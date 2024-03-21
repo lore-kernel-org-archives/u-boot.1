@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E83C54E58
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 19:15:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0622C6FD1F
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 19:15:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF050880AA;
-	Thu, 21 Mar 2024 20:15:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 640FD88121;
+	Thu, 21 Mar 2024 20:15:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nabijaczleweli.xyz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=nabijaczleweli.xyz header.i=@nabijaczleweli.xyz header.b="H7JPIN13";
+	dkim=pass (2048-bit key; secure) header.d=nabijaczleweli.xyz header.i=@nabijaczleweli.xyz header.b="PGUNut28";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 939BE880AA; Thu, 21 Mar 2024 19:29:31 +0100 (CET)
+ id 720E6880B2; Thu, 21 Mar 2024 19:31:57 +0100 (CET)
 Received: from tarta.nabijaczleweli.xyz (tarta.nabijaczleweli.xyz
  [139.28.40.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FD7D87F33
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 19:29:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 43F9F87F6A
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 19:31:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=nabijaczleweli.xyz
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=nabijaczleweli@nabijaczleweli.xyz
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nabijaczleweli.xyz;
- s=202305; t=1711045767;
- bh=nd9RioAg6o0e80zs/kwjuMtZOpSJ/nQRw8tFMmhyFaQ=;
+ s=202305; t=1711045914;
+ bh=zTPXeMQmgPJp0Ut2WlRrQl1d35DIscl31Lk1CBN3J7s=;
  h=Date:From:To:Subject:References:In-Reply-To:From;
- b=H7JPIN13L/EtNV7gyWzTKxLmGTjt3vIHQP+UTezieOMCsAX/nm59JrIGiMmdUiMJt
- vQF46vx0sP1obJXCSlwHItss6BjvtgP11cjCJS0mYnmc4s3jja1B5wkhH/NEF99in7
- eA7uqeYt6Fll8V6/lbVmEtfHfsFCqHBxUxgSvsu6bihZahQgZ1LQJXEq3s2JTPsF/p
- Zi7AhBBcw01T8vC3Z4RZ3BhSRgBxyQa9XvfZ+BYMmrXfIAg8ZWhLRZoVgePaDxQe4H
- 7H4MW1fheokETQy6P44n4n/l4SeYVEwWmPVwbQTPx/FYg18YRLGmolLIo7m6z+2TcZ
- 3/9rjd/VpAd/A==
+ b=PGUNut28yoGhqUnbwG/vTumGxlYiajx1WrYB2r1c8JCHdxq0Kde4SiS3qiZM+BXsh
+ 23ga7A8skPlB8CBHNa+V2wOKJDB1GTaU51aHJemAKNh/SdbD/kVr3PoDDwzBKaoVNk
+ eVD3hEZZHh32i+I3S9Wzp8q06+SnNxTTEkh4tceU8DmoDmPo4vmiKBeZuEuXwKyF6T
+ v60jKXDS/OZ4N40SldLfY+byMF9yG8Ygp+6ZmUENqa613jnBQW5KC1dh2gClnkSrOE
+ xFfqE2P0MWqdzIhlmr+sHlHKy8yDYwO8M0EiW3K4stBlga2GqsGw74cF5fAtRDXF22
+ F2cF5jWf4IfEg==
 Received: from tarta.nabijaczleweli.xyz (unknown [192.168.1.250])
- by tarta.nabijaczleweli.xyz (Postfix) with ESMTPSA id D675F180E;
- Thu, 21 Mar 2024 19:29:27 +0100 (CET)
-Date: Thu, 21 Mar 2024 19:29:27 +0100
+ by tarta.nabijaczleweli.xyz (Postfix) with ESMTPSA id DADF9133E;
+ Thu, 21 Mar 2024 19:31:54 +0100 (CET)
+Date: Thu, 21 Mar 2024 19:31:54 +0100
 From: Ahelenia =?utf-8?Q?Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [PATCH v2] tools: copyfile: use 64k instead of 512 buffer
-Message-ID: <bb5hzhpopwm2d65b5wjsvafsr537nbuyk3msebwth2v56vo3hu@tarta.nabijaczleweli.xyz>
-References: <f48faaa30f42ab63c616611b0b0067b6@manjaro.org>
+Subject: [PATCH v2] tools: open FIT image read-only
+Message-ID: <rt336whqarwenm6q2pbla2x2yewfxwjpxuh2x6mmo5i7ynfopl@tarta.nabijaczleweli.xyz>
+References: <a5562c55fef9fd07e8a087ebcd389e60@manjaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="js4dh7cggshs5hpp"
+ protocol="application/pgp-signature"; boundary="vxya4pfihwgpzcvm"
 Content-Disposition: inline
-In-Reply-To: <f48faaa30f42ab63c616611b0b0067b6@manjaro.org>
+In-Reply-To: <a5562c55fef9fd07e8a087ebcd389e60@manjaro.org>
 User-Agent: NeoMutt/20231221-2-4202cf-dirty
 X-Mailman-Approved-At: Thu, 21 Mar 2024 20:15:42 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -69,85 +69,61 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---js4dh7cggshs5hpp
+--vxya4pfihwgpzcvm
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-This is a trivial but significant optimisation:
-mkimage took >200ms (and 49489 writes (of which 49456 512)),
-now it takes  110ms (and   419 writes (of which   386 64k)).
+Open for reading as O_RDONLY instead of O_RDWR:
+the only usage of the fd is for the single read() below;
+this prevented
+	mkimage -f auto -A arm64 \
+		-T kernel -C lz4 -d Image-6.6.15.lz4 \
+		-b mt8173-elm-hana-6.6.15.dtb outf
+when the inputs were unwritable.
 
-sendfile is much more appropriate for this and is done in one syscall,
-but doesn't bring any significant speedups over 64k r/w
-at the 13M size ranges, so there's no need to introduce
-	#if __linux__
-	while((size =3D sendfile(fd_dst, fd_src, NULL, 128 * 1024 * 1024)) > 0)
-		;
-	if(size !=3D -1) {
-		ret =3D 0;
-		goto out;
-	}
-	#endif
-
-Also lift up the buffer size to a macro.
-
+Link: https://bugs.debian.org/1063097
 Signed-off-by: Ahelenia Ziemia=C5=84ska <nabijaczleweli@nabijaczleweli.xyz>
 Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 ---
- tools/fit_common.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ tools/fit_image.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/tools/fit_common.c b/tools/fit_common.c
-index 2d417d47..1df4785c 100644
---- a/tools/fit_common.c
-+++ b/tools/fit_common.c
-@@ -127,6 +127,7 @@ err:
+diff --git a/tools/fit_image.c b/tools/fit_image.c
+index beef1fa8..0fccfbb4 100644
+--- a/tools/fit_image.c
++++ b/tools/fit_image.c
+@@ -137,7 +137,7 @@ static int fdt_property_file(struct image_tool_params *=
+params,
+ 	int ret;
+ 	int fd;
 =20
- int copyfile(const char *src, const char *dst)
- {
-+#define copyfile_bufsize (64 * 1024)
- 	int fd_src =3D -1, fd_dst =3D -1;
- 	void *buf =3D NULL;
- 	ssize_t size;
-@@ -145,14 +146,14 @@ int copyfile(const char *src, const char *dst)
- 		goto out;
- 	}
-=20
--	buf =3D calloc(1, 512);
-+	buf =3D calloc(1, copyfile_bufsize);
- 	if (!buf) {
- 		printf("Can't allocate buffer to copy file\n");
- 		goto out;
- 	}
-=20
- 	while (1) {
--		size =3D read(fd_src, buf, 512);
-+		size =3D read(fd_src, buf, copyfile_bufsize);
- 		if (size < 0) {
- 			printf("Can't read file %s\n", src);
- 			goto out;
+-	fd =3D open(fname, O_RDWR | O_BINARY);
++	fd =3D open(fname, O_RDONLY | O_BINARY);
+ 	if (fd < 0) {
+ 		fprintf(stderr, "%s: Can't open %s: %s\n",
+ 			params->cmdname, fname, strerror(errno));
 --=20
 2.39.2
 
---js4dh7cggshs5hpp
+--vxya4pfihwgpzcvm
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCgAdFiEEfWlHToQCjFzAxEFjvP0LAY0mWPEFAmX8fIcACgkQvP0LAY0m
-WPE6mRAAsjwQc/xcDrS5sI4XAykaR1CrVsUqMl3XKKoicSn0ZAaoBBDC1D+367ec
-zNmAu2cJMz+4dYiMKFJ6SVncVSIhtSm5RrKcFmcQZawt5oTfvi9Xfjs+Oaww6R6j
-6MQ+2DH8vWp0x7GfBJsSn3CuESI4U/DJF41nAjeWR9TVKKBXNwGatZxWK1Q/et5X
-iHir5zYzx0GdfQkTTr5cVrqLax/gTHMsWVhRX/g3L6wP176RCl1GgUeQiXfe0e2C
-MbmVL9t8iMHV6AMdec61Zc+yzR9iGRia0RUXizqvyhgQxCIF9NWtJ5dkVk9t8TCV
-XbqnAupGPHKWtbRdHLfPVVinYMlQ+YsoF7a/e+56Qwk/iFdMPsLbYJc+OXrbhdzt
-8Ytm+r8chLGKpESfRBjokvSAqkIXn83U1LuGU17iiupTVI4UTQRnAJBWTMLbOwf+
-k+lM80wcIHHcSt25W0r0fe+b/ef88aUTPTaYTDSb5hJAYQ3sFS3SiMl+K5vs0Axx
-T2N2lbx/z/33BLz1kfJoiunNA9/tZQw53M3dEAn0oYVs3stC2Ejn4rtSIYnn45Kw
-ORMYuGChPTOToyC6YqPwCur/+cqib9mvds2gRSFBRNz4oXcz/uKiMmYaAe2bjNSA
-Yv8da8Pps7JB2Uor96HEH7B6fH6QQIM5N8b6tIilpzumfxZzWzw=
-=Zq5v
+iQIzBAABCgAdFiEEfWlHToQCjFzAxEFjvP0LAY0mWPEFAmX8fRoACgkQvP0LAY0m
+WPGpNxAAgM1dI1zhIw2+W7b43ApZ38fgfBIqDvq8OrK8e7bY2T7fPr4FOsp67nQo
+GvhMZM+0uzS6LHXiU364tI0j1lLBxi3o09fQeHHyKd/p4iI+fjDZ16CLqsW1o5iF
+j0TQXX3OYA904XySUucBJr3FqL0Ppo/suGDRwR2Jx6I9opFLwczu9pzUudOiWEff
+smWsIBVeBLsfATx74BOnYtK05a7zNupf9loJDjLVJjnGvWg0tOyTfUnXA+1nRD1f
+WVc13I2FszH/9vV0fi1cU2EgVE1fvFaUXuXPhvDl+REJcnqw8NSKmJ7VO4E/wcJa
+CpDiRQwJR1pCY67gIpTA4BsF2pLxm52wcxaKsE9uyI1oS6xm49xXvovJLlNFXDEk
+5/tQA8sRnNDArgh8UMlngsGJhMVv5+RHNguSSu2kvUNqMrme/HQLgvYOwojuHcSu
+c3/VLYyr85JwEFAR6+csoHhUgDZCnrPdo8eR4EcQpEmrLMD/PMztmsiFtzPDL4jh
+D6E50FTglRfNX3DS4f1FeEUDOjEk4OGlU79AOsnOXMBjZ6PlDWp6socE5xtWWm/l
+VAkURGIK69lwxy1LRXUz/BurMgsAWLZqdXlNzKKH4rLBWNXPBaQ1f1HsceRwiD/X
+x2orhQ1y2i1VEuh99VVMyJVsKTRKwD+0XmR6ZYeUoO7G0UqdwyM=
+=Bah3
 -----END PGP SIGNATURE-----
 
---js4dh7cggshs5hpp--
+--vxya4pfihwgpzcvm--
