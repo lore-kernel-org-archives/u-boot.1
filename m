@@ -4,109 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B11ADC54E58
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 09:26:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7614BC54E58
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 09:29:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33D0787E8E;
-	Thu, 21 Mar 2024 10:26:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 8977587E3F;
+	Thu, 21 Mar 2024 10:29:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ywEjU8FI";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="l0BFKX3/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6314A87E8E; Thu, 21 Mar 2024 10:26:18 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D054E880AC; Thu, 21 Mar 2024 10:29:38 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51BEE879F6
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 10:26:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4885287D83
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 10:29:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=RSdSLgUD13BETd7MjvJu9/wEDszvMnfd8mKHUsCFSoTMI11PIcnGxrgL15GN5aGxSnOmzaYqDD6sHaEJCchDmNvYHsf9YEMEsb27l/rRj9K4RUzkyktA5YS8KimfqP/ggJbEbXvsFmqYLqX/ncnhULb8fxAPvzGBlttgI0ZPHk2oco2xPzp8SQowBESA33H0dAbpP21i13U3wE/CtxSiPkd+40xo+KF3desVCeIinnPtG9X4igbWOoLgusRZc43Rg7Vt/pt/7kiasMXrEO1YECcUtaJoIEYyQDAanjxybQ7UlHmIL7FqcaB0+b3Vt2nAtA2PP8TPqiawOpNAE7TT9g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SgtalUM3rZiEQPgCSYYl914PErxM1ocxPAuqkznh0K4=;
- b=Aeg+0iWmvizFnMIXxN/gTGFSFtynpPdY0ljemfNaNQbPSMjwVfwGE3H0Cam8yb4ioUyuwowtfmdevW0IgjxlGySFSIBhWHVN501/VOEh5vYQabZvNOHya4jt5Cj6tLzJS0oNZfTvFE2OZaJS3yI0De/yV05LK/uW/zEBRKdplaaGkfoOULQrtG6arCd/bQIgkMKB7FcB3L9g3Dtq0fk1dzFeC8DGh6fWOesTtHu9EeTbenqvgyIe/E26nloS1dvnb43mVF3lfvWmirufqbi3JPgPiTyItWXCrOe6n3I+D9+M0CRAP0fuSBxTT+jv8AyYCQMH/XL3V5vfDEUXoc3Vyg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SgtalUM3rZiEQPgCSYYl914PErxM1ocxPAuqkznh0K4=;
- b=ywEjU8FIGbBvonqeRKTT+10wtFrxbd5Q5gnBmTn9d1jkOrl4IoYViC7AjlvMKhSbZf2u3zyH7z/02J8vJ46vsdjSePwsB1a1oXG0fYgKSJYfqmCEz3QM8M4FuQkh5zJ9OVzjreuvC2/odbauTngSTtH1i0jWCHK0ufZ9e7sLUXc=
-Received: from BY5PR16CA0005.namprd16.prod.outlook.com (2603:10b6:a03:1a0::18)
- by SJ0PR12MB8615.namprd12.prod.outlook.com (2603:10b6:a03:484::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.31; Thu, 21 Mar
- 2024 09:26:12 +0000
-Received: from CO1PEPF000042AB.namprd03.prod.outlook.com
- (2603:10b6:a03:1a0:cafe::80) by BY5PR16CA0005.outlook.office365.com
- (2603:10b6:a03:1a0::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.26 via Frontend
- Transport; Thu, 21 Mar 2024 09:26:12 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1PEPF000042AB.mail.protection.outlook.com (10.167.243.40) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7409.10 via Frontend Transport; Thu, 21 Mar 2024 09:26:12 +0000
-Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 21 Mar
- 2024 04:26:11 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
- (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 21 Mar
- 2024 02:26:10 -0700
-Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
- Transport; Thu, 21 Mar 2024 04:26:09 -0500
-From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <trini@konsulko.com>,
- <venkatesh.abbarapu@amd.com>, <git@amd.com>
-Subject: [PATCH] configs: zynqmp_kria: Deactivate CONFIG_SPI_FLASH_BAR
-Date: Thu, 21 Mar 2024 14:55:57 +0530
-Message-ID: <20240321092557.2939231-1-tejas.arvind.bhumkar@amd.com>
-X-Mailer: git-send-email 2.37.6
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4146562a839so5333325e9.1
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 02:29:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1711013376; x=1711618176;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=+TmuW/dgmvsPdUPCScvF+GikRwI0BxsT5WkKecqj1L8=;
+ b=l0BFKX3/6jO2R/w0T1nqmXecUkF+AoEEZB3zTs7KCZ+BTGzHtIcnKRwqXna3kLY2tO
+ fLBtjNPrDJ5k6utFLPhheJNcX9ZM1Opp6mzFXZLkpELvaXe0vjI0n33PXw2WA3WzoYiO
+ AF9rtKP7+MPNOVQt1XCdd/llMOfkcmPKT1clTYkHaddcsr+fxAjAbmbx6sJwTTRXbnrF
+ GWufBrqy+TKHe+iDaw9LfmmewNwFRaEV8i/q3gTJKgz9kNvvbq5TCNN50ZbbQ40c8yER
+ biI3+DyGVsk1Ww4idaAcUmvJigrH401t2tSs52D+jYSVPrE42b9T7s4ZGJZhjsCT9cWf
+ YrGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711013376; x=1711618176;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+TmuW/dgmvsPdUPCScvF+GikRwI0BxsT5WkKecqj1L8=;
+ b=Eh0gDl/uuvzMYztyEIzIlQH+8aB7ybw8u3dLsVWS2g4W/U+Qvx5sx01srLFi7j8pVK
+ yPvfoTpnIU0M2TO6JknvwPXLLz0riApqVrRbsxFakPmt8Nqt0owZShbWKyduYtfhOEee
+ BcsuMPOnHA+kPhjk8qgtv/gtAvYueQnkrBLBQCc1iswEyZlEDozSPBPpEpVO+70nNbwE
+ 0onXQjwm0YCUUZNh15ztYIyzI8+h/t8pR+is+OhttXWf29MDiMI0H9YdhbBP7lvycuQO
+ /whimp8YqWyt3FPKXGPH4+RPDPKczmWqb60k/L50RkQy8OLu5otusvP5habq0y+Nj8US
+ iYmw==
+X-Gm-Message-State: AOJu0Yxs7JqR1k1Q6KAALrf7LU7mT3ud4oWTVCGmQ6JhJg1F72dOuqw7
+ QVPRoiWsFmS8XSCH2sFR3M/WY1oe5d7kv9/YYcseE/unl6a5DirZARPx85bkoeRdnu8pKPeXoTr
+ G
+X-Google-Smtp-Source: AGHT+IG3Z+WUxg449H51hsZN5unUz835AHMqi9whKZZq8SbeTkUY2qj3EdE83RssUG95RHuDcGHZHg==
+X-Received: by 2002:a05:600c:524a:b0:414:63c6:8689 with SMTP id
+ fc10-20020a05600c524a00b0041463c68689mr5161919wmb.20.1711013375575; 
+ Thu, 21 Mar 2024 02:29:35 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ f14-20020a05600c4e8e00b0041413aefeb9sm4946115wmq.48.2024.03.21.02.29.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Mar 2024 02:29:35 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Igor Opaniuk <igor.opaniuk@gmail.com>, Colin McAllister
+ <colinmca242@gmail.com>
+Cc: u-boot@lists.denx.de, Colin McAllister <colin.mcallister@garmin.com>,
+ JPEWhacker@gmail.com, sjg@chromium.org, Sam Protsenko
+ <semen.protsenko@linaro.org>
+Subject: Re: [PATCH v4 2/2] android_ab: Fix ANDROID_AB_BACKUP_OFFSET
+In-Reply-To: <CAByghJZjX863HRWbK7U5PPmaQ_vcuuBN9r+tqEqV7h3sL4HuFg@mail.gmail.com>
+References: <20240312125729.82695-1-colinmca242@gmail.com>
+ <20240312125729.82695-3-colinmca242@gmail.com>
+ <87jzm74gw4.fsf@baylibre.com>
+ <CAByghJZjX863HRWbK7U5PPmaQ_vcuuBN9r+tqEqV7h3sL4HuFg@mail.gmail.com>
+Date: Thu, 21 Mar 2024 10:29:34 +0100
+Message-ID: <87cyronda9.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000042AB:EE_|SJ0PR12MB8615:EE_
-X-MS-Office365-Filtering-Correlation-Id: ead366dd-b681-49cb-48ab-08dc4988f321
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: PFbx+eOQkVX3Q1B105+w3AJO9znSO43b6rdGACIfTKsoDyxSKpZBZOHDIlVITFB8LI8pyKsyz7w+RImdBqetYl5F7/Job0iSMeSDscDc5yz14c9Yi6MKNd/J9SIpdQi+vQVh41LnGH95q130XZvmpUyXm6kqMNb2zfP0THwWPPf5YDCD96eGDsgRckILnMudiiyC/19psZSJRCVmobpjEkfb4ebE3XfYgfzhzH5Z91AkRcsntW76Dwz5nxzn5XK1kNMizKMIcX0Mq4muBkltN/yzgDZJ6lUtY2a7An816Wy7Bk+IKptT1mWX9FyjQzjY3AtfjzX7v/qJfdKVPsNav+zYCSyUl8L2w4Du6xfyzXDBnCJZfNq9Zcy9xRKFYwU0ffI0XpIK49kLr/1riY+UTgSFp0xu79awfpcN1KIL6rtHHMcTXqr7BqwijYriaxUsW98fJC0IEFnaQpb3XPQKaZuQdL+CGacAoUHsxXdDV+JIAZ7zWk3UqjkuVhpaXI9+S3B+i28U+DUyjIWfCQtZoMBg8ddKOjPIAuD+JwPQFFY5zaUZKlTER6sBPdq9U1RNllq0NFQBHf1KSJjJxgspgeV5j8YCmFzXVbkwhTIpDMuSc7GM6WL2YX0jyFv5y1YVY63dk9xsMLc/t8hDE8sJEvOxXYSgw2i0lIZgNUrrwh9IT7f7XOZX/h+6W5PHmnV32SxmDGnRrpn43+4SuDFt1lhTlaLR+fR6uBBudR+2RX/zB7Lc5dOIwGLhShcEoUNE
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(82310400014)(36860700004)(376005)(1800799015); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Mar 2024 09:26:12.1786 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ead366dd-b681-49cb-48ab-08dc4988f321
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000042AB.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB8615
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,25 +97,283 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Disable CONFIG_SPI_FLASH_BAR, which activates 4-byte opcodes.
+Hi Colin,
 
-Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
----
- configs/xilinx_zynqmp_kria_defconfig | 1 -
- 1 file changed, 1 deletion(-)
+Since both below remarks are minor nitpicks, I can also do them when
+applying (to avoid delaying this series too much).
 
-diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
-index 7cb8b62d32..7af8b27be9 100644
---- a/configs/xilinx_zynqmp_kria_defconfig
-+++ b/configs/xilinx_zynqmp_kria_defconfig
-@@ -155,7 +155,6 @@ CONFIG_MMC_HS200_SUPPORT=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ZYNQ=y
- CONFIG_DM_MTD=y
--CONFIG_SPI_FLASH_BAR=y
- CONFIG_SPI_FLASH_STMICRO=y
- # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
- CONFIG_SPI_FLASH_MTD=y
--- 
-2.37.6
+Please le me know what you prefer:
+1. You send a v5 at your convience
+2. I do the minor fixups and I merge right away.
 
+Again, thank you for doing your first U-Boot contributions!
+
+Mattijs
+
+On mer., mars 13, 2024 at 18:22, Igor Opaniuk <igor.opaniuk@gmail.com> wrot=
+e:
+
+> Hi Colin,
+>
+> On Tue, Mar 12, 2024 at 4:19=E2=80=AFPM Mattijs Korpershoek <
+> mkorpershoek@baylibre.com> wrote:
+>
+>> Hi Colin,
+>>
+>> Thank you for the patch.
+>>
+>> On mar., mars 12, 2024 at 07:57, Colin McAllister <colinmca242@gmail.com>
+>> wrote:
+>>
+>> Sam also gave his review here:
+>>
+>> https://lore.kernel.org/all/CAPLW+4kHmPtfACyND4Vc2p0ZrsyGY=3D+bRU=3Dfdub=
+4K1uX5p33Jw@mail.gmail.com/
+>>
+>> Please include his review tag in the next submission.
+>>
+>> I will add it at the appropriate place below:
+>>
+>>
+>> > From: Colin McAllister <colin.mcallister@garmin.com>
+>> >
+>> > Currently, setting CONFIG_AB_BACKUP_OFFSET in a target's defconfig will
+>> > not actually enable the #if protected code in android_ab.c. This is
+>> > because "CONFIG_" should have been prepended to the config macro, or t=
+he
+>> > macros defined in kconfig.h could have been used.
+>> >
+>> > The code included by ANDROID_AB_BACKUP_OFFSET has been refactored to no
+>> > longer be conditionally compiled by preprocessor conditionals and
+>> > instead use C conditionals. This better aligns with the Linux kernel
+>> > style guide.
+>> >
+>> > Fixes: 3430f24bc6 ("android_ab: Try backup booloader_message")
+>> > Signed-off-by: Colin McAllister <colin.mcallister@garmin.com>
+>> > Cc: Joshua Watt <JPEWhacker@gmail.com>
+>> > Cc: Simon Glass <sjg@chromium.org>
+>> > Signed-off-by: Colin McAllister <colinmca242@gmail.com>
+>> Reviewed-by: Sam Protsenko <semen.protsenko@linaro.org>
+>>
+>> > ---
+>> > v2:
+>> >   - Replaced #if conditionals with C if conditionals
+>> >   - Opted to use CONFIG_ANDROID_AB_BACKUP_OFFSET directly instead of
+>> >     macros in kconfig.h as CONFIG_ANDROID_AB_BACKUP_OFFSET is not a
+>> >       boolean or tristate value and doesn't have different values when
+>> >       building SPL or TPL.
+>> > v3:
+>> >   - Added "Fixes:" tag
+>> > v4:
+>> >   - No changes
+>> >
+>> >  boot/android_ab.c | 97 ++++++++++++++++++++++-------------------------
+>> >  1 file changed, 45 insertions(+), 52 deletions(-)
+>> >
+>> > diff --git a/boot/android_ab.c b/boot/android_ab.c
+>> > index 9a3d15ec60..f547aa64e4 100644
+>> > --- a/boot/android_ab.c
+>> > +++ b/boot/android_ab.c
+>> > @@ -187,13 +187,12 @@ int ab_select_slot(struct blk_desc *dev_desc,
+>> struct disk_partition *part_info,
+>> >                  bool dec_tries)
+>> >  {
+>> >       struct bootloader_control *abc =3D NULL;
+>> > +     struct bootloader_control *backup_abc =3D NULL;
+>> >       u32 crc32_le;
+>> >       int slot, i, ret;
+>> >       bool store_needed =3D false;
+>> > +     bool valid_backup =3D false;
+>> >       char slot_suffix[4];
+>> > -#if ANDROID_AB_BACKUP_OFFSET
+>> > -     struct bootloader_control *backup_abc =3D NULL;
+>> > -#endif
+>> >
+>> >       ret =3D ab_control_create_from_disk(dev_desc, part_info, &abc, 0=
+);
+>> >       if (ret < 0) {
+>> > @@ -205,53 +204,49 @@ int ab_select_slot(struct blk_desc *dev_desc,
+>> struct disk_partition *part_info,
+>> >               return ret;
+>> >       }
+>> >
+>> > -#if ANDROID_AB_BACKUP_OFFSET
+>> > -     ret =3D ab_control_create_from_disk(dev_desc, part_info, &backup=
+_abc,
+>> > -                                       ANDROID_AB_BACKUP_OFFSET);
+>> > -     if (ret < 0) {
+>> > -             free(abc);
+>> > -             return ret;
+>> > +     if (CONFIG_ANDROID_AB_BACKUP_OFFSET) {
+>> > +             ret =3D ab_control_create_from_disk(dev_desc, part_info,
+>> &backup_abc,
+>> > +
+>>  CONFIG_ANDROID_AB_BACKUP_OFFSET);
+>> > +             if (ret < 0) {
+>> > +                     free(abc);
+>> > +                     return ret;
+>> > +             }
+>> >       }
+>> > -#endif
+>> >
+>> >       crc32_le =3D ab_control_compute_crc(abc);
+>> >       if (abc->crc32_le !=3D crc32_le) {
+>> >               log_err("ANDROID: Invalid CRC-32 (expected %.8x, found
+>> %.8x),",
+>> >                       crc32_le, abc->crc32_le);
+>> > -#if ANDROID_AB_BACKUP_OFFSET
+>> > -             crc32_le =3D ab_control_compute_crc(backup_abc);
+>> > -             if (backup_abc->crc32_le !=3D crc32_le) {
+>> > -                     log_err("ANDROID: Invalid backup CRC-32 ");
+>> > -                     log_err("expected %.8x, found %.8x),",
+>> > -                             crc32_le, backup_abc->crc32_le);
+>> > -#endif
+>> > -
+>> > -                     log_err("re-initializing A/B metadata.\n");
+>> > +             if (CONFIG_ANDROID_AB_BACKUP_OFFSET) {
+>> > +                     crc32_le =3D ab_control_compute_crc(backup_abc);
+>> > +                     if (backup_abc->crc32_le !=3D crc32_le) {
+>> > +                             log_err(" ANDROID: Invalid backup CRC-32
+>> ");
+>> > +                             log_err("(expected %.8x, found %.8x),",
+>> > +                                     crc32_le, backup_abc->crc32_le);
+>> > +                     } else {
+>> > +                             valid_backup =3D true;
+>> > +                             log_info(" copying A/B metadata from
+>> backup.\n");
+>> > +                             memcpy(abc, backup_abc, sizeof(*abc));
+>> > +                     }
+>> > +             }
+>> >
+>> > +             if (!valid_backup) {
+>> > +                     log_err(" re-initializing A/B metadata.\n");
+>> >                       ret =3D ab_control_default(abc);
+>> >                       if (ret < 0) {
+>> > -#if ANDROID_AB_BACKUP_OFFSET
+>> > -                             free(backup_abc);
+>> > -#endif
+>> > +                             if (CONFIG_ANDROID_AB_BACKUP_OFFSET)
+>> > +                                     free(backup_abc);
+>> >                               free(abc);
+>> >                               return -ENODATA;
+>> >                       }
+>> > -#if ANDROID_AB_BACKUP_OFFSET
+>> > -             } else {
+>> > -                     /*
+>> > -                      * Backup is valid. Copy it to the primary
+>> > -                      */
+>> > -                     memcpy(abc, backup_abc, sizeof(*abc));
+>> >               }
+>> > -#endif
+>> >               store_needed =3D true;
+>> >       }
+>> >
+>> >       if (abc->magic !=3D BOOT_CTRL_MAGIC) {
+>> >               log_err("ANDROID: Unknown A/B metadata: %.8x\n",
+>> abc->magic);
+>> > -#if ANDROID_AB_BACKUP_OFFSET
+>> > -             free(backup_abc);
+>> > -#endif
+>> > +             if (CONFIG_ANDROID_AB_BACKUP_OFFSET)
+>> > +                     free(backup_abc);
+>> >               free(abc);
+>> >               return -ENODATA;
+>> >       }
+>> > @@ -259,9 +254,8 @@ int ab_select_slot(struct blk_desc *dev_desc, stru=
+ct
+>> disk_partition *part_info,
+>> >       if (abc->version > BOOT_CTRL_VERSION) {
+>> >               log_err("ANDROID: Unsupported A/B metadata version:
+>> %.8x\n",
+>> >                       abc->version);
+>> > -#if ANDROID_AB_BACKUP_OFFSET
+>> > -             free(backup_abc);
+>> > -#endif
+>> > +             if (CONFIG_ANDROID_AB_BACKUP_OFFSET)
+>> > +                     free(backup_abc);
+>> >               free(abc);
+>> >               return -ENODATA;
+>> >       }
+>> > @@ -338,30 +332,29 @@ int ab_select_slot(struct blk_desc *dev_desc,
+>> struct disk_partition *part_info,
+>> >               abc->crc32_le =3D ab_control_compute_crc(abc);
+>> >               ret =3D ab_control_store(dev_desc, part_info, abc, 0);
+>> >               if (ret < 0) {
+>> > -#if ANDROID_AB_BACKUP_OFFSET
+>> > -                     free(backup_abc);
+>> > -#endif
+>> > +                     if (CONFIG_ANDROID_AB_BACKUP_OFFSET)
+>> > +                             free(backup_abc);
+>> >                       free(abc);
+>> >                       return ret;
+>> >               }
+>> >       }
+>> >
+>> > -#if ANDROID_AB_BACKUP_OFFSET
+>> > -     /*
+>> > -      * If the backup doesn't match the primary, write the primary
+>> > -      * to the backup offset
+>> > -      */
+>> > -     if (memcmp(backup_abc, abc, sizeof(*abc)) !=3D 0) {
+>> > -             ret =3D ab_control_store(dev_desc, part_info, abc,
+>> > -                                    ANDROID_AB_BACKUP_OFFSET);
+>> > -             if (ret < 0) {
+>> > -                     free(backup_abc);
+>> > -                     free(abc);
+>> > -                     return ret;
+>> > +     if (CONFIG_ANDROID_AB_BACKUP_OFFSET) {
+>> > +             /*
+>> > +             * If the backup doesn't match the primary, write the
+>> primary
+>> > +             * to the backup offset
+>> > +             */
+>>
+>> checkpatch.pl seems to complain about this comment block:
+>>
+>> WARNING: Block comments should align the * on each line
+>> #166: FILE: boot/android_ab.c:344:
+>> +               /*
+>> +               * If the backup doesn't match the primary, write the
+>> primary
+>>
+>> To reproduce, run:
+>>
+>> $ ./scripts/checkpatch.pl --strict --u-boot --git HEAD^..HEAD
+>>
+>> With the above addressed, please send a v5 including:
+>>
+>> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>>
+>> > +             if (memcmp(backup_abc, abc, sizeof(*abc)) !=3D 0) {
+>> > +                     ret =3D ab_control_store(dev_desc, part_info, ab=
+c,
+>> > +
+>> CONFIG_ANDROID_AB_BACKUP_OFFSET);
+>> > +                     if (ret < 0) {
+>> > +                             free(backup_abc);
+>> > +                             free(abc);
+>> > +                             return ret;
+>> > +                     }
+>> >               }
+>> > +             free(backup_abc);
+>> >       }
+>> > -     free(backup_abc);
+>> > -#endif
+>> >
+>> >       free(abc);
+>> >
+>> > --
+>> > 2.34.1
+>>
+>
+> With Mattijs comment addressed:
+> Reviewed-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+>
+> --=20
+> Best regards - Atentamente - Meilleures salutations
+>
+> Igor Opaniuk
+>
+> mailto: igor.opaniuk@gmail.com
+> skype: igor.opanyuk
+> https://www.linkedin.com/in/iopaniuk <http://ua.linkedin.com/in/iopaniuk>
