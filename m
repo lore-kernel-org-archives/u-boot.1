@@ -4,84 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A914C54E58
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 19:39:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A659FCD11DB
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 19:49:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7290388125;
-	Thu, 21 Mar 2024 20:39:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id DD57288013;
+	Thu, 21 Mar 2024 20:49:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="jIs7eJrO";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="VNcCX4+p";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="MY6zFKaJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 493EE88126; Thu, 21 Mar 2024 20:39:06 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 0BBA188113; Thu, 21 Mar 2024 20:49:55 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5947287CB7
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 20:39:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF2EE87D08
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 20:49:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4V0wkb5lMJz9sRf;
- Thu, 21 Mar 2024 20:39:03 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1711049943;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=I4XLGGtmmxvF2PwduTgiC6xedSZIRuTO3hdcqxwdX/A=;
- b=jIs7eJrOXGhC4t31Pw2pqAS/ot2opsGLX0R8gaLCF1UrBUG4ZmGHPQmX1eTRuSjUsgUJak
- +Th6zLSDYkTeA0RmdyCsXKjSOXs9o7Pqi6ngVlSwOvluMdhu/CXnCkYo+zyDaUgUNS1CGJ
- 9/7GOUYXYNyssCQisDZTQsa9QJVsP2XE841d9haX7o2+HQCFWHV3MPUPPzwnmygsIPJz+x
- VuK7XqFQl4poqhgDcWp3WX7ZpNT72hdSRb6SKDAjEfZX4oF9JippIe4jjmt3SKhvqiGQ5b
- 10gtHRFDz6mvKVBcsIiiX2/BgHgVGX1lWz4HtsM4gK9wvs26gVCTAoyk/G+N1A==
-Message-ID: <74a88ffb-c211-4886-a017-a6c523e7e5d9@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1711049942;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=I4XLGGtmmxvF2PwduTgiC6xedSZIRuTO3hdcqxwdX/A=;
- b=VNcCX4+pPZkQha3H6vGVxU+vnVSkj0MuMpIrniTNjAtXxGtx7Wh+NOYPF4IdfkaMnRZzZz
- k7E9usPJVh/zkHFjAJEyRARdYDB9+nsfK5LWh5mmzVHFkj0kXxuMDaYTkhiLlAGz/qnZxq
- /vDDNarxTVfwt3Uwm1an1IrLE0dZaSV7ey6eKzkiBiwXMWwE3Fa38hjPrfeehrQmZ7zeUV
- SAbBXzkOM3+kfpc0TUvWOwn7TX6bkf8JbJwfJl3ym9m3SWtt6e3LsP/0tZH/0PtNJ4ssWI
- sUzgyo7MdOfgCvvpQkoV6L+Cnw6uvXSrx3KNaih0eMtixfedHXhORVPdt5vf/g==
-Date: Thu, 21 Mar 2024 20:38:59 +0100
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/2] usb: udc: dwc3: Fold board
- dm_usb_gadget_handle_interrupts() into DWC3 gadget
-Content-Language: en-US
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Angus Ainslie <angus@akkea.ca>, Caleb Connolly
- <caleb.connolly@linaro.org>, Eugen Hristev <eugen.hristev@collabora.com>,
- Igor Prusov <ivprusov@salutedevices.com>, Nishanth Menon <nm@ti.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Stefan Bosch <stefan_b@posteo.net>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
- kernel@puri.sm
-References: <20240317044357.547037-1-marek.vasut+renesas@mailbox.org>
- <878r2boqd8.fsf@baylibre.com>
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <878r2boqd8.fsf@baylibre.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 01910d7a09cd923076b
-X-MBO-RS-META: qkthwe9414ogb6mbke3m9or16h9dex7h
-X-Rspamd-Queue-Id: 4V0wkb5lMJz9sRf
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1711050592;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kwsPrpDUr4wOBYagQlE8typidR/MOeMg/UJeLIjBhKA=;
+ b=MY6zFKaJoHqpMU8hOssLQET2/9zkK1qmL9/5BTVtieAdwugbBvDxyUuZJjN8iBAVOgdH9w
+ naP9aSig7udeXKRSZ1ElQ1tPID5Mc6xIq3cRFZaDDWqmuxPGWU4uHtXWTdTplZDuBVMpZ9
+ iu26GJc/SW9zZfmhtalBHMwjOqI19teDcXR4+SYHo5M8CdYDxvDX2RvvAm+VCMvgdvbMn7
+ 4bZnQToaWn3Dx0xeqTpwdiUwlaR1htISm9iNlBFViSqSTnG4XEpNfxxXKSCI8rVJ7YoVvm
+ onF3Jh5LqKN9dYW5sH9C12H9ubI4152D2niKXgj7qjgUu4PJO7Du/sC8r9qSDw==
+Date: Thu, 21 Mar 2024 20:49:52 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: =?UTF-8?Q?Ahelenia_Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2] tools: copyfile: use 64k instead of 512 buffer
+In-Reply-To: <bb5hzhpopwm2d65b5wjsvafsr537nbuyk3msebwth2v56vo3hu@tarta.nabijaczleweli.xyz>
+References: <f48faaa30f42ab63c616611b0b0067b6@manjaro.org>
+ <bb5hzhpopwm2d65b5wjsvafsr537nbuyk3msebwth2v56vo3hu@tarta.nabijaczleweli.xyz>
+Message-ID: <2894747cef36c9533b2915b803ce754f@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,45 +69,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/21/24 11:01 AM, Mattijs Korpershoek wrote:
-> Hi Marek,
-> 
-> Thank you for the patch.
-> 
-> On dim., mars 17, 2024 at 05:42, Marek Vasut <marek.vasut+renesas@mailbox.org> wrote:
-> 
->> The dm_usb_gadget_handle_interrupts() has no place in board code. Move
->> this into DWC3 driver. The OMAP implementation is special, add new weak
->> dwc3_uboot_interrupt_status() function to decide whether DWC3 interrupt
->> handling should be called, and override it in OMAP DWC3 code, to repair
->> the special OMAP interrupt handling code until OMAP gets switched over
->> to DM UDC proper.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> 
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> 
-> Tested that I could scan for usb mass storage and that I can use
-> fastboot:
-> 
-> => fastboot usb 0
-> crq->brequest:0x0
-> => usb start
-> starting USB...
-> Bus usb@ff500000: Register 3000140 NbrPorts 3
-> Starting the controller
-> USB XHCI 1.10
-> scanning bus usb@ff500000 for devices... 3 USB Device(s) found
->         scanning usb for storage devices... 1 Storage Device(s) found
-> 
-> => usb storage
->    Device 0: Vendor: SanDisk Rev: 1.00 Prod: Ultra
->              Type: Removable Hard Disk
->              Capacity: 29328.0 MB = 28.6 GB (60063744 x 512)
-> 
-> Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # vim3
+Hello Ahelenia,
 
-Thank you!
+Please see my comments below.
 
-Please feel free to pick this via DFU tree in a week or two, so others 
-can comment on this and test this too.
+On 2024-03-21 19:29, Ahelenia Ziemiańska wrote:
+> This is a trivial but significant optimisation:
+
+s/optimisation/optimization/
+
+> mkimage took >200ms (and 49489 writes (of which 49456 512)),
+> now it takes  110ms (and   419 writes (of which   386 64k)).
+> 
+> sendfile is much more appropriate for this and is done in one syscall,
+> but doesn't bring any significant speedups over 64k r/w
+> at the 13M size ranges, so there's no need to introduce
+> 	#if __linux__
+> 	while((size = sendfile(fd_dst, fd_src, NULL, 128 * 1024 * 1024)) > 0)
+> 		;
+> 	if(size != -1) {
+> 		ret = 0;
+> 		goto out;
+> 	}
+> 	#endif
+> 
+> Also lift up the buffer size to a macro.
+
+s/lift up/extract/
+s/macro/constant/
+
+> Signed-off-by: Ahelenia Ziemiańska <nabijaczleweli@nabijaczleweli.xyz>
+> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+> ---
+>  tools/fit_common.c | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
+> 
+> diff --git a/tools/fit_common.c b/tools/fit_common.c
+> index 2d417d47..1df4785c 100644
+> --- a/tools/fit_common.c
+> +++ b/tools/fit_common.c
+> @@ -127,6 +127,7 @@ err:
+> 
+>  int copyfile(const char *src, const char *dst)
+>  {
+> +#define copyfile_bufsize (64 * 1024)
+
+This is not the right place for such a preprocessor directive.
+Instead, it should be placed at the start of the file.
+
+Also, it should use all uppercase letters.
+
+>  	int fd_src = -1, fd_dst = -1;
+>  	void *buf = NULL;
+>  	ssize_t size;
+> @@ -145,14 +146,14 @@ int copyfile(const char *src, const char *dst)
+>  		goto out;
+>  	}
+> 
+> -	buf = calloc(1, 512);
+> +	buf = calloc(1, copyfile_bufsize);
+>  	if (!buf) {
+>  		printf("Can't allocate buffer to copy file\n");
+>  		goto out;
+>  	}
+> 
+>  	while (1) {
+> -		size = read(fd_src, buf, 512);
+> +		size = read(fd_src, buf, copyfile_bufsize);
+>  		if (size < 0) {
+>  			printf("Can't read file %s\n", src);
+>  			goto out;
