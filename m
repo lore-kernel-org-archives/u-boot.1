@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C003C54E58
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 09:17:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93146C54E58
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 09:23:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F80387D08;
-	Thu, 21 Mar 2024 10:17:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id C1EBB87BAF;
+	Thu, 21 Mar 2024 10:23:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="mC8THJYI";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OyLIDl8L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D03187C7F; Thu, 21 Mar 2024 10:17:06 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 01A03879F6; Thu, 21 Mar 2024 10:23:16 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC4EA87BAF
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 10:16:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 24BCB87DB8
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 10:23:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5684db9147dso692329a12.2
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 02:16:58 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-33e285a33bdso362501f8f.2
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 02:23:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1711012618; x=1711617418;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1711012991; x=1711617791;
  darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JdYMWj1J+B5ervTDzI4sGamn8PGSp9ouS1kj4QW4Xm8=;
- b=mC8THJYIgKKALtklpyoGBtk8CSTG7MO39n8plKkCDHWDOFADV5bYUftyPjIZArEXOY
- Z14imVdIbd4Bgw7Zedu90ATeDFxeh8JBFWAV7iJKlyFjW2SlT35vEoZwmkSONARH7rz5
- ecy5YFVjFEN8po3qy6EKbF5QLTnhEoh48e6uY=
+ bh=n54cOyFWTm6Iov6dnmeVSRskF1meDu2bJAEAe1l0bMk=;
+ b=OyLIDl8LDuYc0L9OIq5ycCLNOMdcmQ+PFy2k6HWgKj5sdFyh4wRuxb5Sc7dXu2pO6C
+ oo9T/VI7fbsgu9tcSdB7IJvUTrI898hyQvz4lDIucJZ94E831uDMJ3Vv0imUsEP8Uodz
+ Oyb0ABHa3sRAmVM1XDnH+5uNfsLpo2EF5FRhM0EjL0SPPZ5ZYB2QKX17jfhy8XJ1jvIl
+ 0cylPmFnMD5uBXs9XU/uExc9DO835JfAkX/Pi8UpwNq408kgvMsdiZbGi90Lel8E9DgH
+ +H4P0q3YgY0RMadtHEAuyvNavPZlPz9AlLjrF+gQd1LcX3Q8V9aWiVcJqEmelrPxJDGZ
+ +l7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711012618; x=1711617418;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1711012991; x=1711617791;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JdYMWj1J+B5ervTDzI4sGamn8PGSp9ouS1kj4QW4Xm8=;
- b=MIjxNk4AY1DlmfBJtrSVKKz6N+RblAvvoKTSEWifSlzzYV8emmwSuhAg7Obaf38AdF
- YD6QT2VnFX2sp5ujL/uqlHlFZ0mQRGFWa1aj/MtBfMWyQKkw7grlt2qKoLjCw0fzWyR3
- QSA7OeEAvo9b8DEQPAyrkJCaK/MP4ym9Hy96vMQzumDyhupDqHfGvt1rI2tBlklWP33L
- 3rKZ9uRXiB6Q7d0N8mhBYF2nk6B7pTeKZIuZgXfJvLzp+7smix/OkjUvaFz/J3Wz8GEt
- vbr8BKEDRi2HpXabovWZo4B6I1iYA/FrVBekmQoL4ZeegtWVTTf/B45dJjsf+RFTN592
- 54jw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVlGVvtSSulyGM/V8Uk3fpxpdxi9/ETiHi9lmZY5oCyzWXZQ4PnGmLVaQYF7JIK220Tu9ao6kv7Z8XqeRbPzCgmLYTh+A==
-X-Gm-Message-State: AOJu0YzEqeTfh30FQS6eGNCQxNPuvHMWr+/h1RYAAmNfSyBo9hDtkjPU
- 67p4WhvKD1hzURytcURY/p4aHAvYKhhDhSZ9HWKHwKmMXoHdwPPeDr7oGsJNa4BW31g8jrwGVHR
- 1YoZ7fu/iB7zKSlVIS5iQ+NQ+Ci601TV8urAjmw==
-X-Google-Smtp-Source: AGHT+IHfg7ePhkHSKN3U9FUmJOzhMua84dVmrz/5L9HS97UdlfqaLOpyyQawp+loyIKnV4+PVfLhA7oLCSEUevjHUXc=
-X-Received: by 2002:a17:907:7e94:b0:a46:ad7c:ccc7 with SMTP id
- qb20-20020a1709077e9400b00a46ad7cccc7mr10850591ejc.59.1711012618221; Thu, 21
- Mar 2024 02:16:58 -0700 (PDT)
+ bh=n54cOyFWTm6Iov6dnmeVSRskF1meDu2bJAEAe1l0bMk=;
+ b=uXt3SKnDq8Ozt7SKI0Kg6koZUxyBdpukUyuegDmHjSbOqAtagtXvStrtnMnJClsRGI
+ g0cJg8SYt7bI2B1lNH0Bgtt5snL6EPVDfTbsZmPUCo5KNgc/7q6Zr7I58B752OM1mmqu
+ sVeisY0PpQdoHgdND9FbgTftZ8E2S984q1zCBfzVQylYEJVuqfGR/fDlYBxcSr1IcoaE
+ XrLv5xCOSo1NU5N30gFTAxuAAruUuEOL687lLjlcrF2cJqZX0yQWZWEr/z9waxead6gH
+ dm9tByXuh/QiFkY0EeZvGONzDC4xnUjpMmerbmBjyBgW8ewKxnnCWN5QfiuHHDMy1Gm5
+ c/2Q==
+X-Gm-Message-State: AOJu0YyITwnQthJ0/hE/Z7vfG1LQRidTFY4pUpr9hBUpEP7uZddJoSB+
+ O3TXTjQAugVOupKAoS4bMtXDRbMInpKOOWdvc8556p1QPqyTnhv3yrCvNpkKHSk=
+X-Google-Smtp-Source: AGHT+IFPkR0E07V6CEv+RNk+lMajlHpbtT5oAo4x27vIE7HQkmMsNmfy6Ain+haoGrbXO9fqGmaltQ==
+X-Received: by 2002:a5d:53c1:0:b0:33e:d7c1:a132 with SMTP id
+ a1-20020a5d53c1000000b0033ed7c1a132mr9917434wrw.29.1711012991408; 
+ Thu, 21 Mar 2024 02:23:11 -0700 (PDT)
+Received: from [192.168.2.43] ([82.66.159.240])
+ by smtp.gmail.com with ESMTPSA id
+ y4-20020a5d4704000000b0033e7603987dsm16728438wrq.12.2024.03.21.02.23.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Mar 2024 02:23:11 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20240320-b4-qcom-usb-v4-0-41be480172e1@linaro.org>
+References: <20240320-b4-qcom-usb-v4-0-41be480172e1@linaro.org>
+Subject: Re: [PATCH v4 0/5] Qualcomm DWC3 USB support
+Message-Id: <171101299073.1017001.16411913317437946645.b4-ty@baylibre.com>
+Date: Thu, 21 Mar 2024 10:23:10 +0100
 MIME-Version: 1.0
-References: <20240320090214.40465-1-ada@thorsis.com>
- <20240320090214.40465-7-ada@thorsis.com>
- <PH8PR11MB680479987099973E85D6CC6C82332@PH8PR11MB6804.namprd11.prod.outlook.com>
-In-Reply-To: <PH8PR11MB680479987099973E85D6CC6C82332@PH8PR11MB6804.namprd11.prod.outlook.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 21 Mar 2024 10:16:46 +0100
-Message-ID: <CAOf5uwmeW0_0rjXgoPBHK2XPYJk=D9Cdw4Qc7rQ_TPuOanCHwQ@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] cmd: nand: Add new optional sub-command 'onfi'
-To: Mihai.Sain@microchip.com
-Cc: ada@thorsis.com, dario.binacchi@amarulasolutions.com, 
- Balamanikandan.Gunasundar@microchip.com, eugen.hristev@collabora.com, 
- Bin.Li@microchip.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,113 +96,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi,
 
-I think this command can be really useful.
+On Wed, 20 Mar 2024 14:30:46 +0000, Caleb Connolly wrote:
+> This series enables support for Qualcomm platforms in the DWC3 driver,
+> adds support for arbitrary sector sizes to the USB mass storage gadget,
+> and fixes an issue with the CDC ACM driver where it wouldn't initialise
+> the USB device.
+> 
+> Additionally, it fixes a syntax bug in the Qualcomm SMMU driver, and
+> makes USB_DWC3_GADGET select DM_USB_GADGET to fix compilation with
+> gadget mode.
+> 
+> [...]
 
-On Wed, Mar 20, 2024 at 3:09=E2=80=AFPM <Mihai.Sain@microchip.com> wrote:
->
-> Hi Alex,
->
-> --------------------------------------------------------
->
-> Override the ONFI timing mode at runtime.
->
-> Signed-off-by: Alexander Dahl <ada@thorsis.com>
-> ---
->
-> I used the same board sam9x75-curiosity to test mode 5 =F0=9F=98=8A
->
-> I forced in nfc driver the mode 5:
-> +       if (conf->timings.sdr.tRC_min < 20000)
->
-> And I ran the nand torture on 16 MiB:
->
-> =3D> nand onfi 0
-> =3D> hsmc decode
->
-> MCK rate: 270 MHz
->
-> SMC_SETUP2:     0x00000007
-> SMC_PULSE2:     0x22112211
-> SMC_CYCLE2:     0x00220022
-> SMC_MODE2:      0x001f0003
-> NCS_RD: setup: 0 (0 ns), pulse: 34 (102 ns), hold: 0 (0 ns), cycle: 34 (1=
-02 ns)
->    NRD: setup: 0 (0 ns), pulse: 17 (51 ns), hold: 17 (51 ns), cycle: 34 (=
-102 ns)
-> NCS_WR: setup: 0 (0 ns), pulse: 34 (102 ns), hold: 0 (0 ns), cycle: 34 (1=
-02 ns)
->    NWE: setup: 7 (21 ns), pulse: 17 (51 ns), hold: 10 (30 ns), cycle: 34 =
-(102 ns)
-> Standard read applied
-> TDF optimization enabled
-> TDF cycles: 15 (45 ns)
-> Data Bus Width: 8-bit bus
-> NWAIT Mode: 0
-> Write operation controlled by NWE signal
-> Read operation controlled by NRD signal
->
-> =3D> time nand torture 0x800000 0x1000000
->
-> NAND torture: device 0 offset 0x800000 size 0x1000000 (block size 0x40000=
-)
->  Passed: 64, failed: 0
->
-> time: 30.152 seconds
->
-> =3D> nand onfi 5
-> =3D> hsmc decode
->
-> MCK rate: 270 MHz
->
-> SMC_SETUP2:     0x00000001
-> SMC_PULSE2:     0x0b060804
-> SMC_CYCLE2:     0x000b0008
-> SMC_MODE2:      0x001f0003
-> NCS_RD: setup: 0 (0 ns), pulse: 11 (33 ns), hold: 0 (0 ns), cycle: 11 (33=
- ns)
->    NRD: setup: 0 (0 ns), pulse: 6 (18 ns), hold: 5 (15 ns), cycle: 11 (33=
- ns)
-> NCS_WR: setup: 0 (0 ns), pulse: 8 (24 ns), hold: 0 (0 ns), cycle: 8 (24 n=
-s)
->    NWE: setup: 1 (3 ns), pulse: 4 (12 ns), hold: 3 (9 ns), cycle: 8 (24 n=
-s)
-> Standard read applied
-> TDF optimization enabled
-> TDF cycles: 15 (45 ns)
-> Data Bus Width: 8-bit bus
-> NWAIT Mode: 0
-> Write operation controlled by NWE signal
-> Read operation controlled by NRD signal
->
-> =3D> time nand torture 0x800000 0x1000000
->
-> NAND torture: device 0 offset 0x800000 size 0x1000000 (block size 0x40000=
-)
->  Passed: 64, failed: 0
->
-> time: 15.891 seconds
->
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
 
-Let try to have more testing on more boards
+[1/5] usb: dwc3-generic: implement Qualcomm wrapper
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/850b307789dca8dfff6d7cad57ba2ffbfbb5f6ed
+[2/5] usb: dwc3: select DM_USB_GADGET
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/97d629372c8c58da96f46aa6d2bec09f120cc62d
+[3/5] usb: gadget: CDC ACM: call usb_gadget_initialize
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/86327b4e3201a55aefee2f1bfbbea9a7896461f0
+[4/5] usb: gadget: UMS: support multiple sector sizes
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/7e71eeb39f4c5280b1ce677f4a14063feaedff95
+[5/5] iommu: qcom-smmu: fix debugging
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/c9959ce7b54145a83d3797bcfb3c3713cb4a97ea
 
-Michael
-
-> Best regards,
-> Mihai Sain
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+--
+Mattijs
