@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4067DC54E68
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 12:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC38C54E58
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 12:15:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76D9D8800B;
-	Thu, 21 Mar 2024 13:15:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DD69F88087;
+	Thu, 21 Mar 2024 13:15:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h4frznFq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ja9D1HDI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B26DE87D5E; Thu, 21 Mar 2024 13:15:12 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 0F51A87F2A; Thu, 21 Mar 2024 13:15:13 +0100 (CET)
+Received: from mail-oa1-x2c.google.com (mail-oa1-x2c.google.com
+ [IPv6:2001:4860:4864:20::2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94E6C88047
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 13:15:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A21E187FCC
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 13:15:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-690d054fff2so5789146d6.3
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 05:15:10 -0700 (PDT)
+Received: by mail-oa1-x2c.google.com with SMTP id
+ 586e51a60fabf-222b6a05bb1so536822fac.3
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 05:15:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711023309; x=1711628109; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1711023308; x=1711628108; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=kmvnKKO+ChOjMwQhKSnPKWHoN5OJYrrQ8fGK06L/TDQ=;
- b=h4frznFq0MSVS5xTtKGpUmzwJIb3tdITUl5b/+Qe3nYAwneAV2M0BLfwEX92UtVXSp
- OBiMutx1nPQfqcEuBrUt8VEBrD22cB76Syezj9DcyWNFW9L2IGFQIQ21ckm7GzvaVZQR
- dr3/PaepGspxs50UtkjpgEYyaTc5MBE+2mEOc=
+ bh=o0BQXrZO7zZnOyGj/lVz7+mUVef/svl89WQ7g+oHBl4=;
+ b=ja9D1HDIIePQFWpW9zkmImTiYVpn2n8WPRWbCIzf8Jj5/e0oF6J4xmIMV5bbHLYv44
+ YemBxejAo0x9Z9Rv0YgRiOuMJolS8C668v/MCqsV5R+7ZLAp0/3hw+aVrCgqw2ApGA3b
+ r909MDRTOx4onVzGA6+lzpVg1CzNkSXLS7Mhk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711023309; x=1711628109;
+ d=1e100.net; s=20230601; t=1711023308; x=1711628108;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kmvnKKO+ChOjMwQhKSnPKWHoN5OJYrrQ8fGK06L/TDQ=;
- b=rFknWPz4zH25L8T4inXjKntPDIfQR2NIUyY2TSR0dvrTsb/l1xak73Z3rT+yRGd965
- SD2sUUMKUxn2JigK+Rx5q9PCql7PNonMtBRYiXt6RhQFt3vfpvCjCkG1N7KG6q9vwPMV
- v1Q2peMiI48LZVY6VhTFXA6KYkOq82OQwak9WC9BWNyBupmwJRzkP6mjmm1vcIb7tcLT
- FEr3Lx+jSZ/AKeVgM67sJUV2002kA/htfFOxoCiXt5SbzvM6XEpHidVg3lzf0ialyi1O
- pAPgeiHm0akY8Lo51AwomRgZMKvrxrrU1eFZ0m7MJ6K07t5s/opDYjyaZFx5N/LZnUt0
- nUpw==
-X-Gm-Message-State: AOJu0YyHfXm6dUEfv5U2tlo20/uEVx3TlIY0GranNI+pJ8V6XLapttoK
- 9myS4xv2zVSqoC7NuGpGYlXsGM02f4d39HKc5jMATa0vOJYpeYoSTNBejeNiqDg=
-X-Google-Smtp-Source: AGHT+IEFhrz4APCAqME8s1WTVXb4rchXStHnbzj0V8P3shXt4wDJl1ejZ+IfZlq8ZMyJW9xdV1Yytg==
-X-Received: by 2002:a0c:da94:0:b0:696:46ec:59cb with SMTP id
- z20-20020a0cda94000000b0069646ec59cbmr4359984qvj.25.1711023309494; 
- Thu, 21 Mar 2024 05:15:09 -0700 (PDT)
+ bh=o0BQXrZO7zZnOyGj/lVz7+mUVef/svl89WQ7g+oHBl4=;
+ b=XS+yZoO/dRcD63pgNTiWhSBieHT5ujew1q1WCOimZh6e5XyoFln0iZYKMM7qETpMhV
+ 0bYsz3hCk4HBjr7gjkjfmfb26NFbJVG0zGThn3RkwxhH0VEAKV1BvNFTT4EAiDDSd9Pg
+ S5rYIpu0qNDSppuZFdqMbdgKblSBfXlazIAbixcb/DFdxBDMO6anIlP33HdhQr2A7sNU
+ qRufL6m+J6SbGwwtclFdox54iOOLHo1WX42lTPX4e67EY8txiXvGr2Du8aZghYk3YBSB
+ FeWXM8JastDGUuJlIzTpy8NTgVntauYkw8NZaig6lxDXaXwOO2XxzdUjdEIEKaZNgkA/
+ /Ydw==
+X-Gm-Message-State: AOJu0YwOKpR2fPBiLOElnaw1oMWib3+0EBo9BecdogO3WCLKc+/4Bmw1
+ xcyvObnrrNZF9JOGyQ4BO+WnBcJQ9Ez9SAYycSxVK0uoVg5VYJ41NnBuSZqcuFw=
+X-Google-Smtp-Source: AGHT+IGhIaTyT35SeQ4pGXEcW1iN19ZFzcuRG/5ajhhvCrP2x/RpdlfCTblN7D62WQmo0Khzh8wwFg==
+X-Received: by 2002:a05:6870:a70f:b0:221:9442:4d58 with SMTP id
+ g15-20020a056870a70f00b0022194424d58mr1967716oam.28.1711023308313; 
+ Thu, 21 Mar 2024 05:15:08 -0700 (PDT)
 Received: from [127.0.1.1] (065-184-193-066.res.spectrum.com. [65.184.193.66])
  by smtp.gmail.com with ESMTPSA id
- kj25-20020a056214529900b00690df461ecbsm8990690qvb.10.2024.03.21.05.15.08
+ kj25-20020a056214529900b00690df461ecbsm8990690qvb.10.2024.03.21.05.15.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 05:15:09 -0700 (PDT)
+ Thu, 21 Mar 2024 05:15:08 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-Cc: Andre Przywara <andre.przywara@arm.com>, 
- Biju Das <biju.das.jz@bp.renesas.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Christophe Leroy <christophe.leroy@csgroup.eu>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>
-In-Reply-To: <20240313115456.9251-1-piotr.wojtaszczyk@timesys.com>
-References: <20240313115456.9251-1-piotr.wojtaszczyk@timesys.com>
-Subject: Re: [PATCH] gpio: mcp230xx: Add support for models with SPI interface.
-Message-Id: <171102330848.1913497.15629036736532393455.b4-ty@konsulko.com>
-Date: Thu, 21 Mar 2024 08:15:08 -0400
+To: u-boot@lists.denx.de, Kelly Hung <ppighouse@gmail.com>
+Cc: kever.yang@rock-chips.com, michal.simek@amd.com, marex@denx.de, 
+ neil.armstrong@linaro.org, jonas@kwiboo.se, cnsztl@gmail.com, 
+ clamor95@gmail.com, hai.pham.ud@renesas.com, naoki@radxa.com, 
+ patrick.delaunay@foss.st.com, christianshewitt@gmail.com, 
+ openbmc@lists.ozlabs.org, kelly_hung@asus.com, Allenyy_Hsu@asus.com, 
+ Kelly Hung <Kelly_Hung@asus.com>
+In-Reply-To: <20240313102725.2067651-1-Kelly_Hung@asus.com>
+References: <20240313102725.2067651-1-Kelly_Hung@asus.com>
+Subject: Re: [PATCH next v1 0/1] Add new bmc dts for ASUS X4TF server
+Message-Id: <171102330708.1913497.6343179780001033974.b4-ty@konsulko.com>
+Date: Thu, 21 Mar 2024 08:15:07 -0400
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,10 +94,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 13 Mar 2024 12:54:56 +0100, Piotr Wojtaszczyk wrote:
+On Wed, 13 Mar 2024 18:27:24 +0800, Kelly Hung wrote:
 
+> Add bmc dts to ASUS X4TF server, we also submitted dts to linux place.
+> Please refer to here, https://lore.kernel.org/lkml/?q=x4tf.
 > 
-
+> Kelly Hung (1):
+>   arm: dts: ast2600-x4tf: Add new dts for ASUS X4TF
+> 
+> arch/arm/dts/Makefile         |   4 +-
+>  arch/arm/dts/ast2600-x4tf.dts | 161 ++++++++++++++++++++++++++++++++++
+>  2 files changed, 164 insertions(+), 1 deletion(-)
+>  create mode 100644 arch/arm/dts/ast2600-x4tf.dts
+> 
+> [...]
 
 Applied to u-boot/next, thanks!
 
