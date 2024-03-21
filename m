@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDE92C54E68
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 12:07:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B88EFC54E58
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 12:15:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E6B9687D02;
-	Thu, 21 Mar 2024 13:07:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0050587D83;
+	Thu, 21 Mar 2024 13:15:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XKPD8fNn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uOiNkF13";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 765B787D02; Thu, 21 Mar 2024 13:07:22 +0100 (CET)
-Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
- [IPv6:2607:f8b0:4864:20::c2c])
+ id AAE9C88049; Thu, 21 Mar 2024 13:15:12 +0100 (CET)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8741187B77
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 13:07:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF2D387D5E
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 13:15:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-oo1-xc2c.google.com with SMTP id
- 006d021491bc7-5a4930d9c48so70186eaf.1
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 05:07:19 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-430b870163eso16589621cf.1
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 05:15:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711022838; x=1711627638; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1711023307; x=1711628107; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g8kri3azyUqVhHNgMPVrh9C/xOl43RBsmDe+JLCAxDs=;
- b=XKPD8fNn8N3Pc7QCdI0VwQBiuhQVfCkL331OArx77sTtp/O+cpz0kmn2fZSXaob1FK
- EfbjQSmq+TFDw7NpmLMyf+MGUU5dPCfDLtDvGAE5Jl4B4yuEh5ksaDVG4DrD8eeySJb+
- omGxot58kiv6Ax/yX3zamRINh5C9m+ybzv5Ud1V+GhpnEQbh1g2MQyHL6T6WowoQb6DZ
- Z/R+vdEG1bSP9E8UOT8YP0/MqXnLI21VoeW70q6BhMo1GUxroH6Ob1k7QpT3Le0JLyTb
- 4SqNagcJBzKe3IczybY7s4p+2/ZJuM35wBv4X0zJ3jJicfRFbLS8bPd1sH52wiQm5wYE
- H14g==
+ bh=ZXu5DlmyUMXRb5doCptFSjfcOBSZ/iX4OCBlWPOlWP4=;
+ b=uOiNkF13KAb9KgF9msFHYeaZnRW45uAnXawg7iab/6UGS4JkILsN5aVNJ9jmp7UpPV
+ imu43hZBBvTwBUNVas1pXy08mNqDfMdtOpkspCGY8XFwuG7Dy2Y2W28F7ktIwOs6dJuJ
+ PWs/oxX1sDKEhqFgcaEtWCejYm0LyD1AHUi8U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711022838; x=1711627638;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1711023307; x=1711628107;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g8kri3azyUqVhHNgMPVrh9C/xOl43RBsmDe+JLCAxDs=;
- b=nUluChQu5l3/JFBhpXDtHWG9GCGbH775sP/bwQDf4RbUnmlvKDuqLZNpPS5T4sTeUL
- IrLhv91sNaphh/YIgUq3zTXCK28cUWh6Pzoz1xjbfvwkRhVBXBIN7Xb0jYrrwJnYIaVb
- 2Yyts02PaRXTbd1r7RwBvErpCiJC9CCmglp86L1wXo5lPoGswT72EmL9HrDZTusevO9G
- u+vf+ClU87Q8VEWZOVLGKQD+6pk5Catolq0AWMxw1RweYwp8g6C/OqKxwPdUZUHoPcav
- vGYKto+ZF0uh6nJD3t5EXMHXq0TabkEQnO+gQKRD+6h3S9gTqtXJF7+rbfBHgl0t9UKz
- iNgg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV5npOHMU3xH5R7v3rxByctOofTAWILa3vyeessVilYszup0jiIViAkrMAcSi5uumUPeymAjnKsT9l7gZzBq0G6TM6khg==
-X-Gm-Message-State: AOJu0YzPQEkFYhG4Nr6D1PvTHB8ZRLdwy7TyEodWNjjqkX9MbauG1wAk
- WMn7LxX4j+49M5SJdR5FaLgST1nmnPBDpGLc627TesOWqk9RVSHeW9mBoQEMjv0gwdutdLAmy3N
- Bh+A57zBbQ+zd4LXmNES7XdW7l8CIchPrCDo=
-X-Google-Smtp-Source: AGHT+IFKuAx7lSDisG6dJx8eW8q0vOo/Wi9tyVSv0zJR4D7JoofUL+7aa8wGafDyY2pmjRXkJ9bZDYLYZY0/O7gHDls=
-X-Received: by 2002:a05:6a20:da87:b0:1a3:6f98:f3de with SMTP id
- iy7-20020a056a20da8700b001a36f98f3demr9100079pzb.1.1711022526399; Thu, 21 Mar
- 2024 05:02:06 -0700 (PDT)
+ bh=ZXu5DlmyUMXRb5doCptFSjfcOBSZ/iX4OCBlWPOlWP4=;
+ b=B6BWeYpZTjh1heg6jt6MqvqbkAI8aPwGNCSp+2cZZLH6F7KIHtylI2f2z22QZa8GvV
+ aRjN63BcRbkAyCJAJUa3clC+GkTOt766YZYT40O2SRAxTYfwqXxGQliBrerbqU0erGuI
+ fqwubvLPfOTA79Gv23RlbKir0N+CzUhWHmEvvDtUnGtca+mHBzQ51jtTExRBRyQr5NeR
+ qOmXr3FYGAFJOZPQ4HOJnMsRpWCdDBcK2uIgrhgB870WNE5sHUBcmLFD9by8D3ern/Mb
+ ZWHoZR8vZ5Z7tj8Q7MAcq8wFUEmhVAgy9hPmp0uvyIkEoDVGlvZ/1+RBUeP9i1oCDuq8
+ myuw==
+X-Gm-Message-State: AOJu0YxQKFsurnK17avdZvMA0cPxMecdvFznl3Xx4IFlIHeVUUJR+UPY
+ 0InqIL3GSUM1DQMIXFGY2K3QZ91ujz1hTCBhruMu9FLBIO8Oma3LkDKnIsfV3dJFTCzslFFgr+d
+ k
+X-Google-Smtp-Source: AGHT+IFMK88Pno6ZBslfz8eM1r0RjqW5unKCdYNcA7AEW3vh7kA10XUky0XNiDXgqa78UAZhxM7lcA==
+X-Received: by 2002:a05:6214:e64:b0:691:abc:ade5 with SMTP id
+ jz4-20020a0562140e6400b006910abcade5mr4309738qvb.27.1711023306826; 
+ Thu, 21 Mar 2024 05:15:06 -0700 (PDT)
+Received: from [127.0.1.1] (065-184-193-066.res.spectrum.com. [65.184.193.66])
+ by smtp.gmail.com with ESMTPSA id
+ kj25-20020a056214529900b00690df461ecbsm8990690qvb.10.2024.03.21.05.15.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 21 Mar 2024 05:15:06 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Leo Yu-Chi Liang <ycliang@andestech.com>
+Cc: sjg@chromium.org, seanga2@gmail.com, marex@denx.de
+In-Reply-To: <20240313065315.118326-1-ycliang@andestech.com>
+References: <20240313065315.118326-1-ycliang@andestech.com>
+Subject: Re: [PATCH 1/1] spl: Improve error message for SPL memory allocation
+Message-Id: <171102330582.1913497.14158562270371832337.b4-ty@konsulko.com>
+Date: Thu, 21 Mar 2024 08:15:05 -0400
 MIME-Version: 1.0
-References: <20240321065742.32441-1-othacehe@gnu.org>
-In-Reply-To: <20240321065742.32441-1-othacehe@gnu.org>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 21 Mar 2024 09:01:53 -0300
-Message-ID: <CAOMZO5DeXdRTMazHqK4T9-=jvoRSQBZgjiPMY8_9E25x4w6sEg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/3] imx93-phyboard-segin: Add USB support.
-To: Mathieu Othacehe <othacehe@gnu.org>
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Peng Fan <peng.fan@nxp.com>, 
- Shiji Yang <yangshiji66@outlook.com>, Ye Li <ye.li@nxp.com>,
- Alice Guo <alice.guo@nxp.com>, Stefano Babic <sbabic@denx.de>,
- =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
- Simon Glass <sjg@chromium.org>, Mathieu Othacehe <m.othacehe@gmail.com>,
- Yannic Moog <y.moog@phytec.de>, Primoz Fiser <primoz.fiser@norik.com>,
- Christoph Stoidner <c.stoidner@phytec.de>, 
- Wadim Egorov <w.egorov@phytec.de>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,26 +90,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mathieu,
+On Wed, 13 Mar 2024 14:53:15 +0800, Leo Yu-Chi Liang wrote:
 
-On Thu, Mar 21, 2024 at 3:57=E2=80=AFAM Mathieu Othacehe <othacehe@gnu.org>=
- wrote:
+> There could be two memory allocation scheme in SPL phase.
+> Explicitly print the corresponding error message.
+> 
+> 
 
-> Mathieu Othacehe (3):
->   arm: dts: imx93-phyboard-segin: Add USB support
->   configs: imx93-phyboard-segin: Add USB support
->   configs: imx93-phyboard-segin: Add fastboot support
->
->  arch/arm/dts/imx93-phyboard-segin.dts  | 13 +++++++++++++
+Applied to u-boot/next, thanks!
 
-The addition of the i.MX93 USB support in the kernel devicetree is
-taking longer than expected:
+-- 
+Tom
 
-https://lore.kernel.org/linux-arm-kernel/20240321081439.541799-8-xu.yang_2@=
-nxp.com/T/#u
 
-To avoid getting out of sync with the upstream dts, please add the USB
-nodes inside imx93-phyboard-segin-u-boot.dtsi
-for now.
-
-Thanks
