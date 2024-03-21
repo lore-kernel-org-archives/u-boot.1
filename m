@@ -4,61 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8D5CC54E68
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 05:36:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B43ABC54E68
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 05:46:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BA8387D08;
-	Thu, 21 Mar 2024 06:36:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C36D087D5E;
+	Thu, 21 Mar 2024 06:46:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1710999364;
-	bh=Cu1rweN1MmeShuiM3EfC9xk1wBv3czCjhKLDG/cr6mw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=bo7qlIMljx2jUFJCuQoJKEFPL0vHjU1QESyzgBxAYvxZSz9BrUF8h7q/sOM7wszc5
-	 AQ11ERirodp/n2ESEFPIzNhN1R4ded45TBq76NVHGFU5oVutnPhmAk8T0Rgc0D2XPg
-	 aZQqLqrfl8YkBHJ0qt/xnAL1RmyaHtYCoiq76lS4HC/RJiE6nrBE/Txx9IauiplVS3
-	 N5q7B21OMQUWbVVDyRo2H+3tsK4sCo0TmB+Yp7kDVvt/8V7/wouT8rWLwRTBumoC3D
-	 aq9I0Yg25grZP4q6sg/IRVlyROROROV1HhJwya/e/jVh/yXW2eNIjkyoeKqxqiX0Vg
-	 l1fc0bZ0Bs/Ng==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jGo9BC8g";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1CCC28657F; Thu, 21 Mar 2024 06:46:32 +0100 (CET)
+Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
+ [IPv6:2607:f8b0:4864:20::e2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id D8CFE87DF1;
- Thu, 21 Mar 2024 06:36:00 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1710999361;
- bh=Cu1rweN1MmeShuiM3EfC9xk1wBv3czCjhKLDG/cr6mw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=jlazcrqfPfUw19Nn0atAgHt0PB5ci6GVnRuEMN0Kafdyz9JzI49ify977pgILFrRa
- gYWecUdLWzXW4apus/NqkS79IV3gIy6avLlYRG2MvXTXLbINNKPp66r+knFhFEiDjr
- FozeHeDhcW9lVF2pVzgKF2T1SRCKZmg5zc3BWCUwG6dBtrAnyArhsGxGh7IO5pBUb/
- r/DrgbxQ18cDv28M13dm2IsVXpnyxXq0i0C9Tmn0+QDgO/68E8rqiG77JoTZcBxp2R
- KleaRNk01OlCkFUjxS7QW6PT8+vCYFxGkGKzmgNK609ypThrZ2dhzMXdhRXMh/nJR8
- bmVMJ9JFm9iaQ==
-Message-ID: <8221c539-51b9-4ead-8cce-834c93230282@denx.de>
-Date: Thu, 21 Mar 2024 06:34:49 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id AD1A188077
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 06:46:29 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vs1-xe2c.google.com with SMTP id
+ ada2fe7eead31-47679ac2798so169334137.2
+ for <u-boot@lists.denx.de>; Wed, 20 Mar 2024 22:46:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1710999988; x=1711604788; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=00gKYusdCxJi28BvEZSBit8lunjQgLfVI6SbDReccos=;
+ b=jGo9BC8gxRgb/0eD93wZzY6nner0OfFr+KuJcSC09a3rUG0+jY0S0gHz3GsAacaA/b
+ 8azqSnu9qOVXIyM6yRDUw7mU5xT2hLrh3VQB2/qO139twbgZKz7pcbsqzMLnuVZfRpqJ
+ 0eJ64Ypr/XrjSlT2p0vWr4Y8R0ziJ8NpPFfl63FPc2uYDKXKAtyiAEvBoGoulUjhzxGL
+ 02DPV0oVuUVADAJskIi+lCr3pyFxkXltyIECFiuFl/2SWXsWLlPZvrvxOehSwvRxoya6
+ 1NT7Qow97SgaiyYcThriAB/yJmouh0nVYASXsg1RgbXt93gqitqcauFEfr/mbbsHpSnK
+ DhCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1710999988; x=1711604788;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=00gKYusdCxJi28BvEZSBit8lunjQgLfVI6SbDReccos=;
+ b=SEfs4tcLvZQ8zggfqS1BOihfUZh1lyx7cJJuWFqE8Qfpi7ukKgfGwSfkfx8zgIAs7O
+ 5A0RZEmFAtD6lPSU4lOtQ3Y10uNRvMo+f1FWCiVJ2E9u0A1nh183jRFcqJSosa4CzlhG
+ plXeT+Jp6Ua9KKkAgkT0z5tbomozJPT6DMQC9Qo0gbpse23At51gbG4zVIqwtzxJ0sxk
+ h9oCzHjE8ZU2OXedmiMDKQdcJUlkqsOSVl0Qnq1Rxnk1zVvBZZ9V8MRoSSsGhZYTzvh0
+ aglPRjabazHSouWhh9CBD/ldb8hXVxoM1roUUiUOI1oKNrFJzvzRdl3ITAtBP+qpgQa5
+ LPiQ==
+X-Gm-Message-State: AOJu0Yz+BmjpFTwh0RY2yvd69Mr3TJP0mxA9b20Q/JUonsRScbb/XDO6
+ 3b3PgUrp22dWnOmNSe8G0LSXkn3CDZeEhphJlyLUYU6G1FOZcjtveX9rhtEzyf3VMXarfyXtDLb
+ FWak/FzwPW0SrQiyFpFhBU1FAoTia5rG9z2bnWQ==
+X-Google-Smtp-Source: AGHT+IFh0eWjp5Axj6Zn1TSJtIbIlMaZvrLsR6/8ypwteQjMHXdQz3rOKBAzfiCSrpqeyffvW/bGKWLHiIRK/8OLJB0=
+X-Received: by 2002:a05:6102:21bb:b0:476:aecb:e09c with SMTP id
+ i27-20020a05610221bb00b00476aecbe09cmr3084111vsb.9.1710999988347; Wed, 20 Mar
+ 2024 22:46:28 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] usb: dwc3-generic: implement Qualcomm wrapper
-Content-Language: en-US
-To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
- <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20240131-b4-qcom-usb-v1-0-6438b2a2285e@linaro.org>
- <20240131-b4-qcom-usb-v1-1-6438b2a2285e@linaro.org>
- <ee020a2c-4f84-4fae-97a0-f12f3157d3ad@denx.de>
- <975bfe22-58b3-46b9-899b-f212b49d8664@linaro.org>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <975bfe22-58b3-46b9-899b-f212b49d8664@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+References: <20240312070338.86127-1-sumit.garg@linaro.org>
+ <20240312070338.86127-5-sumit.garg@linaro.org>
+ <dbd4f385-d93f-48db-a7e9-88b86f3d7445@denx.de>
+ <CAFA6WYO8k=qyexUSRs_X-YMtKZTAzM5ZeSCNEO+sJ7z91z7ohg@mail.gmail.com>
+ <f789292a-7c46-4b98-935f-86bfea39ab05@denx.de>
+ <CAFA6WYPHqdWiL=8foFDD9Rs+_L+E-=D+VMC=FZrnKeQdcooNMQ@mail.gmail.com>
+ <1d7ad0f4-2463-4b1c-9020-5444366438fb@denx.de>
+In-Reply-To: <1d7ad0f4-2463-4b1c-9020-5444366438fb@denx.de>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Thu, 21 Mar 2024 11:16:17 +0530
+Message-ID: <CAFA6WYOygxNUGWu3jDF7=4px5gBSoCOjzU=s+eTcH0rRFSGJUQ@mail.gmail.com>
+Subject: Re: [PATCH v3 04/11] imx8mp: power-domain: Don't power off pd_bus
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, tharvey@gateworks.com, 
+ marcel.ziswiler@toradex.com, francesco@dolcini.it, lukma@denx.de, 
+ seanga2@gmail.com, jh80.chung@samsung.com, sjg@chromium.org, festevam@denx.de, 
+ andrejs.cainikovs@toradex.com, peng.fan@nxp.com, aford173@gmail.com, 
+ ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org, fathi.boudra@linaro.org, 
+ remi.duraffort@linaro.org, daniel.thompson@linaro.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,76 +96,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/13/24 7:22 PM, Caleb Connolly wrote:
+On Thu, 21 Mar 2024 at 11:06, Marek Vasut <marex@denx.de> wrote:
+>
+> On 3/15/24 11:41 AM, Sumit Garg wrote:
+> > On Fri, 15 Mar 2024 at 14:53, Marek Vasut <marex@denx.de> wrote:
+> >>
+> >> On 3/15/24 6:31 AM, Sumit Garg wrote:
+> >>> On Thu, 14 Mar 2024 at 09:45, Marek Vasut <marex@denx.de> wrote:
+> >>>>
+> >>>> On 3/12/24 8:03 AM, Sumit Garg wrote:
+> >>>>> power_domain_on/off() isn't refcounted and power domain bus shouldn't be
+> >>>>> turned off for a single peripheral domain as it would negatively affect
+> >>>>> other peripheral domains. So lets just skip turning off bus power
+> >>>>> domain.
+> >>>>
+> >>>> What exactly is the issue and how did you trigger it ?
+> >>>>
+> >>>> Details please.
+> >>>
+> >>> I suppose the issue can be triggered via the "=> usb start => usb
+> >>> stop" sequence where one of the USB controllers is configured in
+> >>> peripheral mode.
+> >>
+> >> 'usb start ; usb stop' causes no problems on MX8MP , maybe the test case
+> >> is more extensive ?
+> >>
+> >> Please, write down the necessary steps to reproduce this problem, and
+> >> what happens when that problem occurs.
+> >
+> > After digging in more, it looks like dev_power_domain_off() is never
+> > (U-Boot life-cycle) invoked for USB controller devices derived from
+> > DT. So this USB power domain sequence is never reachable.
+>
+> The imx8mp_hsiomix_off() is never called on 'usb stop' command ?
+>
 
-[...]
+Yeah, that's the case.
 
->>> +static inline void dwc3_qcom_setbits(void __iomem *base, u32 offset,
->>> u32 val)
->>> +{
->>> +    u32 reg;
->>> +
->>> +    reg = readl(base + offset);
->>> +    reg |= val;
->>> +    writel(reg, base + offset);
->>
->> Use setbits_le32() .
->>
->>> +    /* ensure that above write is through */
->>> +    readl(base + offset);
->>
->> Is this needed ?
-> 
-> I honestly don't know, this is copied from the Linux driver and it seems
-> to be very defensively written. I doubt it's strictly necessary.
+> But then why would the 'usb start ; usb stop' test break power domain
+> state here ?
 
-Does git log indicate anything ?
+It won't break with current implementation, earlier I made this
+assumption that 'usb stop' turns down the power domain.
 
-I suspect this is some sort of barrier .
+>
+> > BTW, dev_power_domain_on() is invoked when USB controller devices are
+> > added based on DT.
+>
+> I would expect imx8mp_hsiomix_off() to be called either on 'usb stop' or
+> just before Linux boots .
+>
+> [...]
+>
+> >>>> Why not add counter into imx8mp_hsiomix_priv structure in this driver ?
+> >>>
+> >>> Sure I can do that but do you think the current approach can have any
+> >>> side effects?
+> >>
+> >> Bus domain not getting cycled (which can leave it in some odd state),
+> >> and increased power consumption if the next stage doesn't turn the
+> >> domain off.
+> >
+> > Given above, would you like me to drop power domain off path entirely
+> > here?
+>
+> Can the series go in without this patch ?
 
-[...]
+Okay let me drop this patch.
 
->>> +/* For controllers running without superspeed PHYs */
->>> +static void dwc3_qcom_select_utmi_clk(void __iomem *qscratch_base)
->>> +{
->>> +    /* Configure dwc3 to use UTMI clock as PIPE clock not present */
->>> +    dwc3_qcom_setbits(qscratch_base, QSCRATCH_GENERAL_CFG,
->>> +              PIPE_UTMI_CLK_DIS);
->>> +
->>> +    udelay(500);
->>
->> Isn't there some possibility to poll for completion instead of fixed
->> delay ? If so, use wait_for_bit or some such .
-> 
-> Not that I'm aware of, no. I think this hardware just has a blanket
-> "writes take X bus cycles to complete" rule or something. It's totally
-> possible that this code was originally written this way to work around
-> some issues on an FPGA prototype or something. Everything seems to still
-> work if I remove the delays so I'll drop them...
+>
+> > I think if people are concerned about power consumption then it
+> > should be implemented properly in U-Boot to remove all the DT based
+> > devices before passing on control to the next stage.
+>
+> I would expect imx8mp_hsiomix_off() to be called either on 'usb stop' or
+> just before Linux boots (esp. at that point), so if you do not power off
+> the bus domain before booting Linux, you may hand over a device which
+> was not fully power cycled.
 
-Could you possibly ask someone ?
+Unfortunately that's the current situation I see. IMO, the better
+solution would be to just remove all the DT devices before passing on
+control to Linux. That should automatically power off devices.
 
-[...]
+>
+> And sorry for the delay, I was a bit busy.
 
->>>    static int dwc3_rk_glue_get_ctrl_dev(struct udevice *dev, ofnode *node)
->>>    {
->>>        *node = dev_ofnode(dev);
->>> @@ -506,6 +599,10 @@ static int dwc3_glue_reset_init(struct udevice *dev,
->>>        else if (ret)
->>>            return ret;
->>>    +    if (device_is_compatible(dev, "qcom,dwc3")) {
->>> +        reset_assert_bulk(&glue->resets);
->>> +        udelay(500);
->>
->> Why this delay here ?
-> 
-> According to the docs, the reset should be asserted for at least 6 sleep
-> clock cycles, that's ~200us on sdm845, but it can vary by platform.
+No worries.
 
-A comment in the code would be nice.
-
-Sorry for the abysmal delay in replies.
-
-btw. the new version of this series is still OK to go in, unless you 
-want to fill in the comments. They can also go in in separate follow up 
-patch.
+-Sumit
