@@ -4,67 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6135C6FD1F
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 19:17:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD221C54E58
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 19:38:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF2758815A;
-	Thu, 21 Mar 2024 20:17:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 2589287D91;
+	Thu, 21 Mar 2024 20:38:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711048639;
-	bh=ejuD0ZyP3rMLR6A1JDQbz7OeWCi2qc6YDGklVpmHONQ=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=prKAk4Eex97ca++mkeNJlfJ3WVIW5ydoEqWUCr+A15cbM7mjE5UP4XkHxqs+KaqQu
-	 UKxJv457CUOmFuyragHnSlsY7XNTLOhs6pBihuJWoY4kO2uP9zsSCwtP4Zi10ed1VD
-	 UbCxkjQqnB4maVbyiQqUTx+apax8fmUdGr8xtnlC8ls/sU6hPEuiB1LiD0du9NJGZ2
-	 /WWfxcr38pkkNhVpc3OzItxx6lA/GvHCCEfHvNoLgkY5paiucruyFj7bcWIBf3R47K
-	 jMQsCCTQknFEHabVlnnmKRWVEdA3bOBHHY9X+pYnGm7E2mjx1fegtNkR1Im1G2QFU2
-	 R8sI2NkxwKtYQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="R0Ezp00s";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SrzMK6VG";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7CA93880F8; Thu, 21 Mar 2024 20:38:14 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2AF0E88145;
- Thu, 21 Mar 2024 20:17:17 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1711048638;
- bh=ejuD0ZyP3rMLR6A1JDQbz7OeWCi2qc6YDGklVpmHONQ=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=oH1uQyHiq57XnyliKeQX+6rnjb5nVgwLsK4odChyxsybJXHZ9tx3CpFYbqMUanhDa
- cN8OTnuEw68Oy0nfGciaFdIOvfMEjNtTkL/ns0AKF3mCDVKftw0jxwH20A+dXm+k6y
- io3AXNFT4XtfUapy8Bveneg5/M9MXSnrA2HDUPHwD3BZeszzTliUNrrOQwtOlf0+xh
- RnWKaNA0ir3wdh9Hg11q4XN687ll6ua+aPvPX9Dfs45xdK0FAQO9Hd2WFCFkfqR8oH
- IOHvIm/VFvuj+Sb0V44ek3fAdRhHMZCNpw4AAOfQmGHypRdN5TB0t8Wf02uQUVoLe4
- C+5qvDF26CN5A==
-Message-ID: <09b0dbae-208b-439a-bb75-a79902522eed@denx.de>
-Date: Thu, 21 Mar 2024 17:30:32 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 7AE4087CB7
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 20:38:12 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4V0wjc0LV7z9sTK;
+ Thu, 21 Mar 2024 20:38:12 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1711049892;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Zbzk8BsF7lITshqZCvRI9CvJGXEKy15KEp8VtG1TeFo=;
+ b=R0Ezp00slUEXuIgrf0kABxW+r50Roan8B6SdefIf45ek7FP//lwcSs8dZy1zXuy7xVPaYP
+ flWGgx6dQ/C8OlGnYUiIGLHIh4PvTJOyOaKvE+1mHjkJhcMkZZFraoK8ZjtX40g4cpfBC7
+ Q0NL05g7MV4eq1E10DjgrE/SusLWtpZj527yZ4yVhXianOZVhBkRB0e3hYpc+mp4EVDcgO
+ l/bPMs4miW51aCvWt7pPj/BtcWrU0Rl/6vB5cVXf1t3PyOciZ1qwnNm2ot/dbJlmNPEHLp
+ YLvnlwcqNsRkY3f0/6/YIZG+9NjUCpFp5p3xKmQajvCrjto1sgsRllBKzz6UoA==
+Message-ID: <ca4dfdf7-810e-4569-a594-095da8820d5b@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1711049890;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=Zbzk8BsF7lITshqZCvRI9CvJGXEKy15KEp8VtG1TeFo=;
+ b=SrzMK6VGo2Oz/OasHv9qFpTFp/C1wDz04Vg425IjC7EaHN9mAIOhAIESqgioUs1Fnc32TK
+ yvCeFuovRa52j0Quz2ZTjEu9qOCMg8MaIRnJAHziS20ROoMwX22eAmPZ8hdu6UZYBz0Qhr
+ Ys4REkF3IiWxI5Bfy+4vIRZjuF+5ZSmG5sibe1vvQDPlHtcpFLAN8b7a5wSeUdQs3EySld
+ NrlrI7AdfUBMOGvXgi9+5+zelWuEeXz+GLBiSGrkKN4rCjuUWA8abiuFK3qeEttsHVwGr8
+ 1QSS6CBdNeeq/X4ZQr/SKdktxMQDA+8BYiMawsgRgDKK614k8BQLIus6WKlsHg==
+Date: Thu, 21 Mar 2024 20:38:07 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 04/11] imx8mp: power-domain: Don't power off pd_bus
+Subject: Re: [PATCH 1/2] usb: udc: dwc3: Fold board
+ dm_usb_gadget_handle_interrupts() into DWC3 gadget
 Content-Language: en-US
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, tharvey@gateworks.com,
- marcel.ziswiler@toradex.com, francesco@dolcini.it, lukma@denx.de,
- seanga2@gmail.com, jh80.chung@samsung.com, sjg@chromium.org,
- festevam@denx.de, andrejs.cainikovs@toradex.com, peng.fan@nxp.com,
- aford173@gmail.com, ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org,
- fathi.boudra@linaro.org, remi.duraffort@linaro.org,
- daniel.thompson@linaro.org
-References: <20240312070338.86127-1-sumit.garg@linaro.org>
- <20240312070338.86127-5-sumit.garg@linaro.org>
- <dbd4f385-d93f-48db-a7e9-88b86f3d7445@denx.de>
- <CAFA6WYO8k=qyexUSRs_X-YMtKZTAzM5ZeSCNEO+sJ7z91z7ohg@mail.gmail.com>
- <f789292a-7c46-4b98-935f-86bfea39ab05@denx.de>
- <CAFA6WYPHqdWiL=8foFDD9Rs+_L+E-=D+VMC=FZrnKeQdcooNMQ@mail.gmail.com>
- <1d7ad0f4-2463-4b1c-9020-5444366438fb@denx.de>
- <CAFA6WYOygxNUGWu3jDF7=4px5gBSoCOjzU=s+eTcH0rRFSGJUQ@mail.gmail.com>
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFA6WYOygxNUGWu3jDF7=4px5gBSoCOjzU=s+eTcH0rRFSGJUQ@mail.gmail.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Angus Ainslie <angus@akkea.ca>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Nishanth Menon <nm@ti.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, Simon Glass
+ <sjg@chromium.org>, Stefan Bosch <stefan_b@posteo.net>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ kernel@puri.sm
+References: <20240317044357.547037-1-marek.vasut+renesas@mailbox.org>
+ <b20f5e01-d45c-402c-90e2-9593558bbeaa@linaro.org>
+ <3fd317b9-6bbb-4ef2-b806-9e364b4e06de@mailbox.org>
+ <9bb30db8-08d1-49bc-b89a-6c3bd4d898db@linaro.org>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <9bb30db8-08d1-49bc-b89a-6c3bd4d898db@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: a98d2c1a59a8708b171
+X-MBO-RS-META: 1dfcunsbwd47wtyx6xz8e6xcmpyfz3jn
+X-Rspamd-Queue-Id: 4V0wjc0LV7z9sTK
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,90 +100,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/21/24 6:46 AM, Sumit Garg wrote:
-> On Thu, 21 Mar 2024 at 11:06, Marek Vasut <marex@denx.de> wrote:
->>
->> On 3/15/24 11:41 AM, Sumit Garg wrote:
->>> On Fri, 15 Mar 2024 at 14:53, Marek Vasut <marex@denx.de> wrote:
->>>>
->>>> On 3/15/24 6:31 AM, Sumit Garg wrote:
->>>>> On Thu, 14 Mar 2024 at 09:45, Marek Vasut <marex@denx.de> wrote:
->>>>>>
->>>>>> On 3/12/24 8:03 AM, Sumit Garg wrote:
->>>>>>> power_domain_on/off() isn't refcounted and power domain bus shouldn't be
->>>>>>> turned off for a single peripheral domain as it would negatively affect
->>>>>>> other peripheral domains. So lets just skip turning off bus power
->>>>>>> domain.
->>>>>>
->>>>>> What exactly is the issue and how did you trigger it ?
->>>>>>
->>>>>> Details please.
->>>>>
->>>>> I suppose the issue can be triggered via the "=> usb start => usb
->>>>> stop" sequence where one of the USB controllers is configured in
->>>>> peripheral mode.
->>>>
->>>> 'usb start ; usb stop' causes no problems on MX8MP , maybe the test case
->>>> is more extensive ?
->>>>
->>>> Please, write down the necessary steps to reproduce this problem, and
->>>> what happens when that problem occurs.
+On 3/21/24 6:05 PM, Caleb Connolly wrote:
+> 
+> 
+> On 20/03/2024 20:18, Marek Vasut wrote:
+>> On 3/18/24 1:47 PM, Caleb Connolly wrote:
 >>>
->>> After digging in more, it looks like dev_power_domain_off() is never
->>> (U-Boot life-cycle) invoked for USB controller devices derived from
->>> DT. So this USB power domain sequence is never reachable.
->>
->> The imx8mp_hsiomix_off() is never called on 'usb stop' command ?
->>
-> 
-> Yeah, that's the case.
-> 
->> But then why would the 'usb start ; usb stop' test break power domain
->> state here ?
-> 
-> It won't break with current implementation, earlier I made this
-> assumption that 'usb stop' turns down the power domain.
-
-So, maybe I am a little confused, what is this patch solving then ?
-
->>> BTW, dev_power_domain_on() is invoked when USB controller devices are
->>> added based on DT.
->>
->> I would expect imx8mp_hsiomix_off() to be called either on 'usb stop' or
->> just before Linux boots .
->>
->> [...]
->>
->>>>>> Why not add counter into imx8mp_hsiomix_priv structure in this driver ?
->>>>>
->>>>> Sure I can do that but do you think the current approach can have any
->>>>> side effects?
->>>>
->>>> Bus domain not getting cycled (which can leave it in some odd state),
->>>> and increased power consumption if the next stage doesn't turn the
->>>> domain off.
 >>>
->>> Given above, would you like me to drop power domain off path entirely
->>> here?
+>>> On 17/03/2024 04:42, Marek Vasut wrote:
+>>>> The dm_usb_gadget_handle_interrupts() has no place in board code. Move
+>>>> this into DWC3 driver. The OMAP implementation is special, add new weak
+>>>> dwc3_uboot_interrupt_status() function to decide whether DWC3 interrupt
+>>>> handling should be called, and override it in OMAP DWC3 code, to repair
+>>>> the special OMAP interrupt handling code until OMAP gets switched over
+>>>> to DM UDC proper.
+>>>>
+>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>
+>>> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 >>
->> Can the series go in without this patch ?
+>> Thank you. If you have a hardware with DWC3 , can you please also test
+>> this series ? I am afraid this may break things, although it is likely
+>> to break mostly select MX8M boards.
 > 
-> Okay let me drop this patch.
-
-We can fix whatever it is that needs to be fixed in a smaller follow up 
-series.
-
->>> I think if people are concerned about power consumption then it
->>> should be implemented properly in U-Boot to remove all the DT based
->>> devices before passing on control to the next stage.
->>
->> I would expect imx8mp_hsiomix_off() to be called either on 'usb stop' or
->> just before Linux boots (esp. at that point), so if you do not power off
->> the bus domain before booting Linux, you may hand over a device which
->> was not fully power cycled.
+> heh yeah it looked like it would be fine for qcom, but better safe than
+> sorry :P
 > 
-> Unfortunately that's the current situation I see. IMO, the better
-> solution would be to just remove all the DT devices before passing on
-> control to Linux. That should automatically power off devices.
+> Thanks for the ping.
+> 
+> Tested-by: Caleb Connolly <caleb.connolly@linaro.org> # qcom sdm845
 
-Doesn't CONFIG_DM_DEVICE_REMOVE=y do something like that already ?
+Thank you!
