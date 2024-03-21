@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B19AC54E58
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 14:55:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F0B0C54E68
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 14:55:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55BA2880D2;
-	Thu, 21 Mar 2024 15:55:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8466387F4A;
+	Thu, 21 Mar 2024 15:55:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y8bNuzhX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dwSSoI58";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A327880D2; Thu, 21 Mar 2024 15:55:33 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id C214787F4A; Thu, 21 Mar 2024 15:55:38 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2102880AD
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 15:55:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 73B50880E4
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 15:55:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-1dfff641d10so6829945ad.2
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 07:55:28 -0700 (PDT)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-1def89f0cfdso16758785ad.0
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 07:55:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711032927; x=1711637727; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1711032933; x=1711637733; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ad3uCstV6107Ex9Z//2I9L6055a6XtiiyrmcQSBfESM=;
- b=y8bNuzhX0xA5blDyoCtpRBa/oSanhSGRUG3qw31tmTDLV6bGJiGyt4DXDwzBWpvlFE
- mgZ2wZT0pHtE3/FDWBhQ5GT0RVrZgmHExX8yyGTqmCkv/x8gt3t4q8UsPxx3aRsjxUb6
- zjvjuLwnCTVXqRYfMvCQkXuqipf2jgFXcpBcnkVFXDHjTDNLaolRYLredIq24OdOqcfO
- RdC7VUOXrCKNkD/1wq8OPFW752l7TVoIuNEh8I/mV/19icYuf/WWSzOhXbrqJ0mLAySN
- gmOWVrKwRg4H1JWHcEB1IMv/dV057jF86/O8my1G3xwKoRtFdL3P8owB/++nD0jxB0PH
- 1R7g==
+ bh=pZszhapRfBhAfiLoppFEm0qvoUGpo25SESb5dIarLvs=;
+ b=dwSSoI584FFQt/+Y0SKof0CGiz920RK+Pil51DbZA1fU1W9hqNLSOvYs/dzNl9ovID
+ CnMJwcYSQ5whG6oRISHa2zFZBhrBzhldwA/Trhvfd3MnzZI6+gKmqVxBHhr9qAl8qifK
+ 4brXjnLa/ug77llbBjmVMRDEpOoA+NfUJpNk0DaiD6cjz7NTSy3+mY8ERCfm3e9zqnPG
+ lyq3mwOU8//6oZa3sRB/XSBECCZ3NkI71H5T21mf8ksfXKFQiGF/fZxMsPAIBIyeFcwV
+ 1sN7KoNlVhD0ixxGCNWEzB7igQvan1zgf5Ti2qydn7gf8VbRt39e4mVzLberYAq03bjF
+ s45Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711032927; x=1711637727;
+ d=1e100.net; s=20230601; t=1711032933; x=1711637733;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ad3uCstV6107Ex9Z//2I9L6055a6XtiiyrmcQSBfESM=;
- b=wLyy9lwtus7ZAGCAILUOQ2vkApP9JTUIXOI945P3MYm+7QB5+GH1uLNKzhSheL7LD6
- QGzbejyv14wjjZ6HbHA19rQLwnTr9DzXtoHGwM8/e6MdkePvHAHnLImbQ8+WY3N6PkOC
- IP+99RkWGFRosPLuvABTnxrtAQr5RfiHAvmtebYZF2rOrMRZnJ9QKJi9PqmKHsUw7Ee3
- Ftr38aCXEmPyXz2cSIPWEUbSMbqdsVfYC5L9lBpNgSLejZvE+9tz31xm3k3UjgLUedFC
- hg1QQjnxkE8FH3xjCanzAh492poY6T6SwsJp7aLtqFAWhUBT52DCgLDf1Tu30I4Nbz4Q
- UW9w==
-X-Gm-Message-State: AOJu0YzX/Q6Gcq9KLXtIzrpCedzPs3wUCyMTJdNlmEzcWLsusNFMDZBm
- vJMUIftPYEKs9i1SZ49U9Aqy9k6FPDFtUhdyTw/p9ae8txOQtXOpx3BIRdknF8EdrfQbuywPYB1
- N
-X-Google-Smtp-Source: AGHT+IFHx0aW7FBnDf+hF6FjnDMXZFnwMMsmIXYhX35HOyzS5SqmIWTHeITPeGTW7R+MawK262Kjmw==
-X-Received: by 2002:a17:902:eb92:b0:1df:f73e:f8a3 with SMTP id
- q18-20020a170902eb9200b001dff73ef8a3mr16836498plg.30.1711032926835; 
- Thu, 21 Mar 2024 07:55:26 -0700 (PDT)
+ bh=pZszhapRfBhAfiLoppFEm0qvoUGpo25SESb5dIarLvs=;
+ b=pm34qQ1xAetjAwxHfTL8eHMd99MB9S//cSVX6kWnTOkZnhDF7/kbn1Avli/dMpWt/4
+ h4fjDmjBpeYkdfxtDdFlkhITCE3clPOLa6qh5SpNQQcgmvnjlm0jek7JBH+5cjWBbryT
+ 0A/tV3ha3fCfMM87GhzIJAyxoYVR131fRUD4FE+uPxQIF3t3c9cZWzjyRCp+2P6luriP
+ 60c9d6R2ge5f6zl3tfDPXTXaF/+kaKxM6eUMEZ4M3P2bRPUXohin4n2JxLRJF6GGOIi1
+ e1+aanCamy46ZJCXfpmemUXNAwatw/kHezGEbhRcTwGHzugSnjYsyx3SJjOKPJoDwDTQ
+ tn2w==
+X-Gm-Message-State: AOJu0YwkmilquOwZmfmWeBUSQz0hkv/XCCtRjndosh9Oibl3VesNbMtl
+ itD39pjCeP4iyc09TlJO0q1oerbx3Rdm8zMlUUJzrPl3pKMoQcBmoD0A6waVY13s2kUjz53Myn9
+ w
+X-Google-Smtp-Source: AGHT+IEpECogRsSS6wizBtve0aJjnpNp4UVT57N+zw10oEY6uwdoPBskDZBS9GvR/GoQW/O7Onawvg==
+X-Received: by 2002:a17:902:e750:b0:1dd:8daf:99d7 with SMTP id
+ p16-20020a170902e75000b001dd8daf99d7mr4488079plf.32.1711032933574; 
+ Thu, 21 Mar 2024 07:55:33 -0700 (PDT)
 Received: from sumit-X1.. ([223.178.211.159]) by smtp.gmail.com with ESMTPSA id
- j9-20020a170902da8900b001dddb014624sm11751668plx.54.2024.03.21.07.55.20
+ j9-20020a170902da8900b001dddb014624sm11751668plx.54.2024.03.21.07.55.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 07:55:26 -0700 (PDT)
+ Thu, 21 Mar 2024 07:55:33 -0700 (PDT)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, tharvey@gateworks.com, marcel.ziswiler@toradex.com,
@@ -74,9 +74,10 @@ Cc: trini@konsulko.com, tharvey@gateworks.com, marcel.ziswiler@toradex.com,
  fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org, pbrobinson@gmail.com,
  Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v4 01/11] clk: imx8mp: Add support for PCIe clocks
-Date: Thu, 21 Mar 2024 20:24:57 +0530
-Message-Id: <20240321145507.619448-2-sumit.garg@linaro.org>
+Subject: [PATCH v4 02/11] reset: imx: Refactor driver to simplify function
+ names
+Date: Thu, 21 Mar 2024 20:24:58 +0530
+Message-Id: <20240321145507.619448-3-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240321145507.619448-1-sumit.garg@linaro.org>
 References: <20240321145507.619448-1-sumit.garg@linaro.org>
@@ -98,48 +99,138 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for PCIe clocks required to enable PCIe support on
-iMX8MP SoC.
+imx7_reset_{deassert/assert}_imx* are a bit more confusing when compared
+with imx*_reset_{deassert/assert}. So refactor driver to use function
+names easier to understand. This shouldn't affect the functionality
+though.
 
-Tested-by: Tim Harvey <tharvey@gateworks.com> #imx8mp-venice*
-Tested-by: Adam Ford <aford173@gmail.com> #imx8mp-beacon-kit
+Suggested-by: Marek Vasut <marex@denx.de>
 Reviewed-by: Marek Vasut <marex@denx.de>
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
- drivers/clk/imx/clk-imx8mp.c | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/reset/reset-imx7.c | 42 +++++++++++++++++++-------------------
+ 1 file changed, 21 insertions(+), 21 deletions(-)
 
-diff --git a/drivers/clk/imx/clk-imx8mp.c b/drivers/clk/imx/clk-imx8mp.c
-index a21a3ce34bb..7dfc829df2c 100644
---- a/drivers/clk/imx/clk-imx8mp.c
-+++ b/drivers/clk/imx/clk-imx8mp.c
-@@ -62,6 +62,10 @@ static const char *imx8mp_dram_apb_sels[] = {"clock-osc-24m", "sys_pll2_200m", "
- 					     "sys_pll1_160m", "sys_pll1_800m", "sys_pll3_out",
- 					     "sys_pll2_250m", "audio_pll2_out", };
+diff --git a/drivers/reset/reset-imx7.c b/drivers/reset/reset-imx7.c
+index eaef2cc2cdf..ca703466605 100644
+--- a/drivers/reset/reset-imx7.c
++++ b/drivers/reset/reset-imx7.c
+@@ -14,7 +14,7 @@
+ #include <linux/bitops.h>
+ #include <linux/delay.h>
  
-+static const char * const imx8mp_pcie_aux_sels[] = {"clock-osc-24m", "sys_pll2_200m", "sys_pll2_50m",
-+						    "sys_pll3_out", "sys_pll2_100m", "sys_pll1_80m",
-+						    "sys_pll1_160m", "sys_pll1_200m", };
-+
- static const char *imx8mp_i2c5_sels[] = {"clock-osc-24m", "sys_pll1_160m", "sys_pll2_50m",
- 					 "sys_pll3_out", "audio_pll1_out", "video_pll1_out",
- 					 "audio_pll2_out", "sys_pll1_133m", };
-@@ -272,6 +276,7 @@ static int imx8mp_clk_probe(struct udevice *dev)
+-struct imx7_reset_priv {
++struct imx_reset_priv {
+ 	void __iomem *base;
+ 	struct reset_ops ops;
+ };
+@@ -64,9 +64,9 @@ static const struct imx7_src_signal imx7_src_signals[IMX7_RESET_NUM] = {
+ 	[IMX7_RESET_DDRC_CORE_RST]	= { SRC_DDRC_RCR, BIT(1) },
+ };
  
- 	clk_dm(IMX8MP_CLK_DRAM_ALT, imx8m_clk_composite("dram_alt", imx8mp_dram_alt_sels, base + 0xa000));
- 	clk_dm(IMX8MP_CLK_DRAM_APB, imx8m_clk_composite_critical("dram_apb", imx8mp_dram_apb_sels, base + 0xa080));
-+	clk_dm(IMX8MP_CLK_PCIE_AUX, imx8m_clk_composite("pcie_aux", imx8mp_pcie_aux_sels, base + 0xa400));
- 	clk_dm(IMX8MP_CLK_I2C5, imx8m_clk_composite("i2c5", imx8mp_i2c5_sels, base + 0xa480));
- 	clk_dm(IMX8MP_CLK_I2C6, imx8m_clk_composite("i2c6", imx8mp_i2c6_sels, base + 0xa500));
- 	clk_dm(IMX8MP_CLK_ENET_QOS, imx8m_clk_composite("enet_qos", imx8mp_enet_qos_sels, base + 0xa880));
-@@ -322,6 +327,7 @@ static int imx8mp_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MP_CLK_I2C2_ROOT, imx_clk_gate4("i2c2_root_clk", "i2c2", base + 0x4180, 0));
- 	clk_dm(IMX8MP_CLK_I2C3_ROOT, imx_clk_gate4("i2c3_root_clk", "i2c3", base + 0x4190, 0));
- 	clk_dm(IMX8MP_CLK_I2C4_ROOT, imx_clk_gate4("i2c4_root_clk", "i2c4", base + 0x41a0, 0));
-+	clk_dm(IMX8MP_CLK_PCIE_ROOT, imx_clk_gate4("pcie_root_clk", "pcie_aux", base + 0x4250, 0));
- 	clk_dm(IMX8MP_CLK_PWM1_ROOT, imx_clk_gate4("pwm1_root_clk", "pwm1", base + 0x4280, 0));
- 	clk_dm(IMX8MP_CLK_PWM2_ROOT, imx_clk_gate4("pwm2_root_clk", "pwm2", base + 0x4290, 0));
- 	clk_dm(IMX8MP_CLK_PWM3_ROOT, imx_clk_gate4("pwm3_root_clk", "pwm3", base + 0x42a0, 0));
+-static int imx7_reset_deassert_imx7(struct reset_ctl *rst)
++static int imx7_reset_deassert(struct reset_ctl *rst)
+ {
+-	struct imx7_reset_priv *priv = dev_get_priv(rst->dev);
++	struct imx_reset_priv *priv = dev_get_priv(rst->dev);
+ 	const struct imx7_src_signal *sig = imx7_src_signals;
+ 	u32 val;
+ 
+@@ -95,9 +95,9 @@ static int imx7_reset_deassert_imx7(struct reset_ctl *rst)
+ 	return 0;
+ }
+ 
+-static int imx7_reset_assert_imx7(struct reset_ctl *rst)
++static int imx7_reset_assert(struct reset_ctl *rst)
+ {
+-	struct imx7_reset_priv *priv = dev_get_priv(rst->dev);
++	struct imx_reset_priv *priv = dev_get_priv(rst->dev);
+ 	const struct imx7_src_signal *sig = imx7_src_signals;
+ 	u32 val;
+ 
+@@ -185,9 +185,9 @@ static const struct imx7_src_signal imx8mq_src_signals[IMX8MQ_RESET_NUM] = {
+ 	[IMX8MQ_RESET_DDRC2_PRST]		= { SRC_DDRC2_RCR, BIT(2) },
+ };
+ 
+-static int imx7_reset_deassert_imx8mq(struct reset_ctl *rst)
++static int imx8mq_reset_deassert(struct reset_ctl *rst)
+ {
+-	struct imx7_reset_priv *priv = dev_get_priv(rst->dev);
++	struct imx_reset_priv *priv = dev_get_priv(rst->dev);
+ 	const struct imx7_src_signal *sig = imx8mq_src_signals;
+ 	u32 val;
+ 
+@@ -223,9 +223,9 @@ static int imx7_reset_deassert_imx8mq(struct reset_ctl *rst)
+ 	return 0;
+ }
+ 
+-static int imx7_reset_assert_imx8mq(struct reset_ctl *rst)
++static int imx8mq_reset_assert(struct reset_ctl *rst)
+ {
+-	struct imx7_reset_priv *priv = dev_get_priv(rst->dev);
++	struct imx_reset_priv *priv = dev_get_priv(rst->dev);
+ 	const struct imx7_src_signal *sig = imx8mq_src_signals;
+ 	u32 val;
+ 
+@@ -252,21 +252,21 @@ static int imx7_reset_assert_imx8mq(struct reset_ctl *rst)
+ 	return 0;
+ }
+ 
+-static int imx7_reset_assert(struct reset_ctl *rst)
++static int imx_reset_assert(struct reset_ctl *rst)
+ {
+-	struct imx7_reset_priv *priv = dev_get_priv(rst->dev);
++	struct imx_reset_priv *priv = dev_get_priv(rst->dev);
+ 	return priv->ops.rst_assert(rst);
+ }
+ 
+-static int imx7_reset_deassert(struct reset_ctl *rst)
++static int imx_reset_deassert(struct reset_ctl *rst)
+ {
+-	struct imx7_reset_priv *priv = dev_get_priv(rst->dev);
++	struct imx_reset_priv *priv = dev_get_priv(rst->dev);
+ 	return priv->ops.rst_deassert(rst);
+ }
+ 
+ static const struct reset_ops imx7_reset_reset_ops = {
+-	.rst_assert = imx7_reset_assert,
+-	.rst_deassert = imx7_reset_deassert,
++	.rst_assert = imx_reset_assert,
++	.rst_deassert = imx_reset_deassert,
+ };
+ 
+ static const struct udevice_id imx7_reset_ids[] = {
+@@ -277,18 +277,18 @@ static const struct udevice_id imx7_reset_ids[] = {
+ 
+ static int imx7_reset_probe(struct udevice *dev)
+ {
+-	struct imx7_reset_priv *priv = dev_get_priv(dev);
++	struct imx_reset_priv *priv = dev_get_priv(dev);
+ 
+ 	priv->base = dev_remap_addr(dev);
+ 	if (!priv->base)
+ 		return -ENOMEM;
+ 
+ 	if (device_is_compatible(dev, "fsl,imx8mq-src")) {
+-		priv->ops.rst_assert = imx7_reset_assert_imx8mq;
+-		priv->ops.rst_deassert = imx7_reset_deassert_imx8mq;
++		priv->ops.rst_assert = imx8mq_reset_assert;
++		priv->ops.rst_deassert = imx8mq_reset_deassert;
+ 	} else if (device_is_compatible(dev, "fsl,imx7d-src")) {
+-		priv->ops.rst_assert = imx7_reset_assert_imx7;
+-		priv->ops.rst_deassert = imx7_reset_deassert_imx7;
++		priv->ops.rst_assert = imx7_reset_assert;
++		priv->ops.rst_deassert = imx7_reset_deassert;
+ 	}
+ 
+ 	return 0;
+@@ -300,5 +300,5 @@ U_BOOT_DRIVER(imx7_reset) = {
+ 	.of_match = imx7_reset_ids,
+ 	.ops = &imx7_reset_reset_ops,
+ 	.probe = imx7_reset_probe,
+-	.priv_auto	= sizeof(struct imx7_reset_priv),
++	.priv_auto = sizeof(struct imx_reset_priv),
+ };
 -- 
 2.34.1
 
