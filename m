@@ -4,53 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D65CBC6FD1F
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 17:07:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 241E9C6FD1F
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 18:02:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 450E4880F1;
-	Thu, 21 Mar 2024 18:07:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 48DD087F33;
+	Thu, 21 Mar 2024 19:02:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="BO2Qz4k/";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E967880FC; Thu, 21 Mar 2024 18:07:42 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ id D765488095; Thu, 21 Mar 2024 19:02:25 +0100 (CET)
+Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E881880DB
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 18:07:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C60B87D91
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 19:02:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=none (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (31-10-206-125.static.upc.ch [31.10.206.125])
- by mail11.truemail.it (Postfix) with ESMTPA id 29C5A1FA90;
- Thu, 21 Mar 2024 18:07:39 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1711040859;
- bh=09LZvVrpAbEb6DlzB/4l/eDgZfyoqFTgN7cHnq+JrJc=; h=From:To:Subject;
- b=BO2Qz4k/dlHpEzR/Mto5wqnzkN/XIbQkYmzilqzlBppdrc3JRI9x8zGPhiRh55mwa
- 8I8tNT+TK2FCoVI85FU9vDQDtAyzzYaJ42vnhk8CqQMSNB5440S2z5mx6zBDoJ5soA
- MtvMUhmNXRHyZ84YI5pLgd35Vkwzk9MZ8ZsMCJS0hhjKtuEQcGYIp4NaFY9OSJaq2o
- AVI2PjU5Yg8H1V0IUkkVYcnRFfJgIFSyxvwDZc0aecsnW2pE7XJWkM3uXIn0R3xxVf
- jmw8AJNBJKNKVemPTvCuouXx50b2PIrQxffHfW37sntUqZ019mq9BJ+85Jxh1sOjrA
- WUQvYUNK45Rkg==
-Date: Thu, 21 Mar 2024 18:07:32 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Hiago De Franco <hiagofranco@gmail.com>
-Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Tom Rini <trini@konsulko.com>,
- Hiago De Franco <hiago.franco@toradex.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1] board: toradex: verdin-am62_r5: Increase
- SPL_STACK_R_MALLOC_SIMPLE_LEN
-Message-ID: <20240321170732.GA12388@francesco-nb>
-References: <20240320164845.141894-1-hiagofranco@gmail.com>
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: from 068-189-091-139.biz.spectrum.com ([68.189.91.139]
+ helo=tharvey.pdc.gateworks.com)
+ by finn.localdomain with esmtp (Exim 4.95)
+ (envelope-from <tharvey@gateworks.com>) id 1rnMk9-00AbsO-Cm;
+ Thu, 21 Mar 2024 18:02:21 +0000
+From: Tim Harvey <tharvey@gateworks.com>
+To: u-boot@lists.denx.de,
+	Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH] tpm: display message when using gpio-reset instead of when
+ missing it
+Date: Thu, 21 Mar 2024 11:02:19 -0700
+Message-Id: <20240321180219.1039622-1-tharvey@gateworks.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240320164845.141894-1-hiagofranco@gmail.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,25 +54,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 20, 2024 at 01:48:45PM -0300, Hiago De Franco wrote:
-> From: Hiago De Franco <hiago.franco@toradex.com>
-> 
-> Increase the SPL_STACK_R_MALLOC_SIMPLE_LEN to 0x200000 to accommodate the
-> size of tispl.bin fit image. With the recent upgrade of ti-linux-firmware
-> from version v9.1.0 to v9.2.5, the size of tispl.bin fit image has
-> increased to 1.4MB, causing allocation errors in the R5 SPL:
-> 
-> ```
-> alloc space exhausted
-> Could not get FIT buffer of 1325056 bytes
->         check CONFIG_SPL_SYS_MALLOC_SIZE
-> ```
-> 
-> Signed-off-by: Hiago De Franco <hiago.franco@toradex.com>
-Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+Instead of displaying what looks like an error message if a
+gpio-reset dt prop is missing for a TPM dipslay a more
+informative message about resetting the TPM if the gpio is found:
 
+before:
+tpm_tis_spi_probe: missing reset GPIO
 
-Tom, this is also a candidate for master, thanks :-)
+after:
+tpm@0: performing 1ms reset on gpio@30210000:12
 
-Francesco
+Note that the reset dt binding prop used in this driver is not
+dt-compliant; it does not exist in the Linux dt-bindings documentation
+and the reset is not done by the Linux driver.
+
+Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+---
+ drivers/tpm/tpm2_tis_spi.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
+index de9cf8f21e07..944540f7a711 100644
+--- a/drivers/tpm/tpm2_tis_spi.c
++++ b/drivers/tpm/tpm2_tis_spi.c
+@@ -237,14 +237,14 @@ static int tpm_tis_spi_probe(struct udevice *dev)
+ 			/* legacy reset */
+ 			ret = gpio_request_by_name(dev, "gpio-reset", 0,
+ 						   &reset_gpio, GPIOD_IS_OUT);
+-			if (ret) {
+-				log(LOGC_NONE, LOGL_NOTICE,
+-				    "%s: missing reset GPIO\n", __func__);
++			if (ret)
+ 				goto init;
+-			}
+ 			log(LOGC_NONE, LOGL_NOTICE,
+ 			    "%s: gpio-reset is deprecated\n", __func__);
+ 		}
++		log(LOGC_NONE, LOGL_NOTICE,
++		    "%s: performing 1ms reset on %s:%d\n", dev->name,
++		    reset_gpio.dev->name, reset_gpio.offset);
+ 		dm_gpio_set_value(&reset_gpio, 1);
+ 		mdelay(1);
+ 		dm_gpio_set_value(&reset_gpio, 0);
+-- 
+2.25.1
 
