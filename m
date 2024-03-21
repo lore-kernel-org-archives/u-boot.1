@@ -4,72 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4F94C54E68
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 07:56:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F6B1C54E68
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 08:52:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3743887FF2;
-	Thu, 21 Mar 2024 08:56:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 05D93879CC;
+	Thu, 21 Mar 2024 09:52:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Ti/NrL2U";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="F036TYmu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1300E87FF2; Thu, 21 Mar 2024 08:56:11 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3F60A87B41; Thu, 21 Mar 2024 09:52:37 +0100 (CET)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::600])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C84A78744F
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 08:56:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 434B786DEE
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 09:52:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1711007766; x=1711612566; i=xypron.glpk@gmx.de;
- bh=rAcH0FbrAtB4ou/9gbi4QG2S5lDmIby/UEAiXdWndSc=;
- h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
- b=Ti/NrL2UCUhkl21azGgpZ3nT/9/lmtWdGTCPrhlWUW9pzns4nLo0Og3XV9Dy8cm7
- Cydk4A5BbsmjNlVbACs+XtZw8EmyhYmF7wN9b0HovvKcAP1fKgq2xJCVlF+rRpJyk
- BsBBtd5kVIFYhgWkC9Uu1N0CQDSUEp0OKFL/FRlmH0z2aQuOI6TxHIc4LrfWbYfFU
- 0Zv8FiL2r4AiMo8ZWZ+/u3vaFNJedXeOF/+Hp5TVYVF/18Z76zEfpUtf83+UljiT0
- oUoK5xLkMqP+M7Wkb/Jjc91DiTOY819yRK37ikj2ioP7metshN5Ht/uY2ATdvWE9k
- dieKq8hUpL+FMu3Siw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MbzyP-1rBx7Z2kal-00dYnl; Thu, 21
- Mar 2024 08:56:06 +0100
-Message-ID: <2c0ee51f-4f03-40b2-b286-5b8642ba207f@gmx.de>
-Date: Thu, 21 Mar 2024 08:56:12 +0100
+ spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=YcY7As+jijz2mblYHpx/Jl2R2ocHPxMbMvzpPLwsh3dwNA4heSKLUSov6KnFB7e0nX783Uz7okYkE7Q7CevUQD8WJOMe6sCn4PUCJMgu+5Nz6AAeB1wqIP7G3Lmtf181bpiVperMvhvZNUemA1zk84CQctflB/lyuTD9DSbjRYpIHcr23K1h5kPBJIptIHy/MluAza0KEI3TAMilb97smcbchDUQNi+oX0/Htq2CjrIdAmYaMc2dpekhCSROVb2cT1sk3/pfs6Oofii31z+/tZecmCnKdDezJL2QJ65/dWX3BstvOP6dMPCu07Vb3wSBVfZQGPqoHtUh4z+7E0lATw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=dQAPBPCjYzHjgELstiPRs0qvir6kIpvKWuykY3pZBWQ=;
+ b=beIBss3cXvEX/xJ02KE5mBvHWxXUYZshu+rHbXPtebxArBf0v+SE1Sak+E9sVKtiIO6tTbqJxUKPh+jOtwL1QsfA8qizuCR6BxB2I8JteHo+U1feL97d9KqjXrEyf70t8omIv43n4K24LYk4KyCus32eBVzjd4c/0IkUA5ITmiErN/V9P83Sy5mlP1LQ9Dj/gy2dC9tDu6DSxG27KaeWUC+K41uv6xsAVdHNntHPt85u0v0XI5oYiWAywmG229kDtWi/2PiYvODkxBD+RZhIXBJdgtMIsHepD8R+x2iFQdfOF1MAMtX73I+yPveJcVzdp0O3PoDrjCXqnk57OvYZCA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=dQAPBPCjYzHjgELstiPRs0qvir6kIpvKWuykY3pZBWQ=;
+ b=F036TYmu3i7cyeVs0XNq5BSQK6q6MU17l1KXNsJrforee8oyZbFeQ8e/yP/IHTL4ORF83rHga86y2lvLhT/fBP+oIqpKS7rV1k3LaDOv0H4fW26VIKP9tk42xjJ9WQtWmlJWwlcODASeXGTaUAW6rFmDGWjFNbeuwIWJj7gjxTs=
+Received: from BL0PR02CA0099.namprd02.prod.outlook.com (2603:10b6:208:51::40)
+ by DM4PR12MB5963.namprd12.prod.outlook.com (2603:10b6:8:6a::8) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7386.31; Thu, 21 Mar 2024 08:52:30 +0000
+Received: from BL02EPF0001A0FC.namprd03.prod.outlook.com
+ (2603:10b6:208:51:cafe::c) by BL0PR02CA0099.outlook.office365.com
+ (2603:10b6:208:51::40) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.28 via Frontend
+ Transport; Thu, 21 Mar 2024 08:52:29 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL02EPF0001A0FC.mail.protection.outlook.com (10.167.242.103) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7409.10 via Frontend Transport; Thu, 21 Mar 2024 08:52:29 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 21 Mar
+ 2024 03:52:29 -0500
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 21 Mar
+ 2024 03:52:28 -0500
+Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
+ Transport; Thu, 21 Mar 2024 03:52:27 -0500
+From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <trini@konsulko.com>,
+ <venkatesh.abbarapu@amd.com>, <git@amd.com>
+Subject: [PATCH] arm64: zynqmp: Disable Tri-state for SDIO
+Date: Thu, 21 Mar 2024 14:22:19 +0530
+Message-ID: <20240321085220.2920792-1-tejas.arvind.bhumkar@amd.com>
+X-Mailer: git-send-email 2.37.6
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Douglas Anderson <dianders@chromium.org>,
- Hiago De Franco <hiago.franco@toradex.com>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request efi-2024-04-rc5-2
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:0KylRAdmM4l75cixtd///sHQWazURw0bQkAJU5lTizet/epzvtB
- t3D0psWSyUjQo+GfSSbH/ZhipnuymhGy0MjOnR8jwphJF1TPzVA8BAhiSZlZZZncLm4Xo2d
- wOlwQiRtrQn+F0w4ZXrHCjwdDoh6eKH0rnwq2/muMLgJlM5WUhNFJTUEvz17zCwAMiO18p5
- vn6ZEB08aaFio4ewcQJVg==
-UI-OutboundReport: notjunk:1;M01:P0:l4xOdLDPQaM=;Lh1rsetMCfJeQdPa2aybKWh00qR
- lrZLJsjnheyfoSzHYFmqIQiKiUnckxGLJT5eOoxUj/65pRPxbW/Ps51sEa6mJHKzEIjovUShy
- AVZmYk2PNipHjzEjiTUNes/cgVffcmw6oYcZueuF/mepipt7eW+shiTaAtFTR02NouprcKuYm
- CJ3ba0AgIq+1JskKiUh0fJCKjf9qu87TKTi8iK6NzvHYpOS2ctfIVOmevfLK2KZ69tlE2DAps
- 7/Hiwz2L4nRD5+V5+PUvxEHzoRgxeFNwdlqaubhSaG5cVnCuUeuIJgtHOx1ezitYEtyQJwFi7
- JXa6qK1kvNx/r1EobuwQJv8TzdVYyAWS0tdxfGm8k+GWRnQEuNi0Ul2QXZrATFi03PqUHALjG
- wRuzQH5/JbbHapY2xo6XTdm23v62whNNt/+4nmTSiiNOyU4fJRuvMti3U8FSjYiF/lF2vQrus
- wCc06Bad/qdKo96IXbUONfCyT2N4He8irSKz6Bl1F3AP/q8iikORskFhKbPBytgQ9JUlL7IYR
- QvJIBqlsc1zUD5+gvDKNu7q/Sv7D2q8K/aoNIzgXsOFqgaSpgMnNxIeA8fFPPJAkoYDRbSTrr
- 69vGixvWyLasWG+HCYzHHhDYoDARoTZ/ZN1+UhnsuiXq52nCCFGQa0Va9jr2wEIGdpsxUmTAr
- +vB66WD8zVkPoQsH+tnItmI+kkQB95HIXELHu2TqC1vLSsRTS0EUv5BFoeYAAxDYAywFOPIoY
- E5x0Fc39LFTd/tcypKUxItJOqUu5vrHfM2bL0EobLQd14kO/agARKnuUnpws/JMrw60LaAmHA
- POcOzl17k5Yvrd4CbaMjK3hLYriSqoiiig1morD9pv0/M=
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL02EPF0001A0FC:EE_|DM4PR12MB5963:EE_
+X-MS-Office365-Filtering-Correlation-Id: a73ed47d-0f75-442b-1e91-08dc49843d8b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: E8T8lMDosP/BzWib2RHuKkgSNmkz/HsbyoXWmerfuwRJHdedDvZXdrg3dfhf6eF0YxmI2jEVXmfuMSG7XjUGnRE3FSCXEujrTshtQSp0zXUjJ0F8tTUqRgDkthFinwuHgbhRJ+LuJ65PIH8tXlkRatFq4KT1FpyEGjG4XfMEXl0kwFuIBaVv20hhKXotK5TnbSF73ko+GXBgUgJ2KBN7KVlROEW2lN4RXqdCxARWwN7ZWykGRCg9GqeB9Fg+p0nSKT+3XwzmUtDI0N8fevGfCHiKn55Igjk+39uJt/SqE/vIHmMquFvnMEAGE0F896MEBMOeAqPvyxJVZeSFcXa13IWXgTXBqTbHuxvNs/9JUmf0mPeLoqbEAB5P/C7yH+xQMDY6SVBnHJoh8ffr+1hqIvSnKXjPGdjIp3mnonjXRb9OEhuVCj12Ot3Nsv46Yh83xz1fN5bNNyPHu2LB0XdHI3bIdQxKhPl5jD8GKDwgwrnuRX7r8HD5gMTO78oiu5/ZCorab74/ZTG2mv1U2sL/bXZsHSag058KKXzbty0pJQMqK29sCawo9tM6KEP161JjLpVGVrI8S6mpu5iDY2V6RMnhKl8NU33gV40VnK6jAeht71ecHkyau1EoYcAgEP2D/RYFvMBF/XH1PfbB7uDS1poH9KHiBddsyYuQTp1200p08Ft/PEZnGDzjWHR7BPNTyLrMq+0eJXbPB7R5z6pi8E6nbMEnUaMPn349brbx11RDO4p2Cs6EO596A3QrUl/2
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(82310400014)(36860700004)(1800799015)(376005); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Mar 2024 08:52:29.6493 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a73ed47d-0f75-442b-1e91-08dc49843d8b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0FC.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5963
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,86 +123,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+Since the zynqmp pinctrl driver now includes support for the
+tri-state registers, ensure that the pins needing output-enable
+are correctly configured for SOMs.
 
-The following changes since commit 6ec096a7116a5f1f7dfac5f69ef192429331905=
-c:
+Currently, there is an issue with the detection of the MMC for
+the SOM kv260, resulting in the following error:
+ZynqMP> mmc dev 1
+Card did not respond to voltage select! : -110
 
-   Merge tag 'u-boot-imx-master-20240317' of
-https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2024-03-17 19:43:02
--0400)
+To address this problem, configure the SDIO pins for output-enable
+to enable MMC detection.
 
-are available in the Git repository at:
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+---
+ arch/arm/dts/zynqmp-sck-kv-g-revA.dtso | 1 +
+ arch/arm/dts/zynqmp-sck-kv-g-revB.dtso | 1 +
+ 2 files changed, 2 insertions(+)
 
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/efi-2024-04-rc5-2
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+index 6d0d5c487d..561b546e37 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revA.dtso
+@@ -342,6 +342,7 @@
+ 			slew-rate = <SLEW_RATE_SLOW>;
+ 			power-source = <IO_STANDARD_LVCMOS18>;
+ 			bias-disable;
++			output-enable;
+ 		};
+ 
+ 		conf-cd {
+diff --git a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+index a4b4465d20..13876fb47d 100644
+--- a/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
++++ b/arch/arm/dts/zynqmp-sck-kv-g-revB.dtso
+@@ -329,6 +329,7 @@
+ 			slew-rate = <SLEW_RATE_SLOW>;
+ 			power-source = <IO_STANDARD_LVCMOS18>;
+ 			bias-disable;
++			output-enable;
+ 		};
+ 
+ 		conf-cd {
+-- 
+2.37.6
 
-for you to fetch changes up to fcd0c8b8474f7db0b94608424715a73fbeba92dc:
-
-   patman: Properly document the patchwork_url setting (2024-03-21
-07:36:54 +0100)
-
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/20013
-
-=2D---------------------------------------------------------------
-Pull request efi-2024-04-rc5-2
-
-Documentation:
-
-* patman: Properly document the patchwork_url setting
-* doc: man-page for if
-* colibri-imx8x, apalis-imx8: update board documentation
-
-UEFI:
-
-* correct handling of EFI binary return code
-* don't show usage help if EFI binary fails.
-* correct error handling for bootefi selftest command
-
-=2D---------------------------------------------------------------
-Douglas Anderson (1):
-       patman: Properly document the patchwork_url setting
-
-Heinrich Schuchardt (5):
-       efi_loader: correct handling of EFI binary return code
-       cmd: bootefi: Don't show usage help if EFI binary fails.
-       cmd: bootefi: error handling bootefi selftest
-       doc: man-page for if
-       doc: typo Synopis
-
-Hiago De Franco (2):
-       doc: board: colibri-imx8x: Update and improve documentation
-       doc: board: apalis-imx8: Update and improve documentation
-
-  cmd/bootefi.c                       | 12 ++-----
-  doc/board/toradex/apalis-imx8.rst   | 32 ++++++++---------
-  doc/board/toradex/colibri-imx8x.rst | 23 ++++++++----
-  doc/usage/cmd/acpi.rst              |  4 +--
-  doc/usage/cmd/bootdev.rst           |  4 +--
-  doc/usage/cmd/bootflow.rst          |  4 +--
-  doc/usage/cmd/bootmeth.rst          |  4 +--
-  doc/usage/cmd/cbsysinfo.rst         |  4 +--
-  doc/usage/cmd/cedit.rst             |  4 +--
-  doc/usage/cmd/cli.rst               |  4 +--
-  doc/usage/cmd/dm.rst                |  4 +--
-  doc/usage/cmd/fdt.rst               |  4 +--
-  doc/usage/cmd/font.rst              |  4 +--
-  doc/usage/cmd/for.rst               |  4 +--
-  doc/usage/cmd/history.rst           |  4 +--
-  doc/usage/cmd/host.rst              |  4 +--
-  doc/usage/cmd/if.rst                | 72
-+++++++++++++++++++++++++++++++++++++
-  doc/usage/cmd/md.rst                |  4 +--
-  doc/usage/cmd/mtrr.rst              |  4 +--
-  doc/usage/cmd/panic.rst             |  4 +--
-  doc/usage/cmd/part.rst              |  4 +--
-  doc/usage/cmd/sf.rst                |  4 +--
-  doc/usage/cmd/sm.rst                |  4 +--
-  doc/usage/cmd/trace.rst             |  4 +--
-  doc/usage/cmd/ut.rst                |  4 +--
-  doc/usage/index.rst                 |  1 +
-  lib/efi_loader/efi_bootbin.c        | 16 ++++++---
-  tools/patman/patman.rst             |  8 ++---
-  28 files changed, 165 insertions(+), 83 deletions(-)
-  create mode 100644 doc/usage/cmd/if.rst
