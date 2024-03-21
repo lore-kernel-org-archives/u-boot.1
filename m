@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47755C6FD1F
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 23:37:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FF1EC54E58
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 23:37:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0463288190;
+	by phobos.denx.de (Postfix) with ESMTP id 6342A88195;
 	Fri, 22 Mar 2024 00:35:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hv9ecskO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lEidHgr9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C12BC87D08; Thu, 21 Mar 2024 22:04:31 +0100 (CET)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id 78C7888153; Thu, 21 Mar 2024 22:04:33 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D8E788140
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 22:04:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A71AD8814C
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 22:04:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4146f2b3fafso10237385e9.1
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 14:04:21 -0700 (PDT)
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2d29aad15a5so19133131fa.3
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 14:04:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711055060; x=1711659860; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1711055062; x=1711659862; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ho6DUKv8w+2gxCeqMOmcdtjUHQaZUNjWHJh8sb5SGhU=;
- b=hv9ecskOkyoNNts3phzBRimttALmVsyJpoJxIvmIHJvv62+s/GA7eltab8/T89KKko
- cLr19ADslCvgVAJhz5grlKPSFvY+cztn86lu5LhcRLN3ma5KXQb62UlFCixVNs8sOV8v
- 5bEMfT83GxSAZDMZEEqQo9HDuI9TCGmyIHgm7xkYUdgDhazR78Aj3PsDHCOYsammv1Eg
- CWdeVoX0xHH+keurTYYK4gX4Zzh7DzgZIYL0Vikz0F+UuOKQML5i95LPa8z0XGfss69f
- pJSFGApOUi+rjdg9RVY3rJwNUI63UX3DWKomEREz0c+KfQ0az2TZPrl3zsVOQofzr2M5
- cv2A==
+ :reply-to; bh=87zIsJl3W/GELloZ6APqKPYV4z/pYzEdvS5LalYfWnA=;
+ b=lEidHgr9mU4NaevX07pjqpOKC/cnXynqJ4AbfUStc/+MG7JTksjg5oyKO7nVJUqmp1
+ hOBjs/r0x5X4YbTDaKmZYiry/EGTS9c14GS98o0ovxGNCOUdd4afe42l+Tl+Gq6Rhs0E
+ myVWoOoGVSybLmHyND/Afy4BppWbUtlzW3XoxwGC4bRRSiryjfkBa5DH9aXsnP3qiyRi
+ adP3VNOE5r1P0q3XS5gjCeb5FXP//WHtUVfrii2ZK0eLF8xAobYH4xnP3A8w3vY1sX4V
+ x4G+5mnklHxGiYmEGSjduMYK/ynNXG9HTN/gFqlhqvOlQZciOgRWIVEnevEZqpsgp6Ao
+ kDSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711055060; x=1711659860;
+ d=1e100.net; s=20230601; t=1711055062; x=1711659862;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ho6DUKv8w+2gxCeqMOmcdtjUHQaZUNjWHJh8sb5SGhU=;
- b=MwDy7r8z+LEA43FW4tYuA2ctc7j29m/CYpfs9i7fWp3kUnXIrzVGBwRzPlYP2A7YLB
- n+I9S09EJzXQ3obX0679nabczPmeIoJnR5kzhmYwynC4G1oEd/qjiS07lsj5Tb8nHYbF
- eLDoA9VmLxuBI0skvhEV8ntWYoaXUGor4R6cKCJdyTKAey96l993eRvZpKO+fiBGM+2d
- Hi2I4tkhof4GYhUbLlUyK/H1qI6CL8gr4YRae7R5WlngVk5BTgpqWyJ3dpM81UKBnSJY
- 1K5WGioD/RViZXoPuN+0xgoMIDCl5MjilfRAn9L+U6WJObfk+HIUA20wvwEhTCMsr4r8
- tGzg==
-X-Gm-Message-State: AOJu0YxNs+BRhJGQSCKZHasQjF2J8YyownigtLy5GWdwrV3YRpJNpQO4
- IfN+jatFe2zc5buhqr5dAlaiiSRpNMCdBo5R32d+iG+zkUuLsWwSHgYiu+aP7Y4=
-X-Google-Smtp-Source: AGHT+IHvdPEVXMdf/SMP09I+/XbSi7MSWe2e7HSSBD/vZLB51IzCNyIJg1teEwC6ldXHa0E8TdweZA==
-X-Received: by 2002:a05:600c:5494:b0:413:f2c6:df3d with SMTP id
- iv20-20020a05600c549400b00413f2c6df3dmr229977wmb.13.1711055060566; 
- Thu, 21 Mar 2024 14:04:20 -0700 (PDT)
+ bh=87zIsJl3W/GELloZ6APqKPYV4z/pYzEdvS5LalYfWnA=;
+ b=gwRBvHggenWtlJv5GhvtVuofnmpw6j3AAtC3y61hbSQMXwnfpuJ2Zr1CriqnB2TTNm
+ SAn7nXV9+iMAU5EDSubv56iKoYNk9V8o5ZrDSYZ690Os21DQGP8sdm1a+L88jQ518ru7
+ R8IyCPr0ruFNtC/mVQfPollINN73bl37pD+nC5KTl26+dXG8VNcA/+a0w8EojF0uY4EQ
+ GJ6dkTUyPHYRS+WkdZ8ahtmWcpfQQXy9KKg5GlKDnnvztTtFgh+SaorJBw+cFehNWUEx
+ 1xj6MQFZxDbKak3HT4cxyN81cAoTch7MnXwPlKz+Gj5PxeZRDuJqkr+6YFTpMhSfuPYU
+ h1iw==
+X-Gm-Message-State: AOJu0YzVTvdjtFNSqm/krMbuuz6M4uJmDJ/ZYr0IkwfL/Cq2XxW3PYSh
+ 5vNagiiQYdItLPXlssInqyuOBske+kznASGg4YiTfzYf522yWEINUZFxBquisTM=
+X-Google-Smtp-Source: AGHT+IE0NHspFDINUzcehLpG3ysLFPTMyRRYXk+NB4AbRJSFMixfLjT4O4V4p7PI6u2bM6PMsMuDAw==
+X-Received: by 2002:a2e:9d98:0:b0:2d5:9b15:8064 with SMTP id
+ c24-20020a2e9d98000000b002d59b158064mr441942ljj.14.1711055061997; 
+ Thu, 21 Mar 2024 14:04:21 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- ay15-20020a05600c1e0f00b004146f728906sm925462wmb.7.2024.03.21.14.04.18
+ ay15-20020a05600c1e0f00b004146f728906sm925462wmb.7.2024.03.21.14.04.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 14:04:19 -0700 (PDT)
+ Thu, 21 Mar 2024 14:04:21 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 21 Mar 2024 21:03:54 +0000
-Subject: [PATCH v2 11/24] exynos: drop dt-binding headers
+Date: Thu, 21 Mar 2024 21:03:55 +0000
+Subject: [PATCH v2 12/24] bcm: drop dt-binding headers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240321-b4-upstream-dt-headers-v2-11-1eac0df875fe@linaro.org>
+Content-Transfer-Encoding: 8bit
+Message-Id: <20240321-b4-upstream-dt-headers-v2-12-1eac0df875fe@linaro.org>
 References: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
 In-Reply-To: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -102,13 +102,13 @@ Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  uboot-stm32@st-md-mailman.stormreply.com, uboot-snps-arc@synopsys.com, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=19475;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=22436;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=kZLqLmWc/ez1mBweoulX7ov9ivbShWuGmqjIVl+U5Tg=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ/C/ZMnFJ/b83V1OCFHDMbJC20n1gca7zs9/iBSEv0/
- j2GLO4pHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiUvcY/ulFSXzeY8M0KXbX
- 6r9Tvjc1iWxmetFUzJap9/jsS9+lX18w/FPy+xKrdOB6hvYV/uDX7A8+3lbKvXnX5uNvliUh5/5
- d9jkGAA==
+ bh=p2kQlLlmG+uZoQ7cbK+KtCThsdXUbN1+sfAF6FEk0VM=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhtQ/C/YcZ2gSYn52f0b2v5sGRTwL50osZp6qm8zawHh/8
+ WrpfxlsHaUsDIIcDLJiiiziJ5ZZNq29bK+xfcEFmDmsTCBDGLg4BWAiegEM/zNf71aoTJzouF5x
+ fl4I57X+Uz3nTOsEvnzOfJQso2L2KoPhN4v0y9cnT2+9eTz0/JSn3XEcTH4t8pr93tNLl13Mb9m
+ +chYA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-Mailman-Approved-At: Fri, 22 Mar 2024 00:35:07 +0100
@@ -128,628 +128,679 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop in favour of dts/upstream.
+Drop in favour of dts/upstream
 
-Small driver and DTS adjustments to use upstream headers.
+Fix bcm6318 USB clock name
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/dts/exynos7420.dtsi                 |   2 +-
- drivers/clk/exynos/clk-exynos7420.c          |   2 +-
- include/dt-bindings/clock/exynos7420-clk.h   | 207 ----------------
- include/dt-bindings/clock/exynos850.h        | 337 ---------------------------
- include/dt-bindings/soc/samsung,exynos-usi.h |  17 --
- 5 files changed, 2 insertions(+), 563 deletions(-)
+ arch/mips/dts/brcm,bcm6318.dtsi            |  2 +-
+ include/dt-bindings/clock/bcm-nsp.h        | 51 ------------------------
+ include/dt-bindings/clock/bcm2835-aux.h    |  9 -----
+ include/dt-bindings/clock/bcm2835.h        | 62 ------------------------------
+ include/dt-bindings/clock/bcm6318-clock.h  | 47 ----------------------
+ include/dt-bindings/clock/bcm63268-clock.h | 51 ------------------------
+ include/dt-bindings/clock/bcm6328-clock.h  | 24 ------------
+ include/dt-bindings/clock/bcm6358-clock.h  | 23 -----------
+ include/dt-bindings/clock/bcm6362-clock.h  | 32 ---------------
+ include/dt-bindings/clock/bcm6368-clock.h  | 30 ---------------
+ include/dt-bindings/pinctrl/bcm2835.h      | 26 -------------
+ include/dt-bindings/reset/bcm6318-reset.h  | 25 ------------
+ include/dt-bindings/reset/bcm63268-reset.h | 31 ---------------
+ include/dt-bindings/reset/bcm6328-reset.h  | 23 -----------
+ include/dt-bindings/reset/bcm6358-reset.h  | 20 ----------
+ include/dt-bindings/reset/bcm6362-reset.h  | 27 -------------
+ include/dt-bindings/reset/bcm6368-reset.h  | 21 ----------
+ include/dt-bindings/soc/bcm2835-pm.h       | 28 --------------
+ 18 files changed, 1 insertion(+), 531 deletions(-)
 
-diff --git a/arch/arm/dts/exynos7420.dtsi b/arch/arm/dts/exynos7420.dtsi
-index 373f48cf2eca..ba9666f3de01 100644
---- a/arch/arm/dts/exynos7420.dtsi
-+++ b/arch/arm/dts/exynos7420.dtsi
-@@ -7,9 +7,9 @@
-  */
+diff --git a/arch/mips/dts/brcm,bcm6318.dtsi b/arch/mips/dts/brcm,bcm6318.dtsi
+index 5813de7bf6b9..b9cc0712f8bc 100644
+--- a/arch/mips/dts/brcm,bcm6318.dtsi
++++ b/arch/mips/dts/brcm,bcm6318.dtsi
+@@ -181,9 +181,9 @@
+ 		usbh: usb-phy@10005200 {
+ 			compatible = "brcm,bcm6318-usbh";
+ 			reg = <0x10005200 0x30>;
+ 			#phy-cells = <0>;
+-			clocks = <&periph_clk BCM6318_CLK_USB>;
++			clocks = <&periph_clk BCM6318_CLK_USBD>;
+ 			clock-names = "usbh";
+ 			power-domains = <&periph_pwr BCM6318_PWR_USB>;
+ 			resets = <&periph_rst BCM6318_RST_USBH>;
  
- /dts-v1/;
- #include "skeleton.dtsi"
--#include <dt-bindings/clock/exynos7420-clk.h>
-+#include <dt-bindings/clock/exynos7-clk.h>
- / {
- 	compatible = "samsung,exynos7420";
- 
- 	fin_pll: xxti {
-diff --git a/drivers/clk/exynos/clk-exynos7420.c b/drivers/clk/exynos/clk-exynos7420.c
-index 9caa932e12fb..cd6d67a0752b 100644
---- a/drivers/clk/exynos/clk-exynos7420.c
-+++ b/drivers/clk/exynos/clk-exynos7420.c
-@@ -10,9 +10,9 @@
- #include <errno.h>
- #include <clk-uclass.h>
- #include <asm/io.h>
- #include <div64.h>
--#include <dt-bindings/clock/exynos7420-clk.h>
-+#include <dt-bindings/clock/exynos7-clk.h>
- 
- #define PLL145X_MDIV_SHIFT	16
- #define PLL145X_MDIV_MASK	0x3ff
- #define PLL145X_PDIV_SHIFT	8
-diff --git a/include/dt-bindings/clock/exynos7420-clk.h b/include/dt-bindings/clock/exynos7420-clk.h
+diff --git a/include/dt-bindings/clock/bcm-nsp.h b/include/dt-bindings/clock/bcm-nsp.h
 deleted file mode 100644
-index 10c558611085..000000000000
---- a/include/dt-bindings/clock/exynos7420-clk.h
+index ad5827cde782..000000000000
+--- a/include/dt-bindings/clock/bcm-nsp.h
 +++ /dev/null
-@@ -1,207 +0,0 @@
+@@ -1,51 +0,0 @@
 -/*
-- * Copyright (c) 2014 Samsung Electronics Co., Ltd.
-- * Author: Naveen Krishna Ch <naveenkrishna.ch@gmail.com>
+- *  BSD LICENSE
 - *
-- * This program is free software; you can redistribute it and/or modify
-- * it under the terms of the GNU General Public License version 2 as
-- * published by the Free Software Foundation.
--*/
--
--#ifndef _DT_BINDINGS_CLOCK_EXYNOS7_H
--#define _DT_BINDINGS_CLOCK_EXYNOS7_H
--
--/* TOPC */
--#define DOUT_ACLK_PERIS			1
--#define DOUT_SCLK_BUS0_PLL		2
--#define DOUT_SCLK_BUS1_PLL		3
--#define DOUT_SCLK_CC_PLL		4
--#define DOUT_SCLK_MFC_PLL		5
--#define DOUT_ACLK_CCORE_133		6
--#define DOUT_ACLK_MSCL_532		7
--#define ACLK_MSCL_532			8
--#define DOUT_SCLK_AUD_PLL		9
--#define FOUT_AUD_PLL			10
--#define SCLK_AUD_PLL			11
--#define SCLK_MFC_PLL_B			12
--#define SCLK_MFC_PLL_A			13
--#define SCLK_BUS1_PLL_B			14
--#define SCLK_BUS1_PLL_A			15
--#define SCLK_BUS0_PLL_B			16
--#define SCLK_BUS0_PLL_A			17
--#define SCLK_CC_PLL_B			18
--#define SCLK_CC_PLL_A			19
--#define ACLK_CCORE_133			20
--#define ACLK_PERIS_66			21
--#define TOPC_NR_CLK			22
--
--/* TOP0 */
--#define DOUT_ACLK_PERIC1		1
--#define DOUT_ACLK_PERIC0		2
--#define CLK_SCLK_UART0			3
--#define CLK_SCLK_UART1			4
--#define CLK_SCLK_UART2			5
--#define CLK_SCLK_UART3			6
--#define CLK_SCLK_SPI0			7
--#define CLK_SCLK_SPI1			8
--#define CLK_SCLK_SPI2			9
--#define CLK_SCLK_SPI3			10
--#define CLK_SCLK_SPI4			11
--#define CLK_SCLK_SPDIF			12
--#define CLK_SCLK_PCM1			13
--#define CLK_SCLK_I2S1			14
--#define CLK_ACLK_PERIC0_66		15
--#define CLK_ACLK_PERIC1_66		16
--#define TOP0_NR_CLK			17
--
--/* TOP1 */
--#define DOUT_ACLK_FSYS1_200		1
--#define DOUT_ACLK_FSYS0_200		2
--#define DOUT_SCLK_MMC2			3
--#define DOUT_SCLK_MMC1			4
--#define DOUT_SCLK_MMC0			5
--#define CLK_SCLK_MMC2			6
--#define CLK_SCLK_MMC1			7
--#define CLK_SCLK_MMC0			8
--#define CLK_ACLK_FSYS0_200		9
--#define CLK_ACLK_FSYS1_200		10
--#define CLK_SCLK_PHY_FSYS1		11
--#define CLK_SCLK_PHY_FSYS1_26M		12
--#define MOUT_SCLK_UFSUNIPRO20		13
--#define DOUT_SCLK_UFSUNIPRO20		14
--#define CLK_SCLK_UFSUNIPRO20		15
--#define DOUT_SCLK_PHY_FSYS1		16
--#define DOUT_SCLK_PHY_FSYS1_26M		17
--#define TOP1_NR_CLK			18
--
--/* CCORE */
--#define PCLK_RTC			1
--#define CCORE_NR_CLK			2
--
--/* PERIC0 */
--#define PCLK_UART0			1
--#define SCLK_UART0			2
--#define PCLK_HSI2C0			3
--#define PCLK_HSI2C1			4
--#define PCLK_HSI2C4			5
--#define PCLK_HSI2C5			6
--#define PCLK_HSI2C9			7
--#define PCLK_HSI2C10			8
--#define PCLK_HSI2C11			9
--#define PCLK_PWM			10
--#define SCLK_PWM			11
--#define PCLK_ADCIF			12
--#define PERIC0_NR_CLK			13
--
--/* PERIC1 */
--#define PCLK_UART1			1
--#define PCLK_UART2			2
--#define PCLK_UART3			3
--#define SCLK_UART1			4
--#define SCLK_UART2			5
--#define SCLK_UART3			6
--#define PCLK_HSI2C2			7
--#define PCLK_HSI2C3			8
--#define PCLK_HSI2C6			9
--#define PCLK_HSI2C7			10
--#define PCLK_HSI2C8			11
--#define PCLK_SPI0			12
--#define PCLK_SPI1			13
--#define PCLK_SPI2			14
--#define PCLK_SPI3			15
--#define PCLK_SPI4			16
--#define SCLK_SPI0			17
--#define SCLK_SPI1			18
--#define SCLK_SPI2			19
--#define SCLK_SPI3			20
--#define SCLK_SPI4			21
--#define PCLK_I2S1			22
--#define PCLK_PCM1			23
--#define PCLK_SPDIF			24
--#define SCLK_I2S1			25
--#define SCLK_PCM1			26
--#define SCLK_SPDIF			27
--#define PERIC1_NR_CLK			28
--
--/* PERIS */
--#define PCLK_CHIPID			1
--#define SCLK_CHIPID			2
--#define PCLK_WDT			3
--#define PCLK_TMU			4
--#define SCLK_TMU			5
--#define PERIS_NR_CLK			6
--
--/* FSYS0 */
--#define ACLK_MMC2			1
--#define ACLK_AXIUS_USBDRD30X_FSYS0X	2
--#define ACLK_USBDRD300			3
--#define SCLK_USBDRD300_SUSPENDCLK	4
--#define SCLK_USBDRD300_REFCLK		5
--#define PHYCLK_USBDRD300_UDRD30_PIPE_PCLK_USER		6
--#define PHYCLK_USBDRD300_UDRD30_PHYCLK_USER		7
--#define OSCCLK_PHY_CLKOUT_USB30_PHY		8
--#define ACLK_PDMA0			9
--#define ACLK_PDMA1			10
--#define FSYS0_NR_CLK			11
--
--/* FSYS1 */
--#define ACLK_MMC1			1
--#define ACLK_MMC0			2
--#define PHYCLK_UFS20_TX0_SYMBOL		3
--#define PHYCLK_UFS20_RX0_SYMBOL		4
--#define PHYCLK_UFS20_RX1_SYMBOL		5
--#define ACLK_UFS20_LINK			6
--#define SCLK_UFSUNIPRO20_USER		7
--#define PHYCLK_UFS20_RX1_SYMBOL_USER	8
--#define PHYCLK_UFS20_RX0_SYMBOL_USER	9
--#define PHYCLK_UFS20_TX0_SYMBOL_USER	10
--#define OSCCLK_PHY_CLKOUT_EMBEDDED_COMBO_PHY	11
--#define SCLK_COMBO_PHY_EMBEDDED_26M	12
--#define DOUT_PCLK_FSYS1			13
--#define PCLK_GPIO_FSYS1			14
--#define MOUT_FSYS1_PHYCLK_SEL1		15
--#define FSYS1_NR_CLK			16
--
--/* MSCL */
--#define USERMUX_ACLK_MSCL_532		1
--#define DOUT_PCLK_MSCL			2
--#define ACLK_MSCL_0			3
--#define ACLK_MSCL_1			4
--#define ACLK_JPEG			5
--#define ACLK_G2D			6
--#define ACLK_LH_ASYNC_SI_MSCL_0		7
--#define ACLK_LH_ASYNC_SI_MSCL_1		8
--#define ACLK_AXI2ACEL_BRIDGE		9
--#define ACLK_XIU_MSCLX_0		10
--#define ACLK_XIU_MSCLX_1		11
--#define ACLK_QE_MSCL_0			12
--#define ACLK_QE_MSCL_1			13
--#define ACLK_QE_JPEG			14
--#define ACLK_QE_G2D			15
--#define ACLK_PPMU_MSCL_0		16
--#define ACLK_PPMU_MSCL_1		17
--#define ACLK_MSCLNP_133			18
--#define ACLK_AHB2APB_MSCL0P		19
--#define ACLK_AHB2APB_MSCL1P		20
--
--#define PCLK_MSCL_0			21
--#define PCLK_MSCL_1			22
--#define PCLK_JPEG			23
--#define PCLK_G2D			24
--#define PCLK_QE_MSCL_0			25
--#define PCLK_QE_MSCL_1			26
--#define PCLK_QE_JPEG			27
--#define PCLK_QE_G2D			28
--#define PCLK_PPMU_MSCL_0		29
--#define PCLK_PPMU_MSCL_1		30
--#define PCLK_AXI2ACEL_BRIDGE		31
--#define PCLK_PMU_MSCL			32
--#define MSCL_NR_CLK			33
--
--/* AUD */
--#define SCLK_I2S			1
--#define SCLK_PCM			2
--#define PCLK_I2S			3
--#define PCLK_PCM			4
--#define ACLK_ADMA			5
--#define AUD_NR_CLK			6
--#endif /* _DT_BINDINGS_CLOCK_EXYNOS7_H */
-diff --git a/include/dt-bindings/clock/exynos850.h b/include/dt-bindings/clock/exynos850.h
-deleted file mode 100644
-index 3090e09c9a55..000000000000
---- a/include/dt-bindings/clock/exynos850.h
-+++ /dev/null
-@@ -1,337 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
--/*
-- * Copyright (C) 2021 Linaro Ltd.
-- * Author: Sam Protsenko <semen.protsenko@linaro.org>
+- *  Copyright(c) 2015 Broadcom Corporation.  All rights reserved.
 - *
-- * Device Tree binding constants for Exynos850 clock controller.
+- *  Redistribution and use in source and binary forms, with or without
+- *  modification, are permitted provided that the following conditions
+- *  are met:
+- *
+- *	* Redistributions of source code must retain the above copyright
+- *	  notice, this list of conditions and the following disclaimer.
+- *	* Redistributions in binary form must reproduce the above copyright
+- *	  notice, this list of conditions and the following disclaimer in
+- *	  the documentation and/or other materials provided with the
+- *	  distribution.
+- *	* Neither the name of Broadcom Corporation nor the names of its
+- *	  contributors may be used to endorse or promote products derived
+- *	  from this software without specific prior written permission.
+- *
+- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+- *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+- *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+- *  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+- *  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+- *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+- *  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+- *  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+- *  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+- *  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 - */
 -
--#ifndef _DT_BINDINGS_CLOCK_EXYNOS_850_H
--#define _DT_BINDINGS_CLOCK_EXYNOS_850_H
+-#ifndef _CLOCK_BCM_NSP_H
+-#define _CLOCK_BCM_NSP_H
 -
--/* CMU_TOP */
--#define CLK_FOUT_SHARED0_PLL		1
--#define CLK_FOUT_SHARED1_PLL		2
--#define CLK_FOUT_MMC_PLL		3
--#define CLK_MOUT_SHARED0_PLL		4
--#define CLK_MOUT_SHARED1_PLL		5
--#define CLK_MOUT_MMC_PLL		6
--#define CLK_MOUT_CORE_BUS		7
--#define CLK_MOUT_CORE_CCI		8
--#define CLK_MOUT_CORE_MMC_EMBD		9
--#define CLK_MOUT_CORE_SSS		10
--#define CLK_MOUT_DPU			11
--#define CLK_MOUT_HSI_BUS		12
--#define CLK_MOUT_HSI_MMC_CARD		13
--#define CLK_MOUT_HSI_USB20DRD		14
--#define CLK_MOUT_PERI_BUS		15
--#define CLK_MOUT_PERI_UART		16
--#define CLK_MOUT_PERI_IP		17
--#define CLK_DOUT_SHARED0_DIV3		18
--#define CLK_DOUT_SHARED0_DIV2		19
--#define CLK_DOUT_SHARED1_DIV3		20
--#define CLK_DOUT_SHARED1_DIV2		21
--#define CLK_DOUT_SHARED0_DIV4		22
--#define CLK_DOUT_SHARED1_DIV4		23
--#define CLK_DOUT_CORE_BUS		24
--#define CLK_DOUT_CORE_CCI		25
--#define CLK_DOUT_CORE_MMC_EMBD		26
--#define CLK_DOUT_CORE_SSS		27
--#define CLK_DOUT_DPU			28
--#define CLK_DOUT_HSI_BUS		29
--#define CLK_DOUT_HSI_MMC_CARD		30
--#define CLK_DOUT_HSI_USB20DRD		31
--#define CLK_DOUT_PERI_BUS		32
--#define CLK_DOUT_PERI_UART		33
--#define CLK_DOUT_PERI_IP		34
--#define CLK_GOUT_CORE_BUS		35
--#define CLK_GOUT_CORE_CCI		36
--#define CLK_GOUT_CORE_MMC_EMBD		37
--#define CLK_GOUT_CORE_SSS		38
--#define CLK_GOUT_DPU			39
--#define CLK_GOUT_HSI_BUS		40
--#define CLK_GOUT_HSI_MMC_CARD		41
--#define CLK_GOUT_HSI_USB20DRD		42
--#define CLK_GOUT_PERI_BUS		43
--#define CLK_GOUT_PERI_UART		44
--#define CLK_GOUT_PERI_IP		45
--#define CLK_MOUT_CLKCMU_APM_BUS		46
--#define CLK_DOUT_CLKCMU_APM_BUS		47
--#define CLK_GOUT_CLKCMU_APM_BUS		48
--#define CLK_MOUT_AUD			49
--#define CLK_GOUT_AUD			50
--#define CLK_DOUT_AUD			51
--#define CLK_MOUT_IS_BUS			52
--#define CLK_MOUT_IS_ITP			53
--#define CLK_MOUT_IS_VRA			54
--#define CLK_MOUT_IS_GDC			55
--#define CLK_GOUT_IS_BUS			56
--#define CLK_GOUT_IS_ITP			57
--#define CLK_GOUT_IS_VRA			58
--#define CLK_GOUT_IS_GDC			59
--#define CLK_DOUT_IS_BUS			60
--#define CLK_DOUT_IS_ITP			61
--#define CLK_DOUT_IS_VRA			62
--#define CLK_DOUT_IS_GDC			63
--#define CLK_MOUT_MFCMSCL_MFC		64
--#define CLK_MOUT_MFCMSCL_M2M		65
--#define CLK_MOUT_MFCMSCL_MCSC		66
--#define CLK_MOUT_MFCMSCL_JPEG		67
--#define CLK_GOUT_MFCMSCL_MFC		68
--#define CLK_GOUT_MFCMSCL_M2M		69
--#define CLK_GOUT_MFCMSCL_MCSC		70
--#define CLK_GOUT_MFCMSCL_JPEG		71
--#define CLK_DOUT_MFCMSCL_MFC		72
--#define CLK_DOUT_MFCMSCL_M2M		73
--#define CLK_DOUT_MFCMSCL_MCSC		74
--#define CLK_DOUT_MFCMSCL_JPEG		75
--#define CLK_MOUT_G3D_SWITCH		76
--#define CLK_GOUT_G3D_SWITCH		77
--#define CLK_DOUT_G3D_SWITCH		78
+-/* GENPLL clock channel ID */
+-#define BCM_NSP_GENPLL			0
+-#define BCM_NSP_GENPLL_PHY_CLK		1
+-#define BCM_NSP_GENPLL_ENET_SW_CLK	2
+-#define BCM_NSP_GENPLL_USB_PHY_REF_CLK	3
+-#define BCM_NSP_GENPLL_IPROCFAST_CLK	4
+-#define BCM_NSP_GENPLL_SATA1_CLK	5
+-#define BCM_NSP_GENPLL_SATA2_CLK	6
 -
--/* CMU_APM */
--#define CLK_RCO_I3C_PMIC		1
--#define OSCCLK_RCO_APM			2
--#define CLK_RCO_APM__ALV		3
--#define CLK_DLL_DCO			4
--#define CLK_MOUT_APM_BUS_USER		5
--#define CLK_MOUT_RCO_APM_I3C_USER	6
--#define CLK_MOUT_RCO_APM_USER		7
--#define CLK_MOUT_DLL_USER		8
--#define CLK_MOUT_CLKCMU_CHUB_BUS	9
--#define CLK_MOUT_APM_BUS		10
--#define CLK_MOUT_APM_I3C		11
--#define CLK_DOUT_CLKCMU_CHUB_BUS	12
--#define CLK_DOUT_APM_BUS		13
--#define CLK_DOUT_APM_I3C		14
--#define CLK_GOUT_CLKCMU_CMGP_BUS	15
--#define CLK_GOUT_CLKCMU_CHUB_BUS	16
--#define CLK_GOUT_RTC_PCLK		17
--#define CLK_GOUT_TOP_RTC_PCLK		18
--#define CLK_GOUT_I3C_PCLK		19
--#define CLK_GOUT_I3C_SCLK		20
--#define CLK_GOUT_SPEEDY_PCLK		21
--#define CLK_GOUT_GPIO_ALIVE_PCLK	22
--#define CLK_GOUT_PMU_ALIVE_PCLK		23
--#define CLK_GOUT_SYSREG_APM_PCLK	24
+-/* LCPLL0 clock channel ID */
+-#define BCM_NSP_LCPLL0			0
+-#define BCM_NSP_LCPLL0_PCIE_PHY_REF_CLK	1
+-#define BCM_NSP_LCPLL0_SDIO_CLK		2
+-#define BCM_NSP_LCPLL0_DDR_PHY_CLK	3
 -
--/* CMU_AUD */
--#define CLK_DOUT_AUD_AUDIF		1
--#define CLK_DOUT_AUD_BUSD		2
--#define CLK_DOUT_AUD_BUSP		3
--#define CLK_DOUT_AUD_CNT		4
--#define CLK_DOUT_AUD_CPU		5
--#define CLK_DOUT_AUD_CPU_ACLK		6
--#define CLK_DOUT_AUD_CPU_PCLKDBG	7
--#define CLK_DOUT_AUD_FM			8
--#define CLK_DOUT_AUD_FM_SPDY		9
--#define CLK_DOUT_AUD_MCLK		10
--#define CLK_DOUT_AUD_UAIF0		11
--#define CLK_DOUT_AUD_UAIF1		12
--#define CLK_DOUT_AUD_UAIF2		13
--#define CLK_DOUT_AUD_UAIF3		14
--#define CLK_DOUT_AUD_UAIF4		15
--#define CLK_DOUT_AUD_UAIF5		16
--#define CLK_DOUT_AUD_UAIF6		17
--#define CLK_FOUT_AUD_PLL		18
--#define CLK_GOUT_AUD_ABOX_ACLK		19
--#define CLK_GOUT_AUD_ASB_CCLK		20
--#define CLK_GOUT_AUD_CA32_CCLK		21
--#define CLK_GOUT_AUD_CNT_BCLK		22
--#define CLK_GOUT_AUD_CODEC_MCLK		23
--#define CLK_GOUT_AUD_DAP_CCLK		24
--#define CLK_GOUT_AUD_GPIO_PCLK		25
--#define CLK_GOUT_AUD_PPMU_ACLK		26
--#define CLK_GOUT_AUD_PPMU_PCLK		27
--#define CLK_GOUT_AUD_SPDY_BCLK		28
--#define CLK_GOUT_AUD_SYSMMU_CLK		29
--#define CLK_GOUT_AUD_SYSREG_PCLK	30
--#define CLK_GOUT_AUD_TZPC_PCLK		31
--#define CLK_GOUT_AUD_UAIF0_BCLK		32
--#define CLK_GOUT_AUD_UAIF1_BCLK		33
--#define CLK_GOUT_AUD_UAIF2_BCLK		34
--#define CLK_GOUT_AUD_UAIF3_BCLK		35
--#define CLK_GOUT_AUD_UAIF4_BCLK		36
--#define CLK_GOUT_AUD_UAIF5_BCLK		37
--#define CLK_GOUT_AUD_UAIF6_BCLK		38
--#define CLK_GOUT_AUD_WDT_PCLK		39
--#define CLK_MOUT_AUD_CPU		40
--#define CLK_MOUT_AUD_CPU_HCH		41
--#define CLK_MOUT_AUD_CPU_USER		42
--#define CLK_MOUT_AUD_FM			43
--#define CLK_MOUT_AUD_PLL		44
--#define CLK_MOUT_AUD_TICK_USB_USER	45
--#define CLK_MOUT_AUD_UAIF0		46
--#define CLK_MOUT_AUD_UAIF1		47
--#define CLK_MOUT_AUD_UAIF2		48
--#define CLK_MOUT_AUD_UAIF3		49
--#define CLK_MOUT_AUD_UAIF4		50
--#define CLK_MOUT_AUD_UAIF5		51
--#define CLK_MOUT_AUD_UAIF6		52
--#define IOCLK_AUDIOCDCLK0		53
--#define IOCLK_AUDIOCDCLK1		54
--#define IOCLK_AUDIOCDCLK2		55
--#define IOCLK_AUDIOCDCLK3		56
--#define IOCLK_AUDIOCDCLK4		57
--#define IOCLK_AUDIOCDCLK5		58
--#define IOCLK_AUDIOCDCLK6		59
--#define TICK_USB			60
--#define CLK_GOUT_AUD_CMU_AUD_PCLK	61
--
--/* CMU_CMGP */
--#define CLK_RCO_CMGP			1
--#define CLK_MOUT_CMGP_ADC		2
--#define CLK_MOUT_CMGP_USI0		3
--#define CLK_MOUT_CMGP_USI1		4
--#define CLK_DOUT_CMGP_ADC		5
--#define CLK_DOUT_CMGP_USI0		6
--#define CLK_DOUT_CMGP_USI1		7
--#define CLK_GOUT_CMGP_ADC_S0_PCLK	8
--#define CLK_GOUT_CMGP_ADC_S1_PCLK	9
--#define CLK_GOUT_CMGP_GPIO_PCLK		10
--#define CLK_GOUT_CMGP_USI0_IPCLK	11
--#define CLK_GOUT_CMGP_USI0_PCLK		12
--#define CLK_GOUT_CMGP_USI1_IPCLK	13
--#define CLK_GOUT_CMGP_USI1_PCLK		14
--#define CLK_GOUT_SYSREG_CMGP_PCLK	15
--
--/* CMU_G3D */
--#define CLK_FOUT_G3D_PLL		1
--#define CLK_MOUT_G3D_PLL		2
--#define CLK_MOUT_G3D_SWITCH_USER	3
--#define CLK_MOUT_G3D_BUSD		4
--#define CLK_DOUT_G3D_BUSP		5
--#define CLK_GOUT_G3D_CMU_G3D_PCLK	6
--#define CLK_GOUT_G3D_GPU_CLK		7
--#define CLK_GOUT_G3D_TZPC_PCLK		8
--#define CLK_GOUT_G3D_GRAY2BIN_CLK	9
--#define CLK_GOUT_G3D_BUSD_CLK		10
--#define CLK_GOUT_G3D_BUSP_CLK		11
--#define CLK_GOUT_G3D_SYSREG_PCLK	12
--
--/* CMU_HSI */
--#define CLK_MOUT_HSI_BUS_USER		1
--#define CLK_MOUT_HSI_MMC_CARD_USER	2
--#define CLK_MOUT_HSI_USB20DRD_USER	3
--#define CLK_MOUT_HSI_RTC		4
--#define CLK_GOUT_USB_RTC_CLK		5
--#define CLK_GOUT_USB_REF_CLK		6
--#define CLK_GOUT_USB_PHY_REF_CLK	7
--#define CLK_GOUT_USB_PHY_ACLK		8
--#define CLK_GOUT_USB_BUS_EARLY_CLK	9
--#define CLK_GOUT_GPIO_HSI_PCLK		10
--#define CLK_GOUT_MMC_CARD_ACLK		11
--#define CLK_GOUT_MMC_CARD_SDCLKIN	12
--#define CLK_GOUT_SYSREG_HSI_PCLK	13
--#define CLK_GOUT_HSI_PPMU_ACLK		14
--#define CLK_GOUT_HSI_PPMU_PCLK		15
--#define CLK_GOUT_HSI_CMU_HSI_PCLK	16
--
--/* CMU_IS */
--#define CLK_MOUT_IS_BUS_USER		1
--#define CLK_MOUT_IS_ITP_USER		2
--#define CLK_MOUT_IS_VRA_USER		3
--#define CLK_MOUT_IS_GDC_USER		4
--#define CLK_DOUT_IS_BUSP		5
--#define CLK_GOUT_IS_CMU_IS_PCLK		6
--#define CLK_GOUT_IS_CSIS0_ACLK		7
--#define CLK_GOUT_IS_CSIS1_ACLK		8
--#define CLK_GOUT_IS_CSIS2_ACLK		9
--#define CLK_GOUT_IS_TZPC_PCLK		10
--#define CLK_GOUT_IS_CSIS_DMA_CLK	11
--#define CLK_GOUT_IS_GDC_CLK		12
--#define CLK_GOUT_IS_IPP_CLK		13
--#define CLK_GOUT_IS_ITP_CLK		14
--#define CLK_GOUT_IS_MCSC_CLK		15
--#define CLK_GOUT_IS_VRA_CLK		16
--#define CLK_GOUT_IS_PPMU_IS0_ACLK	17
--#define CLK_GOUT_IS_PPMU_IS0_PCLK	18
--#define CLK_GOUT_IS_PPMU_IS1_ACLK	19
--#define CLK_GOUT_IS_PPMU_IS1_PCLK	20
--#define CLK_GOUT_IS_SYSMMU_IS0_CLK	21
--#define CLK_GOUT_IS_SYSMMU_IS1_CLK	22
--#define CLK_GOUT_IS_SYSREG_PCLK		23
--
--/* CMU_MFCMSCL */
--#define CLK_MOUT_MFCMSCL_MFC_USER		1
--#define CLK_MOUT_MFCMSCL_M2M_USER		2
--#define CLK_MOUT_MFCMSCL_MCSC_USER		3
--#define CLK_MOUT_MFCMSCL_JPEG_USER		4
--#define CLK_DOUT_MFCMSCL_BUSP			5
--#define CLK_GOUT_MFCMSCL_CMU_MFCMSCL_PCLK	6
--#define CLK_GOUT_MFCMSCL_TZPC_PCLK		7
--#define CLK_GOUT_MFCMSCL_JPEG_ACLK		8
--#define CLK_GOUT_MFCMSCL_M2M_ACLK		9
--#define CLK_GOUT_MFCMSCL_MCSC_CLK		10
--#define CLK_GOUT_MFCMSCL_MFC_ACLK		11
--#define CLK_GOUT_MFCMSCL_PPMU_ACLK		12
--#define CLK_GOUT_MFCMSCL_PPMU_PCLK		13
--#define CLK_GOUT_MFCMSCL_SYSMMU_CLK		14
--#define CLK_GOUT_MFCMSCL_SYSREG_PCLK		15
--
--/* CMU_PERI */
--#define CLK_MOUT_PERI_BUS_USER		1
--#define CLK_MOUT_PERI_UART_USER		2
--#define CLK_MOUT_PERI_HSI2C_USER	3
--#define CLK_MOUT_PERI_SPI_USER		4
--#define CLK_DOUT_PERI_HSI2C0		5
--#define CLK_DOUT_PERI_HSI2C1		6
--#define CLK_DOUT_PERI_HSI2C2		7
--#define CLK_DOUT_PERI_SPI0		8
--#define CLK_GOUT_PERI_HSI2C0		9
--#define CLK_GOUT_PERI_HSI2C1		10
--#define CLK_GOUT_PERI_HSI2C2		11
--#define CLK_GOUT_GPIO_PERI_PCLK		12
--#define CLK_GOUT_HSI2C0_IPCLK		13
--#define CLK_GOUT_HSI2C0_PCLK		14
--#define CLK_GOUT_HSI2C1_IPCLK		15
--#define CLK_GOUT_HSI2C1_PCLK		16
--#define CLK_GOUT_HSI2C2_IPCLK		17
--#define CLK_GOUT_HSI2C2_PCLK		18
--#define CLK_GOUT_I2C0_PCLK		19
--#define CLK_GOUT_I2C1_PCLK		20
--#define CLK_GOUT_I2C2_PCLK		21
--#define CLK_GOUT_I2C3_PCLK		22
--#define CLK_GOUT_I2C4_PCLK		23
--#define CLK_GOUT_I2C5_PCLK		24
--#define CLK_GOUT_I2C6_PCLK		25
--#define CLK_GOUT_MCT_PCLK		26
--#define CLK_GOUT_PWM_MOTOR_PCLK		27
--#define CLK_GOUT_SPI0_IPCLK		28
--#define CLK_GOUT_SPI0_PCLK		29
--#define CLK_GOUT_SYSREG_PERI_PCLK	30
--#define CLK_GOUT_UART_IPCLK		31
--#define CLK_GOUT_UART_PCLK		32
--#define CLK_GOUT_WDT0_PCLK		33
--#define CLK_GOUT_WDT1_PCLK		34
--
--/* CMU_CORE */
--#define CLK_MOUT_CORE_BUS_USER		1
--#define CLK_MOUT_CORE_CCI_USER		2
--#define CLK_MOUT_CORE_MMC_EMBD_USER	3
--#define CLK_MOUT_CORE_SSS_USER		4
--#define CLK_MOUT_CORE_GIC		5
--#define CLK_DOUT_CORE_BUSP		6
--#define CLK_GOUT_CCI_ACLK		7
--#define CLK_GOUT_GIC_CLK		8
--#define CLK_GOUT_MMC_EMBD_ACLK		9
--#define CLK_GOUT_MMC_EMBD_SDCLKIN	10
--#define CLK_GOUT_SSS_ACLK		11
--#define CLK_GOUT_SSS_PCLK		12
--#define CLK_GOUT_GPIO_CORE_PCLK		13
--#define CLK_GOUT_SYSREG_CORE_PCLK	14
--
--/* CMU_DPU */
--#define CLK_MOUT_DPU_USER		1
--#define CLK_DOUT_DPU_BUSP		2
--#define CLK_GOUT_DPU_CMU_DPU_PCLK	3
--#define CLK_GOUT_DPU_DECON0_ACLK	4
--#define CLK_GOUT_DPU_DMA_ACLK		5
--#define CLK_GOUT_DPU_DPP_ACLK		6
--#define CLK_GOUT_DPU_PPMU_ACLK		7
--#define CLK_GOUT_DPU_PPMU_PCLK		8
--#define CLK_GOUT_DPU_SMMU_CLK		9
--#define CLK_GOUT_DPU_SYSREG_PCLK	10
--#define DPU_NR_CLK			11
--
--#endif /* _DT_BINDINGS_CLOCK_EXYNOS_850_H */
-diff --git a/include/dt-bindings/soc/samsung,exynos-usi.h b/include/dt-bindings/soc/samsung,exynos-usi.h
+-#endif /* _CLOCK_BCM_NSP_H */
+diff --git a/include/dt-bindings/clock/bcm2835-aux.h b/include/dt-bindings/clock/bcm2835-aux.h
 deleted file mode 100644
-index a01af169d249..000000000000
---- a/include/dt-bindings/soc/samsung,exynos-usi.h
+index bb79de383a3b..000000000000
+--- a/include/dt-bindings/clock/bcm2835-aux.h
 +++ /dev/null
-@@ -1,17 +0,0 @@
--/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
+@@ -1,9 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
 -/*
-- * Copyright (c) 2021 Linaro Ltd.
-- * Author: Sam Protsenko <semen.protsenko@linaro.org>
-- *
-- * Device Tree bindings for Samsung Exynos USI (Universal Serial Interface).
+- * Copyright (C) 2015 Broadcom Corporation
 - */
 -
--#ifndef __DT_BINDINGS_SAMSUNG_EXYNOS_USI_H
--#define __DT_BINDINGS_SAMSUNG_EXYNOS_USI_H
+-#define BCM2835_AUX_CLOCK_UART		0
+-#define BCM2835_AUX_CLOCK_SPI1		1
+-#define BCM2835_AUX_CLOCK_SPI2		2
+-#define BCM2835_AUX_CLOCK_COUNT		3
+diff --git a/include/dt-bindings/clock/bcm2835.h b/include/dt-bindings/clock/bcm2835.h
+deleted file mode 100644
+index b60c03430cf1..000000000000
+--- a/include/dt-bindings/clock/bcm2835.h
++++ /dev/null
+@@ -1,62 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Copyright (C) 2015 Broadcom Corporation
+- */
 -
--#define USI_V2_NONE		0
--#define USI_V2_UART		1
--#define USI_V2_SPI		2
--#define USI_V2_I2C		3
+-#define BCM2835_PLLA			0
+-#define BCM2835_PLLB			1
+-#define BCM2835_PLLC			2
+-#define BCM2835_PLLD			3
+-#define BCM2835_PLLH			4
 -
--#endif /* __DT_BINDINGS_SAMSUNG_EXYNOS_USI_H */
+-#define BCM2835_PLLA_CORE		5
+-#define BCM2835_PLLA_PER		6
+-#define BCM2835_PLLB_ARM		7
+-#define BCM2835_PLLC_CORE0		8
+-#define BCM2835_PLLC_CORE1		9
+-#define BCM2835_PLLC_CORE2		10
+-#define BCM2835_PLLC_PER		11
+-#define BCM2835_PLLD_CORE		12
+-#define BCM2835_PLLD_PER		13
+-#define BCM2835_PLLH_RCAL		14
+-#define BCM2835_PLLH_AUX		15
+-#define BCM2835_PLLH_PIX		16
+-
+-#define BCM2835_CLOCK_TIMER		17
+-#define BCM2835_CLOCK_OTP		18
+-#define BCM2835_CLOCK_UART		19
+-#define BCM2835_CLOCK_VPU		20
+-#define BCM2835_CLOCK_V3D		21
+-#define BCM2835_CLOCK_ISP		22
+-#define BCM2835_CLOCK_H264		23
+-#define BCM2835_CLOCK_VEC		24
+-#define BCM2835_CLOCK_HSM		25
+-#define BCM2835_CLOCK_SDRAM		26
+-#define BCM2835_CLOCK_TSENS		27
+-#define BCM2835_CLOCK_EMMC		28
+-#define BCM2835_CLOCK_PERI_IMAGE	29
+-#define BCM2835_CLOCK_PWM		30
+-#define BCM2835_CLOCK_PCM		31
+-
+-#define BCM2835_PLLA_DSI0		32
+-#define BCM2835_PLLA_CCP2		33
+-#define BCM2835_PLLD_DSI0		34
+-#define BCM2835_PLLD_DSI1		35
+-
+-#define BCM2835_CLOCK_AVEO		36
+-#define BCM2835_CLOCK_DFT		37
+-#define BCM2835_CLOCK_GP0		38
+-#define BCM2835_CLOCK_GP1		39
+-#define BCM2835_CLOCK_GP2		40
+-#define BCM2835_CLOCK_SLIM		41
+-#define BCM2835_CLOCK_SMI		42
+-#define BCM2835_CLOCK_TEC		43
+-#define BCM2835_CLOCK_DPI		44
+-#define BCM2835_CLOCK_CAM0		45
+-#define BCM2835_CLOCK_CAM1		46
+-#define BCM2835_CLOCK_DSI0E		47
+-#define BCM2835_CLOCK_DSI1E		48
+-#define BCM2835_CLOCK_DSI0P		49
+-#define BCM2835_CLOCK_DSI1P		50
+-
+-#define BCM2711_CLOCK_EMMC2		51
+diff --git a/include/dt-bindings/clock/bcm6318-clock.h b/include/dt-bindings/clock/bcm6318-clock.h
+deleted file mode 100644
+index 3f10448cef11..000000000000
+--- a/include/dt-bindings/clock/bcm6318-clock.h
++++ /dev/null
+@@ -1,47 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2018 Álvaro Fernández Rojas <noltari@gmail.com>
+- *
+- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_BCM6318_H
+-#define __DT_BINDINGS_CLOCK_BCM6318_H
+-
+-#define BCM6318_CLK_ADSL_ASB	0
+-#define BCM6318_CLK_USB_ASB	1
+-#define BCM6318_CLK_MIPS_ASB	2
+-#define BCM6318_CLK_PCIE_ASB	3
+-#define BCM6318_CLK_PHYMIPS_ASB	4
+-#define BCM6318_CLK_ROBOSW_ASB	5
+-#define BCM6318_CLK_SAR_ASB	6
+-#define BCM6318_CLK_SDR_ASB	7
+-#define BCM6318_CLK_SWREG_ASB	8
+-#define BCM6318_CLK_PERIPH_ASB	9
+-#define BCM6318_CLK_CPUBUS160	10
+-#define BCM6318_CLK_ADSL	11
+-#define BCM6318_CLK_SAR125	12
+-#define BCM6318_CLK_MIPS	13
+-#define BCM6318_CLK_PCIE	14
+-#define BCM6318_CLK_ROBOSW250	16
+-#define BCM6318_CLK_ROBOSW025	17
+-#define BCM6318_CLK_SDR		19
+-#define BCM6318_CLK_USB		20
+-#define BCM6318_CLK_HSSPI	25
+-#define BCM6318_CLK_PCIE25	27
+-#define BCM6318_CLK_PHYMIPS	28
+-#define BCM6318_CLK_AFE		29
+-#define BCM6318_CLK_QPROC	30
+-
+-#define BCM6318_UCLK_ADSL	0
+-#define BCM6318_UCLK_ARB	1
+-#define BCM6318_UCLK_MIPS	2
+-#define BCM6318_UCLK_PCIE	3
+-#define BCM6318_UCLK_PERIPH	4
+-#define BCM6318_UCLK_PHYMIPS	5
+-#define BCM6318_UCLK_ROBOSW	6
+-#define BCM6318_UCLK_SAR	7
+-#define BCM6318_UCLK_SDR	8
+-#define BCM6318_UCLK_USB	9
+-
+-#endif /* __DT_BINDINGS_CLOCK_BCM6318_H */
+diff --git a/include/dt-bindings/clock/bcm63268-clock.h b/include/dt-bindings/clock/bcm63268-clock.h
+deleted file mode 100644
+index 2725dcd06bcc..000000000000
+--- a/include/dt-bindings/clock/bcm63268-clock.h
++++ /dev/null
+@@ -1,51 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
+- *
+- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_BCM63268_H
+-#define __DT_BINDINGS_CLOCK_BCM63268_H
+-
+-#define BCM63268_CLK_GLESS	0
+-#define BCM63268_CLK_VDSL_QPROC	1
+-#define BCM63268_CLK_VDSL_AFE	2
+-#define BCM63268_CLK_VDSL	3
+-#define BCM63268_CLK_MIPS	4
+-#define BCM63268_CLK_WLAN_OCP	5
+-#define BCM63268_CLK_DECT	6
+-#define BCM63268_CLK_FAP0	7
+-#define BCM63268_CLK_FAP1	8
+-#define BCM63268_CLK_SAR	9
+-#define BCM63268_CLK_ROBOSW	10
+-#define BCM63268_CLK_PCM	11
+-#define BCM63268_CLK_USBD	12
+-#define BCM63268_CLK_USBH	13
+-#define BCM63268_CLK_IPSEC	14
+-#define BCM63268_CLK_SPI	15
+-#define BCM63268_CLK_HSSPI	16
+-#define BCM63268_CLK_PCIE	17
+-#define BCM63268_CLK_PHYMIPS	18
+-#define BCM63268_CLK_GMAC	19
+-#define BCM63268_CLK_NAND	20
+-#define BCM63268_CLK_TBUS	27
+-#define BCM63268_CLK_ROBOSW250	31
+-
+-#define BCM63268_TCLK_EPHY1	0
+-#define BCM63268_TCLK_EPHY2	1
+-#define BCM63268_TCLK_EPHY3	2
+-#define BCM63268_TCLK_GPHY	3
+-#define BCM63268_TCLK_DSL	4
+-#define BCM63268_TCLK_WO_EPHY	5
+-#define BCM63268_TCLK_WO_DSL	6
+-#define BCM63268_TCLK_FAP1	11
+-#define BCM63268_TCLK_FAP2	15
+-#define BCM63268_TCLK_UTO_50	16
+-#define BCM63268_TCLK_UTO_EXT	17
+-#define BCM63268_TCLK_USB_REF	18
+-#define BCM63268_TCLK_SW_RST	29
+-#define BCM63268_TCLK_HW_RST	30
+-#define BCM63268_TCLK_POR_RST	31
+-
+-#endif /* __DT_BINDINGS_CLOCK_BCM63268_H */
+diff --git a/include/dt-bindings/clock/bcm6328-clock.h b/include/dt-bindings/clock/bcm6328-clock.h
+deleted file mode 100644
+index 6f1e018a74bb..000000000000
+--- a/include/dt-bindings/clock/bcm6328-clock.h
++++ /dev/null
+@@ -1,24 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
+- *
+- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_BCM6328_H
+-#define __DT_BINDINGS_CLOCK_BCM6328_H
+-
+-#define BCM6328_CLK_PHYMIPS	0
+-#define BCM6328_CLK_ADSL_QPROC	1
+-#define BCM6328_CLK_ADSL_AFE	2
+-#define BCM6328_CLK_ADSL	3
+-#define BCM6328_CLK_MIPS	4
+-#define BCM6328_CLK_SAR		5
+-#define BCM6328_CLK_PCM		6
+-#define BCM6328_CLK_USBD	7
+-#define BCM6328_CLK_USBH	8
+-#define BCM6328_CLK_HSSPI	9
+-#define BCM6328_CLK_PCIE	10
+-#define BCM6328_CLK_ROBOSW	11
+-
+-#endif /* __DT_BINDINGS_CLOCK_BCM6328_H */
+diff --git a/include/dt-bindings/clock/bcm6358-clock.h b/include/dt-bindings/clock/bcm6358-clock.h
+deleted file mode 100644
+index a7529bcc0303..000000000000
+--- a/include/dt-bindings/clock/bcm6358-clock.h
++++ /dev/null
+@@ -1,23 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
+- *
+- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_BCM6358_H
+-#define __DT_BINDINGS_CLOCK_BCM6358_H
+-
+-#define BCM6358_CLK_ENET	4
+-#define BCM6358_CLK_ADSL	5
+-#define BCM6358_CLK_PCM		8
+-#define BCM6358_CLK_SPI		9
+-#define BCM6358_CLK_USBS	10
+-#define BCM6358_CLK_SAR		11
+-#define BCM6358_CLK_EMUSB	17
+-#define BCM6358_CLK_ENET0	18
+-#define BCM6358_CLK_ENET1	19
+-#define BCM6358_CLK_USBSU	20
+-#define BCM6358_CLK_EPHY	21
+-
+-#endif /* __DT_BINDINGS_CLOCK_BCM6358_H */
+diff --git a/include/dt-bindings/clock/bcm6362-clock.h b/include/dt-bindings/clock/bcm6362-clock.h
+deleted file mode 100644
+index d3770c504909..000000000000
+--- a/include/dt-bindings/clock/bcm6362-clock.h
++++ /dev/null
+@@ -1,32 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2018 Álvaro Fernández Rojas <noltari@gmail.com>
+- *
+- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_BCM6362_H
+-#define __DT_BINDINGS_CLOCK_BCM6362_H
+-
+-#define BCM6362_CLK_GLESS	0
+-#define BCM6362_CLK_ADSL_QPROC	1
+-#define BCM6362_CLK_ADSL_AFE	2
+-#define BCM6362_CLK_ADSL	3
+-#define BCM6362_CLK_MIPS	4
+-#define BCM6362_CLK_WLAN_OCP	5
+-#define BCM6362_CLK_SWPKT_USB	7
+-#define BCM6362_CLK_SWPKT_SAR	8
+-#define BCM6362_CLK_SAR		9
+-#define BCM6362_CLK_ROBOSW	10
+-#define BCM6362_CLK_PCM		11
+-#define BCM6362_CLK_USBD	12
+-#define BCM6362_CLK_USBH	13
+-#define BCM6362_CLK_IPSEC	14
+-#define BCM6362_CLK_SPI		15
+-#define BCM6362_CLK_HSSPI	16
+-#define BCM6362_CLK_PCIE	17
+-#define BCM6362_CLK_FAP		18
+-#define BCM6362_CLK_PHYMIPS	19
+-#define BCM6362_CLK_NAND	20
+-
+-#endif /* __DT_BINDINGS_CLOCK_BCM6362_H */
+diff --git a/include/dt-bindings/clock/bcm6368-clock.h b/include/dt-bindings/clock/bcm6368-clock.h
+deleted file mode 100644
+index 0c857826329a..000000000000
+--- a/include/dt-bindings/clock/bcm6368-clock.h
++++ /dev/null
+@@ -1,30 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
+- *
+- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
+- */
+-
+-#ifndef __DT_BINDINGS_CLOCK_BCM6368_H
+-#define __DT_BINDINGS_CLOCK_BCM6368_H
+-
+-#define BCM6368_CLK_VDSL_QPROC		2
+-#define BCM6368_CLK_VDSL_AFE		3
+-#define BCM6368_CLK_VDSL_BONDING	4
+-#define BCM6368_CLK_VDSL		5
+-#define BCM6368_CLK_PHYMIPS		6
+-#define BCM6368_CLK_SWPKT_USB		7
+-#define BCM6368_CLK_SWPKT_SAR		8
+-#define BCM6368_CLK_SPI			9
+-#define BCM6368_CLK_USBD		10
+-#define BCM6368_CLK_SAR			11
+-#define BCM6368_CLK_ROBOSW		12
+-#define BCM6368_CLK_UTOPIA		13
+-#define BCM6368_CLK_PCM			14
+-#define BCM6368_CLK_USBH		15
+-#define BCM6368_CLK_GLESS		16
+-#define BCM6368_CLK_NAND		17
+-#define BCM6368_CLK_IPSEC		18
+-#define BCM6368_CLK_USBH_IDDQ		19
+-
+-#endif /* __DT_BINDINGS_CLOCK_BCM6368_H */
+diff --git a/include/dt-bindings/pinctrl/bcm2835.h b/include/dt-bindings/pinctrl/bcm2835.h
+deleted file mode 100644
+index b5b2654a0e4d..000000000000
+--- a/include/dt-bindings/pinctrl/bcm2835.h
++++ /dev/null
+@@ -1,26 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0 */
+-/*
+- * Header providing constants for bcm2835 pinctrl bindings.
+- *
+- * Copyright (C) 2015 Stefan Wahren <stefan.wahren@i2se.com>
+- */
+-
+-#ifndef __DT_BINDINGS_PINCTRL_BCM2835_H__
+-#define __DT_BINDINGS_PINCTRL_BCM2835_H__
+-
+-/* brcm,function property */
+-#define BCM2835_FSEL_GPIO_IN	0
+-#define BCM2835_FSEL_GPIO_OUT	1
+-#define BCM2835_FSEL_ALT5	2
+-#define BCM2835_FSEL_ALT4	3
+-#define BCM2835_FSEL_ALT0	4
+-#define BCM2835_FSEL_ALT1	5
+-#define BCM2835_FSEL_ALT2	6
+-#define BCM2835_FSEL_ALT3	7
+-
+-/* brcm,pull property */
+-#define BCM2835_PUD_OFF		0
+-#define BCM2835_PUD_DOWN	1
+-#define BCM2835_PUD_UP		2
+-
+-#endif /* __DT_BINDINGS_PINCTRL_BCM2835_H__ */
+diff --git a/include/dt-bindings/reset/bcm6318-reset.h b/include/dt-bindings/reset/bcm6318-reset.h
+deleted file mode 100644
+index 1422500f8f52..000000000000
+--- a/include/dt-bindings/reset/bcm6318-reset.h
++++ /dev/null
+@@ -1,25 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2018 Álvaro Fernández Rojas <noltari@gmail.com>
+- *
+- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
+- */
+-
+-#ifndef __DT_BINDINGS_RESET_BCM6318_H
+-#define __DT_BINDINGS_RESET_BCM6318_H
+-
+-#define BCM6318_RST_SPI		0
+-#define BCM6318_RST_EPHY	1
+-#define BCM6318_RST_SAR		2
+-#define BCM6318_RST_ENETSW	3
+-#define BCM6318_RST_USBD	4
+-#define BCM6318_RST_USBH	5
+-#define BCM6318_RST_PCIE_CORE	6
+-#define BCM6318_RST_PCIE	7
+-#define BCM6318_RST_PCIE_EXT	8
+-#define BCM6318_RST_PCIE_HARD	9
+-#define BCM6318_RST_ADSL	10
+-#define BCM6318_RST_PHYMIPS	11
+-#define BCM6318_RST_HOSTMIPS	11
+-
+-#endif /* __DT_BINDINGS_RESET_BCM6318_H */
+diff --git a/include/dt-bindings/reset/bcm63268-reset.h b/include/dt-bindings/reset/bcm63268-reset.h
+deleted file mode 100644
+index a45abed1ceb7..000000000000
+--- a/include/dt-bindings/reset/bcm63268-reset.h
++++ /dev/null
+@@ -1,31 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
+- *
+- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
+- */
+-
+-#ifndef __DT_BINDINGS_RESET_BCM63268_H
+-#define __DT_BINDINGS_RESET_BCM63268_H
+-
+-#define BCM63268_RST_SPI	0
+-#define BCM63268_RST_IPSEC	1
+-#define BCM63268_RST_EPHY	2
+-#define BCM63268_RST_SAR	3
+-#define BCM63268_RST_ENETSW	4
+-#define BCM63268_RST_USBS	5
+-#define BCM63268_RST_USBH	6
+-#define BCM63268_RST_PCM	7
+-#define BCM63268_RST_PCIE_CORE	8
+-#define BCM63268_RST_PCIE	9
+-#define BCM63268_RST_PCIE_EXT	10
+-#define BCM63268_RST_WLAN_SHIM	11
+-#define BCM63268_RST_DDR_PHY	12
+-#define BCM63268_RST_FAP0	13
+-#define BCM63268_RST_WLAN_UBUS	14
+-#define BCM63268_RST_DECT	15
+-#define BCM63268_RST_FAP1	16
+-#define BCM63268_RST_PCIE_HARD	17
+-#define BCM63268_RST_GPHY	18
+-
+-#endif /* __DT_BINDINGS_RESET_BCM63268_H */
+diff --git a/include/dt-bindings/reset/bcm6328-reset.h b/include/dt-bindings/reset/bcm6328-reset.h
+deleted file mode 100644
+index f2dd4f79cc61..000000000000
+--- a/include/dt-bindings/reset/bcm6328-reset.h
++++ /dev/null
+@@ -1,23 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
+- *
+- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
+- */
+-
+-#ifndef __DT_BINDINGS_RESET_BCM6328_H
+-#define __DT_BINDINGS_RESET_BCM6328_H
+-
+-#define BCM6328_RST_SPI		0
+-#define BCM6328_RST_EPHY	1
+-#define BCM6328_RST_SAR		2
+-#define BCM6328_RST_ENETSW	3
+-#define BCM6328_RST_USBS	4
+-#define BCM6328_RST_USBH	5
+-#define BCM6328_RST_PCM		6
+-#define BCM6328_RST_PCIE_CORE	7
+-#define BCM6328_RST_PCIE	8
+-#define BCM6328_RST_PCIE_EXT	9
+-#define BCM6328_RST_PCIE_HARD	10
+-
+-#endif /* __DT_BINDINGS_RESET_BCM6328_H */
+diff --git a/include/dt-bindings/reset/bcm6358-reset.h b/include/dt-bindings/reset/bcm6358-reset.h
+deleted file mode 100644
+index 075706eff7ad..000000000000
+--- a/include/dt-bindings/reset/bcm6358-reset.h
++++ /dev/null
+@@ -1,20 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
+- *
+- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
+- */
+-
+-#ifndef __DT_BINDINGS_RESET_BCM6358_H
+-#define __DT_BINDINGS_RESET_BCM6358_H
+-
+-#define BCM6358_RST_SPI		0
+-#define BCM6358_RST_ENET	2
+-#define BCM6358_RST_MPI		3
+-#define BCM6358_RST_EPHY	6
+-#define BCM6358_RST_SAR		7
+-#define BCM6358_RST_USBH	12
+-#define BCM6358_RST_PCM		13
+-#define BCM6358_RST_ADSL	14
+-
+-#endif /* __DT_BINDINGS_RESET_BCM6358_H */
+diff --git a/include/dt-bindings/reset/bcm6362-reset.h b/include/dt-bindings/reset/bcm6362-reset.h
+deleted file mode 100644
+index 8202e4991905..000000000000
+--- a/include/dt-bindings/reset/bcm6362-reset.h
++++ /dev/null
+@@ -1,27 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2018 Álvaro Fernández Rojas <noltari@gmail.com>
+- *
+- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
+- */
+-
+-#ifndef __DT_BINDINGS_RESET_BCM6362_H
+-#define __DT_BINDINGS_RESET_BCM6362_H
+-
+-#define BCM6362_RST_SPI		0
+-#define BCM6362_RST_IPSEC	1
+-#define BCM6362_RST_EPHY	2
+-#define BCM6362_RST_SAR		3
+-#define BCM6362_RST_ENETSW	4
+-#define BCM6362_RST_USBD	5
+-#define BCM6362_RST_USBH	6
+-#define BCM6362_RST_PCM		7
+-#define BCM6362_RST_PCIE_CORE	8
+-#define BCM6362_RST_PCIE	9
+-#define BCM6362_RST_PCIE_EXT	10
+-#define BCM6362_RST_WLAN_SHIM	11
+-#define BCM6362_RST_DDR_PHY	12
+-#define BCM6362_RST_FAP		13
+-#define BCM6362_RST_WLAN_UBUS	14
+-
+-#endif /* __DT_BINDINGS_RESET_BCM6362_H */
+diff --git a/include/dt-bindings/reset/bcm6368-reset.h b/include/dt-bindings/reset/bcm6368-reset.h
+deleted file mode 100644
+index 0038a7ccf5c6..000000000000
+--- a/include/dt-bindings/reset/bcm6368-reset.h
++++ /dev/null
+@@ -1,21 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
+- *
+- * Derived from linux/arch/mips/include/asm/mach-bcm63xx/bcm63xx_regs.h
+- */
+-
+-#ifndef __DT_BINDINGS_RESET_BCM6368_H
+-#define __DT_BINDINGS_RESET_BCM6368_H
+-
+-#define BCM6368_RST_SPI		0
+-#define BCM6368_RST_MPI		3
+-#define BCM6368_RST_IPSEC	4
+-#define BCM6368_RST_EPHY	6
+-#define BCM6368_RST_SAR		7
+-#define BCM6368_RST_SWITCH	10
+-#define BCM6368_RST_USBD	11
+-#define BCM6368_RST_USBH	12
+-#define BCM6368_RST_PCM		13
+-
+-#endif /* __DT_BINDINGS_RESET_BCM6368_H */
+diff --git a/include/dt-bindings/soc/bcm2835-pm.h b/include/dt-bindings/soc/bcm2835-pm.h
+deleted file mode 100644
+index 153d75b8d99f..000000000000
+--- a/include/dt-bindings/soc/bcm2835-pm.h
++++ /dev/null
+@@ -1,28 +0,0 @@
+-/* SPDX-License-Identifier: (GPL-2.0+ OR MIT) */
+-
+-#ifndef _DT_BINDINGS_ARM_BCM2835_PM_H
+-#define _DT_BINDINGS_ARM_BCM2835_PM_H
+-
+-#define BCM2835_POWER_DOMAIN_GRAFX		0
+-#define BCM2835_POWER_DOMAIN_GRAFX_V3D		1
+-#define BCM2835_POWER_DOMAIN_IMAGE		2
+-#define BCM2835_POWER_DOMAIN_IMAGE_PERI		3
+-#define BCM2835_POWER_DOMAIN_IMAGE_ISP		4
+-#define BCM2835_POWER_DOMAIN_IMAGE_H264		5
+-#define BCM2835_POWER_DOMAIN_USB		6
+-#define BCM2835_POWER_DOMAIN_DSI0		7
+-#define BCM2835_POWER_DOMAIN_DSI1		8
+-#define BCM2835_POWER_DOMAIN_CAM0		9
+-#define BCM2835_POWER_DOMAIN_CAM1		10
+-#define BCM2835_POWER_DOMAIN_CCP2TX		11
+-#define BCM2835_POWER_DOMAIN_HDMI		12
+-
+-#define BCM2835_POWER_DOMAIN_COUNT		13
+-
+-#define BCM2835_RESET_V3D			0
+-#define BCM2835_RESET_ISP			1
+-#define BCM2835_RESET_H264			2
+-
+-#define BCM2835_RESET_COUNT			3
+-
+-#endif /* _DT_BINDINGS_ARM_BCM2835_PM_H */
 
 -- 
 2.44.0
