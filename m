@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C911AC54E68
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 14:56:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8785AC54E68
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 14:56:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00315880F8;
-	Thu, 21 Mar 2024 15:56:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7818D8810D;
+	Thu, 21 Mar 2024 15:56:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XaS1nX8Z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FkZCMC63";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9DB9880FC; Thu, 21 Mar 2024 15:56:17 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 8FAD887F1E; Thu, 21 Mar 2024 15:56:25 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6D7F880FE
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 15:56:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DD9528810D
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 15:56:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1e00b1c2684so8280855ad.0
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 07:56:14 -0700 (PDT)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1dff837d674so8482595ad.3
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 07:56:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711032973; x=1711637773; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1711032979; x=1711637779; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8wps8uv/k5UQVBa/I0VqzJT2tx2q5k9BLdfIs1HgCOM=;
- b=XaS1nX8Zp4bHnKIx6V9c6Y6/2S4rspC4ePp4eGeuvxHOc/BPJe6EqylHtDsS1CSUXJ
- IzSB+whIGdK0FNUUCGnsHcUne9BF52QXCI6cKRgt4Rf6aQXUtbAlAgLu5LtekuzsTkrg
- kfzqInLIXHO7UUJh+IWb2UbAUdIPvW29zLVeOZ/F5MQb5Ay1MpRZCvWsgynmJE2JwthR
- wrVgRL9lgzGIEDb8cOmzBPxrC+y1kGIAM/sFBaZpA0D1eAKiKlAOgHRVlMx1aRlnEN1F
- fOVj4m0oYmxpByaeazEOoDSC6yFte47Dw8jYsraA8RRONdRG2wNDr06RVWMNVIlJ6IMp
- AisA==
+ bh=FQSdlyuHyjO3evVA1Zxr8iEviGz+bLT9UGQ9oBc3nSw=;
+ b=FkZCMC63AB1Jm4NAvFFAuOWTbBAiI+OloTr0lPAKyrjSgSAW4GmHffHtQs0ESWskn0
+ PWx+GdXsfB70wmiOT9ziY3SRZGzARgkgy1Axqk24rVRpvpCslwtiaUfCOrSYO442Xhh/
+ oBFjFU95rlp+SxB7e33IDGL964yrNSqcEE6eoKl3E5gDZYFzkqvoTznYfVsgiRxBvAFi
+ JMCZ7a7PFPiIICQeLIxLWWNoPUFpgonMAFo+IY+I4uCUvxziaFiouY44hHRBWFYNDvmS
+ X7IsgH30OQVvrfbTECWD5ytF94Tp+7qEitOpzRc0tYoJQLq4Cfe3Fjh0omE5NcxzIh1c
+ IAmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711032973; x=1711637773;
+ d=1e100.net; s=20230601; t=1711032979; x=1711637779;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8wps8uv/k5UQVBa/I0VqzJT2tx2q5k9BLdfIs1HgCOM=;
- b=s3CybFHywxLbpmXcNp5RaXrfrRs1SYGleD0EmL6qST9UKnEluiB7TdMyI0ff+qpsqf
- zUyn2+6rIIhPVYSSdr3ItZWaVBonOouHQT1T10UGcR/N453Hlz8/cTxsanqGn6sPEvIq
- cFcd0l6AxZqzSUN23BQuWVTHcwFeRXHVtPWJoXD/5l0szz1XvciSTJC2Cn0/PsZseiLb
- r+esxfiE96Hebc0Lnj3Iq42FuUyRiaSe3NwghRoJpwjiTHcO8VSOTvy58y86BX0mc5rV
- 4jtbX8lhYsvqSEapOXL6J8vH7kWy29qNyvjD2GnivM+zJ93Yq+nxo0BdNecyvbmzYt67
- 43jg==
-X-Gm-Message-State: AOJu0YxDcb5Oyrusn5SJvxg/oOhM8lUcKsBuwSSzi1y1ENGjnSJ6RlF7
- u5m5kWIeGF2YYve5mtarpOj0CrbH89ETAd5PAMog3lOuVaGZI5jvKV6c4Z1v2fohyIYDdOAmjLR
- F
-X-Google-Smtp-Source: AGHT+IGal69B12T6leHN1rGpgWPX6x3uFrpUTyoHXC6ZwBMEca3fOF0qUi3OLH2SAyLz6esfkcXwmA==
-X-Received: by 2002:a17:902:a385:b0:1db:f910:98a9 with SMTP id
- x5-20020a170902a38500b001dbf91098a9mr21679003pla.56.1711032972974; 
- Thu, 21 Mar 2024 07:56:12 -0700 (PDT)
+ bh=FQSdlyuHyjO3evVA1Zxr8iEviGz+bLT9UGQ9oBc3nSw=;
+ b=HIVqAH521BbfoX7opsJgFmplmoH0vXygwNwvm1YHjGuDfPw6DkWUEpYEXYt96hqb2W
+ qvRSJGdGzqidj9x1sU5XvVR9oXBDPUjjvL39CGgDiNleWcpKDzYBEKGoOk0OZFhc/xHW
+ ShYH3ZPi6bcUbPTulVlLqPxICjQ1LrKl+IyiV/bJjWVeGh/KyQjD8Ii7812ouZtwGzJl
+ yo6Max8rMj+77DlwQPUjbzsvhqMSWb2Hzo12xSECUwqhldAMGFX0ytR9UdOmy3e45mxV
+ qqzfNY5CoqZytwJ9iIZ+KmuD7RzKRUJMDqvBWYf6/K1cqUVAEQLpjtVzDXHFj/83D/Hu
+ ewGg==
+X-Gm-Message-State: AOJu0YwXdjG27U68tabzGLto4+KwGjEU5WdbpWjbntCiqdeYBhiwDNiS
+ EG/UQoFyJz/rCgNuprwlWZwV/IlvcK5x5coxhKBJ0US+R26Zr0ZiH6lP/SHLcbaqjHMwsD8Xi1E
+ n
+X-Google-Smtp-Source: AGHT+IHCUsgWaM2xJxs3FjOTsrhqAdWtWmAu9zShFl6go8MIXpkWQ2sSHd+RKXNZRBWUf0ukOe+ZTg==
+X-Received: by 2002:a17:902:7847:b0:1e0:2335:8f68 with SMTP id
+ e7-20020a170902784700b001e023358f68mr4636036pln.26.1711032979710; 
+ Thu, 21 Mar 2024 07:56:19 -0700 (PDT)
 Received: from sumit-X1.. ([223.178.211.159]) by smtp.gmail.com with ESMTPSA id
- j9-20020a170902da8900b001dddb014624sm11751668plx.54.2024.03.21.07.56.06
+ j9-20020a170902da8900b001dddb014624sm11751668plx.54.2024.03.21.07.56.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 07:56:12 -0700 (PDT)
+ Thu, 21 Mar 2024 07:56:19 -0700 (PDT)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, tharvey@gateworks.com, marcel.ziswiler@toradex.com,
@@ -73,11 +73,11 @@ Cc: trini@konsulko.com, tharvey@gateworks.com, marcel.ziswiler@toradex.com,
  marex@denx.de, ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org,
  fathi.boudra@linaro.org, remi.duraffort@linaro.org,
  daniel.thompson@linaro.org, pbrobinson@gmail.com,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v4 08/11] pcie_imx: Update header to describe it as a legacy
- driver
-Date: Thu, 21 Mar 2024 20:25:04 +0530
-Message-Id: <20240321145507.619448-9-sumit.garg@linaro.org>
+ Sumit Garg <sumit.garg@linaro.org>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: [PATCH v4 09/11] verdin-imx8mp_defconfig: Enable PCIe/NVMe support
+Date: Thu, 21 Mar 2024 20:25:05 +0530
+Message-Id: <20240321145507.619448-10-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240321145507.619448-1-sumit.garg@linaro.org>
 References: <20240321145507.619448-1-sumit.garg@linaro.org>
@@ -99,35 +99,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since now we have the modern pcie_dw_imx.c driver for iMX SoCs,
-encourage people to switch to that for any further new iMX SoC support
-or even for the older iMX6 SoCs too.
+Enable PCIe/NVMe support. Also, enable the reset driver which
+is a prerequisite for PCIe support.
 
-Suggested-by: Peter Robinson <pbrobinson@gmail.com>
+Acked-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+Tested-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
- drivers/pci/pcie_imx.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ configs/verdin-imx8mp_defconfig | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/pci/pcie_imx.c b/drivers/pci/pcie_imx.c
-index 4a18b0e0910..78f2c7d6bcd 100644
---- a/drivers/pci/pcie_imx.c
-+++ b/drivers/pci/pcie_imx.c
-@@ -7,6 +7,14 @@
-  * Based on upstream Linux kernel driver:
-  * pci-imx6.c:		Sean Cross <xobs@kosagi.com>
-  * pcie-designware.c:	Jingoo Han <jg1.han@samsung.com>
-+ *
-+ * This is a legacy PCIe iMX driver kept to support older iMX6 SoCs. It is
-+ * rather tied to quite old port of pcie-designware driver from Linux which
-+ * suffices only iMX6 specific needs. But now we have modern PCIe iMX driver
-+ * (drivers/pci/pcie_dw_imx.c) utilizing all the common DWC specific bits from
-+ * (drivers/pci/pcie_dw_common.*). So you are encouraged to add any further iMX
-+ * SoC support there or even better if you posses older iMX6 SoCs then switch
-+ * those too in order to have a single modern PCIe iMX driver.
-  */
- 
- #include <common.h>
+diff --git a/configs/verdin-imx8mp_defconfig b/configs/verdin-imx8mp_defconfig
+index 7ac5e65642c..b6194404baa 100644
+--- a/configs/verdin-imx8mp_defconfig
++++ b/configs/verdin-imx8mp_defconfig
+@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="imx8mp-verdin-wifi-dev"
+ CONFIG_SPL_TEXT_BASE=0x920000
+ CONFIG_TARGET_VERDIN_IMX8MP=y
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+@@ -26,6 +27,7 @@ CONFIG_SPL=y
+ CONFIG_IMX_BOOTAUX=y
+ CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x48000000
+ CONFIG_SYS_LOAD_ADDR=0x48200000
++CONFIG_PCI=y
+ CONFIG_SYS_MEMTEST_START=0x40000000
+ CONFIG_SYS_MEMTEST_END=0x80000000
+ CONFIG_REMAKE_ELF=y
+@@ -76,6 +78,7 @@ CONFIG_CMD_FUSE=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
+ CONFIG_CMD_READ=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+@@ -145,8 +148,11 @@ CONFIG_DWC_ETH_QOS_IMX=y
+ CONFIG_FEC_MXC=y
+ CONFIG_RGMII=y
+ CONFIG_MII=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_IMX=y
+ CONFIG_PHY=y
+ CONFIG_PHY_IMX8MQ_USB=y
++CONFIG_PHY_IMX8M_PCIE=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_IMX8M=y
 -- 
 2.34.1
 
