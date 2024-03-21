@@ -4,86 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC364C54E58
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 11:34:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDE92C54E68
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 12:07:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8F5187F4A;
-	Thu, 21 Mar 2024 12:34:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E6B9687D02;
+	Thu, 21 Mar 2024 13:07:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="y3dH5Jwa";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XKPD8fNn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A9F188087; Thu, 21 Mar 2024 12:34:33 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 765B787D02; Thu, 21 Mar 2024 13:07:22 +0100 (CET)
+Received: from mail-oo1-xc2c.google.com (mail-oo1-xc2c.google.com
+ [IPv6:2607:f8b0:4864:20::c2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B22BF87D91
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 12:34:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8741187B77
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 13:07:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4141156f245so6053635e9.2
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 04:34:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-oo1-xc2c.google.com with SMTP id
+ 006d021491bc7-5a4930d9c48so70186eaf.1
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 05:07:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711020870; x=1711625670; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=gFn7hBo48tvNt0O+Bb+rUhIHIfR2SebBqIIgjmA4D2w=;
- b=y3dH5JwaZwn44lqfsNc1rnypMug3aLFOTizZQ7OMqSh7wgeVCoURo81mdrWgKOCxuq
- hObw093Hmmn+nfqwtSaBr93IBkzLkO8OYe2sMq9E5EALS4kY4hLF3yyBNlmgdl/RdZix
- OaNjVqQyBD8ZeK8Ko1ld6uWgGo66p0XtJl+votje7Kht+5SZzHKYMluR77F79o7XnYXx
- 99XEt1nIgeOsYdrZofubgNxWnL//gIlEq0dLKPYS3SvbaHnyAZLowQ6NeWhrMhCy9LsX
- 3vNV3gDLeM5RPwVmmEqutvcfiANnlgPDwTrvr/ebiMgq4kCgBmHYwgodB5llEBAVoJ1z
- RdfQ==
+ d=gmail.com; s=20230601; t=1711022838; x=1711627638; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g8kri3azyUqVhHNgMPVrh9C/xOl43RBsmDe+JLCAxDs=;
+ b=XKPD8fNn8N3Pc7QCdI0VwQBiuhQVfCkL331OArx77sTtp/O+cpz0kmn2fZSXaob1FK
+ EfbjQSmq+TFDw7NpmLMyf+MGUU5dPCfDLtDvGAE5Jl4B4yuEh5ksaDVG4DrD8eeySJb+
+ omGxot58kiv6Ax/yX3zamRINh5C9m+ybzv5Ud1V+GhpnEQbh1g2MQyHL6T6WowoQb6DZ
+ Z/R+vdEG1bSP9E8UOT8YP0/MqXnLI21VoeW70q6BhMo1GUxroH6Ob1k7QpT3Le0JLyTb
+ 4SqNagcJBzKe3IczybY7s4p+2/ZJuM35wBv4X0zJ3jJicfRFbLS8bPd1sH52wiQm5wYE
+ H14g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711020870; x=1711625670;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=gFn7hBo48tvNt0O+Bb+rUhIHIfR2SebBqIIgjmA4D2w=;
- b=LaOpj2PXPNcnJkZhC3v6jYgInGv5qYKDjgLMRLxN10Qfke8F+SrRToz80EnMTlT8Kj
- IW7YrtwCRzMkQ/rbJmsKxwqzgs63LwXSSg5DtP3KtjrLj+e5LvW7qhKHjcM6cjmQS1b3
- AFHJDDwEZMlVVxLE0GNX2/xT7Nwzo/fXaR6QxADOwxRwQPdMBq6vuRQ1Scf2GkGRX4O/
- TEVJnR82Qkhpvfi5OwhKchRan3YRG0cTBRFYI57xspprGhaxAaiFCygi/lkDO/aup8Ze
- 7B+ncbqhiTqPEW+cyjxccFeP19WuamLhpfh5qKLWgwM28ep+QdjcLP0Q0YDKDpnYSSOU
- AbSg==
-X-Gm-Message-State: AOJu0YyOdlqr6c2GdIQ9zHW4hyDkBxSLMnXq5nT7knb2PJuyv/kwU7B/
- qcnoFSG07CTLp+YZ4tGhNvdtkMXudFenR2ohWy3wEyAtganEaWE4FdwOUqra2JU=
-X-Google-Smtp-Source: AGHT+IHNLmDXLy7J8vuTX0Wt2P0FNIvCm0rhtmwlZPbyG1ZSgFf9Zzv83iGewSLNOyrzj+eDWAIpPA==
-X-Received: by 2002:a05:600c:4e93:b0:413:3160:840f with SMTP id
- f19-20020a05600c4e9300b004133160840fmr1234476wmq.0.1711020870136; 
- Thu, 21 Mar 2024 04:34:30 -0700 (PDT)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- n31-20020a05600c3b9f00b00414037f27a9sm5384784wms.31.2024.03.21.04.34.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 21 Mar 2024 04:34:29 -0700 (PDT)
-Message-ID: <f3940b9b-e5a0-447d-a6a8-447fdd21e17b@linaro.org>
-Date: Thu, 21 Mar 2024 11:34:29 +0000
+ d=1e100.net; s=20230601; t=1711022838; x=1711627638;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=g8kri3azyUqVhHNgMPVrh9C/xOl43RBsmDe+JLCAxDs=;
+ b=nUluChQu5l3/JFBhpXDtHWG9GCGbH775sP/bwQDf4RbUnmlvKDuqLZNpPS5T4sTeUL
+ IrLhv91sNaphh/YIgUq3zTXCK28cUWh6Pzoz1xjbfvwkRhVBXBIN7Xb0jYrrwJnYIaVb
+ 2Yyts02PaRXTbd1r7RwBvErpCiJC9CCmglp86L1wXo5lPoGswT72EmL9HrDZTusevO9G
+ u+vf+ClU87Q8VEWZOVLGKQD+6pk5Catolq0AWMxw1RweYwp8g6C/OqKxwPdUZUHoPcav
+ vGYKto+ZF0uh6nJD3t5EXMHXq0TabkEQnO+gQKRD+6h3S9gTqtXJF7+rbfBHgl0t9UKz
+ iNgg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV5npOHMU3xH5R7v3rxByctOofTAWILa3vyeessVilYszup0jiIViAkrMAcSi5uumUPeymAjnKsT9l7gZzBq0G6TM6khg==
+X-Gm-Message-State: AOJu0YzPQEkFYhG4Nr6D1PvTHB8ZRLdwy7TyEodWNjjqkX9MbauG1wAk
+ WMn7LxX4j+49M5SJdR5FaLgST1nmnPBDpGLc627TesOWqk9RVSHeW9mBoQEMjv0gwdutdLAmy3N
+ Bh+A57zBbQ+zd4LXmNES7XdW7l8CIchPrCDo=
+X-Google-Smtp-Source: AGHT+IFKuAx7lSDisG6dJx8eW8q0vOo/Wi9tyVSv0zJR4D7JoofUL+7aa8wGafDyY2pmjRXkJ9bZDYLYZY0/O7gHDls=
+X-Received: by 2002:a05:6a20:da87:b0:1a3:6f98:f3de with SMTP id
+ iy7-20020a056a20da8700b001a36f98f3demr9100079pzb.1.1711022526399; Thu, 21 Mar
+ 2024 05:02:06 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] usb: dwc3-generic: implement Qualcomm wrapper
-Content-Language: en-US
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20240131-b4-qcom-usb-v1-0-6438b2a2285e@linaro.org>
- <20240131-b4-qcom-usb-v1-1-6438b2a2285e@linaro.org>
- <ee020a2c-4f84-4fae-97a0-f12f3157d3ad@denx.de>
- <975bfe22-58b3-46b9-899b-f212b49d8664@linaro.org>
- <8221c539-51b9-4ead-8cce-834c93230282@denx.de> <87frwkndhf.fsf@baylibre.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <87frwkndhf.fsf@baylibre.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20240321065742.32441-1-othacehe@gnu.org>
+In-Reply-To: <20240321065742.32441-1-othacehe@gnu.org>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 21 Mar 2024 09:01:53 -0300
+Message-ID: <CAOMZO5DeXdRTMazHqK4T9-=jvoRSQBZgjiPMY8_9E25x4w6sEg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/3] imx93-phyboard-segin: Add USB support.
+To: Mathieu Othacehe <othacehe@gnu.org>
+Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Shiji Yang <yangshiji66@outlook.com>, Ye Li <ye.li@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, Stefano Babic <sbabic@denx.de>,
+ =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
+ Simon Glass <sjg@chromium.org>, Mathieu Othacehe <m.othacehe@gmail.com>,
+ Yannic Moog <y.moog@phytec.de>, Primoz Fiser <primoz.fiser@norik.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, 
+ Wadim Egorov <w.egorov@phytec.de>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,99 +97,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Mathieu,
 
-On 21/03/2024 09:25, Mattijs Korpershoek wrote:
-> Hi Caleb, Marek,
-> 
-> On jeu., mars 21, 2024 at 06:34, Marek Vasut <marex@denx.de> wrote:
-> 
->> On 3/13/24 7:22 PM, Caleb Connolly wrote:
->>
->> [...]
->>
->>>>> +static inline void dwc3_qcom_setbits(void __iomem *base, u32 offset,
->>>>> u32 val)
->>>>> +{
->>>>> +    u32 reg;
->>>>> +
->>>>> +    reg = readl(base + offset);
->>>>> +    reg |= val;
->>>>> +    writel(reg, base + offset);
->>>>
->>>> Use setbits_le32() .
->>>>
->>>>> +    /* ensure that above write is through */
->>>>> +    readl(base + offset);
->>>>
->>>> Is this needed ?
->>>
->>> I honestly don't know, this is copied from the Linux driver and it seems
->>> to be very defensively written. I doubt it's strictly necessary.
->>
->> Does git log indicate anything ?
+On Thu, Mar 21, 2024 at 3:57=E2=80=AFAM Mathieu Othacehe <othacehe@gnu.org>=
+ wrote:
 
-Nope :/ it's there from when the driver was first added.
->>
->> I suspect this is some sort of barrier .
->>
->> [...]
->>
->>>>> +/* For controllers running without superspeed PHYs */
->>>>> +static void dwc3_qcom_select_utmi_clk(void __iomem *qscratch_base)
->>>>> +{
->>>>> +    /* Configure dwc3 to use UTMI clock as PIPE clock not present */
->>>>> +    dwc3_qcom_setbits(qscratch_base, QSCRATCH_GENERAL_CFG,
->>>>> +              PIPE_UTMI_CLK_DIS);
->>>>> +
->>>>> +    udelay(500);
->>>>
->>>> Isn't there some possibility to poll for completion instead of fixed
->>>> delay ? If so, use wait_for_bit or some such .
->>>
->>> Not that I'm aware of, no. I think this hardware just has a blanket
->>> "writes take X bus cycles to complete" rule or something. It's totally
->>> possible that this code was originally written this way to work around
->>> some issues on an FPGA prototype or something. Everything seems to still
->>> work if I remove the delays so I'll drop them...
->>
->> Could you possibly ask someone ?
+> Mathieu Othacehe (3):
+>   arm: dts: imx93-phyboard-segin: Add USB support
+>   configs: imx93-phyboard-segin: Add USB support
+>   configs: imx93-phyboard-segin: Add fastboot support
+>
+>  arch/arm/dts/imx93-phyboard-segin.dts  | 13 +++++++++++++
 
-Yeah I'll ask around, I'm not confident I'll find an answer though.
->>
->> [...]
->>
->>>>>    static int dwc3_rk_glue_get_ctrl_dev(struct udevice *dev, ofnode *node)
->>>>>    {
->>>>>        *node = dev_ofnode(dev);
->>>>> @@ -506,6 +599,10 @@ static int dwc3_glue_reset_init(struct udevice *dev,
->>>>>        else if (ret)
->>>>>            return ret;
->>>>>    +    if (device_is_compatible(dev, "qcom,dwc3")) {
->>>>> +        reset_assert_bulk(&glue->resets);
->>>>> +        udelay(500);
->>>>
->>>> Why this delay here ?
->>>
->>> According to the docs, the reset should be asserted for at least 6 sleep
->>> clock cycles, that's ~200us on sdm845, but it can vary by platform.
->>
->> A comment in the code would be nice.
->>
->> Sorry for the abysmal delay in replies.
->>
->> btw. the new version of this series is still OK to go in, unless you 
->> want to fill in the comments. They can also go in in separate follow up 
->> patch.
-> 
-> I'm interested by the answers above as well. As I took in the series [1] (to
-> avoid delaying it too much), please consider a follow up patch to add a
-> comment.
+The addition of the i.MX93 USB support in the kernel devicetree is
+taking longer than expected:
 
-The v4 you picked up has a comment explaining this.
-> 
-> [1] https://lore.kernel.org/r/all/171101299073.1017001.16411913317437946645.b4-ty@baylibre.com/
-> 
+https://lore.kernel.org/linux-arm-kernel/20240321081439.541799-8-xu.yang_2@=
+nxp.com/T/#u
 
--- 
-// Caleb (they/them)
+To avoid getting out of sync with the upstream dts, please add the USB
+nodes inside imx93-phyboard-segin-u-boot.dtsi
+for now.
+
+Thanks
