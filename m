@@ -4,82 +4,109 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB0E9C54E58
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 09:25:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B11ADC54E58
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 09:26:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B17187D33;
-	Thu, 21 Mar 2024 10:25:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 33D0787E8E;
+	Thu, 21 Mar 2024 10:26:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LWx5cb2+";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ywEjU8FI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A512879F6; Thu, 21 Mar 2024 10:25:22 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6314A87E8E; Thu, 21 Mar 2024 10:26:18 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::600])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 190F287D59
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 10:25:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 51BEE879F6
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 10:26:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-41466e01965so5203675e9.3
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 02:25:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1711013117; x=1711617917;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=bhJGeurYHyioi9ymosn+Jq8sju6cUCclL1Jug0iJT/4=;
- b=LWx5cb2+PejZLIIv5Fra+bXkBC+ClFy+Z2pQBVm3B1a+8j2UGHrLboFVJIulCGIyx0
- TBsJT269xza1mLpqBWJfF4aXdjPyPjfqsu9m/c1DSSHp5oHgofcIVeHvkgo59ZabnRDs
- 02HejgBbqF7T5U4bgDUzF/ECNxf8Iq1a10daLI1HZM5uyzylGaUoFc/G/+sKtTTXjizc
- VYMTNf67HkSyejphFGEd7PauIP/pEvN+aws80VyrIBEWSbtrOq/R8iRt3mrI35wEvDUm
- biB2tjDb8jvAncEAVElbf8E5vkBGzxTofFZFCM2xVGBJBgKzYBeY/EUosnq8tQwjF8RJ
- 2TSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711013117; x=1711617917;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=bhJGeurYHyioi9ymosn+Jq8sju6cUCclL1Jug0iJT/4=;
- b=XFfXaZZ+1+ciLYmx0juIHCa/6l7Yhf96dy1hiYe8ukVu6BM2e25dotdd0hhx2sOJ7/
- 5uLJ7I36eaajk1Htw7JEdAVPM9IFsjcX7Mrb9dtJ9tDTaeN+laKPQTZb+R1eCMlZ3gYC
- liiRGa42Q5qqE2auxkGlayTcmkiUrJlSbeJBI+1PrSwHgm6D8fuO1Ce6rx/jHVPhynrX
- fp0CTaoY87mv6TF5gKAfkTRdITJOacxyBCZ4XyENWpiBiuU7WQZmk/D4Di20JWczx19b
- geo5lfl4AiG5yVlMUeL3dCYO9QwUZ1e1p98tNA4W8t1L3Q3lWwIeuVFH3jG+u/yvwxWU
- ctUw==
-X-Gm-Message-State: AOJu0YwjQ97DsqrrRggqaOa/N3jalZFKDJS8uvGei+6SaoDq8ip/scbF
- L8t8/MSjKR9YWT4uNp2O9pY8RlfQhId/hMSnjc7PPNmSaYe54H7OhjW6WtVVzdA=
-X-Google-Smtp-Source: AGHT+IHHTp0gk+31+wOtYI+8IImG01CK00Jeh9li0hk31Jye01OgpDcCH66n1Zyuj8/Kw+vWuNe2jw==
-X-Received: by 2002:a05:600c:358a:b0:414:22b5:c33a with SMTP id
- p10-20020a05600c358a00b0041422b5c33amr6786196wmq.1.1711013117516; 
- Thu, 21 Mar 2024 02:25:17 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- s14-20020a05600c384e00b00413ee7921b4sm4902635wmr.15.2024.03.21.02.25.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 02:25:17 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Marek Vasut <marex@denx.de>, Caleb Connolly <caleb.connolly@linaro.org>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Neil
- Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 1/5] usb: dwc3-generic: implement Qualcomm wrapper
-In-Reply-To: <8221c539-51b9-4ead-8cce-834c93230282@denx.de>
-References: <20240131-b4-qcom-usb-v1-0-6438b2a2285e@linaro.org>
- <20240131-b4-qcom-usb-v1-1-6438b2a2285e@linaro.org>
- <ee020a2c-4f84-4fae-97a0-f12f3157d3ad@denx.de>
- <975bfe22-58b3-46b9-899b-f212b49d8664@linaro.org>
- <8221c539-51b9-4ead-8cce-834c93230282@denx.de>
-Date: Thu, 21 Mar 2024 10:25:16 +0100
-Message-ID: <87frwkndhf.fsf@baylibre.com>
+ spf=fail smtp.mailfrom=tejas.arvind.bhumkar@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=RSdSLgUD13BETd7MjvJu9/wEDszvMnfd8mKHUsCFSoTMI11PIcnGxrgL15GN5aGxSnOmzaYqDD6sHaEJCchDmNvYHsf9YEMEsb27l/rRj9K4RUzkyktA5YS8KimfqP/ggJbEbXvsFmqYLqX/ncnhULb8fxAPvzGBlttgI0ZPHk2oco2xPzp8SQowBESA33H0dAbpP21i13U3wE/CtxSiPkd+40xo+KF3desVCeIinnPtG9X4igbWOoLgusRZc43Rg7Vt/pt/7kiasMXrEO1YECcUtaJoIEYyQDAanjxybQ7UlHmIL7FqcaB0+b3Vt2nAtA2PP8TPqiawOpNAE7TT9g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SgtalUM3rZiEQPgCSYYl914PErxM1ocxPAuqkznh0K4=;
+ b=Aeg+0iWmvizFnMIXxN/gTGFSFtynpPdY0ljemfNaNQbPSMjwVfwGE3H0Cam8yb4ioUyuwowtfmdevW0IgjxlGySFSIBhWHVN501/VOEh5vYQabZvNOHya4jt5Cj6tLzJS0oNZfTvFE2OZaJS3yI0De/yV05LK/uW/zEBRKdplaaGkfoOULQrtG6arCd/bQIgkMKB7FcB3L9g3Dtq0fk1dzFeC8DGh6fWOesTtHu9EeTbenqvgyIe/E26nloS1dvnb43mVF3lfvWmirufqbi3JPgPiTyItWXCrOe6n3I+D9+M0CRAP0fuSBxTT+jv8AyYCQMH/XL3V5vfDEUXoc3Vyg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SgtalUM3rZiEQPgCSYYl914PErxM1ocxPAuqkznh0K4=;
+ b=ywEjU8FIGbBvonqeRKTT+10wtFrxbd5Q5gnBmTn9d1jkOrl4IoYViC7AjlvMKhSbZf2u3zyH7z/02J8vJ46vsdjSePwsB1a1oXG0fYgKSJYfqmCEz3QM8M4FuQkh5zJ9OVzjreuvC2/odbauTngSTtH1i0jWCHK0ufZ9e7sLUXc=
+Received: from BY5PR16CA0005.namprd16.prod.outlook.com (2603:10b6:a03:1a0::18)
+ by SJ0PR12MB8615.namprd12.prod.outlook.com (2603:10b6:a03:484::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.31; Thu, 21 Mar
+ 2024 09:26:12 +0000
+Received: from CO1PEPF000042AB.namprd03.prod.outlook.com
+ (2603:10b6:a03:1a0:cafe::80) by BY5PR16CA0005.outlook.office365.com
+ (2603:10b6:a03:1a0::18) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.26 via Frontend
+ Transport; Thu, 21 Mar 2024 09:26:12 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CO1PEPF000042AB.mail.protection.outlook.com (10.167.243.40) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7409.10 via Frontend Transport; Thu, 21 Mar 2024 09:26:12 +0000
+Received: from SATLEXMB08.amd.com (10.181.40.132) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 21 Mar
+ 2024 04:26:11 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB08.amd.com
+ (10.181.40.132) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Thu, 21 Mar
+ 2024 02:26:10 -0700
+Received: from xhdcl190040.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
+ Transport; Thu, 21 Mar 2024 04:26:09 -0500
+From: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <trini@konsulko.com>,
+ <venkatesh.abbarapu@amd.com>, <git@amd.com>
+Subject: [PATCH] configs: zynqmp_kria: Deactivate CONFIG_SPI_FLASH_BAR
+Date: Thu, 21 Mar 2024 14:55:57 +0530
+Message-ID: <20240321092557.2939231-1-tejas.arvind.bhumkar@amd.com>
+X-Mailer: git-send-email 2.37.6
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PEPF000042AB:EE_|SJ0PR12MB8615:EE_
+X-MS-Office365-Filtering-Correlation-Id: ead366dd-b681-49cb-48ab-08dc4988f321
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: PFbx+eOQkVX3Q1B105+w3AJO9znSO43b6rdGACIfTKsoDyxSKpZBZOHDIlVITFB8LI8pyKsyz7w+RImdBqetYl5F7/Job0iSMeSDscDc5yz14c9Yi6MKNd/J9SIpdQi+vQVh41LnGH95q130XZvmpUyXm6kqMNb2zfP0THwWPPf5YDCD96eGDsgRckILnMudiiyC/19psZSJRCVmobpjEkfb4ebE3XfYgfzhzH5Z91AkRcsntW76Dwz5nxzn5XK1kNMizKMIcX0Mq4muBkltN/yzgDZJ6lUtY2a7An816Wy7Bk+IKptT1mWX9FyjQzjY3AtfjzX7v/qJfdKVPsNav+zYCSyUl8L2w4Du6xfyzXDBnCJZfNq9Zcy9xRKFYwU0ffI0XpIK49kLr/1riY+UTgSFp0xu79awfpcN1KIL6rtHHMcTXqr7BqwijYriaxUsW98fJC0IEFnaQpb3XPQKaZuQdL+CGacAoUHsxXdDV+JIAZ7zWk3UqjkuVhpaXI9+S3B+i28U+DUyjIWfCQtZoMBg8ddKOjPIAuD+JwPQFFY5zaUZKlTER6sBPdq9U1RNllq0NFQBHf1KSJjJxgspgeV5j8YCmFzXVbkwhTIpDMuSc7GM6WL2YX0jyFv5y1YVY63dk9xsMLc/t8hDE8sJEvOxXYSgw2i0lIZgNUrrwh9IT7f7XOZX/h+6W5PHmnV32SxmDGnRrpn43+4SuDFt1lhTlaLR+fR6uBBudR+2RX/zB7Lc5dOIwGLhShcEoUNE
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(82310400014)(36860700004)(376005)(1800799015); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Mar 2024 09:26:12.1786 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ead366dd-b681-49cb-48ab-08dc4988f321
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000042AB.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB8615
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,95 +123,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb, Marek,
+Disable CONFIG_SPI_FLASH_BAR, which activates 4-byte opcodes.
 
-On jeu., mars 21, 2024 at 06:34, Marek Vasut <marex@denx.de> wrote:
+Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+---
+ configs/xilinx_zynqmp_kria_defconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-> On 3/13/24 7:22 PM, Caleb Connolly wrote:
->
-> [...]
->
->>>> +static inline void dwc3_qcom_setbits(void __iomem *base, u32 offset,
->>>> u32 val)
->>>> +{
->>>> +=C2=A0=C2=A0=C2=A0 u32 reg;
->>>> +
->>>> +=C2=A0=C2=A0=C2=A0 reg =3D readl(base + offset);
->>>> +=C2=A0=C2=A0=C2=A0 reg |=3D val;
->>>> +=C2=A0=C2=A0=C2=A0 writel(reg, base + offset);
->>>
->>> Use setbits_le32() .
->>>
->>>> +=C2=A0=C2=A0=C2=A0 /* ensure that above write is through */
->>>> +=C2=A0=C2=A0=C2=A0 readl(base + offset);
->>>
->>> Is this needed ?
->>=20
->> I honestly don't know, this is copied from the Linux driver and it seems
->> to be very defensively written. I doubt it's strictly necessary.
->
-> Does git log indicate anything ?
->
-> I suspect this is some sort of barrier .
->
-> [...]
->
->>>> +/* For controllers running without superspeed PHYs */
->>>> +static void dwc3_qcom_select_utmi_clk(void __iomem *qscratch_base)
->>>> +{
->>>> +=C2=A0=C2=A0=C2=A0 /* Configure dwc3 to use UTMI clock as PIPE clock =
-not present */
->>>> +=C2=A0=C2=A0=C2=A0 dwc3_qcom_setbits(qscratch_base, QSCRATCH_GENERAL_=
-CFG,
->>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 PIPE_UTMI_CLK_DIS);
->>>> +
->>>> +=C2=A0=C2=A0=C2=A0 udelay(500);
->>>
->>> Isn't there some possibility to poll for completion instead of fixed
->>> delay ? If so, use wait_for_bit or some such .
->>=20
->> Not that I'm aware of, no. I think this hardware just has a blanket
->> "writes take X bus cycles to complete" rule or something. It's totally
->> possible that this code was originally written this way to work around
->> some issues on an FPGA prototype or something. Everything seems to still
->> work if I remove the delays so I'll drop them...
->
-> Could you possibly ask someone ?
->
-> [...]
->
->>>>  =C2=A0 static int dwc3_rk_glue_get_ctrl_dev(struct udevice *dev, ofno=
-de *node)
->>>>  =C2=A0 {
->>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 *node =3D dev_ofnode(dev);
->>>> @@ -506,6 +599,10 @@ static int dwc3_glue_reset_init(struct udevice *d=
-ev,
->>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 else if (ret)
->>>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return ret;
->>>>  =C2=A0 +=C2=A0=C2=A0=C2=A0 if (device_is_compatible(dev, "qcom,dwc3")=
-) {
->>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 reset_assert_bulk(&glue->r=
-esets);
->>>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 udelay(500);
->>>
->>> Why this delay here ?
->>=20
->> According to the docs, the reset should be asserted for at least 6 sleep
->> clock cycles, that's ~200us on sdm845, but it can vary by platform.
->
-> A comment in the code would be nice.
->
-> Sorry for the abysmal delay in replies.
->
-> btw. the new version of this series is still OK to go in, unless you=20
-> want to fill in the comments. They can also go in in separate follow up=20
-> patch.
-
-I'm interested by the answers above as well. As I took in the series [1] (to
-avoid delaying it too much), please consider a follow up patch to add a
-comment.
-
-[1] https://lore.kernel.org/r/all/171101299073.1017001.16411913317437946645=
-.b4-ty@baylibre.com/
+diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
+index 7cb8b62d32..7af8b27be9 100644
+--- a/configs/xilinx_zynqmp_kria_defconfig
++++ b/configs/xilinx_zynqmp_kria_defconfig
+@@ -155,7 +155,6 @@ CONFIG_MMC_HS200_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_ZYNQ=y
+ CONFIG_DM_MTD=y
+-CONFIG_SPI_FLASH_BAR=y
+ CONFIG_SPI_FLASH_STMICRO=y
+ # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
+ CONFIG_SPI_FLASH_MTD=y
+-- 
+2.37.6
 
