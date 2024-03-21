@@ -4,84 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 113AEC54E68
-	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 10:08:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D999BC54E58
+	for <u-boot@archiver.kernel.org>; Thu, 21 Mar 2024 10:28:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69DEE87EFA;
-	Thu, 21 Mar 2024 11:08:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id DCF1487B77;
+	Thu, 21 Mar 2024 11:28:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="0bURX4bu";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RTEY3Q0p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B738288087; Thu, 21 Mar 2024 11:08:08 +0100 (CET)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9D2B487CB7; Thu, 21 Mar 2024 11:28:37 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B10C87DC7
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 11:08:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 250EB87B41
+ for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 11:28:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-33ff53528ceso454098f8f.0
- for <u-boot@lists.denx.de>; Thu, 21 Mar 2024 03:08:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1711015684; x=1711620484;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=GveuQTod++AlDrILXj8YzLYWcHOGNiosnUtd54t9KrM=;
- b=0bURX4buWURUEn9flYwg61VUCo08vLVafaWhM+FuY4dLIjiaNHrl3kzw9dldradLs2
- phbYdY3QDW8+8/ZQSXxZ3RFVYnMNgzRbBRfzqGmsCVEILZ32liJ6uVM3OXj+xRkxCIQ0
- p7mM2bEyMEkOxbGdNSY9JflYsKWH4VCiJnAY140BHCmYsTb4bFf8XzmNgJwF0kLajlFe
- jZ+h3Ri24FGjBGWpGibCrB4H5mNrMlm5i0Dt8d7SIUkwVfNiaLQlsNcW9spl9mUx6Q6o
- K8m+uLNz1ZM3GWxuLpZi1LkjCGoTTEvVqi5D5bQ/CKzKZnQ6ThGj2fYC9fVmUQ+JdHC5
- 0dSA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711015684; x=1711620484;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=GveuQTod++AlDrILXj8YzLYWcHOGNiosnUtd54t9KrM=;
- b=XvV/GS81JhK95kiPYyIxJKv0TAkXuttO18YyU+n3+QeESneBGAvZ8RMK3oL6ULXePm
- sVD/6ohhyf54nVbaLdJoufD+VreJmEP9bQDsbSKJbLZo2UYi/FEimLXttaSpfJQwQ2Yy
- 0BU3Qkvo3dJP8AlfZi77GRZDUueZrBg/QbfayDxWKmyTNNW+z0XIx1x7coixZQIjr5D2
- BCKg2i8dio0W59+M0Q+6X6AQV/jTLlDQ45cwaQCUPqTpdkE94m52m7vK95Bk+VUAEA+u
- N1td1vj4xF66YTI4yYJoE+8hPannU3zU3Oa2e+aCUHiKBA4T+PF6s2ch2nej4YNVdIoT
- i9Tw==
-X-Gm-Message-State: AOJu0YwEirQqdWlijQjFR+E9jcELDcxUmo8m8d5+Z4WSCoP7yrinibXX
- aX0xEC5ihvLUcs43vkro340XG+q4iHVcTq+u5wxBL/Z0lpK7/dkpF7laXcE1VgM=
-X-Google-Smtp-Source: AGHT+IGbor2CXS73lYdEzQRmDAlm0yun/ANSAoZ+31RVMS2mY2KC/kE9mr1MUz092UvZoTudVV6cDg==
-X-Received: by 2002:adf:e6ca:0:b0:33e:7719:325d with SMTP id
- y10-20020adfe6ca000000b0033e7719325dmr1081912wrm.2.1711015684415; 
- Thu, 21 Mar 2024 03:08:04 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- t18-20020a5d42d2000000b0033e456f6e7csm17012247wrr.1.2024.03.21.03.08.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 21 Mar 2024 03:08:03 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>, Abdellatif El Khlifi
- <abdellatif.elkhlifi@arm.com>, AKASHI Takahiro
- <takahiro.akashi@linaro.org>, Alexander Gendin <agendin@matrox.com>, Caleb
- Connolly <caleb.connolly@linaro.org>, Ehsan Mohandesi
- <emohandesi@linux.microsoft.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joshua Watt <jpewhacker@gmail.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Mario Six <mario.six@gdsys.cc>, Sean
- Anderson <seanga2@gmail.com>, Sergei Antonov <saproj@gmail.com>, Simon
- Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini
- <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v3] test: dm: add button_cmd test
-In-Reply-To: <20240319132459.1997125-1-caleb.connolly@linaro.org>
-References: <20240319132459.1997125-1-caleb.connolly@linaro.org>
-Date: Thu, 21 Mar 2024 11:08:03 +0100
-Message-ID: <8734sjoq2k.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=danishanwar@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42LASNgL025929;
+ Thu, 21 Mar 2024 05:28:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1711016903;
+ bh=+aWA38ZBokI62m/ahWX+EsH675Ku/BwgXp6ZXpCFOYo=;
+ h=From:To:CC:Subject:Date;
+ b=RTEY3Q0pJQaCAeffYK41PD1+KmeRzTLScKyWLpgm8G5qGJ8zK/zWQMWZsvvJvgzK7
+ 5LpkVm+PRgSuvRYgw1smDwZWO7U5b1jFGpF+jI53GAK4A73YIdWZbSv7Dd+wOMRcow
+ 1sf5GV/4bC9Q/XYPxr4jd0ejtIY9pLZ/MUevbQI8=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42LASMOa023224
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 21 Mar 2024 05:28:23 -0500
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 21
+ Mar 2024 05:28:22 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 21 Mar 2024 05:28:22 -0500
+Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42LASMk0084668;
+ Thu, 21 Mar 2024 05:28:22 -0500
+Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
+ by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 42LASLTa010751;
+ Thu, 21 Mar 2024 05:28:22 -0500
+From: MD Danish Anwar <danishanwar@ti.com>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>, Max Krummenacher
+ <max.krummenacher@toradex.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Ravi Gunasekaran <r-gunasekaran@ti.com>, MD
+ Danish Anwar <danishanwar@ti.com>, Nishanth Menon <nm@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
+Subject: [PATCH v7] remoteproc: uclass: Add methods to load firmware to rproc
+ and boot rproc
+Date: Thu, 21 Mar 2024 15:58:19 +0530
+Message-ID: <20240321102819.1011011-1-danishanwar@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,212 +85,256 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Add APIs to set a firmware_name to a rproc and boot the rproc with the
+same firmware.
 
-Thank you for the patch.
+Clients can call rproc_set_firmware() API to set firmware_name for a rproc
+whereas rproc_boot() will load the firmware set by rproc_set_firmware() to
+a buffer by calling request_firmware_into_buf(). rproc_boot() will then
+load the firmware file to the remote processor and start the remote
+processor.
 
-On mar., mars 19, 2024 at 13:24, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+Acked-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
+Reviewed-by: Roger Quadros <rogerq@kernel.org>
+---
+Changes from v6 to v7:
+*) Removed selecting FS_LOADER by default in remoteproc Kconfig.
+*) Wrapped the rproc APIs using FS_LOADER inside #ifdef CONFIG_FS_LOADER.
+*) Added Reviewed-by tag from Roger Quadros <rogerq@kernel.org>
 
-> Add a test for the button_cmd feature. This validates that commands can
-> be mapped to two buttons, that the correct command runs based on which
-> button is pressed, that only 1 command is run, and that no command runs
-> if button_cmd_0_name is wrong or unset.
->
-> Additionally, fix a potential uninitialised variable use caught by these
-> tests, the btn variable in get_button_cmd() is assumed to be null if
-> button_get_by_label() fails, but it's actually used uninitialised in
-> that case.
->
-> CONFIG_BUTTON is now enabled automatically and was removed when running
-> save_defconfig.
->
-> Fixes: e761035b6423 ("boot: add support for button commands")
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+Changes from v5 to v6:
+*) Collected Acked-by tag from Ravi Gunasekaran <r-gunasekaran@ti.com>
+*) Fixed few typos as pointed out by Roger Quadros <rogerq@kernel.org>
+*) Added if condition to check if uc_pdata->fw_name exists and free it
+   before the strndup as suggested by Roger Quadros <rogerq@kernel.org>
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Changes from v4 to v5:
+*) Added Kconfig option REMOTEPROC_MAX_FW_SIZE to set max firmware size
+   that can be loaded to a rproc.
+*) Added freeing of address in rproc_boot() as pointed out by Ravi.
+*) Allocating the address at a later point in rproc_boot()
+*) Rebased on latest u-boot/master [commit 
+   9e00b6993f724da9699ef12573307afea8c19284]
 
-> ---
-> Pipeline: https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/pipelines/19995
-> Changes in v3:
-> - Enable CONFIG_BUTTON_CMD for sandbox_flattree as well.
-> - Link to v2: https://lore.kernel.org/u-boot/20240305145111.1391645-1-caleb.connolly@linaro.org
->
-> Changes in v2:
-> - Explicitly assign btn as NULL in get_button_cmd(). This fixes a
->   bug where if the undefined variable is non-zero the
->   button_get_by_label() check would fail and result in invalid memory
->   being accessed.
-> - Enable CONFIG_BUTTON_CMD for sandbox64 as well as sandbox.
-> - Link to v1: https://lore.kernel.org/u-boot/20240214170357.4091708-1-caleb.connolly@linaro.org/
-> ---
->  common/button_cmd.c                |  2 +-
->  configs/sandbox64_defconfig        |  1 +
->  configs/sandbox_defconfig          |  1 +
->  configs/sandbox_flattree_defconfig |  1 +
->  test/dm/button.c                   | 96 ++++++++++++++++++++++++++++++
->  5 files changed, 100 insertions(+), 1 deletion(-)
->
-> diff --git a/common/button_cmd.c b/common/button_cmd.c
-> index b6a8434d6f29..8642c26735cc 100644
-> --- a/common/button_cmd.c
-> +++ b/common/button_cmd.c
-> @@ -32,9 +32,9 @@ struct button_cmd {
->   */
->  static int get_button_cmd(int n, struct button_cmd *cmd)
->  {
->  	const char *cmd_str;
-> -	struct udevice *btn;
-> +	struct udevice *btn = NULL;
->  	char buf[24];
->  
->  	snprintf(buf, sizeof(buf), "button_cmd_%d_name", n);
->  	cmd->btn_name = env_get(buf);
-> diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-> index 3be9a00a8575..a62faf772482 100644
-> --- a/configs/sandbox64_defconfig
-> +++ b/configs/sandbox64_defconfig
-> @@ -10,8 +10,9 @@ CONFIG_PCI=y
->  CONFIG_SANDBOX64=y
->  CONFIG_DEBUG_UART=y
->  CONFIG_SYS_MEMTEST_START=0x00100000
->  CONFIG_SYS_MEMTEST_END=0x00101000
-> +CONFIG_BUTTON_CMD=y
->  CONFIG_FIT=y
->  CONFIG_FIT_SIGNATURE=y
->  CONFIG_FIT_VERBOSE=y
->  CONFIG_LEGACY_IMAGE_FORMAT=y
-> diff --git a/configs/sandbox_defconfig b/configs/sandbox_defconfig
-> index 4ad10363e91b..93b52f2de5cf 100644
-> --- a/configs/sandbox_defconfig
-> +++ b/configs/sandbox_defconfig
-> @@ -9,8 +9,9 @@ CONFIG_SYS_LOAD_ADDR=0x0
->  CONFIG_PCI=y
->  CONFIG_DEBUG_UART=y
->  CONFIG_SYS_MEMTEST_START=0x00100000
->  CONFIG_SYS_MEMTEST_END=0x00101000
-> +CONFIG_BUTTON_CMD=y
->  CONFIG_FIT=y
->  CONFIG_FIT_RSASSA_PSS=y
->  CONFIG_FIT_CIPHER=y
->  CONFIG_FIT_VERBOSE=y
-> diff --git a/configs/sandbox_flattree_defconfig b/configs/sandbox_flattree_defconfig
-> index 039018627527..6bf8874e722e 100644
-> --- a/configs/sandbox_flattree_defconfig
-> +++ b/configs/sandbox_flattree_defconfig
-> @@ -7,8 +7,9 @@ CONFIG_SYS_LOAD_ADDR=0x0
->  CONFIG_PCI=y
->  CONFIG_DEBUG_UART=y
->  CONFIG_SYS_MEMTEST_START=0x00100000
->  CONFIG_SYS_MEMTEST_END=0x00101000
-> +CONFIG_BUTTON_CMD=y
->  CONFIG_FIT=y
->  CONFIG_FIT_SIGNATURE=y
->  CONFIG_FIT_VERBOSE=y
->  CONFIG_LEGACY_IMAGE_FORMAT=y
-> diff --git a/test/dm/button.c b/test/dm/button.c
-> index 3318668df25a..830d96fbef34 100644
-> --- a/test/dm/button.c
-> +++ b/test/dm/button.c
-> @@ -130,4 +130,100 @@ static int dm_test_button_keys_adc(struct unit_test_state *uts)
->  
->  	return 0;
->  }
->  DM_TEST(dm_test_button_keys_adc, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
-> +
-> +/* Test of the button uclass using the button_gpio driver */
-> +static int dm_test_button_cmd(struct unit_test_state *uts)
-> +{
-> +	struct udevice *btn1_dev, *btn2_dev, *gpio;
-> +	const char *envstr;
-> +
-> +#define BTN1_GPIO 3
-> +#define BTN2_GPIO 4
-> +#define BTN1_PASS_VAR "test_button_cmds_0"
-> +#define BTN2_PASS_VAR "test_button_cmds_1"
-> +
-> +	/*
-> +	 * Buttons 1 and 2 are connected to gpio_a gpios 3 and 4 respectively.
-> +	 * set the GPIOs to known values and then check that the appropriate
-> +	 * commands are run when invoking process_button_cmds().
-> +	 */
-> +	ut_assertok(uclass_get_device(UCLASS_BUTTON, 1, &btn1_dev));
-> +	ut_assertok(uclass_get_device(UCLASS_BUTTON, 2, &btn2_dev));
-> +	ut_assertok(uclass_get_device(UCLASS_GPIO, 1, &gpio));
-> +
-> +	/*
-> +	 * Map a command to button 1 and check that it process_button_cmds()
-> +	 * runs it if called with button 1 pressed.
-> +	 */
-> +	ut_assertok(env_set("button_cmd_0_name", "button1"));
-> +	ut_assertok(env_set("button_cmd_0", "env set " BTN1_PASS_VAR " PASS"));
-> +	ut_assertok(sandbox_gpio_set_value(gpio, BTN1_GPIO, 1));
-> +	/* Sanity check that the button is actually pressed */
-> +	ut_asserteq(BUTTON_ON, button_get_state(btn1_dev));
-> +	process_button_cmds();
-> +	ut_assertnonnull((envstr = env_get(BTN1_PASS_VAR)));
-> +	ut_asserteq_str(envstr, "PASS");
-> +
-> +	/* Clear result */
-> +	ut_assertok(env_set(BTN1_PASS_VAR, NULL));
-> +
-> +	/*
-> +	 * Map a command for button 2, press it, check that only the command
-> +	 * for button 1 runs because it comes first and is also pressed.
-> +	 */
-> +	ut_assertok(env_set("button_cmd_1_name", "button2"));
-> +	ut_assertok(env_set("button_cmd_1", "env set " BTN2_PASS_VAR " PASS"));
-> +	ut_assertok(sandbox_gpio_set_value(gpio, BTN2_GPIO, 1));
-> +	ut_asserteq(BUTTON_ON, button_get_state(btn2_dev));
-> +	process_button_cmds();
-> +	/* Check that button 1 triggered again */
-> +	ut_assertnonnull((envstr = env_get(BTN1_PASS_VAR)));
-> +	ut_asserteq_str(envstr, "PASS");
-> +	/* And button 2 didn't */
-> +	ut_assertnull(env_get(BTN2_PASS_VAR));
-> +
-> +	/* Clear result */
-> +	ut_assertok(env_set(BTN1_PASS_VAR, NULL));
-> +
-> +	/*
-> +	 * Release button 1 and check that the command for button 2 is run
-> +	 */
-> +	ut_assertok(sandbox_gpio_set_value(gpio, BTN1_GPIO, 0));
-> +	process_button_cmds();
-> +	ut_assertnull(env_get(BTN1_PASS_VAR));
-> +	/* Check that the command for button 2 ran */
-> +	ut_assertnonnull((envstr = env_get(BTN2_PASS_VAR)));
-> +	ut_asserteq_str(envstr, "PASS");
-> +
-> +	/* Clear result */
-> +	ut_assertok(env_set(BTN2_PASS_VAR, NULL));
-> +
-> +	/*
-> +	 * Unset "button_cmd_0_name" and check that no commands run even
-> +	 * with both buttons pressed.
-> +	 */
-> +	ut_assertok(env_set("button_cmd_0_name", NULL));
-> +	/* Press button 1 (button 2 is already pressed )*/
-> +	ut_assertok(sandbox_gpio_set_value(gpio, BTN1_GPIO, 1));
-> +	ut_asserteq(BUTTON_ON, button_get_state(btn1_dev));
-> +	process_button_cmds();
-> +	ut_assertnull(env_get(BTN1_PASS_VAR));
-> +	ut_assertnull(env_get(BTN2_PASS_VAR));
-> +
-> +	/*
-> +	 * Check that no command is run if the button name is wrong.
-> +	 */
-> +	ut_assertok(env_set("button_cmd_0_name", "invalid_button"));
-> +	process_button_cmds();
-> +	ut_assertnull(env_get(BTN1_PASS_VAR));
-> +	ut_assertnull(env_get(BTN2_PASS_VAR));
-> +
-> +#undef BTN1_PASS_VAR
-> +#undef BTN2_PASS_VAR
-> +#undef BTN1_GPIO
-> +#undef BTN2_GPIO
-> +
-> +	return 0;
-> +}
-> +DM_TEST(dm_test_button_cmd, UT_TESTF_SCAN_PDATA | UT_TESTF_SCAN_FDT);
-> -- 
-> 2.44.0
+Changes from v3 to v4:
+*) No functional change. Splitted the patch out of the series as suggested
+   by Nishant.
+*) Droppped the RFC tag.
+
+v6: https://lore.kernel.org/all/20240228120645.958316-1-danishanwar@ti.com/
+v5: https://lore.kernel.org/all/20240217122602.3402774-1-danishanwar@ti.com/
+v4: https://lore.kernel.org/all/20240130063322.2345057-1-danishanwar@ti.com/
+v3: https://lore.kernel.org/all/20240124064930.1787929-4-danishanwar@ti.com/
+
+ drivers/remoteproc/Kconfig        |   7 ++
+ drivers/remoteproc/rproc-uclass.c | 104 ++++++++++++++++++++++++++++++
+ include/remoteproc.h              |  34 ++++++++++
+ 3 files changed, 145 insertions(+)
+
+diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+index 781de530af..a49802c132 100644
+--- a/drivers/remoteproc/Kconfig
++++ b/drivers/remoteproc/Kconfig
+@@ -102,4 +102,11 @@ config REMOTEPROC_TI_IPU
+ 	help
+ 	  Say 'y' here to add support for TI' K3 remoteproc driver.
+ 
++config REMOTEPROC_MAX_FW_SIZE
++	hex "Maximum size of firmware file that needs to be loaded to the remote processor"
++	default 0x10000
++	help
++	  Maximum size of the firmware file (elf, binary) that needs to be
++	  loaded to the remote processor.
++
+ endmenu
+diff --git a/drivers/remoteproc/rproc-uclass.c b/drivers/remoteproc/rproc-uclass.c
+index 28b362c887..aa7f7586a8 100644
+--- a/drivers/remoteproc/rproc-uclass.c
++++ b/drivers/remoteproc/rproc-uclass.c
+@@ -13,6 +13,7 @@
+ #include <log.h>
+ #include <malloc.h>
+ #include <virtio_ring.h>
++#include <fs_loader.h>
+ #include <remoteproc.h>
+ #include <asm/io.h>
+ #include <dm/device-internal.h>
+@@ -961,3 +962,106 @@ unsigned long rproc_parse_resource_table(struct udevice *dev, struct rproc *cfg)
+ 
+ 	return 1;
+ }
++
++int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
++{
++	struct dm_rproc_uclass_pdata *uc_pdata;
++	int len;
++	char *p;
++
++	if (!rproc_dev || !fw_name)
++		return -EINVAL;
++
++	uc_pdata = dev_get_uclass_plat(rproc_dev);
++	if (!uc_pdata)
++		return -EINVAL;
++
++	len = strcspn(fw_name, "\n");
++	if (!len) {
++		debug("invalid firmware name\n");
++		return -EINVAL;
++	}
++
++	if (uc_pdata->fw_name)
++		free(uc_pdata->fw_name);
++
++	p = strndup(fw_name, len);
++	if (!p)
++		return -ENOMEM;
++
++	uc_pdata->fw_name = p;
++
++	return 0;
++}
++
++#if CONFIG_IS_ENABLED(FS_LOADER)
++int rproc_boot(struct udevice *rproc_dev)
++{
++	struct dm_rproc_uclass_pdata *uc_pdata;
++	struct udevice *fs_loader;
++	int core_id, ret = 0;
++	char *firmware;
++	void *addr;
++
++	if (!rproc_dev)
++		return -EINVAL;
++
++	uc_pdata = dev_get_uclass_plat(rproc_dev);
++	if (!uc_pdata)
++		return -EINVAL;
++
++	core_id = dev_seq(rproc_dev);
++	firmware = uc_pdata->fw_name;
++	if (!firmware) {
++		debug("No firmware name set for rproc core %d\n", core_id);
++		return -EINVAL;
++	}
++
++	/* Initialize all rproc cores */
++	if (!rproc_is_initialized()) {
++		ret = rproc_init();
++		if (ret) {
++			debug("rproc_init() failed: %d\n", ret);
++			return ret;
++		}
++	}
++
++	/* Loading firmware to a given address */
++	ret = get_fs_loader(&fs_loader);
++	if (ret) {
++		debug("could not get fs loader: %d\n", ret);
++		return ret;
++	}
++
++	if (CONFIG_REMOTEPROC_MAX_FW_SIZE) {
++		addr = malloc(CONFIG_REMOTEPROC_MAX_FW_SIZE);
++		if (!addr)
++			return -ENOMEM;
++	} else {
++		debug("CONFIG_REMOTEPROC_MAX_FW_SIZE not defined\n");
++		return -EINVAL;
++	}
++
++	ret = request_firmware_into_buf(fs_loader, firmware, addr, CONFIG_REMOTEPROC_MAX_FW_SIZE,
++					0);
++	if (ret < 0) {
++		debug("could not request %s: %d\n", firmware, ret);
++		goto free_buffer;
++	}
++
++	ret = rproc_load(core_id, (ulong)addr, ret);
++	if (ret) {
++		debug("failed to load %s to rproc core %d from addr 0x%08lX err %d\n",
++		      uc_pdata->fw_name, core_id, (ulong)addr, ret);
++		goto free_buffer;
++	}
++
++	ret = rproc_start(core_id);
++	if (ret)
++		debug("failed to start rproc core %d\n", core_id);
++
++free_buffer:
++	free(addr);
++	return ret;
++}
++#endif
+diff --git a/include/remoteproc.h b/include/remoteproc.h
+index 91a88791a4..6f8068e149 100644
+--- a/include/remoteproc.h
++++ b/include/remoteproc.h
+@@ -403,6 +403,7 @@ enum rproc_mem_type {
+  * @name: Platform-specific way of naming the Remote proc
+  * @mem_type: one of 'enum rproc_mem_type'
+  * @driver_plat_data: driver specific platform data that may be needed.
++ * @fw_name: firmware name
+  *
+  * This can be accessed with dev_get_uclass_plat() for any UCLASS_REMOTEPROC
+  * device.
+@@ -412,6 +413,7 @@ struct dm_rproc_uclass_pdata {
+ 	const char *name;
+ 	enum rproc_mem_type mem_type;
+ 	void *driver_plat_data;
++	char *fw_name;
+ };
+ 
+ /**
+@@ -705,6 +707,34 @@ unsigned long rproc_parse_resource_table(struct udevice *dev,
+ struct resource_table *rproc_find_resource_table(struct udevice *dev,
+ 						 unsigned int addr,
+ 						 int *tablesz);
++/**
++ * rproc_set_firmware() - assign a new firmware name
++ * @rproc_dev: device for which new firmware name is being assigned
++ * @fw_name: new firmware name to be assigned
++ *
++ * This function allows remoteproc drivers or clients to configure a custom
++ * firmware name. The function does not trigger a remote processor boot,
++ * only sets the firmware name used for a subsequent boot.
++ *
++ * This function sets the fw_name field in uclass pdata of the Remote proc
++ *
++ * Return: 0 on success or a negative value upon failure
++ */
++int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name);
++
++/**
++ * rproc_boot() - boot a remote processor
++ * @rproc_dev: rproc device to boot
++ *
++ * Boot a remote processor (i.e. load its firmware, power it on, ...).
++ *
++ * This function first loads the firmware set in the uclass pdata of Remote
++ * processor to a buffer and then loads firmware to the remote processor
++ * using rproc_load().
++ *
++ * Return: 0 on success, and an appropriate error value otherwise
++ */
++int rproc_boot(struct udevice *rproc_dev);
+ #else
+ static inline int rproc_init(void) { return -ENOSYS; }
+ static inline int rproc_dev_init(int id) { return -ENOSYS; }
+@@ -744,6 +774,10 @@ static inline int rproc_elf_load_rsc_table(struct udevice *dev, ulong fw_addr,
+ 					   ulong fw_size, ulong *rsc_addr,
+ 					   ulong *rsc_size)
+ { return -ENOSYS; }
++static inline int rproc_set_firmware(struct udevice *rproc_dev, const char *fw_name)
++{ return -ENOSYS; }
++static inline int rproc_boot(struct udevice *rproc_dev)
++{ return -ENOSYS; }
+ #endif
+ 
+ #endif	/* _RPROC_H_ */
+
+base-commit: e50cb36cb5e772d5bbd30d070faedf7323406364
+-- 
+2.34.1
+
