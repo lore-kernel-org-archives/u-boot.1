@@ -4,73 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7577C47DD9
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 07:13:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 237CAC47DD9
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 07:41:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A60187D9C;
-	Fri, 22 Mar 2024 08:13:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 52EED8812B;
+	Fri, 22 Mar 2024 08:41:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="IMwmBVLw";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="R9WC5iVt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E12808816D; Fri, 22 Mar 2024 08:13:37 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id D00C78816D; Fri, 22 Mar 2024 08:41:50 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56A3887D08
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 08:13:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DBB6E8785E
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 08:41:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-dc74435c428so1780929276.2
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 00:13:35 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-414783a9edcso6608385e9.0
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 00:41:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1711091614; x=1711696414;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1711093307; x=1711698107;
  darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CQLg1hHCJgE51MVpbR8H3xo6x6btlliJjzZZkbywji8=;
- b=IMwmBVLw/+WaWH4+vurHMq/2rJKTq/of1V0GrjERYvuxh9SLwMG+1l64EXk3M8pJWJ
- shKeWw4PUcjzR1W4W9RuEUExaplsYDZGqJ3OouvJ4xb+JaiXsiK/WxaydHALMzXZMPF/
- rUDX2ES2ngafZ9qI0aAMReXWis0cD8jHKsE9br98IwKSwDhrtWYcj5C6/ft/vjI4OxkL
- 9OsC3YYIc/eYlgQlgumuPcVRJYqwO/4tQhKdnYllu/t/zZ66cclkbtYA44j1Syo9FbRq
- 9zVz42pjpHZze/VTh19uompMPzKh7tJHvG0g5n4IKP5jaFTEYju4hqyUoH6wwNE+eFbA
- XqbQ==
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=khprt74GVPjvor8YqhCtfzPtGKt5rVNGCMex01JSw78=;
+ b=R9WC5iVt3ns6K+EiHyAuZz8KaD4Z391X9bzpTJQtPBQrq+WUkzTymmmORuW4l5QALE
+ BT3wcKw+vOX8JkmfhKTxpSIDQLMnv/RcSVOLYWuCfEhRUmhwWawFAnkbMHBJhxchSu/c
+ dUrfquwmUKAaT4YfxHJZglB7nTEl2/BYpC4RxDK7A5IFI/IpN2LVjNy10b35r1lCCFKg
+ dpnplwmIUeTykgol9VhdoyboKyVSKoTYZDPHloLTvZrovI2kVTQ5TN98c2xfo/PkAzND
+ OK775EScF3iOQia0UptvQEgF93G6+V1oWnGZNegc9VREtKGrbeOlhHClnrelSHPhPByb
+ snhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711091614; x=1711696414;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CQLg1hHCJgE51MVpbR8H3xo6x6btlliJjzZZkbywji8=;
- b=eJnfxHh3kIyp+dD0bAbmuM4iddmLeqYOuWP4khdUpyu89/BOkgmO+t3TewqWoKsLqH
- 5ZjUmujySlFdbqA13Lz0tm5Zr3K+e2WVbK9jG/7DsGwG12w2MUYX57ow6jz7WAP6CAwi
- RnZnB5kpauoqrIczflPy0GWcLqddgaOfvAmWamuogYbsalIQkh33KmMfQnFSIPC/BPNz
- btwL/+KDTA1jDh8AA5/9btrcxOBxkU/RxbeiCqy1lWbRgFef1qBsZTktS9xStlrcHVDq
- lCdPJ7rFd60Z/5izACvwgmPa6zs/3ZnMnSF6+9C2sqf+lFqIpJtGCeaTued0psbVZ6SM
- GcWA==
-X-Gm-Message-State: AOJu0YxIrpf5UV3Ru20FvdQF4CORxhoYv5MwjdwcuOu/4cKE0B/oWrzC
- j97NQrhoO0IJdJSrC/T/rg3vKwMuW6Y7KpydiB6StfCAu91J9gq390VRNl2/mLmJXNueqC/PBoy
- VlPoNxSmTLeaHqUtw7OIxyVPtrg1XQvVCo2KT
-X-Google-Smtp-Source: AGHT+IH/LKzCTKLfxxH+hPVQtkcVu9Yr9FmC9OfLLFQ7P/RNKmCPUT4dm/7LXrjIZltW4zNlyLxQvEYDpoF4V7uZUdY=
-X-Received: by 2002:a25:aa26:0:b0:dcd:5e5d:4584 with SMTP id
- s35-20020a25aa26000000b00dcd5e5d4584mr1376465ybi.34.1711091614064; Fri, 22
- Mar 2024 00:13:34 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1711093307; x=1711698107;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=khprt74GVPjvor8YqhCtfzPtGKt5rVNGCMex01JSw78=;
+ b=CwixwfaYXNzbEQH5RrWEkcm1pwzkT0Qk+I20DJXN130ykWCqjDeLkUzGwFH5ZrMtLq
+ eK61DhPlh1e9tlTBmp3r/TqahhzAsCP55Y55hMoZOpdTk8kRe6YrZvBm5BOda2tx0Zes
+ KLkb2lI45p98LIuj/f1D9PS6yIj0eLGYhErVFenVRqLII1I7bC+H7RlQadqj98RlFCN8
+ pL/ZIucK3xl16+HcR3H6TUY+PomS7V8ePJelqmy+/nYcAQXtMOXSQRF5Y7JHielThEmZ
+ yvrD5NOWFMlKX0wCnmHnjnuHaT+c+pAH+hxx/PQW4dVFPIORjoHE2hlQU8WHyfuGXMh6
+ WVoQ==
+X-Gm-Message-State: AOJu0Ywqaej3ICTq4igTFlRBZrbJG5UP7019xM03LMAz6n09rY+H3Yjw
+ SyzxCNklEEx1gCww+lZnJYYWizyHBiMoyKnUs2DBq01mI6IayU34/tFmhgTEmUE=
+X-Google-Smtp-Source: AGHT+IFPzSkvhjUVYAs0mWFdTP8PjyJuR0Nmr8jRR+3VOQTzEgSyK/BozDpbH4a0eO/smBHzSp1ixA==
+X-Received: by 2002:a05:600c:4808:b0:414:bfd:379d with SMTP id
+ i8-20020a05600c480800b004140bfd379dmr947017wmo.22.1711093307306; 
+ Fri, 22 Mar 2024 00:41:47 -0700 (PDT)
+Received: from [192.168.2.43] ([82.66.159.240])
+ by smtp.gmail.com with ESMTPSA id
+ j8-20020a05600c1c0800b004146bcdde06sm2236027wms.6.2024.03.22.00.41.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Mar 2024 00:41:46 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: u-boot@lists.denx.de, Colin McAllister <colinmca242@gmail.com>
+Cc: JPEWhacker@gmail.com, sjg@chromium.org, 
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>
+In-Reply-To: <20240312125729.82695-1-colinmca242@gmail.com>
+References: <20240312125729.82695-1-colinmca242@gmail.com>
+Subject: Re: [PATCH v4 0/2] Fix Android A/B backup
+Message-Id: <171109330664.31490.12829512827307130001.b4-ty@baylibre.com>
+Date: Fri, 22 Mar 2024 08:41:46 +0100
 MIME-Version: 1.0
-References: <20240319165131.1651802-1-trini@konsulko.com>
-In-Reply-To: <20240319165131.1651802-1-trini@konsulko.com>
-From: Michal Simek <monstr@monstr.eu>
-Date: Fri, 22 Mar 2024 08:13:22 +0100
-Message-ID: <CAHTX3dKSZ4zwVQhzfNdtWbVbWD4giMizb+_dVF=m4TbWQumFTg@mail.gmail.com>
-Subject: Re: [PATCH] scripts/Makefile.spl: Use 'sort' in SHRUNK_ARCH_DTB rule
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.12.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,49 +95,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=C3=BAt 19. 3. 2024 v 17:51 odes=C3=ADlatel Tom Rini <trini@konsulko.com> n=
-apsal:
+Hi,
 
-> With configs such as "am64x_evm_a53" or "imx8mp_venice" which list
-> multiple device trees to build we get a warning such as:
-> scripts/Makefile.spl:578: target 'spl/dts/freescale/' given more than onc=
-e
-> in the same rule
->
-> If we sort this list first the warning goes away.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
->  scripts/Makefile.spl | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/scripts/Makefile.spl b/scripts/Makefile.spl
-> index d074ba235006..60db38d5bddd 100644
-> --- a/scripts/Makefile.spl
-> +++ b/scripts/Makefile.spl
-> @@ -575,7 +575,7 @@ endif
->
->  SPL_OF_LIST_TARGETS =3D $(patsubst %,dts/%.dtb,$(subst
-> ",,$(CONFIG_SPL_OF_LIST)))
->  SHRUNK_ARCH_DTB =3D $(addprefix $(obj)/,$(SPL_OF_LIST_TARGETS))
-> -$(dir $(SHRUNK_ARCH_DTB)):
-> +$(sort $(dir $(SHRUNK_ARCH_DTB))):
->         $(shell [ -d $@ ] || mkdir -p $@)
->
->  .SECONDEXPANSION:
-> --
-> 2.34.1
->
->
-The same issue also for zynqmp.
-Tested-by: Michal Simek <michal.simek@amd.com>
+On Tue, 12 Mar 2024 07:57:27 -0500, Colin McAllister wrote:
+> - Addresses compiler error due to missing semicolon
+> - Removes use of preprocessor macros with ANDROID_AB_BACKUP_OFFSET
+> 
+> Bug was found by noticing a semicolon was missing and not causing a
+> compiler error when CONFIG_ANDROID_AB_BACKUP_OFFSET was set. I submitted
+> a patch to fix the semicolon before fixing the #if's. Testing the latter
+> patch without the former with ANDORID_AB_BACKUP_OFFSET set will cause a
+> compiler error.
+> 
+> [...]
 
-Thanks,
-Michal
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
---=20
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
+[1/2] android_ab: Add missing semicolon
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/c044f89bb0c2683bcb14006b697ee6db2240f00d
+[2/2] android_ab: Fix ANDROID_AB_BACKUP_OFFSET
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/026e0cd31278bcafcfb35d21478a94fc5072f78c
+
+--
+Mattijs
