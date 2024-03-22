@@ -4,79 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09825C54E71
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:41:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51E0FC47DD9
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:43:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8176D881C7;
-	Fri, 22 Mar 2024 12:41:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B0255881E0;
+	Fri, 22 Mar 2024 12:43:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V5XQcgTU";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 71EF1881C9; Fri, 22 Mar 2024 12:41:37 +0100 (CET)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1711107815;
+	bh=aQ18ucHHsrnEOmsZVUn30gOFLplg7XwVwLRdc9RGvvc=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=apsl1QhCHN/FLktemQYQLPju88fntSIFw8XXXWmYhsEGynCC6cEeB76mtl6qGl0wU
+	 eTmNYo7tBg4nm9nBzP8ugxcixdzXjwz2jc6pMRC+3iccmUd5Q/NqWvqNGH8yPDxgtG
+	 +iJdqsnyMw5uhfv+zWvSFc81S3/WeiIereTMce5jvVe4R8tUtj0lDMZNOwEOQWityW
+	 d2wK3qiRVB5WMkZdCe+cJcdYSUVKFLjgJZnf5O8M4tkFQGtXMjSocJJFT06wboIUkK
+	 ZyVKXLo1sGUwLrM0kyOWOK2r7M3F9D5JL2woO485xdItT4a80u68oPykM4QgT7VfI6
+	 h0XB0uLMm4jIA==
+Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
+ [85.222.111.42])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F25B587B82
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 12:41:34 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2d4886a1cb4so27353061fa.0
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 04:41:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711107694; x=1711712494; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gUOGi7KIZOBF/veAZVf6YXkDFe19hHGBz0hzmc5vW9s=;
- b=V5XQcgTUhcu+Dr+qinM4s1F50J2eRTahc8xutQkoKjdS+qLdbUDCm59a5gWUanSFXR
- gm9U2mF/1XZ8AEsnnnWfHLlbD9bzByjF2NxUoBij/Dtz3SyTH1WydHZzdYzrabAVeuW8
- nEPrfuS+lAMc+Apfslj5QUq8OqLDISpTNiqUiGWwDSFtYuhkwp/PthmCgYXFYiwOQaeU
- lgS0QC23kAmInjjEbWL0Zmbpbsr8e2QVrwpgt9MFJXB9MFFbvXDekXYf0NUFRfqRcZmy
- q44AsfLkHoA6GK/RL7kk3iCAZBNSYkNDZfcl5SohqCQxBf4vHXgK6IruT6wyGIxl2a5c
- DLRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711107694; x=1711712494;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=gUOGi7KIZOBF/veAZVf6YXkDFe19hHGBz0hzmc5vW9s=;
- b=rmIXhqu3xuWfKa4EoxJgYWazbpuxEZS38rwT5Im5zJLDECSSb2oMGiTDEnMXvUuXkj
- pMWDJrkwUInSBO2o4U+iauOCXaYwogojf6aY2PWe4tvakVg9VY1Q3bhpHZ2Ct/9dYLG7
- mf8lyk/7+Ll4Se4VdEeZu7fCGsbw07xQuZsz+McvCv+xVwc+Dsc9IvLkB+Uj2CIpJCWh
- mwyb0GQc6Iu6phwH2gtzBiJ7QQC4+26dlnrrRyQy9R4yo01NeM91qzUEGIi9J9Uvw2qy
- 0LsV/wiIyOJ0gK0pyJqlI+qxqqCnKSwyKRZtMY03fX57KALA7lBLrZxjwyck+T3kL9uI
- /W+w==
-X-Gm-Message-State: AOJu0YxuLKkdJIIQ9nj8abXrnmUs8/DKCrXkur6I+ERo4cJ2px3TySws
- KavWn6eMsUW90734+m55lSaUEykLDuV0MjBs8C1PhAhhTWmLBK1tcaa4EvNBXf//XlOeKNVgnV6
- y9/iS46UwEg0c/1LzHBGAxYVyfO577giK2pk10Q==
-X-Google-Smtp-Source: AGHT+IFKogZkcLAOTEFqFrYDIsKXo72RQlDeDRjVeyo/CyaAM/J8ani2na2AcqC/cNSA9wXFPrY+3ZCd2c7uVgJ4GsY=
-X-Received: by 2002:a05:651c:214:b0:2d5:7798:4efc with SMTP id
- y20-20020a05651c021400b002d577984efcmr1632658ljn.9.1711107693937; Fri, 22 Mar
- 2024 04:41:33 -0700 (PDT)
+ (Authenticated sender: lukma@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id DACDA881DB;
+ Fri, 22 Mar 2024 12:43:33 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1711107814;
+ bh=aQ18ucHHsrnEOmsZVUn30gOFLplg7XwVwLRdc9RGvvc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=j9FZ2vQm2Dq6x8XbT8kWKmIIg2ZNT1NYWd11pAPQ7+C0c9rN/0sZ8PXU0BA68xki3
+ /b+RYkULnejvJNcFnrZ7lfHAiR5hgSt9nhkg4DEmqcd5I3+0ntn3hEANt5nmwRwHkn
+ iU53E/uCLHayhImO4dnmvU/5WpYaRr9uXpk7G01927k69mKDz06Z94IUfjhMlF1NMu
+ jI3cKX2RC0Bm719JoOhioZTVRbHyFDr3I3LoJ9tuVLBafDu3pcRUMJ3YIDDtcmges+
+ tgp2hyt+bBJPiM1vBCigq8vst+EE0/0VWb3PYQ0+XAT+DtiTTDFSb5MSBIgaalnKjH
+ gRe29UIH7mfCg==
+From: Lukasz Majewski <lukma@denx.de>
+To: Stefano Babic <sbabic@denx.de>,
+	u-boot@lists.denx.de
+Cc: Lukasz Majewski <lukma@denx.de>, Anatolij Gustschin <agust@denx.de>,
+ Christian Hewitt <christianshewitt@gmail.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, Fabio Estevam <festevam@gmail.com>,
+ Hai Pham <hai.pham.ud@renesas.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>,
+ Mathieu Othacehe <othacehe@gnu.org>, Michal Simek <michal.simek@amd.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 00/12] arm: xea: Provide support for different XEA board HW
+ versions
+Date: Fri, 22 Mar 2024 12:43:03 +0100
+Message-Id: <20240322114315.2720727-1-lukma@denx.de>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-References: <20240322105733.203888-1-sughosh.ganu@linaro.org>
- <20240322105733.203888-2-sughosh.ganu@linaro.org>
-In-Reply-To: <20240322105733.203888-2-sughosh.ganu@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 22 Mar 2024 13:40:57 +0200
-Message-ID: <CAC_iWjJYH4Az-1_T6=qTFRA5yAUZvsZWqc6k7yusmdg5FvrrNg@mail.gmail.com>
-Subject: Re: [PATCH v3 01/20] configs: fwu: remove FWU configs for metadata V2
- support
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Yann GAUTIER <yann.gautier@st.com>,
- Etienne Carriere <etienne.carriere@foss.st.com>, 
- Patrick DELAUNAY - foss <patrick.delaunay@foss.st.com>,
- Michal Simek <michal.simek@amd.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Michal Simek <monstr@monstr.eu>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,84 +75,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 22 Mar 2024 at 12:58, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> Support is to be added in the following commits for the FWU metadata
-> version 2. Disable the FWU feature on platforms that enable it for the
-> V2 addition work.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
-> Changes since V2: None
->
->  configs/corstone1000_defconfig           | 2 --
->  configs/sandbox64_defconfig              | 1 -
->  configs/synquacer_developerbox_defconfig | 4 ----
->  3 files changed, 7 deletions(-)
->
-> diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
-> index 8b2f77f648..29d7550afb 100644
-> --- a/configs/corstone1000_defconfig
-> +++ b/configs/corstone1000_defconfig
-> @@ -24,7 +24,6 @@ CONFIG_LOGLEVEL=7
->  CONFIG_BOARD_LATE_INIT=y
->  CONFIG_SYS_PROMPT="corstone1000# "
->  # CONFIG_CMD_CONSOLE is not set
-> -CONFIG_CMD_FWU_METADATA=y
->  CONFIG_CMD_BOOTZ=y
->  # CONFIG_CMD_XIMG is not set
->  CONFIG_CMD_GPT=y
-> @@ -67,4 +66,3 @@ CONFIG_FFA_SHARED_MM_BUF_OFFSET=0
->  CONFIG_FFA_SHARED_MM_BUF_ADDR=0x02000000
->  CONFIG_EFI_CAPSULE_ON_DISK=y
->  CONFIG_EFI_IGNORE_OSINDICATIONS=y
-> -CONFIG_FWU_MULTI_BANK_UPDATE=y
-> diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-> index 3be9a00a85..7e8200e70c 100644
-> --- a/configs/sandbox64_defconfig
-> +++ b/configs/sandbox64_defconfig
-> @@ -272,7 +272,6 @@ CONFIG_EFI_CAPSULE_ON_DISK=y
->  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
->  CONFIG_EFI_SECURE_BOOT=y
->  CONFIG_TEST_FDTDEC=y
-> -CONFIG_FWU_MULTI_BANK_UPDATE=y
->  CONFIG_UNIT_TEST=y
->  CONFIG_UT_TIME=y
->  CONFIG_UT_DM=y
-> diff --git a/configs/synquacer_developerbox_defconfig b/configs/synquacer_developerbox_defconfig
-> index 2a0407de40..616d410074 100644
-> --- a/configs/synquacer_developerbox_defconfig
-> +++ b/configs/synquacer_developerbox_defconfig
-> @@ -11,14 +11,12 @@ CONFIG_DM_GPIO=y
->  CONFIG_DEFAULT_DEVICE_TREE="synquacer-sc2a11-developerbox"
->  CONFIG_SYS_LOAD_ADDR=0x80000000
->  CONFIG_TARGET_DEVELOPERBOX=y
-> -CONFIG_FWU_NUM_IMAGES_PER_BANK=1
->  CONFIG_AHCI=y
->  CONFIG_FIT=y
->  CONFIG_SYS_BOOTM_LEN=0x800000
->  CONFIG_BOOTSTAGE_STASH_SIZE=4096
->  CONFIG_HUSH_PARSER=y
->  CONFIG_SYS_MAXARGS=128
-> -CONFIG_CMD_FWU_METADATA=y
->  CONFIG_CMD_IMLS=y
->  CONFIG_CMD_ERASEENV=y
->  CONFIG_CMD_NVEDIT_EFI=y
-> @@ -53,7 +51,6 @@ CONFIG_DFU_TFTP=y
->  CONFIG_DFU_MTD=y
->  CONFIG_DFU_RAM=y
->  CONFIG_DFU_SF=y
-> -CONFIG_FWU_MDATA_MTD=y
->  CONFIG_DM_I2C=y
->  CONFIG_SYS_I2C_SYNQUACER=y
->  CONFIG_MMC_SDHCI=y
-> @@ -96,4 +93,3 @@ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
->  CONFIG_EFI_CAPSULE_ON_DISK=y
->  CONFIG_EFI_IGNORE_OSINDICATIONS=y
->  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-> -CONFIG_FWU_MULTI_BANK_UPDATE=y
-> --
-> 2.34.1
->
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+This patch set provides support for different XEA board revisions.
+Due to very limited SPL size, the board's switch DTB decision is
+performed very early in u-boot proper; before driver model is set.
+
+Adjustments for DTS between revisions are for the u-boot adjustment code
+(i.e. tweaks due to functionality not supported in u-boot), hence
+there is no need to update them from Linux upstream DTS.
+
+
+Lukasz Majewski (12):
+  arm: spl: xea: Remove I2S pins configuration from early initialization
+  arm: xea: Add support for reading SoM (CPU) and base board HW revision
+  arm: xea: Rename imx28-xea.dts to imx28-xea-1.dts
+  dts: xea: Move phy-reset-gpios property to version specific DTS file
+  dts: xea: Remove outdated comment
+  arm: xea: Add support for multiple dtbs in u-boot
+  dts: xea: Add device tree description for XEA HW rev. 2
+  arm: spl: Add definition for PHY reset GPIO for XEA HW rev. 2
+  arm: config: xea: Enable support for multiple DTBs for XEA board
+  config: xea: Enable late board initialization to set revision variable
+  arm: xea: Print information about XEA's SoM HW revision
+  arm: env: Add support for booting different HW revisions of XEA boards
+
+ arch/arm/dts/Makefile                         |  3 +-
+ arch/arm/dts/imx28-xea-1-u-boot.dtsi          | 11 ++++
+ arch/arm/dts/imx28-xea-1.dts                  |  8 +++
+ arch/arm/dts/imx28-xea-2-u-boot.dtsi          | 11 ++++
+ arch/arm/dts/imx28-xea-2.dts                  |  8 +++
+ arch/arm/dts/imx28-xea-u-boot.dtsi            |  1 -
+ .../arm/dts/{imx28-xea.dts => imx28-xea.dtsi} |  0
+ board/liebherr/xea/spl_xea.c                  | 21 +++---
+ board/liebherr/xea/xea.c                      | 65 +++++++++++++++++++
+ board/liebherr/xea/xea.env                    |  4 +-
+ configs/imx28_xea_defconfig                   |  5 +-
+ configs/imx28_xea_sb_defconfig                |  5 +-
+ 12 files changed, 128 insertions(+), 14 deletions(-)
+ create mode 100644 arch/arm/dts/imx28-xea-1-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx28-xea-1.dts
+ create mode 100644 arch/arm/dts/imx28-xea-2-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx28-xea-2.dts
+ rename arch/arm/dts/{imx28-xea.dts => imx28-xea.dtsi} (100%)
+
+-- 
+2.39.2
+
