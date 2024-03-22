@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A7CDC47DD9
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:01:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FB83C47DD9
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:02:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8220288208;
-	Fri, 22 Mar 2024 11:59:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ECFAE88210;
+	Fri, 22 Mar 2024 11:59:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F1788820F; Fri, 22 Mar 2024 11:59:10 +0100 (CET)
+ id A5FD488209; Fri, 22 Mar 2024 11:59:13 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 3C68B8817E
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 11:59:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 35F8088201
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 11:59:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C7F891007;
- Fri, 22 Mar 2024 03:59:37 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C8FFC1691;
+ Fri, 22 Mar 2024 03:59:44 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AC7373F64C;
- Fri, 22 Mar 2024 03:59:00 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AEAD23F64C;
+ Fri, 22 Mar 2024 03:59:07 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -36,10 +36,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Michal Simek <monstr@monstr.eu>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 16/20] tools: mkfwumdata: add logic to append vendor data
- to the FWU metadata
-Date: Fri, 22 Mar 2024 16:27:29 +0530
-Message-Id: <20240322105733.203888-17-sughosh.ganu@linaro.org>
+Subject: [PATCH v3 18/20] doc: fwu: make changes to reflect support for FWU
+ metadata v2
+Date: Fri, 22 Mar 2024 16:27:31 +0530
+Message-Id: <20240322105733.203888-19-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240322105733.203888-1-sughosh.ganu@linaro.org>
 References: <20240322105733.203888-1-sughosh.ganu@linaro.org>
@@ -61,274 +61,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The version 2 of the FWU metadata allows for appending opaque vendor
-specific data to the metadata structure. Add support for appending
-this data to the metadata. The vendor specific data needs to be
-provided through a file, passed through a command-line parameter. Make
-corresponding changes to the tool's manpage.
+The FWU Update Agent in U-Boot supports both versions of the FWU
+metadata. Make changes in the documentation to reflect this.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V2:
-* Added documentation changes.
+* Changes to indicate support for both v1 and v2 instead of only v2.
 
- doc/mkfwumdata.1   |  7 ++++
- tools/mkfwumdata.c | 99 +++++++++++++++++++++++++++++++++++++++-------
- 2 files changed, 91 insertions(+), 15 deletions(-)
+ doc/board/socionext/developerbox.rst |  7 +++++--
+ doc/develop/uefi/fwu_updates.rst     | 20 +++++++++++++++-----
+ 2 files changed, 20 insertions(+), 7 deletions(-)
 
-diff --git a/doc/mkfwumdata.1 b/doc/mkfwumdata.1
-index 5e61c615ea..2ed0fb100b 100644
---- a/doc/mkfwumdata.1
-+++ b/doc/mkfwumdata.1
-@@ -10,6 +10,7 @@ mkfwumdata \- create FWU metadata image
- .OP \-a activeidx
- .OP \-p previousidx
- .OP \-g
-+.OP \-V vendor-file
- .BI \-i\~ imagecount
- .BI \-b\~ bankcount
- .I UUIDs
-@@ -57,6 +58,12 @@ Convert the
- as GUIDs before use.
- .
- .TP
-+.B \-V
-+Pass
-+.IR vendor-file
-+for appending vendor data to the metadata. Supported only with version 2.
-+.
-+.TP
- .B \-i
- Specify there are
- .IR imagecount
-diff --git a/tools/mkfwumdata.c b/tools/mkfwumdata.c
-index 634453d421..fbc2067bc1 100644
---- a/tools/mkfwumdata.c
-+++ b/tools/mkfwumdata.c
-@@ -12,6 +12,8 @@
- #include <string.h>
- #include <unistd.h>
- #include <generated/autoconf.h>
-+#include <sys/types.h>
-+#include <sys/stat.h>
- #include <u-boot/crc.h>
- #include <uuid/uuid.h>
+diff --git a/doc/board/socionext/developerbox.rst b/doc/board/socionext/developerbox.rst
+index 46712c379b..863761c6e2 100644
+--- a/doc/board/socionext/developerbox.rst
++++ b/doc/board/socionext/developerbox.rst
+@@ -116,6 +116,7 @@ configs/synquacer_developerbox_defconfig enables default FWU configuration ::
+  CONFIG_FWU_NUM_BANKS=2
+  CONFIG_FWU_NUM_IMAGES_PER_BANK=1
+  CONFIG_CMD_FWU_METADATA=y
++ CONFIG_FWU_MDATA_V2=y
  
-@@ -36,9 +38,7 @@ typedef uint64_t u64;
+ And build it::
  
- #include <fwu_mdata.h>
+@@ -129,7 +130,9 @@ And build it::
+ By default, the CONFIG_FWU_NUM_BANKS and CONFIG_FWU_NUM_IMAGES_PER_BANKS are
+ set to 2 and 1 respectively. This uses FIP (Firmware Image Package) type image
+ which contains TF-A, U-Boot and OP-TEE (the OP-TEE is optional).
+-You can use fiptool to compose the FIP image from those firmware images.
++You can use fiptool to compose the FIP image from those firmware
++images. There are two versions of the FWU metadata, of which the
++platform enables version 2 by default.
  
--/* TODO: Endianness conversion may be required for some arch. */
--
--static const char *opts_short = "b:i:a:p:v:gh";
-+static const char *opts_short = "b:i:a:p:v:V:gh";
+ Rebuild SCP firmware
+ --------------------
+@@ -194,7 +197,7 @@ following UUIDs.
  
- static struct option options[] = {
- 	{"banks", required_argument, NULL, 'b'},
-@@ -47,6 +47,7 @@ static struct option options[] = {
- 	{"active-bank", required_argument, NULL, 'a'},
- 	{"previous-bank", required_argument, NULL, 'p'},
- 	{"version", required_argument, NULL, 'v'},
-+	{"vendor-file", required_argument, NULL, 'V'},
- 	{"help", no_argument, NULL, 'h'},
- 	{NULL, 0, NULL, 0},
- };
-@@ -61,6 +62,7 @@ static void print_usage(void)
- 		"\t-a, --active-bank  <num>    Active bank (default=0)\n"
- 		"\t-p, --previous-bank  <num>  Previous active bank (default=active_bank - 1)\n"
- 		"\t-g, --guid                  Use GUID instead of UUID\n"
-+		"\t-V, --vendor-file           Vendor data file to append to the metadata\n"
- 		"\t-h, --help                  print a help message\n"
- 		);
- 	fprintf(stderr, "  UUIDs list syntax:\n"
-@@ -80,6 +82,8 @@ struct fwu_mdata_object {
- 	size_t banks;
- 	size_t size;
- 	u8 version;
-+	size_t vsize;
-+	void *vbuf;
- 	struct fwu_mdata *mdata;
- };
+ These UUIDs are used for making a FWU metadata image.
  
-@@ -98,7 +102,7 @@ static bool supported_mdata_version(unsigned long version)
- }
+-u-boot$ ./tools/mkfwumdata -i 1 -b 2 \
++u-boot$ ./tools/mkfwumdata -v 2 -i 1 -b 2 \
+ 	17e86d77-41f9-4fd7-87ec-a55df9842de5,10c36d7d-ca52-b843-b7b9-f9d6c501d108,5a66a702-99fd-4fef-a392-c26e261a2828,a8f868a1-6e5c-4757-878d-ce63375ef2c0 \
+ 	../devbox-fwu-mdata.img
  
- static struct fwu_mdata_object *fwu_alloc_mdata(size_t images, size_t banks,
--						u8 version)
-+						u8 version, size_t vendor_size)
- {
- 	struct fwu_mdata_object *mobj;
+diff --git a/doc/develop/uefi/fwu_updates.rst b/doc/develop/uefi/fwu_updates.rst
+index e4709d82b4..51e8a28efe 100644
+--- a/doc/develop/uefi/fwu_updates.rst
++++ b/doc/develop/uefi/fwu_updates.rst
+@@ -46,6 +46,8 @@ The feature can be enabled by specifying the following configs::
+     CONFIG_FWU_NUM_BANKS=<val>
+     CONFIG_FWU_NUM_IMAGES_PER_BANK=<val>
  
-@@ -115,6 +119,9 @@ static struct fwu_mdata_object *fwu_alloc_mdata(size_t images, size_t banks,
- 			sizeof(struct fwu_fw_store_desc) +
- 			(sizeof(struct fwu_image_entry) +
- 			 sizeof(struct fwu_image_bank_info) * banks) * images;
++    CONFIG_FWU_MDATA_V1=y or CONFIG_FWU_MDATA_V2=y
 +
-+		mobj->size += vendor_size;
-+		mobj->vsize = vendor_size;
- 	}
+ in the .config file
  
- 	mobj->images = images;
-@@ -122,12 +129,21 @@ static struct fwu_mdata_object *fwu_alloc_mdata(size_t images, size_t banks,
- 	mobj->version = version;
+ By enabling the CONFIG_CMD_FWU_METADATA config option, the
+@@ -58,6 +60,14 @@ enable the FWU Multi Bank Update functionality. Please refer to the
+ section :ref:`uefi_capsule_update_ref` for more details on generation
+ of the UEFI capsule.
  
- 	mobj->mdata = calloc(1, mobj->size);
--	if (!mobj->mdata) {
--		free(mobj);
--		return NULL;
-+	if (!mobj->mdata)
-+		goto alloc_err;
++FWU Metadata
++------------
 +
-+	if (vendor_size) {
-+		mobj->vbuf = calloc(1, mobj->vsize);
-+		if (!mobj->vbuf)
-+			goto alloc_err;
- 	}
- 
- 	return mobj;
++U-Boot supports both versions(1 and 2) of the FWU metadata defined in
++the two revisions of the specification. Support can be enabled for
++either of the two versions through a config flag. The mkfwumdata tool
++can generate metadata for both the supported versions.
 +
-+alloc_err:
-+	free(mobj->mdata);
-+	free(mobj);
-+	return NULL;
- }
+ Setting up the device for GPT partitioned storage
+ -------------------------------------------------
  
- static struct fwu_image_entry *
-@@ -297,6 +313,7 @@ static void fwu_fill_version_specific_mdata(struct fwu_mdata_object *mobj)
- static int fwu_parse_fill_uuids(struct fwu_mdata_object *mobj, char *uuids[])
- {
- 	struct fwu_mdata *mdata = mobj->mdata;
-+	char *vdata;
- 	int i, ret;
+@@ -94,12 +104,12 @@ of. Each GPT partition entry in the GPT header has two GUIDs::
+ * UniquePartitionGUID
  
- 	mdata->version = mobj->version;
-@@ -311,24 +328,65 @@ static int fwu_parse_fill_uuids(struct fwu_mdata_object *mobj, char *uuids[])
- 			return ret;
- 	}
+ The PartitionTypeGUID value should correspond to the
+-``image_type_uuid`` field of the FWU metadata. This field is used to
++``image_type_guid`` field of the FWU metadata. This field is used to
+ identify a given type of updatable firmware image, e.g. U-Boot,
+ OP-TEE, FIP etc. This GUID should also be used for specifying the
+ `--guid` parameter when generating the capsule.
  
-+	if (mobj->vsize) {
-+		vdata = (char *)mobj->mdata + (mobj->size - mobj->vsize);
-+		memcpy(vdata, mobj->vbuf, mobj->vsize);
-+	}
-+
- 	mdata->crc32 = crc32(0, (const unsigned char *)&mdata->version,
- 			     mobj->size - sizeof(uint32_t));
+-The UniquePartitionGUID value should correspond to the ``image_uuid``
++The UniquePartitionGUID value should correspond to the ``image_guid``
+ field in the FWU metadata. This GUID is used to identify images of a
+ given image type in different banks.
  
- 	return 0;
- }
+@@ -108,8 +118,8 @@ metadata partitions. This would be the PartitionTypeGUID for the
+ metadata partitions. Similarly, the UEFI specification defines the ESP
+ GUID to be be used.
  
--static int
--fwu_make_mdata(size_t images, size_t banks, u8 version, char *uuids[],
--	       char *output)
-+static int fwu_read_vendor_data(struct fwu_mdata_object *mobj,
-+				const char *vendor_file)
-+{
-+	int ret = 0;
-+	FILE *vfile = NULL;
-+
-+	vfile = fopen(vendor_file, "r");
-+	if (!vfile) {
-+		ret = -1;
-+		goto out;
-+	}
-+
-+	if (fread(mobj->vbuf, 1, mobj->vsize, vfile) != mobj->vsize)
-+		ret = -1;
-+
-+out:
-+	fclose(vfile);
-+	return ret;
-+}
-+
-+static int fwu_make_mdata(size_t images, size_t banks, u8 version,
-+			  const char *vendor_file, char *uuids[],
-+			  char *output)
- {
--	struct fwu_mdata_object *mobj;
--	FILE *file;
- 	int ret;
-+	FILE *file;
-+	struct stat sbuf;
-+	size_t vendor_size = 0;
-+	struct fwu_mdata_object *mobj;
+-When generating the metadata, the ``image_type_uuid`` and the
+-``image_uuid`` values should match the *PartitionTypeGUID* and the
++When generating the metadata, the ``image_type_guid`` and the
++``image_guid`` values should match the *PartitionTypeGUID* and the
+ *UniquePartitionGUID* values respectively.
  
--	mobj = fwu_alloc_mdata(images, banks, version);
-+	if (vendor_file) {
-+		ret = stat(vendor_file, &sbuf);
-+		if (ret)
-+			return -errno;
-+
-+		vendor_size = sbuf.st_size;
-+	}
-+
-+	mobj = fwu_alloc_mdata(images, banks, version, vendor_size);
- 	if (!mobj)
- 		return -ENOMEM;
+ Performing the Update
+@@ -181,5 +191,5 @@ empty capsule would be::
+ Links
+ -----
  
-+	if (vendor_file) {
-+		ret = fwu_read_vendor_data(mobj, vendor_file);
-+		if (ret)
-+			goto done_make;
-+	}
-+
- 	ret = fwu_parse_fill_uuids(mobj, uuids);
- 	if (ret < 0)
- 		goto done_make;
-@@ -349,6 +407,7 @@ fwu_make_mdata(size_t images, size_t banks, u8 version, char *uuids[],
- 
- done_make:
- 	free(mobj->mdata);
-+	free(mobj->vbuf);
- 	free(mobj);
- 
- 	return ret;
-@@ -358,11 +417,13 @@ int main(int argc, char *argv[])
- {
- 	unsigned long banks = 0, images = 0, version = 0;
- 	int c, ret;
-+	const char *vendor_file;
- 
- 	/* Explicitly initialize defaults */
- 	active_bank = 0;
- 	__use_guid = false;
- 	previous_bank = INT_MAX;
-+	vendor_file = NULL;
- 
- 	do {
- 		c = getopt_long(argc, argv, opts_short, options, NULL);
-@@ -388,6 +449,9 @@ int main(int argc, char *argv[])
- 		case 'v':
- 			version = strtoul(optarg, NULL, 0);
- 			break;
-+		case 'V':
-+			vendor_file = optarg;
-+			break;
- 		}
- 	} while (c != -1);
- 
-@@ -402,6 +466,11 @@ int main(int argc, char *argv[])
- 		return -EINVAL;
- 	}
- 
-+	if (version == 1 && vendor_file) {
-+		fprintf(stderr, "Error: Vendor Data can only be appended in version 2 of FWU Metadata.\n");
-+		return -EINVAL;
-+	}
-+
- 	/* This command takes UUIDs * images and output file. */
- 	if (optind + images + 1 != argc) {
- 		fprintf(stderr, "Error: UUID list or output file is not specified or too much.\n");
-@@ -414,8 +483,8 @@ int main(int argc, char *argv[])
- 		previous_bank = active_bank > 0 ? active_bank - 1 : banks - 1;
- 	}
- 
--	ret = fwu_make_mdata(images, banks, (u8)version, argv + optind,
--			     argv[argc - 1]);
-+	ret = fwu_make_mdata(images, banks, (u8)version, vendor_file,
-+			     argv + optind, argv[argc - 1]);
- 	if (ret < 0)
- 		fprintf(stderr, "Error: Failed to parse and write image: %s\n",
- 			strerror(-ret));
+-* [1] https://developer.arm.com/documentation/den0118/a/ - FWU Specification
++* [1] https://developer.arm.com/documentation/den0118/ - FWU Specification
+ * [2] https://git.codelinaro.org/linaro/dependable-boot/mbfw/uploads/6f7ddfe3be24e18d4319e108a758d02e/mbfw.pdf - Dependable Boot Specification
 -- 
 2.34.1
 
