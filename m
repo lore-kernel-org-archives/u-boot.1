@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9469EC47DD9
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:00:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77C8AC54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:01:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DE11881C5;
-	Fri, 22 Mar 2024 11:59:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D1C33881F9;
+	Fri, 22 Mar 2024 11:59:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57C008817E; Fri, 22 Mar 2024 11:58:56 +0100 (CET)
+ id 40FB1881C2; Fri, 22 Mar 2024 11:59:00 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E62C8881F9
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 11:58:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 339CE881C5
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 11:58:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 86475169C;
- Fri, 22 Mar 2024 03:59:27 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C56641691;
+ Fri, 22 Mar 2024 03:59:30 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6B2433F64C;
- Fri, 22 Mar 2024 03:58:50 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E66723F64C;
+ Fri, 22 Mar 2024 03:58:53 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -36,10 +36,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Michal Simek <monstr@monstr.eu>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 13/20] fwu: mtd: obtain image information from version
- agnostic structure
-Date: Fri, 22 Mar 2024 16:27:26 +0530
-Message-Id: <20240322105733.203888-14-sughosh.ganu@linaro.org>
+Subject: [PATCH v3 14/20] cmd: fwu: make changes for supporting FWU metadata
+ version 2
+Date: Fri, 22 Mar 2024 16:27:27 +0530
+Message-Id: <20240322105733.203888-15-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240322105733.203888-1-sughosh.ganu@linaro.org>
 References: <20240322105733.203888-1-sughosh.ganu@linaro.org>
@@ -61,56 +61,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make changes to the functions used for generating the DFU's alt
-variable so that the FWU image information is obtained from the common
-version agnostic structure instead of reading the metadata.
-
-While here, also update the name of the field used for storing the
-image GUID in the FWU metadata.
+Add support for displaying data specific to FWU metadata version
+2. Because the size of the v2 metadata structure is read from the
+structure itself, allocate memory for the metadata structure by first
+getting the size of the structure.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V2:
-* New patch
+* Earlier patch was migrating to v2 only support. These changes
+  support both versions.
 
- lib/fwu_updates/fwu_mtd.c | 14 +++++---------
- 1 file changed, 5 insertions(+), 9 deletions(-)
+ cmd/fwu_mdata.c | 39 ++++++++++++++++++---------------------
+ 1 file changed, 18 insertions(+), 21 deletions(-)
 
-diff --git a/lib/fwu_updates/fwu_mtd.c b/lib/fwu_updates/fwu_mtd.c
-index f4e0e3107b..e8211dd5ba 100644
---- a/lib/fwu_updates/fwu_mtd.c
-+++ b/lib/fwu_updates/fwu_mtd.c
-@@ -136,7 +136,7 @@ static int gen_image_alt_info(char *buf, size_t len,
+diff --git a/cmd/fwu_mdata.c b/cmd/fwu_mdata.c
+index 5ecda455df..3c8be576ac 100644
+--- a/cmd/fwu_mdata.c
++++ b/cmd/fwu_mdata.c
+@@ -13,27 +13,33 @@
  
- 		/* Query a partition by image UUID */
- 		bank = &img->img_bank_info[i];
--		uuid_bin_to_str(bank->image_uuid.b, uuidbuf, UUID_STR_FORMAT_STD);
-+		uuid_bin_to_str(bank->image_guid.b, uuidbuf, UUID_STR_FORMAT_STD);
+ #include <linux/types.h>
  
- 		mtd_img_info = mtd_img_by_uuid(uuidbuf);
- 		if (!mtd_img_info) {
-@@ -163,17 +163,13 @@ static int gen_image_alt_info(char *buf, size_t len,
- 
- int fwu_gen_alt_info_from_mtd(char *buf, size_t len, struct mtd_info *mtd)
+-static void print_mdata(struct fwu_mdata *mdata)
++static void print_mdata(struct fwu_data *data)
  {
+ 	int i, j;
+ 	struct fwu_image_entry *img_entry;
+ 	struct fwu_image_bank_info *img_info;
+ 
+ 	printf("\tFWU Metadata\n");
+-	printf("crc32: %#x\n", mdata->crc32);
+-	printf("version: %#x\n", mdata->version);
+-	printf("active_index: %#x\n", mdata->active_index);
+-	printf("previous_active_index: %#x\n", mdata->previous_active_index);
++	printf("crc32: %#x\n", data->crc32);
++	printf("version: %#x\n", data->version);
++	printf("active_index: %#x\n", data->active_index);
++	printf("previous_active_index: %#x\n", data->previous_active_index);
++
++	if (data->version == 2) {
++		for (i = 0; i < 4; i++)
++			printf("bank_state[%d]: %#x\n",
++			       i, data->bank_state[i]);
++	}
+ 
+ 	printf("\tImage Info\n");
+ 	for (i = 0; i < CONFIG_FWU_NUM_IMAGES_PER_BANK; i++) {
+-		img_entry = &mdata->img_entry[i];
++		img_entry = &data->fwu_images[i];
+ 		printf("\nImage Type Guid: %pUL\n",
+-		       &img_entry->image_type_uuid);
+-		printf("Location Guid: %pUL\n", &img_entry->location_uuid);
++		       &img_entry->image_type_guid);
++		printf("Location Guid: %pUL\n", &img_entry->location_guid);
+ 		for (j = 0; j < CONFIG_FWU_NUM_BANKS; j++) {
+ 			img_info = &img_entry->img_bank_info[j];
+-			printf("Image Guid:  %pUL\n", &img_info->image_uuid);
++			printf("Image Guid:  %pUL\n", &img_info->image_guid);
+ 			printf("Image Acceptance: %s\n",
+ 			       img_info->accepted == 0x1 ? "yes" : "no");
+ 		}
+@@ -43,20 +49,11 @@ static void print_mdata(struct fwu_mdata *mdata)
+ int do_fwu_mdata_read(struct cmd_tbl *cmdtp, int flag,
+ 		     int argc, char * const argv[])
+ {
+-	int ret = CMD_RET_SUCCESS, res;
 -	struct fwu_mdata mdata;
- 	int i, l, ret;
 -
--	ret = fwu_get_mdata(&mdata);
--	if (ret < 0) {
--		log_err("Failed to get the FWU mdata.\n");
--		return ret;
+-	res = fwu_get_mdata(&mdata);
+-	if (res < 0) {
+-		log_err("Unable to get valid FWU metadata\n");
+-		ret = CMD_RET_FAILURE;
+-		goto out;
 -	}
 +	struct fwu_data *data = fwu_get_data();
-+	struct fwu_image_entry *img_entry;
  
- 	for (i = 0; i < CONFIG_FWU_NUM_IMAGES_PER_BANK; i++) {
--		ret = gen_image_alt_info(buf, len, &mdata.img_entry[i], mtd);
-+		img_entry = &data->fwu_images[i];
-+		ret = gen_image_alt_info(buf, len, img_entry, mtd);
- 		if (ret)
- 			break;
+-	print_mdata(&mdata);
++	print_mdata(data);
  
+-out:
+-	return ret;
++	return CMD_RET_SUCCESS;
+ }
+ 
+ U_BOOT_CMD(
 -- 
 2.34.1
 
