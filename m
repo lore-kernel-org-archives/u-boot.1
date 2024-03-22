@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04584C47DD9
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 10:58:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0ECCC54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 10:59:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3084487F6A;
-	Fri, 22 Mar 2024 11:58:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B0877881DE;
+	Fri, 22 Mar 2024 11:58:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53ADD86BDB; Fri, 22 Mar 2024 11:58:24 +0100 (CET)
+ id D882286BDB; Fri, 22 Mar 2024 11:58:27 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 26CE988113
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 11:58:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id A0F9A881D5
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 11:58:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id BA5641007;
- Fri, 22 Mar 2024 03:58:55 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 40CBA1007;
+ Fri, 22 Mar 2024 03:58:59 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9F8873F64C;
- Fri, 22 Mar 2024 03:58:18 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 268AF3F64C;
+ Fri, 22 Mar 2024 03:58:21 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -36,10 +36,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Michal Simek <monstr@monstr.eu>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 04/20] drivers: fwu: mtd: allocate buffer for image info
- dynamically
-Date: Fri, 22 Mar 2024 16:27:17 +0530
-Message-Id: <20240322105733.203888-5-sughosh.ganu@linaro.org>
+Subject: [PATCH v3 05/20] fwu: metadata: add support for version 2 of the
+ structure
+Date: Fri, 22 Mar 2024 16:27:18 +0530
+Message-Id: <20240322105733.203888-6-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240322105733.203888-1-sughosh.ganu@linaro.org>
 References: <20240322105733.203888-1-sughosh.ganu@linaro.org>
@@ -61,179 +61,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The FWU metadata access driver for MTD partitioned devices currently
-uses a statically allocated array for storing the updatable image
-information. This array depends on the number of banks and images per
-bank. With migration of the FWU metadata to version 2, these
-parameters are now obtained at runtime from the metadata.
+Add support for version 2 of the FWU metadata structure. The top level
+structure is kept separate through a config symbol. Most of the
+fields, primarily used for providing information on updatable images
+are common across the two versions.
 
-Make changes to the FWU metadata access driver for MTD devices to
-allocate memory for the image information dynamically in the driver's
-probe function, after having obtained the number of banks and images
-per bank by reading the metadata. Move the image information as part
-of the driver's private structure, instead of using a global variable.
+Also change a few existing structure members used for image
+identification to reflect the fact that these are GUIDs, and not
+UUIDs.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
-Changes since V2: None
+Changes since V2:
+* New patch which retains support for V1 of metadata
 
- drivers/fwu-mdata/raw_mtd.c | 68 +++++++++++++++++++++++--------------
- include/fwu.h               |  9 +++++
- 2 files changed, 52 insertions(+), 25 deletions(-)
+ include/fwu_mdata.h | 71 +++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 65 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/fwu-mdata/raw_mtd.c b/drivers/fwu-mdata/raw_mtd.c
-index 9f3f1dc213..78a709f766 100644
---- a/drivers/fwu-mdata/raw_mtd.c
-+++ b/drivers/fwu-mdata/raw_mtd.c
-@@ -12,22 +12,11 @@
- #include <linux/errno.h>
- #include <linux/types.h>
+diff --git a/include/fwu_mdata.h b/include/fwu_mdata.h
+index 56189e2f40..d2521f39b4 100644
+--- a/include/fwu_mdata.h
++++ b/include/fwu_mdata.h
+@@ -11,7 +11,7 @@
  
--/* Internal helper structure to move data around */
--struct fwu_mdata_mtd_priv {
--	struct mtd_info *mtd;
--	char pri_label[50];
--	char sec_label[50];
--	u32 pri_offset;
--	u32 sec_offset;
--};
--
- enum fwu_mtd_op {
- 	FWU_MTD_READ,
- 	FWU_MTD_WRITE,
- };
+ /**
+  * struct fwu_image_bank_info - firmware image information
+- * @image_uuid: Guid value of the image in this bank
++ * @image_guid: Guid value of the image in this bank
+  * @accepted: Acceptance status of the image
+  * @reserved: Reserved
+  *
+@@ -20,15 +20,15 @@
+  * acceptance status
+  */
+ struct fwu_image_bank_info {
+-	efi_guid_t  image_uuid;
++	efi_guid_t  image_guid;
+ 	uint32_t accepted;
+ 	uint32_t reserved;
+ } __packed;
  
--extern struct fwu_mtd_image_info fwu_mtd_images[];
--
- static bool mtd_is_aligned_with_block_size(struct mtd_info *mtd, u64 size)
- {
- 	return !do_div(size, mtd->erasesize);
-@@ -134,7 +123,7 @@ static int flash_partition_offset(struct udevice *dev, const char *part_name, fd
- 	return (int)size;
- }
+ /**
+  * struct fwu_image_entry - information for a particular type of image
+- * @image_type_uuid: Guid value for identifying the image type
+- * @location_uuid: Guid of the storage volume where the image is located
++ * @image_type_guid: Guid value for identifying the image type
++ * @location_guid: Guid of the storage volume where the image is located
+  * @img_bank_info: Array containing properties of images
+  *
+  * This structure contains information on various types of updatable
+@@ -36,11 +36,35 @@ struct fwu_image_bank_info {
+  * information per bank.
+  */
+ struct fwu_image_entry {
+-	efi_guid_t image_type_uuid;
+-	efi_guid_t location_uuid;
++	efi_guid_t image_type_guid;
++	efi_guid_t location_guid;
+ 	struct fwu_image_bank_info img_bank_info[CONFIG_FWU_NUM_BANKS];
+ } __packed;
  
--static int fwu_mdata_mtd_of_to_plat(struct udevice *dev)
-+static int get_fwu_mdata_dev(struct udevice *dev)
- {
- 	struct fwu_mdata_mtd_priv *mtd_priv = dev_get_priv(dev);
- 	const fdt32_t *phandle_p = NULL;
-@@ -144,8 +133,6 @@ static int fwu_mdata_mtd_of_to_plat(struct udevice *dev)
- 	fdt_addr_t offset;
- 	int ret, size;
- 	u32 phandle;
--	ofnode bank;
--	int off_img;
- 
- 	/* Find the FWU mdata storage device */
- 	phandle_p = ofnode_get_property(dev_ofnode(dev),
-@@ -199,8 +186,28 @@ static int fwu_mdata_mtd_of_to_plat(struct udevice *dev)
- 		return ret;
- 	mtd_priv->sec_offset = offset;
- 
--	off_img = 0;
-+	return 0;
-+}
++/**
++ * struct fwu_fw_store_desc - FWU updatable image information
++ * @num_banks: Number of firmware banks
++ * @num_images: Number of images per bank
++ * @img_entry_size: The size of the img_entry array
++ * @bank_info_entry_size: The size of the img_bank_info array
++ * @img_entry: Array of image entries each giving information on a image
++ *
++ * This image descriptor structure contains information on the number of
++ * updatable banks and images per bank. It also gives the total sizes of
++ * the fwu_image_entry and fwu_image_bank_info arrays. This structure is
++ * only present in version 2 of the metadata structure.
++ */
++struct fwu_fw_store_desc {
++	uint8_t  num_banks;
++	uint8_t  reserved;
++	uint16_t num_images;
++	uint16_t img_entry_size;
++	uint16_t bank_info_entry_size;
 +
-+static int fwu_mtd_image_info_populate(struct udevice *dev, u8 nbanks,
-+				       u16 nimages)
-+{
-+	struct fwu_mtd_image_info *mtd_images;
-+	struct fwu_mdata_mtd_priv *mtd_priv = dev_get_priv(dev);
-+	struct udevice *mtd_dev = mtd_priv->mtd->dev;
-+	fdt_addr_t offset;
-+	ofnode bank;
-+	int off_img;
-+	u32 total_images;
- 
-+	total_images = nbanks * nimages;
-+	mtd_priv->fwu_mtd_images = malloc(sizeof(struct fwu_mtd_image_info) *
-+					  total_images);
-+	if (!mtd_priv->fwu_mtd_images)
-+		return -ENOMEM;
++	struct fwu_image_entry img_entry[CONFIG_FWU_NUM_IMAGES_PER_BANK];
++} __packed;
 +
-+	off_img = 0;
-+	mtd_images = mtd_priv->fwu_mtd_images;
- 	ofnode_for_each_subnode(bank, dev_ofnode(dev)) {
- 		int bank_num, bank_offset, bank_size;
- 		const char *bank_name;
-@@ -219,8 +226,7 @@ static int fwu_mdata_mtd_of_to_plat(struct udevice *dev)
- 			int image_num, image_offset, image_size;
- 			const char *uuid;
++#if defined(CONFIG_FWU_MDATA_V1)
+ /**
+  * struct fwu_mdata - FWU metadata structure for multi-bank updates
+  * @crc32: crc32 value for the FWU metadata
+@@ -65,4 +89,39 @@ struct fwu_mdata {
+ 	struct fwu_image_entry img_entry[CONFIG_FWU_NUM_IMAGES_PER_BANK];
+ } __packed;
  
--			if (off_img == CONFIG_FWU_NUM_BANKS *
--						CONFIG_FWU_NUM_IMAGES_PER_BANK) {
-+			if (off_img == total_images) {
- 				log_err("DT provides more images than configured!\n");
- 				break;
- 			}
-@@ -230,11 +236,11 @@ static int fwu_mdata_mtd_of_to_plat(struct udevice *dev)
- 			ofnode_read_u32(image, "offset", &image_offset);
- 			ofnode_read_u32(image, "size", &image_size);
- 
--			fwu_mtd_images[off_img].start = bank_offset + image_offset;
--			fwu_mtd_images[off_img].size = image_size;
--			fwu_mtd_images[off_img].bank_num = bank_num;
--			fwu_mtd_images[off_img].image_num = image_num;
--			strcpy(fwu_mtd_images[off_img].uuidbuf, uuid);
-+			mtd_images[off_img].start = bank_offset + image_offset;
-+			mtd_images[off_img].size = image_size;
-+			mtd_images[off_img].bank_num = bank_num;
-+			mtd_images[off_img].image_num = image_num;
-+			strcpy(mtd_images[off_img].uuidbuf, uuid);
- 			log_debug("\tImage%d: %s @0x%x\n\n",
- 				  image_num, uuid, bank_offset + image_offset);
- 			off_img++;
-@@ -246,8 +252,21 @@ static int fwu_mdata_mtd_of_to_plat(struct udevice *dev)
- 
- static int fwu_mdata_mtd_probe(struct udevice *dev)
- {
--	/* Ensure the metadata can be read. */
--	return fwu_get_mdata(NULL);
-+	u8 nbanks;
-+	u16 nimages;
-+	int ret;
++#else /* CONFIG_FWU_MDATA_V1 */
++/**
++ * struct fwu_mdata - FWU metadata structure for multi-bank updates
++ * @crc32: crc32 value for the FWU metadata
++ * @version: FWU metadata version
++ * @active_index: Index of the bank currently used for booting images
++ * @previous_active_inde: Index of the bank used before the current bank
++ *                        being used for booting
++ * @metadata_size: Size of the entire metadata structure, including the
++ *                 image descriptors
++ * @desc_offset: The offset from the start of this structure where the
++ *               image descriptor structure starts. 0 if absent
++ * @bank_state: State of each bank, valid, invalid or accepted
++ * @fw_desc: The structure describing the FWU updatable images
++ *
++ * This is the top level structure used to store all information for performing
++ * multi bank updates on the platform. This contains info on the bank being
++ * used to boot along with the information on state of individual banks.
++ */
++struct fwu_mdata {
++	uint32_t crc32;
++	uint32_t version;
++	uint32_t active_index;
++	uint32_t previous_active_index;
++	uint32_t metadata_size;
++	uint16_t desc_offset;
++	uint16_t reserved1;
++	uint8_t  bank_state[4];
++	uint32_t reserved2;
 +
-+	ret = get_fwu_mdata_dev(dev);
-+	if (ret)
-+		return ret;
++	// struct fwu_fw_store_desc fw_desc;
++} __packed;
 +
-+	nbanks = CONFIG_FWU_NUM_BANKS;
-+	nimages = CONFIG_FWU_NUM_IMAGES_PER_BANK;
-+	ret = fwu_mtd_image_info_populate(dev, nbanks, nimages);
-+	if (ret)
-+		return ret;
++#endif /* CONFIG_FWU_MDATA_V1 */
 +
-+	return 0;
- }
- 
- static struct fwu_mdata_ops fwu_mtd_ops = {
-@@ -266,6 +285,5 @@ U_BOOT_DRIVER(fwu_mdata_mtd) = {
- 	.of_match	= fwu_mdata_ids,
- 	.ops		= &fwu_mtd_ops,
- 	.probe		= fwu_mdata_mtd_probe,
--	.of_to_plat	= fwu_mdata_mtd_of_to_plat,
- 	.priv_auto	= sizeof(struct fwu_mdata_mtd_priv),
- };
-diff --git a/include/fwu.h b/include/fwu.h
-index 1815bd0064..6c4d218e13 100644
---- a/include/fwu.h
-+++ b/include/fwu.h
-@@ -26,6 +26,15 @@ struct fwu_mtd_image_info {
- 	char uuidbuf[UUID_STR_LEN + 1];
- };
- 
-+struct fwu_mdata_mtd_priv {
-+	struct mtd_info *mtd;
-+	char pri_label[50];
-+	char sec_label[50];
-+	u32 pri_offset;
-+	u32 sec_offset;
-+	struct fwu_mtd_image_info *fwu_mtd_images;
-+};
-+
- struct fwu_mdata_ops {
- 	/**
- 	 * read_mdata() - Populate the asked FWU metadata copy
+ #endif /* _FWU_MDATA_H_ */
 -- 
 2.34.1
 
