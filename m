@@ -4,81 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 237CAC47DD9
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 07:41:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8580C54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 07:47:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 52EED8812B;
-	Fri, 22 Mar 2024 08:41:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id E43D0881A4;
+	Fri, 22 Mar 2024 08:47:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="R9WC5iVt";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="EKTDlM0j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D00C78816D; Fri, 22 Mar 2024 08:41:50 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3EAC5881A0; Fri, 22 Mar 2024 08:47:22 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBB6E8785E
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 08:41:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CA7288028
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 08:47:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-414783a9edcso6608385e9.0
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 00:41:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1711093307; x=1711698107;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=khprt74GVPjvor8YqhCtfzPtGKt5rVNGCMex01JSw78=;
- b=R9WC5iVt3ns6K+EiHyAuZz8KaD4Z391X9bzpTJQtPBQrq+WUkzTymmmORuW4l5QALE
- BT3wcKw+vOX8JkmfhKTxpSIDQLMnv/RcSVOLYWuCfEhRUmhwWawFAnkbMHBJhxchSu/c
- dUrfquwmUKAaT4YfxHJZglB7nTEl2/BYpC4RxDK7A5IFI/IpN2LVjNy10b35r1lCCFKg
- dpnplwmIUeTykgol9VhdoyboKyVSKoTYZDPHloLTvZrovI2kVTQ5TN98c2xfo/PkAzND
- OK775EScF3iOQia0UptvQEgF93G6+V1oWnGZNegc9VREtKGrbeOlhHClnrelSHPhPByb
- snhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711093307; x=1711698107;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=khprt74GVPjvor8YqhCtfzPtGKt5rVNGCMex01JSw78=;
- b=CwixwfaYXNzbEQH5RrWEkcm1pwzkT0Qk+I20DJXN130ykWCqjDeLkUzGwFH5ZrMtLq
- eK61DhPlh1e9tlTBmp3r/TqahhzAsCP55Y55hMoZOpdTk8kRe6YrZvBm5BOda2tx0Zes
- KLkb2lI45p98LIuj/f1D9PS6yIj0eLGYhErVFenVRqLII1I7bC+H7RlQadqj98RlFCN8
- pL/ZIucK3xl16+HcR3H6TUY+PomS7V8ePJelqmy+/nYcAQXtMOXSQRF5Y7JHielThEmZ
- yvrD5NOWFMlKX0wCnmHnjnuHaT+c+pAH+hxx/PQW4dVFPIORjoHE2hlQU8WHyfuGXMh6
- WVoQ==
-X-Gm-Message-State: AOJu0Ywqaej3ICTq4igTFlRBZrbJG5UP7019xM03LMAz6n09rY+H3Yjw
- SyzxCNklEEx1gCww+lZnJYYWizyHBiMoyKnUs2DBq01mI6IayU34/tFmhgTEmUE=
-X-Google-Smtp-Source: AGHT+IFPzSkvhjUVYAs0mWFdTP8PjyJuR0Nmr8jRR+3VOQTzEgSyK/BozDpbH4a0eO/smBHzSp1ixA==
-X-Received: by 2002:a05:600c:4808:b0:414:bfd:379d with SMTP id
- i8-20020a05600c480800b004140bfd379dmr947017wmo.22.1711093307306; 
- Fri, 22 Mar 2024 00:41:47 -0700 (PDT)
-Received: from [192.168.2.43] ([82.66.159.240])
- by smtp.gmail.com with ESMTPSA id
- j8-20020a05600c1c0800b004146bcdde06sm2236027wms.6.2024.03.22.00.41.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Mar 2024 00:41:46 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: u-boot@lists.denx.de, Colin McAllister <colinmca242@gmail.com>
-Cc: JPEWhacker@gmail.com, sjg@chromium.org, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Igor Opaniuk <igor.opaniuk@gmail.com>
-In-Reply-To: <20240312125729.82695-1-colinmca242@gmail.com>
-References: <20240312125729.82695-1-colinmca242@gmail.com>
-Subject: Re: [PATCH v4 0/2] Fix Android A/B backup
-Message-Id: <171109330664.31490.12829512827307130001.b4-ty@baylibre.com>
-Date: Fri, 22 Mar 2024 08:41:46 +0100
+ spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id DE5C161378;
+ Fri, 22 Mar 2024 07:47:18 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8969FC43394;
+ Fri, 22 Mar 2024 07:47:18 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1711093638;
+ bh=+tYFN6+QK3PUW/oMQcTV0dPiASQpRO0mELezzogU4Y0=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=EKTDlM0jETrOTVGDut2K2vyTRbghQA0fcnBdCO+VI7dyRYqSMXdyF8eZRWm/iguME
+ fdtAAc5YhNRwCDu9LzpbQMQILWyoqKZTpoWgka7NDPQnKlPRG5WdeZfy0DD6IEjEFI
+ UQ+Ji/FDGV25WL/NR7tP8ZDbKPvArPcRJ04QJk1z7qaeflhpIxdGdAFSIZfsHxLK75
+ +kQ8KcwY7E/WQ29fSnr1AsniFnT2ajNwCZSlGytlbXIZK6zJq9wwhA42Nb8+o9P0Ro
+ xxsQx1sX2tlUPZXTgPT7R6S0lppqaC4US5AgW0kHcQSd/rNWEl6WSTTGqCSXaitfnc
+ dMV4mXQUlTyOA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 7AEB5CD11DD;
+ Fri, 22 Mar 2024 07:47:18 +0000 (UTC)
+From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
+Date: Fri, 22 Mar 2024 08:47:06 +0100
+Subject: [PATCH v3 3/6] usb: xhci: Abort transfers with unallocated rings
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.2
+Message-Id: <20240322-asahi-keyboards-v3-3-3106dd4c4e19@jannau.net>
+References: <20240322-asahi-keyboards-v3-0-3106dd4c4e19@jannau.net>
+In-Reply-To: <20240322-asahi-keyboards-v3-0-3106dd4c4e19@jannau.net>
+To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>
+Cc: u-boot@lists.denx.de, asahi@lists.linux.dev, 
+ Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>
+X-Mailer: b4 0.12.3
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1147; i=j@jannau.net;
+ h=from:subject:message-id;
+ bh=4WL/oK9QHrPZzv/LO0Lx0LR9aR1vioRk0nnmNOFZrzg=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhtS/5i0/Z//c82PbI5FnJ5J0P+bvktTYXRH4uW3yj+SbX
+ M43/fxPdpSyMIhxMciKKbIkab/sYFhdoxhT+yAMZg4rE8gQBi5OAZjIrg0M/z39lHgOfdm0qued
+ RyLfntM9h1kljY4miacsc9+wW/XsTzmGf9blPif0Wf95ztTvnz75MudElQal6c7J4uVrT78U2rh
+ GghMA
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
+X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
+X-Original-From: Janne Grunau <j@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,31 +81,49 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j@jannau.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Janne Grunau <j@jannau.net>
 
-On Tue, 12 Mar 2024 07:57:27 -0500, Colin McAllister wrote:
-> - Addresses compiler error due to missing semicolon
-> - Removes use of preprocessor macros with ANDROID_AB_BACKUP_OFFSET
-> 
-> Bug was found by noticing a semicolon was missing and not causing a
-> compiler error when CONFIG_ANDROID_AB_BACKUP_OFFSET was set. I submitted
-> a patch to fix the semicolon before fixing the #if's. Testing the latter
-> patch without the former with ANDORID_AB_BACKUP_OFFSET set will cause a
-> compiler error.
-> 
-> [...]
+Discovered while trying to use the second interface in the USB keyboard
+driver necessary on Apple USB keyboards.
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
+Reviewed-by: Marek Vasut <marex@denx.de>
+Reviewed-by: Neal Gompa <neal@gompa.dev>
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+ drivers/usb/host/xhci-ring.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-[1/2] android_ab: Add missing semicolon
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/c044f89bb0c2683bcb14006b697ee6db2240f00d
-[2/2] android_ab: Fix ANDROID_AB_BACKUP_OFFSET
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/026e0cd31278bcafcfb35d21478a94fc5072f78c
+diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+index b60661fe05..910c5f3352 100644
+--- a/drivers/usb/host/xhci-ring.c
++++ b/drivers/usb/host/xhci-ring.c
+@@ -685,6 +685,9 @@ int xhci_bulk_tx(struct usb_device *udev, unsigned long pipe,
+ 		reset_ep(udev, ep_index);
+ 
+ 	ring = virt_dev->eps[ep_index].ring;
++	if (!ring)
++		return -EINVAL;
++
+ 	/*
+ 	 * How much data is (potentially) left before the 64KB boundary?
+ 	 * XHCI Spec puts restriction( TABLE 49 and 6.4.1 section of XHCI Spec)
+@@ -871,6 +874,8 @@ int xhci_ctrl_tx(struct usb_device *udev, unsigned long pipe,
+ 	ep_index = usb_pipe_ep_index(pipe);
+ 
+ 	ep_ring = virt_dev->eps[ep_index].ring;
++	if (!ep_ring)
++		return -EINVAL;
+ 
+ 	/*
+ 	 * Check to see if the max packet size for the default control
 
---
-Mattijs
+-- 
+2.44.0
+
+
