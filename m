@@ -4,64 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E979C47DD9
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 07:58:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09233C54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 08:12:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D3878818A;
-	Fri, 22 Mar 2024 08:58:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=steffen.cc
+	by phobos.denx.de (Postfix) with ESMTP id 58FEA88178;
+	Fri, 22 Mar 2024 09:12:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=steffen.cc header.i=@steffen.cc header.b="D0luM4zc";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="YhpqnzLF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06BF88818A; Fri, 22 Mar 2024 08:58:46 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AF94C8817C; Fri, 22 Mar 2024 09:12:40 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E79A3880F8
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 08:58:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C8F58816F
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 09:12:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=steffen.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lists@steffen.cc
-Received: from smtp1.mailbox.org (smtp1.mailbox.org
- [IPv6:2001:67c:2050:b231:465::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4V1F7y6t0cz9smk;
- Fri, 22 Mar 2024 08:58:38 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=steffen.cc; s=MBO0001; 
- t=1711094319;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=60aIjA1Sm5UGUTuHoN+/0RmYmO4s7fVEqpba2emEPHw=;
- b=D0luM4zcQ8lWOae7B+eLCE2kVjmoqQfoFGH0Y14lXZWikUvRqMWD1A1ic7WRPOdq+s83Qh
- MW4BWOSpf5pBnidytLgTusfdWFxGXjJYxmfCgaqo05CRzSeNc4UPiHwQjy7IC9Twkh2hVn
- Qyle4ql5Yf1bwG1pgW8sbdMyPO0MCF04F5ZDMEaWusNY7UHdbPYfSf9cRSGxXncAadfpCm
- TpA1M8Tc1zZgRoUJyaBZJuyNE12xny2T7mLQ3KB/WUPOuM4Svp5kuAgK2H91Hbj4dfbEKz
- oYwzW3EBtHmuKLazUw/9ghVi/uSPmdL8VryHyj5yb6BX5jQGlHZ3mh5L/yxOdw==
-Message-ID: <3198bc42918d1d25acaf1889489b5879653f25c8.camel@steffen.cc>
-Subject: Re: [PATCH 2/5] mmc: zynq-sdhci: refactor tapdelay settings
-From: Steffen Dirkwinkel <lists@steffen.cc>
-To: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>, "Kumar, Love"
- <love.kumar@amd.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Cc: Jaehoon Chung <jh80.chung@samsung.com>, Johan Jonker
- <jbx6244@gmail.com>,  "Simek, Michal" <michal.simek@amd.com>, Peng Fan
- <peng.fan@nxp.com>, Tom Rini <trini@konsulko.com>
-Date: Fri, 22 Mar 2024 08:58:25 +0100
-In-Reply-To: <SA1PR12MB86972BBDF8A3A93B6A6475A698282@SA1PR12MB8697.namprd12.prod.outlook.com>
-References: <20240223140613.1240570-1-lists@steffen.cc>
- <20240223140613.1240570-2-lists@steffen.cc>
- <6dfdaf59-156e-40db-9130-4d62e6e5e8e3@amd.com>
- <9301f4ea37a01b3090bd786e1954cdba42a6d20e.camel@dirkwinkel.cc>
- <SA1PR12MB86972BBDF8A3A93B6A6475A698282@SA1PR12MB8697.namprd12.prod.outlook.com>
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a468004667aso258785866b.2
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 01:12:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1711095157; x=1711699957;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=g+D2xFs/MvxVzmcQOO2NbjgJvi5XzBC2Pq4P36oGfrQ=;
+ b=YhpqnzLFhSwcgukPTn0TwNtUNiXcGODFOcWt1osVTb1reiwoKc5lQW8WrWLF8W9rTr
+ BiCm5kUTmDvWxDu3yLR5mGgbQvh43lrhyfZYCe7SXuoiFaCf6mGcuxYTVpqiuyTeAgNC
+ Z6V53SdSgMPHqBsz30qYS9h+AhUSZpzyMSYh4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711095157; x=1711699957;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=g+D2xFs/MvxVzmcQOO2NbjgJvi5XzBC2Pq4P36oGfrQ=;
+ b=UeU23m6ZQ/BAZWpcgEO1w12g2BgSGUYnfU2WiBs/N7kefHmEk+OyPq1No21Z+Oss13
+ AKalv6jn+XxRmL8LpKj50iQiW2eV9kKNIgfIfzkSPsdA/gEeIXP34/wh+NmAVmYDQdsB
+ uPiCgh0U539PwfaBbDLG+EG98CbDb+K1ueFWQ6lPiMTetxCQy4TAg6nz7o2+eOvyj1gK
+ xZ/Y+9qULENpctuTF8pSb/hKukerfqYzgCPNzR0DneLiYZsS2qCWSWJ3RM0rWQftaaXZ
+ qrJuitRsJd98jXZ+ZdgfJ2+EmJevDn722c13Z92dABhQYWYgEhsqwHtNlfyyu9vRqKAA
+ gz/Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVkDOWcwU+c5RlEGUmZv/r0EoZWM1puO8AZ06kgCkNKK52/SZ/Uj/BlqkOxr8oOvjUfqKvXi8Hf2sftbmp4ciJ8NglGVQ==
+X-Gm-Message-State: AOJu0Yz5jbzGyXv4NgOoeRxl6kJXON0NLC0/MhiJ6aKZY5yru/ad0vrE
+ QvfnhbfyMvkfqe8SIOo280Xo9vkOqfdljzelouwbCrJnXu/V9j0EmU6sEqTcszwRafWbq4cSL/t
+ eljffjaK2rYLOcOoxs6pV+DQxAAaLbLR82Iu0Hw==
+X-Google-Smtp-Source: AGHT+IEdK9OEOEwLOZvGcRHw0eUBHLS1sfXlx7emelX73IMJbM3ZkIk6NuAKny4hApky2m2XXERx8NxZx6lDGJvrfi4=
+X-Received: by 2002:a17:906:f1ce:b0:a47:3469:d75a with SMTP id
+ gx14-20020a170906f1ce00b00a473469d75amr343301ejb.67.1711095157297; Fri, 22
+ Mar 2024 01:12:37 -0700 (PDT)
+MIME-Version: 1.0
+References: <20240320190443.1483274-1-avkrasnov@salutedevices.com>
+In-Reply-To: <20240320190443.1483274-1-avkrasnov@salutedevices.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Fri, 22 Mar 2024 09:12:26 +0100
+Message-ID: <CAOf5uwnF8VZoY5pQM6yaGOvT-e4NiBmS965+Re5xZ=X_pQmktw@mail.gmail.com>
+Subject: Re: [PATCH v4] cmd: mtd: OTP access support
+To: Arseniy Krasnov <avkrasnov@salutedevices.com>
+Cc: Simon Glass <sjg@chromium.org>, Alexey Romanov <avromanov@sberdevices.ru>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Nikhil M Jain <n-jain1@ti.com>, 
+ Viacheslav Mitrofanov <v.v.mitrofanov@yadro.com>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Sean Edmond <seanedmond@microsoft.com>, 
+ Tobias Waldekranz <tobias@waldekranz.com>,
+ Stephen Carlson <stcarlso@linux.microsoft.com>, 
+ Michael Walle <michael@walle.cc>, Peter Robinson <pbrobinson@gmail.com>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>, u-boot@lists.denx.de, 
+ kernel@sberdevices.ru, oxffffaa@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-MIME-Version: 1.0
-X-Rspamd-Queue-Id: 4V1F7y6t0cz9smk
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,311 +97,352 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Venkatesh,
+Hi Arseniy
 
-we're not using the firmware when running in el3, so that should still
-work. The sdhci driver needs to know which controller it's operating on
-and uses the power-domain node for that. I can't add the power domain
-node without a firmware node (i think?), but the firmware node without
-a compatible shouldn't be used by anything?
-
-Alternatively we could exit without an error from these functions if
-our node id doesn't match sd0 or sd1. That wouldn't apply any settings,
-but that's the current behaviour already.
-
-Thanks
-Steffen
-
-On Fri, 2024-03-15 at 09:52 +0000, Abbarapu, Venkatesh wrote:
-> Hi Steffen,
-> For mini u-boot cases ZYNQMP_FIRMWARE config is disabled as there
-> won't be any ATF(TF-A) present.
->=20
-> Thanks
-> Venkatesh
->=20
-> > -----Original Message-----
-> > From: Steffen Dirkwinkel <lists@steffen.cc>
-> > Sent: Thursday, March 14, 2024 1:23 PM
-> > To: Kumar, Love <love.kumar@amd.com>; u-boot@lists.denx.de
-> > Cc: Algapally Santosh Sagar <santoshsagar.algapally@amd.com>; Ashok
-> > Reddy Soma <ashok.reddy.soma@amd.com>; Jaehoon Chung
-> > <jh80.chung@samsung.com>; Johan Jonker <jbx6244@gmail.com>; Simek,
-> > Michal <michal.simek@amd.com>; Peng Fan <peng.fan@nxp.com>; Tom
-> > Rini
-> > <trini@konsulko.com>; Abbarapu, Venkatesh
-> > <venkatesh.abbarapu@amd.com>
-> > Subject: Re: [PATCH 2/5] mmc: zynq-sdhci: refactor tapdelay
-> > settings
-> >=20
-> > Hi Love,
-> >=20
-> > On Thu, 2024-03-14 at 12:15 +0530, Love Kumar wrote:
-> > > Hi,
-> > >=20
-> > > When we run in el3 for zynqmp board, we are seeing below issue
-> > > with
-> > > this
-> > > patch:
-> > >=20
-> > >=20
-> > > Model: ZynqMP MINI EMMC0
-> > > Board: Xilinx ZynqMP
-> > > DRAM:=C2=A0 512 MiB
-> > > EL Level:=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 EL3
-> > > Secure Boot:=C2=A0=C2=A0 not authenticated, not encrypted
-> > > Multiboot:=C2=A0=C2=A0=C2=A0=C2=A0 0
-> > > Core:=C2=A0 10 devices, 9 uclasses, devicetree: embed
-> > > MMC:=C2=A0=C2=A0 sdhci@ff160000: 0
-> > > Loading Environment from <NULL>... OK
-> > > In:=C2=A0=C2=A0=C2=A0 dcc
-> > > Out:=C2=A0=C2=A0 dcc
-> > > Err:=C2=A0=C2=A0 dcc
-> > > ZynqMP> mmc list
-> > > sdhci@ff160000: 0
-> > > ZynqMP> mmc dev 0 0
-> > > arasan_sdhci sdhci@ff160000: Error setting Input Tap Delay
-> > > sdhci_set_clock: Error while setting tap delay
-> > > sdhci_send_command: Timeout for status update: 00000000 00000001
-> > > ZynqMP>
-> >=20
-> > Thank you for testing this.
-> > It looks like the zynqmp-mini-emmc0 device lacks the power-domain
-> > node
-> > and doesn't have a sd node id. The code before my change would have
-> > ignored the unknown node id, applied settings for sdhci1 instead of
-> > sdhci0
-> > and returned without an error. Maybe there's a different way to
-> > find out
-> > which sdhci we want to operate on?
-> >=20
-> > Can you try setting the node id in device tree?
-> > Something like this:
-> >=20
-> > diff --git a/arch/arm/dts/zynqmp-mini-emmc0.dts
-> > b/arch/arm/dts/zynqmp-
-> > mini-emmc0.dts
-> > index 02e80bd85e1..87c4a1b6ad0 100644
-> > --- a/arch/arm/dts/zynqmp-mini-emmc0.dts
-> > +++ b/arch/arm/dts/zynqmp-mini-emmc0.dts
-> > @@ -7,6 +7,8 @@
-> > =C2=A0 * Siva Durga Prasad Paladugu <siva.durga.prasad.paladugu@amd.com=
+On Wed, Mar 20, 2024 at 8:14=E2=80=AFPM Arseniy Krasnov
+<avkrasnov@salutedevices.com> wrote:
 >
-> > =C2=A0 */
-> >=20
-> > +#include <dt-bindings/power/xlnx-zynqmp-power.h>
-> > +
-> > =C2=A0/dts-v1/;
-> >=20
-> > =C2=A0/ {
-> > @@ -41,6 +43,12 @@
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 clock-frequency =3D <200000000>;
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 };
-> >=20
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 firmware {
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 zynqmp_firmware: zynqmp-firmware {
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 #power-doma=
-in-cells =3D <1>;
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0 };
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 };
-> > +
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 amba: amba {
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 compatible =3D "simple-bus";
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 #address-cells =3D <2>;
-> > @@ -56,6 +64,7 @@
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 reg =
-=3D <0x0 0xff160000 0x0 0x1000>;
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 clock=
--names =3D "clk_xin", "clk_ahb";
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 clock=
-s =3D <&clk_xin &clk_xin>;
-> > +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 power-domai=
-ns =3D <&zynqmp_firmware PD_SD_0>;
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0 };
-> > =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 };
-> > =C2=A0};
-> >=20
-> > Thanks,
-> > Steffen
-> >=20
-> > >=20
-> > > Regards,
-> > > Love Kumar
-> > >=20
-> > > On 23/02/24 7:36 pm, Steffen Dirkwinkel wrote:
-> > > > From: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
-> > > >=20
-> > > > Previously we were setting in tapdelay for SD1 every time even
-> > > > if
-> > > > SD0 was requested.
-> > > > The SD tapdelay settings are shifted by 16 bits between SD0 and
-> > > > SD1.
-> > > > We can use that to make our tapdelay setup simpler. This is
-> > > > also how
-> > > > it currently works in arm-trusted-firmware.
-> > > >=20
-> > > > Signed-off-by: Steffen Dirkwinkel <s.dirkwinkel@beckhoff.com>
-> > > > ---
-> > > >=20
-> > > > =C2=A0 drivers/mmc/zynq_sdhci.c | 65
-> > > > +++++++++++++++++-----------------------
-> > > > =C2=A0 1 file changed, 28 insertions(+), 37 deletions(-)
-> > > >=20
-> > > > diff --git a/drivers/mmc/zynq_sdhci.c
-> > > > b/drivers/mmc/zynq_sdhci.c
-> > > > index 935540d1719..d4845245b2a 100644
-> > > > --- a/drivers/mmc/zynq_sdhci.c
-> > > > +++ b/drivers/mmc/zynq_sdhci.c
-> > > > @@ -42,14 +42,11 @@
-> > > > =C2=A0 #define SD_OTAP_DLY			0xFF180318
-> > > > =C2=A0 #define SD0_DLL_RST			BIT(2)
-> > > > =C2=A0 #define SD1_DLL_RST			BIT(18)
-> > > > +#define SD1_TAP_OFFSET			16
-> > > > =C2=A0 #define SD0_ITAPCHGWIN			BIT(9)
-> > > > -#define SD1_ITAPCHGWIN			BIT(25)
-> > > > =C2=A0 #define SD0_ITAPDLYENA			BIT(8)
-> > > > -#define SD1_ITAPDLYENA			BIT(24)
-> > > > =C2=A0 #define SD0_ITAPDLYSEL_MASK		GENMASK(7, 0)
-> > > > -#define SD1_ITAPDLYSEL_MASK		GENMASK(23, 16)
-> > > > =C2=A0 #define SD0_OTAPDLYSEL_MASK		GENMASK(5, 0)
-> > > > -#define SD1_OTAPDLYSEL_MASK		GENMASK(21, 16)
-> > > >=20
-> > > > =C2=A0 #define MIN_PHY_CLK_HZ			50000000
-> > > >=20
-> > > > @@ -275,44 +272,32 @@ static int arasan_sdhci_config_dll(struct
-> > > > sdhci_host *host, unsigned int clock,
-> > > > =C2=A0 static inline int arasan_zynqmp_set_in_tapdelay(u32 node_id,
-> > > > u32
-> > > > itap_delay)
-> > > > =C2=A0 {
-> > > > =C2=A0=C2=A0	int ret;
-> > > > +	u32 shift;
-> > > >=20
-> > > > -	if (IS_ENABLED(CONFIG_SPL_BUILD) || current_el() =3D=3D 3)
-> > > > {
-> > > > -		if (node_id =3D=3D NODE_SD_0) {
-> > > > -			ret =3D zynqmp_mmio_write(SD_ITAP_DLY,
-> > SD0_ITAPCHGWIN,
-> > > > -
-> > > > 						SD0_ITAPCHGWIN);
-> > > > -			if (ret)
-> > > > -				return ret;
-> > > > -
-> > > > -			ret =3D zynqmp_mmio_write(SD_ITAP_DLY,
-> > SD0_ITAPDLYENA,
-> > > > -
-> > > > 						SD0_ITAPDLYENA);
-> > > > -			if (ret)
-> > > > -				return ret;
-> > > > -
-> > > > -			ret =3D zynqmp_mmio_write(SD_ITAP_DLY,
-> > SD0_ITAPDLYSEL_MASK,
-> > > > -						itap_delay);
-> > > > -			if (ret)
-> > > > -				return ret;
-> > > > +	if (node_id =3D=3D NODE_SD_0)
-> > > > +		shift =3D 0;
-> > > > +	else if (node_id =3D=3D NODE_SD_1)
-> > > > +		shift =3D SD1_TAP_OFFSET;
-> > > > +	else
-> > > > +		return -EINVAL;
-> > > >=20
-> > > > -			ret =3D zynqmp_mmio_write(SD_ITAP_DLY,
-> > SD0_ITAPCHGWIN, 0);
-> > > > -			if (ret)
-> > > > -				return ret;
-> > > > -		}
-> > > > -		ret =3D zynqmp_mmio_write(SD_ITAP_DLY,
-> > > > SD1_ITAPCHGWIN,
-> > > > -					SD1_ITAPCHGWIN);
-> > > > +	if (IS_ENABLED(CONFIG_SPL_BUILD) || current_el() =3D=3D 3)
-> > > > {
-> > > > +		ret =3D zynqmp_mmio_write(SD_ITAP_DLY,
-> > > > SD0_ITAPCHGWIN
-> > << shift,
-> > > > +					SD0_ITAPCHGWIN <<
-> > > > shift);
-> > > > =C2=A0=C2=A0		if (ret)
-> > > > =C2=A0=C2=A0			return ret;
-> > > >=20
-> > > > -		ret =3D zynqmp_mmio_write(SD_ITAP_DLY,
-> > > > SD1_ITAPDLYENA,
-> > > > -					SD1_ITAPDLYENA);
-> > > > +		ret =3D zynqmp_mmio_write(SD_ITAP_DLY,
-> > > > SD0_ITAPDLYENA <<
-> > shift,
-> > > > +					SD0_ITAPDLYENA <<
-> > > > shift);
-> > > > =C2=A0=C2=A0		if (ret)
-> > > > =C2=A0=C2=A0			return ret;
-> > > >=20
-> > > > -		ret =3D zynqmp_mmio_write(SD_ITAP_DLY,
-> > SD1_ITAPDLYSEL_MASK,
-> > > > -					(itap_delay << 16));
-> > > > +		ret =3D zynqmp_mmio_write(SD_ITAP_DLY,
-> > SD0_ITAPDLYSEL_MASK << shift,
-> > > > +					itap_delay << shift);
-> > > > =C2=A0=C2=A0		if (ret)
-> > > > =C2=A0=C2=A0			return ret;
-> > > >=20
-> > > > -		ret =3D zynqmp_mmio_write(SD_ITAP_DLY,
-> > > > SD1_ITAPCHGWIN,
-> > 0);
-> > > > +		ret =3D zynqmp_mmio_write(SD_ITAP_DLY,
-> > > > SD0_ITAPCHGWIN
-> > << shift, 0);
-> > > > =C2=A0=C2=A0		if (ret)
-> > > > =C2=A0=C2=A0			return ret;
-> > > > =C2=A0=C2=A0	} else {
-> > > > @@ -326,14 +311,20 @@ static inline int
-> > > > arasan_zynqmp_set_in_tapdelay(u32 node_id, u32 itap_delay)
-> > > >=20
-> > > > =C2=A0 static inline int arasan_zynqmp_set_out_tapdelay(u32 node_id=
-,
-> > > > u32
-> > > > otap_delay)
-> > > > =C2=A0 {
-> > > > +	u32 shift;
-> > > > +
-> > > > +	if (node_id =3D=3D NODE_SD_0)
-> > > > +		shift =3D 0;
-> > > > +	else if (node_id =3D=3D NODE_SD_1)
-> > > > +		shift =3D SD1_TAP_OFFSET;
-> > > > +	else
-> > > > +		return -EINVAL;
-> > > > +
-> > > > =C2=A0=C2=A0	if (IS_ENABLED(CONFIG_SPL_BUILD) || current_el() =3D=
-=3D 3)
-> > > > {
-> > > > -		if (node_id =3D=3D NODE_SD_0)
-> > > > -			return zynqmp_mmio_write(SD_OTAP_DLY,
-> > > > -					=09
-> > > > SD0_OTAPDLYSEL_MASK,
-> > > > -						 otap_delay);
-> > > > +		return zynqmp_mmio_write(SD_OTAP_DLY,
-> > > > +						SD0_OTAPDLYSEL
-> > > > _MASK <<
-> > shift,
-> > > > +						otap_delay <<
-> > > > shift);
-> > > >=20
-> > > > -		return zynqmp_mmio_write(SD_OTAP_DLY,
-> > SD1_OTAPDLYSEL_MASK,
-> > > > -					 (otap_delay << 16));
-> > > > =C2=A0=C2=A0	} else {
-> > > > =C2=A0=C2=A0		return xilinx_pm_request(PM_IOCTL, node_id,
-> > > > =C2=A0=C2=A0				=09
-> > > > IOCTL_SET_SD_TAPDELAY,
->=20
+> Add access to OTP region. It supports info, dump, write and lock
+> operations. Usage example:
+>
+> 'mtd otpread nand0 u 0 1024' - dump 1024 bytes of user area starting
+>  from offset 0 of device 'nand0'.
+>
+> 'mtd otpwrite nand0 10 11223344' - write binary data 0x11, 0x22, 0x33,
+>  0x44 to offset 10 to user area of device 'nand0'.
+>
+> 'mtd otplock nand0 0 1024' - lock 1024 bytes of user area starting
+>  from offset 0 of device 'nand0'.
+>
+> 'mtd otpinfo nand0 f' - show info about factory area of device 'nand0'.
+>
+> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
+> Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+> ---
+>  Changelog:
+>  v1 -> v2:
+>   * Remove warning that OTP can't be erased after write.
+>  v2 -> v3:
+>   * Commit message updated by adding usage.
+>   * R-b added.
+>  v3 -> v4:
+>   * Fix build failure due to invalid format strings for 'printf()'.
+>   * Rebase over latest version of cmd/mtd.c.
+>
+>  cmd/Kconfig |   1 +
+>  cmd/mtd.c   | 224 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 225 insertions(+)
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 7292a150f5..f218dc6cf2 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -1363,6 +1363,7 @@ config CMD_MTD
+>         bool "mtd"
+>         depends on MTD
+>         select MTD_PARTITIONS
+> +       select HEXDUMP
 
+Make those change forced in increase the size of uboot and break this build
+
+https://source.denx.de/u-boot/custodians/u-boot-nand-flash/-/jobs/802378
+
+I think that those command could be optional and not forced to be
+included by default
+
+Michael
+
+
+>         help
+>           MTD commands support.
+>
+> diff --git a/cmd/mtd.c b/cmd/mtd.c
+> index e63c011e79..2b03a85ef0 100644
+> --- a/cmd/mtd.c
+> +++ b/cmd/mtd.c
+> @@ -11,6 +11,7 @@
+>  #include <command.h>
+>  #include <common.h>
+>  #include <console.h>
+> +#include <hexdump.h>
+>  #include <malloc.h>
+>  #include <mapmem.h>
+>  #include <mtd.h>
+> @@ -202,6 +203,219 @@ static bool mtd_oob_write_is_empty(struct mtd_oob_o=
+ps *op)
+>         return true;
+>  }
+>
+> +static int do_mtd_otp_read(struct cmd_tbl *cmdtp, int flag, int argc,
+> +                          char *const argv[])
+> +{
+> +       struct mtd_info *mtd;
+> +       size_t retlen;
+> +       off_t from;
+> +       size_t len;
+> +       bool user;
+> +       int ret;
+> +       u8 *buf;
+> +
+> +       if (argc !=3D 5)
+> +               return CMD_RET_USAGE;
+> +
+> +       if (!strcmp(argv[2], "u"))
+> +               user =3D true;
+> +       else if (!strcmp(argv[2], "f"))
+> +               user =3D false;
+> +       else
+> +               return CMD_RET_USAGE;
+> +
+> +       mtd =3D get_mtd_by_name(argv[1]);
+> +       if (IS_ERR_OR_NULL(mtd))
+> +               return CMD_RET_FAILURE;
+> +
+> +       from =3D simple_strtoul(argv[3], NULL, 0);
+> +       len =3D simple_strtoul(argv[4], NULL, 0);
+> +
+> +       ret =3D CMD_RET_FAILURE;
+> +
+> +       buf =3D malloc(len);
+> +       if (!buf)
+> +               goto put_mtd;
+> +
+> +       printf("Reading %s OTP from 0x%lx, %zu bytes\n",
+> +              user ? "user" : "factory", from, len);
+> +
+> +       if (user)
+> +               ret =3D mtd_read_user_prot_reg(mtd, from, len, &retlen, b=
+uf);
+> +       else
+> +               ret =3D mtd_read_fact_prot_reg(mtd, from, len, &retlen, b=
+uf);
+> +       if (ret) {
+> +               free(buf);
+> +               pr_err("OTP read failed: %d\n", ret);
+> +               ret =3D CMD_RET_FAILURE;
+> +               goto put_mtd;
+> +       }
+> +
+> +       if (retlen !=3D len)
+> +               pr_err("OTP read returns %zu, but %zu expected\n",
+> +                      retlen, len);
+> +
+> +       print_hex_dump("", 0, 16, 1, buf, retlen, true);
+> +
+> +       free(buf);
+> +
+> +       ret =3D CMD_RET_SUCCESS;
+> +
+> +put_mtd:
+> +       put_mtd_device(mtd);
+> +
+> +       return ret;
+> +}
+> +
+> +static int do_mtd_otp_lock(struct cmd_tbl *cmdtp, int flag, int argc,
+> +                          char *const argv[])
+> +{
+> +       struct mtd_info *mtd;
+> +       off_t from;
+> +       size_t len;
+> +       int ret;
+> +
+> +       if (argc !=3D 4)
+> +               return CMD_RET_USAGE;
+> +
+> +       mtd =3D get_mtd_by_name(argv[1]);
+> +       if (IS_ERR_OR_NULL(mtd))
+> +               return CMD_RET_FAILURE;
+> +
+> +       from =3D simple_strtoul(argv[2], NULL, 0);
+> +       len =3D simple_strtoul(argv[3], NULL, 0);
+> +
+> +       ret =3D mtd_lock_user_prot_reg(mtd, from, len);
+> +       if (ret) {
+> +               pr_err("OTP lock failed: %d\n", ret);
+> +               ret =3D CMD_RET_FAILURE;
+> +               goto put_mtd;
+> +       }
+> +
+> +       ret =3D CMD_RET_SUCCESS;
+> +
+> +put_mtd:
+> +       put_mtd_device(mtd);
+> +
+> +       return ret;
+> +}
+> +
+> +static int do_mtd_otp_write(struct cmd_tbl *cmdtp, int flag, int argc,
+> +                           char *const argv[])
+> +{
+> +       struct mtd_info *mtd;
+> +       size_t retlen;
+> +       size_t binlen;
+> +       u8 *binbuf;
+> +       off_t from;
+> +       int ret;
+> +
+> +       if (argc !=3D 4)
+> +               return CMD_RET_USAGE;
+> +
+> +       mtd =3D get_mtd_by_name(argv[1]);
+> +       if (IS_ERR_OR_NULL(mtd))
+> +               return CMD_RET_FAILURE;
+> +
+> +       from =3D simple_strtoul(argv[2], NULL, 0);
+> +       binlen =3D strlen(argv[3]) / 2;
+> +
+> +       ret =3D CMD_RET_FAILURE;
+> +       binbuf =3D malloc(binlen);
+> +       if (!binbuf)
+> +               goto put_mtd;
+> +
+> +       hex2bin(binbuf, argv[3], binlen);
+> +
+> +       printf("Will write:\n");
+> +
+> +       print_hex_dump("", 0, 16, 1, binbuf, binlen, true);
+> +
+> +       printf("to 0x%lx\n", from);
+> +
+> +       printf("Continue (y/n)?\n");
+> +
+> +       if (confirm_yesno() !=3D 1) {
+> +               pr_err("OTP write canceled\n");
+> +               ret =3D CMD_RET_SUCCESS;
+> +               goto put_mtd;
+> +       }
+> +
+> +       ret =3D mtd_write_user_prot_reg(mtd, from, binlen, &retlen, binbu=
+f);
+> +       if (ret) {
+> +               pr_err("OTP write failed: %d\n", ret);
+> +               ret =3D CMD_RET_FAILURE;
+> +               goto put_mtd;
+> +       }
+> +
+> +       if (retlen !=3D binlen)
+> +               pr_err("OTP write returns %zu, but %zu expected\n",
+> +                      retlen, binlen);
+> +
+> +       ret =3D CMD_RET_SUCCESS;
+> +
+> +put_mtd:
+> +       free(binbuf);
+> +       put_mtd_device(mtd);
+> +
+> +       return ret;
+> +}
+> +
+> +static int do_mtd_otp_info(struct cmd_tbl *cmdtp, int flag, int argc,
+> +                          char *const argv[])
+> +{
+> +       struct otp_info otp_info;
+> +       struct mtd_info *mtd;
+> +       size_t retlen;
+> +       bool user;
+> +       int ret;
+> +
+> +       if (argc !=3D 3)
+> +               return CMD_RET_USAGE;
+> +
+> +       if (!strcmp(argv[2], "u"))
+> +               user =3D true;
+> +       else if (!strcmp(argv[2], "f"))
+> +               user =3D false;
+> +       else
+> +               return CMD_RET_USAGE;
+> +
+> +       mtd =3D get_mtd_by_name(argv[1]);
+> +       if (IS_ERR_OR_NULL(mtd))
+> +               return CMD_RET_FAILURE;
+> +
+> +       if (user)
+> +               ret =3D mtd_get_user_prot_info(mtd, sizeof(otp_info), &re=
+tlen,
+> +                                            &otp_info);
+> +       else
+> +               ret =3D mtd_get_fact_prot_info(mtd, sizeof(otp_info), &re=
+tlen,
+> +                                            &otp_info);
+> +       if (ret) {
+> +               pr_err("OTP info failed: %d\n", ret);
+> +               ret =3D CMD_RET_FAILURE;
+> +               goto put_mtd;
+> +       }
+> +
+> +       if (retlen !=3D sizeof(otp_info)) {
+> +               pr_err("OTP info returns %zu, but %zu expected\n",
+> +                      retlen, sizeof(otp_info));
+> +               ret =3D CMD_RET_FAILURE;
+> +               goto put_mtd;
+> +       }
+> +
+> +       printf("%s OTP region info:\n", user ? "User" : "Factory");
+> +       printf("\tstart: %u\n", otp_info.start);
+> +       printf("\tlength: %u\n", otp_info.length);
+> +       printf("\tlocked: %u\n", otp_info.locked);
+> +
+> +       ret =3D CMD_RET_SUCCESS;
+> +
+> +put_mtd:
+> +       put_mtd_device(mtd);
+> +
+> +       return ret;
+> +}
+> +
+>  static int do_mtd_list(struct cmd_tbl *cmdtp, int flag, int argc,
+>                        char *const argv[])
+>  {
+> @@ -551,6 +765,10 @@ U_BOOT_LONGHELP(mtd,
+>         "\n"
+>         "Specific functions:\n"
+>         "mtd bad                               <name>\n"
+> +       "mtd otpread                           <name> [u|f] <off> <size>\=
+n"
+> +       "mtd otpwrite                          <name> <off> <hex string>\=
+n"
+> +       "mtd otplock                           <name> <off> <size>\n"
+> +       "mtd otpinfo                           <name> [u|f]\n"
+>         "\n"
+>         "With:\n"
+>         "\t<name>: NAND partition/chip name (or corresponding DM device n=
+ame or OF path)\n"
+> @@ -561,10 +779,16 @@ U_BOOT_LONGHELP(mtd,
+>         "\t<size>: length of the operation in bytes (default: the entire =
+device)\n"
+>         "\t\t* must be a multiple of a block for erase\n"
+>         "\t\t* must be a multiple of a page otherwise (special case: defa=
+ult is a page with dump)\n"
+> +       "\t<hex string>: hex string without '0x' and spaces. Example: ABC=
+D1234\n"
+> +       "\t[u|f]: user or factory OTP region\n"
+>         "\n"
+>         "The .dontskipff option forces writing empty pages, don't use it =
+if unsure.\n");
+>
+>  U_BOOT_CMD_WITH_SUBCMDS(mtd, "MTD utils", mtd_help_text,
+> +               U_BOOT_SUBCMD_MKENT(otpread, 5, 1, do_mtd_otp_read),
+> +               U_BOOT_SUBCMD_MKENT(otpwrite, 4, 1, do_mtd_otp_write),
+> +               U_BOOT_SUBCMD_MKENT(otplock, 4, 1, do_mtd_otp_lock),
+> +               U_BOOT_SUBCMD_MKENT(otpinfo, 3, 1, do_mtd_otp_info),
+>                 U_BOOT_SUBCMD_MKENT(list, 1, 1, do_mtd_list),
+>                 U_BOOT_SUBCMD_MKENT_COMPLETE(read, 5, 0, do_mtd_io,
+>                                              mtd_name_complete),
+> --
+> 2.35.0
+>
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
