@@ -4,57 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90B80C47DD9
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:45:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D56C1C54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:45:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F21F881DF;
+	by phobos.denx.de (Postfix) with ESMTP id DDD2A88217;
 	Fri, 22 Mar 2024 12:43:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1711107824;
-	bh=ptbjB7vny7LMXOI5RNKTmwDDnUc7llEs9SFC1px7cdg=;
+	bh=eJOr65NrCaA1tj3dKnYB22gVwpRA0ancxXdUR7BpvcQ=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GBuLHRstP1PzLk4uBSrUuc61A6a15VyKy6egx4qOWrG6h+A+VMKDpVN/erJV5QvDL
-	 7bJ9SUxF6bDF7MrAYWyS/FYrNpNi2lZ1eSWfdHoKT93M3QKgzxrUIIeUAP4urajiY4
-	 1ZIcfbXIiJkKTrHHc9BHINFHr1V1Gti9Z/7HCMw6zu0y4NN/7nfT9dkN8wgYkbHk3w
-	 hhPEAnt84YHzVmJCrhLQI7ckIOLw+6MGWLVjwcRPy8dC698rNW5pDgEuSCkWk7Z6Ld
-	 78YNco4nQjQGTGMGpFzT0NrWzD7dJVI63X6Q22AaWDWvOyr+eREVfeCKFDgo+LYm9f
-	 WTGK04n/E00ng==
+	b=Bt7ReCUffgghtbMQLr58+FCM4/XLaKANg2vKOIiRYN7GaTqsae/ruCoG1ocX9AFSb
+	 001cJsVRupDZdtTVgVRny0vvd16mjKBdzNvoOwRu04OR7nUThsg+RlFEJG+zACfVpE
+	 Uz3bpKsB5fgBBZfCD3YmA73M1ETcpYm6dQn1ir8wZSLMztx9bfEKdHwVP/LLnBTb4J
+	 cB7xUy4/HgaYtiJoMPWyi0SPadGfrBUfBTaRjFLe6nqgNkDnWuaaaqHNzfHdqcvk80
+	 llqPFHM5KQqa84A9jQqBxA52LQFJYwFBTVGAQGPw2piAGdzjrc+3cHSuqxFWS8AXn/
+	 A/Ei6EhTk0pTg==
 Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
  [85.222.111.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 9944C881E6;
- Fri, 22 Mar 2024 12:43:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 42E7C881FA;
+ Fri, 22 Mar 2024 12:43:39 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1711107819;
- bh=ptbjB7vny7LMXOI5RNKTmwDDnUc7llEs9SFC1px7cdg=;
+ bh=eJOr65NrCaA1tj3dKnYB22gVwpRA0ancxXdUR7BpvcQ=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=fXNcgeV2BIIWzPR4E0bqYIse2p4QqL3liUEwMTNsqfwWiinOZ8EHd143Qr/tWSA9f
- gmj9p6hd7foRk9GSSiGYU8LjEXs6df29qWWqzTw6NWK8yg44BIKjrYNBLrgdpJMRpB
- w2DLrTab4x5EEzUoUwrH6z8L0tuL8OTchp50Txm87hLn5Xzu/36t2GzuvrBQ5pyg+P
- TJCX0g/FT09chX376Ib9rAMew5h/NcMv+Zm2asxDGHKc63wSRLYeEBGR03IPptu9LO
- Y6EJo6HcfGPrv6jSE2Qnch7BpnppDxVUi6//UWebgdF4yUUUgKVic4Az78STspmsvY
- IRgURDlMAc/Hg==
+ b=pFAtfdncdg1+7nEv/uUz9we+WORC4FG2Vx5X/loJRO3Py7UJlR/RCK1NWh/Chko6O
+ bGJAiikAA++5mQ9voA9t32vkwDjgBigv59Ht55IlBEy/HhrP7Mv7PC9ozPrt4Y6DQM
+ OiAFmgIrX9Si0vaxllMJvGU7N0+VKt465haqswThDHDLTRk7BhP9i9lJWgmXoNE2oz
+ eRu860QAdP4NuYXiHzxlWaU2AWadYVxMpcfex4s/TBjjeWF6NsWdDH8gOnbjjb7xry
+ cAj5ZjF4mwgVqGlKYVOm0QdssAoexr7+9CmAyHg9yz/qyG6jxLM1k+RuzWGguViYRm
+ wZ56qCpbFNUfw==
 From: Lukasz Majewski <lukma@denx.de>
 To: Stefano Babic <sbabic@denx.de>,
 	u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, FUKAUMI Naoki <naoki@radxa.com>,
- Fabio Estevam <festevam@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marex@denx.de>, Mathieu Othacehe <othacehe@gnu.org>,
- Michal Simek <michal.simek@amd.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 07/12] dts: xea: Add device tree description for XEA HW rev. 2
-Date: Fri, 22 Mar 2024 12:43:10 +0100
-Message-Id: <20240322114315.2720727-8-lukma@denx.de>
+Cc: Lukasz Majewski <lukma@denx.de>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 08/12] arm: spl: Add definition for PHY reset GPIO for XEA HW
+ rev. 2
+Date: Fri, 22 Mar 2024 12:43:11 +0100
+Message-Id: <20240322114315.2720727-9-lukma@denx.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240322114315.2720727-1-lukma@denx.de>
 References: <20240322114315.2720727-1-lukma@denx.de>
@@ -76,64 +70,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For SPL and u-boot proper, the difference between revsions boils
-down only to the GPIO pin for PHY reset.
+The imx287 based XEA board's revision 2 uses GPIO_3_21 for PHY reset
+
+It is safe to keep the GPIO_2_13 as well, as in the SPL SPI1 is not
+used for transmission. This simplifies the code, as the proper
+configuration is performed either in falcon boot's read DTB or in
+u-boot proper (with correct FIT configuration chosen).
 
 Signed-off-by: Lukasz Majewski <lukma@denx.de>
 ---
 
- arch/arm/dts/Makefile                |  3 ++-
- arch/arm/dts/imx28-xea-2-u-boot.dtsi | 11 +++++++++++
- arch/arm/dts/imx28-xea-2.dts         |  8 ++++++++
- 3 files changed, 21 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/imx28-xea-2-u-boot.dtsi
- create mode 100644 arch/arm/dts/imx28-xea-2.dts
+ board/liebherr/xea/spl_xea.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 4fc508bcfc..69131599ae 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -879,7 +879,8 @@ dtb-$(CONFIG_TARGET_MX23_OLINUXINO) += \
+diff --git a/board/liebherr/xea/spl_xea.c b/board/liebherr/xea/spl_xea.c
+index 71194db235..6cf8f8390e 100644
+--- a/board/liebherr/xea/spl_xea.c
++++ b/board/liebherr/xea/spl_xea.c
+@@ -225,7 +225,8 @@ const iomux_cfg_t iomux_setup[] = {
+ 	MX28_PAD_ENET0_TXD0__ENET0_TXD0 | MUX_CONFIG_ENET,
+ 	MX28_PAD_ENET0_TXD1__ENET0_TXD1 | MUX_CONFIG_ENET,
+ 	MX28_PAD_ENET0_TXD3__ENET1_TXD1 | MUX_CONFIG_ENET,
+-	MX28_PAD_SSP1_CMD__GPIO_2_13, /* PHY reset */
++	MX28_PAD_SSP1_CMD__GPIO_2_13, /* PHY reset HW Rev. 1*/
++	MX28_PAD_SAIF0_LRCLK__GPIO_3_21, /* PHY reset HW Rev. 2*/
  
- dtb-$(CONFIG_MX28) += \
- 	imx28-evk.dtb \
--	imx28-xea-1.dtb
-+	imx28-xea-1.dtb \
-+	imx28-xea-2.dtb
- 
- dtb-$(CONFIG_MX51) += \
- 	imx51-babbage.dtb
-diff --git a/arch/arm/dts/imx28-xea-2-u-boot.dtsi b/arch/arm/dts/imx28-xea-2-u-boot.dtsi
-new file mode 100644
-index 0000000000..6ce82531d5
---- /dev/null
-+++ b/arch/arm/dts/imx28-xea-2-u-boot.dtsi
-@@ -0,0 +1,11 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Copyright 2024
-+ * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-+ */
-+
-+#include "imx28-xea-u-boot.dtsi"
-+
-+&mac0 {
-+	phy-reset-gpios = <&gpio3 21 GPIO_ACTIVE_LOW>;
-+};
-diff --git a/arch/arm/dts/imx28-xea-2.dts b/arch/arm/dts/imx28-xea-2.dts
-new file mode 100644
-index 0000000000..8cb1190ba5
---- /dev/null
-+++ b/arch/arm/dts/imx28-xea-2.dts
-@@ -0,0 +1,8 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
-+/*
-+ * Copyright 2024
-+ * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-+ */
-+
-+/dts-v1/;
-+#include "imx28-xea.dtsi"
+ 	/* TIVA boot control */
+ 	MX28_PAD_GPMI_RDY3__GPIO_0_23 | MUX_CONFIG_BOOT, /* TIVA0 */
 -- 
 2.39.2
 
