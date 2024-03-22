@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D03E8C54E71
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 10:58:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA042C54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 10:58:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 518EF88178;
-	Fri, 22 Mar 2024 11:58:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B6820881C5;
+	Fri, 22 Mar 2024 11:58:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2948388137; Fri, 22 Mar 2024 11:58:11 +0100 (CET)
+ id C09AA881C2; Fri, 22 Mar 2024 11:58:13 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 62E5C87F6A
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 11:58:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 9F75E87F6A
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 11:58:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B77611007;
- Fri, 22 Mar 2024 03:58:41 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3EE361007;
+ Fri, 22 Mar 2024 03:58:45 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D7C003F64C;
- Fri, 22 Mar 2024 03:58:04 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 226A33F64C;
+ Fri, 22 Mar 2024 03:58:07 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -35,11 +35,14 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Patrick DELAUNAY - foss <patrick.delaunay@foss.st.com>,
  Michal Simek <michal.simek@amd.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
- Michal Simek <monstr@monstr.eu>
-Subject: [PATCH v3 00/20] FWU: Add support for FWU metadata version 2
-Date: Fri, 22 Mar 2024 16:27:13 +0530
-Message-Id: <20240322105733.203888-1-sughosh.ganu@linaro.org>
+ Michal Simek <monstr@monstr.eu>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v3 01/20] configs: fwu: remove FWU configs for metadata V2
+ support
+Date: Fri, 22 Mar 2024 16:27:14 +0530
+Message-Id: <20240322105733.203888-2-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240322105733.203888-1-sughosh.ganu@linaro.org>
+References: <20240322105733.203888-1-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -58,103 +61,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Support is to be added in the following commits for the FWU metadata
+version 2. Disable the FWU feature on platforms that enable it for the
+V2 addition work.
 
+Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+---
+Changes since V2: None
 
-The following patch series adds support for version 2 of the FWU
-metadata. The version 2 metadata structure is defined in the latest
-revision of the FWU specification [1].
+ configs/corstone1000_defconfig           | 2 --
+ configs/sandbox64_defconfig              | 1 -
+ configs/synquacer_developerbox_defconfig | 4 ----
+ 3 files changed, 7 deletions(-)
 
-The earlier versions of these patches were migrating to a version 2
-only support in U-Boot, similar to TF-A. However, based on feedback
-from ST [2], this series has been updated to support both versions. A
-platform would still be needed to enable one of the two versions of
-metadata through a config symbol.
-
-TF-A has code which reads the FWU metadata and boots the platform from
-the active partition. TF-A has decided to migrate the FWU code to a
-version 2 only support. These changes have been merged in upstream
-TF-A.
-
-These changes have been tested on the ST DK2 board, which uses the GPT
-based partitioning scheme. Both V1 and V2 metadata versions have been
-tested on the DK2 board.
-
-These changes need to be tested on platforms with MTD partitioned
-storage devices.
-
-@Michal and @Kojima-san, please help in this testing.
-
-Note: The CI is breaking on some sandbox py tests, but the errors look
-unrelated. I will look into those issues, but the code review can
-proceed.
-
-[1] - https://developer.arm.com/documentation/den0118/latest/
-[2] - https://lists.denx.de/pipermail/u-boot/2024-February/546277.html
-
-Changes since V2:
-* New patch which retains support for V1 of metadata
-* Earlier patch was catering to v2 only support. These changes support
-  both versions of metadata.
-* Earlier patch was migrating to v2 only support. These changes
-  support both versions.
-* Support both metadata versions instead of only v2.
-* Added documentation changes.
-* Make changes to have the test work with v1 metadata.
-* Make changes to have the test work with updated logic in fwu code.
-* Changes to indicate support for both v1 and v2 instead of only v2.
-* Add config symbol for selecting either of the two metadata versions.
-
-
-Sughosh Ganu (20):
-  configs: fwu: remove FWU configs for metadata V2 support
-  tools: mkfwumdata: fix the size parameter to the fwrite call
-  drivers: fwu: add the size parameter to the metadata access API's
-  drivers: fwu: mtd: allocate buffer for image info dynamically
-  fwu: metadata: add support for version 2 of the structure
-  fwu: metadata: add a version agnostic structure
-  fwu: metadata: add functions for handling version specific metadata
-    fields
-  fwu: make changes to access version agnostic structure fields
-  capsule: fwu: transition the platform state on a successful update
-  fwu: add config symbols for enabling FWU metadata versions
-  fwu: mtd: remove unused argument from function call
-  fwu: mtd: get MTD partition specific info from driver
-  fwu: mtd: obtain image information from version agnostic structure
-  cmd: fwu: make changes for supporting FWU metadata version 2
-  tools: mkfwumdata: add support for metadata version 2
-  tools: mkfwumdata: add logic to append vendor data to the FWU metadata
-  test: fwu: make changes to the FWU metadata access test
-  doc: fwu: make changes to reflect support for FWU metadata v2
-  MAINTAINERS: add entry for FWU multi bank update feature
-  configs: fwu: re-enable FWU configs
-
- MAINTAINERS                              |   8 +
- cmd/fwu_mdata.c                          |  39 ++--
- configs/corstone1000_defconfig           |   1 +
- configs/sandbox64_defconfig              |   1 +
- configs/synquacer_developerbox_defconfig |   2 +-
- doc/board/socionext/developerbox.rst     |   7 +-
- doc/develop/uefi/fwu_updates.rst         |  20 +-
- doc/mkfwumdata.1                         |  16 +-
- drivers/fwu-mdata/fwu-mdata-uclass.c     |  10 +-
- drivers/fwu-mdata/gpt_blk.c              |  23 +-
- drivers/fwu-mdata/raw_mtd.c              |  78 ++++---
- include/fwu.h                            | 147 ++++++++++++-
- include/fwu_mdata.h                      |  71 ++++++-
- lib/efi_loader/efi_capsule.c             |  14 +-
- lib/fwu_updates/Kconfig                  |  14 ++
- lib/fwu_updates/Makefile                 |   2 +
- lib/fwu_updates/fwu.c                    | 204 ++++++++++++------
- lib/fwu_updates/fwu_mtd.c                |  34 +--
- lib/fwu_updates/fwu_v1.c                 | 167 +++++++++++++++
- lib/fwu_updates/fwu_v2.c                 | 260 +++++++++++++++++++++++
- test/dm/fwu_mdata.c                      |  16 +-
- tools/mkfwumdata.c                       | 235 ++++++++++++++++----
- 22 files changed, 1153 insertions(+), 216 deletions(-)
- create mode 100644 lib/fwu_updates/fwu_v1.c
- create mode 100644 lib/fwu_updates/fwu_v2.c
-
+diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
+index 8b2f77f648..29d7550afb 100644
+--- a/configs/corstone1000_defconfig
++++ b/configs/corstone1000_defconfig
+@@ -24,7 +24,6 @@ CONFIG_LOGLEVEL=7
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SYS_PROMPT="corstone1000# "
+ # CONFIG_CMD_CONSOLE is not set
+-CONFIG_CMD_FWU_METADATA=y
+ CONFIG_CMD_BOOTZ=y
+ # CONFIG_CMD_XIMG is not set
+ CONFIG_CMD_GPT=y
+@@ -67,4 +66,3 @@ CONFIG_FFA_SHARED_MM_BUF_OFFSET=0
+ CONFIG_FFA_SHARED_MM_BUF_ADDR=0x02000000
+ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_IGNORE_OSINDICATIONS=y
+-CONFIG_FWU_MULTI_BANK_UPDATE=y
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 3be9a00a85..7e8200e70c 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -272,7 +272,6 @@ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+ CONFIG_EFI_SECURE_BOOT=y
+ CONFIG_TEST_FDTDEC=y
+-CONFIG_FWU_MULTI_BANK_UPDATE=y
+ CONFIG_UNIT_TEST=y
+ CONFIG_UT_TIME=y
+ CONFIG_UT_DM=y
+diff --git a/configs/synquacer_developerbox_defconfig b/configs/synquacer_developerbox_defconfig
+index 2a0407de40..616d410074 100644
+--- a/configs/synquacer_developerbox_defconfig
++++ b/configs/synquacer_developerbox_defconfig
+@@ -11,14 +11,12 @@ CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="synquacer-sc2a11-developerbox"
+ CONFIG_SYS_LOAD_ADDR=0x80000000
+ CONFIG_TARGET_DEVELOPERBOX=y
+-CONFIG_FWU_NUM_IMAGES_PER_BANK=1
+ CONFIG_AHCI=y
+ CONFIG_FIT=y
+ CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_BOOTSTAGE_STASH_SIZE=4096
+ CONFIG_HUSH_PARSER=y
+ CONFIG_SYS_MAXARGS=128
+-CONFIG_CMD_FWU_METADATA=y
+ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_ERASEENV=y
+ CONFIG_CMD_NVEDIT_EFI=y
+@@ -53,7 +51,6 @@ CONFIG_DFU_TFTP=y
+ CONFIG_DFU_MTD=y
+ CONFIG_DFU_RAM=y
+ CONFIG_DFU_SF=y
+-CONFIG_FWU_MDATA_MTD=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_SYNQUACER=y
+ CONFIG_MMC_SDHCI=y
+@@ -96,4 +93,3 @@ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_IGNORE_OSINDICATIONS=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+-CONFIG_FWU_MULTI_BANK_UPDATE=y
 -- 
 2.34.1
-
 
