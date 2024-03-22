@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A95B5C47DD9
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 13:10:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3ACBC54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 13:10:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AAD3881BE;
-	Fri, 22 Mar 2024 14:10:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 487D4881BC;
+	Fri, 22 Mar 2024 14:10:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="U23dKn43";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="c9bgjjkk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C761881A9; Fri, 22 Mar 2024 14:10:30 +0100 (CET)
+ id BBAC3881A9; Fri, 22 Mar 2024 14:10:33 +0100 (CET)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9967D881AC
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 14:10:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F022E881AC
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 14:10:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42MDAHNV004770;
- Fri, 22 Mar 2024 08:10:17 -0500
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42MDALEJ004801;
+ Fri, 22 Mar 2024 08:10:21 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1711113017;
- bh=HoR0cvEOloUhGi5rgNeSOYKW5HhzpeuaL9LLPL3Xt4Y=;
- h=From:To:CC:Subject:Date;
- b=U23dKn43/cDFNusNfA6edx6/A70IaNWLuk5BkpykQCvura2azwbqEl/x9RYSQuCNQ
- kOjhfgnyorQWwkYpVEHEYaRyNQqEI9BoaMer3kgNiHJpIsK6Fxc2N/j2oO8zq+VUmG
- WRv2O0dUWrVlfQRwzc26BU26SuzDNGEVe7+dtQEo=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42MDAH4h005484
+ s=ti-com-17Q1; t=1711113021;
+ bh=+3mXuYAy+wJ0QcKz4of1cS6ea5hZEiMrFv1LYTXIxmg=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=c9bgjjkkC2Oj7SY3riu37uzn9PBUb8Kuup5mgUkQRNYbWYukJ7MsX6zZ6P3pVInwY
+ XdW3rFOx3oVNF2NzvbOtkRIGt1tMs4EO28cN8OzeZniqf+FcYjFLVmfO14WjNziesa
+ 6Eghi9NpbpIYzBmaeVaakT5xHQzZih1sxpL2tN9w=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42MDALwK005551
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 22 Mar 2024 08:10:17 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 22 Mar 2024 08:10:21 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 22
- Mar 2024 08:10:16 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2024 08:10:21 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 22 Mar 2024 08:10:16 -0500
+ Frontend Transport; Fri, 22 Mar 2024 08:10:21 -0500
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42MDABZ7026606;
- Fri, 22 Mar 2024 08:10:12 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42MDABZ8026606;
+ Fri, 22 Mar 2024 08:10:17 -0500
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
  <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
@@ -57,10 +57,13 @@ To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
 CC: <michal.simek@amd.com>, <marex@denx.de>, <neil.armstrong@linaro.org>,
  <afd@ti.com>, <vigneshr@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>,
  <u-kumar1@ti.com>, <n-francis@ti.com>
-Subject: [PATCH 0/4] Cleanup K3 binman templating
-Date: Fri, 22 Mar 2024 18:40:07 +0530
-Message-ID: <20240322131011.1029620-1-n-francis@ti.com>
+Subject: [PATCH 1/4] configs: j721e_sk: Move to separate defconfig for J721E
+ SK board
+Date: Fri, 22 Mar 2024 18:40:08 +0530
+Message-ID: <20240322131011.1029620-2-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240322131011.1029620-1-n-francis@ti.com>
+References: <20240322131011.1029620-1-n-francis@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -81,94 +84,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series does primarily three things:
-	1. Split out the common J721E defconfig for both EVM and SK
-	2. Cleanup k3-j721e-binman.dtsi to be SoC specific binman nodes
-	   and -u-boot.dtsi files of the respective boards can pick and
-	   edit according to their board. This is based on the
-	   discussion [1] and this is the primary goal of this series
-	3. Move J721E EVM and SK to using OF_UPSTREAM
+Add defconfig for J721E SK R5 and A72 configuration.
 
-This series depends on series [2] and patch [3] which implement
-OF_UPSTREAM.
+This includes and modifies the J721E EVM defconfigs:
+j721e_evm_r5_defconfig -> j721e_sk_r5_defconfig
+j721e_evm_a72_defconfig -> j721e_sk_a72_defconfig
 
-Also received input from Nishanth to clean up the unnecessary artifacts
-in the final build directory (maybe populate them in another directory),
-working on that as well but didn't want to delay v1 further considering
-I'm modifying a bunch of board builds and would like some friendly build
-tests and boot tests for them.
-
-[1] https://lore.kernel.org/u-boot/20240123205255.i7eynu6vdpoxwybf@irregular/
-[2] https://lore.kernel.org/u-boot/20240222093607.3085545-1-sumit.garg@linaro.org/
-[3] https://lore.kernel.org/u-boot/20240205-am62px-wip-rebasing-v3-11-04cbb42eaa6f@ti.com/
-
-Changes since RFC:
-https://lore.kernel.org/all/20240228112042.3437691-1-n-francis@ti.com/
-	- cleaned out FDT descriptions and blobs using macros (Manorit)
-	- modified J721E defconfigs to include missed out configs
-	  (Andrew)
-
-Boot logs:
-https://gist.github.com/nehamalcom/07dc7f95173f0bb67a8a26a6b3ab2b00
-
-Neha Malcom Francis (4):
-  configs: j721e_sk: Move to separate defconfig for J721E SK board
-  tools: binman: control.py: Delete template nodes after parsing
-  arm: dts: k3-*-binman.dtsi: Clean up and templatize boot binaries
-  arm: dts: k3-j721e: Move to OF_UPSTREAM
-
- arch/arm/dts/Makefile                         |    4 +-
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  |  161 +-
- arch/arm/dts/k3-am625-phycore-som-binman.dtsi |  291 +-
- arch/arm/dts/k3-am625-r5-beagleplay.dts       |   39 -
- arch/arm/dts/k3-am625-sk-binman.dtsi          |  148 +-
- arch/arm/dts/k3-am625-sk-u-boot.dtsi          |   42 +
- .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  |  296 +-
- arch/arm/dts/k3-am62a-sk-binman.dtsi          |  146 +-
- arch/arm/dts/k3-am62a7-sk-u-boot.dtsi         |   42 +
- arch/arm/dts/k3-am642-evm-u-boot.dtsi         |   42 +
- arch/arm/dts/k3-am642-sk-u-boot.dtsi          |   42 +
- arch/arm/dts/k3-am64x-binman.dtsi             |  239 +-
- arch/arm/dts/k3-am654-base-board-u-boot.dtsi  |   49 +
- arch/arm/dts/k3-am65x-binman.dtsi             |  144 +-
- .../arm/dts/k3-am68-sk-base-board-u-boot.dtsi |   26 +
- arch/arm/dts/k3-am69-sk-u-boot.dtsi           |   31 +-
- arch/arm/dts/k3-binman.dtsi                   |   96 +
- arch/arm/dts/k3-j7200-binman.dtsi             |  145 +-
- .../k3-j7200-common-proc-board-u-boot.dtsi    |   40 +
- .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   |  154 +-
- arch/arm/dts/k3-j721e-binman.dtsi             |  262 +-
- .../k3-j721e-common-proc-board-u-boot.dtsi    |   84 +
- arch/arm/dts/k3-j721e-common-proc-board.dts   |  976 ------
- arch/arm/dts/k3-j721e-main.dtsi               | 2741 -----------------
- arch/arm/dts/k3-j721e-mcu-wakeup.dtsi         |  681 ----
- arch/arm/dts/k3-j721e-r5-beagleboneai64.dts   |   91 +-
- arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |   84 +
- arch/arm/dts/k3-j721e-sk.dts                  | 1074 -------
- arch/arm/dts/k3-j721e-som-p0.dtsi             |  446 ---
- arch/arm/dts/k3-j721e-thermal.dtsi            |   75 -
- arch/arm/dts/k3-j721e.dtsi                    |  176 --
- arch/arm/dts/k3-j721s2-binman.dtsi            |  231 +-
- .../k3-j721s2-common-proc-board-u-boot.dtsi   |   42 +
- arch/arm/dts/k3-j784s4-binman.dtsi            |  154 +-
- arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        |   42 +
- board/ti/j721e/MAINTAINERS                    |    2 +
- configs/j721e_evm_a72_defconfig               |    5 +-
- configs/j721e_evm_r5_defconfig                |    2 +-
- configs/j721e_sk_a72_defconfig                |    9 +
- configs/j721e_sk_r5_defconfig                 |   10 +
- tools/binman/control.py                       |    6 +-
- 41 files changed, 889 insertions(+), 8481 deletions(-)
- delete mode 100644 arch/arm/dts/k3-j721e-common-proc-board.dts
- delete mode 100644 arch/arm/dts/k3-j721e-main.dtsi
- delete mode 100644 arch/arm/dts/k3-j721e-mcu-wakeup.dtsi
- delete mode 100644 arch/arm/dts/k3-j721e-sk.dts
- delete mode 100644 arch/arm/dts/k3-j721e-som-p0.dtsi
- delete mode 100644 arch/arm/dts/k3-j721e-thermal.dtsi
- delete mode 100644 arch/arm/dts/k3-j721e.dtsi
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+---
+ board/ti/j721e/MAINTAINERS      |  2 ++
+ configs/j721e_evm_a72_defconfig |  2 +-
+ configs/j721e_evm_r5_defconfig  |  2 +-
+ configs/j721e_sk_a72_defconfig  |  9 +++++++++
+ configs/j721e_sk_r5_defconfig   | 10 ++++++++++
+ 5 files changed, 23 insertions(+), 2 deletions(-)
  create mode 100644 configs/j721e_sk_a72_defconfig
  create mode 100644 configs/j721e_sk_r5_defconfig
 
+diff --git a/board/ti/j721e/MAINTAINERS b/board/ti/j721e/MAINTAINERS
+index f5ca7d06a34..06aba53d9b0 100644
+--- a/board/ti/j721e/MAINTAINERS
++++ b/board/ti/j721e/MAINTAINERS
+@@ -5,5 +5,7 @@ F:	board/ti/j721e
+ F:	include/configs/j721e_evm.h
+ F:	configs/j721e_evm_r5_defconfig
+ F:	configs/j721e_evm_a72_defconfig
++F:	configs/j721e_sk_r5_defconfig
++F:	configs/j721e_sk_a72_defconfig
+ F:	configs/j7200_evm_r5_defconfig
+ F:	configs/j7200_evm_a72_defconfig
+diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
+index 019ddcca7e8..34f7eeebbd5 100644
+--- a/configs/j721e_evm_a72_defconfig
++++ b/configs/j721e_evm_a72_defconfig
+@@ -85,7 +85,7 @@ CONFIG_MMC_SPEED_MODE_SET=y
+ # CONFIG_SPL_EFI_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+-CONFIG_OF_LIST="k3-j721e-common-proc-board k3-j721e-sk"
++CONFIG_OF_LIST="k3-j721e-common-proc-board"
+ CONFIG_MULTI_DTB_FIT=y
+ CONFIG_SPL_MULTI_DTB_FIT=y
+ CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
+index 4d4b96dec6b..49da2550ead 100644
+--- a/configs/j721e_evm_r5_defconfig
++++ b/configs/j721e_evm_r5_defconfig
+@@ -81,7 +81,7 @@ CONFIG_CMD_MTDPARTS=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_SPL_MULTI_DTB_FIT=y
+-CONFIG_SPL_OF_LIST="k3-j721e-r5-common-proc-board k3-j721e-r5-sk"
++CONFIG_SPL_OF_LIST="k3-j721e-r5-common-proc-board"
+ CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+diff --git a/configs/j721e_sk_a72_defconfig b/configs/j721e_sk_a72_defconfig
+new file mode 100644
+index 00000000000..8907b8ae58f
+--- /dev/null
++++ b/configs/j721e_sk_a72_defconfig
+@@ -0,0 +1,9 @@
++#include <configs/j721e_evm_a72_defconfig>
++
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_SOC_K3_J721E=y
++CONFIG_TARGET_J721E_A72_EVM=y
++
++CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-sk"
++CONFIG_OF_LIST="k3-j721e-sk"
+diff --git a/configs/j721e_sk_r5_defconfig b/configs/j721e_sk_r5_defconfig
+new file mode 100644
+index 00000000000..b361c691747
+--- /dev/null
++++ b/configs/j721e_sk_r5_defconfig
+@@ -0,0 +1,10 @@
++#include <configs/j721e_evm_r5_defconfig>
++
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_SOC_K3_J721E=y
++CONFIG_TARGET_J721E_R5_EVM=y
++
++CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-r5-sk"
++CONFIG_SPL_OF_LIST="k3-j721e-r5-sk"
++CONFIG_OF_LIST="k3-j721e-r5-sk"
 -- 
 2.34.1
 
