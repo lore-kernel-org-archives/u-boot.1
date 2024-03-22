@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98712C47DD9
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 19:26:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C377C54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 19:26:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8F7487FA3;
-	Fri, 22 Mar 2024 20:26:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B66587DE6;
+	Fri, 22 Mar 2024 20:26:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DWbBNkZ3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="swEmqsoo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5422588178; Fri, 22 Mar 2024 20:26:11 +0100 (CET)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id 62F0E88178; Fri, 22 Mar 2024 20:26:12 +0100 (CET)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED3DD87964
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 20:26:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EE8A687DE6
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 20:26:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-ddaad2aeab1so1039298276.3
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 12:26:08 -0700 (PDT)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-789dbd9a6f1so185031485a.1
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 12:26:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1711135568; x=1711740368; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AVpcjXl570lx35yt1ndqpUAI80x28VD1qCKcvcsahFE=;
- b=DWbBNkZ3yxWsJAH/Ik1QMyfue4ER4hiJwJYyybzopPFcjqeYxO1IgLo9rUiphX1gdS
- f9buRJoRgCX8xoCC2698jp43p8CI9glazPWEB/LXpBSSgO95viwt+yXjkfcsEDYa5Upb
- SYJeRPPoY+HP+MQw9uZ6cbiWKQ2HHs8FgoN1A=
+ bh=h27+0gQQp4X3S4G/iCkXg1lqrryXwnvvUrqoS3VgL+k=;
+ b=swEmqsoo7dl/jkVfP2VmHWM+IOqoE1pxPnq/T0Ac8NQIDMGHWQ3yqIhytrGUWVhf28
+ 5PIXyo9WsGQQQJp3ZQovtRp08qmB5kccHavJgtoX/YoBTVGzJWvn7kDZ27RT8jmY6fsP
+ Jpv0tZxNV/Fqr9B+/HACvGw2njjdjNSV/x2Nw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1711135568; x=1711740368;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AVpcjXl570lx35yt1ndqpUAI80x28VD1qCKcvcsahFE=;
- b=etNFJ+X5ra1O23JGFG98Wi8xhsbo9acnAOVAJZgrVIvkwB9GpqJqyKSEJvbYceQu5W
- jkFHknd+V8X6oyHzbvk9payTYlCP12/DTde8lmiGBS8dLEVKCRggrxhxcLBqk8F4pnMX
- dL2j0VyqieRLXmLGXTnjAd7gxnZdbU5dav3VGnfV2rakmVXz2AAt5T8EHaiUasMsl8YR
- 3fDRqZP4GotWOl5DprM/ndZlF0p1F/jLhI0OWKDvtYXBiyGMeg/EiV14vZU4RqxE5XIr
- WksTNOdINHG/z3SZWCsBb+6qOs8XusFYDCZr+HM0UifHwJDrAI30z+M13/eH7f6Pz8fe
- srIw==
+ bh=h27+0gQQp4X3S4G/iCkXg1lqrryXwnvvUrqoS3VgL+k=;
+ b=lwqOFNjfhKwXwDYkE7MsAcoiOrFubBsqZawL+BsGqaYJnhkAyaIQDtv1lrZ4D5f3uh
+ u4hyEs7/5J7OUwlCzhQwQjTsyqSRnDf6PWgsQNDb0Z/gDTYzSAdDAzY4GApZ+CD4x2Jt
+ WIv5O6+eoMV+5resmzPiw9LVRlkEeBDyk8POmi3PVXKutZswrBli3/SoMS6OwDTe3NVz
+ YHlSF5AznoyGCvTJvvK36Pkfw/YPsMpqmaxxtoS3yhv+BS0CONooaI1yeWmJTTIA5kWe
+ wgkL689soDY7P2Cw8tC8vyZCfABfKyPbhgrV3aSLgK1UX/9a4YwfrWtkRZxKdgSmlBZ/
+ 66FA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW/VwyxbbeAFLuBAUAhwjZUsgjbxGOhvcAEUc9g00HDAI4VdKA3au8GHkgHMPJVsstxkihF9RP/wS15owYseSFTb9LZKQ==
-X-Gm-Message-State: AOJu0YwnYYsBC6sw6f27M0Uh3z6y2QOF39nvqmnWgJcM2vd7oXpj9SNS
- QOuFOF+PRzJPt2UYFh8Jx6+9xL1Ek98EHVtKclVYyJgTiNkGlXX6rJGdgX1tGdA=
-X-Google-Smtp-Source: AGHT+IEyYltOigVmzRfZvhljsgJq4wfwLT16yDKyIPja7QJ+8tw3yyIGrbsW6WvTqmtxaOTdm2UtXA==
-X-Received: by 2002:a25:9a02:0:b0:dcc:9d30:58a0 with SMTP id
- x2-20020a259a02000000b00dcc9d3058a0mr278633ybn.64.1711135567806; 
- Fri, 22 Mar 2024 12:26:07 -0700 (PDT)
+ AJvYcCV9JW2mXCI6qBItgWyr3T/MWDLR3go3OVRfsQwomykIdgDfbeloNWsOTmgfmcEJ1HQV7t1pOyRTf0AbIrY8iNeYDW7UCw==
+X-Gm-Message-State: AOJu0Ywb4qkrsXSaDMHVnEgz31eKClCMHe2hV+wsi9xdV4Xs+29VZ3Go
+ QvrBla15NZfm6ZN1ggYLQSA4qww7+mIRxC6D5CSjgxeDxfi94y2ZPjiuhM1tu7o=
+X-Google-Smtp-Source: AGHT+IEVWJinHbffP08X3g+P5aMSd0a1Ow11pgVCfKM43YjPc4n2x1dFot81ITXo8THjW9Nc6p23gA==
+X-Received: by 2002:a05:6214:3018:b0:696:2489:9dc9 with SMTP id
+ ke24-20020a056214301800b0069624899dc9mr407692qvb.37.1711135568709; 
+ Fri, 22 Mar 2024 12:26:08 -0700 (PDT)
 Received: from [127.0.1.1] (065-184-193-066.res.spectrum.com. [65.184.193.66])
  by smtp.gmail.com with ESMTPSA id
- jo10-20020a056214500a00b0069102f97e08sm1362309qvb.97.2024.03.22.12.26.06
+ jo10-20020a056214500a00b0069102f97e08sm1362309qvb.97.2024.03.22.12.26.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Mar 2024 12:26:07 -0700 (PDT)
+ Fri, 22 Mar 2024 12:26:08 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: seanga2@gmail.com, Fabio Estevam <festevam@gmail.com>
-Cc: peng.fan@nxp.com, ye.li@nxp.com, u-boot@lists.denx.de, 
- marcel.ziswiler@toradex.com, francesco.dolcini@toradex.com, 
- hiago.franco@toradex.com, joao.goncalves@toradex.com
-In-Reply-To: <20240308201316.1721909-1-festevam@gmail.com>
-References: <20240308201316.1721909-1-festevam@gmail.com>
-Subject: Re: [PATCH 1/2] clk: clk-imx8qxp: Add LPUART IPG entries
-Message-Id: <171113556673.2191577.1419243975260990823.b4-ty@konsulko.com>
-Date: Fri, 22 Mar 2024 15:26:06 -0400
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Joao Paulo Goncalves <jpaulo.silvagoncalves@gmail.com>
+Cc: Joao Paulo Goncalves <joao.goncalves@toradex.com>, u-boot@lists.denx.de
+In-Reply-To: <20240319140427.73721-1-jpaulo.silvagoncalves@gmail.com>
+References: <20240319140427.73721-1-jpaulo.silvagoncalves@gmail.com>
+Subject: Re: [PATCH] arm: dts: k3-am625-verdin-r5: Change CPU frequency to
+ 800MHz
+Message-Id: <171113556788.2191577.2349016593069254080.b4-ty@konsulko.com>
+Date: Fri, 22 Mar 2024 15:26:07 -0400
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,17 +93,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 08 Mar 2024 17:13:15 -0300, Fabio Estevam wrote:
+On Tue, 19 Mar 2024 11:04:27 -0300, Joao Paulo Goncalves wrote:
 
-> Since commit cc7df0b9e8bc ("serial: lpuart: Enable IPG clock")
-> the colibri-imx8qxp board no longer boots.
+> The lowest speed grade of Toradex AM62 SoMs is K speed, resulting in a
+> max value of 800MHz for the CPU operating frequency. A solution with
+> runtime selection of the CPU frequency is already planned to avoid these
+> kinds of problems in the future.
 > 
-> The reason is that the imx8qxp clock driver does not handle the
-> LPUART IPG clocks inside get_rate(), set_rate() and enable() functions.
 > 
-> Fix the boot regression by adding the LPUART IPG entries.
-> 
-> [...]
 
 Applied to u-boot/master, thanks!
 
