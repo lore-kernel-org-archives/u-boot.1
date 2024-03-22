@@ -4,56 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D3F2C54E71
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:43:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29257C54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:44:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7FE2881EC;
-	Fri, 22 Mar 2024 12:43:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5C0FD881FF;
+	Fri, 22 Mar 2024 12:43:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711107818;
-	bh=W2SIImO38ouVpgkps1pm/Gfp7We6piaKHqANJcbDs0o=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=e1dkSd7tFh1jKsljQhQkUkYPO9BHn0HrHAQcBv4gdKKj6mcxZ7KdenkLiGJFYb6Ql
-	 gYgzHRzeXozBHJxr2a2ZkklBNq/2OTMOME0Q8DBCETPW9qdgFBZKRlREgRokWE0Hv+
-	 X0s+fcA3/+yWnQ9fM5HTxnBqbPrGZ414aNuFYWkn+p99PGo+2jMvyI70/tgTYWtYOj
-	 W8aTcL+OfB3aCNBwpJSy4ez6C4mzFykDhE41OVxamHbxzOb0pcxuudaKJjtxrXtquD
-	 HfDeHP3yIDfkug9bpadLbNmZFNEXiR7gDMVo+jivL6ldIJ27qIXALB4xoQLVwOO23W
-	 9p7HTE7gNb4Yw==
-Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
- [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="41jeG7bA";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E3177881D6; Fri, 22 Mar 2024 12:43:35 +0100 (CET)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2B06C881D4;
- Fri, 22 Mar 2024 12:43:35 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1711107815;
- bh=W2SIImO38ouVpgkps1pm/Gfp7We6piaKHqANJcbDs0o=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=FMrz8tC2Y9HcjsROSAZ802Qm4ZTuagt6yvECcz6ITUjhj6J+dtyhsoYb/O3RS3jOS
- Y0iP3pXcQl5wlBcQoBwlnPPVlUiTy+pbNbKXlgOLkYsyrKaSeE2I2+mgZVnlBdzxvG
- CfPzhYfGLyzjkEpO8dJ9lNcZnR0kQ/SZa/Xtyfe3+Z2rznl6jsTVDRJIxvFQU8T/sh
- SzTVehmLM11at2ltPMfKm+bkSDNAz4+gi50zFlHfFSxNqvd5qJ66CzJqxkdu/VuMte
- bH5yKzuG05+IOJwseeEvEQDSiDrfZhN5AwcZG2FoU7AJi0nHDQR//HyuA+BcrUKzLR
- yndnMrzLZY0yw==
-From: Lukasz Majewski <lukma@denx.de>
-To: Stefano Babic <sbabic@denx.de>,
-	u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Anatolij Gustschin <agust@denx.de>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 02/12] arm: xea: Add support for reading SoM (CPU) and base
- board HW revision
-Date: Fri, 22 Mar 2024 12:43:05 +0100
-Message-Id: <20240322114315.2720727-3-lukma@denx.de>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240322114315.2720727-1-lukma@denx.de>
-References: <20240322114315.2720727-1-lukma@denx.de>
+ by phobos.denx.de (Postfix) with ESMTPS id 4A934881D6
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 12:43:31 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Uxr/1YBUif6Y8+lLWKtoE8PHlfUFasbASQwX02jNIorTXzh6dxUusi0yGmqFNSspYEm3oaa2MoAQIIEWjkg4okkm+h8fWagdTOLmTq/4KpK5chV5ufjV6qpb57StlyFNf3+XycRvAx3L6KLP4VqgRJJykX3CK4XDtOrPR2pH3SdsAAv5EMTEABCNG1H+YwChb5uRPzhSI86hpID+oUzmNfPeKYIMJFOQCrEfK89G4Pj4TkRBTvb+xzvLtBsoPZsT5hCeUcDqTQXqLEhAGgZn+6feuEGzrs0wyUdWL3JYbwhT00yNChWx6yVAe94kUvPLINr07jYW2s0mug1DuKNuvA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Tk8UyhE0nTv+Jb4r291KdL5NHksqQ/yhVriugibV+U4=;
+ b=Ys8LCR6r7xNDuQHkwWclNTefBxZOUcGEX2itrGJpdJk72CUxVT5X2ayILo+6nktuVcYvNhRvTA7iQFmj+C30NVVwAUKUyBxvaMGuQY0Lqo5lCHmjFv8cr/hXWkHsGcQcbAipD3VCEU/mP+5syDE/sqbQMWdN9+xUyj+OOdMdLAz3fxiwIF/Ys6WuwmdWmiRWU2FBPHWA5rPvA24M0vA5Kn4HDGT8fwKPzGrhA1leFi4My2XrhQKZSYfuzQi8WAaVbKJp8e9CRZu23i5yAIAo65vIBjxe0mA/p4VG80aUj5BkCQTNQnKwLYU2/yuvihYQdzH9JJdwvASRAakcqzI3Ig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Tk8UyhE0nTv+Jb4r291KdL5NHksqQ/yhVriugibV+U4=;
+ b=41jeG7bAfwpQEjUyQiOAeXqfKM1SnrRsvkhfBs//HdR08jOedKT1M2lc+l38JU2wICFDpCfvJysk84TOotQ23Dhwmt0Fm6KJRpRj2O6aQ3QhM3yoXS/ukq8gu+TIRoofG9FYeic5MWW+ipHPTCbga8A0ljfy7/RGLkS9FFL2Ut0=
+Received: from DM5PR07CA0054.namprd07.prod.outlook.com (2603:10b6:4:ad::19) by
+ BY5PR12MB4132.namprd12.prod.outlook.com (2603:10b6:a03:209::22) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.34; Fri, 22 Mar
+ 2024 11:43:27 +0000
+Received: from DS2PEPF0000343E.namprd02.prod.outlook.com
+ (2603:10b6:4:ad:cafe::77) by DM5PR07CA0054.outlook.office365.com
+ (2603:10b6:4:ad::19) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.13 via Frontend
+ Transport; Fri, 22 Mar 2024 11:43:27 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ DS2PEPF0000343E.mail.protection.outlook.com (10.167.18.41) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7409.10 via Frontend Transport; Fri, 22 Mar 2024 11:43:27 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 22 Mar
+ 2024 06:43:25 -0500
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Ashok Reddy Soma <ashok.reddy.soma@amd.com>, "Polak, Leszek"
+ <LPolak@arri.de>, Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH] xilinx: Do not call private env_get_location() when
+ !ENV_IS_NOWHERE
+Date: Fri, 22 Mar 2024 12:43:17 +0100
+Message-ID: <830b9c93d30688cfa8a5cbb0388e79deb7731f29.1711107795.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2635; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=/EVH53ybSP1jYuuask25aqlb0zfhdMNDrHKg17YU8Bs=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtS/ede03xw6vfWrW1txwse7nF6VZbNr8nhNNasTvW2/H
+ HjgmZPSEcvCIMjEICumyCJtc+XM3soZU4QvHpaDmcPKBDKEgYtTACaS8YBhfth1rWWrXRu3RvrH
+ ib3r5ls+LdU1mWHBzPtsT4LeGFYLyC0qnXk8XiHq88cdAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS2PEPF0000343E:EE_|BY5PR12MB4132:EE_
+X-MS-Office365-Filtering-Correlation-Id: aad2344d-4f94-41f8-5926-08dc4a654a05
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: E4T6+iRz3OAv264JbeGr+7ZMeBrKbBmLuJRnkGZMdyvYm4Dx0yKJ8nNjToqyVDA2xeCypEecVY3kZDEUkUwKAzbfNSHaix/ReFEEFpkrlrcM1GOM/CWN4xLVsWtr9AApxskEpsC31SzceM6IEfNbsRKfYSv+hvDp9RzooNyrNKPH9t8YoyZdtT/sBSAKBbP16MTyEq8Jq19Iz12PXJsmEfpBxOjQBF7Z8UuQsCpxESw6TKuwTWKJCotA132Ewy+p0QhTA710hKb3dwI5ioRhPGjjqAyqlhTY7SMCof6lCllPmbgUjSUgRXrS2yjF9kVWVS4sjJMTOo8qtxUiqCXptXMhRb6iC4y0yAApGIcWy51tTA8pv3w3UiI6ZtGJUSWGKWfovTRLYZ0rzPHWUmuOy3ak876uuX5hY5ltASrWUNsDItFUdiYQijxr/0vxSN7OdVcV2EGW9QP7RxamTNg+G51TtL6Qo7CgSoVmLIjKB6UOlAJBZAR1BzwS3jfNUuQlHmb1Al+SG3BchRdbUgTKiRt5Y8Au0RfaKLA+yPvNSyVgFfYGG3T7Pgf9/igvqMcxcBeUrSCY/qdhfrDIisQ3HlBYnmuMWWUPGT/ZMdvCuMnTJxYGEIFqTwjG1a3SUMQMpwFXkDqy7L2hx8jRhJ4IChSuvRhLVVyp14YUVJkxYY14v5PlV28KsSUqUrAMBrMzgFPKQtkTYgeIWgHpl31nLU0k4ug6B60A5TBRzhRaoT5hSg+VtjpBPoPsw50nFxen
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(82310400014)(36860700004)(1800799015)(376005); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2024 11:43:27.3003 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: aad2344d-4f94-41f8-5926-08dc4a654a05
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF0000343E.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4132
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,84 +127,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The XEA board now has several HW revisions for both SoM and base boards.
-This patch provides support for reading those revision ID values in SPL
-(u-boot.sb) and then pass this information to u-boot proper, as the
-maximal SPL size (~55KiB) is not allowing for having FIT support in it.
+Private function for finding out location of environment is not working
+when ENV_IS_NOWHERE is disabled.
+The reason is that current fallback is ENVL_UNKNOWN when
+CONFIG_ENV_IS_NOWHERE is not enabled. The code could be updated like this
 
-It was necessary to handle reading GPIOs values solely in u-boot proper
-as one configuration (i.e. 'single binary' - imx28_xea_sb_defconfig)
-is not using SPL framework.
+-               return ENVL_NOWHERE;
++               if (IS_ENABLED(CONFIG_ENV_IS_NOWHERE))
++                       return ENVL_NOWHERE;
++               return ENVL_UNKNOWN;
 
-Signed-off-by: Lukasz Majewski <lukma@denx.de>
+But then boot is still not working because ENVL_UNKNOWN has no driver and
+env_init() returns -ENODEV. That's why it is better not to define board
+specific env_get_location() because then weak env_get_location() is used
+which is going over env_locations[] and returning locations which are
+actually enabled in u-boot instance.
+
+Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- board/liebherr/xea/spl_xea.c | 11 +++++++++++
- board/liebherr/xea/xea.c     | 29 +++++++++++++++++++++++++++++
- 2 files changed, 40 insertions(+)
+ board/xilinx/versal-net/board.c | 2 ++
+ board/xilinx/versal/board.c     | 2 ++
+ board/xilinx/zynqmp/zynqmp.c    | 2 ++
+ 3 files changed, 6 insertions(+)
 
-diff --git a/board/liebherr/xea/spl_xea.c b/board/liebherr/xea/spl_xea.c
-index 551ed6fbae..71194db235 100644
---- a/board/liebherr/xea/spl_xea.c
-+++ b/board/liebherr/xea/spl_xea.c
-@@ -230,6 +230,17 @@ const iomux_cfg_t iomux_setup[] = {
- 	/* TIVA boot control */
- 	MX28_PAD_GPMI_RDY3__GPIO_0_23 | MUX_CONFIG_BOOT, /* TIVA0 */
- 	MX28_PAD_GPMI_WRN__GPIO_0_25 | MUX_CONFIG_BOOT, /* TIVA1 */
-+
-+	/* HW revision ID Base Board */
-+	MX28_PAD_LCD_D12__GPIO_1_12,
-+	MX28_PAD_LCD_D13__GPIO_1_13,
-+	MX28_PAD_LCD_D14__GPIO_1_14,
-+
-+	/* HW revision ID (SoM) */
-+	MX28_PAD_LCD_D15__GPIO_1_15,
-+	MX28_PAD_LCD_D16__GPIO_1_16,
-+	MX28_PAD_LCD_D17__GPIO_1_17,
-+	MX28_PAD_LCD_D18__GPIO_1_18,
- };
- 
- u32 mxs_dram_vals[] = {
-diff --git a/board/liebherr/xea/xea.c b/board/liebherr/xea/xea.c
-index c8ac526cb4..d9cf27c81b 100644
---- a/board/liebherr/xea/xea.c
-+++ b/board/liebherr/xea/xea.c
-@@ -48,6 +48,35 @@ DECLARE_GLOBAL_DATA_PTR;
-  * Functions
-  */
- 
-+/*
-+ * Reading the HW ID number for XEA SoM module
-+ *
-+ * GPIOs from Port 1 (GPIO1_15, GPIO1_16, GPIO1_17 and GPIO1_18)
-+ * are used to store HW revision information.
-+ * Reading of GPIOs values is performed before the Device Model is
-+ * bring up as the proper DTB needs to be chosen first.
-+ *
-+ * Moreover, this approach is required as "single binary" configuration
-+ * of U-Boot (imx28_xea_sb_defconfig) is NOT using SPL framework, so
-+ * only minimal subset of functionality is provided when ID is read.
-+ *
-+ * Hence, the direct registers' access.
-+ */
-+#define XEA_SOM_HW_ID_GPIO_PORT (MXS_PINCTRL_BASE + (0x0900 + ((1) * 0x10)))
-+#define XEA_SOM_REV_MASK GENMASK(18, 15)
-+#define XEA_SOM_REV_SHIFT 15
-+
-+static inline u8 get_som_rev(void)
-+{
-+	struct mxs_register_32 *reg =
-+		(struct mxs_register_32 *)XEA_SOM_HW_ID_GPIO_PORT;
-+
-+	u32 tmp = ~readl(&reg->reg);
-+	u8 id = (tmp & XEA_SOM_REV_MASK) >> XEA_SOM_REV_SHIFT;
-+
-+	return id;
-+}
-+
- static void init_clocks(void)
+diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/board.c
+index aecaeb657453..da03024e162f 100644
+--- a/board/xilinx/versal-net/board.c
++++ b/board/xilinx/versal-net/board.c
+@@ -372,6 +372,7 @@ void reset_cpu(void)
  {
- 	/* IO0 clock at 480MHz */
+ }
+ 
++#if defined(CONFIG_ENV_IS_NOWHERE)
+ enum env_location env_get_location(enum env_operation op, int prio)
+ {
+ 	u8 bootmode = versal_net_get_bootmode();
+@@ -401,3 +402,4 @@ enum env_location env_get_location(enum env_operation op, int prio)
+ 		return ENVL_NOWHERE;
+ 	}
+ }
++#endif
+diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+index 8c2e614ad8a0..4f6d56119db1 100644
+--- a/board/xilinx/versal/board.c
++++ b/board/xilinx/versal/board.c
+@@ -291,6 +291,7 @@ void reset_cpu(void)
+ {
+ }
+ 
++#if defined(CONFIG_ENV_IS_NOWHERE)
+ enum env_location env_get_location(enum env_operation op, int prio)
+ {
+ 	u32 bootmode = versal_get_bootmode();
+@@ -320,3 +321,4 @@ enum env_location env_get_location(enum env_operation op, int prio)
+ 		return ENVL_NOWHERE;
+ 	}
+ }
++#endif
+diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
+index ba49eb7be229..79daaf8723ac 100644
+--- a/board/xilinx/zynqmp/zynqmp.c
++++ b/board/xilinx/zynqmp/zynqmp.c
+@@ -588,6 +588,7 @@ int mmc_get_env_dev(void)
+ 	return bootseq;
+ }
+ 
++#if defined(CONFIG_ENV_IS_NOWHERE)
+ enum env_location env_get_location(enum env_operation op, int prio)
+ {
+ 	u32 bootmode = zynqmp_get_bootmode();
+@@ -621,6 +622,7 @@ enum env_location env_get_location(enum env_operation op, int prio)
+ 		return ENVL_NOWHERE;
+ 	}
+ }
++#endif
+ 
+ #if defined(CONFIG_SET_DFU_ALT_INFO)
+ 
 -- 
-2.39.2
+2.44.0
 
