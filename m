@@ -4,114 +4,199 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EEE5C54E71
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 12:09:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F716C47DD9
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 12:17:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 695A0881C2;
-	Fri, 22 Mar 2024 13:09:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AB76B881BE;
+	Fri, 22 Mar 2024 13:17:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="y0IRUBR0";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="JvvlFQX0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 103418820D; Fri, 22 Mar 2024 13:09:35 +0100 (CET)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::600])
+ id 32EF98817E; Fri, 22 Mar 2024 08:17:07 +0100 (CET)
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2407::601])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E28AA881C2
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 13:09:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BAB18816D
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 08:17:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ReMCL26hsXa17iJzcHVKHY3eP3IeYeo8YLGL0ZAX2HXgIQt0rHS7cR5HPEnXVcUIkP4nnP5cca0HD4D6G9mXpyo4nIRts8BHN0xvqUlIrnGZL9hieTCI3mw4MVPK+EkM4sF1bABxYM7akpjXj0FvWO7W1MgE7+/uTGkuwe20VXr3Meh3k7DhmU7Gfzl6yW6sHRa1eU2nd8mWmz8kIdaH1Yt6cTCulb9mLXfyj57ADYUbcq+eVXZbeL3OlFk5Is3L2Pt/3ruxhNsztskRvT7qxKbOS8a6GHjIzd+Z7Dxl3lrJfUhKkvGaQkmbl/QL/iJNKLnT1n4ujLbBspI3dm+2EA==
+ b=kINQrk8VVNqQHEJ9stlU6VjSvll1BCI0t2+3EH91wBPrZo+3ztVltiDHLQiqDc2X8PldxNyQJudnvC9lU9mYQ9D66INJ5j+QHtn0NWd4V0jWd0L97rz3yfLwS8orYHeBLuE/ZqZEM4/GJZ1j9K5XDMpRKJJU19Tqkveu1H8mdIq11temwWZ8+WQNMjMNlV4xJmfXOY6/IxOsJVoNtEc+ia8uONeA9yIqJxkgXwuKAltb3NEkYHg91rlzd8P1ePPQ/Xcw2/G9NK3zpnpgUuUtx2KBJdIhoLTkCytqliyYir3PyxlJVtH3xHFGsmpGd50I4Ki+fbV3KYWmGOYu9fyHhA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ujvTPHObQcLrqVIHkwvYUfN+kU8d5AbyJnBGuoHpCXA=;
- b=UzKq6x8r6HVOEsIGS8neYnNBPI1MFCoMQ2FYI27uzx/+eZflW5WxqfeeA4XZ/mfNf/NDF3OfotMTKUczN/Ti+BPvIIYSO8rgZdpohmMFkEnJ5rJvqe/QpcQaS9BbGx7MMHmV4E7sejygK/751wwlrSqFBo3XGD+3eAEbTgL+QtWDTeci35QyJD9CvyHFvT70FXAf7/3re8u8jbknxi7l24SIoKXfo6L/o0EqYWAtth4dkQ4H8qmmlr9sFJ20dAOkmC+aY0HlMZ7oPFxdqjTh8+9ahT/mw3KKt39/0gW0AvRPo79yaMUirrWG+36A13SFKZJySxIamY7y8V9S5u/prw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
+ bh=Vji2rtyI0I08Z5bFLFEU6Ly4AZKqyZebqKMwZTkY/qc=;
+ b=GoOM6ixkFIj4JJM3HRmbJxJNkx5O1SnIDpzmtdosiFitrFSQSU+Mj7d2BZmIA8VqTLdGHnd9W1LTcREge/a2gCJeiyEAl3lMkA61ZiJveCOv3Fq+rJ72fdd0e8mOGSIQj6kkOcLj7EOSXqgwOwvtr6E2/VkKfUPNUOz1+YMtrmOO/7fpQlJc5IR59Yl2vz6M/0JaPX39ENx3WIsWjrPPYGyBWDDnLsbj2jSBgZNjQISDv7LNz4gwb9K3yc8hX4s/3EwSDkUBHkf9ME3lCwY+aicVVJfDIY0aFlbIaB+unN/KjysrETfxr4e3dPVq/eVukA9c7GIjk1p1D/1rBtJ3CQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ujvTPHObQcLrqVIHkwvYUfN+kU8d5AbyJnBGuoHpCXA=;
- b=y0IRUBR00+xu2hf12zHLlSy3DcDDDLnMwU+D+nC91aiuAtJcIbFZBLMOHKfnEPyTx6P/2a8jpi2+b6L0CQHrptgF60j8GuVxTXlpaQuz+GLLM8hpAKJv7GaevysY9IVq4LT4FR0cdqdD1EUltwgleeL4vjRgvAanTWSMlVWVzWE=
-Received: from SJ0PR13CA0131.namprd13.prod.outlook.com (2603:10b6:a03:2c6::16)
- by PH8PR12MB7326.namprd12.prod.outlook.com (2603:10b6:510:216::7)
+ bh=Vji2rtyI0I08Z5bFLFEU6Ly4AZKqyZebqKMwZTkY/qc=;
+ b=JvvlFQX0oSMtXFZA5aRiuHO2noeaEDLoXT17SRcKxeaZQYZd6K4BV3UN50igug7CGlH6vHQrh2xSgHuPtsVjIneQA7RRE62Otfq9Zgh7YvMlkmPzTGvgHhMXg4PCAUAHe3ZBsTVdj2mHGfgevumxPyk9JN5Zsvpz+p5h8MCc2ao=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
+ by CH3PR12MB9430.namprd12.prod.outlook.com (2603:10b6:610:1cd::18)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7386.34; Fri, 22 Mar
- 2024 12:09:29 +0000
-Received: from SJ1PEPF00001CE7.namprd03.prod.outlook.com
- (2603:10b6:a03:2c6:cafe::e0) by SJ0PR13CA0131.outlook.office365.com
- (2603:10b6:a03:2c6::16) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.11 via Frontend
- Transport; Fri, 22 Mar 2024 12:09:29 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SJ1PEPF00001CE7.mail.protection.outlook.com (10.167.242.23) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7409.10 via Frontend Transport; Fri, 22 Mar 2024 12:09:29 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 22 Mar
- 2024 07:09:27 -0500
+ 2024 07:16:59 +0000
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::6622:ec76:9367:3907]) by SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::6622:ec76:9367:3907%2]) with mapi id 15.20.7386.025; Fri, 22 Mar 2024
+ 07:16:59 +0000
+Message-ID: <1ad397c3-6732-4e8c-8326-a3443288355c@amd.com>
+Date: Fri, 22 Mar 2024 08:16:30 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 16/24] xlnx: drop dt-binding headers
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
+ Ryder Lee <ryder.lee@mediatek.com>, Chunfeng Yun
+ <chunfeng.yun@mediatek.com>, Eugen Hristev <eugen.hristev@collabora.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Ryan Chen <ryan_chen@aspeedtech.com>,
+ Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
+ Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
+ Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
+ Dai Okamura <okamura.dai@socionext.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
+Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
+ uboot-stm32@st-md-mailman.stormreply.com, uboot-snps-arc@synopsys.com
+References: <20240321-b4-upstream-dt-headers-v2-0-1eac0df875fe@linaro.org>
+ <20240321-b4-upstream-dt-headers-v2-16-1eac0df875fe@linaro.org>
+Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>, <ilias.apalodimas@linaro.org>
-CC: Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>
-Subject: [PATCH v2 2/2] arm64: zynqmp: Add MTD partition handling for
- dfu_alt_info generation
-Date: Fri, 22 Mar 2024 13:09:19 +0100
-Message-ID: <db58d9f3fc142004d833bb115bfba0e26d660b66.1711109356.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <4cec866f5fffa742258c65796371d7bfc6068915.1711109356.git.michal.simek@amd.com>
-References: <4cec866f5fffa742258c65796371d7bfc6068915.1711109356.git.michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <20240321-b4-upstream-dt-headers-v2-16-1eac0df875fe@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR0202CA0005.eurprd02.prod.outlook.com
+ (2603:10a6:803:14::18) To SJ2PR12MB8109.namprd12.prod.outlook.com
+ (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2773; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=46xLpuzfuSCuRgAxPthvYKGnD/DUQDO48WPn7PSPaA0=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhtS/JR/Mai9r+Hvq9USl/F1ziGXfq2qRFJGVzX9tn4ZeP
- 7F9fsXzjlgWBkEmBlkxRRZpmytn9lbOmCJ88bAczBxWJpAhDFycAjCROg+G+bmTDqgsfd69rMxz
- WVlR8JobjZvOX2CY72a/fs2uLpNH97YGsTiKu9uLJU8sBQA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CE7:EE_|PH8PR12MB7326:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6d746e7e-0fb3-4e49-d74f-08dc4a68ecef
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|CH3PR12MB9430:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3c832478-c866-4278-a196-08dc4a401037
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: mxkOo2UWSKPrlND69JoZ4GbIqB6pVLPPTnt7/WemEI/1OU1gGHAysUR9jFNm48DwgzWESbSPQo5QVn0X92gnt0wHLwKaqoZW02h4JTKKtU07E5woQqaaMtU33E2FesmJVQ1qtflv33bCJqyckbBcyXFpWlL/wI9mET8o5Zk+t+jTIc4Bx8Dd1m9QvanHkxpYMUuwgPDKMfgUUJnE4SQ4wCL1W1s0/mXYBXUaqMwXgwxAvrv66ebZKgxWR4vurKYAD0jxTzYZ6M5ViU8U6wW8Itt2p+ibwmRYAMA6fBtlyq0O1ZG9E7apg3dNn2hJWe3ELwj06vuOztO+3XMOsmb61vYYLNM9sjZhST9haJ5RIn5vnf4VpII8OvbbI7tMIMBU+logRYEwQt1QWD5874LZUqn1djA4DkMEaa/Tlw4B1FOoH+a7Oth3lxQtB3W7DzaS3MzQ6Wq+VZS8eEp1+2hoEGG0djkgHP/Qjc9i5U5JAIJRCVx9+B/b8H4cTqdDH2DmTQaVGwzSSSC8zz5eMXrzDAQXtsUJcLc646jHdaIpBAY1+VUCLHQv4WItatQ0bNPvXjZlwTAFG5hBhM42uyFndJvsmJq0eYp5zgf2SdUYdM/C/tgswv0Cm71VL/5CE3dyxQamWmR2Q6DqIuIhIZRsNjtDP+TjEpyOPNf3XvOHuyAHnEeQCatWlmGrViht/R4rm2BX4p+xy6fof3E3bNv6KupdzjDBG7tPlouaoTU0d6awwlPLpTIBdLkcOiU4ozF7
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(376005)(82310400014)(36860700004)(1800799015); DIR:OUT;
- SFP:1101; 
+X-Microsoft-Antispam-Message-Info: 3HTsLT5Ayr775S7YAew2Kxxl1vHaOIT3B1vY4P5S9rGXmVNYbdxbKNpu/iert8+JTEspGB3LDXn+wfClY4Ks0vmZkPq4xt0DUw2wR6l1DnhZFUpcTTyS2WjIcU91/QuTh7fWHUSaUs0A6LEWd7QkZwufgcShRB/MDeKnkACJ1wm1Bkdbg+5NHkl6LkntyrHZTI4m3vyrHU5yO205gT0bBOIA7qLqgi2IUwHLzsW7jkrTNvdyZJUgg9ha2xeXa27EHcQglDVYEgqId3hw5tJq6pAyNb8HQluk1b2XuHJcRTCVwVhfDsSMPADQpe68RHN4cs7GrjV38z3SKF5XzjKtiz6FDR9VaeJNR9botwzunpAmld9s9SEdObbGlnfCNSH+fO+6j9SR8oxxi04UIo5K/uBM3jTLWrUn88ELJzCbvXQOElSN71UhMUkMPJ50XJHcVuZX42b/1WYrW4oeGyHsmznor6SZwZpaTNezjPpB4tPzikBLGPHLR3DjFZ6gbaOaSUJVCDfvWAAItrhORgQQBl9OPRbQQ01rvzxDW6oKLmUiUKHW7ek8qWjGhin/kVbPz8ofrAtlHertpYR0DEAgaD14elAm/HLqnOGNx5cgxIx5dv4ARpK3/Ze8GCbGwnYpQUXOmsitrRlO2uTiC39KChDB4Ik2Ojbpbve/mdOScGSI7QWoIlefMySXBtcYaQKO1HzCPOPbXwX9aqJX1sIQ3w==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(7416005)(1800799015)(366007)(376005)(921011); DIR:OUT; SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eW10RkhlNmgwRTcydUpjSDR5K3U2dXNXNy8rOTh2UDBFTSthS3NPYXY0QXZP?=
+ =?utf-8?B?dEtLdyt4STJQM0lEMktXVzZGODFwS3p5NTlhcUpVWTZrMXJQQzhUUTBqRWdq?=
+ =?utf-8?B?YXVMRXd3LzdNZTVSSDBRQ3ZER0pUQmtpWGoyQnc2Q2NaYzhiaFZCRElJOUx4?=
+ =?utf-8?B?WUJjSnhrSm5LbDJkNDFQbWlyZjJLcjFvVVhxSm9JRG1kT3MrMzBmekpqY2Q3?=
+ =?utf-8?B?Y214djloTDBHM0diRVNHQXhHcHhtSXhXMXZCSVJIYk9SK21JZVplZkNDUG9w?=
+ =?utf-8?B?aGJYUjlIdzJzTjJ5YUNBUDVLS3VYcmM1Y1dqYWF3YitYeUhKZE0zY1BnVTFq?=
+ =?utf-8?B?bERlNU5qSW05dnNuNHZkWnFBb0ZRUVdINUVpeC9LdjZaUGVUcXljVTFYYitv?=
+ =?utf-8?B?NFpDNnNCRW1vWThldkhHMGloZUg5T2Z0QmtwNWRJMUx2RDh4SEY4MEUyQmky?=
+ =?utf-8?B?cFBhQVA3UThyQWFvUEZCVmpVR2xGcEl1TG9nRGxocjJadUhWQ1VDcm9QUmts?=
+ =?utf-8?B?YVJQUFhLRklOZzdoeFhJVURSK2Z0bFIwdWhPVkp3MmdkeG1lOUJ5RUhuTE5C?=
+ =?utf-8?B?REVXbmk2NmlJZEJFZ2lGQ1BYbWJyWEN0VHV0V1dmdTNmYjR2WTNBSFZaZThz?=
+ =?utf-8?B?ZXh0TUFzUkxOaXdWTmhtQmV5a0RtQ09rSTR0WTNzTzdJbEFMcno0VG1CQjZ2?=
+ =?utf-8?B?MC9TVlVaaDJHVE9SMUJxZVZGODdtRytyUzk2UEhUUjk4MGRONC9YdEVUL2tx?=
+ =?utf-8?B?djBUVUxObnpXRkRZUnJYM3VxR3ZHa1l3SXZ3MHVtSmszRGprVUVvREprOUI5?=
+ =?utf-8?B?MmxsampWQkZwSnZKRytqcm93R3JPTi9VTlNTRnJrQmhrbFR6Ykt0VG51clNh?=
+ =?utf-8?B?SXVsVzFGT1JOanpUZkJRYnBvN2lsZHJzeFVWKzRlaHFFdDFidGp5WW5HekYx?=
+ =?utf-8?B?dmR1WDFnUzJrZmxIMnBncUlPL0hEYmIzQk1QUG4ycmhoR3FsM2txd1pDRDlN?=
+ =?utf-8?B?LzRKUk03Zmw1eUk4YXdpbnFsK1pqak5ybVN0S0lkVUhoS2FBMVRaYkZVdnZP?=
+ =?utf-8?B?eWpHcWRUWldjZmsvUkxubDdCS0gzcko3SVJ1YjBxMGdVM1c2TG9DU1cvUllS?=
+ =?utf-8?B?aUgvSjd6L2FSSU5IaG15V2hYTGcrVFMwamRCbG5uSjNURXluMkI2MXlvQ2dR?=
+ =?utf-8?B?WUdxbks3MjN4Z2lYaEcxSmEvaGtPUCtwa0dYMXkzVFBuRndaOWNmK1BZSXNm?=
+ =?utf-8?B?ZWthZHI0U2hUV3pBT0owcys1MXVnVVpIMFFNV0lVc3Z6WGdnSUJWN05wL2sw?=
+ =?utf-8?B?Q09rMmZQMXBuRTRwSUZwdUVSVHRySFBRcHNaTzlXWXFFOFBoUXRjZEUxajlx?=
+ =?utf-8?B?TE4rOWUrVXJhbXFVbHIwZEdVNGxtU1Y2QlRGTTVjK1hUdlJhNXlCK3NDM2sv?=
+ =?utf-8?B?OG14R1A1cTF1dU5sNFRGTGdKWWIza09aK1FadzhJV0IzM1RJdTNzTzZVMmFJ?=
+ =?utf-8?B?NjBuZzQvTWZVYTRPa0dSZFJSb3pvMDBaYTc4TU1xSHRLS0xZUGViNE1uQm1l?=
+ =?utf-8?B?ajBkRThzTW51NWhHZXV5VTVEZ0JYd1EvMHkyREdhbVZYaTl6Y0RlV2lNUEV0?=
+ =?utf-8?B?eDJMWDJPM1F6Y3BneWxzaGtqTkFpYndVWTVBSlpaVGhNVkY0RS9ZNDY2L2xU?=
+ =?utf-8?B?NVB4TkxjaE5JNUlNTTVZQkdLUWFOSzJDb2dsK0hKeHlweTFMZko0RnlmcHNO?=
+ =?utf-8?B?SHB2bkJEUi9FaVE4QUxYZDZqQ3F6Q1RyZktobWo5cjlUM1hhZzd5VlFrYW1R?=
+ =?utf-8?B?SFBBTC9Fb0NhcWdIRGo5OFUrMTN1MCs4TFg1OHlOWGlCTmpsSVc3cXdxelFW?=
+ =?utf-8?B?RTZJNEhubmdCSU13ZEt1bmR6UWRTd2FkN1ZnVzZka2VuWld0MlduaS9FV3Ey?=
+ =?utf-8?B?OGxjVzJlUWpqVU51RThmT0pOMkVFZXFPNUpVOGliaENaVnhoQlU3eit5LzBZ?=
+ =?utf-8?B?Y2NMMjVNYlNGaUdXV1dyZXBEdjFFTnNib210elNwT2loT1Q0U3RPaDRUelly?=
+ =?utf-8?B?Y25sWjNEQXVtcjNwMkFlMFdGSFFicldWb3FwUGhOMTNUakozbDF3SGx1YWpH?=
+ =?utf-8?Q?CUX441Y/AXAc+zJ3EuqPSo1qf?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2024 12:09:29.0244 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6d746e7e-0fb3-4e49-d74f-08dc4a68ecef
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3c832478-c866-4278-a196-08dc4a401037
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2024 07:16:59.3225 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CE7.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7326
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Y2H1PRRl28258zK/kQ+q9bDV0pQxBBehamq/v7G1qmgetlddFMBDpPRBdah0TQwZ
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9430
+X-Mailman-Approved-At: Fri, 22 Mar 2024 13:17:29 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,95 +213,636 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Generate dfu_alt_info generation based on information from MTD partitions.
-mtd_found_part() is trying to identify MTD partition which code is running
-from. If partitions are not defined and location is not found it is going
-to previous behavior.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
 
-Changes in v2:
-- Update logic based on 1/2 patch
+On 3/21/24 22:03, Caleb Connolly wrote:
+> Drop in favour of dts/upstream
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   include/dt-bindings/clock/xlnx-versal-clk.h    | 123 -----------------------
+>   include/dt-bindings/clock/xlnx-zynqmp-clk.h    | 126 ------------------------
+>   include/dt-bindings/dma/xlnx-zynqmp-dpdma.h    |  16 ---
+>   include/dt-bindings/pinctrl/pinctrl-zynqmp.h   |  19 ----
+>   include/dt-bindings/power/xlnx-zynqmp-power.h  |  50 ----------
+>   include/dt-bindings/reset/xlnx-versal-resets.h | 105 --------------------
+>   include/dt-bindings/reset/xlnx-zynqmp-resets.h | 130 -------------------------
+>   7 files changed, 569 deletions(-)
+> 
+> diff --git a/include/dt-bindings/clock/xlnx-versal-clk.h b/include/dt-bindings/clock/xlnx-versal-clk.h
+> deleted file mode 100644
+> index 264d634d226e..000000000000
+> --- a/include/dt-bindings/clock/xlnx-versal-clk.h
+> +++ /dev/null
+> @@ -1,123 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0 */
+> -/*
+> - *  Copyright (C) 2019 Xilinx Inc.
+> - *
+> - */
+> -
+> -#ifndef _DT_BINDINGS_CLK_VERSAL_H
+> -#define _DT_BINDINGS_CLK_VERSAL_H
+> -
+> -#define PMC_PLL					1
+> -#define APU_PLL					2
+> -#define RPU_PLL					3
+> -#define CPM_PLL					4
+> -#define NOC_PLL					5
+> -#define PLL_MAX					6
+> -#define PMC_PRESRC				7
+> -#define PMC_POSTCLK				8
+> -#define PMC_PLL_OUT				9
+> -#define PPLL					10
+> -#define NOC_PRESRC				11
+> -#define NOC_POSTCLK				12
+> -#define NOC_PLL_OUT				13
+> -#define NPLL					14
+> -#define APU_PRESRC				15
+> -#define APU_POSTCLK				16
+> -#define APU_PLL_OUT				17
+> -#define APLL					18
+> -#define RPU_PRESRC				19
+> -#define RPU_POSTCLK				20
+> -#define RPU_PLL_OUT				21
+> -#define RPLL					22
+> -#define CPM_PRESRC				23
+> -#define CPM_POSTCLK				24
+> -#define CPM_PLL_OUT				25
+> -#define CPLL					26
+> -#define PPLL_TO_XPD				27
+> -#define NPLL_TO_XPD				28
+> -#define APLL_TO_XPD				29
+> -#define RPLL_TO_XPD				30
+> -#define EFUSE_REF				31
+> -#define SYSMON_REF				32
+> -#define IRO_SUSPEND_REF				33
+> -#define USB_SUSPEND				34
+> -#define SWITCH_TIMEOUT				35
+> -#define RCLK_PMC				36
+> -#define RCLK_LPD				37
+> -#define WDT					38
+> -#define TTC0					39
+> -#define TTC1					40
+> -#define TTC2					41
+> -#define TTC3					42
+> -#define GEM_TSU					43
+> -#define GEM_TSU_LB				44
+> -#define MUXED_IRO_DIV2				45
+> -#define MUXED_IRO_DIV4				46
+> -#define PSM_REF					47
+> -#define GEM0_RX					48
+> -#define GEM0_TX					49
+> -#define GEM1_RX					50
+> -#define GEM1_TX					51
+> -#define CPM_CORE_REF				52
+> -#define CPM_LSBUS_REF				53
+> -#define CPM_DBG_REF				54
+> -#define CPM_AUX0_REF				55
+> -#define CPM_AUX1_REF				56
+> -#define QSPI_REF				57
+> -#define OSPI_REF				58
+> -#define SDIO0_REF				59
+> -#define SDIO1_REF				60
+> -#define PMC_LSBUS_REF				61
+> -#define I2C_REF					62
+> -#define TEST_PATTERN_REF			63
+> -#define DFT_OSC_REF				64
+> -#define PMC_PL0_REF				65
+> -#define PMC_PL1_REF				66
+> -#define PMC_PL2_REF				67
+> -#define PMC_PL3_REF				68
+> -#define CFU_REF					69
+> -#define SPARE_REF				70
+> -#define NPI_REF					71
+> -#define HSM0_REF				72
+> -#define HSM1_REF				73
+> -#define SD_DLL_REF				74
+> -#define FPD_TOP_SWITCH				75
+> -#define FPD_LSBUS				76
+> -#define ACPU					77
+> -#define DBG_TRACE				78
+> -#define DBG_FPD					79
+> -#define LPD_TOP_SWITCH				80
+> -#define ADMA					81
+> -#define LPD_LSBUS				82
+> -#define CPU_R5					83
+> -#define CPU_R5_CORE				84
+> -#define CPU_R5_OCM				85
+> -#define CPU_R5_OCM2				86
+> -#define IOU_SWITCH				87
+> -#define GEM0_REF				88
+> -#define GEM1_REF				89
+> -#define GEM_TSU_REF				90
+> -#define USB0_BUS_REF				91
+> -#define UART0_REF				92
+> -#define UART1_REF				93
+> -#define SPI0_REF				94
+> -#define SPI1_REF				95
+> -#define CAN0_REF				96
+> -#define CAN1_REF				97
+> -#define I2C0_REF				98
+> -#define I2C1_REF				99
+> -#define DBG_LPD					100
+> -#define TIMESTAMP_REF				101
+> -#define DBG_TSTMP				102
+> -#define CPM_TOPSW_REF				103
+> -#define USB3_DUAL_REF				104
+> -#define OUTCLK_MAX				105
+> -#define REF_CLK					106
+> -#define PL_ALT_REF_CLK				107
+> -#define MUXED_IRO				108
+> -#define PL_EXT					109
+> -#define PL_LB					110
+> -#define MIO_50_OR_51				111
+> -#define MIO_24_OR_25				112
+> -
+> -#endif
+> diff --git a/include/dt-bindings/clock/xlnx-zynqmp-clk.h b/include/dt-bindings/clock/xlnx-zynqmp-clk.h
+> deleted file mode 100644
+> index cdc4c0b9a374..000000000000
+> --- a/include/dt-bindings/clock/xlnx-zynqmp-clk.h
+> +++ /dev/null
+> @@ -1,126 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0 */
+> -/*
+> - * Xilinx Zynq MPSoC Firmware layer
+> - *
+> - *  Copyright (C) 2014-2018 Xilinx, Inc.
+> - *
+> - */
+> -
+> -#ifndef _DT_BINDINGS_CLK_ZYNQMP_H
+> -#define _DT_BINDINGS_CLK_ZYNQMP_H
+> -
+> -#define IOPLL			0
+> -#define RPLL			1
+> -#define APLL			2
+> -#define DPLL			3
+> -#define VPLL			4
+> -#define IOPLL_TO_FPD		5
+> -#define RPLL_TO_FPD		6
+> -#define APLL_TO_LPD		7
+> -#define DPLL_TO_LPD		8
+> -#define VPLL_TO_LPD		9
+> -#define ACPU			10
+> -#define ACPU_HALF		11
+> -#define DBF_FPD			12
+> -#define DBF_LPD			13
+> -#define DBG_TRACE		14
+> -#define DBG_TSTMP		15
+> -#define DP_VIDEO_REF		16
+> -#define DP_AUDIO_REF		17
+> -#define DP_STC_REF		18
+> -#define GDMA_REF		19
+> -#define DPDMA_REF		20
+> -#define DDR_REF			21
+> -#define SATA_REF		22
+> -#define PCIE_REF		23
+> -#define GPU_REF			24
+> -#define GPU_PP0_REF		25
+> -#define GPU_PP1_REF		26
+> -#define TOPSW_MAIN		27
+> -#define TOPSW_LSBUS		28
+> -#define GTGREF0_REF		29
+> -#define LPD_SWITCH		30
+> -#define LPD_LSBUS		31
+> -#define USB0_BUS_REF		32
+> -#define USB1_BUS_REF		33
+> -#define USB3_DUAL_REF		34
+> -#define USB0			35
+> -#define USB1			36
+> -#define CPU_R5			37
+> -#define CPU_R5_CORE		38
+> -#define CSU_SPB			39
+> -#define CSU_PLL			40
+> -#define PCAP			41
+> -#define IOU_SWITCH		42
+> -#define GEM_TSU_REF		43
+> -#define GEM_TSU			44
+> -#define GEM0_TX			45
+> -#define GEM1_TX			46
+> -#define GEM2_TX			47
+> -#define GEM3_TX			48
+> -#define GEM0_RX			49
+> -#define GEM1_RX			50
+> -#define GEM2_RX			51
+> -#define GEM3_RX			52
+> -#define QSPI_REF		53
+> -#define SDIO0_REF		54
+> -#define SDIO1_REF		55
+> -#define UART0_REF		56
+> -#define UART1_REF		57
+> -#define SPI0_REF		58
+> -#define SPI1_REF		59
+> -#define NAND_REF		60
+> -#define I2C0_REF		61
+> -#define I2C1_REF		62
+> -#define CAN0_REF		63
+> -#define CAN1_REF		64
+> -#define CAN0			65
+> -#define CAN1			66
+> -#define DLL_REF			67
+> -#define ADMA_REF		68
+> -#define TIMESTAMP_REF		69
+> -#define AMS_REF			70
+> -#define PL0_REF			71
+> -#define PL1_REF			72
+> -#define PL2_REF			73
+> -#define PL3_REF			74
+> -#define WDT			75
+> -#define IOPLL_INT		76
+> -#define IOPLL_PRE_SRC		77
+> -#define IOPLL_HALF		78
+> -#define IOPLL_INT_MUX		79
+> -#define IOPLL_POST_SRC		80
+> -#define RPLL_INT		81
+> -#define RPLL_PRE_SRC		82
+> -#define RPLL_HALF		83
+> -#define RPLL_INT_MUX		84
+> -#define RPLL_POST_SRC		85
+> -#define APLL_INT		86
+> -#define APLL_PRE_SRC		87
+> -#define APLL_HALF		88
+> -#define APLL_INT_MUX		89
+> -#define APLL_POST_SRC		90
+> -#define DPLL_INT		91
+> -#define DPLL_PRE_SRC		92
+> -#define DPLL_HALF		93
+> -#define DPLL_INT_MUX		94
+> -#define DPLL_POST_SRC		95
+> -#define VPLL_INT		96
+> -#define VPLL_PRE_SRC		97
+> -#define VPLL_HALF		98
+> -#define VPLL_INT_MUX		99
+> -#define VPLL_POST_SRC		100
+> -#define CAN0_MIO		101
+> -#define CAN1_MIO		102
+> -#define ACPU_FULL		103
+> -#define GEM0_REF		104
+> -#define GEM1_REF		105
+> -#define GEM2_REF		106
+> -#define GEM3_REF		107
+> -#define GEM0_REF_UNG		108
+> -#define GEM1_REF_UNG		109
+> -#define GEM2_REF_UNG		110
+> -#define GEM3_REF_UNG		111
+> -#define LPD_WDT			112
+> -
+> -#endif
+> diff --git a/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h b/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h
+> deleted file mode 100644
+> index 3719cda5679d..000000000000
+> --- a/include/dt-bindings/dma/xlnx-zynqmp-dpdma.h
+> +++ /dev/null
+> @@ -1,16 +0,0 @@
+> -/* SPDX-License-Identifier: (GPL-2.0 OR MIT) */
+> -/*
+> - * Copyright 2019 Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+> - */
+> -
+> -#ifndef __DT_BINDINGS_DMA_XLNX_ZYNQMP_DPDMA_H__
+> -#define __DT_BINDINGS_DMA_XLNX_ZYNQMP_DPDMA_H__
+> -
+> -#define ZYNQMP_DPDMA_VIDEO0		0
+> -#define ZYNQMP_DPDMA_VIDEO1		1
+> -#define ZYNQMP_DPDMA_VIDEO2		2
+> -#define ZYNQMP_DPDMA_GRAPHICS		3
+> -#define ZYNQMP_DPDMA_AUDIO0		4
+> -#define ZYNQMP_DPDMA_AUDIO1		5
+> -
+> -#endif /* __DT_BINDINGS_DMA_XLNX_ZYNQMP_DPDMA_H__ */
+> diff --git a/include/dt-bindings/pinctrl/pinctrl-zynqmp.h b/include/dt-bindings/pinctrl/pinctrl-zynqmp.h
+> deleted file mode 100644
+> index cdb215734bdf..000000000000
+> --- a/include/dt-bindings/pinctrl/pinctrl-zynqmp.h
+> +++ /dev/null
+> @@ -1,19 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0 */
+> -/*
+> - * MIO pin configuration defines for Xilinx ZynqMP
+> - *
+> - * Copyright (C) 2020 Xilinx, Inc.
+> - */
+> -
+> -#ifndef _DT_BINDINGS_PINCTRL_ZYNQMP_H
+> -#define _DT_BINDINGS_PINCTRL_ZYNQMP_H
+> -
+> -/* Bit value for different voltage levels */
+> -#define IO_STANDARD_LVCMOS33	0
+> -#define IO_STANDARD_LVCMOS18	1
+> -
+> -/* Bit values for Slew Rates */
+> -#define SLEW_RATE_FAST		0
+> -#define SLEW_RATE_SLOW		1
+> -
+> -#endif /* _DT_BINDINGS_PINCTRL_ZYNQMP_H */
+> diff --git a/include/dt-bindings/power/xlnx-zynqmp-power.h b/include/dt-bindings/power/xlnx-zynqmp-power.h
+> deleted file mode 100644
+> index e7eb0960480a..000000000000
+> --- a/include/dt-bindings/power/xlnx-zynqmp-power.h
+> +++ /dev/null
+> @@ -1,50 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0 */
+> -/*
+> - *  Copyright (C) 2018 Xilinx, Inc.
+> - */
+> -
+> -#ifndef _DT_BINDINGS_ZYNQMP_POWER_H
+> -#define _DT_BINDINGS_ZYNQMP_POWER_H
+> -
+> -#define		PD_RPU_0	6
+> -#define		PD_RPU_1	7
+> -#define		PD_OCM_BANK_0	11
+> -#define		PD_OCM_BANK_1	12
+> -#define		PD_OCM_BANK_2	13
+> -#define		PD_OCM_BANK_3	14
+> -#define		PD_TCM_BANK_0	15
+> -#define		PD_TCM_BANK_1	16
+> -#define		PD_TCM_BANK_2	17
+> -#define		PD_TCM_BANK_3	18
+> -#define		PD_USB_0	22
+> -#define		PD_USB_1	23
+> -#define		PD_TTC_0	24
+> -#define		PD_TTC_1	25
+> -#define		PD_TTC_2	26
+> -#define		PD_TTC_3	27
+> -#define		PD_SATA		28
+> -#define		PD_ETH_0	29
+> -#define		PD_ETH_1	30
+> -#define		PD_ETH_2	31
+> -#define		PD_ETH_3	32
+> -#define		PD_UART_0	33
+> -#define		PD_UART_1	34
+> -#define		PD_SPI_0	35
+> -#define		PD_SPI_1	36
+> -#define		PD_I2C_0	37
+> -#define		PD_I2C_1	38
+> -#define		PD_SD_0		39
+> -#define		PD_SD_1		40
+> -#define		PD_DP		41
+> -#define		PD_GDMA		42
+> -#define		PD_ADMA		43
+> -#define		PD_NAND		44
+> -#define		PD_QSPI		45
+> -#define		PD_GPIO		46
+> -#define		PD_CAN_0	47
+> -#define		PD_CAN_1	48
+> -#define		PD_GPU		58
+> -#define		PD_PCIE		59
+> -#define		PD_PL		69
+> -
+> -#endif
+> diff --git a/include/dt-bindings/reset/xlnx-versal-resets.h b/include/dt-bindings/reset/xlnx-versal-resets.h
+> deleted file mode 100644
+> index 895424e9b0e5..000000000000
+> --- a/include/dt-bindings/reset/xlnx-versal-resets.h
+> +++ /dev/null
+> @@ -1,105 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0 */
+> -/*
+> - *  Copyright (C) 2020 Xilinx, Inc.
+> - */
+> -
+> -#ifndef _DT_BINDINGS_VERSAL_RESETS_H
+> -#define _DT_BINDINGS_VERSAL_RESETS_H
+> -
+> -#define VERSAL_RST_PMC_POR			(0xc30c001U)
+> -#define VERSAL_RST_PMC				(0xc410002U)
+> -#define VERSAL_RST_PS_POR			(0xc30c003U)
+> -#define VERSAL_RST_PL_POR			(0xc30c004U)
+> -#define VERSAL_RST_NOC_POR			(0xc30c005U)
+> -#define VERSAL_RST_FPD_POR			(0xc30c006U)
+> -#define VERSAL_RST_ACPU_0_POR			(0xc30c007U)
+> -#define VERSAL_RST_ACPU_1_POR			(0xc30c008U)
+> -#define VERSAL_RST_OCM2_POR			(0xc30c009U)
+> -#define VERSAL_RST_PS_SRST			(0xc41000aU)
+> -#define VERSAL_RST_PL_SRST			(0xc41000bU)
+> -#define VERSAL_RST_NOC				(0xc41000cU)
+> -#define VERSAL_RST_NPI				(0xc41000dU)
+> -#define VERSAL_RST_SYS_RST_1			(0xc41000eU)
+> -#define VERSAL_RST_SYS_RST_2			(0xc41000fU)
+> -#define VERSAL_RST_SYS_RST_3			(0xc410010U)
+> -#define VERSAL_RST_FPD				(0xc410011U)
+> -#define VERSAL_RST_PL0				(0xc410012U)
+> -#define VERSAL_RST_PL1				(0xc410013U)
+> -#define VERSAL_RST_PL2				(0xc410014U)
+> -#define VERSAL_RST_PL3				(0xc410015U)
+> -#define VERSAL_RST_APU				(0xc410016U)
+> -#define VERSAL_RST_ACPU_0			(0xc410017U)
+> -#define VERSAL_RST_ACPU_1			(0xc410018U)
+> -#define VERSAL_RST_ACPU_L2			(0xc410019U)
+> -#define VERSAL_RST_ACPU_GIC			(0xc41001aU)
+> -#define VERSAL_RST_RPU_ISLAND			(0xc41001bU)
+> -#define VERSAL_RST_RPU_AMBA			(0xc41001cU)
+> -#define VERSAL_RST_R5_0				(0xc41001dU)
+> -#define VERSAL_RST_R5_1				(0xc41001eU)
+> -#define VERSAL_RST_SYSMON_PMC_SEQ_RST		(0xc41001fU)
+> -#define VERSAL_RST_SYSMON_PMC_CFG_RST		(0xc410020U)
+> -#define VERSAL_RST_SYSMON_FPD_CFG_RST		(0xc410021U)
+> -#define VERSAL_RST_SYSMON_FPD_SEQ_RST		(0xc410022U)
+> -#define VERSAL_RST_SYSMON_LPD			(0xc410023U)
+> -#define VERSAL_RST_PDMA_RST1			(0xc410024U)
+> -#define VERSAL_RST_PDMA_RST0			(0xc410025U)
+> -#define VERSAL_RST_ADMA				(0xc410026U)
+> -#define VERSAL_RST_TIMESTAMP			(0xc410027U)
+> -#define VERSAL_RST_OCM				(0xc410028U)
+> -#define VERSAL_RST_OCM2_RST			(0xc410029U)
+> -#define VERSAL_RST_IPI				(0xc41002aU)
+> -#define VERSAL_RST_SBI				(0xc41002bU)
+> -#define VERSAL_RST_LPD				(0xc41002cU)
+> -#define VERSAL_RST_QSPI				(0xc10402dU)
+> -#define VERSAL_RST_OSPI				(0xc10402eU)
+> -#define VERSAL_RST_SDIO_0			(0xc10402fU)
+> -#define VERSAL_RST_SDIO_1			(0xc104030U)
+> -#define VERSAL_RST_I2C_PMC			(0xc104031U)
+> -#define VERSAL_RST_GPIO_PMC			(0xc104032U)
+> -#define VERSAL_RST_GEM_0			(0xc104033U)
+> -#define VERSAL_RST_GEM_1			(0xc104034U)
+> -#define VERSAL_RST_SPARE			(0xc104035U)
+> -#define VERSAL_RST_USB_0			(0xc104036U)
+> -#define VERSAL_RST_UART_0			(0xc104037U)
+> -#define VERSAL_RST_UART_1			(0xc104038U)
+> -#define VERSAL_RST_SPI_0			(0xc104039U)
+> -#define VERSAL_RST_SPI_1			(0xc10403aU)
+> -#define VERSAL_RST_CAN_FD_0			(0xc10403bU)
+> -#define VERSAL_RST_CAN_FD_1			(0xc10403cU)
+> -#define VERSAL_RST_I2C_0			(0xc10403dU)
+> -#define VERSAL_RST_I2C_1			(0xc10403eU)
+> -#define VERSAL_RST_GPIO_LPD			(0xc10403fU)
+> -#define VERSAL_RST_TTC_0			(0xc104040U)
+> -#define VERSAL_RST_TTC_1			(0xc104041U)
+> -#define VERSAL_RST_TTC_2			(0xc104042U)
+> -#define VERSAL_RST_TTC_3			(0xc104043U)
+> -#define VERSAL_RST_SWDT_FPD			(0xc104044U)
+> -#define VERSAL_RST_SWDT_LPD			(0xc104045U)
+> -#define VERSAL_RST_USB				(0xc104046U)
+> -#define VERSAL_RST_DPC				(0xc208047U)
+> -#define VERSAL_RST_PMCDBG			(0xc208048U)
+> -#define VERSAL_RST_DBG_TRACE			(0xc208049U)
+> -#define VERSAL_RST_DBG_FPD			(0xc20804aU)
+> -#define VERSAL_RST_DBG_TSTMP			(0xc20804bU)
+> -#define VERSAL_RST_RPU0_DBG			(0xc20804cU)
+> -#define VERSAL_RST_RPU1_DBG			(0xc20804dU)
+> -#define VERSAL_RST_HSDP				(0xc20804eU)
+> -#define VERSAL_RST_DBG_LPD			(0xc20804fU)
+> -#define VERSAL_RST_CPM_POR			(0xc30c050U)
+> -#define VERSAL_RST_CPM				(0xc410051U)
+> -#define VERSAL_RST_CPMDBG			(0xc208052U)
+> -#define VERSAL_RST_PCIE_CFG			(0xc410053U)
+> -#define VERSAL_RST_PCIE_CORE0			(0xc410054U)
+> -#define VERSAL_RST_PCIE_CORE1			(0xc410055U)
+> -#define VERSAL_RST_PCIE_DMA			(0xc410056U)
+> -#define VERSAL_RST_CMN				(0xc410057U)
+> -#define VERSAL_RST_L2_0				(0xc410058U)
+> -#define VERSAL_RST_L2_1				(0xc410059U)
+> -#define VERSAL_RST_ADDR_REMAP			(0xc41005aU)
+> -#define VERSAL_RST_CPI0				(0xc41005bU)
+> -#define VERSAL_RST_CPI1				(0xc41005cU)
+> -#define VERSAL_RST_XRAM				(0xc30c05dU)
+> -#define VERSAL_RST_AIE_ARRAY			(0xc10405eU)
+> -#define VERSAL_RST_AIE_SHIM			(0xc10405fU)
+> -
+> -#endif
+> diff --git a/include/dt-bindings/reset/xlnx-zynqmp-resets.h b/include/dt-bindings/reset/xlnx-zynqmp-resets.h
+> deleted file mode 100644
+> index d44525b9f8db..000000000000
+> --- a/include/dt-bindings/reset/xlnx-zynqmp-resets.h
+> +++ /dev/null
+> @@ -1,130 +0,0 @@
+> -/* SPDX-License-Identifier: GPL-2.0 */
+> -/*
+> - *  Copyright (C) 2018 Xilinx, Inc.
+> - */
+> -
+> -#ifndef _DT_BINDINGS_ZYNQMP_RESETS_H
+> -#define _DT_BINDINGS_ZYNQMP_RESETS_H
+> -
+> -#define		ZYNQMP_RESET_PCIE_CFG		0
+> -#define		ZYNQMP_RESET_PCIE_BRIDGE	1
+> -#define		ZYNQMP_RESET_PCIE_CTRL		2
+> -#define		ZYNQMP_RESET_DP			3
+> -#define		ZYNQMP_RESET_SWDT_CRF		4
+> -#define		ZYNQMP_RESET_AFI_FM5		5
+> -#define		ZYNQMP_RESET_AFI_FM4		6
+> -#define		ZYNQMP_RESET_AFI_FM3		7
+> -#define		ZYNQMP_RESET_AFI_FM2		8
+> -#define		ZYNQMP_RESET_AFI_FM1		9
+> -#define		ZYNQMP_RESET_AFI_FM0		10
+> -#define		ZYNQMP_RESET_GDMA		11
+> -#define		ZYNQMP_RESET_GPU_PP1		12
+> -#define		ZYNQMP_RESET_GPU_PP0		13
+> -#define		ZYNQMP_RESET_GPU		14
+> -#define		ZYNQMP_RESET_GT			15
+> -#define		ZYNQMP_RESET_SATA		16
+> -#define		ZYNQMP_RESET_ACPU3_PWRON	17
+> -#define		ZYNQMP_RESET_ACPU2_PWRON	18
+> -#define		ZYNQMP_RESET_ACPU1_PWRON	19
+> -#define		ZYNQMP_RESET_ACPU0_PWRON	20
+> -#define		ZYNQMP_RESET_APU_L2		21
+> -#define		ZYNQMP_RESET_ACPU3		22
+> -#define		ZYNQMP_RESET_ACPU2		23
+> -#define		ZYNQMP_RESET_ACPU1		24
+> -#define		ZYNQMP_RESET_ACPU0		25
+> -#define		ZYNQMP_RESET_DDR		26
+> -#define		ZYNQMP_RESET_APM_FPD		27
+> -#define		ZYNQMP_RESET_SOFT		28
+> -#define		ZYNQMP_RESET_GEM0		29
+> -#define		ZYNQMP_RESET_GEM1		30
+> -#define		ZYNQMP_RESET_GEM2		31
+> -#define		ZYNQMP_RESET_GEM3		32
+> -#define		ZYNQMP_RESET_QSPI		33
+> -#define		ZYNQMP_RESET_UART0		34
+> -#define		ZYNQMP_RESET_UART1		35
+> -#define		ZYNQMP_RESET_SPI0		36
+> -#define		ZYNQMP_RESET_SPI1		37
+> -#define		ZYNQMP_RESET_SDIO0		38
+> -#define		ZYNQMP_RESET_SDIO1		39
+> -#define		ZYNQMP_RESET_CAN0		40
+> -#define		ZYNQMP_RESET_CAN1		41
+> -#define		ZYNQMP_RESET_I2C0		42
+> -#define		ZYNQMP_RESET_I2C1		43
+> -#define		ZYNQMP_RESET_TTC0		44
+> -#define		ZYNQMP_RESET_TTC1		45
+> -#define		ZYNQMP_RESET_TTC2		46
+> -#define		ZYNQMP_RESET_TTC3		47
+> -#define		ZYNQMP_RESET_SWDT_CRL		48
+> -#define		ZYNQMP_RESET_NAND		49
+> -#define		ZYNQMP_RESET_ADMA		50
+> -#define		ZYNQMP_RESET_GPIO		51
+> -#define		ZYNQMP_RESET_IOU_CC		52
+> -#define		ZYNQMP_RESET_TIMESTAMP		53
+> -#define		ZYNQMP_RESET_RPU_R50		54
+> -#define		ZYNQMP_RESET_RPU_R51		55
+> -#define		ZYNQMP_RESET_RPU_AMBA		56
+> -#define		ZYNQMP_RESET_OCM		57
+> -#define		ZYNQMP_RESET_RPU_PGE		58
+> -#define		ZYNQMP_RESET_USB0_CORERESET	59
+> -#define		ZYNQMP_RESET_USB1_CORERESET	60
+> -#define		ZYNQMP_RESET_USB0_HIBERRESET	61
+> -#define		ZYNQMP_RESET_USB1_HIBERRESET	62
+> -#define		ZYNQMP_RESET_USB0_APB		63
+> -#define		ZYNQMP_RESET_USB1_APB		64
+> -#define		ZYNQMP_RESET_IPI		65
+> -#define		ZYNQMP_RESET_APM_LPD		66
+> -#define		ZYNQMP_RESET_RTC		67
+> -#define		ZYNQMP_RESET_SYSMON		68
+> -#define		ZYNQMP_RESET_AFI_FM6		69
+> -#define		ZYNQMP_RESET_LPD_SWDT		70
+> -#define		ZYNQMP_RESET_FPD		71
+> -#define		ZYNQMP_RESET_RPU_DBG1		72
+> -#define		ZYNQMP_RESET_RPU_DBG0		73
+> -#define		ZYNQMP_RESET_DBG_LPD		74
+> -#define		ZYNQMP_RESET_DBG_FPD		75
+> -#define		ZYNQMP_RESET_APLL		76
+> -#define		ZYNQMP_RESET_DPLL		77
+> -#define		ZYNQMP_RESET_VPLL		78
+> -#define		ZYNQMP_RESET_IOPLL		79
+> -#define		ZYNQMP_RESET_RPLL		80
+> -#define		ZYNQMP_RESET_GPO3_PL_0		81
+> -#define		ZYNQMP_RESET_GPO3_PL_1		82
+> -#define		ZYNQMP_RESET_GPO3_PL_2		83
+> -#define		ZYNQMP_RESET_GPO3_PL_3		84
+> -#define		ZYNQMP_RESET_GPO3_PL_4		85
+> -#define		ZYNQMP_RESET_GPO3_PL_5		86
+> -#define		ZYNQMP_RESET_GPO3_PL_6		87
+> -#define		ZYNQMP_RESET_GPO3_PL_7		88
+> -#define		ZYNQMP_RESET_GPO3_PL_8		89
+> -#define		ZYNQMP_RESET_GPO3_PL_9		90
+> -#define		ZYNQMP_RESET_GPO3_PL_10		91
+> -#define		ZYNQMP_RESET_GPO3_PL_11		92
+> -#define		ZYNQMP_RESET_GPO3_PL_12		93
+> -#define		ZYNQMP_RESET_GPO3_PL_13		94
+> -#define		ZYNQMP_RESET_GPO3_PL_14		95
+> -#define		ZYNQMP_RESET_GPO3_PL_15		96
+> -#define		ZYNQMP_RESET_GPO3_PL_16		97
+> -#define		ZYNQMP_RESET_GPO3_PL_17		98
+> -#define		ZYNQMP_RESET_GPO3_PL_18		99
+> -#define		ZYNQMP_RESET_GPO3_PL_19		100
+> -#define		ZYNQMP_RESET_GPO3_PL_20		101
+> -#define		ZYNQMP_RESET_GPO3_PL_21		102
+> -#define		ZYNQMP_RESET_GPO3_PL_22		103
+> -#define		ZYNQMP_RESET_GPO3_PL_23		104
+> -#define		ZYNQMP_RESET_GPO3_PL_24		105
+> -#define		ZYNQMP_RESET_GPO3_PL_25		106
+> -#define		ZYNQMP_RESET_GPO3_PL_26		107
+> -#define		ZYNQMP_RESET_GPO3_PL_27		108
+> -#define		ZYNQMP_RESET_GPO3_PL_28		109
+> -#define		ZYNQMP_RESET_GPO3_PL_29		110
+> -#define		ZYNQMP_RESET_GPO3_PL_30		111
+> -#define		ZYNQMP_RESET_GPO3_PL_31		112
+> -#define		ZYNQMP_RESET_RPU_LS		113
+> -#define		ZYNQMP_RESET_PS_ONLY		114
+> -#define		ZYNQMP_RESET_PL			115
+> -#define		ZYNQMP_RESET_PS_PL0		116
+> -#define		ZYNQMP_RESET_PS_PL1		117
+> -#define		ZYNQMP_RESET_PS_PL2		118
+> -#define		ZYNQMP_RESET_PS_PL3		119
+> -
+> -#endif
+> 
 
- board/xilinx/zynqmp/zynqmp.c | 55 ++++++++++++++++++++++++++++++------
- 1 file changed, 46 insertions(+), 9 deletions(-)
+Acked-by: Michal Simek <michal.simek@amd.com>
 
-diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index 3844a9c9a8ff..2522024b4082 100644
---- a/board/xilinx/zynqmp/zynqmp.c
-+++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -626,6 +626,31 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 
- #define DFU_ALT_BUF_LEN		SZ_1K
- 
-+static void mtd_found_part(u32 *base, u32 *size)
-+{
-+	struct mtd_info *part, *mtd;
-+
-+	mtd_probe_devices();
-+
-+	mtd = get_mtd_device_nm("nor0");
-+	if (!IS_ERR_OR_NULL(mtd)) {
-+		list_for_each_entry(part, &mtd->partitions, node) {
-+			debug("0x%012llx-0x%012llx : \"%s\"\n",
-+			      part->offset, part->offset + part->size,
-+			      part->name);
-+
-+			if (*base >= part->offset &&
-+			    *base < part->offset + part->size) {
-+				debug("Found my partition: %d/%s\n",
-+				      part->index, part->name);
-+				*base = part->offset;
-+				*size = part->size;
-+				break;
-+			}
-+		}
-+	}
-+}
-+
- void set_dfu_alt_info(char *interface, char *devstr)
- {
- 	int multiboot, bootseq = 0, len = 0;
-@@ -670,17 +695,29 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 		break;
- 	case QSPI_MODE_24BIT:
- 	case QSPI_MODE_32BIT:
--		len += snprintf(buf + len, DFU_ALT_BUF_LEN,
--			       "sf 0:0=boot.bin raw %x 0x1500000",
--			       multiboot * SZ_32K);
--#if defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME) && defined(CONFIG_SYS_SPI_U_BOOT_OFFS)
--		if (strlen(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME))
-+		{
-+			u32 base = multiboot * SZ_32K;
-+			u32 size = 0x1500000;
-+			u32 limit = size;
-+
-+			mtd_found_part(&base, &limit);
-+
-+#if defined(CONFIG_SYS_SPI_U_BOOT_OFFS)
-+			size = limit;
-+			limit = CONFIG_SYS_SPI_U_BOOT_OFFS;
-+#endif
-+
- 			len += snprintf(buf + len, DFU_ALT_BUF_LEN,
--					";%s raw 0x%x 0x500000",
--					CONFIG_SPL_FS_LOAD_PAYLOAD_NAME,
--					multiboot * SZ_32K +
--					CONFIG_SYS_SPI_U_BOOT_OFFS);
-+					"sf 0:0=boot.bin raw 0x%x 0x%x",
-+					base, limit);
-+#if defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME) && defined(CONFIG_SYS_SPI_U_BOOT_OFFS)
-+			if (strlen(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME))
-+				len += snprintf(buf + len, DFU_ALT_BUF_LEN,
-+						";%s raw 0x%x 0x%x",
-+						CONFIG_SPL_FS_LOAD_PAYLOAD_NAME,
-+						base + limit, size - limit);
- #endif
-+		}
- 		break;
- 	default:
- 		return;
--- 
-2.44.0
-
+Thanks,
+Michal
