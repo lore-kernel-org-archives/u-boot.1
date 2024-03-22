@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD985C54E71
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:41:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09825C54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:41:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0689488113;
-	Fri, 22 Mar 2024 12:41:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8176D881C7;
+	Fri, 22 Mar 2024 12:41:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GuO6i8dm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V5XQcgTU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B48BC881BE; Fri, 22 Mar 2024 12:41:12 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
+ id 71EF1881C9; Fri, 22 Mar 2024 12:41:37 +0100 (CET)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61AAA87B82
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 12:41:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F25B587B82
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 12:41:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2d228a132acso27014981fa.0
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 04:41:09 -0700 (PDT)
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2d4886a1cb4so27353061fa.0
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 04:41:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711107668; x=1711712468; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1711107694; x=1711712494; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/ckPMc+931s1aTeZ9eqLkSf/0MbiOz7lNQ3ZG0Corz0=;
- b=GuO6i8dmnKDDj8Bic4beXzAAHSfI//y6IVEKjIfMPTmq+N3y+anfEEkcWjepqm9IBS
- rXM+ZQ50cKlr6A9rGvKPf+mEkHnAHHP6GpKVnY6e2QXZGngNWkcF5wU8Fk1m7mxktosr
- 2KBgfH/k5RLff77bJWtNJUSlBIR1MZO35Sbuf+e42EIdWBGG4BFlFDX3RCskPqeMkhVf
- tnnOSwBzkB+cZ96dT2oTzR9gmc+lU4ZBgReRnAw4HPh6BrvJ4OdeVp2tnzNfEFdUpgAj
- AstmS+i7erPDDX5X416ESvYAMeHwpmlJRvt5rS62ECGlNGsKSV7ow9oh4BXz0e4NIbmu
- f7Yg==
+ bh=gUOGi7KIZOBF/veAZVf6YXkDFe19hHGBz0hzmc5vW9s=;
+ b=V5XQcgTUhcu+Dr+qinM4s1F50J2eRTahc8xutQkoKjdS+qLdbUDCm59a5gWUanSFXR
+ gm9U2mF/1XZ8AEsnnnWfHLlbD9bzByjF2NxUoBij/Dtz3SyTH1WydHZzdYzrabAVeuW8
+ nEPrfuS+lAMc+Apfslj5QUq8OqLDISpTNiqUiGWwDSFtYuhkwp/PthmCgYXFYiwOQaeU
+ lgS0QC23kAmInjjEbWL0Zmbpbsr8e2QVrwpgt9MFJXB9MFFbvXDekXYf0NUFRfqRcZmy
+ q44AsfLkHoA6GK/RL7kk3iCAZBNSYkNDZfcl5SohqCQxBf4vHXgK6IruT6wyGIxl2a5c
+ DLRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711107668; x=1711712468;
+ d=1e100.net; s=20230601; t=1711107694; x=1711712494;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/ckPMc+931s1aTeZ9eqLkSf/0MbiOz7lNQ3ZG0Corz0=;
- b=HI4nLDKj35IPoOYRT3tXENwsXdwJdm7rhYDgWvXg5kmA26AzL1NYA8WIlYZ/5I/YFw
- g4fSrIrSvHGCQM5cTypp62ApXijCNQJKZcUGsRq4CpuhmyvSHhN1E4q4wq12G8ZAdaQo
- 2mobbBMPjiXO5lTjULrxCc4hnpvcrCoVrGdllgiKgqMLssfUaYrtpU3FOd3s9Df2jIaL
- x4uhoDntZLFY6+nny6Tblbq5n9jXobCP0a2l762EdJ8NiVkwoZl/NqjmmG71zZXIeont
- NQ/+Kvs0WUX/IXe8qbwwngU1cYqzFZTfPKhmPZron0KfBhnlTzkHwwC34umXSCIg/8fF
- X82w==
-X-Gm-Message-State: AOJu0Ywbn9+iQPh6Z0l9X8ED5BFb576cANrKWHvPvDqZXFdxYq4ZX0rd
- N/XGUT+w6qZtTJsd9LzPh/wU/Al2ZWjdC2CqS21Ej8Wa0jp8PZXvnNQL0Y0DfjrGi1YrVwEPs2A
- onwvFN3jmGo9aoUNilggyqfahP/GQtEizE1TYbg==
-X-Google-Smtp-Source: AGHT+IGbBIGj5HkMcJLqBViZ2pyZRR09JE5rY80EU5WFROepftE80ZhYsot1sFFIEdoZZ/hGGjCA/xG9JfMOILBOTkI=
-X-Received: by 2002:a2e:8ed1:0:b0:2d4:74c5:2cd3 with SMTP id
- e17-20020a2e8ed1000000b002d474c52cd3mr1623302ljl.41.1711107668304; Fri, 22
- Mar 2024 04:41:08 -0700 (PDT)
+ bh=gUOGi7KIZOBF/veAZVf6YXkDFe19hHGBz0hzmc5vW9s=;
+ b=rmIXhqu3xuWfKa4EoxJgYWazbpuxEZS38rwT5Im5zJLDECSSb2oMGiTDEnMXvUuXkj
+ pMWDJrkwUInSBO2o4U+iauOCXaYwogojf6aY2PWe4tvakVg9VY1Q3bhpHZ2Ct/9dYLG7
+ mf8lyk/7+Ll4Se4VdEeZu7fCGsbw07xQuZsz+McvCv+xVwc+Dsc9IvLkB+Uj2CIpJCWh
+ mwyb0GQc6Iu6phwH2gtzBiJ7QQC4+26dlnrrRyQy9R4yo01NeM91qzUEGIi9J9Uvw2qy
+ 0LsV/wiIyOJ0gK0pyJqlI+qxqqCnKSwyKRZtMY03fX57KALA7lBLrZxjwyck+T3kL9uI
+ /W+w==
+X-Gm-Message-State: AOJu0YxuLKkdJIIQ9nj8abXrnmUs8/DKCrXkur6I+ERo4cJ2px3TySws
+ KavWn6eMsUW90734+m55lSaUEykLDuV0MjBs8C1PhAhhTWmLBK1tcaa4EvNBXf//XlOeKNVgnV6
+ y9/iS46UwEg0c/1LzHBGAxYVyfO577giK2pk10Q==
+X-Google-Smtp-Source: AGHT+IFKogZkcLAOTEFqFrYDIsKXo72RQlDeDRjVeyo/CyaAM/J8ani2na2AcqC/cNSA9wXFPrY+3ZCd2c7uVgJ4GsY=
+X-Received: by 2002:a05:651c:214:b0:2d5:7798:4efc with SMTP id
+ y20-20020a05651c021400b002d577984efcmr1632658ljn.9.1711107693937; Fri, 22 Mar
+ 2024 04:41:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240322105733.203888-1-sughosh.ganu@linaro.org>
- <20240322105733.203888-20-sughosh.ganu@linaro.org>
-In-Reply-To: <20240322105733.203888-20-sughosh.ganu@linaro.org>
+ <20240322105733.203888-2-sughosh.ganu@linaro.org>
+In-Reply-To: <20240322105733.203888-2-sughosh.ganu@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 22 Mar 2024 13:40:31 +0200
-Message-ID: <CAC_iWjK2OG8Vph4uF8rRkKZzdJzt3ArqGPGx8Zocryz=8vct4A@mail.gmail.com>
-Subject: Re: [PATCH v3 19/20] MAINTAINERS: add entry for FWU multi bank update
- feature
+Date: Fri, 22 Mar 2024 13:40:57 +0200
+Message-ID: <CAC_iWjJYH4Az-1_T6=qTFRA5yAUZvsZWqc6k7yusmdg5FvrrNg@mail.gmail.com>
+Subject: Re: [PATCH v3 01/20] configs: fwu: remove FWU configs for metadata V2
+ support
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Yann GAUTIER <yann.gautier@st.com>,
@@ -93,37 +93,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 22 Mar 2024 at 12:59, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+On Fri, 22 Mar 2024 at 12:58, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> Add an entry for the FWU Multi Bank Update feature.
+> Support is to be added in the following commits for the FWU metadata
+> version 2. Disable the FWU feature on platforms that enable it for the
+> V2 addition work.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
-> Changes since V2:
-> * New patch
+> Changes since V2: None
 >
->  MAINTAINERS | 8 ++++++++
->  1 file changed, 8 insertions(+)
+>  configs/corstone1000_defconfig           | 2 --
+>  configs/sandbox64_defconfig              | 1 -
+>  configs/synquacer_developerbox_defconfig | 4 ----
+>  3 files changed, 7 deletions(-)
 >
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index cd9b2d42e8..5409b1d78a 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -1147,6 +1147,14 @@ T:       git https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq.git
->  F:     drivers/watchdog/sp805_wdt.c
->  F:     drivers/watchdog/sbsa_gwdt.c
->
-> +FWU Multi Bank Update
-> +M:     Sughosh Ganu <sughosh.ganu@linaro.org>
-> +S:     Maintained
-> +T:     git https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> +F:     lib/fwu_updates/*
-> +F:     drivers/fwu-mdata/*
-> +F:     tools/mkfwumdata.c
-> +
->  GATEWORKS_SC
->  M:     Tim Harvey <tharvey@gateworks.com>
->  S:     Maintained
+> diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
+> index 8b2f77f648..29d7550afb 100644
+> --- a/configs/corstone1000_defconfig
+> +++ b/configs/corstone1000_defconfig
+> @@ -24,7 +24,6 @@ CONFIG_LOGLEVEL=7
+>  CONFIG_BOARD_LATE_INIT=y
+>  CONFIG_SYS_PROMPT="corstone1000# "
+>  # CONFIG_CMD_CONSOLE is not set
+> -CONFIG_CMD_FWU_METADATA=y
+>  CONFIG_CMD_BOOTZ=y
+>  # CONFIG_CMD_XIMG is not set
+>  CONFIG_CMD_GPT=y
+> @@ -67,4 +66,3 @@ CONFIG_FFA_SHARED_MM_BUF_OFFSET=0
+>  CONFIG_FFA_SHARED_MM_BUF_ADDR=0x02000000
+>  CONFIG_EFI_CAPSULE_ON_DISK=y
+>  CONFIG_EFI_IGNORE_OSINDICATIONS=y
+> -CONFIG_FWU_MULTI_BANK_UPDATE=y
+> diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+> index 3be9a00a85..7e8200e70c 100644
+> --- a/configs/sandbox64_defconfig
+> +++ b/configs/sandbox64_defconfig
+> @@ -272,7 +272,6 @@ CONFIG_EFI_CAPSULE_ON_DISK=y
+>  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+>  CONFIG_EFI_SECURE_BOOT=y
+>  CONFIG_TEST_FDTDEC=y
+> -CONFIG_FWU_MULTI_BANK_UPDATE=y
+>  CONFIG_UNIT_TEST=y
+>  CONFIG_UT_TIME=y
+>  CONFIG_UT_DM=y
+> diff --git a/configs/synquacer_developerbox_defconfig b/configs/synquacer_developerbox_defconfig
+> index 2a0407de40..616d410074 100644
+> --- a/configs/synquacer_developerbox_defconfig
+> +++ b/configs/synquacer_developerbox_defconfig
+> @@ -11,14 +11,12 @@ CONFIG_DM_GPIO=y
+>  CONFIG_DEFAULT_DEVICE_TREE="synquacer-sc2a11-developerbox"
+>  CONFIG_SYS_LOAD_ADDR=0x80000000
+>  CONFIG_TARGET_DEVELOPERBOX=y
+> -CONFIG_FWU_NUM_IMAGES_PER_BANK=1
+>  CONFIG_AHCI=y
+>  CONFIG_FIT=y
+>  CONFIG_SYS_BOOTM_LEN=0x800000
+>  CONFIG_BOOTSTAGE_STASH_SIZE=4096
+>  CONFIG_HUSH_PARSER=y
+>  CONFIG_SYS_MAXARGS=128
+> -CONFIG_CMD_FWU_METADATA=y
+>  CONFIG_CMD_IMLS=y
+>  CONFIG_CMD_ERASEENV=y
+>  CONFIG_CMD_NVEDIT_EFI=y
+> @@ -53,7 +51,6 @@ CONFIG_DFU_TFTP=y
+>  CONFIG_DFU_MTD=y
+>  CONFIG_DFU_RAM=y
+>  CONFIG_DFU_SF=y
+> -CONFIG_FWU_MDATA_MTD=y
+>  CONFIG_DM_I2C=y
+>  CONFIG_SYS_I2C_SYNQUACER=y
+>  CONFIG_MMC_SDHCI=y
+> @@ -96,4 +93,3 @@ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+>  CONFIG_EFI_CAPSULE_ON_DISK=y
+>  CONFIG_EFI_IGNORE_OSINDICATIONS=y
+>  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> -CONFIG_FWU_MULTI_BANK_UPDATE=y
 > --
 > 2.34.1
 >
