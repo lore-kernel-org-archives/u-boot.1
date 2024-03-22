@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4F15C47DD9
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 13:11:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3792C54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 13:14:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61A25881D9;
-	Fri, 22 Mar 2024 14:10:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1C128881A9;
+	Fri, 22 Mar 2024 14:14:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rl68s6L9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jjg7/O14";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02B8B881D9; Fri, 22 Mar 2024 14:10:45 +0100 (CET)
+ id DCC38881E4; Fri, 22 Mar 2024 14:10:56 +0100 (CET)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 08170881FD
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 14:10:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D259B881A9
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 14:10:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42MDAV7q011508;
- Fri, 22 Mar 2024 08:10:31 -0500
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42MDAaec011527;
+ Fri, 22 Mar 2024 08:10:36 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1711113031;
- bh=Kjp0jltcDZ7krHhuXOy2X+CwDGJma2egoVQGJgOIFEM=;
+ s=ti-com-17Q1; t=1711113036;
+ bh=Fg7Bz0YZ006aZ5TZBrOF50bB58TO2mYnKuq+1TgIo40=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=rl68s6L9VIpYJ1ig8IjkRgBPaTDHb/i2C79jXEwo+Oy73uGc4hOs+XmKlISEqVaqx
- PeR/DwE2Op6+TWaZC6KfdYLduGPz2BTndZsG8QGMPn3pcsGSMoKC/d+NiQvxY5Gus2
- UjIDTnUyla6o2NUjj1CobaGMTGxS3xK+8E4U92YU=
-Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42MDAVbw010033
+ b=jjg7/O147UOpYsFAhjiWIrWOIFJ/PvTMQr4NGor2OGAqIGV31DEuEfb1wGpsipkjm
+ brBx7R3wZtvKyqhWZG0AD84PKJLTUTIopK6Bb0oieSV5kcK4UCAZWmxGoRUmB35GfY
+ iNtsWCdvTvNGxy3b12VLdEzTDnCVAr4SGPHJ1fnc=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42MDAagi010068
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 22 Mar 2024 08:10:31 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 22 Mar 2024 08:10:36 -0500
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 22
- Mar 2024 08:10:30 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2024 08:10:35 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 22 Mar 2024 08:10:30 -0500
+ Frontend Transport; Fri, 22 Mar 2024 08:10:35 -0500
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42MDABZA026606;
- Fri, 22 Mar 2024 08:10:26 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42MDABZB026606;
+ Fri, 22 Mar 2024 08:10:31 -0500
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
  <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
@@ -57,10 +57,9 @@ To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
 CC: <michal.simek@amd.com>, <marex@denx.de>, <neil.armstrong@linaro.org>,
  <afd@ti.com>, <vigneshr@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>,
  <u-kumar1@ti.com>, <n-francis@ti.com>
-Subject: [PATCH 3/4] arm: dts: k3-*-binman.dtsi: Clean up and templatize boot
- binaries
-Date: Fri, 22 Mar 2024 18:40:10 +0530
-Message-ID: <20240322131011.1029620-4-n-francis@ti.com>
+Subject: [PATCH 4/4] arm: dts: k3-j721e: Move to OF_UPSTREAM
+Date: Fri, 22 Mar 2024 18:40:11 +0530
+Message-ID: <20240322131011.1029620-5-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240322131011.1029620-1-n-francis@ti.com>
 References: <20240322131011.1029620-1-n-francis@ti.com>
@@ -68,6 +67,7 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Fri, 22 Mar 2024 14:14:32 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,4379 +84,6328 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Clean up templatized boot binaries for all K3 boards. This includes
-modifying the k3-binman.dtsi to use SPL_BOARD_DTB, BOARD_DESCRIPTION and
-UBOOT_BOARD_DESCRIPTION from the files that include it to further reuse
-code.
-
-All k3-<soc>-binman.dtsi will contain only templates. Only required boot
-binaries can be built from the templates in the boards' respective
--u-boot.dtsi file (or k3-<board>-binman.dtsi if it exists). This allows
-clear distinction between the SoC common stuff vs. what is additionally
-needed to boot up a specific board.
+Move to using OF_UPSTREAM config and thus using the devicetree-rebasing
+subtree.
 
 Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 ---
- arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  | 161 +---------
- arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 291 +----------------
- arch/arm/dts/k3-am625-r5-beagleplay.dts       |  39 ---
- arch/arm/dts/k3-am625-sk-binman.dtsi          | 148 +--------
- arch/arm/dts/k3-am625-sk-u-boot.dtsi          |  42 +++
- .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 296 +-----------------
- arch/arm/dts/k3-am62a-sk-binman.dtsi          | 146 +--------
- arch/arm/dts/k3-am62a7-sk-u-boot.dtsi         |  42 +++
- arch/arm/dts/k3-am642-evm-u-boot.dtsi         |  42 +++
- arch/arm/dts/k3-am642-sk-u-boot.dtsi          |  42 +++
- arch/arm/dts/k3-am64x-binman.dtsi             | 239 +-------------
- arch/arm/dts/k3-am654-base-board-u-boot.dtsi  |  49 +++
- arch/arm/dts/k3-am65x-binman.dtsi             | 144 +--------
- .../arm/dts/k3-am68-sk-base-board-u-boot.dtsi |  26 ++
- arch/arm/dts/k3-am69-sk-u-boot.dtsi           |  31 +-
- arch/arm/dts/k3-binman.dtsi                   |  96 ++++++
- arch/arm/dts/k3-j7200-binman.dtsi             | 145 +--------
- .../k3-j7200-common-proc-board-u-boot.dtsi    |  40 +++
- .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   | 154 +--------
- arch/arm/dts/k3-j721e-binman.dtsi             | 262 +++-------------
- .../k3-j721e-common-proc-board-u-boot.dtsi    |  84 +++++
- arch/arm/dts/k3-j721e-r5-beagleboneai64.dts   |  91 +-----
- arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |  84 +++++
- arch/arm/dts/k3-j721s2-binman.dtsi            | 231 +-------------
- .../k3-j721s2-common-proc-board-u-boot.dtsi   |  42 +++
- arch/arm/dts/k3-j784s4-binman.dtsi            | 154 +--------
- arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        |  42 +++
- 27 files changed, 858 insertions(+), 2305 deletions(-)
+ arch/arm/dts/Makefile                         |    4 +-
+ .../k3-j721e-common-proc-board-u-boot.dtsi    |    2 +-
+ arch/arm/dts/k3-j721e-common-proc-board.dts   |  976 ------
+ arch/arm/dts/k3-j721e-main.dtsi               | 2741 -----------------
+ arch/arm/dts/k3-j721e-mcu-wakeup.dtsi         |  681 ----
+ arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |    2 +-
+ arch/arm/dts/k3-j721e-sk.dts                  | 1074 -------
+ arch/arm/dts/k3-j721e-som-p0.dtsi             |  446 ---
+ arch/arm/dts/k3-j721e-thermal.dtsi            |   75 -
+ arch/arm/dts/k3-j721e.dtsi                    |  176 --
+ configs/j721e_evm_a72_defconfig               |    5 +-
+ configs/j721e_sk_a72_defconfig                |    4 +-
+ 12 files changed, 8 insertions(+), 6178 deletions(-)
+ delete mode 100644 arch/arm/dts/k3-j721e-common-proc-board.dts
+ delete mode 100644 arch/arm/dts/k3-j721e-main.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e-mcu-wakeup.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e-sk.dts
+ delete mode 100644 arch/arm/dts/k3-j721e-som-p0.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e-thermal.dtsi
+ delete mode 100644 arch/arm/dts/k3-j721e.dtsi
 
-diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-index cca0f44b7d8..fc1898f1510 100644
---- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
-@@ -6,7 +6,11 @@
-  * Copyright (C) 2022-2023 Robert Nelson, BeagleBoard.org Foundation
-  */
- 
--#include "k3-binman.dtsi"
-+#define SPL_BOARD_DTB "spl/dts/k3-am625-beagleplay.dtb"
-+#define BOARD_DESCRIPTION "k3-am625-beagleplay"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM625 BeaglePlay"
-+
-+#include "k3-am625-sk-binman.dtsi"
- 
- / {
- 	chosen {
-@@ -61,155 +65,24 @@
- 	>;
- };
- 
--#ifdef CONFIG_TARGET_AM625_A53_BEAGLEPLAY
--
--#define SPL_NODTB "spl/u-boot-spl-nodtb.bin"
--#define SPL_AM625_BEAGLEPLAY_DTB "spl/dts/k3-am625-beagleplay.dtb"
--#define UBOOT_NODTB "u-boot-nodtb.bin"
--#define AM625_BEAGLEPLAY_DTB "arch/arm/dts/k3-am625-beagleplay.dtb"
-+#ifndef CONFIG_ARM64
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--		};
-+	tiboot3-am62x-gp {
-+		insert-template = <&tiboot3_am62x_gp>;
- 	};
-+};
- 
--	ti-spl_unsigned {
--		filename = "tispl.bin_unsigned";
--		pad-byte = <0xff>;
--
--		fit {
--			description = "Configuration to load ATF and SPL";
--			#address-cells = <1>;
--
--			images {
--
--				atf {
--					description = "ARM Trusted Firmware";
--					type = "firmware";
--					arch = "arm64";
--					compression = "none";
--					os = "arm-trusted-firmware";
--					load = <CONFIG_K3_ATF_LOAD_ADDR>;
--					entry = <CONFIG_K3_ATF_LOAD_ADDR>;
--					atf-bl31 {
--						filename = "bl31.bin";
--					};
--				};
--
--				tee {
--					description = "OP-TEE";
--					type = "tee";
--					arch = "arm64";
--					compression = "none";
--					os = "tee";
--					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
--					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
--					tee-os {
--						filename = "tee-raw.bin";
--					};
--				};
--
--				dm {
--					description = "DM binary";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "DM";
--					load = <0x89000000>;
--					entry = <0x89000000>;
--					blob-ext {
--						filename = "ti-dm.bin";
--					};
--				};
--
--				spl {
--					description = "SPL (64-bit)";
--					type = "standalone";
--					os = "U-Boot";
--					arch = "arm64";
--					compression = "none";
--					load = <CONFIG_SPL_TEXT_BASE>;
--					entry = <CONFIG_SPL_TEXT_BASE>;
--					blob {
--						filename = "spl/u-boot-spl-nodtb.bin";
--					};
--				};
--
--				fdt-0 {
--					description = "k3-am625-beagleplay";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					spl_am625_bp_dtb_unsigned: blob {
--						filename = SPL_AM625_BEAGLEPLAY_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am625-beagleplay";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
--			};
--		};
-+#else
-+
-+&binman {
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
- 	};
- 
--	u-boot_unsigned {
--		filename = "u-boot.img_unsigned";
--		pad-byte = <0xff>;
--
--		fit {
--			description = "FIT image with multiple configurations";
--
--			images {
--				uboot {
--					description = "U-Boot for AM625 board";
--					type = "firmware";
--					os = "u-boot";
--					arch = "arm";
--					compression = "none";
--					load = <CONFIG_TEXT_BASE>;
--					blob {
--						filename = UBOOT_NODTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--
--				fdt-0 {
--					description = "k3-am625-beagleplay";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					am625_bp_dtb_unsigned: blob {
--						filename = AM625_BEAGLEPLAY_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am625-beagleplay";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--			};
--		};
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
- 	};
- };
-+
- #endif
-diff --git a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-index ed50bfeb031..14fc8468c56 100644
---- a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
-@@ -6,309 +6,48 @@
-  * Author: Wadim Egorov <w.egorov@phytec.de>
-  */
- 
--#include "k3-binman.dtsi"
-+#define SPL_BOARD_DTB "spl/dts/k3-am625-phyboard-lyra-rdk.dtb"
-+#define BOARD_DESCRIPTION "k3-am625-phyboard-lyra-rdk"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for phyCORE-AM62x"
-+
-+#include "k3-am625-sk-binman.dtsi"
- 
- #ifdef CONFIG_TARGET_PHYCORE_AM62X_R5
- &binman {
- 	tiboot3-am62x-hs-phycore-som.bin {
- 		filename = "tiboot3-am62x-hs-phycore-som.bin";
--		ti-secure-rom {
--			content = <&u_boot_spl>, <&ti_fs_enc>, <&combined_tifs_cfg>,
--				<&combined_dm_cfg>, <&sysfw_inner_cert>;
--			combined;
--			dm-data;
--			sysfw-inner-cert;
--			keyfile = "custMpk.pem";
--			sw-rev = <1>;
--			content-sbl = <&u_boot_spl>;
--			content-sysfw = <&ti_fs_enc>;
--			content-sysfw-data = <&combined_tifs_cfg>;
--			content-sysfw-inner-cert = <&sysfw_inner_cert>;
--			content-dm-data = <&combined_dm_cfg>;
--			load = <0x43c00000>;
--			load-sysfw = <0x40000>;
--			load-sysfw-data = <0x67000>;
--			load-dm-data = <0x43c3a800>;
--		};
--		u_boot_spl: u-boot-spl {
--			no-expanded;
--		};
--		ti_fs_enc: ti-fs-enc.bin {
--			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-enc.bin";
--			type = "blob-ext";
--			optional;
--		};
--		combined_tifs_cfg: combined-tifs-cfg.bin {
--			filename = "combined-tifs-cfg.bin";
--			type = "blob-ext";
--		};
--		sysfw_inner_cert: sysfw-inner-cert {
--			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-cert.bin";
--			type = "blob-ext";
--			optional;
--		};
--		combined_dm_cfg: combined-dm-cfg.bin {
--			filename = "combined-dm-cfg.bin";
--			type = "blob-ext";
--		};
-+		insert-template = <&tiboot3_am62x_hs>;
- 	};
--};
- 
--&binman {
- 	tiboot3-am62x-hs-fs-phycore-som.bin {
- 		filename = "tiboot3-am62x-hs-fs-phycore-som.bin";
--		symlink = "tiboot3.bin";
--		ti-secure-rom {
--			content = <&u_boot_spl_fs>, <&ti_fs_enc_fs>, <&combined_tifs_cfg_fs>,
--				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
--			combined;
--			dm-data;
--			sysfw-inner-cert;
--			keyfile = "custMpk.pem";
--			sw-rev = <1>;
--			content-sbl = <&u_boot_spl_fs>;
--			content-sysfw = <&ti_fs_enc_fs>;
--			content-sysfw-data = <&combined_tifs_cfg_fs>;
--			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
--			content-dm-data = <&combined_dm_cfg_fs>;
--			load = <0x43c00000>;
--			load-sysfw = <0x40000>;
--			load-sysfw-data = <0x67000>;
--			load-dm-data = <0x43c3a800>;
--		};
--		u_boot_spl_fs: u-boot-spl {
--			no-expanded;
--		};
--		ti_fs_enc_fs: ti-fs-enc.bin {
--			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-fs-enc.bin";
--			type = "blob-ext";
--			optional;
--		};
--		combined_tifs_cfg_fs: combined-tifs-cfg.bin {
--			filename = "combined-tifs-cfg.bin";
--			type = "blob-ext";
--		};
--		sysfw_inner_cert_fs: sysfw-inner-cert {
--			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-fs-cert.bin";
--			type = "blob-ext";
--			optional;
--		};
--		combined_dm_cfg_fs: combined-dm-cfg.bin {
--			filename = "combined-dm-cfg.bin";
--			type = "blob-ext";
--		};
-+		insert-template = <&tiboot3_am62x_hs_fs>;
- 	};
--};
- 
--&binman {
- 	tiboot3-am62x-gp-phycore-som.bin {
- 		filename = "tiboot3-am62x-gp-phycore-som.bin";
--		ti-secure-rom {
--			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
--				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
--			combined;
--			dm-data;
--			content-sbl = <&u_boot_spl_unsigned>;
--			load = <0x43c00000>;
--			content-sysfw = <&ti_fs_gp>;
--			load-sysfw = <0x40000>;
--			content-sysfw-data = <&combined_tifs_cfg_gp>;
--			load-sysfw-data = <0x67000>;
--			content-dm-data = <&combined_dm_cfg_gp>;
--			load-dm-data = <0x43c3a800>;
--			sw-rev = <1>;
--			keyfile = "ti-degenerate-key.pem";
--		};
--		u_boot_spl_unsigned: u-boot-spl {
--			no-expanded;
--		};
--		ti_fs_gp: ti-fs-gp.bin {
--			filename = "ti-sysfw/ti-fs-firmware-am62x-gp.bin";
--			type = "blob-ext";
--			optional;
--		};
--		combined_tifs_cfg_gp: combined-tifs-cfg-gp.bin {
--			filename = "combined-tifs-cfg.bin";
--			type = "blob-ext";
--		};
--		combined_dm_cfg_gp: combined-dm-cfg-gp.bin {
--			filename = "combined-dm-cfg.bin";
--			type = "blob-ext";
--		};
-+		insert-template = <&tiboot3_am62x_gp>;
- 	};
- };
- #endif /* CONFIG_TARGET_PHYCORE_AM62X_R5 */
- 
- #ifdef CONFIG_TARGET_PHYCORE_AM62X_A53
--#define SPL_AM625_PHYBOARD_LYRA_DTB "spl/dts/k3-am625-phyboard-lyra-rdk.dtb"
--#define AM625_PHYBOARD_LYRA_DTB "u-boot.dtb"
- 
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--		};
-+	tispl {
-+		insert-template = <&ti_spl>;
- 	};
--	ti-spl {
--		insert-template = <&ti_spl_template>;
--
--		fit {
--
--			images {
--				dm {
--					ti-secure {
--						content = <&dm>;
--						keyfile = "custMpk.pem";
--					};
--					dm: blob-ext {
--						filename = "ti-dm.bin";
--					};
--				};
--
--				fdt-0 {
--					description = "k3-am625-phyboard-lyra-rdk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&spl_am625_phyboard_lyra_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					spl_am625_phyboard_lyra_dtb: blob-ext {
--						filename = SPL_AM625_PHYBOARD_LYRA_DTB;
--					};
--				};
--			};
- 
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am625-phyboard-lyra-rdk";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
--			};
--		};
--	};
--};
--
--&binman {
- 	u-boot {
--		insert-template = <&u_boot_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for phyCORE-AM62x";
--				};
--
--				fdt-0 {
--					description = "k3-am625-phyboard-lyra-rdk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&am625_phyboard_lyra_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					am625_phyboard_lyra_dtb: blob-ext {
--						filename = AM625_PHYBOARD_LYRA_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am625-phyboard-lyra-rdk";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--			};
--		};
-+		insert-template = <&u_boot>;
- 	};
--};
--
--&binman {
--	ti-spl_unsigned {
--		insert-template = <&ti_spl_unsigned_template>;
--
--		fit {
--			images {
--				dm {
--					blob-ext {
--						filename = "ti-dm.bin";
--					};
--				};
--
--				fdt-0 {
--					description = "k3-am625-phyboard-lyra-rdk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					spl_am625_phyboard_lyra_dtb_unsigned: blob {
--						filename = SPL_AM625_PHYBOARD_LYRA_DTB;
--					};
--				};
--			};
- 
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am625-phyboard-lyra-rdk";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
--			};
--		};
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
- 	};
--};
--
--&binman {
--	u-boot_unsigned {
--		insert-template = <&u_boot_unsigned_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for phyCORE-AM62x";
--				};
--
--				fdt-0 {
--					description = "k3-am625-phyboard-lyra-rdk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					am625_phyboard_lyra_dtb_unsigned: blob {
--						filename = AM625_PHYBOARD_LYRA_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
- 
--				conf-0 {
--					description = "k3-am625-phyboard-lyra-rdk";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--			};
--		};
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
- 	};
- };
- #endif /* CONFIG_TARGET_PHYCORE_AM62X_A53 */
-diff --git a/arch/arm/dts/k3-am625-r5-beagleplay.dts b/arch/arm/dts/k3-am625-r5-beagleplay.dts
-index 9db58f093c8..1f450f55c1d 100644
---- a/arch/arm/dts/k3-am625-r5-beagleplay.dts
-+++ b/arch/arm/dts/k3-am625-r5-beagleplay.dts
-@@ -75,42 +75,3 @@
- &main_bcdma {
- 	ti,sci = <&dm_tifs>;
- };
--
--&binman {
--	tiboot3-am62x-gp-evm.bin {
--		filename = "tiboot3-am62x-gp-evm.bin";
--		ti-secure-rom {
--			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
--				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
--			combined;
--			dm-data;
--			content-sbl = <&u_boot_spl_unsigned>;
--			load = <0x43c00000>;
--			content-sysfw = <&ti_fs_gp>;
--			load-sysfw = <0x40000>;
--			content-sysfw-data = <&combined_tifs_cfg_gp>;
--			load-sysfw-data = <0x67000>;
--			content-dm-data = <&combined_dm_cfg_gp>;
--			load-dm-data = <0x43c3a800>;
--			sw-rev = <1>;
--			keyfile = "ti-degenerate-key.pem";
--		};
--		u_boot_spl_unsigned: u-boot-spl {
--			no-expanded;
--		};
--		ti_fs_gp: ti-fs-gp.bin {
--			filename = "ti-sysfw/ti-fs-firmware-am62x-gp.bin";
--			type = "blob-ext";
--			optional;
--		};
--		combined_tifs_cfg_gp: combined-tifs-cfg-gp.bin {
--			filename = "combined-tifs-cfg.bin";
--			type = "blob-ext";
--		};
--		combined_dm_cfg_gp: combined-dm-cfg-gp.bin {
--			filename = "combined-dm-cfg.bin";
--			type = "blob-ext";
--		};
--
--	};
--};
-diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
-index 5b058bd03a0..7b67eb2d8d4 100644
---- a/arch/arm/dts/k3-am625-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
-@@ -5,11 +5,12 @@
- 
- #include "k3-binman.dtsi"
- 
--#ifdef CONFIG_TARGET_AM625_R5_EVM
-+#ifndef CONFIG_ARM64
- 
- &binman {
--	tiboot3-am62x-hs-evm.bin {
-+	tiboot3_am62x_hs: template-9 {
- 		filename = "tiboot3-am62x-hs-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl>, <&ti_fs_enc>, <&combined_tifs_cfg>,
- 				<&combined_dm_cfg>, <&sysfw_inner_cert>;
-@@ -49,13 +50,15 @@
- 			filename = "combined-dm-cfg.bin";
- 			type = "blob-ext";
- 		};
-+		};
- 	};
- };
- 
- &binman {
--	tiboot3-am62x-hs-fs-evm.bin {
-+	tiboot3_am62x_hs_fs: template-10 {
- 		filename = "tiboot3-am62x-hs-fs-evm.bin";
- 		symlink = "tiboot3.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_fs>, <&ti_fs_enc_fs>, <&combined_tifs_cfg_fs>,
- 				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
-@@ -96,11 +99,13 @@
- 			type = "blob-ext";
- 		};
- 	};
-+	};
- };
- 
- &binman {
--	tiboot3-am62x-gp-evm.bin {
-+	tiboot3_am62x_gp: template-11 {
- 		filename = "tiboot3-am62x-gp-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
- 				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
-@@ -133,16 +138,11 @@
- 			filename = "combined-dm-cfg.bin";
- 			type = "blob-ext";
- 		};
--
-+	};
- 	};
- };
- 
--#endif
--
--#ifdef CONFIG_TARGET_AM625_A53_EVM
--
--#define SPL_AM625_SK_DTB "spl/dts/k3-am625-sk.dtb"
--#define AM625_SK_DTB "u-boot.dtb"
-+#else
- 
- &binman {
- 	ti-dm {
-@@ -151,7 +151,7 @@
- 			filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
- 		};
- 	};
--	ti-spl {
-+	ti_spl: template-12 {
- 		insert-template = <&ti_spl_template>;
- 
- 		fit {
-@@ -165,154 +165,36 @@
- 						filename = "ti-dm.bin";
- 					};
- 				};
--
--				fdt-0 {
--					description = "k3-am625-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&spl_am625_sk_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					spl_am625_sk_dtb: blob-ext {
--						filename = SPL_AM625_SK_DTB;
--					};
--
--				};
--
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am625-sk";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot {
-+	u_boot: template-13 {
- 		insert-template = <&u_boot_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for AM625 Board";
--				};
--
--				fdt-0 {
--					description = "k3-am625-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&am625_sk_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					am625_sk_dtb: blob-ext {
--						filename = AM625_SK_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am625-sk";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--
--			};
--		};
- 	};
- };
- 
- &binman {
--	ti-spl_unsigned {
-+	ti_spl_unsigned: template-14 {
- 		insert-template = <&ti_spl_unsigned_template>;
- 
- 		fit {
- 			images {
--
- 				dm {
- 					ti-dm {
- 						filename = "ti-dm.bin";
- 					};
- 				};
--
--				fdt-0 {
--					description = "k3-am625-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					spl_am625_sk_dtb_unsigned: blob {
--						filename = SPL_AM625_SK_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am625-sk";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot_unsigned {
-+	u_boot_unsigned: template-15 {
- 		insert-template = <&u_boot_unsigned_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for AM625 Board";
--				};
--
--				fdt-0 {
--					description = "k3-am625-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					am625_sk_dtb_unsigned: blob {
--						filename = AM625_SK_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am625-sk";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--			};
--		};
- 	};
- };
- #endif
-diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-index fa778b0ff4c..3871359bf43 100644
---- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-@@ -4,6 +4,10 @@
-  * Copyright (C) 2021-2022 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
-+#define SPL_BOARD_DTB "spl/dts/k3-am625-sk.dtb"
-+#define BOARD_DESCRIPTION "k3-am625-sk"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM625 SK"
-+
- #include "k3-am625-sk-binman.dtsi"
- 
- / {
-@@ -46,3 +50,41 @@
- &cpsw_port2 {
- 	status = "disabled";
- };
-+
-+#ifndef CONFIG_ARM64
-+
-+&binman {
-+	tiboot3-am62x-hs {
-+		insert-template = <&tiboot3_am62x_hs>;
-+	};
-+
-+	tiboot3-am62x-hs-fs {
-+		insert-template = <&tiboot3_am62x_hs_fs>;
-+	};
-+
-+	tiboot3-am62x-gp {
-+		insert-template = <&tiboot3_am62x_gp>;
-+	};
-+};
-+
-+#else
-+
-+&binman {
-+	tispl {
-+		insert-template = <&ti_spl>;
-+	};
-+
-+	u-boot {
-+		insert-template = <&u_boot>;
-+	};
-+
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
-+	};
-+
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
-+	};
-+};
-+
-+#endif
-diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-index 4e3704809a6..0a2ae7cd19c 100644
---- a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-+++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-@@ -3,136 +3,28 @@
-  * Copyright 2023 Toradex
-  */
- 
--#include "k3-binman.dtsi"
-+#define SPL_BOARD_DTB "spl/dts/k3-am625-verdin-wifi-dev.dtb"
-+#define BOARD_DESCRIPTION "k3-am625-verdin-wifi-dev"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot fot AM625 Verdin Board"
-+
-+#include "k3-am625-sk-binman.dtsi"
- 
- #ifdef CONFIG_TARGET_VERDIN_AM62_R5
- 
- &binman {
- 	tiboot3-am62x-hs-verdin.bin {
- 		filename = "tiboot3-am62x-hs-verdin.bin";
--		ti-secure-rom {
--			content = <&u_boot_spl>, <&ti_fs_enc>, <&combined_tifs_cfg>,
--				<&combined_dm_cfg>, <&sysfw_inner_cert>;
--			combined;
--			dm-data;
--			sysfw-inner-cert;
--			keyfile = "custMpk.pem";
--			sw-rev = <1>;
--			content-sbl = <&u_boot_spl>;
--			content-sysfw = <&ti_fs_enc>;
--			content-sysfw-data = <&combined_tifs_cfg>;
--			content-sysfw-inner-cert = <&sysfw_inner_cert>;
--			content-dm-data = <&combined_dm_cfg>;
--			load = <0x43c00000>;
--			load-sysfw = <0x40000>;
--			load-sysfw-data = <0x67000>;
--			load-dm-data = <0x43c3a800>;
--		};
--		u_boot_spl: u-boot-spl {
--			no-expanded;
--		};
--		ti_fs_enc: ti-fs-enc.bin {
--			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-enc.bin";
--			type = "blob-ext";
--			optional;
--		};
--		combined_tifs_cfg: combined-tifs-cfg.bin {
--			filename = "combined-tifs-cfg.bin";
--			type = "blob-ext";
--		};
--		sysfw_inner_cert: sysfw-inner-cert {
--			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-cert.bin";
--			type = "blob-ext";
--			optional;
--		};
--		combined_dm_cfg: combined-dm-cfg.bin {
--			filename = "combined-dm-cfg.bin";
--			type = "blob-ext";
--		};
-+		insert-template = <&tiboot3_am62x_hs>;
- 	};
--};
- 
--&binman {
--	tiboot3-am62x-hs-fs-verdin.bin {
-+	tiboot3-am62x-hs-fs-verdin {
- 		filename = "tiboot3-am62x-hs-fs-verdin.bin";
--		symlink = "tiboot3.bin";
--		ti-secure-rom {
--			content = <&u_boot_spl_fs>, <&ti_fs_enc_fs>, <&combined_tifs_cfg_fs>,
--				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
--			combined;
--			dm-data;
--			sysfw-inner-cert;
--			keyfile = "custMpk.pem";
--			sw-rev = <1>;
--			content-sbl = <&u_boot_spl_fs>;
--			content-sysfw = <&ti_fs_enc_fs>;
--			content-sysfw-data = <&combined_tifs_cfg_fs>;
--			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
--			content-dm-data = <&combined_dm_cfg_fs>;
--			load = <0x43c00000>;
--			load-sysfw = <0x40000>;
--			load-sysfw-data = <0x67000>;
--			load-dm-data = <0x43c3a800>;
--		};
--		u_boot_spl_fs: u-boot-spl {
--			no-expanded;
--		};
--		ti_fs_enc_fs: ti-fs-enc.bin {
--			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-fs-enc.bin";
--			type = "blob-ext";
--			optional;
--		};
--		combined_tifs_cfg_fs: combined-tifs-cfg.bin {
--			filename = "combined-tifs-cfg.bin";
--			type = "blob-ext";
--		};
--		sysfw_inner_cert_fs: sysfw-inner-cert {
--			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-fs-cert.bin";
--			type = "blob-ext";
--			optional;
--		};
--		combined_dm_cfg_fs: combined-dm-cfg.bin {
--			filename = "combined-dm-cfg.bin";
--			type = "blob-ext";
--		};
-+		insert-template = <&tiboot3_am62x_hs_fs>;
- 	};
--};
- 
--&binman {
--	tiboot3-am62x-gp-verdin.bin {
-+	tiboot3-am62x-gp-verdin {
- 		filename = "tiboot3-am62x-gp-verdin.bin";
--		ti-secure-rom {
--			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
--				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
--			combined;
--			dm-data;
--			content-sbl = <&u_boot_spl_unsigned>;
--			load = <0x43c00000>;
--			content-sysfw = <&ti_fs_gp>;
--			load-sysfw = <0x40000>;
--			content-sysfw-data = <&combined_tifs_cfg_gp>;
--			load-sysfw-data = <0x67000>;
--			content-dm-data = <&combined_dm_cfg_gp>;
--			load-dm-data = <0x43c3a800>;
--			sw-rev = <1>;
--			keyfile = "ti-degenerate-key.pem";
--		};
--		u_boot_spl_unsigned: u-boot-spl {
--			no-expanded;
--		};
--		ti_fs_gp: ti-fs-gp.bin {
--			filename = "ti-sysfw/ti-fs-firmware-am62x-gp.bin";
--			type = "blob-ext";
--			optional;
--		};
--		combined_tifs_cfg_gp: combined-tifs-cfg-gp.bin {
--			filename = "combined-tifs-cfg.bin";
--			type = "blob-ext";
--		};
--		combined_dm_cfg_gp: combined-dm-cfg-gp.bin {
--			filename = "combined-dm-cfg.bin";
--			type = "blob-ext";
--		};
-+		insert-template = <&tiboot3_am62x_gp>;
- 	};
- };
- 
-@@ -140,175 +32,21 @@
- 
- #ifdef CONFIG_TARGET_VERDIN_AM62_A53
- 
--#define SPL_VERDIN_AM62_DTB "spl/dts/k3-am625-verdin-wifi-dev.dtb"
--#define VERDIN_AM62_DTB "u-boot.dtb"
--
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--		};
-+	tispl {
-+		insert-template = <&ti_spl>;
- 	};
--	ti-spl {
--		insert-template = <&ti_spl_template>;
--
--		fit {
--
--			images {
--				dm {
--					ti-secure {
--						content = <&dm>;
--						keyfile = "custMpk.pem";
--					};
--					dm: ti-dm {
--						filename = "ti-dm.bin";
--					};
--				};
- 
--				fdt-0 {
--					description = "k3-am625-verdin-wifi-dev";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&spl_verdin_am62_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					spl_verdin_am62_dtb: blob-ext {
--						filename = SPL_VERDIN_AM62_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am625-verdin-wifi-dev";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
--			};
--		};
--	};
--};
--
--&binman {
- 	u-boot {
--		insert-template = <&u_boot_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot fot AM625 Verdin Board";
--				};
--
--				fdt-0 {
--					description = "k3-am625-verdin-wifi-dev";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&verdin_am62_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					verdin_am62_dtb: blob-ext {
--						filename = VERDIN_AM62_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am625-verdin-wifi-dev";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--			};
--		};
-+		insert-template = <&u_boot>;
- 	};
--};
--
--&binman {
--	ti-spl_unsigned {
--		insert-template = <&ti_spl_unsigned_template>;
--
--		fit {
--			images {
--				dm {
--					ti-dm {
--						filename = "ti-dm.bin";
--					};
--				};
--
--				fdt-0 {
--					description = "k3-am625-verdin-wifi-dev";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = SPL_VERDIN_AM62_DTB;
--					};
--				};
--			};
- 
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am625-verdin-wifi-dev";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
--			};
--		};
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
- 	};
--};
--
--&binman {
--	u-boot_unsigned {
--		insert-template = <&u_boot_unsigned_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for AM625 Verdin Board";
--				};
--
--				fdt-0 {
--					description = "k3-am625-verdin-wifi-dev";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = VERDIN_AM62_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
- 
--				conf-0 {
--					description = "k3-am625-verdin-wifi-dev";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--			};
--		};
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
- 	};
- };
- 
-diff --git a/arch/arm/dts/k3-am62a-sk-binman.dtsi b/arch/arm/dts/k3-am62a-sk-binman.dtsi
-index ec3bf7ce913..1fc0b3ef14c 100644
---- a/arch/arm/dts/k3-am62a-sk-binman.dtsi
-+++ b/arch/arm/dts/k3-am62a-sk-binman.dtsi
-@@ -5,14 +5,15 @@
- 
- #include "k3-binman.dtsi"
- 
--#ifdef CONFIG_TARGET_AM62A7_R5_EVM
-+#ifndef CONFIG_ARM64
- 
- &rcfg_yaml_tifs {
- 	config = "tifs-rm-cfg.yaml";
- };
- 
- &binman {
--	tiboot3-am62ax-hs-evm.bin {
-+	tiboot3_am62ax_hs: template-9 {
-+		section {
- 		filename = "tiboot3-am62ax-hs-evm.bin";
- 		ti-secure-rom {
- 			content = <&u_boot_spl>, <&ti_fs_enc>, <&combined_tifs_cfg>,
-@@ -53,13 +54,15 @@
- 			filename = "combined-dm-cfg.bin";
- 			type = "blob-ext";
- 		};
-+		};
- 	};
- };
- 
- &binman {
--	tiboot3-am62ax-hs-fs-evm.bin {
-+	tiboot3_am62ax_hs_fs: template-10 {
- 		filename = "tiboot3-am62ax-hs-fs-evm.bin";
- 		symlink = "tiboot3.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_fs>, <&ti_fs_enc_fs>, <&combined_tifs_cfg_fs>,
- 				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
-@@ -99,12 +102,14 @@
- 			filename = "combined-dm-cfg.bin";
- 			type = "blob-ext";
- 		};
-+		};
- 	};
- };
- 
- &binman {
--	tiboot3-am62ax-gp-evm.bin {
-+	tiboot3_am62ax_gp: template-11 {
- 		filename = "tiboot3-am62ax-gp-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
- 				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
-@@ -137,15 +142,11 @@
- 			filename = "combined-dm-cfg.bin";
- 			type = "blob-ext";
- 		};
-+		};
- 	};
- };
- 
--#endif
--
--#ifdef CONFIG_TARGET_AM62A7_A53_EVM
--
--#define SPL_AM62A7_SK_DTB "spl/dts/k3-am62a7-sk.dtb"
--#define AM62A7_SK_DTB "u-boot.dtb"
-+#else
- 
- &binman {
- 	ti-dm {
-@@ -154,7 +155,7 @@
- 			filename = "ti-dm/am62axx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
- 		};
- 	};
--	ti-spl {
-+	ti_spl: template-12 {
- 		insert-template = <&ti_spl_template>;
- 
- 		fit {
-@@ -168,83 +169,19 @@
- 						filename = "ti-dm.bin";
- 					};
- 				};
--
--				fdt-0 {
--					description = "k3-am62a7-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&spl_am62a7_sk_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					spl_am62a7_sk_dtb: blob-ext {
--						filename = SPL_AM62A7_SK_DTB;
--					};
--
--				};
--
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am62a7-sk";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot {
-+	u_boot: template-13 {
- 		insert-template = <&u_boot_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for AM62Ax Board";
--				};
--
--				fdt-0 {
--					description = "k3-am62a7-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&am62a7_sk_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					am62a7_sk_dtb: blob-ext {
--						filename = AM62A7_SK_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am62a7-sk";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--
--			};
--		};
- 	};
- };
- 
- &binman {
--	ti-spl_unsigned {
-+	ti_spl_unsigned: template-14 {
- 		insert-template = <&ti_spl_unsigned_template>;
- 
- 		fit {
-@@ -254,67 +191,14 @@
- 						filename = "ti-dm.bin";
- 					};
- 				};
--
--				fdt-0 {
--					description = "k3-am62a7-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = SPL_AM62A7_SK_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am62a7-sk";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot_unsigned {
-+	u_boot_unsigned: template-15 {
- 		insert-template = <&u_boot_unsigned_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for AM62Ax Board";
--				};
--
--				fdt-0 {
--					description = "k3-am62a7-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = AM62A7_SK_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am62a7-sk";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--			};
--		};
- 	};
- };
- #endif
-diff --git a/arch/arm/dts/k3-am62a7-sk-u-boot.dtsi b/arch/arm/dts/k3-am62a7-sk-u-boot.dtsi
-index 31b89b41748..d8ee892dcd5 100644
---- a/arch/arm/dts/k3-am62a7-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am62a7-sk-u-boot.dtsi
-@@ -4,6 +4,10 @@
-  * Copyright (C) 2022 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
-+#define SPL_BOARD_DTB "spl/dts/k3-am62a7-sk.dtb"
-+#define BOARD_DESCRIPTION "k3-am62a7-sk"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM62Ax SK"
-+
- #include "k3-am62a-sk-binman.dtsi"
- 
- / {
-@@ -187,3 +191,41 @@
- &cpsw_port1 {
- 	bootph-all;
- };
-+
-+#ifndef CONFIG_ARM64
-+
-+&binman {
-+	tiboot3-am62ax-hs-sk {
-+		insert-template = <&tiboot3_am62ax_hs>;
-+	};
-+
-+	tiboot3-am62ax-hs-fs-sk {
-+		insert-template = <&tiboot3_am62ax_hs_fs>;
-+	};
-+
-+	tiboot3-am62ax-gp-sk {
-+		insert-template = <&tiboot3_am62ax_gp>;
-+	};
-+};
-+
-+#else
-+
-+&binman {
-+	tispl {
-+		insert-template = <&ti_spl>;
-+	};
-+
-+	u-boot {
-+		insert-template = <&u_boot>;
-+	};
-+
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
-+	};
-+
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
-+	};
-+};
-+
-+#endif
-diff --git a/arch/arm/dts/k3-am642-evm-u-boot.dtsi b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-index ee6656774d6..4e9a2d4bd4a 100644
---- a/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am642-evm-u-boot.dtsi
-@@ -3,6 +3,10 @@
-  * Copyright (C) 2020-2021 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
-+#define SPL_BOARD_DTB "spl/dts/ti/k3-am642-evm.dtb"
-+#define BOARD_DESCRIPTION "k3-am642-evm"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM642 EVM"
-+
- #include "k3-am64x-binman.dtsi"
- 
- / {
-@@ -88,3 +92,41 @@
- 		bootph-all;
- 	};
- };
-+
-+#ifndef CONFIG_ARM64
-+
-+&binman {
-+	tiboot3-am64x-sr2-hs-evm {
-+		insert-template = <&tiboot3_am64x_sr2_hs_evm>;
-+	};
-+
-+	tiboot3-am64x-sr2-hs-fs-evm {
-+		insert-template = <&tiboot3_am64x_sr2_hs_fs_evm>;
-+	};
-+
-+	tiboot3-am64x-gp-evm {
-+		insert-template = <&tiboot3_am64x_gp_evm>;
-+	};
-+};
-+
-+#else
-+
-+&binman {
-+	tispl {
-+		insert-template = <&ti_spl>;
-+	};
-+
-+	u-boot {
-+		insert-template = <&u_boot>;
-+	};
-+
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
-+	};
-+
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
-+	};
-+};
-+
-+#endif
-diff --git a/arch/arm/dts/k3-am642-sk-u-boot.dtsi b/arch/arm/dts/k3-am642-sk-u-boot.dtsi
-index 7e6b2981346..7b5a8640cc6 100644
---- a/arch/arm/dts/k3-am642-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am642-sk-u-boot.dtsi
-@@ -3,6 +3,10 @@
-  * Copyright (C) 2021 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
-+#define SPL_BOARD_DTB "spl/dts/ti/k3-am642-sk.dtb"
-+#define BOARD_DESCRIPTION "k3-am642-sk"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM642 SK"
-+
- #include "k3-am64x-binman.dtsi"
- 
- / {
-@@ -133,3 +137,41 @@
- 		bootph-all;
- 	};
- };
-+
-+#ifndef CONFIG_ARM64
-+
-+&binman {
-+	tiboot3-am64x-sr2-hs-sk {
-+		insert-template = <&tiboot3_am64x_sr2_hs_evm>;
-+	};
-+
-+	tiboot3-am64x-sr2-hs-fs-sk {
-+		insert-template = <&tiboot3_am64x_sr2_hs_fs_evm>;
-+	};
-+
-+	tiboot3-am64x-gp-sk {
-+		insert-template = <&tiboot3_am64x_gp_evm>;
-+	};
-+};
-+
-+#else
-+
-+&binman {
-+	tispl {
-+		insert-template = <&ti_spl>;
-+	};
-+
-+	u-boot {
-+		insert-template = <&u_boot>;
-+	};
-+
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
-+	};
-+
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
-+	};
-+};
-+
-+#endif
-diff --git a/arch/arm/dts/k3-am64x-binman.dtsi b/arch/arm/dts/k3-am64x-binman.dtsi
-index 37817ba60d2..c8ae6250129 100644
---- a/arch/arm/dts/k3-am64x-binman.dtsi
-+++ b/arch/arm/dts/k3-am64x-binman.dtsi
-@@ -3,11 +3,12 @@
- 
- #include "k3-binman.dtsi"
- 
--#ifdef CONFIG_TARGET_AM642_R5_EVM
-+#ifndef CONFIG_ARM64
- 
- &binman {
--	tiboot3-am64x_sr2-hs-evm.bin {
-+	tiboot3_am64x_sr2_hs_evm: template-9 {
- 		filename = "tiboot3-am64x_sr2-hs-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl>, <&ti_sci_enc>,
- 				<&combined_sysfw_cfg>, <&sysfw_inner_cert>;
-@@ -40,14 +41,15 @@
- 			type = "blob-ext";
- 			optional;
- 		};
--
-+	};
- 	};
- };
- 
- &binman {
--	tiboot3-am64x_sr2-hs-fs-evm.bin {
-+	tiboot3_am64x_sr2_hs_fs_evm: template-10 {
- 		filename = "tiboot3-am64x_sr2-hs-fs-evm.bin";
- 		symlink = "tiboot3.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_fs>, <&ti_sci_enc_fs>,
- 				<&combined_sysfw_cfg_fs>, <&sysfw_inner_cert_fs>;
-@@ -80,13 +82,14 @@
- 			type = "blob-ext";
- 			optional;
- 		};
--
-+	};
- 	};
- };
- 
- &binman {
--	tiboot3-am64x-gp-evm.bin {
-+	tiboot3_am64x_gp_evm: template-11 {
- 		filename = "tiboot3-am64x-gp-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_unsigned>, <&ti_sci_gp>, <&combined_sysfw_cfg_gp>;
- 			combined;
-@@ -112,157 +115,35 @@
- 			type = "blob-ext";
- 		};
- 	};
-+	};
- };
- 
--#endif
--
--#ifdef CONFIG_TARGET_AM642_A53_EVM
--
--#define SPL_AM642_EVM_DTB "spl/dts/ti/k3-am642-evm.dtb"
--#define SPL_AM642_SK_DTB "spl/dts/ti/k3-am642-sk.dtb"
--
--#define AM642_EVM_DTB "u-boot.dtb"
--#define AM642_SK_DTB "dts/upstream/src/arm64/ti/k3-am642-sk.dtb"
-+#else
- 
- &binman {
--	ti-spl {
-+	ti_spl: template-12 {
- 		insert-template = <&ti_spl_template>;
- 
- 		fit {
--			description = "Configuration to load ATF and SPL";
--			#address-cells = <1>;
--
- 			images {
- 				dm {
- 					blob-ext {
- 						filename = "/dev/null";
- 					};
- 				};
--
--
--				fdt-0 {
--					description = "k3-am642-evm";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&spl_am64x_evm_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					spl_am64x_evm_dtb: blob-ext {
--						filename = SPL_AM642_EVM_DTB;
--					};
--
--				};
--
--				fdt-1 {
--					description = "k3-am642-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&spl_am64x_sk_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					spl_am64x_sk_dtb: blob-ext {
--						filename = SPL_AM642_SK_DTB;
--					};
--
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am642-evm";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
--
--				conf-1 {
--					description = "k3-am642-sk";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-1";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot {
-+	u_boot: template-13 {
- 		insert-template = <&u_boot_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for AM64 Board";
--				};
--
--				fdt-0 {
--					description = "k3-am642-evm";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&am64x_evm_dtb>;
--						keyfile = "custMpk.pem";
--
--					};
--					am64x_evm_dtb: blob-ext {
--						filename = AM642_EVM_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--
--				fdt-1 {
--					description = "k3-am642-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&am64x_sk_dtb>;
--						keyfile = "custMpk.pem";
--
--					};
--					am64x_sk_dtb: blob-ext {
--						filename = AM642_SK_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am642-evm";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--
--				conf-1 {
--					description = "k3-am642-sk";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-1";
--				};
--			};
--		};
- 	};
- };
- 
- &binman {
--	ti-spl_unsigned {
-+	ti_spl_unsigned: template-14 {
- 		insert-template = <&ti_spl_unsigned_template>;
- 
- 		fit {
-@@ -273,104 +154,14 @@
- 						filename = "/dev/null";
- 					};
- 				};
--
--				fdt-0 {
--					description = "k3-am642-evm";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = SPL_AM642_EVM_DTB;
--					};
--				};
--
--				fdt-1 {
--					description = "k3-am642-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = SPL_AM642_SK_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am642-evm";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
--
--				conf-1 {
--					description = "k3-am642-sk";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-1";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot_unsigned {
-+	u_boot_unsigned: template-15 {
- 		insert-template = <&u_boot_unsigned_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for AM64 Board";
--				};
--
--				fdt-0 {
--					description = "k3-am642-evm";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = AM642_EVM_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--
--				fdt-1 {
--					description = "k3-am642-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = AM642_SK_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am642-evm";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--
--				conf-1 {
--					description = "k3-am642-sk";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-1";
--				};
--			};
--		};
- 	};
- };
- #endif
-diff --git a/arch/arm/dts/k3-am654-base-board-u-boot.dtsi b/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
-index 4fd188fa191..8899e5599ec 100644
---- a/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am654-base-board-u-boot.dtsi
-@@ -3,6 +3,11 @@
-  * Copyright (C) 2018-2021 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
-+#define SPL_BOARD_DTB "spl/dts/k3-am654-base-board.dtb"
-+#define BOARD_DESCRIPTION "k3-am654-base-board"
-+
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM654 Base Board"
-+
- #include "k3-am65x-binman.dtsi"
- 
- / {
-@@ -274,3 +279,47 @@
- 	reg-names = "gcfg", "rchanrt", "tchanrt",
- 		    "tchan", "rchan", "rflow";
- };
-+
-+#ifndef CONFIG_ARM64
-+
-+&binman {
-+	tiboot3-am65x-sr2-hs-evm {
-+		insert-template = <&tiboot3_am65x_sr2_hs_evm>;
-+	};
-+
-+	itb-am65x-sr2-hs-evm {
-+		insert-template = <&itb>;
-+	};
-+};
-+
-+&binman {
-+	tiboot3-am65x-sr2-gp-evm {
-+		insert-template = <&tiboot3_am65x_sr2_gp_evm>;
-+	};
-+
-+	itb-am65x-sr2-gp-evm {
-+		insert-template = <&itb_gp>;
-+	};
-+};
-+
-+#else
-+
-+&binman {
-+	tispl {
-+		insert-template = <&ti_spl>;
-+	};
-+
-+	u-boot {
-+		insert-template = <&u_boot>;
-+	};
-+
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
-+	};
-+
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
-+	};
-+};
-+
-+#endif
-diff --git a/arch/arm/dts/k3-am65x-binman.dtsi b/arch/arm/dts/k3-am65x-binman.dtsi
-index 8cc24da1f3f..f1f0093bbb1 100644
---- a/arch/arm/dts/k3-am65x-binman.dtsi
-+++ b/arch/arm/dts/k3-am65x-binman.dtsi
-@@ -5,11 +5,12 @@
- 
- #include "k3-binman.dtsi"
- 
--#ifdef CONFIG_TARGET_AM654_R5_EVM
-+#ifndef CONFIG_ARM64
- 
- &binman {
--	tiboot3-am65x_sr2-hs-evm.bin {
-+	tiboot3_am65x_sr2_hs_evm: template-9 {
- 		filename = "tiboot3-am65x_sr2-hs-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl>;
- 			core = "public";
-@@ -20,6 +21,7 @@
- 			no-expanded;
- 		};
- 	};
-+	};
- 	sysfw {
- 		filename = "sysfw.bin";
- 		ti-secure-rom {
-@@ -40,16 +42,17 @@
- 			optional;
- 		};
- 	};
--	itb {
-+	itb: template-10 {
- 		filename = "sysfw-am65x_sr2-hs-evm.itb";
- 		insert-template = <&itb_template>;
- 	};
- };
- 
- &binman {
--	tiboot3-am65x_sr2-gp-evm.bin {
-+	tiboot3_am65x_sr2_gp_evm: template-11 {
- 		filename = "tiboot3-am65x_sr2-gp-evm.bin";
- 		symlink = "tiboot3.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_unsigned>;
- 			core = "public";
-@@ -61,6 +64,7 @@
- 			no-expanded;
- 		};
- 	};
-+	};
- 	sysfw_gp {
- 		filename = "sysfw.bin_gp";
- 		ti-secure-rom {
-@@ -76,7 +80,7 @@
- 			optional;
- 		};
- 	};
--	itb_gp {
-+	itb_gp: template-12 {
- 		filename = "sysfw-am65x_sr2-gp-evm.itb";
- 		symlink = "sysfw.itb";
- 		insert-template = <&itb_unsigned_template>;
-@@ -91,15 +95,11 @@
- 		};
- 	};
- };
--#endif
--
--#ifdef CONFIG_TARGET_AM654_A53_EVM
- 
--#define SPL_AM654_EVM_DTB "spl/dts/k3-am654-base-board.dtb"
--#define AM654_EVM_DTB "u-boot.dtb"
-+#else
- 
- &binman {
--	ti-spl {
-+	ti_spl: template-13 {
- 		insert-template = <&ti_spl_template>;
- 
- 		fit {
-@@ -110,82 +110,19 @@
- 						filename = "/dev/null";
- 					};
- 				};
--
--				fdt-0 {
--					description = "k3-am654-base-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&spl_am65x_evm_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					spl_am65x_evm_dtb: blob-ext {
--						filename = SPL_AM654_EVM_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am654-base-board";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot {
-+	u_boot: template-14 {
- 		insert-template = <&u_boot_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for AM65 Board";
--				};
--
--				fdt-0 {
--					description = "k3-am654-base-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&am65x_evm_dtb>;
--						keyfile = "custMpk.pem";
--
--					};
--					am65x_evm_dtb: blob-ext {
--						filename = AM654_EVM_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am654-base-board";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--			};
--		};
- 	};
- };
- 
- &binman {
--	ti-spl_unsigned {
-+	ti_spl_unsigned: template-15 {
- 		insert-template = <&ti_spl_unsigned_template>;
- 
- 		fit {
-@@ -195,67 +132,14 @@
- 						filename = "/dev/null";
- 					};
- 				};
--
--				fdt-0 {
--					description = "k3-j721e-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = SPL_AM654_EVM_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am654-base-board";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot_unsigned {
-+	u_boot_unsigned: template-16 {
- 		insert-template = <&u_boot_unsigned_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for AM65 Board";
--				};
--
--				fdt-0 {
--					description = "k3-am654-base-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = AM654_EVM_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-am654-base-board";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--			};
--		};
- 	};
- };
- #endif
-diff --git a/arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi b/arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi
-index 4f34347586e..0ade1ef53cb 100644
---- a/arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi
-@@ -3,6 +3,10 @@
-  * Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
-+#define SPL_BOARD_DTB "spl/dts/k3-am68-sk-base-board.dtb"
-+#define BOARD_DESCRIPTION "k3-am68-sk-base-board"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM68 SK"
-+
- #include "k3-j721s2-binman.dtsi"
- 
- &wkup_i2c0 {
-@@ -133,3 +137,25 @@
- 	dr_mode = "peripheral";
- 	bootph-all;
- };
-+
-+#ifndef CONFIG_ARM64
-+
-+&binman {
-+	tiboot3-am68-sk {
-+		insert-template = <&tiboot3_j721s2_hs_fs_evm>;
-+	};
-+};
-+
-+#else
-+
-+&binman {
-+	tispl {
-+		insert-template = <&ti_spl>;
-+	};
-+
-+	u-boot {
-+		insert-template = <&u_boot>;
-+	};
-+};
-+
-+#endif
-diff --git a/arch/arm/dts/k3-am69-sk-u-boot.dtsi b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-index bed330e6d4e..866836909df 100644
---- a/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-@@ -3,6 +3,10 @@
-  * Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
-+#define SPL_BOARD_DTB "spl/dts/ti/k3-am69-sk.dtb"
-+#define BOARD_DESCRIPTION "k3-am68-sk"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM69 SK"
-+
- #include "k3-j784s4-binman.dtsi"
- 
- / {
-@@ -30,25 +34,24 @@
- 	};
- };
- 
--#ifdef CONFIG_TARGET_J784S4_A72_EVM
--
--#define SPL_AM69_SK_DTB "spl/dts/ti/k3-am69-sk.dtb"
--#define AM69_SK_DTB "u-boot.dtb"
-+#ifndef CONFIG_ARM64
- 
--&spl_j784s4_evm_dtb {
--	filename = SPL_AM69_SK_DTB;
-+&binman {
-+	tiboot3-am69-sk {
-+		insert-template = <&tiboot3_j784s4_hs_fs_evm>;
-+	};
- };
- 
--&j784s4_evm_dtb {
--	filename = AM69_SK_DTB;
--};
-+#else
- 
--&spl_j784s4_evm_dtb_unsigned {
--	filename = SPL_AM69_SK_DTB;
--};
-+&binman {
-+	tispl {
-+		insert-template = <&ti_spl>;
-+	};
- 
--&j784s4_evm_dtb_unsigned {
--	filename = AM69_SK_DTB;
-+	u-boot {
-+		insert-template = <&u_boot>;
-+	};
- };
- 
- #endif
-diff --git a/arch/arm/dts/k3-binman.dtsi b/arch/arm/dts/k3-binman.dtsi
-index 5163161b94d..eb920c092ef 100644
---- a/arch/arm/dts/k3-binman.dtsi
-+++ b/arch/arm/dts/k3-binman.dtsi
-@@ -325,6 +325,27 @@
- 					};
- 				};
- 
-+				fdt-0 {
-+					description = BOARD_DESCRIPTION;
-+					ti-secure {
-+						content = <&spl_board_dtb>;
-+						keyfile = "custMpk.pem";
-+					};
-+					spl_board_dtb: blob-ext {
-+						filename = SPL_BOARD_DTB;
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "conf-0";
-+
-+				conf-0 {
-+					description = BOARD_DESCRIPTION;
-+					firmware = "atf";
-+					loadables = "tee", "dm", "spl";
-+					fdt = "fdt-0";
-+				};
- 			};
- 		};
- 	};
-@@ -387,6 +408,27 @@
- 						filename = "spl/u-boot-spl-nodtb.bin";
- 					};
- 				};
-+
-+				fdt-0 {
-+					description = BOARD_DESCRIPTION;
-+					type = "flat_dt";
-+					arch = "arm";
-+					compression = "none";
-+					blob {
-+						filename = SPL_BOARD_DTB;
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "conf-0";
-+
-+				conf-0 {
-+					description = BOARD_DESCRIPTION;
-+					firmware = "atf";
-+					loadables = "tee", "dm", "spl";
-+					fdt = "fdt-0";
-+				};
- 			};
- 		};
- 	};
-@@ -399,6 +441,7 @@
- 
- 			images {
- 				uboot {
-+					description = UBOOT_BOARD_DESCRIPTION;
- 					type = "firmware";
- 					os = "u-boot";
- 					arch = "arm";
-@@ -414,6 +457,35 @@
- 						algo = "crc32";
- 					};
- 				};
-+
-+				fdt-0 {
-+					description = BOARD_DESCRIPTION;
-+					type = "flat_dt";
-+					arch = "arm";
-+					compression = "none";
-+					ti-secure {
-+						content = <&board_dtb>;
-+						keyfile = "custMpk.pem";
-+
-+					};
-+					board_dtb: blob {
-+						filename = "u-boot.dtb";
-+					};
-+					hash {
-+						algo = "crc32";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "conf-0";
-+
-+				conf-0 {
-+					description = BOARD_DESCRIPTION;
-+					firmware = "uboot";
-+					loadables = "uboot";
-+					fdt = "fdt-0";
-+				};
- 			};
- 		};
- 	};
-@@ -426,6 +498,7 @@
- 
- 			images {
- 				uboot {
-+					description = UBOOT_BOARD_DESCRIPTION;
- 					type = "firmware";
- 					os = "u-boot";
- 					arch = "arm";
-@@ -438,6 +511,29 @@
- 						algo = "crc32";
- 					};
- 				};
-+
-+				fdt-0 {
-+					description = BOARD_DESCRIPTION;
-+					type = "flat_dt";
-+					arch = "arm";
-+					compression = "none";
-+					u-boot-dtb {
-+					};
-+					hash {
-+						algo = "crc32";
-+					};
-+				};
-+			};
-+
-+			configurations {
-+				default = "conf-0";
-+
-+				conf-0 {
-+					description = BOARD_DESCRIPTION;
-+					firmware = "uboot";
-+					loadables = "uboot";
-+					fdt = "fdt-0";
-+				};
- 			};
- 		};
- 	};
-diff --git a/arch/arm/dts/k3-j7200-binman.dtsi b/arch/arm/dts/k3-j7200-binman.dtsi
-index 06db8659876..69efa81942a 100644
---- a/arch/arm/dts/k3-j7200-binman.dtsi
-+++ b/arch/arm/dts/k3-j7200-binman.dtsi
-@@ -5,7 +5,7 @@
- 
- #include "k3-binman.dtsi"
- 
--#ifdef CONFIG_TARGET_J7200_R5_EVM
-+#ifndef CONFIG_ARM64
- 
- &bcfg_yaml {
- 	config = "board-cfg_j7200.yaml";
-@@ -48,8 +48,9 @@
- };
- 
- &binman {
--	tiboot3-j7200_sr2-hs-evm.bin {
-+	tiboot3_j7200_sr2_hs_evm: template-9 {
- 		filename = "tiboot3-j7200_sr2-hs-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl>, <&ti_fs_enc>, <&combined_tifs_cfg>,
- 				<&combined_dm_cfg>, <&sysfw_inner_cert>;
-@@ -90,11 +91,13 @@
- 			type = "blob-ext";
- 		};
- 	};
-+	};
- };
- 
- &binman {
--	tiboot3-j7200_sr2-hs-fs-evm.bin {
-+	tiboot3_j7200_sr2_hs_fs_evm: template-10 {
- 		filename = "tiboot3-j7200_sr2-hs-fs-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_fs>, <&ti_fs_enc_fs>, <&combined_tifs_cfg_fs>,
- 				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
-@@ -135,12 +138,14 @@
- 			type = "blob-ext";
- 		};
- 	};
-+	};
- };
- 
- &binman {
--	tiboot3-j7200-gp-evm.bin {
-+	tiboot3_j7200_gp_evm: template-11 {
- 		filename = "tiboot3-j7200-gp-evm.bin";
- 		symlink = "tiboot3.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
- 				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
-@@ -173,15 +178,11 @@
- 			filename = "combined-dm-cfg.bin";
- 			type = "blob-ext";
- 		};
-+		};
- 	};
- };
- 
--#endif
--
--#ifdef CONFIG_TARGET_J7200_A72_EVM
--
--#define SPL_J7200_EVM_DTB "spl/dts/k3-j7200-common-proc-board.dtb"
--#define J7200_EVM_DTB "u-boot.dtb"
-+#else
- 
- &binman {
- 	ti-dm {
-@@ -190,7 +191,7 @@
- 			filename = "ti-dm/j7200/ipc_echo_testb_mcu1_0_release_strip.xer5f";
- 		};
- 	};
--	ti-spl {
-+	ti_spl: template-12 {
- 		insert-template = <&ti_spl_template>;
- 
- 		fit {
-@@ -294,82 +295,19 @@
- 						filename = "ti-dm.bin";
- 					};
- 				};
--
--				fdt-0 {
--					description = "k3-j7200-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&spl_j7200_evm_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					spl_j7200_evm_dtb: blob-ext {
--						filename = SPL_J7200_EVM_DTB;
--					};
--				};
--
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-j7200-common-proc-board";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot {
-+	u_boot: template-13 {
- 		insert-template = <&u_boot_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for J7200 Board";
--				};
--
--				fdt-0 {
--					description = "k3-j7200-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&j7200_evm_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					j7200_evm_dtb: blob-ext {
--						filename = J7200_EVM_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-j7200-common-proc-board";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--
--			};
--		};
- 	};
- };
- 
- &binman {
--	ti-spl_unsigned {
-+	ti_spl_unsigned: template-14 {
- 		insert-template = <&ti_spl_unsigned_template>;
- 
- 		fit {
-@@ -379,67 +317,14 @@
- 						filename = "ti-dm.bin";
- 					};
- 				};
--
--				fdt-1 {
--					description = "k3-j7200-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = SPL_J7200_EVM_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-1";
--
--				conf-1 {
--					description = "k3-j7200-common-proc-board";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-1";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot_unsigned {
-+	u_boot_unsigned: template-15 {
- 		insert-template = <&u_boot_unsigned_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for J7200 Board";
--				};
--
--				fdt-1 {
--					description = "k3-j7200-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = J7200_EVM_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-1";
--
--				conf-1 {
--					description = "k3-j7200-common-proc-board";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-1";
--				};
--			};
--		};
- 	};
- };
- #endif
-diff --git a/arch/arm/dts/k3-j7200-common-proc-board-u-boot.dtsi b/arch/arm/dts/k3-j7200-common-proc-board-u-boot.dtsi
-index c9fee0ea99b..c09672104d5 100644
---- a/arch/arm/dts/k3-j7200-common-proc-board-u-boot.dtsi
-+++ b/arch/arm/dts/k3-j7200-common-proc-board-u-boot.dtsi
-@@ -3,6 +3,10 @@
-  * Copyright (C) 2020-2023 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
-+#define SPL_BOARD_DTB "spl/dts/k3-j7200-common-proc-board.dtb"
-+#define BOARD_DESCRIPTION "k3-j7200-common-proc-board"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for J7200 EVM"
-+
- #include "k3-j7200-binman.dtsi"
- 
- / {
-@@ -212,3 +216,39 @@
- &serdes0 {
- 	bootph-all;
- };
-+
-+#ifndef CONFIG_ARM64
-+
-+&binman {
-+	tiboot3-j7200-sr2-hs-evm {
-+		insert-template = <&tiboot3_j7200_sr2_hs_evm>;
-+	};
-+	tiboot3-j7200-sr2-hs-fs-evm {
-+		insert-template = <&tiboot3_j7200_sr2_hs_fs_evm>;
-+	};
-+	tiboot3-j7200-gp-evm {
-+		insert-template = <&tiboot3_j7200_gp_evm>;
-+	};
-+};
-+
-+#else
-+
-+&binman {
-+	tispl {
-+		insert-template = <&ti_spl>;
-+	};
-+
-+	u-boot {
-+		insert-template = <&u_boot>;
-+	};
-+
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
-+	};
-+
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
-+	};
-+};
-+
-+#endif
-diff --git a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
-index 116ee373118..2059ace6c5b 100644
---- a/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
-+++ b/arch/arm/dts/k3-j721e-beagleboneai64-u-boot.dtsi
-@@ -7,7 +7,11 @@
-  * Copyright (C) 2022-2023 Robert Nelson, BeagleBoard.org Foundation
-  */
- 
--#include "k3-binman.dtsi"
-+#define SPL_BOARD_DTB "spl/dts/k3-j721e-beagleboneai64.dtb"
-+#define BOARD_DESCRIPTION "k3-j721e-beagleboneai64"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for J721E BeagleBoneAI64"
-+
-+#include "k3-j721e-binman.dtsi"
- 
- / {
- 	memory@80000000 {
-@@ -205,154 +209,14 @@
- 
- #ifdef CONFIG_TARGET_J721E_A72_BEAGLEBONEAI64
- 
--#define SPL_NODTB "spl/u-boot-spl-nodtb.bin"
--#define SPL_J721E_BBAI64_DTB "spl/dts/k3-j721e-beagleboneai64.dtb"
--
--#define UBOOT_NODTB "u-boot-nodtb.bin"
--#define J721E_BBAI64_DTB "arch/arm/dts/k3-j721e-beagleboneai64.dtb"
--
- &binman {
--	ti-dm {
--		filename = "ti-dm.bin";
--		blob-ext {
--			filename = "ti-dm/j721e/ipc_echo_testb_mcu1_0_release_strip.xer5f";
--		};
--	};
- 
--	ti-spl_unsigned {
--		filename = "tispl.bin_unsigned";
--		pad-byte = <0xff>;
--
--		fit {
--			description = "Configuration to load ATF and SPL";
--			#address-cells = <1>;
--
--			images {
--
--				atf {
--					description = "ARM Trusted Firmware";
--					type = "firmware";
--					arch = "arm64";
--					compression = "none";
--					os = "arm-trusted-firmware";
--					load = <CONFIG_K3_ATF_LOAD_ADDR>;
--					entry = <CONFIG_K3_ATF_LOAD_ADDR>;
--					atf-bl31 {
--						filename = "bl31.bin";
--					};
--				};
--
--				tee {
--					description = "OP-TEE";
--					type = "tee";
--					arch = "arm64";
--					compression = "none";
--					os = "tee";
--					load = <CONFIG_K3_OPTEE_LOAD_ADDR>;
--					entry = <CONFIG_K3_OPTEE_LOAD_ADDR>;
--					tee-os {
--						filename = "tee-raw.bin";
--					};
--				};
--
--				dm {
--					description = "DM binary";
--					type = "firmware";
--					arch = "arm32";
--					compression = "none";
--					os = "DM";
--					load = <0x89000000>;
--					entry = <0x89000000>;
--					blob-ext {
--						filename = "ti-dm.bin";
--					};
--				};
--
--				spl {
--					description = "SPL (64-bit)";
--					type = "standalone";
--					os = "U-Boot";
--					arch = "arm64";
--					compression = "none";
--					load = <CONFIG_SPL_TEXT_BASE>;
--					entry = <CONFIG_SPL_TEXT_BASE>;
--					blob-ext {
--						filename = SPL_NODTB;
--					};
--				};
--
--				fdt-0 {
--					description = "k3-j721e-beagleboneai64";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = SPL_J721E_BBAI64_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-j721e-beagleboneai64";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
--			};
--		};
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
- 	};
- 
--	u-boot_unsigned {
--		filename = "u-boot.img_unsigned";
--		pad-byte = <0xff>;
--
--		fit {
--			description = "FIT image with multiple configurations";
--
--			images {
--				uboot {
--					description = "U-Boot for j721e board";
--					type = "firmware";
--					os = "u-boot";
--					arch = "arm";
--					compression = "none";
--					load = <CONFIG_TEXT_BASE>;
--					blob {
--						filename = UBOOT_NODTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--
--				fdt-0 {
--					description = "k3-j721e-beagleboneai64";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = J721E_BBAI64_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-j721e-beagleboneai64";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--			};
--		};
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
- 	};
- };
- #endif
-diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
-index 75a6e9599b9..fb0f645774b 100644
---- a/arch/arm/dts/k3-j721e-binman.dtsi
-+++ b/arch/arm/dts/k3-j721e-binman.dtsi
-@@ -5,11 +5,12 @@
- 
- #include "k3-binman.dtsi"
- 
--#ifdef CONFIG_TARGET_J721E_R5_EVM
-+#ifndef CONFIG_ARM64
- 
- &binman {
--	tiboot3-j721e_sr1_1-hs-evm.bin {
-+	tiboot3_j721e_sr1_1_hs: template-9 {
- 		filename = "tiboot3-j721e_sr1_1-hs-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl>;
- 			core = "public";
-@@ -19,10 +20,12 @@
- 		u_boot_spl: u-boot-spl {
- 			no-expanded;
- 		};
-+		};
- 	};
- 
--	tiboot3-j721e_sr2-hs-evm.bin {
-+	tiboot3_j721e_sr2_hs: template-10 {
- 		filename = "tiboot3-j721e_sr2-hs-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_sr2>;
- 			core = "public";
-@@ -32,10 +35,12 @@
- 		u_boot_spl_sr2: u-boot-spl {
- 			no-expanded;
- 		};
-+		};
- 	};
- 
--	sysfw {
-+	sysfw: template-11 {
- 		filename = "sysfw.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&ti_fs_cert>;
- 			core = "secure";
-@@ -53,10 +58,12 @@
- 			type = "blob-ext";
- 			optional;
- 		};
-+		};
- 	};
- 
--	sysfw_sr2 {
-+	sysfw_sr2: template-12 {
- 		filename = "sysfw.bin_sr2";
-+		section {
- 		ti-secure-rom {
- 			content = <&ti_fs_cert_sr2>;
- 			core = "secure";
-@@ -74,15 +81,17 @@
- 			type = "blob-ext";
- 			optional;
- 		};
-+		};
- 	};
- 
--	itb {
-+	itb: template-13 {
- 		filename = "sysfw-j721e_sr1_1-hs-evm.itb";
- 		insert-template = <&itb_template>;
- 	};
- 
--	itb_sr2 {
-+	itb_sr2: template-14 {
- 		filename = "sysfw-j721e_sr2-hs-evm.itb";
-+		section {
- 		insert-template = <&itb_template>;
- 		fit {
- 			images {
-@@ -127,11 +136,13 @@
- 			};
- 		};
- 	};
-+	};
- };
- 
- &binman {
--	tiboot3-j721e_sr2-hs-fs-evm.bin {
-+	tiboot3_j721e_sr2_hs_fs: template-15 {
- 		filename = "tiboot3-j721e_sr2-hs-fs-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_fs>;
- 			core = "public";
-@@ -141,9 +152,11 @@
- 		u_boot_spl_fs: u-boot-spl {
- 			no-expanded;
- 		};
-+		};
- 	};
--	sysfw_fs {
-+	sysfw_fs: template-16 {
- 		filename = "sysfw.bin_fs";
-+		section {
- 		ti-fs-cert-fs.bin {
- 			filename = "ti-sysfw/ti-fs-firmware-j721e_sr2-hs-fs-cert.bin";
- 			type = "blob-ext";
-@@ -154,17 +167,19 @@
- 			type = "blob-ext";
- 			optional;
- 		};
-+		};
- 	};
--	itb_fs {
-+	itb_fs: template-17 {
- 		filename = "sysfw-j721e_sr2-hs-fs-evm.itb";
- 		insert-template = <&itb_unsigned_template>;
- 	};
- };
- 
- &binman {
--	tiboot3-j721e-gp-evm.bin {
-+	tiboot3_j721e_gp: template-18 {
- 		filename = "tiboot3-j721e-gp-evm.bin";
- 		symlink = "tiboot3.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_unsigned>;
- 			core = "public";
-@@ -175,9 +190,11 @@
- 		u_boot_spl_unsigned: u-boot-spl {
- 			no-expanded;
- 		};
-+		};
- 	};
--	sysfw_gp {
-+	sysfw_gp: template-19 {
- 		filename = "sysfw.bin_gp";
-+		section {
- 		ti-secure-rom {
- 			content = <&ti_fs>;
- 			core = "secure";
-@@ -190,10 +207,12 @@
- 			type = "blob-ext";
- 			optional;
- 		};
-+		};
- 	};
--	itb_gp {
-+	itb_gp: template-20 {
- 		filename = "sysfw-j721e-gp-evm.itb";
- 		symlink = "sysfw.itb";
-+		section {
- 		insert-template = <&itb_unsigned_template>;
- 
- 		fit {
-@@ -205,17 +224,11 @@
- 				};
- 			};
- 		};
-+		};
- 	};
- };
--#endif
--
--#ifdef CONFIG_TARGET_J721E_A72_EVM
- 
--#define SPL_J721E_EVM_DTB "spl/dts/k3-j721e-common-proc-board.dtb"
--#define SPL_J721E_SK_DTB "spl/dts/k3-j721e-sk.dtb"
--
--#define J721E_EVM_DTB "u-boot.dtb"
--#define J721E_SK_DTB "arch/arm/dts/k3-j721e-sk.dtb"
-+#else
- 
- &binman {
- 	ti-dm {
-@@ -224,7 +237,7 @@
- 			filename = "ti-dm/j721e/ipc_echo_testb_mcu1_0_release_strip.xer5f";
- 		};
- 	};
--	ti-spl {
-+	ti_spl: template-21 {
- 		insert-template = <&ti_spl_template>;
- 
- 		fit {
-@@ -354,128 +367,19 @@
- 						filename = "ti-dm.bin";
- 					};
- 				};
--
--				fdt-0 {
--					description = "k3-j721e-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&spl_j721e_evm_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					spl_j721e_evm_dtb: blob-ext {
--						filename = SPL_J721E_EVM_DTB;
--					};
--				};
--
--				fdt-1 {
--					description = "k3-j721e-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&spl_j721e_sk_dtb>;
--						keyfile = "custMpk.pem";
--
--					};
--					spl_j721e_sk_dtb: blob-ext {
--						filename = SPL_J721E_SK_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-j721e-common-proc-board";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
--
--				conf-1 {
--					description = "k3-j721e-sk";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-1";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot {
-+	u_boot: template-22 {
- 		insert-template = <&u_boot_template>;
--		fit {
--
--			images {
--				uboot {
--					description = "U-Boot for J721E Board";
--				};
--
--				fdt-0 {
--					description = "k3-j721e-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&j721e_evm_dtb>;
--						keyfile = "custMpk.pem";
--
--					};
--					j721e_evm_dtb: blob-ext {
--						filename = J721E_EVM_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--
--				fdt-1 {
--					description = "k3-j721e-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&j721e_sk_dtb>;
--						keyfile = "custMpk.pem";
--
--					};
--					j721e_sk_dtb: blob-ext {
--						filename = J721E_SK_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-j721e-common-proc-board";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--
--				conf-1 {
--					description = "k3-j721e-sk";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-1";
--				};
--			};
--		};
- 	};
- };
- 
- &binman {
--	ti-spl_unsigned {
-+	ti_spl_unsigned: template-23 {
- 		insert-template = <&ti_spl_unsigned_template>;
- 
- 		fit {
-@@ -485,104 +389,14 @@
- 						filename = "ti-dm.bin";
- 					};
- 				};
--
--				fdt-0 {
--					description = "k3-j721e-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = SPL_J721E_EVM_DTB;
--					};
--				};
--
--				fdt-1 {
--					description = "k3-j721e-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = SPL_J721E_SK_DTB;
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-j721e-common-proc-board";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
--
--				conf-1 {
--					description = "k3-j721e-sk";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-1";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot_unsigned {
-+	u_boot_unsigned: template-24 {
- 		insert-template = <&u_boot_unsigned_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for J721E Board";
--				};
--
--				fdt-0 {
--					description = "k3-j721e-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = J721E_EVM_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--
--				fdt-1 {
--					description = "k3-j721e-sk";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = J721E_SK_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-j721e-common-proc-board";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--
--				conf-1 {
--					description = "k3-j721e-sk";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-1";
--				};
--			};
--		};
- 	};
- };
- #endif
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index d4451663526..85c5bdb2ccd 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -1392,11 +1392,9 @@ dtb-$(CONFIG_SOC_K3_AM654) += \
+ 	k3-am6548-iot2050-advanced-m2.dtb \
+ 	k3-am6548-iot2050-advanced-m2-bkey-usb3-overlay.dtbo \
+ 	k3-am6548-iot2050-advanced-m2-bkey-ekey-pcie-overlay.dtbo
+-dtb-$(CONFIG_SOC_K3_J721E) += k3-j721e-common-proc-board.dtb \
+-			      k3-j721e-r5-common-proc-board.dtb \
++dtb-$(CONFIG_SOC_K3_J721E) += k3-j721e-r5-common-proc-board.dtb \
+ 			      k3-j7200-common-proc-board.dtb \
+ 			      k3-j7200-r5-common-proc-board.dtb \
+-			      k3-j721e-sk.dtb \
+ 			      k3-j721e-r5-sk.dtb \
+ 			      k3-j721e-beagleboneai64.dtb \
+ 			      k3-j721e-r5-beagleboneai64.dtb
 diff --git a/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi b/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
-index 9433f3bafae..1db18044756 100644
+index 1db18044756..6c21f9b018d 100644
 --- a/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
 +++ b/arch/arm/dts/k3-j721e-common-proc-board-u-boot.dtsi
-@@ -3,6 +3,10 @@
+@@ -3,7 +3,7 @@
   * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com/
   */
  
-+#define SPL_BOARD_DTB "spl/dts/k3-j721e-common-proc-board.dtb"
-+#define BOARD_DESCRIPTION "k3-j721e-common-proc-board"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for J721E EVM"
-+
- #include "k3-j721e-binman.dtsi"
+-#define SPL_BOARD_DTB "spl/dts/k3-j721e-common-proc-board.dtb"
++#define SPL_BOARD_DTB "spl/dts/ti/k3-j721e-common-proc-board.dtb"
+ #define BOARD_DESCRIPTION "k3-j721e-common-proc-board"
+ #define UBOOT_BOARD_DESCRIPTION "U-Boot for J721E EVM"
  
- &cbass_main {
-@@ -187,3 +191,83 @@
- &mcu_fss0_ospi1_pins_default {
- 	bootph-all;
- };
-+
-+#ifndef CONFIG_ARM64
-+
-+&binman {
-+	tiboot3-j721e-sr1-1-hs-evm {
-+		insert-template = <&tiboot3_j721e_sr1_1_hs>;
-+	};
-+
-+	sysfw-j721e-sr1-1-hs-evm {
-+		insert-template = <&sysfw>;
-+	};
-+
-+	itb-j721e-sr1-1-hs-evm {
-+		insert-template = <&itb>;
-+	};
-+};
-+
-+&binman {
-+	tiboot3-j721e-sr2-hs-evm {
-+		insert-template = <&tiboot3_j721e_sr2_hs>;
-+	};
-+
-+	sysfw-j721e-sr2-hs-evm {
-+		insert-template = <&sysfw_sr2>;
-+	};
-+
-+	itb-j721e-sr2-hs-evm {
-+		insert-template = <&itb_sr2>;
-+	};
-+};
-+
-+&binman {
-+	tiboot3-j721e-sr2-hs-fs-evm {
-+		insert-template = <&tiboot3_j721e_sr2_hs_fs>;
-+	};
-+
-+	sysfw-j721e-sr2-hs-fs-evm {
-+		insert-template = <&sysfw_fs>;
-+	};
-+
-+	itb-j721e-sr2-hs-fs-evm {
-+		insert-template = <&itb_fs>;
-+	};
-+};
-+
-+&binman {
-+	tiboot3-j721e-gp-evm {
-+		insert-template = <&tiboot3_j721e_gp>;
-+	};
-+
-+	sysfw-j721e-gp-evm {
-+		insert-template = <&sysfw_gp>;
-+	};
-+
-+	itb-j721e-gp-evm {
-+		insert-template = <&itb_gp>;
-+	};
-+};
-+
-+#else
-+
-+&binman {
-+	tispl {
-+		insert-template = <&ti_spl>;
-+	};
-+
-+	u-boot {
-+		insert-template = <&u_boot>;
-+	};
-+
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
-+	};
-+
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
-+	};
-+};
-+
-+#endif
-diff --git a/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts b/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts
-index 43da4dafba8..c75f8aac302 100644
---- a/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts
-+++ b/arch/arm/dts/k3-j721e-r5-beagleboneai64.dts
-@@ -95,91 +95,20 @@
- 	bootph-pre-ram;
- };
- 
-+#ifndef CONFIG_ARM64
-+
- &binman {
--	tiboot3-j721e-gp-evm.bin {
--		filename = "tiboot3-j721e-gp-evm.bin";
--		symlink = "tiboot3.bin";
--		ti-secure-rom {
--			content = <&u_boot_spl_unsigned>;
--			core = "public";
--			load = <CONFIG_SPL_TEXT_BASE>;
--			sw-rev = <CONFIG_K3_X509_SWRV>;
--			keyfile = "ti-degenerate-key.pem";
+diff --git a/arch/arm/dts/k3-j721e-common-proc-board.dts b/arch/arm/dts/k3-j721e-common-proc-board.dts
+deleted file mode 100644
+index fe5207ac7d8..00000000000
+--- a/arch/arm/dts/k3-j721e-common-proc-board.dts
++++ /dev/null
+@@ -1,976 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * Copyright (C) 2019 Texas Instruments Incorporated - https://www.ti.com/
+- *
+- * Product Link: https://www.ti.com/tool/J721EXCPXEVM
+- */
+-
+-/dts-v1/;
+-
+-#include "k3-j721e-som-p0.dtsi"
+-#include <dt-bindings/gpio/gpio.h>
+-#include <dt-bindings/input/input.h>
+-#include <dt-bindings/net/ti-dp83867.h>
+-#include <dt-bindings/phy/phy-cadence.h>
+-
+-/ {
+-	compatible = "ti,j721e-evm", "ti,j721e";
+-	model = "Texas Instruments J721e EVM";
+-
+-	aliases {
+-		serial0 = &wkup_uart0;
+-		serial1 = &mcu_uart0;
+-		serial2 = &main_uart0;
+-		serial3 = &main_uart1;
+-		serial4 = &main_uart2;
+-		serial6 = &main_uart4;
+-		ethernet0 = &cpsw_port1;
+-		mmc0 = &main_sdhci0;
+-		mmc1 = &main_sdhci1;
+-	};
+-
+-	chosen {
+-		stdout-path = "serial2:115200n8";
+-	};
+-
+-	gpio_keys: gpio-keys {
+-		compatible = "gpio-keys";
+-		autorepeat;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&sw10_button_pins_default>, <&sw11_button_pins_default>;
+-
+-		sw10: switch-10 {
+-			label = "GPIO Key USER1";
+-			linux,code = <BTN_0>;
+-			gpios = <&main_gpio0 0 GPIO_ACTIVE_LOW>;
 -		};
--		u_boot_spl_unsigned: u-boot-spl {
--			no-expanded;
+-
+-		sw11: switch-11 {
+-			label = "GPIO Key USER2";
+-			linux,code = <BTN_1>;
+-			gpios = <&wkup_gpio0 7 GPIO_ACTIVE_LOW>;
 -		};
-+	tiboot3-j721e-beagleboneai64 {
-+		insert-template = <&tiboot3_j721e_gp>;
- 	};
- 
--	sysfw_gp {
--		filename = "sysfw.bin_gp";
--		ti-secure-rom {
--			content = <&ti_fs>;
--			core = "secure";
--			load = <0x40000>;
--			sw-rev = <CONFIG_K3_X509_SWRV>;
--			keyfile = "ti-degenerate-key.pem";
+-	};
+-
+-	evm_12v0: fixedregulator-evm12v0 {
+-		/* main supply */
+-		compatible = "regulator-fixed";
+-		regulator-name = "evm_12v0";
+-		regulator-min-microvolt = <12000000>;
+-		regulator-max-microvolt = <12000000>;
+-		regulator-always-on;
+-		regulator-boot-on;
+-	};
+-
+-	vsys_3v3: fixedregulator-vsys3v3 {
+-		/* Output of LMS140 */
+-		compatible = "regulator-fixed";
+-		regulator-name = "vsys_3v3";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		vin-supply = <&evm_12v0>;
+-		regulator-always-on;
+-		regulator-boot-on;
+-	};
+-
+-	vsys_5v0: fixedregulator-vsys5v0 {
+-		/* Output of LM5140 */
+-		compatible = "regulator-fixed";
+-		regulator-name = "vsys_5v0";
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-		vin-supply = <&evm_12v0>;
+-		regulator-always-on;
+-		regulator-boot-on;
+-	};
+-
+-	vdd_mmc1: fixedregulator-sd {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vdd_mmc1";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		regulator-boot-on;
+-		enable-active-high;
+-		vin-supply = <&vsys_3v3>;
+-		gpio = <&exp2 2 GPIO_ACTIVE_HIGH>;
+-	};
+-
+-	vdd_sd_dv_alt: gpio-regulator-TLV71033 {
+-		compatible = "regulator-gpio";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&vdd_sd_dv_alt_pins_default>;
+-		regulator-name = "tlv71033";
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <3300000>;
+-		regulator-boot-on;
+-		vin-supply = <&vsys_5v0>;
+-		gpios = <&main_gpio0 117 GPIO_ACTIVE_HIGH>;
+-		states = <1800000 0x0>,
+-			 <3300000 0x1>;
+-	};
+-
+-	sound0: sound-0 {
+-		compatible = "ti,j721e-cpb-audio";
+-		model = "j721e-cpb";
+-
+-		ti,cpb-mcasp = <&mcasp10>;
+-		ti,cpb-codec = <&pcm3168a_1>;
+-
+-		clocks = <&k3_clks 184 1>,
+-			 <&k3_clks 184 2>, <&k3_clks 184 4>,
+-			 <&k3_clks 157 371>,
+-			 <&k3_clks 157 400>, <&k3_clks 157 401>;
+-		clock-names = "cpb-mcasp-auxclk",
+-			      "cpb-mcasp-auxclk-48000", "cpb-mcasp-auxclk-44100",
+-			      "cpb-codec-scki",
+-			      "cpb-codec-scki-48000", "cpb-codec-scki-44100";
+-	};
+-
+-	transceiver1: can-phy0 {
+-		compatible = "ti,tcan1043";
+-		#phy-cells = <0>;
+-		max-bitrate = <5000000>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&mcu_mcan0_gpio_pins_default>;
+-		standby-gpios = <&wkup_gpio0 54 GPIO_ACTIVE_LOW>;
+-		enable-gpios = <&wkup_gpio0 0 GPIO_ACTIVE_HIGH>;
+-	};
+-
+-	transceiver2: can-phy1 {
+-		compatible = "ti,tcan1042";
+-		#phy-cells = <0>;
+-		max-bitrate = <5000000>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&mcu_mcan1_gpio_pins_default>;
+-		standby-gpios = <&wkup_gpio0 2 GPIO_ACTIVE_HIGH>;
+-	};
+-
+-	transceiver3: can-phy2 {
+-		compatible = "ti,tcan1043";
+-		#phy-cells = <0>;
+-		max-bitrate = <5000000>;
+-		standby-gpios = <&exp2 7 GPIO_ACTIVE_LOW>;
+-		enable-gpios = <&exp2 6 GPIO_ACTIVE_HIGH>;
+-	};
+-
+-	transceiver4: can-phy3 {
+-		compatible = "ti,tcan1042";
+-		#phy-cells = <0>;
+-		max-bitrate = <5000000>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&main_mcan2_gpio_pins_default>;
+-		standby-gpios = <&main_gpio0 127 GPIO_ACTIVE_HIGH>;
+-	};
+-
+-	dp_pwr_3v3: regulator-dp-pwr {
+-		compatible = "regulator-fixed";
+-		regulator-name = "dp-pwr";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&exp4 0 GPIO_ACTIVE_HIGH>; /* P0 - DP0_PWR_SW_EN */
+-		enable-active-high;
+-	};
+-
+-	dp0: connector {
+-		compatible = "dp-connector";
+-		label = "DP0";
+-		type = "full-size";
+-		dp-pwr-supply = <&dp_pwr_3v3>;
+-
+-		port {
+-			dp_connector_in: endpoint {
+-				remote-endpoint = <&dp0_out>;
+-			};
 -		};
--		ti_fs: ti-fs.bin {
--			filename = "ti-sysfw/ti-fs-firmware-j721e-gp.bin";
--			type = "blob-ext";
--			optional;
--		};
-+	sysfw-j721e-beagleboneai64 {
-+		insert-template = <&sysfw_gp>;
- 	};
- 
--	itb_gp {
--		filename = "sysfw-j721e-gp-evm.itb";
--		symlink = "sysfw.itb";
--		fit {
--			description = "SYSFW and Config fragments";
+-	};
+-};
+-
+-&main_pmx0 {
+-	main_uart0_pins_default: main-uart0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x1d4, PIN_INPUT, 1) /* (Y3) SPI1_CS0.UART0_CTSn */
+-			J721E_IOPAD(0x1c0, PIN_OUTPUT, 1) /* (AA2) SPI0_CS0.UART0_RTSn */
+-			J721E_IOPAD(0x1e8, PIN_INPUT, 0) /* (AB2) UART0_RXD */
+-			J721E_IOPAD(0x1ec, PIN_OUTPUT, 0) /* (AB3) UART0_TXD */
+-		>;
+-	};
+-
+-	main_uart1_pins_default: main-uart1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x1f8, PIN_INPUT, 0) /* (AA4) UART1_RXD */
+-			J721E_IOPAD(0x1fc, PIN_OUTPUT, 0) /* (AB4) UART1_TXD */
+-		>;
+-	};
+-
+-	main_uart2_pins_default: main-uart2-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x1dc, PIN_INPUT, 3) /* (Y1) SPI1_CLK.UART2_RXD */
+-			J721E_IOPAD(0x1e0, PIN_OUTPUT, 3) /* (Y5) SPI1_D0.UART2_TXD */
+-		>;
+-	};
+-
+-	main_uart4_pins_default: main-uart4-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x190, PIN_INPUT, 1) /* (W23) RGMII6_TD3.UART4_RXD */
+-			J721E_IOPAD(0x194, PIN_OUTPUT, 1) /* (W28) RGMII6_TD2.UART4_TXD */
+-		>;
+-	};
+-
+-	sw10_button_pins_default: sw10-button-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x0, PIN_INPUT, 7) /* (AC18) EXTINTn.GPIO0_0 */
+-		>;
+-	};
+-
+-	main_mmc1_pins_default: main-mmc1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x254, PIN_INPUT, 0) /* (R29) MMC1_CMD */
+-			J721E_IOPAD(0x250, PIN_INPUT, 0) /* (P25) MMC1_CLK */
+-			J721E_IOPAD(0x2ac, PIN_INPUT, 0) /* (P25) MMC1_CLKLB */
+-			J721E_IOPAD(0x24c, PIN_INPUT, 0) /* (R24) MMC1_DAT0 */
+-			J721E_IOPAD(0x248, PIN_INPUT, 0) /* (P24) MMC1_DAT1 */
+-			J721E_IOPAD(0x244, PIN_INPUT, 0) /* (R25) MMC1_DAT2 */
+-			J721E_IOPAD(0x240, PIN_INPUT, 0) /* (R26) MMC1_DAT3 */
+-			J721E_IOPAD(0x258, PIN_INPUT, 0) /* (P23) MMC1_SDCD */
+-			J721E_IOPAD(0x25c, PIN_INPUT, 0) /* (R28) MMC1_SDWP */
+-		>;
+-	};
+-
+-	vdd_sd_dv_alt_pins_default: vdd-sd-dv-alt-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x1d8, PIN_INPUT, 7) /* (W4) SPI1_CS1.GPIO0_117 */
+-		>;
+-	};
+-
+-	main_usbss0_pins_default: main-usbss0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x290, PIN_OUTPUT, 0) /* (U6) USB0_DRVVBUS */
+-			J721E_IOPAD(0x210, PIN_INPUT, 7) /* (W3) MCAN1_RX.GPIO1_3 */
+-		>;
+-	};
+-
+-	main_usbss1_pins_default: main-usbss1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x214, PIN_OUTPUT, 4) /* (V4) MCAN1_TX.USB1_DRVVBUS */
+-		>;
+-	};
+-
+-	dp0_pins_default: dp0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x1c4, PIN_INPUT, 5) /* SPI0_CS1.DP0_HPD */
+-		>;
+-	};
+-
+-	main_i2c1_exp4_pins_default: main-i2c1-exp4-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x230, PIN_INPUT, 7) /* (U2) ECAP0_IN_APWM_OUT.GPIO1_11 */
+-		>;
+-	};
+-
+-	main_i2c0_pins_default: main-i2c0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x220, PIN_INPUT_PULLUP, 0) /* (AC5) I2C0_SCL */
+-			J721E_IOPAD(0x224, PIN_INPUT_PULLUP, 0) /* (AA5) I2C0_SDA */
+-		>;
+-	};
+-
+-	main_i2c1_pins_default: main-i2c1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x228, PIN_INPUT_PULLUP, 0) /* (Y6) I2C1_SCL */
+-			J721E_IOPAD(0x22c, PIN_INPUT_PULLUP, 0) /* (AA6) I2C1_SDA */
+-		>;
+-	};
+-
+-	main_i2c3_pins_default: main-i2c3-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x270, PIN_INPUT_PULLUP, 4) /* (T26) MMC2_CLK.I2C3_SCL */
+-			J721E_IOPAD(0x274, PIN_INPUT_PULLUP, 4) /* (T25) MMC2_CMD.I2C3_SDA */
+-		>;
+-	};
+-
+-	main_i2c6_pins_default: main-i2c6-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x1d0, PIN_INPUT_PULLUP, 2) /* (AA3) SPI0_D1.I2C6_SCL */
+-			J721E_IOPAD(0x1e4, PIN_INPUT_PULLUP, 2) /* (Y2) SPI1_D1.I2C6_SDA */
+-		>;
+-	};
+-
+-	mcasp10_pins_default: mcasp10-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x158, PIN_OUTPUT_PULLDOWN, 12) /* (U23) RGMII5_TX_CTL.MCASP10_ACLKX */
+-			J721E_IOPAD(0x15c, PIN_OUTPUT_PULLDOWN, 12) /* (U26) RGMII5_RX_CTL.MCASP10_AFSX */
+-			J721E_IOPAD(0x160, PIN_OUTPUT_PULLDOWN, 12) /* (V28) RGMII5_TD3.MCASP10_AXR0 */
+-			J721E_IOPAD(0x164, PIN_OUTPUT_PULLDOWN, 12) /* (V29) RGMII5_TD2.MCASP10_AXR1 */
+-			J721E_IOPAD(0x170, PIN_OUTPUT_PULLDOWN, 12) /* (U29) RGMII5_TXC.MCASP10_AXR2 */
+-			J721E_IOPAD(0x174, PIN_OUTPUT_PULLDOWN, 12) /* (U25) RGMII5_RXC.MCASP10_AXR3 */
+-			J721E_IOPAD(0x198, PIN_INPUT_PULLDOWN, 12) /* (V25) RGMII6_TD1.MCASP10_AXR4 */
+-			J721E_IOPAD(0x19c, PIN_INPUT_PULLDOWN, 12) /* (W27) RGMII6_TD0.MCASP10_AXR5 */
+-			J721E_IOPAD(0x1a0, PIN_INPUT_PULLDOWN, 12) /* (W29) RGMII6_TXC.MCASP10_AXR6 */
+-		>;
+-	};
+-
+-	audi_ext_refclk2_pins_default: audi-ext-refclk2-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x1a4, PIN_OUTPUT, 3) /* (W26) RGMII6_RXC.AUDIO_EXT_REFCLK2 */
+-		>;
+-	};
+-
+-	main_mcan0_pins_default: main-mcan0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x208, PIN_INPUT, 0) /* (W5) MCAN0_RX */
+-			J721E_IOPAD(0x20c, PIN_OUTPUT, 0) /* (W6) MCAN0_TX */
+-		>;
+-	};
+-
+-	main_mcan2_pins_default: main-mcan2-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x01f0, PIN_INPUT, 3) /* (AC2) MCAN2_RX.GPIO0_123 */
+-			J721E_IOPAD(0x01f4, PIN_OUTPUT, 3) /* (AB1) MCAN2_TX.GPIO0_124 */
+-		>;
+-	};
+-
+-	main_mcan2_gpio_pins_default: main-mcan2-gpio-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x200, PIN_INPUT, 7) /* (AC4) UART1_CTSn.GPIO0_127 */
+-		>;
+-	};
+-};
+-
+-&wkup_pmx0 {
+-	wkup_uart0_pins_default: wkup-uart0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xa0, PIN_INPUT, 0) /* (J29) WKUP_UART0_RXD */
+-			J721E_WKUP_IOPAD(0xa4, PIN_OUTPUT, 0) /* (J28) WKUP_UART0_TXD */
+-		>;
+-	};
+-
+-	mcu_uart0_pins_default: mcu-uart0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xe8, PIN_INPUT, 0) /* (H29) WKUP_GPIO0_14.MCU_UART0_CTSn */
+-			J721E_WKUP_IOPAD(0xec, PIN_OUTPUT, 0) /* (J27) WKUP_GPIO0_15.MCU_UART0_RTSn */
+-			J721E_WKUP_IOPAD(0xe4, PIN_INPUT, 0) /* (H28) WKUP_GPIO0_13.MCU_UART0_RXD */
+-			J721E_WKUP_IOPAD(0xe0, PIN_OUTPUT, 0) /* (G29) WKUP_GPIO0_12.MCU_UART0_TXD */
+-		>;
+-	};
+-
+-	sw11_button_pins_default: sw11-button-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xcc, PIN_INPUT, 7) /* (G28) WKUP_GPIO0_7 */
+-		>;
+-	};
+-
+-	mcu_fss0_ospi1_pins_default: mcu-fss0-ospi1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0x34, PIN_OUTPUT, 0) /* (F22) MCU_OSPI1_CLK */
+-			J721E_WKUP_IOPAD(0x50, PIN_OUTPUT, 0) /* (C22) MCU_OSPI1_CSn0 */
+-			J721E_WKUP_IOPAD(0x40, PIN_INPUT, 0) /* (D22) MCU_OSPI1_D0 */
+-			J721E_WKUP_IOPAD(0x44, PIN_INPUT, 0) /* (G22) MCU_OSPI1_D1 */
+-			J721E_WKUP_IOPAD(0x48, PIN_INPUT, 0) /* (D23) MCU_OSPI1_D2 */
+-			J721E_WKUP_IOPAD(0x4c, PIN_INPUT, 0) /* (C23) MCU_OSPI1_D3 */
+-			J721E_WKUP_IOPAD(0x3c, PIN_INPUT, 0) /* (B23) MCU_OSPI1_DQS */
+-			J721E_WKUP_IOPAD(0x38, PIN_INPUT, 0) /* (A23) MCU_OSPI1_LBCLKO */
+-		>;
+-	};
+-
+-	mcu_cpsw_pins_default: mcu-cpsw-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0x0058, PIN_OUTPUT, 0) /* MCU_RGMII1_TX_CTL */
+-			J721E_WKUP_IOPAD(0x005c, PIN_INPUT, 0) /* MCU_RGMII1_RX_CTL */
+-			J721E_WKUP_IOPAD(0x0060, PIN_OUTPUT, 0) /* MCU_RGMII1_TD3 */
+-			J721E_WKUP_IOPAD(0x0064, PIN_OUTPUT, 0) /* MCU_RGMII1_TD2 */
+-			J721E_WKUP_IOPAD(0x0068, PIN_OUTPUT, 0) /* MCU_RGMII1_TD1 */
+-			J721E_WKUP_IOPAD(0x006c, PIN_OUTPUT, 0) /* MCU_RGMII1_TD0 */
+-			J721E_WKUP_IOPAD(0x0078, PIN_INPUT, 0) /* MCU_RGMII1_RD3 */
+-			J721E_WKUP_IOPAD(0x007c, PIN_INPUT, 0) /* MCU_RGMII1_RD2 */
+-			J721E_WKUP_IOPAD(0x0080, PIN_INPUT, 0) /* MCU_RGMII1_RD1 */
+-			J721E_WKUP_IOPAD(0x0084, PIN_INPUT, 0) /* MCU_RGMII1_RD0 */
+-			J721E_WKUP_IOPAD(0x0070, PIN_OUTPUT, 0) /* MCU_RGMII1_TXC */
+-			J721E_WKUP_IOPAD(0x0074, PIN_INPUT, 0) /* MCU_RGMII1_RXC */
+-		>;
+-	};
+-
+-	mcu_mdio_pins_default: mcu-mdio1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0x008c, PIN_OUTPUT, 0) /* MCU_MDIO0_MDC */
+-			J721E_WKUP_IOPAD(0x0088, PIN_INPUT, 0) /* MCU_MDIO0_MDIO */
+-		>;
+-	};
+-
+-	mcu_mcan0_pins_default: mcu-mcan0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xac, PIN_INPUT, 0) /* (C29) MCU_MCAN0_RX */
+-			J721E_WKUP_IOPAD(0xa8, PIN_OUTPUT, 0) /* (D29) MCU_MCAN0_TX */
+-		>;
+-	};
+-
+-	mcu_mcan0_gpio_pins_default: mcu-mcan0-gpio-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xb0, PIN_INPUT, 7) /* (F26) WKUP_GPIO0_0 */
+-			J721E_WKUP_IOPAD(0x98, PIN_INPUT, 7) /* (E28) MCU_SPI0_D1.WKUP_GPIO0_54 */
+-		>;
+-	};
+-
+-	mcu_mcan1_pins_default: mcu-mcan1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xc4, PIN_INPUT, 0) /* (G24) WKUP_GPIO0_5.MCU_MCAN1_RX */
+-			J721E_WKUP_IOPAD(0xc0, PIN_OUTPUT, 0) /* (G25) WKUP_GPIO0_4.MCU_MCAN1_TX */
+-		>;
+-	};
+-
+-	mcu_mcan1_gpio_pins_default: mcu-mcan1-gpio-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xb8, PIN_INPUT, 7) /* (F28) WKUP_GPIO0_2 */
+-		>;
+-	};
+-
+-	wkup_gpio_pins_default: wkup-gpio-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xd0, PIN_INPUT, 7) /* (C14) WKUP_GPIO0_8 */
+-		>;
+-	};
+-};
+-
+-&wkup_uart0 {
+-	/* Wakeup UART is used by System firmware */
+-	status = "reserved";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&wkup_uart0_pins_default>;
+-};
+-
+-&mcu_uart0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcu_uart0_pins_default>;
+-};
+-
+-&main_uart0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_uart0_pins_default>;
+-	/* Shared with ATF on this platform */
+-	power-domains = <&k3_pds 146 TI_SCI_PD_SHARED>;
+-};
+-
+-&main_uart1 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_uart1_pins_default>;
+-};
+-
+-&main_uart2 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_uart2_pins_default>;
+-};
+-
+-&main_uart4 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_uart4_pins_default>;
+-};
+-
+-&wkup_gpio0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&wkup_gpio_pins_default>;
+-};
+-
+-&main_gpio0 {
+-	status = "okay";
+-};
+-
+-&main_gpio1 {
+-	status = "okay";
+-};
+-
+-&main_sdhci0 {
+-	/* eMMC */
+-	status = "okay";
+-	non-removable;
+-	ti,driver-strength-ohm = <50>;
+-	disable-wp;
+-};
+-
+-&main_sdhci1 {
+-	/* SD/MMC */
+-	status = "okay";
+-	vmmc-supply = <&vdd_mmc1>;
+-	vqmmc-supply = <&vdd_sd_dv_alt>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_mmc1_pins_default>;
+-	ti,driver-strength-ohm = <50>;
+-	disable-wp;
+-};
+-
+-&usb_serdes_mux {
+-	idle-states = <1>, <0>; /* USB0 to SERDES3, USB1 to SERDES1 */
+-};
+-
+-&serdes_ln_ctrl {
+-	idle-states = <J721E_SERDES0_LANE0_PCIE0_LANE0>, <J721E_SERDES0_LANE1_PCIE0_LANE1>,
+-		      <J721E_SERDES1_LANE0_PCIE1_LANE0>, <J721E_SERDES1_LANE1_PCIE1_LANE1>,
+-		      <J721E_SERDES2_LANE0_PCIE2_LANE0>, <J721E_SERDES2_LANE1_PCIE2_LANE1>,
+-		      <J721E_SERDES3_LANE0_USB3_0_SWAP>, <J721E_SERDES3_LANE1_USB3_0>,
+-		      <J721E_SERDES4_LANE0_EDP_LANE0>, <J721E_SERDES4_LANE1_EDP_LANE1>,
+-		      <J721E_SERDES4_LANE2_EDP_LANE2>, <J721E_SERDES4_LANE3_EDP_LANE3>;
+-};
+-
+-&serdes_wiz3 {
+-	typec-dir-gpios = <&main_gpio1 3 GPIO_ACTIVE_HIGH>;
+-	typec-dir-debounce-ms = <700>;	/* TUSB321, tCCB_DEFAULT 133 ms */
+-};
+-
+-&serdes3 {
+-	serdes3_usb_link: phy@0 {
+-		reg = <0>;
+-		cdns,num-lanes = <2>;
+-		#phy-cells = <0>;
+-		cdns,phy-type = <PHY_TYPE_USB3>;
+-		resets = <&serdes_wiz3 1>, <&serdes_wiz3 2>;
+-	};
+-};
+-
+-&usbss0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_usbss0_pins_default>;
+-	ti,vbus-divider;
+-};
+-
+-&usb0 {
+-	dr_mode = "otg";
+-	maximum-speed = "super-speed";
+-	phys = <&serdes3_usb_link>;
+-	phy-names = "cdns3,usb3-phy";
+-};
+-
+-&usbss1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_usbss1_pins_default>;
+-	ti,usb2-only;
+-};
+-
+-&usb1 {
+-	dr_mode = "host";
+-	maximum-speed = "high-speed";
+-};
+-
+-&ospi1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcu_fss0_ospi1_pins_default>;
+-
+-	flash@0 {
+-		compatible = "jedec,spi-nor";
+-		reg = <0x0>;
+-		spi-tx-bus-width = <1>;
+-		spi-rx-bus-width = <4>;
+-		spi-max-frequency = <40000000>;
+-		cdns,tshsl-ns = <60>;
+-		cdns,tsd2d-ns = <60>;
+-		cdns,tchsh-ns = <60>;
+-		cdns,tslch-ns = <60>;
+-		cdns,read-delay = <2>;
+-
+-		partitions {
+-			compatible = "fixed-partitions";
 -			#address-cells = <1>;
--			images {
--				sysfw.bin {
--					description = "sysfw";
--					type = "firmware";
--					arch = "arm";
--					compression = "none";
--					blob-ext {
--					    filename = "sysfw.bin_gp";
--					};
+-			#size-cells = <1>;
+-
+-			partition@0 {
+-				label = "qspi.tiboot3";
+-				reg = <0x0 0x80000>;
+-			};
+-
+-			partition@80000 {
+-				label = "qspi.tispl";
+-				reg = <0x80000 0x200000>;
+-			};
+-
+-			partition@280000 {
+-				label = "qspi.u-boot";
+-				reg = <0x280000 0x400000>;
+-			};
+-
+-			partition@680000 {
+-				label = "qspi.env";
+-				reg = <0x680000 0x20000>;
+-			};
+-
+-			partition@6a0000 {
+-				label = "qspi.env.backup";
+-				reg = <0x6a0000 0x20000>;
+-			};
+-
+-			partition@6c0000 {
+-				label = "qspi.sysfw";
+-				reg = <0x6c0000 0x100000>;
+-			};
+-
+-			partition@800000 {
+-				label = "qspi.rootfs";
+-				reg = <0x800000 0x37c0000>;
+-			};
+-
+-			partition@3fe0000 {
+-				label = "qspi.phypattern";
+-				reg = <0x3fe0000 0x20000>;
+-			};
+-		};
+-	};
+-};
+-
+-&tscadc0 {
+-	status = "okay";
+-	adc {
+-		ti,adc-channels = <0 1 2 3 4 5 6 7>;
+-	};
+-};
+-
+-&tscadc1 {
+-	status = "okay";
+-	adc {
+-		ti,adc-channels = <0 1 2 3 4 5 6 7>;
+-	};
+-};
+-
+-&main_i2c0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_i2c0_pins_default>;
+-	clock-frequency = <400000>;
+-
+-	exp1: gpio@20 {
+-		compatible = "ti,tca6416";
+-		reg = <0x20>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-	};
+-
+-	exp2: gpio@22 {
+-		compatible = "ti,tca6424";
+-		reg = <0x22>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-
+-		p09-hog {
+-			/* P11 - MCASP/TRACE_MUX_S0 */
+-			gpio-hog;
+-			gpios = <9 GPIO_ACTIVE_HIGH>;
+-			output-low;
+-			line-name = "MCASP/TRACE_MUX_S0";
+-		};
+-
+-		p10-hog {
+-			/* P12 - MCASP/TRACE_MUX_S1 */
+-			gpio-hog;
+-			gpios = <10 GPIO_ACTIVE_HIGH>;
+-			output-high;
+-			line-name = "MCASP/TRACE_MUX_S1";
+-		};
+-	};
+-};
+-
+-&main_i2c1 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_i2c1_pins_default>;
+-	clock-frequency = <400000>;
+-
+-	exp4: gpio@20 {
+-		compatible = "ti,tca6408";
+-		reg = <0x20>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&main_i2c1_exp4_pins_default>;
+-		interrupt-parent = <&main_gpio1>;
+-		interrupts = <11 IRQ_TYPE_EDGE_FALLING>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-	};
+-};
+-
+-&k3_clks {
+-	/* Confiure AUDIO_EXT_REFCLK2 pin as output */
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&audi_ext_refclk2_pins_default>;
+-};
+-
+-&main_i2c3 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_i2c3_pins_default>;
+-	clock-frequency = <400000>;
+-
+-	exp3: gpio@20 {
+-		compatible = "ti,tca6408";
+-		reg = <0x20>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-	};
+-
+-	pcm3168a_1: audio-codec@44 {
+-		compatible = "ti,pcm3168a";
+-		reg = <0x44>;
+-
+-		#sound-dai-cells = <1>;
+-
+-		reset-gpios = <&exp3 0 GPIO_ACTIVE_LOW>;
+-
+-		/* C_AUDIO_REFCLK2 -> RGMII6_RXC (W26) */
+-		clocks = <&k3_clks 157 371>;
+-		clock-names = "scki";
+-
+-		/* HSDIV3_16FFT_MAIN_4_HSDIVOUT2_CLK -> REFCLK2 */
+-		assigned-clocks = <&k3_clks 157 371>;
+-		assigned-clock-parents = <&k3_clks 157 400>;
+-		assigned-clock-rates = <24576000>; /* for 48KHz */
+-
+-		VDD1-supply = <&vsys_3v3>;
+-		VDD2-supply = <&vsys_3v3>;
+-		VCCAD1-supply = <&vsys_5v0>;
+-		VCCAD2-supply = <&vsys_5v0>;
+-		VCCDA1-supply = <&vsys_5v0>;
+-		VCCDA2-supply = <&vsys_5v0>;
+-	};
+-};
+-
+-&main_i2c6 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_i2c6_pins_default>;
+-	clock-frequency = <400000>;
+-
+-	exp5: gpio@20 {
+-		compatible = "ti,tca6408";
+-		reg = <0x20>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-	};
+-};
+-
+-&mcu_cpsw {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcu_cpsw_pins_default>, <&mcu_mdio_pins_default>;
+-};
+-
+-&davinci_mdio {
+-	phy0: ethernet-phy@0 {
+-		reg = <0>;
+-		ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
+-		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
+-	};
+-};
+-
+-&cpsw_port1 {
+-	phy-mode = "rgmii-rxid";
+-	phy-handle = <&phy0>;
+-};
+-
+-&dss {
+-	/*
+-	 * These clock assignments are chosen to enable the following outputs:
+-	 *
+-	 * VP0 - DisplayPort SST
+-	 * VP1 - DPI0
+-	 * VP2 - DSI
+-	 * VP3 - DPI1
+-	 */
+-
+-	assigned-clocks = <&k3_clks 152 1>,
+-			  <&k3_clks 152 4>,
+-			  <&k3_clks 152 9>,
+-			  <&k3_clks 152 13>;
+-	assigned-clock-parents = <&k3_clks 152 2>,	/* PLL16_HSDIV0 */
+-				 <&k3_clks 152 6>,	/* PLL19_HSDIV0 */
+-				 <&k3_clks 152 11>,	/* PLL18_HSDIV0 */
+-				 <&k3_clks 152 18>;	/* PLL23_HSDIV0 */
+-};
+-
+-&dss_ports {
+-	port {
+-		dpi0_out: endpoint {
+-			remote-endpoint = <&dp0_in>;
+-		};
+-	};
+-};
+-
+-&dp0_ports {
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-
+-	port@0 {
+-		reg = <0>;
+-		dp0_in: endpoint {
+-			remote-endpoint = <&dpi0_out>;
+-		};
+-	};
+-
+-	port@4 {
+-		reg = <4>;
+-		dp0_out: endpoint {
+-			remote-endpoint = <&dp_connector_in>;
+-		};
+-	};
+-};
+-
+-&mcasp10 {
+-	status = "okay";
+-	#sound-dai-cells = <0>;
+-
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcasp10_pins_default>;
+-
+-	op-mode = <0>;          /* MCASP_IIS_MODE */
+-	tdm-slots = <2>;
+-	auxclk-fs-ratio = <256>;
+-
+-	serial-dir = <	/* 0: INACTIVE, 1: TX, 2: RX */
+-		1 1 1 1
+-		2 2 2 0
+-	>;
+-	tx-num-evt = <0>;
+-	rx-num-evt = <0>;
+-};
+-
+-&cmn_refclk1 {
+-	clock-frequency = <100000000>;
+-};
+-
+-&wiz0_pll1_refclk {
+-	assigned-clocks = <&wiz0_pll1_refclk>;
+-	assigned-clock-parents = <&cmn_refclk1>;
+-};
+-
+-&wiz0_refclk_dig {
+-	assigned-clocks = <&wiz0_refclk_dig>;
+-	assigned-clock-parents = <&cmn_refclk1>;
+-};
+-
+-&wiz1_pll1_refclk {
+-	assigned-clocks = <&wiz1_pll1_refclk>;
+-	assigned-clock-parents = <&cmn_refclk1>;
+-};
+-
+-&wiz1_refclk_dig {
+-	assigned-clocks = <&wiz1_refclk_dig>;
+-	assigned-clock-parents = <&cmn_refclk1>;
+-};
+-
+-&wiz2_pll1_refclk {
+-	assigned-clocks = <&wiz2_pll1_refclk>;
+-	assigned-clock-parents = <&cmn_refclk1>;
+-};
+-
+-&wiz2_refclk_dig {
+-	assigned-clocks = <&wiz2_refclk_dig>;
+-	assigned-clock-parents = <&cmn_refclk1>;
+-};
+-
+-&serdes0 {
+-	assigned-clocks = <&serdes0 CDNS_SIERRA_PLL_CMNLC>;
+-	assigned-clock-parents = <&wiz0_pll1_refclk>;
+-
+-	serdes0_pcie_link: phy@0 {
+-		reg = <0>;
+-		cdns,num-lanes = <1>;
+-		#phy-cells = <0>;
+-		cdns,phy-type = <PHY_TYPE_PCIE>;
+-		resets = <&serdes_wiz0 1>;
+-	};
+-};
+-
+-&serdes1 {
+-	assigned-clocks = <&serdes1 CDNS_SIERRA_PLL_CMNLC>;
+-	assigned-clock-parents = <&wiz1_pll1_refclk>;
+-
+-	serdes1_pcie_link: phy@0 {
+-		reg = <0>;
+-		cdns,num-lanes = <2>;
+-		#phy-cells = <0>;
+-		cdns,phy-type = <PHY_TYPE_PCIE>;
+-		resets = <&serdes_wiz1 1>, <&serdes_wiz1 2>;
+-	};
+-};
+-
+-&serdes2 {
+-	assigned-clocks = <&serdes2 CDNS_SIERRA_PLL_CMNLC>;
+-	assigned-clock-parents = <&wiz2_pll1_refclk>;
+-
+-	serdes2_pcie_link: phy@0 {
+-		reg = <0>;
+-		cdns,num-lanes = <2>;
+-		#phy-cells = <0>;
+-		cdns,phy-type = <PHY_TYPE_PCIE>;
+-		resets = <&serdes_wiz2 1>, <&serdes_wiz2 2>;
+-	};
+-};
+-
+-&serdes4 {
+-	torrent_phy_dp: phy@0 {
+-		reg = <0>;
+-		resets = <&serdes_wiz4 1>;
+-		cdns,phy-type = <PHY_TYPE_DP>;
+-		cdns,num-lanes = <4>;
+-		cdns,max-bit-rate = <5400>;
+-		#phy-cells = <0>;
+-	};
+-};
+-
+-&mhdp {
+-	phys = <&torrent_phy_dp>;
+-	phy-names = "dpphy";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&dp0_pins_default>;
+-};
+-
+-&pcie0_rc {
+-	status = "okay";
+-	reset-gpios = <&exp1 6 GPIO_ACTIVE_HIGH>;
+-	phys = <&serdes0_pcie_link>;
+-	phy-names = "pcie-phy";
+-	num-lanes = <1>;
+-};
+-
+-&pcie1_rc {
+-	status = "okay";
+-	reset-gpios = <&exp1 2 GPIO_ACTIVE_HIGH>;
+-	phys = <&serdes1_pcie_link>;
+-	phy-names = "pcie-phy";
+-	num-lanes = <2>;
+-};
+-
+-&pcie2_rc {
+-	status = "okay";
+-	reset-gpios = <&exp2 20 GPIO_ACTIVE_HIGH>;
+-	phys = <&serdes2_pcie_link>;
+-	phy-names = "pcie-phy";
+-	num-lanes = <2>;
+-};
+-
+-&mcu_mcan0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcu_mcan0_pins_default>;
+-	phys = <&transceiver1>;
+-};
+-
+-&mcu_mcan1 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcu_mcan1_pins_default>;
+-	phys = <&transceiver2>;
+-};
+-
+-&main_mcan0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_mcan0_pins_default>;
+-	phys = <&transceiver3>;
+-};
+-
+-&main_mcan2 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_mcan2_pins_default>;
+-	phys = <&transceiver4>;
+-};
+diff --git a/arch/arm/dts/k3-j721e-main.dtsi b/arch/arm/dts/k3-j721e-main.dtsi
+deleted file mode 100644
+index 746b9f8b1c6..00000000000
+--- a/arch/arm/dts/k3-j721e-main.dtsi
++++ /dev/null
+@@ -1,2741 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * Device Tree Source for J721E SoC Family Main Domain peripherals
+- *
+- * Copyright (C) 2016-2020 Texas Instruments Incorporated - https://www.ti.com/
+- */
+-#include <dt-bindings/phy/phy.h>
+-#include <dt-bindings/phy/phy-ti.h>
+-#include <dt-bindings/mux/mux.h>
+-
+-#include "k3-serdes.h"
+-
+-/ {
+-	cmn_refclk: clock-cmnrefclk {
+-		#clock-cells = <0>;
+-		compatible = "fixed-clock";
+-		clock-frequency = <0>;
+-	};
+-
+-	cmn_refclk1: clock-cmnrefclk1 {
+-		#clock-cells = <0>;
+-		compatible = "fixed-clock";
+-		clock-frequency = <0>;
+-	};
+-};
+-
+-&cbass_main {
+-	msmc_ram: sram@70000000 {
+-		compatible = "mmio-sram";
+-		reg = <0x0 0x70000000 0x0 0x800000>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges = <0x0 0x0 0x70000000 0x800000>;
+-
+-		atf-sram@0 {
+-			reg = <0x0 0x20000>;
+-		};
+-	};
+-
+-	scm_conf: scm-conf@100000 {
+-		compatible = "ti,j721e-system-controller", "syscon", "simple-mfd";
+-		reg = <0 0x00100000 0 0x1c000>; /* excludes pinctrl region */
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges = <0x0 0x0 0x00100000 0x1c000>;
+-
+-		serdes_ln_ctrl: mux-controller@4080 {
+-			compatible = "mmio-mux";
+-			reg = <0x00004080 0x50>;
+-			#mux-control-cells = <1>;
+-			mux-reg-masks = <0x4080 0x3>, <0x4084 0x3>, /* SERDES0 lane0/1 select */
+-					<0x4090 0x3>, <0x4094 0x3>, /* SERDES1 lane0/1 select */
+-					<0x40a0 0x3>, <0x40a4 0x3>, /* SERDES2 lane0/1 select */
+-					<0x40b0 0x3>, <0x40b4 0x3>, /* SERDES3 lane0/1 select */
+-					<0x40c0 0x3>, <0x40c4 0x3>, <0x40c8 0x3>, <0x40cc 0x3>;
+-					/* SERDES4 lane0/1/2/3 select */
+-			idle-states = <J721E_SERDES0_LANE0_PCIE0_LANE0>, <J721E_SERDES0_LANE1_PCIE0_LANE1>,
+-				      <J721E_SERDES1_LANE0_PCIE1_LANE0>, <J721E_SERDES1_LANE1_PCIE1_LANE1>,
+-				      <J721E_SERDES2_LANE0_PCIE2_LANE0>, <J721E_SERDES2_LANE1_PCIE2_LANE1>,
+-				      <MUX_IDLE_AS_IS>, <J721E_SERDES3_LANE1_USB3_0>,
+-				      <J721E_SERDES4_LANE0_EDP_LANE0>, <J721E_SERDES4_LANE1_EDP_LANE1>,
+-				      <J721E_SERDES4_LANE2_EDP_LANE2>, <J721E_SERDES4_LANE3_EDP_LANE3>;
+-		};
+-
+-		cpsw0_phy_gmii_sel: phy@4044 {
+-			compatible = "ti,j721e-cpsw9g-phy-gmii-sel";
+-			ti,qsgmii-main-ports = <2>, <2>;
+-			reg = <0x4044 0x20>;
+-			#phy-cells = <1>;
+-		};
+-
+-		usb_serdes_mux: mux-controller@4000 {
+-			compatible = "mmio-mux";
+-			#mux-control-cells = <1>;
+-			mux-reg-masks = <0x4000 0x8000000>, /* USB0 to SERDES0/3 mux */
+-					<0x4010 0x8000000>; /* USB1 to SERDES1/2 mux */
+-		};
+-
+-		ehrpwm_tbclk: clock-controller@4140 {
+-			compatible = "ti,am654-ehrpwm-tbclk";
+-			reg = <0x4140 0x18>;
+-			#clock-cells = <1>;
+-		};
+-	};
+-
+-	main_ehrpwm0: pwm@3000000 {
+-		compatible = "ti,am654-ehrpwm", "ti,am3352-ehrpwm";
+-		#pwm-cells = <3>;
+-		reg = <0x00 0x3000000 0x00 0x100>;
+-		power-domains = <&k3_pds 83 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&ehrpwm_tbclk 0>, <&k3_clks 83 0>;
+-		clock-names = "tbclk", "fck";
+-		status = "disabled";
+-	};
+-
+-	main_ehrpwm1: pwm@3010000 {
+-		compatible = "ti,am654-ehrpwm", "ti,am3352-ehrpwm";
+-		#pwm-cells = <3>;
+-		reg = <0x00 0x3010000 0x00 0x100>;
+-		power-domains = <&k3_pds 84 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&ehrpwm_tbclk 1>, <&k3_clks 84 0>;
+-		clock-names = "tbclk", "fck";
+-		status = "disabled";
+-	};
+-
+-	main_ehrpwm2: pwm@3020000 {
+-		compatible = "ti,am654-ehrpwm", "ti,am3352-ehrpwm";
+-		#pwm-cells = <3>;
+-		reg = <0x00 0x3020000 0x00 0x100>;
+-		power-domains = <&k3_pds 85 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&ehrpwm_tbclk 2>, <&k3_clks 85 0>;
+-		clock-names = "tbclk", "fck";
+-		status = "disabled";
+-	};
+-
+-	main_ehrpwm3: pwm@3030000 {
+-		compatible = "ti,am654-ehrpwm", "ti,am3352-ehrpwm";
+-		#pwm-cells = <3>;
+-		reg = <0x00 0x3030000 0x00 0x100>;
+-		power-domains = <&k3_pds 86 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&ehrpwm_tbclk 3>, <&k3_clks 86 0>;
+-		clock-names = "tbclk", "fck";
+-		status = "disabled";
+-	};
+-
+-	main_ehrpwm4: pwm@3040000 {
+-		compatible = "ti,am654-ehrpwm", "ti,am3352-ehrpwm";
+-		#pwm-cells = <3>;
+-		reg = <0x00 0x3040000 0x00 0x100>;
+-		power-domains = <&k3_pds 87 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&ehrpwm_tbclk 4>, <&k3_clks 87 0>;
+-		clock-names = "tbclk", "fck";
+-		status = "disabled";
+-	};
+-
+-	main_ehrpwm5: pwm@3050000 {
+-		compatible = "ti,am654-ehrpwm", "ti,am3352-ehrpwm";
+-		#pwm-cells = <3>;
+-		reg = <0x00 0x3050000 0x00 0x100>;
+-		power-domains = <&k3_pds 88 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&ehrpwm_tbclk 5>, <&k3_clks 88 0>;
+-		clock-names = "tbclk", "fck";
+-		status = "disabled";
+-	};
+-
+-	gic500: interrupt-controller@1800000 {
+-		compatible = "arm,gic-v3";
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-		ranges;
+-		#interrupt-cells = <3>;
+-		interrupt-controller;
+-		reg = <0x00 0x01800000 0x00 0x10000>,	/* GICD */
+-		      <0x00 0x01900000 0x00 0x100000>,	/* GICR */
+-		      <0x00 0x6f000000 0x00 0x2000>,	/* GICC */
+-		      <0x00 0x6f010000 0x00 0x1000>,	/* GICH */
+-		      <0x00 0x6f020000 0x00 0x2000>;	/* GICV */
+-
+-		/* vcpumntirq: virtual CPU interface maintenance interrupt */
+-		interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_HIGH>;
+-
+-		gic_its: msi-controller@1820000 {
+-			compatible = "arm,gic-v3-its";
+-			reg = <0x00 0x01820000 0x00 0x10000>;
+-			socionext,synquacer-pre-its = <0x1000000 0x400000>;
+-			msi-controller;
+-			#msi-cells = <1>;
+-		};
+-	};
+-
+-	main_gpio_intr: interrupt-controller@a00000 {
+-		compatible = "ti,sci-intr";
+-		reg = <0x00 0x00a00000 0x00 0x800>;
+-		ti,intr-trigger-type = <1>;
+-		interrupt-controller;
+-		interrupt-parent = <&gic500>;
+-		#interrupt-cells = <1>;
+-		ti,sci = <&dmsc>;
+-		ti,sci-dev-id = <131>;
+-		ti,interrupt-ranges = <8 392 56>;
+-	};
+-
+-	main_navss: bus@30000000 {
+-		compatible = "simple-bus";
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-		ranges = <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>;
+-		dma-coherent;
+-		dma-ranges;
+-
+-		ti,sci-dev-id = <199>;
+-
+-		main_navss_intr: interrupt-controller@310e0000 {
+-			compatible = "ti,sci-intr";
+-			reg = <0x0 0x310e0000 0x0 0x4000>;
+-			ti,intr-trigger-type = <4>;
+-			interrupt-controller;
+-			interrupt-parent = <&gic500>;
+-			#interrupt-cells = <1>;
+-			ti,sci = <&dmsc>;
+-			ti,sci-dev-id = <213>;
+-			ti,interrupt-ranges = <0 64 64>,
+-					      <64 448 64>,
+-					      <128 672 64>;
+-		};
+-
+-		main_udmass_inta: interrupt-controller@33d00000 {
+-			compatible = "ti,sci-inta";
+-			reg = <0x0 0x33d00000 0x0 0x100000>;
+-			interrupt-controller;
+-			interrupt-parent = <&main_navss_intr>;
+-			msi-controller;
+-			#interrupt-cells = <0>;
+-			ti,sci = <&dmsc>;
+-			ti,sci-dev-id = <209>;
+-			ti,interrupt-ranges = <0 0 256>;
+-		};
+-
+-		secure_proxy_main: mailbox@32c00000 {
+-			compatible = "ti,am654-secure-proxy";
+-			#mbox-cells = <1>;
+-			reg-names = "target_data", "rt", "scfg";
+-			reg = <0x00 0x32c00000 0x00 0x100000>,
+-			      <0x00 0x32400000 0x00 0x100000>,
+-			      <0x00 0x32800000 0x00 0x100000>;
+-			interrupt-names = "rx_011";
+-			interrupts = <GIC_SPI 37 IRQ_TYPE_LEVEL_HIGH>;
+-		};
+-
+-		smmu0: iommu@36600000 {
+-			compatible = "arm,smmu-v3";
+-			reg = <0x0 0x36600000 0x0 0x100000>;
+-			interrupt-parent = <&gic500>;
+-			interrupts = <GIC_SPI 772 IRQ_TYPE_EDGE_RISING>,
+-				     <GIC_SPI 768 IRQ_TYPE_EDGE_RISING>;
+-			interrupt-names = "eventq", "gerror";
+-			#iommu-cells = <1>;
+-		};
+-
+-		hwspinlock: spinlock@30e00000 {
+-			compatible = "ti,am654-hwspinlock";
+-			reg = <0x00 0x30e00000 0x00 0x1000>;
+-			#hwlock-cells = <1>;
+-		};
+-
+-		mailbox0_cluster0: mailbox@31f80000 {
+-			compatible = "ti,am654-mailbox";
+-			reg = <0x00 0x31f80000 0x00 0x200>;
+-			#mbox-cells = <1>;
+-			ti,mbox-num-users = <4>;
+-			ti,mbox-num-fifos = <16>;
+-			interrupt-parent = <&main_navss_intr>;
+-			status = "disabled";
+-		};
+-
+-		mailbox0_cluster1: mailbox@31f81000 {
+-			compatible = "ti,am654-mailbox";
+-			reg = <0x00 0x31f81000 0x00 0x200>;
+-			#mbox-cells = <1>;
+-			ti,mbox-num-users = <4>;
+-			ti,mbox-num-fifos = <16>;
+-			interrupt-parent = <&main_navss_intr>;
+-			status = "disabled";
+-		};
+-
+-		mailbox0_cluster2: mailbox@31f82000 {
+-			compatible = "ti,am654-mailbox";
+-			reg = <0x00 0x31f82000 0x00 0x200>;
+-			#mbox-cells = <1>;
+-			ti,mbox-num-users = <4>;
+-			ti,mbox-num-fifos = <16>;
+-			interrupt-parent = <&main_navss_intr>;
+-			status = "disabled";
+-		};
+-
+-		mailbox0_cluster3: mailbox@31f83000 {
+-			compatible = "ti,am654-mailbox";
+-			reg = <0x00 0x31f83000 0x00 0x200>;
+-			#mbox-cells = <1>;
+-			ti,mbox-num-users = <4>;
+-			ti,mbox-num-fifos = <16>;
+-			interrupt-parent = <&main_navss_intr>;
+-			status = "disabled";
+-		};
+-
+-		mailbox0_cluster4: mailbox@31f84000 {
+-			compatible = "ti,am654-mailbox";
+-			reg = <0x00 0x31f84000 0x00 0x200>;
+-			#mbox-cells = <1>;
+-			ti,mbox-num-users = <4>;
+-			ti,mbox-num-fifos = <16>;
+-			interrupt-parent = <&main_navss_intr>;
+-			status = "disabled";
+-		};
+-
+-		mailbox0_cluster5: mailbox@31f85000 {
+-			compatible = "ti,am654-mailbox";
+-			reg = <0x00 0x31f85000 0x00 0x200>;
+-			#mbox-cells = <1>;
+-			ti,mbox-num-users = <4>;
+-			ti,mbox-num-fifos = <16>;
+-			interrupt-parent = <&main_navss_intr>;
+-			status = "disabled";
+-		};
+-
+-		mailbox0_cluster6: mailbox@31f86000 {
+-			compatible = "ti,am654-mailbox";
+-			reg = <0x00 0x31f86000 0x00 0x200>;
+-			#mbox-cells = <1>;
+-			ti,mbox-num-users = <4>;
+-			ti,mbox-num-fifos = <16>;
+-			interrupt-parent = <&main_navss_intr>;
+-			status = "disabled";
+-		};
+-
+-		mailbox0_cluster7: mailbox@31f87000 {
+-			compatible = "ti,am654-mailbox";
+-			reg = <0x00 0x31f87000 0x00 0x200>;
+-			#mbox-cells = <1>;
+-			ti,mbox-num-users = <4>;
+-			ti,mbox-num-fifos = <16>;
+-			interrupt-parent = <&main_navss_intr>;
+-			status = "disabled";
+-		};
+-
+-		mailbox0_cluster8: mailbox@31f88000 {
+-			compatible = "ti,am654-mailbox";
+-			reg = <0x00 0x31f88000 0x00 0x200>;
+-			#mbox-cells = <1>;
+-			ti,mbox-num-users = <4>;
+-			ti,mbox-num-fifos = <16>;
+-			interrupt-parent = <&main_navss_intr>;
+-			status = "disabled";
+-		};
+-
+-		mailbox0_cluster9: mailbox@31f89000 {
+-			compatible = "ti,am654-mailbox";
+-			reg = <0x00 0x31f89000 0x00 0x200>;
+-			#mbox-cells = <1>;
+-			ti,mbox-num-users = <4>;
+-			ti,mbox-num-fifos = <16>;
+-			interrupt-parent = <&main_navss_intr>;
+-			status = "disabled";
+-		};
+-
+-		mailbox0_cluster10: mailbox@31f8a000 {
+-			compatible = "ti,am654-mailbox";
+-			reg = <0x00 0x31f8a000 0x00 0x200>;
+-			#mbox-cells = <1>;
+-			ti,mbox-num-users = <4>;
+-			ti,mbox-num-fifos = <16>;
+-			interrupt-parent = <&main_navss_intr>;
+-			status = "disabled";
+-		};
+-
+-		mailbox0_cluster11: mailbox@31f8b000 {
+-			compatible = "ti,am654-mailbox";
+-			reg = <0x00 0x31f8b000 0x00 0x200>;
+-			#mbox-cells = <1>;
+-			ti,mbox-num-users = <4>;
+-			ti,mbox-num-fifos = <16>;
+-			interrupt-parent = <&main_navss_intr>;
+-			status = "disabled";
+-		};
+-
+-		main_ringacc: ringacc@3c000000 {
+-			compatible = "ti,am654-navss-ringacc";
+-			reg = <0x0 0x3c000000 0x0 0x400000>,
+-			      <0x0 0x38000000 0x0 0x400000>,
+-			      <0x0 0x31120000 0x0 0x100>,
+-			      <0x0 0x33000000 0x0 0x40000>,
+-			      <0x0 0x31080000 0x0 0x40000>;
+-			reg-names = "rt", "fifos", "proxy_gcfg", "proxy_target", "cfg";
+-			ti,num-rings = <1024>;
+-			ti,sci-rm-range-gp-rings = <0x1>; /* GP ring range */
+-			ti,sci = <&dmsc>;
+-			ti,sci-dev-id = <211>;
+-			msi-parent = <&main_udmass_inta>;
+-		};
+-
+-		main_udmap: dma-controller@31150000 {
+-			compatible = "ti,j721e-navss-main-udmap";
+-			reg = <0x0 0x31150000 0x0 0x100>,
+-			      <0x0 0x34000000 0x0 0x100000>,
+-			      <0x0 0x35000000 0x0 0x100000>;
+-			reg-names = "gcfg", "rchanrt", "tchanrt";
+-			msi-parent = <&main_udmass_inta>;
+-			#dma-cells = <1>;
+-
+-			ti,sci = <&dmsc>;
+-			ti,sci-dev-id = <212>;
+-			ti,ringacc = <&main_ringacc>;
+-
+-			ti,sci-rm-range-tchan = <0x0d>, /* TX_CHAN */
+-						<0x0f>, /* TX_HCHAN */
+-						<0x10>; /* TX_UHCHAN */
+-			ti,sci-rm-range-rchan = <0x0a>, /* RX_CHAN */
+-						<0x0b>, /* RX_HCHAN */
+-						<0x0c>; /* RX_UHCHAN */
+-			ti,sci-rm-range-rflow = <0x00>; /* GP RFLOW */
+-		};
+-
+-		cpts@310d0000 {
+-			compatible = "ti,j721e-cpts";
+-			reg = <0x0 0x310d0000 0x0 0x400>;
+-			reg-names = "cpts";
+-			clocks = <&k3_clks 201 1>;
+-			clock-names = "cpts";
+-			interrupts-extended = <&main_navss_intr 391>;
+-			interrupt-names = "cpts";
+-			ti,cpts-periodic-outputs = <6>;
+-			ti,cpts-ext-ts-inputs = <8>;
+-		};
+-	};
+-
+-	cpsw0: ethernet@c000000 {
+-		compatible = "ti,j721e-cpswxg-nuss";
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-		reg = <0x0 0xc000000 0x0 0x200000>;
+-		reg-names = "cpsw_nuss";
+-		ranges = <0x0 0x0 0x0 0x0c000000 0x0 0x200000>;
+-		clocks = <&k3_clks 19 89>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 19 TI_SCI_PD_EXCLUSIVE>;
+-
+-		dmas = <&main_udmap 0xca00>,
+-		       <&main_udmap 0xca01>,
+-		       <&main_udmap 0xca02>,
+-		       <&main_udmap 0xca03>,
+-		       <&main_udmap 0xca04>,
+-		       <&main_udmap 0xca05>,
+-		       <&main_udmap 0xca06>,
+-		       <&main_udmap 0xca07>,
+-		       <&main_udmap 0x4a00>;
+-		dma-names = "tx0", "tx1", "tx2", "tx3",
+-			    "tx4", "tx5", "tx6", "tx7",
+-			    "rx";
+-
+-		status = "disabled";
+-
+-		ethernet-ports {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			cpsw0_port1: port@1 {
+-				reg = <1>;
+-				ti,mac-only;
+-				label = "port1";
+-				status = "disabled";
+-			};
+-
+-			cpsw0_port2: port@2 {
+-				reg = <2>;
+-				ti,mac-only;
+-				label = "port2";
+-				status = "disabled";
+-			};
+-
+-			cpsw0_port3: port@3 {
+-				reg = <3>;
+-				ti,mac-only;
+-				label = "port3";
+-				status = "disabled";
+-			};
+-
+-			cpsw0_port4: port@4 {
+-				reg = <4>;
+-				ti,mac-only;
+-				label = "port4";
+-				status = "disabled";
+-			};
+-
+-			cpsw0_port5: port@5 {
+-				reg = <5>;
+-				ti,mac-only;
+-				label = "port5";
+-				status = "disabled";
+-			};
+-
+-			cpsw0_port6: port@6 {
+-				reg = <6>;
+-				ti,mac-only;
+-				label = "port6";
+-				status = "disabled";
+-			};
+-
+-			cpsw0_port7: port@7 {
+-				reg = <7>;
+-				ti,mac-only;
+-				label = "port7";
+-				status = "disabled";
+-			};
+-
+-			cpsw0_port8: port@8 {
+-				reg = <8>;
+-				ti,mac-only;
+-				label = "port8";
+-				status = "disabled";
+-			};
+-		};
+-
+-		cpsw9g_mdio: mdio@f00 {
+-			compatible = "ti,cpsw-mdio","ti,davinci_mdio";
+-			reg = <0x0 0xf00 0x0 0x100>;
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			clocks = <&k3_clks 19 89>;
+-			clock-names = "fck";
+-			bus_freq = <1000000>;
+-			status = "disabled";
+-		};
+-
+-		cpts@3d000 {
+-			compatible = "ti,j721e-cpts";
+-			reg = <0x0 0x3d000 0x0 0x400>;
+-			clocks = <&k3_clks 19 16>;
+-			clock-names = "cpts";
+-			interrupts-extended = <&gic500 GIC_SPI 16 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-names = "cpts";
+-			ti,cpts-ext-ts-inputs = <4>;
+-			ti,cpts-periodic-outputs = <2>;
+-		};
+-	};
+-
+-	main_crypto: crypto@4e00000 {
+-		compatible = "ti,j721e-sa2ul";
+-		reg = <0x0 0x4e00000 0x0 0x1200>;
+-		power-domains = <&k3_pds 264 TI_SCI_PD_EXCLUSIVE>;
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-		ranges = <0x0 0x04e00000 0x00 0x04e00000 0x0 0x30000>;
+-
+-		dmas = <&main_udmap 0xc000>, <&main_udmap 0x4000>,
+-				<&main_udmap 0x4001>;
+-		dma-names = "tx", "rx1", "rx2";
+-
+-		rng: rng@4e10000 {
+-			compatible = "inside-secure,safexcel-eip76";
+-			reg = <0x0 0x4e10000 0x0 0x7d>;
+-			interrupts = <GIC_SPI 11 IRQ_TYPE_LEVEL_HIGH>;
+-		};
+-	};
+-
+-	main_pmx0: pinctrl@11c000 {
+-		compatible = "pinctrl-single";
+-		/* Proxy 0 addressing */
+-		reg = <0x0 0x11c000 0x0 0x2b4>;
+-		#pinctrl-cells = <1>;
+-		pinctrl-single,register-width = <32>;
+-		pinctrl-single,function-mask = <0xffffffff>;
+-	};
+-
+-	/* TIMERIO pad input CTRLMMR_TIMER*_CTRL registers */
+-	main_timerio_input: pinctrl@104200 {
+-		compatible = "pinctrl-single";
+-		reg = <0x00 0x104200 0x00 0x50>;
+-		#pinctrl-cells = <1>;
+-		pinctrl-single,register-width = <32>;
+-		pinctrl-single,function-mask = <0x00000007>;
+-	};
+-
+-	/* TIMERIO pad output CTCTRLMMR_TIMERIO*_CTRL registers */
+-	main_timerio_output: pinctrl@104280 {
+-		compatible = "pinctrl-single";
+-		reg = <0x00 0x104280 0x00 0x20>;
+-		#pinctrl-cells = <1>;
+-		pinctrl-single,register-width = <32>;
+-		pinctrl-single,function-mask = <0x0000001f>;
+-	};
+-
+-	serdes_wiz0: wiz@5000000 {
+-		compatible = "ti,j721e-wiz-16g";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		power-domains = <&k3_pds 292 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 292 5>, <&k3_clks 292 11>, <&cmn_refclk>;
+-		clock-names = "fck", "core_ref_clk", "ext_ref_clk";
+-		assigned-clocks = <&k3_clks 292 11>, <&k3_clks 292 0>;
+-		assigned-clock-parents = <&k3_clks 292 15>, <&k3_clks 292 4>;
+-		num-lanes = <2>;
+-		#reset-cells = <1>;
+-		ranges = <0x5000000 0x0 0x5000000 0x10000>;
+-
+-		wiz0_pll0_refclk: pll0-refclk {
+-			clocks = <&k3_clks 292 11>, <&cmn_refclk>;
+-			#clock-cells = <0>;
+-			assigned-clocks = <&wiz0_pll0_refclk>;
+-			assigned-clock-parents = <&k3_clks 292 11>;
+-		};
+-
+-		wiz0_pll1_refclk: pll1-refclk {
+-			clocks = <&k3_clks 292 0>, <&cmn_refclk1>;
+-			#clock-cells = <0>;
+-			assigned-clocks = <&wiz0_pll1_refclk>;
+-			assigned-clock-parents = <&k3_clks 292 0>;
+-		};
+-
+-		wiz0_refclk_dig: refclk-dig {
+-			clocks = <&k3_clks 292 11>, <&k3_clks 292 0>, <&cmn_refclk>, <&cmn_refclk1>;
+-			#clock-cells = <0>;
+-			assigned-clocks = <&wiz0_refclk_dig>;
+-			assigned-clock-parents = <&k3_clks 292 11>;
+-		};
+-
+-		wiz0_cmn_refclk_dig_div: cmn-refclk-dig-div {
+-			clocks = <&wiz0_refclk_dig>;
+-			#clock-cells = <0>;
+-		};
+-
+-		wiz0_cmn_refclk1_dig_div: cmn-refclk1-dig-div {
+-			clocks = <&wiz0_pll1_refclk>;
+-			#clock-cells = <0>;
+-		};
+-
+-		serdes0: serdes@5000000 {
+-			compatible = "ti,sierra-phy-t0";
+-			reg-names = "serdes";
+-			reg = <0x5000000 0x10000>;
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			#clock-cells = <1>;
+-			resets = <&serdes_wiz0 0>;
+-			reset-names = "sierra_reset";
+-			clocks = <&wiz0_cmn_refclk_dig_div>, <&wiz0_cmn_refclk1_dig_div>,
+-				 <&wiz0_pll0_refclk>, <&wiz0_pll1_refclk>;
+-			clock-names = "cmn_refclk_dig_div", "cmn_refclk1_dig_div",
+-				      "pll0_refclk", "pll1_refclk";
+-		};
+-	};
+-
+-	serdes_wiz1: wiz@5010000 {
+-		compatible = "ti,j721e-wiz-16g";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		power-domains = <&k3_pds 293 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 293 5>, <&k3_clks 293 13>, <&cmn_refclk>;
+-		clock-names = "fck", "core_ref_clk", "ext_ref_clk";
+-		assigned-clocks = <&k3_clks 293 13>, <&k3_clks 293 0>;
+-		assigned-clock-parents = <&k3_clks 293 17>, <&k3_clks 293 4>;
+-		num-lanes = <2>;
+-		#reset-cells = <1>;
+-		ranges = <0x5010000 0x0 0x5010000 0x10000>;
+-
+-		wiz1_pll0_refclk: pll0-refclk {
+-			clocks = <&k3_clks 293 13>, <&cmn_refclk>;
+-			#clock-cells = <0>;
+-			assigned-clocks = <&wiz1_pll0_refclk>;
+-			assigned-clock-parents = <&k3_clks 293 13>;
+-		};
+-
+-		wiz1_pll1_refclk: pll1-refclk {
+-			clocks = <&k3_clks 293 0>, <&cmn_refclk1>;
+-			#clock-cells = <0>;
+-			assigned-clocks = <&wiz1_pll1_refclk>;
+-			assigned-clock-parents = <&k3_clks 293 0>;
+-		};
+-
+-		wiz1_refclk_dig: refclk-dig {
+-			clocks = <&k3_clks 293 13>, <&k3_clks 293 0>, <&cmn_refclk>, <&cmn_refclk1>;
+-			#clock-cells = <0>;
+-			assigned-clocks = <&wiz1_refclk_dig>;
+-			assigned-clock-parents = <&k3_clks 293 13>;
+-		};
+-
+-		wiz1_cmn_refclk_dig_div: cmn-refclk-dig-div {
+-			clocks = <&wiz1_refclk_dig>;
+-			#clock-cells = <0>;
+-		};
+-
+-		wiz1_cmn_refclk1_dig_div: cmn-refclk1-dig-div {
+-			clocks = <&wiz1_pll1_refclk>;
+-			#clock-cells = <0>;
+-		};
+-
+-		serdes1: serdes@5010000 {
+-			compatible = "ti,sierra-phy-t0";
+-			reg-names = "serdes";
+-			reg = <0x5010000 0x10000>;
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			#clock-cells = <1>;
+-			resets = <&serdes_wiz1 0>;
+-			reset-names = "sierra_reset";
+-			clocks = <&wiz1_cmn_refclk_dig_div>, <&wiz1_cmn_refclk1_dig_div>,
+-				 <&wiz1_pll0_refclk>, <&wiz1_pll1_refclk>;
+-			clock-names = "cmn_refclk_dig_div", "cmn_refclk1_dig_div",
+-				      "pll0_refclk", "pll1_refclk";
+-		};
+-	};
+-
+-	serdes_wiz2: wiz@5020000 {
+-		compatible = "ti,j721e-wiz-16g";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		power-domains = <&k3_pds 294 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 294 5>, <&k3_clks 294 11>, <&cmn_refclk>;
+-		clock-names = "fck", "core_ref_clk", "ext_ref_clk";
+-		assigned-clocks = <&k3_clks 294 11>, <&k3_clks 294 0>;
+-		assigned-clock-parents = <&k3_clks 294 15>, <&k3_clks 294 4>;
+-		num-lanes = <2>;
+-		#reset-cells = <1>;
+-		ranges = <0x5020000 0x0 0x5020000 0x10000>;
+-
+-		wiz2_pll0_refclk: pll0-refclk {
+-			clocks = <&k3_clks 294 11>, <&cmn_refclk>;
+-			#clock-cells = <0>;
+-			assigned-clocks = <&wiz2_pll0_refclk>;
+-			assigned-clock-parents = <&k3_clks 294 11>;
+-		};
+-
+-		wiz2_pll1_refclk: pll1-refclk {
+-			clocks = <&k3_clks 294 0>, <&cmn_refclk1>;
+-			#clock-cells = <0>;
+-			assigned-clocks = <&wiz2_pll1_refclk>;
+-			assigned-clock-parents = <&k3_clks 294 0>;
+-		};
+-
+-		wiz2_refclk_dig: refclk-dig {
+-			clocks = <&k3_clks 294 11>, <&k3_clks 294 0>, <&cmn_refclk>, <&cmn_refclk1>;
+-			#clock-cells = <0>;
+-			assigned-clocks = <&wiz2_refclk_dig>;
+-			assigned-clock-parents = <&k3_clks 294 11>;
+-		};
+-
+-		wiz2_cmn_refclk_dig_div: cmn-refclk-dig-div {
+-			clocks = <&wiz2_refclk_dig>;
+-			#clock-cells = <0>;
+-		};
+-
+-		wiz2_cmn_refclk1_dig_div: cmn-refclk1-dig-div {
+-			clocks = <&wiz2_pll1_refclk>;
+-			#clock-cells = <0>;
+-		};
+-
+-		serdes2: serdes@5020000 {
+-			compatible = "ti,sierra-phy-t0";
+-			reg-names = "serdes";
+-			reg = <0x5020000 0x10000>;
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			#clock-cells = <1>;
+-			resets = <&serdes_wiz2 0>;
+-			reset-names = "sierra_reset";
+-			clocks = <&wiz2_cmn_refclk_dig_div>, <&wiz2_cmn_refclk1_dig_div>,
+-				 <&wiz2_pll0_refclk>, <&wiz2_pll1_refclk>;
+-			clock-names = "cmn_refclk_dig_div", "cmn_refclk1_dig_div",
+-				      "pll0_refclk", "pll1_refclk";
+-		};
+-	};
+-
+-	serdes_wiz3: wiz@5030000 {
+-		compatible = "ti,j721e-wiz-16g";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		power-domains = <&k3_pds 295 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 295 5>, <&k3_clks 295 9>, <&cmn_refclk>;
+-		clock-names = "fck", "core_ref_clk", "ext_ref_clk";
+-		assigned-clocks = <&k3_clks 295 9>, <&k3_clks 295 0>;
+-		assigned-clock-parents = <&k3_clks 295 13>, <&k3_clks 295 4>;
+-		num-lanes = <2>;
+-		#reset-cells = <1>;
+-		ranges = <0x5030000 0x0 0x5030000 0x10000>;
+-
+-		wiz3_pll0_refclk: pll0-refclk {
+-			clocks = <&k3_clks 295 9>, <&cmn_refclk>;
+-			#clock-cells = <0>;
+-			assigned-clocks = <&wiz3_pll0_refclk>;
+-			assigned-clock-parents = <&k3_clks 295 9>;
+-		};
+-
+-		wiz3_pll1_refclk: pll1-refclk {
+-			clocks = <&k3_clks 295 0>, <&cmn_refclk1>;
+-			#clock-cells = <0>;
+-			assigned-clocks = <&wiz3_pll1_refclk>;
+-			assigned-clock-parents = <&k3_clks 295 0>;
+-		};
+-
+-		wiz3_refclk_dig: refclk-dig {
+-			clocks = <&k3_clks 295 9>, <&k3_clks 295 0>, <&cmn_refclk>, <&cmn_refclk1>;
+-			#clock-cells = <0>;
+-			assigned-clocks = <&wiz3_refclk_dig>;
+-			assigned-clock-parents = <&k3_clks 295 9>;
+-		};
+-
+-		wiz3_cmn_refclk_dig_div: cmn-refclk-dig-div {
+-			clocks = <&wiz3_refclk_dig>;
+-			#clock-cells = <0>;
+-		};
+-
+-		wiz3_cmn_refclk1_dig_div: cmn-refclk1-dig-div {
+-			clocks = <&wiz3_pll1_refclk>;
+-			#clock-cells = <0>;
+-		};
+-
+-		serdes3: serdes@5030000 {
+-			compatible = "ti,sierra-phy-t0";
+-			reg-names = "serdes";
+-			reg = <0x5030000 0x10000>;
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			#clock-cells = <1>;
+-			resets = <&serdes_wiz3 0>;
+-			reset-names = "sierra_reset";
+-			clocks = <&wiz3_cmn_refclk_dig_div>, <&wiz3_cmn_refclk1_dig_div>,
+-				 <&wiz3_pll0_refclk>, <&wiz3_pll1_refclk>;
+-			clock-names = "cmn_refclk_dig_div", "cmn_refclk1_dig_div",
+-				      "pll0_refclk", "pll1_refclk";
+-		};
+-	};
+-
+-	pcie0_rc: pcie@2900000 {
+-		compatible = "ti,j721e-pcie-host";
+-		reg = <0x00 0x02900000 0x00 0x1000>,
+-		      <0x00 0x02907000 0x00 0x400>,
+-		      <0x00 0x0d000000 0x00 0x00800000>,
+-		      <0x00 0x10000000 0x00 0x00001000>;
+-		reg-names = "intd_cfg", "user_cfg", "reg", "cfg";
+-		interrupt-names = "link_state";
+-		interrupts = <GIC_SPI 318 IRQ_TYPE_EDGE_RISING>;
+-		device_type = "pci";
+-		ti,syscon-pcie-ctrl = <&scm_conf 0x4070>;
+-		max-link-speed = <3>;
+-		num-lanes = <2>;
+-		power-domains = <&k3_pds 239 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 239 1>;
+-		clock-names = "fck";
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		bus-range = <0x0 0xff>;
+-		vendor-id = <0x104c>;
+-		device-id = <0xb00d>;
+-		msi-map = <0x0 &gic_its 0x0 0x10000>;
+-		dma-coherent;
+-		ranges = <0x01000000 0x0 0x10001000 0x0 0x10001000 0x0 0x0010000>,
+-			 <0x02000000 0x0 0x10011000 0x0 0x10011000 0x0 0x7fef000>;
+-		dma-ranges = <0x02000000 0x0 0x0 0x0 0x0 0x10000 0x0>;
+-		status = "disabled";
+-	};
+-
+-	pcie1_rc: pcie@2910000 {
+-		compatible = "ti,j721e-pcie-host";
+-		reg = <0x00 0x02910000 0x00 0x1000>,
+-		      <0x00 0x02917000 0x00 0x400>,
+-		      <0x00 0x0d800000 0x00 0x00800000>,
+-		      <0x00 0x18000000 0x00 0x00001000>;
+-		reg-names = "intd_cfg", "user_cfg", "reg", "cfg";
+-		interrupt-names = "link_state";
+-		interrupts = <GIC_SPI 330 IRQ_TYPE_EDGE_RISING>;
+-		device_type = "pci";
+-		ti,syscon-pcie-ctrl = <&scm_conf 0x4074>;
+-		max-link-speed = <3>;
+-		num-lanes = <2>;
+-		power-domains = <&k3_pds 240 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 240 1>;
+-		clock-names = "fck";
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		bus-range = <0x0 0xff>;
+-		vendor-id = <0x104c>;
+-		device-id = <0xb00d>;
+-		msi-map = <0x0 &gic_its 0x10000 0x10000>;
+-		dma-coherent;
+-		ranges = <0x01000000 0x0 0x18001000 0x0 0x18001000 0x0 0x0010000>,
+-			 <0x02000000 0x0 0x18011000 0x0 0x18011000 0x0 0x7fef000>;
+-		dma-ranges = <0x02000000 0x0 0x0 0x0 0x0 0x10000 0x0>;
+-		status = "disabled";
+-	};
+-
+-	pcie2_rc: pcie@2920000 {
+-		compatible = "ti,j721e-pcie-host";
+-		reg = <0x00 0x02920000 0x00 0x1000>,
+-		      <0x00 0x02927000 0x00 0x400>,
+-		      <0x00 0x0e000000 0x00 0x00800000>,
+-		      <0x44 0x00000000 0x00 0x00001000>;
+-		reg-names = "intd_cfg", "user_cfg", "reg", "cfg";
+-		interrupt-names = "link_state";
+-		interrupts = <GIC_SPI 342 IRQ_TYPE_EDGE_RISING>;
+-		device_type = "pci";
+-		ti,syscon-pcie-ctrl = <&scm_conf 0x4078>;
+-		max-link-speed = <3>;
+-		num-lanes = <2>;
+-		power-domains = <&k3_pds 241 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 241 1>;
+-		clock-names = "fck";
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		bus-range = <0x0 0xff>;
+-		vendor-id = <0x104c>;
+-		device-id = <0xb00d>;
+-		msi-map = <0x0 &gic_its 0x20000 0x10000>;
+-		dma-coherent;
+-		ranges = <0x01000000 0x0 0x00001000 0x44 0x00001000 0x0 0x0010000>,
+-			 <0x02000000 0x0 0x00011000 0x44 0x00011000 0x0 0x7fef000>;
+-		dma-ranges = <0x02000000 0x0 0x0 0x0 0x0 0x10000 0x0>;
+-		status = "disabled";
+-	};
+-
+-	pcie3_rc: pcie@2930000 {
+-		compatible = "ti,j721e-pcie-host";
+-		reg = <0x00 0x02930000 0x00 0x1000>,
+-		      <0x00 0x02937000 0x00 0x400>,
+-		      <0x00 0x0e800000 0x00 0x00800000>,
+-		      <0x44 0x10000000 0x00 0x00001000>;
+-		reg-names = "intd_cfg", "user_cfg", "reg", "cfg";
+-		interrupt-names = "link_state";
+-		interrupts = <GIC_SPI 354 IRQ_TYPE_EDGE_RISING>;
+-		device_type = "pci";
+-		ti,syscon-pcie-ctrl = <&scm_conf 0x407c>;
+-		max-link-speed = <3>;
+-		num-lanes = <2>;
+-		power-domains = <&k3_pds 242 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 242 1>;
+-		clock-names = "fck";
+-		#address-cells = <3>;
+-		#size-cells = <2>;
+-		bus-range = <0x0 0xff>;
+-		vendor-id = <0x104c>;
+-		device-id = <0xb00d>;
+-		msi-map = <0x0 &gic_its 0x30000 0x10000>;
+-		dma-coherent;
+-		ranges = <0x01000000 0x0 0x00001000 0x44 0x10001000 0x0 0x0010000>,
+-			 <0x02000000 0x0 0x00011000 0x44 0x10011000 0x0 0x7fef000>;
+-		dma-ranges = <0x02000000 0x0 0x0 0x0 0x0 0x10000 0x0>;
+-		status = "disabled";
+-	};
+-
+-	serdes_wiz4: wiz@5050000 {
+-		compatible = "ti,am64-wiz-10g";
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		power-domains = <&k3_pds 297 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 297 1>, <&k3_clks 297 9>, <&cmn_refclk>;
+-		clock-names = "fck", "core_ref_clk", "ext_ref_clk";
+-		assigned-clocks = <&k3_clks 297 9>;
+-		assigned-clock-parents = <&k3_clks 297 10>;
+-		assigned-clock-rates = <19200000>;
+-		num-lanes = <4>;
+-		#reset-cells = <1>;
+-		#clock-cells = <1>;
+-		ranges = <0x05050000 0x00 0x05050000 0x010000>,
+-			<0x0a030a00 0x00 0x0a030a00 0x40>;
+-
+-		serdes4: serdes@5050000 {
+-			/*
+-			 * Note: we also map DPTX PHY registers as the Torrent
+-			 * needs to manage those.
+-			 */
+-			compatible = "ti,j721e-serdes-10g";
+-			reg = <0x05050000 0x010000>,
+-			      <0x0a030a00 0x40>; /* DPTX PHY */
+-			reg-names = "torrent_phy", "dptx_phy";
+-
+-			resets = <&serdes_wiz4 0>;
+-			reset-names = "torrent_reset";
+-			clocks = <&serdes_wiz4 TI_WIZ_PLL0_REFCLK>;
+-			clock-names = "refclk";
+-			assigned-clocks = <&serdes_wiz4 TI_WIZ_PLL0_REFCLK>,
+-					  <&serdes_wiz4 TI_WIZ_PLL1_REFCLK>,
+-					  <&serdes_wiz4 TI_WIZ_REFCLK_DIG>;
+-			assigned-clock-parents = <&k3_clks 297 9>,
+-						 <&k3_clks 297 9>,
+-						 <&k3_clks 297 9>;
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-		};
+-	};
+-
+-	main_timer0: timer@2400000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2400000 0x00 0x400>;
+-		interrupts = <GIC_SPI 224 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 49 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 49 1>;
+-		assigned-clock-parents = <&k3_clks 49 2>;
+-		power-domains = <&k3_pds 49 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer1: timer@2410000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2410000 0x00 0x400>;
+-		interrupts = <GIC_SPI 225 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 50 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 50 1>, <&k3_clks 327 0>;
+-		assigned-clock-parents = <&k3_clks 50 2>, <&k3_clks 327 1>;
+-		power-domains = <&k3_pds 50 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer2: timer@2420000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2420000 0x00 0x400>;
+-		interrupts = <GIC_SPI 226 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 51 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 51 1>;
+-		assigned-clock-parents = <&k3_clks 51 2>;
+-		power-domains = <&k3_pds 51 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer3: timer@2430000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2430000 0x00 0x400>;
+-		interrupts = <GIC_SPI 227 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 52 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 52 1>, <&k3_clks 328 0>;
+-		assigned-clock-parents = <&k3_clks 52 2>, <&k3_clks 328 1>;
+-		power-domains = <&k3_pds 52 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer4: timer@2440000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2440000 0x00 0x400>;
+-		interrupts = <GIC_SPI 228 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 53 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 53 1>;
+-		assigned-clock-parents = <&k3_clks 53 2>;
+-		power-domains = <&k3_pds 53 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer5: timer@2450000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2450000 0x00 0x400>;
+-		interrupts = <GIC_SPI 229 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 54 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 54 1>, <&k3_clks 329 0>;
+-		assigned-clock-parents = <&k3_clks 54 2>, <&k3_clks 329 1>;
+-		power-domains = <&k3_pds 54 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer6: timer@2460000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2460000 0x00 0x400>;
+-		interrupts = <GIC_SPI 230 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 55 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 55 1>;
+-		assigned-clock-parents = <&k3_clks 55 2>;
+-		power-domains = <&k3_pds 55 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer7: timer@2470000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2470000 0x00 0x400>;
+-		interrupts = <GIC_SPI 231 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 57 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 57 1>, <&k3_clks 330 0>;
+-		assigned-clock-parents = <&k3_clks 57 2>, <&k3_clks 330 1>;
+-		power-domains = <&k3_pds 57 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer8: timer@2480000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2480000 0x00 0x400>;
+-		interrupts = <GIC_SPI 232 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 58 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 58 1>;
+-		assigned-clock-parents = <&k3_clks 58 2>;
+-		power-domains = <&k3_pds 58 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer9: timer@2490000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2490000 0x00 0x400>;
+-		interrupts = <GIC_SPI 233 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 59 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 59 1>, <&k3_clks 331 0>;
+-		assigned-clock-parents = <&k3_clks 59 2>, <&k3_clks 331 1>;
+-		power-domains = <&k3_pds 59 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer10: timer@24a0000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x24a0000 0x00 0x400>;
+-		interrupts = <GIC_SPI 234 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 60 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 60 1>;
+-		assigned-clock-parents = <&k3_clks 60 2>;
+-		power-domains = <&k3_pds 60 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer11: timer@24b0000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x24b0000 0x00 0x400>;
+-		interrupts = <GIC_SPI 235 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 62 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 62 1>, <&k3_clks 332 0>;
+-		assigned-clock-parents = <&k3_clks 62 2>, <&k3_clks 332 1>;
+-		power-domains = <&k3_pds 62 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer12: timer@24c0000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x24c0000 0x00 0x400>;
+-		interrupts = <GIC_SPI 236 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 63 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 63 1>;
+-		assigned-clock-parents = <&k3_clks 63 2>;
+-		power-domains = <&k3_pds 63 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer13: timer@24d0000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x24d0000 0x00 0x400>;
+-		interrupts = <GIC_SPI 237 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 64 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 64 1>, <&k3_clks 333 0>;
+-		assigned-clock-parents = <&k3_clks 64 2>, <&k3_clks 333 1>;
+-		power-domains = <&k3_pds 64 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer14: timer@24e0000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x24e0000 0x00 0x400>;
+-		interrupts = <GIC_SPI 238 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 65 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 65 1>;
+-		assigned-clock-parents = <&k3_clks 65 2>;
+-		power-domains = <&k3_pds 65 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer15: timer@24f0000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x24f0000 0x00 0x400>;
+-		interrupts = <GIC_SPI 239 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 66 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 66 1>, <&k3_clks 334 0>;
+-		assigned-clock-parents = <&k3_clks 66 2>, <&k3_clks 334 1>;
+-		power-domains = <&k3_pds 66 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer16: timer@2500000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2500000 0x00 0x400>;
+-		interrupts = <GIC_SPI 240 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 67 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 67 1>;
+-		assigned-clock-parents = <&k3_clks 67 2>;
+-		power-domains = <&k3_pds 67 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer17: timer@2510000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2510000 0x00 0x400>;
+-		interrupts = <GIC_SPI 241 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 68 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 68 1>, <&k3_clks 335 0>;
+-		assigned-clock-parents = <&k3_clks 68 2>, <&k3_clks 335 1>;
+-		power-domains = <&k3_pds 68 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer18: timer@2520000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2520000 0x00 0x400>;
+-		interrupts = <GIC_SPI 242 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 69 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 69 1>;
+-		assigned-clock-parents = <&k3_clks 69 2>;
+-		power-domains = <&k3_pds 69 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_timer19: timer@2530000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x2530000 0x00 0x400>;
+-		interrupts = <GIC_SPI 243 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 70 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 70 1>, <&k3_clks 336 0>;
+-		assigned-clock-parents = <&k3_clks 70 2>, <&k3_clks 336 1>;
+-		power-domains = <&k3_pds 70 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-	};
+-
+-	main_uart0: serial@2800000 {
+-		compatible = "ti,j721e-uart", "ti,am654-uart";
+-		reg = <0x00 0x02800000 0x00 0x100>;
+-		interrupts = <GIC_SPI 192 IRQ_TYPE_LEVEL_HIGH>;
+-		clock-frequency = <48000000>;
+-		current-speed = <115200>;
+-		power-domains = <&k3_pds 146 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 146 0>;
+-		clock-names = "fclk";
+-		status = "disabled";
+-	};
+-
+-	main_uart1: serial@2810000 {
+-		compatible = "ti,j721e-uart", "ti,am654-uart";
+-		reg = <0x00 0x02810000 0x00 0x100>;
+-		interrupts = <GIC_SPI 193 IRQ_TYPE_LEVEL_HIGH>;
+-		clock-frequency = <48000000>;
+-		current-speed = <115200>;
+-		power-domains = <&k3_pds 278 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 278 0>;
+-		clock-names = "fclk";
+-		status = "disabled";
+-	};
+-
+-	main_uart2: serial@2820000 {
+-		compatible = "ti,j721e-uart", "ti,am654-uart";
+-		reg = <0x00 0x02820000 0x00 0x100>;
+-		interrupts = <GIC_SPI 194 IRQ_TYPE_LEVEL_HIGH>;
+-		clock-frequency = <48000000>;
+-		current-speed = <115200>;
+-		power-domains = <&k3_pds 279 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 279 0>;
+-		clock-names = "fclk";
+-		status = "disabled";
+-	};
+-
+-	main_uart3: serial@2830000 {
+-		compatible = "ti,j721e-uart", "ti,am654-uart";
+-		reg = <0x00 0x02830000 0x00 0x100>;
+-		interrupts = <GIC_SPI 195 IRQ_TYPE_LEVEL_HIGH>;
+-		clock-frequency = <48000000>;
+-		current-speed = <115200>;
+-		power-domains = <&k3_pds 280 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 280 0>;
+-		clock-names = "fclk";
+-		status = "disabled";
+-	};
+-
+-	main_uart4: serial@2840000 {
+-		compatible = "ti,j721e-uart", "ti,am654-uart";
+-		reg = <0x00 0x02840000 0x00 0x100>;
+-		interrupts = <GIC_SPI 196 IRQ_TYPE_LEVEL_HIGH>;
+-		clock-frequency = <48000000>;
+-		current-speed = <115200>;
+-		power-domains = <&k3_pds 281 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 281 0>;
+-		clock-names = "fclk";
+-		status = "disabled";
+-	};
+-
+-	main_uart5: serial@2850000 {
+-		compatible = "ti,j721e-uart", "ti,am654-uart";
+-		reg = <0x00 0x02850000 0x00 0x100>;
+-		interrupts = <GIC_SPI 197 IRQ_TYPE_LEVEL_HIGH>;
+-		clock-frequency = <48000000>;
+-		current-speed = <115200>;
+-		power-domains = <&k3_pds 282 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 282 0>;
+-		clock-names = "fclk";
+-		status = "disabled";
+-	};
+-
+-	main_uart6: serial@2860000 {
+-		compatible = "ti,j721e-uart", "ti,am654-uart";
+-		reg = <0x00 0x02860000 0x00 0x100>;
+-		interrupts = <GIC_SPI 198 IRQ_TYPE_LEVEL_HIGH>;
+-		clock-frequency = <48000000>;
+-		current-speed = <115200>;
+-		power-domains = <&k3_pds 283 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 283 0>;
+-		clock-names = "fclk";
+-		status = "disabled";
+-	};
+-
+-	main_uart7: serial@2870000 {
+-		compatible = "ti,j721e-uart", "ti,am654-uart";
+-		reg = <0x00 0x02870000 0x00 0x100>;
+-		interrupts = <GIC_SPI 199 IRQ_TYPE_LEVEL_HIGH>;
+-		clock-frequency = <48000000>;
+-		current-speed = <115200>;
+-		power-domains = <&k3_pds 284 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 284 0>;
+-		clock-names = "fclk";
+-		status = "disabled";
+-	};
+-
+-	main_uart8: serial@2880000 {
+-		compatible = "ti,j721e-uart", "ti,am654-uart";
+-		reg = <0x00 0x02880000 0x00 0x100>;
+-		interrupts = <GIC_SPI 248 IRQ_TYPE_LEVEL_HIGH>;
+-		clock-frequency = <48000000>;
+-		current-speed = <115200>;
+-		power-domains = <&k3_pds 285 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 285 0>;
+-		clock-names = "fclk";
+-		status = "disabled";
+-	};
+-
+-	main_uart9: serial@2890000 {
+-		compatible = "ti,j721e-uart", "ti,am654-uart";
+-		reg = <0x00 0x02890000 0x00 0x100>;
+-		interrupts = <GIC_SPI 249 IRQ_TYPE_LEVEL_HIGH>;
+-		clock-frequency = <48000000>;
+-		current-speed = <115200>;
+-		power-domains = <&k3_pds 286 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 286 0>;
+-		clock-names = "fclk";
+-		status = "disabled";
+-	};
+-
+-	main_gpio0: gpio@600000 {
+-		compatible = "ti,j721e-gpio", "ti,keystone-gpio";
+-		reg = <0x0 0x00600000 0x0 0x100>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-parent = <&main_gpio_intr>;
+-		interrupts = <256>, <257>, <258>, <259>,
+-			     <260>, <261>, <262>, <263>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		ti,ngpio = <128>;
+-		ti,davinci-gpio-unbanked = <0>;
+-		power-domains = <&k3_pds 105 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 105 0>;
+-		clock-names = "gpio";
+-		status = "disabled";
+-	};
+-
+-	main_gpio1: gpio@601000 {
+-		compatible = "ti,j721e-gpio", "ti,keystone-gpio";
+-		reg = <0x0 0x00601000 0x0 0x100>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-parent = <&main_gpio_intr>;
+-		interrupts = <288>, <289>, <290>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		ti,ngpio = <36>;
+-		ti,davinci-gpio-unbanked = <0>;
+-		power-domains = <&k3_pds 106 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 106 0>;
+-		clock-names = "gpio";
+-		status = "disabled";
+-	};
+-
+-	main_gpio2: gpio@610000 {
+-		compatible = "ti,j721e-gpio", "ti,keystone-gpio";
+-		reg = <0x0 0x00610000 0x0 0x100>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-parent = <&main_gpio_intr>;
+-		interrupts = <264>, <265>, <266>, <267>,
+-			     <268>, <269>, <270>, <271>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		ti,ngpio = <128>;
+-		ti,davinci-gpio-unbanked = <0>;
+-		power-domains = <&k3_pds 107 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 107 0>;
+-		clock-names = "gpio";
+-		status = "disabled";
+-	};
+-
+-	main_gpio3: gpio@611000 {
+-		compatible = "ti,j721e-gpio", "ti,keystone-gpio";
+-		reg = <0x0 0x00611000 0x0 0x100>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-parent = <&main_gpio_intr>;
+-		interrupts = <292>, <293>, <294>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		ti,ngpio = <36>;
+-		ti,davinci-gpio-unbanked = <0>;
+-		power-domains = <&k3_pds 108 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 108 0>;
+-		clock-names = "gpio";
+-		status = "disabled";
+-	};
+-
+-	main_gpio4: gpio@620000 {
+-		compatible = "ti,j721e-gpio", "ti,keystone-gpio";
+-		reg = <0x0 0x00620000 0x0 0x100>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-parent = <&main_gpio_intr>;
+-		interrupts = <272>, <273>, <274>, <275>,
+-			     <276>, <277>, <278>, <279>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		ti,ngpio = <128>;
+-		ti,davinci-gpio-unbanked = <0>;
+-		power-domains = <&k3_pds 109 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 109 0>;
+-		clock-names = "gpio";
+-		status = "disabled";
+-	};
+-
+-	main_gpio5: gpio@621000 {
+-		compatible = "ti,j721e-gpio", "ti,keystone-gpio";
+-		reg = <0x0 0x00621000 0x0 0x100>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-parent = <&main_gpio_intr>;
+-		interrupts = <296>, <297>, <298>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		ti,ngpio = <36>;
+-		ti,davinci-gpio-unbanked = <0>;
+-		power-domains = <&k3_pds 110 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 110 0>;
+-		clock-names = "gpio";
+-		status = "disabled";
+-	};
+-
+-	main_gpio6: gpio@630000 {
+-		compatible = "ti,j721e-gpio", "ti,keystone-gpio";
+-		reg = <0x0 0x00630000 0x0 0x100>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-parent = <&main_gpio_intr>;
+-		interrupts = <280>, <281>, <282>, <283>,
+-			     <284>, <285>, <286>, <287>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		ti,ngpio = <128>;
+-		ti,davinci-gpio-unbanked = <0>;
+-		power-domains = <&k3_pds 111 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 111 0>;
+-		clock-names = "gpio";
+-		status = "disabled";
+-	};
+-
+-	main_gpio7: gpio@631000 {
+-		compatible = "ti,j721e-gpio", "ti,keystone-gpio";
+-		reg = <0x0 0x00631000 0x0 0x100>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-parent = <&main_gpio_intr>;
+-		interrupts = <300>, <301>, <302>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		ti,ngpio = <36>;
+-		ti,davinci-gpio-unbanked = <0>;
+-		power-domains = <&k3_pds 112 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 112 0>;
+-		clock-names = "gpio";
+-		status = "disabled";
+-	};
+-
+-	main_sdhci0: mmc@4f80000 {
+-		compatible = "ti,j721e-sdhci-8bit";
+-		reg = <0x0 0x4f80000 0x0 0x1000>, <0x0 0x4f88000 0x0 0x400>;
+-		interrupts = <GIC_SPI 3 IRQ_TYPE_LEVEL_HIGH>;
+-		power-domains = <&k3_pds 91 TI_SCI_PD_EXCLUSIVE>;
+-		clock-names = "clk_ahb", "clk_xin";
+-		clocks = <&k3_clks 91 0>, <&k3_clks 91 1>;
+-		assigned-clocks = <&k3_clks 91 1>;
+-		assigned-clock-parents = <&k3_clks 91 2>;
+-		bus-width = <8>;
+-		mmc-hs200-1_8v;
+-		mmc-ddr-1_8v;
+-		ti,otap-del-sel-legacy = <0x0>;
+-		ti,otap-del-sel-mmc-hs = <0x0>;
+-		ti,otap-del-sel-ddr52 = <0x5>;
+-		ti,otap-del-sel-hs200 = <0x6>;
+-		ti,otap-del-sel-hs400 = <0x0>;
+-		ti,itap-del-sel-legacy = <0x10>;
+-		ti,itap-del-sel-mmc-hs = <0xa>;
+-		ti,itap-del-sel-ddr52 = <0x3>;
+-		ti,trm-icp = <0x8>;
+-		dma-coherent;
+-		status = "disabled";
+-	};
+-
+-	main_sdhci1: mmc@4fb0000 {
+-		compatible = "ti,j721e-sdhci-4bit";
+-		reg = <0x0 0x04fb0000 0x0 0x1000>, <0x0 0x4fb8000 0x0 0x400>;
+-		interrupts = <GIC_SPI 4 IRQ_TYPE_LEVEL_HIGH>;
+-		power-domains = <&k3_pds 92 TI_SCI_PD_EXCLUSIVE>;
+-		clock-names = "clk_ahb", "clk_xin";
+-		clocks = <&k3_clks 92 5>, <&k3_clks 92 0>;
+-		assigned-clocks = <&k3_clks 92 0>;
+-		assigned-clock-parents = <&k3_clks 92 1>;
+-		ti,otap-del-sel-legacy = <0x0>;
+-		ti,otap-del-sel-sd-hs = <0x0>;
+-		ti,otap-del-sel-sdr12 = <0xf>;
+-		ti,otap-del-sel-sdr25 = <0xf>;
+-		ti,otap-del-sel-sdr50 = <0xc>;
+-		ti,otap-del-sel-ddr50 = <0xc>;
+-		ti,otap-del-sel-sdr104 = <0x5>;
+-		ti,itap-del-sel-legacy = <0x0>;
+-		ti,itap-del-sel-sd-hs = <0x0>;
+-		ti,itap-del-sel-sdr12 = <0x0>;
+-		ti,itap-del-sel-sdr25 = <0x0>;
+-		ti,itap-del-sel-ddr50 = <0x2>;
+-		ti,trm-icp = <0x8>;
+-		ti,clkbuf-sel = <0x7>;
+-		dma-coherent;
+-		sdhci-caps-mask = <0x2 0x0>;
+-		status = "disabled";
+-	};
+-
+-	main_sdhci2: mmc@4f98000 {
+-		compatible = "ti,j721e-sdhci-4bit";
+-		reg = <0x0 0x4f98000 0x0 0x1000>, <0x0 0x4f90000 0x0 0x400>;
+-		interrupts = <GIC_SPI 5 IRQ_TYPE_LEVEL_HIGH>;
+-		power-domains = <&k3_pds 93 TI_SCI_PD_EXCLUSIVE>;
+-		clock-names = "clk_ahb", "clk_xin";
+-		clocks = <&k3_clks 93 5>, <&k3_clks 93 0>;
+-		assigned-clocks = <&k3_clks 93 0>;
+-		assigned-clock-parents = <&k3_clks 93 1>;
+-		ti,otap-del-sel-legacy = <0x0>;
+-		ti,otap-del-sel-sd-hs = <0x0>;
+-		ti,otap-del-sel-sdr12 = <0xf>;
+-		ti,otap-del-sel-sdr25 = <0xf>;
+-		ti,otap-del-sel-sdr50 = <0xc>;
+-		ti,otap-del-sel-ddr50 = <0xc>;
+-		ti,otap-del-sel-sdr104 = <0x5>;
+-		ti,itap-del-sel-legacy = <0x0>;
+-		ti,itap-del-sel-sd-hs = <0x0>;
+-		ti,itap-del-sel-sdr12 = <0x0>;
+-		ti,itap-del-sel-sdr25 = <0x0>;
+-		ti,itap-del-sel-ddr50 = <0x2>;
+-		ti,trm-icp = <0x8>;
+-		ti,clkbuf-sel = <0x7>;
+-		dma-coherent;
+-		sdhci-caps-mask = <0x2 0x0>;
+-		status = "disabled";
+-	};
+-
+-	usbss0: cdns-usb@4104000 {
+-		compatible = "ti,j721e-usb";
+-		reg = <0x00 0x4104000 0x00 0x100>;
+-		dma-coherent;
+-		power-domains = <&k3_pds 288 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 288 15>, <&k3_clks 288 3>;
+-		clock-names = "ref", "lpm";
+-		assigned-clocks = <&k3_clks 288 15>;	/* USB2_REFCLK */
+-		assigned-clock-parents = <&k3_clks 288 16>; /* HFOSC0 */
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-		ranges;
+-
+-		usb0: usb@6000000 {
+-			compatible = "cdns,usb3";
+-			reg = <0x00 0x6000000 0x00 0x10000>,
+-			      <0x00 0x6010000 0x00 0x10000>,
+-			      <0x00 0x6020000 0x00 0x10000>;
+-			reg-names = "otg", "xhci", "dev";
+-			interrupts = <GIC_SPI 96 IRQ_TYPE_LEVEL_HIGH>,	/* irq.0 */
+-				     <GIC_SPI 102 IRQ_TYPE_LEVEL_HIGH>,	/* irq.6 */
+-				     <GIC_SPI 120 IRQ_TYPE_LEVEL_HIGH>;	/* otgirq.0 */
+-			interrupt-names = "host",
+-					  "peripheral",
+-					  "otg";
+-			maximum-speed = "super-speed";
+-			dr_mode = "otg";
+-		};
+-	};
+-
+-	usbss1: cdns-usb@4114000 {
+-		compatible = "ti,j721e-usb";
+-		reg = <0x00 0x4114000 0x00 0x100>;
+-		dma-coherent;
+-		power-domains = <&k3_pds 289 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 289 15>, <&k3_clks 289 3>;
+-		clock-names = "ref", "lpm";
+-		assigned-clocks = <&k3_clks 289 15>;	/* USB2_REFCLK */
+-		assigned-clock-parents = <&k3_clks 289 16>; /* HFOSC0 */
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-		ranges;
+-
+-		usb1: usb@6400000 {
+-			compatible = "cdns,usb3";
+-			reg = <0x00 0x6400000 0x00 0x10000>,
+-			      <0x00 0x6410000 0x00 0x10000>,
+-			      <0x00 0x6420000 0x00 0x10000>;
+-			reg-names = "otg", "xhci", "dev";
+-			interrupts = <GIC_SPI 104 IRQ_TYPE_LEVEL_HIGH>,	/* irq.0 */
+-				     <GIC_SPI 110 IRQ_TYPE_LEVEL_HIGH>,	/* irq.6 */
+-				     <GIC_SPI 121 IRQ_TYPE_LEVEL_HIGH>;	/* otgirq.0 */
+-			interrupt-names = "host",
+-					  "peripheral",
+-					  "otg";
+-			maximum-speed = "super-speed";
+-			dr_mode = "otg";
+-		};
+-	};
+-
+-	main_i2c0: i2c@2000000 {
+-		compatible = "ti,j721e-i2c", "ti,omap4-i2c";
+-		reg = <0x0 0x2000000 0x0 0x100>;
+-		interrupts = <GIC_SPI 200 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		clock-names = "fck";
+-		clocks = <&k3_clks 187 0>;
+-		power-domains = <&k3_pds 187 TI_SCI_PD_SHARED>;
+-		status = "disabled";
+-	};
+-
+-	main_i2c1: i2c@2010000 {
+-		compatible = "ti,j721e-i2c", "ti,omap4-i2c";
+-		reg = <0x0 0x2010000 0x0 0x100>;
+-		interrupts = <GIC_SPI 201 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		clock-names = "fck";
+-		clocks = <&k3_clks 188 0>;
+-		power-domains = <&k3_pds 188 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	main_i2c2: i2c@2020000 {
+-		compatible = "ti,j721e-i2c", "ti,omap4-i2c";
+-		reg = <0x0 0x2020000 0x0 0x100>;
+-		interrupts = <GIC_SPI 202 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		clock-names = "fck";
+-		clocks = <&k3_clks 189 0>;
+-		power-domains = <&k3_pds 189 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	main_i2c3: i2c@2030000 {
+-		compatible = "ti,j721e-i2c", "ti,omap4-i2c";
+-		reg = <0x0 0x2030000 0x0 0x100>;
+-		interrupts = <GIC_SPI 203 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		clock-names = "fck";
+-		clocks = <&k3_clks 190 0>;
+-		power-domains = <&k3_pds 190 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	main_i2c4: i2c@2040000 {
+-		compatible = "ti,j721e-i2c", "ti,omap4-i2c";
+-		reg = <0x0 0x2040000 0x0 0x100>;
+-		interrupts = <GIC_SPI 204 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		clock-names = "fck";
+-		clocks = <&k3_clks 191 0>;
+-		power-domains = <&k3_pds 191 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	main_i2c5: i2c@2050000 {
+-		compatible = "ti,j721e-i2c", "ti,omap4-i2c";
+-		reg = <0x0 0x2050000 0x0 0x100>;
+-		interrupts = <GIC_SPI 205 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		clock-names = "fck";
+-		clocks = <&k3_clks 192 0>;
+-		power-domains = <&k3_pds 192 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	main_i2c6: i2c@2060000 {
+-		compatible = "ti,j721e-i2c", "ti,omap4-i2c";
+-		reg = <0x0 0x2060000 0x0 0x100>;
+-		interrupts = <GIC_SPI 206 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		clock-names = "fck";
+-		clocks = <&k3_clks 193 0>;
+-		power-domains = <&k3_pds 193 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	ufs_wrapper: ufs-wrapper@4e80000 {
+-		compatible = "ti,j721e-ufs";
+-		reg = <0x0 0x4e80000 0x0 0x100>;
+-		power-domains = <&k3_pds 277 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 277 1>;
+-		assigned-clocks = <&k3_clks 277 1>;
+-		assigned-clock-parents = <&k3_clks 277 4>;
+-		ranges;
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-
+-		ufs@4e84000 {
+-			compatible = "cdns,ufshc-m31-16nm", "jedec,ufs-2.0";
+-			reg = <0x0 0x4e84000 0x0 0x10000>;
+-			interrupts = <GIC_SPI 17 IRQ_TYPE_LEVEL_HIGH>;
+-			freq-table-hz = <250000000 250000000>, <19200000 19200000>, <19200000 19200000>;
+-			clocks = <&k3_clks 277 0>, <&k3_clks 277 1>, <&k3_clks 277 1>;
+-			clock-names = "core_clk", "phy_clk", "ref_clk";
+-			dma-coherent;
+-		};
+-	};
+-
+-	mhdp: dp-bridge@a000000 {
+-		compatible = "ti,j721e-mhdp8546";
+-		/*
+-		 * Note: we do not map DPTX PHY area, as that is handled by
+-		 * the PHY driver.
+-		 */
+-		reg = <0x00 0x0a000000 0x00 0x030a00>, /* DSS_EDP0_V2A_CORE_VP_REGS_APB */
+-		      <0x00 0x04f40000 0x00 0x20>;    /* DSS_EDP0_INTG_CFG_VP */
+-		reg-names = "mhdptx", "j721e-intg";
+-
+-		clocks = <&k3_clks 151 36>;
+-
+-		interrupt-parent = <&gic500>;
+-		interrupts = <GIC_SPI 614 IRQ_TYPE_LEVEL_HIGH>;
+-
+-		power-domains = <&k3_pds 151 TI_SCI_PD_EXCLUSIVE>;
+-
+-		dp0_ports: ports {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-
+-			port@0 {
+-			    reg = <0>;
+-			};
+-
+-			port@4 {
+-			    reg = <4>;
+-			};
+-		};
+-	};
+-
+-	dss: dss@4a00000 {
+-		compatible = "ti,j721e-dss";
+-		reg =
+-			<0x00 0x04a00000 0x00 0x10000>, /* common_m */
+-			<0x00 0x04a10000 0x00 0x10000>, /* common_s0*/
+-			<0x00 0x04b00000 0x00 0x10000>, /* common_s1*/
+-			<0x00 0x04b10000 0x00 0x10000>, /* common_s2*/
+-
+-			<0x00 0x04a20000 0x00 0x10000>, /* vidl1 */
+-			<0x00 0x04a30000 0x00 0x10000>, /* vidl2 */
+-			<0x00 0x04a50000 0x00 0x10000>, /* vid1 */
+-			<0x00 0x04a60000 0x00 0x10000>, /* vid2 */
+-
+-			<0x00 0x04a70000 0x00 0x10000>, /* ovr1 */
+-			<0x00 0x04a90000 0x00 0x10000>, /* ovr2 */
+-			<0x00 0x04ab0000 0x00 0x10000>, /* ovr3 */
+-			<0x00 0x04ad0000 0x00 0x10000>, /* ovr4 */
+-
+-			<0x00 0x04a80000 0x00 0x10000>, /* vp1 */
+-			<0x00 0x04aa0000 0x00 0x10000>, /* vp2 */
+-			<0x00 0x04ac0000 0x00 0x10000>, /* vp3 */
+-			<0x00 0x04ae0000 0x00 0x10000>, /* vp4 */
+-			<0x00 0x04af0000 0x00 0x10000>; /* wb */
+-
+-		reg-names = "common_m", "common_s0",
+-			"common_s1", "common_s2",
+-			"vidl1", "vidl2","vid1","vid2",
+-			"ovr1", "ovr2", "ovr3", "ovr4",
+-			"vp1", "vp2", "vp3", "vp4",
+-			"wb";
+-
+-		clocks = <&k3_clks 152 0>,
+-			 <&k3_clks 152 1>,
+-			 <&k3_clks 152 4>,
+-			 <&k3_clks 152 9>,
+-			 <&k3_clks 152 13>;
+-		clock-names = "fck", "vp1", "vp2", "vp3", "vp4";
+-
+-		power-domains = <&k3_pds 152 TI_SCI_PD_EXCLUSIVE>;
+-
+-		interrupts = <GIC_SPI 602 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 603 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 604 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 605 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "common_m",
+-				  "common_s0",
+-				  "common_s1",
+-				  "common_s2";
+-
+-		dss_ports: ports {
+-		};
+-	};
+-
+-	mcasp0: mcasp@2b00000 {
+-		compatible = "ti,am33xx-mcasp-audio";
+-		reg = <0x0 0x02b00000 0x0 0x2000>,
+-			<0x0 0x02b08000 0x0 0x1000>;
+-		reg-names = "mpu","dat";
+-		interrupts = <GIC_SPI 544 IRQ_TYPE_LEVEL_HIGH>,
+-				<GIC_SPI 545 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "tx", "rx";
+-
+-		dmas = <&main_udmap 0xc400>, <&main_udmap 0x4400>;
+-		dma-names = "tx", "rx";
+-
+-		clocks = <&k3_clks 174 1>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 174 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	mcasp1: mcasp@2b10000 {
+-		compatible = "ti,am33xx-mcasp-audio";
+-		reg = <0x0 0x02b10000 0x0 0x2000>,
+-			<0x0 0x02b18000 0x0 0x1000>;
+-		reg-names = "mpu","dat";
+-		interrupts = <GIC_SPI 546 IRQ_TYPE_LEVEL_HIGH>,
+-				<GIC_SPI 547 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "tx", "rx";
+-
+-		dmas = <&main_udmap 0xc401>, <&main_udmap 0x4401>;
+-		dma-names = "tx", "rx";
+-
+-		clocks = <&k3_clks 175 1>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 175 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	mcasp2: mcasp@2b20000 {
+-		compatible = "ti,am33xx-mcasp-audio";
+-		reg = <0x0 0x02b20000 0x0 0x2000>,
+-			<0x0 0x02b28000 0x0 0x1000>;
+-		reg-names = "mpu","dat";
+-		interrupts = <GIC_SPI 548 IRQ_TYPE_LEVEL_HIGH>,
+-				<GIC_SPI 549 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "tx", "rx";
+-
+-		dmas = <&main_udmap 0xc402>, <&main_udmap 0x4402>;
+-		dma-names = "tx", "rx";
+-
+-		clocks = <&k3_clks 176 1>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 176 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	mcasp3: mcasp@2b30000 {
+-		compatible = "ti,am33xx-mcasp-audio";
+-		reg = <0x0 0x02b30000 0x0 0x2000>,
+-			<0x0 0x02b38000 0x0 0x1000>;
+-		reg-names = "mpu","dat";
+-		interrupts = <GIC_SPI 550 IRQ_TYPE_LEVEL_HIGH>,
+-				<GIC_SPI 551 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "tx", "rx";
+-
+-		dmas = <&main_udmap 0xc500>, <&main_udmap 0x4500>;
+-		dma-names = "tx", "rx";
+-
+-		clocks = <&k3_clks 177 1>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 177 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	mcasp4: mcasp@2b40000 {
+-		compatible = "ti,am33xx-mcasp-audio";
+-		reg = <0x0 0x02b40000 0x0 0x2000>,
+-			<0x0 0x02b48000 0x0 0x1000>;
+-		reg-names = "mpu","dat";
+-		interrupts = <GIC_SPI 552 IRQ_TYPE_LEVEL_HIGH>,
+-				<GIC_SPI 553 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "tx", "rx";
+-
+-		dmas = <&main_udmap 0xc501>, <&main_udmap 0x4501>;
+-		dma-names = "tx", "rx";
+-
+-		clocks = <&k3_clks 178 1>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 178 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	mcasp5: mcasp@2b50000 {
+-		compatible = "ti,am33xx-mcasp-audio";
+-		reg = <0x0 0x02b50000 0x0 0x2000>,
+-			<0x0 0x02b58000 0x0 0x1000>;
+-		reg-names = "mpu","dat";
+-		interrupts = <GIC_SPI 554 IRQ_TYPE_LEVEL_HIGH>,
+-				<GIC_SPI 555 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "tx", "rx";
+-
+-		dmas = <&main_udmap 0xc502>, <&main_udmap 0x4502>;
+-		dma-names = "tx", "rx";
+-
+-		clocks = <&k3_clks 179 1>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 179 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	mcasp6: mcasp@2b60000 {
+-		compatible = "ti,am33xx-mcasp-audio";
+-		reg = <0x0 0x02b60000 0x0 0x2000>,
+-			<0x0 0x02b68000 0x0 0x1000>;
+-		reg-names = "mpu","dat";
+-		interrupts = <GIC_SPI 556 IRQ_TYPE_LEVEL_HIGH>,
+-				<GIC_SPI 557 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "tx", "rx";
+-
+-		dmas = <&main_udmap 0xc503>, <&main_udmap 0x4503>;
+-		dma-names = "tx", "rx";
+-
+-		clocks = <&k3_clks 180 1>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 180 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	mcasp7: mcasp@2b70000 {
+-		compatible = "ti,am33xx-mcasp-audio";
+-		reg = <0x0 0x02b70000 0x0 0x2000>,
+-			<0x0 0x02b78000 0x0 0x1000>;
+-		reg-names = "mpu","dat";
+-		interrupts = <GIC_SPI 558 IRQ_TYPE_LEVEL_HIGH>,
+-				<GIC_SPI 559 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "tx", "rx";
+-
+-		dmas = <&main_udmap 0xc504>, <&main_udmap 0x4504>;
+-		dma-names = "tx", "rx";
+-
+-		clocks = <&k3_clks 181 1>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 181 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	mcasp8: mcasp@2b80000 {
+-		compatible = "ti,am33xx-mcasp-audio";
+-		reg = <0x0 0x02b80000 0x0 0x2000>,
+-			<0x0 0x02b88000 0x0 0x1000>;
+-		reg-names = "mpu","dat";
+-		interrupts = <GIC_SPI 560 IRQ_TYPE_LEVEL_HIGH>,
+-				<GIC_SPI 561 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "tx", "rx";
+-
+-		dmas = <&main_udmap 0xc505>, <&main_udmap 0x4505>;
+-		dma-names = "tx", "rx";
+-
+-		clocks = <&k3_clks 182 1>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 182 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	mcasp9: mcasp@2b90000 {
+-		compatible = "ti,am33xx-mcasp-audio";
+-		reg = <0x0 0x02b90000 0x0 0x2000>,
+-			<0x0 0x02b98000 0x0 0x1000>;
+-		reg-names = "mpu","dat";
+-		interrupts = <GIC_SPI 562 IRQ_TYPE_LEVEL_HIGH>,
+-				<GIC_SPI 563 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "tx", "rx";
+-
+-		dmas = <&main_udmap 0xc506>, <&main_udmap 0x4506>;
+-		dma-names = "tx", "rx";
+-
+-		clocks = <&k3_clks 183 1>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 183 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	mcasp10: mcasp@2ba0000 {
+-		compatible = "ti,am33xx-mcasp-audio";
+-		reg = <0x0 0x02ba0000 0x0 0x2000>,
+-			<0x0 0x02ba8000 0x0 0x1000>;
+-		reg-names = "mpu","dat";
+-		interrupts = <GIC_SPI 564 IRQ_TYPE_LEVEL_HIGH>,
+-				<GIC_SPI 565 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "tx", "rx";
+-
+-		dmas = <&main_udmap 0xc507>, <&main_udmap 0x4507>;
+-		dma-names = "tx", "rx";
+-
+-		clocks = <&k3_clks 184 1>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 184 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	mcasp11: mcasp@2bb0000 {
+-		compatible = "ti,am33xx-mcasp-audio";
+-		reg = <0x0 0x02bb0000 0x0 0x2000>,
+-			<0x0 0x02bb8000 0x0 0x1000>;
+-		reg-names = "mpu","dat";
+-		interrupts = <GIC_SPI 566 IRQ_TYPE_LEVEL_HIGH>,
+-				<GIC_SPI 567 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "tx", "rx";
+-
+-		dmas = <&main_udmap 0xc508>, <&main_udmap 0x4508>;
+-		dma-names = "tx", "rx";
+-
+-		clocks = <&k3_clks 185 1>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 185 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	watchdog0: watchdog@2200000 {
+-		compatible = "ti,j7-rti-wdt";
+-		reg = <0x0 0x2200000 0x0 0x100>;
+-		clocks = <&k3_clks 252 1>;
+-		power-domains = <&k3_pds 252 TI_SCI_PD_EXCLUSIVE>;
+-		assigned-clocks = <&k3_clks 252 1>;
+-		assigned-clock-parents = <&k3_clks 252 5>;
+-	};
+-
+-	watchdog1: watchdog@2210000 {
+-		compatible = "ti,j7-rti-wdt";
+-		reg = <0x0 0x2210000 0x0 0x100>;
+-		clocks = <&k3_clks 253 1>;
+-		power-domains = <&k3_pds 253 TI_SCI_PD_EXCLUSIVE>;
+-		assigned-clocks = <&k3_clks 253 1>;
+-		assigned-clock-parents = <&k3_clks 253 5>;
+-	};
+-
+-	main_r5fss0: r5fss@5c00000 {
+-		compatible = "ti,j721e-r5fss";
+-		ti,cluster-mode = <1>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges = <0x5c00000 0x00 0x5c00000 0x20000>,
+-			 <0x5d00000 0x00 0x5d00000 0x20000>;
+-		power-domains = <&k3_pds 243 TI_SCI_PD_EXCLUSIVE>;
+-
+-		main_r5fss0_core0: r5f@5c00000 {
+-			compatible = "ti,j721e-r5f";
+-			reg = <0x5c00000 0x00008000>,
+-			      <0x5c10000 0x00008000>;
+-			reg-names = "atcm", "btcm";
+-			ti,sci = <&dmsc>;
+-			ti,sci-dev-id = <245>;
+-			ti,sci-proc-ids = <0x06 0xff>;
+-			resets = <&k3_reset 245 1>;
+-			firmware-name = "j7-main-r5f0_0-fw";
+-			ti,atcm-enable = <1>;
+-			ti,btcm-enable = <1>;
+-			ti,loczrama = <1>;
+-		};
+-
+-		main_r5fss0_core1: r5f@5d00000 {
+-			compatible = "ti,j721e-r5f";
+-			reg = <0x5d00000 0x00008000>,
+-			      <0x5d10000 0x00008000>;
+-			reg-names = "atcm", "btcm";
+-			ti,sci = <&dmsc>;
+-			ti,sci-dev-id = <246>;
+-			ti,sci-proc-ids = <0x07 0xff>;
+-			resets = <&k3_reset 246 1>;
+-			firmware-name = "j7-main-r5f0_1-fw";
+-			ti,atcm-enable = <1>;
+-			ti,btcm-enable = <1>;
+-			ti,loczrama = <1>;
+-		};
+-	};
+-
+-	main_r5fss1: r5fss@5e00000 {
+-		compatible = "ti,j721e-r5fss";
+-		ti,cluster-mode = <1>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges = <0x5e00000 0x00 0x5e00000 0x20000>,
+-			 <0x5f00000 0x00 0x5f00000 0x20000>;
+-		power-domains = <&k3_pds 244 TI_SCI_PD_EXCLUSIVE>;
+-
+-		main_r5fss1_core0: r5f@5e00000 {
+-			compatible = "ti,j721e-r5f";
+-			reg = <0x5e00000 0x00008000>,
+-			      <0x5e10000 0x00008000>;
+-			reg-names = "atcm", "btcm";
+-			ti,sci = <&dmsc>;
+-			ti,sci-dev-id = <247>;
+-			ti,sci-proc-ids = <0x08 0xff>;
+-			resets = <&k3_reset 247 1>;
+-			firmware-name = "j7-main-r5f1_0-fw";
+-			ti,atcm-enable = <1>;
+-			ti,btcm-enable = <1>;
+-			ti,loczrama = <1>;
+-		};
+-
+-		main_r5fss1_core1: r5f@5f00000 {
+-			compatible = "ti,j721e-r5f";
+-			reg = <0x5f00000 0x00008000>,
+-			      <0x5f10000 0x00008000>;
+-			reg-names = "atcm", "btcm";
+-			ti,sci = <&dmsc>;
+-			ti,sci-dev-id = <248>;
+-			ti,sci-proc-ids = <0x09 0xff>;
+-			resets = <&k3_reset 248 1>;
+-			firmware-name = "j7-main-r5f1_1-fw";
+-			ti,atcm-enable = <1>;
+-			ti,btcm-enable = <1>;
+-			ti,loczrama = <1>;
+-		};
+-	};
+-
+-	c66_0: dsp@4d80800000 {
+-		compatible = "ti,j721e-c66-dsp";
+-		reg = <0x4d 0x80800000 0x00 0x00048000>,
+-		      <0x4d 0x80e00000 0x00 0x00008000>,
+-		      <0x4d 0x80f00000 0x00 0x00008000>;
+-		reg-names = "l2sram", "l1pram", "l1dram";
+-		ti,sci = <&dmsc>;
+-		ti,sci-dev-id = <142>;
+-		ti,sci-proc-ids = <0x03 0xff>;
+-		resets = <&k3_reset 142 1>;
+-		firmware-name = "j7-c66_0-fw";
+-		status = "disabled";
+-	};
+-
+-	c66_1: dsp@4d81800000 {
+-		compatible = "ti,j721e-c66-dsp";
+-		reg = <0x4d 0x81800000 0x00 0x00048000>,
+-		      <0x4d 0x81e00000 0x00 0x00008000>,
+-		      <0x4d 0x81f00000 0x00 0x00008000>;
+-		reg-names = "l2sram", "l1pram", "l1dram";
+-		ti,sci = <&dmsc>;
+-		ti,sci-dev-id = <143>;
+-		ti,sci-proc-ids = <0x04 0xff>;
+-		resets = <&k3_reset 143 1>;
+-		firmware-name = "j7-c66_1-fw";
+-		status = "disabled";
+-	};
+-
+-	c71_0: dsp@64800000 {
+-		compatible = "ti,j721e-c71-dsp";
+-		reg = <0x00 0x64800000 0x00 0x00080000>,
+-		      <0x00 0x64e00000 0x00 0x0000c000>;
+-		reg-names = "l2sram", "l1dram";
+-		ti,sci = <&dmsc>;
+-		ti,sci-dev-id = <15>;
+-		ti,sci-proc-ids = <0x30 0xff>;
+-		resets = <&k3_reset 15 1>;
+-		firmware-name = "j7-c71_0-fw";
+-		status = "disabled";
+-	};
+-
+-	icssg0: icssg@b000000 {
+-		compatible = "ti,j721e-icssg";
+-		reg = <0x00 0xb000000 0x00 0x80000>;
+-		power-domains = <&k3_pds 119 TI_SCI_PD_EXCLUSIVE>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges = <0x0 0x00 0x0b000000 0x100000>;
+-
+-		icssg0_mem: memories@0 {
+-			reg = <0x0 0x2000>,
+-			      <0x2000 0x2000>,
+-			      <0x10000 0x10000>;
+-			reg-names = "dram0", "dram1",
+-				    "shrdram2";
+-		};
+-
+-		icssg0_cfg: cfg@26000 {
+-			compatible = "ti,pruss-cfg", "syscon";
+-			reg = <0x26000 0x200>;
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			ranges = <0x0 0x26000 0x2000>;
+-
+-			clocks {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-
+-				icssg0_coreclk_mux: coreclk-mux@3c {
+-					reg = <0x3c>;
+-					#clock-cells = <0>;
+-					clocks = <&k3_clks 119 24>, /* icssg0_core_clk */
+-						 <&k3_clks 119 1>;  /* icssg0_iclk */
+-					assigned-clocks = <&icssg0_coreclk_mux>;
+-					assigned-clock-parents = <&k3_clks 119 1>;
 -				};
--				board-cfg.bin {
--					description = "board-cfg";
--					type = "firmware";
--					arch = "arm";
--					compression = "none";
--					blob-ext {
--						filename = "board-cfg.bin";
--					};
--				};
--				pm-cfg.bin {
--					description = "pm-cfg";
--					type = "firmware";
--					arch = "arm";
--					compression = "none";
--					blob-ext {
--						filename = "pm-cfg.bin";
--					};
--				};
--				rm-cfg.bin {
--					description = "rm-cfg";
--					type = "firmware";
--					arch = "arm";
--					compression = "none";
--					blob-ext {
--						filename = "rm-cfg.bin";
--					};
--				};
--				sec-cfg.bin {
--					description = "sec-cfg";
--					type = "firmware";
--					arch = "arm";
--					compression = "none";
--					blob-ext {
--						filename = "sec-cfg.bin";
--					};
+-
+-				icssg0_iepclk_mux: iepclk-mux@30 {
+-					reg = <0x30>;
+-					#clock-cells = <0>;
+-					clocks = <&k3_clks 119 3>,	/* icssg0_iep_clk */
+-						 <&icssg0_coreclk_mux>;	/* core_clk */
+-					assigned-clocks = <&icssg0_iepclk_mux>;
+-					assigned-clock-parents = <&icssg0_coreclk_mux>;
 -				};
 -			};
 -		};
-+	itb-j721e-beagleboneai64 {
-+		insert-template = <&itb_gp>;
- 	};
- };
-+
-+#endif
+-
+-		icssg0_mii_rt: mii-rt@32000 {
+-			compatible = "ti,pruss-mii", "syscon";
+-			reg = <0x32000 0x100>;
+-		};
+-
+-		icssg0_mii_g_rt: mii-g-rt@33000 {
+-			compatible = "ti,pruss-mii-g", "syscon";
+-			reg = <0x33000 0x1000>;
+-		};
+-
+-		icssg0_intc: interrupt-controller@20000 {
+-			compatible = "ti,icssg-intc";
+-			reg = <0x20000 0x2000>;
+-			interrupt-controller;
+-			#interrupt-cells = <3>;
+-			interrupts = <GIC_SPI 254 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 255 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 256 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 257 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 258 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 259 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 260 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 261 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-names = "host_intr0", "host_intr1",
+-					  "host_intr2", "host_intr3",
+-					  "host_intr4", "host_intr5",
+-					  "host_intr6", "host_intr7";
+-		};
+-
+-		pru0_0: pru@34000 {
+-			compatible = "ti,j721e-pru";
+-			reg = <0x34000 0x3000>,
+-			      <0x22000 0x100>,
+-			      <0x22400 0x100>;
+-			reg-names = "iram", "control", "debug";
+-			firmware-name = "j7-pru0_0-fw";
+-		};
+-
+-		rtu0_0: rtu@4000 {
+-			compatible = "ti,j721e-rtu";
+-			reg = <0x4000 0x2000>,
+-			      <0x23000 0x100>,
+-			      <0x23400 0x100>;
+-			reg-names = "iram", "control", "debug";
+-			firmware-name = "j7-rtu0_0-fw";
+-		};
+-
+-		tx_pru0_0: txpru@a000 {
+-			compatible = "ti,j721e-tx-pru";
+-			reg = <0xa000 0x1800>,
+-			      <0x25000 0x100>,
+-			      <0x25400 0x100>;
+-			reg-names = "iram", "control", "debug";
+-			firmware-name = "j7-txpru0_0-fw";
+-		};
+-
+-		pru0_1: pru@38000 {
+-			compatible = "ti,j721e-pru";
+-			reg = <0x38000 0x3000>,
+-			      <0x24000 0x100>,
+-			      <0x24400 0x100>;
+-			reg-names = "iram", "control", "debug";
+-			firmware-name = "j7-pru0_1-fw";
+-		};
+-
+-		rtu0_1: rtu@6000 {
+-			compatible = "ti,j721e-rtu";
+-			reg = <0x6000 0x2000>,
+-			      <0x23800 0x100>,
+-			      <0x23c00 0x100>;
+-			reg-names = "iram", "control", "debug";
+-			firmware-name = "j7-rtu0_1-fw";
+-		};
+-
+-		tx_pru0_1: txpru@c000 {
+-			compatible = "ti,j721e-tx-pru";
+-			reg = <0xc000 0x1800>,
+-			      <0x25800 0x100>,
+-			      <0x25c00 0x100>;
+-			reg-names = "iram", "control", "debug";
+-			firmware-name = "j7-txpru0_1-fw";
+-		};
+-
+-		icssg0_mdio: mdio@32400 {
+-			compatible = "ti,davinci_mdio";
+-			reg = <0x32400 0x100>;
+-			clocks = <&k3_clks 119 1>;
+-			clock-names = "fck";
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			bus_freq = <1000000>;
+-			status = "disabled";
+-		};
+-	};
+-
+-	icssg1: icssg@b100000 {
+-		compatible = "ti,j721e-icssg";
+-		reg = <0x00 0xb100000 0x00 0x80000>;
+-		power-domains = <&k3_pds 120 TI_SCI_PD_EXCLUSIVE>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges = <0x0 0x00 0x0b100000 0x100000>;
+-
+-		icssg1_mem: memories@b100000 {
+-			reg = <0x0 0x2000>,
+-			      <0x2000 0x2000>,
+-			      <0x10000 0x10000>;
+-			reg-names = "dram0", "dram1",
+-				    "shrdram2";
+-		};
+-
+-		icssg1_cfg: cfg@26000 {
+-			compatible = "ti,pruss-cfg", "syscon";
+-			reg = <0x26000 0x200>;
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			ranges = <0x0 0x26000 0x2000>;
+-
+-			clocks {
+-				#address-cells = <1>;
+-				#size-cells = <0>;
+-
+-				icssg1_coreclk_mux: coreclk-mux@3c {
+-					reg = <0x3c>;
+-					#clock-cells = <0>;
+-					clocks = <&k3_clks 120 54>, /* icssg1_core_clk */
+-						 <&k3_clks 120 4>;  /* icssg1_iclk */
+-					assigned-clocks = <&icssg1_coreclk_mux>;
+-					assigned-clock-parents = <&k3_clks 120 4>;
+-				};
+-
+-				icssg1_iepclk_mux: iepclk-mux@30 {
+-					reg = <0x30>;
+-					#clock-cells = <0>;
+-					clocks = <&k3_clks 120 9>,	/* icssg1_iep_clk */
+-						 <&icssg1_coreclk_mux>;	/* core_clk */
+-					assigned-clocks = <&icssg1_iepclk_mux>;
+-					assigned-clock-parents = <&icssg1_coreclk_mux>;
+-				};
+-			};
+-		};
+-
+-		icssg1_mii_rt: mii-rt@32000 {
+-			compatible = "ti,pruss-mii", "syscon";
+-			reg = <0x32000 0x100>;
+-		};
+-
+-		icssg1_mii_g_rt: mii-g-rt@33000 {
+-			compatible = "ti,pruss-mii-g", "syscon";
+-			reg = <0x33000 0x1000>;
+-		};
+-
+-		icssg1_intc: interrupt-controller@20000 {
+-			compatible = "ti,icssg-intc";
+-			reg = <0x20000 0x2000>;
+-			interrupt-controller;
+-			#interrupt-cells = <3>;
+-			interrupts = <GIC_SPI 262 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 263 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 264 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 265 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 266 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 267 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 268 IRQ_TYPE_LEVEL_HIGH>,
+-				     <GIC_SPI 269 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-names = "host_intr0", "host_intr1",
+-					  "host_intr2", "host_intr3",
+-					  "host_intr4", "host_intr5",
+-					  "host_intr6", "host_intr7";
+-		};
+-
+-		pru1_0: pru@34000 {
+-			compatible = "ti,j721e-pru";
+-			reg = <0x34000 0x4000>,
+-			      <0x22000 0x100>,
+-			      <0x22400 0x100>;
+-			reg-names = "iram", "control", "debug";
+-			firmware-name = "j7-pru1_0-fw";
+-		};
+-
+-		rtu1_0: rtu@4000 {
+-			compatible = "ti,j721e-rtu";
+-			reg = <0x4000 0x2000>,
+-			      <0x23000 0x100>,
+-			      <0x23400 0x100>;
+-			reg-names = "iram", "control", "debug";
+-			firmware-name = "j7-rtu1_0-fw";
+-		};
+-
+-		tx_pru1_0: txpru@a000 {
+-			compatible = "ti,j721e-tx-pru";
+-			reg = <0xa000 0x1800>,
+-			      <0x25000 0x100>,
+-			      <0x25400 0x100>;
+-			reg-names = "iram", "control", "debug";
+-			firmware-name = "j7-txpru1_0-fw";
+-		};
+-
+-		pru1_1: pru@38000 {
+-			compatible = "ti,j721e-pru";
+-			reg = <0x38000 0x4000>,
+-			      <0x24000 0x100>,
+-			      <0x24400 0x100>;
+-			reg-names = "iram", "control", "debug";
+-			firmware-name = "j7-pru1_1-fw";
+-		};
+-
+-		rtu1_1: rtu@6000 {
+-			compatible = "ti,j721e-rtu";
+-			reg = <0x6000 0x2000>,
+-			      <0x23800 0x100>,
+-			      <0x23c00 0x100>;
+-			reg-names = "iram", "control", "debug";
+-			firmware-name = "j7-rtu1_1-fw";
+-		};
+-
+-		tx_pru1_1: txpru@c000 {
+-			compatible = "ti,j721e-tx-pru";
+-			reg = <0xc000 0x1800>,
+-			      <0x25800 0x100>,
+-			      <0x25c00 0x100>;
+-			reg-names = "iram", "control", "debug";
+-			firmware-name = "j7-txpru1_1-fw";
+-		};
+-
+-		icssg1_mdio: mdio@32400 {
+-			compatible = "ti,davinci_mdio";
+-			reg = <0x32400 0x100>;
+-			clocks = <&k3_clks 120 4>;
+-			clock-names = "fck";
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			bus_freq = <1000000>;
+-			status = "disabled";
+-		};
+-	};
+-
+-	main_mcan0: can@2701000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x02701000 0x00 0x200>,
+-		      <0x00 0x02708000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 156 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 156 0>, <&k3_clks 156 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 124 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 125 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan1: can@2711000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x02711000 0x00 0x200>,
+-		      <0x00 0x02718000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 158 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 158 0>, <&k3_clks 158 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 127 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 128 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan2: can@2721000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x02721000 0x00 0x200>,
+-		      <0x00 0x02728000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 160 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 160 0>, <&k3_clks 160 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 130 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 131 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan3: can@2731000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x02731000 0x00 0x200>,
+-		      <0x00 0x02738000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 161 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 161 0>, <&k3_clks 161 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 133 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 134 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan4: can@2741000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x02741000 0x00 0x200>,
+-		      <0x00 0x02748000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 162 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 162 0>, <&k3_clks 162 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 136 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 137 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan5: can@2751000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x02751000 0x00 0x200>,
+-		      <0x00 0x02758000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 163 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 163 0>, <&k3_clks 163 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 139 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 140 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan6: can@2761000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x02761000 0x00 0x200>,
+-		      <0x00 0x02768000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 164 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 164 0>, <&k3_clks 164 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 142 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 143 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan7: can@2771000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x02771000 0x00 0x200>,
+-		      <0x00 0x02778000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 165 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 165 0>, <&k3_clks 165 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 145 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 146 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan8: can@2781000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x02781000 0x00 0x200>,
+-		      <0x00 0x02788000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 166 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 166 0>, <&k3_clks 166 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 576 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 577 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan9: can@2791000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x02791000 0x00 0x200>,
+-		      <0x00 0x02798000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 167 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 167 0>, <&k3_clks 167 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 579 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 580 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan10: can@27a1000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x027a1000 0x00 0x200>,
+-		      <0x00 0x027a8000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 168 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 168 0>, <&k3_clks 168 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 582 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 583 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan11: can@27b1000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x027b1000 0x00 0x200>,
+-		      <0x00 0x027b8000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 169 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 169 0>, <&k3_clks 169 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 585 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 586 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan12: can@27c1000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x027c1000 0x00 0x200>,
+-		      <0x00 0x027c8000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 170 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 170 0>, <&k3_clks 170 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 588 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 589 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_mcan13: can@27d1000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x027d1000 0x00 0x200>,
+-		      <0x00 0x027d8000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 171 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 171 0>, <&k3_clks 171 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 591 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 592 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	main_spi0: spi@2100000 {
+-		compatible = "ti,am654-mcspi","ti,omap4-mcspi";
+-		reg = <0x00 0x02100000 0x00 0x400>;
+-		interrupts = <GIC_SPI 184 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		power-domains = <&k3_pds 266 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 266 1>;
+-		status = "disabled";
+-	};
+-
+-	main_spi1: spi@2110000 {
+-		compatible = "ti,am654-mcspi","ti,omap4-mcspi";
+-		reg = <0x00 0x02110000 0x00 0x400>;
+-		interrupts = <GIC_SPI 185 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		power-domains = <&k3_pds 267 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 267 1>;
+-		status = "disabled";
+-	};
+-
+-	main_spi2: spi@2120000 {
+-		compatible = "ti,am654-mcspi","ti,omap4-mcspi";
+-		reg = <0x00 0x02120000 0x00 0x400>;
+-		interrupts = <GIC_SPI 186 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		power-domains = <&k3_pds 268 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 268 1>;
+-		status = "disabled";
+-	};
+-
+-	main_spi3: spi@2130000 {
+-		compatible = "ti,am654-mcspi","ti,omap4-mcspi";
+-		reg = <0x00 0x02130000 0x00 0x400>;
+-		interrupts = <GIC_SPI 187 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		power-domains = <&k3_pds 269 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 269 1>;
+-		status = "disabled";
+-	};
+-
+-	main_spi4: spi@2140000 {
+-		compatible = "ti,am654-mcspi","ti,omap4-mcspi";
+-		reg = <0x00 0x02140000 0x00 0x400>;
+-		interrupts = <GIC_SPI 188 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		power-domains = <&k3_pds 270 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 270 1>;
+-		status = "disabled";
+-	};
+-
+-	main_spi5: spi@2150000 {
+-		compatible = "ti,am654-mcspi","ti,omap4-mcspi";
+-		reg = <0x00 0x02150000 0x00 0x400>;
+-		interrupts = <GIC_SPI 189 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		power-domains = <&k3_pds 271 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 271 1>;
+-		status = "disabled";
+-	};
+-
+-	main_spi6: spi@2160000 {
+-		compatible = "ti,am654-mcspi","ti,omap4-mcspi";
+-		reg = <0x00 0x02160000 0x00 0x400>;
+-		interrupts = <GIC_SPI 190 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		power-domains = <&k3_pds 272 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 272 1>;
+-		status = "disabled";
+-	};
+-
+-	main_spi7: spi@2170000 {
+-		compatible = "ti,am654-mcspi","ti,omap4-mcspi";
+-		reg = <0x00 0x02170000 0x00 0x400>;
+-		interrupts = <GIC_SPI 191 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		power-domains = <&k3_pds 273 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 273 1>;
+-		status = "disabled";
+-	};
+-
+-	main_esm: esm@700000 {
+-		compatible = "ti,j721e-esm";
+-		reg = <0x0 0x700000 0x0 0x1000>;
+-		ti,esm-pins = <344>, <345>;
+-	};
+-};
+diff --git a/arch/arm/dts/k3-j721e-mcu-wakeup.dtsi b/arch/arm/dts/k3-j721e-mcu-wakeup.dtsi
+deleted file mode 100644
+index f7ab7719fc0..00000000000
+--- a/arch/arm/dts/k3-j721e-mcu-wakeup.dtsi
++++ /dev/null
+@@ -1,681 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * Device Tree Source for J721E SoC Family MCU/WAKEUP Domain peripherals
+- *
+- * Copyright (C) 2016-2020 Texas Instruments Incorporated - https://www.ti.com/
+- */
+-
+-&cbass_mcu_wakeup {
+-	dmsc: system-controller@44083000 {
+-		compatible = "ti,k2g-sci";
+-		ti,host-id = <12>;
+-
+-		mbox-names = "rx", "tx";
+-
+-		mboxes = <&secure_proxy_main 11>,
+-			 <&secure_proxy_main 13>;
+-
+-		reg-names = "debug_messages";
+-		reg = <0x00 0x44083000 0x0 0x1000>;
+-
+-		k3_pds: power-controller {
+-			compatible = "ti,sci-pm-domain";
+-			#power-domain-cells = <2>;
+-		};
+-
+-		k3_clks: clock-controller {
+-			compatible = "ti,k2g-sci-clk";
+-			#clock-cells = <2>;
+-		};
+-
+-		k3_reset: reset-controller {
+-			compatible = "ti,sci-reset";
+-			#reset-cells = <2>;
+-		};
+-	};
+-
+-	mcu_conf: syscon@40f00000 {
+-		compatible = "syscon", "simple-mfd";
+-		reg = <0x0 0x40f00000 0x0 0x20000>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges = <0x0 0x0 0x40f00000 0x20000>;
+-
+-		phy_gmii_sel: phy@4040 {
+-			compatible = "ti,am654-phy-gmii-sel";
+-			reg = <0x4040 0x4>;
+-			#phy-cells = <1>;
+-		};
+-	};
+-
+-	chipid@43000014 {
+-		compatible = "ti,am654-chipid";
+-		reg = <0x0 0x43000014 0x0 0x4>;
+-	};
+-
+-	wkup_pmx0: pinctrl@4301c000 {
+-		compatible = "pinctrl-single";
+-		/* Proxy 0 addressing */
+-		reg = <0x00 0x4301c000 0x00 0x178>;
+-		#pinctrl-cells = <1>;
+-		pinctrl-single,register-width = <32>;
+-		pinctrl-single,function-mask = <0xffffffff>;
+-	};
+-
+-	/* MCU_TIMERIO pad input CTRLMMR_MCU_TIMER*_CTRL registers */
+-	mcu_timerio_input: pinctrl@40f04200 {
+-		compatible = "pinctrl-single";
+-		reg = <0x00 0x40f04200 0x00 0x28>;
+-		#pinctrl-cells = <1>;
+-		pinctrl-single,register-width = <32>;
+-		pinctrl-single,function-mask = <0x0000000f>;
+-		/* Non-MPU Firmware usage */
+-		status = "reserved";
+-	};
+-
+-	/* MCU_TIMERIO pad output CTRLMMR_MCU_TIMERIO*_CTRL registers */
+-	mcu_timerio_output: pinctrl@40f04280 {
+-		compatible = "pinctrl-single";
+-		reg = <0x00 0x40f04280 0x00 0x28>;
+-		#pinctrl-cells = <1>;
+-		pinctrl-single,register-width = <32>;
+-		pinctrl-single,function-mask = <0x0000000f>;
+-		/* Non-MPU Firmware usage */
+-		status = "reserved";
+-	};
+-
+-	mcu_ram: sram@41c00000 {
+-		compatible = "mmio-sram";
+-		reg = <0x00 0x41c00000 0x00 0x100000>;
+-		ranges = <0x0 0x00 0x41c00000 0x100000>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-	};
+-
+-	mcu_timer0: timer@40400000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x40400000 0x00 0x400>;
+-		interrupts = <GIC_SPI 816 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 35 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 35 1>;
+-		assigned-clock-parents = <&k3_clks 35 2>;
+-		power-domains = <&k3_pds 35 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-		/* Non-MPU Firmware usage */
+-		status = "reserved";
+-	};
+-
+-	mcu_timer1: timer@40410000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x40410000 0x00 0x400>;
+-		interrupts = <GIC_SPI 817 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 71 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 71 1>, <&k3_clks 322 0>;
+-		assigned-clock-parents = <&k3_clks 71 2>, <&k3_clks 322 1>;
+-		power-domains = <&k3_pds 71 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-		/* Non-MPU Firmware usage */
+-		status = "reserved";
+-	};
+-
+-	mcu_timer2: timer@40420000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x40420000 0x00 0x400>;
+-		interrupts = <GIC_SPI 818 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 72 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 72 1>;
+-		assigned-clock-parents = <&k3_clks 72 2>;
+-		power-domains = <&k3_pds 72 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-		/* Non-MPU Firmware usage */
+-		status = "reserved";
+-	};
+-
+-	mcu_timer3: timer@40430000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x40430000 0x00 0x400>;
+-		interrupts = <GIC_SPI 819 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 73 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 73 1>, <&k3_clks 323 0>;
+-		assigned-clock-parents = <&k3_clks 73 2>, <&k3_clks 323 1>;
+-		power-domains = <&k3_pds 73 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-		/* Non-MPU Firmware usage */
+-		status = "reserved";
+-	};
+-
+-	mcu_timer4: timer@40440000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x40440000 0x00 0x400>;
+-		interrupts = <GIC_SPI 820 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 74 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 74 1>;
+-		assigned-clock-parents = <&k3_clks 74 2>;
+-		power-domains = <&k3_pds 74 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-		/* Non-MPU Firmware usage */
+-		status = "reserved";
+-	};
+-
+-	mcu_timer5: timer@40450000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x40450000 0x00 0x400>;
+-		interrupts = <GIC_SPI 821 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 75 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 75 1>, <&k3_clks 324 0>;
+-		assigned-clock-parents = <&k3_clks 75 2>, <&k3_clks 324 1>;
+-		power-domains = <&k3_pds 75 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-		/* Non-MPU Firmware usage */
+-		status = "reserved";
+-	};
+-
+-	mcu_timer6: timer@40460000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x40460000 0x00 0x400>;
+-		interrupts = <GIC_SPI 822 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 76 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 76 1>;
+-		assigned-clock-parents = <&k3_clks 76 2>;
+-		power-domains = <&k3_pds 76 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-		/* Non-MPU Firmware usage */
+-		status = "reserved";
+-	};
+-
+-	mcu_timer7: timer@40470000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x40470000 0x00 0x400>;
+-		interrupts = <GIC_SPI 823 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 77 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 77 1>, <&k3_clks 325 0>;
+-		assigned-clock-parents = <&k3_clks 77 2>, <&k3_clks 325 1>;
+-		power-domains = <&k3_pds 77 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-		/* Non-MPU Firmware usage */
+-		status = "reserved";
+-	};
+-
+-	mcu_timer8: timer@40480000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x40480000 0x00 0x400>;
+-		interrupts = <GIC_SPI 824 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 78 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 78 1>;
+-		assigned-clock-parents = <&k3_clks 78 2>;
+-		power-domains = <&k3_pds 78 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-		/* Non-MPU Firmware usage */
+-		status = "reserved";
+-	};
+-
+-	mcu_timer9: timer@40490000 {
+-		compatible = "ti,am654-timer";
+-		reg = <0x00 0x40490000 0x00 0x400>;
+-		interrupts = <GIC_SPI 825 IRQ_TYPE_LEVEL_HIGH>;
+-		clocks = <&k3_clks 79 1>;
+-		clock-names = "fck";
+-		assigned-clocks = <&k3_clks 79 1>, <&k3_clks 326 0>;
+-		assigned-clock-parents = <&k3_clks 79 2>, <&k3_clks 326 1>;
+-		power-domains = <&k3_pds 79 TI_SCI_PD_EXCLUSIVE>;
+-		ti,timer-pwm;
+-		/* Non-MPU Firmware usage */
+-		status = "reserved";
+-	};
+-	wkup_uart0: serial@42300000 {
+-		compatible = "ti,j721e-uart", "ti,am654-uart";
+-		reg = <0x00 0x42300000 0x00 0x100>;
+-		interrupts = <GIC_SPI 897 IRQ_TYPE_LEVEL_HIGH>;
+-		clock-frequency = <48000000>;
+-		current-speed = <115200>;
+-		power-domains = <&k3_pds 287 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 287 0>;
+-		clock-names = "fclk";
+-		status = "disabled";
+-	};
+-
+-	mcu_uart0: serial@40a00000 {
+-		compatible = "ti,j721e-uart", "ti,am654-uart";
+-		reg = <0x00 0x40a00000 0x00 0x100>;
+-		interrupts = <GIC_SPI 846 IRQ_TYPE_LEVEL_HIGH>;
+-		clock-frequency = <96000000>;
+-		current-speed = <115200>;
+-		power-domains = <&k3_pds 149 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 149 0>;
+-		clock-names = "fclk";
+-		status = "disabled";
+-	};
+-
+-	wkup_gpio_intr: interrupt-controller@42200000 {
+-		compatible = "ti,sci-intr";
+-		reg = <0x00 0x42200000 0x00 0x400>;
+-		ti,intr-trigger-type = <1>;
+-		interrupt-controller;
+-		interrupt-parent = <&gic500>;
+-		#interrupt-cells = <1>;
+-		ti,sci = <&dmsc>;
+-		ti,sci-dev-id = <137>;
+-		ti,interrupt-ranges = <16 960 16>;
+-	};
+-
+-	wkup_gpio0: gpio@42110000 {
+-		compatible = "ti,j721e-gpio", "ti,keystone-gpio";
+-		reg = <0x0 0x42110000 0x0 0x100>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-parent = <&wkup_gpio_intr>;
+-		interrupts = <103>, <104>, <105>, <106>, <107>, <108>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		ti,ngpio = <84>;
+-		ti,davinci-gpio-unbanked = <0>;
+-		power-domains = <&k3_pds 113 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 113 0>;
+-		clock-names = "gpio";
+-		status = "disabled";
+-	};
+-
+-	wkup_gpio1: gpio@42100000 {
+-		compatible = "ti,j721e-gpio", "ti,keystone-gpio";
+-		reg = <0x0 0x42100000 0x0 0x100>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-		interrupt-parent = <&wkup_gpio_intr>;
+-		interrupts = <112>, <113>, <114>, <115>, <116>, <117>;
+-		interrupt-controller;
+-		#interrupt-cells = <2>;
+-		ti,ngpio = <84>;
+-		ti,davinci-gpio-unbanked = <0>;
+-		power-domains = <&k3_pds 114 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 114 0>;
+-		clock-names = "gpio";
+-		status = "disabled";
+-	};
+-
+-	mcu_i2c0: i2c@40b00000 {
+-		compatible = "ti,j721e-i2c", "ti,omap4-i2c";
+-		reg = <0x0 0x40b00000 0x0 0x100>;
+-		interrupts = <GIC_SPI 852 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		clock-names = "fck";
+-		clocks = <&k3_clks 194 0>;
+-		power-domains = <&k3_pds 194 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	mcu_i2c1: i2c@40b10000 {
+-		compatible = "ti,j721e-i2c", "ti,omap4-i2c";
+-		reg = <0x0 0x40b10000 0x0 0x100>;
+-		interrupts = <GIC_SPI 853 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		clock-names = "fck";
+-		clocks = <&k3_clks 195 0>;
+-		power-domains = <&k3_pds 195 TI_SCI_PD_EXCLUSIVE>;
+-		status = "disabled";
+-	};
+-
+-	wkup_i2c0: i2c@42120000 {
+-		compatible = "ti,j721e-i2c", "ti,omap4-i2c";
+-		reg = <0x0 0x42120000 0x0 0x100>;
+-		interrupts = <GIC_SPI 896 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		clock-names = "fck";
+-		clocks = <&k3_clks 197 0>;
+-		power-domains = <&k3_pds 197 TI_SCI_PD_SHARED>;
+-		status = "disabled";
+-	};
+-
+-	fss: bus@47000000 {
+-		compatible = "simple-bus";
+-		reg = <0x0 0x47000000 0x0 0x100>;
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-		ranges;
+-
+-		hbmc_mux: mux-controller@47000004 {
+-			compatible = "reg-mux";
+-			reg = <0x00 0x47000004 0x00 0x2>;
+-			#mux-control-cells = <1>;
+-			mux-reg-masks = <0x4 0x2>; /* HBMC select */
+-		};
+-
+-		hbmc: hyperbus@47034000 {
+-			compatible = "ti,am654-hbmc";
+-			reg = <0x00 0x47034000 0x00 0x100>,
+-				<0x05 0x00000000 0x01 0x0000000>;
+-			power-domains = <&k3_pds 102 TI_SCI_PD_EXCLUSIVE>;
+-			clocks = <&k3_clks 102 0>;
+-			assigned-clocks = <&k3_clks 102 5>;
+-			assigned-clock-rates = <333333333>;
+-			#address-cells = <2>;
+-			#size-cells = <1>;
+-			mux-controls = <&hbmc_mux 0>;
+-			status = "disabled";
+-		};
+-
+-		ospi0: spi@47040000 {
+-			compatible = "ti,am654-ospi", "cdns,qspi-nor";
+-			reg = <0x0 0x47040000 0x0 0x100>,
+-				<0x5 0x00000000 0x1 0x0000000>;
+-			interrupts = <GIC_SPI 840 IRQ_TYPE_LEVEL_HIGH>;
+-			cdns,fifo-depth = <256>;
+-			cdns,fifo-width = <4>;
+-			cdns,trigger-address = <0x0>;
+-			clocks = <&k3_clks 103 0>;
+-			assigned-clocks = <&k3_clks 103 0>;
+-			assigned-clock-parents = <&k3_clks 103 2>;
+-			assigned-clock-rates = <166666666>;
+-			power-domains = <&k3_pds 103 TI_SCI_PD_EXCLUSIVE>;
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			status = "disabled";
+-		};
+-
+-		ospi1: spi@47050000 {
+-			compatible = "ti,am654-ospi", "cdns,qspi-nor";
+-			reg = <0x0 0x47050000 0x0 0x100>,
+-				<0x7 0x00000000 0x1 0x00000000>;
+-			interrupts = <GIC_SPI 841 IRQ_TYPE_LEVEL_HIGH>;
+-			cdns,fifo-depth = <256>;
+-			cdns,fifo-width = <4>;
+-			cdns,trigger-address = <0x0>;
+-			clocks = <&k3_clks 104 0>;
+-			power-domains = <&k3_pds 104 TI_SCI_PD_EXCLUSIVE>;
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			status = "disabled";
+-		};
+-	};
+-
+-	tscadc0: tscadc@40200000 {
+-		compatible = "ti,am3359-tscadc";
+-		reg = <0x0 0x40200000 0x0 0x1000>;
+-		interrupts = <GIC_SPI 860 IRQ_TYPE_LEVEL_HIGH>;
+-		power-domains = <&k3_pds 0 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 0 1>;
+-		assigned-clocks = <&k3_clks 0 3>;
+-		assigned-clock-rates = <60000000>;
+-		clock-names = "fck";
+-		dmas = <&main_udmap 0x7400>,
+-			<&main_udmap 0x7401>;
+-		dma-names = "fifo0", "fifo1";
+-		status = "disabled";
+-
+-		adc {
+-			#io-channel-cells = <1>;
+-			compatible = "ti,am3359-adc";
+-		};
+-	};
+-
+-	tscadc1: tscadc@40210000 {
+-		compatible = "ti,am3359-tscadc";
+-		reg = <0x0 0x40210000 0x0 0x1000>;
+-		interrupts = <GIC_SPI 861 IRQ_TYPE_LEVEL_HIGH>;
+-		power-domains = <&k3_pds 1 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 1 1>;
+-		assigned-clocks = <&k3_clks 1 3>;
+-		assigned-clock-rates = <60000000>;
+-		clock-names = "fck";
+-		dmas = <&main_udmap 0x7402>,
+-			<&main_udmap 0x7403>;
+-		dma-names = "fifo0", "fifo1";
+-		status = "disabled";
+-
+-		adc {
+-			#io-channel-cells = <1>;
+-			compatible = "ti,am3359-adc";
+-		};
+-	};
+-
+-	mcu_navss: bus@28380000 {
+-		compatible = "simple-bus";
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-		ranges = <0x00 0x28380000 0x00 0x28380000 0x00 0x03880000>;
+-		dma-coherent;
+-		dma-ranges;
+-
+-		ti,sci-dev-id = <232>;
+-
+-		mcu_ringacc: ringacc@2b800000 {
+-			compatible = "ti,am654-navss-ringacc";
+-			reg = <0x0 0x2b800000 0x0 0x400000>,
+-			      <0x0 0x2b000000 0x0 0x400000>,
+-			      <0x0 0x28590000 0x0 0x100>,
+-			      <0x0 0x2a500000 0x0 0x40000>,
+-			      <0x0 0x28440000 0x0 0x40000>;
+-			reg-names = "rt", "fifos", "proxy_gcfg", "proxy_target", "cfg";
+-			ti,num-rings = <286>;
+-			ti,sci-rm-range-gp-rings = <0x1>; /* GP ring range */
+-			ti,sci = <&dmsc>;
+-			ti,sci-dev-id = <235>;
+-			msi-parent = <&main_udmass_inta>;
+-		};
+-
+-		mcu_udmap: dma-controller@285c0000 {
+-			compatible = "ti,j721e-navss-mcu-udmap";
+-			reg = <0x0 0x285c0000 0x0 0x100>,
+-			      <0x0 0x2a800000 0x0 0x40000>,
+-			      <0x0 0x2aa00000 0x0 0x40000>;
+-			reg-names = "gcfg", "rchanrt", "tchanrt";
+-			msi-parent = <&main_udmass_inta>;
+-			#dma-cells = <1>;
+-
+-			ti,sci = <&dmsc>;
+-			ti,sci-dev-id = <236>;
+-			ti,ringacc = <&mcu_ringacc>;
+-
+-			ti,sci-rm-range-tchan = <0x0d>, /* TX_CHAN */
+-						<0x0f>; /* TX_HCHAN */
+-			ti,sci-rm-range-rchan = <0x0a>, /* RX_CHAN */
+-						<0x0b>; /* RX_HCHAN */
+-			ti,sci-rm-range-rflow = <0x00>; /* GP RFLOW */
+-		};
+-	};
+-
+-	secure_proxy_mcu: mailbox@2a480000 {
+-		compatible = "ti,am654-secure-proxy";
+-		#mbox-cells = <1>;
+-		reg-names = "target_data", "rt", "scfg";
+-		reg = <0x0 0x2a480000 0x0 0x80000>,
+-		      <0x0 0x2a380000 0x0 0x80000>,
+-		      <0x0 0x2a400000 0x0 0x80000>;
+-		/*
+-		 * Marked Disabled:
+-		 * Node is incomplete as it is meant for bootloaders and
+-		 * firmware on non-MPU processors
+-		 */
+-		status = "disabled";
+-	};
+-
+-	mcu_cpsw: ethernet@46000000 {
+-		compatible = "ti,j721e-cpsw-nuss";
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-		reg = <0x0 0x46000000 0x0 0x200000>;
+-		reg-names = "cpsw_nuss";
+-		ranges = <0x0 0x0 0x0 0x46000000 0x0 0x200000>;
+-		dma-coherent;
+-		clocks = <&k3_clks 18 22>;
+-		clock-names = "fck";
+-		power-domains = <&k3_pds 18 TI_SCI_PD_EXCLUSIVE>;
+-
+-		dmas = <&mcu_udmap 0xf000>,
+-		       <&mcu_udmap 0xf001>,
+-		       <&mcu_udmap 0xf002>,
+-		       <&mcu_udmap 0xf003>,
+-		       <&mcu_udmap 0xf004>,
+-		       <&mcu_udmap 0xf005>,
+-		       <&mcu_udmap 0xf006>,
+-		       <&mcu_udmap 0xf007>,
+-		       <&mcu_udmap 0x7000>;
+-		dma-names = "tx0", "tx1", "tx2", "tx3",
+-			    "tx4", "tx5", "tx6", "tx7",
+-			    "rx";
+-
+-		ethernet-ports {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-
+-			cpsw_port1: port@1 {
+-				reg = <1>;
+-				ti,mac-only;
+-				label = "port1";
+-				ti,syscon-efuse = <&mcu_conf 0x200>;
+-				phys = <&phy_gmii_sel 1>;
+-			};
+-		};
+-
+-		davinci_mdio: mdio@f00 {
+-			compatible = "ti,cpsw-mdio","ti,davinci_mdio";
+-			reg = <0x0 0xf00 0x0 0x100>;
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			clocks = <&k3_clks 18 22>;
+-			clock-names = "fck";
+-			bus_freq = <1000000>;
+-		};
+-
+-		cpts@3d000 {
+-			compatible = "ti,am65-cpts";
+-			reg = <0x0 0x3d000 0x0 0x400>;
+-			clocks = <&k3_clks 18 2>;
+-			clock-names = "cpts";
+-			interrupts-extended = <&gic500 GIC_SPI 858 IRQ_TYPE_LEVEL_HIGH>;
+-			interrupt-names = "cpts";
+-			ti,cpts-ext-ts-inputs = <4>;
+-			ti,cpts-periodic-outputs = <2>;
+-		};
+-	};
+-
+-	mcu_r5fss0: r5fss@41000000 {
+-		compatible = "ti,j721e-r5fss";
+-		ti,cluster-mode = <1>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		ranges = <0x41000000 0x00 0x41000000 0x20000>,
+-			 <0x41400000 0x00 0x41400000 0x20000>;
+-		power-domains = <&k3_pds 249 TI_SCI_PD_EXCLUSIVE>;
+-
+-		mcu_r5fss0_core0: r5f@41000000 {
+-			compatible = "ti,j721e-r5f";
+-			reg = <0x41000000 0x00008000>,
+-			      <0x41010000 0x00008000>;
+-			reg-names = "atcm", "btcm";
+-			ti,sci = <&dmsc>;
+-			ti,sci-dev-id = <250>;
+-			ti,sci-proc-ids = <0x01 0xff>;
+-			resets = <&k3_reset 250 1>;
+-			firmware-name = "j7-mcu-r5f0_0-fw";
+-			ti,atcm-enable = <1>;
+-			ti,btcm-enable = <1>;
+-			ti,loczrama = <1>;
+-		};
+-
+-		mcu_r5fss0_core1: r5f@41400000 {
+-			compatible = "ti,j721e-r5f";
+-			reg = <0x41400000 0x00008000>,
+-			      <0x41410000 0x00008000>;
+-			reg-names = "atcm", "btcm";
+-			ti,sci = <&dmsc>;
+-			ti,sci-dev-id = <251>;
+-			ti,sci-proc-ids = <0x02 0xff>;
+-			resets = <&k3_reset 251 1>;
+-			firmware-name = "j7-mcu-r5f0_1-fw";
+-			ti,atcm-enable = <1>;
+-			ti,btcm-enable = <1>;
+-			ti,loczrama = <1>;
+-		};
+-	};
+-
+-	mcu_mcan0: can@40528000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x40528000 0x00 0x200>,
+-		      <0x00 0x40500000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 172 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 172 0>, <&k3_clks 172 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 832 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 833 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	mcu_mcan1: can@40568000 {
+-		compatible = "bosch,m_can";
+-		reg = <0x00 0x40568000 0x00 0x200>,
+-		      <0x00 0x40540000 0x00 0x8000>;
+-		reg-names = "m_can", "message_ram";
+-		power-domains = <&k3_pds 173 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 173 0>, <&k3_clks 173 1>;
+-		clock-names = "hclk", "cclk";
+-		interrupts = <GIC_SPI 835 IRQ_TYPE_LEVEL_HIGH>,
+-			     <GIC_SPI 836 IRQ_TYPE_LEVEL_HIGH>;
+-		interrupt-names = "int0", "int1";
+-		bosch,mram-cfg = <0x0 128 64 64 64 64 32 32>;
+-		status = "disabled";
+-	};
+-
+-	mcu_spi0: spi@40300000 {
+-		compatible = "ti,am654-mcspi", "ti,omap4-mcspi";
+-		reg = <0x00 0x040300000 0x00 0x400>;
+-		interrupts = <GIC_SPI 848 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		power-domains = <&k3_pds 274 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 274 0>;
+-		status = "disabled";
+-	};
+-
+-	mcu_spi1: spi@40310000 {
+-		compatible = "ti,am654-mcspi", "ti,omap4-mcspi";
+-		reg = <0x00 0x040310000 0x00 0x400>;
+-		interrupts = <GIC_SPI 849 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		power-domains = <&k3_pds 275 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 275 0>;
+-		status = "disabled";
+-	};
+-
+-	mcu_spi2: spi@40320000 {
+-		compatible = "ti,am654-mcspi", "ti,omap4-mcspi";
+-		reg = <0x00 0x040320000 0x00 0x400>;
+-		interrupts = <GIC_SPI 850 IRQ_TYPE_LEVEL_HIGH>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		power-domains = <&k3_pds 276 TI_SCI_PD_EXCLUSIVE>;
+-		clocks = <&k3_clks 276 0>;
+-		status = "disabled";
+-	};
+-
+-	wkup_vtm0: temperature-sensor@42040000 {
+-		compatible = "ti,j721e-vtm";
+-		reg = <0x00 0x42040000 0x00 0x350>,
+-		      <0x00 0x42050000 0x00 0x350>,
+-		      <0x00 0x43000300 0x00 0x10>;
+-		power-domains = <&k3_pds 154 TI_SCI_PD_EXCLUSIVE>;
+-		#thermal-sensor-cells = <1>;
+-	};
+-
+-	mcu_esm: esm@40800000 {
+-		compatible = "ti,j721e-esm";
+-		reg = <0x00 0x40800000 0x00 0x1000>;
+-		ti,esm-pins = <95>;
+-		bootph-pre-ram;
+-	};
+-};
 diff --git a/arch/arm/dts/k3-j721e-sk-u-boot.dtsi b/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
-index 8b205553cdf..644a11005ed 100644
+index 644a11005ed..cd7f4e2f399 100644
 --- a/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
 +++ b/arch/arm/dts/k3-j721e-sk-u-boot.dtsi
-@@ -3,6 +3,10 @@
+@@ -3,7 +3,7 @@
   * Copyright (C) 2021 Texas Instruments Incorporated - https://www.ti.com/
   */
  
-+#define SPL_BOARD_DTB "spl/dts/k3-j721e-sk.dtb"
-+#define BOARD_DESCRIPTION "k3-j721e-sk"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for J721E SK"
-+
- #include "k3-j721e-binman.dtsi"
+-#define SPL_BOARD_DTB "spl/dts/k3-j721e-sk.dtb"
++#define SPL_BOARD_DTB "spl/dts/ti/k3-j721e-sk.dtb"
+ #define BOARD_DESCRIPTION "k3-j721e-sk"
+ #define UBOOT_BOARD_DESCRIPTION "U-Boot for J721E SK"
  
- &cbass_main {
-@@ -159,3 +163,83 @@
- 		bootph-all;
- 	};
- };
-+
-+#ifndef CONFIG_ARM64
-+
-+&binman {
-+	tiboot3-j721e-sr1-1-sk {
-+		insert-template = <&tiboot3_j721e_sr1_1_hs>;
-+	};
-+
-+	sysfw-j721e-sr1-1-hs-sk {
-+		insert-template = <&sysfw>;
-+	};
-+
-+	itb-j721e-sr1-1-hs-sk {
-+		insert-template = <&itb>;
-+	};
-+};
-+
-+&binman {
-+	tiboot3-j721e-sr2-hs-sk {
-+		insert-template = <&tiboot3_j721e_sr2_hs>;
-+	};
-+
-+	sysfw-j721e-sr2-hs-sk {
-+		insert-template = <&sysfw_sr2>;
-+	};
-+
-+	itb-j721e-sr2-hs-sk {
-+		insert-template = <&itb_sr2>;
-+	};
-+};
-+
-+&binman {
-+	tiboot3-j721e-sr2-hs-fs-sk {
-+		insert-template = <&tiboot3_j721e_sr2_hs_fs>;
-+	};
-+
-+	sysfw-j721e-sr2-hs-fs-sk {
-+		insert-template = <&sysfw_fs>;
-+	};
-+
-+	itb-j721e-sr2-hs-fs-sk {
-+		insert-template = <&itb_fs>;
-+	};
-+};
-+
-+&binman {
-+	tiboot3-j721e-gp-sk {
-+		insert-template = <&tiboot3_j721e_gp>;
-+	};
-+
-+	sysfw-j721e-gp-sk {
-+		insert-template = <&sysfw_gp>;
-+	};
-+
-+	itb-j721e-gp-sk {
-+		insert-template = <&itb_gp>;
-+	};
-+};
-+
-+#else
-+
-+&binman {
-+	tispl {
-+		insert-template = <&ti_spl>;
-+	};
-+
-+	u-boot {
-+		insert-template = <&u_boot>;
-+	};
-+
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
-+	};
-+
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
-+	};
-+};
-+
-+#endif
-diff --git a/arch/arm/dts/k3-j721s2-binman.dtsi b/arch/arm/dts/k3-j721s2-binman.dtsi
-index 7efb135bdff..57521f2d356 100644
---- a/arch/arm/dts/k3-j721s2-binman.dtsi
-+++ b/arch/arm/dts/k3-j721s2-binman.dtsi
-@@ -5,11 +5,12 @@
- 
- #include "k3-binman.dtsi"
- 
--#ifdef CONFIG_TARGET_J721S2_R5_EVM
-+#ifndef CONFIG_ARM64
- 
- &binman {
--	tiboot3-j721s2-hs-evm.bin {
-+	tiboot3_j721s2_hs_evm: template-9 {
- 		filename = "tiboot3-j721s2-hs-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl>, <&ti_fs_enc>, <&combined_tifs_cfg>,
- 				<&combined_dm_cfg>, <&sysfw_inner_cert>;
-@@ -49,12 +50,14 @@
- 			filename = "combined-dm-cfg.bin";
- 			type = "blob-ext";
- 		};
-+		};
- 	};
- };
- 
- &binman {
--	tiboot3-j721s2-hs-fs-evm.bin {
-+	tiboot3_j721s2_hs_fs_evm: template-10 {
- 		filename = "tiboot3-j721s2-hs-fs-evm.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_fs>, <&ti_fs_enc_fs>, <&combined_tifs_cfg_fs>,
- 				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
-@@ -94,13 +97,15 @@
- 			filename = "combined-dm-cfg.bin";
- 			type = "blob-ext";
- 		};
-+		};
- 	};
- };
- 
- &binman {
--	tiboot3-j721s2-gp-evm.bin {
-+	tiboot3_j721s2_gp_evm: template-11 {
- 		filename = "tiboot3-j721s2-gp-evm.bin";
- 		symlink = "tiboot3.bin";
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
- 				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
-@@ -133,19 +138,11 @@
- 			filename = "combined-dm-cfg.bin";
- 			type = "blob-ext";
- 		};
+diff --git a/arch/arm/dts/k3-j721e-sk.dts b/arch/arm/dts/k3-j721e-sk.dts
+deleted file mode 100644
+index 42fe8eee9ec..00000000000
+--- a/arch/arm/dts/k3-j721e-sk.dts
++++ /dev/null
+@@ -1,1074 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * Copyright (C) 2021 Texas Instruments Incorporated - https://www.ti.com/
+- *
+- * J721E SK URL: https://www.ti.com/tool/SK-TDA4VM
+- */
 -
-+		};
- 	};
- };
- 
--#endif
+-/dts-v1/;
 -
--#ifdef CONFIG_TARGET_J721S2_A72_EVM
+-#include "k3-j721e.dtsi"
+-#include <dt-bindings/gpio/gpio.h>
+-#include <dt-bindings/input/input.h>
+-#include <dt-bindings/net/ti-dp83867.h>
 -
--#define SPL_J721S2_EVM_DTB "spl/dts/k3-j721s2-common-proc-board.dtb"
--#define SPL_AM68_SK_DTB "spl/dts/k3-am68-sk-base-board.dtb"
+-/ {
+-	compatible = "ti,j721e-sk", "ti,j721e";
+-	model = "Texas Instruments J721E SK";
 -
--#define J721S2_EVM_DTB "u-boot.dtb"
--#define AM68_SK_DTB "arch/arm/dts/k3-am68-sk-base-board.dtb"
-+#else
- 
- &binman {
- 	ti-dm {
-@@ -154,7 +151,7 @@
- 			filename = "ti-dm/j721s2/ipc_echo_testb_mcu1_0_release_strip.xer5f";
- 		};
- 	};
--	ti-spl {
-+	ti_spl: template-12 {
- 		insert-template = <&ti_spl_template>;
- 
- 		fit {
-@@ -291,129 +288,19 @@
- 						filename = "ti-dm.bin";
- 					};
- 				};
+-	aliases {
+-		serial0 = &wkup_uart0;
+-		serial1 = &mcu_uart0;
+-		serial2 = &main_uart0;
+-		serial3 = &main_uart1;
+-		ethernet0 = &cpsw_port1;
+-		mmc1 = &main_sdhci1;
+-	};
 -
--				fdt-0 {
--					description = "k3-j721s2-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&spl_j721s2_evm_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					spl_j721s2_evm_dtb: blob-ext {
--						filename = SPL_J721S2_EVM_DTB;
--					};
+-	chosen {
+-		stdout-path = "serial2:115200n8";
+-	};
 -
--				};
+-	memory@80000000 {
+-		device_type = "memory";
+-		/* 4G RAM */
+-		reg = <0x00000000 0x80000000 0x00000000 0x80000000>,
+-		      <0x00000008 0x80000000 0x00000000 0x80000000>;
+-	};
 -
--				fdt-1 {
--					description = "k3-am68-sk-base-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&spl_am68_sk_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					spl_am68_sk_dtb: blob-ext {
--						filename = SPL_AM68_SK_DTB;
--					};
--				};
--			};
+-	reserved_memory: reserved-memory {
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-		ranges;
 -
--			configurations {
--				default = "conf-0";
+-		secure_ddr: optee@9e800000 {
+-			reg = <0x00 0x9e800000 0x00 0x01800000>;
+-			alignment = <0x1000>;
+-			no-map;
+-		};
 -
--				conf-0 {
--					description = "k3-j721s2-common-proc-board";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
+-		mcu_r5fss0_core0_dma_memory_region: r5f-dma-memory@a0000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa0000000 0x00 0x100000>;
+-			no-map;
+-		};
 -
--				conf-1 {
--					description = "k3-am68-sk-base-board";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-1";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot {
-+	u_boot: template-13 {
- 		insert-template = <&u_boot_template>;
+-		mcu_r5fss0_core0_memory_region: r5f-memory@a0100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa0100000 0x00 0xf00000>;
+-			no-map;
+-		};
 -
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for J721S2 Board";
--				};
+-		mcu_r5fss0_core1_dma_memory_region: r5f-dma-memory@a1000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa1000000 0x00 0x100000>;
+-			no-map;
+-		};
 -
--				fdt-0 {
--					description = "k3-j721s2-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&j721s2_evm_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					j721s2_evm_dtb: blob-ext {
--						filename = J721S2_EVM_DTB;
--					};
+-		mcu_r5fss0_core1_memory_region: r5f-memory@a1100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa1100000 0x00 0xf00000>;
+-			no-map;
+-		};
 -
--					hash {
--						algo = "crc32";
--					};
--				};
+-		main_r5fss0_core0_dma_memory_region: r5f-dma-memory@a2000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa2000000 0x00 0x100000>;
+-			no-map;
+-		};
 -
--				fdt-1 {
--					description = "k3-am68-sk-base-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					ti-secure {
--						content = <&am68_sk_dtb>;
--						keyfile = "custMpk.pem";
--					};
--					am68_sk_dtb: blob-ext {
--						filename = AM68_SK_DTB;
--					};
+-		main_r5fss0_core0_memory_region: r5f-memory@a2100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa2100000 0x00 0xf00000>;
+-			no-map;
+-		};
 -
--					hash {
--						algo = "crc32";
--					};
--				};
+-		main_r5fss0_core1_dma_memory_region: r5f-dma-memory@a3000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa3000000 0x00 0x100000>;
+-			no-map;
+-		};
 -
--			};
+-		main_r5fss0_core1_memory_region: r5f-memory@a3100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa3100000 0x00 0xf00000>;
+-			no-map;
+-		};
 -
--			configurations {
--				default = "conf-0";
+-		main_r5fss1_core0_dma_memory_region: r5f-dma-memory@a4000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa4000000 0x00 0x100000>;
+-			no-map;
+-		};
 -
--				conf-0 {
--					description = "k3-j721s2-common-proc-board";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--				conf-1 {
--					description = "k3-am68-sk-base-board";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-1";
--				};
+-		main_r5fss1_core0_memory_region: r5f-memory@a4100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa4100000 0x00 0xf00000>;
+-			no-map;
+-		};
 -
+-		main_r5fss1_core1_dma_memory_region: r5f-dma-memory@a5000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa5000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		main_r5fss1_core1_memory_region: r5f-memory@a5100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa5100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		c66_1_dma_memory_region: c66-dma-memory@a6000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa6000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		c66_0_memory_region: c66-memory@a6100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa6100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		c66_0_dma_memory_region: c66-dma-memory@a7000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa7000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		c66_1_memory_region: c66-memory@a7100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa7100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		c71_0_dma_memory_region: c71-dma-memory@a8000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa8000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		c71_0_memory_region: c71-memory@a8100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa8100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		rtos_ipc_memory_region: ipc-memories@aa000000 {
+-			reg = <0x00 0xaa000000 0x00 0x01c00000>;
+-			alignment = <0x1000>;
+-			no-map;
+-		};
+-	};
+-
+-	vusb_main: fixedregulator-vusb-main5v0 {
+-		/* USB MAIN INPUT 5V DC */
+-		compatible = "regulator-fixed";
+-		regulator-name = "vusb-main5v0";
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-		regulator-always-on;
+-		regulator-boot-on;
+-	};
+-
+-	vsys_3v3: fixedregulator-vsys3v3 {
+-		/* Output of LM5141 */
+-		compatible = "regulator-fixed";
+-		regulator-name = "vsys_3v3";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		vin-supply = <&vusb_main>;
+-		regulator-always-on;
+-		regulator-boot-on;
+-	};
+-
+-	vdd_mmc1: fixedregulator-sd {
+-		compatible = "regulator-fixed";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&vdd_mmc1_en_pins_default>;
+-		regulator-name = "vdd_mmc1";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		regulator-boot-on;
+-		enable-active-high;
+-		vin-supply = <&vsys_3v3>;
+-		gpio = <&wkup_gpio0 8 GPIO_ACTIVE_HIGH>;
+-	};
+-
+-	vdd_sd_dv_alt: gpio-regulator-tps659411 {
+-		compatible = "regulator-gpio";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&vdd_sd_dv_alt_pins_default>;
+-		regulator-name = "tps659411";
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <3300000>;
+-		regulator-boot-on;
+-		vin-supply = <&vsys_3v3>;
+-		gpios = <&wkup_gpio0 9 GPIO_ACTIVE_HIGH>;
+-		states = <1800000 0x0>,
+-			 <3300000 0x1>;
+-	};
+-
+-	dp_pwr_3v3: fixedregulator-dp-prw {
+-		compatible = "regulator-fixed";
+-		regulator-name = "dp-pwr";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&dp_pwr_en_pins_default>;
+-		gpio = <&main_gpio0 111 0>;	/* DP0_3V3 _EN */
+-		enable-active-high;
+-	};
+-
+-	dp0: connector {
+-		compatible = "dp-connector";
+-		label = "DP0";
+-		type = "full-size";
+-		dp-pwr-supply = <&dp_pwr_3v3>;
+-
+-		port {
+-			dp_connector_in: endpoint {
+-				remote-endpoint = <&dp0_out>;
 -			};
 -		};
- 	};
- };
- 
- &binman {
--	ti-spl_unsigned {
-+	ti_spl_unsigned: template-14 {
- 		insert-template = <&ti_spl_unsigned_template>;
- 
- 		fit {
-@@ -423,102 +310,14 @@
- 						filename = "ti-dm.bin";
- 					};
- 				};
+-	};
 -
--				fdt-0 {
--					description = "k3-j721s2-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = SPL_J721S2_EVM_DTB;
--					};
--				};
--				fdt-1 {
--					description = "k3-am68-sk-base-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = SPL_AM68_SK_DTB;
--					};
--				};
+-	hdmi-connector {
+-		compatible = "hdmi-connector";
+-		label = "hdmi";
+-		type = "a";
 -
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&hdmi_hpd_pins_default>;
+-
+-		ddc-i2c-bus = <&main_i2c1>;
+-
+-		/* HDMI_HPD */
+-		hpd-gpios = <&main_gpio1 0 GPIO_ACTIVE_HIGH>;
+-
+-		port {
+-			hdmi_connector_in: endpoint {
+-				remote-endpoint = <&tfp410_out>;
+-			};
+-		};
+-	};
+-
+-	dvi-bridge {
+-		compatible = "ti,tfp410";
+-
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&hdmi_pdn_pins_default>;
+-
+-		powerdown-gpios = <&main_gpio0 127 GPIO_ACTIVE_LOW>;
+-		ti,deskew = <0>;
+-
+-		ports {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-
+-			port@0 {
+-				reg = <0>;
+-
+-				tfp410_in: endpoint {
+-					remote-endpoint = <&dpi1_out>;
+-					pclk-sample = <1>;
+-				};
 -			};
 -
--			configurations {
--				default = "conf-0";
+-			port@1 {
+-				reg = <1>;
 -
--				conf-0 {
--					description = "k3-j721s2-common-proc-board";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
--				conf-1 {
--					description = "k3-am68-sk-base-board";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-1";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot_unsigned {
-+	u_boot_unsigned: template-15 {
- 		insert-template = <&u_boot_unsigned_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for J721S2 Board";
--				};
--
--				fdt-0 {
--					description = "k3-j721s2-common-proc-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = J721S2_EVM_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--				fdt-1 {
--					description = "k3-am68-sk-base-board";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--					blob {
--						filename = AM68_SK_DTB;
--					};
--					hash {
--						algo = "crc32";
--					};
--				};
--
--			};
--
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-j721s2-common-proc-board";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
--				conf-1 {
--					description = "k3-am68-sk-base-board";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-1";
+-				tfp410_out: endpoint {
+-					remote-endpoint =
+-						<&hdmi_connector_in>;
 -				};
 -			};
 -		};
- 	};
- };
- #endif
-diff --git a/arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi b/arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi
-index a3ebf5996ea..4ef8f54b87e 100644
---- a/arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi
-+++ b/arch/arm/dts/k3-j721s2-common-proc-board-u-boot.dtsi
-@@ -3,6 +3,10 @@
-  * Copyright (C) 2021-2023 Texas Instruments Incorporated - https://www.ti.com/
-  */
- 
-+#define SPL_BOARD_DTB "spl/dts/k3-j721s2-common-proc-board.dtb"
-+#define BOARD_DESCRIPTION "k3-j721s2-common-proc-board"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for J721S2 EVM"
-+
- #include "k3-j721s2-binman.dtsi"
- 
- &wkup_i2c0 {
-@@ -125,3 +129,41 @@
- 	dr_mode = "peripheral";
- 	bootph-all;
- };
-+
-+#ifndef CONFIG_ARM64
-+
-+&binman {
-+	tiboot3-j721s2-hs-evm {
-+		insert-template = <&tiboot3_j721s2_hs_evm>;
-+	};
-+
-+	tiboot3-j721s2-hs-fs-evm {
-+		insert-template = <&tiboot3_j721s2_hs_fs_evm>;
-+	};
-+
-+	tiboot3-j721s2-gp-evm {
-+		insert-template = <&tiboot3_j721s2_gp_evm>;
-+	};
-+};
-+
-+#else
-+
-+&binman {
-+	tispl {
-+		insert-template = <&ti_spl>;
-+	};
-+
-+	u-boot {
-+		insert-template = <&u_boot>;
-+	};
-+
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
-+	};
-+
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
-+	};
-+};
-+
-+#endif
-diff --git a/arch/arm/dts/k3-j784s4-binman.dtsi b/arch/arm/dts/k3-j784s4-binman.dtsi
-index e4dd6e14a66..afe9829e62f 100644
---- a/arch/arm/dts/k3-j784s4-binman.dtsi
-+++ b/arch/arm/dts/k3-j784s4-binman.dtsi
-@@ -5,16 +5,16 @@
- 
- #include "k3-binman.dtsi"
- 
--#ifdef CONFIG_TARGET_J784S4_R5_EVM
-+#ifndef CONFIG_ARM64
- 
- &rcfg_yaml_tifs {
- 	config = "tifs-rm-cfg.yaml";
- };
- 
- &binman {
--	tiboot3-j784s4-hs-evm.bin {
-+	tiboot3_j784s4_hs_evm: template-9 {
- 		filename = "tiboot3-j784s4-hs-evm.bin";
+-	};
+-};
 -
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl>, <&ti_fs_enc>, <&combined_tifs_cfg>,
- 				<&combined_dm_cfg>, <&sysfw_inner_cert>;
-@@ -59,13 +59,14 @@
- 			filename = "combined-dm-cfg.bin";
- 			type = "blob-ext";
- 		};
-+		};
- 	};
- };
- 
- &binman {
--	tiboot3-j784s4-hs-fs-evm.bin {
-+	tiboot3_j784s4_hs_fs_evm: template-10 {
- 		filename = "tiboot3-j784s4-hs-fs-evm.bin";
+-&main_pmx0 {
+-	main_mmc1_pins_default: main-mmc1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x254, PIN_INPUT, 0) /* (R29) MMC1_CMD */
+-			J721E_IOPAD(0x250, PIN_INPUT, 0) /* (P25) MMC1_CLK */
+-			J721E_IOPAD(0x2ac, PIN_INPUT, 0) /* (P25) MMC1_CLKLB */
+-			J721E_IOPAD(0x24c, PIN_INPUT, 0) /* (R24) MMC1_DAT0 */
+-			J721E_IOPAD(0x248, PIN_INPUT, 0) /* (P24) MMC1_DAT1 */
+-			J721E_IOPAD(0x244, PIN_INPUT, 0) /* (R25) MMC1_DAT2 */
+-			J721E_IOPAD(0x240, PIN_INPUT, 0) /* (R26) MMC1_DAT3 */
+-			J721E_IOPAD(0x258, PIN_INPUT, 0) /* (P23) MMC1_SDCD */
+-		>;
+-	};
 -
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_fs>, <&ti_fs_enc_fs>, <&combined_tifs_cfg_fs>,
- 				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
-@@ -110,14 +111,15 @@
- 			filename = "combined-dm-cfg.bin";
- 			type = "blob-ext";
- 		};
-+		};
- 	};
- };
- 
- &binman {
--	tiboot3-j784s4-gp-evm.bin {
-+	tiboot3_j784s4_gp_evm: template-11 {
- 		filename = "tiboot3-j784s4-gp-evm.bin";
- 		symlink = "tiboot3.bin";
+-	main_uart0_pins_default: main-uart0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x1f0, PIN_INPUT, 0) /* (AC2) UART0_CTSn */
+-			J721E_IOPAD(0x1f4, PIN_OUTPUT, 0) /* (AB1) UART0_RTSn */
+-			J721E_IOPAD(0x1e8, PIN_INPUT, 0) /* (AB2) UART0_RXD */
+-			J721E_IOPAD(0x1ec, PIN_OUTPUT, 0) /* (AB3) UART0_TXD */
+-		>;
+-	};
 -
-+		section {
- 		ti-secure-rom {
- 			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
- 				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
-@@ -154,15 +156,11 @@
- 			filename = "combined-dm-cfg.bin";
- 			type = "blob-ext";
- 		};
+-	main_uart1_pins_default: main-uart1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x1f8, PIN_INPUT, 0) /* (AA4) UART1_RXD */
+-			J721E_IOPAD(0x1fc, PIN_OUTPUT, 0) /* (AB4) UART1_TXD */
+-		>;
+-	};
 -
-+		};
- 	};
- };
--#endif
+-	main_i2c0_pins_default: main-i2c0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x220, PIN_INPUT_PULLUP, 0) /* (AC5) I2C0_SCL */
+-			J721E_IOPAD(0x224, PIN_INPUT_PULLUP, 0) /* (AA5) I2C0_SDA */
+-		>;
+-	};
 -
--#ifdef CONFIG_TARGET_J784S4_A72_EVM
- 
--#define SPL_J784S4_EVM_DTB "spl/dts/ti/k3-j784s4-evm.dtb"
--#define J784S4_EVM_DTB "u-boot.dtb"
-+#else
- 
- &binman {
- 	ti-dm {
-@@ -173,7 +171,7 @@
- 		};
- 	};
- 
--	ti-spl {
-+	ti_spl: template-12 {
- 		insert-template = <&ti_spl_template>;
- 
- 		fit {
-@@ -188,85 +186,19 @@
- 						filename = "ti-dm.bin";
- 					};
- 				};
+-	main_i2c1_pins_default: main-i2c1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x228, PIN_INPUT_PULLUP, 0) /* (Y6) I2C1_SCL */
+-			J721E_IOPAD(0x22c, PIN_INPUT_PULLUP, 0) /* (AA6) I2C1_SDA */
+-		>;
+-	};
 -
--				fdt-0 {
--					description = "k3-j784s4-evm";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
+-	main_i2c3_pins_default: main-i2c3-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x270, PIN_INPUT_PULLUP, 4) /* (T26) MMC2_CLK.I2C3_SCL */
+-			J721E_IOPAD(0x274, PIN_INPUT_PULLUP, 4) /* (T25) MMC2_CMD.I2C3_SDA */
+-		>;
+-	};
 -
--					ti-secure {
--						content = <&spl_j784s4_evm_dtb>;
--						keyfile = "custMpk.pem";
--					};
+-	main_usbss0_pins_default: main-usbss0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x290, PIN_OUTPUT, 0) /* (U6) USB0_DRVVBUS */
+-			J721E_IOPAD(0x210, PIN_INPUT, 7) /* (W3) MCAN1_RX.GPIO1_3 */
+-		>;
+-	};
 -
--					spl_j784s4_evm_dtb: blob-ext {
--						filename = SPL_J784S4_EVM_DTB;
--					};
--				};
+-	main_usbss1_pins_default: main-usbss1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x214, PIN_OUTPUT, 4) /* (V4) MCAN1_TX.USB1_DRVVBUS */
+-		>;
+-	};
+-
+-	dp0_pins_default: dp0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x1c4, PIN_INPUT, 5) /* SPI0_CS1.DP0_HPD */
+-		>;
+-	};
+-
+-	dp_pwr_en_pins_default: dp-pwr-en-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x1c0, PIN_INPUT, 7) /* (AA2) SPI0_CS0.GPIO0_111 */
+-		>;
+-	};
+-
+-	dss_vout0_pins_default: dss-vout0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x58, PIN_OUTPUT, 10) /* (AE22) PRG1_PRU1_GPO0.VOUT0_DATA0 */
+-			J721E_IOPAD(0x5c, PIN_OUTPUT, 10) /* (AG23) PRG1_PRU1_GPO1.VOUT0_DATA1 */
+-			J721E_IOPAD(0x60, PIN_OUTPUT, 10) /* (AF23) PRG1_PRU1_GPO2.VOUT0_DATA2 */
+-			J721E_IOPAD(0x64, PIN_OUTPUT, 10) /* (AD23) PRG1_PRU1_GPO3.VOUT0_DATA3 */
+-			J721E_IOPAD(0x68, PIN_OUTPUT, 10) /* (AH24) PRG1_PRU1_GPO4.VOUT0_DATA4 */
+-			J721E_IOPAD(0x6c, PIN_OUTPUT, 10) /* (AG21) PRG1_PRU1_GPO5.VOUT0_DATA5 */
+-			J721E_IOPAD(0x70, PIN_OUTPUT, 10) /* (AE23) PRG1_PRU1_GPO6.VOUT0_DATA6 */
+-			J721E_IOPAD(0x74, PIN_OUTPUT, 10) /* (AC21) PRG1_PRU1_GPO7.VOUT0_DATA7 */
+-			J721E_IOPAD(0x78, PIN_OUTPUT, 10) /* (Y23) PRG1_PRU1_GPO8.VOUT0_DATA8 */
+-			J721E_IOPAD(0x7c, PIN_OUTPUT, 10) /* (AF21) PRG1_PRU1_GPO9.VOUT0_DATA9 */
+-			J721E_IOPAD(0x80, PIN_OUTPUT, 10) /* (AB23) PRG1_PRU1_GPO10.VOUT0_DATA10 */
+-			J721E_IOPAD(0x84, PIN_OUTPUT, 10) /* (AJ25) PRG1_PRU1_GPO11.VOUT0_DATA11 */
+-			J721E_IOPAD(0x88, PIN_OUTPUT, 10) /* (AH25) PRG1_PRU1_GPO12.VOUT0_DATA12 */
+-			J721E_IOPAD(0x8c, PIN_OUTPUT, 10) /* (AG25) PRG1_PRU1_GPO13.VOUT0_DATA13 */
+-			J721E_IOPAD(0x90, PIN_OUTPUT, 10) /* (AH26) PRG1_PRU1_GPO14.VOUT0_DATA14 */
+-			J721E_IOPAD(0x94, PIN_OUTPUT, 10) /* (AJ27) PRG1_PRU1_GPO15.VOUT0_DATA15 */
+-			J721E_IOPAD(0x30, PIN_OUTPUT, 10) /* (AF24) PRG1_PRU0_GPO11.VOUT0_DATA16 */
+-			J721E_IOPAD(0x34, PIN_OUTPUT, 10) /* (AJ24) PRG1_PRU0_GPO12.VOUT0_DATA17 */
+-			J721E_IOPAD(0x38, PIN_OUTPUT, 10) /* (AG24) PRG1_PRU0_GPO13.VOUT0_DATA18 */
+-			J721E_IOPAD(0x3c, PIN_OUTPUT, 10) /* (AD24) PRG1_PRU0_GPO14.VOUT0_DATA19 */
+-			J721E_IOPAD(0x40, PIN_OUTPUT, 10) /* (AC24) PRG1_PRU0_GPO15.VOUT0_DATA20 */
+-			J721E_IOPAD(0x44, PIN_OUTPUT, 10) /* (AE24) PRG1_PRU0_GPO16.VOUT0_DATA21 */
+-			J721E_IOPAD(0x24, PIN_OUTPUT, 10) /* (AJ20) PRG1_PRU0_GPO8.VOUT0_DATA22 */
+-			J721E_IOPAD(0x28, PIN_OUTPUT, 10) /* (AG20) PRG1_PRU0_GPO9.VOUT0_DATA23 */
+-			J721E_IOPAD(0x9c, PIN_OUTPUT, 10) /* (AC22) PRG1_PRU1_GPO17.VOUT0_DE */
+-			J721E_IOPAD(0x98, PIN_OUTPUT, 10) /* (AJ26) PRG1_PRU1_GPO16.VOUT0_HSYNC */
+-			J721E_IOPAD(0xa4, PIN_OUTPUT, 10) /* (AH22) PRG1_PRU1_GPO19.VOUT0_PCLK */
+-			J721E_IOPAD(0xa0, PIN_OUTPUT, 10) /* (AJ22) PRG1_PRU1_GPO18.VOUT0_VSYNC */
+-		>;
+-	};
+-
+-	hdmi_hpd_pins_default: hdmi-hpd-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x204, PIN_INPUT, 7) /* (AD5) UART1_RTSn.GPIO1_0 */
+-		>;
+-	};
+-
+-	hdmi_pdn_pins_default: hdmi-pdn-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x200, PIN_INPUT, 7) /* (AC4) UART1_CTSn.GPIO0_127 */
+-		>;
+-	};
+-
+-	/* Reset for M.2 E Key slot on PCIe0  */
+-	ekey_reset_pins_default: ekey-reset-pns-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x124, PIN_INPUT, 7) /* (Y24) PRG0_PRU1_GPO9.GPIO0_72 */
+-		>;
+-	};
+-
+-	main_i2c5_pins_default: main-i2c5-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x150, PIN_INPUT_PULLUP, 2) /* (Y26) PRG0_MDIO0_MDIO.I2C5_SCL */
+-			J721E_IOPAD(0x154, PIN_INPUT_PULLUP, 2) /* (AA27) PRG0_MDIO0_MDC.I2C5_SDA */
+-		>;
+-	};
+-
+-	rpi_header_gpio0_pins_default: rpi-header-gpio0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x01C, PIN_INPUT, 7) /* (AD22) PRG1_PRU0_GPO6.GPIO0_7 */
+-			J721E_IOPAD(0x120, PIN_INPUT, 7) /* (AA28) PRG0_PRU1_GPO8.GPIO0_71 */
+-			J721E_IOPAD(0x14C, PIN_INPUT, 7) /* (AA29) PRG0_PRU1_GPO19.GPIO0_82 */
+-			J721E_IOPAD(0x02C, PIN_INPUT, 7) /* (AD21) PRG1_PRU0_GPO10.GPIO0_11 */
+-			J721E_IOPAD(0x198, PIN_INPUT, 7) /* (V25) RGMII6_TD1.GPIO0_101 */
+-			J721E_IOPAD(0x1B0, PIN_INPUT, 7) /* (W24) RGMII6_RD1.GPIO0_107 */
+-			J721E_IOPAD(0x1A0, PIN_INPUT, 7) /* (W29) RGMII6_TXC.GPIO0_103 */
+-			J721E_IOPAD(0x008, PIN_INPUT, 7) /* (AG22) PRG1_PRU0_GPO1.GPIO0_2 */
+-			J721E_IOPAD(0x1D0, PIN_INPUT, 7) /* (AA3) SPI0_D1.GPIO0_115 */
+-			J721E_IOPAD(0x11C, PIN_INPUT, 7) /* (AA24) PRG0_PRU1_GPO7.GPIO0_70 */
+-			J721E_IOPAD(0x148, PIN_INPUT, 7) /* (AA26) PRG0_PRU1_GPO18.GPIO0_81 */
+-			J721E_IOPAD(0x004, PIN_INPUT, 7) /* (AC23) PRG1_PRU0_GPO0.GPIO0_1 */
+-			J721E_IOPAD(0x014, PIN_INPUT, 7) /* (AH23) PRG1_PRU0_GPO4.GPIO0_5 */
+-			J721E_IOPAD(0x020, PIN_INPUT, 7) /* (AE20) PRG1_PRU0_GPO7.GPIO0_8 */
+-			J721E_IOPAD(0x19C, PIN_INPUT, 7) /* (W27) RGMII6_TD0.GPIO0_102 */
+-			J721E_IOPAD(0x1B4, PIN_INPUT, 7) /* (W25) RGMII6_RD0.GPIO0_108 */
+-			J721E_IOPAD(0x188, PIN_INPUT, 7) /* (Y28) RGMII6_TX_CTL.GPIO0_97 */
+-			J721E_IOPAD(0x00C, PIN_INPUT, 7) /* (AF22) PRG1_PRU0_GPO2.GPIO0_3 */
+-			J721E_IOPAD(0x010, PIN_INPUT, 7) /* (AJ23) PRG1_PRU0_GPO3.GPIO0_4 */
+-			J721E_IOPAD(0x178, PIN_INPUT, 7) /* (U27) RGMII5_RD3.GPIO0_93 */
+-			J721E_IOPAD(0x17C, PIN_INPUT, 7) /* (U24) RGMII5_RD2.GPIO0_94 */
+-			J721E_IOPAD(0x190, PIN_INPUT, 7) /* (W23) RGMII6_TD3.GPIO0_99 */
+-			J721E_IOPAD(0x18C, PIN_INPUT, 7) /* (V23) RGMII6_RX_CTL.GPIO0_98 */
+-		>;
+-	};
+-
+-	rpi_header_gpio1_pins_default: rpi-header-gpio1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_IOPAD(0x234, PIN_INPUT, 7) /* (U3) EXT_REFCLK1.GPIO1_12 */
+-		>;
+-	};
+-};
+-
+-&wkup_pmx0 {
+-	mcu_cpsw_pins_default: mcu-cpsw-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0x84, PIN_INPUT, 0) /* (B24) MCU_RGMII1_RD0 */
+-			J721E_WKUP_IOPAD(0x80, PIN_INPUT, 0) /* (A24) MCU_RGMII1_RD1 */
+-			J721E_WKUP_IOPAD(0x7c, PIN_INPUT, 0) /* (D24) MCU_RGMII1_RD2 */
+-			J721E_WKUP_IOPAD(0x78, PIN_INPUT, 0) /* (A25) MCU_RGMII1_RD3 */
+-			J721E_WKUP_IOPAD(0x74, PIN_INPUT, 0) /* (C24) MCU_RGMII1_RXC */
+-			J721E_WKUP_IOPAD(0x5c, PIN_INPUT, 0) /* (C25) MCU_RGMII1_RX_CTL */
+-			J721E_WKUP_IOPAD(0x6c, PIN_OUTPUT, 0) /* (B25) MCU_RGMII1_TD0 */
+-			J721E_WKUP_IOPAD(0x68, PIN_OUTPUT, 0) /* (A26) MCU_RGMII1_TD1 */
+-			J721E_WKUP_IOPAD(0x64, PIN_OUTPUT, 0) /* (A27) MCU_RGMII1_TD2 */
+-			J721E_WKUP_IOPAD(0x60, PIN_OUTPUT, 0) /* (A28) MCU_RGMII1_TD3 */
+-			J721E_WKUP_IOPAD(0x70, PIN_OUTPUT, 0) /* (B26) MCU_RGMII1_TXC */
+-			J721E_WKUP_IOPAD(0x58, PIN_OUTPUT, 0) /* (B27) MCU_RGMII1_TX_CTL */
+-		>;
+-	};
+-
+-	mcu_mdio_pins_default: mcu-mdio1-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0x8c, PIN_OUTPUT, 0) /* (F23) MCU_MDIO0_MDC */
+-			J721E_WKUP_IOPAD(0x88, PIN_INPUT, 0) /* (E23) MCU_MDIO0_MDIO */
+-		>;
+-	};
+-
+-	mcu_fss0_ospi0_pins_default: mcu-fss0-ospi0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0x0, PIN_OUTPUT, 0) /* (E20) MCU_OSPI0_CLK */
+-			J721E_WKUP_IOPAD(0x2c, PIN_OUTPUT, 0) /* (F19) MCU_OSPI0_CSn0 */
+-			J721E_WKUP_IOPAD(0xc, PIN_INPUT, 0) /* (D20) MCU_OSPI0_D0 */
+-			J721E_WKUP_IOPAD(0x10, PIN_INPUT, 0) /* (G19) MCU_OSPI0_D1 */
+-			J721E_WKUP_IOPAD(0x14, PIN_INPUT, 0) /* (G20) MCU_OSPI0_D2 */
+-			J721E_WKUP_IOPAD(0x18, PIN_INPUT, 0) /* (F20) MCU_OSPI0_D3 */
+-			J721E_WKUP_IOPAD(0x1c, PIN_INPUT, 0) /* (F21) MCU_OSPI0_D4 */
+-			J721E_WKUP_IOPAD(0x20, PIN_INPUT, 0) /* (E21) MCU_OSPI0_D5 */
+-			J721E_WKUP_IOPAD(0x24, PIN_INPUT, 0) /* (B22) MCU_OSPI0_D6 */
+-			J721E_WKUP_IOPAD(0x28, PIN_INPUT, 0) /* (G21) MCU_OSPI0_D7 */
+-			J721E_WKUP_IOPAD(0x8, PIN_INPUT, 0) /* (D21) MCU_OSPI0_DQS */
+-		>;
+-	};
+-
+-	vdd_mmc1_en_pins_default: vdd-mmc1-en-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xd0, PIN_OUTPUT, 7) /* (G27) WKUP_GPIO0_8 */
+-		>;
+-	};
+-
+-	vdd_sd_dv_alt_pins_default: vdd-sd-dv-alt-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xd4, PIN_OUTPUT, 7) /* (G26) WKUP_GPIO0_9 */
+-		>;
+-	};
+-
+-	wkup_uart0_pins_default: wkup-uart0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xa0, PIN_INPUT, 0) /* (J29) WKUP_UART0_RXD */
+-			J721E_WKUP_IOPAD(0xa4, PIN_OUTPUT, 0) /* (J28) WKUP_UART0_TXD */
+-		>;
+-	};
+-
+-	mcu_uart0_pins_default: mcu-uart0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xf0, PIN_INPUT, 2) /* (D26) MCU_I3C0_SCL.MCU_UART0_CTSn */
+-			J721E_WKUP_IOPAD(0xf4, PIN_OUTPUT, 2)/* (D25) MCU_I3C0_SDA.MCU_UART0_RTSn */
+-			J721E_WKUP_IOPAD(0xe4, PIN_INPUT, 0) /* (H28) WKUP_GPIO0_13.MCU_UART0_RXD */
+-			J721E_WKUP_IOPAD(0xe0, PIN_OUTPUT, 0)/* (G29) WKUP_GPIO0_12.MCU_UART0_TXD */
+-		>;
+-	};
+-
+-	wkup_i2c0_pins_default: wkup-i2c0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xf8, PIN_INPUT_PULLUP, 0) /* (J25) WKUP_I2C0_SCL */
+-			J721E_WKUP_IOPAD(0xfc, PIN_INPUT_PULLUP, 0) /* (H24) WKUP_I2C0_SDA */
+-		>;
+-	};
+-
+-	/* Reset for M.2 M Key slot on PCIe1  */
+-	mkey_reset_pins_default: mkey-reset-pns-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xdc, PIN_INPUT, 7) /* (H27) WKUP_GPIO0_11 */
+-		>;
+-	};
+-};
+-
+-&wkup_uart0 {
+-	/* Wakeup UART is used by System firmware */
+-	status = "reserved";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&wkup_uart0_pins_default>;
+-};
+-
+-&wkup_i2c0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&wkup_i2c0_pins_default>;
+-	clock-frequency = <400000>;
+-
+-	eeprom@51 {
+-		/* AT24C512C-MAHM-T */
+-		compatible = "atmel,24c512";
+-		reg = <0x51>;
+-	};
+-};
+-
+-&mcu_uart0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcu_uart0_pins_default>;
+-};
+-
+-&main_uart0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_uart0_pins_default>;
+-	/* Shared with ATF on this platform */
+-	power-domains = <&k3_pds 146 TI_SCI_PD_SHARED>;
+-};
+-
+-&main_uart1 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_uart1_pins_default>;
+-};
+-
+-&main_sdhci1 {
+-	/* SD Card */
+-	status = "okay";
+-	vmmc-supply = <&vdd_mmc1>;
+-	vqmmc-supply = <&vdd_sd_dv_alt>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_mmc1_pins_default>;
+-	ti,driver-strength-ohm = <50>;
+-	disable-wp;
+-};
+-
+-&ospi0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcu_fss0_ospi0_pins_default>;
+-
+-	flash@0 {
+-		compatible = "jedec,spi-nor";
+-		reg = <0x0>;
+-		spi-tx-bus-width = <8>;
+-		spi-rx-bus-width = <8>;
+-		spi-max-frequency = <25000000>;
+-		cdns,tshsl-ns = <60>;
+-		cdns,tsd2d-ns = <60>;
+-		cdns,tchsh-ns = <60>;
+-		cdns,tslch-ns = <60>;
+-		cdns,read-delay = <4>;
+-
+-		partitions {
+-			compatible = "fixed-partitions";
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-
+-			partition@0 {
+-				label = "ospi.tiboot3";
+-				reg = <0x0 0x80000>;
 -			};
 -
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-j784s4-evm";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot {
-+	u_boot: template-13 {
- 		insert-template = <&u_boot_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for J784S4 board";
--				};
--
--				fdt-0 {
--					description = "k3-j784s4-evm";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--
--					ti-secure {
--						content = <&j784s4_evm_dtb>;
--						keyfile = "custMpk.pem";
--					};
--
--					j784s4_evm_dtb: blob-ext {
--						filename = J784S4_EVM_DTB;
--					};
--
--					hash {
--						algo = "crc32";
--					};
--				};
+-			partition@80000 {
+-				label = "ospi.tispl";
+-				reg = <0x80000 0x200000>;
 -			};
 -
--			configurations {
--				default = "conf-0";
+-			partition@280000 {
+-				label = "ospi.u-boot";
+-				reg = <0x280000 0x400000>;
+-			};
 -
--				conf-0 {
--					description = "k3-j784s4-evm";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
+-			partition@680000 {
+-				label = "ospi.env";
+-				reg = <0x680000 0x40000>;
+-			};
+-
+-			partition@6c0000 {
+-				label = "ospi.sysfw";
+-				reg = <0x6c0000 0x100000>;
+-			};
+-
+-			partition@7c0000 {
+-				label = "ospi.env.backup";
+-				reg = <0x7c0000 0x40000>;
+-			};
+-
+-			partition@800000 {
+-				label = "ospi.rootfs";
+-				reg = <0x800000 0x37c0000>;
+-			};
+-
+-			partition@3fc0000 {
+-				label = "ospi.phypattern";
+-				reg = <0x3fc0000 0x40000>;
 -			};
 -		};
- 	};
- };
- 
- &binman {
--	ti-spl_unsigned {
-+	ti_spl_unsigned: template-14 {
- 		insert-template = <&ti_spl_unsigned_template>;
- 
- 		fit {
-@@ -276,70 +208,14 @@
- 						filename = "ti-dm.bin";
- 					};
- 				};
+-	};
+-};
 -
--				fdt-0 {
--					description = "k3-j784s4-evm";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
+-&main_i2c0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_i2c0_pins_default>;
+-	clock-frequency = <400000>;
 -
--					spl_j784s4_evm_dtb_unsigned: blob {
--						filename = SPL_J784S4_EVM_DTB;
--					};
--				};
+-	i2c-mux@71 {
+-		compatible = "nxp,pca9543";
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		reg = <0x71>;
+-
+-		/* PCIe1 M.2 M Key I2C */
+-		i2c@0 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <0>;
+-		};
+-
+-		/* PCIe0 M.2 E Key I2C */
+-		i2c@1 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <1>;
+-		};
+-	};
+-};
+-
+-&main_i2c1 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_i2c1_pins_default>;
+-	/* i2c1 is used for DVI DDC, so we need to use 100kHz */
+-	clock-frequency = <100000>;
+-};
+-
+-&main_i2c3 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_i2c3_pins_default>;
+-	clock-frequency = <400000>;
+-
+-	i2c-mux@70 {
+-		compatible = "nxp,pca9543";
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		reg = <0x70>;
+-
+-		/* CSI0 I2C */
+-		i2c@0 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <0>;
+-		};
+-
+-		/* CSI1 I2C */
+-		i2c@1 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <1>;
+-		};
+-	};
+-};
+-
+-&main_i2c5 {
+-	/* Brought out on RPi Header */
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_i2c5_pins_default>;
+-	clock-frequency = <400000>;
+-};
+-
+-&main_gpio0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&rpi_header_gpio0_pins_default>;
+-};
+-
+-&main_gpio1 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&rpi_header_gpio1_pins_default>;
+-};
+-
+-&wkup_gpio0 {
+-	status = "okay";
+-};
+-
+-&usb_serdes_mux {
+-	idle-states = <1>, <1>; /* USB0 to SERDES3, USB1 to SERDES2 */
+-};
+-
+-&serdes_ln_ctrl {
+-	idle-states = <J721E_SERDES0_LANE0_PCIE0_LANE0>, <J721E_SERDES0_LANE1_IP4_UNUSED>,
+-		      <J721E_SERDES1_LANE0_PCIE1_LANE0>, <J721E_SERDES1_LANE1_PCIE1_LANE1>,
+-		      <J721E_SERDES2_LANE0_IP1_UNUSED>, <J721E_SERDES2_LANE1_USB3_1>,
+-		      <J721E_SERDES3_LANE0_USB3_0_SWAP>, <J721E_SERDES3_LANE1_USB3_0>,
+-		      <J721E_SERDES4_LANE0_EDP_LANE0>, <J721E_SERDES4_LANE1_EDP_LANE1>,
+-		      <J721E_SERDES4_LANE2_EDP_LANE2>, <J721E_SERDES4_LANE3_EDP_LANE3>;
+-};
+-
+-&serdes_wiz3 {
+-	typec-dir-gpios = <&main_gpio1 3 GPIO_ACTIVE_HIGH>;
+-	typec-dir-debounce-ms = <700>;	/* TUSB321, tCCB_DEFAULT 133 ms */
+-};
+-
+-&serdes3 {
+-	serdes3_usb_link: phy@0 {
+-		reg = <0>;
+-		cdns,num-lanes = <2>;
+-		#phy-cells = <0>;
+-		cdns,phy-type = <PHY_TYPE_USB3>;
+-		resets = <&serdes_wiz3 1>, <&serdes_wiz3 2>;
+-	};
+-};
+-
+-&serdes4 {
+-	torrent_phy_dp: phy@0 {
+-		reg = <0>;
+-		resets = <&serdes_wiz4 1>;
+-		cdns,phy-type = <PHY_TYPE_DP>;
+-		cdns,num-lanes = <4>;
+-		cdns,max-bit-rate = <5400>;
+-		#phy-cells = <0>;
+-	};
+-};
+-
+-&mhdp {
+-	phys = <&torrent_phy_dp>;
+-	phy-names = "dpphy";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&dp0_pins_default>;
+-};
+-
+-&usbss0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_usbss0_pins_default>;
+-	ti,vbus-divider;
+-};
+-
+-&usb0 {
+-	dr_mode = "otg";
+-	maximum-speed = "super-speed";
+-	phys = <&serdes3_usb_link>;
+-	phy-names = "cdns3,usb3-phy";
+-};
+-
+-&serdes2 {
+-	serdes2_usb_link: phy@1 {
+-		reg = <1>;
+-		cdns,num-lanes = <1>;
+-		#phy-cells = <0>;
+-		cdns,phy-type = <PHY_TYPE_USB3>;
+-		resets = <&serdes_wiz2 2>;
+-	};
+-};
+-
+-&usbss1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&main_usbss1_pins_default>;
+-	ti,vbus-divider;
+-};
+-
+-&usb1 {
+-	dr_mode = "host";
+-	maximum-speed = "super-speed";
+-	phys = <&serdes2_usb_link>;
+-	phy-names = "cdns3,usb3-phy";
+-};
+-
+-&mcu_cpsw {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcu_cpsw_pins_default>, <&mcu_mdio_pins_default>;
+-};
+-
+-&davinci_mdio {
+-	phy0: ethernet-phy@0 {
+-		reg = <0>;
+-		ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_00_NS>;
+-		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_4_B_NIB>;
+-	};
+-};
+-
+-&cpsw_port1 {
+-	phy-mode = "rgmii-rxid";
+-	phy-handle = <&phy0>;
+-};
+-
+-&dss {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&dss_vout0_pins_default>;
+-
+-	assigned-clocks = <&k3_clks 152 1>,	/* VP 1 pixel clock */
+-			  <&k3_clks 152 4>,	/* VP 2 pixel clock */
+-			  <&k3_clks 152 9>,	/* VP 3 pixel clock */
+-			  <&k3_clks 152 13>;	/* VP 4 pixel clock */
+-	assigned-clock-parents = <&k3_clks 152 2>,	/* PLL16_HSDIV0 */
+-				 <&k3_clks 152 6>,	/* DPI0_EXT_CLKSEL_OUT0 */
+-				 <&k3_clks 152 11>,	/* PLL18_HSDIV0 */
+-				 <&k3_clks 152 18>;	/* DPI1_EXT_CLKSEL_OUT0 */
+-};
+-
+-&dss_ports {
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-
+-	port@0  {
+-		reg = <0>;
+-
+-		dpi0_out: endpoint {
+-			remote-endpoint = <&dp0_in>;
+-		};
+-	};
+-
+-	port@1 {
+-		reg = <1>;
+-
+-		dpi1_out: endpoint {
+-			remote-endpoint = <&tfp410_in>;
+-		};
+-	};
+-};
+-
+-&dp0_ports {
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-
+-	port@0 {
+-		reg = <0>;
+-		dp0_in: endpoint {
+-			remote-endpoint = <&dpi0_out>;
+-		};
+-	};
+-
+-	port@4 {
+-		reg = <4>;
+-		dp0_out: endpoint {
+-			remote-endpoint = <&dp_connector_in>;
+-		};
+-	};
+-};
+-
+-&serdes0 {
+-	serdes0_pcie_link: phy@0 {
+-		reg = <0>;
+-		cdns,num-lanes = <1>;
+-		#phy-cells = <0>;
+-		cdns,phy-type = <PHY_TYPE_PCIE>;
+-		resets = <&serdes_wiz0 1>;
+-	};
+-};
+-
+-&serdes1 {
+-	serdes1_pcie_link: phy@0 {
+-		reg = <0>;
+-		cdns,num-lanes = <2>;
+-		#phy-cells = <0>;
+-		cdns,phy-type = <PHY_TYPE_PCIE>;
+-		resets = <&serdes_wiz1 1>, <&serdes_wiz1 2>;
+-	};
+-};
+-
+-&pcie0_rc {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&ekey_reset_pins_default>;
+-	reset-gpios = <&main_gpio0 72 GPIO_ACTIVE_HIGH>;
+-
+-	phys = <&serdes0_pcie_link>;
+-	phy-names = "pcie-phy";
+-	num-lanes = <1>;
+-};
+-
+-&pcie1_rc {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mkey_reset_pins_default>;
+-	reset-gpios = <&wkup_gpio0 11 GPIO_ACTIVE_HIGH>;
+-
+-	phys = <&serdes1_pcie_link>;
+-	phy-names = "pcie-phy";
+-	num-lanes = <2>;
+-};
+-
+-&ufs_wrapper {
+-	status = "disabled";
+-};
+-
+-&mailbox0_cluster0 {
+-	status = "okay";
+-	interrupts = <436>;
+-
+-	mbox_mcu_r5fss0_core0: mbox-mcu-r5fss0-core0 {
+-		ti,mbox-rx = <0 0 0>;
+-		ti,mbox-tx = <1 0 0>;
+-	};
+-
+-	mbox_mcu_r5fss0_core1: mbox-mcu-r5fss0-core1 {
+-		ti,mbox-rx = <2 0 0>;
+-		ti,mbox-tx = <3 0 0>;
+-	};
+-};
+-
+-&mailbox0_cluster1 {
+-	status = "okay";
+-	interrupts = <432>;
+-
+-	mbox_main_r5fss0_core0: mbox-main-r5fss0-core0 {
+-		ti,mbox-rx = <0 0 0>;
+-		ti,mbox-tx = <1 0 0>;
+-	};
+-
+-	mbox_main_r5fss0_core1: mbox-main-r5fss0-core1 {
+-		ti,mbox-rx = <2 0 0>;
+-		ti,mbox-tx = <3 0 0>;
+-	};
+-};
+-
+-&mailbox0_cluster2 {
+-	status = "okay";
+-	interrupts = <428>;
+-
+-	mbox_main_r5fss1_core0: mbox-main-r5fss1-core0 {
+-		ti,mbox-rx = <0 0 0>;
+-		ti,mbox-tx = <1 0 0>;
+-	};
+-
+-	mbox_main_r5fss1_core1: mbox-main-r5fss1-core1 {
+-		ti,mbox-rx = <2 0 0>;
+-		ti,mbox-tx = <3 0 0>;
+-	};
+-};
+-
+-&mailbox0_cluster3 {
+-	status = "okay";
+-	interrupts = <424>;
+-
+-	mbox_c66_0: mbox-c66-0 {
+-		ti,mbox-rx = <0 0 0>;
+-		ti,mbox-tx = <1 0 0>;
+-	};
+-
+-	mbox_c66_1: mbox-c66-1 {
+-		ti,mbox-rx = <2 0 0>;
+-		ti,mbox-tx = <3 0 0>;
+-	};
+-};
+-
+-&mailbox0_cluster4 {
+-	status = "okay";
+-	interrupts = <420>;
+-
+-	mbox_c71_0: mbox-c71-0 {
+-		ti,mbox-rx = <0 0 0>;
+-		ti,mbox-tx = <1 0 0>;
+-	};
+-};
+-
+-&mcu_r5fss0_core0 {
+-	mboxes = <&mailbox0_cluster0>, <&mbox_mcu_r5fss0_core0>;
+-	memory-region = <&mcu_r5fss0_core0_dma_memory_region>,
+-			<&mcu_r5fss0_core0_memory_region>;
+-};
+-
+-&mcu_r5fss0_core1 {
+-	mboxes = <&mailbox0_cluster0>, <&mbox_mcu_r5fss0_core1>;
+-	memory-region = <&mcu_r5fss0_core1_dma_memory_region>,
+-			<&mcu_r5fss0_core1_memory_region>;
+-};
+-
+-&main_r5fss0_core0 {
+-	mboxes = <&mailbox0_cluster1>, <&mbox_main_r5fss0_core0>;
+-	memory-region = <&main_r5fss0_core0_dma_memory_region>,
+-			<&main_r5fss0_core0_memory_region>;
+-};
+-
+-&main_r5fss0_core1 {
+-	mboxes = <&mailbox0_cluster1>, <&mbox_main_r5fss0_core1>;
+-	memory-region = <&main_r5fss0_core1_dma_memory_region>,
+-			<&main_r5fss0_core1_memory_region>;
+-};
+-
+-&main_r5fss1_core0 {
+-	mboxes = <&mailbox0_cluster2>, <&mbox_main_r5fss1_core0>;
+-	memory-region = <&main_r5fss1_core0_dma_memory_region>,
+-			<&main_r5fss1_core0_memory_region>;
+-};
+-
+-&main_r5fss1_core1 {
+-	mboxes = <&mailbox0_cluster2>, <&mbox_main_r5fss1_core1>;
+-	memory-region = <&main_r5fss1_core1_dma_memory_region>,
+-			<&main_r5fss1_core1_memory_region>;
+-};
+-
+-&c66_0 {
+-	status = "okay";
+-	mboxes = <&mailbox0_cluster3>, <&mbox_c66_0>;
+-	memory-region = <&c66_0_dma_memory_region>,
+-			<&c66_0_memory_region>;
+-};
+-
+-&c66_1 {
+-	status = "okay";
+-	mboxes = <&mailbox0_cluster3>, <&mbox_c66_1>;
+-	memory-region = <&c66_1_dma_memory_region>,
+-			<&c66_1_memory_region>;
+-};
+-
+-&c71_0 {
+-	status = "okay";
+-	mboxes = <&mailbox0_cluster4>, <&mbox_c71_0>;
+-	memory-region = <&c71_0_dma_memory_region>,
+-			<&c71_0_memory_region>;
+-};
+diff --git a/arch/arm/dts/k3-j721e-som-p0.dtsi b/arch/arm/dts/k3-j721e-som-p0.dtsi
+deleted file mode 100644
+index 7f0686c2ce3..00000000000
+--- a/arch/arm/dts/k3-j721e-som-p0.dtsi
++++ /dev/null
+@@ -1,446 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * Copyright (C) 2019-2020 Texas Instruments Incorporated - https://www.ti.com/
+- *
+- * Product Link: https://www.ti.com/tool/J721EXSOMXEVM
+- */
+-
+-/dts-v1/;
+-
+-#include "k3-j721e.dtsi"
+-
+-/ {
+-	memory@80000000 {
+-		device_type = "memory";
+-		/* 4G RAM */
+-		reg = <0x00000000 0x80000000 0x00000000 0x80000000>,
+-		      <0x00000008 0x80000000 0x00000000 0x80000000>;
+-	};
+-
+-	reserved_memory: reserved-memory {
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-		ranges;
+-
+-		secure_ddr: optee@9e800000 {
+-			reg = <0x00 0x9e800000 0x00 0x01800000>;
+-			alignment = <0x1000>;
+-			no-map;
+-		};
+-
+-		mcu_r5fss0_core0_dma_memory_region: r5f-dma-memory@a0000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa0000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		mcu_r5fss0_core0_memory_region: r5f-memory@a0100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa0100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		mcu_r5fss0_core1_dma_memory_region: r5f-dma-memory@a1000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa1000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		mcu_r5fss0_core1_memory_region: r5f-memory@a1100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa1100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		main_r5fss0_core0_dma_memory_region: r5f-dma-memory@a2000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa2000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		main_r5fss0_core0_memory_region: r5f-memory@a2100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa2100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		main_r5fss0_core1_dma_memory_region: r5f-dma-memory@a3000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa3000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		main_r5fss0_core1_memory_region: r5f-memory@a3100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa3100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		main_r5fss1_core0_dma_memory_region: r5f-dma-memory@a4000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa4000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		main_r5fss1_core0_memory_region: r5f-memory@a4100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa4100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		main_r5fss1_core1_dma_memory_region: r5f-dma-memory@a5000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa5000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		main_r5fss1_core1_memory_region: r5f-memory@a5100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa5100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		c66_1_dma_memory_region: c66-dma-memory@a6000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa6000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		c66_0_memory_region: c66-memory@a6100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa6100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		c66_0_dma_memory_region: c66-dma-memory@a7000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa7000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		c66_1_memory_region: c66-memory@a7100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa7100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		c71_0_dma_memory_region: c71-dma-memory@a8000000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa8000000 0x00 0x100000>;
+-			no-map;
+-		};
+-
+-		c71_0_memory_region: c71-memory@a8100000 {
+-			compatible = "shared-dma-pool";
+-			reg = <0x00 0xa8100000 0x00 0xf00000>;
+-			no-map;
+-		};
+-
+-		rtos_ipc_memory_region: ipc-memories@aa000000 {
+-			reg = <0x00 0xaa000000 0x00 0x01c00000>;
+-			alignment = <0x1000>;
+-			no-map;
+-		};
+-	};
+-};
+-
+-&wkup_pmx0 {
+-	wkup_i2c0_pins_default: wkup-i2c0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0xf8, PIN_INPUT_PULLUP, 0) /* (J25) WKUP_I2C0_SCL */
+-			J721E_WKUP_IOPAD(0xfc, PIN_INPUT_PULLUP, 0) /* (H24) WKUP_I2C0_SDA */
+-		>;
+-	};
+-
+-	mcu_fss0_ospi0_pins_default: mcu-fss0-ospi0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0x0000, PIN_OUTPUT, 0) /* MCU_OSPI0_CLK */
+-			J721E_WKUP_IOPAD(0x0008, PIN_INPUT, 0)  /* MCU_OSPI0_DQS */
+-			J721E_WKUP_IOPAD(0x000c, PIN_INPUT, 0)  /* MCU_OSPI0_D0 */
+-			J721E_WKUP_IOPAD(0x0010, PIN_INPUT, 0)  /* MCU_OSPI0_D1 */
+-			J721E_WKUP_IOPAD(0x0014, PIN_INPUT, 0)  /* MCU_OSPI0_D2 */
+-			J721E_WKUP_IOPAD(0x0018, PIN_INPUT, 0)  /* MCU_OSPI0_D3 */
+-			J721E_WKUP_IOPAD(0x001c, PIN_INPUT, 0)  /* MCU_OSPI0_D4 */
+-			J721E_WKUP_IOPAD(0x0020, PIN_INPUT, 0)  /* MCU_OSPI0_D5 */
+-			J721E_WKUP_IOPAD(0x0024, PIN_INPUT, 0)  /* MCU_OSPI0_D6 */
+-			J721E_WKUP_IOPAD(0x0028, PIN_INPUT, 0)  /* MCU_OSPI0_D7 */
+-			J721E_WKUP_IOPAD(0x002c, PIN_OUTPUT, 0) /* MCU_OSPI0_CSn0 */
+-		>;
+-	};
+-
+-	mcu_fss0_hpb0_pins_default: mcu-fss0-hpb0-default-pins {
+-		pinctrl-single,pins = <
+-			J721E_WKUP_IOPAD(0x0, PIN_OUTPUT, 1)  /* MCU_HYPERBUS0_CK */
+-			J721E_WKUP_IOPAD(0x4, PIN_OUTPUT, 1)  /* MCU_HYPERBUS0_CKn */
+-			J721E_WKUP_IOPAD(0x2c, PIN_OUTPUT, 1) /* MCU_HYPERBUS0_CSn0 */
+-			J721E_WKUP_IOPAD(0x54, PIN_OUTPUT, 3) /* MCU_HYPERBUS0_CSn1 */
+-			J721E_WKUP_IOPAD(0x30, PIN_OUTPUT, 1) /* MCU_HYPERBUS0_RESETn */
+-			J721E_WKUP_IOPAD(0x8, PIN_INPUT, 1)   /* MCU_HYPERBUS0_RWDS */
+-			J721E_WKUP_IOPAD(0xc, PIN_INPUT, 1)   /* MCU_HYPERBUS0_DQ0 */
+-			J721E_WKUP_IOPAD(0x10, PIN_INPUT, 1)  /* MCU_HYPERBUS0_DQ1 */
+-			J721E_WKUP_IOPAD(0x14, PIN_INPUT, 1)  /* MCU_HYPERBUS0_DQ2 */
+-			J721E_WKUP_IOPAD(0x18, PIN_INPUT, 1)  /* MCU_HYPERBUS0_DQ3 */
+-			J721E_WKUP_IOPAD(0x1c, PIN_INPUT, 1)  /* MCU_HYPERBUS0_DQ4 */
+-			J721E_WKUP_IOPAD(0x20, PIN_INPUT, 1)  /* MCU_HYPERBUS0_DQ5 */
+-			J721E_WKUP_IOPAD(0x24, PIN_INPUT, 1)  /* MCU_HYPERBUS0_DQ6 */
+-			J721E_WKUP_IOPAD(0x28, PIN_INPUT, 1)  /* MCU_HYPERBUS0_DQ7 */
+-		>;
+-	};
+-};
+-
+-&wkup_i2c0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&wkup_i2c0_pins_default>;
+-	clock-frequency = <400000>;
+-
+-	eeprom@50 {
+-		/* CAV24C256WE-GT3 */
+-		compatible = "atmel,24c256";
+-		reg = <0x50>;
+-	};
+-};
+-
+-&ospi0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcu_fss0_ospi0_pins_default>;
+-
+-	flash@0 {
+-		compatible = "jedec,spi-nor";
+-		reg = <0x0>;
+-		spi-tx-bus-width = <8>;
+-		spi-rx-bus-width = <8>;
+-		spi-max-frequency = <25000000>;
+-		cdns,tshsl-ns = <60>;
+-		cdns,tsd2d-ns = <60>;
+-		cdns,tchsh-ns = <60>;
+-		cdns,tslch-ns = <60>;
+-		cdns,read-delay = <0>;
+-
+-		partitions {
+-			compatible = "fixed-partitions";
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-
+-			partition@0 {
+-				label = "ospi.tiboot3";
+-				reg = <0x0 0x80000>;
 -			};
 -
--			configurations {
--				default = "conf-0";
--
--				conf-0 {
--					description = "k3-j784s4-evm";
--					firmware = "atf";
--					loadables = "tee", "dm", "spl";
--					fdt = "fdt-0";
--				};
- 			};
- 		};
- 	};
- };
- 
- &binman {
--	u-boot_unsigned {
-+	u_boot_unsigned: template-15 {
- 		insert-template = <&u_boot_unsigned_template>;
--
--		fit {
--			images {
--				uboot {
--					description = "U-Boot for J784S4 board";
--				};
--
--				fdt-0 {
--					description = "k3-j784s4-evm";
--					type = "flat_dt";
--					arch = "arm";
--					compression = "none";
--
--					j784s4_evm_dtb_unsigned: blob {
--						filename = J784S4_EVM_DTB;
--					};
--
--					hash {
--						algo = "crc32";
--					};
--				};
+-			partition@80000 {
+-				label = "ospi.tispl";
+-				reg = <0x80000 0x200000>;
 -			};
 -
--			configurations {
--				default = "conf-0";
+-			partition@280000 {
+-				label = "ospi.u-boot";
+-				reg = <0x280000 0x400000>;
+-			};
 -
--				conf-0 {
--					description = "k3-j784s4-evm";
--					firmware = "uboot";
--					loadables = "uboot";
--					fdt = "fdt-0";
--				};
+-			partition@680000 {
+-				label = "ospi.env";
+-				reg = <0x680000 0x20000>;
+-			};
+-
+-			partition@6a0000 {
+-				label = "ospi.env.backup";
+-				reg = <0x6a0000 0x20000>;
+-			};
+-
+-			partition@6c0000 {
+-				label = "ospi.sysfw";
+-				reg = <0x6c0000 0x100000>;
+-			};
+-
+-			partition@800000 {
+-				label = "ospi.rootfs";
+-				reg = <0x800000 0x37c0000>;
+-			};
+-
+-			partition@3fe0000 {
+-				label = "ospi.phypattern";
+-				reg = <0x3fe0000 0x20000>;
 -			};
 -		};
- 	};
- };
- #endif
-diff --git a/arch/arm/dts/k3-j784s4-evm-u-boot.dtsi b/arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
-index ac749782bfc..e5e5a6c75be 100644
---- a/arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
-+++ b/arch/arm/dts/k3-j784s4-evm-u-boot.dtsi
-@@ -3,6 +3,10 @@
-  * Copyright (C) 2023 Texas Instruments Incorporated - https://www.ti.com/
-  */
+-	};
+-};
+-
+-&hbmc {
+-	/* OSPI and HBMC are muxed inside FSS, Bootloader will enable
+-	 * appropriate node based on board detection
+-	 */
+-	status = "disabled";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcu_fss0_hpb0_pins_default>;
+-	ranges = <0x00 0x00 0x05 0x00000000 0x4000000>, /* 64MB Flash on CS0 */
+-		 <0x01 0x00 0x05 0x04000000 0x800000>; /* 8MB RAM on CS1 */
+-
+-	flash@0,0 {
+-		compatible = "cypress,hyperflash", "cfi-flash";
+-		reg = <0x00 0x00 0x4000000>;
+-
+-		partitions {
+-			compatible = "fixed-partitions";
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-
+-			partition@0 {
+-				label = "hbmc.tiboot3";
+-				reg = <0x0 0x80000>;
+-			};
+-
+-			partition@80000 {
+-				label = "hbmc.tispl";
+-				reg = <0x80000 0x200000>;
+-			};
+-
+-			partition@280000 {
+-				label = "hbmc.u-boot";
+-				reg = <0x280000 0x400000>;
+-			};
+-
+-			partition@680000 {
+-				label = "hbmc.env";
+-				reg = <0x680000 0x40000>;
+-			};
+-
+-			partition@6c0000 {
+-				label = "hbmc.sysfw";
+-				reg = <0x6c0000 0x100000>;
+-			};
+-
+-			partition@800000 {
+-				label = "hbmc.rootfs";
+-				reg = <0x800000 0x3800000>;
+-			};
+-		};
+-	};
+-};
+-
+-&mailbox0_cluster0 {
+-	status = "okay";
+-	interrupts = <436>;
+-
+-	mbox_mcu_r5fss0_core0: mbox-mcu-r5fss0-core0 {
+-		ti,mbox-rx = <0 0 0>;
+-		ti,mbox-tx = <1 0 0>;
+-	};
+-
+-	mbox_mcu_r5fss0_core1: mbox-mcu-r5fss0-core1 {
+-		ti,mbox-rx = <2 0 0>;
+-		ti,mbox-tx = <3 0 0>;
+-	};
+-};
+-
+-&mailbox0_cluster1 {
+-	status = "okay";
+-	interrupts = <432>;
+-
+-	mbox_main_r5fss0_core0: mbox-main-r5fss0-core0 {
+-		ti,mbox-rx = <0 0 0>;
+-		ti,mbox-tx = <1 0 0>;
+-	};
+-
+-	mbox_main_r5fss0_core1: mbox-main-r5fss0-core1 {
+-		ti,mbox-rx = <2 0 0>;
+-		ti,mbox-tx = <3 0 0>;
+-	};
+-};
+-
+-&mailbox0_cluster2 {
+-	status = "okay";
+-	interrupts = <428>;
+-
+-	mbox_main_r5fss1_core0: mbox-main-r5fss1-core0 {
+-		ti,mbox-rx = <0 0 0>;
+-		ti,mbox-tx = <1 0 0>;
+-	};
+-
+-	mbox_main_r5fss1_core1: mbox-main-r5fss1-core1 {
+-		ti,mbox-rx = <2 0 0>;
+-		ti,mbox-tx = <3 0 0>;
+-	};
+-};
+-
+-&mailbox0_cluster3 {
+-	status = "okay";
+-	interrupts = <424>;
+-
+-	mbox_c66_0: mbox-c66-0 {
+-		ti,mbox-rx = <0 0 0>;
+-		ti,mbox-tx = <1 0 0>;
+-	};
+-
+-	mbox_c66_1: mbox-c66-1 {
+-		ti,mbox-rx = <2 0 0>;
+-		ti,mbox-tx = <3 0 0>;
+-	};
+-};
+-
+-&mailbox0_cluster4 {
+-	status = "okay";
+-	interrupts = <420>;
+-
+-	mbox_c71_0: mbox-c71-0 {
+-		ti,mbox-rx = <0 0 0>;
+-		ti,mbox-tx = <1 0 0>;
+-	};
+-};
+-
+-&mcu_r5fss0_core0 {
+-	mboxes = <&mailbox0_cluster0>, <&mbox_mcu_r5fss0_core0>;
+-	memory-region = <&mcu_r5fss0_core0_dma_memory_region>,
+-			<&mcu_r5fss0_core0_memory_region>;
+-};
+-
+-&mcu_r5fss0_core1 {
+-	mboxes = <&mailbox0_cluster0>, <&mbox_mcu_r5fss0_core1>;
+-	memory-region = <&mcu_r5fss0_core1_dma_memory_region>,
+-			<&mcu_r5fss0_core1_memory_region>;
+-};
+-
+-&main_r5fss0_core0 {
+-	mboxes = <&mailbox0_cluster1>, <&mbox_main_r5fss0_core0>;
+-	memory-region = <&main_r5fss0_core0_dma_memory_region>,
+-			<&main_r5fss0_core0_memory_region>;
+-};
+-
+-&main_r5fss0_core1 {
+-	mboxes = <&mailbox0_cluster1>, <&mbox_main_r5fss0_core1>;
+-	memory-region = <&main_r5fss0_core1_dma_memory_region>,
+-			<&main_r5fss0_core1_memory_region>;
+-};
+-
+-&main_r5fss1_core0 {
+-	mboxes = <&mailbox0_cluster2>, <&mbox_main_r5fss1_core0>;
+-	memory-region = <&main_r5fss1_core0_dma_memory_region>,
+-			<&main_r5fss1_core0_memory_region>;
+-};
+-
+-&main_r5fss1_core1 {
+-	mboxes = <&mailbox0_cluster2>, <&mbox_main_r5fss1_core1>;
+-	memory-region = <&main_r5fss1_core1_dma_memory_region>,
+-			<&main_r5fss1_core1_memory_region>;
+-};
+-
+-&c66_0 {
+-	status = "okay";
+-	mboxes = <&mailbox0_cluster3>, <&mbox_c66_0>;
+-	memory-region = <&c66_0_dma_memory_region>,
+-			<&c66_0_memory_region>;
+-};
+-
+-&c66_1 {
+-	status = "okay";
+-	mboxes = <&mailbox0_cluster3>, <&mbox_c66_1>;
+-	memory-region = <&c66_1_dma_memory_region>,
+-			<&c66_1_memory_region>;
+-};
+-
+-&c71_0 {
+-	status = "okay";
+-	mboxes = <&mailbox0_cluster4>, <&mbox_c71_0>;
+-	memory-region = <&c71_0_dma_memory_region>,
+-			<&c71_0_memory_region>;
+-};
+diff --git a/arch/arm/dts/k3-j721e-thermal.dtsi b/arch/arm/dts/k3-j721e-thermal.dtsi
+deleted file mode 100644
+index c2523279001..00000000000
+--- a/arch/arm/dts/k3-j721e-thermal.dtsi
++++ /dev/null
+@@ -1,75 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-
+-#include <dt-bindings/thermal/thermal.h>
+-
+-thermal_zones: thermal-zones {
+-	wkup_thermal: wkup-thermal {
+-		polling-delay-passive = <250>; /* milliseconds */
+-		polling-delay = <500>; /* milliseconds */
+-		thermal-sensors = <&wkup_vtm0 0>;
+-
+-		trips {
+-			wkup_crit: wkup-crit {
+-				temperature = <125000>; /* milliCelsius */
+-				hysteresis = <2000>; /* milliCelsius */
+-				type = "critical";
+-			};
+-		};
+-	};
+-
+-	mpu_thermal: mpu-thermal {
+-		polling-delay-passive = <250>; /* milliseconds */
+-		polling-delay = <500>; /* milliseconds */
+-		thermal-sensors = <&wkup_vtm0 1>;
+-
+-		trips {
+-			mpu_crit: mpu-crit {
+-				temperature = <125000>; /* milliCelsius */
+-				hysteresis = <2000>; /* milliCelsius */
+-				type = "critical";
+-			};
+-		};
+-	};
+-
+-	c7x_thermal: c7x-thermal {
+-		polling-delay-passive = <250>; /* milliseconds */
+-		polling-delay = <500>; /* milliseconds */
+-		thermal-sensors = <&wkup_vtm0 2>;
+-
+-		trips {
+-			c7x_crit: c7x-crit {
+-				temperature = <125000>; /* milliCelsius */
+-				hysteresis = <2000>; /* milliCelsius */
+-				type = "critical";
+-			};
+-		};
+-	};
+-
+-	gpu_thermal: gpu-thermal {
+-		polling-delay-passive = <250>; /* milliseconds */
+-		polling-delay = <500>; /* milliseconds */
+-		thermal-sensors = <&wkup_vtm0 3>;
+-
+-		trips {
+-			gpu_crit: gpu-crit {
+-				temperature = <125000>; /* milliCelsius */
+-				hysteresis = <2000>; /* milliCelsius */
+-				type = "critical";
+-			};
+-		};
+-	};
+-
+-	r5f_thermal: r5f-thermal {
+-		polling-delay-passive = <250>; /* milliseconds */
+-		polling-delay = <500>; /* milliseconds */
+-		thermal-sensors = <&wkup_vtm0 4>;
+-
+-		trips {
+-			r5f_crit: r5f-crit {
+-				temperature = <125000>; /* milliCelsius */
+-				hysteresis = <2000>; /* milliCelsius */
+-				type = "critical";
+-			};
+-		};
+-	};
+-};
+diff --git a/arch/arm/dts/k3-j721e.dtsi b/arch/arm/dts/k3-j721e.dtsi
+deleted file mode 100644
+index a200810df54..00000000000
+--- a/arch/arm/dts/k3-j721e.dtsi
++++ /dev/null
+@@ -1,176 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0
+-/*
+- * Device Tree Source for J721E SoC Family
+- *
+- * Copyright (C) 2016-2019 Texas Instruments Incorporated - https://www.ti.com/
+- */
+-
+-#include <dt-bindings/interrupt-controller/irq.h>
+-#include <dt-bindings/interrupt-controller/arm-gic.h>
+-#include <dt-bindings/soc/ti,sci_pm_domain.h>
+-
+-#include "k3-pinctrl.h"
+-
+-/ {
+-	model = "Texas Instruments K3 J721E SoC";
+-	compatible = "ti,j721e";
+-	interrupt-parent = <&gic500>;
+-	#address-cells = <2>;
+-	#size-cells = <2>;
+-
+-	chosen { };
+-
+-	cpus {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-		cpu-map {
+-			cluster0: cluster0 {
+-				core0 {
+-					cpu = <&cpu0>;
+-				};
+-
+-				core1 {
+-					cpu = <&cpu1>;
+-				};
+-			};
+-
+-		};
+-
+-		cpu0: cpu@0 {
+-			compatible = "arm,cortex-a72";
+-			reg = <0x000>;
+-			device_type = "cpu";
+-			enable-method = "psci";
+-			i-cache-size = <0xC000>;
+-			i-cache-line-size = <64>;
+-			i-cache-sets = <256>;
+-			d-cache-size = <0x8000>;
+-			d-cache-line-size = <64>;
+-			d-cache-sets = <256>;
+-			next-level-cache = <&L2_0>;
+-		};
+-
+-		cpu1: cpu@1 {
+-			compatible = "arm,cortex-a72";
+-			reg = <0x001>;
+-			device_type = "cpu";
+-			enable-method = "psci";
+-			i-cache-size = <0xC000>;
+-			i-cache-line-size = <64>;
+-			i-cache-sets = <256>;
+-			d-cache-size = <0x8000>;
+-			d-cache-line-size = <64>;
+-			d-cache-sets = <256>;
+-			next-level-cache = <&L2_0>;
+-		};
+-	};
+-
+-	L2_0: l2-cache0 {
+-		compatible = "cache";
+-		cache-level = <2>;
+-		cache-unified;
+-		cache-size = <0x100000>;
+-		cache-line-size = <64>;
+-		cache-sets = <1024>;
+-		next-level-cache = <&msmc_l3>;
+-	};
+-
+-	msmc_l3: l3-cache0 {
+-		compatible = "cache";
+-		cache-level = <3>;
+-		cache-unified;
+-	};
+-
+-	firmware {
+-		optee {
+-			compatible = "linaro,optee-tz";
+-			method = "smc";
+-		};
+-
+-		psci: psci {
+-			compatible = "arm,psci-1.0";
+-			method = "smc";
+-		};
+-	};
+-
+-	a72_timer0: timer-cl0-cpu0 {
+-		compatible = "arm,armv8-timer";
+-		interrupts = <GIC_PPI 13 IRQ_TYPE_LEVEL_LOW>, /* cntpsirq */
+-			     <GIC_PPI 14 IRQ_TYPE_LEVEL_LOW>, /* cntpnsirq */
+-			     <GIC_PPI 11 IRQ_TYPE_LEVEL_LOW>, /* cntvirq */
+-			     <GIC_PPI 10 IRQ_TYPE_LEVEL_LOW>; /* cnthpirq */
+-	};
+-
+-	pmu: pmu {
+-		compatible = "arm,cortex-a72-pmu";
+-		/* Recommendation from GIC500 TRM Table A.3 */
+-		interrupts = <GIC_PPI 7 IRQ_TYPE_LEVEL_HIGH>;
+-	};
+-
+-	cbass_main: bus@100000 {
+-		compatible = "simple-bus";
+-		#address-cells = <2>;
+-		#size-cells = <2>;
+-		ranges = <0x00 0x00100000 0x00 0x00100000 0x00 0x00020000>, /* ctrl mmr */
+-			 <0x00 0x00600000 0x00 0x00600000 0x00 0x00031100>, /* GPIO */
+-			 <0x00 0x00700000 0x00 0x00700000 0x00 0x00001000>, /* ESM */
+-			 <0x00 0x00900000 0x00 0x00900000 0x00 0x00012000>, /* serdes */
+-			 <0x00 0x00a40000 0x00 0x00a40000 0x00 0x00000800>, /* timesync router */
+-			 <0x00 0x06000000 0x00 0x06000000 0x00 0x00400000>, /* USBSS0 */
+-			 <0x00 0x06400000 0x00 0x06400000 0x00 0x00400000>, /* USBSS1 */
+-			 <0x00 0x01000000 0x00 0x01000000 0x00 0x0af02400>, /* Most peripherals */
+-			 <0x00 0x0c000000 0x00 0x0c000000 0x00 0x0d000000>, /* CPSW9G */
+-			 <0x00 0x30000000 0x00 0x30000000 0x00 0x0c400000>, /* MAIN NAVSS */
+-			 <0x00 0x0d000000 0x00 0x0d000000 0x00 0x01800000>, /* PCIe Core*/
+-			 <0x00 0x0e000000 0x00 0x0e000000 0x00 0x01800000>, /* PCIe Core*/
+-			 <0x00 0x10000000 0x00 0x10000000 0x00 0x10000000>, /* PCIe DAT */
+-			 <0x00 0x64800000 0x00 0x64800000 0x00 0x00800000>, /* C71 */
+-			 <0x00 0x6f000000 0x00 0x6f000000 0x00 0x00310000>, /* A72 PERIPHBASE */
+-			 <0x44 0x00000000 0x44 0x00000000 0x00 0x08000000>, /* PCIe2 DAT */
+-			 <0x44 0x10000000 0x44 0x10000000 0x00 0x08000000>, /* PCIe3 DAT */
+-			 <0x4d 0x80800000 0x4d 0x80800000 0x00 0x00800000>, /* C66_0 */
+-			 <0x4d 0x81800000 0x4d 0x81800000 0x00 0x00800000>, /* C66_1 */
+-			 <0x4e 0x20000000 0x4e 0x20000000 0x00 0x00080000>, /* GPU */
+-			 <0x00 0x70000000 0x00 0x70000000 0x00 0x00800000>, /* MSMC RAM */
+-
+-			 /* MCUSS_WKUP Range */
+-			 <0x00 0x28380000 0x00 0x28380000 0x00 0x03880000>,
+-			 <0x00 0x40200000 0x00 0x40200000 0x00 0x00998400>,
+-			 <0x00 0x40f00000 0x00 0x40f00000 0x00 0x00020000>,
+-			 <0x00 0x41000000 0x00 0x41000000 0x00 0x00020000>,
+-			 <0x00 0x41400000 0x00 0x41400000 0x00 0x00020000>,
+-			 <0x00 0x41c00000 0x00 0x41c00000 0x00 0x00100000>,
+-			 <0x00 0x42040000 0x00 0x42040000 0x00 0x03ac2400>,
+-			 <0x00 0x45100000 0x00 0x45100000 0x00 0x00c24000>,
+-			 <0x00 0x46000000 0x00 0x46000000 0x00 0x00200000>,
+-			 <0x00 0x47000000 0x00 0x47000000 0x00 0x00068400>,
+-			 <0x00 0x50000000 0x00 0x50000000 0x00 0x10000000>,
+-			 <0x05 0x00000000 0x05 0x00000000 0x01 0x00000000>,
+-			 <0x07 0x00000000 0x07 0x00000000 0x01 0x00000000>;
+-
+-		cbass_mcu_wakeup: bus@28380000 {
+-			compatible = "simple-bus";
+-			#address-cells = <2>;
+-			#size-cells = <2>;
+-			ranges = <0x00 0x28380000 0x00 0x28380000 0x00 0x03880000>, /* MCU NAVSS*/
+-				 <0x00 0x40200000 0x00 0x40200000 0x00 0x00998400>, /* First peripheral window */
+-				 <0x00 0x40f00000 0x00 0x40f00000 0x00 0x00020000>, /* CTRL_MMR0 */
+-				 <0x00 0x41000000 0x00 0x41000000 0x00 0x00020000>, /* MCU R5F Core0 */
+-				 <0x00 0x41400000 0x00 0x41400000 0x00 0x00020000>, /* MCU R5F Core1 */
+-				 <0x00 0x41c00000 0x00 0x41c00000 0x00 0x00100000>, /* MCU SRAM */
+-				 <0x00 0x42040000 0x00 0x42040000 0x00 0x03ac2400>, /* WKUP peripheral window */
+-				 <0x00 0x45100000 0x00 0x45100000 0x00 0x00c24000>, /* MMRs, remaining NAVSS */
+-				 <0x00 0x46000000 0x00 0x46000000 0x00 0x00200000>, /* CPSW */
+-				 <0x00 0x47000000 0x00 0x47000000 0x00 0x00068400>, /* OSPI register space */
+-				 <0x00 0x50000000 0x00 0x50000000 0x00 0x10000000>, /* FSS OSPI0/1 data region 0 */
+-				 <0x05 0x00000000 0x05 0x00000000 0x01 0x00000000>, /* FSS OSPI0 data region 3 */
+-				 <0x07 0x00000000 0x07 0x00000000 0x01 0x00000000>; /* FSS OSPI1 data region 3*/
+-		};
+-	};
+-
+-	#include "k3-j721e-thermal.dtsi"
+-};
+-
+-/* Now include the peripherals for each bus segments */
+-#include "k3-j721e-main.dtsi"
+-#include "k3-j721e-mcu-wakeup.dtsi"
+diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
+index 34f7eeebbd5..869f855d5de 100644
+--- a/configs/j721e_evm_a72_defconfig
++++ b/configs/j721e_evm_a72_defconfig
+@@ -14,7 +14,7 @@ CONFIG_SF_DEFAULT_SPEED=25000000
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+ CONFIG_SPL_DM_SPI=y
+-CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-common-proc-board"
++CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j721e-common-proc-board"
+ CONFIG_SPL_TEXT_BASE=0x80080000
+ CONFIG_OF_LIBFDT_OVERLAY=y
+ CONFIG_DM_RESET=y
+@@ -85,7 +85,7 @@ CONFIG_MMC_SPEED_MODE_SET=y
+ # CONFIG_SPL_EFI_PARTITION is not set
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
+-CONFIG_OF_LIST="k3-j721e-common-proc-board"
++CONFIG_OF_LIST="ti/k3-j721e-common-proc-board"
+ CONFIG_MULTI_DTB_FIT=y
+ CONFIG_SPL_MULTI_DTB_FIT=y
+ CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
+@@ -98,6 +98,7 @@ CONFIG_REGMAP=y
+ CONFIG_SPL_REGMAP=y
+ CONFIG_SPL_SYSCON=y
+ CONFIG_SPL_OF_TRANSLATE=y
++CONFIG_OF_UPSTREAM=y
+ CONFIG_CLK=y
+ CONFIG_SPL_CLK=y
+ CONFIG_CLK_TI_SCI=y
+diff --git a/configs/j721e_sk_a72_defconfig b/configs/j721e_sk_a72_defconfig
+index 8907b8ae58f..80e3e90cafd 100644
+--- a/configs/j721e_sk_a72_defconfig
++++ b/configs/j721e_sk_a72_defconfig
+@@ -5,5 +5,5 @@ CONFIG_ARCH_K3=y
+ CONFIG_SOC_K3_J721E=y
+ CONFIG_TARGET_J721E_A72_EVM=y
  
-+#define SPL_BOARD_DTB "spl/dts/ti/k3-j784s4-evm.dtb"
-+#define BOARD_DESCRIPTION "k3-j784s4-evm"
-+#define UBOOT_BOARD_DESCRIPTION "U-Boot for J784S4 EVM"
-+
- #include "k3-j784s4-binman.dtsi"
- 
- / {
-@@ -29,3 +33,41 @@
- 		bootph-pre-ram;
- 	};
- };
-+
-+#ifndef CONFIG_ARM64
-+
-+&binman {
-+	tiboot3-j784s4-hs-evm {
-+		insert-template = <&tiboot3_j784s4_hs_evm>;
-+	};
-+
-+	tiboot3-j784s4-hs-fs-evm {
-+		insert-template = <&tiboot3_j784s4_hs_fs_evm>;
-+	};
-+
-+	tiboot3-j784s4-gp-evm {
-+		insert-template = <&tiboot3_j784s4_gp_evm>;
-+	};
-+};
-+
-+#else
-+
-+&binman {
-+	tispl {
-+		insert-template = <&ti_spl>;
-+	};
-+
-+	u-boot {
-+		insert-template = <&u_boot>;
-+	};
-+
-+	tispl-unsigned {
-+		insert-template = <&ti_spl_unsigned>;
-+	};
-+
-+	u-boot-unsigned {
-+		insert-template = <&u_boot_unsigned>;
-+	};
-+};
-+
-+#endif
+-CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-sk"
+-CONFIG_OF_LIST="k3-j721e-sk"
++CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j721e-sk"
++CONFIG_OF_LIST="ti/k3-j721e-sk"
 -- 
 2.34.1
 
