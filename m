@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48B32C54E71
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:02:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03198C54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:02:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 850838821C;
-	Fri, 22 Mar 2024 11:59:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 03CF48820A;
+	Fri, 22 Mar 2024 11:59:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D93888218; Fri, 22 Mar 2024 11:59:17 +0100 (CET)
+ id AD975881C6; Fri, 22 Mar 2024 11:59:20 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id AE9A58817E
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 11:59:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 352ED881CF
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 11:59:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 501C61692;
- Fri, 22 Mar 2024 03:59:48 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CACCA1007;
+ Fri, 22 Mar 2024 03:59:51 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 350553F64C;
- Fri, 22 Mar 2024 03:59:10 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B00D73F64C;
+ Fri, 22 Mar 2024 03:59:14 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -36,10 +36,9 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Michal Simek <monstr@monstr.eu>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 19/20] MAINTAINERS: add entry for FWU multi bank update
- feature
-Date: Fri, 22 Mar 2024 16:27:32 +0530
-Message-Id: <20240322105733.203888-20-sughosh.ganu@linaro.org>
+Subject: [PATCH v3 20/20] configs: fwu: re-enable FWU configs
+Date: Fri, 22 Mar 2024 16:27:33 +0530
+Message-Id: <20240322105733.203888-21-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240322105733.203888-1-sughosh.ganu@linaro.org>
 References: <20240322105733.203888-1-sughosh.ganu@linaro.org>
@@ -61,35 +60,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add an entry for the FWU Multi Bank Update feature.
+Now that support for FWU metadata version 2 has been added, the
+feature can be enabled on platforms which had enabled it. A new config
+symbol for selecting the metadata version for the platform is also
+being added.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V2:
-* New patch
+* Add config symbol for selecting either of the two metadata versions.
 
- MAINTAINERS | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ configs/corstone1000_defconfig           | 3 +++
+ configs/sandbox64_defconfig              | 2 ++
+ configs/synquacer_developerbox_defconfig | 4 ++++
+ 3 files changed, 9 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index cd9b2d42e8..5409b1d78a 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1147,6 +1147,14 @@ T:	git https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq.git
- F:	drivers/watchdog/sp805_wdt.c
- F:	drivers/watchdog/sbsa_gwdt.c
- 
-+FWU Multi Bank Update
-+M:	Sughosh Ganu <sughosh.ganu@linaro.org>
-+S:	Maintained
-+T:	git https://source.denx.de/u-boot/custodians/u-boot-efi.git
-+F:	lib/fwu_updates/*
-+F:	drivers/fwu-mdata/*
-+F:	tools/mkfwumdata.c
-+
- GATEWORKS_SC
- M:	Tim Harvey <tharvey@gateworks.com>
- S:	Maintained
+diff --git a/configs/corstone1000_defconfig b/configs/corstone1000_defconfig
+index 29d7550afb..ab4e0fefc9 100644
+--- a/configs/corstone1000_defconfig
++++ b/configs/corstone1000_defconfig
+@@ -24,6 +24,7 @@ CONFIG_LOGLEVEL=7
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SYS_PROMPT="corstone1000# "
+ # CONFIG_CMD_CONSOLE is not set
++CONFIG_CMD_FWU_METADATA=y
+ CONFIG_CMD_BOOTZ=y
+ # CONFIG_CMD_XIMG is not set
+ CONFIG_CMD_GPT=y
+@@ -66,3 +67,5 @@ CONFIG_FFA_SHARED_MM_BUF_OFFSET=0
+ CONFIG_FFA_SHARED_MM_BUF_ADDR=0x02000000
+ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_IGNORE_OSINDICATIONS=y
++CONFIG_FWU_MULTI_BANK_UPDATE=y
++CONFIG_FWU_MDATA_V1=y
+diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
+index 7e8200e70c..7b316f0d80 100644
+--- a/configs/sandbox64_defconfig
++++ b/configs/sandbox64_defconfig
+@@ -272,6 +272,8 @@ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+ CONFIG_EFI_SECURE_BOOT=y
+ CONFIG_TEST_FDTDEC=y
++CONFIG_FWU_MULTI_BANK_UPDATE=y
++CONFIG_FWU_MDATA_V1=y
+ CONFIG_UNIT_TEST=y
+ CONFIG_UT_TIME=y
+ CONFIG_UT_DM=y
+diff --git a/configs/synquacer_developerbox_defconfig b/configs/synquacer_developerbox_defconfig
+index 616d410074..7e1aeac217 100644
+--- a/configs/synquacer_developerbox_defconfig
++++ b/configs/synquacer_developerbox_defconfig
+@@ -17,6 +17,7 @@ CONFIG_SYS_BOOTM_LEN=0x800000
+ CONFIG_BOOTSTAGE_STASH_SIZE=4096
+ CONFIG_HUSH_PARSER=y
+ CONFIG_SYS_MAXARGS=128
++CONFIG_CMD_FWU_METADATA=y
+ CONFIG_CMD_IMLS=y
+ CONFIG_CMD_ERASEENV=y
+ CONFIG_CMD_NVEDIT_EFI=y
+@@ -51,6 +52,7 @@ CONFIG_DFU_TFTP=y
+ CONFIG_DFU_MTD=y
+ CONFIG_DFU_RAM=y
+ CONFIG_DFU_SF=y
++CONFIG_FWU_MDATA_MTD=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_SYNQUACER=y
+ CONFIG_MMC_SDHCI=y
+@@ -93,3 +95,5 @@ CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
+ CONFIG_EFI_CAPSULE_ON_DISK=y
+ CONFIG_EFI_IGNORE_OSINDICATIONS=y
+ CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
++CONFIG_FWU_MULTI_BANK_UPDATE=y
++CONFIG_FWU_MDATA_V2=y
 -- 
 2.34.1
 
