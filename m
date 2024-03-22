@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3ACBC54E71
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 13:10:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83FA1C54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 13:10:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 487D4881BC;
-	Fri, 22 Mar 2024 14:10:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B2FA1881EC;
+	Fri, 22 Mar 2024 14:10:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="c9bgjjkk";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cyP8c+l2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBAC3881A9; Fri, 22 Mar 2024 14:10:33 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 3DEB6881E2; Fri, 22 Mar 2024 14:10:35 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F022E881AC
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 14:10:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F140881D9
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 14:10:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42MDALEJ004801;
- Fri, 22 Mar 2024 08:10:21 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42MDAQlM064664;
+ Fri, 22 Mar 2024 08:10:26 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1711113021;
- bh=+3mXuYAy+wJ0QcKz4of1cS6ea5hZEiMrFv1LYTXIxmg=;
+ s=ti-com-17Q1; t=1711113026;
+ bh=QJFide4xxqZ2jKZfzrFj6/mZZ+X+uis589/b0xwd4PE=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=c9bgjjkkC2Oj7SY3riu37uzn9PBUb8Kuup5mgUkQRNYbWYukJ7MsX6zZ6P3pVInwY
- XdW3rFOx3oVNF2NzvbOtkRIGt1tMs4EO28cN8OzeZniqf+FcYjFLVmfO14WjNziesa
- 6Eghi9NpbpIYzBmaeVaakT5xHQzZih1sxpL2tN9w=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42MDALwK005551
+ b=cyP8c+l2DZxrJ+TVufoynGCUNF35Zv0NSuVWrol9a/5sGvQZBIL9tLYRkHX8veBgD
+ D7XYocyqN34hb/B30RFazAgHFMQHGO10rKyDEj4ilmoZMynPqOjIN7qzi0xwVg/a3E
+ GfAAOzirdiImDvqEIaam4/xmJdHmHonCe40N8dJE=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42MDAQJg080526
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 22 Mar 2024 08:10:21 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 22 Mar 2024 08:10:26 -0500
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 22
- Mar 2024 08:10:21 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Mar 2024 08:10:25 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 22 Mar 2024 08:10:21 -0500
+ Frontend Transport; Fri, 22 Mar 2024 08:10:26 -0500
 Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
  (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42MDABZ8026606;
- Fri, 22 Mar 2024 08:10:17 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42MDABZ9026606;
+ Fri, 22 Mar 2024 08:10:21 -0500
 From: Neha Malcom Francis <n-francis@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
  <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
@@ -57,10 +57,10 @@ To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
 CC: <michal.simek@amd.com>, <marex@denx.de>, <neil.armstrong@linaro.org>,
  <afd@ti.com>, <vigneshr@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>,
  <u-kumar1@ti.com>, <n-francis@ti.com>
-Subject: [PATCH 1/4] configs: j721e_sk: Move to separate defconfig for J721E
- SK board
-Date: Fri, 22 Mar 2024 18:40:08 +0530
-Message-ID: <20240322131011.1029620-2-n-francis@ti.com>
+Subject: [PATCH 2/4] tools: binman: control.py: Delete template nodes after
+ parsing
+Date: Fri, 22 Mar 2024 18:40:09 +0530
+Message-ID: <20240322131011.1029620-3-n-francis@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240322131011.1029620-1-n-francis@ti.com>
 References: <20240322131011.1029620-1-n-francis@ti.com>
@@ -84,92 +84,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add defconfig for J721E SK R5 and A72 configuration.
-
-This includes and modifies the J721E EVM defconfigs:
-j721e_evm_r5_defconfig -> j721e_sk_r5_defconfig
-j721e_evm_a72_defconfig -> j721e_sk_a72_defconfig
+Dynamically going through the subnode array and deleting leads to
+templates being skipped from deletion when templates are consecutive in
+the subnode list. Prevent this from happening by first parsing the DT
+and then deleting the nodes.
 
 Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
 ---
- board/ti/j721e/MAINTAINERS      |  2 ++
- configs/j721e_evm_a72_defconfig |  2 +-
- configs/j721e_evm_r5_defconfig  |  2 +-
- configs/j721e_sk_a72_defconfig  |  9 +++++++++
- configs/j721e_sk_r5_defconfig   | 10 ++++++++++
- 5 files changed, 23 insertions(+), 2 deletions(-)
- create mode 100644 configs/j721e_sk_a72_defconfig
- create mode 100644 configs/j721e_sk_r5_defconfig
+ tools/binman/control.py | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/board/ti/j721e/MAINTAINERS b/board/ti/j721e/MAINTAINERS
-index f5ca7d06a34..06aba53d9b0 100644
---- a/board/ti/j721e/MAINTAINERS
-+++ b/board/ti/j721e/MAINTAINERS
-@@ -5,5 +5,7 @@ F:	board/ti/j721e
- F:	include/configs/j721e_evm.h
- F:	configs/j721e_evm_r5_defconfig
- F:	configs/j721e_evm_a72_defconfig
-+F:	configs/j721e_sk_r5_defconfig
-+F:	configs/j721e_sk_a72_defconfig
- F:	configs/j7200_evm_r5_defconfig
- F:	configs/j7200_evm_a72_defconfig
-diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
-index 019ddcca7e8..34f7eeebbd5 100644
---- a/configs/j721e_evm_a72_defconfig
-+++ b/configs/j721e_evm_a72_defconfig
-@@ -85,7 +85,7 @@ CONFIG_MMC_SPEED_MODE_SET=y
- # CONFIG_SPL_EFI_PARTITION is not set
- CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_LIST="k3-j721e-common-proc-board k3-j721e-sk"
-+CONFIG_OF_LIST="k3-j721e-common-proc-board"
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_SPL_MULTI_DTB_FIT=y
- CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
-diff --git a/configs/j721e_evm_r5_defconfig b/configs/j721e_evm_r5_defconfig
-index 4d4b96dec6b..49da2550ead 100644
---- a/configs/j721e_evm_r5_defconfig
-+++ b/configs/j721e_evm_r5_defconfig
-@@ -81,7 +81,7 @@ CONFIG_CMD_MTDPARTS=y
- CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_SPL_MULTI_DTB_FIT=y
--CONFIG_SPL_OF_LIST="k3-j721e-r5-common-proc-board k3-j721e-r5-sk"
-+CONFIG_SPL_OF_LIST="k3-j721e-r5-common-proc-board"
- CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-diff --git a/configs/j721e_sk_a72_defconfig b/configs/j721e_sk_a72_defconfig
-new file mode 100644
-index 00000000000..8907b8ae58f
---- /dev/null
-+++ b/configs/j721e_sk_a72_defconfig
-@@ -0,0 +1,9 @@
-+#include <configs/j721e_evm_a72_defconfig>
+diff --git a/tools/binman/control.py b/tools/binman/control.py
+index 2f00279232b..1c4e6a581f9 100644
+--- a/tools/binman/control.py
++++ b/tools/binman/control.py
+@@ -522,9 +522,13 @@ def _ProcessTemplates(parent):
+ def _RemoveTemplates(parent):
+     """Remove any templates in the binman description
+     """
++    del_nodes = []
+     for node in parent.subnodes:
+         if node.name.startswith('template'):
+-            node.Delete()
++            del_nodes.append(node)
 +
-+CONFIG_ARM=y
-+CONFIG_ARCH_K3=y
-+CONFIG_SOC_K3_J721E=y
-+CONFIG_TARGET_J721E_A72_EVM=y
-+
-+CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-sk"
-+CONFIG_OF_LIST="k3-j721e-sk"
-diff --git a/configs/j721e_sk_r5_defconfig b/configs/j721e_sk_r5_defconfig
-new file mode 100644
-index 00000000000..b361c691747
---- /dev/null
-+++ b/configs/j721e_sk_r5_defconfig
-@@ -0,0 +1,10 @@
-+#include <configs/j721e_evm_r5_defconfig>
-+
-+CONFIG_ARM=y
-+CONFIG_ARCH_K3=y
-+CONFIG_SOC_K3_J721E=y
-+CONFIG_TARGET_J721E_R5_EVM=y
-+
-+CONFIG_DEFAULT_DEVICE_TREE="k3-j721e-r5-sk"
-+CONFIG_SPL_OF_LIST="k3-j721e-r5-sk"
-+CONFIG_OF_LIST="k3-j721e-r5-sk"
++    for node in del_nodes:
++        node.Delete()
+ 
+ def PrepareImagesAndDtbs(dtb_fname, select_images, update_fdt, use_expanded):
+     """Prepare the images to be processed and select the device tree
 -- 
 2.34.1
 
