@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECB64C54E71
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 21:46:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05E35C54E64
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 23:15:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C0B887A00;
-	Fri, 22 Mar 2024 22:46:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C75A587CB7;
+	Sat, 23 Mar 2024 00:15:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PHMh0Htn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ljEDjIfO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DCE9879A2; Fri, 22 Mar 2024 22:46:45 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 0535D87CF8; Sat, 23 Mar 2024 00:15:55 +0100 (CET)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C016387A00
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 22:46:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C9A487B30
+ for <u-boot@lists.denx.de>; Sat, 23 Mar 2024 00:15:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-56bdf81706aso1756606a12.2
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 14:46:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-dcc84ae94c1so2631899276.1
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 16:15:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711144003; x=1711748803; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CTj+4B65jz84qjXrftV225klKs5Uh3NCnz75GCAWQ4A=;
- b=PHMh0HtnXEF7u26URO36a+Z5nI2O7ZqiNFV2UV71/SKpqltpgzBozl7ots+lx012C+
- 5Td0WS3tU9719oIdSsPbqkfk1KKbLXZV0N9ubZ5e5mpoNdIyTEzyDIAggV8qS4DhVxUN
- 6Z3g0hysEj7DiI6TTXLckQW6sKD6wyZMAZGWLD8YH1QYJbG4+qDtlIPvPS9Frc6iWw60
- o9e1E1Ao0eVDuoisdHdK95aFc9FHAxfS5ru+sf02BoWHMmjCgtBoSUuh95vV6GF6oWKJ
- f/xEoLkbxyDLoaWyApu8JTpz3gKGc28tzyZY917ENx8kc5CTYIppNG0jUVIqm8SMoCn1
- wqdA==
+ d=konsulko.com; s=google; t=1711149351; x=1711754151; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=GjVvSorGW2UmOeLZ99d5XA21oDLfIgnyo7WsiZUb+r0=;
+ b=ljEDjIfOI+yDw+z19LESZ3oSLZRYWb1+aUxXAgrZwS9+x09SDiNMJ3IPIus57B+1wW
+ vontVU3eXxhZxu3pLleT4EcPWGEYkcWJcWH4q2T5wU9OpfytbWWOBvLX5mubG22B7DCo
+ HT0JC4ByfmKmiSK22R2wYBHl50i2FgE3XEJrs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711144003; x=1711748803;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1711149351; x=1711754151;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CTj+4B65jz84qjXrftV225klKs5Uh3NCnz75GCAWQ4A=;
- b=l3y3hufm36hjxr+SK6XqCmUUAfDaJMCqYP2vHNxKJfJWwjb29ZSyc5LPlwYSibMXaT
- xmyS2X2DhJcFtDMhRl1cnSDPpck1gxKIZ6uVDDWZE8BIDEODbdKwtkXYxysfQlADMXHg
- hdURvBi8Ix5ZUGVNuUohlT4TTRI9ViGiVzEr2853JUOmlibq/idqUQgpnHizqEFc+STe
- fATQwbX/Z+j2M9+e+SpoO3uE4lP6VXdyhPZ6zyYm69Un7D7uC8PtcdTSe9KYVGeISqII
- DWGn285DLT7PK+lb30KstJgs2eCDcXmlKXUd2lKwcwOUwwJxQT7ae4ts/sbT8d8ZxCuv
- Gk/A==
-X-Gm-Message-State: AOJu0YzozHW5kljG2DFpAmlvE74+ow/AwuYP4OQCO9ika7Qr2kAFeQH3
- gAO1WoCgbgtxlYanZXKlC5+Wvmb4EgNJ4tV8JBj9YD2zYaS/UgMtOF48YHcBY1K8OVWZ3+QZtv3
- Q1xLJ6vsnaX7+MIFcpWnyOCWpEjA=
-X-Google-Smtp-Source: AGHT+IECLxJ6nwHQSVGRglaEvs2phJNbg81o99k35KUQ6zb3sLP5DFEfhkZc07cHPrFHeyobWRRp4zC/YaKaFlrx5e0=
-X-Received: by 2002:a50:c014:0:b0:568:d729:a41a with SMTP id
- r20-20020a50c014000000b00568d729a41amr525987edb.9.1711144003061; Fri, 22 Mar
- 2024 14:46:43 -0700 (PDT)
+ bh=GjVvSorGW2UmOeLZ99d5XA21oDLfIgnyo7WsiZUb+r0=;
+ b=rUsO+UXNY/OMLSEYMGIf+4ZWsEVTUfO25HArGo+RCJ3a8WYgAjAnGe6IFlcYzHjJ1L
+ ectWu9v2QjLychO5FfExz9BBdy79ZYdE7loiIwsm3J9zYf+ryjrBXNXVXpiWsksu989q
+ RLEqIlTFkM4fAUhije68rDBnQM7hb7F4LSR2FKusH/3jzTnz274VQO5/77RpZBvdgvFt
+ CagMpeAbPMewpumUj1kSqIcabJmksBfioNnZrsiaeMs/avnxYC5IW1PHh65jO0ywd+Is
+ Ux59AbK7vtwDLDSQwuSX9WoiWR6tirOSuBZVGHE3jLxeQylcm7lBwgM3wA7nofAfoeli
+ IC+A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXAbbjMUNZUoOl9qS4ulm7uVSepG4RFVwGoV8UzK/f+YkTzKRoBYsPWk3SL/YWy8ZI2ZLPiOThMzLs3anhQ3wEP1QKXBw==
+X-Gm-Message-State: AOJu0Yxqeg9xGCFKTdf91BWufxIw8yB2X+GeecY5V7hPVYfF42oVYuE7
+ R6HV416r07p526S4VgFOxfjYhocYhqvREVL3r1qYXcNLOxVCjMBFJBEbV3iNvRM=
+X-Google-Smtp-Source: AGHT+IEgoh968vZ7EtspZOrboA+FPoaKEGrvGT5xc1Ipy+KeDLdlMuXQFkkz839JeGj8HTgFvk0v4Q==
+X-Received: by 2002:a25:b296:0:b0:dd1:2a7f:acb6 with SMTP id
+ k22-20020a25b296000000b00dd12a7facb6mr812731ybj.43.1711149351457; 
+ Fri, 22 Mar 2024 16:15:51 -0700 (PDT)
+Received: from [127.0.1.1] (065-184-193-066.res.spectrum.com. [65.184.193.66])
+ by smtp.gmail.com with ESMTPSA id
+ jo10-20020a056214500a00b0069102f97e08sm1537500qvb.97.2024.03.22.16.15.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 22 Mar 2024 16:15:51 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
+ Udit Kumar <u-kumar1@ti.com>, Hari Nagalla <hnagalla@ti.com>, 
+ u-boot@lists.denx.de, Apurva Nandan <a-nandan@ti.com>
+In-Reply-To: <20240312094436.2959542-1-a-nandan@ti.com>
+References: <20240312094436.2959542-1-a-nandan@ti.com>
+Subject: Re: [PATCH v3 0/2] Add remoteproc driver support for J721S2 SoC
+Message-Id: <171114935056.2210431.8380414666595793407.b4-ty@konsulko.com>
+Date: Fri, 22 Mar 2024 19:15:50 -0400
 MIME-Version: 1.0
-References: <20240322021747.14873-1-mibodhi@gmail.com>
- <D00L56D4IWTX.228PJHRM8H89A@walle.cc>
-In-Reply-To: <D00L56D4IWTX.228PJHRM8H89A@walle.cc>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Fri, 22 Mar 2024 14:46:31 -0700
-Message-ID: <CAJaLiFz5VicgBzFoDHSQj5_vQRhGBnjuw9zBkBX-ZRqpm7j8sQ@mail.gmail.com>
-Subject: Re: [PATCH] arm: dts: kirkwood: Enable upstream DT on Kirkwood boards
-To: Michael Walle <michael@walle.cc>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
- Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
- Chris Packham <chris.packham@alliedtelesis.co.nz>, 
- Dave Purdy <david.c.purdy@gmail.com>, Evgeni Dobrev <evgeni@studio-punkt.com>, 
- Luka Perkov <luka@openwrt.org>, Siddarth Gore <gores@marvell.com>, 
- Simon Guinot <simon.guinot@sequanux.org>, 
- Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- Walter Schweizer <swwa@users.sourceforge.net>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,44 +91,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+On Tue, 12 Mar 2024 15:14:34 +0530, Apurva Nandan wrote:
 
-On Fri, Mar 22, 2024 at 2:10=E2=80=AFPM Michael Walle <michael@walle.cc> wr=
-ote:
->
-> Hi Tony,
->
-> On Fri Mar 22, 2024 at 3:17 AM CET, Tony Dinh wrote:
-> > Enable OF_UPSTREAM to use upstream DT and add marvell/ prefix to the
-> > DEFAULT_DEVICE_TREE for Kirkwood boards. And so we can directly build
-> > DTBs from dts/upstream/src/arm/marvell, and including *-u-boot.dtsi
-> > files from arch/arm/dts/ directory.
->
-> Thanks for taking care.
->
-> > Signed-off-by: Tony Dinh <mibodhi@gmail.com>
->
-> Tested-by: Michael Walle <michael@walle.cc> # on lschlv2
->
-> lsxl should work too as it is just different in memory and cpu
-> frequency settings.
->
-> > ---
-> >
-> >  arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi   | 6 ++++--
-> >  arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi     | 6 ++++--
->
-> arch/arm/dts/kirkwood-lschlv2.dts
-> arch/arm/dts/kirkwood-lsxhl.dts
->
-> Should be then be removed.
+> This series adds relevant ip data in remoteproc driver for j721s2 compatible.
+> 
+> Logs: https://gist.githubusercontent.com/apurvanandan1997/276098af439e11105ab9f809159fcc98/raw/
+> 
+> Changes in v3:
+> - Removed j721s2.env patch from the series
+> 
+> [...]
 
-Thanks for the lschlv2 review/test! I plan to send a follow-up patch
-to remove the corresponding DTS and DTSI files.
+Applied to u-boot/next, thanks!
 
-All the best,
-Tony
+-- 
+Tom
 
 
->
-> -michael
