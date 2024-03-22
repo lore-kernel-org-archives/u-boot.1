@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06FDEC54E71
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 19:26:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84CDCC54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 19:32:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2D3BB881A0;
-	Fri, 22 Mar 2024 20:26:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0055487CF1;
+	Fri, 22 Mar 2024 20:32:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AztD1iRL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mbOAnYnj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5D7B87E8E; Fri, 22 Mar 2024 20:26:13 +0100 (CET)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 8BB8587CAC; Fri, 22 Mar 2024 20:32:03 +0100 (CET)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A10DB87964
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 20:26:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E5D1F87CF1
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 20:31:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-69107859bedso16774106d6.2
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 12:26:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-1e09a7735ecso1389395ad.0
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 12:31:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711135570; x=1711740370; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1711135918; x=1711740718; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K1wr6qxcaENNwUI/Y79zw9YYXTWNBBI1knK4DodxQ10=;
- b=AztD1iRLeUav1I4FcM/iFVLTdT8gZmsibaYpN6Dt86KPDwWgCjdAYhBO0sLVJe0VzN
- G9gZeUcYAy5x61iKz/MwewNvyem4Zu3bgf9Z+U31Au5ZFPlUSAFEV+v6+8FqI64wXMIX
- Ey1yABzhsKNQXXGtJ89D7P0EP7hHqwATW+bdM=
+ bh=gnRJR6JUFqpKrrivR2lpHtNaNNUM4ytZwRhFDQQxOeY=;
+ b=mbOAnYnjqO/8Ar79T+Te7GOn2CSmvM1xDBNaC0SjebEZ2V+eviqhdPcccqm82qOGrb
+ pUEezZLUqxC5rJDtpOv0fEmp/8roBT4/D62ndwC8adan+3cGKjDnFoxK0qvZnhg2Xb+C
+ V4xSmMbDh/22oQnPz/eDY20iVEp26OZbZd/Y9JElcU4hWCiRsC/DDVLxeGz7OBK0gC76
+ PVhK/Tcm1LQku3d518sYqoxK+PRSH2ljd+dcLxc8ugC8Bo4VrbXuyjgB8D5Gxxamysw5
+ LjjwMlj94OSWWizsnRNbT4mjdORSSUozmIFsR1E53ugfvML4QU/g4Kllyl3FLHPUkEK3
+ S5SQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711135570; x=1711740370;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1711135918; x=1711740718;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=K1wr6qxcaENNwUI/Y79zw9YYXTWNBBI1knK4DodxQ10=;
- b=xINz3d9q3057tFUqd65Wu65APAdP81UCWL26oGqxBiv9PKdGthyoOAqFDve1GDeA1l
- zTyoIuZvFt8ERE2u9Hor/DE5Ga7dh2tcDejP6BT7KGdk6IOe0gCAXoz8ssHCVuUf5KS4
- MnPSPPtYnny3QqZlbSF2jTYEQ91Whj4brJjG3+cp7tbfOw1aYUO6O1D9yfGF1/cfgQow
- C0yqAY5vwg4atEpH/D94DtnXAYMulIjT6BwLgEuzKKj1xWU2a/u5FgQdHdjYLH5kIilQ
- iWde2hp0A28nojPOlJdgvDlb7hiZX6o4xl/6tsTcGOsNTjelmjotOI8Xsix6sl6cYVOy
- UePg==
+ bh=gnRJR6JUFqpKrrivR2lpHtNaNNUM4ytZwRhFDQQxOeY=;
+ b=UGjhQWL8nkAr3yJTDK/O0Gx1NHPVl/UdI0HPk5fOejdfyWCA0kMa0orgFDWH0jhhuW
+ hOAsr9CJvaSOYmvLYgRXCNWe92bnXCf2sOsPRYK307ei5L5SUMP4+4tTDTGghbykrS1h
+ Wv4JhlMm16rP2OXhe++yC7wsitso34FCKFdT1h0sKzT951MBQuDBgP4oU1wkQxRgFvEB
+ IMts/O2otT35XLwGhCtR99+T9UbKDj3YctmYG0yORF+DJMNXE73OlVXRtZOOZ/X3kg3D
+ qE/C9drgpvHHfFXAhdqbpQIR29CoumY9tUNyj1dZdAkM+qcvAwdmqXLdwPVF7h45jcnF
+ KTdw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWN+J08Qf3eu7f9fhgE2j+tLXGY93+Gf4vc3mug3opXBMemGlPG+016cRj/QFaIam9qHYFaS/l6cUQksmMQwefOMSjQsQ==
-X-Gm-Message-State: AOJu0YxjScldml435IXnWMvSzxqz+MBrQK3L1pNJwAOAEvY72ynTv+HI
- p0gFTL7Ej1H8kSzbeD4lC/b76Gdmm4cfdBOI+Gd8DVnPbWGqEERddwTZqpvku7E=
-X-Google-Smtp-Source: AGHT+IHtIDA3qnWnIVg540AG2YNuQFELOkFQX97acMxxyQYdlWgVudVgwTGLW0BIEnXI2nzp5DwIRQ==
-X-Received: by 2002:a05:6214:21ab:b0:696:3704:712a with SMTP id
- t11-20020a05621421ab00b006963704712amr430022qvc.28.1711135570578; 
- Fri, 22 Mar 2024 12:26:10 -0700 (PDT)
-Received: from [127.0.1.1] (065-184-193-066.res.spectrum.com. [65.184.193.66])
- by smtp.gmail.com with ESMTPSA id
- jo10-20020a056214500a00b0069102f97e08sm1362309qvb.97.2024.03.22.12.26.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Mar 2024 12:26:10 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Hiago De Franco <hiagofranco@gmail.com>
-Cc: Hiago De Franco <hiago.franco@toradex.com>, u-boot@lists.denx.de
-In-Reply-To: <20240320164845.141894-1-hiagofranco@gmail.com>
-References: <20240320164845.141894-1-hiagofranco@gmail.com>
-Subject: Re: [PATCH v1] board: toradex: verdin-am62_r5: Increase
- SPL_STACK_R_MALLOC_SIMPLE_LEN
-Message-Id: <171113556974.2191577.8759982207251552650.b4-ty@konsulko.com>
-Date: Fri, 22 Mar 2024 15:26:09 -0400
+ AJvYcCUIfFKXQUx+u2xeWy+CJHiZtL/55jK6aqDmPPx3IeYNuSRCwMOGqy4+DF31HaBf6cAfA3E0Jg8BlZH4l3HFsulLDa11SA==
+X-Gm-Message-State: AOJu0YydhaeZyEZIUA/wwBDuatPSdy7sqZlTyBCFSuMrU/1iR3qk95mK
+ 1ZickdWYAypqLqaMv6K1XzurP/gV2vZUvmYAdkbnBYm58sxxsnMALCRy39HObnlUxQwZ3cge4SL
+ Ba7y8BnCDP1LiWljiW0Sx2i4dM9R1uD4Y
+X-Google-Smtp-Source: AGHT+IFGIbbbHJTuVHz6mCvJ1zzsMS6/jGePgButaC0FwuucZwmsa4d5AFawGru22UIyOlQw3dMcxrN0BSZYVIGTzBc=
+X-Received: by 2002:a17:90a:6285:b0:29b:780c:c671 with SMTP id
+ d5-20020a17090a628500b0029b780cc671mr636007pjj.0.1711135918363; Fri, 22 Mar
+ 2024 12:31:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+References: <43haokus4jdxguk4arig5tsqcgq2wbezwpbj7oti6pdkvrfual@wa7vz2iypcv5>
+ <86o7bazheg.wl-maz@kernel.org>
+ <qnca6it6fh6pznsvm33rwa3pf6ushtkpvyui6fds43fcdjxcz5@66tiqctl7arc>
+ <CAOMZO5CNgJUbDGdyP4tS7YBXPqcmyT+FkhaF+phbR64grA2i0g@mail.gmail.com>
+ <yltha7mziq43ke7kas433zlvxamri2p7h2p7oos3x4dexk2oct@gfhscvngsjcw>
+In-Reply-To: <yltha7mziq43ke7kas433zlvxamri2p7h2p7oos3x4dexk2oct@gfhscvngsjcw>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 22 Mar 2024 16:31:45 -0300
+Message-ID: <CAOMZO5Cy9tu_kWDmZZjHa0PAH9+RjHrQKHMwqCPe7fFvj=W6wA@mail.gmail.com>
+Subject: Re: [PATCH] arm64: Fix map_range() not splitting mapped blocks
+To: =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: Marc Zyngier <maz@kernel.org>, u-boot@lists.denx.de,
+ Stefano Babic <sbabic@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,24 +95,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 20 Mar 2024 13:48:45 -0300, Hiago De Franco wrote:
+Hi Tom,
 
-> Increase the SPL_STACK_R_MALLOC_SIMPLE_LEN to 0x200000 to accommodate the
-> size of tispl.bin fit image. With the recent upgrade of ti-linux-firmware
-> from version v9.1.0 to v9.2.5, the size of tispl.bin fit image has
-> increased to 1.4MB, causing allocation errors in the R5 SPL:
-> 
-> ```
-> alloc space exhausted
-> Could not get FIT buffer of 1325056 bytes
->         check CONFIG_SPL_SYS_MALLOC_SIZE
-> ```
-> 
-> [...]
+On Tue, Mar 19, 2024 at 9:39=E2=80=AFAM Pierre-Cl=C3=A9ment Tosi <ptosi@goo=
+gle.com> wrote:
 
-Applied to u-boot/master, thanks!
+> For most AArch64 U-Boot ports (including the i.MX family), the answer is =
+trivial
+> because they use the arch code i.e. setup_all_pgtables(). However, as
+> fsl-layerscape re-implements mmu_setup(), it had to be looked at separate=
+ly,
+> hence my question, which you answered above.
 
--- 
-Tom
+As Pierre's explanation addresses Marc's concern,
+do you think this can go to 2024.01 to fix the boot regression on imx8qxp/8=
+qm?
 
-
+Thanks
