@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 145EEC54E71
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 10:59:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F07C47DD9
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 10:59:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B44E881E4;
-	Fri, 22 Mar 2024 11:58:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CBAA8881E2;
+	Fri, 22 Mar 2024 11:58:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E6BC881C2; Fri, 22 Mar 2024 11:58:35 +0100 (CET)
+ id D2B23881EA; Fri, 22 Mar 2024 11:58:38 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id DFDC2881CC
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 11:58:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 66CC8881DD
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 11:58:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7F4421007;
- Fri, 22 Mar 2024 03:59:06 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 05CC91007;
+ Fri, 22 Mar 2024 03:59:10 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 27F1D3F64C;
- Fri, 22 Mar 2024 03:58:28 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DF7723F64C;
+ Fri, 22 Mar 2024 03:58:32 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -36,10 +36,10 @@ Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Michal Simek <michal.simek@amd.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
  Michal Simek <monstr@monstr.eu>, Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v3 07/20] fwu: metadata: add functions for handling version
- specific metadata fields
-Date: Fri, 22 Mar 2024 16:27:20 +0530
-Message-Id: <20240322105733.203888-8-sughosh.ganu@linaro.org>
+Subject: [PATCH v3 08/20] fwu: make changes to access version agnostic
+ structure fields
+Date: Fri, 22 Mar 2024 16:27:21 +0530
+Message-Id: <20240322105733.203888-9-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240322105733.203888-1-sughosh.ganu@linaro.org>
 References: <20240322105733.203888-1-sughosh.ganu@linaro.org>
@@ -61,535 +61,503 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Support is being added in U-Boot for version 2 of the FWU
-metadata. Support for this version is to co-exist with version 1
-support. To achieve this, a common, version agnostic structure has
-been added to keep information provided by the FWU metadata
-structure.
-
-Add API's to handle the version specific FWU metadata fields. The
-version agnostic structure gets initialized at boot by reading the FWU
-metadata. Updates to the FWU metadata result in the API's getting
-called to populate the version specific fields of the strucure, before
-the metadata gets written to the storage media.
+With addition of support for version 2 of the FWU metadata structure,
+the metadata information is collected into a version agnostic
+structure. Make changes to the FWU functions so that the information
+that was earlier obtained by reading the metadata structure is now
+obtained through this version agnostic structure.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V2:
 * New patch
 
- include/fwu.h            |  57 +++++++++
- lib/fwu_updates/fwu_v1.c | 167 +++++++++++++++++++++++++
- lib/fwu_updates/fwu_v2.c | 260 +++++++++++++++++++++++++++++++++++++++
- 3 files changed, 484 insertions(+)
- create mode 100644 lib/fwu_updates/fwu_v1.c
- create mode 100644 lib/fwu_updates/fwu_v2.c
+ include/fwu.h         |  49 +++++++++-
+ lib/fwu_updates/fwu.c | 204 ++++++++++++++++++++++++++++--------------
+ 2 files changed, 186 insertions(+), 67 deletions(-)
 
 diff --git a/include/fwu.h b/include/fwu.h
-index e681e91027..082b5481d1 100644
+index 082b5481d1..77ec65e618 100644
 --- a/include/fwu.h
 +++ b/include/fwu.h
-@@ -313,4 +313,61 @@ int fwu_gen_alt_info_from_mtd(char *buf, size_t len, struct mtd_info *mtd);
+@@ -79,9 +79,18 @@ struct fwu_mdata_ops {
+ 			   bool primary, uint32_t size);
+ };
+ 
+-#define FWU_MDATA_VERSION	0x1
+ #define FWU_IMAGE_ACCEPTED	0x1
+ 
++#define FWU_BANK_INVALID	(uint8_t)0xFF
++#define FWU_BANK_VALID		(uint8_t)0xFE
++#define FWU_BANK_ACCEPTED	(uint8_t)0xFC
++
++enum {
++	PRIMARY_PART = 1,
++	SECONDARY_PART,
++	BOTH_PARTS,
++};
++
+ /*
+ * GUID value defined in the FWU specification for identification
+ * of the FWU metadata partition.
+@@ -313,6 +322,44 @@ int fwu_gen_alt_info_from_mtd(char *buf, size_t len, struct mtd_info *mtd);
   */
  int fwu_mtd_get_alt_num(efi_guid_t *image_guid, u8 *alt_num, const char *mtd_dev);
  
 +/**
-+ * fwu_populate_mdata_image_info() - Populate the image information
-+ * of the metadata
-+ * @data: Version agnostic FWU metadata information
-+ *
-+ * Populate the image information in the FWU metadata by copying it
-+ * from the version agnostic structure. This is done before the
-+ * metadata gets written to the storage media.
-+ *
-+ * Return: None
-+ */
-+void fwu_populate_mdata_image_info(struct fwu_data *data);
-+
-+/**
-+ * fwu_get_mdata_size() - Get the FWU metadata size
++ * fwu_mdata_copies_allocate() - Allocate memory for metadata
 + * @mdata_size: Size of the metadata structure
 + *
-+ * Get the size of the FWU metadata from the structure. This is later used
-+ * to allocate memory for the structure.
++ * Allocate memory for storing both the copies of the FWU metadata. The
++ * copies are then used as a cache for storing FWU metadata contents.
 + *
 + * Return: 0 if OK, -ve on error
 + */
-+int fwu_get_mdata_size(uint32_t *mdata_size);
++int fwu_mdata_copies_allocate(u32 mdata_size);
 +
 +/**
-+ * fwu_state_machine_updates() - Update FWU state of the platform
-+ * @trial_state: Is platform transitioning into Trial State
-+ * @update_index: Bank number to which images have been updated
++ * fwu_get_dev() - Return the FWU metadata device
 + *
-+ * On successful completion of updates, transition the platform to
-+ * either Trial State or Regular State.
++ * Return the pointer to the FWU metadata device.
 + *
-+ * To transition the platform to Trial State, start the
-+ * TrialStateCtr counter, followed by setting the value of bank_state
-+ * field of the metadata to Valid state(applicable only in version 2
-+ * of metadata).
++ * Return: Pointer to the FWU metadata dev
++ */
++struct udevice *fwu_get_dev(void);
++
++/**
++ * fwu_get_data() - Return the version agnostic FWU structure
 + *
-+ * In case, the platform is to transition directly to Regular State,
-+ * update the bank_state field of the metadata to Accepted
-+ * state(applicable only in version 2 of metadata).
++ * Return the pointer to the version agnostic FWU structure.
++ *
++ * Return: Pointer to the FWU data structure
++ */
++struct fwu_data *fwu_get_data(void);
++
++/**
++ * fwu_sync_mdata() - Update given meta-data partition(s) with the copy provided
++ * @data: FWU Data structure
++ * @part: Bitmask of FWU metadata partitions to be written to
 + *
 + * Return: 0 if OK, -ve on error
 + */
-+int fwu_state_machine_updates(bool trial_state, uint32_t update_index);
++int fwu_sync_mdata(struct fwu_mdata *mdata, int part);
 +
-+/**
-+ * fwu_init() - FWU specific initialisations
-+ *
-+ * Carry out some FWU specific initialisations including allocation
-+ * of memory for the metadata copies, and reading the FWU metadata
-+ * copies into the allocated memory. The metadata fields are then
-+ * copied into a version agnostic structure.
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int fwu_init(void);
-+
- #endif /* _FWU_H_ */
-diff --git a/lib/fwu_updates/fwu_v1.c b/lib/fwu_updates/fwu_v1.c
-new file mode 100644
-index 0000000000..efb8d51500
---- /dev/null
-+++ b/lib/fwu_updates/fwu_v1.c
-@@ -0,0 +1,167 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2024, Linaro Limited
-+ */
-+
-+#include <fwu.h>
-+#include <fwu_mdata.h>
-+
-+#include <linux/types.h>
-+
-+#define FWU_MDATA_VERSION	0x1U
-+
-+static uint32_t fwu_check_trial_state(struct fwu_mdata *mdata, uint32_t bank)
-+{
-+	u32 i;
-+	struct fwu_image_entry *img_entry;
-+	struct fwu_image_bank_info *img_bank_info;
-+
-+	img_entry = &mdata->img_entry[0];
-+	for (i = 0; i < CONFIG_FWU_NUM_IMAGES_PER_BANK; i++) {
-+		img_bank_info = &img_entry[i].img_bank_info[bank];
-+		if (!img_bank_info->accepted) {
-+			return 1;
-+		}
-+	}
-+
-+	return 0;
-+}
-+
-+static void fwu_data_init(void)
-+{
-+	size_t image_info_size;
-+	void *dst_img_info, *src_img_info;
-+	struct fwu_data *data = fwu_get_data();
-+	struct fwu_mdata *mdata = data->fwu_mdata;
-+
-+	data->crc32 = mdata->crc32;
-+	data->version = mdata->version;
-+	data->active_index = mdata->active_index;
-+	data->previous_active_index = mdata->previous_active_index;
-+
-+	data->metadata_size = sizeof(struct fwu_mdata);
-+	data->num_banks = CONFIG_FWU_NUM_BANKS;
-+	data->num_images = CONFIG_FWU_NUM_IMAGES_PER_BANK;
-+	fwu_plat_get_bootidx(&data->boot_index);
-+	data->trial_state = fwu_check_trial_state(mdata, data->boot_index);
-+
-+	src_img_info = &mdata->img_entry[0];
-+	dst_img_info = &data->fwu_images[0];
-+	image_info_size = sizeof(data->fwu_images);
-+
-+	memcpy(dst_img_info, src_img_info, image_info_size);
-+}
-+
-+static int fwu_trial_state_update(bool trial_state)
-+{
-+	int ret;
-+	struct fwu_data *data = fwu_get_data();
-+
-+	if (trial_state) {
-+		ret = fwu_trial_state_ctr_start();
-+		if (ret)
-+			return ret;
-+	}
-+
-+	data->trial_state = trial_state;
-+
-+	return 0;
-+}
-+
-+/**
-+ * fwu_populate_mdata_image_info() - Populate the image information
-+ * of the metadata
-+ * @data: Version agnostic FWU metadata information
-+ *
-+ * Populate the image information in the FWU metadata by copying it
-+ * from the version agnostic structure. This is done before the
-+ * metadata gets written to the storage media.
-+ *
-+ * Return: None
-+ */
-+void fwu_populate_mdata_image_info(struct fwu_data *data)
-+{
-+	size_t image_info_size;
-+	void *dst_img_info, *src_img_info;
-+	struct fwu_mdata *mdata = data->fwu_mdata;
-+
-+	image_info_size = sizeof(data->fwu_images);
-+	dst_img_info = &mdata->img_entry[0];
-+	src_img_info = &data->fwu_images[0];
-+
-+	memcpy(dst_img_info, src_img_info, image_info_size);
-+}
-+
-+/**
-+ * fwu_state_machine_updates() - Update FWU state of the platform
-+ * @trial_state: Is platform transitioning into Trial State
-+ * @update_index: Bank number to which images have been updated
-+ *
-+ * On successful completion of updates, transition the platform to
-+ * either Trial State or Regular State.
-+ *
-+ * To transition the platform to Trial State, start the
-+ * TrialStateCtr counter, followed by setting the value of bank_state
-+ * field of the metadata to Valid state(applicable only in version 2
-+ * of metadata).
-+ *
-+ * In case, the platform is to transition directly to Regular State,
-+ * update the bank_state field of the metadata to Accepted
-+ * state(applicable only in version 2 of metadata).
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int fwu_state_machine_updates(bool trial_state,
-+			      __maybe_unused uint32_t update_index)
-+{
-+	return fwu_trial_state_update(trial_state);
-+}
-+
-+/**
-+ * fwu_get_mdata_size() - Get the FWU metadata size
-+ * @mdata_size: Size of the metadata structure
-+ *
-+ * Get the size of the FWU metadata.
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int fwu_get_mdata_size(uint32_t *mdata_size)
-+{
-+	*mdata_size = sizeof(struct fwu_mdata);
-+
-+	return 0;
-+}
-+
-+/**
-+ * fwu_init() - FWU specific initialisations
-+ *
-+ * Carry out some FWU specific initialisations including allocation
-+ * of memory for the metadata copies, and reading the FWU metadata
-+ * copies into the allocated memory. The metadata fields are then
-+ * copied into a version agnostic structure.
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int fwu_init(void)
-+{
-+	int ret;
-+	uint32_t mdata_size;
-+
-+	fwu_get_mdata_size(&mdata_size);
-+
-+	ret = fwu_mdata_copies_allocate(mdata_size);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * Now read the entire structure, both copies, and
-+	 * validate that the copies.
-+	 */
-+	ret = fwu_get_mdata(NULL);
-+	if (ret)
-+		return ret;
-+
-+	fwu_data_init();
-+
-+	return 0;
-+}
-diff --git a/lib/fwu_updates/fwu_v2.c b/lib/fwu_updates/fwu_v2.c
-new file mode 100644
-index 0000000000..108bc9bb4a
---- /dev/null
-+++ b/lib/fwu_updates/fwu_v2.c
-@@ -0,0 +1,260 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright (c) 2024, Linaro Limited
-+ */
-+
-+#include <fwu.h>
-+#include <fwu_mdata.h>
+ /**
+  * fwu_populate_mdata_image_info() - Populate the image information
+  * of the metadata
+diff --git a/lib/fwu_updates/fwu.c b/lib/fwu_updates/fwu.c
+index 86518108c2..5dfea2a4d8 100644
+--- a/lib/fwu_updates/fwu.c
++++ b/lib/fwu_updates/fwu.c
+@@ -10,6 +10,7 @@
+ #include <event.h>
+ #include <fwu.h>
+ #include <fwu_mdata.h>
 +#include <log.h>
-+
-+#include <linux/types.h>
-+
-+#define FWU_MDATA_VERSION	0x2U
-+
-+static inline struct fwu_fw_store_desc *fwu_get_fw_desc(struct fwu_mdata *mdata)
-+{
-+	return (struct fwu_fw_store_desc *)((u8 *)mdata + sizeof(*mdata));
-+}
-+
-+static uint32_t fwu_check_trial_state(struct fwu_mdata *mdata, uint32_t bank)
-+{
-+	return mdata->bank_state[bank] == FWU_BANK_VALID ? 1 : 0;
-+}
-+
-+static void fwu_data_init(void)
-+{
-+	int i;
-+	size_t image_info_size;
-+	void *dst_img_info, *src_img_info;
-+	struct fwu_data *data = fwu_get_data();
-+	struct fwu_mdata *mdata = data->fwu_mdata;
-+
-+	data->crc32 = mdata->crc32;
-+	data->version = mdata->version;
-+	data->active_index = mdata->active_index;
-+	data->previous_active_index = mdata->previous_active_index;
-+	data->metadata_size = mdata->metadata_size;
-+	fwu_plat_get_bootidx(&data->boot_index);
-+	data->trial_state = fwu_check_trial_state(mdata, data->boot_index);
-+
-+	data->num_banks = fwu_get_fw_desc(mdata)->num_banks;
-+	data->num_images = fwu_get_fw_desc(mdata)->num_images;
-+
-+	for (i = 0; i < 4; i++) {
-+		data->bank_state[i] = mdata->bank_state[i];
-+	}
-+
-+	image_info_size = sizeof(data->fwu_images);
-+	src_img_info = &fwu_get_fw_desc(mdata)->img_entry[0];
-+	dst_img_info = &data->fwu_images[0];
-+
-+	memcpy(dst_img_info, src_img_info, image_info_size);
-+}
-+
-+static int fwu_mdata_sanity_checks(void)
-+{
-+	uint8_t num_banks;
-+	uint16_t num_images;
-+	struct fwu_data *data = fwu_get_data();
-+	struct fwu_mdata *mdata = data->fwu_mdata;
-+
-+	if (mdata->version != FWU_MDATA_VERSION) {
-+		log_err("FWU metadata version %u. Expected value of %u\n",
-+			mdata->version, FWU_MDATA_VERSION);
-+		return -EINVAL;
-+	}
-+
-+	if (!mdata->desc_offset) {
-+		log_err("No image information provided with the Metadata. ");
-+		log_err("Image information expected in the metadata\n");
-+		return -EINVAL;
-+	}
-+
-+	if (mdata->desc_offset != 0x20) {
-+		log_err("Descriptor Offset(0x%x) in the FWU Metadata not equal to 0x20\n",
-+			mdata->desc_offset);
-+		return -EINVAL;
-+	}
-+
-+	num_banks = fwu_get_fw_desc(mdata)->num_banks;
-+	num_images = fwu_get_fw_desc(mdata)->num_images;
-+
-+	if (num_banks != CONFIG_FWU_NUM_BANKS) {
-+		log_err("Number of Banks(%u) in FWU Metadata different from the configured value(%d)",
-+			num_banks, CONFIG_FWU_NUM_BANKS);
-+		return -EINVAL;
-+	}
-+
-+	if (num_images != CONFIG_FWU_NUM_IMAGES_PER_BANK) {
-+		log_err("Number of Images(%u) in FWU Metadata different from the configured value(%d)",
-+			num_images, CONFIG_FWU_NUM_IMAGES_PER_BANK);
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
-+static int fwu_bank_state_update(bool trial_state, uint32_t bank)
+ #include <malloc.h>
+ 
+ #include <linux/errno.h>
+@@ -17,7 +18,7 @@
+ 
+ #include <u-boot/crc.h>
+ 
+-static struct fwu_mdata g_mdata; /* = {0} makes uninit crc32 always invalid */
++struct fwu_data g_fwu_data;
+ static struct udevice *g_dev;
+ static u8 in_trial;
+ static u8 boottime_check;
+@@ -27,12 +28,6 @@ enum {
+ 	IMAGE_ACCEPT_CLEAR,
+ };
+ 
+-enum {
+-	PRIMARY_PART = 1,
+-	SECONDARY_PART,
+-	BOTH_PARTS,
+-};
+-
+ static int trial_counter_update(u16 *trial_state_ctr)
+ {
+ 	bool delete;
+@@ -106,23 +101,9 @@ out:
+ 	return ret;
+ }
+ 
+-static int in_trial_state(struct fwu_mdata *mdata)
++static u32 in_trial_state(void)
+ {
+-	u32 i, active_bank;
+-	struct fwu_image_entry *img_entry;
+-	struct fwu_image_bank_info *img_bank_info;
+-
+-	active_bank = mdata->active_index;
+-	img_entry = &mdata->img_entry[0];
+-	for (i = 0; i < CONFIG_FWU_NUM_IMAGES_PER_BANK; i++) {
+-		img_bank_info = &img_entry[i].img_bank_info[active_bank];
+-		if (!img_bank_info->accepted) {
+-			log_info("System booting in Trial State\n");
+-			return 1;
+-		}
+-	}
+-
+-	return 0;
++	return g_fwu_data.trial_state;
+ }
+ 
+ static int fwu_get_image_type_id(u8 image_index, efi_guid_t *image_type_id)
+@@ -141,17 +122,70 @@ static int fwu_get_image_type_id(u8 image_index, efi_guid_t *image_type_id)
+ 	return -ENOENT;
+ }
+ 
++static int mdata_crc_check(struct fwu_mdata *mdata)
 +{
 +	int ret;
-+	struct fwu_data *data = fwu_get_data();
-+	struct fwu_mdata *mdata = data->fwu_mdata;
++	u32 calc_crc32;
++	uint32_t mdata_size;
++	void *buf = &mdata->version;
 +
-+	mdata->bank_state[bank] = data->bank_state[bank] = trial_state ?
-+		FWU_BANK_VALID : FWU_BANK_ACCEPTED;
-+
-+	ret = fwu_sync_mdata(mdata, BOTH_PARTS);
-+	if (ret)
-+		log_err("Unable to set bank_state for bank %u\n", bank);
-+	else
-+		data->trial_state = trial_state;
-+
-+	return ret;
-+}
-+
-+static int fwu_trial_state_start(uint update_index)
-+{
-+	int ret;
-+
-+	ret = fwu_trial_state_ctr_start();
++	ret = fwu_get_mdata_size(&mdata_size);
 +	if (ret)
 +		return ret;
 +
-+	ret = fwu_bank_state_update(1, update_index);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
++	calc_crc32 = crc32(0, buf, mdata_size - sizeof(u32));
++	return calc_crc32 == mdata->crc32 ? 0 : -EINVAL;
 +}
 +
-+/**
-+ * fwu_populate_mdata_image_info() - Populate the image information
-+ * of the metadata
-+ * @data: Version agnostic FWU metadata information
-+ *
-+ * Populate the image information in the FWU metadata by copying it
-+ * from the version agnostic structure. This is done before the
-+ * metadata gets written to the storage media.
-+ *
-+ * Return: None
-+ */
-+void fwu_populate_mdata_image_info(struct fwu_data *data)
++static void fwu_data_crc_update(uint32_t crc32)
 +{
-+	size_t image_info_size;
-+	struct fwu_mdata *mdata = data->fwu_mdata;
-+	void *dst_img_info, *src_img_info;
-+
-+	image_info_size = sizeof(data->fwu_images);
-+	dst_img_info = &fwu_get_fw_desc(mdata)->img_entry[0];
-+	src_img_info = &data->fwu_images[0];
-+
-+	memcpy(dst_img_info, src_img_info, image_info_size);
++	g_fwu_data.crc32 = crc32;
 +}
 +
 +/**
-+ * fwu_state_machine_updates() - Update FWU state of the platform
-+ * @trial_state: Is platform transitioning into Trial State
-+ * @update_index: Bank number to which images have been updated
++ * fwu_get_data() - Return the version agnostic FWU structure
 + *
-+ * On successful completion of updates, transition the platform to
-+ * either Trial State or Regular State.
++ * Return the pointer to the version agnostic FWU structure.
 + *
-+ * To transition the platform to Trial State, start the
-+ * TrialStateCtr counter, followed by setting the value of bank_state
-+ * field of the metadata to Valid state(applicable only in version 2
-+ * of metadata).
-+ *
-+ * In case, the platform is to transition directly to Regular State,
-+ * update the bank_state field of the metadata to Accepted
-+ * state(applicable only in version 2 of metadata).
-+ *
-+ * Return: 0 if OK, -ve on error
++ * Return: Pointer to the FWU data structure
 + */
-+int fwu_state_machine_updates(bool trial_state, uint32_t update_index)
++struct fwu_data *fwu_get_data(void)
 +{
-+	return trial_state ? fwu_trial_state_start(update_index) :
-+		fwu_bank_state_update(0, update_index);
++	return &g_fwu_data;
++}
++
++static void fwu_populate_mdata_bank_index(struct fwu_data *fwu_data)
++{
++	struct fwu_mdata *mdata = fwu_data->fwu_mdata;
++
++	mdata->active_index = fwu_data->active_index;
++	mdata->previous_active_index = fwu_data->previous_active_index;
 +}
 +
 +/**
-+ * fwu_get_mdata_size() - Get the FWU metadata size
++ * fwu_get_dev() - Return the FWU metadata device
++ *
++ * Return the pointer to the FWU metadata device.
++ *
++ * Return: Pointer to the FWU metadata dev
++ */
++struct udevice *fwu_get_dev(void)
++{
++	return g_dev;
++}
++
+ /**
+  * fwu_sync_mdata() - Update given meta-data partition(s) with the copy provided
+- * @mdata: FWU metadata structure
++ * @data: FWU Data structure
+  * @part: Bitmask of FWU metadata partitions to be written to
+  *
+  * Return: 0 if OK, -ve on error
+  */
+-static int fwu_sync_mdata(struct fwu_mdata *mdata, int part)
++int fwu_sync_mdata(struct fwu_mdata *mdata, int part)
+ {
+-	void *buf = &mdata->version;
+ 	int err;
++	uint mdata_size;
++	void *buf = &mdata->version;
+ 
+ 	if (part == BOTH_PARTS) {
+ 		err = fwu_sync_mdata(mdata, SECONDARY_PART);
+@@ -160,32 +194,53 @@ static int fwu_sync_mdata(struct fwu_mdata *mdata, int part)
+ 		part = PRIMARY_PART;
+ 	}
+ 
++	err = fwu_get_mdata_size(&mdata_size);
++	if (err)
++		return err;
++
+ 	/*
+ 	 * Calculate the crc32 for the updated FWU metadata
+ 	 * and put the updated value in the FWU metadata crc32
+ 	 * field
+ 	 */
+-	mdata->crc32 = crc32(0, buf, sizeof(*mdata) - sizeof(u32));
++	mdata->crc32 = crc32(0, buf, mdata_size - sizeof(u32));
++	fwu_data_crc_update(mdata->crc32);
+ 
+-	err = fwu_write_mdata(g_dev, mdata, part == PRIMARY_PART);
++	err = fwu_write_mdata(g_dev, mdata, part == PRIMARY_PART, mdata_size);
+ 	if (err) {
+ 		log_err("Unable to write %s mdata\n",
+ 			part == PRIMARY_PART ?  "primary" : "secondary");
+ 		return err;
+ 	}
+ 
+-	/* update the cached copy of meta-data */
+-	memcpy(&g_mdata, mdata, sizeof(struct fwu_mdata));
+-
+ 	return 0;
+ }
+ 
+-static inline int mdata_crc_check(struct fwu_mdata *mdata)
++/**
++ * fwu_mdata_copies_allocate() - Allocate memory for metadata
 + * @mdata_size: Size of the metadata structure
 + *
-+ * Get the size of the FWU metadata from the structure. This is later used
-+ * to allocate memory for the structure.
++ * Allocate memory for storing both the copies of the FWU metadata. The
++ * copies are then used as a cache for storing FWU metadata contents.
 + *
 + * Return: 0 if OK, -ve on error
 + */
-+int fwu_get_mdata_size(uint32_t *mdata_size)
-+{
-+	int ret = 0;
-+	struct fwu_mdata mdata = { 0 };
-+	struct fwu_data *data = fwu_get_data();
-+	struct udevice *fwu_dev = fwu_get_dev();
-+
-+	if (data->metadata_size) {
-+		*mdata_size = data->metadata_size;
++int fwu_mdata_copies_allocate(u32 mdata_size)
+ {
+-	void *buf = &mdata->version;
+-	u32 calc_crc32 = crc32(0, buf, sizeof(*mdata) - sizeof(u32));
++	if (g_fwu_data.fwu_mdata)
 +		return 0;
+ 
+-	return calc_crc32 == mdata->crc32 ? 0 : -EINVAL;
++	/*
++	 * Allocate the total memory that would be needed for both
++	 * the copies.
++	 */
++	g_fwu_data.fwu_mdata = calloc(2, mdata_size);
++	if (!g_fwu_data.fwu_mdata) {
++		log_err("Unable to allocate space for FWU metadata\n");
++		return -ENOMEM;
 +	}
-+
-+	ret = fwu_read_mdata(fwu_dev, &mdata, 1,
-+			     sizeof(struct fwu_mdata));
-+	if (ret) {
-+		log_err("FWU metadata read failed\n");
-+		return ret;
-+	}
-+
-+	*mdata_size = mdata.metadata_size;
-+	if (!*mdata_size)
-+		return -EINVAL;
 +
 +	return 0;
-+}
+ }
+ 
+ /**
+@@ -201,21 +256,33 @@ static inline int mdata_crc_check(struct fwu_mdata *mdata)
+ int fwu_get_mdata(struct fwu_mdata *mdata)
+ {
+ 	int err;
++	uint32_t mdata_size;
+ 	bool parts_ok[2] = { false };
+-	struct fwu_mdata s, *parts_mdata[2];
++	struct fwu_mdata *parts_mdata[2];
+ 
+-	parts_mdata[0] = &g_mdata;
+-	parts_mdata[1] = &s;
++	err = fwu_get_mdata_size(&mdata_size);
++	if (err)
++		return err;
 +
-+/**
-+ * fwu_init() - FWU specific initialisations
-+ *
-+ * Carry out some FWU specific initialisations including allocation
-+ * of memory for the metadata copies, and reading the FWU metadata
-+ * copies into the allocated memory. The metadata fields are then
-+ * copied into a version agnostic structure.
-+ *
-+ * Return: 0 if OK, -ve on error
-+ */
-+int fwu_init(void)
-+{
-+	int ret;
-+	struct fwu_mdata mdata = { 0 };
-+	struct udevice *fwu_dev = fwu_get_dev();
-+
-+	/*
-+	 * First we read only the top level structure
-+	 * and get the size of the complete structure.
-+	 */
-+	ret = fwu_read_mdata(fwu_dev, &mdata, 1,
-+			     sizeof(struct fwu_mdata));
-+	if (ret) {
-+		log_err("FWU metadata read failed\n");
-+		return ret;
++	parts_mdata[0] = g_fwu_data.fwu_mdata;
++	if (!parts_mdata[0]) {
++		log_err("Memory not allocated for the FWU Metadata copies\n");
++		return -ENOMEM;
 +	}
 +
-+	ret = fwu_mdata_copies_allocate(mdata.metadata_size);
-+	if (ret)
-+		return ret;
++	parts_mdata[1] = (struct fwu_mdata *)((char *)parts_mdata[0] +
++					      mdata_size);
+ 
+ 	/* if mdata already read and ready */
+ 	err = mdata_crc_check(parts_mdata[0]);
+ 	if (!err)
+ 		goto ret_mdata;
+-	/* else read, verify and, if needed, fix mdata */
+ 
 +
-+	/*
-+	 * Now read the entire structure, both copies, and
-+	 * validate that the copies.
-+	 */
-+	ret = fwu_get_mdata(NULL);
-+	if (ret)
-+		return ret;
++	/* else read, verify and, if needed, fix mdata */
+ 	for (int i = 0; i < 2; i++) {
+ 		parts_ok[i] = false;
+-		err = fwu_read_mdata(g_dev, parts_mdata[i], !i);
++		err = fwu_read_mdata(g_dev, parts_mdata[i], !i, mdata_size);
+ 		if (!err) {
+ 			err = mdata_crc_check(parts_mdata[i]);
+ 			if (!err)
+@@ -230,7 +297,7 @@ int fwu_get_mdata(struct fwu_mdata *mdata)
+ 		 * Before returning, check that both the
+ 		 * FWU metadata copies are the same.
+ 		 */
+-		err = memcmp(parts_mdata[0], parts_mdata[1], sizeof(struct fwu_mdata));
++		err = memcmp(parts_mdata[0], parts_mdata[1], mdata_size);
+ 		if (!err)
+ 			goto ret_mdata;
+ 
+@@ -247,7 +314,7 @@ int fwu_get_mdata(struct fwu_mdata *mdata)
+ 		if (parts_ok[i])
+ 			continue;
+ 
+-		memcpy(parts_mdata[i], parts_mdata[1 - i], sizeof(struct fwu_mdata));
++		memcpy(parts_mdata[i], parts_mdata[1 - i], mdata_size);
+ 		err = fwu_sync_mdata(parts_mdata[i], i ? SECONDARY_PART : PRIMARY_PART);
+ 		if (err) {
+ 			log_debug("mdata : %s write failed\n", i ? "secondary" : "primary");
+@@ -257,7 +324,7 @@ int fwu_get_mdata(struct fwu_mdata *mdata)
+ 
+ ret_mdata:
+ 	if (!err && mdata)
+-		memcpy(mdata, parts_mdata[0], sizeof(struct fwu_mdata));
++		memcpy(mdata, parts_mdata[0], mdata_size);
+ 
+ 	return err;
+ }
+@@ -275,13 +342,13 @@ ret_mdata:
+ int fwu_get_active_index(uint *active_idx)
+ {
+ 	int ret = 0;
+-	struct fwu_mdata *mdata = &g_mdata;
++	struct fwu_data *data = &g_fwu_data;
+ 
+ 	/*
+ 	 * Found the FWU metadata partition, now read the active_index
+ 	 * value
+ 	 */
+-	*active_idx = mdata->active_index;
++	*active_idx = data->active_index;
+ 	if (*active_idx >= CONFIG_FWU_NUM_BANKS) {
+ 		log_debug("Active index value read is incorrect\n");
+ 		ret = -EINVAL;
+@@ -302,7 +369,7 @@ int fwu_get_active_index(uint *active_idx)
+ int fwu_set_active_index(uint active_idx)
+ {
+ 	int ret;
+-	struct fwu_mdata *mdata = &g_mdata;
++	struct fwu_data *data =  &g_fwu_data;
+ 
+ 	if (active_idx >= CONFIG_FWU_NUM_BANKS) {
+ 		log_debug("Invalid active index value\n");
+@@ -313,14 +380,16 @@ int fwu_set_active_index(uint active_idx)
+ 	 * Update the active index and previous_active_index fields
+ 	 * in the FWU metadata
+ 	 */
+-	mdata->previous_active_index = mdata->active_index;
+-	mdata->active_index = active_idx;
++	data->previous_active_index = data->active_index;
++	data->active_index = active_idx;
 +
-+	ret = fwu_mdata_sanity_checks();
-+	if (ret)
-+		return ret;
++	fwu_populate_mdata_bank_index(data);
+ 
+ 	/*
+ 	 * Now write this updated FWU metadata to both the
+ 	 * FWU metadata partitions
+ 	 */
+-	ret = fwu_sync_mdata(mdata, BOTH_PARTS);
++	ret = fwu_sync_mdata(data->fwu_mdata, BOTH_PARTS);
+ 	if (ret) {
+ 		log_debug("Failed to update FWU metadata partitions\n");
+ 		ret = -EIO;
+@@ -346,7 +415,7 @@ int fwu_get_dfu_alt_num(u8 image_index, u8 *alt_num)
+ 	int ret, i;
+ 	uint update_bank;
+ 	efi_guid_t *image_guid, image_type_id;
+-	struct fwu_mdata *mdata = &g_mdata;
++	struct fwu_data *data = &g_fwu_data;
+ 	struct fwu_image_entry *img_entry;
+ 	struct fwu_image_bank_info *img_bank_info;
+ 
+@@ -365,15 +434,15 @@ int fwu_get_dfu_alt_num(u8 image_index, u8 *alt_num)
+ 
+ 	ret = -EINVAL;
+ 	/*
+-	 * The FWU metadata has been read. Now get the image_uuid for the
++	 * The FWU metadata has been read. Now get the image_guid for the
+ 	 * image with the update_bank.
+ 	 */
+ 	for (i = 0; i < CONFIG_FWU_NUM_IMAGES_PER_BANK; i++) {
+ 		if (!guidcmp(&image_type_id,
+-			     &mdata->img_entry[i].image_type_uuid)) {
+-			img_entry = &mdata->img_entry[i];
++			     &data->fwu_images[i].image_type_guid)) {
++			img_entry = &data->fwu_images[i];
+ 			img_bank_info = &img_entry->img_bank_info[update_bank];
+-			image_guid = &img_bank_info->image_uuid;
++			image_guid = &img_bank_info->image_guid;
+ 			ret = fwu_plat_get_alt_num(g_dev, image_guid, alt_num);
+ 			if (ret)
+ 				log_debug("alt_num not found for partition with GUID %pUs\n",
+@@ -407,21 +476,23 @@ int fwu_revert_boot_index(void)
+ {
+ 	int ret;
+ 	u32 cur_active_index;
+-	struct fwu_mdata *mdata = &g_mdata;
++	struct fwu_data *data =  &g_fwu_data;
+ 
+ 	/*
+ 	 * Swap the active index and previous_active_index fields
+ 	 * in the FWU metadata
+ 	 */
+-	cur_active_index = mdata->active_index;
+-	mdata->active_index = mdata->previous_active_index;
+-	mdata->previous_active_index = cur_active_index;
++	cur_active_index = data->active_index;
++	data->active_index = data->previous_active_index;
++	data->previous_active_index = cur_active_index;
 +
-+	fwu_data_init();
-+
-+	return 0;
-+}
++	fwu_populate_mdata_bank_index(data);
+ 
+ 	/*
+ 	 * Now write this updated FWU metadata to both the
+ 	 * FWU metadata partitions
+ 	 */
+-	ret = fwu_sync_mdata(mdata, BOTH_PARTS);
++	ret = fwu_sync_mdata(data->fwu_mdata, BOTH_PARTS);
+ 	if (ret) {
+ 		log_debug("Failed to update FWU metadata partitions\n");
+ 		ret = -EIO;
+@@ -448,20 +519,21 @@ int fwu_revert_boot_index(void)
+ static int fwu_clrset_image_accept(efi_guid_t *img_type_id, u32 bank, u8 action)
+ {
+ 	int ret, i;
+-	struct fwu_mdata *mdata = &g_mdata;
++	struct fwu_data *data = &g_fwu_data;
+ 	struct fwu_image_entry *img_entry;
+ 	struct fwu_image_bank_info *img_bank_info;
+ 
+-	img_entry = &mdata->img_entry[0];
++	img_entry = &data->fwu_images[0];
+ 	for (i = 0; i < CONFIG_FWU_NUM_IMAGES_PER_BANK; i++) {
+-		if (!guidcmp(&img_entry[i].image_type_uuid, img_type_id)) {
++		if (!guidcmp(&img_entry[i].image_type_guid, img_type_id)) {
+ 			img_bank_info = &img_entry[i].img_bank_info[bank];
+ 			if (action == IMAGE_ACCEPT_SET)
+ 				img_bank_info->accepted |= FWU_IMAGE_ACCEPTED;
+ 			else
+ 				img_bank_info->accepted = 0;
+ 
+-			ret = fwu_sync_mdata(mdata, BOTH_PARTS);
++			fwu_populate_mdata_image_info(data);
++			ret = fwu_sync_mdata(data->fwu_mdata, BOTH_PARTS);
+ 			goto out;
+ 		}
+ 	}
+@@ -627,9 +699,9 @@ static int fwu_boottime_checks(void)
+ 		return 0;
+ 	}
+ 
+-	ret = fwu_get_mdata(NULL);
++	ret = fwu_init();
+ 	if (ret) {
+-		log_debug("Unable to read meta-data\n");
++		log_debug("fwu_init() failed\n");
+ 		return ret;
+ 	}
+ 
+@@ -665,7 +737,7 @@ static int fwu_boottime_checks(void)
+ 	if (efi_init_obj_list() != EFI_SUCCESS)
+ 		return 0;
+ 
+-	in_trial = in_trial_state(&g_mdata);
++	in_trial = in_trial_state();
+ 	if (!in_trial || (ret = fwu_trial_count_update()) > 0)
+ 		ret = trial_counter_update(NULL);
+ 
 -- 
 2.34.1
 
