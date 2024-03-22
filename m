@@ -4,55 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03195C54E71
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 16:38:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15E38C47DD9
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 16:39:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F95387F65;
-	Fri, 22 Mar 2024 17:38:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.dev
+	by phobos.denx.de (Postfix) with ESMTP id 4ED64881BF;
+	Fri, 22 Mar 2024 17:39:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.dev header.i=@linux.dev header.b="uXtgOPRD";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 17E55881BF; Fri, 22 Mar 2024 17:38:15 +0100 (CET)
-Received: from out-179.mta1.migadu.com (out-179.mta1.migadu.com
- [IPv6:2001:41d0:203:375::b3])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1711125554;
+	bh=rgwixXaJknUOhb4kM69KgifCQ+4Iu4zmbLGy5I6MfYc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=kX4UqsSGZZD3hmEUO3Su5WefnLe0RWy56v/czvlhg9E4WY0xtahGn8GXmT7lne90v
+	 GL35FN59m9w7waDyaqKLxPJHIVoPFyankjBMMRPvj96JU3r5W7EANWuXf81WYwP2vM
+	 7h9ema9Qaq7rDvbPZ4OMZGNpOn/UZOL7PLSqjQCBqfFRxOwy5Hey61+7OO1ox+GsIM
+	 1QWmSr1XnjVc81SgBI9wU26ZPuz2Vb2Vj48g0GPK/diYz3yECPSoTwG2GANqh5Ukyj
+	 ovbwm5NGZh4Sw3iZ4hLXP7AnEG2BJpFuGDnQoxg4FtOmRsvM9v3N716RXckp3n+qBO
+	 Ya3Oc0vpfD3sg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEE11875FA
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 17:38:12 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linux.dev
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sean.anderson@linux.dev
-Message-ID: <c65a1d4e-94eb-4ee7-823d-c400bec57796@linux.dev>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linux.dev; s=key1;
- t=1711125492;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZhrtrBKVmEGRsiQ9lSuV6X2KWoF3pUifXdsVijbRdjQ=;
- b=uXtgOPRD2hYYiRviPpgWOrH8TsJXWUZhBw8YilrNvFHmK9fb2ASDXQoLmcKI4H7S9CMCxq
- MrWLvXvHhyh/P0nuqvh1VgeIJZkLtEVEhTQ4HNjNmfxSkGn+5u2mpapowBfNZrxDQvgU2Q
- xbU5Am+3zblwFAT060K+H2mxYgzVpRI=
-Date: Fri, 22 Mar 2024 12:38:08 -0400
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 07411875FA;
+ Fri, 22 Mar 2024 17:39:11 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1711125553;
+ bh=rgwixXaJknUOhb4kM69KgifCQ+4Iu4zmbLGy5I6MfYc=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=tk8VZPajrAt9VTByo6Tdl9B1GwTNNtN2FDu3Y9iYaiGIWnXdbV80iCq5MwfN1MfWE
+ qZPl/poFVvbgbqAWJzISZAgQiSP9a1MV/s5502seezglgnZGcv+4+Jm9/FiqEsr25t
+ dS4B5zDMmHZHyztcjJh8QPiZdClloHAc+Qy+vI0NHlcBRYm4QHYZdEG7if5iVdyI4j
+ D0rncirm4+8uynjiPim1bw+elM4VHRu1oVqii0klQgjmJ+DBL990M2tBeHfvbhe/aC
+ gWLc93+8fyK+pAPRUvJryNqhG3DHrido7cCY2sjeE+46fXo2hmi2qEk6IL09y5sDvX
+ xJqHDgE7oCh0w==
+Message-ID: <e5691237-a4dd-470c-84da-d0583190c28a@denx.de>
+Date: Fri, 22 Mar 2024 17:39:11 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm64: zynqmp: Also support JTAG as alternative boot mode
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 04/11] imx8mp: power-domain: Don't power off pd_bus
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, tharvey@gateworks.com,
+ marcel.ziswiler@toradex.com, francesco@dolcini.it, lukma@denx.de,
+ seanga2@gmail.com, jh80.chung@samsung.com, sjg@chromium.org,
+ festevam@denx.de, andrejs.cainikovs@toradex.com, peng.fan@nxp.com,
+ aford173@gmail.com, ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org,
+ fathi.boudra@linaro.org, remi.duraffort@linaro.org,
+ daniel.thompson@linaro.org
+References: <20240312070338.86127-1-sumit.garg@linaro.org>
+ <20240312070338.86127-5-sumit.garg@linaro.org>
+ <dbd4f385-d93f-48db-a7e9-88b86f3d7445@denx.de>
+ <CAFA6WYO8k=qyexUSRs_X-YMtKZTAzM5ZeSCNEO+sJ7z91z7ohg@mail.gmail.com>
+ <f789292a-7c46-4b98-935f-86bfea39ab05@denx.de>
+ <CAFA6WYPHqdWiL=8foFDD9Rs+_L+E-=D+VMC=FZrnKeQdcooNMQ@mail.gmail.com>
+ <1d7ad0f4-2463-4b1c-9020-5444366438fb@denx.de>
+ <CAFA6WYOygxNUGWu3jDF7=4px5gBSoCOjzU=s+eTcH0rRFSGJUQ@mail.gmail.com>
+ <09b0dbae-208b-439a-bb75-a79902522eed@denx.de>
+ <CAFA6WYNcfQ6Szb81thXJDYUd1GEF7zcdnAAuZCiSagYBzbAqvQ@mail.gmail.com>
 Content-Language: en-US
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@xilinx.com
-Cc: Tom Rini <trini@konsulko.com>
-References: <ed51a9d51948ab939a53e0b9dc6c2d2546f97a4f.1710933505.git.michal.simek@amd.com>
- <dcc310e3-fa22-4459-a0ab-b44176c4bd2e@linux.dev>
- <a727ac9f-3602-4b55-82f4-5e5696c92070@amd.com>
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Sean Anderson <sean.anderson@linux.dev>
-In-Reply-To: <a727ac9f-3602-4b55-82f4-5e5696c92070@amd.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Migadu-Flow: FLOW_OUT
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAFA6WYNcfQ6Szb81thXJDYUd1GEF7zcdnAAuZCiSagYBzbAqvQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,103 +83,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/22/24 07:53, Michal Simek wrote:
-> 
-> 
-> On 3/21/24 17:20, Sean Anderson wrote:
->> On 3/20/24 07:18, Michal Simek wrote:
->>> if (reg >> BOOT_MODE_ALT_SHIFT) condition rules out alternative jtag boot
->>> mode which is 0. When 0 was used origin(HW) boot mode was used instead.
->>> That's why directly fill reg variable with requested boot mode and don't
->>> let code to read value back. "else" part of code remain unchanged.
->>>
->>> Signed-off-by: Michal Simek <michal.simek@amd.com>
->>> ---
->>>
->>>   arch/arm/mach-zynqmp/spl.c | 5 +++--
->>>   1 file changed, 3 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/arch/arm/mach-zynqmp/spl.c b/arch/arm/mach-zynqmp/spl.c
->>> index 5af735aa5cef..979ff3aef6c2 100644
->>> --- a/arch/arm/mach-zynqmp/spl.c
->>> +++ b/arch/arm/mach-zynqmp/spl.c
->>> @@ -91,13 +91,14 @@ u32 spl_boot_device(void)
->>>     #if defined(CONFIG_SPL_ZYNQMP_ALT_BOOTMODE_ENABLED)
->>>       /* Change default boot mode at run-time */
->>> +    reg = CONFIG_SPL_ZYNQMP_ALT_BOOTMODE;
->>>       writel(CONFIG_SPL_ZYNQMP_ALT_BOOTMODE << BOOT_MODE_ALT_SHIFT,
->>>              &crlapb_base->boot_mode);
->>> -#endif
->>> -
->>> +#else
->>>       reg = readl(&crlapb_base->boot_mode);
->>>       if (reg >> BOOT_MODE_ALT_SHIFT)
->>>           reg >>= BOOT_MODE_ALT_SHIFT;
->>> +#endif
->>>         bootmode = reg & BOOT_MODES_MASK;
->>>   
->>
->> Looks fine; can we change this to
->>
->> if (IS_ENABLED(CONFIG_SPL_ZYNQMP_ALT_BOOTMODE_ENABLED)) {
->>     ...
->> } else {
->>     ...
->> }
-> 
-> Issue is that CONFIG_SPL_ZYNQMP_ALT_BOOTMODE symbol is not defined and depends on CONFIG_SPL_ZYNQMP_ALT_BOOTMODE_ENABLED. It means you get compilation error.
-> That symbol can be setup and then what you have above can work.
-> Is it worth? TBH I don't have preference. Please take a look at patch below.
-> (And if v1 is fine then at least there should be added depends on SPL_ZYNQMP_ALT_BOOTMODE_ENABLED to SPL_ZYNQMP_ALT_BOOTMODE which is missing there now).
-> 
-> Thanks,
-> Michal
-> 
-> diff --git a/arch/arm/mach-zynqmp/Kconfig b/arch/arm/mach-zynqmp/Kconfig
-> index eee34380f0a0..75d3ec916a66 100644
-> --- a/arch/arm/mach-zynqmp/Kconfig
-> +++ b/arch/arm/mach-zynqmp/Kconfig
-> @@ -145,7 +145,7 @@ config ZYNQ_SDHCI_MAX_FREQ
-> 
->  config SPL_ZYNQMP_ALT_BOOTMODE
->         hex
-> -       default 0x0 if JTAG_MODE
-> +       default 0x0
->         default 0x1 if QSPI_MODE_24BIT
->         default 0x2 if QSPI_MODE_32BIT
->         default 0x3 if SD_MODE
-> diff --git a/arch/arm/mach-zynqmp/spl.c b/arch/arm/mach-zynqmp/spl.c
-> index 979ff3aef6c2..bbbf684ae496 100644
-> --- a/arch/arm/mach-zynqmp/spl.c
-> +++ b/arch/arm/mach-zynqmp/spl.c
-> @@ -89,16 +89,16 @@ u32 spl_boot_device(void)
->         u32 reg = 0;
->         u8 bootmode;
-> 
-> -#if defined(CONFIG_SPL_ZYNQMP_ALT_BOOTMODE_ENABLED)
-> -       /* Change default boot mode at run-time */
-> -       reg = CONFIG_SPL_ZYNQMP_ALT_BOOTMODE;
-> -       writel(CONFIG_SPL_ZYNQMP_ALT_BOOTMODE << BOOT_MODE_ALT_SHIFT,
-> -              &crlapb_base->boot_mode);
-> -#else
-> -       reg = readl(&crlapb_base->boot_mode);
-> -       if (reg >> BOOT_MODE_ALT_SHIFT)
-> -               reg >>= BOOT_MODE_ALT_SHIFT;
-> -#endif
-> +       if (IS_ENABLED(CONFIG_SPL_ZYNQMP_ALT_BOOTMODE_ENABLED)) {
-> +               /* Change default boot mode at run-time */
-> +               reg = CONFIG_SPL_ZYNQMP_ALT_BOOTMODE;
-> +               writel(CONFIG_SPL_ZYNQMP_ALT_BOOTMODE << BOOT_MODE_ALT_SHIFT,
-> +                      &crlapb_base->boot_mode);
-> +       } else {
-> +               reg = readl(&crlapb_base->boot_mode);
-> +               if (reg >> BOOT_MODE_ALT_SHIFT)
-> +                       reg >>= BOOT_MODE_ALT_SHIFT;
-> +       }
-> 
->         bootmode = reg & BOOT_MODES_MASK;
-> 
-> 
-> 
+On 3/22/24 5:55 AM, Sumit Garg wrote:
 
-Reviewed-by: Sean Anderson <sean.anderson@linux.dev>
+Hi,
+
+>>>>> I think if people are concerned about power consumption then it
+>>>>> should be implemented properly in U-Boot to remove all the DT based
+>>>>> devices before passing on control to the next stage.
+>>>>
+>>>> I would expect imx8mp_hsiomix_off() to be called either on 'usb stop' or
+>>>> just before Linux boots (esp. at that point), so if you do not power off
+>>>> the bus domain before booting Linux, you may hand over a device which
+>>>> was not fully power cycled.
+>>>
+>>> Unfortunately that's the current situation I see. IMO, the better
+>>> solution would be to just remove all the DT devices before passing on
+>>> control to Linux. That should automatically power off devices.
+>>
+>> Doesn't CONFIG_DM_DEVICE_REMOVE=y do something like that already ?
+> 
+> I just did simple experiment via following diff:
+> 
+> diff --git a/drivers/power/domain/imx8mp-hsiomix.c
+> b/drivers/power/domain/imx8mp-hsiomix.c
+> index 6188a04c45e..0ddcd39923a 100644
+> --- a/drivers/power/domain/imx8mp-hsiomix.c
+> +++ b/drivers/power/domain/imx8mp-hsiomix.c
+> @@ -101,6 +101,7 @@ static int imx8mp_hsiomix_set(struct power_domain
+> *power_domain, bool power_on)
+>                  if (gpr_reg0_bits)
+>                          setbits_le32(priv->base + GPR_REG0, gpr_reg0_bits);
+>          } else {
+> +               while(1);
+>                  if (gpr_reg0_bits)
+>                          clrbits_le32(priv->base + GPR_REG0, gpr_reg0_bits);
+> 
+> The boot doesn't hang suggesting that CONFIG_DM_DEVICE_REMOVE=y isn't
+> effective to remove any DT devices. It can for sure be another
+> followup series to make it effective.
+
+That's odd. Please try and edit drivers/core/device-remove.c , look up 
+device_remove() at the end , and see if the remove is being called on 
+the hsiomix device . You might need to add some sort of printf() there, 
+but that's where the removal happens.
+
+The removal before boot is I think called from drivers/core/root.c 
+dm_remove_devices_flags(), which itself is called from 
+arch/arm/lib/bootm.c announce_and_cleanup() .
