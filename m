@@ -4,173 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 897E4C47DD9
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 11:58:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87362C54E71
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 12:02:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D8E78820F;
-	Fri, 22 Mar 2024 12:58:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id EA73B881C9;
+	Fri, 22 Mar 2024 13:02:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="n7HgIcpC";
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="XOSxuUvz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CBDD8820D; Fri, 22 Mar 2024 12:58:33 +0100 (CET)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20615.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::615])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 41F6A8821A; Fri, 22 Mar 2024 13:02:49 +0100 (CET)
+Received: from mail.thorsis.com (mail.thorsis.com [92.198.35.195])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F345A881BC
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 12:58:30 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IBV2e4rIYGLR2eD0ixhz/zigXkk95k7j4Tq8KMDv8MBgVByTSTZeJkTESqyFxVlRl4JCTm4xEaHSbFGvCGgJR3ZAits2Nh42nBGQO8spTw4dcUlT9ztOl5J7ThogtYIch10i0y+NMBKoNesXye8kqsTwLfurdJ9lask+FDufAF0dauLYsNXmuGgr4J3H7OrS81+Rsk4aYm1oOATkTwfCHSyIFSpjRNv1TM/nxR9CXbu8XyJnBVKjpI41HJ2GiEcTwsJ4JwgeqwoC2+5a0E8+PTr5DNIsYIcAJh5BH8fpt2vaXOWoXZI3R85N0YafCX0LwU9WaaQpuwBTQgVunbjvWg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OxNGhvUn0nnrmTtZVDTQMp/yDIWCS4MTJmXfNnw8L0k=;
- b=Ic/MwR+GyTBabhf+gBIjhkKboqdbpONocRua4PKCHBRbre0F2BhXhFZfd9QqJI9p+PUd1RmCRykEsFr1HfHNuQ4RGNoL/gmWXRs672bX0gizm3O6Zh6uvFxGD21d4pgey5OvUkydyqKMsKy51rdMD/Qdga9UyKyWgEdUBq836c45S1XuuKgZMj7lH64BwdeP2ZAEPG5eTzseZr+fD2K7MyypLfeZaPy13JLQddV5Qchnyal8zFZ0uDdpQe/Qa89x0oBh5+DjaHDIPQCSctm7TooIPJS3O7zEgL3VwXssbz02xkIsPrCuGvIdBHZ7rkQd3fnBPq+GJNxiWB5rQYQ/1Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OxNGhvUn0nnrmTtZVDTQMp/yDIWCS4MTJmXfNnw8L0k=;
- b=n7HgIcpCcrHTCwl7RVIHi3hVFzSnojmVXG2iUe8Kn/7CvtoZrNdS2ZIKfl8u5tVFCKUp04XSSDbttpLFuOHfWKve3vPPV3bkS+dKIRzTR0sN6b/LX8r5sGQSfF/vVVxO7Zq+7HKpDVTelXhavIWbSrnN83rVAsuqOfqYRTgxaqk=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SN7PR12MB8101.namprd12.prod.outlook.com (2603:10b6:806:321::7)
- by DS0PR12MB9322.namprd12.prod.outlook.com (2603:10b6:8:1bd::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.24; Fri, 22 Mar
- 2024 11:58:28 +0000
-Received: from SN7PR12MB8101.namprd12.prod.outlook.com
- ([fe80::40b9:ca6b:89d7:f45f]) by SN7PR12MB8101.namprd12.prod.outlook.com
- ([fe80::40b9:ca6b:89d7:f45f%7]) with mapi id 15.20.7386.030; Fri, 22 Mar 2024
- 11:58:28 +0000
-Message-ID: <bec13c53-2919-4bd6-b5ba-b1d7f0683ebf@amd.com>
-Date: Fri, 22 Mar 2024 12:58:23 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: zynqmp: Add MTD partition handling for
- dfu_alt_info generation
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-To: u-boot@lists.denx.de, git@xilinx.com, ilias.apalodimas@linaro.org
-Cc: Tom Rini <trini@konsulko.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <c0d35e3b51064a31d2f1b6a0233976624826f1d2.1708705093.git.michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <c0d35e3b51064a31d2f1b6a0233976624826f1d2.1708705093.git.michal.simek@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR02CA0075.eurprd02.prod.outlook.com
- (2603:10a6:802:14::46) To PH7PR12MB8108.namprd12.prod.outlook.com
- (2603:10b6:510:2bc::14)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8101:EE_|DS0PR12MB9322:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4e5802ad-627a-4759-e968-08dc4a6762cb
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: xrTTwVd6wLcyqzspbOmPR+ryjMz8WTr3GXhMGc6WJ8JyREK3ETWGBAOWTQD3Ww0AVwhs83Tp7Bqw/KNs4MqH8AxU/bOH1KiQ1JwDDXXVUOuVcRdn2bQ0zAfyaT/m6rwDhUgaCJpPRilmKjyuaC4VaUCCorTy0Ta0kLocfoTMrEIWiPY1Y04RhUDhcgx6TTfZAIRRZLkxMJ76hfd5cVbszCv7J0XqwUGQ8coykk0oTd8u5r/N5BBRfLPiXugJkXuSgIkUPRdZ+0t5qgLut8erAM6bLiew2OYxMZtb4FG7XLWwX7IoGjXIhBI9JAq/MI7mGcDCXRddpqdQf0XkUOpGyp3AfBNdt8erNgH4F827PAlWSzoTbJJ4hz1lV90sn5VSAZyf3UouCXzITO9J5Ol/a9a8060cApTG7JgqI3YYYiXrisAzB/Pdt2FDUWq7CAkNB4mAIok+tw6zBzbwe3pkFU39UyL570oSRGfgfdAw73FBtNnq47Ix6syuG+xIvATYesnsmWKghPScxMnNTc7Yb07O5tV80lP5P5r5bCmP8ha5iaLJnfj/engx/fCpOu7vP03k+IjQVs+AYbzhonGoATwFpCyixMAeOk274oNN/J0=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR12MB8101.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(1800799015)(366007); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MVRoSDdITnNOZVZsSXJTY3JMdWoxaytxUG1vSkFrK012YWl3KzBWQUp0Rm5r?=
- =?utf-8?B?Ymk3UUVzK1RwRG1udUl1b2I0WkRaakxvMVd1dlRqdFVidE1VS3Jpd2dnU2s5?=
- =?utf-8?B?Nk1LTzFkMnJHaEFOaEszWld3K3BERUtheUdXekVTOGtyZHRYRHpQWWRJSmt1?=
- =?utf-8?B?bXR3blVZcTgrb3FpTEpoZ2tZUzRiNkl6YkhFM0VFUE5VR1FBWnNlY2pMemFu?=
- =?utf-8?B?ejZxenBMdEp0dmQrd1F1eUZyQUZpSHJKV1dFbWhLY2huSE1Wb0krWmtvS1Zt?=
- =?utf-8?B?ei9yaCtoL3RpT1dKM05oS244eFlEcGNjM2V5MTk5cUVtaVE3QVJOUFk5a3dP?=
- =?utf-8?B?Q3hXZkFnU2dUTE9XZXUveCt6VlhRaWF4Y0VERzkxOW85aHV4Uk5TZ0ZJcXMy?=
- =?utf-8?B?cllkaVdpbStDNTNIU1h5Z0FvNVlVUFZYR2Z0cVdoQlNTNlJNZFVCaUJXd09M?=
- =?utf-8?B?MWJqdlJzOEd1aTYxVUlxcXNjTFZYdVpic05sVlk2UVUxcW5rbWpPa1BYRy9Z?=
- =?utf-8?B?VVEraFJSbEJjRlB1K2ZRMnkwMkRzT0hXVmFwS2dhVU1iU21laWRpeXdnSlA0?=
- =?utf-8?B?VjNWTG8zQW1vVjBNRWZvdTJiOVVLOTl6SW5HWStuMmNIa2s1MTM0NzRTTzQx?=
- =?utf-8?B?b0QrRklJNE1QMHpvRDN5V2l2ZGxleitSS21veTBtNlFHcm9uUndtMjkrdXI1?=
- =?utf-8?B?S2N4RE9vdlUrbjVYUjVpR04yTklaWG9qTXFsYmUyMDNrRXZ2a1NBTlBtbE93?=
- =?utf-8?B?NlVkeis1RzkrSlRvZmtjOFpiNzd1ODdJa0pZWnpiSkoxMDJMUC9EdjNsM3U0?=
- =?utf-8?B?ckpUeHBoSmFDNTl1UG1rM2xoTGtheHNUbFBtajFsUDRsQVpxdmFPaVRQVHFa?=
- =?utf-8?B?Wkl2dmRjNWZycmhIVTBEOG9ROCtrcGMrbWNFa3I0YmFNRlVKSEYxc0lNaHJp?=
- =?utf-8?B?VXMvV200bjlxWXJEejg1WUdvQzljQ0gyU0o2aWtvdlU5SWRqMWtucUdOMm11?=
- =?utf-8?B?Nk56cUZQM0VIZlZmVG9jL2NOL05LVUkzWUd2MkJoNFYvOVhaNFFIUGdpSlEw?=
- =?utf-8?B?Qkd0d2NQNHNkWCtYNldNTzVtVU1LaWxZNkZqVjI4L2VsTmFGNERXaGVFaVYv?=
- =?utf-8?B?WEo1QjZYK2xKMHlLaUxqMldKYktCeWVQWmxKaCtKR09OcHNYd0tsZEhrZTds?=
- =?utf-8?B?N3A3NXFQa21KVzlGb0d1UXRDekQwOGRmSFNhNWI4SzNJM2JObGw0aUM0ZmND?=
- =?utf-8?B?ekgwQTRhbHU5dm8wRVdqSFl6amt1aGFuMWZJSUFib2VNOXgyUUhIR2JsMFF2?=
- =?utf-8?B?bHRWSzUxRHFJc0JLOFN0azMxeWUxK2pFdy9qZlRSSGYvK3FzOHoyQlRSamNv?=
- =?utf-8?B?RU4wNEk4Y2pITDJzeUdRaFVNa3RtdHJYbXpVZUlDb0Vqdlc0TjdkLy9GZ2V4?=
- =?utf-8?B?b0Q3eE5YdXFrNnh5QVQwWEJGbWlyWTRHU2FSamdDWTFJV2F3VEpoSDk2NVF2?=
- =?utf-8?B?OVJKNGU2SytoQTVWcmxnR3dYVU5xclR0L2MrN2JscjkrdWRjQzBoVEVtYVgr?=
- =?utf-8?B?Nkk5SWN4ZXYyUmFLTlFINXpIOHVKZlpkcEFWZEF1VGQ3SWdyakZTQWZSYVVi?=
- =?utf-8?B?Q0RLMXJFNG52V0pJRHduczhSMUJzWGVKWE02SDkxTjdzdmZZQUU3UlVpR3d5?=
- =?utf-8?B?UVlFdDZuNHhXZFpmWGhINTJ3OXBtZVd4dEMreURFNmNud0ZUUTVla2luRFJD?=
- =?utf-8?B?bmU3UDIzTDJPRFdmOTlaSWNuelpEUFJoQm1yTmt6RFUwZnoyWi96aURlTzNH?=
- =?utf-8?B?WDNzZ3QxaXR5TGp3VXkvK0xaRDVjK1ZtL0FSYzEvNjlHMjc0NFMxQUwzejFx?=
- =?utf-8?B?elhHZWlwMlFpc1pXZUhFeWI0TkVhajF4U0hrYW1ibGZVYVVhQ1psZjl5R1Jv?=
- =?utf-8?B?NzZkQ1NSdEpCeUJtNTJ2M1hhVFpiY3U5anBtMEd3bmJLTm9vd1ZVOE9xTFlZ?=
- =?utf-8?B?eXlRU25RWFpja1Z6QS9yQTM0ZExadGhWYWhzd29MUHBwdHYxWFFEK1M3Tllu?=
- =?utf-8?B?cUwxQXBxUTVVMlNmb2JYTVZ3alB0QW55MzhhN1ZRb3p3NHNQeTFENlRBNCsv?=
- =?utf-8?Q?wsxav0WNTQpWQqlPpeG0IiK3O?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4e5802ad-627a-4759-e968-08dc4a6762cb
-X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB8108.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Mar 2024 11:58:28.3329 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1iDgZCjitliJiiM0QgJs7MpNwNbwM2Tqd7SMJ/70RolPLOHkbw57HZmTSkk/r/Dy
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB9322
+ by phobos.denx.de (Postfix) with ESMTPS id C6A45881C9
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 13:02:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Date: Fri, 22 Mar 2024 13:02:45 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=default;
+ t=1711108963;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=IR4VNiq2bclKp0Ip7gHD2USHzF6tEIxdgrYMLEqOahQ=;
+ b=XOSxuUvz/OFrw4Hrp7vdr9icb70UQ4+W1YVW2hbAN9BAXwlg33z+ApyBs9yPvrjth/YpHs
+ LOXP5WAGTgYc+R47y91ydp+ANqy2VTmmG7QE9kiM9uuVq83w0EACtoV4OeODFtP0qUM1DM
+ Y5qDuQr0mLAjqDao78Pgvaf+x9Iv407+n7c5y8/g/0UgJ5rEFDIvGmTNhN1iFeZyrs3uzt
+ hnVydWyodSEkgwNTCwyRIuaY8FGEDv6LhrD8k57DQJ0YcSy6DscomNPqzCVVc43u6TYf2M
+ naaHtLF0XH6K8qTD+2qekUdiu0ZNl863FmVWI7QRtboPcDtabrsgdCPIWbmLIQ==
+From: Alexander Dahl <ada@thorsis.com>
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Mihai.Sain@microchip.com, dario.binacchi@amarulasolutions.com,
+ Balamanikandan.Gunasundar@microchip.com,
+ eugen.hristev@collabora.com, Bin.Li@microchip.com,
+ u-boot@lists.denx.de, ada@thorsis.com
+Subject: Re: [PATCH v2 6/6] cmd: nand: Add new optional sub-command 'onfi'
+Message-ID: <20240322-pummel-spry-ef7e39c220ec@thorsis.com>
+Mail-Followup-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
+ Mihai.Sain@microchip.com, dario.binacchi@amarulasolutions.com,
+ Balamanikandan.Gunasundar@microchip.com,
+ eugen.hristev@collabora.com, Bin.Li@microchip.com,
+ u-boot@lists.denx.de
+References: <20240320090214.40465-1-ada@thorsis.com>
+ <20240320090214.40465-7-ada@thorsis.com>
+ <PH8PR11MB680479987099973E85D6CC6C82332@PH8PR11MB6804.namprd11.prod.outlook.com>
+ <CAOf5uwmeW0_0rjXgoPBHK2XPYJk=D9Cdw4Qc7rQ_TPuOanCHwQ@mail.gmail.com>
+ <PH8PR11MB680480DD4A44E187DFC4A9B782312@PH8PR11MB6804.namprd11.prod.outlook.com>
+ <20240322-cupbearer-tray-de2157fd9c07@thorsis.com>
+ <CAOf5uwkgF+BGyDdStaDruh9cT0i+4iTedz0f7pOwYDg08zpzmg@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAOf5uwkgF+BGyDdStaDruh9cT0i+4iTedz0f7pOwYDg08zpzmg@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -187,96 +77,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Michael,
 
-
-On 2/23/24 17:18, Michal Simek wrote:
-> Generate dfu_alt_info generation based on information from MTD partitions.
-> mtd_found_part() is trying to identify MTD partition which code is running
-> from. If partitions are not defined and location is not found it is going
-> to previous behavior.
+Am Fri, Mar 22, 2024 at 12:54:27PM +0100 schrieb Michael Nazzareno Trimarchi:
+> HI
 > 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
+> On Fri, Mar 22, 2024 at 12:46 PM Alexander Dahl <ada@thorsis.com> wrote:
+> >
+> > Hello Mihai,
+> >
+> > Am Fri, Mar 22, 2024 at 10:02:29AM +0000 schrieb Mihai.Sain@microchip.com:
+> > > Hi Michael,
+> > >
+> > > -------------------------------------------------------
+> > >
+> > > I think this command can be really useful.
+> > > Let try to have more testing on more boards
+> > >
+> > > ---------------------------------------------------------
+> > >
+> > > I managed to test the command on sama7g54-curiosity board.
+> >
+> > Thanks for that.  Nice to see it works on other variants of the SoC
+> > family.
+> >
+> > > I also forced timing mode 5 from controller driver (conf->timings.sdr.tRC_min < 20000).
+> >
+> > You did a similar thing for the sam9x75.  These boards/socs seem to
+> > have a newer SMC / HSMC controller than sama5d2 or sam9x60?  The
+> > driver claims all the (H)SMC incarnations do _not_ support these EDO
+> > modes 4 and 5.  Maybe someone could have a deeper look at the
+> > datasheets of the newer SoCs and propose a patch to support those
+> > newer controllers in the atmel nand-controller driver?  I guess the
+> > problem is the same in Linux, right?
+> >
+> > Greets
+> > Alex
+> >
+> > >
+> > > => nand onfi 0
+> > > => hsmc decode
+> > >
+> > > MCK rate: 200 MHz
+> > >
+> > > HSMC_SETUP3:    0x00000004
+> > > HSMC_PULSE3:    0x140a140a
+> > > HSMC_CYCLE3:    0x00140014
+> > > HSMC_TIMINGS3:  0x880805f4
+> > > HSMC_MODE3:     0x001f0003
+> > > NCS_RD: setup: 0 (0 ns), pulse: 20 (100 ns), hold: 0 (0 ns), cycle: 20 (100 ns)
+> > >    NRD: setup: 0 (0 ns), pulse: 10 (50 ns), hold: 10 (50 ns), cycle: 20 (100 ns)
+> > > NCS_WR: setup: 0 (0 ns), pulse: 20 (100 ns), hold: 0 (0 ns), cycle: 20 (100 ns)
+> > >    NWE: setup: 4 (20 ns), pulse: 10 (50 ns), hold: 6 (30 ns), cycle: 20 (100 ns)
+> > > TDF optimization enabled
+> > > TDF cycles: 15 (75 ns)
+> > > Data Bus Width: 8-bit bus
+> > > NWAIT Mode: 0
+> > > Write operation controlled by NWE signal
+> > > Read operation controlled by NRD signal
+> > > NFSEL (NAND Flash Selection) is set
+> > > OCMS (Off Chip Memory Scrambling) is disabled
+> > > TWB (WEN High to REN to Busy): 64 (320 ns)
+> > > TRR (Ready to REN Low Delay):  64 (320 ns)
+> > > TAR (ALE to REN Low Delay):    5 (25 ns)
+> > > TADL (ALE to Data Start):      71 (355 ns)
+> > > TCLR (CLE to REN Low Delay):   4 (20 ns)
+> > >
+> > > => time nand torture 0x1000000 0x1000000
+> > >
+> > > NAND torture: device 0 offset 0x1000000 size 0x1000000 (block size 0x40000)
+> > >  Passed: 64, failed: 0
+> > >
+> > > time: 22.638 seconds
+> > >
+> > > => nand onfi 5
+> > > => hsmc decode
+> > >
+> > > MCK rate: 200 MHz
+> > >
+> > > HSMC_SETUP3:    0x00000001
+> > > HSMC_PULSE3:    0x07040502
+> > > HSMC_CYCLE3:    0x00070005
+> > > HSMC_TIMINGS3:  0x880402f2
+> > > HSMC_MODE3:     0x001f0003
+> > > NCS_RD: setup: 0 (0 ns), pulse: 7 (35 ns), hold: 0 (0 ns), cycle: 7 (35 ns)
+> > >    NRD: setup: 0 (0 ns), pulse: 4 (20 ns), hold: 3 (15 ns), cycle: 7 (35 ns)
+> > > NCS_WR: setup: 0 (0 ns), pulse: 5 (25 ns), hold: 0 (0 ns), cycle: 5 (25 ns)
+> > >    NWE: setup: 1 (5 ns), pulse: 2 (10 ns), hold: 2 (10 ns), cycle: 5 (25 ns)
+> > > TDF optimization enabled
+> > > TDF cycles: 15 (75 ns)
+> > > Data Bus Width: 8-bit bus
+> > > NWAIT Mode: 0
+> > > Write operation controlled by NWE signal
+> > > Read operation controlled by NRD signal
+> > > NFSEL (NAND Flash Selection) is set
+> > > OCMS (Off Chip Memory Scrambling) is disabled
+> > > TWB (WEN High to REN to Busy): 64 (320 ns)
+> > > TRR (Ready to REN Low Delay):  4 (20 ns)
+> > > TAR (ALE to REN Low Delay):    2 (10 ns)
+> > > TADL (ALE to Data Start):      71 (355 ns)
+> > > TCLR (CLE to REN Low Delay):   2 (10 ns)
+> > >
+> > > => time nand torture 0x1000000 0x1000000
+> > >
+> > > NAND torture: device 0 offset 0x1000000 size 0x1000000 (block size 0x40000)
+> > >  Passed: 64, failed: 0
+> > >
+> > > time: 11.661 seconds
+> > >
+> > > => nand info
+> > >
+> > > Device 0: nand0, sector size 256 KiB
+> > >   Manufacturer  MACRONIX
+> > >   Model         MX30LF4G28AD
+> > >   Device size        512 MiB
+> > >   Page size         4096 b
+> > >   OOB size           256 b
+> > >   Erase size      262144 b
+> > >   ecc strength         8 bits
+> > >   ecc step size      512 b
+> > >   subpagesize       4096 b
+> > >   options       0x40004200
+> > >   bbt options   0x00028000
+> > >
+> > > Best regards,
+> > > Mihai Sain
 > 
->   board/xilinx/zynqmp/zynqmp.c | 52 +++++++++++++++++++++++++++++++-----
->   1 file changed, 45 insertions(+), 7 deletions(-)
+> I'm in favor to have it even cover by one soc family. I would like to
+> confirm on imx6 and imx8. If you are not in a rush.
+> Let's us test too
+
+Agreed.  This is a generic nand command, so it would of course be
+reasonable to test it on multiple nand controllers.  I'm afraid I
+currently have only at91 boards on my desk for which I have a recent
+U-Boot _and_ a NAND chip soldered.  So take your time for this patch.
+
+If you don't mind I would be happy if you could merge the four trivial
+patches which do not add new features and which already got your
+reviewed-by in the next cycle already, and let those other patches
+with the new subcommands for debugging be tested as long as needed.
+
+Kind regards
+Alex
+
 > 
-> diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-> index ba49eb7be229..eee89284de9d 100644
-> --- a/board/xilinx/zynqmp/zynqmp.c
-> +++ b/board/xilinx/zynqmp/zynqmp.c
-> @@ -626,6 +626,31 @@ enum env_location env_get_location(enum env_operation op, int prio)
->   
->   #define DFU_ALT_BUF_LEN		SZ_1K
->   
-> +static void mtd_found_part(u32 *base, u32 *size)
-> +{
-> +	struct mtd_info *part, *mtd;
-> +
-> +	mtd_probe_devices();
-> +
-> +	mtd = get_mtd_device_nm("nor0");
-> +	if (!IS_ERR_OR_NULL(mtd)) {
-> +		list_for_each_entry(part, &mtd->partitions, node) {
-> +			debug("0x%012llx-0x%012llx : \"%s\"\n",
-> +			      part->offset, part->offset + part->size,
-> +			      part->name);
-> +
-> +			if (*base >= part->offset &&
-> +			    *base < part->offset + part->size) {
-> +				debug("Found my partition: %d/%s\n",
-> +				      part->index, part->name);
-> +				*base = part->offset;
-> +				*size = part->size;
-> +				break;
-> +			}
-> +		}
-> +	}
-> +}
-> +
->   void set_dfu_alt_info(char *interface, char *devstr)
->   {
->   	int multiboot, bootseq = 0, len = 0;
-> @@ -667,15 +692,28 @@ void set_dfu_alt_info(char *interface, char *devstr)
->   		break;
->   	case QSPI_MODE_24BIT:
->   	case QSPI_MODE_32BIT:
-> -		len += snprintf(buf + len, DFU_ALT_BUF_LEN,
-> -			       "sf 0:0=boot.bin raw %x 0x1500000",
-> -			       multiboot * SZ_32K);
-> +		{
-> +			u32 base = multiboot * SZ_32K;
-> +			u32 size = 0x1500000;
-> +			u32 limit = size;
-> +
-> +			mtd_found_part(&base, &limit);
-> +
-> +#if defined(CONFIG_SYS_SPI_U_BOOT_OFFS)
-> +			size = limit;
-> +			limit = CONFIG_SYS_SPI_U_BOOT_OFFS;
-> +#endif
-> +
-> +			len += snprintf(buf + len, DFU_ALT_BUF_LEN,
-> +					"sf 0:0=boot.bin raw 0x%x 0x%x",
-> +					base, limit);
->   #if defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME) && defined(CONFIG_SYS_SPI_U_BOOT_OFFS)
-> -		len += snprintf(buf + len, DFU_ALT_BUF_LEN,
-> -			       ";%s raw 0x%x 0x500000",
-> -			       CONFIG_SPL_FS_LOAD_PAYLOAD_NAME,
-> -			       multiboot * SZ_32K + CONFIG_SYS_SPI_U_BOOT_OFFS);
-> +			len += snprintf(buf + len, DFU_ALT_BUF_LEN,
-> +					";%s raw 0x%x 0x%x",
-> +					CONFIG_SPL_FS_LOAD_PAYLOAD_NAME,
-> +					base + limit, size - limit);
->   #endif
-> +		}
->   		break;
->   	default:
->   		return;
-
-Based on discussion here
-https://lore.kernel.org/all/561f9d0ee96ebb6cd674042f269f280ab68fbbac.1708705118.git.michal.simek@amd.com/
-
-I will send updated version of this patch.
-
-M
+> Michael
+> 
+> -- 
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com
+> __________________________________
+> 
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com
+> www.amarulasolutions.com
