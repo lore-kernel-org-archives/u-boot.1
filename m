@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05E35C54E64
-	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 23:15:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA341C47DD9
+	for <u-boot@archiver.kernel.org>; Fri, 22 Mar 2024 23:16:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C75A587CB7;
-	Sat, 23 Mar 2024 00:15:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4663E87D07;
+	Sat, 23 Mar 2024 00:15:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ljEDjIfO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z1YJwCji";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0535D87CF8; Sat, 23 Mar 2024 00:15:55 +0100 (CET)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
+ id DA88987B30; Sat, 23 Mar 2024 00:15:55 +0100 (CET)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C9A487B30
- for <u-boot@lists.denx.de>; Sat, 23 Mar 2024 00:15:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF0D587CDB
+ for <u-boot@lists.denx.de>; Sat, 23 Mar 2024 00:15:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-dcc84ae94c1so2631899276.1
- for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 16:15:52 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6962950c6bfso23999956d6.2
+ for <u-boot@lists.denx.de>; Fri, 22 Mar 2024 16:15:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711149351; x=1711754151; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1711149353; x=1711754153; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=GjVvSorGW2UmOeLZ99d5XA21oDLfIgnyo7WsiZUb+r0=;
- b=ljEDjIfOI+yDw+z19LESZ3oSLZRYWb1+aUxXAgrZwS9+x09SDiNMJ3IPIus57B+1wW
- vontVU3eXxhZxu3pLleT4EcPWGEYkcWJcWH4q2T5wU9OpfytbWWOBvLX5mubG22B7DCo
- HT0JC4ByfmKmiSK22R2wYBHl50i2FgE3XEJrs=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ha9OjnTi4LaNxdOiZ0kOCPAogI0NVzSxz12bt/LBGWk=;
+ b=Z1YJwCjibUAXSNoQ2RC1KLcnHyCglWkruMxSstCETRVNQyHH4JcoG3ymMSRMdbE5l2
+ ToP7wGTTmfBXDXVNSpcbPMnl04U/RY4JbfH/xMXbdWVy3axiJJiCQDlRyz/cRIlCC/+h
+ OzcQUJEMT1O1qyxP4ypGNXy1IInMofg1kcDPM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711149351; x=1711754151;
+ d=1e100.net; s=20230601; t=1711149353; x=1711754153;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GjVvSorGW2UmOeLZ99d5XA21oDLfIgnyo7WsiZUb+r0=;
- b=rUsO+UXNY/OMLSEYMGIf+4ZWsEVTUfO25HArGo+RCJ3a8WYgAjAnGe6IFlcYzHjJ1L
- ectWu9v2QjLychO5FfExz9BBdy79ZYdE7loiIwsm3J9zYf+ryjrBXNXVXpiWsksu989q
- RLEqIlTFkM4fAUhije68rDBnQM7hb7F4LSR2FKusH/3jzTnz274VQO5/77RpZBvdgvFt
- CagMpeAbPMewpumUj1kSqIcabJmksBfioNnZrsiaeMs/avnxYC5IW1PHh65jO0ywd+Is
- Ux59AbK7vtwDLDSQwuSX9WoiWR6tirOSuBZVGHE3jLxeQylcm7lBwgM3wA7nofAfoeli
- IC+A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXAbbjMUNZUoOl9qS4ulm7uVSepG4RFVwGoV8UzK/f+YkTzKRoBYsPWk3SL/YWy8ZI2ZLPiOThMzLs3anhQ3wEP1QKXBw==
-X-Gm-Message-State: AOJu0Yxqeg9xGCFKTdf91BWufxIw8yB2X+GeecY5V7hPVYfF42oVYuE7
- R6HV416r07p526S4VgFOxfjYhocYhqvREVL3r1qYXcNLOxVCjMBFJBEbV3iNvRM=
-X-Google-Smtp-Source: AGHT+IEgoh968vZ7EtspZOrboA+FPoaKEGrvGT5xc1Ipy+KeDLdlMuXQFkkz839JeGj8HTgFvk0v4Q==
-X-Received: by 2002:a25:b296:0:b0:dd1:2a7f:acb6 with SMTP id
- k22-20020a25b296000000b00dd12a7facb6mr812731ybj.43.1711149351457; 
- Fri, 22 Mar 2024 16:15:51 -0700 (PDT)
+ bh=ha9OjnTi4LaNxdOiZ0kOCPAogI0NVzSxz12bt/LBGWk=;
+ b=VniHcTU9gqIShUqiXJvNXgRV+mz9F7dJ+muSuilJh+Nmc0tv0XJM5lzPdZIRRsfqKl
+ 52VRwJvKx7F7/uR5M7kjVsPEVqPZVtPj59qZm0B+ok/7hNq9TQ3g9P7lAx43Zhd7ypRK
+ CVesQcg2hwhjKeSszPcmwkX1X+Zldjxpst6Na1wdtJvC5H11ltEk4il/1LVmQzmwFsfC
+ RGT7xLQXhHvWbrWzdvc9bpUVs1QBS3O5JVoa3cNLHn9juWcPKxaVVJ9Ktk34n9mv8D2r
+ VOkwYtK00ld5ZQqGNtmrbJTy/0oQhsda4C61FtpNTLrL2sx/EaPYlLQWl3O+8HrBpSrq
+ yGNA==
+X-Gm-Message-State: AOJu0YwkEH93BK4BoB0eQam/MeQKu/w2ugRwV60dRTTH8qzEjcf6tG48
+ opzw1lPxu0uER20n+1anHBG0SkZurTUtQc2kE2ph1xyn8jsgz+2Y5Wmnm0XZsuU=
+X-Google-Smtp-Source: AGHT+IEjW336dZ6pgDbCVAB5y9fn1FKtD6smuHmOP1Uf6IueoKSWDQ/nnhSxvDJc2doA9XFgDbPsaw==
+X-Received: by 2002:ad4:5cca:0:b0:696:3704:712c with SMTP id
+ iu10-20020ad45cca000000b006963704712cmr853303qvb.63.1711149352690; 
+ Fri, 22 Mar 2024 16:15:52 -0700 (PDT)
 Received: from [127.0.1.1] (065-184-193-066.res.spectrum.com. [65.184.193.66])
  by smtp.gmail.com with ESMTPSA id
- jo10-20020a056214500a00b0069102f97e08sm1537500qvb.97.2024.03.22.16.15.50
+ jo10-20020a056214500a00b0069102f97e08sm1537500qvb.97.2024.03.22.16.15.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 22 Mar 2024 16:15:51 -0700 (PDT)
+ Fri, 22 Mar 2024 16:15:52 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Nishanth Menon <nm@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, 
- Udit Kumar <u-kumar1@ti.com>, Hari Nagalla <hnagalla@ti.com>, 
- u-boot@lists.denx.de, Apurva Nandan <a-nandan@ti.com>
-In-Reply-To: <20240312094436.2959542-1-a-nandan@ti.com>
-References: <20240312094436.2959542-1-a-nandan@ti.com>
-Subject: Re: [PATCH v3 0/2] Add remoteproc driver support for J721S2 SoC
-Message-Id: <171114935056.2210431.8380414666595793407.b4-ty@konsulko.com>
-Date: Fri, 22 Mar 2024 19:15:50 -0400
+To: Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Max Krummenacher <max.krummenacher@toradex.com>, 
+ Dan Carpenter <dan.carpenter@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Ravi Gunasekaran <r-gunasekaran@ti.com>, Nishanth Menon <nm@ti.com>, 
+ Roger Quadros <rogerq@kernel.org>, MD Danish Anwar <danishanwar@ti.com>
+Cc: u-boot@lists.denx.de, srk@ti.com, Vignesh Raghavendra <vigneshr@ti.com>
+In-Reply-To: <20240321102819.1011011-1-danishanwar@ti.com>
+References: <20240321102819.1011011-1-danishanwar@ti.com>
+Subject: Re: [PATCH v7] remoteproc: uclass: Add methods to load firmware to
+ rproc and boot rproc
+Message-Id: <171114935161.2210431.1695475448869985748.b4-ty@konsulko.com>
+Date: Fri, 22 Mar 2024 19:15:51 -0400
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -91,14 +94,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 12 Mar 2024 15:14:34 +0530, Apurva Nandan wrote:
+On Thu, 21 Mar 2024 15:58:19 +0530, MD Danish Anwar wrote:
 
-> This series adds relevant ip data in remoteproc driver for j721s2 compatible.
+> Add APIs to set a firmware_name to a rproc and boot the rproc with the
+> same firmware.
 > 
-> Logs: https://gist.githubusercontent.com/apurvanandan1997/276098af439e11105ab9f809159fcc98/raw/
-> 
-> Changes in v3:
-> - Removed j721s2.env patch from the series
+> Clients can call rproc_set_firmware() API to set firmware_name for a rproc
+> whereas rproc_boot() will load the firmware set by rproc_set_firmware() to
+> a buffer by calling request_firmware_into_buf(). rproc_boot() will then
+> load the firmware file to the remote processor and start the remote
+> processor.
 > 
 > [...]
 
