@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 693E2C54E67
-	for <u-boot@archiver.kernel.org>; Sat, 23 Mar 2024 18:07:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1C7C54E67
+	for <u-boot@archiver.kernel.org>; Sat, 23 Mar 2024 18:08:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0557A87F33;
-	Sat, 23 Mar 2024 19:07:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 89C6087D46;
+	Sat, 23 Mar 2024 19:07:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Lh+CGWM6";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Rclb4/XF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C5AEE87DCC; Sat, 23 Mar 2024 19:07:27 +0100 (CET)
+ id 2944B87EDF; Sat, 23 Mar 2024 19:07:30 +0100 (CET)
 Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3BB887D2D
- for <u-boot@lists.denx.de>; Sat, 23 Mar 2024 19:07:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B730387D87
+ for <u-boot@lists.denx.de>; Sat, 23 Mar 2024 19:07:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 0BBA4CE094C;
+ by sin.source.kernel.org (Postfix) with ESMTP id 18BE4CE094D;
+ Sat, 23 Mar 2024 18:07:21 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 884C1C433C7;
  Sat, 23 Mar 2024 18:07:19 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A415C433C7;
- Sat, 23 Mar 2024 18:07:16 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1711217237;
- bh=Xl+OEGvwj8wzs+u11LR4gJ7MOaFHPmIGu7rszc2Gzd8=;
+ s=k20201202; t=1711217240;
+ bh=aHAgSBn+nphHSjHeo6N0OQJ3LUst52GFRP7eOzoptPA=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Lh+CGWM6aPQPmT0i77KNl09iowTeutgwNBF87n++LCVYMwYPwrwpAvmNGXCbP2N2n
- ccO9eW/SXMCIz2EbhIuLfD4u6ADMXs0fKmSEJmiKvdmtiaA/DJkRz4Z0JFxiAmU6yu
- 4utMj4tXWHWeH8w+ETuWfwvyVAYf0WlmD5E3ejpx2/OhOVfY8HolZLJ4ggjdFiDmiP
- NW9KhldHipvFEs6Z6oICtKw7helFpv8CVhzQu50T+HJVEsVoph4qBnuqPn0Xlk/ybK
- R8LeHkqqbutxTjc6+oDcjxcdrOFLh3eUMQ1kwzU8Te8D0r6bwUIu1quRkIuJ3rspNL
- 9TdodgKTSyoFA==
+ b=Rclb4/XFYvux1MwY/GotN0yLKIUpyDeLeGhAi+H0eAF98KDTOnzw/oh/u0yzaN1EV
+ vKeykVo9twhY/6cSmluSn9fKOZcCjfCWt4lHO57E1Ca3QbObL1KKd8IIj8MPmOlNBz
+ AvF4J5n8zggZLHRL54vCanvQgxuR2CxvhsXZMudym6F+fcEonhsqxLSDCb0aGuq1jH
+ S/+TCLbPk0rDG8nAynEYxfYp1hfs6ni19mTifjY1V5vLCVDMX30dorOzq8Ev5aAwps
+ PfUmgkb//heryAooDwEfTxdsQRkO4PZHS6ANU/pZxwrJ93S8xB6pUqzIX3QR303Mol
+ aoaWfyd/cODsw==
 From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
 To: Stefan Roese <sr@denx.de>
 Cc: u-boot@lists.denx.de,
 	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH u-boot-mvebu v2 01/18] arm: mvebu: turris_omnia: Enable LTO by
- default on Turris Omnia
-Date: Sat, 23 Mar 2024 19:06:54 +0100
-Message-ID: <20240323180711.5498-2-kabel@kernel.org>
+Subject: [PATCH u-boot-mvebu v2 03/18] arm: mvebu: turris_{omnia,
+ mox}: Don't print model two times
+Date: Sat, 23 Mar 2024 19:06:56 +0100
+Message-ID: <20240323180711.5498-4-kabel@kernel.org>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240323180711.5498-1-kabel@kernel.org>
 References: <20240323180711.5498-1-kabel@kernel.org>
@@ -69,28 +69,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot builds for Turris Omnia are approaching the limit of 0xf0000
-bytes, which is the size of the U-Boot partition on Omnia.
+Since commit 8cd4bf7dc9ba ("turris: Use checkboard() instead of
+show_board_info()") the model is show two times during boot:
+  Model: Turris Omnia
+  Model: Turris Omnia
 
-Enable LTO to get more size optimized binaries.
+This is because the common function show_board_info() shows it, and
+Turris' checkboard() also does.
 
+Remove the second print.
+
+Fixes: 8cd4bf7dc9ba ("turris: Use checkboard() instead of show_board_info()")
 Signed-off-by: Marek Behún <kabel@kernel.org>
 ---
- configs/turris_omnia_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ board/CZ.NIC/turris_mox/turris_mox.c     | 5 +----
+ board/CZ.NIC/turris_omnia/turris_omnia.c | 1 -
+ 2 files changed, 1 insertion(+), 5 deletions(-)
 
-diff --git a/configs/turris_omnia_defconfig b/configs/turris_omnia_defconfig
-index 29148402a1..39e15043df 100644
---- a/configs/turris_omnia_defconfig
-+++ b/configs/turris_omnia_defconfig
-@@ -31,6 +31,7 @@ CONFIG_AHCI=y
- CONFIG_OF_BOARD_FIXUP=y
- CONFIG_SYS_MEMTEST_START=0x00800000
- CONFIG_SYS_MEMTEST_END=0x00ffffff
-+CONFIG_LTO=y
- CONFIG_HAS_BOARD_SIZE_LIMIT=y
- CONFIG_BOARD_SIZE_LIMIT=983040
- CONFIG_FIT=y
+diff --git a/board/CZ.NIC/turris_mox/turris_mox.c b/board/CZ.NIC/turris_mox/turris_mox.c
+index 3489bdd74b..1a2f60e3d1 100644
+--- a/board/CZ.NIC/turris_mox/turris_mox.c
++++ b/board/CZ.NIC/turris_mox/turris_mox.c
+@@ -565,13 +565,10 @@ static void handle_reset_button(void)
+ int checkboard(void)
+ {
+ 	int i, ret, board_version, ram_size, is_sd;
+-	const char *pub_key, *model;
++	const char *pub_key;
+ 	const u8 *topology;
+ 	u64 serial_number;
+ 
+-	model = fdt_getprop(gd->fdt_blob, 0, "model", NULL);
+-	printf("Model: %s\n", model);
+-
+ 	ret = mbox_sp_get_board_info(&serial_number, NULL, NULL, &board_version,
+ 				     &ram_size, NULL);
+ 	if (ret < 0) {
+diff --git a/board/CZ.NIC/turris_omnia/turris_omnia.c b/board/CZ.NIC/turris_omnia/turris_omnia.c
+index 6c2d7da528..87e33d88c4 100644
+--- a/board/CZ.NIC/turris_omnia/turris_omnia.c
++++ b/board/CZ.NIC/turris_omnia/turris_omnia.c
+@@ -933,7 +933,6 @@ int checkboard(void)
+ 	int err;
+ 
+ 	err = turris_atsha_otp_get_serial_number(serial);
+-	printf("Model: Turris Omnia\n");
+ 	printf("  MCU type: %s\n", omnia_get_mcu_type());
+ 	printf("  MCU version: %s\n", omnia_get_mcu_version());
+ 	printf("  RAM size: %i MiB\n", omnia_get_ram_size_gb() * 1024);
 -- 
 2.43.2
 
