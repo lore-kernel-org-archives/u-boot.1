@@ -4,50 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDD62C54E58
-	for <u-boot@archiver.kernel.org>; Sat, 23 Mar 2024 18:08:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1760CC54E58
+	for <u-boot@archiver.kernel.org>; Sat, 23 Mar 2024 18:08:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D880C87E2E;
-	Sat, 23 Mar 2024 19:07:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 49E1387EB2;
+	Sat, 23 Mar 2024 19:07:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="no/UC6G0";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="fCyakZhj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 001DF87ECC; Sat, 23 Mar 2024 19:07:33 +0100 (CET)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
+ id 96BB987DDF; Sat, 23 Mar 2024 19:07:34 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A076879DC
+ by phobos.denx.de (Postfix) with ESMTPS id D0A2587D69
  for <u-boot@lists.denx.de>; Sat, 23 Mar 2024 19:07:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id EBF6DCE094D;
+ by dfw.source.kernel.org (Postfix) with ESMTP id BA65F6091A;
+ Sat, 23 Mar 2024 18:07:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C258C43394;
  Sat, 23 Mar 2024 18:07:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 68496C433C7;
- Sat, 23 Mar 2024 18:07:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1711217245;
- bh=zxdf9y013E21sSsgjDpo/KYGEIjOQZ9YHgxrRkRpIOk=;
+ s=k20201202; t=1711217246;
+ bh=e4VW+W2K4zILdk8I3Tg1aPePw+MeDj8H8x6xDE/Sirw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=no/UC6G0kHuPvbLzp0gm3u/CYszI8PFhXfzBLIHnUV0b6859uipWw1oJ7Qi5nWYad
- 2JcZ6Q6KwyNWsKiSW1rqMiIciC461TWmaKSwAxKQJ8mea/J4s592O7BRd7cgaLMmqh
- Rl4MX0gsdSti9GOR6JRSN/Tv3jJ/0x6xneiwYJ5c98j4x9UFcDn8y/6oSLpjaQOqAH
- Is/mqgO+cttiGL3nEWOxveBMffoMYrU6+MHA7EfMB03yLZKSJHbI/F1UwgECMGxts9
- O1+3VmNjz2NFxXsf7gbkdUIVhSAb4JWxmDgGc7dvqxzlubqBF0y23qfrSTT1+kyEjL
- ede/DGkYlS0uw==
+ b=fCyakZhjssiPNL63Ge7MEVpHwWmHTdl9++YRJ1AAL4Y6jo/lbfKEPYlHALqOSB0BW
+ PhGHDMgnS4t9PSfCZUczuS48DeiCerbTyJiPj+Wy7abof5xDi/KNDe8vYZ7TbruGdD
+ gnsF7RNSF4P/8qE/vJHFEnuZzjV5gsTd2HKtocvAhgS6W29NNQHqqqGfA1kAkSYBM/
+ cVwOPz+BJ/CfJOCXHk7FHyZcG1Yg3mzwYBs9bzG3zR1nZnlVGmSP7VByVARxPNBXKk
+ HD44wO2u83md+nDTPj1ndz4+/T+kaA763B4jU9azzBVFzKP+pn/VERWloDzUeDp90j
+ Vn5eKv2n3gS2Q==
 From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
 To: Stefan Roese <sr@denx.de>
 Cc: u-boot@lists.denx.de,
 	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH u-boot-mvebu v2 07/18] arm: mvebu: turris_omnia: Disable Atmel
- SHA node if not present
-Date: Sat, 23 Mar 2024 19:07:00 +0100
-Message-ID: <20240323180711.5498-8-kabel@kernel.org>
+Subject: [PATCH u-boot-mvebu v2 08/18] arm: mvebu: spl: Do not build
+ mvebu-reset in SPL
+Date: Sat, 23 Mar 2024 19:07:01 +0100
+Message-ID: <20240323180711.5498-9-kabel@kernel.org>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240323180711.5498-1-kabel@kernel.org>
 References: <20240323180711.5498-1-kabel@kernel.org>
@@ -70,63 +69,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the FEAT_CRYPTO feature bit is present in MCU features, the board
-crypto is implemented by MCU and the Atmel SHA chip is not present.
-Disable Atmel SHA device-tree node in that case.
+Commit 35e29e89a386 ("arm: mvebu: Implement simple mvebu-reset driver
+for enabling/disabling PCIe ports") made it so that the mvebu reset
+driver for enabling/disabling PCIe ports is build if CONFIG_DM_RESET is
+enabled. This is because PCI_MVEBU depends on DM_RESET.
+
+But the driver should not be built for SPL. Indeed the PCI_MVEBU driver
+is not supported in SPL now, and so the mvebu-reset driver is not needed.
 
 Signed-off-by: Marek Behún <kabel@kernel.org>
 ---
- board/CZ.NIC/turris_omnia/turris_omnia.c | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+ arch/arm/mach-mvebu/Makefile | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/board/CZ.NIC/turris_omnia/turris_omnia.c b/board/CZ.NIC/turris_omnia/turris_omnia.c
-index 896c14bb99..6f3aae55a8 100644
---- a/board/CZ.NIC/turris_omnia/turris_omnia.c
-+++ b/board/CZ.NIC/turris_omnia/turris_omnia.c
-@@ -1007,6 +1007,25 @@ static int fixup_mcu_gpio_in_eth_wan_node(void *blob)
- 	return 0;
- }
+diff --git a/arch/arm/mach-mvebu/Makefile b/arch/arm/mach-mvebu/Makefile
+index 0584ed2be5..ef790d97fe 100644
+--- a/arch/arm/mach-mvebu/Makefile
++++ b/arch/arm/mach-mvebu/Makefile
+@@ -22,13 +22,14 @@ else # CONFIG_ARCH_KIRKWOOD
+ obj-y	= cpu.o
+ obj-y	+= dram.o
+ obj-y	+= lowlevel.o
+-obj-$(CONFIG_DM_RESET) += system-controller.o
+ ifndef CONFIG_SPL_BUILD
+ obj-$(CONFIG_ARMADA_375) += ../../../drivers/ddr/marvell/axp/xor.o
+ obj-$(CONFIG_ARMADA_38X) += ../../../drivers/ddr/marvell/a38x/xor.o
+ obj-$(CONFIG_ARMADA_XP) += ../../../drivers/ddr/marvell/axp/xor.o
+ obj-$(CONFIG_ARMADA_MSYS) += ../../../drivers/ddr/marvell/axp/xor.o
  
-+static void fixup_atsha_node(void *blob)
-+{
-+	int node;
++obj-$(CONFIG_DM_RESET) += system-controller.o
 +
-+	if (!omnia_mcu_has_feature(FEAT_CRYPTO))
-+		return;
-+
-+	node = fdt_node_offset_by_compatible(blob, -1, "atmel,atsha204a");
-+	if (node < 0) {
-+		printf("Cannot find ATSHA204A node!\n");
-+		return;
-+	}
-+
-+	if (fdt_status_disabled(blob, node) < 0)
-+		printf("Cannot disable ATSHA204A node!\n");
-+	else
-+		debug("Disabled ATSHA204A node\n");
-+}
-+
- #endif
- 
- #if IS_ENABLED(CONFIG_OF_BOARD_FIXUP)
-@@ -1020,6 +1039,8 @@ int board_fix_fdt(void *blob)
- 	fixup_msata_port_nodes(blob);
- 	fixup_wwan_port_nodes(blob);
- 
-+	fixup_atsha_node(blob);
-+
- 	return 0;
- }
- #endif
-@@ -1211,6 +1232,8 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- 	fixup_msata_port_nodes(blob);
- 	fixup_wwan_port_nodes(blob);
- 
-+	fixup_atsha_node(blob);
-+
- 	return 0;
- }
- #endif
+ ifdef CONFIG_ARMADA_38X
+ obj-$(CONFIG_MVEBU_EFUSE) += efuse.o
+ endif
 -- 
 2.43.2
 
