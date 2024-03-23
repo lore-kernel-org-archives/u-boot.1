@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69A38C54E58
-	for <u-boot@archiver.kernel.org>; Sat, 23 Mar 2024 04:53:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8356AC54E58
+	for <u-boot@archiver.kernel.org>; Sat, 23 Mar 2024 04:58:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53FE287CF2;
-	Sat, 23 Mar 2024 05:53:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0345E87D06;
+	Sat, 23 Mar 2024 05:58:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711169587;
-	bh=nB8VW0P5+yKgs3wIa3daHYrW2VFzvA47f/kGM+qb0TU=;
+	s=phobos-20191101; t=1711169920;
+	bh=9w8FAwaQ50O7FxlAwfLLUWJbREZpZX0Zkcs9yePvRoE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=Qa/KEXO1dxwtLwlYDyQrQERQOzfqe8GVnHof1SKIGihH5sTJK3cnEZjiRfJ3e5gQA
-	 hA5kbbegZ2U/C74PG2+4MNuNj8yHmjDM65bHPGQFXHuQUmHS0rqVYTPfK/8ytnp7sW
-	 HuSQXKOQ69Y5RgqGDFcMH26B8oHcHXpDE+G+fvVztndW1Q2PXkro02Y4eTSKAd02Um
-	 hcXHjWFyeKe8v1McijRk63p9jSoksXUBDmCFXHSK6sif86fDKv8UKjZzKGwCek0JIY
-	 JkpJav04evmsblf8EObWwfkGRIRmSG85eYTSJUzdr1dlUDVwbx5sAM6cJZ6TMWRl82
-	 Xfr6js84XrnLA==
+	b=T5Mi/vEJ7ARGQifeI9K8Oz/lnRyhGrqHBbOe/dYbHUBfqC5noYS2dIwEXxWUt8fgR
+	 V+YDOT4Wp0z0tPB8KCRoP8iA8eI/2jofc3p5p5BR0h5U2UrFNvSfscCGzXosPRwMHK
+	 zjvUC9J7a+shjBj2xnnasCriiMNeSGHOiVYqv7M52zHvzbyUyIwgl5Df7J53zoT8MY
+	 9bKrDjIelkNBu92wbHfLkgxwJGiOqMyQ/7o2DeoaLWFzvM316icKTWKd2wZRul6OM4
+	 BaCq9gUzKUJb9p9j6HtkciXg20Aw6/gMguH+xPoNNk0Zuz5pJseBxVHQKy7t4chKmD
+	 scAqqgZdNBOLQ==
 Received: from [192.168.1.107] (82-131-203-241.pool.digikabel.hu
  [82.131.203.241])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id CD7FA87B35;
- Sat, 23 Mar 2024 05:53:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 7425087B35;
+ Sat, 23 Mar 2024 05:58:35 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1711169586;
- bh=nB8VW0P5+yKgs3wIa3daHYrW2VFzvA47f/kGM+qb0TU=;
+ s=phobos-20191101; t=1711169917;
+ bh=9w8FAwaQ50O7FxlAwfLLUWJbREZpZX0Zkcs9yePvRoE=;
  h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=ilKrvqP7FDMpdhve+u+BJ6KSmtNmnGLUpMtN7InXVeOJ0pBfhYLxCpcJBq3RiOwE7
- 9PgGrtVE6DPBtmqjnZIZLHzWllmloU/kjsnYmw4oZXlff0c4efQPllmSgeQFNJSCHl
- SvFJu2Uzkys6zXFZ+L5wEULWPRKnugjpKR3H1LLWDTJ1aLSLBAfSclktSO6BzRjY1A
- o7rXwTQP9IzSfr2O/kscbaAfw3Sfh085Ow57eiFxwny63ItgyVVx9fgdsCIYdtmROd
- zlwUa6VwsJKsOR56Ncarqjf5AD/u3+SEPXCzvXFQN2w3w9x3rtxWpWfpSbsljJX/dO
- x1J78MU+Cs8lQ==
-Message-ID: <583a638f-d913-4e43-239d-941d00423c6d@denx.de>
-Date: Sat, 23 Mar 2024 05:52:35 +0100
+ b=Bc8syWxCOw1GUj7BCGUqDWoG68T0fLSg4zUH7aJVfY6WORJEMt7CuUZkiJV5KPOMo
+ v+TYGCocLrmyWr5+07GfeE0dQeXBjrJWg4WDHJ38f9UB5cpuQPL1FzmIYARcyXLykK
+ P/kaLcUGYlNnaXHDVq0OwO3nxPrQLBzg6VeptJ13YQoxI9GUz+yluG6yKs4KRFTqVp
+ 8sR/pYQCuA5oY0e3+P0NQmBbYoUnjsxrWgkU1/Rv5i2sPEnqIaApxEQ6/gFBD/IcIV
+ M0bM+4H2L6X7BJCe6FsExYTcDPLBit+tbG+4uiw9egth9yzIq011OrfWR8xA7W73AL
+ WVuvbmxcndkjw==
+Message-ID: <f32f2c10-df0b-a0c6-9a95-33963ef2152e@denx.de>
+Date: Sat, 23 Mar 2024 05:58:13 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH v1 1/6] ubi: allow to read from volume with offset
+Subject: Re: [PATCH v1 2/6] ubi: allow to write to volume with offset
 Content-Language: en-US
 To: Alexey Romanov <avromanov@salutedevices.com>,
  dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
@@ -56,9 +56,9 @@ To: Alexey Romanov <avromanov@salutedevices.com>,
  mikhail.kshevetskiy@iopsys.eu, jagan@amarulasolutions.com
 Cc: kernel@salutedevices.com, u-boot@lists.denx.de
 References: <20240306134906.1179285-1-avromanov@salutedevices.com>
- <20240306134906.1179285-2-avromanov@salutedevices.com>
+ <20240306134906.1179285-3-avromanov@salutedevices.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20240306134906.1179285-2-avromanov@salutedevices.com>
+In-Reply-To: <20240306134906.1179285-3-avromanov@salutedevices.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -81,15 +81,15 @@ X-Virus-Status: Clean
 Hello Alexey,
 
 On 06.03.24 14:49, Alexey Romanov wrote:
-> Now user can pass an additional parameter 'offset'
-> to ubi_volume_read() function.
+> Introduce ubi_volume_offset_write() helper, which
+> allow to write to ubi volume with specified offset.
 > 
 > Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
 > ---
->   cmd/ubi.c           | 6 +++---
->   env/ubi.c           | 6 +++---
->   include/ubi_uboot.h | 2 +-
->   3 files changed, 7 insertions(+), 7 deletions(-)
+>   cmd/ubi.c           | 71 +++++++++++++++++++++++++++++++++++++++++++--
+>   env/ubi.c           | 10 +++----
+>   include/ubi_uboot.h |  2 +-
+>   3 files changed, 74 insertions(+), 9 deletions(-)
 
 Reviewed-by: Heiko Schocher <hs@denx.de>
 Acked-by: Heiko Schocher <hs@denx.de>
