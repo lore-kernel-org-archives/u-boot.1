@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF42BC54E67
-	for <u-boot@archiver.kernel.org>; Sat, 23 Mar 2024 18:10:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBF5BC54E58
+	for <u-boot@archiver.kernel.org>; Sat, 23 Mar 2024 18:10:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9C1F87F69;
-	Sat, 23 Mar 2024 19:07:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2C4D987F95;
+	Sat, 23 Mar 2024 19:07:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="G/C0Adjq";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="FcaG609R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B0E48809A; Sat, 23 Mar 2024 19:07:44 +0100 (CET)
+ id 864CE87FC0; Sat, 23 Mar 2024 19:07:44 +0100 (CET)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0517587FC0
- for <u-boot@lists.denx.de>; Sat, 23 Mar 2024 19:07:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6612E87D8D
+ for <u-boot@lists.denx.de>; Sat, 23 Mar 2024 19:07:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 4BD9460B30;
+ by dfw.source.kernel.org (Postfix) with ESMTP id D0DDF60B2C;
+ Sat, 23 Mar 2024 18:07:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 62264C433C7;
  Sat, 23 Mar 2024 18:07:35 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 2E9B0C433C7;
- Sat, 23 Mar 2024 18:07:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1711217255;
- bh=OKnMr0tZ+KyvLTI4BZbNRZlaxNDoxc3Xi9NqBFN76y4=;
+ s=k20201202; t=1711217256;
+ bh=ewRGcb1rTah6ovhLRvzrl0VBI34TgLXbLxpwd5A9cVU=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=G/C0Adjq6Rs6MU/RL5nQ2mHNR/nZK8at9tpu1udxmU+6Ly2ZMWnRySZEa05sTDp3s
- PsLIU3v95WuRAvIucFeUX5rhTqHLGKzq/MZYU8B4mfIHTC7oO5Qh8m5E4xnDHn5sGg
- ni6PUsNfSKEZ4HqHyRT+e0Es1dN7TqBeeqJtinwW8mB/+MNsOjvpkkcXJ8uV16iFYB
- 3mfCte4mZzHmJKT2H/2l979oxhpCObFjEVpb4iGtKFaq4x5jGadRrFWaupVvl1Ssmx
- 8ElT4Pv7tneSIWs0h+3+TSfdIqDQwAejcwFEuCBz7tAmqWYL6RUl5mX22SOJRDHV8y
- yJlivTCQdUgEw==
+ b=FcaG609R/22p/Y0VutDt4vRvSub0pMtqysFX6z70g2XzcOtTYt7I1N8rnd2kFY9Pi
+ 4TwR77ZWSYRoE0Gxi80WuM6FysU30raUjffMAUEAZY1Dfwtn0cMqAPmZwBTu45dEzE
+ p51H0Mdjl68dzBdVoxLSQtYTHU5J0a8uqaBi5Uf2+Uy5yngQB5D1oGxzyx0yZQqmYJ
+ Xpem1sq4lMvI0nOihQDh1Mqkrmzl65c7/oLtY3v+KW6Z3wfty7nrZ22AqMjh68YUsX
+ tdV2+Boejk7bWwalirGUvzEUphk5icVY59UQjSpjfIsWsgdSU8U2/aGaOydxzfPOYs
+ bpGFHHB1B3ZwA==
 From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-To: Stefan Roese <sr@denx.de>
+To: Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: u-boot@lists.denx.de,
 	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH u-boot-mvebu v2 15/18] arm: mvebu: turris_omnia: Enable
- poweroff command via sysreset in defconfig
-Date: Sat, 23 Mar 2024 19:07:08 +0100
-Message-ID: <20240323180711.5498-16-kabel@kernel.org>
+Subject: [PATCH u-boot-mvebu v2 16/18] cmd: rng: Print "Abort" on -EINTR
+Date: Sat, 23 Mar 2024 19:07:09 +0100
+Message-ID: <20240323180711.5498-17-kabel@kernel.org>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240323180711.5498-1-kabel@kernel.org>
 References: <20240323180711.5498-1-kabel@kernel.org>
@@ -69,33 +69,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable support for the poweroff command via sysreset for Turris Omnia.
+In the rng command, print
+  Abort
+instead of
+  Reading RNG failed
+if the error number is -EINTR.
 
 Signed-off-by: Marek Behún <kabel@kernel.org>
 ---
- configs/turris_omnia_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ cmd/rng.c | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/configs/turris_omnia_defconfig b/configs/turris_omnia_defconfig
-index 9d5171c6a8..0df0f3c90b 100644
---- a/configs/turris_omnia_defconfig
-+++ b/configs/turris_omnia_defconfig
-@@ -65,6 +65,7 @@ CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_MTD=y
- CONFIG_CMD_PCI=y
-+CONFIG_CMD_POWEROFF=y
- CONFIG_CMD_SATA=y
- CONFIG_CMD_SPI=y
- CONFIG_CMD_USB=y
-@@ -114,6 +115,7 @@ CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550=y
- CONFIG_KIRKWOOD_SPI=y
- CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_CMD_POWEROFF=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_EHCI_HCD=y
+diff --git a/cmd/rng.c b/cmd/rng.c
+index 52f722c7af..48ba67061b 100644
+--- a/cmd/rng.c
++++ b/cmd/rng.c
+@@ -17,7 +17,7 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 	u8 buf[64];
+ 	int devnum;
+ 	struct udevice *dev;
+-	int ret = CMD_RET_SUCCESS;
++	int ret = CMD_RET_SUCCESS, err;
+ 
+ 	switch (argc) {
+ 	case 1:
+@@ -46,8 +46,9 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 
+ 	n = min(n, sizeof(buf));
+ 
+-	if (dm_rng_read(dev, buf, n)) {
+-		printf("Reading RNG failed\n");
++	err = dm_rng_read(dev, buf, n);
++	if (err) {
++		puts(err == -EINTR ? "Abort\n" : "Reading RNG failed\n");
+ 		ret = CMD_RET_FAILURE;
+ 	} else {
+ 		print_hex_dump_bytes("", DUMP_PREFIX_OFFSET, buf, n);
 -- 
 2.43.2
 
