@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2695C6FD1F
-	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 17:55:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 722B8C6FD1F
+	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 18:00:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EC7987DBB;
-	Sun, 24 Mar 2024 18:55:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A3246879E0;
+	Sun, 24 Mar 2024 19:00:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LULknE21";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XKbPaLzI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E2FC87DBB; Sun, 24 Mar 2024 18:55:51 +0100 (CET)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
+ id DB78F87D57; Sun, 24 Mar 2024 19:00:36 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3EBC1879E0
- for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 18:55:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82784875FA
+ for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 19:00:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-29f8ae4eae5so755983a91.0
- for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 10:55:49 -0700 (PDT)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-29df844539bso752915a91.1
+ for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 11:00:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711302948; x=1711907748; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1711303233; x=1711908033; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KiRxJRhFi0jklFG/7GBu7RQMlo+yTy7WeYmvoqlGlto=;
- b=LULknE219eFRBYbjXN7N3A79Tmt+g+lbCRMTn7Y/59//C9dqBaTqmrmf2vi9VIVbUQ
- c6OMvqH7y8Fb3ndcI62J2WQjillci0Dii3rct/pDimXq521DljMkXbPYVi7YmmoEL96a
- 3Evz4ttjlYnZCCTWTfOqmegiK9ElpwjDy63K/oLLY5r4Rafngrne40LODCnk7u0aNYgu
- nDd0XI8dHO1mKnj9ElZCAdaA7W7YjmdlhGFo6hECLQEKbHJTFt2C6dF7Tj226JUePMKL
- 3sahdqCd1HIvv1CCwTmtRPzpv2GWxNjPp9M4pHX33IuU1DxDrpHd5sgb2wKo26CSmame
- iP+g==
+ bh=USRf4E/8TsrLZy3GC2knDSF2jMcK/GwDWiOImZoAEx0=;
+ b=XKbPaLzIut0hCiXh3PBmI76qkhqLgK6ujD6VZLgdQUyNRe2K3NmVfytuDXde2gqfEm
+ LOAmxZlBGh5faeS/MLgxTnbsYD5bJh+v0jJw2qehlnFjYWgfgIoBCVL5wVxuYYe+gyvd
+ v8vBrRmt8H90u76duoHUAatMAidZJwHbqTQhsDWzGb0XiKF+wWJj1f4tweiDL4vHA2MT
+ TXtysxoxn8FaoEXFZOrNWkSTromRHNjx6zKnEFhcbS81BYkkEEt5bk53FSssLPeVNOZf
+ 2YXhKekfckpSTG267HUR61OaK4l8eihtqgieJBpP8H2H+rgVctK3JZI2TIH/Vnb67hwn
+ t9Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711302948; x=1711907748;
+ d=1e100.net; s=20230601; t=1711303233; x=1711908033;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KiRxJRhFi0jklFG/7GBu7RQMlo+yTy7WeYmvoqlGlto=;
- b=J/CWOTuxjrqKrr+4XwaAzLWbRITjXS9lBrY51py11wWcCEguQLVAhrdpPDjD4Bokbv
- iJitfPka4C/U0qHIOe1X1NBjUqwrxwQPid2DQU7gDh1cBC9K6DPh1Yv7bFqoM2mEBrFF
- NHWfeXbAvPZHgVF3Osdz3N2OQqmmi/CP7lesJuXzRnQtShTHaRUsiTnGdWUwMA4JtO1B
- PuSa+zKG8/aQ1YT0S2rT0J8sLTaLWdHFiX+hRaIZqVtglPpAea9sRSUcvo3u1BeCtLoa
- QFrSIQPomUQNez6o5KTJNbeZA+281ipbRuXwkBuFsILceku6eaLyshEPvfGQU4H2weKT
- sauw==
+ bh=USRf4E/8TsrLZy3GC2knDSF2jMcK/GwDWiOImZoAEx0=;
+ b=iAd8WJ0LNa7dU2J6g7OqsSuC4dq40yq6hevZ9FK6hz69zjpZXlGV6MwuMsHULEtjSI
+ oZUqRU18B6OL9617/chJTr317Dn7slXTBHl4kl+rGNHwzrc8wLVHKXEsHqoxdx2TfKe2
+ NRcEAvMtE/oEHRjujzhNQyrdkzsMvVgyIkeDNubjASnckt+L2G9v3+pS3j1wSzNORiYq
+ jTDJUCaH61a5ZtDDsV8VUs4VCXYvb89W8QPmY7qMD9rEQxJHT8lAe5DILN1NsU/gIKRA
+ u6p+6l6FDpWlUsqO00FZ6epY00Sv8II9WcPFcfZt6QQEvziYQswW6e23dk15n6NcT1hd
+ KPxw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQBqY+tmCbEMNKRKa0LEZ8xwm0NvJ+c4KmEZQUYpI5MARr3ghrjpVQl/mkCq9NDjeh/7S4fk50Kklx4Di6H07RTbEnEQ==
-X-Gm-Message-State: AOJu0YylTR+q292Lbs8pnljrGc1xba3Ca1eGgbIx8FsI0BXrRQTkczRx
- aihGL4X1wsvAfEfzIRdKgadIvxN8qIJOlxdZliWXw+bJBAhDls2+9ZQNkqePhVbkdZ9PCvWk1+G
- 08nTTUg98r+PiDgp+bwZamLpKGwSgOE9a
-X-Google-Smtp-Source: AGHT+IE9zsk7HYsAdvvXjPqPNOfSXN4gMVRRAUttfCdG2UR/KI2CMiovr7Xe7WLdMe3pdVM5+F2ybYvdzbfJ+1ZYTP8=
-X-Received: by 2002:a05:6a21:789e:b0:1a3:bd72:b8de with SMTP id
- bf30-20020a056a21789e00b001a3bd72b8demr4873643pzc.3.1711302947798; Sun, 24
- Mar 2024 10:55:47 -0700 (PDT)
+ AJvYcCU2Ysj6wPaU/usMNrXdm5isjJb85OlWx+vl7u9ufU5n0CmKwvsIXeJSHqlwfg/drcqT5PGPKhG2btW/9oHJ9f1LIyqy8w==
+X-Gm-Message-State: AOJu0YwN1OUuYEqvt00aqJvTNKeuIfD4OfhZXCYFUye+ev7meEB8Xkmi
+ egmvcVonapaVxq64y4oqegKiyYm4wUthii+Otx7Dv9UgBcoadbqnDy1BimulymaqcC5+gZhmtVA
+ Nb4B5PyUBk/dUg4ZXQtebmb+BpCY=
+X-Google-Smtp-Source: AGHT+IExY0iue9jS5Iq1FS9i6bYBiSo5AHsrro1oKmLalvjRqEdoZdpPtdBXFNzsjQ5epzoxEXuX6uhbxfCIhEO4hDw=
+X-Received: by 2002:a17:90a:b395:b0:2a0:350a:a7a8 with SMTP id
+ e21-20020a17090ab39500b002a0350aa7a8mr4160943pjr.2.1711303233020; Sun, 24 Mar
+ 2024 11:00:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240321144541.15314-1-othacehe@gnu.org>
- <20240321144541.15314-2-othacehe@gnu.org>
- <7b72bd8d-653e-4bba-9d62-26a60d85792a@denx.de>
-In-Reply-To: <7b72bd8d-653e-4bba-9d62-26a60d85792a@denx.de>
+ <20240321144541.15314-3-othacehe@gnu.org>
+ <dec314ce-d83a-4549-a2d6-f5604107bca5@denx.de>
+In-Reply-To: <dec314ce-d83a-4549-a2d6-f5604107bca5@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 24 Mar 2024 14:55:36 -0300
-Message-ID: <CAOMZO5BQvz2ZbjYb2_ZrvNg42YQ+-59iGKndhqHX11osnhcYTg@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] arm: dts: imx93-phyboard-segin: Add USB support
+Date: Sun, 24 Mar 2024 15:00:21 -0300
+Message-ID: <CAOMZO5AOv9Cmdpmji-y+YO9GvkMTHmh2d+RxmVksMLgj-23rqQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] configs: imx93-phyboard-segin: Add USB support
 To: Marek Vasut <marex@denx.de>
 Cc: Mathieu Othacehe <othacehe@gnu.org>, Tom Rini <trini@konsulko.com>,
  Peng Fan <peng.fan@nxp.com>, 
@@ -100,14 +100,32 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On Thu, Mar 21, 2024 at 4:17=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->
-> On 3/21/24 3:45 PM, Mathieu Othacehe wrote:
-> > Enable both usbotg1 and usbotg2 ports. Disable over-current as OC pins =
-are
-> > not connected to the SoC.
-> >
-> > This
->
-> "This addition to ...-u-boot.dtsi is temporary, ..." would be clearer.
 
-I fixed as Marek's suggestion and applied it to u-boot-imx/next, thanks.
+> $ git grep -i usb.*phytec configs
+> configs/phycore_pcl063_defconfig:CONFIG_USB_GADGET_MANUFACTURER=3D"Phytec=
+"
+> configs/phycore_pcl063_ull_defconfig:CONFIG_USB_GADGET_MANUFACTURER=3D"Ph=
+ytec"
+>
+> It would be good to be consistent.
+>
+> Also, what is the vendor/product number those two boards use ?
+
+They both use:
+
+CONFIG_USB_GADGET_VENDOR_NUM=3D0x01b67
+CONFIG_USB_GADGET_PRODUCT_NUM=3D0x4fff
+
+configs/phycore-imx8mp_defconfig has:
+
+CONFIG_USB_GADGET_MANUFACTURER=3D"FSL"
+CONFIG_USB_GADGET_VENDOR_NUM=3D0x0525
+CONFIG_USB_GADGET_PRODUCT_NUM=3D0xa4a5
+
+I agree we should make this consistent.
+
+To not block this series, I applied it, but it would be great if
+Phytec could submit
+a separate series making it consistent across their boards.
+
+Thanks
