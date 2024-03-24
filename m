@@ -4,76 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7BF3C6FD1F
-	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 18:01:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89721C6FD1F
+	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 18:23:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 36A8887D2F;
-	Sun, 24 Mar 2024 19:01:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id CD6B887D1E;
+	Sun, 24 Mar 2024 19:23:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="G0tPIQrv";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="EncCFqqe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BA7A875FA; Sun, 24 Mar 2024 19:01:38 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7F2B987D37; Sun, 24 Mar 2024 19:23:57 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BC4387DD8
- for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 19:01:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 468BF879E0
+ for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 19:23:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-29f8b407610so216352a91.1
- for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 11:01:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711303295; x=1711908095; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=1LVuf0hgPNSYzPbX9+B5o6h+3r4ZaZ8DhJyIpL1Jytk=;
- b=G0tPIQrvZOqJwsEhFNou3+OMtTXssVjWMr4Y0jkhI8q0sICcQu6GOnn6o2e+SeBhfO
- EsfGhpgJVT4MqEc7VmwrmO6CAgotF8814uTpMmSSMQdfZ+tH18H8TrSPJJU0xrZR5ZDG
- Fobw5uXPqwGhAUGzaSynUx0RZsoUC+nORVjoz4ZVzfrSJeDhKEtal762+TagHl5Yhuxj
- 7ZmrcBTcE0mT8A4j1+LNFsOs4ishBd/9mvduxT94OUr5wWJsoCFG9ioOERbE6ry/Spvx
- 5Deq/Pb43H2KGticH9lV1nhv6cRVxdqTjYuKc+Xl3hcNerkIS+4DKd6gXA9mgOrSI8zF
- caZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711303295; x=1711908095;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=1LVuf0hgPNSYzPbX9+B5o6h+3r4ZaZ8DhJyIpL1Jytk=;
- b=sM/Setw9YvJBUfeMLGg9rUS2E1CS0d8yXeDFur9PX60P9K4UtU8wtiQgZWekfxOTxY
- mkgnxj7G6UY92ldqbPrCdyaRMnrtWlVbkIzhBedJi77ZGmnJr4Hz3JOtOuUfzH4SWXRU
- bdIxTmkloSDVeR3YlLkpQfdIIOkbbggJ2PAxUnfrxQtNrWG+rQAXz0ZSLAawNwsufEKM
- xraHWdfHgvvkPjmAXsDnAkyYODqu0U0E7rMxYC0cTaPdGDfWC68wSGLOIAJjkXays9aM
- rGY/KJNXw4XEBo8DF0moKOrVbzSurrutuVEox2Q3U0jztzFpLClW1WMkPXehpnMm8hAh
- YoIQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVOv7MQUe6AlXiywVmMtjwxC4cY/cB8tzzvAgojRLtjxgIOJ9YzItVhPCWfxKV+vQQOXjKueZaMyuPrHe4VGuQlEVduEg==
-X-Gm-Message-State: AOJu0Yxv5dtWLEpgiFp9afgIxwLAjSGElRmyaItpWcITFUlI2k652SCt
- glHJGesM1Lcqmf2sEuoUhjoofyBHb8/Ouq4/KGU/UI0k6JdNTDBgGWofsiGSqDP2B4+oaQgLw8y
- ay0qOKkIakX8Kfi/N4hmGGnTTthcBbTHw5J0=
-X-Google-Smtp-Source: AGHT+IHu5PE4QPeQ5kfGULM1/lvXy9q1hFQeVHfnDnyJ/phzt8d+VNrL3ETfgrB5Bsf9EHjavHgKsb1qxm5CTH/EyvA=
-X-Received: by 2002:a17:90a:9f8b:b0:29e:b9c:d062 with SMTP id
- o11-20020a17090a9f8b00b0029e0b9cd062mr4252619pjp.3.1711303294919; Sun, 24 Mar
- 2024 11:01:34 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=5b6e=K7=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1711304609;
+ bh=B/Tak17SHgI3Dmv69OkHs47rDl2zfqpSHKn23Hlzjhc=;
+ b=EncCFqqezgX7avMYIfAlFqLUi6Qcu2Hzeu0Aqv0QapRwI+RACqILtrKaZSfN6grgJKob/EiN4
+ FzEs9G82EDucJ1baNmTtKe/vuruRgt6Mvr2KLUs2kGAAESvBIVyiomknAjVDbs6zQR/6N0qRsYn
+ 6o9F1+8O+llFs39vNNeurN3h8K4JUGV0NrX9IBI5du7VvsgW3oPRFbdC4bhz03yq/ZYiT/UtSPo
+ WWQK4v1XryWQXBV8zNHJIND8Bw6zJTSeSDSn8oYEbw046DwhRuq1wALqSSutRcHPT01gYAU79ZE
+ 66qGskDoZHF9GCGSChtYCEgF/CdE8g06KEu+UHsCDBSw==
+Message-ID: <955522b3-344d-4f11-8ea3-d24cbc9f7f7a@kwiboo.se>
+Date: Sun, 24 Mar 2024 18:28:47 +0100
 MIME-Version: 1.0
-References: <20240322-phycore_mx8mp_netboot_fixes-v1-1-33d992343fc0@phytec.de>
-In-Reply-To: <20240322-phycore_mx8mp_netboot_fixes-v1-1-33d992343fc0@phytec.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 24 Mar 2024 15:01:23 -0300
-Message-ID: <CAOMZO5CQ6WqPYZ6+B0uXekcjzQbdPanX9J_3poqUELraOhgPew@mail.gmail.com>
-Subject: Re: [PATCH] board: phytec: phycore_imx8mp.env fix netboot issues
-To: Yannic Moog <y.moog@phytec.de>
-Cc: Teresa Remmet <t.remmet@phytec.de>, u-boot@lists.denx.de,
- upstream@lists.phytec.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/3] rockchip: spl: Add SPI NOR flash to boot_devices
+ array
+Content-Language: en-US
+To: Dragan Simic <dsimic@manjaro.org>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Christopher Obbard <chris.obbard@collabora.com>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
+References: <20240322205027.3860170-1-jonas@kwiboo.se>
+ <20240322205027.3860170-4-jonas@kwiboo.se>
+ <69ac8183dcf1cc54f51d21b823c1abfa@manjaro.org>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <69ac8183dcf1cc54f51d21b823c1abfa@manjaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 660062d4b95d8b6a02449567
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,17 +77,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Mar 22, 2024 at 9:55=E2=80=AFAM Yannic Moog <y.moog@phytec.de> wrot=
-e:
->
-> The "run netargs" command should come later in the "netboot" command
-> order when using dhcp since it sets the server and client ip addresses.
-> The previous order led to misconfigured kernel boot params and thus
-> kernel panic when serverip was not manually set.
-> Further, following Linux FHS 3.0, change the nfsroot default directory
-> to /srv/nfs.
->
-> Fixes: 60f64bec414e ("board: phytec: phycore_imx8mp: Add fec support")
-> Signed-off-by: Yannic Moog <y.moog@phytec.de>
+Hi Dragan,
 
-Applied to u-boot-imx/next, thanks.
+On 2024-03-24 17:52, Dragan Simic wrote:
+> Hello Jonas,
+> 
+> Please see my comments below.
+> 
+> On 2024-03-22 21:50, Jonas Karlman wrote:
+>> Add missing boot source id <-> device tree node path mapping for SPI 
+>> NOR
+>> flash on PX30, RK3288, RK3308, RK3368 and RV1126.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>> v2:
+>> - New patch
+>> ---
+>>  arch/arm/mach-rockchip/px30/px30.c     | 1 +
+>>  arch/arm/mach-rockchip/rk3288/rk3288.c | 1 +
+>>  arch/arm/mach-rockchip/rk3308/rk3308.c | 1 +
+>>  arch/arm/mach-rockchip/rk3368/rk3368.c | 1 +
+>>  arch/arm/mach-rockchip/rv1126/rv1126.c | 1 +
+>>  5 files changed, 5 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-rockchip/px30/px30.c
+>> b/arch/arm/mach-rockchip/px30/px30.c
+>> index b4f655fa4b3e..2ec3289d75b7 100644
+>> --- a/arch/arm/mach-rockchip/px30/px30.c
+>> +++ b/arch/arm/mach-rockchip/px30/px30.c
+>> @@ -19,6 +19,7 @@
+>>
+>>  const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+>>  	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff390000",
+>> +	[BROM_BOOTSOURCE_SPINOR] = "/spi@ff3a0000/flash@0",
+> 
+> AFAICT, no PX30-based board contains an SPI chip, but making this
+> future-proof perhaps shouldn't hurt.
+
+The rk3326-odroid-go2 variant of PX30 has a jedec,spi-nor node.
+
+> 
+>>  	[BROM_BOOTSOURCE_SD] = "/mmc@ff370000",
+>>  };
+>>
+>> diff --git a/arch/arm/mach-rockchip/rk3288/rk3288.c
+>> b/arch/arm/mach-rockchip/rk3288/rk3288.c
+>> index c77c56c1dab5..70cf50029121 100644
+>> --- a/arch/arm/mach-rockchip/rk3288/rk3288.c
+>> +++ b/arch/arm/mach-rockchip/rk3288/rk3288.c
+>> @@ -28,6 +28,7 @@ DECLARE_GLOBAL_DATA_PTR;
+>>
+>>  const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+>>  	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff0f0000",
+>> +	[BROM_BOOTSOURCE_SPINOR] = "/spi@ff130000/flash@0",
+> 
+> Using spi2 for a flash chip applies to some RK3288-based boards, but 
+> AFAICT
+> not to all of them.  For example, arch/arm/dts/rk3288-evb.dtsi uses spi0
+> for a flash chip, which in turn translates to /spi@ff110000/flash@0.  
+> The
+> same also applies to arch/arm/dts/rk3288-firefly.dtsi, for example.
+
+The RK3288 TRM explicitly mention that it can boot from SPI2 CS0.
+
+Also I can only find jedec,spi-nor reference in rk3288-phycore-som.dtsi
+and rk3288-veyron.dtsi, nothing in rk3288-evb.dtsi or rk3288-firefly.dtsi.
+
+> 
+>>  	[BROM_BOOTSOURCE_SD] = "/mmc@ff0c0000",
+>>  };
+>>
+>> diff --git a/arch/arm/mach-rockchip/rk3308/rk3308.c
+>> b/arch/arm/mach-rockchip/rk3308/rk3308.c
+>> index 27a748327e31..b3ffabc5449a 100644
+>> --- a/arch/arm/mach-rockchip/rk3308/rk3308.c
+>> +++ b/arch/arm/mach-rockchip/rk3308/rk3308.c
+>> @@ -141,6 +141,7 @@ enum {
+>>
+>>  const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+>>  	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff490000",
+>> +	[BROM_BOOTSOURCE_SPINOR] = "/spi@ff4c0000/flash@0",
+> 
+> AFAICT, no RK3308-based board contains an SPI chip, and I'm not really
+> sure where does /spi@ff4c0000/flash@0 come from.
+
+RK3308 TRM mention that it can boot from the SFC. And yes there is no
+upstream board that currently have a jedec,spi-nor node, it however
+have the sfc (spi@ff4c0000) node so this adds correct node path.
+
+Regards,
+Jonas
+
+> 
+>>  	[BROM_BOOTSOURCE_SD] = "/mmc@ff480000",
+>>  };
+>>
+>> diff --git a/arch/arm/mach-rockchip/rk3368/rk3368.c
+>> b/arch/arm/mach-rockchip/rk3368/rk3368.c
+>> index 651ba1090206..8f5ca1dfa7c9 100644
+>> --- a/arch/arm/mach-rockchip/rk3368/rk3368.c
+>> +++ b/arch/arm/mach-rockchip/rk3368/rk3368.c
+>> @@ -55,6 +55,7 @@ struct mm_region *mem_map = rk3368_mem_map;
+>>
+>>  const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+>>  	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff0f0000",
+>> +	[BROM_BOOTSOURCE_SPINOR] = "/spi@ff120000/flash@0",
+> 
+> This is fine.
+> 
+>>  	[BROM_BOOTSOURCE_SD] = "/mmc@ff0c0000",
+>>  };
+>>
+>> diff --git a/arch/arm/mach-rockchip/rv1126/rv1126.c
+>> b/arch/arm/mach-rockchip/rv1126/rv1126.c
+>> index 8589c46f10aa..40eb9eb7b196 100644
+>> --- a/arch/arm/mach-rockchip/rv1126/rv1126.c
+>> +++ b/arch/arm/mach-rockchip/rv1126/rv1126.c
+>> @@ -15,6 +15,7 @@
+>>
+>>  const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+>>  	[BROM_BOOTSOURCE_EMMC] = "/mmc@ffc50000",
+>> +	[BROM_BOOTSOURCE_SPINOR] = "/spi@ffc90000/flash@0",
+> 
+> This is also fine.
+> 
+>>  	[BROM_BOOTSOURCE_SD] = "/mmc@ffc60000",
+>>  };
+
