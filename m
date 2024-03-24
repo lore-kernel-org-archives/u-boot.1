@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFF99C6FD1F
-	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 15:19:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B8CBC6FD1F
+	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 15:19:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B89C875FA;
-	Sun, 24 Mar 2024 16:19:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9113A87D74;
+	Sun, 24 Mar 2024 16:19:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jTZSDzTp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZBWzQpq4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 908D787D2F; Sun, 24 Mar 2024 16:19:14 +0100 (CET)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id D0E3987D42; Sun, 24 Mar 2024 16:19:15 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA211879E0
- for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 16:19:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F038E8718A
+ for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 16:19:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=christianshewitt@gmail.com
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-56bf6418434so1385106a12.0
- for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 08:19:12 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-56bb22ff7baso4168420a12.3
+ for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 08:19:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711293551; x=1711898351; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1711293553; x=1711898353; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ze781fdYMJC8X6yPwfz4FQS/isO5gR11eLckzIKPCfI=;
- b=jTZSDzTpvRWx0g3jiXUAskcYf71PDf2wnMg2peu5r9DBsEsZnxxlKp45Xy413ekT7k
- 8LHG7N2LX++OkWik8CEVKyY1Ab4sauQKc/819hBMSMD8kWg37tHrrZoKeO1WaeILXHmh
- 3N1VOSHGEmq7kgawSamfmgVXMQ7y29bNvLbax9dbHRXoYARpKmcnStU8A4No+/tzorxv
- +fguPy3+nyfPMQPF1ecEg28BCRMp/+s/JI/wppru/VFbW0WQG27TEjoIMQC0o94XYmLP
- RfBRLfVHxbpoIGjECTrHNEl4xsLd2zMECqRPIujvmYHBNZqdHdiCCaytyfeBIUQ1q+9v
- wcVA==
+ bh=orAznLnWy0CEitEVvnSeuGQAseklMB0s/6SFzX1+Rno=;
+ b=ZBWzQpq4xDGYl9xsyS74sxfsPU7SQHiURuxtTH8enrrQrWVPdMkZYYrhjA0In8kS0f
+ EGVgwxVLaGPtvBrZVPzujT0zC/0/9/Wg9yzr99bKRbRBLnOR/ATPU/cROPII2k/RDtEp
+ Q8NTwDhY915Tietu4fJrC6nSpVDmNahD8tAfXbKjIvWGBKJnYSh8FnCXrmEyBcpDR+CB
+ gEEZPQoDfWChB6zkemmBxHDK0I52QM63Jna3M+DxjAFfMBHjv+XI4RVsAFe5MjmkiwKE
+ ednXDH7GLHuR6hJJwHzxNvyspBuIG8U0NgG7/E1Hr83/rrspJb02pLwA3kOdkhyz9Thi
+ zoKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711293551; x=1711898351;
+ d=1e100.net; s=20230601; t=1711293553; x=1711898353;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ze781fdYMJC8X6yPwfz4FQS/isO5gR11eLckzIKPCfI=;
- b=fxaYJgj8exwgFU/YyO1SWoyerCz+D4NoTvhb+7JHUtYaSOvLQD0ocd2tnhUEFFk3s0
- JiPX5OaDw0nuhQqIUYh6Z8FeNMa+VNIlTnymSSib0l2DkpHFBL5q9YdTxBaWSWJwFEkb
- QpHrqWz6wog+fP7FohULJO31LXoZ6ikvHdYjGOo1/Esz2HReEiP64RD+VZjQCMicBcI1
- mSF1WQgia0cyVU5VPfjO1j0FX+P1zZd9QNvipRq0eSj1zGTbcMPpI8W3RYg9r2Ix+rK3
- V4iTPAMlYTqYiKOF1MdDYkqucU9eAJCjRHjWANiB4TO+VHGJGyQGIrdKY89HjKat0sje
- lu6w==
-X-Gm-Message-State: AOJu0YyQvLbrTuD9U4eGS4zeU7kX2lK98i6CGXMw0iiFy01DJDlvSnXH
- eBpMLQGgprngkqTem2VJ+WTXDvYt7MUZAum27c2YGXB+7kMkJDjrdgF+Bc0Ww1k=
-X-Google-Smtp-Source: AGHT+IGWop+tRdvatwhyMLUo6vB2OpRCupGJ56dqduh0sfpCfS2PruM3icraWlMqlzpjp74V6KKbQQ==
-X-Received: by 2002:a50:d594:0:b0:56b:902e:b144 with SMTP id
- v20-20020a50d594000000b0056b902eb144mr2966510edi.12.1711293551532; 
- Sun, 24 Mar 2024 08:19:11 -0700 (PDT)
+ bh=orAznLnWy0CEitEVvnSeuGQAseklMB0s/6SFzX1+Rno=;
+ b=ZPOPk++640yTy2jmIjTnhkrWPlJuI8bg7QGiDyd2COMsvPUw4Fjq7cO7/KHIL3VA5G
+ Cxr8Y+SVCAgxbJuHqHxVDoST2Gt59OZCP9wVbFcNJW0+oowxw0U0SYbXsJbft4S+cbH6
+ FISShHcqNdumMcCUV8vpZuXN9sX6o4wkl/H3LTdEjEXMO2A6AHYrhD7u/lx3F9SFftIj
+ KylOu1UplP9Dd6fdAkK1Zjo9m4SPseCCKz3vjhRiZ3lnbqWNPGVimDPtHCzio9ymQCAh
+ ZTzgsWGW8+qc+9pIsYOPLf5ZHVj+hUcALhOlPlQ3+YIt6L/EFXdRCVLTwPQJzvDzEvjJ
+ +ESQ==
+X-Gm-Message-State: AOJu0Yy4T9LNl6Zl6PAGURlOZP09X2KS/5gFO5LjLWbTwk24MfOOaGl1
+ YE2X9LEHgB7dg7wWJKoWSfTHxnfPKR9BQbyPcALgF300zYAKMTPPxik+P/9TUQg=
+X-Google-Smtp-Source: AGHT+IFhRJgpiqLGFCc44rQRz5LPiyxEJY5CVYn69exzGloG9UHUmJzBBQMw9KF+UW7QUds+qK+B2A==
+X-Received: by 2002:a50:bae7:0:b0:56b:d15b:6dc1 with SMTP id
+ x94-20020a50bae7000000b0056bd15b6dc1mr540362ede.23.1711293552801; 
+ Sun, 24 Mar 2024 08:19:12 -0700 (PDT)
 Received: from toolbox.. ([87.200.95.144]) by smtp.gmail.com with ESMTPSA id
- o26-20020aa7c7da000000b0056bf34d656dsm1996114eds.29.2024.03.24.08.19.10
+ o26-20020aa7c7da000000b0056bf34d656dsm1996114eds.29.2024.03.24.08.19.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Mar 2024 08:19:11 -0700 (PDT)
+ Sun, 24 Mar 2024 08:19:12 -0700 (PDT)
 From: Christian Hewitt <christianshewitt@gmail.com>
 To: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
  linux-amlogic@lists.infradead.org
 Cc: Christian Hewitt <christianshewitt@gmail.com>
-Subject: [PATCH v2 1/2] ARM: dts: fix Ethernet on WeTek Hub/Play2
-Date: Sun, 24 Mar 2024 15:19:04 +0000
-Message-Id: <20240324151905.3817732-2-christianshewitt@gmail.com>
+Subject: [PATCH v2 2/2] board: amlogic: add meson_generate_serial_ethaddr
+ fallback to p200
+Date: Sun, 24 Mar 2024 15:19:05 +0000
+Message-Id: <20240324151905.3817732-3-christianshewitt@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240324151905.3817732-1-christianshewitt@gmail.com>
 References: <20240324151905.3817732-1-christianshewitt@gmail.com>
@@ -91,42 +92,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Placing the snps,reset content needed for Ethernet to probe in a common
-uboot.dtsi results in the content not being used and broken Ethernet. Fix
-this by creating two board specific dtsi files with the right content.
+Add a fall-back method to generate ethaddr from CPU serial on p200 boards
+if the MAC cannot be read from efuse. This prevents random MAC addresses
+on the WeTek Hub/Play2 boards.
 
-Fixes: 67d5128df950 ("ARM: dts: add support for WeTek Hub and WeTek Play2")
 Signed-off-by: Christian Hewitt <christianshewitt@gmail.com>
 ---
- ...u-boot.dtsi => meson-gxbb-wetek-hub-u-boot.dtsi} |  0
- arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi     | 13 +++++++++++++
- 2 files changed, 13 insertions(+)
- rename arch/arm/dts/{meson-gxbb-wetek-u-boot.dtsi => meson-gxbb-wetek-hub-u-boot.dtsi} (100%)
- create mode 100644 arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi
+ board/amlogic/p200/p200.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/dts/meson-gxbb-wetek-u-boot.dtsi b/arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi
-similarity index 100%
-rename from arch/arm/dts/meson-gxbb-wetek-u-boot.dtsi
-rename to arch/arm/dts/meson-gxbb-wetek-hub-u-boot.dtsi
-diff --git a/arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi b/arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi
-new file mode 100644
-index 00000000000..3743053eb9c
---- /dev/null
-+++ b/arch/arm/dts/meson-gxbb-wetek-play2-u-boot.dtsi
-@@ -0,0 +1,13 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (c) 2019 BayLibre, SAS.
-+ * Author: Neil Armstrong <narmstrong@baylibre.com>
-+ */
-+
-+#include "meson-gx-u-boot.dtsi"
-+
-+&ethmac {
-+	snps,reset-gpio = <&gpio GPIOZ_14 0>;
-+	snps,reset-delays-us = <0 10000 1000000>;
-+	snps,reset-active-low;
-+};
+diff --git a/board/amlogic/p200/p200.c b/board/amlogic/p200/p200.c
+index 7c432f9d281..3061f7a6b3c 100644
+--- a/board/amlogic/p200/p200.c
++++ b/board/amlogic/p200/p200.c
+@@ -30,6 +30,8 @@ int misc_init_r(void)
+ 					  mac_addr, EFUSE_MAC_SIZE);
+ 		if (len == EFUSE_MAC_SIZE && is_valid_ethaddr(mac_addr))
+ 			eth_env_set_enetaddr("ethaddr", mac_addr);
++		else
++			meson_generate_serial_ethaddr();
+ 	}
+ 
+ 	if (!env_get("serial#")) {
 -- 
 2.34.1
 
