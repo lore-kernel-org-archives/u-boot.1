@@ -4,74 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12133C6FD1F
-	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 17:53:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18431C6FD1F
+	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 17:54:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 137D387D40;
-	Sun, 24 Mar 2024 18:53:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 563C087527;
+	Sun, 24 Mar 2024 18:54:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="F2LtErU7";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b4P6woQ0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04310879E0; Sun, 24 Mar 2024 18:53:18 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 20A3687519; Sun, 24 Mar 2024 18:54:22 +0100 (CET)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74C9287519
- for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 18:53:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D308187527
+ for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 18:54:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1def81ee762so4328795ad.0
- for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 10:53:15 -0700 (PDT)
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-6ea7b38f773so280569b3a.0
+ for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 10:54:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711302794; x=1711907594; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=leWQUzYjUrQwqERz9vyKVJKtzcvp8OsyviAMUUQ2qT0=;
- b=F2LtErU7ezmSOlP5ejcYfq66BVwHPq82Qd1GpedKx8fBdFx6/Lg9L3oB5i/PuiZo9C
- 0Id5XRWf1e0e/iV0HEQaXzTw124fLkER+qSs52+o6aykKKyLfS7cjIEZlLvGm3FeA/i9
- 2esgM4RcGSxagvpCfa8oOu4D22BFVuWT73S8AKUupNBLJViSy5GFSTiqDQd/Mwqvxry9
- z9fZ8aOKNXhbVbSrJMMFVO9hiJAEikR3j2El3CZfFlhrn2FSuUsITnCDQC0lisjkb45n
- JOmKOwrxP7lYaIPt7t/r1S81hX9/q93expKBqBW6HkWrMLTFRONsNzb1r9FJDAdQR9Po
- GLOA==
+ d=gmail.com; s=20230601; t=1711302857; x=1711907657; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7zu1LHGswR4FJ49JO8vEGF5f++K0HXmt/XOCKZ8cRFI=;
+ b=b4P6woQ0ZUIkmsriq6XBeZl+blSs/59ughntJ81XIqzDF5kE9ikJTSmwVt7KFSKAZQ
+ yLel6fSOhlSVBeDJwrr98UFq0IxQ2VrI2FeMCBqEoewQnRH18Q2CVRuGPn/L9TgpL9sE
+ rcnzjNpESnPjbnRjXFixUDaHY6C7rlaKlaeHYR5cnI9NPGe7NnOeIH0VYQlubmIHWZ99
+ Jh1amm7fO4gV21HhECj2Xzyh3zhmOazoiqTNRbBbBHk+X+SSS/fRzUFbn0LQzzx97PYy
+ V8QY+znnrfluK05aKyHJyby/xY7lD/4xZHmGaqT+8QsWaybY+dPqXwLSZ/sYVnBSlJBo
+ 4B8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711302794; x=1711907594;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=leWQUzYjUrQwqERz9vyKVJKtzcvp8OsyviAMUUQ2qT0=;
- b=tk0mWSDBm5wp4ADmlebJsHxg3LJH5T1TxCzSYN8eIuX3hlnRR8GNbGlTOhH2ew9na7
- 5tgR+T7lTKBKP2tVE/FbuKkEof64x/tJyx+p8k/c9GI1fJufqQtCkn39qf1vw4tiC4yD
- C7Yfai7da0oOkht4aIGtUezun5W59jTqyKXy2UKJtfuYZjq1jMFI6Tb8Ywq/jzul1RD4
- HovTgEiEohp8mao/EO3jNe/oGnI5s7nTp0ZBLHxIGsSJg8mr++xIZyR3FO7lM0huREGe
- 4mgrIJVgdVoD7r7GzqDTqa/xUgzzkU08+pz3RyltGppr2pR1mB+/sca9lIHzLIl575Qk
- gN/Q==
-X-Gm-Message-State: AOJu0YzYMF6FnoTpfhKcZyAccZPtbxxXq2z+e7yOAzVLEqjLU1S9OvBZ
- MQach6jnj1p5fwdLRmvFdeT/w17OeMxecV9oy+yAYMJh2LatzjjsB9LH0mcA
-X-Google-Smtp-Source: AGHT+IE74SV7iQbKBt5uoLAgTFcqXKQI+sLxvzdT6x9gzctLgJFlIO7m1wniKSAXHtyQREnxtBHtVA==
-X-Received: by 2002:a17:902:b70e:b0:1db:ce31:96b1 with SMTP id
- d14-20020a170902b70e00b001dbce3196b1mr6279601pls.6.1711302793790; 
- Sun, 24 Mar 2024 10:53:13 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:cbca:37f7:5684:5700])
- by smtp.gmail.com with ESMTPSA id
- u14-20020a170903124e00b001e004924412sm3270598plh.108.2024.03.24.10.53.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 24 Mar 2024 10:53:13 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-next-20240324
-Date: Sun, 24 Mar 2024 14:53:08 -0300
-Message-Id: <20240324175308.1612688-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1711302857; x=1711907657;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7zu1LHGswR4FJ49JO8vEGF5f++K0HXmt/XOCKZ8cRFI=;
+ b=f53jfET0mq6ztI1ErRkVV9R7p0HGuhYYO7Pw3nmgIBih9akGQAvurngfc3AkqcIPnN
+ ml4RGzLEdgZQmthqSKABv8/aFDFu3WpBlyBLLEY5izhnN9ptbPrH06DZCSMl3jPehyzS
+ Sph+4hRtC5deEeE0nuRytB/IkNzjmgVS3Q1nvgKZ5Ot9abE4msVpE5PFCyxXrXkuMWIz
+ 4oE5kMg6q6eEfPVH0SV4G1/iK2uArPeca2DgQ3PFzoer0+kgRDP6uFSlJqcYWvz4Jz0t
+ pyP/Ij5wsOY85/5pMG/McVsdPX5hlFom06sb5IUS2iv9CC175RyQoBie2ns2qv3hbRM1
+ Jd3w==
+X-Gm-Message-State: AOJu0Yx4cbd9mKCxIM+gTYKsIsbCde5mVNA6ole8tqISJtcPoEhpqk8e
+ 5sAwY1p4FyGNbJzv9F0Us6NxCEewgujVgatBfhO26TgigHUSzQ6WHELuX80Vo3JfgXzgo3CU5Qy
+ VXAteMgdf+EaQ2swnh+w8HLwjELE=
+X-Google-Smtp-Source: AGHT+IEprW8I+2Q4ms+fmctbaLuNz5FTU9Bz1Z5M7UjxJWcw+In/xn5zb8mHVEDecfUVlsJPBxdgyM8nKSZ1ix7JZUM=
+X-Received: by 2002:a05:6a21:a598:b0:1a3:a936:eb07 with SMTP id
+ gd24-20020a056a21a59800b001a3a936eb07mr7385484pzc.2.1711302857377; Sun, 24
+ Mar 2024 10:54:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240321145507.619448-1-sumit.garg@linaro.org>
+ <CAOMZO5DjJRRRi8ujbMu0ypCwXWbymt_RTtdviUhNAcknQN3-Vw@mail.gmail.com>
+In-Reply-To: <CAOMZO5DjJRRRi8ujbMu0ypCwXWbymt_RTtdviUhNAcknQN3-Vw@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 24 Mar 2024 14:54:05 -0300
+Message-ID: <CAOMZO5BnuH21=H+dkKeDOkYkq+y3v1jEFMMH1AN5X+jetVzh9g@mail.gmail.com>
+Subject: Re: [PATCH v4 00/11] imx8mp: Enable PCIe/NVMe support
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, tharvey@gateworks.com, 
+ marcel.ziswiler@toradex.com, francesco@dolcini.it, lukma@denx.de, 
+ seanga2@gmail.com, jh80.chung@samsung.com, sjg@chromium.org, festevam@denx.de, 
+ andrejs.cainikovs@toradex.com, peng.fan@nxp.com, aford173@gmail.com, 
+ marex@denx.de, ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org, 
+ fathi.boudra@linaro.org, remi.duraffort@linaro.org, 
+ daniel.thompson@linaro.org, pbrobinson@gmail.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,75 +94,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Fri, Mar 22, 2024 at 10:51=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
+ wrote:
+>
+> Hi Sumit,
+>
+> On Thu, Mar 21, 2024 at 11:55=E2=80=AFAM Sumit Garg <sumit.garg@linaro.or=
+g> wrote:
+>
+> > Changes in v4:
+> > - Incorporated misc comments from Marek and added his review tag.
+> > - Dropped patch #4 (imx8mp: power-domain: Don't power off pd_bus)
+> >   since power domain off path is never excercised for DT based devices.
+> > - Added patch#8 as suggested by Peter to describe older pcie_imx.c
+> >   driver as legacy one.
+>
+> v4 looks good, thanks.
+>
+> I'll wait a few days and will queue it to next.
 
-Please pull this material for next from u-boot-imx, thanks.
-
-The following changes since commit fb49d6c289d942ff7de309a5c5eaa37a7f4235db:
-
-  remoteproc: uclass: Add methods to load firmware to rproc and boot rproc (2024-03-22 15:50:28 -0400)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20240324
-
-for you to fetch changes up to 9d27e441bb14dd526c60c13d5ff16353ca322eb3:
-
-  board: phytec: phycore_imx8mp.env fix netboot issues (2024-03-24 13:42:10 -0300)
-
-u-boot-imx-next-20240324
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/20056
-
-- Add ahab_commit command support.
-- Add USB support for the imx93-phyboard-segin board.
-- Add i.MX8MP PCIe support.
-- Fix netboot environment on phycore_imx8mp.
-----------------------------------------------------------------
-Mathieu Othacehe (4):
-      imx: ele_ahab: Add ahab_commit command support
-      arm: dts: imx93-phyboard-segin: Add USB support
-      configs: imx93-phyboard-segin: Add USB support
-      configs: imx93-phyboard-segin: Add fastboot support
-
-Sumit Garg (10):
-      clk: imx8mp: Add support for PCIe clocks
-      reset: imx: Refactor driver to simplify function names
-      reset: imx: Add support for i.MX8MP reset controller
-      imx8mp: power-domain: Add PCIe support
-      imx8mp: power-domain: Expose high performance PLL clock
-      phy: phy-imx8m-pcie: Add support for i.MX8M{M/P} PCIe PHY
-      pci: Add DW PCIe controller support for iMX8MP SoC
-      pcie_imx: Update header to describe it as a legacy driver
-      verdin-imx8mp_defconfig: Enable PCIe/NVMe support
-      MAINTAINERS: Add entry for PCIe DWC IMX driver
-
-Tim Harvey (1):
-      imx8mp_venice_defconfig: Enable PCIe/NVMe support
-
-Yannic Moog (1):
-      board: phytec: phycore_imx8mp.env fix netboot issues
-
- MAINTAINERS                                    |   6 +
- arch/arm/dts/imx93-phyboard-segin-u-boot.dtsi  |  15 ++
- arch/arm/include/asm/mach-imx/ele_api.h        |   2 +
- arch/arm/mach-imx/ele_ahab.c                   |  29 +++
- board/phytec/phycore_imx8mp/phycore_imx8mp.env |   4 +-
- configs/imx8mp_venice_defconfig                |   8 +
- configs/imx93-phyboard-segin_defconfig         |  14 +
- configs/verdin-imx8mp_defconfig                |   6 +
- drivers/clk/imx/clk-imx8mp.c                   |   6 +
- drivers/misc/imx_ele/ele_api.c                 |  32 +++
- drivers/pci/Kconfig                            |  11 +
- drivers/pci/Makefile                           |   1 +
- drivers/pci/pcie_dw_imx.c                      | 338 +++++++++++++++++++++++++
- drivers/pci/pcie_imx.c                         |   8 +
- drivers/phy/Kconfig                            |  11 +
- drivers/phy/Makefile                           |   1 +
- drivers/phy/phy-imx8m-pcie.c                   | 283 +++++++++++++++++++++
- drivers/power/domain/imx8mp-hsiomix.c          | 190 +++++++++++---
- drivers/reset/reset-imx7.c                     | 143 +++++++++--
- 19 files changed, 1049 insertions(+), 59 deletions(-)
- create mode 100644 drivers/pci/pcie_dw_imx.c
- create mode 100644 drivers/phy/phy-imx8m-pcie.c
+Applied to u-boot-imx/next, thanks.
