@@ -4,65 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A625EC47DD9
-	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 21:25:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69A13C47DD9
+	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 21:28:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1720987CB1;
-	Sun, 24 Mar 2024 22:25:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id D404287D42;
+	Sun, 24 Mar 2024 22:28:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711315538;
-	bh=gn4LDFKqcd5sJsePvgc7Bwu5wen77SFDmH5FYelFV00=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=arZOIAgyBc3Mne6sC8Ec9nbjdquqMVe+02xXiSKOEMEaMYhjVDNTMxEQN5vOCLq8r
-	 4Q6rhpvAaVGkqETN5bqiuQrWL1NfSskzSPz35LGc1MUth9T6LueqCUOhKgtf59ENHj
-	 9Slb+sWq40kV1KevG/pZuoJ6W+zUX/ru+Z3BRz9uSk3fT0vli9/o1m1fPSylJTFE3K
-	 rCLK4tYARuXeS8+DnNt6051egUHVv7U5oRJnjA5xSVdokog43hO5RgefGDqN+6dsO4
-	 OOLwJ3TRfq0HvdpoITX2inj7TU+rzpIQKTg0vfF78ZInmW2sjVfJ3VXMlKOyTSFYqG
-	 eqhIjthnGPj4Q==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="MMmaFgWb";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 1F49287DEC; Sun, 24 Mar 2024 22:28:31 +0100 (CET)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 131C18718A;
- Sun, 24 Mar 2024 22:25:36 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1711315537;
- bh=gn4LDFKqcd5sJsePvgc7Bwu5wen77SFDmH5FYelFV00=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=nXaRYViHex4KWdeL/hLbNSHlJ12Qch8nov8XlgmknnohKtJDsedJN6+K047oOLY9b
- Kr1+z8K/tu2jJDlZRUPpTG6tvweXAJle6NiCTq/K8YRrndQrQWLfeYf5ASc9cYOFEL
- AOrRgyen9YgyJATHVQjbS3SMNu6eIjvSwAFPG2d9PeDZObZYmq7SHGvHIxdNxGyzZL
- 5Hk/SODYnDeTPo8ChPbXU5xBECS2Ajx0A6Swq13ck7Yyz8cXJrZ8Vi5JFC4V7TXID7
- WcEb8Sh9VoK0yv6pzb8+cMDq2iU6XGfI3nBgvNsoTfhvTBUtKA6eTRYMRdwM+ZShW8
- XOJ81GALR/EAg==
-Message-ID: <2af5e746-9591-4774-a7bd-94d1390831ef@denx.de>
-Date: Sun, 24 Mar 2024 22:25:35 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id E951B87572
+ for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 22:28:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/3] configs: imx93-phyboard-segin: Add USB support
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Mathieu Othacehe <othacehe@gnu.org>, Tom Rini <trini@konsulko.com>,
- Peng Fan <peng.fan@nxp.com>, Shiji Yang <yangshiji66@outlook.com>,
- Ye Li <ye.li@nxp.com>, Alice Guo <alice.guo@nxp.com>,
- Stefano Babic <sbabic@denx.de>,
- =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>,
- Simon Glass <sjg@chromium.org>, Mathieu Othacehe <m.othacehe@gmail.com>,
- Yannic Moog <y.moog@phytec.de>, Primoz Fiser <primoz.fiser@norik.com>,
- Christoph Stoidner <c.stoidner@phytec.de>, Wadim Egorov
- <w.egorov@phytec.de>, u-boot@lists.denx.de
-References: <20240321144541.15314-1-othacehe@gnu.org>
- <20240321144541.15314-3-othacehe@gnu.org>
- <dec314ce-d83a-4549-a2d6-f5604107bca5@denx.de>
- <CAOMZO5AOv9Cmdpmji-y+YO9GvkMTHmh2d+RxmVksMLgj-23rqQ@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAOMZO5AOv9Cmdpmji-y+YO9GvkMTHmh2d+RxmVksMLgj-23rqQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1711315708;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=v7LYG0xkUkRUiWKU6yEu9H2AiorNUvzPObYdvdjzkWw=;
+ b=MMmaFgWbM+IdNwMMMFEgDd1UQUX+y52daf1lhPutYy5MbQbf8HsRs98fuUpSLXSsBjItyA
+ n3ocFPm4TqWbIXVf65N4A8yepRA0WkUvHPWYxjQlqzCGpU+F9cyUh2RojWrUrIMNuOHeoU
+ ChXMUR7yJwiNRTXAAPLI6SjnCe69tW70nAuPGxR8a9Te6AWc8EVm+boJgK3AwaybAVR0dQ
+ fxahuHcsyCik+yLGwAz/WmG8nKkEvR4lp5OdN/NMa9LYk4cWEtlNhFGVmXrpjvjdKA7ouX
+ DT0A8h6L0Aep+Olsd5+JoqFeAWUzbp34UH7GkwIQRi/QJSI8HnRD4s9r1eqn2Q==
+Date: Sun, 24 Mar 2024 22:28:27 +0100
+From: Dragan Simic <dsimic@manjaro.org>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Christopher Obbard <chris.obbard@collabora.com>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 3/3] rockchip: spl: Add SPI NOR flash to boot_devices
+ array
+In-Reply-To: <dc60db5b-a030-41e4-8cfe-f909dd89badf@kwiboo.se>
+References: <20240322205027.3860170-1-jonas@kwiboo.se>
+ <20240322205027.3860170-4-jonas@kwiboo.se>
+ <69ac8183dcf1cc54f51d21b823c1abfa@manjaro.org>
+ <955522b3-344d-4f11-8ea3-d24cbc9f7f7a@kwiboo.se>
+ <9ae8cf4a7aefef78dd1f546fb3290825@manjaro.org>
+ <dc60db5b-a030-41e4-8cfe-f909dd89badf@kwiboo.se>
+Message-ID: <3e8d12008f4f12ad13302efb91e09aca@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,20 +77,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/24/24 7:00 PM, Fabio Estevam wrote:
-> On Thu, Mar 21, 2024 at 4:17 PM Marek Vasut <marex@denx.de> wrote:
+On 2024-03-24 22:23, Jonas Karlman wrote:
+> On 2024-03-24 21:58, Dragan Simic wrote:
+>> On 2024-03-24 18:28, Jonas Karlman wrote:
+>>> On 2024-03-24 17:52, Dragan Simic wrote:
+>>>> On 2024-03-22 21:50, Jonas Karlman wrote:
+>>>>> diff --git a/arch/arm/mach-rockchip/rk3308/rk3308.c
+>>>>> b/arch/arm/mach-rockchip/rk3308/rk3308.c
+>>>>> index 27a748327e31..b3ffabc5449a 100644
+>>>>> --- a/arch/arm/mach-rockchip/rk3308/rk3308.c
+>>>>> +++ b/arch/arm/mach-rockchip/rk3308/rk3308.c
+>>>>> @@ -141,6 +141,7 @@ enum {
+>>>>> 
+>>>>>  const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+>>>>>  	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff490000",
+>>>>> +	[BROM_BOOTSOURCE_SPINOR] = "/spi@ff4c0000/flash@0",
+>>>> 
+>>>> AFAICT, no RK3308-based board contains an SPI chip, and I'm not 
+>>>> really
+>>>> sure where does /spi@ff4c0000/flash@0 come from.
+>>> 
+>>> RK3308 TRM mention that it can boot from the SFC. And yes there is no
+>>> upstream board that currently have a jedec,spi-nor node, it however
+>>> have the sfc (spi@ff4c0000) node so this adds correct node path.
+>> 
+>> Hmm, I see no sfc node in any of the arch/arm/dts/rk3308* files?
+>> Maybe I'm missing something, but there's also no "ff4c0000" string
+>> in the entire arch/arm/dts directory.
 > 
->> $ git grep -i usb.*phytec configs
->> configs/phycore_pcl063_defconfig:CONFIG_USB_GADGET_MANUFACTURER="Phytec"
->> configs/phycore_pcl063_ull_defconfig:CONFIG_USB_GADGET_MANUFACTURER="Phytec"
->>
->> It would be good to be consistent.
->>
->> Also, what is the vendor/product number those two boards use ?
+> The rk3308 DTs in U-Boot is very outdated so the sfc node cannot be
+> found in current master branch.
 > 
-> They both use:
+> The sfc node is part of linux upstream DT, should also match in
+> dts/upstream in next branch and after the rk3308 DT sync series [1].
 > 
-> CONFIG_USB_GADGET_VENDOR_NUM=0x01b67
+> rockchip: rk3308: Sync DT with linux v6.8 and update defconfigs:
+> [1] https://patchwork.ozlabs.org/cover/1912830/
 
-USB VID is 16bit number, the nubmer above is 20bit , drop the leading 
-zero while at it.
+All good, thanks for explaining it further.  Please add
+
+Reviewed-by: Dragan Simic <dsimic@manjaro.org>
