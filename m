@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80BDDC47DD9
-	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 17:54:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2695C6FD1F
+	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 17:55:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D402E87D74;
-	Sun, 24 Mar 2024 18:54:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5EC7987DBB;
+	Sun, 24 Mar 2024 18:55:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IcKWHv5z";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LULknE21";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BD6B787D74; Sun, 24 Mar 2024 18:54:55 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 5E2FC87DBB; Sun, 24 Mar 2024 18:55:51 +0100 (CET)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C12F87D57
- for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 18:54:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3EBC1879E0
+ for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 18:55:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1dd8ee2441dso4171495ad.1
- for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 10:54:52 -0700 (PDT)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-29f8ae4eae5so755983a91.0
+ for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 10:55:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711302890; x=1711907690; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1711302948; x=1711907748; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AfNiQ0NP/AAkVzKYA0v2ezWQBBSB+kts1//QqJGqE9U=;
- b=IcKWHv5zCgVWvL6YfxLmyifKwMg/MwFpgzqGqDWjWQNxDOPC2uew17oQ38a/S7BwQR
- Hii+ms4QXgJ6HDiWTzEzgdF09cB0RDT48BYzDD4Q/P/kQ4TZR2FOI6PNoPA1ugkJF+zR
- oucXPC6czaI8z9xKKthrVXmIZGtM0NE4oH0VJH134xcx4bYqBQvexj4A6UEn9r6oq4+9
- M5wkHGrUCm33XWeOmg4hCG3HbbtCphvYAo9tAzLX2iJmE5ODbh2WOBYMo3IhjiXpna9C
- KesNBClt0n/qSR6Fnp7KvDsCToV94EKw0WhWAy5U9l/ifycGGnQjoRszTA/AjgWzmxJB
- vfiw==
+ bh=KiRxJRhFi0jklFG/7GBu7RQMlo+yTy7WeYmvoqlGlto=;
+ b=LULknE219eFRBYbjXN7N3A79Tmt+g+lbCRMTn7Y/59//C9dqBaTqmrmf2vi9VIVbUQ
+ c6OMvqH7y8Fb3ndcI62J2WQjillci0Dii3rct/pDimXq521DljMkXbPYVi7YmmoEL96a
+ 3Evz4ttjlYnZCCTWTfOqmegiK9ElpwjDy63K/oLLY5r4Rafngrne40LODCnk7u0aNYgu
+ nDd0XI8dHO1mKnj9ElZCAdaA7W7YjmdlhGFo6hECLQEKbHJTFt2C6dF7Tj226JUePMKL
+ 3sahdqCd1HIvv1CCwTmtRPzpv2GWxNjPp9M4pHX33IuU1DxDrpHd5sgb2wKo26CSmame
+ iP+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711302890; x=1711907690;
+ d=1e100.net; s=20230601; t=1711302948; x=1711907748;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AfNiQ0NP/AAkVzKYA0v2ezWQBBSB+kts1//QqJGqE9U=;
- b=ZzpTdTvNbDcpSeyE4QwSSwIZPLGrjCEABGyxvZBgdXTVTzkCOS54ii4Cu4+ebXaG+L
- b/Wz/Dpf+p2tUk5p4Pkqj9dA3VuziqezP2NS38wT2fV5zIePgF1lJfHnBjkTbZ49JMhG
- N97V1PMlXOIy07BXsD7SQVStO2cHm5xFqJMn2+YDt6J01JWqZnQRtWG6EtnAtLSzNdhQ
- Wnx0dczobJRc+WxZHeZD9L9Wy7GjJnpdygggTMFWz4Vf4UexUg5dqh6Fgr4diu//adxT
- qNd1vOJXn7BN4LMKsE1orkQx1QLqaax/EYTjccnGDaewJ/LjkJuBjOICoRqG7+lZM5x8
- A4Eg==
+ bh=KiRxJRhFi0jklFG/7GBu7RQMlo+yTy7WeYmvoqlGlto=;
+ b=J/CWOTuxjrqKrr+4XwaAzLWbRITjXS9lBrY51py11wWcCEguQLVAhrdpPDjD4Bokbv
+ iJitfPka4C/U0qHIOe1X1NBjUqwrxwQPid2DQU7gDh1cBC9K6DPh1Yv7bFqoM2mEBrFF
+ NHWfeXbAvPZHgVF3Osdz3N2OQqmmi/CP7lesJuXzRnQtShTHaRUsiTnGdWUwMA4JtO1B
+ PuSa+zKG8/aQ1YT0S2rT0J8sLTaLWdHFiX+hRaIZqVtglPpAea9sRSUcvo3u1BeCtLoa
+ QFrSIQPomUQNez6o5KTJNbeZA+281ipbRuXwkBuFsILceku6eaLyshEPvfGQU4H2weKT
+ sauw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUJ6YRfIY+A9HexCGc1lG8SfIJ0TAa2lY8DbndQUncCjuuTRj6PG3FSMO8FVtAqxCd4hh5FD0nIYpMr1SvAu54LB2kLaQ==
-X-Gm-Message-State: AOJu0YxzbmP+UFky+MPi6M4aac8sSBySpWH3SQySUvaRmaAqxTQVEFa9
- I+vI0PIBV2rDW5AmlJ6zJLBI6A1tbB0K9P6/XRpvBxe+99U2GcOGAUfe6F/pOrATD+mKlHG+10e
- 4bWn/KQ8N3CsZfRRTaVGqPxTS4Ko=
-X-Google-Smtp-Source: AGHT+IGEfZe1H9G0wvGVCy+ScDeXFtYBv/Uu1THqMO3l4mIYCg6tSECYfU/wCUoAFGXv6jDoxFJezedWIoyF6C/+GK4=
-X-Received: by 2002:a17:90a:bf07:b0:29b:961c:2df0 with SMTP id
- c7-20020a17090abf0700b0029b961c2df0mr4303186pjs.3.1711302890726; Sun, 24 Mar
- 2024 10:54:50 -0700 (PDT)
+ AJvYcCXQBqY+tmCbEMNKRKa0LEZ8xwm0NvJ+c4KmEZQUYpI5MARr3ghrjpVQl/mkCq9NDjeh/7S4fk50Kklx4Di6H07RTbEnEQ==
+X-Gm-Message-State: AOJu0YylTR+q292Lbs8pnljrGc1xba3Ca1eGgbIx8FsI0BXrRQTkczRx
+ aihGL4X1wsvAfEfzIRdKgadIvxN8qIJOlxdZliWXw+bJBAhDls2+9ZQNkqePhVbkdZ9PCvWk1+G
+ 08nTTUg98r+PiDgp+bwZamLpKGwSgOE9a
+X-Google-Smtp-Source: AGHT+IE9zsk7HYsAdvvXjPqPNOfSXN4gMVRRAUttfCdG2UR/KI2CMiovr7Xe7WLdMe3pdVM5+F2ybYvdzbfJ+1ZYTP8=
+X-Received: by 2002:a05:6a21:789e:b0:1a3:bd72:b8de with SMTP id
+ bf30-20020a056a21789e00b001a3bd72b8demr4873643pzc.3.1711302947798; Sun, 24
+ Mar 2024 10:55:47 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240321071953.14615-1-othacehe@gnu.org>
-In-Reply-To: <20240321071953.14615-1-othacehe@gnu.org>
+References: <20240321144541.15314-1-othacehe@gnu.org>
+ <20240321144541.15314-2-othacehe@gnu.org>
+ <7b72bd8d-653e-4bba-9d62-26a60d85792a@denx.de>
+In-Reply-To: <7b72bd8d-653e-4bba-9d62-26a60d85792a@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 24 Mar 2024 14:54:39 -0300
-Message-ID: <CAOMZO5D9Rr2s8wOXkFROfDPTtNeUqQAUudYz4aTBgjjp4wH5og@mail.gmail.com>
-Subject: Re: [PATCH] imx: ele_ahab: Add ahab_commit command support
-To: Mathieu Othacehe <othacehe@gnu.org>
-Cc: Stefano Babic <sbabic@denx.de>,
- "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, 
- Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
- Clement Faure <clement.faure@nxp.com>, 
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
+Date: Sun, 24 Mar 2024 14:55:36 -0300
+Message-ID: <CAOMZO5BQvz2ZbjYb2_ZrvNg42YQ+-59iGKndhqHX11osnhcYTg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] arm: dts: imx93-phyboard-segin: Add USB support
+To: Marek Vasut <marex@denx.de>
+Cc: Mathieu Othacehe <othacehe@gnu.org>, Tom Rini <trini@konsulko.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Shiji Yang <yangshiji66@outlook.com>, Ye Li <ye.li@nxp.com>,
+ Alice Guo <alice.guo@nxp.com>, Stefano Babic <sbabic@denx.de>,
+ =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
+ Simon Glass <sjg@chromium.org>, Mathieu Othacehe <m.othacehe@gmail.com>,
+ Yannic Moog <y.moog@phytec.de>, Primoz Fiser <primoz.fiser@norik.com>,
+ Christoph Stoidner <c.stoidner@phytec.de>, 
+ Wadim Egorov <w.egorov@phytec.de>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,13 +99,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 21, 2024 at 4:20=E2=80=AFAM Mathieu Othacehe <othacehe@gnu.org>=
- wrote:
+On Thu, Mar 21, 2024 at 4:17=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
-> This message is used to commit into the fuses any new SRK revocation and
-> FW version information that have been found into the NXP (ELE FW) and
-> OEM containers.
+> On 3/21/24 3:45 PM, Mathieu Othacehe wrote:
+> > Enable both usbotg1 and usbotg2 ports. Disable over-current as OC pins =
+are
+> > not connected to the SoC.
+> >
+> > This
 >
-> Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
+> "This addition to ...-u-boot.dtsi is temporary, ..." would be clearer.
 
-Applied to u-boot-imx/next, thanks.
+I fixed as Marek's suggestion and applied it to u-boot-imx/next, thanks.
