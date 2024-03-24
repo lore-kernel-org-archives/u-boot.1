@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18431C6FD1F
-	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 17:54:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80BDDC47DD9
+	for <u-boot@archiver.kernel.org>; Sun, 24 Mar 2024 17:54:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 563C087527;
-	Sun, 24 Mar 2024 18:54:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D402E87D74;
+	Sun, 24 Mar 2024 18:54:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="b4P6woQ0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IcKWHv5z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 20A3687519; Sun, 24 Mar 2024 18:54:22 +0100 (CET)
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
- [IPv6:2607:f8b0:4864:20::42a])
+ id BD6B787D74; Sun, 24 Mar 2024 18:54:55 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D308187527
- for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 18:54:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C12F87D57
+ for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 18:54:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x42a.google.com with SMTP id
- d2e1a72fcca58-6ea7b38f773so280569b3a.0
- for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 10:54:18 -0700 (PDT)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-1dd8ee2441dso4171495ad.1
+ for <u-boot@lists.denx.de>; Sun, 24 Mar 2024 10:54:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711302857; x=1711907657; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1711302890; x=1711907690; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7zu1LHGswR4FJ49JO8vEGF5f++K0HXmt/XOCKZ8cRFI=;
- b=b4P6woQ0ZUIkmsriq6XBeZl+blSs/59ughntJ81XIqzDF5kE9ikJTSmwVt7KFSKAZQ
- yLel6fSOhlSVBeDJwrr98UFq0IxQ2VrI2FeMCBqEoewQnRH18Q2CVRuGPn/L9TgpL9sE
- rcnzjNpESnPjbnRjXFixUDaHY6C7rlaKlaeHYR5cnI9NPGe7NnOeIH0VYQlubmIHWZ99
- Jh1amm7fO4gV21HhECj2Xzyh3zhmOazoiqTNRbBbBHk+X+SSS/fRzUFbn0LQzzx97PYy
- V8QY+znnrfluK05aKyHJyby/xY7lD/4xZHmGaqT+8QsWaybY+dPqXwLSZ/sYVnBSlJBo
- 4B8Q==
+ bh=AfNiQ0NP/AAkVzKYA0v2ezWQBBSB+kts1//QqJGqE9U=;
+ b=IcKWHv5zCgVWvL6YfxLmyifKwMg/MwFpgzqGqDWjWQNxDOPC2uew17oQ38a/S7BwQR
+ Hii+ms4QXgJ6HDiWTzEzgdF09cB0RDT48BYzDD4Q/P/kQ4TZR2FOI6PNoPA1ugkJF+zR
+ oucXPC6czaI8z9xKKthrVXmIZGtM0NE4oH0VJH134xcx4bYqBQvexj4A6UEn9r6oq4+9
+ M5wkHGrUCm33XWeOmg4hCG3HbbtCphvYAo9tAzLX2iJmE5ODbh2WOBYMo3IhjiXpna9C
+ KesNBClt0n/qSR6Fnp7KvDsCToV94EKw0WhWAy5U9l/ifycGGnQjoRszTA/AjgWzmxJB
+ vfiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711302857; x=1711907657;
+ d=1e100.net; s=20230601; t=1711302890; x=1711907690;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7zu1LHGswR4FJ49JO8vEGF5f++K0HXmt/XOCKZ8cRFI=;
- b=f53jfET0mq6ztI1ErRkVV9R7p0HGuhYYO7Pw3nmgIBih9akGQAvurngfc3AkqcIPnN
- ml4RGzLEdgZQmthqSKABv8/aFDFu3WpBlyBLLEY5izhnN9ptbPrH06DZCSMl3jPehyzS
- Sph+4hRtC5deEeE0nuRytB/IkNzjmgVS3Q1nvgKZ5Ot9abE4msVpE5PFCyxXrXkuMWIz
- 4oE5kMg6q6eEfPVH0SV4G1/iK2uArPeca2DgQ3PFzoer0+kgRDP6uFSlJqcYWvz4Jz0t
- pyP/Ij5wsOY85/5pMG/McVsdPX5hlFom06sb5IUS2iv9CC175RyQoBie2ns2qv3hbRM1
- Jd3w==
-X-Gm-Message-State: AOJu0Yx4cbd9mKCxIM+gTYKsIsbCde5mVNA6ole8tqISJtcPoEhpqk8e
- 5sAwY1p4FyGNbJzv9F0Us6NxCEewgujVgatBfhO26TgigHUSzQ6WHELuX80Vo3JfgXzgo3CU5Qy
- VXAteMgdf+EaQ2swnh+w8HLwjELE=
-X-Google-Smtp-Source: AGHT+IEprW8I+2Q4ms+fmctbaLuNz5FTU9Bz1Z5M7UjxJWcw+In/xn5zb8mHVEDecfUVlsJPBxdgyM8nKSZ1ix7JZUM=
-X-Received: by 2002:a05:6a21:a598:b0:1a3:a936:eb07 with SMTP id
- gd24-20020a056a21a59800b001a3a936eb07mr7385484pzc.2.1711302857377; Sun, 24
- Mar 2024 10:54:17 -0700 (PDT)
+ bh=AfNiQ0NP/AAkVzKYA0v2ezWQBBSB+kts1//QqJGqE9U=;
+ b=ZzpTdTvNbDcpSeyE4QwSSwIZPLGrjCEABGyxvZBgdXTVTzkCOS54ii4Cu4+ebXaG+L
+ b/Wz/Dpf+p2tUk5p4Pkqj9dA3VuziqezP2NS38wT2fV5zIePgF1lJfHnBjkTbZ49JMhG
+ N97V1PMlXOIy07BXsD7SQVStO2cHm5xFqJMn2+YDt6J01JWqZnQRtWG6EtnAtLSzNdhQ
+ Wnx0dczobJRc+WxZHeZD9L9Wy7GjJnpdygggTMFWz4Vf4UexUg5dqh6Fgr4diu//adxT
+ qNd1vOJXn7BN4LMKsE1orkQx1QLqaax/EYTjccnGDaewJ/LjkJuBjOICoRqG7+lZM5x8
+ A4Eg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUJ6YRfIY+A9HexCGc1lG8SfIJ0TAa2lY8DbndQUncCjuuTRj6PG3FSMO8FVtAqxCd4hh5FD0nIYpMr1SvAu54LB2kLaQ==
+X-Gm-Message-State: AOJu0YxzbmP+UFky+MPi6M4aac8sSBySpWH3SQySUvaRmaAqxTQVEFa9
+ I+vI0PIBV2rDW5AmlJ6zJLBI6A1tbB0K9P6/XRpvBxe+99U2GcOGAUfe6F/pOrATD+mKlHG+10e
+ 4bWn/KQ8N3CsZfRRTaVGqPxTS4Ko=
+X-Google-Smtp-Source: AGHT+IGEfZe1H9G0wvGVCy+ScDeXFtYBv/Uu1THqMO3l4mIYCg6tSECYfU/wCUoAFGXv6jDoxFJezedWIoyF6C/+GK4=
+X-Received: by 2002:a17:90a:bf07:b0:29b:961c:2df0 with SMTP id
+ c7-20020a17090abf0700b0029b961c2df0mr4303186pjs.3.1711302890726; Sun, 24 Mar
+ 2024 10:54:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240321145507.619448-1-sumit.garg@linaro.org>
- <CAOMZO5DjJRRRi8ujbMu0ypCwXWbymt_RTtdviUhNAcknQN3-Vw@mail.gmail.com>
-In-Reply-To: <CAOMZO5DjJRRRi8ujbMu0ypCwXWbymt_RTtdviUhNAcknQN3-Vw@mail.gmail.com>
+References: <20240321071953.14615-1-othacehe@gnu.org>
+In-Reply-To: <20240321071953.14615-1-othacehe@gnu.org>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 24 Mar 2024 14:54:05 -0300
-Message-ID: <CAOMZO5BnuH21=H+dkKeDOkYkq+y3v1jEFMMH1AN5X+jetVzh9g@mail.gmail.com>
-Subject: Re: [PATCH v4 00/11] imx8mp: Enable PCIe/NVMe support
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, tharvey@gateworks.com, 
- marcel.ziswiler@toradex.com, francesco@dolcini.it, lukma@denx.de, 
- seanga2@gmail.com, jh80.chung@samsung.com, sjg@chromium.org, festevam@denx.de, 
- andrejs.cainikovs@toradex.com, peng.fan@nxp.com, aford173@gmail.com, 
- marex@denx.de, ilias.apalodimas@linaro.org, sahaj.sarup@linaro.org, 
- fathi.boudra@linaro.org, remi.duraffort@linaro.org, 
- daniel.thompson@linaro.org, pbrobinson@gmail.com
+Date: Sun, 24 Mar 2024 14:54:39 -0300
+Message-ID: <CAOMZO5D9Rr2s8wOXkFROfDPTtNeUqQAUudYz4aTBgjjp4wH5og@mail.gmail.com>
+Subject: Re: [PATCH] imx: ele_ahab: Add ahab_commit command support
+To: Mathieu Othacehe <othacehe@gnu.org>
+Cc: Stefano Babic <sbabic@denx.de>,
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, Tom Rini <trini@konsulko.com>, 
+ Peng Fan <peng.fan@nxp.com>, Ye Li <ye.li@nxp.com>,
+ Clement Faure <clement.faure@nxp.com>, 
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -94,23 +93,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Mar 22, 2024 at 10:51=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
+On Thu, Mar 21, 2024 at 4:20=E2=80=AFAM Mathieu Othacehe <othacehe@gnu.org>=
  wrote:
 >
-> Hi Sumit,
+> This message is used to commit into the fuses any new SRK revocation and
+> FW version information that have been found into the NXP (ELE FW) and
+> OEM containers.
 >
-> On Thu, Mar 21, 2024 at 11:55=E2=80=AFAM Sumit Garg <sumit.garg@linaro.or=
-g> wrote:
->
-> > Changes in v4:
-> > - Incorporated misc comments from Marek and added his review tag.
-> > - Dropped patch #4 (imx8mp: power-domain: Don't power off pd_bus)
-> >   since power domain off path is never excercised for DT based devices.
-> > - Added patch#8 as suggested by Peter to describe older pcie_imx.c
-> >   driver as legacy one.
->
-> v4 looks good, thanks.
->
-> I'll wait a few days and will queue it to next.
+> Signed-off-by: Mathieu Othacehe <othacehe@gnu.org>
 
 Applied to u-boot-imx/next, thanks.
