@@ -4,74 +4,139 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4242C54E64
-	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 08:19:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C1DBC54E64
+	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 08:35:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DC8E87E74;
-	Mon, 25 Mar 2024 09:19:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id AD2F387D1E;
+	Mon, 25 Mar 2024 09:35:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=socionext.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="hzgT+lqu";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="lOqgNBCq";
+	dkim=pass (1024-bit key; unprotected) header.d=SocionextGlobal.onmicrosoft.com header.i=@SocionextGlobal.onmicrosoft.com header.b="ZyyIId89";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1F74E87E13; Mon, 25 Mar 2024 09:18:59 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8519787D1E; Mon, 25 Mar 2024 09:35:27 +0100 (CET)
+Received: from ps82.spcmail.jp (ps82.spcmail.jp [35.74.107.109])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9884B87DC7
- for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 09:18:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DB4C287D64
+ for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 09:35:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=fail (p=none dis=none) header.from=socionext.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4V35Rz2L1Gz9scN;
- Mon, 25 Mar 2024 09:18:55 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1711354735;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Wn+V2r/RThszGH7LNDrisHPRRkfHCSzPfbOOI+cqwig=;
- b=hzgT+lquPopgR1yypqtuEZpGnXfOk4l/V4oQBu8msoZOXj9dX+VI2KIq5gHdEyHe++4FCs
- i+Bw1vPUxlp32cBEHoDQmII/Ic8YYnn2jVAOqOSvSEalw2k1Nw2RU0fW6Y2iHm8odVUKXr
- /hE3YxzlPHbSVlLilHVOVkwQbDvd9akwessM00aE0AzsosnouUmPILt+QFwTELV7bhyThg
- yP9lvdJCkg0bHl40EhHLNr4lBvLRNskimw5xqTjbEhR3VxofpAE8OZ9qU5jou0gAEvZIHZ
- Ex79fMPgA6JlBTPtH26zqNwyuGnBOEM5hLmAp4qWhTci4pMoHqeNTj8j4eH8IA==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1711354733;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=Wn+V2r/RThszGH7LNDrisHPRRkfHCSzPfbOOI+cqwig=;
- b=lOqgNBCqseeLkjtNFJWoryfDdNoOt0jO9Bo17lIG3qIDDPNCxX0abEz88N0jsIIvQD8C3w
- mfj74De5QQd0CfJc6SNesrVDLWpkhRN8tEuvJ/cZS234tHl7UmS4FBaNWnckMkODrsRpdU
- eFinMkacGM5HPMfb9nHFKWQ3zgw0Uhat/ZE7PCfoXmGXXHSuZdp6oy156ofzJJ+UlImMTU
- K38K7qqG6mUYBP+heh8c+Mj/tJYtazhaoX1EJ7gcX9x73zgVN1ycISTyeKhi5ry3irUrkE
- Trb6Vwl+AMW0KiRfroncnv7DyxWiwGDr2+czmO6bC7DK/ARnIJskAoOnwklgng==
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Adam Ford <aford173@gmail.com>, Biju Das <biju.das.jz@bp.renesas.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Ralph Siemsen <ralph.siemsen@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] ARM: dts: renesas: Switch to using upstream DT
-Date: Mon, 25 Mar 2024 09:17:54 +0100
-Message-ID: <20240325081834.5519-1-marek.vasut+renesas@mailbox.org>
+ spf=pass smtp.mailfrom=kojima.masahisa@socionext.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ml9+I9PYr5RX1f+S+b8WyNTuqK+IoAim14DO+tSB0HXgejERFepgBKF8ryQwLUJMAwr3vuLEE/c4E0SsPp7UGFxZ6ZyzBfroAAYT9ZpkT5bRYvvI32s7ia1EHJ7Nr8TTvO53iTzRswnEwLJJ1LRUMuwT9ZAIp7Nc3i0abijzodmO87vqZLAW1FSDpOmCejCKLMwm8+ZwlE/K1gGPRZUzVB1hSE4pU9HsBPhf9coFQ9/E1T7ydvvHfdb1R3A1GK7Bu69GpNXWZ3GCvUeBn4i7eyX924XOefF9tZk6yjxvuiLyiOlDI40SqQLE8bfRs5TvLV7Vg/H19xcJh8OALd/YBw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cLDJ1vurUF7ts6c3XRiIrooRDo8d7NTxyqTDuiohB+4=;
+ b=X8eMhPteIWB+V6mKji4SBYAii768gQdS0RJCbOmZp/gDar/HYtHh2JT4wBXJmCgkTpQpy7xp5X0BCtyLpSt2RcYr6tNzvquXXF7tjtSgLZ+mu5TaNgQqTXLu95WUgePN8bOlINw0xI47vPoWyoXpMIjHK8z5u/kPRNUS+YdeivCBWoOjN+5ryGm6FSV+orbkVqtCEh45Bag4ih35G0iWDNsCaXnOXCoXqsTOqb5AHgy77OfORWGjA9UKt/ueUZ9TL01zYTDsJgCE1aSAJ84PfUqdfu0RYwLt3zD7u47ho15V8xdGuTgazRSLM/ZhZVo3WG4gkPOOVHRlDDEHZsjp+w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=socionext.com; dmarc=pass action=none
+ header.from=socionext.com; dkim=pass header.d=socionext.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=SocionextGlobal.onmicrosoft.com;
+ s=selector1-SocionextGlobal-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cLDJ1vurUF7ts6c3XRiIrooRDo8d7NTxyqTDuiohB+4=;
+ b=ZyyIId89+v+LK+sLMS5Ct4qxO8c5SDK59SUCxHuskthJ75gUwRvFPl4O8kVgF3ReAcVTa7Mbvqrs+FNnVLGZOI46mmenXgeQ3CUm1fJ4herzGxC4xRFXh1IBIpQK2d8MQeyS8/+JzyCkn1LilBWUaKJ7QaCnQkP1aZqKR9wQyZc=
+Received: from TYCPR01MB8375.jpnprd01.prod.outlook.com (2603:1096:400:151::10)
+ by TYCPR01MB10052.jpnprd01.prod.outlook.com (2603:1096:400:1e8::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.31; Mon, 25 Mar
+ 2024 08:35:08 +0000
+Received: from TYCPR01MB8375.jpnprd01.prod.outlook.com
+ ([fe80::35f7:2a4e:bfd4:b4f]) by TYCPR01MB8375.jpnprd01.prod.outlook.com
+ ([fe80::35f7:2a4e:bfd4:b4f%4]) with mapi id 15.20.7409.028; Mon, 25 Mar 2024
+ 08:35:08 +0000
+From: <kojima.masahisa@socionext.com>
+Subject: RE: [PATCH v3 00/20] FWU: Add support for FWU metadata version 2
+Thread-Topic: [PATCH v3 00/20] FWU: Add support for FWU metadata version 2
+Thread-Index: AQHafEfUDdctN6t5P0CVx81YWgIUE7FIJQYw
+Date: Mon, 25 Mar 2024 08:35:08 +0000
+Message-ID: <TYCPR01MB8375F9C9980212AF72D23F4CE3362@TYCPR01MB8375.jpnprd01.prod.outlook.com>
+References: <20240322105733.203888-1-sughosh.ganu@linaro.org>
+In-Reply-To: <20240322105733.203888-1-sughosh.ganu@linaro.org>
+Accept-Language: ja-JP, en-US
+Content-Language: ja-JP
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ccmail7: Relayed
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=socionext.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: TYCPR01MB8375:EE_|TYCPR01MB10052:EE_
+x-ms-office365-filtering-correlation-id: d1c97c17-a29a-4e46-5fa0-08dc4ca67a79
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: n6JCWBLSmMORzrBpjGRHp7cj/oGnFn5ZGoKIMs7ggDsrvik4rD0ZMiNpQNizGu4J6AcaseF3Kz81YlL1BdywqtZtZ5MBdIwh2eqoQ/XXITSGnpcs3xrApvKYlSlltt4sDx6/ZuhUStxeVCyU65MTwojxS7fKAGc/5RRxvsHbxNc1TjCoTLlgxwq4Ui86DL/u7p0OAn9RzbLtxSvtPN6+OVtHrAz5JMCm/Z1zA6mebJ3uXA7Yf2ggvImSvuIj4ywVpFx8LZ059R1J0BK01EYhOrSebYc1HDRt6RxDnT3wz/ydSQyoiHwgDzhswqFkwyoIERR2NiFmBsHNdsvq8wyyNTuZAlRd4d7aLL07mTLvo3M1wavP3qwuSKysM8jFO1+8repLB35QFiFuMhPQlxvHq4o7KR7TeOlO6xaL4su9lILYQ0T/W+2inLF5Roewu84FDn5Yfdgv0EClZl/R6sxB9zDEtSy8ZAo4Lq3JHsEbupuyZBlt5Z1N+0nsT465HVwqdqoXP3XhDrz/DgrrZk/rCw6STlgQ1V94AfzdQgCWoNcTS82ttmKNHUXB87enC4vrMbenkz0ha6wv0phq9iFMkgbp4Yv9x9lPi4CoWiXQz88X6AjnDdILbJovHbhgZ5w+aS8YT/gjwN38ga2gOGMszenLE2vX6+7snJh9BGxRHLB+sknPkcgv9EsU07inHRSC
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:ja; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:TYCPR01MB8375.jpnprd01.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376005)(1800799015)(366007)(1580799018)(38070700009); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?iso-2022-jp?B?anliRjMyb3pxQnl6ZXdwVnliemo4bEZGQVZTSFFhTUlwUDBIVk1NNW8w?=
+ =?iso-2022-jp?B?a1pSek1WL3F4QkVRRVNjK0VPNEIxTTFIekVNSk1TUDdDTDZJbzJndEs1?=
+ =?iso-2022-jp?B?K3hvaFMyYlBSaEFGbEJEV2tlMHdpWG9yQnYwdXpTQnVibVJZYlY2QlJT?=
+ =?iso-2022-jp?B?N1doZW1idHVCeWRDeldnUmdzY0hHYnRoY2dPa2Y3S0RoSnI5WFZIZXQ3?=
+ =?iso-2022-jp?B?elRhNUc3aHR2cWtDMkhZY1pvS01lM1piTlkzc0piRHl2SEVDVk9tZzZw?=
+ =?iso-2022-jp?B?NHdLc0EzYnlpK3hmRGVNOGVHU0hZdFQxcHRiaFl0M1A3YmlZVmYwQWFT?=
+ =?iso-2022-jp?B?cVQwRGVaRHNxYXdraFVGNnlkYW5Ncm5ZSjhLT3Ayb3VCWHRQRU5LTDE3?=
+ =?iso-2022-jp?B?YjM4TFBHOVZrOWVla20vV0JCa1p1R09HbE4zZSsrK3FRbVc0S3VxSXlh?=
+ =?iso-2022-jp?B?RUtlanZ4QXZ2cjU5alc5WW5rRnNyamtPSWZKQnhXVkMzZk9zTUJNaDhF?=
+ =?iso-2022-jp?B?aThOcXBHN0NabE80a2x4STlqdldJR2J0aGYxM3hyRDhVYU5Pa0tCSTUv?=
+ =?iso-2022-jp?B?S1ZaRFQ3Q0xiTUtrMmg2RHpsbFc3NTlQRjRGeDhvdUd5UTEvL0pSbmk2?=
+ =?iso-2022-jp?B?TTdodlVuN2JCb3liMjdPMzVOYWlWUFZPTHZUYzhHcUo3djdTZFRkWlFQ?=
+ =?iso-2022-jp?B?SUtTUGhYWmw1SnpzNmZQaVZjUHVnVTBCbVM4VlI4WWsyOVBtdHEzc0kr?=
+ =?iso-2022-jp?B?Uk9SOC8xcHFXYWNiMUxHTEs3VFN4cDdIUTVKclN6dm1jczVDdncvQUNt?=
+ =?iso-2022-jp?B?ZHRUK3pEYnQzQXNielNuUldDSzZTNjFSK1hvM3ZoTHVPWkxzMWRaZitq?=
+ =?iso-2022-jp?B?clZxaDg2OVZuS0ZzT0xNdVRwSFZKcmxaUVk2NWZidmlvN2N6cVoyWHFX?=
+ =?iso-2022-jp?B?ZU9EeVNvS1NsVCtGbllGR2FvdkgwM1A2ZWtEZ1lUc24wWGQ0eFRXejRv?=
+ =?iso-2022-jp?B?VFlteXBOc21hcUNZMExhYkd5bnZyU1hKOTZMTFV6azhQZG13TnJEQ3Q5?=
+ =?iso-2022-jp?B?OC94UGMwSWRGRFFybEc2M0FRTVVEUDNybHNXVnRubTk3TU1remZ3N2Zl?=
+ =?iso-2022-jp?B?aDNPQnZtWE9SRjQvZWxMWUFEcjBrMWdUcE9HS1lxVFhHUHB1U3JXZmdT?=
+ =?iso-2022-jp?B?czFudWsydzdCNXk4dmJPL2oxa1FmaCtMK2NSU1FhenZyVnR5eTk2V0Fu?=
+ =?iso-2022-jp?B?WFBYL0NxVHNIZ2taUEhJcTNXdHFLU2VsbEJ0ckdHVDIvUDY4ZXRNRCtC?=
+ =?iso-2022-jp?B?WUYyY2l4S3BXbkQzWTZwSEtKWmlEQWlnT3BnbDg0clZCODRWbDY2UXVw?=
+ =?iso-2022-jp?B?QXZZRTJZNW9FSklzcGhYalE2VUtFNVZiWk40Z0ZkYlZXVkNtVG0rZUlE?=
+ =?iso-2022-jp?B?ZkRNNFRoUTZURWVyRktBeEFLMVp4VE15L0V6Ynludld6UmQvcVYzSSt3?=
+ =?iso-2022-jp?B?Uy9pT1Bwa0pObmViSjV0NWQyVEs3OGlkKzFUV1lyLzFETWs3eElJK3Q2?=
+ =?iso-2022-jp?B?RTVHbWVJVUcvQ2U4MStESUhBTW1hejltdXlwbGZWRE5PbXBVVVIwUjBU?=
+ =?iso-2022-jp?B?QnJXYVJQNUpPMlQzbG9FSXN3U3FPK2o2L2UwR2F6WVJLaWxLK1hnNDA3?=
+ =?iso-2022-jp?B?Vkg1RHQyajFrQThZTlV6bTFBUEthM2ZTd21oclhsdFFGZjlCTFA0MHpv?=
+ =?iso-2022-jp?B?a0EydzhYT2ZkTjBUSlJES0RFS3VMVlN1VjFvNkJ1eU5QM3VyR0ZRKzhS?=
+ =?iso-2022-jp?B?WW5hQ2ppSkVXTmFrS3p5UE11Z3NrcW45bXJWV3J3QUdqZFRJdEVrY0h6?=
+ =?iso-2022-jp?B?N1R1VnZZS2JONWR1VThuWDd1b2QzZGRXSUpmNVFDZEdTUVJSQ2JQa09n?=
+ =?iso-2022-jp?B?LzlNbDN3TjdrU3d0dEh0cmdpM21WaTBQdUZYSmlkMHdEc2swNlpMUXVm?=
+ =?iso-2022-jp?B?M2s5MnVpSzZ0M1ZSejQ5NGJWdm1hNnQwdE84SG1YZUV5R0lBUkw1cEow?=
+ =?iso-2022-jp?B?dEYyVW42ZFo0akJsNnY0SUFpa0JYKzhXcUo1SDJZZmhibVgwT3YyWkpn?=
+ =?iso-2022-jp?B?dnpBcTVwK3FIT0R3a2MyemxIeFFHNnR3bkMrbEhVTFhmV3JkZmdRR05F?=
+ =?iso-2022-jp?B?aWpwRWpUb3daNEQ2YmpJVEVza3hTWDQ3N1JUbXg2aEl5ZG5iMFF5NlRx?=
+ =?iso-2022-jp?B?YXFpSWRKQ3FtWHBORFhqcUtGdXpCazVILzJ0M1hGR0EvT0R1YnAwUjhq?=
+ =?iso-2022-jp?B?ejFITExGWHZqRmhlRWdGMG1GNi9IWldOYkE9PQ==?=
+Content-Type: text/plain; charset="iso-2022-jp"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 2625ccd1cde7302cc33
-X-MBO-RS-META: x46t16r7gtxrwosm1x6gy6kgknfrnorj
-X-Rspamd-Queue-Id: 4V35Rz2L1Gz9scN
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: DuKTLVPhK5/oFTihRuBps0v0+eC9FksP9RcqAyBZAaUWP7iKPdfUP0rWfy7m7u420IkCLIBy+RdmfeTJDyQBL1XuC4r9WQUB23UzL2HkEpIXrwisYebGwFuz8wB1GmtfFJuqZ6+i+Khic1XFyClfgFD0xVKadxl86ELgxweTUtb8Dpf6KlPTyNnGkUzOUu5s1MJzBLejy55IxDoEklyYPqo1mkheVJksV/bf8yuhsuRKtwRe0qfTc2+0eaozcplGUU822v/BedYlriwjc0+2JdSb57CfRAhwoCmi7b/HVyUD+T4V8ru5F43sl0WYAxzaPvuJDzYCHkBf+wQiNaCqclrue1XWuDs6YLIhtLjRdoX15uY5MoX5TfkP9MLPGk2gmmWU52YcnFvzqEtNwykxqybxxLFfZTlMcVMLLVYhWpgcDBY6BJIcpxfZg7Trvb/+pvTtg/vsznIgHFFSDOs8m6GlfAi1fbAe23MfmNVbwGDdtm/N2zjvTOTtAonS7SXwi+yFJZodQcJOAe3EoXDYBEOyCM74gi6CRoBBe03aalPOQSkog/vziObhGXgV1xjlr79GncMWjiX/gBJ0ziH3GofdotQ3gir9NkGpSy/4m2UOTZX6t/zSblp7HnKRM5J8LgJmo7s4Q+NFJx6g0PkGbiIZrAlPxQQNWUUNSP7daUrGhw6hd6VkjRZEnEFxjgWaY+TuPFDds9POZgY/iPCDdtaj2dKKv52jrXnHs2tpOW5JO1QqNr5cPrmcqAl99qZx
+X-OriginatorOrg: socionext.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: TYCPR01MB8375.jpnprd01.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d1c97c17-a29a-4e46-5fa0-08dc4ca67a79
+X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Mar 2024 08:35:08.2571 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 33c08a51-ea9e-46de-8669-aff1f467d3fe
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 56aXjhxA5G9/kqUavNKWtShA3+NtJV3RJKeN0UIRjU1sQq4K1t9klL5wdcZbVqqUkL9wp/ODGQ6HG3bP1kq9GR3kQnKUfGofxUy0tlkEw10=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYCPR01MB10052
+X-CC-Mail-RelayStamp: CC/Mail Relayed
+X-CC-Mail-RelayStamp: CC/Mail EncServer Relayed
+To: <sughosh.ganu@linaro.org>, <u-boot@lists.denx.de>
+Cc: <xypron.glpk@gmx.de>, <ilias.apalodimas@linaro.org>,
+ <yann.gautier@st.com>, <etienne.carriere@foss.st.com>,
+ <patrick.delaunay@foss.st.com>, <michal.simek@amd.com>, <monstr@monstr.eu>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,181 +153,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable OF_UPSTREAM to use upstream DT and add renesas/ prefix to the
-DEFAULT_DEVICE_TREE and OF_LIST. And thereby directly build DTB from
-dts/upstream/src/ including *-u-boot.dtsi files from arch/$(ARCH)/dts/
-directory.
+Hi Sughosh,
 
-The configuration update has been done using the following script:
-```
-sed -i '/^CONFIG_DEFAULT_DEVICE_TREE/ s@="@&renesas/@' `git grep -li renesas configs`
-sed -i '/^CONFIG_OF_LIST/ s@r8a@renesas/&@g' `git grep -li renesas configs`
-```
+> -----Original Message-----
+> From: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Sent: Friday, March 22, 2024 7:57 PM
+> To: u-boot@lists.denx.de
+> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>; Ilias Apalodimas
+> <ilias.apalodimas@linaro.org>; Yann GAUTIER <yann.gautier@st.com>;
+> Etienne Carriere <etienne.carriere@foss.st.com>; Patrick DELAUNAY - foss
+> <patrick.delaunay@foss.st.com>; Michal Simek <michal.simek@amd.com>;
+> Kojima, Masahisa/=1B$B>.Eg=1B(B =1B$B2m5W=1B(B <kojima.masahisa@socionext=
+.com>; Michal
+> Simek <monstr@monstr.eu>
+> Subject: [PATCH v3 00/20] FWU: Add support for FWU metadata version 2
+>=20
+>=20
+>=20
+> The following patch series adds support for version 2 of the FWU
+> metadata. The version 2 metadata structure is defined in the latest
+> revision of the FWU specification [1].
+>=20
+> The earlier versions of these patches were migrating to a version 2
+> only support in U-Boot, similar to TF-A. However, based on feedback
+> from ST [2], this series has been updated to support both versions. A
+> platform would still be needed to enable one of the two versions of
+> metadata through a config symbol.
+>=20
+> TF-A has code which reads the FWU metadata and boots the platform from
+> the active partition. TF-A has decided to migrate the FWU code to a
+> version 2 only support. These changes have been merged in upstream
+> TF-A.
+>=20
+> These changes have been tested on the ST DK2 board, which uses the GPT
+> based partitioning scheme. Both V1 and V2 metadata versions have been
+> tested on the DK2 board.
+>=20
+> These changes need to be tested on platforms with MTD partitioned
+> storage devices.
+>=20
+> @Michal and @Kojima-san, please help in this testing.
 
-The RZN1 Snarc board does not seem to have a matching Linux kernel
-DT counterpart, this is currently not switched to OF upstream.
+I have tested this series on the Developerbox that implements the
+MTD-based metadata access, multi bank update works fine.
 
-Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
----
-Cc: Adam Ford <aford173@gmail.com>
-Cc: Biju Das <biju.das.jz@bp.renesas.com>
-Cc: Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Ralph Siemsen <ralph.siemsen@linaro.org>
-Cc: Sumit Garg <sumit.garg@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>
----
- arch/arm/Kconfig             | 1 +
- configs/alt_defconfig        | 2 +-
- configs/blanche_defconfig    | 2 +-
- configs/gose_defconfig       | 2 +-
- configs/grpeach_defconfig    | 2 +-
- configs/koelsch_defconfig    | 2 +-
- configs/lager_defconfig      | 2 +-
- configs/porter_defconfig     | 2 +-
- configs/rzn1_snarc_defconfig | 1 +
- configs/silk_defconfig       | 2 +-
- configs/stout_defconfig      | 2 +-
- 11 files changed, 11 insertions(+), 9 deletions(-)
+Thanks,
+Masahisa Kojima
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index a0842e19330..ab8f30f1142 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1068,6 +1068,7 @@ config ARCH_RENESAS
- 	imply BOARD_EARLY_INIT_F
- 	imply CMD_DM
- 	imply FAT_WRITE
-+	imply OF_UPSTREAM
- 	imply SYS_THUMB_BUILD
- 	imply ARCH_MISC_INIT if DISPLAY_CPUINFO
- 
-diff --git a/configs/alt_defconfig b/configs/alt_defconfig
-index 06e9e11f297..c9ca22cbe8f 100644
---- a/configs/alt_defconfig
-+++ b/configs/alt_defconfig
-@@ -16,7 +16,7 @@ CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0xC0000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="r8a7794-alt"
-+CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a7794-alt"
- CONFIG_SPL_TEXT_BASE=0xe6300000
- CONFIG_ARCH_RENESAS_BOARD_STRING="Alt"
- CONFIG_R8A7794=y
-diff --git a/configs/blanche_defconfig b/configs/blanche_defconfig
-index c392055e5a7..a2823a614a5 100644
---- a/configs/blanche_defconfig
-+++ b/configs/blanche_defconfig
-@@ -12,7 +12,7 @@ CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0x40000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="r8a7792-blanche"
-+CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a7792-blanche"
- CONFIG_ARCH_RENESAS_BOARD_STRING="Blanche"
- CONFIG_R8A7792=y
- CONFIG_TARGET_BLANCHE=y
-diff --git a/configs/gose_defconfig b/configs/gose_defconfig
-index 35edc677c48..0f76ae147ef 100644
---- a/configs/gose_defconfig
-+++ b/configs/gose_defconfig
-@@ -16,7 +16,7 @@ CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0xC0000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="r8a7793-gose"
-+CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a7793-gose"
- CONFIG_SPL_TEXT_BASE=0xe6300000
- CONFIG_ARCH_RENESAS_BOARD_STRING="Gose"
- CONFIG_R8A7793=y
-diff --git a/configs/grpeach_defconfig b/configs/grpeach_defconfig
-index 0c581b634a2..70a80088bfb 100644
---- a/configs/grpeach_defconfig
-+++ b/configs/grpeach_defconfig
-@@ -11,7 +11,7 @@ CONFIG_ENV_SIZE=0x10000
- CONFIG_ENV_OFFSET=0x80000
- CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="r7s72100-gr-peach"
-+CONFIG_DEFAULT_DEVICE_TREE="renesas/r7s72100-gr-peach"
- CONFIG_RZA1=y
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_MONITOR_LEN=524288
-diff --git a/configs/koelsch_defconfig b/configs/koelsch_defconfig
-index ad411b45141..a912e58cf4d 100644
---- a/configs/koelsch_defconfig
-+++ b/configs/koelsch_defconfig
-@@ -16,7 +16,7 @@ CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0xC0000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="r8a7791-koelsch"
-+CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a7791-koelsch"
- CONFIG_SPL_TEXT_BASE=0xe6300000
- CONFIG_ARCH_RENESAS_BOARD_STRING="Koelsch"
- CONFIG_R8A7791=y
-diff --git a/configs/lager_defconfig b/configs/lager_defconfig
-index f60d4db5ec2..03f29b8849b 100644
---- a/configs/lager_defconfig
-+++ b/configs/lager_defconfig
-@@ -16,7 +16,7 @@ CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0xC0000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="r8a7790-lager"
-+CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a7790-lager"
- CONFIG_SPL_TEXT_BASE=0xe6300000
- CONFIG_ARCH_RENESAS_BOARD_STRING="Lager"
- CONFIG_R8A7790=y
-diff --git a/configs/porter_defconfig b/configs/porter_defconfig
-index f05a0baf215..170ca3a5f43 100644
---- a/configs/porter_defconfig
-+++ b/configs/porter_defconfig
-@@ -16,7 +16,7 @@ CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0xC0000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="r8a7791-porter"
-+CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a7791-porter"
- CONFIG_SPL_TEXT_BASE=0xe6300000
- CONFIG_ARCH_RENESAS_BOARD_STRING="Porter"
- CONFIG_R8A7791=y
-diff --git a/configs/rzn1_snarc_defconfig b/configs/rzn1_snarc_defconfig
-index 29a96d1aefe..1c313d2d4da 100644
---- a/configs/rzn1_snarc_defconfig
-+++ b/configs/rzn1_snarc_defconfig
-@@ -21,3 +21,4 @@ CONFIG_CADENCE_DDR_CTRL=y
- CONFIG_SYS_NS16550=y
- CONFIG_SYS_NS16550_MEM32=y
- # CONFIG_EFI_LOADER is not set
-+# CONFIG_OF_UPSTREAM is not set
-diff --git a/configs/silk_defconfig b/configs/silk_defconfig
-index 40ac8759d08..2e4fab8ac54 100644
---- a/configs/silk_defconfig
-+++ b/configs/silk_defconfig
-@@ -16,7 +16,7 @@ CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0xC0000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="r8a7794-silk"
-+CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a7794-silk"
- CONFIG_SPL_TEXT_BASE=0xe6300000
- CONFIG_ARCH_RENESAS_BOARD_STRING="Silk"
- CONFIG_R8A7794=y
-diff --git a/configs/stout_defconfig b/configs/stout_defconfig
-index 428a0241986..ee87ea53d6e 100644
---- a/configs/stout_defconfig
-+++ b/configs/stout_defconfig
-@@ -16,7 +16,7 @@ CONFIG_ENV_SIZE=0x40000
- CONFIG_ENV_OFFSET=0xC0000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="r8a7790-stout"
-+CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a7790-stout"
- CONFIG_SPL_TEXT_BASE=0xe6300000
- CONFIG_ARCH_RENESAS_BOARD_STRING="Stout"
- CONFIG_R8A7790=y
--- 
-2.43.0
+>=20
+> Note: The CI is breaking on some sandbox py tests, but the errors look
+> unrelated. I will look into those issues, but the code review can
+> proceed.
+>=20
+> [1] - https://developer.arm.com/documentation/den0118/latest/
+> [2] - https://lists.denx.de/pipermail/u-boot/2024-February/546277.html
+>=20
+> Changes since V2:
+> * New patch which retains support for V1 of metadata
+> * Earlier patch was catering to v2 only support. These changes support
+>   both versions of metadata.
+> * Earlier patch was migrating to v2 only support. These changes
+>   support both versions.
+> * Support both metadata versions instead of only v2.
+> * Added documentation changes.
+> * Make changes to have the test work with v1 metadata.
+> * Make changes to have the test work with updated logic in fwu code.
+> * Changes to indicate support for both v1 and v2 instead of only v2.
+> * Add config symbol for selecting either of the two metadata versions.
+>=20
+>=20
+> Sughosh Ganu (20):
+>   configs: fwu: remove FWU configs for metadata V2 support
+>   tools: mkfwumdata: fix the size parameter to the fwrite call
+>   drivers: fwu: add the size parameter to the metadata access API's
+>   drivers: fwu: mtd: allocate buffer for image info dynamically
+>   fwu: metadata: add support for version 2 of the structure
+>   fwu: metadata: add a version agnostic structure
+>   fwu: metadata: add functions for handling version specific metadata
+>     fields
+>   fwu: make changes to access version agnostic structure fields
+>   capsule: fwu: transition the platform state on a successful update
+>   fwu: add config symbols for enabling FWU metadata versions
+>   fwu: mtd: remove unused argument from function call
+>   fwu: mtd: get MTD partition specific info from driver
+>   fwu: mtd: obtain image information from version agnostic structure
+>   cmd: fwu: make changes for supporting FWU metadata version 2
+>   tools: mkfwumdata: add support for metadata version 2
+>   tools: mkfwumdata: add logic to append vendor data to the FWU metadata
+>   test: fwu: make changes to the FWU metadata access test
+>   doc: fwu: make changes to reflect support for FWU metadata v2
+>   MAINTAINERS: add entry for FWU multi bank update feature
+>   configs: fwu: re-enable FWU configs
+>=20
+>  MAINTAINERS                              |   8 +
+>  cmd/fwu_mdata.c                          |  39 ++--
+>  configs/corstone1000_defconfig           |   1 +
+>  configs/sandbox64_defconfig              |   1 +
+>  configs/synquacer_developerbox_defconfig |   2 +-
+>  doc/board/socionext/developerbox.rst     |   7 +-
+>  doc/develop/uefi/fwu_updates.rst         |  20 +-
+>  doc/mkfwumdata.1                         |  16 +-
+>  drivers/fwu-mdata/fwu-mdata-uclass.c     |  10 +-
+>  drivers/fwu-mdata/gpt_blk.c              |  23 +-
+>  drivers/fwu-mdata/raw_mtd.c              |  78 ++++---
+>  include/fwu.h                            | 147 ++++++++++++-
+>  include/fwu_mdata.h                      |  71 ++++++-
+>  lib/efi_loader/efi_capsule.c             |  14 +-
+>  lib/fwu_updates/Kconfig                  |  14 ++
+>  lib/fwu_updates/Makefile                 |   2 +
+>  lib/fwu_updates/fwu.c                    | 204 ++++++++++++------
+>  lib/fwu_updates/fwu_mtd.c                |  34 +--
+>  lib/fwu_updates/fwu_v1.c                 | 167 +++++++++++++++
+>  lib/fwu_updates/fwu_v2.c                 | 260
+> +++++++++++++++++++++++
+>  test/dm/fwu_mdata.c                      |  16 +-
+>  tools/mkfwumdata.c                       | 235
+> ++++++++++++++++----
+>  22 files changed, 1153 insertions(+), 216 deletions(-)
+>  create mode 100644 lib/fwu_updates/fwu_v1.c
+>  create mode 100644 lib/fwu_updates/fwu_v2.c
+>=20
+> --
+> 2.34.1
+>=20
+
+
+
 
