@@ -4,145 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1852CC54E64
-	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 11:15:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72E52C54E58
+	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 11:47:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4179687E86;
-	Mon, 25 Mar 2024 12:15:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=amperemail.onmicrosoft.com
+	by phobos.denx.de (Postfix) with ESMTP id 8EA1A87842;
+	Mon, 25 Mar 2024 12:47:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=amperemail.onmicrosoft.com header.i=@amperemail.onmicrosoft.com header.b="ZrOcexrx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YDj28YPe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD53287DB3; Mon, 25 Mar 2024 11:18:48 +0100 (CET)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::700])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0288587D07; Mon, 25 Mar 2024 12:47:15 +0100 (CET)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C79D687842
- for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 11:18:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=amperemail.onmicrosoft.com
+ by phobos.denx.de (Postfix) with ESMTPS id CFBCA870AB
+ for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 12:47:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chanh@os.amperecomputing.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=L8u4h0cQk4AJAg9bD3bhp0pzLplAp6GJdQZKMB5fcZM3skwFDmEaY54rwu59m7cKrvQ3EAzUMvdpineYBCnU0Xm+qHLFaHKBL4Ou4R9leahVpogf4AMorEZrfa7n3R+KoUCFTNbmGXNPaHoAzu/ML35/MmQvLP9KxMUQfCpWLpJ2ItvugjUbC4OCdsbJye2kalZ+VvEUCj8C9/4qwr9sXDnfk1CNgC7st3e0M+uyM+FsJNkrg7a1aaHH/vX3uR/fuW3XI43UXKHZLs44YloMSVwh+Mr2xMjeThf8wksg31fzBhmsxylHxmYaL6ZLJyP0YVf/2jm6ECcxsH/jv41NRA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZJRO/w5AKnMAzTyB+Oc9aHl7C+tNjOIlKHm3brRnHWQ=;
- b=nNZPGGiG6KVRrQAkrVgdv3m/oBK/NVWlXlQg8MBD/XVi5OHVzo36zVY8kEPGyf5wBM0MvhvsLVYldSS6hnI+QjxpjpP9OkPE3ZSLp0pIwmHxktg4jkw+yUysg3SE39cWJN/dayCH4IrklT8kL+gFEf4Qwpf7j5fKjZBcwl753CjJvtadCed0dnThPEM5WtHMeKLqK8ImZ6pMMcDn2hG0nLYRE0567Djb+c73BVER6/0gnq/Jpz+Z2j7K8M5SirTAVKluxnXCSBm71XOGMmlQW2liLOMPcI+czXTQRIfJLRcK9nwjoBtDdppWSoQabbGSM35psDgGP4tAAoee6oiwIQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=os.amperecomputing.com; dmarc=pass action=none
- header.from=amperemail.onmicrosoft.com; dkim=pass
- header.d=amperemail.onmicrosoft.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-51381021af1so6528948e87.0
+ for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 04:47:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amperemail.onmicrosoft.com; s=selector1-amperemail-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZJRO/w5AKnMAzTyB+Oc9aHl7C+tNjOIlKHm3brRnHWQ=;
- b=ZrOcexrxiY1xROrGq5GC0R8Df2kI1/dkuCp3Xu+nfyvVZpPQlXrObFhjSBMvVZ6tc971WP/6BFJx5qmUFIMHSyGZ0J2PvMQXyLnmRp3Bd1FUVhVUemmKl6KeOHw+cnf9s38Lde08hB7gRMzKJUyjyhfQf8ORgj9T/dow0fbjH0A=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amperemail.onmicrosoft.com;
-Received: from DM6PR01MB5947.prod.exchangelabs.com (2603:10b6:5:1dd::12) by
- SJ0PR01MB7238.prod.exchangelabs.com (2603:10b6:a03:3f7::22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7409.31; Mon, 25 Mar 2024 10:18:41 +0000
-Received: from DM6PR01MB5947.prod.exchangelabs.com
- ([fe80::b557:13cd:8a29:ae08]) by DM6PR01MB5947.prod.exchangelabs.com
- ([fe80::b557:13cd:8a29:ae08%4]) with mapi id 15.20.7409.028; Mon, 25 Mar 2024
- 10:18:40 +0000
-Message-ID: <642c4474-1b14-4095-b080-e467dc0230ba@amperemail.onmicrosoft.com>
-Date: Mon, 25 Mar 2024 17:18:25 +0700
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH u-boot v2019.04-aspeed-openbmc] ARM: dts: aspeed: Add
- Ampere's BMC platform (AST2600)
-Content-Language: en-US
-To: Andrew Jeffery <andrew@codeconstruct.com.au>,
- Chanh Nguyen <chanh@os.amperecomputing.com>, u-boot@lists.denx.de,
- Albert Aribaud <albert.u.boot@aribaud.net>, Joel Stanley <joel@jms.id.au>,
- Zev Weiss <zev@bewilderbeest.net>, Andrew Jeffery <andrew@aj.id.au>,
- =?UTF-8?Q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>,
- Jae Hyun Yoo <quic_jaehyoo@quicinc.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Dylan Hung <dylan_hung@aspeedtech.com>,
- Graeme Gregory <quic_ggregory@quicinc.com>,
- Eddie James <eajames@linux.ibm.com>,
- OpenBMC Maillist <openbmc@lists.ozlabs.org>,
- Open Source Submission <patches@amperecomputing.com>
-Cc: Thang Nguyen <thang@os.amperecomputing.com>,
- Phong Vo <phong@os.amperecomputing.com>,
- Quan Nguyen <quan@os.amperecomputing.com>
-References: <20240319072137.16695-1-chanh@os.amperecomputing.com>
- <2a55a4544f3c1c9b31ecf5232a8d8409a87a6f2a.camel@codeconstruct.com.au>
-From: Chanh Nguyen <chanh@amperemail.onmicrosoft.com>
-In-Reply-To: <2a55a4544f3c1c9b31ecf5232a8d8409a87a6f2a.camel@codeconstruct.com.au>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BN7PR06CA0056.namprd06.prod.outlook.com
- (2603:10b6:408:34::33) To DM6PR01MB5947.prod.exchangelabs.com
- (2603:10b6:5:1dd::12)
+ d=gmail.com; s=20230601; t=1711367231; x=1711972031; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=RoO29KxGYL3uFdyVGcFgnGDAmzBX8/76X7l5Rkmeuws=;
+ b=YDj28YPeeHY9ASSa0uwETXnR28/H61CRMJJD6JHaJ/KBWo08J4u2IpUw5XqW3Xj8Lt
+ oik2S4XWXZAmtFMcJ0PFT+QW7EGfAojKZ/9L3K7J5W5a7whm807iwaOdoVwoZtCI6xQx
+ ON4OD9bizqk5EMwP+dFchh8KEMuWXevhkiHib4tsmUOyDS77HOVJFVRVtZIdik9UfCAr
+ UTnjMivEmeet66VMViWprNtL/300NHw7h7/VIS2hfXAK2f/A7Xgec6QMJOjH28FpsAZP
+ 2cmvBSN6KIyip0dnqZEpm75blsEsRHBqexUtOkmjU5NaTDjkCGeFoMrfLbdUnW/UBP5F
+ MKQg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711367231; x=1711972031;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RoO29KxGYL3uFdyVGcFgnGDAmzBX8/76X7l5Rkmeuws=;
+ b=MkSqXbdrcvS2K7I3ZEn8GHol1It/elxQK0k77b3cduHNzunSqMsVYU8ZnFxEfMu/s+
+ 7sTCfnQXA1lyNnmW0n1mbh4X2R+FdJGWvt0KXG9dmc+CkWXY9BPBgtl6fdn6cb6w55OG
+ KAKL4h6dQn9xY6ciG0hfMUXKW/NWCJUfmsvWw97gePvew+urb4tgVLHNQg2FYi791Ep7
+ tfyJFUslbRE9UYZUd2ofBK1BVfoINvoQV+u7ttb9P5+3q4tOimdYKd6XX4d7EiHoejII
+ iMc7TlGt8C400StA/2zEcuTjpcUWYpRKsoiWzlCkv/+86SkZGp6d3AfYUQttC3coDbQB
+ casA==
+X-Gm-Message-State: AOJu0YwP2LV6+QrQqtXp0Ci3UgeL89oeAR5+9i+mH6SYVq40FHB6EgGO
+ NlenWjgZiHXfopYxaI+f/qBfjG/O4d0hA9e6OwPoNgUiExyTqAcWt5UiShyxxyk=
+X-Google-Smtp-Source: AGHT+IFRaAVMMR8fUo5fgMchEsWIAc/oneYD3jzEmGVxESBTop+pxOHDhatYbl60SYMGI6ARV7lCuA==
+X-Received: by 2002:ac2:551b:0:b0:513:bf8a:bd2e with SMTP id
+ j27-20020ac2551b000000b00513bf8abd2emr5580095lfk.17.1711367230909; 
+ Mon, 25 Mar 2024 04:47:10 -0700 (PDT)
+Received: from localhost.localdomain ([2001:b07:aac:705d:da6e:975d:104b:c525])
+ by smtp.gmail.com with ESMTPSA id
+ jy10-20020a170907762a00b00a461e10094asm2988864ejc.95.2024.03.25.04.47.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Mar 2024 04:47:10 -0700 (PDT)
+From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+To: u-boot@lists.denx.de, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
+ Gaurav Jain <gaurav.jain@nxp.com>, Fabio Estevam <festevam@gmail.com>,
+ Breno Matheus Lima <breno.lima@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Subject: [PATCH v1 0/3] crypto/fsl: allow accessing Job Ring from non-TrustZone
+Date: Mon, 25 Mar 2024 12:46:39 +0100
+Message-Id: <20240325114642.3664840-1-ghidoliemanuele@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM6PR01MB5947:EE_|SJ0PR01MB7238:EE_
-X-MS-Office365-Filtering-Correlation-Id: e97ac55d-8755-4efc-2b9e-08dc4cb4f132
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 5fvNCpiTnFsDrc+b3uxhu+S/LnvGP7+FdN+O5kh/fHKq+OrmvoEF0iJmTdhJBaneTcg/VpJMbfrf8yd7snI2126omZmWbVIcGwcuVece2bbB1qOud8O6EmMBAcQla9SK4H96ZdPA7vK6YvWuL4Dhh4yIllWZKQ1Tl9DbNv4j9dM+iFCpP4BD7whCmPtPxgvRO0yw7L53yr1wk2YT1xHWU6BUOZdSkCDPV/fhfB8V+XaL0l4XKq+mU9ZOA2UoMQWhgmatqZp3vOKzdT2oxg0OoUukFxlG6n+XRt9kku3GdNhHLaO0BNNQZpVphrkxCvaYPR7SfbdkXu2Z/TW5fObpKaJMF0KA3+dinbMzH2VV23OLg3XI4loNMjGAiCuugyERhtQeAKjRB1VyTrXAtkWRwnitw+G53TqV2sX47xxPDX5JSqPaTsm9zTXcHd2bbUCDcDGxDEmLIOEYvWLehoGBhKqUWStHnFglvDJ/f/Ygcn0Ih2FS4IDQNzmpFl4GoZEGlV9PuxhjPLX14RfGvFQoScDDichMefE06YXaZPN/6WBu9QbU26HcOc+vrzzFqhJD7PaUDuzXFempz7XRMXBMFcpUQoLa7q3vS8fasQNAJsORayRHvWNE7gKKfpAY6A+Cao9bu1n0yNhCOOYWCPSgn0v9M9u/obgncZzgUve8gVto0A6+ZKBusGUgcRyDJ7cqgSO57D4nkBgUvKc7yqNAtw==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DM6PR01MB5947.prod.exchangelabs.com; PTR:; CAT:NONE;
- SFS:(13230031)(7416005)(1800799015)(376005)(366007)(921011); DIR:OUT; SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?aXprZTVoR0RpYXlKM1FtdEtpWVBkM3hIUlBNcndlRTZqYVVoUUFZQ3RwVFhZ?=
- =?utf-8?B?dEtMWjhZOUdCMEdVdGp4aXZqM3RCa1BOdjVYQStDTFZJWlRSQUFneGN0T2Qz?=
- =?utf-8?B?ZDlid1ZhakRza3pyQ2E2VWxwSU84MHFPc1F3aXdsUUxneVJsNXZKVEU0aFZV?=
- =?utf-8?B?WTRSbjUxTy9aVk5BbFZGanRIMWl6WnJGTE9jemlqTm15Q2JBdGp2OTljRVYw?=
- =?utf-8?B?NTVQWHR1Q1RtN2JLVUdzRTNCVUpqTitiMkVXNVNiVUZFQ2NIanJ5V1hmdkJ3?=
- =?utf-8?B?VXZIK2Z2NjdKV0JqUUg4L203NFpJbW5nMU9JeVFaTkwzY1Q4L2tPaW91MTZ6?=
- =?utf-8?B?MGtidU9PVHBEVnJOQ0JzY21VSXk3TEVCL0ltM1pHNS9qRk9menJsTmRQR2Y5?=
- =?utf-8?B?a1NGbWtQK3hYbUx2UzBZQ3Bwd3VyaXp1V3hOOFZBMzluRkdjMllJYWJKYjFs?=
- =?utf-8?B?U0NrMzExYzBOaWwzaCs4bzJwd1VTcmtueWVwT1c3R1hveE9DaytZRVNnNlBM?=
- =?utf-8?B?aXRlS1RkQS9ESldaQ1VsUlBMUFFnMkxDbGV2L1VENkg2S2QvMmNSYWRIMTcv?=
- =?utf-8?B?dlJQOU50OTMyTWpZMVZDT29hSjY2VkJPaXc0SEdwODNnM0NYRWZkVExvQnZB?=
- =?utf-8?B?TTlHVmxHN1EzQjNNT3pZZDlpVHQrT1FvcUk1SnUwMmwyNnd0eExUQzViSVBT?=
- =?utf-8?B?cGNFaFk3T3ZpMlRJWk44RW1QbmNrM0VHMFhUcXdKTGVGUWNzdzMzRHoydjA1?=
- =?utf-8?B?NmtEdUxzRlpaN3l2MzgxTGY1RWNMU1o5M1JPcnFuUUNhalRiSGVjODUrZHpC?=
- =?utf-8?B?US9kYWxOL3BZYlRGVC8wQlFLZ0lMdkFuK0o3Ujd4Yi9ucE1KakFvQ1g2dGpx?=
- =?utf-8?B?R1BSc3g1d1loZnBCQnFFVW01WUl3TWxNVU9abVJVNnBLeFhJVWhqNzhHeW5o?=
- =?utf-8?B?b2ZIYU1vMW03TDRaV3FXMEVBRzB1cEd0Yk54L295ODI3SjNDcXYyU2I2YjhL?=
- =?utf-8?B?dkdnQzYzNG92enFzclF2R2E1SEVnVEpYRjhkNDc3dlhwSnFDenQzc0xkUSt5?=
- =?utf-8?B?eW9YemdCRk5EM1dER3p6RXREV1pUMnViYUo4ODhZeU9yMkJ5bU9oSERoTTVN?=
- =?utf-8?B?cndBMjJObzBmNGRuejZUazlESlp0VmdXd3Q0RDBveGN4Tlc3UklkdWp5RFpU?=
- =?utf-8?B?M1RLdUNDL2lUamFiZXdUV0U4TWZzVWVyR2t3MkpJMTk2cmQ1SUJEZTRJWU9r?=
- =?utf-8?B?RE9JdTV4M2RKZTlWeGdZNzJvdkw4VEVwNUR4WnRCanpmalBPL0tJeHNSa055?=
- =?utf-8?B?cnQyWVAydUF4S2k4M3FBak0rQzY1b1g1R3hRVjF4UEttVDRaRmg5eHd2MjNw?=
- =?utf-8?B?NFRXUWNYWEhrQ24vRy9sTWp0K2c1VWJDdkkvcDZFdU5aREtsWWg5YmIyK0xi?=
- =?utf-8?B?NVdQN3h5M2J4MEVwL0NaU0E5U0hxQXpDSEV3eDJvU1pwQ01wUGhXcXFObWdW?=
- =?utf-8?B?MjJic0RRYTVVZk5PV3lxQ1Nla1FoU1NNN0U2NVFUVkxtcXMvWFdBemhMV2Y2?=
- =?utf-8?B?TnkvUEhjU05wYXh4dE5nSFZrQzlTaFNIaEdrVnNlcGZ0K3p2VWN1L2RsMkpO?=
- =?utf-8?B?Mm01NW5HMU5NNWdkLzRWWm5zSjZNdldFWFU2bklhWGpsYktQT3pJS1ZlaGFp?=
- =?utf-8?B?Q3V0SDNJNGZmSHo0V2Fuc0NDWnI3aHN3RmJoZUVOTE4rUDhaQks4ZzJYN25D?=
- =?utf-8?B?RkJEeTFQY0FzMlJSR2puTllHT1FHM0lyYjFrQkQveUpia3U0V0JvbFZPNmFL?=
- =?utf-8?B?VXlTa3JVdU5HaTdoVDEzd1BmVFBYNE1aRytpazMzbndxb2FPWkRMVll5K0cv?=
- =?utf-8?B?cU43WTF2dGZhejV5a3hrSTJDa1RldDFybkFDOERETzNoaXh1eS9wcTNtY3Nr?=
- =?utf-8?B?N054bjdJdVBDQVBlTmhYTi9aZnFhcm50TmJDSm9WSStqc3hIRkIrNnB4NVo4?=
- =?utf-8?B?aFFoWDJGTVpaUGpCR3lvTmQrRUNSeHNUNGlqbm03cnBaWmZVTnNha0FCL1VP?=
- =?utf-8?B?TW9vS3ZyYnRZTFkvbjBXUDJXQitUTk9wZzRpenJtOHZUcU9lNllkdlZVdExI?=
- =?utf-8?B?NS91OWtnSDVNV2pPcGtRVHpKTE9zL1pBU3M4eW5vN1ZDSzRtWVpoS1BLbnNr?=
- =?utf-8?Q?hA9cRD9ShYDuEl0QrUwLrTs=3D?=
-X-OriginatorOrg: amperemail.onmicrosoft.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e97ac55d-8755-4efc-2b9e-08dc4cb4f132
-X-MS-Exchange-CrossTenant-AuthSource: DM6PR01MB5947.prod.exchangelabs.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2024 10:18:40.8120 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3bc2b170-fd94-476d-b0ce-4229bdc904a7
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: CWBYEdeOykND0souNYfvfM4px3D05jer9KxYYZbf6UsAfq331WX6Qj0YkBFBTKlep2LprxFH+fVS59ATJjgJ9Jp0g+9opQhcndwCwroPSW4X/Vjx4mB09/OtuxgWNYmi
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR01MB7238
-X-Mailman-Approved-At: Mon, 25 Mar 2024 12:15:06 +0100
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -159,50 +91,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
+This series allows using Freescale CAAM Job Ring from Linux without having OP-TEE,
+this is needed for example on Toradex Colibri iMX7 where we just have U-Boot + Linux kernel.
 
-On 25/03/2024 12:32, Andrew Jeffery wrote:
-> Hi Chanh,
-> 
-> On Tue, 2024-03-19 at 14:21 +0700, Chanh Nguyen wrote:
->> Add the initial version of the device tree for the Ampere BMC
->> platform, which is equipped with the Aspeed AST2600 BMC SoC.
->>
->> Signed-off-by: Chanh Nguyen <chanh@os.amperecomputing.com>
->> ---
->>   arch/arm/dts/Makefile           |   1 +
->>   arch/arm/dts/ast2600-ampere.dts | 113 ++++++++++++++++++++++++++++++++
->>   2 files changed, 114 insertions(+)
->>   create mode 100644 arch/arm/dts/ast2600-ampere.dts
->>
->> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
->> index 37675a3277..3642d59c89 100755
->> --- a/arch/arm/dts/Makefile
->> +++ b/arch/arm/dts/Makefile
->> @@ -691,6 +691,7 @@ dtb-$(CONFIG_ARCH_ASPEED) += \
->>   	ast2600-greatlakes.dtb \
->>   	ast2600-intel.dtb \
->>   	ast2600-ncsi.dtb \
->> +	ast2600-ampere.dtb \
->>   	ast2600-p10bmc.dtb \
->>   	ast2600-pfr.dtb \
->>   	ast2600-qcom-dc-scm-v1.dtb \
-> 
-> Given this hunk and the tags in the `[PATCH]` prefix of the mail
-> subject you've based this change on OpenBMC's fork of u-boot, which is
-> heavily (out of date, and) inspired by Aspeed's SDK tree. I've applied
-> this to OpenBMC's fork for now.
-> 
+To achieve this add a new config option to allow the non-secure world to access job rings.
 
-Thank Andrew! I saw my patch on the OpenBMC's fork.
+The functionality has been broken since U-Boot v2019.07, with commit 51f1357f3428
+("Revert "drivers/crypto/fsl: assign job-rings to non-TrustZone"")
 
-> However, you've sent this to the upstream list. You will need to rework
-> your patch on top of mainline u-boot if you want it accepted there, and
-> follow all the usual documentation on how to submit patches to the u-
-> boot project (e.g. you should not be including `u-boot v2019.04-aspeed-
-> openbmc` in the patch subject prefix in upstream submissions).
-> 
-> Andrew
+Link: https://lore.kernel.org/all/4b64a9de-a840-4065-a530-f81155b4b9f2@toradex.com/
 
-Sorry all! It is my mistake. I just want to send this to OpenBMC's fork, 
-but I used the upstream mail list.
+Regards,
+Emanuele Ghidoli
+
+Emanuele Ghidoli (3):
+  crypto/fsl: allow accessing Job Ring from non-TrustZone
+  configs: colibri-imx7: set non-secure boot mode as default
+  configs: colibri-imx7: allow accessing job-rings from non-TrustZone
+
+ configs/colibri_imx7_defconfig      |  1 +
+ configs/colibri_imx7_emmc_defconfig |  2 +-
+ drivers/crypto/fsl/Kconfig          |  7 +++++++
+ drivers/crypto/fsl/jr.c             | 19 +++++++++++++++++++
+ drivers/crypto/fsl/jr.h             |  2 ++
+ 5 files changed, 30 insertions(+), 1 deletion(-)
+
+-- 
+2.34.1
+
