@@ -4,107 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 646B4C54E58
-	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 09:50:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DB69C54E58
+	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 10:20:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDBCB878ED;
-	Mon, 25 Mar 2024 10:50:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id CC94287D1E;
+	Mon, 25 Mar 2024 11:20:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="EdJ+v/59";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="k0lnpRYB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57D8687C9E; Mon, 25 Mar 2024 10:50:28 +0100 (CET)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20604.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::604])
+ id 4626987DB3; Mon, 25 Mar 2024 11:20:41 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 915F287837
- for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 10:50:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D803487842
+ for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 11:20:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=EDIpd8bUswoMNPXfg7bNdXEDULQKcVUqUXbAuKzB1IwK0gL259Sw5kcJt/ynhszGF6DfBosLInZ5s0jK658h/CDJ2jpG+mQx6Z/k9FbUNn5vQwQNkcSeUYHY69wz6ZCEomhJj6mhaqP+HxRy8Fc7go+nn+zebJx6b6wHYXbez2oXgIjmNjERi6dos+/BGzi2aNkwZ5/hv/vIdPMh3euFZEDQmqfQZpmPNKCLDjgGstgKWMBJEpmtvhZ5NoCvKlVqrM9byMg0T0cXLu/1DzNcQG8I/yCoi9h73eCdqc/SzY/dj6pCHgcWtKSWc7kDXbaUbGRYeNHXMCdXC8r+4wyJpg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=MBigM1wsxMzx2GnGnSzIy2yONuQ443tWZ048LXir5iI=;
- b=aB0pwwiM4jjZtqfqDgn+pCAwWxWIyUw6r9yRWgyPZPTsVXOoZTJg+IIlc5FtLgv+2GC8Ham44XZmIsNFJKbJMU/xS2hWw1+t9pIxGk7dTmTgx0RmgKSoX0ADxgbEwjiOf7Dn0OcMZkRMnZjWOAeBz9VUywn2K0zZoU/Sy/R7Itod8VwF0UalKdSnRAY+6dfGa5GE3uhn+PzNtvuiSwkA5azT7LM1aTq8B1aBrCVNCeTKlvE1GG4TV4+911KBcGfwVX+eGXcmBuFE8a1gj4P1MKZycxSE2CqJXKwO5E8ZVPgqLoqEu3WD5UY8KzF+X5lIPexay9CCK3zINGdNBoLftQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=MBigM1wsxMzx2GnGnSzIy2yONuQ443tWZ048LXir5iI=;
- b=EdJ+v/596yNMmizitb8ywN0717tVLMdzgViaMjIZusNBlCXYR7s1GQpz0i0oHxhftZ0+W46VwbdIYSRmK8L2KGn9n/fA+yxpdlSRFIlbI1ljvtHTm2xuxUs3HL6UpzUvITDzjduciZI1jpQttA2ZNr4CmARhF98IGNH5svj3g6w=
-Received: from SJ0PR03CA0077.namprd03.prod.outlook.com (2603:10b6:a03:331::22)
- by SJ2PR12MB8848.namprd12.prod.outlook.com (2603:10b6:a03:537::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.31; Mon, 25 Mar
- 2024 09:50:23 +0000
-Received: from SJ1PEPF00001CE6.namprd03.prod.outlook.com
- (2603:10b6:a03:331:cafe::e4) by SJ0PR03CA0077.outlook.office365.com
- (2603:10b6:a03:331::22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.13 via Frontend
- Transport; Mon, 25 Mar 2024 09:50:23 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SJ1PEPF00001CE6.mail.protection.outlook.com (10.167.242.22) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7409.10 via Frontend Transport; Mon, 25 Mar 2024 09:50:22 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 25 Mar
- 2024 04:50:21 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 25 Mar
- 2024 04:50:21 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
- Transport; Mon, 25 Mar 2024 04:50:20 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@amd.com>
-Subject: [PATCH] arm64: dts: zynqmp: make hw-ecc as the default ecc mode
-Date: Mon, 25 Mar 2024 15:20:13 +0530
-Message-ID: <20240325095013.29497-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42PAKUiZ083752;
+ Mon, 25 Mar 2024 05:20:30 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1711362030;
+ bh=AtZoRjtdmXO5M1+TMEYJcK97UZPvti102JQSeUiaM64=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=k0lnpRYBe0BRrBeUM8aQl6wyxwk+D6Y3bd04fy+d5hNa0c1lPNlRQVVIHuSbAsRkp
+ QYNEB1226f85aSbrkK9S6/bvfrkGt6m5kn1s7HsOGuW6earKymxhb6WbcTl7/f2gM9
+ Dy+whC5VDNP00ItfulbTfV03vBEhCfbustZdNJCs=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42PAKUJB066927
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 25 Mar 2024 05:20:30 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 25
+ Mar 2024 05:20:30 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 25 Mar 2024 05:20:30 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42PAKPIi118806;
+ Mon, 25 Mar 2024 05:20:25 -0500
+Message-ID: <ad97dffa-08d5-4327-b28e-bfc460aa5dad@ti.com>
+Date: Mon, 25 Mar 2024 15:50:24 +0530
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00001CE6:EE_|SJ2PR12MB8848:EE_
-X-MS-Office365-Filtering-Correlation-Id: bec9b08e-3a8c-4c7e-244c-08dc4cb0fd59
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 4LbwUCq2j8GdbfVzVnX/wrVEysNY5GAYi9uB0N5EtR4iFw8FkMMpUhFcwZBt299/fzkXu6nsq3H/uKAjNN8CsH7fOhOsv9naBQbJEW59FsULBJxnQLZ+LjjfBv+H5NZYWVsHrroOK9roDWFLc1Na60+OHS+slWZzAZncAiKAFdX0OFSTMjZci+QC7lbvA3+89mtwOuwmZiFkSVXn613UpeSq2T+GBUUT2R+sAZKRwEpS7qaGgaaBgzfpFE/BpF4GbcSMiExiUgQq/ZyGvXOaBbZIEpBEjmJjmy8EYtRBGpjReTe4OUQZ8uctRFvae5mVJ/QJWIo4fm6ARWT3BK4zeIn7VkxvOQQ4/lgCt8omMthTpIoQ3yb2V48TUlJ1GgOR5ZxrMfXjVAlHSawXRnGyixNTokEECSHlANuCZ2xYQuq9ihipbC8ij+Z/AeLm4cMLtAMiB2BHbyRZMDKL2X2LUare1FOJMJlQEmjjQx7AiH9x/J9Xdt2QLP4C7uOX0OiayO1q0u3cgRymxf8ygLW+3s+lCyLJ7vEfjMkV2pxIXuaYl+DYyNo+HSyuRUk0EIiTjM4XXHCHysTmJGm1VgqLK6XoCew+X+6L1cxjgGh05M66JCclnDBaTwJ6aH6nfXkCeSYIegY1FJP6GrdaWJClrWqqqlfbrdJoYmcTxoxh2lqDhmMczi1Bxy3L342N+/N3PsrYd2PW1yEuQrBqmT9qy+6YJqiUQnj6RGA6WKH6UcdtgocHgj7hjj41ra3ZlsEH
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(36860700004)(376005)(82310400014)(1800799015); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Mar 2024 09:50:22.6794 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: bec9b08e-3a8c-4c7e-244c-08dc4cb0fd59
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00001CE6.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8848
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/4] arm: dts: k3-*-binman.dtsi: Clean up and templatize
+ boot binaries
+Content-Language: en-US
+To: Manorit Chawdhry <m-chawdhry@ti.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
+ <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
+ <sumit.garg@linaro.org>, <michal.simek@amd.com>, <marex@denx.de>,
+ <neil.armstrong@linaro.org>, <afd@ti.com>, <vigneshr@ti.com>,
+ <kamlesh@ti.com>, <u-kumar1@ti.com>
+References: <20240322131011.1029620-1-n-francis@ti.com>
+ <20240322131011.1029620-4-n-francis@ti.com>
+ <20240325092028.cjbtsdu4t7eo67dp@uda0497581>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240325092028.cjbtsdu4t7eo67dp@uda0497581>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,58 +87,300 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Except for Linux no other component (i.e., u-boot, fsbl
-or BootRom) of the software stack supports software ecc
-engine. So, make hw-ecc as the default ecc mode.
-Update the same for mini u-boot nand configuration as well.
+Hi Manorit
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- arch/arm/dts/zynqmp-mini-nand.dts        | 6 ++++++
- arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts | 6 ++----
- 2 files changed, 8 insertions(+), 4 deletions(-)
+On 25/03/24 14:50, Manorit Chawdhry wrote:
+> Hi Neha,
+> 
+> On 18:40-20240322, Neha Malcom Francis wrote:
+>> Clean up templatized boot binaries for all K3 boards. This includes
+>> modifying the k3-binman.dtsi to use SPL_BOARD_DTB, BOARD_DESCRIPTION and
+>> UBOOT_BOARD_DESCRIPTION from the files that include it to further reuse
+>> code.
+>>
+>> All k3-<soc>-binman.dtsi will contain only templates. Only required boot
+>> binaries can be built from the templates in the boards' respective
+>> -u-boot.dtsi file (or k3-<board>-binman.dtsi if it exists). This allows
+>> clear distinction between the SoC common stuff vs. what is additionally
+>> needed to boot up a specific board.
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>>   arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  | 161 +---------
+>>   arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 291 +----------------
+>>   arch/arm/dts/k3-am625-r5-beagleplay.dts       |  39 ---
+>>   arch/arm/dts/k3-am625-sk-binman.dtsi          | 148 +--------
+>>   arch/arm/dts/k3-am625-sk-u-boot.dtsi          |  42 +++
+>>   .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 296 +-----------------
+>>   arch/arm/dts/k3-am62a-sk-binman.dtsi          | 146 +--------
+>>   arch/arm/dts/k3-am62a7-sk-u-boot.dtsi         |  42 +++
+>>   arch/arm/dts/k3-am642-evm-u-boot.dtsi         |  42 +++
+>>   arch/arm/dts/k3-am642-sk-u-boot.dtsi          |  42 +++
+>>   arch/arm/dts/k3-am64x-binman.dtsi             | 239 +-------------
+>>   arch/arm/dts/k3-am654-base-board-u-boot.dtsi  |  49 +++
+>>   arch/arm/dts/k3-am65x-binman.dtsi             | 144 +--------
+>>   .../arm/dts/k3-am68-sk-base-board-u-boot.dtsi |  26 ++
+>>   arch/arm/dts/k3-am69-sk-u-boot.dtsi           |  31 +-
+>>   arch/arm/dts/k3-binman.dtsi                   |  96 ++++++
+>>   arch/arm/dts/k3-j7200-binman.dtsi             | 145 +--------
+>>   .../k3-j7200-common-proc-board-u-boot.dtsi    |  40 +++
+>>   .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   | 154 +--------
+>>   arch/arm/dts/k3-j721e-binman.dtsi             | 262 +++-------------
+>>   .../k3-j721e-common-proc-board-u-boot.dtsi    |  84 +++++
+>>   arch/arm/dts/k3-j721e-r5-beagleboneai64.dts   |  91 +-----
+>>   arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |  84 +++++
+>>   arch/arm/dts/k3-j721s2-binman.dtsi            | 231 +-------------
+>>   .../k3-j721s2-common-proc-board-u-boot.dtsi   |  42 +++
+>>   arch/arm/dts/k3-j784s4-binman.dtsi            | 154 +--------
+>>   arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        |  42 +++
+>>   27 files changed, 858 insertions(+), 2305 deletions(-)
+>>
+> 
+> [ snip ]
+> 
+>> diff --git a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+>> index ed50bfeb031..14fc8468c56 100644
+>> --- a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+>> +++ b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+>> @@ -6,309 +6,48 @@
+>>    * Author: Wadim Egorov <w.egorov@phytec.de>
+>>    */
+>>   
+>> -#include "k3-binman.dtsi"
+>> +#define SPL_BOARD_DTB "spl/dts/k3-am625-phyboard-lyra-rdk.dtb"
+>> +#define BOARD_DESCRIPTION "k3-am625-phyboard-lyra-rdk"
+>> +#define UBOOT_BOARD_DESCRIPTION "U-Boot for phyCORE-AM62x"
+>> +
+>> +#include "k3-am625-sk-binman.dtsi"
+>>   
+>>   #ifdef CONFIG_TARGET_PHYCORE_AM62X_R5
+>>   &binman {
+>>   	tiboot3-am62x-hs-phycore-som.bin {
+>>   		filename = "tiboot3-am62x-hs-phycore-som.bin";
+>> -		ti-secure-rom {
+>> -			content = <&u_boot_spl>, <&ti_fs_enc>, <&combined_tifs_cfg>,
+>> -				<&combined_dm_cfg>, <&sysfw_inner_cert>;
+>> -			combined;
+>> -			dm-data;
+>> -			sysfw-inner-cert;
+>> -			keyfile = "custMpk.pem";
+>> -			sw-rev = <1>;
+>> -			content-sbl = <&u_boot_spl>;
+>> -			content-sysfw = <&ti_fs_enc>;
+>> -			content-sysfw-data = <&combined_tifs_cfg>;
+>> -			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+>> -			content-dm-data = <&combined_dm_cfg>;
+> 
+> I was looking between SoCs that we have and all this data seems common
+> to me on first glance, like there is only some delta in tiboot3
+> templates as well and maybe we can minimise those as well if am not
+> missing anything.
+> 
+> in k3-binman.dtsi:
+> 
+> tiboot3_combined_gp: template-x {
+> 	section {
+> 		ti-secure-rom {
+> 			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
+> 				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
+> 			combined;
+> 			dm-data;
+> 			content-sbl = <&u_boot_spl_unsigned>;
+> 			content-sysfw = <&ti_fs_gp>;
+> 			content-sysfw-data = <&combined_tifs_cfg_gp>;
+> 			content-dm-data = <&combined_dm_cfg_gp>;
+> 			sw-rev = <1>;
+> 			keyfile = "ti-degenerate-key.pem";
+> 		};
+> 		u_boot_spl_unsigned: u-boot-spl {
+> 			no-expanded;
+> 		};
+> 		ti_fs_gp: ti-fs-gp.bin {
+> 			type = "blob-ext";
+> 			optional;
+> 		};
+> 		combined_tifs_cfg_gp: combined-tifs-cfg-gp.bin {
+> 			filename = "combined-tifs-cfg.bin";
+> 			type = "blob-ext";
+> 		};
+> 		combined_dm_cfg_gp: combined-dm-cfg-gp.bin {
+> 			filename = "combined-dm-cfg.bin";
+> 			type = "blob-ext";
+> 		};
+> 	};
+> };
+> 
+> in k3-j721s2-binman.dtsi:
+> 
+> tiboot3_j721s2_gp_evm {
+> 	insert-template = <&tiboot3_combined_gp>;
+> 	filename = "tiboot3-j721s2-gp-evm.bin";
+> 	section {
+> 		ti-secure-rom {
+> 			load = <0x41c00000>;
+> 			load-sysfw = <0x40000>;
+> 			load-sysfw-data = <0x67000>;
+> 			load-dm-data = <0x41c80000>;
+> 		}
+> 		ti_fs_gp {
+> 			filename = "ti-sysfw/ti-fs-firmware-j721s2-gp.bin";
+> 		}
+> 	}
+> };
+> 
+> in k3-j784s4-binman.dtsi:
+> 
+> tiboot3_j784s4_gp_evm {
+> 	insert-template = <&tiboot3_combined_gp>;
+> 	filename = "tiboot3-j784s4-gp-evm.bin";
+> 	section {
+> 		ti-secure-rom {
+> 			load = <0x41c00000>;
+> 			load-sysfw = <0x40000>;
+> 			load-sysfw-data = <0x66800>;
+> 			load-dm-data = <0x41c80000>;
+> 		}
+> 		ti_fs_gp {
+> 			filename = "ti-sysfw/ti-fs-firmware-j784s4-gp.bin";
+> 		}
+> 	}
+> 
+> }
+> 
+> Similar re-use can be done for other GP devices as well based on
+> this template and similar can be extended for other variants HS-FS,
+> HS-SE and other SR variants. This might end up a bit complicated as well
+> as we do have a lot of combinations of combined boot and other boot
+> variants that we have so let me know if you don't find improvement with
+> this but I feel this might help in more readability and understanding
+> for the initial bootloader template designs as well.
+> 
+> Regards,
+> Manorit
 
-diff --git a/arch/arm/dts/zynqmp-mini-nand.dts b/arch/arm/dts/zynqmp-mini-nand.dts
-index e0517cf460..5889d436ed 100644
---- a/arch/arm/dts/zynqmp-mini-nand.dts
-+++ b/arch/arm/dts/zynqmp-mini-nand.dts
-@@ -50,6 +50,12 @@
- 			#size-cells = <1>;
- 			arasan,has-mdma;
- 			num-cs = <2>;
-+			nand@0 {
-+				reg = <0>;
-+				#address-cells = <2>;
-+				#size-cells = <1>;
-+				nand-ecc-mode = "hw";
-+			};
- 		};
- 	};
- };
-diff --git a/arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts b/arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts
-index b97f7ee8d4..48ab619472 100644
---- a/arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts
-+++ b/arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts
-@@ -136,8 +136,7 @@
- 		reg = <0x0>;
- 		#address-cells = <0x2>;
- 		#size-cells = <0x1>;
--		nand-ecc-mode = "soft";
--		nand-ecc-algo = "bch";
-+		nand-ecc-mode = "hw";
- 		nand-rb = <0>;
- 		label = "main-storage-0";
- 		nand-ecc-step-size = <1024>;
-@@ -173,8 +172,7 @@
- 		reg = <0x1>;
- 		#address-cells = <0x2>;
- 		#size-cells = <0x1>;
--		nand-ecc-mode = "soft";
--		nand-ecc-algo = "bch";
-+		nand-ecc-mode = "hw";
- 		nand-rb = <0>;
- 		label = "main-storage-1";
- 		nand-ecc-step-size = <1024>;
+Yes I think we can pull these changes into k3-binman.dtsi as well, will reduce 
+code duplication a great deal. Thanks!
+
+> 
+>> -			load = <0x43c00000>;
+>> -			load-sysfw = <0x40000>;
+>> -			load-sysfw-data = <0x67000>;
+>> -			load-dm-data = <0x43c3a800>;
+> 
+> 
+>> -		};
+>> -		u_boot_spl: u-boot-spl {
+>> -			no-expanded;
+>> -		};
+>> -		ti_fs_enc: ti-fs-enc.bin {
+>> -			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-enc.bin";
+>> -			type = "blob-ext";
+>> -			optional;
+>> -		};
+>> -		combined_tifs_cfg: combined-tifs-cfg.bin {
+>> -			filename = "combined-tifs-cfg.bin";
+>> -			type = "blob-ext";
+>> -		};
+>> -		sysfw_inner_cert: sysfw-inner-cert {
+>> -			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-cert.bin";
+>> -			type = "blob-ext";
+>> -			optional;
+>> -		};
+>> -		combined_dm_cfg: combined-dm-cfg.bin {
+>> -			filename = "combined-dm-cfg.bin";
+>> -			type = "blob-ext";
+>> -		};
+>> +		insert-template = <&tiboot3_am62x_hs>;
+>>   	};
+>> -};
+>>   
+>> -&binman {
+>>   	tiboot3-am62x-hs-fs-phycore-som.bin {
+>>   		filename = "tiboot3-am62x-hs-fs-phycore-som.bin";
+>> -		symlink = "tiboot3.bin";
+>> -		ti-secure-rom {
+>> -			content = <&u_boot_spl_fs>, <&ti_fs_enc_fs>, <&combined_tifs_cfg_fs>,
+>> -				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
+>> -			combined;
+>> -			dm-data;
+>> -			sysfw-inner-cert;
+>> -			keyfile = "custMpk.pem";
+>> -			sw-rev = <1>;
+>> -			content-sbl = <&u_boot_spl_fs>;
+>> -			content-sysfw = <&ti_fs_enc_fs>;
+>> -			content-sysfw-data = <&combined_tifs_cfg_fs>;
+>> -			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+>> -			content-dm-data = <&combined_dm_cfg_fs>;
+>> -			load = <0x43c00000>;
+>> -			load-sysfw = <0x40000>;
+>> -			load-sysfw-data = <0x67000>;
+>> -			load-dm-data = <0x43c3a800>;
+>> -		};
+>> -		u_boot_spl_fs: u-boot-spl {
+>> -			no-expanded;
+>> -		};
+>> -		ti_fs_enc_fs: ti-fs-enc.bin {
+>> -			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-fs-enc.bin";
+>> -			type = "blob-ext";
+>> -			optional;
+>> -		};
+>> -		combined_tifs_cfg_fs: combined-tifs-cfg.bin {
+>> -			filename = "combined-tifs-cfg.bin";
+>> -			type = "blob-ext";
+>> -		};
+>> -		sysfw_inner_cert_fs: sysfw-inner-cert {
+>> -			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-fs-cert.bin";
+>> -			type = "blob-ext";
+>> -			optional;
+>> -		};
+>> -		combined_dm_cfg_fs: combined-dm-cfg.bin {
+>> -			filename = "combined-dm-cfg.bin";
+>> -			type = "blob-ext";
+>> -		};
+>> +		insert-template = <&tiboot3_am62x_hs_fs>;
+>>   	};
+>> -};
+>>   
+>> -&binman {
+>>   	tiboot3-am62x-gp-phycore-som.bin {
+>>   		filename = "tiboot3-am62x-gp-phycore-som.bin";
+>> -		ti-secure-rom {
+>> -			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
+>> -				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
+>> -			combined;
+>> -			dm-data;
+>> -			content-sbl = <&u_boot_spl_unsigned>;
+>> -			load = <0x43c00000>;
+>> -			content-sysfw = <&ti_fs_gp>;
+>> -			load-sysfw = <0x40000>;
+>> -			content-sysfw-data = <&combined_tifs_cfg_gp>;
+>> -			load-sysfw-data = <0x67000>;
+>> -			content-dm-data = <&combined_dm_cfg_gp>;
+>> -			load-dm-data = <0x43c3a800>;
+>> -			sw-rev = <1>;
+>> -			keyfile = "ti-degenerate-key.pem";
+>> -		};
+>> -		u_boot_spl_unsigned: u-boot-spl {
+>> -			no-expanded;
+>> -		};
+>> -		ti_fs_gp: ti-fs-gp.bin {
+>> -			filename = "ti-sysfw/ti-fs-firmware-am62x-gp.bin";
+>> -			type = "blob-ext";
+>> -			optional;
+>> -		};
+>> -		combined_tifs_cfg_gp: combined-tifs-cfg-gp.bin {
+>> -			filename = "combined-tifs-cfg.bin";
+>> -			type = "blob-ext";
+>> -		};
+>> -		combined_dm_cfg_gp: combined-dm-cfg-gp.bin {
+>> -			filename = "combined-dm-cfg.bin";
+>> -			type = "blob-ext";
+>> -		};
+>> +		insert-template = <&tiboot3_am62x_gp>;
+>>   	};
+>>   };
+>>   #endif /* CONFIG_TARGET_PHYCORE_AM62X_R5 */
+
 -- 
-2.17.1
-
+Thanking You
+Neha Malcom Francis
