@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EF46C54E58
-	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 13:52:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CBD5C54E58
+	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 13:52:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5441A87EE3;
-	Mon, 25 Mar 2024 14:51:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D0FC187EED;
+	Mon, 25 Mar 2024 14:52:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FlbfGH1k";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T3j7TuVA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6F6F8718A; Mon, 25 Mar 2024 14:51:47 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id AF3AB87EED; Mon, 25 Mar 2024 14:52:52 +0100 (CET)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB28487EF6
- for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 14:51:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C00EB87EAF
+ for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 14:52:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-690b8788b12so30833906d6.2
- for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 06:51:43 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-5a47a3786dbso1248668eaf.0
+ for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 06:52:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711374702; x=1711979502; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=pdqewitPjkQnwUMvABUV58bfo0FHWqi/mm/IVHh+ZjQ=;
- b=FlbfGH1kPkI9XKZlwkDzOJNPJ6YcAHWQ6Gwq1rk7JzmeGE8w6j2vAAGDHLcEcGEQsJ
- mvmjsQFdGvxSx1qjqGmqYYViOprusxvI6bG6z/j6ZD2sU34QEyGCBEjwlOy4ZUX8Xed+
- HgAreyqfyXNyuK9WtJbjm0EGTsTDyC0z1a7WE=
+ d=gmail.com; s=20230601; t=1711374766; x=1711979566; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=AGoNuN2pajNr9rGY4++Z3WP7lMtaSF9Dd3wKj63EO8o=;
+ b=T3j7TuVAxp54Lss+xEqSR71ClZ/lC3CZhIe2/GvJ4J+SEIb6OY2tjZEfUjZLaXwt2F
+ hgd7zSDcT6OV15+KtmAqIszCyLHYxyH7S6sKRkiQVynEabXmU+/4pCEb42j9ZwdssPF2
+ MBG/li6yVu0jpK6gns4DWyy1mwwLCeo6ZuuNZy9g/dGVhOgRwPQrbiKBAbo9huJIbcKn
+ fEM9mibldeg8c6ElkI65dZoeCPgMqje8hDbtG2N24ZAyo0ymdkcWSkhxCmmjiiJ6rOOa
+ 39XldNuMDmMtP64GY6yTtBbQMYgVZ5jdyzlMtjM1K4Goj+Gxq4AwzMIWdcOFLLAaEcMv
+ n9+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711374702; x=1711979502;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pdqewitPjkQnwUMvABUV58bfo0FHWqi/mm/IVHh+ZjQ=;
- b=vJDeQCb7tdruwrct8TS6bNVDclpmYIq2LutYjggkHrEgvHtXBIPtZau31D5IhgzXq5
- PYWl//IhtQHZEPA0KfWty+z63ndpsJpBB/Jif8toLnekDlkcjaT/A+DdtkQ0lmgUuNI/
- 85JtoPt+kN67qoyKX4ts3SSCt7rTBBPD8opkwnub9WMJlo1CVZEMkpuKIlsy73Be4nZX
- ZtEJQ27XLnhLfqE9Tdb5VRsqsna+3h0UC2lR6AYDvxhXKX9Fg9ewr0kkRo2ZH1n3YP/s
- 3uRvRUu0Rbn6Ml5mcrIsyMBdd/RQ41PfcOTOwjpcfhX3RnuLaGP9+aGBFszVKBIL7NZr
- bLhA==
+ d=1e100.net; s=20230601; t=1711374766; x=1711979566;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=AGoNuN2pajNr9rGY4++Z3WP7lMtaSF9Dd3wKj63EO8o=;
+ b=KbzStq/KaHRv9g+J0XHor/eMKTFEZUIm+DmN9rIG6kGoBlU5Pz0HtqBXVoXdHArgBv
+ TEGev8DvlGuQxqusUlM/wNvFdVcKfihPA3Dx4IU9R66rREQZPBgVH0yiQgwzMMi+2s22
+ I4z9CsRg6GZQ6CRi4FNnkl1GN9xKS9bMxL6wXR90lCb6599QJr5lziSl4zwO6ARUcRMd
+ VmNQj9rs+X8I5tkXeJ5P42+4r/z1xHSkSDl2KdX2C5grF3mNRucKYoCg9+AhezN9lD+j
+ o0rmWQ4yw7ICtStVkMhA5rsPxnvdlc0uqiElTuJ1QMePgpzFu4ICzoODgdfrWoy2lc3x
+ zCAw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVLiQvmAPbLURdH4f7nCNbs7rQ4rbpHEyG4T54gO4ySVerWkHi44SkK+CUfk7LPnQ+W5YJgoEpoIf0bAp+WkqIRwsRrZQ==
-X-Gm-Message-State: AOJu0YzBFblUjboWJamfVHSnrHrI1a4CvTbSFJsvz8j67sg16m8Mxf84
- p9CVM1t8C0FyJhqKGeQgQpIUZhiNfAWlzo5Axr5YDKvvEvOIn+qzv8r9BQfwCvA=
-X-Google-Smtp-Source: AGHT+IFYoQhE/hr3z/iQPdAOG5TahMIqBQK/oYP8eyQqMD7lmOAyAMhWsMUiWOX2ZXD5m0Qa1mIKsg==
-X-Received: by 2002:a05:6214:1308:b0:691:e21:736c with SMTP id
- pn8-20020a056214130800b006910e21736cmr9252973qvb.30.1711374702646; 
- Mon, 25 Mar 2024 06:51:42 -0700 (PDT)
-Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
+ AJvYcCWf5lWbRFtK3E4LVXtt40BQ5fhoElFnw0u8PLfRijXUs+Iv6yrzWUufuIhm0wlcTLIsjLEymU8r2qVxhqxSUW/OvC91rg==
+X-Gm-Message-State: AOJu0YyKKiexhKsgfiUFxjKx9PLKeggeK1k8NjQpMgJGPZlajtH5JgZw
+ uBaUPBdYKNnY6sJh0/n+euMrvNsY/SPlsJvXFbU8hlLhSJIsXi9g
+X-Google-Smtp-Source: AGHT+IFIO35H42d3LKCNU6E8qKChsYpnWNTsNcerir1hZbec1onhm+kh4RSASLP7NbdZnJNQi+nAcg==
+X-Received: by 2002:a05:6359:45a8:b0:17e:bc8b:fbb5 with SMTP id
+ no40-20020a05635945a800b0017ebc8bfbb5mr6441882rwb.3.1711374766330; 
+ Mon, 25 Mar 2024 06:52:46 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:97a:fe72:ef3c:22d1])
  by smtp.gmail.com with ESMTPSA id
- 15-20020ad45b8f000000b00690b21ff926sm4103245qvp.137.2024.03.25.06.51.41
+ 15-20020a63000f000000b005dc26144d96sm5888788pga.75.2024.03.25.06.52.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Mar 2024 06:51:42 -0700 (PDT)
-Date: Mon, 25 Mar 2024 09:51:40 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de
-Subject: Re: [GIT PULL] Please pull u-boot-amlogic-fixes-20240325
-Message-ID: <20240325135140.GD3442575@bill-the-cat>
-References: <b3c9af94-9b6e-4dd8-b5f7-7a59a3520e24@linaro.org>
+ Mon, 25 Mar 2024 06:52:45 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: martyn.welch@collabora.com
+Cc: parthitce@gmail.com, marex@denx.de, u-boot@lists.denx.de, y.moog@phytec.de,
+ w.egorov@phytec.de, Fabio Estevam <festevam@gmail.com>
+Subject: [PATCH] phycore_pcl063: Drop leading zero from USB vendor number
+Date: Mon, 25 Mar 2024 10:52:30 -0300
+Message-Id: <20240325135230.1777213-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="uX84QOHXoFWwOYT6"
-Content-Disposition: inline
-In-Reply-To: <b3c9af94-9b6e-4dd8-b5f7-7a59a3520e24@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,59 +91,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+CONFIG_USB_GADGET_VENDOR_NUM is a 16-bit number, so remove
+the leading zero.
 
---uX84QOHXoFWwOYT6
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reported-by: Marek Vasut <marex@denx.de>
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+ configs/phycore_pcl063_defconfig     | 2 +-
+ configs/phycore_pcl063_ull_defconfig | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-On Mon, Mar 25, 2024 at 10:45:43AM +0100, Neil Armstrong wrote:
+diff --git a/configs/phycore_pcl063_defconfig b/configs/phycore_pcl063_defconfig
+index 6b00df1cffb3..017054a8e12b 100644
+--- a/configs/phycore_pcl063_defconfig
++++ b/configs/phycore_pcl063_defconfig
+@@ -63,7 +63,7 @@ CONFIG_USB=y
+ CONFIG_SPL_USB_HOST=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_MANUFACTURER="Phytec"
+-CONFIG_USB_GADGET_VENDOR_NUM=0x01b67
++CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x4fff
+ CONFIG_CI_UDC=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
+diff --git a/configs/phycore_pcl063_ull_defconfig b/configs/phycore_pcl063_ull_defconfig
+index 6195fcfb73df..b3da43a5bf1e 100644
+--- a/configs/phycore_pcl063_ull_defconfig
++++ b/configs/phycore_pcl063_ull_defconfig
+@@ -54,7 +54,7 @@ CONFIG_USB=y
+ CONFIG_SPL_USB_HOST=y
+ CONFIG_USB_GADGET=y
+ CONFIG_USB_GADGET_MANUFACTURER="Phytec"
+-CONFIG_USB_GADGET_VENDOR_NUM=0x01b67
++CONFIG_USB_GADGET_VENDOR_NUM=0x1b67
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x4fff
+ CONFIG_CI_UDC=y
+ CONFIG_USB_GADGET_DOWNLOAD=y
+-- 
+2.34.1
 
-> Hi Tom,
->=20
-> Please pull this set of last minute fixes
->=20
-> Thanks,
-> Neil
->=20
-> The following changes since commit bd0aedde3ea3691616c17c720e2d25351308c0=
-a1:
->=20
->   board: toradex: verdin-am62_r5: Increase SPL_STACK_R_MALLOC_SIMPLE_LEN =
-(2024-03-22 11:10:51 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-amlogic.git tags/u-boot=
--amlogic-fixes-20240325
->=20
-> for you to fetch changes up to d54f87f09a36ac20154955297b7c999b368b0443:
->=20
->   board: amlogic: fix buffler overflow in seria, mac & usid read (2024-03=
--25 09:16:19 +0100)
->=20
-
-Applied to u-boot/master, thanks!
-
---=20
-Tom
-
---uX84QOHXoFWwOYT6
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYBgWwACgkQFHw5/5Y0
-tyzRMgwAqXs1Lo9/UyO+AZHbXT3trxezE7nZq60Fbvm+cFKHct0St32AA/Rbve70
-14MMgfPp/7MCOr9Dtz+M989XyhTRcwOprAg26BhKKiF7ob+Zjm2001Xh/QlVagJ9
-ilsjFXOQvZCogQ4UNomv61Vw3DaKgtCLHUybW1sX9/PAgKslukA1PsLnaUhyeAgW
-beEDygF+pyRqxebWSYseh+YiV/ffZHSfnyicXQH2sPrZnlbdWChs/C95Tj+OeC91
-JBQgeUcP9kiIzJ84tl2gWf27UE20t6S1wGPuWkLOOmAALAr5dUy0Fd7rt9mUNxnF
-Xk3IxLnBIct9XES5tCC7LgRkVxXKDOTi/Pa1zKwPqp6DOTPmTWLU7IlKRAoU0Jm6
-axqQpBQVNVyGfkfz/VSm2l43wpg7i/XHeGCraiV1ahtFR85LpZuqd3kGsCVhHZBB
-SqMGQe5bcX34IXSazUXs3AJS8unpoN7SrpB8fdhUoJC1P/v4g7Ef/qhi/msYI8vW
-vg7LGKiv
-=wRQh
------END PGP SIGNATURE-----
-
---uX84QOHXoFWwOYT6--
