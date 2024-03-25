@@ -4,64 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCD5EC54E64
-	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 08:48:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88DF5C54E64
+	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 09:20:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04AF487DFA;
-	Mon, 25 Mar 2024 09:48:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C6C0587E1B;
+	Mon, 25 Mar 2024 10:20:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711356502;
-	bh=UL4Grey3YWWT+241vCVICP54o4lFHVf4gMet1RBlOf8=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=SCov/GnJQ8AQQu9iujoJbPR1vYf/dsBMoG0TKKQT70eNjspwR9IMyx9uhq+bTCq3q
-	 rfTG5+dpMP7U5AZis1h6pBk09gTtqzZCxJJ2eoT0kSfKFjwtYkRhZ+5QDio1IAXWWh
-	 CzkMV8iBW+pEVu3afss6p2OFBL/5KNLnycd8++77R1io/wY3Aqrwyt6XUC4nrLSTK6
-	 PjGeYy2UGbTXRTFuwOPw1HTCk2qIfuJpaw7LlOE2gLM09u44VS5fyEzvfNCuPYX1g3
-	 gr1bMYzQlCN8Cfz72HFSYCSkYMERY/4CxnFO5AvkhLRE10PWS7+kwnhFGTgq7GrQ1D
-	 q1V61XNjyWO/A==
-Received: from wsk (85-222-111-42.dynamic.chello.pl [85.222.111.42])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lFVwOpYH";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0D26187E2E; Mon, 25 Mar 2024 10:20:40 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 199B387DC8;
- Mon, 25 Mar 2024 09:48:19 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1711356500;
- bh=UL4Grey3YWWT+241vCVICP54o4lFHVf4gMet1RBlOf8=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=CTcrQ+x2exLN67aK3zSHazOW8PER+67oZuDPK0OCSFgGozLa3d86K9zC0aORN1tkp
- US8R9Df9+B+bBwBj+iFkittb8yMRpR+AZpqgQP0cH25AXe84gNHoRcM4Gn0ykJdw2E
- n7waR0EqUQx3HFx1rP4rLTdv7UingmoopxUJplNvNGE/Wh3qT9fk4XNtwdXUchLEcx
- NeclzCUgAkt4xO/aicGECAkM8sMxHbpf1LemFx9dGc9WM/LAEaIf1NB+QPGjNXNDTa
- oVLxLSXSfX/8mAaoE3fFb9ZZ3kliL+4o6a6yQmCyCBoxNOsiVhoab5UXc9M9cJHVa9
- 2ltK0uFRDl7JA==
-Date: Mon, 25 Mar 2024 09:48:12 +0100
-From: Lukasz Majewski <lukma@denx.de>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Stefano Babic <sbabic@denx.de>, u-boot@lists.denx.de, Anatolij Gustschin
- <agust@denx.de>, Christian Hewitt <christianshewitt@gmail.com>, FUKAUMI
- Naoki <naoki@radxa.com>, Hai Pham <hai.pham.ud@renesas.com>, Jonas Karlman
- <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, Marek Vasut
- <marex@denx.de>, Mathieu Othacehe <othacehe@gnu.org>, Michal Simek
- <michal.simek@amd.com>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Neil
- Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tianling Shen <cnsztl@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 00/12] arm: xea: Provide support for different XEA board
- HW versions
-Message-ID: <20240325094812.480d23c8@wsk>
-In-Reply-To: <CAOMZO5Cgjy6huSfX_gpd+UQB-xZN6vKJv-=sLE1QL38jCgUUeg@mail.gmail.com>
-References: <20240322114315.2720727-1-lukma@denx.de>
- <CAOMZO5Cgjy6huSfX_gpd+UQB-xZN6vKJv-=sLE1QL38jCgUUeg@mail.gmail.com>
-Organization: denx.de
-X-Mailer: Claws Mail 3.19.0 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+ by phobos.denx.de (Postfix) with ESMTPS id 9952F87DFA
+ for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 10:20:37 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42P9KVDN071439;
+ Mon, 25 Mar 2024 04:20:31 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1711358431;
+ bh=EWE7oKRKVNZ8uKkW3iphC6teVvzjnxFclMCnJqI+Huo=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=lFVwOpYHJTe8qEHBqfkzH5mt4xffqq3OHy8zBY/dZFwQ7lnNM7GAbXw9VfORp8sGD
+ 8CFO3MOJBMYsdfDXW8VBJOwLms+SIAjv4+Ggdfb7IewJfFtvt14VyY3ot4l8JSTS9l
+ HG8L9MH5DoSQEqN2U/AFhNckrA7YBVMJRbuRROpg=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42P9KVmY013083
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 25 Mar 2024 04:20:31 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 25
+ Mar 2024 04:20:30 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 25 Mar 2024 04:20:30 -0500
+Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.185])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42P9KSAn107451;
+ Mon, 25 Mar 2024 04:20:29 -0500
+Date: Mon, 25 Mar 2024 14:50:28 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
+ <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
+ <sumit.garg@linaro.org>, <michal.simek@amd.com>, <marex@denx.de>,
+ <neil.armstrong@linaro.org>, <afd@ti.com>, <vigneshr@ti.com>,
+ <kamlesh@ti.com>, <u-kumar1@ti.com>
+Subject: Re: [PATCH 3/4] arm: dts: k3-*-binman.dtsi: Clean up and templatize
+ boot binaries
+Message-ID: <20240325092028.cjbtsdu4t7eo67dp@uda0497581>
+References: <20240322131011.1029620-1-n-francis@ti.com>
+ <20240322131011.1029620-4-n-francis@ti.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/MTAPfCjDr1+L2Q1GSwHocur";
- protocol="application/pgp-signature"; micalg=pgp-sha512
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240322131011.1029620-4-n-francis@ti.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,76 +84,289 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---Sig_/MTAPfCjDr1+L2Q1GSwHocur
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Hi Neha,
 
-Hi Fabio,
+On 18:40-20240322, Neha Malcom Francis wrote:
+> Clean up templatized boot binaries for all K3 boards. This includes
+> modifying the k3-binman.dtsi to use SPL_BOARD_DTB, BOARD_DESCRIPTION and
+> UBOOT_BOARD_DESCRIPTION from the files that include it to further reuse
+> code.
+> 
+> All k3-<soc>-binman.dtsi will contain only templates. Only required boot
+> binaries can be built from the templates in the boards' respective
+> -u-boot.dtsi file (or k3-<board>-binman.dtsi if it exists). This allows
+> clear distinction between the SoC common stuff vs. what is additionally
+> needed to boot up a specific board.
+> 
+> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> ---
+>  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  | 161 +---------
+>  arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 291 +----------------
+>  arch/arm/dts/k3-am625-r5-beagleplay.dts       |  39 ---
+>  arch/arm/dts/k3-am625-sk-binman.dtsi          | 148 +--------
+>  arch/arm/dts/k3-am625-sk-u-boot.dtsi          |  42 +++
+>  .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 296 +-----------------
+>  arch/arm/dts/k3-am62a-sk-binman.dtsi          | 146 +--------
+>  arch/arm/dts/k3-am62a7-sk-u-boot.dtsi         |  42 +++
+>  arch/arm/dts/k3-am642-evm-u-boot.dtsi         |  42 +++
+>  arch/arm/dts/k3-am642-sk-u-boot.dtsi          |  42 +++
+>  arch/arm/dts/k3-am64x-binman.dtsi             | 239 +-------------
+>  arch/arm/dts/k3-am654-base-board-u-boot.dtsi  |  49 +++
+>  arch/arm/dts/k3-am65x-binman.dtsi             | 144 +--------
+>  .../arm/dts/k3-am68-sk-base-board-u-boot.dtsi |  26 ++
+>  arch/arm/dts/k3-am69-sk-u-boot.dtsi           |  31 +-
+>  arch/arm/dts/k3-binman.dtsi                   |  96 ++++++
+>  arch/arm/dts/k3-j7200-binman.dtsi             | 145 +--------
+>  .../k3-j7200-common-proc-board-u-boot.dtsi    |  40 +++
+>  .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   | 154 +--------
+>  arch/arm/dts/k3-j721e-binman.dtsi             | 262 +++-------------
+>  .../k3-j721e-common-proc-board-u-boot.dtsi    |  84 +++++
+>  arch/arm/dts/k3-j721e-r5-beagleboneai64.dts   |  91 +-----
+>  arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |  84 +++++
+>  arch/arm/dts/k3-j721s2-binman.dtsi            | 231 +-------------
+>  .../k3-j721s2-common-proc-board-u-boot.dtsi   |  42 +++
+>  arch/arm/dts/k3-j784s4-binman.dtsi            | 154 +--------
+>  arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        |  42 +++
+>  27 files changed, 858 insertions(+), 2305 deletions(-)
+> 
 
-> Hi Lukasz,
->=20
-> On Fri, Mar 22, 2024 at 8:43=E2=80=AFAM Lukasz Majewski <lukma@denx.de> w=
-rote:
->=20
-> >  arch/arm/dts/Makefile                         |  3 +-
-> >  arch/arm/dts/imx28-xea-1-u-boot.dtsi          | 11 ++++
-> >  arch/arm/dts/imx28-xea-1.dts                  |  8 +++
-> >  arch/arm/dts/imx28-xea-2-u-boot.dtsi          | 11 ++++
-> >  arch/arm/dts/imx28-xea-2.dts                  |  8 +++
-> >  arch/arm/dts/imx28-xea-u-boot.dtsi            |  1 -
-> >  .../arm/dts/{imx28-xea.dts =3D> imx28-xea.dtsi} |  0 =20
->=20
-> This rename deviates from the upstream devicetree name.
->=20
-> Ideally, we should convert to OF_UPSTREAM available in U-Boot next.
->=20
-> >  board/liebherr/xea/spl_xea.c                  | 21 +++---
-> >  board/liebherr/xea/xea.c                      | 65
-> > +++++++++++++++++++ board/liebherr/xea/xea.env                    |
-> >  4 +- configs/imx28_xea_defconfig                   |  5 +-
-> >  configs/imx28_xea_sb_defconfig                |  5 +-
-> >  12 files changed, 128 insertions(+), 14 deletions(-)
-> >  create mode 100644 arch/arm/dts/imx28-xea-1-u-boot.dtsi =20
->=20
-> >  create mode 100644 arch/arm/dts/imx28-xea-1.dts
-> >  create mode 100644 arch/arm/dts/imx28-xea-2-u-boot.dtsi
-> >  create mode 100644 arch/arm/dts/imx28-xea-2.dts
-> >  rename arch/arm/dts/{imx28-xea.dts =3D> imx28-xea.dtsi} (100%) =20
->=20
-> You should upstream imx28-xea-1.dts and imx28-xea-2.dts first.
+[ snip ]
 
-The case here is that I'm modifying the *-u-boot.dts{i} files only. In
-other words, u-boot will not support features described in Linux DTS.
+> diff --git a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+> index ed50bfeb031..14fc8468c56 100644
+> --- a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+> +++ b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+> @@ -6,309 +6,48 @@
+>   * Author: Wadim Egorov <w.egorov@phytec.de>
+>   */
+>  
+> -#include "k3-binman.dtsi"
+> +#define SPL_BOARD_DTB "spl/dts/k3-am625-phyboard-lyra-rdk.dtb"
+> +#define BOARD_DESCRIPTION "k3-am625-phyboard-lyra-rdk"
+> +#define UBOOT_BOARD_DESCRIPTION "U-Boot for phyCORE-AM62x"
+> +
+> +#include "k3-am625-sk-binman.dtsi"
+>  
+>  #ifdef CONFIG_TARGET_PHYCORE_AM62X_R5
+>  &binman {
+>  	tiboot3-am62x-hs-phycore-som.bin {
+>  		filename = "tiboot3-am62x-hs-phycore-som.bin";
+> -		ti-secure-rom {
+> -			content = <&u_boot_spl>, <&ti_fs_enc>, <&combined_tifs_cfg>,
+> -				<&combined_dm_cfg>, <&sysfw_inner_cert>;
+> -			combined;
+> -			dm-data;
+> -			sysfw-inner-cert;
+> -			keyfile = "custMpk.pem";
+> -			sw-rev = <1>;
+> -			content-sbl = <&u_boot_spl>;
+> -			content-sysfw = <&ti_fs_enc>;
+> -			content-sysfw-data = <&combined_tifs_cfg>;
+> -			content-sysfw-inner-cert = <&sysfw_inner_cert>;
+> -			content-dm-data = <&combined_dm_cfg>;
 
-Hence, the rename of files (which would be in sync with Linux at some
-point) looks like not related to Linux DTS (as even after re-sync with
-upstream Linux those changes will not be in Linux DTS).
+I was looking between SoCs that we have and all this data seems common
+to me on first glance, like there is only some delta in tiboot3
+templates as well and maybe we can minimise those as well if am not
+missing anything.
+
+in k3-binman.dtsi:
+
+tiboot3_combined_gp: template-x {
+	section {
+		ti-secure-rom {
+			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
+				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
+			combined;
+			dm-data;
+			content-sbl = <&u_boot_spl_unsigned>;
+			content-sysfw = <&ti_fs_gp>;
+			content-sysfw-data = <&combined_tifs_cfg_gp>;
+			content-dm-data = <&combined_dm_cfg_gp>;
+			sw-rev = <1>;
+			keyfile = "ti-degenerate-key.pem";
+		};
+		u_boot_spl_unsigned: u-boot-spl {
+			no-expanded;
+		};
+		ti_fs_gp: ti-fs-gp.bin {
+			type = "blob-ext";
+			optional;
+		};
+		combined_tifs_cfg_gp: combined-tifs-cfg-gp.bin {
+			filename = "combined-tifs-cfg.bin";
+			type = "blob-ext";
+		};
+		combined_dm_cfg_gp: combined-dm-cfg-gp.bin {
+			filename = "combined-dm-cfg.bin";
+			type = "blob-ext";
+		};
+	};
+};
+
+in k3-j721s2-binman.dtsi:
+
+tiboot3_j721s2_gp_evm {
+	insert-template = <&tiboot3_combined_gp>;
+	filename = "tiboot3-j721s2-gp-evm.bin";
+	section {
+		ti-secure-rom {
+			load = <0x41c00000>;
+			load-sysfw = <0x40000>;
+			load-sysfw-data = <0x67000>;
+			load-dm-data = <0x41c80000>;
+		}
+		ti_fs_gp {
+			filename = "ti-sysfw/ti-fs-firmware-j721s2-gp.bin";
+		}
+	}
+};
+
+in k3-j784s4-binman.dtsi:
+
+tiboot3_j784s4_gp_evm {
+	insert-template = <&tiboot3_combined_gp>;
+	filename = "tiboot3-j784s4-gp-evm.bin";
+	section {
+		ti-secure-rom {
+			load = <0x41c00000>;
+			load-sysfw = <0x40000>;
+			load-sysfw-data = <0x66800>;
+			load-dm-data = <0x41c80000>;
+		}
+		ti_fs_gp {
+			filename = "ti-sysfw/ti-fs-firmware-j784s4-gp.bin";
+		}
+	}
+
+}
+
+Similar re-use can be done for other GP devices as well based on
+this template and similar can be extended for other variants HS-FS,
+HS-SE and other SR variants. This might end up a bit complicated as well
+as we do have a lot of combinations of combined boot and other boot
+variants that we have so let me know if you don't find improvement with
+this but I feel this might help in more readability and understanding
+for the initial bootloader template designs as well.
+
+Regards,
+Manorit
+
+> -			load = <0x43c00000>;
+> -			load-sysfw = <0x40000>;
+> -			load-sysfw-data = <0x67000>;
+> -			load-dm-data = <0x43c3a800>;
 
 
-Best regards,
-
-Lukasz Majewski
-
---
-
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-59 Fax: (+49)-8142-66989-80 Email: lukma@denx.de
-
---Sig_/MTAPfCjDr1+L2Q1GSwHocur
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCgAdFiEEgAyFJ+N6uu6+XupJAR8vZIA0zr0FAmYBOkwACgkQAR8vZIA0
-zr0F1QgAlgUMWB5gUXwXHt4uRINZk2CB345O0CPBNVkYuoFFlbP8jQjxQ2I6Cs2R
-jJqj/7TsTqvYz2zcdKcwWvNb3rEN7YO4QogHWknfvyW3E/X1JzHoVyFmEsuyhB18
-rIbiwnKDyyH2xPtJZJByqhFkmZ4oqBy/wqtyskth9fgA6fxH7zYSVvdDiFSDk1Zq
-PnTe4MT32VjahllBj5ra3DG7KS9AixQS7Vt0ouv6p0sYsn4NxCvcq4H3YvWlsams
-bL6elHhxS5h4bITv4WkrTddyjFQgyiwEG2Uq+6NgZp7BTyiDV4SIr6Hjb41tQ3rm
-euitbnbUjGxqZMSOBRGkQDxUypfkfg==
-=8qwT
------END PGP SIGNATURE-----
-
---Sig_/MTAPfCjDr1+L2Q1GSwHocur--
+> -		};
+> -		u_boot_spl: u-boot-spl {
+> -			no-expanded;
+> -		};
+> -		ti_fs_enc: ti-fs-enc.bin {
+> -			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-enc.bin";
+> -			type = "blob-ext";
+> -			optional;
+> -		};
+> -		combined_tifs_cfg: combined-tifs-cfg.bin {
+> -			filename = "combined-tifs-cfg.bin";
+> -			type = "blob-ext";
+> -		};
+> -		sysfw_inner_cert: sysfw-inner-cert {
+> -			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-cert.bin";
+> -			type = "blob-ext";
+> -			optional;
+> -		};
+> -		combined_dm_cfg: combined-dm-cfg.bin {
+> -			filename = "combined-dm-cfg.bin";
+> -			type = "blob-ext";
+> -		};
+> +		insert-template = <&tiboot3_am62x_hs>;
+>  	};
+> -};
+>  
+> -&binman {
+>  	tiboot3-am62x-hs-fs-phycore-som.bin {
+>  		filename = "tiboot3-am62x-hs-fs-phycore-som.bin";
+> -		symlink = "tiboot3.bin";
+> -		ti-secure-rom {
+> -			content = <&u_boot_spl_fs>, <&ti_fs_enc_fs>, <&combined_tifs_cfg_fs>,
+> -				<&combined_dm_cfg_fs>, <&sysfw_inner_cert_fs>;
+> -			combined;
+> -			dm-data;
+> -			sysfw-inner-cert;
+> -			keyfile = "custMpk.pem";
+> -			sw-rev = <1>;
+> -			content-sbl = <&u_boot_spl_fs>;
+> -			content-sysfw = <&ti_fs_enc_fs>;
+> -			content-sysfw-data = <&combined_tifs_cfg_fs>;
+> -			content-sysfw-inner-cert = <&sysfw_inner_cert_fs>;
+> -			content-dm-data = <&combined_dm_cfg_fs>;
+> -			load = <0x43c00000>;
+> -			load-sysfw = <0x40000>;
+> -			load-sysfw-data = <0x67000>;
+> -			load-dm-data = <0x43c3a800>;
+> -		};
+> -		u_boot_spl_fs: u-boot-spl {
+> -			no-expanded;
+> -		};
+> -		ti_fs_enc_fs: ti-fs-enc.bin {
+> -			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-fs-enc.bin";
+> -			type = "blob-ext";
+> -			optional;
+> -		};
+> -		combined_tifs_cfg_fs: combined-tifs-cfg.bin {
+> -			filename = "combined-tifs-cfg.bin";
+> -			type = "blob-ext";
+> -		};
+> -		sysfw_inner_cert_fs: sysfw-inner-cert {
+> -			filename = "ti-sysfw/ti-fs-firmware-am62x-hs-fs-cert.bin";
+> -			type = "blob-ext";
+> -			optional;
+> -		};
+> -		combined_dm_cfg_fs: combined-dm-cfg.bin {
+> -			filename = "combined-dm-cfg.bin";
+> -			type = "blob-ext";
+> -		};
+> +		insert-template = <&tiboot3_am62x_hs_fs>;
+>  	};
+> -};
+>  
+> -&binman {
+>  	tiboot3-am62x-gp-phycore-som.bin {
+>  		filename = "tiboot3-am62x-gp-phycore-som.bin";
+> -		ti-secure-rom {
+> -			content = <&u_boot_spl_unsigned>, <&ti_fs_gp>,
+> -				<&combined_tifs_cfg_gp>, <&combined_dm_cfg_gp>;
+> -			combined;
+> -			dm-data;
+> -			content-sbl = <&u_boot_spl_unsigned>;
+> -			load = <0x43c00000>;
+> -			content-sysfw = <&ti_fs_gp>;
+> -			load-sysfw = <0x40000>;
+> -			content-sysfw-data = <&combined_tifs_cfg_gp>;
+> -			load-sysfw-data = <0x67000>;
+> -			content-dm-data = <&combined_dm_cfg_gp>;
+> -			load-dm-data = <0x43c3a800>;
+> -			sw-rev = <1>;
+> -			keyfile = "ti-degenerate-key.pem";
+> -		};
+> -		u_boot_spl_unsigned: u-boot-spl {
+> -			no-expanded;
+> -		};
+> -		ti_fs_gp: ti-fs-gp.bin {
+> -			filename = "ti-sysfw/ti-fs-firmware-am62x-gp.bin";
+> -			type = "blob-ext";
+> -			optional;
+> -		};
+> -		combined_tifs_cfg_gp: combined-tifs-cfg-gp.bin {
+> -			filename = "combined-tifs-cfg.bin";
+> -			type = "blob-ext";
+> -		};
+> -		combined_dm_cfg_gp: combined-dm-cfg-gp.bin {
+> -			filename = "combined-dm-cfg.bin";
+> -			type = "blob-ext";
+> -		};
+> +		insert-template = <&tiboot3_am62x_gp>;
+>  	};
+>  };
+>  #endif /* CONFIG_TARGET_PHYCORE_AM62X_R5 */
