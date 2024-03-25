@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF053C54E64
-	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 12:17:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37EE7C54E64
+	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 13:51:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDC7387E7F;
-	Mon, 25 Mar 2024 13:17:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 77B6F871C7;
+	Mon, 25 Mar 2024 14:51:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f84OuKKf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uVGFihIh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E9AB87E7F; Mon, 25 Mar 2024 13:17:23 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id C67CF8718A; Mon, 25 Mar 2024 14:51:37 +0100 (CET)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23DAE87D73
- for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 13:17:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B1E9874B1
+ for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 14:51:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-29f8403166aso687471a91.1
- for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 05:17:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3c35c4d8878so1790352b6e.1
+ for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 06:51:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711369039; x=1711973839; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UkZkHDkvmopwcQFLKFK7Ub2U37rtlitl7PjUo6eHHn4=;
- b=f84OuKKf9uSb2VXVnKKau40nqhmttIPnEeZIeljyJuSITsTRwIoY8CPMQbqaNSdCEZ
- JDnTw03cRnmB7a/RlQy40dhgg6/kbMG+tfZqdUefJgWor2YM91ebb2MmuS2cA1pB6Sqg
- Uym+RHPML2pKln/VWkDeejrtj7IUjr2XB0yRn4ok4gVzbrlOQRqrepiBgJ7SXMlASYEF
- TNDY0lbtmPSovC6JF3HE+VwBJ6yLeB+sTes3k6VHrrIhunRaLnWmgcibtQtEIr/6sKSE
- ttTIkptEtJ3wpe3OEkjzNkTSXNA8YLfLx+0eG8KMXuU8yXW1vrcrcO62cvePci5A9PY3
- TKgg==
+ d=konsulko.com; s=google; t=1711374694; x=1711979494; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XCPMGt0h8jl4LvqdTOm3i4axYRM8zrpw0LEdcRFiUZw=;
+ b=uVGFihIhMKPNs7ZXPiZOukFMycpI67olSD8xfcVv1hpqtuOV8Gz3Ix+ty0y1d/8VVB
+ f40FOy336Di7etSRcxwhiJxO9YcYO6f28tWu7PcyorDanBUfgXpC2DlEGyAi7npOxOUr
+ JhvVIB/4zfpWBC5khSwltYBxX+qlHj+gLcb9w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711369039; x=1711973839;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UkZkHDkvmopwcQFLKFK7Ub2U37rtlitl7PjUo6eHHn4=;
- b=IQI3IPUNwFdIG4bM+nf5SKH2FdqOkekcQKamTfkKwfsBTiW2w7qmSMGaHdEMROqc7J
- ZVibqrPOJ0ESkOXwIkvnVr0TjFFE+bsDn7WyguOb+By5s8olv2Hsi8OVPwsBSURFtpwh
- r2Jp19e+YHzXyaB/t1LJP/DcN4pBGLfOVma8osHsPZNLbUoxdXILcFV4f7zkTZqCO6vd
- cnuUSqY4GCoLGZEDAMAWbERNNewHCIhdHEu4hFxXiYERBPzyPa8rlkk8MMp9od0ha0WD
- jUCuMJowce4++qYiFeXV+I9vX4JQPYtArg2YIpfUfaRMF0+VIgVZAs6g1w7gJ2Nvqx6F
- 7bvQ==
-X-Gm-Message-State: AOJu0YxxE4TDPcNOsfoifK14recpKy1JTu1/afjBGrTQOXXIRB4nvWj4
- Xy+I7QTehfR5sr+fUyDcT1iZjOUVMcAzTU7GsACF3oOv7uS3kuq426TucddVI8j9Chfb128vqDc
- IGqwjSi0zTJlgABIMEv90jD4anU8=
-X-Google-Smtp-Source: AGHT+IECSWjyabxX/wI6OCar8kiScMxSIswaDmTcAY5auyrYUpOSYvX5muNJvZQHP4N+aM/PMzJEZ8NqibixC1hutLg=
-X-Received: by 2002:a17:90a:b016:b0:29b:ef73:44ff with SMTP id
- x22-20020a17090ab01600b0029bef7344ffmr5678300pjq.1.1711369039530; Mon, 25 Mar
- 2024 05:17:19 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1711374694; x=1711979494;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XCPMGt0h8jl4LvqdTOm3i4axYRM8zrpw0LEdcRFiUZw=;
+ b=gJbYzeD6IMWwJYE1SRzbxwYBCPyHasXI5pf4d0/Xi2wKYhNwjD5i4g2YJ/ddI0pigd
+ RjmJcOahJYIzFGKHhusFchcrGNrR8voomRsPq7CXSHunfUb8w1ysvD46Z/DaJSDrv3i6
+ EmzEp2vWz0vAXFeoG4zIyBi2TBCIFPHTTUMPfRBbVyJAijGwOmH2VGStZuHTz9HpKArm
+ FP4ugHs63ZJeOzWyqusSGoUsWQRgmgFqtp5TXL+5x0SFmvEsmIbO1iRLABqSTPwByrvI
+ Oy/Ib+Ck90U+UUl4Yd2EfiFXB9sUC0l5uav3q79y9NSDPn9YR/aH3ZkTm2LQom/FMpsz
+ 6XUw==
+X-Gm-Message-State: AOJu0YwwNUyKRmmqMjM6fTrnXw0iCJ2JQVM6wfL237qqDI4LPiN4BCkF
+ 3EMRk+Pwcx+gIOKRHYIlZcF7oze/NSsnKNN+DPEGlvYsVm6pVErh1XXcSopuu0E=
+X-Google-Smtp-Source: AGHT+IG4BVw6SeqB26CIF27JQL1y+I5iQTGylXEcKR5MfI7APDA1wxh9FRVbi3mklYxOl2uY73HhDQ==
+X-Received: by 2002:a05:6808:318c:b0:3c3:cb61:dc4a with SMTP id
+ cd12-20020a056808318c00b003c3cb61dc4amr6755166oib.39.1711374694033; 
+ Mon, 25 Mar 2024 06:51:34 -0700 (PDT)
+Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
+ by smtp.gmail.com with ESMTPSA id
+ fz18-20020a05622a5a9200b0042ee2920298sm2593650qtb.61.2024.03.25.06.51.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 25 Mar 2024 06:51:33 -0700 (PDT)
+Date: Mon, 25 Mar 2024 09:51:31 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20240324
+Message-ID: <20240325135131.GB3442575@bill-the-cat>
+References: <20240324175308.1612688-1-festevam@gmail.com>
 MIME-Version: 1.0
-References: <20240325114642.3664840-1-ghidoliemanuele@gmail.com>
- <20240325114642.3664840-2-ghidoliemanuele@gmail.com>
-In-Reply-To: <20240325114642.3664840-2-ghidoliemanuele@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 25 Mar 2024 09:17:07 -0300
-Message-ID: <CAOMZO5B0wECVB+m1O-XTt60oA7hMPRvBtjidDPpFJ6aXhRq+NA@mail.gmail.com>
-Subject: Re: [PATCH v1 1/3] crypto/fsl: allow accessing Job Ring from
- non-TrustZone
-To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
-Cc: u-boot@lists.denx.de, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, 
- Gaurav Jain <gaurav.jain@nxp.com>, Breno Matheus Lima <breno.lima@nxp.com>,
- Peng Fan <peng.fan@nxp.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="TdN2KtiS9qsheQ1V"
+Content-Disposition: inline
+In-Reply-To: <20240324175308.1612688-1-festevam@gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,16 +89,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Emanuele,
 
-On Mon, Mar 25, 2024 at 8:47=E2=80=AFAM Emanuele Ghidoli
-<ghidoliemanuele@gmail.com> wrote:
+--TdN2KtiS9qsheQ1V
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> +config FSL_CAAM_JR_NTZ_ACCESS
-> +       bool "Give caam Job Ring access to non-secure world"
+On Sun, Mar 24, 2024 at 02:53:08PM -0300, Fabio Estevam wrote:
 
-Please spell CAAM instead.
+> Hi Tom,
+>=20
+> Please pull this material for next from u-boot-imx, thanks.
+>=20
+> The following changes since commit fb49d6c289d942ff7de309a5c5eaa37a7f4235=
+db:
+>=20
+>   remoteproc: uclass: Add methods to load firmware to rproc and boot rpro=
+c (2024-03-22 15:50:28 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
+-next-20240324
+>=20
+> for you to fetch changes up to 9d27e441bb14dd526c60c13d5ff16353ca322eb3:
+>=20
+>   board: phytec: phycore_imx8mp.env fix netboot issues (2024-03-24 13:42:=
+10 -0300)
+>=20
+> u-boot-imx-next-20240324
 
-> +       default n
+Applied to u-boot/next, thanks!
 
-'default n' is already the default, please drop this line.
+--=20
+Tom
+
+--TdN2KtiS9qsheQ1V
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYBgVkACgkQFHw5/5Y0
+tyz8Vgv/btm43clyuMdCsRVjiADqcKch0U/S3OlD3PF17MzT7z2aswR5YpFwm16I
+yFOMFoEkDnydzAvzfqVFgzNvbkglUOrvGLPGTk50mrbDdaxilOrA7y6H+I1KUHVi
+ijZsqJvX6Tcx+bULLyblg49+kBX+g3CGVvZSskmlCIzeRMSeZVMrS7SsB5G3S+j9
+PEdHr1qfuxaheQWV2d/LShs71OVrxM28yyct2d3VNYps3vsw9Qi44dBpcTeG0ap4
+9G6TzJLLBVVBWbnCvUWUuocF7ygGGr8+ucEBY+/UbkLLQztLaYWQzZ/hPnsdTmsG
++eQhOKoCXRhuVEpiFSOOgOnSdipTsyZYQt1tzze22yLMAM39IkIxH4ocnHmxuG7z
+KjbtdvuV704sDYuNZjxgiogccQuI1hEIcDFKmGzLfZ3j7k3IHkJevlQqEAkH3tMP
+np15ZJWqLx06k1dD0FK2hwL8MwqdP9nT/RM2124v/zoJR/+XWfwmRJeIPUWEWHMy
+H9mYmvKo
+=2TcY
+-----END PGP SIGNATURE-----
+
+--TdN2KtiS9qsheQ1V--
