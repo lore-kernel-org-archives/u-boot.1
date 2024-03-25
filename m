@@ -4,61 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A68DBC54E64
-	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 12:17:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF053C54E64
+	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 12:17:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E922187E3A;
-	Mon, 25 Mar 2024 13:17:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id DDC7387E7F;
+	Mon, 25 Mar 2024 13:17:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="OSEfTgLT";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f84OuKKf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE6DD87E6A; Mon, 25 Mar 2024 13:17:03 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3E9AB87E7F; Mon, 25 Mar 2024 13:17:23 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55B0D87D73
- for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 13:17:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 23DAE87D73
+ for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 13:17:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id C808360F27;
- Mon, 25 Mar 2024 12:16:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 86BFCC433F1;
- Mon, 25 Mar 2024 12:16:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1711369019;
- bh=YKX+rP6Sx/WWmX+iXIQ6ne3XbQsstCEyZ1kCLNOdY7g=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=OSEfTgLTZJCxMwtuVC0D3mXKJ5MZwoWji9xNZZxtxbTuvehQvJNrgAupdxmPgMJS6
- kt0oNDjqR9BqfiU1O2DIOAxTA0brIdY3vYhhk62W/inC+U9BOsb3qY7OgLcLA4DsG0
- hhiZhk8aX/nGSkWCqxlh0HsOjM3ZClCWeql6o5uxN8NgPv1OyvCZBqz5fq8IOD1KZJ
- Y0VJj+Pz1VGAUUaIQrjXvuQqSZIFdiPkMst09ZVP/htuvsT1KhG9b1JGVkpXzYtPkv
- Oxtu+B2D8EsRQRvNK51NMGHY6I36tqpekgsTFC1rQHWiOyHedloDHJgRzEcvcMuy1X
- sYOwnsvqTUufA==
-Message-ID: <a91f3573-0e2c-49ff-bbe0-933eff7eedc7@kernel.org>
-Date: Mon, 25 Mar 2024 14:16:53 +0200
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-29f8403166aso687471a91.1
+ for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 05:17:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711369039; x=1711973839; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=UkZkHDkvmopwcQFLKFK7Ub2U37rtlitl7PjUo6eHHn4=;
+ b=f84OuKKf9uSb2VXVnKKau40nqhmttIPnEeZIeljyJuSITsTRwIoY8CPMQbqaNSdCEZ
+ JDnTw03cRnmB7a/RlQy40dhgg6/kbMG+tfZqdUefJgWor2YM91ebb2MmuS2cA1pB6Sqg
+ Uym+RHPML2pKln/VWkDeejrtj7IUjr2XB0yRn4ok4gVzbrlOQRqrepiBgJ7SXMlASYEF
+ TNDY0lbtmPSovC6JF3HE+VwBJ6yLeB+sTes3k6VHrrIhunRaLnWmgcibtQtEIr/6sKSE
+ ttTIkptEtJ3wpe3OEkjzNkTSXNA8YLfLx+0eG8KMXuU8yXW1vrcrcO62cvePci5A9PY3
+ TKgg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711369039; x=1711973839;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=UkZkHDkvmopwcQFLKFK7Ub2U37rtlitl7PjUo6eHHn4=;
+ b=IQI3IPUNwFdIG4bM+nf5SKH2FdqOkekcQKamTfkKwfsBTiW2w7qmSMGaHdEMROqc7J
+ ZVibqrPOJ0ESkOXwIkvnVr0TjFFE+bsDn7WyguOb+By5s8olv2Hsi8OVPwsBSURFtpwh
+ r2Jp19e+YHzXyaB/t1LJP/DcN4pBGLfOVma8osHsPZNLbUoxdXILcFV4f7zkTZqCO6vd
+ cnuUSqY4GCoLGZEDAMAWbERNNewHCIhdHEu4hFxXiYERBPzyPa8rlkk8MMp9od0ha0WD
+ jUCuMJowce4++qYiFeXV+I9vX4JQPYtArg2YIpfUfaRMF0+VIgVZAs6g1w7gJ2Nvqx6F
+ 7bvQ==
+X-Gm-Message-State: AOJu0YxxE4TDPcNOsfoifK14recpKy1JTu1/afjBGrTQOXXIRB4nvWj4
+ Xy+I7QTehfR5sr+fUyDcT1iZjOUVMcAzTU7GsACF3oOv7uS3kuq426TucddVI8j9Chfb128vqDc
+ IGqwjSi0zTJlgABIMEv90jD4anU8=
+X-Google-Smtp-Source: AGHT+IECSWjyabxX/wI6OCar8kiScMxSIswaDmTcAY5auyrYUpOSYvX5muNJvZQHP4N+aM/PMzJEZ8NqibixC1hutLg=
+X-Received: by 2002:a17:90a:b016:b0:29b:ef73:44ff with SMTP id
+ x22-20020a17090ab01600b0029bef7344ffmr5678300pjq.1.1711369039530; Mon, 25 Mar
+ 2024 05:17:19 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/5] net: mdio-uclass: probe generic Ethernet PHY driver &
- Fix Beagleplay Ethernet
-To: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Wadim Egorov <w.egorov@phytec.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Simon Glass <sjg@chromium.org>
-Cc: srk@ti.com, s-vadapalli@ti.com, vigneshr@ti.com, r-gunasekaran@ti.com,
- danishanwar@ti.com, u-boot@lists.denx.de
-References: <20240305-for-2024-07-beagleplay-eth-v1-0-e1294a575cc1@kernel.org>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20240305-for-2024-07-beagleplay-eth-v1-0-e1294a575cc1@kernel.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240325114642.3664840-1-ghidoliemanuele@gmail.com>
+ <20240325114642.3664840-2-ghidoliemanuele@gmail.com>
+In-Reply-To: <20240325114642.3664840-2-ghidoliemanuele@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Mon, 25 Mar 2024 09:17:07 -0300
+Message-ID: <CAOMZO5B0wECVB+m1O-XTt60oA7hMPRvBtjidDPpFJ6aXhRq+NA@mail.gmail.com>
+Subject: Re: [PATCH v1 1/3] crypto/fsl: allow accessing Job Ring from
+ non-TrustZone
+To: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
+Cc: u-boot@lists.denx.de, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Gaurav Jain <gaurav.jain@nxp.com>, Breno Matheus Lima <breno.lima@nxp.com>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,78 +93,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom / Joe,
+Hi Emanuele,
 
-On 05/03/2024 15:24, Roger Quadros wrote:
-> Currently, the GPIO Reset Device Tree properties of the
-> PHY node are ignored when the PHY is probed via mdio-uclass driver [1].
-> 
-> To resolve this, for each child of the MDIO bus node, bind and probe
-> the generic Ethernet PHY driver if CONFIG_DM_ETH_PHY is enabled.
-> 
-> This should now show the generic_phy_driver in "dm tree"
-> and also apply the GPIO reset before the MDIO bus driver scans the bus
-> for the PHYs.
-> 
->  ethernet      0  [ + ]   am65_cpsw_nuss_port       |   |-- ethernet@8000000port@1
->  bootdev       3  [   ]   eth_bootdev               |   |   `-- port@1.bootdev
->  mdio          0  [ + ]   cpsw_mdio                 |   `-- mdio@f00
->  eth_phy_ge    0  [ + ]   eth_phy_generic_drv       |       |-- ethernet-phy@0
->  eth_phy_ge    1  [ + ]   eth_phy_generic_drv       |       `-- ethernet-phy@1
-> 
-> To test this on Beagleplay, the following series is required
-> 
-> [1] Switch am65-cpsw to DM MDIO
->  https://lore.kernel.org/all/20240228-for-2024-07-am65-cpsw-mdio-v2-0-f74f972eafeb@kernel.org/
-> 
-> The last 3 patches are marked [not-for-merge]. They are to show how the
-> whole solution can work to fix Ethernet on Beagleplay, which has been broken
-> so far. Those DT patches will be sent once the device tree changes are merged
-> into Linux tree.
-> 
-> Signed-off-by: Roger Quadros <rogerq@kernel.org>
-> ---
-> Roger Quadros (5):
->       net: mdio-uclass: Bind and probe generic Ethernet PHY driver
->       configs/am62x_beagleplay_a53_defconfig: enable DM_ETH_PHY
+On Mon, Mar 25, 2024 at 8:47=E2=80=AFAM Emanuele Ghidoli
+<ghidoliemanuele@gmail.com> wrote:
 
-Any comments to the first 2 patches in this series?
+> +config FSL_CAAM_JR_NTZ_ACCESS
+> +       bool "Give caam Job Ring access to non-secure world"
 
->       [not-for-merge] arm: dts: k3-am62*: sync with linux-next-20240229
->       [not-for-merge] k3-am625-beagleplay-u-boot: get CPSW Ethernet to work
->       [not-for-merge] arm: dts: k3-am625-beagleplay: Fix Ethernet PHY reset GPIO
-> 
->  arch/arm/dts/k3-am62-main.dtsi               | 126 ++++++++++++++---
->  arch/arm/dts/k3-am62-mcu.dtsi                |   4 +-
->  arch/arm/dts/k3-am62-phycore-som.dtsi        |   5 +-
->  arch/arm/dts/k3-am62-thermal.dtsi            |   5 +-
->  arch/arm/dts/k3-am62-verdin-dev.dtsi         |   4 +-
->  arch/arm/dts/k3-am62-verdin-wifi.dtsi        |   1 -
->  arch/arm/dts/k3-am62-verdin.dtsi             |  76 +++++++---
->  arch/arm/dts/k3-am62-wakeup.dtsi             |  38 +++--
->  arch/arm/dts/k3-am62.dtsi                    |   4 +-
->  arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi |  63 +++++++++
->  arch/arm/dts/k3-am625-beagleplay.dts         |  66 ++++-----
->  arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts  | 104 +++++++++++++-
->  arch/arm/dts/k3-am625-sk.dts                 |   4 +-
->  arch/arm/dts/k3-am625.dtsi                   |   4 +-
->  arch/arm/dts/k3-am62a-main.dtsi              | 201 +++++++++++++++++++++++++--
->  arch/arm/dts/k3-am62a-mcu.dtsi               |   4 +-
->  arch/arm/dts/k3-am62a-thermal.dtsi           |   5 +-
->  arch/arm/dts/k3-am62a-wakeup.dtsi            |   4 +-
->  arch/arm/dts/k3-am62a.dtsi                   |   4 +-
->  arch/arm/dts/k3-am62a7-sk.dts                | 162 ++++++++++++++++++++-
->  arch/arm/dts/k3-am62a7.dtsi                  |   4 +-
->  arch/arm/dts/k3-am62x-sk-common.dtsi         |  24 +++-
->  configs/am62x_beagleplay_a53_defconfig       |   2 +-
->  net/mdio-uclass.c                            |  41 ++++++
->  24 files changed, 825 insertions(+), 130 deletions(-)
-> ---
-> base-commit: 84f5bb0be0ec9fbf98f8f3317b578dfc114cf44e
-> change-id: 20240305-for-2024-07-beagleplay-eth-f82a51197937
-> 
-> Best regards,
+Please spell CAAM instead.
 
--- 
-cheers,
--roger
+> +       default n
+
+'default n' is already the default, please drop this line.
