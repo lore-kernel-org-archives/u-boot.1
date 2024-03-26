@@ -4,57 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A2D3C54E67
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 17:08:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A052AC54E67
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 18:08:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B315987F4A;
-	Tue, 26 Mar 2024 18:08:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id CD03287D4F;
+	Tue, 26 Mar 2024 19:08:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711472892;
-	bh=NVyAysE4Sc7z3be5CpVuhMk8f/YvLzUYeFx+F3v65lw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=YeAMH+qJhjK84/DmVTadHmEGMY9zpQ1Txt4O3AFlrWiubyj9KYS8q862CXmLnhbns
-	 SKAAj6I5Yy7VWxsF/7sCB1sJRL0frkxZkaei+OVIGZTIZbjfI8qV965+M9riQLF0Fv
-	 JAWzYcq2knBfe5wYobyl3GHvmVPF6DmclQt2onMMu0NQ3b61i7tHO3AzQeMSjl5q+b
-	 Qp47a0pMaaX8PoCj8QV8hwSV0jqa09jDWNObkZ6ALS66WamlPPxtGNiV20Zb68BC4A
-	 cK9AiEjjNbuY+4+yW3Ab1Y8H2sTSq0cNUkWIFK+sVquT/MGDbNRbRlzj2eXrfJy/8O
-	 buGVILGuvwvNg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZDiYKd6g";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 508F687D50; Tue, 26 Mar 2024 19:08:15 +0100 (CET)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 1AD3F87ABC;
- Tue, 26 Mar 2024 18:08:10 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1711472892;
- bh=NVyAysE4Sc7z3be5CpVuhMk8f/YvLzUYeFx+F3v65lw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=ThS7MwijlxNSBzUYRJIAfK2EdZ5qkkJqQdMEHEqKhY/unPoewaiwCLUyShrtQEwJ1
- 39WQEEd4QRDiygn8Ape2dwMdp3HdPFXczSkIZ0y0YNB7AYCS+C1OF5ikb3RrbxbOv1
- bQ79a51B0EJ1UQmebggeCS45yxOLuhcRsryDv0qQ/7vc+BI5E/VP3KdPwc9m6e/I5z
- 2kE1dOAjoC/W2oghbVvJdoPeQBuEg/k9sVpT4tJMqCXRjG2BkcGYVr7TcMgxpq2jU7
- IMQwnijfMVt2FYY9yyIldMd1Y/i6HsU+md5wDHNELvODMYyu6xd35Y6/bEQlnQmzVr
- VA1kXkxaUwBxg==
-Message-ID: <7ed56763-f494-4d19-82a0-05f0cc557241@denx.de>
-Date: Tue, 26 Mar 2024 18:08:09 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id 3BD8E8751B
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 19:08:13 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-29f8403166aso966645a91.1
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 11:08:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711476492; x=1712081292; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eMKxrVRjEvlTAywiohLLisucldx4Td2OvwcEbHydKpI=;
+ b=ZDiYKd6gh85Vg0LudYvqyh5+CR71Jumv57qOSslcKDavI23MMU+NAc13ACO2Cn9g13
+ vRoYZAwBvvZ1fzJC/b0ApSMYLrepTf9nyI49+s+ApgpDKg3TiYLFSx6vXQ5yhVjVMDBT
+ pWYdjRqAvtxudi03jCuWtcv2yk8vjToB4gd1OKsiTMLkq3FDi0ncl21NHpOpAhG8l91U
+ Khz0paD0UEiu0I4KvET5nHS5LH2lw7F7Op5b5awVNikaJaipAAG4ebGntkmiPJCW37rz
+ O8Mfq4nDtyK7ojrqn+dmEt+Pv3xcTg8iYeYQCpLZTAQanBapSJ0kwIDaZu03F0YZxTGO
+ /gqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711476492; x=1712081292;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eMKxrVRjEvlTAywiohLLisucldx4Td2OvwcEbHydKpI=;
+ b=jfBrXufTTVKjsQvIofTe2V7fc4FfS2lKy8Hkzf0XqsaO8xIrm9bsgB8ZFc6ELpg+r8
+ Lbl5iK3b9BxKBRN43f2ynjKF3D0qGzZ3Rht8eoamc5BqfJJ1NLEOYCfAQlmh3bDGWLv3
+ Qu7FUJEOmzHWXxNR4JMoSlbHsNpZk+foxkhFnOtpLpQxTq5G7M5Ou+NtjamK8MFsB3vl
+ JdIUtJOXVlM+sfUwn+IgwYRcdsuTo5pItSAbwpJA/IbVhEvEt3VJ5odp38qlA6/vxT1v
+ szBNQDLbMlpzeJTQbR+QhNr1yYAlcGGrAgCdpVJJWGZ045vaCSozjBiEYV2tYxx7krXK
+ WBPQ==
+X-Gm-Message-State: AOJu0YwipLorX4PeLE1Aj9O7rEq+irBItL3QtyqwIhnzl9ouJDuu37jN
+ KsOx5D2Ya+jBlLEIE2mx7xZgz0Mtw8bGhPgCp3dkKGbsDXEajF67LGTWlidXjzu8EXT9PJDyAYK
+ RgzAGxqPQwD97Ph+kXrGPx+wE5uU=
+X-Google-Smtp-Source: AGHT+IHChEeXgy7JMNsqQBm4KvDWJzKdnVDkjine6j2eFKQ+1tIMkWA4f/uQvvfWFtutWiuXeXSmVpaJmvX4TG89+r4=
+X-Received: by 2002:a17:90a:9f8b:b0:29b:fab2:8a24 with SMTP id
+ o11-20020a17090a9f8b00b0029bfab28a24mr9375086pjp.3.1711476491633; Tue, 26 Mar
+ 2024 11:08:11 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Default dfu_alt_info for STM32MP13xx SPI NOR
-To: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-References: <20240319024430.103196-1-marex@denx.de>
- <f2ab30e8-e65a-4025-a203-639d7ff1b01e@foss.st.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <f2ab30e8-e65a-4025-a203-639d7ff1b01e@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <CAH9NwWe1qEo5r0UmdRh9CqFxmJYfHRU1YxoW8b8vTQwDB-227A@mail.gmail.com>
+ <CAOMZO5BUibOAqqdtJtjrGwgciJ984ayUu0nPVdLkR_YLOh9bHQ@mail.gmail.com>
+ <CAH9NwWdfcOM-q-EBVeZBs7-PRkr87M+pn-dYTzMW5bW7KRTo8g@mail.gmail.com>
+In-Reply-To: <CAH9NwWdfcOM-q-EBVeZBs7-PRkr87M+pn-dYTzMW5bW7KRTo8g@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 26 Mar 2024 15:08:00 -0300
+Message-ID: <CAOMZO5C4L2ka3-0xnycwVOfmu2CGqg5b-h1zKERHsah4Mvg9rw@mail.gmail.com>
+Subject: Re: mx6cuboxi: failes to detect model
+To: Christian Gmeiner <christian.gmeiner@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, jonas@kwiboo.se,
+ josua@solid-run.com, 
+ Simon Glass <sjg@chromium.org>, Baruch Siach <baruch@tkos.co.il>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,54 +91,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/19/24 11:22 AM, Patrice CHOTARD wrote:
-> 
-> 
-> On 3/19/24 03:44, Marek Vasut wrote:
->> Define dfu_alt_info with SPI NOR layout to make it easy to
->> install or update bootloader in the SPI NOR using dfu-util.
->>
->> Use the following U-Boot commands to start DFU mode:
->> "
->> => sf probe && dfu 0 mtd
->> "
->>
->> Use the following dfu-util invocation on Host PC to install binaries:
->> "
->> $ dfu-util -w -a 0 -D build/stm32mp1/release/tf-a-stm32mp135f-dhcor-dhsbc.stm32
->> $ dfu-util -w -a 1 -D build/stm32mp1/release/tf-a-stm32mp135f-dhcor-dhsbc.stm32
->> $ dfu-util -w -a 2 -D build/stm32mp1/release/fip.bin
->> "
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
->> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@dh-electronics.com
->> Cc: u-boot@lists.denx.de
->> Cc: uboot-stm32@st-md-mailman.stormreply.com
->> ---
->>   include/configs/stm32mp13_common.h | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/include/configs/stm32mp13_common.h b/include/configs/stm32mp13_common.h
->> index 5b0658ced92..d6e4f8fd915 100644
->> --- a/include/configs/stm32mp13_common.h
->> +++ b/include/configs/stm32mp13_common.h
->> @@ -63,6 +63,7 @@
->>   	"fi;\0"
->>   
->>   #define STM32MP_EXTRA \
->> +	"dfu_alt_info=mtd nor0=fsbl1 raw 0x0 0x40000;fsbl2 raw 0x40000 0x40000;uboot raw 0x80000 0x160000\0" \
->>   	"env_check=if env info -p -d -q; then env save; fi\0" \
->>   	"boot_net_usb_start=true\0"
->>   
-> 
-> 
-> Hi Marek
-> 
-> On our STM32 board, the dfu_alt_info is build dynamically, we have CONFIG_SET_DFU_ALT_INFO enable
-> Can you add the dfu_alt_info in a specific stm32mp13_dhxx.common.h instead ?
+On Tue, Mar 26, 2024 at 1:11=E2=80=AFPM Christian Gmeiner
+<christian.gmeiner@gmail.com> wrote:
 
-You can drop this patch.
+> It got better but the model is (still) wrong:
+>
+> U-Boot 2024.04-rc5-dirty (Mar 26 2024 - 17:03:41 +0100)
+>
+> CPU:   Freescale i.MX6Q rev1.3 996 MHz (running at 792 MHz)
+> CPU:   Extended Commercial temperature grade (-20C to 105C) at 20C
+> Reset cause: POR
+> Model: SolidRun HummingBoard2 Dual/Quad (1.5som+emmc)
+> Board: MX6 HummingBoard2
+> DRAM:  2 GiB
+> Core:  82 devices, 17 uclasses, devicetree: fit
+> MMC:   FSL_SDHC: 1, FSL_SDHC: 2
+> Loading Environment from MMC... *** Warning - bad CRC, using default envi=
+ronment
+
+It seems to me that there is a mix of DM GPIO and non-DM GPIO.
+
+Does the change below help?
+
+--- a/board/solidrun/mx6cuboxi/mx6cuboxi.c
++++ b/board/solidrun/mx6cuboxi/mx6cuboxi.c
+@@ -336,20 +336,16 @@ static enum board_type board_type(void)
+         * HB             1     1    x
+         */
+
+-       gpio_direction_input(IMX_GPIO_NR(2, 8));
+-       val3 =3D gpio_get_value(IMX_GPIO_NR(2, 8));
++       val3 =3D !!dm_gpio_get_value(&(board_detect_desc[0]));
+
+        if (val3 =3D=3D 0)
+                return HUMMINGBOARD2;
+
+-       gpio_direction_input(IMX_GPIO_NR(3, 4));
+-       val2 =3D gpio_get_value(IMX_GPIO_NR(3, 4));
++       val2 =3D !!dm_gpio_get_value(&(board_detect_desc[1]));
+
+        if (val2 =3D=3D 0)
+                return HUMMINGBOARD;
+-
+-       gpio_direction_input(IMX_GPIO_NR(4, 9));
+-       val1 =3D gpio_get_value(IMX_GPIO_NR(4, 9));
++       val1 =3D !!dm_gpio_get_value(&(board_detect_desc[2]));
+
+        if (val1 =3D=3D 0) {
+                return CUBOXI;
