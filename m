@@ -4,64 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA690C6FD1F
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 15:13:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76D23CD11DD
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 15:18:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 259A087EFA;
-	Tue, 26 Mar 2024 16:13:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id CA1B087D6B;
+	Tue, 26 Mar 2024 16:18:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="OosWbu+y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="glay4vaL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 50B3987F5D; Tue, 26 Mar 2024 16:13:14 +0100 (CET)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [46.235.227.194])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0D69B87E47; Tue, 26 Mar 2024 16:18:02 +0100 (CET)
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
+ [IPv6:2607:f8b0:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AF2C87971
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 16:13:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1403287BD6
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 16:17:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=martyn.welch@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1711465991;
- bh=ti3uQeFBoc/p6EftDrVPN6Swu/xr9GqEFIVtYx8aO+k=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=OosWbu+yf+kkKmHkk7TEEvrq3fMFXrG7dUXWHmTPne9JCE36I/1nrkLp7u52jA6qY
- ChGTNYRSUCzt6LxLcrlH7hMLGiOCCjiUOnD/5ryKo5zZV25Rubx/MTtzFXugl2/6cm
- acExZyjXhdJlpc/d357qN4CSJh/S93Ml7Vwfc0gUyialhIPBwGlYx86j9Po+w+0CHj
- 0noKC5UD8PlPikoF05IqhrlWTkkByJYVv6mu2hA0XQB5gyz+3YSr51sHc6iQDbzyCP
- hmc6ZSOzf6KVdrQp4ij9vc2qcBk+4izfHAvUeMCEij56k4e9m2pWqO0kff8bqJKOuu
- 15ik7e8/LKtYQ==
-Received: from [100.117.211.133]
- (ec2-34-240-57-77.eu-west-1.compute.amazonaws.com [34.240.57.77])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits))
- (No client certificate requested) (Authenticated sender: martyn)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id 534F6378020D;
- Tue, 26 Mar 2024 15:13:11 +0000 (UTC)
-Message-ID: <c02e12d7384eae7c7bc667aab8bef564d42d3ccc.camel@collabora.com>
-Subject: Re: [PATCH] am625x_evm_a53: Tweak boot command to set fdt
-From: Martyn Welch <martyn.welch@collabora.com>
-To: Christopher Obbard <chris.obbard@collabora.com>, Dave Gerlach
- <d-gerlach@ti.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Date: Tue, 26 Mar 2024 15:13:10 +0000
-In-Reply-To: <a01a752d7ad07d64d574547599b50f516ca04433.camel@collabora.com>
-References: <20240326142634.2043539-1-martyn.welch@collabora.com>
- <a01a752d7ad07d64d574547599b50f516ca04433.camel@collabora.com>
-Autocrypt: addr=martyn.welch@collabora.com; prefer-encrypt=mutual;
- keydata=mQENBGDt6HMBCADHvrlL7Rr7nduRf9lrvXQg3xvwHQvtT9rHvOWOiIJkIKJPFD43D0yor7MCtLklXcfTEWpecK3S1+l7mzXgHxu96NaIrVarkYGbmi8/Z74T6Av7RyaKxZQoBLlXTxV5+2Sy1gqzZc6v1eKzgLkDDKhMvEyA81tpJWqyq7xc8SI0A3W2c2eHsnKNf/BR+hWYBaINGQUGSaE+gxUe9Zf7jiuJBOVRKQnKu/zSz24gUz1QY2JAs6ZeD194VAw7R70gnSl4oNE57iKJhuz4yw8+InOVNhMwE9+7DszqBNgYmEPsMs9lz9E2jyElcU1YFNWY1n4lpMZ5ftXdluy64saLwRWHABEBAAG0KU1hcnR5biBXZWxjaCA8bWFydHluLndlbGNoQGNvbGxhYm9yYS5jb20+iQFOBBMBCgA4FiEEIfUbhXTr+lyt1aegTzseokq+IGUFAmDt6HMCGwMFCwkIBwIGFQoJCAsCBBYCAwECHgECF4AACgkQTzseokq+IGXgygf/eCNqi8QxZ5LVwgE+QqK7X85FZiJB8jNWbiK6s26MnTTllT55Wdp1cNcUKkRsiIzgrf6B406ua9lDWiDPA9Q/1bQmU2xgpObgF3dx5GbzB2IGkUuu4814SwGTDXV1KAnj/sXCzANTNZd8YvxgdcatxlV3aFKmgYxKcmbNVe5d8IO1P1N6pIOAvNlZSA/uvz04oGJAfkRIo9tLSMR60a84K98Roo+3gy/cef9YD1ZJk7WH89SacFXte8Cb9uNjKbG0CH3Yeh/1ZGMISI4Bor13ADH0gd9eO7kJsypnPaLvf3/eXzPLLj3mbf23jIHumG3HWPyFmuEJnuQHeGC6X8fMq7kBDQRg7ehzAQgA4ez4gqQ5wPJvfh0FZ3HMGzqxgBU4iTJD3y+UJ1OYD9jHYOMu67NJke5JhXH0pQRma+x/PihdX+gsxUXxwQVJ1nSHr7FmRFpBwb7RZW5Wb
- 6t4j6BmT0AHJEjRI2PVQKPBxpt8FPlpa1X8vF5qNSBNuZ/WkAmf9iBvldflwY5KLRGlXYWRygphH7uGzGatMNPLNjBtN1gGkKKd3Lg44gCDCSlA7kAUeHeUO6in6qswJDO7a5HVZKyLOQ+OmBXvkzZbqzGs1vKl39tPbnhBj7IA4kbXX+ECEX+p8LgUOr/VzG92pZhvrI/iA5mtj4P+BHJwIVF2Tdq3RFpBGQrUjZPbnQARAQABiQE2BBgBCgAgFiEEIfUbhXTr+lyt1aegTzseokq+IGUFAmDt6HMCGwwACgkQTzseokq+IGXqCAf/XuFZgK9uGBCJAVpnOf42zScmuqa0LylQEqn/Op+VulBbhODsq67Jb4/fiPk/GHuU1/1NDeBjDljmUA4P0f+YRgJSGpzJSxYjWYRAsudLbuq1vBevw3VMrtGZ/qdJvY3gYVpAoegoj4cw1MylLv++c5lAWwEbbOX+0zUNgUjpL0q3WmUhVG+7V8JR/vZupVxdJw4vtkmO5UB5fKKVSNvg2tY4OjA3XCW7SxeMYIHuj6sx+vwVVcuLQiCdixcMRSf+W4AAVBfyHkEgZ05wAa05PIrkR9FGM91lkbtX7y5z6kER06WJ6vd6FzdRZGs+Sormw4KJ6QyLroITWJY6FVIkeLkBDQRg7ei2AQgAxlJBQLLgm4hv6WOHVxkQMQBETSTqFCHwoNatxYnL1hRnA87uVKZf+WIYiRvN0JgZX2wCpCeKbhZLmwMTgm/fb4CJZGips5julUaTimd+4DF+EEVmGLzHvfuIuSOWCLv6nk9zZDVDRIYu6iXwaC88Hk0y8VjrXzMsKtB9Q+0U5LUKK5OyHsWQt0XwP/1NUT2AW0OhUyJXvA1habkAObnn4OSXFLf5s1QN22BtokdRnjwI/Gm4zwF8cCZmBOlNsStsTNpoQZHI1q+gkK4x97DQz2JNPVmuNUltZgwcDFlr3Js6zHW+ZQmBjSFCh1D53WN3fq
- /LxvcyYPgeeJRv40lfFwARAQABiQE2BBgBCgAgFiEEIfUbhXTr+lyt1aegTzseokq+IGUFAmDt6LYCGyAACgkQTzseokq+IGWbVQf/SzDCZgXRvXjyylc+iMN7/ydZEG0BxfMsBFNCDP1TweRpZWo0cW96r1FNpt3lN2nDv7tcIAJtxOUpWudzCC8G2eR+55pO0b1YZsy8dcLYsZOD/8lbROFRSQ5YVlzHWJO5VgsdRmN8+xHkVGGcTebsgdFITv9LwcMkDKFuKM20YTgoslo6wjgRi/fvpolotocXhGVJFt8mM2Fw6qXGg/YBs97INabbkCKUf16zuxFbMYlwDohLwV6YfFevFO2EX9O5ZbqVpJBCAHP9b2NUjswIDa7oG4M/BLpuhPxfL86wBzgLxiTkX6arVZcHNYdvYB/lKdd+AJIdyecks5HotI4eWA==
-Organization: Collabora Ltd.
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.3-1 
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=christian.gmeiner@gmail.com
+Received: by mail-pf1-x42c.google.com with SMTP id
+ d2e1a72fcca58-6e73e8bdea2so4659352b3a.0
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 08:17:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711466277; x=1712071077; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=yq2NE+3S/XHi5r17wvBkwLvKN6aT9ohOvX3WDIAddNg=;
+ b=glay4vaLTunJk79RhyPVVFT/TEq1mBd+U6wdPH4B4acHO9AzmMjmGd+vbFGsznlz/v
+ LQXzeIMajx8uX1EQgo4PE6LoGa46K28JPIM1SeOVFTwCbxNfyAWvygaWAYn3Lg/z2p5j
+ Q07hC+xARE962pwKI2g3mfSaCIKxuoGUmG9OK82F1UQLl8pSJp+iX2Kc3VTU8Kxdxe0z
+ Hb3tpDI/fUEkjqn23S1JzeUBDpSKVF9dNlRHsL9MvuGcRVawj6Tk8jgdFno7qri0RzQb
+ Cv/VgS0u0Wv8rZKHdG7pAQs3I0QtFOGsQMtafgoDV1RP7BGC1zmtizMLJwsNZ7hMEHQt
+ 1F7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711466277; x=1712071077;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=yq2NE+3S/XHi5r17wvBkwLvKN6aT9ohOvX3WDIAddNg=;
+ b=L7gO5IPo7iARP1zlF9bDeHuyKWH3S5Ttk9Zabu39SSL016MVwIOYMBk+ICWeAAf1wq
+ ve4xB7IhXmx5+Kkdfwnw3cgl9rDSVqMZyMxRfH/lk3qdBKWrnDOKLQH+rZdrUGZCt7ZQ
+ sQHZZMOuvGSTmfo8GYAv+4Lsc8fpVrW94OETtLHbCNM+/aQ2KShXuQFHWuyTnuB2rOf7
+ eUXCyZjUPKS4fgy0YhD8ba/jFnhZNtHt3b1pGb+/Erom7qYlpmhIgoWoE/oERUndktnW
+ Uq+9PwjykDxO0IgDcqUEoAoLwq+pRiHqqB41XozLXhPtgd59nhcFUkIbyVzCeNYqX6Fl
+ 282Q==
+X-Gm-Message-State: AOJu0Yx2aLksHELPX1WJ29wgr73PxxWqMfZyMcgDkvgfnoJERs6WlQEW
+ ZLMFLDOx1W6QvfPpbbb+Lw1KFPweau3WVp773a0Ky2voaXsjilTj1sJbhEEra9of7lcxnuJ1ivn
+ TuZqZdr7USzyKScRB8NfzxEy+HC5EvHLk1018sQ==
+X-Google-Smtp-Source: AGHT+IGCz9EPqt7JkUapFMUcTO9RlM70kaR2cVmoq00AR2ASERw3rjJP5/MLjKcxikwDSt1M1HsHV6xJEn7L8K0KCZc=
+X-Received: by 2002:a17:90a:6be2:b0:2a0:8f31:a359 with SMTP id
+ w89-20020a17090a6be200b002a08f31a359mr101240pjj.39.1711466276926; Tue, 26 Mar
+ 2024 08:17:56 -0700 (PDT)
 MIME-Version: 1.0
+From: Christian Gmeiner <christian.gmeiner@gmail.com>
+Date: Tue, 26 Mar 2024 16:17:45 +0100
+Message-ID: <CAH9NwWe1qEo5r0UmdRh9CqFxmJYfHRU1YxoW8b8vTQwDB-227A@mail.gmail.com>
+Subject: mx6cuboxi: failes to detect model
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: jonas@kwiboo.se, Fabio Estevam <festevam@gmail.com>, josua@solid-run.com, 
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,75 +83,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 2024-03-26 at 14:35 +0000, Christopher Obbard wrote:
-> Hi Martyn.
->=20
-> On Tue, 2024-03-26 at 14:26 +0000, Martyn Welch wrote:
-> > With the current config for tha SK-AM62, fdtfile isn't set in the
-> > U-Boot
-> > environment. When using bootflow to boot from a block device, where
-> > the
-> > extlinux.conf file specifies `fdtdir`, a fallback device tree is
-> > being
-> > constructed from the `soc` (`k3`) and `board` (`am62x`) environment
-> > variables, resulting in u-Boot trying to retrieve
-> > `/dtbs/6.8.1+/k3-am62x.dtb`. This file doesn't exist.
-> >=20
-> > The environment variables `default_device_tree` and
-> > `default_device_tree_arch` are set in the config, the `findfdt`
-> > script
-> > can be called to construct `fdtfile` from the environment variables
-> > set
-> > by these config options, however this script currently isn't being
-> > run.
-> >=20
-> > Calling this script results in the correct device tree being
-> > retrieved:
-> >=20
-> > =C2=A0=C2=A0 Retrieving file: /dtbs/6.8.1+/ti/k3-am625-sk.dtb
-> >=20
-> > Many boards are calling this script as part of their boot command.
-> > The
-> > am62x currently isn't. Rectify this so that booting works
-> > correctly.
-> >=20
-> > Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
->=20
-> Would this also be appropriate to add to the defconfig for other
-> AM62x boards
-> (e.g beagleplay) ?
->=20
+I am seeing model detection problems with the current git master.
 
-Hi Chris,
+U-Boot 2024.04-rc5 (Mar 26 2024 - 15:59:22 +0100)
 
-Probably, but this is the only board I have available to test.
+CPU:   Freescale i.MX6Q rev1.3 996 MHz (running at 792 MHz)
+CPU:   Extended Commercial temperature grade (-20C to 105C) at 26C
+Reset cause: POR
+Model: SolidRun HummingBoard2 Dual/Quad (1.5som+emmc)
+gpio@20a4000: set_dir_flags: error: gpio GPIO3_8 not reserved
+gpio@20a4000: get_value: error: gpio GPIO3_8 not reserved
+gpio@20a8000: set_dir_flags: error: gpio GPIO4_4 not reserved
+gpio@20a8000: get_value: error: gpio GPIO4_4 not reserved
+gpio@20b0000: set_dir_flags: error: gpio GPIO6_9 not reserved
+gpio@20b0000: get_value: error: gpio GPIO6_9 not reserved
+Board: MX6 HummingBoard
+DRAM:  2 GiB
+Core:  82 devices, 17 uclasses, devicetree: fit
+MMC:   FSL_SDHC: 1, FSL_SDHC: 2
+Loading Environment from MMC... *** Warning - bad CRC, using default environment
 
-Martyn
+In:    serial
+Out:   serial
+Err:   serial
+Net:   eth0: ethernet@2188000
 
-> Anyway, for this device:
->=20
-> Reviewed-by: Christopher Obbard <chris.obbard@collabora.com>
->=20
-> > ---
-> > =C2=A0configs/am62x_evm_a53_defconfig | 2 +-
-> > =C2=A01 file changed, 1 insertion(+), 1 deletion(-)
-> >=20
-> > diff --git a/configs/am62x_evm_a53_defconfig
-> > b/configs/am62x_evm_a53_defconfig
-> > index 78287ec18a..e373e44a93 100644
-> > --- a/configs/am62x_evm_a53_defconfig
-> > +++ b/configs/am62x_evm_a53_defconfig
-> > @@ -30,7 +30,7 @@ CONFIG_SPL_LOAD_FIT=3Dy
-> > =C2=A0CONFIG_SPL_LOAD_FIT_ADDRESS=3D0x81000000
-> > =C2=A0CONFIG_BOOTSTD_FULL=3Dy
-> > =C2=A0CONFIG_SYS_BOOTM_LEN=3D0x800000
-> > -CONFIG_BOOTCOMMAND=3D"run envboot; bootflow scan -lb"
-> > +CONFIG_BOOTCOMMAND=3D"run findfdt; run envboot; bootflow scan -lb"
-> > =C2=A0CONFIG_BOARD_LATE_INIT=3Dy
-> > =C2=A0CONFIG_SPL_MAX_SIZE=3D0x58000
-> > =C2=A0CONFIG_SPL_HAS_BSS_LINKER_SECTION=3Dy
->=20
-> Thanks!
->=20
-> Chris
 
+I did a git bisect to find the commit that broke model detection:
+
+# good: [4459ed60cb1e0562bc5b40405e2b4b9bbf766d57] Prepare v2023.10
+git bisect good 4459ed60cb1e0562bc5b40405e2b4b9bbf766d57
+# bad: [873791433602281ed230486606e326983c97a285] Merge
+https://source.denx.de/u-boot/custodians/u-boot-riscv
+git bisect bad 873791433602281ed230486606e326983c97a285
+# bad: [6e0a75d3162a024cb0cdedd871d435e6ee782447] configs: Resync with
+savedefconfig
+git bisect bad 6e0a75d3162a024cb0cdedd871d435e6ee782447
+# good: [99b46477e3495f819f6826d11470d46f12a4f9f7] clk: Dont return
+error when assigned-clocks is empty or missing
+git bisect good 99b46477e3495f819f6826d11470d46f12a4f9f7
+# bad: [50fa67d091b6ffbc1d77d3100d7b31795bf64928] arm: mach-k3:
+j721e_init: Move clk_k3 probe before loading TIFS
+git bisect bad 50fa67d091b6ffbc1d77d3100d7b31795bf64928
+# bad: [827cece3aa550d41e9c08c640b3a73372c8fb14a] pinctrl: renesas:
+Synchronize R8A77980 V3H PFC tables with Linux 6.5.3
+git bisect bad 827cece3aa550d41e9c08c640b3a73372c8fb14a
+# good: [623b3e8f9718a1fbd612b3e42451859e9f98a947] x86: spl: Change
+the condition for copying U-Boot to RAM
+git bisect good 623b3e8f9718a1fbd612b3e42451859e9f98a947
+# good: [ad57b98e212bd15492398cea3a8d4df6297e16fd] x86: doc: Split out
+manual booting into its own file
+git bisect good ad57b98e212bd15492398cea3a8d4df6297e16fd
+# bad: [6d53b50888315252cdd3251551add7a9108a1300] ARM: renesas: Enable
+DM_ETH_PHY on 64-bit R-Car boards
+git bisect bad 6d53b50888315252cdd3251551add7a9108a1300
+# bad: [283dcb63cb7d124fa427938f39aa9362872e02fc] buildman: Show
+progress when regenerating the board.cfg file
+git bisect bad 283dcb63cb7d124fa427938f39aa9362872e02fc
+# bad: [9e644284ab812f2db23f6185af77c0e771b0be73] dm: core: Report
+bootph-pre-ram/sram node as pre-reloc after relocation
+git bisect bad 9e644284ab812f2db23f6185af77c0e771b0be73
+# good: [b05a184379631d13c4a49e423aa1324dc1ae6158] Merge tag
+'x86-pull-20230922' of
+https://source.denx.de/u-boot/custodians/u-boot-x86 into next
+git bisect good b05a184379631d13c4a49e423aa1324dc1ae6158
+# first bad commit: [9e644284ab812f2db23f6185af77c0e771b0be73] dm:
+core: Report bootph-pre-ram/sram node as pre-reloc after relocation
+
+If I revert 9e644284ab812f2db23f6185af77c0e771b0be73 on top of git
+master everything is fine again. As I am not an export in that area I
+am seeking
+some directions on how to fix this issue.
+
+-- 
+greets
+--
+Christian Gmeiner, MSc
+
+https://christian-gmeiner.info/privacypolicy
