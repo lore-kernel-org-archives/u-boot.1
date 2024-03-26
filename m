@@ -4,79 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE64EC6FD1F
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 15:38:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFB52C6FD1F
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 15:49:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4283487ABC;
-	Tue, 26 Mar 2024 16:38:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
+	by phobos.denx.de (Postfix) with ESMTP id DFD6E87FAC;
+	Tue, 26 Mar 2024 16:49:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=digi.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="rPyLCEMf";
+	dkim=pass (2048-bit key; unprotected) header.d=digi.com header.i=@digi.com header.b="UUciDOg3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B860B87FAC; Tue, 26 Mar 2024 16:38:25 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1DDC688043; Tue, 26 Mar 2024 12:07:19 +0100 (CET)
+Received: from outbound-ip24a.ess.barracuda.com
+ (outbound-ip24a.ess.barracuda.com [209.222.82.206])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2CDFD8751B
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 16:38:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 96BB48644E
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 12:07:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=timesys.com
+ dmarc=pass (p=reject dis=none) header.from=digi.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=greg.malysa@timesys.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-609f3ca61e0so61227217b3.3
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 08:38:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1711467502; x=1712072302;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NV+e7uR81s5dxC4L5vO3Rgm18M/fOfbxHWHfhfPFEGs=;
- b=rPyLCEMfaP7pUpezleb4ICsDDnkN7NWRud/F1ODvJjaz+n2mS8NWrlryQaVuXEKIuM
- qsS7Y8W3/TDEmgX6+bSGxL0bRzhFA8y96qu6AvldfbZJFQt2AAdIFNqdc7Z6C96S1/2v
- IjQvC1RsUPuBeXldXITXhzSLysVtU5N9Q92o0/TBO6kEQ2bZcRUxf0yRT9GxlXCr0jBf
- sDq3yJzHF9+JBl1KKiFELZly4WxDbhipos+2lkAIa05/XYZElochl1A1FLBR4kpHKpHB
- 7IgrHUy9SozQdJFv9z4I75QvaGEx5DIGb3tCoYw1WHavQDWra8Ph0izrK2v819T/INw0
- 4pWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711467502; x=1712072302;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=NV+e7uR81s5dxC4L5vO3Rgm18M/fOfbxHWHfhfPFEGs=;
- b=MzfPxifl8H0ZaEQKZ7bzLaV5gOgKTVyCr2xV2+BjWPSQEJ/dUxC6AEI3+7OZDaH1bA
- 9gH3kJtBv5V3CCquTSnnUWq36NOH2zBNUrYi9B+UhtXhu6gcZmacCIig50l4tw3DGjFg
- mfEAaW2uxCxtm2IyLxylogyfoKJB/TVpSDF4Wx6LTxf/4ghLFIiTncKOTL3oriWGNLVj
- 5jrPQXp3+ZMj8t2XmoTDI8H6bB9/9mYZp2pmpDSJLZFFKC7W17tlI4TlK/wgeWSqBPrP
- e90GJih/3BN8GPtpfKZGktsqZaZVO0SOUI4xYkY/ykhwTBwsTmCltIBmH8ZN1tUK0e9s
- 7LVQ==
-X-Gm-Message-State: AOJu0YyoPPWW8syWdyVxeM/q6vVYmx6iPGnkA18Ol25nKGvaiDZeIDMf
- sKe8rQ45j8HT9YP3ttEjGcFi4ufAzriOQ41/fwdOnifoVToATynn4xn8lfinqeCP6k661FgSWDi
- YzAIGCGJKcqOqmu0RqrzFGUfasJ+q9HWXRKiO
-X-Google-Smtp-Source: AGHT+IEz7NJd68f3ednhfngDFtgh1xiprkDG7JYrpgeLCZcbwaSlwKJj2VVydEYeC9TTKG4GiFDwWl8z0JC/m2+tlgw=
-X-Received: by 2002:a81:85c5:0:b0:610:b933:33a1 with SMTP id
- v188-20020a8185c5000000b00610b93333a1mr8287153ywf.52.1711467502042; Tue, 26
- Mar 2024 08:38:22 -0700 (PDT)
+ spf=pass smtp.mailfrom=Javier.Viguera@digi.com
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11lp2169.outbound.protection.outlook.com [104.47.58.169]) by
+ mx-outbound40-112.us-east-2c.ess.aws.cudaops.com (version=TLSv1.2
+ cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Tue, 26 Mar 2024 11:07:12 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=HwvoC6hC0mxQDmSv9S839E7RWozZmXhCap7ueZ8UOq9pSP8dK3EXg1SqhzgiUD185LqyQCmH6FV/2QKQyZTEfymwvUXYujI0t7SR+8jIFANJpHx3kCOoTvr6r27IVNCNOAbgjVxpliQ9Pl2qqIyTqy/xV6mP6QTinXX1dMVxdxzmK1JxZ5xJDL9zo2HN/+aEDFD7gtbwPlaxXeocuDUBFpQU2DplRwlNOwrwb17IrhEZvqtYW1BtK7FpP5HFZ9K2/Lqazv4OSugpGYfRKV51g/uZxVb6Lqx5beXwA5Ixr4gScr8+tFZsNAUQNaWgxQLbmzmBWM8drfdL5J6fhtPEtw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=aX06AMW+o7yolVRNBmMXEcuNomiM8i+FKekkYn8MUTI=;
+ b=OA2Ryy5R6sRJHGYq7bB4eQfdYz1izvZ2zvlreoIrwSBQ5kzP5/6hXBlXa1U3d5rfVI6vFBVmSbVjD7zTO0DfnLraBzyPsVTxHJyhca6wEnakPoleqhEsdzJJdDNxGZ177MPDngz3/2kkWon6cf09htcQGOWa9yDNHwQS/n7Gg0iVyI9HVqic24x0UnOgm/yqs/zH/ZCSFtVgmHRgBjAVSqqA1pxjCOtoROxmg7YL+z+l4fDalb8iM9KF+YsxBGumwRQCUOH0uXq8puQdMcNC5ynyCZwLZn7pB6IgSbTSXyNYVvLGh3bkfMEWLCtjEAtzP+N+1/p3mjzfXe8o31JIwA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=digi.com; dmarc=pass action=none header.from=digi.com;
+ dkim=pass header.d=digi.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=digi.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=aX06AMW+o7yolVRNBmMXEcuNomiM8i+FKekkYn8MUTI=;
+ b=UUciDOg3mffSl8TKqOVs1+F7RbQqz+gq6z11OMPrdlXwqdk5MYbHAdcB2yI6Us0Gz1TpKp8OLaPVTLvFqiz+Bx3du5TrrcXGbI7i4nqj2VTsYhA2ft60sum0PGSVHvNeJr9SODU9RQtTLkQ304EFAagHWX2w27RHLkasXEggH5E8Z0Df1KUboRjKWO4xbuJhX+WCWcK1Y7BWyEDBx1toVGZk/Dtan9E2+TZNu+f+UTtbNXl2BkuTWkqVNCB9sQWIJtU3w56Ipaop7hyzSblkGThgR/jaMbsF5e5LVhSBXQA99dRBwmg5xuWNSM+E7KT4M3Z4F9SWLPnlssRFAKfx4w==
+Received: from DS7PR10MB5167.namprd10.prod.outlook.com (2603:10b6:5:38e::9) by
+ SN7PR10MB6498.namprd10.prod.outlook.com (2603:10b6:806:2a5::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7409.33; Tue, 26 Mar 2024 11:07:10 +0000
+Received: from DS7PR10MB5167.namprd10.prod.outlook.com
+ ([fe80::2991:3274:498f:f9d5]) by DS7PR10MB5167.namprd10.prod.outlook.com
+ ([fe80::2991:3274:498f:f9d5%4]) with mapi id 15.20.7409.031; Tue, 26 Mar 2024
+ 11:07:10 +0000
+From: Javier Viguera <javier.viguera@digi.com>
+To: u-boot@lists.denx.de,
+	uboot-imx@nxp.com,
+	festevam@gmail.com
+Cc: javier.viguera@digi.com
+Subject: [PATCH] arm: imx: fix signature_block_hdr struct fields order
+Date: Tue, 26 Mar 2024 12:06:56 +0100
+Message-ID: <20240326110656.21110-1-javier.viguera@digi.com>
+X-Mailer: git-send-email 2.43.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: CH0PR04CA0067.namprd04.prod.outlook.com
+ (2603:10b6:610:74::12) To DS7PR10MB5167.namprd10.prod.outlook.com
+ (2603:10b6:5:38e::9)
 MIME-Version: 1.0
-References: <20240326023208.3525-1-greg.malysa@timesys.com>
- <8e4d6360-8722-4358-b981-2b3405373861@denx.de>
-In-Reply-To: <8e4d6360-8722-4358-b981-2b3405373861@denx.de>
-From: Greg Malysa <greg.malysa@timesys.com>
-Date: Tue, 26 Mar 2024 11:36:11 -0400
-Message-ID: <CAAjXUap1DDPOSKQRc3-h0m5ybv_AHZePwW-vxRSeKW1STZp-0g@mail.gmail.com>
-Subject: Re: [PATCH] usb: dwc2: Add in version 4xx compatibility
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>, 
- Teik Heng Chong <teik.heng.chong@intel.com>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS7PR10MB5167:EE_|SN7PR10MB6498:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: +bjns3MHGrOUvVDx+BW4oMWRRjpa7nJ+uHBmOfsxH1hegMvW9aU93dmkDk3cZR81qblUrOD7dOufWb3iwGLORq1dmW2paEPRXOMOSvKcFDb5u5CqG01SBnTN3/h53GnRhkvUY9BFea7n665DH43h/2IBR9TjsIgidsMA/fygxYtFwjTEG9fVLc9UosrRau9ZviJLu6p+++2FSLMZHcVaRd1aJivDwA427JqTu10ET4Mm8bkvgmbn+bUdLgffPnGK6/rJe+7bZNJEja8tNnbMV/AJRHOIZNFJsf/C/KEX2oHAKB2ZtkU3AXWqfy+S8CNEq1ZlofPwA4sOTBv6rUt8bOxhn27J+q0dxE8ddQGYZ24spQLaHsAaqybi/tMGpIvvxFwjN7s0jfvZsse+L4PTZ4HHdk+YSBjCVs0HlBJu9F5zy6yc5/NFnwO/LfOo42YEqXkyBfhWN7z8B1m4pXQNpfzXhrgqrh6YPH1fzStOV34WG/L4jXBQxK8OH9yOmc83w52CGPV+it4/68OR/DUER1tmE9+RHBJ2wdbxRHLzP92CzQo3W0w9YTCYJJSHSzNKI5A9qo84T7L1bdy274W8nRAI3jwsL2I8qO/ARbCNd9SSGBPNF2gM/HzRJCN5+zdqIHCfbyqbIA+H0rA8yQ8PEVUas03CWDgzUkGicdIQsoLyfl3toB3tXB71VQ6XIOIY0MSypERB7UNG0sEjkVtNjS8ak95pn9ZUcQxBkcHrUQE=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DS7PR10MB5167.namprd10.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(52116005)(376005)(1800799015)(38350700005); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?7vMbLuIdsSGmxOP4kZqVzH9LsWTxe07fVZpRrn5TFXcPqg2p85y/ex8qIZ1T?=
+ =?us-ascii?Q?RHWQ8u5z5C1uRklKcquEJCOl6HEC4/bAnO0pBpt+hO5PpIY2pqa+AYP2/tV7?=
+ =?us-ascii?Q?eRhIA15+Y7aD5gCcSdFLyRVDEpLRmtQQmYxRIVSWpxmzYFXXOPJSjRdZ46Xe?=
+ =?us-ascii?Q?bjl19q1xqUlzvCIHEUDCH7Bsd7lF4bEUGBfgtMfPuZrrRToMfwDlvKiTuhMm?=
+ =?us-ascii?Q?V5L4Uuf2Se4FdALhBJFGpjxutLQaFsyqesyvpaFXxL8V4eD6dREbzu5N0+zS?=
+ =?us-ascii?Q?NTiYR+3aaT/2+711ksXRGNgvQyMkOitRJJgwrDzsQawtQlWCC97RkUEsmDcr?=
+ =?us-ascii?Q?LCTh2Q5L326MnLfL1JYcFvlesyVtAauygjRZGCTdFGS5nDjZvYBubcZUgM88?=
+ =?us-ascii?Q?9EetJByvOzaAA/oaCKhho3rL+FZkd3eACy7PmtzUV1e/YMsdhxOTD1cX1Loa?=
+ =?us-ascii?Q?8AM9KXw8p8LQu6+Yjbm4j5K9vzeTNFmsc4jxL1Ed3KXe3uxX1dFUBb3a5RXm?=
+ =?us-ascii?Q?Q5StidIt7QGd9A+oBH5Fd/jBM7bAQnyeAPgYoGl6BGH6SzcqSbzlh55Mhren?=
+ =?us-ascii?Q?GKz5/Yrccrh55t5bmHO9L9YUzgG9BHb1DqBCUQIVlIrFWTUtssLW3eAez6Pi?=
+ =?us-ascii?Q?51yH8JmQiwfDCQPClBB+1TfUxXh3URNreAJILEUrmhrq2fm2/RGkfEIZzXE0?=
+ =?us-ascii?Q?aIuOvPLJ+qpsaWCIaqUuPaX3IC+WuirBEd933UHYAXdQquX7KEBLOnQJtLFl?=
+ =?us-ascii?Q?Bg5J92ErxYopl42jplUIXLq/PfGPsqIL7Y3R2fgdzvIb0hRvCCTGXJtV/zH1?=
+ =?us-ascii?Q?qcx6wFizXMlQUXY4DIgBw6IM5Oonu6EFtdZbFAP3terWC6d9tOTXA25tk7ur?=
+ =?us-ascii?Q?lEHcb2OaJ22vvkks6p9wyfgRf2towp0SxLlC0WwjOXbNyu5XfrTIhfr1BK/H?=
+ =?us-ascii?Q?7Ejx7RC3mUhNdsUHTA1QVmQEN7AbfIimfnOYUgiy8PBpCEs2LuveejU8c5g6?=
+ =?us-ascii?Q?8VHJsmU5FXySlMhxwGJdiwGE9pfrISQAt8DvpTYhiRsGAI1cl1BwljOE5800?=
+ =?us-ascii?Q?FnXL6fQqP+LhpHnSOT1pu6ALixxIof06Xnq2kjaS3Df8Px1hbL2DqA7Ij6E0?=
+ =?us-ascii?Q?JSSLe4XnALYkgIO0NrsvXqXGGOknlyZ53TXrH5y0ImMFYkamT2xMpxH7kXWX?=
+ =?us-ascii?Q?oqPJbW2mbTB2ZGyt+VnETtn+IBjn21Iwj8ZzFPtyUqlbwXXwzIn3arXNdI/P?=
+ =?us-ascii?Q?TNw9Uncxgd7E1MUT+Ienni7GJ4ygQlHyog10BKiCrthglzOv62YmmzngKvus?=
+ =?us-ascii?Q?Xd9ovG7HUh3Ug7plW+OQ7berZ46gepd53Yusm1PQgv7f0lhFhDrswmf/gN8C?=
+ =?us-ascii?Q?o5BNavCut68J68DSj8htfEVHIhD8GKtTzn32eFTwxdilPcHwGFsBT45Ibwq+?=
+ =?us-ascii?Q?SztWCh4Vw0JnNABoBYRzcnvILMC+f5D1yEvgORz1/lREFr4ErVLkaT5TXsyw?=
+ =?us-ascii?Q?9SC1UVu3EPKJlRfjaNkii+IBfGygAJwo5AieCgaZc97eWXYv4eDjk1TBowOS?=
+ =?us-ascii?Q?Wu/15iLhMrDIl+YDCw702dtwMgrJ/krysXW4oPx5?=
+X-OriginatorOrg: digi.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 99a9f7ca-4ce2-4307-21c8-08dc4d84e20b
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR10MB5167.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2024 11:07:10.5572 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Rj//aKhR8eXm5hRTze5tuGEOz5GPVxO8rLdGvx/sbxgY54z0eTs7MVtwx39APq1MOSFI0/EEJSY91hapmZ/6Yg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR10MB6498
+X-BESS-ID: 1711451232-110352-12637-915-1
+X-BESS-VER: 2019.1_20240320.1941
+X-BESS-Apparent-Source-IP: 104.47.58.169
+X-BESS-Parts: H4sIAAAAAAACA4uuVkqtKFGyUioBkjpK+cVKVoaGRgZAVgZQMDXNxCzZzMDSwi
+ QtySjRyCjFLNUwOcU0MdHQ1DjRwMRSqTYWAEJq/PNBAAAA
+X-BESS-Outbound-Spam-Score: 0.00
+X-BESS-Outbound-Spam-Report: Code version 3.2,
+ rules version 3.2.2.255133 [from 
+ cloudscan17-31.us-east-2b.ess.aws.cudaops.com]
+ Rule breakdown below
+ pts rule name              description
+ ---- ---------------------- --------------------------------
+ 0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
+X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS112744 scores of
+ KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND
+X-BESS-BRTS-Status: 1
+X-Mailman-Approved-At: Tue, 26 Mar 2024 16:49:00 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,70 +150,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I'd be happy with that change. Does anyone have access to the
-associated designware databook (I do not)? We could also check to see
-if those four bits are all always allocated to the 2/3/4/x version
-number. I can submit v2 with that change instead once we know.
+According to the documentation (for example AN13994), for AHAB-enabled
+devices the format of the signature block is:
 
-On Tue, Mar 26, 2024 at 7:50=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
->
-> On 3/26/24 3:32 AM, Greg Malysa wrote:
-> > From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-> >
-> > This adds the Synopsys device id for version 4xx of the designware
-> > IP block and extends the version check to include it to permit
-> > new hardware to run. It does not add any 4xx-specific features.
-> >
-> > Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
-> > Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
-> > Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-> >
-> > ---
-> >
-> >
-> > ---
-> >   drivers/usb/host/dwc2.c | 3 ++-
-> >   drivers/usb/host/dwc2.h | 1 +
-> >   2 files changed, 3 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
-> > index 637eb2dd06..6fdde6a9a7 100644
-> > --- a/drivers/usb/host/dwc2.c
-> > +++ b/drivers/usb/host/dwc2.c
-> > @@ -1180,7 +1180,8 @@ static int dwc2_init_common(struct udevice *dev, =
-struct dwc2_priv *priv)
-> >                snpsid >> 12 & 0xf, snpsid & 0xfff);
-> >
-> >       if ((snpsid & DWC2_SNPSID_DEVID_MASK) !=3D DWC2_SNPSID_DEVID_VER_=
-2xx &&
-> > -         (snpsid & DWC2_SNPSID_DEVID_MASK) !=3D DWC2_SNPSID_DEVID_VER_=
-3xx) {
-> > +         (snpsid & DWC2_SNPSID_DEVID_MASK) !=3D DWC2_SNPSID_DEVID_VER_=
-3xx &&
-> > +         (snpsid & DWC2_SNPSID_DEVID_MASK) !=3D DWC2_SNPSID_DEVID_VER_=
-4xx) {
-> >               dev_info(dev, "SNPSID invalid (not DWC2 OTG device): %08x=
-\n",
-> >                        snpsid);
-> >               return -ENODEV;
-> > diff --git a/drivers/usb/host/dwc2.h b/drivers/usb/host/dwc2.h
-> > index 6f022e33a1..f202d55eb2 100644
-> > --- a/drivers/usb/host/dwc2.h
-> > +++ b/drivers/usb/host/dwc2.h
-> > @@ -739,6 +739,7 @@ struct dwc2_core_regs {
-> >   #define DWC2_PCGCCTL_DEEP_SLEEP_OFFSET                      7
-> >   #define DWC2_SNPSID_DEVID_VER_2xx                   (0x4f542 << 12)
-> >   #define DWC2_SNPSID_DEVID_VER_3xx                   (0x4f543 << 12)
-> > +#define DWC2_SNPSID_DEVID_VER_4xx                    (0x4f544 << 12)
-> >   #define DWC2_SNPSID_DEVID_MASK                              (0xfffff =
-<< 12)
-> >   #define DWC2_SNPSID_DEVID_OFFSET                    12
->
-> Maybe it would be better/easier/futureproof to simply check if (snpsid &
-> 0xffff0 =3D=3D 0x4f540) ?
+  +--------------+--------------+--------------+-------------+
+  | Tag          | Length - msb | Length - lsb | Version     |
+  +--------------+--------------+--------------+-------------+
+  | SRK Table offset            | Certificate offset         |
+  +-----------------------------+----------------------------+
+  | Blob offset                 | Signature offset           |
+  +-----------------------------+----------------------------+
 
+Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+---
+ include/imx_container.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-
---=20
-Greg Malysa
-Timesys Corporation
+diff --git a/include/imx_container.h b/include/imx_container.h
+index 54cd684e35d5..691c764b3e5b 100644
+--- a/include/imx_container.h
++++ b/include/imx_container.h
+@@ -50,10 +50,10 @@ struct signature_block_hdr {
+ 	u8 length_lsb;
+ 	u8 length_msb;
+ 	u8 tag;
+-	u16 srk_table_offset;
+ 	u16 cert_offset;
+-	u16 blob_offset;
++	u16 srk_table_offset;
+ 	u16 signature_offset;
++	u16 blob_offset;
+ 	u32 reserved;
+ } __packed;
+ 
