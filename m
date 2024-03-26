@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2DADCD11DF
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 22:15:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F45BC54E67
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 22:15:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AC798804F;
-	Tue, 26 Mar 2024 23:15:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 13E6E88058;
+	Tue, 26 Mar 2024 23:15:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="eh4472qG";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="VrCQwfa5";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="OwtLyh9+";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="D/xGND0O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E87538804C; Tue, 26 Mar 2024 23:15:02 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id BA3058804C; Tue, 26 Mar 2024 23:15:03 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF02980EED
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 23:15:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C315687B89
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 23:15:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,46 +32,49 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4V43yD3RXjz9snl;
- Tue, 26 Mar 2024 23:15:00 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4V43yF4bRDz9sWp;
+ Tue, 26 Mar 2024 23:15:01 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1711491300;
+ s=mail20150812; t=1711491301;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=C7fST/yDSh7t6jOTQ+1N9ifrlZyOS5a7LeyGUyOS+RU=;
- b=eh4472qGXGl0FBLnu0qTolaFVmhw4/G5xU7Kw3yw7M5wH90NVNYdVARGs4RYjN9HdwHWdU
- k5NrkL0Ugn6R0QDD5dUoS5kgOcCYkWOQ10YOjlZq9OzVartUWGaoS6Ah72DTLRj9qS9nKY
- kP9ByvxmdYnG4rjrXks3Mhn4cT+rBWlonAGzHc0Qa8GC+fMUmy9HSzJVRShvIb/6ZOa6o6
- +UJdWGGjy8r7N3/b/3gW3N+Uk6zwFjCAZQUfsHqSuMC4/kluc2rFNXEtqTJmzwa1vejkY3
- p5f20dpQ5XQ7EoP0J7gk7cLGB0RZ6JEeqMuyKhHx0u+faHZfQfw2a3/nHdhXTw==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=y3vjzFprV7zRMswWO06m+t1rGw2JlDX26Zi/OjqObsA=;
+ b=OwtLyh9+ChIISybklakB691S0sYERVh1AtGNj9UDnHISDltL63SX8TGYH0OgLWTSRf0A6i
+ 9sdBnV9Ri3O/5Lw0Ox7cf3nm3cCq4iJS5LhtPFjQ5GoK9mBDHoCQtbwDPgwNz4YZwcvoeE
+ hVqRbia0ZhoSVzM7QyjLWXAIcHqUrfKuQrR3J98lPxXSTLXWKRvpdyyc7Hh/koXwR8SQ5T
+ HsFr2ICbuRETfmqkV9i2OcQQOibxXS+n7l9GfF3inwsIC9l3I5ZHAwCRQ+SFCQXS2Y6Yfc
+ O03/ZurGIamNzdp0rpCuT/mZcxrem5P+9tAEPvsG58iMA5C8db2QhIrmZ7Y3cA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1711491298;
+ s=mail20150812; t=1711491299;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=C7fST/yDSh7t6jOTQ+1N9ifrlZyOS5a7LeyGUyOS+RU=;
- b=VrCQwfa5j/5YPBMROgUXCZvoIzccKazGFNDnJaPZa+ZsR3sUz7/KHMEJ1hkX8rP5JxDCIC
- WKd5h52NUXcl00l4T9HYxf0TkwpC1ihFm4F2yR5jWvtbKKI/3Io3PKJftZZGsyGlNmk06q
- EQL/b6Sy3dlo/XowC0M5qhwJGUEUB7uZUcXGu1ZzsK0a2DEhnAYgjmdXTY3kImMzmzeENI
- HiRmoAArGzZ0Rse4hx/qZOiyEvMXBHGvgLk0+Q85ExylKD/U10tZPgmVfH6tnkKj6s5kLg
- cfiroZ0ESWc0HmPnv2fR1uDgHZBZZs3NvWMSLEh867VCP5adVa0YsP7FOYssTA==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=y3vjzFprV7zRMswWO06m+t1rGw2JlDX26Zi/OjqObsA=;
+ b=D/xGND0OZKBnI/As7vLnU7G4Yxf/l7seYkA4Xx7RpLCzofXCPPEGcQiqrxkYl1dtjzzkeC
+ 5Qpssrmbl3yIArYQtvY1kx3k4wpwzC6ybhoxWzC9F5wlcBWNrmgl4zYLbaq7fAQwc00XR5
+ 00pzkdek18DGUuye52tp2AIKuyKS3wMgOB0W4+zlGmAhRFq4phpaaXiOTGoPDgdjyIEV7M
+ t8sh3CTS4l5NhRtSIsiRvYUbzL4JTVmU7hhcuY2mtt8gYEKUeFQlxaCMr12zsBbz7YLmSN
+ y/D08LbROxms1iga/vnYmZp2IAZjc/ufYqFk+oaVpqs+LRaaeIT3yoM/qVR7gQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 1/6] boot: fdt: Change type of env_get_bootm_low() to
- phys_addr_t
-Date: Tue, 26 Mar 2024 23:13:11 +0100
-Message-ID: <20240326221431.55346-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v4 2/6] boot: fdt: Clean up env_get_bootm_size()
+Date: Tue, 26 Mar 2024 23:13:12 +0100
+Message-ID: <20240326221431.55346-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240326221431.55346-1-marek.vasut+renesas@mailbox.org>
+References: <20240326221431.55346-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: a7695dd117a2fb10018
-X-MBO-RS-META: 9nm3m1d7fi3c44mgbrdyekj39ui34t1q
-X-Rspamd-Queue-Id: 4V43yD3RXjz9snl
+X-MBO-RS-ID: ba928519c6720327cb4
+X-MBO-RS-META: 8zsycyi5xpkwjjb4pe86m667oz8amik6
+X-Rspamd-Queue-Id: 4V43yF4bRDz9sWp
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,15 +91,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change type of ulong env_get_bootm_low() to phys_addr_t env_get_bootm_low().
-The PPC/LS systems already treat env_get_bootm_low() result as phys_addr_t,
-while the function itself still returns ulong. This is potentially dangerous
-on 64bit systems, where ulong might not be large enough to hold the content
-of "bootm_low" environment variable. Fix it by using phys_addr_t, similar to
-what env_get_bootm_size() does, which returns phys_size_t .
+Reduce tmp variable use and remove unnecessary type cast in
+env_get_bootm_size(). This aligns the env variable parsing
+with env_get_bootm_low(). No functional change.
 
-Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Reported-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
@@ -104,130 +103,39 @@ Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Cc: Simon Glass <sjg@chromium.org>
 Cc: Tom Rini <trini@konsulko.com>
 ---
-V2: - Drop now unnecessary conversion in boot_start_lmb()
-      lmb_init_and_reserve_range()
-    - Drop tmp variable in env_get_bootm_low()
-    - Print initrd_high as u64/%llx
-    - Add RB from Laurent
-V3: No change
+V2: - New patch
+V3: - Reword commit message
 V4: No change
 ---
- boot/bootm.c       |  4 ++--
- boot/image-board.c | 14 ++++++--------
- boot/image-fdt.c   |  9 +++++----
- include/image.h    |  2 +-
- 4 files changed, 14 insertions(+), 15 deletions(-)
+ boot/image-board.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
 
-diff --git a/boot/bootm.c b/boot/bootm.c
-index d071537d692..032f5a4a160 100644
---- a/boot/bootm.c
-+++ b/boot/bootm.c
-@@ -242,13 +242,13 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
- #ifdef CONFIG_LMB
- static void boot_start_lmb(struct bootm_headers *images)
- {
--	ulong		mem_start;
-+	phys_addr_t	mem_start;
- 	phys_size_t	mem_size;
- 
- 	mem_start = env_get_bootm_low();
- 	mem_size = env_get_bootm_size();
- 
--	lmb_init_and_reserve_range(&images->lmb, (phys_addr_t)mem_start,
-+	lmb_init_and_reserve_range(&images->lmb, mem_start,
- 				   mem_size, NULL);
- }
- #else
 diff --git a/boot/image-board.c b/boot/image-board.c
-index 75f6906cd56..3263497a1d5 100644
+index 3263497a1d5..e3d63745299 100644
 --- a/boot/image-board.c
 +++ b/boot/image-board.c
-@@ -107,14 +107,12 @@ static int on_loadaddr(const char *name, const char *value, enum env_op op,
- }
- U_BOOT_ENV_CALLBACK(loadaddr, on_loadaddr);
- 
--ulong env_get_bootm_low(void)
-+phys_addr_t env_get_bootm_low(void)
- {
- 	char *s = env_get("bootm_low");
+@@ -129,10 +129,8 @@ phys_size_t env_get_bootm_size(void)
+ 	phys_addr_t start;
+ 	char *s = env_get("bootm_size");
  
 -	if (s) {
--		ulong tmp = hextoul(s, NULL);
+-		tmp = (phys_size_t)simple_strtoull(s, NULL, 16);
 -		return tmp;
 -	}
 +	if (s)
 +		return simple_strtoull(s, NULL, 16);
  
- #if defined(CFG_SYS_SDRAM_BASE)
- 	return CFG_SYS_SDRAM_BASE;
-@@ -538,7 +536,7 @@ int boot_ramdisk_high(struct lmb *lmb, ulong rd_data, ulong rd_len,
- 		      ulong *initrd_start, ulong *initrd_end)
- {
- 	char	*s;
--	ulong	initrd_high;
-+	phys_addr_t initrd_high;
- 	int	initrd_copy_to_ram = 1;
+ 	start = gd->ram_base;
+ 	size = gd->ram_size;
+@@ -142,7 +140,7 @@ phys_size_t env_get_bootm_size(void)
  
- 	s = env_get("initrd_high");
-@@ -553,8 +551,8 @@ int boot_ramdisk_high(struct lmb *lmb, ulong rd_data, ulong rd_len,
- 		initrd_high = env_get_bootm_mapsize() + env_get_bootm_low();
- 	}
+ 	s = env_get("bootm_low");
+ 	if (s)
+-		tmp = (phys_size_t)simple_strtoull(s, NULL, 16);
++		tmp = simple_strtoull(s, NULL, 16);
+ 	else
+ 		tmp = start;
  
--	debug("## initrd_high = 0x%08lx, copy_to_ram = %d\n",
--	      initrd_high, initrd_copy_to_ram);
-+	debug("## initrd_high = 0x%llx, copy_to_ram = %d\n",
-+	      (u64)initrd_high, initrd_copy_to_ram);
- 
- 	if (rd_data) {
- 		if (!initrd_copy_to_ram) {	/* zero-copy ramdisk support */
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 5e4aa9de0d2..c2571b22244 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -160,9 +160,10 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
- {
- 	void	*fdt_blob = *of_flat_tree;
- 	void	*of_start = NULL;
--	u64	start, size, usable;
-+	phys_addr_t start, size, usable;
- 	char	*fdt_high;
--	ulong	mapsize, low;
-+	phys_addr_t low;
-+	phys_size_t mapsize;
- 	ulong	of_len = 0;
- 	int	bank;
- 	int	err;
-@@ -217,7 +218,7 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
- 			if (start + size < low)
- 				continue;
- 
--			usable = min(start + size, (u64)(low + mapsize));
-+			usable = min(start + size, low + mapsize);
- 
- 			/*
- 			 * At least part of this DRAM bank is usable, try
-@@ -233,7 +234,7 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
- 			 * Reduce the mapping size in the next bank
- 			 * by the size of attempt in current bank.
- 			 */
--			mapsize -= usable - max(start, (u64)low);
-+			mapsize -= usable - max(start, low);
- 			if (!mapsize)
- 				break;
- 		}
-diff --git a/include/image.h b/include/image.h
-index 21de70f0c9e..acffd17e0df 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -946,7 +946,7 @@ static inline void image_set_name(struct legacy_img_hdr *hdr, const char *name)
- int image_check_hcrc(const struct legacy_img_hdr *hdr);
- int image_check_dcrc(const struct legacy_img_hdr *hdr);
- #ifndef USE_HOSTCC
--ulong env_get_bootm_low(void);
-+phys_addr_t env_get_bootm_low(void);
- phys_size_t env_get_bootm_size(void);
- phys_size_t env_get_bootm_mapsize(void);
- #endif
 -- 
 2.43.0
 
