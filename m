@@ -4,45 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E4BC6FD1F
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 13:22:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B3F7C6FD1F
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 13:48:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B734187F64;
-	Tue, 26 Mar 2024 14:22:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id D80F987F78;
+	Tue, 26 Mar 2024 14:48:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="UIrAztDy";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 050A887F65; Tue, 26 Mar 2024 14:22:47 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
+ id A0F3187FAC; Tue, 26 Mar 2024 14:48:35 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org
+ [IPv6:2604:1380:40e1:4800::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE42087F5D
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 14:22:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
+ by phobos.denx.de (Postfix) with ESMTPS id A630487F65
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 14:48:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 42QDMZ6Y000961;
- Tue, 26 Mar 2024 21:22:35 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0;
- Tue, 26 Mar 2024 21:22:30 +0800
-Date: Tue, 26 Mar 2024 21:22:27 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
-Subject: [GIT PULL] u-boot-riscv/master
-Message-ID: <ZgLME470PHld19If@swlinux02>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 42QDMZ6Y000961
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mwalle@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 75D6BCE2142;
+ Tue, 26 Mar 2024 13:48:31 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6332AC433F1;
+ Tue, 26 Mar 2024 13:48:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1711460910;
+ bh=edLiWMdo0Y3CxMachJdVrm0TDElF4ls53slF1rbPoEk=;
+ h=Date:Subject:Cc:From:To:References:In-Reply-To:From;
+ b=UIrAztDybADAaLmYPGCucVXkBCzjtoDkU3hfvjQPPD9Lb8ZBvjRB/6eq53mokkAyd
+ XTsRrjmnxllpzJWLB7PeFbmqBYyGTiNWygzHn6PPz3Kb2oUMtiUlbzHm/SOyC322ie
+ kn4Uz9U6dRrbIgNuvThCWnwomFW1peuR0rtuljQlcM6XOsZOxPxLL8Qkm3nHPq72PK
+ vmH7PHPl2Jymyq34yOUVJ1FBtw59NPmFE6zNpmdKKSeSF6ps8d14NKNacA0Mtta9FQ
+ JuJ0c2z71gaNHmT8FP6vplXt4vFRO0JSdOsobTT+wEezC9fy6zC2aJxYRL3Z3zuUhq
+ A94O9L/v/uIZw==
+Content-Type: multipart/signed;
+ boundary=2a666c3e8316120ed72cc5a0ba21c70da685767dccdd517302239d962389;
+ micalg=pgp-sha384; protocol="application/pgp-signature"
+Date: Tue, 26 Mar 2024 14:48:26 +0100
+Message-Id: <D03Q9AGO5ND9.1TJM3KSNA71WG@kernel.org>
+Subject: Re: [PATCH 3/4] arm: dts: k3-*-binman.dtsi: Clean up and templatize
+ boot binaries
+Cc: <michal.simek@amd.com>, <marex@denx.de>, <neil.armstrong@linaro.org>,
+ <afd@ti.com>, <vigneshr@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>,
+ <u-kumar1@ti.com>
+From: "Michael Walle" <mwalle@kernel.org>
+To: "Neha Malcom Francis" <n-francis@ti.com>, <u-boot@lists.denx.de>,
+ <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
+ <bb@ti.com>, <nm@ti.com>, <sumit.garg@linaro.org>
+X-Mailer: aerc 0.16.0
+References: <20240322131011.1029620-1-n-francis@ti.com>
+ <20240322131011.1029620-4-n-francis@ti.com>
+In-Reply-To: <20240322131011.1029620-4-n-francis@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,31 +75,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+--2a666c3e8316120ed72cc5a0ba21c70da685767dccdd517302239d962389
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-The following changes since commit dde373bde392c38649c8c4420e0c98ef8d38d9dc:
+Hi,
 
-  Prepare v2024.04-rc5 (2024-03-25 21:56:50 -0400)
+On Fri Mar 22, 2024 at 2:10 PM CET, Neha Malcom Francis wrote:
+> Clean up templatized boot binaries for all K3 boards. This includes
+> modifying the k3-binman.dtsi to use SPL_BOARD_DTB, BOARD_DESCRIPTION and
+> UBOOT_BOARD_DESCRIPTION from the files that include it to further reuse
+> code.
+>
+> All k3-<soc>-binman.dtsi will contain only templates. Only required boot
+> binaries can be built from the templates in the boards' respective
+> -u-boot.dtsi file (or k3-<board>-binman.dtsi if it exists). This allows
+> clear distinction between the SoC common stuff vs. what is additionally
+> needed to boot up a specific board.
 
-are available in the Git repository at:
+I appreciate the cleanup. But as far as I can see, a board might
+only have one device tree. How would that work if the uboot proper
+must support multiple device trees?
 
-  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
+Thanks,
+-michael
 
-for you to fetch changes up to 0cfe1bc6ed9b322d2b03ded3175ac5de3ed2b784:
+--2a666c3e8316120ed72cc5a0ba21c70da685767dccdd517302239d962389
+Content-Type: application/pgp-signature; name="signature.asc"
 
-  spl: riscv: opensbi: fix check of PAYLOAD_ARGS_ADDR (2024-03-26 17:31:24 +0800)
+-----BEGIN PGP SIGNATURE-----
 
-CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/20075
-----------------------------------------------------------------
+iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCZgLSKxIcbXdhbGxlQGtl
+cm5lbC5vcmcACgkQEic87j4CH/g1MgGAp5D0ggNk4efJrW7BioXgDJHZlY0klnFf
+LiATMn0FPKTVB8gnHKPGGTImkWTUK3eTAYCmcSAEbClaJYFDZphJHZ37I2GOLCGp
+lCbXO3tV52s6VstAiH7f3TP6OW/Zf6i4+pE=
+=oO0c
+-----END PGP SIGNATURE-----
 
-- Fix RISC-V falcon mode booting issue
-
-----------------------------------------------------------------
-Randolph (1):
-      spl: riscv: opensbi: fix check of PAYLOAD_ARGS_ADDR
-
- common/spl/spl_opensbi.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-Best regards,
-Leo
+--2a666c3e8316120ed72cc5a0ba21c70da685767dccdd517302239d962389--
