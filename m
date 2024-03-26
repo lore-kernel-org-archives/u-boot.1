@@ -4,70 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 263B8C54E58
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 02:49:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F14CAC54E67
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 04:22:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9187A87061;
-	Tue, 26 Mar 2024 03:49:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
+	by phobos.denx.de (Postfix) with ESMTP id 26FCD87F69;
+	Tue, 26 Mar 2024 05:22:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="JRs0r+uh";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2ED1887F5D; Tue, 26 Mar 2024 03:49:43 +0100 (CET)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1711426922;
+	bh=EiTa9Ev3NxOJYQ/2OYKYLaSzD36SCAM832BAM7Ncpf8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=IEYxC79qgIY9RzdZCWxYtCyWEzwFLT97Vof5HL1LiLR3x7xl85v/RAL3OfPgoKSsC
+	 5q+HDInsyLDT+XWnsXOaMo0GnHJpEmvtRdx9fDvWBxVtr4TOzwHjumdB+LJxum7L9y
+	 KnOZJl+wWHOqWcB3V3DXxfbpvSDMou9fVl4uZzYNvvgzBAWauQQ71yPp3AmLVonB2P
+	 TE9lyKVYnWVkf9o92AHJMxsvM0AF+6f+GwTojj5lYILAc6riCBPITaJZezVqgfZ9Jz
+	 oxUV9a3NPsrDEiO94en7Teq4BAYDJfmDYTg7BrM1JeLOBigV/Frf55utBagtNXXZNE
+	 89fIjUmicEMuA==
+Received: from [192.168.1.107] (87-97-112-25.pool.digikabel.hu [87.97.112.25])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2449187061
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 03:49:41 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=timesys.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=greg.malysa@timesys.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-dd161eb03afso4434017276.0
- for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 19:49:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1711421380; x=1712026180;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=eT0oez/x5TyX46nYiTAuhgciG0nD8e5K70X1m05GV90=;
- b=JRs0r+uhyaoh83Gvq3J/q+NPA1Y6ocpskpYLrRwf/74DfIe0S8eOKFPuX1vPRq66m6
- DjTjyTeJBgFtQJvgAfP841s0pgJ17nqcbFhYs79g3zpkyKnPSc/+O42Q12GbrbkFUUPR
- /4+eA5oW6D56LeHXIs+t2Ceg/1vS1TkZ7uHcahPCHtQSLyuJTA39OqNyIOHhbRp7jLTK
- aJldUrcKKxxH83zYtXmkDIfqqERgA39lMTR+hdzJ2Pk+dP7y+K8+M3v0CuFVrTyqNeho
- Oah9JKAjcYqyAc4tpEE1jxvc7IwwigqbRDGUZJvdLs7CNWZHQGrbQ1mF3GU5ZGpd+TYZ
- /xDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711421380; x=1712026180;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=eT0oez/x5TyX46nYiTAuhgciG0nD8e5K70X1m05GV90=;
- b=V2Yyr444nq3cUPUjmi0BAGW8DlGHV7o8ENd8AYqCzUUw4SqAOBt4bgTssxn4UhDVde
- CMxE623OexnZMv0cbiwWlLtZHKCnnHZERECcKQx+hZeqLThTC9o+ANA06OHwM9FBsZRc
- +k9S80bHHtkbsaNU0hBX2KM72vviLI1tpYPrrp5lGz9SadNWw2GsiN78K3yBZWmkWyR+
- 3Nv1WvwlZ2U4bNWjA1jmoOX1xRFwyEKXcb0mrvBRmP3kuNkwS67UKLL4iyQ1mt3acxyo
- M6nzgblMvH0C+d9jss29+cqcsV2yvXH3XezAbKg3Z+e96DwQUnnMcJ7OPyQ6kSQLzFzW
- wBtg==
-X-Gm-Message-State: AOJu0Yyky1JQFZfiTopmLEk9ZIfnGDnIN8Kocqn8sIMKG37YX4a25xjc
- iFlNjMpx9q935JgDFcx5C10NAT72nzNOfapelAEn8ZSLz6WULiy2Ml0llwH7ospb4j6C0iUvrtg
- odEvlpP4DahvGGdgs2Jih9ZkiEHD3nSoEDlN/970rUgH4cz8=
-X-Google-Smtp-Source: AGHT+IHkxjaK0V1MkrHuRIxFpdANBF56Ngx4lK4eRqBQe8Z9tsltIKY9F0dnfa5ixNAXQ2fO7I+ZI0F6/eAXkscs4zE=
-X-Received: by 2002:a25:a89:0:b0:db5:3b32:b1c3 with SMTP id
- 131-20020a250a89000000b00db53b32b1c3mr1484507ybk.21.1711421379948; Mon, 25
- Mar 2024 19:49:39 -0700 (PDT)
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id CF84780E9A;
+ Tue, 26 Mar 2024 05:21:56 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1711426920;
+ bh=EiTa9Ev3NxOJYQ/2OYKYLaSzD36SCAM832BAM7Ncpf8=;
+ h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
+ b=NI9OJBueEs/RwPrwIQWDvh5L9JlklxsGljA6QIIRt+4JbOuuHFT1I6jg+5Lp6jZxB
+ bJZOL60UtBkEpBdS/O14P53x/ysbOCL8cxjk/9Yga6ubqflwaY26IIMvF2nkfxyha7
+ U1V//uiuq2ZYPRipEdpDza8HqWoX6o3MGl76bcnqIxVj7XwtaSmdEXTBG/zj/aluAU
+ mbWnx5maObvwaat66agf9HLUEaUtV4Llkbke8kEDkqNzHS4qKkeMHGk5OnlqXcOEwv
+ 6AOwwfSVE0buREOdr1wRy0knScJZmZ2fPUTWiIKsnGhTWQvLyCLlZsOwTT4pNQeZRM
+ iQyXat/FGj5gw==
+Message-ID: <b5ab190f-6bcd-9cdc-ec91-6a9178ef9d9a@denx.de>
+Date: Tue, 26 Mar 2024 05:21:29 +0100
 MIME-Version: 1.0
-From: Greg Malysa <greg.malysa@timesys.com>
-Date: Mon, 25 Mar 2024 22:47:30 -0400
-Message-ID: <CAAjXUar=97omadi8MSLox5V_iCwix+YSUP_fMCGsLhUzUfBpcw@mail.gmail.com>
-Subject: Upcoming Analog Devices SoC Support Submission
-To: u-boot@lists.denx.de
-Cc: Ian Roberts <ian.roberts@timesys.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v2 0/6] Introduce UBI block device
+Content-Language: en-US
+To: Alexey Romanov <avromanov@salutedevices.com>,
+ dario.binacchi@amarulasolutions.com
+Cc: kernel@salutedevices.com, u-boot@lists.denx.de,
+ michael@amarulasolutions.com, frieder.schrempf@kontron.de,
+ kmpark@infradead.org, joe.hershberger@ni.com, dunaev@tecon.ru,
+ sjg@chromium.org, bmeng@tinylab.org, xypron.glpk@gmx.de,
+ tobias@waldekranz.com, jpewhacker@gmail.com,
+ marek.vasut+renesas@mailbox.org, kever.yang@rock-chips.com,
+ jbx6244@gmail.com, abdellatif.elkhlifi@arm.com,
+ mikhail.kshevetskiy@iopsys.eu, jagan@amarulasolutions.com
+References: <20240325144148.3738195-1-avromanov@salutedevices.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <20240325144148.3738195-1-avromanov@salutedevices.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,36 +71,74 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hello Alexey,
 
-I wanted to get a little bit of guidance before dumping some patches
-on the mailing list. I've been preparing to submit support we've
-developed for the Analog Devices SC5xx SoCs including both core SoC
-support and specific device trees and defconfigs for the eval kits
-available from ADI. I've submitted several small patches to touch
-various shared parts of U-Boot that we needed to extend to get this
-hardware running and to get some familiarity with using patman to
-format and submit things, but now I have a roughly 15k line changeset
-consisting of a new mach type and all of the required drivers for the
-system. It's broken down into a bunch of commits: one for the mach
-type support, one per driver we've added, and one per target board
-supported.
+On 25.03.24 15:41, Alexey Romanov wrote:
+> Hello!
+> 
+> This series adds support for the UBI block device, which
+> allows to read/write data block by block. For example,
+> it can now be used for BCB or Android AB command:
+> 
+>    $ bcb load ubi 0 part_name
+> 
+> Tested only on SPI NAND, so bind is made only for
+> SPI NAND drivers. Can be used with mtdblock device [1].
+> 
+> ---
+> 
+> Changes V1 -> V2 [2]:
+> 
+>   - Rebased over mtdblock v2 patchset [3].
+>   - Compile UBI partitions support only if CONFIG_BLK option
+>     is enabled.
 
-What is the best way to submit this? Ideally I'd love to get feedback
-on individual drivers from the respective subsystem maintainers, but
-it seems rude to have a 20-element patch series that gets resubmitted
-each time feedback comes in for one component. If we break it down
-into separate patches for each piece, what would be the best way to
-ensure that all of the dependencies are merged in order?
+Thanks!
 
-Thanks,
-Greg
+> - Links:
+> 
+>    [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salutedevices.com/
+>    [2] https://lore.kernel.org/all/20240306134906.1179285-1-avromanov@salutedevices.com/
+>    [3] https://lore.kernel.org/all/20240307130726.1582487-1-avromanov@salutedevices.com/
+> 
+> Alexey Romanov (6):
+>    ubi: allow to read from volume with offset
+>    ubi: allow to write to volume with offset
+>    drivers: introduce UBI block abstraction
+>    disk: don't try search for partition type if already set
+>    disk: support UBI partitions
+>    spinand: bind UBI block
+> 
+>   cmd/ubi.c                   |  77 +++++++++++++++++++--
+>   disk/part.c                 |   7 ++
+>   drivers/block/blk-uclass.c  |   1 +
+>   drivers/mtd/nand/spi/core.c |   8 ++-
+>   drivers/mtd/ubi/Makefile    |   1 +
+>   drivers/mtd/ubi/block.c     | 130 ++++++++++++++++++++++++++++++++++++
+>   drivers/mtd/ubi/part.c      |  99 +++++++++++++++++++++++++++
+>   env/ubi.c                   |  16 ++---
+>   include/part.h              |   2 +
+>   include/ubi_uboot.h         |   8 ++-
+>   10 files changed, 332 insertions(+), 17 deletions(-)
+>   create mode 100644 drivers/mtd/ubi/block.c
+>   create mode 100644 drivers/mtd/ubi/part.c
 
+Looks good to me now.
+
+@Dario: I saw that series is delegetad to you in patchwork.
+  From my side it is fine. If you think I should  pick it up, please
+  send a Reviewed/Acked-by for the SPI NAND parts, and notify me,
+  thanks!
+
+bye,
+Heiko
 -- 
-Greg Malysa
-Timesys Corporation
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
