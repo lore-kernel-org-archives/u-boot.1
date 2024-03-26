@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE830C6FD1F
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 12:34:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0640CC6FD1F
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 12:49:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4487888076;
-	Tue, 26 Mar 2024 13:33:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 640C688011;
+	Tue, 26 Mar 2024 13:49:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KE9hoEGl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OaIzXx22";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06C8688073; Tue, 26 Mar 2024 13:33:56 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9993D8801F; Tue, 26 Mar 2024 13:49:31 +0100 (CET)
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com
+ [IPv6:2607:f8b0:4864:20::42b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6D6087FDA
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 13:33:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 48D2A88003
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 13:49:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42QCXjp5082791;
- Tue, 26 Mar 2024 07:33:45 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1711456425;
- bh=m5w0gVKAo+V1bT33j3cAbgWJ+igUAW/FVJpXIF6F20g=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=KE9hoEGl2rK4pqR8ELuHp3cqnR+nvng2qtCWyMqgVkNB/9zxY897fljaVAAKosC21
- x7/kepFN1ixCnlCvuYm35NrWKY72dZqfk068T4ERcLVmaqfsWhFM+U9Zva4ADfXEWv
- nqXZkNHHpEWvujJGx2pWUfkEE2KoWpCIkWDJKabA=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42QCXj1x022962
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 26 Mar 2024 07:33:45 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 26
- Mar 2024 07:33:44 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 26 Mar 2024 07:33:44 -0500
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42QCXe4T096639;
- Tue, 26 Mar 2024 07:33:40 -0500
-Message-ID: <01d903da-353f-4d9d-8b9a-610e34b6ee20@ti.com>
-Date: Tue, 26 Mar 2024 18:03:39 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x42b.google.com with SMTP id
+ d2e1a72fcca58-6ea895eaaadso924804b3a.1
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 05:49:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711457368; x=1712062168; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eRk2IiMRPoigAcZhfpB1iD4Ki2zFcoG9u4H3DFwwmqM=;
+ b=OaIzXx221X4cD84txY0AblFp36bzijNOsoX5dhGqlo/RKtg+D/dnqv01vm2RjT1fFQ
+ u0fxGYIkqzGd7Pl3lE18/s1UxmNZy+lCPpTQBZ90njp7UEOgPbNNMy0mh2KJ9e/QFbw3
+ Ts1Y5amK/aH7tF8CutGBHezYmjp10GUACrewIaaGVuTdMqaWwYSioPOgAX8FLUQO5DRn
+ DmUGOE49X1jiBu2PJnEuPoSG3qTY+j9zu0cmp9TqHweOLqC5kMDami2kCC0eGXu9p+hc
+ YqzLIbcwQng0HhGgp6LFavcv0HpoV6VRhakx3fvH2bJj/zwBUMHGYG935ecAyp85pSCb
+ Znrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711457368; x=1712062168;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eRk2IiMRPoigAcZhfpB1iD4Ki2zFcoG9u4H3DFwwmqM=;
+ b=NFcM2qViyA2fXFh96juph2H7Ana6SvlZUa2bc9ULRIh55kcOzA0c/hg6i4sP+gpUpw
+ ytIZeA3AY78sfNm7PfgU/LJwZ5yNyn+AZcFXhl5lxtEcWjl3Sxn5wrmD8hgg03c3i6gY
+ 6FHUXeV1VhJRfl7Az5IOyrMnNqP9MogiD0qQ4irldPx/SaQ0UCqPdfzCaBCNFDnVp/pj
+ Otnt6Rs3rOWPHQcfa620J1kTk6sli410XVBUDpwOQGGUdmj90JX9dCCIaf8uEoE38lnW
+ MbnqTqsB1GJh6iHJ5X5jv7VPg/mvVWfXrsLq1Gu+1pWj5OUtn/pke2blexATsZVOQqxa
+ 80rg==
+X-Gm-Message-State: AOJu0YyGsJWlPVF5hI5BVlXATryb0kmMRHM9RyVnKbjuM2OK8Wn5a/N3
+ 9xO6hfVq2EIc5szVydonSPEtis6syQraeTYOel2JIBdMcV+U/DwfuPoeCPBUx6E5w5RwauNqesQ
+ wKpID9PrKHBuT6ywpE0euDX7Bkyp7+QR2Dr0=
+X-Google-Smtp-Source: AGHT+IGo+P6xInkX6+8jtB1X9BsvwtgorA1WL8+IX6+veJHY6ZYVcMZ626zlM5vcvncoTCDHbFk98cKpqshA/BAGjUA=
+X-Received: by 2002:a05:6a20:3d06:b0:1a3:c3a1:b780 with SMTP id
+ y6-20020a056a203d0600b001a3c3a1b780mr7910554pzi.1.1711457367675; Tue, 26 Mar
+ 2024 05:49:27 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] arm: dts: k3-*-binman.dtsi: Clean up and templatize
- boot binaries
-Content-Language: en-US
-To: Nishanth Menon <nm@ti.com>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
- <alpernebiyasak@gmail.com>, <bb@ti.com>, <sumit.garg@linaro.org>,
- <michal.simek@amd.com>, <marex@denx.de>, <neil.armstrong@linaro.org>,
- <afd@ti.com>, <vigneshr@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>,
- <u-kumar1@ti.com>
-References: <20240322131011.1029620-1-n-francis@ti.com>
- <20240322131011.1029620-4-n-francis@ti.com>
- <20240326122723.f2dwxggu7yop7jf2@booted>
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20240326122723.f2dwxggu7yop7jf2@booted>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <BEZP281MB29655E047444C987850ED632AB202@BEZP281MB2965.DEUP281.PROD.OUTLOOK.COM>
+ <CAOMZO5BhEmnVsmYdJgabZC1L6GrNc4WvMhRZNrFhemTvD3rpzQ@mail.gmail.com>
+ <FRYP281MB2969D2ABC5FF3EB2421E95E8AB202@FRYP281MB2969.DEUP281.PROD.OUTLOOK.COM>
+ <CAOMZO5BZETj3yTE1mOVXCmUH+JeyYPs2bSWZ9DGp1qtNqD=JHQ@mail.gmail.com>
+ <FRYP281MB296999BB951F57EE51D9C52EAB362@FRYP281MB2969.DEUP281.PROD.OUTLOOK.COM>
+In-Reply-To: <FRYP281MB296999BB951F57EE51D9C52EAB362@FRYP281MB2969.DEUP281.PROD.OUTLOOK.COM>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 26 Mar 2024 09:49:17 -0300
+Message-ID: <CAOMZO5C3LfFd5fGZiQUh9Kdv24aavL+2o8eQYTKfSQhtS93q-A@mail.gmail.com>
+Subject: Re: U-boot fails for khadas-edge -v
+To: Vivek Jaiswal <vjaiswal@cinemo.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,72 +91,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Nishanth
+Hi Vivek,
 
-On 26/03/24 17:57, Nishanth Menon wrote:
-> On 18:40-20240322, Neha Malcom Francis wrote:
->> Clean up templatized boot binaries for all K3 boards. This includes
->> modifying the k3-binman.dtsi to use SPL_BOARD_DTB, BOARD_DESCRIPTION and
->> UBOOT_BOARD_DESCRIPTION from the files that include it to further reuse
->> code.
->>
->> All k3-<soc>-binman.dtsi will contain only templates. Only required boot
->> binaries can be built from the templates in the boards' respective
->> -u-boot.dtsi file (or k3-<board>-binman.dtsi if it exists). This allows
->> clear distinction between the SoC common stuff vs. what is additionally
->> needed to boot up a specific board.
->>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->>   arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  | 161 +---------
->>   arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 291 +----------------
->>   arch/arm/dts/k3-am625-r5-beagleplay.dts       |  39 ---
->>   arch/arm/dts/k3-am625-sk-binman.dtsi          | 148 +--------
->>   arch/arm/dts/k3-am625-sk-u-boot.dtsi          |  42 +++
->>   .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 296 +-----------------
->>   arch/arm/dts/k3-am62a-sk-binman.dtsi          | 146 +--------
->>   arch/arm/dts/k3-am62a7-sk-u-boot.dtsi         |  42 +++
->>   arch/arm/dts/k3-am642-evm-u-boot.dtsi         |  42 +++
->>   arch/arm/dts/k3-am642-sk-u-boot.dtsi          |  42 +++
->>   arch/arm/dts/k3-am64x-binman.dtsi             | 239 +-------------
->>   arch/arm/dts/k3-am654-base-board-u-boot.dtsi  |  49 +++
->>   arch/arm/dts/k3-am65x-binman.dtsi             | 144 +--------
->>   .../arm/dts/k3-am68-sk-base-board-u-boot.dtsi |  26 ++
->>   arch/arm/dts/k3-am69-sk-u-boot.dtsi           |  31 +-
->>   arch/arm/dts/k3-binman.dtsi                   |  96 ++++++
->>   arch/arm/dts/k3-j7200-binman.dtsi             | 145 +--------
->>   .../k3-j7200-common-proc-board-u-boot.dtsi    |  40 +++
->>   .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   | 154 +--------
->>   arch/arm/dts/k3-j721e-binman.dtsi             | 262 +++-------------
->>   .../k3-j721e-common-proc-board-u-boot.dtsi    |  84 +++++
->>   arch/arm/dts/k3-j721e-r5-beagleboneai64.dts   |  91 +-----
->>   arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |  84 +++++
->>   arch/arm/dts/k3-j721s2-binman.dtsi            | 231 +-------------
->>   .../k3-j721s2-common-proc-board-u-boot.dtsi   |  42 +++
->>   arch/arm/dts/k3-j784s4-binman.dtsi            | 154 +--------
->>   arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        |  42 +++
->>   27 files changed, 858 insertions(+), 2305 deletions(-)
->>
->> diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
->> index cca0f44b7d8..fc1898f1510 100644
->> --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
->> +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
->> @@ -6,7 +6,11 @@
->>    * Copyright (C) 2022-2023 Robert Nelson, BeagleBoard.org Foundation
->>    */
->>   
->> -#include "k3-binman.dtsi"
->> +#define SPL_BOARD_DTB "spl/dts/k3-am625-beagleplay.dtb"
->> +#define BOARD_DESCRIPTION "k3-am625-beagleplay"
->> +#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM625 BeaglePlay"
->> +
->> +#include "k3-am625-sk-binman.dtsi"
-> 
-> Drop the "sk" ?
-> 
+[Please don't top-post and do not post HTML]
 
-Yes Andrew had pointed it out earlier, will make the change in the next version.
+On Mon, Mar 25, 2024 at 1:37=E2=80=AFPM Vivek Jaiswal <vjaiswal@cinemo.com>=
+ wrote:
+>
+> Hello Fabio,
+> I tried using the this github repository.
+> https://github.com/u-boot/u-boot.git
+>
+> And the configuration used was following
+>
+> rockchip-rk3399-khadas-edge-v.conf
+>
+> UBOOT_MACHINE =3D "khadas-edge-v-rk3399_defconfig"
+>
+> I got some error during the build from the u-boot.
+>
+> Please check the attachment BuildError1.txt or BuildError2.txt
+>
+> make[2]: *** [/home/vjaiswal/dev/Projects/SOLAR/khadas-dev/forTesting/yoc=
+to2_actual_meta_rockchip/build/tmp/work/rockchip_rk3399_khadas_edge_v-poky-=
+linux/u-boot-rockchip/1_2017.09-r0/git/scripts/Makefile.build:280: cmd/boot=
+m.o] Error 1
+> make[1]: *** [/home/vjaiswal/dev/Projects/SOLAR/khadas-dev/forTesting/yoc=
+to2_actual_meta_rockchip/build/tmp/work/rockchip_rk3399_khadas_edge_v-poky-=
+linux/u-boot-rockchip/1_2017.09-r0/git/Makefile:1317: cmd] Error 2
+> make: *** [Makefile:157: sub-make] Error 2
 
--- 
-Thanking You
-Neha Malcom Francis
+You are trying to build U-Boot 2017.09.
+
+U-Boot 2024.01 builds khadas-edge-v-rk3399_defconfig just fine.
