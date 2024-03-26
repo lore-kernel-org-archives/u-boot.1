@@ -4,78 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85303CD11DF
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 22:14:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2DADCD11DF
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 22:15:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04C0B87ABC;
-	Tue, 26 Mar 2024 23:14:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7AC798804F;
+	Tue, 26 Mar 2024 23:15:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U5KBk0gw";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="eh4472qG";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="VrCQwfa5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0925D87ABC; Tue, 26 Mar 2024 23:14:13 +0100 (CET)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E87538804C; Tue, 26 Mar 2024 23:15:02 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16D1480EED
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 23:14:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF02980EED
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 23:15:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-5cfcf509fbdso1104370a12.1
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 15:14:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711491248; x=1712096048; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dj7uXol22fgjTfeIu36aHTOTXgcziZc4mFJj2F+Eb3A=;
- b=U5KBk0gwbcYsAz1zlvofwHsA9C50AP6vBtcmsabIEnbJZFhnTXse/YbPjaiMXGp5I9
- fMZmyV3nKytEoSNXiDcVfNFsFaF5mxACYipgDlqOtZV1U68wJGKeoxItY4anTkGmCFP4
- wSJmoUI/cPpkKMzKapJxQ0X0Z2jD3BXpl/S+NysHOm91yXidJ7vLHYz/YHN8NJYtRGK/
- U10HizqctGMpangFYGhAkINxl0hUruX5PTqi9ctXdJn8POMWhNrBw9pg2iq7jihgp+Nz
- R3LwYmHABBb8RYSAgPl6sSlzPr1tev7RRyX3XbngiddHZRL5O+NXJ1tzoGJW5/Uk83Nz
- knBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711491248; x=1712096048;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dj7uXol22fgjTfeIu36aHTOTXgcziZc4mFJj2F+Eb3A=;
- b=OPGNDKrFOmewpVBi5wvT/wBcgsZZ+n0BMSTznBiBBMCmdy/FLa+eB/nxhBXI0ja/Ml
- HCFbXAGKqvnLJT18oPUnblYfAlbQR3Z1zl4Lve7t3JWYqw4D+pWZo15OyoDzBLPSPxRr
- 3bOD6QsqV93kDyJLqSD3Y8x4EEiuQsp/7wmriPyGpQt2zw6kAFYorLkAyptFGe8PMcwu
- EKnWezZmLXYZfQoAh7jfA4JJsV25lwA5M0tlz31NoyE9ZlGajF8VUCcYa40Bn1V+OeHm
- UUeD809jKZ7YU128vmwEM2DkUj0OELsb6oYbgWDsEYsGJ6J1K+kgISXGUBviPjBUdDUl
- 0eYw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUcw8KXVCExrgtP1fjIRdsgd5kSKeInWNTS5YmlGZWlebEw9pO4NnXIKQb8YJcAE7NLaDsCOH5DwsvspNH+UrDhPrGltA==
-X-Gm-Message-State: AOJu0YxnNu3qxSFAd13/zIOyICUJDdlioZ5qGN6GLLLgNwa9pjkzjVdj
- 1oG441mg/iqEWl7I0bqbuvJJ5POPnLJrSlsKu+aVYvR+wyGGrSQQSXdUdIj2ypfTHnh21M6S2qC
- reLoiIGYIurzPoK0qpobj5lDToos=
-X-Google-Smtp-Source: AGHT+IEnXwN3APQhrAaAkcdQDaKN1LQ6q+VCQuvNAPiBif/dGNObh3gCLLFlyB3P6ZBcpjb5ZdIpFRU32sz8s6VEURM=
-X-Received: by 2002:a17:90a:ba98:b0:29c:7487:43b8 with SMTP id
- t24-20020a17090aba9800b0029c748743b8mr9913749pjr.1.1711491248497; Tue, 26 Mar
- 2024 15:14:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4V43yD3RXjz9snl;
+ Tue, 26 Mar 2024 23:15:00 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1711491300;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=C7fST/yDSh7t6jOTQ+1N9ifrlZyOS5a7LeyGUyOS+RU=;
+ b=eh4472qGXGl0FBLnu0qTolaFVmhw4/G5xU7Kw3yw7M5wH90NVNYdVARGs4RYjN9HdwHWdU
+ k5NrkL0Ugn6R0QDD5dUoS5kgOcCYkWOQ10YOjlZq9OzVartUWGaoS6Ah72DTLRj9qS9nKY
+ kP9ByvxmdYnG4rjrXks3Mhn4cT+rBWlonAGzHc0Qa8GC+fMUmy9HSzJVRShvIb/6ZOa6o6
+ +UJdWGGjy8r7N3/b/3gW3N+Uk6zwFjCAZQUfsHqSuMC4/kluc2rFNXEtqTJmzwa1vejkY3
+ p5f20dpQ5XQ7EoP0J7gk7cLGB0RZ6JEeqMuyKhHx0u+faHZfQfw2a3/nHdhXTw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1711491298;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=C7fST/yDSh7t6jOTQ+1N9ifrlZyOS5a7LeyGUyOS+RU=;
+ b=VrCQwfa5j/5YPBMROgUXCZvoIzccKazGFNDnJaPZa+ZsR3sUz7/KHMEJ1hkX8rP5JxDCIC
+ WKd5h52NUXcl00l4T9HYxf0TkwpC1ihFm4F2yR5jWvtbKKI/3Io3PKJftZZGsyGlNmk06q
+ EQL/b6Sy3dlo/XowC0M5qhwJGUEUB7uZUcXGu1ZzsK0a2DEhnAYgjmdXTY3kImMzmzeENI
+ HiRmoAArGzZ0Rse4hx/qZOiyEvMXBHGvgLk0+Q85ExylKD/U10tZPgmVfH6tnkKj6s5kLg
+ cfiroZ0ESWc0HmPnv2fR1uDgHZBZZs3NvWMSLEh867VCP5adVa0YsP7FOYssTA==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 1/6] boot: fdt: Change type of env_get_bootm_low() to
+ phys_addr_t
+Date: Tue, 26 Mar 2024 23:13:11 +0100
+Message-ID: <20240326221431.55346-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20240326033801.228419-1-joy.zou@nxp.com>
- <20240326033801.228419-3-joy.zou@nxp.com>
-In-Reply-To: <20240326033801.228419-3-joy.zou@nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 26 Mar 2024 19:13:57 -0300
-Message-ID: <CAOMZO5AaEwu_VnmuXiT_pUiM9ftJZb3gpCSKwqVjdbKoUOb8Lw@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] imx: imx93_evk: add rtc pcf2131
-To: Joy Zou <joy.zou@nxp.com>
-Cc: peng.fan@nxp.com, ye.li@nxp.com, ping.bai@nxp.com, sbabic@denx.de, 
- sjg@chromium.org, saproj@gmail.com, judge.packham@gmail.com, 
- uboot-imx@nxp.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: a7695dd117a2fb10018
+X-MBO-RS-META: 9nm3m1d7fi3c44mgbrdyekj39ui34t1q
+X-Rspamd-Queue-Id: 4V43yD3RXjz9snl
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,27 +87,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 26, 2024 at 12:30=E2=80=AFAM Joy Zou <joy.zou@nxp.com> wrote:
+Change type of ulong env_get_bootm_low() to phys_addr_t env_get_bootm_low().
+The PPC/LS systems already treat env_get_bootm_low() result as phys_addr_t,
+while the function itself still returns ulong. This is potentially dangerous
+on 64bit systems, where ulong might not be large enough to hold the content
+of "bootm_low" environment variable. Fix it by using phys_addr_t, similar to
+what env_get_bootm_size() does, which returns phys_size_t .
 
-> +&lpi2c3 {
-> +       #address-cells =3D <1>;
-> +       #size-cells =3D <0>;
-> +       clock-frequency =3D <400000>;
-> +       pinctrl-names =3D "default", "sleep";
-> +       pinctrl-0 =3D <&pinctrl_lpi2c3>;
-> +       pinctrl-1 =3D <&pinctrl_lpi2c3>;
-> +       status =3D "okay";
-> +
-> +       pcf2131: rtc@53 {
-> +               compatible =3D "nxp,pcf2131";
-> +               reg =3D <0x53>;
-> +               interrupt-parent =3D <&pcal6524>;
-> +               interrupts =3D <1 IRQ_TYPE_LEVEL_LOW>;
-> +               status =3D "okay";
+Reviewed-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Reported-by: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+---
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
+Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+---
+V2: - Drop now unnecessary conversion in boot_start_lmb()
+      lmb_init_and_reserve_range()
+    - Drop tmp variable in env_get_bootm_low()
+    - Print initrd_high as u64/%llx
+    - Add RB from Laurent
+V3: No change
+V4: No change
+---
+ boot/bootm.c       |  4 ++--
+ boot/image-board.c | 14 ++++++--------
+ boot/image-fdt.c   |  9 +++++----
+ include/image.h    |  2 +-
+ 4 files changed, 14 insertions(+), 15 deletions(-)
 
-Please submit the RTC support to Linux first, then you can sync the
-devicetree with Linux in U-Boot.
+diff --git a/boot/bootm.c b/boot/bootm.c
+index d071537d692..032f5a4a160 100644
+--- a/boot/bootm.c
++++ b/boot/bootm.c
+@@ -242,13 +242,13 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
+ #ifdef CONFIG_LMB
+ static void boot_start_lmb(struct bootm_headers *images)
+ {
+-	ulong		mem_start;
++	phys_addr_t	mem_start;
+ 	phys_size_t	mem_size;
+ 
+ 	mem_start = env_get_bootm_low();
+ 	mem_size = env_get_bootm_size();
+ 
+-	lmb_init_and_reserve_range(&images->lmb, (phys_addr_t)mem_start,
++	lmb_init_and_reserve_range(&images->lmb, mem_start,
+ 				   mem_size, NULL);
+ }
+ #else
+diff --git a/boot/image-board.c b/boot/image-board.c
+index 75f6906cd56..3263497a1d5 100644
+--- a/boot/image-board.c
++++ b/boot/image-board.c
+@@ -107,14 +107,12 @@ static int on_loadaddr(const char *name, const char *value, enum env_op op,
+ }
+ U_BOOT_ENV_CALLBACK(loadaddr, on_loadaddr);
+ 
+-ulong env_get_bootm_low(void)
++phys_addr_t env_get_bootm_low(void)
+ {
+ 	char *s = env_get("bootm_low");
+ 
+-	if (s) {
+-		ulong tmp = hextoul(s, NULL);
+-		return tmp;
+-	}
++	if (s)
++		return simple_strtoull(s, NULL, 16);
+ 
+ #if defined(CFG_SYS_SDRAM_BASE)
+ 	return CFG_SYS_SDRAM_BASE;
+@@ -538,7 +536,7 @@ int boot_ramdisk_high(struct lmb *lmb, ulong rd_data, ulong rd_len,
+ 		      ulong *initrd_start, ulong *initrd_end)
+ {
+ 	char	*s;
+-	ulong	initrd_high;
++	phys_addr_t initrd_high;
+ 	int	initrd_copy_to_ram = 1;
+ 
+ 	s = env_get("initrd_high");
+@@ -553,8 +551,8 @@ int boot_ramdisk_high(struct lmb *lmb, ulong rd_data, ulong rd_len,
+ 		initrd_high = env_get_bootm_mapsize() + env_get_bootm_low();
+ 	}
+ 
+-	debug("## initrd_high = 0x%08lx, copy_to_ram = %d\n",
+-	      initrd_high, initrd_copy_to_ram);
++	debug("## initrd_high = 0x%llx, copy_to_ram = %d\n",
++	      (u64)initrd_high, initrd_copy_to_ram);
+ 
+ 	if (rd_data) {
+ 		if (!initrd_copy_to_ram) {	/* zero-copy ramdisk support */
+diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+index 5e4aa9de0d2..c2571b22244 100644
+--- a/boot/image-fdt.c
++++ b/boot/image-fdt.c
+@@ -160,9 +160,10 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
+ {
+ 	void	*fdt_blob = *of_flat_tree;
+ 	void	*of_start = NULL;
+-	u64	start, size, usable;
++	phys_addr_t start, size, usable;
+ 	char	*fdt_high;
+-	ulong	mapsize, low;
++	phys_addr_t low;
++	phys_size_t mapsize;
+ 	ulong	of_len = 0;
+ 	int	bank;
+ 	int	err;
+@@ -217,7 +218,7 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
+ 			if (start + size < low)
+ 				continue;
+ 
+-			usable = min(start + size, (u64)(low + mapsize));
++			usable = min(start + size, low + mapsize);
+ 
+ 			/*
+ 			 * At least part of this DRAM bank is usable, try
+@@ -233,7 +234,7 @@ int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
+ 			 * Reduce the mapping size in the next bank
+ 			 * by the size of attempt in current bank.
+ 			 */
+-			mapsize -= usable - max(start, (u64)low);
++			mapsize -= usable - max(start, low);
+ 			if (!mapsize)
+ 				break;
+ 		}
+diff --git a/include/image.h b/include/image.h
+index 21de70f0c9e..acffd17e0df 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -946,7 +946,7 @@ static inline void image_set_name(struct legacy_img_hdr *hdr, const char *name)
+ int image_check_hcrc(const struct legacy_img_hdr *hdr);
+ int image_check_dcrc(const struct legacy_img_hdr *hdr);
+ #ifndef USE_HOSTCC
+-ulong env_get_bootm_low(void);
++phys_addr_t env_get_bootm_low(void);
+ phys_size_t env_get_bootm_size(void);
+ phys_size_t env_get_bootm_mapsize(void);
+ #endif
+-- 
+2.43.0
 
-In the meantime, you can add the RTC support to the -u-boot.dtsi.
-
-Please consider using OF_UPSTREAM available in the U-Boot next branch.
