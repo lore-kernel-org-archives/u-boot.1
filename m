@@ -4,72 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FBD6CD11DF
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 09:24:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F24FCD11DF
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 09:34:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4B0488011;
-	Tue, 26 Mar 2024 10:24:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B16B58718A;
+	Tue, 26 Mar 2024 10:34:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=armadeus.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MPS3WBCm";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F160A8801F; Tue, 26 Mar 2024 10:24:07 +0100 (CET)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 83CD788019; Tue, 26 Mar 2024 10:34:41 +0100 (CET)
+Received: from 1.mo576.mail-out.ovh.net (1.mo576.mail-out.ovh.net
+ [178.33.251.173])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3C0087FDA
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 10:24:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40FAD87F64
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 10:34:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2d49f7e5c2cso70297451fa.2
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 02:24:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711445045; x=1712049845; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=kLFYPSUYd6QvFV/CPS7ViM6lgPdq4J6gHIFNErBrCy4=;
- b=MPS3WBCm/AFN5wIF/HYSqIwCCjYqFJH4hh+3DVW+j/tEQgkGDHwjqiW2/GiPosOolF
- ek8EMEPwQnGXbFtDVX+eXKprgApzmFJWzEAolpsuQp+cs5+bpgRslQLkXhfgSv4IZXfH
- NvMLwLFiE7DBnlo0He7NM0lrkZadNHizVCBKYoxdDuiU15qF0x3Vcry32AHNtZpMTQlY
- PalwMp58iPWyUor88/qk9sy+mWYosVq7IMPKgp2ItrijirGxPR34QdvQmRvmPkcnyHYy
- i5Izj9zdU5Tm3lwYDSYzOkdb/6l1dZb/W8KdhJjouHB0D3MSBJEeYCzb3/XTVUS8BJOT
- X1sQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711445045; x=1712049845;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kLFYPSUYd6QvFV/CPS7ViM6lgPdq4J6gHIFNErBrCy4=;
- b=dkExpkHItMdtEBXqm2Eje/aW7FqquAw0b2UMvPzOoe3U5KB3yOJN63shi75prgL1kz
- yLT4WmhqwvGT55MqWJjNzeiJ6bnT5N9Z5nFyiSRAsZPdlEjkWbqCNCoolveTgNyDMR2A
- WKH46JHP0HgTchFj9brJdfXae506OkIS4J3TE0zw3zVGXGjppcwofnGvYqDuKacaI75C
- 27VCwxFaFVGV1xeIi4LU0Gh8aoPwKlXHKnjRcZY5V5hVJr5WbV+Q+GVcpDQ69AWq9Tpl
- Lk0WRz3FY+0iV/oLikKmX6WUUUUqU7hj6ubNwcIzpMr+MfHQuvsyfFdqVW5MaaEJWsKj
- eBAQ==
-X-Gm-Message-State: AOJu0YzcRGWFkUwZIO0/B7NfuyQa83pI8eT5ErJ2UM2GidKz7O0ieVpm
- hBzdzHFP7OSkmWr+PouUI0CuVsjjS3THLUNYXEN/kAKQnrYym56SlA5ZQxt4eGbqqcd1+ihfWPI
- RMaAJl/eGqI8+17f9rwWc7jLHROePlw9gIT2KBrtIpwycDbug
-X-Google-Smtp-Source: AGHT+IGUTcS3Ag+GM/tx1wkhfEkNSD/u+VHMIGC7qDcOs3JCKHy7l8jDvbpleNJpPvszqVduz4rQfcBPQLKejN/fj/s=
-X-Received: by 2002:a2e:a272:0:b0:2d4:5ce5:2323 with SMTP id
- k18-20020a2ea272000000b002d45ce52323mr5461248ljm.34.1711445045068; Tue, 26
- Mar 2024 02:24:05 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=armadeus.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=sebastien.szymanski@armadeus.com
+Received: from director10.ghost.mail-out.ovh.net (unknown [10.108.17.88])
+ by mo576.mail-out.ovh.net (Postfix) with ESMTP id 4V3l4t56Cqz1d3n
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 09:34:38 +0000 (UTC)
+Received: from ghost-submission-6684bf9d7b-tbvpx (unknown [10.110.168.217])
+ by director10.ghost.mail-out.ovh.net (Postfix) with ESMTPS id 05A1920009;
+ Tue, 26 Mar 2024 09:34:37 +0000 (UTC)
+Received: from armadeus.com ([37.59.142.103])
+ by ghost-submission-6684bf9d7b-tbvpx with ESMTPSA
+ id X1+lOK2WAmbxeAAAE8nR6A
+ (envelope-from <sebastien.szymanski@armadeus.com>);
+ Tue, 26 Mar 2024 09:34:37 +0000
+Authentication-Results: garm.ovh; auth=pass
+ (GARM-103G00582661fa7-6dfb-4e63-8092-3d26630fbfe1,
+ 053BE689857645FDD68B3632F2CDF9C290DDC83D)
+ smtp.auth=sebastien.szymanski@armadeus.com
+X-OVh-ClientIp: 92.140.169.135
+From: =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: Guillaume GARDET <guillaume.gardet@free.fr>, u-boot@lists.denx.de,
+ =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>
+Subject: [PATCH 1/1] net: nfs: fix file handle length in NFSv3
+Date: Tue, 26 Mar 2024 10:34:31 +0100
+Message-ID: <20240326093431.23962-1-sebastien.szymanski@armadeus.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-References: <CAJ+vNU12-4EJN_RPGPPTfTVden2=beq-XaeFL=dF7t+AAqje=Q@mail.gmail.com>
-In-Reply-To: <CAJ+vNU12-4EJN_RPGPPTfTVden2=beq-XaeFL=dF7t+AAqje=Q@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 26 Mar 2024 11:23:28 +0200
-Message-ID: <CAC_iWj+B0r7o8Hwi_KZM=+L9t6=THH=pzY38jrcDDdAntWT3Rw@mail.gmail.com>
-Subject: Re: tcg2_platform_get_log failing to read address and size of
- memory-region via ofnode_get_addr_size
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot <u-boot@lists.denx.de>, eajames@linux.ibm.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Ovh-Tracer-Id: 10857615754266471403
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedvledruddufedgtdeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpefurogsrghsthhivghnucfuiiihmhgrnhhskhhiuceoshgvsggrshhtihgvnhdrshiihihmrghnshhkihesrghrmhgruggvuhhsrdgtohhmqeenucggtffrrghtthgvrhhnpefgleevhfejvddujeeuheehtdfghfetieevtdfhueeivdehuedvgefggfejgedtffenucffohhmrghinheprhhftgdqvgguihhtohhrrdhorhhgpdhrvghplhihrdgurghtrgenucfkphepuddvjedrtddrtddruddpledvrddugedtrdduieelrddufeehpdefjedrheelrddugedvrddutdefnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepuddvjedrtddrtddruddpmhgrihhlfhhrohhmpehsvggsrghsthhivghnrdhsiiihmhgrnhhskhhisegrrhhmrgguvghushdrtghomhdpnhgspghrtghpthhtohepuddprhgtphhtthhopehuqdgsohhotheslhhishhtshdruggvnhigrdguvgdpoffvtefjohhsthepmhhoheejiedpmhhouggvpehsmhhtphhouhht
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,105 +71,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
+The NFS protocol uses file handles to refer to file or directory.
+In NFSv2 file handles have a fixed size of 32 bytes.
+In NFSv3 file handles have a variable length up to 64 bytes. This is
+also true for the MOUNT protocol. [1]
+When the NFSv3 server replies with a file handle length > 32 bytes, U-Boot
+only copies 32 bytes of that file handle and the next LOOKUP Call fails:
 
-On Tue, 26 Mar 2024 at 03:15, Tim Harvey <tharvey@gateworks.com> wrote:
->
-> Greetings,
->
-> I'm unable to understand why tcg2_platform_get_log is failing to read
-> a memory region.
->
-> For example the following diffs:
+BIOS> nfs ${loadaddr} 192.168.1.51:/nfsroot/opos93dev-br/boot/Image
+Using ethernet@428a0000 device
+File transfer via NFS from server 192.168.1.51; our IP address is 192.168.1.133
+Filename '/nfsroot/opos93dev-br/boot/Image'.
+Load address: 0x80400000
+Loading: *** ERROR: File lookup fail
 
-I am not really sure what those nodes are supposed to do in sandbox.
-Pehaps Eddie remembers.
-What exactly are you trying to achieve here? Read the eventlog from TF-A?
+done
+BIOS>
 
-Thanks
-/Ilias
->
-> diff --git a/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
-> b/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
-> index 7b2130dbdb21..57b3c227ceaf 100644
-> --- a/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
-> +++ b/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
-> @@ -112,6 +112,7 @@
->                 compatible = "tcg,tpm_tis-spi";
->                 reg = <0x1>;
->                 spi-max-frequency = <36000000>;
-> +               memory-region = <&event_log>;
->         };
->  };
->  diff --git a/arch/arm/dts/imx8mm-venice-gw700x.dtsi
-> b/arch/arm/dts/imx8mm-venice-gw700x.dtsi
-> index c305e325d007..697fd1148785 100644
-> --- a/arch/arm/dts/imx8mm-venice-gw700x.dtsi
-> +++ b/arch/arm/dts/imx8mm-venice-gw700x.dtsi
-> @@ -13,6 +13,17 @@
->                 reg = <0x0 0x40000000 0 0x80000000>;
->         };
->
-> +       reserved-memory {
-> +               #address-cells = <2>;
-> +               #size-cells = <2>;
-> +               ranges;
-> +
-> +               event_log: tcg_event_log {
-> +                       no-map;
-> +                       reg = <0 0x40000000 0x2000>;
-> +               };
-> +       };
-> +
->         gpio-keys {
->                 compatible = "gpio-keys";
->
-> And at runtime:
-> u-boot=> fdt addr $fdtcontroladdr
-> u-boot=> fdt list /soc@0/bus@30800000/spba-bus@30800000/spi@30830000/tpm@1/
-> tpm@1 {
->         compatible = "tcg,tpm_tis-spi";
->         reg = <0x00000001>;
->         spi-max-frequency = <0x02255100>;
->         memory-region = <0x00000025>;
-> };
-> u-boot=> fdt list /reserved-memory/
-> reserved-memory {
->         #address-cells = <0x00000002>;
->         #size-cells = <0x00000002>;
->         ranges;
->         tcg_event_log {
->         };
-> };
-> u-boot=> fdt list /reserved-memory/tcg_event_log
-> tcg_event_log {
->         no-map;
->         reg = <0x00000000 0x40000000 0x00002000>;
->         phandle = <0x00000025>;
-> };
->
-> So why does the following code in tcg2_platform_get_log() return -ENOMEM?
->
->                 if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
->                                                0, &args))
->                         return -ENODEV;
->
->                 a = ofnode_get_addr_size(args.node, "reg", &s);
->                 if (a == FDT_ADDR_T_NONE)
->                         return -ENOMEM;
->
-> debugging shows that dev_read_phandle_with_args returns non-zero but
-> args.args_count is 0.
->
-> I feel like the construct of using dev_read_phandle_with_args followed
-> by the ofnode_get_addr_size is just wrong but I don't understand why
-> nor do I understand how my dt changes differ from what is in
-> arch/sandbox/dts/test.dts (other than its using address-size=1 which
-> doesn't appear to be the issue in my testing). The abstraction of the
-> ofnode and fdt stuff always trip me up... very confusing.
->
-> Can anyone explain the issue here?
->
-> Best Regards,
->
-> Tim
+Looking at this transfer in Wireshark, we can see that the server
+replies with the following file handle:
+
+    length: 36
+    [hash (CRC-32): 0x230ac67b]
+    FileHandle: 0100070101005e000000000091763911f87c449fa73c298552db19ba0c9f60002980cfd2
+
+and U-Boot sends the following file handle in the next LOOKUP Call:
+
+    length: 32
+    [hash (CRC-32): 0x6314131b]
+    FileHandle: 000000240100070101005e000000000091763911f87c449fa73c298552db19ba
+
+Fix this by using a variable length file handle for dirfh.
+
+[1] https://www.rfc-editor.org/rfc/rfc1813.html#page-106
+
+Fixes: b0baca982048 ("net: NFS: Add NFSv3 support")
+Signed-off-by: Sébastien Szymanski <sebastien.szymanski@armadeus.com>
+---
+ net/nfs.c | 18 +++++++++++++-----
+ 1 file changed, 13 insertions(+), 5 deletions(-)
+
+diff --git a/net/nfs.c b/net/nfs.c
+index 7a8887ef2368..c18282448ccd 100644
+--- a/net/nfs.c
++++ b/net/nfs.c
+@@ -57,7 +57,8 @@ static int nfs_offset = -1;
+ static int nfs_len;
+ static const ulong nfs_timeout = CONFIG_NFS_TIMEOUT;
+ 
+-static char dirfh[NFS_FHSIZE];	/* NFSv2 / NFSv3 file handle of directory */
++static char dirfh[NFS3_FHSIZE]; /* NFSv2 / NFSv3 file handle of directory */
++static unsigned int dirfh3_length; /* (variable) length of dirfh when NFSv3 */
+ static char filefh[NFS3_FHSIZE]; /* NFSv2 / NFSv3 file handle */
+ static unsigned int filefh3_length;	/* (variable) length of filefh when NFSv3 */
+ 
+@@ -377,9 +378,9 @@ static void nfs_lookup_req(char *fname)
+ 
+ 		rpc_req(PROG_NFS, NFS_LOOKUP, data, len);
+ 	} else {  /* NFS_V3 */
+-		*p++ = htonl(NFS_FHSIZE);	/* Dir handle length */
+-		memcpy(p, dirfh, NFS_FHSIZE);
+-		p += (NFS_FHSIZE / 4);
++		*p++ = htonl(dirfh3_length);	/* Dir handle length */
++		memcpy(p, dirfh, dirfh3_length);
++		p += (dirfh3_length / 4);
+ 		*p++ = htonl(fnamelen);
+ 		if (fnamelen & 3)
+ 			*(p + fnamelen / 4) = 0;
+@@ -565,7 +566,14 @@ static int nfs_mount_reply(uchar *pkt, unsigned len)
+ 
+ 	fs_mounted = 1;
+ 	/*  NFSv2 and NFSv3 use same structure */
+-	memcpy(dirfh, rpc_pkt.u.reply.data + 1, NFS_FHSIZE);
++	if (choosen_nfs_version != NFS_V3) {
++		memcpy(dirfh, rpc_pkt.u.reply.data + 1, NFS_FHSIZE);
++	} else {
++		dirfh3_length = ntohl(rpc_pkt.u.reply.data[1]);
++		if (dirfh3_length > NFS3_FHSIZE)
++			dirfh3_length  = NFS3_FHSIZE;
++		memcpy(dirfh, rpc_pkt.u.reply.data + 2, dirfh3_length);
++	}
+ 
+ 	return 0;
+ }
+-- 
+2.43.2
+
