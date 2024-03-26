@@ -4,67 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6762C54E67
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 21:28:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A547CD11DF
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 22:10:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2725E88049;
-	Tue, 26 Mar 2024 22:28:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5211B87D09;
+	Tue, 26 Mar 2024 23:10:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pmcxI2oV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TGhhrueE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FE358803E; Tue, 26 Mar 2024 22:28:31 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 704B680EED; Tue, 26 Mar 2024 23:10:40 +0100 (CET)
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
+ [IPv6:2607:f8b0:4864:20::432])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B59E87F49
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 22:28:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A05C8801E
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 23:10:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42QLSNeI107588;
- Tue, 26 Mar 2024 16:28:23 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1711488503;
- bh=jdY98i7/25ixun6hDZIDNGrecJfc7R49IE6tJUAS6HY=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=pmcxI2oVgB2MCxHAtt+Yr6GyFXY2FZduutG8gfdWbLDSJnYINASmoKUWNg+cP7PNp
- VDS0sWICeh1KEpmDF4hFq7Vo0mlcP0dPd0ya54KhtmdOfb3StkdaQddi65ytx6LGoS
- uo0as446riDdWCXhfS1fxm9PV0b6hcWufzlCmXvM=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42QLSNcB048010
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 26 Mar 2024 16:28:23 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 26
- Mar 2024 16:28:23 -0500
-Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 26 Mar 2024 16:28:23 -0500
-Received: from [10.249.42.149] ([10.249.42.149])
- by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42QLSNSH031091;
- Tue, 26 Mar 2024 16:28:23 -0500
-Message-ID: <aa3cf276-2e96-4bfd-8962-d4061165a259@ti.com>
-Date: Tue, 26 Mar 2024 16:28:22 -0500
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x432.google.com with SMTP id
+ d2e1a72fcca58-6ea7eff5f3cso555532b3a.0
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 15:10:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711491036; x=1712095836; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QNFtw4+lsjUn+uGerRgUjRvKFck0MGwllzb7pkQryqo=;
+ b=TGhhrueEDuOfWVi+NqCYL/UO7fyFbfW93TnEzqIQjpT/HmxV7jd9m9hIy3KC5G8Ena
+ aWQaexwLBaL8vMKMVgqnWzXl6mRrrlnhB17gDDmgx0QrpCLQI8PzZ1ovJGhw8DcfN+ud
+ t/fAVUHVX/y9jeVBr91PVWDe/S6SOOe5eeJ2q6/Q3gtdfx9n0vE5Pfxr/i942x2MDVDe
+ titFE2C/C0zZ8E0/Q4Xf5YwBI4+9NLxVLKWS2n7a3IlBnLJWg/8JZMI430WFrvek+CyU
+ wVzF5mzeifu2ZPz+3OYMpXrzxzYRkVFjDX6DnqK3K+npPHVHmtbsyFSsm6fW8Qd34PTh
+ 7Djg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711491036; x=1712095836;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QNFtw4+lsjUn+uGerRgUjRvKFck0MGwllzb7pkQryqo=;
+ b=Rp8K4I9QI2y897lFddGluljm6hlI0rT9bPlIqRr0Ajfsy9oB1GhmhCzqnHZY0PA9Ok
+ RSkRgFA5mIf6Oh/y4hRK11Jg1nsMYlXZWmRBZo7wdakWZxYxB0LC4f2brOFZZpDZMO6q
+ p++1OuGM/1iCWP0R9goMXMzMZiJhJYzkSwDSXLpI9aO2+s1NEZ8OeyUJmH4WWDmay3e1
+ //9uswrYmfOuQtw2/BMUSnTo6Aq2z4w8UxAKWUemflWvn/39VqeGG36K5aaAuyzyPZIH
+ 4+kuTOvJoiHyK7f5fjMHzNsE1vDD5cQQWmhFbX6ZX4NxjM2bx1ih9d2Oee5501C3KEGO
+ UeKQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUJh95DkDkTHdkgp5H21isxMzq1rXNnB7G0ojoEHyJveqpBAX6Z66TmIWyaTB6RkHf6cXQbYptFQmp15ahtF3A+qCFdtA==
+X-Gm-Message-State: AOJu0YzpXKCAc5CvnvTo4p8PyhKQi0+ncpvuOamOqRwa7mwozm1gYHwN
+ 6/7sgVLfcTSbgdXAYZPS70ksnE0ARL6vDLVvXNsYU+bvMxor/BbUEzSIt2PDtGamUjjWYwOHG73
+ Rb699UTlRmaQe0hfGen7LOyN5f1g=
+X-Google-Smtp-Source: AGHT+IGTJMKf9+nyv3Gschd0a21oFMRxSvxqo4g0tE6cjmd5GnuuYADmN/eJVrEG0SAIrhM9cyr6SA3+kfVcQ+p1yN4=
+X-Received: by 2002:a17:90a:b016:b0:2a0:2605:688f with SMTP id
+ x22-20020a17090ab01600b002a02605688fmr10104081pjq.2.1711491036396; Tue, 26
+ Mar 2024 15:10:36 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] am625x_evm_a53: Tweak boot command to set fdt
-Content-Language: en-US
-To: Martyn Welch <martyn.welch@collabora.com>, Dave Gerlach
- <d-gerlach@ti.com>, Tom Rini <trini@konsulko.com>, "Menon, Nishanth"
- <nm@ti.com>
-CC: <u-boot@lists.denx.de>
-References: <20240326142634.2043539-1-martyn.welch@collabora.com>
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20240326142634.2043539-1-martyn.welch@collabora.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240326033801.228419-1-joy.zou@nxp.com>
+ <20240326033801.228419-2-joy.zou@nxp.com>
+In-Reply-To: <20240326033801.228419-2-joy.zou@nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 26 Mar 2024 19:10:25 -0300
+Message-ID: <CAOMZO5DnR_AoZJsnx8FD-y5j5UzgiPSHsPRRQkLKwYFwhCVWQA@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] drivers: rtc: add pcf2131 rtc driver
+To: Joy Zou <joy.zou@nxp.com>
+Cc: peng.fan@nxp.com, ye.li@nxp.com, ping.bai@nxp.com, sbabic@denx.de, 
+ sjg@chromium.org, saproj@gmail.com, judge.packham@gmail.com, 
+ uboot-imx@nxp.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,48 +92,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/26/24 9:26 AM, Martyn Welch wrote:
-> With the current config for tha SK-AM62, fdtfile isn't set in the U-Boot
-> environment. When using bootflow to boot from a block device, where the
-> extlinux.conf file specifies `fdtdir`, a fallback device tree is being
-> constructed from the `soc` (`k3`) and `board` (`am62x`) environment
-> variables, resulting in u-Boot trying to retrieve
-> `/dtbs/6.8.1+/k3-am62x.dtb`. This file doesn't exist.
-> 
-> The environment variables `default_device_tree` and
-> `default_device_tree_arch` are set in the config, the `findfdt` script
-> can be called to construct `fdtfile` from the environment variables set
-> by these config options, however this script currently isn't being run.
-> 
+On Tue, Mar 26, 2024 at 12:30=E2=80=AFAM Joy Zou <joy.zou@nxp.com> wrote:
 
-I think this patch will be unneeded after this series goes in:
+> +bool is_pcf2131_type(struct udevice *dev)
 
-https://lore.kernel.org/u-boot/20240109191506.3820908-1-nm@ti.com/
+static bool
 
-Andrew
+>  static int pcf2127_rtc_read(struct udevice *dev, uint offset, u8 *buffer=
+, uint len)
+>  {
+>         struct dm_i2c_chip *chip =3D dev_get_parent_plat(dev);
+> @@ -43,10 +75,64 @@ static int pcf2127_rtc_read(struct udevice *dev, uint=
+ offset, u8 *buffer, uint l
+>         return dm_i2c_xfer(dev, &msg, 1);
+>  }
+>
+> +static int pcf2131_rtc_lock(struct udevice *dev)
+> +{
+> +       int ret =3D 0;
 
-> Calling this script results in the correct device tree being retrieved:
-> 
->     Retrieving file: /dtbs/6.8.1+/ti/k3-am625-sk.dtb
-> 
-> Many boards are calling this script as part of their boot command. The
-> am62x currently isn't. Rectify this so that booting works correctly.
-> 
-> Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
-> ---
->   configs/am62x_evm_a53_defconfig | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
-> index 78287ec18a..e373e44a93 100644
-> --- a/configs/am62x_evm_a53_defconfig
-> +++ b/configs/am62x_evm_a53_defconfig
-> @@ -30,7 +30,7 @@ CONFIG_SPL_LOAD_FIT=y
->   CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
->   CONFIG_BOOTSTD_FULL=y
->   CONFIG_SYS_BOOTM_LEN=0x800000
-> -CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
-> +CONFIG_BOOTCOMMAND="run findfdt; run envboot; bootflow scan -lb"
->   CONFIG_BOARD_LATE_INIT=y
->   CONFIG_SPL_MAX_SIZE=0x58000
->   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+No need to initialize ret with 0.
+
+> +static int pcf2131_rtc_unlock(struct udevice *dev)
+> +{
+> +       int ret =3D 0;
+
+Ditto.
+
+>  static int pcf2127_rtc_write(struct udevice *dev, uint offset,
+>                              const u8 *buffer, uint len)
+>  {
+> -       return dm_i2c_write(dev, offset, buffer, len);
+> +       int ret =3D 0;
+
+Ditto.
