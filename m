@@ -4,79 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00022CD11DF
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 21:25:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6762C54E67
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 21:28:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6812887F9F;
-	Tue, 26 Mar 2024 22:25:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 2725E88049;
+	Tue, 26 Mar 2024 22:28:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nhwUX7lV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pmcxI2oV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E48388035; Tue, 26 Mar 2024 22:25:08 +0100 (CET)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2FE358803E; Tue, 26 Mar 2024 22:28:31 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2796487F49
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 22:25:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B59E87F49
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 22:28:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-696147fb5a7so55584476d6.0
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 14:25:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711488304; x=1712093104; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ZvaFcS2zxRZuIwk/ZCPEXbBkBWlUvE1N6BCndZn9kS4=;
- b=nhwUX7lVkzFS1P47W/1s8TUmDH/N6pM7U7A8JOgQNVDuK9TbWrs0FDqovHkti/HKSw
- R7Yn7dCJU/t0KmUL4hl2PIMJVC7cuoPnd7nI7e8uh0EzRksQqY7GY4Nm07aauVm/tWTH
- D9+ZJmeRUv6O/lfH6OzjbPgo1p1w5CnqVx7VViQ36tiNwuPYkQwy0hKZzSxzfDeD5tFs
- LlI9waGRrowNe9lXkR7oK4H4i2lt7Pm42ThDMzO9k58fx7lSbmhPFAAHHhYbGG5KxiQl
- YzM6bTXJmxO6uZMgevw8nClUh5IGHk+ppZHEgs0idljaBKza6Rxe2PRW5NZ+X2LKLmpM
- PvaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711488304; x=1712093104;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ZvaFcS2zxRZuIwk/ZCPEXbBkBWlUvE1N6BCndZn9kS4=;
- b=g8JcrR+el9ZzXXY2x8N66OWVrORNbxzD/vzk6F/Qf0Da/J0XodpCXYxSZMHoYiB/Z+
- 148I5tFrzCBZYIeq327OVR7MsOFHxWrA+EJH9sj9SFzWWLgn6IUF9fSyt0WxDvAcbHSF
- 8kxtNHFU9L4nlqLhbdY3RfDPD7GiSa9/NSWPP1N7cqOkLU0j+aR9+y6do3gQ3y8YGfyh
- ZjsiRalPKRZmfCK8oYaGi3mloikrdi6t+LnSsat0dFcqEiQTwNu4+mFOTvzHDNFY78De
- VcbitT9YWu6vVTJt0w+Pkw/tNrJSJS1jutzk6C+mPSZqqUmI2zDPN2ZgoUb0on02ykkd
- BLSQ==
-X-Gm-Message-State: AOJu0Yz/j/r9/29WPX4ftZX9WPKRcU8RrfCQYP9KIvjLBCtwiCBq1ofl
- FzqTXIMVoq+IstduObTCN9WCiihWm5jBP8qya6KolnK6Xir2pQn5ZX/N2A65sOE=
-X-Google-Smtp-Source: AGHT+IEpktkyw7hGr7Yxe0N8djybio2dyveriK3tXjCOs08IQ1wR7r3Ha9174zt8sLRkN4x1ewjmrA==
-X-Received: by 2002:a05:6214:528b:b0:696:a324:cd04 with SMTP id
- kj11-20020a056214528b00b00696a324cd04mr1138880qvb.10.1711488304375; 
- Tue, 26 Mar 2024 14:25:04 -0700 (PDT)
-Received: from aford-System-Version.lan
- ([2601:447:d002:5be:6f52:cf6f:a4b1:c71f])
- by smtp.gmail.com with ESMTPSA id
- j11-20020a05621419cb00b006968f5c34dasm2469361qvc.112.2024.03.26.14.25.03
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Mar 2024 14:25:03 -0700 (PDT)
-From: Adam Ford <aford173@gmail.com>
-To: u-boot@lists.denx.de
-Cc: aford@beaconembedded.com, sumit.garg@linaro.org,
- Adam Ford <aford173@gmail.com>, Tom Rini <trini@konsulko.com>,
- Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH] configs: imx8mp_beacon:  Enable PCIe NVMe drives
-Date: Tue, 26 Mar 2024 16:24:54 -0500
-Message-ID: <20240326212455.118772-1-aford173@gmail.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42QLSNeI107588;
+ Tue, 26 Mar 2024 16:28:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1711488503;
+ bh=jdY98i7/25ixun6hDZIDNGrecJfc7R49IE6tJUAS6HY=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=pmcxI2oVgB2MCxHAtt+Yr6GyFXY2FZduutG8gfdWbLDSJnYINASmoKUWNg+cP7PNp
+ VDS0sWICeh1KEpmDF4hFq7Vo0mlcP0dPd0ya54KhtmdOfb3StkdaQddi65ytx6LGoS
+ uo0as446riDdWCXhfS1fxm9PV0b6hcWufzlCmXvM=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42QLSNcB048010
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 26 Mar 2024 16:28:23 -0500
+Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 26
+ Mar 2024 16:28:23 -0500
+Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 26 Mar 2024 16:28:23 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42QLSNSH031091;
+ Tue, 26 Mar 2024 16:28:23 -0500
+Message-ID: <aa3cf276-2e96-4bfd-8962-d4061165a259@ti.com>
+Date: Tue, 26 Mar 2024 16:28:22 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] am625x_evm_a53: Tweak boot command to set fdt
+Content-Language: en-US
+To: Martyn Welch <martyn.welch@collabora.com>, Dave Gerlach
+ <d-gerlach@ti.com>, Tom Rini <trini@konsulko.com>, "Menon, Nishanth"
+ <nm@ti.com>
+CC: <u-boot@lists.denx.de>
+References: <20240326142634.2043539-1-martyn.welch@collabora.com>
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20240326142634.2043539-1-martyn.welch@collabora.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,64 +81,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The baseboard supports and NVMe drives via the PCIe slot. This
-requires a few extra config options to be enabled.
+On 3/26/24 9:26 AM, Martyn Welch wrote:
+> With the current config for tha SK-AM62, fdtfile isn't set in the U-Boot
+> environment. When using bootflow to boot from a block device, where the
+> extlinux.conf file specifies `fdtdir`, a fallback device tree is being
+> constructed from the `soc` (`k3`) and `board` (`am62x`) environment
+> variables, resulting in u-Boot trying to retrieve
+> `/dtbs/6.8.1+/k3-am62x.dtb`. This file doesn't exist.
+> 
+> The environment variables `default_device_tree` and
+> `default_device_tree_arch` are set in the config, the `findfdt` script
+> can be called to construct `fdtfile` from the environment variables set
+> by these config options, however this script currently isn't being run.
+> 
 
-The NVMe can be enumerated with the following commands:
+I think this patch will be unneeded after this series goes in:
 
-u-boot=> pci enum
-PCIE-0: Link up (Gen1-x1, Bus0)
-u-boot=> nvme scan
-u-boot=> nvme info
-Device 0: Vendor: 0x15b7 Rev: 20120022 Prod: 184960441105
-            Type: Hard Disk
-            Capacity: 122104.3 MB = 119.2 GB (250069680 x 512)
-u-boot=>
+https://lore.kernel.org/u-boot/20240109191506.3820908-1-nm@ti.com/
 
-Signed-off-by: Adam Ford <aford173@gmail.com>
----
-Depends on: https://patchwork.ozlabs.org/project/uboot/patch/20240326202439.46707-4-aford173@gmail.com/
+Andrew
 
-diff --git a/configs/imx8mp_beacon_defconfig b/configs/imx8mp_beacon_defconfig
-index 0ae8c9645a..fe1678d8ae 100644
---- a/configs/imx8mp_beacon_defconfig
-+++ b/configs/imx8mp_beacon_defconfig
-@@ -15,6 +15,7 @@ CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mp-beacon-kit"
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_TARGET_IMX8MP_BEACON=y
-+CONFIG_DM_RESET=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-@@ -27,6 +28,7 @@ CONFIG_ARMV8_SET_SMPEN=y
- CONFIG_ARMV8_EA_EL3_FIRST=y
- CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x48000000
- CONFIG_SYS_LOAD_ADDR=0x40480000
-+CONFIG_PCI=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_FIT=y
- CONFIG_FIT_EXTERNAL_OFFSET=0x3000
-@@ -65,6 +67,7 @@ CONFIG_CMD_FUSE=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
-+CONFIG_CMD_PCI=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_USB_SDP=y
- CONFIG_CMD_USB_MASS_STORAGE=y
-@@ -118,8 +121,11 @@ CONFIG_DWC_ETH_QOS_IMX=y
- CONFIG_FEC_MXC=y
- CONFIG_RGMII=y
- CONFIG_MII=y
-+CONFIG_NVME_PCI=y
-+CONFIG_PCIE_DW_IMX=y
- CONFIG_PHY=y
- CONFIG_PHY_IMX8MQ_USB=y
-+CONFIG_PHY_IMX8M_PCIE=y
- CONFIG_PINCTRL=y
- CONFIG_SPL_PINCTRL=y
- CONFIG_PINCTRL_IMX8M=y
--- 
-2.43.0
-
+> Calling this script results in the correct device tree being retrieved:
+> 
+>     Retrieving file: /dtbs/6.8.1+/ti/k3-am625-sk.dtb
+> 
+> Many boards are calling this script as part of their boot command. The
+> am62x currently isn't. Rectify this so that booting works correctly.
+> 
+> Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+> ---
+>   configs/am62x_evm_a53_defconfig | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
+> index 78287ec18a..e373e44a93 100644
+> --- a/configs/am62x_evm_a53_defconfig
+> +++ b/configs/am62x_evm_a53_defconfig
+> @@ -30,7 +30,7 @@ CONFIG_SPL_LOAD_FIT=y
+>   CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
+>   CONFIG_BOOTSTD_FULL=y
+>   CONFIG_SYS_BOOTM_LEN=0x800000
+> -CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
+> +CONFIG_BOOTCOMMAND="run findfdt; run envboot; bootflow scan -lb"
+>   CONFIG_BOARD_LATE_INIT=y
+>   CONFIG_SPL_MAX_SIZE=0x58000
+>   CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
