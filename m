@@ -4,78 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D7EAC6FD1F
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 12:32:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE830C6FD1F
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 12:34:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0476588019;
-	Tue, 26 Mar 2024 13:32:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4487888076;
+	Tue, 26 Mar 2024 13:33:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C/VTOANf";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KE9hoEGl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F29F38806A; Tue, 26 Mar 2024 13:32:33 +0100 (CET)
-Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
- [IPv6:2607:f8b0:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 06C8688073; Tue, 26 Mar 2024 13:33:56 +0100 (CET)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2D3588019
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 13:32:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E6D6087FDA
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 13:33:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hiagofranco@gmail.com
-Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-6ea9a616cc4so1917170b3a.1
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 05:32:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711456350; x=1712061150; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=FwJ58MYA4EcAMl1I9dMxdZNkyXTrXuybLg4dXoDqZFw=;
- b=C/VTOANf33AmJ3FGWQRIhlFkBBG1OuNifx8bb4RZ0AjozoNCuyPha3htUrwqEd/8Ih
- 4PFpfvLCtrA1oNwu0Dz302B9tOZZ43DEVbUrR7Qg4AsYhpzoC08Na6+DDmS36S6ZF4V0
- w7/vyy1J8ZNkFWlNHDzE1OwD8NKPgIyrDx5DJvvgmfLzYVrqhxFLI1CY7OfqogC1c/HA
- JiAQmif9NPYahRgr01JGx95AT9eB/9gG16f0h9pTqOGEucs08A1MOBSkYJv4W9fSM+8o
- YNsE1IhBqDEgHs2e68xRE4S8CSr6pKF0/A474cAUZAQOEAgoMwevAF/lfWdPCPVATke3
- wi7Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711456350; x=1712061150;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FwJ58MYA4EcAMl1I9dMxdZNkyXTrXuybLg4dXoDqZFw=;
- b=jO8bTLmAyWDNCmKkXzYhznk7P+FKOCS3b7lyluDu+GXDiNJmvYOk2ZcuhmTxYqHzBy
- c8PYwyMxTjxD3E/PnPpFlalWuHULiFcxL6Vi37NcpqyE0UrAHdAwgKs2tQiz7VvNhcWD
- CXfGmxYlp6YYlBBvamoqL+fUNJS5W3xEu1tyA75Cp9JlT45q2tRwixTKiUES5wL+tJgT
- J+MwsX+UtU2KUyDBmgPxo1R8FqWetUxH5B6QsfF+DDgrugqkPAkq50Jrk8m5oX2C3XI5
- SA3xXc04eEwBctvZpbjpOA3toeRZKge0boRtDmVIz/UIduWx/nETo6e9QnLU/L4dqo6S
- n5kw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXc8X796/f6g+m4TiTvu0FbWcCxALiop+4l+0H5cbJMZjTpaAPXFn65YKm00gdSCjCCFFzmWlPpi2Hwd+Z9E0YnW+xHZg==
-X-Gm-Message-State: AOJu0Yx2pdT343hpfB8bAFXNZqeRQV0c2gsecobPI1sfPhvF3wF+CZCL
- hndEOWu+nVUHNA97m4xJo6wrc/Kk4kRSMolmNc1pFgnp13A2n+C6
-X-Google-Smtp-Source: AGHT+IG4PTl93N3XOF+7JEjLg5GccLS4941r8ljuhxaXOO2Zhc6ek9JII9oe4hY+D44dUYkmMQwrRw==
-X-Received: by 2002:a05:6a20:9586:b0:1a3:d2e0:f484 with SMTP id
- iu6-20020a056a20958600b001a3d2e0f484mr4374690pzb.39.1711456349912; 
- Tue, 26 Mar 2024 05:32:29 -0700 (PDT)
-Received: from frhdebian ([201.82.41.210]) by smtp.gmail.com with ESMTPSA id
- si12-20020a17090b528c00b002a077966136sm2819507pjb.1.2024.03.26.05.32.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 26 Mar 2024 05:32:29 -0700 (PDT)
-Date: Tue, 26 Mar 2024 09:32:26 -0300
-From: Hiago De Franco <hiagofranco@gmail.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, hiago.franco@toradex.com,
- Fabio Estevam <festevam@denx.de>
-Subject: Re: [PATCH] imx8: Add a default reset_cpu() implementation
-Message-ID: <20240326123226.ndqj25en2ts4wcky@frhdebian>
-References: <20240326121949.1915850-1-festevam@gmail.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42QCXjp5082791;
+ Tue, 26 Mar 2024 07:33:45 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1711456425;
+ bh=m5w0gVKAo+V1bT33j3cAbgWJ+igUAW/FVJpXIF6F20g=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=KE9hoEGl2rK4pqR8ELuHp3cqnR+nvng2qtCWyMqgVkNB/9zxY897fljaVAAKosC21
+ x7/kepFN1ixCnlCvuYm35NrWKY72dZqfk068T4ERcLVmaqfsWhFM+U9Zva4ADfXEWv
+ nqXZkNHHpEWvujJGx2pWUfkEE2KoWpCIkWDJKabA=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42QCXj1x022962
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 26 Mar 2024 07:33:45 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 26
+ Mar 2024 07:33:44 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 26 Mar 2024 07:33:44 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42QCXe4T096639;
+ Tue, 26 Mar 2024 07:33:40 -0500
+Message-ID: <01d903da-353f-4d9d-8b9a-610e34b6ee20@ti.com>
+Date: Tue, 26 Mar 2024 18:03:39 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240326121949.1915850-1-festevam@gmail.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/4] arm: dts: k3-*-binman.dtsi: Clean up and templatize
+ boot binaries
+Content-Language: en-US
+To: Nishanth Menon <nm@ti.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
+ <alpernebiyasak@gmail.com>, <bb@ti.com>, <sumit.garg@linaro.org>,
+ <michal.simek@amd.com>, <marex@denx.de>, <neil.armstrong@linaro.org>,
+ <afd@ti.com>, <vigneshr@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>,
+ <u-kumar1@ti.com>
+References: <20240322131011.1029620-1-n-francis@ti.com>
+ <20240322131011.1029620-4-n-francis@ti.com>
+ <20240326122723.f2dwxggu7yop7jf2@booted>
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240326122723.f2dwxggu7yop7jf2@booted>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,182 +87,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 26, 2024 at 09:19:49AM -0300, Fabio Estevam wrote:
-> From: Fabio Estevam <festevam@denx.de>
-> 
-> Add a weak default reset_cpu() implementation just like
-> it is done on arch/arm/mach-imx/cpu.c.
-> 
-> This allows the removal of the empty reset_cpu() in several
-> board files.
-> 
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
+Hi Nishanth
 
-Thanks Fabio!
-
-Tested-by: Hiago De Franco <hiago.franco@toradex.com> # Toradex Colibri iMX8X
-
-> ---
->  arch/arm/mach-imx/imx8/cpu.c                          |  4 ++++
->  board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c | 11 -----------
->  board/advantech/imx8qm_rom7720_a1/imx8qm_rom7720_a1.c |  8 --------
->  board/congatec/cgtqmx8/cgtqmx8.c                      |  7 -------
->  board/freescale/imx8qm_mek/imx8qm_mek.c               |  8 --------
->  board/freescale/imx8qxp_mek/imx8qxp_mek.c             |  8 --------
->  board/toradex/apalis-imx8/apalis-imx8.c               |  8 --------
->  board/toradex/colibri-imx8x/colibri-imx8x.c           |  8 --------
->  8 files changed, 4 insertions(+), 58 deletions(-)
+On 26/03/24 17:57, Nishanth Menon wrote:
+> On 18:40-20240322, Neha Malcom Francis wrote:
+>> Clean up templatized boot binaries for all K3 boards. This includes
+>> modifying the k3-binman.dtsi to use SPL_BOARD_DTB, BOARD_DESCRIPTION and
+>> UBOOT_BOARD_DESCRIPTION from the files that include it to further reuse
+>> code.
+>>
+>> All k3-<soc>-binman.dtsi will contain only templates. Only required boot
+>> binaries can be built from the templates in the boards' respective
+>> -u-boot.dtsi file (or k3-<board>-binman.dtsi if it exists). This allows
+>> clear distinction between the SoC common stuff vs. what is additionally
+>> needed to boot up a specific board.
+>>
+>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+>> ---
+>>   arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  | 161 +---------
+>>   arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 291 +----------------
+>>   arch/arm/dts/k3-am625-r5-beagleplay.dts       |  39 ---
+>>   arch/arm/dts/k3-am625-sk-binman.dtsi          | 148 +--------
+>>   arch/arm/dts/k3-am625-sk-u-boot.dtsi          |  42 +++
+>>   .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 296 +-----------------
+>>   arch/arm/dts/k3-am62a-sk-binman.dtsi          | 146 +--------
+>>   arch/arm/dts/k3-am62a7-sk-u-boot.dtsi         |  42 +++
+>>   arch/arm/dts/k3-am642-evm-u-boot.dtsi         |  42 +++
+>>   arch/arm/dts/k3-am642-sk-u-boot.dtsi          |  42 +++
+>>   arch/arm/dts/k3-am64x-binman.dtsi             | 239 +-------------
+>>   arch/arm/dts/k3-am654-base-board-u-boot.dtsi  |  49 +++
+>>   arch/arm/dts/k3-am65x-binman.dtsi             | 144 +--------
+>>   .../arm/dts/k3-am68-sk-base-board-u-boot.dtsi |  26 ++
+>>   arch/arm/dts/k3-am69-sk-u-boot.dtsi           |  31 +-
+>>   arch/arm/dts/k3-binman.dtsi                   |  96 ++++++
+>>   arch/arm/dts/k3-j7200-binman.dtsi             | 145 +--------
+>>   .../k3-j7200-common-proc-board-u-boot.dtsi    |  40 +++
+>>   .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   | 154 +--------
+>>   arch/arm/dts/k3-j721e-binman.dtsi             | 262 +++-------------
+>>   .../k3-j721e-common-proc-board-u-boot.dtsi    |  84 +++++
+>>   arch/arm/dts/k3-j721e-r5-beagleboneai64.dts   |  91 +-----
+>>   arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |  84 +++++
+>>   arch/arm/dts/k3-j721s2-binman.dtsi            | 231 +-------------
+>>   .../k3-j721s2-common-proc-board-u-boot.dtsi   |  42 +++
+>>   arch/arm/dts/k3-j784s4-binman.dtsi            | 154 +--------
+>>   arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        |  42 +++
+>>   27 files changed, 858 insertions(+), 2305 deletions(-)
+>>
+>> diff --git a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+>> index cca0f44b7d8..fc1898f1510 100644
+>> --- a/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+>> +++ b/arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi
+>> @@ -6,7 +6,11 @@
+>>    * Copyright (C) 2022-2023 Robert Nelson, BeagleBoard.org Foundation
+>>    */
+>>   
+>> -#include "k3-binman.dtsi"
+>> +#define SPL_BOARD_DTB "spl/dts/k3-am625-beagleplay.dtb"
+>> +#define BOARD_DESCRIPTION "k3-am625-beagleplay"
+>> +#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM625 BeaglePlay"
+>> +
+>> +#include "k3-am625-sk-binman.dtsi"
 > 
-> diff --git a/arch/arm/mach-imx/imx8/cpu.c b/arch/arm/mach-imx/imx8/cpu.c
-> index 0b91e448a5d..6e643188f40 100644
-> --- a/arch/arm/mach-imx/imx8/cpu.c
-> +++ b/arch/arm/mach-imx/imx8/cpu.c
-> @@ -84,6 +84,10 @@ static char *get_reset_cause(void)
->  	}
->  }
->  
-> +__weak void reset_cpu(void)
-> +{
-> +}
-> +
->  int arch_cpu_init(void)
->  {
->  #if defined(CONFIG_SPL_BUILD) && defined(CONFIG_SPL_RECOVER_DATA_SECTION)
-> diff --git a/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c b/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c
-> index 8b4d73052eb..56b7bdb57c9 100644
-> --- a/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c
-> +++ b/board/advantech/imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c
-> @@ -136,17 +136,6 @@ void detail_board_ddr_info(void)
->  	puts("\nDDR    ");
->  }
->  
-> -/*
-> - * Board specific reset that is system reset.
-> - */
-> -void reset_cpu(void)
-> -{
-> -	puts("SCI reboot request");
-> -
-> -	while (1)
-> -		putc('.');
-> -}
-> -
->  #ifdef CONFIG_OF_BOARD_SETUP
->  int ft_board_setup(void *blob, struct bd_info *bd)
->  {
-> diff --git a/board/advantech/imx8qm_rom7720_a1/imx8qm_rom7720_a1.c b/board/advantech/imx8qm_rom7720_a1/imx8qm_rom7720_a1.c
-> index 206ce7d5c13..7f766a688bb 100644
-> --- a/board/advantech/imx8qm_rom7720_a1/imx8qm_rom7720_a1.c
-> +++ b/board/advantech/imx8qm_rom7720_a1/imx8qm_rom7720_a1.c
-> @@ -112,14 +112,6 @@ int board_init(void)
->  	return 0;
->  }
->  
-> -/*
-> - * Board specific reset that is system reset.
-> - */
-> -void reset_cpu(void)
-> -{
-> -	/* TODO */
-> -}
-> -
->  int board_mmc_get_env_dev(int devno)
->  {
->  	return devno;
-> diff --git a/board/congatec/cgtqmx8/cgtqmx8.c b/board/congatec/cgtqmx8/cgtqmx8.c
-> index 26189ff66f5..3b01354bb6b 100644
-> --- a/board/congatec/cgtqmx8/cgtqmx8.c
-> +++ b/board/congatec/cgtqmx8/cgtqmx8.c
-> @@ -371,13 +371,6 @@ void detail_board_ddr_info(void)
->  	puts("\nDDR    ");
->  }
->  
-> -/*
-> - * Board specific reset that is system reset.
-> - */
-> -void reset_cpu(void)
-> -{
-> -	/* TODO */
-> -}
->  
->  #ifdef CONFIG_OF_BOARD_SETUP
->  int ft_board_setup(void *blob, struct bd_info *bd)
-> diff --git a/board/freescale/imx8qm_mek/imx8qm_mek.c b/board/freescale/imx8qm_mek/imx8qm_mek.c
-> index d96d1d07bb1..2b209c8886f 100644
-> --- a/board/freescale/imx8qm_mek/imx8qm_mek.c
-> +++ b/board/freescale/imx8qm_mek/imx8qm_mek.c
-> @@ -102,14 +102,6 @@ int board_init(void)
->  	return 0;
->  }
->  
-> -/*
-> - * Board specific reset that is system reset.
-> - */
-> -void reset_cpu(void)
-> -{
-> -	/* TODO */
-> -}
-> -
->  #ifdef CONFIG_OF_BOARD_SETUP
->  int ft_board_setup(void *blob, struct bd_info *bd)
->  {
-> diff --git a/board/freescale/imx8qxp_mek/imx8qxp_mek.c b/board/freescale/imx8qxp_mek/imx8qxp_mek.c
-> index 516cefd2f24..833bee55462 100644
-> --- a/board/freescale/imx8qxp_mek/imx8qxp_mek.c
-> +++ b/board/freescale/imx8qxp_mek/imx8qxp_mek.c
-> @@ -126,14 +126,6 @@ int board_init(void)
->  	return 0;
->  }
->  
-> -/*
-> - * Board specific reset that is system reset.
-> - */
-> -void reset_cpu(void)
-> -{
-> -	/* TODO */
-> -}
-> -
->  #ifdef CONFIG_OF_BOARD_SETUP
->  int ft_board_setup(void *blob, struct bd_info *bd)
->  {
-> diff --git a/board/toradex/apalis-imx8/apalis-imx8.c b/board/toradex/apalis-imx8/apalis-imx8.c
-> index 49719f2f553..0f993e644d7 100644
-> --- a/board/toradex/apalis-imx8/apalis-imx8.c
-> +++ b/board/toradex/apalis-imx8/apalis-imx8.c
-> @@ -291,14 +291,6 @@ int board_init(void)
->  	return 0;
->  }
->  
-> -/*
-> - * Board specific reset that is system reset.
-> - */
-> -void reset_cpu(void)
-> -{
-> -	/* TODO */
-> -}
-> -
->  #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
->  int ft_board_setup(void *blob, struct bd_info *bd)
->  {
-> diff --git a/board/toradex/colibri-imx8x/colibri-imx8x.c b/board/toradex/colibri-imx8x/colibri-imx8x.c
-> index 6fc8076163c..a507d666c07 100644
-> --- a/board/toradex/colibri-imx8x/colibri-imx8x.c
-> +++ b/board/toradex/colibri-imx8x/colibri-imx8x.c
-> @@ -140,14 +140,6 @@ int board_init(void)
->  	return 0;
->  }
->  
-> -/*
-> - * Board specific reset that is system reset.
-> - */
-> -void reset_cpu(void)
-> -{
-> -	/* TODO */
-> -}
-> -
->  #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
->  int ft_board_setup(void *blob, struct bd_info *bd)
->  {
-> -- 
-> 2.34.1
+> Drop the "sk" ?
 > 
+
+Yes Andrew had pointed it out earlier, will make the change in the next version.
+
+-- 
+Thanking You
+Neha Malcom Francis
