@@ -4,83 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABB49C54E64
-	for <u-boot@archiver.kernel.org>; Mon, 25 Mar 2024 20:37:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71820C54E58
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 01:16:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 197E487C69;
-	Mon, 25 Mar 2024 21:37:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 90B4187F5E;
+	Tue, 26 Mar 2024 02:15:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XkWGTVoW";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="Skcagedt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F1E5087A80; Mon, 25 Mar 2024 21:37:51 +0100 (CET)
-Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com
- [IPv6:2607:f8b0:4864:20::432])
+ id D3E3C83346; Tue, 26 Mar 2024 02:15:56 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B31D87A80
- for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 21:37:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CDC687F1E
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 02:15:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hiagofranco@gmail.com
-Received: by mail-pf1-x432.google.com with SMTP id
- d2e1a72fcca58-6e6c0098328so3213757b3a.3
- for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 13:37:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-56be32b9775so4545178a12.1
+ for <u-boot@lists.denx.de>; Mon, 25 Mar 2024 18:15:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711399067; x=1712003867; darn=lists.denx.de;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:message-id:subject:cc:to:from:date:from:to:cc:subject
+ d=gateworks.com; s=google; t=1711415749; x=1712020549; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
  :date:message-id:reply-to;
- bh=Uc1ahUCprBaHdZDdyVFZVU+U0HnRN9wykSxCF4/416w=;
- b=XkWGTVoWVvQF3bBd4xQmSgR7f8O7oG/r7KbBUyZCdmYNKLTXM9XCcahJUMv6BUAj9Y
- i+JV0qQxBZjRYe5QbUOGokbqbe+sTVEmhf8nxeXOW/U9kOUerchFCwvhHW/JL+uAcEAW
- zxMkcXEO8sOerGulxzrbp7t344XAyHVR21F5HVFVKqCjs+W98sNgGYWIRfgn0Ss51bRk
- x+fZNvUWmYMN2og4CFEpbCt9c2aEG4Eon4MGzqJ093nDGkXQOFedT9ZyrWjvRDZQn0OE
- Cf7Ypz18I5rDzq0dMDFt4hMrPq+6LP4IRxq/tkJAEBhRP6Z3zhQGMJWgQoLWvNvlJIr7
- k44Q==
+ bh=ARKwK/gbemM8saqjnjf94yKMg0D3HYZaKO5WunopXXU=;
+ b=Skcagedt6iPmX7m8Atsi1+rrxaOH7UXYsynN2ag0UQ8/GzwzaP0HugpbpldgbvmSaR
+ Kf9jGcBFpIHh8odMbO8z4z92RsPVGleW/haAj7SQOecwdoUE2kCfnHKqS+hzMnCbXeHx
+ Xl/3ZNKZkl/E0wtuserTwhzDpxlE3I9AkVlWlPDFDmvQ/oRHJDx+BinIAkQg3EymbHb+
+ qytG+iy2y3BQoAh+weBA0U+9dzPx2WYL2BhbANSwH5gv5WFE0gxRqNbfMfL9YU+qcZnA
+ lTRFOHPTfOMBDW3x3eyBWisoWjCH9DUgJACkaZSe7Fp/eycAjwW1aeIpBZT8vrEhQBw1
+ cLxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711399067; x=1712003867;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:message-id:subject:cc:to:from:date:x-gm-message-state
+ d=1e100.net; s=20230601; t=1711415749; x=1712020549;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=Uc1ahUCprBaHdZDdyVFZVU+U0HnRN9wykSxCF4/416w=;
- b=aIbDienkUfweQ6D6kG972xqhxukTU5ggXjQ+l9Tz/KaFMMzDGlKrX9apTgRKaHanBy
- 5XDzfJC/Vp0x95s8XzGkhrna7vpo4IO3DKhI7PYLO/o3KrsBQryMlzBrNe+y/pmlCQLL
- uSZHulPNtBN0a8rfZg5KxQGkTshSmLuRsSlPnXZ1VWBjRV7/8aJixd8F328Y6N4Ma6c+
- O728FvhNt9fyfWqgGLXLXz4s7sZ2J8Gj0/r7BVjl6t73p1gr3p8psa3h0LKJJGvYcg5r
- DeFJbQFStiwVi43TQjfDVDujzZW7cirjurbOXX0XTtDOgagaqSK19C4fTHma/vfFaPPZ
- XcoQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW7eOCqJvTfpfrDLTBYh3saHuMCstxKiA/hO4+M30LkHpTA22h6DpEg7oJFpi+0qj37Ozl24Ma1J3tk9UzCnLY3rklMjw==
-X-Gm-Message-State: AOJu0YyEBGMiCnZIY+4LpGMNpI45JSPg7bPH1Bb440XFY97LskhJ78d4
- rLTwX6d+UjhDA5J2hEEHGtPZeIq6DsWoQsnn6oRhO2+zGWMWa/fz
-X-Google-Smtp-Source: AGHT+IHKLPo2soxA5Y8VnFslGm7aTOgc7xTl+LdwptUZy9c+jD3wHh24dn988+a4A4dOp8c0NHJNUA==
-X-Received: by 2002:a05:6a20:a11d:b0:1a3:c8c4:9c83 with SMTP id
- q29-20020a056a20a11d00b001a3c8c49c83mr4666973pzk.37.1711399067487; 
- Mon, 25 Mar 2024 13:37:47 -0700 (PDT)
-Received: from frhdebian ([201.82.41.210]) by smtp.gmail.com with ESMTPSA id
- b7-20020a62cf07000000b006e6aee6807dsm4750225pfg.22.2024.03.25.13.37.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 25 Mar 2024 13:37:47 -0700 (PDT)
-Date: Mon, 25 Mar 2024 17:37:42 -0300
-From: Hiago De Franco <hiagofranco@gmail.com>
-To: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: =?utf-8?Q?Pierre-Cl=C3=A9ment?= Tosi <ptosi@google.com>,
- u-boot@lists.denx.de, Marc Zyngier <maz@kernel.org>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Hiago De Franco <hiago.franco@toradex.com>, Stefano Babic <sbabic@denx.de>
-Subject: Re: [PATCH] arm64: Fix map_range() not splitting mapped blocks
-Message-ID: <20240325203742.kan3xp5i3aqcd5ve@frhdebian>
+ bh=ARKwK/gbemM8saqjnjf94yKMg0D3HYZaKO5WunopXXU=;
+ b=N6YiMxWs3fE4DeCyRjOR37nepp0ShFoawqnkkY5vs1eINSoiR9xDz8kMWtZdPit1PE
+ 6BBvtfmbTvkFPLjQkYikoU9StJ32do+fg+5pJrx6lw2rI0Fp6/Do1VwGWYvjj1iaUh6N
+ tiqiNcKJGQtUbqmMA2eG2KnOEdLISgweafZPa4TCc+5v+VVuYz8YL96hhvRsbBoGxIMG
+ ZePRPHDcxdzWOeTsMH6X5lh76zilylFuY9EyC5H33AJHoRkyqVzllPMsrEM+OAj71yKu
+ 1HTpGqSVlT+iWK+nc86gtKAA5AoVyS8suRKmJEZRfji+xn+aJUvpM18UWh7lp9awBqTu
+ DcaA==
+X-Gm-Message-State: AOJu0YwNvnJzPLLtgon5y/pi9VLn2F7Ejj+I6gYuqMtqBMDu36rCFij0
+ TkkkF8GVre4IxNhZFUgjOzrxquGtVDkdZD6Gayq0nLYC40BvV5QTA4iaSQxneo/dA9k5maOesE1
+ zkwFpvd/sPS87qVZi2McVAoaj1p2zXBa504Cgy+NzeLthkbucZbA=
+X-Google-Smtp-Source: AGHT+IE5u7DvNDWvFJFNcXQnrT8b8ELWN9KYsDHRar/8ePmjfPBw1qHXZvo6H9cdBQbBP6//aiOW+1OAkLr2e1hRfqI=
+X-Received: by 2002:a17:906:f10a:b0:a46:bbc9:a8c7 with SMTP id
+ gv10-20020a170906f10a00b00a46bbc9a8c7mr5295701ejb.71.1711415748676; Mon, 25
+ Mar 2024 18:15:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAOMZO5DXy8nuVPx-8uSpcVvyLFSb++S6ad64Gg0MWM3guxGZvw@mail.gmail.com>
- <20240323143454.GA3442575@bill-the-cat>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Mon, 25 Mar 2024 18:15:37 -0700
+Message-ID: <CAJ+vNU12-4EJN_RPGPPTfTVden2=beq-XaeFL=dF7t+AAqje=Q@mail.gmail.com>
+Subject: tcg2_platform_get_log failing to read address and size of
+ memory-region via ofnode_get_addr_size
+To: u-boot <u-boot@lists.denx.de>, eajames@linux.ibm.com, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,72 +83,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 18, 2024 at 04:46:55PM -0300, Fabio Estevam wrote:
-> Hi Pierre,
-> 
-> On Mon, Mar 18, 2024 at 4:35 PM Pierre-Clément Tosi <ptosi@google.com> wrote:
-> >
-> > The implementation of map_range() creates the requested mapping by
-> > walking the page tables, iterating over multiple PTEs and/or descending
-> > into existing table mappings as needed. When doing so, it assumes any
-> > pre-existing valid PTE to be a table mapping. This assumption is wrong
-> > if the platform code attempts to successively map two overlapping ranges
-> > where the latter intersects a block mapping created for the former.
-> >
-> > As a result, map_range() treats the existing block mapping as a table
-> > mapping and descends into it i.e. starts interpreting the
-> > previously-mapped range as an array of PTEs, writing to them and
-> > potentially even descending further (extra fun with MMIO ranges!).
-> >
-> > Instead, pass any valid non-table mapping to split_block(), which
-> > ensures that it actually was a block mapping (calls panic() otherwise)
-> > before splitting it.
-> >
-> > Fixes: 41e2787f5ec4 ("arm64: Reduce add_map() complexity")
-> > Signed-off-by: Pierre-Clément Tosi <ptosi@google.com>
-> 
-> This fixes the boot regression on colibri-imx8x.
-> 
-> Thanks a lot for your fix!
-> 
-> Tested-by: Fabio Estevam <festevam@gmail.com>
+Greetings,
 
-Tested-by: Hiago De Franco <hiago.franco@toradex.com> # Toradex Verdin AM62
+I'm unable to understand why tcg2_platform_get_log is failing to read
+a memory region.
 
-On Sat, Mar 23, 2024 at 10:34:54AM -0400, Tom Rini wrote:
-> On Fri, Mar 22, 2024 at 04:33:03PM -0300, Fabio Estevam wrote:
-> > On Fri, Mar 22, 2024 at 4:31 PM Fabio Estevam <festevam@gmail.com> wrote:
-> > 
-> > > As Pierre's explanation addresses Marc's concern,
-> > > do you think this can go to 2024.01 to fix the boot regression on imx8qxp/8qm?
-> > 
-> > I meant 2024.04, sorry.
-> 
-> How much testing has this seen outside of imx?
+For example the following diffs:
 
-Tom, I tested with the AM62 TI arm processor (Toradex Verdin AM62) and
-it works fine.
+diff --git a/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
+b/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
+index 7b2130dbdb21..57b3c227ceaf 100644
+--- a/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
++++ b/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
+@@ -112,6 +112,7 @@
+                compatible = "tcg,tpm_tis-spi";
+                reg = <0x1>;
+                spi-max-frequency = <36000000>;
++               memory-region = <&event_log>;
+        };
+ };
+ diff --git a/arch/arm/dts/imx8mm-venice-gw700x.dtsi
+b/arch/arm/dts/imx8mm-venice-gw700x.dtsi
+index c305e325d007..697fd1148785 100644
+--- a/arch/arm/dts/imx8mm-venice-gw700x.dtsi
++++ b/arch/arm/dts/imx8mm-venice-gw700x.dtsi
+@@ -13,6 +13,17 @@
+                reg = <0x0 0x40000000 0 0x80000000>;
+        };
 
-U-Boot 2024.04-rc4-00001-g5db2e36c8e97 (Mar 25 2024 - 17:28:20 -0300)
++       reserved-memory {
++               #address-cells = <2>;
++               #size-cells = <2>;
++               ranges;
++
++               event_log: tcg_event_log {
++                       no-map;
++                       reg = <0 0x40000000 0x2000>;
++               };
++       };
++
+        gpio-keys {
+                compatible = "gpio-keys";
 
-SoC:   AM62X SR1.0 HS-FS
-DRAM:  1 GiB
-Core:  138 devices, 29 uclasses, devicetree: separate
-MMC:   mmc@fa10000: 0, mmc@fa00000: 1
-Loading Environment from MMC... OK
-In:    serial@2800000
-Out:   serial@2800000
-Err:   serial@2800000
-Model: Toradex 0074 Verdin AM62 Dual 1GB IT V1.1A
-Serial#: 15133548
-Carrier: Toradex Dahlia V1.1C, Serial# 10952631
+And at runtime:
+u-boot=> fdt addr $fdtcontroladdr
+u-boot=> fdt list /soc@0/bus@30800000/spba-bus@30800000/spi@30830000/tpm@1/
+tpm@1 {
+        compatible = "tcg,tpm_tis-spi";
+        reg = <0x00000001>;
+        spi-max-frequency = <0x02255100>;
+        memory-region = <0x00000025>;
+};
+u-boot=> fdt list /reserved-memory/
+reserved-memory {
+        #address-cells = <0x00000002>;
+        #size-cells = <0x00000002>;
+        ranges;
+        tcg_event_log {
+        };
+};
+u-boot=> fdt list /reserved-memory/tcg_event_log
+tcg_event_log {
+        no-map;
+        reg = <0x00000000 0x40000000 0x00002000>;
+        phandle = <0x00000025>;
+};
 
-I've added my Tested-by as well.
+So why does the following code in tcg2_platform_get_log() return -ENOMEM?
 
-> 
-> -- 
-> Tom
+                if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
+                                               0, &args))
+                        return -ENODEV;
+
+                a = ofnode_get_addr_size(args.node, "reg", &s);
+                if (a == FDT_ADDR_T_NONE)
+                        return -ENOMEM;
+
+debugging shows that dev_read_phandle_with_args returns non-zero but
+args.args_count is 0.
+
+I feel like the construct of using dev_read_phandle_with_args followed
+by the ofnode_get_addr_size is just wrong but I don't understand why
+nor do I understand how my dt changes differ from what is in
+arch/sandbox/dts/test.dts (other than its using address-size=1 which
+doesn't appear to be the issue in my testing). The abstraction of the
+ofnode and fdt stuff always trip me up... very confusing.
+
+Can anyone explain the issue here?
 
 Best Regards,
 
-Hiago.
+Tim
