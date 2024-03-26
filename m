@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E858C6FD1F
-	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 08:36:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B13AC54E58
+	for <u-boot@archiver.kernel.org>; Tue, 26 Mar 2024 08:40:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AF8587F3F;
-	Tue, 26 Mar 2024 09:36:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DC18B87FA1;
+	Tue, 26 Mar 2024 09:40:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="yXfkhMGy";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="MNoZPwLR";
+	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="KpYOgWj1";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="BNSSwmSv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACE3D87DF8; Tue, 26 Mar 2024 09:36:15 +0100 (CET)
-Received: from fout8-smtp.messagingengine.com (fout8-smtp.messagingengine.com
- [103.168.172.151])
+ id D25A987E47; Tue, 26 Mar 2024 09:40:45 +0100 (CET)
+Received: from fhigh3-smtp.messagingengine.com
+ (fhigh3-smtp.messagingengine.com [103.168.172.154])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47F6387F3F
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 09:36:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8556687FA1
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 09:40:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=jannau.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=janne@jannau.net
-Received: from compute7.internal (compute7.nyi.internal [10.202.2.48])
- by mailfout.nyi.internal (Postfix) with ESMTP id 071B51380104;
- Tue, 26 Mar 2024 04:36:11 -0400 (EDT)
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+ by mailfhigh.nyi.internal (Postfix) with ESMTP id 55D4911400C5;
+ Tue, 26 Mar 2024 04:40:41 -0400 (EDT)
 Received: from mailfrontend1 ([10.202.2.162])
- by compute7.internal (MEProxy); Tue, 26 Mar 2024 04:36:11 -0400
+ by compute5.internal (MEProxy); Tue, 26 Mar 2024 04:40:41 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
  :cc:content-type:content-type:date:date:from:from:in-reply-to
  :in-reply-to:message-id:mime-version:references:reply-to:subject
- :subject:to:to; s=fm1; t=1711442171; x=1711528571; bh=RqUnATFnkN
- /atbi2LoUUzmsvRFTWnDKu2pDJucNkCR4=; b=yXfkhMGysnnDw2cHPYlqOcvnfB
- eFlrbScnz4PzI0qVvsQpV3tXGEOPpOKFsWGkj1XCRyQh53zbfRotmv2zXIi2u88a
- Xd59LHd163DIiHSM7po1chaNXkRsRL34+flAQ2A8NqG+zJNLfQ8fFc7uI85QfDfD
- HrVffzFWmgDZvUlQbtN3foOPXRII6HxdP0cI9L4VDkoafvRkZAeumYbWCow+A9A8
- 7iSdIub16pWxeItJax90BHZ2N/4Egt94K3HCOF93m9L2xLWM8gzZpbLHpthXAjTs
- h11Htpty57DUByYBTCi8NXGS15VWSaRhHdOWlaY1KO/Ct7ja63mvyixCJe/A==
+ :subject:to:to; s=fm1; t=1711442441; x=1711528841; bh=uLDslNtMa8
+ UbGGtc66/a8tBxA69zC3b2k4JuPcT5aAE=; b=KpYOgWj1gDKaLRyYqsaj9a+1Au
+ ptoqwLKLWbO/5F5Uq8jlRpVR8XvGHpSMBYqCneB4kUA0zVnNvRNekfMFAhgXKae3
+ KwT2JLi6y5XJiL8dZzWjTWTzsM9RqbNw3PTu+8Qs3EN7SxFEqE6LfDVVZKW499hj
+ gEJfflvpqHKNck5xiojFaoyG/U2BLMQPTzrBwQpdDaMchQoEZR3c5bZU85vQjYT8
+ 4eHSr+tBSlYrNzzJKslaw/REk3N95/c9WVlwvTTfcQ5Mj1MOzPZGVakxcc9Fw3s7
+ StVVAkQ0MAY4urFlSJfIEOPt+eMXiBaEpn2iQFez9HB45Vkz9x5uPmEIWL8w==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
  messagingengine.com; h=cc:cc:content-type:content-type:date:date
  :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
  :message-id:mime-version:references:reply-to:subject:subject:to
  :to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1711442171; x=1711528571; bh=RqUnATFnkN/atbi2LoUUzmsvRFTW
- nDKu2pDJucNkCR4=; b=MNoZPwLR/NwsYxqflD8oQxvC1KerJuXmT4+NJAiWzC3i
- cVGHWQfy2OmcDcqJhjEkhh3s61V1UDnik2cVD4tsxyqJMgo+qtEwyKy9BpFeu8vG
- 9JHstZzZ/ZM512MaMGWO7wBDsbrnXpVWfb8RLMWoTXNgtoTY0K59kdx8nVT0swvY
- 9tBE8dtljhFcM7Y1mdGib+Q3xQuhtsGFyYqA46SH130sODGBAD7xYKbKgXUeNZQA
- ZUdNcrMllwtRtZkzoWQuoE/lTV5POVJk7MXhWH5kwEvJzi0Ih7WuWZpzc449PwUy
- n3RcLmicfqReW/oPldL60Ct4+rnRpwlicVfnwGHh5Q==
-X-ME-Sender: <xms:-ogCZlPwGJ_X9lklX7GNaxsVlELV6qfQZtI16f83La9sT0BfzKlo9w>
- <xme:-ogCZn8BA_RzDtgLJe6ARW-VOUqUvnxbzl7ZTXrHeiY3UfTDBCsGM3COe7M088bQh
- lNMeM_z5koDpDutxDM>
-X-ME-Received: <xmr:-ogCZkQVFBNVQRPNAtgiMfHVODabMYxbuta9lt-khPFPceiCnn_2D-godSL3lLWLlrJjR1pBgbvCPz4ULWxy8xxzFA_ja9yxow>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrudduvddguddvvdcutefuodetggdotefrod
+ fm2; t=1711442441; x=1711528841; bh=uLDslNtMa8UbGGtc66/a8tBxA69z
+ C3b2k4JuPcT5aAE=; b=BNSSwmSvqX8y0gHbBOoIaRKHkV5f3xGovyNFJLjvjU3H
+ Bc1R7qg8kVM4EC6o39gaKAZpL40yqOipf6L0CdjngZ1QP3ptvkK2VOjSaDc4qcpo
+ 884wTgKlvCAPS0oNx0m6ve+X3KJNrIMyKn7NvDcaN37Jg2QNosn0ciZTf11pYLaH
+ Etw5CFsZK1MDReIQyRxLCRV8K8dE8Xcos7/4amHuVWmXxnWqYjbRDY3xjg1elJlz
+ q1VPJXP4Ak0E4MKxHkIt3wyiXkdlf8Wts/8iTT2fGWH7NH2T7ZF6ehnedx/kE1Wo
+ FqdE6iso4S+WaGda2bgJHWlbOXgtTnqoV/00LZtGmA==
+X-ME-Sender: <xms:CYoCZhi0aM5OnPAosksf4SKFS4o5Ts1QPW6XLMC10seW67Ai1CTHvw>
+ <xme:CYoCZmBaeBK3hLSmoYff1J8MQFUBfQJ3vOtJs_HbD-DzVr7frl_6bP7NpBchRmofv
+ _QUUscKchROqgaCB28>
+X-ME-Received: <xmr:CYoCZhETUYY0fRkvuTD0-tTn0baRYXow_doYtwJDq4b6ls4camvw5E4ztcjZpNOASF7HtO9OecjdK7d8SZurwLD9TfzVM9_HXA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrudduvddguddvfecutefuodetggdotefrod
  ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
  necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
  enucfjughrpeffhffvvefukfhfgggtuggjsehttdertddttdejnecuhfhrohhmpeflrghn
@@ -65,31 +65,30 @@ X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrudduvddguddvvdcutefuodetgg
  epgfdvffevleegudejfeefheehkeehleehfefgjefffeetudegtefhuedufeehfeetnecu
  vehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepjhgrnhhnvg
  esjhgrnhhnrghurdhnvght
-X-ME-Proxy: <xmx:-ogCZhuSOwJ0VtGkTfw_jwMXyxa4MxV9Ch38oG7r-px0Xpgw0SI5_Q>
- <xmx:-ogCZtc7yc9zbv8jdJ57qlyJUTK047oa4pGU31UGQIRMo3TBYtLXYg>
- <xmx:-ogCZt1AjGHSmRqqS97CPm2T9-yFjHbLxA0jTCsdUCMmCIa0DS399Q>
- <xmx:-ogCZp-9V297mM7_CKr1wFnoFUbZrBqWDtnhpCBMpfB3dbEB1pErbg>
- <xmx:-4gCZuVxYqJHfgOTbR2wlS9DX07wmJnIAIrsH-3HqjA4Y2AlL-QQIQ>
+X-ME-Proxy: <xmx:CYoCZmTQNZ7uhmO0OlZHHLlKbd4prURRM0iZpMLjddU39eVO-1DLfg>
+ <xmx:CYoCZuxWl8YoYSDSTjv8N4rRQ0hEnK1Xe8fv_C26t7Vfs7hdo8MUJA>
+ <xmx:CYoCZs6m_tDXGUpWD6aDNB3fgFN01DObQf1YQGhttY_1xvA8eG27rg>
+ <xmx:CYoCZjyrz6LnvXXcA-gvC4xknllgaSfeuFoOXeD4cKAubEnMWRPDTA>
+ <xmx:CYoCZifSr6Es8RS8us67SVK-oAaaklxWYijRtGABc4MW4UnqU0bNJw>
 Feedback-ID: i47b949f6:Fastmail
 Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 26 Mar 2024 04:36:10 -0400 (EDT)
-Date: Tue, 26 Mar 2024 09:36:07 +0100
+ 26 Mar 2024 04:40:40 -0400 (EDT)
+Date: Tue, 26 Mar 2024 09:40:39 +0100
 From: Janne Grunau <j@jannau.net>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: u-boot@lists.denx.de, asahi@lists.linux.dev,
- Neal Gompa <neal@gompa.dev>, Bin Meng <bmeng.cn@gmail.com>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>
-Subject: Re: [PATCH v3 2/6] usb: xhci: Set up endpoints for the first 2
- interfaces
-Message-ID: <ZgKI9y4RITeAgAKj@robin>
+To: Marek Vasut <marex@denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, u-boot@lists.denx.de,
+ asahi@lists.linux.dev, Neal Gompa <neal@gompa.dev>
+Subject: Re: [PATCH v3 4/6] usb: Add environment based device ignorelist
+Message-ID: <ZgKKB_j02eAVltTs@robin>
 References: <20240322-asahi-keyboards-v3-0-3106dd4c4e19@jannau.net>
- <20240322-asahi-keyboards-v3-2-3106dd4c4e19@jannau.net>
- <082bfd68-1dd4-4bc5-acb3-1000de1a19b8@canonical.com>
+ <20240322-asahi-keyboards-v3-4-3106dd4c4e19@jannau.net>
+ <fcc7e54e-5e52-4b27-bc0c-801954ccf0ca@denx.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <082bfd68-1dd4-4bc5-acb3-1000de1a19b8@canonical.com>
+In-Reply-To: <fcc7e54e-5e52-4b27-bc0c-801954ccf0ca@denx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,51 +105,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Mar 22, 2024 at 09:17:08AM +0100, Heinrich Schuchardt wrote:
-> On 3/22/24 08:47, Janne Grunau via B4 Relay wrote:
-> > From: Janne Grunau <j@jannau.net>
-> > 
-> > The xhci driver currently only does the necessary initialization for
-> > endpoints found in the first interface descriptor. Apple USB keyboards
-> > (released 2021) use the second interface descriptor for the HID keyboard
-> > boot protocol. To allow USB drivers to use endpoints from other
-> > interface descriptors the xhci driver needs to ensure these endpoints
-> > are initialized as well.
-> > Use USB_MAX_ACTIVE_INTERFACES to control how many interface descriptors
-> > are considered during endpoint initialisation.
-> > For now define it to 2 as that is sufficient for supporting the Apple
-> > keyboards.
-> > 
-> > Reviewed-by: Marek Vasut <marex@denx.de>
-> > Reviewed-by: Neal Gompa <neal@gompa.dev>
-> > Signed-off-by: Janne Grunau <j@jannau.net>
-> > ---
-> >   drivers/usb/host/xhci.c | 31 +++++++++++++++++++------------
-> >   include/usb.h           |  6 ++++++
-> >   2 files changed, 25 insertions(+), 12 deletions(-)
-> > 
-> > diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
-> > index 534c4b973f..741e186ee0 100644
-> > --- a/drivers/usb/host/xhci.c
-> > +++ b/drivers/usb/host/xhci.c
-> > @@ -606,24 +606,28 @@ static int xhci_set_configuration(struct usb_device *udev)
-> >   	int slot_id = udev->slot_id;
-> >   	struct xhci_virt_device *virt_dev = ctrl->devs[slot_id];
-> >   	struct usb_interface *ifdesc;
-> > +	unsigned int ifnum;
-> > +	unsigned int max_ifnum = min((unsigned int)USB_MAX_ACTIVE_INTERFACES,
+On Fri, Mar 22, 2024 at 12:56:37PM +0100, Marek Vasut wrote:
+> On 3/22/24 8:47 AM, Janne Grunau via B4 Relay wrote:
 > 
-> no_of_if being of type u8 limits the number of interfaces to 255. 
-> Introducing USB_MAX_ACTIVE_INTERFACES limit us to the first two 
-> interfaces. Is this really needed? Handling all interface would avoid 
-> the introduction of artificial limitations which may hit us on the next 
-> device.
+> [...]
+> 
+> > @@ -1099,6 +1142,20 @@ int usb_select_config(struct usb_device *dev)
+> >   	le16_to_cpus(&dev->descriptor.idProduct);
+> >   	le16_to_cpus(&dev->descriptor.bcdDevice);
+> >   
+> > +	/* ignore devices from usb_ignorelist */
+> > +	err = usb_device_is_ignored(dev->descriptor.idVendor,
+> > +				    dev->descriptor.idProduct);
+> > +	if (err == -ENODEV) {
+> > +		dev_dbg(dev->dev, "Ignoring USB device 0x%x:0x%x\n",
+> > +			dev->descriptor.idVendor, dev->descriptor.idProduct);
+> > +		return err;
+> > +	} else if (err == -EINVAL) {
+> > +		printf("usb_ignorelist parse error in \"%s\"\n",
+> > +		       env_get("usb_ignorelist"));
+> 
+> Please use dev_err() here consistently with dev_dbg() above.
 
-It's not strictly necessary but assume that the code was only tested
-with a single interface. Given the general state of u-boot's USB stack
-I wouldn't be surprised if it would blew up with USB descriptors maxing
-out the number of interfaces / endpoints. So limiting it to the minimum
-of what's needed to support the device in front of me looks like the
-safer option.
+I didn't use dev_err() since the parsing error is not specific to the
+device. It doesn't matter much. I'll change it and resend after we've
+settled the new discussion about the interface limit.
+
+> With that fixed:
+> 
+> Reviewed-by: Marek Vasut <marex@denx.de>
+
+thanks,
 
 Janne
