@@ -4,76 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 713CEC54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 16:16:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6494BC54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 16:24:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E64CE8800C;
-	Wed, 27 Mar 2024 17:16:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C1BD1880AC;
+	Wed, 27 Mar 2024 17:24:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tE7x/ox8";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Z+Zk9Z97";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B83E8801A; Wed, 27 Mar 2024 17:16:23 +0100 (CET)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C361687F95; Wed, 27 Mar 2024 17:24:03 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76D0A87F95
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 17:16:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F90888035
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 17:24:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-51381021af1so10737896e87.0
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 09:16:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711556180; x=1712160980; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=oiFnUyqRvBeQhRhgTpOXfZdE5xwpnuMgbEwVsBQrhQk=;
- b=tE7x/ox8bj1oHGzZ/yueGdJXvSm6YXILKzS1rqk8a4Lz7kYBfmvn1fgKUtSVv7mxwu
- agcE6Qbm6k5/NLYDH0l0MP8iI9P/jljD+8jXiVT5/tTvbIHmFyE73O14vvPX1bO77Lsn
- R1h1T6zJ5E67n672Vfl9NzelW1YUMkWKJHnPmE0to5LKQTEUF2GdYp1SDiUy33tNdUfQ
- /95uZosOv+WPskPocxFBrjhbdPF31Q2rXUJlgaXiaWxaj2Ggn/fa886yqSnsAQWcuLlq
- VJfb1UlmmnOnQwJh2Je1ecbkfkFoTiBjiBRea//vJkdcAy4q5Rg6lMl1C7qnXi40UMAp
- JXXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711556180; x=1712160980;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=oiFnUyqRvBeQhRhgTpOXfZdE5xwpnuMgbEwVsBQrhQk=;
- b=oJVQXC4qQ27DUGQ80pCsOKLl1UVwibfPYEjkDZFnvzNm0d2gsO2S9qZuvQn17w4l0H
- 4C9nQfMv3kuAHKBBD/rrx3uffbmA8f9sAcPopMLnF034LKmrQz29gHjtOqjuxP0Q5eek
- M45aX8DSayyIQsXi3gc/EgxBitGTjEKfMfD/iNd+UTNyQzE4uOQbEgGabjW/rnXRu/XF
- N8RPZp4tiNWGT4JKYoGVeU4MQI4f8KCerj1zeiR3e0X7bMlqtoxc2nv5Vf6ZFNGtNjYk
- +66dbSxQDciiHmwVKOJUTxYZjZwFf/0Ih4+hbX/5bN6RQygL91CmySu8A6gP6t6P2N/B
- laqg==
-X-Gm-Message-State: AOJu0YzQxIR6GbP2NLWdnYDfnmx7GmxMYaDobR+OU7/Ac+ImK8H/69EF
- YNL9JbBctdlBIB2X7oqeVL5kdAUsm8YoA6vhRES/+0ssrCUg6SGPciwPAE6PdrI4kdkismbi9D+
- Aqk0DlYbns0YyfulRMsTNH5JPIfkg93ktoWdOEy2qfa0aWqHgEsQ=
-X-Google-Smtp-Source: AGHT+IHG7egLRgBcgLGOdbaiF5yiawNgedt1xWGYA+bwN9Q8D2xm4RN/sjqCo6n75lFQwNlkNQBGomBzZ961mYrU6Hg=
-X-Received: by 2002:a2e:8010:0:b0:2d4:a20f:299f with SMTP id
- j16-20020a2e8010000000b002d4a20f299fmr484382ljg.35.1711556179621; Wed, 27 Mar
- 2024 09:16:19 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id EBECB615F2;
+ Wed, 27 Mar 2024 16:23:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 96D7CC433C7;
+ Wed, 27 Mar 2024 16:23:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1711556639;
+ bh=ePTVhfDAthlnPSErceMvBPpwP0nuucm6UUOO9vgVQ6k=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Z+Zk9Z97LA3zp0dyq5AqLt7QRVlBNNDD8jnPxWJXdmBGckTUc5Md2YSgmL8PNbC6P
+ Fz46whBtiO8Z02Lp5/Dt0oqbGVMTkEhfDuIc3RAFwqvIew31nwevk2SZwL44ky8ibO
+ ztBwNTV2yTCvl43c3b/pr68iM94IdcvP6KfX7coB8ITraQFPG8PDeTtsMhygoupYJR
+ MxcVNr66ZGxKX8xcanIfIMcR602bMghhQ5EIBveCtOTJt/+tCTPa8Y2CIs0xIaXdu+
+ XpN0ubDKpgYXZuleVi2L3hZfh7K9ZUmFt4nXNDhvD2U+CwyDoesLu2l1ndbKsVbwXj
+ OrnHdIMRroE0g==
+From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
+To: Stefan Roese <sr@denx.de>
+Cc: u-boot@lists.denx.de, =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH u-boot-mvebu v3 00/18] Turris Omnia - New board revision
+ support
+Date: Wed, 27 Mar 2024 17:23:37 +0100
+Message-ID: <20240327162355.24584-1-kabel@kernel.org>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-References: <20240321180219.1039622-1-tharvey@gateworks.com>
- <CAC_iWjLwt9NxwOsYWwx4+w2vL3dtfJnJPH-eeApU-ODKf8tzBA@mail.gmail.com>
- <CAJ+vNU0aSj5RgCUxz74hg059Qtmco4HSBCiAHA_hhw+jzxo5Dw@mail.gmail.com>
-In-Reply-To: <CAJ+vNU0aSj5RgCUxz74hg059Qtmco4HSBCiAHA_hhw+jzxo5Dw@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 27 Mar 2024 18:15:43 +0200
-Message-ID: <CAC_iWjJ4s1ZS8X64vjV_xiOSzKf7fPBryw6eGp6tW7Vqxv2_gw@mail.gmail.com>
-Subject: Re: [PATCH] tpm: display message when using gpio-reset instead of
- when missing it
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Samuel Lee <slee@gateworks.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,126 +69,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
+Hi Stefan,
 
-On Wed, 27 Mar 2024 at 17:29, Tim Harvey <tharvey@gateworks.com> wrote:
->
-> On Wed, Mar 27, 2024 at 7:44=E2=80=AFAM Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Tim,
-> >
-> > On Thu, 21 Mar 2024 at 20:02, Tim Harvey <tharvey@gateworks.com> wrote:
-> > >
-> > > Instead of displaying what looks like an error message if a
-> > > gpio-reset dt prop is missing for a TPM dipslay a more
-> > > informative message about resetting the TPM if the gpio is found:
-> > >
-> > > before:
-> > > tpm_tis_spi_probe: missing reset GPIO
-> > >
-> > > after:
-> > > tpm@0: performing 1ms reset on gpio@30210000:12
-> > >
-> > > Note that the reset dt binding prop used in this driver is not
-> > > dt-compliant; it does not exist in the Linux dt-bindings documentatio=
-n
-> > > and the reset is not done by the Linux driver.
-> >
-> > Probably for a good reason. You aren't supposed to be able to reset a
-> > TPM without resetting the CPUI as well no?
->
-> Hi Ilias,
->
-> Could you clarify what you know about TPM reset? We use the ATTPM20P
-> [1] which states in the datasheet under the reset pin: "To be
-> compliant with TCG requirements, this pin needs to be tied to system
-> reset. TPM_Init is indicated by asserting this pin."
+this is v3 of series adding support for new board revision of Turris
+Omnia.
 
-In short, you shouldn't be able to toggle a GPIO and reset the TPM
-without resetting the CPU as well.
-An attacker could boot -> log into the OS -> reset the TPM -> replay
-measurements and unseal keys that he shouldn't.
+Changes since v2:
+- patch 2: updated MCU command interface header
+- patch 6: fixed bug setting \0 as end of string in src array instead
+           of dst array after bin2hex() call
+- patch 16: updated commit message (added the bit about ctrl+c)
 
->
-> Our boards have a resistor loading option which routes the TPM RST# to
-> an SoC GPIO or alternately to a POR# (hardware power on reset provided
-> by power supply and/or PMIC). Could you point me to where in the spec
-> it explains what the TPM reset should be connected to?
+v1 and v2 at:
+  https://patchwork.ozlabs.org/project/uboot/cover/20240304152148.3847-1-kabel@kernel.org/
+  https://patchwork.ozlabs.org/project/uboot/cover/20240323180711.5498-1-kabel@kernel.org/
 
-I am aware of the the TCG TIS spec [0] which says
-"The TPM_Init (LRESET#/SPI_RST#) signal MUST be connected to the platform C=
-PU
-Reset signal such that it complies with the requirements specified in
-section 1.2.7 HOST
-Platform Reset in the PC Client Implementation Specification for
-Conventional BIOS."
-There might be other TCG specs defining this as well.
+Marek Behún (18):
+  arm: mvebu: turris_omnia: Enable LTO by default on Turris Omnia
+  arm: mvebu: turris_omnia: Add header containing MCU command interface
+    and use it
+  arm: mvebu: turris_{omnia, mox}: Don't print model two times
+  arm: mvebu: turris_omnia: Update MCU status and features reading
+  arm: mvebu: turris_omnia: Implement getting board information from MCU
+  arm: mvebu: turris_omnia: Print board ECDSA public key if available
+  arm: mvebu: turris_omnia: Disable Atmel SHA node if not present
+  arm: mvebu: spl: Do not build mvebu-reset in SPL
+  arm: mvebu: system-controller: Rework to use UCLASS_SYSCON
+  arm: mvebu: system-controller: Select mvebu-reset if DM_RESET &&
+    PCI_MVEBU
+  arm: mvebu: system-controller: Add support for SYSRESET
+  gpio: turris_omnia_mcu: Use byteorder conversion functions
+  gpio: turris_omnia_mcu: Update firmware features reading
+  gpio: turris_omnia_mcu: Add support for system power off via sysreset
+  arm: mvebu: turris_omnia: Enable poweroff command via sysreset in
+    defconfig
+  cmd: rng: Print "Abort" on -EINTR
+  misc: turris_omnia_mcu: Add support for rng provided by MCU
+  arm: mvebu: turris_omnia: Enable rng command in defconfig
 
-[0] https://trustedcomputinggroup.org/wp-content/uploads/TCG_PCClientTPMInt=
-erfaceSpecification_TIS__1-3_27_03212013.pdf
+ arch/arm/mach-mvebu/Kconfig              |  25 ++
+ arch/arm/mach-mvebu/Makefile             |   3 +-
+ arch/arm/mach-mvebu/cpu.c                |   2 +
+ arch/arm/mach-mvebu/system-controller.c  | 144 ++++++--
+ board/CZ.NIC/turris_atsha_otp.c          |  27 +-
+ board/CZ.NIC/turris_mox/turris_mox.c     |   5 +-
+ board/CZ.NIC/turris_omnia/Makefile       |   2 +-
+ board/CZ.NIC/turris_omnia/turris_omnia.c | 310 ++++++++++++-----
+ cmd/rng.c                                |   7 +-
+ configs/turris_omnia_defconfig           |   6 +
+ drivers/gpio/Kconfig                     |   7 -
+ drivers/gpio/Makefile                    |   1 -
+ drivers/gpio/turris_omnia_mcu.c          | 316 -----------------
+ drivers/misc/Kconfig                     |  11 +
+ drivers/misc/Makefile                    |   1 +
+ drivers/misc/turris_omnia_mcu.c          | 411 +++++++++++++++++++++++
+ include/turris-omnia-mcu-interface.h     | 248 ++++++++++++++
+ 17 files changed, 1044 insertions(+), 482 deletions(-)
+ delete mode 100644 drivers/gpio/turris_omnia_mcu.c
+ create mode 100644 drivers/misc/turris_omnia_mcu.c
+ create mode 100644 include/turris-omnia-mcu-interface.h
 
->
-> > That being said, printing that the TPM was reset is pointless imho.
-> > OTOH the existing error message at least points out a potential
-> > problem in the DT.
-> >
->
-> I'm not sure if you are NAK'ing this patch or asking me to change it.
->
-> Displaying a 'missing GPIO' message is not helpful when there is no
-> GPIO in the dt bindings to begin with.
+-- 
+2.43.2
 
-I am not NAKing it. But isn't that message more useful than printing
-the TPM did a reset? At least you get a hint of something that's
-missing from your DT
-
-Thanks
-/Ilias
->
-> Best Regards,
->
-> Tim
-> [1] https://ww1.microchip.com/downloads/en/DeviceDoc/ATTPM20P-Trusted-Pla=
-tform-Module-TPM-2.0-SPI-Interface-Summary-Data-Sheet-DS40002082A.pdf
->
->
-> > Thanks
-> > /Ilias
-> > >
-> > > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> > > ---
-> > >  drivers/tpm/tpm2_tis_spi.c | 8 ++++----
-> > >  1 file changed, 4 insertions(+), 4 deletions(-)
-> > >
-> > > diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
-> > > index de9cf8f21e07..944540f7a711 100644
-> > > --- a/drivers/tpm/tpm2_tis_spi.c
-> > > +++ b/drivers/tpm/tpm2_tis_spi.c
-> > > @@ -237,14 +237,14 @@ static int tpm_tis_spi_probe(struct udevice *de=
-v)
-> > >                         /* legacy reset */
-> > >                         ret =3D gpio_request_by_name(dev, "gpio-reset=
-", 0,
-> > >                                                    &reset_gpio, GPIOD=
-_IS_OUT);
-> > > -                       if (ret) {
-> > > -                               log(LOGC_NONE, LOGL_NOTICE,
-> > > -                                   "%s: missing reset GPIO\n", __fun=
-c__);
-> > > +                       if (ret)
-> > >                                 goto init;
-> > > -                       }
-> > >                         log(LOGC_NONE, LOGL_NOTICE,
-> > >                             "%s: gpio-reset is deprecated\n", __func_=
-_);
-> > >                 }
-> > > +               log(LOGC_NONE, LOGL_NOTICE,
-> > > +                   "%s: performing 1ms reset on %s:%d\n", dev->name,
-> > > +                   reset_gpio.dev->name, reset_gpio.offset);
-> > >                 dm_gpio_set_value(&reset_gpio, 1);
-> > >                 mdelay(1);
-> > >                 dm_gpio_set_value(&reset_gpio, 0);
-> > > --
-> > > 2.25.1
-> > >
