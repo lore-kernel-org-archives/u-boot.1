@@ -4,114 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37FF6C47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 16:40:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE649C47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 16:40:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6B64880D2;
-	Wed, 27 Mar 2024 17:39:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=hotmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5FD86880F5;
+	Wed, 27 Mar 2024 17:39:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=igalia.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="oSBxGlEU";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="rpJBUu3B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E339880D6; Wed, 27 Mar 2024 16:03:20 +0100 (CET)
-Received: from BN1PR04CU002.outbound.protection.outlook.com
- (mail-eastus2azolkn190120000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:d108::])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DFDAD88105; Wed, 27 Mar 2024 17:04:20 +0100 (CET)
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1CDE8801A
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 16:03:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D744787F4F
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 17:04:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=hotmail.com
+ dmarc=none (p=none dis=none) header.from=igalia.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=macromorgan@hotmail.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OHJxqUHpyz+llpgGdwAWB2bt3I4jEHQnFt/e2gLKQsTBDuGvVPGMNAqw0Nk6K9czFfmJbabu/g3gsrS7szQ/OcxoJLUGc70POH/kt3DVrez+hEIHnzYRfa5vvEJi+vipuPjNifikofvUF4nimNn49uylBjWRHvjXX8e0RnqBfgl9k0bpTI36PiMA3uK+JwR91003MIdAzcS1lYsf5uomx3TOfmMNTGenq/2XghYY74kNSLowxscb9mZ3k8/vikAx/MQ4ApwyVhFlconPYF4RdUbEDquf+QWkY26WOG4PqCft7Bt+/fnB5f+W+yCp60W4YvoePwxWwLpUhz6SmVl2hQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xjdidoIrK/91F+7Y7GGrorj2OEk2/L/WC8Ov8o59ehg=;
- b=X3aw9mwGrdeCpvjoNiYh1+6pDREY3PFeT/uRL2l0jdiI0OYHulfOd9HUvrrURovOgAbSXalFS9lp7zuUXKphB0/c8s1TJhV/FS+7lCo0bn+rjx0GOpG4TGQ0pHl7ukhtfIC+ywd4P8NlhY8OY6yKNkMFeKuZtnxZ+Ct2XwBDn6xp8Hs7I3jG7jGpLRakOH97dGnWfoAL59r0UjsUzfnbmVGyOjrAF035sxNCQFQ7IhcJifyNrHQXHWMdLnaXL1peR/KRC7rW38J4FWCwp9XP37L52g6HQXy+edEwf2bVA7CM2CGTTJjOL5eT05ULODbKUDiL1oOZQby4yOtsIQw8OA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xjdidoIrK/91F+7Y7GGrorj2OEk2/L/WC8Ov8o59ehg=;
- b=oSBxGlEUyc7FG9GwVWVPyBPmT5eVCF8mGca6nBONpwT8bpFF0ocKjkssUXzV42mUtsK7mig/D44BoFynZq+G/yiqMsKREzZ7MMxxfnIa/ZbPFIfWyeUCsfRqwzpFuEnF6e4SpvIP2U+Rhhc6hjZmo26HQtSbqTEMstitnNNGs8xgjHm+giM1POTzBfZc2XcwLpzscKVrYtDL1XOBd6mqNEoYP8mXBAVhqQfXoY08K4ee1f8VKRiSZHYTC5lYQqc3iZuGwBnnvkjMuXHlWEF/Bc2qVxVpa3VODOgQ6B6G6DR2vuM87Ouq+UdEjRBxvVCyESQT6w/WrDLzP1UXE5fbvw==
-Received: from DM4PR05MB9229.namprd05.prod.outlook.com (2603:10b6:8:88::20) by
- PH0PR05MB7930.namprd05.prod.outlook.com (2603:10b6:510:93::9) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7409.33; Wed, 27 Mar 2024 15:03:15 +0000
-Received: from DM4PR05MB9229.namprd05.prod.outlook.com
- ([fe80::148f:6016:501b:93f4]) by DM4PR05MB9229.namprd05.prod.outlook.com
- ([fe80::148f:6016:501b:93f4%3]) with mapi id 15.20.7409.031; Wed, 27 Mar 2024
- 15:03:15 +0000
-Date: Wed, 27 Mar 2024 10:03:11 -0500
-From: Chris Morgan <macromorgan@hotmail.com>
-To: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>,
- Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
- xypron.glpk@gmx.de, cym@rock-chips.com, philipp.tomsich@vrull.eu,
- sjg@chromium.org, trini@konsulko.com, jonas@kwiboo.se
-Subject: Re: [PATCH 1/2] rockchip: rk3588: Add support for ATAG parsing
-Message-ID: <DM4PR05MB92298DB9B7803B3E0ABC0137A5342@DM4PR05MB9229.namprd05.prod.outlook.com>
-References: <20240326204944.1572667-1-macroalpha82@gmail.com>
- <20240326204944.1572667-2-macroalpha82@gmail.com>
- <fe9eef97-5814-4d25-8357-60873d565aff@rock-chips.com>
- <DM4PR05MB9229EA8B503F50C94DDA5212A5342@DM4PR05MB9229.namprd05.prod.outlook.com>
- <9541747b-b05c-4bb2-bf73-d720659905d2@collabora.com>
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <9541747b-b05c-4bb2-bf73-d720659905d2@collabora.com>
-X-TMN: [shxvuCTGGHPfDrVp4VO6dYjUUaLrgSeW]
-X-ClientProxiedBy: SA1P222CA0028.NAMP222.PROD.OUTLOOK.COM
- (2603:10b6:806:22c::30) To DM4PR05MB9229.namprd05.prod.outlook.com
- (2603:10b6:8:88::20)
-X-Microsoft-Original-Message-ID: <ZgQ1LxRxSye60XEI@wintermute.localhost.fail>
+ spf=pass smtp.mailfrom=cgmeiner@igalia.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
+ s=20170329;
+ h=Content-Transfer-Encoding:Content-Type:Message-ID:References:
+ In-Reply-To:Subject:Cc:To:From:Date:MIME-Version:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=mWDvdziSmQxwcoCLFgEP+k/za7G/xeROyPzPVma/Mf4=; b=rpJBUu3BQFysE0VpjQJtIBkKU9
+ n4AGWCIPwyXzk7VAMVDbAJ12FvfgQ1falrROQXtbCER2p0IR1+FhdWzyd+KB8EKEFvNzfvo+RxZfd
+ 3Az3tC3CePj5qvv3xk3z4SmC1kTl2SgPR0jntvNBpikQ+i2YZr8KrIMDsnM+e4XX3vm56ELGOC5Yb
+ 6c9wfOgj5HlkFtWMLnpx7vmEL5RV9vL7NbLG4TLXoprXUE8ycfeg70hQT+OMG2pbt2y7TpPB9E/tq
+ A3myrrtsg323m1RfCaADKWA+Bx6JNs/rKt3NVGEgPtXW/TDSSgoTYx8Uok94AdEbmU73D7hReTHcX
+ eAEdu0Cg==;
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+ by fanzine2.igalia.com with esmtps 
+ (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1rpVl5-00FvQu-Me; Wed, 27 Mar 2024 17:04:11 +0100
+Received: from webmail.service.igalia.com ([192.168.21.45])
+ by mail.igalia.com with esmtp (Exim)
+ id 1rpVl3-00Cwt8-L1; Wed, 27 Mar 2024 17:04:11 +0100
+Received: from localhost ([127.0.0.1] helo=webmail.igalia.com)
+ by webmail.service.igalia.com with esmtp (Exim 4.96)
+ (envelope-from <cgmeiner@igalia.com>) id 1rpVl3-004v1I-1Q;
+ Wed, 27 Mar 2024 17:04:09 +0100
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR05MB9229:EE_|PH0PR05MB7930:EE_
-X-MS-Office365-Filtering-Correlation-Id: e375c812-bd49-4857-538f-08dc4e6f0702
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: /CnY3grjzqg39y4aoec08jac9BL+mZywyOU42J4ac6grKNWlZ7WBEH4iUwOzcp50gd05EjeUbe7mLzDuZs91VGO61GQK5L9NrAZ5viCTT6zpNzs1AJnT4cnn49YDeXAyHaD43rMPmZBHp0/7fzL6K9rRnTzk5w4v3kx5WMU6a51uBEa6b8hb5Q0RrnVoYCZu4USxQUPb+wBOxACYt7h4nykMa4XVxBXtF24mFszFch06WmV7d908RQaMfmyDCuDi1t6XfL2i6CQUCH/lubaXfyC6SlTvD9ecwRSKyv/4sMy1FJzAPAbDkcHDXLlO7sXZ0PY/6utgUwXfkTsri7s73/W+IUJ8+AYkSU+SBtve+36PlY4uAWgtaHVda6SllrmFLGxyr4uKHeukDwxYaYDEUCoowCZbWlVy96y52VfBpHwl8+YYnw5j3nmc0WTuUwNwFiWxV4Uu6uK9Y0N4wQSg29gO7bxj5VA6wp5IVPfIZI2jyUwdxWa4TRMNxjNaezwhCLpftaoUC1V/wWEpmYhnsGo++smHwYIME6va5Eb3PaOffc6gagAtuOIE39OnB/9E
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?MBZyaHqqr33Bxng99v40TdeE36d7W/Z8sF5cWqB5gptJNMZ4EnOtSUWyhZ?=
- =?iso-8859-1?Q?/CDQJTcP6F1XpZtuCco9LRu8AHHCIUOSJkaLH6wFTdB7BWWuKBz5zXAdTu?=
- =?iso-8859-1?Q?nEW/txAmA7ZHNvE40T124vJHC7ZqMZUQXYme0f1kUjPL83eXhAVAyKfqUT?=
- =?iso-8859-1?Q?RwIDlZ3xH5vEQz6oqeAKFEBVGZAOqLnRd1y/+PfQUc/XcBq8KKKx4e/n4S?=
- =?iso-8859-1?Q?mRCSHu0u8Ynq1ZKg4L6Ve4e8pIxc/W1UxqOHYkjc1W+vRqbkvBiLM4OEHe?=
- =?iso-8859-1?Q?JBwKtTagE8HcAgmPa7K0c1lvjeTlt04VZdPoufirUOKTzxsB1wWJQul9CG?=
- =?iso-8859-1?Q?VDiO+1iD50Wb2aX1LIdlDVfUGnc46P3+bv198IVfBJjridT8ztKc8FhgrZ?=
- =?iso-8859-1?Q?TnJJKerqrG7oo6s4MQmc7pKmyBHx9GiNfPGmfbgSX8fKeHDGATZnl45ein?=
- =?iso-8859-1?Q?LUQygjSQd8OwwY9Bh4llxy1YeabGVoRKmALroND9hQ2scidqGbACgy1MY0?=
- =?iso-8859-1?Q?BJedKfUCZsSbBNMWt9A7o/vUzBmVe3i69wRjK1L0AMEFbtkhT+5jc24/gH?=
- =?iso-8859-1?Q?sCDqWus7BzLZYFRBPxY6bjMafFVBOfoyoeuD83YTpgcYbPNdLlKmDezQnh?=
- =?iso-8859-1?Q?QJkOepqdHDrimRHc6zSRA+zIgIq9kMOkKEsAk+G3/10WmxWZkbwUxh4eJm?=
- =?iso-8859-1?Q?OVxIPsVQkDBjh7851hJb6+UOuD6zqDIzxSQo3f4BT6VD22eHNDhUM8XMld?=
- =?iso-8859-1?Q?IE8I4JnbAjB61luO8/kKrgd7cmGZMOwPtJe5+Ln4Je/TnQJiRHmq9gctdH?=
- =?iso-8859-1?Q?9EX4CiKQlsx+xdLDMMnv6MsFwsS5fh9qYE/7YahTOqKnwhyqHQcoUBv278?=
- =?iso-8859-1?Q?BHdcSgjI8JfrGwkXx/WIKl9mxoMO/7pKS2sy9xghZWi+3XAojDoLQisKSa?=
- =?iso-8859-1?Q?H2WjiN3W91iPUWQvWIb1xXtTwMb0u2GMWmnWejS0PKWlGSENyhVA6Utycz?=
- =?iso-8859-1?Q?5Blaqp4OnmUaBZtqCwYnNRff3EXFzSwYBWpka5+4Dvhh5RKtbmKgykYNPN?=
- =?iso-8859-1?Q?fhVk0oZ15WWI8UKu0rwyGCWTl4TtJEkBdXPy3xJz6CtoTs++dAo/Vc0/II?=
- =?iso-8859-1?Q?tHp7RYzIVzV+oYFFGzAvBa2VyXMUrTNvckBXnnrEDeIP9CEd2qlim/FQWq?=
- =?iso-8859-1?Q?b38MDfiwW1sHbx4zxscu7etQnJilQMnTHCxV7qsoJMQXh/bjt9cYZHmStd?=
- =?iso-8859-1?Q?ACSG7YcoNujFm60SlpOWbuPo4hoZjSy036LjfEUHU=3D?=
-X-OriginatorOrg: sct-15-20-4823-7-msonline-outlook-84f76.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: e375c812-bd49-4857-538f-08dc4e6f0702
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR05MB9229.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2024 15:03:15.0241 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR05MB7930
+Date: Wed, 27 Mar 2024 16:04:09 +0000
+From: Christian Gmeiner <cgmeiner@igalia.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: baruch@tkos.co.il, trini@konsulko.com, josua@solid-run.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] mx6cuboxi: Convert to watchdog driver model
+In-Reply-To: <20240327141849.2126157-1-festevam@gmail.com>
+References: <20240327141849.2126157-1-festevam@gmail.com>
+Message-ID: <9eadf309c5c617bb6f4792889a8f674a@igalia.com>
+X-Sender: cgmeiner@igalia.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Wed, 27 Mar 2024 17:39:52 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -129,454 +79,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 27, 2024 at 04:21:49PM +0200, Eugen Hristev wrote:
-> On 3/27/24 15:32, Chris Morgan wrote:
-> > On Wed, Mar 27, 2024 at 06:32:06PM +0800, Kever Yang wrote:
-> >> Hi Chris,
-> >>
-> >>     The ATAGS is used for passing parameter from bootloader to kernel at
-> >> first, which has been replaced by DTB now for ARM platform.
-> >>
-> >>     And Rockchip using ATAGs for passing parameter like dram memory
-> >> size/board uart in different boot process like DRAM init binary/ TPL/SPL to
-> >> U-Boot since 2018.
-> >>
-> >>     And almost at the same time, Simon add bloblist for mainline U-Boot
-> >> which for similar purpose.
-> >>
-> >>     So I'm not sure if this ATAGS should be accept in mainline U-Boot or
-> >> not, even for rockchip platform only seems some kind of regression for this
-> >> feature support.
-> >>
-> >>
-> >> Hi Simon and Tom,
-> >>
-> >>      Could you help to give some suggestion for this?
-> >>
-> > 
-> > I really meant to do this as an "RFC", so I apologize in advance for
-> > possibly causing more work in treating this as a full-fledged patch.
-> > 
-> > The problem I'm trying to solve is that I've got 2 boards, a Rock 5B
-> > as well as an Indiedroid Nova both with 16GB of RAM. I noticed that
-> > without the memory holes the Rock 5B defined in my Indiedroid it would
-> > also fail to boot. I've got 2 other boards as well with less than 16GB
-> > of RAM which seem to work fine without any holes (a 4GB Indiedroid Nova
-> > prototype and a GameForce Ace with 12GB of RAM).
+On 2024-03-27 14:18, Fabio Estevam wrote:
+> Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
+> the 'reset' command in U-Boot to not cause a board reset.
 > 
-> Hi,
+> Fix it by switching to the watchdog driver model via sysreset, which
+> is the preferred method for implementing the watchdog reset.
 > 
-> When I initially added these holes in the memory, I tried to ask Rockchip what are
-> the holes for. I didn't get any answer, however the patches to reserve the holes
-> were accepted.
-> If we could get more information about why the holes are there, if that area is
-> specific to something, or that it's fixed in a per-SoC basis, we could reserve it
-> by hardcoding in the Linux DT, without the need for ATAGs.
-> Without real information, we cannot be sure that for other variants of the SoC or
-> some other bootrom configuration, the holes will not change/move.
+> Signed-off-by: Fabio Estevam <festevam@gmail.com>
+> ---
+> Christian,
 > 
-> Eugen
-
-It's not *just* about the holes, but also making sure we use the full
-extent of the RAM. For example on my 4GB Indiedroid Nova the existing
-logic ignores about 256MB of RAM that's otherwise present. When we
-use the existing code the RAM map reported by Linux is as follows:
-
-[    0.000000] Early memory node ranges
-[    0.000000]   node   0: [mem 0x0000000000200000-0x00000000efffffff]
-
-Whereas when we do ATAGS parsing to set the banks we get the following:
-
-[    0.000000] Early memory node ranges
-[    0.000000]   node   0: [mem 0x0000000000200000-0x00000000efffffff]
-[    0.000000]   node   0: [mem 0x00000001f0000000-0x00000001ffffffff]
-
-So basically the issue is two-fold... one we need to create the memory
-holes when necessary, and two the current method of defining memory
-banks leaves some RAM unallocated. Parsing the ATAGS does both of these,
-I'm just curious if it's the RIGHT way or there's something else I'm
-missing...
-
-Thank you,
-Chris.
-
+> Can you test this, please?
 > 
-> > 
-> > The "RFC" part for which I'm really requesting guidance/comments is
-> > a question of "is it appropriate to use ATAGS" to get the RAM banks
-> > on this SoC, or is there a different way we should be doing it? If
-> > we can/should use the ATAGS, then I guess this can be pared down and
-> > refactored to just be RK3588 specific. If so, we can possibly add
-> > something like this to the RK3588 SoC specific code, guard it with
-> > an #ifdef ROCKCHIP_TPL to only call it when using the Rockchip
-> > specific RAM init (in the hopes that maybe one day we get our own
-> > RAM init), and then replace existing code for boards like the Rock 5B
-> > so that it no longer reserves these memory banks.
-> > 
-> > Thank you,
-> > Chris.
-> > 
-> >>
-> >> Thanks,
-> >> - Kever
-> >> On 2024/3/27 04:49, Chris Morgan wrote:
-> >>> From: Chris Morgan <macromorgan@hotmail.com>
-> >>>
-> >>> Add support for parsing the ATAGs created by the Rockchip binary
-> >>> RAM init. This ATAG parsing code was taken from the Rockchip BSP
-> >>> U-Boot source and tested only on parsing the RAM specific ATAGs
-> >>> for the RK3588.
-> >>>
-> >>> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-> >>> ---
-> >>>   arch/arm/include/asm/arch-rockchip/atags.h | 222 +++++++++++++++++++++
-> >>>   arch/arm/mach-rockchip/Makefile            |   1 +
-> >>>   arch/arm/mach-rockchip/atags.c             |  99 +++++++++
-> >>>   3 files changed, 322 insertions(+)
-> >>>   create mode 100644 arch/arm/include/asm/arch-rockchip/atags.h
-> >>>   create mode 100644 arch/arm/mach-rockchip/atags.c
-> >>>
-> >>> diff --git a/arch/arm/include/asm/arch-rockchip/atags.h b/arch/arm/include/asm/arch-rockchip/atags.h
-> >>> new file mode 100644
-> >>> index 0000000000..9bae66d7f8
-> >>> --- /dev/null
-> >>> +++ b/arch/arm/include/asm/arch-rockchip/atags.h
-> >>> @@ -0,0 +1,222 @@
-> >>> +/* SPDX-License-Identifier:     GPL-2.0+ */
-> >>> +/*
-> >>> + * (C) Copyright 2018 Rockchip Electronics Co., Ltd
-> >>> + *
-> >>> + */
-> >>> +
-> >>> +#ifndef __RK_ATAGS_H_
-> >>> +#define __RK_ATAGS_H_
-> >>> +
-> >>> +/* Tag magic */
-> >>> +#define ATAG_CORE		0x54410001
-> >>> +#define ATAG_NONE		0x00000000
-> >>> +
-> >>> +#define ATAG_SERIAL		0x54410050
-> >>> +#define ATAG_BOOTDEV		0x54410051
-> >>> +#define ATAG_DDR_MEM		0x54410052
-> >>> +#define ATAG_TOS_MEM		0x54410053
-> >>> +#define ATAG_RAM_PARTITION	0x54410054
-> >>> +#define ATAG_ATF_MEM		0x54410055
-> >>> +#define ATAG_PUB_KEY		0x54410056
-> >>> +#define ATAG_SOC_INFO		0x54410057
-> >>> +#define ATAG_BOOT1_PARAM	0x54410058
-> >>> +#define ATAG_PSTORE		0x54410059
-> >>> +#define ATAG_FWVER		0x5441005a
-> >>> +#define ATAG_MAX		0x544100ff
-> >>> +
-> >>> +/* Tag size and offset */
-> >>> +#define ATAGS_SIZE		(0x2000)	/* 8K */
-> >>> +#define ATAGS_OFFSET		(0x200000 - ATAGS_SIZE)/* [2M-8K, 2M] */
-> >>> +#define ATAGS_PHYS_BASE		(CFG_SYS_SDRAM_BASE + ATAGS_OFFSET)
-> >>> +
-> >>> +/* tag_fwver.ver[fwid][] */
-> >>> +#define FWVER_LEN		36
-> >>> +
-> >>> +enum fwid {
-> >>> +	FW_DDR,
-> >>> +	FW_SPL,
-> >>> +	FW_ATF,
-> >>> +	FW_TEE,
-> >>> +	FW_MAX,
-> >>> +};
-> >>> +
-> >>> +struct tag_serial {
-> >>> +	u32 version;
-> >>> +	u32 enable;
-> >>> +	u64 addr;
-> >>> +	u32 baudrate;
-> >>> +	u32 m_mode;
-> >>> +	u32 id;
-> >>> +	u32 reserved[2];
-> >>> +	u32 hash;
-> >>> +} __packed;
-> >>> +
-> >>> +struct tag_bootdev {
-> >>> +	u32 version;
-> >>> +	u32 devtype;
-> >>> +	u32 devnum;
-> >>> +	u32 mode;
-> >>> +	u32 sdupdate;
-> >>> +	u32 reserved[6];
-> >>> +	u32 hash;
-> >>> +} __packed;
-> >>> +
-> >>> +struct tag_ddr_mem {
-> >>> +	u32 count;
-> >>> +	u32 version;
-> >>> +	u64 bank[20];
-> >>> +	u32 flags;
-> >>> +	u32 data[2];
-> >>> +	u32 hash;
-> >>> +} __packed;
-> >>> +
-> >>> +struct tag_tos_mem {
-> >>> +	u32 version;
-> >>> +	struct {
-> >>> +		char name[8];
-> >>> +		u64 phy_addr;
-> >>> +		u32 size;
-> >>> +		u32 flags;
-> >>> +	} tee_mem;
-> >>> +
-> >>> +	struct {
-> >>> +		char name[8];
-> >>> +		u64 phy_addr;
-> >>> +		u32 size;
-> >>> +		u32 flags;
-> >>> +	} drm_mem;
-> >>> +
-> >>> +	u64 reserved[7];
-> >>> +	u32 reserved1;
-> >>> +	u32 hash;
-> >>> +} __packed;
-> >>> +
-> >>> +struct tag_atf_mem {
-> >>> +	u32 version;
-> >>> +	u64 phy_addr;
-> >>> +	u32 size;
-> >>> +	u32 flags;
-> >>> +	u32 reserved[2];
-> >>> +	u32 hash;
-> >>> +} __packed;
-> >>> +
-> >>> +struct tag_pub_key {
-> >>> +	u32 version;
-> >>> +	u32 len;
-> >>> +	u8  data[768];	/* u32 rsa_n[64], rsa_e[64], rsa_c[64] */
-> >>> +	u32 flag;
-> >>> +	u32 reserved[5];
-> >>> +	u32 hash;
-> >>> +} __packed;
-> >>> +
-> >>> +struct tag_ram_partition {
-> >>> +	u32 version;
-> >>> +	u32 count;
-> >>> +	u32 reserved[4];
-> >>> +
-> >>> +	struct {
-> >>> +		char name[16];
-> >>> +		u64 start;
-> >>> +		u64 size;
-> >>> +	} part[6];
-> >>> +
-> >>> +	u32 reserved1[3];
-> >>> +	u32 hash;
-> >>> +} __packed;
-> >>> +
-> >>> +struct tag_soc_info {
-> >>> +	u32 version;
-> >>> +	u32 name;	/* Hex: 0x3288, 0x3399... */
-> >>> +	u32 flags;
-> >>> +	u32 reserved[6];
-> >>> +	u32 hash;
-> >>> +} __packed;
-> >>> +
-> >>> +struct tag_boot1p {
-> >>> +	u32 version;
-> >>> +	u32 param[8];
-> >>> +	u32 reserved[4];
-> >>> +	u32 hash;
-> >>> +} __packed;
-> >>> +
-> >>> +struct tag_pstore {
-> >>> +	u32 version;
-> >>> +	struct {
-> >>> +		u32 addr;
-> >>> +		u32 size;
-> >>> +	} buf[16];
-> >>> +	u32 hash;
-> >>> +} __packed;
-> >>> +
-> >>> +struct tag_fwver {
-> >>> +	u32 version;
-> >>> +	char ver[8][FWVER_LEN];
-> >>> +	u32 hash;
-> >>> +} __packed;
-> >>> +
-> >>> +struct tag_core {
-> >>> +	u32 flags;
-> >>> +	u32 pagesize;
-> >>> +	u32 rootdev;
-> >>> +} __packed;
-> >>> +
-> >>> +struct tag_header {
-> >>> +	u32 size;	/* bytes = size * 4 */
-> >>> +	u32 magic;
-> >>> +} __packed;
-> >>> +
-> >>> +/* Must be 4 bytes align */
-> >>> +struct tag {
-> >>> +	struct tag_header hdr;
-> >>> +	union {
-> >>> +		struct tag_core		core;
-> >>> +		struct tag_serial	serial;
-> >>> +		struct tag_bootdev	bootdev;
-> >>> +		struct tag_ddr_mem	ddr_mem;
-> >>> +		struct tag_tos_mem	tos_mem;
-> >>> +		struct tag_ram_partition ram_part;
-> >>> +		struct tag_atf_mem	atf_mem;
-> >>> +		struct tag_pub_key	pub_key;
-> >>> +		struct tag_soc_info	soc;
-> >>> +		struct tag_boot1p	boot1p;
-> >>> +		struct tag_pstore	pstore;
-> >>> +		struct tag_fwver	fwver;
-> >>> +	} u;
-> >>> +} __aligned(4);
-> >>> +
-> >>> +#define tag_next(t)	((struct tag *)((u32 *)(t) + (t)->hdr.size))
-> >>> +#define tag_size(type)	((sizeof(struct tag_header) + sizeof(struct type)) >> 2)
-> >>> +#define for_each_tag(t, base)		\
-> >>> +	for (t = base; t->hdr.size; t = tag_next(t))
-> >>> +
-> >>> +/*
-> >>> + * atags_get_tag - get tag by tag magic
-> >>> + *
-> >>> + * @magic: tag magic, i.e. ATAG_SERIAL, ATAG_BOOTDEV, ...
-> >>> + *
-> >>> + * return: NULL on failed, otherwise return the tag that we want.
-> >>> + */
-> >>> +struct tag *atags_get_tag(u32 magic);
-> >>> +
-> >>> +/*
-> >>> + * atags_is_available - check if atags is available, used for second or
-> >>> + *			later pre-loaders.
-> >>> + *
-> >>> + * return: 0 is not available, otherwise available.
-> >>> + */
-> >>> +int atags_is_available(void);
-> >>> +
-> >>> +/*
-> >>> + * atags_overflow - check if atags is overflow
-> >>> + *
-> >>> + * return: 0 if not overflow, otherwise overflow.
-> >>> + */
-> >>> +int atags_overflow(struct tag *t);
-> >>> +
-> >>> +/*
-> >>> + * atags_bad_magic - check if atags magic is invalid.
-> >>> + *
-> >>> + * return: 1 if invalid, otherwise valid.
-> >>> + */
-> >>> +int atags_bad_magic(u32 magic);
-> >>> +#endif
-> >>> diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
-> >>> index 1dc92066bb..4165cbe99f 100644
-> >>> --- a/arch/arm/mach-rockchip/Makefile
-> >>> +++ b/arch/arm/mach-rockchip/Makefile
-> >>> @@ -28,6 +28,7 @@ endif
-> >>>   ifeq ($(CONFIG_TPL_BUILD),)
-> >>>   obj-$(CONFIG_DISPLAY_CPUINFO) += cpu-info.o
-> >>> +obj-$(CONFIG_ROCKCHIP_RK3588) += atags.o
-> >>>   endif
-> >>>   obj-$(CONFIG_$(SPL_TPL_)RAM) += sdram.o
-> >>> diff --git a/arch/arm/mach-rockchip/atags.c b/arch/arm/mach-rockchip/atags.c
-> >>> new file mode 100644
-> >>> index 0000000000..9daa2f2fc0
-> >>> --- /dev/null
-> >>> +++ b/arch/arm/mach-rockchip/atags.c
-> >>> @@ -0,0 +1,99 @@
-> >>> +// SPDX-License-Identifier:     GPL-2.0+
-> >>> +/*
-> >>> + * (C) Copyright 2018 Rockchip Electronics Co., Ltd.
-> >>> + *
-> >>> + */
-> >>> +
-> >>> +#include <config.h>
-> >>> +#include <asm/io.h>
-> >>> +#include <asm/arch-rockchip/atags.h>
-> >>> +
-> >>> +#define HASH_LEN	sizeof(u32)
-> >>> +
-> >>> +static u32 js_hash(void *buf, u32 len)
-> >>> +{
-> >>> +	u32 i, hash = 0x47C6A7E6;
-> >>> +	char *data = buf;
-> >>> +
-> >>> +	if (!buf || !len)
-> >>> +		return hash;
-> >>> +
-> >>> +	for (i = 0; i < len; i++)
-> >>> +		hash ^= ((hash << 5) + data[i] + (hash >> 2));
-> >>> +
-> >>> +	return hash;
-> >>> +}
-> >>> +
-> >>> +int atags_bad_magic(u32 magic)
-> >>> +{
-> >>> +	bool bad;
-> >>> +
-> >>> +	bad = ((magic != ATAG_CORE) &&
-> >>> +	       (magic != ATAG_NONE) &&
-> >>> +	       (magic < ATAG_SERIAL || magic > ATAG_MAX));
-> >>> +	if (bad)
-> >>> +		printf("Magic(%x) is not support\n", magic);
-> >>> +
-> >>> +	return bad;
-> >>> +}
-> >>> +
-> >>> +static int atags_size_overflow(struct tag *t, u32 tag_size)
-> >>> +{
-> >>> +	return (unsigned long)t + (tag_size << 2) - ATAGS_PHYS_BASE > ATAGS_SIZE;
-> >>> +}
-> >>> +
-> >>> +int atags_overflow(struct tag *t)
-> >>> +{
-> >>> +	bool overflow;
-> >>> +
-> >>> +	overflow = atags_size_overflow(t, 0) ||
-> >>> +		   atags_size_overflow(t, t->hdr.size);
-> >>> +	if (overflow)
-> >>> +		printf("Tag is overflow\n");
-> >>> +
-> >>> +	return overflow;
-> >>> +}
-> >>> +
-> >>> +int atags_is_available(void)
-> >>> +{
-> >>> +	struct tag *t = (struct tag *)ATAGS_PHYS_BASE;
-> >>> +
-> >>> +	return (t->hdr.magic == ATAG_CORE);
-> >>> +}
-> >>> +
-> >>> +struct tag *atags_get_tag(u32 magic)
-> >>> +{
-> >>> +	u32 *hash, calc_hash, size;
-> >>> +	struct tag *t;
-> >>> +
-> >>> +	if (!atags_is_available())
-> >>> +		return NULL;
-> >>> +
-> >>> +	for_each_tag(t, (struct tag *)ATAGS_PHYS_BASE) {
-> >>> +		if (atags_overflow(t))
-> >>> +			return NULL;
-> >>> +
-> >>> +		if (atags_bad_magic(t->hdr.magic))
-> >>> +			return NULL;
-> >>> +
-> >>> +		if (t->hdr.magic != magic)
-> >>> +			continue;
-> >>> +
-> >>> +		size = t->hdr.size;
-> >>> +		hash = (u32 *)((ulong)t + (size << 2) - HASH_LEN);
-> >>> +		if (!*hash) {
-> >>> +			debug("No hash, magic(%x)\n", magic);
-> >>> +			return t;
-> >>> +		}
-> >>> +		calc_hash = js_hash(t, (size << 2) - HASH_LEN);
-> >>> +		if (calc_hash == *hash) {
-> >>> +			debug("Hash okay, magic(%x)\n", magic);
-> >>> +			return t;
-> >>> +		}
-> >>> +		debug("Hash bad, magic(%x), orgHash=%x, nowHash=%x\n",
-> >>> +		      magic, *hash, calc_hash);
-> >>> +		return NULL;
-> >>> +	}
-> >>> +
-> >>> +	return NULL;
-> >>> +}
-> 
+
+Sure.
+
+Before the patch:
+
+U-Boot 2024.04-rc5-00003-g774ec4fda8 (Mar 27 2024 - 16:48:35 +0100)
+
+CPU:   Freescale i.MX6Q rev1.3 996 MHz (running at 792 MHz)
+CPU:   Extended Commercial temperature grade (-20C to 105C) at 36C
+Reset cause: POR
+Model: SolidRun HummingBoard2 Dual/Quad (1.5som+emmc)
+Board: MX6 Cubox-i
+DRAM:  2 GiB
+Core:  82 devices, 17 uclasses, devicetree: fit
+MMC:   FSL_SDHC: 1, FSL_SDHC: 2
+Loading Environment from MMC... *** Warning - bad CRC, using default
+environment
+
+In:    serial
+Out:   serial
+Err:   serial
+Net:   eth0: ethernet@2188000
+Hit any key to stop autoboot:  0 
+=> 
+=> reset
+resetting ...
+=> 
+=> 
+=> reset
+resetting ...
+=> 
+=> 
+
+
+After the patch:
+
+
+U-Boot 2024.04-rc5-00003-g3988fdb94c (Mar 27 2024 - 17:00:03 +0100)
+
+CPU:   Freescale i.MX6Q rev1.3 996 MHz (running at 792 MHz)
+CPU:   Extended Commercial temperature grade (-20C to 105C) at 36C
+Reset cause: POR
+Model: SolidRun HummingBoard2 Dual/Quad (1.5som+emmc)
+Board: MX6 Cubox-i
+DRAM:  2 GiB
+Core:  84 devices, 19 uclasses, devicetree: fit
+WDT:   Started watchdog@20bc000 with servicing every 1000ms (128s
+timeout)
+MMC:   FSL_SDHC: 1, FSL_SDHC: 2
+Loading Environment from MMC... *** Warning - bad CRC, using default
+environment
+
+In:    serial
+Out:   serial
+Err:   serial
+Net:   eth0: ethernet@2188000
+Hit any key to stop autoboot:  0 
+=> 
+=> 
+=> reset
+resetting ...
+
+U-Boot SPL 2024.04-rc5-00003-g3988fdb94c (Mar 27 2024 - 17:00:03 +0100)
+WDT:   Started watchdog@20bc000 with servicing every 1000ms (128s
+timeout)
+...
+
+
+
+Tested-by: Christian Gmeiner <cgmeiner@igalia.com>
+
+Thanks & Regards,
+Christian
