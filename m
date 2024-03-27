@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7B07C54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 11:15:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2C6EC54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 11:15:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F4B8880AC;
+	by phobos.denx.de (Postfix) with ESMTP id BE1A8880B9;
 	Wed, 27 Mar 2024 12:14:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="d1un8ZAa";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="CILKq/8c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CB6488060; Wed, 27 Mar 2024 09:11:05 +0100 (CET)
+ id 6FFEF88058; Wed, 27 Mar 2024 09:11:11 +0100 (CET)
 Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.133.124])
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DE2E88054
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 09:11:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B42887BAF
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 09:11:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wefu@redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1711527062;
+ s=mimecast20190719; t=1711527068;
  h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=azw58eifUJbBoDQlTvja8OPfs7NMSPXvH32hMV7Ltro=;
- b=d1un8ZAamZhGyP1XQSXU/LP5TfcaquOtKBHJ1E0za9YZirYmI1UYE/iKfxFdDcQ+9c9by8
- 3wc62uXnktxha82Yuh/pxrB2XVylxWquW923S6YTcbSReKyN8GFlGb/TwxBf+N3mRDn+Cn
- 0N14zPhaAiOoHYeX/ob4BtXl6Q2u2sY=
+ bh=aOce0SUk1qPhfFfeubn/8p7kqTJUFkazIDFqviQW8/Q=;
+ b=CILKq/8cwLlx5yqnXzIsG3W1z7lQFUe+R6+S4O7PTUlOxv2Q0qKsELxAnUQORalz5E3g6z
+ Z+n1K8SRQH7AeO+LqePCI0HtyI7CMr5iZ51+GxqImEZd+bbF2P2FGcayflo1EVDq+/D+f/
+ cz7nFc9PfWl9AOm5NXaSlUfS34UXhc4=
 Received: from mail-pl1-f197.google.com (mail-pl1-f197.google.com
  [209.85.214.197]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-182-f_AR6T8LNx2oBWkX1BpfpA-1; Wed, 27 Mar 2024 04:11:00 -0400
-X-MC-Unique: f_AR6T8LNx2oBWkX1BpfpA-1
+ us-mta-615-CSKFZsm7NhiCX-lhWBSvvg-1; Wed, 27 Mar 2024 04:11:06 -0400
+X-MC-Unique: CSKFZsm7NhiCX-lhWBSvvg-1
 Received: by mail-pl1-f197.google.com with SMTP id
- d9443c01a7336-1e09fba31afso26422415ad.1
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 01:11:00 -0700 (PDT)
+ d9443c01a7336-1e08039b8e7so5181325ad.1
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 01:11:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711527059; x=1712131859;
+ d=1e100.net; s=20230601; t=1711527065; x=1712131865;
  h=content-transfer-encoding:mime-version:reply-to:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=azw58eifUJbBoDQlTvja8OPfs7NMSPXvH32hMV7Ltro=;
- b=eak5mRAlzjjurSh8fggYD4P54deDdnm19sOzd0qG3v/EFJC5giq4GEs58koMKBKAnC
- ECISoiCmA5xq2IA3rcW6uoF4nyKal5ox0AvzwIpERBkbK49H6m4Yssaao8YuKdYeYtey
- s7zojE7xycNeZM8CMUDLIuz9f5zl4ci1Ep+nrc7lxj6vl3mB9JM3+TDP7+T1cAYmMVID
- z/PKsJ1TZcZ19FweldMGUG+hlr3oVLmfQRDAhKNnvElgQO/191lMXoP0g6FGKGvIEVkz
- QmcKFGCF81ecEPXtaNxJrE2ZHsinW0uC3WkjQksnI5zeHsji3fdWCOYCgnPvVjjrCYfk
- vfOQ==
-X-Gm-Message-State: AOJu0YwQGr66RxleIcDS0vxVOFYXvXygDMk21GLKORlHxLYyQ9zOX2mR
- iNddNdUyZS9BGyBR98AcraLCivRYC5vatATlCN9RSwHZ1MjuzzONuS182gdl/+/8EJK3Q5O++Nr
- 0n5L8ItvcRMyRBB0kQBio/wH6Z+zpDyAZ073XuCcNIUWZFko8ftCWQiAC3dvXDtS3tZ+wr+yUn2
- n0+f/dY1KCqItDFIwa2ldFjNgmSbPXQDUpZN0=
-X-Received: by 2002:a17:902:db08:b0:1e0:cd01:9fd with SMTP id
- m8-20020a170902db0800b001e0cd0109fdmr552737plx.26.1711527058936; 
- Wed, 27 Mar 2024 01:10:58 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IF1Gw/Z+X4IH14MvkH8VcAeFIPL0mMeiwuyDGDi8Pg5o4UmCkIXTPivRYOLjHS/oVX0tgEDTA==
-X-Received: by 2002:a17:902:db08:b0:1e0:cd01:9fd with SMTP id
- m8-20020a170902db0800b001e0cd0109fdmr552699plx.26.1711527058494; 
- Wed, 27 Mar 2024 01:10:58 -0700 (PDT)
+ bh=aOce0SUk1qPhfFfeubn/8p7kqTJUFkazIDFqviQW8/Q=;
+ b=ZwsHj0ivqg7xzJVOJ4X37TrwuM4wGudfg6uRTKkjzvY2Ctj2qf3nWcnpiDDwJp091n
+ Tmu/5VVEXoZti6kN6LP+UQK6aEa6l8ceVfPDBOx7O5WqHl+GIvjzNA2jHE5PR8vkRy74
+ gsnks+qiWdEQ5Fa9Gsa75wRDw9/OtpK+Y5tc/C7R/2U82Ec5e0VKgBI019PIQnmQFWfv
+ 2dRKMbnHYkshJ1nIOJUoBDrPtk/UgfNdOAanizjeIUuyCR0NRsSBuqDSl+8z4QXBI3FY
+ BooCqm0np8HqFtBYNyET8eM+bGZQr9mEOkIsHVJTQqNveC+lBc2BPtHv96gCUDbv8/aQ
+ dIkQ==
+X-Gm-Message-State: AOJu0YxBR7KRMMlgpnqOPBFuR/vDTvdSOlnicTJRKuC65+/joA44JXLo
+ CHReoSnRt+JY33bFbwQEuMSEzPNoLm3S1sY3WeKcvlMGkp5gGeLCcUh+jFoTLb4lGUyNDw4QxdH
+ 77yPmDI+WweR8vgzMy8TFjQyBGf9hgiuDknZrfUSY9xAWhd1TPnwVYmFfwNpiwFrRYHjD1HJxcs
+ 4mG7C7ER+yCVTnDnyFzNK2lf2FX+12eCbFr+I=
+X-Received: by 2002:a17:903:120e:b0:1e0:1f53:a164 with SMTP id
+ l14-20020a170903120e00b001e01f53a164mr6055396plh.0.1711527065300; 
+ Wed, 27 Mar 2024 01:11:05 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IH8wnyW6pqCLj9hvtIBjI4A5wEIg1Arxi8V6gf3IEIghu40Gr9DIdLk9NVLH3l86AlKYxnq7w==
+X-Received: by 2002:a17:903:120e:b0:1e0:1f53:a164 with SMTP id
+ l14-20020a170903120e00b001e01f53a164mr6055346plh.0.1711527064846; 
+ Wed, 27 Mar 2024 01:11:04 -0700 (PDT)
 Received: from localhost.localdomain ([43.228.180.230])
  by smtp.gmail.com with ESMTPSA id
- n15-20020a170902d2cf00b001dcfaab3457sm8293709plc.104.2024.03.27.01.10.52
+ n15-20020a170902d2cf00b001dcfaab3457sm8293709plc.104.2024.03.27.01.10.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Mar 2024 01:10:58 -0700 (PDT)
+ Wed, 27 Mar 2024 01:11:04 -0700 (PDT)
 From: wefu@redhat.com
 To: u-boot@lists.denx.de, bmeng@tinylab.org, rick@andestech.com,
  trini@konsulko.com, wefu@redhat.com, dlan@gentoo.org,
@@ -83,9 +83,9 @@ To: u-boot@lists.denx.de, bmeng@tinylab.org, rick@andestech.com,
  ycliang@andestech.com
 Cc: tekkamanninja@gmail.com,
 	tekkamanninja@163.com
-Subject: [PATCH 2/6] riscv/dts: add gmac node for th1520.
-Date: Wed, 27 Mar 2024 16:07:23 +0800
-Message-ID: <20240327080817.44501-3-wefu@redhat.com>
+Subject: [PATCH 3/6] riscv/dts: add gmac node for lichee-pi-4a
+Date: Wed, 27 Mar 2024 16:07:24 +0800
+Message-ID: <20240327080817.44501-4-wefu@redhat.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240327080817.44501-1-wefu@redhat.com>
 References: <20240327080817.44501-1-wefu@redhat.com>
@@ -117,60 +117,29 @@ From: Wei Fu <wefu@redhat.com>
 Signed-off-by: Wei Fu <wefu@redhat.com>
 Co-authored-by: Yixun Lan <dlan@gentoo.org>
 ---
- arch/riscv/dts/th1520.dtsi | 33 +++++++++++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
+ arch/riscv/dts/th1520-lichee-pi-4a.dts | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/arch/riscv/dts/th1520.dtsi b/arch/riscv/dts/th1520.dtsi
-index f7bfa42243..d68c446a6b 100644
---- a/arch/riscv/dts/th1520.dtsi
-+++ b/arch/riscv/dts/th1520.dtsi
-@@ -128,6 +128,13 @@
- 		#clock-cells = <0>;
+diff --git a/arch/riscv/dts/th1520-lichee-pi-4a.dts b/arch/riscv/dts/th1520-lichee-pi-4a.dts
+index a1248b2ee3..29f990c7be 100644
+--- a/arch/riscv/dts/th1520-lichee-pi-4a.dts
++++ b/arch/riscv/dts/th1520-lichee-pi-4a.dts
+@@ -20,6 +20,7 @@
+ 		serial3 = &uart3;
+ 		serial4 = &uart4;
+ 		serial5 = &uart5;
++		ethernet0 = &gmac0;
  	};
  
-+	dummy_apb: apb-clock {
-+		compatible = "fixed-clock";
-+		clock-frequency = <62500000>;
-+		clock-output-names = "dummy_apb";
-+		#clock-cells = <0>;
-+	};
+ 	chosen {
+@@ -30,3 +31,7 @@
+ &uart0 {
+ 	status = "okay";
+ };
 +
- 	uart_sclk: uart-sclk-clock {
- 		compatible = "fixed-clock";
- 		clock-output-names = "uart_sclk";
-@@ -163,6 +170,32 @@
- 					      <&cpu3_intc 3>, <&cpu3_intc 7>;
- 		};
- 
-+		gmac0: ethernet@ffe7070000 {
-+			compatible = "snps,dwmac";
-+			reg = <0xff 0xe7070000 0x0 0x2000>;
-+			clocks = <&dummy_apb>;
-+			clock-names = "stmmaceth";
-+			snps,pbl = <32>;
-+			snps,fixed-burst;
-+
-+			phy-mode = "rgmii-id";
-+			phy-handle = <&phy_88E1111_a>;
-+			status = "disabled";
-+			mdio0 {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+				compatible = "snps,dwmac-mdio";
-+
-+				phy_88E1111_a: ethernet-phy@1 {
-+					reg = <0x1>;
-+				};
-+
-+				phy_88E1111_b: ethernet-phy@2 {
-+					reg = <0x2>;
-+				};
-+			};
-+		};
-+
- 		uart0: serial@ffe7014000 {
- 			compatible = "snps,dw-apb-uart";
- 			reg = <0xff 0xe7014000 0x0 0x100>;
++&gmac0 {
++	status = "okay";
++};
 -- 
 2.44.0
 
