@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B0AC54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 07:02:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD2E7C47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 07:37:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBA8687D31;
-	Wed, 27 Mar 2024 08:02:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D3EEF8803B;
+	Wed, 27 Mar 2024 08:37:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KfvEHOkv";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="bvGbOLym";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6D3F388103; Wed, 27 Mar 2024 08:02:08 +0100 (CET)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 3599A8802E; Wed, 27 Mar 2024 08:37:03 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1018E870D2
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 08:02:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C84A879F6
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 08:37:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42R71mCP118493;
- Wed, 27 Mar 2024 02:01:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1711522908;
- bh=SEwLXw1tsX6mDeFwwRTiP1q0rpiN/gapBokOei7ZYfk=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=KfvEHOkvnuxEjfUdwwU2XBxopCu8Z/d7BPx5twH68joEuLF6LoQNSnlcTG/vNRPet
- 7dfPjdQRbzh64lfM4EsFidv9toUJRQ2padiIsynVXgQgbUyHTWVOSErAtQwtyOk6ud
- AciFd60MvblM3A7uQOFj/nn9PNLzbX/ETZVElZFk=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42R71mwV007958
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 27 Mar 2024 02:01:48 -0500
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
- Mar 2024 02:01:48 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 27 Mar 2024 02:01:48 -0500
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42R71hG2044813;
- Wed, 27 Mar 2024 02:01:44 -0500
-Message-ID: <83c6532a-e994-4bcd-bc48-9e22ecdec644@ti.com>
-Date: Wed, 27 Mar 2024 12:31:42 +0530
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=38162bd5ef=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 42R3h4qd016250; Wed, 27 Mar 2024 08:36:51 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=anYEZaI7cauvymeNjcAhUEDssn6FOs1OH2tD7xgAlII=; b=bv
+ GbOLymmOSvC3mSDk/F/DsHvdcraHCCX021EYgSjtg0RYc1OILrAOp++D1zPr3dH4
+ btDn4g4jvXzJYX6RS+/XY+EqvpruaTUJvlRdoeoP+aEJP1y4OP1E50LhlGP3HkEw
+ azs1fQHVbO/3vy7c8lZ+bH7K0NJhAeRpW3bnH7TXuNLuFoQyGE+vDm54L4obgpy3
+ +fxmHzwThhSexn4LS8hbtYCBtGI6L7JdK0F8mf3K05SIIXeKqoMYUMlZLzfRJqGb
+ qajyL/bGwCytEsatobQzGnIjXUD4xUC28NG4hQCfqMGh79L54a5Fq3rUb+Az9S96
+ ivHdeOfJlmok/fGxNLaQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3x1pugh61y-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 27 Mar 2024 08:36:51 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 185164002D;
+ Wed, 27 Mar 2024 08:36:47 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1AB4F20D402;
+ Wed, 27 Mar 2024 08:36:26 +0100 (CET)
+Received: from [10.201.20.71] (10.201.20.71) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Wed, 27 Mar
+ 2024 08:36:25 +0100
+Message-ID: <abb5338e-205a-46d3-ae11-cdb6aca5cec8@foss.st.com>
+Date: Wed, 27 Mar 2024 08:36:25 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] arm: dts: k3-*-binman.dtsi: Clean up and templatize
- boot binaries
-To: Michael Walle <mwalle@kernel.org>, <u-boot@lists.denx.de>,
- <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
- <bb@ti.com>, <nm@ti.com>, <sumit.garg@linaro.org>
-CC: <michal.simek@amd.com>, <marex@denx.de>, <neil.armstrong@linaro.org>,
- <afd@ti.com>, <vigneshr@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>,
- <u-kumar1@ti.com>
-References: <20240322131011.1029620-1-n-francis@ti.com>
- <20240322131011.1029620-4-n-francis@ti.com>
- <D03Q9AGO5ND9.1TJM3KSNA71WG@kernel.org>
+Subject: Re: [PATCH] ARM: stm32: Default dfu_alt_info for STM32MP13xx SPI NOR
 Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <D03Q9AGO5ND9.1TJM3KSNA71WG@kernel.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240319024430.103196-1-marex@denx.de>
+ <f2ab30e8-e65a-4025-a203-639d7ff1b01e@foss.st.com>
+ <7ed56763-f494-4d19-82a0-05f0cc557241@denx.de>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <7ed56763-f494-4d19-82a0-05f0cc557241@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.201.20.71]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-03-27_04,2024-03-21_02,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,37 +92,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael
 
-On 26/03/24 19:18, Michael Walle wrote:
-> Hi,
-> 
-> On Fri Mar 22, 2024 at 2:10 PM CET, Neha Malcom Francis wrote:
->> Clean up templatized boot binaries for all K3 boards. This includes
->> modifying the k3-binman.dtsi to use SPL_BOARD_DTB, BOARD_DESCRIPTION and
->> UBOOT_BOARD_DESCRIPTION from the files that include it to further reuse
->> code.
+
+On 3/26/24 18:08, Marek Vasut wrote:
+> On 3/19/24 11:22 AM, Patrice CHOTARD wrote:
 >>
->> All k3-<soc>-binman.dtsi will contain only templates. Only required boot
->> binaries can be built from the templates in the boards' respective
->> -u-boot.dtsi file (or k3-<board>-binman.dtsi if it exists). This allows
->> clear distinction between the SoC common stuff vs. what is additionally
->> needed to boot up a specific board.
+>>
+>> On 3/19/24 03:44, Marek Vasut wrote:
+>>> Define dfu_alt_info with SPI NOR layout to make it easy to
+>>> install or update bootloader in the SPI NOR using dfu-util.
+>>>
+>>> Use the following U-Boot commands to start DFU mode:
+>>> "
+>>> => sf probe && dfu 0 mtd
+>>> "
+>>>
+>>> Use the following dfu-util invocation on Host PC to install binaries:
+>>> "
+>>> $ dfu-util -w -a 0 -D build/stm32mp1/release/tf-a-stm32mp135f-dhcor-dhsbc.stm32
+>>> $ dfu-util -w -a 1 -D build/stm32mp1/release/tf-a-stm32mp135f-dhcor-dhsbc.stm32
+>>> $ dfu-util -w -a 2 -D build/stm32mp1/release/fip.bin
+>>> "
+>>>
+>>> Signed-off-by: Marek Vasut <marex@denx.de>
+>>> ---
+>>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>>> Cc: Tom Rini <trini@konsulko.com>
+>>> Cc: u-boot@dh-electronics.com
+>>> Cc: u-boot@lists.denx.de
+>>> Cc: uboot-stm32@st-md-mailman.stormreply.com
+>>> ---
+>>>   include/configs/stm32mp13_common.h | 1 +
+>>>   1 file changed, 1 insertion(+)
+>>>
+>>> diff --git a/include/configs/stm32mp13_common.h b/include/configs/stm32mp13_common.h
+>>> index 5b0658ced92..d6e4f8fd915 100644
+>>> --- a/include/configs/stm32mp13_common.h
+>>> +++ b/include/configs/stm32mp13_common.h
+>>> @@ -63,6 +63,7 @@
+>>>       "fi;\0"
+>>>     #define STM32MP_EXTRA \
+>>> +    "dfu_alt_info=mtd nor0=fsbl1 raw 0x0 0x40000;fsbl2 raw 0x40000 0x40000;uboot raw 0x80000 0x160000\0" \
+>>>       "env_check=if env info -p -d -q; then env save; fi\0" \
+>>>       "boot_net_usb_start=true\0"
+>>>   
+>>
+>>
+>> Hi Marek
+>>
+>> On our STM32 board, the dfu_alt_info is build dynamically, we have CONFIG_SET_DFU_ALT_INFO enable
+>> Can you add the dfu_alt_info in a specific stm32mp13_dhxx.common.h instead ?
 > 
-> I appreciate the cleanup. But as far as I can see, a board might
-> only have one device tree. How would that work if the uboot proper
-> must support multiple device trees?
-> 
+> You can drop this patch.
 
- From the discussions that took place in the mailing list [1] the consensus 
-seems to be to not focus on multiple devicetree support as it leads to confusion 
-for downstream users.
 
-> Thanks,
-> -michael
+Ok thanks
 
-[1] https://lore.kernel.org/all/20230908183124.27zctk6ishfd7ics@canopener/
-
--- 
-Thanking You
-Neha Malcom Francis
+Patrice
