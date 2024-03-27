@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC6C6C54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 04:21:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFE33C54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 05:28:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D04388063;
-	Wed, 27 Mar 2024 05:21:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E2E1F8803B;
+	Wed, 27 Mar 2024 06:28:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HqhXIQjm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OfzQ7RiJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B143387BD6; Wed, 27 Mar 2024 05:21:40 +0100 (CET)
-Received: from mail-vk1-xa29.google.com (mail-vk1-xa29.google.com
- [IPv6:2607:f8b0:4864:20::a29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9318F88099; Wed, 27 Mar 2024 06:28:54 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D17D88063
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 05:21:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B54E087E3D
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 06:28:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-4d8804a553dso1325306e0c.1
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 21:21:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711513296; x=1712118096; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+m7AvuaS3wTTiBkiG6SLllc281sTHhR3/qHndW/MBVw=;
- b=HqhXIQjm91mnkiVHyKRvVf4xNi2GhidcYl/jL4kalj0Ndde14cb19XLkslOJGzNTH0
- Sw12YnWZTFpuYkArDVYzQCQ3p665UjVggrMfdtgjaUA2Y7jJKOVnT2EnljGR0AG5iniI
- Ni7mkbhV/9ptUGk7eUJpkx4u/nIqPizqi3NJYlfnfg7XCa5yAWuzSZUO60Syjoef0RL8
- 8oT6PrSmbYHJJbcyOT57Y1rfuse8M6Nk5BevjejDyxSAccu4DBkDJCMoL5u0qBva82Xo
- vgNythTsPU46n1dlAQ3MOmEDtV38d8G5tr1YuRY1wnGqX602/1GfJcsls138e1Q5H4Zo
- p/jQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711513296; x=1712118096;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+m7AvuaS3wTTiBkiG6SLllc281sTHhR3/qHndW/MBVw=;
- b=NUI4Y1btj+j15YhDbDNlX88FVtZZE3aseLqHgzYhVrQfZN3wqJdGF707nxEf8HUGWk
- VFfOpnzOeENvkCqNdJBd3YOqNvtycrs1j6CI0lThwWBmpvNs1bz+/OxS46iW8oEeKSds
- 4yMiL3RxzOFjZfiKmQBY2eKyx2UnDNA3aMSA1xI0ZBD3rN48+863fElzLNC6EnjHiIlf
- XGhHazE9AiTL1RFzgIqCUnPElUkti4YWdJ7sEXED/AjsPCESm4PIS21CZp5tngbigrqq
- RjZRM9mfbbxCQJAdDXBpa95HQgmV1xaw2hZKXDX1x0mRBSBUEwZdo8B2fO62ec1WT7kB
- vyMg==
-X-Gm-Message-State: AOJu0YyacBM9b+xsmHOU4Sx4r29p4ynB7KuXaPBBq3Q3yZEAP0PTeK+V
- 0ZF1G+gkEG0r0BLlpKO9r4Z3YjApK7IpirWv0gFHD5r7u5LMt2A9vZkAFBPf7/58IxaLU3YGsbh
- uWgR7diIwwvfHTXtepJM79b6mtm3XfQGAOpiQMA==
-X-Google-Smtp-Source: AGHT+IFfbE+BUR4m2NHqX3ccUHC7c+51ZuKAlQU2iINTpnb5xOd6M++Igi6N0YRrqknQxQ6PBXqAaMy5lj8cR2ozj0M=
-X-Received: by 2002:a05:6102:32ce:b0:474:c9d0:8b2 with SMTP id
- o14-20020a05610232ce00b00474c9d008b2mr2179734vss.10.1711513296212; Tue, 26
- Mar 2024 21:21:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=danishanwar@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42R5SjkG078192;
+ Wed, 27 Mar 2024 00:28:45 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1711517325;
+ bh=rRpvDaT4HbKl1dKuRcws0p5RZGzcvK8OXTpEMSgZzB0=;
+ h=From:To:CC:Subject:Date;
+ b=OfzQ7RiJSWz/9O1gTOf8mVt1RZaku6Rp7BvI2YtCd06+v0WMc/09i0ce0lebCCAs2
+ aJvVIYLTuvR2/8AYhK4UFpTKJIsIES855VHw7xmIeaL594kXQvB0w6U2jLdelXKZJQ
+ CAgbvsE0w8QXVHqp5LiP6nbRLRKIyu6S90iNDqW0=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42R5Sjda021689
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 27 Mar 2024 00:28:45 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
+ Mar 2024 00:28:45 -0500
+Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 27 Mar 2024 00:28:45 -0500
+Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
+ by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42R5Sjc1087317;
+ Wed, 27 Mar 2024 00:28:45 -0500
+Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
+ by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 42R5Si2x017285;
+ Wed, 27 Mar 2024 00:28:44 -0500
+From: MD Danish Anwar <danishanwar@ti.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, Maxime Ripard
+ <mripard@kernel.org>, Nishanth Menon <nm@ti.com>, Roger Quadros
+ <rogerq@kernel.org>, Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, MD
+ Danish Anwar <danishanwar@ti.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Aradhya Bhatia <a-bhatia1@ti.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>, Manorit
+ Chawdhry <m-chawdhry@ti.com>, Andrew Davis <afd@ti.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, <r-gunasekaran@ti.com>
+Subject: [PATCH v4 0/5] Introduce ICSSG Ethernet driver
+Date: Wed, 27 Mar 2024 10:58:36 +0530
+Message-ID: <20240327052841.1692469-1-danishanwar@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240322021747.14873-1-mibodhi@gmail.com>
-In-Reply-To: <20240322021747.14873-1-mibodhi@gmail.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 27 Mar 2024 09:51:24 +0530
-Message-ID: <CAFA6WYMaHyqf1KOn05synhqAHr_oTKtqv-DHs4-07zgS+np0XQ@mail.gmail.com>
-Subject: Re: [PATCH] arm: dts: kirkwood: Enable upstream DT on Kirkwood boards
-To: Tony Dinh <mibodhi@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
- Michael Walle <michael@walle.cc>, Tom Rini <trini@konsulko.com>,
- Chris Packham <chris.packham@alliedtelesis.co.nz>, 
- Dave Purdy <david.c.purdy@gmail.com>, Evgeni Dobrev <evgeni@studio-punkt.com>, 
- Luka Perkov <luka@openwrt.org>, Siddarth Gore <gores@marvell.com>, 
- Simon Guinot <simon.guinot@sequanux.org>, 
- Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>, 
- This contributor prefers not to receive mails <noreply@example.com>,
- Walter Schweizer <swwa@users.sourceforge.net>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,234 +90,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tony,
+Introduce ICSSG PRUETH support in uboot. The ICSSG driver is used in TI
+AM654 SR2.0.
 
-On Fri, 22 Mar 2024 at 07:48, Tony Dinh <mibodhi@gmail.com> wrote:
->
-> Enable OF_UPSTREAM to use upstream DT and add marvell/ prefix to the
-> DEFAULT_DEVICE_TREE for Kirkwood boards. And so we can directly build
-> DTBs from dts/upstream/src/arm/marvell, and including *-u-boot.dtsi
-> files from arch/arm/dts/ directory.
->
-> Background:
->
-> Hi Stefan,
-> Hi Michael,
->
-> I did a survey and we currently have 28 Kirkwood boards. Using some
-> commands and filters, here are the finding.
->
-> git grep -li arch_kirkwood configs | xargs grep DEVICE_TREE | cut -d '"' -f2 | xargs -n1 sh -c 'diff -qs  arch/arm/dts/$1.dts dts/upstream/src/arm/marvell/$1.dts' sh | grep differ
->
-> diff: dts/upstream/src/arm/marvell/kirkwood-atl-sbx81lifkw.dts: No such file or directory
-> diff: dts/upstream/src/arm/marvell/kirkwood-atl-sbx81lifxcat.dts: No such file or directory
->
-> Files arch/arm/dts/kirkwood-dockstar.dts and dts/upstream/src/arm/marvell/kirkwood-dockstar.dts differ
-> Files arch/arm/dts/kirkwood-dreamplug.dts and dts/upstream/src/arm/marvell/kirkwood-dreamplug.dts differ
-> Files arch/arm/dts/kirkwood-goflexnet.dts and dts/upstream/src/arm/marvell/kirkwood-goflexnet.dts differ
-> Files arch/arm/dts/kirkwood-guruplug-server-plus.dts and dts/upstream/src/arm/marvell/kirkwood-guruplug-server-plus.dts differ
-> Files arch/arm/dts/kirkwood-iconnect.dts and dts/upstream/src/arm/marvell/kirkwood-iconnect.dts differ
-> Files arch/arm/dts/kirkwood-net2big.dts and dts/upstream/src/arm/marvell/kirkwood-net2big.dts differ
-> Files arch/arm/dts/kirkwood-ns2max.dts and dts/upstream/src/arm/marvell/kirkwood-ns2max.dts differ
-> Files arch/arm/dts/kirkwood-ns2mini.dts and dts/upstream/src/arm/marvell/kirkwood-ns2mini.dts differ
-> Files arch/arm/dts/kirkwood-nsa310s.dts and dts/upstream/src/arm/marvell/kirkwood-nsa310s.dts differ
-> Files arch/arm/dts/kirkwood-nsa325.dts and dts/upstream/src/arm/marvell/kirkwood-nsa325.dts differ
-> Files arch/arm/dts/kirkwood-openrd-client.dts and dts/upstream/src/arm/marvell/kirkwood-openrd-client.dts differ
->
-> diff -qrbu arch/arm/dts/ dts/upstream/src/arm/marvell/ | grep kirkwood | grep ".dtsi "
->
-> Files arch/arm/dts/kirkwood-6192.dtsi and dts/upstream/src/arm/marvell/kirkwood-6192.dtsi differ
-> Files arch/arm/dts/kirkwood-6281.dtsi and dts/upstream/src/arm/marvell/kirkwood-6281.dtsi differ
-> Files arch/arm/dts/kirkwood-98dx4122.dtsi and dts/upstream/src/arm/marvell/kirkwood-98dx4122.dtsi differ
-> Files arch/arm/dts/kirkwood-dnskw.dtsi and dts/upstream/src/arm/marvell/kirkwood-dnskw.dtsi differ
-> Files arch/arm/dts/kirkwood.dtsi and dts/upstream/src/arm/marvell/kirkwood.dtsi differ
-> Files arch/arm/dts/kirkwood-lsxl.dtsi and dts/upstream/src/arm/marvell/kirkwood-lsxl.dtsi differ
-> Files arch/arm/dts/kirkwood-nsa3x0-common.dtsi and dts/upstream/src/arm/marvell/kirkwood-nsa3x0-common.dtsi differ
-> Files arch/arm/dts/kirkwood-synology.dtsi and dts/upstream/src/arm/marvell/kirkwood-synology.dtsi differ
->
-> And after reviewing these differences, the following are my observation.
->
-> OF_LIST is not used in these Kirkwood boards.
->
-> 1. Boards that have only u-boot DTS that should be opt-out for now with "#CONFIG_OF_UPSTREAM is not set"
->
-> diff: dts/upstream/src/arm/marvell/kirkwood-atl-sbx81lifkw.dts: No such file or directory
-> diff: dts/upstream/src/arm/marvell/kirkwood-atl-sbx81lifxcat.dts: No such file or directory
->
-> 2. DTS and DTSI files that have only cosmetic, style, or binding changes (safe to take)
->
-> Files arch/arm/dts/kirkwood-dockstar.dts and dts/upstream/src/arm/marvell/kirkwood-dockstar.dts differ
-> Files arch/arm/dts/kirkwood-goflexnet.dts and dts/upstream/src/arm/marvell/kirkwood-goflexnet.dts differ
-> Files arch/arm/dts/kirkwood-guruplug-server-plus.dts and dts/upstream/src/arm/marvell/kirkwood-guruplug-server-plus.dts differ
-> Files arch/arm/dts/kirkwood-iconnect.dts and dts/upstream/src/arm/marvell/kirkwood-iconnect.dts differ
-> Files arch/arm/dts/kirkwood-net2big.dts and dts/upstream/src/arm/marvell/kirkwood-net2big.dts differ
-> Files arch/arm/dts/kirkwood-ns2max.dts and dts/upstream/src/arm/marvell/kirkwood-ns2max.dts differ
-> Files arch/arm/dts/kirkwood-ns2mini.dts and dts/upstream/src/arm/marvell/kirkwood-ns2mini.dts differ
-> Files arch/arm/dts/kirkwood-nsa325.dts and dts/upstream/src/arm/marvell/kirkwood-nsa325.dts differ
-> Files arch/arm/dts/kirkwood-openrd-client.dts and dts/upstream/src/arm/marvell/kirkwood-openrd-client.dts differ
->
-> Files arch/arm/dts/kirkwood-dnskw.dtsi and dts/upstream/src/arm/marvell/kirkwood-dnskw.dtsi differ
-> Files arch/arm/dts/kirkwood.dtsi and dts/upstream/src/arm/marvell/kirkwood.dtsi differ
-> Files arch/arm/dts/kirkwood-synology.dtsi and dts/upstream/src/arm/marvell/kirkwood-synology.dtsi differ
->
-> 3. DTS files that are newer in upstream (safe to take with regression test)
->
-> Files arch/arm/dts/kirkwood-nsa310s.dts and dts/upstream/src/arm/marvell/kirkwood-nsa310s.dts differ
->
-> 4. DTSI files that have additional PCI-related bindings in upstream (safe to take with regression test)
->
-> Files arch/arm/dts/kirkwood-6192.dtsi and dts/upstream/src/arm/marvell/kirkwood-6192.dtsi differ
-> Files arch/arm/dts/kirkwood-6281.dtsi and dts/upstream/src/arm/marvell/kirkwood-6281.dtsi differ
-> Files arch/arm/dts/kirkwood-98dx4122.dtsi and dts/upstream/src/arm/marvell/kirkwood-98dx4122.dtsi differ
->
-> 5. DTSI files that will need new or modified -u-boot.dtsi
->
-> Files arch/arm/dts/kirkwood-dreamplug.dts and dts/upstream/src/arm/marvell/kirkwood-dreamplug.dts differ
-> Files arch/arm/dts/kirkwood-lsxl.dtsi and dts/upstream/src/arm/marvell/kirkwood-lsxl.dtsi differ
-> Files arch/arm/dts/kirkwood-nsa3x0-common.dtsi and dts/upstream/src/arm/marvell/kirkwood-nsa3x0-common.dtsi differ
->
-> So these u-boot.dtsi files need to be created/modified so we can use upstream DTS/DTSI:
->
->         modified:   arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi
->         modified:   arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi
->
->         new file:   arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi
->         new file:   arch/arm/dts/kirkwood-nsa325-u-boot.dtsi
->
-> I've regression tested this patch with the Zyxel NSA325 (Kirkwood 88F6282)
-> and Zyxel NSA310S (Kirkwood 88F6281). The Zyxel NSA325 board has a
-> USB 3.0 controller attached to the PCIe bus. And the Zyxel NSA310S
-> has an extensive overhaul in bindings and styles in upstream DTS version.
->
-> Signed-off-by: Tony Dinh <mibodhi@gmail.com>
-> ---
->
->  arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi | 7 +++++++
->  arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi   | 6 ++++--
->  arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi     | 6 ++++--
->  arch/arm/dts/kirkwood-nsa325-u-boot.dtsi    | 7 +++++++
->  arch/arm/mach-kirkwood/Kconfig              | 4 ++++
->  configs/SBx81LIFKW_defconfig                | 1 +
->  configs/SBx81LIFXCAT_defconfig              | 1 +
->  configs/d2net_v2_defconfig                  | 2 +-
->  configs/dns325_defconfig                    | 2 +-
->  configs/dockstar_defconfig                  | 2 +-
->  configs/dreamplug_defconfig                 | 2 +-
->  configs/ds109_defconfig                     | 2 +-
->  configs/goflexhome_defconfig                | 2 +-
->  configs/guruplug_defconfig                  | 2 +-
->  configs/ib62x0_defconfig                    | 2 +-
->  configs/iconnect_defconfig                  | 2 +-
->  configs/inetspace_v2_defconfig              | 2 +-
->  configs/lschlv2_defconfig                   | 2 +-
->  configs/lsxhl_defconfig                     | 2 +-
->  configs/nas220_defconfig                    | 2 +-
->  configs/net2big_v2_defconfig                | 2 +-
->  configs/netspace_lite_v2_defconfig          | 2 +-
->  configs/netspace_max_v2_defconfig           | 2 +-
->  configs/netspace_mini_v2_defconfig          | 2 +-
->  configs/netspace_v2_defconfig               | 2 +-
->  configs/nsa310s_defconfig                   | 2 +-
->  configs/nsa325_defconfig                    | 2 +-
->  configs/openrd_base_defconfig               | 2 +-
->  configs/openrd_client_defconfig             | 2 +-
->  configs/openrd_ultimate_defconfig           | 2 +-
->  configs/pogo_e02_defconfig                  | 2 +-
->  configs/pogo_v4_defconfig                   | 2 +-
->  configs/sheevaplug_defconfig                | 2 +-
->  33 files changed, 54 insertions(+), 30 deletions(-)
->  create mode 100644 arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi
->  create mode 100644 arch/arm/dts/kirkwood-nsa325-u-boot.dtsi
->
-> diff --git a/arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi b/arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..59f19a211f
-> --- /dev/null
-> +++ b/arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi
-> @@ -0,0 +1,7 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +/ {
-> +       aliases {
-> +               spi0 = &spi0;
-> +       };
-> +};
-> diff --git a/arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi b/arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi
-> index 7fc2d7d3b4..cf33ff822e 100644
-> --- a/arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi
-> +++ b/arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi
-> @@ -1,7 +1,9 @@
->  // SPDX-License-Identifier: GPL-2.0+
->
-> -&eth0 {
-> -       status = "disabled";
-> +/ {
-> +       aliases {
-> +               spi0 = &spi0;
-> +       };
->  };
->
->  &hdd_power {
-> diff --git a/arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi b/arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi
-> index 7fc2d7d3b4..cf33ff822e 100644
-> --- a/arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi
-> +++ b/arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi
-> @@ -1,7 +1,9 @@
->  // SPDX-License-Identifier: GPL-2.0+
->
-> -&eth0 {
-> -       status = "disabled";
-> +/ {
-> +       aliases {
-> +               spi0 = &spi0;
-> +       };
->  };
->
->  &hdd_power {
-> diff --git a/arch/arm/dts/kirkwood-nsa325-u-boot.dtsi b/arch/arm/dts/kirkwood-nsa325-u-boot.dtsi
-> new file mode 100644
-> index 0000000000..dec27b2a87
-> --- /dev/null
-> +++ b/arch/arm/dts/kirkwood-nsa325-u-boot.dtsi
-> @@ -0,0 +1,7 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +
-> +&nand {
-> +       partition@0 {
-> +               /delete-property/ read-only;
-> +       };
-> +};
-> diff --git a/arch/arm/mach-kirkwood/Kconfig b/arch/arm/mach-kirkwood/Kconfig
-> index c2fff84a68..39593c83d0 100644
-> --- a/arch/arm/mach-kirkwood/Kconfig
-> +++ b/arch/arm/mach-kirkwood/Kconfig
-> @@ -28,6 +28,10 @@ config CUSTOM_SYS_INIT_SP_ADDR
->          depends on HAS_CUSTOM_SYS_INIT_SP_ADDR
->          default 0x5ff000
->
-> +config OF_UPSTREAM
-> +       bool "Use upstream DTS for Kirkwood boards"
-> +       default y
+The ICSSG PRU Sub-system runs on EMAC firmware. This series Introduces
+support for ICSSG driver in uboot.
 
-You don't have to create a new config option here, just add "imply
-OF_UPSTREAM" for the SoC which you want to switch, something like:
+This series has been tested on AM65x SR2.0, and the ICSSG interface is
+able to ping / dhcp and boot kernel using tftp in uboot.
 
-diff --git a/arch/arm/mach-kirkwood/Kconfig b/arch/arm/mach-kirkwood/Kconfig
-index c2fff84a686..031d4e5ecd3 100644
---- a/arch/arm/mach-kirkwood/Kconfig
-+++ b/arch/arm/mach-kirkwood/Kconfig
-@@ -6,10 +6,12 @@ config FEROCEON_88FR131
- config KW88F6192
-        bool
-        select ARCH_VERY_EARLY_INIT
-+       imply OF_UPSTREAM
+To use ICSSG2 ethernet, the ICSSG firmware needs to be loaded to PRU RPROC
+cores and RPROC cores need to be booted with the firmware. This step is
+done inside driver similar to kernel.
 
- config KW88F6281
-        bool
-        select ARCH_VERY_EARLY_INIT
-+       imply OF_UPSTREAM
+The remoteproc driver uses request_fw_into_buf() API from fs-loader driver
+to load and start rproc with the required firmwares.
 
- config SHEEVA_88SV131
-        bool
+This series only introduces driver files. The device tree and config
+changes to enable ICSSG driver will be introduced later.
 
--Sumit
+This is v4 of the series [1].
+
+Changes from v3 [3] to v4:
+*) Dropped the dependncy patches and posted them seprately.
+*) Dropped the DTS and config patches, will post them seprately.
+*) Modified patch 4/5 to have multi port independent MAC mode support.
+*) Rebased the series on latest u-boot/next.
+
+Changes from v2 [2] to v3:
+*) No functional changes.
+*) Rebased the series on latest u-boot/next.
+*) Dropped the RFC tag.
+
+Changes from v1 [1] to v2:
+*) Modified the driver to load the firmware inside the driver only instead
+   of loading the firmware using commands at u-boot prompt. Added patch
+   3/16 for this.
+*) Rebased the series on the latest u-boot/next.
+*) Modified conf-0 configuration in k3-am65x-binman.dtsi as suggested by
+   Roger.
+*) Dropped patch [4] as the patch is no longer needed.
+*) Added patch 2/15 to modify fs-loader driver to use fw_storage_interface
+   env instead of storage_interface and keep the env storage_interface as
+   fallback as suggested by Roger.
+*) Added patch 15/15 to set default values to env fw_storage_interface and
+   fw_dev_part.
+
+[1] https://lore.kernel.org/all/20231219103418.3445886-1-danishanwar@ti.com/
+[2] https://lore.kernel.org/all/20240111070611.342701-1-danishanwar@ti.com/
+[3] https://lore.kernel.org/all/20240124064930.1787929-1-danishanwar@ti.com/
+[4] https://lore.kernel.org/all/20231219103418.3445886-16-danishanwar@ti.com/
+
+Thanks and Regards,
+MD Danish Anwar
+
+MD Danish Anwar (5):
+  net: ti: icssg: Add Firmware Interface for ICSSG Ethernet driver.
+  net: ti: icssg: Add Firmware config and classification APIs.
+  net: ti: icssg: Add icssg queues APIs and macros
+  net: ti: icssg: Add ICSSG ethernet driver
+  net: ti: icssg: Add support sending FDB command to update rx_flow_id
+
+ arch/arm/mach-k3/common.c         |  11 +
+ drivers/net/ti/Kconfig            |  13 +
+ drivers/net/ti/Makefile           |   1 +
+ drivers/net/ti/icss_mii_rt.h      | 192 +++++++++
+ drivers/net/ti/icssg_classifier.c | 376 ++++++++++++++++
+ drivers/net/ti/icssg_config.c     | 474 ++++++++++++++++++++
+ drivers/net/ti/icssg_config.h     | 195 +++++++++
+ drivers/net/ti/icssg_prueth.c     | 691 ++++++++++++++++++++++++++++++
+ drivers/net/ti/icssg_prueth.h     |  97 +++++
+ drivers/net/ti/icssg_queues.c     |  51 +++
+ drivers/net/ti/icssg_switch_map.h | 209 +++++++++
+ 11 files changed, 2310 insertions(+)
+ create mode 100644 drivers/net/ti/icss_mii_rt.h
+ create mode 100644 drivers/net/ti/icssg_classifier.c
+ create mode 100644 drivers/net/ti/icssg_config.c
+ create mode 100644 drivers/net/ti/icssg_config.h
+ create mode 100644 drivers/net/ti/icssg_prueth.c
+ create mode 100644 drivers/net/ti/icssg_prueth.h
+ create mode 100644 drivers/net/ti/icssg_queues.c
+ create mode 100644 drivers/net/ti/icssg_switch_map.h
+
+
+base-commit: 8ef8dcc54a0d507912ee57e15a541c5cebcfca76
+-- 
+2.34.1
+
