@@ -4,98 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4ADAC47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 15:32:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27F33C54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 15:46:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E412880DD;
-	Wed, 27 Mar 2024 16:32:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=linux.ibm.com
+	by phobos.denx.de (Postfix) with ESMTP id 5B125880C5;
+	Wed, 27 Mar 2024 16:46:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ibm.com header.i=@ibm.com header.b="Y3qvKNTh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K6L/GvYf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C24C7880FE; Wed, 27 Mar 2024 16:32:52 +0100 (CET)
-Received: from mx0b-001b2d01.pphosted.com (mx0b-001b2d01.pphosted.com
- [148.163.158.5])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B2DC2880E0; Wed, 27 Mar 2024 16:46:40 +0100 (CET)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2C8C880C5
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 16:32:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E190880AD
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 16:46:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=linux.ibm.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eajames@linux.ibm.com
-Received: from pps.filterd (m0353724.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.17.1.19/8.17.1.19) with ESMTP id
- 42RF8I6K023942; Wed, 27 Mar 2024 15:32:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com;
- h=message-id : date :
- mime-version : from : subject : to : cc : references : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=xc83GKQTH5V3XqtKSS+sNSMjwygFKlV8eeh4PQnL88M=;
- b=Y3qvKNThWiXE3L6G9QxAHdCg0LjB/uTVYVJ5qmujcgFr9FghyV7FCmziU6D45BMsdh9w
- WCA257lK/48L+Hnv/lp0LY3S6fbGaduv3gDIY0mS658jKsEGUlFsKe77PSzV0acW3U1i
- sPab1tX29EhZcpdVaqWaLsQBm8Bbz5+Mq/9yesCB0Hzo0qZBHUZhDuVbM4hwiB5Aj+T4
- MMxF3+JDeB0TVtkx+2BbH6oIwX/gjnCExpX9mvKbfrv1vfpYFvAb59YL7vA5f8tO4Eg1
- rl42z411uF+dYQbYzU4eDPxXBZ4tquoeOVvEkuHaZawIQLEueNnOz06fG+rXyhnfG2th 5w== 
-Received: from ppma23.wdc07v.mail.ibm.com
- (5d.69.3da9.ip4.static.sl-reverse.com [169.61.105.93])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 3x4nm0g38s-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 27 Mar 2024 15:32:46 +0000
-Received: from pps.filterd (ppma23.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma23.wdc07v.mail.ibm.com (8.17.1.19/8.17.1.19) with ESMTP id
- 42RDcmbZ025481; Wed, 27 Mar 2024 15:32:46 GMT
-Received: from smtprelay03.wdc07v.mail.ibm.com ([172.16.1.70])
- by ppma23.wdc07v.mail.ibm.com (PPS) with ESMTPS id 3x2awmybf1-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 27 Mar 2024 15:32:46 +0000
-Received: from smtpav04.wdc07v.mail.ibm.com (smtpav04.wdc07v.mail.ibm.com
- [10.39.53.231])
- by smtprelay03.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 42RFWhfS28312198
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 27 Mar 2024 15:32:45 GMT
-Received: from smtpav04.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id CA43058069;
- Wed, 27 Mar 2024 15:32:43 +0000 (GMT)
-Received: from smtpav04.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 7304058066;
- Wed, 27 Mar 2024 15:32:43 +0000 (GMT)
-Received: from [9.61.28.184] (unknown [9.61.28.184])
- by smtpav04.wdc07v.mail.ibm.com (Postfix) with ESMTP;
- Wed, 27 Mar 2024 15:32:43 +0000 (GMT)
-Message-ID: <31360dde-ae73-41e9-a7b0-a99fd2eaff46@linux.ibm.com>
-Date: Wed, 27 Mar 2024 10:32:43 -0500
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2d4886a1cb4so89998691fa.0
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 08:46:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1711554398; x=1712159198; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hWLQvASEPp17TVYllXFJw3nyvTknS90gECrBiFeea90=;
+ b=K6L/GvYf00SZzfMHfjahUdsyh5FWCHGUJohLPM6KJpG3MEgWoBJRJReK6QFMUJwHyI
+ uQDkZwcWwEzDzdx+YJvHnA/ZoaLZspiJLxpyvIB6XDz+s71SleYbLhVekm4VFpegph/+
+ lq/XWP7CxQQ5YqGMI6Qq4VCdEdNeOFi1nP1raAHnxn1KI6zv+1sw/ZKT0JLkaDd7zWQX
+ aQJhC7D0tuTixIZt0LiVEq7Nvh5GM0BTSUq3n2snLXt99QgIJNo/HCCio17CUduClyc8
+ EA5whThvk1J7K3M2JA0uUPBu001K09qfwknOz3IF6IopY4+WncYU6kF8kIPd7IkP2XMv
+ pAvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711554398; x=1712159198;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hWLQvASEPp17TVYllXFJw3nyvTknS90gECrBiFeea90=;
+ b=eOxgsurmSzUWIkPgsLs7YahIUHMvLp5y9WKEs0hmIEm8PWqPoLbKaTMZAREJIUcoqB
+ 0mxEHxuyUuu5OjJ/j9Oq78iFzp/4/faxcbdTsjzuZx60Xh/i5A9f16qOCCsaP0hfQ/Ap
+ EtJKJr9Y+fCmxPFg93xJwzgPZwRf5BH1xaq4i5mlMQdwOApkjxBR4u0vqaLrDJ/VXdBJ
+ ZBS3bkdPwK70uyipOHpseNiHkQI6FB/TPoQv4luf4OmlAuCKK5vKsPPdeo4FeCc75S49
+ sdv+1OWKFSU8gBYYzkWyRTx90wLAoBCMqYAD1ysXJQLIeLJrckCCY2lQV68v3BF05ARK
+ iDGw==
+X-Gm-Message-State: AOJu0YzV0edql4KY/R3WtqIq2VVtpinqcE2uD0/nN1uV+0iNo95V3YNi
+ zuOqfj1kvXIU0U3dLAgAFnfCa9+5WSbRfhAA5LDvT8vhEEMF0RkIs0sKqtHpkyrDPMMT7T6y4NV
+ ySNDVfgpXncpeKF7nJDXxthv4BaDB5nuQaY4HNg==
+X-Google-Smtp-Source: AGHT+IGNjiBBElU2cy1FqG6JixHxaQsVX3tBI6lsNz8VjR0uXtkkeAzr7Rcqnr/ltY6GRWJPW5jUXyDYDxJCGAtN25c=
+X-Received: by 2002:a2e:95d5:0:b0:2d4:6aba:f1a9 with SMTP id
+ y21-20020a2e95d5000000b002d46abaf1a9mr325842ljh.40.1711554397563; Wed, 27 Mar
+ 2024 08:46:37 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Eddie James <eajames@linux.ibm.com>
-Subject: Re: tcg2_platform_get_log failing to read address and size of
- memory-region via ofnode_get_addr_size
-To: Tim Harvey <tharvey@gateworks.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>,
- Ruchika Gupta <ruchika.gupta@linaro.org>, Samuel Lee <slee@gateworks.com>
 References: <CAJ+vNU12-4EJN_RPGPPTfTVden2=beq-XaeFL=dF7t+AAqje=Q@mail.gmail.com>
  <CAC_iWj+B0r7o8Hwi_KZM=+L9t6=THH=pzY38jrcDDdAntWT3Rw@mail.gmail.com>
  <CAJ+vNU0380ved3FWt_R4UVR3stFrb3B4dLTx=m6dp0377MK6hQ@mail.gmail.com>
-Content-Language: en-US
-In-Reply-To: <CAJ+vNU0380ved3FWt_R4UVR3stFrb3B4dLTx=m6dp0377MK6hQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-GUID: FJkfRsencS12VAnM9mqpnzJdsQGKymdA
-X-Proofpoint-ORIG-GUID: FJkfRsencS12VAnM9mqpnzJdsQGKymdA
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-03-27_12,2024-03-27_01,2023-05-22_02
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- adultscore=0 impostorscore=0
- spamscore=0 priorityscore=1501 mlxscore=0 malwarescore=0 suspectscore=0
- bulkscore=0 clxscore=1015 phishscore=0 mlxlogscore=999 lowpriorityscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2403210000
- definitions=main-2403270107
+ <afab8b1e-ad41-47fc-ad76-383151f4caf2@linux.ibm.com>
+In-Reply-To: <afab8b1e-ad41-47fc-ad76-383151f4caf2@linux.ibm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 27 Mar 2024 17:46:01 +0200
+Message-ID: <CAC_iWjK47NBn89yMs0FsMGtOijHTAta5uYmZL=oumzhzyW29WQ@mail.gmail.com>
+Subject: Re: tcg2_platform_get_log failing to read address and size of
+ memory-region via ofnode_get_addr_size
+To: Eddie James <eajames@linux.ibm.com>, Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>, 
+ Ruchika Gupta <ruchika.gupta@linaro.org>, Samuel Lee <slee@gateworks.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,170 +92,265 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi both,
 
-On 3/26/24 11:15, Tim Harvey wrote:
-> On Tue, Mar 26, 2024 at 2:24 AM Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
->> Hi Tim,
->>
->> On Tue, 26 Mar 2024 at 03:15, Tim Harvey <tharvey@gateworks.com> wrote:
->>> Greetings,
->>>
->>> I'm unable to understand why tcg2_platform_get_log is failing to read
->>> a memory region.
->>>
->>> For example the following diffs:
->> I am not really sure what those nodes are supposed to do in sandbox.
->> Pehaps Eddie remembers.
->> What exactly are you trying to achieve here? Read the eventlog from TF-A?
->>
+On Wed, 27 Mar 2024 at 17:22, Eddie James <eajames@linux.ibm.com> wrote:
 >
-> Would you agree with removing the requirement for the event log?
+>
+> On 3/26/24 11:15, Tim Harvey wrote:
+> > On Tue, Mar 26, 2024 at 2:24=E2=80=AFAM Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> >> Hi Tim,
+> >>
+> >> On Tue, 26 Mar 2024 at 03:15, Tim Harvey <tharvey@gateworks.com> wrote=
+:
+> >>> Greetings,
+> >>>
+> >>> I'm unable to understand why tcg2_platform_get_log is failing to read
+> >>> a memory region.
+> >>>
+> >>> For example the following diffs:
+> >> I am not really sure what those nodes are supposed to do in sandbox.
+> >> Pehaps Eddie remembers.
+> >> What exactly are you trying to achieve here? Read the eventlog from TF=
+-A?
+> >>
+> > Hi Ilias,
+> >
+> > I was trying to get measured boot (CONFIG_MEASURED_BOOT=3Dy) working on
+> > a tpm on my board but ran into an issue when I couldn't get the
+> > memory-region I added for testing to be recognized with the current
+> > code in tcg2_platform_get_log().
+> >
+> > I wonder if an event log should be required for measured boot - it
+> > sounds like that was something required for EFI, so I was thinking of
+> > submitting the following:
+> > commit b3f336c2f863168219a93cd1c7ac922396e0fad5 (HEAD -> master-venice)
+> > Author: Tim Harvey <tharvey@gateworks.com>
+> > Date:   Tue Mar 26 08:49:07 2024 -0700
+> >
+> >      tpm: allow measured boot without an event log
+> >
+> >      Currently an event log is required for measured boot. Remove this
+> >      requirement.
+> >
+> >      Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> >
+> > diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+> > index 68eaaa639f89..994f8089ba34 100644
+> > --- a/lib/tpm-v2.c
+> > +++ b/lib/tpm-v2.c
+> > @@ -175,17 +175,19 @@ static int tcg2_log_append_check(struct
+> > tcg2_event_log *elog, u32 pcr_index,
+> >          u32 event_size;
+> >          u8 *log;
+> >
+> > -       event_size =3D size + tcg2_event_get_size(digest_list);
+> > -       if (elog->log_position + event_size > elog->log_size) {
+> > -               printf("%s: log too large: %u + %u > %u\n", __func__,
+> > -                      elog->log_position, event_size, elog->log_size);
+> > -               return -ENOBUFS;
+> > -       }
+> > +       if (elog->log_size) {
+> > +               event_size =3D size + tcg2_event_get_size(digest_list);
+> > +               if (elog->log_position + event_size > elog->log_size) {
+> > +                       printf("%s: log too large: %u + %u > %u\n", __f=
+unc__,
+> > +                              elog->log_position, event_size, elog->lo=
+g_size);
+> > +                       return -ENOBUFS;
+> > +               }
+> >
+> > -       log =3D elog->log + elog->log_position;
+> > -       elog->log_position +=3D event_size;
+> > +               log =3D elog->log + elog->log_position;
+> > +               elog->log_position +=3D event_size;
+> >
+> > -       tcg2_log_append(pcr_index, event_type, digest_list, size, event=
+, log);
+> > +               tcg2_log_append(pcr_index, event_type, digest_list,
+> > size, event, log);
+> > +       }
+> >
+> >          return 0;
+> >   }
+> > @@ -613,10 +615,8 @@ int tcg2_measurement_init(struct udevice **dev,
+> > struct tcg2_event_log *elog,
+> >                  return rc;
+> >
+> >          rc =3D tcg2_log_prepare_buffer(*dev, elog, ignore_existing_log=
+);
+> > -       if (rc) {
+> > +       if (rc)
+> >                  tcg2_measurement_term(*dev, elog, true);
+> > -               return rc;
+> > -       }
+> >
+> >          rc =3D tcg2_measure_event(*dev, elog, 0, EV_S_CRTM_VERSION,
+> >                                  strlen(version_string) + 1,
+> >
+> > Would you agree with removing the requirement for the event log?
+>
+>
+> No, the log is required, otherwise it's fairly meaningless work. You
+> need the log in your OS to verify the contents of the TPM.
 
+It's the other way around. You trust the TPM and replay the event log
+in memory to verify it's correct.
+That being said, I do agree the event log is pretty useful when trying
+to understand how and what the platform measured. In any case, I'd
+rather fix any issues rather than sidestep them.
 
-No, the log is required, otherwise it's fairly meaningless work. You 
-need the log in your OS to verify the contents of the TPM.
+The return value of ofnode_get_addr_size() depends on a couple Kconfig
+options. Any chance those differ from the ones Eddie is using?
 
-Here is the device tree reserved memory stuff we're using, perhaps it 
-will help.
-
-diff --git a/arch/arm/dts/ast2600-p10bmc.dts 
-b/arch/arm/dts/ast2600-p10bmc.dts
-index 1d0f88bf96..8fbfeaa0d7 100755
---- a/arch/arm/dts/ast2600-p10bmc.dts
-+++ b/arch/arm/dts/ast2600-p10bmc.dts
-@@ -13,6 +13,17 @@
-                 reg = <0x80000000 0x40000000>;
-         };
-
-+       reserved-memory {
-+               #address-cells = <1>;
-+               #size-cells = <1>;
-+               ranges;
-+
-+               event_log: tcg_event_log@b3d00000 {
-+                       no-map;
-+                       reg = <0xb3d00000 0x100000>;
-+               };
-+       };
-+
-         chosen {
-                 stdout-path = &uart5;
-         };
-@@ -113,6 +124,7 @@
-         tpm@2e {
-                 compatible = "nuvoton,npct75x";
-                 reg = <0x2e>;
-+               memory-region = <&event_log>;
-         };
-  };
-
+Thanks
+/Ilias
 
 >
-> I have another question that perhaps you may have some feedback on.
-> The tpm commands such as pcr_extend, pcr_read currently require a
-> 32-byte SHA256 digest and I wish to extend that as my TPM supports
-> only SHA1. The tpm2_pcr_extend and tpm2_pcr_read functions were
-> extended to function to allow the digest type and length to be passed
-> in and I'm wondering what the best way to extend the tpm extend/read
-> commands would be to support that.
+> Here is the device tree reserved memory stuff we're using, perhaps it
+> will help.
 >
-> The tcg2_create_digest function creates a digest based on the
-> capabilities of the tpm and the tcg2_pcr_extend loops over those
-> calling tpm2_pcr_extend for each digtest supported (and same for
-> tcg2_pcr_read looping over tpm2_pcr_read) and I'm assuming TPM's can
-> support multiple algos so I suppose a parameter needs to be added to
-> the pcr_read and pcr_extend commands. Would you agree with that?
+> diff --git a/arch/arm/dts/ast2600-p10bmc.dts
+> b/arch/arm/dts/ast2600-p10bmc.dts
+> index 1d0f88bf96..8fbfeaa0d7 100755
+> --- a/arch/arm/dts/ast2600-p10bmc.dts
+> +++ b/arch/arm/dts/ast2600-p10bmc.dts
+> @@ -13,6 +13,17 @@
+>                  reg =3D <0x80000000 0x40000000>;
+>          };
 >
-> Best Regards,
+> +       reserved-memory {
+> +               #address-cells =3D <1>;
+> +               #size-cells =3D <1>;
+> +               ranges;
+> +
+> +               event_log: tcg_event_log@b3d00000 {
+> +                       no-map;
+> +                       reg =3D <0xb3d00000 0x100000>;
+> +               };
+> +       };
+> +
+>          chosen {
+>                  stdout-path =3D &uart5;
+>          };
+> @@ -113,6 +124,7 @@
+>          tpm@2e {
+>                  compatible =3D "nuvoton,npct75x";
+>                  reg =3D <0x2e>;
+> +               memory-region =3D <&event_log>;
+>          };
+>   };
 >
-> Tim
 >
->> Thanks
->> /Ilias
->>> diff --git a/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
->>> b/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
->>> index 7b2130dbdb21..57b3c227ceaf 100644
->>> --- a/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
->>> +++ b/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
->>> @@ -112,6 +112,7 @@
->>> compatible = "tcg,tpm_tis-spi";
->>> reg = <0x1>;
->>> spi-max-frequency = <36000000>;
->>> + memory-region = <&event_log>;
->>> };
->>> };
->>> diff --git a/arch/arm/dts/imx8mm-venice-gw700x.dtsi
->>> b/arch/arm/dts/imx8mm-venice-gw700x.dtsi
->>> index c305e325d007..697fd1148785 100644
->>> --- a/arch/arm/dts/imx8mm-venice-gw700x.dtsi
->>> +++ b/arch/arm/dts/imx8mm-venice-gw700x.dtsi
->>> @@ -13,6 +13,17 @@
->>> reg = <0x0 0x40000000 0 0x80000000>;
->>> };
->>>
->>> + reserved-memory {
->>> + #address-cells = <2>;
->>> + #size-cells = <2>;
->>> + ranges;
->>> +
->>> + event_log: tcg_event_log {
->>> + no-map;
->>> + reg = <0 0x40000000 0x2000>;
->>> + };
->>> + };
->>> +
->>> gpio-keys {
->>> compatible = "gpio-keys";
->>>
->>> And at runtime:
->>> u-boot=> fdt addr $fdtcontroladdr
->>> u-boot=> fdt list 
->>> /soc@0/bus@30800000/spba-bus@30800000/spi@30830000/tpm@1/
->>> tpm@1 {
->>> compatible = "tcg,tpm_tis-spi";
->>> reg = <0x00000001>;
->>> spi-max-frequency = <0x02255100>;
->>> memory-region = <0x00000025>;
->>> };
->>> u-boot=> fdt list /reserved-memory/
->>> reserved-memory {
->>> #address-cells = <0x00000002>;
->>> #size-cells = <0x00000002>;
->>> ranges;
->>> tcg_event_log {
->>> };
->>> };
->>> u-boot=> fdt list /reserved-memory/tcg_event_log
->>> tcg_event_log {
->>> no-map;
->>> reg = <0x00000000 0x40000000 0x00002000>;
->>> phandle = <0x00000025>;
->>> };
->>>
->>> So why does the following code in tcg2_platform_get_log() return 
->>> -ENOMEM?
->>>
->>> if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
->>> 0, &args))
->>> return -ENODEV;
->>>
->>> a = ofnode_get_addr_size(args.node, "reg", &s);
->>> if (a == FDT_ADDR_T_NONE)
->>> return -ENOMEM;
->>>
->>> debugging shows that dev_read_phandle_with_args returns non-zero but
->>> args.args_count is 0.
->>>
->>> I feel like the construct of using dev_read_phandle_with_args followed
->>> by the ofnode_get_addr_size is just wrong but I don't understand why
->>> nor do I understand how my dt changes differ from what is in
->>> arch/sandbox/dts/test.dts (other than its using address-size=1 which
->>> doesn't appear to be the issue in my testing). The abstraction of the
->>> ofnode and fdt stuff always trip me up... very confusing.
->>>
->>> Can anyone explain the issue here?
->>>
->>> Best Regards,
->>>
->>> Tim
+> >
+> > I have another question that perhaps you may have some feedback on.
+> > The tpm commands such as pcr_extend, pcr_read currently require a
+> > 32-byte SHA256 digest and I wish to extend that as my TPM supports
+> > only SHA1. The tpm2_pcr_extend and tpm2_pcr_read functions were
+> > extended to  function to allow the digest type and length to be passed
+> > in and I'm wondering what the best way to extend the tpm extend/read
+> > commands would be to support that.
+> >
+> > The tcg2_create_digest function creates a digest based on the
+> > capabilities of the tpm and the tcg2_pcr_extend loops over those
+> > calling tpm2_pcr_extend for each digtest supported (and same for
+> > tcg2_pcr_read looping over tpm2_pcr_read) and I'm assuming TPM's can
+> > support multiple algos so I suppose a parameter needs to be added to
+> > the pcr_read and pcr_extend commands. Would you agree with that?
+> >
+> > Best Regards,
+> >
+> > Tim
+> >
+> >> Thanks
+> >> /Ilias
+> >>> diff --git a/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
+> >>> b/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
+> >>> index 7b2130dbdb21..57b3c227ceaf 100644
+> >>> --- a/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
+> >>> +++ b/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
+> >>> @@ -112,6 +112,7 @@
+> >>>                  compatible =3D "tcg,tpm_tis-spi";
+> >>>                  reg =3D <0x1>;
+> >>>                  spi-max-frequency =3D <36000000>;
+> >>> +               memory-region =3D <&event_log>;
+> >>>          };
+> >>>   };
+> >>>   diff --git a/arch/arm/dts/imx8mm-venice-gw700x.dtsi
+> >>> b/arch/arm/dts/imx8mm-venice-gw700x.dtsi
+> >>> index c305e325d007..697fd1148785 100644
+> >>> --- a/arch/arm/dts/imx8mm-venice-gw700x.dtsi
+> >>> +++ b/arch/arm/dts/imx8mm-venice-gw700x.dtsi
+> >>> @@ -13,6 +13,17 @@
+> >>>                  reg =3D <0x0 0x40000000 0 0x80000000>;
+> >>>          };
+> >>>
+> >>> +       reserved-memory {
+> >>> +               #address-cells =3D <2>;
+> >>> +               #size-cells =3D <2>;
+> >>> +               ranges;
+> >>> +
+> >>> +               event_log: tcg_event_log {
+> >>> +                       no-map;
+> >>> +                       reg =3D <0 0x40000000 0x2000>;
+> >>> +               };
+> >>> +       };
+> >>> +
+> >>>          gpio-keys {
+> >>>                  compatible =3D "gpio-keys";
+> >>>
+> >>> And at runtime:
+> >>> u-boot=3D> fdt addr $fdtcontroladdr
+> >>> u-boot=3D> fdt list /soc@0/bus@30800000/spba-bus@30800000/spi@3083000=
+0/tpm@1/
+> >>> tpm@1 {
+> >>>          compatible =3D "tcg,tpm_tis-spi";
+> >>>          reg =3D <0x00000001>;
+> >>>          spi-max-frequency =3D <0x02255100>;
+> >>>          memory-region =3D <0x00000025>;
+> >>> };
+> >>> u-boot=3D> fdt list /reserved-memory/
+> >>> reserved-memory {
+> >>>          #address-cells =3D <0x00000002>;
+> >>>          #size-cells =3D <0x00000002>;
+> >>>          ranges;
+> >>>          tcg_event_log {
+> >>>          };
+> >>> };
+> >>> u-boot=3D> fdt list /reserved-memory/tcg_event_log
+> >>> tcg_event_log {
+> >>>          no-map;
+> >>>          reg =3D <0x00000000 0x40000000 0x00002000>;
+> >>>          phandle =3D <0x00000025>;
+> >>> };
+> >>>
+> >>> So why does the following code in tcg2_platform_get_log() return -ENO=
+MEM?
+> >>>
+> >>>                  if (dev_read_phandle_with_args(dev, "memory-region",=
+ NULL, 0,
+> >>>                                                 0, &args))
+> >>>                          return -ENODEV;
+> >>>
+> >>>                  a =3D ofnode_get_addr_size(args.node, "reg", &s);
+> >>>                  if (a =3D=3D FDT_ADDR_T_NONE)
+> >>>                          return -ENOMEM;
+> >>>
+> >>> debugging shows that dev_read_phandle_with_args returns non-zero but
+> >>> args.args_count is 0.
+> >>>
+> >>> I feel like the construct of using dev_read_phandle_with_args followe=
+d
+> >>> by the ofnode_get_addr_size is just wrong but I don't understand why
+> >>> nor do I understand how my dt changes differ from what is in
+> >>> arch/sandbox/dts/test.dts (other than its using address-size=3D1 whic=
+h
+> >>> doesn't appear to be the issue in my testing). The abstraction of the
+> >>> ofnode and fdt stuff always trip me up... very confusing.
+> >>>
+> >>> Can anyone explain the issue here?
+> >>>
+> >>> Best Regards,
+> >>>
+> >>> Tim
