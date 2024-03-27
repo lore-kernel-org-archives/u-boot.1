@@ -4,89 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C47CC54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 14:17:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DD39C47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 14:19:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C907880DE;
-	Wed, 27 Mar 2024 15:17:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EE6CB880F3;
+	Wed, 27 Mar 2024 15:19:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IdjK9iO6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J0LbxX0k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04BEB880E0; Wed, 27 Mar 2024 15:17:49 +0100 (CET)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 792E5880FB; Wed, 27 Mar 2024 15:19:14 +0100 (CET)
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com
+ [IPv6:2607:f8b0:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEC62880D2
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 15:17:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 62088880EB
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 15:19:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2d6a1af9c07so91466521fa.3
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 07:17:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pf1-x433.google.com with SMTP id
+ d2e1a72fcca58-6e6ca65edc9so2070803b3a.0
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 07:19:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711549066; x=1712153866; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Pfb7Ru0wHai7n4C797DPWjcsyGNGoAmf9zvf9u1/Tr4=;
- b=IdjK9iO6qosNdip45KSGQP+sAf66FGUWE4n1sJ2eaisPu7J4N9RtULLeNLom6zQhZV
- 00Pf4DsmBxjQWqfYSxbCJWgF26PBxk+qVZ0hbc2yADpGZaTyUsXYbz0bjUDD2wd9lvfH
- qbz0cbteU0FOqYdG8hnU8vfveupDlQQzuFTItfmqPpneANCOPh/QWF76nfACAX7Lcrfs
- NxuyAbt1Ua1zIchXxaHutiWzMQ6+TDiWBtvdcoYDTWWLFOc+BOHeQi7u4B1Y0AXKrqI2
- 8ce5Vqs4nqwKeZcd08gijE8l8CVI34riDi+HjVSBCJZDJ9hW0uyVbHdn+TnkPob/dSZ9
- P4nw==
+ d=gmail.com; s=20230601; t=1711549151; x=1712153951; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UHJ8iOzSJiUhozbBsSDKVgBn2GeDMVJlqmKXHubpxdg=;
+ b=J0LbxX0kxN27z3Holjktvc6Sq5XE5Q4If8dAObepwdIDsppH5wQcg8Ah5Efa84BUwn
+ mw3/yXEOP/F9a/sbgZQD+zHHjNs7kaK3DeGHaY+Q1sPFVIAxRaJmTIz7D+Y4fEhVVI1q
+ Rul1qjQMRGLseYS9eFlGDxmdkbBOLWwEiaN4uSb3Z+LuJqU8MCzJejNeMzQFkwxuIHaD
+ 0HPgI/74+gRAjCL3ag+OVPx8domylvBsmpzIEBqgnjioiPMxX7Bpa+84IhoejxziA9m3
+ tTlNwL1plyhdj3ORnOROUWPu2RbbtcmGgN/M1/48fvxdM8XZbPFMttgrovzwccbwzPz6
+ EoSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711549066; x=1712153866;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Pfb7Ru0wHai7n4C797DPWjcsyGNGoAmf9zvf9u1/Tr4=;
- b=wgqvp84mTtvx0G53mz+KUw3iq9Nc4nmVdKcG1TJZP1NTrVvXbSqqRHERCNctexi0zH
- W54DuIOUDVnJ7UDOjSsLdG6+1a9qo7bPGHbEX2r2JsAlOU/GmQ++CfsdIdOQYh0be49O
- 81sCg3RoqDD9WUMwQkOUZ5qpsHncThne7O+rIPRVobGnCOLnraYIq/if3VfK5WRw8P/D
- MuyPk8vLb+AXYfR7SGTV9er2iR/WdwB9A8uzwW7RinRZr+Gz5YsnxLJrNVDMdgNSAwq3
- fCdBk6Z/+lxig3rgdJd612ssKP4aOKxYMXtcT4jG0JiEukD0Yo0y8NeQCr2gKNsmaSBt
- bS+A==
+ d=1e100.net; s=20230601; t=1711549151; x=1712153951;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UHJ8iOzSJiUhozbBsSDKVgBn2GeDMVJlqmKXHubpxdg=;
+ b=qplxV+uydSYfb38OxNbGOfus8gpr2vmTEX5BQSryTreV/P8zrdn91zY07lVr9SM31M
+ BWVPPiFH2IoeU7ZXle7e7B1sY4twL6hnFPvqpCvAugADA8o7lsEortI+E9XSl381CavM
+ C0wAe4h/YI3L8uCdR2iXYW8VXZ0L49/Bu99z5zY6limLB1G/RTggRdU2PY7DoUccHKtj
+ ixB3ScroHHCt3WFXi282S8WeVYRs/3fT1QoSjraHRP+dpcMX+msc4J9j6K5cavb1SYly
+ vyS6nYVKOPtilw8jYGyPl8RFDfdpwIwXhhMh7I8Q/C6pmGYqhy1jx+zTUCxshCdlacGa
+ Tp1A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXodMXC8s2oOw9NZAZq0ikdnTAfSpvsv10D/L+z3iCd3neUucALbGpbQkj92mdqClnZoVRo0FZg3eLIeKh/rgJsQwghGw==
-X-Gm-Message-State: AOJu0Ywjlge/3JLbXWj9ayVZlNDaaHa5t1st1ybvMGnbHt8aVO01vb7/
- LLokkQw2HAXDyA+dwfr4DXHAYLtTyZ+vXDZMVFkohhQRiG/F7bCO4488sn/2yrTiTZyt9cxMOcP
- dpLg8hQHb2vLyi3H8uCYXqbtCQkbS9KUlz3YaDA==
-X-Google-Smtp-Source: AGHT+IHxghJHNpmxBV4+PCTL1UadEO2gfpn43Bqbz/S7XBQmhclnF/mV+S36Fuefas/uYFum05C6Q05AjS02KPbH9IA=
-X-Received: by 2002:a2e:9545:0:b0:2d6:db57:83c1 with SMTP id
- t5-20020a2e9545000000b002d6db5783c1mr92488ljh.35.1711549065984; Wed, 27 Mar
- 2024 07:17:45 -0700 (PDT)
+ AJvYcCXl0AUF4Vj7ASnOUqLrBYjcDojJhYgzug/uLRG6bVMu9Y3KJwMR3r8ieOKELqS7likg16cjGJd7n6kRU8Et/J9u05cejw==
+X-Gm-Message-State: AOJu0YxRqu+hZplLOMKpAbwJkYsXp8vuXiNuWoEa7siM26qv5VP6mo1k
+ JjZCuSyW024zBlLHw482haAjdyOQkyJiJyN3L09oZeWHLgVQA8Ai
+X-Google-Smtp-Source: AGHT+IHty25PcsJVtOQ27NfL0VAk+11rovjQxzgqg2Ii1bwFREeUPBRvHF8FcLXSdipQ85idnoOh8A==
+X-Received: by 2002:a05:6a20:841c:b0:1a3:c3a1:b780 with SMTP id
+ c28-20020a056a20841c00b001a3c3a1b780mr128315pzd.1.1711549150772; 
+ Wed, 27 Mar 2024 07:19:10 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:bfc9:1394:a603:c344])
+ by smtp.gmail.com with ESMTPSA id
+ p56-20020a056a0026f800b006e091a254adsm7923879pfw.30.2024.03.27.07.19.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Mar 2024 07:19:10 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: festevam@gmail.com
+Cc: baruch@tkos.co.il, trini@konsulko.com, josua@solid-run.com,
+ u-boot@lists.denx.de, cgmeiner@igalia.com
+Subject: [PATCH] mx6cuboxi: Convert to watchdog driver model
+Date: Wed, 27 Mar 2024 11:18:49 -0300
+Message-Id: <20240327141849.2126157-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240304174454.1484507-1-igor.opaniuk@gmail.com>
- <CAByghJY17Z42heuQiAruJPHKpQ-3_Ge-bqt70LC3g+2M7dAyvg@mail.gmail.com>
-In-Reply-To: <CAByghJY17Z42heuQiAruJPHKpQ-3_Ge-bqt70LC3g+2M7dAyvg@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 27 Mar 2024 16:17:09 +0200
-Message-ID: <CAC_iWj+Uq0NZhBKuAbbM5asvUuTBku0OZDSu+b68rtqNFqFCDA@mail.gmail.com>
-Subject: Re: [PATCH v3 0/6] TEE: minor cleanup
-To: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bin Meng <bmeng@tinylab.org>, 
- Etienne Carriere <etienne.carriere@foss.st.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jens Wiklander <jens.wiklander@linaro.org>, 
- Jorge Ramirez-Ortiz <jorge@foundries.io>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
- Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,79 +91,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Igor,
+Commit 68dcbdd594d4 ("ARM: imx: Add weak default reset_cpu()") caused
+the 'reset' command in U-Boot to not cause a board reset.
 
-On Wed, 27 Mar 2024 at 14:13, Igor Opaniuk <igor.opaniuk@gmail.com> wrote:
->
-> Ilias,
->
-> On Mon, Mar 4, 2024 at 6:45=E2=80=AFPM Igor Opaniuk <igor.opaniuk@gmail.c=
-om> wrote:
->>
->> - Address some spelling errors and typos
->> - Support CMD_OPTEE_RPMB for SANDBOX configurations and add python tests
->> - Remove common.h inclusion for drivers/tee
->> - Add calls for closing tee session after every read/write operation.
->>
->> CI build:
->> [1] https://dev.azure.com/igoropaniuk/u-boot/_build/results?buildId=3D28=
-&view=3Dresults
->>
->> Changes in v3:
->> - Added calls for closing tee session after every read/write operation
->>
->> Changes in v2:
->> - Fixed chimp_optee.c:37:9: error: implicit declaration of function 'mem=
-set'
->> - Applied R-b and T-b tags
->>
->> Igor Opaniuk (6):
->>   tee: optee: fix description in Kconfig
->>   tee: sandbox: fix spelling errors
->>   cmd: optee_rpmb: close tee session
->>   cmd: optee_rpmb: build cmd for sandbox
->>   test: py: add optee_rpmb tests
->>   tee: remove common.h inclusion
->>
->>  cmd/Kconfig                        |  4 +++-
->>  cmd/optee_rpmb.c                   | 23 +++++++++++++++++------
->>  drivers/tee/broadcom/chimp_optee.c |  3 ++-
->>  drivers/tee/optee/Kconfig          |  2 +-
->>  drivers/tee/optee/core.c           |  1 -
->>  drivers/tee/optee/i2c.c            |  1 -
->>  drivers/tee/optee/rpmb.c           |  1 -
->>  drivers/tee/optee/supplicant.c     |  2 +-
->>  drivers/tee/sandbox.c              | 10 +++++-----
->>  drivers/tee/tee-uclass.c           |  1 -
->>  test/py/tests/test_optee_rpmb.py   | 20 ++++++++++++++++++++
->>  11 files changed, 49 insertions(+), 19 deletions(-)
->>  create mode 100644 test/py/tests/test_optee_rpmb.py
->>
->> --
->> 2.34.1
->>
->
-> Are there currently any comments/objections that can prevent these cosmet=
-ic
-> changes from being applied? CI is happy now and all tests are passing suc=
-cessfully.
->
-> If there are any - just let me know, thanks
+Fix it by switching to the watchdog driver model via sysreset, which
+is the preferred method for implementing the watchdog reset.
 
-IIRC I did run this version on the CI and everything looked fine. I'll
-send a PR to Tom with it -- apologies for the delay
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+Christian,
 
-Regards
-/Ilias
->
-> Regards,
-> Igor
->
-> --
-> Best regards - Atentamente - Meilleures salutations
->
-> Igor Opaniuk
->
-> mailto: igor.opaniuk@gmail.com
-> skype: igor.opanyuk
-> https://www.linkedin.com/in/iopaniuk
+Can you test this, please?
+
+ .../dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi | 10 ++++++++++
+ configs/mx6cuboxi_defconfig                            |  3 +++
+ 2 files changed, 13 insertions(+)
+
+diff --git a/arch/arm/dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi b/arch/arm/dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi
+index 23a05773b579..e9b188ed6587 100644
+--- a/arch/arm/dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi
++++ b/arch/arm/dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi
+@@ -13,6 +13,12 @@
+ 			&gpio6 4 0
+ 		>;
+ 	};
++
++	wdt-reboot {
++		compatible = "wdt-reboot";
++		wdt = <&wdog1>;
++		bootph-pre-ram;
++	};
+ };
+ 
+ &soc {
+@@ -58,3 +64,7 @@
+ &usdhc3 {
+ 	bootph-all;
+ };
++
++&wdog1 {
++	bootph-pre-ram;
++};
+diff --git a/configs/mx6cuboxi_defconfig b/configs/mx6cuboxi_defconfig
+index 66d4aaeda2d9..27ceb22599a6 100644
+--- a/configs/mx6cuboxi_defconfig
++++ b/configs/mx6cuboxi_defconfig
+@@ -71,6 +71,8 @@ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_MXC_UART=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_WATCHDOG=y
+ CONFIG_DM_THERMAL=y
+ CONFIG_IMX_THERMAL=y
+ CONFIG_USB=y
+@@ -89,3 +91,4 @@ CONFIG_IMX_HDMI=y
+ CONFIG_SPLASH_SCREEN=y
+ CONFIG_SPLASH_SCREEN_ALIGN=y
+ CONFIG_BMP_16BPP=y
++CONFIG_IMX_WATCHDOG=y
+-- 
+2.34.1
+
