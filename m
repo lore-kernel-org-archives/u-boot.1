@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27F33C54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 15:46:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21D58CD1280
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 15:56:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B125880C5;
-	Wed, 27 Mar 2024 16:46:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 155298806C;
+	Wed, 27 Mar 2024 16:56:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K6L/GvYf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ayLfPQb7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2DC2880E0; Wed, 27 Mar 2024 16:46:40 +0100 (CET)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 85D6E87F4F; Wed, 27 Mar 2024 16:56:06 +0100 (CET)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E190880AD
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 16:46:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 72CF58806C
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 16:56:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2d4886a1cb4so89998691fa.0
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 08:46:38 -0700 (PDT)
+ spf=pass smtp.mailfrom=christian.gmeiner@gmail.com
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-5bdbe2de25fso4878198a12.3
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 08:56:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711554398; x=1712159198; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hWLQvASEPp17TVYllXFJw3nyvTknS90gECrBiFeea90=;
- b=K6L/GvYf00SZzfMHfjahUdsyh5FWCHGUJohLPM6KJpG3MEgWoBJRJReK6QFMUJwHyI
- uQDkZwcWwEzDzdx+YJvHnA/ZoaLZspiJLxpyvIB6XDz+s71SleYbLhVekm4VFpegph/+
- lq/XWP7CxQQ5YqGMI6Qq4VCdEdNeOFi1nP1raAHnxn1KI6zv+1sw/ZKT0JLkaDd7zWQX
- aQJhC7D0tuTixIZt0LiVEq7Nvh5GM0BTSUq3n2snLXt99QgIJNo/HCCio17CUduClyc8
- EA5whThvk1J7K3M2JA0uUPBu001K09qfwknOz3IF6IopY4+WncYU6kF8kIPd7IkP2XMv
- pAvw==
+ d=gmail.com; s=20230601; t=1711554959; x=1712159759; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Mnw8lmecvrexGHzgOpFlHfHzWumVgsaWcRWB+VR0fro=;
+ b=ayLfPQb7ycpgqtzvy6sMC8GjMkrkMGbrh20NwKJ/uH2tnsw9tBq5pGvx429TFhSC/F
+ NBJSCfpBHsrNons5KNRvxnVFNAHPU7eZZF+99I2zXDtXggZMx9FxIwKFIORZxxWpp9C4
+ L/jjnkri68dLZrbnnYEtcDQS0TKh6ztlzwzc5JNs18y3Tl6XcFn0E6GeR6GFfkITJYZk
+ xLVW5Pyi8S2bQeayhd4EI8/AfQf/s3Vq/voJfL1tfBOVxhlsOHkYxcLiVpB82w5xnLxi
+ S35hMzJvKF0F/+wZ1FNB6br3vT0C81L3e9g4KJPBPJ7NKoBI3MwjF2e31mqAQ/C59yXn
+ 7RXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711554398; x=1712159198;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hWLQvASEPp17TVYllXFJw3nyvTknS90gECrBiFeea90=;
- b=eOxgsurmSzUWIkPgsLs7YahIUHMvLp5y9WKEs0hmIEm8PWqPoLbKaTMZAREJIUcoqB
- 0mxEHxuyUuu5OjJ/j9Oq78iFzp/4/faxcbdTsjzuZx60Xh/i5A9f16qOCCsaP0hfQ/Ap
- EtJKJr9Y+fCmxPFg93xJwzgPZwRf5BH1xaq4i5mlMQdwOApkjxBR4u0vqaLrDJ/VXdBJ
- ZBS3bkdPwK70uyipOHpseNiHkQI6FB/TPoQv4luf4OmlAuCKK5vKsPPdeo4FeCc75S49
- sdv+1OWKFSU8gBYYzkWyRTx90wLAoBCMqYAD1ysXJQLIeLJrckCCY2lQV68v3BF05ARK
- iDGw==
-X-Gm-Message-State: AOJu0YzV0edql4KY/R3WtqIq2VVtpinqcE2uD0/nN1uV+0iNo95V3YNi
- zuOqfj1kvXIU0U3dLAgAFnfCa9+5WSbRfhAA5LDvT8vhEEMF0RkIs0sKqtHpkyrDPMMT7T6y4NV
- ySNDVfgpXncpeKF7nJDXxthv4BaDB5nuQaY4HNg==
-X-Google-Smtp-Source: AGHT+IGNjiBBElU2cy1FqG6JixHxaQsVX3tBI6lsNz8VjR0uXtkkeAzr7Rcqnr/ltY6GRWJPW5jUXyDYDxJCGAtN25c=
-X-Received: by 2002:a2e:95d5:0:b0:2d4:6aba:f1a9 with SMTP id
- y21-20020a2e95d5000000b002d46abaf1a9mr325842ljh.40.1711554397563; Wed, 27 Mar
- 2024 08:46:37 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1711554959; x=1712159759;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Mnw8lmecvrexGHzgOpFlHfHzWumVgsaWcRWB+VR0fro=;
+ b=LI/X6Z+sLxo/D5h5seTOme8wMm2pwJ7L3uUsCSuA+WluMLjKhDOVvg3g4dGZYov+ml
+ lq7kUKr+aD5rIQyBMDyVDSI/2VMXh1/uHrPNCLOCHFQ1wlQTMnYlOvb0/rD541P9oIqn
+ L18abxt4AOULsFPy2Dk4LJElCEWrEk/GPw+sNx2+0CAc8tsYY7lGwddeBucTb1UXhVG5
+ n8/fp6+DDpQ0r9t7Dtf+CAP56wNntROllNMgWSCW2UKivrKyqOLx0R01RDudTXi8S2as
+ zQQQq7NrCsDtJrEYlNCgodjqqDoQlD6RpWtb3svjD92G38ZgQt7NmyetSA7Iyh3pe2q4
+ hg+Q==
+X-Gm-Message-State: AOJu0Yy1bLCEdmywBJDrYX46v7ANO//k5F0+GMn4JgBkqzlceqBMl5V8
+ yJdi0psgTRXIpd1QeaxUZUZ2LS+qJqpLF1MeS+DCV/LvPNoCP+ZTu/CnQjh5X+3erORgU3vbicY
+ 7QtVk+YNhmLVajcwT4wYRCgi7H1yxI4oHK8OkjJnT
+X-Google-Smtp-Source: AGHT+IFoA9I65oiCW40q5kFbFwmlnibs1F2sObAzkwMAZG5Mk3fMLJY3PXvZEmeMF+7/8GOTxpiBeOs2J/6ZktQBlhw=
+X-Received: by 2002:a17:90a:dc08:b0:2a0:4c3b:3454 with SMTP id
+ i8-20020a17090adc0800b002a04c3b3454mr20429pjv.47.1711554958741; Wed, 27 Mar
+ 2024 08:55:58 -0700 (PDT)
 MIME-Version: 1.0
-References: <CAJ+vNU12-4EJN_RPGPPTfTVden2=beq-XaeFL=dF7t+AAqje=Q@mail.gmail.com>
- <CAC_iWj+B0r7o8Hwi_KZM=+L9t6=THH=pzY38jrcDDdAntWT3Rw@mail.gmail.com>
- <CAJ+vNU0380ved3FWt_R4UVR3stFrb3B4dLTx=m6dp0377MK6hQ@mail.gmail.com>
- <afab8b1e-ad41-47fc-ad76-383151f4caf2@linux.ibm.com>
-In-Reply-To: <afab8b1e-ad41-47fc-ad76-383151f4caf2@linux.ibm.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 27 Mar 2024 17:46:01 +0200
-Message-ID: <CAC_iWjK47NBn89yMs0FsMGtOijHTAta5uYmZL=oumzhzyW29WQ@mail.gmail.com>
-Subject: Re: tcg2_platform_get_log failing to read address and size of
- memory-region via ofnode_get_addr_size
-To: Eddie James <eajames@linux.ibm.com>, Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>, 
- Ruchika Gupta <ruchika.gupta@linaro.org>, Samuel Lee <slee@gateworks.com>
+References: <20220728070540.28554-1-josua@solid-run.com>
+ <CA+EmdG5+QYxVo27C-u5W6FkuDgcoey4i-md9L4b9cs1gtsv+1g@mail.gmail.com>
+ <30c35e80-2015-4fac-b9dc-6902cc09c58e@solid-run.com>
+ <CAH9NwWd2smg+vC=hHx1XbRPS569Mxzr4HNghwA9DUQUyYf-OKA@mail.gmail.com>
+ <1c077133-dbd4-4255-89af-259a2ca686c2@solid-run.com>
+In-Reply-To: <1c077133-dbd4-4255-89af-259a2ca686c2@solid-run.com>
+From: Christian Gmeiner <christian.gmeiner@gmail.com>
+Date: Wed, 27 Mar 2024 16:55:47 +0100
+Message-ID: <CAH9NwWfEBUiGF9kVh20AYnHwn1mri1sHy-M4Qdb-zrOcOXjM7Q@mail.gmail.com>
+Subject: Re: [PATCH] mx6cuboxi: fix ethernet after synchronise device-tree
+To: Josua Mayer <josua@solid-run.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Yazan Shhady <yazan.shhady@solid-run.com>, 
+ Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>,
+ Fabio Estevam <festevam@gmail.com>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Baruch Siach <baruch@tkos.co.il>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,265 +94,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi both,
+Hi Josua
 
-On Wed, 27 Mar 2024 at 17:22, Eddie James <eajames@linux.ibm.com> wrote:
->
->
-> On 3/26/24 11:15, Tim Harvey wrote:
-> > On Tue, Mar 26, 2024 at 2:24=E2=80=AFAM Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> >> Hi Tim,
+> > Hi Josua
+> >
+> > My bisect showed me that after a device-tree sync the ethernet broke.
+> >
+> >> please take a look at this patch, I suspect it will (hack-)fix your
+> >> ethernet issue.
 > >>
-> >> On Tue, 26 Mar 2024 at 03:15, Tim Harvey <tharvey@gateworks.com> wrote=
-:
-> >>> Greetings,
-> >>>
-> >>> I'm unable to understand why tcg2_platform_get_log is failing to read
-> >>> a memory region.
-> >>>
-> >>> For example the following diffs:
-> >> I am not really sure what those nodes are supposed to do in sandbox.
-> >> Pehaps Eddie remembers.
-> >> What exactly are you trying to achieve here? Read the eventlog from TF=
--A?
+> > Yes.. it fixes the problem I am seeing.
+> >
+> >> Unfortunately I had no time to revisit this yet and implement a correct solution.
 > >>
-> > Hi Ilias,
-> >
-> > I was trying to get measured boot (CONFIG_MEASURED_BOOT=3Dy) working on
-> > a tpm on my board but ran into an issue when I couldn't get the
-> > memory-region I added for testing to be recognized with the current
-> > code in tcg2_platform_get_log().
-> >
-> > I wonder if an event log should be required for measured boot - it
-> > sounds like that was something required for EFI, so I was thinking of
-> > submitting the following:
-> > commit b3f336c2f863168219a93cd1c7ac922396e0fad5 (HEAD -> master-venice)
-> > Author: Tim Harvey <tharvey@gateworks.com>
-> > Date:   Tue Mar 26 08:49:07 2024 -0700
-> >
-> >      tpm: allow measured boot without an event log
-> >
-> >      Currently an event log is required for measured boot. Remove this
-> >      requirement.
-> >
-> >      Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> >
-> > diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> > index 68eaaa639f89..994f8089ba34 100644
-> > --- a/lib/tpm-v2.c
-> > +++ b/lib/tpm-v2.c
-> > @@ -175,17 +175,19 @@ static int tcg2_log_append_check(struct
-> > tcg2_event_log *elog, u32 pcr_index,
-> >          u32 event_size;
-> >          u8 *log;
-> >
-> > -       event_size =3D size + tcg2_event_get_size(digest_list);
-> > -       if (elog->log_position + event_size > elog->log_size) {
-> > -               printf("%s: log too large: %u + %u > %u\n", __func__,
-> > -                      elog->log_position, event_size, elog->log_size);
-> > -               return -ENOBUFS;
-> > -       }
-> > +       if (elog->log_size) {
-> > +               event_size =3D size + tcg2_event_get_size(digest_list);
-> > +               if (elog->log_position + event_size > elog->log_size) {
-> > +                       printf("%s: log too large: %u + %u > %u\n", __f=
-unc__,
-> > +                              elog->log_position, event_size, elog->lo=
-g_size);
-> > +                       return -ENOBUFS;
-> > +               }
-> >
-> > -       log =3D elog->log + elog->log_position;
-> > -       elog->log_position +=3D event_size;
-> > +               log =3D elog->log + elog->log_position;
-> > +               elog->log_position +=3D event_size;
-> >
-> > -       tcg2_log_append(pcr_index, event_type, digest_list, size, event=
-, log);
-> > +               tcg2_log_append(pcr_index, event_type, digest_list,
-> > size, event, log);
-> > +       }
-> >
-> >          return 0;
-> >   }
-> > @@ -613,10 +615,8 @@ int tcg2_measurement_init(struct udevice **dev,
-> > struct tcg2_event_log *elog,
-> >                  return rc;
-> >
-> >          rc =3D tcg2_log_prepare_buffer(*dev, elog, ignore_existing_log=
-);
-> > -       if (rc) {
-> > +       if (rc)
-> >                  tcg2_measurement_term(*dev, elog, true);
-> > -               return rc;
-> > -       }
-> >
-> >          rc =3D tcg2_measure_event(*dev, elog, 0, EV_S_CRTM_VERSION,
-> >                                  strlen(version_string) + 1,
-> >
-> > Would you agree with removing the requirement for the event log?
+> > Would it be okay for you if I look into a proper solution?
 >
+> Sure. I am swamped by other products at the moment.
 >
-> No, the log is required, otherwise it's fairly meaningless work. You
-> need the log in your OS to verify the contents of the TPM.
+> However I will provide a rough overview what needs to be done:
+>
+> Background: i.MX6 SoMs originally had a an atheros phy at unstable address,
+> either 0 or 4 depending on electrical noise on floating configuration signals.
+>
 
-It's the other way around. You trust the TPM and replay the event log
-in memory to verify it's correct.
-That being said, I do agree the event log is pretty useful when trying
-to understand how and what the platform measured. In any case, I'd
-rather fix any issues rather than sidestep them.
+Would it be possible to set those configuration signals from the MX6
+to a defined state and
+then toggle the PHY reset , to force correct PHY address?
 
-The return value of ofnode_get_addr_size() depends on a couple Kconfig
-options. Any chance those differ from the ones Eddie is using?
+> Linux had solved this by placing 2 phy nodes in device-tree.
+> During boot the kernel would attempt in order to probe the phys,
+> then link the successful one to the ethernet netdev.
+> As a side-effect there is always an error in the kernel log for one of the
+> addresses.
+>
+> U-Boot had something similar in that with a special address (I think 0xff)
+> in device-tree, the code will probe mdio bus for all addresses, but only
+> for a single phy node in dts.
+>
+> With release of SoM 2.0 we changed to an analog devices phy at address 1,
+> which most importantly uses a different driver, and requires a different description
+> in device-tree.
+>
+> When adding this new phy, as a third node in device-tree, kernel maintainers
+> requested a better solution, and we got u-boot to runtime patch dtb to update
+> status properties of the dtb for linux, after probing mdio bus for phys.
+>
 
-Thanks
-/Ilias
+Got it.
 
 >
-> Here is the device tree reserved memory stuff we're using, perhaps it
-> will help.
+> Now - what u-boot needs to do is probe the mdio bus, and then runtime-patch its own DTB.
+> Either with status properties, or for adding the phy-handle property (not sure which method will work).
 >
-> diff --git a/arch/arm/dts/ast2600-p10bmc.dts
-> b/arch/arm/dts/ast2600-p10bmc.dts
-> index 1d0f88bf96..8fbfeaa0d7 100755
-> --- a/arch/arm/dts/ast2600-p10bmc.dts
-> +++ b/arch/arm/dts/ast2600-p10bmc.dts
-> @@ -13,6 +13,17 @@
->                  reg =3D <0x80000000 0x40000000>;
->          };
+
+We could patch DTB in SPL for U-Boot proper but doing a mdio scan in
+SPL looks like a lot of work. Do
+you know if there is a pull up/down resistor etc. that I could use to
+detect pre SoM 2.0 and SoM 2.0?
+
+Is this what board_type() does?
+Is HummingBoard2 == SoM 2.0?
+
+> This somehow has to happen after probing mdio driver, but before probing ethernet driver.
 >
-> +       reserved-memory {
-> +               #address-cells =3D <1>;
-> +               #size-cells =3D <1>;
-> +               ranges;
-> +
-> +               event_log: tcg_event_log@b3d00000 {
-> +                       no-map;
-> +                       reg =3D <0xb3d00000 0x100000>;
-> +               };
-> +       };
-> +
->          chosen {
->                  stdout-path =3D &uart5;
->          };
-> @@ -113,6 +124,7 @@
->          tpm@2e {
->                  compatible =3D "nuvoton,npct75x";
->                  reg =3D <0x2e>;
-> +               memory-region =3D <&event_log>;
->          };
->   };
->
->
+> > I have a
+> > handful of such devices here
+> > that are already or will be used in a CI farm so I am interested in
+> > using the latest U-Boot for them.
 > >
-> > I have another question that perhaps you may have some feedback on.
-> > The tpm commands such as pcr_extend, pcr_read currently require a
-> > 32-byte SHA256 digest and I wish to extend that as my TPM supports
-> > only SHA1. The tpm2_pcr_extend and tpm2_pcr_read functions were
-> > extended to  function to allow the digest type and length to be passed
-> > in and I'm wondering what the best way to extend the tpm extend/read
-> > commands would be to support that.
-> >
-> > The tcg2_create_digest function creates a digest based on the
-> > capabilities of the tpm and the tcg2_pcr_extend loops over those
-> > calling tpm2_pcr_extend for each digtest supported (and same for
-> > tcg2_pcr_read looping over tpm2_pcr_read) and I'm assuming TPM's can
-> > support multiple algos so I suppose a parameter needs to be added to
-> > the pcr_read and pcr_extend commands. Would you agree with that?
-> >
-> > Best Regards,
-> >
-> > Tim
-> >
-> >> Thanks
-> >> /Ilias
-> >>> diff --git a/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
-> >>> b/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
-> >>> index 7b2130dbdb21..57b3c227ceaf 100644
-> >>> --- a/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
-> >>> +++ b/arch/arm/dts/imx8mm-venice-gw73xx.dtsi
-> >>> @@ -112,6 +112,7 @@
-> >>>                  compatible =3D "tcg,tpm_tis-spi";
-> >>>                  reg =3D <0x1>;
-> >>>                  spi-max-frequency =3D <36000000>;
-> >>> +               memory-region =3D <&event_log>;
-> >>>          };
-> >>>   };
-> >>>   diff --git a/arch/arm/dts/imx8mm-venice-gw700x.dtsi
-> >>> b/arch/arm/dts/imx8mm-venice-gw700x.dtsi
-> >>> index c305e325d007..697fd1148785 100644
-> >>> --- a/arch/arm/dts/imx8mm-venice-gw700x.dtsi
-> >>> +++ b/arch/arm/dts/imx8mm-venice-gw700x.dtsi
-> >>> @@ -13,6 +13,17 @@
-> >>>                  reg =3D <0x0 0x40000000 0 0x80000000>;
-> >>>          };
+> >> sincerely
+> >> Josua Mayer
+> >>
+> >> Am 28.07.22 um 09:08 schrieb Josua Mayer:
+> >>> Please hold off merging this patch until someone tested it, I can not do so this week.
+> >>> @Tom Can you confirm if this fixes the networking on your Cubox?
+> >>> Also note that the phy-handle property may or may not be required, I am not sure.
 > >>>
-> >>> +       reserved-memory {
-> >>> +               #address-cells =3D <2>;
-> >>> +               #size-cells =3D <2>;
-> >>> +               ranges;
-> >>> +
-> >>> +               event_log: tcg_event_log {
-> >>> +                       no-map;
-> >>> +                       reg =3D <0 0x40000000 0x2000>;
-> >>> +               };
-> >>> +       };
-> >>> +
-> >>>          gpio-keys {
-> >>>                  compatible =3D "gpio-keys";
+> >>> sincerely
+> >>> Josua Mayer
 > >>>
-> >>> And at runtime:
-> >>> u-boot=3D> fdt addr $fdtcontroladdr
-> >>> u-boot=3D> fdt list /soc@0/bus@30800000/spba-bus@30800000/spi@3083000=
-0/tpm@1/
-> >>> tpm@1 {
-> >>>          compatible =3D "tcg,tpm_tis-spi";
-> >>>          reg =3D <0x00000001>;
-> >>>          spi-max-frequency =3D <0x02255100>;
-> >>>          memory-region =3D <0x00000025>;
-> >>> };
-> >>> u-boot=3D> fdt list /reserved-memory/
-> >>> reserved-memory {
-> >>>          #address-cells =3D <0x00000002>;
-> >>>          #size-cells =3D <0x00000002>;
-> >>>          ranges;
-> >>>          tcg_event_log {
-> >>>          };
-> >>> };
-> >>> u-boot=3D> fdt list /reserved-memory/tcg_event_log
-> >>> tcg_event_log {
-> >>>          no-map;
-> >>>          reg =3D <0x00000000 0x40000000 0x00002000>;
-> >>>          phandle =3D <0x00000025>;
-> >>> };
+> >>> On Thu, Jul 28, 2022 at 7:05 AM Josua Mayer <josua@solid-run.com> wrote:
 > >>>
-> >>> So why does the following code in tcg2_platform_get_log() return -ENO=
-MEM?
+> >>>     The i.MX6 Cubox-i and HummingBoards can have different PHYs at varying
+> >>>     addresses. U-Boot needs to auto-detect which phy is actually present,
+> >>>     and at which address it is responding.
 > >>>
-> >>>                  if (dev_read_phandle_with_args(dev, "memory-region",=
- NULL, 0,
-> >>>                                                 0, &args))
-> >>>                          return -ENODEV;
+> >>>     Auto-detection from multiple phy nodes specified in device-tree does not
+> >>>     currently work correct. As a work-around merge all three possible phys
+> >>>     into one node with the special address 0xffffffff which indicates to the
+> >>>     generic phy driver to probe all addresses.
+> >>>     Also fixup this fake address before booting Linux, *if* booting with
+> >>>     U-Boot's internal dtb.
 > >>>
-> >>>                  a =3D ofnode_get_addr_size(args.node, "reg", &s);
-> >>>                  if (a =3D=3D FDT_ADDR_T_NONE)
-> >>>                          return -ENOMEM;
+> >>>     Signed-off-by: Josua Mayer <josua@solid-run.com>
+> >>>     Fixes: d0399a46e7cd
+> >>>     ---
+> >>>      arch/arm/dts/imx6qdl-sr-som.dtsi     | 30 +++++++++-------------------
+> >>>      board/solidrun/mx6cuboxi/mx6cuboxi.c |  6 +++++-
+> >>>      2 files changed, 14 insertions(+), 22 deletions(-)
 > >>>
-> >>> debugging shows that dev_read_phandle_with_args returns non-zero but
-> >>> args.args_count is 0.
+> >>>     diff --git a/arch/arm/dts/imx6qdl-sr-som.dtsi b/arch/arm/dts/imx6qdl-sr-som.dtsi
+> >>>     index ce543e325c..2d7cbc26b3 100644
+> >>>     ---_a/arch/arm/dts/imx6qdl-sr-som.dtsi
+> >>>     +++ b/arch/arm/dts/imx6qdl-sr-som.dtsi
+> >>>     @@ -53,6 +53,7 @@
+> >>>      &fec {
+> >>>             pinctrl-names = "default";
+> >>>             pinctrl-0 = <&pinctrl_microsom_enet_ar8035>;
+> >>>     +       phy-handle = <&phy>;
+> >>>             phy-mode = "rgmii-id";
 > >>>
-> >>> I feel like the construct of using dev_read_phandle_with_args followe=
-d
-> >>> by the ofnode_get_addr_size is just wrong but I don't understand why
-> >>> nor do I understand how my dt changes differ from what is in
-> >>> arch/sandbox/dts/test.dts (other than its using address-size=3D1 whic=
-h
-> >>> doesn't appear to be the issue in my testing). The abstraction of the
-> >>> ofnode and fdt stuff always trip me up... very confusing.
+> >>>             /*
+> >>>     @@ -68,30 +69,17 @@
+> >>>                     #address-cells = <1>;
+> >>>                     #size-cells = <0>;
 > >>>
-> >>> Can anyone explain the issue here?
+> >>>     -               /*
+> >>>     -                * The PHY can appear at either address 0 or 4 due to the
+> >>>     -                * configuration (LED) pin not being pulled sufficiently.
+> >>>     -                */
+> >>>     -               ethernet-phy@0 {
+> >>>     -                       reg = <0>;
+> >>>     +               phy: ethernet-phy@0 {
+> >>>     +                       /*
+> >>>     +                        * The PHY can appear either:
+> >>>     +                        * - AR8035: at address 0 or 4
+> >>>     +                        * - ADIN1300: at address 1
+> >>>     +                        * Actual address being detected at runtime.
+> >>>     +                        */
+> >>>     +                       reg = <0xffffffff>;
+> >>>                             qca,clk-out-frequency = <125000000>;
+> >>>                             qca,smarteee-tw-us-1g = <24>;
+> >>>     -               };
+> >>>     -
+> >>>     -               ethernet-phy@4 {
+> >>>     -                       reg = <4>;
+> >>>     -                       qca,clk-out-frequency = <125000000>;
+> >>>     -                       qca,smarteee-tw-us-1g = <24>;
+> >>>     -               };
+> >>>     -
+> >>>     -               /*
+> >>>     -                * ADIN1300 (som rev 1.9 or later) is always at address 1. It
+> >>>     -                * will be enabled automatically by U-Boot if detected.
+> >>>     -                */
+> >>>     -               ethernet-phy@1 {
+> >>>     -                       reg = <1>;
+> >>>                             adi,phy-output-clock = "125mhz-free-running";
+> >>>     -                       status = "disabled";
+> >>>                     };
+> >>>             };
+> >>>      };
+> >>>     diff --git a/board/solidrun/mx6cuboxi/mx6cuboxi.c b/board/solidrun/mx6cuboxi/mx6cuboxi.c
+> >>>     index debf4f6a3b..52172a03b1 100644
+> >>>     ---_a/board/solidrun/mx6cuboxi/mx6cuboxi.c
+> >>>     +++ b/board/solidrun/mx6cuboxi/mx6cuboxi.c
+> >>>     @@ -446,7 +446,7 @@ static int find_ethernet_phy(void)
+> >>>       */
+> >>>      int ft_board_setup(void *fdt, struct bd_info *bd)
+> >>>      {
+> >>>     -       int node_phy0, node_phy1, node_phy4;
+> >>>     +       int node_phy, node_phy0, node_phy1, node_phy4;
+> >>>             int ret, phy;
+> >>>             bool enable_phy0 = false, enable_phy1 = false, enable_phy4 = false;
+> >>>             enum board_type board;
+> >>>     @@ -478,6 +478,10 @@ int ft_board_setup(void *fdt, struct bd_info *bd)
+> >>>                     return 0;
+> >>>             }
 > >>>
-> >>> Best Regards,
+> >>>     +       // update U-Boot's own unified phy node phy address, if present
+> >>>     +       node_phy = fdt_path_offset(fdt, "/soc/bus@2100000/ethernet@2188000/mdio/phy");
+> >>>     +       ret = fdt_setprop_u32(fdt, node_phy, "reg", phy);
+> >>>     +
+> >>>             // update all phy nodes status
+> >>>             node_phy0 = fdt_path_offset(fdt, "/soc/bus@2100000/ethernet@2188000/mdio/ethernet-phy@0");
+> >>>             ret = fdt_setprop_string(fdt, node_phy0, "status", enable_phy0 ? "okay" : "disabled");
+> >>>     --_
+> >>>     2.37.1
 > >>>
-> >>> Tim
+
+
+
+-- 
+greets
+--
+Christian Gmeiner, MSc
+
+https://christian-gmeiner.info/privacypolicy
