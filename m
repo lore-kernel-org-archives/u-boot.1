@@ -4,76 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0447AC54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 12:13:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88EDFC54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 12:13:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80AE088085;
-	Wed, 27 Mar 2024 13:13:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 05E3788103;
+	Wed, 27 Mar 2024 13:13:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Dthr23Qc";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O9pcuaDs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 015CC88085; Wed, 27 Mar 2024 13:13:04 +0100 (CET)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 746BF88104; Wed, 27 Mar 2024 13:13:23 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC7318802E
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 13:13:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 35C728802E
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 13:13:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-690c43c5b5aso37566606d6.1
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 05:13:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-341bba83366so1255149f8f.1
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 05:13:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711541580; x=1712146380; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Q7bOMSQX24O6Qvro7a01ESuH486qhwnywjY/L1LXcEY=;
- b=Dthr23QcIWWPgr3obzaz3lbgRVLnUTzhSg/rvXTGWVX1BkkVlill3vG9P260mrWMeu
- N7W779ogBC6LVgz3DajLCP7dal+Gi3PcpmONTZPBo0kx4+8OC9eiizRZ8S7RcAyEZaIF
- dMvWcuM8jhp30ctjuoqmmpWjKnXMFTr/BRI7s=
+ d=gmail.com; s=20230601; t=1711541600; x=1712146400; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+gZ4iu/vVwiITKdl8KYk5d/fpc7a1F4/PZY2RN7HCX4=;
+ b=O9pcuaDskzoQyyFyljf4yj2GnrNGOMq/lFHfnOytMu2XK9zLFu+9Qo8zBYBrmhuw4p
+ HpNjsmu/oeCkJxCaAtaNf9HgpA2dkL8X4od9tXxESGDZHOybBgTvFKhL6cWPkD+430JT
+ NSWASRU8R6E8cTTa/OlxTLLC6kWDURE6mPKu6Udun/CY+1KXyCmD9NZCcCd7RvZhC/NH
+ 0p0Rvfmwf0kGmCMZEOY3hgMDXjHKluqi6imdDylQdRE4cXg003TfcsrQMY56P/Vrt4FH
+ OLAw2HK9M2jQOCm8IH6r8WPCmJgPFGjiFe3WShZ/sg/U3WXOTWTyTlQkfJz8dYxEaVAn
+ Bl6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711541580; x=1712146380;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Q7bOMSQX24O6Qvro7a01ESuH486qhwnywjY/L1LXcEY=;
- b=teKtyQrCjTJT4XaJkDR0ImFANVoA4KiKM3FWp9SOlx4lZkDY0Ej7hYamBevmcIFLRO
- CRoyd2+RvK3OZKJyfyGX/9ctDLWZU9D2XVBkVOl+fupIsFXKAwpM5dE9YqgzZVMEiPO9
- ydrEfvb4LvurUPKX0clvrm8m43R5V6YW5qiUeby2bgb/8DibpgsWae5iQBJieexI+BFy
- KIElA4NQWiH8XsM6k4oSgWjSnJHluOMgMq3jT50lfKvC786f+YqIjfgKwxeZR5cTRmXC
- KRHH0n7YP9qd3KcXKq5yxv9cfJaQcMc5zN2GQhmsKLCrVFo/Wl5mcw+pjtNooyTd3cYu
- /W5A==
-X-Gm-Message-State: AOJu0YzEZnHeeShdEBb//+Pveli1uLt/0m1SPGKHDyKoRmGnotHvH4ni
- DBjH1+LYLx2N8UF6j3CR6NnYIiqnLopeWaIN8CEdWlKpw2bpLZflTwm+dVUNmHVcOeMwFfbRsG/
- D
-X-Google-Smtp-Source: AGHT+IGCONjcnSQHgqmnljcO0JopzR2xIyqR0seFUPRw8E58XfRXaPtJZr47c/WMxzjUFjHuEqJBSQ==
-X-Received: by 2002:a05:6214:2609:b0:696:7902:983d with SMTP id
- gu9-20020a056214260900b006967902983dmr4548730qvb.47.1711541580579; 
- Wed, 27 Mar 2024 05:13:00 -0700 (PDT)
-Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
- by smtp.gmail.com with ESMTPSA id
- h6-20020a0562140da600b00696af399fbbsm463205qvh.110.2024.03.27.05.12.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Mar 2024 05:13:00 -0700 (PDT)
-Date: Wed, 27 Mar 2024 08:12:58 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Leo Liang <ycliang@andestech.com>
-Cc: u-boot@lists.denx.de, rick@andestech.com
-Subject: Re: [GIT PULL] u-boot-riscv/master
-Message-ID: <20240327121258.GI3442575@bill-the-cat>
-References: <ZgLME470PHld19If@swlinux02>
+ d=1e100.net; s=20230601; t=1711541600; x=1712146400;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+gZ4iu/vVwiITKdl8KYk5d/fpc7a1F4/PZY2RN7HCX4=;
+ b=a/NVlg9ERil8zza36JcQidSBP2cpOXMLC+7l+MCQ4+Q2usolZxrD/EkZLlQytou4hl
+ gQQKTekNNPvHSYbelf80hOXfGeVIamacbNYE8H5rjxhxJRgkZEEonh6d/yfF5DypWUz5
+ 0jVdA0RhjbKUP74S74luHDX+Q28l62f9oocZGweEQ3oY3H3PVqk8IEuEMSjaM7FBtqrc
+ E9ZF4cQ30lwEF8cSy1D48z2ZkCc4zzsDa/SagxnJfx0ubijvPDi+UhXk0IVStTFpspHF
+ R8MAZ4mDaDYPeJ1CFivnaZy0uJIB8lNyhmo5VEC88cJK5t0b+RqGb8SKWSIp6Wc2KNtj
+ yKwQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVfqPiltt79KgkByZcqSHUPeBaiSJlYStXD8gZ1vlf+AKkz0KcprhRnlq+QIKhXu/FzlZW4STfj+nGdfh6G+baHi8WfmA==
+X-Gm-Message-State: AOJu0YxI4UCAszdtYWKOtAKXS7adHyWAeAkUuFEpvXL1j6T9Zx+kBD0F
+ g+PjJI67PQqOldcepe1TUS7qd09yJo8FoIm2bHTAJiHm3CIG0eZkc+crqph5E+OAZxBNoRdnHje
+ heuY5eDOxMUlJay2cBtICDFJg3OQ=
+X-Google-Smtp-Source: AGHT+IEWjYzT9BZcCmHxNyq5hKAs14GkQS1nnqjRrf7kr47zrtp7t0MlJDbiPpY96Ec6Aws/3OXqo0Ser7xsygzUF1Y=
+X-Received: by 2002:a5d:6147:0:b0:33e:cf2f:b0 with SMTP id
+ y7-20020a5d6147000000b0033ecf2f00b0mr8826178wrt.3.1711541600235; 
+ Wed, 27 Mar 2024 05:13:20 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Eqin/1zXyIohTKHI"
-Content-Disposition: inline
-In-Reply-To: <ZgLME470PHld19If@swlinux02>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240304174454.1484507-1-igor.opaniuk@gmail.com>
+In-Reply-To: <20240304174454.1484507-1-igor.opaniuk@gmail.com>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Wed, 27 Mar 2024 13:13:08 +0100
+Message-ID: <CAByghJY17Z42heuQiAruJPHKpQ-3_Ge-bqt70LC3g+2M7dAyvg@mail.gmail.com>
+Subject: Re: [PATCH v3 0/6] TEE: minor cleanup
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng@tinylab.org>, 
+ Etienne Carriere <etienne.carriere@foss.st.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jens Wiklander <jens.wiklander@linaro.org>, 
+ Jorge Ramirez-Ortiz <jorge@foundries.io>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,54 +102,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Ilias,
 
---Eqin/1zXyIohTKHI
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, Mar 4, 2024 at 6:45=E2=80=AFPM Igor Opaniuk <igor.opaniuk@gmail.com=
+> wrote:
 
-On Tue, Mar 26, 2024 at 09:22:27PM +0800, Leo Liang wrote:
+> - Address some spelling errors and typos
+> - Support CMD_OPTEE_RPMB for SANDBOX configurations and add python tests
+> - Remove common.h inclusion for drivers/tee
+> - Add calls for closing tee session after every read/write operation.
+>
+> CI build:
+> [1]
+> https://dev.azure.com/igoropaniuk/u-boot/_build/results?buildId=3D28&view=
+=3Dresults
+>
+> Changes in v3:
+> - Added calls for closing tee session after every read/write operation
+>
+> Changes in v2:
+> - Fixed chimp_optee.c:37:9: error: implicit declaration of function
+> 'memset'
+> - Applied R-b and T-b tags
+>
+> Igor Opaniuk (6):
+>   tee: optee: fix description in Kconfig
+>   tee: sandbox: fix spelling errors
+>   cmd: optee_rpmb: close tee session
+>   cmd: optee_rpmb: build cmd for sandbox
+>   test: py: add optee_rpmb tests
+>   tee: remove common.h inclusion
+>
+>  cmd/Kconfig                        |  4 +++-
+>  cmd/optee_rpmb.c                   | 23 +++++++++++++++++------
+>  drivers/tee/broadcom/chimp_optee.c |  3 ++-
+>  drivers/tee/optee/Kconfig          |  2 +-
+>  drivers/tee/optee/core.c           |  1 -
+>  drivers/tee/optee/i2c.c            |  1 -
+>  drivers/tee/optee/rpmb.c           |  1 -
+>  drivers/tee/optee/supplicant.c     |  2 +-
+>  drivers/tee/sandbox.c              | 10 +++++-----
+>  drivers/tee/tee-uclass.c           |  1 -
+>  test/py/tests/test_optee_rpmb.py   | 20 ++++++++++++++++++++
+>  11 files changed, 49 insertions(+), 19 deletions(-)
+>  create mode 100644 test/py/tests/test_optee_rpmb.py
+>
+> --
+> 2.34.1
+>
+>
+Are there currently any comments/objections that can prevent these cosmetic
+changes from being applied? CI is happy now and all tests are passing
+successfully.
 
-> Hi Tom,
->=20
-> The following changes since commit dde373bde392c38649c8c4420e0c98ef8d38d9=
-dc:
->=20
->   Prepare v2024.04-rc5 (2024-03-25 21:56:50 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
->=20
-> for you to fetch changes up to 0cfe1bc6ed9b322d2b03ded3175ac5de3ed2b784:
->=20
->   spl: riscv: opensbi: fix check of PAYLOAD_ARGS_ADDR (2024-03-26 17:31:2=
-4 +0800)
->=20
-> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
--riscv/-/pipelines/20075
+If there are any - just let me know, thanks
 
-Applied to u-boot/master, thanks!
+Regards,
+Igor
 
 --=20
-Tom
+Best regards - Atentamente - Meilleures salutations
 
---Eqin/1zXyIohTKHI
-Content-Type: application/pgp-signature; name="signature.asc"
+Igor Opaniuk
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYEDUoACgkQFHw5/5Y0
-tyzK6AwAl/TRUcRf49YDIo7OcWwZExNu9lRIGEAv+ltuZTBPbb4hwG/8+nOzSe+P
-ncqhhfHlk2V19UreQlkuj5FX1NDLDo/1gB6bpet9TRaPmyM5uksn7mTuJJhEKwBS
-29iH/urgZfhQWoHGoZkUTOvZ8vcPEWuSNbgmCXkEPNPY7zhW2uliGqN8whNR/Yyf
-x0Ris/vBh1+hP7f+/Rf3h8mIGvzYgvJpAXsGLgXxQtKdJgzS/DCLdAr0VQzK69CY
-Kb5NtvPuh1HzUeZPOVeGXGUISDMUSkvGpMluJ12CPC4a8raECkJogPoOhXBXa076
-REUTRknGF2mSzHy8v+sGTrGHIu0msbyXItnzVEuN7Rwc51lhwmzq9OzaUcnx4rlB
-vtVV3FwwMYB+lRcbVa7lZDp4Vn+9f1UuYa8rXoNzHA5Cuh1f6HeUZbxruR+K8rHl
-M6v7cXatligUMvY9LPN/ehOznbBrGcbpYgQs930B00tazuRZ+4gHK40cPrnop1b2
-GSss9kbt
-=SLgH
------END PGP SIGNATURE-----
-
---Eqin/1zXyIohTKHI--
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+https://www.linkedin.com/in/iopaniuk <http://ua.linkedin.com/in/iopaniuk>
