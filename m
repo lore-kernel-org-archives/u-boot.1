@@ -4,79 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BD47C54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 21:04:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBCC5C47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 21:36:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A6388808F;
-	Wed, 27 Mar 2024 22:04:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E9A6E87FCC;
+	Wed, 27 Mar 2024 22:36:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HYMTW4NV";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PcL9CQ0l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E70B7880A7; Wed, 27 Mar 2024 22:04:42 +0100 (CET)
-Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com
- [IPv6:2607:f8b0:4864:20::52b])
+ id 4818B8803F; Wed, 27 Mar 2024 22:36:49 +0100 (CET)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A41E38803F
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 22:04:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F135B87F95
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 22:36:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52b.google.com with SMTP id
- 41be03b00d2f7-58962bf3f89so47177a12.0
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 14:04:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-2d68c6a4630so2377221fa.3
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 14:36:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711573479; x=1712178279; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KSHN+NlqvROi30jY3rRop5fKh4iFiEwLKF9Ov2mPUrI=;
- b=HYMTW4NVpDpNk2KEKrciMHQIxOIvidzCknK9mWFn++RGbBnpn9lDfPedNI3x2yQD5O
- xx1ueNaSDI7dOoXleSZNjqBNs59kHl+6Oy2fjqzQJNuH1DfPV2f5rSqRA0J+me/dw8sL
- MB8RmqZy5RYprEFEX1R12ETenyibN/axx9tAwQ6mrzNhrW7tMo9v2LfwaYgE9BMqH8rl
- e9EXdpG7p9gH209ChtJhfoJ/tDwncEmaoVtX+0ri4PzIbAmQq/bLkSijV9pbLsW+XdxB
- 4vbB52eBtA2QkhGHTxPkpB9lWo877V5cdJYcbpQjrpcVUh6aO+zmsuUfS+WEVlwU0ACR
- smYQ==
+ d=linaro.org; s=google; t=1711575406; x=1712180206; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WWvXCyNjfOwbkIIQBXzRQ4rOxbgOKPL+bnDm9Xi4NE8=;
+ b=PcL9CQ0l1A7cUg8coXkutVGvyRRe8cKuZE/PJbVPaEIxj51nyxdTxtr/ScCcVkl/SW
+ QCtO2gyW77F6DV+jxewqpOVbCUI+lNAFtKb77jlSxJYumlQ1xQcI1HSrkm07UkE+uOsq
+ IwxMO6N4nrYo+pvxT2it+yJuPxq/dhGpIOHbdJheci5TCKu6tjSHXrx8zAylypoKz78J
+ HK+xk+A3H7QusxGJkYTUAFl/VHPrajdv5DVVGDUEf2CiysckWVSRbwRlK3EUfYQuPrdl
+ EGCWpE/W3Z3EQ/tArQtpPR4+VewZQNpFLD9CJLEkp5B+J5nSaZIiHMi0CVKRBAyDfD99
+ clLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711573479; x=1712178279;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KSHN+NlqvROi30jY3rRop5fKh4iFiEwLKF9Ov2mPUrI=;
- b=RpjIGSQdg+F5sF7uwtPUYcBXbiCX2WmFW+oFUApdGxgYLhFMJRcf5MSfVJKh40jHbh
- SIoRIeg4ATw1gb5ku2BaM90/ix26e/YZUZV247/0mRKEnMkg/X3qB3pAgHPsvWzJgJnq
- zYCJiiHIA+RsiN2piCK9i4K1qEMHsqC6i5A+CiGt4WVlliHouQUT+4pOqsMBDsaYLStB
- W978LACgBTavYab9jAssIo4jVHbzmhc5hYA8mSrZd4Vp4vJmG3Dz72151HN0Ti9Ywbeb
- Kv5wv+8jH1gyA9HESQic8CFDkvM0UWUbwU6CAUMtEjyYut/RwXv24Z8sL92iM7Vjz27H
- 74Dg==
-X-Gm-Message-State: AOJu0Yzky4dpWX1L8foQ8mdRp1o1IwKjkDifbcRl+rVrm3wY9JUFoNDE
- IgtzEI+QtLmyAa/pm7ESaZ6t/MY9j1XmxLno0ELADpCpKazxDoUlDWRF8oCGPVWvcQUpjvYPMWm
- CZkUCwJF7HJVmQ32QGkw4G5bfTDM=
-X-Google-Smtp-Source: AGHT+IELfSk7FNu4BcR+M8t9YLZUE/mvsWbhh7lMJBL9k8vKl5Ck2obRUe2un+Q5vg/Dqes1/M2SyP/hzadJJBUr9FE=
-X-Received: by 2002:a05:6a21:329f:b0:1a5:699f:289a with SMTP id
- yt31-20020a056a21329f00b001a5699f289amr1035846pzb.6.1711573479064; Wed, 27
- Mar 2024 14:04:39 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1711575406; x=1712180206;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WWvXCyNjfOwbkIIQBXzRQ4rOxbgOKPL+bnDm9Xi4NE8=;
+ b=UZhJTOqFeDW7rZUri0Z9/8Jgywa0y5xiZyrir2JOOU6nNew04C7MF+tXH5frW90KjS
+ Bye+/gVrFieoV6qoTf0I201HG3b6m3lUtq3w6FGLe+x53CefP0+hSaCG0mXbF7yvm0JE
+ NYbkHV/ftrNmYyeyBdTVqCxbnMoZ/gIsW29zjuKH2D+AzJs1nT50j702kumdxZud2YSQ
+ UvFA7tnoNa635tukd6EasOGU18OH4bsCEBbD0VGeW/eMFtfqa8otzckwTqkCAJjkHnTq
+ kWlf/DNgBeXJqlON9btOY05+K5XM8hkGfISguHmYGmk6zwLUDCy0flV0sobNbNtjOVeZ
+ wxww==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXlw4HFsvbmfHqYFPgBoatM4Kqy/qDDHOuudlrQ85DtYOsNuclggXiewpB+kyWfAjU6kdyXGLaj4rXS5+70aU4oXzE75Q==
+X-Gm-Message-State: AOJu0Yyx7ANJkfsCcJfQFHmKOxuoBzM/7rVeZgmUR/qoJfdhidoL9z8v
+ 2rPASkD9sfogFLZzjuaU2M8+QgI8eBnDHaU+RAl4aD41jMmJwFVs4B4V2AGaUiMs6WXr+vRdJzG
+ I+jq192N7yPQXmsXA38Jjhbt3yId2sJNNsf8KrA==
+X-Google-Smtp-Source: AGHT+IGHp3DT7BC4KPwFWJTU9X4EUiOExpoNI8gp8rFKvEyBKwMiALYbxhAZnuyh1UaEoLCZNITeApNkZ/I9nOPyaIU=
+X-Received: by 2002:a2e:82d5:0:b0:2d6:bb8d:d3ab with SMTP id
+ n21-20020a2e82d5000000b002d6bb8dd3abmr1005306ljh.2.1711575406108; Wed, 27 Mar
+ 2024 14:36:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20220728070540.28554-1-josua@solid-run.com>
- <CA+EmdG5+QYxVo27C-u5W6FkuDgcoey4i-md9L4b9cs1gtsv+1g@mail.gmail.com>
- <30c35e80-2015-4fac-b9dc-6902cc09c58e@solid-run.com>
- <CAOMZO5AQArxRN25J0+M1hjNSwBQUoLsGhD9cChDkfUrv3ys=Rw@mail.gmail.com>
-In-Reply-To: <CAOMZO5AQArxRN25J0+M1hjNSwBQUoLsGhD9cChDkfUrv3ys=Rw@mail.gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 27 Mar 2024 18:04:28 -0300
-Message-ID: <CAOMZO5AjeShry9xQRpEq==zswOc=aL5RoKyL=Y439t1wtkKRuA@mail.gmail.com>
-Subject: Re: [PATCH] mx6cuboxi: fix ethernet after synchronise device-tree
-To: Josua Mayer <josua@solid-run.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Yazan Shhady <yazan.shhady@solid-run.com>, 
- Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Baruch Siach <baruch@tkos.co.il>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- "christian.gmeiner@gmail.com" <christian.gmeiner@gmail.com>
-Content-Type: multipart/mixed; boundary="0000000000003a9f770614aac1a5"
+References: <20240321180219.1039622-1-tharvey@gateworks.com>
+ <CAC_iWjLwt9NxwOsYWwx4+w2vL3dtfJnJPH-eeApU-ODKf8tzBA@mail.gmail.com>
+ <CAJ+vNU0aSj5RgCUxz74hg059Qtmco4HSBCiAHA_hhw+jzxo5Dw@mail.gmail.com>
+ <CAC_iWjJ4s1ZS8X64vjV_xiOSzKf7fPBryw6eGp6tW7Vqxv2_gw@mail.gmail.com>
+ <CAJ+vNU1m=joe0mAC2ss-QmBN17Jht4d+fpba4iM0tTScy0Zngg@mail.gmail.com>
+ <CAC_iWjL6CtZ5WgASepcUZOXnF=G4uDTeVq3WnOkz+jDL+cLZzw@mail.gmail.com>
+ <CAC_iWjJCAj0sv3mdzje4ivn4Ob=tyW38K03GD=mj8_FOvK35AQ@mail.gmail.com>
+ <CAJ+vNU2v03MQXBysVxrUQwKeQH4KJjwkHXtmT3g=2f+++jsP5A@mail.gmail.com>
+In-Reply-To: <CAJ+vNU2v03MQXBysVxrUQwKeQH4KJjwkHXtmT3g=2f+++jsP5A@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 27 Mar 2024 23:36:09 +0200
+Message-ID: <CAC_iWjJ1hBrPAom1HaHTG0m+AGnNON+XwVtS6v1z+hJk4f10zA@mail.gmail.com>
+Subject: Re: [PATCH] tpm: display message when using gpio-reset instead of
+ when missing it
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
+ Jorge Ramirez-Ortiz <jorge@foundries.io>, 
+ Adam Ford <aford173@gmail.com>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ u-boot@lists.denx.de, Samuel Lee <slee@gateworks.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,132 +100,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---0000000000003a9f770614aac1a5
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Wed, 27 Mar 2024 at 20:47, Tim Harvey <tharvey@gateworks.com> wrote:
+>
+> On Wed, Mar 27, 2024 at 10:26=E2=80=AFAM Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > [...]
+> >
+> > > >
+> > > > missing an invalid property?
+> > > >
+> > > > I deal with users all the time that think things like that are
+> > > > 'errors' and contact tech support. In this case its not an error
+> > > > because there is no gpio reset in the official dt-bindings for the =
+tpm
+> > > > and its generally considered bad form to add non official propertie=
+s.
+> > > >
+> > > > And from what your explaining we shouldn't have a GPIO connected to
+> > > > the TPM so perhaps we should remove the reset completely and perhap=
+s
+> > > > even spit out a warning if present:
+> > > > ignore Invalid DT property gpio reset to conform with the TCG speci=
+fication
+> > >
+> > > We should, but those changes predate me being appointed as a TPM
+> > > maintainer. If I had to guess, I would say that was added for TPM tha=
+t
+> > > are connected on an external SPI bus (e.g the RPI).
+> > > So what about not printing the error message, keeping the code so we
+> > > won't break 'test' devices, and print a warning message like "This
+> > > shouldn't be used on secure production devices"?
+> >
+> > Unless we can get a list of the devices that *currently* use it. If
+> > they aren't that many I am fine getting rid of the reset overall (and
+> > I can test it on the RPI4)
+> >
+>
+> Adding Miquel who authored commit a174f0001f592 ("tpm2: tis_spi: add
+> the possibility to reset the chip with a gpio"):
+> On some designs, the reset line could not be connected to the SoC reset
+> line, in this case, request the GPIO and ensure the chip gets reset.
+>
+> Adding Jorge who athoried commit cc5afabc9d329 ("drivers: tpm2: update
+> reset gpio semantics"):
+> Use the more generic reset-gpios property name.
+>
+> I looked through all dts in U-Boot matching 'tpm' as well as Linux to
+> see who's using it:
+> Adding Adam who has a 'reset-gpios' in
+> arch/arm/dts/imx8mp-beacon-kit.dts (and somehow snuck it in upstream
+> as well)
+> Adding Rasmus who has a suspicious 'regulatot-tpm0-rst' (but no gpio
+> reset in tpm) in arch/arm/dts/imx8mm-cl-iot-gate-ied-tpm0.dtso
+>
+> As there is at least one board that clearly uses a gpio reset for the
+> TPM in the tpm node I think we leave the tpm reset support, eliminate
+> the warning if its missing and print a message like "Warning: TPM gpio
+> reset should not be used on secure production device"
+>
+> I'll send a v2 of my patch for review
 
-Hi Christian,
+Thanks. It's a bit unfortunate we ended up with broken devices, but if
+we remove the GPIO reset I am pretty sure the side effect will be
+having an unusable TPM after warm resets since PCRs will retain the
+pre-reboot values...
 
-On Wed, Mar 27, 2024 at 4:29=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
-
-> Please make these changes in a new imx6qdl-sr-som-u-boot.dtsi file instea=
-d.
-
-I took Josua's patch and modified it a bit.
-
-Does the attached patch fix Ethernet?
-
---0000000000003a9f770614aac1a5
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-mx6cuboxi-fix-Ethernet-after-DT-sync-with-Linux.patch"
-Content-Disposition: attachment; 
-	filename="0001-mx6cuboxi-fix-Ethernet-after-DT-sync-with-Linux.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_luaan0f60>
-X-Attachment-Id: f_luaan0f60
-
-RnJvbSAyNGY1N2MzY2Q4YjFhMmIxMTNiY2ZmYWQyNmUyYmIxYjliNTgyZTM1IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBKb3N1YSBNYXllciA8am9zdWFAc29saWQtcnVuLmNvbT4KRGF0
-ZTogV2VkLCAyNyBNYXIgMjAyNCAxNzo1ODo0NyAtMDMwMApTdWJqZWN0OiBbUEFUQ0hdIG14NmN1
-Ym94aTogRml4IEV0aGVybmV0IGFmdGVyIERUIHN5bmMgd2l0aCBMaW51eAoKVGhlIGkuTVg2IEN1
-Ym94LWkgYW5kIEh1bW1pbmdCb2FyZHMgY2FuIGhhdmUgZGlmZmVyZW50IFBIWXMgYXQgdmFyeWlu
-ZwphZGRyZXNzZXMuIFUtQm9vdCBuZWVkcyB0byBhdXRvLWRldGVjdCB3aGljaCBwaHkgaXMgYWN0
-dWFsbHkgcHJlc2VudCwKYW5kIGF0IHdoaWNoIGFkZHJlc3MgaXQgaXMgcmVzcG9uZGluZy4KCkF1
-dG8tZGV0ZWN0aW9uIGZyb20gbXVsdGlwbGUgcGh5IG5vZGVzIHNwZWNpZmllZCBpbiBkZXZpY2Ut
-dHJlZSBkb2VzIG5vdApjdXJyZW50bHkgd29yayBjb3JyZWN0LiBBcyBhIHdvcmstYXJvdW5kIG1l
-cmdlIGFsbCB0aHJlZSBwb3NzaWJsZSBwaHlzCmludG8gb25lIG5vZGUgd2l0aCB0aGUgc3BlY2lh
-bCBhZGRyZXNzIDB4ZmZmZmZmZmYgd2hpY2ggaW5kaWNhdGVzIHRvIHRoZQpnZW5lcmljIHBoeSBk
-cml2ZXIgdG8gcHJvYmUgYWxsIGFkZHJlc3Nlcy4KQWxzbyBmaXh1cCB0aGlzIGZha2UgYWRkcmVz
-cyBiZWZvcmUgYm9vdGluZyBMaW51eCwgKmlmKiBib290aW5nIHdpdGgKVS1Cb290J3MgaW50ZXJu
-YWwgZHRiLgoKU2lnbmVkLW9mZi1ieTogSm9zdWEgTWF5ZXIgPGpvc3VhQHNvbGlkLXJ1bi5jb20+
-CltmYWJpbzogQWRkZWQgdGhlIGNoYW5nZXMgdG8gaW14NnFkbC1zci1zb20tdS1ib290LmR0c2ku
-XQpTaWduZWQtb2ZmLWJ5OiBGYWJpbyBFc3RldmFtIDxmZXN0ZXZhbUBnbWFpbC5jb20+Ci0tLQog
-Li4ucWRsLWh1bW1pbmdib2FyZDItZW1tYy1zb20tdjE1LXUtYm9vdC5kdHNpIHwgIDEgKwogYXJj
-aC9hcm0vZHRzL2lteDZxZGwtc3Itc29tLXUtYm9vdC5kdHNpICAgICAgIHwgNzYgKysrKysrKysr
-KysrKysrKysrKwogYm9hcmQvc29saWRydW4vbXg2Y3Vib3hpL214NmN1Ym94aS5jICAgICAgICAg
-IHwgIDggKy0KIDMgZmlsZXMgY2hhbmdlZCwgODQgaW5zZXJ0aW9ucygrKSwgMSBkZWxldGlvbigt
-KQogY3JlYXRlIG1vZGUgMTAwNjQ0IGFyY2gvYXJtL2R0cy9pbXg2cWRsLXNyLXNvbS11LWJvb3Qu
-ZHRzaQoKZGlmZiAtLWdpdCBhL2FyY2gvYXJtL2R0cy9pbXg2cWRsLWh1bW1pbmdib2FyZDItZW1t
-Yy1zb20tdjE1LXUtYm9vdC5kdHNpIGIvYXJjaC9hcm0vZHRzL2lteDZxZGwtaHVtbWluZ2JvYXJk
-Mi1lbW1jLXNvbS12MTUtdS1ib290LmR0c2kKaW5kZXggZTliMTg4ZWQ2NTg3Li4zNThjZjhhYmM0
-ZmYgMTAwNjQ0Ci0tLSBhL2FyY2gvYXJtL2R0cy9pbXg2cWRsLWh1bW1pbmdib2FyZDItZW1tYy1z
-b20tdjE1LXUtYm9vdC5kdHNpCisrKyBiL2FyY2gvYXJtL2R0cy9pbXg2cWRsLWh1bW1pbmdib2Fy
-ZDItZW1tYy1zb20tdjE1LXUtYm9vdC5kdHNpCkBAIC0xLDYgKzEsNyBAQAogLy8gU1BEWC1MaWNl
-bnNlLUlkZW50aWZpZXI6IEdQTC0yLjArCiAKICNpbmNsdWRlICJpbXg2cWRsLXUtYm9vdC5kdHNp
-IgorI2luY2x1ZGUgImlteDZxZGwtc3Itc29tLXUtYm9vdC5kdHNpIgogCiAvIHsKIAlib2FyZC1k
-ZXRlY3QgewpkaWZmIC0tZ2l0IGEvYXJjaC9hcm0vZHRzL2lteDZxZGwtc3Itc29tLXUtYm9vdC5k
-dHNpIGIvYXJjaC9hcm0vZHRzL2lteDZxZGwtc3Itc29tLXUtYm9vdC5kdHNpCm5ldyBmaWxlIG1v
-ZGUgMTAwNjQ0CmluZGV4IDAwMDAwMDAwMDAwMC4uM2YyZDkyYmU3MDYxCi0tLSAvZGV2L251bGwK
-KysrIGIvYXJjaC9hcm0vZHRzL2lteDZxZGwtc3Itc29tLXUtYm9vdC5kdHNpCkBAIC0wLDAgKzEs
-NzYgQEAKKy8qCisgKiBDb3B5cmlnaHQgKEMpIDIwMTMsMjAxNCBSdXNzZWxsIEtpbmcKKyAqCisg
-KiBUaGlzIGZpbGUgaXMgZHVhbC1saWNlbnNlZDogeW91IGNhbiB1c2UgaXQgZWl0aGVyIHVuZGVy
-IHRoZSB0ZXJtcworICogb2YgdGhlIEdQTCBvciB0aGUgWDExIGxpY2Vuc2UsIGF0IHlvdXIgb3B0
-aW9uLiBOb3RlIHRoYXQgdGhpcyBkdWFsCisgKiBsaWNlbnNpbmcgb25seSBhcHBsaWVzIHRvIHRo
-aXMgZmlsZSwgYW5kIG5vdCB0aGlzIHByb2plY3QgYXMgYQorICogd2hvbGUuCisgKgorICogIGEp
-IFRoaXMgZmlsZSBpcyBmcmVlIHNvZnR3YXJlOyB5b3UgY2FuIHJlZGlzdHJpYnV0ZSBpdCBhbmQv
-b3IKKyAqICAgICBtb2RpZnkgaXQgdW5kZXIgdGhlIHRlcm1zIG9mIHRoZSBHTlUgR2VuZXJhbCBQ
-dWJsaWMgTGljZW5zZQorICogICAgIHZlcnNpb24gMiBhcyBwdWJsaXNoZWQgYnkgdGhlIEZyZWUg
-U29mdHdhcmUgRm91bmRhdGlvbi4KKyAqCisgKiAgICAgVGhpcyBmaWxlIGlzIGRpc3RyaWJ1dGVk
-IGluIHRoZSBob3BlIHRoYXQgaXQgd2lsbCBiZSB1c2VmdWwsCisgKiAgICAgYnV0IFdJVEhPVVQg
-QU5ZIFdBUlJBTlRZOyB3aXRob3V0IGV2ZW4gdGhlIGltcGxpZWQgd2FycmFudHkgb2YKKyAqICAg
-ICBNRVJDSEFOVEFCSUxJVFkgb3IgRklUTkVTUyBGT1IgQSBQQVJUSUNVTEFSIFBVUlBPU0UuICBT
-ZWUgdGhlCisgKiAgICAgR05VIEdlbmVyYWwgUHVibGljIExpY2Vuc2UgZm9yIG1vcmUgZGV0YWls
-cy4KKyAqCisgKiBPciwgYWx0ZXJuYXRpdmVseSwKKyAqCisgKiAgYikgUGVybWlzc2lvbiBpcyBo
-ZXJlYnkgZ3JhbnRlZCwgZnJlZSBvZiBjaGFyZ2UsIHRvIGFueSBwZXJzb24KKyAqICAgICBvYnRh
-aW5pbmcgYSBjb3B5IG9mIHRoaXMgc29mdHdhcmUgYW5kIGFzc29jaWF0ZWQgZG9jdW1lbnRhdGlv
-bgorICogICAgIGZpbGVzICh0aGUgIlNvZnR3YXJlIiksIHRvIGRlYWwgaW4gdGhlIFNvZnR3YXJl
-IHdpdGhvdXQKKyAqICAgICByZXN0cmljdGlvbiwgaW5jbHVkaW5nIHdpdGhvdXQgbGltaXRhdGlv
-biB0aGUgcmlnaHRzIHRvIHVzZSwKKyAqICAgICBjb3B5LCBtb2RpZnksIG1lcmdlLCBwdWJsaXNo
-LCBkaXN0cmlidXRlLCBzdWJsaWNlbnNlLCBhbmQvb3IKKyAqICAgICBzZWxsIGNvcGllcyBvZiB0
-aGUgU29mdHdhcmUsIGFuZCB0byBwZXJtaXQgcGVyc29ucyB0byB3aG9tIHRoZQorICogICAgIFNv
-ZnR3YXJlIGlzIGZ1cm5pc2hlZCB0byBkbyBzbywgc3ViamVjdCB0byB0aGUgZm9sbG93aW5nCisg
-KiAgICAgY29uZGl0aW9uczoKKyAqCisgKiAgICAgVGhlIGFib3ZlIGNvcHlyaWdodCBub3RpY2Ug
-YW5kIHRoaXMgcGVybWlzc2lvbiBub3RpY2Ugc2hhbGwgYmUKKyAqICAgICBpbmNsdWRlZCBpbiBh
-bGwgY29waWVzIG9yIHN1YnN0YW50aWFsIHBvcnRpb25zIG9mIHRoZSBTb2Z0d2FyZS4KKyAqCisg
-KiAgICAgVEhFIFNPRlRXQVJFIElTIFBST1ZJREVEICJBUyBJUyIsIFdJVEhPVVQgV0FSUkFOVFkg
-T0YgQU5ZIEtJTkQsCisgKiAgICAgRVhQUkVTUyBPUiBJTVBMSUVELCBJTkNMVURJTkcgQlVUIE5P
-VCBMSU1JVEVEIFRPIFRIRSBXQVJSQU5USUVTCisgKiAgICAgT0YgTUVSQ0hBTlRBQklMSVRZLCBG
-SVRORVNTIEZPUiBBIFBBUlRJQ1VMQVIgUFVSUE9TRSBBTkQKKyAqICAgICBOT05JTkZSSU5HRU1F
-TlQuIElOIE5PIEVWRU5UIFNIQUxMIFRIRSBBVVRIT1JTIE9SIENPUFlSSUdIVAorICogICAgIEhP
-TERFUlMgQkUgTElBQkxFIEZPUiBBTlkgQ0xBSU0sIERBTUFHRVMgT1IgT1RIRVIgTElBQklMSVRZ
-LAorICogICAgIFdIRVRIRVIgSU4gQU4gQUNUSU9OIE9GIENPTlRSQUNULCBUT1JUIE9SIE9USEVS
-V0lTRSwgQVJJU0lORworICogICAgIEZST00sIE9VVCBPRiBPUiBJTiBDT05ORUNUSU9OIFdJVEgg
-VEhFIFNPRlRXQVJFIE9SIFRIRSBVU0UgT1IKKyAqICAgICBPVEhFUiBERUFMSU5HUyBJTiBUSEUg
-U09GVFdBUkUuCisgKi8KKyNpbmNsdWRlIDxkdC1iaW5kaW5ncy9ncGlvL2dwaW8uaD4KKworJmZl
-YyB7CisJcGluY3RybC1uYW1lcyA9ICJkZWZhdWx0IjsKKwlwaW5jdHJsLTAgPSA8JnBpbmN0cmxf
-bWljcm9zb21fZW5ldF9hcjgwMzU+OworCXBoeS1oYW5kbGUgPSA8JnBoeT47CisJcGh5LW1vZGUg
-PSAicmdtaWktaWQiOworCisJLyoKKwkgKiBUaGUgUEhZIHNlZW1zIHRvIHJlcXVpcmUgYSBsb25n
-LWVub3VnaCByZXNldCBkdXJhdGlvbiB0byBhdm9pZAorCSAqIHNvbWUgcmFyZSBpc3N1ZXMgd2hl
-cmUgdGhlIFBIWSBnZXRzIHN0dWNrIGluIGFuIGluY29uc2lzdGVudCBhbmQKKwkgKiBub24tZnVu
-Y3Rpb25hbCBzdGF0ZSBhdCBib290LXVwLiAxMG1zIHByb3ZlZCB0byBiZSBmaW5lIC4KKwkgKi8K
-KwlwaHktcmVzZXQtZHVyYXRpb24gPSA8MTA+OworCXBoeS1yZXNldC1ncGlvcyA9IDwmZ3BpbzQg
-MTUgR1BJT19BQ1RJVkVfTE9XPjsKKwlzdGF0dXMgPSAib2theSI7CisKKwltZGlvIHsKKwkJI2Fk
-ZHJlc3MtY2VsbHMgPSA8MT47CisJCSNzaXplLWNlbGxzID0gPDA+OworCisKKwkJcGh5OiBldGhl
-cm5ldC1waHlAMCB7CisJCQkvKgorCQkJICogVGhlIFBIWSBjYW4gYXBwZWFyIGVpdGhlcjoKKwkJ
-CSAqIC0gQVI4MDM1OiBhdCBhZGRyZXNzIDAgb3IgNAorCQkJICogLSBBRElOMTMwMDogYXQgYWRk
-cmVzcyAxCisJCQkgKiBBY3R1YWwgYWRkcmVzcyBiZWluZyBkZXRlY3RlZCBhdCBydW50aW1lLgor
-CQkJICovCisJCQlyZWcgPSA8MHhmZmZmZmZmZj47CisJCQlxY2EsY2xrLW91dC1mcmVxdWVuY3kg
-PSA8MTI1MDAwMDAwPjsKKwkJCXFjYSxzbWFydGVlZS10dy11cy0xZyA9IDwyND47CisJCQlhZGks
-cGh5LW91dHB1dC1jbG9jayA9ICIxMjVtaHotZnJlZS1ydW5uaW5nIjsKKwkJfTsKKwl9OworfTsK
-ZGlmZiAtLWdpdCBhL2JvYXJkL3NvbGlkcnVuL214NmN1Ym94aS9teDZjdWJveGkuYyBiL2JvYXJk
-L3NvbGlkcnVuL214NmN1Ym94aS9teDZjdWJveGkuYwppbmRleCA4ZWRhYmY0NDA0YzIuLmZiYWIz
-OWU4MDBhNiAxMDA2NDQKLS0tIGEvYm9hcmQvc29saWRydW4vbXg2Y3Vib3hpL214NmN1Ym94aS5j
-CisrKyBiL2JvYXJkL3NvbGlkcnVuL214NmN1Ym94aS9teDZjdWJveGkuYwpAQCAtNDQ3LDcgKzQ0
-Nyw3IEBAIHN0YXRpYyBpbnQgZmluZF9ldGhlcm5ldF9waHkodm9pZCkKICAqLwogaW50IGZ0X2Jv
-YXJkX3NldHVwKHZvaWQgKmZkdCwgc3RydWN0IGJkX2luZm8gKmJkKQogewotCWludCBub2RlX3Bo
-eTAsIG5vZGVfcGh5MSwgbm9kZV9waHk0OworCWludCBub2RlX3BoeSwgbm9kZV9waHkwLCBub2Rl
-X3BoeTEsIG5vZGVfcGh5NDsKIAlpbnQgcmV0LCBwaHk7CiAJYm9vbCBlbmFibGVfcGh5MCA9IGZh
-bHNlLCBlbmFibGVfcGh5MSA9IGZhbHNlLCBlbmFibGVfcGh5NCA9IGZhbHNlOwogCWVudW0gYm9h
-cmRfdHlwZSBib2FyZDsKQEAgLTQ3OSw2ICs0NzksMTIgQEAgaW50IGZ0X2JvYXJkX3NldHVwKHZv
-aWQgKmZkdCwgc3RydWN0IGJkX2luZm8gKmJkKQogCQlyZXR1cm4gMDsKIAl9CiAKKwkvLyB1cGRh
-dGUgVS1Cb290J3Mgb3duIHVuaWZpZWQgcGh5IG5vZGUgcGh5IGFkZHJlc3MsIGlmIHByZXNlbnQK
-Kwlub2RlX3BoeSA9IGZkdF9wYXRoX29mZnNldChmZHQsICIvc29jL2J1c0AyMTAwMDAwL2V0aGVy
-bmV0QDIxODgwMDAvbWRpby9waHkiKTsKKwlyZXQgPSBmZHRfc2V0cHJvcF91MzIoZmR0LCBub2Rl
-X3BoeSwgInJlZyIsIHBoeSk7CisJaWYgKHJldCA8IDApCisJCXByX2VycigiJXM6IGZhaWxlZCB0
-byB1cGRhdGUgdW5pZmllZCBQSFkgbm9kZSBhZGRyZXNzXG4iLCBfX2Z1bmNfXyk7CisKIAkvLyB1
-cGRhdGUgYWxsIHBoeSBub2RlcyBzdGF0dXMKIAlub2RlX3BoeTAgPSBmZHRfcGF0aF9vZmZzZXQo
-ZmR0LCAiL3NvYy9idXNAMjEwMDAwMC9ldGhlcm5ldEAyMTg4MDAwL21kaW8vZXRoZXJuZXQtcGh5
-QDAiKTsKIAlyZXQgPSBmZHRfc2V0cHJvcF9zdHJpbmcoZmR0LCBub2RlX3BoeTAsICJzdGF0dXMi
-LCBlbmFibGVfcGh5MCA/ICJva2F5IiA6ICJkaXNhYmxlZCIpOwotLSAKMi4zNC4xCgo=
---0000000000003a9f770614aac1a5--
+/Ilias
+>
+> Best Regards,
+>
+> Tim
+> [1] https://patchwork.ozlabs.org/project/uboot/patch/20240321180219.10396=
+22-1-tharvey@gateworks.com/
+>
+> > Cheers
+> > /Ilias
+> > >
+> > > Regards
+> > > /Ilias
+> > > >
+> > > > Best regards,
+> > > >
+> > > > Tim
+> > > >
+> > > > >
+> > > > > Thanks
+> > > > > /Ilias
+> > > > > >
+> > > > > > Best Regards,
+> > > > > >
+> > > > > > Tim
+> > > > > > [1] https://ww1.microchip.com/downloads/en/DeviceDoc/ATTPM20P-T=
+rusted-Platform-Module-TPM-2.0-SPI-Interface-Summary-Data-Sheet-DS40002082A=
+.pdf
+> > > > > >
+> > > > > >
+> > > > > > > Thanks
+> > > > > > > /Ilias
+> > > > > > > >
+> > > > > > > > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> > > > > > > > ---
+> > > > > > > >  drivers/tpm/tpm2_tis_spi.c | 8 ++++----
+> > > > > > > >  1 file changed, 4 insertions(+), 4 deletions(-)
+> > > > > > > >
+> > > > > > > > diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_=
+tis_spi.c
+> > > > > > > > index de9cf8f21e07..944540f7a711 100644
+> > > > > > > > --- a/drivers/tpm/tpm2_tis_spi.c
+> > > > > > > > +++ b/drivers/tpm/tpm2_tis_spi.c
+> > > > > > > > @@ -237,14 +237,14 @@ static int tpm_tis_spi_probe(struct u=
+device *dev)
+> > > > > > > >                         /* legacy reset */
+> > > > > > > >                         ret =3D gpio_request_by_name(dev, "=
+gpio-reset", 0,
+> > > > > > > >                                                    &reset_g=
+pio, GPIOD_IS_OUT);
+> > > > > > > > -                       if (ret) {
+> > > > > > > > -                               log(LOGC_NONE, LOGL_NOTICE,
+> > > > > > > > -                                   "%s: missing reset GPIO=
+\n", __func__);
+> > > > > > > > +                       if (ret)
+> > > > > > > >                                 goto init;
+> > > > > > > > -                       }
+> > > > > > > >                         log(LOGC_NONE, LOGL_NOTICE,
+> > > > > > > >                             "%s: gpio-reset is deprecated\n=
+", __func__);
+> > > > > > > >                 }
+> > > > > > > > +               log(LOGC_NONE, LOGL_NOTICE,
+> > > > > > > > +                   "%s: performing 1ms reset on %s:%d\n", =
+dev->name,
+> > > > > > > > +                   reset_gpio.dev->name, reset_gpio.offset=
+);
+> > > > > > > >                 dm_gpio_set_value(&reset_gpio, 1);
+> > > > > > > >                 mdelay(1);
+> > > > > > > >                 dm_gpio_set_value(&reset_gpio, 0);
+> > > > > > > > --
+> > > > > > > > 2.25.1
+> > > > > > > >
