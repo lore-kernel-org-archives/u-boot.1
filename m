@@ -4,79 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F0DEC47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 08:50:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5907DC47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 08:56:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DF348803A;
-	Wed, 27 Mar 2024 09:50:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C054B88044;
+	Wed, 27 Mar 2024 09:56:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sZ0QosNt";
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="QK2yXgos";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97A1688044; Wed, 27 Mar 2024 09:50:29 +0100 (CET)
-Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
- [IPv6:2a00:1450:4864:20::52f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C955D8805B; Wed, 27 Mar 2024 09:56:21 +0100 (CET)
+Received: from EUR04-DB3-obe.outbound.protection.outlook.com
+ (mail-db3eur04on0721.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe0c::721])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABC8787F36
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 09:50:27 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ed1-x52f.google.com with SMTP id
- 4fb4d7f45d1cf-56a2bb1d84eso1044413a12.1
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 01:50:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711529427; x=1712134227; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/7EaowtJXBz9w+90gjXpdaHouzzLrrXTFxKKtxK/ADY=;
- b=sZ0QosNtKvqEjz5I176W24tLOluX9akaxes7rHFaRdSFl/7zIU5xXIANRc52Vsue0M
- 70tXp3ZI860JPlJIXfLQMVBA8xA3PtvUMV2NaYXkCeU0o+nl2HuWsfu2vh80k0dw2IoO
- A8GWvq93IIiOEZFbpnQP0sCsk3AqbN0sParWJ015Fa8WpOs11rKtaq3sz8AEgMUKwFGx
- at6YL24a/5LY0+DgOcaSHKndBIhzT+nBJDeeAkeCVrAKyHrObD62k0Bzhk/4Nq8Pul3r
- EoZeXWrXEY7OZfbEh6ExHE/yt2W5zxIX8KXe6Id3XhC40ExIv6oPerY/e9KXuN9YGvxY
- zZ3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711529427; x=1712134227;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/7EaowtJXBz9w+90gjXpdaHouzzLrrXTFxKKtxK/ADY=;
- b=JWgkceuJie/TaPnm1dOD5t4UmFiRaGelKp9HdpxVYYzOAxe4EbiATM8Fr3fzAihbdE
- egTZ5I0fAYfScAwm24IOgiXpEsoLiCXfwBM7SmeOmn9aVgsDCOvBLRFlQ9FRf3opYhxo
- qj1N5pYVDmVAu0LI0FfNXHrQNOry/s8T4GTJ8iHAhY3JjX0TJqFiRzvR60bvnh+afBBT
- 1MNdf8LxZy/oj4F6sIzuMhGoOaVZuIsRJpkAY5SPR78A+pid9+QGj5LZ5k2tO3d3ZFQO
- z7F4c7lXDBrRHeBnqiOcUwkWWoUvfNMTKVXsBoAP2PYMy7fbDWlcaKahT4BInNwd9TcM
- ui8Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWKu7wpnBeoND/zOOBAnQMD36nmZ6rQA4xCnyR3HXM7xOBOTloI7tjmko4H+N4oQsxhEAHrhKiJf4XXJ8dvcSAaV/bLfg==
-X-Gm-Message-State: AOJu0Yzp98KbGmteEXBtXIkKeAChlC97BY6tczpOIzaMifwp+blLJ0cI
- LLXg+5B5bmwkPKpTY153Cj9s3SpNDfT6yBIGpK5GAL4Qcgs6qrlzU4rF57njF8cXIwTPXYy1ZPL
- v9iAd9dmncxPmzR5JtrRGv93FhwiDMaEe2zAYbA==
-X-Google-Smtp-Source: AGHT+IHcgg06eh38KaVtyCx/QU/8SCEbfE3ppdn7T3UZCa+UIIaBE9EX97QmrK9A7sD9KrUsr0YcpFfZo+lFFINxnMk=
-X-Received: by 2002:a50:9b4d:0:b0:56b:d1c6:66a5 with SMTP id
- a13-20020a509b4d000000b0056bd1c666a5mr3100911edj.6.1711529427033; Wed, 27 Mar
- 2024 01:50:27 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id BB1288573F
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 09:56:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=theobroma-systems.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=quentin.schulz@theobroma-systems.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=kEZrQ1DhaOGe2nBpaKd50FtAbc5tWE4KtzOTMZB1mtldlhZ3beRjSRinPZhr4xFKL2GfW4NM7rZTEP/0oven6En9wFAU09TWh4ZzYqmuOQwYAxZkL9Rot1/uP7peUYzIxGppED09agOiiRrBSWSRRRkqp7Fcca/STMCBdPEA4+dcwiJq+hEhSBBtMU7nZDPD9ZGtsvwr3iU5qgkR+XVoPGN97Bcs4+TP6uMIdsfrmanABAcCLDGsyDhj4NnitOVk4BwTwtV/CkFiwZHghgYyOQYHwoerTlS492VV71LhjxZhxZDS1EL4SP4+aRa7fUGt1dzNV40BpALyao8oJYHd+g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0Y+nn3W5uHMIvqOu/OVfBl3x6gx6rLlFnjf4Gtpxwno=;
+ b=cMxpWqkwqo4/9GFes3uz5Sj2GrJ61t6M/Mc8wEWCA93xJsBsKfD1RpDgAXgGGQZHsK9XZ8WdWYigv4lMP7N6lFaTIQaAf8+By8ZmJpnipxG6znQRFKfsd6W56CYJ/+B3/A5vBssVN1VLTO8T7QsXrM1iUOZngjBA+f1JOYPehoHfv3fSoS4W1d2eMIjTF3jVXpHIcMUyQSGX5lKc9qvQy4m3c9BPhfntlvTP9AtN+ke6YWEId/CUeppSEwbaQSDYNxW3yGHl8pnXN+PKoZ0CZF0inyeWrFIRN+AoEPRkZa7/M8uPdjq+IjqXbWkqvRzsdIApV0+68T5yEQOngzjpjw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
+ header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0Y+nn3W5uHMIvqOu/OVfBl3x6gx6rLlFnjf4Gtpxwno=;
+ b=QK2yXgos1WbqIy7e3rSKgZEtcHtvvoqbgT5JzxEk3kCHFniuWQIW4OwFkZFFva+Uy9oi5d/Le4KdiyIZUAauVyev9//gN1dKTl/8vHahHPwV18n//FVogCnLvNkudU37+FbSDtjy2ts70uqIowkuDkTjfnEyqhoBU79fxLv6xMBgttyxuNEWGMKOWi0YJ+1c/oUs7QqkJ+qnsXOCxAk+dDj2psyWvnOhJNJRTzoT2OLyZBDuPQwuMoa/OaOKXruzcGmLM9NiGMoxt7qKeCNq7s+p5CnkJjgdodzQlEzLs5RMamOcRkWKPo4PRblDpEswuyKdynsHV1IIdUxMx/UzxA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
+ by PA4PR04MB9368.eurprd04.prod.outlook.com (2603:10a6:102:2ab::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.30; Wed, 27 Mar
+ 2024 08:56:17 +0000
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::23:4118:ae4a:8dda]) by DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::23:4118:ae4a:8dda%5]) with mapi id 15.20.7409.031; Wed, 27 Mar 2024
+ 08:56:16 +0000
+Message-ID: <a162464f-8cf6-4229-9062-f1369769af20@theobroma-systems.com>
+Date: Wed, 27 Mar 2024 09:56:14 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mmc: rockchip_sdhci: Revert 4 blocks PIO mode read limit
+ for RK35xx
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240326233502.2625015-1-jonas@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+In-Reply-To: <20240326233502.2625015-1-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA0P291CA0011.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1::23) To DU2PR04MB8536.eurprd04.prod.outlook.com
+ (2603:10a6:10:2d7::10)
 MIME-Version: 1.0
-References: <20240327023451.2288523-1-j-humphreys@ti.com>
-In-Reply-To: <20240327023451.2288523-1-j-humphreys@ti.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 27 Mar 2024 14:20:14 +0530
-Message-ID: <CADg8p94FjRoYkvdSHJ=2MycXceXDOQeES1S6VCNAuJ5ZBZqDow@mail.gmail.com>
-Subject: Re: [RFC] Makefile.lib: find capsule ESL dtsi file when
- CONFIG_OF_UPSTREAM=y
-To: Jonathan Humphreys <j-humphreys@ti.com>
-Cc: Masahisa Kojima <masahisa.kojima@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|PA4PR04MB9368:EE_
+X-MS-Office365-Filtering-Correlation-Id: f5a64e07-d0c2-490a-30ff-08dc4e3bc359
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: MOJo/pBFKMmboE5yIka00NrCjATZB56ngebbeCxpL2QDxZ1ggb8SN9skXzjgPe+r4V3QhhvHN6I2EanCYuebhFVQ4bp/Y1994KinMrVnmt8g3uNAnQM6igRDEYgRUwlQiu0DanAmktgV09b+d753ENC5tZ/FM8mJvqS8iatDYtamYQBbCkUhDC8CsRC79/EKmbpg3+vbG/KtVDjxo8wlhpTKI4Ar29WJ0b3kGI22WVcJ4pBUJojyCE/vwVTaa1Xjpcy/jmNjJKQNeMYQAyMJjWA/DD0rpS1mI58VjPghbPKUkLKFOvansE3hRPqwVGobfUMRN0i9SVK0zhs921+ZSZ/O3Jwfs0EzMYhPClsEn+9FNtCZ4RSXvw/pKFWzTb2pqn260G2Fx//Cppiy8ypp18kt1NHUIPN0DqqO1ugHAsBLhURr6aQQgAqZcgnI2HMrTew1cPwPLMtdznwBpZYM1VowE/Iketx0WYsDWyVhywWAIbnge+YHYXfEWmbPxrTjAhZotqd8Rg1LMOTeG/EODoKXIpBHdTnGUQmkQpUZg0RYRAbKng4bvqJvhXPfp0ppqEhUFLV4+FFNji1H3TefWIUgWRTrNDWR4p3YnmLehaouCeRQv1b1NfX07eetHQLqhZBbNACzVM1U6XhffSLDG6FdSHozw563C3yiAKwTtbg=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376005)(1800799015)(366007); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QnNLTFRQYXFLOC9nbWNhMTZDRytnZUxOb3FzMnFKUlNLdUx2bzZ6S1l0YjVU?=
+ =?utf-8?B?ZWQxWFpzYTZyeHkzV2taT2F4Yk9veHd2VmhUR3dNMjhDOUJFc0I1NldtMFp3?=
+ =?utf-8?B?cDVRTk1McXdYaVhlV0NGOFRPNXkrWWRTekdTWDVCMGNha24xS2ZVa1VCQ3pG?=
+ =?utf-8?B?Y042NTJablFjVTV0ODNTREt1bWFicmhKWXpTUStVSzBBZkhsajdERnZSTmJS?=
+ =?utf-8?B?M1FkSTJWVlF3THAzYVZHQTV1NWkwcDdSOUNGR2NZTmVoeWxGalRWMkE2ZWJp?=
+ =?utf-8?B?RWNzSDVnbWc4VklhVHVTaXNmNXhGcFR3S1hJK2tpZ0s2WHR6N3RGNjQ0Y3JD?=
+ =?utf-8?B?UXgzVEM3TzZ0c05hUjh5YkU2SS9sLzMraFpXTlN5a0FSaS95M0RhTmwrNWdh?=
+ =?utf-8?B?VjhDdzlxZ09USHF6UzFlM0ZWZGExbXppNXZQZ1JLYjNkblVjQWlwM3RQQVJq?=
+ =?utf-8?B?dFlZUzhEQlJzY25kVmpjUEVmek14UmZqVEZiVmY1YmVRVG9vSzlvSy93bWth?=
+ =?utf-8?B?eVVFY3VyQjZGRGNSTW4wZm4rTlBoWklsQytKV090LzNIQUFNWnBzRmt6NkFD?=
+ =?utf-8?B?ZlJiYWttQUYxUEd1cEJRUjdYN2oveUxHWUZSNXR5aXNPQ2JibFEzZnVkRHp4?=
+ =?utf-8?B?S2oyUEc0aHk1eWhSVDFzd2lXNEpxOUdIT1RXdXVNLzFxRDNsNzJFRUNpQ2Vs?=
+ =?utf-8?B?cDFqQmZWcHdHOW8wNnNwd1htamVCZGJCT2dSRUlnc0RxaTFGTCtBSk1aY2d6?=
+ =?utf-8?B?UmtZcWhNNmt2VVphVjNQMDVZUEhZTmQxeVZ0MVZDYmdZMzFEdWZicmhCbVRO?=
+ =?utf-8?B?L3NySWVDb29SWWxlVjBiRjR2RHlwTjFQbHVCYWxBKzI3bXRpaEovOGx0YURS?=
+ =?utf-8?B?MStpUmVObUFhc1RRWmVmL0RYTlB3Y25aZnRucUxKMzF5MEVHVEhLU2RYTkcy?=
+ =?utf-8?B?ZWJvLytNRmFUbDJJcThmemZZYVlKRmhwSzBnVGIzRmNSUXdsZGdubWpKU0Zq?=
+ =?utf-8?B?UWZ1WTFudjd1Z0FTMTVoUGh0N2lTNWNIMStqMFkwcnM4VTBJam1IRnBDbjZz?=
+ =?utf-8?B?MkhKRG1nWXJ6enM3SDVPOEplbUNMejd1QTMwaDE2c1FjVndzajQ0Wm5vOWhR?=
+ =?utf-8?B?NHErR0NCRUxDRTVwc0xKNUVHVmwwMXE4Z0ozRW95dkJOZGNSS016dE45aW9q?=
+ =?utf-8?B?QjFYSFFLeGtHSk1tZktKdkdnNTBUaGhpWUZBek90a0xWSDNBdnJkanRuSG9n?=
+ =?utf-8?B?N3RIdmdzNWlsNk9zVVhmU1RjWEx4emJnM3ZWeWE0ZHFlYjVwaVRVS3h5R0lj?=
+ =?utf-8?B?ZXp5MzUwK1FYaEJXZGR1Q3JaTnd0QmM1RFhKa1A4akl1U0c1OUhVa1hSOExn?=
+ =?utf-8?B?S2N6aXMyYTN0bWtlbFd2aExDMFdsSi9PLzBNSkUwdWdVMDJnVnJ0RHZwb0Va?=
+ =?utf-8?B?eGdoM0JXOXBXYmtWWHRLZTdTT01lSDlZdFNXRVc4OC9FcmFKSmJtT2ZCSEVa?=
+ =?utf-8?B?Vyt2REsxYkY1MHd2WitQa0l5VTdmTjRpa20rRWxtSHZHSDZrWTcrdlAxRUlu?=
+ =?utf-8?B?SmJrdFVMU0RXdzNGN0VHUFdDbXA1QkdrTW9hUFpzVENTUThwS09LT0laYXkx?=
+ =?utf-8?B?Vkx2cWZySGs5dUl0YzAzTDV0a3piMVpackpwTUxtYy84ZkVrdjdxTGNBazBi?=
+ =?utf-8?B?TG4xOXVtNUJGYzlVaTFrODVSdGU0T1NqOElscXVrMkV6dmtPUHRKaE9NcURr?=
+ =?utf-8?B?aXg0UmR3NTJNaVJ6aHhLU2hTR3hjdUo4WjlHY0RkSy9YVjlBWVFEOUdqUmVp?=
+ =?utf-8?B?Slh2RGljb284Z0Q2cWx5cTZEOHJDWkc1OFcrR1pxVEZxVXloWkVmTmJwbTBh?=
+ =?utf-8?B?S0pnRnpFUGM5Q3N4K3d4YmpMbTdaOXRsZGxNTnNhWk1ueW1tdUw0aTk2cjlz?=
+ =?utf-8?B?cDJkZGJCbU1sQmVUenFPVVdFa09aQUVkdDZ6UXZBVHhmYVp5T1FTTFdMTHJS?=
+ =?utf-8?B?ZXZ5TlpjemVvNmtUaGhjT3pFZ0Y5eEdMellYaXp5OW1GejVnREl6WTZIM2pK?=
+ =?utf-8?B?VXBCM0M2cXZsZm8zQmp6SUo5MDV1N1RueUdyVmpKbm1ubjVMVTNNa1JZaTlt?=
+ =?utf-8?B?T3BMaEdMTHkvTDN1clNGbDZhZi9IS3RSV28rTHFTL0hzOExBOVI1dzNOVHNi?=
+ =?utf-8?B?QmRxcVFBNFFPZzZmZFJ3VnFjOWNGOHZ0bXhzSUVoYnZQU2VtMmZvUzBXZFJ1?=
+ =?utf-8?B?S0dvZExvQmVQdnE3TW1hZjNLOUxBPT0=?=
+X-OriginatorOrg: theobroma-systems.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f5a64e07-d0c2-490a-30ff-08dc4e3bc359
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2024 08:56:16.8723 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: KiaAOCA0ffqtQOqB7UXT4/VfcqvrKLg6LyegyYoVUQccoBm2Nsnx0V+SdVty6p/naeJqbVO4ikzSqEpi1EKAV5jl9IWEOrr1/RYfk3L0uwrl0gT7jKCT1cxsIPZgHcFI
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB9368
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,57 +149,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-hi Jonathan,
+Hi Jonas,
 
-On Wed, 27 Mar 2024 at 08:05, Jonathan Humphreys <j-humphreys@ti.com> wrote:
->
-> When CONFIG_OF_UPSTREAM is enabled, DTS files are in SOC subdirectories (vs the
-> top level dts directory), but when CONFIG_EFI_CAPSULE_AUTHENTICATE is enabled,
-> the dynamically created dtsi file containing the capsule ESL DT node is in the
-> parent directory.  This results in a build failure because the #include inserted
-> in the DTS file is local to the current directory.  Update Makefile to have the
-> DT preprocessing of #includes search in the parent (dts top level) directory
-> too.
->
-> I'm not sure if this is the best solution.
->
-> I was also tempted to just manually include the capsule-key property in the
-> board dts, and avoid the Makefile implicit inclusion trickery.  I would actually
-> prefer this approach as everything is more explicit.  But this isn't an option
-> because if CONFIG_EFI_CAPSULE_AUTHENTICATE is enabled, the implicit inclusion of
-> the dtsi file happens.  It would be better, IMO, if we only included the
-> generated dtsi file if CONFIG_EFI_CAPSULE_ESL_FILE is defined.  Was only
-> supporting the implicit inclusiong approach an intentional design choice?
+On 3/27/24 00:35, Jonas Karlman wrote:
+> The commit 2cc6cde647e2 ("mmc: rockchip_sdhci: Limit number of blocks
+> read in a single command") introduced a limit of number of blocks to
+> read to fix a Data End Bit Error on RK3568 and RK3588. This had a side
+> affect of significant slowing down reading FIT from eMMC.
+> 
+> After the commit 6de9d7b2f13c ("rockchip: rk35xx: Enable eMMC HS200 mode
+> by default") the limit of number of blocks to read workaround is no
+> longer necessary and a Data End Bit Error is no longer happening using
+> PIO mode.
+> 
+> Revert this limitation to allow reading more than 4 blocks with a single
+> CMD18 command in PIO mode and speed up reading FIT from eMMC.
+> 
 
-I was not sure if users would want to manually insert the contents of
-the ESL file, which is a binary file(a few hundred bytes at least)
-into the DTS. If you prefer having such an option, we can change the
-logic to what you propose. Thanks.
+Should we instead keep this code but surround it with
+#if !IS_ENABLED(MMC_HS200_SUPPORT)
+?
 
--sughosh
+After all, HS200 is only implied for RK35xx boards, so one could disable it.
 
->
-> Thanks
-> Jon
->
-> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
-> ---
->  scripts/Makefile.lib | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-> index 12857316c58..62f87517c09 100644
-> --- a/scripts/Makefile.lib
-> +++ b/scripts/Makefile.lib
-> @@ -334,7 +334,7 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
->         (cat $< > $(pre-tmp)); \
->         $(foreach f,$(subst $(quote),,$(dtsi_include_list)), \
->           echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
-> -       $(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
-> +       $(HOSTCC) -E $(dtc_cpp_flags) -I$(obj) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
->         $(DTC) -O dtb -o $@ -b 0 \
->                 -i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) \
->                 -d $(depfile).dtc.tmp $(dtc-tmp) || \
-> --
-> 2.34.1
->
+Also wondering whether we should do this dynamically based on the MMC 
+mode that could be negotiated with the chip? E.g. I think it's not 
+guaranteed that with hs200 support built and enabled in DT that it'll be 
+negotiated as HS200?
+
+Cheers,
+Quentin
