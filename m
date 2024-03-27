@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80BC3C47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 12:12:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0447AC54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 12:13:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BB568803A;
-	Wed, 27 Mar 2024 13:12:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 80AE088085;
+	Wed, 27 Mar 2024 13:13:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NbdH3KLh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Dthr23Qc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73EE9880A6; Wed, 27 Mar 2024 13:12:52 +0100 (CET)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
+ id 015CC88085; Wed, 27 Mar 2024 13:13:04 +0100 (CET)
+Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
+ [IPv6:2607:f8b0:4864:20::f33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63A638802E
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 13:12:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AC7318802E
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 13:13:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-43182c2457bso1072461cf.1
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 05:12:50 -0700 (PDT)
+Received: by mail-qv1-xf33.google.com with SMTP id
+ 6a1803df08f44-690c43c5b5aso37566606d6.1
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 05:13:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711541569; x=1712146369; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1711541580; x=1712146380; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jR3ojDtd7dcdAFmNEzyO3KmR5Ypq0UKsSPQCbJl0hRk=;
- b=NbdH3KLhmyghbmeN+mjooP9Ha1bQ/YaFbkXX8jMu91dtdF02K+8yTMrqzx3jqvwnhW
- AbfA7SnKnAPazmMTJk/7XhxzHZXjQz8hBD0c2+FfJ9nnhocpU7AzK9LfSqgYbQOehEIk
- GAEv5xAfIFDTFKSFP8GpaM2fXlSsp7FBj+/tA=
+ bh=Q7bOMSQX24O6Qvro7a01ESuH486qhwnywjY/L1LXcEY=;
+ b=Dthr23QcIWWPgr3obzaz3lbgRVLnUTzhSg/rvXTGWVX1BkkVlill3vG9P260mrWMeu
+ N7W779ogBC6LVgz3DajLCP7dal+Gi3PcpmONTZPBo0kx4+8OC9eiizRZ8S7RcAyEZaIF
+ dMvWcuM8jhp30ctjuoqmmpWjKnXMFTr/BRI7s=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711541569; x=1712146369;
+ d=1e100.net; s=20230601; t=1711541580; x=1712146380;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jR3ojDtd7dcdAFmNEzyO3KmR5Ypq0UKsSPQCbJl0hRk=;
- b=bj1bl4SDIc70GnxiDFaLmJgMr4N07WiyHMl30vUit4qmGeNn05mVMdcK1s6Yp24NhZ
- rvNCE+0HIjC07HNB9MzJ8NDtb4Nt+NBXCO+YWiNbFG3nw2rSikkURbTHNEocl6thb5z6
- gv1I5ZP4eJJkB7E7uypXpVI8Z0zotISUbNrWNHZSBoTQi+MRhAGvoyBUMoX5zRlWheQW
- qi9BjhKyawpv6/biWsXUH/jnw6ASALVsxG7kATpXQan8390PDTKstORq5u3IklkxWd4J
- wkcoHEvGiqLHEDvacdWiRVg1Sg4Pnuk158scl+5aqc24DyOWpi4LqNB9DSvdS4v/+9SK
- 0RPg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUaFqf/sc+IA/arw0SmJRQ5Pu2fxgxIHg/btk4f/iRzt+N8fflWPSn5mYRR44qu434NQeX/bmpNRWrRsJO/a04upeysDw==
-X-Gm-Message-State: AOJu0YzUfjm/gluDmsy4ETFiKISwyyvQBbbrnv2/oSU8vHT6c2hm9OiL
- njEX1c5ujixpPeuKg2hViNucgrMn7U3aagtq8fgKzht5Ng08cICSRdozTbsHb2Q=
-X-Google-Smtp-Source: AGHT+IFfkO6EbCipogh8I/DC4dGMBHeJyxbcLY2Dtjz3mDYqTDYRdmH0m4rD4asdmkIgczif3qAI5w==
-X-Received: by 2002:ac8:5d8b:0:b0:431:5b06:c2ae with SMTP id
- d11-20020ac85d8b000000b004315b06c2aemr6071790qtx.56.1711541569238; 
- Wed, 27 Mar 2024 05:12:49 -0700 (PDT)
+ bh=Q7bOMSQX24O6Qvro7a01ESuH486qhwnywjY/L1LXcEY=;
+ b=teKtyQrCjTJT4XaJkDR0ImFANVoA4KiKM3FWp9SOlx4lZkDY0Ej7hYamBevmcIFLRO
+ CRoyd2+RvK3OZKJyfyGX/9ctDLWZU9D2XVBkVOl+fupIsFXKAwpM5dE9YqgzZVMEiPO9
+ ydrEfvb4LvurUPKX0clvrm8m43R5V6YW5qiUeby2bgb/8DibpgsWae5iQBJieexI+BFy
+ KIElA4NQWiH8XsM6k4oSgWjSnJHluOMgMq3jT50lfKvC786f+YqIjfgKwxeZR5cTRmXC
+ KRHH0n7YP9qd3KcXKq5yxv9cfJaQcMc5zN2GQhmsKLCrVFo/Wl5mcw+pjtNooyTd3cYu
+ /W5A==
+X-Gm-Message-State: AOJu0YzEZnHeeShdEBb//+Pveli1uLt/0m1SPGKHDyKoRmGnotHvH4ni
+ DBjH1+LYLx2N8UF6j3CR6NnYIiqnLopeWaIN8CEdWlKpw2bpLZflTwm+dVUNmHVcOeMwFfbRsG/
+ D
+X-Google-Smtp-Source: AGHT+IGCONjcnSQHgqmnljcO0JopzR2xIyqR0seFUPRw8E58XfRXaPtJZr47c/WMxzjUFjHuEqJBSQ==
+X-Received: by 2002:a05:6214:2609:b0:696:7902:983d with SMTP id
+ gu9-20020a056214260900b006967902983dmr4548730qvb.47.1711541580579; 
+ Wed, 27 Mar 2024 05:13:00 -0700 (PDT)
 Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
  by smtp.gmail.com with ESMTPSA id
- j29-20020ac84c9d000000b0042ee243ca95sm4732620qtv.50.2024.03.27.05.12.48
+ h6-20020a0562140da600b00696af399fbbsm463205qvh.110.2024.03.27.05.12.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Mar 2024 05:12:48 -0700 (PDT)
-Date: Wed, 27 Mar 2024 08:12:46 -0400
+ Wed, 27 Mar 2024 05:13:00 -0700 (PDT)
+Date: Wed, 27 Mar 2024 08:12:58 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
- xypron.glpk@gmx.de, cym@rock-chips.com, philipp.tomsich@vrull.eu,
- sjg@chromium.org, eugen.hristev@collabora.com, jonas@kwiboo.se,
- Chris Morgan <macromorgan@hotmail.com>
-Subject: Re: [PATCH 1/2] rockchip: rk3588: Add support for ATAG parsing
-Message-ID: <20240327121246.GH3442575@bill-the-cat>
-References: <20240326204944.1572667-1-macroalpha82@gmail.com>
- <20240326204944.1572667-2-macroalpha82@gmail.com>
- <fe9eef97-5814-4d25-8357-60873d565aff@rock-chips.com>
+To: Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, rick@andestech.com
+Subject: Re: [GIT PULL] u-boot-riscv/master
+Message-ID: <20240327121258.GI3442575@bill-the-cat>
+References: <ZgLME470PHld19If@swlinux02>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="87/R+F6OM59gh2VM"
+ protocol="application/pgp-signature"; boundary="Eqin/1zXyIohTKHI"
 Content-Disposition: inline
-In-Reply-To: <fe9eef97-5814-4d25-8357-60873d565aff@rock-chips.com>
+In-Reply-To: <ZgLME470PHld19If@swlinux02>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,59 +91,53 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---87/R+F6OM59gh2VM
-Content-Type: text/plain; charset=iso-8859-1
+--Eqin/1zXyIohTKHI
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Mar 27, 2024 at 06:32:06PM +0800, Kever Yang wrote:
-> Hi Chris,
->=20
-> =A0=A0=A0 The ATAGS is used for passing parameter from bootloader to kern=
-el at
-> first, which has been replaced by DTB now for ARM platform.
->=20
-> =A0=A0=A0 And Rockchip using ATAGs for passing parameter like dram memory
-> size/board uart in different boot process like DRAM init binary/ TPL/SPL =
-to
-> U-Boot since 2018.
->=20
-> =A0=A0=A0 And almost at the same time, Simon add bloblist for mainline U-=
-Boot
-> which for similar purpose.
->=20
-> =A0=A0=A0 So I'm not sure if this ATAGS should be accept in mainline U-Bo=
-ot or
-> not, even for rockchip platform only seems some kind of regression for th=
-is
-> feature support.
->=20
->=20
-> Hi Simon and Tom,
->=20
-> =A0=A0=A0=A0 Could you help to give some suggestion for this?
+On Tue, Mar 26, 2024 at 09:22:27PM +0800, Leo Liang wrote:
 
-This should be using bloblist, yes, as I understand it.
+> Hi Tom,
+>=20
+> The following changes since commit dde373bde392c38649c8c4420e0c98ef8d38d9=
+dc:
+>=20
+>   Prepare v2024.04-rc5 (2024-03-25 21:56:50 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-riscv.git=20
+>=20
+> for you to fetch changes up to 0cfe1bc6ed9b322d2b03ded3175ac5de3ed2b784:
+>=20
+>   spl: riscv: opensbi: fix check of PAYLOAD_ARGS_ADDR (2024-03-26 17:31:2=
+4 +0800)
+>=20
+> CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot=
+-riscv/-/pipelines/20075
+
+Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---87/R+F6OM59gh2VM
+--Eqin/1zXyIohTKHI
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYEDT4ACgkQFHw5/5Y0
-tyxbIQv+KIMl0EBMSZZn5wQe8MaQqWkwpuyFbQ1wImaoR8uiapRVgBjadDHMPt8D
-Bw6YPHfdlfU6KisaR2RHTD7AhlOsb989jex+l5RPmEDflOXtezXdCbRRLd7oo1Mw
-Hx8gTW8xyHqN3uhkFqzrsCBiFsaxMVV5LcEbHlLufvL0+x6U0N1vOfV8oewPkzMc
-krSTQnp01UAPP6Vic2r/ch9wu2RRlhU5R0xstrsKx5j5Hb7lJbtDe6Zm9vL8zdsp
-+nAG6toVbZr9zuSaLnVOtjLOGt4E7uS0nHb/y11P/r0C/QB5F8DCaHQU+OZaIUro
-suxh5MfEOr7sqO8a33zL8tDrBjHte5aELABQaXBjDYbmx6lXWJPcQblfaNH5tIjL
-wNjPMtg0nW83vwMtBpr5fmFjmna98CdI3K9pMSqhHZvP+dOrU6GLukUZIQGAwWEs
-3s+RkbH3Wg7dHN7ZkJ3AUIDB/NbR+jFDTq/w2PkjKQf9NjqVsNE9wK7jDuFJicrE
-0+BOG3vV
-=9MFy
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYEDUoACgkQFHw5/5Y0
+tyzK6AwAl/TRUcRf49YDIo7OcWwZExNu9lRIGEAv+ltuZTBPbb4hwG/8+nOzSe+P
+ncqhhfHlk2V19UreQlkuj5FX1NDLDo/1gB6bpet9TRaPmyM5uksn7mTuJJhEKwBS
+29iH/urgZfhQWoHGoZkUTOvZ8vcPEWuSNbgmCXkEPNPY7zhW2uliGqN8whNR/Yyf
+x0Ris/vBh1+hP7f+/Rf3h8mIGvzYgvJpAXsGLgXxQtKdJgzS/DCLdAr0VQzK69CY
+Kb5NtvPuh1HzUeZPOVeGXGUISDMUSkvGpMluJ12CPC4a8raECkJogPoOhXBXa076
+REUTRknGF2mSzHy8v+sGTrGHIu0msbyXItnzVEuN7Rwc51lhwmzq9OzaUcnx4rlB
+vtVV3FwwMYB+lRcbVa7lZDp4Vn+9f1UuYa8rXoNzHA5Cuh1f6HeUZbxruR+K8rHl
+M6v7cXatligUMvY9LPN/ehOznbBrGcbpYgQs930B00tazuRZ+4gHK40cPrnop1b2
+GSss9kbt
+=SLgH
 -----END PGP SIGNATURE-----
 
---87/R+F6OM59gh2VM--
+--Eqin/1zXyIohTKHI--
