@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5A2AC47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 18:47:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37C50C54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 19:29:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEABD880AC;
-	Wed, 27 Mar 2024 19:47:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 5FF168809B;
+	Wed, 27 Mar 2024 20:29:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="BaUmLYOB";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fCa+Hb92";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC4E0880B5; Wed, 27 Mar 2024 19:47:26 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id B2B0E88044; Wed, 27 Mar 2024 20:29:34 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55B78880A3
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 19:47:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 97A778809B
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 20:29:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5688eaf1165so196271a12.1
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 11:47:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-29df844539bso51230a91.1
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 12:29:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1711565243; x=1712170043; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1711567771; x=1712172571; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=F2CREkClos/ol7GKUT1vAo3Np5CU3N7BOhUtgOWsyrA=;
- b=BaUmLYOBfgtcPsGpuqzGNrGt/A/l6OsDM2XnLSAUsarD1yOFd0WIzsUsQ98lQQkw1D
- DI8ovNPYqvrNQ+vSOMkenF505l0yuerMOzQdbzkzWYTYrSIAQ+BEfG632+WrLaY6map4
- xdvbcead+2UYX5dZgD0Dpwg6+MXKJm6rblf0zzAlFBuhR1zD915GFn4gVSSPQOJnINs+
- DxQ+6P5SrR0e+dpl7xbSbFVpU2kfkFHM2aWDRz65BG7nHpqCKEHT+FngHbjoNuk573Iy
- X2/yzrQOt8YqEghWcxlgU9mGqBdOHh8I9uyJ+EREHFLcCHZ3nmLbs9DYdSjsMVjCiRc3
- JDKg==
+ bh=cCaR+c95Qo/SmHavfYJJKKCnW5U4einxcqTLd7MVReo=;
+ b=fCa+Hb924AnYD7HN0ioZPeHUEcFlNPHzu3IIPV6FKVAYOfREL8dj7bS9tc/WSL3y0w
+ DY+H4+8MAJi4p7EuHLNcZE1pM+m5+MZF/owenPNk2zpIvyJi9zfUPAGb8yh10fBmw/LB
+ yRHy34p69vT4Zbhrk3dPnP1F5lNFh2QxvEsG+Mchb7zP1HZq46PVP+4Tj81lXX2EQkqH
+ y0mn1G3c2e4u63z9PMDNIyCIYmGSnTlkCTkhAJ1r/RTMDCDdSxofvw3Fhsvo68KJcxcc
+ oNYy/FrQQE397FR3oVIk+FHcCJEQN/kuSMAqjzj/K6NaJtSfDpsZabydUrK2Bnj4bxf1
+ 8Qcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711565243; x=1712170043;
+ d=1e100.net; s=20230601; t=1711567771; x=1712172571;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=F2CREkClos/ol7GKUT1vAo3Np5CU3N7BOhUtgOWsyrA=;
- b=g3mSuabdYZHJtOkSMQWaT+pCHXVPCG4Vz4pMQh5vZSAWsv66tpvc0H3FilU+iu7voJ
- r4zqsy1YHiIV4j2vL2CAjW4Uvau6F4Yo232Ty3Np2DCb0wz8ss19cw6Pw2YhKYMWenTL
- t924TNfl82OFV3452/p3WKV1/bMvuJodX37pGfjen56b4DnprPhJC/lSFCvIpdxRomtu
- lu8tNVkvg2jWsvTlRsNQlKBH0gKJq5nMcCQvvZCuriBKyR0mpFTEzG1mBfWEYQeso3DN
- LwmDRQwXWdPGc0s+1smmEc/OtMVuRgnsUbdPzg7hpR47yp3drw648iHJKdvscrLvuiT2
- ALPw==
-X-Gm-Message-State: AOJu0YwbzZK1XTum57vFdZGLgyhU0aYdx6npj2RjQ5v/NyU4b3mw6uWD
- fNVI59oyfe+yG7FgXY8YsWSrjVutHIgJDGxjpoUJM5SmjwiTvG6p4xf2peS8y5MG4c+JP2Qmx+W
- cQpOwd3NGFkT3HNj6UifLYqnJEP+HImNGkPbI6A==
-X-Google-Smtp-Source: AGHT+IFeiEZsN73Bdwh2XuXcRkAEG1428t/b8wolwQW90y3A1ffzGCLmBPJEWhX9UIbv0GjZNqeTkXGg1DruMMc/uuQ=
-X-Received: by 2002:a17:906:48d0:b0:a47:4293:947f with SMTP id
- d16-20020a17090648d000b00a474293947fmr235440ejt.8.1711565243567; Wed, 27 Mar
- 2024 11:47:23 -0700 (PDT)
+ bh=cCaR+c95Qo/SmHavfYJJKKCnW5U4einxcqTLd7MVReo=;
+ b=GAxNYKDsh7kYQe3lin0ENZQXSsvDEcDfXzkbWp7FG+8Zd1ytojTItvGmSRf3SZYs3x
+ hJ2Uhap+hGnDyMkqzwJ19EfPEBS0Xoqu3huyJqjG5RJo3dlA/rv11IyTiYpTwNW/XnbD
+ IsST10bvpGbqtVXr3HJAkmGImMRjxGsC8yFd+V/scVVcSubGlQB1TkvBPSPZwSI2e96c
+ ZnJWp/XJiHS1kiqkN2jpR4wXflmIDodVspZOZiDBHFhERnQ0fwOMrPnEFY5tn/wndmjs
+ X3CmJ8gK6+2pLihCFpONbwptVnXS5JT9GSnEYLRjbyRvUcTC5t2FiDChFjDE+/ZG//TK
+ hXPA==
+X-Gm-Message-State: AOJu0YxFbRac/HRgoLMA22iNCgzeXbuu6f2TbOkukXJ3mpFROkVSY+yC
+ bLXQnPIRga1UyKPCV28U75RMXd2bggNmGq28fgbb69w1mwcoSS68+umZK+fRLL3yrTvJsM1SNVQ
+ abBK7J9iR3HspcvduNnlvgtO2UB4Yn6cTLr0=
+X-Google-Smtp-Source: AGHT+IGEPFbYC5fphkHL2fktMsJ4YNgA0ooVP2s4EZm6B/3qfYn1B9bXgvsGId+3T78F5eu7av5ORD8BnauL7mLoljo=
+X-Received: by 2002:a17:90b:4a43:b0:2a0:350a:a7a8 with SMTP id
+ lb3-20020a17090b4a4300b002a0350aa7a8mr575730pjb.2.1711567770989; Wed, 27 Mar
+ 2024 12:29:30 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240321180219.1039622-1-tharvey@gateworks.com>
- <CAC_iWjLwt9NxwOsYWwx4+w2vL3dtfJnJPH-eeApU-ODKf8tzBA@mail.gmail.com>
- <CAJ+vNU0aSj5RgCUxz74hg059Qtmco4HSBCiAHA_hhw+jzxo5Dw@mail.gmail.com>
- <CAC_iWjJ4s1ZS8X64vjV_xiOSzKf7fPBryw6eGp6tW7Vqxv2_gw@mail.gmail.com>
- <CAJ+vNU1m=joe0mAC2ss-QmBN17Jht4d+fpba4iM0tTScy0Zngg@mail.gmail.com>
- <CAC_iWjL6CtZ5WgASepcUZOXnF=G4uDTeVq3WnOkz+jDL+cLZzw@mail.gmail.com>
- <CAC_iWjJCAj0sv3mdzje4ivn4Ob=tyW38K03GD=mj8_FOvK35AQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjJCAj0sv3mdzje4ivn4Ob=tyW38K03GD=mj8_FOvK35AQ@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Wed, 27 Mar 2024 11:47:11 -0700
-Message-ID: <CAJ+vNU2v03MQXBysVxrUQwKeQH4KJjwkHXtmT3g=2f+++jsP5A@mail.gmail.com>
-Subject: Re: [PATCH] tpm: display message when using gpio-reset instead of
- when missing it
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Miquel Raynal <miquel.raynal@bootlin.com>, 
- Jorge Ramirez-Ortiz <jorge@foundries.io>, Adam Ford <aford173@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: u-boot@lists.denx.de, Samuel Lee <slee@gateworks.com>
+References: <20220728070540.28554-1-josua@solid-run.com>
+ <CA+EmdG5+QYxVo27C-u5W6FkuDgcoey4i-md9L4b9cs1gtsv+1g@mail.gmail.com>
+ <30c35e80-2015-4fac-b9dc-6902cc09c58e@solid-run.com>
+In-Reply-To: <30c35e80-2015-4fac-b9dc-6902cc09c58e@solid-run.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 27 Mar 2024 16:29:20 -0300
+Message-ID: <CAOMZO5AQArxRN25J0+M1hjNSwBQUoLsGhD9cChDkfUrv3ys=Rw@mail.gmail.com>
+Subject: Re: [PATCH] mx6cuboxi: fix ethernet after synchronise device-tree
+To: Josua Mayer <josua@solid-run.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Yazan Shhady <yazan.shhady@solid-run.com>, 
+ Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Baruch Siach <baruch@tkos.co.il>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ "christian.gmeiner@gmail.com" <christian.gmeiner@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -97,128 +94,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Mar 27, 2024 at 10:26=E2=80=AFAM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+Hi Christian,
+
+On Wed, Mar 27, 2024 at 9:06=E2=80=AFAM Josua Mayer <josua@solid-run.com> w=
+rote:
 >
-> [...]
+> Cc: christian.gmeiner@gmail.com
 >
-> > >
-> > > missing an invalid property?
-> > >
-> > > I deal with users all the time that think things like that are
-> > > 'errors' and contact tech support. In this case its not an error
-> > > because there is no gpio reset in the official dt-bindings for the tp=
-m
-> > > and its generally considered bad form to add non official properties.
-> > >
-> > > And from what your explaining we shouldn't have a GPIO connected to
-> > > the TPM so perhaps we should remove the reset completely and perhaps
-> > > even spit out a warning if present:
-> > > ignore Invalid DT property gpio reset to conform with the TCG specifi=
-cation
+> Hi Christian,
+>
+> please take a look at this patch, I suspect it will (hack-)fix your
+> ethernet issue.
+>
+> Unfortunately I had no time to revisit this yet and implement a correct s=
+olution.
+
+> >      arch/arm/dts/imx6qdl-sr-som.dtsi     | 30 +++++++++---------------=
+----
+> >      board/solidrun/mx6cuboxi/mx6cuboxi.c |  6 +++++-
+> >      2 files changed, 14 insertions(+), 22 deletions(-)
 > >
-> > We should, but those changes predate me being appointed as a TPM
-> > maintainer. If I had to guess, I would say that was added for TPM that
-> > are connected on an external SPI bus (e.g the RPI).
-> > So what about not printing the error message, keeping the code so we
-> > won't break 'test' devices, and print a warning message like "This
-> > shouldn't be used on secure production devices"?
->
-> Unless we can get a list of the devices that *currently* use it. If
-> they aren't that many I am fine getting rid of the reset overall (and
-> I can test it on the RPI4)
->
+> >     diff --git a/arch/arm/dts/imx6qdl-sr-som.dtsi b/arch/arm/dts/imx6qd=
+l-sr-som.dtsi
+> >     index ce543e325c..2d7cbc26b3 100644
+> >     ---_a/arch/arm/dts/imx6qdl-sr-som.dtsi
+> >     +++ b/arch/arm/dts/imx6qdl-sr-som.dtsi
 
-Adding Miquel who authored commit a174f0001f592 ("tpm2: tis_spi: add
-the possibility to reset the chip with a gpio"):
-On some designs, the reset line could not be connected to the SoC reset
-line, in this case, request the GPIO and ensure the chip gets reset.
+Please make these changes in a new imx6qdl-sr-som-u-boot.dtsi file instead.
 
-Adding Jorge who athoried commit cc5afabc9d329 ("drivers: tpm2: update
-reset gpio semantics"):
-Use the more generic reset-gpios property name.
-
-I looked through all dts in U-Boot matching 'tpm' as well as Linux to
-see who's using it:
-Adding Adam who has a 'reset-gpios' in
-arch/arm/dts/imx8mp-beacon-kit.dts (and somehow snuck it in upstream
-as well)
-Adding Rasmus who has a suspicious 'regulatot-tpm0-rst' (but no gpio
-reset in tpm) in arch/arm/dts/imx8mm-cl-iot-gate-ied-tpm0.dtso
-
-As there is at least one board that clearly uses a gpio reset for the
-TPM in the tpm node I think we leave the tpm reset support, eliminate
-the warning if its missing and print a message like "Warning: TPM gpio
-reset should not be used on secure production device"
-
-I'll send a v2 of my patch for review
-
-Best Regards,
-
-Tim
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20240321180219.1039622=
--1-tharvey@gateworks.com/
-
-> Cheers
-> /Ilias
-> >
-> > Regards
-> > /Ilias
-> > >
-> > > Best regards,
-> > >
-> > > Tim
-> > >
-> > > >
-> > > > Thanks
-> > > > /Ilias
-> > > > >
-> > > > > Best Regards,
-> > > > >
-> > > > > Tim
-> > > > > [1] https://ww1.microchip.com/downloads/en/DeviceDoc/ATTPM20P-Tru=
-sted-Platform-Module-TPM-2.0-SPI-Interface-Summary-Data-Sheet-DS40002082A.p=
-df
-> > > > >
-> > > > >
-> > > > > > Thanks
-> > > > > > /Ilias
-> > > > > > >
-> > > > > > > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> > > > > > > ---
-> > > > > > >  drivers/tpm/tpm2_tis_spi.c | 8 ++++----
-> > > > > > >  1 file changed, 4 insertions(+), 4 deletions(-)
-> > > > > > >
-> > > > > > > diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_ti=
-s_spi.c
-> > > > > > > index de9cf8f21e07..944540f7a711 100644
-> > > > > > > --- a/drivers/tpm/tpm2_tis_spi.c
-> > > > > > > +++ b/drivers/tpm/tpm2_tis_spi.c
-> > > > > > > @@ -237,14 +237,14 @@ static int tpm_tis_spi_probe(struct ude=
-vice *dev)
-> > > > > > >                         /* legacy reset */
-> > > > > > >                         ret =3D gpio_request_by_name(dev, "gp=
-io-reset", 0,
-> > > > > > >                                                    &reset_gpi=
-o, GPIOD_IS_OUT);
-> > > > > > > -                       if (ret) {
-> > > > > > > -                               log(LOGC_NONE, LOGL_NOTICE,
-> > > > > > > -                                   "%s: missing reset GPIO\n=
-", __func__);
-> > > > > > > +                       if (ret)
-> > > > > > >                                 goto init;
-> > > > > > > -                       }
-> > > > > > >                         log(LOGC_NONE, LOGL_NOTICE,
-> > > > > > >                             "%s: gpio-reset is deprecated\n",=
- __func__);
-> > > > > > >                 }
-> > > > > > > +               log(LOGC_NONE, LOGL_NOTICE,
-> > > > > > > +                   "%s: performing 1ms reset on %s:%d\n", de=
-v->name,
-> > > > > > > +                   reset_gpio.dev->name, reset_gpio.offset);
-> > > > > > >                 dm_gpio_set_value(&reset_gpio, 1);
-> > > > > > >                 mdelay(1);
-> > > > > > >                 dm_gpio_set_value(&reset_gpio, 0);
-> > > > > > > --
-> > > > > > > 2.25.1
-> > > > > > >
+This way, the changes will not get lost after a new sync with Linux or
+if OF_UPSTREAM is used.
