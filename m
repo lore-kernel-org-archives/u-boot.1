@@ -4,76 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A16ACD1283
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 11:21:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72728C47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 11:24:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC3518800D;
-	Wed, 27 Mar 2024 12:21:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BAD3A87E47;
+	Wed, 27 Mar 2024 12:24:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pt5PKvMc";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tz5jQtMI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3607E88073; Wed, 27 Mar 2024 12:21:46 +0100 (CET)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AC2718803A; Wed, 27 Mar 2024 12:24:48 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18C3287E47
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 12:21:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 04BF98780A
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 12:24:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42RBLG0U106507;
- Wed, 27 Mar 2024 06:21:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1711538476;
- bh=Gj+AjcGTrQlbTRtZXFgftontx/OE/A6nH2r1rIy59zg=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=pt5PKvMcSfaDDDYitFpA26Vpmv5C56VdNBcCgUWOzsw+OFESophl/dUQkdQNzJISb
- uN65P5vXc9vyhCOkJtPzPM2ysa79Pg00vDFafbyqiEx+wFLPyrCRILoTrIejR9GeN5
- oca6snyVYkFsIlOm3iFxzSNh8ebvJBTifqcToPjk=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42RBLGUw114202
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 27 Mar 2024 06:21:16 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
- Mar 2024 06:21:15 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 27 Mar 2024 06:21:15 -0500
-Received: from [172.24.227.193] (devarsht.dhcp.ti.com [172.24.227.193] (may be
- forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42RBLBS8014533;
- Wed, 27 Mar 2024 06:21:11 -0500
-Message-ID: <a281c494-d04d-1757-0f01-12e1a9fa2111@ti.com>
-Date: Wed, 27 Mar 2024 16:51:10 +0530
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=ab23=LB=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1711538675;
+ bh=FTHESGklJxoh3TU1I6ZL4yQrUta0zpYK0x6vU0dxaYI=;
+ b=tz5jQtMIdCLNPFYiyDpCIItGwWvOk7G0X//pUzLbM+So4C6K9GW7oSLWuWq8Rm2Iue4wLtQ9g
+ frKd/9TbXvdSznOBRkFb8JH2Duq7iWNHyQH8PtQ8hm4gJlqryK5DK40aH7HevRzCH8SLpiAM2wi
+ t5KU49MoBlnIaTMXI5CMPnaqpa1alsRz5Bf4eLxXrPK1+8vpFEisjqDKL/LyWf1Yzh1ZJRHcuGf
+ M4wcwQDW/zvH8vPt14rJjrZ6X7rtqz0Kb1gAHy7m1tN8mRfC/8dlXp6U8Z7BpHyRQagxnjKY9ST
+ r96EtZH/b9EM+jO+9p2qRzREh4XZ+stlu0gvt5ZGGcSA==
+Message-ID: <21e01d83-7f64-4b57-8ead-35a909b7216b@kwiboo.se>
+Date: Wed, 27 Mar 2024 12:24:29 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Subject: Re: [PATCH v2 1/2] spl: Introduce SoC specific init function
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mmc: rockchip_sdhci: Revert 4 blocks PIO mode read limit
+ for RK35xx
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20240326233502.2625015-1-jonas@kwiboo.se>
+ <a162464f-8cf6-4229-9062-f1369769af20@theobroma-systems.com>
 Content-Language: en-US
-To: <lukas.funke-oss@weidmueller.com>, <u-boot@lists.denx.de>
-CC: Lukas Funke <lukas.funke@weidmueller.com>, Andre Przywara
- <andre.przywara@arm.com>, Bin Meng <bmeng@tinylab.org>, Chanho Park
- <chanho61.park@samsung.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Marek Vasut <marex@denx.de>, Mayuresh Chitale <mchitale@ventanamicro.com>,
- Nikhil M Jain <n-jain1@ti.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, Sean Anderson
- <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>
-References: <20240327104638.2432672-1-lukas.funke-oss@weidmueller.com>
- <20240327104638.2432672-2-lukas.funke-oss@weidmueller.com>
-From: Devarsh Thakkar <devarsht@ti.com>
-In-Reply-To: <20240327104638.2432672-2-lukas.funke-oss@weidmueller.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <a162464f-8cf6-4229-9062-f1369769af20@theobroma-systems.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 660401f2a890af8ec6d1c76c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,83 +76,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
+On 2024-03-27 09:56, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 3/27/24 00:35, Jonas Karlman wrote:
+>> The commit 2cc6cde647e2 ("mmc: rockchip_sdhci: Limit number of blocks
+>> read in a single command") introduced a limit of number of blocks to
+>> read to fix a Data End Bit Error on RK3568 and RK3588. This had a side
+>> affect of significant slowing down reading FIT from eMMC.
+>>
+>> After the commit 6de9d7b2f13c ("rockchip: rk35xx: Enable eMMC HS200 mode
+>> by default") the limit of number of blocks to read workaround is no
+>> longer necessary and a Data End Bit Error is no longer happening using
+>> PIO mode.
+>>
+>> Revert this limitation to allow reading more than 4 blocks with a single
+>> CMD18 command in PIO mode and speed up reading FIT from eMMC.
+>>
+> 
+> Should we instead keep this code but surround it with
+> #if !IS_ENABLED(MMC_HS200_SUPPORT)
+> ?
+> 
+> After all, HS200 is only implied for RK35xx boards, so one could disable it.
 
-On 27/03/24 16:16, lukas.funke-oss@weidmueller.com wrote:
-> From: Lukas Funke <lukas.funke@weidmueller.com>
-> 
-> Some architectures use spl_board_init() in their SoC specific
-> implementation. Board developers should be able to add board specific
-> implementation via spl_board_init(). Hence, introduce a spl_soc_init()
-> method which is called right before spl_board_init() for SoC
-> specific implementation.
-> 
-> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
-> ---
-> 
-> (no changes since v1)
-> 
->  common/spl/Kconfig | 7 +++++++
->  common/spl/spl.c   | 3 +++
->  include/spl.h      | 8 ++++++++
->  3 files changed, 18 insertions(+)
-> 
-> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-> index 6405374bcc..9b5cc8daa7 100644
-> --- a/common/spl/Kconfig
-> +++ b/common/spl/Kconfig
-> @@ -272,6 +272,13 @@ config SPL_TEXT_BASE
->  	help
->  	  The address in memory that SPL will be running from.
->  
-> +config SPL_SOC_INIT
-> +	bool "Call arch-specific initialization in SPL"
+I do not think this will be necessary, for RK3568 the PIO mode is not
+needed at all and SDMA is used. And not 100% sure if it was the HS200 or
+bss address change, or a combo of both that fixes the Data End Bit Error.
+Or could also be that it was the DDR52 mode that caused issues.
 
-Call SoC specific intialization in SPL
+Will re-try with normal HS mode and see if any hack is still needed at
+all.
 
-With above change,
-Reviewed-by: Devarsh Thakkar <devarsht@ti.com>
+> 
+> Also wondering whether we should do this dynamically based on the MMC 
+> mode that could be negotiated with the chip? E.g. I think it's not 
+> guaranteed that with hs200 support built and enabled in DT that it'll be 
+> negotiated as HS200?
 
-Regards
-Devarsh
-> +	help
-> +	  If this option is enabled, U-Boot will call the function
-> +	  spl_soc_init() from board_init_r(). This function should be
-> +	  provided by the architecture.
-> +
->  config SPL_BOARD_INIT
->  	bool "Call board-specific initialization in SPL"
->  	help
-> diff --git a/common/spl/spl.c b/common/spl/spl.c
-> index b65c439e7a..9b83c85df5 100644
-> --- a/common/spl/spl.c
-> +++ b/common/spl/spl.c
-> @@ -711,6 +711,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
->  		}
->  	}
->  
-> +	if (CONFIG_IS_ENABLED(SOC_INIT))
-> +		spl_soc_init();
-> +
->  	if (CONFIG_IS_ENABLED(BOARD_INIT))
->  		spl_board_init();
->  
-> diff --git a/include/spl.h b/include/spl.h
-> index 043875f10f..5dfdf778d2 100644
-> --- a/include/spl.h
-> +++ b/include/spl.h
-> @@ -816,6 +816,14 @@ int spl_early_init(void);
->   */
->  int spl_init(void);
->  
-> +/*
-> + * spl_soc_init() - Do architecture-specific init in SPL
-> + *
-> + * If SPL_SOC_INIT is enabled, this is called from board_init_r() before
-> + * jumping to the next phase.
-> + */
-> +void spl_soc_init(void);
-> +
->  /*
->   * spl_board_init() - Do board-specific init in SPL
->   *
+Last time I checked this there was no easy way to change number of
+blocks to read at time using current mmc/sdhci ops, and I do not think
+there is enough need to add new ops. However, if we still need a
+workaround it should be changed to use a bounce buffer instead of limit
+number of blocks to not affect performance, similar to [1].
+
+[1] https://patchwork.ozlabs.org/patch/1895377/
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
+
