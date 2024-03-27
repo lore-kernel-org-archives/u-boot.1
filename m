@@ -4,49 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3109C54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 16:25:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2685EC54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 16:25:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28FB788122;
-	Wed, 27 Mar 2024 17:24:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8E7828806C;
+	Wed, 27 Mar 2024 17:24:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="WvKSMhvU";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ArJEkeZS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80BC3880DB; Wed, 27 Mar 2024 17:24:11 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id 49DBE88035; Wed, 27 Mar 2024 17:24:13 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C16958811D
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 17:24:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B2B5488127
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 17:24:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 5784D614DD;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 79E1D615C5;
+ Wed, 27 Mar 2024 16:24:08 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 59D1DC43394;
  Wed, 27 Mar 2024 16:24:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 28B69C43390;
- Wed, 27 Mar 2024 16:24:06 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1711556646;
- bh=Yx+vkLyLcQMaPExUO1LWCgMhTJX5pvfrgLRiHlsEd58=;
+ s=k20201202; t=1711556648;
+ bh=m2VxTS9tX9MH7nSxgHFoawuN5tRMM0jTQ+d+QJZghJE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=WvKSMhvUk7tXbbEjcS6qaVERBJraY1r7m9aqeCxMDMLpk21d+AfbTSoaewmuEB+ai
- x9YztqSHazht8LwG81NXtQWneKdgL5/cFSaO4xHhBztVfnGZE/ovWBXx7KG16UCPob
- l5SAHXLt9q3EB1N5khsy/U2dqTw50ZC1o1R6XEf3DV07O31j88fVQGb4A9HV89h6H+
- ezztNAUZu4kDPjnG/c8IyhO98zdVTVYLwe/l1vs4aINt31dB6o3pol6tzxgFOw/n7/
- whC7Ze8GRpLZ0aldoV/OnQ+ScGxF53VQZ1BOzskkpFjNO9gpH8j4DeJDS6/2roImz+
- lDv/rqwj35aVA==
+ b=ArJEkeZSNdoTuTFLIu8uu/A6BW8RiSo5WXCtrNjOkUgx6GJZSgYDSn/p0rCRBoyp1
+ ljNTnvSxLD+E/2X/8OMarM+bPlfTu/+u+fRnth+tPdxOyHhGkXWrWEzqHy4MX9/0Rw
+ gxI0PprnfOnfdBfg/IxDMwXyJj4MVsYnULFW075zaVyiiCpoDcEVegFfkd16mkeFaW
+ M29p1Fi6aHcvcf6h/Abe2X4K8ymA9OceNS/bA3DfN/eKYN0oV1G8mmrFMvXs1+9coh
+ +9DWqvdDTnB6Zv+JhUNUY+sdF94ozh1VSoVvpWaUrYCyPcYjgSjVau+T4wSSCfcctr
+ pfZeeHWCDHdyQ==
 From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
 To: Stefan Roese <sr@denx.de>
 Cc: u-boot@lists.denx.de,
 	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH u-boot-mvebu v3 06/18] arm: mvebu: turris_omnia: Print board
- ECDSA public key if available
-Date: Wed, 27 Mar 2024 17:23:43 +0100
-Message-ID: <20240327162355.24584-7-kabel@kernel.org>
+Subject: [PATCH u-boot-mvebu v3 07/18] arm: mvebu: turris_omnia: Disable Atmel
+ SHA node if not present
+Date: Wed, 27 Mar 2024 17:23:44 +0100
+Message-ID: <20240327162355.24584-8-kabel@kernel.org>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240327162355.24584-1-kabel@kernel.org>
 References: <20240327162355.24584-1-kabel@kernel.org>
@@ -69,64 +70,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If MCU supports the FEAT_CRYPTO feature, read board ECDSA public key
-from MCU and print it.
+If the FEAT_CRYPTO feature bit is present in MCU features, the board
+crypto is implemented by MCU and the Atmel SHA chip is not present.
+Disable Atmel SHA device-tree node in that case.
 
 Signed-off-by: Marek Behún <kabel@kernel.org>
 ---
- board/CZ.NIC/turris_omnia/turris_omnia.c | 25 +++++++++++++++++++++++-
- 1 file changed, 24 insertions(+), 1 deletion(-)
+ board/CZ.NIC/turris_omnia/turris_omnia.c | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
 diff --git a/board/CZ.NIC/turris_omnia/turris_omnia.c b/board/CZ.NIC/turris_omnia/turris_omnia.c
-index f63640ad64..b2f0088e5e 100644
+index b2f0088e5e..3b7a71bdad 100644
 --- a/board/CZ.NIC/turris_omnia/turris_omnia.c
 +++ b/board/CZ.NIC/turris_omnia/turris_omnia.c
-@@ -253,6 +253,24 @@ static int omnia_mcu_board_info(char *serial, u8 *mac, char *version)
+@@ -1007,6 +1007,25 @@ static int fixup_mcu_gpio_in_eth_wan_node(void *blob)
  	return 0;
  }
  
-+static int omnia_mcu_get_board_public_key(char pub_key[static 67])
++static void fixup_atsha_node(void *blob)
 +{
-+	u8 reply[34];
-+	int ret;
++	int node;
 +
-+	ret = omnia_mcu_read(CMD_CRYPTO_GET_PUBLIC_KEY, reply, sizeof(reply));
-+	if (ret)
-+		return ret;
++	if (!omnia_mcu_has_feature(FEAT_CRYPTO))
++		return;
 +
-+	if (reply[0] != 33)
-+		return -EBADMSG;
-+
-+	bin2hex(pub_key, &reply[1], 33);
-+	pub_key[66] = '\0';
-+
-+	return 0;
-+}
-+
- static void enable_a385_watchdog(unsigned int timeout_minutes)
- {
- 	struct sar_freq_modes sar_freq;
-@@ -1032,7 +1050,7 @@ int board_late_init(void)
- 
- int checkboard(void)
- {
--	char serial[17], version[4];
-+	char serial[17], version[4], pub_key[67];
- 	bool has_version;
- 	int err;
- 
-@@ -1051,6 +1069,11 @@ int checkboard(void)
- 	printf("  Board version: %s\n", has_version ? version : "unknown");
- 	printf("  Serial Number: %s\n", !err ? serial : "unknown");
- 
-+	if (omnia_mcu_has_feature(FEAT_CRYPTO)) {
-+		err = omnia_mcu_get_board_public_key(pub_key);
-+		printf("  ECDSA Public Key: %s\n", !err ? pub_key : "unknown");
++	node = fdt_node_offset_by_compatible(blob, -1, "atmel,atsha204a");
++	if (node < 0) {
++		printf("Cannot find ATSHA204A node!\n");
++		return;
 +	}
 +
++	if (fdt_status_disabled(blob, node) < 0)
++		printf("Cannot disable ATSHA204A node!\n");
++	else
++		debug("Disabled ATSHA204A node\n");
++}
++
+ #endif
+ 
+ #if IS_ENABLED(CONFIG_OF_BOARD_FIXUP)
+@@ -1020,6 +1039,8 @@ int board_fix_fdt(void *blob)
+ 	fixup_msata_port_nodes(blob);
+ 	fixup_wwan_port_nodes(blob);
+ 
++	fixup_atsha_node(blob);
++
  	return 0;
  }
+ #endif
+@@ -1211,6 +1232,8 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+ 	fixup_msata_port_nodes(blob);
+ 	fixup_wwan_port_nodes(blob);
  
++	fixup_atsha_node(blob);
++
+ 	return 0;
+ }
+ #endif
 -- 
 2.43.2
 
