@@ -4,98 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81137C54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 11:16:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A16ACD1283
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 11:21:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 310DA880E5;
-	Wed, 27 Mar 2024 12:15:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
+	by phobos.denx.de (Postfix) with ESMTP id AC3518800D;
+	Wed, 27 Mar 2024 12:21:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="a7+IV5FM";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="pt5PKvMc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93CF088065; Wed, 27 Mar 2024 09:11:30 +0100 (CET)
-Received: from us-smtp-delivery-124.mimecast.com
- (us-smtp-delivery-124.mimecast.com [170.10.129.124])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3607E88073; Wed, 27 Mar 2024 12:21:46 +0100 (CET)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99FAE88064
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 09:11:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18C3287E47
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 12:21:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=redhat.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wefu@redhat.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1711527087;
- h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=VD+y7r7dM5xTeayVgiXbCheGbQvqvCEuZsaN2oem17s=;
- b=a7+IV5FMyczMkLgkcQ5veUF+edFKzp7ZLt+Cs4StFaA3LyBLgGQFQtasZAFaR1+gb8d+/z
- +nRewnJPEYjkY4/r0s+Q8EclX/OKoQtFtfNiaP8Xu9eTGL16eZrzcvnK0KM1HknMuTXO6t
- 0oqwte1mXhHhPCYrVr1nPf7VGyX4LJc=
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200]) by relay.mimecast.com with ESMTP with STARTTLS
- (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-13-HQzHAER-PAib_o5XAx2FyA-1; Wed, 27 Mar 2024 04:11:26 -0400
-X-MC-Unique: HQzHAER-PAib_o5XAx2FyA-1
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-1e0b3a4c2e4so28320055ad.0
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 01:11:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711527085; x=1712131885;
- h=content-transfer-encoding:mime-version:reply-to:references
- :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=VD+y7r7dM5xTeayVgiXbCheGbQvqvCEuZsaN2oem17s=;
- b=Lqf267A7opmt2fd34dGlr376CbpcRJxRU+KaVFIR/zlXmDkdDO8oFszJZbSsld0VrF
- ZjwczLQCxqQFgD2OaMIx60pdcVfIxs0jSm5EulSPUo/X+ZiT3qVoRfI1xcM3lK+pI08x
- 1f3yk+i+RsbisPFS2NUn6gHNAD/KKlfmOoMJIjk98FUxbYvubBdj4YFMXOimNvw0z8w1
- GzKIPphgs7ifwElT1QhSmkReiR6xu2Qvgpg6GZlAmZGZMN2ddZr4hMBn4SC5IaDHAFyr
- N+B2DXrUAMPEt7mkhgTByn4A1HosD9caWmPXqcV/WPZVm4HYSzembmQpD1Xcn13cn5/I
- HXbA==
-X-Gm-Message-State: AOJu0YznO2ObARXXDU8RU8TCfPK0El4jmIk7XK6+pkBIoahOtAiGeviE
- vNYTskEbZmnQtGB26VIMn4LZelDIV+aeQ0gb3BtZauF0yAiT+Cny341wQKVYvkw9L09OXkagFfU
- aEzjyzBbu0Rrp9Sd5xgK92pVuG+/7+V/1Lw4cXDZvf5QNvj0dIeCPqk2irF7j42tNHuz/W/w0Df
- /jQeqsH72IC8qshAL17zc1nxrqRTSdDnOrL6Y=
-X-Received: by 2002:a17:903:2342:b0:1e0:e2c2:5703 with SMTP id
- c2-20020a170903234200b001e0e2c25703mr610077plh.0.1711527084899; 
- Wed, 27 Mar 2024 01:11:24 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IF/l+bZeawPsROKVtJ7LtcCTFHHPdj2JzBq+bx4NQGhyY1ZXfssNYVLxIZ0HYqx9Q7B0CTsmQ==
-X-Received: by 2002:a17:903:2342:b0:1e0:e2c2:5703 with SMTP id
- c2-20020a170903234200b001e0e2c25703mr610024plh.0.1711527084153; 
- Wed, 27 Mar 2024 01:11:24 -0700 (PDT)
-Received: from localhost.localdomain ([43.228.180.230])
- by smtp.gmail.com with ESMTPSA id
- n15-20020a170902d2cf00b001dcfaab3457sm8293709plc.104.2024.03.27.01.11.18
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Mar 2024 01:11:23 -0700 (PDT)
-From: wefu@redhat.com
-To: u-boot@lists.denx.de, bmeng@tinylab.org, rick@andestech.com,
- trini@konsulko.com, wefu@redhat.com, dlan@gentoo.org,
- joe.hershberger@ni.com, rfried.dev@gmail.com, ypron.glpk@gmx.de,
- michal.simek@amd.com, randolph@andestech.com, seashell11234455@gmail.com,
- peterlin@andestech.com, samuel@sholland.org, wiagn233@outlook.com,
- jonas@kwiboo.se, seanga2@gmail.com, baruch@tkos.co.il,
- kever.yang@rock-chips.com, sjg@chromium.org, gilbsgilbert@gmail.com,
- ycliang@andestech.com
-Cc: tekkamanninja@gmail.com,
-	tekkamanninja@163.com
-Subject: [PATCH 6/6] config/th1520_lpi4a.h: add more env option for booting
- linux
-Date: Wed, 27 Mar 2024 16:07:27 +0800
-Message-ID: <20240327080817.44501-7-wefu@redhat.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240327080817.44501-1-wefu@redhat.com>
-References: <20240327080817.44501-1-wefu@redhat.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=devarsht@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42RBLG0U106507;
+ Wed, 27 Mar 2024 06:21:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1711538476;
+ bh=Gj+AjcGTrQlbTRtZXFgftontx/OE/A6nH2r1rIy59zg=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=pt5PKvMcSfaDDDYitFpA26Vpmv5C56VdNBcCgUWOzsw+OFESophl/dUQkdQNzJISb
+ uN65P5vXc9vyhCOkJtPzPM2ysa79Pg00vDFafbyqiEx+wFLPyrCRILoTrIejR9GeN5
+ oca6snyVYkFsIlOm3iFxzSNh8ebvJBTifqcToPjk=
+Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42RBLGUw114202
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 27 Mar 2024 06:21:16 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
+ Mar 2024 06:21:15 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 27 Mar 2024 06:21:15 -0500
+Received: from [172.24.227.193] (devarsht.dhcp.ti.com [172.24.227.193] (may be
+ forged))
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42RBLBS8014533;
+ Wed, 27 Mar 2024 06:21:11 -0500
+Message-ID: <a281c494-d04d-1757-0f01-12e1a9fa2111@ti.com>
+Date: Wed, 27 Mar 2024 16:51:10 +0530
 MIME-Version: 1.0
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: redhat.com
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain; charset="US-ASCII"; x-default=true
-X-Mailman-Approved-At: Wed, 27 Mar 2024 12:14:56 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.11.0
+Subject: Re: [PATCH v2 1/2] spl: Introduce SoC specific init function
+Content-Language: en-US
+To: <lukas.funke-oss@weidmueller.com>, <u-boot@lists.denx.de>
+CC: Lukas Funke <lukas.funke@weidmueller.com>, Andre Przywara
+ <andre.przywara@arm.com>, Bin Meng <bmeng@tinylab.org>, Chanho Park
+ <chanho61.park@samsung.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Marek Vasut <marex@denx.de>, Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, Sean Anderson
+ <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+References: <20240327104638.2432672-1-lukas.funke-oss@weidmueller.com>
+ <20240327104638.2432672-2-lukas.funke-oss@weidmueller.com>
+From: Devarsh Thakkar <devarsht@ti.com>
+In-Reply-To: <20240327104638.2432672-2-lukas.funke-oss@weidmueller.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,43 +85,88 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: wefu@redhat.com
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Wei Fu <wefu@redhat.com>
 
-Signed-off-by: Wei Fu <wefu@redhat.com>
-Co-authored-by: Yixun Lan <dlan@gentoo.org>
----
- include/configs/th1520_lpi4a.h | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
 
-diff --git a/include/configs/th1520_lpi4a.h b/include/configs/th1520_lpi4a.h
-index 87496a52c4..6c0c4bc50d 100644
---- a/include/configs/th1520_lpi4a.h
-+++ b/include/configs/th1520_lpi4a.h
-@@ -17,6 +17,18 @@
- /* Environment options */
- 
- #define CFG_EXTRA_ENV_SETTINGS \
-+	"kernel_addr_r=0x82000000\0" \
-+	"kernel_comp_addr_r=0x88000000\0" \
-+	"kernel_comp_size=0x4000000\0" \
-+	"ramdisk_addr_r=0x8d300000\0" \
-+	"fdt_addr_r=0x8e000000\0" \
-+	"fdt_addr_fixed=0x20000000\0" \
-+	"scriptaddr=0x8e400000\0" \
-+	"scriptfile=uEnv_light_lpi4a.txt\0" \
-+	"devtype=mmc\0" \
-+	"devnum=0\0" \
-+	"bootpart=2\0" \
-+	"bootcmd=ext4load mmc ${devnum}:${bootpart} ${scriptaddr} ${scriptfile}; env import -t ${scriptaddr} ${filesize};boot\0" \
- 	"PS1=[LPi4A]# \0"
- 
- #endif /* __TH1520_LPI4A_H */
--- 
-2.44.0
+On 27/03/24 16:16, lukas.funke-oss@weidmueller.com wrote:
+> From: Lukas Funke <lukas.funke@weidmueller.com>
+> 
+> Some architectures use spl_board_init() in their SoC specific
+> implementation. Board developers should be able to add board specific
+> implementation via spl_board_init(). Hence, introduce a spl_soc_init()
+> method which is called right before spl_board_init() for SoC
+> specific implementation.
+> 
+> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+> ---
+> 
+> (no changes since v1)
+> 
+>  common/spl/Kconfig | 7 +++++++
+>  common/spl/spl.c   | 3 +++
+>  include/spl.h      | 8 ++++++++
+>  3 files changed, 18 insertions(+)
+> 
+> diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+> index 6405374bcc..9b5cc8daa7 100644
+> --- a/common/spl/Kconfig
+> +++ b/common/spl/Kconfig
+> @@ -272,6 +272,13 @@ config SPL_TEXT_BASE
+>  	help
+>  	  The address in memory that SPL will be running from.
+>  
+> +config SPL_SOC_INIT
+> +	bool "Call arch-specific initialization in SPL"
 
+Call SoC specific intialization in SPL
+
+With above change,
+Reviewed-by: Devarsh Thakkar <devarsht@ti.com>
+
+Regards
+Devarsh
+> +	help
+> +	  If this option is enabled, U-Boot will call the function
+> +	  spl_soc_init() from board_init_r(). This function should be
+> +	  provided by the architecture.
+> +
+>  config SPL_BOARD_INIT
+>  	bool "Call board-specific initialization in SPL"
+>  	help
+> diff --git a/common/spl/spl.c b/common/spl/spl.c
+> index b65c439e7a..9b83c85df5 100644
+> --- a/common/spl/spl.c
+> +++ b/common/spl/spl.c
+> @@ -711,6 +711,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+>  		}
+>  	}
+>  
+> +	if (CONFIG_IS_ENABLED(SOC_INIT))
+> +		spl_soc_init();
+> +
+>  	if (CONFIG_IS_ENABLED(BOARD_INIT))
+>  		spl_board_init();
+>  
+> diff --git a/include/spl.h b/include/spl.h
+> index 043875f10f..5dfdf778d2 100644
+> --- a/include/spl.h
+> +++ b/include/spl.h
+> @@ -816,6 +816,14 @@ int spl_early_init(void);
+>   */
+>  int spl_init(void);
+>  
+> +/*
+> + * spl_soc_init() - Do architecture-specific init in SPL
+> + *
+> + * If SPL_SOC_INIT is enabled, this is called from board_init_r() before
+> + * jumping to the next phase.
+> + */
+> +void spl_soc_init(void);
+> +
+>  /*
+>   * spl_board_init() - Do board-specific init in SPL
+>   *
