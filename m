@@ -4,87 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F536CD11DD
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 01:04:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 286DAC54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 01:18:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AFE887F78;
-	Wed, 27 Mar 2024 02:04:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 86FAE8801F;
+	Wed, 27 Mar 2024 02:18:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Fgo0Ydaf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QZKDbCOD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4251487E47; Wed, 27 Mar 2024 02:04:12 +0100 (CET)
+ id 92BEF83CF3; Wed, 27 Mar 2024 02:18:26 +0100 (CET)
 Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
  [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B13E987E47
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 02:04:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 437528810D
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 02:18:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
 Received: by mail-pf1-x42f.google.com with SMTP id
- d2e1a72fcca58-6ea895eaaadso1070656b3a.1
- for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 18:04:06 -0700 (PDT)
+ d2e1a72fcca58-6e694337fffso906794b3a.1
+ for <u-boot@lists.denx.de>; Tue, 26 Mar 2024 18:18:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711501445; x=1712106245; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1711502301; x=1712107101; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Q1vP1VLeEZQR7Aw/Xx376kC7KlUHvWn5Aj8D2ktfEt4=;
- b=Fgo0YdafCZjo3TzS8oplxRKZF3HnZZSvrDDcL9L0KWBjEuVzrIQm5CBr1ieG+iYDuS
- H4JQ+V4LzOo9stw6egGBA4ljTJxS1OvZZHnDg2ubRGGX9xYwKJPQbpw/1H9f0P5Ts6c5
- YuUJ6SsyNPq4fqIAHJLv7FdzqHpkFhkpf/4MoWrXj/Ffh0cC9clmAnAdBsdoafZzEOoJ
- 19yxTz0keja4mhEyKu4ynZRvcW68k0L/fzuGH9bkYQGSq2dGYsX5GSbJMGUZJlUSUSgL
- 9no1kReZJAK8K8OsCsyaDvZyXx/v/UNTXTzUeV/bc4X3JSISoZuojt+RWPWCSBeZjPIr
- 3Atg==
+ bh=mlZ9RkK9MfpWjp2yQoRNSsVKbuExtdNY5QEW30CAvN8=;
+ b=QZKDbCODoMtMjupiLyuLI4cir7FumA4i1CVn2FewYqvCR9PtnGhyhBwGotCxb2ud0l
+ EwCfRXj//VBhDTPtrZpbdQgsRsuB05w4K3sQF/bOOUNXryHAbri72KH52vP0g9hCPRv6
+ y7TaB/jfzW8Yc3RAYnxRzn3rTxyhgxu+3IiZG86RSqb0wrKZjLrMjSkD69PECMHhDdM9
+ jfD7UaUJ2Svb8Js9+kXlmUKCB5BVVz+HBuISMI3xbkOt4k2IKsqe3cL3Wn+lZNr29ktj
+ bU07z9rpK9OKG8MRbWC3JaLI8+jQbbsXccsmVSFyIrWk7w8+M5zy2DlJqq/BWR2Ggf3r
+ EgXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711501445; x=1712106245;
+ d=1e100.net; s=20230601; t=1711502301; x=1712107101;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Q1vP1VLeEZQR7Aw/Xx376kC7KlUHvWn5Aj8D2ktfEt4=;
- b=N+hW7XRjAQqVxus8QzQCs8GQ3PjkZnlswjndK1qQ2lkukBdML+SaEDRyLY5BtEMv/+
- DQJzeo0MJqaqQqiAwtQLC8qUZWWIIooUS+xBY7vsjql3VKi67S2XtHACR9We0L4zdnC+
- nnbM6zsNxj9DOzJ+1hi6XIZFzY8V4iPHDhhVQj9zaWPoxrB7XKSce7trJhVRrP8VpO12
- rgE8O85dfUqKzOIP2oKB+Wu4YKIXNXoQOgC7pmSR18wxRKekmBdADj5N0oJEElrkaWNr
- H4XflQYVh6Muj0uDw2AQLpytaQnRZcsRmhNdXoIUUUnxrXyvlxDmCJIIQmE9Fo2Nyqqo
- U4Jw==
-X-Gm-Message-State: AOJu0YwEtuBNTYDqCk40fA+hznHHE0wmcwGUSV0drFQ6BsVTKXxwwdg9
- 2hDDK2+oebLUFVPjnlsHEGT4qe+D9RWROAo3Vwb91IvCiLALcLtKlfj/Qvfd0n1kKeMg6GGgP9V
- FUkvjg55WF3NPdex/YuPndeItvlM=
-X-Google-Smtp-Source: AGHT+IGekDIBC2RJfzzB909ym8wtQ4JraE2/OcTp1X/ez7twp/g9NhV6viIAcUL8kyYOMCd2/wDZzrAm6OuLiyPJL6Y=
-X-Received: by 2002:a05:6a20:daa9:b0:1a3:c61f:c2d5 with SMTP id
- iy41-20020a056a20daa900b001a3c61fc2d5mr9463094pzb.6.1711501445117; Tue, 26
- Mar 2024 18:04:05 -0700 (PDT)
+ bh=mlZ9RkK9MfpWjp2yQoRNSsVKbuExtdNY5QEW30CAvN8=;
+ b=QzlVypP10w20SQP3Dd5XKQy7HkECYLzOuBN0tONa5tXj6ivc6woa99FBPl27B/qxZ9
+ S1j85RhIEAXpYZC9e8AhNp9jYjuI2ebvnzWwNZZu/X+x2YxM2SRnEg0eRWMK+oIIrCUK
+ Jgct4zuxXMOMgGHhIvCIFsh/MwUtH41EAN0mwxKT0fg8QBZI+TGbD35c+BisE+jD7mSC
+ OMWX+KXLQvsggAiiSFRXRl1GwnEv9b1E8vUbgCYhQaWciZYduxJImTwjfZdlGtQv+pnk
+ pe2Gq8NMh49TaiS+ID4AW30X4/imOb76I1b4NneDBI+gKQjOoU4oweL0BzeouA14BS+5
+ qRzg==
+X-Gm-Message-State: AOJu0YxLtTH4lfQpGeOQtJx5ExVuU+KMeK95+HxUzAMXhNT4fpXU5+wZ
+ nek4DmtXNgAJmLqrfHdGJvjpP/Mzv19z6LJj0o+4XRwQPBNAouyAj9ERuTntrVFOlIt2ZLkD4Hy
+ QllNRhXHfdmLsx20Yp23Am0ytGfLv0EKz
+X-Google-Smtp-Source: AGHT+IHamh28I6xIOJZS59pE4dzRU2IVw39n1DkHfEWD0x91RIuJLacO+iyKahdjQ/kRYV4ch0etP3ZAEI+GfeDLaKM=
+X-Received: by 2002:a05:6a21:3293:b0:1a1:481b:475d with SMTP id
+ yt19-20020a056a21329300b001a1481b475dmr13963235pzb.6.1711502300651; Tue, 26
+ Mar 2024 18:18:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240326202439.46707-1-aford173@gmail.com>
- <20240326202439.46707-5-aford173@gmail.com>
-In-Reply-To: <20240326202439.46707-5-aford173@gmail.com>
+References: <20240326110656.21110-1-javier.viguera@digi.com>
+In-Reply-To: <20240326110656.21110-1-javier.viguera@digi.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 26 Mar 2024 22:03:53 -0300
-Message-ID: <CAOMZO5CGm_OXe-oxK2qhWnnfzy=Bz57oV57XEo7-6KV5jpXSPg@mail.gmail.com>
-Subject: Re: [PATCH 5/7] arm64: imx: imx8mm-beacon: Migrate to OF_UPSTREAM
-To: Adam Ford <aford173@gmail.com>
-Cc: u-boot@lists.denx.de, aford@beaconembedded.com, 
- Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Michal Simek <michal.simek@amd.com>,
- Marek Vasut <marex@denx.de>, Jonas Karlman <jonas@kwiboo.se>,
- Svyatoslav Ryhel <clamor95@gmail.com>, 
- Tim Harvey <tharvey@gateworks.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Hai Pham <hai.pham.ud@renesas.com>, 
- Andrew Davis <afd@ti.com>, Peng Fan <peng.fan@nxp.com>, 
- Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Gilles Talis <gilles.talis@gmail.com>, 
- Patrick Wildt <patrick@blueri.se>, Simon Glass <sjg@chromium.org>,
- Sean Anderson <seanga2@gmail.com>, 
- Martyn Welch <martyn.welch@collabora.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Date: Tue, 26 Mar 2024 22:18:10 -0300
+Message-ID: <CAOMZO5DYmkp6Wm79bBFv3fFuVWu+LghiKqPkC5kcLnW21Umy3A@mail.gmail.com>
+Subject: Re: [PATCH] arm: imx: fix signature_block_hdr struct fields order
+To: Javier Viguera <javier.viguera@digi.com>
+Cc: u-boot@lists.denx.de, uboot-imx@nxp.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -103,14 +87,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Adam,
+Hi Javier,
 
-On Tue, Mar 26, 2024 at 5:25=E2=80=AFPM Adam Ford <aford173@gmail.com> wrot=
-e:
+On Tue, Mar 26, 2024 at 8:07=E2=80=AFAM Javier Viguera <javier.viguera@digi=
+.com> wrote:
 >
-> The imx8mm-beacon boards can migrate to OF_UPSTREAM which also
-> allows for the removal the device tree files.
+> According to the documentation (for example AN13994), for AHAB-enabled
+> devices the format of the signature block is:
 >
-> Signed-off-by: Adam Ford <aford173@gmail.com>
+>   +--------------+--------------+--------------+-------------+
+>   | Tag          | Length - msb | Length - lsb | Version     |
+>   +--------------+--------------+--------------+-------------+
+>   | SRK Table offset            | Certificate offset         |
+>   +-----------------------------+----------------------------+
+>   | Blob offset                 | Signature offset           |
+>   +-----------------------------+----------------------------+
 
-Please split the series by SoC family, thanks.
+Could you elaborate more about this and share more details?
+
+Have you seen a run-time error or did you catch it by code inspection?
+
+Please clarify.
+
+Thanks
