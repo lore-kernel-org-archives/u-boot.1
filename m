@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD162CD11DD
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 14:15:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10AD3C54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 14:15:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 163A58803A;
-	Wed, 27 Mar 2024 15:15:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 79169880BB;
+	Wed, 27 Mar 2024 15:15:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="yBYjqRpC";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="QbRA0cQC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C5F3879F6; Wed, 27 Mar 2024 15:15:16 +0100 (CET)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::601])
+ id 4020C880EB; Wed, 27 Mar 2024 15:15:22 +0100 (CET)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::600])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B906880B9
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 15:15:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 94189880B9
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 15:15:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=E2231bG0uSsGnh3Yjtry0P55sHv9FQ4MEEGktX207Ty/DI/lhNReFx4U8qtZnysOiF+1q1sKmmtbZnHPHz8MFdioYioTLeqi0pNVBslEeoFzwR4G1UFImSgdlthRgW1aw5eXlTiUmAQBF1gPhZE73dreyxoPeCeV3x0jiRDtnjPzX+jntnMJs6kKrAiEJ4Fd5IX2zLEPuc8Brm/MPzW+/PTjDvg/ICeNfc0sByZdfkzzMWpECNzBQVzIA/4C0Vdd/9G4/0XmKbzGeu4+s9T0nQkXLF+FRJz21er35zsHuBgYPkX454AD4NNQZ0Q5SR257JhQIYtYFzwsFeJAxE8R/Q==
+ b=VQ8OYnmgGDQe0xA1ABKJkCDecn1tndKrr0pXiuMccghx6lIe9c288NDYQnbI8BN2x96d77jgRyjZHooOtK07q85Gt8DCQFdib/FZANJkDrikZ0mM9NasLF66+6YtCQLFdvK/19bTZ18oPnUFPNxZb0V64XiTnJNPFAU8PxbdWjpv0kISDT+OXklrgfg1ky86OW0PBU/nN6LRsHrOarMFC3nbA0sWIQfb+XXOKjZ7+6PnF/RGX9Zio1KaZC26FmGxrdY5jvQ8CdXfcRpsUP4suUX2xuOUPDk1A4bILEgftuwPkdpuh2mlVmJ9Yx3PaNcSZZDRqLcbLq15az2vPRe6RA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9xyyMfMTcJQgcQtPej4L/1Lf9WvcKWUL9Hvc/P5ZRH4=;
- b=I/q8SZfK5Sq5Zj01kJtvq9gVJEPkDLqd0wxR7MiI5fkVmYV4tim8MXt3HH9r+8xMGYmow6s4MzgyiQpO05W0lwmivXDQUKeJ+4wma79SVcb4kF0aQVtCx08HPo0FFEL/syZr1rhbGQ3eeer/BgFTmwcp6KmSw6aQmTlkBkIiexMLWd8+tYySxK4vo9rlJ3i2Q/TW1Zu0WeUI3iISPwOrEcptmEfcDVfBrFyFvgxZjgC1xY75CkEzVPA02u/MWdQwFP7rNfL67XmbkL2i70LWDJ9gInJkDrHO7lORoXtriVS1YIEvYzNbIWX0kYoDh4kxBi1uQ15Zy7/GIzAVs7hYoA==
+ bh=2VABfEmQ1cxu+KiTUn1YHCFAUiiNDZEAGL4Le+gxEgs=;
+ b=HaHVUHfa9sxKlBOg/0C+FqqiJUE46fEoOIuLnvbYoFE5guuAG8gYxBBtN50VJ8bT+DCAjK5hEQtE0FMuilfBNzfggkNDVTzLf6Y9eUxgInYkhTnnjjcmjGMhn2rZi5+uyx6Dghuf9/yvEP2NTYDeoE2gTTSGs4d9cy7xhilcN0VfT6NowbdQSju4qHk9OKrKlAjxY7KanRnF6B7f7stGk0h0k8TpvGh+LepCqYL3sDdsDgJ0SrHSZmfrM9XBVZT193KruMN08TeCFGC0F6uW3L0FKVXxdRAU11OCrNDGSMKVDJ7SogRNRJj2nTTLaokamnj0dd6AyEnyeCU4rQ6x/g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9xyyMfMTcJQgcQtPej4L/1Lf9WvcKWUL9Hvc/P5ZRH4=;
- b=yBYjqRpCb5GTLYRF9SaFHjmcdQ8peuh0Q3RENY/BMxdSHRnWotFDFiZcqRB8IlAIvV2Aw4ivif+WaVp+iqt/ajtsUACCCj+Ximc6qSuK3JJ8Nl50s7a75X9CYCqPyB5jE8azMB3ixBQSNGZB00ikKtJ2P+/x45cZRTs3W8bha8g=
-Received: from BL1P221CA0028.NAMP221.PROD.OUTLOOK.COM (2603:10b6:208:2c5::18)
- by SJ2PR12MB8690.namprd12.prod.outlook.com (2603:10b6:a03:540::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.31; Wed, 27 Mar
- 2024 14:15:10 +0000
+ bh=2VABfEmQ1cxu+KiTUn1YHCFAUiiNDZEAGL4Le+gxEgs=;
+ b=QbRA0cQCRMCSRWW4Jq6NSET93TqlCzkVXCKdQ4gQkmE+xxozmvYlfgzAgrL9bnKaGkxS4C9MEJH2NEnQyhnnA1wCES2S/x0ApY6qxv48v9AkOPPPcAh8LZ9fkvH5j0AwB3JophUSqJSDyCYJ5pn7SWJi9SmGWojrlXkpnCdU/RY=
+Received: from BL1P221CA0006.NAMP221.PROD.OUTLOOK.COM (2603:10b6:208:2c5::22)
+ by DM6PR12MB4154.namprd12.prod.outlook.com (2603:10b6:5:21d::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.32; Wed, 27 Mar
+ 2024 14:15:14 +0000
 Received: from BL6PEPF0001AB4E.namprd04.prod.outlook.com
- (2603:10b6:208:2c5:cafe::2e) by BL1P221CA0028.outlook.office365.com
- (2603:10b6:208:2c5::18) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10b6:208:2c5:cafe::89) by BL1P221CA0006.outlook.office365.com
+ (2603:10b6:208:2c5::22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.13 via Frontend
- Transport; Wed, 27 Mar 2024 14:15:09 +0000
+ Transport; Wed, 27 Mar 2024 14:15:13 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -61,26 +61,27 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
  BL6PEPF0001AB4E.mail.protection.outlook.com (10.167.242.72) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7409.10 via Frontend Transport; Wed, 27 Mar 2024 14:15:09 +0000
+ 15.20.7409.10 via Frontend Transport; Wed, 27 Mar 2024 14:15:13 +0000
 Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 27 Mar
- 2024 09:15:08 -0500
+ 2024 09:15:12 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/4] zlib: Port fix for CVE-2016-9841 to U-Boot
-Date: Wed, 27 Mar 2024 15:14:52 +0100
-Message-ID: <b456422bcfc6b1e5e23c4784438c4e75c4ed9e00.1711548887.git.michal.simek@amd.com>
+CC: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 4/4] zlib: Remove incorrect ZLIB_VERSION
+Date: Wed, 27 Mar 2024 15:14:53 +0100
+Message-ID: <5fd7c5b4c0b7d15e42cc9fbc69666853ee27eb0a.1711548887.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <cover.1711548887.git.michal.simek@amd.com>
 References: <cover.1711548887.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=12224; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=frUFg9rGCqA/FP/ncVrYuVQ1lAnsmdxT41R8TlMkxT4=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhjQWzfsn+1zSj/je10rdF7FY5G8SQ5+Wm3O0i/72ZbumL
- mU5ki7YEcvCIMjEICumyCJtc+XM3soZU4QvHpaDmcPKBDKEgYtTACZy+yXDPNWlqUeifE/wd89c
- qnHyXs2l+Sv7DzPMr+jbV+6n+uO50/QJZk/TxcLMvryMBgA=
+X-Developer-Signature: v=1; a=openpgp-sha256; l=8155; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=7OMIRWctZ6NvYHiquJvE2zUxV7g8Si3Z4GlZk66pNeA=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhjQWzQd7+wqZT1o1S+UGp044/DGq1UD9soarlqLmAX3ND
+ +6mL553xLIwCDIxyIopskjbXDmzt3LGFOGLh+Vg5rAygQxh4OIUgIlcD2aYzbq2ddG0Jae/3p01
+ rS/z6bQ09gvmKxnmO4vVqLzOWXP6xNdNyvulpt6yKPBxAgA=
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
@@ -90,26 +91,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4E:EE_|SJ2PR12MB8690:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9021fcef-6c29-4fbb-b552-08dc4e684f7b
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4E:EE_|DM6PR12MB4154:EE_
+X-MS-Office365-Filtering-Correlation-Id: e7ac447f-bc27-4c32-8661-08dc4e6851d4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: HrUNIJVxOYAx71a1MdYAvQ+tQdpinhjTUNNV3Pdo5wz9cqCOOHuR3m6LtRs/upYpu26zf7YCF5qySXxSGWqj7Xjr/upiFMK2qaENcEdn6csOJ95KOAwowiwlLj3yi1tqeqPUegV/uqRHy506InFhVff0zP3kaaMDHLafTu0ZPGjoqXf3nOH/EcFUER1llrazqL608YzBE8w5qkDQmYawITB2QqZGUca0CERm1G8s7dQ+8Izn3bEKNoqELcWcgoPHgxfCZeE7tB73nRSJ+EJzD6CHlbwvkCYinDiAd9+fkcnWyhUpg1VEpzmldluvz2ntE225usOtrek6KML23D+xT/TV3ja15EMUdmXb9kehjgoIZCM8CziGQAQfvjxWfFC8tFwmBUDlt14wCGZI5MTlUoMBOglWuSzBlrjKcSwEt53iXG3MdTVj8HL8JvqHSB+FR9m7yKQab3geTwQqmXn8rY15QIBB9qu2L0bKRgpCGPaD334CYUzbf0ty/L1R7Fh9kLq13+kcCMJyStP/VywFsnVilm9qjseRz7JXUTld+/1q8pRzSiVxcdX+wSZb6y6RTdLZmd0zgrJkenLUVaKc6gTe7AnB55GpF1r5qDCv0cRMqFH6hkZIaowzW4sUDcmibWTA3IQy+7/G/WbaNmcgiYdqSlt25jWIm08C4ApYJz1ImenDmhUcJTKvdQ1M+iQMmpJTHNhsvoht9VPPtLPOBw==
+X-Microsoft-Antispam-Message-Info: I8q6PMBf5XMJwnEdlsXBmQO25TIfWBWCpG+eznz+ZtpSl3iXmZ8iCZVb/sA0sq9YL6T/RAATuVVRX1CwOFZdFPvNoddpvGJ3HDWYpG+Yn0PobhlBep3izRt35pdtzZugX5kxJKI9bOlkI87nOS0UDKw0Bo0Y7OzoWB2XgFmLCxUv0miLYjh06axF5BiGO2vgT0VP0TvCDGpXggJlQnj9nxShxkrlTfslA6pmv5wHj9CnsM2Zv9nE0tkCPTIDsIJzKnOrX/qyFtReDxWNY+T04eHb1FqmVSAzJj81SYP2QopJw1tkW4TX5Bqy2vRD7eOFfjqWG2noSg7Fx0DDFDeQf9t+XqTx8G7TcRLSoC0hIeGRL8ocCB0gapCCkAcux491WAuYULt3YxDGwLJP+Mb415RZ2nfXn4sNBvM+LcN8xA7yAdUneTu7GG+sZhoDNwxeHGeVVjJbksw/ioQ40+VBVjxKv16V5uFjeeeOwN5WNLuG0Yr2eHMy3cW7jUglMpGRqK3fMc2/ZmWu4k1M3EacocY4SPvj+DeI1yhiAckKSDz6V4OIib/vaNrqsbDckDFHFYZ1HcHzCSEoN3hMq9KbKWorNARA2Xk7qUhLivZIm302WbOL4MH+CNJU02ohriH126VhnZnyIpA0sOKmWP/X3SMHPLRB4weiPZ+1+QP5o1wGceW8dV/qL2+DZeNJ137xDGfGXm4R5AhVGU//UzUt1A==
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(376005)(82310400014)(36860700004)(1800799015); DIR:OUT;
+ SFS:(13230031)(36860700004)(376005)(82310400014)(1800799015); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2024 14:15:09.6371 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9021fcef-6c29-4fbb-b552-08dc4e684f7b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2024 14:15:13.5746 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7ac447f-bc27-4c32-8661-08dc4e6851d4
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB4E.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8690
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4154
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -126,299 +127,209 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The patch corresponds to zlib commit at
-https://github.com/madler/zlib/commit/9aaec95e82117c1cb0f9624264c3618fc380cecb
-which declares that it is fixing CVE-2016-9841.
-Here is c&p description from zlib:
-"Use post-increment only in inffast.c.
+Get rid of zlib version which is not correct because of U-Boot related
+changes and various CVE backports.
 
-An old inffast.c optimization turns out to not be optimal anymore
-with modern compilers, and furthermore was not compliant with the
-C standard, for which decrementing a pointer before its allocated
-memory is undefined. Per the recommendation of a security audit of
-the zlib code by Trail of Bits and TrustInSoft, in support of the
-Mozilla Foundation, this "optimization" was removed, in order to
-avoid the possibility of undefined behavior."
+The change in inspired by Linux kernel commit 4f3865fb57a0 ("[PATCH]
+zlib_inflate: Upgrade library code to a recent version") which described
+ZLIB_VERSION removal as
 
-Origin patch also updates the code when
-INFLATE_ALLOW_INVALID_DISTANCE_TOOFAR_ARRR is present but this code is not
-the part of U-Boot hence it is ignored.
-Also do not deal with state->sane variable which requires other changes
-which are also not the part of zlib.
+"This patch also removes ZLIB_VERSION as it no longer has a correct value.
+We don't need version checks anyway as the kernel's module handling will
+take care of that for us.  This removal is also more in keeping with the
+zlib author's wishes (http://www.zlib.net/zlib_faq.html#faq24) and I've
+added something to the zlib.h header to note its a modified version."
 
-Commit 92faa8b10918 ("zlib: handle overflow while calculating available
-stream input size") is kept in inffast.c too not to break described case.
+Author describes wish to follow this guidance at
+https://www.zlib.net/zlib_faq.html#faq24:
+"The license says that altered source versions must be "plainly marked". So
+what exactly do I need to do to meet that requirement?
+
+You need to change the ZLIB_VERSION and ZLIB_VERNUM #defines in zlib.h. In
+particular, the final version number needs to be changed to f, and an
+identification string should be appended to ZLIB_VERSION. Version numbers
+x.x.x.f are reserved for modifications to zlib by others than the zlib
+maintainers. For example, if the version of the base zlib you are altering
+is 1.2.3.4, then in zlib.h you should change ZLIB_VERNUM to 0x123f, and
+ZLIB_VERSION to something like 1.2.3.f-zachary-mods-v3. You can also update
+the version strings in deflate.c and inftrees.c."
+
+But U-Boot is not exact version that's why following the same style which
+has been used by Linux kernel where ZLIB_VERSION is completely removed.
 
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
-The first attempt to fix this is here.
-https://patchwork.ozlabs.org/project/uboot/patch/20220911084637.21513-1-jit.loon.lim@intel.com/
 ---
- lib/zlib/inffast.c | 130 +++++++++++++++------------------------------
- 1 file changed, 42 insertions(+), 88 deletions(-)
+ include/u-boot/zlib.h | 16 ++++++----------
+ lib/gzip.c            |  2 +-
+ lib/zlib/deflate.c    | 13 +++----------
+ lib/zlib/inflate.c    |  9 +++------
+ lib/zlib/zutil.c      |  1 -
+ 5 files changed, 13 insertions(+), 28 deletions(-)
 
-diff --git a/lib/zlib/inffast.c b/lib/zlib/inffast.c
-index bdaa6d0dc51f..5e2a65ad4d27 100644
---- a/lib/zlib/inffast.c
-+++ b/lib/zlib/inffast.c
-@@ -1,5 +1,5 @@
- /* inffast.c -- fast decoding
-- * Copyright (C) 1995-2004 Mark Adler
-+ * Copyright (C) 1995-2008, 2010, 2013 Mark Adler
-  * For conditions of distribution and use, see copyright notice in zlib.h
-  */
+diff --git a/include/u-boot/zlib.h b/include/u-boot/zlib.h
+index a33cc8780d33..ee19f4609588 100644
+--- a/include/u-boot/zlib.h
++++ b/include/u-boot/zlib.h
+@@ -49,9 +49,6 @@
+ extern "C" {
+ #endif
  
-@@ -12,25 +12,6 @@
- 
- #ifndef ASMINF
- 
--/* Allow machine dependent optimization for post-increment or pre-increment.
--   Based on testing to date,
--   Pre-increment preferred for:
--   - PowerPC G3 (Adler)
--   - MIPS R5000 (Randers-Pehrson)
--   Post-increment preferred for:
--   - none
--   No measurable difference:
--   - Pentium III (Anderson)
--   - M68060 (Nikl)
-- */
--#ifdef POSTINC
--#  define OFF 0
--#  define PUP(a) *(a)++
--#else
--#  define OFF 1
--#  define PUP(a) *++(a)
--#endif
+-#define ZLIB_VERSION "1.2.3"
+-#define ZLIB_VERNUM 0x1230
 -
- /*
-    Decode literal, length, and distance codes and write out the resulting
-    literal and match bytes until either not enough input or output is
-@@ -66,12 +47,13 @@
-       requires strm->avail_out >= 258 for each loop to avoid checking for
-       output space.
+ /* #include "zconf.h" */        /* included directly here */
+ /* zconf.h -- configuration of the zlib compression library
+  * Copyright (C) 1995-2005 Jean-loup Gailly.
+@@ -484,7 +481,6 @@ typedef gz_header FAR *gz_headerp;
+ #define Z_DATA_ERROR   (-3)
+ #define Z_MEM_ERROR    (-4)
+ #define Z_BUF_ERROR    (-5)
+-#define Z_VERSION_ERROR (-6)
+ /* Return codes for the compression/decompression functions. Negative
+  * values are errors, positive values are used for special but normal events.
   */
--void inflate_fast(z_streamp strm, unsigned start)
--/* start: inflate()'s starting value for strm->avail_out */
-+void ZLIB_INTERNAL inflate_fast(strm, start)
-+z_streamp strm;
-+unsigned start;         /* inflate()'s starting value for strm->avail_out */
+@@ -523,11 +519,11 @@ typedef gz_header FAR *gz_headerp;
+ 
+ ZEXTERN int ZEXPORT deflate OF((z_streamp strm, int flush));
+ ZEXTERN int ZEXPORT deflateInit_ OF((z_streamp strm, int level,
+-			const char *version, int stream_size));
++			int stream_size));
+ ZEXTERN int ZEXPORT deflateEnd OF((z_streamp strm));
+ ZEXTERN int ZEXPORT deflateInit2_ OF((z_streamp strm, int  level, int  method,
+ 			int windowBits, int memLevel,
+-			int strategy, const char *version,
++			int strategy,
+ 			int stream_size));
+ ZEXTERN int ZEXPORT deflateReset OF((z_streamp strm));
+ ZEXTERN int ZEXPORT deflateSetDictionary OF((z_streamp strm,
+@@ -553,7 +549,7 @@ ZEXTERN int ZEXPORT deflateCopy OF((z_streamp dest,
+ 
+ 
+ ZEXTERN int ZEXPORT inflateInit_ OF((z_streamp strm,
+-			const char *version, int stream_size));
++			int stream_size));
+ ZEXTERN int ZEXPORT inflate OF((z_streamp strm, int flush));
+ /*
+     inflate decompresses as much data as possible, and stops when the input
+@@ -743,11 +739,11 @@ ZEXTERN int ZEXPORT uncompress2 OF((Bytef *dest, uLongf *destLen,
+ */
+ 
+ ZEXTERN int ZEXPORT inflateInit2_ OF((z_streamp strm, int  windowBits,
+-                                      const char *version, int stream_size));
++                                      int stream_size));
+ #define inflateInit(strm) \
+-	inflateInit_((strm), ZLIB_VERSION, sizeof(z_stream))
++	inflateInit_((strm), sizeof(z_stream))
+ #define inflateInit2(strm, windowBits) \
+-	inflateInit2_((strm), (windowBits), ZLIB_VERSION, sizeof(z_stream))
++	inflateInit2_((strm), (windowBits), sizeof(z_stream))
+ 
+ #if !defined(ZUTIL_H) && !defined(NO_DUMMY_DECL)
+ 	struct internal_state {int dummy;}; /* hack for buggy compilers */
+diff --git a/lib/gzip.c b/lib/gzip.c
+index 5d9c19598d5e..a9a3df524de1 100644
+--- a/lib/gzip.c
++++ b/lib/gzip.c
+@@ -67,7 +67,7 @@ int zzip(void *dst, unsigned long *lenp, unsigned char *src,
+ 
+ 	r = deflateInit2_(&s, Z_BEST_SPEED, Z_DEFLATED,	window,
+ 			DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY,
+-			ZLIB_VERSION, sizeof(z_stream));
++			sizeof(z_stream));
+ 	if (r != Z_OK) {
+ 		printf ("Error: deflateInit2_() returned %d\n", r);
+ 		return -1;
+diff --git a/lib/zlib/deflate.c b/lib/zlib/deflate.c
+index 4549f4dc12a0..7e1ed4f9b20a 100644
+--- a/lib/zlib/deflate.c
++++ b/lib/zlib/deflate.c
+@@ -196,37 +196,30 @@ struct static_tree_desc_s {int dummy;}; /* for buggy compilers */
+     zmemzero((Bytef *)s->head, (unsigned)(s->hash_size-1)*sizeof(*s->head));
+ 
+ /* ========================================================================= */
+-int ZEXPORT deflateInit_(strm, level, version, stream_size)
++int ZEXPORT deflateInit_(strm, level, stream_size)
+     z_streamp strm;
+     int level;
+-    const char *version;
+     int stream_size;
+ {
+     return deflateInit2_(strm, level, Z_DEFLATED, MAX_WBITS, DEF_MEM_LEVEL,
+-                         Z_DEFAULT_STRATEGY, version, stream_size);
++                         Z_DEFAULT_STRATEGY, stream_size);
+     /* To do: ignore strm->next_in if we use it as window */
+ }
+ 
+ /* ========================================================================= */
+ int ZEXPORT deflateInit2_(strm, level, method, windowBits, memLevel, strategy,
+-                  version, stream_size)
++                  stream_size)
+     z_streamp strm;
+     int  level;
+     int  method;
+     int  windowBits;
+     int  memLevel;
+     int  strategy;
+-    const char *version;
+     int stream_size;
+ {
+     deflate_state *s;
+     int wrap = 1;
+-    static const char my_version[] = ZLIB_VERSION;
+ 
+-    if (version == Z_NULL || version[0] != my_version[0] ||
+-        stream_size != sizeof(z_stream)) {
+-        return Z_VERSION_ERROR;
+-    }
+     if (strm == Z_NULL) return Z_STREAM_ERROR;
+ 
+     strm->msg = Z_NULL;
+diff --git a/lib/zlib/inflate.c b/lib/zlib/inflate.c
+index 79c9e991aa33..f7e81fc8b2a0 100644
+--- a/lib/zlib/inflate.c
++++ b/lib/zlib/inflate.c
+@@ -30,14 +30,11 @@ int ZEXPORT inflateReset(z_streamp strm)
+     return Z_OK;
+ }
+ 
+-int ZEXPORT inflateInit2_(z_streamp strm, int windowBits, const char *version,
++int ZEXPORT inflateInit2_(z_streamp strm, int windowBits,
+ 			  int stream_size)
  {
      struct inflate_state FAR *state;
--    unsigned char FAR *in;      /* local strm->next_in */
--    unsigned char FAR *last;    /* while in < last, enough input available */
-+    z_const unsigned char FAR *in;      /* local strm->next_in */
-+    z_const unsigned char FAR *last;    /* have enough input while in < last */
-     unsigned char FAR *out;     /* local strm->next_out */
-     unsigned char FAR *beg;     /* inflate()'s initial strm->next_out */
-     unsigned char FAR *end;     /* while out < end, enough space available */
-@@ -97,7 +79,7 @@ void inflate_fast(z_streamp strm, unsigned start)
  
-     /* copy state to local variables */
-     state = (struct inflate_state FAR *)strm->state;
--    in = strm->next_in - OFF;
-+    in = strm->next_in;
-     last = in + (strm->avail_in - 5);
-     if (in > last && strm->avail_in > 5) {
-         /*
-@@ -107,7 +89,7 @@ void inflate_fast(z_streamp strm, unsigned start)
- 	strm->avail_in = 0xffffffff - (uintptr_t)in;
-         last = in + (strm->avail_in - 5);
-     }
--    out = strm->next_out - OFF;
-+    out = strm->next_out;
-     beg = out - (start - strm->avail_out);
-     end = out + (strm->avail_out - 257);
- #ifdef INFLATE_STRICT
-@@ -128,9 +110,9 @@ void inflate_fast(z_streamp strm, unsigned start)
-        input data or output space */
-     do {
-         if (bits < 15) {
--            hold += (unsigned long)(PUP(in)) << bits;
-+            hold += (unsigned long)(*in++) << bits;
-             bits += 8;
--            hold += (unsigned long)(PUP(in)) << bits;
-+            hold += (unsigned long)(*in++) << bits;
-             bits += 8;
-         }
-         here = lcode[hold & lmask];
-@@ -143,14 +125,14 @@ void inflate_fast(z_streamp strm, unsigned start)
-             Tracevv((stderr, here.val >= 0x20 && here.val < 0x7f ?
-                     "inflate:         literal '%c'\n" :
-                     "inflate:         literal 0x%02x\n", here.val));
--            PUP(out) = (unsigned char)(here.val);
-+            *out++ = (unsigned char)(here.val);
-         }
-         else if (op & 16) {                     /* length base */
-             len = (unsigned)(here.val);
-             op &= 15;                           /* number of extra bits */
-             if (op) {
-                 if (bits < op) {
--                    hold += (unsigned long)(PUP(in)) << bits;
-+                    hold += (unsigned long)(*in++) << bits;
-                     bits += 8;
-                 }
-                 len += (unsigned)hold & ((1U << op) - 1);
-@@ -159,9 +141,9 @@ void inflate_fast(z_streamp strm, unsigned start)
-             }
-             Tracevv((stderr, "inflate:         length %u\n", len));
-             if (bits < 15) {
--                hold += (unsigned long)(PUP(in)) << bits;
-+                hold += (unsigned long)(*in++) << bits;
-                 bits += 8;
--                hold += (unsigned long)(PUP(in)) << bits;
-+                hold += (unsigned long)(*in++) << bits;
-                 bits += 8;
-             }
-             here = dcode[hold & dmask];
-@@ -174,10 +156,10 @@ void inflate_fast(z_streamp strm, unsigned start)
-                 dist = (unsigned)(here.val);
-                 op &= 15;                       /* number of extra bits */
-                 if (bits < op) {
--                    hold += (unsigned long)(PUP(in)) << bits;
-+                    hold += (unsigned long)(*in++) << bits;
-                     bits += 8;
-                     if (bits < op) {
--                        hold += (unsigned long)(PUP(in)) << bits;
-+                        hold += (unsigned long)(*in++) << bits;
-                         bits += 8;
-                     }
-                 }
-@@ -196,17 +178,18 @@ void inflate_fast(z_streamp strm, unsigned start)
-                 if (dist > op) {                /* see if copy from window */
-                     op = dist - op;             /* distance back in window */
-                     if (op > whave) {
--                        strm->msg = (char *)"invalid distance too far back";
-+                        strm->msg =
-+                            (char *)"invalid distance too far back";
-                         state->mode = BAD;
-                         break;
-                     }
--                    from = window - OFF;
-+                    from = window;
-                     if (wnext == 0) {           /* very common case */
-                         from += wsize - op;
-                         if (op < len) {         /* some from window */
-                             len -= op;
-                             do {
--                                PUP(out) = PUP(from);
-+                                *out++ = *from++;
-                             } while (--op);
-                             from = out - dist;  /* rest from output */
-                         }
-@@ -217,14 +200,14 @@ void inflate_fast(z_streamp strm, unsigned start)
-                         if (op < len) {         /* some from end of window */
-                             len -= op;
-                             do {
--                                PUP(out) = PUP(from);
-+                                *out++ = *from++;
-                             } while (--op);
--                            from = window - OFF;
-+                            from = window;
-                             if (wnext < len) {  /* some from start of window */
-                                 op = wnext;
-                                 len -= op;
-                                 do {
--                                    PUP(out) = PUP(from);
-+                                    *out++ = *from++;
-                                 } while (--op);
-                                 from = out - dist;      /* rest from output */
-                             }
-@@ -235,65 +218,36 @@ void inflate_fast(z_streamp strm, unsigned start)
-                         if (op < len) {         /* some from window */
-                             len -= op;
-                             do {
--                                PUP(out) = PUP(from);
-+                                *out++ = *from++;
-                             } while (--op);
-                             from = out - dist;  /* rest from output */
-                         }
-                     }
-                     while (len > 2) {
--                        PUP(out) = PUP(from);
--                        PUP(out) = PUP(from);
--                        PUP(out) = PUP(from);
-+                        *out++ = *from++;
-+                        *out++ = *from++;
-+                        *out++ = *from++;
-                         len -= 3;
-                     }
-                     if (len) {
--                        PUP(out) = PUP(from);
-+                        *out++ = *from++;
-                         if (len > 1)
--                            PUP(out) = PUP(from);
-+                            *out++ = *from++;
-                     }
-                 }
-                 else {
--		    unsigned short *sout;
--		    unsigned long loops;
--
-                     from = out - dist;          /* copy direct from output */
--                    /* minimum length is three */
--		    /* Align out addr */
--		    if (!((long)(out - 1 + OFF) & 1)) {
--			PUP(out) = PUP(from);
--			len--;
--		    }
--		    sout = (unsigned short *)(out - OFF);
--		    if (dist > 2 ) {
--			unsigned short *sfrom;
--
--			sfrom = (unsigned short *)(from - OFF);
--			loops = len >> 1;
--			do
--			    PUP(sout) = get_unaligned(++sfrom);
--			while (--loops);
--			out = (unsigned char *)sout + OFF;
--			from = (unsigned char *)sfrom + OFF;
--		    } else { /* dist == 1 or dist == 2 */
--			unsigned short pat16;
--
--			pat16 = *(sout-2+2*OFF);
--			if (dist == 1)
--#if defined(__BIG_ENDIAN)
--			    pat16 = (pat16 & 0xff) | ((pat16 & 0xff ) << 8);
--#elif defined(__LITTLE_ENDIAN)
--			    pat16 = (pat16 & 0xff00) | ((pat16 & 0xff00 ) >> 8);
--#else
--#error __BIG_ENDIAN nor __LITTLE_ENDIAN is defined
--#endif
--			loops = len >> 1;
--			do
--			    PUP(sout) = pat16;
--			while (--loops);
--			out = (unsigned char *)sout + OFF;
--		    }
--		    if (len & 1)
--			PUP(out) = PUP(from);
-+                    do {                        /* minimum length is three */
-+                        *out++ = *from++;
-+                        *out++ = *from++;
-+                        *out++ = *from++;
-+                        len -= 3;
-+                    } while (len > 2);
-+                    if (len) {
-+                        *out++ = *from++;
-+                        if (len > 1)
-+                            *out++ = *from++;
-+                    }
-                 }
-             }
-             else if ((op & 64) == 0) {          /* 2nd level distance code */
-@@ -329,8 +283,8 @@ void inflate_fast(z_streamp strm, unsigned start)
-     hold &= (1U << bits) - 1;
+-    if (version == Z_NULL || version[0] != ZLIB_VERSION[0] ||
+-        stream_size != (int)(sizeof(z_stream)))
+-        return Z_VERSION_ERROR;
+     if (strm == Z_NULL) return Z_STREAM_ERROR;
+     strm->msg = Z_NULL;                 /* in case we return an error */
+     if (strm->zalloc == (alloc_func)0) {
+@@ -70,9 +67,9 @@ int ZEXPORT inflateInit2_(z_streamp strm, int windowBits, const char *version,
+     return inflateReset(strm);
+ }
  
-     /* update state and return */
--    strm->next_in = in + OFF;
--    strm->next_out = out + OFF;
-+    strm->next_in = in;
-+    strm->next_out = out;
-     strm->avail_in = (unsigned)(in < last ? 5 + (last - in) : 5 - (in - last));
-     strm->avail_out = (unsigned)(out < end ?
-                                  257 + (end - out) : 257 - (out - end));
+-int ZEXPORT inflateInit_(z_streamp strm, const char *version, int stream_size)
++int ZEXPORT inflateInit_(z_streamp strm, int stream_size)
+ {
+-    return inflateInit2_(strm, DEF_WBITS, version, stream_size);
++    return inflateInit2_(strm, DEF_WBITS, stream_size);
+ }
+ 
+ local void fixedtables(struct inflate_state FAR *state)
+diff --git a/lib/zlib/zutil.c b/lib/zlib/zutil.c
+index 609aac55ce11..ec21b458fcce 100644
+--- a/lib/zlib/zutil.c
++++ b/lib/zlib/zutil.c
+@@ -21,7 +21,6 @@ const char * const z_errmsg[10] = {
+ "data error",          /* Z_DATA_ERROR    (-3) */
+ "insufficient memory", /* Z_MEM_ERROR     (-4) */
+ "buffer error",        /* Z_BUF_ERROR     (-5) */
+-"incompatible version",/* Z_VERSION_ERROR (-6) */
+ ""};
+ 
+ #ifdef DEBUG
 -- 
 2.44.0
 
