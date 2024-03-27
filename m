@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5217EC47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 14:15:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15EB3C47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 14:15:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26FBA880BE;
-	Wed, 27 Mar 2024 15:15:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9642B880E8;
+	Wed, 27 Mar 2024 15:15:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="U35cq5xN";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="YL6hFKnc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA926880BB; Wed, 27 Mar 2024 15:15:08 +0100 (CET)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::600])
+ id 5D256880DD; Wed, 27 Mar 2024 15:15:11 +0100 (CET)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::600])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4FEC8808F
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 15:15:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C8658808F
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 15:15:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YkbGLhvTT264e8IM+aYhB4hM/KCBwJ/hGbwnKdhFihUAgePajpcQdkbZRibakiUu7iynwoBahdcFB714+NudxXhe6AT5YHscBmnzbcelQ6by1vOGd3hvdVGBc6fDINiJmjMdz+GojhMi30ZLzeXURDKVe63iMY6jfZ3TcjsJr4et6SgWocwmcKj7x4UmHqf4WDsT/SZXksC+i78qOwlxv1u9K1NB2LoOwJKXvMbJeuYhXg4zWB/oyMmnu68iUglAXUf2wstMbLk1nJaQXhG+UgEt+bg0Mp2wM4r6i8aPy60kpmxSEsoFVsWE03B7cbC+zF3R3rOcOxnL/4a7MHLJPg==
+ b=OZu59Z7EWDr5O+zkuLUcUwTFqEgLEhq8Iuh8l0T6Rm+e4FO5fXV315FciJAg4pql5VeSF6HtAPGg65JitcNL3VI9lGAMeaEWU+XRCaIL2MarMmnQB5TIC1hKGJO3g1CGq4LxRaj7q5vwmHNI7eVHG16ThDZwe2Vxy/4FT0gfm7nMY6aIdVXPBNiCkBDoJ7CzHVGgYjFvAfZCNuIWAH8qpFwSZIFqORGPWBWCfuESvysmdI5Z1YRhuAADT2wGzqQzikAJSdZhYQ4u7uz2FWiymiJu0wQbxSa8YBqyEPSotab2qvfK/mm+Idzgjo7OG4CO7q2U9P2sWVwtxjdZZcOazg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=h/sgJmlncKuQQ2zy8AqySWQEZOgKugWBrboqyJxAzdg=;
- b=g40ajSj34x1yOpXPX1u0rgG3m1cQ3k4Y1SJEkR5yQVa+WC4LlJdJS9fcVZonQQV7no5bAlj1j+8u6D7fB/GYA5OCuhELX0cQX9PrFHKBhy5nHqGLMqhmbUMdCP/f4SgSCjsq6OmDTnVmYZ7MRVuSYv3Z975qhlDZasnBHnIQpxstgxgpfgyB4gC07uKMHbucI0YtOUu6I/kGwF5XsSp8yBW4fDd0bkJcu9lfiO205Paz2usqw9Gy0AiKNe/PP4rSwi1lGauAInfUnSH9ajgoUBpvPK+WfJpPHmZpuVTgVHg9/SZ7cfxo+BILfaaLQX2MFnKB7NosW51c5UC14F63OQ==
+ bh=S7pkwGtRKKsJnMUdDAOh1dob7MIHBxD6yRmifjusUU0=;
+ b=WjW+aRCq6zOiFdCmh79nkQn5pXq+9M6nzt7cOzvKgm7RyVsVjyvJ+I3MF+oI3E0VLrhoawV6MAXoMJi9I0uccuKH9Ym4rnV+WDHHbVoHRrqx/T5CwZarMVGsvvUGagn+fQ5j06wXtMTvSzSEPU0GNhWcZnLc59lVFRBnxCrw3iNvsSOhGa5vUy5RaZduIR4X/yAel4Xuom5URLyZ9U8Jx+w8yCr7BysH3plp30/DUuVUP2DqocdSOmvKMWG3NPmxB6MBoZPgDvFWiKwMReTBgWRyCN5G/MQKbsyNxTVJK8lgOnX2JMLMJ9eJA0OlB6OHrLYO8nIc/lruGZX61NgG0Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
  dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
  header.from=amd.com; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=h/sgJmlncKuQQ2zy8AqySWQEZOgKugWBrboqyJxAzdg=;
- b=U35cq5xNlzIBh26yhU9KMiRDK4xZr+d+DtDJRLWonFqYyftXYoYRvtAOYnFueP2c+XACqA+tTLmjLViqkHu+2uvSRK5WIKk6iPZ3IQPVj+BOR8+eftlHPQ57LM7axzPpnksCQbkpYVX26IGiySvfPLVi6qw7ENAWpfIF6hqYHtk=
-Received: from BLAPR03CA0070.namprd03.prod.outlook.com (2603:10b6:208:329::15)
- by IA1PR12MB8192.namprd12.prod.outlook.com (2603:10b6:208:3f9::20)
+ bh=S7pkwGtRKKsJnMUdDAOh1dob7MIHBxD6yRmifjusUU0=;
+ b=YL6hFKncLDejLVNvONHjnyPOaRy4d7UsjjKAUTWUcOIyIN0w5rXQfCIDFN0Nto/QEkyFymOZcemY0DUCYcURdO4ABHCjSk6WxuyWhB5RPyTEueICp5PeJtg7o+u/7VldUag0klOmiSrr3LQvc6rQRlUw8CkEXCc4X55N2NB9Z4k=
+Received: from MN2PR17CA0010.namprd17.prod.outlook.com (2603:10b6:208:15e::23)
+ by MW6PR12MB8663.namprd12.prod.outlook.com (2603:10b6:303:240::9)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.31; Wed, 27 Mar
- 2024 14:15:03 +0000
-Received: from BL6PEPF0001AB51.namprd04.prod.outlook.com
- (2603:10b6:208:329:cafe::d8) by BLAPR03CA0070.outlook.office365.com
- (2603:10b6:208:329::15) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.32; Wed, 27 Mar
+ 2024 14:15:06 +0000
+Received: from BL6PEPF0001AB4B.namprd04.prod.outlook.com
+ (2603:10b6:208:15e:cafe::db) by MN2PR17CA0010.outlook.office365.com
+ (2603:10b6:208:15e::23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.13 via Frontend
- Transport; Wed, 27 Mar 2024 14:15:03 +0000
+ Transport; Wed, 27 Mar 2024 14:15:05 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -59,29 +59,29 @@ Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
 Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BL6PEPF0001AB51.mail.protection.outlook.com (10.167.242.75) with Microsoft
+ BL6PEPF0001AB4B.mail.protection.outlook.com (10.167.242.69) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7409.10 via Frontend Transport; Wed, 27 Mar 2024 14:15:03 +0000
+ 15.20.7409.10 via Frontend Transport; Wed, 27 Mar 2024 14:15:05 +0000
 Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
  (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 27 Mar
- 2024 09:15:00 -0500
+ 2024 09:15:04 -0500
 From: Michal Simek <michal.simek@amd.com>
 To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/4] zlib: Rename this variable to here (current decoding
- table entry)
-Date: Wed, 27 Mar 2024 15:14:50 +0100
-Message-ID: <37b3beb34aeb6b1f03ced7509fe3d7262d2406ce.1711548887.git.michal.simek@amd.com>
+CC: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, Tom Rini
+ <trini@konsulko.com>
+Subject: [PATCH 2/4] zlib: Rename write variable to wnext (window write index)
+Date: Wed, 27 Mar 2024 15:14:51 +0100
+Message-ID: <c870c4f94764400ad450b3babe493acb0b349c79.1711548887.git.michal.simek@amd.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <cover.1711548887.git.michal.simek@amd.com>
 References: <cover.1711548887.git.michal.simek@amd.com>
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4097; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=s5l0xEKW1Der3W2q3r/EGYHLFEQLRl1FJ9uOSLN8Ry0=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhjQWzXt9KQVP1xm5RXF0L1PbuI594hPZjfte5iyMFFI7K
- CupHne2I5aFQZCJQVZMkUXa5sqZvZUzpghfPCwHM4eVCWQIAxenAEwkPophDh+j6qw5wnd0bn+z
- ePzx74Wt9aIb7jHMd+8/EsLKteDcrWIppxD5cz05Udu9AQ==
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7677; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=UmBaxxZ/AhGShWt2PzU6aVuOnaNRO2QcqFuv0rabsw4=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhjQWzfs5dndfPtzJk1h0tC74YcSTyE752cJ7mGVMp4RO8
+ AnOluXoiGVhEGRikBVTZJG2uXJmb+WMKcIXD8vBzGFlAhnCwMUpABPZu4Jhnjbb4dfWzcU/y3ds
+ SPVeXub9/dYTLob5/qcsvSXa/Do8tgXdElFarL0vseQTAA==
 X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
  fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
@@ -91,26 +91,26 @@ X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
  (10.181.40.145)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB51:EE_|IA1PR12MB8192:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8da3e1ba-303c-4399-aeab-08dc4e684ba2
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4B:EE_|MW6PR12MB8663:EE_
+X-MS-Office365-Filtering-Correlation-Id: e00d15d1-9a74-4b4c-9574-08dc4e684d3c
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: o/JC0i1hwrbLZNDD4FKu0p2WuWCVkuHa6JGMXRaWvcJmPiK8n37OgqEw79HsPJBUHvTPfqyfmQlK/k1z6xNrfoaSriYhyLHCZtIqrh67rlAJrqvTSthSM+8uopVnpjfCBz++9eeCmLRWYEijILfvs6grQycdZfDf2oXdL9A4p6zT+W23faZDqFdsITKuFz6igGPW8qFmYSL8kxuaPOwtHlK81n4XqGN4ywTckErR1LKjCBtZyP+li4wpKbPR1lgC9MNvKqGCM/gj8OoDk8UNXTdVmlaJESWe+RgKJHR+98dtijxVyGTwZXTQjvWDWOAKb6cpcAwsBriffPbdwKDnOLjb+s243fWqcbYE4fQITVj9NKFNqxqZ8k1IQc0VYs3rJ6NPPcHkcFnyikU48bNPxf5hPc7Ouipm6lM2LcruBZQTRbe9tRHqleJU15cXzeGWEmfp5F+b88nIYK9uhHZs+M7Ay+CsfFP5ERapPA38oFSFFH44RDbF3dAikljHGuYq3LixfbkqXkjVzhnisGUf/Cm1jodb/WkCAKbAApKz7z1wGrZM584imle4jZtk4HliF52DLQ2Qsz50FGKPPPygwANxZ/wjbo682CBnV8PPfJsEgxek0JoGEYIn8NkTy/Q79JkwkJocHBqcmQV8hmRLLyh+/AtPKwPSILtT2dFo5YADfhFffILfD39n9IGxDtdEuxbFA81da31fOcBHlI2XMj5ql9mOYUsWgwN9KawFGwjFMUVH8y5ixW3slh3aLKz/
+X-Microsoft-Antispam-Message-Info: dIFx7EivammeFdV2DrPnR7sfL4hknh9e0iFCbQF4mWbxd9ZUnQkGtQNmeZ7AXAnd3AWCmelk4wLC+4ugiWnMrPgXJzJxqjK0bxqBgeOBNu78GyQBiU6thlj9Ipdy11kT7NLx4Osrz1vEqtzcJDicokMygR9QWlnkckW5SUnfRNHXGkt4OKCSWbNEAukBcZPdfnYU8XHDep6D9PqoZeGEHpkp9ndDp7qcqnVLDr9T8jTXOr7qmzb6lE1trIlS7rbE5E8Pp4mHraPunSwAIWCSi1tgwn7Qn1GNdsTbt+GWfudsgp1R6LkbO9CwvVgLR8Jrifgbiiv+1Efz2qq8CmsnKH2AUiym0+7HlejjkHcW4ByiAtpEkKdO+K6C38jhSHkMPjirOoLSl5okbHtwAQZfeCZFLm0ZL0OYgckUFShpBPVZyMxegiozK1wfh7LJfr4MURebc5mJqT7QIQTHaKBNJlVZrxuoEi5kfA7vgXW5zOPYhnxSObBNGxO9LG8OBC3B82FTgO1SgADQunNdKzz8T29PIhagHvqxlWHx1NwMt26j861o5u51QK2mx1pIcJuAeI/CdHZNc4jloiaOjtNnXtWLE5/HzKzH2TpZq/LRR0ivvCuQypdAduWFlE5P840aqxZrgI2nWv5mppS1834YElGsrEe4jxjfbX1kT2Dyb8m92hhZPuyM4joCAe0sFrhYkfflRT7mcVwDuSlD3MdWdCHhsSM5zSlO5UEcCyvlU82ZINF9nCwtccgu+PIxcIlj
 X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(1800799015)(376005)(82310400014)(36860700004); DIR:OUT;
+ SFS:(13230031)(82310400014)(376005)(36860700004)(1800799015); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2024 14:15:03.1817 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8da3e1ba-303c-4399-aeab-08dc4e684ba2
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2024 14:15:05.8680 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e00d15d1-9a74-4b4c-9574-08dc4e684d3c
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
  Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB51.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB4B.namprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8192
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8663
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,93 +129,169 @@ X-Virus-Status: Clean
 
 There is no particular patch/description which described the reason for
 this change but it was done as the part of zlib 1.2.3.5 release done by
-zlib commit 639be997883d ("zlib 1.2.3.3") It is preparation for followup
+zlib commit d004b047838a ("zlib 1.2.3.5"). It is preparation for followup
 patch.
 
 Signed-off-by: Michal Simek <michal.simek@amd.com>
 ---
 
- lib/zlib/inffast.c | 28 ++++++++++++++--------------
- 1 file changed, 14 insertions(+), 14 deletions(-)
+ lib/zlib/inffast.c | 20 ++++++++++----------
+ lib/zlib/inflate.c | 22 +++++++++++-----------
+ lib/zlib/inflate.h |  2 +-
+ 3 files changed, 22 insertions(+), 22 deletions(-)
 
 diff --git a/lib/zlib/inffast.c b/lib/zlib/inffast.c
-index e3c7f3b892bb..d61cf0e72af4 100644
+index d61cf0e72af4..bdaa6d0dc51f 100644
 --- a/lib/zlib/inffast.c
 +++ b/lib/zlib/inffast.c
-@@ -88,7 +88,7 @@ void inflate_fast(z_streamp strm, unsigned start)
-     code const FAR *dcode;      /* local strm->distcode */
-     unsigned lmask;             /* mask for first level of length codes */
-     unsigned dmask;             /* mask for first level of distance codes */
--    code this;                  /* retrieved table entry */
-+    code here;                  /* retrieved table entry */
-     unsigned op;                /* code bits, operation, extra bits, or */
-                                 /*  window position, window bytes to copy */
-     unsigned len;               /* match length, unused bytes */
-@@ -133,20 +133,20 @@ void inflate_fast(z_streamp strm, unsigned start)
-             hold += (unsigned long)(PUP(in)) << bits;
-             bits += 8;
+@@ -80,7 +80,7 @@ void inflate_fast(z_streamp strm, unsigned start)
+ #endif
+     unsigned wsize;             /* window size or zero if not using window */
+     unsigned whave;             /* valid bytes in the window */
+-    unsigned write;             /* window write index */
++    unsigned wnext;             /* window write index */
+     unsigned char FAR *window;  /* allocated sliding window, if wsize != 0 */
+     unsigned long hold;         /* local strm->hold */
+     unsigned bits;              /* local strm->bits */
+@@ -115,7 +115,7 @@ void inflate_fast(z_streamp strm, unsigned start)
+ #endif
+     wsize = state->wsize;
+     whave = state->whave;
+-    write = state->write;
++    wnext = state->wnext;
+     window = state->window;
+     hold = state->hold;
+     bits = state->bits;
+@@ -201,7 +201,7 @@ void inflate_fast(z_streamp strm, unsigned start)
+                         break;
+                     }
+                     from = window - OFF;
+-                    if (write == 0) {           /* very common case */
++                    if (wnext == 0) {           /* very common case */
+                         from += wsize - op;
+                         if (op < len) {         /* some from window */
+                             len -= op;
+@@ -211,17 +211,17 @@ void inflate_fast(z_streamp strm, unsigned start)
+                             from = out - dist;  /* rest from output */
+                         }
+                     }
+-                    else if (write < op) {      /* wrap around window */
+-                        from += wsize + write - op;
+-                        op -= write;
++                    else if (wnext < op) {      /* wrap around window */
++                        from += wsize + wnext - op;
++                        op -= wnext;
+                         if (op < len) {         /* some from end of window */
+                             len -= op;
+                             do {
+                                 PUP(out) = PUP(from);
+                             } while (--op);
+                             from = window - OFF;
+-                            if (write < len) {  /* some from start of window */
+-                                op = write;
++                            if (wnext < len) {  /* some from start of window */
++                                op = wnext;
+                                 len -= op;
+                                 do {
+                                     PUP(out) = PUP(from);
+@@ -231,7 +231,7 @@ void inflate_fast(z_streamp strm, unsigned start)
+                         }
+                     }
+                     else {                      /* contiguous in window */
+-                        from += write - op;
++                        from += wnext - op;
+                         if (op < len) {         /* some from window */
+                             len -= op;
+                             do {
+@@ -343,7 +343,7 @@ void inflate_fast(z_streamp strm, unsigned start)
+    inflate_fast() speedups that turned out slower (on a PowerPC G3 750CXe):
+    - Using bit fields for code structure
+    - Different op definition to avoid & for extra bits (do & for table bits)
+-   - Three separate decoding do-loops for direct, window, and write == 0
++   - Three separate decoding do-loops for direct, window, and wnext == 0
+    - Special case for distance > 1 copies to do overlapped load and store copy
+    - Explicit branch predictions (based on measured branch probabilities)
+    - Deferring match copy and interspersed it with decoding subsequent codes
+diff --git a/lib/zlib/inflate.c b/lib/zlib/inflate.c
+index 8f767b7b9d2d..79c9e991aa33 100644
+--- a/lib/zlib/inflate.c
++++ b/lib/zlib/inflate.c
+@@ -21,7 +21,7 @@ int ZEXPORT inflateReset(z_streamp strm)
+     state->head = Z_NULL;
+     state->wsize = 0;
+     state->whave = 0;
+-    state->write = 0;
++    state->wnext = 0;
+     state->hold = 0;
+     state->bits = 0;
+     state->lencode = state->distcode = state->next = state->codes;
+@@ -115,7 +115,7 @@ local int updatewindow(z_streamp strm, unsigned out)
+     /* if window not in use yet, initialize */
+     if (state->wsize == 0) {
+         state->wsize = 1U << state->wbits;
+-        state->write = 0;
++        state->wnext = 0;
+         state->whave = 0;
+     }
+ 
+@@ -123,22 +123,22 @@ local int updatewindow(z_streamp strm, unsigned out)
+     copy = out - strm->avail_out;
+     if (copy >= state->wsize) {
+         zmemcpy(state->window, strm->next_out - state->wsize, state->wsize);
+-        state->write = 0;
++        state->wnext = 0;
+         state->whave = state->wsize;
+     }
+     else {
+-        dist = state->wsize - state->write;
++        dist = state->wsize - state->wnext;
+         if (dist > copy) dist = copy;
+-        zmemcpy(state->window + state->write, strm->next_out - copy, dist);
++        zmemcpy(state->window + state->wnext, strm->next_out - copy, dist);
+         copy -= dist;
+         if (copy) {
+             zmemcpy(state->window, strm->next_out - copy, copy);
+-            state->write = copy;
++            state->wnext = copy;
+             state->whave = state->wsize;
          }
--        this = lcode[hold & lmask];
-+        here = lcode[hold & lmask];
-       dolen:
--        op = (unsigned)(this.bits);
-+        op = (unsigned)(here.bits);
-         hold >>= op;
-         bits -= op;
--        op = (unsigned)(this.op);
-+        op = (unsigned)(here.op);
-         if (op == 0) {                          /* literal */
--            Tracevv((stderr, this.val >= 0x20 && this.val < 0x7f ?
-+            Tracevv((stderr, here.val >= 0x20 && here.val < 0x7f ?
-                     "inflate:         literal '%c'\n" :
--                    "inflate:         literal 0x%02x\n", this.val));
--            PUP(out) = (unsigned char)(this.val);
-+                    "inflate:         literal 0x%02x\n", here.val));
-+            PUP(out) = (unsigned char)(here.val);
+         else {
+-            state->write += dist;
+-            if (state->write == state->wsize) state->write = 0;
++            state->wnext += dist;
++            if (state->wnext == state->wsize) state->wnext = 0;
+             if (state->whave < state->wsize) state->whave += dist;
          }
-         else if (op & 16) {                     /* length base */
--            len = (unsigned)(this.val);
-+            len = (unsigned)(here.val);
-             op &= 15;                           /* number of extra bits */
-             if (op) {
-                 if (bits < op) {
-@@ -164,14 +164,14 @@ void inflate_fast(z_streamp strm, unsigned start)
-                 hold += (unsigned long)(PUP(in)) << bits;
-                 bits += 8;
-             }
--            this = dcode[hold & dmask];
-+            here = dcode[hold & dmask];
-           dodist:
--            op = (unsigned)(this.bits);
-+            op = (unsigned)(here.bits);
-             hold >>= op;
-             bits -= op;
--            op = (unsigned)(this.op);
-+            op = (unsigned)(here.op);
-             if (op & 16) {                      /* distance base */
--                dist = (unsigned)(this.val);
-+                dist = (unsigned)(here.val);
-                 op &= 15;                       /* number of extra bits */
-                 if (bits < op) {
-                     hold += (unsigned long)(PUP(in)) << bits;
-@@ -297,7 +297,7 @@ void inflate_fast(z_streamp strm, unsigned start)
+     }
+@@ -823,12 +823,12 @@ int ZEXPORT inflate(z_streamp strm, int flush)
+             copy = out - left;
+             if (state->offset > copy) {         /* copy from window */
+                 copy = state->offset - copy;
+-                if (copy > state->write) {
+-                    copy -= state->write;
++                if (copy > state->wnext) {
++                    copy -= state->wnext;
+                     from = state->window + (state->wsize - copy);
                  }
+                 else
+-                    from = state->window + (state->write - copy);
++                    from = state->window + (state->wnext - copy);
+                 if (copy > state->length) copy = state->length;
              }
-             else if ((op & 64) == 0) {          /* 2nd level distance code */
--                this = dcode[this.val + (hold & ((1U << op) - 1))];
-+                here = dcode[here.val + (hold & ((1U << op) - 1))];
-                 goto dodist;
-             }
-             else {
-@@ -307,7 +307,7 @@ void inflate_fast(z_streamp strm, unsigned start)
-             }
-         }
-         else if ((op & 64) == 0) {              /* 2nd level length code */
--            this = lcode[this.val + (hold & ((1U << op) - 1))];
-+            here = lcode[here.val + (hold & ((1U << op) - 1))];
-             goto dolen;
-         }
-         else if (op & 32) {                     /* end-of-block */
+             else {                              /* copy from output */
+diff --git a/lib/zlib/inflate.h b/lib/zlib/inflate.h
+index 07bd3e78a7c7..2657d611cda3 100644
+--- a/lib/zlib/inflate.h
++++ b/lib/zlib/inflate.h
+@@ -88,7 +88,7 @@ struct inflate_state {
+     unsigned wbits;             /* log base 2 of requested window size */
+     unsigned wsize;             /* window size or zero if not using window */
+     unsigned whave;             /* valid bytes in the window */
+-    unsigned write;             /* window write index */
++    unsigned wnext;             /* window write index */
+     unsigned char FAR *window;  /* allocated sliding window, if needed */
+         /* bit accumulator */
+     unsigned long hold;         /* input bit accumulator */
 -- 
 2.44.0
 
