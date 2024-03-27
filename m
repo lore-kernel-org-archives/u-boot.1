@@ -4,62 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72728C47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 11:24:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4CA2C47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 11:50:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAD3A87E47;
-	Wed, 27 Mar 2024 12:24:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id CCDE088035;
+	Wed, 27 Mar 2024 12:50:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tz5jQtMI";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AbVa9C/5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC2718803A; Wed, 27 Mar 2024 12:24:48 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 808918805B; Wed, 27 Mar 2024 12:50:16 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04BF98780A
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 12:24:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 528AC8801A
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 12:50:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=ab23=LB=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1711538675;
- bh=FTHESGklJxoh3TU1I6ZL4yQrUta0zpYK0x6vU0dxaYI=;
- b=tz5jQtMIdCLNPFYiyDpCIItGwWvOk7G0X//pUzLbM+So4C6K9GW7oSLWuWq8Rm2Iue4wLtQ9g
- frKd/9TbXvdSznOBRkFb8JH2Duq7iWNHyQH8PtQ8hm4gJlqryK5DK40aH7HevRzCH8SLpiAM2wi
- t5KU49MoBlnIaTMXI5CMPnaqpa1alsRz5Bf4eLxXrPK1+8vpFEisjqDKL/LyWf1Yzh1ZJRHcuGf
- M4wcwQDW/zvH8vPt14rJjrZ6X7rtqz0Kb1gAHy7m1tN8mRfC/8dlXp6U8Z7BpHyRQagxnjKY9ST
- r96EtZH/b9EM+jO+9p2qRzREh4XZ+stlu0gvt5ZGGcSA==
-Message-ID: <21e01d83-7f64-4b57-8ead-35a909b7216b@kwiboo.se>
-Date: Wed, 27 Mar 2024 12:24:29 +0100
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1dee5daedf6so7123015ad.0
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 04:50:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711540213; x=1712145013; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=UseadsVRICUFSxCD784O3ICbKT7mbMFNmodX5PmTqOs=;
+ b=AbVa9C/5HUxflDgoxiTxO1G+a2Wg8CloN318r8xYFQNNyV+sg+cK3rgHUeJaWQypzy
+ qf6iK8Nf4qUQkp8dESe9JBTjM4/Z6mu/erbOgoHpaaFCFOGCsopAA5GlcA3Dwt/lj2dU
+ +b9bDNRDK4YrrtZIc96a/bCTtOmiFPm2pkpti8WD3bisSn0klTEQOkiqmoEGIGF8jzMp
+ aP5BV2rytlOgbE8JCNxF7NTWyZ3dVia/pPCYqJM72522xeaxmfN+O6wcUBJRAl9mDPgM
+ LVHrrriX+fTE6Jd694MoRtNPNIvbERyvFteCkxTVEIod6mJ2z5PvrVmFtFWDIao7KFGt
+ +vmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711540213; x=1712145013;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=UseadsVRICUFSxCD784O3ICbKT7mbMFNmodX5PmTqOs=;
+ b=QgWkAXZVsSY7pgGFOCLcMprVIS8Fdih1zC6rb1Rvm29lJL04tkr3ZFe/+GDpmeIjjC
+ 5u13T5gUKXB8TRgnVLcPA3nsBixGx0EWNPFS21d2VvV6V32AkmDCu89KfuvZNbydhlCD
+ 21LZ3BjykhxQcUNNgu3Xa/1Khzk4VOehWdjDRxBYnExdhDFkjIMcDiyovvnNRWxGU524
+ jOFcQZtT3n0K43/DxWpp0UQ18LImyKnSS+S0IMmueTMNujrQ2gZXux9mAE/gQCGQwkYo
+ NQIT1VAS9ykDfa1/rCGavAMKFS8cJwdIVb/u1SJgcBA+vsWeirMdlY3Utxm6Ls/ogaKg
+ 2tUQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWn94uQtfl7XT/Cr+lZu7oLhayrkqTan2KrGh8OR2ilqISDjiX0DMXtLM8pWqr1ITLfje6P9IFADzAjgY/fzk6D1zewPQ==
+X-Gm-Message-State: AOJu0YzR9Xu+HoCyAA9LS8Euu/fzqXu0R4GArDnqeV1AIJdFEQBllF6g
+ 2507p3vctUExdO+H7nUWwCmRRJPTdHfVKJu1e8wYAZ8nu2a804Ae
+X-Google-Smtp-Source: AGHT+IH+dQqrAc5K/M6SmtaOAz48HGMCaH8Y7Qzk3mK3sGk8hmnDlU8HrDc0t49Acw+Bavuj9t8y3Q==
+X-Received: by 2002:a17:902:e547:b0:1e0:b25b:c423 with SMTP id
+ n7-20020a170902e54700b001e0b25bc423mr11331314plf.5.1711540212664; 
+ Wed, 27 Mar 2024 04:50:12 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:bfc9:1394:a603:c344])
+ by smtp.gmail.com with ESMTPSA id
+ j1-20020a17090276c100b001e0d093d962sm4895316plt.248.2024.03.27.04.50.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 27 Mar 2024 04:50:12 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: festevam@gmail.com
+Cc: baruch@tkos.co.il, trini@konsulko.com, josua@solid-run.com,
+ u-boot@lists.denx.de, cgmeiner@igalia.com
+Subject: [PATCH] mx6cuboxi: Fix board revision detection
+Date: Wed, 27 Mar 2024 08:49:59 -0300
+Message-Id: <20240327114959.2084525-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mmc: rockchip_sdhci: Revert 4 blocks PIO mode read limit
- for RK35xx
-To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-References: <20240326233502.2625015-1-jonas@kwiboo.se>
- <a162464f-8cf6-4229-9062-f1369769af20@theobroma-systems.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <a162464f-8cf6-4229-9062-f1369769af20@theobroma-systems.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 660401f2a890af8ec6d1c76c
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,58 +91,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Currently, an i.MX6 Cuboxi board is incorrectly detected
+as the HummingBoard model:
 
-On 2024-03-27 09:56, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 3/27/24 00:35, Jonas Karlman wrote:
->> The commit 2cc6cde647e2 ("mmc: rockchip_sdhci: Limit number of blocks
->> read in a single command") introduced a limit of number of blocks to
->> read to fix a Data End Bit Error on RK3568 and RK3588. This had a side
->> affect of significant slowing down reading FIT from eMMC.
->>
->> After the commit 6de9d7b2f13c ("rockchip: rk35xx: Enable eMMC HS200 mode
->> by default") the limit of number of blocks to read workaround is no
->> longer necessary and a Data End Bit Error is no longer happening using
->> PIO mode.
->>
->> Revert this limitation to allow reading more than 4 blocks with a single
->> CMD18 command in PIO mode and speed up reading FIT from eMMC.
->>
-> 
-> Should we instead keep this code but surround it with
-> #if !IS_ENABLED(MMC_HS200_SUPPORT)
-> ?
-> 
-> After all, HS200 is only implied for RK35xx boards, so one could disable it.
+U-Boot 2024.04-rc5 (Mar 26 2024 - 15:59:22 +0100)
 
-I do not think this will be necessary, for RK3568 the PIO mode is not
-needed at all and SDMA is used. And not 100% sure if it was the HS200 or
-bss address change, or a combo of both that fixes the Data End Bit Error.
-Or could also be that it was the DDR52 mode that caused issues.
+CPU:   Freescale i.MX6Q rev1.3 996 MHz (running at 792 MHz)
+CPU:   Extended Commercial temperature grade (-20C to 105C) at 26C
+Reset cause: POR
+Model: SolidRun HummingBoard2 Dual/Quad (1.5som+emmc)
+gpio@20a4000: set_dir_flags: error: gpio GPIO3_8 not reserved
+gpio@20a4000: get_value: error: gpio GPIO3_8 not reserved
+gpio@20a8000: set_dir_flags: error: gpio GPIO4_4 not reserved
+gpio@20a8000: get_value: error: gpio GPIO4_4 not reserved
+gpio@20b0000: set_dir_flags: error: gpio GPIO6_9 not reserved
+gpio@20b0000: get_value: error: gpio GPIO6_9 not reserved
+Board: MX6 HummingBoard
+DRAM:  2 GiB
+...
 
-Will re-try with normal HS mode and see if any hack is still needed at
-all.
+This error happens because request_detect_gpios() uses the GPIO DM
+API, but board_type() still uses the legacy non-DM GPIO API.
 
-> 
-> Also wondering whether we should do this dynamically based on the MMC 
-> mode that could be negotiated with the chip? E.g. I think it's not 
-> guaranteed that with hs200 support built and enabled in DT that it'll be 
-> negotiated as HS200?
+Fix it by using the GPIO DM API in board_type() to read the
+board revision pins in SPL.
 
-Last time I checked this there was no easy way to change number of
-blocks to read at time using current mmc/sdhci ops, and I do not think
-there is enough need to add new ops. However, if we still need a
-workaround it should be changed to use a bounce buffer instead of limit
-number of blocks to not affect performance, similar to [1].
+Reported-by: Christian Gmeiner <cgmeiner@igalia.com>
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+---
+ board/solidrun/mx6cuboxi/mx6cuboxi.c | 13 +++++--------
+ 1 file changed, 5 insertions(+), 8 deletions(-)
 
-[1] https://patchwork.ozlabs.org/patch/1895377/
-
-Regards,
-Jonas
-
-> 
-> Cheers,
-> Quentin
+diff --git a/board/solidrun/mx6cuboxi/mx6cuboxi.c b/board/solidrun/mx6cuboxi/mx6cuboxi.c
+index 8edabf4404c2..7fe515f928a0 100644
+--- a/board/solidrun/mx6cuboxi/mx6cuboxi.c
++++ b/board/solidrun/mx6cuboxi/mx6cuboxi.c
+@@ -336,20 +336,17 @@ static enum board_type board_type(void)
+ 	 * HB             1     1    x
+ 	 */
+ 
+-	gpio_direction_input(IMX_GPIO_NR(2, 8));
+-	val3 = gpio_get_value(IMX_GPIO_NR(2, 8));
++	val3 = !!dm_gpio_get_value(&board_detect_desc[0]);
+ 
+ 	if (val3 == 0)
+ 		return HUMMINGBOARD2;
+ 
+-	gpio_direction_input(IMX_GPIO_NR(3, 4));
+-	val2 = gpio_get_value(IMX_GPIO_NR(3, 4));
++	val2 = !!dm_gpio_get_value(&board_detect_desc[1]);
+ 
+ 	if (val2 == 0)
+ 		return HUMMINGBOARD;
+ 
+-	gpio_direction_input(IMX_GPIO_NR(4, 9));
+-	val1 = gpio_get_value(IMX_GPIO_NR(4, 9));
++	val1 = !!dm_gpio_get_value(&board_detect_desc[2]);
+ 
+ 	if (val1 == 0) {
+ 		return CUBOXI;
+@@ -363,8 +360,8 @@ static bool is_rev_15_som(void)
+ 	int val1, val2;
+ 	SETUP_IOMUX_PADS(som_rev_detect);
+ 
+-	val1 = gpio_get_value(IMX_GPIO_NR(6, 0));
+-	val2 = gpio_get_value(IMX_GPIO_NR(6, 4));
++	val1 = !!dm_gpio_get_value(&board_detect_desc[3]);
++	val2 = !!dm_gpio_get_value(&board_detect_desc[4]);
+ 
+ 	if (val1 == 1 && val2 == 0)
+ 		return true;
+-- 
+2.34.1
 
