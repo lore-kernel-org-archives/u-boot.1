@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DB5CC47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 12:12:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A62EECD11DD
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 12:12:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CA09880AE;
-	Wed, 27 Mar 2024 13:12:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7D6EE880E4;
+	Wed, 27 Mar 2024 13:12:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="DOhstqK7";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="JrXU5Zyl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19F5F880DB; Wed, 27 Mar 2024 13:12:06 +0100 (CET)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260d::701])
+ id 1DFED880AE; Wed, 27 Mar 2024 13:12:06 +0100 (CET)
+Received: from EUR03-AM7-obe.outbound.protection.outlook.com
+ (mail-am7eur03on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::701])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DAC33880E0
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 13:12:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 71FA6880A6
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 13:12:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
  header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=CR/e3v6QALtOE0xdV88HupmYJf6oFPZUJ3wVuKSDUNoQi9uU7sEHC9olLZjjYCpKWsDlMYP5rXesw+3hfwvGJ5vSGQRI7dMlsqZ4FP2XLN7gNehEQSJJsPXysVFr6WCOW3Np4vpgtn7vpYVRvw5OTEXfuacWV7KbwJkAAonLyobQYAXB2pZ61FjG5FDJ+QiN8c+dyTUgruRDi0YQTSGnR2YFO5cjFH0xQbNbmv14bJUSqeomdgHUuWDiGy3O4AW0EdkP6S4ctziJhQakwBhPJ+FZ/rnTKXiSJfqP6In9Ziz9hynJnESbDVZRJQhk6yvV5n7Vy+Mrcg2hzVkjVHCiUw==
+ b=fgxG9DD2MWbphpBNYu9pR5jDsjS5e/fWYYFqFkxOyrwSxDA5c//fnbhYBxSEmWw2SLBEzMYd7u7jI1jnE3bBBlfdGTAVJoKX3ceJB3B6f+EaY2oKgS5zyHcYjcHrHzM//GIWLMOw0MKQbHnzPsGwdUVlalI+YWPaTLsCTEUsgyzY5L5EPCVOpaz9FJvAHjHgehiGUSu2iOCST9WR0OH2E9Z36Fd5z0/B3IvbAXdHbj5oUN3Uf/OZcgQH+43ZuXL+hKvfJF1nP7MwDq4MNoTznStKuPBQQ83ztFmhRHn4GO4uHmcWw2rwF85y6pIxuXWANsde5z9yREmq6pxiuw/y4g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cNzsLDH3SmvQC+SF4VzfI/ix0w0htYgtiPGbWwfmihc=;
- b=RLj4pQFAE4o7YfApbjGLBFl2sRvt5S2Watrfrxbs79VCdAVfOZ2y7G1jCFgoEURZv2q+FkXxAkzdgkpcDDuRHC0SRELler+CVIF2otd86gdudwkFoXkm3FMFX4yEeXHCl3hpQeIpwG8uGLmPFeKwucWpxo65TJVQfGwc618wWoJ4eIsOdJA1CLJGqVRbbqs4RYDcEyfQx2w1SgjIhVB+xMk19ZZ9d4QZS8Tig4raJdcyuYH3l29ZXaP89PAPWG00vTndf8nxaGuH0EqAiGrfnbi5d/1/St2ApFdMqvp8Yo+JlvpMMn7lnw7xHgFJPbb9FSiFKQ6WvbbCHrLTpTPLhw==
+ bh=39DWVu2TwmxaWGyz359fpu7nMFGm9ZLgrqgc1WZ/xkY=;
+ b=j5/ZOuUUHSbB4nQkneswjP31fyWAs6fTtjStkhNNljf/iyC8SuETHpqVD/3rOLYTi+v8RsLv2iBm8SsWIlC8vGAcTEzxRZMSf99k18RUYBLEi0BKegGq04TkUCJci8NbSZxkpSM85BL1WdeRZsq2cgSqNr+LvajLcvrM+p/jtwZSq6iXSMDJEbHhZEIp46SSl6zY/sBQmpSsw/xo0jlHDkbAT+5i++0jyPATqgJSnh+qOihmZcVLN0MV8XPHTEkpjdolQXDFZZ7WxmgD0j36nKYM0tIFq9e7py1C7FcFXhl0vfRdQEJ7MEF0E2E7ZxXeMiXJXrvR4Jem1K+E/UW2fw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=weidmueller.com; dmarc=pass action=none
  header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cNzsLDH3SmvQC+SF4VzfI/ix0w0htYgtiPGbWwfmihc=;
- b=DOhstqK7XbQ4A+37VePBqLXjaIFxJav79AixC6YWRKrxBeUeh+C/CGw52dEZSbtzP0n/9LXD5tfod6D19YLZMGOweVeqXlJqyCF0OqM0hIVWv/W4M7wXdbW4SkHYRbNZzUgwJz8XyHOw5qb7txOASofqQE7YzZ3/tJ98qsq9VsM=
+ bh=39DWVu2TwmxaWGyz359fpu7nMFGm9ZLgrqgc1WZ/xkY=;
+ b=JrXU5Zyl2U89gNc31VhhiW6bTqZqO8lZQeSO3c0HKzWKa2aU1v2gf97xrFPN7+5CSq9C94TzJEAUYPaJmWj9wo0KxQg1LFKjRV4lOI0eeqg4otlXj833A6fxddlkomnVTdG1sxW4RmjuGGgpZCcRgq8eIciAemmMYwMtNJFYHjU=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=weidmueller.com;
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
- by PAXPR08MB6528.eurprd08.prod.outlook.com (2603:10a6:102:15a::10)
+ by PA4PR08MB6303.eurprd08.prod.outlook.com (2603:10a6:102:e5::14)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.32; Wed, 27 Mar
- 2024 12:12:02 +0000
+ 2024 12:12:01 +0000
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
  ([fe80::d003:60c0:6918:8a5]) by AS2PR08MB8431.eurprd08.prod.outlook.com
  ([fe80::d003:60c0:6918:8a5%6]) with mapi id 15.20.7409.031; Wed, 27 Mar 2024
@@ -56,20 +56,18 @@ Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
 From: lukas.funke-oss@weidmueller.com
 To: u-boot@lists.denx.de
 Cc: Lukas Funke <lukas.funke@weidmueller.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- =?UTF-8?q?Cs=C3=B3k=C3=A1s=20Bence?= <csokas.bence@prolan.hu>,
- Fabio Estevam <festevam@denx.de>, Linus Walleij <linus.walleij@linaro.org>,
- Michal Simek <michal.simek@amd.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Yang Xiwen <forbidden405@outlook.com>
-Subject: [PATCH v3 2/2] arm64: zynq(mp): Rename spl_board_init() to
- spl_soc_init()
-Date: Wed, 27 Mar 2024 13:11:53 +0100
-Message-Id: <20240327121153.2455126-3-lukas.funke-oss@weidmueller.com>
+ Devarsh Thakkar <devarsht@ti.com>, Andre Przywara <andre.przywara@arm.com>,
+ Bin Meng <bmeng@tinylab.org>, Chanho Park <chanho61.park@samsung.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
+ Marek Vasut <marex@denx.de>, Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Suniel Mahesh <sunil@amarulasolutions.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 1/2] spl: Introduce SoC specific init function
+Date: Wed, 27 Mar 2024 13:11:52 +0100
+Message-Id: <20240327121153.2455126-2-lukas.funke-oss@weidmueller.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240327121153.2455126-1-lukas.funke-oss@weidmueller.com>
 References: <20240327121153.2455126-1-lukas.funke-oss@weidmueller.com>
@@ -80,55 +78,55 @@ X-ClientProxiedBy: FR0P281CA0038.DEUP281.PROD.OUTLOOK.COM
  (2603:10a6:20b:55a::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|PAXPR08MB6528:EE_
-X-MS-Office365-Filtering-Correlation-Id: f9932db0-192d-4ab3-c7ef-08dc4e571bdc
+X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|PA4PR08MB6303:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3f4ace43-13af-4414-7726-08dc4e571b75
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: W9SbkSFdU73QbVIG2rKY2WPC5erAt16+Ao+UNxwwbbKIUEal/ugIF9kuinrlINho06E3BBJNRazZdsx84XFO9D6qT4o8RNpFE3lwB2InxRMCdW3NNp0rYF/UdXH2ETPvaczb8D7+fKTBKW4sNiVztoH2YH6ygXMH7nlqMvo6BXYWoLLe0io6DqDN4IJ4fV7vyk239Q/uLAWrNuL4oASrbLXwuuRlz4bgYoJJDkg8Cr1yrtjiukvuC/v13d5+y9Uayks1bavBkrguB/bh5MuTGTvTKSTcuFL3qg0tyWoR8L/oRDO/lv/a/MRqJUZw6vUsAreFSyDZy8BaeNPNSJzRPyhgTQCr/+R+4AhMttQTNWUpTt0UOaM6DySbCFHnCVYKfFpceiUXPGoGVbHev8AhTW7AgophjqyeL/vv3GjSATQd52FLet/YkdJD7sgzZpoyrkqOJ+YWBKIrxRphU0rDzCuzsFqFTy0/z0Ez911ymDmHtYnKWIzPYaop7nNqo2h1A6U1RZv1Ly+P3CjZG2hMsGjNe5J6yqvr6RV1C4PgtPkFsoGqA9IpCx8NQ7WRT2ofLeJntrzUSKF3HQSZzqDPQWBnUBliRkudZOcwxwDJw55DzRswwRSqcg7uWpl38qAoIwgfVw55nz76GdI9zxdQFn+mIXPE0QK24VcGltMDLJfdFTN5XCoo1juf8RCG0+95aS2p03ECr//juOj2y3A3Rg==
+X-Microsoft-Antispam-Message-Info: 2CHMwt+2+nTRHLhW8Gj4XalBXpQDc5WU4n4BYAuE9CjrjLiHlMWiTHHJS8+DV8nTkezA/2d6U11YGH8PABoo9rNbsuziRW7yVqbCfbGoQy3XO9vEQOXUuTiRK+OZot3vVXvN+PJ9mWG3778L0HxQILbb+Pb1ByD9AWUEGH6P3Jy4nSgeh9jUPCSvwKJ+EqzHsLaHHFl9iwtyAoKBRoi5xpMODxCJfGPVdDn2b8GL+zwZ8sZIuJF5/YDojuPuB2w6YVshzvrheN2pCPtPaykrMl+9sSxmkFjvav0yfIqli9sXcDTONAhE9uuL3iiJ48IwrupsTdA9sOhOJ3ZRMQ8uvVHqWTn0z1N6nWuG7viZU0C+1aC7GMjkfyDwbGwFHAM44XQzvOCbyuRh37swkFExra+CXUeHNWmIjl2LfxBeNB1GpdAA0OawlgPkWcnmpKpvToI5xvfbGsPmA/lWELaaqZc/J/Xd/dOV4VCCek8Z80oUtqqKA3drLUAgYS5HWN6i/J6NMlgnTgCgVSgws7qYcaxCWooYG0kBOq+uBHP9ZD9v5X9R3LlEcysW8Gqpb+0hdi4FbpFg+dORp/4eWr1rCorReBaa5d2iHxIG88YoML3TPDW/mp3eGqO77yVb123oj2Ip8MDeBwHeO7+bEnwuxX4PfF2dPz1lBAEpByTwYBEi5Bu7khWwmlOxCIsIx8H9Z50ej+ZCgU5JGT0pJXVUZE5USN8jwJcxFHOSkx/UGWE=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(1800799015)(376005)(7416005)(52116005)(366007)(38350700005);
+ SFS:(13230031)(376005)(7416005)(52116005)(1800799015)(366007)(38350700005);
  DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?K98na8nfLEqZGlvqaNQU4TK52NKAuIMSby+ULzGsgUK5ijW5PVYVJyGcd3/3?=
- =?us-ascii?Q?1C4cwRX7wV47OdJm3hPslEoGZzj3IBcd7OWeGJh41NhzdF2iZEP9+Uv5hQ1F?=
- =?us-ascii?Q?Dwcaw76BNZ4dOYpZA4GYKzHtGiDdGCwXQOGqqNeUhNsBzmiAhZXxkKTQ9ziW?=
- =?us-ascii?Q?sSYFbIKjcl4p09YjzpcsiKdvaZ47qLHyw8RSezihUsg7CXS55+BzzfdhkQ/M?=
- =?us-ascii?Q?8F5h9t9EOW5B/P1cASwO9ojyRZec9O1JDBBbukTQlo9uyF0KVqf2QY081GKB?=
- =?us-ascii?Q?6NZyKVrA/4YgAwlAXw9RQXdiFO0aCzsD670dlEaDdZxZOSCD72K3hCMoQxQe?=
- =?us-ascii?Q?OCnQrdme8VljMonbj1RS6k44B/wTOgE1zJdVLxyvduqfnjYBrVg5zjZCv8WG?=
- =?us-ascii?Q?3PnrjFGPfMrFjMaEytiJmMVkAo2zXBp3N4gEmJ8wVol8p8dNvvCzNzwn6ERU?=
- =?us-ascii?Q?iJ6ZbaQ3uealZt1xdROy7JDH5GTcFriZUNwIVcspkCfbrIsrwKj+o9GJ2atX?=
- =?us-ascii?Q?Co8JCXXUqrqGX624Igcqaqk8fqhoEZn9qPYEJi++5Me7BWKlyPlp6j6/DKSE?=
- =?us-ascii?Q?b2tcsR7Dd1SvRrdw+6/4fca1QLnOYY1+x7xRuDxf0HAvuYMNXE1PnA6/+Zdf?=
- =?us-ascii?Q?PCWqB7asCz/e8z0fr236A51pt3K5Bu5Ljef0hW36qvalX6MKhVsmD+HGjKkF?=
- =?us-ascii?Q?8v/dr1Qg4Ah/zDEBpbyvuE18x0U6+D1+YQmCRtrqdP8+mEh/sHSx210y7y+7?=
- =?us-ascii?Q?HJMflx+0qFoUrygKTvPfoGZmzFRs8hndi6w9Jjy2H8b2w6DyxVT3WUfDbH3T?=
- =?us-ascii?Q?n/TMBFrX7uQY5MDAFUOOkv/2j1VTyqBuro5+EI18+8QazJq54/L5yoPg0xsC?=
- =?us-ascii?Q?7Linz354it4Lt5JNoRxyx5F6M924htPF/eVNpJRwjGmgEHs6zdkk2U964R/P?=
- =?us-ascii?Q?vM5Yti4Tkwu1CncuDcNfXf8HjKZ4oBiuMyVi2T0vvVo8DpFTFTQAzsFVEUXC?=
- =?us-ascii?Q?PAnK5Ms/SstBuGlkqsLy4u1sBfWardyKbBd2g5N9+VqH36WNGkSOhZ8sAkDL?=
- =?us-ascii?Q?v02NTRoM+SfO8bT5on5vyUgu3utgKAxdTw69rNcJfigMDYj2S6WwymfENULs?=
- =?us-ascii?Q?gbmW5JPKGgJPMPUPZFJAvmXwlB0hQtAc8/jygS6D8niLqQZaTdzJfrW0Y5H5?=
- =?us-ascii?Q?o1CrH1c0YDl3AAWOqG6VlMcArBE2IrBUIcxYUoYRvTBaNHge5CJ9QNfjkBf8?=
- =?us-ascii?Q?cc8nCfNu8sGIRPSDABqWSgM95Zzo3o0bIY/T81dxdD9YBhVVgeiMI2IbPJ4R?=
- =?us-ascii?Q?uA7LhTgAEbN4nPhBgBPLiZ4AUzESl9donRLKtHB5iZU19HAtNL+CpmLtGAQM?=
- =?us-ascii?Q?M0GSkKD0y4ACeVafEhcjGXiPTm4s1EsnlTWTsFZLHZ+nyQsP97u8ZjvrE+KK?=
- =?us-ascii?Q?idDTqOXXW1NCCh8FNfBpRB3PvUXmj0taW3tuNmSmpHNMHy0At27RnbQfdVFi?=
- =?us-ascii?Q?YoCEobitn144pMRLHSqFpSX3doF/iR0YmAO8P9Fqm6/6Axuh+pB/2CPZjGJq?=
- =?us-ascii?Q?1y7yDB3M6BOxwoIMEkrngugsTksLBw7vohYk3G1/MECPkiybRf0gJSxoFjf1?=
- =?us-ascii?Q?aw=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?bm80x2LBT2rvTog77o0vNpZxc1EKMEOQhBSK1lLTmjJLZjQx/aWtY//HF+Ao?=
+ =?us-ascii?Q?l2S5qhDF2JwSaNC/33368dF74GC/xfBkAPc/DYJmRlWK9UzHitoVqxkM7WTk?=
+ =?us-ascii?Q?ywSNPxz7BTRVYmk8DAceApbYpepIvCUjHJpBece7JMNXzyPHE5/Z+cx22STm?=
+ =?us-ascii?Q?1J3jX1LEqGWQjp6Wzyh88tlSe99rAZgZseqr3lFZvq0vzfI/aNq3rXIK83yl?=
+ =?us-ascii?Q?CkjfQyhn7nU0UqUQc4sGJ7RQvYtDykwIAcfoS1Ev1vVhuEmmu1zOpbcmr/5E?=
+ =?us-ascii?Q?fD96Gy5uI4zh++dp6trLDv63du3xtEU1UFXNW1cDqBSiyJT5puQtRQyZfW5N?=
+ =?us-ascii?Q?W6yuLhr8PcZrqaRaGOYiGVhhbO4qFY+LJWJvDKmM8DoPp6ulkLUV2bCpFfSO?=
+ =?us-ascii?Q?WubakmxUGb/r/QzQ9XBshLkwSydCYfzbOi8yTmxTK8c3N5/lszP9TBR7HqIB?=
+ =?us-ascii?Q?njH76s6qiVzCd8iy9KikQTiQmmuKha/46e8l5+TJHuG2L5v4+VNkHd54iDP7?=
+ =?us-ascii?Q?c/dTVkabVFfrvWFBfVCXZeMCzneipDCPH7sB4DcnaqAyXdkPgdkInHGvoQRA?=
+ =?us-ascii?Q?s5zvBW8NxDKduKh5tuUPyvcoRG4Rv2F0Ggt3Fno7pteWtc9MQXZBGv3dNx8A?=
+ =?us-ascii?Q?VlANPFopr4Q8JFcLyCIAMSOUXIQFi10T3U0psVhTvmxA1IYLPyZfp6uKEr02?=
+ =?us-ascii?Q?cp4Y2EmAOU/oMUe1EJe5OUkAX+wjDCujUdfTuRV+gR5DTbx9Y5gkMQcc6Obe?=
+ =?us-ascii?Q?knROgWWytE0VKe8A4UI5TgLD8bRzZ2vb5N0KiiIjxhGFkf9jUV2gAtbHc2bg?=
+ =?us-ascii?Q?6geELi8iF6ndhFuwUBNv56hEtVf7XDxdKg67a+xD4AoHRAL6W1D63sjJGjPk?=
+ =?us-ascii?Q?/jjxPsDp+DXmf9tQr2FS20KfQVHvIUEfPvbiusU7DJ00dHmEmiGeN9BzNHkm?=
+ =?us-ascii?Q?l47jWs04gheHz6NaJJvTiLeUc2BNyX1SMMwKyPD313p9/qnwO1gwqMnaJ+l8?=
+ =?us-ascii?Q?q5Fnams6fRh+j7lX9dG5Gji+IE+vZ45I6oD146ud63vKaHdFinOt2zq30mx6?=
+ =?us-ascii?Q?j7e+lgvE6Xy/fCE72rYxRcUYrEvxg3XZRcq1nSNEkEddsLsELxfwhQ8bMd5z?=
+ =?us-ascii?Q?Ftjb8O/+ccdK2S54V+M+4hT7pCMGU6M5eHbCjpo40PZmnSY9BpQpt3RGFFVZ?=
+ =?us-ascii?Q?8snp2RxfIvxeuf5O8OQlgL2ObqKleBB+h6mLIqc2UKgi7EYi0R4pT4ifSpLR?=
+ =?us-ascii?Q?erqnPHcR2VKGFWIbMc4LVCLuFw4OvYrWdotQKwUhtgmnCF65LNwQOWpfY85m?=
+ =?us-ascii?Q?ARyahBBBi14y570ZcQHOpt3smFRyCenyWOguklu1DIN6qJe+oaLJf18587x+?=
+ =?us-ascii?Q?o+qQTEXS2bRLxG9uVjFAEvO2mO/kP6RWSApEqaywntRZfxJ9GykPyJ/gvPTh?=
+ =?us-ascii?Q?dfyGr6he3oo1cwqHUEYw50i80bbj0WRtyMLVniKee+mLSv4tsrEig2kU/wRp?=
+ =?us-ascii?Q?cxMy7GxGtTU2dcZPq13XIYJACj9CUYhNgHMWCVMGAsUsFCEgnw1itqkxcbtk?=
+ =?us-ascii?Q?wjCVI6bYiNZ02a0nkHrKzvfS6KGyOpWi/rTyGFKmZbcxRSS3DzMIB5XXIVDX?=
+ =?us-ascii?Q?Sw=3D=3D?=
 X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f9932db0-192d-4ab3-c7ef-08dc4e571bdc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3f4ace43-13af-4414-7726-08dc4e571b75
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2024 12:12:01.7734 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Mar 2024 12:12:01.0449 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: WIfPVKo06p8tDh4wY32U8+DRVAZc3Ta8CKXQ2CW7YHCKqKwaz0ySSk8s8u35iNev2ih3KNzZkoEnJPkrTtxn4g==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR08MB6528
+X-MS-Exchange-CrossTenant-UserPrincipalName: k/wRWNnzBBiHn3259VL5AYaRJyFYLkeLr9j/BIdqcYNH4MzWD+4PB+YPVHHPXwfZ5tp2quwAIUCGGAFnISKiBQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR08MB6303
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,76 +145,74 @@ X-Virus-Status: Clean
 
 From: Lukas Funke <lukas.funke@weidmueller.com>
 
-Rename spl_board_init() to spl_soc_init(). SoC specific
-implementation should be separated from board specific implementation
-in order to be extended by board developers.
+Some architectures use spl_board_init() in their SoC specific
+implementation. Board developers should be able to add board specific
+implementation via spl_board_init(). Hence, introduce a spl_soc_init()
+method which is called right before spl_board_init() for SoC
+specific implementation.
 
 Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+Reviewed-by: Devarsh Thakkar <devarsht@ti.com>
 ---
 
-Changes in v3:
- - Rephrase Kconfig description and correct minor typo
+(no changes since v1)
 
-Changes in v2:
- - Change spl_arch_init() to spl_soc_init()
+ common/spl/Kconfig | 7 +++++++
+ common/spl/spl.c   | 3 +++
+ include/spl.h      | 8 ++++++++
+ 3 files changed, 18 insertions(+)
 
- arch/arm/Kconfig           | 4 ++--
- arch/arm/mach-zynq/spl.c   | 4 ++--
- arch/arm/mach-zynqmp/spl.c | 4 ++--
- 3 files changed, 6 insertions(+), 6 deletions(-)
-
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 01d6556c42..db56db9414 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -1275,7 +1275,7 @@ config ARCH_ZYNQ
- 	select OF_CONTROL
- 	select MTD
- 	select SPI
--	select SPL_BOARD_INIT if SPL
-+	select SPL_SOC_INIT if SPL
- 	select SPL_CLK if SPL
- 	select SPL_DM if SPL
- 	select SPL_DM_SPI if SPL
-@@ -1318,7 +1318,7 @@ config ARCH_ZYNQMP
- 	imply FIRMWARE
- 	select GICV2
- 	select OF_CONTROL
--	select SPL_BOARD_INIT if SPL
-+	select SPL_SOC_INIT if SPL
- 	select SPL_CLK if SPL
- 	select SPL_DM if SPL
- 	select SPL_DM_SPI if SPI && SPL_DM
-diff --git a/arch/arm/mach-zynq/spl.c b/arch/arm/mach-zynq/spl.c
-index fea1c9b12a..112b44e2e1 100644
---- a/arch/arm/mach-zynq/spl.c
-+++ b/arch/arm/mach-zynq/spl.c
-@@ -32,8 +32,8 @@ void board_init_f(ulong dummy)
- 	arch_cpu_init();
- }
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 6405374bcc..eece8e58ce 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -272,6 +272,13 @@ config SPL_TEXT_BASE
+ 	help
+ 	  The address in memory that SPL will be running from.
  
--#ifdef CONFIG_SPL_BOARD_INIT
--void spl_board_init(void)
-+#ifdef CONFIG_SPL_SOC_INIT
-+void spl_soc_init(void)
- {
- 	preloader_console_init();
- #if defined(CONFIG_ARCH_EARLY_INIT_R) && defined(CONFIG_SPL_FPGA)
-diff --git a/arch/arm/mach-zynqmp/spl.c b/arch/arm/mach-zynqmp/spl.c
-index a0f35f36fa..71f9932525 100644
---- a/arch/arm/mach-zynqmp/spl.c
-+++ b/arch/arm/mach-zynqmp/spl.c
-@@ -56,8 +56,8 @@ static void ps_mode_reset(ulong mode)
- # define MODE_RESET	PS_MODE1
- #endif
++config SPL_SOC_INIT
++	bool "Call SoC-specific initialization in SPL"
++	help
++	  If this option is enabled, U-Boot will call the function
++	  spl_soc_init() from board_init_r(). This function should be
++	  provided by the SoC vendor.
++
+ config SPL_BOARD_INIT
+ 	bool "Call board-specific initialization in SPL"
+ 	help
+diff --git a/common/spl/spl.c b/common/spl/spl.c
+index b65c439e7a..9b83c85df5 100644
+--- a/common/spl/spl.c
++++ b/common/spl/spl.c
+@@ -711,6 +711,9 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+ 		}
+ 	}
  
--#ifdef CONFIG_SPL_BOARD_INIT
--void spl_board_init(void)
-+#ifdef CONFIG_SPL_SOC_INIT
-+void spl_soc_init(void)
- {
- 	preloader_console_init();
- 	ps_mode_reset(MODE_RESET);
++	if (CONFIG_IS_ENABLED(SOC_INIT))
++		spl_soc_init();
++
+ 	if (CONFIG_IS_ENABLED(BOARD_INIT))
+ 		spl_board_init();
+ 
+diff --git a/include/spl.h b/include/spl.h
+index 043875f10f..5dfdf778d2 100644
+--- a/include/spl.h
++++ b/include/spl.h
+@@ -816,6 +816,14 @@ int spl_early_init(void);
+  */
+ int spl_init(void);
+ 
++/*
++ * spl_soc_init() - Do architecture-specific init in SPL
++ *
++ * If SPL_SOC_INIT is enabled, this is called from board_init_r() before
++ * jumping to the next phase.
++ */
++void spl_soc_init(void);
++
+ /*
+  * spl_board_init() - Do board-specific init in SPL
+  *
 -- 
 2.30.2
 
