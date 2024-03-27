@@ -4,37 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11ABDC47DD9
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 10:49:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D150C54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 10:49:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB67A8808A;
-	Wed, 27 Mar 2024 11:49:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1F4B988096;
+	Wed, 27 Mar 2024 11:49:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41B4988089; Wed, 27 Mar 2024 11:49:19 +0100 (CET)
+ id DF5DF880A1; Wed, 27 Mar 2024 11:49:21 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 06AA08780A
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 11:49:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id A98468780A
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 11:49:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6F7922F4;
- Wed, 27 Mar 2024 03:49:50 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 32E352F4;
+ Wed, 27 Mar 2024 03:49:53 -0700 (PDT)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 686783F694;
- Wed, 27 Mar 2024 03:49:14 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E2BB93F694;
+ Wed, 27 Mar 2024 03:49:16 -0700 (PDT)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 1/4] sandbox: capsule: remove capsule related configs
-Date: Wed, 27 Mar 2024 16:18:59 +0530
-Message-Id: <20240327104902.905144-2-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 2/4] sandbox: capsule: binman: generate some capsules as
+ part of build
+Date: Wed, 27 Mar 2024 16:19:00 +0530
+Message-Id: <20240327104902.905144-3-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240327104902.905144-1-sughosh.ganu@linaro.org>
 References: <20240327104902.905144-1-sughosh.ganu@linaro.org>
@@ -56,87 +57,470 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The capsule update testing is carried out only on the sandbox and
-sandbox_flattree variants. Remove the capsule update related configs
-from the other sandbox variants. This ensures that the capsule files
-are generated only on variants which are used for the feature's
-testing.
+Currently, all the capsules for the sandbox platform are generated at
+the time of running the capsule tests. To showcase generation of
+capsules through binman, generate all raw(non FIT payload) capsules
+needed for the sandbox platform as part of the build. This acts as an
+illustrative example for generating capsules as part of a platform's
+build.
+
+Make corresponding change in the capsule test's configuration to get
+these capsules from the build directory.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 
-Changes since V1: None
+Changes since V1:
+* Fix the typo in the commit message about raw capsules being
+  generated as part of the build, and not signed capsules.
 
- configs/sandbox64_defconfig      | 5 -----
- configs/sandbox_noinst_defconfig | 2 --
- configs/sandbox_spl_defconfig    | 2 --
- configs/sandbox_vpl_defconfig    | 2 --
- 4 files changed, 11 deletions(-)
+ arch/sandbox/dts/sandbox.dts                  |   4 +
+ arch/sandbox/dts/sandbox_capsule.dtsi         | 169 ++++++++++++++++++
+ arch/sandbox/dts/test.dts                     |   4 +
+ .../test_efi_capsule/capsule_gen_binman.dts   | 167 +----------------
+ test/py/tests/test_efi_capsule/conftest.py    |   1 +
+ 5 files changed, 185 insertions(+), 160 deletions(-)
+ create mode 100644 arch/sandbox/dts/sandbox_capsule.dtsi
 
-diff --git a/configs/sandbox64_defconfig b/configs/sandbox64_defconfig
-index 3be9a00a85..a67f9f0265 100644
---- a/configs/sandbox64_defconfig
-+++ b/configs/sandbox64_defconfig
-@@ -134,7 +134,6 @@ CONFIG_CPU=y
- CONFIG_DM_DEMO=y
- CONFIG_DM_DEMO_SIMPLE=y
- CONFIG_DM_DEMO_SHAPE=y
--CONFIG_DFU_SF=y
- CONFIG_FASTBOOT_FLASH=y
- CONFIG_FASTBOOT_FLASH_MMC_DEV=0
- CONFIG_ARM_FFA_TRANSPORT=y
-@@ -267,12 +266,8 @@ CONFIG_CMD_DHRYSTONE=y
- CONFIG_TPM=y
- CONFIG_ERRNO_STR=y
- CONFIG_GETOPT=y
--CONFIG_EFI_RUNTIME_UPDATE_CAPSULE=y
--CONFIG_EFI_CAPSULE_ON_DISK=y
--CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
- CONFIG_EFI_SECURE_BOOT=y
- CONFIG_TEST_FDTDEC=y
--CONFIG_FWU_MULTI_BANK_UPDATE=y
- CONFIG_UNIT_TEST=y
- CONFIG_UT_TIME=y
- CONFIG_UT_DM=y
-diff --git a/configs/sandbox_noinst_defconfig b/configs/sandbox_noinst_defconfig
-index 137b3c6b82..f37230151a 100644
---- a/configs/sandbox_noinst_defconfig
-+++ b/configs/sandbox_noinst_defconfig
-@@ -281,8 +281,6 @@ CONFIG_TPM=y
- CONFIG_ZSTD=y
- CONFIG_SPL_LZMA=y
- CONFIG_ERRNO_STR=y
--CONFIG_EFI_CAPSULE_ON_DISK=y
--CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
- CONFIG_UNIT_TEST=y
- CONFIG_SPL_UNIT_TEST=y
- CONFIG_UT_TIME=y
-diff --git a/configs/sandbox_spl_defconfig b/configs/sandbox_spl_defconfig
-index d0cd91ef4f..f7b92dc844 100644
---- a/configs/sandbox_spl_defconfig
-+++ b/configs/sandbox_spl_defconfig
-@@ -249,8 +249,6 @@ CONFIG_ZSTD=y
- CONFIG_SPL_LZMA=y
- CONFIG_ERRNO_STR=y
- CONFIG_SPL_HEXDUMP=y
--CONFIG_EFI_CAPSULE_ON_DISK=y
--CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
- CONFIG_UNIT_TEST=y
- CONFIG_SPL_UNIT_TEST=y
- CONFIG_UT_TIME=y
-diff --git a/configs/sandbox_vpl_defconfig b/configs/sandbox_vpl_defconfig
-index b138b352de..72483d8ba1 100644
---- a/configs/sandbox_vpl_defconfig
-+++ b/configs/sandbox_vpl_defconfig
-@@ -252,8 +252,6 @@ CONFIG_TPM=y
- CONFIG_ZSTD=y
- # CONFIG_VPL_LZMA is not set
- CONFIG_ERRNO_STR=y
--CONFIG_EFI_CAPSULE_ON_DISK=y
--CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
- CONFIG_UNIT_TEST=y
- CONFIG_SPL_UNIT_TEST=y
- CONFIG_UT_TIME=y
+diff --git a/arch/sandbox/dts/sandbox.dts b/arch/sandbox/dts/sandbox.dts
+index 12d3eff5fa..8392206eea 100644
+--- a/arch/sandbox/dts/sandbox.dts
++++ b/arch/sandbox/dts/sandbox.dts
+@@ -106,3 +106,7 @@
+ #if IS_ENABLED(CONFIG_SUPPORT_VPL)
+ #include "sandbox_vpl.dtsi"
+ #endif
++
++#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
++#include "sandbox_capsule.dtsi"
++#endif
+diff --git a/arch/sandbox/dts/sandbox_capsule.dtsi b/arch/sandbox/dts/sandbox_capsule.dtsi
+new file mode 100644
+index 0000000000..34d29916b3
+--- /dev/null
++++ b/arch/sandbox/dts/sandbox_capsule.dtsi
+@@ -0,0 +1,169 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Devicetree file with binman nodes needed for generating EFI
++ * capsules.
++ *
++ */
++
++#include <sandbox_efi_capsule.h>
++
++/ {
++	binman: binman {
++		multiple-images;
++	};
++};
++
++&binman {
++	capsule1 {
++		filename = "Test01";
++		efi-capsule {
++			image-index = <0x1>;
++			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
++
++			text {
++				text = "u-boot:New";
++			};
++		};
++	};
++
++	capsule2 {
++		filename = "Test02";
++		efi-capsule {
++			image-index = <0x2>;
++			image-guid = SANDBOX_UBOOT_ENV_IMAGE_GUID;
++
++			text {
++				text = "u-boot-env:New";
++			};
++		};
++	};
++
++	capsule3 {
++		filename = "Test03";
++		efi-capsule {
++			image-index = <0x1>;
++			image-guid = SANDBOX_INCORRECT_GUID;
++
++			text {
++				text = "u-boot:New";
++			};
++		};
++	};
++
++	capsule4 {
++		filename = "Test101";
++		efi-capsule {
++			image-index = <0x1>;
++			fw-version = <0x5>;
++			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
++
++			text {
++				text = "u-boot:New";
++			};
++		};
++	};
++
++	capsule5 {
++		filename = "Test102";
++		efi-capsule {
++			image-index = <0x2>;
++			fw-version = <0xa>;
++			image-guid = SANDBOX_UBOOT_ENV_IMAGE_GUID;
++
++			text {
++				text = "u-boot-env:New";
++			};
++		};
++	};
++
++	capsule6 {
++		filename = "Test103";
++		efi-capsule {
++			image-index = <0x1>;
++			fw-version = <0x2>;
++			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
++
++			text {
++				text = "u-boot:New";
++			};
++		};
++	};
++
++	capsule7 {
++		filename = "Test11";
++		efi-capsule {
++			image-index = <0x1>;
++			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
++			private-key = CAPSULE_PRIV_KEY;
++			public-key-cert = CAPSULE_PUB_KEY;
++			monotonic-count = <0x1>;
++
++			text {
++				text = "u-boot:New";
++			};
++		};
++	};
++
++	capsule8 {
++		filename = "Test12";
++		efi-capsule {
++			image-index = <0x1>;
++			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
++			private-key = CAPSULE_INVAL_KEY;
++			public-key-cert = CAPSULE_INVAL_PUB_KEY;
++			monotonic-count = <0x1>;
++
++			text {
++				text = "u-boot:New";
++			};
++		};
++	};
++
++	capsule9 {
++		filename = "Test111";
++		efi-capsule {
++			image-index = <0x1>;
++			fw-version = <0x5>;
++			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
++			private-key = CAPSULE_PRIV_KEY;
++			public-key-cert = CAPSULE_PUB_KEY;
++			monotonic-count = <0x1>;
++
++			text {
++				text = "u-boot:New";
++			};
++		};
++	};
++
++	capsule10 {
++		filename = "Test112";
++		efi-capsule {
++			image-index = <0x2>;
++			fw-version = <0xa>;
++			image-guid = SANDBOX_UBOOT_ENV_IMAGE_GUID;
++			private-key = CAPSULE_PRIV_KEY;
++			public-key-cert = CAPSULE_PUB_KEY;
++			monotonic-count = <0x1>;
++
++			text {
++				text = "u-boot-env:New";
++			};
++		};
++	};
++
++	capsule11 {
++		filename = "Test113";
++		efi-capsule {
++			image-index = <0x1>;
++			fw-version = <0x2>;
++			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
++			private-key = CAPSULE_PRIV_KEY;
++			public-key-cert = CAPSULE_PUB_KEY;
++			monotonic-count = <0x1>;
++
++			text {
++				text = "u-boot:New";
++			};
++		};
++	};
++};
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index e264b29554..a012f5c4c9 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -1990,4 +1990,8 @@
+ #include "sandbox_vpl.dtsi"
+ #endif
+ 
++#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
++#include "sandbox_capsule.dtsi"
++#endif
++
+ #include "cedit.dtsi"
+diff --git a/test/py/tests/test_efi_capsule/capsule_gen_binman.dts b/test/py/tests/test_efi_capsule/capsule_gen_binman.dts
+index e8a1858509..1a62c26047 100644
+--- a/test/py/tests/test_efi_capsule/capsule_gen_binman.dts
++++ b/test/py/tests/test_efi_capsule/capsule_gen_binman.dts
+@@ -55,42 +55,6 @@
+ 	};
+ 
+ 	capsule1 {
+-		filename = "Test01";
+-		efi-capsule {
+-			image-index = <0x1>;
+-			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
+-
+-			text {
+-				text = "u-boot:New";
+-			};
+-		};
+-	};
+-
+-	capsule2 {
+-		filename = "Test02";
+-		efi-capsule {
+-			image-index = <0x2>;
+-			image-guid = SANDBOX_UBOOT_ENV_IMAGE_GUID;
+-
+-			text {
+-				text = "u-boot-env:New";
+-			};
+-		};
+-	};
+-
+-	capsule3 {
+-		filename = "Test03";
+-		efi-capsule {
+-			image-index = <0x1>;
+-			image-guid = SANDBOX_INCORRECT_GUID;
+-
+-			text {
+-				text = "u-boot:New";
+-			};
+-		};
+-	};
+-
+-	capsule4 {
+ 		filename = "Test04";
+ 		efi-capsule {
+ 			image-index = <0x1>;
+@@ -102,7 +66,7 @@
+ 		};
+ 	};
+ 
+-	capsule5 {
++	capsule2 {
+ 		filename = "Test05";
+ 		efi-capsule {
+ 			image-index = <0x1>;
+@@ -114,46 +78,7 @@
+ 		};
+ 	};
+ 
+-	capsule6 {
+-		filename = "Test101";
+-		efi-capsule {
+-			image-index = <0x1>;
+-			fw-version = <0x5>;
+-			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
+-
+-			text {
+-				text = "u-boot:New";
+-			};
+-		};
+-	};
+-
+-	capsule7 {
+-		filename = "Test102";
+-		efi-capsule {
+-			image-index = <0x2>;
+-			fw-version = <0xa>;
+-			image-guid = SANDBOX_UBOOT_ENV_IMAGE_GUID;
+-
+-			text {
+-				text = "u-boot-env:New";
+-			};
+-		};
+-	};
+-
+-	capsule8 {
+-		filename = "Test103";
+-		efi-capsule {
+-			image-index = <0x1>;
+-			fw-version = <0x2>;
+-			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
+-
+-			text {
+-				text = "u-boot:New";
+-			};
+-		};
+-	};
+-
+-	capsule9 {
++	capsule3 {
+ 		filename = "Test104";
+ 		efi-capsule {
+ 			image-index = <0x1>;
+@@ -166,7 +91,7 @@
+ 		};
+ 	};
+ 
+-	capsule10 {
++	capsule4 {
+ 		filename = "Test105";
+ 		efi-capsule {
+ 			image-index = <0x1>;
+@@ -179,37 +104,7 @@
+ 		};
+ 	};
+ 
+-	capsule11 {
+-		filename = "Test11";
+-		efi-capsule {
+-			image-index = <0x1>;
+-			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
+-			private-key = CAPSULE_PRIV_KEY;
+-			public-key-cert = CAPSULE_PUB_KEY;
+-			monotonic-count = <0x1>;
+-
+-			text {
+-				text = "u-boot:New";
+-			};
+-		};
+-	};
+-
+-	capsule12 {
+-		filename = "Test12";
+-		efi-capsule {
+-			image-index = <0x1>;
+-			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
+-			private-key = CAPSULE_INVAL_KEY;
+-			public-key-cert = CAPSULE_INVAL_PUB_KEY;
+-			monotonic-count = <0x1>;
+-
+-			text {
+-				text = "u-boot:New";
+-			};
+-		};
+-	};
+-
+-	capsule13 {
++	capsule5 {
+ 		filename = "Test13";
+ 		efi-capsule {
+ 			image-index = <0x1>;
+@@ -224,7 +119,7 @@
+ 		};
+ 	};
+ 
+-	capsule14 {
++	capsule6 {
+ 		filename = "Test14";
+ 		efi-capsule {
+ 			image-index = <0x1>;
+@@ -239,55 +134,7 @@
+ 		};
+ 	};
+ 
+-	capsule15 {
+-		filename = "Test111";
+-		efi-capsule {
+-			image-index = <0x1>;
+-			fw-version = <0x5>;
+-			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
+-			private-key = CAPSULE_PRIV_KEY;
+-			public-key-cert = CAPSULE_PUB_KEY;
+-			monotonic-count = <0x1>;
+-
+-			text {
+-				text = "u-boot:New";
+-			};
+-		};
+-	};
+-
+-	capsule16 {
+-		filename = "Test112";
+-		efi-capsule {
+-			image-index = <0x2>;
+-			fw-version = <0xa>;
+-			image-guid = SANDBOX_UBOOT_ENV_IMAGE_GUID;
+-			private-key = CAPSULE_PRIV_KEY;
+-			public-key-cert = CAPSULE_PUB_KEY;
+-			monotonic-count = <0x1>;
+-
+-			text {
+-				text = "u-boot-env:New";
+-			};
+-		};
+-	};
+-
+-	capsule17 {
+-		filename = "Test113";
+-		efi-capsule {
+-			image-index = <0x1>;
+-			fw-version = <0x2>;
+-			image-guid = SANDBOX_UBOOT_IMAGE_GUID;
+-			private-key = CAPSULE_PRIV_KEY;
+-			public-key-cert = CAPSULE_PUB_KEY;
+-			monotonic-count = <0x1>;
+-
+-			text {
+-				text = "u-boot:New";
+-			};
+-		};
+-	};
+-
+-	capsule18 {
++	capsule7 {
+ 		filename = "Test114";
+ 		efi-capsule {
+ 			image-index = <0x1>;
+@@ -303,7 +150,7 @@
+ 		};
+ 	};
+ 
+-	capsule19 {
++	capsule8 {
+ 		filename = "Test115";
+ 		efi-capsule {
+ 			image-index = <0x1>;
+diff --git a/test/py/tests/test_efi_capsule/conftest.py b/test/py/tests/test_efi_capsule/conftest.py
+index dd41da9284..80b12977d6 100644
+--- a/test/py/tests/test_efi_capsule/conftest.py
++++ b/test/py/tests/test_efi_capsule/conftest.py
+@@ -85,6 +85,7 @@ def efi_capsule_data(request, u_boot_config):
+         check_call('cd %s; '
+                    './tools/binman/binman --toolpath %s/tools build -u -d %s/capsule_binman.dtb -O %s -m --allow-missing -I %s -I ./board/sandbox -I ./arch/sandbox/dts'
+                    % (u_boot_config.source_dir, u_boot_config.build_dir, data_dir, data_dir, data_dir), shell=True)
++        check_call('cp %s/Test* %s' % (u_boot_config.build_dir, data_dir), shell=True)
+         os.environ['PYTHONPATH'] = pythonpath
+ 
+         # Create a disk image with EFI system partition
 -- 
 2.34.1
 
