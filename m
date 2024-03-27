@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C187C54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 11:16:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81137C54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 11:16:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99C28880DB;
-	Wed, 27 Mar 2024 12:15:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 310DA880E5;
+	Wed, 27 Mar 2024 12:15:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="JSCrtswz";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="a7+IV5FM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1499888058; Wed, 27 Mar 2024 09:11:24 +0100 (CET)
+ id 93CF088065; Wed, 27 Mar 2024 09:11:30 +0100 (CET)
 Received: from us-smtp-delivery-124.mimecast.com
  (us-smtp-delivery-124.mimecast.com [170.10.129.124])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18E9E8805B
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 09:11:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 99FAE88064
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 09:11:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wefu@redhat.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
- s=mimecast20190719; t=1711527081;
+ s=mimecast20190719; t=1711527087;
  h=from:from:reply-to:reply-to:subject:subject:date:date:
  message-id:message-id:to:to:cc:cc:mime-version:mime-version:
  content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=/sPc5nIhOyJRZk8bXxj9IIZ+OkxKJMNiI9c4dTZ22cs=;
- b=JSCrtswzG29298fvbe3mfOsMAurUk0l47CTs/nuwhet6G19h+NbBMTaZd/TfDs12CVJ9b9
- reKSxnb8MLkL+8BUIoMqvPM/WZwoPW3mz8fK+CE4bT2v/P3b8Ju5PHVorlGg1ZWpydqvku
- zU0Yyp56/dO62XKHViQjInzqCFSySYM=
-Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
- [209.85.214.198]) by relay.mimecast.com with ESMTP with STARTTLS
+ bh=VD+y7r7dM5xTeayVgiXbCheGbQvqvCEuZsaN2oem17s=;
+ b=a7+IV5FMyczMkLgkcQ5veUF+edFKzp7ZLt+Cs4StFaA3LyBLgGQFQtasZAFaR1+gb8d+/z
+ +nRewnJPEYjkY4/r0s+Q8EclX/OKoQtFtfNiaP8Xu9eTGL16eZrzcvnK0KM1HknMuTXO6t
+ 0oqwte1mXhHhPCYrVr1nPf7VGyX4LJc=
+Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
+ [209.85.214.200]) by relay.mimecast.com with ESMTP with STARTTLS
  (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
- us-mta-499-y1ltTz7MNwWzxTHlaw9xFQ-1; Wed, 27 Mar 2024 04:11:19 -0400
-X-MC-Unique: y1ltTz7MNwWzxTHlaw9xFQ-1
-Received: by mail-pl1-f198.google.com with SMTP id
- d9443c01a7336-1e0ac20241aso24574425ad.2
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 01:11:19 -0700 (PDT)
+ us-mta-13-HQzHAER-PAib_o5XAx2FyA-1; Wed, 27 Mar 2024 04:11:26 -0400
+X-MC-Unique: HQzHAER-PAib_o5XAx2FyA-1
+Received: by mail-pl1-f200.google.com with SMTP id
+ d9443c01a7336-1e0b3a4c2e4so28320055ad.0
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 01:11:26 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711527078; x=1712131878;
+ d=1e100.net; s=20230601; t=1711527085; x=1712131885;
  h=content-transfer-encoding:mime-version:reply-to:references
  :in-reply-to:message-id:date:subject:cc:to:from:x-gm-message-state
  :from:to:cc:subject:date:message-id:reply-to;
- bh=/sPc5nIhOyJRZk8bXxj9IIZ+OkxKJMNiI9c4dTZ22cs=;
- b=bOKIPuTjtRv6rh+7G9O/Y3QmhznSN1kx2W5/wYEkIv7Yb8H9WDi4G8kaOxs4t0AbLK
- gSe1feDbNX87Ymn0BqDDLyABYNlHStYNVy6J7nZ93MDnE/fSx7OKnnNe5dd+9gZNM5B0
- 91fgTuiStqyYkOPs9+RH+j2iCX0VvRkPsIU01WZhB9cKoOG1eKRERb35zXx2xSU2UPDS
- r+rnlaI+BJmOZCOUOLiePjs7XzAJTh/Bcs/8czEW92c162y7MSoiHqSDUKQPEHJNpZp/
- fbrFkOBZdpyxyC9Q6YNTbiLA1yR9oBN+4bvpJOdFTuBZDN8SjdelENrFFmtu28k7t6IQ
- cS7Q==
-X-Gm-Message-State: AOJu0YxVomJGl6A1EQGOvypdLCirWF7hzopRfUl7milO9eN+OYjc44Cg
- 8r0HQA6vxIUSzp7Bu21GqcBvk/au6DqVEBq8mW6RJZXWDiGx9xBj60DSJoTivn7zPYLxfRg46/K
- lUo+/pjtRmzRwDytLlfmvg3ELFyVIVtL6t82OES0ThyMMFXzTk507+FWILaQyB1DAmsTGP6BdDr
- zEhsOzW2BGBEHFpNeE0mA+pMaEV913hAdy6/0=
-X-Received: by 2002:a17:902:ce86:b0:1e0:e2b1:7395 with SMTP id
- f6-20020a170902ce8600b001e0e2b17395mr2627076plg.14.1711527078098; 
- Wed, 27 Mar 2024 01:11:18 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEW8BzkNqEOp+46jG289EUMDBeGiIb24uolatyICnRefM2AUgakOJeX6RfnzAa+sMVxwbm81Q==
-X-Received: by 2002:a17:902:ce86:b0:1e0:e2b1:7395 with SMTP id
- f6-20020a170902ce8600b001e0e2b17395mr2627038plg.14.1711527077715; 
- Wed, 27 Mar 2024 01:11:17 -0700 (PDT)
+ bh=VD+y7r7dM5xTeayVgiXbCheGbQvqvCEuZsaN2oem17s=;
+ b=Lqf267A7opmt2fd34dGlr376CbpcRJxRU+KaVFIR/zlXmDkdDO8oFszJZbSsld0VrF
+ ZjwczLQCxqQFgD2OaMIx60pdcVfIxs0jSm5EulSPUo/X+ZiT3qVoRfI1xcM3lK+pI08x
+ 1f3yk+i+RsbisPFS2NUn6gHNAD/KKlfmOoMJIjk98FUxbYvubBdj4YFMXOimNvw0z8w1
+ GzKIPphgs7ifwElT1QhSmkReiR6xu2Qvgpg6GZlAmZGZMN2ddZr4hMBn4SC5IaDHAFyr
+ N+B2DXrUAMPEt7mkhgTByn4A1HosD9caWmPXqcV/WPZVm4HYSzembmQpD1Xcn13cn5/I
+ HXbA==
+X-Gm-Message-State: AOJu0YznO2ObARXXDU8RU8TCfPK0El4jmIk7XK6+pkBIoahOtAiGeviE
+ vNYTskEbZmnQtGB26VIMn4LZelDIV+aeQ0gb3BtZauF0yAiT+Cny341wQKVYvkw9L09OXkagFfU
+ aEzjyzBbu0Rrp9Sd5xgK92pVuG+/7+V/1Lw4cXDZvf5QNvj0dIeCPqk2irF7j42tNHuz/W/w0Df
+ /jQeqsH72IC8qshAL17zc1nxrqRTSdDnOrL6Y=
+X-Received: by 2002:a17:903:2342:b0:1e0:e2c2:5703 with SMTP id
+ c2-20020a170903234200b001e0e2c25703mr610077plh.0.1711527084899; 
+ Wed, 27 Mar 2024 01:11:24 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IF/l+bZeawPsROKVtJ7LtcCTFHHPdj2JzBq+bx4NQGhyY1ZXfssNYVLxIZ0HYqx9Q7B0CTsmQ==
+X-Received: by 2002:a17:903:2342:b0:1e0:e2c2:5703 with SMTP id
+ c2-20020a170903234200b001e0e2c25703mr610024plh.0.1711527084153; 
+ Wed, 27 Mar 2024 01:11:24 -0700 (PDT)
 Received: from localhost.localdomain ([43.228.180.230])
  by smtp.gmail.com with ESMTPSA id
- n15-20020a170902d2cf00b001dcfaab3457sm8293709plc.104.2024.03.27.01.11.11
+ n15-20020a170902d2cf00b001dcfaab3457sm8293709plc.104.2024.03.27.01.11.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 27 Mar 2024 01:11:17 -0700 (PDT)
+ Wed, 27 Mar 2024 01:11:23 -0700 (PDT)
 From: wefu@redhat.com
 To: u-boot@lists.denx.de, bmeng@tinylab.org, rick@andestech.com,
  trini@konsulko.com, wefu@redhat.com, dlan@gentoo.org,
@@ -83,10 +83,10 @@ To: u-boot@lists.denx.de, bmeng@tinylab.org, rick@andestech.com,
  ycliang@andestech.com
 Cc: tekkamanninja@gmail.com,
 	tekkamanninja@163.com
-Subject: [PATCH 5/6] config/th1520_lpi4a_defconfig:enable designware ethernet
- & realtek phy
-Date: Wed, 27 Mar 2024 16:07:26 +0800
-Message-ID: <20240327080817.44501-6-wefu@redhat.com>
+Subject: [PATCH 6/6] config/th1520_lpi4a.h: add more env option for booting
+ linux
+Date: Wed, 27 Mar 2024 16:07:27 +0800
+Message-ID: <20240327080817.44501-7-wefu@redhat.com>
 X-Mailer: git-send-email 2.44.0
 In-Reply-To: <20240327080817.44501-1-wefu@redhat.com>
 References: <20240327080817.44501-1-wefu@redhat.com>
@@ -118,36 +118,32 @@ From: Wei Fu <wefu@redhat.com>
 Signed-off-by: Wei Fu <wefu@redhat.com>
 Co-authored-by: Yixun Lan <dlan@gentoo.org>
 ---
- configs/th1520_lpi4a_defconfig | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ include/configs/th1520_lpi4a.h | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/configs/th1520_lpi4a_defconfig b/configs/th1520_lpi4a_defconfig
-index 49ff92f6de..b7d049b9d2 100644
---- a/configs/th1520_lpi4a_defconfig
-+++ b/configs/th1520_lpi4a_defconfig
-@@ -58,16 +58,20 @@ CONFIG_CMD_BOOTMENU=y
- CONFIG_PARTITION_TYPE_GUID=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_VERSION_VARIABLE=y
--# CONFIG_NET is not set
- # CONFIG_BLOCK_CACHE is not set
- # CONFIG_GPIO is not set
- # CONFIG_I2C is not set
- # CONFIG_INPUT is not set
- # CONFIG_DM_MMC is not set
- # CONFIG_MTD is not set
-+CONFIG_PHY_REALTEK=y
-+CONFIG_RTL8211X_PHY_FORCE_MASTER=y
-+CONFIG_RTL8211F_PHY_FORCE_EEE_RXC_ON=y
-+CONFIG_ETH_DESIGNWARE=y
-+CONFIG_DW_ALTDESCRIPTOR=y
- # CONFIG_POWER is not set
- CONFIG_SYS_NS16550=y
--CONFIG_RISCV_TIMER=y
-+# CONFIG_REGEX is not set
- CONFIG_AES=y
- CONFIG_BLAKE2=y
- CONFIG_SHA512=y
+diff --git a/include/configs/th1520_lpi4a.h b/include/configs/th1520_lpi4a.h
+index 87496a52c4..6c0c4bc50d 100644
+--- a/include/configs/th1520_lpi4a.h
++++ b/include/configs/th1520_lpi4a.h
+@@ -17,6 +17,18 @@
+ /* Environment options */
+ 
+ #define CFG_EXTRA_ENV_SETTINGS \
++	"kernel_addr_r=0x82000000\0" \
++	"kernel_comp_addr_r=0x88000000\0" \
++	"kernel_comp_size=0x4000000\0" \
++	"ramdisk_addr_r=0x8d300000\0" \
++	"fdt_addr_r=0x8e000000\0" \
++	"fdt_addr_fixed=0x20000000\0" \
++	"scriptaddr=0x8e400000\0" \
++	"scriptfile=uEnv_light_lpi4a.txt\0" \
++	"devtype=mmc\0" \
++	"devnum=0\0" \
++	"bootpart=2\0" \
++	"bootcmd=ext4load mmc ${devnum}:${bootpart} ${scriptaddr} ${scriptfile}; env import -t ${scriptaddr} ${filesize};boot\0" \
+ 	"PS1=[LPi4A]# \0"
+ 
+ #endif /* __TH1520_LPI4A_H */
 -- 
 2.44.0
 
