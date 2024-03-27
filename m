@@ -4,49 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AEA9C54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 14:33:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7434EC54E67
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 14:44:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B52E18809B;
-	Wed, 27 Mar 2024 15:33:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 9D38C88085;
+	Wed, 27 Mar 2024 15:44:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7DEFF8809B; Wed, 27 Mar 2024 15:33:31 +0100 (CET)
-Received: from mail.3ffe.de (0001.3ffe.de [IPv6:2a01:4f8:c0c:9d57::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D787880B9
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 15:33:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=michael@walle.cc
-Received: from localhost (unknown [IPv6:2a02:810b:4340:6430:4685:ff:fe12:5967])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ixerzk7w";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2C5B2880AE; Wed, 27 Mar 2024 15:44:20 +0100 (CET)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mail.3ffe.de (Postfix) with ESMTPSA id 5A6CD5E8;
- Wed, 27 Mar 2024 15:33:27 +0100 (CET)
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 27 Mar 2024 15:33:26 +0100
-Message-Id: <D04LUAJJ6LC7.1JVGVTJ0UCMVR@kernel.org>
-To: "Neha Malcom Francis" <n-francis@ti.com>, <u-boot@lists.denx.de>,
- <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>,
- <bb@ti.com>, <nm@ti.com>, <sumit.garg@linaro.org>
-Subject: Re: [PATCH 3/4] arm: dts: k3-*-binman.dtsi: Clean up and templatize
- boot binaries
-Cc: <michal.simek@amd.com>, <marex@denx.de>, <neil.armstrong@linaro.org>,
- <afd@ti.com>, <vigneshr@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>,
- <u-kumar1@ti.com>
-From: "Michael Walle" <mwalle@kernel.org>
-X-Mailer: aerc 0.16.0
-References: <20240322131011.1029620-1-n-francis@ti.com>
- <20240322131011.1029620-4-n-francis@ti.com>
- <D03Q9AGO5ND9.1TJM3KSNA71WG@kernel.org>
- <83c6532a-e994-4bcd-bc48-9e22ecdec644@ti.com>
-In-Reply-To: <83c6532a-e994-4bcd-bc48-9e22ecdec644@ti.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 12A7B88069
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 15:44:18 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2d4979cd8c8so9958471fa.0
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 07:44:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1711550657; x=1712155457; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hw1hWg/oBQIjIE6tL5VWYGnhi9DUScQ0QyE4Rb/UYZI=;
+ b=ixerzk7wa1TEPWX8aNhut6zBR9YFgfN9q8GBMs6NzYyrQL6tSQtMj7glCWXfLHHgVR
+ c+heEaDsYT6AA8niCN4xamUR3MGsUcjw0/c4tSD5wy3ddV1VgVT/89m+n9yHaTxojUX4
+ wB9C0PJnGgHUpkRcLxkag4Z9YyEohn5oernsRwRm2VhqjFp/b/tTBWuWpWB3QIs+SKrY
+ qjwe5eiPwSNh9jZehWlXN/n5lTqUHdJyFFutQZpDOlstyEilw0r1DNTYa0eSEgQ+xa97
+ CqDpDRnMeC6GOCz59C/vkTu8OS3IDAHm6zSMSabnpUhyT7Ia5ptw8iCJOZsmnNBz36+s
+ RWdw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711550657; x=1712155457;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hw1hWg/oBQIjIE6tL5VWYGnhi9DUScQ0QyE4Rb/UYZI=;
+ b=UHDTeB2e+Uj3LfnvC3KpVT7iEDnk2MneYnFRSzhvBqy+sG44XgSYxQPx3PqhERRsCE
+ hhHDSXX02MSRvFagHf5HizU2m231SiCxP8IwPhLPzi6J3cWxh7X5fKUNPK+mLABwXpIM
+ CVvllcT9zgfpScRr/ngfC93maXor3tSCnsyuB0n6JlVN+zEQNRrJXBFkarupsXudN2+C
+ q/APD3ExoPOs1TFoqqd5DCRZiu+5z/eDLcKlHzBqRWlbxHUyeNPMv06cgSVcitvjsxNJ
+ Ect7Lv2A/IB432GJQfTm9wH3QqZq8r7pbXKJUy35r6eUXo9/nMtwQ/UB5wH0G9FncJ00
+ saVg==
+X-Gm-Message-State: AOJu0Yy0plk9pnGeKz+YWnviXRiy6ixDj7danxgGjfXciP8sFPSQ0LKa
+ V0Jwl2EP1yyWpYa2ZnPwlUSaRj5rKbxMrqDcR+krUH0fACDmd1npkTMCTKUUmp56+J+6cq5v/w8
+ H1l0yQKTE67XyoVu109lqzIcs4J2hjtoWcIgR7la7vgbiI8GK
+X-Google-Smtp-Source: AGHT+IHDjIiwO9qf147xVDojMoKBsJOkz8XJM/hcuvWAvsDG0NAdlsIzQx9/iOYgbIaFQGpQabzw4LkoEYyCZM1t1mg=
+X-Received: by 2002:a2e:990c:0:b0:2d4:535a:e7a with SMTP id
+ v12-20020a2e990c000000b002d4535a0e7amr39796lji.24.1711550657334; Wed, 27 Mar
+ 2024 07:44:17 -0700 (PDT)
+MIME-Version: 1.0
+References: <20240321180219.1039622-1-tharvey@gateworks.com>
+In-Reply-To: <20240321180219.1039622-1-tharvey@gateworks.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 27 Mar 2024 16:43:41 +0200
+Message-ID: <CAC_iWjLwt9NxwOsYWwx4+w2vL3dtfJnJPH-eeApU-ODKf8tzBA@mail.gmail.com>
+Subject: Re: [PATCH] tpm: display message when using gpio-reset instead of
+ when missing it
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,60 +86,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Tim,
 
-On Wed Mar 27, 2024 at 8:01 AM CET, Neha Malcom Francis wrote:
-> On 26/03/24 19:18, Michael Walle wrote:
-> > On Fri Mar 22, 2024 at 2:10 PM CET, Neha Malcom Francis wrote:
-> >> Clean up templatized boot binaries for all K3 boards. This includes
-> >> modifying the k3-binman.dtsi to use SPL_BOARD_DTB, BOARD_DESCRIPTION a=
-nd
-> >> UBOOT_BOARD_DESCRIPTION from the files that include it to further reus=
-e
-> >> code.
-> >>
-> >> All k3-<soc>-binman.dtsi will contain only templates. Only required bo=
-ot
-> >> binaries can be built from the templates in the boards' respective
-> >> -u-boot.dtsi file (or k3-<board>-binman.dtsi if it exists). This allow=
-s
-> >> clear distinction between the SoC common stuff vs. what is additionall=
-y
-> >> needed to boot up a specific board.
-> >=20
-> > I appreciate the cleanup. But as far as I can see, a board might
-> > only have one device tree. How would that work if the uboot proper
-> > must support multiple device trees?
-> >=20
+On Thu, 21 Mar 2024 at 20:02, Tim Harvey <tharvey@gateworks.com> wrote:
 >
->  From the discussions that took place in the mailing list [1] the consens=
-us=20
-> seems to be to not focus on multiple devicetree support as it leads to co=
-nfusion=20
-> for downstream users.
+> Instead of displaying what looks like an error message if a
+> gpio-reset dt prop is missing for a TPM dipslay a more
+> informative message about resetting the TPM if the gpio is found:
+>
+> before:
+> tpm_tis_spi_probe: missing reset GPIO
+>
+> after:
+> tpm@0: performing 1ms reset on gpio@30210000:12
+>
+> Note that the reset dt binding prop used in this driver is not
+> dt-compliant; it does not exist in the Linux dt-bindings documentation
+> and the reset is not done by the Linux driver.
 
-What are users in this regard? I don't think you'd confuse
-developers.
+Probably for a good reason. You aren't supposed to be able to reset a
+TPM without resetting the CPUI as well no?
+That being said, printing that the TPM was reset is pointless imho.
+OTOH the existing error message at least points out a potential
+problem in the DT.
 
-Anyway, I'm planning on upstreaming a TI board which will have
-different memory configurations and different variants of the board.
-And on top of that, it will just be a base board and there will
-likely be some carrier device trees (overlay? I'm not sure yet).
-
-As far as I can tell, you've put the memory configuration into the
-device tree, so I'll probably need to switch between them somehow.
-Also, regarding the board variants, I'll probably need to choose
-between multiple device trees. That is invisible to the user,
-because u-boot will choose the correct DTB according a board
-strapping, which btw. works really fine, see for example
-(boards/kontron/sl28/spl.c:board_fit_config_name_match).
-
-I don't think it makes much sense to hardcode your generic
-*-binman.dtsi to just one FIT configuration. I'd rather see a split
-between generic things which are shared across all boards and board
-specifics, like the FIT configuration. I mean I could just copy all
-the binman and tiboot3.bin and tispl.bin magic and put it into my
-own "-u-boot.dtsi". But I'm not sure that will make things any
-better.
-
--michael
+Thanks
+/Ilias
+>
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> ---
+>  drivers/tpm/tpm2_tis_spi.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
+> index de9cf8f21e07..944540f7a711 100644
+> --- a/drivers/tpm/tpm2_tis_spi.c
+> +++ b/drivers/tpm/tpm2_tis_spi.c
+> @@ -237,14 +237,14 @@ static int tpm_tis_spi_probe(struct udevice *dev)
+>                         /* legacy reset */
+>                         ret = gpio_request_by_name(dev, "gpio-reset", 0,
+>                                                    &reset_gpio, GPIOD_IS_OUT);
+> -                       if (ret) {
+> -                               log(LOGC_NONE, LOGL_NOTICE,
+> -                                   "%s: missing reset GPIO\n", __func__);
+> +                       if (ret)
+>                                 goto init;
+> -                       }
+>                         log(LOGC_NONE, LOGL_NOTICE,
+>                             "%s: gpio-reset is deprecated\n", __func__);
+>                 }
+> +               log(LOGC_NONE, LOGL_NOTICE,
+> +                   "%s: performing 1ms reset on %s:%d\n", dev->name,
+> +                   reset_gpio.dev->name, reset_gpio.offset);
+>                 dm_gpio_set_value(&reset_gpio, 1);
+>                 mdelay(1);
+>                 dm_gpio_set_value(&reset_gpio, 0);
+> --
+> 2.25.1
+>
