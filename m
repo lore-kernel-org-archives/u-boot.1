@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08025CD1280
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 16:27:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB224C47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 16:27:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97A0B88148;
-	Wed, 27 Mar 2024 17:24:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 033A688155;
+	Wed, 27 Mar 2024 17:24:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="cXHnliw0";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="TsR/dl7R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE7AE88148; Wed, 27 Mar 2024 17:24:24 +0100 (CET)
+ id 8B03488129; Wed, 27 Mar 2024 17:24:25 +0100 (CET)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13CF28812C
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 17:24:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 524FE880F5
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 17:24:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id E29C5615B7;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 2B2426160D;
+ Wed, 27 Mar 2024 16:24:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id F29C8C43390;
  Wed, 27 Mar 2024 16:24:20 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BA8EFC433F1;
- Wed, 27 Mar 2024 16:24:19 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1711556660;
- bh=UlLI/x1+0662tqrPJDuwgjzpJQBcCnQrbViSqVOrOi0=;
+ s=k20201202; t=1711556661;
+ bh=j77PdZKiThGejZM8DKgctNyKXdulSrWTB8m+40ByHDw=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=cXHnliw0irOKpeoMi5wSgbG2MAObdtzhgHLiRyEoR4vy04EXhy43zvS48ySTIMkkQ
- Am4GcXL/n1IkI0Rc+/gR0wbj2WbT6HaPI2Gg1epLBgTndTFYLVJqwMnOji82LjGXsO
- VAlkQl2SJOQ/QzBYHCzhXV3sc34QKLDAjeRLMSwymgVqH9NIXfW34M+j/4WJ8/YPL2
- /HFit0bNdj2rGp/kkJBR5g3D1sKTBkJhrIVmNJqxVz6KF2FsqVmx5kfBx3XTk6j7kY
- HtdpOY1w+FXcOLH7oSO7TUpdc6MxmNPoWmDrFCshiiGk9/NRquBDnqMHAVLl9MlIIQ
- UxLk74JwpWUEw==
+ b=TsR/dl7RYkF31QfUiXnW1VV/HdrujEn04IoCBAqPAdzcYJIWyxyORVEXAkobkP6yU
+ K/dVuBioxP6rnUuGFO7KzJdvbETp48Et0iIOiIsw7FiNfpPyg+JyIRJ+omJv7UmB2l
+ sh1tfDklJM1xSuVnnME4tx5Pvn1FsVa0mJxDizofEJwnlCR8Df4mGUP8vIYfnLOOnV
+ RMTCVL+r1BcVNMypN6Dff0chzK6htmd3SIsFOREw12dplyFkto4i3gU4Gi1kNZ0Mm4
+ feK0SXX7J87IGsjKvS/RLzG8vKB3Sb9kHU0z8/S07dcG3da3/A/+b/qxkl/tKr6fTD
+ gi9zlnfyka7/g==
 From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
 To: Stefan Roese <sr@denx.de>
 Cc: u-boot@lists.denx.de,
 	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH u-boot-mvebu v3 17/18] misc: turris_omnia_mcu: Add support for
- rng provided by MCU
-Date: Wed, 27 Mar 2024 17:23:54 +0100
-Message-ID: <20240327162355.24584-18-kabel@kernel.org>
+Subject: [PATCH u-boot-mvebu v3 18/18] arm: mvebu: turris_omnia: Enable rng
+ command in defconfig
+Date: Wed, 27 Mar 2024 17:23:55 +0100
+Message-ID: <20240327162355.24584-19-kabel@kernel.org>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240327162355.24584-1-kabel@kernel.org>
 References: <20240327162355.24584-1-kabel@kernel.org>
@@ -69,132 +69,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for true random number generator provided by the MCU on
-Turris Omnia. The MCU firmware supports TRNG if the FEAT_TRNG bit is set
-in features. In that case we bind the rng driver.
+Now that Turris Omnia has a rng driver provided in the MCU driver,
+enable the rng command in defconfig.
 
 Signed-off-by: Marek Behún <kabel@kernel.org>
 ---
- configs/turris_omnia_defconfig  |  1 +
- drivers/misc/Kconfig            |  1 +
- drivers/misc/turris_omnia_mcu.c | 57 +++++++++++++++++++++++++++++++++
- 3 files changed, 59 insertions(+)
+ configs/turris_omnia_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/configs/turris_omnia_defconfig b/configs/turris_omnia_defconfig
-index 0df0f3c90b..4c21635ec9 100644
+index 4c21635ec9..f2b39115fe 100644
 --- a/configs/turris_omnia_defconfig
 +++ b/configs/turris_omnia_defconfig
-@@ -107,6 +107,7 @@ CONFIG_NVME_PCI=y
- CONFIG_PCI_MVEBU=y
- CONFIG_PINCTRL=y
- CONFIG_PINCTRL_ARMADA_38X=y
-+CONFIG_DM_RNG=y
- CONFIG_DM_RTC=y
- CONFIG_RTC_ARMADA38X=y
- CONFIG_SERIAL_PROBE_ALL=y
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index 844a21be47..a08f02196f 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -509,6 +509,7 @@ config TURRIS_OMNIA_MCU
- 	bool "Enable Turris Omnia MCU driver"
- 	depends on DM_I2C
- 	depends on DM_GPIO
-+	depends on DM_RNG
- 	depends on SYSRESET
- 	default y if TARGET_TURRIS_OMNIA
- 	help
-diff --git a/drivers/misc/turris_omnia_mcu.c b/drivers/misc/turris_omnia_mcu.c
-index 77a0424d61..6b2f17c000 100644
---- a/drivers/misc/turris_omnia_mcu.c
-+++ b/drivers/misc/turris_omnia_mcu.c
-@@ -5,15 +5,20 @@
-  */
- 
- #include <common.h>
-+#include <console.h>
- #include <dm.h>
- #include <dm/lists.h>
- #include <i2c.h>
-+#include <rng.h>
- #include <sysreset.h>
- #include <turris-omnia-mcu-interface.h>
- #include <asm/byteorder.h>
- #include <asm/gpio.h>
-+#include <linux/delay.h>
- #include <linux/log2.h>
- 
-+#define CMD_TRNG_MAX_ENTROPY_LEN	64
-+
- struct turris_omnia_mcu_info {
- 	u32 features;
- };
-@@ -282,6 +287,49 @@ U_BOOT_DRIVER(turris_omnia_mcu_sysreset) = {
- 	.ops		= &omnia_sysreset_ops,
- };
- 
-+static int omnia_rng_read(struct udevice *dev, void *data, size_t count)
-+{
-+	u8 buf[1 + CMD_TRNG_MAX_ENTROPY_LEN];
-+	size_t len;
-+	int ret;
-+
-+	while (count) {
-+		ret = dm_i2c_read(dev->parent, CMD_TRNG_COLLECT_ENTROPY, buf,
-+				  sizeof(buf));
-+		if (ret)
-+			return ret;
-+
-+		len = min_t(size_t, buf[0],
-+			    min_t(size_t, CMD_TRNG_MAX_ENTROPY_LEN, count));
-+
-+		if (!len) {
-+			/* wait 500ms (fail if interrupted), then try again */
-+			for (int i = 0; i < 5; ++i) {
-+				mdelay(100);
-+				if (ctrlc())
-+					return -EINTR;
-+			}
-+			continue;
-+		}
-+
-+		memcpy(data, &buf[1], len);
-+		data += len;
-+		count -= len;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct dm_rng_ops omnia_rng_ops = {
-+	.read		= omnia_rng_read,
-+};
-+
-+U_BOOT_DRIVER(turris_omnia_mcu_trng) = {
-+	.name		= "turris-omnia-mcu-trng",
-+	.id		= UCLASS_RNG,
-+	.ops		= &omnia_rng_ops,
-+};
-+
- static int turris_omnia_mcu_bind(struct udevice *dev)
- {
- 	/* bind MCU GPIOs as a child device */
-@@ -336,6 +384,15 @@ static int turris_omnia_mcu_probe(struct udevice *dev)
- 			return ret;
- 	}
- 
-+	/* bind rng if trng is supported */
-+	if (info->features & FEAT_TRNG) {
-+		ret = device_bind_driver_to_node(dev, "turris-omnia-mcu-trng",
-+						 "turris-omnia-mcu-trng",
-+						 dev_ofnode(dev), NULL);
-+		if (ret < 0)
-+			return ret;
-+	}
-+
- 	return 0;
- }
- 
+@@ -73,6 +73,7 @@ CONFIG_CMD_WDT=y
+ CONFIG_CMD_TFTPPUT=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_TIME=y
++CONFIG_CMD_RNG=y
+ CONFIG_CMD_AES=y
+ CONFIG_CMD_HASH=y
+ CONFIG_CMD_BTRFS=y
 -- 
 2.43.2
 
