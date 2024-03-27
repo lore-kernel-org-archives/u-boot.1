@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6494BC54E67
-	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 16:24:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4296C47DD9
+	for <u-boot@archiver.kernel.org>; Wed, 27 Mar 2024 16:24:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1BD1880AC;
-	Wed, 27 Mar 2024 17:24:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 32374880E0;
+	Wed, 27 Mar 2024 17:24:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Z+Zk9Z97";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ium9bqr8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C361687F95; Wed, 27 Mar 2024 17:24:03 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id CB0AB880FA; Wed, 27 Mar 2024 17:24:06 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F90888035
- for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 17:24:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DBBBE87F95
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 17:24:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id EBECB615F2;
+ by sin.source.kernel.org (Postfix) with ESMTP id B3444CE268E;
+ Wed, 27 Mar 2024 16:24:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 258C6C43390;
  Wed, 27 Mar 2024 16:23:59 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 96D7CC433C7;
- Wed, 27 Mar 2024 16:23:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1711556639;
- bh=ePTVhfDAthlnPSErceMvBPpwP0nuucm6UUOO9vgVQ6k=;
- h=From:To:Cc:Subject:Date:From;
- b=Z+Zk9Z97LA3zp0dyq5AqLt7QRVlBNNDD8jnPxWJXdmBGckTUc5Md2YSgmL8PNbC6P
- Fz46whBtiO8Z02Lp5/Dt0oqbGVMTkEhfDuIc3RAFwqvIew31nwevk2SZwL44ky8ibO
- ztBwNTV2yTCvl43c3b/pr68iM94IdcvP6KfX7coB8ITraQFPG8PDeTtsMhygoupYJR
- MxcVNr66ZGxKX8xcanIfIMcR602bMghhQ5EIBveCtOTJt/+tCTPa8Y2CIs0xIaXdu+
- XpN0ubDKpgYXZuleVi2L3hZfh7K9ZUmFt4nXNDhvD2U+CwyDoesLu2l1ndbKsVbwXj
- OrnHdIMRroE0g==
+ s=k20201202; t=1711556641;
+ bh=Xl+OEGvwj8wzs+u11LR4gJ7MOaFHPmIGu7rszc2Gzd8=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=ium9bqr8+3++VbW7ie1DuofrzIEdDyboxMjVZ6gFgI3SVUb1bzDY4vZ0jrVzt5UrX
+ 1SrhZd8N92AiT1FP0yU7V9ZcbU2p3Amm3Shv1OBjKh2BDPXvpTyYzBLPC4x8uiVtju
+ eWjUIQqh+j8X2VUD6WEK6F5AFAvtYz2+9GgPbBmqav/vgZatkARq0hx4/1t8AiNDyz
+ Ki54M28svqxltGyyc5pC528S+r7FBOqmM/zoAdRoOM2HEDKI6ifl1XAiv3Sw+7ne+o
+ +oNTfSNPSE4xHzxjJ/Obl8yEpUeN70gf+PLRFs+NttEjjzOmLWp1a6DsbQTfSVFFbQ
+ ic27Ieg8R8s5Q==
 From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
 To: Stefan Roese <sr@denx.de>
-Cc: u-boot@lists.denx.de, =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH u-boot-mvebu v3 00/18] Turris Omnia - New board revision
- support
-Date: Wed, 27 Mar 2024 17:23:37 +0100
-Message-ID: <20240327162355.24584-1-kabel@kernel.org>
+Cc: u-boot@lists.denx.de,
+	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
+Subject: [PATCH u-boot-mvebu v3 01/18] arm: mvebu: turris_omnia: Enable LTO by
+ default on Turris Omnia
+Date: Wed, 27 Mar 2024 17:23:38 +0100
+Message-ID: <20240327162355.24584-2-kabel@kernel.org>
 X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20240327162355.24584-1-kabel@kernel.org>
+References: <20240327162355.24584-1-kabel@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -69,66 +69,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Stefan,
+U-Boot builds for Turris Omnia are approaching the limit of 0xf0000
+bytes, which is the size of the U-Boot partition on Omnia.
 
-this is v3 of series adding support for new board revision of Turris
-Omnia.
+Enable LTO to get more size optimized binaries.
 
-Changes since v2:
-- patch 2: updated MCU command interface header
-- patch 6: fixed bug setting \0 as end of string in src array instead
-           of dst array after bin2hex() call
-- patch 16: updated commit message (added the bit about ctrl+c)
+Signed-off-by: Marek Behún <kabel@kernel.org>
+---
+ configs/turris_omnia_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-v1 and v2 at:
-  https://patchwork.ozlabs.org/project/uboot/cover/20240304152148.3847-1-kabel@kernel.org/
-  https://patchwork.ozlabs.org/project/uboot/cover/20240323180711.5498-1-kabel@kernel.org/
-
-Marek Behún (18):
-  arm: mvebu: turris_omnia: Enable LTO by default on Turris Omnia
-  arm: mvebu: turris_omnia: Add header containing MCU command interface
-    and use it
-  arm: mvebu: turris_{omnia, mox}: Don't print model two times
-  arm: mvebu: turris_omnia: Update MCU status and features reading
-  arm: mvebu: turris_omnia: Implement getting board information from MCU
-  arm: mvebu: turris_omnia: Print board ECDSA public key if available
-  arm: mvebu: turris_omnia: Disable Atmel SHA node if not present
-  arm: mvebu: spl: Do not build mvebu-reset in SPL
-  arm: mvebu: system-controller: Rework to use UCLASS_SYSCON
-  arm: mvebu: system-controller: Select mvebu-reset if DM_RESET &&
-    PCI_MVEBU
-  arm: mvebu: system-controller: Add support for SYSRESET
-  gpio: turris_omnia_mcu: Use byteorder conversion functions
-  gpio: turris_omnia_mcu: Update firmware features reading
-  gpio: turris_omnia_mcu: Add support for system power off via sysreset
-  arm: mvebu: turris_omnia: Enable poweroff command via sysreset in
-    defconfig
-  cmd: rng: Print "Abort" on -EINTR
-  misc: turris_omnia_mcu: Add support for rng provided by MCU
-  arm: mvebu: turris_omnia: Enable rng command in defconfig
-
- arch/arm/mach-mvebu/Kconfig              |  25 ++
- arch/arm/mach-mvebu/Makefile             |   3 +-
- arch/arm/mach-mvebu/cpu.c                |   2 +
- arch/arm/mach-mvebu/system-controller.c  | 144 ++++++--
- board/CZ.NIC/turris_atsha_otp.c          |  27 +-
- board/CZ.NIC/turris_mox/turris_mox.c     |   5 +-
- board/CZ.NIC/turris_omnia/Makefile       |   2 +-
- board/CZ.NIC/turris_omnia/turris_omnia.c | 310 ++++++++++++-----
- cmd/rng.c                                |   7 +-
- configs/turris_omnia_defconfig           |   6 +
- drivers/gpio/Kconfig                     |   7 -
- drivers/gpio/Makefile                    |   1 -
- drivers/gpio/turris_omnia_mcu.c          | 316 -----------------
- drivers/misc/Kconfig                     |  11 +
- drivers/misc/Makefile                    |   1 +
- drivers/misc/turris_omnia_mcu.c          | 411 +++++++++++++++++++++++
- include/turris-omnia-mcu-interface.h     | 248 ++++++++++++++
- 17 files changed, 1044 insertions(+), 482 deletions(-)
- delete mode 100644 drivers/gpio/turris_omnia_mcu.c
- create mode 100644 drivers/misc/turris_omnia_mcu.c
- create mode 100644 include/turris-omnia-mcu-interface.h
-
+diff --git a/configs/turris_omnia_defconfig b/configs/turris_omnia_defconfig
+index 29148402a1..39e15043df 100644
+--- a/configs/turris_omnia_defconfig
++++ b/configs/turris_omnia_defconfig
+@@ -31,6 +31,7 @@ CONFIG_AHCI=y
+ CONFIG_OF_BOARD_FIXUP=y
+ CONFIG_SYS_MEMTEST_START=0x00800000
+ CONFIG_SYS_MEMTEST_END=0x00ffffff
++CONFIG_LTO=y
+ CONFIG_HAS_BOARD_SIZE_LIMIT=y
+ CONFIG_BOARD_SIZE_LIMIT=983040
+ CONFIG_FIT=y
 -- 
 2.43.2
 
