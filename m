@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F95FCD1284
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 13:22:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF9ACCD1288
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 13:45:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2E4788126;
-	Thu, 28 Mar 2024 14:22:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 35B6887E9D;
+	Thu, 28 Mar 2024 14:45:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jXkMlZmJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dmPMI/RM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 68B938811D; Thu, 28 Mar 2024 14:18:31 +0100 (CET)
-Received: from mail-pf1-x429.google.com (mail-pf1-x429.google.com
- [IPv6:2607:f8b0:4864:20::429])
+ id 5511C88127; Thu, 28 Mar 2024 14:45:21 +0100 (CET)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 35F5288150
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 14:18:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B1F3A87E8E
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 14:45:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-pf1-x429.google.com with SMTP id
- d2e1a72fcca58-6e74bd85f26so836914b3a.1
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 06:18:29 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-5cfcf509fbdso223657a12.1
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 06:45:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711631907; x=1712236707; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kgh4X624ZbUbs210xWPI/kio/prhXZarEdsDAZ0R/V0=;
- b=jXkMlZmJgj8qZoN+l5iiUPKTzYaHPGYmmajPt5sBVPT/7/FHOWOA+rZMOmrbB6tK/z
- ubomZNXOLTcSh4WCIo24bbkyzJxlUTAMQpTERKGWw9B7Uj51nT1QOXAGxua1IjYdeboM
- W4TOao+f4wJaKGCiBroXyCygMHuu9ikJadBCtn4ObWKXq1QA799axiNhE8dfGrLqAbKR
- aoRZztLpmESWHznr309x/JZe7BKzZZxMXzZC5fTMHl9SQBO1l+7kQD6qoGri6C9f3P59
- ikhMXquVC7CwCYkH/6OXt+BBIgcA3AEL1E9f7WkoxhqlVIshqlnz58EMUOZdTstO+BnK
- ADqw==
+ d=gmail.com; s=20230601; t=1711633517; x=1712238317; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=AqhRvLd4v87/DphmoMUSTav+TGpkhVHYXapKPGwT6pI=;
+ b=dmPMI/RMDfL7um0n6lSBwPuRPY2Sl3Fnu/6thd/muoHlqJQkMmCeCrFXIFffGDfGPF
+ pMjA75tMdgRWIciLG4NM8Z9ETKwaiR1367xhhin7PJINBKi/lc1Fzyh4M5z8D8mb2D/m
+ 9h8QxUM0uPQwzAxkKSWMPc8N8QvwdYiXEICF3P+QnRe8i/hedr5EiJzfdZGkBgYiMqdW
+ k72KSize8yO1SBrCDhBKr1+w6OTRDOnNWTsC4VGPYrfHYxKBSKWz8akM8ZDIEpWPy5xE
+ h/tR4CfGiulTRA74ySPHKteFVthkhsTTwvegB9mAMSFyZRbMYR1N1+KVSYCWa+raOupr
+ e0mQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711631907; x=1712236707;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1711633517; x=1712238317;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=kgh4X624ZbUbs210xWPI/kio/prhXZarEdsDAZ0R/V0=;
- b=RQ2UMpom8U48He345423sHJCGcmJT7jeRnNFTqAXMfoKXpmFmaBXAGCzaVNhFz9J73
- wVgssTMQG+aE+paYa8a7dsjJTEtYPXp/71f/grQlx9nii06byFPdRCr9EPmtmHyhwLFS
- qtvpFJo7Pk6XbSVd35zSNjUWwqsaHeiPfJ0FZBs6vcpWZ2yoyCwlEAd56MecV5Q4oiEk
- sQl8A5ddFLgQT6mhrNY9bRLVH0ACJYf/87vqdClvUhp70PYncUQ3ZgPTTiscJUcmkKoF
- VAdUZYRGr4sfdX+PEwPXjW71h2Xr86m4qXtkpB/QaBO+wXZX3wWb0RsxqY1+19o9BwHU
- fX8w==
-X-Gm-Message-State: AOJu0YxKZs/iejR7W84aoLb464KUYOiGU1PiblQ8I7YJf5zJpSfDn1nQ
- Zg1FaDFQBboWfB8S0/UjAAnUqjSbHNkAE9bifuQM272CgGwsgu3D3CVZTd8860M=
-X-Google-Smtp-Source: AGHT+IE3W7Mt8JaZzmHZyBVpNmkJuQcVHR8IFg7q2oFvtBCxAqCOeRVRA0xodXtQ0N8CiaYCzpSezw==
-X-Received: by 2002:a05:6a20:3d06:b0:1a5:6a09:623d with SMTP id
- y6-20020a056a203d0600b001a56a09623dmr2747226pzi.7.1711631906193; 
- Thu, 28 Mar 2024 06:18:26 -0700 (PDT)
-Received: from localhost.localdomain ([117.135.88.116])
- by smtp.gmail.com with ESMTPSA id
- w4-20020a17090aaf8400b002a1f596c1c6sm1308541pjq.48.2024.03.28.06.18.23
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 06:18:25 -0700 (PDT)
-From: Kongyang Liu <seashell11234455@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Jonas Karlman <jonas@kwiboo.se>, Lukasz Majewski <lukma@denx.de>,
- Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>,
- Teik Heng Chong <teik.heng.chong@intel.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] usb: dwc2: update reset method for host and device mode
-Date: Thu, 28 Mar 2024 21:14:03 +0800
-Message-ID: <20240328131811.94559-1-seashell11234455@gmail.com>
-X-Mailer: git-send-email 2.41.0
+ bh=AqhRvLd4v87/DphmoMUSTav+TGpkhVHYXapKPGwT6pI=;
+ b=RzqMjpjkiEvW23rsQgVlqujnBqZVPONpdzcT4jyl2ePGl3cC7M2/D8zqowYrcQECdh
+ x4mJtExX6ga7WL61BBXT8WK/sesck5/qWZNUaej6GvoYUWycPJ1eGAUHcFDMQxemVqRD
+ bw6V/8ABmHson8lJD2X+brIXYAmdrFu9y6Az8q4JDkAznLXQSKhvMVNqYfBRxzxBW2le
+ QuK72bN4K8goHZEAhqa2dPKuTWOFV8qoVMxQXjVWW43ZsIGIg5B70KoAK5ZJyC0eYuXL
+ u+zPd2AdAFfTN84RH9Z25RSexhFvdL5tZONjey/Ldrf08ieT1DXqrNrd3W3Yt9hqnfyB
+ e7Rw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVJaP0w2EsIJ/p9Tjx+zyTWMWQEYq2VtSL5aAxa76a37fB7c89IWJU7FOkO33jBBuEAHd1nc28CA5dApYMyXzRQfN9ZAA==
+X-Gm-Message-State: AOJu0YwCK8SxgNyDkQD8cOD2ZP1m/hGKxUgd/vD1fO4yIh73mRvhIT8u
+ 6QMLuV3PAbgfrY7L6Lo5aZZnYt+NV3zrJtvlxVYpu8wlgjMKLhdr5rmoQAbnsKK7AbDxI4b2f0P
+ 9LnpbMMHCQLF7Ov2q4kyXIMR/jZPG+9//
+X-Google-Smtp-Source: AGHT+IGtOsMWjQu9JUKM56OtIJ5bSm+NRQLBR7GRENF0PIZGVbNyfK8wSJX3r0hqZOCdBRq6+Grb4JvbghcGeP91Pu8=
+X-Received: by 2002:a17:90a:dc13:b0:2a1:fe2e:d98d with SMTP id
+ i19-20020a17090adc1300b002a1fe2ed98dmr2335394pjv.3.1711633517190; Thu, 28 Mar
+ 2024 06:45:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 28 Mar 2024 14:22:29 +0100
+References: <20240327170359.2167228-1-festevam@gmail.com>
+ <fbc0c244d688872c793366a6aeb15ba5@igalia.com>
+In-Reply-To: <fbc0c244d688872c793366a6aeb15ba5@igalia.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 28 Mar 2024 10:45:04 -0300
+Message-ID: <CAOMZO5DCafY+UzUtyMc00gW9oJ5FZgwKTnASyhRFuURb-bNQuw@mail.gmail.com>
+Subject: Re: [PATCH] mx6cuboxi: Do not print devicetree model
+To: Christian Gmeiner <cgmeiner@igalia.com>
+Cc: baruch@tkos.co.il, trini@konsulko.com, josua@solid-run.com, 
+ u-boot@lists.denx.de
+Content-Type: multipart/mixed; boundary="000000000000c73e7c0614b8bbfa"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,187 +89,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Starting from version 4.20a, there has been a change in the reset method.
-A new bit, GRSTCTL_CSFTRST_DONE, has been introduced in the GRSTCTL
-register to indicate whether the reset has been completed.
+--000000000000c73e7c0614b8bbfa
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
----
+Hi Christian,
 
- drivers/usb/gadget/dwc2_udc_otg.c      | 18 ++++++++++++++++--
- drivers/usb/gadget/dwc2_udc_otg_regs.h | 19 +++++++++++++------
- drivers/usb/host/dwc2.c                | 19 ++++++++++++++++---
- drivers/usb/host/dwc2.h                |  6 ++++++
- 4 files changed, 51 insertions(+), 11 deletions(-)
+On Thu, Mar 28, 2024 at 4:18=E2=80=AFAM Christian Gmeiner <cgmeiner@igalia.=
+com> wrote:
 
-diff --git a/drivers/usb/gadget/dwc2_udc_otg.c b/drivers/usb/gadget/dwc2_udc_otg.c
-index 27082f5152..d1dd469a0f 100644
---- a/drivers/usb/gadget/dwc2_udc_otg.c
-+++ b/drivers/usb/gadget/dwc2_udc_otg.c
-@@ -42,7 +42,7 @@
- #include <asm/unaligned.h>
- #include <asm/io.h>
- 
--#include <asm/mach-types.h>
-+#include <wait_bit.h>
- 
- #include <power/regulator.h>
- 
-@@ -464,12 +464,26 @@ static void reconfig_usbd(struct dwc2_udc *dev)
- {
- 	/* 2. Soft-reset OTG Core and then unreset again. */
- 	int i;
--	unsigned int uTemp = writel(CORE_SOFT_RESET, &reg->grstctl);
-+	unsigned int uTemp;
- 	uint32_t dflt_gusbcfg;
- 	uint32_t rx_fifo_sz, tx_fifo_sz, np_tx_fifo_sz;
- 	u32 max_hw_ep;
- 	int pdata_hw_ep;
- 
-+	u32 snpsid, greset;
-+
-+	snpsid = readl(&reg->gsnpsid);
-+	writel(CORE_SOFT_RESET, &reg->grstctl);
-+	if ((snpsid & SNPSID_VER_MASK) < (SNPSID_VER_420a & SNPSID_VER_MASK)) {
-+		wait_for_bit_le32(&reg->grstctl, CORE_SOFT_RESET, false, 1000, false);
-+	} else {
-+		wait_for_bit_le32(&reg->grstctl, CORE_SOFT_RESET_DONE, true, 1000, false);
-+		greset = readl(&reg->grstctl);
-+		greset &= ~CORE_SOFT_RESET;
-+		greset |= CORE_SOFT_RESET_DONE;
-+		writel(greset, &reg->grstctl);
-+	}
-+
- 	debug("Resetting OTG controller\n");
- 
- 	dflt_gusbcfg =
-diff --git a/drivers/usb/gadget/dwc2_udc_otg_regs.h b/drivers/usb/gadget/dwc2_udc_otg_regs.h
-index 9ca6f42375..b3d9117033 100644
---- a/drivers/usb/gadget/dwc2_udc_otg_regs.h
-+++ b/drivers/usb/gadget/dwc2_udc_otg_regs.h
-@@ -63,24 +63,26 @@ struct dwc2_usbotg_reg {
- 	u32 gnptxfsiz; /* Non-Periodic Transmit FIFO Size */
- 	u8  res0[12];
- 	u32 ggpio;     /* 0x038 */
--	u8  res1[20];
-+	u8  res1[4];
-+	u32 gsnpsid;
-+	u8  res2[12];
- 	u32 ghwcfg4; /* User HW Config4 */
--	u8  res2[176];
-+	u8  res3[176];
- 	u32 dieptxf[15]; /* Device Periodic Transmit FIFO size register */
--	u8  res3[1728];
-+	u8  res4[1728];
- 	/* Device Configuration */
- 	u32 dcfg; /* Device Configuration Register */
- 	u32 dctl; /* Device Control */
- 	u32 dsts; /* Device Status */
--	u8  res4[4];
-+	u8  res5[4];
- 	u32 diepmsk; /* Device IN Endpoint Common Interrupt Mask */
- 	u32 doepmsk; /* Device OUT Endpoint Common Interrupt Mask */
- 	u32 daint; /* Device All Endpoints Interrupt */
- 	u32 daintmsk; /* Device All Endpoints Interrupt Mask */
--	u8  res5[224];
-+	u8  res6[224];
- 	struct dwc2_dev_in_endp in_endp[16];
- 	struct dwc2_dev_out_endp out_endp[16];
--	u8  res6[768];
-+	u8  res7[768];
- 	struct ep_fifo ep[16];
- };
- 
-@@ -118,6 +120,7 @@ struct dwc2_usbotg_reg {
- /* DWC2_UDC_OTG_GRSTCTL */
- #define AHB_MASTER_IDLE		(1u<<31)
- #define CORE_SOFT_RESET		(0x1<<0)
-+#define CORE_SOFT_RESET_DONE		(0x1<<29)
- 
- /* DWC2_UDC_OTG_GINTSTS/DWC2_UDC_OTG_GINTMSK core interrupt register */
- #define INT_RESUME			(1u<<31)
-@@ -285,6 +288,10 @@ struct dwc2_usbotg_reg {
- #define DAINT_IN_EP_INT(x)                        (x << 0)
- #define DAINT_OUT_EP_INT(x)                       (x << 16)
- 
-+/* DWC2_UDC_OTG_GSNPSID */
-+#define SNPSID_VER_420a					0x4f54420a
-+#define SNPSID_VER_MASK					0xffff
-+
- /* User HW Config4 */
- #define GHWCFG4_NUM_IN_EPS_MASK		(0xf << 26)
- #define GHWCFG4_NUM_IN_EPS_SHIFT	26
-diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
-index 637eb2dd06..1baeff96ee 100644
---- a/drivers/usb/host/dwc2.c
-+++ b/drivers/usb/host/dwc2.c
-@@ -159,6 +159,7 @@ static void dwc_otg_core_reset(struct udevice *dev,
- 			       struct dwc2_core_regs *regs)
- {
- 	int ret;
-+	u32 snpsid, greset;
- 
- 	/* Wait for AHB master IDLE state. */
- 	ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_AHBIDLE,
-@@ -167,9 +168,20 @@ static void dwc_otg_core_reset(struct udevice *dev,
- 		dev_info(dev, "%s: Timeout!\n", __func__);
- 
- 	/* Core Soft Reset */
-+	snpsid = readl(&regs->gsnpsid);
- 	writel(DWC2_GRSTCTL_CSFTRST, &regs->grstctl);
--	ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_CSFTRST,
--				false, 1000, false);
-+	if ((snpsid & DWC2_SNPSID_VER_MASK) < (DWC2_SNPSID_DEVID_VER_420a & DWC2_SNPSID_VER_MASK)) {
-+		ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_CSFTRST,
-+					false, 1000, false);
-+	} else {
-+		ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_GSFTRST_DONE,
-+					true, 1000, false);
-+		greset = readl(&regs->grstctl);
-+		greset &= ~DWC2_GRSTCTL_CSFTRST;
-+		greset |= DWC2_GRSTCTL_GSFTRST_DONE;
-+		writel(greset, &regs->grstctl);
-+	}
-+
- 	if (ret)
- 		dev_info(dev, "%s: Timeout!\n", __func__);
- 
-@@ -1180,7 +1192,8 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
- 		 snpsid >> 12 & 0xf, snpsid & 0xfff);
- 
- 	if ((snpsid & DWC2_SNPSID_DEVID_MASK) != DWC2_SNPSID_DEVID_VER_2xx &&
--	    (snpsid & DWC2_SNPSID_DEVID_MASK) != DWC2_SNPSID_DEVID_VER_3xx) {
-+		(snpsid & DWC2_SNPSID_DEVID_MASK) != DWC2_SNPSID_DEVID_VER_3xx &&
-+	    (snpsid & DWC2_SNPSID_DEVID_MASK) != DWC2_SNPSID_DEVID_VER_4xx) {
- 		dev_info(dev, "SNPSID invalid (not DWC2 OTG device): %08x\n",
- 			 snpsid);
- 		return -ENODEV;
-diff --git a/drivers/usb/host/dwc2.h b/drivers/usb/host/dwc2.h
-index 6f022e33a1..e1f0f59b82 100644
---- a/drivers/usb/host/dwc2.h
-+++ b/drivers/usb/host/dwc2.h
-@@ -207,6 +207,8 @@ struct dwc2_core_regs {
- #define DWC2_GRSTCTL_TXFFLSH_OFFSET			5
- #define DWC2_GRSTCTL_TXFNUM_MASK			(0x1F << 6)
- #define DWC2_GRSTCTL_TXFNUM_OFFSET			6
-+#define DWC2_GRSTCTL_GSFTRST_DONE			(1 << 29)
-+#define DWC2_GRSTCTL_GSFTRST_DONE_OFFSET	29
- #define DWC2_GRSTCTL_DMAREQ				(1 << 30)
- #define DWC2_GRSTCTL_DMAREQ_OFFSET			30
- #define DWC2_GRSTCTL_AHBIDLE				(1 << 31)
-@@ -739,8 +741,12 @@ struct dwc2_core_regs {
- #define DWC2_PCGCCTL_DEEP_SLEEP_OFFSET			7
- #define DWC2_SNPSID_DEVID_VER_2xx			(0x4f542 << 12)
- #define DWC2_SNPSID_DEVID_VER_3xx			(0x4f543 << 12)
-+#define DWC2_SNPSID_DEVID_VER_4xx			(0x4f544 << 12)
-+#define DWC2_SNPSID_DEVID_VER_420a			0x4f54420a
- #define DWC2_SNPSID_DEVID_MASK				(0xfffff << 12)
- #define DWC2_SNPSID_DEVID_OFFSET			12
-+#define DWC2_SNPSID_VER_MASK				0xffff
-+#define DWC2_SNPSID_VER_OFFSET				0
- 
- /* Host controller specific */
- #define DWC2_HC_PID_DATA0		0
--- 
-2.41.0
+> This is not what this patch is doing. show_board_info() is the only
+> caller of checkboard()
+> so we end with the following output:
 
+You're right. The attached patch should do what we want.
+
+--000000000000c73e7c0614b8bbfa
+Content-Type: text/x-patch; charset="US-ASCII"; name="0001-mx6cuboxiboardrevv2.patch"
+Content-Disposition: attachment; filename="0001-mx6cuboxiboardrevv2.patch"
+Content-Transfer-Encoding: base64
+Content-ID: <f_lubadi7f0>
+X-Attachment-Id: f_lubadi7f0
+
+RnJvbSBiNzRhNDEwMTI3Y2FiYzEwMGE4OTkzODQwYTNiMDBkNDAzYTMxNmFkIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBGYWJpbyBFc3RldmFtIDxmZXN0ZXZhbUBnbWFpbC5jb20+CkRh
+dGU6IFRodSwgMjggTWFyIDIwMjQgMTA6Mzk6MjkgLTAzMDAKU3ViamVjdDogW1BBVENIIHYyXSBt
+eDZjdWJveGk6IERvIG5vdCBwcmludCBkZXZpY2V0cmVlIG1vZGVsCgpUaGUgbXg2Y3Vib3hpX2Rl
+ZmNvbmZpZyB0YXJnZXQgc3VwcG9ydHMgc2V2ZXJhbCBib2FyZAp2YXJpYW50cy4gQWxsIG9mIHRo
+ZXNlIHZhcmlhbnRzIHVzZSB0aGUgaHVtbWluZ2JvYXJkIGRldmljZXRyZWUgaW4gVS1Cb290LgoK
+Q3VycmVudGx5LCB0aGUgZGV2aWNldHJlZSBtb2RlbCBhcyB3ZWxsIGFzIHRoZSBib2FyZCB2YXJp
+YW50IG5hbWUKYXJlIHNob3duOgoKLi4uCk1vZGVsOiBTb2xpZFJ1biBIdW1taW5nQm9hcmQyIER1
+YWwvUXVhZCAoMS41c29tK2VtbWMpCkJvYXJkOiBNWDYgQ3Vib3gtaQouLi4KClByaW50aW5nIHRo
+ZSBkZXZpY2V0cmVlIG1vZGVsIHRoYXQgaXMgdXNlZCBpbnRlcm5hbGx5IGJ5IFUtQm9vdAptYXkg
+Y29uZnVzZSB1c2Vycy4KClVuc2VsZWN0IHRoZSBDT05GSUdfRElTUExBWV9CT0FSRElORk8gb3B0
+aW9uIHNvIHRoYXQgb25seSB0aGUKYm9hcmQgbmFtZSBpcyBwcmludGVkIGluIGJvYXJkX2xhdGVf
+aW5pdCgpIGluc3RlYWQuCgpTaWduZWQtb2ZmLWJ5OiBGYWJpbyBFc3RldmFtIDxmZXN0ZXZhbUBn
+bWFpbC5jb20+Ci0tLQpDaGFuZ2VzIHNpbmNlIHYxOgotIFJlbW92ZSBjaGVja2JvYXJkIGFuZCBw
+cmludCB0aGUgYm9hcmQgbmFtZSBpbiBib2FyZF9sYXRlX2luaXQoKS4KCiBib2FyZC9zb2xpZHJ1
+bi9teDZjdWJveGkvbXg2Y3Vib3hpLmMgfCA0MCArKysrKystLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+CiBjb25maWdzL214NmN1Ym94aV9kZWZjb25maWcgICAgICAgICAgfCAgMSArCiAyIGZpbGVzIGNo
+YW5nZWQsIDkgaW5zZXJ0aW9ucygrKSwgMzIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEvYm9h
+cmQvc29saWRydW4vbXg2Y3Vib3hpL214NmN1Ym94aS5jIGIvYm9hcmQvc29saWRydW4vbXg2Y3Vi
+b3hpL214NmN1Ym94aS5jCmluZGV4IDhlZGFiZjQ0MDRjMi4uMzFkMzBjZmJiZDdiIDEwMDY0NAot
+LS0gYS9ib2FyZC9zb2xpZHJ1bi9teDZjdWJveGkvbXg2Y3Vib3hpLmMKKysrIGIvYm9hcmQvc29s
+aWRydW4vbXg2Y3Vib3hpL214NmN1Ym94aS5jCkBAIC0zODEsMzcgKzM4MSw2IEBAIHN0YXRpYyBi
+b29sIGhhc19lbW1jKHZvaWQpCiAJcmV0dXJuIChtbWNfZ2V0X29wX2NvbmQobW1jLCB0cnVlKSA8
+IDApID8gMCA6IDE7CiB9CiAKLS8qIE92ZXJyaWRlIHRoZSBkZWZhdWx0IGltcGxlbWVudGF0aW9u
+LCBEVCBtb2RlbCBpcyBub3QgYWNjdXJhdGUgKi8KLWludCBjaGVja2JvYXJkKHZvaWQpCi17Ci0J
+cmVxdWVzdF9kZXRlY3RfZ3Bpb3MoKTsKLQotCXN3aXRjaCAoYm9hcmRfdHlwZSgpKSB7Ci0JY2Fz
+ZSBDVUJPWEk6Ci0JCXB1dHMoIkJvYXJkOiBNWDYgQ3Vib3gtaSIpOwotCQlicmVhazsKLQljYXNl
+IEhVTU1JTkdCT0FSRDoKLQkJcHV0cygiQm9hcmQ6IE1YNiBIdW1taW5nQm9hcmQiKTsKLQkJYnJl
+YWs7Ci0JY2FzZSBIVU1NSU5HQk9BUkQyOgotCQlwdXRzKCJCb2FyZDogTVg2IEh1bW1pbmdCb2Fy
+ZDIiKTsKLQkJYnJlYWs7Ci0JY2FzZSBVTktOT1dOOgotCWRlZmF1bHQ6Ci0JCXB1dHMoIkJvYXJk
+OiBVbmtub3duXG4iKTsKLQkJZ290byBvdXQ7Ci0JfQotCi0JaWYgKGlzX3Jldl8xNV9zb20oKSkK
+LQkJcHV0cygiIChzb20gcmV2IDEuNSlcbiIpOwotCWVsc2UKLQkJcHV0cygiXG4iKTsKLQotCWZy
+ZWVfZGV0ZWN0X2dwaW9zKCk7Ci1vdXQ6Ci0JcmV0dXJuIDA7Ci19Ci0KIHN0YXRpYyBpbnQgZmlu
+ZF9ldGhlcm5ldF9waHkodm9pZCkKIHsKIAlzdHJ1Y3QgbWlpX2RldiAqYnVzID0gTlVMTDsKQEAg
+LTUwNSwxMiArNDc0LDE1IEBAIGludCBib2FyZF9sYXRlX2luaXQodm9pZCkKIAlzd2l0Y2ggKGJv
+YXJkX3R5cGUoKSkgewogCWNhc2UgQ1VCT1hJOgogCQllbnZfc2V0KCJib2FyZF9uYW1lIiwgIkNV
+Qk9YSSIpOworCQlwdXRzKCJCb2FyZDogTVg2IEN1Ym94LWkiKTsKIAkJYnJlYWs7CiAJY2FzZSBI
+VU1NSU5HQk9BUkQ6CiAJCWVudl9zZXQoImJvYXJkX25hbWUiLCAiSFVNTUlOR0JPQVJEIik7CisJ
+CXB1dHMoIkJvYXJkOiBNWDYgSHVtbWluZ0JvYXJkIik7CiAJCWJyZWFrOwogCWNhc2UgSFVNTUlO
+R0JPQVJEMjoKIAkJZW52X3NldCgiYm9hcmRfbmFtZSIsICJIVU1NSU5HQk9BUkQyIik7CisJCXB1
+dHMoIkJvYXJkOiBNWDYgSHVtbWluZ0JvYXJkMiIpOwogCQlicmVhazsKIAljYXNlIFVOS05PV046
+CiAJZGVmYXVsdDoKQEAgLTUyMiw4ICs0OTQsMTIgQEAgaW50IGJvYXJkX2xhdGVfaW5pdCh2b2lk
+KQogCWVsc2UKIAkJZW52X3NldCgiYm9hcmRfcmV2IiwgIk1YNkRMIik7CiAKLQlpZiAoaXNfcmV2
+XzE1X3NvbSgpKQorCWlmIChpc19yZXZfMTVfc29tKCkpIHsKIAkJZW52X3NldCgic29tX3JldiIs
+ICJWMTUiKTsKKwkJcHV0cygiIChzb20gcmV2IDEuNSlcbiIpOworCX0gZWxzZSB7CisJCXB1dHMo
+IlxuIik7CisJfQogCiAJaWYgKGhhc19lbW1jKCkpCiAJCWVudl9zZXQoImhhc19lbW1jIiwgInll
+cyIpOwpkaWZmIC0tZ2l0IGEvY29uZmlncy9teDZjdWJveGlfZGVmY29uZmlnIGIvY29uZmlncy9t
+eDZjdWJveGlfZGVmY29uZmlnCmluZGV4IDI3Y2ViMjI1OTlhNi4uZTNhYmE3MTVhYTU4IDEwMDY0
+NAotLS0gYS9jb25maWdzL214NmN1Ym94aV9kZWZjb25maWcKKysrIGIvY29uZmlncy9teDZjdWJv
+eGlfZGVmY29uZmlnCkBAIC0yOCw2ICsyOCw3IEBAIENPTkZJR19CT09UQ09NTUFORD0icnVuIGZp
+bmRmZHQ7IHJ1biBmaW5kdXVpZDsgcnVuIGRpc3Ryb19ib290Y21kIgogQ09ORklHX1VTRV9QUkVC
+T09UPXkKIENPTkZJR19QUkVCT09UPSJpZiBoZG1pZGV0OyB0aGVuIHVzYiBzdGFydDsgc2V0ZW52
+IHN0ZGluICBzZXJpYWwsdXNia2JkOyBzZXRlbnYgc3Rkb3V0IHNlcmlhbCx2aWRjb25zb2xlOyBz
+ZXRlbnYgc3RkZXJyIHNlcmlhbCx2aWRjb25zb2xlOyBlbHNlIHNldGVudiBzdGRpbiAgc2VyaWFs
+OyBzZXRlbnYgc3Rkb3V0IHNlcmlhbDsgc2V0ZW52IHN0ZGVyciBzZXJpYWw7IGZpOyIKIENPTkZJ
+R19TWVNfUEJTSVpFPTUzMgorIyBDT05GSUdfRElTUExBWV9CT0FSRElORk8gaXMgbm90IHNldAog
+Q09ORklHX0JPQVJEX0VBUkxZX0lOSVRfRj15CiBDT05GSUdfU1BMX1NZU19NQUxMT0M9eQogQ09O
+RklHX1NQTF9GU19FWFQ0PXkKLS0gCjIuMzQuMQoK
+--000000000000c73e7c0614b8bbfa--
