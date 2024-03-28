@@ -4,32 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04558C54E64
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 09:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91C5DC54E67
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 09:56:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88A9488113;
-	Thu, 28 Mar 2024 10:56:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 185E187FAC;
+	Thu, 28 Mar 2024 10:56:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711619766;
-	bh=nwDuwsg6wMPqtEcpXS/Wg/7akoavgvHYTClZ0zAoKRk=;
+	s=phobos-20191101; t=1711619786;
+	bh=+UoV1kc2MCEffgNvuUpnZ6bJum+7y3DEGzCQLOX9HPk=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=GdZbZKn/t3WTfraEy8SO6gHaw4ZJKzQj7QQGJBsViw6Q06lT2UxedVjA1O/uB/k7V
-	 seiejKinqUOuVomiXtuoEBIq9DEGlAqbL4p/TQBD7+NCVtYuDU850/qE6jQPjkNojP
-	 V0LXY87MJlqdhJse8k5BzbabiwHuaFpcmkiXjOZSzz3rMvzhhwpVpnicxG0h52PXHI
-	 N7aT3jpQH9qCNDPYkJ+amD0utRTjZ5krs27VPZdlwCrL5ShMeL8m6QE99/LMVem8As
-	 r3FtuiXRyAX+eK6rMG6eJvSq9X8fTjg/phqll7CgHGDFcj7y6JJ3qOPE+BstCf7nr7
-	 oCSYpcGYrzhHw==
+	b=WV9RXVsrpo06WYllpx//DEMUaQ1xfbpa6m7Gc0I7TNg9FFA2JJiOQRIgBa/M/oinc
+	 LTpsXnchWG1oyjuObpjhuIpz69/3icPmsQ9a3kQ7o3thxjV1beqxTL+UZzK1cApd9Z
+	 GWQ91kIVnCLPALl2FxODeiRANd/fMOjBEIpFMxV7buTbREMamy5vQco/nfMMc7CBe2
+	 AhZbxdPM0GqazpkbLZh6cU46Ys5H7WTf6/hbbVzPQEWYDv/vwuzYbt7DoUHL3es3wF
+	 i5mU4B09/uFZ2LUxuxHILdLkh0BBD+4iWoniMMMyFEcmnVk421+C88MPbwZa4+U57y
+	 jYbJTV3KpkNaQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79A3F88101; Thu, 28 Mar 2024 10:56:05 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ id 2EBC887E75; Thu, 28 Mar 2024 10:56:25 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B27587FAC
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:56:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A08F88124
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:56:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
@@ -38,23 +39,23 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4V4zSd3Wg3z9srk;
- Thu, 28 Mar 2024 10:56:01 +0100 (CET)
-Message-ID: <aa285a06-7fcd-42b9-9a85-29608162e2c3@denx.de>
-Date: Thu, 28 Mar 2024 10:56:01 +0100
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4V4zT113X5z9sq8;
+ Thu, 28 Mar 2024 10:56:21 +0100 (CET)
+Message-ID: <3e8280f1-a1ad-486f-9bf1-875c70f43f35@denx.de>
+Date: Thu, 28 Mar 2024 10:56:20 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH u-boot-mvebu v3 05/18] arm: mvebu: turris_omnia: Implement
- getting board information from MCU
+Subject: Re: [PATCH u-boot-mvebu v3 06/18] arm: mvebu: turris_omnia: Print
+ board ECDSA public key if available
 Content-Language: en-US
 To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
 Cc: u-boot@lists.denx.de
 References: <20240327162355.24584-1-kabel@kernel.org>
- <20240327162355.24584-6-kabel@kernel.org>
+ <20240327162355.24584-7-kabel@kernel.org>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240327162355.24584-6-kabel@kernel.org>
+In-Reply-To: <20240327162355.24584-7-kabel@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4V4zSd3Wg3z9srk
+X-Rspamd-Queue-Id: 4V4zT113X5z9sq8
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,16 +73,10 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/27/24 17:23, Marek Behún wrote:
-> Implement reading board serial number, first MAC address and board
-> version from MCU. MCU supports board information if the FEAT_BOARD_INFO
-> feature bit is set in MCU features.
-> 
-> Prefer getting board information from MCU if supported, fallback to
-> Atmel SHA chip.
+> If MCU supports the FEAT_CRYPTO feature, read board ECDSA public key
+> from MCU and print it.
 > 
 > Signed-off-by: Marek Behún <kabel@kernel.org>
-
-Minor comment below. Other than this:
 
 Reviewed-by: Stefan Roese <sr@denx.de>
 
@@ -89,167 +84,31 @@ Thanks,
 Stefan
 
 > ---
->   board/CZ.NIC/turris_atsha_otp.c          | 27 +------
->   board/CZ.NIC/turris_omnia/Makefile       |  2 +-
->   board/CZ.NIC/turris_omnia/turris_omnia.c | 94 +++++++++++++++++++++++-
->   3 files changed, 93 insertions(+), 30 deletions(-)
+>   board/CZ.NIC/turris_omnia/turris_omnia.c | 25 +++++++++++++++++++++++-
+>   1 file changed, 24 insertions(+), 1 deletion(-)
 > 
-> diff --git a/board/CZ.NIC/turris_atsha_otp.c b/board/CZ.NIC/turris_atsha_otp.c
-> index a29fe36231..85eebcdf18 100644
-> --- a/board/CZ.NIC/turris_atsha_otp.c
-> +++ b/board/CZ.NIC/turris_atsha_otp.c
-> @@ -11,6 +11,7 @@
->   #include <atsha204a-i2c.h>
->   
->   #include "turris_atsha_otp.h"
-> +#include "turris_common.h"
->   
->   #define TURRIS_ATSHA_OTP_VERSION	0
->   #define TURRIS_ATSHA_OTP_SERIAL		1
-> @@ -32,26 +33,6 @@ static struct udevice *get_atsha204a_dev(void)
->   	return dev;
->   }
->   
-> -static void increment_mac(u8 *mac)
-> -{
-> -	int i;
-> -
-> -	for (i = 5; i >= 3; i--) {
-> -		mac[i] += 1;
-> -		if (mac[i])
-> -			break;
-> -	}
-> -}
-> -
-> -static void set_mac_if_invalid(int i, u8 *mac)
-> -{
-> -	u8 oldmac[6];
-> -
-> -	if (is_valid_ethaddr(mac) &&
-> -	    !eth_env_get_enetaddr_by_index("eth", i, oldmac))
-> -		eth_env_set_enetaddr_by_index("eth", i, mac);
-> -}
-> -
->   int turris_atsha_otp_init_mac_addresses(int first_idx)
->   {
->   	struct udevice *dev = get_atsha204a_dev();
-> @@ -84,11 +65,7 @@ int turris_atsha_otp_init_mac_addresses(int first_idx)
->   	mac[4] = mac1[2];
->   	mac[5] = mac1[3];
->   
-> -	set_mac_if_invalid((first_idx + 0) % 3, mac);
-> -	increment_mac(mac);
-> -	set_mac_if_invalid((first_idx + 1) % 3, mac);
-> -	increment_mac(mac);
-> -	set_mac_if_invalid((first_idx + 2) % 3, mac);
-> +	turris_init_mac_addresses(first_idx, mac);
->   
->   	return 0;
->   }
-> diff --git a/board/CZ.NIC/turris_omnia/Makefile b/board/CZ.NIC/turris_omnia/Makefile
-> index dc39b44ae1..341378b4e5 100644
-> --- a/board/CZ.NIC/turris_omnia/Makefile
-> +++ b/board/CZ.NIC/turris_omnia/Makefile
-> @@ -2,4 +2,4 @@
->   #
->   # Copyright (C) 2017 Marek Behún <kabel@kernel.org>
->   
-> -obj-y	:= turris_omnia.o ../turris_atsha_otp.o
-> +obj-y	:= turris_omnia.o ../turris_atsha_otp.o ../turris_common.o
 > diff --git a/board/CZ.NIC/turris_omnia/turris_omnia.c b/board/CZ.NIC/turris_omnia/turris_omnia.c
-> index 6dfde5ee7a..f63640ad64 100644
+> index f63640ad64..b2f0088e5e 100644
 > --- a/board/CZ.NIC/turris_omnia/turris_omnia.c
 > +++ b/board/CZ.NIC/turris_omnia/turris_omnia.c
-> @@ -18,6 +18,7 @@
->   #include <asm/io.h>
->   #include <asm/arch/cpu.h>
->   #include <asm/arch/soc.h>
-> +#include <asm/unaligned.h>
->   #include <dm/uclass.h>
->   #include <dt-bindings/gpio/gpio.h>
->   #include <fdt_support.h>
-> @@ -25,12 +26,14 @@
->   #include <time.h>
->   #include <turris-omnia-mcu-interface.h>
->   #include <linux/bitops.h>
-> +#include <linux/bitrev.h>
->   #include <linux/delay.h>
->   #include <u-boot/crc.h>
->   
->   #include "../drivers/ddr/marvell/a38x/ddr3_init.h"
->   #include <../serdes/a38x/high_speed_env_spec.h>
->   #include "../turris_atsha_otp.h"
-> +#include "../turris_common.h"
->   
->   DECLARE_GLOBAL_DATA_PTR;
->   
-> @@ -186,6 +189,70 @@ static bool omnia_mcu_has_feature(u32 feature)
->   	return feature & features;
+> @@ -253,6 +253,24 @@ static int omnia_mcu_board_info(char *serial, u8 *mac, char *version)
+>   	return 0;
 >   }
 >   
-> +static u32 omnia_mcu_crc32(const void *p, size_t len)
+> +static int omnia_mcu_get_board_public_key(char pub_key[static 67])
 > +{
-> +	u32 val, crc = 0;
+> +	u8 reply[34];
+> +	int ret;
 > +
-> +	compiletime_assert(!(len % 4), "length has to be a multiple of 4");
+> +	ret = omnia_mcu_read(CMD_CRYPTO_GET_PUBLIC_KEY, reply, sizeof(reply));
+> +	if (ret)
+> +		return ret;
 > +
-> +	while (len) {
-> +		val = bitrev32(get_unaligned_le32(p));
-> +		crc = crc32(crc, (void *)&val, 4);
-> +		p += 4;
-> +		len -= 4;
-> +	}
+> +	if (reply[0] != 33)
+> +		return -EBADMSG;
 > +
-> +	return ~bitrev32(crc);
-> +}
-> +
-> +/* Can only be called after relocation, since it needs cleared BSS */
-> +static int omnia_mcu_board_info(char *serial, u8 *mac, char *version)
-> +{
-> +	static u8 reply[17];
-> +	static bool cached;
-> +
-> +	if (!cached) {
-> +		u8 csum;
-> +		int ret;
-> +
-> +		ret = omnia_mcu_read(CMD_BOARD_INFO_GET, reply, sizeof(reply));
-> +		if (ret)
-> +			return ret;
-> +
-> +		if (reply[0] != 16)
-> +			return -EBADMSG;
-> +
-> +		csum = reply[16];
-> +		reply[16] = 0;
-> +
-> +		if ((omnia_mcu_crc32(&reply[1], 16) & 0xff) != csum)
-> +			return -EBADMSG;
-> +
-> +		cached = true;
-> +	}
-> +
-> +	if (serial) {
-> +		const char *serial_env;
-> +
-> +		serial_env = env_get("serial#");
-> +		if (serial_env && strlen(serial_env) == 16) {
-> +			strcpy(serial, serial_env);
-
-Usage of strcpy() is discouraged AFAIK.
-
-> +		} else {
-> +			sprintf(serial, "%016llX",
-> +				get_unaligned_le64(&reply[1]));
-> +			env_set("serial#", serial);
-> +		}
-> +	}
-> +
-> +	if (mac)
-> +		memcpy(mac, &reply[9], ETH_ALEN);
-> +
-> +	if (version)
-> +		sprintf(version, "%u", reply[15]);
+> +	bin2hex(pub_key, &reply[1], 33);
+> +	pub_key[66] = '\0';
 > +
 > +	return 0;
 > +}
@@ -257,47 +116,22 @@ Usage of strcpy() is discouraged AFAIK.
 >   static void enable_a385_watchdog(unsigned int timeout_minutes)
 >   {
 >   	struct sar_freq_modes sar_freq;
-> @@ -965,13 +1032,23 @@ int board_late_init(void)
+> @@ -1032,7 +1050,7 @@ int board_late_init(void)
 >   
 >   int checkboard(void)
 >   {
-> -	char serial[17];
-> +	char serial[17], version[4];
-> +	bool has_version;
+> -	char serial[17], version[4];
+> +	char serial[17], version[4], pub_key[67];
+>   	bool has_version;
 >   	int err;
 >   
-> -	err = turris_atsha_otp_get_serial_number(serial);
->   	printf("  MCU type: %s\n", omnia_get_mcu_type());
->   	printf("  MCU version: %s\n", omnia_get_mcu_version());
->   	printf("  RAM size: %i MiB\n", omnia_get_ram_size_gb() * 1024);
-> +
-> +	if (omnia_mcu_has_feature(FEAT_BOARD_INFO)) {
-> +		err = omnia_mcu_board_info(serial, NULL, version);
-> +		has_version = !err;
-> +	} else {
-> +		err = turris_atsha_otp_get_serial_number(serial);
-> +		has_version = false;
-> +	}
-> +
-> +	printf("  Board version: %s\n", has_version ? version : "unknown");
+> @@ -1051,6 +1069,11 @@ int checkboard(void)
+>   	printf("  Board version: %s\n", has_version ? version : "unknown");
 >   	printf("  Serial Number: %s\n", !err ? serial : "unknown");
 >   
->   	return 0;
-> @@ -979,8 +1056,17 @@ int checkboard(void)
->   
->   int misc_init_r(void)
->   {
-> -	turris_atsha_otp_init_mac_addresses(1);
-> -	turris_atsha_otp_init_serial_number();
-> +	if (omnia_mcu_has_feature(FEAT_BOARD_INFO)) {
-> +		char serial[17];
-> +		u8 first_mac[6];
-> +
-> +		if (!omnia_mcu_board_info(serial, first_mac, NULL))
-> +			turris_init_mac_addresses(1, first_mac);
-> +	} else {
-> +		turris_atsha_otp_init_mac_addresses(1);
-> +		turris_atsha_otp_init_serial_number();
+> +	if (omnia_mcu_has_feature(FEAT_CRYPTO)) {
+> +		err = omnia_mcu_get_board_public_key(pub_key);
+> +		printf("  ECDSA Public Key: %s\n", !err ? pub_key : "unknown");
 > +	}
 > +
 >   	return 0;
