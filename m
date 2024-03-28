@@ -4,83 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBC1CC54E67
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 08:34:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0ABCC54E64
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 08:37:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16283880F3;
-	Thu, 28 Mar 2024 09:34:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CDCC8880D6;
+	Thu, 28 Mar 2024 09:36:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=lexina.in
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="COh6K9Pj";
+	dkim=pass (2048-bit key; unprotected) header.d=lexina.in header.i=@lexina.in header.b="Y/iOo1W1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37544880F3; Thu, 28 Mar 2024 09:34:12 +0100 (CET)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8DBB9880F4; Thu, 28 Mar 2024 09:36:59 +0100 (CET)
+Received: from mx.msync.work (mx.msync.work [62.182.159.68])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A1794880B2
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 09:34:08 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2d485886545so9950151fa.2
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 01:34:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711614848; x=1712219648; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MPGZ6Ade+Jys6IGgkWlcBBtkwM0k4StVHzWYvkq2Xrw=;
- b=COh6K9PjzqRFcXWEXTqPP8+zODiKL+2P9RzINstXkUXuEqZnF79vgXiolztEwy+mX8
- p0itNVzygfI57Kjj0krEOtVwV9oBaQmIrTLahfBL7USV/neDfBofcFFMUYQUjg4P80pB
- jUMmmSXVDppjOobo+uK2g1E3RcSOLvihGDscnql6cSrribU9YTfIKhSqWP2tWqQmXYDM
- 9ImPE5FocyrBfcQZ2S1zl9F+o5bg3gzBiKiJ8IxxTxLI9zAYQ2D4Hl5unpOsm51+FeOh
- 0ZTmZrrJerm7oPQTZfcFuubjKfWnxTRhmtpgBIkxpwKAJCWLH3APN++4zsOfT60gZ2JB
- lSig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711614848; x=1712219648;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=MPGZ6Ade+Jys6IGgkWlcBBtkwM0k4StVHzWYvkq2Xrw=;
- b=cFCeQNfqGPltC3tTPEFm6FGO4/r8jdPTRBWrybzWMWYpvSfmCumbx+cILCJyNZRbmf
- cpEXeZH8e+KqYgByKxT+D6hz/vEnmAWPmU1hlwtCql8U54fAQNwYXlqtPxl52BB0YT+u
- KeWAYVDXVNFRL3MI86P6jp00G3XF4OLL3PTnXyPNeO1ySunFv4I9kCfdKOh9wMAf+qRt
- mEYy1uWCY3VbiIPd7jQvkIiSQSJZvzAB/7HSYJRwvsQr0rC6h8E1nQBvhrtFSgpRUAMP
- m6C/+K4rQsTlulEEZR25NzkJaeiihRQyLT+Zv7euruCwBqvBoxvUyAT53cVMmiHunRlQ
- Y6EA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUzdDq8Jr7PevtTPLe06Aht4do0GgLSSPgfbuy7RnqnvphBwBAHVDQy/c+bRjwYIchtwoS4tHQi8Lh9YvFpTNJlai+p0g==
-X-Gm-Message-State: AOJu0YwGyaRiMhzg1VxfUV3zWmafwcuatVeQzJ9At3B5UYrJVERD3cea
- hRO3U3F3bLtl0jxOtWtsee3/6H2MeSQZdRF6/3qiuC5oYaEOT6C5JxtfD9xQVSETfRaM/iZFCXD
- tkmX5xu3uwD2fwKnokpyULg4AhNeIi2Oq2I4Dog==
-X-Google-Smtp-Source: AGHT+IGlQV4jbj2ddsQG69zLvZMLCXbh/UvolyjJ43tbws+DBTDCFmsVOvsBarrB7XJp4fe3UGFQ0NSROU6rX/r5t2k=
-X-Received: by 2002:a2e:8010:0:b0:2d4:a20f:299f with SMTP id
- j16-20020a2e8010000000b002d4a20f299fmr2157995ljg.35.1711614847866; Thu, 28
- Mar 2024 01:34:07 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id DABA9880BE
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 09:36:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=lexina.in
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=adeep@lexina.in
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 56E7317913D; Thu, 28 Mar 2024 08:36:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lexina.in; s=dkim;
+ t=1711615015; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references:autocrypt;
+ bh=cI9w2dwfw/CwwiHbKzqsE1ygN9Rde29YETYWMdaU/Sk=;
+ b=Y/iOo1W1LkgcEd2Tls0MSP5taDXbgry6bNHu0zw/QTTlAEHTN1Ffx7r7Op9QM6ftQ2uRmr
+ 5iJYhh0+lnRytPehboUgl/NDfTdGCzZRerVI/Qgvznwp2kdYoSK8Xk2RQXULk8zS7Zo/VJ
+ EGIUa+9nAYS97a5ji9H8/fIXAfWeMeKxzWWwWUoJmAh0kE8OzyKRfMDJL9mrhDO8EjuDbt
+ xA18PJicrv276ftP/9Q4yL5mPNa83mpxTDBhejA2XWuyxcEuTE/H6vsTN96McaAH4cSgH8
+ Pf9ptrMmx3fQTfp6WGssSWOXBT+niuCqPgnZq/hwJrMeZ0c9wU83jtOSZzU1AA==
+Message-ID: <7dbe9b58-6b5b-4c61-831b-f0fd30736f42@lexina.in>
+Date: Thu, 28 Mar 2024 11:36:51 +0300
 MIME-Version: 1.0
-References: <CAJ+vNU12-4EJN_RPGPPTfTVden2=beq-XaeFL=dF7t+AAqje=Q@mail.gmail.com>
- <CAC_iWj+B0r7o8Hwi_KZM=+L9t6=THH=pzY38jrcDDdAntWT3Rw@mail.gmail.com>
- <CAJ+vNU0380ved3FWt_R4UVR3stFrb3B4dLTx=m6dp0377MK6hQ@mail.gmail.com>
- <afab8b1e-ad41-47fc-ad76-383151f4caf2@linux.ibm.com>
- <CAC_iWjK47NBn89yMs0FsMGtOijHTAta5uYmZL=oumzhzyW29WQ@mail.gmail.com>
- <CAJ+vNU228uHF3D6BzLjZifb1d-GN7tSTLJmaZRDk0tQWDrYknw@mail.gmail.com>
- <CAC_iWjK8SHvZeEUgDeBRYpq8LgU=M5bqQQbSYwTxsrV_H1hdVA@mail.gmail.com>
- <CAJ+vNU0ONNOr2-sQTMVnuhQPug+mUimcfMMQj=DEs9a8fprMOg@mail.gmail.com>
-In-Reply-To: <CAJ+vNU0ONNOr2-sQTMVnuhQPug+mUimcfMMQj=DEs9a8fprMOg@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 28 Mar 2024 10:33:31 +0200
-Message-ID: <CAC_iWj+kE+-q60GzPBcO2xYxKX6eUSkJ1UwC4atg4BmXHNzA7g@mail.gmail.com>
-Subject: Re: tcg2_platform_get_log failing to read address and size of
- memory-region via ofnode_get_addr_size
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: Simon Glass <sjg@chromium.org>, Eddie James <eajames@linux.ibm.com>, 
- u-boot <u-boot@lists.denx.de>, Ruchika Gupta <ruchika.gupta@linaro.org>, 
- Samuel Lee <slee@gateworks.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] arm: meson: Switch to using upstream DT for GXL, GXM, 
+ AXG, G12A, G12B & SM1 SoCs
+To: neil.armstrong@linaro.org
+Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Christian Hewitt <christianshewitt@gmail.com>
+References: <20240319-u-boot-of-upstream-v1-0-f82bc9fe69c0@linaro.org>
+ <045a8bb4-e061-4727-9f07-a55825a99518@linaro.org>
+ <3a411122-fefa-4193-b988-ba3b35449946@lexina.in>
+ <f8fce939-f095-449f-816e-39a96f8e298f@linaro.org>
+Content-Language: en-US, ru-RU
+From: Viacheslav <adeep@lexina.in>
+Autocrypt: addr=adeep@lexina.in; keydata=
+ xsDNBF+1fsQBDADh4przgt1LU4l+B6rIWel42Mg3hgdgbZ2nlIkKnaaNLXkm5rK0EJJeStd7
+ 8sxsdk9n7UQFB3mkmgjc89zyAG+CDG/+KZQMWOsc5IvWlDebKlefieyvf9yvV4qcQTeudr3C
+ CgUxq8qsp1fDX9jdSjz5/OMJKrxCElMxLxJTFF+FHtWvUIMr4txesE8NP7f7VnIYILEeMM8q
+ gvptNUrWQr6KTv4XnRD/BvsRZJWnQ/a5MzMGQWzw7LeT4vhV4lYqJsXmxbGLUOKi+5ZpslR3
+ Ffby2kdL1Xyq6Y7Gi70RhUpKP0xGJ6gDVs6SjFSb9UxgrjwNBWZcFeSJkc6pR5JbgbYMRvdA
+ W5CNnA8TzdfhPgO3HEDFlsVqberSBI/tMiwHWPze7jkv7ttx/Wg9+RZybFfCkGm4XvKh7aP4
+ jG3Td43mqhyHGzOd/EUxNITebqxqpEJTmRCisgpjr3M76aht4UFz11tP/QEuCrpDX0bOMPYA
+ 4aohmhw5FLyWUPg0JllH6kEAEQEAAc0SIDxhZGVlcEBsZXhpbmEuaW4+wsDwBBMBCgAaBAsJ
+ CAcCFQoCFgECGQEFgl+1fsQCngECmwMACgkQ7jaxEAJajfrgvAwA051C6jUKS6Wp4oy2Or0i
+ B1HXCDDaCS2zgWDCa+nuI+8qVDzTx0TAlurt+S3AUv8+DHjkc4XjEHtDdigabp2nGsk51w3C
+ WyGD7NKUQz8/mpN7Fb2OV79etE3PTMayUrXRZh7ZuvQ7vkUemKM8rRw0PFPu3kqwZPDPapYH
+ rPyJZjnNFuvFULli/xIcc8+WklaYgOKg4nmsVBT4NigiV2Y4Mb4yVBWl58mErRH5pv08NYb4
+ 1JFD2FZnTGhEeumQDl9p6Kd+rZETRgkMEHw+HMwdXl5ZXv5ci4NTigiH77UvfN8FetuAdl3x
+ 6EM+1bJkgab6TMyWdNPPmF6e5BPHtBduk9gzmU5+xUlTbur0gun662oFi1oWwbAqhBDueDyL
+ xCi8qjycOJaehBcPRtksQeTZrp+fDYne7hq3ywMBdlqhdz4Sfm7urLHvA/bApgJKlWylkqkl
+ sG82QPh63ZnNw2lORTGEQTO3tBMY5RLKnrvZjtZR7W06pVZXyQQXZceEmpCazsDNBF+1fsQB
+ DACy2kiiKt2bTSl4u/z1en+BhP16c/RbjnDXVkbapyZRCf3OmjfpRXprje4Z0+HAHReWgnOc
+ sC6vNk+SWimoE/qyXQTNnUDS7KYdFaof14UmU2rA9pf1oXHOgMRzlwinCe+6NCgkjsqOr3e5
+ 8XNo+cxmQy1bhHt1LDwixBFU6v65umJpZAVUd1F624wU+UeRZCjymMB80ePxF9ppnfcYc+Yp
+ aM70LFwDzxCmeLGv0uMb0jfgJ8j2k2LS5nOQ4AX+WoOb98vFuqW7oYA9oCCKDG0Gp/w9QxG5
+ RKjMytZIUxQA2JDq0jUN90pK0mtZJn7/Dr8GRM+W+UpeKiK7wW9iTFH+hTIRtbCC8vO8JDGz
+ umW65BFtZfH2cEQDU2nbdsf/SstszPDMuyDiCHmxh8MKN/fn55osvJvjXgqpsH48tz9O7262
+ P5xK4nMpsWWj7W6OhHGTQTHgMrKsiYoDx9+5NGt8n+MbLO5DUvyOSvfAiE+hRaf97R9vtoSy
+ BoyahDXmCH0AEQEAAcLA3wQYAQoACQWCX7V+xAKbDAAKCRDuNrEQAlqN+ra3C/95TV1Fjy//
+ t6FvNIgLy0e+5LnTegejiCaGbxklGFIWkGamX/DOm3QF+ZaKsoXUf/kmpL10dnsExiGHTeGw
+ 7zR8+rOkVnK6fq0ady43a7RxKP5nW0pDVclTvsAWr1CcdFrCVpH2idj7fjtAmZlMbuiEMXoo
+ kaDXdhJtS60VrwS4xUlw4ZPQjMZdQdvpu4vGtZUfJr+8vJ757d9N3EGpFUrk+5QWozjktLVm
+ gdQ0nlD9ji3RpwjhQWCIoi6GmdWpfdj3LzDO/DwWRLlz8iAdZG3pHSGsCmM2MJ16HbPnsSxr
+ YrKwM/HVpqTSVsprnQogPL/xM0AH11uAbqNvIvm6sUkEmx2kdBzTKjY0YdSkpUgTauWn13bg
+ Ay+0xfqxRvYBSsHpWpnSnsI12861OVGnYsnB8gJlJLSQjOl3Kwq36MeWbAg6Bs4PnNU4i+uO
+ rz9PJ4vHmMYfmMDJLYWJI6pcLyAoZSE/bSTLaRV73/zjtlX85mtEL3fvh6G342uRCvAwqgI=
+In-Reply-To: <f8fce939-f095-449f-816e-39a96f8e298f@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,179 +103,236 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
 
-[...]
+Builds and run ok.
 
-> > > > > >
-> > > > > > Would you agree with removing the requirement for the event log?
-> > > > >
-> > > > >
-> > > > > No, the log is required, otherwise it's fairly meaningless work. You
-> > > > > need the log in your OS to verify the contents of the TPM.
-> > > >
-> > > > It's the other way around. You trust the TPM and replay the event log
-> > > > in memory to verify it's correct.
-> > > > That being said, I do agree the event log is pretty useful when trying
-> > > > to understand how and what the platform measured. In any case, I'd
-> > > > rather fix any issues rather than sidestep them.
-> > > >
-> > >
-> > > Why do you need a log to verify the contents of the TPM? If the PCR's
-> > > are not correct you can't get your secrets from the TPM and if they
-> > > are you can regardless of a log. Where is this log requirement in the
-> > > TCG specification?
-> >
-> > Yes, as I said you *validate* the eventlog by looking at the TPM PCRs,
-> > not the other way around.
-> > The problem with the TCG spec is
-> > - EFI_TCG2_PROTOCOL.GetEventLog can only returns either EFI_SUCCESS or
-> > EFI_INVALID_PARAMETER. There's no EFI_UNSUPPORTED
-> > - EFI_TCG2_PROTOCOL.HashLogExtendEvent has a flag
-> > (EFI_TCG2_EXTEND_ONLY) which allows you to only extend PCRs and not
-> > log them
-> >
-> > But I can't find anywhere in the spec a statement that says "the
-> > eventlog is optional"
-> >
-> > >
-> > > Please see Linux commit 805fa88e0780b ("tpm: Don't make log failures
-> > > fatal") which has a commit log of:
-> > >
-> > > If a TPM is in disabled state, it's reasonable for it to have an empty
-> > > log.
-> >
-> > Yes, an empty log. Not missing a log overall. Which makes sense if the
-> > TPM is disabled.
-> >
-> > >  Bailing out of probe in this case means that the PPI interface
-> > > isn't available, so there's no way to then enable the TPM from the OS.
-> > > In general it seems reasonable to ignore log errors - they shouldn't
-> > > interfere with any other TPM functionality.
-> > >
-> > > That last sentence makes sense to me; Sure the log may be 'useful' to
-> > > some but I feel like it's not a requirement and it certainly is not a
-> > > requirement for Linux.
-> > >
-> > > > The return value of ofnode_get_addr_size() depends on a couple Kconfig
-> > > > options. Any chance those differ from the ones Eddie is using?
-> > > >
-> > >
-> > > I have the same dt changes. I think this has something to do with the
-> > > whole are we using of or fdt, and is of live:
-> > >
-> > > $ git diff
-> > > diff --git a/arch/arm/dts/imx8mm-venice-gw72xx.dtsi
-> > > b/arch/arm/dts/imx8mm-venice-gw72xx.dtsi
-> > > index 97ed34a3c586..5752a38c7b4c 100644
-> > > --- a/arch/arm/dts/imx8mm-venice-gw72xx.dtsi
-> > > +++ b/arch/arm/dts/imx8mm-venice-gw72xx.dtsi
-> > > @@ -14,6 +14,17 @@
-> > >                 usb1 = &usbotg2;
-> > >         };
-> > >
-> > > +       reserved-memory {
-> > > +               #address-cells = <1>;
-> > > +               #size-cells = <1>;
-> > > +               ranges;
-> > > +
-> > > +               event_log: tcg_event_log@40000000 {
-> > > +                       no-map;
-> > > +                       reg = <0x40000000 0x2000>;
-> > > +               };
-> > > +       };
-> > > +
-> > >         led-controller {
-> > >                 compatible = "gpio-leds";
-> > >                 pinctrl-names = "default";
-> > > @@ -91,6 +102,7 @@
-> > >         tpm@1 {
-> > >                 compatible = "tcg,tpm_tis-spi";
-> > >                 reg = <0x1>;
-> > > +               memory-region = <&event_log>;
-> > >                 spi-max-frequency = <36000000>;
-> > >         };
-> > >  };
-> > > diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> > > index 994f8089ba34..0bc08cebed2f 100644
-> > > --- a/lib/tpm-v2.c
-> > > +++ b/lib/tpm-v2.c
-> > > @@ -672,11 +673,14 @@ __weak int tcg2_platform_get_log(struct udevice
-> > > *dev, void **addr, u32 *size)
-> > >                 phys_addr_t a;
-> > >                 fdt_size_t s;
-> > >
-> > > +printf("%s %s ofnode=%px valid=%d is_np=%d of_live_active=%d\n",
-> > > __func__, dev->name, dev_ofnode(dev).np, ofnode_valid(dev_ofnode(de
-> > > v)), ofnode_is_np(dev_ofnode(dev)), of_live_active());
-> > >                 if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
-> > >                                                0, &args))
-> > >                         return -ENODEV;
-> > > +printf("%s %s args:%d\n", __func__, dev->name, args.args_count);
-> > >
-> > >                 a = ofnode_get_addr_size(args.node, "reg", &s);
-> > > +printf("%s %s a:%px\n", __func__, dev->name, (void*)a);
-> > >                 if (a == FDT_ADDR_T_NONE)
-> > >                         return -ENOMEM;
-> > >
-> > > This shows the following:
-> > > tcg2_platform_get_log tpm@1 ofnode=00000000000054d0 valid=1 is_np=0
-> > > of_live_active=0
-> > > tcg2_platform_get_log tpm@1 args:0
-> > > tcg2_platform_get_log tpm@1 a:ffffffffffffffff
-> > > ^^^ can't get address of reg
-> > >
-> > > so we have a valid of_node in the dev structure but its not a np?
-> > >
-> > > dev_read_phandle_with_args() is returning success but was not able to
-> > > parse any args, so we should not use 'args.node' as the arg of
-> > > ofnode_get_addr_size(args.node, "reg", &s);
-> > >
-> > > I think the mix of dev_read_phandle_with_args and ofnode_get_addr_size
-> > > is wrong. U-Boot is full of constructs like this that are extremely
-> > > confusing... missing fdt with of and the concept of if its live or
-> > > not. I'm hoping Simon can shed some light on this and maybe give or
-> > > point to a primer on all the of/dt/live stuff?
-> >
-> > Thanks that helps. I'll try to reproduce it with sandbox and/or QEMU
-> > with OF_LIVE and see if I get something.
-> >
->
-> Ilias,
->
-> I think the following is needed here:
-> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> index 994f8089ba34..6b9d587e491c 100644
-> --- a/lib/tpm-v2.c
-> +++ b/lib/tpm-v2.c
-> @@ -675,8 +675,7 @@ __weak int tcg2_platform_get_log(struct udevice
-> *dev, void **addr, u32 *size)
->                 if (dev_read_phandle_with_args(dev, "memory-region", NULL, 0,
->                                                0, &args))
->                         return -ENODEV;
-> -
-> -               a = ofnode_get_addr_size(args.node, "reg", &s);
-> +               a = ofnode_get_addr_size_index(args.node, 0, &s);
->                 if (a == FDT_ADDR_T_NONE)
->                         return -ENOMEM;
->
->
-> Best Regards,
+for related:
+Acked-by: Viacheslav Bocharov <adeep@lexina.in>
 
-Looking at the sandbox config file OF_LIVE is enabled. I haven't
-looked into the differences on ofnode_get_addr_size(),
-ofnode_get_addr_size_index(), why is the index one needed?
-
-btw, why are you trying to create the eventlog area like this? IIRC
-linux doesn't support that. Looking at the latest kernel
-'tcg_event_log' is only defined in aspeed bmc's on TPMs so I guess
-they have a special usecase for that, hence the code Eddie carried in
-U-Boot.
-For your case, isn't it preferable to add the log area with
-linux,sml-base, linux,sml-size? Linux will try to read the eventlog in
-that case.
-
-Thanks
-/Ilias
->
-> Tim
+28/03/2024 10.50, neil.armstrong@linaro.org wrote:
+> Hi,
+> 
+> On 28/03/2024 07:58, Viacheslav wrote:
+>> Hi, Neil!
+>>
+>> With this patchset I got wrong fdt link in env with double prefix:
+>>
+>> fdtfile=amlogic/amlogic/meson-gxl-s905w-jethome-jethub-j80.dtb
+>>
+>>
+>> but if i remove "amlogic" prefix in config it does not build
+>>
+>> --- a/configs/jethub_j80_defconfig
+>> +++ b/configs/jethub_j80_defconfig
+>> -CONFIG_DEFAULT_DEVICE_TREE="amlogic/meson-gxl-s905w-jethome-jethub-j80"
+>> +CONFIG_DEFAULT_DEVICE_TREE="meson-gxl-s905w-jethome-jethub-j80"
+>>
+>>
+>> Error:
+>>
+>> make[2]: *** No rule to make target 
+>> 'dts/upstream/src/arm64/meson-gxl-s905w-jethome-jethub-j80.dtb', 
+>> needed by 'dtbs'.  Stop.
+>> make[1]: *** [dts/Makefile:54: arch-dtbs] Error 2
+>> make: *** [Makefile:1166: dts/dt.dtb] Error 2
+> 
+> You're right, I forgot to remove the fdtfile prefix, can you retry with:
+> 
+> =====><===========================================
+> diff --git a/include/configs/meson64.h b/include/configs/meson64.h
+> index efab9a624d..65fa5f3d6d 100644
+> --- a/include/configs/meson64.h
+> +++ b/include/configs/meson64.h
+> @@ -120,6 +120,12 @@
+> 
+>   #include <config_distro_bootcmd.h>
+> 
+> +#ifdef CONFIG_OF_UPSTREAM
+> +#define FDTFILE_NAME           CONFIG_DEFAULT_DEVICE_TREE ".dtb"
+> +#else
+> +#define FDTFILE_NAME           "amlogic/" CONFIG_DEFAULT_DEVICE_TREE 
+> ".dtb"
+> +#endif
+> +
+>   #ifndef CFG_EXTRA_ENV_SETTINGS
+>   #define CFG_EXTRA_ENV_SETTINGS \
+>          "stdin=" STDIN_CFG "\0" \
+> @@ -133,7 +139,7 @@
+>          "pxefile_addr_r=" PXEFILE_ADDR_R "\0" \
+>          "fdtoverlay_addr_r=" FDTOVERLAY_ADDR_R "\0" \
+>          "ramdisk_addr_r=" RAMDISK_ADDR_R "\0" \
+> -       "fdtfile=amlogic/" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
+> +       "fdtfile=" FDTFILE_NAME "\0" \
+>          "dfu_alt_info=fitimage ram " KERNEL_ADDR_R " 0x4000000 \0" \
+>          BOOTENV
+>   #endif
+> =====><===========================================
+> 
+> Thanks,
+> Neil
+> 
+>>
+>>
+>>
+>> 22/03/2024 12.03, Neil Armstrong:
+>>> Hi Viacheslav,
+>>>
+>>> On 19/03/2024 15:42, Neil Armstrong wrote:
+>>>> Enable OF_UPSTREAM to use upstream DT and add amlogic/ prefix to the
+>>>> DEFAULT_DEVICE_TREE. And thereby directly build DTB from 
+>>>> dts/upstream/src/
+>>>> including *-u-boot.dtsi files from arch/$(ARCH)/dts/ directory and
+>>>> drop redundant files from arch/arm/dts directory. Only *-u-boot.dtsi 
+>>>> files
+>>>> kept in arch/arm/dts directory for these boards.
+>>>>
+>>>> Keep A1 DTs locally since the architecture is still young.
+>>>>
+>>>> CI built & tested at:
+>>>> https://gitlab.com/amlogic-foss/amlogic-u-boot-autotest/-/pipelines/1219273552
+>>>>
+>>>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>>>> ---
+>>>> Neil Armstrong (4):
+>>>>        dts: meson: Switch GXL, GXM & AXG to using upstream DT
+>>>>        dts: meson: Drop redundant GXL, GXM & AXG devicetree files
+>>>
+>>> Could you run a test run on your boards so make sure is still boots 
+>>> fine ?
+>>>
+>>> Thanks,
+>>> Neil
+>>>
+>>>>        dts: meson-g12a: Switch to using upstream DT
+>>>>        dts: meson: Drop redundant G12A, G12B & SM1 devicetree files
+>>>>
+>>>>   arch/arm/dts/Makefile                              |   36 +-
+>>>>   arch/arm/dts/meson-axg-jethome-jethub-j100.dts     |  361 ---
+>>>>   arch/arm/dts/meson-axg-s400.dts                    |  602 -----
+>>>>   arch/arm/dts/meson-axg.dtsi                        | 1957 
+>>>> ---------------
+>>>>   arch/arm/dts/meson-g12-common.dtsi                 | 2493 
+>>>> --------------------
+>>>>   arch/arm/dts/meson-g12.dtsi                        |  385 ---
+>>>>   arch/arm/dts/meson-g12a-radxa-zero.dts             |  405 ----
+>>>>   arch/arm/dts/meson-g12a-sei510.dts                 |  566 -----
+>>>>   arch/arm/dts/meson-g12a-u200.dts                   |  308 ---
+>>>>   arch/arm/dts/meson-g12a.dtsi                       |  140 --
+>>>>   arch/arm/dts/meson-g12b-a311d-bananapi-m2s.dts     |   33 -
+>>>>   arch/arm/dts/meson-g12b-a311d-khadas-vim3.dts      |   41 -
+>>>>   arch/arm/dts/meson-g12b-a311d.dtsi                 |  149 --
+>>>>   arch/arm/dts/meson-g12b-bananapi-cm4-cm4io.dts     |  165 --
+>>>>   arch/arm/dts/meson-g12b-bananapi-cm4.dtsi          |  388 ---
+>>>>   arch/arm/dts/meson-g12b-bananapi.dtsi              |  521 ----
+>>>>   arch/arm/dts/meson-g12b-gsking-x.dts               |  133 --
+>>>>   arch/arm/dts/meson-g12b-gtking-pro.dts             |  142 --
+>>>>   arch/arm/dts/meson-g12b-gtking.dts                 |  163 --
+>>>>   arch/arm/dts/meson-g12b-khadas-vim3.dtsi           |  107 -
+>>>>   arch/arm/dts/meson-g12b-odroid-go-ultra.dts        |  722 ------
+>>>>   arch/arm/dts/meson-g12b-odroid-n2-plus.dts         |   31 -
+>>>>   arch/arm/dts/meson-g12b-odroid-n2.dts              |   15 -
+>>>>   arch/arm/dts/meson-g12b-odroid-n2.dtsi             |  303 ---
+>>>>   arch/arm/dts/meson-g12b-odroid-n2l.dts             |  125 -
+>>>>   arch/arm/dts/meson-g12b-odroid.dtsi                |  445 ----
+>>>>   arch/arm/dts/meson-g12b-radxa-zero2.dts            |  489 ----
+>>>>   arch/arm/dts/meson-g12b-s922x-bananapi-m2s.dts     |   14 -
+>>>>   arch/arm/dts/meson-g12b-s922x.dtsi                 |  139 --
+>>>>   arch/arm/dts/meson-g12b-w400.dtsi                  |  425 ----
+>>>>   arch/arm/dts/meson-g12b.dtsi                       |  146 --
+>>>>   arch/arm/dts/meson-gx-libretech-pc.dtsi            |  447 ----
+>>>>   arch/arm/dts/meson-gx-mali450.dtsi                 |   61 -
+>>>>   arch/arm/dts/meson-gx-p23x-q20x.dtsi               |  324 ---
+>>>>   arch/arm/dts/meson-gx.dtsi                         |  675 ------
+>>>>   arch/arm/dts/meson-gxl-mali.dtsi                   |   17 -
+>>>>   arch/arm/dts/meson-gxl-s805x-libretech-ac.dts      |  319 ---
+>>>>   arch/arm/dts/meson-gxl-s805x.dtsi                  |   23 -
+>>>>   arch/arm/dts/meson-gxl-s905d-libretech-pc.dts      |   16 -
+>>>>   arch/arm/dts/meson-gxl-s905d.dtsi                  |   12 -
+>>>>   .../arm/dts/meson-gxl-s905w-jethome-jethub-j80.dts |  247 --
+>>>>   arch/arm/dts/meson-gxl-s905x-khadas-vim.dts        |  237 --
+>>>>   arch/arm/dts/meson-gxl-s905x-libretech-cc-v2.dts   |  313 ---
+>>>>   arch/arm/dts/meson-gxl-s905x-libretech-cc.dts      |  356 ---
+>>>>   arch/arm/dts/meson-gxl-s905x-p212.dts              |  134 --
+>>>>   arch/arm/dts/meson-gxl-s905x-p212.dtsi             |  213 --
+>>>>   arch/arm/dts/meson-gxl-s905x.dtsi                  |   18 -
+>>>>   arch/arm/dts/meson-gxl.dtsi                        |  940 --------
+>>>>   arch/arm/dts/meson-gxm-gt1-ultimate.dts            |   91 -
+>>>>   arch/arm/dts/meson-gxm-khadas-vim2.dts             |  424 ----
+>>>>   arch/arm/dts/meson-gxm-s912-libretech-pc.dts       |   62 -
+>>>>   arch/arm/dts/meson-gxm-wetek-core2.dts             |   85 -
+>>>>   arch/arm/dts/meson-gxm.dtsi                        |  216 --
+>>>>   arch/arm/dts/meson-khadas-vim3.dtsi                |  534 -----
+>>>>   arch/arm/dts/meson-sm1-bananapi-m2-pro.dts         |   97 -
+>>>>   arch/arm/dts/meson-sm1-bananapi-m5.dts             |  221 --
+>>>>   arch/arm/dts/meson-sm1-bananapi.dtsi               |  435 ----
+>>>>   arch/arm/dts/meson-sm1-khadas-vim3l.dts            |  113 -
+>>>>   arch/arm/dts/meson-sm1-odroid-c4.dts               |   48 -
+>>>>   arch/arm/dts/meson-sm1-odroid-hc4.dts              |  140 --
+>>>>   arch/arm/dts/meson-sm1-odroid.dtsi                 |  449 ----
+>>>>   arch/arm/dts/meson-sm1-sei610.dts                  |  616 -----
+>>>>   arch/arm/dts/meson-sm1.dtsi                        |  550 -----
+>>>>   arch/arm/mach-meson/Kconfig                        |    4 +
+>>>>   configs/bananapi-cm4-cm4io_defconfig               |    2 +-
+>>>>   configs/bananapi-m2-pro_defconfig                  |    2 +-
+>>>>   configs/bananapi-m2s_defconfig                     |    2 +-
+>>>>   configs/bananapi-m5_defconfig                      |    2 +-
+>>>>   configs/beelink-gsking-x_defconfig                 |    2 +-
+>>>>   configs/beelink-gt1-ultimate_defconfig             |    2 +-
+>>>>   configs/beelink-gtking_defconfig                   |    2 +-
+>>>>   configs/beelink-gtkingpro_defconfig                |    2 +-
+>>>>   configs/jethub_j100_defconfig                      |    2 +-
+>>>>   configs/jethub_j80_defconfig                       |    2 +-
+>>>>   configs/khadas-vim2_defconfig                      |    2 +-
+>>>>   configs/khadas-vim3_android_ab_defconfig           |    2 +-
+>>>>   configs/khadas-vim3_android_defconfig              |    2 +-
+>>>>   configs/khadas-vim3_defconfig                      |    2 +-
+>>>>   configs/khadas-vim3l_android_ab_defconfig          |    2 +-
+>>>>   configs/khadas-vim3l_android_defconfig             |    2 +-
+>>>>   configs/khadas-vim3l_defconfig                     |    2 +-
+>>>>   configs/khadas-vim_defconfig                       |    2 +-
+>>>>   configs/libretech-ac_defconfig                     |    2 +-
+>>>>   configs/libretech-cc_defconfig                     |    2 +-
+>>>>   configs/libretech-cc_v2_defconfig                  |    2 +-
+>>>>   configs/libretech-s905d-pc_defconfig               |    2 +-
+>>>>   configs/libretech-s912-pc_defconfig                |    2 +-
+>>>>   configs/odroid-c4_defconfig                        |    2 +-
+>>>>   configs/odroid-go-ultra_defconfig                  |    2 +-
+>>>>   configs/odroid-hc4_defconfig                       |    2 +-
+>>>>   configs/odroid-n2_defconfig                        |    2 +-
+>>>>   configs/odroid-n2l_defconfig                       |    2 +-
+>>>>   configs/p212_defconfig                             |    2 +-
+>>>>   configs/radxa-zero2_defconfig                      |    2 +-
+>>>>   configs/radxa-zero_defconfig                       |    2 +-
+>>>>   configs/s400_defconfig                             |    2 +-
+>>>>   configs/sei510_defconfig                           |    2 +-
+>>>>   configs/sei610_defconfig                           |    2 +-
+>>>>   configs/u200_defconfig                             |    2 +-
+>>>>   configs/wetek-core2_defconfig                      |    2 +-
+>>>>   include/dt-bindings/gpio/meson-axg-gpio.h          |  116 -
+>>>>   include/dt-bindings/gpio/meson-g12a-gpio.h         |  114 -
+>>>>   include/dt-bindings/gpio/meson-gxbb-gpio.h         |  148 --
+>>>>   include/dt-bindings/gpio/meson-gxl-gpio.h          |  125 -
+>>>>   include/dt-bindings/power/meson-axg-power.h        |   14 -
+>>>>   include/dt-bindings/power/meson-g12a-power.h       |   13 -
+>>>>   include/dt-bindings/power/meson-gxbb-power.h       |   13 -
+>>>>   include/dt-bindings/power/meson-sm1-power.h        |   18 -
+>>>>   .../reset/amlogic,meson-axg-audio-arb.h            |   19 -
+>>>>   .../dt-bindings/reset/amlogic,meson-axg-reset.h    |  123 -
+>>>>   .../reset/amlogic,meson-g12a-audio-reset.h         |   53 -
+>>>>   .../dt-bindings/reset/amlogic,meson-g12a-reset.h   |  137 --
+>>>>   .../dt-bindings/reset/amlogic,meson-gxbb-reset.h   |  161 --
+>>>>   include/dt-bindings/sound/meson-aiu.h              |   18 -
+>>>>   include/dt-bindings/sound/meson-g12a-toacodec.h    |   10 -
+>>>>   include/dt-bindings/sound/meson-g12a-tohdmitx.h    |   13 -
+>>>>   116 files changed, 42 insertions(+), 21511 deletions(-)
+>>>> ---
+>>>> base-commit: b145877c22b391a4872c875145a8f86f6ffebaba
+>>>> change-id: 20240319-u-boot-of-upstream-46454fded5ea
+>>>>
+>>>> Best regards,
+>>>
+>>
+>> -- 
+>> Best regards,
+>> Viacheslav
+> 
