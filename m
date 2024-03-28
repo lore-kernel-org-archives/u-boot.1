@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8B46C54E67
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 15:09:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEA23C54E67
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 15:09:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03AC3881A0;
-	Thu, 28 Mar 2024 16:08:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 84A9288191;
+	Thu, 28 Mar 2024 16:09:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ui0UeDFf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jWlHC8aA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24ECA88010; Thu, 28 Mar 2024 16:08:57 +0100 (CET)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 9929588191; Thu, 28 Mar 2024 16:09:01 +0100 (CET)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F82488191
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 16:08:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9BF6588010
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 16:08:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-789db18e169so66834785a.1
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:08:55 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-690caa6438aso5636506d6.0
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:08:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711638534; x=1712243334; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1711638538; x=1712243338; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=aWb/4ZrsYGs+Ji1oSeVpKH5WBkb6vzoWw86nOx8yh/E=;
- b=ui0UeDFfX29oQ9k9kAnALlQzq7Dn+UHg1b6Ffdm7ht6+Kc3/qOqVmUJynGP95A/aAp
- 5AD5xdwGZ7W/fk7v2TvnM9+AyUi7oLsGTuOB0aeNO9rke5NF8vNLSaBW8kWP/+NT4nfI
- asPhG21k0/r/ZTpwWeQNJAMiULtDsQeZhmaHs=
+ bh=dI50JMqtJg/9y6coeogZAOuid81KPo/dqPYzXpUsln4=;
+ b=jWlHC8aAigZyaiESMR2CvWw/fYEo6Cz3ynoicoMyhRngarLN94RcEBBEExCbzvc3/b
+ 91LKLka6oYuBEOg7trWR2pWEVdPi9seSNk/dnZA1yHYrHOSJrJhdNK02LWWCNZ5xjBRA
+ eJBfK8NTJ3/zKDq/5h+7XSuAWRmpXIHiD47W8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711638534; x=1712243334;
+ d=1e100.net; s=20230601; t=1711638538; x=1712243338;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aWb/4ZrsYGs+Ji1oSeVpKH5WBkb6vzoWw86nOx8yh/E=;
- b=QgQ8OuaHG9RsGntXss3De4eQ2CxMeaabkoeAeiAo7p207tnW0VuMRxJtZHGta0Ye2b
- H0ltPrmBTP44IsxM1j9if9p3rNeYdW/mAOzU9lu0lPhMU0045XR1RFuj1mbO8bFsg1eb
- CQg1hBnAWxixt2Zp1uxbcdHdsfCvp0zrLug1dPBsNkxb8dGPxo+TQ9iCMamxkuDl8z1p
- B2JzCyeNy58zoFQMbTdsXMZcO/smGLh+GjLWCg4ZwuUcKy6x0TOn0hAuuornp6HyUuTE
- D4ZXRI3h5pe71CDS+bXNUgpHMZCZB4YywyqmK7eV1DiCSGnw0UDsG/pPBDIm54efygii
- k4cA==
+ bh=dI50JMqtJg/9y6coeogZAOuid81KPo/dqPYzXpUsln4=;
+ b=n2LO8GPxCeofbTKqj0nVEa2LdOBeegZEFZ3EjL5gi1uLlyJTiTsa1rC5JBrf13Fl3Z
+ KgERt/tF3gM5RH3/QucwAmWv9bFVB4uRJxEpfm4qR/42lTT7tZKJQSF6tlDxdypXxtl5
+ H/8qyt9UFSsuUmsqq28IR70S7rOhw9us25YOmbnsoHSsXuZyDMlaMbvkQc1+qvdxDdFN
+ r2Z+shDVkq0GGItc1jrCTtUwFalD78bWoMhylLnmFG1xdkpFby1A3SN/bo6x1co9ynWr
+ E9XOBjN7fq1KRTZ65YbpMSTECDiAZgCXWNB/1+hgbXTEocKtzu9cVxTPN3k3r6eV/fQ8
+ bQyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVjLed6lzWEz6U81UPC6vw4hxJfwQZPfGf2vg98oOuxMOww2ZJRd4vfY94t/rPXEF/ilh+W58nIwIowHAYu1LYRZFIQhA==
-X-Gm-Message-State: AOJu0YwGIpsXBltzFM6v4xhnMemV8k0zkRUZBUHQVr4R4Z4B+ZjnRbHx
- bEnqTxndXKHLlo+ZEmKUr4Xcfz2x1piLPZjEvuvWqlDl/APRiV+DwZ+odR92w9fjWnWW5xOWnux
- u
-X-Google-Smtp-Source: AGHT+IEVilWk/byrUZUb4oUztkgkV8PFanSdIQufwe/cKkAVbpxUFxLmGPNdkqlQgeCFXtiXJ6Qqxg==
-X-Received: by 2002:a05:620a:1d81:b0:788:56c0:6006 with SMTP id
- pj1-20020a05620a1d8100b0078856c06006mr3168735qkn.4.1711638534063; 
- Thu, 28 Mar 2024 08:08:54 -0700 (PDT)
+ AJvYcCUL+zh+ZrotaR3+UpZ6r5UwXzRQ5xtjfY/0IaIh5y6QCZqIiC8Qqt+zURsxtB2RLlWonlXR+Gr36o9CyRqBhhUXSJL+5A==
+X-Gm-Message-State: AOJu0YzYKlVGIYPSrAlAFpi9OVRXGE+hWX/4OS4kcykiRukFL1kaZT8N
+ c7nv80+q7MoRjct+VpxqAtElWEACCUorco1br7x9WQTUZxWkayxP51KXapxNf7U=
+X-Google-Smtp-Source: AGHT+IHqgEXJw+DMaq40IF1vv7s2eBs3oPo2+XwU1j/Q9OxghB97H1wRlkYNqy4JirwwbQfwf0bcLg==
+X-Received: by 2002:ad4:4e0e:0:b0:696:797d:bea1 with SMTP id
+ dl14-20020ad44e0e000000b00696797dbea1mr2776289qvb.23.1711638538541; 
+ Thu, 28 Mar 2024 08:08:58 -0700 (PDT)
 Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
  by smtp.gmail.com with ESMTPSA id
- u6-20020ae9c006000000b00789e17a55fbsm583254qkk.131.2024.03.28.08.08.52
+ kl23-20020a056214519700b00690c77505bdsm724349qvb.37.2024.03.28.08.08.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 08:08:53 -0700 (PDT)
-Date: Thu, 28 Mar 2024 11:08:51 -0400
+ Thu, 28 Mar 2024 08:08:57 -0700 (PDT)
+Date: Thu, 28 Mar 2024 11:08:56 -0400
 From: Tom Rini <trini@konsulko.com>
 To: Jacky Chou <jacky_chou@aspeedtech.com>
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, michal.simek@amd.com,
  marek.vasut+renesas@mailbox.org, u-boot@lists.denx.de,
  BMC-SW@aspeedtech.com
-Subject: Re: [PATCH] net: phy: ncsi: Correct the endian of the checksum
-Message-ID: <20240328150851.GT3442575@bill-the-cat>
-References: <20240205080228.140001-1-jacky_chou@aspeedtech.com>
+Subject: Re: [PATCH] net: phy: ncsi: reslove the unaligned access issue
+Message-ID: <20240328150856.GU3442575@bill-the-cat>
+References: <20240205081323.256131-1-jacky_chou@aspeedtech.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="hlcQBgsi8U3R/x8O"
+ protocol="application/pgp-signature"; boundary="VulA62uW+lHXq/VG"
 Content-Disposition: inline
-In-Reply-To: <20240205080228.140001-1-jacky_chou@aspeedtech.com>
+In-Reply-To: <20240205081323.256131-1-jacky_chou@aspeedtech.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,39 +94,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---hlcQBgsi8U3R/x8O
+--VulA62uW+lHXq/VG
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 05, 2024 at 04:02:28PM +0800, Jacky Chou wrote:
+On Mon, Feb 05, 2024 at 04:13:23PM +0800, Jacky Chou wrote:
 
-> There is no need to perform the endian twice here.
+> From the ethernet header is not on aligned, because the length
+> of the ethernet header is 14 bytes.
+> Therefore, unaligned access must be done here.
 >=20
 > Signed-off-by: Jacky Chou <jacky_chou@aspeedtech.com>
-> Reviewed-by: Dan Carpenter <dan.carpenter@linaro.org>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---hlcQBgsi8U3R/x8O
+--VulA62uW+lHXq/VG
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYFiAMACgkQFHw5/5Y0
-tyxg7Av/c7wNcqfZOGZ9lGVHYn//IUDMOcJnnKVKE61ijWt1r5qcUXy780qOIokx
-Zf8ocB122nai/MPB7zLaNovYDK2w7huIchiOlc4G0Deb1dj064uWxO0iPYJEEc5V
-+m+CXFYrPT/RshXVs8bKe5gdEk2bLLn4LUcPeJg1MKByXOd2K2Nbn4TW/j04PSCY
-9XlTr1UAgi2y5wvmzBqwvGHkYMKO0mk1WHUNtZN9kk8Clj7D612yIVe0ufgPz54X
-7Qp1eS2LOKr9sssCRIidevu71Cb2I0PptHegmyiKErGYw1AS9Pgisrbg7+66DuiK
-gyNtU346GR7Yx43Zd4Jw68pAPSxgJcdrUAc6IjJvO5d4CiDFYi+pJAVc/U+YP4Mt
-Hu7f+hb3jB+roYBFRabQZk5YpAnhMahXCU1+wXpE2s/o1W0WHRho++nzwQopm0Nm
-Fk12XQKvcohu+sComFQNOHSKcl2oe90/6TBVY62sYO0r0sqe2r76kcGb1S6TZGTC
-c7+Su3Qj
-=UdJ0
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYFiAgACgkQFHw5/5Y0
+tyxoGQv+KRKuoFr1j8n4tQ4QOFa0kz6EaqT6fqrwoHAZU01JxTyMnLi0OMyLPDc8
+l+Lj2H8li9ptJM/tDV/OCHhVCXqWAYfeQ/E7T7GuY4NKJvN+ydsfkAZqxZLszlxh
+CF2atzwDivrQ0EXGpcsWX21P9Ffwnlobr9d/nvd9/lafwEM7Zpec7uTpVFUY9G/3
+B6JgCdOCen+qLAm3PbQ+b9i+yfh1qx485HfFITu3iL77SNA6D9PGllaitOS+TtC4
+FsyYzwNB4HioLBb6cTaBiD7kg+H/p/DxSi2nAcX/FcI1w2HIeuBB3ziX82HZovOk
+bT9+Rq51ChgxjvJxfosMsu6RvVoolZcMxOZy/g42qY6PNa+5Vz/zLenmSsb9AzWf
+pBFyfolpvq9s0sgGQIzB+xx7xNiZAJTglvoDXLNYuLFOXkqsE0JUsDiBn9+V8vXB
+Zf+a0gjktxloI9nkvv3byG+bvLBssfB/ovC2uK/pyHRtoawgik5qPDeuZBQp9eEd
+Uiuswqls
+=cYCf
 -----END PGP SIGNATURE-----
 
---hlcQBgsi8U3R/x8O--
+--VulA62uW+lHXq/VG--
