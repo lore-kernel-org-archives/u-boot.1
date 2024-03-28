@@ -4,55 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D306FC54E64
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 14:10:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 575E6C54E64
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 14:19:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E97F88166;
-	Thu, 28 Mar 2024 15:10:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
+	by phobos.denx.de (Postfix) with ESMTP id B745D8818E;
+	Thu, 28 Mar 2024 15:19:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="SOa7S9Ky";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="BXfPPQVS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8762288150; Thu, 28 Mar 2024 14:44:42 +0100 (CET)
-Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F16258818E; Thu, 28 Mar 2024 15:19:04 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4819D87E9D
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 14:44:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 00FEB88188
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 15:19:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gnu.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
-Received: from fencepost.gnu.org ([2001:470:142:3::e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1rpq3X-0007lw-KY; Thu, 28 Mar 2024 09:44:36 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
- s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
- From; bh=kn6BLOOit+S33lW4j+ZvdM4TiAcF7xspEcRqe96HfWs=; b=SOa7S9KyhsKnBHQKpKDC
- sI6zE06K92fOztOVqZgDOmjT7HdidMQ3KMPU7culJUsPj/leDZ9wkKv7+kzTyoKPzZOS/w3CPsAv2
- m8yaYaz0dgM0kg7DRVwgxV5jqZAnTxjoVgjl6yeZ+sckmIRm89zFRiLJQp8jbH3O7YQoXiunnh7vR
- ea5XNGn5fKR26bUp5Y81nEYhJSVF5Fw1pfrdm0/VPoKmlsE0lFKHU4t74vyVLmta33G7AyHZKuyyo
- s3A0rgxXG7EXR4iLLNstk+xTKB5smbM0mPTd0FF29x+UQTewnLaIA6Oj/D8p8O6afCdakKgNkEXfq
- 0a97VCwdVdhrkw==;
-From: Mathieu Othacehe <othacehe@gnu.org>
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: =?utf-8?Q?S=C3=A9bastien?= Szymanski <sebastien.szymanski@armadeus.com>,
- Stefano Babic
- <sbabic@denx.de>,  Fabio Estevam <festevam@gmail.com>,  "NXP i.MX U-Boot
- Team" <uboot-imx@nxp.com>,  u-boot@lists.denx.de,  Peng Fan
- <peng.fan@nxp.com>
-Subject: Re: [PATCH v4 0/5] imx93: Conver to OF_UPSTREAM
-In-Reply-To: <20240328-imx93-of-v2-v4-0-338d15a65c36@nxp.com> (Peng Fan's
- message of "Thu, 28 Mar 2024 13:05:44 +0800")
-References: <20240328-imx93-of-v2-v4-0-338d15a65c36@nxp.com>
-Date: Thu, 28 Mar 2024 14:43:50 +0100
-Message-ID: <87r0fucvzd.fsf@gnu.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 028B9CE2B72;
+ Thu, 28 Mar 2024 14:19:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9E894C433F1;
+ Thu, 28 Mar 2024 14:18:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1711635540;
+ bh=12XoTqCVB6OsA23jwH/GgKsouxYbvYUGpR/xFujmHd0=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=BXfPPQVSlOCWG/biejJlAraeeA7cJFtOMYtob4np7kjqjwKsTgs7WgrInEe8MLapm
+ F6RhxfpCl/n8e51AYNNRq5qUpkhdSWzntPsdNMEOiJxGXF0p6I0awSZMqa0iS1ApJN
+ XSG9nEtz/BFS2tCggL5zRZhRpEwCW3KsA3JfaoSKBjEV/eL7C0TKpbEDU2XBBJcnEj
+ ZVe/ve+/VwZsMTfvioMnWzqb74SVm6o1670QDpDDHHegB0BEee6FQFoTMC2iXU/p3i
+ Ba8nfI42vCc5Bb1GokqpG7gaxfeNH7wkEUuLWqhTr6Qvc1eYyFuBYRpb4sh0ZuZOqj
+ JAHT9uISWKexQ==
+Date: Thu, 28 Mar 2024 15:18:56 +0100
+From: Marek =?UTF-8?B?QmVow7pu?= <kabel@kernel.org>
+To: Stefan Roese <sr@denx.de>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH u-boot-mvebu v3 11/18] arm: mvebu: system-controller:
+ Add support for SYSRESET
+Message-ID: <20240328151856.18f5a488@dellmb>
+In-Reply-To: <16784d38-8456-40da-9ee1-180c10e8d905@denx.de>
+References: <20240327162355.24584-1-kabel@kernel.org>
+ <20240327162355.24584-12-kabel@kernel.org>
+ <81922125-aa47-4be2-9e0c-c7dfd57c4ebc@denx.de>
+ <20240328122133.12b0e83f@dellmb>
+ <16784d38-8456-40da-9ee1-180c10e8d905@denx.de>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.39; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Thu, 28 Mar 2024 15:10:19 +0100
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,18 +72,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 28 Mar 2024 14:01:22 +0100
+Stefan Roese <sr@denx.de> wrote:
 
-Hello,
+> On 3/28/24 12:21, Marek Beh=C3=BAn wrote:
+> > On Thu, 28 Mar 2024 11:04:45 +0100
+> > Stefan Roese <sr@denx.de> wrote:
+> >  =20
+> >>> +static int mvebu_sysreset_request(struct udevice *dev, enum sysreset=
+_t type)
+> >>> +{
+> >>> +	struct regmap *regmap =3D syscon_get_regmap(dev->parent);
+> >>> +	uint bit;
+> >>> +
+> >>> +	if (type !=3D SYSRESET_COLD)
+> >>> +		return -EPROTONOSUPPORT;
+> >>> +
+> >>> +	bit =3D MVEBU_GLOBAL_SOFT_RST_BIT;
+> >>> +
+> >>> +	regmap_update_bits(regmap, MVEBU_RSTOUTN_MASK_REG, bit, bit);
+> >>> +	regmap_update_bits(regmap, MVEBU_SYS_SOFT_RST_REG, bit, bit);
+> >>> +
+> >>> +	while (1)
+> >>> +		; =20
+> >>
+> >> A comment before this endless loop might be helpful here. =20
+> >=20
+> > The code does the same as reset_cpu() in cpu.c, and the while() cycle
+> > is not commented there. =20
+>=20
+> Sure, other code might suffer this undocumented endless loop as well.
+> And again, this is more a nitpicking comment than a real requirement.
+>=20
+> > But we can add something like
+> >    /* something has gone wrong if we reach here, so we may as well stay
+> >     * here */
+> >=20
+> > What do you think? Could you amend the patch? =20
+>=20
+> More something like this:
+>=20
+> 	/* Loop while waiting for the reset */
+> 	while (1)
+> 		;
 
->  Mathieu: please help test the boards you maintain when you have time.
+As of now I don't see a need for v4.
 
-I have tried both imx93_var_som and imx93-phyboard-segin
-configurations. Compilation works but I only get garbage on the UART on
-those two different boards.
+I may sent another patches regarding DDR training, but it will be
+made on top of this series.
 
-I will try to conduct further investigations later on, but the booting
-test is KO here.
-
-Thanks,
-
-Mathieu
+Marek
