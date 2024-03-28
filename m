@@ -4,65 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 351A3C54E67
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 09:37:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C50CC54E67
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 09:40:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24C0487EE6;
-	Thu, 28 Mar 2024 10:37:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5FD36880D5;
+	Thu, 28 Mar 2024 10:40:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711618675;
-	bh=Ep656/4o8zc5K4vwXt49p2YC6+PrT+NG1VumITpRRfw=;
+	s=phobos-20191101; t=1711618837;
+	bh=LsgZlIaP42m1QyYX7v5ce4vTiKtjVopO9+nO28pwfho=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=0CtWJSlZXm3bjq7p7ph9NsiL/3xXThppMaqdWWk+8asHlGZqalxsSYWlNzDtMmHsS
-	 yzHs2lUyfTk5auZYKTjkMU+PjnVyugJoOY7aYFFz779O7y+37xpWyzyZGq/y/kM9ka
-	 fG49CUC/HipEQF9g33wy7c0qHWC/v3tZh/pino1TXZGK0vLRQOHkCG6DQyIXYhIaBs
-	 sdx5IU6NGXPiIZB2rTsO6+JVCAskXGKp5EP2lQGmXo1slzlOUEUwMaN05Z8ksFRzZF
-	 fIRy2zkCZ+KVq4OZgPtBtZuDlG2FhsfrePSpCmogds50T+WoFEnMmb0MldpVx6MyNb
-	 aIR9wfj1+INpA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 18B6287FAC; Thu, 28 Mar 2024 10:37:54 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+	b=LqbFtFXom4kM2D85zdyIL1VojqaSgO7zVyGsgxQ/Q3zUIOUm9hGpMJ9bQC6GGqpZ2
+	 AXqOoIn1B9lfZ6r6zfqzhB7qjHg49zFs3VM5knZmwTcmxC5ZaNxNDdIlSY9c6jP/D8
+	 WOt8b2NMl6DLaqXoDP12ekXWSQSPf3a4upbqcKxJqMeKBhLHkarUjgqX1Bh229k4If
+	 Iamqmsou5pTAXSG2ZD0a3a25cIPyfld1K/r6rxSVkvWCLl2IcfJPv8ExC0yoNTfWE4
+	 Au8vFffkc5CUf4QsGkD2ghdOtC71N0AbLQLnjz4mTR4uS0+sVs2+xV3Kap2jp/U0zH
+	 bXFaAmvplyofw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F15F87E9B
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:37:52 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4V4z3f0TcTz9ssM;
- Thu, 28 Mar 2024 10:37:50 +0100 (CET)
-Message-ID: <55229181-3aff-4bff-afb5-df778f5f1849@denx.de>
-Date: Thu, 28 Mar 2024 10:37:47 +0100
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 36CCC880DE;
+ Thu, 28 Mar 2024 10:40:35 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1711618835;
+ bh=LsgZlIaP42m1QyYX7v5ce4vTiKtjVopO9+nO28pwfho=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=cLIOskxtlyb2foZE46JFqjlXjPFPrfpuXnQJcJx1tfSLFrp4xJfP5ymrl8eL5iU+B
+ D9CZoHhFIB6R854OkwmaRIMIdA5VB9aJxpvIBT6BAxjieaOGNr7si4nT1bDFzzhsfW
+ 9nmciZOuFxfSdqHAtLGIGidhqpyAdcJyJPZ4N80Iosp0GN1b4a/AFUx01t3zHsnjRW
+ kIMC/t1XtLOyWcsC+hwUzpckiDCfWmbjJN0jM4fJH7YRH5WU0pTmk2MfPN/micepwT
+ 2HvH7XsYutPvsPXbzrBcExINViFrD+Vu9uVfZVVkKTUP3nEqtPSHY27ZnI7idcACMj
+ TR37BVJN2LDkA==
+Message-ID: <343af186-17b5-4945-ac76-9bd4527f1da7@denx.de>
+Date: Thu, 28 Mar 2024 10:40:34 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] arm: dts: kirkwood: Enable upstream DT on Kirkwood
- boards
-To: Michael Walle <michael@walle.cc>, Tony Dinh <mibodhi@gmail.com>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
- Chris Packham <chris.packham@alliedtelesis.co.nz>,
- Dave Purdy <david.c.purdy@gmail.com>, Evgeni Dobrev
- <evgeni@studio-punkt.com>, Luka Perkov <luka@openwrt.org>,
- Siddarth Gore <gores@marvell.com>, Simon Guinot <simon.guinot@sequanux.org>,
- Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>,
- Walter Schweizer <swwa@users.sourceforge.net>
-References: <20240328021825.17935-1-mibodhi@gmail.com>
- <D057P1KGDU7W.1IWOBHLNV5GX@walle.cc>
+User-Agent: Mozilla Thunderbird
+Subject: Re: Thoughts about U-boot binary size increase
+To: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
+Cc: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>
+References: <20240328102049.10108d5b@wsk>
 Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <D057P1KGDU7W.1IWOBHLNV5GX@walle.cc>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20240328102049.10108d5b@wsk>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 4V4z3f0TcTz9ssM
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,46 +69,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tony,
-
-On 3/28/24 08:41, Michael Walle wrote:
-> Hi,
+On 3/28/24 10:20 AM, Lukasz Majewski wrote:
+> Dear Community,
 > 
-> On Thu Mar 28, 2024 at 3:18 AM CET, Tony Dinh wrote:
->> Enable OF_UPSTREAM to use upstream DT and add marvell/ prefix to the
->> DEFAULT_DEVICE_TREE for Kirkwood boards. And so we can directly build
->> DTBs from dts/upstream/src/arm/marvell, and including *-u-boot.dtsi
->> files from arch/arm/dts/ directory.
->>
->> Background:
->>
->> Hi Stefan,
->> Hi Michael,
->>
->> I did a survey and we currently have 28 Kirkwood boards. Using some
->> commands and filters, here are the finding.
->>
->> git grep -li arch_kirkwood configs | xargs grep DEVICE_TREE | cut -d '"' -f2 | xargs -n1 sh -c 'diff -qs  arch/arm/dts/$1.dts dts/upstream/src/arm/marvell/$1.dts' sh | grep differ
->>
->> diff: dts/upstream/src/arm/marvell/kirkwood-atl-sbx81lifkw.dts: No such file or directory
->> diff: dts/upstream/src/arm/marvell/kirkwood-atl-sbx81lifxcat.dts: No such file or directory
+> I'd like to share with you some thoughts about growth of u-boot's
+> binary size for SPL and u-boot proper.
 > 
-> ...
+> Board: XEA
+> SoC  : imx287 (still in active production)
+> Problem: SPL size constrained to ~55 KiB (This cannot be exceeded).
+> 	 Board design constraints u-boot proper size to less than ~448
+> 	 KiB
 > 
-> Are you sure you want to have all this text in the commit log?
+> 
+> When XEA was added (2019.07):
+> 	- u-boot.sb (SPL): 37 KiB
+> 	- u-boot.img 	 : 401 KiB
+> 
+> Now (2024.04):
+> 	- u-boot.sb (SPL): 40 KiB
 
-This is also my concern. Even though I love descriptive commit messages,
-this seems to be a bit too much IMHO. Not sure if and how to get these
-findings of yours archived otherwise.
+Do you know which symbol(s) grew in here ?
 
-> You seem to have forgotten my tag:
-> Tested-by: Michael Walle <michael@walle.cc> # on lschv2
+> 	- u-boot.img 	 : 427 KiB
+> 
+> (With a _lot_ of effort put to reduce the size)
+> 
+> Hence, the question - would it be possible to take more concern about
+> the binary size growth?
+> 
+> Maybe CI could catch patches, which enable by default some features and
+> the size is unintentionally increased?
 
-Tony, many thanks to work on this consolidation. Very impressive
-results. I can't test anything of this though, but my plan would be
-to pull this in the upcoming merge window, if nobody complains.
-
-Reviewed-by: Stefan Roese <sr@denx.de>
-
-Thanks,
-Stefan
+Try and set CONFIG_BOARD_SIZE_LIMIT and CONFIG_SPL_SIZE_LIMIT for this 
+board, that would trip build error if the size grows too large.
