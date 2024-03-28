@@ -4,91 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2AC0CD11DD
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 18:02:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 403D3CD11DF
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 18:43:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D865588206;
-	Thu, 28 Mar 2024 19:00:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2FA15881DA;
+	Thu, 28 Mar 2024 19:43:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I5kfjqVp";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lm5u5ZOm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DB979881F3; Thu, 28 Mar 2024 19:00:00 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id C2851881E1; Thu, 28 Mar 2024 19:43:35 +0100 (CET)
+Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
+ [IPv6:2607:f8b0:4864:20::c2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 638A8881DA
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 18:59:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AE037881D7
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 19:43:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-341cf28e013so767995f8f.3
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:59:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-oo1-xc2d.google.com with SMTP id
+ 006d021491bc7-5a46ad0d981so244385eaf.1
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 11:43:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711648798; x=1712253598; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=2rIilUL3fPgdL00EeRjYvSoOr0+tfQS+h1cCC5JbimE=;
- b=I5kfjqVpwcB/0Gp8M8SJpbDZAaZzXCtGrA7xgpiGvRyh879yMn+pKi/VGQE5kNyJpm
- z+CAKhv7+SSDRgiC9v94I1qAkOO6dMbkB47vuM3bOAwaVkJo5bzQKrMqLoelRzLOcnDr
- 86xqCnPNYawsDpnpL3QgjPteuMX/Yh27YIki3/2V3DLLjr5vuRnbrxvL5rdoKEf++c7C
- BNoO8nZE4t70iPvr61CBKw75HakBq8eHKW2WpkKAaS/4S7oPLDuU7ywux4/ywufYBAB4
- eBfoN4OP4IOCsSk+Dc2Id/5wSE+gmrhldVZN2GLZnTxedm61nnD6ZRQr1h0woYWibW1y
- 1TgA==
+ d=gmail.com; s=20230601; t=1711651412; x=1712256212; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=/yjFa+g9tB+fBdQiyiWpmngG1WC9Tb5wgLFQ8Bz69iI=;
+ b=lm5u5ZOmjme4XUYpjLmtxrCzxsZVbUesj4Ac7JzdziA8+sTXIn+WSaBx8yGxItUJXd
+ pdTshHwc67SimiKvp3e+kP0RJxWbCGcdBSzIF2KmBOkQUnpSguBIF06QsKVbeABI+Q9V
+ vOMFzq2NbPx2A52ThkrnchZ7YpkR+0dRhBjuUJrnfpjaMT6FEXHCt3l95K38/Dfk4Zhu
+ SeggWE69+Pdp3sw1Q+t88bGmWbFzx4HzZzeTRSpKB/WfvIUssvDeRU61HdXmtDZv8cAY
+ FuGslJIHuuSdfVJaWqMIIOBh+powsASgRWsnmsH8hKuozjXllGRdK03b1savvbTYQFVp
+ +JCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711648798; x=1712253598;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2rIilUL3fPgdL00EeRjYvSoOr0+tfQS+h1cCC5JbimE=;
- b=IKPJ7Uqx+bksd27kQYu6+snJDOyWtTY6w43C49uEDIMKwcLOwK380RBRn4s1ModD7i
- t/xsCP566EbF6V56sHyQKWPNpxuuAYZp/hOXqy8uqMzN3gomz1M2Rd5Fk/DKkNPkj+uK
- l9sKnxpyL3qsG7ouM9wZcKQE93FwVCy6kB4f0yefYO5lIzOGGHLer3lxM0L8PzCjuepi
- Ez6kzlIMT1dSQuBmlK1ahIowlSOS1w70dV6ee9sUqUm9MC4Dt+Dl2k2cnpg46iZY2tz7
- MFQt7INxireDTXStlreO9cnYuY/6ETBXG2ddStkMgQ+3o7b57ZKZI6pQGqWbwYJMuMQA
- 33/Q==
-X-Gm-Message-State: AOJu0YwU6+TJcwuBTKKL/kv4ePOlUVy+77WLFXlvDt04B1QaqGw92l2G
- RmFyg6c+GZF2l53xPvBraOC6mwqwhAfQNjFmjEeZnLjtEdA53pniZNOCWcRNvJgv77nfy4lef7p
- 3
-X-Google-Smtp-Source: AGHT+IEKnYH+hmQ41BxEwLeXif5Vq4SBfYvLO8afUoAsUh14fRRqRX4smMnwnRosgE1Upw+UKTjxcA==
-X-Received: by 2002:adf:fa42:0:b0:33e:8b93:87c6 with SMTP id
- y2-20020adffa42000000b0033e8b9387c6mr2678093wrr.42.1711648797948; 
- Thu, 28 Mar 2024 10:59:57 -0700 (PDT)
-Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
+ d=1e100.net; s=20230601; t=1711651412; x=1712256212;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/yjFa+g9tB+fBdQiyiWpmngG1WC9Tb5wgLFQ8Bz69iI=;
+ b=OgyNl63Pa2nKzZ/SnYVp2AGfcEY4gFjWbiy4oPxE1EYy2WyMcM8kGE3aK8vBm/xm+F
+ vdo3JQvklZjE7xpyIYM7L/vjdVGFwTIkQ3AYsppTJfuFTGk9YbXRW7C3opuUgxZNi4Jd
+ ebY7c+VmFVX+ObRmIb1G3pGozHHptK6stCNoAf0bi+RRVV6bJm3fQGUC6MRNARYIpcR+
+ dPDGNnVC2q7sOKvfph13Y5N+MSPaqq1ftQPxX1V4WMbyI7zqLJadfsY2PvTgsrhD7edY
+ oxQA2BC4FaO6DPL43Fa0gj5qCsVwfbMIpkK8kVYrOA+iixyrTTni9B6sVNh8U87RnNVK
+ /piA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWC95N3vs0K1ZoiHXFMhgit4EjE9Uct+bj3m6b9aH3r8oqroBfQlXJidQ53mp5eUobacnsnpHFqm6pI0Bk77sAHoM8nqA==
+X-Gm-Message-State: AOJu0YwjlaZ0C+cZdnhs2TrKPt3Jd/ibO+2YkELi/z6ePA/8HaqMettc
+ 6pOoNta5LnJaFSX1g4SL6DhXv+qpmBgjAiVOS8+G0mJdthCxZ9I8
+X-Google-Smtp-Source: AGHT+IFXEDEB42BKTV66I9QrOmOFdmt7IY3HiqeItH43Ci4FrW2Hzbl1PuYnf5OZddmU+NoW+3cxrQ==
+X-Received: by 2002:a05:6358:3423:b0:17e:b7a0:2ec6 with SMTP id
+ h35-20020a056358342300b0017eb7a02ec6mr177930rwd.3.1711651412384; 
+ Thu, 28 Mar 2024 11:43:32 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:918f:1fce:e47c:7f91])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a5d4acd000000b00341e5f487casm2292237wrs.46.2024.03.28.10.59.56
+ g1-20020a63f401000000b005e4fa511505sm1630737pgi.69.2024.03.28.11.43.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 10:59:57 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 28 Mar 2024 17:59:22 +0000
-Subject: [PATCH v5 16/16] usb: gadget: UMS: fix 64-bit division on ARM32
+ Thu, 28 Mar 2024 11:43:31 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: festevam@gmail.com
+Cc: peng.fan@nxp.com,
+	u-boot@lists.denx.de
+Subject: [PATCH] imx8mq_evk: Remove FEC and Ethernet PHY board code
+Date: Thu, 28 Mar 2024 15:43:19 -0300
+Message-Id: <20240328184319.2572139-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240328-b4-qcom-livetree-v5-16-4e98228b3d03@linaro.org>
-References: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
-In-Reply-To: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2332;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=GILrVlJTLB7vGoUqwXYfiSFWeP5Fqv5LLGhQ18mVlh4=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTWDVwHLU3WZuzJkhAQvvLzAOPldO9bixbuywjcsfvp+
- tOPN4QkdZSyMAhyMMiKKbKIn1hm2bT2sr3G9gUXYOawMoEMYeDiFICJ1Kgz/E/m8La2Z4haV5PP
- LM6scOvA0flRgQxOctVrqkNX6KotWMPIMFN1Xb3RwyarF2mlCYcmqXqudrzP2Xqmxdv+7ZN/5hX
- XXwMA
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,73 +91,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The patch introducing support for dynamic sector sizes changed the types
-used in some divisions, resulting in the compiler attempting to use
-libgcc helpers (__aeabi_ldivmod). Replace these divisions with calls to
-lldiv() to handle this correctly.
+With Ethernet DM in place, there is no longer the need for having
+the board_phy_config() and setup_fec() functions anymore.
+    
+Remove them.
 
-Fixes: 74e56e0c5065 ("usb: gadget: UMS: support multiple sector sizes")
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+Successfully tested a TFTP transfer after these changes.
+
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
 ---
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- drivers/usb/gadget/f_mass_storage.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+ board/freescale/imx8mq_evk/imx8mq_evk.c | 30 -------------------------
+ 1 file changed, 30 deletions(-)
 
-diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
-index d880928044f4..ef90c7ec7fb5 100644
---- a/drivers/usb/gadget/f_mass_storage.c
-+++ b/drivers/usb/gadget/f_mass_storage.c
-@@ -239,8 +239,9 @@
- /* #define VERBOSE_DEBUG */
- /* #define DUMP_MSGS */
+diff --git a/board/freescale/imx8mq_evk/imx8mq_evk.c b/board/freescale/imx8mq_evk/imx8mq_evk.c
+index e39480585609..e577e4d9ccaa 100644
+--- a/board/freescale/imx8mq_evk/imx8mq_evk.c
++++ b/board/freescale/imx8mq_evk/imx8mq_evk.c
+@@ -54,38 +54,8 @@ int board_early_init_f(void)
+ 	return 0;
+ }
  
- #include <config.h>
-+#include <div64.h>
- #include <hexdump.h>
- #include <log.h>
- #include <malloc.h>
- #include <common.h>
-@@ -768,10 +769,10 @@ static int do_read(struct fsg_common *common)
- 		}
- 
- 		/* Perform the read */
- 		rc = ums[common->lun].read_sector(&ums[common->lun],
--				      file_offset / curlun->blksize,
--				      amount / curlun->blksize,
-+				      lldiv(file_offset, curlun->blksize),
-+				      lldiv(amount, curlun->blksize),
- 				      (char __user *)bh->buf);
- 		if (!rc)
- 			return -EIO;
- 
-@@ -942,10 +943,10 @@ static int do_write(struct fsg_common *common)
- 			amount = bh->outreq->actual;
- 
- 			/* Perform the write */
- 			rc = ums[common->lun].write_sector(&ums[common->lun],
--					       file_offset / curlun->blksize,
--					       amount / curlun->blksize,
-+					       lldiv(file_offset, curlun->blksize),
-+					       lldiv(amount, curlun->blksize),
- 					       (char __user *)bh->buf);
- 			if (!rc)
- 				return -EIO;
- 			nwritten = rc * curlun->blksize;
-@@ -1058,10 +1059,10 @@ static int do_verify(struct fsg_common *common)
- 		}
- 
- 		/* Perform the read */
- 		rc = ums[common->lun].read_sector(&ums[common->lun],
--				      file_offset / curlun->blksize,
--				      amount / curlun->blksize,
-+				      lldiv(file_offset, curlun->blksize),
-+				      lldiv(amount, curlun->blksize),
- 				      (char __user *)bh->buf);
- 		if (!rc)
- 			return -EIO;
- 		nread = rc * curlun->blksize;
-
+-#ifdef CONFIG_FEC_MXC
+-static int setup_fec(void)
+-{
+-	struct iomuxc_gpr_base_regs *gpr =
+-		(struct iomuxc_gpr_base_regs *)IOMUXC_GPR_BASE_ADDR;
+-
+-	/* Use 125M anatop REF_CLK1 for ENET1, not from external */
+-	clrsetbits_le32(&gpr->gpr[1], BIT(13) | BIT(17), 0);
+-	return set_clk_enet(ENET_125MHZ);
+-}
+-
+-int board_phy_config(struct phy_device *phydev)
+-{
+-	/* enable rgmii rxc skew and phy mode select to RGMII copper */
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x1f);
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x8);
+-
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x05);
+-	phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x100);
+-
+-	if (phydev->drv->config)
+-		phydev->drv->config(phydev);
+-	return 0;
+-}
+-#endif
+-
+ int board_init(void)
+ {
+-#ifdef CONFIG_FEC_MXC
+-	setup_fec();
+-#endif
+-
+ #if defined(CONFIG_USB_DWC3) || defined(CONFIG_USB_XHCI_DWC3)
+ 	init_usb_clk();
+ #endif
 -- 
-2.44.0
+2.34.1
 
