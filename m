@@ -4,58 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C533CC54E64
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 10:18:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BEA7CD11DF
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 10:22:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B0CA288140;
-	Thu, 28 Mar 2024 11:18:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9B86B88132;
+	Thu, 28 Mar 2024 11:22:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711621127;
-	bh=sMM4I6VQ0As82ZKBPkMkLfZQfJ6vvNw4SaaaJ7X2N0U=;
+	s=phobos-20191101; t=1711621336;
+	bh=dmL9+claA7D3D8UsaEz+XNiO6iUq1GNU47dd5/LUzk4=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=WYVbzaEvUzRp+tU1fcaBMh9oG8pKYQoJxvuFJ0SpOedu7iu6Vga5v0qdpAnXG/aH3
-	 UppFMLoX/tmWXI1C6voPAzUT90W4ClBtyaWa8vz44rBoI45ilZcKhkIpeXYffKO83q
-	 ZZKgKCcfbiteiEu8tV5Gg2BcsEygdXFPccjibA4dQ3bCKAx50GFWmDrRNIdftQ4vPM
-	 USpJq0P7GMGLu3Rs9OJ5q+2wV/MO1F8MTb4PyXvvRx7gkMTuA40ytybwDzpZWctsHB
-	 22zJ6e24pJ2Hdlt3Slv/92xC+OSpmt3nVkwKGLLvUSv6QjkMxTrpYYwqT9r5zKAlr6
-	 Sc2bhXelV279A==
+	b=lZ9McJP4mvCS7qegLTh80377wKB1LdGy/ZvxjAagxA5Qc2EEUiN9IZWNNOfSDwgZX
+	 gPoIPBNpxUy2ecbOkMmAjRNrq+xTGCHzigchCxpwJ3bu9OpqFkgATLTu6G9w9zgiBe
+	 rPdJyGFzlxHSRzLKOADFcLKLB7Zk2V1px9lrx9UHpqozOMl4NvQ3qgqwTdrPgu7jY4
+	 tApZ4fEEIfvAoff013TecmZY5gT8S1/G+MUQWcmwyJQd8MA17TVCRp3rvxO7DYx06d
+	 DMxA1N7wGa6kTeSgnK0H6twf5XMLqXNAvZQwFJs+dOn9zDzkH2QK2N2P90ZktMnB5M
+	 I9UdoLZPK9Qog==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D65A8813C; Thu, 28 Mar 2024 11:18:47 +0100 (CET)
+ id 796F38813C; Thu, 28 Mar 2024 11:22:15 +0100 (CET)
 Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
  [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80F9688141
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 11:18:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5E9D8812B
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 11:22:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4V4zyq4nCbz9srk;
- Thu, 28 Mar 2024 11:18:43 +0100 (CET)
-Message-ID: <929e3d62-e62e-49a1-98f3-06a7e7fc8909@denx.de>
-Date: Thu, 28 Mar 2024 11:18:43 +0100
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4V502q4vmHz9srn;
+ Thu, 28 Mar 2024 11:22:11 +0100 (CET)
+Message-ID: <6c352943-77f0-426b-909e-fa1263085ea8@denx.de>
+Date: Thu, 28 Mar 2024 11:22:11 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH u-boot-mvebu v3 15/18] arm: mvebu: turris_omnia: Enable
- poweroff command via sysreset in defconfig
+Subject: Re: [PATCH u-boot-mvebu v3 16/18] cmd: rng: Print "Abort" on -EINTR
 Content-Language: en-US
 To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
 Cc: u-boot@lists.denx.de
 References: <20240327162355.24584-1-kabel@kernel.org>
- <20240327162355.24584-16-kabel@kernel.org>
+ <20240327162355.24584-17-kabel@kernel.org>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240327162355.24584-16-kabel@kernel.org>
+In-Reply-To: <20240327162355.24584-17-kabel@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4V4zyq4nCbz9srk
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,7 +70,12 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/27/24 17:23, Marek Behún wrote:
-> Enable support for the poweroff command via sysreset for Turris Omnia.
+> In the rng command, print
+>    Abort
+> instead of
+>    Reading RNG failed
+> if the error number is -EINTR, which can happen if the user pressed
+> CTRL-C.
 > 
 > Signed-off-by: Marek Behún <kabel@kernel.org>
 
@@ -83,29 +85,34 @@ Thanks,
 Stefan
 
 > ---
->   configs/turris_omnia_defconfig | 2 ++
->   1 file changed, 2 insertions(+)
+>   cmd/rng.c | 7 ++++---
+>   1 file changed, 4 insertions(+), 3 deletions(-)
 > 
-> diff --git a/configs/turris_omnia_defconfig b/configs/turris_omnia_defconfig
-> index 9d5171c6a8..0df0f3c90b 100644
-> --- a/configs/turris_omnia_defconfig
-> +++ b/configs/turris_omnia_defconfig
-> @@ -65,6 +65,7 @@ CONFIG_CMD_I2C=y
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_MTD=y
->   CONFIG_CMD_PCI=y
-> +CONFIG_CMD_POWEROFF=y
->   CONFIG_CMD_SATA=y
->   CONFIG_CMD_SPI=y
->   CONFIG_CMD_USB=y
-> @@ -114,6 +115,7 @@ CONFIG_DEBUG_UART_SHIFT=2
->   CONFIG_SYS_NS16550=y
->   CONFIG_KIRKWOOD_SPI=y
->   CONFIG_SYSRESET=y
-> +CONFIG_SYSRESET_CMD_POWEROFF=y
->   CONFIG_USB=y
->   CONFIG_USB_XHCI_HCD=y
->   CONFIG_USB_EHCI_HCD=y
+> diff --git a/cmd/rng.c b/cmd/rng.c
+> index 52f722c7af..48ba67061b 100644
+> --- a/cmd/rng.c
+> +++ b/cmd/rng.c
+> @@ -17,7 +17,7 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>   	u8 buf[64];
+>   	int devnum;
+>   	struct udevice *dev;
+> -	int ret = CMD_RET_SUCCESS;
+> +	int ret = CMD_RET_SUCCESS, err;
+>   
+>   	switch (argc) {
+>   	case 1:
+> @@ -46,8 +46,9 @@ static int do_rng(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>   
+>   	n = min(n, sizeof(buf));
+>   
+> -	if (dm_rng_read(dev, buf, n)) {
+> -		printf("Reading RNG failed\n");
+> +	err = dm_rng_read(dev, buf, n);
+> +	if (err) {
+> +		puts(err == -EINTR ? "Abort\n" : "Reading RNG failed\n");
+>   		ret = CMD_RET_FAILURE;
+>   	} else {
+>   		print_hex_dump_bytes("", DUMP_PREFIX_OFFSET, buf, n);
 
 Viele Grüße,
 Stefan Roese
