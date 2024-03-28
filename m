@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E852C54E64
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 12:18:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC950C54E64
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 12:21:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87E4F87EDD;
-	Thu, 28 Mar 2024 13:18:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 294B187EAF;
+	Thu, 28 Mar 2024 13:21:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ccaesXYx";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WM+R3zJm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DAC488146; Thu, 28 Mar 2024 13:18:56 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id C8A9E88148; Thu, 28 Mar 2024 13:21:31 +0100 (CET)
+Received: from mail-pf1-x42d.google.com (mail-pf1-x42d.google.com
+ [IPv6:2607:f8b0:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B7E587EAF
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 13:18:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BE1187E8E
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 13:21:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-29df844539bso260224a91.1
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 05:18:54 -0700 (PDT)
+Received: by mail-pf1-x42d.google.com with SMTP id
+ d2e1a72fcca58-6ea7b38f773so191099b3a.0
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 05:21:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711628333; x=1712233133; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GX5famJQ+azUGPNugNhPeUfYlVFpsDWpWXhuP+iHzWY=;
- b=ccaesXYx+GfEw4jXAZzUhLhAQ50AZ9bVhVXChNndPK9pvMEfVq8XhKGlH5LLV4SXLo
- I1jL0j0vuatt8Kv+PJTrGuyyEA6jIj5NHVjl89agp8kLIV3pI/DprvEQLOBm8HmKLgIw
- wxFXF6IZ+JNb0bEnRC+VhQ5TPk4j+W7aKqrZDFBkw3B/k9QvtICBzdVOrzS0ioYisM+h
- rbFB2Tfct8gfw1aAL270V181phAf2jUF0PPVBVSvd6py2K+EMpJl3Z4Hlps5yMlS2f1k
- gd/cyAMVbr13Ijf49Sjn4f+HiyvKD60jiGS4MgvvQg0+d+KchSw5YNKnGrRrG5y9J0kt
- d1vw==
+ d=gmail.com; s=20230601; t=1711628488; x=1712233288; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=bkVOahQLydHEod93fC0SSmcRUZmoYjI/cICd23zyl14=;
+ b=WM+R3zJmB5lIMtWl2ciiFrzA4Qr440O8YNz9YZHiHrChZ7PFmi4+RvzmbkwabvbUbS
+ MCSKBv3wMhrJM/IMAEdm/tIpa1jmh3dNIOrQhrmgKydx8pFMZsA8fIA+LcbERwCm1N1+
+ 7vbnW/Qh2rSn7Wivp/o/unw9SVuJlmnfdRc/iqkqzy/zpCmnaQF/wYfSfuHPsVIAy6r1
+ T4ShKjuTg8dj0sXl1jHicWwN1X9/cQQlkFBE7xwcxIoSH2418vZQ4wYz/uF29OacZPz5
+ 4jkf9ubPlQdJsjxxk4ZllH5K79u4EdDuukzZsfAnNTt5LPngnIAtbTQQUvCWx00hjjCj
+ aPUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711628333; x=1712233133;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GX5famJQ+azUGPNugNhPeUfYlVFpsDWpWXhuP+iHzWY=;
- b=PuuZOJlXOoW2/AmH1qNemtPr4KLA/p3+2rC5YlQux2ACPoV1kMVHWZzfrjs33ZWikd
- vvF3pkchnHejtTaZ4GpfsJh6s60vefdIMGKhYlwwAWnIVGzkZ4LpItDRggAQTUatRxDk
- zXo/YLu3JvhEW5xmCUzgqULFye8RU/1hSwv/YcBE30uh1H9FQIqb5e1/NiNdjykhturY
- A+eEB90cn/9q70Y4wtfRUaxkT3+1a92R+y5+vA60lI2ui5TMlCTk8BfEKNavForcYh0b
- ZuNHqCOkWYUdzsUYPe0gVuNyhRTZh3sh+MGEe2VLZfer4jxQfmSkZSpYlebAL6yf18xz
- Utiw==
+ d=1e100.net; s=20230601; t=1711628488; x=1712233288;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bkVOahQLydHEod93fC0SSmcRUZmoYjI/cICd23zyl14=;
+ b=nYWmNxNNQg4RHFBiAYZ4AVztyzxg+Ja5uopZ2g+Q3fb05hUGjAVrkafhEESp/a2Syp
+ Uh5V/NgQscgiyZFiseswq6tm8srXEY473alNO6qBPSg9xoja3VbsHDjThAwXzAvva94p
+ lmojotaNP2X/kCK5tBJeUXXI7P/s2yvy3ykFezSHumlqDr/aJT3kwY+p/mhErBfd+K+q
+ k+TrqsfktwqAjjWplG03ipDSpemvmi+qTB6qyr8THe3zr/948GI1zv25O2zSf+pXm9iP
+ v6k4FUgrvcfcg00qS4XwItoGMbzjIAre9wyoDqguXyZB0pCNMO2XS7GS7riCQBx2tAS7
+ cvmA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVIIpQXEjdPvMS+F1VfjM8BYR4fqN+HoYxpBR5Ri6LSKjLn4f8NSu04cM3LNz9l2Gx/wafR4aYxj6OA7YTHvXJH6pj3jg==
-X-Gm-Message-State: AOJu0YwUA7ge+LQ5ENbJZrqcrGP+ws7QBll6m8CKI4a8+2xohiQPYVt5
- ZpnfLXJCYoJIzQGLCIoeNHWHViRrKkc5B1GVNx4FAuz3KyM3vK1t7tAL3E5YVNEBkIx7zq5aoqF
- QwiDZSn9dKfStcCX+nzlA7n2CNz0=
-X-Google-Smtp-Source: AGHT+IH1aMV4re4HRz0LeMnx/0iGN3XmRKEkPfCzqN9pGZMy4/UL4ylDGlYsb+WbBJFY77b7T2ie+Gjxja69J+8JLlg=
-X-Received: by 2002:a17:90b:b0f:b0:2a2:e98:83c with SMTP id
- bf15-20020a17090b0b0f00b002a20e98083cmr32215pjb.3.1711628332780; Thu, 28 Mar
- 2024 05:18:52 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240328102049.10108d5b@wsk>
-In-Reply-To: <20240328102049.10108d5b@wsk>
+ AJvYcCV6Vv5acZfd9AG0kApgUXcKBsgId0mjw1Nk6qaTDiF7rLSolyK/PzFGiN8IIb1ki2GqW1XXhYnWuL8OWgBl/LXuoOFnFg==
+X-Gm-Message-State: AOJu0YwwP7r7EpSwe7017PqNTrnMvyCBTi3qgfGcZ5cKIGzUxeeX7YDy
+ cjKqLpK7R9pDUIvVZ1Onpo4dbVyVcCLmzGKmMtf9TQcBvSVnATVq
+X-Google-Smtp-Source: AGHT+IE5nD3MRXevESDTb+0Mf5gNdNGsl8NRiWfxnoYb8x+9Ed9Fwz6bc78PPOZSEElhlSqaJq4ADg==
+X-Received: by 2002:a05:6a20:da8d:b0:1a3:4721:df94 with SMTP id
+ iy13-20020a056a20da8d00b001a34721df94mr3066932pzb.0.1711628487885; 
+ Thu, 28 Mar 2024 05:21:27 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:918f:1fce:e47c:7f91])
+ by smtp.gmail.com with ESMTPSA id
+ p1-20020a170902e74100b001dd2bacf30asm1432184plf.162.2024.03.28.05.21.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Mar 2024 05:21:27 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 28 Mar 2024 09:18:40 -0300
-Message-ID: <CAOMZO5CKc_CGgzu3Xhba-FKN1svJt9V2if6yv3_sP7cjA-rPHg@mail.gmail.com>
-Subject: Re: Thoughts about U-boot binary size increase
-To: Lukasz Majewski <lukma@denx.de>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
- Stefano Babic <sbabic@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: festevam@gmail.com
+Cc: baruch@tkos.co.il, trini@konsulko.com, josua@solid-run.com,
+ u-boot@lists.denx.de, cgmeiner@igalia.com
+Subject: [PATCH] mx6cuboxi: Fix Ethernet after DT sync with Linux
+Date: Thu, 28 Mar 2024 09:21:16 -0300
+Message-Id: <20240328122116.2460855-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,74 +91,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Lukasz,
+From: Josua Mayer <josua@solid-run.com>
 
-On Thu, Mar 28, 2024 at 6:20=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wro=
-te:
->
-> Dear Community,
->
-> I'd like to share with you some thoughts about growth of u-boot's
-> binary size for SPL and u-boot proper.
->
-> Board: XEA
-> SoC  : imx287 (still in active production)
-> Problem: SPL size constrained to ~55 KiB (This cannot be exceeded).
->          Board design constraints u-boot proper size to less than ~448
->          KiB
->
->
-> When XEA was added (2019.07):
->         - u-boot.sb (SPL): 37 KiB
->         - u-boot.img     : 401 KiB
->
-> Now (2024.04):
->         - u-boot.sb (SPL): 40 KiB
->         - u-boot.img     : 427 KiB
->
-> (With a _lot_ of effort put to reduce the size)
->
-> Hence, the question - would it be possible to take more concern about
-> the binary size growth?
->
-> Maybe CI could catch patches, which enable by default some features and
-> the size is unintentionally increased?
->
-> I'm open for any feedback and thoughts on "stopping" the binary size
-> increase.
+The i.MX6 Cubox-i and HummingBoards can have different PHYs at varying
+addresses. U-Boot needs to auto-detect which phy is actually present,
+and at which address it is responding.
 
-In addition to adding CONFIG_BOARD_SIZE_LIMIT and CONFIG_SPL_SIZE_LIMIT che=
-cks,
-could you try the change below?
+Auto-detection from multiple phy nodes specified in device-tree does not
+currently work correct. As a work-around merge all three possible phys
+into one node with the special address 0xffffffff which indicates to the
+generic phy driver to probe all addresses.
+Also fixup this fake address before booting Linux, *if* booting with
+U-Boot's internal dtb.
 
-diff --git a/arch/arm/mach-imx/mxs/Kconfig b/arch/arm/mach-imx/mxs/Kconfig
-index d2e4205c5ce5..ee8c23d0e04f 100644
---- a/arch/arm/mach-imx/mxs/Kconfig
-+++ b/arch/arm/mach-imx/mxs/Kconfig
-@@ -32,6 +32,7 @@ if ARCH_MX28
+Signed-off-by: Josua Mayer <josua@solid-run.com>
+[fabio: Added the changes to imx6qdl-sr-som-u-boot.dtsi.]
+Signed-off-by: Fabio Estevam <festevam@gmail.com>
+Tested-by: Christian Gmeiner <cgmeiner@igalia.com>
+---
+ ...qdl-hummingboard2-emmc-som-v15-u-boot.dtsi |  1 +
+ arch/arm/dts/imx6qdl-sr-som-u-boot.dtsi       | 40 +++++++++++++++++++
+ board/solidrun/mx6cuboxi/mx6cuboxi.c          |  8 +++-
+ 3 files changed, 48 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/imx6qdl-sr-som-u-boot.dtsi
 
- config MX28
-        bool
-+       select LTO
-        default y
+diff --git a/arch/arm/dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi b/arch/arm/dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi
+index e9b188ed6587..358cf8abc4ff 100644
+--- a/arch/arm/dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi
++++ b/arch/arm/dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi
+@@ -1,6 +1,7 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+ #include "imx6qdl-u-boot.dtsi"
++#include "imx6qdl-sr-som-u-boot.dtsi"
+ 
+ / {
+ 	board-detect {
+diff --git a/arch/arm/dts/imx6qdl-sr-som-u-boot.dtsi b/arch/arm/dts/imx6qdl-sr-som-u-boot.dtsi
+new file mode 100644
+index 000000000000..4c5f043ea92a
+--- /dev/null
++++ b/arch/arm/dts/imx6qdl-sr-som-u-boot.dtsi
+@@ -0,0 +1,40 @@
++// SPDX-License-Identifier: (GPL-2.0 OR MIT)
++
++#include <dt-bindings/gpio/gpio.h>
++
++&fec {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_microsom_enet_ar8035>;
++	phy-handle = <&phy>;
++	phy-mode = "rgmii-id";
++
++	/*
++	 * The PHY seems to require a long-enough reset duration to avoid
++	 * some rare issues where the PHY gets stuck in an inconsistent and
++	 * non-functional state at boot-up. 10ms proved to be fine .
++	 */
++	phy-reset-duration = <10>;
++	phy-reset-gpios = <&gpio4 15 GPIO_ACTIVE_LOW>;
++	status = "okay";
++
++	mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		/delete-node/ ethernet-phy@1;
++		/delete-node/ ethernet-phy@4;
++
++		phy: ethernet-phy@0 {
++			/*
++			 * The PHY can appear either:
++			 * - AR8035: at address 0 or 4
++			 * - ADIN1300: at address 1
++			 * Actual address being detected at runtime.
++			 */
++			reg = <0xffffffff>;
++			qca,clk-out-frequency = <125000000>;
++			qca,smarteee-tw-us-1g = <24>;
++			adi,phy-output-clock = "125mhz-free-running";
++		};
++	};
++};
+diff --git a/board/solidrun/mx6cuboxi/mx6cuboxi.c b/board/solidrun/mx6cuboxi/mx6cuboxi.c
+index 8edabf4404c2..fbab39e800a6 100644
+--- a/board/solidrun/mx6cuboxi/mx6cuboxi.c
++++ b/board/solidrun/mx6cuboxi/mx6cuboxi.c
+@@ -447,7 +447,7 @@ static int find_ethernet_phy(void)
+  */
+ int ft_board_setup(void *fdt, struct bd_info *bd)
+ {
+-	int node_phy0, node_phy1, node_phy4;
++	int node_phy, node_phy0, node_phy1, node_phy4;
+ 	int ret, phy;
+ 	bool enable_phy0 = false, enable_phy1 = false, enable_phy4 = false;
+ 	enum board_type board;
+@@ -479,6 +479,12 @@ int ft_board_setup(void *fdt, struct bd_info *bd)
+ 		return 0;
+ 	}
+ 
++	// update U-Boot's own unified phy node phy address, if present
++	node_phy = fdt_path_offset(fdt, "/soc/bus@2100000/ethernet@2188000/mdio/phy");
++	ret = fdt_setprop_u32(fdt, node_phy, "reg", phy);
++	if (ret < 0)
++		pr_err("%s: failed to update unified PHY node address\n", __func__);
++
+ 	// update all phy nodes status
+ 	node_phy0 = fdt_path_offset(fdt, "/soc/bus@2100000/ethernet@2188000/mdio/ethernet-phy@0");
+ 	ret = fdt_setprop_string(fdt, node_phy0, "status", enable_phy0 ? "okay" : "disabled");
+-- 
+2.34.1
 
-I did a quick imx28_xea_defconfig build test here:
-
-U-Boot mainline
----------------
-
-$ ls -al u-boot.img
--rw-rw-r-- 1 fabio fabio 444128 mar 28 09:11 u-boot.img
-
-$ ls -al spl/u-boot-spl.bin
--rwxrwxr-x 1 fabio fabio 39800 mar 28 09:12 spl/u-boot-spl.bin
-
-
-U-Boot mainline + LTO
----------------------
-
-$ ls -al u-boot.img
--rw-rw-r-- 1 fabio fabio 424144 mar 28 09:14 u-boot.img
-
-$ ls -al spl/u-boot-spl.bin
--rw-rw-r-- 1 fabio fabio 37664 mar 28 09:14 spl/u-boot-spl.bin
