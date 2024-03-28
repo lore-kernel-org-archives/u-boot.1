@@ -4,84 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89291CD11DD
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 22:30:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB664CD11DD
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 22:38:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD13F8820D;
-	Thu, 28 Mar 2024 23:29:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5F9698820C;
+	Thu, 28 Mar 2024 23:38:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uIkP2GIO";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="NS4M4I5T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C660B87D43; Thu, 28 Mar 2024 23:29:56 +0100 (CET)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E59AB88207; Thu, 28 Mar 2024 22:59:05 +0100 (CET)
+Received: from SN4PR2101CU001.outbound.protection.outlook.com
+ (mail-southcentralusazolkn190100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d10c::])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F6D78820C
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 23:29:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3192B880E8
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 22:59:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-6e675181ceaso875329a34.2
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 15:29:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711664993; x=1712269793; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pqiti0bNe3BX+VY7a+1ktOo3ZCQegloD5+euTZJ86L8=;
- b=uIkP2GIOtyMrMuTa21Ju8eBBvWVmMnf8FkO1t3r63tn1IJkTABiPp3f+3XZpCD73b/
- YLUZbBBx0H2n4DVC64JQkGL25+njpLY5lOmK8n5PamMnifHgf5lvDy3a9yett3PD9bOI
- 1WlD5nTnOFM9D/0Nf9aORFc9BJVbyJSq7AhHp2fE6KPSUNr79oQgsblvQoBagbKuqG78
- o524knfo3HhUFtjwUrLmdS4vIgPS4wJiW4ZFOHMlTAY9LTedr53xmVkiiC9zU3Q0vy8w
- +UnzQR4fk5MRcMVuqwNA8xo7zMmOMHY2mcH93G0wsoMvPzaAo/1U0Bwpy+0CzuV9AA8r
- wH8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711664993; x=1712269793;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pqiti0bNe3BX+VY7a+1ktOo3ZCQegloD5+euTZJ86L8=;
- b=b/ssidGw03HY2cfw5QOtVjmBx26onou1m18yJSeW6E0RhOrneUklQq01Bf8LiVpitf
- Sn3hHrc/FN68IBNqoLYWt+ZQFUBFJv9dRx+YCfF/sMgOTRZVOt/iv8A2wsAGJRZoflJ7
- j1LuSriybOx/4mew3sh6LNe1fh/n8rSKvJR7KN8B72jQnCC0Gw7M2b7GNqFZZlit7C0b
- VM7qZDN8UIvMmnOLH9qA7AuxWUBYGXImGzpwwm8fgEhz4qShKkKDMK0EvB5fLlcM/grm
- LvzWEqBt4/ablfDJ1nB4sq62Nnm8Yv+OSt0+0ycAWyPIT9P9MooegzZDiaHvE2IcvbB5
- HR5A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUQuXJoqhRTHiKW29OfBunf1Irb0+JcAp4FoXti//t5746gAZ/xlTkTCPpF2khrN/36FKTUw/7+3jW4DTPnBDz05A4vxA==
-X-Gm-Message-State: AOJu0Yzhl4q60AUdAE7cOdRGgdEiIObRB7u1T6/sXK8tnMzavJ42vR4N
- JrIPjx7flpSKRXs8NbJhHt4jS0xfrvWIzIwHRSK16UENOX8biwa7C0kN29vwJxyEJK1Em7O7089
- m
-X-Google-Smtp-Source: AGHT+IH6dAnGQuTJ4vG51erYrfNZbKXahuk3dMBfaiBlQQcAz8DlaZQnrurs6NYCRtDfBvHeLVTBzA==
-X-Received: by 2002:a05:6870:51b:b0:221:91dd:6ea6 with SMTP id
- j27-20020a056870051b00b0022191dd6ea6mr536482oao.58.1711664993084; 
- Thu, 28 Mar 2024 15:29:53 -0700 (PDT)
-Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- fs14-20020a056870f78e00b0022273a66aadsm610497oab.34.2024.03.28.15.29.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 15:29:52 -0700 (PDT)
-From: Sam Protsenko <semen.protsenko@linaro.org>
+ spf=pass smtp.mailfrom=macromorgan@hotmail.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=hBNUrf8opwvQaJk+U+Z8renA/VNuAiD1UprHNgRzu3dAZkNX8IGU8lwbGgtxf6q2ZBhpas7BG8InuTx5Sk9yXy4QQxOE7w92NTdt6HdMWIfafGo5a0aoP4rBc/RRGItctB2g3NUs/HfuX5kkEGzr36G6len12WCvP3B6t/O1xGrRMTPGL/j13w47rxwwgL8MyEtRMhMQZo1eMzOcsXcU3W412shrScDbtwgYSKWke6KrNQq+6kPvNoJfr3fcn26vw6xZXIFS5uZ6PMqt0T8LlWyxl2cR0H9gCz6qB7x+8ghW9zrS/o+3AhA7C+vQ6vtxGJj4hy4MdIB5eScjGDBwww==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pN6e2QcudZyu4cBD/yGtWGr+OyzQQcl/q8lLYAsiT10=;
+ b=HryydlTxdlQjsFlyMbEvKryxftILxBmLzgxlQnd6sFCQp1NYXQ4O9Y37uGoKPpm8vZMwEEK5sG+5vznfX6YPJs4pDgXX8JQcPSQAD3GMYx1VTW9vySYUI2OUUDlOPFUJ2W7aiCOCjqRBsiDZu+K8nox75mydLmHwqlT2Q9RxAdYNMkdLyF0M2Muo7DEV2dCelSJ8N/A/QX3OGxwz7+Xywn6WNPo6F7sSBU0aFZXfcvmXUEJZ7alLljmn95h2AjdgbNyM9ZrDPNlWHvWTsH2IG4dBQkrqWSjZjQgvScd6LuQQq9+Fh4WPiVn83u94PmSB/tKt+EW6Hndm9Fa7K3GGVA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pN6e2QcudZyu4cBD/yGtWGr+OyzQQcl/q8lLYAsiT10=;
+ b=NS4M4I5T/4ThSvSFLOvncWTYVqiU2xo2vYFR+NRvuaeVinRq/ys+hgtylaG2hHyT8f70E6UdvfEy9hgM9Gjvv+tE4fp3Lh5BC9ZHa6DwFLwAfbX2kjhVnMfMZilJlpYEBvXpbKivFMWIPXUSeQz9BgOzUT4VGe+WclWytXv219W4vq/G7fk0rf7UZlzxHBf0QqMTq6ZHw6woh086997G8MWtemxB+MXFXysFAo7QFW9lNa3pRAbLhRW9Bx+psih4cqtH/RHjmkOeXHGp3I7ZQMPiN+bbPwD8oWpsJxlxWs1sxa0kRsvBBKA5Dcv3cFg2NmBoUSCr0x+b3rdDFAZ78w==
+Received: from DM4PR05MB9229.namprd05.prod.outlook.com (2603:10b6:8:88::20) by
+ CY5PR05MB9144.namprd05.prod.outlook.com (2603:10b6:930:34::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7409.38; Thu, 28 Mar 2024 21:58:57 +0000
+Received: from DM4PR05MB9229.namprd05.prod.outlook.com
+ ([fe80::148f:6016:501b:93f4]) by DM4PR05MB9229.namprd05.prod.outlook.com
+ ([fe80::148f:6016:501b:93f4%3]) with mapi id 15.20.7409.031; Thu, 28 Mar 2024
+ 21:58:57 +0000
+Date: Thu, 28 Mar 2024 16:58:53 -0500
+From: Chris Morgan <macromorgan@hotmail.com>
 To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Johan Jonker <jbx6244@gmail.com>,
- Joshua Watt <jpewhacker@gmail.com>, Steve Rae <steve.rae@raedomain.com>,
- Petr Kulhavy <brain@jikos.cz>,
- Richard Retanubun <RichardRetanubun@RugggedCom.com>, u-boot@lists.denx.de
-Subject: [PATCH 2/2] part: efi: Treat unused partition type GUID as a valid
- case
-Date: Thu, 28 Mar 2024 17:29:51 -0500
-Message-Id: <20240328222951.11431-2-semen.protsenko@linaro.org>
-X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240328222951.11431-1-semen.protsenko@linaro.org>
-References: <20240328222951.11431-1-semen.protsenko@linaro.org>
-MIME-Version: 1.0
+Cc: Eugen Hristev <eugen.hristev@collabora.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
+ xypron.glpk@gmx.de, cym@rock-chips.com, philipp.tomsich@vrull.eu,
+ sjg@chromium.org, jonas@kwiboo.se
+Subject: Re: [PATCH 1/2] rockchip: rk3588: Add support for ATAG parsing
+Message-ID: <DM4PR05MB92294A5E8F160BF82B4E46EFA53B2@DM4PR05MB9229.namprd05.prod.outlook.com>
+References: <20240326204944.1572667-1-macroalpha82@gmail.com>
+ <20240326204944.1572667-2-macroalpha82@gmail.com>
+ <fe9eef97-5814-4d25-8357-60873d565aff@rock-chips.com>
+ <DM4PR05MB9229EA8B503F50C94DDA5212A5342@DM4PR05MB9229.namprd05.prod.outlook.com>
+ <9541747b-b05c-4bb2-bf73-d720659905d2@collabora.com>
+ <DM4PR05MB92298DB9B7803B3E0ABC0137A5342@DM4PR05MB9229.namprd05.prod.outlook.com>
+ <20240328200209.GE3442575@bill-the-cat>
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20240328200209.GE3442575@bill-the-cat>
+X-TMN: [aPgI6Nzlj+TbnzVIBO8fWoUq4vVBC0y/]
+X-ClientProxiedBy: SN7P220CA0012.NAMP220.PROD.OUTLOOK.COM
+ (2603:10b6:806:123::17) To DM4PR05MB9229.namprd05.prod.outlook.com
+ (2603:10b6:8:88::20)
+X-Microsoft-Original-Message-ID: <ZgXoHfq8FbhNvByN@wintermute.localhost.fail>
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DM4PR05MB9229:EE_|CY5PR05MB9144:EE_
+X-MS-Office365-Filtering-Correlation-Id: 018d1115-993e-42aa-d81d-08dc4f724429
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: RBJns/tB2J3/JX/8I5axLg2N4Trcc90yo8QHY6wYirNaRGzJ6zf9t5v3MaHY0g7JfJ5vIdIusTGoLBtvbuT0YDiY4RW3N2y882wcIO0D8T3/GtmjCAwe7qRqUnRsG8uiIeY8azSJeX5SlprZrmfnhmxj0bk1viXWQU9ZQujVhnLZq+G3w+Dw8/wTmv1Hny0kXSbnTOQegf5qVfZD3vPkop6oZ6Vy6N7EN64ZFgH8lbDfyBFeB1VkjtmEN4G5ZT5umGVDB95q1U/hwvSV9l0DSUSbLASdbyfELA89FFiLtYXvnIzSvKUnKZWU6kSKDgk8EXyjY0frrkD7BktqmjZuo3ISszvx1DgHHqk9GAaN+4ScXFKhDp1VgW0TmQpDuiXEObnOBRGbwoafoOyL5NwZvHtNaDGDzLKggjECY/8/vApWgVFHREOfC1x9OphmsdXk7XCKzTVaLmXEPy3mV4cXRAfM4kLxOX8bAX2SfKHVodFMtaeYWbVM6epdVhi8JUZp4urI0akW2SB27zhleW9VaEFtFepQk/6xLhsW+fYE5zrMaDIoPJ1YLjGkqCZOnP9s
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?4sBO4E08Oi3CeaI0bYG3oaSm4sdakD2v5VVlac5LvQdh+YeOEWhuQWkWvV?=
+ =?iso-8859-1?Q?qdk7gj5gP3UDu/dTf4IaW8akEH7i0v3ctoLUIcOtaqp+PSFEyVf2F1W+W1?=
+ =?iso-8859-1?Q?6tT3/wIy91huq7Ci9wwV/3WHLJnAG1vkA/g2e74mZpTzB9AHlkq+C6LI6p?=
+ =?iso-8859-1?Q?P+ro09VJrNGbNiJTPyC9tqicb4VuX2EzfZt5IrGcg4kXQMj0ly9mBc88gH?=
+ =?iso-8859-1?Q?USNFsCMOJHckXZLNPqqo3f/7X5Nt9vkgGheKV+iO9sAOmW5dSq0qiUjhjV?=
+ =?iso-8859-1?Q?8zWh3C6J6vu1ef7x1X0eFZkHIsWuZK5ZcsBoSN8uSVBzNyqGJ9CyjlVmD/?=
+ =?iso-8859-1?Q?24u1km6ObZ1XfaUpbtL8Ed5T6wVQGXth00fRueJCF3ZBSPLBycvLSyQUXV?=
+ =?iso-8859-1?Q?GKN+IXcnpD0t8hL2QhkuKUpakJJdwepT/IZ7ZfQ4+QhCBhvdI9wNdskRyg?=
+ =?iso-8859-1?Q?EDbsfKy9dUO+9CytIik9NrslDLP7bTLtG486QhKOciOdc+AgGxhQ+gQ/1G?=
+ =?iso-8859-1?Q?L1FWUIFMyK03tGGc+EX8V3sTBSvHf+4kBMk3cCyYoaI+11stEV96tYOUgl?=
+ =?iso-8859-1?Q?6FICTZ9G5VoruOheaQTAnZWczkGt0s8bJ9ts7komiteQH8eAmkm1jAT1r2?=
+ =?iso-8859-1?Q?BuQpFR6IMifwyXkAPShdh0aIiX16SBEx6W2gTTR4N8p2UliBJMp8enXGVY?=
+ =?iso-8859-1?Q?q8f1+jPjBqMElXUCQi2Mfclx4nF+bWBYN7jt1O7Pd2KROwv/i7i93Cx6aV?=
+ =?iso-8859-1?Q?gxHz2+GZMyMAhGZq8n/8pTXL4q/R/E01ogudDAK1yn4y2T4bxMFP+I7TMm?=
+ =?iso-8859-1?Q?EUDoDncmZzkkbJ2yU0zQWExVL33lqOAQi74myWdxVq9LRLOP7mPrl3k6sI?=
+ =?iso-8859-1?Q?z8q3c11YBIImOhVKjVGpF3th/4R1mrWsYEPyVnLX3E+2dc58Nxd/4qWycY?=
+ =?iso-8859-1?Q?Pouu+PAaNVLwZBIVYDi4wXDAmNO7pRqvmhQqBmNjYU6pChna/3eBg950DG?=
+ =?iso-8859-1?Q?/vRh/o+iStRFbJFxvwKWVRxO63cQ+1CbqVSk+oq22aZo4Rl42H4reTqhRO?=
+ =?iso-8859-1?Q?bUb9HSk4rX/9DdHIOVijR6rXmNy/JBHFcBslki1269TrMHSdh2RCou5tvf?=
+ =?iso-8859-1?Q?VI25yXyAEIpfNmNKIq9H9J8DMwJcRMg+ZTzk2bC9PiKPajMubHQj5tKzJ3?=
+ =?iso-8859-1?Q?3zKcmqbXhjFYvY65eTxpYz99qVMCb4NeSLFMRAN7pDOyf8/LrsIy5pDCrr?=
+ =?iso-8859-1?Q?AWRG0qCSHE5C9Vpwxg/RH8k2A/A6im+5eW6uXppQc=3D?=
+X-OriginatorOrg: sct-15-20-4823-7-msonline-outlook-84f76.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 018d1115-993e-42aa-d81d-08dc4f724429
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR05MB9229.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Mar 2024 21:58:57.1785 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR05MB9144
+X-Mailman-Approved-At: Thu, 28 Mar 2024 23:37:58 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,70 +132,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some platforms use the "unused" (all-zero) GUID as a partition type GUID
-to make some partitions hidden from the OS. For example, Samsung phones
-and other devices often have GPT partition tables like that, created by
-their "gpt_builder" tool [1]. All partitions with FILESYS=0 value
-(second column in [2] file) will be created in a way that:
-  1. Partition type GUID will be all-zero ("unused")
-  2. Attributes[48:49] bits will be set to 0 (whereas non-zero values
-     mean the partition is visible to the OS: 1=raw, 2=ext4, 3=f2fs)
+On Thu, Mar 28, 2024 at 04:02:09PM -0400, Tom Rini wrote:
+> On Wed, Mar 27, 2024 at 10:03:11AM -0500, Chris Morgan wrote:
+> > On Wed, Mar 27, 2024 at 04:21:49PM +0200, Eugen Hristev wrote:
+> > > On 3/27/24 15:32, Chris Morgan wrote:
+> > > > On Wed, Mar 27, 2024 at 06:32:06PM +0800, Kever Yang wrote:
+> > > >> Hi Chris,
+> > > >>
+> > > >>     The ATAGS is used for passing parameter from bootloader to kernel at
+> > > >> first, which has been replaced by DTB now for ARM platform.
+> > > >>
+> > > >>     And Rockchip using ATAGs for passing parameter like dram memory
+> > > >> size/board uart in different boot process like DRAM init binary/ TPL/SPL to
+> > > >> U-Boot since 2018.
+> > > >>
+> > > >>     And almost at the same time, Simon add bloblist for mainline U-Boot
+> > > >> which for similar purpose.
+> > > >>
+> > > >>     So I'm not sure if this ATAGS should be accept in mainline U-Boot or
+> > > >> not, even for rockchip platform only seems some kind of regression for this
+> > > >> feature support.
+> > > >>
+> > > >>
+> > > >> Hi Simon and Tom,
+> > > >>
+> > > >>      Could you help to give some suggestion for this?
+> > > >>
+> > > > 
+> > > > I really meant to do this as an "RFC", so I apologize in advance for
+> > > > possibly causing more work in treating this as a full-fledged patch.
+> > > > 
+> > > > The problem I'm trying to solve is that I've got 2 boards, a Rock 5B
+> > > > as well as an Indiedroid Nova both with 16GB of RAM. I noticed that
+> > > > without the memory holes the Rock 5B defined in my Indiedroid it would
+> > > > also fail to boot. I've got 2 other boards as well with less than 16GB
+> > > > of RAM which seem to work fine without any holes (a 4GB Indiedroid Nova
+> > > > prototype and a GameForce Ace with 12GB of RAM).
+> > > 
+> > > Hi,
+> > > 
+> > > When I initially added these holes in the memory, I tried to ask Rockchip what are
+> > > the holes for. I didn't get any answer, however the patches to reserve the holes
+> > > were accepted.
+> > > If we could get more information about why the holes are there, if that area is
+> > > specific to something, or that it's fixed in a per-SoC basis, we could reserve it
+> > > by hardcoding in the Linux DT, without the need for ATAGs.
+> > > Without real information, we cannot be sure that for other variants of the SoC or
+> > > some other bootrom configuration, the holes will not change/move.
+> > > 
+> > > Eugen
+> > 
+> > It's not *just* about the holes, but also making sure we use the full
+> > extent of the RAM. For example on my 4GB Indiedroid Nova the existing
+> > logic ignores about 256MB of RAM that's otherwise present. When we
+> > use the existing code the RAM map reported by Linux is as follows:
+> > 
+> > [    0.000000] Early memory node ranges
+> > [    0.000000]   node   0: [mem 0x0000000000200000-0x00000000efffffff]
+> > 
+> > Whereas when we do ATAGS parsing to set the banks we get the following:
+> > 
+> > [    0.000000] Early memory node ranges
+> > [    0.000000]   node   0: [mem 0x0000000000200000-0x00000000efffffff]
+> > [    0.000000]   node   0: [mem 0x00000001f0000000-0x00000001ffffffff]
+> > 
+> > So basically the issue is two-fold... one we need to create the memory
+> > holes when necessary, and two the current method of defining memory
+> > banks leaves some RAM unallocated. Parsing the ATAGS does both of these,
+> > I'm just curious if it's the RIGHT way or there's something else I'm
+> > missing...
+> 
+> It's unfortunate that all of this is in the wild, from the Rockchip
+> side. The best answer is that the platform should be passing all of this
+> along via bloblist. I would hope that future platforms will do that. For
+> now yes, I guess we need to constrain this ATAG parsing to rockchip as
+> much as we can and use it.
 
-Although it's true that Linux kernel verifies the partition type GUID to
-be non-zero (in block/partitions/efi.c, is_pte_valid() function), where
-its U-Boot counterpart code was borrowed from originally, in case of
-U-Boot we want to handle partitions with "unused" GUIDs the same way as
-any other valid partitions, to allow the user to interact with those
-(e.g. list partitions using "part list", be able to flash those via
-fastboot, etc).
+Any thought/benefit of trying to force the ATAGS into a bloblist after the
+fact (instead of expecting it to be passed that way)?  Otherwise yes I'll
+work on simplified ATAGS parsing for the memory info and constrain it to
+the rk3588 specific board code/wrap it around ROCKCHIP_TPL present.
 
-[1] https://gitlab.com/Linaro/96boards/e850-96/tools/gpt/
-[2] https://gitlab.com/Linaro/96boards/e850-96/tools/gpt/-/blob/master/gpt_layout
+Thank you,
+Chris
 
-Fixes: 07f3d789b9be ("Add support for CONFIG_EFI_PARTITION (GUID Partition Table)")
-Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
----
- disk/part_efi.c | 21 +++++----------------
- 1 file changed, 5 insertions(+), 16 deletions(-)
+> 
+> -- 
+> Tom
 
-diff --git a/disk/part_efi.c b/disk/part_efi.c
-index 4ce9243ef25c..6b138abae0a6 100644
---- a/disk/part_efi.c
-+++ b/disk/part_efi.c
-@@ -1166,28 +1166,17 @@ static gpt_entry *alloc_read_gpt_entries(struct blk_desc *desc,
-  */
- static int is_pte_valid(gpt_entry * pte)
- {
--	efi_guid_t unused_guid;
-+	/*
-+	 * NOTE: Do not check unused (zero) GUIDs here, it's considered a valid
-+	 * case in U-Boot.
-+	 */
- 
- 	if (!pte) {
- 		log_debug("Invalid Argument(s)\n");
- 		return 0;
- 	}
- 
--	/* Only one validation for now:
--	 * The GUID Partition Type != Unused Entry (ALL-ZERO)
--	 */
--	memset(unused_guid.b, 0, sizeof(unused_guid.b));
--
--	if (memcmp(pte->partition_type_guid.b, unused_guid.b,
--		sizeof(unused_guid.b)) == 0) {
--
--		log_debug("Found an unused PTE GUID at 0x%08X\n",
--			  (unsigned int)(uintptr_t)pte);
--
--		return 0;
--	} else {
--		return 1;
--	}
-+	return 1;
- }
- 
- /*
--- 
-2.39.2
 
