@@ -4,55 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B4D5CD11DF
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 20:16:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48242CD11DD
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 20:37:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A0F988152;
-	Thu, 28 Mar 2024 21:16:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 888DD881DD;
+	Thu, 28 Mar 2024 21:37:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="TADOaofm";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="M91K4TnG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D222881AD; Thu, 28 Mar 2024 21:16:52 +0100 (CET)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
+ id E580C880E8; Thu, 28 Mar 2024 21:37:20 +0100 (CET)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B27C87C62
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 21:16:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE67187C62
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 21:37:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-062-143-245-032.um16.pools.vodafone-ip.de
- [62.143.245.32])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 540983F2AE; 
- Thu, 28 Mar 2024 20:16:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1711657009;
- bh=9FbRYcGRWLu2+pJLjXrybIKK8dBWFO8WXtpfRqw2BAE=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=TADOaofmQxYgcNbGxwfET0S2dzFvT+FxXbB2QPyqZcuuEnvvkhsUMvHgxdVfsbUDu
- GPRiPmhR3x5V/C/mtpaOOpeKRfJY84hfRCqH/WBZYsIVknj2zjrj0Xm+gbgqu51uQ6
- VLr3hoQNEmhV6RHPgvyjDERofiHF9nS+whqC/JOcBEDXRPbOGj8mYaVSN8XfOcio/j
- hs3p4CM551Ovzw3crP9w7y9CSnIWLrxfrunvmu/iY+MXLGNfOjF/+QWm0+yjgVZgUF
- xke76LhlodiNNx5S2lcH/JeO0KQnefQiK3AC00Uex+JPzzf6HA93/KgRxqPmlxdvBX
- A247SPK6n5J8g==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] doc: missing :: in doc/usage/cmd/itest.rst
-Date: Thu, 28 Mar 2024 21:16:54 +0100
-Message-ID: <20240328201654.15148-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=robh@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id 764C0CE2CDB;
+ Thu, 28 Mar 2024 20:37:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8C2B2C433C7;
+ Thu, 28 Mar 2024 20:37:15 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1711658235;
+ bh=o3TMU6J+1La8rLs2zcigdVj1AgPp6xVFZzSdMIJZ+dg=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=M91K4TnGiHgnYf7fli2rIaNCPFSkgB6FKdjUAO5LIu+nLxhre2FmA5y0q+G5YL4e6
+ MiTAjHYTr1oxozM2m47RyyTZJ/LT5eG4uPj2MAyGRBedG6rcsR5Tax0POrIqgAoMyU
+ LKosAXuzI2Uy4snnO31W2VpbtqGm1tCav8w8LVxJNoRhfxmAtOS1HfewJiBVSdspFY
+ EC3ZzPqtPr9KcLWvpsmo5rzrdvQonI72X/tvdCOqtD8Sh92lPUEqy+SU2V6MiK52AD
+ +eMkSrIuaBew8BqY8qbXt9b8o7KxmCl99ESbA45vXyLDpOJr9RApK8z2FR4V2aPbqu
+ GVrhTPC293Q1A==
+Date: Thu, 28 Mar 2024 15:37:13 -0500
+From: Rob Herring <robh@kernel.org>
+To: Simon Glass <sjg@chromium.org>
+Cc: Michael Walle <mwalle@kernel.org>, Conor Dooley <conor+dt@kernel.org>,
+ Vignesh Raghavendra <vigneshr@ti.com>, devicetree@vger.kernel.org,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ =?utf-8?B?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>,
+ linux-mtd@lists.infradead.org, Miquel Raynal <miquel.raynal@bootlin.com>,
+ Richard Weinberger <richard@nod.at>, linux-kernel@vger.kernel.org,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v10 2/2] dt-bindings: mtd: fixed-partition: Add binman
+ compatibles
+Message-ID: <171165823084.305347.5584935515178377776.robh@kernel.org>
+References: <20240326200645.1182803-1-sjg@chromium.org>
+ <20240326200645.1182803-2-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240326200645.1182803-2-sjg@chromium.org>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,26 +75,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add :: for correct formatting of example.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- doc/usage/cmd/itest.rst | 2 ++
- 1 file changed, 2 insertions(+)
+On Tue, 26 Mar 2024 14:06:45 -0600, Simon Glass wrote:
+> Add two compatibles for binman entries, as a starting point for the
+> schema.
+> 
+> Note that, after discussion on v2, we decided to keep the existing
+> meaning of label so as not to require changes to existing userspace
+> software when moving to use binman nodes to specify the firmware
+> layout.
+> 
+> Note also that, after discussion on v6, we decided to use the same
+> 'fixed-partition' schema for the binman features, so this version
+> adds a new 'binman.yaml' file providing the new compatibles to the
+> existing partition.yaml binding.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+> Changes in v10:
+> - Drop binman,entry since it is likely not necessary
+> - Put the description back
+> 
+> Changes in v8:
+> - Switch the patch ordering so the partition change comes first
+> 
+> Changes in v7:
+> - Adjust MAINTAINERS entry
+> - Put compatible strings into the 'fixed-partition' binding
+> 
+> Changes in v5:
+> - Add mention of why 'binman' is the vendor
+> - Drop  'select: false'
+> - Tidy up the compatible setings
+> - Use 'tfa-bl31' instead of 'atf-bl31'
+> 
+> Changes in v4:
+> - Correct selection of multiple compatible strings
+> 
+> Changes in v3:
+> - Drop fixed-partitions from the example
+> - Use compatible instead of label
+> 
+> Changes in v2:
+> - Use plain partition@xxx for the node name
+> 
+>  .../bindings/mtd/partitions/binman.yaml       | 53 +++++++++++++++++++
+>  .../bindings/mtd/partitions/partition.yaml    | 21 ++++++++
+>  MAINTAINERS                                   |  5 ++
+>  3 files changed, 79 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+> 
 
-diff --git a/doc/usage/cmd/itest.rst b/doc/usage/cmd/itest.rst
-index ab933db760d..9c307fb4bf4 100644
---- a/doc/usage/cmd/itest.rst
-+++ b/doc/usage/cmd/itest.rst
-@@ -86,6 +86,8 @@ Numbers will be truncated according to the postfix before comparing:
- Postfix .s causes a string compare. The string '0xa1234' is alphabetically
- smaller than '0xb'.
- 
-+::
-+
-     => if itest.s 0xa1234 < 0xb; then echo true; else echo false; fi
-     true
- 
--- 
-2.43.0
+Reviewed-by: Rob Herring <robh@kernel.org>
 
