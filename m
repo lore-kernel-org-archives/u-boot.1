@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B91FDCD1283
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 16:35:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB79ECD11DD
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 16:42:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 257C888195;
-	Thu, 28 Mar 2024 17:35:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E2B6788193;
+	Thu, 28 Mar 2024 17:42:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="l9NXWtS/";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RY1wlJRu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD018881A7; Thu, 28 Mar 2024 17:35:36 +0100 (CET)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id A2E51881AD; Thu, 28 Mar 2024 17:42:49 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0CE088176
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 17:35:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 969F388176
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 17:42:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2d46dd8b0b8so12908111fa.2
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 09:35:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-29d51cdde7eso217575a91.0
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 09:42:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711643734; x=1712248534; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1711644166; x=1712248966; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=a25a3W0TJLGMi2sBrCHLWZv242o4TjcNPVZLXwedHXg=;
- b=l9NXWtS/Zswv/N8paOHBaGzVBmZRzAk2WdcwJC7mVByESMs2yDp0xk2IAkUqdGHgtJ
- NUBcfBqUwwTNk8t+QWlT/L8pdv3+G3cpHbl1MwTnpww1of/uvAjbwXLkzwB4a3RQqsF+
- w+EuTOBidGKJHq37i2u4htjRpSw1a0ZWP03OQZ7Pak9XUhQXHzFx1xJzRol6tRSPbIug
- JuSGW/MI4P9pROEfd4O5i+oqXSsBwT3/rROx5l7VS9TN/DLVfEDO/RxgsGmbyfLOvxyb
- 1rXeahiR6C3vpPZts7A+o/+UaAt9X36rJpkCAjgnr0w3EBOZj4H9JxZOZf/K6cN1Fdu5
- 5MYA==
+ bh=cqWnKYKR9khUwnpqPUfpS/lvBGVfYW8O/Ik0pJkjHCo=;
+ b=RY1wlJRunhSgnALzhNybZs9Fq13deVFaB+xYcM5ePi0a4IVha9pZxBGI0xU+6KjdkY
+ z17EVvJZynMTDiTLivZ1sF7HtdA1Nr1j1bqjjeyoDMv0zaATVLWZgUdmLAdmJeLM0pKz
+ Sa1weUrHTXoJlPj6IItWbUCVSyKcsxPatgQNOxwirr+9d5+42CKvo/nEvCx424JhHUJt
+ Xeh+puJdcqZkq6cB0h0wxa3sdt9xXscPYvPrWAu8V6pFWENM+dXX7H+Zuy1NLulc7AHW
+ u6zqVpO8+MYmQv+5QFzRv7oryRfByCuOypkNZ9MUENINlzj63HWmDsaac6cNIJUevowP
+ IDpQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711643734; x=1712248534;
+ d=1e100.net; s=20230601; t=1711644166; x=1712248966;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=a25a3W0TJLGMi2sBrCHLWZv242o4TjcNPVZLXwedHXg=;
- b=eaPjKfd2UJjODYSdDC8+j+hhLnokEmcEK0Wa4EXfJKV4BMiE3WRRriZOcsYXyGFaXq
- +rnTGaeB7tMDhTyJjAdUqIYIKPloxoBK1uicpnfH5rOxEesD7MqMeMdyFK86mAz67aZu
- HxgPJgAYx9+M+0deQ1FDMEH+CC8D5da2Ld+ada3tnmY0F2WsICe4tvxqqMVpNvkXrqje
- 5RMronJ9JbKbYfa50rJWrmHEth5z3iCSjlymGNs4ak9ZjMvqUC0EPaaOEk0ebLbZzAYk
- ZsbgHv7TjlAKz/ktNEBwCJmOcubykvy9Rn6fd9X4BoYsnaVntlYqy45+uW6R/oSzfepC
- iXYQ==
-X-Gm-Message-State: AOJu0YxdsjqrDv7Qqm7zUdxR1hoD+Ltk9iOkISL8zAGTUQidUPU2uV48
- NcMCt2umKrNEXa0fRWiRfb2ZcR6MpE81LxmHs4ugKNPhGQ6u4EnDLmC6OPttK7T2jTIwJPSbSN6
- Nv6+Y1z08AxIUsoW7thvQQihKrMovG/0s4vacJ9wKBj5xuhku
-X-Google-Smtp-Source: AGHT+IGm5LnbweCGYosMlDo1p2Pv3g83K97nM//Jjl+r/adGfqjjcmPGHydO5GGxUCrBDAlO2tHZN4wBnssfkfgW6I4=
-X-Received: by 2002:a2e:7a12:0:b0:2d6:ee46:96d with SMTP id
- v18-20020a2e7a12000000b002d6ee46096dmr2354572ljc.31.1711643734015; Thu, 28
- Mar 2024 09:35:34 -0700 (PDT)
+ bh=cqWnKYKR9khUwnpqPUfpS/lvBGVfYW8O/Ik0pJkjHCo=;
+ b=CJvtk4XZr/7Eam/RUkLTRmK9EvEeuuxPsoqSZFcrDKl0rvaAj/5BDOPa2MUS+qe0pa
+ WQVBhMxZk7Ktk6JW6udFKXN4ogNyE87Eo7SjvbHAH8S1VgCBAtyXksACSrDElsx0ytdu
+ yM85oHclwakrMxNqDfjie8RbebRArcjtOf2UPEaUFvL69/ZmCf3bC+7tY0CUqXDsQJcW
+ n5gk1cMYA42UzST5uoWm+6WHt1bic+uYHTnMWTL9ybTuJJ6V6J+rNs/MTe0jqSi3wWYi
+ vLQG278MfZu8V9+V41UyHnSDd7ChLD4P3bmNMu60lWQSVeZHBqSPZDUTX9DPF6iN5e0N
+ dDEA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUcMkUB2BqpL7CqB241GwZc5L36bloAKxIpicuTGLvA2/J9HZkOHXV1cIZmag+sg9ZyTxJbsDcDj1oxwnThhKzGVxaMqg==
+X-Gm-Message-State: AOJu0YxOZUPLIW7N4mfdW8ZQsP96q+2/73D/56r19JmJoriPin24XtU4
+ UEcR9yl3DyDHvNUo88/fC4Ux4ceQtgjcNaXrAzGGVq4yue8/soZfrZJh5pRnLLyvWwhIX0Bulob
+ hz+WH93Mq4B04NB9JRbwB/mM+pEg=
+X-Google-Smtp-Source: AGHT+IGhZv1vXcSmsqaZkpcMDoyE6UiCpd4WSPIMKp/jqCjIw+399X8nfPWu5orm/pG2viqD5L8thDB5/oQ0RcavYGA=
+X-Received: by 2002:a17:90b:1bc2:b0:29c:7697:d2dc with SMTP id
+ oa2-20020a17090b1bc200b0029c7697d2dcmr3257623pjb.4.1711644166048; Thu, 28 Mar
+ 2024 09:42:46 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240327223704.1883824-1-tharvey@gateworks.com>
- <CAC_iWjL+oK9FQGGc-ZOGK8Ai0nZTeVWEz0HWa8Wsa2=_gpkuhQ@mail.gmail.com>
- <CAJ+vNU1-WPNzy35GGPJHBt0P13GKMCRLrhCjP+JVwr=-zcSV5A@mail.gmail.com>
-In-Reply-To: <CAJ+vNU1-WPNzy35GGPJHBt0P13GKMCRLrhCjP+JVwr=-zcSV5A@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 28 Mar 2024 18:34:57 +0200
-Message-ID: <CAC_iWj+Y8jjEtwU6+QxT=R-sUt_x3iuOqyhXLpatpP1sKe17JA@mail.gmail.com>
-Subject: Re: [PATCH] tpm-v2: allow algo name to be conigured for pcr_read and
- pcr_extend
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Eddie James <eajames@linux.ibm.com>
+References: <20240328153415.3706637-1-lukma@denx.de>
+ <20240328153415.3706637-3-lukma@denx.de>
+In-Reply-To: <20240328153415.3706637-3-lukma@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 28 Mar 2024 13:42:33 -0300
+Message-ID: <CAOMZO5DTc1S_HnHtVbNmUxswGMXV346gtBcVRutCdja52RMTpw@mail.gmail.com>
+Subject: Re: [PATCH 2/6] arm: xea: Add support for reading SoM (CPU) and base
+ board HW revision
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Stefano Babic <sbabic@denx.de>, u-boot@lists.denx.de, 
+ Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,121 +92,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 28 Mar 2024 at 17:33, Tim Harvey <tharvey@gateworks.com> wrote:
->
-> On Thu, Mar 28, 2024 at 12:37=E2=80=AFAM Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Tim,
-> >
-> > [...]
-> >
-> > >
-> > > +/**
-> > > + * tpm2_algo_len() - Return an algo value and length given a algorit=
-hm name
-> > > + *
-> > > + * @name: algorithm name
-> > > + * @rwlen: pointer to integer to populate with algorithm length if n=
-on-null
-> > > + * Return: algorithm value
-> > > + */
-> > > +int tpm2_algo_len(const char *name, int *rwlen);
-> > > +
-> > > +/**
-> > > + * tpm2_algo_len() - Return an algoithm name string
-> > > + *
-> > > + * @algo: algorithm value
-> > > + * Return: algorithm string
-> > > + */
-> > > +const char *tpm2_algo_name(int algo);
-> > > +
-> > >  #endif /* __TPM_V2_H */
-> > > diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> > > index 68eaaa639f89..6a090ce5810c 100644
-> > > --- a/lib/tpm-v2.c
-> > > +++ b/lib/tpm-v2.c
-> > > @@ -1555,3 +1555,49 @@ u32 tpm2_enable_nvcommits(struct udevice *dev,=
- uint vendor_cmd,
-> > >
-> > >         return 0;
-> > >  }
-> > > +
-> > > +int tpm2_algo_len(const char *name, int *rwlen)
-> > > +{
-> > > +       int algo =3D -EINVAL;
-> > > +       int len =3D 0;
-> > > +
-> > > +       if (!strcasecmp("sha1", name)) {
-> > > +               algo =3D TPM2_ALG_SHA1;
-> > > +               len =3D TPM2_SHA1_DIGEST_SIZE;
-> > > +       } else if (!strcasecmp("sha256", name)) {
-> > > +               algo =3D TPM2_ALG_SHA256;
-> > > +               len =3D TPM2_SHA256_DIGEST_SIZE;
-> > > +       } else if (!strcasecmp("sha384", name)) {
-> > > +               algo =3D TPM2_ALG_SHA384;
-> > > +               len =3D TPM2_SHA384_DIGEST_SIZE;
-> > > +       } else if (!strcasecmp("sha512", name)) {
-> > > +               algo =3D TPM2_ALG_SHA512;
-> > > +               len =3D TPM2_SHA512_DIGEST_SIZE;
-> > > +       } else if (!strcasecmp("sm3_256", name)) {
-> > > +               algo =3D TPM2_ALG_SM3_256;
-> > > +               len =3D TPM2_SM3_256_DIGEST_SIZE;
-> > > +       }
-> > > +
-> > > +       if (*rwlen)
-> > > +               *rwlen =3D len;
-> > > +
-> > > +       return algo;
-> > > +}
-> > > +
-> >
-> > We already have tpm2_algorithm_to_len(). Instead of defining a new
-> > function, can we convert strings to 'enum tpm2_algorithms'? We can
-> > then reuse the existing function.
-> >
->
-> Hi Ilias,
->
-> Thanks - I didn't see tpm2_algorithm_to_len. Yes, I can use it but I
-> still need to add a new function to turn the name into an algo.
+Hi Lukasz,
 
-Yep, that's fine,
-> I also
-> didn't see tpm2_supported_algorithms; should I only support
-> name-to-algorithm and algorithm-to-name for that subset?
->
+On Thu, Mar 28, 2024 at 12:34=E2=80=AFPM Lukasz Majewski <lukma@denx.de> wr=
+ote:
 
-Yea, that would be good, we can at least have a reference of what we
-currently support.
+> +static inline u8 get_som_rev(void)
 
-Cheers
-/Ilias
+There is no need for 'inline' here.
 
-> Best Regards,
->
-> Tim
->
-> > > +const char *tpm2_algo_name(int algo)
-> > > +{
-> > > +       switch (algo) {
-> > > +       case TPM2_ALG_SHA1:
-> > > +               return "sha1";
-> > > +       case TPM2_ALG_SHA256:
-> > > +               return "sha256";
-> > > +       case TPM2_ALG_SHA384:
-> > > +               return "sha384";
-> > > +       case TPM2_ALG_SHA512:
-> > > +               return "sha512";
-> > > +       case TPM2_ALG_SM3_256:
-> > > +               return "sm3_256";
-> > > +       }
-> > > +
-> > > +       return "";
-> > > +}
-> > > --
-> > > 2.25.1
-> > >
-> >
-> > Thanks
-> > /Ilias
+Also, get_som_rev() is only used 5/6, so I suggest to squash this
+patch with 5/6.
+
+Besides that, the series looks good.
