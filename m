@@ -4,68 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C626C54E64
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 11:44:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B25FC54E67
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 11:44:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 296948816A;
-	Thu, 28 Mar 2024 12:43:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 69B3A88173;
+	Thu, 28 Mar 2024 12:43:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=igalia.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MgbtSosa";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=igalia.com header.i=@igalia.com header.b="Z5UASUiN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9077A880C0; Thu, 28 Mar 2024 07:46:58 +0100 (CET)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AA47A87F36; Thu, 28 Mar 2024 08:18:09 +0100 (CET)
+Received: from fanzine2.igalia.com (fanzine2.igalia.com [213.97.179.56])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90245880BB
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 07:46:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 209C98758B
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:18:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=none (p=none dis=none) header.from=igalia.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42S6ksW6047806;
- Thu, 28 Mar 2024 01:46:54 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1711608414;
- bh=B5iAl00c1LTj9+86/byRh60l7GUDyLXJUXwsbw61d0w=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=MgbtSosa0uF3pSqR2fI7/iaBCo6Bz2Q3irOInVpv7tSV/QBJlpqO8dFPfZ1oNKlbN
- yfomB446TJaF/f0ZQZj92OZYy/StWyvfNqMvMhWHdsXCon7Ik16iPGm8+fMyB6lQ3Q
- xkqVA1Nf0ZktrmBN6/y4w4ua2Hs03cSGloqE2Uaw=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42S6ksrL016152
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 28 Mar 2024 01:46:54 -0500
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 28
- Mar 2024 01:46:54 -0500
-Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 28 Mar 2024 01:46:54 -0500
-Received: from localhost (uda0492258.dhcp.ti.com [172.24.227.9])
- by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42S6kr7C081371;
- Thu, 28 Mar 2024 01:46:54 -0500
-Date: Thu, 28 Mar 2024 12:16:53 +0530
-From: Siddharth Vadapalli <s-vadapalli@ti.com>
-To: "A. Sverdlin" <alexander.sverdlin@siemens.com>
-CC: <u-boot@lists.denx.de>, Joe Hershberger <joe.hershberger@ni.com>, Ramon
- Fried <rfried.dev@gmail.com>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
- Andreas Dannenberg <dannenberg@ti.com>, Suman Anna <s-anna@ti.com>
-Subject: Re: [PATCH v2] net: ti: am65-cpsw-nuss: handle missing PHY in
- am65_cpsw_phy_init() gracefully
-Message-ID: <9cb0cf67-799d-4e09-b923-495217c85685@ti.com>
-References: <20240328062914.486999-1-alexander.sverdlin@siemens.com>
+ spf=pass smtp.mailfrom=cgmeiner@igalia.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com; 
+ s=20170329;
+ h=Content-Transfer-Encoding:Content-Type:Message-ID:References:
+ In-Reply-To:Subject:Cc:To:From:Date:MIME-Version:Sender:Reply-To:Content-ID:
+ Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+ :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+ List-Post:List-Owner:List-Archive;
+ bh=VYJYvb6yUeLNhjmoTnTAOkjLGUBlcCQjP+Y+xOFu2h0=; b=Z5UASUiNPmslHV/SVfGA7CHYUW
+ 3Ze9GwPeS2ugmcwuQWacCkFZC2Vp8ezlorr7nXMa0c426EbTaf6KCortO3c/l4SwDydqQz2RqjQM+
+ iBPO5MxYJ2R5tlwL9M9KzbD/tbp9NSQ9ZGFXVUdWcOMygs2LakWBOh1IPZkwx6YB0MexlCOcmbFZt
+ BGr1pe5fDEHda6v2QrR2W7SrbRja7Q8GLdqxmoDSAX+nNEuEfYdqF1zH4qHtbqgAwr2YJSjq/bANU
+ lFPyyGpqE28Zck/T21h8oJtC4hNVk2jMBuASwr8b9WsFbrunjuJCQSrVleZhluwkM8EB1jQf6696T
+ xz2jBbZQ==;
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+ by fanzine2.igalia.com with esmtps 
+ (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
+ id 1rpk1N-00GAAX-FQ; Thu, 28 Mar 2024 08:17:57 +0100
+Received: from webmail.service.igalia.com ([192.168.21.45])
+ by mail.igalia.com with esmtp (Exim)
+ id 1rpk1L-00ElEY-Dt; Thu, 28 Mar 2024 08:17:57 +0100
+Received: from localhost ([127.0.0.1] helo=webmail.igalia.com)
+ by webmail.service.igalia.com with esmtp (Exim 4.96)
+ (envelope-from <cgmeiner@igalia.com>) id 1rpk1L-00539d-0i;
+ Thu, 28 Mar 2024 08:17:55 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240328062914.486999-1-alexander.sverdlin@siemens.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Date: Thu, 28 Mar 2024 07:17:55 +0000
+From: Christian Gmeiner <cgmeiner@igalia.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: baruch@tkos.co.il, trini@konsulko.com, josua@solid-run.com,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] mx6cuboxi: Do not print devicetree model
+In-Reply-To: <20240327170359.2167228-1-festevam@gmail.com>
+References: <20240327170359.2167228-1-festevam@gmail.com>
+Message-ID: <fbc0c244d688872c793366a6aeb15ba5@igalia.com>
+X-Sender: cgmeiner@igalia.com
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Thu, 28 Mar 2024 12:43:31 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -83,29 +79,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 28, 2024 at 07:29:10AM +0100, A. Sverdlin wrote:
-> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-> 
-> am65_cpsw_ofdata_parse_phy() tries to handle the case when PHY is not
-> specified in DT gracefully:
-> 
-> am65_cpsw_nuss_port ethernet@8000000port@1: can't parse phy-handle port 1 (-2)
-> 
-> am65_cpsw_mdio_init() in turn is prepared for this, checks
-> if priv->has_phy == 0 and bails out (leaving cpsw_common->bus == NULL).
-> 
-> am65_cpsw_phy_init() however is not prepared for this and calls
-> phy_connect(cpsw_common->bus, ...) unconditionally, which leads to:
-> 
-> "Synchronous Abort" handler, esr 0x8600000d, far 0x0
-> elr: ffffffff808ab000 lr : 000000008083bde4 (reloc)
-> 
-> where lr points to the instruction right after bus->read() in get_phy_id().
-> 
-> Fixes: 9d0dca1199d1 ("net: ethernet: ti: Introduce am654 gigabit eth switch subsystem driver")
-> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Hi Fabio
 
-Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> The mx6cuboxi_defconfig target supports several board
+> variants. All of these variants use the hummingboard devicetree in U-Boot.
+> 
+> Currently, the devicetree model as well as the board variant name
+> are shown:
+> 
+> U-Boot 2024.04-rc5-00003-g774ec4fda8 (Mar 27 2024 - 16:48:35 +0100)
+> 
+> ...
+> Model: SolidRun HummingBoard2 Dual/Quad (1.5som+emmc)
+> Board: MX6 Cubox-i
+> ...
+> 
+> Printing the devicetree model that is used internally by U-Boot
+> may confuse users.
+> 
+> Unselect the CONFIG_DISPLAY_BOARDINFO option so that only the
+> board name is printed instead.
+>
 
-Regards,
-Siddharth.
+This is not what this patch is doing. show_board_info() is the only
+caller of checkboard()
+so we end with the following output:
+
+U-Boot 2024.04-rc5-00005-g50decee264-dirty (Mar 28 2024 - 08:09:58
++0100)
+
+CPU:   Freescale i.MX6Q rev1.3 996 MHz (running at 792 MHz)
+CPU:   Extended Commercial temperature grade (-20C to 105C) at 34C
+Reset cause: POR
+DRAM:  2 GiB
+Core:  84 devices, 19 uclasses, devicetree: fit
+WDT:   Started watchdog@20bc000 with servicing every 1000ms (128s
+timeout)
+MMC:   FSL_SDHC: 1, FSL_SDHC: 2
+Loading Environment from MMC... *** Warning - bad CRC, using default
+environment
+
+Thanks & Regards,
+Christian
