@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D070CD1283
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 18:00:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F1E3CD11DF
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 18:01:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7E52881ED;
-	Thu, 28 Mar 2024 18:59:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 500CB881D9;
+	Thu, 28 Mar 2024 18:59:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NYjUAWIo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="btPev3XJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 932B08083F; Thu, 28 Mar 2024 18:59:49 +0100 (CET)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 68773881F3; Thu, 28 Mar 2024 18:59:51 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BFCD881C7
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 18:59:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4823A881BF
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 18:59:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2d46dd5f222so18129601fa.1
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:59:47 -0700 (PDT)
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3417a3151c4so1110679f8f.3
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:59:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711648786; x=1712253586; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1711648789; x=1712253589; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=juaadawQi5dtqVZYnJ+QwO1/OAexPncDaRDXhesSnrw=;
- b=NYjUAWIoEUr4uq5hzQmWkebgYTaiXn181aBhIEnYwun4jmYxm5dutK304i9xXSCnTn
- U/LiDk5HCjwlUepTkbF5nM3pFgjBcNm+/7q+lvrEHLsfD8MhVebQ4KYc07adjZQbmrnP
- /g5T7vZ/SAeRVlf+KRlgBGzxyfjsEPAyNNlwSQPw6B9+IwXZRQ66tPpb2dW7UTUBS35o
- r+rHL7M5UtDd9A0hiua1DHwtSRBTMqPQwvjIq/R1yF2BRDmnPWjIIW7yzFgLewpOyD25
- S8BGp1bkUzCi03BCb8UwgGkLdWXwBhMCjWHp7NVwsxhn2tlhqn1KC/h+AUv8rPvm8ci4
- 9QYw==
+ :reply-to; bh=GewhX1AhomHs5Aohn6YwaTX+GkXafQtxsWjEwPDqGAk=;
+ b=btPev3XJR/mwJ9z1CGnbYPRELGLC806TP92Im0bWbwyecPXC2+9sFYaTOIHK3A4BE7
+ p/nxqsiWkukCYCdPoGq7yjKtqbs46appfkRrTdKXc1MYnpWD9Y0RjDYA11LRfsr8lZLz
+ LiOnglFd+S2wEdAg6Wsvl6neZaQd3sPR8NcsRvxjmJJy66FzeS27Z/mHELc7W4W/3a81
+ IpFmDr4vQ/7mNI0DBGXhr4MwWfjB/8cvYMqiUxQ2WU1aRWHYxLRm97lnC7kQ8cEoorwF
+ Fu23SDTiUQO3YbrJOqtz8CfTICP7U+ibiyeX02PWZSCqe7VQPRpgid4M8TTNPm+43zJi
+ uiDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711648786; x=1712253586;
+ d=1e100.net; s=20230601; t=1711648789; x=1712253589;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=juaadawQi5dtqVZYnJ+QwO1/OAexPncDaRDXhesSnrw=;
- b=EPl2Cq3Pqb1ON3UJyIcJQSAnQlDXoYwlzX7h7fj6E/xVcFf0vYLbk6xVeN/WTXmb3N
- PEqQd+0J99AOpjCulpeLJkDbasUWALuUF1kM/Avcy+KdBbe/awhaRFRHlndyV027Ynf2
- niEnHw4NOSQrbbPQFcgzCtGOevwGAoE/b4jV68lkbQngqCFtzrdQ+u879fOcHT0RAD3S
- ut5i09ML10q82qsxYsfyee7nKOAE8wQrA5TS+tbnz8Equqkulx7ZIwO3PUj5+vdlT5mD
- 0i1/1e7umojsgqkSPEO7/0L+LSwQJO9q6CsiOayZTCR/cWV/eu+UBs7fc8798GXHKOlm
- 5BzQ==
-X-Gm-Message-State: AOJu0YwzUYHliMFEm7NQSnhNOvvlRxrjxIpCD9uUOrG71t7JMb3v1HpR
- N8XHgL0nx/HVIgHQOqXdD+v+5dYnw/g6IrbWraPaLtdyHUPrPnrEuNw14rKU0BM=
-X-Google-Smtp-Source: AGHT+IGJ96CFpRm0IJHNyBL8ksQwIKBVdfFaj3KD6sBgXiEC58PJ1IZZZ3Qg3SCwCnD2Tg9j3yXvCw==
-X-Received: by 2002:a2e:9c8e:0:b0:2d6:f7d4:a393 with SMTP id
- x14-20020a2e9c8e000000b002d6f7d4a393mr2533270lji.9.1711648786365; 
- Thu, 28 Mar 2024 10:59:46 -0700 (PDT)
+ bh=GewhX1AhomHs5Aohn6YwaTX+GkXafQtxsWjEwPDqGAk=;
+ b=G7G/uZzz2nKuALsehU17IHMOE1Eq2x1Uqj30VIwe0w04BVDOpYmEEdJJTzeLuovvhU
+ 6mCwaqWng/xYnyYzrwNv3oEim7QzuqydNqTRRbgL0pAfkC7zl5Q2LMHV5tj2hkNfV+IV
+ DyTe54EiOHAKfLtGcVy2r+CLRI8ggqsGTtIzH8l1dhzfnOYugcNPclPkrKzAbMcV0p+r
+ gUmCKn502/ww58j/V6nnO9SndW02RtkRO0Kw0FTHPrCcLf5x+R0BIaDgnWsvkQI8wpiA
+ Os5VFJlReh9vpolx4R7UAIojUUk/75BFw3CtuLn73PMi/pE4H1FwTMudaMwe3D0c2T5C
+ 3KMA==
+X-Gm-Message-State: AOJu0Yys1UITBHhtzQRKt7A0vIJ3ms7qgJWHqtHfx7BdEWPPOQm9so7I
+ +4Wgg/owam2aBUrBcgOPvYP9DNmQURVPGx1S9867GaNVDzLdLKvz6Eut/NaQrWs=
+X-Google-Smtp-Source: AGHT+IGR7ROTfD96+aBt0e88qXZjl7AiM+6olPxZJbAOrSZOiyk8dLF2Y8+sFwyO1PhI+A/YtyNXtA==
+X-Received: by 2002:adf:fcc6:0:b0:33e:7a1c:788e with SMTP id
+ f6-20020adffcc6000000b0033e7a1c788emr3434450wrs.6.1711648788830; 
+ Thu, 28 Mar 2024 10:59:48 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a5d4acd000000b00341e5f487casm2292237wrs.46.2024.03.28.10.59.45
+ y13-20020a5d4acd000000b00341e5f487casm2292237wrs.46.2024.03.28.10.59.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 10:59:45 -0700 (PDT)
+ Thu, 28 Mar 2024 10:59:48 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 28 Mar 2024 17:59:11 +0000
-Subject: [PATCH v5 05/16] clk/qcom: use offsets for RCG registers
+Date: Thu, 28 Mar 2024 17:59:13 +0000
+Subject: [PATCH v5 07/16] clk/qcom: sdm845: add USB clocks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240328-b4-qcom-livetree-v5-5-4e98228b3d03@linaro.org>
+Message-Id: <20240328-b4-qcom-livetree-v5-7-4e98228b3d03@linaro.org>
 References: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
 In-Reply-To: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -79,13 +79,13 @@ To: Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=21534;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2569;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=eOFtlhU96dqlEnXPalbLBCT2nnod4qFsAzqcv/bfsS4=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTWDZyJPySvtOzJnvjz3KVfpj8KP2+c2D3xNVMDT/DUi
- 18Cfu7Q6ShlYRDkYJAVU2QRP7HMsmntZXuN7QsuwMxhZQIZwsDFKQAT+eLLyLClV2mf6wvOHcuP
- LJGM65nxbJ/99KliuX/Y92+Ovra/5+13hv/pRm9Ordk7mVXleRGDotP8xKuCjGdVXp4VEF0dFl4
- Xcl0VAA==
+ bh=LQeBYALcRlahXsl7p+tCEbXEjlrRYAIfZnvrRJ8uguA=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTWDZybL17bMu3Q56w5iy/N39H363ar4/8dRX/qctjun
+ jvYtTx6bUcxC4MgB4OsmCKL+Illlk1rL9trbF9wAWYOKxPIEAYuTgGYiCEnI0NzN8tRd907d9Ye
+ 5+qLkZRgChLNvbn7VQYv8xW7OTdUDt5geB/w1XtHdGO1tar37223Hzp3Tn+94tPuvHsx5f/EJ7+
+ dAwA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -104,611 +104,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The RCG registers always have the same offsets, so only store the base
-CMD register address and calculate the others relative to that.
+Most devices only initialise the USB clocks for us if we boot via
+"fastboot boot", add the missing clock configuration to get both USB
+ports working regardless of the bootloader state.
 
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/clk/qcom/clock-apq8016.c |  39 +------------
- drivers/clk/qcom/clock-apq8096.c |  28 +--------
- drivers/clk/qcom/clock-qcom.c    |  22 +++----
- drivers/clk/qcom/clock-qcom.h    |  16 +++--
- drivers/clk/qcom/clock-qcs404.c  | 122 +++++----------------------------------
- drivers/clk/qcom/clock-sdm845.c  |  16 +----
- 6 files changed, 39 insertions(+), 204 deletions(-)
+ drivers/clk/qcom/clock-sdm845.c | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
 
-diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8016.c
-index e6647f7c41dd..5a5868169c89 100644
---- a/drivers/clk/qcom/clock-apq8016.c
-+++ b/drivers/clk/qcom/clock-apq8016.c
-@@ -22,13 +22,9 @@
- #define APCS_GPLL_ENA_VOTE		(0x45000)
- #define APCS_CLOCK_BRANCH_ENA_VOTE (0x45004)
- 
- #define SDCC_BCR(n)			((n * 0x1000) + 0x41000)
--#define SDCC_CMD_RCGR(n)		((n * 0x1000) + 0x41004)
--#define SDCC_CFG_RCGR(n)		((n * 0x1000) + 0x41008)
--#define SDCC_M(n)			((n * 0x1000) + 0x4100C)
--#define SDCC_N(n)			((n * 0x1000) + 0x41010)
--#define SDCC_D(n)			((n * 0x1000) + 0x41014)
-+#define SDCC_CMD_RCGR(n)		(((n + 1) * 0x1000) + 0x41004)
- #define SDCC_APPS_CBCR(n)		((n * 0x1000) + 0x41018)
- #define SDCC_AHB_CBCR(n)		((n * 0x1000) + 0x4101C)
- 
- /* BLSP1 AHB clock (root clock for BLSP) */
-@@ -37,33 +33,12 @@
- /* Uart clock control registers */
- #define BLSP1_UART2_BCR			(0x3028)
- #define BLSP1_UART2_APPS_CBCR		(0x302C)
- #define BLSP1_UART2_APPS_CMD_RCGR	(0x3034)
--#define BLSP1_UART2_APPS_CFG_RCGR	(0x3038)
--#define BLSP1_UART2_APPS_M		(0x303C)
--#define BLSP1_UART2_APPS_N		(0x3040)
--#define BLSP1_UART2_APPS_D		(0x3044)
- 
- /* GPLL0 clock control registers */
- #define GPLL0_STATUS_ACTIVE BIT(17)
- 
--static const struct bcr_regs sdc_regs[] = {
--	{
--	.cfg_rcgr = SDCC_CFG_RCGR(1),
--	.cmd_rcgr = SDCC_CMD_RCGR(1),
--	.M = SDCC_M(1),
--	.N = SDCC_N(1),
--	.D = SDCC_D(1),
--	},
--	{
--	.cfg_rcgr = SDCC_CFG_RCGR(2),
--	.cmd_rcgr = SDCC_CMD_RCGR(2),
--	.M = SDCC_M(2),
--	.N = SDCC_N(2),
--	.D = SDCC_D(2),
--	}
--};
--
- static struct pll_vote_clk gpll0_vote_clk = {
- 	.status = GPLL0_STATUS,
- 	.status_bit = GPLL0_STATUS_ACTIVE,
- 	.ena_vote = APCS_GPLL_ENA_VOTE,
-@@ -85,32 +60,24 @@ static int clk_init_sdc(struct msm_clk_priv *priv, int slot, uint rate)
- 		div = 4;
- 
- 	clk_enable_cbc(priv->base + SDCC_AHB_CBCR(slot));
- 	/* 800Mhz/div, gpll0 */
--	clk_rcg_set_rate_mnd(priv->base, &sdc_regs[slot], div, 0, 0,
-+	clk_rcg_set_rate_mnd(priv->base, SDCC_CMD_RCGR(slot), div, 0, 0,
- 			     CFG_CLK_SRC_GPLL0, 8);
- 	clk_enable_gpll0(priv->base, &gpll0_vote_clk);
- 	clk_enable_cbc(priv->base + SDCC_APPS_CBCR(slot));
- 
- 	return rate;
- }
- 
--static const struct bcr_regs uart2_regs = {
--	.cfg_rcgr = BLSP1_UART2_APPS_CFG_RCGR,
--	.cmd_rcgr = BLSP1_UART2_APPS_CMD_RCGR,
--	.M = BLSP1_UART2_APPS_M,
--	.N = BLSP1_UART2_APPS_N,
--	.D = BLSP1_UART2_APPS_D,
--};
--
- /* UART: 115200 */
- int apq8016_clk_init_uart(phys_addr_t base)
- {
- 	/* Enable AHB clock */
- 	clk_enable_vote_clk(base, &gcc_blsp1_ahb_clk);
- 
- 	/* 7372800 uart block clock @ GPLL0 */
--	clk_rcg_set_rate_mnd(base, &uart2_regs, 1, 144, 15625,
-+	clk_rcg_set_rate_mnd(base, BLSP1_UART2_APPS_CMD_RCGR, 1, 144, 15625,
- 			     CFG_CLK_SRC_GPLL0, 16);
- 
- 	/* Vote for gpll0 clock */
- 	clk_enable_gpll0(base, &gpll0_vote_clk);
-diff --git a/drivers/clk/qcom/clock-apq8096.c b/drivers/clk/qcom/clock-apq8096.c
-index a4731613c5e0..479f9771a464 100644
---- a/drivers/clk/qcom/clock-apq8096.c
-+++ b/drivers/clk/qcom/clock-apq8096.c
-@@ -25,33 +25,17 @@
- #define SDCC2_BCR			(0x14000) /* block reset */
- #define SDCC2_APPS_CBCR			(0x14004) /* branch control */
- #define SDCC2_AHB_CBCR			(0x14008)
- #define SDCC2_CMD_RCGR			(0x14010)
--#define SDCC2_CFG_RCGR			(0x14014)
--#define SDCC2_M				(0x14018)
--#define SDCC2_N				(0x1401C)
--#define SDCC2_D				(0x14020)
- 
- #define BLSP2_AHB_CBCR			(0x25004)
- #define BLSP2_UART2_APPS_CBCR		(0x29004)
- #define BLSP2_UART2_APPS_CMD_RCGR	(0x2900C)
--#define BLSP2_UART2_APPS_CFG_RCGR	(0x29010)
--#define BLSP2_UART2_APPS_M		(0x29014)
--#define BLSP2_UART2_APPS_N		(0x29018)
--#define BLSP2_UART2_APPS_D		(0x2901C)
- 
- /* GPLL0 clock control registers */
- #define GPLL0_STATUS_ACTIVE		BIT(30)
- #define APCS_GPLL_ENA_VOTE_GPLL0	BIT(0)
- 
--static const struct bcr_regs sdc_regs = {
--	.cfg_rcgr = SDCC2_CFG_RCGR,
--	.cmd_rcgr = SDCC2_CMD_RCGR,
--	.M = SDCC2_M,
--	.N = SDCC2_N,
--	.D = SDCC2_D,
--};
--
- static const struct pll_vote_clk gpll0_vote_clk = {
- 	.status = GPLL0_STATUS,
- 	.status_bit = GPLL0_STATUS_ACTIVE,
- 	.ena_vote = APCS_GPLL_ENA_VOTE,
-@@ -68,31 +52,23 @@ static int clk_init_sdc(struct msm_clk_priv *priv, uint rate)
- {
- 	int div = 5;
- 
- 	clk_enable_cbc(priv->base + SDCC2_AHB_CBCR);
--	clk_rcg_set_rate_mnd(priv->base, &sdc_regs, div, 0, 0,
-+	clk_rcg_set_rate_mnd(priv->base, SDCC2_CMD_RCGR, div, 0, 0,
- 			     CFG_CLK_SRC_GPLL0, 8);
- 	clk_enable_gpll0(priv->base, &gpll0_vote_clk);
- 	clk_enable_cbc(priv->base + SDCC2_APPS_CBCR);
- 
- 	return rate;
- }
- 
--static const struct bcr_regs uart2_regs = {
--	.cfg_rcgr = BLSP2_UART2_APPS_CFG_RCGR,
--	.cmd_rcgr = BLSP2_UART2_APPS_CMD_RCGR,
--	.M = BLSP2_UART2_APPS_M,
--	.N = BLSP2_UART2_APPS_N,
--	.D = BLSP2_UART2_APPS_D,
--};
--
- static int clk_init_uart(struct msm_clk_priv *priv)
- {
- 	/* Enable AHB clock */
- 	clk_enable_vote_clk(priv->base, &gcc_blsp2_ahb_clk);
- 
- 	/* 7372800 uart block clock @ GPLL0 */
--	clk_rcg_set_rate_mnd(priv->base, &uart2_regs, 1, 192, 15625,
-+	clk_rcg_set_rate_mnd(priv->base, BLSP2_UART2_APPS_CMD_RCGR, 1, 192, 15625,
- 			     CFG_CLK_SRC_GPLL0, 16);
- 
- 	/* Vote for gpll0 clock */
- 	clk_enable_gpll0(priv->base, &gpll0_vote_clk);
-diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
-index 6303dcbf8461..05e5ab7d094b 100644
---- a/drivers/clk/qcom/clock-qcom.c
-+++ b/drivers/clk/qcom/clock-qcom.c
-@@ -103,9 +103,9 @@ void clk_bcr_update(phys_addr_t apps_cmd_rcgr)
- /*
-  * root set rate for clocks with half integer and MND divider
-  * div should be pre-calculated ((div * 2) - 1)
-  */
--void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
-+void clk_rcg_set_rate_mnd(phys_addr_t base, uint32_t cmd_rcgr,
- 			  int div, int m, int n, int source, u8 mnd_width)
- {
- 	u32 cfg;
- 	/* M value for MND divider. */
-@@ -119,14 +119,14 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
- 
- 	debug("m %#x n %#x d %#x div %#x mask %#x\n", m_val, n_val, d_val, div, mask);
- 
- 	/* Program MND values */
--	writel(m_val & mask, base + regs->M);
--	writel(n_val & mask, base + regs->N);
--	writel(d_val & mask, base + regs->D);
-+	writel(m_val & mask, base + cmd_rcgr + RCG_M_REG);
-+	writel(n_val & mask, base + cmd_rcgr + RCG_N_REG);
-+	writel(d_val & mask, base + cmd_rcgr + RCG_D_REG);
- 
- 	/* setup src select and divider */
--	cfg  = readl(base + regs->cfg_rcgr);
-+	cfg  = readl(base + cmd_rcgr + RCG_CFG_REG);
- 	cfg &= ~(CFG_SRC_SEL_MASK | CFG_MODE_MASK | CFG_HW_CLK_CTRL_MASK |
- 		 CFG_SRC_DIV_MASK);
- 	cfg |= source & CFG_SRC_SEL_MASK; /* Select clock source */
- 
-@@ -135,22 +135,22 @@ void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
- 
- 	if (n && n != m)
- 		cfg |= CFG_MODE_DUAL_EDGE;
- 
--	writel(cfg, base + regs->cfg_rcgr); /* Write new clock configuration */
-+	writel(cfg, base + cmd_rcgr + RCG_CFG_REG); /* Write new clock configuration */
- 
- 	/* Inform h/w to start using the new config. */
--	clk_bcr_update(base + regs->cmd_rcgr);
-+	clk_bcr_update(base + cmd_rcgr);
- }
- 
- /* root set rate for clocks with half integer and mnd_width=0 */
--void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
-+void clk_rcg_set_rate(phys_addr_t base, uint32_t cmd_rcgr, int div,
- 		      int source)
- {
- 	u32 cfg;
- 
- 	/* setup src select and divider */
--	cfg  = readl(base + regs->cfg_rcgr);
-+	cfg  = readl(base + cmd_rcgr + RCG_CFG_REG);
- 	cfg &= ~(CFG_SRC_SEL_MASK | CFG_MODE_MASK | CFG_HW_CLK_CTRL_MASK);
- 	cfg |= source & CFG_CLK_SRC_MASK; /* Select clock source */
- 
- 	/*
-@@ -159,12 +159,12 @@ void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
- 	 */
- 	if (div)
- 		cfg |= (2 * div - 1) & CFG_SRC_DIV_MASK;
- 
--	writel(cfg, base + regs->cfg_rcgr); /* Write new clock configuration */
-+	writel(cfg, base + cmd_rcgr + RCG_CFG_REG); /* Write new clock configuration */
- 
- 	/* Inform h/w to start using the new config. */
--	clk_bcr_update(base + regs->cmd_rcgr);
-+	clk_bcr_update(base + cmd_rcgr);
- }
- 
- const struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, uint rate)
- {
-diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
-index 12a1eaec2b2e..a7f833a4b6dd 100644
---- a/drivers/clk/qcom/clock-qcom.h
-+++ b/drivers/clk/qcom/clock-qcom.h
-@@ -11,8 +11,13 @@
- #define CFG_CLK_SRC_GPLL0 (1 << 8)
- #define CFG_CLK_SRC_GPLL0_EVEN (6 << 8)
- #define CFG_CLK_SRC_MASK  (7 << 8)
- 
-+#define RCG_CFG_REG		0x4
-+#define RCG_M_REG		0x8
-+#define RCG_N_REG		0xc
-+#define RCG_D_REG		0x10
-+
- struct pll_vote_clk {
- 	uintptr_t status;
- 	int status_bit;
- 	uintptr_t ena_vote;
-@@ -23,15 +28,8 @@ struct vote_clk {
- 	uintptr_t cbcr_reg;
- 	uintptr_t ena_vote;
- 	int vote_bit;
- };
--struct bcr_regs {
--	uintptr_t cfg_rcgr;
--	uintptr_t cmd_rcgr;
--	uintptr_t M;
--	uintptr_t N;
--	uintptr_t D;
--};
- 
- struct freq_tbl {
- 	uint freq;
- 	uint src;
-@@ -87,11 +85,11 @@ void clk_enable_gpll0(phys_addr_t base, const struct pll_vote_clk *gpll0);
- void clk_bcr_update(phys_addr_t apps_cmd_rgcr);
- void clk_enable_cbc(phys_addr_t cbcr);
- void clk_enable_vote_clk(phys_addr_t base, const struct vote_clk *vclk);
- const struct freq_tbl *qcom_find_freq(const struct freq_tbl *f, uint rate);
--void clk_rcg_set_rate_mnd(phys_addr_t base, const struct bcr_regs *regs,
-+void clk_rcg_set_rate_mnd(phys_addr_t base, uint32_t cmd_rcgr,
- 			  int div, int m, int n, int source, u8 mnd_width);
--void clk_rcg_set_rate(phys_addr_t base, const struct bcr_regs *regs, int div,
-+void clk_rcg_set_rate(phys_addr_t base, uint32_t cmd_rcgr, int div,
- 		      int source);
- 
- static inline void qcom_gate_clk_en(const struct msm_clk_priv *priv, unsigned long id)
- {
-diff --git a/drivers/clk/qcom/clock-qcs404.c b/drivers/clk/qcom/clock-qcs404.c
-index 958312b88842..8a897a52bc00 100644
---- a/drivers/clk/qcom/clock-qcs404.c
-+++ b/drivers/clk/qcom/clock-qcs404.c
-@@ -27,37 +27,24 @@
- /* Uart clock control registers */
- #define BLSP1_UART2_BCR			(0x3028)
- #define BLSP1_UART2_APPS_CBCR		(0x302C)
- #define BLSP1_UART2_APPS_CMD_RCGR	(0x3034)
--#define BLSP1_UART2_APPS_CFG_RCGR	(0x3038)
--#define BLSP1_UART2_APPS_M		(0x303C)
--#define BLSP1_UART2_APPS_N		(0x3040)
--#define BLSP1_UART2_APPS_D		(0x3044)
- 
- /* I2C controller clock control registerss */
- #define BLSP1_QUP0_I2C_APPS_CBCR	(0x6028)
- #define BLSP1_QUP0_I2C_APPS_CMD_RCGR	(0x602C)
--#define BLSP1_QUP0_I2C_APPS_CFG_RCGR	(0x6030)
- #define BLSP1_QUP1_I2C_APPS_CBCR	(0x2008)
- #define BLSP1_QUP1_I2C_APPS_CMD_RCGR	(0x200C)
--#define BLSP1_QUP1_I2C_APPS_CFG_RCGR	(0x2010)
- #define BLSP1_QUP2_I2C_APPS_CBCR	(0x3010)
- #define BLSP1_QUP2_I2C_APPS_CMD_RCGR	(0x3000)
--#define BLSP1_QUP2_I2C_APPS_CFG_RCGR	(0x3004)
- #define BLSP1_QUP3_I2C_APPS_CBCR	(0x4020)
- #define BLSP1_QUP3_I2C_APPS_CMD_RCGR	(0x4000)
--#define BLSP1_QUP3_I2C_APPS_CFG_RCGR	(0x4004)
- #define BLSP1_QUP4_I2C_APPS_CBCR	(0x5020)
- #define BLSP1_QUP4_I2C_APPS_CMD_RCGR	(0x5000)
--#define BLSP1_QUP4_I2C_APPS_CFG_RCGR	(0x5004)
- 
- /* SD controller clock control registers */
- #define SDCC_BCR(n)			(((n) * 0x1000) + 0x41000)
--#define SDCC_CMD_RCGR(n)		(((n) * 0x1000) + 0x41004)
--#define SDCC_CFG_RCGR(n)		(((n) * 0x1000) + 0x41008)
--#define SDCC_M(n)			(((n) * 0x1000) + 0x4100C)
--#define SDCC_N(n)			(((n) * 0x1000) + 0x41010)
--#define SDCC_D(n)			(((n) * 0x1000) + 0x41014)
-+#define SDCC_CMD_RCGR(n)		(((n + 1) * 0x1000) + 0x41004)
- #define SDCC_APPS_CBCR(n)		(((n) * 0x1000) + 0x41018)
- #define SDCC_AHB_CBCR(n)		(((n) * 0x1000) + 0x4101C)
- 
- /* USB-3.0 controller clock control registers */
-@@ -69,12 +56,8 @@
- #define USB30_MOCK_UTMI_CBCR		(0x39014)
- #define USB30_MOCK_UTMI_CMD_RCGR	(0x3901C)
- #define USB30_MOCK_UTMI_CFG_RCGR	(0x39020)
- #define USB30_MASTER_CMD_RCGR		(0x39028)
--#define USB30_MASTER_CFG_RCGR		(0x3902C)
--#define USB30_MASTER_M			(0x39030)
--#define USB30_MASTER_N			(0x39034)
--#define USB30_MASTER_D			(0x39038)
- #define USB2A_PHY_SLEEP_CBCR		(0x4102C)
- #define USB_HS_PHY_CFG_AHB_CBCR		(0x41030)
- 
- /* ETH controller clock control registers */
-@@ -82,14 +65,9 @@
- #define ETH_RGMII_CBCR			(0x4e008)
- #define ETH_SLAVE_AHB_CBCR		(0x4e00c)
- #define ETH_AXI_CBCR			(0x4e010)
- #define EMAC_PTP_CMD_RCGR		(0x4e014)
--#define EMAC_PTP_CFG_RCGR		(0x4e018)
- #define EMAC_CMD_RCGR			(0x4e01c)
--#define EMAC_CFG_RCGR			(0x4e020)
--#define EMAC_M				(0x4e024)
--#define EMAC_N				(0x4e028)
--#define EMAC_D				(0x4e02c)
- 
- 
- /* GPLL0 clock control registers */
- #define GPLL0_STATUS_ACTIVE BIT(31)
-@@ -102,24 +80,8 @@ static struct vote_clk gcc_blsp1_ahb_clk = {
- 	.ena_vote = APCS_CLOCK_BRANCH_ENA_VOTE,
- 	.vote_bit = BIT(10) | BIT(5) | BIT(4),
- };
- 
--static const struct bcr_regs uart2_regs = {
--	.cfg_rcgr = BLSP1_UART2_APPS_CFG_RCGR,
--	.cmd_rcgr = BLSP1_UART2_APPS_CMD_RCGR,
--	.M = BLSP1_UART2_APPS_M,
--	.N = BLSP1_UART2_APPS_N,
--	.D = BLSP1_UART2_APPS_D,
--};
--
--static const struct bcr_regs sdc_regs = {
--	.cfg_rcgr = SDCC_CFG_RCGR(1),
--	.cmd_rcgr = SDCC_CMD_RCGR(1),
--	.M = SDCC_M(1),
--	.N = SDCC_N(1),
--	.D = SDCC_D(1),
--};
--
- static struct pll_vote_clk gpll0_vote_clk = {
- 	.status = GPLL0_STATUS,
- 	.status_bit = GPLL0_STATUS_ACTIVE,
- 	.ena_vote = APCS_GPLL_ENA_VOTE,
-@@ -132,92 +94,38 @@ static struct pll_vote_clk gpll1_vote_clk = {
- 	.ena_vote = APCS_GPLL_ENA_VOTE,
- 	.vote_bit = BIT(1),
- };
- 
--static const struct bcr_regs usb30_master_regs = {
--	.cfg_rcgr = USB30_MASTER_CFG_RCGR,
--	.cmd_rcgr = USB30_MASTER_CMD_RCGR,
--	.M = USB30_MASTER_M,
--	.N = USB30_MASTER_N,
--	.D = USB30_MASTER_D,
--};
--
--static const struct bcr_regs emac_regs = {
--	.cfg_rcgr = EMAC_CFG_RCGR,
--	.cmd_rcgr = EMAC_CMD_RCGR,
--	.M = EMAC_M,
--	.N = EMAC_N,
--	.D = EMAC_D,
--};
--
--static const struct bcr_regs emac_ptp_regs = {
--	.cfg_rcgr = EMAC_PTP_CFG_RCGR,
--	.cmd_rcgr = EMAC_PTP_CMD_RCGR,
--	.M = EMAC_M,
--	.N = EMAC_N,
--	.D = EMAC_D,
--};
--
--static const struct bcr_regs blsp1_qup0_i2c_apps_regs = {
--	.cmd_rcgr = BLSP1_QUP0_I2C_APPS_CMD_RCGR,
--	.cfg_rcgr = BLSP1_QUP0_I2C_APPS_CFG_RCGR,
--	/* mnd_width = 0 */
--};
--
--static const struct bcr_regs blsp1_qup1_i2c_apps_regs = {
--	.cmd_rcgr = BLSP1_QUP1_I2C_APPS_CMD_RCGR,
--	.cfg_rcgr = BLSP1_QUP1_I2C_APPS_CFG_RCGR,
--	/* mnd_width = 0 */
--};
--
--static const struct bcr_regs blsp1_qup2_i2c_apps_regs = {
--	.cmd_rcgr = BLSP1_QUP2_I2C_APPS_CMD_RCGR,
--	.cfg_rcgr = BLSP1_QUP2_I2C_APPS_CFG_RCGR,
--	/* mnd_width = 0 */
--};
--
--static const struct bcr_regs blsp1_qup3_i2c_apps_regs = {
--	.cmd_rcgr = BLSP1_QUP3_I2C_APPS_CMD_RCGR,
--	.cfg_rcgr = BLSP1_QUP3_I2C_APPS_CFG_RCGR,
--	/* mnd_width = 0 */
--};
--
--static const struct bcr_regs blsp1_qup4_i2c_apps_regs = {
--	.cmd_rcgr = BLSP1_QUP4_I2C_APPS_CMD_RCGR,
--	.cfg_rcgr = BLSP1_QUP4_I2C_APPS_CFG_RCGR,
--	/* mnd_width = 0 */
--};
--
- static ulong qcs404_clk_set_rate(struct clk *clk, ulong rate)
- {
- 	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
- 
- 	switch (clk->id) {
- 	case GCC_BLSP1_UART2_APPS_CLK:
- 		/* UART: 1843200Hz for a fixed 115200 baudrate (19200000 * (12/125)) */
--		clk_rcg_set_rate_mnd(priv->base, &uart2_regs, 0, 12, 125,
-+		clk_rcg_set_rate_mnd(priv->base, BLSP1_UART2_APPS_CMD_RCGR, 0, 12, 125,
- 				     CFG_CLK_SRC_CXO, 16);
- 		clk_enable_cbc(priv->base + BLSP1_UART2_APPS_CBCR);
- 		return 1843200;
- 	case GCC_SDCC1_APPS_CLK:
- 		/* SDCC1: 200MHz */
--		clk_rcg_set_rate_mnd(priv->base, &sdc_regs, 7, 0, 0,
-+		clk_rcg_set_rate_mnd(priv->base, SDCC_CMD_RCGR(0), 7, 0, 0,
- 				     CFG_CLK_SRC_GPLL0, 8);
- 		clk_enable_gpll0(priv->base, &gpll0_vote_clk);
- 		clk_enable_cbc(priv->base + SDCC_APPS_CBCR(1));
- 		return rate;
- 	case GCC_ETH_RGMII_CLK:
- 		if (rate == 250000000)
--			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 0, 0,
-+			clk_rcg_set_rate_mnd(priv->base, EMAC_CMD_RCGR, 3, 0, 0,
- 					     CFG_CLK_SRC_GPLL1, 8);
- 		else if (rate == 125000000)
--			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 7, 0, 0,
-+			clk_rcg_set_rate_mnd(priv->base, EMAC_CMD_RCGR, 7, 0, 0,
- 					     CFG_CLK_SRC_GPLL1, 8);
- 		else if (rate == 50000000)
--			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 19, 0, 0,
-+			clk_rcg_set_rate_mnd(priv->base, EMAC_CMD_RCGR, 19, 0, 0,
- 					     CFG_CLK_SRC_GPLL1, 8);
- 		else if (rate == 5000000)
--			clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 1, 50,
-+			clk_rcg_set_rate_mnd(priv->base, EMAC_CMD_RCGR, 3, 1, 50,
- 					     CFG_CLK_SRC_GPLL1, 8);
- 		return rate;
- 	}
- 
-@@ -236,9 +144,9 @@ static int qcs404_clk_enable(struct clk *clk)
- 
- 	switch (clk->id) {
- 	case GCC_USB30_MASTER_CLK:
- 		clk_enable_cbc(priv->base + USB30_MASTER_CBCR);
--		clk_rcg_set_rate_mnd(priv->base, &usb30_master_regs, 7, 0, 0,
-+		clk_rcg_set_rate_mnd(priv->base, USB30_MASTER_CMD_RCGR, 7, 0, 0,
- 				     CFG_CLK_SRC_GPLL0, 8);
- 		break;
- 	case GCC_SYS_NOC_USB3_CLK:
- 		clk_enable_cbc(priv->base + SYS_NOC_USB3_CBCR);
-@@ -258,16 +166,16 @@ static int qcs404_clk_enable(struct clk *clk)
- 	case GCC_ETH_PTP_CLK:
- 		/* SPEED_1000: freq -> 250MHz */
- 		clk_enable_cbc(priv->base + ETH_PTP_CBCR);
- 		clk_enable_gpll0(priv->base, &gpll1_vote_clk);
--		clk_rcg_set_rate_mnd(priv->base, &emac_ptp_regs, 3, 0, 0,
-+		clk_rcg_set_rate_mnd(priv->base, EMAC_PTP_CMD_RCGR, 3, 0, 0,
- 				     CFG_CLK_SRC_GPLL1, 8);
- 		break;
- 	case GCC_ETH_RGMII_CLK:
- 		/* SPEED_1000: freq -> 250MHz */
- 		clk_enable_cbc(priv->base + ETH_RGMII_CBCR);
- 		clk_enable_gpll0(priv->base, &gpll1_vote_clk);
--		clk_rcg_set_rate_mnd(priv->base, &emac_regs, 3, 0, 0,
-+		clk_rcg_set_rate_mnd(priv->base, EMAC_CMD_RCGR, 3, 0, 0,
- 				     CFG_CLK_SRC_GPLL1, 8);
- 		break;
- 	case GCC_ETH_SLAVE_AHB_CLK:
- 		clk_enable_cbc(priv->base + ETH_SLAVE_AHB_CBCR);
-@@ -279,29 +187,29 @@ static int qcs404_clk_enable(struct clk *clk)
- 		clk_enable_vote_clk(priv->base, &gcc_blsp1_ahb_clk);
- 		break;
- 	case GCC_BLSP1_QUP0_I2C_APPS_CLK:
- 		clk_enable_cbc(priv->base + BLSP1_QUP0_I2C_APPS_CBCR);
--		clk_rcg_set_rate(priv->base, &blsp1_qup0_i2c_apps_regs, 0,
-+		clk_rcg_set_rate(priv->base, BLSP1_QUP0_I2C_APPS_CMD_RCGR, 0,
- 				 CFG_CLK_SRC_CXO);
- 		break;
- 	case GCC_BLSP1_QUP1_I2C_APPS_CLK:
- 		clk_enable_cbc(priv->base + BLSP1_QUP1_I2C_APPS_CBCR);
--		clk_rcg_set_rate(priv->base, &blsp1_qup1_i2c_apps_regs, 0,
-+		clk_rcg_set_rate(priv->base, BLSP1_QUP1_I2C_APPS_CMD_RCGR, 0,
- 				 CFG_CLK_SRC_CXO);
- 		break;
- 	case GCC_BLSP1_QUP2_I2C_APPS_CLK:
- 		clk_enable_cbc(priv->base + BLSP1_QUP2_I2C_APPS_CBCR);
--		clk_rcg_set_rate(priv->base, &blsp1_qup2_i2c_apps_regs, 0,
-+		clk_rcg_set_rate(priv->base, BLSP1_QUP2_I2C_APPS_CMD_RCGR, 0,
- 				 CFG_CLK_SRC_CXO);
- 		break;
- 	case GCC_BLSP1_QUP3_I2C_APPS_CLK:
- 		clk_enable_cbc(priv->base + BLSP1_QUP3_I2C_APPS_CBCR);
--		clk_rcg_set_rate(priv->base, &blsp1_qup3_i2c_apps_regs, 0,
-+		clk_rcg_set_rate(priv->base, BLSP1_QUP3_I2C_APPS_CMD_RCGR, 0,
- 				 CFG_CLK_SRC_CXO);
- 		break;
- 	case GCC_BLSP1_QUP4_I2C_APPS_CLK:
- 		clk_enable_cbc(priv->base + BLSP1_QUP4_I2C_APPS_CBCR);
--		clk_rcg_set_rate(priv->base, &blsp1_qup4_i2c_apps_regs, 0,
-+		clk_rcg_set_rate(priv->base, BLSP1_QUP4_I2C_APPS_CMD_RCGR, 0,
- 				 CFG_CLK_SRC_CXO);
- 		break;
- 	case GCC_SDCC1_AHB_CLK:
- 		clk_enable_cbc(priv->base + SDCC_AHB_CBCR(1));
 diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
-index babd83119e2c..ccb0cf245d33 100644
+index b7154360894a..e9c61eb480de 100644
 --- a/drivers/clk/qcom/clock-sdm845.c
 +++ b/drivers/clk/qcom/clock-sdm845.c
-@@ -18,15 +18,9 @@
- #include <dt-bindings/clock/qcom,gcc-sdm845.h>
- 
+@@ -20,8 +20,12 @@
  #include "clock-qcom.h"
  
--#define SE9_AHB_CBCR		0x25004
--#define SE9_UART_APPS_CBCR	0x29004
  #define SE9_UART_APPS_CMD_RCGR	0x18148
--#define SE9_UART_APPS_CFG_RCGR	0x1814C
--#define SE9_UART_APPS_M		0x18150
--#define SE9_UART_APPS_N		0x18154
--#define SE9_UART_APPS_D		0x18158
  
++#define USB30_PRIM_MASTER_CLK_CMD_RCGR 0xf018
++#define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR 0xf030
++#define USB3_PRIM_PHY_AUX_CMD_RCGR 0xf05c
++
  static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s0_clk_src[] = {
  	F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
  	F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
-@@ -45,25 +39,17 @@ static const struct freq_tbl ftbl_gcc_qupv3_wrap0_s0_clk_src[] = {
- 	F(128000000, CFG_CLK_SRC_GPLL0, 1, 16, 75),
- 	{ }
- };
+ 	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
+@@ -56,8 +60,10 @@ static ulong sdm845_clk_set_rate(struct clk *clk, ulong rate)
+ 	}
+ }
  
--static const struct bcr_regs uart2_regs = {
--	.cfg_rcgr = SE9_UART_APPS_CFG_RCGR,
--	.cmd_rcgr = SE9_UART_APPS_CMD_RCGR,
--	.M = SE9_UART_APPS_M,
--	.N = SE9_UART_APPS_N,
--	.D = SE9_UART_APPS_D,
--};
--
- static ulong sdm845_clk_set_rate(struct clk *clk, ulong rate)
- {
+ static const struct gate_clk sdm845_clks[] = {
++	GATE_CLK(GCC_AGGRE_USB3_SEC_AXI_CLK,		0x82020, 0x00000001),
++	GATE_CLK(GCC_CFG_NOC_USB3_SEC_AXI_CLK,		0x05030, 0x00000001),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S0_CLK,		0x5200c, 0x00000400),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S1_CLK,		0x5200c, 0x00000800),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S2_CLK,		0x5200c, 0x00001000),
+ 	GATE_CLK(GCC_QUPV3_WRAP0_S3_CLK,		0x5200c, 0x00002000),
+@@ -120,8 +126,27 @@ static int sdm845_clk_enable(struct clk *clk)
  	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
- 	const struct freq_tbl *freq;
  
- 	switch (clk->id) {
- 	case GCC_QUPV3_WRAP1_S1_CLK: /* UART9 */
- 		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap0_s0_clk_src, rate);
--		clk_rcg_set_rate_mnd(priv->base, &uart2_regs,
-+		clk_rcg_set_rate_mnd(priv->base, SE9_UART_APPS_CMD_RCGR,
- 				     freq->pre_div, freq->m, freq->n, freq->src, 16);
- 		return freq->freq;
- 	default:
- 		return 0;
+ 	debug("%s: clk %s\n", __func__, sdm845_clks[clk->id].name);
+ 
++	switch (clk->id) {
++	case GCC_USB30_PRIM_MASTER_CLK:
++		qcom_gate_clk_en(priv, GCC_USB_PHY_CFG_AHB2PHY_CLK);
++		/* These numbers are just pulled from the frequency tables in the Linux driver */
++		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR,
++				     (4.5 * 2) - 1, 0, 0, 1 << 8, 8);
++		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR,
++				     1, 0, 0, 0, 8);
++		clk_rcg_set_rate_mnd(priv->base, USB3_PRIM_PHY_AUX_CMD_RCGR,
++				     1, 0, 0, 0, 8);
++		break;
++	case GCC_USB30_SEC_MASTER_CLK:
++		qcom_gate_clk_en(priv, GCC_USB3_SEC_PHY_AUX_CLK);
++
++		qcom_gate_clk_en(priv, GCC_USB3_SEC_CLKREF_CLK);
++		qcom_gate_clk_en(priv, GCC_USB3_SEC_PHY_COM_AUX_CLK);
++		break;
++	}
++
+ 	qcom_gate_clk_en(priv, clk->id);
+ 
+ 	return 0;
+ }
 
 -- 
 2.44.0
