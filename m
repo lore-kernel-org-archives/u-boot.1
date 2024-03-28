@@ -4,133 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A50CC54E64
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 04:06:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 462AAC54E64
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 05:03:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E3C8880D5;
-	Thu, 28 Mar 2024 05:06:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 4CB098808D;
+	Thu, 28 Mar 2024 06:02:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="KsWAwBss";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kLvQ9d9O";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB8358806C; Thu, 28 Mar 2024 05:06:22 +0100 (CET)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260f::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6CD3B8808A; Thu, 28 Mar 2024 06:02:56 +0100 (CET)
+Received: from mail-vk1-xa32.google.com (mail-vk1-xa32.google.com
+ [IPv6:2607:f8b0:4864:20::a32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0789E88035
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 05:06:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D09C87D2E
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 06:02:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=YGVZhqCThNPxYUuqL9e/JUrWrucgcBnnO+Htknh9o3oewDlfALwn/rn8rmYmTPNmZRzsRxDgVUUJr9nbwCSbU/WlNp30DgOgvkHaQpFykgIi2Sm0prAeeZ1OlxvtNP0LQ+O0/h9ME2ZtY3RG3qcQwXwAd9Irulg52gH1WEpII6bm3dhjzcRkAXA7j/ii29NWj17R7zWBO1Ndyk18u/GtUnKhkPmnPfxo/9TCU1mlLO6K2A0tjoqxzUfrEUVmndS+7AlWlthJZgMwc+Y9XffQpz7HtZV86WMhouxqKXFSH3cV6IDXZIQhFHnwDNOxQG/jm7zX9w3rp/Q4zFEJAjklgQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2apRpJ7rgh6shHzqqLbCaAC+wmcq2NUoYjF1/VDY0b8=;
- b=Y0G0jHfJNuhQ3nMm3aE+8J+4ttOG3w+VMTwzCk60P/xps42DFTuxdxQ5j1y+GougwyEX3HlHLgHwvYZLMc2zoR32ZZazz/msfHJPBUn0Q14IoMnUPghGddbLplAwsnbJqoxkwiWDhrmUUej5N2w4hBbjYn9+vtM873muorZ/mZ1QSbekeIHFzVjoYznnR+gYbMg9jL0JaXvd/xepSOoP1CwcafewKfg2sdphbmzF1u2svtC/VyopVTXCyxMlZDQJkkxH0s/f0gwbUAbLqfdTuQ9bMcNaQoIGCxYGyVEky4yK+MGQQhEXj/unt/wYH5esKW7H5jPZ+QH0g5jK11ddog==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector2-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2apRpJ7rgh6shHzqqLbCaAC+wmcq2NUoYjF1/VDY0b8=;
- b=KsWAwBssKHt5HNAcy/YRAtAv+MgXCdvefTU0+63YzezRHFGvh38O9rZM4m5pK4tV95fhflFIGxeiPKBSPMXHHnDwsi6u9rBY1DTNP1o7P5ASaBNEE44C0xQ0s+1MNwNbm06v8ZxoUOS9tFvEG5GtUGzNFBzdSqkosWhXagdH0NQ=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from DU0PR04MB9417.eurprd04.prod.outlook.com (2603:10a6:10:358::11)
- by PA4PR04MB9488.eurprd04.prod.outlook.com (2603:10a6:102:2af::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.31; Thu, 28 Mar
- 2024 04:06:19 +0000
-Received: from DU0PR04MB9417.eurprd04.prod.outlook.com
- ([fe80::d30b:44e7:e78e:662d]) by DU0PR04MB9417.eurprd04.prod.outlook.com
- ([fe80::d30b:44e7:e78e:662d%4]) with mapi id 15.20.7386.037; Thu, 28 Mar 2024
- 04:06:19 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Date: Thu, 28 Mar 2024 13:05:48 +0800
-Subject: [PATCH v4 4/5] clk: imx93: fix anatop base
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240328-imx93-of-v2-v4-4-338d15a65c36@nxp.com>
-References: <20240328-imx93-of-v2-v4-0-338d15a65c36@nxp.com>
-In-Reply-To: <20240328-imx93-of-v2-v4-0-338d15a65c36@nxp.com>
-To: =?utf-8?q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>, 
- Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Mathieu Othacehe <m.othacehe@gmail.com>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
-X-Mailer: b4 0.12.3
-X-ClientProxiedBy: SI2PR01CA0045.apcprd01.prod.exchangelabs.com
- (2603:1096:4:193::19) To DU0PR04MB9417.eurprd04.prod.outlook.com
- (2603:10a6:10:358::11)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-vk1-xa32.google.com with SMTP id
+ 71dfb90a1353d-4d43b3fc06cso222899e0c.3
+ for <u-boot@lists.denx.de>; Wed, 27 Mar 2024 22:02:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711602173; x=1712206973; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=kjz2dDVlJ/4adcw+ilZgEmHGAEtwONmekCar2FZ+JJo=;
+ b=kLvQ9d9O5JfES3re17dXB3z3OLZWnRjw2mmk6z1G8bxw6yx+RCZ805nu5oiJwYvIhc
+ 4OB7DX4QnkIrEW8atDtw2TFnbEM9aM2ZS/6bJOcWeP68Ydz280Gkx5EJs+XPP86V4Cn2
+ xlp8bbcY30Ui9ti/H87/8xzWC2dzg0NmhjOwEFSl5TA9x7hOCul4swvl6WEWi8otWZLX
+ Q4fb1AAvzWqXvHeFhKyQIAGJ2AVoMhTMBqFKyKFxHpa+wXwSoH7WSyB9aqq6f8sv60r2
+ ZKXrgi9jIHwUlWiYJfkVFHbOl8xMNC7xup9mmaQDU5ZpjTkr2sOFQr+XDEi9z6LtBCNn
+ iJFQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711602173; x=1712206973;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kjz2dDVlJ/4adcw+ilZgEmHGAEtwONmekCar2FZ+JJo=;
+ b=L089fGR/+Twnv3OnBKrOQ9Zew4220SRMHGQljaZ25rbJ1qtvNqAxh6zKu1hkMAXE9y
+ TqFmhDdvjMylJUNvrf8qYH5TVlXgwwCMBDYtOM+BDnssqnC+z9m2+hgd8G+0XU/YVkRn
+ Q+WaUPjoAi2byPFDUI0KulPXnice1hcNi9JGDOCqFqsoNAHfT0Qp7+sUdcyjL8HWpAS3
+ YaYI+f9YezvhxyvkrfgFk9Jyeq4/X1x7kMq0mpJ9aGGonMoNnj2/Xz25BkFaWj2avh6I
+ V1erHaWSbnmzsEpQTQN+nxA3/oMd2fKQgBKj2raFCAb5ROQB/rGPDrY8fA5YRxT994EH
+ sUaQ==
+X-Gm-Message-State: AOJu0YwgoLFURPWFtSdufN9D2pFPa5nHVXzYQu/QcTUhYQlf9duIBWjb
+ wpobq50vwaze1ftpW6t3xz0hVs8jr74SX5qgfJTKp5TqLioV+fP9qsQ9TpMHuhBqQ6CZySgJU5U
+ Ochphh/bwLAvXxXVGwQuLohc4fBKFh/j7z44R1g==
+X-Google-Smtp-Source: AGHT+IH0RapVseiP77MNxifYW+OHjh26xo5GPgaGoN85JR7U1K2+0U6IJW9FCXzVtaItEMZpt0Fia0ql7hKTV5VeQeo=
+X-Received: by 2002:a05:6122:c8c:b0:4cb:fc25:7caa with SMTP id
+ ba12-20020a0561220c8c00b004cbfc257caamr1434905vkb.14.1711602173142; Wed, 27
+ Mar 2024 22:02:53 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU0PR04MB9417:EE_|PA4PR04MB9488:EE_
-X-MS-Office365-Filtering-Correlation-Id: cbf7c03e-7359-4f7a-1db3-08dc4edc6c36
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: BgtcpCy/oNoXa/2FkrCqHLl1j8aQ4MpOmNWC4MHVg48cheW+8PgvcM4G5ytn9m3cLTsJrfFD3AJuXoNkXW4FueZbxug2CHf4+BO37pPYL4EBpIU3nYJN1sD7RX7IqlyQGZj3j3/d0PiFjStYlQ9CwEggMjDy6AlufWCRNG1VEsZy+B8o6agTwJflzwZTf6sCe3X1C8e0Z/b+Ya4okU1e4J+75xpI/36LLPbodatUB7HM+JfU3nd/ABmxP1sbGZyHeume6GYRD37+ImTqGqMH1QTIp0ek/kKGlqksw4My8t0DR1IBMx2Wl3+hEh2KWy/yFtPr9OrJwTqVviTCdafcqbDWyvGAMF+yWCEHs/19+WwjUbtuRugTRirCpduEJGghHb3GWhXeAS4rZmYl9Fj6x3yMQXNPk7jodHxtJ2gLVm3vj4KujO32T/SKxlwcCLyPWc0/GqKipqMI7BzQk1peBQZ2W7ivpsW3yoLq2VEMmjEErAXkfePZsqCoazbrgMF/S8RDZS+P04U+fObtkJeClBThege5fI2waHFrp46sY6lHDDMye3MDP5u17nSW98FqEgSft8LPffySTAvZSKYOVkHzFz7Riy2WQ7aSbKvrZm6X2q2bZzh+SoXrhkuEDL2rLfSzHofwRGxP4vRuHBPRYW2Q5fUU0YtIa9WXbmEkgfKE1rslF03mGbjJVk7L1TMjQAaMg2adVx0jZOMggWo5gQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU0PR04MB9417.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366007)(52116005)(376005)(1800799015)(38350700005); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T1pOVnlkNjBpZ1YzRDBJU29JUzNXZ1lSZHRBMDA5QklCS3NpMm0wZ3UrTVV5?=
- =?utf-8?B?cW8raW8zNFo5QW1PbjhISVVjcHJKVUw3QTJTUGJaQkc3NUR0clhyTCsrY2ts?=
- =?utf-8?B?NWVoR3pNMlRoZ0dwOVh5SmJWS0xyazhxTnVJREFrYmxqaDFlUmoxSnRvQy9n?=
- =?utf-8?B?TnV1dEtxVDVLVTZuNEcrbVZaeWdGdWJhSHZ3SHdPNGdNckJBRnVUZjJKQlJD?=
- =?utf-8?B?ajZrVVp5VWlYb24zRENSTEVHeHA4dkIvT1pYcmoycmZhUUh3OE0zc2Y0YXl2?=
- =?utf-8?B?Yko5WkZFUUNZTmJIdHEyU0YybVowemxiZ2JMMUkyRVNBclVQTGpwKzByWCtz?=
- =?utf-8?B?c2g0VWJJSThZaFN2dDRCRFd4RkFONEc3RUEzYXdkUzNxeE1DYVBTRFRwdDdz?=
- =?utf-8?B?OHJGZTNxeDR1cXEveTBSMmo2YVJWWEZBbzRoUitDVmtyM3VCVkY5dWVGU2Jw?=
- =?utf-8?B?K0RocTdicWh3VG1YWG1LdGN6ZXRJemFWbWdVOHFydndiN2pxWktkRzcreXdi?=
- =?utf-8?B?N1VoTVhNT2tzRS9kazFLM3pZZ0Q4emJNcVNXR0ViY29pS1BpdDRmWnh5SUxJ?=
- =?utf-8?B?SVBuOHdWYVhNa3MxZGd2L3UyN3F5WHUzREFMODdBa25MazhSdGZvZ21GdjIz?=
- =?utf-8?B?WUo0bzNUQ2tBbnlEZGF1Sjk1M2RDT2loRSsxNEJEeHVDTUpKcEVwUU04Tmw4?=
- =?utf-8?B?NE81YnEvNnIxWXNURDR5Nm4xTDR1Q3VkNG5xMWQ0WDdBNnZOTlRWVjkwSWJC?=
- =?utf-8?B?WlAwZU83Zy9KckF2enlwNlhtTURjZS9tYmNiQkpWNGgxemxlUzdlSnd4UmVK?=
- =?utf-8?B?U2ROd0NvS0o5NXRiL2tiVjJNcThYbkt0cXJkZGZ0RkZaa2FIVXorYW82SWhE?=
- =?utf-8?B?T2RLcXN1Z045bk1RdjF0ajNFZHB3MDZoT0duRW5zTHRXeVBBMzVjYjY4Q1FM?=
- =?utf-8?B?bFk0dWZTb3VSeGQ2ZjRDRThmSTBhQWc0SmE5ZllaSXl0YjZINS9qWnRPMzZD?=
- =?utf-8?B?cGs2aEczUXN4ZDlSYmh4Um1Gbi9pR3pCVnRVbGVzaWp0QkVFWHRCbWNNa2hk?=
- =?utf-8?B?c056UVppZWNiTFdGT25SODMxU0l2RHViQ0hTWUtMQmVtOFc1Qm84UDh5V0xK?=
- =?utf-8?B?NEpnbjAxVE1ZNnpSRUQ0d0k1MDF1VTNFcGFuZElnWXBTeW9yNERmVzhqMzAx?=
- =?utf-8?B?WFVHaFRaM3Z3ZjQ0VTV3bWorTjZrYm9sRFNCb29maE1yekRmSjBjUEpIUGY5?=
- =?utf-8?B?QjdLYWx0RjZVaStJZWpiL2RvWWp2cWtGRFp4K3QrMlVpd0pRMHhmZTYrUjJr?=
- =?utf-8?B?bmgxd2lFczNsK1prMGtubjl1a29nZUlWaSt4NHJJS0JDeitabHB3SUtFS2pL?=
- =?utf-8?B?clo1S2U3cmd0aTFjb284UHNmbFpIb3U1MU1RcmYybitIblpJRlM2N2xxU2h1?=
- =?utf-8?B?VmlqN0EzbDh6aHVSbWxtQUtKSjk2YnIxOTRsR0EvdkYwOWZ0a2xkN0EwS2Yz?=
- =?utf-8?B?RTVKVlU5cUtmL2FuZWFYcVhOVC94STNQYTZYR1RYQkhsVy9PbGhCV0E5YytP?=
- =?utf-8?B?TTUxNlZKMXJOaS9QWS8xNXZNK2NDeTYvVXF1MU9MRVZFMk5mSjJGdVVwYWYw?=
- =?utf-8?B?UC9ueEc1bGV1MWc0d3ZHQ29tNnpUMWNLYVd2NUtYQmJLWEVsbkFMZ1UvcVFP?=
- =?utf-8?B?RmVmTm5ISCtLYXBKRkxqaktjOUNtMUQzLzVCVE8rY0IvVjhyTXhMaU55WFlZ?=
- =?utf-8?B?cTIveitYbDE4c1hxQk9zaHQvbUJCT2QvOW0xdGFFUmJSRGNWK0tQK0N3bGEv?=
- =?utf-8?B?RWZsdVMxYUVmTWtWQ2ZkWXYxNXVvMjQ4T0JvdGp2Z0V2TDNBY3RHMkRuZ3F1?=
- =?utf-8?B?YTRlR0N3ZkdzT1lQUmtBYkoxWnU4aS9JWmNmbmFSY25yTVBHaTk3VDVLQ0gz?=
- =?utf-8?B?ME5USVpxeDJRbEowZktYZ1NkazZkVjEwMGFsSHp5dVdVMG1uUGQwUUVkcW1o?=
- =?utf-8?B?N0lEZGhRNlc4NVRJaFNISXF4VGZVVEhmZ3g1RW9GMVJWVE02b2hzeThKTFd6?=
- =?utf-8?B?SWIvYkJSOTBMUHB6dmN3eDVkeXN4VWxobkFFWDFOUzZIem01T2R4cVliRzBC?=
- =?utf-8?Q?ousz5gQV0MZHo8NTBhNjBLxxz?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cbf7c03e-7359-4f7a-1db3-08dc4edc6c36
-X-MS-Exchange-CrossTenant-AuthSource: DU0PR04MB9417.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Mar 2024 04:06:19.5903 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: vLNaRJWgCS5tsdrwssmhfhr1Oj9wqSISljHFsAzrytYNyFdnNUHDoBDC/SVRbMJdI8L6T8ehWcZRAilFVxIPfQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR04MB9488
+References: <20240221120014.149193-1-namcao@linutronix.de>
+ <20240313184206.GA20322@m1pro.arvanta.net>
+ <20240314130436.76a2892a@namcao> <20240318203431.GA21567@m1pro.arvanta.net>
+In-Reply-To: <20240318203431.GA21567@m1pro.arvanta.net>
+From: E Shattow <lucent@gmail.com>
+Date: Wed, 27 Mar 2024 22:02:41 -0700
+Message-ID: <CANV2PTMT+8rcVkZEqX8Db_CV445dvBnFmnTqLj1LCWuUFiG=oA@mail.gmail.com>
+Subject: Re: [PATCH] starfive: visionfive2: switch to standard boot
+To: u-boot@lists.denx.de
+Cc: Nam Cao <namcao@linutronix.de>,
+ =?UTF-8?Q?Milan_P=2E_Stani=C4=87?= <mps@arvanta.net>, 
+ ycliang@andestech.com, yanhong.wang@starfivetech.com, 
+ chanho61.park@samsung.com, wiagn233@outlook.com, sjg@chromium.org, 
+ inindev@gmail.com, rick@andestech.com, bmeng@tinylab.org, 
+ minda.chen@starfivetech.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,31 +91,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+Hi, does this standard boot no longer try to boot from the configured
+EFI list? I have a boot listing (for Debian's grub EFI loader)
+configured with u-boot eficonfig but it does not seem to be attempting
+EFI boot anymore, there is a message about card select error but I
+think that must be trying the eMMC (mmc 1) and not the SD Card (mmc
+0).
 
-The PLL clk needs use anatop base, otherwise wrong PLL address will
-be used.
+StarFive # mmc list
+mmc@16010000: 0 (SD)
+mmc@16020000: 1
 
-Fixes: 9c153e46661b ("clk: imx: add i.MX93 CCF driver")
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
- drivers/clk/imx/clk-imx93.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+StarFive # help bootflow
+bootflow - Boot flows
 
-diff --git a/drivers/clk/imx/clk-imx93.c b/drivers/clk/imx/clk-imx93.c
-index ce10d795316..f0cb797d975 100644
---- a/drivers/clk/imx/clk-imx93.c
-+++ b/drivers/clk/imx/clk-imx93.c
-@@ -289,7 +289,7 @@ static int imx93_clk_probe(struct udevice *dev)
- 	clk_dm(IMX93_CLK_SYS_PLL_PFD2_DIV2,
- 	       imx_clk_fixed_factor("sys_pll_pfd2_div2", "sys_pll_pfd2", 1, 2));
- 
--	base = (void *)ANATOP_BASE_ADDR;
-+	anatop_base = (void *)ANATOP_BASE_ADDR;
- 
- 	clk_dm(IMX93_CLK_ARM_PLL,
- 	       imx_clk_fracn_gppll_integer("arm_pll", "clock-osc-24m",
+Usage:
+bootflow scan - boot first available bootflow
 
--- 
-2.35.3
 
+StarFive # bootflow scan
+Card did not respond to voltage select! : -110
+No working controllers found
+ethernet@16030000 Waiting for PHY auto negotiation to complete....... done
+BOOTP broadcast 1
+
+StarFive # bootefi bootmgr
+Card did not respond to voltage select! : -110
+Booting: Debian bootloader GRUB
+error: no suitable video mode found.
+"                                    GNU GRUB  version 2.12-1+b1"...
+
+The documentation for bootflow command seems to have a lot more
+options than what I'm seeing now?
