@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7FCEC54E64
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 15:08:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AC47C54E64
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 15:08:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A96188127;
-	Thu, 28 Mar 2024 16:08:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 895BB88167;
+	Thu, 28 Mar 2024 16:08:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OKm1G4so";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="taJms2E8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 14BE088150; Thu, 28 Mar 2024 16:08:31 +0100 (CET)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id 6094688010; Thu, 28 Mar 2024 16:08:52 +0100 (CET)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA68C88010
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 16:08:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 22DDC8818B
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 16:08:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-430bf84977dso5780231cf.1
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:08:28 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6963c0c507eso10509646d6.1
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:08:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711638507; x=1712243307; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1711638529; x=1712243329; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ktp4U8VX1Mga9ZYn2vo0PBP7orb9/XPIxw4hFBUDpX4=;
- b=OKm1G4soxY2mBrP6coVnQsfud/gtDpJoJ7XzBv/aIuH+Q6GFtesC2sWonLD/16rdSY
- uJaKGEDCJ48AiGIWrSGln3EggPIKqX9UDiYe5NEB2VgpP+CxJC8Uv5qMDjkbKXq/Lswa
- CMcfOBoe3efu0YfNWCTQbTReT1BPrHmsnuGog=
+ bh=QS+hg62/qIViyirO/q82NoS7jAIJO2wecoD0pdm6drw=;
+ b=taJms2E8lveGgYAKhP1/ZBfg30LJUJymqSyh3rd8V21r8Bw+iJRvdWB6RLmKyp/q+E
+ H3XvhQ1d9TxuxcwtpQsJKk05GJq2eyTiAb0c5LfGGiZwPBi5vV/C/WNyyKJn3ny39w3U
+ KGY3j5uGQe+Zc44nf4KOZmVltDWOJSok8Wa5Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711638507; x=1712243307;
+ d=1e100.net; s=20230601; t=1711638529; x=1712243329;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ktp4U8VX1Mga9ZYn2vo0PBP7orb9/XPIxw4hFBUDpX4=;
- b=Ia4roDtiYicrLDM06yxBlJa88RU3aCD+3pcZBu7R/Lom2rmGCMefIo2zS3qOLEo9T1
- Off4fSu2Rchx34bc7BN82QlaVciJ7cITGe0GDGtBr6LGMMzpjkvZi1iBIOpmxcRA/oPc
- 627mbdqLtMoUNgLbtCqHlBH5gwdxMPk/SItj1kn3QQTZRSeVxw3qvpfikk5TGR5VFQSt
- F2JIeZS4Iu2ecPM7XtmIyBeVt8eNIvA+fR3YUPS5gxBgHXNQNrfe6JgZc19N2di6i4nv
- 7LEPF27iAbJdfitC+DVIHMLXRkLxRS1ZeIeNv4wRRuOkO3WC/AtgOZaEICdLeRwoTy9L
- U7Gg==
-X-Gm-Message-State: AOJu0YxG5zyJ238IxF2RqwTc4IUhc/ioAX5wXiqcf/KB2ONlJDznviPX
- Jfq3jjhfj2Lr/ibLEbE6fDU2Lg59ACzFKG7gywYE9dolzmyYbFm8LlVbaPXkbUg=
-X-Google-Smtp-Source: AGHT+IECsTLFG0Q4mB++wPm51EVXO+WHhDuQ1lo3IaEqc9x9xYzMbmMKebYkHg0t6mhy7c3SkzJVMA==
-X-Received: by 2002:ac8:7c49:0:b0:432:b568:4218 with SMTP id
- o9-20020ac87c49000000b00432b5684218mr1877721qtv.7.1711638507336; 
- Thu, 28 Mar 2024 08:08:27 -0700 (PDT)
+ bh=QS+hg62/qIViyirO/q82NoS7jAIJO2wecoD0pdm6drw=;
+ b=bwj18VCI0RVKhyaYzXcCbYtSR1UUdrRVWPWmc9MRM0ogULCHUAAVKNEe6vgQlgV0yH
+ jcKE6nC6K5a77ZlYoX0WV++x9nQ8vkdCoGyPuJsfufWzDAJYscgSci/Jw1VuHONWQluc
+ +xfrT0Pa76E3OzF3Qm+RbMxb03TCmTRTUyeWvGRimEKEA72aq1lEwu9XV7O7djYYxzOw
+ TeZApqJTpsBfWEXxORNcCAXp2Fb9J+dpsIJyGroyV12mdSl/5M7sgfLU1f3oFtWtCH0Q
+ 0AafX19xeUf/EWRTJ0z9XgeljcViDzKvTz81JsDvZhNBumjCU3Nm3laVVbyKQtVBsTPZ
+ DT1w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVK3Vmr9ySaWoUpeyTrShyneOMK9PhcYFTd5fvlhiqBC8zoyZTlBEixere5pslgZ/xsKRVgTjJeAx/ntJ+4OW4EFgaRYA==
+X-Gm-Message-State: AOJu0YzCk8ckqC3KdtWBfCxJTPNZCDulVOQ8xA6jYWHqoMLKBBBYM9GA
+ AYzjYDS0C+SkoLPhOBHFGMcX0K2Dhpu9vrxYSTp2yFe7C5PjNHaNcx84h7xSwd5lHNisem6BdfI
+ Y
+X-Google-Smtp-Source: AGHT+IERg/ENtx0jeMD305bXSOZpJ8IcMIb3Wc6dkznP7T5mBkAcASOIaUQqGkOlD1mXKrqlt6/51w==
+X-Received: by 2002:ad4:4e26:0:b0:696:3e05:9c21 with SMTP id
+ dm6-20020ad44e26000000b006963e059c21mr3476636qvb.18.1711638528931; 
+ Thu, 28 Mar 2024 08:08:48 -0700 (PDT)
 Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
  by smtp.gmail.com with ESMTPSA id
- en4-20020a05622a540400b00430a67b3437sm698545qtb.17.2024.03.28.08.08.26
+ a2-20020a056214062200b0068c8be959a0sm713001qvx.111.2024.03.28.08.08.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 08:08:26 -0700 (PDT)
-Date: Thu, 28 Mar 2024 11:08:25 -0400
+ Thu, 28 Mar 2024 08:08:48 -0700 (PDT)
+Date: Thu, 28 Mar 2024 11:08:46 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-Subject: Re: [NEXT] Pull request acpi-next-20240328
-Message-ID: <20240328150825.GP3442575@bill-the-cat>
-References: <e2c1b7e5-ee38-4427-ab03-48a68d41b044@canonical.com>
+To: Jacky Chou <jacky_chou@aspeedtech.com>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
+ marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
+ u-boot@lists.denx.de, BMC-SW@aspeedtech.com
+Subject: Re: [PATCH] net: phy: ncsi: fixed not nullify the pointers after free
+Message-ID: <20240328150846.GS3442575@bill-the-cat>
+References: <20231229014555.3781595-1-jacky_chou@aspeedtech.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TQLn+Z1qF9tNVDbB"
+ protocol="application/pgp-signature"; boundary="v0Fyjr3PnUCpkqZJ"
 Content-Disposition: inline
-In-Reply-To: <e2c1b7e5-ee38-4427-ab03-48a68d41b044@canonical.com>
+In-Reply-To: <20231229014555.3781595-1-jacky_chou@aspeedtech.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -90,54 +95,42 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---TQLn+Z1qF9tNVDbB
+--v0Fyjr3PnUCpkqZJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 28, 2024 at 11:16:56AM +0100, Heinrich Schuchardt wrote:
-> Dear Tom,
+On Fri, Dec 29, 2023 at 09:45:55AM +0800, Jacky Chou wrote:
 
+> The issue occurs the UAF (use-after-free) to cause double free
+> when do the realloc function for the pointers during the
+> reinitialization NC-SI process, and it will cause the memory
+> management occurs error.
+> So, nullify these pointers after free.
 >=20
-> The following changes since commit ab8d9ca3044acf51d8ff3bf3c4718c48f30ad6=
-06:
->=20
->   Merge tag 'v2024.04-rc5' into next (2024-03-25 22:15:47 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-> tags/acpi-next-20240328
->=20
-> for you to fetch changes up to 6eca28b61af1835e70a6feb86f86a0b18b1708c6:
->=20
->   smbios: fill wake-up type (2024-03-27 09:23:30 +0100)
->=20
-> Gitlab CI showed no issues:
-> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/20081
->=20
+> Signed-off-by: Jacky Chou <jacky_chou@aspeedtech.com>
 
 Applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---TQLn+Z1qF9tNVDbB
+--v0Fyjr3PnUCpkqZJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYFh+UACgkQFHw5/5Y0
-tyxc9Av+IpO80mWy5CvGdRjyhhvcy6kMNWloEHDJDWjdtUoTzB53nUQpRMa3BT0/
-KSlktbbQkven0MEvvtPGGpskrXx7SJw1OHtXBsE0BwGZ5FO/Ue//pdbSbPCd7Z+n
-lls3FsGozHCG8Hca+KRP2QQ6D0AO1SloOwDrl2jAqfScH+twrxbkcqYQyJUVb5vX
-KnoVq4kM0VR/31QcUc/F1SYq51JJ/rNjEFiydyTWhB790bco5/L6PeSFZf8joD9w
-K+jjmOwwhwq7J+eFRa3yDUijcXIfttH6lBa+a8yurDufB0l6SMwQ6f4iWeWCqXmC
-ruStzKCp5QC1MTT3CJPCIDC5HZ3mQsusXPg/yaWXo5xCvYFxZb68UQgQ7dSwTQQr
-ZM3DtVXeOa+l+vmv0m/EBWz0wkiEpDDUa7s3PtF2OHUY8mNlh8iFXuHV0Fkqi6NO
-a9JZOtz9lK4Hko1ddRNKSgZpAf4Ae3bNLIzp/oYC7mBcpAuOs4gIxL8DQ7VWdJ1L
-brNNaf77
-=jao3
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYFh/4ACgkQFHw5/5Y0
+tyxY3Qv/WAOC7xnlhQM/nslS2s48SaluIDaK5coYJXtKYf23EzgBfXA4wRGB1d0T
+AVv0nmJ4rbST6Fhe7SNL2a904xyOYKfgjAsMPyjIBxrmA/h99IQu597iLk59dPSN
+uQufVXaBCHC+f3do5C3GDZBC+Q74ZOq6K/2ipUopnVS8e1eDfPQmWxAykEMmDy/G
+8xZLJS5KlrIjYTswkIGh5EXEE7tOnYImDrsmTOEJe+xTnMvs6nWzg1EW4xo/hHPO
+o/hVr6XOqhezsQ1sd3+YloX9BaMd6O6uSCYvhWZE9pBxTnM9OYkjzctWy7ok/SkF
+mHbKsBWOT7lNBqhjUzIePS+zOMblubEyHu5UZLNY5yr6EQpBN6KTF1NCHipdDszB
+rft/OXCdmP1Sh5rxmypKYnlNFOO/p9SH6PTz/9fp6SzVq31nzWPp34KOhP2L1NAx
+RQq8Ust5G7jrL5cTrxgXJUbCSWB4koxI3B3hNAVr8l65UMJl9WwVitHmMBBtb2AS
+dqAG4IS0
+=Yoto
 -----END PGP SIGNATURE-----
 
---TQLn+Z1qF9tNVDbB--
+--v0Fyjr3PnUCpkqZJ--
