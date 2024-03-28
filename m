@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93E6DCD11DF
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 18:01:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6476ACD11DD
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 18:01:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 98D4D881FD;
-	Thu, 28 Mar 2024 18:59:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 14D85881CA;
+	Thu, 28 Mar 2024 18:59:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="USr++w93";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cSq4qb26";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 111A687A0E; Thu, 28 Mar 2024 18:59:55 +0100 (CET)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 7FE778083F; Thu, 28 Mar 2024 18:59:55 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3776F881E3
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 18:59:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1066583348
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 18:59:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-34005b5927eso859697f8f.1
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:59:50 -0700 (PDT)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-341c7c8adf3so793154f8f.0
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:59:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711648790; x=1712253590; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1711648791; x=1712253591; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=R7r7yaX5GC6A7b+YWiB29a1fIsl80G8kHqu1xhDh7Zc=;
- b=USr++w93Kkl7EB6RN+PzNmZGpkT4ELxer90TwltysL29VgSBVLhTwnW9MzJN/wodas
- 2yE6yDjr6YYGuNgwzL1gRgYxxOq6nDuz9X0kU7SXddM3uSux6ZmGy+wfLIibtHZb+aZb
- cRdS2PgEnTRVIEZ63GzDl9MMVd6OH/quKpB5qYNMRhOAL5er+ACjbQC2FO6jEIgn9j9C
- 7ho49Zt+IopNzMmbTWEcYY9z5Nf7/GiDDgUxWrp34vYu+5eaBL2fQx9NIgW1ryp08Rlo
- nitVLbmuXi2JSV8DMum1tDFyJOyOrkKv2ll6YjqlOpUgTAop9YXl4E2BeFoI7iA/sSG8
- 6W3w==
+ :reply-to; bh=8kYov/liTQ82x2KMJHf3ZjJBU6Bbzvx3nDiFsfzeCZs=;
+ b=cSq4qb26sl0l65WVYKhhyYeccRsyrZslG1dsWunS+KZruEGvVl95kYbeKMn5BSkpXh
+ HajfQoGl7MXDhcnynBB08EpSttrOIBj5vZXH0x8Lb4GXJEiWY2ztc9cbcWSbmEF4F9yN
+ yILz4gJaSuz7aFpn0vMSRDza2Zaa21W/KGVHshKdnpR/boxaACVLplmALlvgw/aUkBVy
+ wVAJnNY8NkKwpLBIo8nUNzhb/dPyCnJMDkSQuh/PbFddO1PCergEWoTLJnOECUGxHfck
+ P+MLgfBE2B/YceWi0oNIRA/D/NslY23kVUhZuxc+FSyBp+Yeeg3NGEanWWDvbWKZ9YgN
+ DPXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711648790; x=1712253590;
+ d=1e100.net; s=20230601; t=1711648791; x=1712253591;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R7r7yaX5GC6A7b+YWiB29a1fIsl80G8kHqu1xhDh7Zc=;
- b=VL7Q9SRYd/nooExXfRh0gRYZR29pie4rHKSZYW+wiVGbAQuZ/NlFH9vOWXnVDUFi/1
- NHYFeRvuEH33ybsXR8jpfNHPbKU/6KDAFB4s7a1+DG/nzbPiNsGfAbosu+Li2oT5hF78
- 39PNmQlTqGi0+ub0ZAVUb75VW7dyiN/LUv5kxcFgtdwin9oyZa+cVX9GZnbMw8qAmub+
- 1z4yl5/PcBVdMm8WUNWe4NL3ueBCaxdrHpOywMEOQtyHVQ0vmFFsdmuaDGTPZ3T2cJUu
- nSvQ23A/J3i5OV5HBXpOHF+dwHCkVNpG6tjdQ5Nk8lAVp21InkDcGE1UFrMrtPL2vJZZ
- jUew==
-X-Gm-Message-State: AOJu0Yy/YnMCOs5vUjiLTetpxZH9ddMLlloR99iLohTw6ka+RhOOtpfn
- uvKGhX1KEEEEwLkis910InVRq5mOW3iweEBtg5TcgMPWw8GcqWewUR9sjZmrwiQ=
-X-Google-Smtp-Source: AGHT+IGKXGeLcK7bnkkBuswDCwpldFogOruIoFcKvVSI28CcMa3yX0u3y6sHxJHa/phmdgtkc8rayQ==
-X-Received: by 2002:a5d:47cd:0:b0:33d:c217:e8a4 with SMTP id
- o13-20020a5d47cd000000b0033dc217e8a4mr3449654wrc.14.1711648789843; 
- Thu, 28 Mar 2024 10:59:49 -0700 (PDT)
+ bh=8kYov/liTQ82x2KMJHf3ZjJBU6Bbzvx3nDiFsfzeCZs=;
+ b=nc4Lt8Ac1AfntRKR1RKhREUnWy3W2bmWF9Rtv5qjUmWvkJTTOp5SZgcbv8YKGKIBiE
+ KJs/+t/Pl/l1QsAmqtJDxeQrL3Njf30R3E9jBEoWtVtF+58Nlngai3dErfICgQfsGxuN
+ NLbBOmbqHKF8AcpcVctM75HGrDtdb654r/U8waSDHwBtDMFV3oEzykBSZpN+wIowYNNl
+ Mb+MCvO1uzDmh6XMiVxpY0v4eC+KFlIfnRSoxn/zdlJnoQnHq/J27nDdYjTLup06SpyJ
+ Gd0JoE9Ddj7D7292DdIYPZIFjbQD8IXh+H7lW8YmDVqVdQJqL2lY7i8W5RuVsDl56b0r
+ gm3A==
+X-Gm-Message-State: AOJu0YxmfqGmRfKR5IPIczo4V3YXUirF5Mahe4oO3GSzncnfuc4vvabM
+ CqP2j8RreyT4OVQ/hLi9lLTeKWaioGfWGZvhmUqI+PbIj1AzoPgcgCzk2uPMA/8=
+X-Google-Smtp-Source: AGHT+IFer9Eq9IWBIjK5jStGuqqP4E2elgvtBDoqnY1EOdny6QRrfhlZ2mMZ8eEyiR8c9t58WPCr6Q==
+X-Received: by 2002:adf:f44f:0:b0:33e:9dff:a3f7 with SMTP id
+ f15-20020adff44f000000b0033e9dffa3f7mr2780826wrp.62.1711648791649; 
+ Thu, 28 Mar 2024 10:59:51 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a5d4acd000000b00341e5f487casm2292237wrs.46.2024.03.28.10.59.48
+ y13-20020a5d4acd000000b00341e5f487casm2292237wrs.46.2024.03.28.10.59.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 10:59:49 -0700 (PDT)
+ Thu, 28 Mar 2024 10:59:51 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 28 Mar 2024 17:59:14 +0000
-Subject: [PATCH v5 08/16] gpio: msm_gpio: add .set_flags op
+Date: Thu, 28 Mar 2024 17:59:16 +0000
+Subject: [PATCH v5 10/16] mach-snapdragon: fixup USB nodes
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240328-b4-qcom-livetree-v5-8-4e98228b3d03@linaro.org>
+Message-Id: <20240328-b4-qcom-livetree-v5-10-4e98228b3d03@linaro.org>
 References: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
 In-Reply-To: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -79,13 +79,13 @@ To: Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2578;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6817;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=O61GGp35CPRo6Gs3ecjo0wdiQX5EtInYxOC3wND9vEE=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTWDZxbTOueWl1rE2PcHNss5LnBjF07RPhpaX6Yf/PC6
- uSmhNUdpSwMghwMsmKKLOInllk2rb1sr7F9wQWYOaxMIEMYuDgFYCJ3pjH899lkevvTim2J7Hbz
- mIVe/NrR9P7h7+VNlffym/vCMpU++jMybJpYv/dr9vzsF8ue+M79eMk+mje8RnpJyku9junTA3M
- /1wAA
+ bh=gK9Jwt3hMxnTPj7O/O0mZ0f7yso4mriyeJANT7O7crM=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTWDVxX8oITV6T9nOaweO2LCyIm66UK4vRKt199sylx+
+ kHxqy8nd5SyMAhyMMiKKbKIn1hm2bT2sr3G9gUXYOawMoEMYeDiFICJNCQz/PeU5epQXSJRsTap
+ 8xLP5ZgDs79L6bvaGk6IZ9i07hHbCVFGhraio48q08Oe5kZy2FStNw/7vIJr+fqPsf/UDD0tlp/
+ gbgYA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -104,85 +104,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The .direction_input and .direction_output ops are deprecated, and don't
-seem to behave properly for us. Implement our own .set_flags op to
-handle this correctly.
+We don't support USB super-speed in U-Boot yet, we lack the SS PHY
+drivers, however from my testing even with a PHY driver there seem to be
+other issues when talking to super-speed peripherals.
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+In pursuit of maintaining upstream DT compatibility, and simplifying
+porting for new devices, let's implement the DT fixups necessary to
+configure USB in high-speed only mode at runtime. The pattern is
+identical for all Qualcomm boards that use the Synaptics DWC3
+controller:
+
+* Add an additional property on the Qualcomm wrapper node
+* Remove the super-speed phy phandle and phy-name entries.
+
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/gpio/msm_gpio.c | 27 +++++++++++++++++++++------
- 1 file changed, 21 insertions(+), 6 deletions(-)
+ arch/arm/mach-snapdragon/Makefile    |   1 +
+ arch/arm/mach-snapdragon/board.c     |   3 +
+ arch/arm/mach-snapdragon/of_fixup.c  | 123 +++++++++++++++++++++++++++++++++++
+ arch/arm/mach-snapdragon/qcom-priv.h |  20 ++++++
+ 4 files changed, 147 insertions(+)
 
-diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
-index 5e57b0cbde75..f5d9ab54e817 100644
---- a/drivers/gpio/msm_gpio.c
-+++ b/drivers/gpio/msm_gpio.c
-@@ -34,21 +34,21 @@ struct msm_gpio_bank {
+diff --git a/arch/arm/mach-snapdragon/Makefile b/arch/arm/mach-snapdragon/Makefile
+index 857171e593da..7a4495c8108f 100644
+--- a/arch/arm/mach-snapdragon/Makefile
++++ b/arch/arm/mach-snapdragon/Makefile
+@@ -2,4 +2,5 @@
+ #
+ # (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
  
- #define GPIO_IN_OUT_REG(dev, x) \
- 	(GPIO_CONFIG_REG(dev, x) + 0x4)
+ obj-y += board.o
++obj-$(CONFIG_OF_LIVE) += of_fixup.o
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index 6f762fc948bf..65e4c61e866a 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -27,8 +27,10 @@
+ #include <fdt_support.h>
+ #include <usb.h>
+ #include <sort.h>
  
--static int msm_gpio_direction_input(struct udevice *dev, unsigned int gpio)
-+static void msm_gpio_direction_input(struct udevice *dev, unsigned int gpio)
++#include "qcom-priv.h"
++
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+ static struct mm_region rbx_mem_map[CONFIG_NR_DRAM_BANKS + 2] = { { 0 } };
+ 
+@@ -159,8 +161,9 @@ void __weak qcom_board_init(void)
+ 
+ int board_init(void)
  {
- 	struct msm_gpio_bank *priv = dev_get_priv(dev);
- 
- 	/* Always NOP for special pins, assume they're in the correct state */
- 	if (qcom_is_special_pin(priv->pin_data, gpio))
--		return 0;
-+		return;
- 
- 	/* Disable OE bit */
- 	clrsetbits_le32(priv->base + GPIO_CONFIG_REG(dev, gpio),
- 			GPIO_OE_MASK, GPIO_OE_DISABLE);
- 
--	return 0;
-+	return;
- }
- 
- static int msm_gpio_set_value(struct udevice *dev, unsigned int gpio, int value)
- {
-@@ -83,8 +83,25 @@ static int msm_gpio_direction_output(struct udevice *dev, unsigned int gpio,
- 
+ 	show_psci_version();
++	qcom_of_fixup_nodes();
+ 	qcom_board_init();
  	return 0;
  }
  
-+static int msm_gpio_set_flags(struct udevice *dev, unsigned int gpio, ulong flags)
+diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
+new file mode 100644
+index 000000000000..4fdfed2dff16
+--- /dev/null
++++ b/arch/arm/mach-snapdragon/of_fixup.c
+@@ -0,0 +1,123 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * OF_LIVE devicetree fixup.
++ *
++ * This file implements runtime fixups for Qualcomm DT to improve
++ * compatibility with U-Boot. This includes adjusting the USB nodes
++ * to only use USB high-speed, as well as remapping volume buttons
++ * to behave as up/down for navigating U-Boot.
++ *
++ * We use OF_LIVE for this rather than early FDT fixup for a couple
++ * of reasons: it has a much nicer API, is most likely more efficient,
++ * and our changes are only applied to U-Boot. This allows us to use a
++ * DT designed for Linux, run U-Boot with a modified version, and then
++ * boot Linux with the original FDT.
++ *
++ * Copyright (c) 2024 Linaro Ltd.
++ *   Author: Caleb Connolly <caleb.connolly@linaro.org>
++ */
++
++#include <dt-bindings/input/linux-event-codes.h>
++#include <dm/of_access.h>
++#include <dm/of.h>
++#include <fdt_support.h>
++#include <linux/errno.h>
++#include <time.h>
++
++/* U-Boot only supports USB high-speed mode on Qualcomm platforms with DWC3
++ * USB controllers. Rather than requiring source level DT changes, we fix up
++ * DT here. This improves compatibility with upstream DT and simplifies the
++ * porting process for new devices.
++ */
++static int fixup_qcom_dwc3(struct device_node *glue_np)
 +{
-+	if (flags & GPIOD_IS_OUT_ACTIVE) {
-+		return msm_gpio_direction_output(dev, gpio, 1);
-+	} else if (flags & GPIOD_IS_OUT) {
-+		return msm_gpio_direction_output(dev, gpio, 0);
-+	} else if (flags & GPIOD_IS_IN) {
-+		msm_gpio_direction_input(dev, gpio);
-+		if (flags & GPIOD_PULL_UP)
-+			return msm_gpio_set_value(dev, gpio, 1);
-+		else if (flags & GPIOD_PULL_DOWN)
-+			return msm_gpio_set_value(dev, gpio, 0);
++	struct device_node *dwc3;
++	int ret, len, hsphy_idx = 1;
++	const __be32 *phandles;
++	const char *second_phy_name;
++
++	debug("Fixing up %s\n", glue_np->name);
++
++	/* Tell the glue driver to configure the wrapper for high-speed only operation */
++	ret = of_write_prop(glue_np, "qcom,select-utmi-as-pipe-clk", 0, NULL);
++	if (ret) {
++		log_err("Failed to add property 'qcom,select-utmi-as-pipe-clk': %d\n", ret);
++		return ret;
++	}
++
++	/* Find the DWC3 node itself */
++	dwc3 = of_find_compatible_node(glue_np, NULL, "snps,dwc3");
++	if (!dwc3) {
++		log_err("Failed to find dwc3 node\n");
++		return -ENOENT;
++	}
++
++	phandles = of_get_property(dwc3, "phys", &len);
++	len /= sizeof(*phandles);
++	if (len == 1) {
++		log_debug("Only one phy, not a superspeed controller\n");
++		return 0;
++	}
++
++	/* Figure out if the superspeed phy is present and if so then which phy is it? */
++	ret = of_property_read_string_index(dwc3, "phy-names", 1, &second_phy_name);
++	if (ret == -ENODATA) {
++		log_debug("Only one phy, not a super-speed controller\n");
++		return 0;
++	} else if (ret) {
++		log_err("Failed to read second phy name: %d\n", ret);
++		return ret;
++	}
++
++	if (!strncmp("usb3-phy", second_phy_name, strlen("usb3-phy"))) {
++		log_debug("Second phy isn't superspeed (is '%s') assuming first phy is SS\n",
++			  second_phy_name);
++		hsphy_idx = 0;
++	}
++
++	/* Overwrite the "phys" property to only contain the high-speed phy */
++	ret = of_write_prop(dwc3, "phys", sizeof(*phandles), phandles + hsphy_idx);
++	if (ret) {
++		log_err("Failed to overwrite 'phys' property: %d\n", ret);
++		return ret;
++	}
++
++	/* Overwrite "phy-names" to only contain a single entry */
++	ret = of_write_prop(dwc3, "phy-names", strlen("usb2-phy"), "usb2-phy");
++	if (ret) {
++		log_err("Failed to overwrite 'phy-names' property: %d\n", ret);
++		return ret;
++	}
++
++	ret = of_write_prop(dwc3, "maximum-speed", strlen("high-speed"), "high-speed");
++	if (ret) {
++		log_err("Failed to set 'maximum-speed' property: %d\n", ret);
++		return ret;
 +	}
 +
 +	return 0;
 +}
 +
- static int msm_gpio_get_value(struct udevice *dev, unsigned int gpio)
- {
- 	struct msm_gpio_bank *priv = dev_get_priv(dev);
- 
-@@ -109,12 +126,10 @@ static int msm_gpio_get_function(struct udevice *dev, unsigned int gpio)
- 	return GPIOF_INPUT;
- }
- 
- static const struct dm_gpio_ops gpio_msm_ops = {
--	.direction_input	= msm_gpio_direction_input,
--	.direction_output	= msm_gpio_direction_output,
-+	.set_flags		= msm_gpio_set_flags,
- 	.get_value		= msm_gpio_get_value,
--	.set_value		= msm_gpio_set_value,
- 	.get_function		= msm_gpio_get_function,
- };
- 
- static int msm_gpio_probe(struct udevice *dev)
++static void fixup_usb_nodes(void)
++{
++	struct device_node *glue_np = NULL;
++	int ret;
++
++	while ((glue_np = of_find_compatible_node(glue_np, NULL, "qcom,dwc3"))) {
++		ret = fixup_qcom_dwc3(glue_np);
++		if (ret)
++			log_warning("Failed to fixup node %s: %d\n", glue_np->name, ret);
++	}
++}
++
++#define time_call(func, ...) \
++	do { \
++		u64 start = timer_get_us(); \
++		func(__VA_ARGS__); \
++		debug(#func " took %lluus\n", timer_get_us() - start); \
++	} while (0)
++
++void qcom_of_fixup_nodes(void)
++{
++	time_call(fixup_usb_nodes);
++}
+diff --git a/arch/arm/mach-snapdragon/qcom-priv.h b/arch/arm/mach-snapdragon/qcom-priv.h
+new file mode 100644
+index 000000000000..0a7ed5eff8b8
+--- /dev/null
++++ b/arch/arm/mach-snapdragon/qcom-priv.h
+@@ -0,0 +1,20 @@
++// SPDX-License-Identifier: GPL-2.0
++
++#ifndef __QCOM_PRIV_H__
++#define __QCOM_PRIV_H__
++
++#if CONFIG_IS_ENABLED(OF_LIVE)
++/**
++ * qcom_of_fixup_nodes() - Fixup Qualcomm DT nodes
++ *
++ * Adjusts nodes in the live tree to improve compatibility with U-Boot.
++ */
++void qcom_of_fixup_nodes(void);
++#else
++static inline void qcom_of_fixup_nodes(void)
++{
++	log_debug("Unable to dynamically fixup USB nodes, please enable CONFIG_OF_LIVE\n");
++}
++#endif /* OF_LIVE */
++
++#endif /* __QCOM_PRIV_H__ */
 
 -- 
 2.44.0
