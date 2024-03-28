@@ -4,85 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 724C6C54E67
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 15:10:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AACCC54E64
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 15:33:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D338881C1;
-	Thu, 28 Mar 2024 16:09:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 910A68817C;
+	Thu, 28 Mar 2024 16:33:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iEt1B9yo";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="NonFFJfV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AF73881BE; Thu, 28 Mar 2024 16:09:41 +0100 (CET)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 075C488172; Thu, 28 Mar 2024 16:33:52 +0100 (CET)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FCD9881BC
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 16:09:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 835BA8818F
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 16:33:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-696147fb5a7so8942456d6.0
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:09:39 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-51588f70d2dso1179689e87.3
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:33:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711638578; x=1712243378; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=I2lh8q2YWYvuVsNb3dn7SJHD+zkjRSWTkdwxidhw0h0=;
- b=iEt1B9yoldka2Z2Mmw1yIiXZrYxp4xWBjJkjtJC25Lf5qAwghXmOEwMiiAFFZlY5f4
- 0JrIToJk7pFWE4pldN18qzApI2OWOucfFVSGKaInpwxrV21ItMPqfiOdf+2mWwJovC4a
- Ha168RimWGFrKgmFEYsbZEbkSdrs2oorGxVAo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711638578; x=1712243378;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gateworks.com; s=google; t=1711640029; x=1712244829; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I2lh8q2YWYvuVsNb3dn7SJHD+zkjRSWTkdwxidhw0h0=;
- b=TcNpUPxiSFpvoWLnzq9zcZyZmJ5r8VzYCh5hZspodKCmxPiD/2xQMyFVhwYwYOtRfB
- PD3Migje4cOhvsQa33hWM1VaStMFDcAYS9AyNEEZOOk8753mfGpFF9udErRWl2DZzLfp
- oPBS/h5uz6oC0qxyaPCr6NMjgmPc8yhHWLl2FLqJVg1Gt+bJ08TQ9s8XLcY4mZ2FwoBj
- WSRh5BoZ9P3eDzE99icQi2FmCMURpj64K5Xigps9SkcwW9+Sxt67G/aEFAWhkierddp4
- YhP2ybQMhI8iRDLpKBlMFGVEBhU/jsnCHHtd9Kzt92PAK4fakSeEuzk530qsENkMoNL+
- MIHg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUVfJpaHBUHXEBjwjdrECsrvZVhwpiaRhS0qW3LE9fXWFFHSTg8gHQqis+o9vR7BL8ev2Ag6I5M7ZBkQT/T6tspHeATQg==
-X-Gm-Message-State: AOJu0YzsCc9+ULaJObmkY0++9k+xG92lshkOacFJeAbCu0SLbtieF0Dq
- b0BBWLu7sTVER0dk+PerMUxts18jP03x1KIagbS6oYN49dvEh6lzgenAPEOFPr0=
-X-Google-Smtp-Source: AGHT+IEOgxkSQIMmCCpbZYqz8Jpr7B5Ba+CnS8HpZVhW6B5UwS9/S7zTqvWEuPWuKsWNAm1cZImTwA==
-X-Received: by 2002:a0c:f704:0:b0:696:93f3:7cb3 with SMTP id
- w4-20020a0cf704000000b0069693f37cb3mr1971188qvn.51.1711638577908; 
- Thu, 28 Mar 2024 08:09:37 -0700 (PDT)
-Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
- by smtp.gmail.com with ESMTPSA id
- t1-20020a05621421a100b0069682be3e86sm717211qvc.125.2024.03.28.08.09.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 08:09:37 -0700 (PDT)
-Date: Thu, 28 Mar 2024 11:09:35 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Roger Quadros <rogerq@kernel.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Nishanth Menon <nm@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Wadim Egorov <w.egorov@phytec.de>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Simon Glass <sjg@chromium.org>, srk@ti.com, s-vadapalli@ti.com,
- vigneshr@ti.com, r-gunasekaran@ti.com, danishanwar@ti.com,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 2/5] configs/am62x_beagleplay_a53_defconfig: enable
- DM_ETH_PHY
-Message-ID: <20240328150935.GC3442575@bill-the-cat>
-References: <20240305-for-2024-07-beagleplay-eth-v1-0-e1294a575cc1@kernel.org>
- <20240305-for-2024-07-beagleplay-eth-v1-2-e1294a575cc1@kernel.org>
+ bh=QIM3G2enVj7MiiH6J64Xfh7HnI6aDTRFfxqn8C8FIbw=;
+ b=NonFFJfVLsct39voPXSHcnL4rLpTBLqlFUFrRUuHL6VPQa1nsfxKfxDA+y9lhraAse
+ OVphi+pzUsQB46fudfyg7S92+stINy87HNu/hWMTIJbLgs+fM6BARGbzwzUvceOlPwXS
+ eJuMZC4B/WasWV8GR/MK5Vnf6isslcJSkXuLXqYO53OgDAh7d9qFvVGCcq0O74ZQRedA
+ z4LSMugGpccn6qLm2hgn+UYqRySlkxDKI5fQw8TtR0YOKbfcJB7zKB20qKWeUchtdzoM
+ YJugWKWGsiyF+mO2CrNYlJ1G//VWfJRwxMuDrSLdo2uRCJCz9BcIxtLiU0IYko7+KVJe
+ e02g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711640029; x=1712244829;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QIM3G2enVj7MiiH6J64Xfh7HnI6aDTRFfxqn8C8FIbw=;
+ b=qwFqTsD7RlT5ZYCQCxLh1YTy4rW8Cg1E452HvjR7h8MYVXXk07SnnX/QnnTAF3iMEb
+ fRjhUK9lhU5RkzzlEMDWqK6PWlxLO23GWXvIHdjfb+ThcH2rJhtBtNsRm7E8EoDVT+0n
+ adyVmXw5GCxp3DJ6PCr72nWZqdfAnNvCplZtCEHpwMSegQ1c6uZE0yd+jxjMi5+DwP35
+ 4cKyHExb/NDSSpeEsu8XcSEgcJa/8cx5Jf9Okpa8yzfgTleFz2IHVa5hXSYVt8EKxtnA
+ vW5ioF3chj1MTd3xBI8GKbIXjV6PUPU+XDfQNMTNqaHRDd/gZ+LloyYa37kxLDanaiqV
+ bTlQ==
+X-Gm-Message-State: AOJu0Yw+2Q+Ds+SDcRM5wsoCD/vvQA2bU/yOyVTNLlXtykcjkB1E4YVM
+ 6WLf0eT43VPjddpI1GePcgpx6/iqVtbegbpBk/frzELgqWMju0iNj8y+Hw8U0yBGu8DfWIAHRBq
+ rgie6i6+UcsG0ZDXw75qP8BUcnLuc+Afpz7kxOg==
+X-Google-Smtp-Source: AGHT+IGZeHwbpiqBkBAS6x2ZIW5T8GNxsB2gejQI/Wrq4rZFyfNAhs9Ws12EBqPlKLsCmjI9yd1F2gIJFDNI/TQgiz0=
+X-Received: by 2002:a05:6512:40b:b0:515:c770:a7bf with SMTP id
+ u11-20020a056512040b00b00515c770a7bfmr1568579lfk.63.1711640028624; Thu, 28
+ Mar 2024 08:33:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="76cLybKAkQV337qa"
-Content-Disposition: inline
-In-Reply-To: <20240305-for-2024-07-beagleplay-eth-v1-2-e1294a575cc1@kernel.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20240327223704.1883824-1-tharvey@gateworks.com>
+ <CAC_iWjL+oK9FQGGc-ZOGK8Ai0nZTeVWEz0HWa8Wsa2=_gpkuhQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjL+oK9FQGGc-ZOGK8Ai0nZTeVWEz0HWa8Wsa2=_gpkuhQ@mail.gmail.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Thu, 28 Mar 2024 08:33:36 -0700
+Message-ID: <CAJ+vNU1-WPNzy35GGPJHBt0P13GKMCRLrhCjP+JVwr=-zcSV5A@mail.gmail.com>
+Subject: Re: [PATCH] tpm-v2: allow algo name to be conigured for pcr_read and
+ pcr_extend
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de, Eddie James <eajames@linux.ibm.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,42 +89,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Mar 28, 2024 at 12:37=E2=80=AFAM Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Hi Tim,
+>
+> [...]
+>
+> >
+> > +/**
+> > + * tpm2_algo_len() - Return an algo value and length given a algorithm=
+ name
+> > + *
+> > + * @name: algorithm name
+> > + * @rwlen: pointer to integer to populate with algorithm length if non=
+-null
+> > + * Return: algorithm value
+> > + */
+> > +int tpm2_algo_len(const char *name, int *rwlen);
+> > +
+> > +/**
+> > + * tpm2_algo_len() - Return an algoithm name string
+> > + *
+> > + * @algo: algorithm value
+> > + * Return: algorithm string
+> > + */
+> > +const char *tpm2_algo_name(int algo);
+> > +
+> >  #endif /* __TPM_V2_H */
+> > diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+> > index 68eaaa639f89..6a090ce5810c 100644
+> > --- a/lib/tpm-v2.c
+> > +++ b/lib/tpm-v2.c
+> > @@ -1555,3 +1555,49 @@ u32 tpm2_enable_nvcommits(struct udevice *dev, u=
+int vendor_cmd,
+> >
+> >         return 0;
+> >  }
+> > +
+> > +int tpm2_algo_len(const char *name, int *rwlen)
+> > +{
+> > +       int algo =3D -EINVAL;
+> > +       int len =3D 0;
+> > +
+> > +       if (!strcasecmp("sha1", name)) {
+> > +               algo =3D TPM2_ALG_SHA1;
+> > +               len =3D TPM2_SHA1_DIGEST_SIZE;
+> > +       } else if (!strcasecmp("sha256", name)) {
+> > +               algo =3D TPM2_ALG_SHA256;
+> > +               len =3D TPM2_SHA256_DIGEST_SIZE;
+> > +       } else if (!strcasecmp("sha384", name)) {
+> > +               algo =3D TPM2_ALG_SHA384;
+> > +               len =3D TPM2_SHA384_DIGEST_SIZE;
+> > +       } else if (!strcasecmp("sha512", name)) {
+> > +               algo =3D TPM2_ALG_SHA512;
+> > +               len =3D TPM2_SHA512_DIGEST_SIZE;
+> > +       } else if (!strcasecmp("sm3_256", name)) {
+> > +               algo =3D TPM2_ALG_SM3_256;
+> > +               len =3D TPM2_SM3_256_DIGEST_SIZE;
+> > +       }
+> > +
+> > +       if (*rwlen)
+> > +               *rwlen =3D len;
+> > +
+> > +       return algo;
+> > +}
+> > +
+>
+> We already have tpm2_algorithm_to_len(). Instead of defining a new
+> function, can we convert strings to 'enum tpm2_algorithms'? We can
+> then reuse the existing function.
+>
 
---76cLybKAkQV337qa
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Ilias,
 
-On Tue, Mar 05, 2024 at 03:24:54PM +0200, Roger Quadros wrote:
+Thanks - I didn't see tpm2_algorithm_to_len. Yes, I can use it but I
+still need to add a new function to turn the name into an algo. I also
+didn't see tpm2_supported_algorithms; should I only support
+name-to-algorithm and algorithm-to-name for that subset?
 
-> Reset GPIO handling is done in ETH PHY Class driver.
-> Enable DM_ETH_PHY.
->=20
-> We don't use Fixed PHY so disable PHY_FIXED.
->=20
-> Signed-off-by: Roger Quadros <rogerq@kernel.org>
+Best Regards,
 
-Applied to u-boot/next, thanks!
+Tim
 
---=20
-Tom
-
---76cLybKAkQV337qa
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYFiC8ACgkQFHw5/5Y0
-tyx8SQv+LQLbFgyQHOPd7KedY+xJHkOCsy9c8XlVi7FtrC5XhQWMR3iMdhfj3xVP
-cy86fe31InLHjx9dXUbgG4JE/ueodW4kokCZH1lFk53M13PShtf1DGDjF5FoKjAb
-QMtxF4wZS3oYGARCCP7eiZk8gLe1vdXkNRVy+SUqZF9RGaog+1BFT9a6/oHbYHMI
-YFoTWDvUN/63ScPdWJbhASo/yMjwDNxQOvSF+JbFolrZr8FvIEdvSFukKtT50I+U
-ewdf/56CjdLTptQuJUtk1cw+H/Oyt1oyuEE0VkKpb/Hkc+p44B8TsUBk9QfyNaCC
-mWld8lzm6SCkRUeukXZhhwUwN+HUUBgw+iaVoDgD2Jm0dxeRf53gHRvDkZKcEhKw
-bWoIWUcLMqHBIGx8Dlbxa/wXwmtm7H7B7/e6dQ7Q01bZTo8nHoDMsPalLoCBkgAH
-uHWOOrUuxoGT+vvfj1vpXHo2JxU7gtqp1AAbItu/PsPpBDpVqfq9BdT9FIS8nV3a
-a7S3/0/d
-=3qJS
------END PGP SIGNATURE-----
-
---76cLybKAkQV337qa--
+> > +const char *tpm2_algo_name(int algo)
+> > +{
+> > +       switch (algo) {
+> > +       case TPM2_ALG_SHA1:
+> > +               return "sha1";
+> > +       case TPM2_ALG_SHA256:
+> > +               return "sha256";
+> > +       case TPM2_ALG_SHA384:
+> > +               return "sha384";
+> > +       case TPM2_ALG_SHA512:
+> > +               return "sha512";
+> > +       case TPM2_ALG_SM3_256:
+> > +               return "sm3_256";
+> > +       }
+> > +
+> > +       return "";
+> > +}
+> > --
+> > 2.25.1
+> >
+>
+> Thanks
+> /Ilias
