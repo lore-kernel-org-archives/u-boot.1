@@ -4,64 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8440CD11DF
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 22:29:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89291CD11DD
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 22:30:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DD4A8818B;
+	by phobos.denx.de (Postfix) with ESMTP id AD13F8820D;
 	Thu, 28 Mar 2024 23:29:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bM/kD5hL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uIkP2GIO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4D6087D43; Thu, 28 Mar 2024 23:29:55 +0100 (CET)
-Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
- [IPv6:2001:4860:4864:20::2f])
+ id C660B87D43; Thu, 28 Mar 2024 23:29:56 +0100 (CET)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B36AE88203
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 23:29:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F6D78820C
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 23:29:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=semen.protsenko@linaro.org
-Received: by mail-oa1-x2f.google.com with SMTP id
- 586e51a60fabf-22222357d76so916218fac.2
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 15:29:53 -0700 (PDT)
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-6e675181ceaso875329a34.2
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 15:29:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711664992; x=1712269792; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=PCZV+dlltxUhxTKZqkPE6ZqobohUd9JSGdhq94MjY+c=;
- b=bM/kD5hLefDTsePFxBpXRJzHx14j9rc7RURUYNcPKUL98/DrHo8sfLQ4XU0KtKnqXT
- t67TOsqZAfZ+sV1GAg+IVPcGiCFS32GNzZWCee7ouvERywttlGzboaytGel0xtE/SCy+
- A7C50T0ExaQ5mLB2RnlGTozD+rHfB2Taf9Zw8VeouOxsi1AkhPeqmljgIFE466lTwcpP
- H34PXvPiFKybfbAoG8it5kNcB/d83iics1jYI7JINd2aCYJHCBPEl0P2FrnxWCA/qu64
- v0h/bdUew3x82ew/gNrMN250tV/gluT7m2jtBpBov/dxLkX4PUjxxU/Q7877vKpg6ydp
- nYQQ==
+ d=linaro.org; s=google; t=1711664993; x=1712269793; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pqiti0bNe3BX+VY7a+1ktOo3ZCQegloD5+euTZJ86L8=;
+ b=uIkP2GIOtyMrMuTa21Ju8eBBvWVmMnf8FkO1t3r63tn1IJkTABiPp3f+3XZpCD73b/
+ YLUZbBBx0H2n4DVC64JQkGL25+njpLY5lOmK8n5PamMnifHgf5lvDy3a9yett3PD9bOI
+ 1WlD5nTnOFM9D/0Nf9aORFc9BJVbyJSq7AhHp2fE6KPSUNr79oQgsblvQoBagbKuqG78
+ o524knfo3HhUFtjwUrLmdS4vIgPS4wJiW4ZFOHMlTAY9LTedr53xmVkiiC9zU3Q0vy8w
+ +UnzQR4fk5MRcMVuqwNA8xo7zMmOMHY2mcH93G0wsoMvPzaAo/1U0Bwpy+0CzuV9AA8r
+ wH8w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711664992; x=1712269792;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=PCZV+dlltxUhxTKZqkPE6ZqobohUd9JSGdhq94MjY+c=;
- b=a5rFMGfJlkTzGegmwJStcpc0i0S7C9JurEOpFQsrC7w4QgkuvNxE88FeVQ/QI+JFm1
- 9lvUqzGkPLV/CTRCgGEToRjDW782TjP3rUbs538+UTulP/OvA1XHP0ScDCaw+KwzYLrJ
- vCXhmQwo3j26AV/6kZu6Ty5Hn6/B4uHjLO/SZH9oyt3Wl+ZUpCy7OWq7fP4DJbQmifod
- kxAojBAH2HWsFWIEGgjVLnGJ7OaDcLs5pum+agVacQQcTH0xGa5ZPFGzKf/wo3sOu8pW
- fCwS3fhNxx7lgtLlyEzI+A5x1dYlbn5qU3NIp+i44B5VT4uTkYiKcTPiFzwNDg+CMLMr
- 0MYw==
+ d=1e100.net; s=20230601; t=1711664993; x=1712269793;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pqiti0bNe3BX+VY7a+1ktOo3ZCQegloD5+euTZJ86L8=;
+ b=b/ssidGw03HY2cfw5QOtVjmBx26onou1m18yJSeW6E0RhOrneUklQq01Bf8LiVpitf
+ Sn3hHrc/FN68IBNqoLYWt+ZQFUBFJv9dRx+YCfF/sMgOTRZVOt/iv8A2wsAGJRZoflJ7
+ j1LuSriybOx/4mew3sh6LNe1fh/n8rSKvJR7KN8B72jQnCC0Gw7M2b7GNqFZZlit7C0b
+ VM7qZDN8UIvMmnOLH9qA7AuxWUBYGXImGzpwwm8fgEhz4qShKkKDMK0EvB5fLlcM/grm
+ LvzWEqBt4/ablfDJ1nB4sq62Nnm8Yv+OSt0+0ycAWyPIT9P9MooegzZDiaHvE2IcvbB5
+ HR5A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUBZnyt00Fi17+GD/LWdJaGNTpkv7kdkP8HFVyGx7O0ikeDl38ZvokuAVEezQGAk6hLgc8b0MeC2Ups/qiwG9scn94MjQ==
-X-Gm-Message-State: AOJu0YyLoRnMcJiYIAjsn2yBu3abAW9GkqXqAh+hLS5dfajg67k9FMC7
- nWp5ZhoyJxqeKhfugN+NDUOLMEKsFtQR7HcT++QB8nIyOVFVi/ZRf6CpGrx2j/Q=
-X-Google-Smtp-Source: AGHT+IENcwebxbZP8sjNjeOeEXIi9zG+povHcLW6CkRfhUxsJ2xp/HoImECo1tJFhNck51AmYq4Urw==
-X-Received: by 2002:a05:6871:741a:b0:229:cec1:cbb8 with SMTP id
- nw26-20020a056871741a00b00229cec1cbb8mr630383oac.3.1711664992459; 
- Thu, 28 Mar 2024 15:29:52 -0700 (PDT)
+ AJvYcCUQuXJoqhRTHiKW29OfBunf1Irb0+JcAp4FoXti//t5746gAZ/xlTkTCPpF2khrN/36FKTUw/7+3jW4DTPnBDz05A4vxA==
+X-Gm-Message-State: AOJu0Yzhl4q60AUdAE7cOdRGgdEiIObRB7u1T6/sXK8tnMzavJ42vR4N
+ JrIPjx7flpSKRXs8NbJhHt4jS0xfrvWIzIwHRSK16UENOX8biwa7C0kN29vwJxyEJK1Em7O7089
+ m
+X-Google-Smtp-Source: AGHT+IH6dAnGQuTJ4vG51erYrfNZbKXahuk3dMBfaiBlQQcAz8DlaZQnrurs6NYCRtDfBvHeLVTBzA==
+X-Received: by 2002:a05:6870:51b:b0:221:91dd:6ea6 with SMTP id
+ j27-20020a056870051b00b0022191dd6ea6mr536482oao.58.1711664993084; 
+ Thu, 28 Mar 2024 15:29:53 -0700 (PDT)
 Received: from localhost ([136.62.192.75]) by smtp.gmail.com with ESMTPSA id
- hz14-20020a05687153ce00b00222623eea36sm602541oac.40.2024.03.28.15.29.52
+ fs14-20020a056870f78e00b0022273a66aadsm610497oab.34.2024.03.28.15.29.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 28 Mar 2024 15:29:52 -0700 (PDT)
 From: Sam Protsenko <semen.protsenko@linaro.org>
@@ -71,10 +73,13 @@ Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
  Joshua Watt <jpewhacker@gmail.com>, Steve Rae <steve.rae@raedomain.com>,
  Petr Kulhavy <brain@jikos.cz>,
  Richard Retanubun <RichardRetanubun@RugggedCom.com>, u-boot@lists.denx.de
-Subject: [PATCH 1/2] part: Check all partitions in part_get_info_by_name()
-Date: Thu, 28 Mar 2024 17:29:50 -0500
-Message-Id: <20240328222951.11431-1-semen.protsenko@linaro.org>
+Subject: [PATCH 2/2] part: efi: Treat unused partition type GUID as a valid
+ case
+Date: Thu, 28 Mar 2024 17:29:51 -0500
+Message-Id: <20240328222951.11431-2-semen.protsenko@linaro.org>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240328222951.11431-1-semen.protsenko@linaro.org>
+References: <20240328222951.11431-1-semen.protsenko@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,50 +98,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In part_get_info_by_name() the inability to get some partition info
-shouldn't be a reason for dropping out of the loop. That might happen
-e.g. if the partition is hidden or unused. An example of such case are
-Samsung devices, where they use the "unused" GUID type
-(00000000-0000-0000-0000-000000000000) to indicate that the partition
-should be hidden from the OS. Such partitions might not be seen in
-"part list" output, which creates "gaps" in numbering in between of the
-visible partitions:
+Some platforms use the "unused" (all-zero) GUID as a partition type GUID
+to make some partitions hidden from the OS. For example, Samsung phones
+and other devices often have GPT partition tables like that, created by
+their "gpt_builder" tool [1]. All partitions with FILESYS=0 value
+(second column in [2] file) will be created in a way that:
+  1. Partition type GUID will be all-zero ("unused")
+  2. Attributes[48:49] bits will be set to 0 (whereas non-zero values
+     mean the partition is visible to the OS: 1=raw, 2=ext4, 3=f2fs)
 
-    Part    Start LBA       End LBA         Name
-      1     0x00000400      0x0000a3ff      "efs"
-      5     0x00026420      0x00026c1f      "dtbo"
-     12     0x0003f390      0x0074738f      "super"
+Although it's true that Linux kernel verifies the partition type GUID to
+be non-zero (in block/partitions/efi.c, is_pte_valid() function), where
+its U-Boot counterpart code was borrowed from originally, in case of
+U-Boot we want to handle partitions with "unused" GUIDs the same way as
+any other valid partitions, to allow the user to interact with those
+(e.g. list partitions using "part list", be able to flash those via
+fastboot, etc).
 
-In that case, the loop in part_get_info_by_name() would break after
-partition #1, so any attempt to obtain "dtbo" or "super" partition will
-fail. Fix that by continuing to iterate over the remaining partitions to
-make sure none of the visible ones is missed. That makes "part" command
-(e.g. "part start", "part size") able to work with such tables.
+[1] https://gitlab.com/Linaro/96boards/e850-96/tools/gpt/
+[2] https://gitlab.com/Linaro/96boards/e850-96/tools/gpt/-/blob/master/gpt_layout
 
-Fixes: 87b8530fe244 ("disk: part: implement generic function part_get_info_by_name()")
+Fixes: 07f3d789b9be ("Add support for CONFIG_EFI_PARTITION (GUID Partition Table)")
 Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 ---
- disk/part.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+ disk/part_efi.c | 21 +++++----------------
+ 1 file changed, 5 insertions(+), 16 deletions(-)
 
-diff --git a/disk/part.c b/disk/part.c
-index 36b88205eca7..08c9331e059c 100644
---- a/disk/part.c
-+++ b/disk/part.c
-@@ -717,8 +717,11 @@ int part_get_info_by_name(struct blk_desc *desc, const char *name,
- 	for (i = 1; i < part_drv->max_entries; i++) {
- 		ret = part_drv->get_info(desc, i, info);
- 		if (ret != 0) {
--			/* no more entries in table */
--			break;
-+			/*
-+			 * Partition with this index can't be obtained, but
-+			 * further partitions might be, so keep checking.
-+			 */
-+			continue;
- 		}
- 		if (strcmp(name, (const char *)info->name) == 0) {
- 			/* matched */
+diff --git a/disk/part_efi.c b/disk/part_efi.c
+index 4ce9243ef25c..6b138abae0a6 100644
+--- a/disk/part_efi.c
++++ b/disk/part_efi.c
+@@ -1166,28 +1166,17 @@ static gpt_entry *alloc_read_gpt_entries(struct blk_desc *desc,
+  */
+ static int is_pte_valid(gpt_entry * pte)
+ {
+-	efi_guid_t unused_guid;
++	/*
++	 * NOTE: Do not check unused (zero) GUIDs here, it's considered a valid
++	 * case in U-Boot.
++	 */
+ 
+ 	if (!pte) {
+ 		log_debug("Invalid Argument(s)\n");
+ 		return 0;
+ 	}
+ 
+-	/* Only one validation for now:
+-	 * The GUID Partition Type != Unused Entry (ALL-ZERO)
+-	 */
+-	memset(unused_guid.b, 0, sizeof(unused_guid.b));
+-
+-	if (memcmp(pte->partition_type_guid.b, unused_guid.b,
+-		sizeof(unused_guid.b)) == 0) {
+-
+-		log_debug("Found an unused PTE GUID at 0x%08X\n",
+-			  (unsigned int)(uintptr_t)pte);
+-
+-		return 0;
+-	} else {
+-		return 1;
+-	}
++	return 1;
+ }
+ 
+ /*
 -- 
 2.39.2
 
