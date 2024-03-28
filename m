@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CC9BCD11DD
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 18:00:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F658CD11DF
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 18:00:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BF48881DE;
+	by phobos.denx.de (Postfix) with ESMTP id 6F8E0881E8;
 	Thu, 28 Mar 2024 18:59:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZfasIqyP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JUoH7lbQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 275CC881D5; Thu, 28 Mar 2024 18:59:47 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 3C6B5881C5; Thu, 28 Mar 2024 18:59:47 +0100 (CET)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 412A0881C6
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 18:59:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AFB5881B9
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 18:59:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-41493e0fbf2so8566395e9.1
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:59:44 -0700 (PDT)
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-341ccef5058so808679f8f.2
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:59:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711648784; x=1712253584; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1711648785; x=1712253585; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=gJUvXphPC3p9rZd0chs4jfgRZGh5ZWvKyziB6xi0Ex8=;
- b=ZfasIqyPG/1gH8PfYhLndyoEba1kyGSLGDj1WaOWX1cRbpxzfwklkz1VWKXjrcdmls
- YmsU/rfcifZC7yv0vZWHjssJQ0PtRXYQp3oonvUFUmD+PgTgtEhNF7XucC1+Rp0xfiPg
- nM+VhQsb/noQz4tlSWg3J2RO5glRyIxqD5+T4KA20apKpuP7DiJkVd5tx/iNw4RPSr8x
- tZBBl+H0GgkZ0U4DrX0IqKG1LnYBN+VknkiPbq7zjhsHHTqtMHT1vFd6Z7tLlMOzUFg1
- 9wUxjmYDTsttbH6NHW4oUX+Gup9zuUknbbDzeUzt2Vs9aYQMTA1t2Ma/eQE5j8ui2ZVn
- oGuQ==
+ :reply-to; bh=oFmODt990ad8kjLTTOpTYnAwB7mre5Em7KQhg5E3z/E=;
+ b=JUoH7lbQfI0Ia9oaODe2wL/gqYC3FoPgjsyoEzaresbxN2pRSyiEJf4i4WkrHeb1Kz
+ XbDo2Wxli2n1RPpFnNoIVVPId94gdAq1UmlS6kS63vAzQ8TpA2P7w0hSMPmWyaL6PqD+
+ dAqUHmV+osLBAhdfa6HL8CPRsJJWI4/xGKTQ1qA9HODZ0HIavrXTKewIBOgwFrAxpdey
+ oKTKzgj6CAFiWgmAN2bqQXyb/tZlHVOxsqIXx3Ykt1eLDtUZTLNWSlrcIYnxTsG2lX2B
+ a+F/6i1QrPbckoYSxt8SKm6eOzVe9l9LaWOk97llywSPoCp9aZ01BAk3d7xL9uP3oibm
+ ZPhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711648784; x=1712253584;
+ d=1e100.net; s=20230601; t=1711648785; x=1712253585;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=gJUvXphPC3p9rZd0chs4jfgRZGh5ZWvKyziB6xi0Ex8=;
- b=Mz8j48KpeIb/IZs9TzVz4ptXTXxNyseg4nqEZuXOl2AddAsPM/18M9+WPxkUyiyBY0
- 2AxFpPXaAiH4mSV/T7xEUmkfGXTobmvucIQWUcqBRyzKf/EbDaPPtuA2LN/Q4C+Cup8f
- 4GHZhdd4alOnNTzyzXgnGYFpklkmsSv/C5bGLx+HbT5JQWRiJvPmEtb7p/Qd21CgY46a
- ytOCcZZPes3RopKZzA+WsVkf1RKCrs7dx4EPgN4UE9X6/hNsFpuYp02GU6KTSnvlhARL
- 1jvXrLLcn6ugmgQNp7onuwf1oAY948nE3mQ/2PdFTGJvWNjYNTtYi7NEk/nUNKfGLnYr
- FCUA==
-X-Gm-Message-State: AOJu0Ywo7QDod5DWZosM4TCEgTFmp6zUOAZ2DyGz/Y2zXOYSOso4XWVG
- anpjpM8+hM2dfsrMP92aY3CMZGnJozECWkB6LpT6F6fztu9ax0AUBbhrFwlI9pfCop05k0PCy/x
- T
-X-Google-Smtp-Source: AGHT+IHOwPbLYj+wA5Ine0EFFGiYtgKPxcEHzFCyoGngc3dhyDPc80rYVR468mc3mWm0ye1ETRnHYQ==
-X-Received: by 2002:adf:f38f:0:b0:33e:709f:f340 with SMTP id
- m15-20020adff38f000000b0033e709ff340mr2924318wro.32.1711648783679; 
- Thu, 28 Mar 2024 10:59:43 -0700 (PDT)
+ bh=oFmODt990ad8kjLTTOpTYnAwB7mre5Em7KQhg5E3z/E=;
+ b=iOK+oo4souOjjePlaKpvkWnneyWxUHfHIAayXW5C0LZbJTU0uEHp15MNcTCyC/WYa3
+ 8y70QAFPI29H9SrRuziSJWV2yaXsvYAqfBr1UP/7/mIvZj6CSyuOE3A41MUCCylSLtac
+ 1MBl8gPQ9Uf36knz6OWKW3d2A7EEOjIIu4IHfXcORi6ZOp1xopvONyH45yEY6lKnZwRG
+ R06WXzWXdujoAMHtQotPWMG759+pp7uS4DwQr2iYyjEAeMk3630/zmO1lcbOTvPoum43
+ 00pJECQEIQ9JPcxOjAo0z2SzBXqRjdn4B5K7uhMfDxhn1MQCqgv75eY3Ms8OfJ4iJMJQ
+ 7ZZQ==
+X-Gm-Message-State: AOJu0YwU/CGDM4zU20FIU8cYbQoU73HabAo4bUvySsv5i3fQnTSEp2Sm
+ m3Ug9r1+BJNGu6g8szAtB5N+QOrhIeUSmfAmbIs50q4lagfFCmm7q4JEMFEr3zc=
+X-Google-Smtp-Source: AGHT+IE52IrGBwkvJkWAls0IiaJzT0XvYZwClDirtZ5rT4FghSLK7eh/kI/nw/U4UsH6k+3equLhcg==
+X-Received: by 2002:a5d:6585:0:b0:33e:d68a:7d42 with SMTP id
+ q5-20020a5d6585000000b0033ed68a7d42mr2739987wru.30.1711648784952; 
+ Thu, 28 Mar 2024 10:59:44 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a5d4acd000000b00341e5f487casm2292237wrs.46.2024.03.28.10.59.42
+ y13-20020a5d4acd000000b00341e5f487casm2292237wrs.46.2024.03.28.10.59.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 10:59:42 -0700 (PDT)
+ Thu, 28 Mar 2024 10:59:44 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 28 Mar 2024 17:59:09 +0000
-Subject: [PATCH v5 03/16] phy: qcom: Add SNPS femto v2 USB HS phy
+Date: Thu, 28 Mar 2024 17:59:10 +0000
+Subject: [PATCH v5 04/16] mach-snapdragon: disable power-domains for
+ pre-reloc drivers
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240328-b4-qcom-livetree-v5-3-4e98228b3d03@linaro.org>
+Message-Id: <20240328-b4-qcom-livetree-v5-4-4e98228b3d03@linaro.org>
 References: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
 In-Reply-To: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -78,16 +78,15 @@ To: Tom Rini <trini@konsulko.com>,
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
  Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>
+Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7987;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2212;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=O8MgnNvz8xNo/VZuwsqphFm+cOIRbPwCtp7k6WZHsHY=;
- b=kA0DAAgReTBFn7kwMhcByyZiAGYFsAmjPbDRkhIY1njrWDe4f6yOSYoeuX6Vmf1Z1PwTE3ej0
- Yh1BAARCAAdFiEEF8imOYKt0z8ot6DQeTBFn7kwMhcFAmYFsAkACgkQeTBFn7kwMhdNAAD+NVmY
- MhPzE/Rk81IzC+NPp5XXecSTdQigJ2Sa0WmamhMA/RbGU96p8JYsWOGf5D59vHrjw+knSk0SR9C
- sdcpcSMO2
+ bh=lNaop02wGgSTfoA1P61dU8gqi6TppeaoShUOEotMpkk=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTWDZz9UbUzGK9YZ0+Z+E0ygsnn0sZbX4/yHWE74C8S/
+ eTcqgS5jlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRpBaGf/ZvKqMZhJM+ijtF
+ TIvWW6egpFO7wm+rFKP/lf8C6ZX/7jAyLLzM/dRJKvDmiV26ZYmz9WMWvJQKigmeq7Omzeiey0u
+ T3QA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -106,268 +105,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Bhupesh Sharma <bhupesh.linux@gmail.com>
+Some devices like the UART and clock controller reference an RPM(h)
+power domain. We don't support this device in U-Boot, so add
+DM_FLAG_DEFAULT_PD_CTRL_OFF to tell DM core not to try and enable the
+power domain.
 
-Some Qualcomm SoCs newer than SDM845 feature a so-called "7nm phy"
-driver, notable the SM8250 SoC which will gain U-Boot support in
-upcoming patches.
-
-Introduce a driver based on the Linux driver.
-
-Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
-[code cleanup, align symbol names with Linux, switch to clk/reset_bulk APIs]
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/phy/qcom/Kconfig                  |   8 ++
- drivers/phy/qcom/Makefile                 |   1 +
- drivers/phy/qcom/phy-qcom-snps-femto-v2.c | 207 ++++++++++++++++++++++++++++++
- 3 files changed, 216 insertions(+)
+ drivers/clk/qcom/clock-qcom.c    | 2 ++
+ drivers/clk/qcom/clock-sdm845.c  | 2 +-
+ drivers/serial/serial_msm_geni.c | 2 +-
+ 3 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/phy/qcom/Kconfig b/drivers/phy/qcom/Kconfig
-index 361dfb6e1126..b9fe608c2798 100644
---- a/drivers/phy/qcom/Kconfig
-+++ b/drivers/phy/qcom/Kconfig
-@@ -18,8 +18,16 @@ config PHY_QCOM_QUSB2
- 	help
- 	  Enable this to support the Super-Speed USB transceiver on various
- 	  Qualcomm chipsets.
+diff --git a/drivers/clk/qcom/clock-qcom.c b/drivers/clk/qcom/clock-qcom.c
+index 7a5938a06a34..6303dcbf8461 100644
+--- a/drivers/clk/qcom/clock-qcom.c
++++ b/drivers/clk/qcom/clock-qcom.c
+@@ -226,8 +226,9 @@ U_BOOT_DRIVER(qcom_clk) = {
+ 	.id		= UCLASS_CLK,
+ 	.ops		= &msm_clk_ops,
+ 	.priv_auto	= sizeof(struct msm_clk_priv),
+ 	.probe		= msm_clk_probe,
++	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
+ };
  
-+config PHY_QCOM_USB_SNPS_FEMTO_V2
-+	tristate "Qualcomm SNPS FEMTO USB HS PHY v2"
-+	depends on PHY && ARCH_SNAPDRAGON
-+	help
-+	  Enable this to support the Qualcomm Synopsys DesignWare Core 7nm
-+	  High-Speed PHY driver. This driver supports the Hi-Speed PHY which
-+	  is usually paired with Synopsys DWC3 USB IPs on MSM SOCs.
-+
- config PHY_QCOM_USB_HS_28NM
- 	tristate "Qualcomm 28nm High-Speed PHY"
- 	depends on PHY && ARCH_SNAPDRAGON
- 	help
-diff --git a/drivers/phy/qcom/Makefile b/drivers/phy/qcom/Makefile
-index f6af985666a4..5f4db4a53788 100644
---- a/drivers/phy/qcom/Makefile
-+++ b/drivers/phy/qcom/Makefile
-@@ -1,5 +1,6 @@
- obj-$(CONFIG_PHY_QCOM_IPQ4019_USB) += phy-qcom-ipq4019-usb.o
- obj-$(CONFIG_MSM8916_USB_PHY) += msm8916-usbh-phy.o
- obj-$(CONFIG_PHY_QCOM_QUSB2) += phy-qcom-qusb2.o
-+obj-$(CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2) += phy-qcom-snps-femto-v2.o
- obj-$(CONFIG_PHY_QCOM_USB_HS_28NM) += phy-qcom-usb-hs-28nm.o
- obj-$(CONFIG_PHY_QCOM_USB_SS) += phy-qcom-usb-ss.o
-diff --git a/drivers/phy/qcom/phy-qcom-snps-femto-v2.c b/drivers/phy/qcom/phy-qcom-snps-femto-v2.c
-new file mode 100644
-index 000000000000..58eb01972402
---- /dev/null
-+++ b/drivers/phy/qcom/phy-qcom-snps-femto-v2.c
-@@ -0,0 +1,207 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2020, The Linux Foundation. All rights reserved.
-+ * Copyright (C) 2023 Bhupesh Sharma <bhupesh.sharma@linaro.org>
-+ *
-+ * Based on Linux driver
-+ */
-+
-+#include <clk.h>
-+#include <clk-uclass.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <dm/devres.h>
-+#include <generic-phy.h>
-+#include <malloc.h>
-+#include <reset.h>
-+
-+#include <asm/io.h>
-+#include <linux/bitops.h>
-+#include <linux/clk-provider.h>
-+#include <linux/delay.h>
-+#include <linux/iopoll.h>
-+
-+#define USB2_PHY_USB_PHY_UTMI_CTRL0 (0x3c)
-+#define SLEEPM BIT(0)
-+#define OPMODE_MASK GENMASK(4, 3)
-+#define OPMODE_NORMAL (0x00)
-+#define OPMODE_NONDRIVING BIT(3)
-+#define TERMSEL BIT(5)
-+
-+#define USB2_PHY_USB_PHY_UTMI_CTRL5 (0x50)
-+#define POR BIT(1)
-+
-+#define USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0 (0x54)
-+#define SIDDQ BIT(2)
-+#define RETENABLEN BIT(3)
-+#define FSEL_MASK GENMASK(6, 4)
-+#define FSEL_DEFAULT (0x3 << 4)
-+
-+#define USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON1 (0x58)
-+#define VBUSVLDEXTSEL0 BIT(4)
-+#define PLLBTUNE BIT(5)
-+
-+#define USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON2 (0x5c)
-+#define VREGBYPASS BIT(0)
-+
-+#define USB2_PHY_USB_PHY_HS_PHY_CTRL1 (0x60)
-+#define VBUSVLDEXT0 BIT(0)
-+
-+#define USB2_PHY_USB_PHY_HS_PHY_CTRL2 (0x64)
-+#define USB2_AUTO_RESUME BIT(0)
-+#define USB2_SUSPEND_N BIT(2)
-+#define USB2_SUSPEND_N_SEL BIT(3)
-+
-+#define USB2_PHY_USB_PHY_CFG0 (0x94)
-+#define UTMI_PHY_DATAPATH_CTRL_OVERRIDE_EN BIT(0)
-+#define UTMI_PHY_CMN_CTRL_OVERRIDE_EN BIT(1)
-+
-+#define USB2_PHY_USB_PHY_REFCLK_CTRL (0xa0)
-+#define REFCLK_SEL_MASK GENMASK(1, 0)
-+#define REFCLK_SEL_DEFAULT (0x2 << 0)
-+
-+struct qcom_snps_hsphy {
-+	void __iomem *base;
-+	struct clk_bulk clks;
-+	struct reset_ctl_bulk resets;
-+};
-+
-+static inline void qcom_snps_hsphy_write_mask(void __iomem *base, u32 offset,
-+					      u32 mask, u32 val)
-+{
-+	u32 reg;
-+
-+	reg = readl_relaxed(base + offset);
-+
-+	reg &= ~mask;
-+	reg |= val & mask;
-+	writel_relaxed(reg, base + offset);
-+
-+	/* Ensure above write is completed */
-+	readl_relaxed(base + offset);
-+}
-+
-+static int qcom_snps_hsphy_usb_init(struct phy *phy)
-+{
-+	struct qcom_snps_hsphy *priv = dev_get_priv(phy->dev);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_CFG0,
-+				   UTMI_PHY_CMN_CTRL_OVERRIDE_EN,
-+				   UTMI_PHY_CMN_CTRL_OVERRIDE_EN);
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_UTMI_CTRL5, POR,
-+				   POR);
-+	qcom_snps_hsphy_write_mask(priv->base,
-+				   USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0, FSEL_MASK, 0);
-+	qcom_snps_hsphy_write_mask(priv->base,
-+				   USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON1,
-+				   PLLBTUNE, PLLBTUNE);
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_REFCLK_CTRL,
-+				   REFCLK_SEL_DEFAULT, REFCLK_SEL_MASK);
-+	qcom_snps_hsphy_write_mask(priv->base,
-+				   USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON1,
-+				   VBUSVLDEXTSEL0, VBUSVLDEXTSEL0);
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_CTRL1,
-+				   VBUSVLDEXT0, VBUSVLDEXT0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base,
-+				   USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON2,
-+				   VREGBYPASS, VREGBYPASS);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_CTRL2,
-+				   USB2_SUSPEND_N_SEL | USB2_SUSPEND_N,
-+				   USB2_SUSPEND_N_SEL | USB2_SUSPEND_N);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_UTMI_CTRL0,
-+				   SLEEPM, SLEEPM);
-+
-+	qcom_snps_hsphy_write_mask(
-+		priv->base, USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0, SIDDQ, 0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_UTMI_CTRL5, POR,
-+				   0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_CTRL2,
-+				   USB2_SUSPEND_N_SEL, 0);
-+
-+	qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_CFG0,
-+				   UTMI_PHY_CMN_CTRL_OVERRIDE_EN, 0);
-+
-+	return 0;
-+}
-+
-+static int qcom_snps_hsphy_power_on(struct phy *phy)
-+{
-+	struct qcom_snps_hsphy *priv = dev_get_priv(phy->dev);
-+	int ret;
-+
-+	clk_enable_bulk(&priv->clks);
-+
-+	ret = reset_deassert_bulk(&priv->resets);
-+	if (ret)
-+		return ret;
-+
-+	ret = qcom_snps_hsphy_usb_init(phy);
-+	if (ret)
-+		return ret;
-+
-+	return 0;
-+}
-+
-+static int qcom_snps_hsphy_power_off(struct phy *phy)
-+{
-+	struct qcom_snps_hsphy *priv = dev_get_priv(phy->dev);
-+
-+	reset_assert_bulk(&priv->resets);
-+	clk_disable_bulk(&priv->clks);
-+
-+	return 0;
-+}
-+
-+static int qcom_snps_hsphy_phy_probe(struct udevice *dev)
-+{
-+	struct qcom_snps_hsphy *priv = dev_get_priv(dev);
-+	int ret;
-+
-+	priv->base = dev_read_addr_ptr(dev);
-+	if (IS_ERR(priv->base))
-+		return PTR_ERR(priv->base);
-+
-+	ret = clk_get_bulk(dev, &priv->clks);
-+	if (ret < 0 && ret != -ENOENT) {
-+		printf("%s: Failed to get clocks %d\n", __func__, ret);
-+		return ret;
-+	}
-+
-+	ret = reset_get_bulk(dev, &priv->resets);
-+	if (ret < 0) {
-+		printf("failed to get resets, ret = %d\n", ret);
-+		return ret;
-+	}
-+
-+	clk_enable_bulk(&priv->clks);
-+	reset_deassert_bulk(&priv->resets);
-+
-+	return 0;
-+}
-+
-+static struct phy_ops qcom_snps_hsphy_phy_ops = {
-+	.power_on = qcom_snps_hsphy_power_on,
-+	.power_off = qcom_snps_hsphy_power_off,
-+};
-+
-+static const struct udevice_id qcom_snps_hsphy_phy_ids[] = {
-+	{ .compatible = "qcom,sm8150-usb-hs-phy" },
-+	{ .compatible = "qcom,usb-snps-hs-5nm-phy" },
-+	{ .compatible = "qcom,usb-snps-hs-7nm-phy" },
-+	{ .compatible = "qcom,usb-snps-femto-v2-phy" },
-+	{}
-+};
-+
-+U_BOOT_DRIVER(qcom_usb_qcom_snps_hsphy) = {
-+	.name = "qcom-snps-hsphy",
-+	.id = UCLASS_PHY,
-+	.of_match = qcom_snps_hsphy_phy_ids,
-+	.ops = &qcom_snps_hsphy_phy_ops,
-+	.probe = qcom_snps_hsphy_phy_probe,
-+	.priv_auto = sizeof(struct qcom_snps_hsphy),
-+};
+ int qcom_cc_bind(struct udevice *parent)
+ {
+@@ -410,5 +411,6 @@ U_BOOT_DRIVER(qcom_power) = {
+ 	.name = "qcom_power",
+ 	.id = UCLASS_POWER_DOMAIN,
+ 	.ops = &qcom_power_ops,
+ 	.probe = qcom_power_probe,
++	.flags = DM_FLAG_PRE_RELOC,
+ };
+diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
+index 36ffee79d966..babd83119e2c 100644
+--- a/drivers/clk/qcom/clock-sdm845.c
++++ b/drivers/clk/qcom/clock-sdm845.c
+@@ -182,6 +182,6 @@ U_BOOT_DRIVER(gcc_sdm845) = {
+ 	.name		= "gcc_sdm845",
+ 	.id		= UCLASS_NOP,
+ 	.of_match	= gcc_sdm845_of_match,
+ 	.bind		= qcom_cc_bind,
+-	.flags		= DM_FLAG_PRE_RELOC,
++	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
+ };
+diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
+index e5c3dcffc1c6..4aa0bc8c72bc 100644
+--- a/drivers/serial/serial_msm_geni.c
++++ b/drivers/serial/serial_msm_geni.c
+@@ -602,9 +602,9 @@ U_BOOT_DRIVER(serial_msm_geni) = {
+ 	.of_to_plat = msm_serial_ofdata_to_platdata,
+ 	.priv_auto = sizeof(struct msm_serial_data),
+ 	.probe = msm_serial_probe,
+ 	.ops = &msm_serial_ops,
+-	.flags = DM_FLAG_PRE_RELOC,
++	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
+ };
+ 
+ #ifdef CONFIG_DEBUG_UART_MSM_GENI
+ 
 
 -- 
 2.44.0
