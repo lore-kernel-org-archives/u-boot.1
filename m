@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF8F4CD11DD
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 18:02:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E1CCD11DF
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 18:02:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61ECC881CE;
-	Thu, 28 Mar 2024 19:00:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D34AD88158;
+	Thu, 28 Mar 2024 19:00:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gjBWhshw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PYyDMVWE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15F7988158; Thu, 28 Mar 2024 18:59:59 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id 4059887A0E; Thu, 28 Mar 2024 19:00:00 +0100 (CET)
+Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
+ [IPv6:2a00:1450:4864:20::42d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7284881EE
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 18:59:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C295881B5
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 18:59:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-341808b6217so756258f8f.3
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:59:54 -0700 (PDT)
+Received: by mail-wr1-x42d.google.com with SMTP id
+ ffacd0b85a97d-341808b6217so756271f8f.3
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:59:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711648794; x=1712253594; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1711648796; x=1712253596; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=O6Q4iPHqNBQ1Q20gSfmWBGk3J7Uofd34Sexw0LNLNLk=;
- b=gjBWhshwAMWS5Rzk0y0BSU9Foz0oVNOqFc0cGei0dn6gdhgrn4/+c0SeRW3325eK8Y
- 1Mre7IT3JVAesDI9KbasfWD9EyJ/CDjdq7+a2iNz97RlJoZoSpjYc45Zhe9tVhNDnRin
- tgSXB29ibiZ0riAWt7XzcZHq6PvXvTO6ZgTyzsYtVyvW2xw4qRaeJVPsjSHiGvmzgO5m
- 259pKQO53w76iamcPuPQPkGd1TYAaxGxxMo9woEc/vo2T0kVGiLuNfTnmMztUAhvzdOF
- fZ3YExRFzXX9W9eqN3gMYAGe5h4FHbJZAdEr6X3R+ANmBHpldSfd6ZmLIsQ3LdzIr37u
- RjXw==
+ :reply-to; bh=P6XcPr9pfYOEmSnzHa2qooJBhM9QEIsjkS+to/+R8LA=;
+ b=PYyDMVWEkqfbt4GupZqzxrx1h+QyB3CO6gP2nD9semrI5XTQLuFRN3RswXvhLcFsJA
+ h1pOn7aaxes85ypBg18pBu8We+VXpYtFOvwRDXZ/LsOmGxNcOB0k7nEZPVRM5IXPglwC
+ uaN42Gu6ddSPsC/k7l8KAIWfFXIRlWGHYx+yVlvqedSXW8HNpwBJgZ1Mla6PKDgk6W/C
+ 41sEiYFAMoqpPQ+AyDgowriCHy49A6Va0jY3tKnIf1CkzZdaVS2+U9+XorGTaWTXfJnY
+ XsgBspSAZYO9sHCRDowpA7TpoSIxpP1ktZ8nPqLcJaQvLyOl8xnMbPQswk9mumnmFGeJ
+ mLTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711648794; x=1712253594;
+ d=1e100.net; s=20230601; t=1711648796; x=1712253596;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=O6Q4iPHqNBQ1Q20gSfmWBGk3J7Uofd34Sexw0LNLNLk=;
- b=gBrVu2Idw32oYbtxg/QOO7nT+4PxyG0dIMy36KLDb3Ab+YgglbdEDzAa29AE3GGYWf
- UQzVj/0432qzMa2krpmTyMzgmsYEeHDeJ32wwDkkBdTPXzQjSIpURhcw5IECNTd7sFyu
- WtdOMXS6Q2kJ+qgwPO0JQZl+00tVbXEp6gmxuNwo9klLIgYp56BVy8Lvoa/2J8BlJT/G
- k1F0WUSC0OMp9L6NvRukQFnLBkL7MpaRbyrIZPA0M/xZKy8Pj+cL699rGhZYCOPY/UGO
- b8YZkv3dUhp48ULE3vzq52XhJYFwk5DdjMSZ3nq8hbttndAVePdJNWyQ7skvxPPkADbj
- 2MaQ==
-X-Gm-Message-State: AOJu0YwNI8Qd/J7gHyfXiKSfH/5sowsna/t6MEXNt8fDI+i/EgR3kbg9
- jtu3MHC/Lfoji6zPf00h3fFQk3Wxp9Y7wkv2xKScE2paS+cQIYwpiR+w0dFWY8+m5NgXoStBT9c
- H
-X-Google-Smtp-Source: AGHT+IGbcEhcdVMO475goFsEquqv8Vwu0uqUCqwB9EyNJFTCQkI5Sxgy2HS0nphxHRDyqw+gLbNxtA==
-X-Received: by 2002:a05:6000:1c5:b0:341:b5d5:a1d6 with SMTP id
- t5-20020a05600001c500b00341b5d5a1d6mr2619100wrx.50.1711648794446; 
- Thu, 28 Mar 2024 10:59:54 -0700 (PDT)
+ bh=P6XcPr9pfYOEmSnzHa2qooJBhM9QEIsjkS+to/+R8LA=;
+ b=iqU+rMFSOXpdTyzsrDUipbUJBE0hrcA096voKCYM7zIeIZ7KppaEeqizmmL+AD/OW8
+ GLiPZERcLc/6qlAnGlgw7R1VHzCvXsMjnQLmM1BsA+Ir0O25/A0fXwJ/3M651sIBi+P5
+ CXLbGlQOHjd2RDeH2vw90qrc9Rv2wdK2hwUJHvYFM5P2aDnXyse1ewONcue7SoYd/vvp
+ 5TO2QRImCIVYmqHxMknF1PpONB3K7+p87qAr7bBgdnyeUoHMtQjTgHZ2bLaPk03qGYD+
+ bcAGwGP54bMfviMQEXJJcZxhekZbG3xatDPs2UH+CZ8mpOpey2gGjtCXeC97ejED8HAA
+ kjjA==
+X-Gm-Message-State: AOJu0YyXOCql0T1iAn5xOpuBKcHJ2wFnOZZsT+tQ7nYfKT2HMAIJb9k6
+ cq1wETcSrjNeNdljhR+8sjzdn9XhIw9YfvYt6rPHoYhkXaTZo0kovYx9k5nXsPg=
+X-Google-Smtp-Source: AGHT+IHDkKgSt6wbzKkxqgf/Au+PqgQNKB1SIaXPZZBoqif1AAfFvgTCaH7qsysXIkS/tY+57K4eaQ==
+X-Received: by 2002:a05:6000:18cf:b0:341:7269:e4d0 with SMTP id
+ w15-20020a05600018cf00b003417269e4d0mr2584939wrq.54.1711648795760; 
+ Thu, 28 Mar 2024 10:59:55 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a5d4acd000000b00341e5f487casm2292237wrs.46.2024.03.28.10.59.53
+ y13-20020a5d4acd000000b00341e5f487casm2292237wrs.46.2024.03.28.10.59.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 10:59:53 -0700 (PDT)
+ Thu, 28 Mar 2024 10:59:54 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 28 Mar 2024 17:59:19 +0000
-Subject: [PATCH v5 13/16] dts: sdm845-db845c: add u-boot fixups
+Date: Thu, 28 Mar 2024 17:59:20 +0000
+Subject: [PATCH v5 14/16] qcom_defconfig: enable livetree
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240328-b4-qcom-livetree-v5-13-4e98228b3d03@linaro.org>
+Message-Id: <20240328-b4-qcom-livetree-v5-14-4e98228b3d03@linaro.org>
 References: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
 In-Reply-To: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -80,13 +79,13 @@ To: Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1063;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1104;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=JWwpm6PYEfZfiLMJYt/BfVr0y0ivgV4Se6+WvKM3mNY=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTWDVwfjk3+tyFodb9WW/p+j+lRH+aev9T6YOGbhX5nk
- tZ6Lu5g6ihlYRDkYJAVU2QRP7HMsmntZXuN7QsuwMxhZQIZwsDFKQAT2WHIyNDK2PndZR2zWWaV
- jHc196Pu2tNHJmvu/6oXMq1/Z57DRgeGv4JnfUNeJN8Q3V6Y0qF0L0+r42LENebzVU1ijQEbap9
- EXQcA
+ bh=nJRZofJGcS/sPbnQvIzqGqi1p7++HEANmQebMMxA9oM=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTWDVzTLTIydadF8F1TNogwO+B97qrlhu2da42K7HaJH
+ JPu3SbRUcrCIMjBICumyCJ+Ypll09rL9hrbF1yAmcPKBDKEgYtTACay24ORYf2GO6rn5qqcmSpR
+ 9qGERUZWZ98iHYlj69g6TUMrBZbOf8jwzyS0qG+mzuFQt7tsIWbPtQQXzPrIflErXC/ktmSccMz
+ vEAA=
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -105,32 +104,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The USB VBUS supply for the type-A port is enabled via a GPIO regulator.
-This is incorrectly modelled in Linux where only the PCIe dependency is
-expressed. The correct way to handle this will be through a
-usb-connector node, but for now we'll just mark the regulator as
-always-on so that it will be enabled automatically during boot.
+Qualcomm FDTs are on the larger size, and with the addition of DT
+modifications during board_init() it makes sense to enable OF_LIVE
+globally. The cost of building the tree should be offset by the
+increased efficiency at which we can walk it.
 
+Some rough measurements with CONFIG_BOOTSTAGE suggests that this might
+add 0.1-0.2ms to the boot-to-console time. However the reset-to-reset
+timer difference is in the range of 0.5ms so this could just be noise.
+
+Suffice to say, no significant slow down.
+
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/dts/sdm845-db845c-u-boot.dtsi | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ configs/qcom_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/arm/dts/sdm845-db845c-u-boot.dtsi b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
-new file mode 100644
-index 000000000000..906f9faa5451
---- /dev/null
-+++ b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
-@@ -0,0 +1,9 @@
-+// SPDX-License-Identifier: GPL-2.0
-+
-+/* Needed for Linux to boot from USB, otherwise if PCIe driver is not in initramfs
-+ * the VBUS supply will never get turned on.
-+ * https://lore.kernel.org/linux-arm-msm/20240320122515.3243711-1-caleb.connolly@linaro.org/
-+ */
-+&pcie0_3p3v_dual {
-+	regulator-always-on;
-+};
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index cbc612b44bd9..8c4402e8f780 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -25,8 +25,9 @@ CONFIG_CMD_UFS=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_CAT=y
+ CONFIG_CMD_BMP=y
+ CONFIG_CMD_LOG=y
++CONFIG_OF_LIVE=y
+ CONFIG_BUTTON_QCOM_PMIC=y
+ CONFIG_CLK=y
+ CONFIG_CLK_QCOM_QCS404=y
+ CONFIG_CLK_QCOM_SDM845=y
 
 -- 
 2.44.0
