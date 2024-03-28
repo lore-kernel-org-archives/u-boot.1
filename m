@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E039C54E64
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 09:01:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87D51CD11DD
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 09:01:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E2D787FB5;
-	Thu, 28 Mar 2024 10:01:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 063C888105;
+	Thu, 28 Mar 2024 10:01:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="U1rX6Cql";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="3OckwAif";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C843383CF3; Thu, 28 Mar 2024 10:01:23 +0100 (CET)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on0709.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0c::709])
+ id 486F2880FE; Thu, 28 Mar 2024 10:01:28 +0100 (CET)
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur01on0716.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe02::716])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBF6587D43
+ by phobos.denx.de (Postfix) with ESMTPS id EC65C87D55
  for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:01:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
  header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ezx2f8SY7RBbNNgLr1orR2bJK2ruLwo6vCg2PEu7TJ3NkJa3RxqxdBspLI5RKg3no3QkajncTXpZIgceu9Lb5xW37iyWnYqCbXy9WrI2d6+fpNdW6eryQOpsXL0+nycApi7rN7iPhB1chNvp51kmpd5SQHFnQdf2QLSX+rhW5z6BFjmaSON9DNjkBQc3cpxfcC2VCktAuDfT6nygDsHp2lXmmN6rDePwWDU+oqS3WWJ6KeUEu8iWRV7P/ucbbSfElHK+lz4Omizrd+Defmsgn8LIDQgiwrviRLFa6nUMemJ3IkTFKhtOdaYglBa1ke9VSmvadY9QZOWtjbLrrxFlZA==
+ b=OqK5H0Jh4962cRUVJz2SQZp+4/ThEBdrOd8Cza/ilKL3YzoQ+4yZ2UEtzcRfLcv/U2MbGME1Ty6cj4i7/GRicuis/OM5HJKh5N2iacL0oakp4VqZ0JkcyNu6K77i9/q6wZ1OQijA8WPQP+IPyAR2BKwIqUwXzaU3Exnwc15Cdvxx/80CXoxB1p7tZ2Ayq9HuIkaPk+7LIrLv/RRruDsMH/ZgyuoJT/tZrpJk+ecx8Wk4m6eBj41GYT9uJmoAzhjbaG3azt60aw87Jblp6rbWQsmCj2vziWbUfqTc4qm5x+QNoxdBaVHMrt/KbzG+tMcpbNUdQA3xZCRZ0yInUTtxeg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UlqlY7q+JuVwTwzXu6UgWKB6ouP2apzBE4lh7XwZTA8=;
- b=j1sgKWH0l2dPDWF1NsIukvZnuuARtP1vuw+ED2HSsqHonpOiMiQyi6LoTwhVQ01u03TlElGu/HXnpdNR4wR5c4Sf1yzrr7AcDVldJp23dfTDzEVQqUQ44eP9BhjYTzxFtQcyLzcshgkpVr749feHAdNA5xMiBLzTnvv8/EQYHUWiDxY3DGFCUU9rVfkWAEnCN6lfStrUfd8OVjX8FpnNsCAQjaBMnWg75ULUjMz8M6gmr07Rvrny0aIHiBgsPNN/fSN63p7BcIlx+j1xB7wQTYYkVadzE7F+q0udKn0rcrV3Z20Ari8W8NTdRRx7LJjrkuuaUKnMkH47TNmt4jZgaA==
+ bh=evdjx9IhQcu4FhPH4vbI3hHRu5dw3rjUPcGc4THnFo0=;
+ b=QrbCLQruWuLt2RDuyYU+ra4ZPlPogAGhqyhsa1M0/aGxZxiwZqtlQAiS+3aDbm4ZFSYOzFe0e+hJA6BO+ZvuJK33lS1z3QOjo3r1qXHqxP5Djf0IbePQzHaQ55e2OD6CH7DDflIai+xcLHrdaVR8tV3NtdKNRldovceSMQrPkGd//h27P8yfhtMjg0axfIjrGK99A1141anRXvVBjP2ae3oO13mD8povzTd1UfrTyvwQJV8T+jv6xtka0zD4J3R2MPEGNmmW7IndBmbT231+i+i9ptsor0RFwxj/3nAr3oRaXWTLYqRlbvmAOoRpV44vB4HZvCnIsgKeS05fcS19PA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=weidmueller.com; dmarc=pass action=none
  header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UlqlY7q+JuVwTwzXu6UgWKB6ouP2apzBE4lh7XwZTA8=;
- b=U1rX6CqlvljVQotqtpGUl/H8emXQR2RQFl005vbDh7AriNIuua5/kll+JufGGL2W69cUDboe/nSRdSxfdwOQ4fqL8cNBLJJC3uf8u7vDAHkwQqfIi9CfcZpjEpxtX+lrKjrJxfypML0EsPSnRBw7qNYIVMBsxWwaZ8alBRSZii8=
+ bh=evdjx9IhQcu4FhPH4vbI3hHRu5dw3rjUPcGc4THnFo0=;
+ b=3OckwAifs8I2F13pH5ji/t3KkyhEy8rS4d7i35fNC4uOSYhqt20yHG0Hi8fXFfzLmeIdtbwIQ26UrLNgoBAVz8i5tlQcoOLvdb4o5wyy7Rz+/t7B8yGYCT2mxp2xIYlndahRR3krqcyrRwQKXGLix8QPys4LsXlDtSk6qLPg1ak=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=weidmueller.com;
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
- by PAVPR08MB9578.eurprd08.prod.outlook.com (2603:10a6:102:310::10)
- with Microsoft SMTP Server (version=TLS1_2,
+ by DB3PR08MB9035.eurprd08.prod.outlook.com (2603:10a6:10:429::6) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.32; Thu, 28 Mar
  2024 09:01:18 +0000
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
@@ -59,9 +59,9 @@ Cc: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Lukas Funke <lukas.funke@weidmueller.com>,
  Michal Simek <michal.simek@amd.com>, Michal Simek <monstr@monstr.eu>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/3] zynq: Add get function for multi boot address register
-Date: Thu, 28 Mar 2024 10:01:08 +0100
-Message-Id: <20240328090110.14683-2-lukas.funke-oss@weidmueller.com>
+Subject: [PATCH 2/3] zynq: Add function to enable JTAG
+Date: Thu, 28 Mar 2024 10:01:09 +0100
+Message-Id: <20240328090110.14683-3-lukas.funke-oss@weidmueller.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240328090110.14683-1-lukas.funke-oss@weidmueller.com>
 References: <20240328090110.14683-1-lukas.funke-oss@weidmueller.com>
@@ -72,55 +72,55 @@ X-ClientProxiedBy: FR3P281CA0085.DEUP281.PROD.OUTLOOK.COM
  (2603:10a6:20b:55a::18)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|PAVPR08MB9578:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4b72c2c9-0319-4a87-d761-08dc4f05a15e
+X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|DB3PR08MB9035:EE_
+X-MS-Office365-Filtering-Correlation-Id: f8f99b9a-984c-4fae-66b2-08dc4f05a197
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: g3/fsgHbPQ0ZqUdv1YSJEzWJz4HXbop2N1EU+XpkWoB1iHj/q19TNucL7f6VCBjo5ZCYRVEEh3Qu8O1Br78Ih4bhMeEtKqlhnYYsoj0V3Rcwr8XKR/JZWyKspGRs9MdMvAFcl3wCai0FtrU9on4sDKVU+CE1n7jhN/W6/SSPvQYbQ/sTf6v+34LMZRoLbfQbif+IidjT3tVymY5O8iFQy42eWdS6nuwFKvRZqhBrhDSRtom9/3fqqVqV9taSsjlfokeCTUW86mIjnse0jpNe0wq9aMroyIu294hAH7qfZ2sIQA46vIeOpSykZ5xSBGK2BxmXtRd8X4puQqV1V7pmAZiMgqabx4JV0ieq6+4RKvQQd7Fkj7mGa2Wurj3Mz3vSa0+0ucPznn2Ypdp200PO69JO+Q+hlD53D3YlCxJCUREJzW+g3wuI+PtTjGxzYu5V6hT5Zx5pzZnWbk/7pbo0iKDuaTIGJ2GfKdcz9o9OQ4BMP6lL7ZS6MOLWrmTw8kVpbLCHXGM3+XTRtnTqAnQ3cgdiSEFg/kB2QkBwftFQPo+CXdoR3J9FqYRegLpynPfjQC28WZlk4CV88adDV2rfPbFqRHe7zC9NB1Dk33Gbho00KeQYMrafgvdBE8xvmEcT3urH2L1g2krbdB7ilOABIyTHYPPVNjxy6nvj6wHlrgUmYoAcAVgv6bNTRG18c8Qg5KvFIveEfjOiHcGeQoDZwjpPeX1EnJ9TA3r0Ciugttg=
+X-Microsoft-Antispam-Message-Info: OLqWBUM8d/xVyHhKrujX1hfk3hriZ/7X4igP0IijI5Cf2Aez4ZFeOPfKCndh0mqgAi7bXXhkrKKL5H7uwbrjx0YXCXbNIgBm73X2esFuZTdvwHCi6m4l81bJcsguyB+VTbFloj9l94QWJ1HG2IY4qUff5V7apXlVyDMqCuByQbxyrKcbltov/Slo5bK88b3H03UyeKuPzcrn2qFER4rZbR1J1B/UUMiZGIFEVIkvK6jYqRf9q6QKQiZcwLFUHqB8HZJB15AYUb9m4z7bdVvHHacAL27Dtyq+zv7pi/LnhzMnuRg2qNz3asiUbbNvKHL+oKCQchJCFgu7Tv6ncR+HTmzokJc8YZTMd2/miFnyJio8coMp0hQ8ybabGWVQMQ/cJYWWI/G+/ConOYY38sTaZ2KJwMwgYlLuRX82c7a74V1YEmd+bU0hreYfOUmjCwZ+H0uxehKKUdmPaM9N9SZJJeRHVhtjIEELg7wSBtzqQl2mlsb8FPklIXll5OZDFarI37kMd56GvqHMvNil4ZbeHr7NpK2q+zZ2Ueh48QcX7VaxDpsnl7Q2NVfzDS30hgQ+srVfTop5t0HrU+OedghfLeGZ4BEwmglOPkTfwo05K1kY645hmXqm0QDKENRSme9ygozUjwjbgCa7H+zG2O+Vc8ptBfjcRjo7OO9xiftV0bYABYwizzq0miktsGnMdK0BDHI3Q2uyiS0RN91CoyF9Tna4eaNgjnO++jfa4Z0fVms=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230031)(376005)(366007)(1800799015)(52116005)(38350700005); DIR:OUT;
  SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?OiUEaoLbk05tLhRRe3VV1P1fN7J/Mj0hQkLNseOLk/ItLn3r/psw6VXiBX/f?=
- =?us-ascii?Q?OnoLYQtFWRhEPX8Bi/NMEqF/OxWFHCU7/ewy6cuOAhCHTQg0wW2TxV8eEfv7?=
- =?us-ascii?Q?vViuE6KvV7kslRtxcvcCRd87A837zoVgbCX5EPMHQ2qI5A/YHnKat6UamI9c?=
- =?us-ascii?Q?2t4YoHkr7sRezQbJaRwdit22+QsS8Fe1TQ3gdTbS7TeNbdTXY9jBw1NSPImb?=
- =?us-ascii?Q?mmd5avENC7I8Jg1vVo16oj+uMX7q3woQ6v7Rriibqt+ZbpFjQ9pBghO/9dNM?=
- =?us-ascii?Q?ilVeInJ+LSOy7OrIoMfILPVkawTJzkQ9zTD/WP6jKJveWl17kX8ncrE4RFFm?=
- =?us-ascii?Q?kWVCKSY2YDB+AAzJdPXg2828Y6Ju7tsfORY6yBWeNs6g+jaqi4c/c3HM1z1j?=
- =?us-ascii?Q?LxozG3TmtOnIqPOdi2o2JrDR35kOkheW7k0HPj5Ibzu9aLSYJg36Z+rGAQ9l?=
- =?us-ascii?Q?eqokQX9tanhwzRta4FgxCzSKiLExAHDGQl7a9dFZLSkCBTFGj1j9Aot0hKiL?=
- =?us-ascii?Q?qoOXehTj6rWo0nO08rEPGM4JsHRYkhZC1PVSI08FmkYeZ3gMltV3J1LbHbKR?=
- =?us-ascii?Q?vDNqoaClOytxn1atosKxvryaf+O15K5JYgD7c3KlH8A2NPmRgDDSEngdlV0B?=
- =?us-ascii?Q?Vy9dbALoys9cutAOVr472gbqZNTGzvYazDdPz/kmLt1mKg8KB8Jn35GF9Yf6?=
- =?us-ascii?Q?mi+Nm2/iIlq9tIKBIQvcxx8GvBaun9RcXdmmVCwFDXZ6js6Y5M60aQec+j/n?=
- =?us-ascii?Q?CLk5UgmAbQezAsfeoencjwCtMaOXK5rp6zARswhCyYCbzUPpq6uRuH0mFRuk?=
- =?us-ascii?Q?quyiXgWZYXcHs6crvQgTQcz8qXBakKuUiyvxiyZJ0MYns5SMu+ldSJRR65Mm?=
- =?us-ascii?Q?1iOpdknw03n0yKCgYimVI0SiWdxlhvf9iYWLnUoLBKBIWoFLwHZcatClpQKm?=
- =?us-ascii?Q?whb1aULoLc8LRIIgF2lNHeP0rm3Uk6uy/SZDtLtr4Axw6KytavBbhz9U06Hq?=
- =?us-ascii?Q?i2n2Qr4/H5oY2iI16ufpc7FceB+4QZUoigR/anWTZAoualhue9Yys4lpCXcd?=
- =?us-ascii?Q?xLITQSkbbdzxknAvn/+g2up2xqtuEmv25q12Hw6j0f1iYffH5URiBc1Dm2Tw?=
- =?us-ascii?Q?gd1MxvSZ91bGcTdJGhHPN1vlPnLht4amir/CMs7/ffle3pRLfCwjrqpj9NAN?=
- =?us-ascii?Q?wBlqf+7pqunT9jh1l0ZjUPQmDxL91YDU8dwKYJGeNLU948feikGd2Tzc0mhO?=
- =?us-ascii?Q?G6Nm2ZRCQ/FhSXqADVoOmgKIJX5izcuzm1pHHiZNmFImgRr2mmwdybq7CMML?=
- =?us-ascii?Q?lKqIHv0UKYjoJ9uWO7RfRWiNh+183PRSynqwxhY8P9ZYFn05IILjkF8zXfbL?=
- =?us-ascii?Q?4aXjwf7JKm21gg6FH2RpjD/CJXiofzVB7zDPj9EqpIqGjJIg7Cs5fV3kd4Kk?=
- =?us-ascii?Q?GGaTslIpvfcsqoxl5VCin1KhrcEBZN3FEEOEpWKg+DWPBUOx6i1NzeIAnu70?=
- =?us-ascii?Q?mPWvv8Nx05V/GfxCUQPjPHtBW12zi5qAsnD4QsqlVlKV1byFWmVOo68Sm39S?=
- =?us-ascii?Q?4p36ARXmkqyi3KG8N++7lFdBodOzpmtY+Jwp2w4j01QlK271rg2CRW5QWVd/?=
- =?us-ascii?Q?iQ=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?KmzdCZRtD+W8yRlFUSai/kEZYngY6nIgxpMqc3QnzIdlDWbRmDCJxs9C2LY3?=
+ =?us-ascii?Q?ybDILLNzGUQqtRc/ytC+M6j3UNlp8CHgKMkmdFAMRip9xtGkUR0Kzt0EG9cV?=
+ =?us-ascii?Q?XpzK/3ukSW+EB8SWia+0A6iBVjid5qhcEKpIDfYXZ1lbMj6iCHo3o9n9PnR6?=
+ =?us-ascii?Q?rIuh7+6blt5+qA9kHklVCXIgwm1tOkkxL+vf27xvjYeSJ657HbJ87Bud5WgW?=
+ =?us-ascii?Q?wCUK8ZXan9COa+qMKB335sj/Zp+S8Q+mWEoVhzxbSea39tFEoGAwiORcREKK?=
+ =?us-ascii?Q?aISxnOZ4euxRdLZBOkXJ9BB1VqrNpkjGK1Rdj640xqLoEmTSD8xvlvQrXcrx?=
+ =?us-ascii?Q?pjsC/7Tls9d85O08BRMgNwSnm8I3ifgY1cncBCq7hww55KI29OTOFggU1oaQ?=
+ =?us-ascii?Q?7+SFEQOEd+yg0gQyuKrLkIWIhAMgl1xC8N5L3UehgpCgABNo8rFOa46PshRk?=
+ =?us-ascii?Q?Ptc8Bm8k3WR9gdjw6AlYZ/XDm71JhHY8jbhPx5aX8jE7awTEnJJCNpPc5qAX?=
+ =?us-ascii?Q?HBScxz+h75Fo6MVjt6DuIhbjBSSbLvGwcZZJeIPesBNNWtNVSzmCCGbPU3FI?=
+ =?us-ascii?Q?hAgPerTvZ7M3zSwkQDffD+5SMSeyPEphXZGstAlTRoCRo5zhkEX5Rjbdu5dQ?=
+ =?us-ascii?Q?CjX6CmGCM2smAq8B/ev65jjjkm6JBhriNz7ixQzIGQZZ9Z9WFei4XHaxv42/?=
+ =?us-ascii?Q?JLu1jHTP32f5dI33pnqtRMBT4OFRGSr4+J5i2ckeal5ezIPPWMACCEveO/xa?=
+ =?us-ascii?Q?5ZPLtQKWpIQfssJTrjxOuQWdteBUtahQc6qJHtjsIA9XKzUYTixVQ6v7tM7k?=
+ =?us-ascii?Q?9XUoGwOrGoCAnDB5zCtfhrHXZgMTR8cqM/+njCB3YogUgZpPOt1EpYqY/QBz?=
+ =?us-ascii?Q?kTuA/2bLmeD7nbOVV1z+AftwYiV41Zw3E8TvVSgyvHdvxcBg3B6vLa6Cp3YW?=
+ =?us-ascii?Q?+NH2jdWPUcnywDLvwmnBrQC//i9RtHZNikXZidh/InL7ODzBe9zVQKtL1Ufw?=
+ =?us-ascii?Q?AorwroO5QLHpa/iHn+hGYKkbUMVI4rlatG86OCp1W70xGNg6ovYr6TuVhOZ8?=
+ =?us-ascii?Q?VkC/dyc+sjAe5fkXw8sVZxfE55Wz6mmIq2xyqref9yVBbVNyGzWzPP/41I2z?=
+ =?us-ascii?Q?EF2KpVYK9GdmTS2IVYo7rYfJabMKX/2ehoijC370+ncc6GZ2L0k3Zrt4rvbb?=
+ =?us-ascii?Q?bVJ0H9UNwryuIrNPz7uSxDit8MssojpQVpPSpsV6rHq20xywZF4TEq3cBHWj?=
+ =?us-ascii?Q?wggU4gUras2OI+OwWzYyYAEVI4wCNY2OuQRKxHZi8KSeWrzZqjZKUJ7/V8Gy?=
+ =?us-ascii?Q?LzofbIqjzYE1UUkXS3/XBELwH6IOVcjTNAFK+DIPbxhR5k8g+1/7OXz8l1/s?=
+ =?us-ascii?Q?2T7uomFtWa+YXSiQVRnrNvkW5UUxgivKRUI9X8GQh9Vr3gk+Sj/BhVApdhPi?=
+ =?us-ascii?Q?wtN/w5avpZN37NEh4ggxsK2Rm4K76YOS8LxgAYguMNVqSa/3UX+bCWz+9KCC?=
+ =?us-ascii?Q?wVdfLLisxUA8R1t9mKgBEweadjpKcE0tI2V+RCXhf8UjbPs4LrhkTdAw68X9?=
+ =?us-ascii?Q?oJq5NyBOEnWGiseuWvGKktJk1KxZuHrbWZCSCRvYt50L9SXnRAmd4BDxC0sa?=
+ =?us-ascii?Q?Lg=3D=3D?=
 X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4b72c2c9-0319-4a87-d761-08dc4f05a15e
+X-MS-Exchange-CrossTenant-Network-Message-Id: f8f99b9a-984c-4fae-66b2-08dc4f05a197
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Mar 2024 09:01:18.1299 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Mar 2024 09:01:18.5270 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2+J+IOAM+n69odletwhmji8uhAD2tDFHNjnrXdYbj0v8Bqvm9Ypo1xa3dTLb+b+viIhnmHd77pzuDVk4fJqz2Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR08MB9578
+X-MS-Exchange-CrossTenant-UserPrincipalName: 2KSKa+0dmW13u/Wbw0eKVtPLbpiMFuJZrhSYInBopblWNjkFi2+RLx7NgxD47S/qAjzeJWgAbgvOyyaXhiqVLQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB3PR08MB9035
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,81 +139,70 @@ X-Virus-Status: Clean
 
 From: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
 
-This commit adds a function to get/set the multiboot register. This
-becomes handy in order to ensure a fresh bootimage search after reset.
+In non-secure boot mode jtag is restored by the BootROM. In secure boot
+mode jtag has to be restored by the trusted application, i.e. the
+bootloader.
+
+This commit adds a function to enable the jtag interface on zynq
+devices from u-boot.
 
 Signed-off-by: Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
 Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
 ---
 
- arch/arm/mach-zynq/cpu.c                    | 19 +++++++++++++++++--
- arch/arm/mach-zynq/include/mach/hardware.h  |  3 ++-
- arch/arm/mach-zynq/include/mach/sys_proto.h |  2 ++
- 3 files changed, 21 insertions(+), 3 deletions(-)
+ arch/arm/mach-zynq/cpu.c                    | 19 +++++++++++++++++++
+ arch/arm/mach-zynq/include/mach/sys_proto.h |  1 +
+ 2 files changed, 20 insertions(+)
 
 diff --git a/arch/arm/mach-zynq/cpu.c b/arch/arm/mach-zynq/cpu.c
-index 3b6518c71c..3d2866422e 100644
+index 3d2866422e..b8d413b69a 100644
 --- a/arch/arm/mach-zynq/cpu.c
 +++ b/arch/arm/mach-zynq/cpu.c
-@@ -14,8 +14,9 @@
+@@ -14,6 +14,13 @@
  #include <asm/arch/ps7_init_gpl.h>
  #include <asm/arch/sys_proto.h>
  
--#define ZYNQ_SILICON_VER_MASK	0xF0000000
--#define ZYNQ_SILICON_VER_SHIFT	28
-+#define ZYNQ_SILICON_VER_MASK		0xF0000000
-+#define ZYNQ_SILICON_VER_SHIFT		28
-+#define ZYNQ_MULTIBOOT_ADDR_MASK	0x00001FFF
- 
- #if CONFIG_IS_ENABLED(FPGA)
- xilinx_desc fpga = {
-@@ -79,6 +80,20 @@ unsigned int zynq_get_silicon_version(void)
- 						>> ZYNQ_SILICON_VER_SHIFT;
++#define ZYNQ_DEV_CFG_CTRL_DAP_EN		GENMASK(0, 2)
++#define ZYNQ_DEV_CFG_CTRL_DBGEN			BIT(3)
++#define ZYNQ_DEV_CFG_CTRL_NIDEN			BIT(4)
++#define ZYNQ_DEV_CFG_CTRL_SPIDEM		BIT(5)
++#define ZYNQ_DEV_CFG_CTRL_SPNIDEN		BIT(6)
++#define ZYNQ_DEV_CFG_CTRL_JTAG_CHAIN_DIS	BIT(23)
++
+ #define ZYNQ_SILICON_VER_MASK		0xF0000000
+ #define ZYNQ_SILICON_VER_SHIFT		28
+ #define ZYNQ_MULTIBOOT_ADDR_MASK	0x00001FFF
+@@ -74,6 +81,18 @@ int arch_cpu_init(void)
+ 	return 0;
  }
  
-+unsigned int zynq_get_mulitboot_addr(void)
++void zynq_enable_jtag(void)
 +{
-+	return readl(&devcfg_base->multiboot_addr) & ZYNQ_MULTIBOOT_ADDR_MASK;
++	unsigned int v;
++
++	v = readl(&devcfg_base->ctrl);
++	v &= ~ZYNQ_DEV_CFG_CTRL_JTAG_CHAIN_DIS;
++	v |= ZYNQ_DEV_CFG_CTRL_DAP_EN | ZYNQ_DEV_CFG_CTRL_DBGEN
++	   | ZYNQ_DEV_CFG_CTRL_NIDEN | ZYNQ_DEV_CFG_CTRL_NIDEN
++	   | ZYNQ_DEV_CFG_CTRL_SPIDEM | ZYNQ_DEV_CFG_CTRL_SPNIDEN;
++	writel(v, &devcfg_base->ctrl);
 +}
 +
-+void zynq_set_mulitboot_addr(unsigned int value)
-+{
-+	unsigned int v = readl(&devcfg_base->multiboot_addr);
-+
-+	v &= ~ZYNQ_MULTIBOOT_ADDR_MASK;
-+	v |= value & ZYNQ_MULTIBOOT_ADDR_MASK;
-+	writel(v, &devcfg_base->multiboot_addr);
-+}
-+
- void reset_cpu(void)
+ unsigned int zynq_get_silicon_version(void)
  {
- 	zynq_slcr_cpu_reset();
-diff --git a/arch/arm/mach-zynq/include/mach/hardware.h b/arch/arm/mach-zynq/include/mach/hardware.h
-index 89eb565c94..9199baccfa 100644
---- a/arch/arm/mach-zynq/include/mach/hardware.h
-+++ b/arch/arm/mach-zynq/include/mach/hardware.h
-@@ -96,7 +96,8 @@ struct devcfg_regs {
- 	u32 dma_src_len; /* 0x20 */
- 	u32 dma_dst_len; /* 0x24 */
- 	u32 rom_shadow; /* 0x28 */
--	u32 reserved1[2];
-+	u32 multiboot_addr; /* 0x2c */
-+	u32 reserved1[1];
- 	u32 unlock; /* 0x34 */
- 	u32 reserved2[18];
- 	u32 mctrl; /* 0x80 */
+ 	return (readl(&devcfg_base->mctrl) & ZYNQ_SILICON_VER_MASK)
 diff --git a/arch/arm/mach-zynq/include/mach/sys_proto.h b/arch/arm/mach-zynq/include/mach/sys_proto.h
-index 268ec50ad8..6b85682808 100644
+index 6b85682808..f583ef090d 100644
 --- a/arch/arm/mach-zynq/include/mach/sys_proto.h
 +++ b/arch/arm/mach-zynq/include/mach/sys_proto.h
-@@ -16,5 +16,7 @@ extern u32 zynq_slcr_get_idcode(void);
+@@ -15,6 +15,7 @@ extern u32 zynq_slcr_get_boot_mode(void);
+ extern u32 zynq_slcr_get_idcode(void);
  extern int zynq_slcr_get_mio_pin_status(const char *periph);
  extern void zynq_ddrc_init(void);
++extern void zynq_enable_jtag(void);
  extern unsigned int zynq_get_silicon_version(void);
-+extern unsigned int zynq_get_mulitboot_addr(void);
-+extern void zynq_set_mulitboot_addr(unsigned int);
- 
- #endif /* _SYS_PROTO_H_ */
+ extern unsigned int zynq_get_mulitboot_addr(void);
+ extern void zynq_set_mulitboot_addr(unsigned int);
 -- 
 2.30.2
 
