@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB245C54E67
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 10:30:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 007C7C54E67
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 10:30:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2327988130;
-	Thu, 28 Mar 2024 11:30:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0FA7788159;
+	Thu, 28 Mar 2024 11:30:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cSbINvSb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AHnrp1vu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3DF3B88141; Thu, 28 Mar 2024 11:30:30 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id A9D9688141; Thu, 28 Mar 2024 11:30:30 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 582928811D
+ by phobos.denx.de (Postfix) with ESMTPS id D506B88127
  for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 11:30:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-513d599dbabso954653e87.1
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a46cca2a979so44917466b.3
  for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 03:30:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=gmail.com; s=20230601; t=1711621827; x=1712226627; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7/Q33ur/4r6anSZZUOURs6YTjHP5Ol358kbWt4ShhTo=;
- b=cSbINvSb9lDb2wXIqsYCXDsQgqPgUyAsnd3k9QtYmuG8fLZwHcH6xq7JmI0b1Z6YOG
- 2gZh1tcHO3BLjSlqN/FwNK9HblrwQrHqzsfeXJBU2jR2gzKxRIyLGwviNYCx3KDfcBBO
- kEtsc6a6t2z0Xt1JOZ11h7TkllYAEm+w3zy8xLG3fAzimbRRe//7FDF8X3YCIc6vDZ6p
- pxYsVoEooqQA5vxd2spglSEialmHRRoViQ8af+fsuUbVB/zgZkbr2DRwCansRHqSFN91
- bt0bAd8KLfwZPYM/FT5feKpiRObpdlByYHYRv/q3f/zh7kzPnno1vzJgOxXJMm419Q1S
- iQGg==
+ bh=wIjA+IHP02KgDl1pzDSRClzJQWzEm1L1Mtnzae8MkkE=;
+ b=AHnrp1vuAkJPpyRSZRhqlpXC3+FJSK/Nb4YpTJ+ISPqvCPT09O8wLp4rHrwpx5fl6t
+ 0i+flUqQT/t0rC5CH/07UyWlg+DUURrkbDIEwk1m40wTZc6rnGM7zLIBISK+egkGbFdS
+ znt4uq9c1PIKJjYDYo2LK3i0FlqUF+csh2tyZVEKAnUbfzar+Sphy9FheYpP1plmzdOd
+ IsoqT6asYW+t1jRYL8ZmfjQtxDUbhymHZpYIn5K8XaKQ2iAzKt4fQoqtXIpNV/s15Bpx
+ lj8ylfhpbOp9kNotvMgEuV0d8u8grhUAl7iA/AY7tjLKs7ds76n/rZ2N7PsDu6+x8MZA
+ ihIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1711621827; x=1712226627;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7/Q33ur/4r6anSZZUOURs6YTjHP5Ol358kbWt4ShhTo=;
- b=uc59pPYJlgJqCngR2xLF2XXGqg8RwZ+YEH+WMx4x65GTj0DxMybqLjfeIrdqshb+U+
- NMvuRYgJS0YnTLyKJgWFkoVe8wbksF4Td/Hr85l3up+qNhZ1zWk0mDSw9g3tCc1BgMP1
- kItHBYDWfUbCqzC0Cu05/B33HaZ8WzGmYj41WVN662n8IKN0UuU5ZaEHEC5z8sYlWvGj
- vPb96Qmv8Wu5HkC20tTIvpDxaQygO6oAT7B8jvXvH8SFvQdt6G0M7KQY4CVRFQH5DNpg
- qnNXZlF5hgRAQile7amlOLU08PlUDatMSHCWMDzRwfBvircl0OazgXDmpR/zxCAV/UA4
- jBVg==
-X-Gm-Message-State: AOJu0YyI5SpcVmFaWa3OwtufDktMsywA8Rs2oGccI0LDo9XQlXo4UAAv
- OFnxKkwgqQ1/6HwIer3x9T/1kVTXKdyVeWKFWP9HyBOwdc40/mloiymb2xLHJs8=
-X-Google-Smtp-Source: AGHT+IGyWedL+kE2X1UBRJ8PRyn/xdieq+qhgYzBiGQaUOhYa+N3uwecPsiyLudNEkvdf/xXZSad0w==
-X-Received: by 2002:a05:6512:712:b0:515:8bde:56c3 with SMTP id
- b18-20020a056512071200b005158bde56c3mr1641086lfs.26.1711621826412; 
- Thu, 28 Mar 2024 03:30:26 -0700 (PDT)
+ bh=wIjA+IHP02KgDl1pzDSRClzJQWzEm1L1Mtnzae8MkkE=;
+ b=YMenGQpim+vNQCJw0eRl5G3VXxTRW4yde8iIzWfy1ZLiebNSItEIaHWlrfYLX4iiYL
+ 5g/I8wqAtBy5OaRGEfZa6EkxSZPDW2hW9siGn33gK57mcdfe2IILFfoKChwPzHXqR15N
+ 1isjs/HBbVD9ox+CtQmy2O05icbgptG22yqv0CKoNhTtHt53ubQmeNm6PknfApWoNu8I
+ FWbQoYsDYa/K37TbYaNP4UIdm3BRlLtG+hmv4KM5TzdSnNGHGMvExPHcuKs4JhtNh4w9
+ aJT0Gk7JPk1RhDEQ7OL9gmXVQRzEA4wz0Dn+nOUuZjiU8GBf8Wr/Sfob4Ai1QBABRGKQ
+ 7yKQ==
+X-Gm-Message-State: AOJu0YzTmjLLe7o1hLsNTk/lybVMASFWl//RLDhE9zYLbZGXwbewTFe6
+ Jii9Stj6dWZ5o8BJuacKsnC++/3cX92LaSl0wZ4sx+So7v8/Hy8srqm8mt/2AZw=
+X-Google-Smtp-Source: AGHT+IGIOPbGtFs15oPIp94MMP5Di/KSmEOCoJsexGJ4MBlM1l6izZoGbAjtD+3VFtc+cd0qMGl5Tg==
+X-Received: by 2002:a05:6402:34d0:b0:56c:1735:57a2 with SMTP id
+ w16-20020a05640234d000b0056c173557a2mr1515524edc.31.1711621827256; 
+ Thu, 28 Mar 2024 03:30:27 -0700 (PDT)
 Received: from localhost.localdomain ([2001:b07:aac:705d:baf6:ec90:82d5:a261])
  by smtp.gmail.com with ESMTPSA id
- s2-20020aa7cb02000000b0056c0d96e099sm653099edt.89.2024.03.28.03.30.25
+ s2-20020aa7cb02000000b0056c0d96e099sm653099edt.89.2024.03.28.03.30.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Thu, 28 Mar 2024 03:30:26 -0700 (PDT)
 From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
@@ -70,12 +70,14 @@ To: u-boot@lists.denx.de, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
  Breno Matheus Lima <breno.lima@nxp.com>, Peng Fan <peng.fan@nxp.com>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-Subject: [PATCH v2 1/3] crypto/fsl: allow accessing Job Ring from non-TrustZone
-Date: Thu, 28 Mar 2024 11:30:12 +0100
-Message-Id: <20240328101724.127371-2-ghidoliemanuele@gmail.com>
+Subject: [PATCH v2 2/3] configs: colibri-imx7: set non-secure boot mode as
+ default
+Date: Thu, 28 Mar 2024 11:30:13 +0100
+Message-Id: <20240328101724.127371-3-ghidoliemanuele@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240328101724.127371-1-ghidoliemanuele@gmail.com>
 References: <20240328101724.127371-1-ghidoliemanuele@gmail.com>
+ <20240328101724.127371-2-ghidoliemanuele@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,86 +98,26 @@ X-Virus-Status: Clean
 
 From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Add a new kconfig option to allow non-secure world access
-to the CAAM Job Ring.
-This is needed, for example, when running linux without
-OP-TEE services, as it's done on Colibri iMX7.
+Linux kernel is supposed to run in non-secure world,
+fix the defconfig accordingly.
 
-Fixes: 51f1357f3428 ("Revert "drivers/crypto/fsl: assign job-rings to non-TrustZone"")
 Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 ---
- drivers/crypto/fsl/Kconfig |  6 ++++++
- drivers/crypto/fsl/jr.c    | 19 +++++++++++++++++++
- drivers/crypto/fsl/jr.h    |  2 ++
- 3 files changed, 27 insertions(+)
+ configs/colibri_imx7_emmc_defconfig | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/drivers/crypto/fsl/Kconfig b/drivers/crypto/fsl/Kconfig
-index eaad19633f1d..294e1c8a44ef 100644
---- a/drivers/crypto/fsl/Kconfig
-+++ b/drivers/crypto/fsl/Kconfig
-@@ -62,6 +62,12 @@ config SYS_FSL_SEC_LE
- 
- if FSL_CAAM
- 
-+config FSL_CAAM_JR_NTZ_ACCESS
-+	bool "Give CAAM Job Ring access to non-secure world"
-+	help
-+	  It is needed when OP-TEE is not used and Freescale CAAM Job Ring linux
-+	  driver is used.
-+
- config FSL_CAAM_RNG
- 	bool "Enable Random Number Generator support"
- 	depends on DM_RNG
-diff --git a/drivers/crypto/fsl/jr.c b/drivers/crypto/fsl/jr.c
-index ceb66dd6270d..203f16252159 100644
---- a/drivers/crypto/fsl/jr.c
-+++ b/drivers/crypto/fsl/jr.c
-@@ -673,6 +673,21 @@ static int rng_init(uint8_t sec_idx, ccsr_sec_t *sec)
- 	return ret;
- }
- 
-+#if CONFIG_IS_ENABLED(FSL_CAAM_JR_NTZ_ACCESS)
-+static void jr_setown_non_trusted(ccsr_sec_t *sec)
-+{
-+	u32 jrown_ns;
-+	int i;
-+
-+	/* Set ownership of job rings to non-TrustZone mode */
-+	for (i = 0; i < ARRAY_SIZE(sec->jrliodnr); i++) {
-+		jrown_ns = sec_in32(&sec->jrliodnr[i].ms);
-+		jrown_ns |= JROWN_NS | JRMID_NS;
-+		sec_out32(&sec->jrliodnr[i].ms, jrown_ns);
-+	}
-+}
-+#endif
-+
- int sec_init_idx(uint8_t sec_idx)
- {
- 	int ret = 0;
-@@ -761,6 +776,10 @@ int sec_init_idx(uint8_t sec_idx)
- #if CONFIG_IS_ENABLED(OF_CONTROL)
- init:
- #endif
-+#if CONFIG_IS_ENABLED(FSL_CAAM_JR_NTZ_ACCESS)
-+	jr_setown_non_trusted(sec);
-+#endif
-+
- 	ret = jr_init(sec_idx, caam);
- 	if (ret < 0) {
- 		printf("SEC%u:  initialization failed\n", sec_idx);
-diff --git a/drivers/crypto/fsl/jr.h b/drivers/crypto/fsl/jr.h
-index 4e4c4af5805f..b136cd8d05a9 100644
---- a/drivers/crypto/fsl/jr.h
-+++ b/drivers/crypto/fsl/jr.h
-@@ -37,6 +37,8 @@
- #define JRNSLIODN_MASK		0x0fff0000
- #define JRSLIODN_SHIFT		0
- #define JRSLIODN_MASK		0x00000fff
-+#define JROWN_NS		0x00000008
-+#define JRMID_NS		0x00000001
- 
- #define JRDID_MS_PRIM_DID	BIT(0)
- #define JRDID_MS_PRIM_TZ	BIT(4)
+diff --git a/configs/colibri_imx7_emmc_defconfig b/configs/colibri_imx7_emmc_defconfig
+index 9d4423cd0d6a..8dd9fe6e6a38 100644
+--- a/configs/colibri_imx7_emmc_defconfig
++++ b/configs/colibri_imx7_emmc_defconfig
+@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="imx7d-colibri-emmc-eval-v3"
+ CONFIG_TARGET_COLIBRI_IMX7=y
+ CONFIG_TARGET_COLIBRI_IMX7_EMMC=y
+ CONFIG_OF_LIBFDT_OVERLAY=y
+-CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
+ CONFIG_IMX_RDC=y
+ CONFIG_IMX_BOOTAUX=y
+ CONFIG_IMX_HAB=y
 -- 
 2.34.1
 
