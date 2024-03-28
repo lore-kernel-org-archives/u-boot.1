@@ -4,57 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29A20C54E67
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 11:21:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC8FDC54E64
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 11:43:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6469A87E75;
-	Thu, 28 Mar 2024 12:21:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 1FE8788133;
+	Thu, 28 Mar 2024 12:43:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ct8aUZ7r";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EYZ35iRY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 392E388157; Thu, 28 Mar 2024 12:21:41 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4508788035; Thu, 28 Mar 2024 05:04:24 +0100 (CET)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0B2887DE6
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 12:21:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E766987F4F
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 05:04:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 6F2FE60EB3;
- Thu, 28 Mar 2024 11:21:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 76745C433F1;
- Thu, 28 Mar 2024 11:21:36 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1711624897;
- bh=GacNbMSvPmNmkRPf03s0DIJ+V7E9KR2PXZxDV32TPHM=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=ct8aUZ7rhqxU80FkYsTFk0yXiJplLXTtNBmC200iqIdnDwRwHixdpPMiAGw9gqiIs
- kdQO7dqaT8gO2dk7u2PMBCc7aRVODS3FvGb0eXTAN5YRr9hFju+q2VW7csoiu3iVBx
- hR5cGdqicsw3p5Gnyk24xf3Ok4RhkhmYy8MM2EXYVMnoUPVZQgrbm7zJf2NcqVq8IB
- w+GX+0zNKL5tnNwQJdrHNHIDIF43FSmHkdnAh3A9gvXsQcnAXpmfu2195XuSEo1IzU
- 59V+IzxOG5t6+MfOtABwmY9KObbSUlyUtvqRa3VyS06yvDWGWIQMc07hJB/v7qAj1F
- tapdsZXw4iusQ==
-Date: Thu, 28 Mar 2024 12:21:33 +0100
-From: Marek =?UTF-8?B?QmVow7pu?= <kabel@kernel.org>
-To: Stefan Roese <sr@denx.de>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH u-boot-mvebu v3 11/18] arm: mvebu: system-controller:
- Add support for SYSRESET
-Message-ID: <20240328122133.12b0e83f@dellmb>
-In-Reply-To: <81922125-aa47-4be2-9e0c-c7dfd57c4ebc@denx.de>
-References: <20240327162355.24584-1-kabel@kernel.org>
- <20240327162355.24584-12-kabel@kernel.org>
- <81922125-aa47-4be2-9e0c-c7dfd57c4ebc@denx.de>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.39; x86_64-pc-linux-gnu)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 42S44F31051256;
+ Wed, 27 Mar 2024 23:04:15 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1711598655;
+ bh=tgdJWMXL4dSBdaDHTW+UxVpUDwz3SeF9AOa9AEayWJM=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=EYZ35iRYPhXPLE2YlVEMc7QZGzWvx2HqYvlD6mJZjdnB3Wf4mfHNoQw/vLQ/WL6C5
+ r5dIPIvi+zXOjScS5tSbSY87MyiSBeol3PusXOtt7MFFyziK3mn3U/5QrZMlDItWer
+ erPykqtgIlo5tVfufR72XgbJFn25soBXS3BOhqBM=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 42S44FHO030727
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 27 Mar 2024 23:04:15 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 27
+ Mar 2024 23:04:14 -0500
+Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 27 Mar 2024 23:04:15 -0500
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 42S44E6v096438;
+ Wed, 27 Mar 2024 23:04:14 -0500
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+CC: Masahisa Kojima <masahisa.kojima@linaro.org>, Sumit Garg
+ <sumit.garg@linaro.org>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ <u-boot@lists.denx.de>
+Subject: Re: [RFC] Makefile.lib: find capsule ESL dtsi file when
+ CONFIG_OF_UPSTREAM=y
+In-Reply-To: <CADg8p94FjRoYkvdSHJ=2MycXceXDOQeES1S6VCNAuJ5ZBZqDow@mail.gmail.com>
+References: <20240327023451.2288523-1-j-humphreys@ti.com>
+ <CADg8p94FjRoYkvdSHJ=2MycXceXDOQeES1S6VCNAuJ5ZBZqDow@mail.gmail.com>
+Date: Wed, 27 Mar 2024 23:04:14 -0500
+Message-ID: <86jzlnvw75.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Thu, 28 Mar 2024 12:43:31 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,34 +84,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 28 Mar 2024 11:04:45 +0100
-Stefan Roese <sr@denx.de> wrote:
+Sughosh Ganu <sughosh.ganu@linaro.org> writes:
 
-> > +static int mvebu_sysreset_request(struct udevice *dev, enum sysreset_t type)
-> > +{
-> > +	struct regmap *regmap = syscon_get_regmap(dev->parent);
-> > +	uint bit;
-> > +
-> > +	if (type != SYSRESET_COLD)
-> > +		return -EPROTONOSUPPORT;
-> > +
-> > +	bit = MVEBU_GLOBAL_SOFT_RST_BIT;
-> > +
-> > +	regmap_update_bits(regmap, MVEBU_RSTOUTN_MASK_REG, bit, bit);
-> > +	regmap_update_bits(regmap, MVEBU_SYS_SOFT_RST_REG, bit, bit);
-> > +
-> > +	while (1)
-> > +		;  
-> 
-> A comment before this endless loop might be helpful here.
+> hi Jonathan,
+>
+> On Wed, 27 Mar 2024 at 08:05, Jonathan Humphreys <j-humphreys@ti.com> wrote:
+>>
+>> When CONFIG_OF_UPSTREAM is enabled, DTS files are in SOC subdirectories (vs the
+>> top level dts directory), but when CONFIG_EFI_CAPSULE_AUTHENTICATE is enabled,
+>> the dynamically created dtsi file containing the capsule ESL DT node is in the
+>> parent directory.  This results in a build failure because the #include inserted
+>> in the DTS file is local to the current directory.  Update Makefile to have the
+>> DT preprocessing of #includes search in the parent (dts top level) directory
+>> too.
+>>
+>> I'm not sure if this is the best solution.
+>>
+>> I was also tempted to just manually include the capsule-key property in the
+>> board dts, and avoid the Makefile implicit inclusion trickery.  I would actually
+>> prefer this approach as everything is more explicit.  But this isn't an option
+>> because if CONFIG_EFI_CAPSULE_AUTHENTICATE is enabled, the implicit inclusion of
+>> the dtsi file happens.  It would be better, IMO, if we only included the
+>> generated dtsi file if CONFIG_EFI_CAPSULE_ESL_FILE is defined.  Was only
+>> supporting the implicit inclusiong approach an intentional design choice?
+>
+> I was not sure if users would want to manually insert the contents of
+> the ESL file, which is a binary file(a few hundred bytes at least)
+> into the DTS. If you prefer having such an option, we can change the
+> logic to what you propose. Thanks.
 
-The code does the same as reset_cpu() in cpu.c, and the while() cycle
-is not commented there.
+What I was thinking is that one would explictly add the capsule-key
+property to the board dts but do it just as the generated dtsi does
+where it references the .esl file.
 
-But we can add something like
-  /* something has gone wrong if we reach here, so we may as well stay
-   * here */
 
-What do you think? Could you amend the patch?
+Jon
 
-Marek
+>
+> -sughosh
+>
+>>
+>> Thanks
+>> Jon
+>>
+>> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+>> ---
+>>  scripts/Makefile.lib | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+>> index 12857316c58..62f87517c09 100644
+>> --- a/scripts/Makefile.lib
+>> +++ b/scripts/Makefile.lib
+>> @@ -334,7 +334,7 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+>>         (cat $< > $(pre-tmp)); \
+>>         $(foreach f,$(subst $(quote),,$(dtsi_include_list)), \
+>>           echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
+>> -       $(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
+>> +       $(HOSTCC) -E $(dtc_cpp_flags) -I$(obj) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
+>>         $(DTC) -O dtb -o $@ -b 0 \
+>>                 -i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) \
+>>                 -d $(depfile).dtc.tmp $(dtc-tmp) || \
+>> --
+>> 2.34.1
+>>
