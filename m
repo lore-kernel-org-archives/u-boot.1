@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 007C7C54E67
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 10:30:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA009C54E64
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 10:30:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FA7788159;
-	Thu, 28 Mar 2024 11:30:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 78CC888155;
+	Thu, 28 Mar 2024 11:30:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AHnrp1vu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U+zVedBg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9D9688141; Thu, 28 Mar 2024 11:30:30 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 27BF38815C; Thu, 28 Mar 2024 11:30:34 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D506B88127
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 11:30:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61F9E8811D
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 11:30:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ghidoliemanuele@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a46cca2a979so44917466b.3
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 03:30:28 -0700 (PDT)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-56c1364ff79so896256a12.1
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 03:30:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711621827; x=1712226627; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1711621829; x=1712226629; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wIjA+IHP02KgDl1pzDSRClzJQWzEm1L1Mtnzae8MkkE=;
- b=AHnrp1vuAkJPpyRSZRhqlpXC3+FJSK/Nb4YpTJ+ISPqvCPT09O8wLp4rHrwpx5fl6t
- 0i+flUqQT/t0rC5CH/07UyWlg+DUURrkbDIEwk1m40wTZc6rnGM7zLIBISK+egkGbFdS
- znt4uq9c1PIKJjYDYo2LK3i0FlqUF+csh2tyZVEKAnUbfzar+Sphy9FheYpP1plmzdOd
- IsoqT6asYW+t1jRYL8ZmfjQtxDUbhymHZpYIn5K8XaKQ2iAzKt4fQoqtXIpNV/s15Bpx
- lj8ylfhpbOp9kNotvMgEuV0d8u8grhUAl7iA/AY7tjLKs7ds76n/rZ2N7PsDu6+x8MZA
- ihIw==
+ bh=yqoHV8cGciX4Ao/8p4+nn/qyhtF2e1hKDNhD04oySek=;
+ b=U+zVedBgxqhA/RyOkjd/Oc/U8kZBZlaAnLr3ZsMgV3YkdJQq6PvJZ5TKBr3pEj/KYO
+ TbA6auPiAO0GQLCbO1eXANAUKMebh6fUS+fkDCPgH0H2wBy55WBvqTZv41CahAfb/9Yv
+ 3/WTzxXq61seKz2Mw92+KeelqQMlbb+GtV4vlYnwiWuzUvAiTgvXCIAunLCmnyRGa0kA
+ 54LULrmLwGqsvJEaZxoNvgLFRYTagS+5BHKlO7tgTyKGeWb6U0iIBAn8e1pnzFO5ZFMe
+ q6SVsW/3rzQ5izaUAxS4D1CpajwMmXN0TVAXL5VPd/AXh7MuhotSy30Qke+BGeYM+3wl
+ C6fQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711621827; x=1712226627;
+ d=1e100.net; s=20230601; t=1711621829; x=1712226629;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wIjA+IHP02KgDl1pzDSRClzJQWzEm1L1Mtnzae8MkkE=;
- b=YMenGQpim+vNQCJw0eRl5G3VXxTRW4yde8iIzWfy1ZLiebNSItEIaHWlrfYLX4iiYL
- 5g/I8wqAtBy5OaRGEfZa6EkxSZPDW2hW9siGn33gK57mcdfe2IILFfoKChwPzHXqR15N
- 1isjs/HBbVD9ox+CtQmy2O05icbgptG22yqv0CKoNhTtHt53ubQmeNm6PknfApWoNu8I
- FWbQoYsDYa/K37TbYaNP4UIdm3BRlLtG+hmv4KM5TzdSnNGHGMvExPHcuKs4JhtNh4w9
- aJT0Gk7JPk1RhDEQ7OL9gmXVQRzEA4wz0Dn+nOUuZjiU8GBf8Wr/Sfob4Ai1QBABRGKQ
- 7yKQ==
-X-Gm-Message-State: AOJu0YzTmjLLe7o1hLsNTk/lybVMASFWl//RLDhE9zYLbZGXwbewTFe6
- Jii9Stj6dWZ5o8BJuacKsnC++/3cX92LaSl0wZ4sx+So7v8/Hy8srqm8mt/2AZw=
-X-Google-Smtp-Source: AGHT+IGIOPbGtFs15oPIp94MMP5Di/KSmEOCoJsexGJ4MBlM1l6izZoGbAjtD+3VFtc+cd0qMGl5Tg==
-X-Received: by 2002:a05:6402:34d0:b0:56c:1735:57a2 with SMTP id
- w16-20020a05640234d000b0056c173557a2mr1515524edc.31.1711621827256; 
- Thu, 28 Mar 2024 03:30:27 -0700 (PDT)
+ bh=yqoHV8cGciX4Ao/8p4+nn/qyhtF2e1hKDNhD04oySek=;
+ b=m2mMDmAr3WU7XRvIsxFZfGoquXraaoQh4Gw7tClwZcXxQ33wo/aGuYrM2nDUZcdCYL
+ uPu/l+qR0X+UByhGTuUnOtIUnIFz41f5UMlD39FDQstkKBSfhuLtqm6zrUC6EWi34Mk0
+ JrihepMjgBjOUiQXNrjzLF0nMmbiemweup6bP0IO3/fEziYUeS0ktO/Gofc59vG2CrLZ
+ /6T6DHJKGO+2laWG/zpaPbhacWT35+Sh6dEPJPcqhUlCgP/XDFznnkvXuE5N+ShQMXwQ
+ Y6BlVbAmNuyt/obbMvxWMThb2KM+74kZJd5gs+5E/G56Vd3mwqachvZdwwMbhCzknTUk
+ 4YbQ==
+X-Gm-Message-State: AOJu0YyU2ghQreQM+xugUEUboMhUglJYjVuLe9rsverpNILYN/31AYJQ
+ OctqMwJnJ4SzBG99jOgND1zLbCCbOGaI9arMpC0aPeuPxzybuEfRaMNA+OWQ2xY=
+X-Google-Smtp-Source: AGHT+IF1/Xri/u3x44UmL+KjMCLos2Vfh0OaeHyWRcjrP/Q8osAcPD81ffrPdrcwHMUOJBIZ/h/diw==
+X-Received: by 2002:a50:d586:0:b0:56b:9b69:2e81 with SMTP id
+ v6-20020a50d586000000b0056b9b692e81mr1720104edi.27.1711621828969; 
+ Thu, 28 Mar 2024 03:30:28 -0700 (PDT)
 Received: from localhost.localdomain ([2001:b07:aac:705d:baf6:ec90:82d5:a261])
  by smtp.gmail.com with ESMTPSA id
- s2-20020aa7cb02000000b0056c0d96e099sm653099edt.89.2024.03.28.03.30.26
+ s2-20020aa7cb02000000b0056c0d96e099sm653099edt.89.2024.03.28.03.30.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 03:30:26 -0700 (PDT)
+ Thu, 28 Mar 2024 03:30:27 -0700 (PDT)
 From: Emanuele Ghidoli <ghidoliemanuele@gmail.com>
 To: u-boot@lists.denx.de, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>,
  Gaurav Jain <gaurav.jain@nxp.com>, Fabio Estevam <festevam@gmail.com>,
  Breno Matheus Lima <breno.lima@nxp.com>, Peng Fan <peng.fan@nxp.com>,
  Marcel Ziswiler <marcel.ziswiler@toradex.com>
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-Subject: [PATCH v2 2/3] configs: colibri-imx7: set non-secure boot mode as
- default
-Date: Thu, 28 Mar 2024 11:30:13 +0100
-Message-Id: <20240328101724.127371-3-ghidoliemanuele@gmail.com>
+Subject: [PATCH v2 3/3] configs: colibri-imx7: allow accessing job-rings from
+ non-TrustZone
+Date: Thu, 28 Mar 2024 11:30:14 +0100
+Message-Id: <20240328101724.127371-4-ghidoliemanuele@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240328101724.127371-1-ghidoliemanuele@gmail.com>
 References: <20240328101724.127371-1-ghidoliemanuele@gmail.com>
@@ -98,26 +98,39 @@ X-Virus-Status: Clean
 
 From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
-Linux kernel is supposed to run in non-secure world,
-fix the defconfig accordingly.
+Set FSL_CAAM_JR_NTZ_ACCESS configuration since colibri-imx7
+uses Freescale CAAM Job Ring linux driver
 
 Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 ---
- configs/colibri_imx7_emmc_defconfig | 1 -
- 1 file changed, 1 deletion(-)
+ configs/colibri_imx7_defconfig      | 1 +
+ configs/colibri_imx7_emmc_defconfig | 1 +
+ 2 files changed, 2 insertions(+)
 
+diff --git a/configs/colibri_imx7_defconfig b/configs/colibri_imx7_defconfig
+index 0c6a272ddfc6..16f923b07c22 100644
+--- a/configs/colibri_imx7_defconfig
++++ b/configs/colibri_imx7_defconfig
+@@ -72,6 +72,7 @@ CONFIG_SERVERIP="192.168.10.1"
+ CONFIG_BOUNCE_BUFFER=y
+ CONFIG_BOOTCOUNT_LIMIT=y
+ CONFIG_BOOTCOUNT_ENV=y
++CONFIG_FSL_CAAM_JR_NTZ_ACCESS=y
+ CONFIG_DFU_NAND=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+ CONFIG_FASTBOOT_BUF_ADDR=0x81100000
 diff --git a/configs/colibri_imx7_emmc_defconfig b/configs/colibri_imx7_emmc_defconfig
-index 9d4423cd0d6a..8dd9fe6e6a38 100644
+index 8dd9fe6e6a38..7c6a725ea9a2 100644
 --- a/configs/colibri_imx7_emmc_defconfig
 +++ b/configs/colibri_imx7_emmc_defconfig
-@@ -8,7 +8,6 @@ CONFIG_DEFAULT_DEVICE_TREE="imx7d-colibri-emmc-eval-v3"
- CONFIG_TARGET_COLIBRI_IMX7=y
- CONFIG_TARGET_COLIBRI_IMX7_EMMC=y
- CONFIG_OF_LIBFDT_OVERLAY=y
--CONFIG_ARMV7_BOOT_SEC_DEFAULT=y
- CONFIG_IMX_RDC=y
- CONFIG_IMX_BOOTAUX=y
- CONFIG_IMX_HAB=y
+@@ -61,6 +61,7 @@ CONFIG_USE_SERVERIP=y
+ CONFIG_SERVERIP="192.168.10.1"
+ CONFIG_BOOTCOUNT_LIMIT=y
+ CONFIG_BOOTCOUNT_ENV=y
++CONFIG_FSL_CAAM_JR_NTZ_ACCESS=y
+ CONFIG_USB_FUNCTION_FASTBOOT=y
+ CONFIG_FASTBOOT_BUF_ADDR=0x81100000
+ CONFIG_FASTBOOT_FLASH=y
 -- 
 2.34.1
 
