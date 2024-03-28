@@ -4,78 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8D3EC54E64
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 15:10:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F266EC54E67
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 15:10:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B55C888198;
-	Thu, 28 Mar 2024 16:09:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 254F5881A9;
+	Thu, 28 Mar 2024 16:09:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KK+moUik";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="en4p+E5s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1DFF88198; Thu, 28 Mar 2024 16:09:20 +0100 (CET)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id 2FC7C88150; Thu, 28 Mar 2024 16:09:25 +0100 (CET)
+Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
+ [IPv6:2607:f8b0:4864:20::82d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC4BE88150
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 16:09:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 35489881A8
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 16:09:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-78a13117a3dso91527585a.1
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:09:18 -0700 (PDT)
+Received: by mail-qt1-x82d.google.com with SMTP id
+ d75a77b69052e-430c32c04c7so5155031cf.0
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:09:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711638558; x=1712243358; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1711638562; x=1712243362; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=incCmaaocmN04Ktmd/w9RUMCfIBZ10KwL7i9z/Zq49o=;
- b=KK+moUikb0UWjMpE3ehXFZ2mXRDpzGi6WqJhl39iGBF17FHnYhaYCgpyVPKHJ47T3Q
- lx42GxSW3MWlwoQ8FGLZrE4Fwyk5sxL0bYYuGB42LqceLEg07PHl0+79gZSIy3w9K2lp
- feuuzV0St5DjvCvJibzeM6LtAB2VnHzKMwUSY=
+ bh=y8OAcKSH7XVaS9F4atPsR7h/hrtT+B1CMjNtCyPO4RU=;
+ b=en4p+E5sdAJ2OsulIBnnO+X1nVkybCv2AkmlM5dTCPYug5mgeL8hE4p2+7Ky97cYrA
+ 0o1w8037nLmL2XGFQDkomQG2KXUOnwZR+Ah4BcPWshO2WhyJdajakdQyAuN/AwapSpBv
+ BSWMtOTY/E469KFMX55QsK7bUn9Q47GaSNDmE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711638558; x=1712243358;
+ d=1e100.net; s=20230601; t=1711638562; x=1712243362;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=incCmaaocmN04Ktmd/w9RUMCfIBZ10KwL7i9z/Zq49o=;
- b=kzGFB7HWHN9gHmsYbPtZKaFHhFwu8MEF9CFMu9mvSemC1rd57paoB7njotC2CTTzgF
- BO/hjnxNcC7mx9fxL35/tQQLsmndIamXXk/4Q21wLZ1Wykf09RYJzsYHc1YAj9mVtG59
- tWGsHcq/maorRkagEEWRtVuXwg18bIoExCOAZjS7zQdzHIbeo4b+bQCvU6JcvF7K2Tl5
- tHegUp6SIq/EVRCmXjQ5TqjYF5UxK+1X4hNCxEyf162ZjhTAvxEcJg8oQe98Rs10ZIs4
- Gp8xHaBZW4OKxKee5fD5I7KV9Pce9nFSsOJVrrybGis5n/utDL0l2LPZb+VwAiIWrhoE
- uCIg==
+ bh=y8OAcKSH7XVaS9F4atPsR7h/hrtT+B1CMjNtCyPO4RU=;
+ b=xN7Br1jRl/qkPGhhOCijEIkq225+d+XyXKL83uQtpwLk52S4hfKKQYCmdgl1cfskFM
+ U6L3O1iihVz9fAleDkPXcTQmmPle7Soh6aZeBFooRZaoy28SNCIyzJ8TZFSNLzYaPTbX
+ SsM6XRNC1wWf8glGpsDxFAEwBTD3ozl+aP76PLz6Je364f7CZwuSuWagIABobPQwpRA/
+ op+VkLo7t+P+WzLrqy/o8OlpUPAKxUbwzcGoD1GEp/PJWx1gV0hPIwHvzvLkI9Os2e/h
+ JXM8BgFD5SYVp2dgUAYnfcpAbMYyeRBAuGMKFUEGTBxEyphRgtmxAz3ImkYFnDa6jxfe
+ s5Zw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUOyA9OAmHHhyBq+grwtRl+IFr3cC/9/XaCHZ322RUKMIpwwnfqzv/YVrmOpL46rNgfsiPPmD8tc9+i/yuznO9gRCuifA==
-X-Gm-Message-State: AOJu0YxW661cf38ugG/GEPDdD6MgvNsFdmjWwi52R5TQY9dopdIuqz+d
- WwFVOAgABH3BR7TpxJN2AHwHPQoSLUR+pIZqMNM5rw8jM9YV2tg4ASmTjJgxBM8=
-X-Google-Smtp-Source: AGHT+IH0dDLUkRUiho61T1lbgTjge7l1r8HaLEQMrVtBwVOLFVfSEGVYptT65Crx7XwoEbgCRi+TUg==
-X-Received: by 2002:a05:620a:2086:b0:78a:3ccc:8140 with SMTP id
- e6-20020a05620a208600b0078a3ccc8140mr3859994qka.28.1711638557745; 
- Thu, 28 Mar 2024 08:09:17 -0700 (PDT)
+ AJvYcCWQl2ge8VEOMAcDdx8NpQG9dzbYGbt09bbmrb7Ce/DdhszokxxD+Ao+BolimP6VeyLbNQXC7BXIHPO5+yOqVir6BGnB0Q==
+X-Gm-Message-State: AOJu0Yz/N8V4a89Bj724jSi0sYtszqZyo2jjSOs9b/Sid+XsmoQrZgh1
+ 0Un0tb/0QLJ7e2TYtG9rpefo6wfKbV2rTD2EKgTbG/GHM5Qxmtw7saDC/3/f6W4=
+X-Google-Smtp-Source: AGHT+IFZ6eybir8tv0ZVLXI998Th+k4P61DDxsKEIVbPzmeoAC5GXy4QIVLivZFb8aMe8ECfTjMGQQ==
+X-Received: by 2002:ac8:5c45:0:b0:432:b42b:8f3e with SMTP id
+ j5-20020ac85c45000000b00432b42b8f3emr2081323qtj.64.1711638562107; 
+ Thu, 28 Mar 2024 08:09:22 -0700 (PDT)
 Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
  by smtp.gmail.com with ESMTPSA id
- u6-20020ae9c006000000b00789e17a55fbsm583563qkk.131.2024.03.28.08.09.16
+ f2-20020ac84702000000b0042f14f31cd9sm678716qtp.92.2024.03.28.08.09.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 08:09:17 -0700 (PDT)
-Date: Thu, 28 Mar 2024 11:09:15 -0400
+ Thu, 28 Mar 2024 08:09:21 -0700 (PDT)
+Date: Thu, 28 Mar 2024 11:09:19 -0400
 From: Tom Rini <trini@konsulko.com>
-To: Jacky Chou <jacky_chou@aspeedtech.com>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
- marek.vasut+renesas@mailbox.org, michal.simek@amd.com,
- u-boot@lists.denx.de, BMC-SW@aspeedtech.com
-Subject: Re: [PATCH] net: phy: the NC-SI phy device do not require mdio bus
-Message-ID: <20240328150915.GY3442575@bill-the-cat>
-References: <20240115103447.389339-1-jacky_chou@aspeedtech.com>
+To: forbidden405@outlook.com
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 1/5] net: hifemac_mdio: use log_msg_ret() correctly,
+ report error by dev_err()
+Message-ID: <20240328150919.GZ3442575@bill-the-cat>
+References: <20240122-net-v3-0-f1e80564725b@outlook.com>
+ <20240122-net-v3-1-f1e80564725b@outlook.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="pPzuKeJ/9GPds9rs"
+ protocol="application/pgp-signature"; boundary="kLqnZVXULFqdYlTj"
 Content-Disposition: inline
-In-Reply-To: <20240115103447.389339-1-jacky_chou@aspeedtech.com>
+In-Reply-To: <20240122-net-v3-1-f1e80564725b@outlook.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,40 +95,45 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---pPzuKeJ/9GPds9rs
+--kLqnZVXULFqdYlTj
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jan 15, 2024 at 06:34:47PM +0800, Jacky Chou wrote:
+On Mon, Jan 22, 2024 at 10:33:20PM +0800, Yang Xiwen via B4 Relay wrote:
 
-> As with fixed-link phy device, the NC-SI phy devive does not
-> require an mdio bus. So, a condition is added to check the
-> NC-SI phy id to avoid accessing the bus pointer that is NULL.
+> From: Yang Xiwen <forbidden405@outlook.com>
 >=20
-> Signed-off-by: Jacky Chou <jacky_chou@aspeedtech.com>
+> The initial commit used log_msg_ret() wrongly. Fix that by moving error
+> report to a separate dev_err() call and shrink the first argument of
+> log_msg_ret() to no more than 4 chars.
+>=20
+> Fixes: 6b5c8d98e204 ("net: add hifemac_mdio MDIO bus driver for HiSilicon=
+ platform")
+>=20
+> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
 
-Applied to u-boot/next, thanks!
+For the series, applied to u-boot/next, thanks!
 
 --=20
 Tom
 
---pPzuKeJ/9GPds9rs
+--kLqnZVXULFqdYlTj
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYFiBsACgkQFHw5/5Y0
-tyyoMAwArGbRXWxJbKAi8tZT1jaQXrU5TGZeB6J3lPTza/Zoc050LsRukgAeMdMa
-dPH/8mUwox+eqU6yWbcypJWWn7JFWo9Zp+3sf+u/p6WCjEX5inTA/tTu81spMwJz
-cOPj3cAmeMKtU8dwBfHuT+N4l5SLjDfKok2QpNzBcblEbYowzRj9Qjkfqg1qUOnI
-aRALI6xwhqc0b/gMHGOHu8KYHx8Dr7IAHmSIQMuzw3pUnCIBbq0rLTzyxWL6t2cK
-0yrIkapTwOkBGcRlPO8okk8tOIbF+PwPdACbdeAZ4S2/EOOjd9YdH4rwkTRlrdw4
-1ZeANo2iL0ZDumYfFO25kcQlRMfBfvf6sp21BMOt25fxiiKaEfjslgcrRKlnD7Ej
-i57W3fHjnpq3tmlkIFx+vvranqtuWjiVT+ED8ogPeFnLX05NnWS5AFXv5WRAvyUK
-/f4XylgmAMgqkxxfvTOuCsWX3FtRDzPOcNoPlbyqMXoAEu+RueezjFHlkma/3cW1
-jFXN7bYi
-=jibn
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYFiB8ACgkQFHw5/5Y0
+tyxo/gwAqpIFB6l/ltQz02eBDMfgBX3b2MV7AyZl/Cx/RyeiZiTXd+0wzCx0w4v9
+wyR99gUOj3oxZvt71/MiBheFixtyAgvewEj0GjAoxbexRJn3V8O9l5gSq6ye408t
+yuFgKKXuKM3awFygjyqdPbNqIXL7/FE2oFw1iCFTE6R2U+LFydMPslLP0Uzotq7b
+oDDqvB00RNf9oQBTAHRbX4Y4CeIzQUtbXM+nr0v0Jh29UQh9bblKxutGszdpDCXE
+lGG8wXWZioTHKJEQXbH/8++g/3PXBUc8HgtS62irvS5oBsJSw7BABpzxWfCUNBWg
+lU72Rj8yMmF1ucgnc6iD/f87HFBraLuc0AdjEK/fFirIzBEuhrc110ad2RCemWDc
+ZWKNFTboZXNIj5mjFrPHhNd3ycpJs2anf/45lar0UzFLgrCiBYVT9lonCudzpbZZ
+VsaB6hSxECUng8UqUNNuGabt55Tqw3euJtUMzrpsbnqxIda0zE75Zii1h5RqjLqi
+VAf6M+OC
+=L8A8
 -----END PGP SIGNATURE-----
 
---pPzuKeJ/9GPds9rs--
+--kLqnZVXULFqdYlTj--
