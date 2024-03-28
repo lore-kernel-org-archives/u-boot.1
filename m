@@ -4,55 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E9F6C54E67
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 10:15:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B86AC54E67
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 10:17:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57ADF87F95;
-	Thu, 28 Mar 2024 11:15:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1512C88094;
+	Thu, 28 Mar 2024 11:17:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711620915;
-	bh=Ehur7DpqmHhg555MmSB/8uRrP4YTNK0RfCQb4NW0cr4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=fguEj2Ftn3u0tJ6mP40l5tSUW1ecUl8a2oPAw3g9er6qaRJZtWivs/fdj+tmXbCfI
-	 tV3hGsU1F+X84rp7Yo0w9lm6ONJHecgnbGcC+PHMX38rGdGZ6dbBb02a3hCupwGDIg
-	 f2DDsCntuE9aF2ujfxSZcxd9Ne763QslxQXFZdkB/lII774u7JMwPHcgXZDXI234Ye
-	 ToRVQjoKerOT6P/t5MReyMsTwWCJb8ml5Zc2Dfz4aT/RDn+PHOR4LeeUpr7uieWPho
-	 585c3CavaTy9cwSSM9kNShEkVahcw2B5e1b9/4A04eNccQMOkjcGfai2cQRffxHA3S
-	 St0ZjiBp9VwbA==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="X7OGbfNb";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7116788094; Thu, 28 Mar 2024 11:15:14 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ id 3EDF08811C; Thu, 28 Mar 2024 11:17:09 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98DBC87DE6
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 11:15:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15E7E87DE6
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 11:17:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4V4ztk3zKMz9sqw;
- Thu, 28 Mar 2024 11:15:10 +0100 (CET)
-Message-ID: <ab15fe52-c157-4875-b8a4-affe7935d23f@denx.de>
-Date: Thu, 28 Mar 2024 11:15:09 +0100
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id E0A8C3FB79
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:16:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1711621018;
+ bh=S89lXJ+y4JHe2jhuQFI0bVygTF9EAOGNoaGktUKF/gg=;
+ h=Message-ID:Date:MIME-Version:To:Cc:From:Subject:Content-Type;
+ b=X7OGbfNb3XgpR+jLz1R772C40D7hbQK8NqZQdykEsgnfcbFDS4USSSRzbjimHAeMw
+ mKwp0Ta0s+cQwfqK/lu0v7hK1S10C3nDAdLfgEY9dLS++vmIpf4gqJglgL6+xk08EK
+ PCMu7q6z5+OdWTCHXonDas23PuTcs2/fCdSyp/SoEjQb+0YvkBCE58ovlEoHo5r1YZ
+ fPf2RLLzeekFZStH1qJqoKtAPLk+d+/aRu2oa3/qZa3naJ8YmKfL3vLoFoIX/hlTAI
+ L7MpJgYd3J8CWFqC3Qi3RNvPToDlaE3fYu7lt7yVXDMC4vfYBZjL182mioOoesT7aS
+ VjADajdLt7fvA==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-3418412a734so448619f8f.0
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 03:16:58 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711621018; x=1712225818;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=S89lXJ+y4JHe2jhuQFI0bVygTF9EAOGNoaGktUKF/gg=;
+ b=Uf1uhtERUkqISqk/90f7kVD+an2ih+zCHgVE41Q0w2gqn3gyVZi7F7U+J5gkPVhNLR
+ y2jQqRJLKLQRtOtm30YYprjCvNd4yx6j/0wd+WRn+mkcXY8vzbOA8V6PiQyXuR8ZDbxf
+ wqnJBvg4Uu0NkkKEYi87XwrOLHLnUhRpdmgZO76R3BlGvV22sbmRrX3RBf522tv4SHxw
+ pWBN9rldKkuTJJYV0imEQatlp5jTAusRaZopAZD7NpHkXwtPQBCuMfG4QIJ+xx+Gxq2u
+ Z3q4Sv6/AGTZnx2uDJCS98lw+2CkgBV5UInPzcnujM98Hq/+AP77+jUaxlirV11SiW7v
+ mgPw==
+X-Gm-Message-State: AOJu0Yxzk8ep1JgfkV+HsFFxUGot65oGcRXPAvHvx2aYjC6VlDGXAdr1
+ xM9RfGJ95ojreTsSTfT0iDjsoQnJ5Z+EdUc2n7TkJ45zuxR9a6xxx8Qedpd2PSsGEC21dijvKsW
+ xuza0EM2z2CHm4P4LvaJUIprjHpX4cTG+4BywABxI+iyZ7x6+kxLqwQfNkOHnK/GopJBilJgzEu
+ 0=
+X-Received: by 2002:a5d:4903:0:b0:33d:b2d6:b3a6 with SMTP id
+ x3-20020a5d4903000000b0033db2d6b3a6mr1836742wrq.48.1711621018476; 
+ Thu, 28 Mar 2024 03:16:58 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IE+pm51e8ZgvF5GmWx5dd/h1IlHJkXSWXvHvo/cG1TavVa4hG3MtJ5tW2Gg+ETjOrQzg+lSwg==
+X-Received: by 2002:a5d:4903:0:b0:33d:b2d6:b3a6 with SMTP id
+ x3-20020a5d4903000000b0033db2d6b3a6mr1836725wrq.48.1711621018025; 
+ Thu, 28 Mar 2024 03:16:58 -0700 (PDT)
+Received: from [192.168.123.126]
+ (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ by smtp.gmail.com with ESMTPSA id
+ v28-20020a5d591c000000b00341d4722a9asm1356809wrd.21.2024.03.28.03.16.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 28 Mar 2024 03:16:57 -0700 (PDT)
+Message-ID: <e2c1b7e5-ee38-4427-ab03-48a68d41b044@canonical.com>
+Date: Thu, 28 Mar 2024 11:16:56 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH u-boot-mvebu v3 13/18] gpio: turris_omnia_mcu: Update
- firmware features reading
+User-Agent: Mozilla Thunderbird
 Content-Language: en-US
-To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
-Cc: u-boot@lists.denx.de
-References: <20240327162355.24584-1-kabel@kernel.org>
- <20240327162355.24584-14-kabel@kernel.org>
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240327162355.24584-14-kabel@kernel.org>
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [NEXT] Pull request acpi-next-20240328
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,86 +102,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/27/24 17:23, Marek Behún wrote:
-> Update firmware features reading to try reading 32 bits of features and
-> fallback to reading 16 bits.
-> 
-> Signed-off-by: Marek Behún <kabel@kernel.org>
+Dear Tom,
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+The following changes since commit ab8d9ca3044acf51d8ff3bf3c4718c48f30ad606:
 
-Thanks,
-Stefan
+   Merge tag 'v2024.04-rc5' into next (2024-03-25 22:15:47 -0400)
 
-> ---
->   drivers/gpio/turris_omnia_mcu.c | 32 ++++++++++++++++++++++----------
->   1 file changed, 22 insertions(+), 10 deletions(-)
-> 
-> diff --git a/drivers/gpio/turris_omnia_mcu.c b/drivers/gpio/turris_omnia_mcu.c
-> index c441d07d69..40ced261e3 100644
-> --- a/drivers/gpio/turris_omnia_mcu.c
-> +++ b/drivers/gpio/turris_omnia_mcu.c
-> @@ -10,7 +10,7 @@
->   #include <linux/log2.h>
->   
->   struct turris_omnia_mcu_info {
-> -	u16 features;
-> +	u32 features;
->   };
->   
->   static int turris_omnia_mcu_get_function(struct udevice *dev, uint offset)
-> @@ -228,25 +228,37 @@ static int turris_omnia_mcu_probe(struct udevice *dev)
->   {
->   	struct turris_omnia_mcu_info *info = dev_get_plat(dev);
->   	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
-> -	u16 val;
-> +	u32 dword;
-> +	u16 word;
->   	int ret;
->   
-> -	ret = dm_i2c_read(dev, CMD_GET_STATUS_WORD, (void *)&val, sizeof(val));
-> +	ret = dm_i2c_read(dev, CMD_GET_STATUS_WORD, (void *)&word, sizeof(word));
->   	if (ret < 0) {
->   		printf("Error: turris_omnia_mcu CMD_GET_STATUS_WORD failed: %d\n",
->   		       ret);
->   		return ret;
->   	}
->   
-> -	if (le16_to_cpu(val) & STS_FEATURES_SUPPORTED) {
-> -		ret = dm_i2c_read(dev, CMD_GET_FEATURES, (void *)&val,
-> -				  sizeof(val));
-> +	if (le16_to_cpu(word) & STS_FEATURES_SUPPORTED) {
-> +		/* try read 32-bit features */
-> +		ret = dm_i2c_read(dev, CMD_GET_FEATURES, (void *)&dword,
-> +				  sizeof(dword));
->   		if (ret < 0) {
-> -			printf("Error: turris_omnia_mcu CMD_GET_FEATURES failed: %d\n",
-> -			       ret);
-> -			return ret;
-> +			/* try read 16-bit features */
-> +			ret = dm_i2c_read(dev, CMD_GET_FEATURES, (void *)&word,
-> +					  sizeof(word));
-> +			if (ret < 0) {
-> +				printf("Error: turris_omnia_mcu CMD_GET_FEATURES failed: %d\n",
-> +				       ret);
-> +				return ret;
-> +			}
-> +
-> +			info->features = le16_to_cpu(word);
-> +		} else {
-> +			info->features = le32_to_cpu(dword);
-> +			if (info->features & FEAT_FROM_BIT_16_INVALID)
-> +				info->features &= GENMASK(15, 0);
->   		}
-> -		info->features = le16_to_cpu(val);
->   	}
->   
->   	uc_priv->bank_name = "mcu_";
+are available in the Git repository at:
 
-Viele Grüße,
-Stefan Roese
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git 
+tags/acpi-next-20240328
 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+for you to fetch changes up to 6eca28b61af1835e70a6feb86f86a0b18b1708c6:
+
+   smbios: fill wake-up type (2024-03-27 09:23:30 +0100)
+
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/20081
+
+----------------------------------------------------------------
+Pull request acpi-next-20240328
+
+ACPI:
+
+* rename fields rename aslc_id, aslc_revision to match ACPI specification
+* remove duplicate declaration of acpi_fill_header()
+* document fields of HETP table
+* MAINTAINERS: add include/acpi/ to ACPI
+
+SMBIOS:
+
+* provide wake-up type in SMBIOS table
+* display wake-up type in smbios command
+
+----------------------------------------------------------------
+Heinrich Schuchardt (6):
+       acpi: rename aslc_id, aslc_revision
+       MAINTAINERS: add include/acpi/ to ACPI
+       acpi: document HETP table
+       acpi: remove duplicate declaration of acpi_fill_header()
+       cmd: smbios: type 1 wake-up time, family
+       smbios: fill wake-up type
+
+  MAINTAINERS               |  1 +
+  arch/x86/lib/acpi_nhlt.c  |  2 +-
+  arch/x86/lib/acpi_table.c |  8 ++--
+  cmd/acpi.c                |  2 +-
+  cmd/smbios.c              | 25 ++++++++++++-
+  include/acpi/acpi_table.h | 95 
+++++++++++++++++++++++++++++++-----------------
+  include/smbios.h          | 27 ++++++++++++++
+  lib/acpi/acpi_table.c     |  4 +-
+  lib/acpi/ssdt.c           |  2 +-
+  lib/smbios.c              |  1 +
+  test/dm/acpi.c            |  6 +--
+  11 files changed, 124 insertions(+), 49 deletions(-)
