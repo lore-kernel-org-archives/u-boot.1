@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03C99CD11DD
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 18:01:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7194CCD11DD
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 18:01:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFABD881E4;
-	Thu, 28 Mar 2024 18:59:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 34AFD83348;
+	Thu, 28 Mar 2024 18:59:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J12FDXHa";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iXd8FfLt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76A3E881BF; Thu, 28 Mar 2024 18:59:51 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 0CB928083F; Thu, 28 Mar 2024 18:59:55 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56242881D5
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 18:59:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 22224881CE
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 18:59:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-33ed7ef0ae8so848622f8f.0
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:59:48 -0700 (PDT)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-415447b16aaso6539695e9.1
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:59:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711648788; x=1712253588; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1711648790; x=1712253590; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=MOEUaSh2jP1fM+GMfk9jn6DYONqGieAUpvNGE9zTi/M=;
- b=J12FDXHasM2pm80dPaSqUuV9CoBhg+V2qTFqTLoRyGnT9TYjEasUv0ijABSzpcmJFi
- cad5cVb3vY7D2PDHuF49GSDA8DcWkiRf/1Of9G4RGVkTBVNlsyDIW7Ue9zDqyz1cb+by
- NAq9osM9JRe5qKx6zgwA/c2JifieTjIayO+t7c/QMhEqoxukJBV1d0odtRGY0wccM2N6
- ZXxadkvPnwlDLTmI4qr85iLL8I5cPWZ+Qoi/XTwYYOHJ9q+mwAWmkhGTW2ZI4/gL95S4
- il/epkBdWKomCtodLaIOTEGuifDVsfAsvBhQAF0/mpbwVugIxgp8ZcRIh+B20YXXMkXp
- 7ieQ==
+ :reply-to; bh=cgGFkOv1r6ZqedijumR44euV2V/PWTObj0uui6365Yw=;
+ b=iXd8FfLthb5av+lRlbykNBLWxUKw4/4LrxY+orGjXppFuF2iaUtO1+gyTMp0kgRs5C
+ 7NUl7SvoXXXRsMX2sHozbCQ8UXwGOGaQtMeMq1tZUtDcE7h0E4ANod8VinRDcZ479RUh
+ gktHRE5jRE2f9gNIcUmr6sWBNxLnZ+ZxIEdBnX4n9EEN0JMVo3anppIH0wmjAwpMZ8z3
+ mSNjBnmcdArl67MNLn9OXuiWZK+94+BHYUcUuXU/s8/mIoD5vxy831eicpgSA1zFMSxA
+ 64ccuHqMdFO8QUAIQT+5BgkFybKVEj8cwXzoOPywmTsHMjZb4XRd01ZvkFXV9ZEDXEbL
+ OjXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711648788; x=1712253588;
+ d=1e100.net; s=20230601; t=1711648790; x=1712253590;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MOEUaSh2jP1fM+GMfk9jn6DYONqGieAUpvNGE9zTi/M=;
- b=R9AhmsTjYscZBrw0XotoljEol8eiprdLAbOODP3WHV/zJANHIN3uN8VXUW587ULQlg
- nD5zJ5zZM7vQa18+sP9679Jo1UJCuygover3Kn9i74suL8bERbH//SjL2wqbcwp/yRPN
- 4JIwPDZOi2BAtaCy+e5UuAnvddfsOf/GV5fxORkQ4NbtMe9/AtgB9Lf/EBKGP1317o0G
- YI4pqYxDNakkdz7U3PdklWV9yFZWTHxHwO4RagqOSGKI+eEYhLNa53j2Jfz1qa/oaip9
- 45Tl2ufirVWYmA3wYJ0U5nbYBL26deY/yKBVb0Qb1u00c2cCu6DJGXAnr3y9jEfUEBCZ
- uVHA==
-X-Gm-Message-State: AOJu0Yy1X5TuW11bAX8kDQo1y2FfPzm3tiB4EXkrH3LDbbt1493rGk/z
- BVuLhBG10r+OjC4M2DymVMs9CDm7LOfFvQVYruKfTVdcODPcM+1hprfSAj80ZRQ=
-X-Google-Smtp-Source: AGHT+IFyblP2ocaictBNYgt2T53qIadpg7insyBrVwoN1fYzUgPIDbxg+qcO85M4GP65r23Z7Sw3mg==
-X-Received: by 2002:a5d:6b47:0:b0:33d:2d07:b567 with SMTP id
- x7-20020a5d6b47000000b0033d2d07b567mr3158000wrw.24.1711648787821; 
- Thu, 28 Mar 2024 10:59:47 -0700 (PDT)
+ bh=cgGFkOv1r6ZqedijumR44euV2V/PWTObj0uui6365Yw=;
+ b=LV9u6/qgk4K9LVrnw51vVlL7WmaazuHr5m8il0vLCGrsl01+92nPTbPQ61ZMAMJUK4
+ +nNEiHTEZ+CIdol+cVuX59gh4xjGYwrZo+Xd2wzNlO6ikzM/Yuwudk8X4QUvs0cuaZYV
+ 1URG0KZ+//4C39hrcVQObmyGLXnnfNovvavu3QSTBpSM92hZEbCr5LRANXLPned4emKj
+ z54McB3yzev7D7vpygzojYAuWyzPfoMi89O2dA5QqWAKJRBODjGdvmw+06LjtI0WY2ct
+ +Jsgl13h7FSYhnZyYynnP6SUizNCZffqd8/8RRxtMs0lM507oBmpmHpY7s007OMQiHse
+ bBYg==
+X-Gm-Message-State: AOJu0Yxh5MXz+Ld0A39LVPehKOycub6oY7BdWbdAhkH3r/lhRkkZrRrZ
+ b3t/XCMBW65UOPdX8CG6Mebru45yQgm5/g00oyKD6POXUq32/uLN8J0+plFMsHI=
+X-Google-Smtp-Source: AGHT+IExHIV0d5kAquQkv3vKlTeIBd1tL7BcTDnMWSUN8MftuXr0Eo2cGFCFrfh0X0LazseZdLW/Fw==
+X-Received: by 2002:adf:f010:0:b0:33e:ca29:5a3 with SMTP id
+ j16-20020adff010000000b0033eca2905a3mr2728579wro.23.1711648790708; 
+ Thu, 28 Mar 2024 10:59:50 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- y13-20020a5d4acd000000b00341e5f487casm2292237wrs.46.2024.03.28.10.59.46
+ y13-20020a5d4acd000000b00341e5f487casm2292237wrs.46.2024.03.28.10.59.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 10:59:46 -0700 (PDT)
+ Thu, 28 Mar 2024 10:59:50 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 28 Mar 2024 17:59:12 +0000
-Subject: [PATCH v5 06/16] clk/qcom: sdm845: add gdscs
+Date: Thu, 28 Mar 2024 17:59:15 +0000
+Subject: [PATCH v5 09/16] serial: msm-geni: support livetree
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240328-b4-qcom-livetree-v5-6-4e98228b3d03@linaro.org>
+Message-Id: <20240328-b4-qcom-livetree-v5-9-4e98228b3d03@linaro.org>
 References: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
 In-Reply-To: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -79,13 +79,13 @@ To: Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1714;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1262;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=J2wyNARYq0khhF05IOZjfXaKY3NwgELyfaNZ+Dn9LDc=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTWDZypKrqLKmf87QpfNCPp2mVmn2/tyd1Jn9ztfC9HX
- 7229W1RRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZhI9G9Ghs7wg9ELe/d9rI89
- KF7weP33cqWG5aH/8t1UohMvf33+KJvhn8LklBMNnVUmJmtZRJ3cLRxYk53q9FcInfHbnOxhNl+
- oHQA=
+ bh=e9QvEtgQXqVS65y/B+mDQKCzyUPIH18kPws1KWRjbZI=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTWDVxnTYJmLVRbmZX1cMdpVbOwH7M/TmxJ0OefuI+nz
+ VtKQHx3RykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZiI8CqGv1L6Rudvmvl8Ynz/
+ r2tlg+hizrYXV7/0Srsdvr+5VMH28iZGhmZBjibJF8JbvH/5rZ3Mt1vgaUefVtjO74eLhCMT1od
+ 9Og8A
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -104,51 +104,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Define the GDSC power domains for SDM845.
+When using OF_LIVE, the debug UART driver won't be probed if it's a
+subnode of the geni-se-qup controller. Add a NOP driver for the
+controller to correctly discover its child nodes.
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
 Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/clk/qcom/clock-sdm845.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ drivers/serial/serial_msm_geni.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/drivers/clk/qcom/clock-sdm845.c b/drivers/clk/qcom/clock-sdm845.c
-index ccb0cf245d33..b7154360894a 100644
---- a/drivers/clk/qcom/clock-sdm845.c
-+++ b/drivers/clk/qcom/clock-sdm845.c
-@@ -145,13 +145,31 @@ static const struct qcom_reset_map sdm845_gcc_resets[] = {
- 	[GCC_USB3_DP_PHY_SEC_BCR] = { 0x50014 },
- 	[GCC_USB_PHY_CFG_AHB2PHY_BCR] = { 0x6a000 },
+diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
+index 4aa0bc8c72bc..5260474fb9a4 100644
+--- a/drivers/serial/serial_msm_geni.c
++++ b/drivers/serial/serial_msm_geni.c
+@@ -605,8 +605,21 @@ U_BOOT_DRIVER(serial_msm_geni) = {
+ 	.ops = &msm_serial_ops,
+ 	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
  };
  
-+static const struct qcom_power_map sdm845_gdscs[] = {
-+	[PCIE_0_GDSC] = { 0x6b004 },
-+	[PCIE_1_GDSC] = { 0x8d004 },
-+	[UFS_CARD_GDSC] = { 0x75004 },
-+	[UFS_PHY_GDSC] = { 0x77004 },
-+	[USB30_PRIM_GDSC] = { 0xf004 },
-+	[USB30_SEC_GDSC] = { 0x10004 },
-+	[HLOS1_VOTE_AGGRE_NOC_MMU_AUDIO_TBU_GDSC] = { 0x7d030 },
-+	[HLOS1_VOTE_AGGRE_NOC_MMU_PCIE_TBU_GDSC] = { 0x7d03c },
-+	[HLOS1_VOTE_AGGRE_NOC_MMU_TBU1_GDSC] = { 0x7d034 },
-+	[HLOS1_VOTE_AGGRE_NOC_MMU_TBU2_GDSC] = { 0x7d038 },
-+	[HLOS1_VOTE_MMNOC_MMU_TBU_HF0_GDSC] = { 0x7d040 },
-+	[HLOS1_VOTE_MMNOC_MMU_TBU_HF1_GDSC] = { 0x7d048 },
-+	[HLOS1_VOTE_MMNOC_MMU_TBU_SF_GDSC] = { 0x7d044 },
++static const struct udevice_id geniqup_ids[] = {
++	{ .compatible = "qcom,geni-se-qup" },
++	{ }
 +};
 +
- static struct msm_clk_data sdm845_clk_data = {
- 	.resets = sdm845_gcc_resets,
- 	.num_resets = ARRAY_SIZE(sdm845_gcc_resets),
- 	.clks = sdm845_clks,
- 	.num_clks = ARRAY_SIZE(sdm845_clks),
-+	.power_domains = sdm845_gdscs,
-+	.num_power_domains = ARRAY_SIZE(sdm845_gdscs),
++U_BOOT_DRIVER(geni_se_qup) = {
++	.name = "geni-se-qup",
++	.id = UCLASS_NOP,
++	.of_match = geniqup_ids,
++	.bind = dm_scan_fdt_dev,
++	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
++};
++
+ #ifdef CONFIG_DEBUG_UART_MSM_GENI
  
- 	.enable = sdm845_clk_enable,
- 	.set_rate = sdm845_clk_set_rate,
- };
+ static struct msm_serial_data init_serial_data = {
+ 	.base = CONFIG_VAL(DEBUG_UART_BASE)
 
 -- 
 2.44.0
