@@ -4,33 +4,33 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14902C54E67
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 09:56:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42D54C54E64
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 09:58:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 91AFF8812C;
-	Thu, 28 Mar 2024 10:56:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C4B9D880C5;
+	Thu, 28 Mar 2024 10:58:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711619809;
-	bh=lVipQZ1I8jf/nYAOVsbrpkMw6Wkyto3AbniMbdNprbs=;
+	s=phobos-20191101; t=1711619887;
+	bh=I3cdVcY/khqUoaX+WEAlBeAqvsFmy352yF0zct2fB98=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=j3+2X2X9lxEDb8Zuh9MIHMcya3x+zEqIl50mTkb41JIZVDaG0Ah2XWYlpIFNV/6rC
-	 fE+zl4Sm8bC3SjARCvvPDSh1NboZp0xFFlufJI8YTlYoNA+Ybmap5kCYAnbArSz1LQ
-	 7NL+gHsHadazHRo55bPcqjXupGB+hfFYJbHynRGUBcyVfy5Mnx9ycYWf2vIuXXJ4DO
-	 3QaTef+bOQM3YInp3ZzRaN3Yg3qiRy2SwPjFNcJ08gTE1WhqEBdTzoTckZJxOps7SE
-	 dhZdSmXQvGfgqE/bgl96oRzhTaj+Fc5aFtcSM0ZFXmM04uPX2Z4YNhuMJt1ngrKcZE
-	 ZDrs0Z7W2zTFw==
+	b=rmyYJOXfkdNDpLEhZQrZsZuPYto4fApzVA7OVnpUFpAUvU6CCDYMauQvfT8dZBgVb
+	 nC8pCPbkyI1Ev5EP/CY1UXy/4kVLWnJ1ardx6DgXt21GUvLaaQCuLxqbRfpLiBkcnY
+	 oa7FmmO4av1D5u2nz4Ad/khB80RQAfshQw5AJDEzhKXxeBVlM2/Btf3Gzh92/juAUd
+	 9E6/9IsZgAMwB2u5F9qoS2pX5cwUymHlx+4UOly2aaM8fRXPvBv4wXNoYgHdVEKAxO
+	 Eq2lSms7X7YYdLsRgnlkHAMFL2YL5a3+VoqTRrkfPftTiC+4b1TRNjCcQhumwiZro8
+	 OmpwgJ5BdE2yQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5738B8812C; Thu, 28 Mar 2024 10:56:48 +0100 (CET)
+ id 7E6B688123; Thu, 28 Mar 2024 10:58:07 +0100 (CET)
 Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
  [IPv6:2001:67c:2050:101:465::204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 926EA87E75
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:56:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3B1987E75
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:58:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
@@ -39,23 +39,23 @@ Received: from smtp1.mailbox.org (smtp1.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4V4zTS4yQ7z9sZN;
- Thu, 28 Mar 2024 10:56:44 +0100 (CET)
-Message-ID: <cd6fd531-e855-4230-853c-4ac90de605bc@denx.de>
-Date: Thu, 28 Mar 2024 10:56:44 +0100
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4V4zVz4wPjz9sNw;
+ Thu, 28 Mar 2024 10:58:03 +0100 (CET)
+Message-ID: <72cfc08c-e1fb-407a-bf8e-91d90a0302c5@denx.de>
+Date: Thu, 28 Mar 2024 10:58:03 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH u-boot-mvebu v3 07/18] arm: mvebu: turris_omnia: Disable
- Atmel SHA node if not present
+Subject: Re: [PATCH u-boot-mvebu v3 08/18] arm: mvebu: spl: Do not build
+ mvebu-reset in SPL
 Content-Language: en-US
 To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
 Cc: u-boot@lists.denx.de
 References: <20240327162355.24584-1-kabel@kernel.org>
- <20240327162355.24584-8-kabel@kernel.org>
+ <20240327162355.24584-9-kabel@kernel.org>
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240327162355.24584-8-kabel@kernel.org>
+In-Reply-To: <20240327162355.24584-9-kabel@kernel.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4V4zTS4yQ7z9sZN
+X-Rspamd-Queue-Id: 4V4zVz4wPjz9sNw
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,9 +73,13 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 3/27/24 17:23, Marek Behún wrote:
-> If the FEAT_CRYPTO feature bit is present in MCU features, the board
-> crypto is implemented by MCU and the Atmel SHA chip is not present.
-> Disable Atmel SHA device-tree node in that case.
+> Commit 35e29e89a386 ("arm: mvebu: Implement simple mvebu-reset driver
+> for enabling/disabling PCIe ports") made it so that the mvebu reset
+> driver for enabling/disabling PCIe ports is build if CONFIG_DM_RESET is
+> enabled. This is because PCI_MVEBU depends on DM_RESET.
+> 
+> But the driver should not be built for SPL. Indeed the PCI_MVEBU driver
+> is not supported in SPL now, and so the mvebu-reset driver is not needed.
 > 
 > Signed-off-by: Marek Behún <kabel@kernel.org>
 
@@ -85,57 +89,29 @@ Thanks,
 Stefan
 
 > ---
->   board/CZ.NIC/turris_omnia/turris_omnia.c | 23 +++++++++++++++++++++++
->   1 file changed, 23 insertions(+)
+>   arch/arm/mach-mvebu/Makefile | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 > 
-> diff --git a/board/CZ.NIC/turris_omnia/turris_omnia.c b/board/CZ.NIC/turris_omnia/turris_omnia.c
-> index b2f0088e5e..3b7a71bdad 100644
-> --- a/board/CZ.NIC/turris_omnia/turris_omnia.c
-> +++ b/board/CZ.NIC/turris_omnia/turris_omnia.c
-> @@ -1007,6 +1007,25 @@ static int fixup_mcu_gpio_in_eth_wan_node(void *blob)
->   	return 0;
->   }
+> diff --git a/arch/arm/mach-mvebu/Makefile b/arch/arm/mach-mvebu/Makefile
+> index 0584ed2be5..ef790d97fe 100644
+> --- a/arch/arm/mach-mvebu/Makefile
+> +++ b/arch/arm/mach-mvebu/Makefile
+> @@ -22,13 +22,14 @@ else # CONFIG_ARCH_KIRKWOOD
+>   obj-y	= cpu.o
+>   obj-y	+= dram.o
+>   obj-y	+= lowlevel.o
+> -obj-$(CONFIG_DM_RESET) += system-controller.o
+>   ifndef CONFIG_SPL_BUILD
+>   obj-$(CONFIG_ARMADA_375) += ../../../drivers/ddr/marvell/axp/xor.o
+>   obj-$(CONFIG_ARMADA_38X) += ../../../drivers/ddr/marvell/a38x/xor.o
+>   obj-$(CONFIG_ARMADA_XP) += ../../../drivers/ddr/marvell/axp/xor.o
+>   obj-$(CONFIG_ARMADA_MSYS) += ../../../drivers/ddr/marvell/axp/xor.o
 >   
-> +static void fixup_atsha_node(void *blob)
-> +{
-> +	int node;
+> +obj-$(CONFIG_DM_RESET) += system-controller.o
 > +
-> +	if (!omnia_mcu_has_feature(FEAT_CRYPTO))
-> +		return;
-> +
-> +	node = fdt_node_offset_by_compatible(blob, -1, "atmel,atsha204a");
-> +	if (node < 0) {
-> +		printf("Cannot find ATSHA204A node!\n");
-> +		return;
-> +	}
-> +
-> +	if (fdt_status_disabled(blob, node) < 0)
-> +		printf("Cannot disable ATSHA204A node!\n");
-> +	else
-> +		debug("Disabled ATSHA204A node\n");
-> +}
-> +
->   #endif
->   
->   #if IS_ENABLED(CONFIG_OF_BOARD_FIXUP)
-> @@ -1020,6 +1039,8 @@ int board_fix_fdt(void *blob)
->   	fixup_msata_port_nodes(blob);
->   	fixup_wwan_port_nodes(blob);
->   
-> +	fixup_atsha_node(blob);
-> +
->   	return 0;
->   }
->   #endif
-> @@ -1211,6 +1232,8 @@ int ft_board_setup(void *blob, struct bd_info *bd)
->   	fixup_msata_port_nodes(blob);
->   	fixup_wwan_port_nodes(blob);
->   
-> +	fixup_atsha_node(blob);
-> +
->   	return 0;
->   }
->   #endif
+>   ifdef CONFIG_ARMADA_38X
+>   obj-$(CONFIG_MVEBU_EFUSE) += efuse.o
+>   endif
 
 Viele Grüße,
 Stefan Roese
