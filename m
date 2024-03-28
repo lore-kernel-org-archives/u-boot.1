@@ -4,51 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FDB6C54E67
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 07:13:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E39E9C54E67
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 07:37:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D56C3880D5;
-	Thu, 28 Mar 2024 08:13:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 4CDD787D70;
+	Thu, 28 Mar 2024 08:37:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CDE31880D6; Thu, 28 Mar 2024 08:13:06 +0100 (CET)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71691880C0
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:13:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 42S7Cmkn056569;
- Thu, 28 Mar 2024 15:12:48 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0;
- Thu, 28 Mar 2024 15:12:45 +0800
-Date: Thu, 28 Mar 2024 15:12:43 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: Conor Dooley <conor@kernel.org>
-CC: <u-boot@lists.denx.de>, Conor Dooley <conor.dooley@microchip.com>, "Rick
- Chen" <rick@andestech.com>, Tom Rini <trini@konsulko.com>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH v1 2/2] riscv: support extension probing using riscv,
- isa-extensions
-Message-ID: <ZgUYa-YT7PQY2QBa@swlinux02>
-References: <20240318151604.865025-2-conor@kernel.org>
- <20240318151604.865025-4-conor@kernel.org>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B5x5wtAi";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D64868808A; Thu, 28 Mar 2024 08:37:04 +0100 (CET)
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
+ [IPv6:2a00:1450:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DAE4083346
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:37:02 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x231.google.com with SMTP id
+ 38308e7fff4ca-2d29aad15a5so7056771fa.3
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 00:37:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1711611422; x=1712216222; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=bSx/xGGusUfNhrHTP2NwCGypD2D2dm5vNsW2fOvONFw=;
+ b=B5x5wtAiSACLFUgpxq8Fa9M+JQFe5pBqen8taJq+wplkgDVh2eafX1lLZF9CAQ44Op
+ te+DO1E5R2XH6YpqijGmXM2Ibc/zd0SpCcg8Taip1ncstuKqB8XBSZMPJx2XoQ1AsOqY
+ P6fCkFhrneFmbcB5zRRIf7gcSMDIxBwMwMDo5ivt7Nf0DtQUOdzG5nAz3wM6V2RIeQ/B
+ y2CwsM1L88pna3+DsFuYdN61CaiShIhILZu3VJs/UpFel9pA0fmBQLZOcutaS7feywyq
+ wf1GpEQvcchrqAiY76BkRuhzFxYWESomIJ61pIBcGKpdvTarFb/9UKJxnP6jv27YW2PS
+ lz0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711611422; x=1712216222;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=bSx/xGGusUfNhrHTP2NwCGypD2D2dm5vNsW2fOvONFw=;
+ b=kmPXL4rZKNDxraQRtRkgirdE5TqzCUSEK5kjAru+SxQxt7chMWDp8DLTh0Mpb40w6i
+ om8xiAuIgF07oAqOpmcmOzqy1uwdhkAnL9K7E+i7RVnPzJwzY5C7AOdoiCprnQGOC0IO
+ yEzf2DP0JFUCuPBiCPdiMJMXkyofikfnNxGHSKLOXQ1Sjhpl7BQa2Ccc7RvcIBwI4/g3
+ 8ITPElrxasewIYZ5K/R1+tR+AFmKvkTc9lz3dEQQ9dqdIKe4L2xdvWLmSP/rI/icfW9B
+ 65IZYvd2qFs52iCpzEsXYaA623jbc14RdT2dNJ47GItLOZ0opXD2JfpEcywVKQ0Pw/TC
+ v1og==
+X-Gm-Message-State: AOJu0YzI/BFCjbGsZI+PhY8XcoQFfaPQGI+3wd8LcW0k0ZesUnfSydu5
+ taZOxJ6qq63aPXWIGTS/c+Ef9LEiXxzXkLPRKx99Fmr8NrXQ2hfh3w18lWOTKM5K/GV7bBDWSck
+ x384N1+mQHRFTpbT7bDn3pVhIyt0IH+MGQE0orQ==
+X-Google-Smtp-Source: AGHT+IGZ4+Xex2eLRAVuvp5PrXVeskt+1IM5RcLx4zxtepmXAqa1myVuSj8r/Q2eZSSN/FYo4c/X4IFV11tUzMp/ZJY=
+X-Received: by 2002:a2e:7316:0:b0:2d6:c29c:a4e9 with SMTP id
+ o22-20020a2e7316000000b002d6c29ca4e9mr1544428ljc.22.1711611422109; Thu, 28
+ Mar 2024 00:37:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20240318151604.865025-4-conor@kernel.org>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 42S7Cmkn056569
+References: <20240327223704.1883824-1-tharvey@gateworks.com>
+In-Reply-To: <20240327223704.1883824-1-tharvey@gateworks.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 28 Mar 2024 09:36:25 +0200
+Message-ID: <CAC_iWjL+oK9FQGGc-ZOGK8Ai0nZTeVWEz0HWa8Wsa2=_gpkuhQ@mail.gmail.com>
+Subject: Re: [PATCH] tpm-v2: allow algo name to be conigured for pcr_read and
+ pcr_extend
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, Eddie James <eajames@linux.ibm.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,38 +86,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 18, 2024 at 03:16:03PM +0000, Conor Dooley wrote:
-> From: Conor Dooley <conor.dooley@microchip.com>
-> 
-> A new property has been added, with an extensive rationale at [1], that
-> can be used in place of "riscv,isa" to indicate what extensions are
-> supported by a given platform that is a list of strings rather than a
-> single string. There are some differences between the new property,
-> "riscv,isa-extensions" and the incumbent "riscv,isa" - chief among them
-> for the sake of parsing being the list of strings, as opposed to a
-> string. Another advantage is strictly defined meanings for each string
-> in a dt-binding, rather than deriving meaning from RVI standards. This
-> will likely to some divergence over time, but U-Boot's current use of
-> extension detection is very limited - there are just four callsites of
-> supports_extension() in mainline U-Boot.
-> 
-> These checks are limited to two checks for FPU support and two checks
-> for "s" and "u". "s" and "u" are not supported by the new property, but
-> they were also not permitted in "riscv,isa". These checks are only
-> meaningful (or run) in M-Mode, in which case supports_extension() does
-> not parse the devicetree anyway.
-> 
-> Add support for the new property in U-Boot, prioritising it, before
-> falling back to the, now deprecated, "riscv,isa" property if it is not
-> present.
-> 
-> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
-> ---
-> I moved the kernel devicetrees to use the new properties, I'd do the
-> same here, but I'd rather just move things to use dt-rebasing instead,
-> where possible.
-> ---
->  arch/riscv/cpu/cpu.c | 56 +++++++++++++++++++++++++++-----------------
->  1 file changed, 35 insertions(+), 21 deletions(-)
+Hi Tim,
 
-Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+[...]
+
+>
+> +/**
+> + * tpm2_algo_len() - Return an algo value and length given a algorithm name
+> + *
+> + * @name: algorithm name
+> + * @rwlen: pointer to integer to populate with algorithm length if non-null
+> + * Return: algorithm value
+> + */
+> +int tpm2_algo_len(const char *name, int *rwlen);
+> +
+> +/**
+> + * tpm2_algo_len() - Return an algoithm name string
+> + *
+> + * @algo: algorithm value
+> + * Return: algorithm string
+> + */
+> +const char *tpm2_algo_name(int algo);
+> +
+>  #endif /* __TPM_V2_H */
+> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+> index 68eaaa639f89..6a090ce5810c 100644
+> --- a/lib/tpm-v2.c
+> +++ b/lib/tpm-v2.c
+> @@ -1555,3 +1555,49 @@ u32 tpm2_enable_nvcommits(struct udevice *dev, uint vendor_cmd,
+>
+>         return 0;
+>  }
+> +
+> +int tpm2_algo_len(const char *name, int *rwlen)
+> +{
+> +       int algo = -EINVAL;
+> +       int len = 0;
+> +
+> +       if (!strcasecmp("sha1", name)) {
+> +               algo = TPM2_ALG_SHA1;
+> +               len = TPM2_SHA1_DIGEST_SIZE;
+> +       } else if (!strcasecmp("sha256", name)) {
+> +               algo = TPM2_ALG_SHA256;
+> +               len = TPM2_SHA256_DIGEST_SIZE;
+> +       } else if (!strcasecmp("sha384", name)) {
+> +               algo = TPM2_ALG_SHA384;
+> +               len = TPM2_SHA384_DIGEST_SIZE;
+> +       } else if (!strcasecmp("sha512", name)) {
+> +               algo = TPM2_ALG_SHA512;
+> +               len = TPM2_SHA512_DIGEST_SIZE;
+> +       } else if (!strcasecmp("sm3_256", name)) {
+> +               algo = TPM2_ALG_SM3_256;
+> +               len = TPM2_SM3_256_DIGEST_SIZE;
+> +       }
+> +
+> +       if (*rwlen)
+> +               *rwlen = len;
+> +
+> +       return algo;
+> +}
+> +
+
+We already have tpm2_algorithm_to_len(). Instead of defining a new
+function, can we convert strings to 'enum tpm2_algorithms'? We can
+then reuse the existing function.
+
+> +const char *tpm2_algo_name(int algo)
+> +{
+> +       switch (algo) {
+> +       case TPM2_ALG_SHA1:
+> +               return "sha1";
+> +       case TPM2_ALG_SHA256:
+> +               return "sha256";
+> +       case TPM2_ALG_SHA384:
+> +               return "sha384";
+> +       case TPM2_ALG_SHA512:
+> +               return "sha512";
+> +       case TPM2_ALG_SM3_256:
+> +               return "sm3_256";
+> +       }
+> +
+> +       return "";
+> +}
+> --
+> 2.25.1
+>
+
+Thanks
+/Ilias
