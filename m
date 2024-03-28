@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC40DC54E64
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 12:18:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E852C54E64
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 12:18:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2233A8813C;
-	Thu, 28 Mar 2024 13:18:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 87E4F87EDD;
+	Thu, 28 Mar 2024 13:18:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EksJ6dSc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ccaesXYx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3E07C8813C; Thu, 28 Mar 2024 13:18:38 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 8DAC488146; Thu, 28 Mar 2024 13:18:56 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34E1A8808D
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 13:18:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6B7E587EAF
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 13:18:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-781753f52afso45877485a.2
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 05:18:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-29df844539bso260224a91.1
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 05:18:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711628315; x=1712233115; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=GE00+6cx0WC5b8dl49XnHx8ANHbQOTmo0niuJkNscbw=;
- b=EksJ6dScqRAH2k0PyBYHwG0tP2GYa5km3CnAieEhiYGD25uXOMmXz+Ysnri/9xnBeh
- a3oZlO3Z+n6hh2hA1Bz94L5HT5bBZvCYyTeab44B4Wu4InVUvMyQBknXHHLyy3E054kd
- 3uRP0vrCMJv7k0AEVwOn+UiFvEv3VK/djTo2E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711628315; x=1712233115;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1711628333; x=1712233133; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GE00+6cx0WC5b8dl49XnHx8ANHbQOTmo0niuJkNscbw=;
- b=HGyxDbuW1U+EOIkpQxfFPGlyBGEyhUG2WEMk/bi0ecKQQXhDwhvtalGvy/A69/XTdH
- aKEmrpWYpacOTt85yWpioAgAUAVtjcvXpusbtiGRoNqIg5aSdxV6RvgmXJdlQoRK69kx
- nKHedRHDYzRYh4jrpWhaGzRGnafn7GKKsEbagy3pRNmMCZq3PLJADn70kpbyWsTg2vIg
- kbUQ01dfC+VB636hBZhU7kntK4/etOGScTYZr4JzAIIzkpD2HVfjgQ48MshAj1dhqEQY
- XTtHQNzBtWPptKWxWHmHPL8hsst+76gCYfzUMHOJm8F/7G77nIO0SUgdwWsYdN3AywZB
- gFhg==
-X-Gm-Message-State: AOJu0YwhXCKkbs+rin1KZ/urhTbjbo8Y+ssSAwKJuTWgUweTW/SPNZje
- oPxBfu5nk7Mp9/eONjxsr5xhxhfBtO7aXYlDJ1vWm/4cMlQADza+TBP1I100sH4=
-X-Google-Smtp-Source: AGHT+IFMda8xk7psuaxREhlnCtPpJV/E0RMozkpBPbTGJJKjV0hVb6a/vLTa8IB+osX55HmzhTUSbA==
-X-Received: by 2002:a05:620a:215d:b0:78b:beec:dcea with SMTP id
- m29-20020a05620a215d00b0078bbeecdceamr987929qkm.12.1711628315051; 
- Thu, 28 Mar 2024 05:18:35 -0700 (PDT)
-Received: from bill-the-cat (065-184-193-066.res.spectrum.com. [65.184.193.66])
- by smtp.gmail.com with ESMTPSA id
- wl25-20020a05620a57d900b00787930320b6sm478458qkn.70.2024.03.28.05.18.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 28 Mar 2024 05:18:34 -0700 (PDT)
-Date: Thu, 28 Mar 2024 08:18:32 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Lukasz Majewski <lukma@denx.de>
-Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marex@denx.de>, Stefano Babic <sbabic@denx.de>,
- Fabio Estevam <festevam@gmail.com>
-Subject: Re: Thoughts about U-boot binary size increase
-Message-ID: <20240328121832.GL3442575@bill-the-cat>
-References: <20240328102049.10108d5b@wsk>
+ bh=GX5famJQ+azUGPNugNhPeUfYlVFpsDWpWXhuP+iHzWY=;
+ b=ccaesXYx+GfEw4jXAZzUhLhAQ50AZ9bVhVXChNndPK9pvMEfVq8XhKGlH5LLV4SXLo
+ I1jL0j0vuatt8Kv+PJTrGuyyEA6jIj5NHVjl89agp8kLIV3pI/DprvEQLOBm8HmKLgIw
+ wxFXF6IZ+JNb0bEnRC+VhQ5TPk4j+W7aKqrZDFBkw3B/k9QvtICBzdVOrzS0ioYisM+h
+ rbFB2Tfct8gfw1aAL270V181phAf2jUF0PPVBVSvd6py2K+EMpJl3Z4Hlps5yMlS2f1k
+ gd/cyAMVbr13Ijf49Sjn4f+HiyvKD60jiGS4MgvvQg0+d+KchSw5YNKnGrRrG5y9J0kt
+ d1vw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711628333; x=1712233133;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GX5famJQ+azUGPNugNhPeUfYlVFpsDWpWXhuP+iHzWY=;
+ b=PuuZOJlXOoW2/AmH1qNemtPr4KLA/p3+2rC5YlQux2ACPoV1kMVHWZzfrjs33ZWikd
+ vvF3pkchnHejtTaZ4GpfsJh6s60vefdIMGKhYlwwAWnIVGzkZ4LpItDRggAQTUatRxDk
+ zXo/YLu3JvhEW5xmCUzgqULFye8RU/1hSwv/YcBE30uh1H9FQIqb5e1/NiNdjykhturY
+ A+eEB90cn/9q70Y4wtfRUaxkT3+1a92R+y5+vA60lI2ui5TMlCTk8BfEKNavForcYh0b
+ ZuNHqCOkWYUdzsUYPe0gVuNyhRTZh3sh+MGEe2VLZfer4jxQfmSkZSpYlebAL6yf18xz
+ Utiw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVIIpQXEjdPvMS+F1VfjM8BYR4fqN+HoYxpBR5Ri6LSKjLn4f8NSu04cM3LNz9l2Gx/wafR4aYxj6OA7YTHvXJH6pj3jg==
+X-Gm-Message-State: AOJu0YwUA7ge+LQ5ENbJZrqcrGP+ws7QBll6m8CKI4a8+2xohiQPYVt5
+ ZpnfLXJCYoJIzQGLCIoeNHWHViRrKkc5B1GVNx4FAuz3KyM3vK1t7tAL3E5YVNEBkIx7zq5aoqF
+ QwiDZSn9dKfStcCX+nzlA7n2CNz0=
+X-Google-Smtp-Source: AGHT+IH1aMV4re4HRz0LeMnx/0iGN3XmRKEkPfCzqN9pGZMy4/UL4ylDGlYsb+WbBJFY77b7T2ie+Gjxja69J+8JLlg=
+X-Received: by 2002:a17:90b:b0f:b0:2a2:e98:83c with SMTP id
+ bf15-20020a17090b0b0f00b002a20e98083cmr32215pjb.3.1711628332780; Thu, 28 Mar
+ 2024 05:18:52 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="dOrArqPVp+ZPd8Kc"
-Content-Disposition: inline
+References: <20240328102049.10108d5b@wsk>
 In-Reply-To: <20240328102049.10108d5b@wsk>
-X-Clacks-Overhead: GNU Terry Pratchett
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 28 Mar 2024 09:18:40 -0300
+Message-ID: <CAOMZO5CKc_CGgzu3Xhba-FKN1svJt9V2if6yv3_sP7cjA-rPHg@mail.gmail.com>
+Subject: Re: Thoughts about U-boot binary size increase
+To: Lukasz Majewski <lukma@denx.de>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ Stefano Babic <sbabic@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,70 +91,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Lukasz,
 
---dOrArqPVp+ZPd8Kc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Thu, Mar 28, 2024 at 10:20:49AM +0100, Lukasz Majewski wrote:
+On Thu, Mar 28, 2024 at 6:20=E2=80=AFAM Lukasz Majewski <lukma@denx.de> wro=
+te:
+>
 > Dear Community,
->=20
+>
 > I'd like to share with you some thoughts about growth of u-boot's
 > binary size for SPL and u-boot proper.
->=20
+>
 > Board: XEA
 > SoC  : imx287 (still in active production)
-> Problem: SPL size constrained to ~55 KiB (This cannot be exceeded).=20
-> 	 Board design constraints u-boot proper size to less than ~448
-> 	 KiB
->=20
->=20
+> Problem: SPL size constrained to ~55 KiB (This cannot be exceeded).
+>          Board design constraints u-boot proper size to less than ~448
+>          KiB
+>
+>
 > When XEA was added (2019.07):
-> 	- u-boot.sb (SPL): 37 KiB
-> 	- u-boot.img 	 : 401 KiB
->=20
+>         - u-boot.sb (SPL): 37 KiB
+>         - u-boot.img     : 401 KiB
+>
 > Now (2024.04):
-> 	- u-boot.sb (SPL): 40 KiB
-> 	- u-boot.img 	 : 427 KiB
->=20
+>         - u-boot.sb (SPL): 40 KiB
+>         - u-boot.img     : 427 KiB
+>
 > (With a _lot_ of effort put to reduce the size)
->=20
+>
 > Hence, the question - would it be possible to take more concern about
 > the binary size growth?
->=20
+>
 > Maybe CI could catch patches, which enable by default some features and
 > the size is unintentionally increased?
->=20
+>
 > I'm open for any feedback and thoughts on "stopping" the binary size
 > increase.
 
-I think that's pretty amazingly small growth for nearly 5 years of bug
-fixes and feature enhancements that it's likely minor to make granular.
-If LTO is not enabled on this platform you should be able to use
-buildman to give you a "bloat" list from v2019.07 to v2024.04 and see if
-anything sticks out as being something that can be addressed. But that
-little growth seems pretty good to me at first glance.
+In addition to adding CONFIG_BOARD_SIZE_LIMIT and CONFIG_SPL_SIZE_LIMIT che=
+cks,
+could you try the change below?
 
---=20
-Tom
+diff --git a/arch/arm/mach-imx/mxs/Kconfig b/arch/arm/mach-imx/mxs/Kconfig
+index d2e4205c5ce5..ee8c23d0e04f 100644
+--- a/arch/arm/mach-imx/mxs/Kconfig
++++ b/arch/arm/mach-imx/mxs/Kconfig
+@@ -32,6 +32,7 @@ if ARCH_MX28
 
---dOrArqPVp+ZPd8Kc
-Content-Type: application/pgp-signature; name="signature.asc"
+ config MX28
+        bool
++       select LTO
+        default y
 
------BEGIN PGP SIGNATURE-----
+I did a quick imx28_xea_defconfig build test here:
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYFYBEACgkQFHw5/5Y0
-tyw8kQv+KIdb6anSuZ/JWY/ep0TQJ/pkywNh+INc8GSfxeCRJbSTMGNn3DiVemmk
-dAh9QHoRhR1BWPAxJvd2p2gPVuqJR0M7FI8+xoVV0gGu/nHYWLmykqdMQS5b9c2U
-pW2ENlCsw5c2b432IXjmilBveO2NJ2Q0yghkIFTY9Ju+yFCxBQ/28jn7sEPf916r
-rGUNKd0RFJbpi91PqEvvNnEnmXiiOYggmAO7QHznz2jM2WkgEfDEkx7t/zkazJAK
-Ec4irWJA+iOwEJi03BqVL73iR0vrjp39y1yY7ZLqPZ1wWQsFQpC+LMtlD1Ohx4ks
-6cDjlsrPZQ0RtYfAIW4FKB+CpQNMXRcKmUors/v61Ii66wjFcbkOKtjUjOPHB1Sh
-OSe83KdVuakNMpIMv119QWpwwcLhr1TTUBE+wTRJSLFgkohx9KupbbzTmdNJl53g
-Bx3Nx5Tks6LU/jmTxWyzKr/6Tc2iz3M5LrqGX5uCSGm/iMsnILk3g4s9XSeUY/Xj
-BfecCYEZ
-=OSl1
------END PGP SIGNATURE-----
+U-Boot mainline
+---------------
 
---dOrArqPVp+ZPd8Kc--
+$ ls -al u-boot.img
+-rw-rw-r-- 1 fabio fabio 444128 mar 28 09:11 u-boot.img
+
+$ ls -al spl/u-boot-spl.bin
+-rwxrwxr-x 1 fabio fabio 39800 mar 28 09:12 spl/u-boot-spl.bin
+
+
+U-Boot mainline + LTO
+---------------------
+
+$ ls -al u-boot.img
+-rw-rw-r-- 1 fabio fabio 424144 mar 28 09:14 u-boot.img
+
+$ ls -al spl/u-boot-spl.bin
+-rw-rw-r-- 1 fabio fabio 37664 mar 28 09:14 spl/u-boot-spl.bin
