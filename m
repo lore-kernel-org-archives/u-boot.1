@@ -4,114 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6667C54E67
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 11:44:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15316C54E67
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 11:44:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18BB588180;
+	by phobos.denx.de (Postfix) with ESMTP id 7F65D88190;
 	Thu, 28 Mar 2024 12:43:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="bP/j5Mq+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Got5Af7j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8A418812B; Thu, 28 Mar 2024 10:59:17 +0100 (CET)
-Received: from mailout2.w1.samsung.com (mailout2.w1.samsung.com
- [210.118.77.12])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 227F388124; Thu, 28 Mar 2024 11:06:54 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57B4687E75
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 10:59:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F1ADC88103
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 11:06:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=l.stelmach@samsung.com
-Received: from eucas1p1.samsung.com (unknown [182.198.249.206])
- by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id
- 20240328095913euoutp025102fd1ace1d2418f2782487d345aa96~A5Udtdr5U0198101981euoutp02i
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 09:59:13 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com
- 20240328095913euoutp025102fd1ace1d2418f2782487d345aa96~A5Udtdr5U0198101981euoutp02i
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1711619953;
- bh=3NPAbxRHVPX0nCjD9emS1JQuXck9psCvKb59tV9tbU8=;
- h=From:To:Cc:Subject:Date:References:From;
- b=bP/j5Mq+teTZZCVoX58JXUGSR3u5EoNFQSDPpoHh5VYyz2lqgMNrj9WhGwGQatRew
- YnqcjVKYD+nkMHOlLwXyLnaNqu6KTSXG8ewmtl9BjkVuJXFxXVFqzuvmxNjTqGgPCp
- p+wC2695QHmPaPDRcScEfPi5QRn+i+MY950ChX6s=
-Received: from eusmges3new.samsung.com (unknown [203.254.199.245]) by
- eucas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20240328095913eucas1p20222d7919396feb2c5a27cecf8c572c5~A5UdZx2ab1475314753eucas1p2D;
- Thu, 28 Mar 2024 09:59:13 +0000 (GMT)
-Received: from eucas1p1.samsung.com ( [182.198.249.206]) by
- eusmges3new.samsung.com (EUCPMTA) with SMTP id 20.27.09552.07F35066; Thu, 28
- Mar 2024 09:59:12 +0000 (GMT)
-Received: from eusmtrp2.samsung.com (unknown [182.198.249.139]) by
- eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20240328095912eucas1p1f064f0460cf71edcfd82ca1782906a44~A5Uc3lT_s3122331223eucas1p15;
- Thu, 28 Mar 2024 09:59:12 +0000 (GMT)
-Received: from eusmgms1.samsung.com (unknown [182.198.249.179]) by
- eusmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240328095912eusmtrp2b615c827327e4241884c64d032b2ba05~A5Uc2Lv9x1104711047eusmtrp2S;
- Thu, 28 Mar 2024 09:59:12 +0000 (GMT)
-X-AuditID: cbfec7f5-83dff70000002550-91-66053f70371d
-Received: from eusmtip2.samsung.com ( [203.254.199.222]) by
- eusmgms1.samsung.com (EUCPMTA) with SMTP id 18.D8.09146.07F35066; Thu, 28
- Mar 2024 09:59:12 +0000 (GMT)
-Received: from localhost (unknown [106.120.51.111]) by eusmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20240328095912eusmtip26b58b090d4e7b21901c1ac5c5d93dc75~A5UcsuJhP2982929829eusmtip2s;
- Thu, 28 Mar 2024 09:59:12 +0000 (GMT)
-From: =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>
-To: u-boot@lists.denx.de, Leo Liang <ycliang@andestech.com>
-Cc: Marek Szyprowski <m.szyprowski@samsung.com>, Seung-Woo Kim
- <sw0312.kim@samsung.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- =?UTF-8?q?=C5=81ukasz=20Stelmach?= <l.stelmach@samsung.com>
-Subject: [PATCH v2] riscv: Move virtio scan to board_late_init()
-Date: Thu, 28 Mar 2024 10:58:24 +0100
-Message-Id: <20240328095824.1179072-1-l.stelmach@samsung.com>
-X-Mailer: git-send-email 2.39.2
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ivitro@gmail.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-41490d05bafso7748875e9.1
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 03:06:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711620411; x=1712225211; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=N6cWFynWi6h9ekuzcFCecD89N85bbfETptaHot1KCvQ=;
+ b=Got5Af7j8jjtfycJMhMghHMeRUHD8CPyXuVMa7wcZQE6sjf5UDTsjCppGprg3dcrtn
+ GqSqk4LgFYsahqKZKabXlsHucOtkBny1TIbloVOcb5y8D3ksQGkW9O161kDM8hmNx/dr
+ kOnOJV1erQ8jx+is2De83zOZiaZq/1JKE8Pl3VyaEkLNrkzX7T2D8Biooy1B/Q3DAubN
+ przKmvspYKgd+ifCaJcuwa2nsm1W78ZQB8agbxTlmXXrHGhTWnw/wGBwPDkMA1yZ2dO+
+ QzGbglcSyv5RPeJJZFn2uSSeEefcGcrs9SWUGqaVvKhk3//8yPNBA1i18AP1HBvskh1y
+ CjOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711620411; x=1712225211;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=N6cWFynWi6h9ekuzcFCecD89N85bbfETptaHot1KCvQ=;
+ b=RwHTg7OAlgJseCmDBEFT58BvylijUmSxhw23qnLAsK9hS2MZdoRy9vAf7BEtYTklDY
+ 0lWxyJlpavi4/GWc7T9fEfVqeNKddKvvQTwm99UQ/gxd4mN8CXYoAXL8okx0QpmY0r2Z
+ MHAU9VBQ4p68zkv4po/G9idVGx2dDMfekQkIU/F8K2wtOUkTYH26uq6QdH+Zq9q/UC4m
+ cTzjPQ2q4nRrGJtg1ZUpW6HzPHOhp9IyxthZ/ikGV3Hn/lOwXhid3bOkoeL8GeWgI8DQ
+ 9Oxk+YD3hbT1bS02sHVyBL3p4zWL58sX4Jiyl5f9aE8Gf9H+WhnyUHMhiM53uxFGfTH5
+ JoAg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXTKUwAhv62wheS5Ffg/T3V8MA3NSXGdKJxauNrTt6Ni7hIi/TF3keujLSak+OqTsm3Y5K1oCtcVLCMVa1izeuleyjj+w==
+X-Gm-Message-State: AOJu0YxdZaqmSHj71sgLrW10Gk+DpIiZhw732v3RXp4SH5nEhNWSeX/B
+ dQvQn6TI+VaTQiB6KnTqRd1cjpI5pAHSokxrigQitaEV5gGY7AJvvQF9s9bC
+X-Google-Smtp-Source: AGHT+IHYcGiAInwp4BHCq0Rl+GHMmizcud6xj6NL7vrls6S3WELICUyGPZYfmfGahB6vYyhRzDZoTw==
+X-Received: by 2002:a05:600c:281:b0:414:5cec:a9dd with SMTP id
+ 1-20020a05600c028100b004145ceca9ddmr2529915wmk.38.1711620411148; 
+ Thu, 28 Mar 2024 03:06:51 -0700 (PDT)
+Received: from vitor-nb.. ([2001:8a0:e622:f700:d17a:a6e4:6bf1:e6ce])
+ by smtp.gmail.com with ESMTPSA id
+ m28-20020a056000181c00b00341d186a2dbsm1329898wrh.14.2024.03.28.03.06.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 28 Mar 2024 03:06:50 -0700 (PDT)
+From: Vitor Soares <ivitro@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Vitor Soares <vitor.soares@toradex.com>, u-boot@lists.denx.de,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Alexander Graf <agraf@csgraf.de>
+Subject: [PATCH v1] arm: mach-k3: common: EFI loader map memory below ram top
+Date: Thu, 28 Mar 2024 10:05:48 +0000
+Message-Id: <20240328100548.321634-1-ivitro@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Organization: Samsung R&D Institute Poland
 Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpileLIzCtJLcpLzFFi42LZduznOd0Ce9Y0gxPLTC1u/Gpjtbh5aAWj
- xdojd9ktZkx+yWbxdm8nu8XjQ6+ZHNg89pyexexx9s4ORo++LasYA5ijuGxSUnMyy1KL9O0S
- uDKuH77IXLCIt2Ji9xKWBsZ7XF2MnBwSAiYS0860MXcxcnEICaxglLi5tB3K+cIocWHCFTYI
- 5zOjxK+tPSwwLa1TZ7GB2EICyxklHp/JhbBfMErc7VQDsdkEHCX6l55gBbFFBKwlnm09ywoy
- iFngAKPEwcsfwQYJCzhIbJ64F6yIRUBV4vmmuWA2r4CtxPMzxxm7GDmAlslLLH4gAREWlDg5
- 8wlYK7+AlsSaputgNjNQSfPW2WBXSwis5JBoWr+ODaLXRWL5OTeIm4UlXh3fwg5hy0j83zmf
- CaK+nVGi6cpCVghnAqPE544mJogqa4k7536BDWIW0JRYv0sfIuwocWnmDmaI+XwSN94KQtzA
- JzFp23SoMK9ER5sQRLWKxLr+PdBgk5LofbWCEcL2kFi86TvrBEbFWUg+m4Xkm1kIexcwMq9i
- FE8tLc5NTy02zkst1ytOzC0uzUvXS87P3cQITCan/x3/uoNxxauPeocYmTgYDzFKcDArifDu
- PMqSJsSbklhZlVqUH19UmpNafIhRmoNFSZxXNUU+VUggPbEkNTs1tSC1CCbLxMEp1cBkVPPr
- VvytjO1nN8W4iSze9+oWP/v2t2Vbv95Pe54rm3LetyveQ3Xdx5vBkUHRFy5eW1U3O+THPT3h
- /V+1985IkM0TFtzkwKiqd/vNvuPmJ+ruGvgUJRR6RkxhWV1+THSd/kHvs1Genq9fOwa7SJss
- 7Ys+nLtyyqUtNickj2TusLI/ONu34N2c2/7LUiJ8azS5J6S3eYuqGHr+tGJ4JfNqaUGr/+d9
- gi9Ln965ctSMJflQRGr1kr/rbztbHI0wtVR/dtmoe2/pJD+frkuM5bahNTULP87b9fKZap+A
- 6Z0r6SlXxEUuN7bY9b++4t0RfmGB6ZZ+3vtO51u54t7uVF+S9Dw5dz37FSch2ZhDe4WVWIoz
- Eg21mIuKEwFbgtgxlQMAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrNLMWRmVeSWpSXmKPExsVy+t/xe7oF9qxpBnc2iVnc+NXGanHz0ApG
- i7VH7rJbzJj8ks3i7d5OdovHh14zObB57Dk9i9nj7J0djB59W1YxBjBH6dkU5ZeWpCpk5BeX
- 2CpFG1oY6RlaWugZmVjqGRqbx1oZmSrp29mkpOZklqUW6dsl6GVcP3yRuWARb8XE7iUsDYz3
- uLoYOTkkBEwkWqfOYuti5OIQEljKKLF58VqmLkYOoISUxMq56RA1whJ/rnVB1TxjlPhy+gkj
- SIJNwFGif+kJVhBbRMBWYsnOM4wgRcwChxglWs59ZQJJCAs4SGyeuBesiEVAVeL5prlgNi9Q
- w/MzxxkhlslLLH4gAREWlDg58wkLSJhZQF1i/TwhkDC/gJbEmqbrLCA2M1B189bZzBMYBWYh
- 6ZiF0DELSdUCRuZVjCKppcW56bnFhnrFibnFpXnpesn5uZsYgbGw7djPzTsY5736qHeIkYmD
- EehwDmYlEd6dR1nShHhTEiurUovy44tKc1KLDzGaAj0wkVlKNDkfGI15JfGGZgamhiZmlgam
- lmbGSuK8ngUdiUIC6YklqdmpqQWpRTB9TBycUg1MBvbVNVPkMy8EfbPYVvuicsF1tT13uhYa
- PiivEl6RwmvVPNvhxTN3ScnZ5aJ7b0wJYRfU/BRmNf+sfJK7zevkn0HTa8v0Lnc++SPuXM/t
- /PyM1HXle5FnfyucSEtelc1jej82wPS3NbfvHYv/6z7O+tf44sf/i79LU2R/7zSJk7h7w3zR
- 0xCZ73NTcrcX9Rn9PeejcJGBQ8wu4KYDS/7etOa5hm8KjAx+Sv02n91Q/898c1Ea18GLMh+2
- OEn+eF4qLOhwLqZt2VXTz6VOj+eczmre4OKy7PAdEYaK4Hbf3R+zTzvkGcmdn2ai67988v7t
- dfdbd4vkKq1oOGQ2Z5qdiP1iqSOmrJZN9dH18/YrsRRnJBpqMRcVJwIAe95RRQ4DAAA=
-X-CMS-MailID: 20240328095912eucas1p1f064f0460cf71edcfd82ca1782906a44
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20240328095912eucas1p1f064f0460cf71edcfd82ca1782906a44
-X-EPHeader: CA
-CMS-TYPE: 201P
-X-CMS-RootMailID: 20240328095912eucas1p1f064f0460cf71edcfd82ca1782906a44
-References: <CGME20240328095912eucas1p1f064f0460cf71edcfd82ca1782906a44@eucas1p1.samsung.com>
 X-Mailman-Approved-At: Thu, 28 Mar 2024 12:43:31 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -129,62 +92,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When virtio_init() gets called from board_init() PCI isn't ready. Thus,
-virtio-over-PCI (e.g. network interfaces) devices can't be detected and
-used without additional `virtio scan` scan in the shell or a script.
+From: Vitor Soares <vitor.soares@toradex.com>
 
-Signed-off-by: Łukasz Stelmach <l.stelmach@samsung.com>
+During the boot, the EFI loader maps the memory from ram_top to ram_end
+as EFI_BOOT_SERVICES_DATA. When LMB does boot_fdt_add_mem_rsv_regions()
+to OPTEE, TFA, R5, and M4F DMA/memory "no-map" for the kernel it produces
+the following error message:
+
+ERROR: reserving fdt memory region failed (addr=9cb00000 size=100000 flags=4)
+ERROR: reserving fdt memory region failed (addr=9cc00000 size=e00000 flags=4)
+ERROR: reserving fdt memory region failed (addr=9da00000 size=100000 flags=4)
+ERROR: reserving fdt memory region failed (addr=9db00000 size=c00000 flags=4)
+ERROR: reserving fdt memory region failed (addr=9e780000 size=80000 flags=4)
+ERROR: reserving fdt memory region failed (addr=9e800000 size=1800000 flags=4)
+
+To avoid this, don't flag with EFI_BOOT_SERVICES_DATA the memory from
+ram_top to ram_end by the EFI loader.
+
+Signed-off-by: Vitor Soares <vitor.soares@toradex.com>
 ---
-Changes since v1:
- - remove virtio_init() call from board_init()
- - select BOARD_LATE_INIT for TARGET_QEMU_VIRT
 
- arch/riscv/Kconfig                      |  1 +
- board/emulation/qemu-riscv/qemu-riscv.c | 12 ++++++------
- 2 files changed, 7 insertions(+), 6 deletions(-)
+Similar fix for the same issue can be found at
+https://lore.kernel.org/all/20240308101230.2595220-1-patrice.chotard@foss.st.com/
 
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index ac52c5e6daf..c5c2e8a9c9d 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -22,6 +22,7 @@ config TARGET_OPENPITON_RISCV64
- 
- config TARGET_QEMU_VIRT
- 	bool "Support QEMU Virt Board"
-+	select BOARD_LATE_INIT
- 
- config TARGET_SIFIVE_UNLEASHED
- 	bool "Support SiFive Unleashed Board"
-diff --git a/board/emulation/qemu-riscv/qemu-riscv.c b/board/emulation/qemu-riscv/qemu-riscv.c
-index 181abbbf97d..173245b40e3 100644
---- a/board/emulation/qemu-riscv/qemu-riscv.c
-+++ b/board/emulation/qemu-riscv/qemu-riscv.c
-@@ -31,12 +31,6 @@ int is_flash_available(void)
- 
- int board_init(void)
- {
--	/*
--	 * Make sure virtio bus is enumerated so that peripherals
--	 * on the virtio bus can be discovered by their drivers
--	 */
--	virtio_init();
--
- 	return 0;
+ arch/arm/mach-k3/common.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/arch/arm/mach-k3/common.c b/arch/arm/mach-k3/common.c
+index b54f2ddc47..80e89b2a16 100644
+--- a/arch/arm/mach-k3/common.c
++++ b/arch/arm/mach-k3/common.c
+@@ -24,6 +24,7 @@
+ #include <asm/io.h>
+ #include <fs_loader.h>
+ #include <fs.h>
++#include <efi_loader.h>
+ #include <env.h>
+ #include <elf.h>
+ #include <soc.h>
+@@ -607,3 +608,14 @@ void setup_qos(void)
+ 		writel(qos_data[i].val, (uintptr_t)qos_data[i].reg);
  }
- 
-@@ -46,6 +40,12 @@ int board_late_init(void)
- 	if (CONFIG_IS_ENABLED(USB_KEYBOARD))
- 		usb_init();
- 
-+	/*
-+	 * Make sure virtio bus is enumerated so that peripherals
-+	 * on the virtio bus can be discovered by their drivers
-+	 */
-+	virtio_init();
+ #endif
 +
- 	return 0;
- }
- 
++void efi_add_known_memory(void)
++{
++	if (IS_ENABLED(CONFIG_EFI_LOADER))
++		/*
++		 * Memory over ram_top can be used by various firmware
++		 * Declare to EFI only memory area below ram_top
++		 */
++		efi_add_memory_map(gd->ram_base, gd->ram_top - gd->ram_base,
++				   EFI_CONVENTIONAL_MEMORY);
++}
 -- 
-2.39.2
+2.34.1
 
