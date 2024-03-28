@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC05FC54E64
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 15:35:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1909C54E64
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 15:35:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BAF0288172;
-	Thu, 28 Mar 2024 16:34:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 36C5D881BC;
+	Thu, 28 Mar 2024 16:34:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711640079;
-	bh=eJOr65NrCaA1tj3dKnYB22gVwpRA0ancxXdUR7BpvcQ=;
+	s=phobos-20191101; t=1711640080;
+	bh=k2bjMeyKh/xTIG66PASgg5gk02BV0nVMbWe8Zk4y7Gc=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=xOFD/CnbGnf2uKIGFkFsyDMXC6gooG5JRJjLgkJei12vJvDAYDtUINbhFFxIPnCxh
-	 THnjpqfLH+NHQWjxqYpNYJ4FYtv0ojGg72lNpoLt5PFLrYn3k8JKTIjxUT50y6amgQ
-	 AlNVwHe3WhFC4YDFtm4jrUyiXBJYRk4+Wry5rFU+MsVxu0ffS8jRT+SiUS4A0rHJcX
-	 G0s53D2hFCvWZfBu+BTBWGsbX7t9fMDS/sCH/B6Hhvw97CmPrHfFWh5j98j8oA1P4o
-	 gONDqwrSAwzII+fae6FattR3ICZTnFpynNf4BCorIJX/RLcg6I4OTUVMLGrBK+Sf/I
-	 U45A02eZDH51Q==
+	b=cH7zlfsqviJNVz7CRtV11g1T8AE8LpZZmv8hp3pZlMhhvACJtHpGRvq7avCSz4KJ0
+	 g2Br53N9LhDILhFlThvutkc2hV0hgI2EiDOi2kMj3aK1hH/a1RI7Ak6yvUNzE15oBk
+	 kRkOwWrpgsM6Wh/l4FgZg1hljP2CeY3MozBi4PQJawlIlGJcfKVHXGLKWCgzbZrZGN
+	 lUTPj2aXO75a1D7QZKd8UZo1bCaqujn7HAgoByHZU7xHprY56UaURN7ZnPN2pQRcWt
+	 fFHqeSQcJ5tki6QjuoqERHovS04NjK9wlSyp9tQVzB7YpwMylZ/2Qp0UZ+uSrB90K1
+	 G3uaNIKdJqpQw==
 Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
  [85.222.111.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id C540488196;
- Thu, 28 Mar 2024 16:34:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 2B407881A4;
+ Thu, 28 Mar 2024 16:34:38 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1711640078;
- bh=eJOr65NrCaA1tj3dKnYB22gVwpRA0ancxXdUR7BpvcQ=;
+ bh=k2bjMeyKh/xTIG66PASgg5gk02BV0nVMbWe8Zk4y7Gc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Y3gFfYxg4s89q0dfrVb1QaHIuiQgUtUcWBumJGjSaJvrLeQ2KGdAzT6Oo65omN8wZ
- vVGGrr6SbnYV+QIgpMVaeHO38JewVuRUqKBXT+rrmtGWN3aVidprSMLe7v5AajJTQ1
- EraQrbn1psuZ9L7BOU6tbBzD5+6DYdr/HPZ3NuP7b7235csjkRdcj4O8EncjE46xro
- /YMh6hcasPd75Erz04cmRf7gCDoEz+zInvmkJ/y2WZ6E1BWpVGnr9FV4UNmFzUDGgv
- ZhnjcpAKi66Rurrd049iMblVFPFvFzG+zBQq8tUSZztG5O9wi8OKG+CjivGF09ywaZ
- WV4Qqq5efUBJA==
+ b=QmqLqEFPkknHG+M5V8qbA3cMM7L4/CYtB1ZkeiPwXP+SYapetApnEfiaoHrOoArWE
+ VfU4ys9h1qX6N1xwPnSIzgybsmOHOEfMgiM6cr86AQbp4h+LMQJkVDrReRvbW2Ve68
+ zjpADjbiNlxHLW/jWP8xPzw9bvtZ7b+z4vBhyIQkr3RLYOHuvMJcXfGcqwP7+3uBiP
+ Oje0A/A6B1hsQNpZ5GSk8hDx1g0j9S/xMca57afcAktBx2SJVPs4BA74o2V1xPA0dh
+ 7F7zThOXTpdqaonT6uvI3Cyw+t2RLyKGRMzfB1X2HDE1DbFqYJZ/T48GAnJvdGEx6j
+ JaUTys2cipxqA==
 From: Lukasz Majewski <lukma@denx.de>
 To: Stefano Babic <sbabic@denx.de>, u-boot@lists.denx.de,
  Fabio Estevam <festevam@gmail.com>
-Cc: Lukasz Majewski <lukma@denx.de>,
-	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/6] arm: spl: Add definition for PHY reset GPIO for XEA HW
- rev. 2
-Date: Thu, 28 Mar 2024 16:34:12 +0100
-Message-Id: <20240328153415.3706637-4-lukma@denx.de>
+Cc: Lukasz Majewski <lukma@denx.de>, Anatolij Gustschin <agust@denx.de>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 4/6] config: xea: Enable late board initialization to set
+ revision variable
+Date: Thu, 28 Mar 2024 16:34:13 +0100
+Message-Id: <20240328153415.3706637-5-lukma@denx.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240328153415.3706637-1-lukma@denx.de>
 References: <20240328153415.3706637-1-lukma@denx.de>
@@ -70,33 +70,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The imx287 based XEA board's revision 2 uses GPIO_3_21 for PHY reset
-
-It is safe to keep the GPIO_2_13 as well, as in the SPL SPI1 is not
-used for transmission. This simplifies the code, as the proper
-configuration is performed either in falcon boot's read DTB or in
-u-boot proper (with correct FIT configuration chosen).
+The 'board_som_rev' environment variable will be used to point correct
+configuration from the Linux FIT file.
 
 Signed-off-by: Lukasz Majewski <lukma@denx.de>
 ---
 
- board/liebherr/xea/spl_xea.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ board/liebherr/xea/xea.c       | 12 ++++++++++++
+ configs/imx28_xea_defconfig    |  1 +
+ configs/imx28_xea_sb_defconfig |  1 +
+ 3 files changed, 14 insertions(+)
 
-diff --git a/board/liebherr/xea/spl_xea.c b/board/liebherr/xea/spl_xea.c
-index 71194db235..6cf8f8390e 100644
---- a/board/liebherr/xea/spl_xea.c
-+++ b/board/liebherr/xea/spl_xea.c
-@@ -225,7 +225,8 @@ const iomux_cfg_t iomux_setup[] = {
- 	MX28_PAD_ENET0_TXD0__ENET0_TXD0 | MUX_CONFIG_ENET,
- 	MX28_PAD_ENET0_TXD1__ENET0_TXD1 | MUX_CONFIG_ENET,
- 	MX28_PAD_ENET0_TXD3__ENET1_TXD1 | MUX_CONFIG_ENET,
--	MX28_PAD_SSP1_CMD__GPIO_2_13, /* PHY reset */
-+	MX28_PAD_SSP1_CMD__GPIO_2_13, /* PHY reset HW Rev. 1*/
-+	MX28_PAD_SAIF0_LRCLK__GPIO_3_21, /* PHY reset HW Rev. 2*/
+diff --git a/board/liebherr/xea/xea.c b/board/liebherr/xea/xea.c
+index d9cf27c81b..90a1e03077 100644
+--- a/board/liebherr/xea/xea.c
++++ b/board/liebherr/xea/xea.c
+@@ -282,6 +282,18 @@ int board_init(void)
+ 	return 0;
+ }
  
- 	/* TIVA boot control */
- 	MX28_PAD_GPMI_RDY3__GPIO_0_23 | MUX_CONFIG_BOOT, /* TIVA0 */
++#if defined(CONFIG_BOARD_LATE_INIT)
++int board_late_init(void)
++{
++	int ret = env_set_ulong("board_som_rev", get_som_rev());
++
++	if (ret)
++		printf("Cannot set XEA's SoM revision env variable!\n");
++
++	return 0;
++}
++#endif
++
+ int dram_init(void)
+ {
+ 	return mxs_dram_init();
+diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
+index 64a0561a34..6098c1f3be 100644
+--- a/configs/imx28_xea_defconfig
++++ b/configs/imx28_xea_defconfig
+@@ -39,6 +39,7 @@ CONFIG_BOOTCOMMAND="run ${bootpri} ; run ${bootsec}"
+ CONFIG_USE_PREBOOT=y
+ CONFIG_PREBOOT="run prebootcmd"
+ CONFIG_BOARD_EARLY_INIT_F=y
++CONFIG_BOARD_LATE_INIT=y
+ CONFIG_SPL_NO_BSS_LIMIT=y
+ CONFIG_SPL_BOARD_INIT=y
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+diff --git a/configs/imx28_xea_sb_defconfig b/configs/imx28_xea_sb_defconfig
+index 9872d35c1b..8d48d8c507 100644
+--- a/configs/imx28_xea_sb_defconfig
++++ b/configs/imx28_xea_sb_defconfig
+@@ -23,6 +23,7 @@ CONFIG_BOOTARGS="console=ttyAMA0,115200n8"
+ CONFIG_USE_PREBOOT=y
+ CONFIG_PREBOOT="run prebootcmd"
+ CONFIG_BOARD_EARLY_INIT_F=y
++CONFIG_BOARD_LATE_INIT=y
+ # CONFIG_SPL_FRAMEWORK is not set
+ CONFIG_SPL_NO_BSS_LIMIT=y
+ CONFIG_SPL_BOARD_INIT=y
 -- 
 2.39.2
 
