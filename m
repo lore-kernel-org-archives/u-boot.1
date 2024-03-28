@@ -4,83 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB092C54E64
-	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 07:08:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0313CD11DD
+	for <u-boot@archiver.kernel.org>; Thu, 28 Mar 2024 07:09:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 28A30880A3;
-	Thu, 28 Mar 2024 08:08:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 398FA880E8;
+	Thu, 28 Mar 2024 08:09:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iY3wbVbI";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5385287BF4; Thu, 28 Mar 2024 08:08:53 +0100 (CET)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 65479880C0; Thu, 28 Mar 2024 08:09:14 +0100 (CET)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09943880A3
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:08:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C6F8C880C5
+ for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 08:09:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christian.gmeiner@gmail.com
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2a0782f0da5so1271895a91.0
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 00:08:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711609729; x=1712214529; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ozddIoMdCX8zRCPaAaFwKuAOg/eG7ygUE3X+1kUBE/M=;
- b=iY3wbVbIIVRKz7AerEvIWizXmVUrlWiJnXMgVrb6R4DiIUkywo+UOiB6ZU4f9swvIo
- LQnSvOmuXXcTraEVSmAE/wRHj9GShNWFbAsfx1QmFHYNR94HJQ1BggwbuyPl46Mk9yMP
- EXw4EXCzKk+Saf/BTZ490gcPrtcB3FGuK1h3uVhlaaI1S4VrI3XyWNOHJmviUbn0bK8s
- 083Qp2U7p84z2dY649e32K+74EzJ0/no9W+Lsn1rfld/GQioqBQhI5JQIzS6fdjx8AwK
- 4ujEV7rI6NHRC10sKpvkKM28LTD3Yy3KwNVj4KkjYLhGpmBIDUCBc3jwm8ZX4Z1YhMqT
- OzHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711609729; x=1712214529;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ozddIoMdCX8zRCPaAaFwKuAOg/eG7ygUE3X+1kUBE/M=;
- b=aAJ4VyaBPE6E/kP+TM1oTNrf9umMUSdJnUWt1bXZVGaEsuLMCp9yxIQK0la2qw156q
- 98mvo+o/0RoezizNgzb1WuKLqq0aJAq1FUkzdBDjNQWwjFgGM2nlgT+kXlUHqDJJ/gva
- xBm1Jx4AAe9LR/A4YL3ZZ4+GXGQrqpjimZY+GupXj3Nqz77i/Zmgl3PsHL8UuOIvBxxG
- LbQcAWVzOf6E7SXOSb6A4AgkABTSy367TpLBifvG/m1AD6gEks71fxk8nzZ7s7z4Gf/w
- uUn28ycoxdNEe77sfabfJ4Tq4bLf2Mf6VEbUud5TlRCE/O0Lel2co2icZJG/Cb6TD2/c
- e2jg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU9vecmQXLKYyLWfNDerAhQMBE6SU9KBVULsWntcQ4J7jpM8aCc2JPMZzcmiIJUMdt4I/tFWSwnMy/euKK7AJFfjLG2Pg==
-X-Gm-Message-State: AOJu0Yxm6bgSv6JjGhjRDJ1izuPH/TB2DR4eCWZVZEcE9ME5na5uY50j
- JT+bZNWZIfS3V7SBKSkhPnwQLlPyul+owl7ifI+Bmkhgbn1Aq8ZCI7A3sxyMeTAYL7BHxMWsuCO
- epWzQKW+tFgI58k0+KYSqAIibfdg=
-X-Google-Smtp-Source: AGHT+IGSu6p0KHFRbSvRhpwDGeYDtDIkHj2hKB88UawMgmYCW4yfWnrHKQJ2M2D0At3YF68LrWVOgexkNGp4/ai0CS8=
-X-Received: by 2002:a17:90a:be07:b0:2a0:8eee:5603 with SMTP id
- a7-20020a17090abe0700b002a08eee5603mr2236665pjs.6.1711609729370; Thu, 28 Mar
- 2024 00:08:49 -0700 (PDT)
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 42S78jEs054775;
+ Thu, 28 Mar 2024 15:08:45 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.498.0;
+ Thu, 28 Mar 2024 15:08:42 +0800
+Date: Thu, 28 Mar 2024 15:08:39 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: Conor Dooley <conor@kernel.org>
+CC: <u-boot@lists.denx.de>, Conor Dooley <conor.dooley@microchip.com>, "Rick
+ Chen" <rick@andestech.com>, Tom Rini <trini@konsulko.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH v1 1/2] riscv: don't read riscv, isa in the riscv cpu's
+ get_desc()
+Message-ID: <ZgUXd1yXH3s1OBIA@swlinux02>
+References: <20240318151604.865025-2-conor@kernel.org>
+ <20240318151604.865025-3-conor@kernel.org>
 MIME-Version: 1.0
-References: <20220728070540.28554-1-josua@solid-run.com>
- <CA+EmdG5+QYxVo27C-u5W6FkuDgcoey4i-md9L4b9cs1gtsv+1g@mail.gmail.com>
- <30c35e80-2015-4fac-b9dc-6902cc09c58e@solid-run.com>
- <CAOMZO5AQArxRN25J0+M1hjNSwBQUoLsGhD9cChDkfUrv3ys=Rw@mail.gmail.com>
- <CAOMZO5AjeShry9xQRpEq==zswOc=aL5RoKyL=Y439t1wtkKRuA@mail.gmail.com>
- <CAOMZO5AH0BS_Jhx0jR9gj_cAuPPzVuVM2FeWF2xh_RiXpSkOQQ@mail.gmail.com>
-In-Reply-To: <CAOMZO5AH0BS_Jhx0jR9gj_cAuPPzVuVM2FeWF2xh_RiXpSkOQQ@mail.gmail.com>
-From: Christian Gmeiner <christian.gmeiner@gmail.com>
-Date: Thu, 28 Mar 2024 08:08:37 +0100
-Message-ID: <CAH9NwWcnG+z5_U4vpw8udcBTomwH+6dRvwRBOEKFJB+41QP_Xg@mail.gmail.com>
-Subject: Re: [PATCH] mx6cuboxi: fix ethernet after synchronise device-tree
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Josua Mayer <josua@solid-run.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- Yazan Shhady <yazan.shhady@solid-run.com>, Tom Rini <trini@konsulko.com>, 
- Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Baruch Siach <baruch@tkos.co.il>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240318151604.865025-3-conor@kernel.org>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 42S78jEs054775
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,27 +65,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio
+On Mon, Mar 18, 2024 at 03:16:02PM +0000, Conor Dooley wrote:
+> From: Conor Dooley <conor.dooley@microchip.com>
+> 
+> cpu_get_desc() for the RISC-V CPU currently reads "riscv,isa" to get
+> the description, but it is no longer a required property and cannot be
+> assummed to always be present, as the new "riscv,isa-extensions" and
+> "riscv,isa-base" properties may be present instead.
+> 
+> On RISC-V, cpu_get_desc() has two main uses - firstly providing an
+> informational name for the CPU for smbios or at boot with
+> DISPLAY_CPUINFO etc and secondly it forms the basis of ISA extension
+> detection in supports_extension() as it returns (a portion of) an ISA
+> string.
+> 
+> cpu_get_desc() returns a string, which aligned with "riscv,isa" but
+> the new property is a list of strings. Rather than add support for
+> the list of strings property, which would require creating an isa
+> string from "riscv,isa-extensions", modify the RISC-V CPU's
+> implementaion of cpu_get_desc() return the first compatible as the
+> cpu description instead. This may be fine for the informational cases,
+> but it would break extension dtection, given supports_extension()
+> expects cpu_get_desc() to return an ISA string.
+> 
+> Call dev_read_string() directly in supports_extension() to get the
+> contents of "riscv,isa" so that extension detection remains functional.
+> As a knock-on affect of this change, extension detection is no longer
+> broken for long ISA strings. Previously if the ISA string exceeded the
+> 32 element array that supports_extension() passed to cpu_get_desc(),
+> it would return ENOSPC and no extensions would be detected.
+> This bug probably had no impact as U-Boot does not currently do anything
+> meaningful with the results of supports_extension() and most SoCs
+> supported by U-Boot don't have anywhere near that complex of an ISA
+> string. The QEMU virt machine's CPUs do however, so extension detection
+> doesn't work there.
+> 
+> Signed-off-by: Conor Dooley <conor.dooley@microchip.com>
+> ---
+> I'm not really sure if I am happy with this patch - people could
+> definitely have got use out of the cpu info printout of the ISA string
+> before this patch - they'd have seen something like
+> CPU:	rv64imafdc
+> at boot, but now they will see
+> CPU:	sifive,u74
+> If it really is desired, cpu_get_desc() could be made to assemble
+> an isa string out of "riscv,isa-extensions", but I think it's always
+> gonna be a bit flawed, since that string can run to almost arbitrary
+> length now - one I saw for a CPU last week was 320 characters long
+> and these things are only going to grow.
+> ---
+>  arch/riscv/cpu/cpu.c    | 12 +++++++-----
+>  drivers/cpu/riscv_cpu.c |  8 ++++----
+>  2 files changed, 11 insertions(+), 9 deletions(-)
 
->
-> > I took Josua's patch and modified it a bit.
-> >
-> > Does the attached patch fix Ethernet?
->
-> I forgot to delete the old ethernet-phy nodes.
->
-> Please try this one instead.
->
-> If it works in U-Boot, please also test Ethernet in Linux as we are
-> touching ft_board_setup().
+LGTM!
 
-I am able to load kernel and dtb via tftp and ssh into a nfs debian rootfs.
-
-Thanks a lot - all my problems are solved :)
-
--- 
-greets
---
-Christian Gmeiner, MSc
-
-https://christian-gmeiner.info/privacypolicy
+reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
