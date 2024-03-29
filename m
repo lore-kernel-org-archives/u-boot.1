@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2867EC6FD1F
-	for <u-boot@archiver.kernel.org>; Fri, 29 Mar 2024 11:18:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3612C6FD1F
+	for <u-boot@archiver.kernel.org>; Fri, 29 Mar 2024 11:18:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89C2688250;
-	Fri, 29 Mar 2024 12:18:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 091EA88224;
+	Fri, 29 Mar 2024 12:18:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711711104;
-	bh=xpKIc+xtdlqUUk7w8asBibEWHSjtttOouNLaGh/041M=;
+	s=phobos-20191101; t=1711711107;
+	bh=4etpwCtHCK9Zs6jSwtB12OyWve4UsIRTqx0mmsWrHkM=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Imi1nGPoR1T+xXsUvpVxUzGKhxaeg96lII+qtb2R7u2SgM0Byo+gh87BpCd9WSLyi
-	 TfGg2C0ckvlJcG0ZXxnToGak04ceNeGd2kGo/RSxZOHskIlXCzAFUl1pgQBRqBmPN2
-	 vbuXB9fGpu1/8ha2UpJqmLlL5l/Y0hLRvn4pgBVMZbmOsDHbM0nmFjAEmTHYdthojy
-	 +6wMcD+2pyaksbS55JDXNK6PWLUf7Hf2RL7knG4eV1Q+xFKFcWzl/aUAZe4oAF6h3J
-	 cJcuUlFu99w5b0oDkJEcNwwjBYR2K6RqPqupJYr1mi4xevxj4veUE/fbb9xK/lr3Ay
-	 3ZhKb6wVoJtlQ==
+	b=i5lYl1Fx0pNInK3DRsw+wkaRUFyZZNPFD+T8rtg+9s6gLRKnmpMnWwvvCBuu5BnBV
+	 HQic5vy8QeKhihp51DyVxJGSCwL/MAPAF+JeTwLdaQNyuGt3cFvwjEn80Cl86BZZt9
+	 IYM+pPs75RPxcC6gyHyJ9005EfMhn5koR+Ovai6OQku03mOfKT+KzfZz3+y172HJuw
+	 91b9cfasvMg0t+VUxjlE2F2+jbwvZ95XHwiLfnQkFWU+KBr/dpMb4bQdsz8PcnmO3z
+	 +cs0CHO5y5qYlAjWtG+aZqrh8/RZIrA145ODvgbUe8WhV++FAxAyr6+kNRINNYkM7D
+	 HGAtI8mtmgt3w==
 Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
  [85.222.111.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 310CE88224;
+ by phobos.denx.de (Postfix) with ESMTPSA id 95A2E88234;
  Fri, 29 Mar 2024 12:18:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1711711103;
- bh=xpKIc+xtdlqUUk7w8asBibEWHSjtttOouNLaGh/041M=;
+ bh=4etpwCtHCK9Zs6jSwtB12OyWve4UsIRTqx0mmsWrHkM=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ZWN0iZHXY9d05RvE8zZGACXVaSKFEvCcyRFNMo3n4vfxYCPTRmwliIPDj0ei7PESs
- VqD7ND7LJVeXxWJ3ringTcyfueND9EMyrUBgh/1zi7OwTMO2IftbBgf8l9/y6RlARl
- 87eHzTS5BjoRo5/yvZ45Eop48zMemlAS6g3ZS5YqLYRioXSqh1ItWO2qbRBPyH+hBZ
- tUNpM0G/tecNl4rkITrqYzxInBwPSpglevPMkRVlqlUNUHCsjoNtgyuCuMdfxAJEj1
- EuN80LdJNEYX7dYeysRjbjOp4RtUObT0TwfHB04woGrFsT5ABo+T742HaXCxUCp99e
- F5GgCA5Gw2lag==
+ b=t2E7eMvI7oSEVuWuof2UYslJHajibndp/4ZvCpen9TYsM7m6a/LA0felCP4BKPWJ+
+ x6Xg+X+ZSkQKjMRoQHVDYDYz1SB/tej+wXF7r2D8F1dnD81T0fDsOpe1moy13U+fZj
+ Qs4+uCTAS3CQdWHgBatw8RmLoGFWjv1juXXPi1KhUY+HhDUuUrz/cj0LQNigp06mwJ
+ /7pasNpoilyJygkaBdVnuY6Jz/OdBzgTwY2CZBmi+I8Ybi4WV/Lww6+mxEu7GEHati
+ LcX1mGcZSpSnzIC6soaflHFebGGzHZ0vM3B4Aqvf0e0KGStrQmbjwxh7Gu/9WAn/Nr
+ D688HLNY2fnbA==
 From: Lukasz Majewski <lukma@denx.de>
 To: Stefano Babic <sbabic@denx.de>, u-boot@lists.denx.de,
  Fabio Estevam <festevam@gmail.com>
 Cc: Lukasz Majewski <lukma@denx.de>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/4] arm: spl: xea: Remove I2S pins configuration from early
- initialization
-Date: Fri, 29 Mar 2024 12:18:06 +0100
-Message-Id: <20240329111809.3959962-2-lukma@denx.de>
+Subject: [PATCH 2/4] arm: spl: Add definition for PHY reset GPIO for XEA HW
+ rev. 2
+Date: Fri, 29 Mar 2024 12:18:07 +0100
+Message-Id: <20240329111809.3959962-3-lukma@denx.de>
 X-Mailer: git-send-email 2.39.2
 In-Reply-To: <20240329111809.3959962-1-lukma@denx.de>
 References: <20240329111809.3959962-1-lukma@denx.de>
@@ -70,35 +70,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-XEA is not supporting and using I2S codec, so there is no need to
-configure pins for it.
+The imx287 based XEA board's revision 2 uses GPIO_3_21 for PHY reset
+
+It is safe to keep the GPIO_2_13 as well, as in the SPL SPI1 is not
+used for transmission. This simplifies the code, as the proper
+configuration is performed either in falcon boot's read DTB or in
+u-boot proper (with correct FIT configuration chosen).
 
 Signed-off-by: Lukasz Majewski <lukma@denx.de>
 ---
 
 (no changes since v1)
 
- board/liebherr/xea/spl_xea.c | 7 -------
- 1 file changed, 7 deletions(-)
+ board/liebherr/xea/spl_xea.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/board/liebherr/xea/spl_xea.c b/board/liebherr/xea/spl_xea.c
-index df354cac64..551ed6fbae 100644
+index 551ed6fbae..4068a2ad49 100644
 --- a/board/liebherr/xea/spl_xea.c
 +++ b/board/liebherr/xea/spl_xea.c
-@@ -112,13 +112,6 @@ const iomux_cfg_t iomux_setup[] = {
- 	MX28_PAD_I2C0_SCL__I2C0_SCL,
- 	MX28_PAD_I2C0_SDA__I2C0_SDA,
+@@ -225,7 +225,8 @@ const iomux_cfg_t iomux_setup[] = {
+ 	MX28_PAD_ENET0_TXD0__ENET0_TXD0 | MUX_CONFIG_ENET,
+ 	MX28_PAD_ENET0_TXD1__ENET0_TXD1 | MUX_CONFIG_ENET,
+ 	MX28_PAD_ENET0_TXD3__ENET1_TXD1 | MUX_CONFIG_ENET,
+-	MX28_PAD_SSP1_CMD__GPIO_2_13, /* PHY reset */
++	MX28_PAD_SSP1_CMD__GPIO_2_13, /* PHY reset HW Rev. 1*/
++	MX28_PAD_SAIF0_LRCLK__GPIO_3_21, /* PHY reset HW Rev. 2*/
  
--	/* I2S Codec */
--	MX28_PAD_SAIF0_BITCLK__SAIF0_BITCLK,
--	MX28_PAD_SAIF0_LRCLK__SAIF0_LRCLK,
--	MX28_PAD_SAIF0_MCLK__SAIF0_MCLK,
--	MX28_PAD_SAIF0_SDATA0__SAIF0_SDATA0,
--	MX28_PAD_SAIF1_SDATA0__SAIF1_SDATA0,
--
- 	/* PWR-Hold */
- 	MX28_PAD_SPDIF__GPIO_3_27,
- 
+ 	/* TIVA boot control */
+ 	MX28_PAD_GPMI_RDY3__GPIO_0_23 | MUX_CONFIG_BOOT, /* TIVA0 */
 -- 
 2.39.2
 
