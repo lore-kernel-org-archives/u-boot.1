@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D63BC6FD1F
-	for <u-boot@archiver.kernel.org>; Fri, 29 Mar 2024 19:06:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B04B3CD1283
+	for <u-boot@archiver.kernel.org>; Fri, 29 Mar 2024 19:06:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 914D8882B5;
-	Fri, 29 Mar 2024 20:03:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F19DA882AE;
+	Fri, 29 Mar 2024 20:03:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="yKbC5+Y1";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="vUVo33TM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7531B8827E; Fri, 29 Mar 2024 20:03:49 +0100 (CET)
+ id 3097F882AA; Fri, 29 Mar 2024 20:03:53 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73238882AF
- for <u-boot@lists.denx.de>; Fri, 29 Mar 2024 20:03:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8654B8828C
+ for <u-boot@lists.denx.de>; Fri, 29 Mar 2024 20:03:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,21 +28,20 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1711739017; bh=6PahE9qUDih9BqXhpQwjc/pEhNHodtjQQ+OwglbhzFY=;
- b=yKbC5+Y192DjaJj3qqA6SQERDv1myEPBjS7xZdWJ+W4gVpIx7+qRzfcExBaud0G4I/JJv8vUB
- C7o6lYs1qcsUKIRg8OmJdKqKZ2CkKqPtgLoKVke0+Yf+c7zi4rBq+xpswFf+KiBFdqDI1rvAX/s
- vgT1tl+7CFCkxWvV06JeO43VzKwWopyfHQVzuqrSVxmsA94mIffwUsM1iPCRpBtpMKaD9T7RgTd
- o1rLiKsafjmtRd64ekEp285ARTTt0GMgQ2AKGyWy9Yh3aC10gW1JHC7WEA3OaH7hi6MOKfFxgzt
- aW4FkTYwrIvxSI0c69aZ37QGlbgW/9JGes4AzhHrYAuw==
+ t=1711739022; bh=DGJUl37u6ly6SFS7XMOBX1ZKNyktZPnkagC4CM5WG3w=;
+ b=vUVo33TMWQIJRxuo8HQWepFxkf0zhi35er6yMeC/+o2u2Bg8t6YVs7IL0QSzNE7s97zo9bjrv
+ 56UEDf/VJfgpFbU2j30icD4jxuKB+kXOEWgYvHuGw3tPoYAE3g2ACknZ3BOdMeJzO7pHj6CELwH
+ dtFp5chqCsebqm6QeZh+JJTM2MgNmBJIZKm6Se1Jbbx0m+UEiU+ixN5uoPOlm610GG1WmHbCtqC
+ HAEeyBrkATmrCngqOqyeymBZF+UM3Jw+Jk0lsRFNHk2ej9NzfRHfla0AS2zl8wg2LV+thv9HPD1
+ w2otYBME3NZCCU2ohJ1/phCdcVQzJy6UJ0PgKVLl5XeQ==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Elon Zhang <zhangzj@rock-chips.com>, Weizhao Ouyang
- <weizhao.ouyang@arm.com>
+ Joshua Riek <jjriek@verizon.net>
 Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 15/19] rockchip: rk3588-toybrick: Add missing Kconfig options
-Date: Fri, 29 Mar 2024 19:01:56 +0000
-Message-ID: <20240329190224.3613471-16-jonas@kwiboo.se>
+Subject: [PATCH 16/19] rockchip: rk3588-turing-rk1: Use dwc3-generic driver
+Date: Fri, 29 Mar 2024 19:01:57 +0000
+Message-ID: <20240329190224.3613471-17-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240329190224.3613471-1-jonas@kwiboo.se>
 References: <20240329190224.3613471-1-jonas@kwiboo.se>
@@ -54,7 +53,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 66071088c77850cc7d0ca17e
+X-ForwardEmail-ID: 6607108cc77850cc7d0ca192
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,52 +70,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add .dtb-file entry to Makefile and enable Kconfig options required to
-configure pinctrl in SPL. Also add missing PHY_ROCKCHIP_NANENG_COMBOPHY.
+RK35xx boards are expected to use the dwc3-generic driver and not the
+xhci-dwc3 driver.
 
-Fixes: 9fdd9a546986 ("board: rockchip: add Rockchip Toybrick TB-RK3588X board")
+Remove the USB_XHCI_DWC3 option to ensure that the dwc3-generic driver
+is used. Also enable DWC_AHCI to support on-board SATA.
+
+Fixes: 153ac950a599 ("board: rockchip: Add the Turing RK1 SoM")
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/Makefile             | 1 +
- configs/toybrick-rk3588_defconfig | 5 ++++-
- 2 files changed, 5 insertions(+), 1 deletion(-)
+ configs/turing-rk1-rk3588_defconfig | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index f49b7e5d251f..3e0bad8306b5 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -207,6 +207,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3588) += \
- 	rk3588-quartzpro64.dtb \
- 	rk3588s-rock-5a.dtb \
- 	rk3588-rock-5b.dtb \
-+	rk3588-toybrick-x0.dts \
- 	rk3588-turing-rk1.dtb
- 
- dtb-$(CONFIG_ROCKCHIP_RV1108) += \
-diff --git a/configs/toybrick-rk3588_defconfig b/configs/toybrick-rk3588_defconfig
-index 38fc7906eef2..0168e014103e 100644
---- a/configs/toybrick-rk3588_defconfig
-+++ b/configs/toybrick-rk3588_defconfig
-@@ -33,8 +33,9 @@ CONFIG_CMD_REGULATOR=y
- # CONFIG_SPL_DOS_PARTITION is not set
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIVE=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
+diff --git a/configs/turing-rk1-rk3588_defconfig b/configs/turing-rk1-rk3588_defconfig
+index 77aacbc64b6c..e486f0597813 100644
+--- a/configs/turing-rk1-rk3588_defconfig
++++ b/configs/turing-rk1-rk3588_defconfig
+@@ -52,9 +52,8 @@ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigne
+ CONFIG_SPL_DM_SEQ_ALIAS=y
  CONFIG_SPL_REGMAP=y
  CONFIG_SPL_SYSCON=y
+-CONFIG_SATA=y
+-CONFIG_SCSI_AHCI=y
+ CONFIG_AHCI_PCI=y
++CONFIG_DWC_AHCI=y
  CONFIG_SPL_CLK=y
-@@ -53,6 +54,8 @@ CONFIG_PHY_REALTEK=y
- CONFIG_DWC_ETH_QOS=y
- CONFIG_DWC_ETH_QOS_ROCKCHIP=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-+CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-+CONFIG_SPL_PINCTRL=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_SPL_RAM=y
- CONFIG_BAUDRATE=1500000
+ # CONFIG_USB_FUNCTION_FASTBOOT is not set
+ CONFIG_ROCKCHIP_GPIO=y
+@@ -90,7 +89,6 @@ CONFIG_ROCKCHIP_SFC=y
+ CONFIG_SYSRESET=y
+ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
+-CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_XHCI_PCI=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_GENERIC=y
 -- 
 2.43.2
 
