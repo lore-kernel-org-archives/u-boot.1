@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14970CD1288
-	for <u-boot@archiver.kernel.org>; Fri, 29 Mar 2024 00:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB9D6CD1284
+	for <u-boot@archiver.kernel.org>; Fri, 29 Mar 2024 01:02:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74518881DC;
-	Fri, 29 Mar 2024 01:59:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 26BFF8821D;
+	Fri, 29 Mar 2024 02:02:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JQ9XZC5l";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="EasrIDlA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3B9488150; Fri, 29 Mar 2024 01:59:54 +0100 (CET)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C0C8D88203; Fri, 29 Mar 2024 02:02:21 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92B7C881DC
- for <u-boot@lists.denx.de>; Fri, 29 Mar 2024 01:59:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7089E88150
+ for <u-boot@lists.denx.de>; Fri, 29 Mar 2024 02:02:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-2d715638540so2496221fa.3
- for <u-boot@lists.denx.de>; Thu, 28 Mar 2024 17:59:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711673991; x=1712278791; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dv8rzNTLEmWcKQtpqqOn1a6h2Z+EasGvyUHqvq+Xw7k=;
- b=JQ9XZC5leUBgAEwfTRAUiH2Zdh/mIsTkU20TlMpJ1Agelca/2myZu0V5V93cFt7ctj
- YlEavW8GdsM00Jh7Ai/W/bNJbMfFQpgh5g5U1TLgOo7v2ANJQSaZGYuDPhVOBC4aAjZ2
- jHcdleLUEXiB2k0sW8FmBZLCZ43omZJpuG+NXQfuOZuF/xJHC/LaHQIdhJCMISj/afl2
- ud62XA/o5uiEpuTFDS3SWhHNdr4PiyR0HbC6JtKsgpR9MdpkqxGIAvZI0sI8Et6Z47Az
- tUhV47NTn8U4Un/7Vw1mKwY3w7G7CAQExvEkSytTvsf0ac26T0L3uj514/cK7v+7jhv/
- 14yw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711673991; x=1712278791;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dv8rzNTLEmWcKQtpqqOn1a6h2Z+EasGvyUHqvq+Xw7k=;
- b=rJy9I1tdVJW+ousSW5/dBGHX72n9GhlDa3zux8DrrHesHMYKpUqd9YZUlFXGqHvQyq
- 7RuOD7pEypRLZxiVLMsDPWOmXBYUUlSI1H/Rx3lNF8ZXq35gPFSpqsTbh/Hgqgj/RRSc
- bzlqDj4GZbQAJAkCDAC8Bq42PHjIApDScDbPmj4jLApVJtmeULOyRgU+1xygIGMPD1LH
- T3AtBz/CSIP/5Z7Q3DjXy1OBib+8RrnCH5L9nCUk7ru1ck3xNpJZzTDWO1jffQm3zAx8
- PKkYfhInjwm1ltFwbu1s0Q1qWUbQO7DORRBl7y7UQEwgLHfpR9WK08tL5NbFAea5p7R4
- ChbQ==
-X-Gm-Message-State: AOJu0YwjOLu4UEhND7530O0SN8eUDCjCQX/Ol3rNJfqoXUtI4E2p0PzW
- PQxvG1tLisZcI6+JSuXCLOdXYxjCS7AiVNE1N2FvQJ/C/DV/LxgPFGekbsijT1rjmru36XWJUHf
- sWvxawlZ0Pg9YtTeG5V/kgzeVTNs=
-X-Google-Smtp-Source: AGHT+IECOKbwTVxCOzb3LPuFnuHz9jhS08c5sx/wvmDT3W/S+1QxKVQ70yjwIoD2ldoapMXj0+PpuUt7rdZSy0587ak=
-X-Received: by 2002:a2e:7e0d:0:b0:2d6:d3fd:325f with SMTP id
- z13-20020a2e7e0d000000b002d6d3fd325fmr420953ljc.32.1711673990591; Thu, 28 Mar
- 2024 17:59:50 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1711674115; x=1712278915; i=xypron.glpk@gmx.de;
+ bh=uSIJC0MDT6XwQ0HhbxqEGgjztQ1K0rm27ygXO+3RYIg=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=EasrIDlA49rfdmzMHuVkbC0o7+1gBOWLkVjz+qLyvQ7KpjIKjbO7n6/5UJ0GJc5s
+ 0ccGSNr7eyZKy3fR5jU3EvAe8yLk+MbK7Rkf20E2YeJQ67AnliQENSDOSTtziehfK
+ QvNuvJIIb0DBWicYJJntOL2D5MW4/pWma2SMZoZ+tQW4D3wePN2XHUmT5T3lRdlOS
+ O82LJjwoop1sbuBet2ly0qe24lvGx7xR/JZcMZDxtLMZCBnFlr7bkk00O+ZUmgWvu
+ wN7xkWnp7+/ZmCGTtrfPx3/LJnTz3ZOtRPe9qHrhBEOsKYfGq8USKcKTW6kQPJIT1
+ M0cJJ/h/zUgOv2R9DA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Md6R1-1sP4CG03d5-00aGMh; Fri, 29
+ Mar 2024 02:01:55 +0100
+Message-ID: <c9320079-458a-44f5-85a6-3a7c8bd3585e@gmx.de>
+Date: Fri, 29 Mar 2024 02:02:07 +0100
 MIME-Version: 1.0
-References: <20240328021825.17935-1-mibodhi@gmail.com>
- <D057P1KGDU7W.1IWOBHLNV5GX@walle.cc>
-In-Reply-To: <D057P1KGDU7W.1IWOBHLNV5GX@walle.cc>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Thu, 28 Mar 2024 17:59:37 -0700
-Message-ID: <CAJaLiFwcG4Hu_Ufx623gP=EmNcpGenU5DV1LO-2ix4hawutY2Q@mail.gmail.com>
-Subject: Re: [PATCH v2] arm: dts: kirkwood: Enable upstream DT on Kirkwood
- boards
-To: Michael Walle <michael@walle.cc>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
- Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
- Chris Packham <chris.packham@alliedtelesis.co.nz>, 
- Dave Purdy <david.c.purdy@gmail.com>, Evgeni Dobrev <evgeni@studio-punkt.com>, 
- Luka Perkov <luka@openwrt.org>, Siddarth Gore <gores@marvell.com>, 
- Simon Guinot <simon.guinot@sequanux.org>, 
- Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>,
- Walter Schweizer <swwa@users.sourceforge.net>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] part: efi: Treat unused partition type GUID as a
+ valid case
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng@tinylab.org>,
+ Johan Jonker <jbx6244@gmail.com>, Joshua Watt <jpewhacker@gmail.com>,
+ Steve Rae <steve.rae@raedomain.com>, Petr Kulhavy <brain@jikos.cz>,
+ u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+References: <20240328222951.11431-1-semen.protsenko@linaro.org>
+ <20240328222951.11431-2-semen.protsenko@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240328222951.11431-2-semen.protsenko@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:3wdqj9xPsy9c0uvkSE6w7rI5NJgELxIOrmnS66Rty5dH2RFeHxj
+ TmOy7Xb3LBgehfw3mwBiI/JdNS4+kAgqvrwmlMKExLEf5GJ4b+KSlJ86FbQUW9e4Cp+MRET
+ xF4e2M4MNy57DgtNtFEhPx8QfBozNuQCTqvrBAb0lan73eHSudoE47ppYXLfsRA5zaVnAiV
+ 2zVPBHvrigdy8aFtibVBw==
+UI-OutboundReport: notjunk:1;M01:P0:hzODbAp7E2w=;u01Z/gUJqMNzogLxodYHoZKAoId
+ W57HgmCzSRJZrjtlt2H9kDxQgjlN4q55xHxaWwBHSdoZtqzq6pXeuWQbXMZ2IDChrkt9JKlkz
+ nU+srjC7hVUo5tZijPspvmeOUFnso+NfGWHuKoqSdMzFsw4e7NwT7dsudB8XOIhT7RDYHywNB
+ INON7votAl5oSsQ3W2nCgck1Jz9cMEqEZCbXc1u8Qsb8dnF/BnIT4fC1X5hULYDX0vOziDDOF
+ ELO8dPdpv+9UQ7TigVY7W2WByJ3iWx6qti9kKP+YtSehDOsVSChQy6poMFE3/C3TChhnw54SJ
+ UcOvda0Qwyo4qrm6KnJpIPby9JPvcnf4DgjlTb+UkrlCvZHb40Q/zLTOsI53PtLF9CA2ExKWZ
+ pt3J2O+Zjpj0yO4C3y8WMZEBZmTyoVLcSBq77v3XKLAeASrIy7GuCOBhhcqFuQiu71ZdGRhno
+ tM8/ix8BR40sJl/2Ucs+7gko/69rY/LeBl5oJGNMTGi6+3EpEimASsjr/VbEapK+TAzn7wraw
+ 4uBtLBfDdQ3l/iCx+mPB6EgFDhEfAmYGqc3GZ0eGC7c1QO2FR76Da0j7oB+u71WPbpr0S1J0l
+ mRklH3OYOtZagLulKu+pBB6g/TaxJ+zcPffHuTaUa0CqgpI60w5aW5kPfEqeN3FIqXiWi5urv
+ lwwGjXZT+9LgMLZqsuRkyCiGaMdcHw+Rt5Kbf0ceQ0rKrs/Imw/W7FT6PSBqg0RGRqA7xTDhR
+ ByKuV4ENbXVjt7VFTzCsJkuBqm3AumvkyIo993giySSPPOk4FGFD8FhmbZuNGzyjmIg/Q42yW
+ Y6HChY1UDyCCxdnYIfSjACurjMOkkTWbHUZ5bjrygrC/M=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,75 +91,127 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
-Hi Stefan,
+On 3/28/24 23:29, Sam Protsenko wrote:
+> Some platforms use the "unused" (all-zero) GUID as a partition type GUID
+> to make some partitions hidden from the OS. For example, Samsung phones
+> and other devices often have GPT partition tables like that, created by
+> their "gpt_builder" tool [1]. All partitions with FILESYS=3D0 value
+> (second column in [2] file) will be created in a way that:
+>    1. Partition type GUID will be all-zero ("unused")
+>    2. Attributes[48:49] bits will be set to 0 (whereas non-zero values
+>       mean the partition is visible to the OS: 1=3Draw, 2=3Dext4, 3=3Df2=
+fs)
 
-It seems either the Denx server or Gmail has failed to send/deliver
-Stefan's response to my Inbox. Luckily, I also monitored
-lore.kernel.org and I saw the response. So I'd like to answer that
-below.
+The UEFI specification is defining what a GPT partition table has to
+look like.
 
-On Thu, Mar 28, 2024 at 12:41=E2=80=AFAM Michael Walle <michael@walle.cc> w=
-rote:
+According the specification partition type GUID
+00000000-0000-0000-0000-000000000000 marks an "unused entry" in the
+partition table.
+
+An unused partition table entry cannot define a partition. It is one of
+the entries, that you skip over when enumerating via your patch 1/2.
+
+With this patch 128 partition table entries are printed for an image
+having a single partition.
+
+=3D> part list host 0
+
+Partition Map for HOST device 0  --   Partition Type: EFI
+
+Part    Start LBA       End LBA         Name
+         Attributes
+         Type GUID
+         Partition GUID
+   1     0x00000800      0x0001f7ff      "EFI system partition"
+         attrs:  0x0000000000000005
+         type:   c12a7328-f81f-11d2-ba4b-00a0c93ec93b
+                 (system)
+         guid:   ee474198-4601-4d5c-81f0-54acf904dd40
+   2     0x00000000      0x00000000      ""
+         attrs:  0x0000000000000000
+         type:   00000000-0000-0000-0000-000000000000
+                 (00000000-0000-0000-0000-000000000000)
+         guid:   00000000-0000-0000-0000-000000000000
+...
+
+128     0x00000000      0x00000000      ""
+         attrs:  0x0000000000000000
+         type:   00000000-0000-0000-0000-000000000000
+                 (00000000-0000-0000-0000-000000000000)
+         guid:   00000000-0000-0000-0000-000000000000
+
+This is definitively wrong.
+
 >
-> Hi,
+> Although it's true that Linux kernel verifies the partition type GUID to
+> be non-zero (in block/partitions/efi.c, is_pte_valid() function), where
+> its U-Boot counterpart code was borrowed from originally, in case of
+> U-Boot we want to handle partitions with "unused" GUIDs the same way as
+> any other valid partitions, to allow the user to interact with those
+> (e.g. list partitions using "part list", be able to flash those via
+> fastboot, etc).
+
+You cannot interact with a non-existing partition.
+
+You may create a new partition in any empty slot that Samsung's tool has
+left in the partition table and then write to it. No patch is needed for
+this.
+
+Best regards
+
+Heinrich
+
 >
-> On Thu Mar 28, 2024 at 3:18 AM CET, Tony Dinh wrote:
-> > Enable OF_UPSTREAM to use upstream DT and add marvell/ prefix to the
-> > DEFAULT_DEVICE_TREE for Kirkwood boards. And so we can directly build
-> > DTBs from dts/upstream/src/arm/marvell, and including *-u-boot.dtsi
-> > files from arch/arm/dts/ directory.
-> >
-> > Background:
-> >
-> > Hi Stefan,
-> > Hi Michael,
-> >
-> > I did a survey and we currently have 28 Kirkwood boards. Using some
-> > commands and filters, here are the finding.
-> >
-> > git grep -li arch_kirkwood configs | xargs grep DEVICE_TREE | cut -d '"=
-' -f2 | xargs -n1 sh -c 'diff -qs  arch/arm/dts/$1.dts dts/upstream/src/arm=
-/marvell/$1.dts' sh | grep differ
-> >
-> > diff: dts/upstream/src/arm/marvell/kirkwood-atl-sbx81lifkw.dts: No such=
- file or directory
-> > diff: dts/upstream/src/arm/marvell/kirkwood-atl-sbx81lifxcat.dts: No su=
-ch file or directory
+> [1] https://gitlab.com/Linaro/96boards/e850-96/tools/gpt/
+> [2] https://gitlab.com/Linaro/96boards/e850-96/tools/gpt/-/blob/master/g=
+pt_layout
 >
-> ...
+> Fixes: 07f3d789b9be ("Add support for CONFIG_EFI_PARTITION (GUID Partiti=
+on Table)")
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> ---
+>   disk/part_efi.c | 21 +++++----------------
+>   1 file changed, 5 insertions(+), 16 deletions(-)
 >
-> Are you sure you want to have all this text in the commit log?
+> diff --git a/disk/part_efi.c b/disk/part_efi.c
+> index 4ce9243ef25c..6b138abae0a6 100644
+> --- a/disk/part_efi.c
+> +++ b/disk/part_efi.c
+> @@ -1166,28 +1166,17 @@ static gpt_entry *alloc_read_gpt_entries(struct =
+blk_desc *desc,
+>    */
+>   static int is_pte_valid(gpt_entry * pte)
+>   {
+> -	efi_guid_t unused_guid;
+> +	/*
+> +	 * NOTE: Do not check unused (zero) GUIDs here, it's considered a vali=
+d
+> +	 * case in U-Boot.
+> +	 */
 >
-Please see my response to you and Stefan below.
+>   	if (!pte) {
+>   		log_debug("Invalid Argument(s)\n");
+>   		return 0;
+>   	}
+>
+> -	/* Only one validation for now:
+> -	 * The GUID Partition Type !=3D Unused Entry (ALL-ZERO)
+> -	 */
+> -	memset(unused_guid.b, 0, sizeof(unused_guid.b));
+> -
+> -	if (memcmp(pte->partition_type_guid.b, unused_guid.b,
+> -		sizeof(unused_guid.b)) =3D=3D 0) {
+> -
+> -		log_debug("Found an unused PTE GUID at 0x%08X\n",
+> -			  (unsigned int)(uintptr_t)pte);
+> -
+> -		return 0;
+> -	} else {
+> -		return 1;
+> -	}
+> +	return 1;
+>   }
+>
+>   /*
 
-> You seem to have forgotten my tag:
-> Tested-by: Michael Walle <michael@walle.cc> # on lschv2
-
-My bad!
-
-Stefan's comment (about the large commit text):
-"This is also my concern. Even though I love descriptive commit messages,
-this seems to be a bit too much IMHO. Not sure if and how to get these
-findings of yours archived otherwise."
-
-I can send a V3 patch. I will cut out the Background stuff and point it to:
-https://lore.kernel.org/u-boot/55229181-3aff-4bff-afb5-df778f5f1849@denx.de=
-/T/#t
-And also I will collect Michael's Test-by tag and your Review-by tag
-in the commit description.
-
-Does that sound OK?
-
-Stefan's comment:
-"Tony, many thanks to work on this consolidation. Very impressive
-results. I can't test anything of this though, but my plan would be
-to pull this in the upcoming merge window, if nobody complains."
-Reviewed-by: Stefan Roese <sr@denx.de>"
-
-I think between Michael and I, we've tested 3 representative Kirkwood
-boards. Time permitted, I will update u-boot for a few of my other
-Kirkwood boards, and will send patches if I see any regression.
-
-All the best,
-Tony
