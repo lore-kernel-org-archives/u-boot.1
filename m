@@ -4,50 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC330CD11DD
-	for <u-boot@archiver.kernel.org>; Fri, 29 Mar 2024 11:18:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2867EC6FD1F
+	for <u-boot@archiver.kernel.org>; Fri, 29 Mar 2024 11:18:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21D8F8824B;
+	by phobos.denx.de (Postfix) with ESMTP id 89C2688250;
 	Fri, 29 Mar 2024 12:18:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1711711104;
-	bh=Oura5P+wXKzhtyuOPc+oulblrfwIm2fis6xzAXeptlo=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=jPMQjLAbIELnkX+6xloL6B+8Z88Xu7fwgWAsYFDZ42MufI/UhYfuideZ6kNbuGwnw
-	 ZXXB012UKoNnQ82Fm3jJ65TeJlW4JSYFLDMCWjTfifHKTI0yH84KCjMTy/O0oOPoM6
-	 VL0Pyp48Dm2kUK7RniYBkeG1iWduIvLbyuzTx0XfUy8/IqssNuKCAfBNPtN0HVKN2Q
-	 7DQ4Xakmjw4ETmQ+Gr3OSvXk6vo2sReNEdUFYnSrrJojf2Lkbv+Xkhpk9uZkHYvSlb
-	 Q9WcX1F9obLmwiruSEg5Q8ov3TES5Qmh/qmcpyT+k5P2QBiaK0Ui1q7UPuUmTjq+C/
-	 JzDsURNF2TGJA==
+	bh=xpKIc+xtdlqUUk7w8asBibEWHSjtttOouNLaGh/041M=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=Imi1nGPoR1T+xXsUvpVxUzGKhxaeg96lII+qtb2R7u2SgM0Byo+gh87BpCd9WSLyi
+	 TfGg2C0ckvlJcG0ZXxnToGak04ceNeGd2kGo/RSxZOHskIlXCzAFUl1pgQBRqBmPN2
+	 vbuXB9fGpu1/8ha2UpJqmLlL5l/Y0hLRvn4pgBVMZbmOsDHbM0nmFjAEmTHYdthojy
+	 +6wMcD+2pyaksbS55JDXNK6PWLUf7Hf2RL7knG4eV1Q+xFKFcWzl/aUAZe4oAF6h3J
+	 cJcuUlFu99w5b0oDkJEcNwwjBYR2K6RqPqupJYr1mi4xevxj4veUE/fbb9xK/lr3Ay
+	 3ZhKb6wVoJtlQ==
 Received: from localhost.localdomain (85-222-111-42.dynamic.chello.pl
  [85.222.111.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: lukma@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id B106488089;
- Fri, 29 Mar 2024 12:18:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPSA id 310CE88224;
+ Fri, 29 Mar 2024 12:18:23 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1711711103;
- bh=Oura5P+wXKzhtyuOPc+oulblrfwIm2fis6xzAXeptlo=;
- h=From:To:Cc:Subject:Date:From;
- b=GnIggyF5wSOnvwAfnRodFJkldXC51vngNXIEM/1lFO+NPDaV9AS0LOr0SuCt8JXmd
- CV8ZnkfPPvJVE5fYskI2GaUPQFsByw/QXm+ZQ2qD1x8WPYZlRxGQ4k7uIYaKnZngy1
- fm0cayKmjaaWbPm1iAhvQ0hyhsHkhuMQy2axw8LgrFPJG172IPS2WJbot0dxAIgrQB
- hkmmvSdROXxF/dTkPN1On/6xY1Kj7s7qWmldsy3TXdO3/jpk3iQj0j/lWnD05ouJUM
- eU+RmkaKZlfGttoUnf80hi7wN6ubRV3cbmQYYzoEVnLPbXyjv07uI9mPgSa9JgWYMW
- nUZghblL0l+fQ==
+ bh=xpKIc+xtdlqUUk7w8asBibEWHSjtttOouNLaGh/041M=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=ZWN0iZHXY9d05RvE8zZGACXVaSKFEvCcyRFNMo3n4vfxYCPTRmwliIPDj0ei7PESs
+ VqD7ND7LJVeXxWJ3ringTcyfueND9EMyrUBgh/1zi7OwTMO2IftbBgf8l9/y6RlARl
+ 87eHzTS5BjoRo5/yvZ45Eop48zMemlAS6g3ZS5YqLYRioXSqh1ItWO2qbRBPyH+hBZ
+ tUNpM0G/tecNl4rkITrqYzxInBwPSpglevPMkRVlqlUNUHCsjoNtgyuCuMdfxAJEj1
+ EuN80LdJNEYX7dYeysRjbjOp4RtUObT0TwfHB04woGrFsT5ABo+T742HaXCxUCp99e
+ F5GgCA5Gw2lag==
 From: Lukasz Majewski <lukma@denx.de>
 To: Stefano Babic <sbabic@denx.de>, u-boot@lists.denx.de,
  Fabio Estevam <festevam@gmail.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Anatolij Gustschin <agust@denx.de>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 0/4] arm: xea: Provide enhancements for XEA board
-Date: Fri, 29 Mar 2024 12:18:05 +0100
-Message-Id: <20240329111809.3959962-1-lukma@denx.de>
+Cc: Lukasz Majewski <lukma@denx.de>,
+	Tom Rini <trini@konsulko.com>
+Subject: [PATCH 1/4] arm: spl: xea: Remove I2S pins configuration from early
+ initialization
+Date: Fri, 29 Mar 2024 12:18:06 +0100
+Message-Id: <20240329111809.3959962-2-lukma@denx.de>
 X-Mailer: git-send-email 2.39.2
+In-Reply-To: <20240329111809.3959962-1-lukma@denx.de>
+References: <20240329111809.3959962-1-lukma@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -66,32 +70,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+XEA is not supporting and using I2S codec, so there is no need to
+configure pins for it.
 
-This patch series is a preparatory patch for supporting
-different versions of XEA board HW (until problem with
-Linux kernel support for multiple revisions is resorted).
+Signed-off-by: Lukasz Majewski <lukma@denx.de>
+---
 
-Moreover, limits for u-boot.sb and u-boot.img has been set
-to avoid binary sizes exceeding in the future.
+(no changes since v1)
 
-Changes in v2:
-Remove "inline" from get_som_rev() function definition
-Squash with 'config: xea: Enable late board initialization to set revision variable'
-Update commit message
-Squash with 'arm: xea: Print information about XEA's SoM HW revision'
+ board/liebherr/xea/spl_xea.c | 7 -------
+ 1 file changed, 7 deletions(-)
 
-Lukasz Majewski (4):
-  arm: spl: xea: Remove I2S pins configuration from early initialization
-  arm: spl: Add definition for PHY reset GPIO for XEA HW rev. 2
-  arm: xea: Add support for reading SoM (CPU) board HW revision
-  config: xea: Add limits for SPL and u-boot proper sizes
-
- board/liebherr/xea/spl_xea.c   | 21 +++++++++------
- board/liebherr/xea/xea.c       | 49 ++++++++++++++++++++++++++++++++++
- configs/imx28_xea_defconfig    |  4 +++
- configs/imx28_xea_sb_defconfig |  1 +
- 4 files changed, 67 insertions(+), 8 deletions(-)
-
+diff --git a/board/liebherr/xea/spl_xea.c b/board/liebherr/xea/spl_xea.c
+index df354cac64..551ed6fbae 100644
+--- a/board/liebherr/xea/spl_xea.c
++++ b/board/liebherr/xea/spl_xea.c
+@@ -112,13 +112,6 @@ const iomux_cfg_t iomux_setup[] = {
+ 	MX28_PAD_I2C0_SCL__I2C0_SCL,
+ 	MX28_PAD_I2C0_SDA__I2C0_SDA,
+ 
+-	/* I2S Codec */
+-	MX28_PAD_SAIF0_BITCLK__SAIF0_BITCLK,
+-	MX28_PAD_SAIF0_LRCLK__SAIF0_LRCLK,
+-	MX28_PAD_SAIF0_MCLK__SAIF0_MCLK,
+-	MX28_PAD_SAIF0_SDATA0__SAIF0_SDATA0,
+-	MX28_PAD_SAIF1_SDATA0__SAIF1_SDATA0,
+-
+ 	/* PWR-Hold */
+ 	MX28_PAD_SPDIF__GPIO_3_27,
+ 
 -- 
 2.39.2
 
