@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A3CCD11DD
-	for <u-boot@archiver.kernel.org>; Fri, 29 Mar 2024 12:48:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD3B7C6FD1F
+	for <u-boot@archiver.kernel.org>; Fri, 29 Mar 2024 12:54:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B3F188246;
-	Fri, 29 Mar 2024 13:48:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2FE4E881E5;
+	Fri, 29 Mar 2024 13:54:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Txi0S0cE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WWz99H0D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9757688243; Fri, 29 Mar 2024 13:48:35 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 1109488233; Fri, 29 Mar 2024 13:54:55 +0100 (CET)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9985587E53
- for <u-boot@lists.denx.de>; Fri, 29 Mar 2024 13:48:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 20486880A1
+ for <u-boot@lists.denx.de>; Fri, 29 Mar 2024 13:54:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-513cf9bacf1so2358142e87.0
- for <u-boot@lists.denx.de>; Fri, 29 Mar 2024 05:48:33 -0700 (PDT)
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2d48f03a8bbso25680581fa.0
+ for <u-boot@lists.denx.de>; Fri, 29 Mar 2024 05:54:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711716513; x=1712321313; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1711716892; x=1712321692; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DdITQpz23zXCvaTOjJ8DN+MRmHNSMfPr7Xmq1auFKYw=;
- b=Txi0S0cEfO3V8GHHKFLK4FKdoE59hhQ1iEdhK0CZgLQc7d9TP11M2s3SMXVIEW+KEs
- yiYnqlpd97tqPH2R0rxdiMf1qZcdWeaQp5KfC+SP6LiAOGCkGQS3mLltKfbx2irHUJiQ
- 69wqJpXhDkFCo3po+SgXOufSOfj3fEV3dWLj/deqWvU3QBRXnSa8nWXJwtQbAn6UzXAr
- Ipc999hYE4Qa/E1I5NEZZ1VLYddod8m+6XAWwSu6+HWRXzDiOuPic7HfAIXPyQnoDPfb
- Xkb3o9/xEFzI4Gbarq26U0L/nk+ul/lPOrn5ENzoCQb5fyAWxod699l+h+VIi+SrHEEo
- XTew==
+ bh=p4dhfI3uUZmeiRFbMvxo3et5Ex5AH9wASHxIMl1A9YU=;
+ b=WWz99H0DlCRRqTRpf7RRaXtLkwAB+JcROLC6EqQ8gGk6jtA7GF+v03tfOK4eV0/Grx
+ rlkmzPDyMs+5XEOg09v8kqakrx3kBv32VAeCn4X2W6jz9+a2LzwYLlP5/Sx8FYkPKmI/
+ I7lNocYB5Obr3rqgFwfU7b2GleJpE8k2rJ+C1MyvPQ2YbzsyRI2YDhsLoOtxbvZeqTVz
+ /bzN2yS15Il2tjuS+A4DOCPC0tKUghQB6msaiTm1LRYxNw9zsFsLhlNNciNLJW8BByeL
+ yLWbhQRHkhL5smVZrbuSbneMRRLm7CZ6EapXYXf4VvTECbV/U3PORqL/MuZZYZqgCLTn
+ 8DsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711716513; x=1712321313;
+ d=1e100.net; s=20230601; t=1711716892; x=1712321692;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DdITQpz23zXCvaTOjJ8DN+MRmHNSMfPr7Xmq1auFKYw=;
- b=wm3KkQzNLg5bTTMk6opbu/Ak0rcQHRmBMJvHKl0EDjIUl7WkinxShqSuG+ESI+aIu1
- MB8cJ9ccb93j2Fk3l4XxJWGnb2UtUivOOesUmwUU6lAfKn5fSeSjNITpRgHJBxOZPFwL
- EYWb18aOWuSscA0oC3PPtHNsEA4t0sNpzSfFufoDXPaGFYb+otWiRJcedU2883RlNc1y
- 2sj42lP2eCAMsbqDke/bpTaGt21T3tRcGExSPrsaga8tVZNTY0LFEK7pvp7VlGUttSHe
- MAGTkHBuQ72K2b0zKEoJj7YYiN01iQSbTsrlOn/u5JjVSPpCWQwWvrBp2DL8MPKSdx+3
- 2fMw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV3oUILQ9l/5iqmmXvyx3jjU6tOBkJocr3Pc5fl73liA+9U6JSbyk8EDzufv6d+gUiuQI7BN5kFt7vXedxCxwWvZKDplw==
-X-Gm-Message-State: AOJu0YwbN18vn1M1Y2TrcelDKFb+W3ddMZ+tEhzgkyUy1tJJoHJ5PIJq
- 7rX5CIJEZYILmMoZeaHlt9cEHlSPjK4CGM/QcVvqIMm7SbkKXI8S1rQjU50OHA7+oxwKM48Cich
- YQm3h+XaIoItq4x28r3aD2YZQxMwDV9ASpfhxbg==
-X-Google-Smtp-Source: AGHT+IHDeOmi7BEr/TIHKojGKrEvGpIR2B4Xpk6tU/cW6QMBMS2bGvLsITmgPjBNN7EcQYBSoaa/KKE8BJeMo1bTiI0=
-X-Received: by 2002:a05:651c:1508:b0:2d6:a1f7:2a12 with SMTP id
- e8-20020a05651c150800b002d6a1f72a12mr1667711ljf.38.1711716512940; Fri, 29 Mar
- 2024 05:48:32 -0700 (PDT)
+ bh=p4dhfI3uUZmeiRFbMvxo3et5Ex5AH9wASHxIMl1A9YU=;
+ b=EICPX84jOw91QtOwlyXBpLOy5EoebitiKkY9m04dJn6vtzeMdl0pfcl763I64aC2/7
+ 2h6u4ggGKt5f/nMrqCOJCt6266VAWBEC2zzPrc+qWrjltPE24O65UBFM4prLl6TiYIxB
+ oYmyGcPf0atkJ4DHDoJzrxn3jsEdFIKKN+Kr+wr67eteJU6//nqmRr7C0cWSb1KFx2Wc
+ DqspLu5HA5UO/a6cSCGWg+F/1iV40lYhljPnA1UdtRCBRSLdjKSjmjS5XmZyP/HWTr+Z
+ kRgmp/jYOgZBRPZLORQRyu3QwMDKVrkbGZGanVZdn533pEjV8tr/Voszm1uBL66Q1sw2
+ 8RwA==
+X-Gm-Message-State: AOJu0YzrgGHYrwRU22Pa62ipgTn+f935tfpkYPIsYfR/9SjE2tqgw1Bo
+ 8nJwXy7p4aEhDnJL+6iYT4j6AIU00mOHvUvVEofFUmi6nmHGHhV08qnN/tVAu1hA5cfiCIH5Izz
+ 5wXXDB6IJeGsgjzLe5YolChVziEkdCoNf8yu5MA==
+X-Google-Smtp-Source: AGHT+IGHtoyMuOSZ25bsnswlk3rNkpopaTungh+tO9J/EUSEgKR0CpoXSfUbiohqLTn/u2SzHk2qFluNpZCMjz5nTPA=
+X-Received: by 2002:a2e:b81b:0:b0:2d6:dd34:d38 with SMTP id
+ u27-20020a2eb81b000000b002d6dd340d38mr801760ljo.17.1711716892412; Fri, 29 Mar
+ 2024 05:54:52 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240329071929.2461441-1-ilias.apalodimas@linaro.org>
- <87msqh8bta.fsf@bloch.sibelius.xs4all.nl>
-In-Reply-To: <87msqh8bta.fsf@bloch.sibelius.xs4all.nl>
+ <7b9afe57-7454-49d9-930e-abcaa829b0d9@gmx.de>
+ <CAC_iWjKS16PCDYmpmsRabpaAeV=7Q0NS+jPVJZLSYduqEReQvQ@mail.gmail.com>
+In-Reply-To: <CAC_iWjKS16PCDYmpmsRabpaAeV=7Q0NS+jPVJZLSYduqEReQvQ@mail.gmail.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 29 Mar 2024 14:47:56 +0200
-Message-ID: <CAC_iWjL_xd-ax9uoX2Sba-xX16TtNvk-7_EhUPov9gaLpjmfoA@mail.gmail.com>
+Date: Fri, 29 Mar 2024 14:54:15 +0200
+Message-ID: <CAC_iWjKhyAeuOrgi68=O+-Ssth9zX2GBwbXJgFqJApWfvpFDnQ@mail.gmail.com>
 Subject: Re: [RFC PATCH] efi_loader: conditionally enable SetvariableRT
-To: Mark Kettenis <mark.kettenis@xs4all.nl>
-Cc: ardb@kernel.org, kettenis@openbsd.org, pbrobinson@gmail.com, 
- xypron.glpk@gmx.de, u-boot@lists.denx.de, trini@konsulko.com, 
- caleb.connolly@linaro.org, sumit.garg@linaro.org, sjg@chromium.org, 
- abdellatif.elkhlifi@arm.com, takahiro.akashi@linaro.org, 
- sughosh.ganu@linaro.org, kojima.masahisa@socionext.com, bmeng@tinylab.org
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, caleb.connolly@linaro.org, 
+ sumit.garg@linaro.org, Simon Glass <sjg@chromium.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Bin Meng <bmeng@tinylab.org>, pbrobinson@gmail.com, kettenis@openbsd.org, 
+ ardb@kernel.org
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,34 +94,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Mark,
+Hi Heinrich,
 
-[...]
 
+
+>
 > >
-> > Open questions:
-> > Looking at the EFI spec, I can't find a documented way of notifying the OS
-> > that the storage is volatile. I would like to send a hint to the OS about
-> > that and I was thinking of adding a configuration table with the filename,
-> > which U-Boot expects to be on the ESP. Alternatively we could add a device
-> > path which would be a bit harder to parse from the userspace application,
-> > but safer in case multiple ESPs are present.
->
-> Should there be a way for the OS to opt-in to this new behaviour?
+> > > +     struct efi_var_entry *var;
+> > > +     efi_uintn_t ret;
+> > > +     bool append, delete;
+> > > +     u64 time = 0;
+> > > +
+> > > +     /* Authenticated variables are not supported */
+> > > +     if (attributes & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS)
+> >
+> > Adding EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS here would make it
+> > clearer that all authenticated variables are unsupported.
 
-The feature itself is in a Kconfig option. If we agree on a way to
-notify the OS that the variable storage is in RAM and hence volatile,
-the OS is free to ignore it I guess
+Looking at this again, I already prevent
+EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS unconditionally in
+efi_check_setvariable() since its deprecated. So I'll keep this as is
 
->
-> > Since I am not too familiar with how BSDs treat and expose config tables,
-> > we could instead add a RO efi variable with identical semantics, which
-> > would be easier to read from userspace.
->
-> There is an EFIIOC_GET_TABLE ioctl that allows retreiving a table by GUID.
-
-Ah thanks. I am leaning towards an EFI variable now to signal the OS
-
-[...]
-
+Cheers
 /Ilias
