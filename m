@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2E77C6FD1F
-	for <u-boot@archiver.kernel.org>; Sat, 30 Mar 2024 19:45:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D7DFC6FD1F
+	for <u-boot@archiver.kernel.org>; Sat, 30 Mar 2024 19:46:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A96A882B7;
-	Sat, 30 Mar 2024 20:45:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BD2CD882BB;
+	Sat, 30 Mar 2024 20:46:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AJ19MVIr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Dbg+8h+2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7E82882B6; Sat, 30 Mar 2024 20:45:47 +0100 (CET)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id 2464A882B6; Sat, 30 Mar 2024 20:46:20 +0100 (CET)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF8DD882B7
- for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 20:45:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1ED38882BB
+ for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 20:46:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6ea895eaaadso711231b3a.1
- for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 12:45:44 -0700 (PDT)
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-6ea7eff5f3cso451420b3a.0
+ for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 12:46:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711827943; x=1712432743; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1711827976; x=1712432776; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mREBGQqmLvpBWqK2hSky8qNDt/orXRCaJ7Ql6tSlOXA=;
- b=AJ19MVIrSrkkTLoLdF0mHUUwP2QiqmNVWUlWsZdA/pIAIlhDe9o32r3ZOgq9MQcyNz
- gklHD31eOthi1KUO3sJz60h7fteqZX/M5a8w/eMclsKfL4cH27Et3gWUtu17Bsuudy/w
- BFuBd9pN+xcK7Q3okvMrdB5/l7vfVnIGiFnMBhnOT+2Ij1yOz5cLILNAsO9kB9jNs8CT
- Vdr4kjvvfyionwU0PPXCUdhGdod2X7JQTvMlVGHkweexPO3jqz/Gy9kX8CpR9jCe+uhH
- 2xSqnfMkhy8HJ0VSD0s3z9MF3A2z7PZITZuxlWvj3uTgH/O8IxA7ZLRjN6bJTUB7syLr
- YpYA==
+ bh=YPiw8O7cLju1TLNOw8Qo2kDXnI/ksB3F/m0mk8xf25s=;
+ b=Dbg+8h+2XSVYc4CmYMZz4FC7mHoZBNO359i1r68AVuN/h4lSGYCAH+tnOyoCWDqwIe
+ uDFivV1M6uKkolfKP45atfXSprMwxgtT6Kz/pj1AwKMWUjaGr+laoVXTbyIOdVJM2Hbp
+ FOSDVZeXX+WsFeGNKE4xYPr078cLT1bkO0w3prvWyQP7+thO+lncspgtRox9sAV9AyjB
+ yiWDktc8ltG1giWJ6WSJWp7zdW/woMa2DGxfJM5IcQDxNO9EFOwjPt87fOXYCCqJh6vl
+ 7TGGcM85YKLJFGLUbJ7+0dobsXUr/cU2/MasVmBXZCMoApLtP4PEu3VrAZRUTzptyUht
+ dvWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711827943; x=1712432743;
+ d=1e100.net; s=20230601; t=1711827976; x=1712432776;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mREBGQqmLvpBWqK2hSky8qNDt/orXRCaJ7Ql6tSlOXA=;
- b=YPXZT9RA5uw4lgDsrtkNneWLWweqt+vMmaGKCFPXNoW5sv6ihgDvxSd6gsJ4nRvJQW
- 9bvXuMWbsQTjFZE8fHitKrwJ6BFfH3oaBNhFzMrwRsfhomobBO71IAp8mChUQooM8qAT
- DQAt/C4AKpJElhf9YaUjE321w/paONeo3PI0jIUk6WTYo3rtpuoKNLXevQ3ji40H/XAC
- vdXMHpdlmBA4C+f+AKeuXN0mLZeMPB6umfRIy03AJETudy0ndWhQVcIz5q3YBNljsx0Y
- jj3F0ZA5MK8uX+hXOhEsPcGIgYTtM8qHRTO3HRMKiVIVa1Ozo7lhfGiRjaQrzb+MQ17H
- /x8A==
-X-Gm-Message-State: AOJu0YxfK1wiMj6ewrPaUPrJrZVmJVaBGT0ppujMh1KW0r0kOc5spMZ8
- IighRlz1bsxX1lC4bUEBh4CzpvWlcDvQ4bluuLzf8D2nUHcHmKBR1CFWtt17+ai1zTqcjlXBoti
- OiTJHjWWp8TNrsT39mcVooslarus=
-X-Google-Smtp-Source: AGHT+IE0k5NTkG/r1txaEasr/buJv3GNFNUrHpX/aQ8Ai65+3uQJEZKCwAPQQFeUDmbv17D5+9zz8VdmHrLIQdr/95Q=
-X-Received: by 2002:a05:6a20:3ca9:b0:1a7:c2e:41eb with SMTP id
- b41-20020a056a203ca900b001a70c2e41ebmr2452545pzj.2.1711827943218; Sat, 30 Mar
- 2024 12:45:43 -0700 (PDT)
+ bh=YPiw8O7cLju1TLNOw8Qo2kDXnI/ksB3F/m0mk8xf25s=;
+ b=qO5W7IqF96sWAxFiGDbOJW7jHm0aEOn6CwBPRQDmV4ZUuRuTU3ipCVCjC0EsjKGSvX
+ jE6QsJaz8hKsBx+UyvMfHu5lJz9C1TzRDpfUflA/UNpcVGNNrYO4vM8B4Sz+5vPXp9Hr
+ U0n4iTYsR1yPENdHaCCRuujj5j4yNbE+V263O7qVnS792Kk0KRfSZFZq8QG2jF7a6jZO
+ GXxWMk6dkoL7cbu6MEclPzrdLIRwuMCOqPMOka/qc3oZ7uJax5PAjsDqdXvxpNmAXHAu
+ JG6IjCDbI9GT5k+qVh8MaYEGABg6EGEvs7KBMQmKDvoXfKeADDAXp2LaoOgnTXPM+iuF
+ KvhA==
+X-Gm-Message-State: AOJu0YxmBykp+GQ+hSoT1qSJatc3C3/VmvJbQ8DEU94qRV6shiOYY2dT
+ ePuODNouCT+latfaaqYql3SaWBgdUQuLeWARIxKyFdOw/OY19MPhjy5K1R+BK2+CjH5m+TzJwzI
+ +pTA414E/fitpn8TzxrrXXfMP6Jc=
+X-Google-Smtp-Source: AGHT+IFSV2/hYi6cJbfTuD9A1qkZfiBmwz4fKNX2k1pxcnwgsvakniwv3qkouKQbHTVfg7p+HRG77wMZYvd4u6AMtNA=
+X-Received: by 2002:a05:6a20:7345:b0:1a3:c603:61d4 with SMTP id
+ v5-20020a056a20734500b001a3c60361d4mr7630098pzc.3.1711827976653; Sat, 30 Mar
+ 2024 12:46:16 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240325162702.1350537-1-tharvey@gateworks.com>
-In-Reply-To: <20240325162702.1350537-1-tharvey@gateworks.com>
+References: <20240325162722.1350593-1-tharvey@gateworks.com>
+In-Reply-To: <20240325162722.1350593-1-tharvey@gateworks.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 30 Mar 2024 16:45:33 -0300
-Message-ID: <CAOMZO5Dkk0VgA3guxbpehXp-Y+euGucZyL2pf8V897CoJCKmMw@mail.gmail.com>
-Subject: Re: [PATCH] arm: dts: imx8mm-venice-gw7901: add digital I/O direction
- control GPIO's
+Date: Sat, 30 Mar 2024 16:46:06 -0300
+Message-ID: <CAOMZO5CutomhjoJx3OBAFNbsjWd0hB1Wq+A8dHKYdG5jm+T-Xw@mail.gmail.com>
+Subject: Re: [PATCH] arm: dts: imx8m*-venice-gw72xx: add TPM device
 To: Tim Harvey <tharvey@gateworks.com>
 Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
  "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
@@ -92,9 +91,9 @@ X-Virus-Status: Clean
 On Mon, Mar 25, 2024 at 1:27=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
 wrote:
 >
-> The GW7901 has GPIO's to configure the direction of its isolated
-> digital I/O signals. Add the GPIO pinmux, line names, and hog
-> configuration.
+> The GW71xx baseboard has a TPM that defined in the upstream dt however
+> we need to ensure the GPIO reset line is de-asserted which we do in boot
+> firmware with a gpio hog.
 >
 > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 
