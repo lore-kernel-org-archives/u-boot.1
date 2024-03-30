@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 108D8C6FD1F
-	for <u-boot@archiver.kernel.org>; Sat, 30 Mar 2024 19:45:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2E77C6FD1F
+	for <u-boot@archiver.kernel.org>; Sat, 30 Mar 2024 19:45:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 988F886DBD;
-	Sat, 30 Mar 2024 20:45:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4A96A882B7;
+	Sat, 30 Mar 2024 20:45:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C7S1u8R4";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AJ19MVIr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A416986DBD; Sat, 30 Mar 2024 20:44:59 +0100 (CET)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id B7E82882B6; Sat, 30 Mar 2024 20:45:47 +0100 (CET)
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
+ [IPv6:2607:f8b0:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DECE83334
- for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 20:44:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF8DD882B7
+ for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 20:45:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-29f8ae4eae5so953530a91.0
- for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 12:44:56 -0700 (PDT)
+Received: by mail-pf1-x431.google.com with SMTP id
+ d2e1a72fcca58-6ea895eaaadso711231b3a.1
+ for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 12:45:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711827895; x=1712432695; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1711827943; x=1712432743; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XcfGM5FYAzXrnNeYW5ZIACxJ3K+i4bj35tq8yWcfYxI=;
- b=C7S1u8R4O0KUgtJwktIDTeIvdsz66jf1C5h9z6ld9KGRP0eLonPbPdBCbuFBvZObUE
- o4Tir4dU68vcsk7SrvIG7Pa9fFidEsseFl78aIlJianngub2qAZMiayOpsEdH0Xk9o1I
- g1aa9Eo1GsdWq0hBQNhnOBl66lm4PJeyhSA4sNlaqvCTja8WGHiXZxeWD8Z6TbwwtNsZ
- U57f0zbx10XhOTr8f9Z2+yRWKSdeZZxnzTiwtkNE3HDLkeUQpByIPAWV+Cto5N76ytGM
- s554+EF0r+gusPgHxyh9W0yTe3qI4T2X7I06WFcUUbf2yLoEKsujIAm6cpcTuwW+JtdI
- mEow==
+ bh=mREBGQqmLvpBWqK2hSky8qNDt/orXRCaJ7Ql6tSlOXA=;
+ b=AJ19MVIrSrkkTLoLdF0mHUUwP2QiqmNVWUlWsZdA/pIAIlhDe9o32r3ZOgq9MQcyNz
+ gklHD31eOthi1KUO3sJz60h7fteqZX/M5a8w/eMclsKfL4cH27Et3gWUtu17Bsuudy/w
+ BFuBd9pN+xcK7Q3okvMrdB5/l7vfVnIGiFnMBhnOT+2Ij1yOz5cLILNAsO9kB9jNs8CT
+ Vdr4kjvvfyionwU0PPXCUdhGdod2X7JQTvMlVGHkweexPO3jqz/Gy9kX8CpR9jCe+uhH
+ 2xSqnfMkhy8HJ0VSD0s3z9MF3A2z7PZITZuxlWvj3uTgH/O8IxA7ZLRjN6bJTUB7syLr
+ YpYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711827895; x=1712432695;
+ d=1e100.net; s=20230601; t=1711827943; x=1712432743;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XcfGM5FYAzXrnNeYW5ZIACxJ3K+i4bj35tq8yWcfYxI=;
- b=Ulh0MxeiHPSXL4k1xXYinMeWjg10wniY8VY2jBUivV4ze7YJzvS+h5KX+h7DDt/+1h
- QUv46hBo05W3jKqDA/I6ylhkRyQx8kjJ/32zK5yECIi4ep2AzmFuAdGp8bTy8ZU1UGj0
- nypLAcM1aj2d0E4UrD0Mxm6DLTm93xp+9knZ78T47fuB5j3+6heRcdFu56VEZCp/EZ3f
- OXyzQmHorEt+fEEg00CexpmNG1Fa6Y7vnD/kgdrsAlLYfG3j6P8O0JmQ6j7hOVIzGzNh
- TvUmgQsDIjjvKRDeuhxgyY9+mFXNDgD5Uh16aVvkOc2FtVop8Lh4DtXx6XfEzO0QeFLV
- +mdQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWlGgd9qXf04dTRlkZoYOsXXaipXVwIKqcdlq6CHdCl8p/zgcjeZpo3cBm5wp5GmeqhRLnO9QyFhHqI2YlVEYTCUlE1Tg==
-X-Gm-Message-State: AOJu0YzUbH1fN4SrkBcyKy4lDOozjgFx4oWaHlV7qjquAyjeA6q/Qmph
- iFWDeh74l5XzJdTWJRIqpFijJ5rcsl6EqtelVPruwPsWI9NpiZfJZWDI6Ed/CEzzDruM7OBv5Bm
- AXmVTJUrDIdjodEkZbdJDsQPQRRA=
-X-Google-Smtp-Source: AGHT+IFZH/thU5aFIeWPpSVdXAFNTaEteK9Su9cvAq2T/P/LFRioLqsaTit3H0wSTt7l+Uy97c8AySWXzD70hKe6nKg=
-X-Received: by 2002:a17:90a:6ba5:b0:2a2:191a:de72 with SMTP id
- w34-20020a17090a6ba500b002a2191ade72mr4101715pjj.1.1711827895625; Sat, 30 Mar
- 2024 12:44:55 -0700 (PDT)
+ bh=mREBGQqmLvpBWqK2hSky8qNDt/orXRCaJ7Ql6tSlOXA=;
+ b=YPXZT9RA5uw4lgDsrtkNneWLWweqt+vMmaGKCFPXNoW5sv6ihgDvxSd6gsJ4nRvJQW
+ 9bvXuMWbsQTjFZE8fHitKrwJ6BFfH3oaBNhFzMrwRsfhomobBO71IAp8mChUQooM8qAT
+ DQAt/C4AKpJElhf9YaUjE321w/paONeo3PI0jIUk6WTYo3rtpuoKNLXevQ3ji40H/XAC
+ vdXMHpdlmBA4C+f+AKeuXN0mLZeMPB6umfRIy03AJETudy0ndWhQVcIz5q3YBNljsx0Y
+ jj3F0ZA5MK8uX+hXOhEsPcGIgYTtM8qHRTO3HRMKiVIVa1Ozo7lhfGiRjaQrzb+MQ17H
+ /x8A==
+X-Gm-Message-State: AOJu0YxfK1wiMj6ewrPaUPrJrZVmJVaBGT0ppujMh1KW0r0kOc5spMZ8
+ IighRlz1bsxX1lC4bUEBh4CzpvWlcDvQ4bluuLzf8D2nUHcHmKBR1CFWtt17+ai1zTqcjlXBoti
+ OiTJHjWWp8TNrsT39mcVooslarus=
+X-Google-Smtp-Source: AGHT+IE0k5NTkG/r1txaEasr/buJv3GNFNUrHpX/aQ8Ai65+3uQJEZKCwAPQQFeUDmbv17D5+9zz8VdmHrLIQdr/95Q=
+X-Received: by 2002:a05:6a20:3ca9:b0:1a7:c2e:41eb with SMTP id
+ b41-20020a056a203ca900b001a70c2e41ebmr2452545pzj.2.1711827943218; Sat, 30 Mar
+ 2024 12:45:43 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240325135230.1777213-1-festevam@gmail.com>
-In-Reply-To: <20240325135230.1777213-1-festevam@gmail.com>
+References: <20240325162702.1350537-1-tharvey@gateworks.com>
+In-Reply-To: <20240325162702.1350537-1-tharvey@gateworks.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 30 Mar 2024 16:44:45 -0300
-Message-ID: <CAOMZO5DV-FX=ZxgCeu2GqzJbU1kun08UupojXjAgZ6p_cwPAeg@mail.gmail.com>
-Subject: Re: [PATCH] phycore_pcl063: Drop leading zero from USB vendor number
-To: martyn.welch@collabora.com
-Cc: parthitce@gmail.com, marex@denx.de, u-boot@lists.denx.de, y.moog@phytec.de,
- w.egorov@phytec.de
+Date: Sat, 30 Mar 2024 16:45:33 -0300
+Message-ID: <CAOMZO5Dkk0VgA3guxbpehXp-Y+euGucZyL2pf8V897CoJCKmMw@mail.gmail.com>
+Subject: Re: [PATCH] arm: dts: imx8mm-venice-gw7901: add digital I/O direction
+ control GPIO's
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,13 +89,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Mar 25, 2024 at 10:52=E2=80=AFAM Fabio Estevam <festevam@gmail.com>=
- wrote:
+On Mon, Mar 25, 2024 at 1:27=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+wrote:
 >
-> CONFIG_USB_GADGET_VENDOR_NUM is a 16-bit number, so remove
-> the leading zero.
+> The GW7901 has GPIO's to configure the direction of its isolated
+> digital I/O signals. Add the GPIO pinmux, line names, and hog
+> configuration.
 >
-> Reported-by: Marek Vasut <marex@denx.de>
-> Signed-off-by: Fabio Estevam <festevam@gmail.com>
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 
 Applied to u-boot-imx/next, thanks.
