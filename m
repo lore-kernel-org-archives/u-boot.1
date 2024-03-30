@@ -4,77 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9306FCD1288
-	for <u-boot@archiver.kernel.org>; Sat, 30 Mar 2024 21:36:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B940CD1288
+	for <u-boot@archiver.kernel.org>; Sat, 30 Mar 2024 21:42:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 00ACA882B2;
-	Sat, 30 Mar 2024 22:36:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D621087E2E;
+	Sat, 30 Mar 2024 22:42:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Z1RtAlhu";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jhRQUYiq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D5E5882C0; Sat, 30 Mar 2024 22:36:31 +0100 (CET)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1E372882A1; Sat, 30 Mar 2024 22:42:34 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5534587E2E
- for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 22:36:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3800F87873
+ for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 22:42:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6ea895eaaadso732702b3a.1
- for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 14:36:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711834587; x=1712439387; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=KEeExF3D7Fl5Rf+By3J8Z/Q8SsE809Nah3ujRm5PVK0=;
- b=Z1RtAlhuDMDY+Ss5fNsEMGqrHUv5Ap/T/LO+8fSq0ESgbISxEAoN5j15ge6ZpBr7CP
- 9WoiHh/RKlr4MosGCXoY5qWb2gQQo9yXpA9JRRXnSnUEIdEK7YnoFRonfZyKYmigLkaq
- g1dum3GelzBPb8QCejRyvGpQzpkPJsMu0CAJ7dQzyhsGtH7otbdG5UyWKY5iDeEpBuF3
- tTGW4M+v7T7hGdZhZQDiZqLIncbvektqWYo6YVcJT+ecWCEdI7cEpPqx0muaf0S1q/c+
- HHTWwopywooMH4kfY35bEbq0VEz19Vq0AhWEIq1aUx6Z1yDi7wAkU7SB8qcs6+icHVfy
- uP2w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711834587; x=1712439387;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KEeExF3D7Fl5Rf+By3J8Z/Q8SsE809Nah3ujRm5PVK0=;
- b=lAg+59cMtYbVbusthK24cr0ekNvIHE5TyWfonhCXN8O72FGCGzYOX6hHkJVTXIuCVE
- XELOtekU33kYwOxN6STbo6Ta8yVeeeCQfO4x6geTNOKyR7nHnEywHG8+j2SJRxRZ4MgS
- 6HWdsP2I4ryeR+0xAWGIrRlB2wNrrzwhkHbqkP/5DEIxyBT9+KrGT5v4CCtejtXZ7dCU
- R4M3SglKVYtpCku5FIl2Hav9AiN4wOZa3T+TuT7UQtzyBLA8n3v3A+rmHoUFR3uwpQ4C
- kXpScq0oC5+iBSigRSFaZr4cEc5Vm+0qP6ElVnJVgdQPLr57g3jgxm5w2wyhKjYU+Dq/
- BCHw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV0KKB/RQixjR4LplpEtVyejI+zYlzf5wYifTxoqtfWN18zr3FF5If528vAE9fJY+u9DvfCNmtq8CPh5IKJ/0lRTgUjTg==
-X-Gm-Message-State: AOJu0YzGq00/3a4ULPNSFaElBSdH/sKAkgbkDBTBX4ODLKxV0Ei4wPkC
- j8bFmjDAwmKFAr4i/EYhk/gA937nxrGdJyd2DwCB3eEthExRi42dIE/PuTTf
-X-Google-Smtp-Source: AGHT+IF4vVH/vtmXLEA2F5ak3/yZXFinbbUX2CSwOHzPHI91ZaAwsoISgWhe3JQW0JFwUXdj1eFCrQ==
-X-Received: by 2002:a17:903:503:b0:1dd:b883:3398 with SMTP id
- jn3-20020a170903050300b001ddb8833398mr6311997plb.4.1711834587476; 
- Sat, 30 Mar 2024 14:36:27 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:3bdf:3f7c:9329:bd24])
- by smtp.gmail.com with ESMTPSA id
- n16-20020a17090ac69000b002a06260ac96sm5032420pjt.16.2024.03.30.14.36.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 30 Mar 2024 14:36:27 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: festevam@gmail.com
-Cc: baruch@tkos.co.il, trini@konsulko.com, josua@solid-run.com,
- u-boot@lists.denx.de, cgmeiner@igalia.com
-Subject: [PATCH v2] mx6cuboxi: Fix Ethernet after DT sync with Linux
-Date: Sat, 30 Mar 2024 18:35:55 -0300
-Message-Id: <20240330213555.2889619-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1711834942; x=1712439742; i=xypron.glpk@gmx.de;
+ bh=HzDuaBN+HRuOfZYWK2HeTc0/NVVKYLGuxUXvfxC0flQ=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=jhRQUYiq3YOpB7KXbvwz3LddD4NqCPKBnQyWlVwjp97Cyr8YX+Lkc2eIJjBZ2UUz
+ FuYvxvp4powT89z9wMb5DJi5ThUerGNO0O0+DRc8qE5/9EvjLYKGWAAuIq2fADcov
+ HiL+0GjcMBBKzeMSC5qlRDGwRiNs1HRHqk768/8J3tQlHqUM1lwuwiR6WIObzYbEJ
+ IWMXIxshcP+KmbX11/c5x19y5TEmHZGgNelNS/Q+l8Ixx50VUDiaSB1fC/cFFqGHf
+ jciCpcobYVkmJ9fgsqcX8KVZ87gUVXgK2byuyABCJMAYNcHqz1HK2j2tyJjXEADGH
+ AzdRBVy4kwDK7xLEeQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MNt0M-1sAZrK3A1A-00OKR9; Sat, 30
+ Mar 2024 22:42:22 +0100
+Message-ID: <adb0dd0d-dfd2-4c02-95d5-1c301da24269@gmx.de>
+Date: Sat, 30 Mar 2024 22:42:30 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] lib: add missing line breaks in debug messages
+To: Maxim Moskalets <maximmosk4@gmail.com>
+Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>, sjg@chromium.org,
+ trini@konsulko.com, u-boot@lists.denx.de
+References: <20240330111121.5935-1-Maxim.Moskalets@kaspersky.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240330111121.5935-1-Maxim.Moskalets@kaspersky.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:1/xpSzY6qoZdU0yMvW6T8SG6joyn7iZ5h+6a7hzfDPGBKMNt7E9
+ M/VmDtdxE6ztS5llZORFaJGol63V28k7dSBoGppP84nA9IsPLNvbyc19PDV+RLWhhQTWhim
+ BVTrlTilHTxZnCFOS2l6+ZZPNv/EA+xG7Ri6Flv1Ntx/q/d6XTwu+2nc470fg+pbbHyQh8g
+ 1W9i26uzRXNcItEtTsPuQ==
+UI-OutboundReport: notjunk:1;M01:P0:W5LQnlpPzEw=;2+oAUhCg8onMU0hQfuiF9rXpnRC
+ vJTr0njdyI/eIv0AAE1lZqZO+uqHpivN8TpyenD2z78C1sDgAd7uO6VBimq5/fDQlE7QRuFHS
+ ioWKS7fxihtODoBJIhcJyeTAsmW3V3PiMJ+3hzyzDEFrt9JELSPfggPlyFi08Iu54q6Ffu190
+ IUOmOnrBCe8WpP28yMyzplWuZlbloWhH86oLj1KyVn2xiT8JGnIWyDO35fu7jVqawVcfpsaWi
+ DuRZfYfDqVBiJ44Ppdoh3QGF6qXNXY+xGgvfW613upXS82fEmny0a++X9I9t8NjZVad8jM1+H
+ +3wV/eTo+w6gYyyof54MCNW9KDUqL0dfoKTJqxBmb6WVaY7oybv5mDqN8vp9fhQQS+QkkNnay
+ fZ+xrRrhVBgReqecpSz2yVWxxP27BiQ3bPb9VSmnsigVjMkUFdfd4DcHUVDzdHsUdsT8rrTwq
+ YPXcra8DG2Y4gZMg/vKfEBqlrLO3xr44WY/MVeWRVvHgpv37u1DKgaroX8NHv7EbY1X64eWwV
+ G/3eOmgFglC7ScqGBwOVeo5B1fO09+650D1jJbJxgNhD9lBOTsGHmUoRKqFE/WItI/lNsfzx8
+ C/DfoNsAU3XYX/Q7SVOzUgOk/IEQR2jR7mleJbe+b9Igk/XAgs9sGQ7TWOJ/tqksIicUJyMev
+ bvyfUCtKnzNLMP3RBEIOxEQSPq7qwKkwPtwciq/LxH7JdvQkPDDxPKjohAYQadCGysBWo1t8t
+ xil2vuLl4RqVGZO1M3NLL+aapjxgiGrJ0HbySj+cYlu/YJCOk06Cij4GEi2KAOCNAIlDb3D03
+ Au5jFjvqt68F6cKNY55ekNJhoFGgrGcpzITci8/0X/FoE=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,114 +87,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Josua Mayer <josua@solid-run.com>
+On 3/30/24 12:11, Maxim Moskalets wrote:
+> Add missing line breaks to improve debug log readability.
+>
+> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
 
-The i.MX6 Cubox-i and HummingBoards can have different PHYs at varying
-addresses. U-Boot needs to auto-detect which phy is actually present,
-and at which address it is responding.
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Auto-detection from multiple phy nodes specified in device-tree does not
-currently work correct. As a work-around merge all three possible phys
-into one node with the special address 0xffffffff which indicates to the
-generic phy driver to probe all addresses.
-
-Signed-off-by: Josua Mayer <josua@solid-run.com>
-[fabio: Added the changes to imx6qdl-sr-som-u-boot.dtsi.]
-Signed-off-by: Fabio Estevam <festevam@gmail.com>
-Tested-by: Christian Gmeiner <cgmeiner@igalia.com>
----
-Changes since v1:
-- Disable ethernet-phy at addresses 0, 1 and 4.
-- Remove the fixup of the fake 0xffffff address before booting Linux.
-
-Josua and Christian,
-
-I got access to a imx6 humming board and I was able to test it.
-
-This is the minimal fix I came up based on your suggestions.
-
-There is no need to fixup of the fake 0xffffff address before booting Linux,
-as this fake address does not exist in Linux.
-
-Successfully tested Ethernet in U-Boot and in the kernel.
-
-Given that Ethernet is currently broken, I suggest we go with this
-version to restore Ethernet for 2024.04.
-
-What do you think?
-
- ...qdl-hummingboard2-emmc-som-v15-u-boot.dtsi |  1 +
- arch/arm/dts/imx6qdl-sr-som-u-boot.dtsi       | 49 +++++++++++++++++++
- 2 files changed, 50 insertions(+)
- create mode 100644 arch/arm/dts/imx6qdl-sr-som-u-boot.dtsi
-
-diff --git a/arch/arm/dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi b/arch/arm/dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi
-index e9b188ed6587..358cf8abc4ff 100644
---- a/arch/arm/dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi
-+++ b/arch/arm/dts/imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi
-@@ -1,6 +1,7 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
- #include "imx6qdl-u-boot.dtsi"
-+#include "imx6qdl-sr-som-u-boot.dtsi"
- 
- / {
- 	board-detect {
-diff --git a/arch/arm/dts/imx6qdl-sr-som-u-boot.dtsi b/arch/arm/dts/imx6qdl-sr-som-u-boot.dtsi
-new file mode 100644
-index 000000000000..0bd7df02dd66
---- /dev/null
-+++ b/arch/arm/dts/imx6qdl-sr-som-u-boot.dtsi
-@@ -0,0 +1,49 @@
-+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
-+
-+#include <dt-bindings/gpio/gpio.h>
-+
-+&fec {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_microsom_enet_ar8035>;
-+	phy-handle = <&phy>;
-+	phy-mode = "rgmii-id";
-+
-+	/*
-+	 * The PHY seems to require a long-enough reset duration to avoid
-+	 * some rare issues where the PHY gets stuck in an inconsistent and
-+	 * non-functional state at boot-up. 10ms proved to be fine .
-+	 */
-+	phy-reset-duration = <10>;
-+	phy-reset-gpios = <&gpio4 15 GPIO_ACTIVE_LOW>;
-+	status = "okay";
-+
-+	mdio {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		ethernet-phy@0 {
-+			status = "disabled";
-+		};
-+
-+		ethernet-phy@1 {
-+			status = "disabled";
-+		};
-+
-+		ethernet-phy@4 {
-+			status = "disabled";
-+		};
-+
-+		phy: ethernet-phy@ffffffff {
-+			/*
-+			 * The PHY can appear either:
-+			 * - AR8035: at address 0 or 4
-+			 * - ADIN1300: at address 1
-+			 * Actual address being detected at runtime.
-+			 */
-+			reg = <0xffffffff>;
-+			qca,clk-out-frequency = <125000000>;
-+			qca,smarteee-tw-us-1g = <24>;
-+			adi,phy-output-clock = "125mhz-free-running";
-+		};
-+	};
-+};
--- 
-2.34.1
+> ---
+>   lib/rsa/rsa-verify.c | 8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/lib/rsa/rsa-verify.c b/lib/rsa/rsa-verify.c
+> index 1007b6979a..d3b4f71d6b 100644
+> --- a/lib/rsa/rsa-verify.c
+> +++ b/lib/rsa/rsa-verify.c
+> @@ -342,7 +342,7 @@ static int rsa_verify_key(struct image_sign_info *in=
+fo,
+>   		return -EINVAL;
+>   	}
+>
+> -	debug("Checksum algorithm: %s", checksum->name);
+> +	debug("Checksum algorithm: %s\n", checksum->name);
+>
+>   	/* Sanity check for stack size */
+>   	if (sig_len > RSA_MAX_SIG_BITS / 8) {
+> @@ -444,13 +444,13 @@ static int rsa_verify_with_keynode(struct image_si=
+gn_info *info,
+>   	const char *algo;
+>
+>   	if (node < 0) {
+> -		debug("%s: Skipping invalid node", __func__);
+> +		debug("%s: Skipping invalid node\n", __func__);
+>   		return -EBADF;
+>   	}
+>
+>   	algo =3D fdt_getprop(blob, node, "algo", NULL);
+>   	if (strcmp(info->name, algo)) {
+> -		debug("%s: Wrong algo: have %s, expected %s", __func__,
+> +		debug("%s: Wrong algo: have %s, expected %s\n", __func__,
+>   		      info->name, algo);
+>   		return -EFAULT;
+>   	}
+> @@ -470,7 +470,7 @@ static int rsa_verify_with_keynode(struct image_sign=
+_info *info,
+>   	prop.rr =3D fdt_getprop(blob, node, "rsa,r-squared", NULL);
+>
+>   	if (!prop.num_bits || !prop.modulus || !prop.rr) {
+> -		debug("%s: Missing RSA key info", __func__);
+> +		debug("%s: Missing RSA key info\n", __func__);
+>   		return -EFAULT;
+>   	}
+>
 
