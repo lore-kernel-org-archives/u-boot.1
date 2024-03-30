@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB2BAC6FD1F
-	for <u-boot@archiver.kernel.org>; Sat, 30 Mar 2024 19:36:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1842ECD1288
+	for <u-boot@archiver.kernel.org>; Sat, 30 Mar 2024 19:40:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20C2C88299;
-	Sat, 30 Mar 2024 20:36:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 802F0882A3;
+	Sat, 30 Mar 2024 20:40:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f4vKMycP";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l6GZ7bzL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FD748829C; Sat, 30 Mar 2024 20:36:13 +0100 (CET)
-Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
- [IPv6:2607:f8b0:4864:20::112b])
+ id 2406B882A4; Sat, 30 Mar 2024 20:40:39 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E87F888294
- for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 20:36:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A7FF9882A1
+ for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 20:40:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112b.google.com with SMTP id
- 00721157ae682-60a068e26d8so29866957b3.3
- for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 12:36:10 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1def81ee762so6012185ad.0
+ for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 12:40:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1711827370; x=1712432170; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=860Jtg+TsYrMGczUxdpW8QsyHA2ukHWvyd1Siqnj/6w=;
- b=f4vKMycPgX6BnH1bLO61PS/mr+e+ztpAcu0ZPRqorBj96zBzVVWkWt86pdVvPJT0Tj
- eMgu15wmrwz6c6Oph4j1gHj6LNbtvIiWiotuW5Oqb+k0gAi1te3PdWNCUdds/e3PZtCf
- L/TPRMK9kR6DG+B9limd6+A/jFb8pxBaaJgfQ=
+ d=gmail.com; s=20230601; t=1711827635; x=1712432435; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7UiSr8X+xGRH+2exIB+lKCnAUqKvxWk2I/zpRIX8uJ4=;
+ b=l6GZ7bzLxbsKax9I58YnfvB65scfZO64+xoaUzGaLWJvHdfYlfXuf8PRsm1K3djimJ
+ vpB9slC9BkuCeBzJBCigu6A5sJfkaexRCD7E1yHo0JKlG1n0oQESrQxDB4yvGkd0Enjd
+ /weyboOz9p6Dhy9PBS8cRB/qufcV5zbXbhb4tHoFgE9nsDARDV+sFxfrfzCYKuSWz/bq
+ +s3ix1yjmB+jC1dFojPFIJHJzUBWoA2BzkMdTa111VHfhfbYCkP7pHOZQShDqCPVY4UN
+ 2VlYATcfRZjanV/uw0MJpcQjb4ztkOJPm+a9NpFJI9cBr96EJkSrGAP95RDtrPFALBFT
+ 24cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711827370; x=1712432170;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=860Jtg+TsYrMGczUxdpW8QsyHA2ukHWvyd1Siqnj/6w=;
- b=OEiYWPlWLx5ANpEsNal5j2XfN+AAfp2qP7YaYbsmSu7g1NubTwnT308If4dGY80UYk
- e440bRCpRtXwlc1aZZg8HnUOMlNVqiuVEL9/1pXi9Pcm2rQLE0L+sCgFzTOaUggkYTE3
- V20r9HoW7h6LOlTnROl4dvuZfc6IKmuB4hKMMr3LUedmY5JUjx0QB+1qwtdkFV8B+a0O
- pqZPRHX/onDwC1NcdsPychf1rQa4qmlSlkNTloV7jT5kEGN2u+eLa32uFCTKV+augnSX
- dL1ukz6ul2cLXRtkFUxX50XX31KzEbI+8dhzqp/KSgyw9/pqs4itCRfFBsBdVYaiuTxF
- y2QA==
-X-Gm-Message-State: AOJu0YxcF6wBvxOuW/i29anyM2eIw4guAyw+fHBRnEI6uhkZa/ZNK+Tk
- TBIgcGEwaibyzF+JKwfy1sjgNty6jQOOC7kDHl5xwxY6y6KfsfArji9xCWiG4MU=
-X-Google-Smtp-Source: AGHT+IHxcrMYECzM0YPA04ZuooXG6TwYItjSqaKyfDbkppSA0Xf4qj36PieiGkIfszf5NzpsdoMoMg==
-X-Received: by 2002:a0d:d783:0:b0:60a:16b8:1042 with SMTP id
- z125-20020a0dd783000000b0060a16b81042mr5327090ywd.16.1711827368875; 
- Sat, 30 Mar 2024 12:36:08 -0700 (PDT)
-Received: from oliver.lan
- (2603-6081-7b00-3174-0000-0000-0000-1000.res6.spectrum.com.
- [2603:6081:7b00:3174::1000]) by smtp.gmail.com with ESMTPSA id
- k21-20020a81ac15000000b0061471353383sm523977ywh.93.2024.03.30.12.36.07
+ d=1e100.net; s=20230601; t=1711827635; x=1712432435;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7UiSr8X+xGRH+2exIB+lKCnAUqKvxWk2I/zpRIX8uJ4=;
+ b=ZhHSUXdPzs5J+6JIn+ZUnNeVI7xhkRWyOe+8KrvdhwJXtEo8lgC2kc7hXq5w0/Q57F
+ eKhaeIrHUW1Ht2VZTSRdvlLuptrStZJPl5/Ey6DVyL5fw3PvHoall+teMfHyxsO3yoR0
+ vNkCia9Yx5t4NzafqQi7NXbLSjdwaLCSNfZg306nrbbeHlGPV5jWn+8ChrQB9/ffK4n3
+ f5LnKxASYz1NlKzK6un/Cc6nv8BvMjJ58PIzOR3Fdfmb7Iz6AzH500S2F30iE4tI1E7c
+ ck63YRaFWOOM+Q1JvX1XT4gswW5gXc37eZ8xYuJ0Htfd6db/XEZU4SvXEyD3TE1uNC03
+ 7qCw==
+X-Gm-Message-State: AOJu0Yx9LB9fZJLJJncTyN8rDjsb+vatAzcBIZy0v+ybzX3jX8/AxsmD
+ okIZgoj5QRz0+sSu5wLGxmnMxmAqdkw/tcGIebxBOWXqw9wm2xmcSHHBVIX0
+X-Google-Smtp-Source: AGHT+IFQ69TbBoPM07f1b1Q2ZGb2zN+6wktxmXjS+xZhJe7mp/TtzUcZiVXg8UAtgbuC0GVGjcduzA==
+X-Received: by 2002:a17:902:d897:b0:1e0:c91b:b950 with SMTP id
+ b23-20020a170902d89700b001e0c91bb950mr6445162plz.5.1711827635114; 
+ Sat, 30 Mar 2024 12:40:35 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:3bdf:3f7c:9329:bd24])
+ by smtp.gmail.com with ESMTPSA id
+ 21-20020a170902c11500b001e0adef698asm5590212pli.230.2024.03.30.12.40.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 30 Mar 2024 12:36:07 -0700 (PDT)
-Date: Sat, 30 Mar 2024 15:36:05 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
+ Sat, 30 Mar 2024 12:40:34 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
 Cc: u-boot@lists.denx.de
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20240330
-Message-ID: <20240330193605.GA2107444@oliver.lan>
-References: <20240330165321.2767621-1-festevam@gmail.com>
+Subject: [GIT PULL] Please pull u-boot-imx-next-20240330
+Date: Sat, 30 Mar 2024 16:40:31 -0300
+Message-Id: <20240330194031.2790982-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="8zBwU8C+dsfkmjRs"
-Content-Disposition: inline
-In-Reply-To: <20240330165321.2767621-1-festevam@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,56 +88,113 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---8zBwU8C+dsfkmjRs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Please pull this material for next from u-boot-imx, thanks.
 
-On Sat, Mar 30, 2024 at 01:53:21PM -0300, Fabio Estevam wrote:
+The following changes since commit 6e2228fb052b68c84688d5baff06e2ebc787a4a5:
 
-> Hi Tom,
->=20
-> Please pull the following fixes from u-boot-master-imx, thanks.
->=20
-> The following changes since commit 9468bf3a69b05bda05adb06f954b089ace301a=
-fc:
->=20
->   Merge tag 'doc-2024-04-rc6' of https://source.denx.de/u-boot/custodians=
-/u-boot-efi (2024-03-28 16:01:03 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
--master-20240330
->=20
-> for you to fetch changes up to fc07cac02adebc87b69cd82f6ca6f0283d11cd5a:
->=20
->   mx6cuboxi: Convert to watchdog driver model (2024-03-30 09:49:53 -0300)
->=20
-> u-boot-imx-master-20240330
+  Merge patch series "Clean up arm linker scripts" (2024-03-29 10:39:38 -0400)
 
-Applied to u-boot/master, thanks!
+are available in the Git repository at:
 
---=20
-Tom
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20240330
 
---8zBwU8C+dsfkmjRs
-Content-Type: application/pgp-signature; name="signature.asc"
+for you to fetch changes up to f21b3e2cd954634d405fb522198d099879f3f1e7:
 
------BEGIN PGP SIGNATURE-----
+  config: xea: Add limits for SPL and u-boot proper sizes (2024-03-30 15:12:22 -0300)
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYIaaEACgkQFHw5/5Y0
-tywxaQwApzo3bp+1rvoCzrd+xOWIsLsPhzMk1kBj4p/EJiEttz+ww+zgvPW09JZk
-WTuUPcBtT6x03Pwz8i5l8s+i0odwbkjfEn1dmldCoidm8ICAJT9E7+bqB5597xy4
-llFx2L1/hh21p0QoeXtNIH5+tApDZJUDnboWR54kozTciJp8PASrdn70Sgv6q8UB
-Y/PUYl2qML3YINWYChnzBw1VonUwyTYIvSyP6uSTBIITc9aVHlNIgAFltgSEe0mQ
-L8Uh+T82W7oMX2vPTpDaOmdh2SOTgTFaOe9x7VEDSi1zLkkxnMBGJurovBRCjcG4
-JHMk5Hqlh0ol3PrlNnqdShqjMPgSk0syylMqWIr78xYKaKp1QClHUK1Z8bCpuPpB
-BZ+E3YitqgDlUbLUnXikMn7gLLtgXh0HhPkcFEyIZ9MpRE5MYIU/qeqpAbqmdyZH
-hRLzOhXUKbUosXo4g8AxwvqiGevS97J6Y4sqQxksMsb8SLqduBftsRVRG54+PiT4
-s0WVrsVK
-=BP20
------END PGP SIGNATURE-----
+u-boot-imx-next-20240330
+--------------------------
 
---8zBwU8C+dsfkmjRs--
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/20128
+
+- Allow accessing job-rings from non-TrustZone on colibri-imx7.
+- Add support for reading XEA hardware revision.
+- Convert imx8mq/8mm/8mn/8mp-evk to OF_UPSTREAM.
+- Add TMP support on imx8m*-venice-gw72xx.
+- Miscellaneous fixes and improvements.
+----------------------------------------------------------------
+Emanuele Ghidoli (3):
+      crypto/fsl: allow accessing Job Ring from non-TrustZone
+      configs: colibri-imx7: set non-secure boot mode as default
+      configs: colibri-imx7: allow accessing job-rings from non-TrustZone
+
+Fabio Estevam (3):
+      phycore_pcl063: Drop leading zero from USB vendor number
+      imx8: Add a default reset_cpu() implementation
+      imx8mq_evk: Remove FEC and Ethernet PHY board code
+
+Hiago De Franco (1):
+      board: toradex: colibri-imx8x: Remove board_gpio_init
+
+Lukasz Majewski (4):
+      arm: spl: xea: Remove I2S pins configuration from early initialization
+      arm: spl: Add definition for PHY reset GPIO for XEA HW rev. 2
+      arm: xea: Add support for reading SoM (CPU) board HW revision
+      config: xea: Add limits for SPL and u-boot proper sizes
+
+Peng Fan (4):
+      imx: imx8mq_evk: convert to OF_UPSTREAM
+      imx: imx8mm_evk: convert to OF_UPSTREAM
+      imx: imx8mn-evk: convert to OF_UPSTREAM
+      imx: imx8mp_evk: convert to OF_UPSTREAM
+
+Tim Harvey (2):
+      arm: dts: imx8mm-venice-gw7901: add digital I/O direction control GPIO's
+      arm: dts: imx8m*-venice-gw72xx: add TPM device
+
+Ye Li (4):
+      arm: imx9: Fix MMU map table overlap
+      thermal: imx_tmu: Fix TMU error on iMX8MQ
+      image-container: Fix incorrect return value
+      net: fec_mxc: Avoid enable regulator failure
+
+ arch/arm/dts/Makefile                              |   5 -
+ arch/arm/dts/imx8mm-evk.dts                        | 128 ----
+ arch/arm/dts/imx8mm-evk.dtsi                       | 615 ------------------
+ arch/arm/dts/imx8mm-venice-gw71xx-0x-u-boot.dtsi   |   7 +
+ arch/arm/dts/imx8mm-venice-gw7901-u-boot.dtsi      |  14 +
+ arch/arm/dts/imx8mn-ddr4-evk.dts                   | 160 -----
+ arch/arm/dts/imx8mn-evk.dts                        | 128 ----
+ arch/arm/dts/imx8mp-evk.dts                        | 684 --------------------
+ arch/arm/dts/imx8mp-venice-gw71xx-2x-u-boot.dtsi   |   9 +
+ arch/arm/dts/imx8mq-evk.dts                        | 712 ---------------------
+ arch/arm/mach-imx/image-container.c                |   2 +-
+ arch/arm/mach-imx/imx8/cpu.c                       |   4 +
+ arch/arm/mach-imx/imx8m/Kconfig                    |   5 +
+ arch/arm/mach-imx/imx9/soc.c                       |   2 +-
+ .../imx8qm_dmsse20_a1/imx8qm_dmsse20_a1.c          |  11 -
+ .../imx8qm_rom7720_a1/imx8qm_rom7720_a1.c          |   8 -
+ board/congatec/cgtqmx8/cgtqmx8.c                   |   7 -
+ board/freescale/imx8mq_evk/imx8mq_evk.c            |  30 -
+ board/freescale/imx8qm_mek/imx8qm_mek.c            |   8 -
+ board/freescale/imx8qxp_mek/imx8qxp_mek.c          |   8 -
+ board/liebherr/xea/spl_xea.c                       |  21 +-
+ board/liebherr/xea/xea.c                           |  49 ++
+ board/toradex/apalis-imx8/apalis-imx8.c            |   8 -
+ board/toradex/colibri-imx8x/colibri-imx8x.c        |  19 -
+ configs/colibri_imx7_defconfig                     |   1 +
+ configs/colibri_imx7_emmc_defconfig                |   2 +-
+ configs/imx28_xea_defconfig                        |   4 +
+ configs/imx28_xea_sb_defconfig                     |   1 +
+ configs/imx8mm_evk_defconfig                       |   2 +-
+ configs/imx8mm_evk_fspi_defconfig                  |   2 +-
+ configs/imx8mn_ddr4_evk_defconfig                  |   2 +-
+ configs/imx8mn_evk_defconfig                       |   2 +-
+ configs/imx8mp_evk_defconfig                       |   2 +-
+ configs/imx8mq_evk_defconfig                       |   2 +-
+ configs/phycore_pcl063_defconfig                   |   2 +-
+ configs/phycore_pcl063_ull_defconfig               |   2 +-
+ drivers/crypto/fsl/Kconfig                         |   6 +
+ drivers/crypto/fsl/jr.c                            |  19 +
+ drivers/crypto/fsl/jr.h                            |   2 +
+ drivers/net/fec_mxc.c                              |   2 +-
+ drivers/thermal/imx_tmu.c                          |   3 +
+ 41 files changed, 149 insertions(+), 2551 deletions(-)
+ delete mode 100644 arch/arm/dts/imx8mm-evk.dts
+ delete mode 100644 arch/arm/dts/imx8mm-evk.dtsi
+ delete mode 100644 arch/arm/dts/imx8mn-ddr4-evk.dts
+ delete mode 100644 arch/arm/dts/imx8mn-evk.dts
+ delete mode 100644 arch/arm/dts/imx8mp-evk.dts
+ delete mode 100644 arch/arm/dts/imx8mq-evk.dts
