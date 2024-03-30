@@ -4,61 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AA6FCD128E
-	for <u-boot@archiver.kernel.org>; Sat, 30 Mar 2024 11:01:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1C82CD128E
+	for <u-boot@archiver.kernel.org>; Sat, 30 Mar 2024 11:11:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EB5A87E53;
-	Sat, 30 Mar 2024 12:01:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 2540587FC1;
+	Sat, 30 Mar 2024 12:11:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="LcM4EIuX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hZ0YXFjp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A94487FC1; Sat, 30 Mar 2024 12:01:08 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 50D9888019; Sat, 30 Mar 2024 12:11:29 +0100 (CET)
+Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
+ [IPv6:2a00:1450:4864:20::230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A29D87DCC
- for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 12:01:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E25587DCC
+ for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 12:11:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=52ff=LE=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1711796453;
- bh=WJlvChYHVgwg7IhQmyfyg2EPRYJQGGizxi95b3v9Quk=;
- b=LcM4EIuX3faTVrPHEClRWQ8s9tHvFL20VbF4P665pTVQrhZPu1tl124DvD7bIJoyQK/815iS9
- V10oDWUriE0KzNoleUZyJqjWY4EM3/y8IZNslSYbvkkolgZ0fh8QswxKyw44ehykT6GRwqOr+lZ
- /jhNtfOeE1KRyBw2rFrNha+L4LpKJUVctrbp/aRk74JlweqFIY7Vmloo3Q02JMdlVentxb2EVJD
- ixrF4hMeIej2U3zzltdHCDSPT/582a0180gCCwqGZOuJlDu+eOhEoTUIx3Gu30ARP8eXGYByqcM
- jPrWq00JkaqA8/LWKyHrsxZwx3Zzy97rGKqS/BJVP3Ew==
-Message-ID: <44dc2249-3ec3-491b-8ce2-dc254a97ddfc@kwiboo.se>
-Date: Sat, 30 Mar 2024 12:00:46 +0100
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lj1-x230.google.com with SMTP id
+ 38308e7fff4ca-2d717603aa5so17150341fa.0
+ for <u-boot@lists.denx.de>; Sat, 30 Mar 2024 04:11:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711797086; x=1712401886; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=wZ2lnECPWSfbIBOjVFcSoERYmH2nYr8KqYSlyxFT/vs=;
+ b=hZ0YXFjpDBuFQNgvA4jEocyOHywYbnaR0M/+QqgCqx/9iatlV/kYpBYjyOh5Lelc+O
+ xh9pgccPfcfg6pAci1Mfwugb3exi4pcRz0l54jUjtXREQgr1BY2ZvVC1x40xjVZI8xiR
+ yFPhBLO6+Ue461tpEXWGMGwyq16c0EdI7yIPC7u7gDTi9Hx5Z2CFVGrwqN7oS6o0H7PW
+ Xgh7IjaaGoYFrTAHIbjjb5GgYbW06kT+YKWf/3u2NbkxDM0rzy0tmp+x1kRP0s1ZkP8z
+ 4ROJ1E/hRsAosNjwH0lF7O4GaPmQpTkO1agau93wySiMNBtvJ1EetX39XnJin4uNYxJT
+ J3tA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711797086; x=1712401886;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=wZ2lnECPWSfbIBOjVFcSoERYmH2nYr8KqYSlyxFT/vs=;
+ b=pv8Fy0oAiSb5QnCha+euHK4HQgPsprFPrUoTzRUEuXTf4h07akD4NIN+5s+UeusS2X
+ dowNf2UOlFNM2eAX58tRnSaKdcTSAK0XHTUo+b17vjml01DewytGtAxEwzPmg3dGYEW/
+ LgcZK1e15VsMonveL+nXcKuMISmgLLUuJYyg/g3ISmy28paaDC6YduCbqA0GXjkQVsRk
+ PlHXuzj1FqsQfrn3/zShOiVgo7821m8pk24mcjYko1zFdkWOLf+5+LyRvzZT7eDUEHDf
+ yjMqrWzCy9KGWOwt3SqRcCnvL6e/vlgaDKdXMc8L718KYR9/CC3j5ff/xfw8q+oE+RA9
+ ONew==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVgNFI2+U0HiRKmntIsTwtTR/H0XLGKcb3fMo/o6Eja8zpt4CfI8Kq2v4pxlnXAAhbuhyfssJ4+/6xLXUdlgLZKbZ3J/g==
+X-Gm-Message-State: AOJu0YzTHp+SqrlnIQKtYTII+gqgsd5gwCTxL/bHYMuQ11lJJgqcGRo9
+ z1EddMwloflw6vJBWZ41LZIbfR6nxKUhtoiganVOxrbbTMKeQri+
+X-Google-Smtp-Source: AGHT+IEqNtyDp3T4P0ZDlJmGt9QuQaN5QwyR48JWHpHnn0iiznpwCO6i/T8SE9/9vUcJLD4iQXMDlA==
+X-Received: by 2002:ac2:414e:0:b0:512:cc50:c3e0 with SMTP id
+ c14-20020ac2414e000000b00512cc50c3e0mr2918411lfi.52.1711797086217; 
+ Sat, 30 Mar 2024 04:11:26 -0700 (PDT)
+Received: from localhost.localdomain (109-252-14-191.nat.spd-mgts.ru.
+ [109.252.14.191]) by smtp.gmail.com with ESMTPSA id
+ o15-20020a198c0f000000b00515ac340c4asm891922lfd.179.2024.03.30.04.11.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 30 Mar 2024 04:11:25 -0700 (PDT)
+From: Maxim Moskalets <maximmosk4@gmail.com>
+X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
+To: sjg@chromium.org, trini@konsulko.com, u-boot@lists.denx.de,
+ xypron.glpk@gmx.de
+Cc: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>
+Subject: [PATCH] lib: add missing line breaks in debug messages
+Date: Sat, 30 Mar 2024 14:11:21 +0300
+Message-Id: <20240330111121.5935-1-Maxim.Moskalets@kaspersky.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 1/2] rockchip: sdram: Allow board/soc specific RAM bank logic
-To: Chris Morgan <macroalpha82@gmail.com>, Chris Morgan
- <macromorgan@hotmail.com>
-Cc: eugen.hristev@collabora.com, kever.yang@rock-chips.com,
- xypron.glpk@gmx.de, cym@rock-chips.com, philipp.tomsich@vrull.eu,
- sjg@chromium.org, trini@konsulko.com, u-boot@lists.denx.de
-References: <20240330050515.470025-1-macroalpha82@gmail.com>
- <20240330050515.470025-2-macroalpha82@gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240330050515.470025-2-macroalpha82@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 6607f0e4eaa1e9e0a464c4d2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,61 +93,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Chris,
+Add missing line breaks to improve debug log readability.
 
-On 2024-03-30 06:05, Chris Morgan wrote:
-> From: Chris Morgan <macromorgan@hotmail.com>
-> 
-> Allow individual boards or SoCs to alter the RAM bank addition logic
-> by defining a __weak function that these boards can then override
-> if needed. In the event this function fails, fallback to the default
-> detection logic.
-> 
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-> ---
->  arch/arm/mach-rockchip/sdram.c | 7 +++++++
->  1 file changed, 7 insertions(+)
-> 
-> diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
-> index 0d9a0aef6f..53aa19feca 100644
-> --- a/arch/arm/mach-rockchip/sdram.c
-> +++ b/arch/arm/mach-rockchip/sdram.c
-> @@ -35,11 +35,18 @@ struct tos_parameter_t {
->  	s64 reserve[8];
->  };
->  
-> +__weak int rk_get_ram_banks(void)
+Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+---
+ lib/rsa/rsa-verify.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-I would call this rockchip_dram_init_banksize()
-
-> +{
-> +	return -EINVAL;
-
-and return 0 in default implementation,
-
-> +}
-> +
->  int dram_init_banksize(void)
->  {
->  	size_t ram_top = (unsigned long)(gd->ram_size + CFG_SYS_SDRAM_BASE);
->  	size_t top = min((unsigned long)ram_top, (unsigned long)(gd->ram_top));
->  
-> +	if (!rk_get_ram_banks())
-> +		return 0;
-
-and something like:
-
-ret = rockchip_dram_init_banksize();
-if (ret)
-	return ret;
-
-is probably a better pattern when allowing board specific weak
-implementations.
-
-Regards,
-Jonas
-
->  #ifdef CONFIG_ARM64
->  	/* Reserve 0x200000 for ATF bl31 */
->  	gd->bd->bi_dram[0].start = 0x200000;
+diff --git a/lib/rsa/rsa-verify.c b/lib/rsa/rsa-verify.c
+index 1007b6979a..d3b4f71d6b 100644
+--- a/lib/rsa/rsa-verify.c
++++ b/lib/rsa/rsa-verify.c
+@@ -342,7 +342,7 @@ static int rsa_verify_key(struct image_sign_info *info,
+ 		return -EINVAL;
+ 	}
+ 
+-	debug("Checksum algorithm: %s", checksum->name);
++	debug("Checksum algorithm: %s\n", checksum->name);
+ 
+ 	/* Sanity check for stack size */
+ 	if (sig_len > RSA_MAX_SIG_BITS / 8) {
+@@ -444,13 +444,13 @@ static int rsa_verify_with_keynode(struct image_sign_info *info,
+ 	const char *algo;
+ 
+ 	if (node < 0) {
+-		debug("%s: Skipping invalid node", __func__);
++		debug("%s: Skipping invalid node\n", __func__);
+ 		return -EBADF;
+ 	}
+ 
+ 	algo = fdt_getprop(blob, node, "algo", NULL);
+ 	if (strcmp(info->name, algo)) {
+-		debug("%s: Wrong algo: have %s, expected %s", __func__,
++		debug("%s: Wrong algo: have %s, expected %s\n", __func__,
+ 		      info->name, algo);
+ 		return -EFAULT;
+ 	}
+@@ -470,7 +470,7 @@ static int rsa_verify_with_keynode(struct image_sign_info *info,
+ 	prop.rr = fdt_getprop(blob, node, "rsa,r-squared", NULL);
+ 
+ 	if (!prop.num_bits || !prop.modulus || !prop.rr) {
+-		debug("%s: Missing RSA key info", __func__);
++		debug("%s: Missing RSA key info\n", __func__);
+ 		return -EFAULT;
+ 	}
+ 
+-- 
+2.39.2
 
