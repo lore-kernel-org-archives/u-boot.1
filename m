@@ -4,57 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69813CD128A
-	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 20:35:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B69DCD1284
+	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 21:00:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C98388320;
-	Sun, 31 Mar 2024 22:32:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 7530787F16;
+	Sun, 31 Mar 2024 23:00:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="VmiQFk3q";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TrkP+yyV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 998E687FE3; Sun, 31 Mar 2024 22:32:13 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9A1EF87DF1; Sun, 31 Mar 2024 22:03:33 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42FC088305
- for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:31:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8DBC187D45
+ for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:03:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=3892=LG=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1711917110; bh=8CZzwwQow4zMzWaJ84q3mm3aVUq5QLX/kRw0XnFfuoU=;
- b=VmiQFk3qqS0JZ7QiFIjT0aQQi7Z0SdnkvX3nfzOn7kjIbMvRApkd+Bki/jL5yubHOtWWwODHp
- N8GvQPb85PZul+0TIf6fLSDtajcxRXgVEeSZv++ZP72tZs6ezquwcqp1LrQaz431K2hp/PZU5xV
- agyjEKr53OPzADLgf3u4XgxGNBMfZElcx9eIhqZnvRcvhrG5pgY7YGN6EuMg5xN1A9jM9T5n7Kr
- QUN08Jc6W1y8iiD85Aj9GYx08lyETLBQen3FGVwuD+kAPq9Zf4F0xMaWDmG6LbmLnwQJwqdjbQq
- +32xauxImu73AqqjaBod57RZPCvExuQyalDeYUjpcmKw==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Peter Robinson <pbrobinson@gmail.com>, Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH 30/31] rockchip: rk3399-pinebook-pro: Sync device tree from
- linux v6.8
-Date: Sun, 31 Mar 2024 20:28:36 +0000
-Message-ID: <20240331202921.262323-31-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240331202921.262323-1-jonas@kwiboo.se>
-References: <20240331202921.262323-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=eugeneuriev@gmail.com
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-516a01c8490so797896e87.1
+ for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 13:03:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711915411; x=1712520211; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vI5N3Yjv79U0WZkAOUQFKBv5htNWZMUCTL4VA/e155A=;
+ b=TrkP+yyVvTxEvVatcDDoEk505PUsbg4aob+lXOrfzVXhT7MzXuLxlzvnk1Z/o7LAlh
+ kTqXt83HYO03l0O6PL8V1Pqn1egTDbQ23pwhFoe3Ome+e+UQ68yTx0LVN3ms8OiZQbJP
+ T9sm8a5W9xy8Lx7+ETmKzVUGLq2ksdam+6f+FCUtfc3zJTliCmufO3UdU+Fttttfp8pc
+ uHDEWpEokg15ESHBUxwAyUBvQa6v3vtDpyk/p6xd8eInUQGPXrsm602Bb5henmPyyhHJ
+ Q1LELe8FhP6ZYGJIO+bpJ9LZrWiJ4tGW8juNMPfLrggiwIElnxBRNGKtITgNzwhl2+H4
+ bu3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711915411; x=1712520211;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vI5N3Yjv79U0WZkAOUQFKBv5htNWZMUCTL4VA/e155A=;
+ b=EvUZ5sxgYUUGil7cSH+cn9aZgAkRKPu+TXgwt37+9GeargjRCQtJmG38gYwfCvOSWH
+ 9TaW1c8zzW21u6tk44C0uhC3Bo6OokrS9rw/PwuvP+elMVXzGna5AnCKgNNdn+aILDjm
+ Voaal3b7XD5tXkFdJVffNdT8FEv+tYc5M6OL7pvTaioZTInpE/PMCnLU7+LmBktmgCem
+ y5rpGc6MRWK4WECzK2XH/7LXLlAw8178y/vHW4+e3brhyjuEgVBC7HQwQItL+lAzcSZa
+ xyET04Fbuqj6y0cRYkUWDD7ztugoHd7C9hdFsZ3cDfeb0knOoeHwzOkleiWkgynPUTlT
+ XPbg==
+X-Gm-Message-State: AOJu0YyI4VXzo08P2gp7wsFJq8KkKRe7vcYBrnvsrzlxi3PigOEFPjB4
+ CzPKPYJgqPbDfz/RMLmJ3ourspqUM/7Y9J+ygT/r2ezQuRfRphTP
+X-Google-Smtp-Source: AGHT+IGoC0H0rLEH5uoXEmQ4P2JeR/bRH8c2+ne8RmoixSXnX/1XDLfesRsO1O3FNj4thIe/YVppDw==
+X-Received: by 2002:a05:6512:20c9:b0:513:cfa9:be6b with SMTP id
+ u9-20020a05651220c900b00513cfa9be6bmr2461406lfr.3.1711915410658; 
+ Sun, 31 Mar 2024 13:03:30 -0700 (PDT)
+Received: from BlackProtonRN.clients.gtk.su ([185.16.100.35])
+ by smtp.gmail.com with ESMTPSA id
+ l5-20020ac25545000000b00516a08ce8f8sm425000lfk.269.2024.03.31.13.03.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 31 Mar 2024 13:03:30 -0700 (PDT)
+From: Eugene Uriev <eugeneuriev@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	Eugene Uriev <eugeneuriev@gmail.com>
+Subject: [PATCH 0/9] mcheck implementation for U-Boot
+Date: Sun, 31 Mar 2024 23:03:18 +0300
+Message-Id: <20240331200327.29141-1-eugeneuriev@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 6609c8348fc6b45ed44f74a0
+X-Mailman-Approved-At: Sun, 31 Mar 2024 23:00:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,122 +90,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sync rk3399-pinebook-pro device tree from linux v6.8.
 
-Add SF_DEFAULT_SPEED=10000000 and SPI_FLASH_SFDP_SUPPORT=y to improve
-support for booting from SPI flash.
+There was no "mcheck" for U-Boot before.
 
-Add CMD_POWEROFF=y to support poweroff using cmdline and power on using
-the pwr button on the board.
+Since U-Boot has only 1 thread, and normally makes 4000+ - 6000+
+mallocs, it's better to use havier canaries to protect heap-chunks.
+My variant uses 2x8 = 16byte-long protector. And
+the multiplier could be changed to tune speed/protection tradeoff.
+This protects not only against memset()-s, but against "near" wild
+pointers too, and makes more probable to catch "distant" ones.
 
-Remove SPL_TINY_MEMSET=y to use full memset in SPL.
+The core file of the set is included into the C-file, not complied
+separately in order to enable (potential) coexisting of
+mcheck-protectors, e.g. malloc_simple(.) and dlmalloc simultaneously.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/dts/rk3399-pinebook-pro.dts  | 24 +++++++-----------------
- configs/pinebook-pro-rk3399_defconfig |  6 ++++--
- 2 files changed, 11 insertions(+), 19 deletions(-)
+My tests were for ARM SoC, 64bit, so the patch is
+aware of alignment.
 
-diff --git a/arch/arm/dts/rk3399-pinebook-pro.dts b/arch/arm/dts/rk3399-pinebook-pro.dts
-index d6b68d77d63a..054c6a4d1a45 100644
---- a/arch/arm/dts/rk3399-pinebook-pro.dts
-+++ b/arch/arm/dts/rk3399-pinebook-pro.dts
-@@ -50,19 +50,9 @@
- 		pinctrl-0 = <&panel_en_pin>;
- 		power-supply = <&vcc3v3_panel>;
- 
--		ports {
--			#address-cells = <1>;
--			#size-cells = <0>;
--
--			port@0 {
--				reg = <0>;
--				#address-cells = <1>;
--				#size-cells = <0>;
--
--				panel_in_edp: endpoint@0 {
--					reg = <0>;
--					remote-endpoint = <&edp_out_panel>;
--				};
-+		port {
-+			panel_in_edp: endpoint {
-+				remote-endpoint = <&edp_out_panel>;
- 			};
- 		};
- 	};
-@@ -76,7 +66,7 @@
- 		pinctrl-names = "default";
- 		pinctrl-0 = <&lidbtn_pin>;
- 
--		lid {
-+		switch-lid {
- 			debounce-interval = <20>;
- 			gpios = <&gpio1 RK_PA1 GPIO_ACTIVE_LOW>;
- 			label = "Lid";
-@@ -92,7 +82,7 @@
- 		pinctrl-names = "default";
- 		pinctrl-0 = <&pwrbtn_pin>;
- 
--		power {
-+		key-power {
- 			debounce-interval = <20>;
- 			gpios = <&gpio0 RK_PA5 GPIO_ACTIVE_LOW>;
- 			label = "Power";
-@@ -675,7 +665,7 @@
- 	i2c-scl-rising-time-ns = <168>;
- 	status = "okay";
- 
--	es8316: es8316@11 {
-+	es8316: audio-codec@11 {
- 		compatible = "everest,es8316";
- 		reg = <0x11>;
- 		clocks = <&cru SCLK_I2S_8CH_OUT>;
-@@ -943,7 +933,7 @@
- 	disable-wp;
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&sdmmc_clk &sdmmc_cmd &sdmmc_bus4>;
--	sd-uhs-sdr104;
-+	sd-uhs-sdr50;
- 	vmmc-supply = <&vcc3v0_sd>;
- 	vqmmc-supply = <&vcc_sdio>;
- 	status = "okay";
-diff --git a/configs/pinebook-pro-rk3399_defconfig b/configs/pinebook-pro-rk3399_defconfig
-index dd8bc2b72cc3..8ac6ddd49dea 100644
---- a/configs/pinebook-pro-rk3399_defconfig
-+++ b/configs/pinebook-pro-rk3399_defconfig
-@@ -4,7 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
--CONFIG_SF_DEFAULT_SPEED=20000000
-+CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_SIZE=0x8000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-pinebook-pro"
-@@ -36,6 +36,7 @@ CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PCI=y
-+CONFIG_CMD_POWEROFF=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
-@@ -64,7 +65,9 @@ CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
- CONFIG_SF_DEFAULT_BUS=1
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
- CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_SILICONKAISER=y
- CONFIG_SPI_FLASH_WINBOND=y
- CONFIG_NVME_PCI=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-@@ -98,5 +101,4 @@ CONFIG_VIDEO=y
- CONFIG_DISPLAY=y
- CONFIG_VIDEO_ROCKCHIP=y
- CONFIG_DISPLAY_ROCKCHIP_EDP=y
--CONFIG_SPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
+Primary this patch is for using by developers: to verify,
+if a change doesn't break the heap integrity.
+By default the mcheck is disabled and wouldn't affect the boot.
+
+I used pedantic mode, canary=16byte, registry-size=6608.
+For my system the overhead was 230ms.
+
+I assume, the merge window coming. So I send it now.
+
+
+Eugene Uriev (9):
+  mcheck: prepare +1 tier for mcheck-wrappers, in dl-*alloc commands
+  mcheck: Use memset/memcpy instead of MALLOC_ZERO/MALLOC_COPY for
+    mcheck.
+  mcheck: introduce essentials of mcheck
+  mcheck: integrate mcheck into dlmalloc.c
+  mcheck: support memalign
+  mcheck: add pedantic mode support
+  mcheck: introduce mcheck_on_ramrelocation(.)
+  mcheck: add stats, add a comment with test results
+  mcheck: let mcheck_abortfunc_t print the pointer
+
+ common/board_f.c         |   4 +
+ common/dlmalloc.c        | 154 ++++++++++++++++----
+ common/mcheck_core.inc.h | 304 +++++++++++++++++++++++++++++++++++++++
+ include/mcheck.h         |  51 +++++++
+ 4 files changed, 488 insertions(+), 25 deletions(-)
+ create mode 100644 common/mcheck_core.inc.h
+ create mode 100644 include/mcheck.h
+
 -- 
-2.43.2
+2.25.1
 
