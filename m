@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C60AACD128A
-	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 20:32:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4149CCD128A
+	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 20:32:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F801882D4;
-	Sun, 31 Mar 2024 22:30:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 91CC0882D8;
+	Sun, 31 Mar 2024 22:31:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="oCOn/qYS";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="F+md9wRj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0D1987FC0; Sun, 31 Mar 2024 22:30:55 +0200 (CEST)
+ id 2003387FC0; Sun, 31 Mar 2024 22:30:57 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B088882D4
- for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:30:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01B94882E1
+ for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:30:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,31 +28,19 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1711917019; bh=Yx0QL8vJxcSkiombB3dCkNA8wuWBnTTX6+PKO7ns8PI=;
- b=oCOn/qYSbA3dxEj2Kg87owoDogT1XKQT3bpkxqN8Lg2NyvquOmdbBINZGRvSsJx1NKijH8jPH
- fB4rT7xVcgAJ97V95OD7mK7hlnxlRYZqLbPsJ3HlpcfVMn8Aj9x4Ge6dFV72UwULxOoDSztsL11
- gnyX1PEs5oZXl48+bmjHo66h+3Y79NaZ/9oaxz9q9fZZKpc0lxbrVwhtvCRHKcgocXOqn8Wzs9g
- wkTvnl2rDEkBNfAGG7F1yqVP/TCWZdtBLWtpnVVFALafUJJRK4O/IGG9nFxvixmld2UWIE1HrcQ
- +H16PyrzsFs6iokOKes1zrdZunh2KET/hVLIx2gWSUHQ==
+ t=1711917045; bh=DWYy2aG/eQZBAqo5JouWx9w8b9NicVWiPMOJnHefgmk=;
+ b=F+md9wRjIs3ui6o4LAeTtl4q3nEYdea4hN/XtN9pPGah87KXwqKeiAOlQQ7LD0cblz71xKGBO
+ 5HJXPj+GoLXguDNI6ss9kPiiBs6FMGkq0T8KiA9wuk/pU0LSpkxO528MP8dblee2AqiCVpOBFhK
+ xpeAC5mvUMy+t+WzB5/NtYp93q2POYNK9J7fqpb3U8cXIsFCdWxAIaRppZpIdmvNcsIe6xDRyjz
+ LpUhd9wjTf8pwuvABCqlxHX1M4TRlSNrvtnkvGC4gmQgKwYTIxYVmUMEmJCaErXWEFXgrNhI9Ed
+ ItDim0d7MjyC7BXV8vFiqc+R+khNUCJFz8aEeZvgCcaw==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>, Jagan Teki
- <jagan@amarulasolutions.com>, Peter Robinson <pbrobinson@gmail.com>, Jonas
- Karlman <jonas@kwiboo.se>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, Klaus Goger
- <klaus.goger@theobroma-systems.com>, Levin Du <djw@t-chip.com.cn>, Suniel
- Mahesh <sunil@amarulasolutions.com>, FUKAUMI Naoki <naoki@radxa.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andy Yan
- <andy.yan@rock-chips.com>, Nick Xie <nick@khadas.com>, Deepak Das
- <deepakdas.linux@gmail.com>, Alexandre Vicenzi <linux@alxd.me>, Xiaobo
- Tian <peterwillcn@gmail.com>, Christopher Obbard
- <chris.obbard@collabora.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH 10/31] rockchip: rk3399: Fix loading FIT from SD-card when
- booting from eMMC
-Date: Sun, 31 Mar 2024 20:28:16 +0000
-Message-ID: <20240331202921.262323-11-jonas@kwiboo.se>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 16/31] rockchip: rk3399-gru: Sync device tree from linux v6.8
+Date: Sun, 31 Mar 2024 20:28:22 +0000
+Message-ID: <20240331202921.262323-17-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240331202921.262323-1-jonas@kwiboo.se>
 References: <20240331202921.262323-1-jonas@kwiboo.se>
@@ -64,7 +52,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 6609c7d98fc6b45ed44f7307
+X-ForwardEmail-ID: 6609c7f38fc6b45ed44f7386
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,1095 +69,457 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When RK3399 boards run SPL from eMMC and fail to load FIT from eMMC due
-to it being missing or checksum validation fails there can be a fallback
-to read FIT from SD-card. However, without proper pinctrl configuration
-reading FIT from SD-card may fail:
+Sync rk3399-gru related device tree from linux v6.8.
 
-  U-Boot SPL 2024.04-rc4 (Mar 17 2024 - 22:54:45 +0000)
-  Trying to boot from MMC2
-  mmc_load_image_raw_sector: mmc block read error
-  Trying to boot from MMC2
-  mmc_load_image_raw_sector: mmc block read error
-  Trying to boot from MMC1
-  Card did not respond to voltage select! : -110
-  mmc_init: -95, time 12
-  spl: mmc init failed with error: -95
-  SPL: failed to boot from all boot devices (err=-6)
-  ### ERROR ### Please RESET the board ###
-
-Fix this by tagging related sdhci and sdmmc pinctrl nodes with bootph
-props. Also sort and move common nodes shared by all boards to the SoC
-u-boot.dtsi. Finally imply the SPL_DM_SEQ_ALIAS Kconfig option to enable
-it on all RK3399 boards.
+The spi_flash symbol is no longer part of upstream DT, it is re-defined
+to allow exising use in related u-boot.dtsi-files.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/rk3399-evb-u-boot.dtsi           |  1 -
- arch/arm/dts/rk3399-ficus-u-boot.dtsi         |  8 ++
- arch/arm/dts/rk3399-gru-u-boot.dtsi           | 24 ++++++
- arch/arm/dts/rk3399-nanopi4-u-boot.dtsi       | 12 +++
- arch/arm/dts/rk3399-orangepi-u-boot.dtsi      | 12 +++
- arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi  | 17 ++++-
- arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi |  2 -
- arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi   | 19 ++---
- arch/arm/dts/rk3399-roc-pc-u-boot.dtsi        | 41 ++++++----
- arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi  |  8 ++
- arch/arm/dts/rk3399-rock960-u-boot.dtsi       |  8 ++
- arch/arm/dts/rk3399-rockpro64-u-boot.dtsi     | 17 ++++-
- arch/arm/dts/rk3399-u-boot.dtsi               | 75 +++++++++++++++----
- arch/arm/mach-rockchip/Kconfig                |  1 +
- configs/chromebook_bob_defconfig              |  1 -
- configs/chromebook_kevin_defconfig            |  1 -
- configs/eaidk-610-rk3399_defconfig            |  2 +-
- configs/evb-rk3399_defconfig                  |  2 +-
- configs/ficus-rk3399_defconfig                |  2 +-
- configs/firefly-rk3399_defconfig              |  2 +-
- configs/khadas-edge-captain-rk3399_defconfig  |  2 +-
- configs/khadas-edge-rk3399_defconfig          |  2 +-
- configs/khadas-edge-v-rk3399_defconfig        |  2 +-
- configs/leez-rk3399_defconfig                 |  2 +-
- configs/nanopc-t4-rk3399_defconfig            |  4 +-
- configs/nanopi-m4-2gb-rk3399_defconfig        |  4 +-
- configs/nanopi-m4-rk3399_defconfig            |  4 +-
- configs/nanopi-m4b-rk3399_defconfig           |  4 +-
- configs/nanopi-neo4-rk3399_defconfig          |  4 +-
- configs/nanopi-r4s-rk3399_defconfig           |  4 +-
- configs/orangepi-rk3399_defconfig             |  4 +-
- configs/pinebook-pro-rk3399_defconfig         |  5 +-
- configs/pinephone-pro-rk3399_defconfig        |  3 +-
- configs/puma-rk3399_defconfig                 |  1 -
- configs/roc-pc-mezzanine-rk3399_defconfig     |  4 +-
- configs/roc-pc-rk3399_defconfig               |  4 +-
- configs/rock-4c-plus-rk3399_defconfig         |  2 +-
- configs/rock-4se-rk3399_defconfig             |  2 +-
- configs/rock-pi-4-rk3399_defconfig            |  3 +-
- configs/rock-pi-4c-rk3399_defconfig           |  2 +-
- configs/rock-pi-n10-rk3399pro_defconfig       |  2 +-
- configs/rock960-rk3399_defconfig              |  2 +-
- configs/rockpro64-rk3399_defconfig            |  5 +-
- 43 files changed, 243 insertions(+), 83 deletions(-)
+ arch/arm/dts/rk3399-gru-bob.dts         |   8 +-
+ arch/arm/dts/rk3399-gru-chromebook.dtsi | 200 +++++++++++++++++++++++-
+ arch/arm/dts/rk3399-gru-kevin.dts       |   3 +-
+ arch/arm/dts/rk3399-gru-u-boot.dtsi     |  10 +-
+ arch/arm/dts/rk3399-gru.dtsi            |  52 +++++-
+ 5 files changed, 254 insertions(+), 19 deletions(-)
 
-diff --git a/arch/arm/dts/rk3399-evb-u-boot.dtsi b/arch/arm/dts/rk3399-evb-u-boot.dtsi
-index 796ac9642399..9df4a02c3e74 100644
---- a/arch/arm/dts/rk3399-evb-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-evb-u-boot.dtsi
-@@ -38,7 +38,6 @@
+diff --git a/arch/arm/dts/rk3399-gru-bob.dts b/arch/arm/dts/rk3399-gru-bob.dts
+index e6c1c94c8d69..1cba1d857c96 100644
+--- a/arch/arm/dts/rk3399-gru-bob.dts
++++ b/arch/arm/dts/rk3399-gru-bob.dts
+@@ -16,6 +16,7 @@
+ 		     "google,bob-rev7", "google,bob-rev6",
+ 		     "google,bob-rev5", "google,bob-rev4",
+ 		     "google,bob", "google,gru", "rockchip,rk3399";
++	chassis-type = "convertible";
+ 
+ 	edp_panel: edp-panel {
+ 		compatible = "boe,nv101wxmn51";
+@@ -69,7 +70,7 @@
+ &spi0 {
+ 	status = "okay";
+ 
+-	cr50@0 {
++	tpm@0 {
+ 		compatible = "google,cr50";
+ 		reg = <0>;
+ 		interrupt-parent = <&gpio0>;
+@@ -87,3 +88,8 @@
+ 		};
+ 	};
+ };
++
++&wlan_host_wake_l {
++	/* Kevin has an external pull up, but Bob does not. */
++	rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
++};
+diff --git a/arch/arm/dts/rk3399-gru-chromebook.dtsi b/arch/arm/dts/rk3399-gru-chromebook.dtsi
+index 1384dabbdf40..cacbad35cfc8 100644
+--- a/arch/arm/dts/rk3399-gru-chromebook.dtsi
++++ b/arch/arm/dts/rk3399-gru-chromebook.dtsi
+@@ -198,7 +198,6 @@
+ 		power-supply = <&pp3300_disp>;
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&bl_en>;
+-		pwm-delay-us = <10000>;
+ 	};
+ 
+ 	gpio_keys: gpio-keys {
+@@ -206,7 +205,7 @@
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&bt_host_wake_l>;
+ 
+-		wake_on_bt: wake-on-bt {
++		wake_on_bt: key-wake-on-bt {
+ 			label = "Wake-on-Bluetooth";
+ 			gpios = <&gpio0 3 GPIO_ACTIVE_LOW>;
+ 			linux,code = <KEY_WAKEUP>;
+@@ -234,9 +233,24 @@
+ 	extcon = <&usbc_extcon0>, <&usbc_extcon1>;
  };
  
- &sdmmc {
--	bootph-all;
- 	bus-width = <4>;
- 	cap-mmc-highspeed;
- 	cap-sd-highspeed;
-diff --git a/arch/arm/dts/rk3399-ficus-u-boot.dtsi b/arch/arm/dts/rk3399-ficus-u-boot.dtsi
-index 67b63a835238..d821cabfaa67 100644
---- a/arch/arm/dts/rk3399-ficus-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-ficus-u-boot.dtsi
-@@ -5,3 +5,11 @@
++&dmc {
++	center-supply = <&ppvar_centerlogic>;
++	rockchip,pd-idle-dis-freq-hz = <800000000>;
++	rockchip,sr-idle-dis-freq-hz = <800000000>;
++	rockchip,sr-mc-gate-idle-dis-freq-hz = <800000000>;
++};
++
+ &edp {
+ 	status = "okay";
  
- #include "rk3399-u-boot.dtsi"
- #include "rk3399-sdram-ddr3-1600.dtsi"
++	/*
++	 * eDP PHY/clk don't sync reliably at anything other than 24 MHz. Only
++	 * set this here, because rk3399-gru.dtsi ensures we can generate this
++	 * off GPLL=600MHz, whereas some other RK3399 boards may not.
++	 */
++	assigned-clocks = <&cru PCLK_EDP>;
++	assigned-clock-rates = <24000000>;
 +
-+&pcfg_pull_none_18ma {
-+	bootph-pre-ram;
+ 	ports {
+ 		edp_out: port@1 {
+ 			reg = <1>;
+@@ -251,6 +265,182 @@
+ 	};
+ };
+ 
++&gpio0 {
++	gpio-line-names = /* GPIO0 A 0-7 */
++			  "AP_RTC_CLK_IN",
++			  "EC_AP_INT_L",
++			  "PP1800_AUDIO_EN",
++			  "BT_HOST_WAKE_L",
++			  "WLAN_MODULE_PD_L",
++			  "H1_INT_OD_L",
++			  "CENTERLOGIC_DVS_PWM",
++			  "",
++
++			  /* GPIO0 B 0-4 */
++			  "WIFI_HOST_WAKE_L",
++			  "PMUIO2_33_18_L",
++			  "PP1500_EN",
++			  "AP_EC_WARM_RESET_REQ",
++			  "PP3000_EN";
 +};
 +
-+&pcfg_pull_up_8ma {
-+	bootph-pre-ram;
++&gpio1 {
++	gpio-line-names = /* GPIO1 A 0-7 */
++			  "",
++			  "",
++			  "SPK_PA_EN",
++			  "",
++			  "TRACKPAD_INT_L",
++			  "AP_EC_S3_S0_L",
++			  "AP_EC_OVERTEMP",
++			  "AP_SPI_FLASH_MISO",
++
++			  /* GPIO1 B 0-7 */
++			  "AP_SPI_FLASH_MOSI_R",
++			  "AP_SPI_FLASH_CLK_R",
++			  "AP_SPI_FLASH_CS_L_R",
++			  "WLAN_MODULE_RESET_L",
++			  "WIFI_DISABLE_L",
++			  "MIC_INT",
++			  "",
++			  "AP_I2C_DVS_SDA",
++
++			  /* GPIO1 C 0-7 */
++			  "AP_I2C_DVS_SCL",
++			  "AP_BL_EN",
++			  /*
++			   * AP_FLASH_WP is crossystem ABI. Schematics call it
++			   * AP_FW_WP or CPU1_FW_WP, depending on the variant.
++			   */
++			  "AP_FLASH_WP",
++			  "LITCPU_DVS_PWM",
++			  "AP_I2C_AUDIO_SDA",
++			  "AP_I2C_AUDIO_SCL",
++			  "",
++			  "HEADSET_INT_L";
 +};
++
++&gpio2 {
++	gpio-line-names = /* GPIO2 A 0-7 */
++			  "",
++			  "",
++			  "SD_IO_PWR_EN",
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++
++			  /* GPIO2 B 0-7 */
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++
++			  /* GPIO2 C 0-7 */
++			  "",
++			  "",
++			  "",
++			  "",
++			  "AP_SPI_EC_MISO",
++			  "AP_SPI_EC_MOSI",
++			  "AP_SPI_EC_CLK",
++			  "AP_SPI_EC_CS_L",
++
++			  /* GPIO2 D 0-4 */
++			  "BT_DEV_WAKE_L",
++			  "",
++			  "WIFI_PCIE_CLKREQ_L",
++			  "WIFI_PERST_L",
++			  "SD_PWR_3000_1800_L";
++};
++
++&gpio3 {
++	gpio-line-names = /* GPIO3 A 0-7 */
++			  "",
++			  "",
++			  "",
++			  "",
++			  "AP_SPI_TPM_MISO",
++			  "AP_SPI_TPM_MOSI_R",
++			  "AP_SPI_TPM_CLK_R",
++			  "AP_SPI_TPM_CS_L_R",
++
++			  /* GPIO3 B 0-7 */
++			  "EC_IN_RW",
++			  "",
++			  "AP_I2C_TP_SDA",
++			  "AP_I2C_TP_SCL",
++			  "AP_I2C_TP_PU_EN",
++			  "TOUCH_INT_L",
++			  "",
++			  "",
++
++			  /* GPIO3 C 0-7 */
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++
++			  /* GPIO3 D 0-7 */
++			  "I2S0_SCLK",
++			  "I2S0_LRCK_RX",
++			  "I2S0_LRCK_TX",
++			  "I2S0_SDI_0",
++			  "I2S0_SDI_1",
++			  "",
++			  "I2S0_SDO_1",
++			  "I2S0_SDO_0";
++};
++
++&gpio4 {
++	gpio-line-names = /* GPIO4 A 0-7 */
++			  "I2S_MCLK",
++			  "AP_I2C_MIC_SDA",
++			  "AP_I2C_MIC_SCL",
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++
++			  /* GPIO4 B 0-7 */
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++			  "",
++
++			  /* GPIO4 C 0-7 */
++			  "AP_I2C_TS_SDA",
++			  "AP_I2C_TS_SCL",
++			  "GPU_DVS_PWM",
++			  "UART_DBG_TX_AP_RX",
++			  "UART_AP_TX_DBG_RX",
++			  "",
++			  "BIGCPU_DVS_PWM",
++			  "EDP_HPD_3V0",
++
++			  /* GPIO4 D 0-5 */
++			  "SD_CARD_DET_L",
++			  "USB_DP_HPD",
++			  "TOUCH_RESET_L",
++			  "PP3300_DISP_EN",
++			  "",
++			  "SD_SLOT_PWR_EN";
++};
++
+ ap_i2c_mic: &i2c1 {
+ 	status = "okay";
+ 
+@@ -286,7 +476,7 @@ ap_i2c_tp: &i2c5 {
+ };
+ 
+ &cros_ec {
+-	cros_ec_pwm: ec-pwm {
++	cros_ec_pwm: pwm {
+ 		compatible = "google,cros-ec-pwm";
+ 		#pwm-cells = <1>;
+ 	};
+@@ -319,8 +509,7 @@ ap_i2c_tp: &i2c5 {
+ &pci_rootport {
+ 	mvl_wifi: wifi@0,0 {
+ 		compatible = "pci1b4b,2b42";
+-		reg = <0x83010000 0x0 0x00000000 0x0 0x00100000
+-		       0x83010000 0x0 0x00100000 0x0 0x00100000>;
++		reg = <0x0000 0x0 0x0 0x0 0x0>;
+ 		interrupt-parent = <&gpio0>;
+ 		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
+ 		pinctrl-names = "default";
+@@ -395,6 +584,7 @@ ap_i2c_tp: &i2c5 {
+ 	};
+ 
+ 	wlan_host_wake_l: wlan-host-wake-l {
++		/* Kevin has an external pull up, but Bob does not */
+ 		rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+ 	};
+ };
+diff --git a/arch/arm/dts/rk3399-gru-kevin.dts b/arch/arm/dts/rk3399-gru-kevin.dts
+index 2bbef9fcbe27..2cc9b3386c16 100644
+--- a/arch/arm/dts/rk3399-gru-kevin.dts
++++ b/arch/arm/dts/rk3399-gru-kevin.dts
+@@ -24,6 +24,7 @@
+ 		     "google,kevin-rev9", "google,kevin-rev8",
+ 		     "google,kevin-rev7", "google,kevin-rev6",
+ 		     "google,kevin", "google,gru", "rockchip,rk3399";
++	chassis-type = "convertible";
+ 
+ 	/* Power tree */
+ 
+@@ -91,7 +92,7 @@
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&bt_host_wake_l>, <&cpu1_pen_eject>;
+ 
+-	pen-insert {
++	switch-pen-insert {
+ 		label = "Pen Insert";
+ 		/* Insert = low, eject = high */
+ 		gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
 diff --git a/arch/arm/dts/rk3399-gru-u-boot.dtsi b/arch/arm/dts/rk3399-gru-u-boot.dtsi
-index b1604a6872c0..0cc40eb6d6f6 100644
+index 0cc40eb6d6f6..6bdc892bd913 100644
 --- a/arch/arm/dts/rk3399-gru-u-boot.dtsi
 +++ b/arch/arm/dts/rk3399-gru-u-boot.dtsi
-@@ -54,6 +54,30 @@
- 	enable-gpios = <&gpio2 2 GPIO_ACTIVE_HIGH>;
+@@ -78,12 +78,14 @@
+ 	/delete-property/ bootph-pre-ram;
  };
  
-+&sdhci {
-+	/delete-property/ bootph-pre-ram;
-+};
-+
-+&sdmmc {
-+	/delete-property/ bootph-pre-ram;
-+};
-+
-+&sdmmc_bus4 {
-+	/delete-property/ bootph-pre-ram;
-+};
-+
-+&sdmmc_cd {
-+	/delete-property/ bootph-pre-ram;
-+};
-+
-+&sdmmc_clk {
-+	/delete-property/ bootph-pre-ram;
-+};
-+
-+&sdmmc_cmd {
-+	/delete-property/ bootph-pre-ram;
++&spi1 {
++	spi_flash: flash@0 {
++		bootph-all;
++	};
 +};
 +
  &spi5 {
  	spi-activate-delay = <100>;
  	spi-max-frequency = <3000000>;
-diff --git a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-index a126bbaf086f..e0d7a518dfc2 100644
---- a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-@@ -5,6 +5,18 @@
- 
- #include "rk3399-u-boot.dtsi"
- 
-+&gpio0 {
-+	bootph-pre-ram;
-+};
-+
- &sdmmc {
- 	pinctrl-0 = <&sdmmc_bus4 &sdmmc_clk &sdmmc_cmd &sdmmc_cd>;
+ 	spi-deactivate-delay = <200>;
  };
-+
-+&sdmmc0_pwr_h {
-+	bootph-pre-ram;
-+};
-+
-+&vcc3v0_sd {
-+	bootph-pre-ram;
-+};
-diff --git a/arch/arm/dts/rk3399-orangepi-u-boot.dtsi b/arch/arm/dts/rk3399-orangepi-u-boot.dtsi
-index d4327ea607c4..b7452eca2254 100644
---- a/arch/arm/dts/rk3399-orangepi-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-orangepi-u-boot.dtsi
-@@ -6,6 +6,18 @@
- #include "rk3399-u-boot.dtsi"
- #include "rk3399-sdram-ddr3-1333.dtsi"
- 
-+&gpio0 {
-+	bootph-pre-ram;
-+};
-+
-+&sdmmc0_pwr_h {
-+	bootph-pre-ram;
-+};
-+
-+&vcc3v0_sd {
-+	bootph-pre-ram;
-+};
-+
- &vdd_log {
- 	regulator-init-microvolt = <950000>;
- };
-diff --git a/arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi b/arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi
-index 83b0c44e9ec5..2341db444ef3 100644
---- a/arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi
-@@ -10,18 +10,29 @@
- 	rockchip,panel = <&edp_panel>;
- };
- 
-+&gpio0 {
-+	bootph-pre-ram;
-+};
-+
- &sdhci {
- 	max-frequency = <25000000>;
--	bootph-all;
- };
- 
- &sdmmc {
- 	max-frequency = <20000000>;
--	bootph-all;
-+};
-+
-+&sdmmc0_pwr_h_pin {
-+	bootph-pre-ram;
- };
- 
- &spiflash {
--	bootph-all;
-+	bootph-pre-ram;
-+	bootph-some-ram;
-+};
-+
-+&vcc3v0_sd {
-+	bootph-pre-ram;
- };
- 
- &vdd_log {
-diff --git a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-index e29757590611..b8f95b86d86b 100644
---- a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-@@ -12,10 +12,8 @@
- 
- &sdhci {
- 	max-frequency = <25000000>;
--	bootph-all;
- };
- 
- &sdmmc {
- 	max-frequency = <20000000>;
--	bootph-all;
- };
-diff --git a/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi b/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi
-index 2b3ea6da88db..f48d395f972a 100644
---- a/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi
-@@ -87,26 +87,27 @@
- 	bootph-all;
- };
- 
-+&haikou_pin_hog {
-+	bootph-all;
-+};
-+
- &norflash {
+-
+-&spi_flash {
 -	bootph-all;
 -};
--
--&pcfg_pull_none {
--	bootph-all;
-+	bootph-pre-ram;
-+	bootph-some-ram;
- };
+diff --git a/arch/arm/dts/rk3399-gru.dtsi b/arch/arm/dts/rk3399-gru.dtsi
+index b80f19066b57..d90fe4d40d48 100644
+--- a/arch/arm/dts/rk3399-gru.dtsi
++++ b/arch/arm/dts/rk3399-gru.dtsi
+@@ -250,7 +250,7 @@
+ 		pinctrl-0 = <&sd_io_pwr_en &sd_pwr_1800_sel>;
  
--&pcfg_pull_up {
-+&uart0 {
- 	bootph-all;
- };
+ 		enable-active-high;
+-		enable-gpio = <&gpio2 2 GPIO_ACTIVE_HIGH>;
++		enable-gpios = <&gpio2 2 GPIO_ACTIVE_HIGH>;
+ 		gpios = <&gpio2 28 GPIO_ACTIVE_HIGH>;
+ 		states = <1800000 0x1>,
+ 			 <3000000 0x0>;
+@@ -286,7 +286,7 @@
  
--&sdmmc_bus4 {
-+&uart0_cts {
- 	bootph-all;
- };
- 
--&sdmmc_clk {
-+&uart0_rts {
- 	bootph-all;
- };
- 
--&sdmmc_cmd {
-+&uart0_xfer {
- 	bootph-all;
- };
-diff --git a/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi b/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-index e390cf3abab5..aecf7dbe383c 100644
---- a/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-@@ -32,25 +32,38 @@
- 	vin-supply = <&vcc_vbus_typec0>;
- };
- 
-+&gpio4 {
-+	bootph-pre-ram;
-+};
-+
- &spi1 {
--	spi_flash: flash@0 {
--		bootph-all;
-+	flash@0 {
-+		bootph-pre-ram;
-+		bootph-some-ram;
+ 	sound: sound {
+ 		compatible = "rockchip,rk3399-gru-sound";
+-		rockchip,cpu = <&i2s0 &i2s2>;
++		rockchip,cpu = <&i2s0 &spdif>;
  	};
  };
  
-+&vcc3v0_sd {
-+	bootph-pre-ram;
-+};
-+
-+&vcc3v0_sd_en {
-+	bootph-pre-ram;
-+};
-+
-+&vcc5v0_host {
-+	regulator-always-on;
-+};
-+
-+&vcc_sdio {
-+	regulator-always-on;
-+};
-+
-+&vcc_sys {
-+	regulator-always-on;
-+};
-+
- &vdd_log {
- 	regulator-min-microvolt = <430000>;
- 	regulator-init-microvolt = <950000>;
- };
--
--&vcc5v0_host {
--	regulator-always-on;
--};
--
--&vcc_sys {
--	regulator-always-on;
--};
--
--&vcc_sdio {
--	regulator-always-on;
--};
-diff --git a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-index 5c1c451b8f85..9785b97b9eea 100644
---- a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-@@ -3,3 +3,11 @@
-  * Copyright (c) 2023 Radxa Limited
-  */
- #include "rk3399-rock-pi-4-u-boot.dtsi"
-+
-+&pcfg_pull_none_18ma {
-+	bootph-pre-ram;
-+};
-+
-+&pcfg_pull_up_8ma {
-+	bootph-pre-ram;
-+};
-diff --git a/arch/arm/dts/rk3399-rock960-u-boot.dtsi b/arch/arm/dts/rk3399-rock960-u-boot.dtsi
-index 55716ba4df73..b1db07a107ec 100644
---- a/arch/arm/dts/rk3399-rock960-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-rock960-u-boot.dtsi
-@@ -19,3 +19,11 @@
- 		vin-supply = <&vcc5v0_sys>;
- 	};
- };
-+
-+&pcfg_pull_none_18ma {
-+	bootph-pre-ram;
-+};
-+
-+&pcfg_pull_up_8ma {
-+	bootph-pre-ram;
-+};
-diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-index b15e5392c3cf..43b67991fe5a 100644
---- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-@@ -26,8 +26,10 @@
-                         };
-                 };
-         };
-+};
- 
--
-+&gpio0 {
-+	bootph-pre-ram;
+@@ -373,6 +373,34 @@
+ 		<200000000>;
  };
  
- &sdhci {
-@@ -35,12 +37,21 @@
- 	mmc-ddr-1_8v;
- };
- 
-+&sdmmc0_pwr_h {
-+	bootph-pre-ram;
++&dfi {
++	status = "okay";
 +};
 +
- &spi1 {
--	spi_flash: flash@0 {
--		bootph-all;
-+	flash@0 {
-+		bootph-pre-ram;
-+		bootph-some-ram;
- 	};
- };
- 
-+&vcc3v0_sd {
-+	bootph-pre-ram;
++&dmc {
++	status = "okay";
++
++	rockchip,pd-idle-ns = <160>;
++	rockchip,sr-idle-ns = <10240>;
++	rockchip,sr-mc-gate-idle-ns = <40960>;
++	rockchip,srpd-lite-idle-ns = <61440>;
++	rockchip,standby-idle-ns = <81920>;
++
++	rockchip,ddr3_odt_dis_freq = <666000000>;
++	rockchip,lpddr3_odt_dis_freq = <666000000>;
++	rockchip,lpddr4_odt_dis_freq = <666000000>;
++
++	rockchip,sr-mc-gate-idle-dis-freq-hz = <1000000000>;
++	rockchip,srpd-lite-idle-dis-freq-hz = <0>;
++	rockchip,standby-idle-dis-freq-hz = <928000000>;
 +};
 +
- &vdd_center {
- 	regulator-min-microvolt = <950000>;
- 	regulator-max-microvolt = <950000>;
-diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
-index fe045ca81749..69e6b808a69b 100644
---- a/arch/arm/dts/rk3399-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-u-boot.dtsi
-@@ -94,13 +94,22 @@
- };
- 
++&dmc_opp_table {
++	opp03 {
++		opp-suspend;
++	};
++};
++
  &emmc_phy {
--	bootph-all;
-+	bootph-pre-ram;
-+	bootph-some-ram;
+ 	status = "okay";
+ };
+@@ -437,10 +465,6 @@ ap_i2c_audio: &i2c8 {
+ 	status = "okay";
  };
  
- &grf {
- 	bootph-all;
- };
- 
-+&pcfg_pull_none {
-+	bootph-all;
-+};
-+
-+&pcfg_pull_up {
-+	bootph-all;
-+};
-+
- &pinctrl {
- 	bootph-all;
- };
-@@ -109,47 +118,81 @@
- 	bootph-all;
- };
- 
--&pmugrf {
--	bootph-all;
+-&i2s2 {
+-	status = "okay";
 -};
 -
--&pmu {
--	bootph-all;
--};
--
- &pmucru {
- 	bootph-all;
+ &io_domains {
+ 	status = "okay";
+ 
+@@ -461,10 +485,11 @@ ap_i2c_audio: &i2c8 {
+ 	vpcie0v9-supply = <&pp900_pcie>;
+ 
+ 	pci_rootport: pcie@0,0 {
+-		reg = <0x83000000 0x0 0x00000000 0x0 0x00000000>;
++		reg = <0x0000 0 0 0 0>;
+ 		#address-cells = <3>;
+ 		#size-cells = <2>;
+ 		ranges;
++		device_type = "pci";
+ 	};
  };
  
-+&pmugrf {
-+	bootph-all;
-+};
-+
- &sdhci {
-+	bootph-pre-ram;
-+	bootph-some-ram;
- 	max-frequency = <200000000>;
--	bootph-all;
-+
-+	/* mmc to sram can't do dma, prevent aborts transferring TF-A parts */
- 	u-boot,spl-fifo-mode;
+@@ -537,13 +562,24 @@ ap_i2c_audio: &i2c8 {
+ 	vqmmc-supply = <&ppvar_sd_card_io>;
  };
  
- &sdmmc {
--	bootph-all;
-+	bootph-pre-ram;
-+	bootph-some-ram;
- 
- 	/* mmc to sram can't do dma, prevent aborts transferring TF-A parts */
- 	u-boot,spl-fifo-mode;
- };
- 
-+&sdmmc_bus4 {
-+	bootph-pre-ram;
-+};
++&spdif {
++	status = "okay";
 +
-+&sdmmc_cd {
-+	bootph-pre-ram;
-+};
-+
-+&sdmmc_clk {
-+	bootph-pre-ram;
-+};
-+
-+&sdmmc_cmd {
-+	bootph-pre-ram;
++	/*
++	 * SPDIF is routed internally to DP; we either don't use these pins, or
++	 * mux them to something else.
++	 */
++	/delete-property/ pinctrl-0;
++	/delete-property/ pinctrl-names;
 +};
 +
  &spi1 {
--	bootph-all;
-+	bootph-pre-ram;
-+	bootph-some-ram;
- };
+ 	status = "okay";
  
--&uart0 {
--	bootph-all;
-+&spi1_clk {
-+	bootph-pre-ram;
-+};
-+
-+&spi1_cs0 {
-+	bootph-pre-ram;
-+};
-+
-+&spi1_rx {
-+	bootph-pre-ram;
-+};
-+
-+&spi1_tx {
-+	bootph-pre-ram;
- };
+ 	pinctrl-names = "default", "sleep";
+ 	pinctrl-1 = <&spi1_sleep>;
  
- &uart2 {
- 	bootph-all;
-+	clock-frequency = <24000000>;
-+};
-+
-+&uart2c_xfer {
-+	bootph-all;
- };
+-	spi_flash: spiflash@0 {
++	flash@0 {
+ 		compatible = "jedec,spi-nor";
+ 		reg = <0>;
  
- &vopb {
--	bootph-all;
-+	bootph-some-ram;
- };
- 
- &vopl {
--	bootph-all;
-+	bootph-some-ram;
- };
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index bc03d69a7f5c..1b9bfa313fc0 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -276,6 +276,7 @@ config ROCKCHIP_RK3399
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply ROCKCHIP_EFUSE
- 	imply ROCKCHIP_SDRAM_COMMON
-+	imply SPL_DM_SEQ_ALIAS
- 	imply SPL_FIT_SIGNATURE
- 	imply SPL_ROCKCHIP_COMMON_BOARD
- 	imply SYS_BOOTCOUNT_SINGLEWORD if BOOTCOUNT_LIMIT
-diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
-index 6e203a6cf0e1..7022ee51e6c7 100644
---- a/configs/chromebook_bob_defconfig
-+++ b/configs/chromebook_bob_defconfig
-@@ -61,7 +61,6 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_I2C_CROS_EC_TUNNEL=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
-index e3d16f44d62a..57d43677eb00 100644
---- a/configs/chromebook_kevin_defconfig
-+++ b/configs/chromebook_kevin_defconfig
-@@ -62,7 +62,6 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_I2C_CROS_EC_TUNNEL=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-diff --git a/configs/eaidk-610-rk3399_defconfig b/configs/eaidk-610-rk3399_defconfig
-index 4d8b495ccfec..eba6f90c605b 100644
---- a/configs/eaidk-610-rk3399_defconfig
-+++ b/configs/eaidk-610-rk3399_defconfig
-@@ -25,7 +25,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
-diff --git a/configs/evb-rk3399_defconfig b/configs/evb-rk3399_defconfig
-index c4936768ffb6..afb79987464f 100644
---- a/configs/evb-rk3399_defconfig
-+++ b/configs/evb-rk3399_defconfig
-@@ -27,7 +27,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
-diff --git a/configs/ficus-rk3399_defconfig b/configs/ficus-rk3399_defconfig
-index 3bcd0fd66b91..f4e3ebba8f46 100644
---- a/configs/ficus-rk3399_defconfig
-+++ b/configs/ficus-rk3399_defconfig
-@@ -25,7 +25,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
-diff --git a/configs/firefly-rk3399_defconfig b/configs/firefly-rk3399_defconfig
-index 8f68ffbd3a49..db98926b627a 100644
---- a/configs/firefly-rk3399_defconfig
-+++ b/configs/firefly-rk3399_defconfig
-@@ -29,7 +29,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
-diff --git a/configs/khadas-edge-captain-rk3399_defconfig b/configs/khadas-edge-captain-rk3399_defconfig
-index 310250ed4a52..230b9d796442 100644
---- a/configs/khadas-edge-captain-rk3399_defconfig
-+++ b/configs/khadas-edge-captain-rk3399_defconfig
-@@ -27,7 +27,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
-diff --git a/configs/khadas-edge-rk3399_defconfig b/configs/khadas-edge-rk3399_defconfig
-index 3fe5542d1256..9f13cbf58398 100644
---- a/configs/khadas-edge-rk3399_defconfig
-+++ b/configs/khadas-edge-rk3399_defconfig
-@@ -27,7 +27,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
-diff --git a/configs/khadas-edge-v-rk3399_defconfig b/configs/khadas-edge-v-rk3399_defconfig
-index 4b41454d710d..abc4f2054cfd 100644
---- a/configs/khadas-edge-v-rk3399_defconfig
-+++ b/configs/khadas-edge-v-rk3399_defconfig
-@@ -27,7 +27,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_NET_RANDOM_ETHADDR=y
-diff --git a/configs/leez-rk3399_defconfig b/configs/leez-rk3399_defconfig
-index 2831cfb36689..13453e523444 100644
---- a/configs/leez-rk3399_defconfig
-+++ b/configs/leez-rk3399_defconfig
-@@ -25,7 +25,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
-diff --git a/configs/nanopc-t4-rk3399_defconfig b/configs/nanopc-t4-rk3399_defconfig
-index cdfacb66e678..89c36e273a9b 100644
---- a/configs/nanopc-t4-rk3399_defconfig
-+++ b/configs/nanopc-t4-rk3399_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopc-t4"
-@@ -28,7 +29,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
-@@ -42,6 +43,7 @@ CONFIG_GMAC_ROCKCHIP=y
- CONFIG_NVME_PCI=y
- CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
-diff --git a/configs/nanopi-m4-2gb-rk3399_defconfig b/configs/nanopi-m4-2gb-rk3399_defconfig
-index 51596f57ae35..eb1d2c1f51fc 100644
---- a/configs/nanopi-m4-2gb-rk3399_defconfig
-+++ b/configs/nanopi-m4-2gb-rk3399_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-m4-2gb"
-@@ -25,7 +26,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
-@@ -38,6 +39,7 @@ CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
- CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
-diff --git a/configs/nanopi-m4-rk3399_defconfig b/configs/nanopi-m4-rk3399_defconfig
-index 2af84fb6ff17..bc0b90b3d861 100644
---- a/configs/nanopi-m4-rk3399_defconfig
-+++ b/configs/nanopi-m4-rk3399_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-m4"
-@@ -25,7 +26,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
-@@ -38,6 +39,7 @@ CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
- CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
-diff --git a/configs/nanopi-m4b-rk3399_defconfig b/configs/nanopi-m4b-rk3399_defconfig
-index 1b76f98e0df7..678f4d9d823f 100644
---- a/configs/nanopi-m4b-rk3399_defconfig
-+++ b/configs/nanopi-m4b-rk3399_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-m4b"
-@@ -25,7 +26,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
-@@ -38,6 +39,7 @@ CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
- CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
-diff --git a/configs/nanopi-neo4-rk3399_defconfig b/configs/nanopi-neo4-rk3399_defconfig
-index c176c5a12111..d9b7a90e8402 100644
---- a/configs/nanopi-neo4-rk3399_defconfig
-+++ b/configs/nanopi-neo4-rk3399_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-neo4"
-@@ -25,7 +26,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
-@@ -38,6 +39,7 @@ CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
- CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
-diff --git a/configs/nanopi-r4s-rk3399_defconfig b/configs/nanopi-r4s-rk3399_defconfig
-index ea01d323541b..1fcccf2bae6e 100644
---- a/configs/nanopi-r4s-rk3399_defconfig
-+++ b/configs/nanopi-r4s-rk3399_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-r4s"
-@@ -25,7 +26,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
-@@ -38,6 +39,7 @@ CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
- CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM_ROCKCHIP_LPDDR4=y
-diff --git a/configs/orangepi-rk3399_defconfig b/configs/orangepi-rk3399_defconfig
-index c6a92b2decf3..703732ad15f0 100644
---- a/configs/orangepi-rk3399_defconfig
-+++ b/configs/orangepi-rk3399_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-orangepi"
-@@ -25,7 +26,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
-@@ -38,6 +39,7 @@ CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
- CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
-diff --git a/configs/pinebook-pro-rk3399_defconfig b/configs/pinebook-pro-rk3399_defconfig
-index e4aad1b710cb..dd8bc2b72cc3 100644
---- a/configs/pinebook-pro-rk3399_defconfig
-+++ b/configs/pinebook-pro-rk3399_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_ENV_SIZE=0x8000
-@@ -41,10 +42,9 @@ CONFIG_CMD_TIME=y
- CONFIG_CMD_PMIC=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_LED=y
-@@ -72,6 +72,7 @@ CONFIG_PHY_ROCKCHIP_TYPEC=y
- CONFIG_DM_PMIC_FAN53555=y
- CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM_ROCKCHIP_LPDDR4=y
-diff --git a/configs/pinephone-pro-rk3399_defconfig b/configs/pinephone-pro-rk3399_defconfig
-index 285c47d76b6e..c36898364b5d 100644
---- a/configs/pinephone-pro-rk3399_defconfig
-+++ b/configs/pinephone-pro-rk3399_defconfig
-@@ -40,10 +40,9 @@ CONFIG_CMD_TIME=y
- CONFIG_CMD_PMIC=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_LED=y
-diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
-index fe7aac791271..cc3d2cf3755d 100644
---- a/configs/puma-rk3399_defconfig
-+++ b/configs/puma-rk3399_defconfig
-@@ -61,7 +61,6 @@ CONFIG_ENV_SPI_MAX_HZ=50000000
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
- CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG=y
--CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_GPIO_HOG=y
- CONFIG_SPL_GPIO_HOG=y
- CONFIG_ROCKCHIP_GPIO=y
-diff --git a/configs/roc-pc-mezzanine-rk3399_defconfig b/configs/roc-pc-mezzanine-rk3399_defconfig
-index 1ff4e15c8c10..e13356faabbc 100644
---- a/configs/roc-pc-mezzanine-rk3399_defconfig
-+++ b/configs/roc-pc-mezzanine-rk3399_defconfig
-@@ -38,10 +38,9 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MMC_DW=y
-@@ -57,6 +56,7 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PHY_ROCKCHIP_TYPEC=y
- CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- # CONFIG_RAM_ROCKCHIP_DEBUG is not set
-diff --git a/configs/roc-pc-rk3399_defconfig b/configs/roc-pc-rk3399_defconfig
-index 5d6e6b17091f..dee342898d1f 100644
---- a/configs/roc-pc-rk3399_defconfig
-+++ b/configs/roc-pc-rk3399_defconfig
-@@ -38,10 +38,9 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
- CONFIG_MMC_DW=y
-@@ -56,6 +55,7 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PHY_ROCKCHIP_TYPEC=y
- CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- # CONFIG_RAM_ROCKCHIP_DEBUG is not set
-diff --git a/configs/rock-4c-plus-rk3399_defconfig b/configs/rock-4c-plus-rk3399_defconfig
-index 6c69e8bdcb92..2024defb2bf0 100644
---- a/configs/rock-4c-plus-rk3399_defconfig
-+++ b/configs/rock-4c-plus-rk3399_defconfig
-@@ -34,7 +34,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_DFU_MMC=y
-diff --git a/configs/rock-4se-rk3399_defconfig b/configs/rock-4se-rk3399_defconfig
-index e5ed81022bd6..9b2303fdf792 100644
---- a/configs/rock-4se-rk3399_defconfig
-+++ b/configs/rock-4se-rk3399_defconfig
-@@ -33,7 +33,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_DFU_MMC=y
-diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
-index 2801becedb4b..e5a2bba8e7ff 100644
---- a/configs/rock-pi-4-rk3399_defconfig
-+++ b/configs/rock-pi-4-rk3399_defconfig
-@@ -40,10 +40,9 @@ CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_DFU_MMC=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-diff --git a/configs/rock-pi-4c-rk3399_defconfig b/configs/rock-pi-4c-rk3399_defconfig
-index 72d37bff9e9a..4a9d1c531c10 100644
---- a/configs/rock-pi-4c-rk3399_defconfig
-+++ b/configs/rock-pi-4c-rk3399_defconfig
-@@ -34,7 +34,7 @@ CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_DFU_MMC=y
-diff --git a/configs/rock-pi-n10-rk3399pro_defconfig b/configs/rock-pi-n10-rk3399pro_defconfig
-index 6889cdcbf7d8..234d0c9ab0f5 100644
---- a/configs/rock-pi-n10-rk3399pro_defconfig
-+++ b/configs/rock-pi-n10-rk3399pro_defconfig
-@@ -31,7 +31,7 @@ CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_ROCKCHIP_GPIO=y
-diff --git a/configs/rock960-rk3399_defconfig b/configs/rock960-rk3399_defconfig
-index 7a4a3df85b1b..3b5ab7dc5781 100644
---- a/configs/rock960-rk3399_defconfig
-+++ b/configs/rock960-rk3399_defconfig
-@@ -33,7 +33,7 @@ CONFIG_CMD_TIME=y
- CONFIG_CMD_PMIC=y
- CONFIG_CMD_REGULATOR=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
-diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
-index 368ef7c4b5db..173f8f75020d 100644
---- a/configs/rockpro64-rk3399_defconfig
-+++ b/configs/rockpro64-rk3399_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_SIZE=0x8000
- CONFIG_ENV_OFFSET=0x3F8000
-@@ -38,10 +39,9 @@ CONFIG_CMD_USB=y
- CONFIG_CMD_TIME=y
- CONFIG_CMD_BOOTSTAGE=y
- CONFIG_SPL_OF_CONTROL=y
--CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_SPI_FLASH=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_SATA=y
- CONFIG_SCSI_AHCI=y
- CONFIG_AHCI_PCI=y
-@@ -65,6 +65,7 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PHY_ROCKCHIP_TYPEC=y
- CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM_ROCKCHIP_LPDDR4=y
 -- 
 2.43.2
 
