@@ -4,52 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C4C1CD1284
-	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 21:35:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C627ACD128A
+	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 22:53:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC62B87FE8;
-	Sun, 31 Mar 2024 23:35:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BD2A587F77;
+	Mon,  1 Apr 2024 00:53:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="PmqbSDL0";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="TWqlhuAU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADDB887F77; Sun, 31 Mar 2024 23:35:15 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ id B5F2F87F8C; Mon,  1 Apr 2024 00:53:52 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A662486FCE
- for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 23:35:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 80F8387A0E
+ for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 00:53:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1711920912;
+ t=1711925629;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=2i/fv9kjl41Xd4Vcvnc0ZSfu+ZHPGm7SIozCMDWqbQM=;
- b=PmqbSDL0i4MrsJs8qs76i7XRwo3qfh05iaKPk7ZfbSejej/zlINsXUnb1Ox9pQJmwBJQ+C
- fWR0JsT+gQnUk8uGyrmxIzThe7trWZLF8LO8xZEpX/21uf8djythqaZiSQIVzR5fl/rgWI
- oxBMX1Sa6mm2gdthN1FTl81Yha5xunmrqLei6ycqREaX1XBHZXw94uzjsWylra+1RhPYih
- T7z6aWcCN9H+nVSKXI6jH4JXsRZdhdMJIw5rMuKPMLgu0dF3F18I00rT6k7Xl8MJ4r80a5
- T+p3PJxIbdMouQ7cend2+30Fzijy/PT5oCPh/ddKUV8N+ZnP1jTkFioIKCdK4Q==
-Date: Sun, 31 Mar 2024 23:35:12 +0200
+ bh=2K5Ot7PaiYQMO9OrLbADApiUBIq3HQK4TxK7ZJUIjpA=;
+ b=TWqlhuAUubpORUIA30Ww/RC5XSLMOIzQOHPDsrhDXSOlLNWq9K5rsOezfaXlijqvfq1rns
+ ZWRRlUBSv6t1qsKZ38ykeMZ6bPQDKYi9YfI8AO5mW2ECdsHL/cgPbFsYUvY1Jben1Eyabo
+ znfv7oOQVHQOnYMl2278Sj8RfgHeg8CRSAwS18vY7OxRICL7UTsblQEDM0t8pGFwm2R1wG
+ iVKguwxYPnbEh28GEDjrDgtsbZg5oObUVD9tTNgpsbayaOYvxZNWOC8/IepmH7WE1KU9g7
+ 5CpDT8Knju36XNoBvI5wIN8SwP4F6Q8BmKVrvKFhUA/3BCyyLVhje/CQaBUVCA==
+Date: Mon, 01 Apr 2024 00:53:47 +0200
 From: Dragan Simic <dsimic@manjaro.org>
 To: Jonas Karlman <jonas@kwiboo.se>
 Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 31/31] rockchip: rk3399-pinephone-pro: Sync device tree
- from linux v6.8
-In-Reply-To: <20240331202921.262323-32-jonas@kwiboo.se>
+ FUKAUMI Naoki <naoki@radxa.com>, Christopher Obbard
+ <chris.obbard@collabora.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 28/31] rockchip: rk3399-rock-pi-4: Sync device tree from
+ linux v6.8
+In-Reply-To: <20240331202921.262323-29-jonas@kwiboo.se>
 References: <20240331202921.262323-1-jonas@kwiboo.se>
- <20240331202921.262323-32-jonas@kwiboo.se>
-Message-ID: <8cf00667126ce32b56138608d09ea968@manjaro.org>
+ <20240331202921.262323-29-jonas@kwiboo.se>
+Message-ID: <3de901ef24bac4a84be53de528b2b766@manjaro.org>
 X-Sender: dsimic@manjaro.org
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
@@ -72,38 +74,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Jonas,
+
+Please see my comments below.
+
 On 2024-03-31 22:28, Jonas Karlman wrote:
-> Sync rk3399-pinephone-pro device tree from linux v6.8.
+> Sync rk3399-rock-pi-4 related device tree from linux v6.8.
 > 
-> Add SPI flash related node and options to support booting from SPI 
-> flash.
+> Add SPI flash related options to support booting from SPI flash.
 > 
-> Remove REGULATOR_PWM=y, board does not use pwm-regulator compatible.
+> Add AHCI=y, SCSI_AHCI=y, AHCI_PCI=y and SCSI=y to support PCIe SATA 
+> boot.
+
+As we know, these boards have no standard connectors for PCI Express
+expansion cards, which makes me wonder how many users actually use M.2
+PCI Express modules with SATA controllers on them with these boards,
+and need support for them in U-Boot?
+
+I mean, it can't hurt, but frankly, I'm not 100% sure about it.
+
+> Change to SPL_MAX_SIZE=0x40000, SPL can be up to 256 KiB.
 > 
-> Add SYS_NS16550_MEM32=y to use readl/writel for serial console.
+> Add ROCKCHIP_IODOMAIN=y to configure io-domain voltage.
+> 
+> Add PHY_REALTEK=y and DM_ETH_PHY=y to support ethernet PHY.
 > 
 > Remove SPL_TINY_MEMSET=y to use full memset in SPL.
 > 
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-Looking good to me.
+Otherwise, looking good to me.
 
 Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 
 > ---
->  arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi |  12 ++
->  arch/arm/dts/rk3399-pinephone-pro.dts         | 147 ++++++++++++++++++
->  configs/pinephone-pro-rk3399_defconfig        |   8 +-
->  3 files changed, 163 insertions(+), 4 deletions(-)
+>  arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi | 12 ++++++++++
+>  arch/arm/dts/rk3399-rock-4c-plus.dts         |  1 +
+>  arch/arm/dts/rk3399-rock-4se-u-boot.dtsi     | 12 ++++++++++
+>  arch/arm/dts/rk3399-rock-pi-4.dtsi           |  4 +++-
+>  arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi   |  7 ++++++
+>  arch/arm/dts/rk3399-rock-pi-4c.dts           | 10 ++++++++
+>  configs/rock-4c-plus-rk3399_defconfig        | 24 +++++++++++++++-----
+>  configs/rock-4se-rk3399_defconfig            | 23 +++++++++++++++++--
+>  configs/rock-pi-4-rk3399_defconfig           |  8 +++++++
+>  configs/rock-pi-4c-rk3399_defconfig          | 24 ++++++++++++++++++--
+>  10 files changed, 114 insertions(+), 11 deletions(-)
 > 
-> diff --git a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> index dcfcec4f3072..6a248691e29d 100644
-> --- a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> @@ -13,3 +13,15 @@
->  &sdmmc {
->  	max-frequency = <20000000>;
+> diff --git a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+> b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+> index 9785b97b9eea..b5ee644a83dd 100644
+> --- a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
+> @@ -11,3 +11,15 @@
+>  &pcfg_pull_up_8ma {
+>  	bootph-pre-ram;
 >  };
 > +
 > +&spi1 {
@@ -117,244 +141,174 @@ Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 > +		spi-max-frequency = <10000000>;
 > +	};
 > +};
-> diff --git a/arch/arm/dts/rk3399-pinephone-pro.dts
-> b/arch/arm/dts/rk3399-pinephone-pro.dts
-> index 04403a76238b..61f3fec5a8b1 100644
-> --- a/arch/arm/dts/rk3399-pinephone-pro.dts
-> +++ b/arch/arm/dts/rk3399-pinephone-pro.dts
-> @@ -10,6 +10,7 @@
+> diff --git a/arch/arm/dts/rk3399-rock-4c-plus.dts
+> b/arch/arm/dts/rk3399-rock-4c-plus.dts
+> index 8bfd5f88d1ef..7baf9d1b22fd 100644
+> --- a/arch/arm/dts/rk3399-rock-4c-plus.dts
+> +++ b/arch/arm/dts/rk3399-rock-4c-plus.dts
+> @@ -15,6 +15,7 @@
+>  	compatible = "radxa,rock-4c-plus", "rockchip,rk3399";
+> 
+>  	aliases {
+> +		ethernet0 = &gmac;
+>  		mmc0 = &sdhci;
+>  		mmc1 = &sdmmc;
+>  	};
+> diff --git a/arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
+> b/arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
+> index 85ee5770add0..2213d0093052 100644
+> --- a/arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
+> @@ -4,3 +4,15 @@
 >   */
 > 
->  /dts-v1/;
-> +#include <dt-bindings/input/gpio-keys.h>
->  #include <dt-bindings/input/linux-event-codes.h>
->  #include "rk3399.dtsi"
->  #include "rk3399-opp.dtsi"
-> @@ -29,6 +30,31 @@
->  		stdout-path = "serial2:115200n8";
->  	};
-> 
-> +	adc-keys {
-> +		compatible = "adc-keys";
-> +		io-channels = <&saradc 1>;
-> +		io-channel-names = "buttons";
-> +		keyup-threshold-microvolt = <1600000>;
-> +		poll-interval = <100>;
+>  #include "rk3399-rock-pi-4-u-boot.dtsi"
 > +
-> +		button-up {
-> +			label = "Volume Up";
-> +			linux,code = <KEY_VOLUMEUP>;
-> +			press-threshold-microvolt = <100000>;
-> +		};
-> +
-> +		button-down {
-> +			label = "Volume Down";
-> +			linux,code = <KEY_VOLUMEDOWN>;
-> +			press-threshold-microvolt = <600000>;
-> +		};
-> +	};
-> +
-> +	backlight: backlight {
-> +		compatible = "pwm-backlight";
-> +		pwms = <&pwm0 0 50000 0>;
-> +	};
-> +
->  	gpio-keys {
->  		compatible = "gpio-keys";
->  		pinctrl-names = "default";
-> @@ -102,6 +128,37 @@
->  		/* WL_REG_ON on module */
->  		reset-gpios = <&gpio0 RK_PB2 GPIO_ACTIVE_LOW>;
->  	};
-> +
-> +	/* MIPI DSI panel 1.8v supply */
-> +	vcc1v8_lcd: vcc1v8-lcd {
-> +		compatible = "regulator-fixed";
-> +		enable-active-high;
-> +		regulator-name = "vcc1v8_lcd";
-> +		regulator-min-microvolt = <1800000>;
-> +		regulator-max-microvolt = <1800000>;
-> +		vin-supply = <&vcc3v3_sys>;
-> +		gpio = <&gpio3 RK_PA5 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names = "default";
-> +	};
-> +
-> +	/* MIPI DSI panel 2.8v supply */
-> +	vcc2v8_lcd: vcc2v8-lcd {
-> +		compatible = "regulator-fixed";
-> +		enable-active-high;
-> +		regulator-name = "vcc2v8_lcd";
-> +		regulator-min-microvolt = <2800000>;
-> +		regulator-max-microvolt = <2800000>;
-> +		vin-supply = <&vcc3v3_sys>;
-> +		gpio = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
-> +		pinctrl-names = "default";
-> +	};
-> +};
-> +
-> +&cpu_alert0 {
-> +	temperature = <65000>;
-> +};
-> +&cpu_alert1 {
-> +	temperature = <68000>;
->  };
-> 
->  &cpu_l0 {
-> @@ -132,6 +189,11 @@
->  	status = "okay";
->  };
-> 
-> +&gpu {
-> +	mali-supply = <&vdd_gpu>;
-> +	status = "okay";
-> +};
-> +
->  &i2c0 {
->  	clock-frequency = <400000>;
->  	i2c-scl-rising-time-ns = <168>;
-> @@ -326,6 +388,25 @@
->  	};
->  };
-> 
-> +&i2c3 {
-> +	i2c-scl-rising-time-ns = <450>;
-> +	i2c-scl-falling-time-ns = <15>;
+> +&spi1 {
 > +	status = "okay";
 > +
-> +	touchscreen@14 {
-> +		compatible = "goodix,gt1158";
-> +		reg = <0x14>;
-> +		interrupt-parent = <&gpio3>;
-> +		interrupts = <RK_PB5 IRQ_TYPE_EDGE_RISING>;
-> +		irq-gpios = <&gpio3 RK_PB5 GPIO_ACTIVE_HIGH>;
-> +		reset-gpios = <&gpio3 RK_PB4 GPIO_ACTIVE_HIGH>;
-> +		AVDD28-supply = <&vcc3v0_touch>;
-> +		VDDIO-supply = <&vcc3v0_touch>;
-> +		touchscreen-size-x = <720>;
-> +		touchscreen-size-y = <1440>;
-> +	};
-> +};
-> +
->  &cluster0_opp {
->  	opp04 {
->  		status = "disabled";
-> @@ -355,6 +436,39 @@
->  	status = "okay";
->  };
-> 
-> +&mipi_dsi {
-> +	status = "okay";
-> +	clock-master;
-> +
-> +	ports {
-> +		mipi_out: port@1 {
-> +			#address-cells = <0>;
-> +			#size-cells = <0>;
-> +			reg = <1>;
-> +
-> +			mipi_out_panel: endpoint {
-> +				remote-endpoint = <&mipi_in_panel>;
-> +			};
-> +		};
-> +	};
-> +
-> +	panel@0 {
-> +		compatible = "hannstar,hsd060bhw4";
+> +	flash@0 {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +		compatible = "jedec,spi-nor";
 > +		reg = <0>;
-> +		backlight = <&backlight>;
-> +		reset-gpios = <&gpio4 RK_PD1 GPIO_ACTIVE_LOW>;
-> +		vcc-supply = <&vcc2v8_lcd>;
-> +		iovcc-supply = <&vcc1v8_lcd>;
-> +		pinctrl-names = "default";
+> +		spi-max-frequency = <10000000>;
+> +	};
+> +};
+> diff --git a/arch/arm/dts/rk3399-rock-pi-4.dtsi
+> b/arch/arm/dts/rk3399-rock-pi-4.dtsi
+> index b1b7f4ffb1d4..281a12180703 100644
+> --- a/arch/arm/dts/rk3399-rock-pi-4.dtsi
+> +++ b/arch/arm/dts/rk3399-rock-pi-4.dtsi
+> @@ -12,6 +12,7 @@
+> 
+>  / {
+>  	aliases {
+> +		ethernet0 = &gmac;
+>  		mmc0 = &sdhci;
+>  		mmc1 = &sdmmc;
+>  	};
+> @@ -44,7 +45,7 @@
+>  	sdio_pwrseq: sdio-pwrseq {
+>  		compatible = "mmc-pwrseq-simple";
+>  		clocks = <&rk808 1>;
+> -		clock-names = "ext_clock";
+> +		clock-names = "lpo";
+>  		pinctrl-names = "default";
+>  		pinctrl-0 = <&wifi_enable_h>;
+>  		reset-gpios = <&gpio0 RK_PB2 GPIO_ACTIVE_LOW>;
+> @@ -492,6 +493,7 @@
+> 
+>  &i2s0 {
+>  	pinctrl-0 = <&i2s0_2ch_bus>;
+> +	pinctrl-1 = <&i2s0_2ch_bus_bclk_off>;
+>  	rockchip,capture-channels = <2>;
+>  	rockchip,playback-channels = <2>;
+>  	status = "okay";
+> diff --git a/arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
+> b/arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
+> index 85ee5770add0..38385621deb1 100644
+> --- a/arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
+> @@ -4,3 +4,10 @@
+>   */
+> 
+>  #include "rk3399-rock-pi-4-u-boot.dtsi"
 > +
-> +		port {
-> +			mipi_in_panel: endpoint {
-> +				remote-endpoint = <&mipi_out_panel>;
-> +			};
-> +		};
+> +&spi1 {
+> +	flash@0 {
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+> +	};
+> +};
+> diff --git a/arch/arm/dts/rk3399-rock-pi-4c.dts
+> b/arch/arm/dts/rk3399-rock-pi-4c.dts
+> index d32efab74e94..de2ebe4cb4f3 100644
+> --- a/arch/arm/dts/rk3399-rock-pi-4c.dts
+> +++ b/arch/arm/dts/rk3399-rock-pi-4c.dts
+> @@ -43,6 +43,16 @@
+>  	hp-det-gpio = <&gpio1 RK_PA0 GPIO_ACTIVE_HIGH>;
+>  };
+> 
+> +&spi1 {
+> +	status = "okay";
+> +
+> +	flash@0 {
+> +		compatible = "jedec,spi-nor";
+> +		reg = <0>;
+> +		spi-max-frequency = <10000000>;
 > +	};
 > +};
 > +
->  &pmu_io_domains {
->  	pmu1830-supply = <&vcc_1v8>;
+>  &uart0 {
 >  	status = "okay";
-> @@ -422,6 +536,15 @@
->  	status = "okay";
->  };
 > 
-> +&pwm0 {
-> +	status = "okay";
-> +};
-> +
-> +&saradc {
-> +	vref-supply = <&vcca1v8_s3>;
-> +	status = "okay";
-> +};
-> +
->  &sdmmc {
->  	bus-width = <4>;
->  	cap-sd-highspeed;
-> @@ -472,3 +595,27 @@
->  &uart2 {
->  	status = "okay";
->  };
-> +
-> +&vopb {
-> +	status = "okay";
-> +	assigned-clocks = <&cru DCLK_VOP0_DIV>, <&cru DCLK_VOP0>,
-> +			  <&cru ACLK_VOP0>, <&cru HCLK_VOP0>;
-> +	assigned-clock-rates = <0>, <0>, <400000000>, <100000000>;
-> +	assigned-clock-parents = <&cru PLL_GPLL>, <&cru DCLK_VOP0_DIV>;
-> +};
-> +
-> +&vopb_mmu {
-> +	status = "okay";
-> +};
-> +
-> +&vopl {
-> +	status = "okay";
-> +	assigned-clocks = <&cru DCLK_VOP1_DIV>, <&cru DCLK_VOP1>,
-> +			  <&cru ACLK_VOP1>, <&cru HCLK_VOP1>;
-> +	assigned-clock-rates = <0>, <0>, <400000000>, <100000000>;
-> +	assigned-clock-parents = <&cru PLL_GPLL>, <&cru DCLK_VOP1_DIV>;
-> +};
-> +
-> +&vopl_mmu {
-> +	status = "okay";
-> +};
-> diff --git a/configs/pinephone-pro-rk3399_defconfig
-> b/configs/pinephone-pro-rk3399_defconfig
-> index c36898364b5d..1bb7b35a255c 100644
-> --- a/configs/pinephone-pro-rk3399_defconfig
-> +++ b/configs/pinephone-pro-rk3399_defconfig
-> @@ -3,7 +3,7 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+> diff --git a/configs/rock-4c-plus-rk3399_defconfig
+> b/configs/rock-4c-plus-rk3399_defconfig
+> index 2024defb2bf0..e97fde17acc2 100644
+> --- a/configs/rock-4c-plus-rk3399_defconfig
+> +++ b/configs/rock-4c-plus-rk3399_defconfig
+> @@ -3,22 +3,27 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
 >  CONFIG_COUNTER_FREQUENCY=24000000
 >  CONFIG_ARCH_ROCKCHIP=y
 >  CONFIG_NR_DRAM_BANKS=1
-> -CONFIG_SF_DEFAULT_SPEED=20000000
 > +CONFIG_SF_DEFAULT_SPEED=10000000
->  CONFIG_ENV_SIZE=0x8000
 >  CONFIG_ENV_OFFSET=0x3F8000
->  CONFIG_DEFAULT_DEVICE_TREE="rk3399-pinephone-pro"
-> @@ -33,7 +33,6 @@ CONFIG_CMD_GPIO=y
+>  CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-4c-plus"
+>  CONFIG_DM_RESET=y
+>  CONFIG_ROCKCHIP_RK3399=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+>  CONFIG_TARGET_ROCKPI4_RK3399=y
+>  CONFIG_DEBUG_UART_BASE=0xFF1A0000
+>  CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+>  CONFIG_SYS_LOAD_ADDR=0x800800
+> -CONFIG_PCI=y
+>  CONFIG_DEBUG_UART=y
+>  # CONFIG_ANDROID_BOOT_IMAGE is not set
+>  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-4c-plus.dtb"
+>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_SPL_MAX_SIZE=0x2e000
+> +CONFIG_SPL_MAX_SIZE=0x40000
+>  CONFIG_SPL_PAD_TO=0x7f8000
+>  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+>  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+>  CONFIG_TPL=y
+>  CONFIG_CMD_BOOTZ=y
+> @@ -26,7 +31,6 @@ CONFIG_CMD_NVEDIT_EFI=y
+>  CONFIG_CMD_DFU=y
 >  CONFIG_CMD_GPT=y
->  CONFIG_CMD_I2C=y
 >  CONFIG_CMD_MMC=y
 > -CONFIG_CMD_PCI=y
 >  CONFIG_CMD_USB=y
->  # CONFIG_CMD_SETEXPR is not set
->  CONFIG_CMD_TIME=y
-> @@ -54,18 +53,20 @@ CONFIG_MMC_SDHCI=y
->  CONFIG_MMC_SDHCI_SDMA=y
+>  CONFIG_CMD_ROCKUSB=y
+>  CONFIG_CMD_USB_MASS_STORAGE=y
+> @@ -40,23 +44,32 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>  CONFIG_DFU_MMC=y
+>  CONFIG_ROCKCHIP_GPIO=y
+>  CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_ROCKCHIP_IODOMAIN=y
+>  CONFIG_MMC_DW=y
+>  CONFIG_MMC_DW_ROCKCHIP=y
+>  CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
 >  CONFIG_MMC_SDHCI_ROCKCHIP=y
->  CONFIG_SF_DEFAULT_BUS=1
+> +CONFIG_SF_DEFAULT_BUS=1
 > +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
->  CONFIG_SPI_FLASH_GIGADEVICE=y
-> +CONFIG_SPI_FLASH_SILICONKAISER=y
->  CONFIG_SPI_FLASH_WINBOND=y
+> +CONFIG_SPI_FLASH_GIGADEVICE=y
+> +CONFIG_SPI_FLASH_MACRONIX=y
+> +CONFIG_SPI_FLASH_WINBOND=y
+> +CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DM_ETH_PHY=y
+>  CONFIG_ETH_DESIGNWARE=y
+>  CONFIG_GMAC_ROCKCHIP=y
+> -CONFIG_NVME_PCI=y
 >  CONFIG_PHY_ROCKCHIP_INNO_USB2=y
 >  CONFIG_PHY_ROCKCHIP_TYPEC=y
->  CONFIG_DM_PMIC_FAN53555=y
 >  CONFIG_PMIC_RK8XX=y
 > -CONFIG_REGULATOR_PWM=y
 >  CONFIG_REGULATOR_RK8XX=y
@@ -362,13 +316,226 @@ Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 >  CONFIG_RAM_ROCKCHIP_LPDDR4=y
 >  CONFIG_BAUDRATE=1500000
 >  CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
->  CONFIG_ROCKCHIP_SPI=y
+>  CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SPI=y
 >  CONFIG_SYSRESET=y
 >  CONFIG_USB=y
-> @@ -85,5 +86,4 @@ CONFIG_VIDEO=y
+>  CONFIG_USB_XHCI_HCD=y
+> @@ -77,7 +90,6 @@ CONFIG_VIDEO=y
 >  CONFIG_DISPLAY=y
 >  CONFIG_VIDEO_ROCKCHIP=y
->  CONFIG_DISPLAY_ROCKCHIP_EDP=y
+>  CONFIG_DISPLAY_ROCKCHIP_HDMI=y
 > -CONFIG_SPL_TINY_MEMSET=y
 >  CONFIG_ERRNO_STR=y
+>  CONFIG_EFI_CAPSULE_ON_DISK=y
+>  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> diff --git a/configs/rock-4se-rk3399_defconfig
+> b/configs/rock-4se-rk3399_defconfig
+> index 9b2303fdf792..13f5f84b9836 100644
+> --- a/configs/rock-4se-rk3399_defconfig
+> +++ b/configs/rock-4se-rk3399_defconfig
+> @@ -3,22 +3,29 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+>  CONFIG_COUNTER_FREQUENCY=24000000
+>  CONFIG_ARCH_ROCKCHIP=y
+>  CONFIG_NR_DRAM_BANKS=1
+> +CONFIG_SF_DEFAULT_SPEED=10000000
+>  CONFIG_ENV_OFFSET=0x3F8000
+>  CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-4se"
+>  CONFIG_DM_RESET=y
+>  CONFIG_ROCKCHIP_RK3399=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+>  CONFIG_TARGET_ROCKPI4_RK3399=y
+>  CONFIG_DEBUG_UART_BASE=0xFF1A0000
+>  CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+>  CONFIG_SYS_LOAD_ADDR=0x800800
+>  CONFIG_PCI=y
+>  CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+>  # CONFIG_ANDROID_BOOT_IMAGE is not set
+>  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-4se.dtb"
+>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_SPL_MAX_SIZE=0x2e000
+> +CONFIG_SPL_MAX_SIZE=0x40000
+>  CONFIG_SPL_PAD_TO=0x7f8000
+>  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+>  CONFIG_TPL=y
+>  CONFIG_CMD_BOOTZ=y
+>  CONFIG_CMD_NVEDIT_EFI=y
+> @@ -36,14 +43,25 @@ CONFIG_SPL_OF_CONTROL=y
+>  CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent
+> assigned-clocks assigned-clock-rates assigned-clock-parents"
+>  CONFIG_ENV_IS_IN_MMC=y
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_SCSI_AHCI=y
+> +CONFIG_AHCI_PCI=y
+>  CONFIG_DFU_MMC=y
+>  CONFIG_ROCKCHIP_GPIO=y
+>  CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_ROCKCHIP_IODOMAIN=y
+>  CONFIG_MMC_DW=y
+>  CONFIG_MMC_DW_ROCKCHIP=y
+>  CONFIG_MMC_SDHCI=y
+>  CONFIG_MMC_SDHCI_SDMA=y
+>  CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_BUS=1
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_GIGADEVICE=y
+> +CONFIG_SPI_FLASH_MACRONIX=y
+> +CONFIG_SPI_FLASH_WINBOND=y
+> +CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DM_ETH_PHY=y
+>  CONFIG_ETH_DESIGNWARE=y
+>  CONFIG_GMAC_ROCKCHIP=y
+>  CONFIG_NVME_PCI=y
+> @@ -54,9 +72,11 @@ CONFIG_REGULATOR_PWM=y
+>  CONFIG_REGULATOR_RK8XX=y
+>  CONFIG_PWM_ROCKCHIP=y
+>  CONFIG_RAM_ROCKCHIP_LPDDR4=y
+> +CONFIG_SCSI=y
+>  CONFIG_BAUDRATE=1500000
+>  CONFIG_DEBUG_UART_SHIFT=2
+>  CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SPI=y
+>  CONFIG_SYSRESET=y
+>  CONFIG_USB=y
+>  CONFIG_USB_XHCI_HCD=y
+> @@ -77,7 +97,6 @@ CONFIG_VIDEO=y
+>  CONFIG_DISPLAY=y
+>  CONFIG_VIDEO_ROCKCHIP=y
+>  CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+> -CONFIG_SPL_TINY_MEMSET=y
+>  CONFIG_ERRNO_STR=y
+>  CONFIG_EFI_CAPSULE_ON_DISK=y
+>  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+> diff --git a/configs/rock-pi-4-rk3399_defconfig
+> b/configs/rock-pi-4-rk3399_defconfig
+> index e5a2bba8e7ff..d474d91053c1 100644
+> --- a/configs/rock-pi-4-rk3399_defconfig
+> +++ b/configs/rock-pi-4-rk3399_defconfig
+> @@ -17,6 +17,7 @@ CONFIG_SPL_SPI=y
+>  CONFIG_SYS_LOAD_ADDR=0x800800
+>  CONFIG_PCI=y
+>  CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+>  # CONFIG_ANDROID_BOOT_IMAGE is not set
+>  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-pi-4a.dtb"
+>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+> @@ -43,6 +44,8 @@ CONFIG_SPL_OF_CONTROL=y
+>  CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent
+> assigned-clocks assigned-clock-rates assigned-clock-parents"
+>  CONFIG_ENV_IS_IN_MMC=y
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_SCSI_AHCI=y
+> +CONFIG_AHCI_PCI=y
+>  CONFIG_DFU_MMC=y
+>  CONFIG_ROCKCHIP_GPIO=y
+>  CONFIG_SYS_I2C_ROCKCHIP=y
+> @@ -54,8 +57,12 @@ CONFIG_MMC_SDHCI_SDMA=y
+>  CONFIG_MMC_SDHCI_ROCKCHIP=y
+>  CONFIG_SF_DEFAULT_BUS=1
+>  CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_GIGADEVICE=y
+> +CONFIG_SPI_FLASH_MACRONIX=y
+>  CONFIG_SPI_FLASH_WINBOND=y
+>  CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DM_ETH_PHY=y
+>  CONFIG_ETH_DESIGNWARE=y
+>  CONFIG_GMAC_ROCKCHIP=y
+>  CONFIG_NVME_PCI=y
+> @@ -66,6 +73,7 @@ CONFIG_REGULATOR_PWM=y
+>  CONFIG_REGULATOR_RK8XX=y
+>  CONFIG_PWM_ROCKCHIP=y
+>  CONFIG_RAM_ROCKCHIP_LPDDR4=y
+> +CONFIG_SCSI=y
+>  CONFIG_BAUDRATE=1500000
+>  CONFIG_DEBUG_UART_SHIFT=2
+>  CONFIG_SYS_NS16550_MEM32=y
+> diff --git a/configs/rock-pi-4c-rk3399_defconfig
+> b/configs/rock-pi-4c-rk3399_defconfig
+> index 4a9d1c531c10..50c6755246f2 100644
+> --- a/configs/rock-pi-4c-rk3399_defconfig
+> +++ b/configs/rock-pi-4c-rk3399_defconfig
+> @@ -3,22 +3,29 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+>  CONFIG_COUNTER_FREQUENCY=24000000
+>  CONFIG_ARCH_ROCKCHIP=y
+>  CONFIG_NR_DRAM_BANKS=1
+> +CONFIG_SF_DEFAULT_SPEED=10000000
+>  CONFIG_ENV_OFFSET=0x3F8000
+>  CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-pi-4c"
+>  CONFIG_DM_RESET=y
+>  CONFIG_ROCKCHIP_RK3399=y
+> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+>  CONFIG_TARGET_ROCKPI4_RK3399=y
+>  CONFIG_DEBUG_UART_BASE=0xFF1A0000
+>  CONFIG_DEBUG_UART_CLOCK=24000000
+> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> +CONFIG_SPL_SPI=y
+>  CONFIG_SYS_LOAD_ADDR=0x800800
+>  CONFIG_PCI=y
+>  CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+>  # CONFIG_ANDROID_BOOT_IMAGE is not set
+>  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-pi-4c.dtb"
+>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+> -CONFIG_SPL_MAX_SIZE=0x2e000
+> +CONFIG_SPL_MAX_SIZE=0x40000
+>  CONFIG_SPL_PAD_TO=0x7f8000
+>  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> +CONFIG_SPL_SPI_LOAD=y
+> +CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+>  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+>  CONFIG_TPL=y
+>  CONFIG_CMD_BOOTZ=y
+> @@ -37,13 +44,25 @@ CONFIG_SPL_OF_CONTROL=y
+>  CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent
+> assigned-clocks assigned-clock-rates assigned-clock-parents"
+>  CONFIG_ENV_IS_IN_MMC=y
+>  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_SCSI_AHCI=y
+> +CONFIG_AHCI_PCI=y
+>  CONFIG_DFU_MMC=y
+>  CONFIG_ROCKCHIP_GPIO=y
+>  CONFIG_SYS_I2C_ROCKCHIP=y
+> +CONFIG_ROCKCHIP_IODOMAIN=y
+>  CONFIG_MMC_DW=y
+>  CONFIG_MMC_DW_ROCKCHIP=y
+>  CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_SDMA=y
+>  CONFIG_MMC_SDHCI_ROCKCHIP=y
+> +CONFIG_SF_DEFAULT_BUS=1
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SPI_FLASH_GIGADEVICE=y
+> +CONFIG_SPI_FLASH_MACRONIX=y
+> +CONFIG_SPI_FLASH_WINBOND=y
+> +CONFIG_SPI_FLASH_XTX=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DM_ETH_PHY=y
+>  CONFIG_ETH_DESIGNWARE=y
+>  CONFIG_GMAC_ROCKCHIP=y
+>  CONFIG_NVME_PCI=y
+> @@ -54,9 +73,11 @@ CONFIG_REGULATOR_PWM=y
+>  CONFIG_REGULATOR_RK8XX=y
+>  CONFIG_PWM_ROCKCHIP=y
+>  CONFIG_RAM_ROCKCHIP_LPDDR4=y
+> +CONFIG_SCSI=y
+>  CONFIG_BAUDRATE=1500000
+>  CONFIG_DEBUG_UART_SHIFT=2
+>  CONFIG_SYS_NS16550_MEM32=y
+> +CONFIG_ROCKCHIP_SPI=y
+>  CONFIG_SYSRESET=y
+>  CONFIG_USB=y
+>  CONFIG_USB_XHCI_HCD=y
+> @@ -77,7 +98,6 @@ CONFIG_VIDEO=y
+>  CONFIG_DISPLAY=y
+>  CONFIG_VIDEO_ROCKCHIP=y
+>  CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+> -CONFIG_SPL_TINY_MEMSET=y
+>  CONFIG_ERRNO_STR=y
+>  CONFIG_EFI_CAPSULE_ON_DISK=y
+>  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
