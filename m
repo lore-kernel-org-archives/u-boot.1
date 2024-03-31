@@ -4,52 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8422CD1284
-	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 18:22:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B33A7CD1284
+	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 20:29:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9477687FA3;
-	Sun, 31 Mar 2024 20:22:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id B8CDC87D8F;
+	Sun, 31 Mar 2024 22:29:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1711909334;
-	bh=DpScHbl4tuYg7q6NIUnvud+jkVbKAW3Egvpwp4B1zdw=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=NG4OStZG7Rhp687wYkqDfafkeVX2Rjsv55fM/f6d3WlSEBB0i/QVr43IWWFNtA2Xp
-	 7MYPtoInYvXSikU/lF4+5fItH0rgqOEPSRekLNgtabIyfzxNrMNKn2TOZFOqeFzwCa
-	 3maqHM2W76sbSrGwc8Hv8xE4ntlGGxe/Sz841/dZKq1ze0u7LqBWy3+H/Uz7LoNU35
-	 XOjamYXYAQ9J79d2q/K+kIBhneNPOunm3nfdRCTgK5DGcK3vaSejwlNvm7l5k+G6A5
-	 KjZauqDHdaPOB+7RQDjhSGnxVwYsS45OUc78KkuumnrvzEOcXbzRERfarHptRM/CfP
-	 0+FrVf2pqvzQQ==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="tXd/qloH";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9CC25876F3; Sun, 31 Mar 2024 22:29:43 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 725468780A;
- Sun, 31 Mar 2024 20:22:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1711909333;
- bh=DpScHbl4tuYg7q6NIUnvud+jkVbKAW3Egvpwp4B1zdw=;
- h=From:To:Cc:Subject:Date:From;
- b=EvkVkNphTa4vIDNLUma+iRD/YIjerp0Ou//VYK/GQWV5kAlmihrhqXEFtKm/GJqlc
- zWStM1ioY+znmjHUr/cYOOSWCRPUYiESP3Ex1INeUPije3fERmp15se2m/FIeNXgfX
- wHDwCejBWa/SdodRPwQuxb4u413M5xAVhHa8Id/4eAglSylB5VmIr0plkRdgw2rXla
- ciiPoOAqi4nvagqXCtpEhpoXWhY65awhrBJrfwMR7gefh4eDg2xFRIkWMPqn8e5myV
- N6YmYmlR3ukkAsROinAKv7zMWXFhd6OKG7Pr/R+dwlkVZkMJxi6kmSJdXIMvjIt3Z7
- oMT5B9KxfiTcA==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] ARM: stm32: Jump to ep on successful resume in PSCI suspend
- code
-Date: Sun, 31 Mar 2024 20:21:47 +0200
-Message-ID: <20240331182202.335923-1-marex@denx.de>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id 8916387EFA
+ for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:29:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=3892=LG=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1711916969;
+ bh=srpUfO59QRdNi7VetY3PO0LNZsE8aqBkuZpsEotlhPg=;
+ b=tXd/qloHxmG0gN2RkfxRkGJ3ULcY4M5Rbrp7QTXbKVGT6Qm5DPjx5cQs6pCQbaM5o+6O1lrux
+ tDT68vKL4ZbfEVUw8ztQwrLM/VIY3w0StG977rWt0SOjGfAkXSPCIaL2ignV5EYbKyToupKXOgw
+ T+NXhDUMtPk43J/L+pEqwTGzaaLctcQo33wB5j48HpTCa3rvF6vudwWLc6mWC0iBXAH2bZJxlGg
+ z5Z/3YWIbYfXVqUbmPoiIYT2WOmDbN3vJJ9b0hXg3yqVq5bcw8Yg2aJyrLHOUesY4Te6tEio+tb
+ x2xSLNvae8v3kNBAm3doP/LX08r8yaX3FjMzrhVXU/zw==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH 00/31] rockchip: rk3399: Sync DT with linux v6.8 and update
+ defconfigs
+Date: Sun, 31 Mar 2024 20:28:06 +0000
+Message-ID: <20240331202921.262323-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 6609c7a78fc6b45ed44f7240
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,59 +68,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case the system has resumed successfully, the PSCI suspend resume
-code has to jump to the 'ep' successful resume entry point code path,
-otherwise the code has to jump to content of the LR register, which
-points to failed resume code path.
+This series adds support for new clocks used in linux v6.8 device trees,
+enables use of FIT signature check for checksum validation and fixes
+loading FIT from SD-card when loading FIT from eMMC fails.
 
-To implement this distinction, rewrite LR register stored on stack
-with 'ep' value in case of a successful resume, which is really in
-every case unless some catastrophic failure occurred during suspend.
+After this series it should be possible to move RK3399 boards to use
+OF_UPSTREAM in a future patch once dts/upstream move to a v6.8+ tag.
 
-Without this change, Linux counts every resume as failed in
-/sys/power/suspend_stats/fail
+I have runtime tested this series on following devices:
+- 96boards Rock960
+- Khadas Edge Captain
+- Pine64 PineBook Pro
+- Pine64 RockPro64
+- Radxa ROCK 4C+
+- Radxa ROCK 4SE
+- Radxa ROCK Pi 4A
+- Radxa ROCK Pi 4B+
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
- arch/arm/mach-stm32mp/psci.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+This series depends on the following series:
+- Enable booting from SPI flash on ROCK Pi 4 [1]
+- rockchip: spl: Cache boot source id for later use [2]
 
-diff --git a/arch/arm/mach-stm32mp/psci.c b/arch/arm/mach-stm32mp/psci.c
-index 8cdeb0ab3f2..4f2379df45f 100644
---- a/arch/arm/mach-stm32mp/psci.c
-+++ b/arch/arm/mach-stm32mp/psci.c
-@@ -703,6 +703,8 @@ void __secure psci_system_suspend(u32 __always_unused function_id,
- {
- 	u32 saved_mcudivr, saved_pll3cr, saved_pll4cr, saved_mssckselr;
- 	u32 gicd_addr = stm32mp_get_gicd_base_address();
-+	u32 cpu = psci_get_cpu_id();
-+	u32 sp = (u32)__secure_stack_end - (cpu << ARM_PSCI_STACK_SHIFT);
- 	bool iwdg1_wake = false;
- 	bool iwdg2_wake = false;
- 	bool other_wake = false;
-@@ -805,4 +807,16 @@ void __secure psci_system_suspend(u32 __always_unused function_id,
- 
- 	writel(SYSCFG_CMPENR_MPUEN, STM32_SYSCFG_BASE + SYSCFG_CMPENSETR);
- 	clrbits_le32(STM32_SYSCFG_BASE + SYSCFG_CMPCR, SYSCFG_CMPCR_SW_CTRL);
-+
-+	/*
-+	 * The system has resumed successfully. Rewrite LR register stored
-+	 * on stack with 'ep' value, so that on return from this PSCI call,
-+	 * the code would jump to that 'ep' resume entry point code path
-+	 * instead of the previous 'lr' register content which (e.g. with
-+	 * Linux) points to resume failure code path.
-+	 *
-+	 * See arch/arm/cpu/armv7/psci.S _smc_psci: for the stack layout
-+	 * used here, SP-4 is PC, SP-8 is LR, SP-12 is R7, and so on.
-+	 */
-+	writel(ep, sp - 8);
- }
+A copy of this series and all its depends can be found at [3]
+
+[1] https://patchwork.ozlabs.org/cover/1912469/
+[2] https://patchwork.ozlabs.org/cover/1915071/
+[3] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3399-dt-sync-v1
+
+Jonas Karlman (31):
+  rockchip: rk3399-gru: Fix max SPL size on bob and kevin
+  rockchip: rk3399-ficus: Enable TPL and use common bss and stack addr
+  rockchip: rk3399: Sort imply statements alphabetically
+  rockchip: rk3399: Enable ARMv8 crypto and FIT checksum validation
+  rockchip: rk3399: Enable random generator on all boards
+  rockchip: rk3399: Imply support for GbE PHY
+  rockchip: rk3399: Enable DT overlay support on all boards
+  rockchip: rk3399: Remove use of xPL_MISC_DRIVERS options
+  rockchip: rk3399: Add a default spl-boot-order prop
+  rockchip: rk3399: Fix loading FIT from SD-card when booting from eMMC
+  clk: rockchip: rk3399: Rename SCLK_DDRCLK to SCLK_DDRC
+  clk: rockchip: rk3399: Add dummy support for ACLK_VDU clock
+  clk: rockchip: rk3399: Add dummy support for SCLK_PCIEPHY_REF clock
+  clk: rockchip: rk3399: Add SCLK_USB3OTGx_REF support
+  rockchip: rk3399: Sync soc device tree from linux v6.8
+  rockchip: rk3399-gru: Sync device tree from linux v6.8
+  rockchip: rk3399-puma: Sync DT from linux v6.8
+  rockchip: rk3399-rock-pi-n10: Sync device tree from linux v6.8
+  rockchip: rk3399-eaidk-610: Sync device tree from linux v6.8
+  rockchip: rk3399-leez: Sync device tree from linux v6.8
+  rockchip: rk3399-evb: Sync device tree from linux v6.8
+  rockchip: rk3399-firefly: Sync device tree from linux v6.8
+  rockchip: rk3399-orangepi: Sync device tree from linux v6.8
+  rockchip: rk3399-roc-pc: Sync device tree from linux v6.8
+  rockchip: rk3399-nanopi-4: Sync device tree from linux v6.8
+  rockchip: rk3399-rock960: Sync device tree from linux v6.8
+  rockchip: rk3399-khadas: Sync device tree from linux v6.8
+  rockchip: rk3399-rock-pi-4: Sync device tree from linux v6.8
+  rockchip: rk3399-rockpro64: Sync device tree from linux v6.8
+  rockchip: rk3399-pinebook-pro: Sync device tree from linux v6.8
+  rockchip: rk3399-pinephone-pro: Sync device tree from linux v6.8
+
+ arch/arm/dts/rk3288-vmarc-som.dtsi            |  48 +++
+ arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi     |   1 -
+ arch/arm/dts/rk3399-eaidk-610.dts             |   3 +-
+ arch/arm/dts/rk3399-evb-u-boot.dtsi           |  13 +-
+ arch/arm/dts/rk3399-evb.dts                   |   3 +-
+ arch/arm/dts/rk3399-ficus-u-boot.dtsi         |  10 +-
+ arch/arm/dts/rk3399-ficus.dts                 |   4 +
+ arch/arm/dts/rk3399-firefly-u-boot.dtsi       |   6 -
+ arch/arm/dts/rk3399-firefly.dts               |  17 +-
+ arch/arm/dts/rk3399-gru-bob.dts               |   8 +-
+ arch/arm/dts/rk3399-gru-chromebook.dtsi       | 200 +++++++++++-
+ arch/arm/dts/rk3399-gru-kevin.dts             |   3 +-
+ arch/arm/dts/rk3399-gru-u-boot.dtsi           |  34 ++-
+ arch/arm/dts/rk3399-gru.dtsi                  |  52 +++-
+ arch/arm/dts/rk3399-khadas-edge-captain.dts   |   4 +
+ arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi   |   7 +-
+ arch/arm/dts/rk3399-khadas-edge-v.dts         |   4 +
+ arch/arm/dts/rk3399-khadas-edge.dtsi          |  10 +-
+ arch/arm/dts/rk3399-leez-p710-u-boot.dtsi     |   6 -
+ arch/arm/dts/rk3399-leez-p710.dts             |   8 +-
+ arch/arm/dts/rk3399-nanopc-t4.dts             |   2 +-
+ arch/arm/dts/rk3399-nanopi-m4-2gb.dts         |  55 +---
+ arch/arm/dts/rk3399-nanopi-m4b.dts            |   2 +-
+ arch/arm/dts/rk3399-nanopi-r4s.dts            |   4 +-
+ arch/arm/dts/rk3399-nanopi4-u-boot.dtsi       |  18 +-
+ arch/arm/dts/rk3399-nanopi4.dtsi              |   7 +-
+ arch/arm/dts/rk3399-op1-opp.dtsi              |  31 +-
+ arch/arm/dts/rk3399-opp.dtsi                  |   6 +-
+ arch/arm/dts/rk3399-orangepi-u-boot.dtsi      |  12 +
+ arch/arm/dts/rk3399-orangepi.dts              |  12 +-
+ arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi  |  23 +-
+ arch/arm/dts/rk3399-pinebook-pro.dts          |  24 +-
+ arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi |  24 +-
+ arch/arm/dts/rk3399-pinephone-pro.dts         | 147 +++++++++
+ arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi   |  27 +-
+ arch/arm/dts/rk3399-puma-haikou.dts           |  42 ++-
+ arch/arm/dts/rk3399-puma.dtsi                 |  17 +-
+ arch/arm/dts/rk3399-roc-pc-u-boot.dtsi        |  45 +--
+ arch/arm/dts/rk3399-roc-pc.dtsi               |  15 +-
+ arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi  |  20 ++
+ arch/arm/dts/rk3399-rock-4c-plus.dts          |   1 +
+ arch/arm/dts/rk3399-rock-4se-u-boot.dtsi      |  12 +
+ arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi     |   6 -
+ arch/arm/dts/rk3399-rock-pi-4.dtsi            |   4 +-
+ arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi    |   7 +
+ arch/arm/dts/rk3399-rock-pi-4c.dts            |  10 +
+ arch/arm/dts/rk3399-rock960-u-boot.dtsi       |  11 +-
+ arch/arm/dts/rk3399-rock960.dtsi              |   5 +-
+ arch/arm/dts/rk3399-rockpro64-u-boot.dtsi     |  22 +-
+ arch/arm/dts/rk3399-rockpro64.dtsi            |  98 +++++-
+ arch/arm/dts/rk3399-u-boot.dtsi               | 129 +++++---
+ arch/arm/dts/rk3399.dtsi                      | 289 ++++++++++++++++--
+ .../arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi |   6 -
+ arch/arm/dts/rk3399pro-vmarc-som.dtsi         |  20 +-
+ .../dts/rockchip-radxa-dalang-carrier.dtsi    |  21 ++
+ arch/arm/mach-rockchip/Kconfig                |  38 ++-
+ configs/chromebook_bob_defconfig              |   6 +-
+ configs/chromebook_kevin_defconfig            |   6 +-
+ configs/eaidk-610-rk3399_defconfig            |  13 +-
+ configs/evb-rk3399_defconfig                  |  10 +-
+ configs/ficus-rk3399_defconfig                |  38 +--
+ configs/firefly-rk3399_defconfig              |  17 +-
+ configs/khadas-edge-captain-rk3399_defconfig  |  35 ++-
+ configs/khadas-edge-rk3399_defconfig          |  29 +-
+ configs/khadas-edge-v-rk3399_defconfig        |  35 ++-
+ configs/leez-rk3399_defconfig                 |  13 +-
+ configs/nanopc-t4-rk3399_defconfig            |  18 +-
+ configs/nanopi-m4-2gb-rk3399_defconfig        |  22 +-
+ configs/nanopi-m4-rk3399_defconfig            |  22 +-
+ configs/nanopi-m4b-rk3399_defconfig           |  22 +-
+ configs/nanopi-neo4-rk3399_defconfig          |  22 +-
+ configs/nanopi-r4s-rk3399_defconfig           |  16 +-
+ configs/orangepi-rk3399_defconfig             |  14 +-
+ configs/pinebook-pro-rk3399_defconfig         |  13 +-
+ configs/pinephone-pro-rk3399_defconfig        |  13 +-
+ configs/puma-rk3399_defconfig                 |   5 +-
+ configs/roc-pc-mezzanine-rk3399_defconfig     |  15 +-
+ configs/roc-pc-rk3399_defconfig               |  13 +-
+ configs/rock-4c-plus-rk3399_defconfig         |  27 +-
+ configs/rock-4se-rk3399_defconfig             |  28 +-
+ configs/rock-pi-4-rk3399_defconfig            |  13 +-
+ configs/rock-pi-4c-rk3399_defconfig           |  27 +-
+ configs/rock-pi-n10-rk3399pro_defconfig       |  10 +-
+ configs/rock960-rk3399_defconfig              |  18 +-
+ configs/rockpro64-rk3399_defconfig            |  16 +-
+ drivers/clk/rockchip/clk_rk3399.c             |  12 +-
+ include/dt-bindings/clock/rk3399-cru.h        |  30 +-
+ 87 files changed, 1700 insertions(+), 531 deletions(-)
+
 -- 
-2.43.0
+2.43.2
 
