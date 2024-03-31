@@ -4,79 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 642D2CD1284
-	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 21:01:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31C9ACD128A
+	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 21:25:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 035728825C;
-	Sun, 31 Mar 2024 23:00:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 69DE287FC9;
+	Sun, 31 Mar 2024 23:25:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="j/vsk1kE";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="Q6+dU6+q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC66887E50; Sun, 31 Mar 2024 22:03:44 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5AB1887FC9; Sun, 31 Mar 2024 23:25:01 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB0FB87F74
- for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:03:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C1F587BF1
+ for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 23:24:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eugeneuriev@gmail.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-515d515e28dso1110583e87.0
- for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 13:03:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711915422; x=1712520222; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2SN9H1KWdNsEF/z0kmR2dcyCmCCNFhLM7FXzlMpjzoA=;
- b=j/vsk1kEYAqW2xqzNGhWPoL1Vu1lgQNTxaiYqrxmtyEgRSYx0xlFfZv7nkDvWlBFwX
- smNo6k79teDvB/9lC7poJPXUrxnGBMA8HYSZozjsbmXghCCtm0U4S7ArOSkklbF8xPxx
- csaYA4Jv5GDxIDb8MOGj//mHfSQKvSjvHRAbFmFMU2LFUuNguzEwUYrPDHIiuF1aWkxB
- uJgzU2wxaVp4JGaN4WcEzIakm4C2N1uDQjdsS8rtbnARROtv6V3xv5FTf9e6Hc9X/u37
- WrB1bAp5SuQFHX22hwpFz2bx0Ls+2DBCmUDAqh7+EMioc6FmBuP6Zou0HFAlw0102RlM
- X1YA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711915422; x=1712520222;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2SN9H1KWdNsEF/z0kmR2dcyCmCCNFhLM7FXzlMpjzoA=;
- b=vHj2tewAgEsj6kAWIY74pWdLEqPQhMBbytcv0nX48QPD9NYb+yH5rNbb/L1yLUSfio
- aw/xp6uoi/PBJUMkAbcR9EB+y9fwgFtHlsrrhhjVMFWnof+m0uv2MNnftKrkAOjfIW1L
- omLRBucb4Kg0m50SD3ZAjmXJruTCjfd5op8W7lkZAO7FqtDkg4wFAIk+TFUJWHHOQMnv
- zycSndWtxqfLj72VvX0EaCOKujug+vzT2pXvXEd+ZQWxf/x2o6wjU3WpBjka7IvH5KLI
- NQMAqyh1rThI4sMsfqtOPzeGxNePoEzE7Shdd9AH2B5uW6AUCkNIK1ih0+08RrmLJeEs
- gmzw==
-X-Gm-Message-State: AOJu0YwGGQWGWyQTkARmZ/xmnBUwLYJebAW20SJ355PHBWh1woqbRH9p
- XBxTkC3xMn4PKEJXF9A1VDvINepLvWuBnNIOGgmddnPsY0g37iWr/96HukAC
-X-Google-Smtp-Source: AGHT+IHoTxLTErqZFsUAv/+VfqZ4+llAQGLAhuICVCqD7H+7aizDMuhncBXvkmYgklWd83cVZIxP8g==
-X-Received: by 2002:a05:6512:48c6:b0:515:cedb:a518 with SMTP id
- er6-20020a05651248c600b00515cedba518mr4517112lfb.16.1711915422161; 
- Sun, 31 Mar 2024 13:03:42 -0700 (PDT)
-Received: from BlackProtonRN.clients.gtk.su ([185.16.100.35])
- by smtp.gmail.com with ESMTPSA id
- l5-20020ac25545000000b00516a08ce8f8sm425000lfk.269.2024.03.31.13.03.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 31 Mar 2024 13:03:41 -0700 (PDT)
-From: Eugene Uriev <eugeneuriev@gmail.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Eugene Uriev <eugeneuriev@gmail.com>
-Subject: [PATCH 9/9] mcheck: let mcheck_abortfunc_t print the pointer
-Date: Sun, 31 Mar 2024 23:03:27 +0300
-Message-Id: <20240331200327.29141-10-eugeneuriev@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240331200327.29141-1-eugeneuriev@gmail.com>
-References: <20240331200327.29141-1-eugeneuriev@gmail.com>
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 31 Mar 2024 23:00:15 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1711920298;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=GkwUUz609HUaJJKzhBfwZcnyXmUZKbsU98rN8TSExPA=;
+ b=Q6+dU6+qjWsJesesWpcAaQpCebDhhN8EPBRTSjZs+SB1ErD+lA8L56CUOhkFXmkGMGr073
+ xxIukcHKXhB4AH/Evjocl2NtxxabAJGQRnZHoxiF+qs3BPVDPuNvHkbLkwTleVyUI0Aiwh
+ QD16zEjlHaEQadXiQeycaWmQ09hFQd+i/vqFuag4spikJGF3dDGqm4DDRlduHwOmpLFY/U
+ UrEqUmTyYUTAd2lqDLVhoRpySxkWI4RWuBR5AQH6F0oUn4p6CPjwRBmRnlKGe589qmHZCd
+ 2q08Ikn+Us0kg/djrJgsFmnj94gi3EPxo+WNCWvGqF/6OL5TAv3xGh1C8VsRAw==
+Date: Sun, 31 Mar 2024 23:24:57 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 29/31] rockchip: rk3399-rockpro64: Sync device tree from
+ linux v6.8
+In-Reply-To: <20240331202921.262323-30-jonas@kwiboo.se>
+References: <20240331202921.262323-1-jonas@kwiboo.se>
+ <20240331202921.262323-30-jonas@kwiboo.se>
+Message-ID: <d348b22bae52f6ae4b7e82bbf44b1bae@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,91 +72,261 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Eugene Uriev <eugeneuriev@gmail.com>
+On 2024-03-31 22:28, Jonas Karlman wrote:
+> Sync rk3399-rockpro64 device tree from linux v6.8.
+> 
+> Add SF_DEFAULT_SPEED=10000000 and SPI_FLASH_SFDP_SUPPORT=y to improve
+> support for booting from SPI flash.
+> 
+> Remove USE_PREBOOT=y to speed up booting, standard boot will init USB
+> after faster boot media has been evaluated.
+> 
+> Add CMD_POWEROFF=y to support poweroff using cmdline and power on using
+> the pwr button on the board.
+> 
+> Add PHY_REALTEK=y and DM_ETH_PHY=y to support ethernet PHY.
+> 
+> Remove SPL_TINY_MEMSET=y to use full memset in SPL.
+> 
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
----
+Looking good to me.  Thank you for all these nice cleanups!
 
- common/mcheck_core.inc.h | 16 ++++++++--------
- include/mcheck.h         |  2 +-
- 2 files changed, 9 insertions(+), 9 deletions(-)
+Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 
-diff --git a/common/mcheck_core.inc.h b/common/mcheck_core.inc.h
-index 2f11ac567f..6902140992 100644
---- a/common/mcheck_core.inc.h
-+++ b/common/mcheck_core.inc.h
-@@ -90,7 +90,7 @@ struct mcheck_hdr {
- 	mcheck_canary canary; /* Magic number to check header integrity.  */
- };
- 
--static void mcheck_default_abort(enum mcheck_status status)
-+static void mcheck_default_abort(enum mcheck_status status, const void *p)
- {
- 	const char *msg;
- 
-@@ -111,7 +111,7 @@ static void mcheck_default_abort(enum mcheck_status status)
- 		msg = "bogus mcheck_status, library is buggy\n";
- 		break;
- 	}
--	printf("\n\nmcheck: %s!!! [%zu]\n\n", msg, mcheck_chunk_count_max);
-+	printf("\n\nmcheck: %p:%s!!! [%zu]\n\n", p, msg, mcheck_chunk_count_max);
- }
- 
- static mcheck_abortfunc_t mcheck_abortfunc = &mcheck_default_abort;
-@@ -124,9 +124,9 @@ static inline size_t allign_size_up(size_t sz, size_t grain)
- #define mcheck_allign_customer_size(SZ) allign_size_up(SZ, sizeof(mcheck_elem))
- #define mcheck_evaluate_memalign_prefix_size(ALIGN) allign_size_up(sizeof(struct mcheck_hdr), ALIGN)
- 
--static enum mcheck_status mcheck_OnNok(enum mcheck_status status)
-+static enum mcheck_status mcheck_OnNok(enum mcheck_status status, const void *p)
- {
--	(*mcheck_abortfunc)(status);
-+	(*mcheck_abortfunc)(status, p);
- 	return status;
- }
- 
-@@ -136,11 +136,11 @@ static enum mcheck_status mcheck_checkhdr(const struct mcheck_hdr *hdr)
- 
- 	for (i = 0; i < CANARY_DEPTH; ++i)
- 		if (hdr->canary.elems[i] == MAGICFREE)
--			return mcheck_OnNok(MCHECK_FREE);
-+			return mcheck_OnNok(MCHECK_FREE, hdr + 1);
- 
- 	for (i = 0; i < CANARY_DEPTH; ++i)
- 		if (hdr->canary.elems[i] != MAGICWORD)
--			return mcheck_OnNok(MCHECK_HEAD);
-+			return mcheck_OnNok(MCHECK_HEAD, hdr + 1);
- 
- 	const size_t payload_size = hdr->size;
- 	const size_t payload_size_aligned = mcheck_allign_customer_size(payload_size);
-@@ -150,13 +150,13 @@ static enum mcheck_status mcheck_checkhdr(const struct mcheck_hdr *hdr)
- 
- 	for (i = 0; i < padd_size; ++i)
- 		if (payload[payload_size + i] != PADDINGFLOOD)
--			return mcheck_OnNok(MCHECK_TAIL);
-+			return mcheck_OnNok(MCHECK_TAIL, hdr + 1);
- 
- 	const mcheck_canary *tail = (const mcheck_canary *)&payload[payload_size_aligned];
- 
- 	for (i = 0; i < CANARY_DEPTH; ++i)
- 		if (tail->elems[i] != MAGICTAIL)
--			return mcheck_OnNok(MCHECK_TAIL);
-+			return mcheck_OnNok(MCHECK_TAIL, hdr + 1);
- 	return MCHECK_OK;
- }
- 
-diff --git a/include/mcheck.h b/include/mcheck.h
-index f4c9b7e61c..bd506ae629 100644
---- a/include/mcheck.h
-+++ b/include/mcheck.h
-@@ -29,7 +29,7 @@ enum mcheck_status {
- 	MCHECK_TAIL                   /* Memory after the block was clobbered.  */
- };
- 
--typedef void (*mcheck_abortfunc_t)(enum mcheck_status);
-+typedef void (*mcheck_abortfunc_t)(enum mcheck_status, const void *p);
- 
- int mcheck(mcheck_abortfunc_t func);
- 
--- 
-2.25.1
-
+> ---
+>  arch/arm/dts/rk3399-rockpro64.dtsi | 98 ++++++++++++++++++++++++++++--
+>  configs/rockpro64-rk3399_defconfig |  7 ++-
+>  2 files changed, 97 insertions(+), 8 deletions(-)
+> 
+> diff --git a/arch/arm/dts/rk3399-rockpro64.dtsi
+> b/arch/arm/dts/rk3399-rockpro64.dtsi
+> index 6bff8db7d33e..f30b82a10ca3 100644
+> --- a/arch/arm/dts/rk3399-rockpro64.dtsi
+> +++ b/arch/arm/dts/rk3399-rockpro64.dtsi
+> @@ -11,6 +11,7 @@
+> 
+>  / {
+>  	aliases {
+> +		ethernet0 = &gmac;
+>  		mmc0 = &sdio0;
+>  		mmc1 = &sdmmc;
+>  		mmc2 = &sdhci;
+> @@ -20,6 +21,15 @@
+>  		stdout-path = "serial2:1500000n8";
+>  	};
+> 
+> +	/* enable for panel backlight support */
+> +	backlight: backlight {
+> +		compatible = "pwm-backlight";
+> +		brightness-levels = <0 4 8 16 32 64 128 255>;
+> +		default-brightness-level = <5>;
+> +		pwms = <&pwm0 0 1000000 0>;
+> +		status = "disabled";
+> +	};
+> +
+>  	clkin_gmac: external-gmac-clock {
+>  		compatible = "fixed-clock";
+>  		clock-frequency = <125000000>;
+> @@ -33,7 +43,7 @@
+>  		pinctrl-names = "default";
+>  		pinctrl-0 = <&pwrbtn>;
+> 
+> -		power {
+> +		key-power {
+>  			debounce-interval = <100>;
+>  			gpios = <&gpio0 RK_PA5 GPIO_ACTIVE_LOW>;
+>  			label = "GPIO Key Power";
+> @@ -69,6 +79,7 @@
+> 
+>  	fan: pwm-fan {
+>  		compatible = "pwm-fan";
+> +		cooling-levels = <0 100 150 200 255>;
+>  		#cooling-cells = <2>;
+>  		fan-supply = <&vcc12v_dcin>;
+>  		pwms = <&pwm1 0 50000 0>;
+> @@ -106,6 +117,14 @@
+>  		};
+>  	};
+> 
+> +	avdd: avdd-regulator {
+> +		compatible = "regulator-fixed";
+> +		regulator-name = "avdd";
+> +		regulator-min-microvolt = <11000000>;
+> +		regulator-max-microvolt = <11000000>;
+> +		vin-supply = <&vcc3v3_s0>;
+> +	};
+> +
+>  	vcc12v_dcin: vcc12v-dcin {
+>  		compatible = "regulator-fixed";
+>  		regulator-name = "vcc12v_dcin";
+> @@ -212,12 +231,12 @@
+>  	vdd_log: vdd-log {
+>  		compatible = "pwm-regulator";
+>  		pwms = <&pwm2 0 25000 1>;
+> +		pwm-supply = <&vcc5v0_sys>;
+>  		regulator-name = "vdd_log";
+>  		regulator-always-on;
+>  		regulator-boot-on;
+>  		regulator-min-microvolt = <800000>;
+>  		regulator-max-microvolt = <1700000>;
+> -		vin-supply = <&vcc5v0_sys>;
+>  	};
+>  };
+> 
+> @@ -245,6 +264,34 @@
+>  	cpu-supply = <&vdd_cpu_b>;
+>  };
+> 
+> +&cpu_thermal {
+> +	trips {
+> +		cpu_warm: cpu_warm {
+> +			temperature = <55000>;
+> +			hysteresis = <2000>;
+> +			type = "active";
+> +		};
+> +
+> +		cpu_hot: cpu_hot {
+> +			temperature = <65000>;
+> +			hysteresis = <2000>;
+> +			type = "active";
+> +		};
+> +	};
+> +
+> +	cooling-maps {
+> +		map2 {
+> +			trip = <&cpu_warm>;
+> +			cooling-device = <&fan THERMAL_NO_LIMIT 1>;
+> +		};
+> +
+> +		map3 {
+> +			trip = <&cpu_hot>;
+> +			cooling-device = <&fan 2 THERMAL_NO_LIMIT>;
+> +		};
+> +	};
+> +};
+> +
+>  &emmc_phy {
+>  	status = "okay";
+>  };
+> @@ -371,8 +418,6 @@
+> 
+>  			vcc3v0_touch: LDO_REG2 {
+>  				regulator-name = "vcc3v0_touch";
+> -				regulator-always-on;
+> -				regulator-boot-on;
+>  				regulator-min-microvolt = <3000000>;
+>  				regulator-max-microvolt = <3000000>;
+>  				regulator-state-mem {
+> @@ -461,8 +506,6 @@
+> 
+>  			vcc3v3_s0: SWITCH_REG2 {
+>  				regulator-name = "vcc3v3_s0";
+> -				regulator-always-on;
+> -				regulator-boot-on;
+>  				regulator-state-mem {
+>  					regulator-off-in-suspend;
+>  				};
+> @@ -536,6 +579,19 @@
+>  		vbus-supply = <&vcc5v0_typec>;
+>  		status = "okay";
+>  	};
+> +
+> +	/* enable for pine64 touch screen support */
+> +	touch: touchscreen@5d {
+> +		compatible = "goodix,gt911";
+> +		reg = <0x5d>;
+> +		interrupt-parent = <&gpio4>;
+> +		interrupts = <RK_PD5 IRQ_TYPE_EDGE_FALLING>;
+> +		AVDD28-supply = <&vcc3v0_touch>;
+> +		VDDIO-supply = <&vcc3v0_touch>;
+> +		irq-gpios = <&gpio4 RK_PD5 GPIO_ACTIVE_HIGH>;
+> +		reset-gpios = <&gpio4 RK_PD6 GPIO_ACTIVE_HIGH>;
+> +		status = "disabled";
+> +	};
+>  };
+> 
+>  &i2s0 {
+> @@ -571,6 +627,36 @@
+>  	gpio1830-supply = <&vcc_3v0>;
+>  };
+> 
+> +/* enable for pine64 panel display support */
+> +&mipi_dsi {
+> +	clock-master;
+> +	status = "disabled";
+> +
+> +	ports {
+> +		mipi_out: port@1 {
+> +			reg = <1>;
+> +
+> +			mipi_out_panel: endpoint {
+> +				remote-endpoint = <&mipi_in_panel>;
+> +			};
+> +		};
+> +	};
+> +
+> +	mipi_panel: panel@0 {
+> +		compatible = "feiyang,fy07024di26a30d";
+> +		reg = <0>;
+> +		avdd-supply = <&avdd>;
+> +		backlight = <&backlight>;
+> +		dvdd-supply = <&vcc3v3_s0>;
+> +
+> +		port {
+> +			mipi_in_panel: endpoint {
+> +				remote-endpoint = <&mipi_out_panel>;
+> +			};
+> +		};
+> +	};
+> +};
+> +
+>  &pcie0 {
+>  	ep-gpios = <&gpio2 RK_PD4 GPIO_ACTIVE_HIGH>;
+>  	num-lanes = <4>;
+> diff --git a/configs/rockpro64-rk3399_defconfig
+> b/configs/rockpro64-rk3399_defconfig
+> index 173f8f75020d..4e1af37a1559 100644
+> --- a/configs/rockpro64-rk3399_defconfig
+> +++ b/configs/rockpro64-rk3399_defconfig
+> @@ -4,6 +4,7 @@ CONFIG_COUNTER_FREQUENCY=24000000
+>  CONFIG_ARCH_ROCKCHIP=y
+>  CONFIG_SPL_GPIO=y
+>  CONFIG_NR_DRAM_BANKS=1
+> +CONFIG_SF_DEFAULT_SPEED=10000000
+>  CONFIG_ENV_SIZE=0x8000
+>  CONFIG_ENV_OFFSET=0x3F8000
+>  CONFIG_DEFAULT_DEVICE_TREE="rk3399-rockpro64"
+> @@ -20,7 +21,6 @@ CONFIG_PCI=y
+>  CONFIG_DEBUG_UART=y
+>  CONFIG_BOOTSTAGE=y
+>  CONFIG_BOOTSTAGE_REPORT=y
+> -CONFIG_USE_PREBOOT=y
+>  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rockpro64.dtb"
+>  CONFIG_DISPLAY_BOARDINFO_LATE=y
+>  CONFIG_SPL_MAX_SIZE=0x40000
+> @@ -34,6 +34,7 @@ CONFIG_CMD_BOOTZ=y
+>  CONFIG_CMD_GPT=y
+>  CONFIG_CMD_MMC=y
+>  CONFIG_CMD_PCI=y
+> +CONFIG_CMD_POWEROFF=y
+>  CONFIG_CMD_USB=y
+>  # CONFIG_CMD_SETEXPR is not set
+>  CONFIG_CMD_TIME=y
+> @@ -57,7 +58,10 @@ CONFIG_MMC_SDHCI=y
+>  CONFIG_MMC_SDHCI_SDMA=y
+>  CONFIG_MMC_SDHCI_ROCKCHIP=y
+>  CONFIG_SF_DEFAULT_BUS=1
+> +CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+>  CONFIG_SPI_FLASH_GIGADEVICE=y
+> +CONFIG_PHY_REALTEK=y
+> +CONFIG_DM_ETH_PHY=y
+>  CONFIG_ETH_DESIGNWARE=y
+>  CONFIG_GMAC_ROCKCHIP=y
+>  CONFIG_NVME_PCI=y
+> @@ -96,5 +100,4 @@ CONFIG_VIDEO=y
+>  CONFIG_DISPLAY=y
+>  CONFIG_VIDEO_ROCKCHIP=y
+>  CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+> -CONFIG_SPL_TINY_MEMSET=y
+>  CONFIG_ERRNO_STR=y
