@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FA24CD1284
-	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 21:01:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BE40CD1284
+	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 21:01:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83036882B0;
-	Sun, 31 Mar 2024 23:00:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 144E6882C4;
+	Sun, 31 Mar 2024 23:00:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="H8GKdBHc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gin49LeB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5568587C82; Sun, 31 Mar 2024 22:03:39 +0200 (CEST)
-Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
- [IPv6:2a00:1450:4864:20::22c])
+ id CF94087F8B; Sun, 31 Mar 2024 22:03:40 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6639D87F74
- for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:03:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D40B987DF1
+ for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:03:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eugeneuriev@gmail.com
-Received: by mail-lj1-x22c.google.com with SMTP id
- 38308e7fff4ca-2d6ff0422a2so49190961fa.2
- for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 13:03:37 -0700 (PDT)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-516a01c8490so797932e87.1
+ for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 13:03:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711915417; x=1712520217; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1711915418; x=1712520218; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iEbE/13KyoJaJ/y0cMWxB2voFqYX1/3jewfTlMW2E5Y=;
- b=H8GKdBHcRYmy/N2GYThFcIZuOt4B52ze5tpypZFFm5Cyt8YHiernEP1KUllWhmE/jn
- XGdc4SyW+9mwmMLpiJHUG9+twNNIF3POYrPkuxWWwfEY3HOOJdHCGhaDQd2m7QsscxW4
- 3RwzOO8qDYGq6YYvZd1Rao6v15dMJqzy6+SDiNx8BT+G8rFx/ejNAZlXBlw0HvExkulp
- ZXUmYk3QLqavNBp5p8X8yHUrGpId7K3VFT1qjjXdXIMfN8bUPloEKZd1s9+dHMaK6RH6
- qX9tXFTSTGSy0mx53WtlzaDEHFekR6HjQJBXZaLE+Xwqd2qO8rLkjVQDYb+/Imfpz7Oc
- iJCg==
+ bh=CykDrKhEY3XMdGlZOyT5MTTTgwvqdMBuZvQx6VAYeN8=;
+ b=gin49LeBdBiUyD8DqrpdKnJfi3rfKl12ID1gqLNXxLMw/IVuLm1Zdr4FWX+CQk0j9P
+ Ch8Zp8T+ql07f8datXvfz3mrFwwGETlHuvhaPasUUVQLzVGI4Dr3dEYgJqoVgZhgOcp4
+ fOQzKWRAM1VHjL07TMJ4D3k2bmPTQ/aUiWobsKl1Mi9H2/9sujsfkcNxVT9HVEZZ8o6V
+ npZUqhmbemamKE0LA8C1WcQfkNW97B7X1hxJSlq7J7GTvdU+bOeMT4qcC+L6zuWJX5oy
+ DTkkHq5WR5mlsXAAFEbBbVhhJwgATo8yb9PSM2zBhuxJGmoecOKAS/opEplGs0FQ+iwq
+ wqrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711915417; x=1712520217;
+ d=1e100.net; s=20230601; t=1711915418; x=1712520218;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iEbE/13KyoJaJ/y0cMWxB2voFqYX1/3jewfTlMW2E5Y=;
- b=FHKLGgWzO33W2qKE1d2AUQX7yIP6FE2LtyowEuXPP82Phxc+koIGEebteHT8l0HoQ8
- +c8MGQSE/DwDXEkrTcxq+MDILYevZ0DvX/SAOeCXtyRuSoX93J2jBfKOLXB+niNA92yJ
- vRLQg34t2KnABCFNwm6pSQFl7s3ghraIkUbtntyIcyKvc7JB8Qfblubo+iWSq0QIfesW
- 4srM4PwnN8Sf9j+3KCaHQNwKY9hQCyekK1yaIIp3eGUXdJ+rn5ywV+MIs77UtvgElRQP
- KpbtQM7zzHKKuUPd6itX54MRszan6RcW7WipvcOWx7itAnCkJ3Mn/PsgaS/Six0Kvsu2
- CbBg==
-X-Gm-Message-State: AOJu0Yyttwrzr3ciG/h5bdR6w5fL0pxYBSKpAadJF+JW6jvJuMG8ggwE
- s3nG2WK1YIPsuI42eqa7uCnR9Anci66Ul/SHOMi2epLwlgc7o1AG
-X-Google-Smtp-Source: AGHT+IFfq/Waisn/BjCT64FeoOnAF0nhcKKvbQHAslPduFlhgWCoJOLh+YfY0Iy42z7nQNI9Yx1lgA==
-X-Received: by 2002:ac2:5f1a:0:b0:513:a05d:7e9a with SMTP id
- 26-20020ac25f1a000000b00513a05d7e9amr4577840lfq.45.1711915416482; 
- Sun, 31 Mar 2024 13:03:36 -0700 (PDT)
+ bh=CykDrKhEY3XMdGlZOyT5MTTTgwvqdMBuZvQx6VAYeN8=;
+ b=nQGce14V+yBdC/hwSVVPc/EnIyVPU8Xt7aiK9RheVDQi3cu9ywRCcvAoDQGaU55lMK
+ lPpGYC4mCNJnHRX/EcajEp7c5CQpLePlxnVZct+LEBOt+EiIqYP0Lwm8Zbke/ThRpFhQ
+ xcLDNwX7ik21C4jX/AVlcSnIDBV8SALSrQX7TB/LNUEOCPiKB9M+nKd5Pr89cwj94ulP
+ oPOzGaqkRWS79SmLFs3irkK5phNDYAf4YBUc8G3T0VWxcI8ZobdO524mZ6GMJZyyJyOA
+ Cpo+umUtUxzWjT+AzBNdE1Q8QrYlDgF+6KKTi4BISP52hnJcQjKuToc9S3zPsjtOCLDp
+ NAag==
+X-Gm-Message-State: AOJu0Yx7T5HNVfyNCDoNekLko7xneHolDJc8CFXt2T5JYiSDMHbJKvJW
+ ThbtE2kYtkuZC16yIlIOLnq3imU0dGEyvIImMj3jyuCuYGTite4H
+X-Google-Smtp-Source: AGHT+IFyIqqDQLVnWNfKi5FrSGBwVhyef1EHpgitd1keSlF8nEl/saU7tBmiWGLgphIDhCM7IAg7wg==
+X-Received: by 2002:ac2:532d:0:b0:515:89cc:26ab with SMTP id
+ f13-20020ac2532d000000b0051589cc26abmr2564694lfh.9.1711915418051; 
+ Sun, 31 Mar 2024 13:03:38 -0700 (PDT)
 Received: from BlackProtonRN.clients.gtk.su ([185.16.100.35])
  by smtp.gmail.com with ESMTPSA id
- l5-20020ac25545000000b00516a08ce8f8sm425000lfk.269.2024.03.31.13.03.35
+ l5-20020ac25545000000b00516a08ce8f8sm425000lfk.269.2024.03.31.13.03.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 31 Mar 2024 13:03:35 -0700 (PDT)
+ Sun, 31 Mar 2024 13:03:37 -0700 (PDT)
 From: Eugene Uriev <eugeneuriev@gmail.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Eugene Uriev <eugeneuriev@gmail.com>
-Subject: [PATCH 5/9] mcheck: support memalign
-Date: Sun, 31 Mar 2024 23:03:23 +0300
-Message-Id: <20240331200327.29141-6-eugeneuriev@gmail.com>
+Subject: [PATCH 6/9] mcheck: add pedantic mode support
+Date: Sun, 31 Mar 2024 23:03:24 +0300
+Message-Id: <20240331200327.29141-7-eugeneuriev@gmail.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240331200327.29141-1-eugeneuriev@gmail.com>
 References: <20240331200327.29141-1-eugeneuriev@gmail.com>
@@ -93,93 +93,182 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The pedantic mode is run-time contolled, so
+appropriate registry take place everytime.
+
+Maybe it's worth to use compile-time control only.
+So, the registry could be optimized out by an #ifdef.
+
 Signed-off-by: Eugene Uriev <eugeneuriev@gmail.com>
 ---
 
- common/dlmalloc.c        |  7 ++++++-
- common/mcheck_core.inc.h | 20 ++++++++++++++++++--
- 2 files changed, 24 insertions(+), 3 deletions(-)
+ common/dlmalloc.c        | 12 ++++++++++++
+ common/mcheck_core.inc.h | 41 ++++++++++++++++++++++++++++++++++++++++
+ include/mcheck.h         |  9 +++++++++
+ 3 files changed, 62 insertions(+)
 
 diff --git a/common/dlmalloc.c b/common/dlmalloc.c
-index 8de15d7193..73c04af2a3 100644
+index 73c04af2a3..a0616217d4 100644
 --- a/common/dlmalloc.c
 +++ b/common/dlmalloc.c
-@@ -2265,7 +2265,12 @@ Void_t *rEALLOc(Void_t *oldmem, size_t bytes)
+@@ -2233,6 +2233,7 @@ void cfree(mem) Void_t *mem;
+ 
+ Void_t *mALLOc(size_t bytes)
+ {
++	mcheck_pedantic_prehook();
+ 	size_t fullsz = mcheck_alloc_prehook(bytes);
+ 	void *p = mALLOc_impl(fullsz);
+ 
+@@ -2245,6 +2246,7 @@ void fREe(Void_t *mem) { fREe_impl(mcheck_free_prehook(mem)); }
+ 
+ Void_t *rEALLOc(Void_t *oldmem, size_t bytes)
+ {
++	mcheck_pedantic_prehook();
+ 	if (bytes == 0) {
+ 		if (oldmem)
+ 			fREe(oldmem);
+@@ -2265,6 +2267,7 @@ Void_t *rEALLOc(Void_t *oldmem, size_t bytes)
  
  Void_t *mEMALIGn(size_t alignment, size_t bytes)
  {
--	return NULL;
-+	size_t fullsz = mcheck_memalign_prehook(alignment, bytes);
-+	void *p = mEMALIGn_impl(alignment, fullsz);
-+
-+	if (!p)
-+		return p;
-+	return mcheck_memalign_posthook(alignment, p, bytes);
++	mcheck_pedantic_prehook();
+ 	size_t fullsz = mcheck_memalign_prehook(alignment, bytes);
+ 	void *p = mEMALIGn_impl(alignment, fullsz);
+ 
+@@ -2277,6 +2280,7 @@ Void_t *mEMALIGn(size_t alignment, size_t bytes)
+ 
+ Void_t *cALLOc(size_t n, size_t elem_size)
+ {
++	mcheck_pedantic_prehook();
+ 	// NB: here is no overflow check.
+ 	size_t fullsz = mcheck_alloc_prehook(n * elem_size);
+ 	void *p = cALLOc_impl(1, fullsz);
+@@ -2287,12 +2291,20 @@ Void_t *cALLOc(size_t n, size_t elem_size)
  }
  
- // pvALLOc, vALLOc - redirect to mEMALIGn, defined here, so they need no wrapping.
+ // mcheck API {
++int mcheck_pedantic(mcheck_abortfunc_t f)
++{
++	mcheck_initialize(f, 1);
++	return 0;
++}
++
+ int mcheck(mcheck_abortfunc_t f)
+ {
+ 	mcheck_initialize(f, 0);
+ 	return 0;
+ }
+ 
++void mcheck_check_all(void) { mcheck_pedantic_check(); }
++
+ enum mcheck_status mprobe(void *__ptr) { return mcheck_mprobe(__ptr); }
+ // mcheck API }
+ #endif
 diff --git a/common/mcheck_core.inc.h b/common/mcheck_core.inc.h
-index 6f26ef00d9..b038bb0539 100644
+index b038bb0539..85a34de295 100644
 --- a/common/mcheck_core.inc.h
 +++ b/common/mcheck_core.inc.h
-@@ -69,6 +69,7 @@ typedef struct {
- } mcheck_canary;
- struct mcheck_hdr {
- 	size_t size; /* Exact size requested by user.  */
-+	size_t aln_skip; /* Ignored bytes, before the mcheck_hdr, to fulfill alignment */
- 	mcheck_canary canary; /* Magic number to check header integrity.  */
- };
+@@ -30,6 +30,8 @@
+  * Unlike glibc-clients, U-Boot has limited malloc-usage, and only one thread.
+  * So it's better to make the protection heavier.
+  * Thus overflow canary here is greater, than glibc's one. Underflow canary is bigger too.
++ * U-Boot also allows to use fixed-size heap-registry, instead of double-linked list in glibc.
++ *
+  * Heavy canary allows to catch not only memset(..)-errors,
+  * but overflow/underflow of struct-array access:
+  *	{
+@@ -61,8 +63,14 @@
+ #define FREEFLOOD	((char)0xf5)
+ #define PADDINGFLOOD	((char)0x58)
  
-@@ -104,6 +105,7 @@ static inline size_t allign_size_up(size_t sz, size_t grain)
- }
++// my normal run demands 4427-6449 chunks:
++#define REGISTRY_SZ	6608
+ #define CANARY_DEPTH	2
  
- #define mcheck_allign_customer_size(SZ) allign_size_up(SZ, sizeof(mcheck_elem))
-+#define mcheck_evaluate_memalign_prefix_size(ALIGN) allign_size_up(sizeof(struct mcheck_hdr), ALIGN)
- 
- static enum mcheck_status mcheck_OnNok(enum mcheck_status status)
- {
-@@ -156,7 +158,8 @@ static void *mcheck_free_helper(void *ptr, int clean_content)
- 
++// avoid problems with BSS at early stage:
++static char mcheck_pedantic_flag __section(".data") = 0;
++static void *mcheck_registry[REGISTRY_SZ] __section(".data") = {0};
++
+ typedef unsigned long long mcheck_elem;
+ typedef struct {
+ 	mcheck_elem elems[CANARY_DEPTH];
+@@ -159,6 +167,12 @@ static void *mcheck_free_helper(void *ptr, int clean_content)
  	if (clean_content)
  		mcheck_flood(ptr, FREEFLOOD, mcheck_allign_customer_size(hdr->size));
--	return hdr;
+ 
++	for (i = 0; i < REGISTRY_SZ; ++i)
++		if (mcheck_registry[i] == hdr) {
++			mcheck_registry[i] = 0;
++			break;
++		}
 +
-+	return (char *)hdr - hdr->aln_skip;
+ 	return (char *)hdr - hdr->aln_skip;
  }
  
- static void *mcheck_free_prehook(void *ptr) { return mcheck_free_helper(ptr, CLEAN_CONTENT); }
-@@ -171,10 +174,13 @@ static size_t mcheck_alloc_prehook(size_t sz)
- static void *mcheck_allocated_helper(void *altoghether_ptr, size_t customer_sz,
- 				     size_t alignment, int clean_content)
- {
--	struct mcheck_hdr *hdr = (struct mcheck_hdr *)altoghether_ptr;
-+	const size_t slop = alignment ?
-+		mcheck_evaluate_memalign_prefix_size(alignment) - sizeof(struct mcheck_hdr) : 0;
-+	struct mcheck_hdr *hdr = (struct mcheck_hdr *)((char *)altoghether_ptr + slop);
- 	int i;
+@@ -197,6 +211,17 @@ static void *mcheck_allocated_helper(void *altoghether_ptr, size_t customer_sz,
  
- 	hdr->size = customer_sz;
-+	hdr->aln_skip = slop;
  	for (i = 0; i < CANARY_DEPTH; ++i)
- 		hdr->canary.elems[i] = MAGICWORD;
- 
-@@ -204,6 +210,16 @@ static void *mcheck_alloc_noclean_posthook(void *altoghether_ptr, size_t custome
- 	return mcheck_allocated_helper(altoghether_ptr, customer_sz, ANY_ALIGNMENT, KEEP_CONTENT);
+ 		tail->elems[i] = MAGICTAIL;
++
++	for (i = 0; i < REGISTRY_SZ; ++i)
++		if (!mcheck_registry[i]) {
++			mcheck_registry[i] = hdr;
++			return payload; // normal end
++		}
++
++	static char *overflow_msg = "\n\n\nERROR: mcheck registry overflow, pedantic check would be incomplete!!\n\n\n\n";
++
++	printf("%s", overflow_msg);
++	overflow_msg = "(mcheck registry full)";
+ 	return payload;
  }
  
-+static size_t mcheck_memalign_prehook(size_t alig, size_t sz)
+@@ -227,9 +252,25 @@ static enum mcheck_status mcheck_mprobe(void *ptr)
+ 	return mcheck_checkhdr(hdr);
+ }
+ 
++static void mcheck_pedantic_check(void)
 +{
-+	return mcheck_evaluate_memalign_prefix_size(alig) + sz + sizeof(mcheck_canary);
++	int i;
++
++	for (i = 0; i < REGISTRY_SZ; ++i)
++		if (mcheck_registry[i])
++			mcheck_checkhdr(mcheck_registry[i]);
 +}
 +
-+static void *mcheck_memalign_posthook(size_t alignment, void *altoghether_ptr, size_t customer_sz)
++static void mcheck_pedantic_prehook(void)
 +{
-+	return mcheck_allocated_helper(altoghether_ptr, customer_sz, alignment, CLEAN_CONTENT);
++	if (mcheck_pedantic_flag)
++		mcheck_pedantic_check();
 +}
 +
- static enum mcheck_status mcheck_mprobe(void *ptr)
+ static void mcheck_initialize(mcheck_abortfunc_t new_func, char pedantic_flag)
  {
- 	struct mcheck_hdr *hdr = &((struct mcheck_hdr *)ptr)[-1];
+ 	mcheck_abortfunc = (new_func) ? new_func : &mcheck_default_abort;
++	mcheck_pedantic_flag = pedantic_flag;
+ }
+ 
+ #endif
+diff --git a/include/mcheck.h b/include/mcheck.h
+index a049745e4e..f4c9b7e61c 100644
+--- a/include/mcheck.h
++++ b/include/mcheck.h
+@@ -33,6 +33,15 @@ typedef void (*mcheck_abortfunc_t)(enum mcheck_status);
+ 
+ int mcheck(mcheck_abortfunc_t func);
+ 
++/*
++ * Similar to `mcheck' but performs checks for all block whenever one of
++ * the memory handling functions is called.  This can be very slow.
++ */
++int mcheck_pedantic(mcheck_abortfunc_t f);
++
++/* Force check of all blocks now.  */
++void mcheck_check_all(void);
++
+ /*
+  * Check for aberrations in a particular malloc'd block. These are the
+  * same checks that `mcheck' does, when you free or reallocate a block.
 -- 
 2.25.1
 
