@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0F2ECD128A
-	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 20:33:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07A94CD1284
+	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 20:33:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 014A7882D3;
-	Sun, 31 Mar 2024 22:31:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8B52F882EB;
+	Sun, 31 Mar 2024 22:31:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="uvqqUyT3";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="cojlrEVV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC6B1882EE; Sun, 31 Mar 2024 22:31:04 +0200 (CEST)
+ id 49EA7882DC; Sun, 31 Mar 2024 22:31:08 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4956882E1
- for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:31:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 03B07882EC
+ for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:31:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,21 +28,21 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1711917053; bh=wyO9IyQIz+U8ddjTD8qR+lHkOwqIVujoQ9yXXZGMPhI=;
- b=uvqqUyT3EaHWvlG54ySIxe+SZ0D73leWD+bNeKt7Dqxgvu27QCRfwKiSv8ifHpGWr5lxXib42
- b2fRQCo1FJLdmAtMxwDidRJ+INwC1f4u9MKNdmK+Kkbai6sRS9KQiQDrOfQ/uhaaEWp8LXMnC5e
- 4Vj4x4Ztf9m6A9JtQFRRooOXBK3L4Bl2JDyrg3cwUiQ9dHOX1iPzOEMQaiJi58LnH5AF4hUseZZ
- MhwRLB5xdGDxw3couQx/g11vqY3vdZOlQDcrNzpcoQaiWmgNnr2Hh8ZYDHcCksTbV00B6f4iPwN
- 2t3vKlwBwROQuu3u0C+0gXMlUrahawvI3fO09Z/+/g4Q==
+ t=1711917058; bh=LUpfJpmoCdc/Uzp5jx13i4MI6jqLlhXGoz1XmAhtkOY=;
+ b=cojlrEVVRtLbD+LhbydI11TMJjkjDHfdtd8g+SGx6RydrjzSgGazuL+a779P/2SJUUMcmFgt7
+ 4wsJ4dNRy8Txn5i0kL6eTpO5MFD7JIYgTU+WByju12sdC0Xu8vlnhUH02K1Bk5292J1ZY02OvIa
+ 26tt5qfsqG/gyyZ3h3ymvUqvkr/6VWju4cqNwPqBuLoBAzZmH/HNi8Nr69nSMGj2P/LriJfRO0W
+ nj+S6CEVoYH3X8cPc933rexaaHv2JRuPt4GlZDIKvvqdJwyqDeILLMg77NTQqElQdYDDOcHlJcl
+ uT13Fn4T8SmD6yd2f5KYmYFmR48pQ4SMYZAFj33msagg==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jagan Teki <jagan@amarulasolutions.com>
+ Andy Yan <andy.yan@rock-chips.com>
 Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 18/31] rockchip: rk3399-rock-pi-n10: Sync device tree from
- linux v6.8
-Date: Sun, 31 Mar 2024 20:28:24 +0000
-Message-ID: <20240331202921.262323-19-jonas@kwiboo.se>
+Subject: [PATCH 19/31] rockchip: rk3399-eaidk-610: Sync device tree from linux
+ v6.8
+Date: Sun, 31 Mar 2024 20:28:25 +0000
+Message-ID: <20240331202921.262323-20-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240331202921.262323-1-jonas@kwiboo.se>
 References: <20240331202921.262323-1-jonas@kwiboo.se>
@@ -54,7 +54,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 6609c7fc8fc6b45ed44f73aa
+X-ForwardEmail-ID: 6609c8008fc6b45ed44f73c3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,9 +71,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sync rk3399-rock-pi-n10 related device tree from linux v6.8.
+Sync rk3399-eaidk-610 device tree from linux v6.8.
 
-Remove SPL_GPIO=y, board does not use gpio in SPL.
+Add DM_RESET=y to support reset signals.
 
 Change to SPL_MAX_SIZE=0x40000, SPL can be up to 256 KiB.
 
@@ -83,210 +83,61 @@ Add MMC_SDHCI_SDMA=y to use DMA transfer for eMMC.
 
 Add PHY_REALTEK=y and DM_ETH_PHY=y to support ethernet PHY.
 
+Add PHY_ROCKCHIP_INNO_USB2=y and PHY_ROCKCHIP_TYPEC=y to support USB PHY.
+
 Remove REGULATOR_PWM=y, board does not use pwm-regulator compatible.
+
+Remove SPL_TINY_MEMSET=y to use full memset in SPL.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/rk3288-vmarc-som.dtsi            | 48 +++++++++++++++++++
- arch/arm/dts/rk3399pro-vmarc-som.dtsi         | 20 ++++++--
- .../dts/rockchip-radxa-dalang-carrier.dtsi    | 21 ++++++++
- configs/rock-pi-n10-rk3399pro_defconfig       |  8 ++--
- 4 files changed, 89 insertions(+), 8 deletions(-)
+ arch/arm/dts/rk3399-eaidk-610.dts  |  3 ++-
+ configs/eaidk-610-rk3399_defconfig | 11 ++++++++---
+ 2 files changed, 10 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm/dts/rk3288-vmarc-som.dtsi b/arch/arm/dts/rk3288-vmarc-som.dtsi
-index 717cb3dc816e..793951655b73 100644
---- a/arch/arm/dts/rk3288-vmarc-som.dtsi
-+++ b/arch/arm/dts/rk3288-vmarc-som.dtsi
-@@ -231,11 +231,43 @@
- 	};
- };
- 
-+&i2c1 {
-+	clock-frequency = <400000>;
-+	status = "okay";
-+
-+	hym8563: rtc@51 {
-+		compatible = "haoyu,hym8563";
-+		reg = <0x51>;
-+		interrupt-parent = <&gpio5>;
-+		interrupts = <RK_PC3 IRQ_TYPE_LEVEL_LOW>;
-+		#clock-cells = <0>;
-+		clock-output-names = "hym8563";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&hym8563_int>;
-+	};
-+};
-+
- &i2c5 {
- 	status = "okay";
- };
- 
-+&io_domains {
-+	bb-supply = <&vcc_io>;
-+	flash0-supply = <&vccio_flash>;
-+	gpio1830-supply = <&vcc_18>;
-+	gpio30-supply = <&vcc_io>;
-+	sdcard-supply = <&vccio_sd>;
-+	wifi-supply = <&vcc_wl>;
-+	status = "okay";
-+};
-+
- &pinctrl {
-+	hym8563 {
-+		hym8563_int: hym8563-int {
-+			rockchip,pins = <5 RK_PC3 RK_FUNC_GPIO &pcfg_pull_up>;
-+		};
-+	};
-+
- 	pcfg_pull_none_drv_8ma: pcfg-pull-none-drv-8ma {
- 		drive-strength = <8>;
- 	};
-@@ -251,6 +283,12 @@
- 		};
- 	};
- 
-+	sdio-pwrseq {
-+		wifi_enable_h: wifi-enable-h {
-+			rockchip,pins = <4 RK_PD4 RK_FUNC_GPIO &pcfg_pull_none>;
-+		};
-+	};
-+
- 	sdmmc {
- 		sdmmc_bus4: sdmmc-bus4 {
- 			rockchip,pins =
-@@ -282,6 +320,16 @@
- 	};
- };
- 
-+&sdio_pwrseq {
-+	/*
-+	 * On the module itself this is one of these (depending
-+	 * on the actual card populated):
-+	 * - SDIO_RESET_L_WL_REG_ON
-+	 * - PDN (power down when low)
-+	 */
-+	reset-gpios = <&gpio4 RK_PD4 GPIO_ACTIVE_LOW>;	/* WIFI_REG_ON */
-+};
-+
- &usbphy {
- 	status = "okay";
- };
-diff --git a/arch/arm/dts/rk3399pro-vmarc-som.dtsi b/arch/arm/dts/rk3399pro-vmarc-som.dtsi
-index e1cb426f2aa5..8823c924dc1d 100644
---- a/arch/arm/dts/rk3399pro-vmarc-som.dtsi
-+++ b/arch/arm/dts/rk3399pro-vmarc-som.dtsi
-@@ -13,8 +13,9 @@
- 	compatible = "vamrs,rk3399pro-vmarc-som", "rockchip,rk3399pro";
+diff --git a/arch/arm/dts/rk3399-eaidk-610.dts b/arch/arm/dts/rk3399-eaidk-610.dts
+index d1f343345f67..173da81fc231 100644
+--- a/arch/arm/dts/rk3399-eaidk-610.dts
++++ b/arch/arm/dts/rk3399-eaidk-610.dts
+@@ -15,6 +15,7 @@
+ 	compatible = "openailab,eaidk-610", "rockchip,rk3399";
  
  	aliases {
--		mmc0 = &sdmmc;
--		mmc1 = &sdhci;
 +		ethernet0 = &gmac;
-+		mmc0 = &sdhci;
-+		mmc1 = &sdmmc;
- 	};
- 
- 	vcc3v3_pcie: vcc-pcie-regulator {
-@@ -297,11 +298,10 @@
- 	clock-frequency = <400000>;
- 	status = "okay";
- 
--	hym8563: hym8563@51 {
-+	hym8563: rtc@51 {
- 		compatible = "haoyu,hym8563";
- 		reg = <0x51>;
- 		#clock-cells = <0>;
--		clock-frequency = <32768>;
- 		clock-output-names = "hym8563";
+ 		mmc0 = &sdio0;
+ 		mmc1 = &sdmmc;
+ 		mmc2 = &sdhci;
+@@ -773,7 +774,7 @@
+ 		compatible = "brcm,bcm4329-fmac";
+ 		reg = <1>;
+ 		interrupt-parent = <&gpio0>;
+-		interrupts = <RK_PA3 GPIO_ACTIVE_HIGH>;
++		interrupts = <RK_PA3 IRQ_TYPE_LEVEL_HIGH>;
+ 		interrupt-names = "host-wake";
  		pinctrl-names = "default";
- 		pinctrl-0 = <&hym8563_int>;
-@@ -347,7 +347,7 @@
- 
- 	pcie {
- 		pcie_pwr: pcie-pwr {
--			rockchip,pins =	<4 RK_PD4 RK_FUNC_GPIO &pcfg_pull_up>;
-+			rockchip,pins = <4 RK_PD4 RK_FUNC_GPIO &pcfg_pull_up>;
- 		};
- 	};
- 
-@@ -381,6 +381,16 @@
- 	pmu1830-supply = <&vcc_1v8>;
- };
- 
-+&sdio_pwrseq {
-+	/*
-+	 * On the module itself this is one of these (depending
-+	 * on the actual card populated):
-+	 * - SDIO_RESET_L_WL_REG_ON
-+	 * - PDN (power down when low)
-+	 */
-+	reset-gpios = <&gpio2 RK_PD3 GPIO_ACTIVE_LOW>;
-+};
-+
- &sdhci {
- 	bus-width = <8>;
- 	mmc-hs400-1_8v;
-diff --git a/arch/arm/dts/rockchip-radxa-dalang-carrier.dtsi b/arch/arm/dts/rockchip-radxa-dalang-carrier.dtsi
-index 26b53eac4706..da1d548b7330 100644
---- a/arch/arm/dts/rockchip-radxa-dalang-carrier.dtsi
-+++ b/arch/arm/dts/rockchip-radxa-dalang-carrier.dtsi
-@@ -15,6 +15,14 @@
- 		#clock-cells = <0>;
- 	};
- 
-+	sdio_pwrseq: sdio-pwrseq {
-+		compatible = "mmc-pwrseq-simple";
-+		clocks = <&hym8563>;
-+		clock-names = "ext_clock";
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&wifi_enable_h>;
-+	};
-+
- 	vcc12v_dcin: vcc12v-dcin-regulator {
- 		compatible = "regulator-fixed";
- 		regulator-name = "vcc12v_dcin";
-@@ -78,6 +86,19 @@
- 	status = "okay";
- };
- 
-+&sdio0 {
-+	bus-width = <4>;
-+	cap-sd-highspeed;
-+	cap-sdio-irq;
-+	keep-power-in-suspend;
-+	mmc-pwrseq = <&sdio_pwrseq>;
-+	non-removable;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&sdio0_bus4 &sdio0_cmd &sdio0_clk>;
-+	sd-uhs-sdr104;
-+	status = "okay";
-+};
-+
- &sdmmc {
- 	bus-width = <4>;
- 	cap-mmc-highspeed;
-diff --git a/configs/rock-pi-n10-rk3399pro_defconfig b/configs/rock-pi-n10-rk3399pro_defconfig
-index 234d0c9ab0f5..6d93b9e58003 100644
---- a/configs/rock-pi-n10-rk3399pro_defconfig
-+++ b/configs/rock-pi-n10-rk3399pro_defconfig
-@@ -2,7 +2,6 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
--CONFIG_SPL_GPIO=y
+ 		pinctrl-0 = <&wifi_host_wake_l>;
+diff --git a/configs/eaidk-610-rk3399_defconfig b/configs/eaidk-610-rk3399_defconfig
+index eba6f90c605b..d9cde9ecced5 100644
+--- a/configs/eaidk-610-rk3399_defconfig
++++ b/configs/eaidk-610-rk3399_defconfig
+@@ -5,6 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
  CONFIG_NR_DRAM_BANKS=1
  CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399pro-rock-pi-n10"
-@@ -18,7 +17,7 @@ CONFIG_DEBUG_UART=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399pro-rock-pi-n10.dtb"
- # CONFIG_CONSOLE_MUX is not set
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-eaidk-610"
++CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+@@ -13,7 +14,7 @@ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_DEBUG_UART=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-eaidk-610.dtb"
  CONFIG_DISPLAY_BOARDINFO_LATE=y
 -CONFIG_SPL_MAX_SIZE=0x2e000
 +CONFIG_SPL_MAX_SIZE=0x40000
  CONFIG_SPL_PAD_TO=0x7f8000
  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-@@ -36,17 +35,20 @@ CONFIG_ENV_IS_IN_MMC=y
+@@ -30,14 +31,19 @@ CONFIG_ENV_IS_IN_MMC=y
  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
  CONFIG_ROCKCHIP_GPIO=y
  CONFIG_SYS_I2C_ROCKCHIP=y
@@ -300,14 +151,19 @@ index 234d0c9ab0f5..6d93b9e58003 100644
 +CONFIG_DM_ETH_PHY=y
  CONFIG_ETH_DESIGNWARE=y
  CONFIG_GMAC_ROCKCHIP=y
- CONFIG_NVME_PCI=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PHY_ROCKCHIP_TYPEC=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_TYPEC=y
  CONFIG_PMIC_RK8XX=y
 -CONFIG_REGULATOR_PWM=y
  CONFIG_REGULATOR_RK8XX=y
  CONFIG_PWM_ROCKCHIP=y
- # CONFIG_RAM_ROCKCHIP_DEBUG is not set
+ CONFIG_BAUDRATE=1500000
+@@ -50,5 +56,4 @@ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_GENERIC=y
+ CONFIG_USB_DWC3=y
+ CONFIG_USB_DWC3_GENERIC=y
+-CONFIG_SPL_TINY_MEMSET=y
+ CONFIG_ERRNO_STR=y
 -- 
 2.43.2
 
