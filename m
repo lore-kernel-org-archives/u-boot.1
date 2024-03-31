@@ -4,73 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B69DCD1284
-	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 21:00:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66363CD128A
+	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 21:00:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7530787F16;
-	Sun, 31 Mar 2024 23:00:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2E55987FA7;
+	Sun, 31 Mar 2024 23:00:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TrkP+yyV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZFstuf9v";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A1EF87DF1; Sun, 31 Mar 2024 22:03:33 +0200 (CEST)
+ id 14FC787FC6; Sun, 31 Mar 2024 22:03:35 +0200 (CEST)
 Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
  [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DBC187D45
- for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:03:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B6BE387F8B
+ for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:03:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eugeneuriev@gmail.com
 Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-516a01c8490so797896e87.1
- for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 13:03:31 -0700 (PDT)
+ 2adb3069b0e04-515b43b39fdso2949914e87.1
+ for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 13:03:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711915411; x=1712520211; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vI5N3Yjv79U0WZkAOUQFKBv5htNWZMUCTL4VA/e155A=;
- b=TrkP+yyVvTxEvVatcDDoEk505PUsbg4aob+lXOrfzVXhT7MzXuLxlzvnk1Z/o7LAlh
- kTqXt83HYO03l0O6PL8V1Pqn1egTDbQ23pwhFoe3Ome+e+UQ68yTx0LVN3ms8OiZQbJP
- T9sm8a5W9xy8Lx7+ETmKzVUGLq2ksdam+6f+FCUtfc3zJTliCmufO3UdU+Fttttfp8pc
- uHDEWpEokg15ESHBUxwAyUBvQa6v3vtDpyk/p6xd8eInUQGPXrsm602Bb5henmPyyhHJ
- Q1LELe8FhP6ZYGJIO+bpJ9LZrWiJ4tGW8juNMPfLrggiwIElnxBRNGKtITgNzwhl2+H4
- bu3w==
+ d=gmail.com; s=20230601; t=1711915412; x=1712520212; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TKcNN9BhN8UKpZzIBetRxa/3ScpLoQgKpgUqXqnwsWw=;
+ b=ZFstuf9v3DkLK7AYjFzA3hoL7zbBAp8QZ/x8gY8DrFv3YbFGxU1LhTdM5g8JJQwFYN
+ P83syuAesfFV9FkbsqsNwJTrx54khvgFrOeEa1Xp76tKtu1XtvQFVy0ivw7tdP9LW75U
+ sZJ+emrJARDli+XSyN1XmuM9ZEhshWe1wD2MKuvgpuDZZRIWF1cGGWDIxPOLxhAJaJuY
+ 3TqXa+WVIbBuWm0WEFxsnrqw6FNJXQ031rX71ttvgUUWvH2ieqejm1uRFby2sLvlcYfy
+ qjwtdy7MXoaWZshS0NEGYKjb7utYnX2VNS+ONeSKXmnj7aTWJqjUJWi7qiqismVDftax
+ EiKg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711915411; x=1712520211;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=vI5N3Yjv79U0WZkAOUQFKBv5htNWZMUCTL4VA/e155A=;
- b=EvUZ5sxgYUUGil7cSH+cn9aZgAkRKPu+TXgwt37+9GeargjRCQtJmG38gYwfCvOSWH
- 9TaW1c8zzW21u6tk44C0uhC3Bo6OokrS9rw/PwuvP+elMVXzGna5AnCKgNNdn+aILDjm
- Voaal3b7XD5tXkFdJVffNdT8FEv+tYc5M6OL7pvTaioZTInpE/PMCnLU7+LmBktmgCem
- y5rpGc6MRWK4WECzK2XH/7LXLlAw8178y/vHW4+e3brhyjuEgVBC7HQwQItL+lAzcSZa
- xyET04Fbuqj6y0cRYkUWDD7ztugoHd7C9hdFsZ3cDfeb0knOoeHwzOkleiWkgynPUTlT
- XPbg==
-X-Gm-Message-State: AOJu0YyI4VXzo08P2gp7wsFJq8KkKRe7vcYBrnvsrzlxi3PigOEFPjB4
- CzPKPYJgqPbDfz/RMLmJ3ourspqUM/7Y9J+ygT/r2ezQuRfRphTP
-X-Google-Smtp-Source: AGHT+IGoC0H0rLEH5uoXEmQ4P2JeR/bRH8c2+ne8RmoixSXnX/1XDLfesRsO1O3FNj4thIe/YVppDw==
-X-Received: by 2002:a05:6512:20c9:b0:513:cfa9:be6b with SMTP id
- u9-20020a05651220c900b00513cfa9be6bmr2461406lfr.3.1711915410658; 
- Sun, 31 Mar 2024 13:03:30 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1711915412; x=1712520212;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=TKcNN9BhN8UKpZzIBetRxa/3ScpLoQgKpgUqXqnwsWw=;
+ b=ezUitkaVwxKB58kw5ZOWiGqatmevAJuO8RxsMAlo8Os7ETo9C+YKx0zJFpRzrK0BVZ
+ JHAGkR/aUgAc52x1riwamL0+VShtSq3IWdMKRPxBRy+wt3OEGBVVvkYZhcNtrF3jy+Vp
+ bPSDmg4L9Rr/6/jUvBKKQctkh6OjyvRzhjhTwh+r5GU5rOBPj8921BFwFgo0MGkI1z0V
+ IM3GdUkvYtKZsvFtqh17ZAz0yQYpbqPt5AwCBtSMzjuzn7qOrzI9D+vzEem25qP2VaL/
+ +TMCgLV+zWXM7UsPB3XN8Wb6u4soz5TXW0gtMvb7XhBfCwgPbXh9qqGrf8uycI9wfnnd
+ Jnsw==
+X-Gm-Message-State: AOJu0Yx5PmQvwDh82qejgFPZ9kBAnUEU9ur3wsAzgvIVfQ+A0GYfIgnC
+ Lc6CiCFg7Ce/7mOfU9errFY6G8k/KnrMZ+WTSX28B7shhwNxyNuE6MSbqeaD
+X-Google-Smtp-Source: AGHT+IGop+vW5M6ZJKy9U/q2LelBKIDEpYMDoBIdCBEfi0Vws/D9GVzrSRY8mGJd9X0JqXHhHADGGQ==
+X-Received: by 2002:a05:6512:15a6:b0:516:a1ad:cedd with SMTP id
+ bp38-20020a05651215a600b00516a1adceddmr1526053lfb.14.1711915412066; 
+ Sun, 31 Mar 2024 13:03:32 -0700 (PDT)
 Received: from BlackProtonRN.clients.gtk.su ([185.16.100.35])
  by smtp.gmail.com with ESMTPSA id
- l5-20020ac25545000000b00516a08ce8f8sm425000lfk.269.2024.03.31.13.03.30
+ l5-20020ac25545000000b00516a08ce8f8sm425000lfk.269.2024.03.31.13.03.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 31 Mar 2024 13:03:30 -0700 (PDT)
+ Sun, 31 Mar 2024 13:03:31 -0700 (PDT)
 From: Eugene Uriev <eugeneuriev@gmail.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de,
 	Eugene Uriev <eugeneuriev@gmail.com>
-Subject: [PATCH 0/9] mcheck implementation for U-Boot
-Date: Sun, 31 Mar 2024 23:03:18 +0300
-Message-Id: <20240331200327.29141-1-eugeneuriev@gmail.com>
+Subject: [PATCH 2/9] mcheck: Use memset/memcpy instead of
+ MALLOC_ZERO/MALLOC_COPY for mcheck.
+Date: Sun, 31 Mar 2024 23:03:20 +0300
+Message-Id: <20240331200327.29141-3-eugeneuriev@gmail.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240331200327.29141-1-eugeneuriev@gmail.com>
+References: <20240331200327.29141-1-eugeneuriev@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 31 Mar 2024 23:00:15 +0200
@@ -90,53 +94,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+These fast helpers sometimes breach mem-chunk boundaries.
+Thus they trigger mcheck alarm. Standard ones are accurate though.
 
-There was no "mcheck" for U-Boot before.
+Signed-off-by: Eugene Uriev <eugeneuriev@gmail.com>
+---
 
-Since U-Boot has only 1 thread, and normally makes 4000+ - 6000+
-mallocs, it's better to use havier canaries to protect heap-chunks.
-My variant uses 2x8 = 16byte-long protector. And
-the multiplier could be changed to tune speed/protection tradeoff.
-This protects not only against memset()-s, but against "near" wild
-pointers too, and makes more probable to catch "distant" ones.
+ common/dlmalloc.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-The core file of the set is included into the C-file, not complied
-separately in order to enable (potential) coexisting of
-mcheck-protectors, e.g. malloc_simple(.) and dlmalloc simultaneously.
-
-My tests were for ARM SoC, 64bit, so the patch is
-aware of alignment.
-
-Primary this patch is for using by developers: to verify,
-if a change doesn't break the heap integrity.
-By default the mcheck is disabled and wouldn't affect the boot.
-
-I used pedantic mode, canary=16byte, registry-size=6608.
-For my system the overhead was 230ms.
-
-I assume, the merge window coming. So I send it now.
-
-
-Eugene Uriev (9):
-  mcheck: prepare +1 tier for mcheck-wrappers, in dl-*alloc commands
-  mcheck: Use memset/memcpy instead of MALLOC_ZERO/MALLOC_COPY for
-    mcheck.
-  mcheck: introduce essentials of mcheck
-  mcheck: integrate mcheck into dlmalloc.c
-  mcheck: support memalign
-  mcheck: add pedantic mode support
-  mcheck: introduce mcheck_on_ramrelocation(.)
-  mcheck: add stats, add a comment with test results
-  mcheck: let mcheck_abortfunc_t print the pointer
-
- common/board_f.c         |   4 +
- common/dlmalloc.c        | 154 ++++++++++++++++----
- common/mcheck_core.inc.h | 304 +++++++++++++++++++++++++++++++++++++++
- include/mcheck.h         |  51 +++++++
- 4 files changed, 488 insertions(+), 25 deletions(-)
- create mode 100644 common/mcheck_core.inc.h
- create mode 100644 include/mcheck.h
-
+diff --git a/common/dlmalloc.c b/common/dlmalloc.c
+index 40acd3dfa5..0813e7e8b1 100644
+--- a/common/dlmalloc.c
++++ b/common/dlmalloc.c
+@@ -34,6 +34,10 @@ DECLARE_GLOBAL_DATA_PTR;
+ 
+ #ifdef MCHECK_HEAP_PROTECTION
+  #define STATIC_IF_MCHECK static
++ #undef MALLOC_COPY
++ #undef MALLOC_ZERO
++static inline void MALLOC_ZERO(void *p, size_t sz) { memset(p, 0, sz); }
++static inline void MALLOC_COPY(void *dest, const void *src, size_t sz) { memcpy(dest, src, sz); }
+ #else
+  #define STATIC_IF_MCHECK
+  #define mALLOc_impl mALLOc
 -- 
 2.25.1
 
