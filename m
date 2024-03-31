@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9791FCD128A
-	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 20:33:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CE1ACD1284
+	for <u-boot@archiver.kernel.org>; Sun, 31 Mar 2024 20:33:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2D27882F6;
-	Sun, 31 Mar 2024 22:31:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7FA8C882F1;
+	Sun, 31 Mar 2024 22:31:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="OgUDuJf5";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="jGFIlRvn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE4C5882F1; Sun, 31 Mar 2024 22:31:20 +0200 (CEST)
+ id B9C8A882F1; Sun, 31 Mar 2024 22:31:27 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6EBD882F7
- for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:31:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A049882F1
+ for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 22:31:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,20 +28,21 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1711917071; bh=mTHUTNCdOCXLD2bPH9wNEkFjRLZngchvFb3wC3upKL8=;
- b=OgUDuJf5wnSdsh1sXhAwUML6fDuiDn/xgRaJxI7bYcaenqLmdT2ujl6AaqitWkb6ieJKRbLod
- iVomaB9j7k/k1ubVBJZ5Y1DGk9+Uo1LtSag84Ep31Jlzn/V+Pt72aifTxKPn6MzEdqA6KhfkhgG
- 6Vhe9gjCh078D4bA1iLvFO2DkCdHCcx/YFodjQ+7piwVo9cg8bfcEbjoPb/lJjOy1WwGt202Yeu
- z+j69tY6PGA8UmC+GXZdLjc5voO00y33sYuQg+vFeWG2m5T9ziil4tKAyk6oRoIen5BOD3Lk7pJ
- CvQq5epwWbwHmovJmX5AM9UfAC2p04afAW9v+spG/Zfw==
+ t=1711917075; bh=9TahS6enAf5uqzJ9nAJz7PCR+20l8pB6vnbhNZDaCN0=;
+ b=jGFIlRvn5QkxXjY7/aokAipuiG5EvEQmg7pHrmCqSDdCAQ5Cnc3OTU7k6xTt3iHP1n/UxDb3J
+ VL2/2zMT+Esftf1mve7oMpJESW0PHaulbFQUd8XZf5UlnH+QqLrfP2ncYowhQtB7IuW6DyCDzjT
+ RkasWxjuBn8Ei6+rbIajVJ+AlQWoFGc5daQfFdHkotjvy2c9vzz9ac3wpizrCuRhuxEBkwgJpNj
+ Kg9VrPQjxGBTlOqIhkQvVkepN3Z/uW54eudS0Q/Up8SXGkuA7xEjR/qrvtGdva5e0xWDQ5dfx+u
+ 58VPsnwJLuXr1z+7MjoKaqQP3RagUSxER+G7MTbtd1yQ==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Jagan Teki <jagan@amarulasolutions.com>
 Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 22/31] rockchip: rk3399-firefly: Sync device tree from linux
+Subject: [PATCH 23/31] rockchip: rk3399-orangepi: Sync device tree from linux
  v6.8
-Date: Sun, 31 Mar 2024 20:28:28 +0000
-Message-ID: <20240331202921.262323-23-jonas@kwiboo.se>
+Date: Sun, 31 Mar 2024 20:28:29 +0000
+Message-ID: <20240331202921.262323-24-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240331202921.262323-1-jonas@kwiboo.se>
 References: <20240331202921.262323-1-jonas@kwiboo.se>
@@ -53,7 +54,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 6609c80d8fc6b45ed44f73f9
+X-ForwardEmail-ID: 6609c8118fc6b45ed44f740b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,9 +71,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sync rk3399-firefly device tree from linux v6.8.
+Sync rk3399-orangepi device tree from linux v6.8.
 
-Add AHCI=y, SCSI_AHCI=y, AHCI_PCI=y and SCSI=y to support PCIe SATA.
+Add DM_RESET=y to support reset signals.
 
 Change to SPL_MAX_SIZE=0x40000, SPL can be up to 256 KiB.
 
@@ -88,40 +89,56 @@ Remove SPL_TINY_MEMSET=y to use full memset in SPL.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/dts/rk3399-firefly.dts  | 17 ++++++++++++-----
- configs/firefly-rk3399_defconfig | 13 +++++++++++--
- 2 files changed, 23 insertions(+), 7 deletions(-)
+ arch/arm/dts/rk3399-orangepi.dts  | 12 +++++++-----
+ configs/orangepi-rk3399_defconfig | 10 ++++++++--
+ 2 files changed, 15 insertions(+), 7 deletions(-)
 
-diff --git a/arch/arm/dts/rk3399-firefly.dts b/arch/arm/dts/rk3399-firefly.dts
-index c4dd2a6b4836..260415d99aeb 100644
---- a/arch/arm/dts/rk3399-firefly.dts
-+++ b/arch/arm/dts/rk3399-firefly.dts
-@@ -5,6 +5,7 @@
+diff --git a/arch/arm/dts/rk3399-orangepi.dts b/arch/arm/dts/rk3399-orangepi.dts
+index 04b54abea3cc..e7551449e718 100644
+--- a/arch/arm/dts/rk3399-orangepi.dts
++++ b/arch/arm/dts/rk3399-orangepi.dts
+@@ -7,6 +7,7 @@
  
- /dts-v1/;
- #include <dt-bindings/input/linux-event-codes.h>
+ #include "dt-bindings/pwm/pwm.h"
+ #include "dt-bindings/input/input.h"
 +#include <dt-bindings/interrupt-controller/irq.h>
- #include <dt-bindings/pwm/pwm.h>
- #include <dt-bindings/usb/pd.h>
+ #include "dt-bindings/usb/pd.h"
  #include "rk3399.dtsi"
-@@ -15,6 +16,7 @@
- 	compatible = "firefly,firefly-rk3399", "rockchip,rk3399";
+ #include "rk3399-opp.dtsi"
+@@ -16,6 +17,7 @@
+ 	compatible = "rockchip,rk3399-orangepi", "rockchip,rk3399";
  
  	aliases {
 +		ethernet0 = &gmac;
  		mmc0 = &sdio0;
  		mmc1 = &sdmmc;
  		mmc2 = &sdhci;
-@@ -86,7 +88,7 @@
- 		pinctrl-names = "default";
- 		pinctrl-0 = <&pwrbtn>;
+@@ -51,13 +53,13 @@
+ 			press-threshold-microvolt = <300000>;
+ 		};
+ 
+-		back {
++		button-back {
+ 			label = "Back";
+ 			linux,code = <KEY_BACK>;
+ 			press-threshold-microvolt = <985000>;
+ 		};
+ 
+-		menu {
++		button-menu {
+ 			label = "Menu";
+ 			linux,code = <KEY_MENU>;
+ 			press-threshold-microvolt = <1314000>;
+@@ -77,7 +79,7 @@
+ 		compatible = "gpio-keys";
+ 		autorepeat;
  
 -		power {
 +		key-power {
  			debounce-interval = <100>;
  			gpios = <&gpio0 RK_PA5 GPIO_ACTIVE_LOW>;
- 			label = "GPIO Key Power";
-@@ -245,12 +247,12 @@
+ 			label = "GPIO Power";
+@@ -166,12 +168,12 @@
  	vdd_log: vdd-log {
  		compatible = "pwm-regulator";
  		pwms = <&pwm2 0 25000 1>;
@@ -129,66 +146,44 @@ index c4dd2a6b4836..260415d99aeb 100644
  		regulator-name = "vdd_log";
  		regulator-always-on;
  		regulator-boot-on;
- 		regulator-min-microvolt = <430000>;
+ 		regulator-min-microvolt = <800000>;
  		regulator-max-microvolt = <1400000>;
 -		vin-supply = <&vcc_sys>;
  	};
  };
  
-@@ -298,6 +300,11 @@
- 	status = "okay";
- };
- 
-+&gpu {
-+	mali-supply = <&vdd_gpu>;
-+	status = "okay";
-+};
-+
- &hdmi {
- 	ddc-i2c-bus = <&i2c3>;
- 	pinctrl-names = "default";
-@@ -770,8 +777,8 @@
- 	sd-uhs-sdr104;
- 
- 	/* Power supply */
--	vqmmc-supply = &vcc1v8_s3;	/* IO line */
--	vmmc-supply = &vcc_sdio;	/* card's power */
-+	vqmmc-supply = <&vcc1v8_s3>;	/* IO line */
-+	vmmc-supply = <&vcc_sdio>;	/* card's power */
- 
- 	#address-cells = <1>;
- 	#size-cells = <0>;
-@@ -781,7 +788,7 @@
+@@ -735,7 +737,7 @@
  		reg = <1>;
  		compatible = "brcm,bcm4329-fmac";
  		interrupt-parent = <&gpio0>;
 -		interrupts = <RK_PA3 GPIO_ACTIVE_HIGH>;
 +		interrupts = <RK_PA3 IRQ_TYPE_LEVEL_HIGH>;
  		interrupt-names = "host-wake";
- 		brcm,drive-strength = <5>;
  		pinctrl-names = "default";
-diff --git a/configs/firefly-rk3399_defconfig b/configs/firefly-rk3399_defconfig
-index db98926b627a..2f81a2ed0da6 100644
---- a/configs/firefly-rk3399_defconfig
-+++ b/configs/firefly-rk3399_defconfig
-@@ -14,9 +14,10 @@ CONFIG_DEBUG_UART_CLOCK=24000000
- CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_PCI=y
+ 		pinctrl-0 = <&wifi_host_wake_l>;
+diff --git a/configs/orangepi-rk3399_defconfig b/configs/orangepi-rk3399_defconfig
+index 703732ad15f0..2d0c9b77e584 100644
+--- a/configs/orangepi-rk3399_defconfig
++++ b/configs/orangepi-rk3399_defconfig
+@@ -6,6 +6,7 @@ CONFIG_SPL_GPIO=y
+ CONFIG_NR_DRAM_BANKS=1
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-orangepi"
++CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+@@ -14,7 +15,7 @@ CONFIG_SYS_LOAD_ADDR=0x800800
  CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-firefly.dtb"
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-orangepi.dtb"
  CONFIG_DISPLAY_BOARDINFO_LATE=y
 -CONFIG_SPL_MAX_SIZE=0x2e000
 +CONFIG_SPL_MAX_SIZE=0x40000
  CONFIG_SPL_PAD_TO=0x7f8000
  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-@@ -32,19 +33,28 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
+@@ -31,12 +32,18 @@ CONFIG_ENV_IS_IN_MMC=y
  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SCSI_AHCI=y
-+CONFIG_AHCI_PCI=y
  CONFIG_ROCKCHIP_GPIO=y
  CONFIG_SYS_I2C_ROCKCHIP=y
 +CONFIG_ROCKCHIP_IODOMAIN=y
@@ -201,18 +196,12 @@ index db98926b627a..2f81a2ed0da6 100644
 +CONFIG_DM_ETH_PHY=y
  CONFIG_ETH_DESIGNWARE=y
  CONFIG_GMAC_ROCKCHIP=y
- CONFIG_NVME_PCI=y
 +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
 +CONFIG_PHY_ROCKCHIP_TYPEC=y
  CONFIG_PMIC_RK8XX=y
  CONFIG_REGULATOR_PWM=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
-+CONFIG_SCSI=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-@@ -61,5 +71,4 @@ CONFIG_USB_ETHER_ASIX88179=y
+ CONFIG_SPL_DM_REGULATOR_FIXED=y
+@@ -58,5 +65,4 @@ CONFIG_USB_ETHER_ASIX88179=y
  CONFIG_USB_ETHER_MCS7830=y
  CONFIG_USB_ETHER_RTL8152=y
  CONFIG_USB_ETHER_SMSC95XX=y
