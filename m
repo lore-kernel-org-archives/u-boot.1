@@ -4,65 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84C8BCD1288
-	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 18:15:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB332CD128A
+	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 18:15:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B87BF88321;
-	Mon,  1 Apr 2024 20:14:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 36B1188329;
+	Mon,  1 Apr 2024 20:15:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="c9aiXUuJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NcE/5kQl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B444480EED; Mon,  1 Apr 2024 20:14:57 +0200 (CEST)
-Received: from mail-oa1-x2e.google.com (mail-oa1-x2e.google.com
- [IPv6:2001:4860:4864:20::2e])
+ id 9079388087; Mon,  1 Apr 2024 20:14:58 +0200 (CEST)
+Received: from mail-oa1-x34.google.com (mail-oa1-x34.google.com
+ [IPv6:2001:4860:4864:20::34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B336488327
- for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 20:14:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8376388325
+ for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 20:14:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-oa1-x2e.google.com with SMTP id
- 586e51a60fabf-22a73f2d6adso1899074fac.3
- for <u-boot@lists.denx.de>; Mon, 01 Apr 2024 11:14:44 -0700 (PDT)
+Received: by mail-oa1-x34.google.com with SMTP id
+ 586e51a60fabf-22988692021so1809598fac.1
+ for <u-boot@lists.denx.de>; Mon, 01 Apr 2024 11:14:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711995283; x=1712600083; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=0FtrJPCWjpbJApxcOTRFrAGNnLUQ5cYmHRFs9ApQbR0=;
- b=c9aiXUuJGRcJ6cO91Tc4RPLmjWsyggvb3wHQpkI3HqupP0MZQ1NsyWbwrG3U6PmWGK
- 1WVXdrIzC7LbQo0pqQbMiRPOQdvs7SgJ6uzZSvEJhk25i5t9Gj5teB+2v2D6Ncdpll1/
- e8eUiuqTx2p4fHD/PbG8HpgRJ2APvjtxeDl90Lp6lETOBIJWH2q1AczseL2r53uPVwxP
- /9fh93CkIBqBXzpcrljglda9v31HCARrcUTOswWOREcj4dcoitQj7ybGL66PI1bjNDQ1
- +RKAHZ0Q4COKvNEaCaa3MnazhUTOvEoVDHXTZtR1KsjeSm2aPPmOE824v7Cnd6hnaU6C
- 4ZyA==
+ d=gmail.com; s=20230601; t=1711995284; x=1712600084; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=u5iVMbdULW5nYegdQpmdOU6oE1l8C8xRFHbn6xszsFI=;
+ b=NcE/5kQlaUQ8tcCVP37c95NHe2HWV2QDY8VhMqCwjAQRCKq3ANTO28d2XG8FigMHhE
+ Yltk5mmuZCMJjxyfoP8HV2/VfvmyO37JXqAOXEgQYepzUzpgkN1WwOBhcsKTa1rgZocr
+ JKwLa/vshkmiZhG/lvMGy49gtogy0GJDXGR3mI5KMagqvumhyPn3sTNBntm4IwrG5yIv
+ h1DFqvFzPjwhXQgLHXJruWh/gKMvy3ADSJnsLNPMBlU+SE89FA9RvRwoF78LNNHm628S
+ MjfWNNIwaCuIiol7zrmR3qxLrHKMn26qpX9fRv9mxxQafF4ecbaNCNy4cJwpTL0h/zx5
+ XXkg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711995283; x=1712600083;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0FtrJPCWjpbJApxcOTRFrAGNnLUQ5cYmHRFs9ApQbR0=;
- b=uDUB/gIMOF/MA9p+HupNxs2pqg8BDqRg6KyR4fBM+kLzmLf4Esu8/H4P2H5NYQNGxt
- l0C/hWBq5ukCN/RCoUzHoQ3fCSPUwQJSjJqnLQQ4cmtRhZloSS8MYSizXWqH+8IcrtYC
- qQA4aBKidovIFwzFgZ9UrAQ9k0jrNVtGXV84MSxBi6Z1+WZ0O/eatLwccBqmH88sg8Qp
- NPrmvpTgkLp1YBzVg+el6Qbgc1gH3gu9eB7DR5R1OWyfCYHc4kJRHbBDnxeiSHncEYW1
- y+jIM35hM9bu+Saz2Y+3T3agGVcX6y4yEwhTdCEZwmn5I0NmUYIZ4DDgWJO2YJXmlUsX
- gBZQ==
-X-Gm-Message-State: AOJu0Yx4iQHCVhP40keVLaLEiuYPY4TkVgNJUCaeqxgKorlEjJX2Km7T
- MfTlrC7Jkw52TA3J6YEqWKjddRvM2mTJGx9D/Xz9GG7kfroQzbytn/bJ5osh
-X-Google-Smtp-Source: AGHT+IERKzOJe6Th1j4/HNcKr7udFZsbc/HzD2qIOgQiGChUV5V79oNjmsCsoJz3FQme9Q7WmWfKfw==
-X-Received: by 2002:a05:6870:a910:b0:22a:1036:4d86 with SMTP id
- eq16-20020a056870a91000b0022a10364d86mr10347777oab.20.1711995283110; 
+ d=1e100.net; s=20230601; t=1711995284; x=1712600084;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=u5iVMbdULW5nYegdQpmdOU6oE1l8C8xRFHbn6xszsFI=;
+ b=FGMe17az+wjFhi7FGg8DECunsvEalIyc8GriwxnLOuBFoGwYzbL5Fg+qZqprhqtk0K
+ oDTKOBxVVaqGAWLS94ngHsB8Kj49crafDq3tgVJSwshMcCdsm+QBflVhhzQ2JNlzJUkA
+ 6oU3KAMUiNILQEUDh6Ggez+R/Yt7M4UpAXSdP1kxA6WBokjyJ4rKDDgoWzHBeNGyB14W
+ IXremB2RZkA5LXQ2TP18Bw7X4S42WjEi1Av0aXVhxeC2GvDYfEXISJHGcG2nb14Kprgy
+ LLbGdNJHaoYjfWRsZFJSKaAkvxpgzQX75NdBbM+9nlmo5k8W78YGO1ZJyBq/puqN8lnM
+ sntQ==
+X-Gm-Message-State: AOJu0Yyd+JsBo24nhCO2/61nntQ1w28k6mhRn2ULJ8BrPv81f2ql5qAe
+ vQFvd+yqY0sfjrK7cBVF18PpUWS1Q1fN1uLvcUxX1X+N0wQBgcGby1vhbHA4
+X-Google-Smtp-Source: AGHT+IGqEViPYYZ+nLUeZXjMxcMk3FtdV9fa8eiQpLKfphap5wMIFmH4rPzaVVhMeigVBFaA33IzFg==
+X-Received: by 2002:a05:6870:d686:b0:22b:8fe7:e335 with SMTP id
+ z6-20020a056870d68600b0022b8fe7e335mr4216318oap.5.1711995283939; 
  Mon, 01 Apr 2024 11:14:43 -0700 (PDT)
 Received: from localhost.localdomain ([75.28.21.198])
  by smtp.gmail.com with ESMTPSA id
- hx17-20020a056871531100b0022a0a60a9bcsm3008824oac.57.2024.04.01.11.14.42
+ hx17-20020a056871531100b0022a0a60a9bcsm3008824oac.57.2024.04.01.11.14.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Apr 2024 11:14:42 -0700 (PDT)
+ Mon, 01 Apr 2024 11:14:43 -0700 (PDT)
 From: Chris Morgan <macroalpha82@gmail.com>
 To: u-boot@lists.denx.de
 Cc: naoki@radxa.com, cym@rock-chips.com, gajjar04akash@gmail.com,
@@ -72,10 +73,13 @@ Cc: naoki@radxa.com, cym@rock-chips.com, gajjar04akash@gmail.com,
  jonas@kwiboo.se, inindev@gmail.com, kever.yang@rock-chips.com,
  philipp.tomsich@vrull.eu, sjg@chromium.org, trini@konsulko.com,
  Chris Morgan <macromorgan@hotmail.com>
-Subject: [V2 PATCH 0/2] Update RAM Bank Logic for RK3568/RK3588
-Date: Mon,  1 Apr 2024 13:14:33 -0500
-Message-Id: <20240401181435.553351-1-macroalpha82@gmail.com>
+Subject: [V1 PATCH 1/2] rockchip: sdram: Support getting banks from TPL for
+ rk3568 and rk3588
+Date: Mon,  1 Apr 2024 13:14:34 -0500
+Message-Id: <20240401181435.553351-2-macroalpha82@gmail.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240401181435.553351-1-macroalpha82@gmail.com>
+References: <20240401181435.553351-1-macroalpha82@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,79 +100,141 @@ X-Virus-Status: Clean
 
 From: Chris Morgan <macromorgan@hotmail.com>
 
-Use the ATAG info provided by the Rockchip binary TPL to identify
-RAM banks on the RK3568 and RK3588 when using the ROCKCHIP_TPL binary.
+Allow RK3568 and RK3588 based boards to get the RAM bank configuration
+from the ROCKCHIP_TPL stage instead of the current logic. This fixes
+both an issue where 256MB of RAM is blocked for devices with >= 4GB
+of RAM and where memory holes need to be defined for devices with
+>= 16GB of RAM. In the event that neither SOC is used and the
+ROCKCHIP_TPL stage is not used, fall back to existing logic.
 
-This is needed because there are specific addresses that should not
-be written to for all RK3588 based devices with >=16GB of RAM, writing
-to these addresses immediately results in a crash. Additionally on the
-RK3568 and RK3588 this allows us to reclaim 256MB of RAM when RAM >=
-4GB.
+Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+---
+ arch/arm/mach-rockchip/sdram.c | 100 +++++++++++++++++++++++++++++++++
+ 1 file changed, 100 insertions(+)
 
-Changes since V1:
- - After additional feedback, removed RFC tag.
- - Made code work for both RK3568 and RK3588.
- - Removed memory hole code for all RK3588 boards.
- - Updated CONFIG_NR_DRAM_BANKS for 3568 and 3588 boards as it is
-   the max number of banks supported by the ATAGS code.
-
-Chris Morgan (2):
-  rockchip: sdram: Support getting banks from TPL for rk3568 and rk3588
-  rockchip: Switch RK3568 and RK3588 to new RAM bank logic
-
- arch/arm/mach-rockchip/sdram.c                | 100 ++++++++++++++++++
- board/friendlyelec/nanopc-t6-rk3588/Makefile  |   6 --
- .../nanopc-t6-rk3588/nanopc-t6-rk3588.c       |  39 -------
- board/pine64/quartzpro64-rk3588/Makefile      |   3 -
- .../quartzpro64-rk3588/quartzpro64-rk3588.c   |  39 -------
- board/radxa/rock5a-rk3588s/Makefile           |   6 --
- board/radxa/rock5a-rk3588s/rock5a-rk3588s.c   |  39 -------
- board/radxa/rock5b-rk3588/Makefile            |   6 --
- board/radxa/rock5b-rk3588/rock5b-rk3588.c     |  39 -------
- board/rockchip/evb_rk3588/Makefile            |   6 --
- board/rockchip/evb_rk3588/evb-rk3588.c        |  39 -------
- board/turing/turing-rk1-rk3588/Makefile       |   6 --
- .../turing-rk1-rk3588/turing-rk1-rk3588.c     |  39 -------
- configs/anbernic-rgxx3-rk3566_defconfig       |   2 +-
- configs/bpi-r2-pro-rk3568_defconfig           |   2 +-
- configs/evb-rk3568_defconfig                  |   2 +-
- configs/evb-rk3588_defconfig                  |   3 +-
- configs/generic-rk3568_defconfig              |   2 +-
- configs/lubancat-2-rk3568_defconfig           |   2 +-
- configs/nanopc-t6-rk3588_defconfig            |   3 +-
- configs/nanopi-r5c-rk3568_defconfig           |   2 +-
- configs/nanopi-r5s-rk3568_defconfig           |   2 +-
- configs/neu6a-io-rk3588_defconfig             |   2 +-
- configs/neu6b-io-rk3588_defconfig             |   2 +-
- configs/odroid-m1-rk3568_defconfig            |   2 +-
- configs/orangepi-5-plus-rk3588_defconfig      |   3 +-
- configs/orangepi-5-rk3588s_defconfig          |   3 +-
- configs/quartz64-a-rk3566_defconfig           |   2 +-
- configs/quartz64-b-rk3566_defconfig           |   2 +-
- configs/quartzpro64-rk3588_defconfig          |   3 +-
- configs/radxa-cm3-io-rk3566_defconfig         |   2 +-
- configs/radxa-e25-rk3568_defconfig            |   2 +-
- configs/rock-3a-rk3568_defconfig              |   2 +-
- configs/rock5a-rk3588s_defconfig              |   3 +-
- configs/rock5b-rk3588_defconfig               |   3 +-
- configs/soquartz-blade-rk3566_defconfig       |   2 +-
- configs/soquartz-cm4-rk3566_defconfig         |   2 +-
- configs/soquartz-model-a-rk3566_defconfig     |   2 +-
- configs/turing-rk1-rk3588_defconfig           |   3 +-
- 39 files changed, 126 insertions(+), 301 deletions(-)
- delete mode 100644 board/friendlyelec/nanopc-t6-rk3588/Makefile
- delete mode 100644 board/friendlyelec/nanopc-t6-rk3588/nanopc-t6-rk3588.c
- delete mode 100644 board/pine64/quartzpro64-rk3588/Makefile
- delete mode 100644 board/pine64/quartzpro64-rk3588/quartzpro64-rk3588.c
- delete mode 100644 board/radxa/rock5a-rk3588s/Makefile
- delete mode 100644 board/radxa/rock5a-rk3588s/rock5a-rk3588s.c
- delete mode 100644 board/radxa/rock5b-rk3588/Makefile
- delete mode 100644 board/radxa/rock5b-rk3588/rock5b-rk3588.c
- delete mode 100644 board/rockchip/evb_rk3588/Makefile
- delete mode 100644 board/rockchip/evb_rk3588/evb-rk3588.c
- delete mode 100644 board/turing/turing-rk1-rk3588/Makefile
- delete mode 100644 board/turing/turing-rk1-rk3588/turing-rk1-rk3588.c
-
+diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
+index 0d9a0aef6f..e02fb03c5f 100644
+--- a/arch/arm/mach-rockchip/sdram.c
++++ b/arch/arm/mach-rockchip/sdram.c
+@@ -12,6 +12,7 @@
+ #include <asm/io.h>
+ #include <asm/arch-rockchip/sdram.h>
+ #include <dm/uclass-internal.h>
++#include <linux/errno.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -35,11 +36,110 @@ struct tos_parameter_t {
+ 	s64 reserve[8];
+ };
+ 
++/* Tag magic */
++#define ATAGS_CORE_MAGIC	0x54410001
++#define ATAGS_DDR_MEM_MAGIC	0x54410052
++
++/* Tag size and offset */
++#define ATAGS_SIZE		SZ_8K
++#define ATAGS_OFFSET		(SZ_2M - ATAGS_SIZE)
++#define ATAGS_PHYS_BASE		(CFG_SYS_SDRAM_BASE + ATAGS_OFFSET)
++
++/* ATAGS memory structure. */
++struct tag_ddr_mem {
++	u32 count;
++	u32 version;
++	u64 bank[20];
++	u32 flags;
++	u32 data[2];
++	u32 hash;
++} __packed;
++
++/**
++ * rockchip_dram_init_banksize() - Get RAM banks from Rockchip TPL
++ *
++ * Iterate through the defined ATAGS memory location to first find a
++ * valid core header, then find a valid ddr_info header. Sanity check
++ * the number of banks found. Then, iterate through the data to add
++ * each individual memory bank. Perform fixups on memory banks that
++ * overlap with a reserved space. If an error condition is received,
++ * it is expected that memory bank setup will fall back on existing
++ * logic. If ROCKCHIP_EXTERNAL_TPL is false then immediately return,
++ * and if neither ROCKCHIP_RK3588 or ROCKCHIP_RK3568 is enabled
++ * immediately return.
++ *
++ * Return number of banks found on success or negative on error.
++ */
++__weak int rockchip_dram_init_banksize(void)
++{
++	struct tag_ddr_mem *ddr_info;
++	size_t val;
++	size_t addr = ATAGS_PHYS_BASE;
++	int i;
++
++	if (!IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL))
++		return 0;
++	if (!IS_ENABLED(CONFIG_ROCKCHIP_RK3588) &&
++	    !IS_ENABLED(CONFIG_ROCKCHIP_RK3568))
++		return 0;
++
++	if (!IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL))
++		return -EPERM;
++
++	while (addr < (ATAGS_PHYS_BASE + ATAGS_SIZE)) {
++		val = readl(addr);
++		if (val == ATAGS_CORE_MAGIC)
++			break;
++		addr += 4;
++	}
++	if (addr >= (ATAGS_PHYS_BASE + ATAGS_SIZE))
++		return -ENODATA;
++
++	while (addr < (ATAGS_PHYS_BASE + ATAGS_SIZE)) {
++		val = readl(addr);
++		if (val == ATAGS_DDR_MEM_MAGIC)
++			break;
++		addr += 4;
++	}
++	if (addr >= (ATAGS_PHYS_BASE + ATAGS_SIZE))
++		return -ENODATA;
++
++	ddr_info = (void *)addr + 4;
++	if (!ddr_info->count || ddr_info->count > CONFIG_NR_DRAM_BANKS)
++		return -ENODATA;
++
++	for (i = 0; i < (ddr_info->count); i++) {
++		size_t start_addr = ddr_info->bank[i];
++		size_t size = ddr_info->bank[(i + ddr_info->count)];
++		size_t tmp;
++
++		if (start_addr < SZ_2M) {
++			tmp = SZ_2M - start_addr;
++			start_addr = SZ_2M;
++			size = size - tmp;
++		}
++
++		if (start_addr >= SDRAM_MAX_SIZE && start_addr < SZ_4G)
++			start_addr = SZ_4G;
++
++		tmp = start_addr + size;
++		if (tmp > SDRAM_MAX_SIZE && tmp < SZ_4G)
++			size = SDRAM_MAX_SIZE - start_addr;
++
++		gd->bd->bi_dram[i].start = start_addr;
++		gd->bd->bi_dram[i].size = size;
++	}
++
++	return i;
++}
++
+ int dram_init_banksize(void)
+ {
+ 	size_t ram_top = (unsigned long)(gd->ram_size + CFG_SYS_SDRAM_BASE);
+ 	size_t top = min((unsigned long)ram_top, (unsigned long)(gd->ram_top));
+ 
++	if (rockchip_dram_init_banksize() > 0)
++		return 0;
+ #ifdef CONFIG_ARM64
+ 	/* Reserve 0x200000 for ATF bl31 */
+ 	gd->bd->bi_dram[0].start = 0x200000;
 -- 
 2.34.1
 
