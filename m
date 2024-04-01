@@ -4,84 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E20A7CD128A
-	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 16:53:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B287ECD1288
+	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 17:04:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ED8987FEE;
-	Mon,  1 Apr 2024 18:53:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id C45128800D;
+	Mon,  1 Apr 2024 19:04:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ipeKdNfh";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ccNr1ZP8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3064C882DC; Mon,  1 Apr 2024 18:53:14 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ id CDF458801D; Mon,  1 Apr 2024 19:03:59 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 384EF87EF5
- for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 18:53:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 857BD87EF5
+ for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 19:03:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1711990391; x=1714582391;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=M5S481Gy5AslMluyv9JKs6qOe5tmzk3tM3/NHYk7Nbo=;
- b=ipeKdNfhNKMMCW8Y59a6vox2nIVwajY+av7glup7LoX3xCMI5ZVQC0ROpntRwcAI
- I9HLeVdipz71hbfIRNX7ygYL8w7AR6g2BjJp/6MeLYBVHQMFWddew3O9Vx1cIp+V
- zZIPJJqHetM/WJRvi/zzGBaP/205hdIFQwsyv/rMqa8=;
-X-AuditID: ac14000a-fadff7000000290d-bf-660ae677d9de
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 19.29.10509.776EA066;
- Mon,  1 Apr 2024 18:53:11 +0200 (CEST)
-Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 1 Apr 2024
- 18:53:11 +0200
-Message-ID: <8a3601ab-fa34-4976-ae22-66dc5263bcd9@phytec.de>
-Date: Mon, 1 Apr 2024 18:53:10 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-nandan@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 431H3sVW022130;
+ Mon, 1 Apr 2024 12:03:54 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1711991034;
+ bh=D4e5YqxsrG5PegyQqVymUBnq63iz9hHRY2OJesev1ug=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=ccNr1ZP8Lw2zK5Bp+QJ8FH2fMJjA+q/V1jBXjEfMC1LlAFelOEsCdq1WWydYglEGh
+ ZAN5t+zLq109T+mBgycAqrt2u4qK08TimH1LIVbJes3x/PEw43/zz1E5npK45ssA/9
+ FWbHVAksSii+dvse2nx8RI++ab4tiwSsaKnVSWLA=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 431H3smb074933
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 1 Apr 2024 12:03:54 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 1
+ Apr 2024 12:03:54 -0500
+Received: from fllvsmtp7.itg.ti.com (10.64.40.31) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 1 Apr 2024 12:03:54 -0500
+Received: from [10.249.129.130] ([10.249.129.130])
+ by fllvsmtp7.itg.ti.com (8.15.2/8.15.2) with ESMTP id 431H3ow1123809;
+ Mon, 1 Apr 2024 12:03:51 -0500
+Message-ID: <347af20e-d3cf-426e-86dc-280653806f6f@ti.com>
+Date: Mon, 1 Apr 2024 22:33:49 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] arm: mach-k3: am625: copy bootindex to OCRAM for main
- domain SPL
-To: Bryan Brattlof <bb@ti.com>
-CC: "Raghavendra, Vignesh" <vigneshr@ti.com>, <u-boot@lists.denx.de>,
- <nm@ti.com>, <upstream@lists.phytec.de>
-References: <20240226133006.3279993-1-w.egorov@phytec.de>
- <20240226133006.3279993-2-w.egorov@phytec.de>
- <eeda9c00-d7c6-444b-ba77-f70b2f19eb2a@ti.com>
- <20240304202717.7ruiozbuzy4bv5iz@bryanbrattlof.com>
- <2428cd68-f69f-4915-bd94-f7b6bb84152c@ti.com>
- <20240305173457.ir564jlw3euux54n@bryanbrattlof.com>
- <c6e446a6-c767-4c61-87f5-8cc310c7178a@ti.com>
- <dba27c99-b160-4e45-ab68-d5fdb69ef984@phytec.de>
- <20240401144622.trimybc6nxhgrdst@bryanbrattlof.com>
+Subject: Re: [PATCH 4/4] configs: j721s2_evm_*_defconfig: Enable OSPI configs
+To: Manorit Chawdhry <m-chawdhry@ti.com>, Jagan Teki
+ <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>, Prasanth Mantena
+ <p-mantena@ti.com>
+References: <20240401-b4-upstream-j721s2-ospi-support-v1-0-20e4a0024db9@ti.com>
+ <20240401-b4-upstream-j721s2-ospi-support-v1-4-20e4a0024db9@ti.com>
 Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <20240401144622.trimybc6nxhgrdst@bryanbrattlof.com>
+From: Apurva Nandan <a-nandan@ti.com>
+In-Reply-To: <20240401-b4-upstream-j721s2-ospi-support-v1-4-20e4a0024db9@ti.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrOLMWRmVeSWpSXmKPExsWyRpKBR7f8GVeawe82I4u5bw6wWrz5cZbJ
- 4u3eTnaL7nfqFv/PfmB3YPU4e2cHo0d/dwurx/Eb25kCmKO4bFJSczLLUov07RK4Mn6cncNc
- 8N284sK/O2wNjBd0uxg5OSQETCRaJ0xi6WLk4hASWMIkcXx7CzOEc4dRYtqrFjaQKl4BG4mT
- 5/6ygNgsAioST5f1skLEBSVOznwCFhcVkJe4f2sGO4gtLBAt0bR2K1hcREBOouHWNLA5zAL5
- Ert/3WWEWHCOWeLWgZUsEAlxiVtP5jOB2GwC6hJ3NnwDWsDBwSngIDHpTzxEiYXE4jcH2SFs
- eYnmrbOZQWwhIPvFpeUsEN/IS0w795oZwg6VOLJpNdMERuFZSE6dhWTbLCRjZyEZu4CRZRWj
- UG5mcnZqUWa2XkFGZUlqsl5K6iZGUGSIMHDtYOyb43GIkYmD8RCjBAezkgjvT2/ONCHelMTK
- qtSi/Pii0pzU4kOM0hwsSuK8qzuCU4UE0hNLUrNTUwtSi2CyTBycUg2MHL/0rIs/BWi/3mUp
- yS61QYOB6/4b99Lp6z0fHXBvLDxg0VTO3Wq4wr4+oUP2xpTWOm3DP8xak85IxZ+X+q3vdnvW
- in95CxOq9v/epegU9r/waXxd4NqkjRUdXw4WlotOkK9jOuc7x3T3mZe1sjV+K8UTn+vzTfD0
- NXxeJ3/iV6qst0DzFg8lluKMREMt5qLiRAAX/1YKegIAAA==
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,156 +85,63 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-
-Am 01.04.24 um 16:46 schrieb Bryan Brattlof:
-> On April  1, 2024 thus sayeth Wadim Egorov:
->> Hi Vignesh, Hi Bryan,
->>
->>
->> Am 05.03.24 um 18:36 schrieb Raghavendra, Vignesh:
->>>
->>>
->>> On 3/5/2024 11:04 PM, Bryan Brattlof wrote:
->>>> On March  5, 2024 thus sayeth Vignesh Raghavendra:
->>>>>
->>>>> On 05/03/24 01:57, Bryan Brattlof wrote:
->>>>>> Hey Vignesh!
->>>>>>
->>>>>> On March  4, 2024 thus sayeth Vignesh Raghavendra:
->>>>>>> Hi Wadim,
->>>>>>>
->>>>>>> On 26/02/24 19:00, Wadim Egorov wrote:
->>>>>>>> Texas Instruments has begun enabling security settings on the SoCs it
->>>>>>>> produces to instruct ROM and TIFS to begin protecting the Security
->>>>>>>> Management Subsystem (SMS) from other binaries we load into the chip by
->>>>>>>> default.
->>>>>>>>
->>>>>>>> One way ROM and TIFS do this is by enabling firewalls to protect the
->>>>>>>> OCSRAM and HSM RAM regions they're using during bootup.
->>>>>>>>
->>>>>>>> The HSM RAM the wakeup SPL is in is firewalled by TIFS to protect
->>>>>>>> itself from the main domain applications. This means the 'bootindex'
->>>>>>>> value in HSM RAM, left by ROM to indicate if we're using the primary
->>>>>>>> or secondary boot-method, must be moved to OCSRAM (that TIFS has open
->>>>>>>> for us) before we make the jump to the main domain so the main domain's
->>>>>>>> bootloaders can keep access to this information.
->>>>>>>>
->>>>>>>> Based on commit
->>>>>>>>     b672e8581070 ("arm: mach-k3: copy bootindex to OCRAM for main domain SPL")
->>
->> I was thinking, even if the reason described here is not right or does not
->> apply to the am62x, it is still a valid solution for carrying this variable
->> into the context for next stage A53 bootloader.
->>
->> store_boot_info_from_rom() stores the index to the bootindex (.data)
->> variable which makes sure it is valid in R5 SPL context. But the next stage
->> bootloader does not know anything about the bootindex variable. So from my
->> understanding it needs to be copied to a different region to preserve the
->> data for next stage bootloaders.
->>
->> Or do I miss something?
-> 
-> That's correct. We typically put this bootindex variable in the same
-> location for both SPLs.
-
-So basically the patch can stay almost as is, but maybe the misleading 
-comments in am62_hardware.h should be removed.
+On 01/04/24 11:16, Manorit Chawdhry wrote:
+> Enable OSPI related configs to boot using OSPI
+>
+> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> ---
+>   configs/j721s2_evm_a72_defconfig | 3 +++
+>   configs/j721s2_evm_r5_defconfig  | 3 +++
+>   2 files changed, 6 insertions(+)
+>
+> diff --git a/configs/j721s2_evm_a72_defconfig b/configs/j721s2_evm_a72_defconfig
+> index 92f69413fa40..6e7e161fa359 100644
+> --- a/configs/j721s2_evm_a72_defconfig
+> +++ b/configs/j721s2_evm_a72_defconfig
+> @@ -50,6 +50,7 @@ CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
+>   CONFIG_SPL_I2C=y
+>   CONFIG_SPL_DM_MAILBOX=y
+>   CONFIG_SPL_MTD=y
+> +CONFIG_SPL_MTD_SUPPORT=y
+>   CONFIG_SPL_DM_SPI_FLASH=y
+>   CONFIG_SPL_NOR_SUPPORT=y
+>   CONFIG_SPL_DM_RESET=y
+> @@ -58,6 +59,8 @@ CONFIG_SPL_RAM_SUPPORT=y
+>   CONFIG_SPL_RAM_DEVICE=y
+>   # CONFIG_SPL_SPI_FLASH_TINY is not set
+>   CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SF_DEFAULT_MODE=0
+> +CONFIG_SF_DEFAULT_SPEED=25000000
+>   CONFIG_SPL_SPI_LOAD=y
+>   CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
+>   CONFIG_SPL_THERMAL=y
+> diff --git a/configs/j721s2_evm_r5_defconfig b/configs/j721s2_evm_r5_defconfig
+> index cb6b4a44864f..197b3284c12d 100644
+> --- a/configs/j721s2_evm_r5_defconfig
+> +++ b/configs/j721s2_evm_r5_defconfig
+> @@ -57,6 +57,7 @@ CONFIG_SPL_FS_EXT4=y
+>   CONFIG_SPL_I2C=y
+>   CONFIG_SPL_DM_MAILBOX=y
+>   CONFIG_SPL_MTD=y
+> +CONFIG_SPL_MTD_SUPPORT=y
+>   CONFIG_SPL_DM_SPI_FLASH=y
+>   CONFIG_SPL_NOR_SUPPORT=y
+>   CONFIG_SPL_DM_RESET=y
+> @@ -66,6 +67,8 @@ CONFIG_SPL_RAM_DEVICE=y
+>   CONFIG_SPL_REMOTEPROC=y
+>   # CONFIG_SPL_SPI_FLASH_TINY is not set
+>   CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
+> +CONFIG_SF_DEFAULT_MODE=0
+> +CONFIG_SF_DEFAULT_SPEED=25000000
+>   CONFIG_SPL_SPI_LOAD=y
+>   CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
+>   CONFIG_SPL_THERMAL=y
 
 
-> 
-> ~Bryan
-> 
->>>>>>>>
->>>>>>> FYI, this is mostly a problem in non SPL flow (TI prosperity SBL for
->>>>>>> example) where HSM RAM would be used by HSM firmware. This should be a
->>>>>>> issue in R5 SPL flow.  Do you see any issues today? If so, whats the
->>>>>>> TIFS firmware being used?
->>>>>>>
->>>>>>>> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
->>>>>>>> ---
->>>>>>>>    arch/arm/mach-k3/Kconfig                      |  3 ++-
->>>>>>>>    arch/arm/mach-k3/am625_init.c                 | 15 +++++++++++++--
->>>>>>>>    arch/arm/mach-k3/include/mach/am62_hardware.h | 15 +++++++++++++++
->>>>>>>>    3 files changed, 30 insertions(+), 3 deletions(-)
->>>>>>>>
->>>>>>>> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
->>>>>>>> index 03898424c9..f5d06593f7 100644
->>>>>>>> --- a/arch/arm/mach-k3/Kconfig
->>>>>>>> +++ b/arch/arm/mach-k3/Kconfig
->>>>>>>> @@ -75,7 +75,8 @@ config SYS_K3_BOOT_PARAM_TABLE_INDEX
->>>>>>>>    	default 0x41cffbfc if SOC_K3_J721E
->>>>>>>>    	default 0x41cfdbfc if SOC_K3_J721S2
->>>>>>>>    	default 0x701bebfc if SOC_K3_AM642
->>>>>>>> -	default 0x43c3f290 if SOC_K3_AM625
->>>>>>>> +	default 0x43c3f290 if SOC_K3_AM625 && CPU_V7R
->>>>>>>> +	default 0x7000f290 if SOC_K3_AM625 && ARM64
->>>>>>>>    	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
->>>>>>>>    	default 0x7000f290 if SOC_K3_AM62A7 && ARM64
->>>>>>>>    	help
->>>>>>>> diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
->>>>>>>> index 6c96e88114..67cf63b103 100644
->>>>>>>> --- a/arch/arm/mach-k3/am625_init.c
->>>>>>>> +++ b/arch/arm/mach-k3/am625_init.c
->>>>>>>> @@ -35,8 +35,10 @@ static struct rom_extended_boot_data bootdata __section(".data");
->>>>>>>>    static void store_boot_info_from_rom(void)
->>>>>>>>    {
->>>>>>>>    	bootindex = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
->>>>>>>> -	memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
->>>>>>>> -	       sizeof(struct rom_extended_boot_data));
->>>>>>>> +	if (IS_ENABLED(CONFIG_CPU_V7R)) {
->>>>>>>> +		memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
->>>>>>>> +		       sizeof(struct rom_extended_boot_data));
->>>>>>>> +	}
->>>>>>>>    }
->>>>>>>>    static void ctrl_mmr_unlock(void)
->>>>>>>> @@ -175,6 +177,15 @@ void board_init_f(ulong dummy)
->>>>>>>>    		k3_sysfw_loader(true, NULL, NULL);
->>>>>>>>    	}
->>>>>>>> +#if defined(CONFIG_CPU_V7R)
->>>>>>>> +	/*
->>>>>>>> +	 * Relocate boot information to OCRAM (after TIFS has opend this
->>>>>>>> +	 * region for us) so the next bootloader stages can keep access to
->>>>>>>> +	 * primary vs backup bootmodes.
->>>>>>>> +	 */
->>>>>>>> +	writel(bootindex, K3_BOOT_PARAM_TABLE_INDEX_OCRAM);
->>>>>>>> +#endif
->>>>>>>> +
->>>>>>>>    	/*
->>>>>>>>    	 * Force probe of clk_k3 driver here to ensure basic default clock
->>>>>>>>    	 * configuration is always done.
->>>>>>>> diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mach-k3/include/mach/am62_hardware.h
->>>>>>>> index 54380f36e1..9f504f4642 100644
->>>>>>>> --- a/arch/arm/mach-k3/include/mach/am62_hardware.h
->>>>>>>> +++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
->>>>>>>> @@ -76,8 +76,23 @@
->>>>>>>>    #define CTRLMMR_MCU_RST_CTRL			(MCU_CTRL_MMR0_BASE + 0x18170)
->>>>>>>>    #define ROM_EXTENDED_BOOT_DATA_INFO		0x43c3f1e0
->>>>>>>> +#define K3_BOOT_PARAM_TABLE_INDEX_OCRAM         0x7000F290
->>>>>>>> +/*
->>>>>>>> + * During the boot process ROM will kill anything that writes to OCSRAM.
->>>>>>> R5 ROM is long gone when R5 SPL starts, how would it kill anything?
->>>>>> Looks like this was based on my patch long ago for the AM62Ax family.
->>>>>>   From what little I remember about this was ROM is leaving behind a
->>>>>> firewall that we need TIFS's help to bring down for us. So I just
->>>>>> blamed ROM 😉
->>>>> Thats true. ROM does bare minimum and so wont open up firewall around
->>>>> main SRAM. but TIFS does, so you should be able to access this region
->>>>> post k3_sysfw_loader().
->>>>>
->>>>>> IDK if this is an issue for the AM62x family though.
->>>>>>
->>>>> It might be if one tries to "select" DT using EEPROM detect before SYSFW
->>>>> is up. But that's not the case any more right?
->>>> Yep we still need to figure out a plan for multiple DDR configs or see
->>>> if we can move the DDR init to later in the boot as that is the only
->>>> thing left that still needs the board detection this early on.
->>>>
->>>> There is a little race condition here as TIFS can respond to some
->>>> messages before it's finished its init. IDK if we can send it anything
->>>> to act like a fence and stall us until the firewalls are down though.
->>>
->>> Firewall configurations should be done before TIFS posts boot
->>> notification message.
->>>
->>> Regards
->>> Vignesh
+Reviewed-by: Apurva Nandan <a-nandan@ti.com>
+
+-- 
+Thanks and regards,
+Apurva Nandan,
+Texas Instruments India.
+
