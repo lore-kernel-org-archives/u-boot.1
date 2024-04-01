@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CE0ACD1288
-	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 20:42:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81E70CD128A
+	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 22:08:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5C988833E;
-	Mon,  1 Apr 2024 22:41:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 898B988330;
+	Tue,  2 Apr 2024 00:08:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LQVlYaen";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h+ec8nKl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D9CD8830B; Mon,  1 Apr 2024 21:13:37 +0200 (CEST)
-Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
- [IPv6:2607:f8b0:4864:20::530])
+ id 4B18888327; Tue,  2 Apr 2024 00:08:37 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BF7D87DCD
- for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 21:13:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73C1A88330
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 00:08:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ckhardin@gmail.com
-Received: by mail-pg1-x530.google.com with SMTP id
- 41be03b00d2f7-5bdbe2de25fso3281899a12.3
- for <u-boot@lists.denx.de>; Mon, 01 Apr 2024 12:13:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-60a104601dcso46726487b3.2
+ for <u-boot@lists.denx.de>; Mon, 01 Apr 2024 15:08:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1711998813; x=1712603613; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1712009313; x=1712614113; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=vv38qOlzGrbhqjQMQd/4PHb44Qe/bcThVmJdezTUq/U=;
- b=LQVlYaen/ZgO7gKxMb7H8jCD3xOG9Ggd1+rMUhwVV6pkJ84wKuiobzPH1EWwOTZEs+
- z1QS7eh7wOeE4nH9qHoMBxi2ArNHCWf8hcOpVPRaSMOuhUJqfDuibX/poa97DMBjW/QB
- B5/O+xWZFlvdgmOrl+ntfaU7veCcQJFleAP4JX1gHxRV2hP5YvQ+a9mic5+zI2yngxTS
- yPTnu4TtGPK7kW5ahYF8nraT//od6+8Kdl2vbqD6VCCRIqX1vG/99xeMOtNbkjUtVIGa
- gBDEt1N2TENYrvNXKYqcp3b/wYbx+q9930fK1/JGvVaKl+tL8CGoJ5N6lFElUkCWfph6
- RD1g==
+ bh=wtQOB61DUc16CE8LkZJOveDTXgpeJTkr+S0+jZtfxow=;
+ b=h+ec8nKlAw9fdweUye18GTSCC6bR2X+hEVCW+TQw2N4CKkPsXI2c97st5a7QlX43K+
+ GBa409Iv2/kIaWoLSgi+gW1smpN/hLsqhWC2/ygR3Wx0AM2QiypeGj2yxzlgTQrD43YA
+ 0DUCW4+hJ+WidMGHCgQzwZz2ceY8tCdYXbfcgCMHvy39b6ATH6Y+C+O71J6P73/7XBwG
+ ZTU+4HWZRMeNwyT+yhJxb62nmPxUTrsQ56IklkawK/bUCl1r2Eqn5AWIjhUHf1+UXXzR
+ r/E+oGI2txEm0TQxvCiFWu2Me+da5HuB7ilGnvM68gbZJFbCm1iIofjYDAUENrhpMkvZ
+ 2ngg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711998813; x=1712603613;
+ d=1e100.net; s=20230601; t=1712009313; x=1712614113;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vv38qOlzGrbhqjQMQd/4PHb44Qe/bcThVmJdezTUq/U=;
- b=rJ3Eb2vNbQMu0BKesm5ud7zeeC86tgyFHqcu5Qgd/nPct+9RewPUHrVA3Y6Uo02RmS
- LH3yM5qVOK8WItBIgjX4W6fgE/ZYF5PaJEri/j7ZM3cxCTIM2dZRwueedg2nQtNJXiwa
- 2DqYHQQh1STekue9aOrfVtFve1yupTRU9YUbekbdei5R8+8/nK6ADdoqAnnGosV3RaEj
- RI5y6XY/3XjoW2AzlvxSCyYyMYUT1e/4JwSna0BZs/+faK+oeEILJTeQ6B0fpIfqxokk
- +iphP2U6b4UMz5/yjHqnARRmdFBvDEgaePiTldKSoJgXUgUIV/RJRVnc1Ok14eeXc508
- NwPg==
-X-Gm-Message-State: AOJu0YwxYzq+qXhLsYOVsQjhW33trpGsz5KseiYy7QsU3ZeeD1APHK6b
- mtFl0c+krHW335MMxTm+kIk3jRuT5dPviXUh/turjU8Y4N6ZhQoLfPOts2ND
-X-Google-Smtp-Source: AGHT+IF8Fp58toSb3BXCLtY+x83vgSiJkPLWTYEUek/YFf9PiFOliBN8kC4B9Zx9iHGFvu9IlxEBgQ==
-X-Received: by 2002:a17:903:120c:b0:1e0:280b:8387 with SMTP id
- l12-20020a170903120c00b001e0280b8387mr13897323plh.40.1711998812643; 
- Mon, 01 Apr 2024 12:13:32 -0700 (PDT)
-Received: from localhost.localdomain ([12.125.190.90])
+ bh=wtQOB61DUc16CE8LkZJOveDTXgpeJTkr+S0+jZtfxow=;
+ b=ej6WowfY+YpcsiQgR1+5aa5H31nxD4R1CoB2lIWuIi4PeadVhqKve8tzhNaPeRla0g
+ xVxmaQxX4+TTdcA5mFCfYt/bCYN31Roenv65XG2MyhbkeS8NGre6YOx8aY+MeHs6GPGG
+ xBawyWiXIeVw/nxs1L35ELpuzyFzS6DtyGhx4umCRWqIMnFXAMiRC2Sy5/dkLLr9fnNC
+ 9oWgBTg0JiAbcUBM6HRIMrRsddcYQ0+9FB2QuzVaLOLgIJtnV2VSGH+gLHZuWYvJQvI/
+ IDK5W6RN+whj0eG9bJ7/FwYcpcKf9OUXzU52EFafbYTafKoRoSayGG2Xl+4OJ+2WstZv
+ ViPQ==
+X-Gm-Message-State: AOJu0Yx1Ovl4KxegBIBB9cQVn+/zMwH3biLfa2QOjJCEQ4i937lt6YeC
+ KgSNy+Awc3R2S4IhIESmluVPTCfUgNTC4lMiZiryhZ25omVZgXVDZHrYV2UX
+X-Google-Smtp-Source: AGHT+IFrrdoUC4wTmlsC9/tUQNfAjswyn34Xs7GWlaSX6xIhEnCQqM6jZ1mk6iTDPk/psrkONp2rkw==
+X-Received: by 2002:a0d:df91:0:b0:615:ecc:91c0 with SMTP id
+ i139-20020a0ddf91000000b006150ecc91c0mr1651058ywe.20.1712009312419; 
+ Mon, 01 Apr 2024 15:08:32 -0700 (PDT)
+Received: from localhost.localdomain
+ (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
  by smtp.gmail.com with ESMTPSA id
- h15-20020a170902680f00b001dd6f305a81sm9472740plk.293.2024.04.01.12.13.31
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Mon, 01 Apr 2024 12:13:31 -0700 (PDT)
-From: Charles Hardin <ckhardin@gmail.com>
-To: u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com,
-	rfried.dev@gmail.com,
-	ckhardin@gmail.com
-Subject: [PATCH 1/1] net: add support to parse the NIS domain for the dhcp
- options
-Date: Mon,  1 Apr 2024 12:13:19 -0700
-Message-Id: <20240401191319.62652-1-ckhardin@gmail.com>
-X-Mailer: git-send-email 2.39.3 (Apple Git-146)
+ c189-20020a0df3c6000000b00614605317dfsm1744560ywf.50.2024.04.01.15.08.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 01 Apr 2024 15:08:31 -0700 (PDT)
+From: Tony Dinh <mibodhi@gmail.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
+ Michael Walle <michael@walle.cc>
+Cc: Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Tony Dinh <mibodhi@gmail.com>,
+ Chris Packham <chris.packham@alliedtelesis.co.nz>,
+ Dave Purdy <david.c.purdy@gmail.com>,
+ Evgeni Dobrev <evgeni@studio-punkt.com>, Luka Perkov <luka@openwrt.org>,
+ Siddarth Gore <gores@marvell.com>,
+ Simon Guinot <simon.guinot@sequanux.org>,
+ Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>,
+ Walter Schweizer <swwa@users.sourceforge.net>
+Subject: [PATCH v3] arm: dts: kirkwood: Enable upstream DT on Kirkwood boards
+Date: Mon,  1 Apr 2024 15:08:16 -0700
+Message-Id: <20240401220817.9905-1-mibodhi@gmail.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 01 Apr 2024 22:41:06 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,35 +98,519 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is code in the bootp parsing for NIS domain and add the
-same support for the dhcp options as well. This allows the same
-usage of the data when the dhcp command is used in the boot
-command.
+Enable OF_UPSTREAM to use upstream DT and add marvell/ prefix to the
+DEFAULT_DEVICE_TREE for Kirkwood boards. And so we can directly build
+DTBs from dts/upstream/src/arm/marvell, and including *-u-boot.dtsi
+files from arch/arm/dts/ directory.
 
-Signed-off-by: Charles Hardin <ckhardin@gmail.com>
+Background:
+
+The following 2 commands and filters were used in the analysis to determine
+which upstream DTS and DTSI files can be used as they are, or need to have
+modified/created *-u-boot.dtsi for u-boot specific implementation, and
+which board should be opt-out from OF_UPSTREAM.
+
+"git grep -li arch_kirkwood configs | xargs grep DEVICE_TREE | cut -d '"' -f2 | xargs -n1 sh -c 'diff -qs  arch/arm/dts/$1.dts dts/upstream/src/arm/marvell/$1.dts' sh | grep differ"
+"diff -qrbu arch/arm/dts/ dts/upstream/src/arm/marvell/ | grep kirkwood | grep ".dtsi ""
+
+More detailed information can be found at:
+https://lore.kernel.org/u-boot/20240328021825.17935-1-mibodhi@gmail.com/T/#u
+
+I've regression tested this patch with the Zyxel NSA325 (Kirkwood 88F6282)
+and Zyxel NSA310S (Kirkwood 88F6281). The Zyxel NSA325 board has a
+USB 3.0 controller attached to the PCIe bus. And the Zyxel NSA310S
+has an extensive overhaul in bindings and styles in upstream DTS version.
+
+Tested-by: Michael Walle <michael@walle.cc> # on lschv2
+Acked-by: Sumit Garg <sumit.garg@linaro.org>
+Reviewed-by: Stefan Roese <sr@denx.de>
+
+Signed-off-by: Tony Dinh <mibodhi@gmail.com>
 ---
- net/bootp.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
 
-diff --git a/net/bootp.c b/net/bootp.c
-index 6800290963..046caf3685 100644
---- a/net/bootp.c
-+++ b/net/bootp.c
-@@ -883,6 +883,14 @@ static void dhcp_process_options(uchar *popt, uchar *end)
- 			break;
- 		case 28:	/* Ignore Broadcast Address Option */
- 			break;
-+		case 40:	/* NIS Domain name */
-+			if (net_nis_domain[0] == 0) {
-+				size = truncate_sz("NIS Domain Name",
-+					sizeof(net_nis_domain), size);
-+				memcpy(&net_nis_domain, ext + 2, size);
-+				net_nis_domain[size] = 0;
-+			}
-+			break;
- #if defined(CONFIG_CMD_SNTP) && defined(CONFIG_BOOTP_NTPSERVER)
- 		case 42:	/* NTP server IP */
- 			net_copy_ip(&net_ntp_server, (popt + 2));
+Changes in v3:
+- Collect Reviewed/Tested/Acked-by tags.
+- Trim the commit description and point to lore.kernel.org for detailed information.
+- No change from the V2 patch.
+
+Changes in v2:
+Remove unnecessary redefined OF_UPSTREAM and use "imply OF_UPSTREAM" for
+KW88F6281 and KW88F6192 SoCs.
+
+ arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi | 7 +++++++
+ arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi   | 6 ++++--
+ arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi     | 6 ++++--
+ arch/arm/dts/kirkwood-nsa325-u-boot.dtsi    | 7 +++++++
+ arch/arm/mach-kirkwood/Kconfig              | 2 ++
+ configs/SBx81LIFKW_defconfig                | 1 +
+ configs/SBx81LIFXCAT_defconfig              | 1 +
+ configs/d2net_v2_defconfig                  | 2 +-
+ configs/dns325_defconfig                    | 2 +-
+ configs/dockstar_defconfig                  | 2 +-
+ configs/dreamplug_defconfig                 | 2 +-
+ configs/ds109_defconfig                     | 2 +-
+ configs/goflexhome_defconfig                | 2 +-
+ configs/guruplug_defconfig                  | 2 +-
+ configs/ib62x0_defconfig                    | 2 +-
+ configs/iconnect_defconfig                  | 2 +-
+ configs/inetspace_v2_defconfig              | 2 +-
+ configs/lschlv2_defconfig                   | 2 +-
+ configs/lsxhl_defconfig                     | 2 +-
+ configs/nas220_defconfig                    | 2 +-
+ configs/net2big_v2_defconfig                | 2 +-
+ configs/netspace_lite_v2_defconfig          | 2 +-
+ configs/netspace_max_v2_defconfig           | 2 +-
+ configs/netspace_mini_v2_defconfig          | 2 +-
+ configs/netspace_v2_defconfig               | 2 +-
+ configs/nsa310s_defconfig                   | 2 +-
+ configs/nsa325_defconfig                    | 2 +-
+ configs/openrd_base_defconfig               | 2 +-
+ configs/openrd_client_defconfig             | 2 +-
+ configs/openrd_ultimate_defconfig           | 2 +-
+ configs/pogo_e02_defconfig                  | 2 +-
+ configs/pogo_v4_defconfig                   | 2 +-
+ configs/sheevaplug_defconfig                | 2 +-
+ 33 files changed, 52 insertions(+), 30 deletions(-)
+ create mode 100644 arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi
+ create mode 100644 arch/arm/dts/kirkwood-nsa325-u-boot.dtsi
+
+diff --git a/arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi b/arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi
+new file mode 100644
+index 0000000000..59f19a211f
+--- /dev/null
++++ b/arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi
+@@ -0,0 +1,7 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++/ {
++	aliases {
++		spi0 = &spi0;
++	};
++};
+diff --git a/arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi b/arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi
+index 7fc2d7d3b4..cf33ff822e 100644
+--- a/arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi
++++ b/arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi
+@@ -1,7 +1,9 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+-&eth0 {
+-	status = "disabled";
++/ {
++	aliases {
++		spi0 = &spi0;
++	};
+ };
+ 
+ &hdd_power {
+diff --git a/arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi b/arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi
+index 7fc2d7d3b4..cf33ff822e 100644
+--- a/arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi
++++ b/arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi
+@@ -1,7 +1,9 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+-&eth0 {
+-	status = "disabled";
++/ {
++	aliases {
++		spi0 = &spi0;
++	};
+ };
+ 
+ &hdd_power {
+diff --git a/arch/arm/dts/kirkwood-nsa325-u-boot.dtsi b/arch/arm/dts/kirkwood-nsa325-u-boot.dtsi
+new file mode 100644
+index 0000000000..dec27b2a87
+--- /dev/null
++++ b/arch/arm/dts/kirkwood-nsa325-u-boot.dtsi
+@@ -0,0 +1,7 @@
++// SPDX-License-Identifier: GPL-2.0+
++
++&nand {
++	partition@0 {
++		/delete-property/ read-only;
++	};
++};
+diff --git a/arch/arm/mach-kirkwood/Kconfig b/arch/arm/mach-kirkwood/Kconfig
+index c2fff84a68..031d4e5ecd 100644
+--- a/arch/arm/mach-kirkwood/Kconfig
++++ b/arch/arm/mach-kirkwood/Kconfig
+@@ -6,10 +6,12 @@ config FEROCEON_88FR131
+ config KW88F6192
+ 	bool
+ 	select ARCH_VERY_EARLY_INIT
++	imply OF_UPSTREAM
+ 
+ config KW88F6281
+ 	bool
+ 	select ARCH_VERY_EARLY_INIT
++	imply OF_UPSTREAM
+ 
+ config SHEEVA_88SV131
+ 	bool
+diff --git a/configs/SBx81LIFKW_defconfig b/configs/SBx81LIFKW_defconfig
+index cc17a8b114..977daf9f09 100644
+--- a/configs/SBx81LIFKW_defconfig
++++ b/configs/SBx81LIFKW_defconfig
+@@ -6,6 +6,7 @@ CONFIG_ARCH_KIRKWOOD=y
+ CONFIG_SYS_KWD_CONFIG="board/alliedtelesis/SBx81LIFKW/kwbimage.cfg"
+ CONFIG_TEXT_BASE=0x00600000
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
++# CONFIG_OF_UPSTREAM is not set
+ CONFIG_TARGET_SBx81LIFKW=y
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_ENV_OFFSET=0xC0000
+diff --git a/configs/SBx81LIFXCAT_defconfig b/configs/SBx81LIFXCAT_defconfig
+index 0612723298..9bc8614030 100644
+--- a/configs/SBx81LIFXCAT_defconfig
++++ b/configs/SBx81LIFXCAT_defconfig
+@@ -6,6 +6,7 @@ CONFIG_ARCH_KIRKWOOD=y
+ CONFIG_SYS_KWD_CONFIG="board/alliedtelesis/SBx81LIFXCAT/kwbimage.cfg"
+ CONFIG_TEXT_BASE=0x00600000
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
++# CONFIG_OF_UPSTREAM is not set
+ CONFIG_TARGET_SBx81LIFXCAT=y
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_ENV_OFFSET=0xC0000
+diff --git a/configs/d2net_v2_defconfig b/configs/d2net_v2_defconfig
+index bb1bcb0aa3..69658a2ba7 100644
+--- a/configs/d2net_v2_defconfig
++++ b/configs/d2net_v2_defconfig
+@@ -11,7 +11,7 @@ CONFIG_TARGET_NET2BIG_V2=y
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_ENV_OFFSET=0x70000
+ CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-d2net"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-d2net"
+ CONFIG_IDENT_STRING=" D2 v2"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_ENV_ADDR=0x70000
+diff --git a/configs/dns325_defconfig b/configs/dns325_defconfig
+index edfe92c5f3..b85f7cac8e 100644
+--- a/configs/dns325_defconfig
++++ b/configs/dns325_defconfig
+@@ -10,7 +10,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
+ CONFIG_TARGET_DNS325=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xE0000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-dns325"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-dns325"
+ CONFIG_IDENT_STRING="\nD-Link DNS-325"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ # CONFIG_SYS_MALLOC_F is not set
+diff --git a/configs/dockstar_defconfig b/configs/dockstar_defconfig
+index 719fa3979e..7b5f19433a 100644
+--- a/configs/dockstar_defconfig
++++ b/configs/dockstar_defconfig
+@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_TARGET_DOCKSTAR=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0x80000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-dockstar"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-dockstar"
+ CONFIG_IDENT_STRING="\nSeagate FreeAgent DockStar"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_BOOTDELAY=3
+diff --git a/configs/dreamplug_defconfig b/configs/dreamplug_defconfig
+index 02a2635af8..8518eabcb2 100644
+--- a/configs/dreamplug_defconfig
++++ b/configs/dreamplug_defconfig
+@@ -13,7 +13,7 @@ CONFIG_TARGET_DREAMPLUG=y
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_ENV_OFFSET=0x100000
+ CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-dreamplug"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-dreamplug"
+ CONFIG_IDENT_STRING="\nMarvell-DreamPlug"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_ENV_ADDR=0x100000
+diff --git a/configs/ds109_defconfig b/configs/ds109_defconfig
+index 304c098c99..ef805eca56 100644
+--- a/configs/ds109_defconfig
++++ b/configs/ds109_defconfig
+@@ -14,7 +14,7 @@ CONFIG_TARGET_DS109=y
+ CONFIG_ENV_SIZE=0x10000
+ CONFIG_ENV_OFFSET=0x3D0000
+ CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-ds109"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ds109"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_ENV_ADDR=0x3D0000
+ # CONFIG_SYS_MALLOC_F is not set
+diff --git a/configs/goflexhome_defconfig b/configs/goflexhome_defconfig
+index d577d5807b..53b2ce97e8 100644
+--- a/configs/goflexhome_defconfig
++++ b/configs/goflexhome_defconfig
+@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_TARGET_GOFLEXHOME=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xC0000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-goflexnet"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-goflexnet"
+ CONFIG_IDENT_STRING="\nSeagate GoFlex Home"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_BOOTDELAY=3
+diff --git a/configs/guruplug_defconfig b/configs/guruplug_defconfig
+index 7cb649e29c..5371ee403b 100644
+--- a/configs/guruplug_defconfig
++++ b/configs/guruplug_defconfig
+@@ -10,7 +10,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
+ CONFIG_TARGET_GURUPLUG=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xE0000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-guruplug-server-plus"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-guruplug-server-plus"
+ CONFIG_IDENT_STRING="\nMarvell-GuruPlug"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ # CONFIG_SYS_MALLOC_F is not set
+diff --git a/configs/ib62x0_defconfig b/configs/ib62x0_defconfig
+index 074384e387..32b0e1c395 100644
+--- a/configs/ib62x0_defconfig
++++ b/configs/ib62x0_defconfig
+@@ -10,7 +10,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
+ CONFIG_TARGET_IB62X0=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xE0000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-ib62x0"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ib62x0"
+ CONFIG_IDENT_STRING=" RaidSonic ICY BOX IB-NAS62x0"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ # CONFIG_SYS_MALLOC_F is not set
+diff --git a/configs/iconnect_defconfig b/configs/iconnect_defconfig
+index f7b74c4662..45ffbd92db 100644
+--- a/configs/iconnect_defconfig
++++ b/configs/iconnect_defconfig
+@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_TARGET_ICONNECT=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0x80000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-iconnect"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-iconnect"
+ CONFIG_IDENT_STRING=" Iomega iConnect"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_PCI=y
+diff --git a/configs/inetspace_v2_defconfig b/configs/inetspace_v2_defconfig
+index 2e8e3f3928..3fa7790d77 100644
+--- a/configs/inetspace_v2_defconfig
++++ b/configs/inetspace_v2_defconfig
+@@ -11,7 +11,7 @@ CONFIG_TARGET_NETSPACE_V2=y
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_ENV_OFFSET=0x70000
+ CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-is2"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-is2"
+ CONFIG_IDENT_STRING=" IS v2"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_ENV_ADDR=0x70000
+diff --git a/configs/lschlv2_defconfig b/configs/lschlv2_defconfig
+index 99bdbc1483..ad060079a7 100644
+--- a/configs/lschlv2_defconfig
++++ b/configs/lschlv2_defconfig
+@@ -15,7 +15,7 @@ CONFIG_ENV_SIZE=0x10000
+ CONFIG_ENV_OFFSET=0x70000
+ CONFIG_ENV_SECT_SIZE=0x10000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-lschlv2"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-lschlv2"
+ CONFIG_IDENT_STRING=" LS-CHLv2"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_HAS_BOARD_SIZE_LIMIT=y
+diff --git a/configs/lsxhl_defconfig b/configs/lsxhl_defconfig
+index bb0a5ddf50..b2d9f0c9d8 100644
+--- a/configs/lsxhl_defconfig
++++ b/configs/lsxhl_defconfig
+@@ -16,7 +16,7 @@ CONFIG_ENV_SIZE=0x10000
+ CONFIG_ENV_OFFSET=0x70000
+ CONFIG_ENV_SECT_SIZE=0x10000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-lsxhl"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-lsxhl"
+ CONFIG_IDENT_STRING=" LS-XHL"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_HAS_BOARD_SIZE_LIMIT=y
+diff --git a/configs/nas220_defconfig b/configs/nas220_defconfig
+index f01b26f2df..4ea342a043 100644
+--- a/configs/nas220_defconfig
++++ b/configs/nas220_defconfig
+@@ -10,7 +10,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
+ CONFIG_TARGET_NAS220=y
+ CONFIG_ENV_SIZE=0x10000
+ CONFIG_ENV_OFFSET=0xA0000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-blackarmor-nas220"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-blackarmor-nas220"
+ CONFIG_IDENT_STRING="\nNAS 220"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ # CONFIG_SYS_MALLOC_F is not set
+diff --git a/configs/net2big_v2_defconfig b/configs/net2big_v2_defconfig
+index dda627aac6..39cbc3384f 100644
+--- a/configs/net2big_v2_defconfig
++++ b/configs/net2big_v2_defconfig
+@@ -12,7 +12,7 @@ CONFIG_NET2BIG_V2=y
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_ENV_OFFSET=0x70000
+ CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-net2big"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-net2big"
+ CONFIG_IDENT_STRING=" 2Big v2"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_ENV_ADDR=0x70000
+diff --git a/configs/netspace_lite_v2_defconfig b/configs/netspace_lite_v2_defconfig
+index 742e6205d8..cd416cb150 100644
+--- a/configs/netspace_lite_v2_defconfig
++++ b/configs/netspace_lite_v2_defconfig
+@@ -12,7 +12,7 @@ CONFIG_NETSPACE_LITE_V2=y
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_ENV_OFFSET=0x70000
+ CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-ns2lite"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ns2lite"
+ CONFIG_IDENT_STRING=" NS v2 Lite"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_ENV_ADDR=0x70000
+diff --git a/configs/netspace_max_v2_defconfig b/configs/netspace_max_v2_defconfig
+index 7779e6815e..6a3d9296ac 100644
+--- a/configs/netspace_max_v2_defconfig
++++ b/configs/netspace_max_v2_defconfig
+@@ -12,7 +12,7 @@ CONFIG_NETSPACE_MAX_V2=y
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_ENV_OFFSET=0x70000
+ CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-ns2max"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ns2max"
+ CONFIG_IDENT_STRING=" NS Max v2"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_ENV_ADDR=0x70000
+diff --git a/configs/netspace_mini_v2_defconfig b/configs/netspace_mini_v2_defconfig
+index 9e3614bb44..e25631b09f 100644
+--- a/configs/netspace_mini_v2_defconfig
++++ b/configs/netspace_mini_v2_defconfig
+@@ -12,7 +12,7 @@ CONFIG_NETSPACE_MINI_V2=y
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_ENV_OFFSET=0x70000
+ CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-ns2mini"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ns2mini"
+ CONFIG_IDENT_STRING=" NS v2 Mini"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_ENV_ADDR=0x70000
+diff --git a/configs/netspace_v2_defconfig b/configs/netspace_v2_defconfig
+index 1583a0adb3..b6ac2a8b19 100644
+--- a/configs/netspace_v2_defconfig
++++ b/configs/netspace_v2_defconfig
+@@ -12,7 +12,7 @@ CONFIG_NETSPACE_V2=y
+ CONFIG_ENV_SIZE=0x1000
+ CONFIG_ENV_OFFSET=0x70000
+ CONFIG_ENV_SECT_SIZE=0x10000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-ns2"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ns2"
+ CONFIG_IDENT_STRING=" NS v2"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_ENV_ADDR=0x70000
+diff --git a/configs/nsa310s_defconfig b/configs/nsa310s_defconfig
+index 89d8b18b16..e859a43ffa 100644
+--- a/configs/nsa310s_defconfig
++++ b/configs/nsa310s_defconfig
+@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_TARGET_NSA310S=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xE0000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-nsa310s"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-nsa310s"
+ CONFIG_DEBUG_UART_BASE=0xf1012000
+ CONFIG_DEBUG_UART_CLOCK=166666667
+ CONFIG_IDENT_STRING="\nZyXEL NSA310S/320S 1/2-Bay Power Media Server"
+diff --git a/configs/nsa325_defconfig b/configs/nsa325_defconfig
+index 5da4a002b4..88a890002e 100644
+--- a/configs/nsa325_defconfig
++++ b/configs/nsa325_defconfig
+@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_TARGET_NSA325=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xC0000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-nsa325"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-nsa325"
+ CONFIG_IDENT_STRING="\nZyXEL NSA325 2-Bay Power Media Server"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_PCI=y
+diff --git a/configs/openrd_base_defconfig b/configs/openrd_base_defconfig
+index 29a14e0927..057dd28dff 100644
+--- a/configs/openrd_base_defconfig
++++ b/configs/openrd_base_defconfig
+@@ -11,7 +11,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
+ CONFIG_TARGET_OPENRD=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0x80000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-openrd-base"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-base"
+ CONFIG_IDENT_STRING="\nOpenRD-Base"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ # CONFIG_SYS_MALLOC_F is not set
+diff --git a/configs/openrd_client_defconfig b/configs/openrd_client_defconfig
+index a95a435bdf..05e4292764 100644
+--- a/configs/openrd_client_defconfig
++++ b/configs/openrd_client_defconfig
+@@ -12,7 +12,7 @@ CONFIG_TARGET_OPENRD=y
+ CONFIG_BOARD_IS_OPENRD_CLIENT=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0x80000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-openrd-client"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-client"
+ CONFIG_IDENT_STRING="\nOpenRD-Client"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ # CONFIG_SYS_MALLOC_F is not set
+diff --git a/configs/openrd_ultimate_defconfig b/configs/openrd_ultimate_defconfig
+index e3f5294ff1..6e13c6eabd 100644
+--- a/configs/openrd_ultimate_defconfig
++++ b/configs/openrd_ultimate_defconfig
+@@ -12,7 +12,7 @@ CONFIG_TARGET_OPENRD=y
+ CONFIG_BOARD_IS_OPENRD_ULTIMATE=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0x80000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-openrd-ultimate"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-ultimate"
+ CONFIG_IDENT_STRING="\nOpenRD-Ultimate"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ # CONFIG_SYS_MALLOC_F is not set
+diff --git a/configs/pogo_e02_defconfig b/configs/pogo_e02_defconfig
+index e53ccf34c7..880cb20b22 100644
+--- a/configs/pogo_e02_defconfig
++++ b/configs/pogo_e02_defconfig
+@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_TARGET_POGO_E02=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xC0000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-pogo_e02"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-pogo_e02"
+ CONFIG_IDENT_STRING="\nPogo E02"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_BOOTDELAY=3
+diff --git a/configs/pogo_v4_defconfig b/configs/pogo_v4_defconfig
+index 95e22b3fef..50046e83b7 100644
+--- a/configs/pogo_v4_defconfig
++++ b/configs/pogo_v4_defconfig
+@@ -12,7 +12,7 @@ CONFIG_TEXT_BASE=0x600000
+ CONFIG_TARGET_POGO_V4=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xC0000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-pogoplug-series-4"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-pogoplug-series-4"
+ CONFIG_IDENT_STRING="\nPogoplug V4"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_PCI=y
+diff --git a/configs/sheevaplug_defconfig b/configs/sheevaplug_defconfig
+index 0af87dc4fb..b673b3f6da 100644
+--- a/configs/sheevaplug_defconfig
++++ b/configs/sheevaplug_defconfig
+@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_TARGET_SHEEVAPLUG=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0x80000
+-CONFIG_DEFAULT_DEVICE_TREE="kirkwood-sheevaplug"
++CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-sheevaplug"
+ CONFIG_IDENT_STRING="\nMarvell-Sheevaplug"
+ CONFIG_SYS_LOAD_ADDR=0x800000
+ CONFIG_HAS_BOARD_SIZE_LIMIT=y
 -- 
-2.39.3 (Apple Git-146)
+2.39.2
 
