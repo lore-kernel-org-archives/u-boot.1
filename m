@@ -4,78 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6524BCD1283
-	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 10:08:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10335CD1288
+	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 10:25:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB6588813D;
-	Mon,  1 Apr 2024 12:08:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 77D9887916;
+	Mon,  1 Apr 2024 12:25:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dkUhN0wT";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="yW6drCOd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4C268821E; Mon,  1 Apr 2024 12:08:18 +0200 (CEST)
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 402B287C68; Mon,  1 Apr 2024 12:25:05 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DEB8788011
- for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 12:08:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B751083334
+ for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 12:25:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-7e06168551eso1107701241.2
- for <u-boot@lists.denx.de>; Mon, 01 Apr 2024 03:08:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711966095; x=1712570895; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Uz5VQ6KwBocqYPJBtgrrKnHI40qOLu09laISAaPB0O0=;
- b=dkUhN0wTmPFT00IJbmdgbCkiDrFZEA0iF+KvhdgCrtfivhg2DvhYChcYSUzASVuq5e
- h937zQ1dO7yv/beG10RuBzqOBUprk0KN0dIXr5BlYhnVvULvBsUQhOlcrCOOU6+xxCpo
- TX/HDSTfViDdpjAZkdHDMpemcOBROD+8szIXO6EO+b2h8yy/qPX67poFc3kfS/XfGN3+
- erJu9JT8RKmfH8J5LttH70denKhUF9KzaraEzKaTy2Xmy/elMT6IVKo+J27jzSXQ8jiA
- l0G8jPZahMES38EBfMrSqDovydYLG4Twl75nOOrQktISCxyZfTRg9JK7eMboXIUuVMOS
- L3Og==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711966095; x=1712570895;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Uz5VQ6KwBocqYPJBtgrrKnHI40qOLu09laISAaPB0O0=;
- b=f5uqW/ts1vUj5NgMk84GtgAaVu7Mk5Sk0INDmbYSQmlzRt2nWGhHC18ftZYvtaksx+
- PJ1YlUSKwDtugdpl/OzKMUfSpCf8viNZCiEsuPLAp9gsaosVLgDCyOgoweqXJ4IYq5Q6
- yQi8qcIAUEt7efQ7jylLqPjnIj45G9v29A8FNHOO/uo2veuHKPdc7cOWk7qkrBNoYnT7
- KGjdxrdeDmauurka3nkIso1vKSHVKOQ/7852+ADBNY64iE+yNW4J2wL3p6KxLt0wkEJ+
- 2stF7ZvqMPT5uM6+LzkdB6zAqMNzN3xwi3/k4Wm9xr87jMwx3f5Ybh7CG9WBIe1dvXth
- 2ztA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXQtfIanuDI0MCyMUMVirV4khflV1uAtYalFS3WUN+tyJS3TYmvzfwNi7i5pxLPIXbv/OWXeYwkk6vwEzTGmc4DG25UYA==
-X-Gm-Message-State: AOJu0YxkCNWNtoph9zn3bBXvH10rS1ltJJ86Oo9hdbKnjKfiF3n6fv9t
- MbSTOfWqYwsTJdURU6+EN4VO0O39bnOFhh31VsNZyLHDc+rMXWLY4VXFYxjvKl9IckCnKWR0G8E
- ATUDjOuVmDmHer4O+tk3naCm6QvAQtV7agvZGJA==
-X-Google-Smtp-Source: AGHT+IHQdTp/DPcL2mqZ6ramYx4j3TlOAboD/jyCXzIWLmA3ej+mGyZQXRWFx/jzkZCRsVGwQWvOrJRrxPnwMOUXKIk=
-X-Received: by 2002:a67:b40a:0:b0:478:6ced:3385 with SMTP id
- x10-20020a67b40a000000b004786ced3385mr2134804vsl.11.1711966094685; Mon, 01
- Apr 2024 03:08:14 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=3892=LG=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1711967094;
+ bh=P3oKZfUZDbuKZxQnZ3zWPUyYaIGRdCsVjjW/2iYPPao=;
+ b=yW6drCOdtrrHLp/F8XmFn38WPMelJFO6KsNqdpiL1/Y1ipE/v70l8yJVnIin0KYkq9vR/G1Vt
+ wjDcCmW3kxU7+V33VF6FndZXgEv5p+Pecv6WeHxWmb6OqzhwJ8tXnx+taY7OfqrjWxgqhWOX9a4
+ SCadDVNKqH+7u6VUgvI5NQueQw94wba8pw3qYkMe4bPU+8A+uKwZ5Am8HkSeXWoWdhFIRI/JJEV
+ GwEz6pWG+KdUoxg7/F4GPRj3N3aYv7SorBHCb2GaxDvI/jkLUSsV+kE0cuk3pi6roEAJp2ifbhJ
+ puEAmMzuC8udAzfzfjilz36O6Q6OccIynyb0AaJbtz5Q==
+Message-ID: <91326c6e-444f-42f7-bfe6-59cb2fb059d4@kwiboo.se>
+Date: Mon, 1 Apr 2024 12:24:50 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/31] rockchip: rk3399: Sync DT with linux v6.8 and
+ update defconfigs
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 References: <20240331202921.262323-1-jonas@kwiboo.se>
  <CAFA6WYPMqRQRpcN--3Mz7czh6MK10W75e19h9VWWp5P6KKbBJA@mail.gmail.com>
  <63f29606-ad3f-4883-9e8b-4d80194c12ab@kwiboo.se>
-In-Reply-To: <63f29606-ad3f-4883-9e8b-4d80194c12ab@kwiboo.se>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 1 Apr 2024 15:38:03 +0530
-Message-ID: <CAFA6WYMGLuftoVcL8WD9DR_QZf=rwe_wLWV6XARG0MTncXJCqA@mail.gmail.com>
-Subject: Re: [PATCH 00/31] rockchip: rk3399: Sync DT with linux v6.8 and
- update defconfigs
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+ <CAFA6WYMGLuftoVcL8WD9DR_QZf=rwe_wLWV6XARG0MTncXJCqA@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAFA6WYMGLuftoVcL8WD9DR_QZf=rwe_wLWV6XARG0MTncXJCqA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 660a8b76ad8aee03271337b2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,200 +77,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 1 Apr 2024 at 15:15, Jonas Karlman <jonas@kwiboo.se> wrote:
->
-> Hi Sumit,
->
-> On 2024-04-01 10:52, Sumit Garg wrote:
-> > Hi Jonas,
-> >
-> > On Mon, 1 Apr 2024 at 01:59, Jonas Karlman <jonas@kwiboo.se> wrote:
-> >>
-> >> This series adds support for new clocks used in linux v6.8 device trees,
-> >> enables use of FIT signature check for checksum validation and fixes
-> >> loading FIT from SD-card when loading FIT from eMMC fails.
-> >>
-> >> After this series it should be possible to move RK3399 boards to use
-> >> OF_UPSTREAM in a future patch once dts/upstream move to a v6.8+ tag.
-> >>
-> >
-> > Thanks for putting this effort together. A switch to v6.8 tag for
-> > OF_UPSTREAM will happen as part of patch [1]. So if you want to save
-> > further effort then you can just rebase with a switch to OF_UPSTREAM
-> > once that patch [1] lands in next.
->
-> Because this is a jump of device tree files from v5.14-rc1 to v6.8,
-> reviewability and being able to cherry-pick these changes to my
-> rk3xxx-2024.04 branch, I think it is much more appropriate to first sync
-> everything to v6.8 and then in a separate series move to OF_UPSTREAM.
-> Else it can be very hard to understand some of the changes that has been
-> and was needed to be made to u-boot.dtsi files.
+On 2024-04-01 12:08, Sumit Garg wrote:
+> On Mon, 1 Apr 2024 at 15:15, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>
+>> Hi Sumit,
+>>
+>> On 2024-04-01 10:52, Sumit Garg wrote:
+>>> Hi Jonas,
+>>>
+>>> On Mon, 1 Apr 2024 at 01:59, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>>
+>>>> This series adds support for new clocks used in linux v6.8 device trees,
+>>>> enables use of FIT signature check for checksum validation and fixes
+>>>> loading FIT from SD-card when loading FIT from eMMC fails.
+>>>>
+>>>> After this series it should be possible to move RK3399 boards to use
+>>>> OF_UPSTREAM in a future patch once dts/upstream move to a v6.8+ tag.
+>>>>
+>>>
+>>> Thanks for putting this effort together. A switch to v6.8 tag for
+>>> OF_UPSTREAM will happen as part of patch [1]. So if you want to save
+>>> further effort then you can just rebase with a switch to OF_UPSTREAM
+>>> once that patch [1] lands in next.
+>>
+>> Because this is a jump of device tree files from v5.14-rc1 to v6.8,
+>> reviewability and being able to cherry-pick these changes to my
+>> rk3xxx-2024.04 branch, I think it is much more appropriate to first sync
+>> everything to v6.8 and then in a separate series move to OF_UPSTREAM.
+>> Else it can be very hard to understand some of the changes that has been
+>> and was needed to be made to u-boot.dtsi files.
+> 
+> That's fair given it's a long pending DT sync.
+> 
+>>
+>> Reviewability is one of the shortcomings with a switch to OF_UPSTREAM.
+> 
+> I suppose the reasoning behind this thinking can be that people are
+> used to reviewing DTs alongside driver changes. However, these patches
+> aren't actual DT changes but rather DT imports which IMHO is a
+> distraction for the reviewer. The actual DT can be looked into
+> dts/upstream/ directory while reviewing the changes.
 
-That's fair given it's a long pending DT sync.
+Things like following was easier to spot when reviewing DT syncs:
+- A property that U-Boot depends on gets removed, as in [1].
+- Some DT changes can break changes that has been made to u-boot.dtsi
+  files, e.g. a symbol to a node is no longer available in upstream but
+  referenced in u-boot.dtsi files (happened in this series).
+- Changes in DT may require a workaround in a u-boot.dtsi file.
+- u-boot.dtsi contains workarounds that has not yet been upstream but
+  can be removed in a future DT sync.
+- Driver incompatibilities due to initial driver imported from vendor
+  ended up not fully compatible with upstream linux driver / dt-binding.
 
->
-> Reviewability is one of the shortcomings with a switch to OF_UPSTREAM.
+[2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit?id=4d08b19629495b29601991d09d07865694c25199
 
-I suppose the reasoning behind this thinking can be that people are
-used to reviewing DTs alongside driver changes. However, these patches
-aren't actual DT changes but rather DT imports which IMHO is a
-distraction for the reviewer. The actual DT can be looked into
-dts/upstream/ directory while reviewing the changes.
+Regards,
+Jonas
 
--Sumit
+> 
+> -Sumit
+> 
+>>
+>> Regards,
+>> Jonas
+>>
+>>>
+>>> [1] https://lists.denx.de/pipermail/u-boot/2024-March/549611.html
+>>>
+>>> -Sumit
+>>>
+>>>> I have runtime tested this series on following devices:
+>>>> - 96boards Rock960
+>>>> - Khadas Edge Captain
+>>>> - Pine64 PineBook Pro
+>>>> - Pine64 RockPro64
+>>>> - Radxa ROCK 4C+
+>>>> - Radxa ROCK 4SE
+>>>> - Radxa ROCK Pi 4A
+>>>> - Radxa ROCK Pi 4B+
+>>>>
+>>>> This series depends on the following series:
+>>>> - Enable booting from SPI flash on ROCK Pi 4 [1]
+>>>> - rockchip: spl: Cache boot source id for later use [2]
+>>>>
+>>>> A copy of this series and all its depends can be found at [3]
+>>>>
+>>>> [1] https://patchwork.ozlabs.org/cover/1912469/
+>>>> [2] https://patchwork.ozlabs.org/cover/1915071/
+>>>> [3] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3399-dt-sync-v1
+>>>>
 
->
-> Regards,
-> Jonas
->
-> >
-> > [1] https://lists.denx.de/pipermail/u-boot/2024-March/549611.html
-> >
-> > -Sumit
-> >
-> >> I have runtime tested this series on following devices:
-> >> - 96boards Rock960
-> >> - Khadas Edge Captain
-> >> - Pine64 PineBook Pro
-> >> - Pine64 RockPro64
-> >> - Radxa ROCK 4C+
-> >> - Radxa ROCK 4SE
-> >> - Radxa ROCK Pi 4A
-> >> - Radxa ROCK Pi 4B+
-> >>
-> >> This series depends on the following series:
-> >> - Enable booting from SPI flash on ROCK Pi 4 [1]
-> >> - rockchip: spl: Cache boot source id for later use [2]
-> >>
-> >> A copy of this series and all its depends can be found at [3]
-> >>
-> >> [1] https://patchwork.ozlabs.org/cover/1912469/
-> >> [2] https://patchwork.ozlabs.org/cover/1915071/
-> >> [3] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3399-dt-sync-v1
-> >>
-> >> Jonas Karlman (31):
-> >>   rockchip: rk3399-gru: Fix max SPL size on bob and kevin
-> >>   rockchip: rk3399-ficus: Enable TPL and use common bss and stack addr
-> >>   rockchip: rk3399: Sort imply statements alphabetically
-> >>   rockchip: rk3399: Enable ARMv8 crypto and FIT checksum validation
-> >>   rockchip: rk3399: Enable random generator on all boards
-> >>   rockchip: rk3399: Imply support for GbE PHY
-> >>   rockchip: rk3399: Enable DT overlay support on all boards
-> >>   rockchip: rk3399: Remove use of xPL_MISC_DRIVERS options
-> >>   rockchip: rk3399: Add a default spl-boot-order prop
-> >>   rockchip: rk3399: Fix loading FIT from SD-card when booting from eMMC
-> >>   clk: rockchip: rk3399: Rename SCLK_DDRCLK to SCLK_DDRC
-> >>   clk: rockchip: rk3399: Add dummy support for ACLK_VDU clock
-> >>   clk: rockchip: rk3399: Add dummy support for SCLK_PCIEPHY_REF clock
-> >>   clk: rockchip: rk3399: Add SCLK_USB3OTGx_REF support
-> >>   rockchip: rk3399: Sync soc device tree from linux v6.8
-> >>   rockchip: rk3399-gru: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-puma: Sync DT from linux v6.8
-> >>   rockchip: rk3399-rock-pi-n10: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-eaidk-610: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-leez: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-evb: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-firefly: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-orangepi: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-roc-pc: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-nanopi-4: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-rock960: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-khadas: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-rock-pi-4: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-rockpro64: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-pinebook-pro: Sync device tree from linux v6.8
-> >>   rockchip: rk3399-pinephone-pro: Sync device tree from linux v6.8
-> >>
-> >>  arch/arm/dts/rk3288-vmarc-som.dtsi            |  48 +++
-> >>  arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi     |   1 -
-> >>  arch/arm/dts/rk3399-eaidk-610.dts             |   3 +-
-> >>  arch/arm/dts/rk3399-evb-u-boot.dtsi           |  13 +-
-> >>  arch/arm/dts/rk3399-evb.dts                   |   3 +-
-> >>  arch/arm/dts/rk3399-ficus-u-boot.dtsi         |  10 +-
-> >>  arch/arm/dts/rk3399-ficus.dts                 |   4 +
-> >>  arch/arm/dts/rk3399-firefly-u-boot.dtsi       |   6 -
-> >>  arch/arm/dts/rk3399-firefly.dts               |  17 +-
-> >>  arch/arm/dts/rk3399-gru-bob.dts               |   8 +-
-> >>  arch/arm/dts/rk3399-gru-chromebook.dtsi       | 200 +++++++++++-
-> >>  arch/arm/dts/rk3399-gru-kevin.dts             |   3 +-
-> >>  arch/arm/dts/rk3399-gru-u-boot.dtsi           |  34 ++-
-> >>  arch/arm/dts/rk3399-gru.dtsi                  |  52 +++-
-> >>  arch/arm/dts/rk3399-khadas-edge-captain.dts   |   4 +
-> >>  arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi   |   7 +-
-> >>  arch/arm/dts/rk3399-khadas-edge-v.dts         |   4 +
-> >>  arch/arm/dts/rk3399-khadas-edge.dtsi          |  10 +-
-> >>  arch/arm/dts/rk3399-leez-p710-u-boot.dtsi     |   6 -
-> >>  arch/arm/dts/rk3399-leez-p710.dts             |   8 +-
-> >>  arch/arm/dts/rk3399-nanopc-t4.dts             |   2 +-
-> >>  arch/arm/dts/rk3399-nanopi-m4-2gb.dts         |  55 +---
-> >>  arch/arm/dts/rk3399-nanopi-m4b.dts            |   2 +-
-> >>  arch/arm/dts/rk3399-nanopi-r4s.dts            |   4 +-
-> >>  arch/arm/dts/rk3399-nanopi4-u-boot.dtsi       |  18 +-
-> >>  arch/arm/dts/rk3399-nanopi4.dtsi              |   7 +-
-> >>  arch/arm/dts/rk3399-op1-opp.dtsi              |  31 +-
-> >>  arch/arm/dts/rk3399-opp.dtsi                  |   6 +-
-> >>  arch/arm/dts/rk3399-orangepi-u-boot.dtsi      |  12 +
-> >>  arch/arm/dts/rk3399-orangepi.dts              |  12 +-
-> >>  arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi  |  23 +-
-> >>  arch/arm/dts/rk3399-pinebook-pro.dts          |  24 +-
-> >>  arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi |  24 +-
-> >>  arch/arm/dts/rk3399-pinephone-pro.dts         | 147 +++++++++
-> >>  arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi   |  27 +-
-> >>  arch/arm/dts/rk3399-puma-haikou.dts           |  42 ++-
-> >>  arch/arm/dts/rk3399-puma.dtsi                 |  17 +-
-> >>  arch/arm/dts/rk3399-roc-pc-u-boot.dtsi        |  45 +--
-> >>  arch/arm/dts/rk3399-roc-pc.dtsi               |  15 +-
-> >>  arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi  |  20 ++
-> >>  arch/arm/dts/rk3399-rock-4c-plus.dts          |   1 +
-> >>  arch/arm/dts/rk3399-rock-4se-u-boot.dtsi      |  12 +
-> >>  arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi     |   6 -
-> >>  arch/arm/dts/rk3399-rock-pi-4.dtsi            |   4 +-
-> >>  arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi    |   7 +
-> >>  arch/arm/dts/rk3399-rock-pi-4c.dts            |  10 +
-> >>  arch/arm/dts/rk3399-rock960-u-boot.dtsi       |  11 +-
-> >>  arch/arm/dts/rk3399-rock960.dtsi              |   5 +-
-> >>  arch/arm/dts/rk3399-rockpro64-u-boot.dtsi     |  22 +-
-> >>  arch/arm/dts/rk3399-rockpro64.dtsi            |  98 +++++-
-> >>  arch/arm/dts/rk3399-u-boot.dtsi               | 129 +++++---
-> >>  arch/arm/dts/rk3399.dtsi                      | 289 ++++++++++++++++--
-> >>  .../arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi |   6 -
-> >>  arch/arm/dts/rk3399pro-vmarc-som.dtsi         |  20 +-
-> >>  .../dts/rockchip-radxa-dalang-carrier.dtsi    |  21 ++
-> >>  arch/arm/mach-rockchip/Kconfig                |  38 ++-
-> >>  configs/chromebook_bob_defconfig              |   6 +-
-> >>  configs/chromebook_kevin_defconfig            |   6 +-
-> >>  configs/eaidk-610-rk3399_defconfig            |  13 +-
-> >>  configs/evb-rk3399_defconfig                  |  10 +-
-> >>  configs/ficus-rk3399_defconfig                |  38 +--
-> >>  configs/firefly-rk3399_defconfig              |  17 +-
-> >>  configs/khadas-edge-captain-rk3399_defconfig  |  35 ++-
-> >>  configs/khadas-edge-rk3399_defconfig          |  29 +-
-> >>  configs/khadas-edge-v-rk3399_defconfig        |  35 ++-
-> >>  configs/leez-rk3399_defconfig                 |  13 +-
-> >>  configs/nanopc-t4-rk3399_defconfig            |  18 +-
-> >>  configs/nanopi-m4-2gb-rk3399_defconfig        |  22 +-
-> >>  configs/nanopi-m4-rk3399_defconfig            |  22 +-
-> >>  configs/nanopi-m4b-rk3399_defconfig           |  22 +-
-> >>  configs/nanopi-neo4-rk3399_defconfig          |  22 +-
-> >>  configs/nanopi-r4s-rk3399_defconfig           |  16 +-
-> >>  configs/orangepi-rk3399_defconfig             |  14 +-
-> >>  configs/pinebook-pro-rk3399_defconfig         |  13 +-
-> >>  configs/pinephone-pro-rk3399_defconfig        |  13 +-
-> >>  configs/puma-rk3399_defconfig                 |   5 +-
-> >>  configs/roc-pc-mezzanine-rk3399_defconfig     |  15 +-
-> >>  configs/roc-pc-rk3399_defconfig               |  13 +-
-> >>  configs/rock-4c-plus-rk3399_defconfig         |  27 +-
-> >>  configs/rock-4se-rk3399_defconfig             |  28 +-
-> >>  configs/rock-pi-4-rk3399_defconfig            |  13 +-
-> >>  configs/rock-pi-4c-rk3399_defconfig           |  27 +-
-> >>  configs/rock-pi-n10-rk3399pro_defconfig       |  10 +-
-> >>  configs/rock960-rk3399_defconfig              |  18 +-
-> >>  configs/rockpro64-rk3399_defconfig            |  16 +-
-> >>  drivers/clk/rockchip/clk_rk3399.c             |  12 +-
-> >>  include/dt-bindings/clock/rk3399-cru.h        |  30 +-
-> >>  87 files changed, 1700 insertions(+), 531 deletions(-)
-> >>
-> >> --
-> >> 2.43.2
-> >>
->
