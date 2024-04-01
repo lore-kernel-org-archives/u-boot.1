@@ -4,100 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95720CD128D
-	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 15:54:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E20A7CD128A
+	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 16:53:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04637880E4;
-	Mon,  1 Apr 2024 17:54:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 0ED8987FEE;
+	Mon,  1 Apr 2024 18:53:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="LY8IOVhB";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ipeKdNfh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 915B3882DC; Mon,  1 Apr 2024 17:54:36 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3064C882DC; Mon,  1 Apr 2024 18:53:14 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F74B8787C
- for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 17:54:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 384EF87EF5
+ for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 18:53:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id D18D54249A
- for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 15:54:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1711986873;
- bh=Id0GinkNybFmzq+aoGeS4v6LW6UxMcRpDOHYiaidsh4=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=LY8IOVhBMwQ64V6Y/YiWiZAr89Hs5ZdxfDMuXo9MrFIZEMb+RClBtzeBneTgcmneU
- iNLk/VhAGuTOpBB8iBHF2qtjEJkqrmeC/F320I9ESCWtpYnh4xctbcLnOMQQBmvXFv
- agRHF7OKG9v+/lLNIlDkZU/q00vCMneMIi/GZyuSV8Ldw1cTYweWe76Q8xvpqtW/o1
- MoOSU3T8QbkQ6fXiR/fPwmKpxAvnVFfsheqgbsnS0DeUKM2ASZRDBjUNGAiM866nuM
- nLUbGMAaZ7XnRQ1Fm/tEkBWYpNrxMl6e245K+z0od0MsmzU+iuIZS+AxvnngOIaBaj
- ap3Y0nXwGD57A==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-33ecf15c037so3840182f8f.3
- for <u-boot@lists.denx.de>; Mon, 01 Apr 2024 08:54:33 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711986873; x=1712591673;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Id0GinkNybFmzq+aoGeS4v6LW6UxMcRpDOHYiaidsh4=;
- b=FDpq8/6LIsfHFnsYemdkIhmoGu4baDF5p6rUlhSnVeW5yNGI+2ClcbI4JaPa0K9znJ
- J0ikTWztrlI8vvOsw38mpTLJnhdrqhGagtvIi3WAmCY7pchsj5E+S2wv2W46RpQuBSaP
- 7vxc6umICr/0lwJnfVu59XzMoHjtSZwamsJtcZ7gS42wktHidJfA7Flh6+rstbRgU3GO
- 9tABORfzxdSZlD4sPWjIEpaqZavc6zyBNtBZ+lqXCqYU55xcGgZvFKBLgPhGtXdfBeWJ
- UeBKW9FDO9iqNs504iUIqfxO3CAYLrPO7NZm/naoA9DUdqd3U7EI1yU6kOLDBWL6fOsP
- Wuyw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVTwieALj/j4OiG8A48G0QrXbu71IK7LDIpeFEy3HSeH7rCAEAq5G9TXTcV8vxuYobpVKeGzEXI7Hy4xzvwuQiLI1vvsw==
-X-Gm-Message-State: AOJu0Yxe8tbWY1AfN8Y9xQH2ywT+PekLOQRzUHgFLSkXpxchcIdkTxZ1
- mUwQhMTpeeu/dMBcR34RPWA/JiQPyXcPlb+1uc4IK4qh+qH6F95pDNZtduiNeZqOJV7FIHzZdqW
- fRT3bRkJNLNU4UacVkUvIrOIFMd4uLTTqK9IDBw7wn/nmxpU//SuCoB25FCD7m0O0MQY=
-X-Received: by 2002:a5d:4843:0:b0:343:2e09:3597 with SMTP id
- n3-20020a5d4843000000b003432e093597mr8744372wrs.64.1711986872931; 
- Mon, 01 Apr 2024 08:54:32 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHOCd6Hp8sPAxhFOORfv3d6Uccg4RWDJpRBfGm8fFhJXF5Qcm1SWz7gQyOwGGSirRyk5RjNEA==
-X-Received: by 2002:a5d:4843:0:b0:343:2e09:3597 with SMTP id
- n3-20020a5d4843000000b003432e093597mr8744352wrs.64.1711986872394; 
- Mon, 01 Apr 2024 08:54:32 -0700 (PDT)
-Received: from [192.168.123.161]
- (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
- by smtp.gmail.com with ESMTPSA id
- dq6-20020a0560000cc600b00341c3071c93sm11925673wrb.73.2024.04.01.08.54.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 01 Apr 2024 08:54:31 -0700 (PDT)
-Message-ID: <a94ea391-5b0a-49b1-8277-f6d018ce780b@canonical.com>
-Date: Mon, 1 Apr 2024 17:54:45 +0200
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1711990391; x=1714582391;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=M5S481Gy5AslMluyv9JKs6qOe5tmzk3tM3/NHYk7Nbo=;
+ b=ipeKdNfhNKMMCW8Y59a6vox2nIVwajY+av7glup7LoX3xCMI5ZVQC0ROpntRwcAI
+ I9HLeVdipz71hbfIRNX7ygYL8w7AR6g2BjJp/6MeLYBVHQMFWddew3O9Vx1cIp+V
+ zZIPJJqHetM/WJRvi/zzGBaP/205hdIFQwsyv/rMqa8=;
+X-AuditID: ac14000a-fadff7000000290d-bf-660ae677d9de
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 19.29.10509.776EA066;
+ Mon,  1 Apr 2024 18:53:11 +0200 (CEST)
+Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 1 Apr 2024
+ 18:53:11 +0200
+Message-ID: <8a3601ab-fa34-4976-ae22-66dc5263bcd9@phytec.de>
+Date: Mon, 1 Apr 2024 18:53:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 4/6] board: starfive: support Milk-V Mars board
-To: Aurelien Jarno <aurelien@aurel32.net>
-Cc: Minda Chen <minda.chen@starfivetech.com>, Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, Lukasz Tekieli <tekieli.lukasz@gmail.com>,
- Shiji Yang <yangshiji66@outlook.com>, Shengyu Qu <wiagn233@outlook.com>,
- Seung-Woo Kim <sw0312.kim@samsung.com>, E Shattow <lucent@gmail.com>,
- u-boot@lists.denx.de, Hal Feng <hal.feng@starfivetech.com>
-References: <20240321181149.177356-1-heinrich.schuchardt@canonical.com>
- <20240321181149.177356-5-heinrich.schuchardt@canonical.com>
- <ZgBAFWBB0-213CfQ@aurel32.net>
- <b5af9050-aa50-4445-9de3-4e5f368621b7@canonical.com>
- <ZgrSnExL1iTg8nSC@aurel32.net>
+Subject: Re: [PATCH 1/2] arm: mach-k3: am625: copy bootindex to OCRAM for main
+ domain SPL
+To: Bryan Brattlof <bb@ti.com>
+CC: "Raghavendra, Vignesh" <vigneshr@ti.com>, <u-boot@lists.denx.de>,
+ <nm@ti.com>, <upstream@lists.phytec.de>
+References: <20240226133006.3279993-1-w.egorov@phytec.de>
+ <20240226133006.3279993-2-w.egorov@phytec.de>
+ <eeda9c00-d7c6-444b-ba77-f70b2f19eb2a@ti.com>
+ <20240304202717.7ruiozbuzy4bv5iz@bryanbrattlof.com>
+ <2428cd68-f69f-4915-bd94-f7b6bb84152c@ti.com>
+ <20240305173457.ir564jlw3euux54n@bryanbrattlof.com>
+ <c6e446a6-c767-4c61-87f5-8cc310c7178a@ti.com>
+ <dba27c99-b160-4e45-ab68-d5fdb69ef984@phytec.de>
+ <20240401144622.trimybc6nxhgrdst@bryanbrattlof.com>
 Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <ZgrSnExL1iTg8nSC@aurel32.net>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20240401144622.trimybc6nxhgrdst@bryanbrattlof.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Florix.phytec.de (172.25.0.13) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrOLMWRmVeSWpSXmKPExsWyRpKBR7f8GVeawe82I4u5bw6wWrz5cZbJ
+ 4u3eTnaL7nfqFv/PfmB3YPU4e2cHo0d/dwurx/Eb25kCmKO4bFJSczLLUov07RK4Mn6cncNc
+ 8N284sK/O2wNjBd0uxg5OSQETCRaJ0xi6WLk4hASWMIkcXx7CzOEc4dRYtqrFjaQKl4BG4mT
+ 5/6ygNgsAioST5f1skLEBSVOznwCFhcVkJe4f2sGO4gtLBAt0bR2K1hcREBOouHWNLA5zAL5
+ Ert/3WWEWHCOWeLWgZUsEAlxiVtP5jOB2GwC6hJ3NnwDWsDBwSngIDHpTzxEiYXE4jcH2SFs
+ eYnmrbOZQWwhIPvFpeUsEN/IS0w795oZwg6VOLJpNdMERuFZSE6dhWTbLCRjZyEZu4CRZRWj
+ UG5mcnZqUWa2XkFGZUlqsl5K6iZGUGSIMHDtYOyb43GIkYmD8RCjBAezkgjvT2/ONCHelMTK
+ qtSi/Pii0pzU4kOM0hwsSuK8qzuCU4UE0hNLUrNTUwtSi2CyTBycUg2MHL/0rIs/BWi/3mUp
+ yS61QYOB6/4b99Lp6z0fHXBvLDxg0VTO3Wq4wr4+oUP2xpTWOm3DP8xak85IxZ+X+q3vdnvW
+ in95CxOq9v/epegU9r/waXxd4NqkjRUdXw4WlotOkK9jOuc7x3T3mZe1sjV+K8UTn+vzTfD0
+ NXxeJ3/iV6qst0DzFg8lluKMREMt5qLiRAAX/1YKegIAAA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,72 +98,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/1/24 17:28, Aurelien Jarno wrote:
-> On 2024-03-28 17:01, Heinrich Schuchardt wrote:
->> On 24.03.24 16:00, Aurelien Jarno wrote:
->>> On 2024-03-21 19:11, Heinrich Schuchardt wrote:
->>>> The differences between the Milk-V Mars board and the VisionFive 2 board
->>>> are small enough that we can support both using the same U-Boot build.
->>>>
->>>> * The model and compatible property are taken from proposed Linux patches.
->>>> * The EEPROM is atmel,24c02 according to the vendor U-Boot.
->>>> * The second Ethernet port is not available.
+
+
+Am 01.04.24 um 16:46 schrieb Bryan Brattlof:
+> On April  1, 2024 thus sayeth Wadim Egorov:
+>> Hi Vignesh, Hi Bryan,
+>>
+>>
+>> Am 05.03.24 um 18:36 schrieb Raghavendra, Vignesh:
 >>>
->>>   From the device tree that have been submitted to the kernel [1] it seems
->>> another difference is that there is a CD gpio for mmc1.
+>>>
+>>> On 3/5/2024 11:04 PM, Bryan Brattlof wrote:
+>>>> On March  5, 2024 thus sayeth Vignesh Raghavendra:
+>>>>>
+>>>>> On 05/03/24 01:57, Bryan Brattlof wrote:
+>>>>>> Hey Vignesh!
+>>>>>>
+>>>>>> On March  4, 2024 thus sayeth Vignesh Raghavendra:
+>>>>>>> Hi Wadim,
+>>>>>>>
+>>>>>>> On 26/02/24 19:00, Wadim Egorov wrote:
+>>>>>>>> Texas Instruments has begun enabling security settings on the SoCs it
+>>>>>>>> produces to instruct ROM and TIFS to begin protecting the Security
+>>>>>>>> Management Subsystem (SMS) from other binaries we load into the chip by
+>>>>>>>> default.
+>>>>>>>>
+>>>>>>>> One way ROM and TIFS do this is by enabling firewalls to protect the
+>>>>>>>> OCSRAM and HSM RAM regions they're using during bootup.
+>>>>>>>>
+>>>>>>>> The HSM RAM the wakeup SPL is in is firewalled by TIFS to protect
+>>>>>>>> itself from the main domain applications. This means the 'bootindex'
+>>>>>>>> value in HSM RAM, left by ROM to indicate if we're using the primary
+>>>>>>>> or secondary boot-method, must be moved to OCSRAM (that TIFS has open
+>>>>>>>> for us) before we make the jump to the main domain so the main domain's
+>>>>>>>> bootloaders can keep access to this information.
+>>>>>>>>
+>>>>>>>> Based on commit
+>>>>>>>>     b672e8581070 ("arm: mach-k3: copy bootindex to OCRAM for main domain SPL")
 >>
->> Thank you for reviewing.
+>> I was thinking, even if the reason described here is not right or does not
+>> apply to the am62x, it is still a valid solution for carrying this variable
+>> into the context for next stage A53 bootloader.
 >>
->> On all of Milk-V Mars, VisionFive 2 1.2B, and 1.3A I see GPIO 41 level
->> changing when removing or inserting an SD card using U-Boot command 'gpio
->> status -a'. So this seems not to be Milk-V specific.
+>> store_boot_info_from_rom() stores the index to the bootindex (.data)
+>> variable which makes sure it is valid in R5 SPL context. But the next stage
+>> bootloader does not know anything about the bootindex variable. So from my
+>> understanding it needs to be copied to a different region to preserve the
+>> data for next stage bootloaders.
 >>
->> Could you, please, check.
+>> Or do I miss something?
 > 
-> This already have been answered by others, thanks.
-> 
->>>   From the schematics, it also seems that the usb0 port is not in
->>> peripheral mode, but in host mode. That said on the submitted kernel
->>> device tree it seems simply disabled.
->>
->> All three blue-colored USB 3.0 ports are able to read an SD-card in U-Boot.
->>
->> The black port provides 5V but I could not make it work.
->>
->> On the schema I found:
->>
->> USB20: Do not support OTG mode and AVSS_USB0-AVSS_USB2 attached to ground.
->>
->> Could you, please, specify which node in the device-tree you want to
->> disable. I cannot see anything disabled for usb@10100000 and usb@0 in the
->> kernel device-tree.
-> 
-> Disclaimer, I have no such board, but I remember people on IRC trying to
-> use the device tree from the VF2 on a Milk-V Mars and getting an error
-> with the USB being in a wrong mode.
-> 
-> The difference I have noticed is not a node but the dr_mode property:
-> 
-> &usb0 {
->          dr_mode = "peripheral";
->          status = "okay";
-> };
+> That's correct. We typically put this bootindex variable in the same
+> location for both SPLs.
 
-Thanks Aurelien for the explanation.
+So basically the patch can stay almost as is, but maybe the misleading 
+comments in am62_hardware.h should be removed.
 
-The node usb@10100000 (aka usb0) does not exist in the U-Boot 
-VisionFive2 device-tree, yet. There isn't any dr_mode property either.
-
-We will have to consider this node once we merge the Linux device-tree.
-
-Best regards
-
-Heinrich
 
 > 
-> This does not appear on the patches submitted on the Linux side for the MilkV
-> Mars.
+> ~Bryan
 > 
-> Aurelien
-> 
-
+>>>>>>>>
+>>>>>>> FYI, this is mostly a problem in non SPL flow (TI prosperity SBL for
+>>>>>>> example) where HSM RAM would be used by HSM firmware. This should be a
+>>>>>>> issue in R5 SPL flow.  Do you see any issues today? If so, whats the
+>>>>>>> TIFS firmware being used?
+>>>>>>>
+>>>>>>>> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+>>>>>>>> ---
+>>>>>>>>    arch/arm/mach-k3/Kconfig                      |  3 ++-
+>>>>>>>>    arch/arm/mach-k3/am625_init.c                 | 15 +++++++++++++--
+>>>>>>>>    arch/arm/mach-k3/include/mach/am62_hardware.h | 15 +++++++++++++++
+>>>>>>>>    3 files changed, 30 insertions(+), 3 deletions(-)
+>>>>>>>>
+>>>>>>>> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+>>>>>>>> index 03898424c9..f5d06593f7 100644
+>>>>>>>> --- a/arch/arm/mach-k3/Kconfig
+>>>>>>>> +++ b/arch/arm/mach-k3/Kconfig
+>>>>>>>> @@ -75,7 +75,8 @@ config SYS_K3_BOOT_PARAM_TABLE_INDEX
+>>>>>>>>    	default 0x41cffbfc if SOC_K3_J721E
+>>>>>>>>    	default 0x41cfdbfc if SOC_K3_J721S2
+>>>>>>>>    	default 0x701bebfc if SOC_K3_AM642
+>>>>>>>> -	default 0x43c3f290 if SOC_K3_AM625
+>>>>>>>> +	default 0x43c3f290 if SOC_K3_AM625 && CPU_V7R
+>>>>>>>> +	default 0x7000f290 if SOC_K3_AM625 && ARM64
+>>>>>>>>    	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
+>>>>>>>>    	default 0x7000f290 if SOC_K3_AM62A7 && ARM64
+>>>>>>>>    	help
+>>>>>>>> diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
+>>>>>>>> index 6c96e88114..67cf63b103 100644
+>>>>>>>> --- a/arch/arm/mach-k3/am625_init.c
+>>>>>>>> +++ b/arch/arm/mach-k3/am625_init.c
+>>>>>>>> @@ -35,8 +35,10 @@ static struct rom_extended_boot_data bootdata __section(".data");
+>>>>>>>>    static void store_boot_info_from_rom(void)
+>>>>>>>>    {
+>>>>>>>>    	bootindex = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
+>>>>>>>> -	memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
+>>>>>>>> -	       sizeof(struct rom_extended_boot_data));
+>>>>>>>> +	if (IS_ENABLED(CONFIG_CPU_V7R)) {
+>>>>>>>> +		memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
+>>>>>>>> +		       sizeof(struct rom_extended_boot_data));
+>>>>>>>> +	}
+>>>>>>>>    }
+>>>>>>>>    static void ctrl_mmr_unlock(void)
+>>>>>>>> @@ -175,6 +177,15 @@ void board_init_f(ulong dummy)
+>>>>>>>>    		k3_sysfw_loader(true, NULL, NULL);
+>>>>>>>>    	}
+>>>>>>>> +#if defined(CONFIG_CPU_V7R)
+>>>>>>>> +	/*
+>>>>>>>> +	 * Relocate boot information to OCRAM (after TIFS has opend this
+>>>>>>>> +	 * region for us) so the next bootloader stages can keep access to
+>>>>>>>> +	 * primary vs backup bootmodes.
+>>>>>>>> +	 */
+>>>>>>>> +	writel(bootindex, K3_BOOT_PARAM_TABLE_INDEX_OCRAM);
+>>>>>>>> +#endif
+>>>>>>>> +
+>>>>>>>>    	/*
+>>>>>>>>    	 * Force probe of clk_k3 driver here to ensure basic default clock
+>>>>>>>>    	 * configuration is always done.
+>>>>>>>> diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mach-k3/include/mach/am62_hardware.h
+>>>>>>>> index 54380f36e1..9f504f4642 100644
+>>>>>>>> --- a/arch/arm/mach-k3/include/mach/am62_hardware.h
+>>>>>>>> +++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
+>>>>>>>> @@ -76,8 +76,23 @@
+>>>>>>>>    #define CTRLMMR_MCU_RST_CTRL			(MCU_CTRL_MMR0_BASE + 0x18170)
+>>>>>>>>    #define ROM_EXTENDED_BOOT_DATA_INFO		0x43c3f1e0
+>>>>>>>> +#define K3_BOOT_PARAM_TABLE_INDEX_OCRAM         0x7000F290
+>>>>>>>> +/*
+>>>>>>>> + * During the boot process ROM will kill anything that writes to OCSRAM.
+>>>>>>> R5 ROM is long gone when R5 SPL starts, how would it kill anything?
+>>>>>> Looks like this was based on my patch long ago for the AM62Ax family.
+>>>>>>   From what little I remember about this was ROM is leaving behind a
+>>>>>> firewall that we need TIFS's help to bring down for us. So I just
+>>>>>> blamed ROM 😉
+>>>>> Thats true. ROM does bare minimum and so wont open up firewall around
+>>>>> main SRAM. but TIFS does, so you should be able to access this region
+>>>>> post k3_sysfw_loader().
+>>>>>
+>>>>>> IDK if this is an issue for the AM62x family though.
+>>>>>>
+>>>>> It might be if one tries to "select" DT using EEPROM detect before SYSFW
+>>>>> is up. But that's not the case any more right?
+>>>> Yep we still need to figure out a plan for multiple DDR configs or see
+>>>> if we can move the DDR init to later in the boot as that is the only
+>>>> thing left that still needs the board detection this early on.
+>>>>
+>>>> There is a little race condition here as TIFS can respond to some
+>>>> messages before it's finished its init. IDK if we can send it anything
+>>>> to act like a fence and stall us until the firewalls are down though.
+>>>
+>>> Firewall configurations should be done before TIFS posts boot
+>>> notification message.
+>>>
+>>> Regards
+>>> Vignesh
