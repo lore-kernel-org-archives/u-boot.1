@@ -4,70 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06B8DCD128A
-	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 20:42:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CE0ACD1288
+	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 20:42:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77F1988335;
+	by phobos.denx.de (Postfix) with ESMTP id E5C988833E;
 	Mon,  1 Apr 2024 22:41:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jtEyVZ+I";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LQVlYaen";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63C0188316; Mon,  1 Apr 2024 19:09:04 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1D9CD8830B; Mon,  1 Apr 2024 21:13:37 +0200 (CEST)
+Received: from mail-pg1-x530.google.com (mail-pg1-x530.google.com
+ [IPv6:2607:f8b0:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFBA38831E
- for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 19:09:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BF7D87DCD
+ for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 21:13:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 431H8wa4023109;
- Mon, 1 Apr 2024 12:08:58 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1711991338;
- bh=6/3pNZanKu5LbYNLGuN7iXHpW6i3vl8ASZf3e1vUQPM=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=jtEyVZ+I+z1bj3FmPGMPuBbRS0Isuzqippwxo+iX6VDasDb4vp7lN/scYhy7FIR38
- 16SQQIOgUEiSJfGCQ36BQxJqPesRY7uEok03shuNHbnPCexx9qHDaQ81geacEIItAf
- PK2FCvLMiYaBy58tBpF8JthUv1pBpwawHkFk4aaw=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 431H8wQf012450
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 1 Apr 2024 12:08:58 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 1
- Apr 2024 12:08:58 -0500
-Received: from fllvsmtp8.itg.ti.com (10.64.41.158) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 1 Apr 2024 12:08:57 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by fllvsmtp8.itg.ti.com (8.15.2/8.15.2) with ESMTP id 431H8vlL076571;
- Mon, 1 Apr 2024 12:08:57 -0500
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Manorit Chawdhry <m-chawdhry@ti.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Vignesh R <vigneshr@ti.com>, Tom Rini
- <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, Nishanth Menon <nm@ti.com>, Udit Kumar
- <u-kumar1@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>, Prasanth Mantena
- <p-mantena@ti.com>, Apurva Nandan <a-nandan@ti.com>, Manorit Chawdhry
- <m-chawdhry@ti.com>, Pratyush Yadav <p.yadav@ti.com>
-Subject: Re: [PATCH 1/4] mtd: spi-nor-core: Do not start or end writes at
- odd address in DTR mode
-In-Reply-To: <20240401-b4-upstream-j721s2-ospi-support-v1-1-20e4a0024db9@ti.com>
-References: <20240401-b4-upstream-j721s2-ospi-support-v1-0-20e4a0024db9@ti.com>
- <20240401-b4-upstream-j721s2-ospi-support-v1-1-20e4a0024db9@ti.com>
-Date: Mon, 1 Apr 2024 12:08:57 -0500
-Message-ID: <864jclvwly.fsf@udb0321960.dhcp.ti.com>
+ spf=pass smtp.mailfrom=ckhardin@gmail.com
+Received: by mail-pg1-x530.google.com with SMTP id
+ 41be03b00d2f7-5bdbe2de25fso3281899a12.3
+ for <u-boot@lists.denx.de>; Mon, 01 Apr 2024 12:13:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1711998813; x=1712603613; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vv38qOlzGrbhqjQMQd/4PHb44Qe/bcThVmJdezTUq/U=;
+ b=LQVlYaen/ZgO7gKxMb7H8jCD3xOG9Ggd1+rMUhwVV6pkJ84wKuiobzPH1EWwOTZEs+
+ z1QS7eh7wOeE4nH9qHoMBxi2ArNHCWf8hcOpVPRaSMOuhUJqfDuibX/poa97DMBjW/QB
+ B5/O+xWZFlvdgmOrl+ntfaU7veCcQJFleAP4JX1gHxRV2hP5YvQ+a9mic5+zI2yngxTS
+ yPTnu4TtGPK7kW5ahYF8nraT//od6+8Kdl2vbqD6VCCRIqX1vG/99xeMOtNbkjUtVIGa
+ gBDEt1N2TENYrvNXKYqcp3b/wYbx+q9930fK1/JGvVaKl+tL8CGoJ5N6lFElUkCWfph6
+ RD1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1711998813; x=1712603613;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vv38qOlzGrbhqjQMQd/4PHb44Qe/bcThVmJdezTUq/U=;
+ b=rJ3Eb2vNbQMu0BKesm5ud7zeeC86tgyFHqcu5Qgd/nPct+9RewPUHrVA3Y6Uo02RmS
+ LH3yM5qVOK8WItBIgjX4W6fgE/ZYF5PaJEri/j7ZM3cxCTIM2dZRwueedg2nQtNJXiwa
+ 2DqYHQQh1STekue9aOrfVtFve1yupTRU9YUbekbdei5R8+8/nK6ADdoqAnnGosV3RaEj
+ RI5y6XY/3XjoW2AzlvxSCyYyMYUT1e/4JwSna0BZs/+faK+oeEILJTeQ6B0fpIfqxokk
+ +iphP2U6b4UMz5/yjHqnARRmdFBvDEgaePiTldKSoJgXUgUIV/RJRVnc1Ok14eeXc508
+ NwPg==
+X-Gm-Message-State: AOJu0YwxYzq+qXhLsYOVsQjhW33trpGsz5KseiYy7QsU3ZeeD1APHK6b
+ mtFl0c+krHW335MMxTm+kIk3jRuT5dPviXUh/turjU8Y4N6ZhQoLfPOts2ND
+X-Google-Smtp-Source: AGHT+IF8Fp58toSb3BXCLtY+x83vgSiJkPLWTYEUek/YFf9PiFOliBN8kC4B9Zx9iHGFvu9IlxEBgQ==
+X-Received: by 2002:a17:903:120c:b0:1e0:280b:8387 with SMTP id
+ l12-20020a170903120c00b001e0280b8387mr13897323plh.40.1711998812643; 
+ Mon, 01 Apr 2024 12:13:32 -0700 (PDT)
+Received: from localhost.localdomain ([12.125.190.90])
+ by smtp.gmail.com with ESMTPSA id
+ h15-20020a170902680f00b001dd6f305a81sm9472740plk.293.2024.04.01.12.13.31
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Mon, 01 Apr 2024 12:13:31 -0700 (PDT)
+From: Charles Hardin <ckhardin@gmail.com>
+To: u-boot@lists.denx.de
+Cc: joe.hershberger@ni.com,
+	rfried.dev@gmail.com,
+	ckhardin@gmail.com
+Subject: [PATCH 1/1] net: add support to parse the NIS domain for the dhcp
+ options
+Date: Mon,  1 Apr 2024 12:13:19 -0700
+Message-Id: <20240401191319.62652-1-ckhardin@gmail.com>
+X-Mailer: git-send-email 2.39.3 (Apple Git-146)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Mon, 01 Apr 2024 22:41:06 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -85,99 +92,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Manorit Chawdhry <m-chawdhry@ti.com> writes:
+There is code in the bootp parsing for NIS domain and add the
+same support for the dhcp options as well. This allows the same
+usage of the data when the dhcp command is used in the boot
+command.
 
-> From: Pratyush Yadav <p.yadav@ti.com>
->
-> On DTR capable flashes like Micron Xcella the writes cannot start or end
-> at an odd address in DTR mode. Extra 0xff bytes need to be prepended or
-> appended respectively to make sure both the start and end addresses are
-> even.
->
-> Signed-off-by: Pratyush Yadav <p.yadav@ti.com>
-> Reviewed-by: Vignesh Raghavendra <vigneshr@ti.com>
-> Signed-off-by: Apurva Nandan <a-nandan@ti.com>
-> Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
-> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> ---
->  drivers/mtd/spi/spi-nor-core.c | 59 +++++++++++++++++++++++++++++++++++++++---
->  1 file changed, 55 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-> index f86003ca8c06..2b000151c97d 100644
-> --- a/drivers/mtd/spi/spi-nor-core.c
-> +++ b/drivers/mtd/spi/spi-nor-core.c
-> @@ -1805,11 +1805,62 @@ static int spi_nor_write(struct mtd_info *mtd, loff_t to, size_t len,
->  		if (ret < 0)
->  			return ret;
->  #endif
-> +
->  		write_enable(nor);
-> -		ret = nor->write(nor, addr, page_remain, buf + i);
-> -		if (ret < 0)
-> -			goto write_err;
-> -		written = ret;
-> +
-> +		/*
-> +		 * On DTR capable flashes like Micron Xcella the writes cannot
-> +		 * start or end at an odd address in DTR mode. So we need to
-> +		 * append or prepend extra 0xff bytes to make sure the start
-> +		 * address and end address are even.
-> +		 */
-> +		if (spi_nor_protocol_is_dtr(nor->write_proto) &&
-> +		    ((addr | page_remain) & 1)) {
-> +			u_char *tmp;
-> +			size_t extra_bytes = 0;
-> +
-> +			tmp = kmalloc(nor->page_size, 0);
-> +			if (!tmp) {
-> +				ret = -ENOMEM;
-> +				goto write_err;
-> +			}
-> +
-> +			/* Prepend a 0xff byte if the start address is odd. */
-> +			if (addr & 1) {
-> +				tmp[0] = 0xff;
-> +				memcpy(tmp + 1, buf + i, page_remain);
-> +				addr--;
-> +				page_remain++;
-> +				extra_bytes++;
-> +			} else {
-> +				memcpy(tmp, buf + i, page_remain);
-> +			}
-> +
-> +			/* Append a 0xff byte if the end address is odd. */
-> +			if ((addr + page_remain) & 1) {
-> +				tmp[page_remain + extra_bytes] = 0xff;
-> +				extra_bytes++;
-> +				page_remain++;
-> +			}
-> +
-> +			ret = nor->write(nor, addr, page_remain, tmp);
-> +
-> +			kfree(tmp);
-> +
-> +			if (ret < 0)
-> +				goto write_err;
-> +
-> +			/*
-> +			 * We write extra bytes but they are not part of the
-> +			 * original write.
-> +			 */
-> +			written = ret - extra_bytes;
-> +		} else {
-> +			ret = nor->write(nor, addr, page_remain, buf + i);
-> +			if (ret < 0)
-> +				goto write_err;
-> +			written = ret;
-> +		}
->  
->  		ret = spi_nor_wait_till_ready(nor);
->  		if (ret)
->
-> -- 
-> 2.43.2
+Signed-off-by: Charles Hardin <ckhardin@gmail.com>
+---
+ net/bootp.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-Thanks for upstreaming!
+diff --git a/net/bootp.c b/net/bootp.c
+index 6800290963..046caf3685 100644
+--- a/net/bootp.c
++++ b/net/bootp.c
+@@ -883,6 +883,14 @@ static void dhcp_process_options(uchar *popt, uchar *end)
+ 			break;
+ 		case 28:	/* Ignore Broadcast Address Option */
+ 			break;
++		case 40:	/* NIS Domain name */
++			if (net_nis_domain[0] == 0) {
++				size = truncate_sz("NIS Domain Name",
++					sizeof(net_nis_domain), size);
++				memcpy(&net_nis_domain, ext + 2, size);
++				net_nis_domain[size] = 0;
++			}
++			break;
+ #if defined(CONFIG_CMD_SNTP) && defined(CONFIG_BOOTP_NTPSERVER)
+ 		case 42:	/* NTP server IP */
+ 			net_copy_ip(&net_ntp_server, (popt + 2));
+-- 
+2.39.3 (Apple Git-146)
 
-Tested-by: Jonathan Humphreys <j-humphreys@ti.com>
