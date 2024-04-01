@@ -4,81 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27236CD1283
-	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 09:24:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFDFECD1283
+	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 09:45:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DFA88801E;
-	Mon,  1 Apr 2024 11:24:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 2A406882C5;
+	Mon,  1 Apr 2024 11:45:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="nZF7Xt6Z";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="nGma/mSq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1B01882E0; Mon,  1 Apr 2024 11:24:20 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 14BBE882C5; Mon,  1 Apr 2024 11:45:46 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4521E8810D
- for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 11:24:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E9FD882DC
+ for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 11:45:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1711963457; x=1714555457;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=IKtxA7g+QNHCEnPDIBGILrS5Mg+2mlSPZN/T+wFaq90=;
- b=nZF7Xt6ZgLjxc3jdg4I4GDt755a95mQFO4vlCxtswRHd2un1iErfnwf4ikJUMJk4
- 7F5WcGGiDMVREDWDQPR7VAliZ7q0RgiRxkxTcWLuxhojmKjGUesKEkXwKK0dLuR9
- GVzKbuqABALcjTR2fUqYvP2HlbvsApe4uXqrTwAGUAg=;
-X-AuditID: ac14000a-fbefe7000000290d-5e-660a7d41ecad
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id FF.97.10509.14D7A066;
- Mon,  1 Apr 2024 11:24:17 +0200 (CEST)
-Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 1 Apr 2024
- 11:24:16 +0200
-Message-ID: <dba27c99-b160-4e45-ab68-d5fdb69ef984@phytec.de>
-Date: Mon, 1 Apr 2024 11:24:15 +0200
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=3892=LG=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1711964734;
+ bh=Njd8WS9J5AiO0E4RaZkaGRWlGqtEw48tbYI1q2eqcPk=;
+ b=nGma/mSqV9nk293AND0IxMedMX0UPG86WfDb9/Kp3jo83dKk3dXJdL+KprwlsTccJ4HLD2DZl
+ xMo5sQNZoRHk1t0CfBiDDGzoKuCBGzBU9acjUVW0D+2B4uqz6XCLgNenYTOgRSIUinH6qSVOoqh
+ 0VHHOEc4uZKhrvcenynn4uLk9Dk0U1ISTa9pxLL+LwAnLk0C9hUCcnS8hAJ4pe6Xzcid6UkCg2V
+ 2SqI7H2Bql3fGaM2LxrdAK2g3f5+Yod6akF+f66TMp4r/+CFH0NgZdYa2Nec3ZPgC3GK6p8Tbzp
+ W3+XD6+tUifb78O6CKyyTHLREairqr71Cj3ct3xIFgsA==
+Message-ID: <63f29606-ad3f-4883-9e8b-4d80194c12ab@kwiboo.se>
+Date: Mon, 1 Apr 2024 11:45:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] arm: mach-k3: am625: copy bootindex to OCRAM for main
- domain SPL
-To: "Raghavendra, Vignesh" <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>
-CC: <u-boot@lists.denx.de>, <nm@ti.com>, <upstream@lists.phytec.de>
-References: <20240226133006.3279993-1-w.egorov@phytec.de>
- <20240226133006.3279993-2-w.egorov@phytec.de>
- <eeda9c00-d7c6-444b-ba77-f70b2f19eb2a@ti.com>
- <20240304202717.7ruiozbuzy4bv5iz@bryanbrattlof.com>
- <2428cd68-f69f-4915-bd94-f7b6bb84152c@ti.com>
- <20240305173457.ir564jlw3euux54n@bryanbrattlof.com>
- <c6e446a6-c767-4c61-87f5-8cc310c7178a@ti.com>
+Subject: Re: [PATCH 00/31] rockchip: rk3399: Sync DT with linux v6.8 and
+ update defconfigs
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20240331202921.262323-1-jonas@kwiboo.se>
+ <CAFA6WYPMqRQRpcN--3Mz7czh6MK10W75e19h9VWWp5P6KKbBJA@mail.gmail.com>
 Content-Language: en-US
-From: Wadim Egorov <w.egorov@phytec.de>
-In-Reply-To: <c6e446a6-c767-4c61-87f5-8cc310c7178a@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrGLMWRmVeSWpSXmKPExsWyRpKBR9exlivN4PIdZYu5bw6wWrz5cZbJ
- 4u3eTnaL7nfqFv/PfmB3YPU4e2cHo0d/dwurx/Eb25kCmKO4bFJSczLLUov07RK4Mk7NuslU
- sMW4ouH9CZYGxhuaXYwcHBICJhKnLzB1MXJxCAksYZJYtPsBlHOHUaJ752b2LkZODl4BG4kZ
- UyeygNgsAioS0572s0DEBSVOznwCZosKyEvcvzUDrF5YIFqiae1WsLiIgIdE39F7YDazgLPE
- 5FUfGEFsIYGnTBIv3wdBxMUlbj2ZzwRiswmoS9zZ8I0VxOYUsJKYtqyRCaLGQmLxm4PsELa8
- RPPW2cwQc+QlXlxaDjZfAsiedu41M4QdKrH1y3amCYzCs5CcOgvJullIxs5CMnYBI8sqRqHc
- zOTs1KLMbL2CjMqS1GS9lNRNjKC4EGHg2sHYN8fjECMTB+MhRgkOZiUR3p/enGlCvCmJlVWp
- RfnxRaU5qcWHGKU5WJTEeVd3BKcKCaQnlqRmp6YWpBbBZJk4OKUaGMXXnlxwfx/bpFctM9tK
- 0y1rCxesaRFh2n5yAtfmeVsmctx343t21uG6fw6rjOjOuKjaay0u+QIX3j5xb44UcvKqdji6
- /aX9jSu/FBzLkmqLnZxe2z9LvvOpfHvgzsuLpD4E3Vtnp9vt/6l7xh6TltveYv3JPBnrXma+
- Wy4ct3zakd1XDkV6zlBiKc5INNRiLipOBADUPFVReQIAAA==
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAFA6WYPMqRQRpcN--3Mz7czh6MK10W75e19h9VWWp5P6KKbBJA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 660a823d643f72951b4770fb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,150 +75,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Vignesh, Hi Bryan,
+Hi Sumit,
 
-
-Am 05.03.24 um 18:36 schrieb Raghavendra, Vignesh:
+On 2024-04-01 10:52, Sumit Garg wrote:
+> Hi Jonas,
 > 
+> On Mon, 1 Apr 2024 at 01:59, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>
+>> This series adds support for new clocks used in linux v6.8 device trees,
+>> enables use of FIT signature check for checksum validation and fixes
+>> loading FIT from SD-card when loading FIT from eMMC fails.
+>>
+>> After this series it should be possible to move RK3399 boards to use
+>> OF_UPSTREAM in a future patch once dts/upstream move to a v6.8+ tag.
+>>
 > 
-> On 3/5/2024 11:04 PM, Bryan Brattlof wrote:
->> On March  5, 2024 thus sayeth Vignesh Raghavendra:
->>>
->>> On 05/03/24 01:57, Bryan Brattlof wrote:
->>>> Hey Vignesh!
->>>>
->>>> On March  4, 2024 thus sayeth Vignesh Raghavendra:
->>>>> Hi Wadim,
->>>>>
->>>>> On 26/02/24 19:00, Wadim Egorov wrote:
->>>>>> Texas Instruments has begun enabling security settings on the SoCs it
->>>>>> produces to instruct ROM and TIFS to begin protecting the Security
->>>>>> Management Subsystem (SMS) from other binaries we load into the chip by
->>>>>> default.
->>>>>>
->>>>>> One way ROM and TIFS do this is by enabling firewalls to protect the
->>>>>> OCSRAM and HSM RAM regions they're using during bootup.
->>>>>>
->>>>>> The HSM RAM the wakeup SPL is in is firewalled by TIFS to protect
->>>>>> itself from the main domain applications. This means the 'bootindex'
->>>>>> value in HSM RAM, left by ROM to indicate if we're using the primary
->>>>>> or secondary boot-method, must be moved to OCSRAM (that TIFS has open
->>>>>> for us) before we make the jump to the main domain so the main domain's
->>>>>> bootloaders can keep access to this information.
->>>>>>
->>>>>> Based on commit
->>>>>>    b672e8581070 ("arm: mach-k3: copy bootindex to OCRAM for main domain SPL")
+> Thanks for putting this effort together. A switch to v6.8 tag for
+> OF_UPSTREAM will happen as part of patch [1]. So if you want to save
+> further effort then you can just rebase with a switch to OF_UPSTREAM
+> once that patch [1] lands in next.
 
-I was thinking, even if the reason described here is not right or does 
-not apply to the am62x, it is still a valid solution for carrying this 
-variable into the context for next stage A53 bootloader.
+Because this is a jump of device tree files from v5.14-rc1 to v6.8,
+reviewability and being able to cherry-pick these changes to my
+rk3xxx-2024.04 branch, I think it is much more appropriate to first sync
+everything to v6.8 and then in a separate series move to OF_UPSTREAM.
+Else it can be very hard to understand some of the changes that has been
+and was needed to be made to u-boot.dtsi files.
 
-store_boot_info_from_rom() stores the index to the bootindex (.data) 
-variable which makes sure it is valid in R5 SPL context. But the next 
-stage bootloader does not know anything about the bootindex variable. So 
-from my understanding it needs to be copied to a different region to 
-preserve the data for next stage bootloaders.
-
-Or do I miss something?
+Reviewability is one of the shortcomings with a switch to OF_UPSTREAM.
 
 Regards,
-Wadim
+Jonas
 
->>>>>>
->>>>> FYI, this is mostly a problem in non SPL flow (TI prosperity SBL for
->>>>> example) where HSM RAM would be used by HSM firmware. This should be a
->>>>> issue in R5 SPL flow.  Do you see any issues today? If so, whats the
->>>>> TIFS firmware being used?
->>>>>
->>>>>> Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
->>>>>> ---
->>>>>>   arch/arm/mach-k3/Kconfig                      |  3 ++-
->>>>>>   arch/arm/mach-k3/am625_init.c                 | 15 +++++++++++++--
->>>>>>   arch/arm/mach-k3/include/mach/am62_hardware.h | 15 +++++++++++++++
->>>>>>   3 files changed, 30 insertions(+), 3 deletions(-)
->>>>>>
->>>>>> diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
->>>>>> index 03898424c9..f5d06593f7 100644
->>>>>> --- a/arch/arm/mach-k3/Kconfig
->>>>>> +++ b/arch/arm/mach-k3/Kconfig
->>>>>> @@ -75,7 +75,8 @@ config SYS_K3_BOOT_PARAM_TABLE_INDEX
->>>>>>   	default 0x41cffbfc if SOC_K3_J721E
->>>>>>   	default 0x41cfdbfc if SOC_K3_J721S2
->>>>>>   	default 0x701bebfc if SOC_K3_AM642
->>>>>> -	default 0x43c3f290 if SOC_K3_AM625
->>>>>> +	default 0x43c3f290 if SOC_K3_AM625 && CPU_V7R
->>>>>> +	default 0x7000f290 if SOC_K3_AM625 && ARM64
->>>>>>   	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
->>>>>>   	default 0x7000f290 if SOC_K3_AM62A7 && ARM64
->>>>>>   	help
->>>>>> diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
->>>>>> index 6c96e88114..67cf63b103 100644
->>>>>> --- a/arch/arm/mach-k3/am625_init.c
->>>>>> +++ b/arch/arm/mach-k3/am625_init.c
->>>>>> @@ -35,8 +35,10 @@ static struct rom_extended_boot_data bootdata __section(".data");
->>>>>>   static void store_boot_info_from_rom(void)
->>>>>>   {
->>>>>>   	bootindex = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
->>>>>> -	memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
->>>>>> -	       sizeof(struct rom_extended_boot_data));
->>>>>> +	if (IS_ENABLED(CONFIG_CPU_V7R)) {
->>>>>> +		memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
->>>>>> +		       sizeof(struct rom_extended_boot_data));
->>>>>> +	}
->>>>>>   }
->>>>>>   
->>>>>>   static void ctrl_mmr_unlock(void)
->>>>>> @@ -175,6 +177,15 @@ void board_init_f(ulong dummy)
->>>>>>   		k3_sysfw_loader(true, NULL, NULL);
->>>>>>   	}
->>>>>>   
->>>>>> +#if defined(CONFIG_CPU_V7R)
->>>>>> +	/*
->>>>>> +	 * Relocate boot information to OCRAM (after TIFS has opend this
->>>>>> +	 * region for us) so the next bootloader stages can keep access to
->>>>>> +	 * primary vs backup bootmodes.
->>>>>> +	 */
->>>>>> +	writel(bootindex, K3_BOOT_PARAM_TABLE_INDEX_OCRAM);
->>>>>> +#endif
->>>>>> +
->>>>>>   	/*
->>>>>>   	 * Force probe of clk_k3 driver here to ensure basic default clock
->>>>>>   	 * configuration is always done.
->>>>>> diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mach-k3/include/mach/am62_hardware.h
->>>>>> index 54380f36e1..9f504f4642 100644
->>>>>> --- a/arch/arm/mach-k3/include/mach/am62_hardware.h
->>>>>> +++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
->>>>>> @@ -76,8 +76,23 @@
->>>>>>   #define CTRLMMR_MCU_RST_CTRL			(MCU_CTRL_MMR0_BASE + 0x18170)
->>>>>>   
->>>>>>   #define ROM_EXTENDED_BOOT_DATA_INFO		0x43c3f1e0
->>>>>> +#define K3_BOOT_PARAM_TABLE_INDEX_OCRAM         0x7000F290
->>>>>>   
->>>>>> +/*
->>>>>> + * During the boot process ROM will kill anything that writes to OCSRAM.
->>>>> R5 ROM is long gone when R5 SPL starts, how would it kill anything?
->>>> Looks like this was based on my patch long ago for the AM62Ax family.
->>>>  From what little I remember about this was ROM is leaving behind a
->>>> firewall that we need TIFS's help to bring down for us. So I just
->>>> blamed ROM 😉
->>> Thats true. ROM does bare minimum and so wont open up firewall around
->>> main SRAM. but TIFS does, so you should be able to access this region
->>> post k3_sysfw_loader().
->>>
->>>> IDK if this is an issue for the AM62x family though.
->>>>
->>> It might be if one tries to "select" DT using EEPROM detect before SYSFW
->>> is up. But that's not the case any more right?
->> Yep we still need to figure out a plan for multiple DDR configs or see
->> if we can move the DDR init to later in the boot as that is the only
->> thing left that still needs the board detection this early on.
+> 
+> [1] https://lists.denx.de/pipermail/u-boot/2024-March/549611.html
+> 
+> -Sumit
+> 
+>> I have runtime tested this series on following devices:
+>> - 96boards Rock960
+>> - Khadas Edge Captain
+>> - Pine64 PineBook Pro
+>> - Pine64 RockPro64
+>> - Radxa ROCK 4C+
+>> - Radxa ROCK 4SE
+>> - Radxa ROCK Pi 4A
+>> - Radxa ROCK Pi 4B+
 >>
->> There is a little race condition here as TIFS can respond to some
->> messages before it's finished its init. IDK if we can send it anything
->> to act like a fence and stall us until the firewalls are down though.
-> 
-> Firewall configurations should be done before TIFS posts boot
-> notification message.
-> 
-> Regards
-> Vignesh
+>> This series depends on the following series:
+>> - Enable booting from SPI flash on ROCK Pi 4 [1]
+>> - rockchip: spl: Cache boot source id for later use [2]
+>>
+>> A copy of this series and all its depends can be found at [3]
+>>
+>> [1] https://patchwork.ozlabs.org/cover/1912469/
+>> [2] https://patchwork.ozlabs.org/cover/1915071/
+>> [3] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3399-dt-sync-v1
+>>
+>> Jonas Karlman (31):
+>>   rockchip: rk3399-gru: Fix max SPL size on bob and kevin
+>>   rockchip: rk3399-ficus: Enable TPL and use common bss and stack addr
+>>   rockchip: rk3399: Sort imply statements alphabetically
+>>   rockchip: rk3399: Enable ARMv8 crypto and FIT checksum validation
+>>   rockchip: rk3399: Enable random generator on all boards
+>>   rockchip: rk3399: Imply support for GbE PHY
+>>   rockchip: rk3399: Enable DT overlay support on all boards
+>>   rockchip: rk3399: Remove use of xPL_MISC_DRIVERS options
+>>   rockchip: rk3399: Add a default spl-boot-order prop
+>>   rockchip: rk3399: Fix loading FIT from SD-card when booting from eMMC
+>>   clk: rockchip: rk3399: Rename SCLK_DDRCLK to SCLK_DDRC
+>>   clk: rockchip: rk3399: Add dummy support for ACLK_VDU clock
+>>   clk: rockchip: rk3399: Add dummy support for SCLK_PCIEPHY_REF clock
+>>   clk: rockchip: rk3399: Add SCLK_USB3OTGx_REF support
+>>   rockchip: rk3399: Sync soc device tree from linux v6.8
+>>   rockchip: rk3399-gru: Sync device tree from linux v6.8
+>>   rockchip: rk3399-puma: Sync DT from linux v6.8
+>>   rockchip: rk3399-rock-pi-n10: Sync device tree from linux v6.8
+>>   rockchip: rk3399-eaidk-610: Sync device tree from linux v6.8
+>>   rockchip: rk3399-leez: Sync device tree from linux v6.8
+>>   rockchip: rk3399-evb: Sync device tree from linux v6.8
+>>   rockchip: rk3399-firefly: Sync device tree from linux v6.8
+>>   rockchip: rk3399-orangepi: Sync device tree from linux v6.8
+>>   rockchip: rk3399-roc-pc: Sync device tree from linux v6.8
+>>   rockchip: rk3399-nanopi-4: Sync device tree from linux v6.8
+>>   rockchip: rk3399-rock960: Sync device tree from linux v6.8
+>>   rockchip: rk3399-khadas: Sync device tree from linux v6.8
+>>   rockchip: rk3399-rock-pi-4: Sync device tree from linux v6.8
+>>   rockchip: rk3399-rockpro64: Sync device tree from linux v6.8
+>>   rockchip: rk3399-pinebook-pro: Sync device tree from linux v6.8
+>>   rockchip: rk3399-pinephone-pro: Sync device tree from linux v6.8
+>>
+>>  arch/arm/dts/rk3288-vmarc-som.dtsi            |  48 +++
+>>  arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi     |   1 -
+>>  arch/arm/dts/rk3399-eaidk-610.dts             |   3 +-
+>>  arch/arm/dts/rk3399-evb-u-boot.dtsi           |  13 +-
+>>  arch/arm/dts/rk3399-evb.dts                   |   3 +-
+>>  arch/arm/dts/rk3399-ficus-u-boot.dtsi         |  10 +-
+>>  arch/arm/dts/rk3399-ficus.dts                 |   4 +
+>>  arch/arm/dts/rk3399-firefly-u-boot.dtsi       |   6 -
+>>  arch/arm/dts/rk3399-firefly.dts               |  17 +-
+>>  arch/arm/dts/rk3399-gru-bob.dts               |   8 +-
+>>  arch/arm/dts/rk3399-gru-chromebook.dtsi       | 200 +++++++++++-
+>>  arch/arm/dts/rk3399-gru-kevin.dts             |   3 +-
+>>  arch/arm/dts/rk3399-gru-u-boot.dtsi           |  34 ++-
+>>  arch/arm/dts/rk3399-gru.dtsi                  |  52 +++-
+>>  arch/arm/dts/rk3399-khadas-edge-captain.dts   |   4 +
+>>  arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi   |   7 +-
+>>  arch/arm/dts/rk3399-khadas-edge-v.dts         |   4 +
+>>  arch/arm/dts/rk3399-khadas-edge.dtsi          |  10 +-
+>>  arch/arm/dts/rk3399-leez-p710-u-boot.dtsi     |   6 -
+>>  arch/arm/dts/rk3399-leez-p710.dts             |   8 +-
+>>  arch/arm/dts/rk3399-nanopc-t4.dts             |   2 +-
+>>  arch/arm/dts/rk3399-nanopi-m4-2gb.dts         |  55 +---
+>>  arch/arm/dts/rk3399-nanopi-m4b.dts            |   2 +-
+>>  arch/arm/dts/rk3399-nanopi-r4s.dts            |   4 +-
+>>  arch/arm/dts/rk3399-nanopi4-u-boot.dtsi       |  18 +-
+>>  arch/arm/dts/rk3399-nanopi4.dtsi              |   7 +-
+>>  arch/arm/dts/rk3399-op1-opp.dtsi              |  31 +-
+>>  arch/arm/dts/rk3399-opp.dtsi                  |   6 +-
+>>  arch/arm/dts/rk3399-orangepi-u-boot.dtsi      |  12 +
+>>  arch/arm/dts/rk3399-orangepi.dts              |  12 +-
+>>  arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi  |  23 +-
+>>  arch/arm/dts/rk3399-pinebook-pro.dts          |  24 +-
+>>  arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi |  24 +-
+>>  arch/arm/dts/rk3399-pinephone-pro.dts         | 147 +++++++++
+>>  arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi   |  27 +-
+>>  arch/arm/dts/rk3399-puma-haikou.dts           |  42 ++-
+>>  arch/arm/dts/rk3399-puma.dtsi                 |  17 +-
+>>  arch/arm/dts/rk3399-roc-pc-u-boot.dtsi        |  45 +--
+>>  arch/arm/dts/rk3399-roc-pc.dtsi               |  15 +-
+>>  arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi  |  20 ++
+>>  arch/arm/dts/rk3399-rock-4c-plus.dts          |   1 +
+>>  arch/arm/dts/rk3399-rock-4se-u-boot.dtsi      |  12 +
+>>  arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi     |   6 -
+>>  arch/arm/dts/rk3399-rock-pi-4.dtsi            |   4 +-
+>>  arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi    |   7 +
+>>  arch/arm/dts/rk3399-rock-pi-4c.dts            |  10 +
+>>  arch/arm/dts/rk3399-rock960-u-boot.dtsi       |  11 +-
+>>  arch/arm/dts/rk3399-rock960.dtsi              |   5 +-
+>>  arch/arm/dts/rk3399-rockpro64-u-boot.dtsi     |  22 +-
+>>  arch/arm/dts/rk3399-rockpro64.dtsi            |  98 +++++-
+>>  arch/arm/dts/rk3399-u-boot.dtsi               | 129 +++++---
+>>  arch/arm/dts/rk3399.dtsi                      | 289 ++++++++++++++++--
+>>  .../arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi |   6 -
+>>  arch/arm/dts/rk3399pro-vmarc-som.dtsi         |  20 +-
+>>  .../dts/rockchip-radxa-dalang-carrier.dtsi    |  21 ++
+>>  arch/arm/mach-rockchip/Kconfig                |  38 ++-
+>>  configs/chromebook_bob_defconfig              |   6 +-
+>>  configs/chromebook_kevin_defconfig            |   6 +-
+>>  configs/eaidk-610-rk3399_defconfig            |  13 +-
+>>  configs/evb-rk3399_defconfig                  |  10 +-
+>>  configs/ficus-rk3399_defconfig                |  38 +--
+>>  configs/firefly-rk3399_defconfig              |  17 +-
+>>  configs/khadas-edge-captain-rk3399_defconfig  |  35 ++-
+>>  configs/khadas-edge-rk3399_defconfig          |  29 +-
+>>  configs/khadas-edge-v-rk3399_defconfig        |  35 ++-
+>>  configs/leez-rk3399_defconfig                 |  13 +-
+>>  configs/nanopc-t4-rk3399_defconfig            |  18 +-
+>>  configs/nanopi-m4-2gb-rk3399_defconfig        |  22 +-
+>>  configs/nanopi-m4-rk3399_defconfig            |  22 +-
+>>  configs/nanopi-m4b-rk3399_defconfig           |  22 +-
+>>  configs/nanopi-neo4-rk3399_defconfig          |  22 +-
+>>  configs/nanopi-r4s-rk3399_defconfig           |  16 +-
+>>  configs/orangepi-rk3399_defconfig             |  14 +-
+>>  configs/pinebook-pro-rk3399_defconfig         |  13 +-
+>>  configs/pinephone-pro-rk3399_defconfig        |  13 +-
+>>  configs/puma-rk3399_defconfig                 |   5 +-
+>>  configs/roc-pc-mezzanine-rk3399_defconfig     |  15 +-
+>>  configs/roc-pc-rk3399_defconfig               |  13 +-
+>>  configs/rock-4c-plus-rk3399_defconfig         |  27 +-
+>>  configs/rock-4se-rk3399_defconfig             |  28 +-
+>>  configs/rock-pi-4-rk3399_defconfig            |  13 +-
+>>  configs/rock-pi-4c-rk3399_defconfig           |  27 +-
+>>  configs/rock-pi-n10-rk3399pro_defconfig       |  10 +-
+>>  configs/rock960-rk3399_defconfig              |  18 +-
+>>  configs/rockpro64-rk3399_defconfig            |  16 +-
+>>  drivers/clk/rockchip/clk_rk3399.c             |  12 +-
+>>  include/dt-bindings/clock/rk3399-cru.h        |  30 +-
+>>  87 files changed, 1700 insertions(+), 531 deletions(-)
+>>
+>> --
+>> 2.43.2
+>>
+
