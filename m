@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 953A3CD1283
-	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 04:47:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07CD8CD1283
+	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 04:48:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 14E7D882CE;
-	Mon,  1 Apr 2024 06:47:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8D07A882D2;
+	Mon,  1 Apr 2024 06:48:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LTM0dVZF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aX0c8l7z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6C2D9882CE; Mon,  1 Apr 2024 06:47:50 +0200 (CEST)
-Received: from mail-vs1-xe33.google.com (mail-vs1-xe33.google.com
- [IPv6:2607:f8b0:4864:20::e33])
+ id 1703C882D6; Mon,  1 Apr 2024 06:48:19 +0200 (CEST)
+Received: from mail-vs1-xe2b.google.com (mail-vs1-xe2b.google.com
+ [IPv6:2607:f8b0:4864:20::e2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AF68882CC
- for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 06:47:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BC29B882D2
+ for <u-boot@lists.denx.de>; Mon,  1 Apr 2024 06:48:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe33.google.com with SMTP id
- ada2fe7eead31-4785c788ba6so206952137.0
- for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 21:47:45 -0700 (PDT)
+Received: by mail-vs1-xe2b.google.com with SMTP id
+ ada2fe7eead31-47832f13a82so1224611137.1
+ for <u-boot@lists.denx.de>; Sun, 31 Mar 2024 21:48:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1711946864; x=1712551664; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1711946894; x=1712551694; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=OsBHUNLukU2UhkNaiavLjD/3gDRSLKjgy97546XRa4A=;
- b=LTM0dVZFpP/od5Mh981ocyCwoI6PeLSNhx1Q8nDm2mheMhZGldAzC2fwWnY/QxybH7
- WK0OX+q5sf7uTFh/dwRdyu5km22BD4cRsFjYp53D7sCGOhVHyRiWLOlpLGShasli2bDB
- moop05CWcmSbRktBQgx932Jpq1m1TtBpJSKJ+1sslAaQBLaZMjxxkL8b3ysea1ciOz2O
- huKpsh/Z1D3y6/5TMylWAOLZPxFdoh55qvAoOyxJf8Sd9QhNZHjqumM4KSCHU0FaUhBw
- 1PkWphp+cie/oKSZUJf4qBKBiTzE9s+wUIg/BBzXsD2ZkiYg6CRZTfyI4MPwj/hacTqG
- lcXA==
+ bh=rkCY76B/+b4UEuYs1U6CL9EiQxvhKGFJ23/UQDTK0cE=;
+ b=aX0c8l7z3wEARxMj+GRV527xG+go6n0sgSJYA7gb/OM7JT3jNqDGKdkpL01KW7Es3Y
+ WrquL4ZNvhiFObxONs7VzBgR90e7aqcjc7MRjSph7gksTfW0+y2J7bjapbGiWHjbwgUC
+ hicA4PQEpSHsnG+clq85uHTlVCMqll0A74djPJt3PDpIM4/Cd72/BFhitf8yvQX7/Ulo
+ 2txhf8k36gn6FlHfKhJsX2gH1e9A71IU83CDKKf4LIZqYmqDL1qzMCQGQphHZZCrmcne
+ AAbUyQX/2sO0eUYB8OOhw37GUT+OcSouF64nGtHsYkF4YEktrJmaf6Qsre2G8R+CEYMI
+ Mm3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1711946864; x=1712551664;
+ d=1e100.net; s=20230601; t=1711946894; x=1712551694;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OsBHUNLukU2UhkNaiavLjD/3gDRSLKjgy97546XRa4A=;
- b=xEjEzqiC6sPGnVKexfyFlRlcDJ2uOYuSagSEZ6OLee/dUvsBXw9I88X++7dkzS7ZKo
- DF5OOZOXSnh88x0rq7aajBh158XTQLITROJ57HT1b/tD5G277LOvgXUo+3SM/7XyLDIX
- 9XVPLfA9BjDTnrJmvimcRRMbKaOGEDOkayv5bDoAY9QhL/76RS2TQSjnnbvogmAuBpTu
- 1H00khReuNovoaPcucXLr9XeKR3NwZ9dCuRNUp+l3ebtMpFQVFe94EUA/MLKSEixGfZy
- 8p5FENn7hT3SXLy5U1tu9LLy8JLHKJarLfe+Rqlg2JjBaUMJo8R5j23HciEOafl33RWe
- xz6w==
+ bh=rkCY76B/+b4UEuYs1U6CL9EiQxvhKGFJ23/UQDTK0cE=;
+ b=WzITuBbqT8guW78E1eOsKxDTs7KRcP/4EuFFfqPau8mamAnZZL5ZW+4Gw3caT3ICY0
+ vKAMY0u2vpb37JCWG6bsy2fIIQhS/M6/YL/rn0Vw95gmvoQRrJZ8BZ8dyfRNd1UEmMe7
+ TESLQlpBL6agbqEzk4qm9D4BJAG9Gpq3bxV20W9iBQKgeEE7FW03JBeSzrZ5w9/AZjE3
+ nReKuT+pQJ83QfsT/Dv+QJR2+2jR+YyUn9ucHZmA8tsa93IslWuRoLkhkdSqq7Eqed/9
+ ebGg9jqgQBBU4czdoqJ2oJCu2Bwm7/s39FOcq1m93J887UB2neIngPpUN0WSfWwepdGz
+ hIpw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV4j6m6vf3gDv7LkS0p2QidGlDdI5j79sRc4SAH77FniOZZ7z+jsQIZJD0ZL32Hv3EChAjPwuvZkpfZaHXKAYS/oNxD0w==
-X-Gm-Message-State: AOJu0YwBFkM/wT0CghQ8cfJo1qusl+VliAJ+cImW7fZqNHdPkvIoCaCb
- T6rg6GqC9fbZi/MDphhPKcWlsn2aBtpYXRfFGfyaVBbCybqhbTmDwdH3+WK8sG4Se9serhUvWj8
- MjCNKaVzpydcdM9qxyJ/DrIQSfVMSuWvWdl0yyQ==
-X-Google-Smtp-Source: AGHT+IG1LDks4DObNdH9UsEuE5zes0ze1eQ/lfzVBnVFEYvVigpC41d7ITDiCYPwSrawnq7HL2lMt/lcsPdn687CRIw=
-X-Received: by 2002:a05:6102:810:b0:478:224b:5aae with SMTP id
- g16-20020a056102081000b00478224b5aaemr3439946vsb.11.1711946862813; Sun, 31
- Mar 2024 21:47:42 -0700 (PDT)
+ AJvYcCXoxcD9+z39UOyWxVix4InrbebOapwKDMVjuAimTeUD/1c6jpbf7XDAmRuz+CIRdET3feNG6z14zHpuSwMREfxdjlG6CA==
+X-Gm-Message-State: AOJu0YxQ1Ae4Jref+Qcyhk0SjgpIsJuf6AU0teaA2FjK7gkYSXO0cc4Q
+ HsP2T1CMlDLBZMlALMn2+JrY92SI8hiZeeu4UMBpAO/tELJ4XIib/wggypOdQWXi4ff6zPCk8V9
+ LfRcP7QonA28TQg4hNotXQIDWyf8x4y+7kODPnQ==
+X-Google-Smtp-Source: AGHT+IGCPojYMAeoQeelglpeJOQd34AmQ72tCPhjmIeJVBULG6VfgaKAX8j8KjKFjOeWtdVzFwWQ+ZV5TGCQbakwn6c=
+X-Received: by 2002:a67:ecc9:0:b0:473:4d73:5e1c with SMTP id
+ i9-20020a67ecc9000000b004734d735e1cmr5331422vsp.9.1711946894290; Sun, 31 Mar
+ 2024 21:48:14 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
- <20240328-b4-qcom-livetree-v5-11-4e98228b3d03@linaro.org>
-In-Reply-To: <20240328-b4-qcom-livetree-v5-11-4e98228b3d03@linaro.org>
+ <20240328-b4-qcom-livetree-v5-12-4e98228b3d03@linaro.org>
+In-Reply-To: <20240328-b4-qcom-livetree-v5-12-4e98228b3d03@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Mon, 1 Apr 2024 10:17:31 +0530
-Message-ID: <CAFA6WYP1oUmFQEibzRs05=nxgHU_2mgSKv=V4M8rmwMRfhLVLw@mail.gmail.com>
-Subject: Re: [PATCH v5 11/16] mach-snapdragon: fixup power-domains
+Date: Mon, 1 Apr 2024 10:18:03 +0530
+Message-ID: <CAFA6WYMnkcEBRr-XySBOWVoq87S9v1XAupn1CWV-uRKuuxhp_g@mail.gmail.com>
+Subject: Re: [PATCH v5 12/16] mach-snapdragon: call regulators_enable_boot_on()
 To: Caleb Connolly <caleb.connolly@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
@@ -92,89 +92,43 @@ X-Virus-Status: Clean
 
 On Thu, 28 Mar 2024 at 23:29, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> We don't support the RPM(h)PD power domains in U-Boot, and we don't need
-> to - the necessary resources are on, and we aren't going to enter any
-> low power modes.
->
-> We could try using a no-op device, but this requires adding a compatible
-> for every platform, and just pollutes the driver model. So instead let's
-> just remove every "power-domains" property that references the RPM(h)pd
-> power controller. This takes <1ms as we're using OF_LIVE.
->
-> Of note, this only applies to drivers which are loading post-relocation.
-> Drivers loaded pre-reloc that reference the rpm(h)pd still need
-> DM_FLAG_DEFAULT_PD_CTRL_OFF in their flags.
+> Make sure we power on any boot-on or always-on regulators. These are
+> used for peripherals like USB on some platforms.
 >
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  arch/arm/mach-snapdragon/of_fixup.c | 32 ++++++++++++++++++++++++++++++++
->  1 file changed, 32 insertions(+)
+>  arch/arm/mach-snapdragon/board.c | 2 ++
+>  1 file changed, 2 insertions(+)
 >
 
-Acked-by: Sumit Garg <sumit.garg@linaro.org>
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
 -Sumit
 
-> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index 4fdfed2dff16..3f7ac227bd09 100644
-> --- a/arch/arm/mach-snapdragon/of_fixup.c
-> +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -21,8 +21,9 @@
->  #include <dm/of_access.h>
->  #include <dm/of.h>
->  #include <fdt_support.h>
->  #include <linux/errno.h>
-> +#include <stdlib.h>
->  #include <time.h>
->
->  /* U-Boot only supports USB high-speed mode on Qualcomm platforms with DWC3
->   * USB controllers. Rather than requiring source level DT changes, we fix up
-> @@ -109,8 +110,38 @@ static void fixup_usb_nodes(void)
->                         log_warning("Failed to fixup node %s: %d\n", glue_np->name, ret);
->         }
+> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+> index 65e4c61e866a..3d5994c87886 100644
+> --- a/arch/arm/mach-snapdragon/board.c
+> +++ b/arch/arm/mach-snapdragon/board.c
+> @@ -15,8 +15,9 @@
+>  #include <dm/device.h>
+>  #include <dm/pinctrl.h>
+>  #include <dm/uclass-internal.h>
+>  #include <dm/read.h>
+> +#include <power/regulator.h>
+>  #include <env.h>
+>  #include <init.h>
+>  #include <linux/arm-smccc.h>
+>  #include <linux/bug.h>
+> @@ -160,8 +161,9 @@ void __weak qcom_board_init(void)
 >  }
 >
-> +/* Remove all references to the rpmhpd device */
-> +static void fixup_power_domains(void)
-> +{
-> +       struct device_node *pd = NULL, *np = NULL;
-> +       struct property *prop;
-> +       const __be32 *val;
-> +
-> +       /* All Qualcomm platforms name the rpm(h)pd "power-controller" */
-> +       for_each_of_allnodes(pd) {
-> +               if (pd->name && !strcmp("power-controller", pd->name))
-> +                       break;
-> +       }
-> +
-> +       /* Sanity check that this is indeed a power domain controller */
-> +       if (!of_find_property(pd, "#power-domain-cells", NULL)) {
-> +               log_err("Found power-controller but it doesn't have #power-domain-cells\n");
-> +               return;
-> +       }
-> +
-> +       /* Remove all references to the power domain controller */
-> +       for_each_of_allnodes(np) {
-> +               if (!(prop = of_find_property(np, "power-domains", NULL)))
-> +                       continue;
-> +
-> +               val = prop->value;
-> +               if (val[0] == cpu_to_fdt32(pd->phandle))
-> +                       of_remove_property(np, prop);
-> +       }
-> +}
-> +
->  #define time_call(func, ...) \
->         do { \
->                 u64 start = timer_get_us(); \
->                 func(__VA_ARGS__); \
-> @@ -119,5 +150,6 @@ static void fixup_usb_nodes(void)
->
->  void qcom_of_fixup_nodes(void)
+>  int board_init(void)
 >  {
->         time_call(fixup_usb_nodes);
-> +       time_call(fixup_power_domains);
->  }
+> +       regulators_enable_boot_on(false);
+>         show_psci_version();
+>         qcom_of_fixup_nodes();
+>         qcom_board_init();
+>         return 0;
 >
 > --
 > 2.44.0
