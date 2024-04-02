@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A04D3CD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 19:37:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D328CD1284
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 19:52:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C71318811D;
-	Tue,  2 Apr 2024 21:37:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4335288179;
+	Tue,  2 Apr 2024 21:52:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KJgBCXYu";
+	dkim=pass (2048-bit key; secure) header.d=gmx.net header.i=wahrenst@gmx.net header.b="gMms3BW3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C998F87E78; Tue,  2 Apr 2024 17:37:28 +0200 (CEST)
-Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
- [IPv6:2001:4860:4864:20::32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E9DEF8815A; Tue,  2 Apr 2024 21:52:13 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B910C86FCE
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 17:37:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 163A388123
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 21:52:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=james.hilliard1@gmail.com
-Received: by mail-oa1-x32.google.com with SMTP id
- 586e51a60fabf-22e6b61d652so412619fac.0
- for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 08:37:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712072245; x=1712677045; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=W61kMoUmlqZVQOoxDivdpiNrtX02H5Llif6zoOx1i/o=;
- b=KJgBCXYuqquoTmRpQFHMguV1NXnRSjp9Uo0GCnhuJ86cIgdencsBaqgV6eF0Ygye2y
- 7Memjr670ixZDy85yIAbp3cMGFXJfR90Nyi/zXokuvzVAOey7SFDNEL/59+gzG4MQev+
- hiHLrmtq6kC2qi5JYXp26uQWCHctw+PjnCHlEH+Gw8oLCkHm74EQOd41Pt+Or9sfFTuZ
- mnuZSY8W21AIshZY/F/6b1KX+ZwJKTAAYG8xfnOSb7z8VmmwImNa0A0o0c3EbnaaEZCe
- iA+EC4168dTKAgKZrDqEai8tbgv4LpvkLYGgB41kov64zoFZ1BWwMGoMTuvJeJO7KA+W
- xOfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712072245; x=1712677045;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=W61kMoUmlqZVQOoxDivdpiNrtX02H5Llif6zoOx1i/o=;
- b=sTzsApblC+zOsuBNoQ8ghpMJ02FWZzFOb184E2Z4h608l0sSjh6KxpO3VFt5b1tmK7
- wGmm0FTi08ZhmIFCm7mOkdZYmcyMhEXa78Q9vfyjA2UtDb/t7iMAwMwbpqHVMm+bZaKM
- yKftIJ5x0AkBAKgWSdt3xDCkQpYXrsIrbXkitiTc9bg5aiQa8Xo/7OaAwKEwmB5U0Uy3
- Hon409qaPS649agxdsQb6vmWUiyp0L4Ldc2jV8LoUp8TH87ONrUkt3dDjKeBJD1It9vs
- 1iVC5yklaD7zXPVtQ56CRB9Vj1PPXERmYkXNnm7OQZC6vCeBu1FfaTWuYN7K2MhnmhXJ
- pa1Q==
-X-Gm-Message-State: AOJu0YyfVEvfxynjVDHM2KjwJl6/eItNi4C3RraWqnWv110aSJ9KJXHQ
- IbKtXr5ST6upCC+CkxtwqOzSFtGicS6odi4mPgmFg+L8VCJUK/jS+MvOpJv5I30VJEecSSdE0+/
- ketE+znNe2L/K5nyNuPsaz3co49M=
-X-Google-Smtp-Source: AGHT+IEJepo07xl/BZQrXsI9yIVl8yYKWRh+HZorO5ErWRQ5o69ljoPBbY7m7Jz3ZapBq2q6SVKHs84arcVi8B8ML1A=
-X-Received: by 2002:a05:6871:68b:b0:22e:8a63:8f99 with SMTP id
- l11-20020a056871068b00b0022e8a638f99mr593131oao.53.1712072245428; Tue, 02 Apr
- 2024 08:37:25 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=wahrenst@gmx.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.net;
+ s=s31663417; t=1712087528; x=1712692328; i=wahrenst@gmx.net;
+ bh=IkJEVzoVILRNqLJbkzKMTwe00jiddmTrC/RUwaa2xn4=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=gMms3BW3HUEZ6AWC5+Thhpqs9HAyRKONfGyDsk0rEb+yQ8PckqLFE6VaPxQc+raQ
+ U4BKKs3eD8c8DjkxJ3XMm3PG2QFlSxX42JDs3wa/y7/0tZxUjHQitw/tArKSbwNGa
+ mg5TTqNBII1eoJRHjzLLv5TBBT/FkcZqC5O37Xx3rWeSb4naQCzeAL3jJ8U7eY5Hm
+ 6tmq1Uh8+uacvzey2nszDfeSA8uaHgGsSYutf2G99/Wch6yemuBl44/rqcUReuz29
+ 1Q+zPyz6oTUiERAtieZwFbVZOi2Kn37DHRGkDDu/9DcGQdNEuSLEVRLPey1fo+Dlo
+ FgluiuryZX5QWUqZiw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.1.167] ([37.4.248.43]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MCsQ4-1s0VbM04jg-008vp4; Tue, 02
+ Apr 2024 21:52:08 +0200
+Message-ID: <2e15ab46-f29c-44ac-8a2a-8baa140ee1a3@gmx.net>
+Date: Tue, 2 Apr 2024 21:52:06 +0200
 MIME-Version: 1.0
-References: <20240331232859.727769-1-james.hilliard1@gmail.com>
- <7fe20558-6af1-46cb-bbfe-af308e3ce279@amd.com>
-In-Reply-To: <7fe20558-6af1-46cb-bbfe-af308e3ce279@amd.com>
-From: James Hilliard <james.hilliard1@gmail.com>
-Date: Tue, 2 Apr 2024 09:37:13 -0600
-Message-ID: <CADvTj4r+0hO841ZYbW+Mg9nS70fRpmVGVbh-Q8yoGYE5mj_1AA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] xilinx: zynq: add FDT_FIXUP_PARTITIONS support
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Shiji Yang <yangshiji66@outlook.com>, 
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 0/3] dt-bindings: arm: bcm:
+ raspberrypi,bcm2835-firmware: Drive-by fixes
+To: "Ivan T. Ivanov" <iivanov@suse.de>,
+ Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>,
+ Dave Stevenson <dave.stevenson@raspberrypi.com>,
+ Naushir Patuck <naush@raspberrypi.com>, Bartosz Golaszewski <brgl@bgdev.pl>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>, Conor Dooley <conor+dt@kernel.org>,
+ Florian Fainelli <florian.fainelli@broadcom.com>,
+ Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Nicolas Saenz Julienne <nsaenz@kernel.org>, Ray Jui <rjui@broadcom.com>,
+ Rob Herring <robh@kernel.org>, Scott Branden <sbranden@broadcom.com>,
+ linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
+ linux-rpi-kernel@lists.infradead.org, u-boot@lists.denx.de
+References: <20240326195807.15163-1-laurent.pinchart@ideasonboard.com>
+ <b044eec1-ae64-4de7-9ab0-e3fe756131ef@gmx.net>
+ <20240327233700.GA21080@pendragon.ideasonboard.com>
+ <bcf8093ab0ea6f3738bf4a4623de700a@suse.de>
+Content-Language: en-US
+From: Stefan Wahren <wahrenst@gmx.net>
+In-Reply-To: <bcf8093ab0ea6f3738bf4a4623de700a@suse.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 02 Apr 2024 21:37:03 +0200
+X-Provags-ID: V03:K1:HZGpeGLDEZJI0DgXnOrYDrVKn3dV6ZB3U4O98GuXVERWAufBKa8
+ sKDQ5aJ/P09eRPvT9wl0XU3L8YN2wGLGZjLjM476f2vHYBL8jiW59TK3DeCOaDmelaFQWVV
+ P3YdzbtPSXDFg6ENWWgoiowPFrxYsYQo24jbrTcVJYG8IGca4gPl5h/PbL8K3LLcQUFhKgj
+ g56+DgcL8G6WntLXsZTfg==
+UI-OutboundReport: notjunk:1;M01:P0:EYu2/wYT3L4=;y9y65saxcrZ0sPsUk8rgil8wZ58
+ Mxj8i6l1eG77gJBl/Nqb7fvCLAbdtxjlISYsh6vcjU0ioDl7V5V7X3fp9JdYh4vKYbCp4V6Zn
+ ZoY/n+j5p+av/EJPP2JMB5Stl+32d80OnpU6GdykYkRUjfLAnIUdpKCtRfFDhQmz/PUmkeq6J
+ GFvK84qDFb+i/Iv8a2V6b/uZ4cpVJZtJwd94BZYGqiKqkxG1IlhZuxln8jeZVQ80kpLSAAAvJ
+ Tt2gTARs/f+I8HqKhb3M283XovxDadZOTV0UAxwJf77+XgxrgBMfV8oPjPWLwyIoi6qkmeAxx
+ l7PqK6Jyl4xFTm1a9fakWwnnUrq30AF9CERcOoUCy0olpgrxFXSlpJV8kJy+sBOsFF6ll79c4
+ CAjsX9fKYyS2oRufA6bn7C3uWvXe0ihVCK4qiNIA8ddCTa3dwr21ypG7iaNu8X+wbmMLB4prW
+ FALbG1z27v5EreO45xbiISCiWkq+OlrtHyAu4wa2gb8TlIF+tS6Y0yLnrniKaFAbhbpt6J1B5
+ OvEZTcPuRGxnvpxp+Cj7wMYM32FZkpj767wIEzrXR53zL0BjPSGScF/MpECha9966Mvoqy7Ur
+ NhVgEAwKH1EIQagUMMsl0RKNsfuT2jCVpsXROMA4rsfWfBveu36LI4+qzdtKL2csIBFiavopE
+ yrmnY5gXG2Ejn38FJhH7vcSSWTMf85b4WA93PhRbVwHh1yCV0d2ybBgljGSmqH3yGkufywCko
+ abFtBEqTwy9IEPIwrSH8JmJRwDD3QIC2ZxNN5CNkpil3UQS5mX9oe3Yuf4FuPdCBfqSKVRnzO
+ Kbi2ytY9L/iY+O2gBg8FENs39TrSD1IrnGo5jOrHp7ty8=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,64 +101,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 2, 2024 at 6:41=E2=80=AFAM Michal Simek <michal.simek@amd.com> =
-wrote:
+Am 02.04.24 um 10:58 schrieb Ivan T. Ivanov:
 >
+> Hi,
 >
+> On 2024-03-28 01:37, Laurent Pinchart wrote:
+>> On Wed, Mar 27, 2024 at 07:49:38AM +0100, Stefan Wahren wrote:
+>>> Hi,
+>>>
+>>> [add Peter and Ivan]
+>>>
+>>> Am 26.03.24 um 20:58 schrieb Laurent Pinchart:
+>>> > Hello,
+>>> >
+>>> > This small series includes a few drive-by fixes for DT validation
+>>> > errors.
+>>> >
+>>> > The first patch has been posted previously in v1 ([1], and now
+>>> addresses
+>>> > a small review comment. I think it's good to go.
+>>> >
+>>> > The next two patches address the same issue as "[PATCH 1/2]
+>>> dt-bindings:
+>>> > arm: bcm: raspberrypi,bcm2835-firmware: Add missing properties"
+>>> ([2]),
+>>> > but this time with a (hopefully) correct approach. Patch 2/3
+>>> starts by
+>>> > fixing the raspberrypi-bcm2835-firmware driver, removing the need
+>>> for DT
+>>> > properties that are specified in bcm2835-rpi.dtsi but not
+>>> documented in
+>>> > the corresponding bindings. Patch 3/3 can then drop those properties=
+,
+>>> > getting rid of the warnings.
+>>>
+>>> since this series drops properties from the device tree, does anyone
+>>> have the chance to test it with a recent U-Boot?
+>>
+>> I don't have U-Boot running with my RPi, so I would appreciate if
+>> someone could help :-)
 >
-> On 4/1/24 01:28, James Hilliard wrote:
-> > There are situations where we may want to let U-Boot modify the FDT
-> > nand partitions for the kernel, such as when supporting multiple
-> > sizes of NAND chips.
-> >
-> > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
-> > ---
-> > Changes v1 -> v2:
-> >    - move partition fixups to board/xilinx/common/board.c
-> > ---
-> >   board/xilinx/common/board.c | 9 +++++++++
-> >   1 file changed, 9 insertions(+)
-> >
-> > diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-> > index 9641ed307b..20a6f00e45 100644
-> > --- a/board/xilinx/common/board.c
-> > +++ b/board/xilinx/common/board.c
-> > @@ -12,6 +12,7 @@
-> >   #include <env.h>
-> >   #include <image.h>
-> >   #include <init.h>
-> > +#include <jffs2/load_kernel.h>
+> Sorry for taking me so long to verify this.
 >
-> What is this header used for?
+> I think on RPi U-Boot side we are fine. API used when accessing Mbox
+> device do not follow DM model and do not use DMA, but just access
+> device directly using this nice macros phys_to_bus/bus_to_phys.
+>
+> I build new DTB files with this patch included and U-Boot build
+> from the latest sources. No obvious issues on RPi3 and RPi4.
+> Devices boot fine.
+Thanks you, Laurent and Ivan
 
-It's needed for MTD_DEV_TYPE_NAND.
+Reviewed-by: Stefan Wahren <wahrenst@gmx.net>
+>
+> Regards,
+> Ivan
 
->
-> >   #include <lmb.h>
-> >   #include <log.h>
-> >   #include <asm/global_data.h>
-> > @@ -20,6 +21,7 @@
-> >   #include <i2c.h>
-> >   #include <linux/sizes.h>
-> >   #include <malloc.h>
-> > +#include <mtd_node.h>
-> >   #include "board.h"
-> >   #include <dm.h>
-> >   #include <i2c_eeprom.h>
-> > @@ -693,6 +695,13 @@ int ft_board_setup(void *blob, struct bd_info *bd)
-> >       u8 buf[MAX_RAND_SIZE];
-> >       int nodeoffset, ret;
-> >
-> > +     static const struct node_info nodes[] =3D {
-> > +             { "arm,pl353-nand-r2p1", MTD_DEV_TYPE_NAND, },
-> > +     };
-> > +
-> > +     if (IS_ENABLED(CONFIG_FDT_FIXUP_PARTITIONS) && IS_ENABLED(CONFIG_=
-NAND_ZYNQ))
-> > +             fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
-> > +
-> >       if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
-> >               debug("No RNG device\n");
-> >               return 0;
->
-> M
