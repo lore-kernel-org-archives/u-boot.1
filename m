@@ -4,71 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0B14CD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 11:03:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C55C6FD1F
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 11:11:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41080880F1;
-	Tue,  2 Apr 2024 13:03:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 574288806A;
+	Tue,  2 Apr 2024 13:11:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uCMp/5/N";
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="L4GRC47Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7C21880F1; Tue,  2 Apr 2024 13:03:26 +0200 (CEST)
-Received: from mail-yw1-x112d.google.com (mail-yw1-x112d.google.com
- [IPv6:2607:f8b0:4864:20::112d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6B1268806A; Tue,  2 Apr 2024 13:11:11 +0200 (CEST)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::700])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3B6D880DB
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 13:03:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112d.google.com with SMTP id
- 00721157ae682-6147942ae18so27666887b3.2
- for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 04:03:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712055803; x=1712660603; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=UaFQ8E4vdm0kTulfiGu8n23afLfbjNO/v7syx96SXek=;
- b=uCMp/5/N3rFeExzly2zpr61cHIVB3u3/+/wI5XhhNLzdv2SvsoWhICEjATpBYYjq4d
- yxvqrI7cjqFM9wkbLP90rg9d11x7lb18sh/qDzZh7gkEh0VTSFtXZvAJU9zpkULzTUcj
- gZ/zXpwMCKgv2u77JteMWXiyBfUyWxumQgJi4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712055803; x=1712660603;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=UaFQ8E4vdm0kTulfiGu8n23afLfbjNO/v7syx96SXek=;
- b=fu6vDfefi/hQBb2Rvster51MZ5R63Y+RrHh/wkjbsqjYkYTeIx9S9+uIVP6pNtaWUy
- GV0KegDuJlojrdNyPCVcyliHluOxUcTWs0EzLHJgnDodPhWKpayZM8EqrXfXg10vAUO1
- vlx01CUckzfeB+BEVhJMlagIJxuccC3THU8o719O7jsTu9upgoASWHFReB7koiJvE1Eq
- 8Ah1zVmxQp1E6z3jFDsv8gpTSQ7EXoCncdesUJHS5nvQMzM54yF0PkpkyIfZsHGZMBAJ
- dkr7QTRo94gu9W7JAIM9QKubd5TkNrxIQyPSomqVkpNFjpXvEqcvhAzGbV13NjMwZ7dv
- wq4g==
-X-Gm-Message-State: AOJu0YxhFHsav0Fhx9gB15sQ+LVNShDw1emWkDZWYX678kcjeKl2J51y
- HNLutYTLMMi99quBjuImbRwCq8MWorb1mAKmkBiT7CYHxlsnaLw+ShtZUlmEQ5xyGPedDYWYoYt
- T
-X-Google-Smtp-Source: AGHT+IETYvxj18e1d8C1NH4lSETstq5BPejvepXs8ZWeCUzYx0mzNOYpOqjInWTtFKWZj5JC/UxArg==
-X-Received: by 2002:a81:89c7:0:b0:613:fdf2:77cf with SMTP id
- z190-20020a8189c7000000b00613fdf277cfmr10968520ywf.34.1712055803303; 
- Tue, 02 Apr 2024 04:03:23 -0700 (PDT)
-Received: from oliver.lan ([23.155.80.164]) by smtp.gmail.com with ESMTPSA id
- q82-20020a815c55000000b006143de9a59esm2273884ywb.11.2024.04.02.04.03.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Apr 2024 04:03:22 -0700 (PDT)
-Date: Tue, 2 Apr 2024 07:03:20 -0400
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2024.04 released
-Message-ID: <20240402110320.GA2384051@oliver.lan>
+ by phobos.denx.de (Postfix) with ESMTPS id 759E2880FE
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 13:11:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=theobroma-systems.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=quentin.schulz@theobroma-systems.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=PtwP0FdmZ0beJL6AXGSkN19+u3ostSi7q5KVway0ewEfQbTHLTYEJZKesCp1f9PjaYY/9pkC/alxy8GPDgQvZ8qN4eZAWYa+3/XkbxzmJ2cgnET4aKwFE4nAelPhWOZZGrwbPEF3fZF/OCpvRVDqYJRqzZO+b8LIU4By4MNoSXhY9k7Gje03g9jwxQOJTqLwTVXPr3OPx/M3VZIoVEp51LtP5m9rWyXIgvB5y4aKjgkHVToDvlNJPn644FfNJgnFbWMezz/4+hW9eJDBRnsjmWLLAwKk5H1yuahtsGtm12Z6v6dJvgWc+8ysVM8QyckF4/iqnh4B5LK+fMnLKum9Ng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=70dKrzUHsZ+TKi2cqGNW3ZyiivJzMQDyeFNb0YTVqHo=;
+ b=Lpb/GLkv/GpyHnRWfke9dzpm+GMNB/nEwZ0/DhvWpTGyyIKE7d3o5HsIkL6NWSdCRiLCEPGWMdB37VNTIZaV42wuxSRndiicyB9aqmMHctZepe/gAi9Menz6n0SYw5naO197k3Hn0IyUFD9nmfq7i0PmSsDi1YsG5v8ULrLEQwln1Xz8dAlDnGtnqO8kNPhVgz3hrfq/PccFpNg+URG4jIT6muNvajBUZJm5LH4d0gc+R66dMsHXe/6VXy9hQfo2ywRavR/uHsejo685YgpzCiVHXVIBVABr1tnlkmGPGFAG1/9mpifcZNLDUemSEefx/Duh2Uk2lK3v4ir02dhAtA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
+ header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=70dKrzUHsZ+TKi2cqGNW3ZyiivJzMQDyeFNb0YTVqHo=;
+ b=L4GRC47QEEgDlj3rbuu0t9sPYiro2WerXzJLYm6Vpa8s7O8wI1OkaMiDVlXBCzPLaEnj8ulZXOjpoYaxMLDlj0McPUYv+IFnTnsYg3sOj+yCWRrWcDJC0orMIisqSvL/numeuOSfsuHBf9Wc6twn4rmFdWKipvNiiz8+4difCQpvG+Pn8fPeVZxFo4ycOqZnRJue86itDLKZzE8kR7ffS9pfj6J9JQYEIm8g7+0DgNyU81NyNFG3uA6u0UcqGNJywtPUkH04zvZcVMugkJoHOEObyKHz4O1zYevf1y4bHzPq+kRG7pwHtq4TeUX/UNGbt5fYiH/wxlX+ehUYXO/XWw==
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
+ by DU0PR04MB9443.eurprd04.prod.outlook.com (2603:10a6:10:35b::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Tue, 2 Apr
+ 2024 11:11:06 +0000
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::3e70:7029:faf2:7779]) by DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::3e70:7029:faf2:7779%3]) with mapi id 15.20.7409.042; Tue, 2 Apr 2024
+ 11:11:06 +0000
+Message-ID: <d210412c-ec9d-480b-ac0a-da7976490f78@theobroma-systems.com>
+Date: Tue, 2 Apr 2024 13:11:04 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 08/19] rockchip: rk35xx: Imply support for GbE PHY
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240329190224.3613471-1-jonas@kwiboo.se>
+ <20240329190224.3613471-9-jonas@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+In-Reply-To: <20240329190224.3613471-9-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA1P291CA0011.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:19::8) To DU2PR04MB8536.eurprd04.prod.outlook.com
+ (2603:10a6:10:2d7::10)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="DM8ZW3rPsjCVo7gh"
-Content-Disposition: inline
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|DU0PR04MB9443:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: iD1YOS8uzPPc/O0udlSN0ZTWwZaF5pPmKhftjgLMiGE8eqCY1+lWeSGwpl2LPE3D3jPx/iyUKnBrqFeM5kSd6cfxbSYUCOMHJzujkl2WM/NlHO75Ui50McSe2dRgYjUnI0wnYcPOCtneo9gh8KoEUHHOte8LymGkpUk4rlj699VuublRPa0PimSoYaRo4XODNYFn+fL7PFt2XcTIEpe/9e/e7/phcwimVlvVWMc9x4AuDLdqhn60fWDFsbhsMiLv4mtdu45reLnHyn/EPQFvXkhfY6HsOthDO5DItJlNLYuh2VWJAIUX44q3mVbFvKmlL/xYtSPyYaT9o2r3HgmeLS4fVUWQR7sToC8N6qqCVyuaYDlq4C782Ckh4iL3I/+BfxlMF6LVi0Fv0UZtrR47Sf7RX47rDSjsdIBNqjJB8cVUyMpVsgSGxbeepm6TuXRn8F8L9CFYLGnyz45jbbQSHsB8hFJt3BaiyW7wGLKYjFbKUT6CsgVWf1+6jaLZeS2GCGA50zmL/bQHR93ty2Y7cVOGi3kOcRvwnBgzylUWV8h71mqJZvM0+glFOHAbVq++53RdFozg2RqTX+2uNVAq5BTrJ96rc0EcekKWL/rP0o9ZPhYAd1yJAlp72WvslJWw7alzFIeVrNyvpsrMGbaJIhOJ+JthgqMaW7zpLjmHZJ0=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376005)(366007)(1800799015); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OWtCM3BrbDZmaFA2aUwzcHZvd1p1Uk1pTEQ5REhpSHhzam5jRSs4NFZZNDZE?=
+ =?utf-8?B?Z1JuLzQvY203bko3aTdZWFJjMVJlb1kvbXJpNjIvamdxOUpmaldWQjZ5dkZY?=
+ =?utf-8?B?eSt3UTBsdnZEZitZTGxjVU91RUMxOHdJWHJjU25YTDFKSmJmaTVDQkcxRHlE?=
+ =?utf-8?B?Z0R3NkN1VTAzSUdOdWc0VlZqZ3lZdkR2VFJhVWNTcExPc29HTUtZTXYrczFC?=
+ =?utf-8?B?RUpXTFV5ckU3OU1sT3RLcS9GTUdCVi9OU2FheWlodjNIU04xeW5vcW5IUDR6?=
+ =?utf-8?B?SjI0UTlCaFdLY0lRWjJTQkhqb3BiYm1rVUo3OXNMTVVtbmpLSXJiL3dCcnVw?=
+ =?utf-8?B?SUkrdFJVVkpxR2pBUFF3TDBlV3lKcHdPMDA1OFhZQVZLbXRxVVFTY0Q2N0VH?=
+ =?utf-8?B?M2xKamJuVWdPWHMveGhSUXlBTEZ1RzcyYVAxUm8rb01jNWhadHVsR0JBaHY1?=
+ =?utf-8?B?RkV6azZBQk1RMmdrM3NEa2lBdXd3OUV5dlhsM2ZybG1kQ0tKdCsvYnFLbkZR?=
+ =?utf-8?B?RWlNQS9qTjJpQUlNRXpmLy9SeUlLSHVjSXdwaklyV0Z4VnVKT05wUkdGRDBq?=
+ =?utf-8?B?dWIrYjBsRjNHQ3J0WTFVUkN0Mnh5eDA0Zm9YclkybE5zWlRyTG1wUTZSdmFV?=
+ =?utf-8?B?TjVZb1ZkdFR2ZzU4bUtaNDdFb0gvU3oxWUVCZFdhUExCQ2ZiT1FYOWVjdWRk?=
+ =?utf-8?B?blF0NFpyN0JEcVlGZlEzWEh1Z1hBVXpmZHplQy9aa2RSd1ZMYzR6T1dXeEFv?=
+ =?utf-8?B?ZWNMZEdIelFtZ0Y3Mlo1OGhvdVJHUjR0N1R2aENqb0l4RCtCM3I0cFpwa0hF?=
+ =?utf-8?B?bkY2UzAybWpxbU56QTlQTmI1cWJCYkFLcUZtR2doRzdLWFh2ZzlHdnBjYS9H?=
+ =?utf-8?B?WGsvbi85VGNBbmZONDB5VzZVK0pVa09oTmZjMllKUHZ6N09sT2JyMUZDanlB?=
+ =?utf-8?B?VE1zajcybjJTYnhtb25sWDloekk3T2M0eWw0K3U1MENWRms2bzl1bzFFRytx?=
+ =?utf-8?B?Y3d1eGI5Y09EZUEzZUpoRXVCU3lOdWxPdTB3NEdncTdBSzFvY1RESVArY25k?=
+ =?utf-8?B?NjEzL2ltQlFiQTJiZFJqbU9YcndRWUE1cnY5eW1RZ3czd2pzYlJSZ1JEL2ZU?=
+ =?utf-8?B?NGJtMUU1SXBBKzVqamFNMDkvZHFkakpxWUtjY01YRTVLc3NnL0VFM2JnTEY4?=
+ =?utf-8?B?RGtqNi9ZL3AvVDJpb2hHR3ZZZndtNmZBSzh1RDVrV1pxMlhJVDZpNHlOQUNV?=
+ =?utf-8?B?Uk5IUDVOUlpOMVdIWmQ4NzZXZ2JjcVF0Zmd4S2s3NDRUK2FVVXpZYW9oT2tL?=
+ =?utf-8?B?OENBMFM5WWFBWHhRMzRYS0J2UUZkZ3VYUE01WWFneEJCZjdiVVF3K29hWTg4?=
+ =?utf-8?B?U3I3YnZPYlZYTDJsOGlGbjRxNDZrV2ZheEhKbWhUWVMrNWFXaVNYTmpTemhL?=
+ =?utf-8?B?VCtyTHBldGxUVUUvd0x3bWlxWUdhdnFiZStmTmQxd0N1WDhyRmxRSGtJQ2Js?=
+ =?utf-8?B?Sjg5aTA4Vkx0eldQMVNyMTA2YUc5OUppWUlnc1ZqYUUwNElmWFNUbm8vTEJU?=
+ =?utf-8?B?K2VIUkdLUFhrbG5FdjlMVkd5Q0ZvMHNJM0gvQUtiNUd2aEw5ZzV6SDNWODF5?=
+ =?utf-8?B?SEt3NitqR3NJNGVxRDV1R0VVU3BQTzExRkJzWERPZFMxcUIrMkRhZUIyQ2xn?=
+ =?utf-8?B?WUpscFY1Wnh4UFhlcU1LRzRJSXk4WEVzbzZ0YW4zVkhaaDd1UlI0WWI0a3U5?=
+ =?utf-8?B?SnRuakZKTGVYWUpZUGc5QmFET29rMHFneVBwcUJtRnFWOUFXcXNlUDJDZmZI?=
+ =?utf-8?B?cGNxMVk1WUNWR3U4azJSeEZtZ2N4dUdoMFMxdlRFblkrOEd6RkJpazJXMkdZ?=
+ =?utf-8?B?M0NLSUQ0YjBzalUvUUY2V2J1N2pCRnZhZGZzbU13VmljQk1rL0c1djdVRnBL?=
+ =?utf-8?B?N1gvVWdJRWdsSWFKLzJKSFRLZ3AzRS9WMXArZWZxOUpXVjVoMElSVXhxUEtv?=
+ =?utf-8?B?aCttRUJVN0dZTVZaNE1Ka1lwNHkrZWxKOGtLck1ZK2diWnB2Z0hHM0ZRTXNF?=
+ =?utf-8?B?K3VTR0xnMGZ6Qm1UdjhUSGcxazk4V1Q5Zyt3dW5TbFZsMHBqR0hJWXQ5d2ZK?=
+ =?utf-8?B?aGtwR3hZd2hSYzVRS0g2VUR6WVRRREdVTFBYcTN2dUJLTVd5QWxoNGV4VDNY?=
+ =?utf-8?Q?gnx1w42bhhNscLZyM5L4vwI=3D?=
+X-OriginatorOrg: theobroma-systems.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bab6c99c-cb85-4fb0-8dbf-08dc530597db
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 11:11:06.8668 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: +kaWjmH/lKEN8IqqHg+ALu1r9oplntUHt+KUKC9TCg5w2u8lF5ktnaBU/J0AruYqYn02+tyLlE/EbAmY3E5g3gBys2soDVb79bDfkC2FjgH2FWu2TtkvA6SdTm5XqSTT
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR04MB9443
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,53 +144,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jonas,
 
---DM8ZW3rPsjCVo7gh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 3/29/24 20:01, Jonas Karlman wrote:
+> Imply support for GbE PHY status parsing and configuration when support
+> for onboard ethernet is enabled.
+> 
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+>   arch/arm/mach-rockchip/Kconfig | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+> index d518913f8a37..d85b59a92da2 100644
+> --- a/arch/arm/mach-rockchip/Kconfig
+> +++ b/arch/arm/mach-rockchip/Kconfig
+> @@ -316,6 +316,7 @@ config ROCKCHIP_RK3568
+>   	imply MISC_INIT_R
+>   	imply MMC_HS200_SUPPORT if MMC_SDHCI_ROCKCHIP
+>   	imply OF_LIBFDT_OVERLAY
+> +	imply PHY_GIGE if DWC_ETH_QOS_ROCKCHIP
 
-Hey all,
+Is this really something we expect most devices to use?
 
-It's Tuesday, and for once I'm not late and it's release day and so here
-is v2024.04. Once again I want to thank everyone that's contributed to
-this release, not just in terms of code, but documentation, testing and
-otherwise ensuring things go as smoothly as they can.
+We have two products based on RK3588, none use it. If I'm not mistaken, 
+Rock5B doesn't as well as Orange Pi 5 Plus, RK3588 EVB, Rock5A, (likely 
+not the Edgeble as well since they have 2.5Gbps connectors), NanoPC T6, 
+IndieDroid Nova, Cool Pi 4B, Cool Pi CM5 EVB, NanoPi R6S, Rockchip 
+Toybrick TB-RK3588X.
 
-In terms of a changelog,=20
-git log --merges v2024.04-rc5..v2024.04
-contains what I've pulled since the last RC or:
-git log --merges v2024.01..v2024.04
-for changes since the last full release. As always, more details in
-pull requests (or the tags referenced by them) will result in more
-details here.
+So, I'm not sure it's worth it making it the default? (Even though we 
+could remove it from the defconfig manually). Wouldn't this make more 
+sense in your generic defconfigs?
 
-The merge window is formally open again, and I'll be merging in next
-shortly. v2024.07 is scheduled for Monday, July 1st, 2024 and the merge
-window will close and -rc1 will be released on the 22nd of April, and
-then the next window will open with -rc2, two weeks later.
-
-Thanks all!
-
---=20
-Tom
-
---DM8ZW3rPsjCVo7gh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYL5fgACgkQFHw5/5Y0
-tywBewv+JMajal9n+j2LjrDDWpF+CaP3AjyUK+gdChbDjKnHJtemtoHTQcYOq9cQ
-BobjEFL255XALEQq9p7SzmVRBXpSBAOqxlRJm6aG6hbmCMHnAPNulRYUuMIVVD2n
-a2zJH4b+DBP2gdf490lF9JzKcvYy14Mi/KpaJkQmYdAPflA5REuhN185YFGTdyXC
-gl/dvQc/1aWfhtxweaLVWxeQFtHlBCYcKOyXirSjgpKoRY0GsgEkKiDLAMxx0LNZ
-YHYrNJ2zdZdI3LMXFCi3iUaiZHKpc9Ops75yi4bG/qWpV3fc+1/cIzRWy+A8IzOY
-8wz/s+d13g3tHnPG6PKHGvV/0R1oQd8ZZ1YV5rrg27vet67/XQN+LETbw66dgXzM
-6Iasc3MBOsW7LkKTIdCCXZzGkjZdvav4HlU2KXVzPe903ZXxE5FQ0LbaU/Skt71Q
-cTrBFbeP7SCY1cYrabOW4onp7xnhiJ/d+LuwkrfLhS0TWuRvLjo2wWkGCUYcL96J
-E4/nxrub
-=jwfA
------END PGP SIGNATURE-----
-
---DM8ZW3rPsjCVo7gh--
+Cheers,
+Quentin
