@@ -4,119 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9295ECD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 23:29:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C24FDCD1284
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 23:30:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8A6888049;
-	Wed,  3 Apr 2024 01:29:21 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 479AB881A5;
+	Wed,  3 Apr 2024 01:30:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="spI/9WhO";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="NLq2ERUH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF4908811A; Wed,  3 Apr 2024 01:29:20 +0200 (CEST)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ id 66FA3879F3; Wed,  3 Apr 2024 01:30:53 +0200 (CEST)
+Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2258C879F3
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 01:29:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8974881A7
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 01:30:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
 Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20240402232914epoutp016140e16f67ab2cfb1d3e248ec4a064c1~CmmIZ9XLr1080010800epoutp01L
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 23:29:14 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20240402232914epoutp016140e16f67ab2cfb1d3e248ec4a064c1~CmmIZ9XLr1080010800epoutp01L
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20240402233048epoutp029241141cadfd931cf327454244d8ed8f~Cmnf8kAFb2423824238epoutp02a
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 23:30:48 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20240402233048epoutp029241141cadfd931cf327454244d8ed8f~Cmnf8kAFb2423824238epoutp02a
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1712100554;
- bh=4GA26NqmlsPc0Qt3+IkmOB4q/7TTYLSdNY1T8vSxsek=;
+ s=mail20170921; t=1712100648;
+ bh=KVRGdFYcQfLVwEZyhrkK3tT9dMaxpC84v/wnFeq+efg=;
  h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=spI/9WhOxFArKa3Yb/9SzwkG2RYVdry4fkxM3JfjChUkFu8L8v5HpgYaQj/Fwun6I
- ex4wff2Z2jeMHkwOEj/P2WSD837P55p1Ybzo0rn06YnwB9en3BdE7AJXT0Gyc92r40
- tv+kIefTvxwKyRGINM0wKc63cBl5usEuGCeYJTK4=
-Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ b=NLq2ERUH4QzApyviPHc+HWrMzBuhM6/zbz8H5HKbVnSlh6L17PTvY2oCcuq1JCV+I
+ jwLCnXWVMkYHvtRT+oQh9JFF4aX2OPYAZeN0X53iYyp4Qm6m59X/dCYW0SskHKe/7d
+ dKLz4tHTGgpftQAbWXCBKvBoSC8x0xZumtqrJNuI=
+Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
  epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20240402232914epcas1p4c36a036580ac5af66ae1c119b4cdea97~CmmIMPN3X3267932679epcas1p4q;
- Tue,  2 Apr 2024 23:29:14 +0000 (GMT)
-Received: from epsmgec1p1-new.samsung.com (unknown [182.195.38.236]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4V8PGd2jv8z4x9QF; Tue,  2 Apr
- 2024 23:29:13 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 1A.0D.19431.9C49C066; Wed,  3 Apr 2024 08:29:13 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
- 20240402232912epcas1p1df0a76336eff985fb53b770990bb05c1~CmmG-YoEX0146501465epcas1p1L;
- Tue,  2 Apr 2024 23:29:12 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240402232912epsmtrp2f24a8357ea0c759d5a88b7e553b2723e~CmmG_x-xC1423014230epsmtrp2K;
- Tue,  2 Apr 2024 23:29:12 +0000 (GMT)
-X-AuditID: b6c32a4c-1d1ff70000004be7-0c-660c94c99b4d
+ 20240402233048epcas1p44ea051f15ab5cbd07874b5accc910c32~Cmnff70ST0446004460epcas1p48;
+ Tue,  2 Apr 2024 23:30:48 +0000 (GMT)
+Received: from epsmges1p1.samsung.com (unknown [182.195.38.232]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4V8PJQ4jkbz4x9Pt; Tue,  2 Apr
+ 2024 23:30:46 +0000 (GMT)
+Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
+ epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 85.1D.09662.6259C066; Wed,  3 Apr 2024 08:30:46 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20240402233046epcas1p4da66434b8d34a61b737a1f9443898e9d~Cmnd6BfGC0425204252epcas1p4z;
+ Tue,  2 Apr 2024 23:30:46 +0000 (GMT)
+Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20240402233046epsmtrp156a4657a7bb94c6bec37eac210af4854~Cmnd5Va-81892718927epsmtrp1C;
+ Tue,  2 Apr 2024 23:30:46 +0000 (GMT)
+X-AuditID: b6c32a35-053ff700000025be-03-660c9526ae67
 Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- A0.AB.19234.8C49C066; Wed,  3 Apr 2024 08:29:12 +0900 (KST)
+ epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ FA.0C.08924.6259C066; Wed,  3 Apr 2024 08:30:46 +0900 (KST)
 Received: from [10.113.113.235] (unknown [10.113.113.235]) by
  epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20240402232912epsmtip2daf19704b219e1303565f5320308c4c4~CmmGvJUD_1275712757epsmtip2H;
- Tue,  2 Apr 2024 23:29:12 +0000 (GMT)
-Message-ID: <b4b0e56f-8fc3-423b-a163-a0809552e8bf@samsung.com>
-Date: Wed, 3 Apr 2024 08:29:12 +0900
+ 20240402233045epsmtip26c6f4a94ebad087b3a83e20df7183316~CmndmMuq02121621216epsmtip2v;
+ Tue,  2 Apr 2024 23:30:45 +0000 (GMT)
+Message-ID: <8a8cbae0-65fc-4d41-952a-ab5aa68b8159@samsung.com>
+Date: Wed, 3 Apr 2024 08:30:45 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] mmc: Avoid buffer overrun in mmc_startup()
+Subject: Re: [PATCH 1/1] mmc: Don't suggest to build modules in Kconfig.
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Peng Fan
  <peng.fan@nxp.com>
-Cc: u-boot@lists.denx.de, Eugeniu Rosca <erosca@de.adit-jv.com>
+Cc: Patrice Chotard <patrice.chotard@st.com>, Arun Parameswaran
+ <arun.parameswaran@broadcom.com>, Jassi Brar <jaswinder.singh@linaro.org>,
+ Weijie Gao <weijie.gao@mediatek.com>, u-boot@lists.denx.de
 Content-Language: en-US
 From: Jaehoon Chung <jh80.chung@samsung.com>
-In-Reply-To: <20240104034942.102500-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240123161816.108839-1-heinrich.schuchardt@canonical.com>
 Content-Transfer-Encoding: 7bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupik+LIzCtJLcpLzFFi42LZdlhTT/fkFJ40g49TRSxW/W9hsrjQeJPd
- 4seqL6wWb/d2sjuweMxq6GXzmNW+mt3j7J0djB4b3+1gCmCJyrbJSE1MSS1SSM1Lzk/JzEu3
- VfIOjneONzUzMNQ1tLQwV1LIS8xNtVVy8QnQdcvMAdqppFCWmFMKFApILC5W0rezKcovLUlV
- yMgvLrFVSi1IySkwLdArTswtLs1L18tLLbEyNDAwMgUqTMjOuPnxEkvBCv6KU6t/sDYwTuXp
- YuTkkBAwkZhwv5eli5GLQ0hgD6PE8UuNzBDOJ0aJvu8r2eGcWxuWMcG0TL3eCJXYyShxrPs8
- I0hCSOA9o8ScL/ogNq+AncSs+99Zuxg5OFgEVCS2XKiBCAtKnJz5hAXEFhWQl7h/awY7iC0s
- 4Cyx5moDWFxEIEpi4vUbzCA2s4C9xL5rrWwQtrjErSfzwW5gE9CR2P7tOJjNKeAhMX/rQ6h6
- eYntb+eAfSAh8JFdYt/adlaIo10kriz8zQ5hC0u8Or4FypaS+PxuLxtEQzOjxNIlB1khnB5G
- iX8N19kgqowl9i+dzATyDbOApsT6XfoQ2/gk3n3tAXtSQoBXoqNNCKJaReLS65dMMPPvPvkP
- dYOHRPfV+9CAm80osW7yDbYJjAqzkAJmFpJHZyF5aBbC5gWMLKsYpVILinPTU5MNCwx181LL
- 4VGenJ+7iRGcKLV8djB+X/9X7xAjEwfjIUYJDmYlEd6f3pxpQrwpiZVVqUX58UWlOanFhxhN
- gTE0kVlKNDkfmKrzSuINTSwNTMyMjE0sDM0MlcR5z1wpSxUSSE8sSc1OTS1ILYLpY+LglGpg
- KrhQ/z+Tw5NTP4tVfX11XcOMl1P3pEvNzuueJCJ9qJihxPja+s3crv4ey5vZl+k6idV1/Hr0
- rfsAd/FWiW8bu7unH+Xf3v7AqM7A49DENcpuP86rLmBMnrFL+mifYs0Ss1Ub34m92lhl4Nfv
- vth1YvnbOVuWS05ZctAt8/nOhzyL5oo5CQUL1R/nsveavFzO4VPwhKfi62JDDzwKOSF7f22j
- 13TJi/yFrS8ObPz3j2lD0/k5F0uE5/7J+h97r1BryZTfzzzuBu4vVcmZ5NC86Ofj9k9Rgcdi
- LSKPBx0tCvyede7XjLAlHrKqa6vdRS1Y+yvf1dsKL3yT91Yh5Q3jF0sJ/6vnFtzkDUh02Nt3
- UomlOCPRUIu5qDgRAD/yw1EdBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrDLMWRmVeSWpSXmKPExsWy7bCSvO6JKTxpBov+G1qs+t/CZHGh8Sa7
- xY9VX1gt3u7tZHdg8ZjV0MvmMat9NbvH2Ts7GD02vtvBFMASxWWTkpqTWZZapG+XwJVx8+Ml
- loIV/BWnVv9gbWCcytPFyMkhIWAiMfV6I3sXIxeHkMB2Rokrcz8yQSSkJD4/ncrWxcgBZAtL
- HD5cDFHzllFi3auHjCA1vAJ2ErPuf2cFqWERUJHYcqEGIiwocXLmExYQW1RAXuL+rRnsILaw
- gLPEmqsNYHERgSiJw0dngY1hFrCX2HetlQ3EFhJwl3j+aQ8zRFxc4taT+WDnsAnoSGz/dhzM
- 5hTwkJi/9SEzyFpmAXWJ9fOEIMrlJba/ncM8gVFoFpIrZiGZNAuhYxaSjgWMLKsYRVMLinPT
- c5MLDPWKE3OLS/PS9ZLzczcxgiNAK2gH47L1f/UOMTJxMB5ilOBgVhLh/enNmSbEm5JYWZVa
- lB9fVJqTWnyIUZqDRUmcVzmnM0VIID2xJDU7NbUgtQgmy8TBKdXAVC5fGSuy5MOVmJSMlLmb
- 53kytf6sZvsaw/BL0y7iVO2iNp7+CzZnHqy5uPVZRmKXZB17rtkU61f/0m+b50xn810R9WBO
- s3pe4pQF4oZKrNNiLN8/mv5yjsimrslX5/+t8Lmz2KSsWalV6dDvec87LMRfM+tN5/h+SllA
- K7Lz86mc+CMpG+eWtEyz1Cz1ns5XP/n3ymO/Pm765TP9y2rb2R/bK49v+Wt48eCtX0vWi86b
- yPA85JDtmgesLKdLlS+k2N16sP/9mYXurY/cu60uL/8nm312xZO21QrHPsk8La2P3icu+dLs
- 4H5tZdWToRY9b/r/7ngmc9u0p8zz77Q1ZgttQtPPP540+2bK9CRjFmYlluKMREMt5qLiRAC1
- L+3I7wIAAA==
-X-CMS-MailID: 20240402232912epcas1p1df0a76336eff985fb53b770990bb05c1
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrGJsWRmVeSWpSXmKPExsWy7bCmvq7aVJ40g3M/lCwO7L3CZHGh8Sa7
+ xeRN9xkt5py4ymjxY9UXVou3ezvZLRpenGZ2YPeYdf8sm8eshl42jzvX9rB5nL2zg9Gj5eR+
+ Fo+N73YweTz9sZc5gD0q2yYjNTEltUghNS85PyUzL91WyTs43jne1MzAUNfQ0sJcSSEvMTfV
+ VsnFJ0DXLTMH6CIlhbLEnFKgUEBicbGSvp1NUX5pSapCRn5xia1SakFKToFpgV5xYm5xaV66
+ Xl5qiZWhgYGRKVBhQnbGxONvGQu2iFZ83yPRwHhaoIuRk0NCwETiccMR9i5GLg4hgR2MEu9/
+ z2CGcD4xSvz8PwvK+cYoMePrE3aYlvn/lrJCJPYySjy6u58RwnnPKHHuWAMrSBWvgJ3Eup1b
+ GUFsFgEViUstHUwQcUGJkzOfsIDYogLyEvdvzQCbKizgIXGx8zZYvYhAlMTE6zfAVjMLnGSU
+ 2LetG6yIWUBc4taT+WCD2AR0JLZ/Ow5mcwI1z+ydywhRIy+x/e0csGYJgbkcEst+7mKDuNtF
+ 4tmEn1C2sMSr41ug/pGSeNnfxg7R0MwosXTJQVYIp4dR4l/DdagOY4n9SycDreMAWqEpsX6X
+ PsQ2Pol3X3tYQcISArwSHW1CENVAH79+yQQz/+6T/6wQtofE+8nf2SDBNRvos097mCYwKsxC
+ CplZSB6dheShWQibFzCyrGIUSy0ozk1PLTYsMIRHeHJ+7iZGcILVMt3BOPHtB71DjEwcjIcY
+ JTiYlUR4f3pzpgnxpiRWVqUW5ccXleakFh9iNAXGz0RmKdHkfGCKzyuJNzSxNDAxMzI2sTA0
+ M1QS5z1zpSxVSCA9sSQ1OzW1ILUIpo+Jg1OqgSnVJGO2/HarjQ332QNexIY1d8ldEG3tc3X1
+ 1G7sktlxbLFpVsx3Mbv6kxZdoT+6xGKlstL2nbp9col6zM6CuPZ7B3fOycx/99M790z4HgP/
+ vXLaUzxrvFjC57VkvI3YYcR3tX/a292t02/esBOKv/260CDtY56X4rEN3bYbxZI9tx916yoo
+ 613IXaNW/GVSa1fEQo8z+b1H4rieBszk01AKNn4VL2apcuuGhszZqb94Dplf4qj/07ciStb8
+ 02PnbsmgbuVPN5ZrZ+zP/34lr79SxUwhvoXbLbXvrfibpd3/S5YzV/H/Wnpf5ABr1kf7L1L7
+ /kw4whj3r/d1/YKpE3/NPTSjdnK7RJZKjMsBJZbijERDLeai4kQAqOcATjkEAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrPLMWRmVeSWpSXmKPExsWy7bCSvK7aVJ40g2OfuC0O7L3CZHGh8Sa7
+ xeRN9xkt5py4ymjxY9UXVou3ezvZLRpenGZ2YPeYdf8sm8eshl42jzvX9rB5nL2zg9Gj5eR+
+ Fo+N73YweTz9sZc5gD2KyyYlNSezLLVI3y6BK2Pi8beMBVtEK77vkWhgPC3QxcjJISFgIjH/
+ 31LWLkYuDiGB3YwS8w4sZYFISEl8fjqVrYuRA8gWljh8uBii5i2jxNJj1xlBangF7CTW7dwK
+ ZrMIqEhcaulggogLSpyc+QRsjqiAvMT9WzPYQWxhAQ+Ji523wepFBKIkDh+dxQgylFngNKPE
+ 4y1nwBJCAu4ST79OA2tgFhCXuPVkPthQNgEdie3fjoPZnECDZvbOZQQ5jllAXWL9PCGIcnmJ
+ 7W/nME9gFJqF5IxZSCbNQuiYhaRjASPLKkbJ1ILi3PTcYsMCw7zUcr3ixNzi0rx0veT83E2M
+ 4DjS0tzBuH3VB71DjEwcjIcYJTiYlUR4f3pzpgnxpiRWVqUW5ccXleakFh9ilOZgURLnFX/R
+ myIkkJ5YkpqdmlqQWgSTZeLglGpgYl6Yf+e1U6jYl5X1C4r5XHK785aETOdTD4yK2NOXtd9d
+ xX/iFedVV799eyKnXNsqdjUr+duFJ4f3umZxTN/CfPlf7zrVvG8Z09udttV+m3pU05Rx0plw
+ 3TevDFWTFzQ+4+SeU65Y/+OS2tW6okNl3Eumzvu+YctxfUfRDZMES1/9ZZuufSNMm93j1NZF
+ Feni6fxnhe1OTrBVfqCWqbJGMXPBZ4HrF4yO3Fvp06naamf40qzvZG7/+ogU0Rlmiy/fPn3I
+ xOv9n+sFSU5Pr2ddPqLIe3zLrvXZfVah9eoF1R7m9mKG8w1nJJhfPFe+qYSHa9PeFtc78mYs
+ kz/VHcsKfvpNJbrrrMHls1Uz/pbdUmIpzkg01GIuKk4EACOCDO4SAwAA
+X-CMS-MailID: 20240402233046epcas1p4da66434b8d34a61b737a1f9443898e9d
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240402232912epcas1p1df0a76336eff985fb53b770990bb05c1
-References: <20240104034942.102500-1-heinrich.schuchardt@canonical.com>
- <CGME20240402232912epcas1p1df0a76336eff985fb53b770990bb05c1@epcas1p1.samsung.com>
+X-CMS-RootMailID: 20240402233046epcas1p4da66434b8d34a61b737a1f9443898e9d
+References: <20240123161816.108839-1-heinrich.schuchardt@canonical.com>
+ <CGME20240402233046epcas1p4da66434b8d34a61b737a1f9443898e9d@epcas1p4.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,62 +135,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/4/24 12:49, Heinrich Schuchardt wrote:
-> If the CSD register contains a reserved value (4 - 7) in bits 0:2 of the
-> TRAN_SPEED field, a buffer overrun occurs. Resize the mapping table.
+On 1/24/24 01:18, Heinrich Schuchardt wrote:
+> U-Boot does not support building kernel modules.
 > 
-> According to the original report
-> https://lore.kernel.org/u-boot/20180826231332.2491-11-erosca@de.adit-jv.com/
-> reserved values have been observed resulting in a buffer overrun.
-> 
-> Reported-by: Eugeniu Rosca <erosca@de.adit-jv.com>
-> Fixes: 272cc70b211e ("Add MMC Framework")
+> Fixes: 3c0dbed232bd ("mmc: arm_pl180_mmci: adapt driver to DM usage")
+> Fixes: 36645f45a048 ("drivers: mmc: Add sdhci driver for Broadcom iProc platform")
+> Fixes: dadd43c14368 ("mmc: synquacer: Add SynQuacer F_SDH30 SDHCI driver")
+> Fixes: b312c590bcd8 ("mmc: Add MMC support for stm32h7 Socs")
+> Fixes: d24b69395949 ("mmc: mtk-sd: add SD/MMC host controller driver for MT7623 SoC")
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-Applied to u-boot-mmc/master. 
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+
+Applied to u-boot-mmc/master, Thanks! Sorry for late.
 
 Best Regards,
-Jaehoon Chung 
+Jaehoon Chung
 
 > ---
->  drivers/mmc/mmc.c | 13 +++++++++++--
->  1 file changed, 11 insertions(+), 2 deletions(-)
+>  drivers/mmc/Kconfig | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
 > 
-> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-> index d96db7a0f8..00f4964aae 100644
-> --- a/drivers/mmc/mmc.c
-> +++ b/drivers/mmc/mmc.c
-> @@ -1570,13 +1570,20 @@ static int sd_read_ssr(struct mmc *mmc)
->  	return 0;
->  }
->  #endif
-> -/* frequency bases */
-> -/* divided by 10 to be nice to platforms without floating point */
-> +/*
-> + * TRAN_SPEED bits 0:2 encode the frequency unit:
-> + * 0 = 100KHz, 1 = 1MHz, 2 = 10MHz, 3 = 100MHz, values 4 - 7 are reserved.
-> + * The values in fbase[] are divided by 10 to avoid floats in multiplier[].
-> + */
->  static const int fbase[] = {
->  	10000,
->  	100000,
->  	1000000,
->  	10000000,
-> +	0,	/* reserved */
-> +	0,	/* reserved */
-> +	0,	/* reserved */
-> +	0,	/* reserved */
->  };
+> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+> index ffde442cb29..9ce331677b8 100644
+> --- a/drivers/mmc/Kconfig
+> +++ b/drivers/mmc/Kconfig
+> @@ -83,7 +83,7 @@ config ARM_PL180_MMCI
+>  	  This selects the ARM(R) AMBA(R) PrimeCell Multimedia Card
+>  	  Interface (PL180, PL181 and compatible) support.
+>  	  If you have an ARM(R) platform with a Multimedia Card slot,
+> -	  say Y or M here.
+> +	  say Y here.
 >  
->  /* Multiplier values for TRAN_SPEED.  Multiplied by 10 to be nice
-> @@ -2560,6 +2567,8 @@ static int mmc_startup(struct mmc *mmc)
->  	mult = multipliers[((cmd.response[0] >> 3) & 0xf)];
+>  config MMC_QUIRKS
+>  	bool "Enable quirks"
+> @@ -592,7 +592,7 @@ config MMC_SDHCI_IPROC
+>  	  This selects the iProc SD/MMC controller.
 >  
->  	mmc->legacy_speed = freq * mult;
-> +	if (!mmc->legacy_speed)
-> +		log_debug("TRAN_SPEED: reserved value");
->  	mmc_select_mode(mmc, MMC_LEGACY);
+>  	  If you have a Broadcom IPROC platform with SD or MMC devices,
+> -	  say Y or M here.
+> +	  say Y here.
 >  
->  	mmc->dsr_imp = ((cmd.response[1] >> 12) & 0x1);
+>  	  If unsure, say N.
+>  
+> @@ -603,7 +603,7 @@ config MMC_SDHCI_F_SDH30
+>  	help
+>  	  This selects the Secure Digital Host Controller Interface (SDHCI)
+>  	  Needed by some Fujitsu/Socionext SoC for MMC / SD / SDIO support.
+> -	  If you have a controller with this interface, say Y or M here.
+> +	  If you have a controller with this interface, say Y here.
+>  	  If unsure, say N.
+>  
+>  config MMC_SDHCI_KONA
+> @@ -797,7 +797,7 @@ config STM32_SDMMC2
+>  	help
+>  	  This selects support for the SD/MMC controller on STM32H7 SoCs.
+>  	  If you have a board based on such a SoC and with a SD/MMC slot,
+> -	  say Y or M here.
+> +	  say Y here.
+>  
+>  config FTSDC010
+>  	bool "Ftsdc010 SD/MMC controller Support"
+> @@ -817,7 +817,7 @@ config MMC_MTK
+>  	depends on OF_CONTROL
+>  	help
+>  	  This selects the MediaTek(R) Secure digital and Multimedia card Interface.
+> -	  If you have a machine with a integrated SD/MMC card reader, say Y or M here.
+> +	  If you have a machine with a integrated SD/MMC card reader, say Y here.
+>  	  This is needed if support for any SD/SDIO/MMC devices is required.
+>  	  If unsure, say N.
+>  
 
