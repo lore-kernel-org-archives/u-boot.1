@@ -4,96 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80EFAC6FD1F
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 19:08:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A04D3CD1284
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 19:37:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B64F487D5F;
-	Tue,  2 Apr 2024 21:08:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id C71318811D;
+	Tue,  2 Apr 2024 21:37:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="E5rRPdlf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KJgBCXYu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A141487BE0; Tue,  2 Apr 2024 21:08:18 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C998F87E78; Tue,  2 Apr 2024 17:37:28 +0200 (CEST)
+Received: from mail-oa1-x32.google.com (mail-oa1-x32.google.com
+ [IPv6:2001:4860:4864:20::32])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0E5187E9D
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 21:08:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B910C86FCE
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 17:37:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-oo1-f70.google.com (mail-oo1-f70.google.com
- [209.85.161.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id DA2DB3FB77
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 19:08:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1712084894;
- bh=CT3Yu5j5MdfeLryPaJrOZbjRhZfvERWOvThuGrioxDA=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=E5rRPdlfg+aEqG4y7KPoimyoFFokHb8vpG5jewxrLBcQG2/YsmHH1laqBkDcIxNKa
- /XJLXqw6F6y/qbzrLe3LUDgs+slenTkxXk944TcLIzSwcrHOnmkypgpBxJMfKlFb4o
- VsqBHTYP+o2pnx3oKq6ffP+FrF+RF2kcHzmtStZaguvHFzmsrwKwARc/FVRaKP2E9F
- 2ZzzB0fdkBajU1sp2Mueldy8osi6PJbM9KjLaMdVQI5TJYfw9n2aV3j7l4mu6K6lE2
- ZtJj/Cmqq/6P3mQjnPqV29G0RT68Bv/hVrM3h4HgtsY8+RoFPSk24xL65nBgWFLCWX
- KUGU65qArSABg==
-Received: by mail-oo1-f70.google.com with SMTP id
- 006d021491bc7-5a46b025acbso5873534eaf.3
- for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 12:08:14 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=james.hilliard1@gmail.com
+Received: by mail-oa1-x32.google.com with SMTP id
+ 586e51a60fabf-22e6b61d652so412619fac.0
+ for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 08:37:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1712072245; x=1712677045; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=W61kMoUmlqZVQOoxDivdpiNrtX02H5Llif6zoOx1i/o=;
+ b=KJgBCXYuqquoTmRpQFHMguV1NXnRSjp9Uo0GCnhuJ86cIgdencsBaqgV6eF0Ygye2y
+ 7Memjr670ixZDy85yIAbp3cMGFXJfR90Nyi/zXokuvzVAOey7SFDNEL/59+gzG4MQev+
+ hiHLrmtq6kC2qi5JYXp26uQWCHctw+PjnCHlEH+Gw8oLCkHm74EQOd41Pt+Or9sfFTuZ
+ mnuZSY8W21AIshZY/F/6b1KX+ZwJKTAAYG8xfnOSb7z8VmmwImNa0A0o0c3EbnaaEZCe
+ iA+EC4168dTKAgKZrDqEai8tbgv4LpvkLYGgB41kov64zoFZ1BWwMGoMTuvJeJO7KA+W
+ xOfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712084893; x=1712689693;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CT3Yu5j5MdfeLryPaJrOZbjRhZfvERWOvThuGrioxDA=;
- b=MhmEakuODRIyd1tVKzt2dy7z2pv2eDAFRNKtOTkUYlO9uT3sXZwWxVlV43MH9SygCl
- eZQdSZdANIJzVZLsS/IXOeiIK+zhMD90GfhadvQlbdZ6l747SxtNdi+rS0JIkTv+2axQ
- JLiR4ir1EdQqZ5cIiNazBwYKvObLgTrBLgOK467l1HFlGoyAopuxkD8Rgoi39hSRrlb3
- JFr7D8IoDQAuGhXNLBFgvHDkiQtiQ/jB6c2UiSOQ5NZudKE0A/uPtvkI1CsMCXYTKT1h
- 78imhxq4PDh70N5KgtXuPJssDwSN9mN5CE0SEAoga4LDquIDyuAI4psYGx8H+Y6uMWeM
- wo/w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWOn1ynP3hAodyJFoCTx7s9k/3F96FjaDpdVjXgwwP5ZQwgLF1jL1ecHjI2+Ma5UQR6cuGcId/Y7no0lku8m33HtHHPvw==
-X-Gm-Message-State: AOJu0Yy3pdLr97q2b9BKkKI+M1XbjXvs4RggBlHSQBZgSGrBRyHgXRXK
- Hq8r8Iqfc3TDhfuaqYFCecQio4eppHYBXi0qcz+az6p1NC+QLRl7nFF3xJIewTaRaEggMZlsnwm
- jKhQUhzA2nAc29jcn7BxMcRvSsqWIyWzCHg/2UvK7vrxjaXfTTaCo2oDL3bvZGMAM9vKcck3CWH
- koZ6hCwxfg1WlVrtWw/GlTDba6duZZGO/5TOI541/fAQ==
-X-Received: by 2002:a05:6358:939b:b0:17f:8831:2b7c with SMTP id
- h27-20020a056358939b00b0017f88312b7cmr498999rwb.25.1712084893072; 
- Tue, 02 Apr 2024 12:08:13 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEZexTtIofi2AHMa0Cs7aCfHOrfuHih42RnqkrPdJhOm/WYlcqtc+NbAc2Ie9yQnZPNbDHcpDAmdX/PCTqpEOs=
-X-Received: by 2002:a05:6358:939b:b0:17f:8831:2b7c with SMTP id
- h27-20020a056358939b00b0017f88312b7cmr498973rwb.25.1712084892646; Tue, 02 Apr
- 2024 12:08:12 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1712072245; x=1712677045;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=W61kMoUmlqZVQOoxDivdpiNrtX02H5Llif6zoOx1i/o=;
+ b=sTzsApblC+zOsuBNoQ8ghpMJ02FWZzFOb184E2Z4h608l0sSjh6KxpO3VFt5b1tmK7
+ wGmm0FTi08ZhmIFCm7mOkdZYmcyMhEXa78Q9vfyjA2UtDb/t7iMAwMwbpqHVMm+bZaKM
+ yKftIJ5x0AkBAKgWSdt3xDCkQpYXrsIrbXkitiTc9bg5aiQa8Xo/7OaAwKEwmB5U0Uy3
+ Hon409qaPS649agxdsQb6vmWUiyp0L4Ldc2jV8LoUp8TH87ONrUkt3dDjKeBJD1It9vs
+ 1iVC5yklaD7zXPVtQ56CRB9Vj1PPXERmYkXNnm7OQZC6vCeBu1FfaTWuYN7K2MhnmhXJ
+ pa1Q==
+X-Gm-Message-State: AOJu0YyfVEvfxynjVDHM2KjwJl6/eItNi4C3RraWqnWv110aSJ9KJXHQ
+ IbKtXr5ST6upCC+CkxtwqOzSFtGicS6odi4mPgmFg+L8VCJUK/jS+MvOpJv5I30VJEecSSdE0+/
+ ketE+znNe2L/K5nyNuPsaz3co49M=
+X-Google-Smtp-Source: AGHT+IEJepo07xl/BZQrXsI9yIVl8yYKWRh+HZorO5ErWRQ5o69ljoPBbY7m7Jz3ZapBq2q6SVKHs84arcVi8B8ML1A=
+X-Received: by 2002:a05:6871:68b:b0:22e:8a63:8f99 with SMTP id
+ l11-20020a056871068b00b0022e8a638f99mr593131oao.53.1712072245428; Tue, 02 Apr
+ 2024 08:37:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240330175948.80931-1-bigunclemax@gmail.com>
- <20240330175948.80931-2-bigunclemax@gmail.com>
- <4c80330c-e12a-4652-89c2-857d572d6a7b@canonical.com>
- <CALHCpMgEr6kB+TcnqOAex=gpNqZex4sUyeEXjEVh2_0E4cdL5w@mail.gmail.com>
-In-Reply-To: <CALHCpMgEr6kB+TcnqOAex=gpNqZex4sUyeEXjEVh2_0E4cdL5w@mail.gmail.com>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Date: Tue, 2 Apr 2024 21:08:01 +0200
-Message-ID: <CAM=mAOmdRJLx4Rr1UaswaGMcvp7EkdhzmDFSbr8La0gWwWCKGQ@mail.gmail.com>
-Subject: Re: [RFC PATCH v1 1/1] mmc: snps_sdhci: Add sdhci driver support for
- TH1520 SoC
-To: Maxim Kiselev <bigunclemax@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Kever Yang <kever.yang@rock-chips.com>, Peter Geis <pgwipeout@gmail.com>,
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Stefan Roese <sr@denx.de>, U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20240331232859.727769-1-james.hilliard1@gmail.com>
+ <7fe20558-6af1-46cb-bbfe-af308e3ce279@amd.com>
+In-Reply-To: <7fe20558-6af1-46cb-bbfe-af308e3ce279@amd.com>
+From: James Hilliard <james.hilliard1@gmail.com>
+Date: Tue, 2 Apr 2024 09:37:13 -0600
+Message-ID: <CADvTj4r+0hO841ZYbW+Mg9nS70fRpmVGVbh-Q8yoGYE5mj_1AA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/1] xilinx: zynq: add FDT_FIXUP_PARTITIONS support
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Leo Yu-Chi Liang <ycliang@andestech.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Shiji Yang <yangshiji66@outlook.com>, 
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-Mailman-Approved-At: Tue, 02 Apr 2024 21:37:03 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,58 +96,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Maxim Kiselev <bigunclemax@gmail.com> schrieb am Di., 2. Apr. 2024, 19:19:
-
-> i, Heinrich!
+On Tue, Apr 2, 2024 at 6:41=E2=80=AFAM Michal Simek <michal.simek@amd.com> =
+wrote:
 >
-> =D0=B2=D1=82, 2 =D0=B0=D0=BF=D1=80. 2024=E2=80=AF=D0=B3. =D0=B2 17:47, He=
-inrich Schuchardt
-> <heinrich.schuchardt@canonical.com>:
+>
+>
+> On 4/1/24 01:28, James Hilliard wrote:
+> > There are situations where we may want to let U-Boot modify the FDT
+> > nand partitions for the kernel, such as when supporting multiple
+> > sizes of NAND chips.
 > >
-> > On 30.03.24 18:59, Maksim Kiselev wrote:
-> > > Add support for DesignWare SDHCI host controller on Alibaba TH1520 So=
-C
-> > >
-> > > Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+> > Signed-off-by: James Hilliard <james.hilliard1@gmail.com>
+> > ---
+> > Changes v1 -> v2:
+> >    - move partition fixups to board/xilinx/common/board.c
+> > ---
+> >   board/xilinx/common/board.c | 9 +++++++++
+> >   1 file changed, 9 insertions(+)
 > >
-> > Thank you for driving the TH1520 support forward.
+> > diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+> > index 9641ed307b..20a6f00e45 100644
+> > --- a/board/xilinx/common/board.c
+> > +++ b/board/xilinx/common/board.c
+> > @@ -12,6 +12,7 @@
+> >   #include <env.h>
+> >   #include <image.h>
+> >   #include <init.h>
+> > +#include <jffs2/load_kernel.h>
+>
+> What is this header used for?
+
+It's needed for MTD_DEV_TYPE_NAND.
+
+>
+> >   #include <lmb.h>
+> >   #include <log.h>
+> >   #include <asm/global_data.h>
+> > @@ -20,6 +21,7 @@
+> >   #include <i2c.h>
+> >   #include <linux/sizes.h>
+> >   #include <malloc.h>
+> > +#include <mtd_node.h>
+> >   #include "board.h"
+> >   #include <dm.h>
+> >   #include <i2c_eeprom.h>
+> > @@ -693,6 +695,13 @@ int ft_board_setup(void *blob, struct bd_info *bd)
+> >       u8 buf[MAX_RAND_SIZE];
+> >       int nodeoffset, ret;
 > >
-> > Locally I updated the Lichee Pi4A device-tree based on the Linux
-> > device-tree and built th1520_lpi4a_defconfig with
-> >
-> > CONFIG_CMD_MMC=3Dy
-> > CONFIG_MMC=3Dy
-> > CONFIG_MMC_SDHCI=3Dy
-> > CONFIG_MMC_SDHCI_SNPS=3Dy
+> > +     static const struct node_info nodes[] =3D {
+> > +             { "arm,pl353-nand-r2p1", MTD_DEV_TYPE_NAND, },
+> > +     };
+> > +
+> > +     if (IS_ENABLED(CONFIG_FDT_FIXUP_PARTITIONS) && IS_ENABLED(CONFIG_=
+NAND_ZYNQ))
+> > +             fdt_fixup_mtdparts(blob, nodes, ARRAY_SIZE(nodes));
+> > +
+> >       if (uclass_get_device(UCLASS_RNG, 0, &dev) || !dev) {
+> >               debug("No RNG device\n");
+> >               return 0;
 >
-> You can also enable following options:
-> CONFIG_MMC_IO_VOLTAGE=3Dy
-> CONFIG_MMC_UHS_SUPPORT=3Dy
-> CONFIG_MMC_HS400_ES_SUPPORT=3Dy
-> CONFIG_MMC_HS400_SUPPORT=3Dy
->
-> For HS400_ES mode also needs to add `mmc-hs400-enhanced-strobe`
-> line to the emmc node in the Lichee's DT.
->
-
-Could you, please, send a patch series with all these changes.
-
-Best regards
-
-Heinrich
-
-
-
-> HS200/HS400/HS400_ES modes work fine with eMMC on my Lichee Pi4A board.
-> MicroSD works fine at UHS SDR104 too.
->
-> Bus Speed for both devices is 198MHz
->
-> > I tested reading from eMMC and SD-card as well as writing to SD-card an=
-d
-> > found no problems.
-> >
-> > Tested-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->
-> Thanks for testing!
->
+> M
