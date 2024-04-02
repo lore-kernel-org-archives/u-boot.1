@@ -4,87 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16EABC6FD1F
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 09:13:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6987FC6FD1F
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 09:33:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4143A88368;
-	Tue,  2 Apr 2024 11:13:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id B176B87FB5;
+	Tue,  2 Apr 2024 11:33:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="RFp8BLfn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="g/VlG7I/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1984488371; Tue,  2 Apr 2024 11:13:12 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+ id E6D2A88105; Tue,  2 Apr 2024 11:33:07 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D75AB87FDA
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 11:13:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A97A87F65
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 11:33:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-4156684ee9cso11508405e9.1
- for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 02:13:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a46cd9e7fcaso628773166b.1
+ for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 02:33:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712049189; x=1712653989;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4Uw+qvJBjC2PuojwknkedUS1Mu2KvbMFfAD6h3uC0dg=;
- b=RFp8BLfnRWZlsKht40Sl8H15yD4SIqt+lzKMo+NeXRv2D+R/cTiSbedd1ACiGzKSsK
- chtKAyLPeRvc+qdndt6XWXInDdHqNiVx8Y2W3d82ZcD9ISPycyc0cSpNIW44pvS7uNFI
- hVUdxalkbqFQfCz8TP1kCOYulEw9Q5UnHPHJ5o51me1DaQQE5IwtQG4zISMs2/juX8D6
- gqniRi5mIpAeuG6gJaS+SEu4F6GHXXfGijG+akAm3KiD1YJML4gfi7MsIwj3r7f4GH8O
- wSRJk4wM1Kj4qFF1g0aeaBiC+w30oE424twEJtF2Lb/+7KqMvE2KGb8Uh4Nh2x2WJTc8
- Czxg==
+ d=linaro.org; s=google; t=1712050384; x=1712655184; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=EpvD5hhwRUNWKHo3tWifhpIOqGXxugZLpCj0SwSLIBo=;
+ b=g/VlG7I/mP/XnFyZDw6BfIrFqUCoVV0L0jdB3jAaGhL5zwDCgMRMFykOAValt4DOBm
+ rDvYcsjLk2W/IOkmQ7iydhMDJVB0b1s/MeEsZEGU/toxJsRmW0w48etEeekgg3GoLvAA
+ VA3FUMvt9QZrv5hW2bJmhRMRQ+SXFvv9Ojz9eA8bWh1fk4zYcsR8MbRWerCUPlGtAn83
+ boHfmCaKr4BjWVK9h2BXamrPmqYVMb8CdtQ7QG19bkpi/cecYbedMDiJVigjfazU+S0o
+ OsowziVk+7uXX/ufphC/oATt6L+MbAgTEce3MsN4NuechfBGJ2tsDv2x+TrkA5IOp5gQ
+ ofwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712049189; x=1712653989;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4Uw+qvJBjC2PuojwknkedUS1Mu2KvbMFfAD6h3uC0dg=;
- b=SC92gfOus/djNbMsqE+dOJC6RBzodTF/ZNhFtUGVbJ01k+LARCU+E937rcoDo2uaaL
- hknI4OYALTLjKnVV69xASyPd8IxQ7Zv3xsr7oQo6eiE5k7oh1LH0Ksjzxf4RfrnnhEeW
- brFRethO4uhomY9XxzXcKL4As1h7xlqBY0bmKE9FYPMB68k1tKP0KcQatQbMmfFBZg4Z
- iE7oqRHqVJGYcI35Kozssln5UXrKV7HmkzfYlWiitLU0GUTk/zZpjlDI5P1tHucgzBA+
- efMefxN+c5FOSo9nxbvTicbNACIPV5OvDwDkY36uBZa4NKYtaoG2t2KDCcUGMPX6yuF4
- OwVA==
-X-Gm-Message-State: AOJu0YyFVLYRK0zjTknnhRL9CExZnUHViil/AYAolvwGYHn2d7vYc64N
- Suh4hfGnD5GkED0yGMnxhmse2q9IS908hHWtNFc1qWq4JjfoxWyagdGaRcgLaNc=
-X-Google-Smtp-Source: AGHT+IFLniX6mDWQOhSU2QxViRODw0N1qE+pEOZ30cqqlOqEePa1iYs4QrtNMD+DgcfuoZ/9Y76reg==
-X-Received: by 2002:a05:600c:3ac5:b0:415:68c1:5899 with SMTP id
- d5-20020a05600c3ac500b0041568c15899mr2963059wms.26.1712049189279; 
- Tue, 02 Apr 2024 02:13:09 -0700 (PDT)
-Received: from [192.168.2.43] ([82.66.159.240])
+ d=1e100.net; s=20230601; t=1712050384; x=1712655184;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=EpvD5hhwRUNWKHo3tWifhpIOqGXxugZLpCj0SwSLIBo=;
+ b=Z9uiRjEvoZvoycnbdtQv/ozs33o/6+54+LZiUNYFY9jQIzFgM1c1RjL1B936mxWXrf
+ /m1jjtEO/DJ4P9gb05J2YBMUtMadYOCQj8NRjgd6PfeoC07mKkIdDxxsAuaECLLw1nT2
+ UDSbrlidYeVjWzDvLiGnGN0Lp3tWPlvrSZBMRdXMbjDCPwpD4fxqLiCRx5sU7LUAgW+7
+ 51Mm7EqFdEjA1crJ1y2cv27Lv0aDE8VPCQ2Zv6WL3i+ZttNP1AZtSMrH4+S0Ph/IVWOl
+ TL2EWHJq2aKZ2YLlf7mK0E1rMe/R+dOYloXY/qenEBw1i32qVYmFW7FJ2pAxpBkgoPwJ
+ O7Ew==
+X-Gm-Message-State: AOJu0Yx+kVhZm1jTP9JA9RYeqx3UQ2h2r9M+hyccN58MUIKCv5B0ONm8
+ ted/bYrtc1k+U4BbcI9ex4JI4CiRVk4y9GmrAvrMuVfiaWyC126rpPtc15KALJQ=
+X-Google-Smtp-Source: AGHT+IExkC/2/4vpRAXAta8qOxvkhwrCkQ9a0MESOTbb2Fazh8XufcZuvdp9mSkuXqiHLHTkhFS2Pw==
+X-Received: by 2002:a17:906:4796:b0:a4e:61ac:c3e9 with SMTP id
+ cw22-20020a170906479600b00a4e61acc3e9mr5448127ejc.31.1712050384478; 
+ Tue, 02 Apr 2024 02:33:04 -0700 (PDT)
+Received: from [192.168.1.23] (i5E863A89.versanet.de. [94.134.58.137])
  by smtp.gmail.com with ESMTPSA id
- n38-20020a05600c3ba600b00415509b11c3sm13419996wms.22.2024.04.02.02.13.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Apr 2024 02:13:08 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Angus Ainslie <angus@akkea.ca>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Eugen Hristev <eugen.hristev@collabora.com>, 
- Igor Prusov <ivprusov@salutedevices.com>, Nishanth Menon <nm@ti.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Simon Glass <sjg@chromium.org>, Stefan Bosch <stefan_b@posteo.net>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, 
- kernel@puri.sm
-In-Reply-To: <20240317044357.547037-1-marek.vasut+renesas@mailbox.org>
-References: <20240317044357.547037-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PATCH 1/2] usb: udc: dwc3: Fold board
- dm_usb_gadget_handle_interrupts() into DWC3 gadget
-Message-Id: <171204918804.88969.5638551486198110201.b4-ty@baylibre.com>
-Date: Tue, 02 Apr 2024 11:13:08 +0200
+ o1-20020a1709064f8100b00a46baba1a0asm6304684eju.100.2024.04.02.02.33.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 02 Apr 2024 02:33:04 -0700 (PDT)
+Message-ID: <88cbdf60-3eab-4291-b34c-bca18da700e0@linaro.org>
+Date: Tue, 2 Apr 2024 11:33:03 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 16/16] usb: gadget: UMS: fix 64-bit division on ARM32
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de
+References: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
+ <20240328-b4-qcom-livetree-v5-16-4e98228b3d03@linaro.org>
+ <87edbogrbk.fsf@baylibre.com>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <87edbogrbk.fsf@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.12.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,24 +98,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Mattijs,
 
-On Sun, 17 Mar 2024 05:42:52 +0100, Marek Vasut wrote:
-> The dm_usb_gadget_handle_interrupts() has no place in board code. Move
-> this into DWC3 driver. The OMAP implementation is special, add new weak
-> dwc3_uboot_interrupt_status() function to decide whether DWC3 interrupt
-> handling should be called, and override it in OMAP DWC3 code, to repair
-> the special OMAP interrupt handling code until OMAP gets switched over
-> to DM UDC proper.
+On 02/04/2024 09:24, Mattijs Korpershoek wrote:
+> Hi Caleb,
 > 
-> [...]
+> Thank you for the patch.
+> 
+> On jeu., mars 28, 2024 at 17:59, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> 
+>> The patch introducing support for dynamic sector sizes changed the types
+>> used in some divisions, resulting in the compiler attempting to use
+>> libgcc helpers (__aeabi_ldivmod). Replace these divisions with calls to
+>> lldiv() to handle this correctly.
+>>
+>> Fixes: 74e56e0c5065 ("usb: gadget: UMS: support multiple sector sizes")
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> 
+> I believe I applied this already via [1]
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu-next)
+Oh yes of course, I'm not sure quite how this patch ended up in my 
+outbox, apologies for any confusion.
+> 
+> I plan to send your work to Tom this week.
+> 
+> Sorry for the delay!
 
-[1/2] usb: udc: dwc3: Fold board dm_usb_gadget_handle_interrupts() into DWC3 gadget
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/4d158980897085a5b0255ab910208d8afc8522dc
-[2/2] usb: udc: dwc3: Fold dwc3_uboot_handle_interrupt into dm_usb_gadget_handle_interrupts
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/12ac51cdb788b9f8e50cbc4fa3681102882ade33
+No problem at all.
 
---
-Mattijs
+Thanks,
+> 
+> [1] https://lore.kernel.org/r/87a5mqei67.fsf@baylibre.com
+> 
+>> ---
+>> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> ---
+>>   drivers/usb/gadget/f_mass_storage.c | 13 +++++++------
+>>   1 file changed, 7 insertions(+), 6 deletions(-)
+>>
+>> diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
+>> index d880928044f4..ef90c7ec7fb5 100644
+>> --- a/drivers/usb/gadget/f_mass_storage.c
+>> +++ b/drivers/usb/gadget/f_mass_storage.c
+>> @@ -239,8 +239,9 @@
+>>   /* #define VERBOSE_DEBUG */
+>>   /* #define DUMP_MSGS */
+>>   
+>>   #include <config.h>
+>> +#include <div64.h>
+>>   #include <hexdump.h>
+>>   #include <log.h>
+>>   #include <malloc.h>
+>>   #include <common.h>
+>> @@ -768,10 +769,10 @@ static int do_read(struct fsg_common *common)
+>>   		}
+>>   
+>>   		/* Perform the read */
+>>   		rc = ums[common->lun].read_sector(&ums[common->lun],
+>> -				      file_offset / curlun->blksize,
+>> -				      amount / curlun->blksize,
+>> +				      lldiv(file_offset, curlun->blksize),
+>> +				      lldiv(amount, curlun->blksize),
+>>   				      (char __user *)bh->buf);
+>>   		if (!rc)
+>>   			return -EIO;
+>>   
+>> @@ -942,10 +943,10 @@ static int do_write(struct fsg_common *common)
+>>   			amount = bh->outreq->actual;
+>>   
+>>   			/* Perform the write */
+>>   			rc = ums[common->lun].write_sector(&ums[common->lun],
+>> -					       file_offset / curlun->blksize,
+>> -					       amount / curlun->blksize,
+>> +					       lldiv(file_offset, curlun->blksize),
+>> +					       lldiv(amount, curlun->blksize),
+>>   					       (char __user *)bh->buf);
+>>   			if (!rc)
+>>   				return -EIO;
+>>   			nwritten = rc * curlun->blksize;
+>> @@ -1058,10 +1059,10 @@ static int do_verify(struct fsg_common *common)
+>>   		}
+>>   
+>>   		/* Perform the read */
+>>   		rc = ums[common->lun].read_sector(&ums[common->lun],
+>> -				      file_offset / curlun->blksize,
+>> -				      amount / curlun->blksize,
+>> +				      lldiv(file_offset, curlun->blksize),
+>> +				      lldiv(amount, curlun->blksize),
+>>   				      (char __user *)bh->buf);
+>>   		if (!rc)
+>>   			return -EIO;
+>>   		nread = rc * curlun->blksize;
+>>
+>> -- 
+>> 2.44.0
+
+-- 
+// Caleb (they/them)
