@@ -4,109 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30F3DC6FD1F
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 10:05:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECDB5CD1284
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 10:07:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD0AF88375;
-	Tue,  2 Apr 2024 12:05:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=hotmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 63A1E880E5;
+	Tue,  2 Apr 2024 12:07:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="ijYPvBvW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dNKuPPPX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D84B87F13; Tue,  2 Apr 2024 12:03:20 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10olkn20824.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::824])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7ABF58837D; Tue,  2 Apr 2024 12:07:45 +0200 (CEST)
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com
+ [IPv6:2a00:1450:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5751A880E5
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 12:03:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79ADA879F3
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 12:07:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=hotmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xiaofengvskuye@hotmail.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=g5/6oYWqzsgbrzZMIP+KOyJqlRX+ybZfOq5MJm7waE6gBOdlFVUMqeGVgj01/8oMdU6jYPvXiNTDL3mnfYIVLVWTIEz7bAxl21JjFm1AUxhhEJ63erCOGun3IjnbU3rjiQKZG132ubQIOjb51xDMrn5Ej6JElvyIqjS7WV7W+yxjj3zKRQ2MWoejsuzhPG4Ajh1GYoU9bLHvvO/yzDnHJkbFLp0INYgTNiZldUi2WE5gez7GBry38Xi1o0UaYiMUdGgLYZd5+UpqnrhkgH7X81Ahj443AgbIJ68ae5LTv5YQ3ZgURAVwca0+fOqbTYYg8PEyfedKJ3veF7HsWBaDrQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yR2lI2DQc3skCsWXIFrZ5xCK3zN/R9cszP1rOka+5p8=;
- b=PjSR2FL7feD2XcQsAWfRzhLX9xqe0Sm2SCSvUQOvwynv0F90II7DAr+Py/hOOWnwgmtIvVC3WhpJQoO4ao9r8+Lxee7zNHdNZdY85BnwlAbevrsEJyhZeLNkLleE1iOtj50ioCQmFQBPyV2NN+IedPYlXlJOBouEOtuq9rg5clCBI13q7qv1Dsw0co63Q0EXknLdENRFS+dYpjD2j56fNhilcEEZqLr7N/6AT8O/XD8MoARowzbjzc2vIlSIqKxd0L8clSevQM9HfSSCDbM7Lm6vHud7jTT6CJoi+LRQVz6snK/JpHRfT0ZtPq/kaRRQL6/6rrcXWqyspvrTNjqWQQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yR2lI2DQc3skCsWXIFrZ5xCK3zN/R9cszP1rOka+5p8=;
- b=ijYPvBvWN0lkVKZKWVS4bls/4LkC5CQ5fNqmfzqR4t3C//K7iJCAUdauSx1RsvuzWdEuZumvHK8QTpTWG3BfmDpPoktcsTv432tPD+9w74xt8Zd8UwJ1kiH9/erRUBAvfRwlz0OP6cGdKj7eRyJpiLrEJFihT+7bBNPo4nuE1aWZ1EeC0+ZP2tGZcAXKG4flrqhlxHeaKD5prAJX933RSxmPqh26mALHZgvQ4q8zmoePl5mqFI4jO/GEWyt28T2/pC5LbLUBL1KANqYA+KAWTvlfsBjHXfL9c0lWKK0SbfhFFO3po9DS59BHc1qW4nHibxiYdMRT+0STMktF0OZ1Mg==
-Received: from PH7P222MB0668.NAMP222.PROD.OUTLOOK.COM (2603:10b6:510:31b::13)
- by PH0P222MB0531.NAMP222.PROD.OUTLOOK.COM (2603:10b6:510:fe::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Tue, 2 Apr
- 2024 10:03:14 +0000
-Received: from PH7P222MB0668.NAMP222.PROD.OUTLOOK.COM
- ([fe80::8392:7df5:faab:8f4b]) by PH7P222MB0668.NAMP222.PROD.OUTLOOK.COM
- ([fe80::8392:7df5:faab:8f4b%7]) with mapi id 15.20.7409.042; Tue, 2 Apr 2024
- 10:03:12 +0000
-From: xiaofengvskuye <xiaofengvskuye@hotmail.com>
-To: kever.yang@rock-chips.com, sjg@chromium.org, philipp.tomsich@vrull.eu,
- trini@konsulko.com, lukma@denx.de, seanga2@gmail.com
-Cc: u-boot@lists.denx.de, jonas@kwiboo.se,
- xiaofengvskuye <xiaofengvskuye@hotmail.com>
-Subject: [PATCH] clk: rockchip: rk3399: Add SCLK_UART4_PMU support
-Date: Tue,  2 Apr 2024 18:02:59 +0800
-Message-ID: <PH7P222MB066847DC525C783560A6B5AADD3E2@PH7P222MB0668.NAMP222.PROD.OUTLOOK.COM>
-X-Mailer: git-send-email 2.43.2
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-TMN: [ZSRejDlTMOsA0TIGHvcKaHSEhyvn00ef8MlGej4wuX2gcmmBDoSoIDsTHFdErWf3]
-X-ClientProxiedBy: SL2P216CA0218.KORP216.PROD.OUTLOOK.COM
- (2603:1096:101:18::10) To PH7P222MB0668.NAMP222.PROD.OUTLOOK.COM
- (2603:10b6:510:31b::13)
-X-Microsoft-Original-Message-ID: <20240402100259.542540-1-xiaofengvskuye@hotmail.com>
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x52f.google.com with SMTP id
+ 4fb4d7f45d1cf-56df41365c8so303696a12.2
+ for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 03:07:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1712052463; x=1712657263; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=n8KNYEYzDnSbZLoeP+uaIJtHe3nWjwW3XqljeStN6NQ=;
+ b=dNKuPPPXYVOPQpt0uoiZpMmLpkEwCo1Y5V7Kqm/TZNCjVwQ72meA8FbmV4pvlAI+/p
+ Dn5oUdjWkInZTwty2BcXbk7a11UPX6FqRO3hg1qgUEcZyyX7M0x3909g9xrSbE5hcjVv
+ KqGnY5CJAMIpLHTuBoxZbtDhUMmLxZ/N4ZNfok69ztu81c4K6LvwvGXHBdSdh86WHSNW
+ qVz8adPXQm2hRUoUXTGxuoiRUPKe30TMnzlc7kXE1+oZyjV4cihmo6xNSd05db+k4eeA
+ 4QNUUjxm3AKBd8ZZNskapEiOzrlrowfO2uk1qkEw3Q8dMMypqlQOIGRVAB79ZFWoTnkq
+ /HCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712052463; x=1712657263;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=n8KNYEYzDnSbZLoeP+uaIJtHe3nWjwW3XqljeStN6NQ=;
+ b=c1UwsspA9eI0YTxgqOV5lEEJsgq46GcxqdqV5xrM6Ld1IqWOYdGMJ+y6Lzj9V++xFO
+ 0YGgEeFptsDvOjUuERkOrcRMXJ38iBZFJJLcjeLFMe/qUgZqYCmlT9gWQy0af5prig/U
+ QbWqxBHr364wyRMAden9ItXqzc65sQLl9FyZuSSVJHZ1JwqdvmELoU9XBkQm7MOn9h7R
+ NqBPvJVk41QFQIK0vkP11GlF4Dye9pPRYPRKDUguEd03Os1HvUIV9devDJ10eeqBB22l
+ KcsWcrmAU7IHM0lIQxkRvER+00BP6AGhoSMEC1r8F6iMNoufIXbBZA80ZR4jH7mYehv4
+ lcJA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVWkFEHZ67EHlBKzzPxTwRg7QQKPrwKKUskEhxYRhi7Aq2948qv61hyn/sfl/B9NOOE3geG0W0QdoMAB4zCL79WNfTytQ==
+X-Gm-Message-State: AOJu0Yz1rwFrL7+e12YRREMEegpVEFnHVmAlWyKiDTd9mdPq01/K0j/N
+ +WGLJANCZ4vTsx3/12jkqcFK1oZ/1Sif1SWn+lAXVeFXp+9f+crHCpfbwIcUKJ4=
+X-Google-Smtp-Source: AGHT+IFT2EvGk4+cHRQ1mGX0/k7exaAkrji2wamtYe/U4LndkaZwJ0RyfG0tYgj+19Hhb/JnXdeaPw==
+X-Received: by 2002:a17:906:5ada:b0:a47:4efb:b0f5 with SMTP id
+ x26-20020a1709065ada00b00a474efbb0f5mr7683470ejs.67.1712052462912; 
+ Tue, 02 Apr 2024 03:07:42 -0700 (PDT)
+Received: from [192.168.1.23] (i5E863A89.versanet.de. [94.134.58.137])
+ by smtp.gmail.com with ESMTPSA id
+ m16-20020a170906581000b00a4a3807929esm6308510ejq.119.2024.04.02.03.07.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 02 Apr 2024 03:07:42 -0700 (PDT)
+Message-ID: <e1ce6d8f-20f5-47af-84a3-d100f96c1b31@linaro.org>
+Date: Tue, 2 Apr 2024 12:07:41 +0200
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH7P222MB0668:EE_|PH0P222MB0531:EE_
-X-MS-Office365-Filtering-Correlation-Id: 111b7e9a-e115-4737-afcf-08dc52fc1b1f
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: NLJ0w5tzsYPR7MkbSw40kTmTceZQp71U819LcByJgsKfbB/nh3qO8aLP4mD1iqPIBnjimeaseXLtB1ofTdXSpf/VjDJvkRqTypBSZJfqUYRrAQ+jRwkPQd7lXxtbIWqZOlmGzizC2JF2+ysVfTNi2pHip6E38JZzq+q/D+rDt/4rywU6os5PnLCcGhRWwv1kDByWZQvd6ouvbJZOpkKFpc4/yx6mJ9Sf2wNkxWH5Oaz471x05ICfmdOGOv6jNxBYQ1PMk/nScqNHICoLxZTGYUEDhzRxbhvkAbMEJyLlNM6rXQob0KZ78VEGFZwU7XYSejhYtR7s6jDnJCKXxoXL/sdKeFihZCGkvZbOEcQZgF5IkFEz8hVQQpYPQx1THYCc0CEe5cADVV7Mo1zmIGw3VzO9y+RTZhBt+gigrpnrMk2UiAuKiwMI+PEwjXBwWfufslI5EJWBHuX4fQwMD1WdlOk9pBH+GTGaiX8ueoFuC8bK1t0z2kJkKSB310n1IX1X36za5seCHpavuaKzqrwAeoQPS+r+tMjERd7CCNWhMtRy4AD7PS+05FxUN0o+CmZ/hjyXBmgKuhMYp/5QCRw8EdgaCZuXQgvikmZeLYwhJtsyPX/pJ79yhoCtdMy3VP1+
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Dp1J58XnW7kI/P6GXCC4FQQMYFMctNvKUaJCGM7V4LVRQZ3L42Q+llrglxHV?=
- =?us-ascii?Q?VDVyOgzCilFBcfJELqcSixOf6ZBqb9bxUxCWUK60pMbEbQWiqkDm9JVMoSYn?=
- =?us-ascii?Q?YXYXnw2Ny3NF7RYbsj6lZzsRa4paWpQzUqbt8Al7h9ynRpsz3NwbcQI6wvEY?=
- =?us-ascii?Q?+W4I6+PiiccDH1Ph/w2uJEibrwWVLwRBukOscvoEZUTRPs8NREL+7bFeBdVE?=
- =?us-ascii?Q?pCq0vvRWSXGRlfz5j/lCM+3pDScBo81cWhHX0/+ZLGPLDd4F8wUk025B+x9k?=
- =?us-ascii?Q?ytTFe05m7K/bJASRr4sxPi7cvqbxoXM9fOeGd09GSAsN43xD9waPQhNcg2B2?=
- =?us-ascii?Q?b+PjY5UTNz4e2y6XAJi2GsFI+fPJicXNMziCFhrveTD6G+hxHF8TRX2PRVQf?=
- =?us-ascii?Q?TWrcTtu8y9vR+C8GBAeQzg6oeJwEszWIwF34jWHFc6Ku5x6z3XAkrJfmHFG2?=
- =?us-ascii?Q?/pgH4kgZhWn1rZJkJnyCm6JUMjA1+9zIOAEucRwIVSSjdmojsNOG3ImwJTAG?=
- =?us-ascii?Q?orbzzW/sC1YKH26rLOhAgTntybgViBhC4cf/RimC5Ft9tApB3TAd8jw18zV1?=
- =?us-ascii?Q?o6x/lSQv89mGra+nVgSVjgq07gqwHAW16Sk4MVS33AjeC3SuPi6K8JRE7Bgb?=
- =?us-ascii?Q?rF98TNwrXyx65ESp32FxyuN7UepIIVjcxSKnWEJm9jDuouBCEh1E8/tqhE6H?=
- =?us-ascii?Q?1n0lfyFBQ/UW2MLkMH8HEHgtddKHiZH9uIu0hdEd3IhrcHR5UqISpH8Z9KGK?=
- =?us-ascii?Q?tPuWC9gnfx3z17X5LdRls62Sp5QZ7WeH8fDHO5uBMs/OsiT/dV3u/7P2biZ+?=
- =?us-ascii?Q?LaIpEYJXQbPSBVPunB5WLULMhe5HzvwpYxf2u/WURaF4cJJBVkD9dCbOtivo?=
- =?us-ascii?Q?g5c/K+e7V1g7p+/Mz41kB9B81qe8J0DKE5+73z5mR/Pd7mzszgzEBcAqfGRy?=
- =?us-ascii?Q?+vBsgdres/lkFvs3DDzahyfYHCBVMh76xCHPxCjZTMBTNjnVXT8RXi66hWvY?=
- =?us-ascii?Q?KdQ6l7E3jK9NGDAMfz7Ehb7yCQH2booyKn9JJSCNwZ3b7gPuPxqJG0RCwQnH?=
- =?us-ascii?Q?gwMds2dAfO4Q5YVg1aoJwNTRnqErgn6cT2mbJs92WHWGMVgjaelGN0xhrkr5?=
- =?us-ascii?Q?0zyefTF+6rl5rhFLAtyhv3naHKIDg0/+CrMtRALaZtI7HqFYl6Z7MdJuprCb?=
- =?us-ascii?Q?0u9XSZiZ348EMN66jEn4RmlKDKuNoParZx2pApBSQ//qNQ9faQNcLXUPg/Oi?=
- =?us-ascii?Q?TC3VyZ4OqKjg4kZzOrrDaOV7HgtqC4c9v2H+2bcy15bbxQcN9dXPQJw0SGq4?=
- =?us-ascii?Q?xN5X9nLnnGLGAXVVT0UfmwsP?=
-X-OriginatorOrg: sct-15-20-4755-11-msonline-outlook-f13ea.templateTenant
-X-MS-Exchange-CrossTenant-Network-Message-Id: 111b7e9a-e115-4737-afcf-08dc52fc1b1f
-X-MS-Exchange-CrossTenant-AuthSource: PH7P222MB0668.NAMP222.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 10:03:12.2875 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0P222MB0531
-X-Mailman-Approved-At: Tue, 02 Apr 2024 12:05:17 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 03/16] phy: qcom: Add SNPS femto v2 USB HS phy
+Content-Language: en-US
+To: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong
+ <neil.armstrong@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de,
+ Bhupesh Sharma <bhupesh.linux@gmail.com>
+References: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
+ <20240328-b4-qcom-livetree-v5-3-4e98228b3d03@linaro.org>
+ <CAFA6WYO=_2NQckqt11b81GPZXGE13Uw9hCkO6S+F6b3ve2nDBA@mail.gmail.com>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFA6WYO=_2NQckqt11b81GPZXGE13Uw9hCkO6S+F6b3ve2nDBA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,30 +100,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The SCLK_UART4_PMU clocks is used as reference clock for UART4 block.
+Hi Sumit,
 
-Add simple support to get rate of SCLK_UART4_PMU clocks to fix
-reference clock period configuration.
+On 01/04/2024 06:46, Sumit Garg wrote:
+> On Thu, 28 Mar 2024 at 23:29, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+>>
+>> From: Bhupesh Sharma <bhupesh.linux@gmail.com>
+>>
+>> Some Qualcomm SoCs newer than SDM845 feature a so-called "7nm phy"
+>> driver, notable the SM8250 SoC which will gain U-Boot support in
+>> upcoming patches.
+>>
+>> Introduce a driver based on the Linux driver.
+>>
+>> Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+>> [code cleanup, align symbol names with Linux, switch to clk/reset_bulk APIs]
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> ---
+>>   drivers/phy/qcom/Kconfig                  |   8 ++
+>>   drivers/phy/qcom/Makefile                 |   1 +
+>>   drivers/phy/qcom/phy-qcom-snps-femto-v2.c | 207 ++++++++++++++++++++++++++++++
+>>   3 files changed, 216 insertions(+)
+>>
+...
+>> diff --git a/drivers/phy/qcom/phy-qcom-snps-femto-v2.c b/drivers/phy/qcom/phy-qcom-snps-femto-v2.c
+>> new file mode 100644
+>> index 000000000000..58eb01972402
+>> --- /dev/null
+>> +++ b/drivers/phy/qcom/phy-qcom-snps-femto-v2.c
+...
+>> +static inline void qcom_snps_hsphy_write_mask(void __iomem *base, u32 offset,
+>> +                                             u32 mask, u32 val)
+>> +{
+>> +       u32 reg;
+>> +
+>> +       reg = readl_relaxed(base + offset);
+>> +
+>> +       reg &= ~mask;
+>> +       reg |= val & mask;
+>> +       writel_relaxed(reg, base + offset);
+>> +
+>> +       /* Ensure above write is completed */
+>> +       readl_relaxed(base + offset);
+> 
+> It looks like you have missed addressing comments related to this API.
+> Again, why do we need this special handling in U-Boot? Why not just
+> clrsetbits_le32()?
 
-Signed-off-by: xiaofengvskuye <xiaofengvskuye@hotmail.com>
----
- drivers/clk/rockchip/clk_rk3399.c | 3 +++
- 1 file changed, 3 insertions(+)
+I have tried to find more info about this, but from what I can tell it's 
+important (my guess is that it's a weird bus arbitration thing with the 
+QMP phy's).
 
-diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
-index c37e8a53a2..41eb13533a 100644
---- a/drivers/clk/rockchip/clk_rk3399.c
-+++ b/drivers/clk/rockchip/clk_rk3399.c
-@@ -1563,6 +1563,9 @@ static ulong rk3399_pmuclk_get_rate(struct clk *clk)
- 	case SCLK_I2C8_PMU:
- 		rate = rk3399_i2c_get_pmuclk(priv->pmucru, clk->id);
- 		break;
-+    case SCLK_UART4_PMU:
-+		return 24000000;
-+        break;
- 	default:
- 		return -ENOENT;
- 	}
+If I replace this with clrsetbits_le32() then my SM8250 board crashdumps 
+while probing USB. So it is needed (and I'm wondering now if I ought to 
+switch back to this for the dwc3 qcom glue as well).
+> 
+> -Sumit
+> 
+>> +}
+>> +
+>> +static int qcom_snps_hsphy_usb_init(struct phy *phy)
+>> +{
+>> +       struct qcom_snps_hsphy *priv = dev_get_priv(phy->dev);
+>> +
+>> +       qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_CFG0,
+>> +                                  UTMI_PHY_CMN_CTRL_OVERRIDE_EN,
+>> +                                  UTMI_PHY_CMN_CTRL_OVERRIDE_EN);
+>> +       qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_UTMI_CTRL5, POR,
+>> +                                  POR);
+>> +       qcom_snps_hsphy_write_mask(priv->base,
+>> +                                  USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0, FSEL_MASK, 0);
+>> +       qcom_snps_hsphy_write_mask(priv->base,
+>> +                                  USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON1,
+>> +                                  PLLBTUNE, PLLBTUNE);
+>> +       qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_REFCLK_CTRL,
+>> +                                  REFCLK_SEL_DEFAULT, REFCLK_SEL_MASK);
+>> +       qcom_snps_hsphy_write_mask(priv->base,
+>> +                                  USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON1,
+>> +                                  VBUSVLDEXTSEL0, VBUSVLDEXTSEL0);
+>> +       qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_CTRL1,
+>> +                                  VBUSVLDEXT0, VBUSVLDEXT0);
+>> +
+>> +       qcom_snps_hsphy_write_mask(priv->base,
+>> +                                  USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON2,
+>> +                                  VREGBYPASS, VREGBYPASS);
+>> +
+>> +       qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_CTRL2,
+>> +                                  USB2_SUSPEND_N_SEL | USB2_SUSPEND_N,
+>> +                                  USB2_SUSPEND_N_SEL | USB2_SUSPEND_N);
+>> +
+>> +       qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_UTMI_CTRL0,
+>> +                                  SLEEPM, SLEEPM);
+>> +
+>> +       qcom_snps_hsphy_write_mask(
+>> +               priv->base, USB2_PHY_USB_PHY_HS_PHY_CTRL_COMMON0, SIDDQ, 0);
+>> +
+>> +       qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_UTMI_CTRL5, POR,
+>> +                                  0);
+>> +
+>> +       qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_HS_PHY_CTRL2,
+>> +                                  USB2_SUSPEND_N_SEL, 0);
+>> +
+>> +       qcom_snps_hsphy_write_mask(priv->base, USB2_PHY_USB_PHY_CFG0,
+>> +                                  UTMI_PHY_CMN_CTRL_OVERRIDE_EN, 0);
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +static int qcom_snps_hsphy_power_on(struct phy *phy)
+>> +{
+>> +       struct qcom_snps_hsphy *priv = dev_get_priv(phy->dev);
+>> +       int ret;
+>> +
+>> +       clk_enable_bulk(&priv->clks);
+>> +
+>> +       ret = reset_deassert_bulk(&priv->resets);
+>> +       if (ret)
+>> +               return ret;
+>> +
+>> +       ret = qcom_snps_hsphy_usb_init(phy);
+>> +       if (ret)
+>> +               return ret;
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +static int qcom_snps_hsphy_power_off(struct phy *phy)
+>> +{
+>> +       struct qcom_snps_hsphy *priv = dev_get_priv(phy->dev);
+>> +
+>> +       reset_assert_bulk(&priv->resets);
+>> +       clk_disable_bulk(&priv->clks);
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +static int qcom_snps_hsphy_phy_probe(struct udevice *dev)
+>> +{
+>> +       struct qcom_snps_hsphy *priv = dev_get_priv(dev);
+>> +       int ret;
+>> +
+>> +       priv->base = dev_read_addr_ptr(dev);
+>> +       if (IS_ERR(priv->base))
+>> +               return PTR_ERR(priv->base);
+>> +
+>> +       ret = clk_get_bulk(dev, &priv->clks);
+>> +       if (ret < 0 && ret != -ENOENT) {
+>> +               printf("%s: Failed to get clocks %d\n", __func__, ret);
+>> +               return ret;
+>> +       }
+>> +
+>> +       ret = reset_get_bulk(dev, &priv->resets);
+>> +       if (ret < 0) {
+>> +               printf("failed to get resets, ret = %d\n", ret);
+>> +               return ret;
+>> +       }
+>> +
+>> +       clk_enable_bulk(&priv->clks);
+>> +       reset_deassert_bulk(&priv->resets);
+>> +
+>> +       return 0;
+>> +}
+>> +
+>> +static struct phy_ops qcom_snps_hsphy_phy_ops = {
+>> +       .power_on = qcom_snps_hsphy_power_on,
+>> +       .power_off = qcom_snps_hsphy_power_off,
+>> +};
+>> +
+>> +static const struct udevice_id qcom_snps_hsphy_phy_ids[] = {
+>> +       { .compatible = "qcom,sm8150-usb-hs-phy" },
+>> +       { .compatible = "qcom,usb-snps-hs-5nm-phy" },
+>> +       { .compatible = "qcom,usb-snps-hs-7nm-phy" },
+>> +       { .compatible = "qcom,usb-snps-femto-v2-phy" },
+>> +       {}
+>> +};
+>> +
+>> +U_BOOT_DRIVER(qcom_usb_qcom_snps_hsphy) = {
+>> +       .name = "qcom-snps-hsphy",
+>> +       .id = UCLASS_PHY,
+>> +       .of_match = qcom_snps_hsphy_phy_ids,
+>> +       .ops = &qcom_snps_hsphy_phy_ops,
+>> +       .probe = qcom_snps_hsphy_phy_probe,
+>> +       .priv_auto = sizeof(struct qcom_snps_hsphy),
+>> +};
+>>
+>> --
+>> 2.44.0
+>>
+
 -- 
-2.43.2
-
+// Caleb (they/them)
