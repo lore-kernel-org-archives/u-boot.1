@@ -4,40 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC6A9CD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 11:29:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E2F5C6FD1F
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 11:32:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DF038812C;
-	Tue,  2 Apr 2024 13:29:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id DF22588130;
+	Tue,  2 Apr 2024 13:32:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="Z+iyNRcC";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0085988130; Tue,  2 Apr 2024 13:29:30 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A615688123
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 13:29:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vincent.stehle@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D81C01007;
- Tue,  2 Apr 2024 04:29:58 -0700 (PDT)
-Received: from localhost.localdomain (X72Y076X74.nice.arm.com [10.34.129.30])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id
- 401FF3F766; Tue,  2 Apr 2024 04:29:26 -0700 (PDT)
-From: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>
-To: u-boot@lists.denx.de
-Cc: =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Michal Simek <michal.simek@amd.com>
-Subject: [PATCH] trace: use dynamic string buffer in make_flamegraph()
-Date: Tue,  2 Apr 2024 13:29:16 +0200
-Message-ID: <20240402112916.1613819-1-vincent.stehle@arm.com>
-X-Mailer: git-send-email 2.43.0
+ id A17348813F; Tue,  2 Apr 2024 13:32:21 +0200 (CEST)
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur02on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2608::700])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 761BB8812F
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 13:32:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=theobroma-systems.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=quentin.schulz@theobroma-systems.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=QbuQw5RBXHQL2fX2J6VPx2eohnMNwOtpCoXu5dHHWhSiJUuJUJ8tyG1/0VXWZab4WZFiRrHH/tG5VMwu0zzoRPj6SQTfloleSQIi/N3oPvGYK0NX4DjL+iMXu40k2zu6mxrGnAhJIjnqbwSQo6dO740hmVMI5TRRFlDRiqB2MjHr//P5EeAlWEO0qnRw9hJgwiuoeEku06uhSbaI1km+2ql6Ngz5i2b2PDjk9EmeOKHwXN9ktnnnbtDjEs1adxOfM3+QqMyduOF2SScFjjjEjeJjRwJl+Fg969qrsos2vi/fM7hXCml491d/LeWmT9Ibwkg3yx9UAxDkLde9BDeMOA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fyqNov2xjy4grUnpOEQtJvzAmiZF7kOj91kKPQE+EZI=;
+ b=gPOLo8OffivmTT0E8K5fo1xJXNKAulifzmH9eNoZ+CiOqwf72zLkNB6nvIuVOifTzHsWPYcL5R9lJwddA7mPgSuFbn/rG5s4JldUSrmxDVypVWKT8mbJKU3HBgiKsNrN3Iu5eq6W0i7krbeZfKatHgAikzJSqMahGplaAOHoucRLVojze4iih2FOT+ck6Ew8ryHeMCVm2QujXdVRkvY49gSIrsh/NI4m711dgfQyBgABenVEGHDYNu3Vh7Z+Lho//1k4T24qnfktwGT2bDH3SM1vovm9A+TCQhVjdKgejFn1AA3cKuCO/hzzhthDolSvsZec9Se0OLOpXpHt05DQkg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
+ header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fyqNov2xjy4grUnpOEQtJvzAmiZF7kOj91kKPQE+EZI=;
+ b=Z+iyNRcChQ8GCjIbmqhkpg7mzkmWTrUFm18t0bPeUpzI5rY8AaXM9fPSTR70x9qLRgSwd5jaseOfwXpUBAFFKq16BqAXKpphNo2YgIA+huw115W/eZNJU/3FoNThYZA6+NaThes9olFTAutjjkVUrEOPdQsWVBD4NnmvIJTkgSy3SABIDc14gHk/jO5+gp/4j2WwiyuPTG9H6yzt1k59ZmUj9r+MPE3soyTYHa0S1W9Ibm3SgC3C7A5RzCjZj9i3J2DWAGawk63UF4NjwI38vzlz/yILMSNbTUeoA9cTeHZKz8o/HUNCIWJBXwAnXds6hSzCVDbxxGyKwizpGV089w==
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
+ by PAXPR04MB9642.eurprd04.prod.outlook.com (2603:10a6:102:240::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Tue, 2 Apr
+ 2024 11:32:05 +0000
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::3e70:7029:faf2:7779]) by DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::3e70:7029:faf2:7779%3]) with mapi id 15.20.7409.042; Tue, 2 Apr 2024
+ 11:32:05 +0000
+Message-ID: <f5416379-7240-48f8-b9ed-f39efd11afdc@theobroma-systems.com>
+Date: Tue, 2 Apr 2024 13:32:03 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] clk: rockchip: rk3399: Add SCLK_UART4_PMU support
+To: xiaofengvskuye <xiaofengvskuye@hotmail.com>, kever.yang@rock-chips.com,
+ sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com,
+ lukma@denx.de, seanga2@gmail.com
+Cc: u-boot@lists.denx.de, jonas@kwiboo.se
+References: <PH7P222MB0668C67CD89312A9CED6E64DDD3E2@PH7P222MB0668.NAMP222.PROD.OUTLOOK.COM>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+In-Reply-To: <PH7P222MB0668C67CD89312A9CED6E64DDD3E2@PH7P222MB0668.NAMP222.PROD.OUTLOOK.COM>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA1P291CA0012.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:19::9) To DU2PR04MB8536.eurprd04.prod.outlook.com
+ (2603:10a6:10:2d7::10)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|PAXPR04MB9642:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: HN4qHXUJh9yaJmZ2bJ+ZYiK98AIS3G4yIpIAYmkebJTtYCebblsAGXgBc/a+fgo3qO0ANyYimg2eRqmFm/EFhmDaFkfPw8HBynxKJ3jMdzjUKiwoj8nAZGUWFaABjy6rkXju3DwrYwfXLTNRr3398ilqiyE4ZJnENpYTIEHbUPEDL2czn8SAEqubi2ctkIKcUKX7qIkUJvu4h3R6JjpfpaFnMWSpxUTuosh1uzcM2whwc5lJjxU47w2Px617TXZbE7jHocaUKT+DAw/IO4jiRrthW82ibSVl1kIY3VnHmdm7kQaGUlR4Qi6ZsGUv0c1uyrMtnYTjVv6XOlyABqiePNMQ79xiuEylEmXLbXGXKBPQBX89LfTk3sla7I3wIITNbuUVlxrfIemk9vmNoKQOxDs11Knv97YNbm6vD96zfOcOvZNKgyzWqodUD5SU970rgwGZxQM2PyubSLYuabOV1c6mS2bFuqjzn2HSA2Zn1VWqYkh+ZV5M2mVSCe7xy5qd+k9rgdDtqMUJFX1/4mWO/bwc+U7MgR/Hlz4nFLL5lmBsSP5kJPF7BYYbilQH4iK0+mAF8DuisW4ARFk3/ebt7K4WcFl0MxeQ7N61plPa6YKQl/Q793TlKUmvQueSE9EiL0FRJI9nfwYlVzRCu454pPltVHrdFIf//+ejTlflEtQ=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(1800799015)(376005); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RVpnRU5nVTExVmJSTkJKNlk4YklGTG1pOEwrb0tGQ3pYejJaRWFteElkNG9Y?=
+ =?utf-8?B?ajZ3WVZzNU5rMEJSdzF0dlVsWFRsejJPZlhaR2ozdytYV1p1MXptNTVWKzZy?=
+ =?utf-8?B?cDVBcHE3UXliYmptTmxBT2dwWDZ4V29IMmdMUnF5dmp2TUJEdWx0L1JkUndF?=
+ =?utf-8?B?R3FOR2NMa2NMcmtpMjhYNjZKeE1RSi9UMytxQmpNcFNTVVpnYnhZVVNYbUxh?=
+ =?utf-8?B?bUl4bFFaNDJ3R1dpTldOeEZmTjFnbWlGajFMUGpEdHY1UDNuQzVJWWRhMko0?=
+ =?utf-8?B?US8rK3VFNTR6KzN6Q1pDZHRCd0hzYjlLNFAvQmQyL3cwQmd3aC9aU2s4OWZi?=
+ =?utf-8?B?dzZHbUptbzBUcS9NZlpTamlyRjhxV0RZN0VPSTA3WURpUy9md1Y4YU53eG9D?=
+ =?utf-8?B?RGYvZ0ZuVDRuMkhIOXlFMEVpbTA2NVlHVmxjMmhjWjZudWRBRFVremkvcVJ0?=
+ =?utf-8?B?bVZQTE9EdHJhb2JKajROVHQwcklaZFdNS2QvNnBObEUwL0FTbjZsNlFYMGRh?=
+ =?utf-8?B?RnQvMm5FemxkU1RhZEtQczMzam5SZU9EMEFnbmJNMThmaWdrRFNPeDJtWHlX?=
+ =?utf-8?B?ckFTUHFDSGlmUGg0UVh6V1hZNmY5YlJqQW80UGp6T3dINk4wd2t3Vlk3N0pR?=
+ =?utf-8?B?c0dDNkIrVFJkRTZ2Q2p2aC9mODd6bklkOUNITGZMYTIxMU85amhMNFRUZ05K?=
+ =?utf-8?B?WkpOMWd4ZDZEc3VsY1ZORElzdGhjc1hJcEpMd1hheXFxaktBZFdzQktqYjZi?=
+ =?utf-8?B?OW0rcWRwYTJ6eklZU3RwTWVXa09PWDNvZmU2MVA2dEV2RnpiSmYrTWhQSHI3?=
+ =?utf-8?B?OEc4ZDRoUXVYanlYSTRJRFQxNTI1citSRW4rTHJoUWh3ZWVWTHh6OEx3Mmd6?=
+ =?utf-8?B?VVdvTjZlSzBhendCbnplcDJzNHRwSEhmK2dyeXFwYUJSckEvVE53Q0p4TlJH?=
+ =?utf-8?B?MjQybEtOVUJBV09UMWgwajIvMlFhWkdlV2tlTFpaMWVnQkxrSWtaR0VET01K?=
+ =?utf-8?B?NGs4VEJQL3VMdUNYU2hwU2thTHZHUGdjaGdyTjFVY0lxcXJqbCtBOUc4WHZR?=
+ =?utf-8?B?YXcwRTJNM0RtdUI1bXpQSmpTY0V1UXVpT01SU04vbG9aWmZpeXgwVG90YW9s?=
+ =?utf-8?B?TytrM3BLWmlHTHdRVStEUEZGZjdIREtjTlNKdHNqcm9IclJNaGh5U1JvSitw?=
+ =?utf-8?B?MnY2OCtiNWltVURycStkL3d6WStHdWZBOWIwODd4dzVOd0svSXY4RXhPMzAz?=
+ =?utf-8?B?YVNkdUpRWVF0SDNyeEpsZGlmelVXcElxWUdCaWM4clZEOTVhSHhpckhQR0I3?=
+ =?utf-8?B?a3lDaGtyTzN3N0dQcEtsakpFdTdxYUNVZG8renBpZlRYeXNiQmtaZW1xd0xI?=
+ =?utf-8?B?bWJ5bGF0elc0ZDhuNjJZbi93SlFBbS9WdkxiUWpzaFpJdEljTlpJQUxLbW1m?=
+ =?utf-8?B?VlBhR1FRWCtscEJFbXBzWldERnB6ajkrZU9SdldiTWxmRGlNaE1DUFNhSXRI?=
+ =?utf-8?B?TmhGQ2c2RDlrelhGTmltMjhCM1VXTkh5YitZZ3VvMG90blhHSzA3Z0oyV1Ri?=
+ =?utf-8?B?blFqeHRlM2ZkZExTNDVSN0M2K0JPWFlPcS9FRytzL1JMTHM3S21YTzlmajcy?=
+ =?utf-8?B?S3lBNXE1NXhtaUlvbW1oZkV5YTlMUkZMRUMyaUJ6NVVhK2NuV1pVeTNpSHFE?=
+ =?utf-8?B?WTBTQ3lMdFpRRzlFaTV4Z0JJSTJIWUNpNElzYUlnNkc0R01jYng1ckJaeEx4?=
+ =?utf-8?B?RkZZa3llUjJseUxuRmlPa3pSY3RtSE40eklUZ0xuYUswSXhLakZQVUVRU0FN?=
+ =?utf-8?B?UzBoWXVxY0cvOHJaMDNYTG11QXczY1gyWEpnV20yK3BNMVp1MURrZXk0MUxI?=
+ =?utf-8?B?SlZYaml4WUEvejJDWVpVVys4WjZzT3NDZ1FpTjgrc1Rrd0QrMmo4VkJla0hm?=
+ =?utf-8?B?alN3L1JhcU1VcHJ6OHZvRlVNN29yb1BIeTVkMWtRbjFiUDgyTzVlTTFlcjVo?=
+ =?utf-8?B?YmFnNmMzMWxhRGZPNnBNTTA4SE0yRGNSV1RpTytNN2NXd3E2bzlFbE1hekF5?=
+ =?utf-8?B?aEZYblBOVCtwVE1wYktiVE1zTHRQYlYvS0krbWV4bkk0LzcyVXhyTXMrSzBF?=
+ =?utf-8?B?ejNPYjNMN1NxSEZHekV1VnpmcndheThpaVZhWEZSTXpmY1ZLOEVoS21oa1Jq?=
+ =?utf-8?Q?08/jboNCjNs+nCg1cPIcXCU=3D?=
+X-OriginatorOrg: theobroma-systems.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d2428f57-fe17-4f24-6bf2-08dc53088611
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 11:32:05.7092 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: AQJ/tYDl4CT9CHrwQFyZiWHOfEIYVHbqeCTqFPSHDvagRv+xvqN9f2D5urhJHMLU06rqxNG46Fkw0C+LFsBhB7vaycUredRMa0qsbon1m8SksBApU0HYM+QoSZQM2224
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9642
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,202 +143,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The str[] buffer declared in make_flamegraph() is used to hold strings
-representing the full call-stacks recorded in traces. The size of this
-buffer is currently 500 characters and this works well for the documented
-examples.
-
-However, it is possible to exhaust this buffer when processing traces
-captured when running the UEFI shell on aarch64 sandbox for example.
-Indeed, the maximum length needed for such traces can reach 780 characters.
-
-As it is difficult to evaluate the maximum size that would ever be needed
-for all the possible traces, let's use a dynamically allocated `abuf'
-instead, which we reallocate when needed.
-
-This fixes the following error:
-
-  String too short (500 chars)
-
-While at it, fix a few typos in strings and comments.
-
-Signed-off-by: Vincent Stehlé <vincent.stehle@arm.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Michal Simek <michal.simek@amd.com>
----
-
-
 Hi,
 
-This can be verified using the `test_trace.py' pytest as a starting point.
+On 4/2/24 12:01, xiaofengvskuye wrote:
+> [You don't often get email from xiaofengvskuye@hotmail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> The SCLK_UART4_PMU clocks is used as reference clock for UART4 block.
+> 
+> Add simple support to get rate of SCLK_UART4_PMU clocks to fix
+> reference clock period configuration.
+> 
+> Signed-off-by: xiaofengvskuye <xiaofengvskuye@hotmail.com>
+> ---
+>   drivers/clk/rockchip/clk_rk3399.c | 2 ++
+>   1 file changed, 2 insertions(+)
+> 
+> diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
+> index c37e8a53a2..a9114c4b02 100644
+> --- a/drivers/clk/rockchip/clk_rk3399.c
+> +++ b/drivers/clk/rockchip/clk_rk3399.c
+> @@ -1563,6 +1563,8 @@ static ulong rk3399_pmuclk_get_rate(struct clk *clk)
+>          case SCLK_I2C8_PMU:
+>                  rate = rk3399_i2c_get_pmuclk(priv->pmucru, clk->id);
+>                  break;
+> +    case SCLK_UART4_PMU:
+> +               return 24000000;
 
-Configure with `sandbox_defconfig' plus the following options:
+Please be mindful about the indentation.
 
-  CONFIG_TRACE=y
-  CONFIG_TRACE_BUFFER_SIZE=0x02000000
-  CONFIG_TRACE_EARLY=y
-  CONFIG_TRACE_EARLY_SIZE=0x01000000
+Additionally, UART4 can be at a different rate than 24MHz, it depends on 
+the value of uart4_clk_sel (which defaults to 24MHz source clock, indeed).
 
-Build with:
+I would suggest to do this support entirely and handle all three clock 
+sources and return the current rate.
 
-  make FTRACE=1 NO_LTO=1
-
-Run the test with:
-
-  ./test/py/test.py --bd sandbox --build-dir . -k trace -s
-
-Note that no reallocation happens during the test as the initial size of
-500 characters is never exhausted; reduce the size manually if you want to
-force re-allocation.
-
-Also, make sure to delete /tmp/test_trace between tests.
-
-Best regards,
-Vincent Stehlé
-
-
- tools/proftool.c | 58 ++++++++++++++++++++++++++++++++----------------
- 1 file changed, 39 insertions(+), 19 deletions(-)
-
-diff --git a/tools/proftool.c b/tools/proftool.c
-index fca45e4a5af..c2e38099354 100644
---- a/tools/proftool.c
-+++ b/tools/proftool.c
-@@ -290,7 +290,7 @@ static void usage(void)
- 		"Options:\n"
- 		"   -c <cfg>\tSpecify config file\n"
- 		"   -f <subtype>\tSpecify output subtype\n"
--		"   -m <map>\tSpecify Systen.map file\n"
-+		"   -m <map>\tSpecify System.map file\n"
- 		"   -o <fname>\tSpecify output file\n"
- 		"   -t <fname>\tSpecify trace data file (from U-Boot 'trace calls')\n"
- 		"   -v <0-4>\tSpecify verbosity\n"
-@@ -306,7 +306,7 @@ static void usage(void)
- }
- 
- /**
-- * h_cmp_offset - bsearch() function to compare two functions bny their offset
-+ * h_cmp_offset - bsearch() function to compare two functions by their offset
-  *
-  * @v1: Pointer to first function (struct func_info)
-  * @v2: Pointer to second function (struct func_info)
-@@ -431,7 +431,7 @@ static struct func_info *find_func_by_offset(uint offset)
- static struct func_info *find_caller_by_offset(uint offset)
- {
- 	int low;	/* least function that could be a match */
--	int high;	/* greated function that could be a match */
-+	int high;	/* greatest function that could be a match */
- 	struct func_info key;
- 
- 	low = 0;
-@@ -1352,7 +1352,7 @@ static int write_pages(struct twriter *tw, enum out_format_t out_format,
- 		}
- 
- 		if (!(func->flags & FUNCF_TRACE)) {
--			debug("Funcion '%s' is excluded from trace\n",
-+			debug("Function '%s' is excluded from trace\n",
- 			      func->name);
- 			skip_count++;
- 			continue;
-@@ -1781,7 +1781,8 @@ static int make_flame_tree(enum out_format_t out_format,
-  *
-  * This works by maintaining a string shared across all recursive calls. The
-  * function name for this node is added to the existing string, to make up the
-- * full call-stack description. For example, on entry, @str might contain:
-+ * full call-stack description. For example, on entry, @str_buf->data might
-+ * contain:
-  *
-  *    "initf_bootstage;bootstage_mark_name"
-  *                                        ^ @base
-@@ -1795,18 +1796,18 @@ static int make_flame_tree(enum out_format_t out_format,
-  * @fout: Output file
-  * @out_format: Output format to use
-  * @node: Node to output (pass the whole tree at first)
-- * @str: String to use to build the output line (e.g. 500 charas long)
-- * @maxlen: Maximum length of string
-+ * @str_buf: String buffer to use to build the output line
-  * @base: Current base position in the string
-  * @treep: Returns the resulting flamegraph tree
-  * Returns 0 if OK, -1 on error
-  */
- static int output_tree(FILE *fout, enum out_format_t out_format,
--		       const struct flame_node *node, char *str, int maxlen,
-+		       const struct flame_node *node, struct abuf *str_buf,
- 		       int base)
- {
- 	const struct flame_node *child;
- 	int pos;
-+	char *str = abuf_data(str_buf);
- 
- 	if (node->count) {
- 		if (out_format == OUT_FMT_FLAMEGRAPH_CALLS) {
-@@ -1832,18 +1833,29 @@ static int output_tree(FILE *fout, enum out_format_t out_format,
- 	if (pos)
- 		str[pos++] = ';';
- 	list_for_each_entry(child, &node->child_head, sibling_node) {
--		int len;
-+		int len, needed;
- 
- 		len = strlen(child->func->name);
--		if (pos + len + 1 >= maxlen) {
--			fprintf(stderr, "String too short (%d chars)\n",
--				maxlen);
--			return -1;
-+		needed = pos + len + 1;
-+		if (needed > abuf_size(str_buf)) {
-+			/*
-+			 * We need to re-allocate the string buffer; increase
-+			 * its size by multiples of 500 characters.
-+			 */
-+			needed = 500 * ((needed / 500) + 1);
-+			if (!abuf_realloc(str_buf, needed))
-+				return -1;
-+			str = abuf_data(str_buf);
-+			memset(str + pos, 0, abuf_size(str_buf) - pos);
- 		}
- 		strcpy(str + pos, child->func->name);
--		if (output_tree(fout, out_format, child, str, maxlen,
--				pos + len))
-+		if (output_tree(fout, out_format, child, str_buf, pos + len))
- 			return -1;
-+		/*
-+		 * Update our pointer as the string buffer might have been
-+		 * re-allocated.
-+		 */
-+		str = abuf_data(str_buf);
- 	}
- 
- 	return 0;
-@@ -1859,16 +1871,24 @@ static int output_tree(FILE *fout, enum out_format_t out_format,
- static int make_flamegraph(FILE *fout, enum out_format_t out_format)
- {
- 	struct flame_node *tree;
--	char str[500];
-+	struct abuf str_buf;
-+	char *str;
-+	int ret = 0;
- 
- 	if (make_flame_tree(out_format, &tree))
- 		return -1;
- 
--	*str = '\0';
--	if (output_tree(fout, out_format, tree, str, sizeof(str), 0))
-+	abuf_init(&str_buf);
-+	if (!abuf_realloc(&str_buf, 500))
- 		return -1;
- 
--	return 0;
-+	str = abuf_data(&str_buf);
-+	memset(str, 0, abuf_size(&str_buf));
-+	if (output_tree(fout, out_format, tree, &str_buf, 0))
-+		ret = -1;
-+
-+	abuf_uninit(&str_buf);
-+	return ret;
- }
- 
- /**
--- 
-2.43.0
-
+Cheers,
+Quentin
