@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 551A6CD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 13:22:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48E50CD1284
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 13:34:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C777C88157;
-	Tue,  2 Apr 2024 15:22:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7ABA58808D;
+	Tue,  2 Apr 2024 15:34:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="L5C/q4IV";
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="TKnxcmDg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDD9588124; Tue,  2 Apr 2024 15:22:51 +0200 (CEST)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20713.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e1a::713])
+ id 882068815E; Tue,  2 Apr 2024 15:34:10 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::700])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E7B58815A
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 15:22:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D0B2188149
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 15:34:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=quentin.schulz@theobroma-systems.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=d0vqtRARtoJEq8ZgViBiw+XM0gXdGFtbyNzz5VWHhvd03Xu/d19fx4XybiBocmQDi31S2O3/mSpmEot7RHqxb5Mi/L8MnWVIUcWnc3Y/M7rYFqImad/baLb6pOfuOhHqCsgemEyeRRbhFTAc0MJUECH4KU8AbkeHECVOuyl1kFEmnK0JXyqbI1DH4Q+l+iKxifyyPZA3p79Lo6I1c10nDzcYnyqi1NPSHI2EK6r0xM6uDBDOTy4qQVuHfQLLznSJKlhLVI1UK0YIlapvNsR5xL+4GZ/K7J+AW7ZPyofkj1ofSWv3eZc6qtFO612Y/xNzCPjjBuWfgV78Cg9RumlmZA==
+ b=HLPhjJ7yPQ7bdbG0AvttNV2Dhv80mz/xZTpWQWpwB2twllzQjBRKxtg5Dlt7ZrjDzn3p8nGNZAKTEOT5BkjUB+MpuA0EDZFrtgc5ALArwiBCcCte6o6bExWjyx2LYsfb4goExF+DRXPxsfuAekLSOToOonH8aNkUxdXmBWiHsnbZQqJ2BNWhiyXJv3qYfDssLclBkRn7A8RFdh6vHW2XFS7oxaMSAC7Z50OCmf8SyAD4PNjCofYsR2BK7el42pzwGCGs14cxv12Cyq4Psx29nODVCF8GaOlSY4t2SMIliISt51I1XL7uvs6UiegClR1Nj5jSGgl6RLEODDYD+aZtkg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=n5A2EHHoS5jcNBYxgb71HYTJ4NxqZ/Yf1Nx4N199jmQ=;
- b=Bp+X2DBA2Zwx59UkAlgZ1dX6Sh8h6jke4fuVKPOnGfGa3mM9611wtP61Ka+/cVjTMeJzSTzP8lP1qY5ejpXqCTOGaUeU/dT+elPiNlD1DtQIppqCM+QTA5a/2glt6UnjHtNJdwLL9mC6x/xsKA/IVfOIGnjqim98AVgMwd1XNsgjgk2VffLXiI1gVnUDEPBJtn8fN0GkRFPkPSjL6SsASrnpG0MxKujOzydGdHyePabVa2Buut7wz1sfU7HtfPqOBl2ErjNO15UAlLRVKP47ymqBcym9eXrTRScFjeLvIy/8c9wI8PJXXjlVlH++rf+GKrCGVRJaMQ/yNyfWaaQNDQ==
+ bh=haia4p6sX4OFqxEuBp359gKadqaIQbOADfvyuB7rKZ0=;
+ b=i7ROpcHC0X5+chGVjGFlExrkS8gHhvIDJg1IjCBYv2wOdO7v5xLrQ5X4CFnuMpwOtXBq/EA4GWa3tFxNJjspHM/W2ioOT6yeIuCQBdsJENWrx22C9TO+z6TWWuPY9aL2xdH/aNAcbYMGieQ9qurQWUMTjmui7hd4Pjs4PifuGliOXc3jv8+YiitS38UH/AdSLv3n6qoZlA8er3zJzzQ4WeJZUr2+U1dhH32mmRIMhaBGvJmXqMKik0ouUfoeQ2A5Xc3JhfPgN/42DsNnT3mV6aXwc5NNot1n+eYBNq6ugiaLUm7pn2gykfci3AiUdmZLkYkGp7OgrSaMmXEcWMJm1A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
  header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
@@ -41,98 +41,95 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n5A2EHHoS5jcNBYxgb71HYTJ4NxqZ/Yf1Nx4N199jmQ=;
- b=L5C/q4IVxTxapFiTgVnDDiFbgi9lFC3NjChIiVNDpaGl31OCm7sta7YNrT+YiDlR2q2m2L52bQm8EgwANEjYeIdCw3DTLRYgAqTJTHMHDJuh4TD0kRL2FSSNcSIvMqhXIAWYE/hsITf9n5yLe/OoxmQoTjkirt1V0kvKyZKIuUUKj0WksBiWszXTExlPFn6VLWRBvmv9ZhtWxMn9vpJ2TO7/KhGyCaqmMAXNQkpb83Uck8A4gEQi+0iEQ0S7wjS8vQ9fmIM29SpjjlggYbt470Ot6QVKvRkLcTUVT/q0qMEOZqwK5GD7HKjXkJpdqxN0c/O3wzDK84ATDeBf9Z5PsQ==
+ bh=haia4p6sX4OFqxEuBp359gKadqaIQbOADfvyuB7rKZ0=;
+ b=TKnxcmDgjYSnpT4yuKKBSDww7nNQTPWuQ3JW9XIfjuQ292JG09hZcge1AXheTFZLHNV5WSbEF7AO+ErQ4VbPoeurGQOoHhOA25WfSQu8ofFvjd+4jxI7NfNJZXz6Bv7N8jGTMoX3xUSVtYwfjajVWL4EKmSz0JIsqmnANnaHJ+7yK5mENmXPsvqfohclp1MFVulzmipNbZ2vKVCznzPeWWvSlk8xm5OB1BzMzjsvr4WnsbBIS5EgSiDLrR0ygiM8p8XO+VF/f5TYeFH8R77Nl6BIS85+4cuN9iipl98ZHKb4TWHBSvYvKwoxgSFQfWH9BCdnqRoSgYYlsV6a4pnA5g==
 Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
- by AS8PR04MB8053.eurprd04.prod.outlook.com (2603:10a6:20b:2ad::12)
+ by AM8PR04MB7348.eurprd04.prod.outlook.com (2603:10a6:20b:1db::21)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Tue, 2 Apr
- 2024 13:22:48 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7339.32; Tue, 2 Apr
+ 2024 13:34:05 +0000
 Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
  ([fe80::3e70:7029:faf2:7779]) by DU2PR04MB8536.eurprd04.prod.outlook.com
  ([fe80::3e70:7029:faf2:7779%3]) with mapi id 15.20.7409.042; Tue, 2 Apr 2024
- 13:22:47 +0000
-Message-ID: <758118bd-e7b5-43ad-a9b5-4203afc058f2@theobroma-systems.com>
-Date: Tue, 2 Apr 2024 15:22:45 +0200
+ 13:34:05 +0000
+Message-ID: <f8650292-d808-4fcf-a794-3236cf117a37@theobroma-systems.com>
+Date: Tue, 2 Apr 2024 15:34:03 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 04/31] rockchip: rk3399: Enable ARMv8 crypto and FIT
- checksum validation
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andy Yan <andy.yan@rock-chips.com>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Christopher Obbard <chris.obbard@collabora.com>,
- Jagan Teki <jagan@amarulasolutions.com>
-Cc: u-boot@lists.denx.de
-References: <20240331202921.262323-1-jonas@kwiboo.se>
- <20240331202921.262323-5-jonas@kwiboo.se>
+Subject: Re: [PATCH 18/19] rockchip: rk356x-generic: Add support for SPI flash
+ and USB OTG
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20240329190224.3613471-1-jonas@kwiboo.se>
+ <20240329190224.3613471-19-jonas@kwiboo.se>
+ <d10bd351-5005-427f-bc41-ebe547e5bda6@theobroma-systems.com>
+ <021954a9-0047-4c7c-8cbc-734dd85014bd@kwiboo.se>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <20240331202921.262323-5-jonas@kwiboo.se>
+In-Reply-To: <021954a9-0047-4c7c-8cbc-734dd85014bd@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA1P291CA0023.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:19::7) To DU2PR04MB8536.eurprd04.prod.outlook.com
+X-ClientProxiedBy: WA1P291CA0019.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:19::23) To DU2PR04MB8536.eurprd04.prod.outlook.com
  (2603:10a6:10:2d7::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|AS8PR04MB8053:EE_
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|AM8PR04MB7348:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: BxYdSwvY925v6dbdfhNVvtNdsRZiK1ggfkByFq3fBArRVn6BBNW+rbWGqpu1SGx9BN9kEZuncq4dFJSC5HSm30t1va+n/ZnOiCvPWLT2ZzwD5JEyXTlszBIXd3QwmRwL7MKTkELOebXGmuJk7IwQzyvqWi5N8hwzoyjPOaOtbSd6X8Ftd3D8AB4H+yrgX7TIMrV23+uCV86re4AM1PBASvtW+efqtvrQF8QB1YiG+O2ksHbJgyKlYLCxjFXHqP0wPnZK2B3wOj5i/qsSg3/KcMgPbVdIqJpgILJjJChJinRxMiJZBd8LJdYfYkPfK9xDFNGypo1il68/doQ4kbHqJl+hT9hEIf/ADhe3k22Z6hOPVmHKdxmtzulsle4kvnKWhLNY4DCm9hhQeEsUVVDCbZRw8oYHxnO7Z4ZQRQgPRvueddnJGJCyb5rA1TtDGIoWOsYOBDGVN5Eo9PZ51YZ6c3SuQjDv+vwm3GEBDEQS3+r1YEzPyisEOwA8YTZmGVvP66n9cYVs7HLxLErwW9S5aJeR57QHKdG8hK6RbbXhPwZPjjboD4Pth6JwB/6w7tRDm4jxddyXGYZr2xJ+jDPfVCYt3AJn7M6GF/K+IpW7AOhiWkqLaZp+GTb8psHMzGFvGvS4Konv5+c/2azc1V70bA==
+X-Microsoft-Antispam-Message-Info: o/Oefc5OfDlm8bCxecJBBqlP53GajgYeV0gS/EG2zKYbNBAzjcmO5rw2Y82f6pGFz3y18/jWUSf0PxBZ76clda4gtVWhP66vlJm64r40IUfFrcisClwqFUAv4n4apv9HB3o4W3Zeb0zQRhsww/jb3NkDegBU7nbDekuXkssOTLIDUUfIGih/e1JjykZbqSJI9SLWFnNQ1do4RE9qpPaeatX6lIkjWl0IY6X0Cr3S8wrPK7aCDrikDXTFMcw4fBqBkk+UM3hz0x3j82nvlUblZ3Hy+7eKQzlGaU+HTBHRgwNChCO0gH8j7DnaPmnyngFwGmfhvXQXxBiOvNKnXHDkfVYuzwBAljdgtXlJrjNb2g0j52K0/d8esZhbTSjS5IXK6heKA47bR4LTRlHn8N4w3JdcZYJgxm8YjDk9SmR3OGsU65B5yexaw/vCo6QB1J4IniR8oFnI/wIjw1gU1EFfmQxWJJ4L25tiCA3bRoRRyLaot50ePve4ldKyCipi3PtzylyoQEC4xI7B91uQ0Vc/6IGoqDs++4MGlG9uHhAq91ZyJdq2vbgZU0kn6eRYyz7WCTbg/eBudiwQCTk1pk5lWk6bx7sJJWh8iH11ifH8NWE=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366007)(7416005)(376005)(1800799015)(921011); DIR:OUT; SFP:1102;
+ SFS:(13230031)(1800799015)(366007)(376005); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eFJCOWFPSWtoWHJyVkFFdjZqZ0RGcG16bVQ1bDJ2YmxHQnhGbmovbHdHb1JN?=
- =?utf-8?B?cHU0Tjhnc1VVU3JhZUN5cGlzTTBYRkxuS041a1FzbjRsaHFlSzdsRndBUnlW?=
- =?utf-8?B?VGJpa0JsWW1lbSt5QXh6ODdDUEptTGMveUFaZDRpc3lPSkRnUVhMN3FOeWh1?=
- =?utf-8?B?MVpjNitlOTZ1aGlHZzZRUVljaWpOWi80SDZPVlY1TVhxb3c0M2JQZ01vWGRk?=
- =?utf-8?B?N0hhRjQyenc4Nm14SFJqUWRVZ1JueEJjU3pSS1JybjVMYi82dEh5aDNNdzVm?=
- =?utf-8?B?R0lGMkxyMkkzTzR5YVZSOC9VNGoxdjNPaysvNTR0Sy9zTWRTeUVaQ1FsU21z?=
- =?utf-8?B?Tk4rTGM1THJaSFJvNTE4N2w3VWp3cVNub3d4OXBha09EZDlzNUlxS2dqMUhs?=
- =?utf-8?B?NG5DNmo1Zm9mU091aXo0Ulk2c01mR2tmUkxobFVvdVVqckVJemlJbm1RV081?=
- =?utf-8?B?ZGljNlAzK1JNVHpudm5zdUx4TFFuTEtiK1pzRGQzMkhaRTBJeXRyK3EzZE5H?=
- =?utf-8?B?N3lNd25RRHByUDVqVmxQcmFZTUxDTmwwNU9zeVVJTzcvRDB6REpTemtZdGZG?=
- =?utf-8?B?eDFjb01qM2NQWnFhTFZJUkhGc0I3K2s3aWhkcStFMk9vSXlnS0NtMi8zRjBr?=
- =?utf-8?B?bFlGMFU4R0JpS1ovYlVWMHB3TjNja1dxSXlOclJHVTJRbjhZYmdSWFQ1OG04?=
- =?utf-8?B?TkVQajU0UXk4YW1JTjhFUDk5OCsxWENCVWVLSzh3UnRaeUsrVFpHSndmQ0ZH?=
- =?utf-8?B?YUo1c1RDMHRZUi8xOEREcmVOZHl1TUZrNHBqZFFSU1ZvZ2lQWlJ2clViZWVO?=
- =?utf-8?B?ODhrZlZMU1liNW5WQUV6ZUYvNDNIaGl6NFV5THIyb3dtOHBIQnltVW1Bdy9J?=
- =?utf-8?B?VE9ncEdNcjNmOTY5QjZremxSTmU1cWJ3YlFGdkNlV0hXdHF0N0c0bi9vV1ZN?=
- =?utf-8?B?TDdxUXlBU2h2WWE4UDFJYTIwZmdxcm9MSHZqODBXKzRjWEZaWEFTckp1VE96?=
- =?utf-8?B?SG9QWFZ5ay9qSENBMFQ5c01Xdm1GRmU1ZUFrRVU5RUc2dHZ6bnpReS9qYXQ2?=
- =?utf-8?B?Q0c0a0VYT0c2TlRSbGVmQXRSN0YwSi9Oc0FkMjBkVWxQZkJzeUM3dUxvQ2tR?=
- =?utf-8?B?cExHUEQ4aHJ6RFdOWGRiZ0Y0cVJEc21ncUx1NUlpbWphMDZtdHg5WFB0b1BP?=
- =?utf-8?B?RnFjNkhyUVpyYkNibEZYVko5WS9NM1pmVWxKOTNWQXRIM2owVE9Ia3BRaDVr?=
- =?utf-8?B?TERiSGF1UjJkK0xjamZyeGlZbnYxNERNZGViL1ZNSkFFYVY0V29vdnNHeERl?=
- =?utf-8?B?RlR2UjRCUG1HYzJkQVdldGdLbG50aEl4NFErcnFjNC90cVZVOEV0RjFXSGIy?=
- =?utf-8?B?K3RLL2s2bXFINHRnNGIrVjJ6WEQ0M29UNnJ0YTJGRDk4dFFqNzU5QWFZR2Ft?=
- =?utf-8?B?Q1MxeG1BL1poWVo2Q3M1NFdDZHNUYVdUZ2ZlWUd0cWpEclRsd0N5V1pmTVVH?=
- =?utf-8?B?UENaV1dXZ0ZqQ0o3RkpGZTg2UlphU0paSkZJSHRGRDA4aEs2c0dZaEIxZUJP?=
- =?utf-8?B?RkdXUktvQVZjK1ArVzQwSTFxWVEwVFpNdXZYcGhDYTBZdXJ1YUs1TitZblBp?=
- =?utf-8?B?YWZCbWFBRnUwYzlzT2txYk9BeVl4andrSmNpZWxpWUdrMVg1cndQcENUcytV?=
- =?utf-8?B?SUlMU1hCNDBXcVg2aEhySk9TMjRhVDMxQVpOTmZDU1RMRTgrNFNHZHNyamlV?=
- =?utf-8?B?SFpjQ3BtaGw4WnRlY2VHOElYbEdnRyswVWk4NUxleXI3M1J6OTdXZjE3SXBx?=
- =?utf-8?B?WFVxaHBYbDFZb2UzYzZTS1JPczVUdFAyUUNDWE5CZEFzYTRnVldwOGNwczNR?=
- =?utf-8?B?L1ZzZDYzZ0pXSFBpWXZ1TkMrUnNDbVZIQ1RFTmNyUEt1V2QrVjZ5SFM3QjNz?=
- =?utf-8?B?U0VBWDB6dnBVSFVNYnhBaWZqcnd4OEMzNmI4T2YzWFJUcWorOGtzazNYYzFi?=
- =?utf-8?B?MjRMRUNoMTJuSU0vZkxwbTRtZjJ2RDRLcEcrRktjaC9wQUhQalVISHdqR1F0?=
- =?utf-8?B?UkdaWHUrY25lZmUyYTlLN2grQVM1dWdsbWR5a0RWOStha2NGWFJYeEFadnF3?=
- =?utf-8?B?SXhXUkUwN3VyVzgwUXR2SVVnZjMxUXhQMWkyNWFINE5pcCtYKzBJTklvMkov?=
- =?utf-8?Q?n5+sFkFYnccep9FBXLMJGhw=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cmhDQkgwSjFKVGdNUFdjelNDeHFwNHlxR3J3YlNoVFMxVWZTTFRyWFRYWnMw?=
+ =?utf-8?B?MHd5NU5mdDZEanJMUXB0bkFzYUNqOGV4OEgzS2d3MjRQSi9HdDBRbW9mbDhn?=
+ =?utf-8?B?QzBXY3ZpYmxxR3FtSmRoa3Q0a0pMRldXS3BQc2JPMDBKb2NxQXFBcGM1RFNU?=
+ =?utf-8?B?M0xBZ0FUT3ZLUGg4dU9sYlhhT1g4NXdaQmNsZnY2S0ZBamVSakhNcmU2SXBR?=
+ =?utf-8?B?TFEwd0N1Nm03LzRMa2tUYTI0SDl1ZitQYVl4Qk0xbjBqNUlQTksyNXA5bEdO?=
+ =?utf-8?B?NDk2b0M5Yjc5TmtXWFMrMy9iLzRKdFdqbm9XRXRHcVFjZmQ4UnhXa2s2amo5?=
+ =?utf-8?B?V1JTenYrZXlWQ0UyRXRrRW1jc25RTGMwREdPeU5ZbllpVWNWR3NJUGpGaXhR?=
+ =?utf-8?B?VFVSVnpFWjZjTlE1NGduak4vckEyWnhzUmxoc3MvOWIyT010eWZRUys3V0FT?=
+ =?utf-8?B?cE8zQ2lMS0FKaU1va0MrQkxtVWFRanZ1b0VsZVBqU3I0bittSUJYcTVJczZy?=
+ =?utf-8?B?cVl0TU1nZGkzdWgxVXlPUUdmMDNYSjI5akdEN3EyZUpSZkE1VU9sVmgvdW1N?=
+ =?utf-8?B?b2NmQjZIbXVYcmFDWmJhWStQQ2UxUmpJUmQwM25EYUczVjFlYW5GT1EvMk9Y?=
+ =?utf-8?B?aGRPdXExSjdSZjF4blV6NC92cUtmU2hSazRPRVI4QUp3TFVDNHQ5K2JpczBm?=
+ =?utf-8?B?RHNWUW9ia0Fzd0dMTThOK1BLbU4wcmtWNDZud1kzNG1qdHdmUW84dmw0L3dv?=
+ =?utf-8?B?SUllU0N4M1lJVXpmaitBN0NjVDExQ25Kd2FqbjJmeGI2N2pabnZwZFhDaXNw?=
+ =?utf-8?B?a0NHSlZ1UGxZUDFmZUtZRlZtT25Ka1E2Q1JsRHExR2ZlUVFyTTUzdWlPOTlz?=
+ =?utf-8?B?OVkrRFVrZkFBZnVlRmk2bHE5UTYwQlNXMW1WYzZhNnZVNm9IS2M0OSs4UHdH?=
+ =?utf-8?B?V2JSZnlLSEd4Y2Q4aFNjR3RPVFIzYjl3SXhqdTRaRWU3V1hYaVVySDNFVlVi?=
+ =?utf-8?B?d2oySzFnUmE5enZ5MGtSVjZtNkYwT0h6SThLTzk3MGw1NHlGakQ3bjB5aTNT?=
+ =?utf-8?B?ekE1NWkyK3NLalh1L3JLVXcvT1FibjBmT3ozbDVUMjRSVUxscDFoY1pCN3BV?=
+ =?utf-8?B?N1RnTksxRHRMa3R1WFBoR05SZXZhdU9OclBmQStlclRLbFBqVlcxZGpqVDZx?=
+ =?utf-8?B?V2EydkhnaDRUU2IvMUNraVk5bURRUWRyZW45K0R6UGJ1bGNDcTd2WUJGclBG?=
+ =?utf-8?B?d1dUNmwvOFR6bldzeHhReTlyYTI4a2FYNXlRN2pZeURGY2JLeXAwM0RRS1Bi?=
+ =?utf-8?B?b28yYy9mY1p4K3hleGNBVXdZeDZsaDh0QXp5QjZQY1R0USs2OG5FU2hraWtx?=
+ =?utf-8?B?MmtNenQ4M3NXSzZZU0g0eFEwSzIyVlc4SE5vU09qY3dZYk1NUDRINHU5YzNY?=
+ =?utf-8?B?V2hZV0M0K3dBOVNSUjRyRHcrRSsrYWovcTllaG1pUG1NalBkNFNVbndwRFgx?=
+ =?utf-8?B?TWlsWEh1c2VrTFpKQW1BKzByMWFpSHlxVzJOYkhobjFqZUZwNkhFeHdQeFZO?=
+ =?utf-8?B?dEpWWlBLMWY3cFoxeVpRNDREUDdBRUJmM1RvUDFUQ3djNUNyc0pPRTk1TUU3?=
+ =?utf-8?B?WUU1SGtHQ3cySDdUMndDMWJMSmJBWmxrNDhuMjgvbW9wQXNYWmVQNGdOWDVV?=
+ =?utf-8?B?WWdDbG5uQTVzTElHdFFSbjFDbWVwUG5OdTZpUm5pYlp5NnVoOHplVmVTV1c5?=
+ =?utf-8?B?L3BCb0U2aGdXc3Bwbkt5eURCbG52bmpvamsvbVZZYnNtb0ZDSXNobkhvQ2NP?=
+ =?utf-8?B?MzYyM1AyUHdiMGl6L2hnN2NOWWQvUTZZeE1UVjMwcitkV2k2ZGNORXFTV243?=
+ =?utf-8?B?Nk5aSDlqNmFoeWM1QVZlbHk5V3VycXZwODlOYmp2aG1DMk9WaEhwVE84K3dO?=
+ =?utf-8?B?ejMwTVpmZFZEeDZIa3hOUE5tUlMvdkZHUXY1ckRtRDhMc0oybm9hZ2R5aXIy?=
+ =?utf-8?B?K2VRZG1wQWNzZU5INzlNUmxvditNNnhjOEZUWHVCd0prT1FVZnMrelp2dTlJ?=
+ =?utf-8?B?UGlZQkhPNUJXUmFLaEtSQm5DVk9WTDdWMEJPSmozRFpaM2NQME9Sckd6OTR5?=
+ =?utf-8?B?UEJCdlZDU1NrazhvaHRYL2VLWVZFQmRHZlcwT201UVhwU2tURGlNc0I5MXV0?=
+ =?utf-8?Q?bmmignC0tFXOw3nAsHDD3L8=3D?=
 X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5a3ca1cb-1fba-41c6-20d1-08dc5317fd48
+X-MS-Exchange-CrossTenant-Network-Message-Id: f96e5955-0e62-430b-e411-08dc531990d9
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 13:22:47.9474 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 13:34:05.0340 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: JS9MQwRP+TRcZkNSA+6MWLImwDkT5a+Gt0MDfE/uP6ya3uYmfxu9AG2CgNnbhfwFZ1QHVTdD6+QREClTGoIAfD6cUqPLHjal2Q8VCdOcpKhG3GdGBbjrnJtoucjoxfmr
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB8053
+X-MS-Exchange-CrossTenant-UserPrincipalName: /9y8+4QhpibRfWDVRxosF6BUIe9IwWcZPXpDguqItzib5MOKnJrAfDIGNj2rqJr7TzN0LSQM5PpYnFFWIIpztom7Y4vIrl2SB2q4a8qH7urZ/f781ZUfzBRoasuwCTfZ
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7348
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,68 +148,169 @@ X-Virus-Status: Clean
 
 Hi Jonas,
 
-On 3/31/24 22:28, Jonas Karlman wrote:
-> The RK3399 SoC support the ARMv8 Cryptography Extensions, use of ARMv8
-> crypto can speed up FIT checksum validation in SPL.
+On 4/2/24 14:37, Jonas Karlman wrote:
+> Hi Quentin,
 > 
-> Imply ARMV8_SET_SMPEN and ARMV8_CRYPTO to take advantage of the crypto
-> extensions for SHA256 when validating checksum of FIT images.
+> On 2024-04-02 12:38, Quentin Schulz wrote:
+>> Hi Jonas,
+>>
+>> On 3/29/24 20:01, Jonas Karlman wrote:
+>>> Extend the Generic RK3566/RK3568 target to also include support for SPI
+>>> flash, USB OTG, RockUSB and UMS.
+>>>
+>>> Also fix sdmmc alias, include missing pinctrl and add broken-cd prop to
+>>> fix use of SD-card in linux.
+>>>
+>>
+>> I think we would have benefit with more and smaller commits there, but
+>> since you're the one mainly maintaining those generic devices, up to you.
 > 
-> Imply SPL_FIT_SIGNATURE and LEGACY_IMAGE_FORMAT to enable FIT checksum
-> validation to almost all RK3399 boards.
+> I can try to split it in a v2.
 > 
-> The following boards have been excluded:
-> - chromebook_bob: SPL max size limitation of 120 KiB
-> - chromebook_kevin: SPL max size limitation of 120 KiB
-> - puma-rk3399: SPL stack in SRAM and TPL+SPL combined max size
->                 limitation of 224 KiB
+>>
+>> [...]
+>>
+>>>    &sdmmc0 {
+>>> +	broken-cd;
+>>>    	bus-width = <4>;
+>>>    	cap-sd-highspeed;
+>>>    	disable-wp;
+>>>    	no-mmc;
+>>>    	no-sdio;
+>>>    	pinctrl-names = "default";
+>>> -	pinctrl-0 = <&sdmmc0_bus4 &sdmmc0_clk &sdmmc0_cmd>;
+>>> +	pinctrl-0 = <&sdmmc0_bus4 &sdmmc0_clk &sdmmc0_cmd &sdmmc0_det>;
+>>
+>> This is... surprising.
+>>
+>> `broken-cd` but we still mux the SDMMC_DET pin in the SD card detect
+>> function?
+>>
+>> According to the dt binding, if broken-cd is provided, we should do
+>> polling. If neither cd-gpios nor broken-cd is passed, host native card
+>> detect will be used (which I assume means the SD card controller handles
+>> this internally).
+>>
+>> c.f.
+>> https://elixir.bootlin.com/linux/latest/source/Documentation/devicetree/bindings/mmc/mmc-controller.yaml#L33
+>>
+>> What are we supposed to do there actually, because this seems to be
+>> contradicting itself?
+> 
+> The generic DTs is intended to be able to be use as control FDT in
+> U-Boot with any board that mostly follows reference hw dedign as close
+> as possible.
+> 
+> broken-cd was added to fool U-Boot (and possible Linux) into thinking a
+> card is present. And the sdmmc0_det pinctrl was added to satisfy the
+> controller logic and auto jtag.
 > 
 
-I think we should move the SPL stack out of SRAM, thanks for hinting at 
-this. This is clearly something I missed when migrating Puma to TPL+SPL 
-as all other devices were migrated way earlier than this board, c.f. 
-https://source.denx.de/u-boot/u-boot/-/commit/f113d7d3034672de7d074506a05a7055f1f0dcae 
-for the default address.
+You shouldn't need to fool auto jtag anymore on RK3588 since 
+https://source.denx.de/u-boot/u-boot/-/commit/5d710738bb1e0ff2bb93ce7baf4c9691ce919b53 
+since it would be disabled except if you enable it by hand via the symbol.
 
-Considering that SPL_MAX_SIZE is set to 0x2e000 (184K) right now, we 
-should fail if we reach that size. But I couldn't with applying the same 
-changes as in this patch, is there something I'm missing that prevents 
-this from happening on Puma? Just trying to figure out what we need to 
-do to not stay too far from most RK3399 devices :)
+I assume you need a similar patch for RK3568.
 
-"""
-diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
-index c2aa02ec74b..f3d23fa3f11 100644
---- a/configs/puma-rk3399_defconfig
-+++ b/configs/puma-rk3399_defconfig
-@@ -21,8 +21,12 @@ CONFIG_DEBUG_UART_BASE=0xFF180000
-  CONFIG_DEBUG_UART_CLOCK=24000000
-  CONFIG_SPL_SPI_FLASH_SUPPORT=y
-  CONFIG_SPL_SPI=y
-+CONFIG_ARMV8_SET_SMPEN=y
-+CONFIG_ARMV8_CRYPTO=y
-  CONFIG_SYS_LOAD_ADDR=0x800800
-  CONFIG_DEBUG_UART=y
-+CONFIG_SPL_FIT_SIGNATURE=y
-+CONFIG_LEGACY_IMAGE_FORMAT=y
-  CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-puma-haikou.dtb"
-  CONFIG_DISPLAY_BOARDINFO_LATE=y
-  CONFIG_MISC_INIT_R=y
-@@ -115,4 +119,5 @@ CONFIG_DISPLAY_ROCKCHIP_HDMI=y
-  CONFIG_BMP_16BPP=y
-  CONFIG_BMP_24BPP=y
-  CONFIG_BMP_32BPP=y
-+# CONFIG_RSA is not set
-  CONFIG_ERRNO_STR=y
-"""
+Linux disables auto jtag automatically for RK3588 since 
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/soc/rockchip/grf.c?id=6f6878ec6faf16a5f36761c93da6ea9cf09adb33. 
+I guess you need a similar patch for RK3568?
 
-(not booted).
+> When I tried to boot into linux with the control FDT prior to this, only
+> eMMC was detected and working, after these changes SD-card was working.
+> 
+> Will re-try without broken-cd for v2.
+> 
 
-Additionally, I think I should be able to bump SPL_MAX_SIZE to 0x30000 
-(224K offset for U-Boot proper on MMC - 32K offset for TPL+SPL on MMC), 
-don't you think?
+I think it'd make sense to properly patch this by disabling autojtag 
+feature instead :)
 
-Backward compatibility is a PITA :)
+>>
+>>>    	status = "okay";
+>>>    };
+>>>    
+>>> +&sfc {
+>>> +	#address-cells = <1>;
+>>> +	#size-cells = <0>;
+>>> +	status = "okay";
+>>> +
+>>> +	flash@0 {
+>>> +		compatible = "jedec,spi-nor";
+>>> +		reg = <0>;
+>>> +		spi-max-frequency = <24000000>;
+>>
+>> Random thought, but shouldn't we update common/spl/spl_spi.c to read
+>> this value instead of using CONFIG_SF_DEFAULT_SPEED? (Nothing to do in
+>> this patch series though :) ).
+> 
+> For U-Boot proper the value from this prop is used, SF_DEFAULT_SPEED is
+> only used in SPL.
+> 
+
+Yup, but I assume we have DM support for SPI flashes in SPL, so we could 
+do this instead of having to rely on a defconfig symbol :)
+
+>>
+>> [...]
+>>
+>>> diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
+>>> index e7d5e55bbfd8..b458080cd539 100644
+>>> --- a/configs/generic-rk3568_defconfig
+>>> +++ b/configs/generic-rk3568_defconfig
+>>> @@ -3,17 +3,22 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+>>>    CONFIG_COUNTER_FREQUENCY=24000000
+>>>    CONFIG_ARCH_ROCKCHIP=y
+>>>    CONFIG_NR_DRAM_BANKS=2
+>>> +CONFIG_SF_DEFAULT_SPEED=24000000
+>>>    CONFIG_DEFAULT_DEVICE_TREE="rk3568-generic"
+>>>    CONFIG_ROCKCHIP_RK3568=y
+>>> +CONFIG_ROCKCHIP_SPI_IMAGE=y
+>>>    CONFIG_SPL_SERIAL=y
+>>>    CONFIG_DEBUG_UART_BASE=0xFE660000
+>>>    CONFIG_DEBUG_UART_CLOCK=24000000
+>>> +CONFIG_SPL_SPI_FLASH_SUPPORT=y
+>>> +CONFIG_SPL_SPI=y
+>>>    CONFIG_SYS_LOAD_ADDR=0xc00800
+>>>    CONFIG_DEBUG_UART=y
+>>>    CONFIG_FIT=y
+>>>    CONFIG_FIT_VERBOSE=y
+>>>    CONFIG_SPL_FIT_SIGNATURE=y
+>>>    CONFIG_SPL_LOAD_FIT=y
+>>> +# CONFIG_BOOTMETH_VBE is not set
+>>>    CONFIG_LEGACY_IMAGE_FORMAT=y
+>>>    CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-generic.dtb"
+>>>    # CONFIG_DISPLAY_CPUINFO is not set
+>>> @@ -21,32 +26,58 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
+>>>    CONFIG_SPL_MAX_SIZE=0x40000
+>>>    CONFIG_SPL_PAD_TO=0x7f8000
+>>>    # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>>> +CONFIG_SPL_SPI_LOAD=y
+>>> +CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+>>>    CONFIG_SPL_ATF=y
+>>>    CONFIG_CMD_GPIO=y
+>>>    CONFIG_CMD_GPT=y
+>>>    CONFIG_CMD_MMC=y
+>>> +CONFIG_CMD_ROCKUSB=y
+>>> +CONFIG_CMD_USB_MASS_STORAGE=y
+>>>    # CONFIG_CMD_SETEXPR is not set
+>>>    # CONFIG_SPL_DOS_PARTITION is not set
+>>>    CONFIG_SPL_OF_CONTROL=y
+>>>    CONFIG_OF_LIVE=y
+>>>    CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>>> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+>>> +# CONFIG_NET is not set
+>>
+>> This seems surprising, do you really want to get rid of network support
+>> for the generic board defconfig?
+> 
+> My intention with the generic targets is that they only contain bare
+> minimum to boot from emmc/sd-card/spi flash. And a future possible use
+> could be to replace vendor usbplug blob and/or for other flashing or
+> recovery purposes. So network support should not be needed, also saves
+> a little on binary size and boot speed.
+> 
+
+netboot/pxe/tftp is nice for debugging, but I understand :)
 
 Cheers,
 Quentin
