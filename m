@@ -4,107 +4,141 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8617CD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 14:23:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A547ECD1284
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 14:32:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F0A1188386;
-	Tue,  2 Apr 2024 16:23:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id DEC8688148;
+	Tue,  2 Apr 2024 16:31:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="KTrv1pjt";
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="icLSv7oh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C990E8811A; Tue,  2 Apr 2024 16:23:34 +0200 (CEST)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::600])
+ id 142E588148; Tue,  2 Apr 2024 16:31:58 +0200 (CEST)
+Received: from EUR04-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur04on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2611::701])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FBCD8811A
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 16:23:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ by phobos.denx.de (Postfix) with ESMTPS id 3A55588380
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 16:31:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=theobroma-systems.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=quentin.schulz@theobroma-systems.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZbcrwPBmRUEczUIETbGa2jZ/h99kZGGXrJe1rFbmZ/9G3q//Wj9eYwnfr1ZqnQSer/6GWHyAp/CGQM3D10tptC1GMimWMx+A6b7qHMWYJ5Drfs5CVoc+CGQheXm4PL7/hvl3n3J3YwFmIcvAGSnD7n2KNAjxbBMhUKGeRA4Y5+bwlWz53q8uCjeHg2P7BLSMf6Hhbwoc4RTMM6oHKVXv1lLJd8tybNpqMAlW/mDfPV8mbZSf4TdLrkNdllCEN1EWtDv5z1iyl31SK8yUQLcw7Vs9rMLod2yZ+ggwP5ZKG7icmfvFhOaYjPXSudhuCjg9EB/maFJc9CrvyVIesHuZvA==
+ b=MVEQilNMKueQjOwMmGsopL9O7gcyVOwL46ewa+0AvR4AUVvDnByKG7cda41iIjVAOglgAydhxGfYvJ7Tl45C8qm9633gulUifIFAHjEz9qpzsYELqV8bjVyhkHsS1p5q/AtvPLysTYNFbze3UYKamzTOb5wz0flAXNIbP3YFb4BOF5gafLTfyVo3cXmgD9kx2h+9xEyFQGPNjaG8GCxO1voyD3WkFf3HlkIvMOAhx4C8kWtx3c1kNmVj7jZEErlQlUosIm+AG81zYGfH1u9qhtC+aXDwYqGW1aTJueL3nZjnbVL54FzvJiNxYSuuBuw80j6eWChBuScw1X7MTfPlxg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fzmHrCpEyS20oa0P8jX/qIxs21W67UNxJiCkrRlu+jw=;
- b=Um5n6J14xFz4EuBgHwfAfIc2KJDwP+n6+R1ZbNCoALIaXQS1JmfrYzfQQ2MkmKjeCD7CEWwNolwBX1dXwpqHiIySX35qU+Pa5HT5P/BOAns1XFhHY+DZHlFYyn+HMeJB5Cp9yInIaYNDC/eGTcIBLbww4bVyZpIPnAb3PlLyRGWtFZseYvrBVFzNqo6udoTfYanHVXX42bPW8e6rlJ0L6uY1O+E9n0ALu09IAnuIyXG0Gtz3a6uz0ESSs54cFvJRBZaYYs66URZwJ8kqYBlphwqHyOVRCxA6zZpy2hbTKk+DxfgTtm+4hc18wjRPXSCv52yTOSOI7B/uNUeVi7dyFQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ bh=rr5B6xwIhXTcDv6FUegcYx8f4v85SJJVsCNOxAMoFn0=;
+ b=R1BiX7QP/epiA5zYstBlzwLCUE2tm568DrWA343fi4cT6zHS0IrYV5UojLALbyiVfXbAqPBG/fJuU/W9Ex6vtz/PDylCGYK8xVA0PGeo+UzsKx/BpSkKn0n0rM5zMS+KG1CrsRzmXkBFY5EC1Cp4TOIFVqgmWrSNOVi9Wyl4li9X0TlOAV5Wd3VHeHcLFI5xC8oO6IICKUqrP7qAL8vrMen97u7l5qMOd9zShgfHPNtNnY+Oun+rqqB/JOQ4GmX/RJeFSLR0Ds+2vFpZp+v7Ujc67KIXTc3W+gif+GcrNaghOSy1DpWzkcwx++AVLTJmQcwXtgBjzbGZFVZU9J8lig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
+ header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fzmHrCpEyS20oa0P8jX/qIxs21W67UNxJiCkrRlu+jw=;
- b=KTrv1pjt4gjMxjsvLjETTI8Pgt7hLp1j1gE9AQ2vLGIIf5nFLATWlV6VRSTcy0DhS96rIFm4EuuOmW3lHwjhFxVbr8DHj/usN3uJfHXgmSsp7R/DiYCNnfWNQSTPBNiaOG//QibjdD5AteSplAvUwCB0J9fNoPlc07AwZ64wvX8=
-Received: from CH0PR03CA0120.namprd03.prod.outlook.com (2603:10b6:610:cd::35)
- by IA1PR12MB6185.namprd12.prod.outlook.com (2603:10b6:208:3e7::21)
+ bh=rr5B6xwIhXTcDv6FUegcYx8f4v85SJJVsCNOxAMoFn0=;
+ b=icLSv7ohSsvjMyXAMfLRxQBxlczSFjNclKO9yidW04d71+ITqgaBlI3dE1rTWFaGiMJ32GNzBlO7fsMFf22UGnW5R7jSqe1LwFLCgolqSAuq+8VBWCktZfXA0u5vShi9KefpTgkayMr5GGuVsDRgT0rze4jkgYSzpx0z6RHSiKqZYPuWskJdWQgadyTWKn3PEbtS7/2HjfWsvyP7KTSUzjK1E6k5VT5XLUJmToiZ9nrwJkvfMV4p/xZqfnpY74pm3i4xFeArzwppWmvJixPnTf3dxyAqN1GgNOMlHno4dVC9r7CSGH7tbdpz1J+wZeJObJPDBKIuuskbx9iZ+u7D4g==
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
+ by AM8PR04MB7411.eurprd04.prod.outlook.com (2603:10a6:20b:1d8::5)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Tue, 2 Apr
- 2024 14:23:29 +0000
-Received: from CH2PEPF000000A0.namprd02.prod.outlook.com
- (2603:10b6:610:cd:cafe::bc) by CH0PR03CA0120.outlook.office365.com
- (2603:10b6:610:cd::35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46 via Frontend
- Transport; Tue, 2 Apr 2024 14:23:28 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- CH2PEPF000000A0.mail.protection.outlook.com (10.167.244.26) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7452.22 via Frontend Transport; Tue, 2 Apr 2024 14:23:28 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 2 Apr
- 2024 09:23:28 -0500
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 2 Apr
- 2024 09:23:27 -0500
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
- Transport; Tue, 2 Apr 2024 09:23:26 -0500
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@amd.com>
-Subject: [PATCH] soc: zynqmp: Add the IDcode for TEG variant
-Date: Tue, 2 Apr 2024 19:53:14 +0530
-Message-ID: <20240402142314.7353-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.17.1
+ 2024 14:31:54 +0000
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::3e70:7029:faf2:7779]) by DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::3e70:7029:faf2:7779%3]) with mapi id 15.20.7409.042; Tue, 2 Apr 2024
+ 14:31:54 +0000
+Message-ID: <24853978-283c-4656-9a3f-23caf015ec4b@theobroma-systems.com>
+Date: Tue, 2 Apr 2024 16:31:50 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 10/31] rockchip: rk3399: Fix loading FIT from SD-card when
+ booting from eMMC
+To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>,
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>, Levin Du
+ <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>,
+ FUKAUMI Naoki <naoki@radxa.com>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>, Andy Yan <andy.yan@rock-chips.com>,
+ Nick Xie <nick@khadas.com>, Deepak Das <deepakdas.linux@gmail.com>,
+ Alexandre Vicenzi <linux@alxd.me>, Xiaobo Tian <peterwillcn@gmail.com>,
+ Christopher Obbard <chris.obbard@collabora.com>
+Cc: u-boot@lists.denx.de
+References: <20240331202921.262323-1-jonas@kwiboo.se>
+ <20240331202921.262323-11-jonas@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+In-Reply-To: <20240331202921.262323-11-jonas@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA0P291CA0014.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1::19) To DU2PR04MB8536.eurprd04.prod.outlook.com
+ (2603:10a6:10:2d7::10)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF000000A0:EE_|IA1PR12MB6185:EE_
-X-MS-Office365-Filtering-Correlation-Id: 670afa57-add3-44c8-3064-08dc53207765
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|AM8PR04MB7411:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: KsXJErfPz6y0vxnrfCo8L3Zsk0cs7Mfg0kVLtW1cEfF+B5vfOa45oq2P30DUjNIWCc/Eq77csvMJ95txwfbKp/UX6APD4d/uOeqAA4TX/T1KNXl1gy0y7I6PrUDgp9u1dEQJPIlZiyX3xaB2Xi0DYusaIC5Aqg7ggqlsOgXTDUvxI5ZZh2q+IYfUYUQsgWhnQvdU8SjdQYJlMIE+LtihqKGJCgm3aAqOg3mjJZxnDUfuNUpcvzMG6OISGN+g1e075mZBJSlBgfjeRhI+cJivXUENGepji4TXnYTfeUf0h97gOjAaWuaEBiyxr2DHchoos3v2X4XfXEjG7dn+nuiSzHsw32J71LBewOP6thBXjzFrv18tstRGiVyR1KMYFJgXLQX8B5v1pTT3r55aZmOoavtkERGePp8Dk1C2IeupMZeRwVyy3WCkHmbzRKIm341I4Q3f+pSRC5EP39NDdEGJLD4zag+oqcOpC6eyOHd0vYkVrMCtlX7+UpCcK7ixEBtktToiZJIf28Fly8/dAF+VOACgczroOdL+tIRcHgk+Doq0yzTT/jpi3OXiEC2TEzH4O2AwG62mQ9SRKXCA3p8Xs3S6uqUORJYWGkhl7M3IuJdhR7krnvqFQQZN3fn69elBT5zHA6QDICExw/IEjb/9Lm3duj4NBUR83cjczYhTx72q8PeRv4Slk8SHyZ5WHCV19zvzjy1KlDfI7ni+w4elH1tdLqFrzRW9pn/3HGW8GWnMGFvG91N1jl0YxVnBJV3h
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(376005)(82310400014)(36860700004)(1800799015); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 14:23:28.6321 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 670afa57-add3-44c8-3064-08dc53207765
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF000000A0.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6185
+X-Microsoft-Antispam-Message-Info: tbikceMMWF5RWe/2TuLYCsOK8AoUJoKHFsOwqcPLL4VRJKIe2CqASUspxOa2iRtiGleas1iHqAoK0Xs1vJRpPmXRv+PX90q4Wm6OtbDg2bKVbZrZpBVnJwFvy63tOY3yN0PZIBuRwzdpAXA/apqt2dvvZ9x+9Dwnbp36LJrbekULp/zLSvrxIKs04pqRCft4P6KaiR79MAxdwsyAYMmprkhVKPzCFUNpHZxZZRGF/AfulBJ1xOqpuygc3GPdzmJuQ8W7ZFSUR9K5N1V9WNyD95PFO08u1YKgfTchNoly7WigVAZbzMdJu2brg+Kk2pQ8boWT9yjQwNjEVvTmX/83L/iFNYLA+yy+fQTmijd04Ar/c+7tOlzwBFIhNClfQORxukVZoiULN9wKMYzXSfBAhlGQh4C44krzPiiyzOEZ8GmM6nQZCJNtxL9rrh/MZAkJX30f8VQ69zS94QXoO2PtWbqfSHYuMXSnUEYB17L3JrlehJ3D2FpqG+ppQrhMaKkaGaMByxAdcGSNQb4Hz5rv/SW87VRzPnM2SH/BUqwt5YHcHXrgZHKVD25/QZRz30zK6vZzB0n0jozU/XLDlfFjVA1xmmNb0AE2c6LjFp3mGqHgoRJxkcr5VY+n2DlzqAJfC3vrPvvsJZvJ5I9Le44K1HoaZ+Q+SjbdmGj4Gndr5SNFP4DswxUn1rBJTivwCVXpYzb82qou7MYrmWVE7A/hEQ==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(376005)(7416005)(1800799015)(921011); DIR:OUT; SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TzJENTlYUWdJYzRhdDdXRkFRTmNodkZKdEdYTENlWkEvcHFVNG9GSlZ4UERV?=
+ =?utf-8?B?VytKTzFLNVZSNHpWcm9uYmhud2M2WjlWRlRtQzVwL1VLVURrc2hCY0k1Qk5D?=
+ =?utf-8?B?aUQ5TFJWN2ZERDgyNXFsOXhoNkhpdVJ3NDhOZFQrVkxIR29yYjJzYURML3pn?=
+ =?utf-8?B?ZVZuREp1UEY5RU9WRjAvdXk5TllYZ1NiQVR0d3RFNnRzaHV5Rm8xV0dSV3U2?=
+ =?utf-8?B?V0JvU3dyRVdKMTlEQWFLb25NL05PaWxPSHBOWXllNXpJYTNPRndiSC9wZFQ5?=
+ =?utf-8?B?c0FNODVGRmJmMFh0VnRIaXROMXNJeWVmam5iaXVWMW5kU1pIcXNLU1h1WmRl?=
+ =?utf-8?B?bnpDaXEweUxQTng2YUdSNmFWUnJGdElpNmIwMTkyYzlkamM3U2J0Y0FsVFRD?=
+ =?utf-8?B?d2s4Syt2d21CU1l3MzBzL0FRYjNOZi9XQWZoeWhQRjJlSGlUUGtPZnpVNjdU?=
+ =?utf-8?B?T0ZwbmVHTkNXenVaNnAySUdWQmlMMnhKQWhFc2lGL1BWaGJxWlcwMjY1bUx3?=
+ =?utf-8?B?Y1kzN2JDUUc4aEI0NFp2SjRZVFBJK1l5bjhzYU5FQ3V1WEdQWWZ2ZnBzNENp?=
+ =?utf-8?B?NzVpSWxuSEc4QXJZZUhFd2tvU0tWSFNpSDlBSE81RDB1bFR2ZzZsbFNmT0dX?=
+ =?utf-8?B?c1VOU0RiVmpKRXRpem1oKzFNWHBXVXd3Q0Q2L2dDdy8xRk9QTHhuYWpwU29H?=
+ =?utf-8?B?TUphMXorUTYzTy9JcG9JbUxBOEZ2L2thT3dqVHp1NEhMelJYWlp1YnpYTGNY?=
+ =?utf-8?B?SWN4ZTA4K045Q1RtT1Z0bkdjNGZlcUxhZVhtYk1Lbk1weldrTHJjRVQwYW5S?=
+ =?utf-8?B?czAyR3V3bzlLSGREcTlEYnEyeUZYb3pKdktoYWI4M3FqdVlNbC9PWGQ1NnhT?=
+ =?utf-8?B?N2lvVVJpQ0lQM1hOSkNrcmRWMUJCd00za0tlK2Q4eWJYYWgzY0FPWFpqQXFZ?=
+ =?utf-8?B?ZysvVFQybFJqK2QxUHgrVjMrOUFsbFdCaVZ5VXFhUGJxZVppbUt2OTV2bG55?=
+ =?utf-8?B?RlNzbzlSc1plSXpHeWVyU2lTekdTVVR4MjRoTEdWUlNpM1p5cS81ZjZFbzg0?=
+ =?utf-8?B?K0lUdE1MNGt2aGlsSXgxOVh3SktiVlZmM2xKZ0RtQ0Y0anQ5cnVvVWdTeWNv?=
+ =?utf-8?B?OWNaaUZ3ejduSlFBcVRhOEFyTFgvakxaSUZSbDgwK2FwM2NEWnRTeXNXOVU1?=
+ =?utf-8?B?bU95cmtLSjJDc2VCWEdUTGtLa3JDRi9CWmIzNzI5NWRVUVpNM0FlRG1NSEE1?=
+ =?utf-8?B?ekhrTXNWcWsxZ3BsRFVNYkVLNnpXZkJQVzBuaE1DVFNleUVxYXlHbDNnRm82?=
+ =?utf-8?B?RG90SnU0QkNsNERUUktIQUI4MDhsSVAvUWN3QWxQR3hUVlg5bTdHK1JaRDNU?=
+ =?utf-8?B?ajh1M1hNY3hOTlFsMnJ5dzZGeXFFRjQxcldMUVpJRkx3QngrL0NBWFdBcmRE?=
+ =?utf-8?B?Qnk1QlN3d2lTQlBsQnViTHYwQzRFZnBsa2pFYzVDYi9XSFlZOWtmYm04eTZZ?=
+ =?utf-8?B?MzZWK3l0OWlMaUl4TWR4U0xyb0FJUlVheU9hbnFaditpTXUvMXRRRVhMaDgx?=
+ =?utf-8?B?di9XSXV2QlZiT1hQTmx1OG9SMjVRbXJyZzZweHo1QmRpdmlFTE81ZzBvYkxj?=
+ =?utf-8?B?cEh5SkVkTHNFWnR0RFJxcEc4Q29BU21CK1ZsbWNlZlY4VUExTHdrbUVlV3JH?=
+ =?utf-8?B?NjhuWE1KNDJyUmZBYXc2TXphZ3ZONnNIZi9qWkNXdmhURHp4b1dKK2FKeWdU?=
+ =?utf-8?B?ZmdYWll2K0IyQXFxQUVUYzBpTDhYRWtTRTVBQ2JsYnF3b2RIS0U2TFdabHAx?=
+ =?utf-8?B?NFNTUFEvY1RvTExUaEQwaG92c09yU1BmN0YxbjNVczJVeGZaWWU2TkVEQzhh?=
+ =?utf-8?B?clAycndYRXBxS0o4cnhjTm51UFlManJxNkV2SjFjeldmRjkzM3lHMDIreFFO?=
+ =?utf-8?B?R0QxNENXS1Fld1YyMDRsVC90bnBJdkFYeFRUNWlxem1FM2ZnVGVja0wyeFdP?=
+ =?utf-8?B?ak5qYkFSRVFXUURSYlROSlhETjFXeWtHN2xPbE5mWDAzNkp3bWV6eEM4WFU1?=
+ =?utf-8?B?TGx6bkhxTm5LNldURy9tM3NrM25NaWJGQUZMOEdWd0NUSHVFaytaa3UwYVNV?=
+ =?utf-8?B?U1BuVGNCT3dZZW1pMmVmMXM4WkVab1FZZ2ZvZ1lvbzZpMWZXUWp3UDczdHJn?=
+ =?utf-8?Q?CB/1eYN9oH6T+ZO/9pTfHNk=3D?=
+X-OriginatorOrg: theobroma-systems.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e56082a7-06e5-414d-9b10-08dc5321a441
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 14:31:54.3482 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /D8bjDlKZdkjNB+b23Pb+jkwgIUAv5HgobGGWKv23zMFQaHwGK6DJaMb5OhL5zjIIBIipqhdoZenckIMCs6FjTQKNAHBat0qQ0cAznhW1iigWkwqqUhWiEjIHT6l4C8L
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7411
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -121,46 +155,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ID code is added for zu3teg variant.
+Hi Jonas,
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- drivers/soc/soc_xilinx_zynqmp.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+On 3/31/24 22:28, Jonas Karlman wrote:
+> When RK3399 boards run SPL from eMMC and fail to load FIT from eMMC due
+> to it being missing or checksum validation fails there can be a fallback
+> to read FIT from SD-card. However, without proper pinctrl configuration
+> reading FIT from SD-card may fail:
+> 
+>    U-Boot SPL 2024.04-rc4 (Mar 17 2024 - 22:54:45 +0000)
+>    Trying to boot from MMC2
+>    mmc_load_image_raw_sector: mmc block read error
+>    Trying to boot from MMC2
+>    mmc_load_image_raw_sector: mmc block read error
+>    Trying to boot from MMC1
+>    Card did not respond to voltage select! : -110
+>    mmc_init: -95, time 12
+>    spl: mmc init failed with error: -95
+>    SPL: failed to boot from all boot devices (err=-6)
+>    ### ERROR ### Please RESET the board ###
+> 
+> Fix this by tagging related sdhci and sdmmc pinctrl nodes with bootph
+> props. Also sort and move common nodes shared by all boards to the SoC
+> u-boot.dtsi. Finally imply the SPL_DM_SEQ_ALIAS Kconfig option to enable
+> it on all RK3399 boards.
+> 
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-diff --git a/drivers/soc/soc_xilinx_zynqmp.c b/drivers/soc/soc_xilinx_zynqmp.c
-index 786825d920..d8b4f172a3 100644
---- a/drivers/soc/soc_xilinx_zynqmp.c
-+++ b/drivers/soc/soc_xilinx_zynqmp.c
-@@ -44,6 +44,7 @@ enum {
- 	ZYNQMP_VARIANT_DR = BIT(3),
- 	ZYNQMP_VARIANT_DR_SE = BIT(4),
- 	ZYNQMP_VARIANT_EG_SE = BIT(5),
-+	ZYNQMP_VARIANT_TEG = BIT(6),
- };
- 
- struct zynqmp_device {
-@@ -74,6 +75,11 @@ static const struct zynqmp_device zynqmp_devices[] = {
- 		.device = 3,
- 		.variants = ZYNQMP_VARIANT_EG | ZYNQMP_VARIANT_CG,
- 	},
-+	{
-+		.id = 0x04718093,
-+		.device = 3,
-+		.variants = ZYNQMP_VARIANT_TEG,
-+	},
- 	{
- 		.id = 0x04721093,
- 		.device = 4,
-@@ -299,6 +305,8 @@ static int soc_xilinx_zynqmp_detect_machine(struct udevice *dev, u32 idcode,
- 		strlcat(priv->machine, "dr", sizeof(priv->machine));
- 	} else if (device->variants & ZYNQMP_VARIANT_DR_SE) {
- 		strlcat(priv->machine, "dr_SE", sizeof(priv->machine));
-+	} else if (device->variants & ZYNQMP_VARIANT_TEG) {
-+		strlcat(priv->machine, "teg", sizeof(priv->machine));
- 	}
- 
- 	return 0;
--- 
-2.17.1
+Review may be easier if we added all missing nodes in one commit, and 
+then another commit to move the common nodes into rk3399-u-boot.dtsi.
 
+For Puma,
+
+Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+
+Thanks,
+Quentin
