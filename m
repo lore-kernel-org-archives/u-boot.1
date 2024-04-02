@@ -4,96 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69431CD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 20:23:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 525AFC6FD1F
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 20:33:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F076388193;
-	Tue,  2 Apr 2024 22:23:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C6FF088196;
+	Tue,  2 Apr 2024 22:33:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ideasonboard.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Unt+nBHY";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="RB8NyPDy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33D7F88193; Tue,  2 Apr 2024 22:23:03 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D65738818F; Tue,  2 Apr 2024 22:33:08 +0200 (CEST)
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EBB98819C
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 22:23:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=f.fainelli@gmail.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-78a5580324eso372331085a.3
- for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 13:23:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712089380; x=1712694180; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=W7tNiMrOXP1634Yg/vOf4MsEzo95+mvSpyjL4l+eDyM=;
- b=Unt+nBHYQMki9n+YArRnTqLyV/1HpB3cIyh79nWll2y3nUs5HFTZxO360nOaQkdtyQ
- 3RsPIVOI+SftNYdUDRQpoAZOuhXGA3zoKRA3uv57ltyLBhoCpMh8uRqutuUbMhNDpI7T
- wQG8eNmNjsQTdKr9vbfwjqTgn7sYdolrxuroTLZOgEXTWzHhl3Ix/QTXL6yasFFs35V4
- MtAGLAdUOIiKahMQFX0Te2UTK6N/1iVq681VFzJAlK0/C+aa1JpMHjTiLxBqaGzE242F
- 33NROJqQZ1JTNG3uA3OOCxhux+eyZAKQlhs8UB7EGcK3p8WUjViyuO6O7RnV6vshoSV/
- DOFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712089380; x=1712694180;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=W7tNiMrOXP1634Yg/vOf4MsEzo95+mvSpyjL4l+eDyM=;
- b=S2G6Lk5cCXnAwt7YZDnz1IjtJ9s2k+vw2Bg/4JczTTqJgHxRG75BgPUC+i3q2y8zNy
- CNh8H+abkwfPUIYnFvyV2zzShPKTmKkHGTQIGUcRqGaia77OOSegp+MFJFDnK1Fbynmk
- wG0dkfaiBANhMGVm/E/fp2p8AwTCCf5+MIXAlYejtuZjBNvI0ZHTjOVuQHZXr8pSUMQ0
- u7PUGdfNquEoLt4fABwq5HZgC8InyfH1gOU2hA+2N1XDV3A+eg/oWB8fXsHiDWQP/QhD
- 3QZZmclAClj+hKJ6ilp5wscEkOEeDX+B3NMZq2gT7G3NMVcUGewD8NeUoUw+2oZuWXow
- uI7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU+rt2llxhCKrBIe2qh/GCdd/m1RAbLHqlG54xneoZWKAeK8zfUNW6iuY65VhZaRpjlVvFKUqOdIJvaEej4meOFNU9TNg==
-X-Gm-Message-State: AOJu0YzH1yax8iVDz39D7VZdBne8Gk8778fHlD6f2BYyW6WGxfdMkYvO
- rz2J7FfoqBtI2KugcVBQJbDqzNcLsyGUW/o/GSAei5PDboArg1fY
-X-Google-Smtp-Source: AGHT+IEDlMRoYnTSBEqdTFqS2KS4443MfztnkmYIYO0eNCRUT1rr3pHk6ZTKoXRIy66IDPJzAPjXRw==
-X-Received: by 2002:a05:620a:4111:b0:78d:36e0:2b5b with SMTP id
- j17-20020a05620a411100b0078d36e02b5bmr377481qko.68.1712089379915; 
- Tue, 02 Apr 2024 13:22:59 -0700 (PDT)
-Received: from [10.67.48.245] ([192.19.223.252])
- by smtp.googlemail.com with ESMTPSA id
- j9-20020a05620a146900b0078d331b3f70sm527832qkl.11.2024.04.02.13.22.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 02 Apr 2024 13:22:59 -0700 (PDT)
-Message-ID: <6dbd1ef4-c516-403c-a2d1-8ed3458add11@gmail.com>
-Date: Tue, 2 Apr 2024 13:22:52 -0700
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/3] dt-bindings: arm: bcm:
- raspberrypi,bcm2835-firmware: Drive-by fixes
-Content-Language: en-US
-To: "Ivan T. Ivanov" <iivanov@suse.de>,
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Cc: Stefan Wahren <wahrenst@gmx.net>, Peter Robinson <pbrobinson@gmail.com>,
+ by phobos.denx.de (Postfix) with ESMTPS id B55F787FBC
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 22:33:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ideasonboard.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=laurent.pinchart@ideasonboard.com
+Received: from pendragon.ideasonboard.com (81-175-209-231.bb.dnainternet.fi
+ [81.175.209.231])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 49F8A1A2;
+ Tue,  2 Apr 2024 22:32:29 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1712089949;
+ bh=4mOofuEeOq7v4mnEeBDbo5h6q7HdM9SMjWkZDda7BNY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=RB8NyPDyGlynBUsDiFxqNkll1yOFsYz/EMZ2VsFQOAmjEHAO1lOeLNUix9efTP4Gt
+ o9G78a0tBd3qS10qEC1wS/GOuu5s1r/3Xv8q2H5zyTEsNEEIXRACPKITbWzHw/yGWx
+ HEx3vLJNEAP+gxQhlUDD2VcV6qbCcIspsCQhtcSw=
+Date: Tue, 2 Apr 2024 23:32:55 +0300
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Florian Fainelli <f.fainelli@gmail.com>
+Cc: Stefan Wahren <wahrenst@gmx.net>, "Ivan T. Ivanov" <iivanov@suse.de>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Dave Stevenson <dave.stevenson@raspberrypi.com>,
- Naushir Patuck <naush@raspberrypi.com>, Bartosz Golaszewski <brgl@bgdev.pl>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Conor Dooley <conor+dt@kernel.org>,
+ Naushir Patuck <naush@raspberrypi.com>,
+ Bartosz Golaszewski <brgl@bgdev.pl>,
+ Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, 
+ Conor Dooley <conor+dt@kernel.org>,
+ Florian Fainelli <florian.fainelli@broadcom.com>,
  Krzysztof Kozlowski <krzysztof.kozlowski+dt@linaro.org>,
  Linus Walleij <linus.walleij@linaro.org>,
- Nicolas Saenz Julienne <nsaenz@kernel.org>, Ray Jui <rjui@broadcom.com>,
- Rob Herring <robh@kernel.org>, Scott Branden <sbranden@broadcom.com>,
+ Nicolas Saenz Julienne <nsaenz@kernel.org>,
+ Ray Jui <rjui@broadcom.com>, Rob Herring <robh@kernel.org>,
+ Scott Branden <sbranden@broadcom.com>,
  linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
  linux-rpi-kernel@lists.infradead.org, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 0/3] dt-bindings: arm: bcm:
+ raspberrypi,bcm2835-firmware: Drive-by fixes
+Message-ID: <20240402203255.GC32172@pendragon.ideasonboard.com>
 References: <20240326195807.15163-1-laurent.pinchart@ideasonboard.com>
  <b044eec1-ae64-4de7-9ab0-e3fe756131ef@gmx.net>
  <20240327233700.GA21080@pendragon.ideasonboard.com>
  <bcf8093ab0ea6f3738bf4a4623de700a@suse.de>
-From: Florian Fainelli <f.fainelli@gmail.com>
-In-Reply-To: <bcf8093ab0ea6f3738bf4a4623de700a@suse.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <2e15ab46-f29c-44ac-8a2a-8baa140ee1a3@gmx.net>
+ <20240402200855.GA32172@pendragon.ideasonboard.com>
+ <8a64376d-f624-44c8-91bb-f6a95dc1c945@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <8a64376d-f624-44c8-91bb-f6a95dc1c945@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,54 +85,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/2/24 01:58, Ivan T. Ivanov wrote:
-> 
-> Hi,
-> 
-> On 2024-03-28 01:37, Laurent Pinchart wrote:
->> On Wed, Mar 27, 2024 at 07:49:38AM +0100, Stefan Wahren wrote:
->>> Hi,
->>>
->>> [add Peter and Ivan]
->>>
->>> Am 26.03.24 um 20:58 schrieb Laurent Pinchart:
->>> > Hello,
->>> >
->>> > This small series includes a few drive-by fixes for DT validation
->>> > errors.
->>> >
->>> > The first patch has been posted previously in v1 ([1], and now 
->>> addresses
->>> > a small review comment. I think it's good to go.
->>> >
->>> > The next two patches address the same issue as "[PATCH 1/2] 
->>> dt-bindings:
->>> > arm: bcm: raspberrypi,bcm2835-firmware: Add missing properties" ([2]),
->>> > but this time with a (hopefully) correct approach. Patch 2/3 starts by
->>> > fixing the raspberrypi-bcm2835-firmware driver, removing the need 
->>> for DT
->>> > properties that are specified in bcm2835-rpi.dtsi but not 
->>> documented in
->>> > the corresponding bindings. Patch 3/3 can then drop those properties,
->>> > getting rid of the warnings.
->>>
->>> since this series drops properties from the device tree, does anyone
->>> have the chance to test it with a recent U-Boot?
->>
->> I don't have U-Boot running with my RPi, so I would appreciate if
->> someone could help :-)
-> 
-> Sorry for taking me so long to verify this.
-> 
-> I think on RPi U-Boot side we are fine. API used when accessing Mbox
-> device do not follow DM model and do not use DMA, but just access
-> device directly using this nice macros phys_to_bus/bus_to_phys.
-> 
-> I build new DTB files with this patch included and U-Boot build
-> from the latest sources. No obvious issues on RPi3 and RPi4.
-> Devices boot fine.
+Hi Florian,
 
-Can I add this as a Tested-by tag from you while applying then?
+On Tue, Apr 02, 2024 at 01:18:35PM -0700, Florian Fainelli wrote:
+> On 4/2/24 13:08, Laurent Pinchart wrote:
+> > On Tue, Apr 02, 2024 at 09:52:06PM +0200, Stefan Wahren wrote:
+> >> Am 02.04.24 um 10:58 schrieb Ivan T. Ivanov:
+> >>> On 2024-03-28 01:37, Laurent Pinchart wrote:
+> >>>> On Wed, Mar 27, 2024 at 07:49:38AM +0100, Stefan Wahren wrote:
+> >>>>> Hi,
+> >>>>>
+> >>>>> [add Peter and Ivan]
+> >>>>>
+> >>>>> Am 26.03.24 um 20:58 schrieb Laurent Pinchart:
+> >>>>>> Hello,
+> >>>>>>
+> >>>>>> This small series includes a few drive-by fixes for DT validation
+> >>>>>> errors.
+> >>>>>>
+> >>>>>> The first patch has been posted previously in v1 ([1], and now addresses
+> >>>>>> a small review comment. I think it's good to go.
+> >>>>>>
+> >>>>>> The next two patches address the same issue as "[PATCH 1/2] dt-bindings:
+> >>>>>> arm: bcm: raspberrypi,bcm2835-firmware: Add missing properties" ([2]),
+> >>>>>> but this time with a (hopefully) correct approach. Patch 2/3 starts by
+> >>>>>> fixing the raspberrypi-bcm2835-firmware driver, removing the need for DT
+> >>>>>> properties that are specified in bcm2835-rpi.dtsi but not documented in
+> >>>>>> the corresponding bindings. Patch 3/3 can then drop those properties,
+> >>>>>> getting rid of the warnings.
+> >>>>>
+> >>>>> since this series drops properties from the device tree, does anyone
+> >>>>> have the chance to test it with a recent U-Boot?
+> >>>>
+> >>>> I don't have U-Boot running with my RPi, so I would appreciate if
+> >>>> someone could help :-)
+> >>>
+> >>> Sorry for taking me so long to verify this.
+> >>>
+> >>> I think on RPi U-Boot side we are fine. API used when accessing Mbox
+> >>> device do not follow DM model and do not use DMA, but just access
+> >>> device directly using this nice macros phys_to_bus/bus_to_phys.
+> >>>
+> >>> I build new DTB files with this patch included and U-Boot build
+> >>> from the latest sources. No obvious issues on RPi3 and RPi4.
+> >>> Devices boot fine.
+> > 
+> > Thank you for testing Ivan.
+> > 
+> >> Thanks you, Laurent and Ivan
+> >>
+> >> Reviewed-by: Stefan Wahren <wahrenst@gmx.net>
+> > 
+> > Stefan, I'm quite unfamiliar with the Raspberry Pi upstreaming process
+> > (despite having sent patches for ages :-)), do I understand correctly
+> > that this patch will go through your tree, or do I need to work with
+> > someone else to get it merged upstream ?
+> 
+> I will be taking those via the Broadcom SoC tree.
+
+Thank you.
+
+If there's a chance to include patches 05/10, 07/10, 08/10 and 09/10
+from [1] at the same time, that would be great :-)
+
+[1] https://lore.kernel.org/linux-media/20240402000424.4650-1-laurent.pinchart@ideasonboard.com
+
 -- 
-Florian
+Regards,
 
+Laurent Pinchart
