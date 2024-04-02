@@ -4,77 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ACC0CD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 09:07:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F9A7CD1284
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 09:09:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 442B0880F4;
-	Tue,  2 Apr 2024 11:07:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EDD1B88365;
+	Tue,  2 Apr 2024 11:09:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=socionext.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hmCKCVAw";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6492A88327; Tue,  2 Apr 2024 11:07:20 +0200 (CEST)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34D3387FDA
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 11:07:18 +0200 (CEST)
+ id 4BA2A88368; Tue,  2 Apr 2024 11:09:40 +0200 (CEST)
+Received: from mx.socionext.com (mx.socionext.com [202.248.49.38])
+ by phobos.denx.de (Postfix) with ESMTP id BF7A087FDA
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 11:09:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=socionext.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-33e9115d501so2173023f8f.0
- for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 02:07:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712048838; x=1712653638; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=cz4IFU5UDpAClZ0E4VZu8ESCJQeLoWbrfZfgCZ+4piw=;
- b=hmCKCVAwmRJNcvaKjuxUne0sscvj3ylrfAXPMIT0KcTFLSzheVwg16eeY6K0OiZkLD
- 8mxdfijrE6/QwtDS9/XiMf79Ow0g0hZ8H2CkvBNzdfTQi5MaEONJmgqrmI4/XOj8xgMf
- yRuvrL0o8IXxxw9us9qV3Irf01f9cHs9jY7fPaQfQHPJHyNIMbZUI8+8pr9phNsfZgIk
- 1e0+yeFxujYWOXNpF4xD0JqWJmPryZzrLzSGu7R8TuTA/XK6Mm9CYFLBRKPvK8N47mC2
- e8n1b7q0q4ffXCFgSkh85kltCxJokgoEgbdYH2ES303acYJZQunDAWZsYaZynlcHqSLy
- a+bw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712048838; x=1712653638;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=cz4IFU5UDpAClZ0E4VZu8ESCJQeLoWbrfZfgCZ+4piw=;
- b=MyTvWYcL08DI0tUZbpizKBzlxEaMJH9Fz6H8czOoJh338S1DK6pGQKhx3N42fYneQZ
- OQ17IdL401Bx14P3YPmPYHrP0ZPy6XIS2BcH7pXPAp8iZx8rseKC6/DdOiiAExtmfzUx
- KhXVWm4VByYXbRzPxYgTrVJaOt1f8iIm5+9ZZKfSzOoFmleg/KYsjQtrvgp5vrmfGeCG
- M6b87fqUIna0afHY2ssWOU8+KNcYJpYA9U0e82VbrslSMJkxhaY1pAGXbr17gUF09gjv
- wgGias4p9EtIBS/RAJ2MigUjUx2iyo2EDZGYMyMM85E9CF1ImxLbM/r5tL0f7ctatmog
- PMgg==
-X-Gm-Message-State: AOJu0Yz/M4l3K2b2+IMeQAsd6kl1RXcbeMJvZCDdsA86KtC+p5MBsiF+
- ggzjqC1GoC427F1KLqQ3tiuxqqh7RtBEW0lRwK3ak+fjXx1UhmbXolq7YdSu17CPRLJe3x7oE7U
- N5XxjgD5mVEvqWfuc1mpVfTv9P98=
-X-Google-Smtp-Source: AGHT+IEds34nr6vuvcceKAwz+cnxGgqvvdWXHMRlGG2zh+3cqNRgHFqwkBBbHjkFjc94rhgfHUHv827y9pHlN1T3tgM=
-X-Received: by 2002:adf:ecce:0:b0:341:90a1:3e09 with SMTP id
- s14-20020adfecce000000b0034190a13e09mr7058498wro.1.1712048837205; Tue, 02 Apr
- 2024 02:07:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=kojima.masahisa@socionext.com
+Received: from unknown (HELO iyokan2-ex.css.socionext.com) ([172.31.9.54])
+ by mx.socionext.com with ESMTP; 02 Apr 2024 18:09:33 +0900
+Received: from mail.mfilter.local (mail-arc01.css.socionext.com [10.213.46.36])
+ by iyokan2-ex.css.socionext.com (Postfix) with ESMTP id E2FE520584CE;
+ Tue,  2 Apr 2024 18:09:33 +0900 (JST)
+Received: from kinkan2.css.socionext.com ([172.31.9.51]) by m-FILTER with
+ ESMTP; Tue, 2 Apr 2024 18:09:33 +0900
+Received: from ubuntu-FMVS04001.e01.socionext.com (unknown [10.213.110.223])
+ by kinkan2.css.socionext.com (Postfix) with ESMTP id 89039B62AB;
+ Tue,  2 Apr 2024 18:09:33 +0900 (JST)
+From: Masahisa Kojima <kojima.masahisa@socionext.com>
+To: u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>
+Subject: [PATCH v2] efi_loader: fix append write behavior to non-existent
+ variable
+Date: Tue,  2 Apr 2024 18:09:50 +0900
+Message-Id: <20240402090950.3819705-1-kojima.masahisa@socionext.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240402014035.8169-1-dennis@ausil.us>
-In-Reply-To: <20240402014035.8169-1-dennis@ausil.us>
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-Date: Tue, 2 Apr 2024 11:07:05 +0200
-Message-ID: <CAByghJZ0+gV6b3-OTOx4=a3fUe27GsaTDXWxVPLxAYDstROAOw@mail.gmail.com>
-Subject: Re: [PATCH] mvebu: Enable preboot start for pci/usb/scsi/nvme
-To: Dennis Gilmore <dennis@ausil.us>
-Cc: u-boot@lists.denx.de, Konstantin Porotchkin <kostap@marvell.com>, 
- Algapally Santosh Sagar <santoshsagar.algapally@amd.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Michal Simek <michal.simek@amd.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,65 +58,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dennis,
+Current "variables" efi_selftest result is inconsistent
+between the U-Boot file storage and the tee-based StandaloneMM
+RPMB secure storage.
 
-On Tue, Apr 2, 2024 at 3:40=E2=80=AFAM Dennis Gilmore <dennis@ausil.us> wro=
-te:
+U-Boot file storage implementation does not accept SetVariale
+call to non-existent variable with EFI_VARIABLE_APPEND_WRITE,
+it return EFI_NOT_FOUND.
+However it is accepted and new variable is created in EDK II
+StandaloneMM implementation if valid data and size are specified.
+If data size is 0, EFI_SUCCESS is returned.
 
-> While preboot was enabled, it did not work as commands are needed to be
-> run to enable some of the subsystems. This patch starts pci, USB, Sata,
-> and nvme and makes sure that the system will boot no mater what storage
-> is in use.
->
-> Applogies for resending, I accidently left the u-boot list off
->
-> Signed-off-by: Dennis Gilmore <dennis@ausil.us>
-> ---
->  configs/mvebu_espressobin-88f3720_defconfig | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/configs/mvebu_espressobin-88f3720_defconfig
-> b/configs/mvebu_espressobin-88f3720_defconfig
-> index 7ecf5ab0d64..f4f7a809609 100644
-> --- a/configs/mvebu_espressobin-88f3720_defconfig
-> +++ b/configs/mvebu_espressobin-88f3720_defconfig
-> @@ -21,6 +21,7 @@ CONFIG_AHCI=3Dy
->  CONFIG_DISTRO_DEFAULTS=3Dy
->  CONFIG_OF_BOARD_SETUP=3Dy
->  CONFIG_USE_PREBOOT=3Dy
-> +CONFIG_PREBOOT=3D"pci enum; usb start; nvme scan; scsi scan;"
->  CONFIG_SYS_CONSOLE_INFO_QUIET=3Dy
->  # CONFIG_DISPLAY_CPUINFO is not set
->  # CONFIG_DISPLAY_BOARDINFO is not set
-> --
-> 2.44.0
->
-> The issue is in a different place. This board uses distroboot
-approach (based on what I see in [1]), which is supposed to automatically
-initialize boot media before trying to boot from it [2].
-Initialization of media is forced when the CONFIG_<subsystem> symbol is
-enabled, for example CONFIG_NVMEM=3Dy (check BOOTENV_SET_NVME_NEED_INIT
-define in [2]). In your final board config "# CONFIG_NVMEM is not set"
-though.
+Since UEFI specification does not clearly describe the behavior
+of the append write to non-existent variable, let's update
+the U-Boot file storage implementation to get aligned with
+the EDK II reference implementation.
 
-IMO, with your proposed fix you'll drastically increase boot time
-(by probing all buses regardless of what boot media is going to be used
-next),
-and hide side effects of misconfiguration.
+Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+---
+v1 -> v2
+- return EFI_SUCCESS for append write with data size 0
+- add comment that we follow the EDK II implementation
 
-Hope that helps
+ lib/efi_loader/efi_variable.c             | 26 +++++++++---
+ lib/efi_selftest/efi_selftest_variables.c | 48 ++++++++++++++++++++++-
+ 2 files changed, 66 insertions(+), 8 deletions(-)
 
-Regards,
-Igor
+diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+index 40f7a0fb10..d1db7ade0a 100644
+--- a/lib/efi_loader/efi_variable.c
++++ b/lib/efi_loader/efi_variable.c
+@@ -282,11 +282,21 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+ 		}
+ 		time = var->time;
+ 	} else {
+-		if (delete || append)
+-			/*
+-			 * Trying to delete or to update a non-existent
+-			 * variable.
+-			 */
++		/*
++		 * UEFI specification does not clearly describe the expected
++		 * behavior of append write with data size 0, we follow
++		 * the EDK II reference implementation.
++		 */
++		if (append && !data_size)
++			return EFI_SUCCESS;
++
++		/*
++		 * EFI_VARIABLE_APPEND_WRITE to non-existent variable is accepted
++		 * and new variable is created in EDK II reference implementation.
++		 * We follow it and only check the deletion here.
++		 */
++		if (delete)
++			/* Trying to delete a non-existent variable. */
+ 			return EFI_NOT_FOUND;
+ 	}
+ 
+@@ -329,7 +339,11 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+ 		/* EFI_NOT_FOUND has been handled before */
+ 		attributes = var->attr;
+ 		ret = EFI_SUCCESS;
+-	} else if (append) {
++	} else if (append && var) {
++		/*
++		 * data is appended if EFI_VARIABLE_APPEND_WRITE is set and
++		 * variable exists.
++		 */
+ 		u16 *old_data = var->name;
+ 
+ 		for (; *old_data; ++old_data)
+diff --git a/lib/efi_selftest/efi_selftest_variables.c b/lib/efi_selftest/efi_selftest_variables.c
+index c7a3fdbaa6..39ad03a090 100644
+--- a/lib/efi_selftest/efi_selftest_variables.c
++++ b/lib/efi_selftest/efi_selftest_variables.c
+@@ -131,13 +131,57 @@ static int execute(void)
+ 			    (unsigned int)len);
+ 	if (memcmp(data, v, len))
+ 		efi_st_todo("GetVariable returned wrong value\n");
+-	/* Append variable 2 */
++
++	/* Append variable 2, write to non-existent variable with datasize=0 */
++	ret = runtime->set_variable(u"efi_none", &guid_vendor1,
++				    EFI_VARIABLE_BOOTSERVICE_ACCESS |
++				    EFI_VARIABLE_APPEND_WRITE,
++				    0, v);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error(
++			"SetVariable(APPEND_WRITE) with size 0 to non-existent variable returns wrong code\n");
++		return EFI_ST_FAILURE;
++	}
++	len = EFI_ST_MAX_DATA_SIZE;
++	ret = runtime->get_variable(u"efi_none", &guid_vendor1,
++				    &attr, &len, data);
++	if (ret != EFI_NOT_FOUND) {
++		efi_st_error("Variable must not be created\n");
++		return EFI_ST_FAILURE;
++	}
++	/* Append variable 2, write to non-existent variable with valid data size*/
+ 	ret = runtime->set_variable(u"efi_none", &guid_vendor1,
+ 				    EFI_VARIABLE_BOOTSERVICE_ACCESS |
+ 				    EFI_VARIABLE_APPEND_WRITE,
+ 				    15, v);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("SetVariable(APPEND_WRITE) with valid size and data to non-existent variable must be succcessful\n");
++		return EFI_ST_FAILURE;
++	}
++	len = EFI_ST_MAX_DATA_SIZE;
++	ret = runtime->get_variable(u"efi_none", &guid_vendor1,
++				    &attr, &len, data);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("GetVariable failed\n");
++		return EFI_ST_FAILURE;
++	}
++	if (len != 15)
++		efi_st_todo("GetVariable returned wrong length %u\n",
++			    (unsigned int)len);
++	if (memcmp(data, v, len))
++		efi_st_todo("GetVariable returned wrong value\n");
++	/* Delete variable efi_none */
++	ret = runtime->set_variable(u"efi_none", &guid_vendor1,
++				    0, 0, NULL);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("SetVariable failed\n");
++		return EFI_ST_FAILURE;
++	}
++	len = EFI_ST_MAX_DATA_SIZE;
++	ret = runtime->get_variable(u"efi_none", &guid_vendor1,
++				    &attr, &len, data);
+ 	if (ret != EFI_NOT_FOUND) {
+-		efi_st_error("SetVariable(APPEND_WRITE) with size 0 to non-existent variable returns wrong code\n");
++		efi_st_error("Variable was not deleted\n");
+ 		return EFI_ST_FAILURE;
+ 	}
+ 	/* Enumerate variables */
+-- 
+2.34.1
 
-[1] include/configs/mvebu_armada-37xx.h
-[2] include/config_distro_bootcmd.h
-
---=20
-Best regards - Atentamente - Meilleures salutations
-
-Igor Opaniuk
-
-mailto: igor.opaniuk@gmail.com
-skype: igor.opanyuk
-https://www.linkedin.com/in/iopaniuk <http://ua.linkedin.com/in/iopaniuk>
