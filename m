@@ -4,132 +4,179 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 947E9CD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 13:10:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B482ECD1284
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 13:11:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B43E87D70;
-	Tue,  2 Apr 2024 15:10:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
+	by phobos.denx.de (Postfix) with ESMTP id A2D18879BB;
+	Tue,  2 Apr 2024 15:11:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="PQ9CjNZw";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="5pp973hO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 003B287F07; Tue,  2 Apr 2024 15:10:54 +0200 (CEST)
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur01on0719.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe02::719])
+ id EA4C788173; Tue,  2 Apr 2024 15:11:26 +0200 (CEST)
+Received: from NAM10-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam10on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2412::701])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A65C2879BB
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 15:10:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=theobroma-systems.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=quentin.schulz@theobroma-systems.com
+ by phobos.denx.de (Postfix) with ESMTPS id D461E879A2
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 15:11:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Hzh3UuH/oEEhJSjSe4Bba9QleLHfh5DM2iMlB1Y1tUWgTWzP0mccBwc4FNOuoSyVCJ1OhblLypNtdOCbSpi9X4WgMCvCkaSlU6vVLhzPzFPg3llAF6XjdBWNlqfoDP3mwKLrVEjenP9GrH0i9hTTrugAnaQkuua8GhI13gn+tPv/ki+RSpcmVzzxwKx+qRkUIOsBNza8C7Tq5P7mi3d386okmXWW4naNivJhkmXqFu7M9F2fNR5/MnDECut3vgJnT19lx1B0Xvsea9aHTvYCeWIE55/tvt14ry/l3azIYvlltkre7vmSIuP6xyH2wy6SH21fK0B8fMrsz4VRfOkJ0g==
+ b=XeN5be+AxsYAAZcl9fIEiUvXcCLOCJk1Hy/z/X3ogGGMJaWO96sj+7LbLtWbngZL4Y6JGu2XIMD3dBtinb6KE9ZZ2lLvtrVq6Ak0nziEtD8mKVtVcxHtX/br+RVd4jwD8GeMrpsEvr62OTOjmbnd0hdW8TVA4hrFk8CymU3YmPK/v48HxWGrN/wSpTn23wZ41JW6KTWF4Y02r8mhLmKEpGs0UPP8y12Gigqsydra96DTxnrCGETnEjuABHPU6VniIe9FAq3SRuNQ3J3QrN5BbTrtPVN8n0uBB9S/lZlrGtDjBt/s/Ar0bPATr3uY1JzeD7cZSxO0/7yLwnCRMQm2lA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pWHwkLptDT+3gdsUi7zGDWaay5dU54w7JYBPjgeCAcE=;
- b=SB9BaimjX5Htws8kWU9VYd4rrVwUIc0FGbgae3z65/7R1G2kmHRSd3TmvXIHJDAb4yJwMlv/TDustorZZBCwqP87rOs1y8vJxjGb7DB0U4PRv8Gm94gBs7avoNKWNsaCHjQNahzMw5SVfpbvWXmQ3M1oL+kR1ZyKaXlen5gFzhRIQoQP2pHQX6uKmG3Q8RBPJ8NoY4XukAz/VhGrel7F2WTywV4aLKHxFVhNuVN8V3ieKcb24JuqooR4mZi5pMlfapxUciJfd5fSiMyOvK0S8XyYPr1rF65IeEcyQFSvFfqqsqvzgDqxkzy8HW7KpHQnfWN8uYBWIU8sUuQGKSAQig==
+ bh=MvHDkbYrS053iDCkywFqYj35tu2up4op+G7G4S1mu1A=;
+ b=hG9yBUH+XTyioMgV5uF+H550byGzGbXa8q+qCQCcptwp8MF3bqNsQY+fcXldFs2GcFhTzQw1FzPZivBVpGXu3l2goZZ40iFmQZNctGAsHKIA2DvFViuCk4jo3oVIdeQYkQ/z64jL76wmqU7UJjDGXlji6hzbTOvREwihBA9vJy0mREc/UHW+chd7drQLLTmj8TwWqF0EIL1Ko1Pr3sn1+VPFEfFSwnw+1ITcLtXpahVSD2RoyJyn4DWXFRAneNDsju1zKh6L7qhk5FTnOcpsJY5joi2RIycEyM1+2GYT7l8UsMw2N9xSv0ZgZAcWeiJ4voE1Bwg5dyb0Zm+CmN4cSA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
- header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
- s=selector1;
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pWHwkLptDT+3gdsUi7zGDWaay5dU54w7JYBPjgeCAcE=;
- b=PQ9CjNZwini9mN3KNyLKjMUHQ5fztvzmFVgf19/tfXRbXsoJBY5XhTPqwxUxxlYRq8F5yrmgI3Tqgv/kOGwbLpQMesl+DMjSSnkJ0U4l+aXzQXVDoMmcFrvFE29oFp3zGghehpmKDliRAggwFUxa6uzs4GVLf7eulGX1HJRcAbjNscDH8WQhHB5OZiyMR5BIoi9cr0lN+BpnDwwA9JeRbqkInei3w1udyX1Ir7cY0MnI2mKVuqK4G/AKB7PbZy7J6bv7G4bAZObjRX/+GcD8AmfIaxeA++VOoCaGm2QJASeLFVds+rGeTU/R6+04iXcDcl+ME9YsmXUfc2VFwebAZw==
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
- by DB9PR04MB9449.eurprd04.prod.outlook.com (2603:10a6:10:36a::11)
+ bh=MvHDkbYrS053iDCkywFqYj35tu2up4op+G7G4S1mu1A=;
+ b=5pp973hO6rwV2rKDANcqqs2X5YpKNGZtFOs0aLEdfRDYts7ckZclGFuvg0/bFeTo3SA2h7r1xprn7IVt+bdAS+rk4jvcLZIbs7H53TPIHT0mMc36E2/HRyTiGVgEV8jyTwmemG0xjNuHXtJb5O93tGyk049xPklvUxu/VrMzEso=
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
+ by MN6PR12MB8544.namprd12.prod.outlook.com (2603:10b6:208:47f::17)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Tue, 2 Apr
- 2024 13:10:50 +0000
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::3e70:7029:faf2:7779]) by DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::3e70:7029:faf2:7779%3]) with mapi id 15.20.7409.042; Tue, 2 Apr 2024
- 13:10:49 +0000
-Message-ID: <2d1ee75c-898e-433a-ba60-37aa532736d6@theobroma-systems.com>
-Date: Tue, 2 Apr 2024 15:10:46 +0200
+ 2024 13:11:20 +0000
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::6622:ec76:9367:3907]) by SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::6622:ec76:9367:3907%2]) with mapi id 15.20.7409.042; Tue, 2 Apr 2024
+ 13:11:20 +0000
+Message-ID: <6db16821-fefe-4e5a-8cc4-58a48707002e@amd.com>
+Date: Tue, 2 Apr 2024 15:11:03 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/31] rockchip: rk3399-ficus: Enable TPL and use common
- bss and stack addr
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20240331202921.262323-1-jonas@kwiboo.se>
- <20240331202921.262323-3-jonas@kwiboo.se>
+Subject: Re: [PATCH v3 2/2] arm64: zynq(mp): Rename spl_board_init() to
+ spl_soc_init()
+To: lukas.funke-oss@weidmueller.com, u-boot@lists.denx.de
+Cc: Lukas Funke <lukas.funke@weidmueller.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?= <csokas.bence@prolan.hu>,
+ Fabio Estevam <festevam@denx.de>, Linus Walleij <linus.walleij@linaro.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Yang Xiwen <forbidden405@outlook.com>
+References: <20240327121153.2455126-1-lukas.funke-oss@weidmueller.com>
+ <20240327121153.2455126-3-lukas.funke-oss@weidmueller.com>
 Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <20240331202921.262323-3-jonas@kwiboo.se>
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <20240327121153.2455126-3-lukas.funke-oss@weidmueller.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA1P291CA0007.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:19::11) To DU2PR04MB8536.eurprd04.prod.outlook.com
- (2603:10a6:10:2d7::10)
+X-ClientProxiedBy: VI1PR07CA0270.eurprd07.prod.outlook.com
+ (2603:10a6:803:b4::37) To SJ2PR12MB8109.namprd12.prod.outlook.com
+ (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|DB9PR04MB9449:EE_
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|MN6PR12MB8544:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: pXmKeNOBMZgZ8EmU0tP0eNlkyDhXG1/8G/wuDfI6DrHCi4Rvj4G3qspmYOjBLUc4wW8ekum16buOra0UfA/3rvPuKrNUu0flQF/R6YKINvxqMBnvbE0dhJ33M5FyXlEkkA8AJy0eZ8FrMCbSASgxBdbvusseQ3XN8c+3dFP0Om8Jmm1BegyRq7xCcHkx30Tat6L97EUFnSw49EjHG3FdRDxnHkSYh4a97EMWo1XbiKlreT8TJ0s76S9dTunK+Lb5a2Jz9NfSZp9LGCkff4yIi7d26oiKeC9w4c4CArFKc/X8H72FGRbDdQ/TYBzYAQFHGSqbSMlmxtuPZZNCVsC5FHDQSV+AeMGrP7eMHpS4psLoKQc1I8L3ZMJnCP6pNaQ/8vjd/iydwWz+sUGhye1M4Mgnnos0rhpyTG5v6KLOn5cTSCLGHdFSHIjXGCO/w5ZrkJzUG7RgSp+doWSa6Yu6PTDM3GyNOSR6bcUpSh42+0p8JAzIndng4vCRhE1QLcIO6DGjOY6mOLPIR3Qn175dTRxb8Qake36P5DwTDppks/700RNCbccfrdN+8AfZzYf0dGNeXv7EpSoPJX5p02oecVLwvWqmUOGC8+dmI+8A28w=
+X-Microsoft-Antispam-Message-Info: YwTqhkl3UlfecJ+bDxgUynACJCLeYEwhdLPUiLFznbn6C5nXUYt8wDtcXTy8nl3Qza8goyc8DVm3JLu0i73rMf2SLrVOwkQ/9Gx3lEcr71AsUFOB/AE/8JlVF+IDrXMwfxdwDqAxSXCbJgcd5XGjH7Bih+RgGvvZSthCN7UmIwylS9ldiKbjn6ExSzkoTwU/5o0UpnKDlwmAHa+GscUOFQKlvAKhD4uopoLmIQVoMXoqEK01ZNjpyEsOoFyt1E3mOh7gYCQTbEwLTQrJl/gTn9u8VGAqY8X8WtnAuUwyH/ZyB+slrNyK0wl8w3bvk3Ub5bdevWTe8RdxhN/xOSsCNQtOixfr9cfyNCzMk74NqcKKUfuchW4+34omH+RKzaFFpJfGE3i9udSqr8Snb8zp8K6dUGZIu1OGc/mOz7IT3NzRSRd9PF3kbQJbTzUlnf2Y0QWPboJNCaSaRWXekFVjZFO+2rX19dXgzxuuh9Fkhpy1mhB8EY52pmZNszWUKH2bAk127dlI9HCqwuiaCPg62J3Z35vfBv/4bWSV2N5ukTUJWJGUhgZOcbsYTR9AEwxQ8wu0s52DNLFvLVdoZnA7CgpFj2whmABwYJbQ3lhu1xaufDu3Py36G/+/bJyewBZ7lhpaeL9MYiPaQcv1a6Cqig==
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(366007)(1800799015); DIR:OUT; SFP:1102; 
+ IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(7416005)(376005)(366007)(1800799015); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?T2Y3YWt4U0xDdFI1TUljeTRNMis3N0c0VkhTbGF2UDNUckdmNEFYSm9zblJW?=
- =?utf-8?B?M0NHaVMvdUpQUlhjVm9VVWgvSGFnYnFmbS9kQUt6UFpOUkQrc2JYWHhnQU81?=
- =?utf-8?B?TUswdnhrekhuUDViZW04QXlzN2ZxY0F3RVBvdUlmazgyVkp0NzZKbXowVGFa?=
- =?utf-8?B?MWFMTC9Jemd3UUdwRW94NlFwbmU2alJ4RExhaXM1WmdiS0pXMi9zT216enZh?=
- =?utf-8?B?cmZ3TVhGMmkyRlcrL2xpL3VKRzA5amNObXMzSTFZdHFoTldQMHFqT2ZHRjNP?=
- =?utf-8?B?Q0p1MDNRRnVtVXdhVUxrcXFxdS8ra0RTaVd5YTVMZFZodks0RU1oOWw2OUdz?=
- =?utf-8?B?NkRRdVFSSXpYU1VENzdZZHRGRWhjMjFpM2plZTRveWtXMWR0blQxdm1MTktF?=
- =?utf-8?B?SGtYUzh3a3VlLzVTZThtVFJ1SWE0M3NHRkdFUmRodElkaTgxV1gwYThNOFZ6?=
- =?utf-8?B?RnNWV3pkSjJ3VTJRQWlwVDU1ZmxQQ0txdVdCS2thc1k4SVZXZjRiTE9TSHBO?=
- =?utf-8?B?WlNsaTRPalFOcWhzcS94ZHpXWWJob0liLzhIV1FrcHhqWTduamovdy82bWxv?=
- =?utf-8?B?OGZkZCtMUEt3WlkzQXFKQVRsTmtaVFBrcm5YbkIxd2IreHUwSTg2aDlTdjFY?=
- =?utf-8?B?TjJPcEdKTlM3MzI4VWtkZGdYam9nR1ZWZ0w3bURKejhoR0YwaHVtNThiR2Vi?=
- =?utf-8?B?NDJhbmE4aDVqb1hlQldWdjdtVWZQR09ZQVJ1SWRUam9ocGFick5QS3NsVWVx?=
- =?utf-8?B?N3g0dkM4ZFRDM1lHcnV3SnlVanVuc3VWWGZFMExzMDVXaml6MmNaakFQaFB0?=
- =?utf-8?B?NkRVd3dpQUYyMGp0cVZWK2hpWlllMTdpRllLck8wbTcxekFXeEEwek83YXN1?=
- =?utf-8?B?UXVqSTRYMFkzS3czRTFlVVFWZXpWTnpvY2g3ZGYvelpzRy9CM1FCZGdXVUU1?=
- =?utf-8?B?d1NKQUNzK2FhM3MzVDM2aXoyMVluQ3RnMVhEc0VWZzd6U1p0dXNHZlhyaDFk?=
- =?utf-8?B?L2dPbDlOcndmM0R3bVFOQlZPWlNHekMvaE9rQmtNZTBlK09hR2tPUFIxb29K?=
- =?utf-8?B?TENiSGdEaWE3eVBkZ216ZEM2Vk04MVRpMmVyRFhUWUk3UlBObzJZWWgzUTNX?=
- =?utf-8?B?aXVKZ3FGSHFENVkyS1F4OENFQ2dYSGlCdHh5WFdaTktJSkdRMk5xa085QSty?=
- =?utf-8?B?S1dFckV4ZGtBRU9wM25RUWUxMStkOGlJTWdkdGRucjhtQ2wwZ2MvanRIZG9s?=
- =?utf-8?B?WElsZ0ZpU0NOdzZBdy9lcmlqVjdpZ2hobWxiRFpITjN3V1ZWcVMyVnU3V0tH?=
- =?utf-8?B?czVjbkJaQ2JMdVArUGZpUityTE9oMWRvclArVWZDRmZEdzU3QTZQRmNkOUl1?=
- =?utf-8?B?Nk9VdWU3OExhU3dyemx1WFJvaC9DOUR0VGx2OTVpVjhYQVFUeUtjQ2ZoYWw5?=
- =?utf-8?B?S1ZiWUdjaDV1THJaNWg5OGdsT2dQaUhCOVVzdUtYNW1lOWNoT2tVOHlYQ0wy?=
- =?utf-8?B?VnFaWEJjWmw2VFVyRHZodzFHNDI1OWNlS0tSSSsvVEFWc0MxUEV2TmJPL05m?=
- =?utf-8?B?ZDd6a3RkWGlNYnZVRGJnU3Y4dklKdy9xcUVadEw0OUlocmJ2elA1eVlIM2E3?=
- =?utf-8?B?OGZsR0E1QzQzbUovaEhrUkVJSkh1cU5DWUFIMUFjaFhEUVBuZW00RVJYbXl1?=
- =?utf-8?B?Ky9NS3JncWdPTFdmNWRtbmhZQlZpVFRML1dOL3h1RnBuSnNrcitISXU4N2Yy?=
- =?utf-8?B?cnhNRTdiL3VKdEw5bXlRSXMvMXF1dDN1ditlYWVEMzRteXcydzV4eUMwWnh6?=
- =?utf-8?B?Ny9MdXVVMnlsUlM5aUwxZnRMNHZzNElIRzVqZjlzbTY1a2E3MVQ4UFc1SnBo?=
- =?utf-8?B?dVlTSjhUdzJIT3lHZzZsVHF3SW12ZTczNlV4M0oxRlNJY3F3cGs5ZVpGd0Yw?=
- =?utf-8?B?V05SNndwZmw5VW95NDRhWXRPWWhrNEVwNTJ0RXBBalYya1hRMlk2WmhRdFht?=
- =?utf-8?B?dzY2UnhWYkpGZTByeXltdUx1ZmVmNDQvVWV3ekFBNzdLeUZ6SFpjY3cvSE5P?=
- =?utf-8?B?WkRlR2U1M1lycEtNNUh4eWpHbnhFYlpXcDhiOFV5MUtobGRkTzFKUTNGTERk?=
- =?utf-8?B?LzMvcDQwSUpDR1NCYXhMazdHMkJSSEl4UGVoMWc0ZGdaTi9VTG9wYTFxS1ZC?=
- =?utf-8?Q?SJRbDDjcjRwOqjovYx2qYBs=3D?=
-X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d1702eb1-6c51-485c-8922-08dc53165103
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cXI4bmd1U0o0OUJlVjlzOXppbEtrZGFKR0d1d0J2bC9qUk1uWUxHOGRDMkR4?=
+ =?utf-8?B?c1dWWUJaVG9DOCtSeDRIejJZZGRyZFhoNUtRaG1taFVSenNNbW40NWgxNUQ2?=
+ =?utf-8?B?Z2xJTUFLZWU0Mjg2Y1ZEdUk2ZTErTURGOWFNMnpadkJzT2Z6djVvZHp0Wmhy?=
+ =?utf-8?B?bXJ4NWFyd1ljS0FtdXcyWkhrRzBVc2NGR3hUdXVpWkdXOEhZRFV2K1VxTXB0?=
+ =?utf-8?B?b0xHRHI0TzJ2WVVadGdJYjZBRWEyZDJ5OENqeGg5NCtITC9CNzYxVWhCd0RT?=
+ =?utf-8?B?VTNBSmVEYWVvL0dXeUZQSmFsM1JKbldyOWgrY2RNTlJBZFJMYlY3cFI2blZp?=
+ =?utf-8?B?c0dERFFRSWlRMUNtNCt4NGRGU3dBUUxCeFNPbktSTnEwYWw4V2lKZUpnWGJk?=
+ =?utf-8?B?ZzFjQ2hLSHY3eWk0YVJCYlFRYUFpYmJBQzFpL3RwdHRtQk1ndHAxNmNuZ1VW?=
+ =?utf-8?B?QmVmdCtzZWtnTXdCRWdoQkVmR2RzOVRIdTVqSTgxNkJXcElCVE9qdnBPK0ZQ?=
+ =?utf-8?B?TDk3KzVFMW9DbXQ3Z1I1NjhwVGF0WUlBQ0hmdjJ3aC84WjFFTUNqVVlVZ24z?=
+ =?utf-8?B?MVo0OVdSKys5YllySEdVRUVBU3lNRHh1ajhWMEQrRXQxcVNRbk8zejFQckNG?=
+ =?utf-8?B?elgzRkVKODUyVkQ3OEFWbEE0RFFEa05PRjQwWjUxRFltcTE5ME42TEtLRjdB?=
+ =?utf-8?B?a0Y0WmVqREdnUDBhRkFGMFFVMnlaRTVvbE8rdUhGT3I2NTJBWXE4MUhZR1Q1?=
+ =?utf-8?B?STJqWGIrY1VxT2dQcnprRndoNkhUT3hQT2NoN3ZkNVJ3eEVCOTVaUS9xc0pS?=
+ =?utf-8?B?YnlFTUY5Vm1yT1llVzFrNzJMUDRJcUg5aFNZcExHSmo2dkFXajQ2a2tNSTBM?=
+ =?utf-8?B?eGlhbnlJNWdIVVF0b0gxay9HNXhyeENrcG44dG5zSm0zZ0F0anZybkw5S1h4?=
+ =?utf-8?B?QkNvSDRQNHlISklpaGFOR0NJdWdaWGlXZjY5MktVM29DVjhJWDFMWUQ3N0hL?=
+ =?utf-8?B?cTdqYlNHWVIzb1g0UDk2dTVzR1VaWDJRZ2dvN1YxTkN4Rk1QMk5WUmVGWUhI?=
+ =?utf-8?B?SHFVcloxWC83b1hINXR2UlpzMFB6K0tNMWViN2lXOEFmb3l1cW1GTVd3TUdt?=
+ =?utf-8?B?emhYYWtZOEdnalpHeU5ycFBWUWxkVzdGVGdmZTgyblJuZjhJQzF5eFRoZXpU?=
+ =?utf-8?B?ZFVoSUVhZTNualBta28vc04vOGxKdStMS054b1BxaE5pWWg1dmVpaEpPRk80?=
+ =?utf-8?B?SFYrTW5KaTFUVHBEV2RxMXhyT3p3Mk1nY1piaklLZWRKd1RoSG1hNi9aZWpy?=
+ =?utf-8?B?ME9BUEtKRnduZm52ay9ML3Jxc3JzRHM2ZUFDRFVjd2QzNlUzb0svd1Y3SXZm?=
+ =?utf-8?B?WElhQVZhUHA1RjBjam11UjA4eEdzT0JUdnJJenZ2NjNTN3hPcVdDWTMzUFkx?=
+ =?utf-8?B?b0lTY0FiKzhudUFRVzBYNCtmSUV6dXpJZ2Q1enpGazZ4MHdRZHM0VXU1V2Rr?=
+ =?utf-8?B?cFEvSnVsRklLdkVvQzFqVTVzS1laajhGQzhlL3NWTkR5Q3U2bFlGZnpFVUxw?=
+ =?utf-8?B?dUEwbUFoTlIzT1FxTm9nQWVyZS84aXFmdjF2ZUFIM0Q4M0pueG5DeEw1MkxE?=
+ =?utf-8?B?OHVPRk9MU096ZWZlZm80WEFVMjN1R1p0ekNHM3ZRNEN4NWp3Qy9GUUtJcHR3?=
+ =?utf-8?B?Y08wY2s4bWNaV3l4Q0JtR252NHFKMEF3L3pUc1RIazNwdDl3YlpvZEtkSlNE?=
+ =?utf-8?B?eDF2cmpTMVlscnhlKzd5OWdDSEcrb1F6YmZ1NTdyWVY4OXBKc3pyTTR5ZUVG?=
+ =?utf-8?B?aXJTMGdVZ3dQYlRYTktoYnAyM0pYS3NVTlRHQitQUnowL05jVzdhaForazBC?=
+ =?utf-8?B?cjVqckppNWp6azhpL09MRXFFWFJzSmlyY2VINE5VWWhZQ2NUb20zZlI2VHhy?=
+ =?utf-8?B?TDZmYlRTcUxOSzQ1cGZqZzUwbjEyTm50MSs5MkI3bVVRbUhiSUtrcDNXUFNM?=
+ =?utf-8?B?VHVTRGlkb3ZzRTI5NGVpZHRpSFNGTXU2NWdUS05iaUkrRWU1K0IraHcyd2hG?=
+ =?utf-8?B?VHlUVVZLa1IzWnBiOWdWTjFveVc5dTMwUm56NjRYcWJjT0Nkc3VmTjZ2b1E0?=
+ =?utf-8?Q?UElh7503yBzHLQGU1tAUGt17+?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 52be04af-42f8-42f5-40c9-08dc5316634f
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 13:10:49.6612 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 13:11:20.2893 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pDZbVwXxFdfsaVMOpSYBCFQ3r58cdSsuSq7+K2KtXO4aN2PqCum8HdOTD5EFQ9bqRtOoblK1I981J7vvbe3neRjK4c12BqMrEPymNozIUlL856XjduWa2KUvLMNaJZWx
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB9449
+X-MS-Exchange-CrossTenant-UserPrincipalName: ZOjgI+a+ioO8v3TBKDL3bIBV1as11l25nN23bHbmbDW9kDrrCa3dIlLsCun5QXQ5
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN6PR12MB8544
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,69 +193,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
 
-On 3/31/24 22:28, Jonas Karlman wrote:
-> The rk3399-ficus board is only using SPL and not TPL+SPL like all other
-> RK3399 boards, chromebook bob/kevin excluded. It does not seem to be any
-> technical reason why this board was left using only SPL.
+
+On 3/27/24 13:11, lukas.funke-oss@weidmueller.com wrote:
+> From: Lukas Funke <lukas.funke@weidmueller.com>
 > 
-> Switch to use TPL+SPL and use common bss and stack addresses to allow
-> for more options to be enabled in a future patch. Also add the missing
-> DEFAULT_FDT_FILE option.
+> Rename spl_board_init() to spl_soc_init(). SoC specific
+> implementation should be separated from board specific implementation
+> in order to be extended by board developers.
 > 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
 > ---
->   configs/ficus-rk3399_defconfig | 14 ++------------
->   1 file changed, 2 insertions(+), 12 deletions(-)
 > 
-> diff --git a/configs/ficus-rk3399_defconfig b/configs/ficus-rk3399_defconfig
-> index 4859042d6b56..3bcd0fd66b91 100644
-> --- a/configs/ficus-rk3399_defconfig
-> +++ b/configs/ficus-rk3399_defconfig
-> @@ -2,32 +2,22 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_TEXT_BASE=0x00200000
-> -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-> -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
->   CONFIG_SF_DEFAULT_SPEED=20000000
->   CONFIG_ENV_OFFSET=0x3F8000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3399-ficus"
-> -CONFIG_SPL_TEXT_BASE=0xff8c2000
->   CONFIG_ROCKCHIP_RK3399=y
-> -CONFIG_ROCKCHIP_SPL_RESERVE_IRAM=0x4000
->   CONFIG_TARGET_ROCK960_RK3399=y
-> -CONFIG_SPL_STACK=0xff8effff
->   CONFIG_DEBUG_UART_BASE=0xFF1A0000
->   CONFIG_DEBUG_UART_CLOCK=24000000
->   CONFIG_SYS_LOAD_ADDR=0x800800
->   CONFIG_DEBUG_UART=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-ficus.dtb"
->   CONFIG_DISPLAY_BOARDINFO_LATE=y
->   CONFIG_SPL_MAX_SIZE=0x2e000
->   CONFIG_SPL_PAD_TO=0x7f8000
-> -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-> -CONFIG_SPL_BSS_START_ADDR=0xff8e0000
-> -CONFIG_SPL_BSS_MAX_SIZE=0x10000
->   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> -CONFIG_SPL_STACK_R=y
-> -CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x4000
->   CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-> +CONFIG_TPL=y
->   CONFIG_CMD_BOOTZ=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_MMC=y
+> Changes in v3:
+>   - Rephrase Kconfig description and correct minor typo
+> 
+> Changes in v2:
+>   - Change spl_arch_init() to spl_soc_init()
+> 
+>   arch/arm/Kconfig           | 4 ++--
+>   arch/arm/mach-zynq/spl.c   | 4 ++--
+>   arch/arm/mach-zynqmp/spl.c | 4 ++--
+>   3 files changed, 6 insertions(+), 6 deletions(-)
+> 
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 01d6556c42..db56db9414 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1275,7 +1275,7 @@ config ARCH_ZYNQ
+>   	select OF_CONTROL
+>   	select MTD
+>   	select SPI
+> -	select SPL_BOARD_INIT if SPL
+> +	select SPL_SOC_INIT if SPL
+>   	select SPL_CLK if SPL
+>   	select SPL_DM if SPL
+>   	select SPL_DM_SPI if SPL
+> @@ -1318,7 +1318,7 @@ config ARCH_ZYNQMP
+>   	imply FIRMWARE
+>   	select GICV2
+>   	select OF_CONTROL
+> -	select SPL_BOARD_INIT if SPL
+> +	select SPL_SOC_INIT if SPL
+>   	select SPL_CLK if SPL
+>   	select SPL_DM if SPL
+>   	select SPL_DM_SPI if SPI && SPL_DM
+> diff --git a/arch/arm/mach-zynq/spl.c b/arch/arm/mach-zynq/spl.c
+> index fea1c9b12a..112b44e2e1 100644
+> --- a/arch/arm/mach-zynq/spl.c
+> +++ b/arch/arm/mach-zynq/spl.c
+> @@ -32,8 +32,8 @@ void board_init_f(ulong dummy)
+>   	arch_cpu_init();
+>   }
+>   
+> -#ifdef CONFIG_SPL_BOARD_INIT
+> -void spl_board_init(void)
+> +#ifdef CONFIG_SPL_SOC_INIT
+> +void spl_soc_init(void)
+>   {
+>   	preloader_console_init();
+>   #if defined(CONFIG_ARCH_EARLY_INIT_R) && defined(CONFIG_SPL_FPGA)
+> diff --git a/arch/arm/mach-zynqmp/spl.c b/arch/arm/mach-zynqmp/spl.c
+> index a0f35f36fa..71f9932525 100644
+> --- a/arch/arm/mach-zynqmp/spl.c
+> +++ b/arch/arm/mach-zynqmp/spl.c
+> @@ -56,8 +56,8 @@ static void ps_mode_reset(ulong mode)
+>   # define MODE_RESET	PS_MODE1
+>   #endif
+>   
+> -#ifdef CONFIG_SPL_BOARD_INIT
+> -void spl_board_init(void)
+> +#ifdef CONFIG_SPL_SOC_INIT
+> +void spl_soc_init(void)
+>   {
+>   	preloader_console_init();
+>   	ps_mode_reset(MODE_RESET);
 
-I think we want to move CONFIG_SPL_STACK to match other RK3399 devices 
-as well?
+Acked-by: Michal Simek <michal.simek@amd.com>
 
-Indeed, it is currently set to 0xff8effff which matches the default 
-value for when TPL was NOT enabled. 0x400000 is used for devices with 
-TPL support. c.f. 
-https://source.denx.de/u-boot/u-boot/-/commit/f113d7d3034672de7d074506a05a7055f1f0dcae
-
-Cheers,
-Quentin
+Thanks,
+Michal
