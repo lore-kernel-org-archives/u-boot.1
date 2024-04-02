@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 158C5C6FD1F
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 07:06:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA514C6FD1F
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 07:24:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A90588310;
-	Tue,  2 Apr 2024 09:06:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 280B88834E;
+	Tue,  2 Apr 2024 09:24:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Xh3+roAW";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rPemuPt2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CCB168833D; Tue,  2 Apr 2024 09:06:38 +0200 (CEST)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id D85CA88339; Tue,  2 Apr 2024 09:24:38 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66665880E5
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 09:06:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 96BB38834E
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 09:24:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-33ed4d8e9edso3682145f8f.2
- for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 00:06:36 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-415584360c0so16684995e9.1
+ for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 00:24:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712041596; x=1712646396;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712042676; x=1712647476;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=blbAjz+0QgA6vSUeCWNZEKYTYJWXWc4mPc9gNvaE9nk=;
- b=Xh3+roAWPxo76/PfygUra97CJNORIJ8I+XFP7+LAff94aasLtpm1a97yRAK1Pxz4Mv
- eopgWoaoZz2J7G26+rRRWlCEOHRYrIWukQgwJEaj2HqZAtc0ug7eLe+oZaDxwWk2iz3I
- k8Oi6BhKJdyMZLy9XY7QxKwt4JLYMne7ZmXGPsaG/04zrV+hraA2RYHhRCcbQbfrSbY0
- W6cZChh95BDlInDuftCrrvYrRohE2+K9JcVhvbB2R2rdYA3coEahJvPxIyZuvwiTynzb
- OjPXNCwxcSf7W/KxtdUq/0cjQgWQzvCAfZYBLBVzLILZEnLkpFCIGhgY6tAC0drXWgDT
- rk5A==
+ bh=SBLABUDBtY+U6DXwf0Oa6rNRUeFYMr+oDF+WA/CDjiU=;
+ b=rPemuPt24ZcmarQkTZOHw7kAo1OLkoVQo2emxZLlvqNRR7Qeh6xk0dxnlmp5WvWhDB
+ +Bst8dxcaTIVJTc4AG7G6d2aOgUg+LqUD+u1aXSjpOXsaw2f8XDWpi1DyEXFqBOewtYJ
+ voAydcGR/MUHgksdZbqs+xMSthnkYloUTNZTWrEQdqsiYPewz+v2k3RPLop276x6XZDw
+ KhlfTeI1zqw6uia8yq6FjGbiiSfCjsrYLS/4SLuJJAkRoWs2bHiGFhNpIjbnGVU5w7pG
+ S4O3qHkMoCrk2vlKPRPy6bvLwyIrbWz7Tm2kb7jR4QTSGB1vYOUmU6OB6ggqpKRN35ri
+ oiEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712041596; x=1712646396;
+ d=1e100.net; s=20230601; t=1712042676; x=1712647476;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=blbAjz+0QgA6vSUeCWNZEKYTYJWXWc4mPc9gNvaE9nk=;
- b=f2boXJmL0LvbrFoMRjNl3FtT0klTfSNmFstWXEuD0zDfsS9KuMWmGVWO1L6iitCXjN
- GhGL265L85gKgjYeZTN1QgexFeLQNZX93B4bqlRCKpOemOkTfnZp4ez4ml+441m5OdYq
- NiuaYqZfIiCSo5GEWrMZBL+dpuUEgHFPbXHeHQi1AiSLz9OrbwofH8KEB/rDhL9G5Knh
- LDz4AQ0JE+6vEJS89PPz6+AIrsM015rEdNB0MDxFMZQYjXzPasEipV1Aa0mVxI3rVsGy
- SSYlYatX4pDtV9M6b6DZ33CTG+MOei763trStOYHKbXIxAanaiuZqKmgTW9Ix8YCC7DG
- tf5A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWZRNLIUxc+hhe41GQ2SxudNE8IxbZJ0W3BLFy9u/+GrpIFRVnIQe+rACHD4UD5ujUHkEDvAmBl8/Q4VDywb8Ns66csRQ==
-X-Gm-Message-State: AOJu0YwdqaaBl/00OiS6lllgdQr267VvEW/PKxD9k14Ia26LCkKpuZ4D
- 1YA+guToU1DvV3hH27Y6AwXPQ9p05CcpZIrn8XvBxK0FBMN306Rnz4A0TPZZLr8=
-X-Google-Smtp-Source: AGHT+IG02DlSVZMo84L5TcExrrAiKIGSKzRJljh2So8nGoCeKgd5ug378z6LWQnLRxRvYS980oHvew==
-X-Received: by 2002:a5d:6547:0:b0:343:6c81:8fd3 with SMTP id
- z7-20020a5d6547000000b003436c818fd3mr436888wrv.24.1712041595689; 
- Tue, 02 Apr 2024 00:06:35 -0700 (PDT)
+ bh=SBLABUDBtY+U6DXwf0Oa6rNRUeFYMr+oDF+WA/CDjiU=;
+ b=gJ/1DgwGSBs1f2A1h4mS3bxMK4+6C4egLp/azh/Ct/lrmPbSuQCAcjNzTZRCLFP5nR
+ 5ZA7W60XgzvkI9RHS0ziuuc7OkZW1cMC5nluN7hAqso2AkB42dI9e7elCZ71lRJFU41Z
+ TnzXJSuqc4sAbmZS/qiToj+hePvYg3jHITIg0sITdLJmvxF3q5YAcK9mvXSO91nG2z3E
+ 7loqNDLe6BBxM4F54Xzr1iwza4U1hVrlfKG42RVcTdkflzCBjrDYovC7Yhu/qiTwgD7K
+ cftk6a0vm/dN+mfZITeuxgosDmxeO+BNP9x6QjODZQV1Jsmkwt9W/3QkNPer7irSL5Eo
+ dIvQ==
+X-Gm-Message-State: AOJu0YxwP5uYnG2W+4Z1c9TVKNO+040ToGWHtfN+HLmxIwfTlUQ59fi2
+ qlZmkS4orevl7kloaBGyD3RZmbPu+TdcCrs0r62L5wr10m7xJwIZ+V2YysKLVnM=
+X-Google-Smtp-Source: AGHT+IFYu7K/cmu9ZQCEIkNXBk7jrA5EYZQbuKRcilRKVQeC/PcOLThyhurPEAn+IXjDkPtsUVMZNQ==
+X-Received: by 2002:a7b:c7d3:0:b0:414:d8f:4399 with SMTP id
+ z19-20020a7bc7d3000000b004140d8f4399mr8547120wmk.18.1712042675991; 
+ Tue, 02 Apr 2024 00:24:35 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- h4-20020a056000000400b00343668bc492sm791712wrx.71.2024.04.02.00.06.34
+ l13-20020a05600c4f0d00b004161af729f4sm1063796wmq.31.2024.04.02.00.24.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Apr 2024 00:06:34 -0700 (PDT)
+ Tue, 02 Apr 2024 00:24:35 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: u-boot-amlogic@groups.io, neil.armstrong@linaro.org, Tom Rini
- <trini@konsulko.com>, Vyacheslav Bocharov <adeep@lexina.in>, Christian
- Hewitt <christianshewitt@gmail.com>
-Cc: u-boot-amlogic@groups.io, u-boot@lists.denx.de, Neil Armstrong
- <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: [PATCH v2 0/5] arm: meson: Switch to using upstream DT for GXL,
- GXM, AXG, G12A, G12B & SM1 SoCs
-In-Reply-To: <20240329-u-boot-of-upstream-v2-0-2512ad3eb63d@linaro.org>
-References: <20240329-u-boot-of-upstream-v2-0-2512ad3eb63d@linaro.org>
-Date: Tue, 02 Apr 2024 09:06:31 +0200
-Message-ID: <87h6gkgs5k.fsf@baylibre.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>, Neil
+ Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v5 16/16] usb: gadget: UMS: fix 64-bit division on ARM32
+In-Reply-To: <20240328-b4-qcom-livetree-v5-16-4e98228b3d03@linaro.org>
+References: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
+ <20240328-b4-qcom-livetree-v5-16-4e98228b3d03@linaro.org>
+Date: Tue, 02 Apr 2024 09:24:31 +0200
+Message-ID: <87edbogrbk.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -94,175 +92,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
+Hi Caleb,
 
-Thank you for the series.
+Thank you for the patch.
 
-On ven., mars 29, 2024 at 18:51, "Neil Armstrong" <neil.armstrong@linaro.org> wrote:
+On jeu., mars 28, 2024 at 17:59, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 
-> Enable OF_UPSTREAM to use upstream DT and add amlogic/ prefix to the
-> DEFAULT_DEVICE_TREE. And thereby directly build DTB from dts/upstream/src/
-> including *-u-boot.dtsi files from arch/$(ARCH)/dts/ directory and
-> drop redundant files from arch/arm/dts directory. Only *-u-boot.dtsi files
-> kept in arch/arm/dts directory for these boards.
+> The patch introducing support for dynamic sector sizes changed the types
+> used in some divisions, resulting in the compiler attempting to use
+> libgcc helpers (__aeabi_ldivmod). Replace these divisions with calls to
+> lldiv() to handle this correctly.
 >
-> Keep A1 DTs locally since the architecture is still young.
->
-> CI built & tested at:
-> https://gitlab.com/amlogic-foss/amlogic-u-boot-autotest/-/pipelines/1233461384
->
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Fixes: 74e56e0c5065 ("usb: gadget: UMS: support multiple sector sizes")
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+
+I believe I applied this already via [1]
+
+I plan to send your work to Tom this week.
+
+Sorry for the delay!
+
+[1] https://lore.kernel.org/r/87a5mqei67.fsf@baylibre.com
+
 > ---
-> Changes in v2:
-> - add change to remove prefix in fdtfile
-> - collected review tags
-> - Link to v1: https://lore.kernel.org/r/20240319-u-boot-of-upstream-v1-0-f82bc9fe69c0@linaro.org
-
-Boot tested AOSP on VIM3.
-
-Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # khadas-vim3_android
-
->
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > ---
-> Neil Armstrong (5):
->       configs: meson64: remove amlogic prefix in fdtfile when CONFIG_OF_UPSTREAM is selected
->       dts: meson: Switch GXL, GXM & AXG to using upstream DT
->       dts: meson: Drop redundant GXL, GXM & AXG devicetree files
->       dts: meson-g12a: Switch to using upstream DT
->       dts: meson: Drop redundant G12A, G12B & SM1 devicetree files
+>  drivers/usb/gadget/f_mass_storage.c | 13 +++++++------
+>  1 file changed, 7 insertions(+), 6 deletions(-)
 >
->  arch/arm/dts/Makefile                              |   36 +-
->  arch/arm/dts/meson-axg-jethome-jethub-j100.dts     |  361 ---
->  arch/arm/dts/meson-axg-s400.dts                    |  602 -----
->  arch/arm/dts/meson-axg.dtsi                        | 1957 ---------------
->  arch/arm/dts/meson-g12-common.dtsi                 | 2493 --------------------
->  arch/arm/dts/meson-g12.dtsi                        |  385 ---
->  arch/arm/dts/meson-g12a-radxa-zero.dts             |  405 ----
->  arch/arm/dts/meson-g12a-sei510.dts                 |  566 -----
->  arch/arm/dts/meson-g12a-u200.dts                   |  308 ---
->  arch/arm/dts/meson-g12a.dtsi                       |  140 --
->  arch/arm/dts/meson-g12b-a311d-bananapi-m2s.dts     |   33 -
->  arch/arm/dts/meson-g12b-a311d-khadas-vim3.dts      |   41 -
->  arch/arm/dts/meson-g12b-a311d.dtsi                 |  149 --
->  arch/arm/dts/meson-g12b-bananapi-cm4-cm4io.dts     |  165 --
->  arch/arm/dts/meson-g12b-bananapi-cm4.dtsi          |  388 ---
->  arch/arm/dts/meson-g12b-bananapi.dtsi              |  521 ----
->  arch/arm/dts/meson-g12b-gsking-x.dts               |  133 --
->  arch/arm/dts/meson-g12b-gtking-pro.dts             |  142 --
->  arch/arm/dts/meson-g12b-gtking.dts                 |  163 --
->  arch/arm/dts/meson-g12b-khadas-vim3.dtsi           |  107 -
->  arch/arm/dts/meson-g12b-odroid-go-ultra.dts        |  722 ------
->  arch/arm/dts/meson-g12b-odroid-n2-plus.dts         |   31 -
->  arch/arm/dts/meson-g12b-odroid-n2.dts              |   15 -
->  arch/arm/dts/meson-g12b-odroid-n2.dtsi             |  303 ---
->  arch/arm/dts/meson-g12b-odroid-n2l.dts             |  125 -
->  arch/arm/dts/meson-g12b-odroid.dtsi                |  445 ----
->  arch/arm/dts/meson-g12b-radxa-zero2.dts            |  489 ----
->  arch/arm/dts/meson-g12b-s922x-bananapi-m2s.dts     |   14 -
->  arch/arm/dts/meson-g12b-s922x.dtsi                 |  139 --
->  arch/arm/dts/meson-g12b-w400.dtsi                  |  425 ----
->  arch/arm/dts/meson-g12b.dtsi                       |  146 --
->  arch/arm/dts/meson-gx-libretech-pc.dtsi            |  447 ----
->  arch/arm/dts/meson-gx-mali450.dtsi                 |   61 -
->  arch/arm/dts/meson-gx-p23x-q20x.dtsi               |  324 ---
->  arch/arm/dts/meson-gx.dtsi                         |  675 ------
->  arch/arm/dts/meson-gxl-mali.dtsi                   |   17 -
->  arch/arm/dts/meson-gxl-s805x-libretech-ac.dts      |  319 ---
->  arch/arm/dts/meson-gxl-s805x.dtsi                  |   23 -
->  arch/arm/dts/meson-gxl-s905d-libretech-pc.dts      |   16 -
->  arch/arm/dts/meson-gxl-s905d.dtsi                  |   12 -
->  .../arm/dts/meson-gxl-s905w-jethome-jethub-j80.dts |  247 --
->  arch/arm/dts/meson-gxl-s905x-khadas-vim.dts        |  237 --
->  arch/arm/dts/meson-gxl-s905x-libretech-cc-v2.dts   |  313 ---
->  arch/arm/dts/meson-gxl-s905x-libretech-cc.dts      |  356 ---
->  arch/arm/dts/meson-gxl-s905x-p212.dts              |  134 --
->  arch/arm/dts/meson-gxl-s905x-p212.dtsi             |  213 --
->  arch/arm/dts/meson-gxl-s905x.dtsi                  |   18 -
->  arch/arm/dts/meson-gxl.dtsi                        |  940 --------
->  arch/arm/dts/meson-gxm-gt1-ultimate.dts            |   91 -
->  arch/arm/dts/meson-gxm-khadas-vim2.dts             |  424 ----
->  arch/arm/dts/meson-gxm-s912-libretech-pc.dts       |   62 -
->  arch/arm/dts/meson-gxm-wetek-core2.dts             |   85 -
->  arch/arm/dts/meson-gxm.dtsi                        |  216 --
->  arch/arm/dts/meson-khadas-vim3.dtsi                |  534 -----
->  arch/arm/dts/meson-sm1-bananapi-m2-pro.dts         |   97 -
->  arch/arm/dts/meson-sm1-bananapi-m5.dts             |  221 --
->  arch/arm/dts/meson-sm1-bananapi.dtsi               |  435 ----
->  arch/arm/dts/meson-sm1-khadas-vim3l.dts            |  113 -
->  arch/arm/dts/meson-sm1-odroid-c4.dts               |   48 -
->  arch/arm/dts/meson-sm1-odroid-hc4.dts              |  140 --
->  arch/arm/dts/meson-sm1-odroid.dtsi                 |  449 ----
->  arch/arm/dts/meson-sm1-sei610.dts                  |  616 -----
->  arch/arm/dts/meson-sm1.dtsi                        |  550 -----
->  arch/arm/mach-meson/Kconfig                        |    4 +
->  configs/bananapi-cm4-cm4io_defconfig               |    2 +-
->  configs/bananapi-m2-pro_defconfig                  |    2 +-
->  configs/bananapi-m2s_defconfig                     |    2 +-
->  configs/bananapi-m5_defconfig                      |    2 +-
->  configs/beelink-gsking-x_defconfig                 |    2 +-
->  configs/beelink-gt1-ultimate_defconfig             |    2 +-
->  configs/beelink-gtking_defconfig                   |    2 +-
->  configs/beelink-gtkingpro_defconfig                |    2 +-
->  configs/jethub_j100_defconfig                      |    2 +-
->  configs/jethub_j80_defconfig                       |    2 +-
->  configs/khadas-vim2_defconfig                      |    2 +-
->  configs/khadas-vim3_android_ab_defconfig           |    2 +-
->  configs/khadas-vim3_android_defconfig              |    2 +-
->  configs/khadas-vim3_defconfig                      |    2 +-
->  configs/khadas-vim3l_android_ab_defconfig          |    2 +-
->  configs/khadas-vim3l_android_defconfig             |    2 +-
->  configs/khadas-vim3l_defconfig                     |    2 +-
->  configs/khadas-vim_defconfig                       |    2 +-
->  configs/libretech-ac_defconfig                     |    2 +-
->  configs/libretech-cc_defconfig                     |    2 +-
->  configs/libretech-cc_v2_defconfig                  |    2 +-
->  configs/libretech-s905d-pc_defconfig               |    2 +-
->  configs/libretech-s912-pc_defconfig                |    2 +-
->  configs/odroid-c4_defconfig                        |    2 +-
->  configs/odroid-go-ultra_defconfig                  |    2 +-
->  configs/odroid-hc4_defconfig                       |    2 +-
->  configs/odroid-n2_defconfig                        |    2 +-
->  configs/odroid-n2l_defconfig                       |    2 +-
->  configs/p212_defconfig                             |    2 +-
->  configs/radxa-zero2_defconfig                      |    2 +-
->  configs/radxa-zero_defconfig                       |    2 +-
->  configs/s400_defconfig                             |    2 +-
->  configs/sei510_defconfig                           |    2 +-
->  configs/sei610_defconfig                           |    2 +-
->  configs/u200_defconfig                             |    2 +-
->  configs/wetek-core2_defconfig                      |    2 +-
->  include/configs/meson64.h                          |    8 +-
->  include/dt-bindings/gpio/meson-axg-gpio.h          |  116 -
->  include/dt-bindings/gpio/meson-g12a-gpio.h         |  114 -
->  include/dt-bindings/gpio/meson-gxbb-gpio.h         |  148 --
->  include/dt-bindings/gpio/meson-gxl-gpio.h          |  125 -
->  include/dt-bindings/power/meson-axg-power.h        |   14 -
->  include/dt-bindings/power/meson-g12a-power.h       |   13 -
->  include/dt-bindings/power/meson-gxbb-power.h       |   13 -
->  include/dt-bindings/power/meson-sm1-power.h        |   18 -
->  .../reset/amlogic,meson-axg-audio-arb.h            |   19 -
->  .../dt-bindings/reset/amlogic,meson-axg-reset.h    |  123 -
->  .../reset/amlogic,meson-g12a-audio-reset.h         |   53 -
->  .../dt-bindings/reset/amlogic,meson-g12a-reset.h   |  137 --
->  .../dt-bindings/reset/amlogic,meson-gxbb-reset.h   |  161 --
->  include/dt-bindings/sound/meson-aiu.h              |   18 -
->  include/dt-bindings/sound/meson-g12a-toacodec.h    |   10 -
->  include/dt-bindings/sound/meson-g12a-tohdmitx.h    |   13 -
->  117 files changed, 49 insertions(+), 21512 deletions(-)
-> ---
-> base-commit: 6e2228fb052b68c84688d5baff06e2ebc787a4a5
-> change-id: 20240319-u-boot-of-upstream-46454fded5ea
+> diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
+> index d880928044f4..ef90c7ec7fb5 100644
+> --- a/drivers/usb/gadget/f_mass_storage.c
+> +++ b/drivers/usb/gadget/f_mass_storage.c
+> @@ -239,8 +239,9 @@
+>  /* #define VERBOSE_DEBUG */
+>  /* #define DUMP_MSGS */
+>  
+>  #include <config.h>
+> +#include <div64.h>
+>  #include <hexdump.h>
+>  #include <log.h>
+>  #include <malloc.h>
+>  #include <common.h>
+> @@ -768,10 +769,10 @@ static int do_read(struct fsg_common *common)
+>  		}
+>  
+>  		/* Perform the read */
+>  		rc = ums[common->lun].read_sector(&ums[common->lun],
+> -				      file_offset / curlun->blksize,
+> -				      amount / curlun->blksize,
+> +				      lldiv(file_offset, curlun->blksize),
+> +				      lldiv(amount, curlun->blksize),
+>  				      (char __user *)bh->buf);
+>  		if (!rc)
+>  			return -EIO;
+>  
+> @@ -942,10 +943,10 @@ static int do_write(struct fsg_common *common)
+>  			amount = bh->outreq->actual;
+>  
+>  			/* Perform the write */
+>  			rc = ums[common->lun].write_sector(&ums[common->lun],
+> -					       file_offset / curlun->blksize,
+> -					       amount / curlun->blksize,
+> +					       lldiv(file_offset, curlun->blksize),
+> +					       lldiv(amount, curlun->blksize),
+>  					       (char __user *)bh->buf);
+>  			if (!rc)
+>  				return -EIO;
+>  			nwritten = rc * curlun->blksize;
+> @@ -1058,10 +1059,10 @@ static int do_verify(struct fsg_common *common)
+>  		}
+>  
+>  		/* Perform the read */
+>  		rc = ums[common->lun].read_sector(&ums[common->lun],
+> -				      file_offset / curlun->blksize,
+> -				      amount / curlun->blksize,
+> +				      lldiv(file_offset, curlun->blksize),
+> +				      lldiv(amount, curlun->blksize),
+>  				      (char __user *)bh->buf);
+>  		if (!rc)
+>  			return -EIO;
+>  		nread = rc * curlun->blksize;
 >
-> Best regards,
 > -- 
-> Neil Armstrong <neil.armstrong@linaro.org>
->
->
->
-> -=-=-=-=-=-=-=-=-=-=-=-
-> Groups.io Links: You receive all messages sent to this group.
-> View/Reply Online (#2256): https://groups.io/g/u-boot-amlogic/message/2256
-> Mute This Topic: https://groups.io/mt/105220383/1991006
-> Group Owner: u-boot-amlogic+owner@groups.io
-> Unsubscribe: https://groups.io/g/u-boot-amlogic/unsub [mkorpershoek@baylibre.com]
-> -=-=-=-=-=-=-=-=-=-=-=-
+> 2.44.0
