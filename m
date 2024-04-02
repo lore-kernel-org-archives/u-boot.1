@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 691E0CD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 08:32:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74509C6FD1F
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 08:32:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1929880DD;
-	Tue,  2 Apr 2024 10:32:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 66EC08830F;
+	Tue,  2 Apr 2024 10:32:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Fhh1ytRU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EcoUq9mE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C671288076; Tue,  2 Apr 2024 10:32:33 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 2792E8803F; Tue,  2 Apr 2024 10:32:43 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69FFE880E5
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 10:32:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED41A88327
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 10:32:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-4161bd0a4ecso1880265e9.1
- for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 01:32:30 -0700 (PDT)
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2d47a92cfefso58680811fa.1
+ for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 01:32:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712046750; x=1712651550; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712046760; x=1712651560; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=os+PEmtXmoBZe558Fyn8SqCTeeClEIncj5tFJ4TZ+LI=;
- b=Fhh1ytRUV5SvVySBzsisBXGHP4sqEAghGEUrouibfcdKHV625yXgGXynQxBHQ5j2vc
- N+z9n3X4bByaBzezvWTA4RIy0B5hQrsr/ck60oE6tqV5hms6DkvJ57Q7z9xtLx/6LXYN
- fEpVkND51JOnwpMkWpGfpb3AKGPuiOgOmMWKU8LCnsLvxJ8FxYvN7fBY0S3GJlZeeoti
- e6wxSMNxJSXLAQoUjeHypOkM7V9Rkp02qNfZiVn/FEdxc+6nRw3kvrSkGMlzgDJBKQQu
- Jt2BXvk9SsIHOc40pD9WXdcfZOAkp2/NfxGdQKdAFQ6MbevpQbZV+mU4pkOWxVAHnNjl
- txPQ==
+ :reply-to; bh=50d3u+HnWTyHvXgLDqKyKxVujRQCFhQMa99lGWk1mA4=;
+ b=EcoUq9mEqYjhMsOO6AfCjsedWIu0j+b+VHPUk7JmBVO7CDEuJPg0lqgvo4Yly7D05m
+ mzOBMNbH9eDjKEM3046WjnwtzFwngPjxyJzR0fH1Qo0wl35z5LbtULLm0ADln1lXa6Vv
+ XGAP00UuQ2bawiXMSt7eUG1qVknbHco+JydEmhTJir03epGorarsDBrNqqfjx/Eb1qrp
+ OPD3xTda8ow0IgUqPhPt3t2gZRDSMh0dOPBBh7CDEB93lCTadYYOwV7QE4EqzSFAv+rm
+ bTp9J78hSMDMrxnmfG/SjWOxf6syIv0vEEtWEbCb/0mPIgQtBzKbYmA72qnACGBvPFUg
+ wPLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712046750; x=1712651550;
+ d=1e100.net; s=20230601; t=1712046760; x=1712651560;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=os+PEmtXmoBZe558Fyn8SqCTeeClEIncj5tFJ4TZ+LI=;
- b=SoIEhvvPvXUcEwv0SCxDh6pn9ynsf/XXVQxZOi36Q6xxXrDXgz+KKOJtifLZjP502s
- 4vF7/We/Ha+hkZLRLHMcJ4qmxEdTKTcfFNC2v16rvCs7HYUUPq8qV+PIhPkrMtbB8tCo
- q3MgAhcQ98VL2CHmN8cDCbN15OmzmeFDNwFrzWCHMUknk3HxGHvkXQ6VWpItjW32cnHV
- UsQaQTLh29SS/Isjy30OdNDb67LVSEhqWn63qh9JR9EmkoA5h/lCUOi5EwSRMKN13ttL
- F3L+417YeWtQh3H9ENcUj8UeIyIft0nJUfRZtJtvgePJQJ4T9Wy1YmxqDF4+5MMELx54
- b+BQ==
-X-Gm-Message-State: AOJu0Yzs8Rul9QuIff0igub0QYi3b/0+Niyx7dnAh/zq4FUz54lcrgVl
- k6BiCsoVKchlM3j01eeNfGCBR+zic4G1GzNibuaJt6YzXVqABHWK8VzFmiuLxJM=
-X-Google-Smtp-Source: AGHT+IHTfOEE45BIKh2LYE9U8HAmPep6iOVMpSwVpwsg9cTfjSUZXTRE6rTngAO39o9CxD+QvnP7jQ==
-X-Received: by 2002:a05:600c:927:b0:414:669b:aa9 with SMTP id
- m39-20020a05600c092700b00414669b0aa9mr7527289wmp.28.1712046749711; 
- Tue, 02 Apr 2024 01:32:29 -0700 (PDT)
+ bh=50d3u+HnWTyHvXgLDqKyKxVujRQCFhQMa99lGWk1mA4=;
+ b=DpqkTgPWwjFfbjrWZb1C+2uLuJP7qHbbmJWuQcLUCnhjoHh5L2xArlJRIDphqLylW3
+ CexK57Kaox2Gj0Qilb+gwH+F8RlY2qYqKvROeMjrlU4tioatFuqRud7iJwwxatb6Ay37
+ UWLB5VBsP17F0PXdnaG3f33GD1fWT4fBiNYTAX5aR4qUeqDCtE4tF5dmd6xHexn24i3G
+ Ak2EyqPNRFEKWa9g0n/sxFHyCp1gjdpzNH2rmnwNM8Sxu3KgaXLHTod7AUcO0AW9qP53
+ ZNikhBPAM7AQNwiKEH7Qxdz8Qpvilwp5+HzkhQdM5eWURkzR46zwqrEggK+GaNUxgX/+
+ +1Yg==
+X-Gm-Message-State: AOJu0Yz9vflgDzDcM/dp0H1ynBQyogS4cJk/UXLwn7J8/Za51u1DKXx+
+ H3A/hqQMRQV8/KJqCk8jTFhIvu5XCfQi6u9RUuBb6AqZD94djHOkxeGNW0WEkZU=
+X-Google-Smtp-Source: AGHT+IG4b29c2L/5Yg9KpIe6LiVfw9I7VU55uPKOavaqcpC30MWzc6JCLcaJwNjI4PlcvCqZiPlpGQ==
+X-Received: by 2002:a05:651c:1a10:b0:2d8:19fe:4879 with SMTP id
+ by16-20020a05651c1a1000b002d819fe4879mr3403071ljb.38.1712046760284; 
+ Tue, 02 Apr 2024 01:32:40 -0700 (PDT)
 Received: from [192.168.7.190] (82-64-249-211.subs.proxad.net. [82.64.249.211])
  by smtp.gmail.com with ESMTPSA id
- u22-20020a05600c139600b00414906f1ea1sm17048893wmf.17.2024.04.02.01.32.29
+ n38-20020a05600c3ba600b00415509b11c3sm13301543wms.22.2024.04.02.01.32.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 02 Apr 2024 01:32:29 -0700 (PDT)
-Message-ID: <e6dc1214-f006-4394-b6fa-022254b06634@linaro.org>
-Date: Tue, 2 Apr 2024 10:32:28 +0200
+ Tue, 02 Apr 2024 01:32:39 -0700 (PDT)
+Message-ID: <1c1f180f-a9e2-4ce7-a32c-a89b4c447b9a@linaro.org>
+Date: Tue, 2 Apr 2024 10:32:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v5 12/16] mach-snapdragon: call regulators_enable_boot_on()
+Subject: Re: [PATCH v5 13/16] dts: sdm845-db845c: add u-boot fixups
 To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
  <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 References: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
- <20240328-b4-qcom-livetree-v5-12-4e98228b3d03@linaro.org>
+ <20240328-b4-qcom-livetree-v5-13-4e98228b3d03@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -103,7 +103,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20240328-b4-qcom-livetree-v5-12-4e98228b3d03@linaro.org>
+In-Reply-To: <20240328-b4-qcom-livetree-v5-13-4e98228b3d03@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -124,38 +124,32 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 28/03/2024 18:59, Caleb Connolly wrote:
-> Make sure we power on any boot-on or always-on regulators. These are
-> used for peripherals like USB on some platforms.
+> The USB VBUS supply for the type-A port is enabled via a GPIO regulator.
+> This is incorrectly modelled in Linux where only the PCIe dependency is
+> expressed. The correct way to handle this will be through a
+> usb-connector node, but for now we'll just mark the regulator as
+> always-on so that it will be enabled automatically during boot.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   arch/arm/mach-snapdragon/board.c | 2 ++
->   1 file changed, 2 insertions(+)
+>   arch/arm/dts/sdm845-db845c-u-boot.dtsi | 9 +++++++++
+>   1 file changed, 9 insertions(+)
 > 
-> diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-> index 65e4c61e866a..3d5994c87886 100644
-> --- a/arch/arm/mach-snapdragon/board.c
-> +++ b/arch/arm/mach-snapdragon/board.c
-> @@ -15,8 +15,9 @@
->   #include <dm/device.h>
->   #include <dm/pinctrl.h>
->   #include <dm/uclass-internal.h>
->   #include <dm/read.h>
-> +#include <power/regulator.h>
->   #include <env.h>
->   #include <init.h>
->   #include <linux/arm-smccc.h>
->   #include <linux/bug.h>
-> @@ -160,8 +161,9 @@ void __weak qcom_board_init(void)
->   }
->   
->   int board_init(void)
->   {
-> +	regulators_enable_boot_on(false);
->   	show_psci_version();
->   	qcom_of_fixup_nodes();
->   	qcom_board_init();
->   	return 0;
+> diff --git a/arch/arm/dts/sdm845-db845c-u-boot.dtsi b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
+> new file mode 100644
+> index 000000000000..906f9faa5451
+> --- /dev/null
+> +++ b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
+> @@ -0,0 +1,9 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +
+> +/* Needed for Linux to boot from USB, otherwise if PCIe driver is not in initramfs
+> + * the VBUS supply will never get turned on.
+> + * https://lore.kernel.org/linux-arm-msm/20240320122515.3243711-1-caleb.connolly@linaro.org/
+> + */
+> +&pcie0_3p3v_dual {
+> +	regulator-always-on;
+> +};
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
