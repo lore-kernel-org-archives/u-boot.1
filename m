@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFE78CD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 08:49:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1983C6FD1F
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 08:49:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9B7218808A;
-	Tue,  2 Apr 2024 10:49:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B95C8835C;
+	Tue,  2 Apr 2024 10:49:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="F9s9Oiza";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="UPKYdFAp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A202188339; Tue,  2 Apr 2024 10:49:24 +0200 (CEST)
+ id BCB12880E5; Tue,  2 Apr 2024 10:49:25 +0200 (CEST)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4BE687E30
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 10:49:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B83BB880E5
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 10:49:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-lj1-f198.google.com (mail-lj1-f198.google.com
- [209.85.208.198])
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id E114142494
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 08:49:20 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id F3050424A1
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 08:49:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1712047760;
- bh=jGfCyigdV5qIBn7xiTOC6sWrrihMectfEY6o36E85X4=;
+ s=20210705; t=1712047762;
+ bh=IKfhwraG6bAHt2xyiFOlL12GxzRez/OCUjpTwVzKueM=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=F9s9OizaN9TdslFjPNFzrZdUAw9LS08O/FukcfTWkVZR6rfwPtlJh6uN20Djj+HFP
- ONO3ovyV/gq7i3OqMeG8S94Lgh4QNeeT+Eh9k8DPEm6VLI0OIQYtEMtQKOCgEHkVX7
- dNh7e63r6/fh4NV6E8KAHXOJPykMTOhbrLAbToomVT38JC0LVPpX1B/REaPYYSBR0F
- DHo5if75lZAbYsiqXHNHCaNJxORkKKM2T4m1xIIMB5d0sp/ohQp25v0ugTXKsZyNyH
- kGIGVdSFmlpqfbowzgm8OGqcmlJoTLSHT22Odo519dsxaCoOyAooqC/wJayY1NXu05
- pywU85tfQH24A==
-Received: by mail-lj1-f198.google.com with SMTP id
- 38308e7fff4ca-2d81eef59e8so11447461fa.3
- for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 01:49:20 -0700 (PDT)
+ b=UPKYdFAp3joPB+tJSNlq4cZKVh8XslX8hY4gcDARV3c9ozFlH1GtSir47V/JQVB2V
+ GLNHXfjMVeu+6AdAPrNkGqbDL1ZfVZsehVVXXM4ziP+//HMD6b0i3LKn0G8OxK4ngl
+ IeChp1YTWWX6OmE5kHGPmgYsDQddTG5iP8/a6iRN8h5XMK6zuZfYxJQ+o+aN0cBWD5
+ GsB7tH93jA88y7ndY0uzKI8RwdSJdFTne4qul/A9naY3zPQ5Y0mXm7B2NEg7gHlykM
+ fFr3E0d2mGcGeIL3cnU5FOj9Sgc7LJmIEcgITNB+Kptt/f5gLCTtXLM1aPv5+0mrlb
+ bVqBYSmCbGm0Q==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-41545bc8962so17770735e9.2
+ for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 01:49:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712047760; x=1712652560;
+ d=1e100.net; s=20230601; t=1712047761; x=1712652561;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jGfCyigdV5qIBn7xiTOC6sWrrihMectfEY6o36E85X4=;
- b=CIP0zkkBL5tq3V7QnmdhQltWB37sM8XHlE5hqQQVfmsTzTEwAHbcoxju5zeJo3d/C8
- W9gIOMHErw9m0ySj2sv8n74Z4zcxcn4XYtMF8tZY+xTDwdsmu1GPomps+HYbNRMBnxb7
- B9+SjD0fIMJbNXMqr5Dq6dK78jADYAUKIa05idcFvT6uYsd/6440VvrggpB6M26A5p9/
- vjUtq2oFPDLljgw9RNrHqRhuVCeSQNUDswlI84TkAeafjn1YW5WQYRMyANv2NF953a3S
- gT3fYEz3IoOLl1bXbkMtHPITp+4QHYaLjxW1Fi2o/lMU6MaKSc8XxRL/nnzYxVe3FoDs
- 21cg==
+ bh=IKfhwraG6bAHt2xyiFOlL12GxzRez/OCUjpTwVzKueM=;
+ b=DrUuhg0Ine4N/TvKztyJXAulAiIzGTLQkYkAMaqZng5jLa687NWV9SNh16/4fjMm01
+ PaO8pKd4sspo2vbu3wUDk+GEZ6S7K1YEQt9ekx9J2RQlj8km8VlRI/7P/Al7Rw/0XvyO
+ KVO3qLK2G8FSdVyjbPWwdllEfvGtIOC3Ikt5AJW73CwtB3+w7w0PzGfF7xHFXMHIydTn
+ aYrnMpSepbmMEtbU9eAy6hIu1f8wMyQopPfGlDjLGZU5LVnD4XnANdVn17YhEcUVMynq
+ ES1eeO+afkngsZjvEWvrOrfIkUYxDplDt71IgkHo3JulL91JewT6fghaAeBlks4qUWgb
+ ylkw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXDXpFLVAl/dRdRZSnVNZT2qV3Bn8HrRpklyUpTKQwNSBFW/oNbiHevZuOkSgrnpB/MO9qg+vWaZBUBW5R2fWk8m32zVw==
-X-Gm-Message-State: AOJu0YylmZRCra0uyVyf8GWe4XSxfQxKxbjCvF1ffUZPXnSZpbeW7oGG
- pxDlY9lqhhNrSQYZ4j9wazTdT2mAP9yiMBCnsH76GmT75cGuiedFOa2D9RzF5kKs+DEnL+1fF8r
- zLByyzYklW4itQhZVm2z5cpksNwRkAOJwazWenkm26IPy8PAOmO1GvVOlBBE88X5F3jE=
-X-Received: by 2002:a05:651c:208:b0:2d8:12a4:8c5b with SMTP id
- y8-20020a05651c020800b002d812a48c5bmr3684105ljn.16.1712047760251; 
+ AJvYcCXkFovradDe7MCNGJDleHF/X3bre1CGz1xmNuB779e2lBLb9CkuNoTtPy5LKtC0RAcjgZnHPd1y2OgnXiD7TwdISMA5Cw==
+X-Gm-Message-State: AOJu0YyoLOQyBb0oCDtL7XJqamvrkDW4tFWfwllLNGyT1+EUML4zYDEb
+ r6Jt9sGlduSCjOfDVgKFMb3hrMGfYXfQHwIN7SbyPhGX41pb+vdHA03F/Sn0uaFKJubglO7pi3G
+ Q8/dDiLNrOVH4fMyYj/F4ii64L0xO0GIr7tAQNe2/Ho1PPeaPewCQ3fGqGWtVrwTMw24=
+X-Received: by 2002:a05:600c:4f13:b0:415:6cf0:b25b with SMTP id
+ l19-20020a05600c4f1300b004156cf0b25bmr1934849wmq.6.1712047761177; 
+ Tue, 02 Apr 2024 01:49:21 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG9d2CSoTZPogI3iDIioLu/iu+VmdzfxAteuT/wCYjv0kCVUjb6DOwR2Ys0BqPPTGwansTHjw==
+X-Received: by 2002:a05:600c:4f13:b0:415:6cf0:b25b with SMTP id
+ l19-20020a05600c4f1300b004156cf0b25bmr1934834wmq.6.1712047760767; 
  Tue, 02 Apr 2024 01:49:20 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHUWuQ4x4Ao2En4w8SOgAziPnyXjEVMzSZGZ+PSFKj4spM9TYwSPVLa5mxMZmOFav7ssSNdUg==
-X-Received: by 2002:a05:651c:208:b0:2d8:12a4:8c5b with SMTP id
- y8-20020a05651c020800b002d812a48c5bmr3684088ljn.16.1712047759885; 
- Tue, 02 Apr 2024 01:49:19 -0700 (PDT)
 Received: from workstation5.fritz.box
  (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
  by smtp.gmail.com with ESMTPSA id
- n18-20020a05600c4f9200b004148c3685ffsm17409318wmq.3.2024.04.02.01.49.19
+ n18-20020a05600c4f9200b004148c3685ffsm17409318wmq.3.2024.04.02.01.49.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 02 Apr 2024 01:49:19 -0700 (PDT)
+ Tue, 02 Apr 2024 01:49:20 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, Rick Chen <rick@andestech.com>,
@@ -87,9 +87,9 @@ Cc: Aurelien Jarno <aurelien@aurel32.net>,
  Seung-Woo Kim <sw0312.kim@samsung.com>, E Shattow <lucent@gmail.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 1/6] riscv: do not set default fdt for VisionFive 2
-Date: Tue,  2 Apr 2024 10:49:07 +0200
-Message-ID: <20240402084912.43228-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 2/6] eeprom: starfive: function get_product_id_from_eeprom()
+Date: Tue,  2 Apr 2024 10:49:08 +0200
+Message-ID: <20240402084912.43228-3-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240402084912.43228-1-heinrich.schuchardt@canonical.com>
 References: <20240402084912.43228-1-heinrich.schuchardt@canonical.com>
@@ -111,86 +111,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently in set_fdtfile() we set the value of environment variable fdtfile
-unconditionally. The implies that a value in the environment will be
-ignored.
+Export a function get_product_id_from_eeprom() to read the product ID.
+This value can be used for fixing up the device-tree on JH7110 based
+products.
 
-With the patch environment variable fdtfile will only be set if it does not
-yet exist. This requires that CONFIG_DEFAULT_FDT_FILE is not set.
-
-Now the user can either set and save fdtfile interactively or in the U-Boot
-configuration to overrule the device-tree name chosen based on the
-hardware in set_fdtfile().
-
-Reported-by: E Shattow <lucent@gmail.com>
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
 ---
 v3:
-	Rephrase last added sentence in doc/board/starfive/visionfive2.rst
+	no change
 v2:
-	new patch
+	no change
 ---
- .../visionfive2/starfive_visionfive2.c         |  4 ++++
- configs/starfive_visionfive2_defconfig         |  1 -
- doc/board/starfive/visionfive2.rst             | 18 ++++++++++++++++++
- 3 files changed, 22 insertions(+), 1 deletion(-)
+ arch/riscv/include/asm/arch-jh7110/eeprom.h         | 9 +++++++++
+ board/starfive/visionfive2/visionfive2-i2c-eeprom.c | 8 ++++++++
+ 2 files changed, 17 insertions(+)
 
-diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/starfive/visionfive2/starfive_visionfive2.c
-index 78e118d5a05..76439179fa7 100644
---- a/board/starfive/visionfive2/starfive_visionfive2.c
-+++ b/board/starfive/visionfive2/starfive_visionfive2.c
-@@ -49,6 +49,10 @@ static void set_fdtfile(void)
- 	u8 version;
- 	const char *fdtfile;
+diff --git a/arch/riscv/include/asm/arch-jh7110/eeprom.h b/arch/riscv/include/asm/arch-jh7110/eeprom.h
+index d2776d5b6cb..62d184aeb57 100644
+--- a/arch/riscv/include/asm/arch-jh7110/eeprom.h
++++ b/arch/riscv/include/asm/arch-jh7110/eeprom.h
+@@ -12,4 +12,13 @@
+ u8 get_pcb_revision_from_eeprom(void);
+ u32 get_ddr_size_from_eeprom(void);
  
-+	fdtfile = env_get("fdtfile");
-+	if (fdtfile)
-+		return;
++/**
++ * get_product_id_from_eeprom - get product ID string
++ *
++ * A string like "VF7110A1-2228-D008E000-00000001" is returned.
++ *
++ * Return:	product ID string
++ */
++const char *get_product_id_from_eeprom(void);
 +
- 	version = get_pcb_revision_from_eeprom();
- 	switch (version) {
- 	case 'a':
-diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-index 7a3f1d4dbdf..fa80d489f5e 100644
---- a/configs/starfive_visionfive2_defconfig
-+++ b/configs/starfive_visionfive2_defconfig
-@@ -40,7 +40,6 @@ CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="console=ttyS0,115200 debug rootwait earlycon=sbi"
- CONFIG_USE_PREBOOT=y
- CONFIG_PREBOOT="nvme scan; usb start; setenv fdt_addr ${fdtcontroladdr}; fdt addr ${fdtcontroladdr};"
--CONFIG_DEFAULT_FDT_FILE="starfive/jh7110-starfive-visionfive-2.dtb"
- CONFIG_SYS_CBSIZE=256
- CONFIG_SYS_PBSIZE=276
- CONFIG_DISPLAY_CPUINFO=y
-diff --git a/doc/board/starfive/visionfive2.rst b/doc/board/starfive/visionfive2.rst
-index abda8ac21bc..2c68df3ce4d 100644
---- a/doc/board/starfive/visionfive2.rst
-+++ b/doc/board/starfive/visionfive2.rst
-@@ -71,6 +71,24 @@ Now build the U-Boot SPL and U-Boot proper
- This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) as well
- as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
+ #endif /* _ASM_RISCV_EEPROM_H */
+diff --git a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+index c36de1a5125..a9f4376c8e1 100644
+--- a/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
++++ b/board/starfive/visionfive2/visionfive2-i2c-eeprom.c
+@@ -405,6 +405,14 @@ static void set_product_id(char *string)
+ 	update_crc();
+ }
  
-+Device-tree selection
-+~~~~~~~~~~~~~~~~~~~~~
++const char *get_product_id_from_eeprom(void)
++{
++	if (read_eeprom())
++		return NULL;
 +
-+Depending on the board version U-Boot set variable $fdtfile to either
-+starfive/jh7110-starfive-visionfive-2-v1.2a.dtb or
-+starfive/jh7110-starfive-visionfive-2-v1.3b.dtb.
++	return pbuf.eeprom.atom1.data.pstr;
++}
 +
-+To overrule this selection the variable can be set manually and saved in the
-+environment
-+
-+::
-+
-+    setenv fdtfile my_device-tree.dtb
-+    env save
-+
-+or the configuration variable CONFIG_DEFAULT_FDT_FILE can be used to provide
-+a default value.
-+
- Flashing
- ~~~~~~~~
- 
+ int do_mac(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ {
+ 	char *cmd;
 -- 
 2.43.0
 
