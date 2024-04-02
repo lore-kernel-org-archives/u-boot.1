@@ -4,84 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81E70CD128A
-	for <u-boot@archiver.kernel.org>; Mon,  1 Apr 2024 22:08:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F05B2CD128A
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 01:19:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 898B988330;
-	Tue,  2 Apr 2024 00:08:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EE1F388344;
+	Tue,  2 Apr 2024 03:19:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="h+ec8nKl";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B18888327; Tue,  2 Apr 2024 00:08:37 +0200 (CEST)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A2CE688346; Tue,  2 Apr 2024 03:19:15 +0200 (CEST)
+Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
+ (mail-sh0chn02on2071e.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4420:2::71e])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73C1A88330
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 00:08:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 59E1588322
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 03:19:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-60a104601dcso46726487b3.2
- for <u-boot@lists.denx.de>; Mon, 01 Apr 2024 15:08:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712009313; x=1712614113; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wtQOB61DUc16CE8LkZJOveDTXgpeJTkr+S0+jZtfxow=;
- b=h+ec8nKlAw9fdweUye18GTSCC6bR2X+hEVCW+TQw2N4CKkPsXI2c97st5a7QlX43K+
- GBa409Iv2/kIaWoLSgi+gW1smpN/hLsqhWC2/ygR3Wx0AM2QiypeGj2yxzlgTQrD43YA
- 0DUCW4+hJ+WidMGHCgQzwZz2ceY8tCdYXbfcgCMHvy39b6ATH6Y+C+O71J6P73/7XBwG
- ZTU+4HWZRMeNwyT+yhJxb62nmPxUTrsQ56IklkawK/bUCl1r2Eqn5AWIjhUHf1+UXXzR
- r/E+oGI2txEm0TQxvCiFWu2Me+da5HuB7ilGnvM68gbZJFbCm1iIofjYDAUENrhpMkvZ
- 2ngg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712009313; x=1712614113;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wtQOB61DUc16CE8LkZJOveDTXgpeJTkr+S0+jZtfxow=;
- b=ej6WowfY+YpcsiQgR1+5aa5H31nxD4R1CoB2lIWuIi4PeadVhqKve8tzhNaPeRla0g
- xVxmaQxX4+TTdcA5mFCfYt/bCYN31Roenv65XG2MyhbkeS8NGre6YOx8aY+MeHs6GPGG
- xBawyWiXIeVw/nxs1L35ELpuzyFzS6DtyGhx4umCRWqIMnFXAMiRC2Sy5/dkLLr9fnNC
- 9oWgBTg0JiAbcUBM6HRIMrRsddcYQ0+9FB2QuzVaLOLgIJtnV2VSGH+gLHZuWYvJQvI/
- IDK5W6RN+whj0eG9bJ7/FwYcpcKf9OUXzU52EFafbYTafKoRoSayGG2Xl+4OJ+2WstZv
- ViPQ==
-X-Gm-Message-State: AOJu0Yx1Ovl4KxegBIBB9cQVn+/zMwH3biLfa2QOjJCEQ4i937lt6YeC
- KgSNy+Awc3R2S4IhIESmluVPTCfUgNTC4lMiZiryhZ25omVZgXVDZHrYV2UX
-X-Google-Smtp-Source: AGHT+IFrrdoUC4wTmlsC9/tUQNfAjswyn34Xs7GWlaSX6xIhEnCQqM6jZ1mk6iTDPk/psrkONp2rkw==
-X-Received: by 2002:a0d:df91:0:b0:615:ecc:91c0 with SMTP id
- i139-20020a0ddf91000000b006150ecc91c0mr1651058ywe.20.1712009312419; 
- Mon, 01 Apr 2024 15:08:32 -0700 (PDT)
-Received: from localhost.localdomain
- (76-229-100-169.lightspeed.irvnca.sbcglobal.net. [76.229.100.169])
- by smtp.gmail.com with ESMTPSA id
- c189-20020a0df3c6000000b00614605317dfsm1744560ywf.50.2024.04.01.15.08.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 01 Apr 2024 15:08:31 -0700 (PDT)
-From: Tony Dinh <mibodhi@gmail.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Stefan Roese <sr@denx.de>,
- Michael Walle <michael@walle.cc>
-Cc: Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- Tony Dinh <mibodhi@gmail.com>,
- Chris Packham <chris.packham@alliedtelesis.co.nz>,
- Dave Purdy <david.c.purdy@gmail.com>,
- Evgeni Dobrev <evgeni@studio-punkt.com>, Luka Perkov <luka@openwrt.org>,
- Siddarth Gore <gores@marvell.com>,
- Simon Guinot <simon.guinot@sequanux.org>,
- Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>,
- Walter Schweizer <swwa@users.sourceforge.net>
-Subject: [PATCH v3] arm: dts: kirkwood: Enable upstream DT on Kirkwood boards
-Date: Mon,  1 Apr 2024 15:08:16 -0700
-Message-Id: <20240401220817.9905-1-mibodhi@gmail.com>
-X-Mailer: git-send-email 2.39.2
+ spf=pass smtp.mailfrom=minda.chen@starfivetech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=PhlIXz3tSh0qetjC9voWrGWWLQmu1+U42uOVTQkFHCLPskIz0zqehpHD4oGej96Bsilm2WaoTPDyf27fVq+hN7iLsXvQPrcKj0c2yiUBHGbFRTqMmFPS6cSj7Pj/OXZCeIpntLordmsQnwph/v4JBKlL2YZTg4P9FpWozhU3BfqaXhNBc94rC6fHjy6r3cYFfjIPFpHrfJADbTYMNr+HgNoU4z9VSJ7r3XBVNhALusgQsybBNCClzIdUTOMKLmRsnKmkENpOybVhomBgDmLE677k/ciK6L0wn5paj/7SCXOZDcToGyeRkH29kIQ5bbMqY7FaZoTiY+OA//dw9LadIw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=gOB/dl8v0zcbBNYVwnLtRvOpnojb+uHTf4yLNr8TqeA=;
+ b=RX9bRgidXPZ+1mxjxuQrEDyJWDOk2YdoiIXyDiaSAiosE758MIiVKl8tUEAMYgyuDr9ndM+wee1zk5KO3ksXh7xNMGlgxoHo5HydPii4fagGmj7Ak+H6NuQJ+2rM+jXenq89f5NuPouEEHSH9fuxwDJ4zgyWlDPZmM/oGxs65opw24XmzKos+mw7OSYQQWLgW8eCRII2EQ6qFNnUF0oAR8j1uj/7zgZCvzoKjBoRjwy1gtAx8Fky/fjI2bi+OvQoYfD2xpoksvvmKTrqfkeFeCqXKqsbO1xnoiBfhKBmYjn7l0/eJcVTmNsXXdhFkOiIcBv2lwP2BrfvI5PqGfVYXA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c311:25::15) by SHXPR01MB0735.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c311:27::17) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7249.38; Tue, 2 Apr
+ 2024 01:19:05 +0000
+Received: from SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
+ ([fe80::a137:b8e5:8a0e:ca9f]) by
+ SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn ([fe80::a137:b8e5:8a0e:ca9f%4])
+ with mapi id 15.20.7409.042; Tue, 2 Apr 2024 01:19:05 +0000
+From: Minda Chen <minda.chen@starfivetech.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Aurelien Jarno
+ <aurelien@aurel32.net>
+CC: Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, Lukasz
+ Tekieli <tekieli.lukasz@gmail.com>, Shiji Yang <yangshiji66@outlook.com>,
+ Shengyu Qu <wiagn233@outlook.com>, Seung-Woo Kim <sw0312.kim@samsung.com>, E
+ Shattow <lucent@gmail.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Hal Feng <hal.feng@starfivetech.com>
+Subject: Re: [PATCH v2 4/6] board: starfive: support Milk-V Mars board
+Thread-Topic: [PATCH v2 4/6] board: starfive: support Milk-V Mars board
+Thread-Index: AQHae7tYHhP1OBwIJEuWo41kwhOK2bFHAJiAgAZaaQCABkAFAIAAB1iAgACdrMA=
+Date: Tue, 2 Apr 2024 01:19:05 +0000
+Message-ID: <SHXPR01MB0863C007C843146B8EA0A82FE63EA@SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn>
+References: <20240321181149.177356-1-heinrich.schuchardt@canonical.com>
+ <20240321181149.177356-5-heinrich.schuchardt@canonical.com>
+ <ZgBAFWBB0-213CfQ@aurel32.net>
+ <b5af9050-aa50-4445-9de3-4e5f368621b7@canonical.com>
+ <ZgrSnExL1iTg8nSC@aurel32.net>
+ <a94ea391-5b0a-49b1-8277-f6d018ce780b@canonical.com>
+In-Reply-To: <a94ea391-5b0a-49b1-8277-f6d018ce780b@canonical.com>
+Accept-Language: en-US
+Content-Language: zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: SHXPR01MB0863:EE_|SHXPR01MB0735:EE_
+x-ms-office365-filtering-correlation-id: 51573d50-fe6a-4b75-3b02-08dc52b2e393
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: SJ4mUtxCnS5nWypmBgFy1gi0MkDbtAWcynRgSKIlcWjwrcokoM8ctx1M9eZGy4X6jeGDfPNBKzTyY6+w+0ZP9Ybs/C7Z2oyYP9I0P3Z7bcSg2QgzFzeGrL6Id+8zaOi31XVA4YyQ0bUAsDjJPyAmw6KY7dWqi6WLp2jGy6P8tKk3ZO8TDYlWu+cDAUcEWkiIe8y6eQSYAqgo3s5RrCNU+Cp3/FT1kP4qHzMm5TK5LeRvZA73HLVEpup2LXaFVzyfcWT+zUnGwpbDQrLcdZUObuj6IhdUBuAkNTY7y8tBkHI6Gs9Ctq3bnPrl8h8KNyBOZtNTZbjq7/2uH9Eo21Ql8ba8H+vDXmbf29VEn/JsdrxTShPxWpqICjYq46u3DYn6aoXPPmdhujWJ/+etn09zCW8+1En2iMAs+cUEGRsDn6T3FmZklzqXFSF6MGgQ8FCwdaEDcT4JWttWiRfLT5ouY9qT6OsI6R4Di4Pn40tSZGXfO7d92OOCNiljoJ0qU8esILli4kRdyY2m1NtOPCW8hNMWLm+vIMxtwFK6wbcYzHdKs8YFSFhUz0BA8effMHbLWPbPUeO3G3Awuz/ks85CqNPYDdc+uR0ORhEMREVPc6VKpERRZGOkuXUHVZ5ht3WU
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE;
+ SFS:(13230031)(1800799015)(41320700004)(366007)(7416005)(38070700009); DIR:OUT;
+ SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?bktYM3pPRlhPUGNkNU11M2FNak9KbzBrdkFxZFpOWEFQaTJYMnR1dEFPcjly?=
+ =?utf-8?B?Z0h0V2Rhb2ZoMkRyaFhUay91UXpNQjh3TjAybUNpai9GSXBpWW9LQndQbnpo?=
+ =?utf-8?B?UFkxRmJlRmNFaXRBSjR3ZTVndkR0U0ZZVlEvYlJCQnRneVoyYytmRlBGMWFx?=
+ =?utf-8?B?d284bXdXWTk1dHdxb1gwbDhtQ1JORVVLVjAra1Z6WmxEM2lXZXJtdERFd1dB?=
+ =?utf-8?B?L0g0Yk1STThYVjJJWG5VNHoyYmdwRlJGSm9ZdTVVTjQ0Qlg1T1RSUUpJaGJO?=
+ =?utf-8?B?ODN1K3JHQ1M4QzhMYWRWMjMvVFVwcjMxa3ZCZDAvdjdwcmtoN2FvdVgrc1RH?=
+ =?utf-8?B?dlRScnc5dU9pMC9EWVdSaEVWdjZtK0wvcE9HRkI3L2tRbnpxVGM4ekI1SjNi?=
+ =?utf-8?B?L2U4TWdQQTg3YmVLOUdXRi9nblNYYzJlN1dyWHg1UnlMR3o5N3EzU0xoNE9T?=
+ =?utf-8?B?UVN1L3FFRGswNFNpaGFPb1pqQUVYQ0ZTNlI3czFkTTllbEFNRDhDMXMyeFln?=
+ =?utf-8?B?eGUxeTBNVEdjSHd4SzhpT2JjcFlVZzdGbnpqd3BkNzBYVTBVNFYxVitlMmZL?=
+ =?utf-8?B?M1E2UWx4RG5zVzVVdXRST3QwYjB1SjJIek5UMVg3YnRhUVY0bllMeUd5UHhI?=
+ =?utf-8?B?MG5TQ0t5c1Z2ZWpIRXIzSnBwcVBPd0IyblFwZ2xPM0NWVDJYZmlYdTZ3ckd6?=
+ =?utf-8?B?UGpuQXk0QU15c3VhQnBYRHhjLzFYM1plTmdQRWFaQVdFcU0vdm02NnNvTUpI?=
+ =?utf-8?B?ZnovQ05DRUpNRHFmN2R0dmhRTmV4NTJyOU43K3FhU09OcDYzZG0vOUNVQU9M?=
+ =?utf-8?B?YkJHNE8ybTVrUUc4MG9HczN4bXNZL3p1QnErbTBlVGdsV2U3RDNVU2IxTlNP?=
+ =?utf-8?B?bzhBLzI0d2lSUFVsVysycjM2eDg5dEdlRmRNT0x2UU9waUZVTzU1SVNBaHhq?=
+ =?utf-8?B?MGVWOUNiRlVLUDJpTHZvUklmT3MvYnVuQXhmUzZZU0hiQUNaV0NCNmxZaUla?=
+ =?utf-8?B?TmpiVmJBY01SSnhoYmkxTSsxcXkxYWN1YkxxTGM3MFRJNnZEQkYrWGhiQ3hR?=
+ =?utf-8?B?UU5TN1ZuK0lRbENWbGs5b1J3d2xRRkhRUEdpVENTYnlnZVRudklFOHB3Q1R2?=
+ =?utf-8?B?K0g0bGthTkFaYWFhRHQ4T1BrRmlKbUhDalpJZHhsblEyUlRNWmxMRGI0b2ta?=
+ =?utf-8?B?VEMrZ2s4dGhLdVlZUU9DRTdFdzlWa3B1RGJJMjBlQjV4LzBsWGEzdlBVNnIr?=
+ =?utf-8?B?UU5rVGI2c2h1eXVyR05yOGRuZFJsUGZqZ25yZ3UvMXYvektWbFlVaUtmRXQv?=
+ =?utf-8?B?Q0E0TzNUL01TNGhlaUpERWxkWnppb2VJeW96Vnh3MHNudzlhdm1UWVhRVUpu?=
+ =?utf-8?B?NlgzSG9HeXdWc0RpMzhHQ2tjUWVrakxHU0FJNFI1bXJCUDRaZjVHMHQ4NXhZ?=
+ =?utf-8?B?R0IxTUhRcGtJSk9Gd0dxZHpmdUNNK2dDSWVEa2hZWmc4SlRIRTBET1NObXFa?=
+ =?utf-8?B?MUdmdnR4YTBZUlFOaFo2eEhKUVYzdExhS2tIdnhITmVtc2VPdXFRaWJUV0U2?=
+ =?utf-8?B?QXkyTUNGdUpDbnNwMS91THp6S0lRZjlZcElicERmclBFN1R0cmM3cDkzaklh?=
+ =?utf-8?B?Z3ROQ2t4MWVPVkVzb1RyZGsvRGFaUFBraHE0angyWFpaemMzTnUxUFVMclkw?=
+ =?utf-8?B?UEI2WTBHRkdWUlpSeW94bngrZE5xdkJiTkw1MXFGNlNsQlVlWFRnaWdiTTR1?=
+ =?utf-8?B?ZE1WSi93S1FMUUpKY0tLSTZ3UFhTQ3llSTJZUXVPZ3NLYlJHZnRBWHJ2cTdE?=
+ =?utf-8?B?YlRINHBxTUJUSEFMUlBKUWdrVytpdWFURnpZdDJ6VWdYaUVIWFFuZ0pTUXFH?=
+ =?utf-8?B?azFSMDA3LzZzaTIvajkvUXJTQ0IxeHgxN1hXMk5DTFluY25tSTh4d2drVkM4?=
+ =?utf-8?B?RXlqbWRSKy9EVnFXcWErZ25BYVJuZ01Na2V5K2RacVJZL3dFd0U0RTMzWjY2?=
+ =?utf-8?B?djIvbVJtdHVTaUk3c0pra3EwREZWMVczS2Y4dUREY3Y0OGh6R1E4UTNJSDhW?=
+ =?utf-8?B?ZEtpWjVhblFrSWdDenZWVXUya0dWQVZsbTJDZDBLYWdmbGFQN2xscjNHcXNN?=
+ =?utf-8?Q?IjWamIlddO5miv8ssOr6lGoOc?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-Network-Message-Id: 51573d50-fe6a-4b75-3b02-08dc52b2e393
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Apr 2024 01:19:05.5179 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: PMQiKeqxzHWUZR1yzSirkFnd36Vj7cqnfjvmtouBItdwbfAB0zVbp4N+Szjqr1FlEIGnj8wDD4rOaHdjkMaweHYZJxtKr4Wo/voV4wjIjbI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SHXPR01MB0735
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,519 +146,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable OF_UPSTREAM to use upstream DT and add marvell/ prefix to the
-DEFAULT_DEVICE_TREE for Kirkwood boards. And so we can directly build
-DTBs from dts/upstream/src/arm/marvell, and including *-u-boot.dtsi
-files from arch/arm/dts/ directory.
-
-Background:
-
-The following 2 commands and filters were used in the analysis to determine
-which upstream DTS and DTSI files can be used as they are, or need to have
-modified/created *-u-boot.dtsi for u-boot specific implementation, and
-which board should be opt-out from OF_UPSTREAM.
-
-"git grep -li arch_kirkwood configs | xargs grep DEVICE_TREE | cut -d '"' -f2 | xargs -n1 sh -c 'diff -qs  arch/arm/dts/$1.dts dts/upstream/src/arm/marvell/$1.dts' sh | grep differ"
-"diff -qrbu arch/arm/dts/ dts/upstream/src/arm/marvell/ | grep kirkwood | grep ".dtsi ""
-
-More detailed information can be found at:
-https://lore.kernel.org/u-boot/20240328021825.17935-1-mibodhi@gmail.com/T/#u
-
-I've regression tested this patch with the Zyxel NSA325 (Kirkwood 88F6282)
-and Zyxel NSA310S (Kirkwood 88F6281). The Zyxel NSA325 board has a
-USB 3.0 controller attached to the PCIe bus. And the Zyxel NSA310S
-has an extensive overhaul in bindings and styles in upstream DTS version.
-
-Tested-by: Michael Walle <michael@walle.cc> # on lschv2
-Acked-by: Sumit Garg <sumit.garg@linaro.org>
-Reviewed-by: Stefan Roese <sr@denx.de>
-
-Signed-off-by: Tony Dinh <mibodhi@gmail.com>
----
-
-Changes in v3:
-- Collect Reviewed/Tested/Acked-by tags.
-- Trim the commit description and point to lore.kernel.org for detailed information.
-- No change from the V2 patch.
-
-Changes in v2:
-Remove unnecessary redefined OF_UPSTREAM and use "imply OF_UPSTREAM" for
-KW88F6281 and KW88F6192 SoCs.
-
- arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi | 7 +++++++
- arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi   | 6 ++++--
- arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi     | 6 ++++--
- arch/arm/dts/kirkwood-nsa325-u-boot.dtsi    | 7 +++++++
- arch/arm/mach-kirkwood/Kconfig              | 2 ++
- configs/SBx81LIFKW_defconfig                | 1 +
- configs/SBx81LIFXCAT_defconfig              | 1 +
- configs/d2net_v2_defconfig                  | 2 +-
- configs/dns325_defconfig                    | 2 +-
- configs/dockstar_defconfig                  | 2 +-
- configs/dreamplug_defconfig                 | 2 +-
- configs/ds109_defconfig                     | 2 +-
- configs/goflexhome_defconfig                | 2 +-
- configs/guruplug_defconfig                  | 2 +-
- configs/ib62x0_defconfig                    | 2 +-
- configs/iconnect_defconfig                  | 2 +-
- configs/inetspace_v2_defconfig              | 2 +-
- configs/lschlv2_defconfig                   | 2 +-
- configs/lsxhl_defconfig                     | 2 +-
- configs/nas220_defconfig                    | 2 +-
- configs/net2big_v2_defconfig                | 2 +-
- configs/netspace_lite_v2_defconfig          | 2 +-
- configs/netspace_max_v2_defconfig           | 2 +-
- configs/netspace_mini_v2_defconfig          | 2 +-
- configs/netspace_v2_defconfig               | 2 +-
- configs/nsa310s_defconfig                   | 2 +-
- configs/nsa325_defconfig                    | 2 +-
- configs/openrd_base_defconfig               | 2 +-
- configs/openrd_client_defconfig             | 2 +-
- configs/openrd_ultimate_defconfig           | 2 +-
- configs/pogo_e02_defconfig                  | 2 +-
- configs/pogo_v4_defconfig                   | 2 +-
- configs/sheevaplug_defconfig                | 2 +-
- 33 files changed, 52 insertions(+), 30 deletions(-)
- create mode 100644 arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi
- create mode 100644 arch/arm/dts/kirkwood-nsa325-u-boot.dtsi
-
-diff --git a/arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi b/arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi
-new file mode 100644
-index 0000000000..59f19a211f
---- /dev/null
-+++ b/arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi
-@@ -0,0 +1,7 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+/ {
-+	aliases {
-+		spi0 = &spi0;
-+	};
-+};
-diff --git a/arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi b/arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi
-index 7fc2d7d3b4..cf33ff822e 100644
---- a/arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi
-+++ b/arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi
-@@ -1,7 +1,9 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
--&eth0 {
--	status = "disabled";
-+/ {
-+	aliases {
-+		spi0 = &spi0;
-+	};
- };
- 
- &hdd_power {
-diff --git a/arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi b/arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi
-index 7fc2d7d3b4..cf33ff822e 100644
---- a/arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi
-+++ b/arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi
-@@ -1,7 +1,9 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
--&eth0 {
--	status = "disabled";
-+/ {
-+	aliases {
-+		spi0 = &spi0;
-+	};
- };
- 
- &hdd_power {
-diff --git a/arch/arm/dts/kirkwood-nsa325-u-boot.dtsi b/arch/arm/dts/kirkwood-nsa325-u-boot.dtsi
-new file mode 100644
-index 0000000000..dec27b2a87
---- /dev/null
-+++ b/arch/arm/dts/kirkwood-nsa325-u-boot.dtsi
-@@ -0,0 +1,7 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+
-+&nand {
-+	partition@0 {
-+		/delete-property/ read-only;
-+	};
-+};
-diff --git a/arch/arm/mach-kirkwood/Kconfig b/arch/arm/mach-kirkwood/Kconfig
-index c2fff84a68..031d4e5ecd 100644
---- a/arch/arm/mach-kirkwood/Kconfig
-+++ b/arch/arm/mach-kirkwood/Kconfig
-@@ -6,10 +6,12 @@ config FEROCEON_88FR131
- config KW88F6192
- 	bool
- 	select ARCH_VERY_EARLY_INIT
-+	imply OF_UPSTREAM
- 
- config KW88F6281
- 	bool
- 	select ARCH_VERY_EARLY_INIT
-+	imply OF_UPSTREAM
- 
- config SHEEVA_88SV131
- 	bool
-diff --git a/configs/SBx81LIFKW_defconfig b/configs/SBx81LIFKW_defconfig
-index cc17a8b114..977daf9f09 100644
---- a/configs/SBx81LIFKW_defconfig
-+++ b/configs/SBx81LIFKW_defconfig
-@@ -6,6 +6,7 @@ CONFIG_ARCH_KIRKWOOD=y
- CONFIG_SYS_KWD_CONFIG="board/alliedtelesis/SBx81LIFKW/kwbimage.cfg"
- CONFIG_TEXT_BASE=0x00600000
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
-+# CONFIG_OF_UPSTREAM is not set
- CONFIG_TARGET_SBx81LIFKW=y
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xC0000
-diff --git a/configs/SBx81LIFXCAT_defconfig b/configs/SBx81LIFXCAT_defconfig
-index 0612723298..9bc8614030 100644
---- a/configs/SBx81LIFXCAT_defconfig
-+++ b/configs/SBx81LIFXCAT_defconfig
-@@ -6,6 +6,7 @@ CONFIG_ARCH_KIRKWOOD=y
- CONFIG_SYS_KWD_CONFIG="board/alliedtelesis/SBx81LIFXCAT/kwbimage.cfg"
- CONFIG_TEXT_BASE=0x00600000
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
-+# CONFIG_OF_UPSTREAM is not set
- CONFIG_TARGET_SBx81LIFXCAT=y
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xC0000
-diff --git a/configs/d2net_v2_defconfig b/configs/d2net_v2_defconfig
-index bb1bcb0aa3..69658a2ba7 100644
---- a/configs/d2net_v2_defconfig
-+++ b/configs/d2net_v2_defconfig
-@@ -11,7 +11,7 @@ CONFIG_TARGET_NET2BIG_V2=y
- CONFIG_ENV_SIZE=0x1000
- CONFIG_ENV_OFFSET=0x70000
- CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-d2net"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-d2net"
- CONFIG_IDENT_STRING=" D2 v2"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_ENV_ADDR=0x70000
-diff --git a/configs/dns325_defconfig b/configs/dns325_defconfig
-index edfe92c5f3..b85f7cac8e 100644
---- a/configs/dns325_defconfig
-+++ b/configs/dns325_defconfig
-@@ -10,7 +10,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
- CONFIG_TARGET_DNS325=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xE0000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-dns325"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-dns325"
- CONFIG_IDENT_STRING="\nD-Link DNS-325"
- CONFIG_SYS_LOAD_ADDR=0x800000
- # CONFIG_SYS_MALLOC_F is not set
-diff --git a/configs/dockstar_defconfig b/configs/dockstar_defconfig
-index 719fa3979e..7b5f19433a 100644
---- a/configs/dockstar_defconfig
-+++ b/configs/dockstar_defconfig
-@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_TARGET_DOCKSTAR=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0x80000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-dockstar"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-dockstar"
- CONFIG_IDENT_STRING="\nSeagate FreeAgent DockStar"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_BOOTDELAY=3
-diff --git a/configs/dreamplug_defconfig b/configs/dreamplug_defconfig
-index 02a2635af8..8518eabcb2 100644
---- a/configs/dreamplug_defconfig
-+++ b/configs/dreamplug_defconfig
-@@ -13,7 +13,7 @@ CONFIG_TARGET_DREAMPLUG=y
- CONFIG_ENV_SIZE=0x1000
- CONFIG_ENV_OFFSET=0x100000
- CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-dreamplug"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-dreamplug"
- CONFIG_IDENT_STRING="\nMarvell-DreamPlug"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_ENV_ADDR=0x100000
-diff --git a/configs/ds109_defconfig b/configs/ds109_defconfig
-index 304c098c99..ef805eca56 100644
---- a/configs/ds109_defconfig
-+++ b/configs/ds109_defconfig
-@@ -14,7 +14,7 @@ CONFIG_TARGET_DS109=y
- CONFIG_ENV_SIZE=0x10000
- CONFIG_ENV_OFFSET=0x3D0000
- CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-ds109"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ds109"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_ENV_ADDR=0x3D0000
- # CONFIG_SYS_MALLOC_F is not set
-diff --git a/configs/goflexhome_defconfig b/configs/goflexhome_defconfig
-index d577d5807b..53b2ce97e8 100644
---- a/configs/goflexhome_defconfig
-+++ b/configs/goflexhome_defconfig
-@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_TARGET_GOFLEXHOME=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xC0000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-goflexnet"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-goflexnet"
- CONFIG_IDENT_STRING="\nSeagate GoFlex Home"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_BOOTDELAY=3
-diff --git a/configs/guruplug_defconfig b/configs/guruplug_defconfig
-index 7cb649e29c..5371ee403b 100644
---- a/configs/guruplug_defconfig
-+++ b/configs/guruplug_defconfig
-@@ -10,7 +10,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
- CONFIG_TARGET_GURUPLUG=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xE0000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-guruplug-server-plus"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-guruplug-server-plus"
- CONFIG_IDENT_STRING="\nMarvell-GuruPlug"
- CONFIG_SYS_LOAD_ADDR=0x800000
- # CONFIG_SYS_MALLOC_F is not set
-diff --git a/configs/ib62x0_defconfig b/configs/ib62x0_defconfig
-index 074384e387..32b0e1c395 100644
---- a/configs/ib62x0_defconfig
-+++ b/configs/ib62x0_defconfig
-@@ -10,7 +10,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
- CONFIG_TARGET_IB62X0=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xE0000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-ib62x0"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ib62x0"
- CONFIG_IDENT_STRING=" RaidSonic ICY BOX IB-NAS62x0"
- CONFIG_SYS_LOAD_ADDR=0x800000
- # CONFIG_SYS_MALLOC_F is not set
-diff --git a/configs/iconnect_defconfig b/configs/iconnect_defconfig
-index f7b74c4662..45ffbd92db 100644
---- a/configs/iconnect_defconfig
-+++ b/configs/iconnect_defconfig
-@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_TARGET_ICONNECT=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0x80000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-iconnect"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-iconnect"
- CONFIG_IDENT_STRING=" Iomega iConnect"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_PCI=y
-diff --git a/configs/inetspace_v2_defconfig b/configs/inetspace_v2_defconfig
-index 2e8e3f3928..3fa7790d77 100644
---- a/configs/inetspace_v2_defconfig
-+++ b/configs/inetspace_v2_defconfig
-@@ -11,7 +11,7 @@ CONFIG_TARGET_NETSPACE_V2=y
- CONFIG_ENV_SIZE=0x1000
- CONFIG_ENV_OFFSET=0x70000
- CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-is2"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-is2"
- CONFIG_IDENT_STRING=" IS v2"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_ENV_ADDR=0x70000
-diff --git a/configs/lschlv2_defconfig b/configs/lschlv2_defconfig
-index 99bdbc1483..ad060079a7 100644
---- a/configs/lschlv2_defconfig
-+++ b/configs/lschlv2_defconfig
-@@ -15,7 +15,7 @@ CONFIG_ENV_SIZE=0x10000
- CONFIG_ENV_OFFSET=0x70000
- CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-lschlv2"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-lschlv2"
- CONFIG_IDENT_STRING=" LS-CHLv2"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_HAS_BOARD_SIZE_LIMIT=y
-diff --git a/configs/lsxhl_defconfig b/configs/lsxhl_defconfig
-index bb0a5ddf50..b2d9f0c9d8 100644
---- a/configs/lsxhl_defconfig
-+++ b/configs/lsxhl_defconfig
-@@ -16,7 +16,7 @@ CONFIG_ENV_SIZE=0x10000
- CONFIG_ENV_OFFSET=0x70000
- CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-lsxhl"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-lsxhl"
- CONFIG_IDENT_STRING=" LS-XHL"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_HAS_BOARD_SIZE_LIMIT=y
-diff --git a/configs/nas220_defconfig b/configs/nas220_defconfig
-index f01b26f2df..4ea342a043 100644
---- a/configs/nas220_defconfig
-+++ b/configs/nas220_defconfig
-@@ -10,7 +10,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
- CONFIG_TARGET_NAS220=y
- CONFIG_ENV_SIZE=0x10000
- CONFIG_ENV_OFFSET=0xA0000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-blackarmor-nas220"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-blackarmor-nas220"
- CONFIG_IDENT_STRING="\nNAS 220"
- CONFIG_SYS_LOAD_ADDR=0x800000
- # CONFIG_SYS_MALLOC_F is not set
-diff --git a/configs/net2big_v2_defconfig b/configs/net2big_v2_defconfig
-index dda627aac6..39cbc3384f 100644
---- a/configs/net2big_v2_defconfig
-+++ b/configs/net2big_v2_defconfig
-@@ -12,7 +12,7 @@ CONFIG_NET2BIG_V2=y
- CONFIG_ENV_SIZE=0x1000
- CONFIG_ENV_OFFSET=0x70000
- CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-net2big"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-net2big"
- CONFIG_IDENT_STRING=" 2Big v2"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_ENV_ADDR=0x70000
-diff --git a/configs/netspace_lite_v2_defconfig b/configs/netspace_lite_v2_defconfig
-index 742e6205d8..cd416cb150 100644
---- a/configs/netspace_lite_v2_defconfig
-+++ b/configs/netspace_lite_v2_defconfig
-@@ -12,7 +12,7 @@ CONFIG_NETSPACE_LITE_V2=y
- CONFIG_ENV_SIZE=0x1000
- CONFIG_ENV_OFFSET=0x70000
- CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-ns2lite"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ns2lite"
- CONFIG_IDENT_STRING=" NS v2 Lite"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_ENV_ADDR=0x70000
-diff --git a/configs/netspace_max_v2_defconfig b/configs/netspace_max_v2_defconfig
-index 7779e6815e..6a3d9296ac 100644
---- a/configs/netspace_max_v2_defconfig
-+++ b/configs/netspace_max_v2_defconfig
-@@ -12,7 +12,7 @@ CONFIG_NETSPACE_MAX_V2=y
- CONFIG_ENV_SIZE=0x1000
- CONFIG_ENV_OFFSET=0x70000
- CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-ns2max"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ns2max"
- CONFIG_IDENT_STRING=" NS Max v2"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_ENV_ADDR=0x70000
-diff --git a/configs/netspace_mini_v2_defconfig b/configs/netspace_mini_v2_defconfig
-index 9e3614bb44..e25631b09f 100644
---- a/configs/netspace_mini_v2_defconfig
-+++ b/configs/netspace_mini_v2_defconfig
-@@ -12,7 +12,7 @@ CONFIG_NETSPACE_MINI_V2=y
- CONFIG_ENV_SIZE=0x1000
- CONFIG_ENV_OFFSET=0x70000
- CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-ns2mini"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ns2mini"
- CONFIG_IDENT_STRING=" NS v2 Mini"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_ENV_ADDR=0x70000
-diff --git a/configs/netspace_v2_defconfig b/configs/netspace_v2_defconfig
-index 1583a0adb3..b6ac2a8b19 100644
---- a/configs/netspace_v2_defconfig
-+++ b/configs/netspace_v2_defconfig
-@@ -12,7 +12,7 @@ CONFIG_NETSPACE_V2=y
- CONFIG_ENV_SIZE=0x1000
- CONFIG_ENV_OFFSET=0x70000
- CONFIG_ENV_SECT_SIZE=0x10000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-ns2"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-ns2"
- CONFIG_IDENT_STRING=" NS v2"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_ENV_ADDR=0x70000
-diff --git a/configs/nsa310s_defconfig b/configs/nsa310s_defconfig
-index 89d8b18b16..e859a43ffa 100644
---- a/configs/nsa310s_defconfig
-+++ b/configs/nsa310s_defconfig
-@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_TARGET_NSA310S=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xE0000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-nsa310s"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-nsa310s"
- CONFIG_DEBUG_UART_BASE=0xf1012000
- CONFIG_DEBUG_UART_CLOCK=166666667
- CONFIG_IDENT_STRING="\nZyXEL NSA310S/320S 1/2-Bay Power Media Server"
-diff --git a/configs/nsa325_defconfig b/configs/nsa325_defconfig
-index 5da4a002b4..88a890002e 100644
---- a/configs/nsa325_defconfig
-+++ b/configs/nsa325_defconfig
-@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_TARGET_NSA325=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xC0000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-nsa325"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-nsa325"
- CONFIG_IDENT_STRING="\nZyXEL NSA325 2-Bay Power Media Server"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_PCI=y
-diff --git a/configs/openrd_base_defconfig b/configs/openrd_base_defconfig
-index 29a14e0927..057dd28dff 100644
---- a/configs/openrd_base_defconfig
-+++ b/configs/openrd_base_defconfig
-@@ -11,7 +11,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc8012000
- CONFIG_TARGET_OPENRD=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0x80000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-openrd-base"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-base"
- CONFIG_IDENT_STRING="\nOpenRD-Base"
- CONFIG_SYS_LOAD_ADDR=0x800000
- # CONFIG_SYS_MALLOC_F is not set
-diff --git a/configs/openrd_client_defconfig b/configs/openrd_client_defconfig
-index a95a435bdf..05e4292764 100644
---- a/configs/openrd_client_defconfig
-+++ b/configs/openrd_client_defconfig
-@@ -12,7 +12,7 @@ CONFIG_TARGET_OPENRD=y
- CONFIG_BOARD_IS_OPENRD_CLIENT=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0x80000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-openrd-client"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-client"
- CONFIG_IDENT_STRING="\nOpenRD-Client"
- CONFIG_SYS_LOAD_ADDR=0x800000
- # CONFIG_SYS_MALLOC_F is not set
-diff --git a/configs/openrd_ultimate_defconfig b/configs/openrd_ultimate_defconfig
-index e3f5294ff1..6e13c6eabd 100644
---- a/configs/openrd_ultimate_defconfig
-+++ b/configs/openrd_ultimate_defconfig
-@@ -12,7 +12,7 @@ CONFIG_TARGET_OPENRD=y
- CONFIG_BOARD_IS_OPENRD_ULTIMATE=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0x80000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-openrd-ultimate"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-openrd-ultimate"
- CONFIG_IDENT_STRING="\nOpenRD-Ultimate"
- CONFIG_SYS_LOAD_ADDR=0x800000
- # CONFIG_SYS_MALLOC_F is not set
-diff --git a/configs/pogo_e02_defconfig b/configs/pogo_e02_defconfig
-index e53ccf34c7..880cb20b22 100644
---- a/configs/pogo_e02_defconfig
-+++ b/configs/pogo_e02_defconfig
-@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_TARGET_POGO_E02=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xC0000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-pogo_e02"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-pogo_e02"
- CONFIG_IDENT_STRING="\nPogo E02"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_BOOTDELAY=3
-diff --git a/configs/pogo_v4_defconfig b/configs/pogo_v4_defconfig
-index 95e22b3fef..50046e83b7 100644
---- a/configs/pogo_v4_defconfig
-+++ b/configs/pogo_v4_defconfig
-@@ -12,7 +12,7 @@ CONFIG_TEXT_BASE=0x600000
- CONFIG_TARGET_POGO_V4=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0xC0000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-pogoplug-series-4"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-pogoplug-series-4"
- CONFIG_IDENT_STRING="\nPogoplug V4"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_PCI=y
-diff --git a/configs/sheevaplug_defconfig b/configs/sheevaplug_defconfig
-index 0af87dc4fb..b673b3f6da 100644
---- a/configs/sheevaplug_defconfig
-+++ b/configs/sheevaplug_defconfig
-@@ -13,7 +13,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_TARGET_SHEEVAPLUG=y
- CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0x80000
--CONFIG_DEFAULT_DEVICE_TREE="kirkwood-sheevaplug"
-+CONFIG_DEFAULT_DEVICE_TREE="marvell/kirkwood-sheevaplug"
- CONFIG_IDENT_STRING="\nMarvell-Sheevaplug"
- CONFIG_SYS_LOAD_ADDR=0x800000
- CONFIG_HAS_BOARD_SIZE_LIMIT=y
--- 
-2.39.2
-
+PiANCj4gT24gNC8xLzI0IDE3OjI4LCBBdXJlbGllbiBKYXJubyB3cm90ZToNCj4gPiBPbiAyMDI0
+LTAzLTI4IDE3OjAxLCBIZWlucmljaCBTY2h1Y2hhcmR0IHdyb3RlOg0KPiA+PiBPbiAyNC4wMy4y
+NCAxNjowMCwgQXVyZWxpZW4gSmFybm8gd3JvdGU6DQo+ID4+PiBPbiAyMDI0LTAzLTIxIDE5OjEx
+LCBIZWlucmljaCBTY2h1Y2hhcmR0IHdyb3RlOg0KPiA+Pj4+IFRoZSBkaWZmZXJlbmNlcyBiZXR3
+ZWVuIHRoZSBNaWxrLVYgTWFycyBib2FyZCBhbmQgdGhlIFZpc2lvbkZpdmUgMg0KPiA+Pj4+IGJv
+YXJkIGFyZSBzbWFsbCBlbm91Z2ggdGhhdCB3ZSBjYW4gc3VwcG9ydCBib3RoIHVzaW5nIHRoZSBz
+YW1lIFUtQm9vdA0KPiBidWlsZC4NCj4gPj4+Pg0KPiA+Pj4+ICogVGhlIG1vZGVsIGFuZCBjb21w
+YXRpYmxlIHByb3BlcnR5IGFyZSB0YWtlbiBmcm9tIHByb3Bvc2VkIExpbnV4DQo+IHBhdGNoZXMu
+DQo+ID4+Pj4gKiBUaGUgRUVQUk9NIGlzIGF0bWVsLDI0YzAyIGFjY29yZGluZyB0byB0aGUgdmVu
+ZG9yIFUtQm9vdC4NCj4gPj4+PiAqIFRoZSBzZWNvbmQgRXRoZXJuZXQgcG9ydCBpcyBub3QgYXZh
+aWxhYmxlLg0KPiA+Pj4NCj4gPj4+ICAgRnJvbSB0aGUgZGV2aWNlIHRyZWUgdGhhdCBoYXZlIGJl
+ZW4gc3VibWl0dGVkIHRvIHRoZSBrZXJuZWwgWzFdIGl0DQo+ID4+PiBzZWVtcyBhbm90aGVyIGRp
+ZmZlcmVuY2UgaXMgdGhhdCB0aGVyZSBpcyBhIENEIGdwaW8gZm9yIG1tYzEuDQo+ID4+DQo+ID4+
+IFRoYW5rIHlvdSBmb3IgcmV2aWV3aW5nLg0KPiA+Pg0KPiA+PiBPbiBhbGwgb2YgTWlsay1WIE1h
+cnMsIFZpc2lvbkZpdmUgMiAxLjJCLCBhbmQgMS4zQSBJIHNlZSBHUElPIDQxDQo+ID4+IGxldmVs
+IGNoYW5naW5nIHdoZW4gcmVtb3Zpbmcgb3IgaW5zZXJ0aW5nIGFuIFNEIGNhcmQgdXNpbmcgVS1C
+b290DQo+ID4+IGNvbW1hbmQgJ2dwaW8gc3RhdHVzIC1hJy4gU28gdGhpcyBzZWVtcyBub3QgdG8g
+YmUgTWlsay1WIHNwZWNpZmljLg0KPiA+Pg0KPiA+PiBDb3VsZCB5b3UsIHBsZWFzZSwgY2hlY2su
+DQo+ID4NCj4gPiBUaGlzIGFscmVhZHkgaGF2ZSBiZWVuIGFuc3dlcmVkIGJ5IG90aGVycywgdGhh
+bmtzLg0KPiA+DQo+ID4+PiAgIEZyb20gdGhlIHNjaGVtYXRpY3MsIGl0IGFsc28gc2VlbXMgdGhh
+dCB0aGUgdXNiMCBwb3J0IGlzIG5vdCBpbg0KPiA+Pj4gcGVyaXBoZXJhbCBtb2RlLCBidXQgaW4g
+aG9zdCBtb2RlLiBUaGF0IHNhaWQgb24gdGhlIHN1Ym1pdHRlZCBrZXJuZWwNCj4gPj4+IGRldmlj
+ZSB0cmVlIGl0IHNlZW1zIHNpbXBseSBkaXNhYmxlZC4NCj4gPj4NCj4gPj4gQWxsIHRocmVlIGJs
+dWUtY29sb3JlZCBVU0IgMy4wIHBvcnRzIGFyZSBhYmxlIHRvIHJlYWQgYW4gU0QtY2FyZCBpbiBV
+LUJvb3QuDQo+ID4+DQo+ID4+IFRoZSBibGFjayBwb3J0IHByb3ZpZGVzIDVWIGJ1dCBJIGNvdWxk
+IG5vdCBtYWtlIGl0IHdvcmsuDQo+ID4+DQo+ID4+IE9uIHRoZSBzY2hlbWEgSSBmb3VuZDoNCj4g
+Pj4NCj4gPj4gVVNCMjA6IERvIG5vdCBzdXBwb3J0IE9URyBtb2RlIGFuZCBBVlNTX1VTQjAtQVZT
+U19VU0IyIGF0dGFjaGVkIHRvDQo+IGdyb3VuZC4NCj4gPj4NCj4gPj4gQ291bGQgeW91LCBwbGVh
+c2UsIHNwZWNpZnkgd2hpY2ggbm9kZSBpbiB0aGUgZGV2aWNlLXRyZWUgeW91IHdhbnQgdG8NCj4g
+Pj4gZGlzYWJsZS4gSSBjYW5ub3Qgc2VlIGFueXRoaW5nIGRpc2FibGVkIGZvciB1c2JAMTAxMDAw
+MDAgYW5kIHVzYkAwIGluDQo+ID4+IHRoZSBrZXJuZWwgZGV2aWNlLXRyZWUuDQo+ID4NCj4gPiBE
+aXNjbGFpbWVyLCBJIGhhdmUgbm8gc3VjaCBib2FyZCwgYnV0IEkgcmVtZW1iZXIgcGVvcGxlIG9u
+IElSQyB0cnlpbmcNCj4gPiB0byB1c2UgdGhlIGRldmljZSB0cmVlIGZyb20gdGhlIFZGMiBvbiBh
+IE1pbGstViBNYXJzIGFuZCBnZXR0aW5nIGFuDQo+ID4gZXJyb3Igd2l0aCB0aGUgVVNCIGJlaW5n
+IGluIGEgd3JvbmcgbW9kZS4NCj4gPg0KPiA+IFRoZSBkaWZmZXJlbmNlIEkgaGF2ZSBub3RpY2Vk
+IGlzIG5vdCBhIG5vZGUgYnV0IHRoZSBkcl9tb2RlIHByb3BlcnR5Og0KPiA+DQo+ID4gJnVzYjAg
+ew0KPiA+ICAgICAgICAgIGRyX21vZGUgPSAicGVyaXBoZXJhbCI7DQo+ID4gICAgICAgICAgc3Rh
+dHVzID0gIm9rYXkiOw0KPiA+IH07DQo+IA0KPiBUaGFua3MgQXVyZWxpZW4gZm9yIHRoZSBleHBs
+YW5hdGlvbi4NCj4gDQo+IFRoZSBub2RlIHVzYkAxMDEwMDAwMCAoYWthIHVzYjApIGRvZXMgbm90
+IGV4aXN0IGluIHRoZSBVLUJvb3QNCj4gVmlzaW9uRml2ZTIgZGV2aWNlLXRyZWUsIHlldC4gVGhl
+cmUgaXNuJ3QgYW55IGRyX21vZGUgcHJvcGVydHkgZWl0aGVyLg0KPiANCj4gV2Ugd2lsbCBoYXZl
+IHRvIGNvbnNpZGVyIHRoaXMgbm9kZSBvbmNlIHdlIG1lcmdlIHRoZSBMaW51eCBkZXZpY2UtdHJl
+ZS4NCj4gDQo+IEJlc3QgcmVnYXJkcw0KPiANCj4gSGVpbnJpY2gNCj4gDQp1c2JAMTAxMDAwMDAg
+aXMgY2FkZW5jZSB1c2IgY29udHJvbGxlci4gSW4gVkYyLCBkciBtb2RlIGlzIHVzYiBwZXJpcGhl
+cmFsIGFuZCANCnNlbGRvbSB1c2VkIGluIHUtYm9vdC4gU28gdGhlIGNhZGVuY2UgdXNiIHdyYXBw
+ZXIgY29kZXMgbm90IGluIHVib290IHVwc3RyZWFtLg0KSSBkb24ndCBrbm93IHRoZSBkciBtb2Rl
+IGluIG1pbGt2IDcxMTAgYm9hcmQuIEJ1dCBpZiBpdCBpdHMgZHIgbW9kZSBpcyBob3N0LCBJIHRo
+aW5rIEkNCm5lZWQgZGV2ZWxvcCBjYWRlbmNlIHVzYiB3cmFwcGVyIGNvZGUgdXBzdHJlYW0uDQoN
+Ck1pbmRhIA0KPiA+DQo+ID4gVGhpcyBkb2VzIG5vdCBhcHBlYXIgb24gdGhlIHBhdGNoZXMgc3Vi
+bWl0dGVkIG9uIHRoZSBMaW51eCBzaWRlIGZvcg0KPiA+IHRoZSBNaWxrViBNYXJzLg0KPiA+DQo+
+ID4gQXVyZWxpZW4NCj4gPg0KDQo=
