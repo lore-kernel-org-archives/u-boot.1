@@ -4,62 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC2BCD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 13:08:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00841CD128D
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 13:08:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F35A8813C;
-	Tue,  2 Apr 2024 15:08:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CA52A88159;
+	Tue,  2 Apr 2024 15:08:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="h+eqMdSh";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="en7S7iPZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0BBE88151; Tue,  2 Apr 2024 15:08:24 +0200 (CEST)
+ id A4CC488137; Tue,  2 Apr 2024 15:08:28 +0200 (CEST)
 Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::700])
+ (mail-bn8nam11on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::701])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A5C788137
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 15:08:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D79988151
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 15:08:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=GZjKy/vGVur6kpd+4RD8NH/dxvmUbpY5GkEXDFfkM29GtWBf/++Sfoz2FJOhzgI692pyBfJr9vZLhBGMuAZ/KmD8GkPI4DYUS5gPsMXYQ2UdUpN+bOxZhFyF44xAmeTQKJTsiJkgtPsPgQlyO4MjXXUNHyeSdRq082vAaSYXbKVr3aQY3lR8kyw24hcGLUlaBRm0/j/qVQ0k3wfPplVO8iu0Gjy4mqXlkKHKFcmqBMX5MztE8qljgX4B+jLahh0aIw8sM4IVVMfjqOs5G3vVg8AsY7ZkoLdW9PusT0MrR0h5Ga7CrDew0zEIMQmhgYIf7lQZ6At6/ztGY385ZE71Fw==
+ b=kmlqYorS0McKn3gd0TedtH2ASQrkC02hr5odBbwcUrTrcs+eibUdcGXB9oDI/NcWlRYzas+mFG5nv2hHarSkN/cGqNjVtpZUJcSAMdtNt//yyxIqQWsvx/aiSep4QI9ypu9oJSWkWksW4YD+xEPAxiwtoH1qotyoBJIO11qNEB9hjihGcBMgzR1ImgBWiG0SiBB9j/1qer7XRXxRU/q54L4q9mw5QBJFkPCJo48w2kVh212/O7Q8A3155ncbMJSjSEWbFNuakUOxCbO9ifBbL4mxyqgo5WzGPsZLnwfvLqJQSr1aeru8NnA0pAkZDgHSVp2vuSHGvi21jKz+uC2Pkg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4YZ73TXOnntyzgILffN/OjdP4R0lkA7Qq3PnELI4ntg=;
- b=XnNr25V/vCtEbkli7q8jLodmeheSBpHRfenRNS8LMHam1fxMwQ07knTMNY/J+OZhqIFS8ZHvQOiZnpdm68gb7lWwiygPb/A8mlHTIyT5cQhnJMZhwdWDp/kyPo3P1FoQo65T44dYBg50zY2iI0tvXQK7/ngdfUz1e+FJ9Yub4Kqt/uMyZeMIORXBFVC3KLgcRnu+OAiYlbUi39Vr1fT6CenmqgLajYBiJ9cxD2Q2EZ+2kDl1DcoweM0c9py37RvwAHPBEu6BxWdBX9Ju2vcJ6s+O2YzwLcXsfkPbgveAF3ljugJpEHBibJFtR2yB9tKNueDfG+DCkCE+Ag+8Txi+pQ==
+ bh=5YNuZ5UKHnn5fwFasLo6ceqd5/HifIJwzt+3+Xu6BZo=;
+ b=XljGKQqQpCONxR2+zMNWZIKCPhpO8U1Q2WVCxLhgLSdSE7jiOY7X2TaXjPh5yT0N7mkNaFCHXD/WvXEZmEhSglzXwG12RKETgpjjIwhZrAsouOTrAuO1T/xtoc6ZaxwlCTtacYzCiDOQcG6y+AMcpZKJmtRNRbJSG740QmP6ilHaHYwjED4fn37VL5/Z/HpciEgF2QIh2MNP9nv/peniuGn/pWCXhmVUBwI5kNCZ+8qFNRNzcn4Ci+MLmAliJUVSw7H9VImtGxNw+8274W9zxtExlYDWSNY8vfRLSDwH/vLnRG/H0VEkPBgvdCNbikmQlqz7QWwtUG9W57FKUaM11g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4YZ73TXOnntyzgILffN/OjdP4R0lkA7Qq3PnELI4ntg=;
- b=h+eqMdSh9gYIRxti3NpCKwaPyaqWOddE3Ji4W6/jvnBheUi4eXZ02jcTNE7pyI9j4Fc5Nz6wVSB9gwlsBGe7kEzj6289d009qG4CzkEl0rwNUKW4/RkZdrLuES9bzHjj5Y/MUr54hOr+maa93HRtZyjmyE7ftvRK/zXXEEXcSe8=
+ bh=5YNuZ5UKHnn5fwFasLo6ceqd5/HifIJwzt+3+Xu6BZo=;
+ b=en7S7iPZ94WvggFvOyUp6lE3yxlzLmKwPVxedVJ2acIZErXLKewI++k0/TWtPCT6JzPfVfNW6cRiojsZwty5t9tXhgCE5fz84sa0ZPdyYTtaLA7HaWv3Cb6NanzC0Us2ECy5EJmabFif4qm6EWm4e9ZLBSDSfgqJjnwFyjjopFQ=
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
  by SN7PR12MB7836.namprd12.prod.outlook.com (2603:10b6:806:34e::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Tue, 2 Apr
- 2024 13:08:19 +0000
+ 2024 13:08:24 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::6622:ec76:9367:3907]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::6622:ec76:9367:3907%2]) with mapi id 15.20.7409.042; Tue, 2 Apr 2024
- 13:08:19 +0000
-Message-ID: <5211c2b6-9eb6-4a1f-bc2e-8d03e1bd1fb3@amd.com>
-Date: Tue, 2 Apr 2024 15:08:09 +0200
+ 13:08:24 +0000
+Message-ID: <e3b65173-6dcc-4756-8c0c-36c48b6a7972@amd.com>
+Date: Tue, 2 Apr 2024 15:08:17 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/2] arm64: zynqmp: Generate desc when
- SPL_FS_LOAD_PAYLOAD_NAME is valid
+Subject: Re: [PATCH v2 2/2] arm64: zynqmp: Add MTD partition handling for
+ dfu_alt_info generation
 From: Michal Simek <michal.simek@amd.com>
 To: u-boot@lists.denx.de, git@xilinx.com, ilias.apalodimas@linaro.org
 Cc: Tom Rini <trini@konsulko.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 References: <4cec866f5fffa742258c65796371d7bfc6068915.1711109356.git.michal.simek@amd.com>
+ <db58d9f3fc142004d833bb115bfba0e26d660b66.1711109356.git.michal.simek@amd.com>
 Content-Language: en-US
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -105,7 +106,7 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <4cec866f5fffa742258c65796371d7bfc6068915.1711109356.git.michal.simek@amd.com>
+In-Reply-To: <db58d9f3fc142004d833bb115bfba0e26d660b66.1711109356.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-ClientProxiedBy: VI1PR06CA0104.eurprd06.prod.outlook.com
@@ -117,56 +118,56 @@ X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SN7PR12MB7836:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: TcEfZFF8rLlGbUivw3QGceuALIhNLlpvJodwq3uYYXA6Z5AKv+eDnIpvBEMleZZoAZs2kzq1PAmN2Ax0hgmJ4y9pOscq94oeGbxZTCbjwbldCVhfSk3VX1XcRYGs2aVkmuwD+uXvMbt8YeJjzhKGdFStYvnFlJr5UAyXevzjMn184WPb/lCyA9/+lG6VMZM0N5BhlAMdyKW6mxvYllwM7C9Ha3hBuT1jTG2Li0PrMk+Zx40ueVUIDWr3styoUVbxXOaeqHrzTblGOCiwnUepylkG1X3RQrLIr/uyn8cObB4Y9jTAPYUXCUn7gWJVWLu2ooKP7LWWDfg7z/9/lPIJvb360WfuqS7JxW6rCdOkxisZfcM2CEO2KmrdjkQQO+Hc6c5XUAn9NjK7onw5aPLiDm4c3483Db8qW9RnTd22l0JcM34N0yATy2CyXy/4AYjMzwxh1R1KDPU82CNSLjduRzvhFiBEbOuErQNBULMEmFVWDjaU9du/YaS7kNlL5iRqrC+k1H1QPcJqJMieFMudCdKWiW1feIL9BVyIfUyIJ+O+WaauL7P2ryzOvQgbKwsecDZVANdp/9QfDIauOAHqO/77mbU4whFN1vSkhgN1tjU=
+X-Microsoft-Antispam-Message-Info: ZYBBjLgp3NzrixCgoO3YMZS1tm7lBXbgbxFGLSn5OBfNdheaBxQG/d79WVvXuGtiB3eJjuYnVhhVFlXavn7UoDgq3XnTPCk6nSH8uAf8hxZHpACqifVS48gZYnF+OLxE6dGv7wCIPfSRr/BRa9jpiPl3MzitB9pX5fJDwLDzOnfxlcx6e099jNujbwtokXkD/P/6VmfeUtk09Q6AOobK1VG3IH8Eo0VHE4zdbo3eN2sAoSFcTvjV/vYST2kiQDrv9LZn/GXQBxeFuig7ae92ACzoUwpU0yPzVclP14v+xtYKMSfwlpVOHeO912kQvb5/nImaxX1XqHoixTywZITNx9oCxHHpTe2FgCzkN3I0tgEhlaXiqGcMcKVOmXc50fBb+wEwCvgCgQ9ZnQHD/L+kU9NbeeymkSx7zMXx38k5oiJQwA3u6EmNjHCNLTiL9ufLvtS0hq2yIg6aJpryzC6QoaOzjufp4rIkpEYL0wy6PWUuZtkg23rNvYxeqzIvGom//eTb8hUtOsAodw7Z8+iJKgtDLrTOKJEwSAS4oIu+6gGmJFKcYZ5bG+5eFNvNNnbUi8gIzjnGyRE7u4U2XuVej1Q7CR6iLy7GvOKcS80IFLe7UBcnPfGtx21SX+bPliRU1pHwJH87RIYVtCpVIZjlK8VYQNvCy7G+5i9iSmmnzZo=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230031)(366007)(1800799015)(376005); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?NmNKSkIvd2VvZUhadm0zM3Y5eGllL0FCbVArNE9NR21od1FuaXZ1NFM4dTdN?=
- =?utf-8?B?Nk9zdXNjN3N6aTNPT2hXOFNVbWQ2dzgvSEdlTUp2Zlljd2xhSThxNTNtNUth?=
- =?utf-8?B?SnJBTjlYcVhsekh4QVQvQkZYRUd0S3pFRUo1WGlsRksxRkliSGRCSTl2dHE2?=
- =?utf-8?B?TjhjUkNSR1dQTnJYcEJxeE9FRmZIcFkvTnlCRUVyd1dMTHQzRWdvcVR5TDRi?=
- =?utf-8?B?R1Z2V1F3ZFBWSnNWS25aSlE1dmNrM3F3cDl5eFd0ajlObTBNZmZHS1FUaHpr?=
- =?utf-8?B?NDNEeDFmZWk2YUFMMUtzZmZvQm5nejhMRC9HUG5zRjVTR0g5K0s1dkFNMjln?=
- =?utf-8?B?bEFFalkvMDd6RHhHSDN6NTVwUTFWR3QzRFAybEdVQ1lDdEFDZThleGt0RlJZ?=
- =?utf-8?B?WitHN1JMUmkxOVBVem54MjFwSW9Edm1sNmJCQVJVWENLSTNVZFVDc01jRDdz?=
- =?utf-8?B?aDVmc09KdnZZcVpoRWM2MGlLL0RyTGVPRzZHQkNEcnJ4VWRINEVpNzY3U2hN?=
- =?utf-8?B?U3BOV2R1aGJxN0FiZGhXSEVSL1NqUExxM1ZXbzFxd3Z4cXI2cGJOeGNkdGFu?=
- =?utf-8?B?c0ZVaExsNTVkR3R6LzNCSjRNMERkREZqY096QXcyUjEvcUQ3ZEh3bjZWU2xZ?=
- =?utf-8?B?RjhnYnloZllmMFh3SXBSemlOaE50aDZQajhFR1J2SzdDSUVuTGRCMUNQZmtQ?=
- =?utf-8?B?MHErYXRmYkxhM2pPT0REeWxhT0dKZkw5T1RsM3dJbFdjVCt3YWFsRVg0K3dj?=
- =?utf-8?B?QllUVmV3UlhNSGc4Qjhua29xeXVvelB3TWJzWUhmQVptSVJITjJqSXY2V0FC?=
- =?utf-8?B?RS81bDFCbFkwOXJ3bk5qUzJYTks1eWJ5andrNEtSZDZIdlp6UktlcVNIb01v?=
- =?utf-8?B?U3JaeVZycjRZT3JyeWFlbWlFNVZGbWRWcGkzVC9pTjdzWGtrZjk3L3NsMlY1?=
- =?utf-8?B?MWFXTHdnUVRaZGxTenZuRlJEOTlvTE1uUml1N2lvVWlNSVBqR09wQ1V4VTM3?=
- =?utf-8?B?ckJwN3NES3BTbE16anllRHZUYVhJTGhTMFlQbjlZUzlUQU5KKzZWNGVoUVZp?=
- =?utf-8?B?WHVOd0NlWFFyREdaUUtqbU1IL1ZwVlhCdkF6S29TbUR1b3doUy80aGkrT25i?=
- =?utf-8?B?LzZ1VkhpcVFoYmdSbU4wcG1nTXJtQldPc0loT3NwZ0phZmhrcEwrWjE2Nmpz?=
- =?utf-8?B?Q0xDaWt3aWxJYlJ4YmljTjZ6REJkWHZaK1RuQ0M5eDNSczF1dFJnRDAwTlNY?=
- =?utf-8?B?K1JkNHJoVHJiVytLTnhKYXpYWE9JT294bnF5UExZY3lBWFBTN3I0Z25qRXQ2?=
- =?utf-8?B?TFQ5YnJVamQyRXM0VFgzOFI2aHRYQ3ZuODB4TDJ4STlvenVVVVBTa3dVQnFn?=
- =?utf-8?B?WWFHblA5S0ZHa2VOOCtoWlZxRHRBdDIrLzNCQ2lPZHlmYXJYSnYrSWdHRXVG?=
- =?utf-8?B?UEMrRFJ5VG1GY1RHUjNPZGc4SUZzWlptaVJsa2x3MER2Vk1FL3RMM3dtbTVI?=
- =?utf-8?B?aEwzRWFqbTFJKzF4MTVDc3pQSVFranlHVTFlalJpNUhvUnBaVk5BVUV0MGpG?=
- =?utf-8?B?YTdUbDU5VDl6d3I4bkFnNnMxRUdvNXc2SmVSRlhkaUdLNTlmeFduaktrWUxB?=
- =?utf-8?B?ejJKeC9BQVg5OGJBdGt1VGFCUzNhN2NmRmJhUUZuRG5xOHZHL1RBbTEyVnlo?=
- =?utf-8?B?R1Nza0xZakdyTVh1SVJydElyYjVPQUk3U2VnYjVzK1R2VFRNVS9kOXpVaWVQ?=
- =?utf-8?B?WWhLNUt0bVczWHBmM2U3ODZFdU9xOVdLQnBSRWp5V2hCWWh5SUM2SWZnb1hk?=
- =?utf-8?B?ZDF0M3hGRnpKRGJLTll1YmF0eXAvSGhhNkRPN2hJVmdPMS9YYXJ1RlNUOWI5?=
- =?utf-8?B?Q1BadzFVNTBlWUZVTm8zTU4yRi9xWHE2dkdWMzRUV3hUaGpWOUVQUkVEYjFv?=
- =?utf-8?B?WDRRd1hlcGpHQ090T1ludEpubjgxdVhIb09iM2x1b1NlYkh1czFkbWtvaTNM?=
- =?utf-8?B?dExVVmZjb2UzUHlJRk9VZVhCeWFnUWF2NHRTSGtuRldsTC9KcHF4L3M1d1Fp?=
- =?utf-8?B?L0VSL253OE41cSttKytvdFBudEM3cWhybXZlMGpnWHNTK25RK3VCSGxMeVF4?=
- =?utf-8?Q?Z3GgsEoGwBgQGixq2GOh+4lzn?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MWVZeFRmU0VYSWxxYUVxb0k1K2dFSS9PRU5GN0tTY1dWYWp2WUZSb2M5TWpC?=
+ =?utf-8?B?TnJJSVFCV2ZsNHF6R1VUcUEwT0VpNTB3bFpGZGkxVXBmeFRTeUUwUEFIamRG?=
+ =?utf-8?B?TFc0bm5yVnZGL2pmZ1NadjVTOHh6YUFHV1d6WFFIUE1FL09UeVhzZ3cxdkZ4?=
+ =?utf-8?B?a1FqQStPdWFnbXR6RGY5ZEYvbHR0akpaQnV2SlcwRkZPVUx3VkRsZDNVdXJi?=
+ =?utf-8?B?TC80d2swTlhWQXovVHAxNmtrbENBV0dpdHFkTDM2VFZKZmY3cjEwSldDdGZD?=
+ =?utf-8?B?dDRJMFVmNElkdElvNWpicnFhWFJQYVVRTml4bnRLelUvdDRlMW85aVpVTUV0?=
+ =?utf-8?B?R2szZVRjdCtkRDZTdTRGVGZlbzBUak9keWxvb2dVU29VemhhMFVHNE1yZlho?=
+ =?utf-8?B?eVBuZS9mM3JCdHQxS0tNWjFGczd4SWF4SW41QUhybjdycUJHRTgzdWtlUmF6?=
+ =?utf-8?B?djdIRW9RS09zTkFXNHcvZmNhR1VCU2wxTDdTdFdjSmVVMGJXaEhCSmxJV3p3?=
+ =?utf-8?B?SWUxc2dOa1FQWHMzekg2L3RvbW9Rc0dtUFFtY1N3Z3dLVGZpU3p1Z2pjMEtS?=
+ =?utf-8?B?cTB0YXZoaE5lRjRzTVV6MlNQMDNSYXBwbnRBNVlqczc4NHl3UWFGNVN4M0Y3?=
+ =?utf-8?B?czBsNklqd0hITDNxS3NHeVpYT0lvRXlOaGRPL1cyRUgwUzNyS0k2OFR6L3dj?=
+ =?utf-8?B?NG9PWWtzbENxUEg0YStFUmVXZWM1UGxmV3RaV3RKRVNTeEcrQzM1MXAyMGZk?=
+ =?utf-8?B?MWpXVGVnaWhIY2RQMFJma1VJdUZYUHVrUXNCQ2JJTnNhcGJQYjZSd3lzZUFM?=
+ =?utf-8?B?S2lFaTVxcDA1cUpHNDVVUkdGRU5rK1Q0eFUvRktXeDc3cnBMWmxTMUNiZUxG?=
+ =?utf-8?B?Y0IwWitNOVZTYTQrSUdNRHFtSlMvOWRjM3NUSkMydDlNck82SDBKMUhPaFpn?=
+ =?utf-8?B?WjRqUjYvcHUzV3JBeVR3eTQ0c0pSenpnU2creUlIM2FSREU2SHozQVJ5OWln?=
+ =?utf-8?B?R1pMVlVzV1dFZ09xMGlFZ2R3djRGWitNMW0yRU9IaGNFOUZnNDQydnlSRDIr?=
+ =?utf-8?B?Uy9HS0gzS00yb25zLzlhLzhtS29OSjdxRnhPTktSZEs0UEVnMzV0RTczd3Zx?=
+ =?utf-8?B?QnpzM0VrM2w2MmJQd1hpdURPRi9GQklsdXg2b0srWk1iRjBFejFFTWNhN2U1?=
+ =?utf-8?B?dFYreFM4QlZzcUp2RkZMeFVDbWs5TU56TlBQVzk4ZzVtcGhzWW9IODFLMDlq?=
+ =?utf-8?B?QWxkY1JLNURUR0UreUdWSFRRb2Z5TmQ5TG80bmU5aEtaM2pvVFh0Z0xmdTZv?=
+ =?utf-8?B?SE1TZHRBekpHR0piT25wUlBrTHJ1dGd2K2lrZGhVVTRhdE9SOVBzTzBGRTJh?=
+ =?utf-8?B?UXBUVmx0cWoyNFFoZzNaVFVwYmxpZTlsSjFXZE1CRWdmSEFNK0lWZnZXN1hp?=
+ =?utf-8?B?VzMwTW5qY1M4d1hWbUxrZDdEM001NDZ0cmY0RmI1TGJ2RU1HOVhtMlR4VVJi?=
+ =?utf-8?B?dG5SdkJnVFhHYzlGR25LZWQwcDB5ZW1xVG05Rm9Mb0VzZVpiM2JpWFl0WEVx?=
+ =?utf-8?B?ak1MZ2J1S2tHbWJGMkRiOHhBclpVbHpiNmRWaXExUFhSSCtWZ3JrSmkxcnR3?=
+ =?utf-8?B?dUwzWGQrUXh1R3hWZmJudzBhYWZMRHJZbURIbDAxSC9TamN5blJ6VmhDaDlQ?=
+ =?utf-8?B?N3R6TytwdGFYK1hlZ3hTZmlCVUp5SlJvUlBBVFJMR3h1Y0dpd01vSndIZVNF?=
+ =?utf-8?B?dVNQWVJjZldIdWM4MWdPN0RILzZUVUYwVEJ3L1BvR1lVVGhHRHovVUlPY05h?=
+ =?utf-8?B?a0NWYnBWdnBQTjNCaTl2WmRQV1BTNVRjSDZ6RlFhcGtRd2xKS21tNU1nR013?=
+ =?utf-8?B?YU0wSUZ3Q2JnSHIvSm5MUG5BR0tpUDNZWjcyK1R0emZjTE1lclNXeEloeXg3?=
+ =?utf-8?B?Y2NEM1dCL2JoZjIzWjM5NHRlT0JiTjUxTG5UczkzbE1YSmVTVWw1MDFrK2lh?=
+ =?utf-8?B?WGcxejJQVzU2OWJYZ3lQMmRCZkxFNGIycFFtam1vamx5aFp4QTRSeEpxTXk1?=
+ =?utf-8?B?L25CQVRpMTFKTnYyOFlVL0QxRE0zVldPdUVWa2h5QkpsVS80eU9QM1k0MG5Z?=
+ =?utf-8?Q?5Rl8K0KamCRWvJIS9CyTgODje?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a7a17e0f-72fd-410d-adce-08dc5315f7b1
+X-MS-Exchange-CrossTenant-Network-Message-Id: 73a76b20-c1e9-4655-e782-08dc5315fa5b
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 13:08:19.7619 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 13:08:24.2189 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: XezGVAfpdcR8jcLwwMS1fSrXl6MhOmjIHOMC9/DKxedmxTe7Jcu4rnF59evBze+b
+X-MS-Exchange-CrossTenant-UserPrincipalName: Al/1ROz0BIO8yV33+woZ9Q9arbIa2XUl/6VT5z/BbWpGRMKvt7weqhtLgxeqiX4w
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7836
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -187,55 +188,95 @@ X-Virus-Status: Clean
 
 
 On 3/22/24 13:09, Michal Simek wrote:
-> Generate description only when CONFIG_SPL_FS_LOAD_PAYLOAD_NAME is not
-> empty. When name is empty there is no reason to generate description for
-> it because it is not aligned with dfu rules.
+> Generate dfu_alt_info generation based on information from MTD partitions.
+> mtd_found_part() is trying to identify MTD partition which code is running
+> from. If partitions are not defined and location is not found it is going
+> to previous behavior.
 > 
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
 > Changes in v2:
-> - New patch is series coming from discussion at
-> https://lore.kernel.org/all/561f9d0ee96ebb6cd674042f269f280ab68fbbac.1708705118.git.michal.simek@amd.com/
+> - Update logic based on 1/2 patch
 > 
->   board/xilinx/zynqmp/zynqmp.c | 17 +++++++++++------
->   1 file changed, 11 insertions(+), 6 deletions(-)
+>   board/xilinx/zynqmp/zynqmp.c | 55 ++++++++++++++++++++++++++++++------
+>   1 file changed, 46 insertions(+), 9 deletions(-)
 > 
 > diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-> index ba49eb7be229..3844a9c9a8ff 100644
+> index 3844a9c9a8ff..2522024b4082 100644
 > --- a/board/xilinx/zynqmp/zynqmp.c
 > +++ b/board/xilinx/zynqmp/zynqmp.c
-> @@ -661,8 +661,11 @@ void set_dfu_alt_info(char *interface, char *devstr)
->   		len += snprintf(buf + len, DFU_ALT_BUF_LEN, ".bin fat %d 1",
->   			       bootseq);
->   #if defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME)
-> -		len += snprintf(buf + len, DFU_ALT_BUF_LEN, ";%s fat %d 1",
-> -			       CONFIG_SPL_FS_LOAD_PAYLOAD_NAME, bootseq);
-> +		if (strlen(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME))
-> +			len += snprintf(buf + len, DFU_ALT_BUF_LEN,
-> +					";%s fat %d 1",
-> +					CONFIG_SPL_FS_LOAD_PAYLOAD_NAME,
-> +					bootseq);
->   #endif
+> @@ -626,6 +626,31 @@ enum env_location env_get_location(enum env_operation op, int prio)
+>   
+>   #define DFU_ALT_BUF_LEN		SZ_1K
+>   
+> +static void mtd_found_part(u32 *base, u32 *size)
+> +{
+> +	struct mtd_info *part, *mtd;
+> +
+> +	mtd_probe_devices();
+> +
+> +	mtd = get_mtd_device_nm("nor0");
+> +	if (!IS_ERR_OR_NULL(mtd)) {
+> +		list_for_each_entry(part, &mtd->partitions, node) {
+> +			debug("0x%012llx-0x%012llx : \"%s\"\n",
+> +			      part->offset, part->offset + part->size,
+> +			      part->name);
+> +
+> +			if (*base >= part->offset &&
+> +			    *base < part->offset + part->size) {
+> +				debug("Found my partition: %d/%s\n",
+> +				      part->index, part->name);
+> +				*base = part->offset;
+> +				*size = part->size;
+> +				break;
+> +			}
+> +		}
+> +	}
+> +}
+> +
+>   void set_dfu_alt_info(char *interface, char *devstr)
+>   {
+>   	int multiboot, bootseq = 0, len = 0;
+> @@ -670,17 +695,29 @@ void set_dfu_alt_info(char *interface, char *devstr)
 >   		break;
 >   	case QSPI_MODE_24BIT:
-> @@ -671,10 +674,12 @@ void set_dfu_alt_info(char *interface, char *devstr)
->   			       "sf 0:0=boot.bin raw %x 0x1500000",
->   			       multiboot * SZ_32K);
->   #if defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME) && defined(CONFIG_SYS_SPI_U_BOOT_OFFS)
+>   	case QSPI_MODE_32BIT:
 > -		len += snprintf(buf + len, DFU_ALT_BUF_LEN,
-> -			       ";%s raw 0x%x 0x500000",
-> -			       CONFIG_SPL_FS_LOAD_PAYLOAD_NAME,
-> -			       multiboot * SZ_32K + CONFIG_SYS_SPI_U_BOOT_OFFS);
-> +		if (strlen(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME))
-> +			len += snprintf(buf + len, DFU_ALT_BUF_LEN,
-> +					";%s raw 0x%x 0x500000",
-> +					CONFIG_SPL_FS_LOAD_PAYLOAD_NAME,
-> +					multiboot * SZ_32K +
-> +					CONFIG_SYS_SPI_U_BOOT_OFFS);
+> -			       "sf 0:0=boot.bin raw %x 0x1500000",
+> -			       multiboot * SZ_32K);
+> -#if defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME) && defined(CONFIG_SYS_SPI_U_BOOT_OFFS)
+> -		if (strlen(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME))
+> +		{
+> +			u32 base = multiboot * SZ_32K;
+> +			u32 size = 0x1500000;
+> +			u32 limit = size;
+> +
+> +			mtd_found_part(&base, &limit);
+> +
+> +#if defined(CONFIG_SYS_SPI_U_BOOT_OFFS)
+> +			size = limit;
+> +			limit = CONFIG_SYS_SPI_U_BOOT_OFFS;
+> +#endif
+> +
+>   			len += snprintf(buf + len, DFU_ALT_BUF_LEN,
+> -					";%s raw 0x%x 0x500000",
+> -					CONFIG_SPL_FS_LOAD_PAYLOAD_NAME,
+> -					multiboot * SZ_32K +
+> -					CONFIG_SYS_SPI_U_BOOT_OFFS);
+> +					"sf 0:0=boot.bin raw 0x%x 0x%x",
+> +					base, limit);
+> +#if defined(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME) && defined(CONFIG_SYS_SPI_U_BOOT_OFFS)
+> +			if (strlen(CONFIG_SPL_FS_LOAD_PAYLOAD_NAME))
+> +				len += snprintf(buf + len, DFU_ALT_BUF_LEN,
+> +						";%s raw 0x%x 0x%x",
+> +						CONFIG_SPL_FS_LOAD_PAYLOAD_NAME,
+> +						base + limit, size - limit);
 >   #endif
+> +		}
 >   		break;
 >   	default:
+>   		return;
 
 Applied.
 M
