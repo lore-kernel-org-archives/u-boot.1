@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13DF8CD1284
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 15:02:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6DBEC6FD1F
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 15:13:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5059F88103;
-	Tue,  2 Apr 2024 17:02:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4215C88124;
+	Tue,  2 Apr 2024 17:13:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="Yeyhdr3C";
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="ZTxpIwtB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FB64880FE; Tue,  2 Apr 2024 17:02:49 +0200 (CEST)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260d::701])
+ id C17718812B; Tue,  2 Apr 2024 17:13:17 +0200 (CEST)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::701])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F69A880FE
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 17:02:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDA4088123
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 17:13:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=quentin.schulz@theobroma-systems.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=j/BnQ7IHhedJl8cSDbWn78DUo2HqDDGmPR2jhiWLhHWuY2LT5TPe5NYMeW5L4YUEpnkhpA3VF+J2lUqSIVy+o09VcMd8I2dXoLZ1/qEV3z7GyoqqiIMUpkCtT1E0tJbFgHlkoUJsdFxalgvPrRRZAJE2RvWZ8TqX4tT1rDky/+9D8UzIhhXsRvMd7XAV2LDBtLHOJmzX1RCtr79PO6ghYmaXyiHfU7WP8K59awsqB9V8ykJLq3y1ENrLW5Tb8yn8mOa33Mw8FPXd/joclkiVmLkQvI6EF9OMdAqyeUil3Phuzrh7H4ZGsCEvZ14523jbCuKrBsOpw7g4GXB9CGrB+g==
+ b=lc3DknTNJlNraYbIhMG8RmeQaPOuocJUkoqG/mxNXyujQ77y1A5pA1E4E4RYGfDNW3SP23/t1uHjK3US/1pA8gOqfI6Iil5mw3AF2dn3tVs5MTMKOwUdLD9N1m8P7BBouAeZYbglkHN9IrLN1AG8JOePNSacCn8h85UbJx759WSfzX7Efr+9xYFanaGcJworImBmJvUyJYjvcq1O8bb1TRE6DGmGvWUOjKW+nU3ieIbHGhXHjyvzVBDvYghL/0at2NSJNrudg1fVGQgv3gv6e4CcCXDfOPXyebCqM/WjEoUeevYlJp24yVrlB9TU35si/OSt4B7qkDoV0Cs/G7FcBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iYDTXez6pnas6CdfmaHuj9K6NMbhUFpgwTqrIwH/KNI=;
- b=HU0l4qLa2wXmH1EzYlXhF+xTt1ubAtdSVgs3zpib+nGDcLURTKtPVVus7VgrA5zqDCjxR7ukffSuFU3AwyhviE+AELPANjA73/FloMTXrjsYjq8yghYsZm3SCdCj9aw+424TtaSIRIC+Y+DDE2e7zxwfnF45qv4P0BrW/Bj/5AOQ5EKGNkQLKAPeBQoC9pmDBrhwfCDSwtP2IlyZZ7Xpw4X8SdRs5SNIqoMetFg58UQE4UWAKcoDouEm4E57Wo0CRYpSfKJ7ghL0KaWzrrOlVzqs5AL2+NXomArx/iZIw91SSgJ9seor3NRayoM8t5j2bTW+3pSpevRPvI2xElo4Pg==
+ bh=4+bhg1ehwBMNeDgd/GbzRAQZfQYTXaGbVOVWBXcqZ5k=;
+ b=hVJbEcyOT0R6fFsmaUhsdh/FOJpTewVHWvTkV2yMNlbMlPsrUda1Uc1dQXm6x0+6D8VjYRXTtVIlQZaxf1v4RMnCgVfF3N9ex+Jc+SIEaOMCYrhOpt+vzltDcEkdJTnZ8BoLNfm0x87E7igRoJZZfszxMS/znfg+d3oyTE8u8W2AnMaLTJVrIv8mvV8s49X9Sx1fYeiDo9k/8JLKzJKRv87LGnLpoBjeDup0/qVM2JuVEHhzQzcGy+HaRSJ/wkm0aNvf+F9hv9Bs6k9Zhnx8ytVfBeedsZKvsUQf93HFgXavF5T5MHqkzDmo5Nc4Bep86Dql5ems8vYRu5dx14VHqg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
  header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
@@ -41,94 +41,94 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iYDTXez6pnas6CdfmaHuj9K6NMbhUFpgwTqrIwH/KNI=;
- b=Yeyhdr3CXle8o2PJ3iisRw1WBUD7IBN80c/9EEXSBkYznxOTU3cx4luOw85aynyGZ0JTsmbR5gEy88n91wZ90UyJlYyp6HezSXnitnHVNaeBIf/5ejInAWYGtBdgBBdO+wPVDjG5zVel6tIPMU7pLcif9JlMqE/cnSGWTkhqLuKchM6VcXY9L/+o5/GD0tqJlzsiOtTS3CZz4vNvBTjiOyeFH+JWpFFovOOJFMrZgomkCItA2q/G4k2vt3DFnB0bLq9HzX7P8n5F1rE2uTutbJr46bJQuYw+fU8VLldypy7Dk1PnjVKTeuR8tUbr2zpXzinY5TpJqdkmjDZb/ZS1Mg==
+ bh=4+bhg1ehwBMNeDgd/GbzRAQZfQYTXaGbVOVWBXcqZ5k=;
+ b=ZTxpIwtBXgqDHkacsHJdaLpWSt1snB9TglTkKHQuWogM3gLWNQDqy7LBK6/mUnI2Ii+gN/o8yMw7wMohf7lcqIwq/N0ipP7xTxp7j4BG1C8Om6UDSXMyJqc27+At6Mr9hp82QFa74Gt7YL9rgRN+SRjxHetNFk5BRrrTxAGEl/vr4LLLPrJDyJZO5wJEwQs8jRWYHbx1n5V+16O4SOrJ8HtOF1Lu4wyifhvJ7t/Ff4FwIrhDQD67JvF3C9mbzUFqW1gH9/lDuAMBE5YmjrAEKJG/pHr+CugRofjHrY8+SNHSuFWxRKzPxCAhEtAmNtkewQH7w0SEkUHaogI6aJMfiQ==
 Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
- by PAXPR04MB8512.eurprd04.prod.outlook.com (2603:10a6:102:213::13)
+ by GVXPR04MB10247.eurprd04.prod.outlook.com (2603:10a6:150:1c2::19)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Tue, 2 Apr
- 2024 15:02:43 +0000
+ 2024 15:13:11 +0000
 Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
  ([fe80::3e70:7029:faf2:7779]) by DU2PR04MB8536.eurprd04.prod.outlook.com
  ([fe80::3e70:7029:faf2:7779%3]) with mapi id 15.20.7409.042; Tue, 2 Apr 2024
- 15:02:43 +0000
-Message-ID: <e146aa22-425a-4aaa-9a64-772ec00d5d7f@theobroma-systems.com>
-Date: Tue, 2 Apr 2024 17:02:41 +0200
+ 15:13:11 +0000
+Message-ID: <741196d4-044b-4cde-aa92-cc81bf375745@theobroma-systems.com>
+Date: Tue, 2 Apr 2024 17:13:08 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 15/31] rockchip: rk3399: Sync soc device tree from linux
- v6.8
+Subject: Re: [PATCH 17/31] rockchip: rk3399-puma: Sync DT from linux v6.8
 To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
  Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, Peter Robinson <pbrobinson@gmail.com>
+ Tom Rini <trini@konsulko.com>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>
 Cc: u-boot@lists.denx.de
 References: <20240331202921.262323-1-jonas@kwiboo.se>
- <20240331202921.262323-16-jonas@kwiboo.se>
+ <20240331202921.262323-18-jonas@kwiboo.se>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <20240331202921.262323-16-jonas@kwiboo.se>
+In-Reply-To: <20240331202921.262323-18-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA0P291CA0003.POLP291.PROD.OUTLOOK.COM (2603:10a6:1d0:1::6)
- To DU2PR04MB8536.eurprd04.prod.outlook.com
+X-ClientProxiedBy: WA0P291CA0007.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1::11) To DU2PR04MB8536.eurprd04.prod.outlook.com
  (2603:10a6:10:2d7::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|PAXPR04MB8512:EE_
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|GVXPR04MB10247:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: S0k/Tkdw0TALlDxGE8BkjC1yzQNjsPo5XiTCTwmAjr46AQRZTu/BrjQya8oCOmYk9ZOLunWPM2LmxL8STkcpngF2KAyNw7BfGZpZI+fbDzaVKBF2Ehgvt2LZZhvI/6m+gXrvMbbDvFH+VKzG6Lyr5IjW+SgHSBZmWv8JdOW5G13GXPU/xitbfRrr0L2bdIRGqhgv7xCA7aZCpUeNo85Cuq+OYo0ssauxZpcSn7aF7VhgaESyWm8gJKBo/ope3KhsBM8EFMkjJadr3RcLRFd8lj4Oo/HeNgiMlVy5tS0RoSx7yZtz/RMyBJq2HTB2xLHxJhO+leyViHe9gzi+xlBsdP/sk/ISXnClgmOeWde5LKBQ1EauvxjL2PZ4Wn0+MjOtVq6rOFtzy3vx6ZCG6v/QW6tqNq7p5z4LIudxeASszwVlmzN2/+6rd0pDEhBlUhkALLuehphr/JE3SPzd/w7ZvJ1Y8whih3AojbVT9dWI2UR8a4bSn5fPXQUuJsG5ZJfcvGGzFFRr0AFNOWYD/tXKs4HVCoyFAmxCHjmSh7lHKvhIIt81f0rrn3okSiywT2W9AUiVFTJJXyDu7EWP4bzyIYlxkVTLo354lgHMtj/gvwBj4llJ00elTSGuODCkw1TUnPIRoDAYgbocTKQyNDS5DpPTJsdh1Q5dC1VS1lVYM5A=
+X-Microsoft-Antispam-Message-Info: Cv1JgRAM7tvD/16lzGSDCmsJmKMU8sZgrN0vImBYeYg7vYKy/ox4Q/5rpFdsh2AEmO60aVMlcr+M1s55ejnpis9gnjDFbF3VnafrLuX9D+AJ6njGt9fJ4ViWwY3A15VfPpfDffBAftxa8PVhBaOdHG3xwKGAh4njkOebmS1e8wL+Pw+a52UjSNov8mcePcVCCIpfDEZFMQW45wZvLBNd3L9hp/pbhwA2WZCtE+MSPYVWV+rl0UXDuVmQt+bqeyT5u+EgBgYcQ6LtlislcPpH5oKcXl3eWHn6O21swnooygYV+p3welqhNvsAa305IS8XNFtEjALecnx0I253du/FCSfpnKJ4sghfGEAU4LfZndE+896wjJ+Kcahp4hgl/qEQhZxUuLjSD2kgwoZCXFnCmAXgU+V15qcREYPeMKH5YYk+Fj3OYlbjtl/60Kt1mHYIkKvm/xi/kciHd6Ps4K8f6IiRoUgu03NzWdikaSb9+Qap6KvynNKu/ltvcgszu9/thKbgFN4zXenzDS92nbOmCKLwT1PNdSwu+roex7wibcXEVC9OsejMVEDl7X4vX3aHBnTuDLQCGvEOmMYsLiU4Sa0wN+Upe+dckPWjwlLZI5U/0yEC8Rd+TyYwGyApu4QDghD+ZEB7OFumbyVQfy8yWqOr1GQMUcWCjOoMncDWyRc=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(366007)(1800799015); DIR:OUT; SFP:1102; 
+ SFS:(13230031)(1800799015)(376005)(366007); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WDRzendrUEVJS1hieVY5ZmhwaWx2b2dsQUlxNVNXR0xqMGM3NDNUR09vdnpK?=
- =?utf-8?B?UzdqNHIxTU9PdS80dTRkaUREL3FkWnZrTzZQbWdMZGFtVmZIbVNQVUh0VXRs?=
- =?utf-8?B?YlRyWmY5eStjNFdMVDl0OElUbk56WHVPeUtONTVobFgrQXpJVGFGbWNwM3ph?=
- =?utf-8?B?OGI2VkxBOVdpNDY3cnVGdC9ITTRPQ2VkWlRnWTRKRit1YU1UV3N4TzFiUVRn?=
- =?utf-8?B?MFYzUHYxbFhsTSs5WUpLY0dMbC9UQnd6YXB6OFFYeE5uUWVtUzNQR3hYWW1G?=
- =?utf-8?B?emtMTE1ScmJHNUs0SmFuOTVXWnZxUjc0aXNvYU1lcDQ0VGtJam5Qd2pCWmJt?=
- =?utf-8?B?dGRkalFkWGIxdEVrNFVCdFIxeE41OERRMmxGaE1FQ1dsTWdGKy9HUUh2Mmpr?=
- =?utf-8?B?MTVsYWZCVVZTYXNCQnF5RmVBMHJDL05ySjgyN21VV0s1Wm1aZHQvNzg0cUVz?=
- =?utf-8?B?akZkYjBtdzVQQ1lyR0JkLzBCQjJIMEZ4N0tka0E5Z1lQNkNYUWhSSmloNk5X?=
- =?utf-8?B?YmZWOVZCNWM3dEY2ZDczb0NhMzlPU0c2Qy85M3ZxTU9GK3ZGSm8rVDVmZ1RZ?=
- =?utf-8?B?WWhoZDVYc3A1OGd1Nm9HL3hIVGY5YmNzZ0xvVzlySkRYR1RjdnpYUk56eGRn?=
- =?utf-8?B?WGFNeDV0U25WMjlzK2t4MnRIUEh3U3J4U3hPR2RraHVLaUk2MGJtRCtpRkp3?=
- =?utf-8?B?bkdOWTdxVHlFUkFNY2hjeFIvZ0VIVVA4Sm9LRmZzR2hPck5nTW5xa0pHOERr?=
- =?utf-8?B?a1dYVjB3eTRWS3Eyakx2UmNpdnM0ZWZNZm50M1lLdUtpZVFYRXlrVmlkQmw1?=
- =?utf-8?B?QUFVSVQwSGdhYzh1dWVIWXZCdXNXS3BsNmZ2QXBsRmNKSzkxeUMrNFpUczZW?=
- =?utf-8?B?NGdVN2R5Sk1jVFFOT0FuZmtZUm15d29ObnQ5enhlanl0Y1hLTHFVR2JXUmRN?=
- =?utf-8?B?NlhhU3VBbHhGZ3l3SU82Y1E0cFRrQys3RkRELzQyTlI4RmxXaUZlcWNHaE1O?=
- =?utf-8?B?Y3VBQnE0cXRPVnRXamZHQ1RkSTZPL0tpa0gwVjBGMDNmdGdteS83eVJSc0pj?=
- =?utf-8?B?aUYyYk9SYjdMSm9aOTBxdXhEdWZYUkpwWGlyWThoazlGL3B5VVNDQStLT0VF?=
- =?utf-8?B?dG8vdGZseFo4ZzM5WUV0OFRsVlFDWHNRNHNNK0t5MW1PS0hTSGVQN01nMldX?=
- =?utf-8?B?ZGFacFpYMWlqQnBlQTRVYTFMUzFlcjFYMXJLKzU2Z0lIU0EyR2g1NnhScW90?=
- =?utf-8?B?YVZmaGhPeVNwRHNRN05EbzU4ZzVGeFUzYkd6Vkt2bFc4Z2NDZVU1c0ZvVGJD?=
- =?utf-8?B?ek1janBBTXdnM1R6bjJqK0pLSHdXNXEvRDN1V3pNUDZCRSszdGo3aW1FaGlK?=
- =?utf-8?B?cU1PaS9ETys4QXpNWlhmUHhrZGZ3OG9tN1pzV3Rob01IcFRlNTkrT3NhNC9w?=
- =?utf-8?B?WnZrbm9sOW80QU1aeDFsV1VwdGFDQUVoL3h4bFlQNjB0QThla2RJNWRyeHdU?=
- =?utf-8?B?VStPRElxUTJEd2lkclQxaWMzTHFiUDFxTjhHQXNzdlNtbEJZekMvSFk3aEF6?=
- =?utf-8?B?M0l0Z0ZHa2Jnc3FJWVBTVEsrVis0bG5rTzN0Y0pwbkhoY1JFajhGcWM4VTVZ?=
- =?utf-8?B?ZlBRbmQyb3U5bFRVQXNCWndaSHhnZGlYYlRtL2thb043MHR4M3Nrb3A4UDEw?=
- =?utf-8?B?QldQOWlmbUp0U3FaQVhKdXdiUmU0M3NSdWlMQ1ZyajBQUEpSeHcrMWRqdVkz?=
- =?utf-8?B?NzZBR2x1cnZoQmpwRWlWWjVHaGhZcTczcUpLalB6bzhudGVWakdGNHUxZkdB?=
- =?utf-8?B?TThDUFlobGhJaDZpUXlTbm54T04yTWlDbzNMaUlTbXlVWkk4YWo0YjQzQ3N0?=
- =?utf-8?B?RGt2WkpvNHZrWlRyM2FiN3ZsSXdkc2dLZ291Y21PNnlVNHAxb1JTK0o0V29U?=
- =?utf-8?B?WXRUMkFWcHdoN2JIeEtJUkRzSUVyTVhSa1NJZVBnSWgzdGJYRWNMUEtNRWd6?=
- =?utf-8?B?bk1zREw2UWVkSGpIc0pTMVNlcXdaU2xIcXhtVTNqU0IyNENYUm1ld1BBb2Vt?=
- =?utf-8?B?aTFKTG5iSWFkbUwrRGdOVUorYUduMysza1VzeHc1UmR6bksvOEhuZEJtSVh2?=
- =?utf-8?B?S1FMMnUyODgyTjMxTzlGbTBOUGRaV3NqUkJUYmQ3N2h1RXdYZUxOMm5MTGsx?=
- =?utf-8?Q?58qKCSpG7at0VBUgl31u6uE=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V2lrQVV4S2pVLzNKZzJ1SWxJRzJGVjNiRERKdmRQZzVvdS9EV0pSeCtXTFdJ?=
+ =?utf-8?B?VTVSSDFTdWNhQWovRmM0VHVKanMvU2tRNk1waXFrSjE4OTVBTk1Rd3l6REox?=
+ =?utf-8?B?YWR1bklVb3BESHJwZXdMclhReFZxZjcwUU5oNkNwVDlSQ2xhYVJVeFJNUkRa?=
+ =?utf-8?B?YmRpOWtYcHc2RFloVG1Nb0JyLzFlVEpnakl3SnRJZ2lzQSs2NDl4aWJLRCty?=
+ =?utf-8?B?QlFzWXlmN3RQdjNHRjBhUGFGbjA4amJnZVNvZG5mc01UNVkwd3JmUUVSMkpx?=
+ =?utf-8?B?dEhFMjIxOTNYVDdBRkhyL3p1OThHb04wK2o3MzNXNCs2QzU4cEZZb3Ezb3B1?=
+ =?utf-8?B?eVdzYzVLTnlKaDZibzgxRVcxdEtnd2crODl0OUlVRWczcGV0dHcraHZsZEVs?=
+ =?utf-8?B?ZHl5Q2h1dmxwZ001RWtNaEZLeEdIRFo3MHdtcUJvaUd0b3NNa2MyUEhYaGxp?=
+ =?utf-8?B?aDNiRndGUmNaN3pDazI2QXJaYmNjTDhQaHI5eUtzeXFEOFlCTU0vTENKcE1l?=
+ =?utf-8?B?aGpNL0haNDBibnJuV1dYZzVJL1V2VVVaVmZCVHZYK3BJVWlsMCt2eDZkWXhH?=
+ =?utf-8?B?SXZETEt2TlJRakR4OHhna3JoNU1hZ0NURmM1ZVNEalhWbTAvMW9OTDloOUZZ?=
+ =?utf-8?B?a29SWmVValVCbHdHVmhFY3Rzck1Uc2ZHS2lsdUJITlhNVHpXNHg2a3pSdEph?=
+ =?utf-8?B?VG1GaGZ0Y01SblltWU9ob3NCYmNUNWRuY09iNUhackhnMFVCUzlBRjAzVmRI?=
+ =?utf-8?B?TVA4UDVQTk5UQUl1WFkrTUxRWDlackV0b1BYTmR4YUw0ZWhrTzZZTkNic1Ni?=
+ =?utf-8?B?VDZvelhPNTlLUjFnL2grNVVUbjVrbThPZ2dFOGxjYUpRU0xuODYya1VZQkJO?=
+ =?utf-8?B?bHlsSXljY0pic3RnazBpSTdRSUtrWGJrZkRjY2QvNTVkc2ZCK3J5RHhNK0JV?=
+ =?utf-8?B?NUFOYno1WlJKVzhPV1huTDhROXZmUmRpYVBCTVpQazliZVF1cm1jMGtKVVdw?=
+ =?utf-8?B?YjFXQy9HRVdPbER3bUdTKzB4bFdrOU9yVi9ER2hFaGFjZlpDdGdrc3V2TXcr?=
+ =?utf-8?B?QXluUzRDWXA0L1hkQkVzMzBZdTJpMFJkMFNVVXYvb0NtUlhWTXlFMnFxYjJE?=
+ =?utf-8?B?WnR6NStOOXBDbEpsTG4raWt6VThGa0pBaExXN3pyZUZ5SHdUZFBuR1hvNlMr?=
+ =?utf-8?B?dXF3WmthTEJUZXFqRTlQcmJNWDJWOThDWTVCVUdqOXFwWm1BQmV5eUVXd1B5?=
+ =?utf-8?B?bWptRWNCdDRBa1B2NmlOeE44TG9WUVpOWXJqNWNoUzRoL1d1Zmw5a1hEaUpD?=
+ =?utf-8?B?L1dsYnFYVkppYW95cG1mTVVqLytoaG1zcnRaVGtuNkU1d0Nyb3gwLzFoVEEw?=
+ =?utf-8?B?T3NDQ3pFaGdROUxWVG9tOGpCTWZEejFYc3ZzcGh1M1RCSUpOd3JDbTNRNS9o?=
+ =?utf-8?B?MlBxcTJ1RGdoNVNnNDN2eG9EV3JiZ3VtMzFNY3Q5NVpST1dDc2RFeTRyWjBi?=
+ =?utf-8?B?RTY3VlhYeS93R3VMVituZjg0UFA4NkJGalZ4SFNQU3RoNjUyZGI5VGdGTTlx?=
+ =?utf-8?B?WEo3a20rcUZKVjVwT21yRjVhc3N0UzlrWFBST01VU3Awb2Z3L2orNDFyWHow?=
+ =?utf-8?B?RHVrbVlEVjFXN2hDK3FYVVRoUEwyVEF6QXFmZnlZNEF2NzJFQWpoeHV0M2s0?=
+ =?utf-8?B?MDM0KzFsVDBEMDVQMzFjR1k0d09pazZmWmMrNjg2dXV1Yzg4Y2JjZUVwdnBQ?=
+ =?utf-8?B?RGFEaHBuQkJJQk5rUEUxekNFMmZnK2xuSDY5OEorbm1GQTJLTlFCR3lBZEZP?=
+ =?utf-8?B?RWp1NlpKQ2ZyQy9sanBEVnZDNEpSQUh4bVJvS2o3c3BCMThnYlEzQXIrazk2?=
+ =?utf-8?B?MUR0RUl3by8rSzltMW9BYlVuM0dqaEJTZUxtdmVQc3BQMkVHT1dweEJkcXh0?=
+ =?utf-8?B?Q0JzU3doVVU2bDlrVjNZeHFwQVBWWlJhZnpiUEhCZHkrQmd4L29IdnM5cmp2?=
+ =?utf-8?B?bWIxZ2JpMTdDUWRhOW1VbkowY1c1L3VneUlQQzBKZnpPNnBWVEtUWU01b3py?=
+ =?utf-8?B?NllucWNFM0JtWURRZ3VkNWtWcWJrWmFWV2Q5YmhNYnEvaGdpV0F6MTlSdUZu?=
+ =?utf-8?B?VzJlWW84MHc0ZWpMRHRyRzVBWGluNVR4czVwamxEbkttb0NMRGR5WjluM2dG?=
+ =?utf-8?Q?RHwO9EbnpjKEWu0Vt1Srf/8=3D?=
 X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 37dac1a7-746f-485d-bb62-08dc5325f30a
+X-MS-Exchange-CrossTenant-Network-Message-Id: ac022c82-6535-4427-71bc-08dc532768e4
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 15:02:43.7696 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Apr 2024 15:13:10.9708 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gViemEwKXJxaR0nWFfCk7qD7vMUlfNlT20iKmYJeTZBGPJ9sIhk0zopzzFn0Ow1YJ2dyDmqlnG2D8DSmCObrSoZMPCfkp9OATFphG9eJR+vdMJiBw2ASjyWV5XCj45oZ
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8512
+X-MS-Exchange-CrossTenant-UserPrincipalName: 3WeCkwIS0K9VXW3eim1KMaE5KZMsTrYKnlxrOkVTAzIfwV3fSserkYOa7pUUYfirIh83m6EUseugvq+HCJx5DgH26XdWc4Xg1pQXFlwHloZHeiqbnIkvgi5uSEgxZzID
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB10247
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,232 +148,208 @@ X-Virus-Status: Clean
 Hi Jonas,
 
 On 3/31/24 22:28, Jonas Karlman wrote:
-> Sync RK3399 SoC common .dtsi-files from linux v6.8.
+> Sync rk3399-puma related device tree from linux v6.8.
 > 
-> The ethernet0 alias is removed from rk3399.dtsi in this patch, it will
-> be restored in board specific .dts-files. There is no other intended
-
-Please add ethernet0 alias to rk3399-u-boot.dtsi and remove it in the 
-patch that moves it to board-specific dts files so that this is not a 
-breaking change and we can bisect through this patch if we need to :)
-
-> change with this patch.
+> SPL_MAX_SIZE is not adjusted to the now common 0x40000 (256 KiB) due to
+> TPL+SPL combined (idbloader.img) is limited to max 224 KiB because of:
 > 
-
-Could you please mention that rng node is named crypto1 in Linux DT? The 
-diff here was a bit surprising since rng node is entirely removed.
-
+>    SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x200
+> 
+> Because FIT payload is located at sector 0x200 instead of the more
+> Rockchip common 0x4000, TPL+SPL cannot take up more than 224 KiB:
+> 
+>    (0x200 - 64) x 512 = 0x38000 (224 KiB)
+> 
+> Also adjust SPL_PAD_TO to match the 0x200 sector offset.
+> 
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 > ---
->   arch/arm/dts/rk3399-op1-opp.dtsi              |  31 +-
->   arch/arm/dts/rk3399-opp.dtsi                  |   6 +-
->   arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi |   4 -
->   arch/arm/dts/rk3399-u-boot.dtsi               |  52 ++--
->   arch/arm/dts/rk3399.dtsi                      | 289 ++++++++++++++++--
->   5 files changed, 308 insertions(+), 74 deletions(-)
+>   arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi | 20 ++--------
+>   arch/arm/dts/rk3399-puma-haikou.dts         | 42 ++++++++++++++++++---
+>   arch/arm/dts/rk3399-puma.dtsi               | 17 ++++++++-
+>   configs/puma-rk3399_defconfig               |  2 +-
+>   4 files changed, 57 insertions(+), 24 deletions(-)
 > 
-> diff --git a/arch/arm/dts/rk3399-op1-opp.dtsi b/arch/arm/dts/rk3399-op1-opp.dtsi
-> index 69cc9b05baa5..783120e9cebe 100644
-> --- a/arch/arm/dts/rk3399-op1-opp.dtsi
-> +++ b/arch/arm/dts/rk3399-op1-opp.dtsi
-> @@ -4,7 +4,7 @@
->    */
->   
->   / {
-> -	cluster0_opp: opp-table0 {
-> +	cluster0_opp: opp-table-0 {
->   		compatible = "operating-points-v2";
->   		opp-shared;
->   
-> @@ -39,7 +39,7 @@
->   		};
+> diff --git a/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi b/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi
+> index f48d395f972a..65340f98d595 100644
+> --- a/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi
+> @@ -30,18 +30,6 @@
+>   	aliases {
+>   		spi5 = &spi5;
 >   	};
->   
-> -	cluster1_opp: opp-table1 {
-> +	cluster1_opp: opp-table-1 {
->   		compatible = "operating-points-v2";
->   		opp-shared;
->   
-> @@ -82,7 +82,7 @@
->   		};
->   	};
->   
-> -	gpu_opp_table: opp-table2 {
-> +	gpu_opp_table: opp-table-2 {
->   		compatible = "operating-points-v2";
->   
->   		opp00 {
-> @@ -110,6 +110,27 @@
->   			opp-microvolt = <1075000>;
->   		};
->   	};
-> +
-> +	dmc_opp_table: opp-table-3 {
-> +		compatible = "operating-points-v2";
-> +
-> +		opp00 {
-> +			opp-hz = /bits/ 64 <400000000>;
-> +			opp-microvolt = <900000>;
-> +		};
-> +		opp01 {
-> +			opp-hz = /bits/ 64 <666000000>;
-> +			opp-microvolt = <900000>;
-> +		};
-> +		opp02 {
-> +			opp-hz = /bits/ 64 <800000000>;
-> +			opp-microvolt = <900000>;
-> +		};
-> +		opp03 {
-> +			opp-hz = /bits/ 64 <928000000>;
-> +			opp-microvolt = <925000>;
-> +		};
-> +	};
->   };
->   
->   &cpu_l0 {
-> @@ -136,6 +157,10 @@
->   	operating-points-v2 = <&cluster1_opp>;
->   };
->   
-> +&dmc {
-> +	operating-points-v2 = <&dmc_opp_table>;
-> +};
-> +
->   &gpu {
->   	operating-points-v2 = <&gpu_opp_table>;
->   };
-> diff --git a/arch/arm/dts/rk3399-opp.dtsi b/arch/arm/dts/rk3399-opp.dtsi
-> index da41cd81ebb7..fee5e7111279 100644
-> --- a/arch/arm/dts/rk3399-opp.dtsi
-> +++ b/arch/arm/dts/rk3399-opp.dtsi
-> @@ -4,7 +4,7 @@
->    */
->   
->   / {
-> -	cluster0_opp: opp-table0 {
-> +	cluster0_opp: opp-table-0 {
->   		compatible = "operating-points-v2";
->   		opp-shared;
->   
-> @@ -35,7 +35,7 @@
->   		};
->   	};
->   
-> -	cluster1_opp: opp-table1 {
-> +	cluster1_opp: opp-table-1 {
->   		compatible = "operating-points-v2";
->   		opp-shared;
->   
-> @@ -74,7 +74,7 @@
->   		};
->   	};
->   
-> -	gpu_opp_table: opp-table2 {
-> +	gpu_opp_table: opp-table-2 {
->   		compatible = "operating-points-v2";
->   
->   		opp00 {
-> diff --git a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> index b8f95b86d86b..dcfcec4f3072 100644
-> --- a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> @@ -6,10 +6,6 @@
->   #include "rk3399-u-boot.dtsi"
->   #include "rk3399-sdram-lpddr4-100.dtsi"
->   
-> -&rng {
-> -	status = "okay";
-> -};
 > -
->   &sdhci {
->   	max-frequency = <25000000>;
->   };
-> diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
-> index adb64d17e040..d2648abd0a44 100644
-> --- a/arch/arm/dts/rk3399-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-u-boot.dtsi
-> @@ -2,8 +2,6 @@
->   /*
->    * Copyright (C) 2019 Jagan Teki <jagan@amarulasolutions.com>
->    */
-> -#define USB_CLASS_HUB			9
-> -
->   #include "rockchip-u-boot.dtsi"
->   
->   / {
-> @@ -24,44 +22,11 @@
->   		reg = <0x0 0xff620000 0x0 0x100>;
->   	};
->   
-> -	dfi: dfi@ff630000 {
-> -		bootph-all;
-> -		reg = <0x00 0xff630000 0x00 0x4000>;
-> -		compatible = "rockchip,rk3399-dfi";
-> -		rockchip,pmu = <&pmugrf>;
-> -		clocks = <&cru PCLK_DDR_MON>;
-> -		clock-names = "pclk_ddr_mon";
+> -	vdd_log: vdd-log {
+> -		compatible = "pwm-regulator";
+> -		pwms = <&pwm2 0 25000 1>;
+> -		regulator-name = "vdd_log";
+> -		regulator-always-on;
+> -		regulator-boot-on;
+> -		regulator-min-microvolt = <800000>;
+> -		regulator-max-microvolt = <1400000>;
+> -		regulator-init-microvolt = <950000>;
+> -		vin-supply = <&vcc5v0_sys>;
 > -	};
-> -
-> -	rng: rng@ff8b8000 {
-> -		compatible = "rockchip,rk3399-crypto";
-> -		reg = <0x0 0xff8b8000 0x0 0x1000>;
-> -		status = "okay";
-> -	};
-> -
-> -	dmc: dmc {
-> -		bootph-all;
-> -		compatible = "rockchip,rk3399-dmc";
-> -		devfreq-events = <&dfi>;
-> -		interrupts = <GIC_SPI 1 IRQ_TYPE_LEVEL_HIGH 0>;
-> -		clocks = <&cru SCLK_DDRC>;
-> -		clock-names = "dmc_clk";
-> -		reg = <0x0 0xffa80000 0x0 0x0800
-> -		       0x0 0xffa80800 0x0 0x1800
-> -		       0x0 0xffa82000 0x0 0x2000
-> -		       0x0 0xffa84000 0x0 0x1000
-> -		       0x0 0xffa88000 0x0 0x0800
-> -		       0x0 0xffa88800 0x0 0x1800
-> -		       0x0 0xffa8a000 0x0 0x2000
-> -		       0x0 0xffa8c000 0x0 0x1000>;
-> -	};
-> -
->   	pmusgrf: syscon@ff330000 {
->   		bootph-all;
-
-I have my doubts the PMU SGRF is accessible from U-Boot proper if TF-A 
-loads it into normal world. Maybe this should rather be 
-bootph-pre-sram+bootph-pre-ram?
-
-Nothing to fix in this series though.
-
->   		compatible = "rockchip,rk3399-pmusgrf", "syscon";
->   		reg = <0x0 0xff330000 0x0 0xe3d4>;
->   	};
-> -
 >   };
 >   
->   #if defined(CONFIG_ROCKCHIP_SPI_IMAGE) && defined(CONFIG_HAS_ROM)
-> @@ -93,6 +58,19 @@
+>   &binman {
+> @@ -87,10 +75,6 @@
 >   	bootph-all;
 >   };
 >   
-> +&dmc {
-> +	bootph-all;
-> +	reg = <0x0 0xffa80000 0x0 0x0800
-> +	       0x0 0xffa80800 0x0 0x1800
-> +	       0x0 0xffa82000 0x0 0x2000
-> +	       0x0 0xffa84000 0x0 0x1000
-> +	       0x0 0xffa88000 0x0 0x0800
-> +	       0x0 0xffa88800 0x0 0x1800
-> +	       0x0 0xffa8a000 0x0 0x2000
-> +	       0x0 0xffa8c000 0x0 0x1000>;
-> +	status = "okay";
+> -&haikou_pin_hog {
+> -	bootph-all;
+> -};
+> -
+>   &norflash {
+>   	bootph-pre-ram;
+>   	bootph-some-ram;
+> @@ -111,3 +95,7 @@
+>   &uart0_xfer {
+>   	bootph-all;
+>   };
+> +
+> +&vdd_log {
+> +	regulator-init-microvolt = <950000>;
 > +};
+> diff --git a/arch/arm/dts/rk3399-puma-haikou.dts b/arch/arm/dts/rk3399-puma-haikou.dts
+> index 115c14c0a3c6..18a98c4648ea 100644
+> --- a/arch/arm/dts/rk3399-puma-haikou.dts
+> +++ b/arch/arm/dts/rk3399-puma-haikou.dts
+> @@ -5,6 +5,7 @@
+>   
+>   /dts-v1/;
+>   #include "rk3399-puma.dtsi"
+> +#include <dt-bindings/input/input.h>
+>   
+>   / {
+>   	model = "Theobroma Systems RK3399-Q7 SoM";
+> @@ -18,6 +19,38 @@
+>   		stdout-path = "serial0:115200n8";
+>   	};
+>   
+> +	gpio-keys {
+> +		compatible = "gpio-keys";
+> +		pinctrl-0 = <&haikou_keys_pin>;
+> +		pinctrl-names = "default";
 > +
 
-Missing bootph-all for dfi?
+To make sure we keep the same behavior, we would need to enable 
+CONFIG_BUTTON_GPIO in the defconfig for it to do the pinmuxing.
 
-[...]
+The impact would be limited, so that's something we could deal with 
+later on if you mind having a commit for that in this series.
 
-Cheers,
+> +		button-batlow-n {
+> +			gpios = <&gpio0 RK_PB2 GPIO_ACTIVE_LOW>;
+> +			label = "BATLOW#";
+> +			linux,code = <KEY_BATTERY>;
+> +		};
+> +
+> +		button-slp-btn-n {
+> +			gpios = <&gpio0 RK_PB3 GPIO_ACTIVE_LOW>;
+> +			label = "SLP_BTN#";
+> +			linux,code = <KEY_SLEEP>;
+> +		};
+> +
+> +		button-wake-n {
+> +			gpios = <&gpio0 RK_PB1 GPIO_ACTIVE_LOW>;
+> +			label = "WAKE#";
+> +			linux,code = <KEY_WAKEUP>;
+> +			wakeup-source;
+> +		};
+> +
+> +		switch-lid-btn-n {
+> +			gpios = <&gpio0 RK_PA4 GPIO_ACTIVE_LOW>;
+> +			label = "LID_BTN#";
+> +			linux,code = <SW_LID>;
+> +			linux,input-type = <EV_SW>;
+> +		};
+> +	};
+> +
+>   	leds {
+>   		pinctrl-0 = <&module_led_pin>, <&sd_card_led_pin>;
+>   
+> @@ -165,11 +198,8 @@
+>   };
+>   
+>   &pinctrl {
+> -	pinctrl-names = "default";
+> -	pinctrl-0 = <&haikou_pin_hog>;
+> -
+> -	hog {
+> -		haikou_pin_hog: haikou-pin-hog {
+> +	buttons {
+> +		haikou_keys_pin: haikou-keys-pin {
+>   			rockchip,pins =
+>   			  /* LID_BTN */
+>   			  <0 RK_PA4 RK_FUNC_GPIO &pcfg_pull_up>,
+> @@ -177,7 +207,7 @@
+>   			  <0 RK_PB2 RK_FUNC_GPIO &pcfg_pull_up>,
+>   			  /* SLP_BTN# */
+>   			  <0 RK_PB3 RK_FUNC_GPIO &pcfg_pull_up>,
+> -			  /* BIOS_DISABLE# */
+> +			  /* WAKE# */
+>   			  <0 RK_PB1 RK_FUNC_GPIO &pcfg_pull_up>;
+>   		};
+>   	};
+> diff --git a/arch/arm/dts/rk3399-puma.dtsi b/arch/arm/dts/rk3399-puma.dtsi
+> index aa3e21bd6c8f..c08e69391c01 100644
+> --- a/arch/arm/dts/rk3399-puma.dtsi
+> +++ b/arch/arm/dts/rk3399-puma.dtsi
+> @@ -9,6 +9,7 @@
+>   
+>   / {
+>   	aliases {
+> +		ethernet0 = &gmac;
+>   		mmc0 = &sdhci;
+>   	};
+>   
+> @@ -27,7 +28,7 @@
+>   
+>   	extcon_usb3: extcon-usb3 {
+>   		compatible = "linux,extcon-usb-gpio";
+> -		id-gpio = <&gpio1 RK_PC2 GPIO_ACTIVE_HIGH>;
+> +		id-gpios = <&gpio1 RK_PC2 GPIO_ACTIVE_HIGH>;
+>   		pinctrl-names = "default";
+>   		pinctrl-0 = <&usb3_id>;
+>   	};
+> @@ -119,6 +120,20 @@
+>   	drive-impedance-ohm = <33>;
+>   };
+>   
+> +&gpio0 {
+> +	/*
+> +	 * The BIOS_DISABLE hog is a feedback pin for the actual status of the
+> +	 * signal. This usually represents the state of a switch on the baseboard.
+> +	 * The pin has a 10k pull-up resistor connected, so no pull-up setting is needed.
+> +	 */
+> +	bios-disable-hog {
+> +		gpios = <RK_PB0 GPIO_ACTIVE_HIGH>;
+> +		gpio-hog;
+> +		input;
+> +		line-name = "bios_disable";
+> +	};
+> +};
+> +
+>   &gmac {
+>   	assigned-clocks = <&cru SCLK_RMII_SRC>;
+>   	assigned-clock-parents = <&clkin_gmac>;
+> diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
+> index cc3d2cf3755d..26d524cabb06 100644
+> --- a/configs/puma-rk3399_defconfig
+> +++ b/configs/puma-rk3399_defconfig
+> @@ -27,7 +27,7 @@ CONFIG_DEBUG_UART=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-puma-haikou.dtb"
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>   CONFIG_SPL_MAX_SIZE=0x2e000
+> -CONFIG_SPL_PAD_TO=0x7f8000
+> +CONFIG_SPL_PAD_TO=0x38000
+
+Those are unrelated changes, please in a different commit (but thanks 
+for catching my mistakes :) ).
+
+Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+
+Thanks,
 Quentin
