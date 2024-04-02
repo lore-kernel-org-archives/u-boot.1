@@ -4,69 +4,119 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DA1FC6FD1F
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 21:42:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9295ECD1284
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 23:29:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 866FE88197;
-	Tue,  2 Apr 2024 23:42:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
+	by phobos.denx.de (Postfix) with ESMTP id A8A6888049;
+	Wed,  3 Apr 2024 01:29:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="kjWJNiKv";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="spI/9WhO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0402588188; Tue,  2 Apr 2024 23:42:16 +0200 (CEST)
-Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
- [IPv6:2a00:1098:ed:100::25])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CF4908811A; Wed,  3 Apr 2024 01:29:20 +0200 (CEST)
+Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC30488167
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 23:42:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=collabora.com
+ by phobos.denx.de (Postfix) with ESMTPS id 2258C879F3
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 01:29:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chris.obbard@collabora.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
- s=mail; t=1712094133;
- bh=sV5Qa4y+CtDOETzbNceHcynZ5EtWWtX11YLwJLxVIzo=;
- h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
- b=kjWJNiKvpsnkBRUr4IbBXpu6Hsa9Hfc7Wx3dSq7Q2w21g/G+0E6AmgtnD1djEEIba
- ZkqlS4K83BpjXjovDvH6EI01p/yfrMfu5PDJ1iMZWmAs2ErJqPzP9Yxr8qoMXobl7V
- DKOWcXneQvEbQbDsL0tcAf+Ai6XAOangLQFHbIOHGxBXd+6HpS7p2tMqBGXxtYCfE3
- jK564EsS3rBI845jdcpsvzq0gBAuQmyQKWio0HIR3eWAGdUUQ24mQmb1RVGd/b8coN
- fx+Ay+fb6C5YhCILQlC5dMLveDtLMTZUCKCEBqq8/GKwK407CbcJl71wMtTuDdOaU2
- n+EZYB/g9fwmQ==
-Received: from [100.77.12.232] (cola.collaboradmins.com [195.201.22.229])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (4096 bits)
- server-digest SHA256) (No client certificate requested)
- (Authenticated sender: obbardc)
- by madrid.collaboradmins.com (Postfix) with ESMTPSA id AFF4937813D7;
- Tue,  2 Apr 2024 21:42:12 +0000 (UTC)
-Message-ID: <0422e83904c8d95d2923ea083deb4be188f5015e.camel@collabora.com>
-Subject: Re: [PATCH 28/31] rockchip: rk3399-rock-pi-4: Sync device tree from
- linux v6.8
-From: Christopher Obbard <chris.obbard@collabora.com>
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,  FUKAUMI Naoki
- <naoki@radxa.com>, Jagan Teki <jagan@amarulasolutions.com>
-Cc: u-boot@lists.denx.de
-Date: Tue, 02 Apr 2024 22:41:56 +0100
-In-Reply-To: <20240331202921.262323-29-jonas@kwiboo.se>
-References: <20240331202921.262323-1-jonas@kwiboo.se>
- <20240331202921.262323-29-jonas@kwiboo.se>
-Autocrypt: addr=chris.obbard@collabora.com; prefer-encrypt=mutual;
- keydata=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
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.50.3-1+b1 
+ dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jh80.chung@samsung.com
+Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
+ by mailout1.samsung.com (KnoxPortal) with ESMTP id
+ 20240402232914epoutp016140e16f67ab2cfb1d3e248ec4a064c1~CmmIZ9XLr1080010800epoutp01L
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 23:29:14 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
+ 20240402232914epoutp016140e16f67ab2cfb1d3e248ec4a064c1~CmmIZ9XLr1080010800epoutp01L
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1712100554;
+ bh=4GA26NqmlsPc0Qt3+IkmOB4q/7TTYLSdNY1T8vSxsek=;
+ h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
+ b=spI/9WhOxFArKa3Yb/9SzwkG2RYVdry4fkxM3JfjChUkFu8L8v5HpgYaQj/Fwun6I
+ ex4wff2Z2jeMHkwOEj/P2WSD837P55p1Ybzo0rn06YnwB9en3BdE7AJXT0Gyc92r40
+ tv+kIefTvxwKyRGINM0wKc63cBl5usEuGCeYJTK4=
+Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTP id
+ 20240402232914epcas1p4c36a036580ac5af66ae1c119b4cdea97~CmmIMPN3X3267932679epcas1p4q;
+ Tue,  2 Apr 2024 23:29:14 +0000 (GMT)
+Received: from epsmgec1p1-new.samsung.com (unknown [182.195.38.236]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4V8PGd2jv8z4x9QF; Tue,  2 Apr
+ 2024 23:29:13 +0000 (GMT)
+Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
+ epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 1A.0D.19431.9C49C066; Wed,  3 Apr 2024 08:29:13 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20240402232912epcas1p1df0a76336eff985fb53b770990bb05c1~CmmG-YoEX0146501465epcas1p1L;
+ Tue,  2 Apr 2024 23:29:12 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20240402232912epsmtrp2f24a8357ea0c759d5a88b7e553b2723e~CmmG_x-xC1423014230epsmtrp2K;
+ Tue,  2 Apr 2024 23:29:12 +0000 (GMT)
+X-AuditID: b6c32a4c-1d1ff70000004be7-0c-660c94c99b4d
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ A0.AB.19234.8C49C066; Wed,  3 Apr 2024 08:29:12 +0900 (KST)
+Received: from [10.113.113.235] (unknown [10.113.113.235]) by
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20240402232912epsmtip2daf19704b219e1303565f5320308c4c4~CmmGvJUD_1275712757epsmtip2H;
+ Tue,  2 Apr 2024 23:29:12 +0000 (GMT)
+Message-ID: <b4b0e56f-8fc3-423b-a163-a0809552e8bf@samsung.com>
+Date: Wed, 3 Apr 2024 08:29:12 +0900
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] mmc: Avoid buffer overrun in mmc_startup()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, Peng Fan
+ <peng.fan@nxp.com>
+Cc: u-boot@lists.denx.de, Eugeniu Rosca <erosca@de.adit-jv.com>
+Content-Language: en-US
+From: Jaehoon Chung <jh80.chung@samsung.com>
+In-Reply-To: <20240104034942.102500-1-heinrich.schuchardt@canonical.com>
+Content-Transfer-Encoding: 7bit
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupik+LIzCtJLcpLzFFi42LZdlhTT/fkFJ40g49TRSxW/W9hsrjQeJPd
+ 4seqL6wWb/d2sjuweMxq6GXzmNW+mt3j7J0djB4b3+1gCmCJyrbJSE1MSS1SSM1Lzk/JzEu3
+ VfIOjneONzUzMNQ1tLQwV1LIS8xNtVVy8QnQdcvMAdqppFCWmFMKFApILC5W0rezKcovLUlV
+ yMgvLrFVSi1IySkwLdArTswtLs1L18tLLbEyNDAwMgUqTMjOuPnxEkvBCv6KU6t/sDYwTuXp
+ YuTkkBAwkZhwv5eli5GLQ0hgD6PE8UuNzBDOJ0aJvu8r2eGcWxuWMcG0TL3eCJXYyShxrPs8
+ I0hCSOA9o8ScL/ogNq+AncSs+99Zuxg5OFgEVCS2XKiBCAtKnJz5hAXEFhWQl7h/awY7iC0s
+ 4Cyx5moDWFxEIEpi4vUbzCA2s4C9xL5rrWwQtrjErSfzwW5gE9CR2P7tOJjNKeAhMX/rQ6h6
+ eYntb+eAfSAh8JFdYt/adlaIo10kriz8zQ5hC0u8Or4FypaS+PxuLxtEQzOjxNIlB1khnB5G
+ iX8N19kgqowl9i+dzATyDbOApsT6XfoQ2/gk3n3tAXtSQoBXoqNNCKJaReLS65dMMPPvPvkP
+ dYOHRPfV+9CAm80osW7yDbYJjAqzkAJmFpJHZyF5aBbC5gWMLKsYpVILinPTU5MNCwx181LL
+ 4VGenJ+7iRGcKLV8djB+X/9X7xAjEwfjIUYJDmYlEd6f3pxpQrwpiZVVqUX58UWlOanFhxhN
+ gTE0kVlKNDkfmKrzSuINTSwNTMyMjE0sDM0MlcR5z1wpSxUSSE8sSc1OTS1ILYLpY+LglGpg
+ KrhQ/z+Tw5NTP4tVfX11XcOMl1P3pEvNzuueJCJ9qJihxPja+s3crv4ey5vZl+k6idV1/Hr0
+ rfsAd/FWiW8bu7unH+Xf3v7AqM7A49DENcpuP86rLmBMnrFL+mifYs0Ss1Ub34m92lhl4Nfv
+ vth1YvnbOVuWS05ZctAt8/nOhzyL5oo5CQUL1R/nsveavFzO4VPwhKfi62JDDzwKOSF7f22j
+ 13TJi/yFrS8ObPz3j2lD0/k5F0uE5/7J+h97r1BryZTfzzzuBu4vVcmZ5NC86Ofj9k9Rgcdi
+ LSKPBx0tCvyede7XjLAlHrKqa6vdRS1Y+yvf1dsKL3yT91Yh5Q3jF0sJ/6vnFtzkDUh02Nt3
+ UomlOCPRUIu5qDgRAD/yw1EdBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrDLMWRmVeSWpSXmKPExsWy7bCSvO6JKTxpBov+G1qs+t/CZHGh8Sa7
+ xY9VX1gt3u7tZHdg8ZjV0MvmMat9NbvH2Ts7GD02vtvBFMASxWWTkpqTWZZapG+XwJVx8+Ml
+ loIV/BWnVv9gbWCcytPFyMkhIWAiMfV6I3sXIxeHkMB2Rokrcz8yQSSkJD4/ncrWxcgBZAtL
+ HD5cDFHzllFi3auHjCA1vAJ2ErPuf2cFqWERUJHYcqEGIiwocXLmExYQW1RAXuL+rRnsILaw
+ gLPEmqsNYHERgSiJw0dngY1hFrCX2HetlQ3EFhJwl3j+aQ8zRFxc4taT+WDnsAnoSGz/dhzM
+ 5hTwkJi/9SEzyFpmAXWJ9fOEIMrlJba/ncM8gVFoFpIrZiGZNAuhYxaSjgWMLKsYRVMLinPT
+ c5MLDPWKE3OLS/PS9ZLzczcxgiNAK2gH47L1f/UOMTJxMB5ilOBgVhLh/enNmSbEm5JYWZVa
+ lB9fVJqTWnyIUZqDRUmcVzmnM0VIID2xJDU7NbUgtQgmy8TBKdXAVC5fGSuy5MOVmJSMlLmb
+ 53kytf6sZvsaw/BL0y7iVO2iNp7+CzZnHqy5uPVZRmKXZB17rtkU61f/0m+b50xn810R9WBO
+ s3pe4pQF4oZKrNNiLN8/mv5yjsimrslX5/+t8Lmz2KSsWalV6dDvec87LMRfM+tN5/h+SllA
+ K7Lz86mc+CMpG+eWtEyz1Cz1ns5XP/n3ymO/Pm765TP9y2rb2R/bK49v+Wt48eCtX0vWi86b
+ yPA85JDtmgesLKdLlS+k2N16sP/9mYXurY/cu60uL/8nm312xZO21QrHPsk8La2P3icu+dLs
+ 4H5tZdWToRY9b/r/7ngmc9u0p8zz77Q1ZgttQtPPP540+2bK9CRjFmYlluKMREMt5qLiRAC1
+ L+3I7wIAAA==
+X-CMS-MailID: 20240402232912epcas1p1df0a76336eff985fb53b770990bb05c1
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20240402232912epcas1p1df0a76336eff985fb53b770990bb05c1
+References: <20240104034942.102500-1-heinrich.schuchardt@canonical.com>
+ <CGME20240402232912epcas1p1df0a76336eff985fb53b770990bb05c1@epcas1p1.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,475 +133,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+On 1/4/24 12:49, Heinrich Schuchardt wrote:
+> If the CSD register contains a reserved value (4 - 7) in bits 0:2 of the
+> TRAN_SPEED field, a buffer overrun occurs. Resize the mapping table.
+> 
+> According to the original report
+> https://lore.kernel.org/u-boot/20180826231332.2491-11-erosca@de.adit-jv.com/
+> reserved values have been observed resulting in a buffer overrun.
+> 
+> Reported-by: Eugeniu Rosca <erosca@de.adit-jv.com>
+> Fixes: 272cc70b211e ("Add MMC Framework")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
-On Sun, 2024-03-31 at 20:28 +0000, Jonas Karlman wrote:
-> Sync rk3399-rock-pi-4 related device tree from linux v6.8.
->=20
-> Add SPI flash related options to support booting from SPI flash.
->=20
-> Add AHCI=3Dy, SCSI_AHCI=3Dy, AHCI_PCI=3Dy and SCSI=3Dy to support PCIe SA=
-TA boot.
->=20
-> Change to SPL_MAX_SIZE=3D0x40000, SPL can be up to 256 KiB.
->=20
-> Add ROCKCHIP_IODOMAIN=3Dy to configure io-domain voltage.
->=20
-> Add PHY_REALTEK=3Dy and DM_ETH_PHY=3Dy to support ethernet PHY.
->=20
-> Remove SPL_TINY_MEMSET=3Dy to use full memset in SPL.
->=20
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Applied to u-boot-mmc/master. 
 
-Thank you for taking care of this.
-
-Reviewed-by: Christopher Obbard <chris.obbard@collabora.com>
+Best Regards,
+Jaehoon Chung 
 
 > ---
-> =C2=A0arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi | 12 ++++++++++
-> =C2=A0arch/arm/dts/rk3399-rock-4c-plus.dts=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0 |=C2=A0 1 +
-> =C2=A0arch/arm/dts/rk3399-rock-4se-u-boot.dtsi=C2=A0=C2=A0=C2=A0=C2=A0 | =
-12 ++++++++++
-> =C2=A0arch/arm/dts/rk3399-rock-pi-4.dtsi=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 4 +++-
-> =C2=A0arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi=C2=A0=C2=A0 |=C2=A0 7 ++=
-++++
-> =C2=A0arch/arm/dts/rk3399-rock-pi-4c.dts=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 10 ++++++++
-> =C2=A0configs/rock-4c-plus-rk3399_defconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0 | 24 +++++++++++++++-----
-> =C2=A0configs/rock-4se-rk3399_defconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 | 23 +++++++++++++++++--
-> =C2=A0configs/rock-pi-4-rk3399_defconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 8 +++++++
-> =C2=A0configs/rock-pi-4c-rk3399_defconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0 | 24 ++++++++++++++++++--
-> =C2=A010 files changed, 114 insertions(+), 11 deletions(-)
->=20
-> diff --git a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-> b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-> index 9785b97b9eea..b5ee644a83dd 100644
-> --- a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-> @@ -11,3 +11,15 @@
-> =C2=A0&pcfg_pull_up_8ma {
-> =C2=A0	bootph-pre-ram;
-> =C2=A0};
-> +
-> +&spi1 {
-> +	status =3D "okay";
-> +
-> +	flash@0 {
-> +		bootph-pre-ram;
-> +		bootph-some-ram;
-> +		compatible =3D "jedec,spi-nor";
-> +		reg =3D <0>;
-> +		spi-max-frequency =3D <10000000>;
-> +	};
-> +};
-> diff --git a/arch/arm/dts/rk3399-rock-4c-plus.dts b/arch/arm/dts/rk3399-
-> rock-4c-plus.dts
-> index 8bfd5f88d1ef..7baf9d1b22fd 100644
-> --- a/arch/arm/dts/rk3399-rock-4c-plus.dts
-> +++ b/arch/arm/dts/rk3399-rock-4c-plus.dts
-> @@ -15,6 +15,7 @@
-> =C2=A0	compatible =3D "radxa,rock-4c-plus", "rockchip,rk3399";
-> =C2=A0
-> =C2=A0	aliases {
-> +		ethernet0 =3D &gmac;
-> =C2=A0		mmc0 =3D &sdhci;
-> =C2=A0		mmc1 =3D &sdmmc;
-> =C2=A0	};
-> diff --git a/arch/arm/dts/rk3399-rock-4se-u-boot.dtsi b/arch/arm/dts/rk33=
-99-
-> rock-4se-u-boot.dtsi
-> index 85ee5770add0..2213d0093052 100644
-> --- a/arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
-> @@ -4,3 +4,15 @@
-> =C2=A0 */
-> =C2=A0
-> =C2=A0#include "rk3399-rock-pi-4-u-boot.dtsi"
-> +
-> +&spi1 {
-> +	status =3D "okay";
-> +
-> +	flash@0 {
-> +		bootph-pre-ram;
-> +		bootph-some-ram;
-> +		compatible =3D "jedec,spi-nor";
-> +		reg =3D <0>;
-> +		spi-max-frequency =3D <10000000>;
-> +	};
-> +};
-> diff --git a/arch/arm/dts/rk3399-rock-pi-4.dtsi b/arch/arm/dts/rk3399-roc=
-k-
-> pi-4.dtsi
-> index b1b7f4ffb1d4..281a12180703 100644
-> --- a/arch/arm/dts/rk3399-rock-pi-4.dtsi
-> +++ b/arch/arm/dts/rk3399-rock-pi-4.dtsi
-> @@ -12,6 +12,7 @@
-> =C2=A0
-> =C2=A0/ {
-> =C2=A0	aliases {
-> +		ethernet0 =3D &gmac;
-> =C2=A0		mmc0 =3D &sdhci;
-> =C2=A0		mmc1 =3D &sdmmc;
-> =C2=A0	};
-> @@ -44,7 +45,7 @@
-> =C2=A0	sdio_pwrseq: sdio-pwrseq {
-> =C2=A0		compatible =3D "mmc-pwrseq-simple";
-> =C2=A0		clocks =3D <&rk808 1>;
-> -		clock-names =3D "ext_clock";
-> +		clock-names =3D "lpo";
-> =C2=A0		pinctrl-names =3D "default";
-> =C2=A0		pinctrl-0 =3D <&wifi_enable_h>;
-> =C2=A0		reset-gpios =3D <&gpio0 RK_PB2 GPIO_ACTIVE_LOW>;
-> @@ -492,6 +493,7 @@
-> =C2=A0
-> =C2=A0&i2s0 {
-> =C2=A0	pinctrl-0 =3D <&i2s0_2ch_bus>;
-> +	pinctrl-1 =3D <&i2s0_2ch_bus_bclk_off>;
-> =C2=A0	rockchip,capture-channels =3D <2>;
-> =C2=A0	rockchip,playback-channels =3D <2>;
-> =C2=A0	status =3D "okay";
-> diff --git a/arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
-> b/arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
-> index 85ee5770add0..38385621deb1 100644
-> --- a/arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
-> @@ -4,3 +4,10 @@
-> =C2=A0 */
-> =C2=A0
-> =C2=A0#include "rk3399-rock-pi-4-u-boot.dtsi"
-> +
-> +&spi1 {
-> +	flash@0 {
-> +		bootph-pre-ram;
-> +		bootph-some-ram;
-> +	};
-> +};
-> diff --git a/arch/arm/dts/rk3399-rock-pi-4c.dts b/arch/arm/dts/rk3399-roc=
-k-
-> pi-4c.dts
-> index d32efab74e94..de2ebe4cb4f3 100644
-> --- a/arch/arm/dts/rk3399-rock-pi-4c.dts
-> +++ b/arch/arm/dts/rk3399-rock-pi-4c.dts
-> @@ -43,6 +43,16 @@
-> =C2=A0	hp-det-gpio =3D <&gpio1 RK_PA0 GPIO_ACTIVE_HIGH>;
-> =C2=A0};
-> =C2=A0
-> +&spi1 {
-> +	status =3D "okay";
-> +
-> +	flash@0 {
-> +		compatible =3D "jedec,spi-nor";
-> +		reg =3D <0>;
-> +		spi-max-frequency =3D <10000000>;
-> +	};
-> +};
-> +
-> =C2=A0&uart0 {
-> =C2=A0	status =3D "okay";
-> =C2=A0
-> diff --git a/configs/rock-4c-plus-rk3399_defconfig b/configs/rock-4c-plus=
--
-> rk3399_defconfig
-> index 2024defb2bf0..e97fde17acc2 100644
-> --- a/configs/rock-4c-plus-rk3399_defconfig
-> +++ b/configs/rock-4c-plus-rk3399_defconfig
-> @@ -3,22 +3,27 @@ CONFIG_SKIP_LOWLEVEL_INIT=3Dy
-> =C2=A0CONFIG_COUNTER_FREQUENCY=3D24000000
-> =C2=A0CONFIG_ARCH_ROCKCHIP=3Dy
-> =C2=A0CONFIG_NR_DRAM_BANKS=3D1
-> +CONFIG_SF_DEFAULT_SPEED=3D10000000
-> =C2=A0CONFIG_ENV_OFFSET=3D0x3F8000
-> =C2=A0CONFIG_DEFAULT_DEVICE_TREE=3D"rk3399-rock-4c-plus"
-> =C2=A0CONFIG_DM_RESET=3Dy
-> =C2=A0CONFIG_ROCKCHIP_RK3399=3Dy
-> +CONFIG_ROCKCHIP_SPI_IMAGE=3Dy
-> =C2=A0CONFIG_TARGET_ROCKPI4_RK3399=3Dy
-> =C2=A0CONFIG_DEBUG_UART_BASE=3D0xFF1A0000
-> =C2=A0CONFIG_DEBUG_UART_CLOCK=3D24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=3Dy
-> +CONFIG_SPL_SPI=3Dy
-> =C2=A0CONFIG_SYS_LOAD_ADDR=3D0x800800
-> -CONFIG_PCI=3Dy
-> =C2=A0CONFIG_DEBUG_UART=3Dy
-> =C2=A0# CONFIG_ANDROID_BOOT_IMAGE is not set
-> =C2=A0CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3399-rock-4c-plus.dtb"
-> =C2=A0CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
-> -CONFIG_SPL_MAX_SIZE=3D0x2e000
-> +CONFIG_SPL_MAX_SIZE=3D0x40000
-> =C2=A0CONFIG_SPL_PAD_TO=3D0x7f8000
-> =C2=A0# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=3Dy
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=3D0xE0000
-> =C2=A0CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
-> =C2=A0CONFIG_TPL=3Dy
-> =C2=A0CONFIG_CMD_BOOTZ=3Dy
-> @@ -26,7 +31,6 @@ CONFIG_CMD_NVEDIT_EFI=3Dy
-> =C2=A0CONFIG_CMD_DFU=3Dy
-> =C2=A0CONFIG_CMD_GPT=3Dy
-> =C2=A0CONFIG_CMD_MMC=3Dy
-> -CONFIG_CMD_PCI=3Dy
-> =C2=A0CONFIG_CMD_USB=3Dy
-> =C2=A0CONFIG_CMD_ROCKUSB=3Dy
-> =C2=A0CONFIG_CMD_USB_MASS_STORAGE=3Dy
-> @@ -40,23 +44,32 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
-> =C2=A0CONFIG_DFU_MMC=3Dy
-> =C2=A0CONFIG_ROCKCHIP_GPIO=3Dy
-> =C2=A0CONFIG_SYS_I2C_ROCKCHIP=3Dy
-> +CONFIG_ROCKCHIP_IODOMAIN=3Dy
-> =C2=A0CONFIG_MMC_DW=3Dy
-> =C2=A0CONFIG_MMC_DW_ROCKCHIP=3Dy
-> =C2=A0CONFIG_MMC_SDHCI=3Dy
-> +CONFIG_MMC_SDHCI_SDMA=3Dy
-> =C2=A0CONFIG_MMC_SDHCI_ROCKCHIP=3Dy
-> +CONFIG_SF_DEFAULT_BUS=3D1
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=3Dy
-> +CONFIG_SPI_FLASH_GIGADEVICE=3Dy
-> +CONFIG_SPI_FLASH_MACRONIX=3Dy
-> +CONFIG_SPI_FLASH_WINBOND=3Dy
-> +CONFIG_SPI_FLASH_XTX=3Dy
-> +CONFIG_PHY_REALTEK=3Dy
-> +CONFIG_DM_ETH_PHY=3Dy
-> =C2=A0CONFIG_ETH_DESIGNWARE=3Dy
-> =C2=A0CONFIG_GMAC_ROCKCHIP=3Dy
-> -CONFIG_NVME_PCI=3Dy
-> =C2=A0CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
-> =C2=A0CONFIG_PHY_ROCKCHIP_TYPEC=3Dy
-> =C2=A0CONFIG_PMIC_RK8XX=3Dy
-> -CONFIG_REGULATOR_PWM=3Dy
-> =C2=A0CONFIG_REGULATOR_RK8XX=3Dy
-> =C2=A0CONFIG_PWM_ROCKCHIP=3Dy
-> =C2=A0CONFIG_RAM_ROCKCHIP_LPDDR4=3Dy
-> =C2=A0CONFIG_BAUDRATE=3D1500000
-> =C2=A0CONFIG_DEBUG_UART_SHIFT=3D2
-> =C2=A0CONFIG_SYS_NS16550_MEM32=3Dy
-> +CONFIG_ROCKCHIP_SPI=3Dy
-> =C2=A0CONFIG_SYSRESET=3Dy
-> =C2=A0CONFIG_USB=3Dy
-> =C2=A0CONFIG_USB_XHCI_HCD=3Dy
-> @@ -77,7 +90,6 @@ CONFIG_VIDEO=3Dy
-> =C2=A0CONFIG_DISPLAY=3Dy
-> =C2=A0CONFIG_VIDEO_ROCKCHIP=3Dy
-> =C2=A0CONFIG_DISPLAY_ROCKCHIP_HDMI=3Dy
-> -CONFIG_SPL_TINY_MEMSET=3Dy
-> =C2=A0CONFIG_ERRNO_STR=3Dy
-> =C2=A0CONFIG_EFI_CAPSULE_ON_DISK=3Dy
-> =C2=A0CONFIG_EFI_CAPSULE_FIRMWARE_RAW=3Dy
-> diff --git a/configs/rock-4se-rk3399_defconfig b/configs/rock-4se-
-> rk3399_defconfig
-> index 9b2303fdf792..13f5f84b9836 100644
-> --- a/configs/rock-4se-rk3399_defconfig
-> +++ b/configs/rock-4se-rk3399_defconfig
-> @@ -3,22 +3,29 @@ CONFIG_SKIP_LOWLEVEL_INIT=3Dy
-> =C2=A0CONFIG_COUNTER_FREQUENCY=3D24000000
-> =C2=A0CONFIG_ARCH_ROCKCHIP=3Dy
-> =C2=A0CONFIG_NR_DRAM_BANKS=3D1
-> +CONFIG_SF_DEFAULT_SPEED=3D10000000
-> =C2=A0CONFIG_ENV_OFFSET=3D0x3F8000
-> =C2=A0CONFIG_DEFAULT_DEVICE_TREE=3D"rk3399-rock-4se"
-> =C2=A0CONFIG_DM_RESET=3Dy
-> =C2=A0CONFIG_ROCKCHIP_RK3399=3Dy
-> +CONFIG_ROCKCHIP_SPI_IMAGE=3Dy
-> =C2=A0CONFIG_TARGET_ROCKPI4_RK3399=3Dy
-> =C2=A0CONFIG_DEBUG_UART_BASE=3D0xFF1A0000
-> =C2=A0CONFIG_DEBUG_UART_CLOCK=3D24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=3Dy
-> +CONFIG_SPL_SPI=3Dy
-> =C2=A0CONFIG_SYS_LOAD_ADDR=3D0x800800
-> =C2=A0CONFIG_PCI=3Dy
-> =C2=A0CONFIG_DEBUG_UART=3Dy
-> +CONFIG_AHCI=3Dy
-> =C2=A0# CONFIG_ANDROID_BOOT_IMAGE is not set
-> =C2=A0CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3399-rock-4se.dtb"
-> =C2=A0CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
-> -CONFIG_SPL_MAX_SIZE=3D0x2e000
-> +CONFIG_SPL_MAX_SIZE=3D0x40000
-> =C2=A0CONFIG_SPL_PAD_TO=3D0x7f8000
-> =C2=A0# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=3Dy
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=3D0xE0000
-> =C2=A0CONFIG_TPL=3Dy
-> =C2=A0CONFIG_CMD_BOOTZ=3Dy
-> =C2=A0CONFIG_CMD_NVEDIT_EFI=3Dy
-> @@ -36,14 +43,25 @@ CONFIG_SPL_OF_CONTROL=3Dy
-> =C2=A0CONFIG_OF_SPL_REMOVE_PROPS=3D"clock-names interrupt-parent assigned=
--clocks
-> assigned-clock-rates assigned-clock-parents"
-> =C2=A0CONFIG_ENV_IS_IN_MMC=3Dy
-> =C2=A0CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
-> +CONFIG_SCSI_AHCI=3Dy
-> +CONFIG_AHCI_PCI=3Dy
-> =C2=A0CONFIG_DFU_MMC=3Dy
-> =C2=A0CONFIG_ROCKCHIP_GPIO=3Dy
-> =C2=A0CONFIG_SYS_I2C_ROCKCHIP=3Dy
-> +CONFIG_ROCKCHIP_IODOMAIN=3Dy
-> =C2=A0CONFIG_MMC_DW=3Dy
-> =C2=A0CONFIG_MMC_DW_ROCKCHIP=3Dy
-> =C2=A0CONFIG_MMC_SDHCI=3Dy
-> =C2=A0CONFIG_MMC_SDHCI_SDMA=3Dy
-> =C2=A0CONFIG_MMC_SDHCI_ROCKCHIP=3Dy
-> +CONFIG_SF_DEFAULT_BUS=3D1
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=3Dy
-> +CONFIG_SPI_FLASH_GIGADEVICE=3Dy
-> +CONFIG_SPI_FLASH_MACRONIX=3Dy
-> +CONFIG_SPI_FLASH_WINBOND=3Dy
-> +CONFIG_SPI_FLASH_XTX=3Dy
-> +CONFIG_PHY_REALTEK=3Dy
-> +CONFIG_DM_ETH_PHY=3Dy
-> =C2=A0CONFIG_ETH_DESIGNWARE=3Dy
-> =C2=A0CONFIG_GMAC_ROCKCHIP=3Dy
-> =C2=A0CONFIG_NVME_PCI=3Dy
-> @@ -54,9 +72,11 @@ CONFIG_REGULATOR_PWM=3Dy
-> =C2=A0CONFIG_REGULATOR_RK8XX=3Dy
-> =C2=A0CONFIG_PWM_ROCKCHIP=3Dy
-> =C2=A0CONFIG_RAM_ROCKCHIP_LPDDR4=3Dy
-> +CONFIG_SCSI=3Dy
-> =C2=A0CONFIG_BAUDRATE=3D1500000
-> =C2=A0CONFIG_DEBUG_UART_SHIFT=3D2
-> =C2=A0CONFIG_SYS_NS16550_MEM32=3Dy
-> +CONFIG_ROCKCHIP_SPI=3Dy
-> =C2=A0CONFIG_SYSRESET=3Dy
-> =C2=A0CONFIG_USB=3Dy
-> =C2=A0CONFIG_USB_XHCI_HCD=3Dy
-> @@ -77,7 +97,6 @@ CONFIG_VIDEO=3Dy
-> =C2=A0CONFIG_DISPLAY=3Dy
-> =C2=A0CONFIG_VIDEO_ROCKCHIP=3Dy
-> =C2=A0CONFIG_DISPLAY_ROCKCHIP_HDMI=3Dy
-> -CONFIG_SPL_TINY_MEMSET=3Dy
-> =C2=A0CONFIG_ERRNO_STR=3Dy
-> =C2=A0CONFIG_EFI_CAPSULE_ON_DISK=3Dy
-> =C2=A0CONFIG_EFI_CAPSULE_FIRMWARE_RAW=3Dy
-> diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-
-> rk3399_defconfig
-> index e5a2bba8e7ff..d474d91053c1 100644
-> --- a/configs/rock-pi-4-rk3399_defconfig
-> +++ b/configs/rock-pi-4-rk3399_defconfig
-> @@ -17,6 +17,7 @@ CONFIG_SPL_SPI=3Dy
-> =C2=A0CONFIG_SYS_LOAD_ADDR=3D0x800800
-> =C2=A0CONFIG_PCI=3Dy
-> =C2=A0CONFIG_DEBUG_UART=3Dy
-> +CONFIG_AHCI=3Dy
-> =C2=A0# CONFIG_ANDROID_BOOT_IMAGE is not set
-> =C2=A0CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3399-rock-pi-4a.dtb"
-> =C2=A0CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
-> @@ -43,6 +44,8 @@ CONFIG_SPL_OF_CONTROL=3Dy
-> =C2=A0CONFIG_OF_SPL_REMOVE_PROPS=3D"clock-names interrupt-parent assigned=
--clocks
-> assigned-clock-rates assigned-clock-parents"
-> =C2=A0CONFIG_ENV_IS_IN_MMC=3Dy
-> =C2=A0CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
-> +CONFIG_SCSI_AHCI=3Dy
-> +CONFIG_AHCI_PCI=3Dy
-> =C2=A0CONFIG_DFU_MMC=3Dy
-> =C2=A0CONFIG_ROCKCHIP_GPIO=3Dy
-> =C2=A0CONFIG_SYS_I2C_ROCKCHIP=3Dy
-> @@ -54,8 +57,12 @@ CONFIG_MMC_SDHCI_SDMA=3Dy
-> =C2=A0CONFIG_MMC_SDHCI_ROCKCHIP=3Dy
-> =C2=A0CONFIG_SF_DEFAULT_BUS=3D1
-> =C2=A0CONFIG_SPI_FLASH_SFDP_SUPPORT=3Dy
-> +CONFIG_SPI_FLASH_GIGADEVICE=3Dy
-> +CONFIG_SPI_FLASH_MACRONIX=3Dy
-> =C2=A0CONFIG_SPI_FLASH_WINBOND=3Dy
-> =C2=A0CONFIG_SPI_FLASH_XTX=3Dy
-> +CONFIG_PHY_REALTEK=3Dy
-> +CONFIG_DM_ETH_PHY=3Dy
-> =C2=A0CONFIG_ETH_DESIGNWARE=3Dy
-> =C2=A0CONFIG_GMAC_ROCKCHIP=3Dy
-> =C2=A0CONFIG_NVME_PCI=3Dy
-> @@ -66,6 +73,7 @@ CONFIG_REGULATOR_PWM=3Dy
-> =C2=A0CONFIG_REGULATOR_RK8XX=3Dy
-> =C2=A0CONFIG_PWM_ROCKCHIP=3Dy
-> =C2=A0CONFIG_RAM_ROCKCHIP_LPDDR4=3Dy
-> +CONFIG_SCSI=3Dy
-> =C2=A0CONFIG_BAUDRATE=3D1500000
-> =C2=A0CONFIG_DEBUG_UART_SHIFT=3D2
-> =C2=A0CONFIG_SYS_NS16550_MEM32=3Dy
-> diff --git a/configs/rock-pi-4c-rk3399_defconfig b/configs/rock-pi-4c-
-> rk3399_defconfig
-> index 4a9d1c531c10..50c6755246f2 100644
-> --- a/configs/rock-pi-4c-rk3399_defconfig
-> +++ b/configs/rock-pi-4c-rk3399_defconfig
-> @@ -3,22 +3,29 @@ CONFIG_SKIP_LOWLEVEL_INIT=3Dy
-> =C2=A0CONFIG_COUNTER_FREQUENCY=3D24000000
-> =C2=A0CONFIG_ARCH_ROCKCHIP=3Dy
-> =C2=A0CONFIG_NR_DRAM_BANKS=3D1
-> +CONFIG_SF_DEFAULT_SPEED=3D10000000
-> =C2=A0CONFIG_ENV_OFFSET=3D0x3F8000
-> =C2=A0CONFIG_DEFAULT_DEVICE_TREE=3D"rk3399-rock-pi-4c"
-> =C2=A0CONFIG_DM_RESET=3Dy
-> =C2=A0CONFIG_ROCKCHIP_RK3399=3Dy
-> +CONFIG_ROCKCHIP_SPI_IMAGE=3Dy
-> =C2=A0CONFIG_TARGET_ROCKPI4_RK3399=3Dy
-> =C2=A0CONFIG_DEBUG_UART_BASE=3D0xFF1A0000
-> =C2=A0CONFIG_DEBUG_UART_CLOCK=3D24000000
-> +CONFIG_SPL_SPI_FLASH_SUPPORT=3Dy
-> +CONFIG_SPL_SPI=3Dy
-> =C2=A0CONFIG_SYS_LOAD_ADDR=3D0x800800
-> =C2=A0CONFIG_PCI=3Dy
-> =C2=A0CONFIG_DEBUG_UART=3Dy
-> +CONFIG_AHCI=3Dy
-> =C2=A0# CONFIG_ANDROID_BOOT_IMAGE is not set
-> =C2=A0CONFIG_DEFAULT_FDT_FILE=3D"rockchip/rk3399-rock-pi-4c.dtb"
-> =C2=A0CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
-> -CONFIG_SPL_MAX_SIZE=3D0x2e000
-> +CONFIG_SPL_MAX_SIZE=3D0x40000
-> =C2=A0CONFIG_SPL_PAD_TO=3D0x7f8000
-> =C2=A0# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_SPI_LOAD=3Dy
-> +CONFIG_SYS_SPI_U_BOOT_OFFS=3D0xE0000
-> =C2=A0CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
-> =C2=A0CONFIG_TPL=3Dy
-> =C2=A0CONFIG_CMD_BOOTZ=3Dy
-> @@ -37,13 +44,25 @@ CONFIG_SPL_OF_CONTROL=3Dy
-> =C2=A0CONFIG_OF_SPL_REMOVE_PROPS=3D"clock-names interrupt-parent assigned=
--clocks
-> assigned-clock-rates assigned-clock-parents"
-> =C2=A0CONFIG_ENV_IS_IN_MMC=3Dy
-> =C2=A0CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
-> +CONFIG_SCSI_AHCI=3Dy
-> +CONFIG_AHCI_PCI=3Dy
-> =C2=A0CONFIG_DFU_MMC=3Dy
-> =C2=A0CONFIG_ROCKCHIP_GPIO=3Dy
-> =C2=A0CONFIG_SYS_I2C_ROCKCHIP=3Dy
-> +CONFIG_ROCKCHIP_IODOMAIN=3Dy
-> =C2=A0CONFIG_MMC_DW=3Dy
-> =C2=A0CONFIG_MMC_DW_ROCKCHIP=3Dy
-> =C2=A0CONFIG_MMC_SDHCI=3Dy
-> +CONFIG_MMC_SDHCI_SDMA=3Dy
-> =C2=A0CONFIG_MMC_SDHCI_ROCKCHIP=3Dy
-> +CONFIG_SF_DEFAULT_BUS=3D1
-> +CONFIG_SPI_FLASH_SFDP_SUPPORT=3Dy
-> +CONFIG_SPI_FLASH_GIGADEVICE=3Dy
-> +CONFIG_SPI_FLASH_MACRONIX=3Dy
-> +CONFIG_SPI_FLASH_WINBOND=3Dy
-> +CONFIG_SPI_FLASH_XTX=3Dy
-> +CONFIG_PHY_REALTEK=3Dy
-> +CONFIG_DM_ETH_PHY=3Dy
-> =C2=A0CONFIG_ETH_DESIGNWARE=3Dy
-> =C2=A0CONFIG_GMAC_ROCKCHIP=3Dy
-> =C2=A0CONFIG_NVME_PCI=3Dy
-> @@ -54,9 +73,11 @@ CONFIG_REGULATOR_PWM=3Dy
-> =C2=A0CONFIG_REGULATOR_RK8XX=3Dy
-> =C2=A0CONFIG_PWM_ROCKCHIP=3Dy
-> =C2=A0CONFIG_RAM_ROCKCHIP_LPDDR4=3Dy
-> +CONFIG_SCSI=3Dy
-> =C2=A0CONFIG_BAUDRATE=3D1500000
-> =C2=A0CONFIG_DEBUG_UART_SHIFT=3D2
-> =C2=A0CONFIG_SYS_NS16550_MEM32=3Dy
-> +CONFIG_ROCKCHIP_SPI=3Dy
-> =C2=A0CONFIG_SYSRESET=3Dy
-> =C2=A0CONFIG_USB=3Dy
-> =C2=A0CONFIG_USB_XHCI_HCD=3Dy
-> @@ -77,7 +98,6 @@ CONFIG_VIDEO=3Dy
-> =C2=A0CONFIG_DISPLAY=3Dy
-> =C2=A0CONFIG_VIDEO_ROCKCHIP=3Dy
-> =C2=A0CONFIG_DISPLAY_ROCKCHIP_HDMI=3Dy
-> -CONFIG_SPL_TINY_MEMSET=3Dy
-> =C2=A0CONFIG_ERRNO_STR=3Dy
-> =C2=A0CONFIG_EFI_CAPSULE_ON_DISK=3Dy
-> =C2=A0CONFIG_EFI_CAPSULE_FIRMWARE_RAW=3Dy
+>  drivers/mmc/mmc.c | 13 +++++++++++--
+>  1 file changed, 11 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+> index d96db7a0f8..00f4964aae 100644
+> --- a/drivers/mmc/mmc.c
+> +++ b/drivers/mmc/mmc.c
+> @@ -1570,13 +1570,20 @@ static int sd_read_ssr(struct mmc *mmc)
+>  	return 0;
+>  }
+>  #endif
+> -/* frequency bases */
+> -/* divided by 10 to be nice to platforms without floating point */
+> +/*
+> + * TRAN_SPEED bits 0:2 encode the frequency unit:
+> + * 0 = 100KHz, 1 = 1MHz, 2 = 10MHz, 3 = 100MHz, values 4 - 7 are reserved.
+> + * The values in fbase[] are divided by 10 to avoid floats in multiplier[].
+> + */
+>  static const int fbase[] = {
+>  	10000,
+>  	100000,
+>  	1000000,
+>  	10000000,
+> +	0,	/* reserved */
+> +	0,	/* reserved */
+> +	0,	/* reserved */
+> +	0,	/* reserved */
+>  };
+>  
+>  /* Multiplier values for TRAN_SPEED.  Multiplied by 10 to be nice
+> @@ -2560,6 +2567,8 @@ static int mmc_startup(struct mmc *mmc)
+>  	mult = multipliers[((cmd.response[0] >> 3) & 0xf)];
+>  
+>  	mmc->legacy_speed = freq * mult;
+> +	if (!mmc->legacy_speed)
+> +		log_debug("TRAN_SPEED: reserved value");
+>  	mmc_select_mode(mmc, MMC_LEGACY);
+>  
+>  	mmc->dsr_imp = ((cmd.response[1] >> 12) & 0x1);
+
