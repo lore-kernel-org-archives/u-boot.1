@@ -4,105 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5383C6FD1F
-	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 08:58:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ACC0CD1284
+	for <u-boot@archiver.kernel.org>; Tue,  2 Apr 2024 09:07:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D1298803F;
-	Tue,  2 Apr 2024 10:58:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
+	by phobos.denx.de (Postfix) with ESMTP id 442B0880F4;
+	Tue,  2 Apr 2024 11:07:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="xUMedfTN";
-	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="QAFhLlt5";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hmCKCVAw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C23BF87FDA; Tue,  2 Apr 2024 10:58:30 +0200 (CEST)
-Received: from smtp-out1.suse.de (smtp-out1.suse.de [195.135.223.130])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6492A88327; Tue,  2 Apr 2024 11:07:20 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCB228803F
- for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 10:58:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34D3387FDA
+ for <u-boot@lists.denx.de>; Tue,  2 Apr 2024 11:07:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=suse.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=iivanov@suse.de
-Received: from imap2.dmz-prg2.suse.org (imap2.dmz-prg2.suse.org [10.150.64.98])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 56D90344A3;
- Tue,  2 Apr 2024 08:58:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
- t=1712048308; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zPekTSsqKbOOUYd7W01+StsjbXrhxyZVbWO8hjsLTjM=;
- b=xUMedfTNuREx6tMGBTf6fBNUqFyx5bO6yIFebiZhFAnqrIoKmYoaXbbmQzCV/U4DD1pnBm
- wxW1wHGIoNE+KgYlKQWqBa2qFcdX44VSIEMj0acT1OImOY/7ZN6ZG2AUAcribsW2Ynu9ZX
- bPkGV1f7PAMaL+8Ojiw9V+LCuFt9jdA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
- s=susede2_ed25519; t=1712048308;
- h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
- mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=zPekTSsqKbOOUYd7W01+StsjbXrhxyZVbWO8hjsLTjM=;
- b=QAFhLlt5MWXVIqQHgq/bryRDMWVaLAdQpbBEUMkyEko8mVtpmxrIvW56SHP/OyTPLBNWFp
- yFLB05NxdETX6iAA==
-Authentication-Results: smtp-out1.suse.de;
-	none
-Received: from imap2.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap2.dmz-prg2.suse.org (Postfix) with ESMTPS id 4B66E13357;
- Tue,  2 Apr 2024 08:58:28 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap2.dmz-prg2.suse.org with ESMTPSA id UYtQErTIC2bOcQAAn2gu4w
- (envelope-from <iivanov@suse.de>); Tue, 02 Apr 2024 08:58:28 +0000
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-33e9115d501so2173023f8f.0
+ for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 02:07:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1712048838; x=1712653638; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cz4IFU5UDpAClZ0E4VZu8ESCJQeLoWbrfZfgCZ+4piw=;
+ b=hmCKCVAwmRJNcvaKjuxUne0sscvj3ylrfAXPMIT0KcTFLSzheVwg16eeY6K0OiZkLD
+ 8mxdfijrE6/QwtDS9/XiMf79Ow0g0hZ8H2CkvBNzdfTQi5MaEONJmgqrmI4/XOj8xgMf
+ yRuvrL0o8IXxxw9us9qV3Irf01f9cHs9jY7fPaQfQHPJHyNIMbZUI8+8pr9phNsfZgIk
+ 1e0+yeFxujYWOXNpF4xD0JqWJmPryZzrLzSGu7R8TuTA/XK6Mm9CYFLBRKPvK8N47mC2
+ e8n1b7q0q4ffXCFgSkh85kltCxJokgoEgbdYH2ES303acYJZQunDAWZsYaZynlcHqSLy
+ a+bw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712048838; x=1712653638;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cz4IFU5UDpAClZ0E4VZu8ESCJQeLoWbrfZfgCZ+4piw=;
+ b=MyTvWYcL08DI0tUZbpizKBzlxEaMJH9Fz6H8czOoJh338S1DK6pGQKhx3N42fYneQZ
+ OQ17IdL401Bx14P3YPmPYHrP0ZPy6XIS2BcH7pXPAp8iZx8rseKC6/DdOiiAExtmfzUx
+ KhXVWm4VByYXbRzPxYgTrVJaOt1f8iIm5+9ZZKfSzOoFmleg/KYsjQtrvgp5vrmfGeCG
+ M6b87fqUIna0afHY2ssWOU8+KNcYJpYA9U0e82VbrslSMJkxhaY1pAGXbr17gUF09gjv
+ wgGias4p9EtIBS/RAJ2MigUjUx2iyo2EDZGYMyMM85E9CF1ImxLbM/r5tL0f7ctatmog
+ PMgg==
+X-Gm-Message-State: AOJu0Yz/M4l3K2b2+IMeQAsd6kl1RXcbeMJvZCDdsA86KtC+p5MBsiF+
+ ggzjqC1GoC427F1KLqQ3tiuxqqh7RtBEW0lRwK3ak+fjXx1UhmbXolq7YdSu17CPRLJe3x7oE7U
+ N5XxjgD5mVEvqWfuc1mpVfTv9P98=
+X-Google-Smtp-Source: AGHT+IEds34nr6vuvcceKAwz+cnxGgqvvdWXHMRlGG2zh+3cqNRgHFqwkBBbHjkFjc94rhgfHUHv827y9pHlN1T3tgM=
+X-Received: by 2002:adf:ecce:0:b0:341:90a1:3e09 with SMTP id
+ s14-20020adfecce000000b0034190a13e09mr7058498wro.1.1712048837205; Tue, 02 Apr
+ 2024 02:07:17 -0700 (PDT)
 MIME-Version: 1.0
-Date: Tue, 02 Apr 2024 11:58:28 +0300
-From: "Ivan T. Ivanov" <iivanov@suse.de>
-To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-Cc: Stefan Wahren <wahrenst@gmx.net>, Peter Robinson <pbrobinson@gmail.com>,
- Dave Stevenson <dave.stevenson@raspberrypi.com>, Naushir Patuck
- <naush@raspberrypi.com>, Bartosz Golaszewski <brgl@bgdev.pl>, Broadcom
- internal kernel review list <bcm-kernel-feedback-list@broadcom.com>, Conor
- Dooley <conor+dt@kernel.org>, Florian Fainelli
- <florian.fainelli@broadcom.com>, Krzysztof Kozlowski
- <krzysztof.kozlowski+dt@linaro.org>, Linus Walleij
- <linus.walleij@linaro.org>, Nicolas Saenz Julienne <nsaenz@kernel.org>, Ray
- Jui <rjui@broadcom.com>, Rob Herring <robh@kernel.org>, Scott Branden
- <sbranden@broadcom.com>, linux-arm-kernel@lists.infradead.org,
- devicetree@vger.kernel.org, linux-rpi-kernel@lists.infradead.org,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v2 0/3] dt-bindings: arm: bcm:
- raspberrypi,bcm2835-firmware: Drive-by fixes
-In-Reply-To: <20240327233700.GA21080@pendragon.ideasonboard.com>
-References: <20240326195807.15163-1-laurent.pinchart@ideasonboard.com>
- <b044eec1-ae64-4de7-9ab0-e3fe756131ef@gmx.net>
- <20240327233700.GA21080@pendragon.ideasonboard.com>
-User-Agent: Roundcube Webmail
-Message-ID: <bcf8093ab0ea6f3738bf4a4623de700a@suse.de>
-X-Sender: iivanov@suse.de
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-1.79 / 50.00]; BAYES_HAM(-3.00)[100.00%];
- SUSPICIOUS_RECIPS(1.50)[]; NEURAL_HAM_SHORT(-0.20)[-1.000];
- MIME_GOOD(-0.10)[text/plain]; XM_UA_NO_VERSION(0.01)[];
- TO_MATCH_ENVRCPT_ALL(0.00)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
- DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
- MIME_TRACE(0.00)[0:+]; ARC_NA(0.00)[];
- RCPT_COUNT_TWELVE(0.00)[19];
- FREEMAIL_ENVRCPT(0.00)[gmail.com,gmx.net];
- FREEMAIL_CC(0.00)[gmx.net,gmail.com,raspberrypi.com,bgdev.pl,broadcom.com,kernel.org,linaro.org,lists.infradead.org,vger.kernel.org,lists.denx.de];
- RCVD_TLS_ALL(0.00)[]; FROM_EQ_ENVFROM(0.00)[];
- FROM_HAS_DN(0.00)[]; TO_DN_SOME(0.00)[];
- RCVD_COUNT_TWO(0.00)[2]; TAGGED_RCPT(0.00)[dt];
- MID_RHS_MATCH_FROM(0.00)[]; RCVD_VIA_SMTP_AUTH(0.00)[];
- DBL_BLOCKED_OPENRESOLVER(0.00)[imap2.dmz-prg2.suse.org:rdns,
- imap2.dmz-prg2.suse.org:helo]
+References: <20240402014035.8169-1-dennis@ausil.us>
+In-Reply-To: <20240402014035.8169-1-dennis@ausil.us>
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+Date: Tue, 2 Apr 2024 11:07:05 +0200
+Message-ID: <CAByghJZ0+gV6b3-OTOx4=a3fUe27GsaTDXWxVPLxAYDstROAOw@mail.gmail.com>
+Subject: Re: [PATCH] mvebu: Enable preboot start for pci/usb/scsi/nvme
+To: Dennis Gilmore <dennis@ausil.us>
+Cc: u-boot@lists.denx.de, Konstantin Porotchkin <kostap@marvell.com>, 
+ Algapally Santosh Sagar <santoshsagar.algapally@amd.com>, 
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,47 +91,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Dennis,
 
-Hi,
+On Tue, Apr 2, 2024 at 3:40=E2=80=AFAM Dennis Gilmore <dennis@ausil.us> wro=
+te:
 
-On 2024-03-28 01:37, Laurent Pinchart wrote:
-> On Wed, Mar 27, 2024 at 07:49:38AM +0100, Stefan Wahren wrote:
->> Hi,
->> 
->> [add Peter and Ivan]
->> 
->> Am 26.03.24 um 20:58 schrieb Laurent Pinchart:
->> > Hello,
->> >
->> > This small series includes a few drive-by fixes for DT validation
->> > errors.
->> >
->> > The first patch has been posted previously in v1 ([1], and now addresses
->> > a small review comment. I think it's good to go.
->> >
->> > The next two patches address the same issue as "[PATCH 1/2] dt-bindings:
->> > arm: bcm: raspberrypi,bcm2835-firmware: Add missing properties" ([2]),
->> > but this time with a (hopefully) correct approach. Patch 2/3 starts by
->> > fixing the raspberrypi-bcm2835-firmware driver, removing the need for DT
->> > properties that are specified in bcm2835-rpi.dtsi but not documented in
->> > the corresponding bindings. Patch 3/3 can then drop those properties,
->> > getting rid of the warnings.
->> 
->> since this series drops properties from the device tree, does anyone
->> have the chance to test it with a recent U-Boot?
-> 
-> I don't have U-Boot running with my RPi, so I would appreciate if
-> someone could help :-)
+> While preboot was enabled, it did not work as commands are needed to be
+> run to enable some of the subsystems. This patch starts pci, USB, Sata,
+> and nvme and makes sure that the system will boot no mater what storage
+> is in use.
+>
+> Applogies for resending, I accidently left the u-boot list off
+>
+> Signed-off-by: Dennis Gilmore <dennis@ausil.us>
+> ---
+>  configs/mvebu_espressobin-88f3720_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/configs/mvebu_espressobin-88f3720_defconfig
+> b/configs/mvebu_espressobin-88f3720_defconfig
+> index 7ecf5ab0d64..f4f7a809609 100644
+> --- a/configs/mvebu_espressobin-88f3720_defconfig
+> +++ b/configs/mvebu_espressobin-88f3720_defconfig
+> @@ -21,6 +21,7 @@ CONFIG_AHCI=3Dy
+>  CONFIG_DISTRO_DEFAULTS=3Dy
+>  CONFIG_OF_BOARD_SETUP=3Dy
+>  CONFIG_USE_PREBOOT=3Dy
+> +CONFIG_PREBOOT=3D"pci enum; usb start; nvme scan; scsi scan;"
+>  CONFIG_SYS_CONSOLE_INFO_QUIET=3Dy
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  # CONFIG_DISPLAY_BOARDINFO is not set
+> --
+> 2.44.0
+>
+> The issue is in a different place. This board uses distroboot
+approach (based on what I see in [1]), which is supposed to automatically
+initialize boot media before trying to boot from it [2].
+Initialization of media is forced when the CONFIG_<subsystem> symbol is
+enabled, for example CONFIG_NVMEM=3Dy (check BOOTENV_SET_NVME_NEED_INIT
+define in [2]). In your final board config "# CONFIG_NVMEM is not set"
+though.
 
-Sorry for taking me so long to verify this.
+IMO, with your proposed fix you'll drastically increase boot time
+(by probing all buses regardless of what boot media is going to be used
+next),
+and hide side effects of misconfiguration.
 
-I think on RPi U-Boot side we are fine. API used when accessing Mbox
-device do not follow DM model and do not use DMA, but just access
-device directly using this nice macros phys_to_bus/bus_to_phys.
-
-I build new DTB files with this patch included and U-Boot build
-from the latest sources. No obvious issues on RPi3 and RPi4.
-Devices boot fine.
+Hope that helps
 
 Regards,
-Ivan
+Igor
+
+[1] include/configs/mvebu_armada-37xx.h
+[2] include/config_distro_bootcmd.h
+
+--=20
+Best regards - Atentamente - Meilleures salutations
+
+Igor Opaniuk
+
+mailto: igor.opaniuk@gmail.com
+skype: igor.opanyuk
+https://www.linkedin.com/in/iopaniuk <http://ua.linkedin.com/in/iopaniuk>
