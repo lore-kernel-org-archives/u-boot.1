@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19F65CD1288
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 04:46:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA817CD1288
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 04:48:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E00B881A7;
-	Wed,  3 Apr 2024 06:46:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 226E3881D3;
+	Wed,  3 Apr 2024 06:48:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HjpfL4JY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QKeFeEuw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07785881D4; Wed,  3 Apr 2024 06:46:00 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id 89F00881DC; Wed,  3 Apr 2024 06:48:06 +0200 (CEST)
+Received: from mail-ua1-x92a.google.com (mail-ua1-x92a.google.com
+ [IPv6:2607:f8b0:4864:20::92a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2431487A4B
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 06:45:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EDE5881D3
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 06:48:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-56d5d4d2e2bso3871447a12.3
- for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 21:45:58 -0700 (PDT)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92a.google.com with SMTP id
+ a1e0cc1a2514c-7e3cc62a78aso82570241.0
+ for <u-boot@lists.denx.de>; Tue, 02 Apr 2024 21:48:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712119557; x=1712724357; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712119683; x=1712724483; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hbLLMYGTnT82sVFGQlHP5JiIWoxFi33XbH38JWMdPQw=;
- b=HjpfL4JY3Wws69Y07eeoa1t4vVkfgPYY0SJQB+JdfZ5L5ERuI2+0GJvcCp75fwujne
- Q647FnlODQeDLKo9uBtuzu+6qM6xxDf5po4rmvgw5V5Fx7Tp4HzajhuMDyiuZKzAkf7p
- GbnVvBEGFohQCbAqkweeBuz/fXJ36kNW9aGTP6qSVIo2yYfcvxcZUL1KveQDfdlH/zdJ
- f5say8GSN3nehRsJFYTZMUCJvEhjYnyCPaRBLFyybkdi3F/pSzaNQIWZG4y5IDaWuouu
- /sXwj9TOFOH5ATSAcfY0KcFDqPFJ3n7xHZWvVSejTUOuZ+sINrBtU8BTDN32kP+f1nfA
- cSAw==
+ bh=Fe3uoxiJ718LVZYHqUKWO3mmfORWoIjg2z6XWP1ZnSU=;
+ b=QKeFeEuwLxaNJARL9/iz9CWu6jkto1GwS5cKFfa1y+H6TFz+R2LD1bbJFCBQgXIKs5
+ 6QmDjLPxqZDBu70NChyBjrqsTQi2NK24UQLhuNNHY+XzV4Hs0B9V9QbG4JcluCBQxxTY
+ TCihp96ISOgEjYT2Z8SF26zIGJZf7jcPJ0miPbt90ILDYnznE4MJCr87IPQZi++0fl1Q
+ 0Gc4tPB5+Crsj7pTUnakM3HgDkYqyABc2HZn7a4f8DtWRrb0jneWZHfeNw3FJrSUyHJo
+ ubmBp04SKpczZmKPkdIqBU01+cRbi0De2xa6Lh14pnCL5wlBYwnqBhCEOcImCS+rH6+6
+ FrKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712119557; x=1712724357;
+ d=1e100.net; s=20230601; t=1712119683; x=1712724483;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hbLLMYGTnT82sVFGQlHP5JiIWoxFi33XbH38JWMdPQw=;
- b=rYYA4inEQ752qwknp8OOuWowFjXm+A1cn+mx4HWyjJ/KVVeNu5azA36aAEIUtBLHs6
- u0h/6vzStE/eRDcNCOfAwoHsKxj+GoSh83A71LnQyiSl5vz7EBiRyEoBPEH/xs2s70YD
- RS9JutOGx9XTKkRifefgWW9NMF5lotnwTIEX26SuFKlCd/Xka8551vfCGpwkRVpayxD+
- c1QMMLNKtLvC3De9cGdRkiYDiRGRuoNM0hJZDEsYGmYxfcbuYbSr5OPm1Z1B9A3OJFZk
- V5Rm2IfRDO3fR0ddc8gt0XkbKfifZO0aT1mo41y+/nvpaKNyf+v6Ko2a6hqOWJwT6Q8A
- PUEg==
+ bh=Fe3uoxiJ718LVZYHqUKWO3mmfORWoIjg2z6XWP1ZnSU=;
+ b=JoSKMTBF88UAz45VQvpsImrNX+PTbyrgxjAydeJV0AMbbX7sm0fkyazc8f59UzTRA7
+ fNyfrQSl/PY8dA/Yl1UrhCJx1j8N8Re8b6YmT8E5QATQ3iBqQNRVQg1g3cNMiuhxkaeh
+ tqCIxz/LPzJUeaX+vhwckC+C8CVsVhrVh9izw6JJmDLza85xJ9kX1fKp+doOsbCIKwXU
+ lDLaiGXuRjrVqOQmyxWh1w4P489Ip/TfeGxztO+UCNjcPo7bh7l4jHMtEtZc3Hf2M6zk
+ p5DpmpP0nwatAEFMSNwIr4L6IA/uSK74cjH4zKq4rBv+d1DhY79Dw1WyFu/BajF3vKUV
+ igPw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV6dbytkDWLs1cTXA7E1qatJfpFN7LRNVfUz4MVmTzOe3q7qNep5j+2uBQh7pJsaOBrpxIY6bJyTbjehN/dvzKj0JPrDw==
-X-Gm-Message-State: AOJu0YyBuAXbh5/0zcAtlCqEgn8pFDwk9F7KXlUNnrgoAbyybL7daqkv
- NnwHz61tHgVSDiBYJ8FQ3mz4EMr31tiExpvTz/L0k4sfABR67Bwxhc1is7CelnWjEtsXPlHuiYo
- T8N5u+0NCDphTcBliC1+N2Md6+QU=
-X-Google-Smtp-Source: AGHT+IFoYbmkpH7E49ww+u6qRDqnWSdI6Y4pQXI8gwPRpb2G7NyE5qHihZaIMtZa3VivBQW/DDuvLQ3Vw5kF2Vii6VM=
-X-Received: by 2002:a50:d7d9:0:b0:568:180a:284b with SMTP id
- m25-20020a50d7d9000000b00568180a284bmr7324911edj.37.1712119557462; Tue, 02
- Apr 2024 21:45:57 -0700 (PDT)
+ AJvYcCURxPliZdtSE7BPgO4D2DzxzgxjKSEAvETddqZn47zPaBqepeAtc4E8bF3MY9NEJC5rxwCabY4JKo9w3stjxGddCoTEWQ==
+X-Gm-Message-State: AOJu0Yx9S31TrsZ2abQEFQGurG6XCBUCyUS/VrDb1btye41YtMo0f81g
+ Cp510zQHuNWQm3p9BKKV8LtSqM43Tke97zIRSz0WuId6QjHpKCpq068lZI/OL8DSFI3SBHK5309
+ bA5ayKxSfPoj8qwNDRQ5YoM0mQfeAmM2o2Lxnqw==
+X-Google-Smtp-Source: AGHT+IFLlc2fjqAY74L+MVYbt70gb1rfY6SotEy2GMJmxgwNAGNH1qPNg6+4j3wGb+72cURNj8iLqhxPvqtOFamEH5A=
+X-Received: by 2002:a05:6102:3b85:b0:478:763d:857b with SMTP id
+ z5-20020a0561023b8500b00478763d857bmr7914504vsu.5.1712119683127; Tue, 02 Apr
+ 2024 21:48:03 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240331202921.262323-1-jonas@kwiboo.se>
- <20240331202921.262323-3-jonas@kwiboo.se>
-In-Reply-To: <20240331202921.262323-3-jonas@kwiboo.se>
-From: Peter Robinson <pbrobinson@gmail.com>
-Date: Wed, 3 Apr 2024 04:45:46 +0000
-Message-ID: <CALeDE9O=x4eO9YoiDUG9oFocDcEyyo+NysdZV2NdgDGKCL-8vw@mail.gmail.com>
-Subject: Re: [PATCH 02/31] rockchip: rk3399-ficus: Enable TPL and use common
- bss and stack addr
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, 
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>, u-boot@lists.denx.de
+References: <20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org>
+ <20240328-b4-qcom-livetree-v5-3-4e98228b3d03@linaro.org>
+ <CAFA6WYO=_2NQckqt11b81GPZXGE13Uw9hCkO6S+F6b3ve2nDBA@mail.gmail.com>
+ <e1ce6d8f-20f5-47af-84a3-d100f96c1b31@linaro.org>
+In-Reply-To: <e1ce6d8f-20f5-47af-84a3-d100f96c1b31@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Wed, 3 Apr 2024 10:17:52 +0530
+Message-ID: <CAFA6WYOqvQ5Ybu2jdPmLiv42DHtYs0XJv8NVEHWKLtvwCs3HQA@mail.gmail.com>
+Subject: Re: [PATCH v5 03/16] phy: qcom: Add SNPS femto v2 USB HS phy
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,66 +92,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 31 Mar 2024 at 21:30, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Tue, 2 Apr 2024 at 15:37, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> The rk3399-ficus board is only using SPL and not TPL+SPL like all other
-> RK3399 boards, chromebook bob/kevin excluded. It does not seem to be any
-> technical reason why this board was left using only SPL.
+> Hi Sumit,
 >
-> Switch to use TPL+SPL and use common bss and stack addresses to allow
-> for more options to be enabled in a future patch. Also add the missing
-> DEFAULT_FDT_FILE option.
+> On 01/04/2024 06:46, Sumit Garg wrote:
+> > On Thu, 28 Mar 2024 at 23:29, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> >>
+> >> From: Bhupesh Sharma <bhupesh.linux@gmail.com>
+> >>
+> >> Some Qualcomm SoCs newer than SDM845 feature a so-called "7nm phy"
+> >> driver, notable the SM8250 SoC which will gain U-Boot support in
+> >> upcoming patches.
+> >>
+> >> Introduce a driver based on the Linux driver.
+> >>
+> >> Signed-off-by: Bhupesh Sharma <bhupesh.sharma@linaro.org>
+> >> [code cleanup, align symbol names with Linux, switch to clk/reset_bulk APIs]
+> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> >> ---
+> >>   drivers/phy/qcom/Kconfig                  |   8 ++
+> >>   drivers/phy/qcom/Makefile                 |   1 +
+> >>   drivers/phy/qcom/phy-qcom-snps-femto-v2.c | 207 ++++++++++++++++++++++++++++++
+> >>   3 files changed, 216 insertions(+)
+> >>
+> ...
+> >> diff --git a/drivers/phy/qcom/phy-qcom-snps-femto-v2.c b/drivers/phy/qcom/phy-qcom-snps-femto-v2.c
+> >> new file mode 100644
+> >> index 000000000000..58eb01972402
+> >> --- /dev/null
+> >> +++ b/drivers/phy/qcom/phy-qcom-snps-femto-v2.c
+> ...
+> >> +static inline void qcom_snps_hsphy_write_mask(void __iomem *base, u32 offset,
+> >> +                                             u32 mask, u32 val)
+> >> +{
+> >> +       u32 reg;
+> >> +
+> >> +       reg = readl_relaxed(base + offset);
+> >> +
+> >> +       reg &= ~mask;
+> >> +       reg |= val & mask;
+> >> +       writel_relaxed(reg, base + offset);
+> >> +
+> >> +       /* Ensure above write is completed */
+> >> +       readl_relaxed(base + offset);
+> >
+> > It looks like you have missed addressing comments related to this API.
+> > Again, why do we need this special handling in U-Boot? Why not just
+> > clrsetbits_le32()?
 >
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
+> I have tried to find more info about this, but from what I can tell it's
+> important (my guess is that it's a weird bus arbitration thing with the
+> QMP phy's).
+>
+> If I replace this with clrsetbits_le32() then my SM8250 board crashdumps
+> while probing USB. So it is needed (and I'm wondering now if I ought to
+> switch back to this for the dwc3 qcom glue as well).
 
-I believe I have one of these if you need anything tested.
+Strange, probably it's due to some strict device memory ordering
+rules. If you can add some reasoning in comments for this API then
+feel free to add:
 
-P
+Acked-by: Sumit Garg <sumit.garg@linaro.org>
 
-> ---
->  configs/ficus-rk3399_defconfig | 14 ++------------
->  1 file changed, 2 insertions(+), 12 deletions(-)
->
-> diff --git a/configs/ficus-rk3399_defconfig b/configs/ficus-rk3399_defconfig
-> index 4859042d6b56..3bcd0fd66b91 100644
-> --- a/configs/ficus-rk3399_defconfig
-> +++ b/configs/ficus-rk3399_defconfig
-> @@ -2,32 +2,22 @@ CONFIG_ARM=y
->  CONFIG_SKIP_LOWLEVEL_INIT=y
->  CONFIG_COUNTER_FREQUENCY=24000000
->  CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_TEXT_BASE=0x00200000
-> -CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-> -CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x300000
->  CONFIG_SF_DEFAULT_SPEED=20000000
->  CONFIG_ENV_OFFSET=0x3F8000
->  CONFIG_DEFAULT_DEVICE_TREE="rk3399-ficus"
-> -CONFIG_SPL_TEXT_BASE=0xff8c2000
->  CONFIG_ROCKCHIP_RK3399=y
-> -CONFIG_ROCKCHIP_SPL_RESERVE_IRAM=0x4000
->  CONFIG_TARGET_ROCK960_RK3399=y
-> -CONFIG_SPL_STACK=0xff8effff
->  CONFIG_DEBUG_UART_BASE=0xFF1A0000
->  CONFIG_DEBUG_UART_CLOCK=24000000
->  CONFIG_SYS_LOAD_ADDR=0x800800
->  CONFIG_DEBUG_UART=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-ficus.dtb"
->  CONFIG_DISPLAY_BOARDINFO_LATE=y
->  CONFIG_SPL_MAX_SIZE=0x2e000
->  CONFIG_SPL_PAD_TO=0x7f8000
-> -CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-> -CONFIG_SPL_BSS_START_ADDR=0xff8e0000
-> -CONFIG_SPL_BSS_MAX_SIZE=0x10000
->  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> -# CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
-> -CONFIG_SPL_STACK_R=y
-> -CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x4000
->  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-> +CONFIG_TPL=y
->  CONFIG_CMD_BOOTZ=y
->  CONFIG_CMD_GPT=y
->  CONFIG_CMD_MMC=y
-> --
-> 2.43.2
->
+-Sumit
