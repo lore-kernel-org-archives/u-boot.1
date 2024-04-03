@@ -4,22 +4,22 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 993E3CD128A
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 13:59:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA711CD1288
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 13:59:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0DAA881E5;
-	Wed,  3 Apr 2024 15:59:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2FBE588388;
+	Wed,  3 Apr 2024 15:59:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="IqVQL81x";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="SqZhApjp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E58B881BE; Wed,  3 Apr 2024 15:59:21 +0200 (CEST)
+ id C5449881BE; Wed,  3 Apr 2024 15:59:21 +0200 (CEST)
 Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FC9A881F7
+ by phobos.denx.de (Postfix) with ESMTPS id 9858D88242
  for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 15:59:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=phytec.de
@@ -31,43 +31,47 @@ DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
  Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
  Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
  List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=h6JtQo4BtSnkYbu3H8Vs2PyS0NYhHSO8DtTTr8A8MGg=;
- b=IqVQL81x8TgFtv+Ru6ArJOx5s1RHACbivrexBCoAlxscSuSWbKQg60MeaTJwy9wP
- y6+eO99ffG2OcDIyCD6jFng9bXRsM+p+6j7SohDtTNMBU41jipnKTdUf8z+NiFEa
- IerAe8NrCgwjXCVmRRpJKriEERuyUOR9TKYZuavat6I=;
-X-AuditID: ac14000a-fadff7000000290d-fe-660d60b7b35d
+ bh=GdbrgGR4HorbZNMYDX6T7XK/xdYrAbVHkpgeSJSJeec=;
+ b=SqZhApjpYYMC3/Renq5O6Jz4urXpklgDtSx/M1x6UunKG/Uv41ZBNLZrzCAmzY5D
+ bt9FDfkA/QxKw0G5tyB3vFbF2fFCunNprEmgWkUXfkjwhXMw73RqPF6kszVMc/xk
+ MXOMPqopiXse6jA/tSeaVVAkCJ6QrKKFFDnsvtcrifY=;
+X-AuditID: ac14000a-fbefe7000000290d-ff-660d60b7e50a
 Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
  (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id EB.D4.10509.7B06D066;
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 4C.D4.10509.7B06D066;
  Wed,  3 Apr 2024 15:59:19 +0200 (CEST)
 Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 3 Apr 2024
- 15:59:18 +0200
+ 15:59:19 +0200
 From: Wadim Egorov <w.egorov@phytec.de>
 To: <u-boot@lists.denx.de>
 CC: <nm@ti.com>, <upstream@lists.phytec.de>, <bb@ti.com>, <vigneshr@ti.com>
-Subject: [PATCH v2 0/3] *** Introduce get_boot_device() for K3 platform ***
-Date: Wed, 3 Apr 2024 15:59:08 +0200
-Message-ID: <20240403135911.1987293-1-w.egorov@phytec.de>
+Subject: [PATCH v2 1/3] arm: mach-k3: am625: copy bootindex to OCRAM for main
+ domain SPL
+Date: Wed, 3 Apr 2024 15:59:09 +0200
+Message-ID: <20240403135911.1987293-2-w.egorov@phytec.de>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240403135911.1987293-1-w.egorov@phytec.de>
+References: <20240403135911.1987293-1-w.egorov@phytec.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [172.25.0.11]
 X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
  (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrCLMWRmVeSWpSXmKPExsWyRpKBR3d7Am+awd4zPBZz3xxgtXjz4yyT
- xdu9newW3e/ULf6f/cDuwOpx9s4ORo/+7hZWj+M3tjMFMEdx2aSk5mSWpRbp2yVwZTy8tJu9
- 4D1XxbkTv9gaGPdwdDFycEgImEjM+RnZxcjFISSwhEni9YUTjBDOI0aJDa9WAjmcHGwC6hJ3
- NnxjBbFFBKQkXnZuZAZpZhbwlrg7jQ0kLAxk/r/ynwkkzCKgIvFujipImFfAUuLWp+fMILaE
- gLzEzEvf2SHighInZz5hAbGZgeLNW2czQ9gSEgdfvACzhYDiLy4tZ4HpnXbuNdScUImtX7Yz
- TWAUmIVk1Cwko2YhGbWAkXkVo1BuZnJ2alFmtl5BRmVJarJeSuomRlDIijBw7WDsm+NxiJGJ
- g/EQowQHs5IIb7cDb5oQb0piZVVqUX58UWlOavEhRmkOFiVx3tUdwalCAumJJanZqakFqUUw
- WSYOTqkGRhEzt5+r1tWuE3hmv1VW1H/3gjVGbU9eu8/vuzyry8/zAtfbe19e/f8uVpx1gP9e
- f0ZFgZfEvQBVcZt+JofFiZaHz7mKGnPmhNful9izndmMxdzxxPHbARkPOqb/1lc7IP7ZNplf
- 7PMFw2UXg0oaBThjlF/InU22kc3afaj4c752QX782c9TlViKMxINtZiLihMB/PqaSUcCAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrDLMWRmVeSWpSXmKPExsWyRpKBR3d7Am+awaLLohZz3xxgtXjz4yyT
+ xdu9newW3e/ULf6f/cDuwOpx9s4ORo/+7hZWj+M3tjMFMEdx2aSk5mSWpRbp2yVwZWy9dIy9
+ 4DFPxbHjUg2Ml7i6GDk5JARMJBqPbmDqYuTiEBJYwiTxat9BZgjnEaPE5Y4XrCBVbALqEnc2
+ fAOzRQSkJF52bgQq4uBgFvCWuDuNDSQsLBAhcWX5fiaQMIuAisSVR+UgYV4BS4lN194wQuyS
+ l5h56Ts7iM0pYCVx98IpsIlCQDU3f3cyQtQLSpyc+YQFxGYGqm/eOpsZwpaQOPjiBTNEvbzE
+ i0vLWWBmTjv3mhnCDpXY+mU70wRGoVlIRs1CMmoWklELGJlXMQrlZiZnpxZlZusVZFSWpCbr
+ paRuYgSFuAgD1w7GvjkehxiZOBgPMUpwMCuJ8HY78KYJ8aYkVlalFuXHF5XmpBYfYpTmYFES
+ 513dEZwqJJCeWJKanZpakFoEk2Xi4AQGtrWu3AJT5lK3VkvNnpRPTJOOcwvJKnbmb/aQ2Nn4
+ vipoDufB+vKeorgVJ73O51wMDvgquTJadhXXqexr5/Y6ZtYK/+hm3CjRpHA08MzHjtyCB68i
+ e/jEXZvkfx291rjiAbtqe7333K0dO37UfVatdZh/8sKza0/SIvdFym/MPneK7+IS3Zv9SizF
+ GYmGWsxFxYkAvP7Vt18CAAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,35 +88,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is handy to have some u-boot environment variables set based on
-the current booting device.
-Provide a way to obtain the boot device for non SPLs by factoring out
-spl_boot_device() into an own function get_boot_device().
+Relocate booindex to OCRAM region after it gets opened by TIFS so
+the main domain bootloaders can have access to this data.
 
+Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+---
 v2:
   - Relocate bootindex to OCRAM, drop misleading comments and remove not needed changes
-  - Make get_boot_device() read bootindex out of OCRAM
-  - Add user for get_boot_device(), patch 3
+---
+ arch/arm/mach-k3/am625_init.c                 | 8 ++++++++
+ arch/arm/mach-k3/include/mach/am62_hardware.h | 1 +
+ 2 files changed, 9 insertions(+)
 
-v1: https://lists.denx.de/pipermail/u-boot/2024-February/546770.html
-
-Wadim Egorov (3):
-  arm: mach-k3: am625: copy bootindex to OCRAM for main domain SPL
-  arm: mach-k3: am625: Provide a way to obtain boot device for non SPLs
-  board: phycore-am62x: Extend for better environment handling
-
- arch/arm/mach-k3/Makefile                     |   1 +
- arch/arm/mach-k3/am625_init.c                 | 103 ++----------------
- arch/arm/mach-k3/am62x/Makefile               |   2 +
- arch/arm/mach-k3/am62x/boot.c                 | 103 ++++++++++++++++++
- arch/arm/mach-k3/include/mach/am62_hardware.h |   1 +
- arch/arm/mach-k3/include/mach/hardware.h      |   1 +
- board/phytec/phycore_am62x/phycore-am62x.c    |  64 +++++++++++
- configs/phycore_am62x_a53_defconfig           |   1 +
- 8 files changed, 182 insertions(+), 94 deletions(-)
- create mode 100644 arch/arm/mach-k3/am62x/Makefile
- create mode 100644 arch/arm/mach-k3/am62x/boot.c
-
+diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
+index 6c96e881146..c9c97b6ce19 100644
+--- a/arch/arm/mach-k3/am625_init.c
++++ b/arch/arm/mach-k3/am625_init.c
+@@ -175,6 +175,14 @@ void board_init_f(ulong dummy)
+ 		k3_sysfw_loader(true, NULL, NULL);
+ 	}
+ 
++	/*
++	 * Relocate boot information to OCRAM (after TIFS has opend this
++	 * region for us) so the next bootloader stages can keep access to
++	 * primary vs backup bootmodes.
++	 */
++	if (IS_ENABLED(CONFIG_CPU_V7R))
++		writel(bootindex, K3_BOOT_PARAM_TABLE_INDEX_OCRAM);
++
+ 	/*
+ 	 * Force probe of clk_k3 driver here to ensure basic default clock
+ 	 * configuration is always done.
+diff --git a/arch/arm/mach-k3/include/mach/am62_hardware.h b/arch/arm/mach-k3/include/mach/am62_hardware.h
+index 54380f36e16..30c2f11062c 100644
+--- a/arch/arm/mach-k3/include/mach/am62_hardware.h
++++ b/arch/arm/mach-k3/include/mach/am62_hardware.h
+@@ -76,6 +76,7 @@
+ #define CTRLMMR_MCU_RST_CTRL			(MCU_CTRL_MMR0_BASE + 0x18170)
+ 
+ #define ROM_EXTENDED_BOOT_DATA_INFO		0x43c3f1e0
++#define K3_BOOT_PARAM_TABLE_INDEX_OCRAM		0x7000F290
+ 
+ #define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x43c30000
+ 
 -- 
 2.34.1
 
