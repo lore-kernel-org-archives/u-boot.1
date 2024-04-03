@@ -4,84 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AF78CD128A
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 12:28:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 784F1CD128A
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 12:48:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA42388356;
-	Wed,  3 Apr 2024 14:28:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A1E5B88248;
+	Wed,  3 Apr 2024 14:48:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OZbVhfW6";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ikuHTurX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4636B8837E; Wed,  3 Apr 2024 14:28:50 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9E52A8825B; Wed,  3 Apr 2024 14:48:11 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 590868822C
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 14:28:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 963CB88248
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 14:48:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a4e61accceaso502744266b.2
- for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 05:28:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712147328; x=1712752128; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aC4dPCBggn11A2TSMTWqNqbptcFGnKCEubk7MzpXu44=;
- b=OZbVhfW6Uabwy3IZ3P9mzNFC7mTOgH2m35eDac5aA8vah9lu/kezFYCJwePGg8ypzx
- p+if3O2w6mKS4Uh917XE3yOV1SHkXTGx2kTTbGKD9b+s2OVJDpE4nuHlUn2fQ47JiqzH
- kNHQExdRYdFVEOfvAMIGKxuG6pVU2by+ecRr0dzrKcHM/WR/dZ5NCloSqQe08f3grUJT
- RTp2p2E5j4KgfB2EM+4X/N/4SpiR/wQv28i7GSDzLGy+Cc6/z8UuT3cAuoD8ss3YdFLr
- +J5qM5rnxVkBcqLVqGGD0Tl42aR56v7dEBYys4sHzHgMkTf8eA4IvKmyL7EATgwI3l+g
- XlNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712147328; x=1712752128;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=aC4dPCBggn11A2TSMTWqNqbptcFGnKCEubk7MzpXu44=;
- b=fqZf3DtirRZbGgmsYfpCifAN2Nq3tTsgJq+n/bYazFxB+8XAcBJty6DOxeST3k7/eO
- MmK9F3oZv33Fc3s3jKTWNrI5iRbMUassjJ5T0JzsCtHTO5tTlZexHZ5oGQ0QfghiuBIo
- wyaHJgwPrhFwJFFS186mjTuoGyWrTcq4dzoNIg4DHAgcYn7rt63v/vodG8iMdbSpluAc
- Fp6HJKPRznyMW5L2jzK2zFETjVMloCyu2673yoLm/wUBuH7K+ZaE2VtATzM2BPmol1jN
- CFzDsX/wrcRbXEvG4M3Akl7U+Yg4MNUUNRVDVeOLYoj+T4z86nkeArEM1KAZKRCqvoou
- s87w==
-X-Gm-Message-State: AOJu0YyaJ3oUYdWZQyHbR3c9S9LOVrYZMnjJ7f5W9jUG900fuoaG0mNE
- oAWjbC1LE+tuJKJkz/JvwhaHsgVlmvxz4wxkE5dn9nxClSnhVPzHBgtXWbiIJXs=
-X-Google-Smtp-Source: AGHT+IHuW6SurOayUMDH4bFVq6r/mudZOGIKX5mvpv1jXfw3g2dEB2kpJzk4uCuHUWtE2XP18k428g==
-X-Received: by 2002:a17:907:9455:b0:a4e:7831:59b7 with SMTP id
- dl21-20020a170907945500b00a4e783159b7mr5728106ejc.61.1712147327822; 
- Wed, 03 Apr 2024 05:28:47 -0700 (PDT)
-Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::38e6])
- by smtp.gmail.com with ESMTPSA id
- h9-20020a1709060f4900b00a472c4b9486sm7676567ejj.84.2024.04.03.05.28.46
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 05:28:47 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>
-In-Reply-To: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
-References: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
-Subject: Re: [PATCH v6 00/16] Qualcomm platform USB support
-Message-Id: <171214732697.1564919.12046706538302349051.b4-ty@linaro.org>
-Date: Wed, 03 Apr 2024 14:28:46 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 433Cm5wl088411;
+ Wed, 3 Apr 2024 07:48:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1712148485;
+ bh=CZDGfTNN922x4c/O3TnmuIIxp2TBb5RKeI+fisrmA60=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=ikuHTurXWznfqqAKwl0Z1lV2OtH70E/CgyVsv5oerbPwainGLlt2e3yZ6sZN66ltW
+ Y0Eycm5IKCklHJGOYqwebWb8Fg3HCwsXMBwbcoif7qj1v90CvZBcvKty/RcqMeEsiR
+ biGPFo27/PBG2SLGIquPaPLewUq09ZW3/ZtQtLsQ=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 433Cm5oG070741
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 3 Apr 2024 07:48:05 -0500
+Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 3
+ Apr 2024 07:48:05 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 3 Apr 2024 07:48:05 -0500
+Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
+ [172.24.227.220])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 433Cm174082302;
+ Wed, 3 Apr 2024 07:48:02 -0500
+Message-ID: <892b473b-5b76-4e44-af27-52d50cb24877@ti.com>
+Date: Wed, 3 Apr 2024 18:18:01 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 01/10] board: ti: am62x: Init DRAM size in R5/A53 SPL
+Content-Language: en-US
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, Tom Rini <trini@konsulko.com>,
+ <sjg@chromium.org>, <marex@denx.de>
+CC: <nm@ti.com>, <sjg@chromium.org>, <afd@ti.com>, <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>, <dannenberg@ti.com>, <srk@ti.com>
+References: <20240112064759.1801600-1-s-vadapalli@ti.com>
+ <20240112064759.1801600-2-s-vadapalli@ti.com>
+ <20240112132607.GO1610741@bill-the-cat>
+ <a1d7ca85-8723-4d73-8e1c-357c6aa6294f@ti.com>
+ <20240120164141.GA3652023@bill-the-cat>
+ <48c63fc4-9f06-4066-b206-a0a548936dcd@ti.com>
+From: Chintan Vankar <c-vankar@ti.com>
+In-Reply-To: <48c63fc4-9f06-4066-b206-a0a548936dcd@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13-dev-4bd13
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,49 +88,57 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Wed, 03 Apr 2024 14:07:35 +0200, Caleb Connolly wrote:
-> This series enables USB on Qualcomm SDM845 platforms and lays the
-> foundation for future SoCs as well.
+
+On 22/01/24 10:11, Siddharth Vadapalli wrote:
 > 
-> It introduces two new high-speed PHY drivers, one for SDM845 and one for
-> an upcoming platform. The SDM845 clock driver gains support for
-> configuring the USB clocks, and the GPIO driver is updated to use .set_flags
-> which fixes a strange bug where GPIOs would also be configured as input.
 > 
-> [...]
+> On 20/01/24 22:11, Tom Rini wrote:
+>> On Mon, Jan 15, 2024 at 01:42:51PM +0530, Siddharth Vadapalli wrote:
+>>> Hello Tom,
+>>>
+>>> On 12/01/24 18:56, Tom Rini wrote:
+> 
+> ...
+> 
+>>>> The list of conditionals in common/spl/spl.c::board_init_r() should be
+>>>> updated and probably use SPL_NET as the option to check for.
+>>>
+>>> Thank you for reviewing the patch and pointing this out. I wasn't aware of it. I
+>>> assume that you are referring to the following change:
+>>>
+>>>          if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HANDOFF) ||
+>>> -           IS_ENABLED(CONFIG_SPL_ATF))
+>>> +           IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(CONFIG_SPL_NET))
+>>>                  dram_init_banksize();
+>>>
+>>> I shall replace the current patch with the above change in the v2 series. Since
+>>> this is in the common section, is there a generic reason I could provide in the
+>>> commit message rather than the existing commit message which seems to be board
+>>> specific? Also, I hope that the above change will not cause regressions for
+>>> other non-TI devices. Please let me know.
+>>
+>> Yes, that's the area, and just note that networking also requires the
+>> DDR to be initialized.
+>>
+> 
+> Thank you for confirming and providing your suggestion for the contents of the
+> commit message.
+> 
+Following Tom's Suggestion of adding CONFIG_SPL_NET in common/spl/spl.c
+"dram_init_banksize()", the issue of fetching a file at SPL stage seemed
+to be fixed. However the commit "ba20b2443c29", which sets gd->ram_top
+for the very first time in "spl_enable_cache()" results in
+"arch_lmb_reserve()" function reserving memory region from Stack pointer
+at "0x81FFB820" to gd->ram_top pointing to "0x100000000". Previously
+when gd->ram_top was zero "arch_lmb_reserve()" was noop. Now using TFTP
+to fetch U-Boot image at SPL stage results in "tftp_init_load_addr()"
+function call that invokes "arch_lmb_reserve()" function, which reserves
+entire memory starting from Stack Pointer to gd->ram_top leaving no
+space to load U-Boot image via TFTP since TFTP loads files at pre
+configured memory address at "0x82000000".
 
-Applied, thanks!
-
-[01/16] mailmap: update Bhupesh's email address
-        commit: d78fd873e777be4dd5f3beec164bb60ced53a750
-[02/16] phy: qcom: add Qualcomm QUSB2 USB PHY driver
-        commit: 62a3eba5bfc89d292c774f88cc2afd8cad1b380b
-[03/16] phy: qcom: Add SNPS femto v2 USB HS phy
-        commit: 49cd93e882a3b6f6fa33dd343558b656ee29d881
-[04/16] mach-snapdragon: disable power-domains for pre-reloc drivers
-        commit: 1bfff467273804b7e47ec0ada189ba4312a5091d
-[05/16] clk/qcom: use offsets for RCG registers
-        commit: d057ada9c163cd4562528a0bfd19a647125a145f
-[06/16] clk/qcom: sdm845: add gdscs
-        commit: ce08f08cb11455729897d2bfe5d10e8d3e781f2a
-[07/16] clk/qcom: sdm845: add USB clocks
-        commit: 3d8546ed7ed27d0c0fd551cbf2c80e3dcdba589b
-[08/16] gpio: msm_gpio: add .set_flags op
-        commit: 4ef1c0566a581f368077fda69b24ce90756f368e
-[09/16] serial: msm-geni: support livetree
-        commit: def7e0f3ce16cba9f7bbead11d1256189b513a80
-[10/16] mach-snapdragon: fixup USB nodes
-        commit: de25b47241cc6bf83dc4db421f8eecc311e9424b
-[11/16] mach-snapdragon: fixup power-domains
-        commit: 2446ad0d1da8a82469186398ee63da7cb4439842
-[12/16] mach-snapdragon: call regulators_enable_boot_on()
-        commit: 57e4ccbd8c1ac7a415f8bff9d24dc2fc384cf583
-[13/16] dts: sdm845-db845c: add u-boot fixups
-        commit: f1ead8665ec10b6a972117a0842e294c48aca3e7
-[14/16] qcom_defconfig: enable livetree
-        commit: 9980bcbd3a0e874d7abbaafed373f1238c1f962f
-
-Best regards,
--- 
-Caleb Connolly <caleb.connolly@linaro.org>
-
+As a workaround for this issue, one solution we can propose is to
+disable the checks "lmb_get_free_size()" at SPL and U-Boot stage. For
+that we can define a new config option for LMB reserve checks as
+"SPL_LMB". This config will be enable by default for the backword
+compatibility and disable for our use case at SPL and U-Boot stage.
