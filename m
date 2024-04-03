@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD87EC6FD1F
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 01:02:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DAD5CD11C2
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 01:03:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 372BD88158;
-	Wed,  3 Apr 2024 03:02:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1A9D6881BF;
+	Wed,  3 Apr 2024 03:03:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="YbeD3kBg";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="nch9jVpg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EDB288158; Wed,  3 Apr 2024 03:02:56 +0200 (CEST)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
+ id BF73A881C0; Wed,  3 Apr 2024 03:03:34 +0200 (CEST)
+Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E624F87947
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 03:02:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 355BE87947
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 03:03:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20240403010250epoutp04b3878e3e92a851f3f907fd8a8e5d9f80~Cn32hX9JR3111731117epoutp04j
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 01:02:50 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20240403010250epoutp04b3878e3e92a851f3f907fd8a8e5d9f80~Cn32hX9JR3111731117epoutp04j
+Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20240403010329epoutp02e1d4b561a49564c3f4b477cd946817d4~Cn4bYBi6Q2005620056epoutp02X
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 01:03:29 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20240403010329epoutp02e1d4b561a49564c3f4b477cd946817d4~Cn4bYBi6Q2005620056epoutp02X
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1712106170;
- bh=VCNA6XLYzSj4sEuWAfNE5tFjNJE9j8xzdXs8z+cGzNc=;
+ s=mail20170921; t=1712106209;
+ bh=NqpgYdXhL4aLbX1KJ1i5RzeFQL8nydkbwgw2tZQzZCg=;
  h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=YbeD3kBgNxG/kU1KhAJ9YO3upAWjykkPTxki5xkKfH35J92wb/d4yRo7FdLYVkHg5
- DXzgXumRU6E5aZHZznB07lE7xIKab74/a/6hooiqno5lZPhnl88P8dCKqTi6u1+T3R
- 8nCcD1IIcJGwoSYAY+HWBQCBbSm0P722Es1Dh/gk=
+ b=nch9jVpgnLBj3AZVkADU7gy4liBYy0KQxLO5VLWxfarSYtJtHJ1WNCyxNdb6DkT2c
+ qRg1GkgBXt0LZLoD2VRbLqOeeKjsNLbst1my7ZWLcUAGEzFORaHxZnCKyu1XqeZt1m
+ 3nOiKp9xQxAyYxTIRivGi+bGYXHaEuqY+Rq37ijc=
 Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
  epcas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20240403010250epcas1p29baa320620efca2245648114322ab1fe~Cn32VkqHw2935129351epcas1p2C;
- Wed,  3 Apr 2024 01:02:50 +0000 (GMT)
-Received: from epsmgec1p1.samsung.com (unknown [182.195.36.144]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4V8RLd062zz4x9Q0; Wed,  3 Apr
- 2024 01:02:49 +0000 (GMT)
+ 20240403010329epcas1p2a7bc3d83e203b14b674978811c2ca968~Cn4a_taPF0866508665epcas1p2T;
+ Wed,  3 Apr 2024 01:03:29 +0000 (GMT)
+Received: from epsmges1p5.samsung.com (unknown [182.195.36.133]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4V8RMN0TjPz4x9Pp; Wed,  3 Apr
+ 2024 01:03:28 +0000 (GMT)
 Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 41.6C.08627.8BAAC066; Wed,  3 Apr 2024 10:02:48 +0900 (KST)
+ epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
+ F3.EA.10076.FDAAC066; Wed,  3 Apr 2024 10:03:27 +0900 (KST)
 Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20240403010248epcas1p4bc0f170bdb71b5ef6e374f56b7a89429~Cn31CT6K12428624286epcas1p4-;
- Wed,  3 Apr 2024 01:02:48 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20240403010327epcas1p1d0bafb3ae76703de8ca5c8c7ad50f9a8~Cn4ZUPp3b1506515065epcas1p10;
+ Wed,  3 Apr 2024 01:03:27 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
  epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240403010248epsmtrp208d2546c1fe0885c513bb378c99ceef7~Cn31BnynB0937409374epsmtrp2j;
- Wed,  3 Apr 2024 01:02:48 +0000 (GMT)
-X-AuditID: b6c32a33-af9ff700000021b3-27-660caab8c850
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 17.12.08390.8BAAC066; Wed,  3 Apr 2024 10:02:48 +0900 (KST)
+ 20240403010327epsmtrp23cd2e1edebf458bbb865d8ff8035494f~Cn4ZTIMxi0943409434epsmtrp2h;
+ Wed,  3 Apr 2024 01:03:27 +0000 (GMT)
+X-AuditID: b6c32a39-59dff7000000275c-08-660caadff43a
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 2B.52.19234.FDAAC066; Wed,  3 Apr 2024 10:03:27 +0900 (KST)
 Received: from [10.113.113.235] (unknown [10.113.113.235]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20240403010248epsmtip1193ece8d4dd6c6d1bb8423e65c022458~Cn30ky9hV1997819978epsmtip1n;
- Wed,  3 Apr 2024 01:02:48 +0000 (GMT)
-Message-ID: <d590f409-5b31-435e-9ca2-9f4fd0db01d5@samsung.com>
-Date: Wed, 3 Apr 2024 10:02:48 +0900
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20240403010327epsmtip2b8489b1498f3ff23c06e9e56e3235701~Cn4ZB3Wtv1426914269epsmtip2g;
+ Wed,  3 Apr 2024 01:03:27 +0000 (GMT)
+Message-ID: <9afc6e0c-7484-46dd-ac64-44a2051b0ab1@samsung.com>
+Date: Wed, 3 Apr 2024 10:03:27 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mmc: tmio: Check INFO1 for completion during DMA transfer
+Subject: Re: [PATCH] mmc: renesas-sdhi: Stop transmission in case tuning
+ block transfer fails
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Hai Pham <hai.pham.ud@renesas.com>, Nobuhiro Iwamatsu
  <iwamatsu@nigauri.org>, Paul Barker <paul.barker.ct@bp.renesas.com>, Peng
@@ -76,51 +77,51 @@ Cc: Hai Pham <hai.pham.ud@renesas.com>, Nobuhiro Iwamatsu
  <trini@konsulko.com>, Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
 Content-Language: en-US
 From: Jaehoon Chung <jh80.chung@samsung.com>
-In-Reply-To: <20240220083827.34473-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20240220083853.34497-1-marek.vasut+renesas@mailbox.org>
 Content-Transfer-Encoding: 7bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrEJsWRmVeSWpSXmKPExsWy7bCmvu6OVTxpBms+WFhsX9XMbPG2udii
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrIJsWRmVeSWpSXmKPExsWy7bCmvu79VTxpBp8OW1lsX9XMbPG2udii
  deUdNos/J3+wWvxY9YXVYuu9CUwWUydtZrd4u7eT3eLr3s9sDpweK1/MZvfYOesuu8erA6vY
  Pc7e2cHosXP2PiaPA5PPsXpsfLeDyePbmYksARxR2TYZqYkpqUUKqXnJ+SmZeem2St7B8c7x
  pmYGhrqGlhbmSgp5ibmptkouPgG6bpk5QPcpKZQl5pQChQISi4uV9O1sivJLS1IVMvKLS2yV
- UgtScgpMC/SKE3OLS/PS9fJSS6wMDQyMTIEKE7IznvfeYiqYIlRxc8oT9gbGT3xdjBwcEgIm
- EjPvunQxcnEICexglNj+7jNrFyMnkPOJUWL/Z16IxDdGiSeNn9lAEiANG77PYoRI7GWU2Dvz
- JzOE855R4vy5BrB2XgE7iVdTvjGC2CwCKhJX29+wQMQFJU7OfAJmiwrIS9y/NYMdxBYWCJBo
- +rmTHeQkEQF3iRd/wDYzC8xgkvi98B3YTGYBcYlbT+YzgdhsAjoS278dB7M5BVwl/q/rYoGo
- kZfY/nYO2EESAjs4JL5s28IIcbaLxPu+c1AvCEu8Or6FHcKWkvj8bi8bREMzo8TSJQdZIZwe
- Rol/DdehOowl9i+dzARyHrOApsT6XfoQ2/gk3n3tYYUEJK9ER5sQRLWKxKXXL5lg5t998p8V
- wvaQmL3hHRMktGYwSjxcvIZxAqPCLKSAmYXk0VlIHpqFsHkBI8sqRrHUguLc9NRkwwJDeHQn
- 5+duYgQnXi3jHYyX5//TO8TIxMF4iFGCg1lJhPenN2eaEG9KYmVValF+fFFpTmrxIUZTYPRM
- ZJYSTc4Hpv68knhDE0sDEzMjYxMLQzNDJXHeM1fKUoUE0hNLUrNTUwtSi2D6mDg4pRqYqnd3
- 2RjmXPP7Hzj7qUGOuPourRvbz9VczlA5FhgcMafh7PsvbLLS0qkP2zyevI5/kNfocFvXM/F6
- 2+l3ejtiZuno1u2z1Fox7/AP5ZOy0x5vuH6h91Faf6FeW/Wiv5f7es5Nu7O4LVv5xd1PT+48
- vZY45fr7h0+nbqhU+K7bc3fi8v9zb+h7yXnWCleumSksUSFg5LvgxkRmntsmcw+cbeYo9kqy
- mbZSr0atK9fWbwWLRsLClc/PCfqXPNpSHZG6T13zf2b1bmfRjo1m4n0TVivpSKwS6as/uVzz
- i/EWh60/P8lY/25+cW/1MwX5+s2JOQ/e/Mnet+GmPrv42Y8OAZWTdSrnTV37deHm8p//nJRY
- ijMSDbWYi4oTAehxM79FBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeLIzCtJLcpLzFFi42LZdlhJTnfHKp40gyOLlCy2r2pmtnjbXGzR
+ UgtScgpMC/SKE3OLS/PS9fJSS6wMDQyMTIEKE7Izeo5eZC84L1px+8EP9gbGVYJdjJwcEgIm
+ Es/fvWPrYuTiEBLYwSjRtek/C4TziVHizZLpCM6kL3PYYFrWXT/ECpHYyShxafJuKOc9o8TV
+ ZevAqngF7CRmdX8EaufgYBFQkZjfVwwRFpQ4OfMJC4gtKiAvcf/WDHaQEmGBeInjEzRATBEB
+ d4kXf3hBJjILzGCS+L3wHStIObOAuMStJ/OZQGw2AR2J7d+Og9mcAq4SPXPmMEHUyEtsfzuH
+ GeLOLRwSfx6bQNguEv/3NLFC2MISr45vYYewpSQ+v9sL9r6EQDOjxNIlB1khnB5GiX8N16E+
+ NpbYv3QyE8h1zAKaEut36UMs45N497WHFSQsIcAr0dEmBFGtInHp9UsmmPl3n/yH2ush8Xnp
+ DkZIUM1glFjwroNpAqPCLKRgmYXkz1lI/pmFsHkBI8sqRrHUguLc9NRiwwJTeGwn5+duYgSn
+ XS3LHYzT337QO8TIxMF4iFGCg1lJhPenN2eaEG9KYmVValF+fFFpTmrxIUZTYNxMZJYSTc4H
+ Jv68knhDE0sDEzMjYxMLQzNDJXHeM1fKUoUE0hNLUrNTUwtSi2D6mDg4pRqYZs0XPd+w6aL7
+ Nx33JzIZkv9fhbTLxHr1PkqfXbJ2+4l1f869kHl33nzB0ZQ5kn9kJ6jc/rdqd+6+y7MzPPeJ
+ RBxZHbtg7xfbFlaDHrWQJnajm+q9zCrrTlcK/XNttzqQMdWi4vz8O0v/ZjyaPq3xgNFU4ebm
+ 1MOrMuJbMo++XTO/62TRsZmdtn97fBfM32HxSv9sq9uRH89nRNaEWfYWs5z3yW3QZPwr4RXi
+ 3pBa0qdXlSUU/TJp85sT4vvnCkdseqB8wXuvRMztysVdr9vXTP/+Uv2TqkykuOOOIleb4x3T
+ dBdE7pRVjEjfZrbFocG957geZ6tzVJV+44Z6qWdyF4XCd+3eqB3tHfyr8KCUEktxRqKhFnNR
+ cSIA3RXueUQEAAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpnkeLIzCtJLcpLzFFi42LZdlhJXvf+Kp40g2WnFC22r2pmtnjbXGzR
  uvIOm8Wfkz9YLX6s+sJqsfXeBCaLqZM2s1u83dvJbvF172c2B06PlS9ms3vsnHWX3ePVgVXs
- Hmfv7GD02Dl7H5PHgcnnWD02vtvB5PHtzESWAI4oLpuU1JzMstQifbsEroznvbeYCqYIVdyc
- 8oS9gfETXxcjJ4eEgInEhu+zGEFsIYHdjBKXGywg4lISn59OZeti5ACyhSUOHy7uYuQCKnnL
- KLH+xwpWkBpeATuJV1O+gfWyCKhIXG1/wwIRF5Q4OfMJmC0qIC9x/9YMdhBbWMBPYtGmB0wg
- M0UE3CVe/OEFmcksMItJ4uzX6SwQN7hIfH7yGMxmFhCXuPVkPhOIzSagI7H923Ewm1PAVeL/
- ui4WkDnMAuoS6+cJQZTLS2x/O4d5AqPQLCRXzEIyaRZCxywkHQsYWVYxSqYWFOem5xYbFhjl
- pZbrFSfmFpfmpesl5+duYgRHmJbWDsY9qz7oHWJk4mA8xCjBwawkwvvTmzNNiDclsbIqtSg/
- vqg0J7X4EKM0B4uSOO+3170pQgLpiSWp2ampBalFMFkmDk6pBqaiuoCc19bulZVdKhOcnSct
- Pd5st8Zhjs+jvz7ebBNiXFJCjs16dVcv9tvKtEqRw7PXzQz6Gvx/xfndHrbv1DqeehlUTyhZ
- KNJx4cny+Xs9LqxJ/VxqbSzQphuWnuiwfRXXj2wnta8rXu6ftitP94B2aKnGw+fv1fIPCGeY
- hn7ds3dD1CS9Yw6txaWWVRaH5MxKAnXfpG3Zn3dgyuzvASG5Zzf87yo+8PWl07ytLB97sp5/
- 0dnzfml8kVOFde3D4qtT628KL/GYLBS23UumY/kDt0cOEWbeW1Wt5Cqv/G9+v+Rsak5eZ/WZ
- f1mRN7Uzc7d0u8b5hBiZXHkR1XBh+WHm20kpTNvnBty5l8VsZqzEUpyRaKjFXFScCAByN4Vd
- HwMAAA==
-X-CMS-MailID: 20240403010248epcas1p4bc0f170bdb71b5ef6e374f56b7a89429
+ Hmfv7GD02Dl7H5PHgcnnWD02vtvB5PHtzESWAI4oLpuU1JzMstQifbsEroyeoxfZC86LVtx+
+ 8IO9gXGVYBcjJ4eEgInEuuuHWEFsIYHtjBIHl3hDxKUkPj+dytbFyAFkC0scPlzcxcgFVPKW
+ UaJr0RM2kBpeATuJWd0fWUBqWARUJOb3FUOEBSVOznzCAmKLCshL3L81gx3EFhaIlzhy+DEj
+ SLmIgLvEiz+8ICOZBWYxSZz9Op0F4gQXid+XrzOC2MwC4hK3nsxnArHZBHQktn87DmZzCrhK
+ 9MyZwwQyh1lAXWL9PCGIcnmJ7W/nME9gFJqF5IpZSCbNQuiYhaRjASPLKkbR1ILi3PTc5AJD
+ veLE3OLSvHS95PzcTYzguNIK2sG4bP1fvUOMTByMhxglOJiVRHh/enOmCfGmJFZWpRblxxeV
+ 5qQWH2KU5mBREudVzulMERJITyxJzU5NLUgtgskycXBKNTB1OXGcVDZx40h4NO3J6uDK7//f
+ +dk+typ/m9K4oLvK27wrStriX8qf42yHvnWGGm5JjdEwv7Vb+OuGMtvdViUz3j1Xfx+5TYcv
+ aRlPcOndvBUhHLGdP3fVTvX3UGcocj/Y/DyJp69O4ZNFyIQnOSX73a/OZp+6ZNmLpImXPlf3
+ L5yzdKb2OfGlL5jumBifXjL/nPFhmdxbzFEsES6fIyyvN7x9LitpG3P3TPzf+K87npmf+nl4
+ Bf8BJsaX7EvOhiibR9+3ZM2Y2fOQ+0VjtZj5uwOhahd+TTXnO3ft67S7Ed/Wrzz5+9WWY66X
+ turPdjt54EhUaGA05+/fC6pKq3UvNrXeljWa9S345qyz1w+2KbEUZyQaajEXFScCAO/JOlMa
+ AwAA
+X-CMS-MailID: 20240403010327epcas1p1d0bafb3ae76703de8ca5c8c7ad50f9a8
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240403010248epcas1p4bc0f170bdb71b5ef6e374f56b7a89429
-References: <20240220083827.34473-1-marek.vasut+renesas@mailbox.org>
- <CGME20240403010248epcas1p4bc0f170bdb71b5ef6e374f56b7a89429@epcas1p4.samsung.com>
+X-CMS-RootMailID: 20240403010327epcas1p1d0bafb3ae76703de8ca5c8c7ad50f9a8
+References: <20240220083853.34497-1-marek.vasut+renesas@mailbox.org>
+ <CGME20240403010327epcas1p1d0bafb3ae76703de8ca5c8c7ad50f9a8@epcas1p1.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -138,30 +139,20 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/20/24 17:38, Marek Vasut wrote:
-> In case a CRC error occurs during DMA transfer, the transfer completion
-> flag is not set in TMIO_SD_DMA_INFO1 and the transfer would eventually
-> time out. The timeout could be very long in case the transfer consists
-> of a large amount of blocks, the base timeout is 10 seconds and every
-> block adds 100 us more.
+> The current code uses the state of tuning block received by SCC to
+> determine whether or not to send transmission stop command. This is
+> not correct. Use the state of tuning block transfer to determine
+> whether or not to send transmission stop command instead, because
+> the transmission stop command has to be sent in case the tuning
+> block transfer failed.
 > 
-> In case a CRC error does occur, a completion flag is set in a different
-> register, TMIO_SD_INFO1. Use this other completion flag to detect DMA
-> transfer ended and stop waiting for TMIO_SD_DMA_INFO1 completion flag.
-> This reduces the lengthy timeout in case of an error. The unconditional
-> check of TMIO_SD_DMA_INFO2 register for DMA related errors must not be
-> skipped in any case to actually recognize the DMA error and report it.
+> This requires two changes, separate variable to store and check the
+> state of tuning block received by SCC, and another separate variable
+> to store and check return value from transmission stop command.
 > 
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 > Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 > Tested-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
-
-Sorry for late. Will apply to u-boot-mmc/master, Thanks!
-
-Best Regards,
-Jaehoon Chung
-
 > ---
 > Cc: Hai Pham <hai.pham.ud@renesas.com>
 > Cc: Jaehoon Chung <jh80.chung@samsung.com>
@@ -171,27 +162,55 @@ Jaehoon Chung
 > Cc: Sean Anderson <seanga2@gmail.com>
 > Cc: Tom Rini <trini@konsulko.com>
 > Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+
+Sorry for late. Will apply to u-boot-mmc/master, Thanks!
+
+Best Regards,
+Jaehoon Chung
+
 > ---
->  drivers/mmc/tmio-common.c | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
+>  drivers/mmc/renesas-sdhi.c | 14 +++++++-------
+>  1 file changed, 7 insertions(+), 7 deletions(-)
 > 
-> diff --git a/drivers/mmc/tmio-common.c b/drivers/mmc/tmio-common.c
-> index 890c496b535..719c4830bc3 100644
-> --- a/drivers/mmc/tmio-common.c
-> +++ b/drivers/mmc/tmio-common.c
-> @@ -299,7 +299,13 @@ static int tmio_sd_dma_wait_for_irq(struct udevice *dev, u32 flag,
->  	struct tmio_sd_priv *priv = dev_get_priv(dev);
->  	long wait = 1000000 + 10 * blocks;
+> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
+> index 316b75b35fe..c4d0733b621 100644
+> --- a/drivers/mmc/renesas-sdhi.c
+> +++ b/drivers/mmc/renesas-sdhi.c
+> @@ -568,8 +568,8 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, uint opcode)
+>  	struct mmc *mmc = upriv->mmc;
+>  	unsigned int tap_num;
+>  	unsigned int taps = 0;
+> -	int i, ret = 0;
+> -	u32 caps;
+> +	int i, ret = 0, sret;
+> +	u32 caps, reg;
 >  
-> -	while (!(tmio_sd_readl(priv, TMIO_SD_DMA_INFO1) & flag)) {
-> +	for (;;) {
-> +		if (tmio_sd_readl(priv, TMIO_SD_DMA_INFO1) & flag)
-> +			break;
-> +
-> +		if (tmio_sd_readl(priv, TMIO_SD_INFO1) & TMIO_SD_INFO1_CMP)
-> +			break;
-> +
->  		if (wait-- < 0) {
->  			dev_err(dev, "timeout during DMA\n");
->  			return -ETIMEDOUT;
+>  	/* Only supported on Renesas RCar */
+>  	if (!(priv->caps & TMIO_SD_CAP_RCAR_UHS))
+> @@ -612,8 +612,8 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, uint opcode)
+>  		if (ret == 0)
+>  			taps |= BIT(i);
+>  
+> -		ret = renesas_sdhi_compare_scc_data(priv);
+> -		if (ret == 0)
+> +		reg = renesas_sdhi_compare_scc_data(priv);
+> +		if (reg == 0)
+>  			priv->smpcmp |= BIT(i);
+>  
+>  		mdelay(1);
+> @@ -624,9 +624,9 @@ int renesas_sdhi_execute_tuning(struct udevice *dev, uint opcode)
+>  		 * eMMC.
+>  		 */
+>  		if (ret && (opcode == MMC_CMD_SEND_TUNING_BLOCK_HS200)) {
+> -			ret = mmc_send_stop_transmission(mmc, false);
+> -			if (ret < 0)
+> -				dev_dbg(dev, "Tuning abort fail (%d)\n", ret);
+> +			sret = mmc_send_stop_transmission(mmc, false);
+> +			if (sret < 0)
+> +				dev_dbg(dev, "Tuning abort fail (%d)\n", sret);
+>  		}
+>  	}
+>  
 
