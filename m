@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23AAECD128A
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 12:10:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1213CCD1288
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 12:10:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74895883CE;
+	by phobos.denx.de (Postfix) with ESMTP id DBB87883CC;
 	Wed,  3 Apr 2024 14:08:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bRrIR0Yp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LT22a5lb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 242B9883BD; Wed,  3 Apr 2024 14:08:10 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 8C2E5883D2; Wed,  3 Apr 2024 14:08:11 +0200 (CEST)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84F858839F
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 14:08:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 725FC8839A
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 14:08:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a4e5ee91879so457409566b.3
- for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 05:08:05 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-56dfba6ae21so1405472a12.1
+ for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 05:08:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712146085; x=1712750885; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712146086; x=1712750886; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lXyr6tJR6QFXRSTjw1XngBqNszpjZjRzQWF6T1YQB14=;
- b=bRrIR0YpahYC/V/b8uGNrWwqrFqWYDOOD9k7h/JtzeixxEh8cFuz7LnGldHwJWfK1W
- Q6U1xxTR/qB3KSVTbX2HXmeYLB8waxx/sCePzCpyfoCRmwJcRgmBgU28Hi1j4pCxuf99
- wjW9jRmI3/r8aIHJ4+1ifosY7sc0REsVjt9MJqxE9iYqbQcWHMJUC/xyi8nVi7F+03rL
- yCTxtpRxYSBW/Q1NzqhzMUgSrzSrClf3lelmcq+tV5ujTi0VWmY4r/eD/DpU7Ze/wKBx
- /Aww5e6bBNU59WzgEaGjisv71JngtFvmpudLtQwRIjzFan3QzNF91zUdwjPEMZzY4n34
- ripw==
+ :reply-to; bh=2rIilUL3fPgdL00EeRjYvSoOr0+tfQS+h1cCC5JbimE=;
+ b=LT22a5lb/5oD1bnMULOtUKfZzVZ0q01R83XjdDyJhkZc+H+OZ95qSlI9gALymrUFbU
+ arWePJ9+My6TTWAGrPhAZkwPLNEvYWF5toF3AvxgZn1EYrt6mSjdXvpNFWOo+b2HamIm
+ I/2iu7ScRV4/utc9eaKvPrPSonFeMg1BbAW7N7VTon7xHNiFoieu02l/JveuOlfiBU3C
+ mUf1sAMXovy2SoZ+oM77uZ3EvFc9f24QsqbG/8zQnQq9BgMYCMnWOuFlgNV/jM5NzCJN
+ LiThUl/A18bpSsuBiijDPskgJv9UUA7jnmPU5JwemEDYT5hAvPPnLDx0ONOuUkEon6PX
+ 9XtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712146085; x=1712750885;
+ d=1e100.net; s=20230601; t=1712146086; x=1712750886;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lXyr6tJR6QFXRSTjw1XngBqNszpjZjRzQWF6T1YQB14=;
- b=lBJwsIaKHfL0/ABUH8abJMQTAqJJy1DzC4Owzmce8Z0lZEWs/J32jmYIyIdBPv3PRs
- mXjPyvsAvZRnhAhZInjWSELgf6refEbc9b69o14iqL7F4a7Mr4X3csU67KFYz6YqHyGX
- QBJlhZPt63zdecO81azT3RJcxsv0NGWiFiFZzWF72G2RpNg8y7iYu0qlBO3wgtaMFRCv
- Ild0IuYgmwzxMSp0rtY/uJre7Va/DIhxnSRNsvssJnZhqXWeeP+vJyDCxsXubDnXDtBx
- d0DNFH83l1M2yQGNd9nPmFRl2ZqpP8TMyoX3qdhSPzyLb8oRQA808TV0SaTIcUy1ksXq
- ahrA==
-X-Gm-Message-State: AOJu0YzS5HQiPwqOCFGIYQVs/YKHii0l66vOIHzH3ad/JYhsvYx6iNZr
- eUpluhsUkI2Uyzghv8uHqIgyHxECMjaZ37r9VbnMny9QIW3B+0BifE3hHRCHeKU=
-X-Google-Smtp-Source: AGHT+IHDzMoCihRG9iOAaxuT9TbPiZmEKt1i2ovIttbRxTnHUx+VU+2w2gxs1Ltv46GmaEJIezzC+w==
-X-Received: by 2002:a17:906:251b:b0:a4e:21e0:2e6e with SMTP id
- i27-20020a170906251b00b00a4e21e02e6emr1760632ejb.5.1712146085119; 
- Wed, 03 Apr 2024 05:08:05 -0700 (PDT)
+ bh=2rIilUL3fPgdL00EeRjYvSoOr0+tfQS+h1cCC5JbimE=;
+ b=q2cpvHI8ppukShdfdOMksXDojBX/5Nbrmf5TEgUhHI4RT2xBpB1o4ZuCslZGx/6PRP
+ aLX5H/iO09u8Dx0K/N2pVy36ukdgkr/7uWIJkEXi0J3RbJS2gQJa+2y62HOrM7c8V8L9
+ MNTd/yJGNNk7LwvnG+V+j8rEmnyouSsAVoE1DVFlsocetk955hq6ZD17NGVJOIheBcFl
+ JsaSskTg14QvPYEnXGkqGYx0qd4n1w9nFtJZe6oMDDh8z5c/IebPk+7/VQnFCon1bA5K
+ rxr69MXuOmvYVd4mdffkUg8KEzlSvjXhauLHGi4DfEQkKCycQYVdelPqMrXIb6wtqdDR
+ 1ZFg==
+X-Gm-Message-State: AOJu0YwvkNaXswKf6WOyFYG9sS+GufK7vRhgSqiJiBCGZAIogDtdIVY0
+ xp5DBYoXr60/0WgXiP362r09Fox7G0AW7pw9fWpHEMvqnJhHGxcybQ7YDsK2QeQ=
+X-Google-Smtp-Source: AGHT+IH//nvGIx2NsypSiF5nucxlrb+Qj6aUoJrpi62ois6iJCdGk3iDhVV4bpjhAnDEImQljR871g==
+X-Received: by 2002:a17:906:e086:b0:a4e:9a1a:e312 with SMTP id
+ gh6-20020a170906e08600b00a4e9a1ae312mr1738155ejb.57.1712146086048; 
+ Wed, 03 Apr 2024 05:08:06 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::38e6])
  by smtp.gmail.com with ESMTPSA id
- lr20-20020a170906fb9400b00a46a04d7dc4sm7654674ejb.61.2024.04.03.05.08.04
+ lr20-20020a170906fb9400b00a46a04d7dc4sm7654674ejb.61.2024.04.03.05.08.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 05:08:04 -0700 (PDT)
+ Wed, 03 Apr 2024 05:08:05 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 03 Apr 2024 14:07:50 +0200
-Subject: [PATCH v6 15/16] qcom_defconfig: enable USB
+Date: Wed, 03 Apr 2024 14:07:51 +0200
+Subject: [PATCH v6 16/16] usb: gadget: UMS: fix 64-bit division on ARM32
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240403-b4-qcom-livetree-v6-15-130f8f50b538@linaro.org>
+Message-Id: <20240403-b4-qcom-livetree-v6-16-130f8f50b538@linaro.org>
 References: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
 In-Reply-To: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -77,23 +77,23 @@ To: Tom Rini <trini@konsulko.com>,
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
  Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3037;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2332;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=IiD4QOo4vMkDUnm2KTlh/8akfMnxgScbcOmu27O4wOg=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmDUaRqzvIYQZ/RjSRt07WmWRnBYvOAq7BEx9uA
- UiEPOSiRxCJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZg1GkQAKCRAFgzErGV9k
- ts5GD/99sMJAEUdyITeqQ1w5MGwakn3EUmV7X/iZgdT2rZXqxoJtA61jP9Vubv6rrZlxeqW0CSd
- QmJjw4LVVUeVMrRjtM7jZkGvSZk6eqBtAnc019wAS3oOfBGuw6KTFsct1WTVyVFgPv3lMW4lIA5
- /+9R6YG1nCtO3UobWgMpBF1ChQl09YDczB6E/A1bMxFeWCddbQvgXGHFpxH9iYC5bTELTWvL+cU
- za6mFNJSE1lToYryMEfHlr+8vZYH7cUO8Rfu6zxYwL3JoxwuFXAlLjeU/0StwpoCm+Xmn0/Hl6y
- G7pm8mzzXnNaaSl3UaFb6asEIyenDH9+iIp4pxuVVBNNyGdi1UHnnpN8pW94X+ymRqjoSQZmiiE
- 0FJ0bivCT79Z13IGXWuuYgebINhtf0yPlgo/xIHPG5kAIgxdYHisEv1PPdX3dUYfKy41ZbgdB/7
- fUOmBhbzOjdIodVD3jHHSKn246KsB+fWGapnzTrdhos+S88CGudQn0KX4gVwlY3Bpji1r3AvK7+
- zFkHIi1vsr/PfiuifdTeZwW0Mf1qlO8Dg2d9tjYEYTf9o3xdqFDI6Vkr8SP+DcPLO7BZUNwsUVB
- Vk9h+K1uD6PsyqZ1kgpONGyAMiOIlh7EEFFwhyr7X5bvv3DyqXSXP+YV/LuDc7PjIDkC/xaAnXf
- mFuV4xhiZd0rqGQ==
+ bh=GILrVlJTLB7vGoUqwXYfiSFWeP5Fqv5LLGhQ18mVlh4=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmDUaS/UZ3ATb1s4JU3qwNUdRjMg3ls3FbxVeRu
+ oznn4aBsWmJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZg1GkgAKCRAFgzErGV9k
+ tqHeD/9W1k82Ypg93K7ja/mXBrh31Lz9jFNXmGXQcMI/85VhfCyKcJD4d9poTWB3gKuEjcNk5uk
+ sANbDuTJAbUIMrkVyF2j8vmpZHOTckDpyrBW/tu1RFtTGt/d03sW41kF0a7DLbmAMQf1v7iqYpt
+ JiFsaURH3mCJn/7+fATHORobCVV7o2kQRU5vDGR5smGxGSjrCjnCRftsdL6aCFyGwcj46rD6Coy
+ /Ag9WhR5+UQPeHEp7BMsA3LDLVm4eCCXZjeFCgL6dlQGujiJxuYm5tdxrJUF0WPS2OPgZzE3Mi4
+ dYTz1WcOiw4+q5DTUH2kfDADIQ1ViKb/2eS2CxrzdL3+mnV65OiOKCObtEBw6tZ7MoLN/HqZx5+
+ 1p3gKmURENsAyvx7ndOmc5W9HyiEG1j0EzyErJnsobrVQxH1YMOrIKnQjj3l6xZ82JjsdaYaLbC
+ +SxAwwdjwpoGNn+sajFhsS1b6xeyNSNErideNm5iX/5WrdOGS1rN2dFr54KmKrrvJ8PpQw0cVfj
+ X7eJe755PZkrhLGTG/fuLn8rlksxwrfveq5bkE2Em1aPxB8Y40isL9QllOJ2rtG5ssF/o3S0IHn
+ jNtbfVAiptQ6QOQUnyuwVwPwhIoIV2jqCxS0I+KsxK3sALZX5+vkDd/gmw83ymQKUB7gUS30zpD
+ agJ5Bav7l0fmemg==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -112,120 +112,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable support for the DWC3 USB controller and required dependencies for
-Qualcomm boards, specifically the DB845c:
-* IOMMU / SMMU
-* USB high-speed PHYs
-* Mass storage and ACM gadgets
+The patch introducing support for dynamic sector sizes changed the types
+used in some divisions, resulting in the compiler attempting to use
+libgcc helpers (__aeabi_ldivmod). Replace these divisions with calls to
+lldiv() to handle this correctly.
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
+Fixes: 74e56e0c5065 ("usb: gadget: UMS: support multiple sector sizes")
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- configs/qcom_defconfig | 52 ++++++++++++++++++++++++++++----------------------
- 1 file changed, 29 insertions(+), 23 deletions(-)
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
+ drivers/usb/gadget/f_mass_storage.c | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 8c4402e8f780..1abb57345ff1 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -17,10 +17,16 @@ CONFIG_LOG_MAX_LEVEL=9
- CONFIG_LOG_DEFAULT_LEVEL=4
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_CMD_BOOTMENU=y
-+CONFIG_CMD_EEPROM=y
-+CONFIG_SYS_I2C_EEPROM_BUS=2
-+CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
-+CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
-+# CONFIG_CMD_BIND is not set
- CONFIG_CMD_CLK=y
- CONFIG_CMD_GPIO=y
-+CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_UFS=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_CAT=y
-@@ -32,20 +38,39 @@ CONFIG_CLK=y
- CONFIG_CLK_QCOM_QCS404=y
- CONFIG_CLK_QCOM_SDM845=y
- CONFIG_MSM_GPIO=y
- CONFIG_QCOM_PMIC_GPIO=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_QUP=y
-+CONFIG_I2C_MUX=y
- CONFIG_DM_KEYBOARD=y
- CONFIG_BUTTON_KEYBOARD=y
-+CONFIG_IOMMU=y
-+CONFIG_QCOM_HYP_SMMU=y
-+CONFIG_MISC=y
-+CONFIG_NVMEM=y
-+CONFIG_I2C_EEPROM=y
- CONFIG_MMC_HS200_SUPPORT=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_ADMA=y
- CONFIG_MMC_SDHCI_MSM=y
-+CONFIG_PHY_MICREL=y
-+CONFIG_PHY_MICREL_KSZ90X1=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_QCOM=y
-+CONFIG_RGMII=y
- CONFIG_PHY=y
-+CONFIG_PHY_QCOM_QUSB2=y
-+CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=y
- CONFIG_PINCTRL=y
- CONFIG_PINCTRL_QCOM_QCS404=y
- CONFIG_PINCTRL_QCOM_SDM845=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_QCOM=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_SCSI=y
- CONFIG_MSM_SERIAL=y
- CONFIG_MSM_GENI_SERIAL=y
- CONFIG_SPMI_MSM=y
-@@ -54,8 +79,12 @@ CONFIG_SYSINFO_SMBIOS=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
- CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_USB_GADGET=y
-+CONFIG_USB_GADGET_DOWNLOAD=y
-+CONFIG_USB_FUNCTION_MASS_STORAGE=y
- CONFIG_UFS=y
- CONFIG_VIDEO=y
- # CONFIG_VIDEO_FONT_8X16 is not set
- CONFIG_VIDEO_FONT_16X32=y
-@@ -64,27 +93,4 @@ CONFIG_NO_FB_CLEAR=y
- CONFIG_VIDEO_SIMPLE=y
- CONFIG_HEXDUMP=y
- # CONFIG_GENERATE_SMBIOS_TABLE is not set
- CONFIG_LMB_MAX_REGIONS=64
--CONFIG_CMD_DHCP=y
--CONFIG_CMD_EEPROM=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_PING=y
--CONFIG_DM_ETH=y
--CONFIG_DM_ETH_PHY=y
--CONFIG_DM_MDIO=y
--CONFIG_DWC_ETH_QOS=y
--CONFIG_DWC_ETH_QOS_QCOM=y
--CONFIG_RGMII=y
--CONFIG_PHY_MICREL=y
--CONFIG_PHY_MICREL_KSZ90X1=y
--CONFIG_MISC=y
--CONFIG_NVMEM=y
--CONFIG_DM_I2C=y
--CONFIG_I2C_SUPPORT=y
--CONFIG_I2C_MUX=y
--CONFIG_I2C_EEPROM=y
--CONFIG_SYS_I2C=y
--CONFIG_SYS_I2C_QUP=y
--CONFIG_SYS_I2C_EEPROM_BUS=2
--CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
--CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
+diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
+index d880928044f4..ef90c7ec7fb5 100644
+--- a/drivers/usb/gadget/f_mass_storage.c
++++ b/drivers/usb/gadget/f_mass_storage.c
+@@ -239,8 +239,9 @@
+ /* #define VERBOSE_DEBUG */
+ /* #define DUMP_MSGS */
+ 
+ #include <config.h>
++#include <div64.h>
+ #include <hexdump.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <common.h>
+@@ -768,10 +769,10 @@ static int do_read(struct fsg_common *common)
+ 		}
+ 
+ 		/* Perform the read */
+ 		rc = ums[common->lun].read_sector(&ums[common->lun],
+-				      file_offset / curlun->blksize,
+-				      amount / curlun->blksize,
++				      lldiv(file_offset, curlun->blksize),
++				      lldiv(amount, curlun->blksize),
+ 				      (char __user *)bh->buf);
+ 		if (!rc)
+ 			return -EIO;
+ 
+@@ -942,10 +943,10 @@ static int do_write(struct fsg_common *common)
+ 			amount = bh->outreq->actual;
+ 
+ 			/* Perform the write */
+ 			rc = ums[common->lun].write_sector(&ums[common->lun],
+-					       file_offset / curlun->blksize,
+-					       amount / curlun->blksize,
++					       lldiv(file_offset, curlun->blksize),
++					       lldiv(amount, curlun->blksize),
+ 					       (char __user *)bh->buf);
+ 			if (!rc)
+ 				return -EIO;
+ 			nwritten = rc * curlun->blksize;
+@@ -1058,10 +1059,10 @@ static int do_verify(struct fsg_common *common)
+ 		}
+ 
+ 		/* Perform the read */
+ 		rc = ums[common->lun].read_sector(&ums[common->lun],
+-				      file_offset / curlun->blksize,
+-				      amount / curlun->blksize,
++				      lldiv(file_offset, curlun->blksize),
++				      lldiv(amount, curlun->blksize),
+ 				      (char __user *)bh->buf);
+ 		if (!rc)
+ 			return -EIO;
+ 		nread = rc * curlun->blksize;
 
 -- 
 2.44.0
