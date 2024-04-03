@@ -4,101 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3515CD1288
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 12:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A723CD128A
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 12:08:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB19D8838C;
-	Wed,  3 Apr 2024 14:07:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5FF9C88389;
+	Wed,  3 Apr 2024 14:07:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KohouVSv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fwnHO3GY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A36288387; Wed,  3 Apr 2024 14:07:52 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 3C2F28838F; Wed,  3 Apr 2024 14:07:54 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0009188238
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 14:07:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D48ED88367
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 14:07:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2d700beb60bso104780501fa.1
- for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 05:07:49 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a51320fc5d6so55100066b.1
+ for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 05:07:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712146069; x=1712750869; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7pYbPx1vk+XqBgc3hGNtUy53R0kIt4y6U+8OA+/aqbo=;
- b=KohouVSvXi9qZWjsKufFxAS756E1EHsfAvcAMINKoJJ70JMdPShdYwDeI+ncFan5f7
- mixXR8lwr/8E6gKJ0gACnDRb/1EPhNnnZix8oLCHvoucuppDN6sNT/5RC3ic5n+wT7sH
- 7nyoFnHSieXJl2YUhuQUTi4ZIssDcD8CNJmLjaVKvkqDQtxQLg1TaN47zeX2fx6HiR+C
- e6+ySQLNNfe9hI7337waYum0G10avJboGUZ9k341BqRmVsrUL8NRlSrjVcUjiDclkbT0
- Vat81AewXq9AbFkDJebYHdUNaIzAu/De2oucevEhEVldGdPQza58qlGmBiHLSNJPg3w2
- fIzw==
+ d=linaro.org; s=google; t=1712146070; x=1712750870; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=dJza8irKGD1LCWutbG2pawgU5HuytyqoLzmIGB2jhMo=;
+ b=fwnHO3GYAn2CAuIbL8DdLWSSMGVT+tR5JdijB9eNKQHCus0SX5Bcq0qzXgIZ7wjobj
+ Iu0JewLKVhlR5ggFXigwSk4N49x1xJHTeNgSWB3nqv6HL++uSCLPAgkUZUpp4DhCQI5A
+ zy1omTBIr0LBuM8ygnS+5hEoQoQQWioMDJwURxrSX8/jjfNEmIPB2WxaFiHF5G4Me0EP
+ 1NDcTPN7McEBzIvPMyIBhJzQl6uYfEiFgO5gbfxWHZv8ccCwQ9mmQB87FF+ZVBakApxK
+ hBeLES61O0u1szc5ryXmpYc2nGDHO3QNnEIpsh9k5Qe48pgAUIEGL4ZYQjOpjGdy7xfV
+ ifyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712146069; x=1712750869;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7pYbPx1vk+XqBgc3hGNtUy53R0kIt4y6U+8OA+/aqbo=;
- b=KnrZtLDKlrtV63ZZURa2u79+9L1Qqw6amwU7jzw7v+aOxdxTtrWsnDyaLQoAyzlcWj
- gpqBBNl3mS2sd+55olRS6KzBHqmbQj0lKZOZ2oXLQIUvWQWORQ7jqLddXjYSRpTVQuVn
- dqvEW06N5GH09PZnT0cCtlz5XheIq9ScA01qRJqhqdlvHC833XjOeR3ozbOpLUkWVqqH
- XsOHo1y7Ntnzrb0aHR+JgPKdd9m3lrfn6OK6vmt1zH1dltjnfT+sAt+ypVLlerhclmYL
- JqJcxTpGGix3R6c/306jGWNAF5DXTL1X6m3ATNpRbQyNunvl83Ie+xh3GIiRLEu75Qyi
- fskg==
-X-Gm-Message-State: AOJu0YyCjnSi+71GVq6N7X9RiTUoATZpFXs5EvGhdQNShomAKG2be/Jn
- GF/goxfnjfwQkc3bpGYLdK7xseHKlQohkIlp/ojYFBqWzq9J3PefaAUYQUoUew4=
-X-Google-Smtp-Source: AGHT+IHfrAQdVWVyrSjrWDgpJlRNBJHqOXenzh7ZIQPeJCXrLZDJddwjmkzh6iycPYGLJx/xWtYPuQ==
-X-Received: by 2002:a2e:a7c8:0:b0:2d4:a20f:299f with SMTP id
- x8-20020a2ea7c8000000b002d4a20f299fmr4585869ljp.35.1712146067167; 
- Wed, 03 Apr 2024 05:07:47 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1712146070; x=1712750870;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dJza8irKGD1LCWutbG2pawgU5HuytyqoLzmIGB2jhMo=;
+ b=iboQdB/XUQ1/RcorTySC72oGr41NDLSfEyiXZJmxCu5banoCuLocSs4NdtQU4dBDd0
+ oBW5Wb4WcxqLbaQ8j2J2iFS46RD+JsGWkX+jr0OUEx3oQc1T+2OHJHfvCSry7rI5ykg3
+ /x0pWMCrNne9Qf90913JjO/bIfLIbaTcEzafkaOkhlRG7I3qLYY+waJcYXC3G9osa31v
+ UeurQj57qAcINxUGAl6oVC78qIcfnTjnAU/oiD4UUfCZN1lAYlhNGJvS2mGfRbgzUbcx
+ 6735wlLyTysHWv80MnOO467pln3iEppnMEg7awp02KpENJxDItaM1VztQiGm9LgOudH5
+ Wh+g==
+X-Gm-Message-State: AOJu0YxbEnTt5iaAIeXAfE6p9KhtJQanHRmt2K+3MwHWfz2ICOzFgkQO
+ 4XRlNU7fY+Y6TrtWD5mL+cd8wBMXtoHeYhj56Ctn3ez2ryss2+zAnaQBN89AV4c=
+X-Google-Smtp-Source: AGHT+IGQCcKDbZK1EZ4wjhPKwQ6QBUtTZlNfidIei9rx11T2I+9pErK90YlS3j1OLD5loSSvk63KIg==
+X-Received: by 2002:a17:906:46db:b0:a51:763e:b788 with SMTP id
+ k27-20020a17090646db00b00a51763eb788mr460710ejs.40.1712146070341; 
+ Wed, 03 Apr 2024 05:07:50 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::38e6])
  by smtp.gmail.com with ESMTPSA id
- lr20-20020a170906fb9400b00a46a04d7dc4sm7654674ejb.61.2024.04.03.05.07.46
+ lr20-20020a170906fb9400b00a46a04d7dc4sm7654674ejb.61.2024.04.03.05.07.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 05:07:46 -0700 (PDT)
+ Wed, 03 Apr 2024 05:07:49 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PATCH v6 00/16] Qualcomm platform USB support
-Date: Wed, 03 Apr 2024 14:07:35 +0200
-Message-Id: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
+Date: Wed, 03 Apr 2024 14:07:36 +0200
+Subject: [PATCH v6 01/16] mailmap: update Bhupesh's email address
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAIdGDWYC/33QS2rDMBCA4asErasyGj3dVe9RstBjnAhSK5WDS
- Qm+e+Vs6mLT5T8w38A82Eg108jeDg9WacpjLkML83Jg8eyHE/GcWjMEVCCk4EHxr1g++SVPdKt
- E3AoIaHQ0ne5ZW7tW6vP9SX4cW5/zeCv1+3lhEsv0H2wSHLgCKyJYZ1OA90sefC2vpZ7Yok34K
- 0ihdwRsgg9GamtVwBQ3glwL3Y4gm0AiSJe6oHqvNoJaCQg7gmpCcsb6IHowETeCXgtuR9DLH6h
- ziC7IBPKPMM/zD5husoy5AQAA
+Message-Id: <20240403-b4-qcom-livetree-v6-1-130f8f50b538@linaro.org>
+References: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
+In-Reply-To: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
  Caleb Connolly <caleb.connolly@linaro.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
  Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Bhupesh Sharma <bhupesh.linux@gmail.com>
+Cc: u-boot@lists.denx.de, Bhupesh Sharma <bhupesh.linux@gmail.com>
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5327;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1165;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=WMBuXaHV7S0bVn5IX59PcAnBVcsx4k6pIDGTz7caKwM=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmDUaPFWHAjOPzUyLYrMCMUXYqcVCYAcj+aF5Sx
- Y7vfHJ7bHGJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZg1GjwAKCRAFgzErGV9k
- tgBCD/9UYwE277aO9Uxpg1eGodUKFzWnuOuWJ05fW2Qx9MOq4/wunz0i4EDGEXlGxU2EvTjwC1V
- 1xKPbGWCnBAoC1jgO5gkqj/+6drUOelPjZjTiaTomXjyhj6e6DBgo8qVj6KK/EUT9y6cO4QDykJ
- nIF0if4cHTcdrD/rvS1B3iRZnrtxcyUDy1aamU0h54ef3KeVhsvev5h4bVyiLI9wX2peq9hrfHZ
- qEYzfOjOnoxf18Qks+ovRBdMs8ThN9Nkk/pMe8ZQ6S+E3Gg0v4pN9+9W6O6A4ks2/wMGLjSfzwC
- Hya9RXAjAdC40rIK3nbiA+3YLgzBy548BXF1cddRkF6YRDvtnxJ0bHT+Z57wg5PbvCQgP9hbX/L
- lW8hxVHGSPcF21MEmA+g0Jnsz4FtVRjoME9rSKkaAxajlSP/rTm3X6TIw4dHSotV5dxDaTXyMvB
- Rh7sjDhCTwpLrF9a3QEJJ0y74LaR+lYKIQR0E6b92Z/GlK2STnBFt1LS+bfolQG24EwkjLTmZRX
- JkeczgeeUIg9rM2QoQiCPAa+ktsbGe64qaQLjkp8wxNYqEcx5J+EY1D8VhVLAHMlBBllNJK0OH0
- nqkCbyNeFltdOLF9XSjQrNYTyXkhoncsG/SayfqqtLLO68ekKZbx8MsQa0Lf7IwPI1UyS8kncVU
- LiQQQA0/i8wQBNA==
+ bh=XSvtB4NoCXg6pY1Nq/qGGGjasqOo57hNo8/eyKot594=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmDUaQdJWqOJj/3btMERubBnuE8mU26MvMG4hTz
+ rjs1ma/V1aJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZg1GkAAKCRAFgzErGV9k
+ ttItD/9zubcpV2vuUddY7HYzDoSXrRb+t9CcPRSgVtPoE/kxe+oNsAXkBKUgNO5fCp7vAy36G1A
+ tNZ53fu/RLvVvWFlyY2JwIUR9w6vRbil4jyPKIOpAeF6hEC91IyqRqvsvENOGcRBtpBQZYds8TA
+ dtdrKSTuq5R7L0OcqM3iH152tGJHEn3bx1gNWm5TpHM0REVG4jqbKSV39FT4gREC4O/VuqNrsvp
+ jXf3QN+NOXy65n6nVwyFCQ7wQ6cCXX3xExn5VgrsuowvdJobK/V2MhOjYCe+DjfNWON4P7jrGgM
+ ok9+dKbCxV6qlNmkSGCAQyddQcX8owBW+SM3XDo2EmUnR8kg/T0YA+GEZgFYS6nTKLaJG8WgB+A
+ hI35RpaAgGTBbSud9hYxkFFf+lOaStOtA8elndG7/m18yNnhipzHq+INyOhz4BeLCeVPQTe/FVK
+ fcZd0ZIUuFGJkjJtHwOOyGr+jYZo4VuT3i70crybJzaG/hOBrFqBlrjZjJo/ds7OjCRgCAdFFoF
+ HWaxoOY2tGE49ROEhteYDh02Vd0A8CamZuX6Rd4m/55lRemUX72HNGHK+kVHk5HDU98J+WDf4ue
+ rPOftyV+756o7CniwPMQ5pMoNZFTjGx01t+sIhkLU1hOppTRbh3atPDWTa9122hKlxHlxMvwK0n
+ hrO27WMMH20YLmw==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -117,122 +112,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series enables USB on Qualcomm SDM845 platforms and lays the
-foundation for future SoCs as well.
+Update Bhupesh's email to his new one.
 
-It introduces two new high-speed PHY drivers, one for SDM845 and one for
-an upcoming platform. The SDM845 clock driver gains support for
-configuring the USB clocks, and the GPIO driver is updated to use .set_flags
-which fixes a strange bug where GPIOs would also be configured as input.
-
-Support for super-speed USB modes is not currently available, however
-configuring the device to be high-speed only requires modifications to
-DT.
-
-To improve compatibility with upstream DT, we switch Qualcomm platforms
-over to OF_LIVE and apply fixups to the tree to remove references to the
-super-speed phy, as well as configure the Qualcomm glue for high-speed
-only mode.
-
-The db845c requires a vbus-supply to be hooked up for its usb type-A
-port. A U-Boot dtsi file is added to configure this.
-
-With these patches, it is now also possible to run U-Boot on some SDM845
-phones like the OnePlus 6 using a dtb from Linux, and access the U-Boot
-shell via the CDC ACM USB serial gadget.
-
-This series depends on the ("Qualcomm DWC3 USB support") series [1], as
-well as Volodymyrs patches enabling power domain support [2].
-A feature branch based on qcom-next with the necessary dependencies
-for testing the Dragonboard845c can be found at [3].
-
-[1]: https://lore.kernel.org/u-boot/20240320-b4-qcom-usb-v4-0-41be480172e1@linaro.org
-[2]: https://lore.kernel.org/u-boot/20240311213334.3567389-1-volodymyr_babchuk@epam.com
-[3]: https://git.codelinaro.org/linaro/qcomlt/u-boot/-/tree/b4/qcom-livetree
-
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
-Changes in v6:
-- Add a comment explaining the non-standard clrsetbits_le32()
-  implementation in the femto-v2 phy.
-- Link to v5: https://lore.kernel.org/r/20240328-b4-qcom-livetree-v5-0-4e98228b3d03@linaro.org
 
-Changes in v5:
-- Call regulators_enable_boot_on() during board_init() and don't use
-  the vbus-supply property anymore. This is slightly more aligned with
-  upstream.
-- Minor checkpatch fixes
-- Link to v4: https://lore.kernel.org/r/20240320-b4-qcom-livetree-v4-0-d867ab1f06c2@linaro.org
-
-Changes in v4:
-- Fix defconfig.
-- Mark db845c vbus regulator always-on to fix a bug in Linux.
-- Add a timer in qcom_of_fixup_nodes() so the boot time impact can
-  be easily measured.
-- Drop unused macros from femto v2 phy, general cleanup, remove custom
-  set/clrbits impl.
-- Rename "7nm" phy driver to "femto-v2" to match Linux, also fix
-  copyright.
-- Use set/clrbits() in qusb2 phy driver.
-- Link to v3: https://lore.kernel.org/r/20240319-b4-qcom-livetree-v3-0-e1b38d9b4fa4@linaro.org
-
-Changes in v3:
-- Add back missing gadget options to qcom_defconfig (thanks Neil)
-- Link to v2: https://lore.kernel.org/r/20240315-b4-qcom-livetree-v2-0-ab635774b2dc@linaro.org
-
-Changes in v2:
-- Fix incorrect order of NULL/0 parameters to of_write_prob() in
-  fixup_qcom_dwc3()
-- Move fixup_usb_nodes() to a separate file in preparation for future
-  additions.
-- Add missing break to switch case in sdm845_clk_enable()
-- Remove rogue return statement in msm_gpio_set_flags()
-- Rebase on Volodymyrs power domain patches.
-- Link to v1: https://lore.kernel.org/r/20240131-b4-qcom-livetree-v1-0-4071c0787db0@linaro.org
-
+Cc: Bhupesh Sharma <bhupesh.linux@gmail.com>
 ---
-Bhupesh Sharma (2):
-      phy: qcom: add Qualcomm QUSB2 USB PHY driver
-      phy: qcom: Add SNPS femto v2 USB HS phy
+ .mailmap | 1 +
+ 1 file changed, 1 insertion(+)
 
-Caleb Connolly (14):
-      mailmap: update Bhupesh's email address
-      mach-snapdragon: disable power-domains for pre-reloc drivers
-      clk/qcom: use offsets for RCG registers
-      clk/qcom: sdm845: add gdscs
-      clk/qcom: sdm845: add USB clocks
-      gpio: msm_gpio: add .set_flags op
-      serial: msm-geni: support livetree
-      mach-snapdragon: fixup USB nodes
-      mach-snapdragon: fixup power-domains
-      mach-snapdragon: call regulators_enable_boot_on()
-      dts: sdm845-db845c: add u-boot fixups
-      qcom_defconfig: enable livetree
-      qcom_defconfig: enable USB
-      usb: gadget: UMS: fix 64-bit division on ARM32
+diff --git a/.mailmap b/.mailmap
+index d1f08f3eca8a..f6e0847b2168 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -29,8 +29,9 @@ Ashok Reddy Soma <ashok.reddy.soma@amd.com> <ashok.reddy.soma@xilinx.com>
+ Atish Patra <atishp@atishpatra.org> <atish.patra@wdc.com>
+ Bharat Kumar Gogada <bharat.kumar.gogada@amd.com> <bharat.kumar.gogada@xilinx.com>
+ Bharat Kumar Gogada <bharat.kumar.gogada@amd.com> <bharatku@xilinx.com>
+ Bhargava Sreekantappa Gayathri <bhargava.sreekantappa-gayathri@amd.com> <bhargava.sreekantappa-gayathri@xilinx.com>
++Bhupesh Sharma <bhupesh.linux@gmail.com> <bhupesh.sharma@linaro.org>
+ Bin Meng <bmeng.cn@gmail.com> <bin.meng@windriver.com>
+ Boris Brezillon <bbrezillon@kernel.org> <boris.brezillon@bootlin.com>
+ Boris Brezillon <bbrezillon@kernel.org> <boris.brezillon@free-electrons.com>
+ Christian Kohn <chris.kohn@amd.com> <christian.kohn@xilinx.com>
 
- .mailmap                                  |   1 +
- arch/arm/dts/sdm845-db845c-u-boot.dtsi    |   9 +
- arch/arm/mach-snapdragon/Makefile         |   1 +
- arch/arm/mach-snapdragon/board.c          |   5 +
- arch/arm/mach-snapdragon/of_fixup.c       | 155 +++++++++++
- arch/arm/mach-snapdragon/qcom-priv.h      |  20 ++
- configs/qcom_defconfig                    |  53 ++--
- drivers/clk/qcom/clock-apq8016.c          |  39 +--
- drivers/clk/qcom/clock-apq8096.c          |  28 +-
- drivers/clk/qcom/clock-qcom.c             |  24 +-
- drivers/clk/qcom/clock-qcom.h             |  16 +-
- drivers/clk/qcom/clock-qcs404.c           | 122 ++-------
- drivers/clk/qcom/clock-sdm845.c           |  61 +++--
- drivers/gpio/msm_gpio.c                   |  27 +-
- drivers/phy/qcom/Kconfig                  |  15 ++
- drivers/phy/qcom/Makefile                 |   2 +
- drivers/phy/qcom/phy-qcom-qusb2.c         | 429 ++++++++++++++++++++++++++++++
- drivers/phy/qcom/phy-qcom-snps-femto-v2.c | 216 +++++++++++++++
- drivers/serial/serial_msm_geni.c          |  15 +-
- drivers/usb/gadget/f_mass_storage.c       |  13 +-
- 20 files changed, 1010 insertions(+), 241 deletions(-)
----
-base-commit: 0d08018d01afaddcee8dd1f1929a48577684110c
-
-Caleb Connolly <caleb.connolly@linaro.org>
+-- 
+2.44.0
 
