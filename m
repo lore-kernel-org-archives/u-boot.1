@@ -4,98 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DD68CD1288
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 19:07:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 391FDCD128A
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 20:33:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A503883A4;
-	Wed,  3 Apr 2024 21:07:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E38E8824C;
+	Wed,  3 Apr 2024 22:33:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="pBTDh1uE";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="pZGyuZuk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B65DE88359; Wed,  3 Apr 2024 21:07:38 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 8AEFC88249; Wed,  3 Apr 2024 22:33:14 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9B3888393
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 21:07:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 365298828D
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 22:33:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 0A0483FE1E
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 19:07:31 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 7BA063F274
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 20:33:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1712171252;
- bh=dVSIyVRFAlBfvInoDuMz4NzfBgRgywhUUJ/CmscLzb8=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=pBTDh1uEnVrKW+nuvfMeplVWjEW+XlWwQZ/3NP+QDcHKYENP46PEyqT7c3dNGoR8r
- 5V/PQs+YWN/dVl+YAG9KYdopiS92+2zRjPwsBR5GiCQdnyXm+vZXlBlCcNsecx6tjI
- 5o4A6BuJIbWMpC6hl5D+9ll9EQqOD4Tb8hS8Wrjk9KruCbk1Rvj+pKYE0vMJp9Xsea
- cwnBC1OCMx87h1pYOp9tZ6p/h1ESD+VbtIFIwsQ2gBxcTb2gTTMtBSuknDF26bINFK
- GrDGCHiquzB3B/JK3rhLYT4aVgdpMa6LJJEUGQ/m9De2C3eFY5n4jnBJeBpC//1hsW
- SyNxKMTf/+60Q==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-33ed71800f2so69901f8f.2
- for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 12:07:31 -0700 (PDT)
+ s=20210705; t=1712176391;
+ bh=nVs7W73bHY39lyvg1HrBrKCkxP91tmxQ3P4aT2kIGiM=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=pZGyuZukDRruisD9aLg5cnUXT/IfF1fALAHvElp9nqMuJbd99bDY2Zuois66kq8Yi
+ R6L0vKTBMypb+Zb8Z2GveYOrqEk+35SjSURiMo9cyZA7Qv4UpzVK1vgfCVAGEGQ7qW
+ X90vbkQCAGnzRsf4qL5jjFBxolMNA5MdjeErEDZeSdaej+FUrcMvbT9Ep60Mqj2PmN
+ OUE8JBkhVHH0Dv2YfyVxlpKc63zCUFKeKUhY7vhwBZ7jPaNP64XuuWlM7DL4yfwd+e
+ ZlogKt0HNCZoCNDHsB0S6Bw0Cm2Ux63CM3MIwgPosAqvjienxL4EHacucAVNX9teWK
+ 3bocBBJVg0aCQ==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-343b9e49248so12258f8f.2
+ for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 13:33:11 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712171245; x=1712776045;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dVSIyVRFAlBfvInoDuMz4NzfBgRgywhUUJ/CmscLzb8=;
- b=HdR6QC3vfJiTQxzee8m6XRtM/Jice5iw0AHp8TC+cZ/JMSA68kU1fZI1ke6MDFGyaF
- VvCbU+pcj3AsfMZsAlalWG+8q7EGKnOFm76nCrESfMrTLftaQWbCLjxakPWRBN129eKA
- 5lhVlXBKY6HMXgukanpMdr/EVcA3cYpOOctFE8UPPzURN2ofEMD5y2G1OdGjsGpmfaAz
- OhcGHhdc+IxCiNiBaKzbhNdSraNnZA+4UqMheUfbwIOcXFAwgGj+CCNWhKfUxKuyOPE/
- OYbeG/a84ZTOiuaCkOrRW+UglQg1ubxWQY/lKPPc9CT3VpKO2Uvd7AMBsGsQmEjUhf2m
- OLFQ==
+ d=1e100.net; s=20230601; t=1712176390; x=1712781190;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=nVs7W73bHY39lyvg1HrBrKCkxP91tmxQ3P4aT2kIGiM=;
+ b=JwA9pSLxvmLGzWbe/ci05RZytzdsMPJS0xUkCpSZOxMPytW6ZTDGMYNjtVdO780yqO
+ ko0T9qtSmslR6ZhT25EhH60T+U/e/3tx8F+NcqS0zJ9t0VQqdxe/Y7Yb/AsXXNGgliyU
+ IDB0tTB3QXPVtFGGj0I+i0xAbgc99CyESPZuMehwIltEm+8SadvPG+vh61ecfhKVGm6h
+ shgTp2Z12KR6p9R/XS2OCzWKi8+M6kmMvWrR/mEUXTk3TwhUNY/Gc9lek4nzTLFabpEr
+ 9eZzSMgNgKsanC2DeDf0UWqDUVkLVLqDf2y9ig+6zp61gHZxR0LkS+jiAf5g8EKGtlMf
+ iJFQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWaXhdPEsIFBhjDqU7rBjqq4urLjfPTCRrJUxF1WhprhGxBcVGpU0aLoINE5uAisqC9gPO6wXJ0lQ3Jg+CFAMYaj4v0wg==
-X-Gm-Message-State: AOJu0YxG24YgOWjZbsm2w6PGfASkdb2aU5/U+k8FdQEvl5IaX4zZ7B5Y
- EnKPoW0VcLD+L/RixUSstDSCCiIiSJcnzRs38tg2DPWmsIfAjSIkFtqkOK13IVKtHFJ8cfAfcOD
- GQlmgLk3t5C1VladiYJ4QUrBnnGROOn5xaRJC15rvL2qvodUvuO/cou7Bt1ao8oLSjZs=
-X-Received: by 2002:adf:e845:0:b0:343:9d4b:d920 with SMTP id
- d5-20020adfe845000000b003439d4bd920mr291805wrn.40.1712171245721; 
- Wed, 03 Apr 2024 12:07:25 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IEiTlxfahnx3nRcVVW8gQz/5cI2XK6n7nl4548W3yW/WZsmj9n6IRK24AAT6m85LNh+GTR6kA==
-X-Received: by 2002:adf:e845:0:b0:343:9d4b:d920 with SMTP id
- d5-20020adfe845000000b003439d4bd920mr291789wrn.40.1712171245407; 
- Wed, 03 Apr 2024 12:07:25 -0700 (PDT)
-Received: from workstation5.fritz.box
+ AJvYcCXg00vViiDdCJMSjh1zRfpQQ51UADaIEt2nbAwLCU94Y9Dd8uyjEJjCBH1JkrEpn1gHzl3MBZUn5JLILQ/VHaqO0lRnGg==
+X-Gm-Message-State: AOJu0YybbYX3sttR88v0Mr7ZmqJwCxvJgz1ZGsPagoU41ojZIucY95zT
+ o97Jwf6kWsZ/n4BabqW2yt+yiVwU2LAO0oR4f90XwHblLBM/0uWPO2MkG5P0Ik6OMD1D8Di0MDg
+ o1QOVuC+cBabl5ziY+MImEzU/xC9eBSbqxvr4Y6K8q0Y+4oWX2jTePBAe4mQ0a94AsFw=
+X-Received: by 2002:a5d:4384:0:b0:33e:c7e9:3360 with SMTP id
+ i4-20020a5d4384000000b0033ec7e93360mr334224wrq.18.1712176390014; 
+ Wed, 03 Apr 2024 13:33:10 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFSCBEotClcrahehNZGb8cjbm2CtWBje7sUMrWwHi8qgO7pgRmoa3FQ/skchTwlWxRW6V6H5Q==
+X-Received: by 2002:a5d:4384:0:b0:33e:c7e9:3360 with SMTP id
+ i4-20020a5d4384000000b0033ec7e93360mr334216wrq.18.1712176389650; 
+ Wed, 03 Apr 2024 13:33:09 -0700 (PDT)
+Received: from [192.168.123.161]
  (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
  by smtp.gmail.com with ESMTPSA id
- d1-20020adfef81000000b00341d84f641asm18042610wro.8.2024.04.03.12.07.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 12:07:25 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Shantur Rathore <i@shantur.com>, Mathew McBride <matt@traverse.com.au>,
- Mark Kettenis <kettenis@openbsd.org>, Ramon Fried <rfried.dev@gmail.com>,
- Sean Edmond <seanedmond@microsoft.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, E Shattow <lucent@gmail.com>,
- u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/2] boot: enable booting via EFI boot manager by default
-Date: Wed,  3 Apr 2024 21:07:14 +0200
-Message-ID: <20240403190715.144725-2-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240403190715.144725-1-heinrich.schuchardt@canonical.com>
-References: <20240403190715.144725-1-heinrich.schuchardt@canonical.com>
+ cc13-20020a5d5c0d000000b00341b8edbe8csm15664506wrb.87.2024.04.03.13.33.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 03 Apr 2024 13:33:09 -0700 (PDT)
+Message-ID: <0f74db58-a3e2-4faf-87ce-79fbf64314ff@canonical.com>
+Date: Wed, 3 Apr 2024 22:33:08 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: Don't delete variable from memory if adding a
+ new one failed
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Ilias Apalodimas <apalos@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+References: <20240403154353.440959-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240403154353.440959-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,29 +108,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If UEFI is enabled in U-Boot, we want it to conform to the UEFI
-specification. This requires enabling the boot manager boot method.
+On 4/3/24 17:43, Ilias Apalodimas wrote:
+> From: Ilias Apalodimas <apalos@gmail.com>
+> 
+> Our efi_var_mem_xxx() functions don't have a replace variant. Instead we
+> add a new variable and delete the old instance when trying to replace a
+> variable. Currently we delete the old version without checking the new
+> one got added
+> 
+> Signed-off-by: Ilias Apalodimas <apalos@gmail.com>
+> ---
+>   lib/efi_loader/efi_variable.c | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+> index 40f7a0fb10d5..b6e60626a260 100644
+> --- a/lib/efi_loader/efi_variable.c
+> +++ b/lib/efi_loader/efi_variable.c
+> @@ -342,11 +342,12 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+>   		ret = efi_var_mem_ins(variable_name, vendor, attributes,
+>   				      data_size, data, 0, NULL, time);
+>   	}
+> -	efi_var_mem_del(var);
+> 
+>   	if (ret != EFI_SUCCESS)
+>   		return ret;
+> 
+> +	efi_var_mem_del(var);
+> +
+>   	if (var_type == EFI_AUTH_VAR_PK)
+>   		ret = efi_init_secure_state();
+>   	else
+> --
+> 2.43.0
+> 
 
-Reported-by: E Shattow <lucent@gmail.com>
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- boot/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/boot/Makefile b/boot/Makefile
-index f0a279cde16..72c3feae0d1 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -34,8 +34,8 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SCRIPT) += bootmeth_script.o
- obj-$(CONFIG_$(SPL_TPL_)CEDIT) += cedit.o
-+obj-$(CONFIG_$(SPL_TPL_)EFI_BOOTMGR) += bootmeth_efi_mgr.o
- ifdef CONFIG_$(SPL_TPL_)BOOTSTD_FULL
--obj-$(CONFIG_EFI_BOOTMGR) += bootmeth_efi_mgr.o
- obj-$(CONFIG_$(SPL_TPL_)EXPO) += bootflow_menu.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootflow_menu.o
- endif
--- 
-2.43.0
-
+Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
