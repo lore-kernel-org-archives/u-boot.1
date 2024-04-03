@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71E08CD128A
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 12:10:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FCD4CD128A
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 12:10:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35DAF88399;
+	by phobos.denx.de (Postfix) with ESMTP id 93C2C883B5;
 	Wed,  3 Apr 2024 14:08:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i/hI2lk6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="shKD9eEh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E8C7883C5; Wed,  3 Apr 2024 14:08:07 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 3608C883B3; Wed,  3 Apr 2024 14:08:08 +0200 (CEST)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5DD30883AC
+ by phobos.denx.de (Postfix) with ESMTPS id E3D8F88391
  for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 14:08:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a517a492055so15230766b.1
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-56dfb52d10cso1340034a12.2
  for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 05:08:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712146083; x=1712750883; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712146078; x=1712750878; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=rT2hJHvXJ3OID9Ciyja3ANXjBepnBUwLb+A7aW2D5jw=;
- b=i/hI2lk6UnGXOP2YBdjKQ0da1wFGQ9XxqpZyqzwgvLShYTNdWS23TSbR/lhRy6SUmQ
- M44d3BcBaGpLr2MQy4HZ6DGL/VUk9acXMcTkQdIaqlaQ0LvQQgm2+ZuXZkr0fLAYGZQS
- zJBu+jA1HIZ3e5liIoTTXKLtYAnwBnMHdghCE5imE03GCbOZHH/1UQd4fOiU3QSXrDNq
- C92mUufd3m3ZVAWMb8ZLciunXPpWzhD9Uk3QVynnv0m+DoU7r440KHsRK9QQDWM/aIxA
- xLWe71697dhJX+/rJFkYIMRVBeHCr2TCqFXL7CXHDTrPCk94XksuqqwIrZSB6LM4k5uZ
- Gmsw==
+ :reply-to; bh=cgGFkOv1r6ZqedijumR44euV2V/PWTObj0uui6365Yw=;
+ b=shKD9eEhdTscW7Igv0DkMp6XYQCJOohxYnjsowwP13Eci9T4/TEzbI+jNM1SBZNsZi
+ WFKaQVFkrBwPGOaEl2Vcp09EHOOR2R6ROYy4HvbAjz9s8J47qDEVXQcuj1Nk4v+GVSAk
+ O70V7LlZTxDFTwg0HTMn5Vs9fG3WzqAUj7LEq3VXbw3ciD/OjnBHcsXqsjbM6v8yKeiW
+ WECiXzJH9ot4YUp56OEanWMnjypgkCscWpxyqrAyO67FzNyXXW44Et03hSfLYSa3uAw9
+ fLh7YoQtfdipHKlHKC2YoABzOE/z+TgXn5isNFU2yzyyNRG2Us3IwcPRUxUM+LFUNjL0
+ zd2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712146083; x=1712750883;
+ d=1e100.net; s=20230601; t=1712146078; x=1712750878;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rT2hJHvXJ3OID9Ciyja3ANXjBepnBUwLb+A7aW2D5jw=;
- b=DsgcHe0GJZ7N8an+f58FyBCioXf8fDMyBDuvRBg8wkhfY1llrYvVYYEpyLVuvQTI1v
- IsOFOIQu95dCiFE5IMJqS66zvsInFf1yFg8PSpzzo3HL+MnW3MWzpEE3anBGEQgxxpwy
- d1/hccBj+j8r5nHkdQ+lhXcnvepYbqyLeACSq3Wg3gc6jQeIA9A0tlzuLL1lNNF4rplB
- hWuVpu5ABGU6ZiR/nULGcmoZ9M1Nfac5tyCcbYN6Idly2qAiuBAlQqK+1cwsgXwaergH
- 01VEPr0O4+Nkp9Rvdl8QHdr80+nZBMkD3H0ViT/5PJkOqxHDgBDxA/R5quQ5BAAdR/4Y
- mFnQ==
-X-Gm-Message-State: AOJu0YzY6Z94Svc/Idg/bNGr1GzY9QBJF/CXH1+gNjLCl6joZotlogs8
- lEWxH2q3M5/6mJlbEomzo/XtjHSOvoFRWc4FJr8uSQ8f92AE5ZXE85TxsW0zZo0=
-X-Google-Smtp-Source: AGHT+IGbC7HTepLFKQ+OZQ9uLW4nEYtucnMnVP5QjE1lcTIh2ckFOwehkFemK1ad50p1WrlrPkFWIA==
-X-Received: by 2002:a17:906:22ca:b0:a4e:a7a:84e0 with SMTP id
- q10-20020a17090622ca00b00a4e0a7a84e0mr1559586eja.34.1712146082954; 
- Wed, 03 Apr 2024 05:08:02 -0700 (PDT)
+ bh=cgGFkOv1r6ZqedijumR44euV2V/PWTObj0uui6365Yw=;
+ b=Zhjoa2qH7tKzQPTIjH7Gm1fJQdt4LSuIBaI4cpFAE2+AKKbaNd9oxqiWCK2N2UfyCD
+ 2KMj9gKaZD118skGP1CG0RcQpSV6/7wiog2Fz9jndcKZol8UjaDNW2zPfGUfd3YjFAow
+ hgUev1H4fpQsVqgYu9sn6WWDdOfzUBheyU4slSZHzA4Nm8zC5LjSqOj7qtvGkYkFrdOz
+ zdl0DdRF13oi7Si4W3heSbMgtGPKsjayX7WOMEp+zbPWilFsHUrgEc4VJwf8W6saPvIw
+ jKECTMt8cFo2q87UsnKhkQ946Tl2C7L63Q6HI/sTLRaNab3vnFHUfgweOJHc/9CyyWDv
+ LCcA==
+X-Gm-Message-State: AOJu0YzGlqNDYInC4SagvL5JK+RwXF5jSgIVrfXHAFtWmvvhgxbAUFDo
+ W00qyEJjoIkGm9tbFqnWPffOb8sGDf1YoI+zCz4TVo9X6O7Aj0zTvRha+/aUkXg=
+X-Google-Smtp-Source: AGHT+IEuPTqlvtjGHa/UUEpwXl2sr9dPmdeEfqC+C8abj9oqxheIZTJmdtzyT718mhdD85J1Tm5L0Q==
+X-Received: by 2002:a17:906:f54:b0:a4d:b960:7b8d with SMTP id
+ h20-20020a1709060f5400b00a4db9607b8dmr8946057ejj.18.1712146078552; 
+ Wed, 03 Apr 2024 05:07:58 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::38e6])
  by smtp.gmail.com with ESMTPSA id
- lr20-20020a170906fb9400b00a46a04d7dc4sm7654674ejb.61.2024.04.03.05.08.02
+ lr20-20020a170906fb9400b00a46a04d7dc4sm7654674ejb.61.2024.04.03.05.07.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 05:08:02 -0700 (PDT)
+ Wed, 03 Apr 2024 05:07:58 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 03 Apr 2024 14:07:48 +0200
-Subject: [PATCH v6 13/16] dts: sdm845-db845c: add u-boot fixups
+Date: Wed, 03 Apr 2024 14:07:44 +0200
+Subject: [PATCH v6 09/16] serial: msm-geni: support livetree
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240403-b4-qcom-livetree-v6-13-130f8f50b538@linaro.org>
+Message-Id: <20240403-b4-qcom-livetree-v6-9-130f8f50b538@linaro.org>
 References: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
 In-Reply-To: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -79,21 +79,21 @@ To: Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1169;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1262;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=1IDFJJ2BawZVnf9CpUigdeE7f6YRQUBvg/1YpdTtwBY=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmDUaRgBKiXoaLUJGiuJjkydjXsh9X5t5TpTITi
- 0a/FryVOoGJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZg1GkQAKCRAFgzErGV9k
- tnumD/9DXm++u+nC9Np19NklsZE63Uqlepa02+VfYA96QNC3DizJxmyWR+1iubtPqLdvFWJKFtZ
- mP1g59LCMG8p5pkFiUSecltdTgV7MJvB3yvq5EJAvGkBhw5bF6NLHFwD8jv3QXgWiKgqklrYBCX
- Mxsg8kfFNnJ9qeeen1lrC+3cPUoWCXo+EtTmivL993vXpLCImvVvxYV2tXf33+DqNWrKnf+8XVI
- NpriFkiXIxHNpbR4HiiZ5+XfHGIpBK9QgSFZ3Fp+ET28wA/6pWXcj1O7sfaswVeGMsgZVsXpTJL
- GBvtM9lJXY//PUT3wvQ1vzwLkEr/ER/Wt9CXknXjmAKZ93H7cAh9VfLlUOCgxUdBzcHtcSDw2FV
- 6tF0uDj4KNZxGWqd/y7WbcQwFtL1/IFXTlHG/y+m/F6qfotZph9rWXEluWi/RdyftwXj1vAUurh
- psj6gjX/gQJvo5OJ5OUdjNQTVIARWcZCal6JVrgQ4rdiDiFUahR6zXuESGNTNv7zGx4Jy9X8DsU
- cV7/cOJgbck47b91y6OoweZ0s7UI1jUWvzQCNY1/nH1qcgY5GUVaVZudMUwqeBU6gTOlyWGPBG4
- RCGAiMpX8rpyX7MrWOdZ4AWgRNDM+dMPZCyWfgSFhVL73ecqxgVA9tmP7YMBihnBdrqiYtgf2pe
- xx3RJrGs1CtBKBg==
+ bh=e9QvEtgQXqVS65y/B+mDQKCzyUPIH18kPws1KWRjbZI=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmDUaRmWSur1rzD8CIDcVepOfCj+IadBnFRwqJU
+ ZSG4RNzQVqJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZg1GkQAKCRAFgzErGV9k
+ tpvSD/sG0z1sTuSAmuBleFC4+P/cgyaEcoGPMxViiMakB22iKyycA4n/al263SlA/VlA3lwQToo
+ ucxnbdBObtIxA/ejqIGZGuMi60vaGQkIe1nT+/JE4t149V7KUWDCDmW8UeLa8GC9z1YU0u6KSEA
+ AYGxaCLgMDkgNodqiwK8DNs/DT620DSWOIwnJtdCiO/WV8bfqPUcsWmpl2N8Fy/74O2blD+XVxR
+ hNfVPe/ldsUc11UzVopvxeQHm+QEO5Ne+OfPu8dS+ERDTgngSkwTKkPvBR+4WUy9gOZALPPEfqz
+ tFcBngvpEcpGFGI4bHdnz57PFBchz8SIfPa7K8ihhI1DZNA4wJbMH0o1jnUzKBpr/xdZn5jnkfs
+ mhUKsfvVvmQh6IMAAd3papyRKbrGcSM/8TsbaU2sGKZyN1nAxHfBn9cLLn6dx/T6vfPjGbBE7WR
+ kvqh6MODxLlMduj8JvCEFXk4BORjJeaVoiArCESgmUlK1VHmZcBJCV7en1KOoq8LXgYp/2CGpxx
+ 2B+EiYSCZdFtb7PX0twKaOR04lzrxKGMcup/lNSOGwxCygxqh3n3RvOH2S/t8f6mowusNYcKrGH
+ iH1s8C+oW5Bjqr/4Iy0qTxvGmoYHYcP2cTTivsNpySxF2/sDnaBFHl4FWyrA15xtMIKbX6+yTuV
+ AqJXcFaSsArRwaw==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -112,34 +112,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The USB VBUS supply for the type-A port is enabled via a GPIO regulator.
-This is incorrectly modelled in Linux where only the PCIe dependency is
-expressed. The correct way to handle this will be through a
-usb-connector node, but for now we'll just mark the regulator as
-always-on so that it will be enabled automatically during boot.
+When using OF_LIVE, the debug UART driver won't be probed if it's a
+subnode of the geni-se-qup controller. Add a NOP driver for the
+controller to correctly discover its child nodes.
 
-Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/dts/sdm845-db845c-u-boot.dtsi | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ drivers/serial/serial_msm_geni.c | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/arch/arm/dts/sdm845-db845c-u-boot.dtsi b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
-new file mode 100644
-index 000000000000..906f9faa5451
---- /dev/null
-+++ b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
-@@ -0,0 +1,9 @@
-+// SPDX-License-Identifier: GPL-2.0
-+
-+/* Needed for Linux to boot from USB, otherwise if PCIe driver is not in initramfs
-+ * the VBUS supply will never get turned on.
-+ * https://lore.kernel.org/linux-arm-msm/20240320122515.3243711-1-caleb.connolly@linaro.org/
-+ */
-+&pcie0_3p3v_dual {
-+	regulator-always-on;
+diff --git a/drivers/serial/serial_msm_geni.c b/drivers/serial/serial_msm_geni.c
+index 4aa0bc8c72bc..5260474fb9a4 100644
+--- a/drivers/serial/serial_msm_geni.c
++++ b/drivers/serial/serial_msm_geni.c
+@@ -605,8 +605,21 @@ U_BOOT_DRIVER(serial_msm_geni) = {
+ 	.ops = &msm_serial_ops,
+ 	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
+ };
+ 
++static const struct udevice_id geniqup_ids[] = {
++	{ .compatible = "qcom,geni-se-qup" },
++	{ }
 +};
++
++U_BOOT_DRIVER(geni_se_qup) = {
++	.name = "geni-se-qup",
++	.id = UCLASS_NOP,
++	.of_match = geniqup_ids,
++	.bind = dm_scan_fdt_dev,
++	.flags = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
++};
++
+ #ifdef CONFIG_DEBUG_UART_MSM_GENI
+ 
+ static struct msm_serial_data init_serial_data = {
+ 	.base = CONFIG_VAL(DEBUG_UART_BASE)
 
 -- 
 2.44.0
