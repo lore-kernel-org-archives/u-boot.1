@@ -4,125 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6229DCD11C2
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 01:18:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B815CD11C2
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 01:20:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5295881C8;
-	Wed,  3 Apr 2024 03:18:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 8B50287CB7;
+	Wed,  3 Apr 2024 03:20:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="sTGijEs+";
+	dkim=pass (2048-bit key; unprotected) header.d=outlook.com header.i=@outlook.com header.b="Lg0cuhv4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 85A9C881C7; Wed,  3 Apr 2024 03:18:18 +0200 (CEST)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
+ id 13B6687CB7; Wed,  3 Apr 2024 03:20:07 +0200 (CEST)
+Received: from APC01-TYZ-obe.outbound.protection.outlook.com
+ (mail-tyzapc01olkn20800.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:280c::800])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 351EC8811A
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 03:18:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A70CD878A1
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 03:20:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=none dis=none) header.from=outlook.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20240403011814epoutp02b3266bdcb31540fb26c091fc95802083~CoFTDYZjx0095200952epoutp02k
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 01:18:14 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20240403011814epoutp02b3266bdcb31540fb26c091fc95802083~CoFTDYZjx0095200952epoutp02k
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1712107094;
- bh=Jrd/7CAu5NQSbbOooTzQH7IO/LC1XJYuCzBmmkJBUJY=;
- h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=sTGijEs+DZtyQ9kY6R7bwpepAGffhpFDD6egMqw+pmc6A4RulwfGa1IzMsUT3cwoI
- 5CkKBUT4JhNsmxaTSIbdyi42eCcAeaR3uPK2QinscbxPjtfcMKd1cMWGRchI4mJpDm
- T4xTLxw8eWrfchFs477N8Y36L1Wz8W3jAiyy2xeM=
-Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
- epcas1p1.samsung.com (KnoxPortal) with ESMTP id
- 20240403011814epcas1p15fb85d60f4a0cd87068515b15cd4de2a~CoFS1Gxt80994609946epcas1p1X;
- Wed,  3 Apr 2024 01:18:14 +0000 (GMT)
-Received: from epsmges1p5.samsung.com (unknown [182.195.36.133]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4V8RhN3kGpz4x9QM; Wed,  3 Apr
- 2024 01:18:12 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
- 90.ED.10076.45EAC066; Wed,  3 Apr 2024 10:18:12 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20240403011812epcas1p487b39de044af6e75cca9bc4b8c9b0ee6~CoFRJoocQ0547705477epcas1p4C;
- Wed,  3 Apr 2024 01:18:12 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240403011812epsmtrp262fcb0d15af2fe893b8044a322f3943e~CoFRI4Og61849118491epsmtrp2N;
- Wed,  3 Apr 2024 01:18:12 +0000 (GMT)
-X-AuditID: b6c32a39-7edf87000000275c-20-660cae542c9e
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- DE.04.08924.35EAC066; Wed,  3 Apr 2024 10:18:12 +0900 (KST)
-Received: from [10.113.113.235] (unknown [10.113.113.235]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20240403011811epsmtip14900350f39317e6755f885c556a93272~CoFQ2Selk2896128961epsmtip19;
- Wed,  3 Apr 2024 01:18:11 +0000 (GMT)
-Message-ID: <e4ca5de9-eb6b-4ea4-a19a-df000d737ed4@samsung.com>
-Date: Wed, 3 Apr 2024 10:18:11 +0900
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=forbidden405@outlook.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KuKQFQa0CYp8xlg4xg+vzTxM1lk52aCpH/7FQIpMxofX4wOjDMwxViTGd2s/gXsS0qqMVaHYpFniJpJyylaLjTMeWMpQT0GnPN7MoopkbnRyZCJEw7bil4cKn3umPtU85yJ41+4CouBlv+R02goeSB7GOh0qed9bKsTfTmx9BTJutyr8CHyVGA4nE4tvB/NBfPWjlqjVEIooI+8fL5N7b63ey/b51kNebawQMzuV3BusScmN8Y3RQRt2WzmFnXUSCDiUiE7TouGHm58gAWuFtNaiQJQqRc7EKKWVlSj2xA/Z0XZtm7rA2ZRqNdsO0JVZQkWMcOJqysiTgy7CocxmhA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=cu9sNK7sWeHDKMKEtuqe98rj2mv9ouu20r9QW2ZSDRU=;
+ b=BhMUnPuoEkKlyNH3hvFfnlGoZNDlWcppmor3OaDkldPR+V+WyoShttSDTvJJApIQpUZHg6L1NJiUNND6xNVgsSOrCR3dYD89AlJa+Zt8qyqf/nBk1OCMfoVQFLocXP1PxtfEUpRVCSsNLUzc6fpnvSuR7l4UMt/RLrzM0N4LVjCpTA9EyyU8vbpRrQ9v2KUwvo7OawDztWxCkZTBEqs0KxLPkc0/0ygTjLykhH92M5o/IP9nb3lWbKVMADak+fxLr4cn84BwsZdXd/DuL3Q3Jt/gbExYqx/3CFrlW6DjiiknYC6YOOfrbat1+qpRcNFBe3VFLjNNTZde515pQurV/Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=cu9sNK7sWeHDKMKEtuqe98rj2mv9ouu20r9QW2ZSDRU=;
+ b=Lg0cuhv4WfvIex1irwL8PgLgxnH5krkliX2urqsan6sZBAgcDi42oanwEHxIHAO0u+3URfiIX24gXb7j4K0SFccoOAJ4tDYhQl3zt1NUUegb0Si4kcOPWvsCDTIhpjeRbD5zZi2bi2p69GrOpVG8EbQzq3G0MHlNVT4h6I1CBfXcTNSWfwFfcrF8QD4zaDMk8oqvaNDyZH2YRFoP0XAKxpvbXfumwZWDboocCDvmSX8eyQppFGvlO9KlsVDtjnjGpQy1p7Vu2YDixTl3RXZ9sX8qyxemCS/i1qeeA1vSU63/10yF0cLM5cEh2FOe1oKDUgEnkVxkO4gfBzrTfGfCBA==
+Received: from SEZPR06MB6959.apcprd06.prod.outlook.com (2603:1096:101:1ed::14)
+ by TYZPR06MB6402.apcprd06.prod.outlook.com (2603:1096:400:425::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Wed, 3 Apr
+ 2024 01:20:01 +0000
+Received: from SEZPR06MB6959.apcprd06.prod.outlook.com
+ ([fe80::aced:cbb9:4616:96d8]) by SEZPR06MB6959.apcprd06.prod.outlook.com
+ ([fe80::aced:cbb9:4616:96d8%2]) with mapi id 15.20.7409.042; Wed, 3 Apr 2024
+ 01:20:01 +0000
+Message-ID: <SEZPR06MB69598F7A966ABC6664BD4724963D2@SEZPR06MB6959.apcprd06.prod.outlook.com>
+Date: Wed, 3 Apr 2024 09:19:56 +0800
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] mmc: renesas-sdhi: Do not access SCC during
- tuning in send_cmd callback
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>, Hai Pham
- <hai.pham.ud@renesas.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Peng
- Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>, Tom Rini
- <trini@konsulko.com>, Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
+Subject: Re: [PATCH v2 2/3] mmc: dw_mmc: Don't return error if data busy
+ timeout
+To: Jaehoon Chung <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>
+Cc: u-boot@lists.denx.de
+References: <20240201-mmc-v2-0-9f09dc1335fd@outlook.com>
+ <20240201-mmc-v2-2-9f09dc1335fd@outlook.com>
+ <CGME20240403004155epcas1p1fdb3680cde2a4dee4325e22b9b076e6a@epcas1p1.samsung.com>
+ <908bd8cb-b7a3-4701-b636-6d96cd2d2472@samsung.com>
 Content-Language: en-US
-From: Jaehoon Chung <jh80.chung@samsung.com>
-In-Reply-To: <20240224223235.287889-3-marek.vasut+renesas@mailbox.org>
+From: Yang Xiwen <forbidden405@outlook.com>
+In-Reply-To: <908bd8cb-b7a3-4701-b636-6d96cd2d2472@samsung.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA01Sb0wTZxz2vbter7qasyK86WastVkGGdCTlh0EyKJGGzFZo+6Li2KlB2Ut
- bddriSxZJDZjm+hGZ3BYcBWBD7QL26xKwaHARpiWLcxANilgSbqtYMootQiR6FpONr49v+d9
- nt/fl0BF13ExUWG0MhajxiDFN2K3fkyXZx7tfKVM7uwU011uO0pH7Cz9cccETq/cW+LRS+4n
- PPrmVD1CN3zp5dOR3s/4dLw3hr8tUHWEm/iqbuckXzXb5+arfpnwAVV30x1E1XfxV57q+zkf
- olocdmBq4pi+QMdotIxFwhhLTdoKY3mhtPhIyd4SZa6cyqTy6LekEqOmkimU7jukztxfYUj0
- J5VUaQy2BKXWsKw0u6jAYrJZGYnOxFoLpYxZazArzVmsppK1GcuzjIw1n5LLdysTwpN6XSQW
- 5Juj8PR4cAKrASsp54CAgKQCxr0eNIlFpA/Ap9EEvzGBFwC86rrD54JFAO//OQ7WHGebH+Hc
- Qy+AN3y3MS74B0DX6DMkqRKSRbB70JuwEwRGyqBj3sLRW+C9yyEsibeRO+Cj8UZ+Em8lGTjW
- 1Ion5SnkARheESZTomQjAn9qbV7Vo2QaHA+5VtPj5Juwa3FoFQvI/dDr8PM4zQ7YFWlGk2ZI
- +gj4SWQa47reBz8P1L2cYCucHbrB57AYxuZ6cc5gB7C9rZ/HBecBfF7zO86pcuDd9otIsj2U
- TIff9mRz1TbDufh5XpKGpBB+Wivi1DL44PEMspZ/MvSCx2EVnJxverm5MQBnY11IPZA41y3G
- uW5Q57qBnP9XvgowN0hlzGxlOcNSZuV/5y41VV4Hq583I88HvorMZw0AhAADABKoNEW4XCwo
- Ewm1muoPGYupxGIzMOwAUCau40DF20pNid9vtJZQijy5Ind3joKmcilpmnB4tIoRkeUaK6Nn
- GDNjWfMhhEBcgwgYucDmP5U+1v51y4xeWBXMqUqRtefuzPhBqBQM25fxZ/mjly74UzdNecIn
- JUVPPBm1/r9PX7AeOSU+ey322h8y3tMDZc17eg4PHazvEdqRQf2DF4TXUx5O/SswdCn76Mir
- t+PahmPha6K6+1ONr2+YGzqo3uCY8qw8DmDqKw+9FQ1xR02JQr4QPde30198eXr05vJmRzTo
- HsQyz9x9h2yxWrcsOU4cbl2q7ehs8VK7CiwL1dHCwPbQu1+4rixSwjPynzHXie/apiOGW+89
- P77X5lS+MSeW4eiugPyjtO35/bKFPccNHwTe/w2v8wbt1SMjltBMm47Z9I3t4eChfinG6jRU
- BmphNf8CkFOLFEUEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuplkeLIzCtJLcpLzFFi42LZdlhJTjdkHU+awbYmZovtq5qZLd42F1u0
- rrzDZvHn5A9Wix+rvrBabL03gcli6qTN7BZv93ayW3zd+5nNgdNj5YvZ7B47Z91l93h1YBW7
- x9k7Oxg9ds7ex+RxYPI5Vo+N73YweXw7M5ElgCOKyyYlNSezLLVI3y6BK+Pt5wfsBR8lKm49
- uMPSwPhHpIuRk0NCwESiac59ti5GLg4hgd2MEpfvrmeBSEhJfH46FSjBAWQLSxw+XAxR85ZR
- YvXnm6wgNbwCdhI7j25mB6lhEVCRmPihCCIsKHFy5hOwMaIC8hL3b81gB7GFBVIl9iy8zwJS
- LiLgLvHiDy/ISGaBWUwS/9qfQd3QyCjxdfNyJpAGZgFxiVtP5oPZbAI6Etu/HQezOQXcJDZP
- PM0KMohZQF1i/TwhiHJ5ie1v5zBPYBSaheSMWUgmzULomIWkYwEjyypGydSC4tz03GLDAsO8
- 1HK94sTc4tK8dL3k/NxNjOAY09Lcwbh91Qe9Q4xMHIyHGCU4mJVEeH96c6YJ8aYkVlalFuXH
- F5XmpBYfYpTmYFES5xV/0ZsiJJCeWJKanZpakFoEk2Xi4JRqYJpVV3ZgX7Heq925Wq+5Zt12
- ULQp9WSRb/I75ro0oM7T1VQn8V/m96QfRj0T3h1X53Ar/xa4VMXi/83fQv//sX3isOnX6WBc
- cGb5Ia1fLP8dY80XeXtdTrwZzzH1RdKMX2/f9PKqrM/bJT6DMas47p+21vbPxs+F5gaevDHt
- 1MH7p947OkRmpbz7u1Dzp8UkVxFjy2OSn/5U28iulwru/j3z1W3JjYXXvFN+2FTbdy/eE+y6
- UvZoDvsj80+tOySyub/f+S+58MrKb1dmcFsfuPTDR3LRvmXTlzzs19hW6bI/2s80W0Vtbf0T
- sXn6B5eEtjNc4c1u1bRrtjcp+B8Rmf16Ev89plcZgV932n8yiFBiKc5INNRiLipOBACSni8H
- IAMAAA==
-X-CMS-MailID: 20240403011812epcas1p487b39de044af6e75cca9bc4b8c9b0ee6
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240403011812epcas1p487b39de044af6e75cca9bc4b8c9b0ee6
-References: <20240224223235.287889-1-marek.vasut+renesas@mailbox.org>
- <20240224223235.287889-3-marek.vasut+renesas@mailbox.org>
- <CGME20240403011812epcas1p487b39de044af6e75cca9bc4b8c9b0ee6@epcas1p4.samsung.com>
+X-TMN: [rfOzz/TS3HNsIyrZOoUdGFbcY+RWXHn3IhWBTGqD69tx8lAVlb1oghihXfoftC7L]
+X-ClientProxiedBy: SG2PR02CA0058.apcprd02.prod.outlook.com
+ (2603:1096:4:54::22) To SEZPR06MB6959.apcprd06.prod.outlook.com
+ (2603:1096:101:1ed::14)
+X-Microsoft-Original-Message-ID: <970132cb-f193-46e5-aa1d-b3ef9ec745bb@outlook.com>
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SEZPR06MB6959:EE_|TYZPR06MB6402:EE_
+X-MS-Office365-Filtering-Correlation-Id: a210e365-37e2-489d-b7aa-08dc537c2eca
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: HOS1ch7fNT5igygp0t2c/YmvYxRQFSDOAJeBXRzTKHPrjpvC5HfMfZ48LX5OIWfVaoq3mwWjiBukXiSg1WxW/LBxbVNpeTPpUcesh0Ews8Esizw1GpriUIiFDYrw1De5niE5Yo5yFS4kOWd33DBjIGCh0AsE3a0ALU9eKZ/HwT84mEdqQoTmpMfYsCqlb2Rz5a2dQFMRGzIabwaxbS7oINDRKRMZlWNqG7vgvS0AaVkU8zWCOsJuxZm+CDPz+8+Xzeb+Z0NRMPnjOT1w4OuOxzSOOx1ItOdbIwwpS8mCm/Dti8Qgo7nnD1yNG4DL1xiXcp7uWp+oT15V3tEMBIga7/Jh3U0sbofYEWNUSNZmSN/befWZZnuqv7C3UFsfs42TBgkTdF5TJPjif//4mYgqi5T5/stofgxgTwBzEaIrR9moeabGtLPYhxj82Q9B+Ev1Q2RWbyzUv++qyr/1Gb6qPAL61U3TcLU7VhLXPIdqLWYUmzl/xa42jkr9/QDQVV0oaomZPevNqw4M+it3ddyUkXMv23JLxa2vQQc6XeRNHy+Bt25I8tjixSUDvTjJ0i/xtOSbaDw0XNfh90gBKmyAsw4eNkHuqWS5AUChFcFGt1AswFeQMfY4mToZe//AqPaSTcFES4vebeJ98yjYUjnOurzBGGLUBetx8v4EMBNdCI4=
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VU1abTlxOERwMDQrVDJ5SmcxMS85V2NRQjF0Q09UQjZTaWxHaGE0bGQ5Nytl?=
+ =?utf-8?B?MGNxNDVhbnpSRmlOSG9scmYrVmk3SGIyTHVJanI4RWJmbmRibDBXRmdmQWxW?=
+ =?utf-8?B?YzlYREpKM2ovUWRNK0lvQzNiaWprMXNWanI4UDZTYWZGK2FvRTc4a08ydVQ4?=
+ =?utf-8?B?VjR1SzhlaVlDcnZEaklMc3lPYjB3UHJiR0hzQlZLUDJ3M1RxQlpWM0d3b3hl?=
+ =?utf-8?B?MmJFdjhGYWluWXJLSmlqdmVXSStzb2trc1NkbmR1MFNPL3AzR2pqa3poSXdP?=
+ =?utf-8?B?WFc5QmI4OU41WEJJUmtQdjZ0OE9ST3pBUHMrTXRRRVAzYStsRTZXVnMrQ2Rr?=
+ =?utf-8?B?T0RaV013SEZWN1doUmNIbFlEZFlUcWcyL0k5Vlg2RlFzeU11ZlRKRXYySFpK?=
+ =?utf-8?B?dDJRazd6S3dJT1R3ZnBQSnR2OHVmdVBrbUtoR3NOVmN3aFd2VFdoaFA1OUNH?=
+ =?utf-8?B?dFp2NVpEWkg5dlYvV1NIbzlPNk5MOGMwWDlBRUU1MldwSWJaWkRDa0Z1aGhB?=
+ =?utf-8?B?cFRKR1VaRFhvdGZrelo1bUpiTVNEQTR3UjFDYnAwaDlDSC9pdEo3NlZ5QTlw?=
+ =?utf-8?B?NGFaMFFkR3VoK2MyNC83RGVCN2MxdmRwRHM0S1lyay8zVTJYVFNKTWJrdVBa?=
+ =?utf-8?B?MzN3U3NqcmhmcW9JU2lJQWpuaVhYall5OEpyQnZGSWRPNE9ydFlNbG1QRkZV?=
+ =?utf-8?B?NWZMRFBEc3lXK280cDF3TER5UUZneGpHejgrb1l1UG1IQ3preEJTcjhhYkVt?=
+ =?utf-8?B?aVpkRG00clhjZUUyaEdCZ2pnK1RENm5LcjZkMkNJam9GVjB0MWw4bCt0MEZh?=
+ =?utf-8?B?OFZ6M0NXUjRpRVB0NUpjOUN5WDgwNFpOd0xqY1ZHZCtVRUdBbzFTUXFlMHBE?=
+ =?utf-8?B?bzFFZm8xRTh4ekZ5b1NsSHZNZk11SmRGWTdNZGI1REJiYVB4MkdrQkpUTGth?=
+ =?utf-8?B?OWIrVlI2dWlZckhhYThBaDE4MUNjRTFTeURraUJnamIvbkoxSmU2dEt0d25R?=
+ =?utf-8?B?MTZSVkJIM1pXTjZDOEI1TmJHM2ZyWlU1Szc1WTJEWlZ2NXlWb0x3dkFvQVRH?=
+ =?utf-8?B?a2FpMkpuQ2hzRlZKYzY0aUdUdlhESzJDR05WYUNsSHNoaW1rZElqOCtYQWFw?=
+ =?utf-8?B?K1NyNmEreFpBNUpQNm44L3V0c3F0OHNpcnJHOWJicWkvaDZMb3kyQ3BRVHgr?=
+ =?utf-8?B?VU5LOU0vb3hzN1dyNG4zSWZvc0ZrUUNYZUoyUWdiOCt3Mi9RNnpZa0E1QjRR?=
+ =?utf-8?B?SER1R1BjWUFHdEZ0N0Vad3NocG9NMUlBNThzNDV5S056eEhjcmhzbXlSc0J5?=
+ =?utf-8?B?T3krdG5JOFRZeXZwVFFrREwrTHZHcDRQemF4Ty9FSXdnZGo4eXJzZ1gzcjhy?=
+ =?utf-8?B?dTF3TmdJNlFwVUJNa2FDbHZ2cHdqOFNqaWxDZlN3eCtHT3NwcSthQ0l6NEsv?=
+ =?utf-8?B?Mno1ME5mS0NSRVl6TTMzdFpRZGdUcHAwSDl2eUxRdnZWUURNRlUxTnNqdnU4?=
+ =?utf-8?B?Zjh6RHRSQVBIYW5qK2VZTXdtU09xcHcraFMzR0FWWGExL2UvcFNpbVJ2Zm85?=
+ =?utf-8?B?U2pRd0U2Q2FVMkRwem9xY2NnVndHamxISkhwQmZVZjdTcm9aMkdCcW01cm83?=
+ =?utf-8?B?bG81czBTSlRDVkV2a29oMW4zQ2FxR21LZmJZNHFCeGtMR1BQcGhsRTdGdzZJ?=
+ =?utf-8?B?SWsxcFV3a3BxMFQwNDhreTRZRTNBUEhLT1JBYm91UEpxaXdFeWdhRXljQldP?=
+ =?utf-8?Q?XRHwh5Q5tJ7ux1iKYZv88E0cXQLt7To3AAmlNAj?=
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a210e365-37e2-489d-b7aa-08dc537c2eca
+X-MS-Exchange-CrossTenant-AuthSource: SEZPR06MB6959.apcprd06.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Apr 2024 01:20:00.8003 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYZPR06MB6402
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,74 +134,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/25/24 07:32, Marek Vasut wrote:
-> Do not access SCC when sending commands during tuning operation as that
-> will disrupt the tuning operation. The tuning operation is adjusting the
-> SCC settings itself in execute_tuning callback.
-> 
-> When renesas_sdhi_execute_tuning() is called by the MMC core code, a loop
-> which consists of renesas_sdhi_prepare_tuning(), mmc_send_tuning() and
-> renesas_sdhi_compare_scc_data() iterates over each SCC tuning tap.
-> 
-> The renesas_sdhi_prepare_tuning() configures the SCC tuning tap number into
-> hardware, mmc_send_tuning() triggers transfer of tuning block which depends
-> on the bus mode for which the bus is currently being tuned, this information
-> is supplied by the MMC core code, and finally renesas_sdhi_compare_scc_data()
-> tests the received tuning block for validity.
-> 
-> Because renesas_sdhi_prepare_tuning() configures the SCC tuning tap into
-> the hardware to fit the tuning operation, mmc_send_tuning() which triggers
-> command transfer using renesas_sdhi_send_cmd() must not manipulate with
-> the SCC in any way. Currently renesas_sdhi_send_cmd() does unconditionally
-> call renesas_sdhi_check_scc_error(), which may adjust the SCC tuning tap
-> position by writing RENESAS_SDHI_SCC_TAPSET, which would overwrite the
-> required tuning configuration set by renesas_sdhi_prepare_tuning() and
-> disrupt the tuning operation.
-> 
-> Fix this by skipping the renesas_sdhi_check_scc_error() call in case the
-> MMC subsystem is in tuning state. This way, the SCC settings are left
-> unmodified by command transfer during tuning operation.
-> 
-> Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Tested-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+On 4/3/2024 8:41 AM, Jaehoon Chung wrote:
+> Hi,
+>
+> On 2/1/24 23:05, Yang Xiwen via B4 Relay wrote:
+>> From: Yang Xiwen <forbidden405@outlook.com>
+>>
+>> As described in [1], some poor hardware or cards would fail to release
+>> the bus and keep driving data lines low. Ignore it and send the next cmd
+>> directly seems okay for most cases.
+> This patch seems to be same with previous patch, right?
 
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
-Best Regards,
-Jaehoon Chung
+ From my observation, this patch does fix some weird problems and is 
+mostly okay for other dwmmc users. I can't say it is very well tested 
+because of I can't come up of other tests i can do except some `mmc 
+read` and `mmc write`.
 
-> ---
-> Cc: Hai Pham <hai.pham.ud@renesas.com>
-> Cc: Jaehoon Chung <jh80.chung@samsung.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Peng Fan <peng.fan@nxp.com>
-> Cc: Sean Anderson <seanga2@gmail.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
-> ---
-> V2: Add RB/TB from Paul
-> ---
->  drivers/mmc/renesas-sdhi.c | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/mmc/renesas-sdhi.c b/drivers/mmc/renesas-sdhi.c
-> index 29a742f404e..c4d0733b621 100644
-> --- a/drivers/mmc/renesas-sdhi.c
-> +++ b/drivers/mmc/renesas-sdhi.c
-> @@ -798,9 +798,12 @@ static int renesas_sdhi_send_cmd(struct udevice *dev, struct mmc_cmd *cmd,
->  #if CONFIG_IS_ENABLED(MMC_UHS_SUPPORT) || \
->      CONFIG_IS_ENABLED(MMC_HS200_SUPPORT) || \
->      CONFIG_IS_ENABLED(MMC_HS400_SUPPORT)
-> +	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
->  	struct tmio_sd_priv *priv = dev_get_priv(dev);
-> +	struct mmc *mmc = upriv->mmc;
->  
-> -	renesas_sdhi_check_scc_error(dev);
-> +	if (!mmc->tuning)
-> +		renesas_sdhi_check_scc_error(dev);
->  
->  	if (cmd->cmdidx == MMC_CMD_SEND_STATUS)
->  		renesas_sdhi_adjust_hs400_mode_enable(priv);
+
+>
+> Best Regards,
+> Jaehoon Chung
+>
+>> [1]: https://patchwork.kernel.org/project/linux-mmc/patch/1424458179-5456-1-git-send-email-dianders@chromium.org/
+>>
+>> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+>> ---
+>>   drivers/mmc/dw_mmc.c | 4 ++--
+>>   1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
+>> index 400066fa99..e103664145 100644
+>> --- a/drivers/mmc/dw_mmc.c
+>> +++ b/drivers/mmc/dw_mmc.c
+>> @@ -262,8 +262,8 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
+>>   
+>>   	while (dwmci_readl(host, DWMCI_STATUS) & DWMCI_BUSY) {
+>>   		if (get_timer(start) > timeout) {
+>> -			debug("%s: Timeout on data busy\n", __func__);
+>> -			return -ETIMEDOUT;
+>> +			debug("%s: Timeout on data busy, continue anyway\n", __func__);
+>> +			break;
+>>   		}
+>>   	}
+>>   
+
+
+-- 
+Regards,
+Yang Xiwen
 
