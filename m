@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D8D0CD1288
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 12:10:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23AAECD128A
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 12:10:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07EAE883C3;
+	by phobos.denx.de (Postfix) with ESMTP id 74895883CE;
 	Wed,  3 Apr 2024 14:08:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f7tMCc/5";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bRrIR0Yp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF593883BA; Wed,  3 Apr 2024 14:08:09 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 242B9883BD; Wed,  3 Apr 2024 14:08:10 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E5D8883BC
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 14:08:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 84F858839F
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 14:08:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a4e39f5030dso650516666b.0
- for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 05:08:04 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a4e5ee91879so457409566b.3
+ for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 05:08:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712146084; x=1712750884; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712146085; x=1712750885; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=dkr+CmAQ64eUqOg4M49/tTSWR5zwY0MG3Z7wMHd84mg=;
- b=f7tMCc/5xuqSxA2NwVpwRrfVH9ZVqZMojSILnxnG/qyprINn6XpU6e6tHb0GS+i2hy
- +hst8fB4QZtyj7rcz8u+CkKdoC85fZIgDsfiah8EL1RPYyPPL+vnCGtykrnVU34BTOI1
- /lDOpP8ll4E5y5pbUyjgi8A3JEe7AvBF77J1YpE/JqwFzhhdHYw64HOG9cmnALLxgBpZ
- 1PPxacRYigFxsDd+nrUIIP9iIQeXBlpZD9U68lzWttTMNb9iw4EIhnt2vts3MrAuoMwd
- NzDofkfm7riBIWWE1ZmHG0L8RAVTkVrLOGSgLmL9qrVCkZvYbs8PEwK7y9cXZ69QZx1D
- 4pYA==
+ :reply-to; bh=lXyr6tJR6QFXRSTjw1XngBqNszpjZjRzQWF6T1YQB14=;
+ b=bRrIR0YpahYC/V/b8uGNrWwqrFqWYDOOD9k7h/JtzeixxEh8cFuz7LnGldHwJWfK1W
+ Q6U1xxTR/qB3KSVTbX2HXmeYLB8waxx/sCePzCpyfoCRmwJcRgmBgU28Hi1j4pCxuf99
+ wjW9jRmI3/r8aIHJ4+1ifosY7sc0REsVjt9MJqxE9iYqbQcWHMJUC/xyi8nVi7F+03rL
+ yCTxtpRxYSBW/Q1NzqhzMUgSrzSrClf3lelmcq+tV5ujTi0VWmY4r/eD/DpU7Ze/wKBx
+ /Aww5e6bBNU59WzgEaGjisv71JngtFvmpudLtQwRIjzFan3QzNF91zUdwjPEMZzY4n34
+ ripw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712146084; x=1712750884;
+ d=1e100.net; s=20230601; t=1712146085; x=1712750885;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dkr+CmAQ64eUqOg4M49/tTSWR5zwY0MG3Z7wMHd84mg=;
- b=AY9gIglPASP4fKal2GeUt48TPiHLviNRPh9cXyjka1gt1xyq5HzbYEOgiwFaNfRCqF
- bjyiCHHRaeF93AUvsKBJyseeu1dzQpFuprKfUCRyMKuR4WilfrqK9GUh9yrlYJohKcpu
- 52FznGh4ZZ6hRczB+cUWlM8JWSVweyA8xxH1z73hrrya5c0Tn8XPYnKaTi0KjYAnjxN7
- 5/p54O2Siawl46Y/KIVu81j51Tf0n0FvKavrGXSB7v5Oh4LDCGUTbsMH3CkHZRAw0NNl
- VHpFJ8+iheLHktYu20SdTxq5Yq/9tXzTWWgHQBY6NcgKV9BpIQJD54unW+wAtOzistIF
- aRhQ==
-X-Gm-Message-State: AOJu0Ywl09E8iYJt1DJ4jHF/x81DwBf5dI4GkeiQAfUoEwm+o58i0G0N
- z8WgT3DTANNAOSeMSykgk7e70LZ7vDlJtdFkIvs3sK1P4oV5mNlEBAMTKCttg4c=
-X-Google-Smtp-Source: AGHT+IH8OHUQLuLK74/rl7dH6AjuR8hfs1lKAg1p5yOCFzrWosf/erDztz2UGJA4kTR2EILSXHZ9Tw==
-X-Received: by 2002:a17:906:5794:b0:a4e:7b8e:35ae with SMTP id
- k20-20020a170906579400b00a4e7b8e35aemr4946670ejq.38.1712146084063; 
- Wed, 03 Apr 2024 05:08:04 -0700 (PDT)
+ bh=lXyr6tJR6QFXRSTjw1XngBqNszpjZjRzQWF6T1YQB14=;
+ b=lBJwsIaKHfL0/ABUH8abJMQTAqJJy1DzC4Owzmce8Z0lZEWs/J32jmYIyIdBPv3PRs
+ mXjPyvsAvZRnhAhZInjWSELgf6refEbc9b69o14iqL7F4a7Mr4X3csU67KFYz6YqHyGX
+ QBJlhZPt63zdecO81azT3RJcxsv0NGWiFiFZzWF72G2RpNg8y7iYu0qlBO3wgtaMFRCv
+ Ild0IuYgmwzxMSp0rtY/uJre7Va/DIhxnSRNsvssJnZhqXWeeP+vJyDCxsXubDnXDtBx
+ d0DNFH83l1M2yQGNd9nPmFRl2ZqpP8TMyoX3qdhSPzyLb8oRQA808TV0SaTIcUy1ksXq
+ ahrA==
+X-Gm-Message-State: AOJu0YzS5HQiPwqOCFGIYQVs/YKHii0l66vOIHzH3ad/JYhsvYx6iNZr
+ eUpluhsUkI2Uyzghv8uHqIgyHxECMjaZ37r9VbnMny9QIW3B+0BifE3hHRCHeKU=
+X-Google-Smtp-Source: AGHT+IHDzMoCihRG9iOAaxuT9TbPiZmEKt1i2ovIttbRxTnHUx+VU+2w2gxs1Ltv46GmaEJIezzC+w==
+X-Received: by 2002:a17:906:251b:b0:a4e:21e0:2e6e with SMTP id
+ i27-20020a170906251b00b00a4e21e02e6emr1760632ejb.5.1712146085119; 
+ Wed, 03 Apr 2024 05:08:05 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::38e6])
  by smtp.gmail.com with ESMTPSA id
- lr20-20020a170906fb9400b00a46a04d7dc4sm7654674ejb.61.2024.04.03.05.08.03
+ lr20-20020a170906fb9400b00a46a04d7dc4sm7654674ejb.61.2024.04.03.05.08.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 05:08:03 -0700 (PDT)
+ Wed, 03 Apr 2024 05:08:04 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 03 Apr 2024 14:07:49 +0200
-Subject: [PATCH v6 14/16] qcom_defconfig: enable livetree
+Date: Wed, 03 Apr 2024 14:07:50 +0200
+Subject: [PATCH v6 15/16] qcom_defconfig: enable USB
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240403-b4-qcom-livetree-v6-14-130f8f50b538@linaro.org>
+Message-Id: <20240403-b4-qcom-livetree-v6-15-130f8f50b538@linaro.org>
 References: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
 In-Reply-To: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -79,21 +79,21 @@ To: Tom Rini <trini@konsulko.com>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1150;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3037;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=FnsFYaj7bNmRgQrn2qeK5nE0SjWYSdwas1Nyt0LNrPk=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmDUaRNjL0dpjtsO/f/nGBGvsouO+laHYNvvFVZ
- RL+UaRbG36JAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZg1GkQAKCRAFgzErGV9k
- tpxlD/45EFB1QPcNTGXXbiZVVMrDUCPk1mv9NgMJHvcAgsX4usbflk2lcQUoDzW35GEMOIlMHsx
- Q0CRRaOhP5T1WyuXq8n38TmIgg0KDg9r5WvG5NqUlHMkSoN5x2BZz0vkIh96moE0AGMsBTtDcHh
- rRddm2tDd5TQIw2VuKot30CQyI8Qpzfc/JUMKY3HKv75XSwWw6+jfwKTNfvk8/lmsXuKDFChJFD
- 6xMS4KseCxN+3L+gFfmuO6S9SpEpKiqNzqqQZkib0fzRIPSbBAjmWnb4flO5uIPej2644tlh4Ur
- mqg8Chjd7IqDxHYkd3Rhba5Nw7qr5XZsIHovwVCbAcgiJ4+hS/N6t80UZTsDM0QUDJ34EKdb0ZM
- uKh7jOs7otAws/I1Sw2eajPXwg6ng1SEI/5iYEfvx9ycqMZQPR4+Vk9oa+fnYOwZsLnoUKwioD5
- SKmmoxohg9Wu9JJMVl6mINOP+m2to/oR4w9gjKV9z9QSOPezVdKykymQeylyxJaXzV1uRyGlKD2
- lQuuvsN32ak9Votp64bUiIBWO5yDDFAgqC94qL1UJp0PPEWW12iXyapqiwmo5goUKhDZIHareKk
- z6OeGznL1kX4oGc+VvBizs5oO+8wAbIwkv1cecbh1Rw+lkJIdpUjag3QVyqovi4jqZFcZ870kRR
- StdqN9seckz1Alw==
+ bh=IiD4QOo4vMkDUnm2KTlh/8akfMnxgScbcOmu27O4wOg=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmDUaRqzvIYQZ/RjSRt07WmWRnBYvOAq7BEx9uA
+ UiEPOSiRxCJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZg1GkQAKCRAFgzErGV9k
+ ts5GD/99sMJAEUdyITeqQ1w5MGwakn3EUmV7X/iZgdT2rZXqxoJtA61jP9Vubv6rrZlxeqW0CSd
+ QmJjw4LVVUeVMrRjtM7jZkGvSZk6eqBtAnc019wAS3oOfBGuw6KTFsct1WTVyVFgPv3lMW4lIA5
+ /+9R6YG1nCtO3UobWgMpBF1ChQl09YDczB6E/A1bMxFeWCddbQvgXGHFpxH9iYC5bTELTWvL+cU
+ za6mFNJSE1lToYryMEfHlr+8vZYH7cUO8Rfu6zxYwL3JoxwuFXAlLjeU/0StwpoCm+Xmn0/Hl6y
+ G7pm8mzzXnNaaSl3UaFb6asEIyenDH9+iIp4pxuVVBNNyGdi1UHnnpN8pW94X+ymRqjoSQZmiiE
+ 0FJ0bivCT79Z13IGXWuuYgebINhtf0yPlgo/xIHPG5kAIgxdYHisEv1PPdX3dUYfKy41ZbgdB/7
+ fUOmBhbzOjdIodVD3jHHSKn246KsB+fWGapnzTrdhos+S88CGudQn0KX4gVwlY3Bpji1r3AvK7+
+ zFkHIi1vsr/PfiuifdTeZwW0Mf1qlO8Dg2d9tjYEYTf9o3xdqFDI6Vkr8SP+DcPLO7BZUNwsUVB
+ Vk9h+K1uD6PsyqZ1kgpONGyAMiOIlh7EEFFwhyr7X5bvv3DyqXSXP+YV/LuDc7PjIDkC/xaAnXf
+ mFuV4xhiZd0rqGQ==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -112,38 +112,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Qualcomm FDTs are on the larger size, and with the addition of DT
-modifications during board_init() it makes sense to enable OF_LIVE
-globally. The cost of building the tree should be offset by the
-increased efficiency at which we can walk it.
+Enable support for the DWC3 USB controller and required dependencies for
+Qualcomm boards, specifically the DB845c:
+* IOMMU / SMMU
+* USB high-speed PHYs
+* Mass storage and ACM gadgets
 
-Some rough measurements with CONFIG_BOOTSTAGE suggests that this might
-add 0.1-0.2ms to the boot-to-console time. However the reset-to-reset
-timer difference is in the range of 0.5ms so this could just be noise.
-
-Suffice to say, no significant slow down.
-
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
-Acked-by: Sumit Garg <sumit.garg@linaro.org>
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- configs/qcom_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ configs/qcom_defconfig | 52 ++++++++++++++++++++++++++++----------------------
+ 1 file changed, 29 insertions(+), 23 deletions(-)
 
 diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index cbc612b44bd9..8c4402e8f780 100644
+index 8c4402e8f780..1abb57345ff1 100644
 --- a/configs/qcom_defconfig
 +++ b/configs/qcom_defconfig
-@@ -25,8 +25,9 @@ CONFIG_CMD_UFS=y
+@@ -17,10 +17,16 @@ CONFIG_LOG_MAX_LEVEL=9
+ CONFIG_LOG_DEFAULT_LEVEL=4
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_CMD_BOOTMENU=y
++CONFIG_CMD_EEPROM=y
++CONFIG_SYS_I2C_EEPROM_BUS=2
++CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
++CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
++# CONFIG_CMD_BIND is not set
+ CONFIG_CMD_CLK=y
+ CONFIG_CMD_GPIO=y
++CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_UFS=y
  CONFIG_CMD_USB=y
  CONFIG_CMD_CAT=y
- CONFIG_CMD_BMP=y
- CONFIG_CMD_LOG=y
-+CONFIG_OF_LIVE=y
- CONFIG_BUTTON_QCOM_PMIC=y
- CONFIG_CLK=y
+@@ -32,20 +38,39 @@ CONFIG_CLK=y
  CONFIG_CLK_QCOM_QCS404=y
  CONFIG_CLK_QCOM_SDM845=y
+ CONFIG_MSM_GPIO=y
+ CONFIG_QCOM_PMIC_GPIO=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_QUP=y
++CONFIG_I2C_MUX=y
+ CONFIG_DM_KEYBOARD=y
+ CONFIG_BUTTON_KEYBOARD=y
++CONFIG_IOMMU=y
++CONFIG_QCOM_HYP_SMMU=y
++CONFIG_MISC=y
++CONFIG_NVMEM=y
++CONFIG_I2C_EEPROM=y
+ CONFIG_MMC_HS200_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_ADMA=y
+ CONFIG_MMC_SDHCI_MSM=y
++CONFIG_PHY_MICREL=y
++CONFIG_PHY_MICREL_KSZ90X1=y
++CONFIG_DM_MDIO=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_QCOM=y
++CONFIG_RGMII=y
+ CONFIG_PHY=y
++CONFIG_PHY_QCOM_QUSB2=y
++CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=y
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_QCOM_QCS404=y
+ CONFIG_PINCTRL_QCOM_SDM845=y
+ CONFIG_DM_PMIC=y
+ CONFIG_PMIC_QCOM=y
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
+ CONFIG_SCSI=y
+ CONFIG_MSM_SERIAL=y
+ CONFIG_MSM_GENI_SERIAL=y
+ CONFIG_SPMI_MSM=y
+@@ -54,8 +79,12 @@ CONFIG_SYSINFO_SMBIOS=y
+ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_XHCI_DWC3=y
+ CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_FUNCTION_MASS_STORAGE=y
+ CONFIG_UFS=y
+ CONFIG_VIDEO=y
+ # CONFIG_VIDEO_FONT_8X16 is not set
+ CONFIG_VIDEO_FONT_16X32=y
+@@ -64,27 +93,4 @@ CONFIG_NO_FB_CLEAR=y
+ CONFIG_VIDEO_SIMPLE=y
+ CONFIG_HEXDUMP=y
+ # CONFIG_GENERATE_SMBIOS_TABLE is not set
+ CONFIG_LMB_MAX_REGIONS=64
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_EEPROM=y
+-CONFIG_CMD_I2C=y
+-CONFIG_CMD_PING=y
+-CONFIG_DM_ETH=y
+-CONFIG_DM_ETH_PHY=y
+-CONFIG_DM_MDIO=y
+-CONFIG_DWC_ETH_QOS=y
+-CONFIG_DWC_ETH_QOS_QCOM=y
+-CONFIG_RGMII=y
+-CONFIG_PHY_MICREL=y
+-CONFIG_PHY_MICREL_KSZ90X1=y
+-CONFIG_MISC=y
+-CONFIG_NVMEM=y
+-CONFIG_DM_I2C=y
+-CONFIG_I2C_SUPPORT=y
+-CONFIG_I2C_MUX=y
+-CONFIG_I2C_EEPROM=y
+-CONFIG_SYS_I2C=y
+-CONFIG_SYS_I2C_QUP=y
+-CONFIG_SYS_I2C_EEPROM_BUS=2
+-CONFIG_SYS_I2C_EEPROM_ADDR_LEN=2
+-CONFIG_SYS_EEPROM_PAGE_WRITE_BITS=5
 
 -- 
 2.44.0
