@@ -4,74 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A0C8CD1288
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 14:00:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E81D3CD1288
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 14:21:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F69E8839E;
-	Wed,  3 Apr 2024 15:59:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 4E11B881CA;
+	Wed,  3 Apr 2024 16:21:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="MCSvPOZo";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="B0SmLafu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04445881BE; Wed,  3 Apr 2024 15:59:22 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ id 996ED88240; Wed,  3 Apr 2024 16:21:18 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A850188388
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 15:59:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54EBB8815D
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 16:21:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1712152759; x=1714744759;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=VkURvmGi8mmiU/KGGbkb3dZj7J8gxnDrYUcIvsc0w+8=;
- b=MCSvPOZovKsXHNgytUo1NuJUuV99HNDOVbh1O/IEyhmCW5tnSjFFQAb4FjP6f+DC
- y1+2Tb0neSOOUd7dNN8Z2eEP0ryM8joBcfMBdRTVy5UO2Wy4XdM+Wt6rBkyxtZiC
- KgoiQMDcbCAoT/kIy6NS3kJmqONqJ4xAghPEs+Ak+4M=;
-X-AuditID: ac14000a-fadff7000000290d-00-660d60b7f7cf
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id AC.D4.10509.7B06D066;
- Wed,  3 Apr 2024 15:59:19 +0200 (CEST)
-Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 3 Apr 2024
- 15:59:19 +0200
-From: Wadim Egorov <w.egorov@phytec.de>
-To: <u-boot@lists.denx.de>
-CC: <nm@ti.com>, <upstream@lists.phytec.de>, <bb@ti.com>, <vigneshr@ti.com>
-Subject: [PATCH v2 2/3] arm: mach-k3: am625: Provide a way to obtain boot
- device for non SPLs
-Date: Wed, 3 Apr 2024 15:59:10 +0200
-Message-ID: <20240403135911.1987293-3-w.egorov@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240403135911.1987293-1-w.egorov@phytec.de>
-References: <20240403135911.1987293-1-w.egorov@phytec.de>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 433ELCFX096128;
+ Wed, 3 Apr 2024 09:21:12 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1712154072;
+ bh=qmD/W3FnxoniYGxUpOYFNrVzjfqlZDxbJLbY+6/kr28=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=B0SmLafuQ9NJriD6ibqp73AthS4kPyWKGYvRSIXSZhdSS+TgxPKHlsO+AbItd2Hpm
+ ZCIYr4GCVN+ARKbgqpEdyYETdNG6fZbCuWMlV7b8G4gyz8hM3kiB/MqCO4/QbX0hWm
+ /FEKBG3/m9S3K+648RqHV0wtorAZQnsj6NoZ8PS4=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 433ELCtc051414
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 3 Apr 2024 09:21:12 -0500
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 3
+ Apr 2024 09:21:11 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 3 Apr 2024 09:21:12 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 433ELBDQ049465;
+ Wed, 3 Apr 2024 09:21:11 -0500
+Message-ID: <7ae26e05-125f-4391-8a2a-761914fce904@ti.com>
+Date: Wed, 3 Apr 2024 09:21:11 -0500
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] arm: dts: k3: Remove unneeded ti, sci-sysreset binding
+ and nodes
+To: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+References: <20240402160908.508974-1-afd@ti.com>
+ <20240402160908.508974-3-afd@ti.com>
+ <0d8d5123-dccc-4b10-808b-5ce9d4f66a99@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <0d8d5123-dccc-4b10-808b-5ce9d4f66a99@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrDLMWRmVeSWpSXmKPExsWyRpKBR3d7Am+awYqPchZz3xxgtXjz4yyT
- xdu9newW3e/ULf6f/cDuwOpx9s4ORo/+7hZWj+M3tjMFMEdx2aSk5mSWpRbp2yVwZew7wlNw
- 36pi2zXeBsYphl2MnBwSAiYSfWsms3cxcnEICSxhkrh98CQLhPOIUeJyxwtWkCo2AXWJOxu+
- gdkiAlISLzs3MncxcnAwC3hL3J3GBhIWFoiVmH2rH6yERUBFYmnPMxYQm1fAUmLZ3HesEMvk
- JWZe+s4OYnMKWEncvXAKLC4EVHPzdycjRL2gxMmZT8B6mYHqm7fOZoawJSQOvnjBDFEvL/Hi
- 0nIWmJnTzr1mhrBDJbZ+2c40gVFoFpJRs5CMmoVk1AJG5lWMQrmZydmpRZnZegUZlSWpyXop
- qZsYQSEuwsC1g7FvjschRiYOxkOMEhzMSiK83Q68aUK8KYmVValF+fFFpTmpxYcYpTlYlMR5
- V3cEpwoJpCeWpGanphakFsFkmTg4pRoY3YXzG+/NWp325ODJ7ckFaTsfsvFyl7XlHXnFxOPz
- rV3UVaNVYdZB979uNwK2zlMqC83t/sFqXxtwxMl6v5PlInvFaY2/r5dV+TTNXRbySezGAsML
- ja//SW39bfXG705mSvC2hbt6Tpyc4LpJcHaY5sKGmVsEny3ePO3Ne5sPLxy+H6gO0mhrVmIp
- zkg01GIuKk4EAG6wxj9fAgAA
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,266 +84,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce get_boot_device() to obtain the booting device. Make it also
-available for non SPL builds so u-boot can also know the device it is
-booting from.
+On 4/3/24 1:37 AM, Neha Malcom Francis wrote:
+> Hi Andrew,
+> 
+> On 02/04/24 21:39, Andrew Davis wrote:
+>> This extra binding is non-standard and now unneeded as we bind the
+>> sysreset driver automatically. This matches what is done in Linux
+>> and allows us to more closely match the DTBs. Remove the binding
+>> and all users.
+>>
+>> Signed-off-by: Andrew Davis <afd@ti.com>
+>> ---
+>>   arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi  |  7 -----
+>>   .../k3-am625-phyboard-lyra-rdk-u-boot.dtsi    |  7 -----
+>>   .../dts/k3-am625-verdin-wifi-dev-u-boot.dtsi  |  7 -----
+>>   arch/arm/dts/k3-am62a7-sk-u-boot.dtsi         |  4 ---
+>>   arch/arm/dts/k3-am62p5-sk-u-boot.dtsi         |  5 ----
+>>   arch/arm/dts/k3-am642-evm-u-boot.dtsi         |  7 -----
+>>   .../k3-am642-phyboard-electra-rdk-u-boot.dtsi |  4 ---
+>>   arch/arm/dts/k3-am642-sk-u-boot.dtsi          |  7 -----
+>>   .../dts/k3-am65-iot2050-common-u-boot.dtsi    |  4 ---
+>>   .../arm/dts/k3-am68-sk-base-board-u-boot.dtsi |  4 ---
+>>   arch/arm/dts/k3-am69-sk-u-boot.dtsi           |  7 -----
+>>   .../k3-j7200-common-proc-board-u-boot.dtsi    |  4 ---
+>>   .../dts/k3-j721e-beagleboneai64-u-boot.dtsi   |  4 ---
+>>   .../k3-j721e-common-proc-board-u-boot.dtsi    |  4 ---
+>>   arch/arm/dts/k3-j721e-sk-u-boot.dtsi          |  4 ---
+>>   .../k3-j721s2-common-proc-board-u-boot.dtsi   |  4 ---
+>>   arch/arm/dts/k3-j784s4-evm-u-boot.dtsi        |  7 -----
+>>   .../sysreset/ti,sci-sysreset.txt              | 29 -------------------
+>>   18 files changed, 119 deletions(-)
+>>   delete mode 100644 doc/device-tree-bindings/sysreset/ti,sci-sysreset.txt
+>>
+> 
+> [...]
+> 
+> Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+> 
+> Why not have Kconfig set this as default y if TI_SCI_PROTOCOL set using same argument?
+> 
 
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
----
-v2:
-  - Make get_boot_device() read bootindex out of OCRAM
----
- arch/arm/mach-k3/Makefile                |   1 +
- arch/arm/mach-k3/am625_init.c            |  95 +--------------------
- arch/arm/mach-k3/am62x/Makefile          |   2 +
- arch/arm/mach-k3/am62x/boot.c            | 103 +++++++++++++++++++++++
- arch/arm/mach-k3/include/mach/hardware.h |   1 +
- 5 files changed, 108 insertions(+), 94 deletions(-)
- create mode 100644 arch/arm/mach-k3/am62x/Makefile
- create mode 100644 arch/arm/mach-k3/am62x/boot.c
+Good idea, and the same could probably be said for most TI-SCI based drivers.
 
-diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
-index 42161376469..61ec4ea13cf 100644
---- a/arch/arm/mach-k3/Makefile
-+++ b/arch/arm/mach-k3/Makefile
-@@ -22,3 +22,4 @@ obj-$(CONFIG_SOC_K3_AM625) += am625_init.o
- obj-$(CONFIG_SOC_K3_AM62A7) += am62a7_init.o
- endif
- obj-y += common.o security.o
-+obj-$(CONFIG_SOC_K3_AM625) += am62x/
-diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
-index c9c97b6ce19..56078099f09 100644
---- a/arch/arm/mach-k3/am625_init.c
-+++ b/arch/arm/mach-k3/am625_init.c
-@@ -243,100 +243,7 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
- 	}
- }
- 
--static u32 __get_backup_bootmedia(u32 devstat)
--{
--	u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
--				MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
--	u32 bkup_bootmode_cfg =
--			(devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
--				MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
--
--	switch (bkup_bootmode) {
--	case BACKUP_BOOT_DEVICE_UART:
--		return BOOT_DEVICE_UART;
--
--	case BACKUP_BOOT_DEVICE_USB:
--		return BOOT_DEVICE_USB;
--
--	case BACKUP_BOOT_DEVICE_ETHERNET:
--		return BOOT_DEVICE_ETHERNET;
--
--	case BACKUP_BOOT_DEVICE_MMC:
--		if (bkup_bootmode_cfg)
--			return BOOT_DEVICE_MMC2;
--		return BOOT_DEVICE_MMC1;
--
--	case BACKUP_BOOT_DEVICE_SPI:
--		return BOOT_DEVICE_SPI;
--
--	case BACKUP_BOOT_DEVICE_I2C:
--		return BOOT_DEVICE_I2C;
--
--	case BACKUP_BOOT_DEVICE_DFU:
--		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
--			return BOOT_DEVICE_USB;
--		return BOOT_DEVICE_DFU;
--	};
--
--	return BOOT_DEVICE_RAM;
--}
--
--static u32 __get_primary_bootmedia(u32 devstat)
--{
--	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
--				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
--	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
--				MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
--
--	switch (bootmode) {
--	case BOOT_DEVICE_OSPI:
--		fallthrough;
--	case BOOT_DEVICE_QSPI:
--		fallthrough;
--	case BOOT_DEVICE_XSPI:
--		fallthrough;
--	case BOOT_DEVICE_SPI:
--		return BOOT_DEVICE_SPI;
--
--	case BOOT_DEVICE_ETHERNET_RGMII:
--		fallthrough;
--	case BOOT_DEVICE_ETHERNET_RMII:
--		return BOOT_DEVICE_ETHERNET;
--
--	case BOOT_DEVICE_EMMC:
--		return BOOT_DEVICE_MMC1;
--
--	case BOOT_DEVICE_MMC:
--		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
--				MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
--			return BOOT_DEVICE_MMC2;
--		return BOOT_DEVICE_MMC1;
--
--	case BOOT_DEVICE_DFU:
--		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
--		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
--			return BOOT_DEVICE_USB;
--		return BOOT_DEVICE_DFU;
--
--	case BOOT_DEVICE_NOBOOT:
--		return BOOT_DEVICE_RAM;
--	}
--
--	return bootmode;
--}
--
- u32 spl_boot_device(void)
- {
--	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
--	u32 bootmedia;
--
--	if (bootindex == K3_PRIMARY_BOOTMODE)
--		bootmedia = __get_primary_bootmedia(devstat);
--	else
--		bootmedia = __get_backup_bootmedia(devstat);
--
--	debug("am625_init: %s: devstat = 0x%x bootmedia = 0x%x bootindex = %d\n",
--	      __func__, devstat, bootmedia, bootindex);
--
--	return bootmedia;
-+	return get_boot_device();
- }
-diff --git a/arch/arm/mach-k3/am62x/Makefile b/arch/arm/mach-k3/am62x/Makefile
-new file mode 100644
-index 00000000000..acf09c3426c
---- /dev/null
-+++ b/arch/arm/mach-k3/am62x/Makefile
-@@ -0,0 +1,2 @@
-+# SPDX-License-Identifier:	GPL-2.0+
-+obj-y += boot.o
-diff --git a/arch/arm/mach-k3/am62x/boot.c b/arch/arm/mach-k3/am62x/boot.c
-new file mode 100644
-index 00000000000..132b42f7edb
---- /dev/null
-+++ b/arch/arm/mach-k3/am62x/boot.c
-@@ -0,0 +1,103 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+#include <asm/io.h>
-+#include <asm/arch/hardware.h>
-+#include <asm/arch/am62_spl.h>
-+
-+static u32 __get_backup_bootmedia(u32 devstat)
-+{
-+	u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
-+				MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
-+	u32 bkup_bootmode_cfg =
-+			(devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
-+				MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
-+
-+	switch (bkup_bootmode) {
-+	case BACKUP_BOOT_DEVICE_UART:
-+		return BOOT_DEVICE_UART;
-+
-+	case BACKUP_BOOT_DEVICE_USB:
-+		return BOOT_DEVICE_USB;
-+
-+	case BACKUP_BOOT_DEVICE_ETHERNET:
-+		return BOOT_DEVICE_ETHERNET;
-+
-+	case BACKUP_BOOT_DEVICE_MMC:
-+		if (bkup_bootmode_cfg)
-+			return BOOT_DEVICE_MMC2;
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BACKUP_BOOT_DEVICE_SPI:
-+		return BOOT_DEVICE_SPI;
-+
-+	case BACKUP_BOOT_DEVICE_I2C:
-+		return BOOT_DEVICE_I2C;
-+
-+	case BACKUP_BOOT_DEVICE_DFU:
-+		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
-+			return BOOT_DEVICE_USB;
-+		return BOOT_DEVICE_DFU;
-+	};
-+
-+	return BOOT_DEVICE_RAM;
-+}
-+
-+static u32 __get_primary_bootmedia(u32 devstat)
-+{
-+	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
-+	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
-+
-+	switch (bootmode) {
-+	case BOOT_DEVICE_OSPI:
-+		fallthrough;
-+	case BOOT_DEVICE_QSPI:
-+		fallthrough;
-+	case BOOT_DEVICE_XSPI:
-+		fallthrough;
-+	case BOOT_DEVICE_SPI:
-+		return BOOT_DEVICE_SPI;
-+
-+	case BOOT_DEVICE_ETHERNET_RGMII:
-+		fallthrough;
-+	case BOOT_DEVICE_ETHERNET_RMII:
-+		return BOOT_DEVICE_ETHERNET;
-+
-+	case BOOT_DEVICE_EMMC:
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BOOT_DEVICE_MMC:
-+		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
-+				MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
-+			return BOOT_DEVICE_MMC2;
-+		return BOOT_DEVICE_MMC1;
-+
-+	case BOOT_DEVICE_DFU:
-+		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
-+		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
-+			return BOOT_DEVICE_USB;
-+		return BOOT_DEVICE_DFU;
-+
-+	case BOOT_DEVICE_NOBOOT:
-+		return BOOT_DEVICE_RAM;
-+	}
-+
-+	return bootmode;
-+}
-+
-+u32 get_boot_device(void)
-+{
-+	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
-+	u32 bootmode = *(u32 *)(K3_BOOT_PARAM_TABLE_INDEX_OCRAM);
-+	u32 bootmedia;
-+
-+	if (bootmode == K3_PRIMARY_BOOTMODE)
-+		bootmedia = __get_primary_bootmedia(devstat);
-+	else
-+		bootmedia = __get_backup_bootmedia(devstat);
-+
-+	debug("%s: devstat = 0x%x bootmedia = 0x%x bootmode = %d\n",
-+	      __func__, devstat, bootmedia, bootmode);
-+
-+	return bootmedia;
-+}
-diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
-index 52ef82e70b0..81a8c612f3c 100644
---- a/arch/arm/mach-k3/include/mach/hardware.h
-+++ b/arch/arm/mach-k3/include/mach/hardware.h
-@@ -96,4 +96,5 @@ struct rom_extended_boot_data {
- 	u32 num_components;
- };
- 
-+u32 get_boot_device(void);
- #endif /* _ASM_ARCH_HARDWARE_H_ */
--- 
-2.34.1
+We might also look into adding more of these as "imply" under config ARCH_K3,
+all K3 boards will want/need these. Should help simplify our defconfig.
 
+Andrew
