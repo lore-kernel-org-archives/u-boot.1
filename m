@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A5FECD128A
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 19:07:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DD68CD1288
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 19:07:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFAD98839A;
-	Wed,  3 Apr 2024 21:07:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2A503883A4;
+	Wed,  3 Apr 2024 21:07:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="wSAOUtBn";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="pBTDh1uE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F2D08838F; Wed,  3 Apr 2024 21:07:29 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id B65DE88359; Wed,  3 Apr 2024 21:07:38 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 91096881D0
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 21:07:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D9B3888393
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 21:07:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72])
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 46172424A0
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 19:07:27 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 0A0483FE1E
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 19:07:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1712171247;
- bh=96bWx8K0fRxfw+q6u4fC+kym8eZ/mRY7xCjInrKG3sU=;
+ s=20210705; t=1712171252;
+ bh=dVSIyVRFAlBfvInoDuMz4NzfBgRgywhUUJ/CmscLzb8=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=wSAOUtBnaChky3pJoyhoiSomLHJCbxZVatLYNtq3b6Cjn0qpNLDzkMKsbwjgYZN49
- z+xkjtkWuXP+Ccg/65r4upfyNoOpE9uXlJINtOHQm9oVTtNOcE1kPa7pfNoaD98zfv
- cn4F2JbXWneglF1sx0Kit/s9eH2kXYNOQxr43y6eOTF2QCUgBEnY02r8wbxOhhxtiM
- xQiZBHaeP/xqHpz8oyMnXprTtir4z0hp+78A2ibUYuIeZvDzOgdWGfleUfMr6FXctO
- RJshmMboOQJRvrplTi905fZjU6NqHgOXMfc4DTwm+Hb5LeGlQCoimgf2qzqKeFnsPj
- t1gqus2/E530Q==
-Received: by mail-wr1-f72.google.com with SMTP id
- ffacd0b85a97d-3436714e286so81503f8f.0
- for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 12:07:27 -0700 (PDT)
+ b=pBTDh1uEnVrKW+nuvfMeplVWjEW+XlWwQZ/3NP+QDcHKYENP46PEyqT7c3dNGoR8r
+ 5V/PQs+YWN/dVl+YAG9KYdopiS92+2zRjPwsBR5GiCQdnyXm+vZXlBlCcNsecx6tjI
+ 5o4A6BuJIbWMpC6hl5D+9ll9EQqOD4Tb8hS8Wrjk9KruCbk1Rvj+pKYE0vMJp9Xsea
+ cwnBC1OCMx87h1pYOp9tZ6p/h1ESD+VbtIFIwsQ2gBxcTb2gTTMtBSuknDF26bINFK
+ GrDGCHiquzB3B/JK3rhLYT4aVgdpMa6LJJEUGQ/m9De2C3eFY5n4jnBJeBpC//1hsW
+ SyNxKMTf/+60Q==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-33ed71800f2so69901f8f.2
+ for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 12:07:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712171247; x=1712776047;
+ d=1e100.net; s=20230601; t=1712171245; x=1712776045;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=96bWx8K0fRxfw+q6u4fC+kym8eZ/mRY7xCjInrKG3sU=;
- b=l92tC1TyJkROg4U5hnIFqdsIigGHm38rd09MA6zGjEbR4Yz42KPV+Iwk+Db48wZIWY
- OESHLjlUcEVBCVkGQqTNkDrUFJv97CKtn3yRL1tnzg5NKV+tnOEHtwDhxYoeNcIXZKWH
- piqUeiPWhNAz91BNhUN1tEG/8VBNuxyZdqoi+s5FtJhUQR6j+aE8b8FuA19mouxw8P8R
- 2Fqq4Xah8ESThbMbT9++7fkP5jZl6rrhENOJNOjNOr2MmQBuX/bkh0BNqLnhDQZb//yt
- krgEiOUS92NHjxoOnduFeqKqO6QXUgWYkO1MDYnqnIYWk7WObDEagUN9iei8VpjmWLAJ
- Mojg==
+ bh=dVSIyVRFAlBfvInoDuMz4NzfBgRgywhUUJ/CmscLzb8=;
+ b=HdR6QC3vfJiTQxzee8m6XRtM/Jice5iw0AHp8TC+cZ/JMSA68kU1fZI1ke6MDFGyaF
+ VvCbU+pcj3AsfMZsAlalWG+8q7EGKnOFm76nCrESfMrTLftaQWbCLjxakPWRBN129eKA
+ 5lhVlXBKY6HMXgukanpMdr/EVcA3cYpOOctFE8UPPzURN2ofEMD5y2G1OdGjsGpmfaAz
+ OhcGHhdc+IxCiNiBaKzbhNdSraNnZA+4UqMheUfbwIOcXFAwgGj+CCNWhKfUxKuyOPE/
+ OYbeG/a84ZTOiuaCkOrRW+UglQg1ubxWQY/lKPPc9CT3VpKO2Uvd7AMBsGsQmEjUhf2m
+ OLFQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXMjyPOS10ivkF9XylEofvDh3CmloYn7YjcZx+PURl46C2/koVwGGSHbLAg7tDySDK/lwYccYsRfaOCP5AHnjEfMvBhJw==
-X-Gm-Message-State: AOJu0Yx+tBwoV8nQWa7syS8xcBgvsKrAijeSNmroK7ECM2Rq7oEM2p+k
- 86RpG96yT5wFqMIKfq3ZEFN6IDXyyFlOPeAqlO87NDLe81OHF2ISbp1uA06k3sULts10PP4VSDW
- aLhwsaTHIFkwo796902iAsC15CW7RDJsz5JE+UDSemdBAIdXi+/6j4iqBsoWwISbJFuI=
-X-Received: by 2002:adf:f045:0:b0:341:cf94:3fdf with SMTP id
- t5-20020adff045000000b00341cf943fdfmr276878wro.13.1712171246755; 
- Wed, 03 Apr 2024 12:07:26 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGesQ4D0kr2jx0lmrzPpZ+vC6dio6Jj4MpoHX+Re2MbrJyJcq7sssEQSzAbeo21s/pvQ2hibA==
-X-Received: by 2002:adf:f045:0:b0:341:cf94:3fdf with SMTP id
- t5-20020adff045000000b00341cf943fdfmr276867wro.13.1712171246445; 
- Wed, 03 Apr 2024 12:07:26 -0700 (PDT)
+ AJvYcCWaXhdPEsIFBhjDqU7rBjqq4urLjfPTCRrJUxF1WhprhGxBcVGpU0aLoINE5uAisqC9gPO6wXJ0lQ3Jg+CFAMYaj4v0wg==
+X-Gm-Message-State: AOJu0YxG24YgOWjZbsm2w6PGfASkdb2aU5/U+k8FdQEvl5IaX4zZ7B5Y
+ EnKPoW0VcLD+L/RixUSstDSCCiIiSJcnzRs38tg2DPWmsIfAjSIkFtqkOK13IVKtHFJ8cfAfcOD
+ GQlmgLk3t5C1VladiYJ4QUrBnnGROOn5xaRJC15rvL2qvodUvuO/cou7Bt1ao8oLSjZs=
+X-Received: by 2002:adf:e845:0:b0:343:9d4b:d920 with SMTP id
+ d5-20020adfe845000000b003439d4bd920mr291805wrn.40.1712171245721; 
+ Wed, 03 Apr 2024 12:07:25 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEiTlxfahnx3nRcVVW8gQz/5cI2XK6n7nl4548W3yW/WZsmj9n6IRK24AAT6m85LNh+GTR6kA==
+X-Received: by 2002:adf:e845:0:b0:343:9d4b:d920 with SMTP id
+ d5-20020adfe845000000b003439d4bd920mr291789wrn.40.1712171245407; 
+ Wed, 03 Apr 2024 12:07:25 -0700 (PDT)
 Received: from workstation5.fritz.box
  (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
  by smtp.gmail.com with ESMTPSA id
- d1-20020adfef81000000b00341d84f641asm18042610wro.8.2024.04.03.12.07.25
+ d1-20020adfef81000000b00341d84f641asm18042610wro.8.2024.04.03.12.07.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 12:07:26 -0700 (PDT)
+ Wed, 03 Apr 2024 12:07:25 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -88,9 +88,9 @@ Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
  Dan Carpenter <dan.carpenter@linaro.org>, E Shattow <lucent@gmail.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/2] boot: correct the default sequence of boot methods
-Date: Wed,  3 Apr 2024 21:07:15 +0200
-Message-ID: <20240403190715.144725-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/2] boot: enable booting via EFI boot manager by default
+Date: Wed,  3 Apr 2024 21:07:14 +0200
+Message-ID: <20240403190715.144725-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240403190715.144725-1-heinrich.schuchardt@canonical.com>
 References: <20240403190715.144725-1-heinrich.schuchardt@canonical.com>
@@ -112,74 +112,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The default sequence of boot methods is determined by alphabetical sorting
-during linkage.
+If UEFI is enabled in U-Boot, we want it to conform to the UEFI
+specification. This requires enabling the boot manager boot method.
 
-* efi_mgr must run before efi to be UEFI compliant
-* pxe should run as last resort
-
-Adjust the bootflow test to match the changed method identifiers.
-
+Reported-by: E Shattow <lucent@gmail.com>
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- boot/bootmeth_efi.c     | 2 +-
- boot/bootmeth_efi_mgr.c | 2 +-
- boot/bootmeth_pxe.c     | 2 +-
- test/boot/bootflow.c    | 2 +-
- 4 files changed, 4 insertions(+), 4 deletions(-)
+ boot/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
-index c4eb331d69e..a46b6c9c805 100644
---- a/boot/bootmeth_efi.c
-+++ b/boot/bootmeth_efi.c
-@@ -489,7 +489,7 @@ static const struct udevice_id distro_efi_bootmeth_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(bootmeth_efi) = {
-+U_BOOT_DRIVER(bootmeth_4efi) = {
- 	.name		= "bootmeth_efi",
- 	.id		= UCLASS_BOOTMETH,
- 	.of_match	= distro_efi_bootmeth_ids,
-diff --git a/boot/bootmeth_efi_mgr.c b/boot/bootmeth_efi_mgr.c
-index ed29d7ef021..b7d429f2c3d 100644
---- a/boot/bootmeth_efi_mgr.c
-+++ b/boot/bootmeth_efi_mgr.c
-@@ -114,7 +114,7 @@ static const struct udevice_id efi_mgr_bootmeth_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(bootmeth_efi_mgr) = {
-+U_BOOT_DRIVER(bootmeth_3efi_mgr) = {
- 	.name		= "bootmeth_efi_mgr",
- 	.id		= UCLASS_BOOTMETH,
- 	.of_match	= efi_mgr_bootmeth_ids,
-diff --git a/boot/bootmeth_pxe.c b/boot/bootmeth_pxe.c
-index 8d489a11aa4..70f693aa239 100644
---- a/boot/bootmeth_pxe.c
-+++ b/boot/bootmeth_pxe.c
-@@ -184,7 +184,7 @@ static const struct udevice_id extlinux_bootmeth_pxe_ids[] = {
- 	{ }
- };
- 
--U_BOOT_DRIVER(bootmeth_pxe) = {
-+U_BOOT_DRIVER(bootmeth_zpxe) = {
- 	.name		= "bootmeth_pxe",
- 	.id		= UCLASS_BOOTMETH,
- 	.of_match	= extlinux_bootmeth_pxe_ids,
-diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
-index 4845b7121c8..e60e9309fa9 100644
---- a/test/boot/bootflow.c
-+++ b/test/boot/bootflow.c
-@@ -377,7 +377,7 @@ static int bootflow_system(struct unit_test_state *uts)
- 	if (!IS_ENABLED(CONFIG_EFI_BOOTMGR))
- 		return -EAGAIN;
- 	ut_assertok(uclass_first_device_err(UCLASS_BOOTSTD, &bootstd));
--	ut_assertok(device_bind(bootstd, DM_DRIVER_GET(bootmeth_efi_mgr),
-+	ut_assertok(device_bind(bootstd, DM_DRIVER_GET(bootmeth_3efi_mgr),
- 				"efi_mgr", 0, ofnode_null(), &dev));
- 	ut_assertok(device_probe(dev));
- 	sandbox_set_fake_efi_mgr_dev(dev, true);
+diff --git a/boot/Makefile b/boot/Makefile
+index f0a279cde16..72c3feae0d1 100644
+--- a/boot/Makefile
++++ b/boot/Makefile
+@@ -34,8 +34,8 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SCRIPT) += bootmeth_script.o
+ obj-$(CONFIG_$(SPL_TPL_)CEDIT) += cedit.o
++obj-$(CONFIG_$(SPL_TPL_)EFI_BOOTMGR) += bootmeth_efi_mgr.o
+ ifdef CONFIG_$(SPL_TPL_)BOOTSTD_FULL
+-obj-$(CONFIG_EFI_BOOTMGR) += bootmeth_efi_mgr.o
+ obj-$(CONFIG_$(SPL_TPL_)EXPO) += bootflow_menu.o
+ obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootflow_menu.o
+ endif
 -- 
 2.43.0
 
