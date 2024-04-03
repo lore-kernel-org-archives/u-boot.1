@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89264CD128A
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 15:37:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EA06CD128A
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 15:37:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 103DD883AC;
-	Wed,  3 Apr 2024 17:37:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 89F1B8838A;
+	Wed,  3 Apr 2024 17:37:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jPW8BSlD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rjX2El5S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 341078839F; Wed,  3 Apr 2024 17:37:17 +0200 (CEST)
-Received: from mail-lj1-x230.google.com (mail-lj1-x230.google.com
- [IPv6:2a00:1450:4864:20::230])
+ id 2EF0C8839F; Wed,  3 Apr 2024 17:37:56 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D8B587D1A
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 17:37:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 419B187D1A
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 17:37:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x230.google.com with SMTP id
- 38308e7fff4ca-2d687da75c4so64815661fa.0
- for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 08:37:15 -0700 (PDT)
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-516c547fb4eso31003e87.0
+ for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 08:37:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712158634; x=1712763434; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712158673; x=1712763473; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vDkGwiwwOjfNn9yky1MyWuChCEGYqFZNzeG9l7ShA88=;
- b=jPW8BSlDQcDQ1+c5Eo0pd8rMJlYK+MDYVa9v49be8VY/R8VwnqcpL68+a5WqH7rThO
- 6yvqGofEAfZxVBsljxvRDAs5u8yJGGGJuW3+03lNLOnffsih+YMxYo61d/1FIg+DdbtE
- YHt4oRehagno+xN7zlmR9I7QJYomm4IbUzriMKDwq15Jnqq6XX8LU382D4IBaF5Rjbet
- SsHaLkrVoILBJXwO9rrKwAnw4lQ3RMnINecxtOWbG52SSBK95RLNkYBQxAuz8nCvY29b
- mugb5OXrWkKOOyrCxgcrLVM8EekK5AKZ3vLrCjTcgznS+qye7hrf9XDS0UnQHapHX85C
- 8KmA==
+ bh=FxFR6+CKPkFEb+a9JsHwGLpWWT6sTdKIurikwZ2136Q=;
+ b=rjX2El5SHf3wOH9dECb9tQIjXk6bSkzGgYLlCHjtzL02oFjZj1S0/jeDfAYTRZITmJ
+ uozp5eu0y8Bs6oeA1+C9kQ1A6EOQsb3DWFLkdQOGRxPpP/hg/h+b13PTDwpJNB48C0Z3
+ YbsI2y4GPA8WBdt2/S4SoNbGoumJT3XjH83S1vR0sx4rCgCYO61RHrXeGAR0Hfl5uxFK
+ 6MvcGEbykIxpPH24De1jrtbmbjtMK6sPg9GyE/J9gMF+xwU3SbF8C0IZ0hKm0rD/75Ag
+ iOBGtkhKNNrF8SJvuZi6B5WPpyAAAkRA+QlgIoC+op3XM7Jns1GpfPfCBPzOQPghJckQ
+ K2Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712158634; x=1712763434;
+ d=1e100.net; s=20230601; t=1712158673; x=1712763473;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vDkGwiwwOjfNn9yky1MyWuChCEGYqFZNzeG9l7ShA88=;
- b=WZPyhpoXKMgC3Qiwdl5rZ40d4YaadansuqYFYyQ4y/1wi5DtY2Pr4G6BiBzOE+maqJ
- kayv5g6xOHx5KTAYggFbiRprH6QEWeSALNbielIcvVXQ92JLqE89KLNthZoWKoL3u/JY
- 1MKmu0k1xwCchfIxpMyW4A3cNqgrw0aiSU9OqKcKe49CIGm7APWPjq9/WG31EQbmwaPo
- Ifou1JuHqwFZesTZ8JXCJxYEO1nNUYwLK6M4FaF90rk7ibhCb0mjPwph4AHIlyKsKZNO
- UnYAifvhQQilK231e+c7vInjmrZbS7znj/iGmu0dqCBa/bmvRdJnrBG2lf/5QKZ6bjc3
- b27g==
+ bh=FxFR6+CKPkFEb+a9JsHwGLpWWT6sTdKIurikwZ2136Q=;
+ b=Yvnb89+8GBi6/nO9O/gua32pbfWGLonxb4IYRqtdNUTACp2hplzuDKtx5HvbzREGqu
+ x1TgGew6Ju5Nb0pmFS5gApGUbx5UI1GeLx+SPRz3IPRpWnMi/ayIbqJcyR0frd4wM8+F
+ S3eBArEVxJOIwZXCXnZ+yJybNN4TkH8JRyB6ZKrwkVnJVN2jrJB5YxxvfJRGQlBo53LN
+ oxsACmJAx9InWNku2EpSbWx5VMAOiFAVIlKzB8MLsIJRdDASvR58mzXaxNF3vvNhQOGm
+ wiQR8+q4BZhbSEZ//gy5MabbyDW4B5tjvDqg1G7//sQ3t5jnCv71QaPasrZn0aRhZiXF
+ iTZg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWs4Vkw68kCZbEuhNPGybWqU3V9swhGpXdYfWnE4EaJWQFLfY+D7Irf8462vhEZNwjkDq8abqN+LHhbUFsfAnG7m8JSug==
-X-Gm-Message-State: AOJu0YzaZFypcB6Syy/zARHVy6Xxz2vxaMq7vtisEbvz3Zmo9Zbv8rIC
- xDHzHMRi2seFb/v6NLBtl53WKRY0jyjs+T3Q62f2SR3XcsQN45ZaX8IVWDRVGusSMT5YOX7wPCR
- nICwRnEBxhU2eruXlfZiER3kxnvF9uR+S8D5wZw==
-X-Google-Smtp-Source: AGHT+IFtZ48rfuvxD9OfHdRERJGp6/EejwLduG011M2bYGwYtBdVbZ4sxroJjTPeONDtIP9bLiG/zkFEv4j4ICnfdwM=
-X-Received: by 2002:ac2:4253:0:b0:513:ed0f:36c4 with SMTP id
- m19-20020ac24253000000b00513ed0f36c4mr1991294lfl.43.1712158634534; Wed, 03
- Apr 2024 08:37:14 -0700 (PDT)
+ AJvYcCVCuzyYSVYC7a2z3sO3BXdaRyO8WiJAS/Kk9lWQ2ArpBzPcdBhFfIRGf17E0h9ECIa7+h+YTxvHtVp1VdLojAkCozXpBQ==
+X-Gm-Message-State: AOJu0YxwMYlYNXIXrvfIpSGte3YZk3Hwyv+rmQqRua81syeQs33yLV7+
+ jnzWuY+UeaEN0THopHYDsx4YboMhVidTSir6V/lv5bpFFjdE4TFDvm2Vb8PZok7QymbxRNyNnUE
+ 1f8OwJiuoIsHOrwci6ajbAWGxa4BeOGhprJ23RC12z7plC4jop9U=
+X-Google-Smtp-Source: AGHT+IHj6/tW/PRWrgx7tQ01njgetATo3haJiCb876cbfAOYtE15lP9Hiyho54GVxVjS/UwMiueXe8UYgbhd1tUrDoE=
+X-Received: by 2002:a05:6512:3d27:b0:516:9f03:6a9a with SMTP id
+ d39-20020a0565123d2700b005169f036a9amr9963552lfv.25.1712158673453; Wed, 03
+ Apr 2024 08:37:53 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240403153335.96971-1-heinrich.schuchardt@canonical.com>
- <20240403153335.96971-4-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240403153335.96971-4-heinrich.schuchardt@canonical.com>
+ <20240403153335.96971-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240403153335.96971-3-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 3 Apr 2024 18:36:38 +0300
-Message-ID: <CAC_iWj+3=O1upUNCc7paTZEZyQozUkU-YLYYL_X5obz7cqJxig@mail.gmail.com>
-Subject: Re: [PATCH 3/3] efi_loader: handle
- EFI_VARIABLE_ENHANCED_AUTHENTICATED_ACCESS
+Date: Wed, 3 Apr 2024 18:37:17 +0300
+Message-ID: <CAC_iWjK7OjdxsmCpuLW_FtEn1Mf+a9heD9s-KtbL2x0yuvxcjQ@mail.gmail.com>
+Subject: Re: [PATCH 2/3] efi_loader: EFI_VARIABLE_READ_ONLY should be 32bit
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -92,48 +91,43 @@ X-Virus-Status: Clean
 On Wed, 3 Apr 2024 at 18:34, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> We don't yet support EFI_VARIABLE_ENHANCED_AUTHENTICATED_ACCESS for file
-> based variables, but we should pass it to TEE based variable stores.
+> GetVariable() and SetVariable() only accept a 32bit value for attributes.
+> It makes not sense to define EFI_VARIABLE_READ_ONLY as unsigned long.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  include/efi.h                 | 3 ++-
->  lib/efi_loader/efi_variable.c | 8 ++++++--
->  2 files changed, 8 insertions(+), 3 deletions(-)
+>  include/efi_variable.h        | 2 +-
+>  lib/efi_loader/efi_variable.c | 4 ++--
+>  2 files changed, 3 insertions(+), 3 deletions(-)
 >
-> diff --git a/include/efi.h b/include/efi.h
-> index 62cfb993d2e..c3c4b93f860 100644
-> --- a/include/efi.h
-> +++ b/include/efi.h
-> @@ -507,7 +507,8 @@ extern char _binary_u_boot_bin_start[], _binary_u_boot_bin_end[];
->                                 EFI_VARIABLE_HARDWARE_ERROR_RECORD | \
->                                 EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS | \
->                                 EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS | \
-> -                               EFI_VARIABLE_APPEND_WRITE)
-> +                               EFI_VARIABLE_APPEND_WRITE | \
-> +                               EFI_VARIABLE_ENHANCED_AUTHENTICATED_ACCESS)
+> diff --git a/include/efi_variable.h b/include/efi_variable.h
+> index 805e6c5f1e0..42a2b7c52be 100644
+> --- a/include/efi_variable.h
+> +++ b/include/efi_variable.h
+> @@ -8,7 +8,7 @@
 >
->  /**
->   * efi_get_priv() - Get access to the EFI-private information
+>  #include <linux/bitops.h>
+>
+> -#define EFI_VARIABLE_READ_ONLY BIT(31)
+> +#define EFI_VARIABLE_READ_ONLY 0x80000000
+>
+>  enum efi_auth_var_type {
+>         EFI_AUTH_VAR_NONE = 0,
 > diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
-> index 48ad813d79b..e09a5e7ccb2 100644
+> index efe17d98f5a..48ad813d79b 100644
 > --- a/lib/efi_loader/efi_variable.c
 > +++ b/lib/efi_loader/efi_variable.c
-> @@ -235,8 +235,12 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
->         if (data_size && !data)
->                 return EFI_INVALID_PARAMETER;
->
-> -       /* EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS is deprecated */
-> -       if (attributes & EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS)
-> +       /*
-> +        * EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS is deprecated.
-> +        * We don't support EFI_VARIABLE_ENHANCED_AUTHENTICATED_ACCESS.
-> +        */
-> +       if (attributes & (EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS | \
-> +                         EFI_VARIABLE_ENHANCED_AUTHENTICATED_ACCESS))
->                 return EFI_UNSUPPORTED;
->
->         /* Make sure if runtime bit is set, boot service bit is set also */
+> @@ -276,8 +276,8 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+>                 /* attributes won't be changed */
+>                 if (!delete &&
+>                     ((ro_check && var->attr != attributes) ||
+> -                    (!ro_check && ((var->attr & ~(u32)EFI_VARIABLE_READ_ONLY)
+> -                                   != (attributes & ~(u32)EFI_VARIABLE_READ_ONLY))))) {
+> +                    (!ro_check && ((var->attr & ~EFI_VARIABLE_READ_ONLY)
+> +                                   != (attributes & ~EFI_VARIABLE_READ_ONLY))))) {
+>                         return EFI_INVALID_PARAMETER;
+>                 }
+>                 time = var->time;
 > --
 > 2.43.0
 >
