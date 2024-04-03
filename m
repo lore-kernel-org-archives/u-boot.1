@@ -4,68 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F3C0CD128A
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 15:51:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AA9DCD1288
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 17:48:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA6CA881E9;
-	Wed,  3 Apr 2024 17:51:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 6FEA6881F6;
+	Wed,  3 Apr 2024 19:48:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Q3uV1jB9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lQfRG+Es";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7274A8839B; Wed,  3 Apr 2024 17:51:13 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 964088817B; Wed,  3 Apr 2024 19:48:27 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2137A881E9
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 17:51:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49C85881F6
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 19:48:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwalle@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 141E6CE1C3B;
- Wed,  3 Apr 2024 15:51:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 02930C433F1;
- Wed,  3 Apr 2024 15:51:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1712159468;
- bh=I3tTMEgKsJp8bRFDEXnm0PZVNspMOI/PdlfibKZy7w0=;
- h=Date:Cc:From:To:Subject:References:In-Reply-To:From;
- b=Q3uV1jB9BJ6ZbOqINAsCJaGaKazr3qkkVUgiueWfVGoagGXIIwsgIno5AQan7pX7c
- UYq+u/by+NWrywYs1jb0Wcph1KaInJQ3RL/Nkmu3VzyP53Nzdh+sYGUpjqHZCNbtIO
- zGS84rBbX92I5MctgBclPK7zvOftYLJl3NA5BZcBILcuzpkvLLz1TFjUb/k7yYOteW
- iKnbB3aJ+8PWuyAbxLvt1Fkbx2SQfxMBZUiPzcFKifpqUdbkCaz6pNIxEW9W1HChA8
- 2K7dmWBa39sGDv+wTgSQlXPtUpwOnj6TXhuVjzml7GZhO65rSq6PywIf1BtKWudRpH
- E2semBvWum/wQ==
-Content-Type: multipart/signed;
- boundary=d81ed4be38f8dfdd65370ed70e84a0fba32a0467b66ec5287132c2b756b2;
- micalg=pgp-sha384; protocol="application/pgp-signature"
-Date: Wed, 03 Apr 2024 17:51:04 +0200
-Message-Id: <D0ALVJNAVD8U.3UYSZULLZ6YG5@kernel.org>
-Cc: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
- <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
- <sumit.garg@linaro.org>, <michal.simek@amd.com>, <marex@denx.de>,
- <neil.armstrong@linaro.org>, <afd@ti.com>, <vigneshr@ti.com>,
- <kamlesh@ti.com>, <u-kumar1@ti.com>
-From: "Michael Walle" <mwalle@kernel.org>
-To: "Manorit Chawdhry" <m-chawdhry@ti.com>, "Neha Malcom Francis"
- <n-francis@ti.com>
-Subject: Re: [PATCH 3/4] arm: dts: k3-*-binman.dtsi: Clean up and templatize
- boot binaries
-X-Mailer: aerc 0.16.0
-References: <20240322131011.1029620-1-n-francis@ti.com>
- <20240322131011.1029620-4-n-francis@ti.com>
- <D03Q9AGO5ND9.1TJM3KSNA71WG@kernel.org>
- <83c6532a-e994-4bcd-bc48-9e22ecdec644@ti.com>
- <D04LUAJJ6LC7.1JVGVTJ0UCMVR@kernel.org>
- <062f7c42-7088-4813-a2d6-ecb7ab22b4ba@ti.com>
- <D05D4N00QDKO.2PJ7VW4BNGQ11@kernel.org>
- <2e817727-524e-47e5-9f5e-2ee13d99a9bb@ti.com>
- <20240403103458.mn2xkemiyymidipo@uda0497581>
-In-Reply-To: <20240403103458.mn2xkemiyymidipo@uda0497581>
+ spf=pass smtp.mailfrom=o451686892@gmail.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-56e0e1d162bso85645a12.1
+ for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 10:48:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1712166505; x=1712771305; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4fbccUT58qBqnkpwQxtx+vjr5GTJzr+t+foXmMgforc=;
+ b=lQfRG+EsnrNUEpckYQ3MNQWikBzjEk8UXE9WtVP9vIK5QFw4m/v64zEqek1PZ2Q0vM
+ zn8AOXPhYXZZmuYSugTFvP7LrKvhjs7Ibunzu5KHse28Y68zslzm7h1QKkzrBKaY+tPa
+ w/2xZZPwSC6WG3Xxv7jezAIX02oT88mODYyJn3rw7lzvEO2KpbSGRkhUJDgedl1EArNl
+ b8zZ6ltH7i0lczwgEUs5dBZoWf6wJdluLAg1Iu8TiXWLG56DRtmkYVdihHhRnubcn4iu
+ foGcQ8DDRE6OCh0D/Okh/IJOVSPToG3Lva3/56q6szIsnF5zO1YHtBG5NaPzG9ps6q45
+ IRmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712166505; x=1712771305;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=4fbccUT58qBqnkpwQxtx+vjr5GTJzr+t+foXmMgforc=;
+ b=cecp7R2YVnZ6kqU10V4U+8HKt5vf20f8wQj8iy/L1sdezLFrJljl+DrtM+gsPa2mB5
+ EicC7txBYORVY5HJKOKwCP5QBRZC8i7MedKK9au/2+hwLWkgoFjfZgBHp2YdA3cCZo0V
+ 6g94c6qls/zMleT6mivZpianZCJm0hd4Lb8HtgsoxLy5SosMq3nu3ylBYsTTiEjVTwCx
+ ztQRPgGtCphVqu8yB/tQXfDBi70AsPkYpr96gtGidBCj6FxTP2ryM04mAMLxjibNcge3
+ UpLJsDFm18pcrbDmElubWOw9yx4qMA5AUWDfrnhwY4jPTNaZyHk5xtmm03zDRaWLPa1A
+ HMTg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV/eO8p9/uj05oMLUfXPYN8fZYpGaytXCN/H9G5LTMF3vf+RN+9UDc6vMyi8GlJIfRil6BaCiWXffsTeL4FX7ITgjwGSQ==
+X-Gm-Message-State: AOJu0Yz3N8l3acBsc8IamtILGzQR11lIt727R+6RRVKdJpp8MrxTl1e2
+ HotyL75jQNVyUji/GmRDGgWTjUMInqxOZvNEQ/uEntLWmhlK6zSGkotw/AZpx3CFwYgaAsd89Vl
+ piB7wZxNSRspC/eHVyt+75Jx3H/U=
+X-Google-Smtp-Source: AGHT+IFQepOGdUxkuDdiCnmgaafvInmPABJU5SIYmvCZGPwSCI/BeQGD7pcPnpOlNWQlzGu/TOfxWzOC2EM/zh1Dkic=
+X-Received: by 2002:a50:9e24:0:b0:565:dfac:a686 with SMTP id
+ z33-20020a509e24000000b00565dfaca686mr89430ede.38.1712166504272; Wed, 03 Apr
+ 2024 10:48:24 -0700 (PDT)
+MIME-Version: 1.0
+References: <20240327140628.106143-1-o451686892@gmail.com>
+ <e2262678-5a0b-4130-af8d-5e3b93b16aaa@gmx.de>
+In-Reply-To: <e2262678-5a0b-4130-af8d-5e3b93b16aaa@gmx.de>
+From: Weizhao Ouyang <o451686892@gmail.com>
+Date: Thu, 4 Apr 2024 01:48:12 +0800
+Message-ID: <CAHk0HosTU1-gfDGYf+gp+LzDxJY_z=ZO8jYHrAChDtprd-xWcA@mail.gmail.com>
+Subject: Re: [RFC PATCH] efi_loader: Fix EFI_VARIABLE_APPEND_WRITE hash check
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Michal Simek <michal.simek@amd.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Raymond Mao <raymond.mao@linaro.org>, Joao Marcos Costa <jmcosta944@gmail.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,212 +97,244 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---d81ed4be38f8dfdd65370ed70e84a0fba32a0467b66ec5287132c2b756b2
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+Hi Heinrich,
 
-Hi,
-
-> > > > > And on top of that, it will just be a base board and there will
-> > > > > likely be some carrier device trees (overlay? I'm not sure yet).
-> > > > >=20
-> > > > > As far as I can tell, you've put the memory configuration into th=
-e
-> > > > > device tree, so I'll probably need to switch between them somehow=
-.
-> > > >=20
-> > > > The "k3-<soc>-ddr.dtsi" file will be present in your k3-<board>r5.d=
-ts
-> > > > which makes sense, the memory configuration depends on the board.
-> > >=20
-> >=20
-> > k3-<board>-ddr.dtsi* (e.g J721E EVM vs. SK boards consume different mem=
-ory
-> > configurations.
-
-Right.
-
-> > > And one board might have multiple configuration depending on the
-> > > variant of the board. Typically, one board is available with
-> > > different memory options. i.e. 1GiB, 4GiB and so on. The actual RAM
-> > > chips can come from different manufacturers. So all all, I presume
-> > > there will be different RAM settings, i.e. different
-> > > k3-<soc>-ddr.dtsi. But I have to switch between the setting during
-> > > runtime because there will be only one boot image for that board.
-> >=20
-> > This is a runtime dynamic DDR configuration support you are describing
-> > correct? This means you would be including all the supported memory opt=
-ion
-> > DTSIs in your k3-<board>-r5.dts correct and probably do some board magi=
-c
-> > code in the SPL DDR driver to choose the DTB. How is this affecting the
-> > packing of the final bootloader which will anyways pack the whole R5 DT=
-B?
-
-Correct, the DDR configuration should be chosen at runtime after
-reading some board strappings. Unless, it will work with with the
-same configuration which seems unlikely to me. But it is not an
-unusual configuration I'd say.
-
-I haven't looked into this in detail, but to me it seems not that
-obvious how to do that in a generic/upstreamable way. Multiple
-device nodes sounds wrong. Thus, I'd likely need different device
-trees for the different memory configurations for the R5 SPL. Not
-sure that is yet possible with u-boot, though. If you have any
-better idea, I'm all ears.
-
-> > > > > Also, regarding the board variants, I'll probably need to choose
-> > > > > between multiple device trees. That is invisible to the user,
-> > > > > because u-boot will choose the correct DTB according a board
-> > > > > strapping, which btw. works really fine, see for example
-> > > > > (boards/kontron/sl28/spl.c:board_fit_config_name_match).
-> > > >=20
-> > > > Again, this is assuming that there is some HW blown register availa=
-ble
-> > > > for the board to use (or in our earlier K3 case, the EEPROM) but th=
-at is
-> > > > not necessarily true every time.
-> > >=20
-> > > No, that is of course board dependent. It is just an example that
-> > > there are boards with more than one DTB.
-> > >=20
-> > > Let's step back a bit. Right now, there is
-> > >    k3-<soc>-<board>-binman.dtsi
-> > > which is fine. But it seems, that TI is heading towards a common
-> > >    k3-<soc>-binman.dtsi
-> > > which is intended to be used by all the boards that are using that
-> > > particular SoC, correct me if I'm wrong here. Now the problem with
-> > > that is that you hardcode the FIT configuations which are really
-> > > board dependent and assume that there will be exactly one DTB per
-> > > board, i.e. your "#define SPL_BOARD_DTB" etc.
-> > >=20
-> >=20
-> > Correct, but as I mentioned in the earlier message, if your board suppo=
-rts
-> > more than 1 FIT configuration, you can easily extend the image and add =
-more
-> > configurations.
-> >=20
-> > > Thus, what I was trying to say is that you should split all the
-> > > board independent configuration (dt fragments) from the board
-> > > specific configuration.
-> > >=20
-> > > And again, of course I could just ignore the k3-<soc>-binman.dtsi
-> > > and just use a suitable copy "k3-<soc>-<myboard>-binman.dtsi" for my
-> > > board. But as I said, I'm not sure, this is the way to go and I have
-> > > a slight feeling I will be asked to reuse the "k3-<soc>-binman.dtsi"
-> > > when I submit my board support.
-> > >=20
-> > > > >=20
-> > > > > I don't think it makes much sense to hardcode your generic
-> > > > > *-binman.dtsi to just one FIT configuration. I'd rather see a spl=
-it
-> > > > > between generic things which are shared across all boards and boa=
-rd
-> > > > > specifics, like the FIT configuration. I mean I could just copy a=
-ll
-> > > >=20
-> > > > Correct me if I'm wrong, but my understanding is that you would wan=
-t to
-> > > > add more FDT blobs in the *-binman.dtsi correct? That is still poss=
-ible,
-> > > > adding another "fdt-1" and "conf-1" in the
-> > > >=20
-> > > > Something like this in your <board>-u-boot.dtsi,
-> > > >=20
-> > > > tispl {
-> > > > 	insert-template =3D <&ti_spl>;
-> > > > 	fit {
-> > > > 		images {
-> > > > 			fdt-1 {
-> > > > 				...
-> > > > 			};
-> > > > 		};
-> > > > 		configurations {
-> > > > 			conf-1 {
-> > > > 				...
-> > > > 			};
-> > > > 		};
-> > > > 	};
-> > > > };
-> > >=20
-> > > Then you have the information at two places. One being the "#define
-> > > SPL_BOARD_DTB" stuff and the other one being in this additional DT
-> > > fragment. That is really confusing.
-> > >=20
-> >=20
-> > Hm... maybe. I personally don't see it as confusing. Even when picking
-> > between multiple DTBs, you will have a default DTB in any case, marking=
- that
-> > as a macro wouldn't be confusing right? We'll need to get a third opini=
-on on
-> > here then, I had seen your ping on IRC [1], putting it here for the oth=
-ers
-> > as well.
-> >=20
+On Wed, Apr 3, 2024 at 10:54=E2=80=AFPM Heinrich Schuchardt <xypron.glpk@gm=
+x.de> wrote:
 >
-> As I see it, it's not like we are making the fdt-0 non overridable, you
-> can still override it in your configs to make it cleaner if you want for
-> your board template, I don't think that -
+> On 27.03.24 15:06, Weizhao Ouyang wrote:
+> > According to UEFI v2.10 spec section 8.2.6, if a caller invokes the
+> > SetVariables() service, it will produce a digest from hash(VariableName=
+,
+> > VendorGuid, Attributes, TimeStamp, DataNew_variable_content), then the
+> > firmware that implements the SetVariable() service will compare the
+> > digest with the result of applying the signer=E2=80=99s public key to t=
+he
+> > signature. For EFI variable append write, efitools sign-efi-sig-list ha=
+s
+> > an option "-a" to add EFI_VARIABLE_APPEND_WRITE attr, and u-boot will
+> > drop this attribute in efi_set_variable_int(). So if a caller uses
+> > "sign-efi-sig-list -a" to create the authenticated variable, this appen=
+d
+> > write will fail in the u-boot due to "hash check failed".
+>
+> Currently U-Boot does not allow to use EFI_VARIABLE_APPEND_WRITE for any
+> non-existent variable, signed or not. This does not match the EDK II
+> behavior.
 
-Though it is not overriding but rather merging, correct? So one
-would need to first erase the node just to create it again. Which
-looks more like a workaround.
+I'm not referring to the non-existent variable situation, it's a normal
+existent variable update.
 
-> tispl {
->  	insert-template =3D <&ti_spl>;
->  	fit {
->  		images {
->  			fdt-0 {
-> 				...=20
-> 			};
->  			fdt-1 {
->  				...
->  			};
->  		};
->  		configurations {
-> 			conf-0 {
-> 				...
-> 			};
->  			conf-1 {
->  				...
->  			};
->  		};
->  	};
-> };
+I mean:
+1. process PK
+2. process KEK
+3. process a new APPEND_WRITE KEK (came from "sign-efi-sig-list -a ...",
+   so the digest and attrtibute of the KEK auth file will contain
+   APPEND_WRITE)
+Then the hash check will fail.
 
 >
-> is not doable. It might be a bit duplicate but if I think about it but
-> we are not losing out on extending the templates for multiple DTBs even
-> with this design. I know it might not be what you want but I feel that
-> for single DTB it's really convenient with the macro stuff and we don't
-> have to override any of the other binman nodes.
+> There is a patch queued for this issue:
+>
+> [PATCH v2] efi_loader: fix append write behavior to non-existent variable
+> https://lore.kernel.org/u-boot/20240402090950.3819705-1-kojima.masahisa@s=
+ocionext.com/
+>
+> Could you, please, retest with that patch.
+>
+> >
+> > This patch resumes writing the EFI_VARIABLE_APPEND_WRITE attr to ensure
+> > that the hash check is correct. And also update the "test_efi_secboot"
+> > test case to compliance with the change.
+> >
+> > Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> > ---
+> >   lib/efi_loader/efi_variable.c                  |  3 +--
+> >   test/py/tests/test_efi_secboot/conftest.py     | 10 ++++++++++
+> >   test/py/tests/test_efi_secboot/test_authvar.py |  4 ++--
+> >   test/py/tests/test_efi_secboot/test_signed.py  | 10 +++++-----
+> >   4 files changed, 18 insertions(+), 9 deletions(-)
+> >
+> > diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variabl=
+e.c
+> > index 40f7a0fb10..f41aa8f9ad 100644
+> > --- a/lib/efi_loader/efi_variable.c
+> > +++ b/lib/efi_loader/efi_variable.c
+> > @@ -259,7 +259,6 @@ efi_status_t efi_set_variable_int(const u16 *variab=
+le_name,
+> >       /* check if a variable exists */
+> >       var =3D efi_var_mem_find(vendor, variable_name, NULL);
+> >       append =3D !!(attributes & EFI_VARIABLE_APPEND_WRITE);
+> > -     attributes &=3D ~(u32)EFI_VARIABLE_APPEND_WRITE;
+>
+> According to the UEFI specification for GetVariable():
+>
+> "The EFI_VARIABLE_APPEND_WRITE attribute will never be set in the
+> returned Attributes bitmask parameter."
 
-I've raised my concern about stuffing board dependent stuff into the
-now generic "k3-<soc>-binman.dtsi". I get it that it will work for
-90% of the boards and that it is very convenient. I'd have rather
-seen a split of lets say
-  k3-<soc>-binman.dtsi
-and
-  k3-one-dtb-template-binman.dtsi
+Yes, that's why I called it a RFC patch.
 
-All the generic stuff goes into k3-soc-binman.dtsi whereas 90% of
-the boards might still use the second dtsi with some define magic.
-But it seems you've already made your mind up on that :)
+>
+> We don't want to set EFI_VARIABLE_APPEND_WRITE in a variable when
+> calling efi_var_mem_ins().
 
--michael
+The APPEND_WRITE attribute is allowed to be set prior to invoking the
+service (UEFI section 8.2.6). So anyway we should consider compatibility
+with this case, along with making changes to GetVariable().
 
---d81ed4be38f8dfdd65370ed70e84a0fba32a0467b66ec5287132c2b756b2
-Content-Type: application/pgp-signature; name="signature.asc"
+BR,
+Weizhao
 
------BEGIN PGP SIGNATURE-----
-
-iKgEABMJADAWIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCZg166RIcbXdhbGxlQGtl
-cm5lbC5vcmcACgkQEic87j4CH/j0FwF/eMJ6eyUsYjHUFGEHh3GpjJjovf7ERQ+Q
-D1HDYkI9xVm5kmLSLhH13Id2w3ULJIF3AX4gE3HIFNHAjodzraxbAP2Hak+taNQ5
-lIvRBdScTwvKwiEt9GMce0OYboa5NKzr9/o=
-=GbOt
------END PGP SIGNATURE-----
-
---d81ed4be38f8dfdd65370ed70e84a0fba32a0467b66ec5287132c2b756b2--
+>
+> >       delete =3D !append && (!data_size || !attributes);
+> >
+> >       /* check attributes */
+> > @@ -275,7 +274,7 @@ efi_status_t efi_set_variable_int(const u16 *variab=
+le_name,
+> >
+> >               /* attributes won't be changed */
+> >               if (!delete &&
+> > -                 ((ro_check && var->attr !=3D attributes) ||
+> > +                 ((ro_check && var->attr !=3D (attributes & ~(u32)EFI_=
+VARIABLE_APPEND_WRITE)) ||
+> >                    (!ro_check && ((var->attr & ~(u32)EFI_VARIABLE_READ_=
+ONLY)
+>
+> The (u32) conversions are superfluous.
+>
+> Best regards
+>
+> Heinrich
+>
+> >                                   !=3D (attributes & ~(u32)EFI_VARIABLE=
+_READ_ONLY))))) {
+> >                       return EFI_INVALID_PARAMETER;
+> > diff --git a/test/py/tests/test_efi_secboot/conftest.py b/test/py/tests=
+/test_efi_secboot/conftest.py
+> > index ff7ac7c810..0fa0747fc7 100644
+> > --- a/test/py/tests/test_efi_secboot/conftest.py
+> > +++ b/test/py/tests/test_efi_secboot/conftest.py
+> > @@ -64,6 +64,12 @@ def efi_boot_env(request, u_boot_config):
+> >           check_call('cd %s; %scert-to-efi-sig-list -g %s db1.crt db1.e=
+sl; %ssign-efi-sig-list -t "2020-04-05" -c KEK.crt -k KEK.key db db1.esl db=
+1.auth'
+> >                      % (mnt_point, EFITOOLS_PATH, GUID, EFITOOLS_PATH),
+> >                      shell=3DTrue)
+> > +        # db2 (APPEND_WRITE)
+> > +        check_call('cd %s; openssl req -x509 -sha256 -newkey rsa:2048 =
+-subj /CN=3DTEST_db2/ -keyout db2.key -out db2.crt -nodes -days 365'
+> > +                   % mnt_point, shell=3DTrue)
+> > +        check_call('cd %s; %scert-to-efi-sig-list -g %s db2.crt db2.es=
+l; %ssign-efi-sig-list -a -c KEK.crt -k KEK.key db db2.esl db2.auth'
+> > +                   % (mnt_point, EFITOOLS_PATH, GUID, EFITOOLS_PATH),
+> > +                   shell=3DTrue)
+> >           # dbx (TEST_dbx certificate)
+> >           check_call('cd %s; openssl req -x509 -sha256 -newkey rsa:2048=
+ -subj /CN=3DTEST_dbx/ -keyout dbx.key -out dbx.crt -nodes -days 365'
+> >                      % mnt_point, shell=3DTrue)
+> > @@ -84,6 +90,10 @@ def efi_boot_env(request, u_boot_config):
+> >           check_call('cd %s; %scert-to-efi-hash-list -g %s -s 256 db1.c=
+rt dbx_hash1.crl; %ssign-efi-sig-list -t "2020-04-06" -c KEK.crt -k KEK.key=
+ dbx dbx_hash1.crl dbx_hash1.auth'
+> >                      % (mnt_point, EFITOOLS_PATH, GUID, EFITOOLS_PATH),
+> >                      shell=3DTrue)
+> > +        # dbx_hash2 (digest of TEST_db2 certificate, with APPEND_WRITE=
+)
+> > +        check_call('cd %s; %scert-to-efi-hash-list -g %s -s 256 db2.cr=
+t dbx_hash2.crl; %ssign-efi-sig-list -a -c KEK.crt -k KEK.key dbx dbx_hash2=
+.crl dbx_hash2.auth'
+> > +                   % (mnt_point, EFITOOLS_PATH, GUID, EFITOOLS_PATH),
+> > +                   shell=3DTrue)
+> >           # dbx_db (with TEST_db certificate)
+> >           check_call('cd %s; %ssign-efi-sig-list -t "2020-04-05" -c KEK=
+.crt -k KEK.key dbx db.esl dbx_db.auth'
+> >                      % (mnt_point, EFITOOLS_PATH),
+> > diff --git a/test/py/tests/test_efi_secboot/test_authvar.py b/test/py/t=
+ests/test_efi_secboot/test_authvar.py
+> > index f99b8270a6..d5aeb65048 100644
+> > --- a/test/py/tests/test_efi_secboot/test_authvar.py
+> > +++ b/test/py/tests/test_efi_secboot/test_authvar.py
+> > @@ -183,7 +183,7 @@ class TestEfiAuthVar(object):
+> >               assert 'db:' in ''.join(output)
+> >
+> >               output =3D u_boot_console.run_command_list([
+> > -                'fatload host 0:1 4000000 db1.auth',
+> > +                'fatload host 0:1 4000000 db2.auth',
+> >                   'setenv -e -nv -bs -rt -a -i 4000000:$filesize db'])
+> >               assert 'Failed to set EFI variable' in ''.join(output)
+> >
+> > @@ -197,7 +197,7 @@ class TestEfiAuthVar(object):
+> >           with u_boot_console.log.section('Test Case 3c'):
+> >               # Test Case 3c, update with correct signature
+> >               output =3D u_boot_console.run_command_list([
+> > -                'fatload host 0:1 4000000 db1.auth',
+> > +                'fatload host 0:1 4000000 db2.auth',
+> >                   'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize db=
+',
+> >                   'printenv -e -n -guid d719b2cb-3d3a-4596-a3bc-dad00e6=
+7656f db'])
+> >               assert 'Failed to set EFI variable' not in ''.join(output=
+)
+> > diff --git a/test/py/tests/test_efi_secboot/test_signed.py b/test/py/te=
+sts/test_efi_secboot/test_signed.py
+> > index 2f862a259a..34719ad1f2 100644
+> > --- a/test/py/tests/test_efi_secboot/test_signed.py
+> > +++ b/test/py/tests/test_efi_secboot/test_signed.py
+> > @@ -177,7 +177,7 @@ class TestEfiSignedImage(object):
+> >           with u_boot_console.log.section('Test Case 5b'):
+> >               # Test Case 5b, authenticated if both signatures are veri=
+fied
+> >               output =3D u_boot_console.run_command_list([
+> > -                'fatload host 0:1 4000000 db1.auth',
+> > +                'fatload host 0:1 4000000 db2.auth',
+> >                   'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize db=
+'])
+> >               assert 'Failed to set EFI variable' not in ''.join(output=
+)
+> >               output =3D u_boot_console.run_command_list([
+> > @@ -201,7 +201,7 @@ class TestEfiSignedImage(object):
+> >           with u_boot_console.log.section('Test Case 5d'):
+> >               # Test Case 5d, rejected if both of signatures are revoke=
+d
+> >               output =3D u_boot_console.run_command_list([
+> > -                'fatload host 0:1 4000000 dbx_hash1.auth',
+> > +                'fatload host 0:1 4000000 dbx_hash2.auth',
+> >                   'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize db=
+x'])
+> >               assert 'Failed to set EFI variable' not in ''.join(output=
+)
+> >               output =3D u_boot_console.run_command_list([
+> > @@ -223,7 +223,7 @@ class TestEfiSignedImage(object):
+> >                   'setenv -e -nv -bs -rt -at -i 4000000:$filesize KEK',
+> >                   'fatload host 0:1 4000000 PK.auth',
+> >                   'setenv -e -nv -bs -rt -at -i 4000000:$filesize PK',
+> > -                'fatload host 0:1 4000000 db1.auth',
+> > +                'fatload host 0:1 4000000 db2.auth',
+> >                   'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize db=
+',
+> >                   'fatload host 0:1 4000000 dbx_hash1.auth',
+> >                   'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx']=
+)
+> > @@ -300,7 +300,7 @@ class TestEfiSignedImage(object):
+> >                   'setenv -e -nv -bs -rt -at -i 4000000:$filesize KEK',
+> >                   'fatload host 0:1 4000000 PK.auth',
+> >                   'setenv -e -nv -bs -rt -at -i 4000000:$filesize PK',
+> > -                'fatload host 0:1 4000000 db1.auth',
+> > +                'fatload host 0:1 4000000 db2.auth',
+> >                   'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize db=
+',
+> >                   'fatload host 0:1 4000000 dbx_hash384.auth',
+> >                   'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx']=
+)
+> > @@ -323,7 +323,7 @@ class TestEfiSignedImage(object):
+> >                   'setenv -e -nv -bs -rt -at -i 4000000:$filesize KEK',
+> >                   'fatload host 0:1 4000000 PK.auth',
+> >                   'setenv -e -nv -bs -rt -at -i 4000000:$filesize PK',
+> > -                'fatload host 0:1 4000000 db1.auth',
+> > +                'fatload host 0:1 4000000 db2.auth',
+> >                   'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize db=
+',
+> >                   'fatload host 0:1 4000000 dbx_hash512.auth',
+> >                   'setenv -e -nv -bs -rt -at -i 4000000:$filesize dbx']=
+)
+>
