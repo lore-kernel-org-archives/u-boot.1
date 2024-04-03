@@ -4,120 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B3C7CD11C2
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 00:45:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD87EC6FD1F
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 01:02:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E869881AC;
-	Wed,  3 Apr 2024 02:45:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 372BD88158;
+	Wed,  3 Apr 2024 03:02:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="AXy3gBP3";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="YbeD3kBg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E46A881BF; Wed,  3 Apr 2024 02:45:48 +0200 (CEST)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ id 2EDB288158; Wed,  3 Apr 2024 03:02:56 +0200 (CEST)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D36E98817C
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 02:45:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E624F87947
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 03:02:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20240403004542epoutp01cfca9d458047a980e047445021ec156b~Cno4-ot172490024900epoutp01P
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 00:45:42 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20240403004542epoutp01cfca9d458047a980e047445021ec156b~Cno4-ot172490024900epoutp01P
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20240403010250epoutp04b3878e3e92a851f3f907fd8a8e5d9f80~Cn32hX9JR3111731117epoutp04j
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 01:02:50 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20240403010250epoutp04b3878e3e92a851f3f907fd8a8e5d9f80~Cn32hX9JR3111731117epoutp04j
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1712105142;
- bh=NJEngI92ONkGwStz158JT/RzbnczCwVs5ls3uoN3z98=;
+ s=mail20170921; t=1712106170;
+ bh=VCNA6XLYzSj4sEuWAfNE5tFjNJE9j8xzdXs8z+cGzNc=;
  h=Date:Subject:To:Cc:From:In-Reply-To:References:From;
- b=AXy3gBP32Og5/sDo6bN9KK+zE3vdrXKRZnSLr3/Ig4NZus64AMmUlqbaquMCLrFGU
- 4NrTi1L83WrDMDmIj6wm7IFa2qT5tZmXLuZ+L1oXlH/2czYisCw2eG+p+AkVWBfGT3
- /TTc8g9JD5FbskqKQoxnaLtWxhgdCp0jiuAFKy9A=
+ b=YbeD3kBgNxG/kU1KhAJ9YO3upAWjykkPTxki5xkKfH35J92wb/d4yRo7FdLYVkHg5
+ DXzgXumRU6E5aZHZznB07lE7xIKab74/a/6hooiqno5lZPhnl88P8dCKqTi6u1+T3R
+ 8nCcD1IIcJGwoSYAY+HWBQCBbSm0P722Es1Dh/gk=
 Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
  epcas1p2.samsung.com (KnoxPortal) with ESMTP id
- 20240403004541epcas1p21cb4c69d1f9a4f2ed12eac403dc71f80~Cno4eUjzh1718317183epcas1p2u;
- Wed,  3 Apr 2024 00:45:41 +0000 (GMT)
-Received: from epsmges1p4.samsung.com (unknown [182.195.38.233]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4V8Qyr4jc1z4x9Q0; Wed,  3 Apr
- 2024 00:45:40 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
- 50.AA.10158.4B6AC066; Wed,  3 Apr 2024 09:45:40 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20240403004539epcas1p22a414027e51daffba353e16bfca94e96~Cno234e2S2647526475epcas1p2c;
- Wed,  3 Apr 2024 00:45:39 +0000 (GMT)
-Received: from epsmgms1p1new.samsung.com (unknown [182.195.42.41]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20240403004539epsmtrp10764a7f4f4199e3d56227887977bb939~Cno23Rs3J0073500735epsmtrp1S;
- Wed,  3 Apr 2024 00:45:39 +0000 (GMT)
-X-AuditID: b6c32a38-b41fa700000027ae-87-660ca6b41a7f
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgms1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- B8.21.08924.3B6AC066; Wed,  3 Apr 2024 09:45:39 +0900 (KST)
+ 20240403010250epcas1p29baa320620efca2245648114322ab1fe~Cn32VkqHw2935129351epcas1p2C;
+ Wed,  3 Apr 2024 01:02:50 +0000 (GMT)
+Received: from epsmgec1p1.samsung.com (unknown [182.195.36.144]) by
+ epsnrtp3.localdomain (Postfix) with ESMTP id 4V8RLd062zz4x9Q0; Wed,  3 Apr
+ 2024 01:02:49 +0000 (GMT)
+Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
+ epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 41.6C.08627.8BAAC066; Wed,  3 Apr 2024 10:02:48 +0900 (KST)
+Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20240403010248epcas1p4bc0f170bdb71b5ef6e374f56b7a89429~Cn31CT6K12428624286epcas1p4-;
+ Wed,  3 Apr 2024 01:02:48 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
+ 20240403010248epsmtrp208d2546c1fe0885c513bb378c99ceef7~Cn31BnynB0937409374epsmtrp2j;
+ Wed,  3 Apr 2024 01:02:48 +0000 (GMT)
+X-AuditID: b6c32a33-af9ff700000021b3-27-660caab8c850
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 17.12.08390.8BAAC066; Wed,  3 Apr 2024 10:02:48 +0900 (KST)
 Received: from [10.113.113.235] (unknown [10.113.113.235]) by
- epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
- 20240403004539epsmtip25bb78c212ea2c373ab99443dafc1dc72~Cno2nyQuI0586705867epsmtip2R;
- Wed,  3 Apr 2024 00:45:39 +0000 (GMT)
-Message-ID: <8dc1fead-ffd4-40f7-83a8-dda235ae1188@samsung.com>
-Date: Wed, 3 Apr 2024 09:45:39 +0900
+ epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
+ 20240403010248epsmtip1193ece8d4dd6c6d1bb8423e65c022458~Cn30ky9hV1997819978epsmtip1n;
+ Wed,  3 Apr 2024 01:02:48 +0000 (GMT)
+Message-ID: <d590f409-5b31-435e-9ca2-9f4fd0db01d5@samsung.com>
+Date: Wed, 3 Apr 2024 10:02:48 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mmc: arm_pl180_mmci: Rely on DM
-To: Linus Walleij <linus.walleij@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>, Usama Arif <usama.arif@arm.com>, Ole Orhagen
- <ole.orhagen@northern.tech>, Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] mmc: tmio: Check INFO1 for completion during DMA transfer
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Hai Pham <hai.pham.ud@renesas.com>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Paul Barker <paul.barker.ct@bp.renesas.com>, Peng
+ Fan <peng.fan@nxp.com>, Sean Anderson <seanga2@gmail.com>, Tom Rini
+ <trini@konsulko.com>, Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
 Content-Language: en-US
 From: Jaehoon Chung <jh80.chung@samsung.com>
-In-Reply-To: <20240208-uboot-vexpress-ca9-v1-1-ad7bc1f2f433@linaro.org>
+In-Reply-To: <20240220083827.34473-1-marek.vasut+renesas@mailbox.org>
 Content-Transfer-Encoding: 7bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrIJsWRmVeSWpSXmKPExsWy7bCmge6WZTxpBs/XKVmsmPeT0WLKn+VM
- Fo//zWO3+LHqC6vF1Emb2S3e7u1kt5j7ZBOTA7vHmnlrGD1eHVjF7nHn2h42j7N3djB6nNw2
- j9Vj47sdTAFsUdk2GamJKalFCql5yfkpmXnptkrewfHO8aZmBoa6hpYW5koKeYm5qbZKLj4B
- um6ZOUDHKCmUJeaUAoUCEouLlfTtbIryS0tSFTLyi0tslVILUnIKTAv0ihNzi0vz0vXyUkus
- DA0MjEyBChOyMx5838teMFO14tiU9ywNjE9luxg5OSQETCROzpvD1MXIxSEksINR4tGvnywQ
- zidGiR3H57OCVAkJfGOUOHdFBqaj4cBsdoiivYwSrR9eQ7W/Z5T4fWk5O0gVr4CdxOdnb5hA
- bBYBFYm3k/ZBxQUlTs58wgJiiwrIS9y/NQMsLgw0dcelHcwgg0QE7jNKTDpwlxkkwSwgIbHk
- 0H1WCFtc4taT+WBD2QR0JLZ/Ow5mcwq4S7x8uosdokZeYvvbOWCDJATmckicaPnDCHG3i8T3
- SV9YIGxhiVfHt7BD2FISL/vb2CEamhklli45yArh9DBK/Gu4zgZRZSyxf+lkoHUcQCs0Jdbv
- 0ofYxifx7msPK0hYQoBXoqNNCKJaReLS65dMMPPvPvnPCmF7SPTumQYN4FmMEtef3mKbwKgw
- CylkZiF5dBaSh2YhbF7AyLKKUSy1oDg3PbXYsMAEHuHJ+bmbGMFpVctiB+Pctx/0DjEycTAe
- YpTgYFYS4f3pzZkmxJuSWFmVWpQfX1Sak1p8iNEUGD8TmaVEk/OBiT2vJN7QxNLAxMzI2MTC
- 0MxQSZz3zJWyVCGB9MSS1OzU1ILUIpg+Jg5OqQamylduLyoeCHU+3qslfav2980s56cJhT+2
- fZhnscQ5PPIiQ8zC88p1n31bBbzPpWqLMuqyzlzHtaw/IU4ruMeAVS7hlv17ltm59458eat6
- a1PlV49+0QblqoOsjqvKrhtcmvOjqIYti+FLoKW3bMzEq3UPSz7OuHY+5mZw6Mqvya/PfBDZ
- 1f9yfXfoROPvnXumbui5XllfHHk5bkrkl1UNe3TSV97wOBezvUyI5cIMjXvGiQ0TJix7bbch
- 27c/df2h5CvnF+sZbbXh3taydG9i/CpexiXmCsZyxWxtPwX6zKd9k58vL6P53dkl8/iRqfs6
- LtfO77LMvJ6x/aF+Un3Hmc6M385r3Esn/eWaPOG7EktxRqKhFnNRcSIArqrQ2jQEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrNLMWRmVeSWpSXmKPExsWy7bCSvO7mZTxpBsfbDC1WzPvJaDHlz3Im
- i8f/5rFb/Fj1hdVi6qTN7BZv93ayW8x9sonJgd1jzbw1jB6vDqxi97hzbQ+bx9k7Oxg9Tm6b
- x+qx8d0OpgC2KC6blNSczLLUIn27BK6MB9/3shfMVK04NuU9SwPjU9kuRk4OCQETiYYDs9m7
- GLk4hAR2M0rM6trKDpGQkvj8dCpbFyMHkC0scfhwMUTNW0aJ953nWUFqeAXsJD4/e8MEYrMI
- qEi8nbSPHSIuKHFy5hMWEFtUQF7i/q0ZYHFhoGU7Lu1gBhkkIvCQUeLs/rmMIAlmAQmJJYfu
- gw0VEnCTuDxlEytEXFzi1pP5YAvYBHQktn87DmZzCrhLvHy6ix3kOGYBdYn184QgyuUltr+d
- wzyBUWgWkjNmIZk0C6FjFpKOBYwsqxglUwuKc9Nziw0LDPNSy/WKE3OLS/PS9ZLzczcxguNH
- S3MH4/ZVH/QOMTJxMB5ilOBgVhLh/enNmSbEm5JYWZValB9fVJqTWnyIUZqDRUmcV/xFb4qQ
- QHpiSWp2ampBahFMlomDU6qByeaT0U+WFusZv7XLfs5m+dL2Xf/Lu72B7UmLZYxy95Y2rPL7
- ERpbYfNz0t6EUsHcnactJ1u2JDw56e/zyt5rbd6ywDXnT//rnGS21f0eW9qP2K/aNqV29m2Z
- c32XeTwW6DxZnfdrXt2Jilzm09d9Jk5/c3xxi1Ja40SrqYcOGbwzUnv+TG9vFevuru2K2yea
- HKpwOJFj9fHt2atJ107s8F4iM69UZGkil//x5UWPP2cV73FJurdhz5ZV7kLzrup8Zq+XOGa9
- 2+BbiebLlW9N9E98s2NL/d/a3TuVddWNDc8nNRx4ktv4k2/qg3ZX6cOzGN59a09pCjBKOrk/
- olP9rdD3k+FSK+X5P/pKLtnzR0+JpTgj0VCLuag4EQCMIISgDgMAAA==
-X-CMS-MailID: 20240403004539epcas1p22a414027e51daffba353e16bfca94e96
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrEJsWRmVeSWpSXmKPExsWy7bCmvu6OVTxpBms+WFhsX9XMbPG2udii
+ deUdNos/J3+wWvxY9YXVYuu9CUwWUydtZrd4u7eT3eLr3s9sDpweK1/MZvfYOesuu8erA6vY
+ Pc7e2cHosXP2PiaPA5PPsXpsfLeDyePbmYksARxR2TYZqYkpqUUKqXnJ+SmZeem2St7B8c7x
+ pmYGhrqGlhbmSgp5ibmptkouPgG6bpk5QPcpKZQl5pQChQISi4uV9O1sivJLS1IVMvKLS2yV
+ UgtScgpMC/SKE3OLS/PS9fJSS6wMDQyMTIEKE7IznvfeYiqYIlRxc8oT9gbGT3xdjBwcEgIm
+ EjPvunQxcnEICexglNj+7jNrFyMnkPOJUWL/Z16IxDdGiSeNn9lAEiANG77PYoRI7GWU2Dvz
+ JzOE855R4vy5BrB2XgE7iVdTvjGC2CwCKhJX29+wQMQFJU7OfAJmiwrIS9y/NYMdxBYWCJBo
+ +rmTHeQkEQF3iRd/wDYzC8xgkvi98B3YTGYBcYlbT+YzgdhsAjoS278dB7M5BVwl/q/rYoGo
+ kZfY/nYO2EESAjs4JL5s28IIcbaLxPu+c1AvCEu8Or6FHcKWkvj8bi8bREMzo8TSJQdZIZwe
+ Rol/DdehOowl9i+dzARyHrOApsT6XfoQ2/gk3n3tYYUEJK9ER5sQRLWKxKXXL5lg5t998p8V
+ wvaQmL3hHRMktGYwSjxcvIZxAqPCLKSAmYXk0VlIHpqFsHkBI8sqRrHUguLc9NRkwwJDeHQn
+ 5+duYgQnXi3jHYyX5//TO8TIxMF4iFGCg1lJhPenN2eaEG9KYmVValF+fFFpTmrxIUZTYPRM
+ ZJYSTc4Hpv68knhDE0sDEzMjYxMLQzNDJXHeM1fKUoUE0hNLUrNTUwtSi2D6mDg4pRqYqnd3
+ 2RjmXPP7Hzj7qUGOuPourRvbz9VczlA5FhgcMafh7PsvbLLS0qkP2zyevI5/kNfocFvXM/F6
+ 2+l3ejtiZuno1u2z1Fox7/AP5ZOy0x5vuH6h91Faf6FeW/Wiv5f7es5Nu7O4LVv5xd1PT+48
+ vZY45fr7h0+nbqhU+K7bc3fi8v9zb+h7yXnWCleumSksUSFg5LvgxkRmntsmcw+cbeYo9kqy
+ mbZSr0atK9fWbwWLRsLClc/PCfqXPNpSHZG6T13zf2b1bmfRjo1m4n0TVivpSKwS6as/uVzz
+ i/EWh60/P8lY/25+cW/1MwX5+s2JOQ/e/Mnet+GmPrv42Y8OAZWTdSrnTV37deHm8p//nJRY
+ ijMSDbWYi4oTAehxM79FBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFuphkeLIzCtJLcpLzFFi42LZdlhJTnfHKp40gyOLlCy2r2pmtnjbXGzR
+ uvIOm8Wfkz9YLX6s+sJqsfXeBCaLqZM2s1u83dvJbvF172c2B06PlS9ms3vsnHWX3ePVgVXs
+ Hmfv7GD02Dl7H5PHgcnnWD02vtvB5PHtzESWAI4oLpuU1JzMstQifbsEroznvbeYCqYIVdyc
+ 8oS9gfETXxcjJ4eEgInEhu+zGEFsIYHdjBKXGywg4lISn59OZeti5ACyhSUOHy7uYuQCKnnL
+ KLH+xwpWkBpeATuJV1O+gfWyCKhIXG1/wwIRF5Q4OfMJmC0qIC9x/9YMdhBbWMBPYtGmB0wg
+ M0UE3CVe/OEFmcksMItJ4uzX6SwQN7hIfH7yGMxmFhCXuPVkPhOIzSagI7H923Ewm1PAVeL/
+ ui4WkDnMAuoS6+cJQZTLS2x/O4d5AqPQLCRXzEIyaRZCxywkHQsYWVYxSqYWFOem5xYbFhjl
+ pZbrFSfmFpfmpesl5+duYgRHmJbWDsY9qz7oHWJk4mA8xCjBwawkwvvTmzNNiDclsbIqtSg/
+ vqg0J7X4EKM0B4uSOO+3170pQgLpiSWp2ampBalFMFkmDk6pBqaiuoCc19bulZVdKhOcnSct
+ Pd5st8Zhjs+jvz7ebBNiXFJCjs16dVcv9tvKtEqRw7PXzQz6Gvx/xfndHrbv1DqeehlUTyhZ
+ KNJx4cny+Xs9LqxJ/VxqbSzQphuWnuiwfRXXj2wnta8rXu6ftitP94B2aKnGw+fv1fIPCGeY
+ hn7ds3dD1CS9Yw6txaWWVRaH5MxKAnXfpG3Zn3dgyuzvASG5Zzf87yo+8PWl07ytLB97sp5/
+ 0dnzfml8kVOFde3D4qtT628KL/GYLBS23UumY/kDt0cOEWbeW1Wt5Cqv/G9+v+Rsak5eZ/WZ
+ f1mRN7Uzc7d0u8b5hBiZXHkR1XBh+WHm20kpTNvnBty5l8VsZqzEUpyRaKjFXFScCAByN4Vd
+ HwMAAA==
+X-CMS-MailID: 20240403010248epcas1p4bc0f170bdb71b5ef6e374f56b7a89429
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240403004539epcas1p22a414027e51daffba353e16bfca94e96
-References: <20240208-uboot-vexpress-ca9-v1-1-ad7bc1f2f433@linaro.org>
- <CGME20240403004539epcas1p22a414027e51daffba353e16bfca94e96@epcas1p2.samsung.com>
+X-CMS-RootMailID: 20240403010248epcas1p4bc0f170bdb71b5ef6e374f56b7a89429
+References: <20240220083827.34473-1-marek.vasut+renesas@mailbox.org>
+ <CGME20240403010248epcas1p4bc0f170bdb71b5ef6e374f56b7a89429@epcas1p4.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,162 +137,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/8/24 18:33, Linus Walleij wrote:
-> The PL180/MMCI driver is implied to use CONFIG_DM and the ARM
-> defconfigs such as configs/vexpress_ca9x4_defconfig will get it
-> as well.
+On 2/20/24 17:38, Marek Vasut wrote:
+> In case a CRC error occurs during DMA transfer, the transfer completion
+> flag is not set in TMIO_SD_DMA_INFO1 and the transfer would eventually
+> time out. The timeout could be very long in case the transfer consists
+> of a large amount of blocks, the base timeout is 10 seconds and every
+> block adds 100 us more.
 > 
-> With a simple oneline to default to not being the v2 variant,
-> the original ARM MMCI variant works fine with the driver as well.
-> The IP version actually needs to be read out from a register on
-> the ARM versions, but we will simply assume we are running on the
-> original hardware if arm,primecell-periphid is not explicitly
-> specified in the device tree.
+> In case a CRC error does occur, a completion flag is set in a different
+> register, TMIO_SD_INFO1. Use this other completion flag to detect DMA
+> transfer ended and stop waiting for TMIO_SD_DMA_INFO1 completion flag.
+> This reduces the lengthy timeout in case of an error. The unconditional
+> check of TMIO_SD_DMA_INFO2 register for DMA related errors must not be
+> skipped in any case to actually recognize the DMA error and report it.
 > 
-> Drop the !CONFIG_DM code and depend on DM_MMC.
-> 
-> Tested on the Versatile Express CA9x4 board.
-> 
-> Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Tested-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
-Sorry for late. I will apply this patch to u-boot-mmc/master. Thanks.
+Sorry for late. Will apply to u-boot-mmc/master, Thanks!
 
 Best Regards,
 Jaehoon Chung
 
 > ---
->  drivers/mmc/Kconfig          |  1 +
->  drivers/mmc/arm_pl180_mmci.c | 66 ++------------------------------------------
->  2 files changed, 3 insertions(+), 64 deletions(-)
-> 
-> 
+> Cc: Hai Pham <hai.pham.ud@renesas.com>
+> Cc: Jaehoon Chung <jh80.chung@samsung.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Cc: Peng Fan <peng.fan@nxp.com>
+> Cc: Sean Anderson <seanga2@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: Yoshihiro Shimoda <yoshihiro.shimoda.uh@renesas.com>
 > ---
-> base-commit: 0101a2ffe125911ebf89172b495f5ff14f2fd058
-> change-id: 20240208-uboot-vexpress-ca9-127bd6b163df
+>  drivers/mmc/tmio-common.c | 8 +++++++-
+>  1 file changed, 7 insertions(+), 1 deletion(-)
 > 
-> Best regards,
-> 
-> diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
-> index 17618c3bdcc1..59716c3966e5 100644
-> --- a/drivers/mmc/Kconfig
-> +++ b/drivers/mmc/Kconfig
-> @@ -79,6 +79,7 @@ config MMC_SPI_CRC_ON
+> diff --git a/drivers/mmc/tmio-common.c b/drivers/mmc/tmio-common.c
+> index 890c496b535..719c4830bc3 100644
+> --- a/drivers/mmc/tmio-common.c
+> +++ b/drivers/mmc/tmio-common.c
+> @@ -299,7 +299,13 @@ static int tmio_sd_dma_wait_for_irq(struct udevice *dev, u32 flag,
+>  	struct tmio_sd_priv *priv = dev_get_priv(dev);
+>  	long wait = 1000000 + 10 * blocks;
 >  
->  config ARM_PL180_MMCI
->  	bool "ARM AMBA Multimedia Card Interface and compatible support"
-> +	depends on DM_MMC
->  	help
->  	  This selects the ARM(R) AMBA(R) PrimeCell Multimedia Card
->  	  Interface (PL180, PL181 and compatible) support.
-> diff --git a/drivers/mmc/arm_pl180_mmci.c b/drivers/mmc/arm_pl180_mmci.c
-> index 5cf5502ed545..2666b65362bc 100644
-> --- a/drivers/mmc/arm_pl180_mmci.c
-> +++ b/drivers/mmc/arm_pl180_mmci.c
-> @@ -18,6 +18,7 @@
->  #include <malloc.h>
->  #include <mmc.h>
->  #include <dm/device_compat.h>
-> +#include <dm.h>
->  
->  #include <asm/io.h>
->  #include <asm-generic/gpio.h>
-> @@ -25,8 +26,6 @@
->  #include "arm_pl180_mmci.h"
->  #include <linux/delay.h>
->  
-> -#ifdef CONFIG_DM_MMC
-> -#include <dm.h>
->  #define MMC_CLOCK_MAX	48000000
->  #define MMC_CLOCK_MIN	400000
->  
-> @@ -34,7 +33,6 @@ struct arm_pl180_mmc_plat {
->  	struct mmc_config cfg;
->  	struct mmc mmc;
->  };
-> -#endif
->  
->  static int wait_for_command_end(struct mmc *dev, struct mmc_cmd *cmd)
->  {
-> @@ -358,65 +356,6 @@ static int  host_set_ios(struct mmc *dev)
->  	return 0;
->  }
->  
-> -#ifndef CONFIG_DM_MMC
-> -/* MMC uses open drain drivers in the enumeration phase */
-> -static int mmc_host_reset(struct mmc *dev)
-> -{
-> -	struct pl180_mmc_host *host = dev->priv;
-> -
-> -	writel(host->pwr_init, &host->base->power);
-> -
-> -	return 0;
-> -}
-> -
-> -static const struct mmc_ops arm_pl180_mmci_ops = {
-> -	.send_cmd = host_request,
-> -	.set_ios = host_set_ios,
-> -	.init = mmc_host_reset,
-> -};
-> -
-> -/*
-> - * mmc_host_init - initialize the mmc controller.
-> - * Set initial clock and power for mmc slot.
-> - * Initialize mmc struct and register with mmc framework.
-> - */
-> -
-> -int arm_pl180_mmci_init(struct pl180_mmc_host *host, struct mmc **mmc)
-> -{
-> -	u32 sdi_u32;
-> -
-> -	writel(host->pwr_init, &host->base->power);
-> -	writel(host->clkdiv_init, &host->base->clock);
-> -	udelay(CLK_CHANGE_DELAY);
-> -
-> -	/* Disable mmc interrupts */
-> -	sdi_u32 = readl(&host->base->mask0) & ~SDI_MASK0_MASK;
-> -	writel(sdi_u32, &host->base->mask0);
-> -
-> -	host->cfg.name = host->name;
-> -	host->cfg.ops = &arm_pl180_mmci_ops;
-> -
-> -	/* TODO remove the duplicates */
-> -	host->cfg.host_caps = host->caps;
-> -	host->cfg.voltages = host->voltages;
-> -	host->cfg.f_min = host->clock_min;
-> -	host->cfg.f_max = host->clock_max;
-> -	if (host->b_max != 0)
-> -		host->cfg.b_max = host->b_max;
-> -	else
-> -		host->cfg.b_max = CONFIG_SYS_MMC_MAX_BLK_COUNT;
-> -
-> -	*mmc = mmc_create(&host->cfg, host);
-> -	if (!*mmc)
-> -		return -1;
-> -	debug("registered mmc interface number is:%d\n",
-> -	      (*mmc)->block_dev.devnum);
-> -
-> -	return 0;
-> -}
-> -#endif
-> -
-> -#ifdef CONFIG_DM_MMC
->  static void arm_pl180_mmc_init(struct pl180_mmc_host *host)
->  {
->  	u32 sdi_u32;
-> @@ -477,7 +416,7 @@ static int arm_pl180_mmc_probe(struct udevice *dev)
->  		host->version2 = true;
->  		break;
->  	default:
-> -		host->version2 = true;
-> +		host->version2 = false; /* ARM variant */
->  	}
->  
->  	gpio_request_by_name(dev, "cd-gpios", 0, &host->cd_gpio, GPIOD_IS_IN);
-> @@ -561,4 +500,3 @@ U_BOOT_DRIVER(arm_pl180_mmc) = {
->  	.priv_auto	= sizeof(struct pl180_mmc_host),
->  	.plat_auto	= sizeof(struct arm_pl180_mmc_plat),
->  };
-> -#endif
+> -	while (!(tmio_sd_readl(priv, TMIO_SD_DMA_INFO1) & flag)) {
+> +	for (;;) {
+> +		if (tmio_sd_readl(priv, TMIO_SD_DMA_INFO1) & flag)
+> +			break;
+> +
+> +		if (tmio_sd_readl(priv, TMIO_SD_INFO1) & TMIO_SD_INFO1_CMP)
+> +			break;
+> +
+>  		if (wait-- < 0) {
+>  			dev_err(dev, "timeout during DMA\n");
+>  			return -ETIMEDOUT;
 
