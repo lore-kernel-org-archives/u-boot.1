@@ -4,98 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1213CCD1288
-	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 12:10:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA09CD128A
+	for <u-boot@archiver.kernel.org>; Wed,  3 Apr 2024 12:23:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBB87883CC;
-	Wed,  3 Apr 2024 14:08:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 604D9881AF;
+	Wed,  3 Apr 2024 14:23:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LT22a5lb";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gujpOsm0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C2E5883D2; Wed,  3 Apr 2024 14:08:11 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A6D4C88212; Wed,  3 Apr 2024 14:23:54 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 725FC8839A
- for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 14:08:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 79FAD87842
+ for <u-boot@lists.denx.de>; Wed,  3 Apr 2024 14:23:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-56dfba6ae21so1405472a12.1
- for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 05:08:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712146086; x=1712750886; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=2rIilUL3fPgdL00EeRjYvSoOr0+tfQS+h1cCC5JbimE=;
- b=LT22a5lb/5oD1bnMULOtUKfZzVZ0q01R83XjdDyJhkZc+H+OZ95qSlI9gALymrUFbU
- arWePJ9+My6TTWAGrPhAZkwPLNEvYWF5toF3AvxgZn1EYrt6mSjdXvpNFWOo+b2HamIm
- I/2iu7ScRV4/utc9eaKvPrPSonFeMg1BbAW7N7VTon7xHNiFoieu02l/JveuOlfiBU3C
- mUf1sAMXovy2SoZ+oM77uZ3EvFc9f24QsqbG/8zQnQq9BgMYCMnWOuFlgNV/jM5NzCJN
- LiThUl/A18bpSsuBiijDPskgJv9UUA7jnmPU5JwemEDYT5hAvPPnLDx0ONOuUkEon6PX
- 9XtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712146086; x=1712750886;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2rIilUL3fPgdL00EeRjYvSoOr0+tfQS+h1cCC5JbimE=;
- b=q2cpvHI8ppukShdfdOMksXDojBX/5Nbrmf5TEgUhHI4RT2xBpB1o4ZuCslZGx/6PRP
- aLX5H/iO09u8Dx0K/N2pVy36ukdgkr/7uWIJkEXi0J3RbJS2gQJa+2y62HOrM7c8V8L9
- MNTd/yJGNNk7LwvnG+V+j8rEmnyouSsAVoE1DVFlsocetk955hq6ZD17NGVJOIheBcFl
- JsaSskTg14QvPYEnXGkqGYx0qd4n1w9nFtJZe6oMDDh8z5c/IebPk+7/VQnFCon1bA5K
- rxr69MXuOmvYVd4mdffkUg8KEzlSvjXhauLHGi4DfEQkKCycQYVdelPqMrXIb6wtqdDR
- 1ZFg==
-X-Gm-Message-State: AOJu0YwvkNaXswKf6WOyFYG9sS+GufK7vRhgSqiJiBCGZAIogDtdIVY0
- xp5DBYoXr60/0WgXiP362r09Fox7G0AW7pw9fWpHEMvqnJhHGxcybQ7YDsK2QeQ=
-X-Google-Smtp-Source: AGHT+IH//nvGIx2NsypSiF5nucxlrb+Qj6aUoJrpi62ois6iJCdGk3iDhVV4bpjhAnDEImQljR871g==
-X-Received: by 2002:a17:906:e086:b0:a4e:9a1a:e312 with SMTP id
- gh6-20020a170906e08600b00a4e9a1ae312mr1738155ejb.57.1712146086048; 
- Wed, 03 Apr 2024 05:08:06 -0700 (PDT)
-Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::38e6])
- by smtp.gmail.com with ESMTPSA id
- lr20-20020a170906fb9400b00a46a04d7dc4sm7654674ejb.61.2024.04.03.05.08.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 05:08:05 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 03 Apr 2024 14:07:51 +0200
-Subject: [PATCH v6 16/16] usb: gadget: UMS: fix 64-bit division on ARM32
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1712146997; x=1712751797; i=xypron.glpk@gmx.de;
+ bh=7oeoa57xtQBGWqwDTaBFdQTmTxG3fMKBdFZsFA01VqA=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=gujpOsm0a4n2PzIKy5PnZuOhx8lmN2bnkgdX0morAC8wq9lCCMHdvnfLHvEpdcni
+ voxVxBNgaheG2yDLdDgzoNEQguVaT8BEoUEO11OtsgNo+ibWlr8OFaRdm66/MsN/G
+ rrrqU+khhdsZwUiSyh1HQUBu8VQAvRoFjj3fVgD8dZv/7w9BSOEPxNlD0EGxY06W4
+ 7Byo5l07yhTs/wQiAFr5lAIw75R4AaoYVnaDnjldvwM7PDH3Kr8eCn/EZ190ut2N8
+ 4NUdrK5oXEx0VWuSTkDODY9LXGBROLBXiYJpqNC5K2FhTd2HmnOnV+LY+YVwJIVw8
+ QC3K4P6aWydYARPHcg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MN5eR-1s89cP3fiH-00J4zY; Wed, 03
+ Apr 2024 14:23:16 +0200
+Message-ID: <3ddc6c93-ad4b-41b2-a7e5-3a28b511dd1b@gmx.de>
+Date: Wed, 3 Apr 2024 14:23:14 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240403-b4-qcom-livetree-v6-16-130f8f50b538@linaro.org>
-References: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
-In-Reply-To: <20240403-b4-qcom-livetree-v6-0-130f8f50b538@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.13-dev-4bd13
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2332;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=GILrVlJTLB7vGoUqwXYfiSFWeP5Fqv5LLGhQ18mVlh4=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmDUaS/UZ3ATb1s4JU3qwNUdRjMg3ls3FbxVeRu
- oznn4aBsWmJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZg1GkgAKCRAFgzErGV9k
- tqHeD/9W1k82Ypg93K7ja/mXBrh31Lz9jFNXmGXQcMI/85VhfCyKcJD4d9poTWB3gKuEjcNk5uk
- sANbDuTJAbUIMrkVyF2j8vmpZHOTckDpyrBW/tu1RFtTGt/d03sW41kF0a7DLbmAMQf1v7iqYpt
- JiFsaURH3mCJn/7+fATHORobCVV7o2kQRU5vDGR5smGxGSjrCjnCRftsdL6aCFyGwcj46rD6Coy
- /Ag9WhR5+UQPeHEp7BMsA3LDLVm4eCCXZjeFCgL6dlQGujiJxuYm5tdxrJUF0WPS2OPgZzE3Mi4
- dYTz1WcOiw4+q5DTUH2kfDADIQ1ViKb/2eS2CxrzdL3+mnV65OiOKCObtEBw6tZ7MoLN/HqZx5+
- 1p3gKmURENsAyvx7ndOmc5W9HyiEG1j0EzyErJnsobrVQxH1YMOrIKnQjj3l6xZ82JjsdaYaLbC
- +SxAwwdjwpoGNn+sajFhsS1b6xeyNSNErideNm5iX/5WrdOGS1rN2dFr54KmKrrvJ8PpQw0cVfj
- X7eJe755PZkrhLGTG/fuLn8rlksxwrfveq5bkE2Em1aPxB8Y40isL9QllOJ2rtG5ssF/o3S0IHn
- jNtbfVAiptQ6QOQUnyuwVwPwhIoIV2jqCxS0I+KsxK3sALZX5+vkDd/gmw83ymQKUB7gUS30zpD
- agJ5Bav7l0fmemg==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] disk: support MTD partitions
+To: Alexey Romanov <avromanov@salutedevices.com>
+Cc: kernel@salutedevices.com, u-boot@lists.denx.de,
+ dario.binacchi@amarulasolutions.com, michael@amarulasolutions.com,
+ frieder.schrempf@kontron.de, ilias.apalodimas@linaro.org, sjg@chromium.org,
+ bmeng@tinylab.org, tobias@waldekranz.com, jpewhacker@gmail.com,
+ marek.vasut+renesas@mailbox.org, kever.yang@rock-chips.com,
+ jbx6244@gmail.com, abdellatif.elkhlifi@arm.com, michal.simek@amd.com,
+ mikhail.kshevetskiy@iopsys.eu, patrice.chotard@foss.st.com
+References: <20240307130726.1582487-1-avromanov@salutedevices.com>
+ <20240307130726.1582487-2-avromanov@salutedevices.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240307130726.1582487-2-avromanov@salutedevices.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:1oseuu2F9xYhoKdcH/DP1d9LAdEKoiQ6xdF6JKgGrf9VFcZTH1C
+ ly9qnv2+W+fTlcu80EN7J9GMc5PYuY3URksadxNhtdSDbD9+5tu7LEuaWE0EARXBCcM+Esu
+ wQr88wYWe3IFgMZnZftbRldHxFWG21v60k43Gn/EoGo+tTGztlpvKB6YopOKmz2MKVUVTBR
+ h3jzu4VeqSO8JXZi0I+5A==
+UI-OutboundReport: notjunk:1;M01:P0:eZaAfO6p9YA=;7+toAio8ZNsbN2dDjOUj1uByLxq
+ tKDfWGc7V3AKlBAh7KtOdZyMhQN4PgYbuqj2oS+nq+wA7vahJ2Qs6HDgNIVngHWa9l3iZFuc5
+ qKFEvXmkKdwwVXAOekVh+7GOTZlupOpnt/1MeSK7tju77vfW1m6YbnRHMifhkroq8q6rSaZJt
+ Re0JhXaorI7vAzGvPENMyd7O4L4d2N8zJK1izrBkVqFaWr4WbCrsac9HE6VvWdiKX6bcW6qjn
+ GwNz7ebC+611t3ON2L9ylUP9RyEy128TyQ3AulUcBCFaEm/qyNdilh9F5761hDMgi+vy4UaKg
+ 19V0qWFxnOiToC0sHUNSgOGTKbBjjq9b4oYC3n9mrW/vsxo3OZcYOsRF268oq1Wl0Himekir9
+ AWs4YF/hqT37cyZ/mQsWtpFi0aIcOEsiJPhjFRKXSOTpWqyO7d5W/uGGvcCTwMtQ8P2mSUT+H
+ g9gOZZre+upMUl3Y4DcF5jgAsnQ9ugFD844YADfDkoQ7pCcQxyBn7tUrwndoY0L60htWrq7HY
+ Nm8i/Cq6WD6Doaq8ztphFT8fp/s1iK1eenDDckZvEY43hZCTzqPpW1gwBu1uUuQXKZIF7kZTs
+ dhlV3ziCxG0H1JwFdWDQUdUKbGWO3Q/pizQ1VZngbw1hTdSzPKB5hahxjQx6r4Gg6PgmveabF
+ qg7kFLI7G5NJbATFTCilYMlGB9vWkenOa7aSsjDU697TzSLLBQE8UhVQbTrbQEyrj3k/FUg7C
+ PStUr+y4T7jgQKPraX+wDysq/v/JXrtceJflsnvsjkeRMcV1iOSLZGL6ronw+Q0/mEYfOC+Dq
+ bazVbGbcD8yHnuo0HXinjFlS12KiYzIs1SC8F0Mw4+edk=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,73 +93,174 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The patch introducing support for dynamic sector sizes changed the types
-used in some divisions, resulting in the compiler attempting to use
-libgcc helpers (__aeabi_ldivmod). Replace these divisions with calls to
-lldiv() to handle this correctly.
+On 07.03.24 14:07, Alexey Romanov wrote:
+> Add new MTD partition driver, which can be useful with
+> mtdblock driver combination.
+>
+> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
+> ---
+>   disk/part.c           |  5 +++-
+>   drivers/mtd/Kconfig   |  1 +
+>   drivers/mtd/mtdpart.c | 69 +++++++++++++++++++++++++++++++++++++++++++
+>   include/part.h        |  2 ++
+>   4 files changed, 76 insertions(+), 1 deletion(-)
+>
+> diff --git a/disk/part.c b/disk/part.c
+> index 36b88205ec..0fc5cc0419 100644
+> --- a/disk/part.c
+> +++ b/disk/part.c
+> @@ -304,7 +304,8 @@ static void print_part_header(const char *type, stru=
+ct blk_desc *desc)
+>   	CONFIG_IS_ENABLED(DOS_PARTITION) || \
+>   	CONFIG_IS_ENABLED(ISO_PARTITION) || \
+>   	CONFIG_IS_ENABLED(AMIGA_PARTITION) || \
+> -	CONFIG_IS_ENABLED(EFI_PARTITION)
+> +	CONFIG_IS_ENABLED(EFI_PARTITION) || \
+> +	CONFIG_IS_ENABLED(MTD_PARTITIONS)
+>   	puts ("\nPartition Map for ");
+>   	switch (desc->uclass_id) {
+>   	case UCLASS_IDE:
+> @@ -343,6 +344,8 @@ static void print_part_header(const char *type, stru=
+ct blk_desc *desc)
+>   	case UCLASS_BLKMAP:
+>   		puts("BLKMAP");
+>   		break;
+> +	case UCLASS_MTD:
+> +		puts("MTD");
+>   	default:
 
-Fixes: 74e56e0c5065 ("usb: gadget: UMS: support multiple sector sizes")
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- drivers/usb/gadget/f_mass_storage.c | 13 +++++++------
- 1 file changed, 7 insertions(+), 6 deletions(-)
+The function should simply call uclass_get_name() instead of duplicating i=
+t:
 
-diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
-index d880928044f4..ef90c7ec7fb5 100644
---- a/drivers/usb/gadget/f_mass_storage.c
-+++ b/drivers/usb/gadget/f_mass_storage.c
-@@ -239,8 +239,9 @@
- /* #define VERBOSE_DEBUG */
- /* #define DUMP_MSGS */
- 
- #include <config.h>
-+#include <div64.h>
- #include <hexdump.h>
- #include <log.h>
- #include <malloc.h>
- #include <common.h>
-@@ -768,10 +769,10 @@ static int do_read(struct fsg_common *common)
- 		}
- 
- 		/* Perform the read */
- 		rc = ums[common->lun].read_sector(&ums[common->lun],
--				      file_offset / curlun->blksize,
--				      amount / curlun->blksize,
-+				      lldiv(file_offset, curlun->blksize),
-+				      lldiv(amount, curlun->blksize),
- 				      (char __user *)bh->buf);
- 		if (!rc)
- 			return -EIO;
- 
-@@ -942,10 +943,10 @@ static int do_write(struct fsg_common *common)
- 			amount = bh->outreq->actual;
- 
- 			/* Perform the write */
- 			rc = ums[common->lun].write_sector(&ums[common->lun],
--					       file_offset / curlun->blksize,
--					       amount / curlun->blksize,
-+					       lldiv(file_offset, curlun->blksize),
-+					       lldiv(amount, curlun->blksize),
- 					       (char __user *)bh->buf);
- 			if (!rc)
- 				return -EIO;
- 			nwritten = rc * curlun->blksize;
-@@ -1058,10 +1059,10 @@ static int do_verify(struct fsg_common *common)
- 		}
- 
- 		/* Perform the read */
- 		rc = ums[common->lun].read_sector(&ums[common->lun],
--				      file_offset / curlun->blksize,
--				      amount / curlun->blksize,
-+				      lldiv(file_offset, curlun->blksize),
-+				      lldiv(amount, curlun->blksize),
- 				      (char __user *)bh->buf);
- 		if (!rc)
- 			return -EIO;
- 		nread = rc * curlun->blksize;
+[PATCH 1/1] disk: simplify print_part_header()
+https://lore.kernel.org/u-boot/20240403114047.84030-1-heinrich.schuchardt@=
+canonical.com/T/#u
 
--- 
-2.44.0
+>   		printf("UNKNOWN(%d)", desc->uclass_id);
+>   		break;
+> diff --git a/drivers/mtd/Kconfig b/drivers/mtd/Kconfig
+> index 1902351719..40272f7e50 100644
+> --- a/drivers/mtd/Kconfig
+> +++ b/drivers/mtd/Kconfig
+> @@ -2,6 +2,7 @@ menu "MTD Support"
+>
+>   config MTD_PARTITIONS
+>   	bool
+> +	select PARTITIONS
+>
+>   config MTD
+>   	bool "Enable MTD layer"
+> diff --git a/drivers/mtd/mtdpart.c b/drivers/mtd/mtdpart.c
+> index 4886392a1c..67244869f2 100644
+> --- a/drivers/mtd/mtdpart.c
+> +++ b/drivers/mtd/mtdpart.c
+> @@ -21,6 +21,8 @@
+>
+>   #include <common.h>
+>   #include <malloc.h>
+> +#include <memalign.h>
+> +#include <part.h>
+>   #include <linux/bug.h>
+>   #include <linux/errno.h>
+>   #include <linux/compat.h>
+> @@ -1055,3 +1057,70 @@ uint64_t mtd_get_device_size(const struct mtd_inf=
+o *mtd)
+>   	return mtd->size;
+>   }
+>   EXPORT_SYMBOL_GPL(mtd_get_device_size);
+> +
+> +static struct mtd_info *mtd_get_partition_by_index(struct mtd_info *mtd=
+, int index)
+> +{
+> +	struct mtd_info *part;
+> +	int i =3D 0;
+> +
+> +	list_for_each_entry(part, &mtd->partitions, node)
+> +		if (i++ =3D=3D index)
+> +			return part;
+> +
+> +	debug("Partition with idx=3D%d not found on MTD device %s\n", index, m=
+td->name);
+> +	return NULL;
+> +}
+> +
+> +static int part_get_info_mtd(struct blk_desc *dev_desc, int part_idx,
+> +			     struct disk_partition *info)
+> +{
+> +	struct mtd_info *master =3D blk_desc_to_mtd(dev_desc);
+> +	struct mtd_info *part;
+> +
+> +	if (!master) {
+> +		pr_err("MTD device is NULL\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	part =3D mtd_get_partition_by_index(master, part_idx);
+> +	if (!part) {
+> +		debug("Failed to find partition with idx=3D%d\n", part_idx);
+> +		return -EINVAL;
+> +	}
+> +
+> +	snprintf(info->name, PART_NAME_LEN, part->name);
+> +	info->start =3D part->offset / dev_desc->blksz;
+> +	info->size =3D part->size / dev_desc->blksz;
+> +	info->blksz =3D dev_desc->blksz;
+> +
+> +	return 0;
+> +}
+> +
+> +static void part_print_mtd(struct blk_desc *dev_desc)
+> +{
+> +	struct mtd_info *master =3D blk_desc_to_mtd(dev_desc);
+> +	struct mtd_info *part;
+> +
+> +	list_for_each_entry(part, &master->partitions, node)
+> +		printf("- 0x%012llx-0x%012llx : \"%s\"\n",
+> +		       part->offset, part->offset + part->size, part->name);
+> +}
+> +
+> +static int part_test_mtd(struct blk_desc *dev_desc)
+> +{
+> +	ALLOC_CACHE_ALIGN_BUFFER(unsigned char, buffer, dev_desc->blksz);
+> +
+> +	if (blk_dread(dev_desc, 0, 1, (ulong *)buffer) !=3D 1)
+> +		return -1;
+> +
+> +	return 0;
+> +}
+> +
+> +U_BOOT_PART_TYPE(mtd) =3D {
+> +	.name		=3D "MTD",
+> +	.part_type	=3D PART_TYPE_MTD,
+> +	.max_entries	=3D MTD_ENTRY_NUMBERS,
+> +	.get_info	=3D part_get_info_ptr(part_get_info_mtd),
+> +	.print		=3D part_print_ptr(part_print_mtd),
+> +	.test		=3D part_test_mtd,
+> +};
+> diff --git a/include/part.h b/include/part.h
+> index db34bc6bb7..f7f3773a95 100644
+> --- a/include/part.h
+> +++ b/include/part.h
+> @@ -30,12 +30,14 @@ struct block_drvr {
+>   #define PART_TYPE_ISO		0x03
+>   #define PART_TYPE_AMIGA		0x04
+>   #define PART_TYPE_EFI		0x05
+> +#define PART_TYPE_MTD		0x06
+>
+>   /* maximum number of partition entries supported by search */
+>   #define DOS_ENTRY_NUMBERS	8
+>   #define ISO_ENTRY_NUMBERS	64
+>   #define MAC_ENTRY_NUMBERS	64
+>   #define AMIGA_ENTRY_NUMBERS	8
+> +#define MTD_ENTRY_NUMBERS	64
+
+Please, add a blank line here.
+
+Best regards
+
+Heinrich
+
+>   /*
+>    * Type string for U-Boot bootable partitions
+>    */
 
