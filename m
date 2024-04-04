@@ -4,69 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F38FCD1284
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 09:03:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81369CD1284
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 09:11:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A31F8841F;
-	Thu,  4 Apr 2024 11:01:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CCEB8883F2;
+	Thu,  4 Apr 2024 11:11:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K0/6kHkx";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fLmTwEp0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 529F988450; Thu,  4 Apr 2024 11:01:16 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id A3201883F8; Thu,  4 Apr 2024 11:11:14 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86AD988417
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 11:01:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EFB09883EF
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 11:11:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-choudhary@ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
 Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 434913nZ070095;
- Thu, 4 Apr 2024 04:01:03 -0500
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4349Awav128608;
+ Thu, 4 Apr 2024 04:10:58 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1712221263;
- bh=kobT3Rn86UwDKy59Va2LpMWzt0u0a+khlgJn3bolHXc=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=K0/6kHkx/MABeeEhtwhbYAWcT9XuNpSjY7ytO6EvtIacodhKj7T+UgITNBWzo12c3
- TRu9321yMD72/yOn+PNPTg5StSR+yBo1ssR51f2P1MDJEcbGl7+FSnk08tUBo/UjAb
- GPxlZEnlpBg2aB38rZZ9xm+w4SQU6F2IyIZ23yH8=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 434913tH022666
+ s=ti-com-17Q1; t=1712221858;
+ bh=a3O8ge1rWGPrbvvqoFXP3riInq+Wc85XkCGZBmnTGq8=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=fLmTwEp0Q/u2vGvcC2a2tORxvuNrAXL1iOnEM5ybhh5/YoC8UIomM0tXurootn6rC
+ xgL0XorCWYwmFdgwIF5/zjTfX+M+vb46oWoV1mPmfOBqXeGIxw6jiOOYm5pX9TvOE9
+ EyIysWwdVKqZ2VwwuQPqmlyos8/JsdnV7LgeB2QE=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4349AwYG036200
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Apr 2024 04:01:03 -0500
-Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 4 Apr 2024 04:10:58 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Apr 2024 04:01:02 -0500
+ Apr 2024 04:10:58 -0500
 Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
  (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Apr 2024 04:01:02 -0500
-Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
- [172.24.227.252])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 434912NQ058503;
- Thu, 4 Apr 2024 04:01:02 -0500
-From: Jayesh Choudhary <j-choudhary@ti.com>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <jh80.chung@samsung.com>,
- <lukma@denx.de>, <seanga2@gmail.com>, <vaishnav.a@ti.com>,
- <n-francis@ti.com>, <u-kumar1@ti.com>, <j-choudhary@ti.com>,
- <sumit.garg@linaro.org>
-CC: <vigneshr@ti.com>, <nm@ti.com>, <afd@ti.com>, <bb@ti.com>,
- <rogerq@kernel.org>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH 15/15] doc: board: ti: Add J722S-EVM documentation
-Date: Thu, 4 Apr 2024 14:30:39 +0530
-Message-ID: <20240404090039.87458-16-j-choudhary@ti.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240404090039.87458-1-j-choudhary@ti.com>
-References: <20240404090039.87458-1-j-choudhary@ti.com>
+ Frontend Transport; Thu, 4 Apr 2024 04:10:58 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4349AqHX074983;
+ Thu, 4 Apr 2024 04:10:53 -0500
+Message-ID: <f4059b33-e36c-41d0-8205-9f8b1b665843@ti.com>
+Date: Thu, 4 Apr 2024 14:40:52 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/4] arm: dts: k3-*-binman.dtsi: Clean up and templatize
+ boot binaries
+To: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, Michael Walle
+ <mwalle@kernel.org>, Manorit Chawdhry <m-chawdhry@ti.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
+ <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
+ <sumit.garg@linaro.org>, <michal.simek@amd.com>, <marex@denx.de>,
+ <neil.armstrong@linaro.org>, <afd@ti.com>, <vigneshr@ti.com>,
+ <kamlesh@ti.com>, <u-kumar1@ti.com>
+References: <20240322131011.1029620-1-n-francis@ti.com>
+ <20240322131011.1029620-4-n-francis@ti.com>
+ <D03Q9AGO5ND9.1TJM3KSNA71WG@kernel.org>
+ <83c6532a-e994-4bcd-bc48-9e22ecdec644@ti.com>
+ <D04LUAJJ6LC7.1JVGVTJ0UCMVR@kernel.org>
+ <062f7c42-7088-4813-a2d6-ecb7ab22b4ba@ti.com>
+ <D05D4N00QDKO.2PJ7VW4BNGQ11@kernel.org>
+ <2e817727-524e-47e5-9f5e-2ee13d99a9bb@ti.com>
+ <20240403103458.mn2xkemiyymidipo@uda0497581>
+ <D0ALVJNAVD8U.3UYSZULLZ6YG5@kernel.org>
+ <d23bdaec46343155c752fcfb5287d9b39ac44918.camel@ew.tq-group.com>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <d23bdaec46343155c752fcfb5287d9b39ac44918.camel@ew.tq-group.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -84,295 +96,214 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce basic documentation for the J722S-EVM.
+Hi Matthias
 
-Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
----
- doc/board/ti/j722s_evm.rst | 262 +++++++++++++++++++++++++++++++++++++
- doc/board/ti/k3.rst        |   1 +
- 2 files changed, 263 insertions(+)
- create mode 100644 doc/board/ti/j722s_evm.rst
+On 04/04/24 13:34, Matthias Schiffer wrote:
+> On Wed, 2024-04-03 at 17:51 +0200, Michael Walle wrote:
+>> Hi,
+>>
+>>>>>>> And on top of that, it will just be a base board and there will
+>>>>>>> likely be some carrier device trees (overlay? I'm not sure yet).
+>>>>>>>
+>>>>>>> As far as I can tell, you've put the memory configuration into the
+>>>>>>> device tree, so I'll probably need to switch between them somehow.
+>>>>>>
+>>>>>> The "k3-<soc>-ddr.dtsi" file will be present in your k3-<board>r5.dts
+>>>>>> which makes sense, the memory configuration depends on the board.
+>>>>>
+>>>>
+>>>> k3-<board>-ddr.dtsi* (e.g J721E EVM vs. SK boards consume different memory
+>>>> configurations.
+>>
+>> Right.
+>>
+>>>>> And one board might have multiple configuration depending on the
+>>>>> variant of the board. Typically, one board is available with
+>>>>> different memory options. i.e. 1GiB, 4GiB and so on. The actual RAM
+>>>>> chips can come from different manufacturers. So all all, I presume
+>>>>> there will be different RAM settings, i.e. different
+>>>>> k3-<soc>-ddr.dtsi. But I have to switch between the setting during
+>>>>> runtime because there will be only one boot image for that board.
+>>>>
+>>>> This is a runtime dynamic DDR configuration support you are describing
+>>>> correct? This means you would be including all the supported memory option
+>>>> DTSIs in your k3-<board>-r5.dts correct and probably do some board magic
+>>>> code in the SPL DDR driver to choose the DTB. How is this affecting the
+>>>> packing of the final bootloader which will anyways pack the whole R5 DTB?
+>>
+>> Correct, the DDR configuration should be chosen at runtime after
+>> reading some board strappings. Unless, it will work with with the
+>> same configuration which seems unlikely to me. But it is not an
+>> unusual configuration I'd say.
+>>
+>> I haven't looked into this in detail, but to me it seems not that
+>> obvious how to do that in a generic/upstreamable way. Multiple
+>> device nodes sounds wrong. Thus, I'd likely need different device
+>> trees for the different memory configurations for the R5 SPL. Not
+>> sure that is yet possible with u-boot, though. If you have any
+>> better idea, I'm all ears.
+>>
+>>>>>>> Also, regarding the board variants, I'll probably need to choose
+>>>>>>> between multiple device trees. That is invisible to the user,
+>>>>>>> because u-boot will choose the correct DTB according a board
+>>>>>>> strapping, which btw. works really fine, see for example
+>>>>>>> (boards/kontron/sl28/spl.c:board_fit_config_name_match).
+>>>>>>
+>>>>>> Again, this is assuming that there is some HW blown register available
+>>>>>> for the board to use (or in our earlier K3 case, the EEPROM) but that is
+>>>>>> not necessarily true every time.
+>>>>>
+>>>>> No, that is of course board dependent. It is just an example that
+>>>>> there are boards with more than one DTB.
+>>>>>
+>>>>> Let's step back a bit. Right now, there is
+>>>>>     k3-<soc>-<board>-binman.dtsi
+>>>>> which is fine. But it seems, that TI is heading towards a common
+>>>>>     k3-<soc>-binman.dtsi
+>>>>> which is intended to be used by all the boards that are using that
+>>>>> particular SoC, correct me if I'm wrong here. Now the problem with
+>>>>> that is that you hardcode the FIT configuations which are really
+>>>>> board dependent and assume that there will be exactly one DTB per
+>>>>> board, i.e. your "#define SPL_BOARD_DTB" etc.
+>>>>>
+>>>>
+>>>> Correct, but as I mentioned in the earlier message, if your board supports
+>>>> more than 1 FIT configuration, you can easily extend the image and add more
+>>>> configurations.
+>>>>
+>>>>> Thus, what I was trying to say is that you should split all the
+>>>>> board independent configuration (dt fragments) from the board
+>>>>> specific configuration.
+>>>>>
+>>>>> And again, of course I could just ignore the k3-<soc>-binman.dtsi
+>>>>> and just use a suitable copy "k3-<soc>-<myboard>-binman.dtsi" for my
+>>>>> board. But as I said, I'm not sure, this is the way to go and I have
+>>>>> a slight feeling I will be asked to reuse the "k3-<soc>-binman.dtsi"
+>>>>> when I submit my board support.
+>>>>>
+>>>>>>>
+>>>>>>> I don't think it makes much sense to hardcode your generic
+>>>>>>> *-binman.dtsi to just one FIT configuration. I'd rather see a split
+>>>>>>> between generic things which are shared across all boards and board
+>>>>>>> specifics, like the FIT configuration. I mean I could just copy all
+>>>>>>
+>>>>>> Correct me if I'm wrong, but my understanding is that you would want to
+>>>>>> add more FDT blobs in the *-binman.dtsi correct? That is still possible,
+>>>>>> adding another "fdt-1" and "conf-1" in the
+>>>>>>
+>>>>>> Something like this in your <board>-u-boot.dtsi,
+>>>>>>
+>>>>>> tispl {
+>>>>>> 	insert-template = <&ti_spl>;
+>>>>>> 	fit {
+>>>>>> 		images {
+>>>>>> 			fdt-1 {
+>>>>>> 				...
+>>>>>> 			};
+>>>>>> 		};
+>>>>>> 		configurations {
+>>>>>> 			conf-1 {
+>>>>>> 				...
+>>>>>> 			};
+>>>>>> 		};
+>>>>>> 	};
+>>>>>> };
+>>>>>
+>>>>> Then you have the information at two places. One being the "#define
+>>>>> SPL_BOARD_DTB" stuff and the other one being in this additional DT
+>>>>> fragment. That is really confusing.
+>>>>>
+>>>>
+>>>> Hm... maybe. I personally don't see it as confusing. Even when picking
+>>>> between multiple DTBs, you will have a default DTB in any case, marking that
+>>>> as a macro wouldn't be confusing right? We'll need to get a third opinion on
+>>>> here then, I had seen your ping on IRC [1], putting it here for the others
+>>>> as well.
+>>>>
+>>>
+>>> As I see it, it's not like we are making the fdt-0 non overridable, you
+>>> can still override it in your configs to make it cleaner if you want for
+>>> your board template, I don't think that -
+>>
+>> Though it is not overriding but rather merging, correct? So one
+>> would need to first erase the node just to create it again. Which
+>> looks more like a workaround.
+>>
+>>> tispl {
+>>>   	insert-template = <&ti_spl>;
+>>>   	fit {
+>>>   		images {
+>>>   			fdt-0 {
+>>> 				...
+>>> 			};
+>>>   			fdt-1 {
+>>>   				...
+>>>   			};
+>>>   		};
+>>>   		configurations {
+>>> 			conf-0 {
+>>> 				...
+>>> 			};
+>>>   			conf-1 {
+>>>   				...
+>>>   			};
+>>>   		};
+>>>   	};
+>>> };
+>>
+>>>
+>>> is not doable. It might be a bit duplicate but if I think about it but
+>>> we are not losing out on extending the templates for multiple DTBs even
+>>> with this design. I know it might not be what you want but I feel that
+>>> for single DTB it's really convenient with the macro stuff and we don't
+>>> have to override any of the other binman nodes.
+>>
+>> I've raised my concern about stuffing board dependent stuff into the
+>> now generic "k3-<soc>-binman.dtsi". I get it that it will work for
+>> 90% of the boards and that it is very convenient. I'd have rather
+>> seen a split of lets say
+>>    k3-<soc>-binman.dtsi
+>> and
+>>    k3-one-dtb-template-binman.dtsi
+>>
+>> All the generic stuff goes into k3-soc-binman.dtsi whereas 90% of
+>> the boards might still use the second dtsi with some define magic.
+>> But it seems you've already made your mind up on that :)
+>>
+>> -michael
+>>
+> 
+> My hope would be that we can get rid of board-specific binman configuration in the common case
+> altogether for the K3 SoC families, using @fdt-SEQ etc. generator sections that will just include
+> all FDTs configured in Kconfig.
+> 
+> A while ago [1], this was blocked on ti-secure signing not working with generator sections, and
+> according to my experiments, this is still the case in U-Boot 2024.01 (and looking at the Git log,
+> also 2024.04/master/next). Are there still plans to make this work? Are there any other blockers?
+> 
+> Best regards,
+> Matthias
+> 
+> 
+> [1] https://lists.denx.de/pipermail/u-boot/2023-July/525095.html
+> 
+> 
 
-diff --git a/doc/board/ti/j722s_evm.rst b/doc/board/ti/j722s_evm.rst
-new file mode 100644
-index 0000000000..150330f637
---- /dev/null
-+++ b/doc/board/ti/j722s_evm.rst
-@@ -0,0 +1,262 @@
-+.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
-+.. sectionauthor:: Jayesh Choudhary <j-choudhary@ti.com>
-+
-+J722S-EVM Platform
-+==================
-+
-+The J722S is a family of  application processors built for Automotive and
-+Linux Application development. J722S family of SoCs is a superset of the
-+AM62P SoC family and shares similar memory map, thus the nodes are being
-+reused from AM62P includes instead of duplicating the definitions.
-+
-+Some highlights of J722S SoC (in addition to AM62P SoC features) are:
-+
-+* Two Cortex-R5F for Functional Safety or general-purpose usage and
-+  two C7x floating point vector DSP with Matrix Multiply Accelerator
-+  for deep learning.
-+
-+* Vision Processing Accelerator (VPAC) with image signal processor
-+  and Depth and Motion Processing Accelerator (DMPAC).
-+
-+* 7xUARTs, 3xSPI, 5xI2C, 2xUSB2, 2xCAN-FD, 3xMMC and SD, GPMC for
-+  NAND/FPGA connection, OSPI memory controller, 5xMcASP for audio,
-+  4xCSI-RX for Camera, 1 PCIe Gen3 controller, USB3.0 eCAP/eQEP,
-+  ePWM, among other peripherals.
-+
-+For those interested, more details about this SoC can be found in the
-+Technical Reference Manual here: https://www.ti.com/lit/zip/sprujb3
-+
-+Boot Flow:
-+----------
-+
-+The bootflow is exactly the same as all SoCs in the am62xxx extended SoC
-+family. Below is the pictorial representation:
-+
-+.. image:: img/boot_diagram_k3_current.svg
-+  :alt: Boot flow diagram
-+
-+- Here TIFS acts as master and provides all the critical services. R5/A53
-+  requests TIFS to get these services done as shown in the above diagram.
-+
-+Sources:
-+--------
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_boot_sources
-+    :end-before: .. k3_rst_include_end_boot_sources
-+
-+Build procedure:
-+----------------
-+
-+0. Setup the environment variables:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_desc
-+    :end-before: .. k3_rst_include_end_common_env_vars_desc
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_board_env_vars_desc
-+    :end-before: .. k3_rst_include_end_board_env_vars_desc
-+
-+Set the variables corresponding to this platform:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_common_env_vars_defn
-+    :end-before: .. k3_rst_include_end_common_env_vars_defn
-+
-+.. code-block:: bash
-+
-+ $ export UBOOT_CFG_CORTEXR=j722s_evm_r5_defconfig
-+ $ export UBOOT_CFG_CORTEXA=j722s_evm_a53_defconfig
-+ $ export TFA_BOARD=lite
-+ $ # we dont use any extra TFA parameters
-+ $ unset TFA_EXTRA_ARGS
-+ $ export OPTEE_PLATFORM=k3-am62x
-+ $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
-+
-+.. j722s_evm_rst_include_start_build_steps
-+
-+1. Trusted Firmware-A:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_tfa
-+    :end-before: .. k3_rst_include_end_build_steps_tfa
-+
-+
-+2. OP-TEE:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_optee
-+    :end-before: .. k3_rst_include_end_build_steps_optee
-+
-+3. U-Boot:
-+
-+* 3.1 R5:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_spl_r5
-+    :end-before: .. k3_rst_include_end_build_steps_spl_r5
-+
-+* 3.2 A53:
-+
-+.. include::  ../ti/k3.rst
-+    :start-after: .. k3_rst_include_start_build_steps_uboot
-+    :end-before: .. k3_rst_include_end_build_steps_uboot
-+.. j722s_evm_rst_include_end_build_steps
-+
-+Target Images
-+--------------
-+
-+In order to boot we need tiboot3.bin, tispl.bin and u-boot.img.  Each SoC
-+variant (HS-FS, HS-SE) requires a different source for these files.
-+
-+ - HS-FS
-+
-+        * tiboot3-j722s-hs-fs-evm.bin from step 3.1
-+        * tispl.bin, u-boot.img from step 3.2
-+
-+ - HS-SE
-+
-+        * tiboot3-j722s-hs-evm.bin from step 3.1
-+        * tispl.bin, u-boot.img from step 3.2
-+
-+Image formats:
-+--------------
-+
-+- tiboot3.bin
-+
-+.. image:: img/multi_cert_tiboot3.bin.svg
-+  :alt: tiboot3.bin image format
-+
-+- tispl.bin
-+
-+.. image:: img/dm_tispl.bin.svg
-+  :alt: tispl.bin image format
-+
-+A53 SPL DDR Memory Layout
-+-------------------------
-+
-+.. j722s_evm_rst_include_start_ddr_mem_layout
-+
-+This provides an overview memory usage in A53 SPL stage.
-+
-+.. list-table::
-+   :widths: 16 16 16
-+   :header-rows: 1
-+
-+   * - Region
-+     - Start Address
-+     - End Address
-+
-+   * - EMPTY
-+     - 0x80000000
-+     - 0x80080000
-+
-+   * - TEXT BASE
-+     - 0x80080000
-+     - 0x800d8000
-+
-+   * - EMPTY
-+     - 0x800d8000
-+     - 0x80477660
-+
-+   * - STACK
-+     - 0x80477660
-+     - 0x80477e60
-+
-+   * - GD
-+     - 0x80477e60
-+     - 0x80478000
-+
-+   * - MALLOC
-+     - 0x80478000
-+     - 0x80480000
-+
-+   * - EMPTY
-+     - 0x80480000
-+     - 0x80a00000
-+
-+   * - BSS
-+     - 0x80a00000
-+     - 0x80a80000
-+
-+   * - BLOBS
-+     - 0x80a80000
-+     - 0x80d00400
-+
-+   * - EMPTY
-+     - 0x80d00400
-+     - 0x81000000
-+.. j722s_evm_rst_include_end_ddr_mem_layout
-+
-+Switch Setting for Boot Mode
-+----------------------------
-+
-+Boot Mode pins provide means to select the boot mode and options before the
-+device is powered up. After every POR, they are the main source to populate
-+the Boot Parameter Tables.
-+
-+The following table shows some common boot modes used on J722S-EVM
-+platform. More details can be found in the Technical Reference Manual:
-+https://www.ti.com/lit/zip/sprujb3 under the `Boot Mode Pins` section.
-+
-+.. note::
-+
-+   This device is very new. Currently only UART boot is available while
-+   we continue to add support for the other bootmodes.
-+
-+.. list-table:: Boot Modes
-+   :widths: 16 16 16
-+   :header-rows: 1
-+
-+   * - Switch Label
-+     - SW3: 12345678
-+     - SW4: 12345678
-+
-+   * - SD
-+     - 11000010
-+     - 01000000
-+
-+   * - OSPI
-+     - 11001110
-+     - 00000000
-+
-+   * - EMMC
-+     - 11010010
-+     - 00000000
-+
-+   * - UART
-+     - 11011100
-+     - 00000000
-+
-+   * - USB DFU
-+     - 11001010
-+     - 00000000
-+
-+For SW2 and SW1, the switch state in the "ON" position = 1.
-+
-+Debugging U-Boot
-+----------------
-+
-+See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
-+detailed setup information.
-+
-+.. warning::
-+
-+  **OpenOCD support after**: v0.12.0
-+
-+  While support for the entire K3 generation including the am62xxx
-+  extended family was added before v0.12.0, the tcl scripts for the
-+  am62px have been accepted and will be available in the next release of
-+  OpenOCD. It may be necessary to build OpenOCD from source depending on
-+  the version your distribution has packaged.
-+
-+.. include::  k3.rst
-+    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
-+    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
-+
-+To start OpenOCD and connect to the board
-+
-+.. code-block:: bash
-+
-+  openocd -f board/ti_j722sevm.cfg
-diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
-index a1c01d1cf0..eba0f0e3e4 100644
---- a/doc/board/ti/k3.rst
-+++ b/doc/board/ti/k3.rst
-@@ -42,6 +42,7 @@ K3 Based SoCs
-    ../beagle/j721e_beagleboneai64
-    j721e_evm
-    j721s2_evm
-+   j722s_evm
-    j784s4_evm
- 
- Boot Flow Overview
+Yeah! This was a series that I pushed away to the side when runtime multi-DTB 
+selection was removed. You're right, this seems like the only way we can come to 
+a common ground.
+
+Let me see if I can bring it back up again, the last blocker was signing not 
+working with the generator as you mentioned.
+
+But again in the interest of time... this would mean this cleaning up effort be 
+kept on hold. If we can agree to move to using the generator later as the final 
+solution, can we pick up this series for now?
+
+>>
+>>   
+> 
+
 -- 
-2.25.1
-
+Thanking You
+Neha Malcom Francis
