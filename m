@@ -4,135 +4,116 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 253E9CD1284
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 23:55:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70295CD1284
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 23:55:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D8EA87D66;
-	Fri,  5 Apr 2024 01:55:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=digi.com
+	by phobos.denx.de (Postfix) with ESMTP id 42927882C9;
+	Fri,  5 Apr 2024 01:55:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=digi.com header.i=@digi.com header.b="eGAGtYLK";
+	dkim=pass (2048-bit key; unprotected) header.d=hotmail.com header.i=@hotmail.com header.b="FOHDlfnj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC95888277; Thu,  4 Apr 2024 17:11:28 +0200 (CEST)
-Received: from outbound-ip24a.ess.barracuda.com
- (outbound-ip24a.ess.barracuda.com [209.222.82.206])
+ id 798C4882B6; Thu,  4 Apr 2024 23:33:20 +0200 (CEST)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazolkn190100000.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:d111::])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55A968826D
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 17:11:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 04DFE874AC
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 23:33:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=digi.com
+ dmarc=pass (p=none dis=none) header.from=hotmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Javier.Viguera@digi.com
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11lp2168.outbound.protection.outlook.com [104.47.56.168]) by
- mx-outbound47-164.us-east-2c.ess.aws.cudaops.com (version=TLSv1.2
- cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 04 Apr 2024 15:11:22 +0000
+ spf=pass smtp.mailfrom=macromorgan@hotmail.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=OTZIOIMjnjM/d4qE6HfJiN6DMq+JSjYctD4DqlQkm29GavUX66/rFXLDXhURKoF2RVO3oLWx3wsvY60LaByN6EFvSXjMBh8XsR3o/0pk+zfafZMh3oqQ5HfiPgdzcRfpReB65pGvVWglGGJCZd9csKPDhSSn1vTd/7q3y3eUzTNmbrz8KbNWad0ktVkyuvlxtEB2cxs/J8i0vlgA8d1V3qKhGezNu8UQ6pgE6H39IzsKd1PmOZRajvZkoCl3DajO06LvKequWpM2z96rx8wGuZ47R0FyHGVeEBJt9CXw7rzWKPcAIXCMoPD29L3G5Gmln5H77wTL4SOkC3d967m4AA==
+ b=Y8EhrOJySUsAE9evPU9Puuu+MCcc9koxakSJgLSX7qCysxtVIs4nFIvCHbZX980Ayw7D2NJAi/JumTC+vxXfGCH+A7XGsgKS+d4XFb1HnHx8APZUpCzvWAG7DAr9SyoidpXNwDVDZK6jD2R0RiXJXDYfOq8c2P6nRC1138nJvOWW4WNH427uHK4BxFWPvhanjRY2HBdTMO7gy8EpPqGOJjmgfz/TFiEI91ue1cTTJKq+E5WU70wjRIfjTTZ2xVo7MaIxYB7L2lQlhhXlsuPm+oGqxF63oz+VS5HuWKuCIkzLKZVtK+3uqS3dZXwCzkrlBH0w4ShmvsrIxzWGAo6w5w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=hcRgNvnX2NuxeF3iPKqc0uJFl8rcVI0GO2Eul885FLk=;
- b=CLjs23Dr5oRiXkO3urWzH/rXEQ3usV/H20BawWPLusJ1T4QrV3al6wPBtG3Pq3UYZAxyR9vTRcrbpMK8jTKYG9FNRAk5Xnf2qxcd9byf2JtntimDOe1PeyKIouTLQPi6ZXbpFgFLsbsRq1YOLUJDXPfQPBRKZr3HvZzg9OoubB0QbdWJpCpdbddRp57eQ/ncTWz+rZ9C8b3QWuNwwYKLBxF/0BVG6TiGoYBZ4bPWcfukCLJSpeckd0ND/RWibR8JnuUlar12sEF0zsaYB6qjoUuSFU+VN17NFydGt9gRGd0p7vezuJQwypwezxVSuoXZb7gF4D1UYD3tRiwlwwft7A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=digi.com; dmarc=pass action=none header.from=digi.com;
- dkim=pass header.d=digi.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=digi.com; s=selector1; 
+ bh=YWz1d69jz4/wOJ6An4ahIt+S3YvSTdrK/6phpQ19PnQ=;
+ b=H/RM5DrsMuJHf7Fojlg49zwIDyWQlVB5LtkBunr1GrimNJr9uCRuHsthql8dfB5bs4IWuZzV/VAIhMZTnl5pg5tADAPmHJaK9jtynmAxP0GFC0i+fdd1BHocpnlD3prBMU7Y6uGIvmpowVR5aONM1BPmSg1iLDSx6VxX3jNpUh+0tm+iDOKwm5pqCBSRAfHIbCb67iXpln6mvG9vVWG9ciYkYiKRcPiXmwhffBw2hPFYctvPIExGQ/lPMghr+mhQNTXi5J8q+KwtWSXYuk9UzSscXotEQdz+MjqrNQyfrZspTtsk3V+PeZsVrywfnYqYnv92y8zdUZU8v5osMLOOUA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
+ dkim=none; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hotmail.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=hcRgNvnX2NuxeF3iPKqc0uJFl8rcVI0GO2Eul885FLk=;
- b=eGAGtYLKirzxX7JkUurnuL33tu4zOJ6YWXM1HqrUw6Lx/nSQGHcGypwzzsz08HBSF3brnTTkoKM+Tsb7EXJq1Ynm8XamaS1xJzTGAzf3GZTvge6+vHVhx+2Bb1T/6V3Nr0CAJRaaQfwUaQDocixZnaUNBWx0NLglnE7mFTy7DCgLxDQcOeuKJ2+zD8oz/7qFQyzD7dbz18Se2DGi/HO3HlqIpXVbBssKMnhaXckdn0k01hcZEdy+Bb5efPx7DWnJhAI+hjDY7q8EOq5QM4nQ0VvJqD/iS7/vi0nXf1gShNRnqNwadxHQCBz0sNVU08P4Vly2HULHqMu4YCiSj4n3mg==
-Received: from DS7PR10MB5167.namprd10.prod.outlook.com (2603:10b6:5:38e::9) by
- CH0PR10MB4875.namprd10.prod.outlook.com (2603:10b6:610:de::7) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.7409.46; Thu, 4 Apr 2024 15:11:20 +0000
-Received: from DS7PR10MB5167.namprd10.prod.outlook.com
- ([fe80::2991:3274:498f:f9d5]) by DS7PR10MB5167.namprd10.prod.outlook.com
- ([fe80::2991:3274:498f:f9d5%4]) with mapi id 15.20.7409.042; Thu, 4 Apr 2024
- 15:11:20 +0000
-From: Javier Viguera <javier.viguera@digi.com>
-To: u-boot@lists.denx.de,
-	uboot-imx@nxp.com,
-	festevam@gmail.com
-Cc: javier.viguera@digi.com
-Subject: [PATCH v2] arm: imx: fix signature_block_hdr struct fields order
-Date: Thu,  4 Apr 2024 17:11:09 +0200
-Message-ID: <20240404151110.2890691-1-javier.viguera@digi.com>
-X-Mailer: git-send-email 2.43.2
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: FR4P281CA0426.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:d1::9) To DS7PR10MB5167.namprd10.prod.outlook.com
- (2603:10b6:5:38e::9)
+ bh=YWz1d69jz4/wOJ6An4ahIt+S3YvSTdrK/6phpQ19PnQ=;
+ b=FOHDlfnjwJO2rLvNnJOiDYxJWrg/DtUGiG8r+ikxpMkUZ9sXjoq5EK1B+IlEnf+7/IWw1s3sOUe0LNOVxWMSElxJRjNdA1oF1RiH8nBpAvj4T75PxZcsR6hg175M9YP0zR+wbIaKmQlSSTr7VpY+B3hjv4jj/1NEUnhEOZY2ihtz7I+u/C6o3+RO+2FNKyZ//jWYw6DYJnqB7pb8lKJQ4oS/UzyCvvwQFRtTwV9+eXpVteaODGKlHeQIvVXOc6OcM1/CiegL/YOXuKW5JPsyuWgV0Hz/GAEIBhXV+uQ8/xK1mlAWK7zlTYZzdeRBLP9lR5989+u2VFr+HCrJIcuDFw==
+Received: from DM4PR05MB9229.namprd05.prod.outlook.com (2603:10b6:8:88::20) by
+ SA1PR05MB9295.namprd05.prod.outlook.com (2603:10b6:806:252::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Thu, 4 Apr
+ 2024 21:33:14 +0000
+Received: from DM4PR05MB9229.namprd05.prod.outlook.com
+ ([fe80::148f:6016:501b:93f4]) by DM4PR05MB9229.namprd05.prod.outlook.com
+ ([fe80::148f:6016:501b:93f4%3]) with mapi id 15.20.7409.031; Thu, 4 Apr 2024
+ 21:33:14 +0000
+Date: Thu, 4 Apr 2024 16:33:11 -0500
+From: Chris Morgan <macromorgan@hotmail.com>
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Cc: Chris Morgan <macroalpha82@gmail.com>, u-boot@lists.denx.de,
+ naoki@radxa.com, cym@rock-chips.com, gajjar04akash@gmail.com,
+ frattaroli.nicolas@gmail.com, jagan@edgeble.ai, cnsztl@gmail.com,
+ andyshrk@163.com, chenjh@rock-chips.com, frank-w@public-files.de,
+ jjriek@verizon.net, eugen.hristev@collabora.com,
+ tom@tom-fitzhenry.me.uk, jonas@kwiboo.se, inindev@gmail.com,
+ kever.yang@rock-chips.com, philipp.tomsich@vrull.eu,
+ sjg@chromium.org, trini@konsulko.com
+Subject: Re: [V1 PATCH 1/2] rockchip: sdram: Support getting banks from TPL
+ for rk3568 and rk3588
+Message-ID: <DM4PR05MB92297603EC71B34A037A87F9A53C2@DM4PR05MB9229.namprd05.prod.outlook.com>
+References: <20240401181435.553351-1-macroalpha82@gmail.com>
+ <20240401181435.553351-2-macroalpha82@gmail.com>
+ <7ceeb297-f1aa-406d-8e87-d02a92e58af8@theobroma-systems.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <7ceeb297-f1aa-406d-8e87-d02a92e58af8@theobroma-systems.com>
+X-TMN: [uEwbDKMs1b3MYaBVNJbguYlECx9nDFfy]
+X-ClientProxiedBy: SN6PR16CA0060.namprd16.prod.outlook.com
+ (2603:10b6:805:ca::37) To DM4PR05MB9229.namprd05.prod.outlook.com
+ (2603:10b6:8:88::20)
+X-Microsoft-Original-Message-ID: <Zg8cl3oxzx4TX907@wintermute.localhost.fail>
 MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS7PR10MB5167:EE_|CH0PR10MB4875:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
+X-MS-TrafficTypeDiagnostic: DM4PR05MB9229:EE_|SA1PR05MB9295:EE_
+X-MS-Office365-Filtering-Correlation-Id: 249e7aee-2bfc-4ffc-2949-08dc54eed58f
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 6OeMIwqN9M9/0PVuLHpWZBDePyKcT19lDt+xuYXp+R9l2fzGY4eymG1SpcpuICv2mCUKMwht+htuQ9GVxKIuW9X2cDFEI/T4n7ZPXSpgGSb7XzT9PFHf0HEG6K40iw+HyRPqqS10bz09on7edUBI4zAz01QAk8UysHBUsm+H1062lKKc3KNNW0Cw3LDUFU06cV2byJukfczeDq8bK/btol5ddLiG52lV4iIXMlAZn5kIwZRNmZqIGnqA5HP3pe9OIEM7NHSIfnClOIKHOzO7mE9qaefunqFTExCXkEvqDoXGEkfQzbewu+ceTIkgd7d/pvw0SLmSyb7C5rvrzTq8SiW6hsD9h1Bg7FxN3Dq8orqTbZTS+7EZowabs3XfIvsC7uhMD9vLNPkADOrzoMP/wy6hdXiiulmB/7Gkwkkrn4s/E+7ngpUgiorQauhLKQkWel9y6v9+3+5Rg4Ua4dUOhxptaQXtKBI06DTYhko+BcXkukNSX7PUA08gZn6mPMot3vmAkPVGCn2soWkVJjFUrVSX2484iL8g0U1TCy2UO3VqigMh5QqsDju52V147SzS9wGkpjAnhVc1F/bb/LSsQuqN3OiFOJN/0zriiRduYwCuSqeIki11tpOgbeaW9lHPqw/mt5A/kx3WdeaQGMWFQ+eyX8lm4ybMYZp0Drpch+LD4a480VlRvnzd54MjqIyHu9o/9jXblahA+w3j5F1TbUGT4EFDv9/xjYfg5a3P++4=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DS7PR10MB5167.namprd10.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(52116005)(376005)(1800799015)(366007)(38350700005); DIR:OUT;
- SFP:1102; 
+X-Microsoft-Antispam-Message-Info: lbf2gv01XcBgmGMl30qVtzV8PZ8mujWCFvD//NBcGKHe4iFUA6XPmh5c45bQpx24s3QN3eveEveJPWIrb8Sg30Bb4+lyJb/fHjheDDFYQ12R5p2coGXKou+fdjj285TmaBtTLa/HWMlz+qcVyL1qm10XCWdiVzhbLupTpT+KQqOUa+ubELf2gMxHl2tSxjqhfbBj/sXcC3kVw0E8sjyoSLSsQZxV+m5QAByuqMbqeyd7Ya0n2n+MIopN3VOD2hoPTR2GTUE40wB0bPiGA/sJUvPTC2PTHQObcE1h5I1OJg6BKD2BwA+BTXvq1frj8x2Surxe0TgBmHTQB1rSf2lJ6wamPnJT8Vqp2iyZ8oHxIdh5ATxa6e0EuALJnvVQ174X8BjLjIiUEfv8en1uTaawTSV3f8/2aeBxqn8mmpzw9doJJpKQEfNuTiwvRiPwrzW1RXNak0dvMRfRY9k7ZmPO1mNOFTkDTeWrkNDLLpnRhhKaxeK7/Snvgwe4o0+Hgw+LIerUBxBqC9tc/lW9xNHRTrZew6AOjwhWioyHp5xsB2/W76pOVVKEkE5mgdkqD+Li
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?49s8vndvfglRFfjPo9cWKujp48v6HRqDzcX3v67YjTIR505IZN8rQV/s6s3+?=
- =?us-ascii?Q?PwERMxRmJ9nySrNc3UOEzSEV99vbI8ChxbiV+AzA5FoEoQ/cQCovn1mJFbje?=
- =?us-ascii?Q?wBpe3AfJqW1X8qX9XZqvPq+5Jl6oU6qt4OG6yrioLIP84s6bdcM/cG1bs2S+?=
- =?us-ascii?Q?MrVGwB0OBXJtEO9rHNAtnA9s9mxE2NU8bRY5UVPaVNrNAFR0yeUt3Sz0rUCF?=
- =?us-ascii?Q?IU54X2xPIi1DRuqK/eT+NQM/USMKMTn9/NG7Z9pa7T9ulpi/S6ZOFKqI71Bb?=
- =?us-ascii?Q?ZbBXQdK9JF780LYdkVvv4hV2RDLzN8izlrvBJ0UghpZTYLWF5t2KYwavRhps?=
- =?us-ascii?Q?6DA1tVRgTdqSg3Ip8exnPs1KDNgbj0UZ7c4ndSs0SZ1weiabUNABSJ3abO7v?=
- =?us-ascii?Q?dynaDpkcCwRzG1EDsbXoxi8sjx/pQiBdTDLjF8yUWffGtrTyJyemHosN9zbn?=
- =?us-ascii?Q?71NhqaDXWzh7lx12O8ks8Ysh2FnCYxpyY6piOGrERAqVVzxN5h+cxs0YDgkw?=
- =?us-ascii?Q?WlPWbmSFv8HTOAAo0krjXQdxKIBkJj185h2aP8w1qQWoUEsTI1EF1OgFyiKP?=
- =?us-ascii?Q?RMQd3XMG8UV3u49oZxNWKHB1LXlMsk2ZqhooSZVvX93SGMeYx+qeEop9Q52N?=
- =?us-ascii?Q?8kTUzBDVRdmiToJkSKM1NUvORM8e6PDSMh1z2IlnGuEUL86VmXNHWHJhpT9f?=
- =?us-ascii?Q?IKct51G+AJspACIrttiPs0/+aTSa9ksF25bbYSxBMlaXR8pDoaRimwaAUdQs?=
- =?us-ascii?Q?lKqE399SkgZQe0rugGiJkDoj6MVLyisYhLbl1cNjYf5BpM/Dbn1ZlPNo83dV?=
- =?us-ascii?Q?nS9GjzciaFflXZ50SEjYB2EvB1sq0phB+77klA+7oe84ZieyiE2Y34WzQLHd?=
- =?us-ascii?Q?L/+56k41KrMolg8lThuDLLhJx+kjXkDusv+dzPGzUB2kklPVBhCVJoxaEH4b?=
- =?us-ascii?Q?6bUY9F1wXuQyZttCCJnQRi6xDlF8PIgTeMy0BHRJD6+YFvMDFUM0LcVdOIp0?=
- =?us-ascii?Q?yq+yQSxM7hZbWBP98TQmL4YnMt01f73SCDAKGibn6FAZhMKoFJOycTjeVq4M?=
- =?us-ascii?Q?txYuQ8aMeyij+3CsFf3tL10dws8lBuyp8v7HhsF/PpdFT0xA/e+PSsIL8zwq?=
- =?us-ascii?Q?wpx7GAMP0ewb1jKjj2sq6zppZDfopYRvqMauuoFdPupyrSC/DaFn7AaV1p/C?=
- =?us-ascii?Q?XgAzzym7xTgLIZZWwWPfnXHR1BmEwzkRP7l4fmI+LwJREPcQnqSh0YinM5SL?=
- =?us-ascii?Q?bpTBaC/fHol4cXo/rx7yX3QDP+Wo/uiUD0AJjvK6OwWKmiRKHBdKufot1gjr?=
- =?us-ascii?Q?MomaBkJuoe2Fsr+LzTGgOIFZBYx7fP7Fqi1a7yFtSWC0XDCIg0n4UD8c+2Do?=
- =?us-ascii?Q?eHnul/YpNVJOz0VapoeXKsr+aClqOw7D+g8tontLU4jCnRBnfoele7BZRnVe?=
- =?us-ascii?Q?FfZNv4X8idMjly6qm8+6dT6y1IvtRGAbDC2+Q4Oapxuoa0yCpnG4bdYsKu8t?=
- =?us-ascii?Q?Fk3j3IOSWulu0AdcWhEm/Z4efEdDmVB3Uf7hvb1wVReSbSGlyOw7EBJKOT8C?=
- =?us-ascii?Q?A2uWBQ+oXVCSocxHn3AwkzY4ZoqJTcd4vREAoL74?=
-X-OriginatorOrg: digi.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2ac2f9bf-22bb-414f-a086-08dc54b97bb2
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR10MB5167.namprd10.prod.outlook.com
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?Fgw+MvSPNhPo4c6V10JdqKnbUwOT+fZR/uo+YXxb4Rr+VVvH3hyocvdWWOf5?=
+ =?us-ascii?Q?qpz5OssJVehXZkMs1S7xiWSMJd7zHQi6Cvt4Y2/vVSEX0gUkYUNC532HeDVp?=
+ =?us-ascii?Q?y5I4mtrNr6zlen/DZ7Bl0OpWmq1UXwKTecmyippZO9+zvJqi3faPm+eOzNWk?=
+ =?us-ascii?Q?+FRQqEt/W/4IqsWoxIlJdy5mjrrq5Pe+q0h4On2uB2dhAq+3Rs+Hzap8SA2k?=
+ =?us-ascii?Q?Qv0KtvEY8yDuxSCPtSL8Stm4QWgaLc5RUaFKg4U9gH8brT3UrvLEvS/lD+ha?=
+ =?us-ascii?Q?908+Kf7aTDqoe/d/hCSzV2qWTa7b4jfq6Wp4bYDgDNXz0r4Mp5sNcY7HhrsB?=
+ =?us-ascii?Q?ARxpUq+GgrFB/mjEuSeg0oalbMczJicjd67WbumE484IujxCjl5Vyk7N570N?=
+ =?us-ascii?Q?0ZvzCF6aIXxJVlJvGLolul8TKlEzp0gmGzflTy5Z0LqEjUNgSmuGe1QJ/EAj?=
+ =?us-ascii?Q?JEwoXNZ91rqW2IG3C8PFGShEgmEI+V8ovlmsrLM+qfUBWmwVJmb1F0r32X7L?=
+ =?us-ascii?Q?RVZywE0MRhX46nMrnA0HfLwyal1qVtVU4xGe8rjRA5VVodiBj0hwIJJP7URt?=
+ =?us-ascii?Q?PTdCW773NGtgj9eQ7gKOYA3MyE94BYB4dhlASGNZ4sTBQz8jB3ie+atVPOF1?=
+ =?us-ascii?Q?m/twxLSaZGZo+xpq7lNnylXwbld6yOj68tcgoH198u49nem+4R5OMGsxf2DW?=
+ =?us-ascii?Q?l+1xEgdNFOG/p61J4NuoFijkw9lSvf5/4YyVmSKb4U7Bkjk50AzzVTRF+Xja?=
+ =?us-ascii?Q?7JWCZX+Rog5Hl4npe2GQpHm9DmgWF+vBVTAcTv7F4qBh/T3m2vql++mE/+vD?=
+ =?us-ascii?Q?aKGwxc5LG0UID2cdzG0c7EhsCcYrtl+3ZnrBDxodqPpeuUTunB3noNgH6TjD?=
+ =?us-ascii?Q?Kiofz+X2rqx/lqVmrufPrT3opVAc6KeGo66pjIYpbvU7hRq/xvjXN6TF4abi?=
+ =?us-ascii?Q?LFQivUF7NSLiKBqZRdDYJotTiyW+CpElYFQ/UuxUhrdKs3NKyEvm2AgvauuY?=
+ =?us-ascii?Q?3cafkapQjG0lYN0dT7jDZfHC+HnHIASc0se2wcRV8tGXjn2XB9bBy33Oj+9e?=
+ =?us-ascii?Q?XV8Kq3h7a8pLMx5fuefiPHDK0mhQnGYcNx2rK8P2qLdWqo6m1altx8LUtl4e?=
+ =?us-ascii?Q?AzPqbZcZCZs0VDOtGLqqh5DaTOID7ECKDFuTjTUnlnaGDc/HAvWiUWZnyLN8?=
+ =?us-ascii?Q?Bh/CBJM/BA0lz/RZ/1Q9LR4o3uOx1s/rStZxGDjnwA20Ao39Rqy4z6FCgFs?=
+ =?us-ascii?Q?=3D?=
+X-OriginatorOrg: sct-15-20-4823-7-msonline-outlook-84f76.templateTenant
+X-MS-Exchange-CrossTenant-Network-Message-Id: 249e7aee-2bfc-4ffc-2949-08dc54eed58f
+X-MS-Exchange-CrossTenant-AuthSource: DM4PR05MB9229.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Apr 2024 15:11:20.4376 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Apr 2024 21:33:14.5706 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 61Uw70LVC8jjhJZcEq2m2mgBhtw9MaaUS/iDzEADHeNXXiRWqcZd1iqnPb9gJS2N0Wall7me2FoCRpuGxeiJdg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR10MB4875
-X-BESS-ID: 1712243481-112196-11141-4444-1
-X-BESS-VER: 2019.1_20240403.2023
-X-BESS-Apparent-Source-IP: 104.47.56.168
-X-BESS-Parts: H4sIAAAAAAACA4uuVkqtKFGyUioBkjpK+cVKVoZmZmZAVgZQMNnCMMUoOcUyxd
- LUNCXJLNUg1cwoxSgpyczEzMI4OdVCqTYWAJKl+qRBAAAA
-X-BESS-Outbound-Spam-Score: 0.00
-X-BESS-Outbound-Spam-Report: Code version 3.2,
- rules version 3.2.2.255334 [from 
- cloudscan20-202.us-east-2b.ess.aws.cudaops.com]
- Rule breakdown below
- pts rule name              description
- ---- ---------------------- --------------------------------
- 0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
-X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS112744 scores of
- KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND
-X-BESS-BRTS-Status: 1
+X-MS-Exchange-CrossTenant-Id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR05MB9295
 X-Mailman-Approved-At: Fri, 05 Apr 2024 01:55:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -150,51 +131,262 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-According to the documentation (for example NXP's AN13994 on encrypted
-boot on AHAB-enabled devices), the format of the signature block is:
+On Tue, Apr 02, 2024 at 06:38:59PM +0200, Quentin Schulz wrote:
+> Hi Chris,
+> 
+> On 4/1/24 20:14, Chris Morgan wrote:
+> > From: Chris Morgan <macromorgan@hotmail.com>
+> > 
+> > Allow RK3568 and RK3588 based boards to get the RAM bank configuration
+> > from the ROCKCHIP_TPL stage instead of the current logic. This fixes
+> > both an issue where 256MB of RAM is blocked for devices with >= 4GB
+> > of RAM and where memory holes need to be defined for devices with
+> > > = 16GB of RAM. In the event that neither SOC is used and the
+> > ROCKCHIP_TPL stage is not used, fall back to existing logic.
+> > 
+> > Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+> > ---
+> >   arch/arm/mach-rockchip/sdram.c | 100 +++++++++++++++++++++++++++++++++
+> >   1 file changed, 100 insertions(+)
+> > 
+> > diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
+> > index 0d9a0aef6f..e02fb03c5f 100644
+> > --- a/arch/arm/mach-rockchip/sdram.c
+> > +++ b/arch/arm/mach-rockchip/sdram.c
+> > @@ -12,6 +12,7 @@
+> >   #include <asm/io.h>
+> >   #include <asm/arch-rockchip/sdram.h>
+> >   #include <dm/uclass-internal.h>
+> > +#include <linux/errno.h>
+> >   DECLARE_GLOBAL_DATA_PTR;
+> > @@ -35,11 +36,110 @@ struct tos_parameter_t {
+> >   	s64 reserve[8];
+> >   };
+> > +/* Tag magic */
+> > +#define ATAGS_CORE_MAGIC	0x54410001
+> > +#define ATAGS_DDR_MEM_MAGIC	0x54410052
+> > +
+> > +/* Tag size and offset */
+> > +#define ATAGS_SIZE		SZ_8K
+> > +#define ATAGS_OFFSET		(SZ_2M - ATAGS_SIZE)
+> > +#define ATAGS_PHYS_BASE		(CFG_SYS_SDRAM_BASE + ATAGS_OFFSET)
+> > +
+> > +/* ATAGS memory structure. */
+> > +struct tag_ddr_mem {
+> > +	u32 count;
+> > +	u32 version;
+> > +	u64 bank[20];
+> > +	u32 flags;
+> > +	u32 data[2];
+> > +	u32 hash;
+> > +} __packed;
+> > +
+> > +/**
+> > + * rockchip_dram_init_banksize() - Get RAM banks from Rockchip TPL
+> > + *
+> > + * Iterate through the defined ATAGS memory location to first find a
+> > + * valid core header, then find a valid ddr_info header. Sanity check
+> > + * the number of banks found. Then, iterate through the data to add
+> > + * each individual memory bank. Perform fixups on memory banks that
+> > + * overlap with a reserved space. If an error condition is received,
+> > + * it is expected that memory bank setup will fall back on existing
+> > + * logic. If ROCKCHIP_EXTERNAL_TPL is false then immediately return,
+> > + * and if neither ROCKCHIP_RK3588 or ROCKCHIP_RK3568 is enabled
+> > + * immediately return.
+> > + *
+> > + * Return number of banks found on success or negative on error.
+> > + */
+> > +__weak int rockchip_dram_init_banksize(void)
+> > +{
+> > +	struct tag_ddr_mem *ddr_info;
+> > +	size_t val;
+> > +	size_t addr = ATAGS_PHYS_BASE;
+> 
+> I think this should be phys_addr_t instead of size_t?
+> 
+> size_t is an unsigned long on aarch64 and phys_addr_t is an unsigned long
+> long so 4B vs 8B.
+> 
+> This however would likely prevent us from reusing this code on aarch32
+> machines, but maybe it's a problem for the people who'll look into
+> supporting this :) (also, aarch32 and >= 3.75GiB may be a bit optimistic :)
+> ).
 
-  +--------------+--------------+--------------+-------------+
-  | Tag          | Length - msb | Length - lsb | Version     |
-  +--------------+--------------+--------------+-------------+
-  | SRK Table offset            | Certificate offset         |
-  +-----------------------------+----------------------------+
-  | Blob offset                 | Signature offset           |
-  +-----------------------------+----------------------------+
+Could I just specify a size and not worry about it? A u32 should be more
+than enough to hold the maximum RAM address of an RK3588 board (32GB).
+That would allow this to work on both 32 and 64 right? Otherwise I could
+further restrict this code to the AARCH64 ifdef.
 
-There is no runtime error in the current u-boot code. The only user of
-struct signature_block_hdr is the "get_container_size" function in the
-"arch/arm/mach-imx/image-container.c" file, and it's only using the very
-first fields of the struct (which are in the correct position) and thus
-there is no runtime failure.
+> 
+> > +	int i;
+> > +
+> 
+> u8 is plenty enough here :)
 
-On the other hand, extending the code to get the data encryption key
-blob offset on the signature header gives a wrong value as the field is
-in the wrong order.
+I use it as a return value where there are negative numbers (though
+obviously this should never be negative since it's an increment
+counter). Does that matter?
 
-Signed-off-by: Javier Viguera <javier.viguera@digi.com>
----
+> 
+> > +	if (!IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL))
+> > +		return 0;
+> > +	if (!IS_ENABLED(CONFIG_ROCKCHIP_RK3588) &&
+> > +	    !IS_ENABLED(CONFIG_ROCKCHIP_RK3568))
+> > +		return 0;
+> > +
+> > +	if (!IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL))
+> > +		return -EPERM;
+> > +
+> 
+> I think testing once is enough :)
+> 
+> Also, you probably want to use -ENOTSUPP instead?
 
-Notes:
-    v2:
-      - Improve commit log
+Acknowledged.
 
- include/imx_container.h | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> > +	while (addr < (ATAGS_PHYS_BASE + ATAGS_SIZE)) {
+> > +		val = readl(addr);
+> > +		if (val == ATAGS_CORE_MAGIC)
+> 
+> Save a variable by not saving the result of readl and just check against
+> ATAGS_CORE_MAGIC.
 
-diff --git a/include/imx_container.h b/include/imx_container.h
-index 54cd684e35d5..691c764b3e5b 100644
---- a/include/imx_container.h
-+++ b/include/imx_container.h
-@@ -50,10 +50,10 @@ struct signature_block_hdr {
- 	u8 length_lsb;
- 	u8 length_msb;
- 	u8 tag;
--	u16 srk_table_offset;
- 	u16 cert_offset;
--	u16 blob_offset;
-+	u16 srk_table_offset;
- 	u16 signature_offset;
-+	u16 blob_offset;
- 	u32 reserved;
- } __packed;
- 
+Acknowledged.
+
+> 
+> > +			break;
+> > +		addr += 4;
+> 
+> This is an incorrect step size, addr is 4B, so this will result in 16B
+> increments, which may be too much. Additionally, we shouldn't read every 4B
+> as the tag is only ever guaranteed to be 4B aligned, not that we would have
+> a tag every 4B. This also means that it's possible somehow the content of a
+> tag at a 4B-aligned offset has the CORE_MAGIC for some reason, but we
+> shouldn't match on it.
+> 
+
+I'm not quite sure I follow. Are you saying I need to increment every
+4 * the value of size in the tag_header? The value I show is 0x5 in
+my header meaning increment every 0x14?
+
+> I recommend to follow what Rockchip does downstream:
+> 
+> """
+> struct tag_header {
+>     u32 size; /* size in units of 4B */
+>     u32 magic;
+> };
+> """
+> 
+> if magic != CORE_MAGIC, then we should increment addr by size * 4B and check
+> again.
+> 
+> > +	}
+> > +	if (addr >= (ATAGS_PHYS_BASE + ATAGS_SIZE))
+> > +		return -ENODATA;
+> 
+> I think it'd be nice to have debug messages here and there :)
+> 
+
+Will do.
+
+> > +
+> > +	while (addr < (ATAGS_PHYS_BASE + ATAGS_SIZE)) {
+> > +		val = readl(addr);
+> > +		if (val == ATAGS_DDR_MEM_MAGIC)
+> > +			break;
+> > +		addr += 4;
+> 
+> Same remarks here.
+> 
+> > +	}
+> > +	if (addr >= (ATAGS_PHYS_BASE + ATAGS_SIZE))
+> > +		return -ENODATA;
+> > +
+> > +	ddr_info = (void *)addr + 4;
+> 
+> It seems that arithmetic operations on void pointers is illegal in the C
+> standard. This also quite obfuscate what you want to do here.
+> 
+> Considering that in this patch you're iterating for each 4B until you get
+> the MAGIC, the next 4B are data for that header of that magic.
+> 
+> If you go for the tag_header I suggested above, I would recommend to do the
+> following instead:
+> 
+> """
+> ddr_info = (u8*)addr + sizeof(addr);
+> """
+> 
+> This is a bit more explicit wrt to what's expected, we want to have the
+> address of the data right after the tag_header we point to currently. (and
+> in-code comments also do not hurt :) ).
+> 
+
+Should I use a (u8*) though? While that works for now, if the ATAGS get
+put at a higher offset wouldn't something like a u32 make more sense?
+
+> 
+> > +	if (!ddr_info->count || ddr_info->count > CONFIG_NR_DRAM_BANKS)
+> > +		return -ENODATA;
+> > +
+> > +	for (i = 0; i < (ddr_info->count); i++) {
+> > +		size_t start_addr = ddr_info->bank[i];
+> 
+> This should be phys_addr_t since it represents an address in physical
+> memory?
+
+Most likely, yes.
+
+> 
+> > +		size_t size = ddr_info->bank[(i + ddr_info->count)];
+> > +		size_t tmp;
+> > +
+> 
+> Please add a comment here to explain everything about those first 2M :)
+> (reserved for TF-A but sometimes the ATAGS don't have it reserved)
+> 
+
+Will do. My original code had comments inline, but I replaced it with
+a function description at the top. I think I'll try to do a simple
+description at the top with inline comments in the next version.
+
+> > +		if (start_addr < SZ_2M) {
+> > +			tmp = SZ_2M - start_addr;
+> > +			start_addr = SZ_2M;
+> > +			size = size - tmp;
+> > +		}
+> > +
+> 
+> Same here, a small comment to explain the check below would be nice.
+> 
+> > +		if (start_addr >= SDRAM_MAX_SIZE && start_addr < SZ_4G)
+> > +			start_addr = SZ_4G;
+> > +
+> 
+> Why are we not changing the size here as well?
+
+Mistake on my part, will correct. Thank you.
+
+> 
+> Same here, a small comment to explain the check below would be nice.
+> 
+> > +		tmp = start_addr + size;
+> > +		if (tmp > SDRAM_MAX_SIZE && tmp < SZ_4G)
+> > +			size = SDRAM_MAX_SIZE - start_addr;
+> > + > +		gd->bd->bi_dram[i].start = start_addr;
+> > +		gd->bd->bi_dram[i].size = size;
+> > +	}
+> > +
+> > +	return i;
+> > +}
+> > +
+> 
+> Cheers,
+> Quentin
+
+Thank you for your feedback. I'll work on all this and resubmit within
+a few days.
+
+Chris
