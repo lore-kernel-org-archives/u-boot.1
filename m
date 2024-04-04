@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE780CD1292
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 14:29:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5155DCD1292
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 14:30:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11F4288264;
-	Thu,  4 Apr 2024 16:29:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9459388288;
+	Thu,  4 Apr 2024 16:30:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hKPGOvY8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V43fX/lX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B75C388264; Thu,  4 Apr 2024 16:29:16 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id E57A68828A; Thu,  4 Apr 2024 16:30:46 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA0EE8826D
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 16:29:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D51D987F0E
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 16:30:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2d6c220a377so12363901fa.2
- for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 07:29:14 -0700 (PDT)
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2d476d7972aso14069601fa.1
+ for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 07:30:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712240954; x=1712845754; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712241044; x=1712845844; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=H38P/q/l+wpWedEof62X1+fPxGV4ywwXHMIbk05T6O4=;
- b=hKPGOvY86MIh+MXuPh5tmYKDCDGh6haK8eLEKkvACkVWuCNRmSPGTVCjS/Zcf/bFbi
- cR2HefgK2EQQy2B/YiHvboUsmVmTkXorTpb3jjZ8hgzE8hGTcLalCxRlAX8Gijw/WjDB
- lPg5h9//8pIatNOj9d1qj9cYEwFfZuDf7OmAbphLd86UMMxlqXyUti9m7e1dQgHDyMF2
- Cy4OA2ynQIHYLDxQCv9Lg4P3YcsBC4FTCvM9MsuExlPrKJYlKDFcpMRbI7R9UIrV+1PQ
- bSdnpA9ZawaZZFfCFYWl6C6C6NTzl0yn4z99QpfeOH3f5LgAtsC+dPhcp/PpeWkeNVw2
- Jvog==
+ bh=PkmMITqKcUAVahHRyFF1JRtejmrnPyjFfW2aLoI6Pck=;
+ b=V43fX/lXWnSm2o2EwwWXwEE1wW+YaaW1RMjwbTerugkx9xlDa/X0P3BiE7m5bMk3ie
+ x2sa+B8GKRz0JTs9+O27ZIYs5lOfbFijQkKXoJ4TdqrRH1U4WxeVd8ctWfi9I1rTmskE
+ 1tATkKBN4zC9OA64x8XMxPaQCLcqrCsVu7fwJtkji6gH1sHxHbPaT0ULDHUN4knUJPVV
+ 3XXxx82M1YgcIiNj4sk/xQVI/u5rkaZBm+FUzquZYkzeyfKSNQKaP7USyll8L580ir+4
+ nsY2/BHcpD2TQi5oZk/RpQHZSJXSF/X/8nHFDVzarrtleyCqIRTacEFaBOT+TX9jTSnr
+ 77+A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712240954; x=1712845754;
+ d=1e100.net; s=20230601; t=1712241044; x=1712845844;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=H38P/q/l+wpWedEof62X1+fPxGV4ywwXHMIbk05T6O4=;
- b=AMfNM8I9kPnJyMaj+eaHjQMTeFH4NX1PrtHCXrKvRcQlHS6pDwbJaIC04HcUT5sMaS
- 2RhmBo9fvhix4o9JxJnMP7bOuzOpT0PtNNgeXGVBq5YSeanv50JkUIaIzEtJ0gaSKIS7
- 2G5vg1Zo2jK0Un7eBUdnBsXN9mYcMA1aTcki/rj9ARl7/vzMVSmMPJFCZDkBXuc5WaVr
- 5xVzNcR+WPrqfh3OuYNS8/zs7hwpmcDJ+YnZoeslt0uc0dy+Hzc23iEpxDFJdQEVbr5w
- qJ3Yw7t4yrBhsJTTz/Sxz2fYWgPdC0Y/7vNAEnOG4IzZ4viXUvfxlb+lOp6VVxTOq7ir
- KSsg==
+ bh=PkmMITqKcUAVahHRyFF1JRtejmrnPyjFfW2aLoI6Pck=;
+ b=nNtduTEOFHzjsyoMzZOW1bQBJS/cEJ6raXZVVqsl9kA87QNW2v3BcfLtG4HMJ66ZGd
+ MbnM6iq34z4Fy/4rePoc2q2h0lvQxnmc523UVxEO8jyLoU+rsOPTSqWHM0upyqL5O82q
+ YE6Y+cElzKCZDXls31VrmQArRU6/fW4KAbAZwtcDojcbX2wFdSqOVMUl1lrpNl599Rr+
+ wLnMcWr3rAOEVgUaR19Y1+uivqcrR96MAtUl+BqFSRMeBEq7gLan2zvrUGTLI9RCPRb9
+ emeSktgUKAUYQyX3FagDgSw6kEywzfLAYUOb4m7W+Lt6/Q7RLgMfNo6oYzQnr59aDD2T
+ boVQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUad+JTqfGy82bOpqVnQokbjhajv1kt+zrHUXT56iOUT2oylehjwKvHU97DS0VRnP3FqR5UninK4jzyFZqYa1cvRvyr4g==
-X-Gm-Message-State: AOJu0YylGVvp4ikTAfieqghx2t7Q1ovulfiCfTKWq6fPruFsO5JBY0v/
- VJUu+ULuvrncpABU+VX9AN62qCnAcD4IN9CiE8EE4GBE8rbhx1a2OcaaVE4hn9G1D7FzsFNVrgr
- qNLrxqTAY0BJ9Jysd26BO+EKjZH/VN4lVAjBhcw==
-X-Google-Smtp-Source: AGHT+IG86h3lmBPdkaDOXdyEdmCkODmjPL+tX6UE+qmsuDmrQMz4q95JRNWDlNiMFm3WhgN9r69YxhGAlCm59zMjI+Y=
-X-Received: by 2002:a2e:890f:0:b0:2d8:5af8:460e with SMTP id
- d15-20020a2e890f000000b002d85af8460emr1375912lji.18.1712240953943; Thu, 04
- Apr 2024 07:29:13 -0700 (PDT)
+ AJvYcCU4u12dV23rZ3/dL8/wYP7eyvLt00Z+Utcu9t2TI8nFBs3qUcu2pW5koThGbdeDdjpx5MRM25zqgyBmKJHXxMIRY9wW8g==
+X-Gm-Message-State: AOJu0Ywfn30Hnp5O2AXgzmdG3SCOrICQYw4ACNSPx3F0a4YAHFcnuqrt
+ NMyrAr0jbhTW4h9Z8Vvkq78KxRONGk5D+WtPcv4Tw161Y57aXpnH3gYfw2xx13kd5D8W8Ry8HnG
+ ESvauXxadYgl1/r9VN3ruJeqP71AQHvslTndpIg==
+X-Google-Smtp-Source: AGHT+IF4H69ui3AMyo7flbvn5TZLaNH1c0GopzSMiM0koygxo7C4vRFedy9O10J0frPc2eHiNCzJmClsZtNh7WMLwMM=
+X-Received: by 2002:a2e:9bd6:0:b0:2d6:e0a9:9981 with SMTP id
+ w22-20020a2e9bd6000000b002d6e0a99981mr2547053ljj.9.1712241044040; Thu, 04 Apr
+ 2024 07:30:44 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240404114742.81187-1-heinrich.schuchardt@canonical.com>
- <20240404114742.81187-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240404114742.81187-3-heinrich.schuchardt@canonical.com>
+ <20240404114742.81187-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240404114742.81187-4-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 4 Apr 2024 17:28:36 +0300
-Message-ID: <CAC_iWj+1+vF_yNE8e6056khJp=-7Q4vYXiMOsp=Qvy0hpr_iXQ@mail.gmail.com>
-Subject: Re: [PATCH v2 2/4] boot: enable booting via EFI boot manager by
- default
+Date: Thu, 4 Apr 2024 17:30:08 +0300
+Message-ID: <CAC_iWjKO-E9RFjMiM2OEJQmo0GcJFi4s02pdCsy1CZSCtbsaSQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] efi_loader: move HOST_ARCH to
+ version_autogenerated.h
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Bryan Brattlof <bb@ti.com>,
@@ -100,72 +100,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 4 Apr 2024 at 14:49, Heinrich Schuchardt
+On Thu, 4 Apr 2024 at 14:50, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> If UEFI is enabled in U-Boot, we want it to conform to the UEFI
-> specification. This requires enabling the boot manager boot method.
+> efi_default_filename.h requires HOST_ARCH to be defined. Up to now we
+> defined it via a CFLAGS. This does not scale. Add the symbol to
+> version_autogenerated.h instead.
 >
-> Reported-by: E Shattow <lucent@gmail.com>
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
 > v2:
->         fix building with EFI_BOOT_MGR but w/o BOOTSTD
+>         new patch
 > ---
->  boot/Kconfig           | 10 ++++++++++
->  boot/Makefile          |  2 +-
->  lib/efi_loader/Kconfig |  1 -
->  3 files changed, 11 insertions(+), 2 deletions(-)
+>  Makefile                | 1 +
+>  arch/sandbox/config.mk  | 2 --
+>  include/host_arch.h     | 2 ++
+>  lib/efi_loader/Makefile | 3 +--
+>  4 files changed, 4 insertions(+), 4 deletions(-)
 >
-> diff --git a/boot/Kconfig b/boot/Kconfig
-> index 3d7aabd27d6..d9a6c270059 100644
-> --- a/boot/Kconfig
-> +++ b/boot/Kconfig
-> @@ -558,6 +558,16 @@ config BOOTMETH_EFILOADER
->
->           This provides a way to try out standard boot on an existing boot flow.
->
-> +config BOOTMETH_EFI_BOOTMGR
-> +       bool "Bootdev support for EFI boot manager"
-> +       depends on EFI_BOOTMGR
-> +       select BOOTMETH_GLOBAL
-> +       default y
-> +       help
-> +         Enable booting via the UEFI boot manager. Based on the EFI variables
-> +         the EFI binary to be launched is determined. To set the EFI variables
-> +         use the eficonfig command.
-> +
->  config BOOTMETH_VBE
->         bool "Bootdev support for Verified Boot for Embedded"
->         depends on FIT
-> diff --git a/boot/Makefile b/boot/Makefile
-> index f0a279cde16..84ccfeaecec 100644
-> --- a/boot/Makefile
-> +++ b/boot/Makefile
-> @@ -34,8 +34,8 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
->  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
->  obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SCRIPT) += bootmeth_script.o
->  obj-$(CONFIG_$(SPL_TPL_)CEDIT) += cedit.o
-> +obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EFI_BOOTMGR) += bootmeth_efi_mgr.o
->  ifdef CONFIG_$(SPL_TPL_)BOOTSTD_FULL
-> -obj-$(CONFIG_EFI_BOOTMGR) += bootmeth_efi_mgr.o
->  obj-$(CONFIG_$(SPL_TPL_)EXPO) += bootflow_menu.o
->  obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootflow_menu.o
+> diff --git a/Makefile b/Makefile
+> index ba660976547..1069adca91e 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -1963,6 +1963,7 @@ define filechk_version.h
+>         echo \#define U_BOOT_VERSION_NUM $(VERSION); \
+>         echo \#define U_BOOT_VERSION_NUM_PATCH $$(echo $(PATCHLEVEL) | \
+>                 sed -e "s/^0*//"); \
+> +       echo \#define HOST_ARCH $(HOST_ARCH); \
+>         echo \#define CC_VERSION_STRING \"$$(LC_ALL=C $(CC) --version | head -n 1)\"; \
+>         echo \#define LD_VERSION_STRING \"$$(LC_ALL=C $(LD) --version | head -n 1)\"; )
+>  endef
+> diff --git a/arch/sandbox/config.mk b/arch/sandbox/config.mk
+> index 1d50991f8d2..405843800e9 100644
+> --- a/arch/sandbox/config.mk
+> +++ b/arch/sandbox/config.mk
+> @@ -69,5 +69,3 @@ EFI_LDS := ${SRCDIR}/../../../arch/riscv/lib/elf_riscv64_efi.lds
 >  endif
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index a7c3e05c13a..e13a6f9f4c3 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -44,7 +44,6 @@ config EFI_BINARY_EXEC
->  config EFI_BOOTMGR
->         bool "UEFI Boot Manager"
->         default y
-> -       select BOOTMETH_GLOBAL if BOOTSTD
->         help
->           Select this option if you want to select the UEFI binary to be booted
->           via UEFI variables Boot####, BootOrder, and BootNext. You should also
+>  EFI_CRT0 := crt0_sandbox_efi.o
+>  EFI_RELOC := reloc_sandbox_efi.o
+> -AFLAGS_crt0_sandbox_efi.o += -DHOST_ARCH="$(HOST_ARCH)"
+> -CFLAGS_reloc_sandbox_efi.o += -DHOST_ARCH="$(HOST_ARCH)"
+> diff --git a/include/host_arch.h b/include/host_arch.h
+> index 169d4945136..261194bd7c6 100644
+> --- a/include/host_arch.h
+> +++ b/include/host_arch.h
+> @@ -16,6 +16,8 @@ export HOST_ARCH_X86=0x0386
+>  export HOST_ARCH_X86_64=0x8664
+>  #endif
+>
+> +#include <version.h>
+> +
+>  #define HOST_ARCH_AARCH64 0xaa64
+>  #define HOST_ARCH_ARM 0x00a7
+>  #define HOST_ARCH_RISCV32 0x5032
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index fcb0af7e7d6..086521fb287 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -6,8 +6,7 @@
+>  # This file only gets included with CONFIG_EFI_LOADER set, so all
+>  # object inclusion implicitly depends on it
+>
+> -asflags-y += -DHOST_ARCH="$(HOST_ARCH)" -I.
+> -ccflags-y += -DHOST_ARCH="$(HOST_ARCH)"
+> +asflags-y += -I.
+>
+>  CFLAGS_efi_boottime.o += \
+>    -DFW_VERSION="0x$(VERSION)" \
 > --
 > 2.43.0
 >
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
