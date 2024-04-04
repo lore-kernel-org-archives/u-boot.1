@@ -4,72 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9078CCD1292
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 08:54:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CBA5CD1284
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 09:00:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B35A8840E;
-	Thu,  4 Apr 2024 10:54:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 128ED8840C;
+	Thu,  4 Apr 2024 11:00:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bSEI0Okq";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Pfgs4k4i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C2EE8840C; Thu,  4 Apr 2024 10:54:33 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 57F5F88413; Thu,  4 Apr 2024 11:00:53 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47B2B88253
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 10:54:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 796B68646E
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 11:00:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2d109e82bd0so6807041fa.3
- for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 01:54:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712220870; x=1712825670; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BL006ev3pQXxGpgMscmNy2t4nPymeYp2/UXMIxfzDIE=;
- b=bSEI0Okq6MUvgEsW9UbRHQXfLEJshHyPmEy+Tkg3Uxcdro91DTTHlft52viv0rHPOs
- qEd/WajM/HN4mTlyrYOWGtZ/k7TOqsFkTkopiqOctoCIxdlQhGdYgxdEg8ooDo+uGv/t
- oUlkuXnQnCUpZNfUbUv95Gre3oPzu+WdZUxjGqNlGPffQgmyZjpBVOWuvgdh4SmHFJ0E
- Hgh9ky8QSeKZgTcwj2G9BC0XYo4bbV/vGav+1F/JDARw5U0dEIy08Mp4UmgR6W34BQpQ
- ME00wBFdR7z3a0xHoVtdD5n2hZ2LROJNXdG4ILyan2ZE/83wiiKrD9odtSC5amdfNwdw
- s/nw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712220870; x=1712825670;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=BL006ev3pQXxGpgMscmNy2t4nPymeYp2/UXMIxfzDIE=;
- b=LfOXdMCGiTZEm17TOt+AYnwUaNbjYQV1TNSHDmDFrMzcye7NOSV1C1KuIaBrmOo8b2
- Ce7E4Qv338tr2PsbZ4WaIyO8uXOarlzXI0oL99pdUV+97RWUE2O34W7kJOY7QJctGhzj
- 1grxhlHakImRf5DYdMmE6iTxZEBhf/z3dZVdyI/MvaTbNRLDvOHcSn10Qc5ciEqYkqtG
- v9C88lJPE3vLbSsIaUdQZvthHizQscKXkv6dYz6Iv1SzGVLK7YLiffYz9HrOozAdy4YN
- 7gdC/9sV9A/8aHG1ucn3QiGNvl4uW5l/kJItjHwchI2sVhpgjzr82bfXKFO+I1SaNAMG
- sklQ==
-X-Gm-Message-State: AOJu0Yw+U/93Ibldfu+U6Wqc6MiidRBnd2raCXQr5BVDd3z06bJIte3v
- hInOVTsRVI0O48fOzq/eYKnJSubWrUzMJ1KtUbHYtZ5MEl0NIPEq0lFVL0RKJyRVATENbiR8SfO
- z2Z4elhagmSjZbk2aneqsc96oNosneRVrcfGeUAxmSXQxKE+VPqA=
-X-Google-Smtp-Source: AGHT+IFayNlUxqWpIY5DXJ80j9wxAs75lN7FzZxrGg8fRb8wqieJ/d+Wcl/wPQ7N5oj6rSFm7LMaa/NBry2egaP00mE=
-X-Received: by 2002:a2e:b94e:0:b0:2d8:5a90:6757 with SMTP id
- 14-20020a2eb94e000000b002d85a906757mr600408ljs.9.1712220870548; Thu, 04 Apr
- 2024 01:54:30 -0700 (PDT)
+ spf=pass smtp.mailfrom=j-choudhary@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43490eWf126631;
+ Thu, 4 Apr 2024 04:00:40 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1712221240;
+ bh=9GEyYxg/ile3xz5pLL8r0sRVkS6JQtbe8Y5fsKe8qwc=;
+ h=From:To:CC:Subject:Date;
+ b=Pfgs4k4ih48RMjkTWeCWiwFAQbbZCWargi8UcwaShr3u4aF1EGvfCnTTnkq3w6eZF
+ kty/Za2fJVMg8JPLzl1+/BFdEUMmvBTviXOlih6I+fJ6NgjSLdNSXpCcl2ADc9+4Ds
+ b6+MfnsckgsZ13ermkRq69DzYSGkkWkN54D8OgCg=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43490eTp091238
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 4 Apr 2024 04:00:40 -0500
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
+ Apr 2024 04:00:40 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 4 Apr 2024 04:00:40 -0500
+Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
+ [172.24.227.252])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43490dQf010568;
+ Thu, 4 Apr 2024 04:00:40 -0500
+From: Jayesh Choudhary <j-choudhary@ti.com>
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <jh80.chung@samsung.com>,
+ <lukma@denx.de>, <seanga2@gmail.com>, <vaishnav.a@ti.com>,
+ <n-francis@ti.com>, <u-kumar1@ti.com>, <j-choudhary@ti.com>,
+ <sumit.garg@linaro.org>
+CC: <vigneshr@ti.com>, <nm@ti.com>, <afd@ti.com>, <bb@ti.com>,
+ <rogerq@kernel.org>, <r-gunasekaran@ti.com>
+Subject: [RFC PATCH 00/15] Add basic U-Boot Support for J722S-EVM
+Date: Thu, 4 Apr 2024 14:30:24 +0530
+Message-ID: <20240404090039.87458-1-j-choudhary@ti.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20240404081352.3224643-1-igor.opaniuk@gmail.com>
- <20240404081352.3224643-3-igor.opaniuk@gmail.com> <Zg5ngbQinAX6bOjM@hera>
-In-Reply-To: <Zg5ngbQinAX6bOjM@hera>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 4 Apr 2024 11:53:54 +0300
-Message-ID: <CAC_iWjL48gDx2dKnB=+OO=3kLMdvU+9cOst4Oj4gtX2bN=7toQ@mail.gmail.com>
-Subject: Re: [PATCH v4 2/5] cmd: optee_rpmb: close tee session
-To: Igor Opaniuk <igor.opaniuk@gmail.com>, jens.wiklander@linaro.org
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,113 +82,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Igor,
+Hello there,
 
-On Thu, 4 Apr 2024 at 11:40, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Igor,
->
-> I was about to apply the series, but noticed neither me or Jens were cc'ed
-> on this. Adding Jens to the party
->
-> On Thu, Apr 04, 2024 at 10:13:49AM +0200, Igor Opaniuk wrote:
-> > Add calls for closing tee session after every read/write operation.
->
-> What the patch is pretty obvious, but I am missing an explanation of why
-> this is needed
->
-> >
-> > Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
-> > ---
-> >
-> > (no changes since v1)
-> >
-> >  cmd/optee_rpmb.c | 23 +++++++++++++++++------
-> >  1 file changed, 17 insertions(+), 6 deletions(-)
-> >
-> > diff --git a/cmd/optee_rpmb.c b/cmd/optee_rpmb.c
-> > index e0e44bbed04..b3cafd92410 100644
-> > --- a/cmd/optee_rpmb.c
-> > +++ b/cmd/optee_rpmb.c
-> > @@ -87,8 +87,10 @@ static int read_persistent_value(const char *name,
-> >
-> >       rc = tee_shm_alloc(tee, name_size,
-> >                          TEE_SHM_ALLOC, &shm_name);
-> > -     if (rc)
-> > -             return -ENOMEM;
-> > +     if (rc) {
-> > +             rc = -ENOMEM;
-> > +             goto close_session;
-> > +     }
->
-> I don't think you need the session to be opened to allocate memory.
-> So instead of of doing this, why don't we just move the alloc call before
-> opening the session?
+This series add the U-Boot support for our new platform of K3-SOC
+family - J722S-EVM which is a superset of AM62P. It shares the same
+memory map and thus the nodes are being reused from AM62P includes
+instead of duplicating the definitions.
 
-Looking at it again, we do need tee != NULL, but I think it's cleaner
-to add something like
-if (!dev)
-    return -ENODEV
-to __tee_shm_add() instead.
+Some highlights of J722S SoC (in addition to AM62P SoC features) are:
 
-Cheers
-/Ilias
->
-> >
-> >       rc = tee_shm_alloc(tee, buffer_size,
-> >                          TEE_SHM_ALLOC, &shm_buf);
-> > @@ -125,6 +127,9 @@ out:
-> >       tee_shm_free(shm_buf);
-> >  free_name:
-> >       tee_shm_free(shm_name);
-> > +close_session:
-> > +     tee_close_session(tee, session);
-> > +     tee = NULL;
-> >
-> >       return rc;
-> >  }
-> > @@ -139,17 +144,20 @@ static int write_persistent_value(const char *name,
-> >       struct tee_param param[2];
-> >       size_t name_size = strlen(name) + 1;
-> >
-> > +     if (!value_size)
-> > +             return -EINVAL;
-> > +
-> >       if (!tee) {
-> >               if (avb_ta_open_session())
-> >                       return -ENODEV;
-> >       }
-> > -     if (!value_size)
-> > -             return -EINVAL;
-> >
-> >       rc = tee_shm_alloc(tee, name_size,
-> >                          TEE_SHM_ALLOC, &shm_name);
-> > -     if (rc)
-> > -             return -ENOMEM;
-> > +     if (rc) {
-> > +             rc = -ENOMEM;
-> > +             goto close_session;
-> > +     }
->
-> ditto
->
-> >
-> >       rc = tee_shm_alloc(tee, value_size,
-> >                          TEE_SHM_ALLOC, &shm_buf);
-> > @@ -178,6 +186,9 @@ out:
-> >       tee_shm_free(shm_buf);
-> >  free_name:
-> >       tee_shm_free(shm_name);
-> > +close_session:
-> > +     tee_close_session(tee, session);
-> > +     tee = NULL;
-> >
-> >       return rc;
-> >  }
-> > --
-> > 2.34.1
-> >
->
-> Thanks
-> /Ilias
+- Two Cortex-R5F for Functional Safety or general-purpose usage and
+  two C7x floating point vector DSP with Matrix Multiply Accelerator
+  for deep learning.
+  
+- Vision Processing Accelerator (VPAC) with image signal processor
+  and Depth and Motion Processing Accelerator (DMPAC).
+
+- 7xUARTs, 3xSPI, 5xI2C, 2xUSB2, 2xCAN-FD, 3xMMC and SD, GPMC for
+  NAND/FPGA connection, OSPI memory controller, 5xMcASP for audio,
+  4xCSI-RX for Camera, 1 PCIe Gen3 controller, USB3.0 eCAP/eQEP,
+  ePWM, among other peripherals.
+  
+TRM: <https://www.ti.com/lit/zip/sprujb3>
+Schematics: <https://www.ti.com/lit/zip/sprr495>
+
+Bootlog test:
+<https://gist.github.com/Jayesh2000/3a662b380e64aaa227256dbbcef3fe0d>
+
+NOTE: This series depends on the latest dts pull form upstream that will
+add the dts changes for J722S-EVM. So the first patch adds the relavent
+dts updates which is *NOT SUPPOSED TO BE MERGED*
+
+Jayesh Choudhary (15):
+  DO-NOT-MERGE: dts: upstream: src: Necessary pulls from upstream dts
+  arm: mach-k3: Sort CONFIG_SOC* and K3_SOC_ID entries
+  soc: ti: k3-socinfo: Fix SOC JTAG entry order
+  soc: add info to identify the J722S SoC family
+  clk: ti: clk-k3: use IS_ENABLED macro and fix the clock-data order
+  power: domain: ti: Fix the order for platform data entries
+  arm: mach-k3: r5: Makefile: Fix the order for entries
+  arm: mach-k3: j722s: introduce clock and device files for wkup spl
+  ram: k3-ddrss: Enable the am62ax's DDR controller for J722S
+  arch: mach-k3: Introduce basic files to support J722S SoC family
+  board: ti: Introduce basic board files for the J722S family
+  firmware: ti_sci_static_data: Add static DMA channel
+  arm: dts: Introduce J722S U-Boot dts files
+  configs: introduce configs needed for the J722S
+  doc: board: ti: Add J722S-EVM documentation
+
+ arch/arm/dts/Makefile                         |    2 +
+ arch/arm/dts/k3-j722s-binman.dtsi             |  171 +
+ arch/arm/dts/k3-j722s-ddr-lp4-50-3733.dtsi    | 2795 +++++++++++++++++
+ arch/arm/dts/k3-j722s-evm-u-boot.dtsi         |   36 +
+ arch/arm/dts/k3-j722s-r5-evm.dts              |   82 +
+ arch/arm/mach-k3/Kconfig                      |    7 +-
+ arch/arm/mach-k3/Makefile                     |    1 +
+ arch/arm/mach-k3/include/mach/hardware.h      |   43 +-
+ .../arm/mach-k3/include/mach/j722s_hardware.h |   83 +
+ arch/arm/mach-k3/include/mach/j722s_spl.h     |   49 +
+ arch/arm/mach-k3/include/mach/spl.h           |    4 +
+ arch/arm/mach-k3/j722s/Kconfig                |   32 +
+ arch/arm/mach-k3/j722s_init.c                 |  276 ++
+ arch/arm/mach-k3/r5/Makefile                  |    7 +-
+ arch/arm/mach-k3/r5/j722s/Makefile            |    6 +
+ arch/arm/mach-k3/r5/j722s/clk-data.c          |  312 ++
+ arch/arm/mach-k3/r5/j722s/dev-data.c          |   69 +
+ board/ti/j722s/Kconfig                        |   26 +
+ board/ti/j722s/MAINTAINERS                    |    9 +
+ board/ti/j722s/Makefile                       |    7 +
+ board/ti/j722s/board-cfg.yaml                 |   36 +
+ board/ti/j722s/evm.c                          |   29 +
+ board/ti/j722s/j722s.env                      |   15 +
+ board/ti/j722s/pm-cfg.yaml                    |   12 +
+ board/ti/j722s/rm-cfg.yaml                    | 1119 +++++++
+ board/ti/j722s/sec-cfg.yaml                   |  379 +++
+ board/ti/j722s/tifs-rm-cfg.yaml               |  981 ++++++
+ configs/j722s_evm_a53_defconfig               |  177 ++
+ configs/j722s_evm_r5_defconfig                |  137 +
+ doc/board/ti/j722s_evm.rst                    |  262 ++
+ doc/board/ti/k3.rst                           |    1 +
+ drivers/clk/ti/clk-k3.c                       |   41 +-
+ drivers/firmware/ti_sci_static_data.h         |    2 +-
+ drivers/power/domain/ti-power-domain.c        |   36 +-
+ drivers/ram/Kconfig                           |    2 +-
+ drivers/soc/soc_ti_k3.c                       |   29 +-
+ dts/upstream/Bindings/arm/ti/k3.yaml          |    6 +
+ dts/upstream/src/arm64/ti/k3-j722s-evm.dts    |  383 +++
+ dts/upstream/src/arm64/ti/k3-j722s.dtsi       |   89 +
+ dts/upstream/src/arm64/ti/k3-pinctrl.h        |    3 +
+ include/configs/j722s_evm.h                   |   14 +
+ include/k3-clk.h                              |    1 +
+ include/k3-dev.h                              |    1 +
+ 43 files changed, 7703 insertions(+), 69 deletions(-)
+ create mode 100644 arch/arm/dts/k3-j722s-binman.dtsi
+ create mode 100644 arch/arm/dts/k3-j722s-ddr-lp4-50-3733.dtsi
+ create mode 100644 arch/arm/dts/k3-j722s-evm-u-boot.dtsi
+ create mode 100644 arch/arm/dts/k3-j722s-r5-evm.dts
+ create mode 100644 arch/arm/mach-k3/include/mach/j722s_hardware.h
+ create mode 100644 arch/arm/mach-k3/include/mach/j722s_spl.h
+ create mode 100644 arch/arm/mach-k3/j722s/Kconfig
+ create mode 100644 arch/arm/mach-k3/j722s_init.c
+ create mode 100644 arch/arm/mach-k3/r5/j722s/Makefile
+ create mode 100644 arch/arm/mach-k3/r5/j722s/clk-data.c
+ create mode 100644 arch/arm/mach-k3/r5/j722s/dev-data.c
+ create mode 100644 board/ti/j722s/Kconfig
+ create mode 100644 board/ti/j722s/MAINTAINERS
+ create mode 100644 board/ti/j722s/Makefile
+ create mode 100644 board/ti/j722s/board-cfg.yaml
+ create mode 100644 board/ti/j722s/evm.c
+ create mode 100644 board/ti/j722s/j722s.env
+ create mode 100644 board/ti/j722s/pm-cfg.yaml
+ create mode 100644 board/ti/j722s/rm-cfg.yaml
+ create mode 100644 board/ti/j722s/sec-cfg.yaml
+ create mode 100644 board/ti/j722s/tifs-rm-cfg.yaml
+ create mode 100644 configs/j722s_evm_a53_defconfig
+ create mode 100644 configs/j722s_evm_r5_defconfig
+ create mode 100644 doc/board/ti/j722s_evm.rst
+ create mode 100644 dts/upstream/src/arm64/ti/k3-j722s-evm.dts
+ create mode 100644 dts/upstream/src/arm64/ti/k3-j722s.dtsi
+ create mode 100644 include/configs/j722s_evm.h
+
+-- 
+2.25.1
+
