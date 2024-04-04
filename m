@@ -4,50 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA823CD1284
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 16:43:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A3ECCD1292
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 16:44:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16709883DB;
-	Thu,  4 Apr 2024 18:43:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8EBA98838F;
+	Thu,  4 Apr 2024 18:44:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="wgKGGw9V";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="T44StBf+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCB6A883D6; Thu,  4 Apr 2024 18:43:18 +0200 (CEST)
+ id BCB1C883D6; Thu,  4 Apr 2024 18:44:12 +0200 (CEST)
 Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCA45881D0
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 18:43:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B21E7881D0
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 18:44:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1712248996;
+ t=1712249050;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=X4Znux1Elr/o6SEmLLJbm3OoUQfyh7ZZwzgS6Pz/e4o=;
- b=wgKGGw9VNMw2up63r70m3xOh2DYUXi7Fwdle4E2usV+IVeY8ubfDnGNNGSBwFrsGwlESxW
- 6qWQNRVXQIcJzQ1sq/mBNkC8lvedotapoMypXXK4/veJsJ5D8AC2k5EULhSsTNL2TGbnXW
- DdwQ7K7UXGU9CiLfFZZsKVLmyO2bXBK6a6Onb/Is0We7uKm+46P0QYet3WrLy6PZ9nnWxL
- a4vRNnMecjSfpcoFUu0tAL6Y0XW+FyxBW6U0hmCHVdnCUttLKF1Ur05B35es9pXrtT5edZ
- MzxrwVMowQm8nZfu4J2GtcyP7LF1Z8achyairUZStMRCSNTU3vGJi+D5yNAcPw==
-Date: Thu, 04 Apr 2024 18:43:15 +0200
+ bh=HN8hP7nerz9Cgem7eksYoRoK7ClhHu3h4GkL/Wb/lpg=;
+ b=T44StBf+NBZpDamovdHX+/oGtAIsJi38s1mc3Kl62dIIjZBAkzl92kOBxwloP9udBfqjx7
+ Y+Z2MwgvfGuf0HzWLxgCn8r/sMNXwN1HyEJze04VqWZYQZ4KKjhV5jMj/rCxJ/a83kS37K
+ JzwfgWdOTEyk4hQgHK+Ias16JHCO2XXc9v4htLe0OPq/cl6L9moBXuyPAq+AHkSEqs6SgN
+ 9aFuQTEKWkLuQ99b2z4kNf4JpazKRbXbuVP6hR3KlMYOsjhGSoLZ7cUxGPfJBfRe0j5YS7
+ bDgXi8i5XvpIu5laDgJo0ymDTD2ukwt+q3Mpscqjog9EoLyw14O4tErzZE7ZcA==
+Date: Thu, 04 Apr 2024 18:44:10 +0200
 From: Dragan Simic <dsimic@manjaro.org>
 To: =?UTF-8?Q?Ahelenia_Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>
 Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v3] tools: copyfile: use 64k instead of 512 buffer
-In-Reply-To: <af5db6b1165d5f800f21463592779f8e@manjaro.org>
-References: <2894747cef36c9533b2915b803ce754f@manjaro.org>
- <u2jkzgrq4tbtvvazqzamuixjiwhdrwvnla7sdbfm6ia2si52i7@tarta.nabijaczleweli.xyz>
- <af5db6b1165d5f800f21463592779f8e@manjaro.org>
-Message-ID: <a59e4fbaef7338ab750eeab5446e9d8c@manjaro.org>
+Subject: Re: [PATCH v2] tools: open FIT image read-only
+In-Reply-To: <rt336whqarwenm6q2pbla2x2yewfxwjpxuh2x6mmo5i7ynfopl@tarta.nabijaczleweli.xyz>
+References: <a5562c55fef9fd07e8a087ebcd389e60@manjaro.org>
+ <rt336whqarwenm6q2pbla2x2yewfxwjpxuh2x6mmo5i7ynfopl@tarta.nabijaczleweli.xyz>
+Message-ID: <9db2f3f506b14abe32cb888a9919a29c@manjaro.org>
 X-Sender: dsimic@manjaro.org
 Content-Type: text/plain; charset=UTF-8;
  format=flowed
@@ -70,104 +69,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Ahelenia,
+Hello all,
 
-Just checking, have you forgotten about this patch?
+Just a brief reminder about merging this patch.  It looks fine to me.
 
 
-On 2024-03-21 21:50, Dragan Simic wrote:
-> On 2024-03-21 21:37, Ahelenia Ziemiańska wrote:
->> This is a trivial but significant optimization:
->> mkimage took >200ms (and 49489 writes (of which 49456 512)),
->> now it takes  110ms (and   419 writes (of which   386 64k)).
->> 
->> sendfile is much more appropriate for this and is done in one syscall,
->> but doesn't bring any significant speedups over 64k r/w
->> at the 13M size ranges, so there's no need to introduce
->> 	#if __linux__
->> 	while((size = sendfile(fd_dst, fd_src, NULL, 128 * 1024 * 1024)) > 0)
->> 		;
->> 	if(size != -1) {
->> 		ret = 0;
->> 		goto out;
->> 	}
->> 	#endif
->> 
->> Also extract the buffer size to a constant.
->> 
->> Signed-off-by: Ahelenia Ziemiańska <nabijaczleweli@nabijaczleweli.xyz>
->> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+On 2024-03-21 19:31, Ahelenia Ziemiańska wrote:
+> Open for reading as O_RDONLY instead of O_RDWR:
+> the only usage of the fd is for the single read() below;
+> this prevented
+> 	mkimage -f auto -A arm64 \
+> 		-T kernel -C lz4 -d Image-6.6.15.lz4 \
+> 		-b mt8173-elm-hana-6.6.15.dtb outf
+> when the inputs were unwritable.
 > 
-> Please, remove my Reviewed-by tag from this version of the patch,
-> because it no longer applies.
+> Link: https://bugs.debian.org/1063097
+> Signed-off-by: Ahelenia Ziemiańska <nabijaczleweli@nabijaczleweli.xyz>
+> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+> ---
+>  tools/fit_image.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
->> ---
->> On Thu, Mar 21, 2024 at 08:49:52PM +0100, Dragan Simic wrote:
->>> On 2024-03-21 19:29, Ahelenia Ziemiańska wrote:
->>> > This is a trivial but significant optimisation:
->>> s/optimisation/optimization/
->> This seems to run counter to precedent of not doing americans'
->> imperialism for them for free
->> (I see -ise/-ize in free variation even in my 100-deep checkout).
+> diff --git a/tools/fit_image.c b/tools/fit_image.c
+> index beef1fa8..0fccfbb4 100644
+> --- a/tools/fit_image.c
+> +++ b/tools/fit_image.c
+> @@ -137,7 +137,7 @@ static int fdt_property_file(struct
+> image_tool_params *params,
+>  	int ret;
+>  	int fd;
 > 
-> Well, that's politics, which I have no interest about.
-> 
->>> > +#define copyfile_bufsize (64 * 1024)
->>> This is not the right place for such a preprocessor directive.
->>> Instead, it should be placed at the start of the file.
->>> 
->>> Also, it should use all uppercase letters.
->> FTR, neither of these points seem to be universal;
->> I modelled this after tools/mtk_image.c (also cf. 
->> scripts/kconfig/expr.c),
->> but there are at least 25 other function-local macros
->> (as in git grep -B1 '^#define' | grep -c -A1 -e '-{' returns 27).
-> 
-> AFAICT, scripts/kconfig/expr.c could use come cleanups.
-> 
->> Also kinda weird to explicitly request a macro
->> only to review it back to a constant, but whatever.
-> 
-> Well, it isn't weird.  See, the instances of a preprocessor #define
-> directive are replaced with its definition before the source code
-> reaches the compiler, making it, in this case, a bit easier for the
-> compiler to do its job.
-> 
-> The way you wrote it below, the compiler will almost surely optimize
-> out the constant variable and replace it with the literal number in
-> the generated object code, but that puts unnecessary burden on the
-> compiler, which can be avoided by feeding it with the literal number,
-> using a preprocessor directive.
-> 
->>  tools/fit_common.c | 5 +++--
->>  1 file changed, 3 insertions(+), 2 deletions(-)
->> 
->> diff --git a/tools/fit_common.c b/tools/fit_common.c
->> index 2d417d47..37066203 100644
->> --- a/tools/fit_common.c
->> +++ b/tools/fit_common.c
->> @@ -129,6 +129,7 @@ int copyfile(const char *src, const char *dst)
->>  {
->>  	int fd_src = -1, fd_dst = -1;
->>  	void *buf = NULL;
->> +	const size_t bufsize = 64 * 1024;
->>  	ssize_t size;
->>  	size_t count;
->>  	int ret = -1;
->> @@ -145,14 +146,14 @@ int copyfile(const char *src, const char *dst)
->>  		goto out;
->>  	}
->> 
->> -	buf = calloc(1, 512);
->> +	buf = calloc(1, bufsize);
->>  	if (!buf) {
->>  		printf("Can't allocate buffer to copy file\n");
->>  		goto out;
->>  	}
->> 
->>  	while (1) {
->> -		size = read(fd_src, buf, 512);
->> +		size = read(fd_src, buf, bufsize);
->>  		if (size < 0) {
->>  			printf("Can't read file %s\n", src);
->>  			goto out;
+> -	fd = open(fname, O_RDWR | O_BINARY);
+> +	fd = open(fname, O_RDONLY | O_BINARY);
+>  	if (fd < 0) {
+>  		fprintf(stderr, "%s: Can't open %s: %s\n",
+>  			params->cmdname, fname, strerror(errno));
