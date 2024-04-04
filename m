@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6350CD1292
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 09:03:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F38FCD1284
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 09:03:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B69D188452;
-	Thu,  4 Apr 2024 11:01:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3A31F8841F;
+	Thu,  4 Apr 2024 11:01:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZFrVXeQ1";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="K0/6kHkx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B58C883F8; Thu,  4 Apr 2024 11:01:14 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 529F988450; Thu,  4 Apr 2024 11:01:16 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E85B8842F
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 11:01:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 86AD988417
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 11:01:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 434911iw110230;
- Thu, 4 Apr 2024 04:01:01 -0500
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 434913nZ070095;
+ Thu, 4 Apr 2024 04:01:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1712221261;
- bh=E/vMFvO193TOdQVdobF1/Ai46Lw99iR1RhvLIo6v/k0=;
+ s=ti-com-17Q1; t=1712221263;
+ bh=kobT3Rn86UwDKy59Va2LpMWzt0u0a+khlgJn3bolHXc=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=ZFrVXeQ1SUhXgfEvwMKgEF/GoPSdvn5EtrP/m5U1lGng/o2QuciDqK0FPMiOaweMO
- orsZq/skT92j1YNVxU6OVPqi1vBRwB8l8DQYG23RuO2vCgTR2LnVpFXko/izjoPSne
- cJJ+QmNg1T/ojZOEDI2ODnD3/+s1JaQCSdDQPq8Y=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 434911MG091533
+ b=K0/6kHkx/MABeeEhtwhbYAWcT9XuNpSjY7ytO6EvtIacodhKj7T+UgITNBWzo12c3
+ TRu9321yMD72/yOn+PNPTg5StSR+yBo1ssR51f2P1MDJEcbGl7+FSnk08tUBo/UjAb
+ GPxlZEnlpBg2aB38rZZ9xm+w4SQU6F2IyIZ23yH8=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 434913tH022666
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Apr 2024 04:01:01 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 4 Apr 2024 04:01:03 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Apr 2024 04:01:01 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 04:01:02 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Apr 2024 04:01:01 -0500
+ Frontend Transport; Thu, 4 Apr 2024 04:01:02 -0500
 Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
  [172.24.227.252])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 434910UD058343;
- Thu, 4 Apr 2024 04:01:01 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 434912NQ058503;
+ Thu, 4 Apr 2024 04:01:02 -0500
 From: Jayesh Choudhary <j-choudhary@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <jh80.chung@samsung.com>,
  <lukma@denx.de>, <seanga2@gmail.com>, <vaishnav.a@ti.com>,
@@ -58,9 +58,9 @@ To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <jh80.chung@samsung.com>,
  <sumit.garg@linaro.org>
 CC: <vigneshr@ti.com>, <nm@ti.com>, <afd@ti.com>, <bb@ti.com>,
  <rogerq@kernel.org>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH 14/15] configs: introduce configs needed for the J722S
-Date: Thu, 4 Apr 2024 14:30:38 +0530
-Message-ID: <20240404090039.87458-15-j-choudhary@ti.com>
+Subject: [RFC PATCH 15/15] doc: board: ti: Add J722S-EVM documentation
+Date: Thu, 4 Apr 2024 14:30:39 +0530
+Message-ID: <20240404090039.87458-16-j-choudhary@ti.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240404090039.87458-1-j-choudhary@ti.com>
 References: <20240404090039.87458-1-j-choudhary@ti.com>
@@ -84,365 +84,295 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce the initial configs needed to support the J722S SoC family.
+Introduce basic documentation for the J722S-EVM.
 
-Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
 Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
 ---
- configs/j722s_evm_a53_defconfig | 177 ++++++++++++++++++++++++++++++++
- configs/j722s_evm_r5_defconfig  | 137 ++++++++++++++++++++++++
- include/configs/j722s_evm.h     |  14 +++
- 3 files changed, 328 insertions(+)
- create mode 100644 configs/j722s_evm_a53_defconfig
- create mode 100644 configs/j722s_evm_r5_defconfig
- create mode 100644 include/configs/j722s_evm.h
+ doc/board/ti/j722s_evm.rst | 262 +++++++++++++++++++++++++++++++++++++
+ doc/board/ti/k3.rst        |   1 +
+ 2 files changed, 263 insertions(+)
+ create mode 100644 doc/board/ti/j722s_evm.rst
 
-diff --git a/configs/j722s_evm_a53_defconfig b/configs/j722s_evm_a53_defconfig
+diff --git a/doc/board/ti/j722s_evm.rst b/doc/board/ti/j722s_evm.rst
 new file mode 100644
-index 0000000000..8d29c9601b
+index 0000000000..150330f637
 --- /dev/null
-+++ b/configs/j722s_evm_a53_defconfig
-@@ -0,0 +1,177 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_K3=y
-+CONFIG_TI_SECURE_DEVICE=y
-+CONFIG_SYS_MALLOC_F_LEN=0x8000
-+CONFIG_SPL_GPIO=y
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_NR_DRAM_BANKS=2
-+CONFIG_SOC_K3_J722S=y
-+CONFIG_TARGET_J722S_A53_EVM=y
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x80480000
-+CONFIG_SF_DEFAULT_SPEED=25000000
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_DM_GPIO=y
-+CONFIG_SPL_DM_SPI=y
-+CONFIG_OF_UPSTREAM=y
-+CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j722s-evm"
-+CONFIG_SPL_TEXT_BASE=0x80080000
-+CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_DM_RESET=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_STACK_R_ADDR=0x82000000
-+CONFIG_SPL_FS_FAT=y
-+CONFIG_SPL_LIBDISK_SUPPORT=y
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
-+# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_BOOTSTD_DEFAULTS=y
-+CONFIG_BOOTCOMMAND="run envboot; bootflow scan -lb"
-+CONFIG_SPL_MAX_SIZE=0x58000
-+CONFIG_SPL_PAD_TO=0x0
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x80a00000
-+CONFIG_SPL_BSS_MAX_SIZE=0x80000
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_STACK_R=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x1400
-+CONFIG_SPL_DMA=y
-+CONFIG_SPL_ENV_SUPPORT=y
-+CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_DM_MAILBOX=y
-+CONFIG_SPL_MTD_SUPPORT=y
-+CONFIG_SPL_DM_SPI_FLASH=y
-+CONFIG_SPL_POWER_DOMAIN=y
-+CONFIG_SPL_RAM_SUPPORT=y
-+CONFIG_SPL_RAM_DEVICE=y
-+# CONFIG_SPL_SPI_FLASH_TINY is not set
-+CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
-+CONFIG_SPL_THERMAL=y
-+CONFIG_SPL_YMODEM_SUPPORT=y
-+CONFIG_SYS_MAXARGS=64
-+CONFIG_CMD_CLK=y
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_DM=y
-+CONFIG_CMD_GPIO=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_MTD=y
-+CONFIG_CMD_REMOTEPROC=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_EXT4_WRITE=y
-+CONFIG_CMD_MTDPARTS=y
-+CONFIG_CMD_UBI=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_MULTI_DTB_FIT=y
-+CONFIG_SPL_MULTI_DTB_FIT=y
-+CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
-+CONFIG_NET_RANDOM_ETHADDR=y
-+CONFIG_SPL_DM=y
-+CONFIG_SPL_DM_DEVICE_REMOVE=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_REGMAP=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_SYSCON=y
-+CONFIG_SPL_OF_TRANSLATE=y
-+CONFIG_CLK=y
-+CONFIG_SPL_CLK=y
-+CONFIG_CLK_TI_SCI=y
-+CONFIG_DFU_MMC=y
-+CONFIG_DFU_MTD=y
-+CONFIG_DFU_RAM=y
-+CONFIG_DFU_SF=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x40000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
-+CONFIG_DMA_CHANNELS=y
-+CONFIG_TI_K3_NAVSS_UDMA=y
-+CONFIG_USB_FUNCTION_FASTBOOT=y
-+CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
-+CONFIG_FASTBOOT_BUF_SIZE=0x2F000000
-+CONFIG_TI_SCI_PROTOCOL=y
-+CONFIG_SPL_DM_GPIO_LOOKUP_LABEL=y
-+CONFIG_DA8XX_GPIO=y
-+CONFIG_DM_PCA953X=y
-+CONFIG_SPL_DM_PCA953X=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_OMAP24XX=y
-+CONFIG_DM_MAILBOX=y
-+CONFIG_K3_SEC_PROXY=y
-+CONFIG_I2C_EEPROM=y
-+CONFIG_SPL_I2C_EEPROM=y
-+CONFIG_FS_LOADER=y
-+CONFIG_SUPPORT_EMMC_BOOT=y
-+CONFIG_MMC_IO_VOLTAGE=y
-+CONFIG_SPL_MMC_IO_VOLTAGE=y
-+CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_SPL_MMC_HS400_SUPPORT=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_SPL_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_AM654=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_MTD_SPI_NAND=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_SOFT_RESET=y
-+CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_S28HX_T=y
-+CONFIG_PHY_TI_DP83867=y
-+CONFIG_TI_AM65_CPSW_NUSS=y
-+CONFIG_PINCTRL=y
-+CONFIG_SPL_PINCTRL=y
-+CONFIG_PINCTRL_SINGLE=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_TI_SCI_POWER_DOMAIN=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_SPL_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_SPL_DM_REGULATOR_GPIO=y
-+CONFIG_K3_SYSTEM_CONTROLLER=y
-+CONFIG_REMOTEPROC_TI_K3_ARM64=y
-+CONFIG_REMOTEPROC_TI_K3_DSP=y
-+CONFIG_REMOTEPROC_TI_K3_R5F=y
-+CONFIG_RESET_TI_SCI=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_SOC_DEVICE=y
-+CONFIG_SOC_DEVICE_TI_K3=y
-+CONFIG_SOC_TI=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_CADENCE_QSPI=y
-+CONFIG_SYSRESET=y
-+CONFIG_SPL_SYSRESET=y
-+CONFIG_SYSRESET_TI_SCI=y
-+CONFIG_DM_THERMAL=y
-+CONFIG_USB=y
-+CONFIG_DM_USB_GADGET=y
-+CONFIG_SPL_DM_USB_GADGET=y
-+CONFIG_SPL_USB_HOST=y
-+CONFIG_USB_XHCI_HCD=y
-+CONFIG_USB_DWC3=y
-+CONFIG_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_DWC3_GENERIC=y
-+CONFIG_SPL_USB_STORAGE=y
-+CONFIG_USB_GADGET=y
-+CONFIG_SPL_USB_GADGET=y
-+CONFIG_USB_GADGET_MANUFACTURER="Texas Instruments"
-+CONFIG_USB_GADGET_VENDOR_NUM=0x0451
-+CONFIG_USB_GADGET_PRODUCT_NUM=0x6165
-+CONFIG_SPL_DFU=y
-+CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
-diff --git a/configs/j722s_evm_r5_defconfig b/configs/j722s_evm_r5_defconfig
-new file mode 100644
-index 0000000000..3f6a51aa53
---- /dev/null
-+++ b/configs/j722s_evm_r5_defconfig
-@@ -0,0 +1,137 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_K3=y
-+CONFIG_TI_SECURE_DEVICE=y
-+CONFIG_SYS_MALLOC_F_LEN=0x9000
-+CONFIG_SPL_LIBCOMMON_SUPPORT=y
-+CONFIG_SPL_LIBGENERIC_SUPPORT=y
-+CONFIG_SOC_K3_J722S=y
-+CONFIG_TARGET_J722S_R5_EVM=y
-+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
-+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x43c4a7f0
-+CONFIG_SF_DEFAULT_SPEED=25000000
-+CONFIG_SF_DEFAULT_MODE=0
-+CONFIG_ENV_SIZE=0x20000
-+CONFIG_ENV_OFFSET=0x680000
-+CONFIG_SPL_DM_SPI=y
-+CONFIG_DEFAULT_DEVICE_TREE="k3-j722s-r5-evm"
-+CONFIG_SPL_TEXT_BASE=0x43c00000
-+CONFIG_DM_RESET=y
-+CONFIG_SPL_MMC=y
-+CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_STACK_R_ADDR=0x82000000
-+CONFIG_SPL_SYS_MALLOC_F_LEN=0x8000
-+CONFIG_SPL_SIZE_LIMIT=0x3C000
-+CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x5000
-+CONFIG_SPL_FS_FAT=y
-+CONFIG_SPL_LIBDISK_SUPPORT=y
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SPL_LOAD_FIT_ADDRESS=0x80080000
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD=y
-+CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
-+CONFIG_SPL_MAX_SIZE=0x6ce00
-+CONFIG_SPL_PAD_TO=0x0
-+CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-+CONFIG_SPL_BSS_START_ADDR=0x43c7b000
-+CONFIG_SPL_BSS_MAX_SIZE=0x3000
-+CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
-+CONFIG_SPL_SYS_MALLOC_SIMPLE=y
-+CONFIG_SPL_STACK_R=y
-+CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x200000
-+CONFIG_SPL_SEPARATE_BSS=y
-+CONFIG_SYS_SPL_MALLOC=y
-+CONFIG_HAS_CUSTOM_SPL_MALLOC_START=y
-+CONFIG_CUSTOM_SYS_SPL_MALLOC_ADDR=0x84000000
-+CONFIG_SYS_SPL_MALLOC_SIZE=0x1000000
-+CONFIG_SPL_EARLY_BSS=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
-+CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR=0x400
-+CONFIG_SPL_DMA=y
-+CONFIG_SPL_DM_MAILBOX=y
-+CONFIG_SPL_MTD_SUPPORT=y
-+CONFIG_SPL_DM_SPI_FLASH=y
-+CONFIG_SPL_DM_RESET=y
-+CONFIG_SPL_POWER_DOMAIN=y
-+CONFIG_SPL_RAM_SUPPORT=y
-+CONFIG_SPL_RAM_DEVICE=y
-+CONFIG_SPL_REMOTEPROC=y
-+# CONFIG_SPL_SPI_FLASH_TINY is not set
-+CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0x80000
-+CONFIG_SPL_THERMAL=y
-+CONFIG_SPL_YMODEM_SUPPORT=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_ASKENV=y
-+CONFIG_CMD_DFU=y
-+CONFIG_CMD_GPT=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_REMOTEPROC=y
-+# CONFIG_CMD_SETEXPR is not set
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_FAT=y
-+CONFIG_OF_CONTROL=y
-+CONFIG_SPL_OF_CONTROL=y
-+CONFIG_ENV_IS_NOWHERE=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SYS_MMC_ENV_PART=1
-+# CONFIG_NET is not set
-+CONFIG_SPL_DM=y
-+CONFIG_SPL_DM_DEVICE_REMOVE=y
-+CONFIG_SPL_DM_SEQ_ALIAS=y
-+CONFIG_REGMAP=y
-+CONFIG_SPL_REGMAP=y
-+CONFIG_SPL_OF_TRANSLATE=y
-+CONFIG_CLK=y
-+CONFIG_SPL_CLK=y
-+CONFIG_SPL_CLK_CCF=y
-+CONFIG_SPL_CLK_K3_PLL=y
-+CONFIG_SPL_CLK_K3=y
-+CONFIG_DMA_CHANNELS=y
-+CONFIG_TI_K3_NAVSS_UDMA=y
-+CONFIG_TI_SCI_PROTOCOL=y
-+# CONFIG_GPIO is not set
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_OMAP24XX=y
-+CONFIG_DM_MAILBOX=y
-+CONFIG_K3_SEC_PROXY=y
-+CONFIG_MMC_HS400_SUPPORT=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_SPL_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_AM654=y
-+CONFIG_MTD=y
-+CONFIG_DM_MTD=y
-+CONFIG_MTD_SPI_NAND=y
-+CONFIG_DM_SPI_FLASH=y
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_SOFT_RESET=y
-+CONFIG_SPI_FLASH_SOFT_RESET_ON_BOOT=y
-+CONFIG_SPI_FLASH_SPANSION=y
-+CONFIG_SPI_FLASH_S28HX_T=y
-+CONFIG_PINCTRL=y
-+# CONFIG_PINCTRL_GENERIC is not set
-+CONFIG_SPL_PINCTRL=y
-+# CONFIG_SPL_PINCTRL_GENERIC is not set
-+CONFIG_PINCTRL_SINGLE=y
-+CONFIG_POWER_DOMAIN=y
-+CONFIG_TI_POWER_DOMAIN=y
-+CONFIG_K3_SYSTEM_CONTROLLER=y
-+CONFIG_REMOTEPROC_TI_K3_ARM64=y
-+CONFIG_RESET_TI_SCI=y
-+CONFIG_SPECIFY_CONSOLE_INDEX=y
-+CONFIG_DM_SERIAL=y
-+CONFIG_SOC_DEVICE=y
-+CONFIG_SOC_DEVICE_TI_K3=y
-+CONFIG_SOC_TI=y
-+CONFIG_SPI=y
-+CONFIG_DM_SPI=y
-+CONFIG_CADENCE_QSPI=y
-+CONFIG_TIMER=y
-+CONFIG_SPL_TIMER=y
-+CONFIG_OMAP_TIMER=y
-+CONFIG_LIB_RATIONAL=y
-+CONFIG_SPL_LIB_RATIONAL=y
-diff --git a/include/configs/j722s_evm.h b/include/configs/j722s_evm.h
-new file mode 100644
-index 0000000000..10f2e2d3ed
---- /dev/null
-+++ b/include/configs/j722s_evm.h
-@@ -0,0 +1,14 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Configuration header file for K3 J722S SoC family
-+ *
-+ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
-+ */
++++ b/doc/board/ti/j722s_evm.rst
+@@ -0,0 +1,262 @@
++.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
++.. sectionauthor:: Jayesh Choudhary <j-choudhary@ti.com>
 +
-+#ifndef __CONFIG_J722S_EVM_H
-+#define __CONFIG_J722S_EVM_H
++J722S-EVM Platform
++==================
 +
-+/* Now for the remaining common defines */
-+#include <configs/ti_armv7_common.h>
++The J722S is a family of  application processors built for Automotive and
++Linux Application development. J722S family of SoCs is a superset of the
++AM62P SoC family and shares similar memory map, thus the nodes are being
++reused from AM62P includes instead of duplicating the definitions.
 +
-+#endif /* __CONFIG_J722S_EVM_H */
++Some highlights of J722S SoC (in addition to AM62P SoC features) are:
++
++* Two Cortex-R5F for Functional Safety or general-purpose usage and
++  two C7x floating point vector DSP with Matrix Multiply Accelerator
++  for deep learning.
++
++* Vision Processing Accelerator (VPAC) with image signal processor
++  and Depth and Motion Processing Accelerator (DMPAC).
++
++* 7xUARTs, 3xSPI, 5xI2C, 2xUSB2, 2xCAN-FD, 3xMMC and SD, GPMC for
++  NAND/FPGA connection, OSPI memory controller, 5xMcASP for audio,
++  4xCSI-RX for Camera, 1 PCIe Gen3 controller, USB3.0 eCAP/eQEP,
++  ePWM, among other peripherals.
++
++For those interested, more details about this SoC can be found in the
++Technical Reference Manual here: https://www.ti.com/lit/zip/sprujb3
++
++Boot Flow:
++----------
++
++The bootflow is exactly the same as all SoCs in the am62xxx extended SoC
++family. Below is the pictorial representation:
++
++.. image:: img/boot_diagram_k3_current.svg
++  :alt: Boot flow diagram
++
++- Here TIFS acts as master and provides all the critical services. R5/A53
++  requests TIFS to get these services done as shown in the above diagram.
++
++Sources:
++--------
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_boot_sources
++    :end-before: .. k3_rst_include_end_boot_sources
++
++Build procedure:
++----------------
++
++0. Setup the environment variables:
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_common_env_vars_desc
++    :end-before: .. k3_rst_include_end_common_env_vars_desc
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_board_env_vars_desc
++    :end-before: .. k3_rst_include_end_board_env_vars_desc
++
++Set the variables corresponding to this platform:
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_common_env_vars_defn
++    :end-before: .. k3_rst_include_end_common_env_vars_defn
++
++.. code-block:: bash
++
++ $ export UBOOT_CFG_CORTEXR=j722s_evm_r5_defconfig
++ $ export UBOOT_CFG_CORTEXA=j722s_evm_a53_defconfig
++ $ export TFA_BOARD=lite
++ $ # we dont use any extra TFA parameters
++ $ unset TFA_EXTRA_ARGS
++ $ export OPTEE_PLATFORM=k3-am62x
++ $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
++
++.. j722s_evm_rst_include_start_build_steps
++
++1. Trusted Firmware-A:
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_tfa
++    :end-before: .. k3_rst_include_end_build_steps_tfa
++
++
++2. OP-TEE:
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_optee
++    :end-before: .. k3_rst_include_end_build_steps_optee
++
++3. U-Boot:
++
++* 3.1 R5:
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_spl_r5
++    :end-before: .. k3_rst_include_end_build_steps_spl_r5
++
++* 3.2 A53:
++
++.. include::  ../ti/k3.rst
++    :start-after: .. k3_rst_include_start_build_steps_uboot
++    :end-before: .. k3_rst_include_end_build_steps_uboot
++.. j722s_evm_rst_include_end_build_steps
++
++Target Images
++--------------
++
++In order to boot we need tiboot3.bin, tispl.bin and u-boot.img.  Each SoC
++variant (HS-FS, HS-SE) requires a different source for these files.
++
++ - HS-FS
++
++        * tiboot3-j722s-hs-fs-evm.bin from step 3.1
++        * tispl.bin, u-boot.img from step 3.2
++
++ - HS-SE
++
++        * tiboot3-j722s-hs-evm.bin from step 3.1
++        * tispl.bin, u-boot.img from step 3.2
++
++Image formats:
++--------------
++
++- tiboot3.bin
++
++.. image:: img/multi_cert_tiboot3.bin.svg
++  :alt: tiboot3.bin image format
++
++- tispl.bin
++
++.. image:: img/dm_tispl.bin.svg
++  :alt: tispl.bin image format
++
++A53 SPL DDR Memory Layout
++-------------------------
++
++.. j722s_evm_rst_include_start_ddr_mem_layout
++
++This provides an overview memory usage in A53 SPL stage.
++
++.. list-table::
++   :widths: 16 16 16
++   :header-rows: 1
++
++   * - Region
++     - Start Address
++     - End Address
++
++   * - EMPTY
++     - 0x80000000
++     - 0x80080000
++
++   * - TEXT BASE
++     - 0x80080000
++     - 0x800d8000
++
++   * - EMPTY
++     - 0x800d8000
++     - 0x80477660
++
++   * - STACK
++     - 0x80477660
++     - 0x80477e60
++
++   * - GD
++     - 0x80477e60
++     - 0x80478000
++
++   * - MALLOC
++     - 0x80478000
++     - 0x80480000
++
++   * - EMPTY
++     - 0x80480000
++     - 0x80a00000
++
++   * - BSS
++     - 0x80a00000
++     - 0x80a80000
++
++   * - BLOBS
++     - 0x80a80000
++     - 0x80d00400
++
++   * - EMPTY
++     - 0x80d00400
++     - 0x81000000
++.. j722s_evm_rst_include_end_ddr_mem_layout
++
++Switch Setting for Boot Mode
++----------------------------
++
++Boot Mode pins provide means to select the boot mode and options before the
++device is powered up. After every POR, they are the main source to populate
++the Boot Parameter Tables.
++
++The following table shows some common boot modes used on J722S-EVM
++platform. More details can be found in the Technical Reference Manual:
++https://www.ti.com/lit/zip/sprujb3 under the `Boot Mode Pins` section.
++
++.. note::
++
++   This device is very new. Currently only UART boot is available while
++   we continue to add support for the other bootmodes.
++
++.. list-table:: Boot Modes
++   :widths: 16 16 16
++   :header-rows: 1
++
++   * - Switch Label
++     - SW3: 12345678
++     - SW4: 12345678
++
++   * - SD
++     - 11000010
++     - 01000000
++
++   * - OSPI
++     - 11001110
++     - 00000000
++
++   * - EMMC
++     - 11010010
++     - 00000000
++
++   * - UART
++     - 11011100
++     - 00000000
++
++   * - USB DFU
++     - 11001010
++     - 00000000
++
++For SW2 and SW1, the switch state in the "ON" position = 1.
++
++Debugging U-Boot
++----------------
++
++See :ref:`Common Debugging environment - OpenOCD<k3_rst_refer_openocd>`: for
++detailed setup information.
++
++.. warning::
++
++  **OpenOCD support after**: v0.12.0
++
++  While support for the entire K3 generation including the am62xxx
++  extended family was added before v0.12.0, the tcl scripts for the
++  am62px have been accepted and will be available in the next release of
++  OpenOCD. It may be necessary to build OpenOCD from source depending on
++  the version your distribution has packaged.
++
++.. include::  k3.rst
++    :start-after: .. k3_rst_include_start_openocd_connect_XDS110
++    :end-before: .. k3_rst_include_end_openocd_connect_XDS110
++
++To start OpenOCD and connect to the board
++
++.. code-block:: bash
++
++  openocd -f board/ti_j722sevm.cfg
+diff --git a/doc/board/ti/k3.rst b/doc/board/ti/k3.rst
+index a1c01d1cf0..eba0f0e3e4 100644
+--- a/doc/board/ti/k3.rst
++++ b/doc/board/ti/k3.rst
+@@ -42,6 +42,7 @@ K3 Based SoCs
+    ../beagle/j721e_beagleboneai64
+    j721e_evm
+    j721s2_evm
++   j722s_evm
+    j784s4_evm
+ 
+ Boot Flow Overview
 -- 
 2.25.1
 
