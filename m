@@ -4,78 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B64DACD1292
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 07:48:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67461CD1284
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 07:51:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22973881E6;
-	Thu,  4 Apr 2024 09:48:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CDA35883AD;
+	Thu,  4 Apr 2024 09:51:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="COh1ZKL5";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Y17Jf4kV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A9168827F; Thu,  4 Apr 2024 09:48:38 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 63D85883B6; Thu,  4 Apr 2024 09:51:16 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 48691880BE
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 09:48:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5EC588393
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 09:51:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a4a3a5e47baso88071066b.2
- for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 00:48:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712216916; x=1712821716; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=5Werfi7/+IS32ruyIg6vPW/180DaksboXEb/vUAP/jk=;
- b=COh1ZKL5VQVYWCVK2SwpqKBt2NgKe17DCMFxnAiEAPZoqpagYPvAyYkjOMN63eOuwD
- 6kUvvCUS1nM9HOjlrrwoEAEQpsFH6Td8bYMwYgDZfkM+Vp113/Loq6rcpXy9VCxf4f4U
- DWfp2k0ihzVTNd8JQ9R7LjW5GFWW8CGqdOsve0nC0+qPGvyP/Dm56hXAbBCLjn2R32X2
- uw0879s2BEr4XiyxNYkON0+oj8JrRrEA4YhmSsSVSyBxbaKi/9AEqlV2SPDohaMh/0HA
- FJonAG4R32+FgyRpf2ezP0L1Iam6cLv+0IebtHx/YrTtljXooywzl8yqt1h7s5Ug3LJJ
- aFJw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712216916; x=1712821716;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5Werfi7/+IS32ruyIg6vPW/180DaksboXEb/vUAP/jk=;
- b=Go0jFBQdmPdVy8Nz/jrllBId9gZu/7tSeaR6vNREbyfnG4pMzApl9p+KvuG6sODUXR
- W5tcB3t/sL8M2y1QVHm92WKTW0iM9A6Vm9OrDWETO8qo5wCcoXg2O30Q78JUwl8cdh44
- VD3uMF9Jk79OSUDadKzWIl+lXkdg7+McPIMKgR6LmLdBucaBwhX4a1wto0KfjhI/np9x
- rekO6lWurRM2DAb/wyWLbJH5JuemzXxzFugvH5E0tmnZP8oBk966JnHhhI9DTV7kV3zP
- AJrxDZquP4AOgdEHNsjnpfCRzfPpc32qUarZGI+duT6t+bK+as+VhmJBgm5aUTvSJU7R
- h9aw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUE67NM+IldKldB5pOjI6CoggbjBGZOJvk21yJL2762bNJjksNz8TNrwF4YfJqiduMHqKRf45u6AWIfZtQxiLtOn65uNA==
-X-Gm-Message-State: AOJu0Yyn8l1HyexwC44BMmOVG9r3hK0n6R4HInZjzjmLMb0cUMjsy+j9
- 7D60MqUfyrCIQy79FVdKbkBci4gmw7axHvmSOAejAMHUZDq5nv4PX24Tte2zO3c=
-X-Google-Smtp-Source: AGHT+IExynLUibqhJE5KB8yCy4ONIWthwqLQh4BDnj4eYUE8mtgHblzqZ4ulPbAXogwsuwZJy8IwEQ==
-X-Received: by 2002:a17:906:1b4a:b0:a51:8d19:3b07 with SMTP id
- p10-20020a1709061b4a00b00a518d193b07mr403903ejg.4.1712216915724; 
- Thu, 04 Apr 2024 00:48:35 -0700 (PDT)
-Received: from hades.. (ppp089210071137.access.hol.gr. [89.210.71.137])
- by smtp.gmail.com with ESMTPSA id
- z19-20020a170906669300b00a4e299dea48sm8144093ejo.199.2024.04.04.00.48.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Apr 2024 00:48:35 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de
-Cc: Ilias Apalodimas <apalos@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: move efi_var_collect to common functions
-Date: Thu,  4 Apr 2024 10:48:18 +0300
-Message-Id: <20240404074819.52156-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.37.2
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 45D00612EC;
+ Thu,  4 Apr 2024 07:51:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 24571C433F1;
+ Thu,  4 Apr 2024 07:51:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1712217072;
+ bh=EdDiwgkX2/qG4nKv8+HB/1ktRRJAUYQx57VrpVVJ0uo=;
+ h=From:To:Cc:Subject:Date:From;
+ b=Y17Jf4kV2hQhhzmsmhcbyi/izrXa+eKdrGvb6qWhBHrbsFiTe/T4Y896VbqSNIIdy
+ c+zuXZTVCGOksVrHMBakSV+WVEA+d2JXPqb9Fa0M6huC53UF4E2qe7nRPGHchgdmPn
+ w8/8MfjJL3qRSbh8YVAhUpOTjOo3D9I9T60gTsHulh7TUqxQIAVeAkiKu/LALSYbKX
+ F4z6LWRlB81LVnpAMBf29zub7sJxuTkO4BI+IB09nTrIhiQssNhhX+nbFsPbcWcOHO
+ 89JcfwALnZFsdZgGcqpWBubZw4SVFjNfUJ9gWwI+1CAtECghGVk95/K5z7V+ViVlNe
+ UgoWo2YbW3U9A==
+From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
+To: Stefan Roese <sr@denx.de>
+Cc: u-boot@lists.denx.de,
+	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
+Subject: [PATCH u-boot-mvebu v4 00/18] Turris Omnia - New board revision
+ support
+Date: Thu,  4 Apr 2024 09:50:49 +0200
+Message-ID: <20240404075107.19636-1-kabel@kernel.org>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,188 +68,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Ilias Apalodimas <apalos@gmail.com>
+changes since v3:
+- added missing files turris_common.c and turris_common.h to patch 05/18
+- added comment to patch 11/18 before while (1); as discussed in v3
 
-efi_var_collect() was initially placed in efi_var_file.c, since back
-then we only supported efi variables stored in a file. Since then we
-support variables stored in an RPMB as well and use that function to
-collect variables that should be present at runtime.
+v1, v2 and v3 at:
+  https://patchwork.ozlabs.org/project/uboot/cover/20240304152148.3847-1-kabel@kernel.org/
+  https://patchwork.ozlabs.org/project/uboot/cover/20240323180711.5498-1-kabel@kernel.org/
+  https://patchwork.ozlabs.org/project/uboot/cover/20240327162355.24584-1-kabel@kernel.org/
 
-So let's move it around in efi_var_common.c which makes more sense
+Marek Behún (18):
+  arm: mvebu: turris_omnia: Enable LTO by default on Turris Omnia
+  arm: mvebu: turris_omnia: Add header containing MCU command interface
+    and use it
+  arm: mvebu: turris_{omnia, mox}: Don't print model two times
+  arm: mvebu: turris_omnia: Update MCU status and features reading
+  arm: mvebu: turris_omnia: Implement getting board information from MCU
+  arm: mvebu: turris_omnia: Print board ECDSA public key if available
+  arm: mvebu: turris_omnia: Disable Atmel SHA node if not present
+  arm: mvebu: spl: Do not build mvebu-reset in SPL
+  arm: mvebu: system-controller: Rework to use UCLASS_SYSCON
+  arm: mvebu: system-controller: Select mvebu-reset if DM_RESET &&
+    PCI_MVEBU
+  arm: mvebu: system-controller: Add support for SYSRESET
+  gpio: turris_omnia_mcu: Use byteorder conversion functions
+  gpio: turris_omnia_mcu: Update firmware features reading
+  gpio: turris_omnia_mcu: Add support for system power off via sysreset
+  arm: mvebu: turris_omnia: Enable poweroff command via sysreset in
+    defconfig
+  cmd: rng: Print "Abort" on -EINTR
+  misc: turris_omnia_mcu: Add support for rng provided by MCU
+  arm: mvebu: turris_omnia: Enable rng command in defconfig
 
-Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Signed-off-by: Ilias Apalodimas <apalos@gmail.com>
----
- lib/efi_loader/efi_var_common.c | 76 +++++++++++++++++++++++++++++++++
- lib/efi_loader/efi_var_file.c   | 64 ---------------------------
- 2 files changed, 76 insertions(+), 64 deletions(-)
+ arch/arm/mach-mvebu/Kconfig              |  25 ++
+ arch/arm/mach-mvebu/Makefile             |   3 +-
+ arch/arm/mach-mvebu/cpu.c                |   2 +
+ arch/arm/mach-mvebu/system-controller.c  | 145 ++++++--
+ board/CZ.NIC/turris_atsha_otp.c          |  27 +-
+ board/CZ.NIC/turris_common.c             |  42 +++
+ board/CZ.NIC/turris_common.h             |  10 +
+ board/CZ.NIC/turris_mox/turris_mox.c     |   5 +-
+ board/CZ.NIC/turris_omnia/Makefile       |   2 +-
+ board/CZ.NIC/turris_omnia/turris_omnia.c | 310 ++++++++++++-----
+ cmd/rng.c                                |   7 +-
+ configs/turris_omnia_defconfig           |   6 +
+ drivers/gpio/Kconfig                     |   7 -
+ drivers/gpio/Makefile                    |   1 -
+ drivers/gpio/turris_omnia_mcu.c          | 316 -----------------
+ drivers/misc/Kconfig                     |  11 +
+ drivers/misc/Makefile                    |   1 +
+ drivers/misc/turris_omnia_mcu.c          | 411 +++++++++++++++++++++++
+ include/turris-omnia-mcu-interface.h     | 248 ++++++++++++++
+ 19 files changed, 1097 insertions(+), 482 deletions(-)
+ create mode 100644 board/CZ.NIC/turris_common.c
+ create mode 100644 board/CZ.NIC/turris_common.h
+ delete mode 100644 drivers/gpio/turris_omnia_mcu.c
+ create mode 100644 drivers/misc/turris_omnia_mcu.c
+ create mode 100644 include/turris-omnia-mcu-interface.h
 
-diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
-index 16b2c3d48828..07b9603d49f3 100644
---- a/lib/efi_loader/efi_var_common.c
-+++ b/lib/efi_loader/efi_var_common.c
-@@ -9,6 +9,7 @@
- #include <efi_loader.h>
- #include <efi_variable.h>
- #include <stdlib.h>
-+#include <u-boot/crc.h>
- 
- enum efi_secure_mode {
- 	EFI_MODE_SETUP,
-@@ -416,3 +417,78 @@ void *efi_get_var(const u16 *name, const efi_guid_t *vendor, efi_uintn_t *size)
- 
- 	return buf;
- }
-+
-+/**
-+ * efi_var_collect() - Copy EFI variables mstching attributes mask
-+ *
-+ * @bufp:	buffer containing variable collection
-+ * @lenp:	buffer length
-+ * @attr_mask:	mask of matched attributes
-+ *
-+ * Return:	Status code
-+ */
-+efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *lenp,
-+					    u32 check_attr_mask)
-+{
-+	size_t len = EFI_VAR_BUF_SIZE;
-+	struct efi_var_file *buf;
-+	struct efi_var_entry *var, *old_var;
-+	size_t old_var_name_length = 2;
-+
-+	*bufp = NULL; /* Avoid double free() */
-+	buf = calloc(1, len);
-+	if (!buf)
-+		return EFI_OUT_OF_RESOURCES;
-+	var = buf->var;
-+	old_var = var;
-+	for (;;) {
-+		efi_uintn_t data_length, var_name_length;
-+		u8 *data;
-+		efi_status_t ret;
-+
-+		if ((uintptr_t)buf + len <=
-+		    (uintptr_t)var->name + old_var_name_length)
-+			return EFI_BUFFER_TOO_SMALL;
-+
-+		var_name_length = (uintptr_t)buf + len - (uintptr_t)var->name;
-+		memcpy(var->name, old_var->name, old_var_name_length);
-+		guidcpy(&var->guid, &old_var->guid);
-+		ret = efi_get_next_variable_name_int(
-+				&var_name_length, var->name, &var->guid);
-+		if (ret == EFI_NOT_FOUND)
-+			break;
-+		if (ret != EFI_SUCCESS) {
-+			free(buf);
-+			return ret;
-+		}
-+		old_var_name_length = var_name_length;
-+		old_var = var;
-+
-+		data = (u8 *)var->name + old_var_name_length;
-+		data_length = (uintptr_t)buf + len - (uintptr_t)data;
-+		ret = efi_get_variable_int(var->name, &var->guid,
-+					   &var->attr, &data_length, data,
-+					   &var->time);
-+		if (ret != EFI_SUCCESS) {
-+			free(buf);
-+			return ret;
-+		}
-+		if ((var->attr & check_attr_mask) == check_attr_mask) {
-+			var->length = data_length;
-+			var = (struct efi_var_entry *)ALIGN((uintptr_t)data + data_length, 8);
-+		}
-+	}
-+
-+	buf->reserved = 0;
-+	buf->magic = EFI_VAR_FILE_MAGIC;
-+	len = (uintptr_t)var - (uintptr_t)buf;
-+	buf->crc32 = crc32(0, (u8 *)buf->var,
-+			   len - sizeof(struct efi_var_file));
-+	buf->length = len;
-+	*bufp = buf;
-+	*lenp = len;
-+
-+	return EFI_SUCCESS;
-+}
-+
-+
-diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
-index 532b6b40eefe..413e1794e88c 100644
---- a/lib/efi_loader/efi_var_file.c
-+++ b/lib/efi_loader/efi_var_file.c
-@@ -52,70 +52,6 @@ static efi_status_t __maybe_unused efi_set_blk_dev_to_system_partition(void)
- 	return EFI_SUCCESS;
- }
- 
--efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *lenp,
--					    u32 check_attr_mask)
--{
--	size_t len = EFI_VAR_BUF_SIZE;
--	struct efi_var_file *buf;
--	struct efi_var_entry *var, *old_var;
--	size_t old_var_name_length = 2;
--
--	*bufp = NULL; /* Avoid double free() */
--	buf = calloc(1, len);
--	if (!buf)
--		return EFI_OUT_OF_RESOURCES;
--	var = buf->var;
--	old_var = var;
--	for (;;) {
--		efi_uintn_t data_length, var_name_length;
--		u8 *data;
--		efi_status_t ret;
--
--		if ((uintptr_t)buf + len <=
--		    (uintptr_t)var->name + old_var_name_length)
--			return EFI_BUFFER_TOO_SMALL;
--
--		var_name_length = (uintptr_t)buf + len - (uintptr_t)var->name;
--		memcpy(var->name, old_var->name, old_var_name_length);
--		guidcpy(&var->guid, &old_var->guid);
--		ret = efi_get_next_variable_name_int(
--				&var_name_length, var->name, &var->guid);
--		if (ret == EFI_NOT_FOUND)
--			break;
--		if (ret != EFI_SUCCESS) {
--			free(buf);
--			return ret;
--		}
--		old_var_name_length = var_name_length;
--		old_var = var;
--
--		data = (u8 *)var->name + old_var_name_length;
--		data_length = (uintptr_t)buf + len - (uintptr_t)data;
--		ret = efi_get_variable_int(var->name, &var->guid,
--					   &var->attr, &data_length, data,
--					   &var->time);
--		if (ret != EFI_SUCCESS) {
--			free(buf);
--			return ret;
--		}
--		if ((var->attr & check_attr_mask) == check_attr_mask) {
--			var->length = data_length;
--			var = (struct efi_var_entry *)ALIGN((uintptr_t)data + data_length, 8);
--		}
--	}
--
--	buf->reserved = 0;
--	buf->magic = EFI_VAR_FILE_MAGIC;
--	len = (uintptr_t)var - (uintptr_t)buf;
--	buf->crc32 = crc32(0, (u8 *)buf->var,
--			   len - sizeof(struct efi_var_file));
--	buf->length = len;
--	*bufp = buf;
--	*lenp = len;
--
--	return EFI_SUCCESS;
--}
--
- /**
-  * efi_var_to_file() - save non-volatile variables as file
-  *
 -- 
-2.37.2
+2.43.2
 
