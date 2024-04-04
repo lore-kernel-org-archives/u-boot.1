@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71195CD128A
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 03:01:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6839FCD128A
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 03:01:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 419E8883A3;
-	Thu,  4 Apr 2024 05:00:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CCD888833D;
+	Thu,  4 Apr 2024 05:01:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OLqsjILi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MARCOkXx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83EEA882A5; Thu,  4 Apr 2024 05:00:58 +0200 (CEST)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id D7D0C882BE; Thu,  4 Apr 2024 05:01:03 +0200 (CEST)
+Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
+ [IPv6:2607:f8b0:4864:20::e30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 147DC882B4
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 05:00:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28AE2882A5
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 05:00:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-430bf84977dso3166711cf.1
- for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 20:00:54 -0700 (PDT)
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-4785c788ba6so214710137.0
+ for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 20:00:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712199652; x=1712804452; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1712199657; x=1712804457; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7Enym2rFQueanytIHMMPxpsKXPuhHnpTaE/XGhiXzow=;
- b=OLqsjILiE7FLNis9CxsCk25+KuzpRUl0VtCRGSuRpj8985GT613ybw6H7U9iJsfYGa
- bfXtPi+uCVFDO1PN/KFkA/wGlhKHtjcn4hQTNv+18QjXHSuQsjA/NYcOiq8fsaA8b7FH
- qgcNxvUsvNeOZo1IWtstTngVwDtvIv8RUYW0qXuHu/NXB3kvpzJDyNxAyGPtyLJWY2iH
- SW6D6vemryLEEDqZnYDdA3zLC/IAtV2ZzKJVanz34kSU9AvcswO9HUgkOmjq9hE2Iabg
- 9cil+Oo2cqBhWbm1gb1qF8GTwyb9jJTu7Pb9yQwKbLhI0N9P4x0iaqlJvAVclwZYWEH5
- LaNg==
+ bh=jAXM3N2DW3UYzALQ+gCDB9FBLGVCurtGmVDoXRE6L1M=;
+ b=MARCOkXxqKdIjJ5NCvVtjmd4gQRpgsD46OGucu3JgtXSa8Xpjzi9JNN/3EQeSjN4es
+ kR63owTM+muW7sZHb0W6ittg1Vbk4oDQae5YvwsqHmmTYYvvnPg20ZDKr5jysWnODnnC
+ yWGDNrT4UiKfOFX+PM47AnGiNr41fWmrkWyYO18OE5bf7LHNyjNSZQOZ+BeRhlwjQ75G
+ D+F8ofD9heWTOUBm6FzvjD3qWnFvOTjlzMUkuCnxta211XWXjQtVYe/lLRRBUEWdnRL1
+ Ld6kSsHy1RENoaHQIJHeBkcvgj7scd/+nU5zGVLMCLTG6SeCdG1NqlSaDXSKTEr7rjRg
+ zlOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712199652; x=1712804452;
+ d=1e100.net; s=20230601; t=1712199657; x=1712804457;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7Enym2rFQueanytIHMMPxpsKXPuhHnpTaE/XGhiXzow=;
- b=n132iqETnGIFn6F/lzVMyDbASpzjD9C7sFgQ6TaMvO3uuOg0uyKg425IBB1J+thHDv
- 7k2F0Y0S3eMKLb1J39ig2LV8Z9HuCJLXXD9D0s0WxryVsHPTZKQz48FkcE4pp8h3jkx/
- OWs8jiyRCRlFrci/lnexj30qYzvlcdLQIl7z4pSuRwA8+TlxOx84QmwSgM45/uOjQBkR
- KosrRYZEu+Pai2XIwnc28Cp8rM6XVJFKvHa13Sw133Hqlxw83HvPOCf+jNZev9az7j3w
- 0sZdl3lwXTdLRpC0yMo2HhBtG+n1YE2/rHO/jSY6TCU10krfjGSuIbrvvqsvo0YJTj/F
- 06Ng==
-X-Gm-Message-State: AOJu0YzZX6e4YRSK57U2zA2CngiW40B2cp8O+pcL2JTG3B1EPU+qiGi9
- aGT2jrgvIC5EZdf8oEXyrxvsTdzdWlICDvRe4/4wwmM6KgWvjrnsNB8z3ip5
-X-Google-Smtp-Source: AGHT+IFbHdNce7iUlcNEN7SpjH3h+9YQRjLlJX/KYwkPqISyY8uLAEE46Wovh5REAoISXfAYLy48pw==
-X-Received: by 2002:ac8:5dd0:0:b0:432:d304:25bd with SMTP id
- e16-20020ac85dd0000000b00432d30425bdmr1189769qtx.18.1712199652278; 
- Wed, 03 Apr 2024 20:00:52 -0700 (PDT)
+ bh=jAXM3N2DW3UYzALQ+gCDB9FBLGVCurtGmVDoXRE6L1M=;
+ b=JCr0NcOFYFRy8oCMGgXHbzB9HsbINs/tH8qQ+S70RU5T9Z6NikFo95EtBhfWp23NrS
+ AcvVvxjckMi0hzk+ZXtHl8xMSyTmFRZD+wE1kg6MkI9JCCyyJlx1YyoDxyVwGzDafZGP
+ G7YQFzi/fN6mLEv9AqYZR0diHl9TV3QZSv8FHErKIB5Rx0Rute0NmPYcIViRM8brOPfk
+ 3qSMla+D4kuWRHw6JEUj5WS0CesYlqmtUcj3GLmr9B3z2e+rwdI1hEsteY5kBmGWlN9X
+ B6g38aVXE3qCw1/PtK4iwgmVyeGHSHhXl99ZggcumOhVXEYdzEbPGyq5RDQ1aBxrzriH
+ jk7w==
+X-Gm-Message-State: AOJu0YzqGtAT2de2TPiQzrAlq7zVU8glORvXmfqjWPsrj9BRs7QOLU0W
+ FeSQtUjGJ9ZvhF50ipMsaUpoLgDtao8Evew24/rEMbHMSGumpyW4knjdEHV/
+X-Google-Smtp-Source: AGHT+IFbSYi9WgkDs6aeEk/rNw1kr2QrXMEJbmyN8DopPHsGy1zV3+6tUBTdFZz+QHbFPC5EbN2OoA==
+X-Received: by 2002:a05:6102:3047:b0:476:e094:ca02 with SMTP id
+ w7-20020a056102304700b00476e094ca02mr1207145vsa.35.1712199657208; 
+ Wed, 03 Apr 2024 20:00:57 -0700 (PDT)
 Received: from aford-System-Version.lan
  ([2601:447:d002:5be:85bc:852d:ae70:b16a])
  by smtp.gmail.com with ESMTPSA id
- ci20-20020a05622a261400b0042efe24b76esm7155409qtb.58.2024.04.03.20.00.51
+ ci20-20020a05622a261400b0042efe24b76esm7155409qtb.58.2024.04.03.20.00.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 20:00:51 -0700 (PDT)
+ Wed, 03 Apr 2024 20:00:56 -0700 (PDT)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.denx.de
 Cc: aford@beaconembedded.com, Adam Ford <aford173@gmail.com>,
  Tom Rini <trini@konsulko.com>, Andrew Davis <afd@ti.com>,
- Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>,
- Martyn Welch <martyn.welch@collabora.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>
-Subject: [PATCH 2/4] arm: ti: am3517_evm: Migrate to OF_UPSTREAM
-Date: Wed,  3 Apr 2024 22:00:10 -0500
-Message-ID: <20240404030031.4726-2-aford173@gmail.com>
+ Martyn Welch <martyn.welch@collabora.com>
+Subject: [PATCH 3/4] arm: ti: logicpd-torpedo: Migrate to OF_UPSTREAM
+Date: Wed,  3 Apr 2024 22:00:11 -0500
+Message-ID: <20240404030031.4726-3-aford173@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240404030031.4726-1-aford173@gmail.com>
 References: <20240404030031.4726-1-aford173@gmail.com>
@@ -97,152 +97,358 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the feature of OF_UPSTREAM now available, the device trees
-for the SOM and baseboard can now deleted and the device tree
-locations need to point to the ti/omap directory.
+The DM37 and OMAP35 Torpedo share a few files, but both of them
+can be migrated to OF_UPSTREAM with a small update to their
+respective u-boot.dtsi files to address changes made the aliases.
+Both defconfigs need to properly point to the upstream directory
+structure for the device trees.  With those updated, the U-Boot
+device tree files can be deleted.
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 
-diff --git a/arch/arm/dts/am3517-evm.dts b/arch/arm/dts/am3517-evm.dts
+diff --git a/arch/arm/dts/logicpd-torpedo-35xx-devkit-u-boot.dtsi b/arch/arm/dts/logicpd-torpedo-35xx-devkit-u-boot.dtsi
+index 4744872f7c..d14d68e458 100644
+--- a/arch/arm/dts/logicpd-torpedo-35xx-devkit-u-boot.dtsi
++++ b/arch/arm/dts/logicpd-torpedo-35xx-devkit-u-boot.dtsi
+@@ -14,6 +14,8 @@
+ 	aliases {
+ 		/delete-property/ serial1;
+ 		/delete-property/ serial2;
++		/delete-property/ mmc1;
++		/delete-property/ mmc2;
+ 	};
+ 
+ 	ethernet@08000000 {
+diff --git a/arch/arm/dts/logicpd-torpedo-35xx-devkit.dts b/arch/arm/dts/logicpd-torpedo-35xx-devkit.dts
 deleted file mode 100644
-index d21bb2ccd0..0000000000
---- a/arch/arm/dts/am3517-evm.dts
+index cb08aa62d9..0000000000
+--- a/arch/arm/dts/logicpd-torpedo-35xx-devkit.dts
 +++ /dev/null
-@@ -1,339 +0,0 @@
+@@ -1,21 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0-only
--/*
-- * Copyright (C) 2011 Texas Instruments Incorporated - https://www.ti.com/
-- */
+-
 -/dts-v1/;
 -
--#include "am3517.dtsi"
--#include "am3517-som.dtsi"
--#include "am3517-evm-ui.dtsi"
--#include <dt-bindings/input/input.h>
+-#include "omap34xx.dtsi"
+-#include "logicpd-torpedo-som.dtsi"
+-#include "logicpd-torpedo-baseboard.dtsi"
+-#include "omap-gpmc-smsc9221.dtsi"
 -
 -/ {
--	model = "TI AM3517 EVM (AM3517/05 TMDSEVM3517)";
--	compatible = "ti,am3517-evm", "ti,am3517", "ti,omap3";
+-	model = "LogicPD Zoom OMAP35xx Torpedo Development Kit";
+-	compatible = "logicpd,dm3730-torpedo-devkit", "ti,omap3430", "ti,omap3";
+-};
 -
+-&omap3_pmx_core {
+-	isp1763_pins: pinmux_isp1763_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x2154,  PIN_INPUT_PULLUP | MUX_MODE4)	/* sdmmc1_dat6.gpio_128 */
+-		>;
+-	};
+-};
+diff --git a/arch/arm/dts/logicpd-torpedo-37xx-devkit-u-boot.dtsi b/arch/arm/dts/logicpd-torpedo-37xx-devkit-u-boot.dtsi
+index 2c34344504..8e8e2e4096 100644
+--- a/arch/arm/dts/logicpd-torpedo-37xx-devkit-u-boot.dtsi
++++ b/arch/arm/dts/logicpd-torpedo-37xx-devkit-u-boot.dtsi
+@@ -10,6 +10,8 @@
+ 	aliases {
+ 		/delete-property/ serial1;
+ 		/delete-property/ serial2;
++		/delete-property/ mmc1;
++		/delete-property/ mmc2;
+ 	};
+ 
+ 	ethernet@08000000 {
+diff --git a/arch/arm/dts/logicpd-torpedo-37xx-devkit.dts b/arch/arm/dts/logicpd-torpedo-37xx-devkit.dts
+deleted file mode 100644
+index 07ea822fe4..0000000000
+--- a/arch/arm/dts/logicpd-torpedo-37xx-devkit.dts
++++ /dev/null
+@@ -1,96 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0-only
+-
+-/dts-v1/;
+-
+-#include "omap36xx.dtsi"
+-#include "logicpd-torpedo-som.dtsi"
+-#include "omap-gpmc-smsc9221.dtsi"
+-#include "logicpd-torpedo-baseboard.dtsi"
+-
+-/ {
+-	model = "LogicPD Zoom DM3730 Torpedo + Wireless Development Kit";
+-	compatible = "logicpd,dm3730-torpedo-devkit", "ti,omap3630", "ti,omap3";
+-
+-	wl12xx_vmmc: wl12xx_vmmc {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vwl1271";
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <1800000>;
+-		gpio = <&gpio5 29 0>;   /* gpio157 */
+-		startup-delay-us = <70000>;
+-		enable-active-high;
+-		vin-supply = <&vmmc2>;
+-	};
+-};
+-
+-/*
+- * Only found on the wireless SOM. For the SOM without wireless, the pins for
+- * MMC3 can be routed with jumpers to the second MMC slot on the devkit and
+- * gpio157 is not connected. So this should be OK to keep common for now,
+- * probably device tree overlays is the way to go with the various SOM and
+- * jumpering combinations for the long run.
+- */
+-&mmc3 {
+-	interrupts-extended = <&intc 94 &omap3_pmx_core 0x136>;
+-	pinctrl-0 = <&mmc3_pins &mmc3_core2_pins>;
+-	pinctrl-names = "default";
+-	vmmc-supply = <&wl12xx_vmmc>;
+-	non-removable;
+-	bus-width = <4>;
+-	cap-power-off-card;
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-	wlcore: wlcore@2 {
+-		compatible = "ti,wl1283";
+-		reg = <2>;
+-		interrupt-parent = <&gpio5>;
+-		interrupts = <24 IRQ_TYPE_EDGE_RISING>; /* gpio 152 */
+-		ref-clock-frequency = <26000000>;
+-		tcxo-clock-frequency = <26000000>;
+-	};
+-};
+-
+-&uart2 {
+-	/delete-property/dma-names;
+-	bluetooth {
+-		compatible = "ti,wl1283-st";
+-		enable-gpios = <&gpio6 2 GPIO_ACTIVE_HIGH>; /* gpio 162 */
+-		max-speed = <3000000>;
+-	};
+-};
+-
+-/* The DM3730 has a faster L3 than OMAP35, so increase pixel clock */
+-&mt9p031_out {
+-	pixel-clock-frequency = <90000000>;
+-};
+-
+-&omap3_pmx_core {
+-	mmc3_pins: pinmux_mm3_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x2164, PIN_INPUT_PULLUP | MUX_MODE3)	/* sdmmc2_dat4.sdmmc3_dat0 */
+-			OMAP3_CORE1_IOPAD(0x2166, PIN_INPUT_PULLUP | MUX_MODE3)	/* sdmmc2_dat5.sdmmc3_dat1 */
+-			OMAP3_CORE1_IOPAD(0x2168, PIN_INPUT_PULLUP | MUX_MODE3)	/* sdmmc2_dat6.sdmmc3_dat2 */
+-			OMAP3_CORE1_IOPAD(0x216a, PIN_INPUT_PULLUP | MUX_MODE3)	/* sdmmc2_dat6.sdmmc3_dat3 */
+-			OMAP3_CORE1_IOPAD(0x2184, PIN_INPUT_PULLUP | MUX_MODE4)	/* mcbsp4_clkx.gpio_152 */
+-			OMAP3_CORE1_IOPAD(0x218e, PIN_OUTPUT | MUX_MODE4)	/* mcbsp1_fsr.gpio_157 */
+-		>;
+-	};
+-};
+-
+-&omap3_pmx_core2 {
+-	mmc3_core2_pins: pinmux_mmc3_core2_pins {
+-		pinctrl-single,pins = <
+-			OMAP3630_CORE2_IOPAD(0x25d8, PIN_INPUT_PULLUP | MUX_MODE2)   /* etk_clk.sdmmc3_clk */
+-			OMAP3630_CORE2_IOPAD(0x25da, PIN_INPUT_PULLUP | MUX_MODE2)   /* etk_ctl.sdmmc3_cmd */
+-		>;
+-	};
+-};
+-
+-/* The gpio muxing between omap3530 and dm3730 is different for GPIO_128 */
+-&omap3_pmx_wkup {
+-	isp1763_pins: pinmux_isp1763_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_WKUP_IOPAD(0x2a58, PIN_INPUT_PULLUP | MUX_MODE4)	/* reserved.gpio_128 */
+-		>;
+-	};
+-};
+diff --git a/arch/arm/dts/logicpd-torpedo-baseboard.dtsi b/arch/arm/dts/logicpd-torpedo-baseboard.dtsi
+deleted file mode 100644
+index b4664ab002..0000000000
+--- a/arch/arm/dts/logicpd-torpedo-baseboard.dtsi
++++ /dev/null
+@@ -1,420 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0-only
+-
+-/ {
+-	gpio_keys {
+-		compatible = "gpio-keys";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&gpio_key_pins &gpio_key_pins_wkup>;
+-
+-		sysboot2 {
+-			label = "sysboot2";
+-			gpios = <&gpio1 2 GPIO_ACTIVE_LOW>;	/* gpio2 */
+-			linux,code = <BTN_0>;
+-			wakeup-source;
+-		};
+-
+-		sysboot5 {
+-			label = "sysboot5";
+-			gpios = <&gpio1 7 GPIO_ACTIVE_LOW>;	/* gpio7 */
+-			linux,code = <BTN_1>;
+-			wakeup-source;
+-		};
+-
+-		gpio1 {
+-			label = "gpio1";
+-			gpios = <&gpio6 21 GPIO_ACTIVE_LOW>;	/* gpio181 */
+-			linux,code = <BTN_2>;
+-			wakeup-source;
+-		};
+-
+-		gpio2 {
+-			label = "gpio2";
+-			gpios = <&gpio6 18 GPIO_ACTIVE_LOW>;	/* gpio178 */
+-			linux,code = <BTN_3>;
+-			wakeup-source;
+-		};
+-	};
+-
+-	sound {
+-		compatible = "ti,omap-twl4030";
+-		ti,model = "omap3logic";
+-		ti,mcbsp = <&mcbsp2>;
+-	};
+-
+-	leds {
+-		compatible = "gpio-leds";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&led_pins>;
+-
+-		led1 {
+-			label = "led1";
+-			gpios = <&gpio6 20 GPIO_ACTIVE_HIGH>;	/* gpio180 */
+-			linux,default-trigger = "cpu0";
+-		};
+-
+-		led2 {
+-			label = "led2";
+-			gpios = <&gpio6 19 GPIO_ACTIVE_HIGH>;	/* gpio179 */
+-			linux,default-trigger = "none";
+-		};
+-	};
+-
+-	pwm10: dmtimer-pwm {
+-		compatible = "ti,omap-dmtimer-pwm";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&pwm_pins>;
+-		ti,timers = <&timer10>;
+-		#pwm-cells = <3>;
+-		ti,clock-source = <0x01>;
+-	};
+-
+-};
+-
+-&vaux1 {
+-	regulator-min-microvolt = <3000000>;
+-	regulator-max-microvolt = <3000000>;
+-};
+-
+-&vaux4 {
+-	regulator-min-microvolt = <1800000>;
+-	regulator-max-microvolt = <1800000>;
+-};
+-
+-&mcbsp2 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcbsp2_pins>;
+-	status = "okay";
+-};
+-
+-&charger {
+-	ti,bb-uvolt = <3200000>;
+-	ti,bb-uamp = <150>;
+-};
+-
+-&gpmc {
+-	ranges = <0 0 0x30000000 0x1000000	/* CS0: 16MB for NAND */
+-		  1 0 0x2c000000 0x1000000	/* CS1: 16MB for LAN9221 */
+-		  6 0 0x28000000 0x1000000>;	/* CS6: 16MB for ISP1763 */
+-
+-	ethernet@gpmc {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&lan9221_pins>;
+-		interrupt-parent = <&gpio5>;
+-		interrupts = <1 IRQ_TYPE_LEVEL_LOW>;		/* gpio129 */
+-		reg = <1 0 0xff>;
+-	};
+-
+-	usb@6,0 {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&isp1763_pins>;
+-		compatible = "nxp,usb-isp1763";
+-		reg = <0x6 0x0 0xff>;
+-		interrupt-parent = <&gpio5>;
+-		interrupts = <0 IRQ_TYPE_LEVEL_LOW>;
+-		interrupt-names = "host";
+-		bus-width = <16>;
+-		dr_mode = "host";
+-		gpmc,mux-add-data = <0>;
+-		gpmc,device-width = <2>;
+-		gpmc,wait-pin = <0>;
+-		gpmc,burst-length = <4>;
+-		gpmc,cycle2cycle-samecsen = <1>;
+-		gpmc,cycle2cycle-diffcsen = <1>;
+-		gpmc,cs-on-ns = <0>;
+-		gpmc,cs-rd-off-ns = <45>;
+-		gpmc,cs-wr-off-ns = <45>;
+-		gpmc,adv-on-ns = <0>;
+-		gpmc,adv-rd-off-ns = <0>;
+-		gpmc,adv-wr-off-ns = <0>;
+-		gpmc,oe-on-ns = <0>;
+-		gpmc,oe-off-ns = <45>;
+-		gpmc,we-on-ns = <0>;
+-		gpmc,we-off-ns = <25>;
+-		gpmc,rd-cycle-ns = <60>;
+-		gpmc,wr-cycle-ns = <45>;
+-		gpmc,access-ns = <35>;
+-		gpmc,page-burst-access-ns = <0>;
+-		gpmc,bus-turnaround-ns = <0>;
+-		gpmc,cycle2cycle-delay-ns = <60>;
+-		gpmc,wait-monitoring-ns = <0>;
+-		gpmc,clk-activation-ns = <0>;
+-		gpmc,wr-data-mux-bus-ns = <5>;
+-		gpmc,wr-access-ns = <20>;
+-	};
+-};
+-
+-&hdqw1w {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&hdq_pins>;
+-};
+-
+-
+-&vpll2 {
+-	regulator-always-on;
+-};
+-
+-&dss {
+-	status = "okay";
+-	vdds_dsi-supply = <&vpll2>;
+-	vdda_video-supply = <&vpll2>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&dss_dpi_pins1>;
+-	port {
+-		dpi_out: endpoint {
+-			remote-endpoint = <&lcd_in>;
+-			data-lines = <16>;
+-		};
+-	};
+-};
+-
+-/ {
 -	aliases {
 -		display0 = &lcd0;
 -	};
 -
--	chosen {
--		stdout-path = &uart3;
--	};
--
--	memory@80000000 {
--		device_type = "memory";
--		reg = <0x80000000 0x10000000>; /* 256 MB */
--	};
--
--	vmmc_fixed: vmmc {
--		compatible = "regulator-fixed";
--		regulator-name = "vmmc_fixed";
--		regulator-min-microvolt = <3300000>;
--		regulator-max-microvolt = <3300000>;
--	};
--
--	gpio-keys {
--		compatible = "gpio-keys-polled";
--		poll-interval = <100>;
--
--		button-user {
--			label = "User Push Button";
--			linux,code = <BTN_0>;
--			gpios = <&tca6416 5 GPIO_ACTIVE_LOW>;
--		};
--
--		switch-1 {
--			label = "User Switch 1";
--			linux,code = <BTN_1>;
--			gpios = <&tca6416 8 GPIO_ACTIVE_LOW>;
--		};
--
--		switch-2 {
--			label = "User Switch 2";
--			linux,code = <BTN_2>;
--			gpios = <&tca6416 9 GPIO_ACTIVE_LOW>;
--		};
--
--		switch-3 {
--			label = "User Switch 3";
--			linux,code = <BTN_3>;
--			gpios = <&tca6416 10 GPIO_ACTIVE_LOW>;
--		};
--
--		switch-4 {
--			label = "User Switch 4";
--			linux,code = <BTN_4>;
--			gpios = <&tca6416 11 GPIO_ACTIVE_LOW>;
--		};
--
--		switch-5 {
--			label = "User Switch 5";
--			linux,code = <BTN_5>;
--			gpios = <&tca6416 12 GPIO_ACTIVE_LOW>;
--		};
--
--		switch-6 {
--			label = "User Switch 6";
--			linux,code = <BTN_6>;
--			gpios = <&tca6416 13 GPIO_ACTIVE_LOW>;
--		};
--
--		switch-7 {
--			label = "User Switch 7";
--			linux,code = <BTN_7>;
--			gpios = <&tca6416 14 GPIO_ACTIVE_LOW>;
--		};
--
--		switch-8 {
--			label = "User Switch 8";
--			linux,code = <BTN_8>;
--			gpios = <&tca6416 15 GPIO_ACTIVE_LOW>;
--		};
--	};
--
--	gpio-leds {
--		compatible = "gpio-leds";
--
--		pinctrl-names = "default";
--		pinctrl-0 = <&leds_pins>;
--
--		user_led_1 {
--			label = "am3517evm:green:user_led_1";
--			gpios = <&tca6416 7 GPIO_ACTIVE_LOW>;
--			default-state = "on";
--		};
--
--		user_led_2 {
--			label = "am3517evm:green:user_led_2";
--			gpios = <&tca6416 6 GPIO_ACTIVE_LOW>;
--			default-state = "on";
--		};
--
--		user_led_3 {
--			label = "am3517evm:green:user_led_3";
--			gpios = <&gpio1 11 GPIO_ACTIVE_HIGH>;
--			linux,default-trigger = "mmc0"; /* SD/MMC card activity */
--		};
--
--		user_led_4 {
--			label = "am3517evm:green:user_led_4";
--			gpios = <&gpio1 31 GPIO_ACTIVE_HIGH>;
--			linux,default-trigger = "heartbeat";
--		};
--	};
--
--	lcd0: display@0 {
+-	lcd0: display {
 -		/* This isn't the exact LCD, but the timings meet spec */
--		/* To make it work, set CONFIG_OMAP2_DSS_MIN_FCK_PER_PCK=4 */
 -		compatible = "newhaven,nhd-4.3-480272ef-atxl";
 -		label = "15";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&panel_pwr_pins>;
 -		backlight = <&bl>;
--		enable-gpios = <&gpio6 16 GPIO_ACTIVE_HIGH>;	/* gpio176, lcd INI */
--		vcc-supply = <&vdd_io_reg>;
--
+-		enable-gpios = <&gpio5 27 GPIO_ACTIVE_HIGH>;
 -		port {
 -			lcd_in: endpoint {
 -				remote-endpoint = <&dpi_out>;
@@ -253,246 +459,280 @@ index d21bb2ccd0..0000000000
 -	bl: backlight {
 -		compatible = "pwm-backlight";
 -		pinctrl-names = "default";
--		power-supply = <&vdd_io_reg>;
 -		pinctrl-0 = <&backlight_pins>;
--		pwms = <&pwm11 0 5000000 0>;
+-		pwms = <&pwm10 0 5000000 0>;
 -		brightness-levels = <0 10 20 30 40 50 60 70 80 90 100>;
 -		default-brightness-level = <7>;
--		enable-gpios = <&gpio6 22 GPIO_ACTIVE_HIGH>; /* gpio_182 */
+-		enable-gpios = <&gpio5 26 GPIO_ACTIVE_HIGH>; /* gpio_154 */
 -	};
--
--	pwm11: pwm-11 {
--		compatible = "ti,omap-dmtimer-pwm";
--		pinctrl-names = "default";
--		pinctrl-0 = <&pwm_pins>;
--		ti,timers = <&timer11>;
--		#pwm-cells = <3>;
--		ti,clock-source = <0x01>;
--	};
--
--	/* HS USB Host PHY on PORT 1 */
--	hsusb1_phy: hsusb1_phy {
--		pinctrl-names = "default";
--		pinctrl-0 = <&hsusb1_rst_pins>;
--		compatible = "usb-nop-xceiv";
--		reset-gpios = <&gpio2 25 GPIO_ACTIVE_LOW>; /* gpio_57 */
--		#phy-cells = <0>;
--	};
--};
--
--&davinci_emac {
--	pinctrl-names = "default";
--	pinctrl-0 = <&ethernet_pins>;
--	status = "okay";
--};
--
--&davinci_mdio {
--	status = "okay";
--};
--
--&dss {
--	status = "okay";
--
--	pinctrl-names = "default";
--	pinctrl-0 = <&dss_dpi_pins>;
--
--	vdds_dsi-supply = <&vdd_io_reg>;
--	vdda_video-supply = <&vdd_io_reg>;
--
--	port {
--		dpi_out: endpoint {
--			remote-endpoint = <&lcd_in>;
--			data-lines = <16>;
--		};
--	};
--};
--
--&i2c2 {
--	clock-frequency = <400000>;
--	/* User DIP swithes [1:8] / User LEDS [1:2] */
--	tca6416: gpio@21 {
--		compatible = "ti,tca6416";
--		reg = <0x21>;
--		gpio-controller;
--		#gpio-cells = <2>;
--		vcc-supply = <&vdd_io_reg>;
--	};
--};
--
--&i2c3 {
--	clock-frequency = <400000>;
 -};
 -
 -&mmc1 {
--	status = "okay";
+-	interrupts-extended = <&intc 83 &omap3_pmx_core 0x11a>;
 -	pinctrl-names = "default";
--	pinctrl-0 = <&mmc1_pins>;
--	vmmc-supply = <&vmmc_fixed>;
+-	pinctrl-0 = <&mmc1_pins &mmc1_cd>;
+-	cd-gpios = <&gpio4 31 GPIO_ACTIVE_LOW>;		/* gpio127 */
+-	vmmc-supply = <&vmmc1>;
 -	bus-width = <4>;
--	wp-gpios = <&gpio4 30 GPIO_ACTIVE_HIGH>; /* gpio_126 */
--	cd-gpios = <&gpio4 31 GPIO_ACTIVE_LOW>; /* gpio_127 */
--};
--
--&mmc3 {
--	status = "disabled";
--};
--
--&usbhshost {
--	pinctrl-names = "default";
--	pinctrl-0 = <&hsusb1_pins>;
--	port1-mode = "ehci-phy";
--};
--
--&usbhsehci {
--	phys = <&hsusb1_phy>;
+-	cap-power-off-card;
 -};
 -
 -&omap3_pmx_core {
--
--	ethernet_pins: pinmux_ethernet_pins {
+-	gpio_key_pins: pinmux_gpio_key_pins {
 -		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x21fe, PIN_INPUT | MUX_MODE0) /* rmii_mdio_data */
--			OMAP3_CORE1_IOPAD(0x2200, MUX_MODE0) /* rmii_mdio_clk */
--			OMAP3_CORE1_IOPAD(0x2202, PIN_INPUT_PULLDOWN | MUX_MODE0) /* rmii_rxd0 */
--			OMAP3_CORE1_IOPAD(0x2204, PIN_INPUT_PULLDOWN | MUX_MODE0) /* rmii_rxd1 */
--			OMAP3_CORE1_IOPAD(0x2206, PIN_INPUT_PULLDOWN | MUX_MODE0) /* rmii_crs_dv */
--			OMAP3_CORE1_IOPAD(0x2208, PIN_OUTPUT_PULLDOWN | MUX_MODE0) /* rmii_rxer */
--			OMAP3_CORE1_IOPAD(0x220a, PIN_OUTPUT_PULLDOWN | MUX_MODE0) /* rmii_txd0 */
--			OMAP3_CORE1_IOPAD(0x220c, PIN_OUTPUT_PULLDOWN | MUX_MODE0) /* rmii_txd1 */
--			OMAP3_CORE1_IOPAD(0x220e, PIN_OUTPUT_PULLDOWN |MUX_MODE0) /* rmii_txen */
--			OMAP3_CORE1_IOPAD(0x2210, PIN_INPUT_PULLDOWN | MUX_MODE0) /* rmii_50mhz_clk */
+-			OMAP3_CORE1_IOPAD(0x21d6, PIN_INPUT_PULLUP | MUX_MODE4)	/* mcspi2_clk.gpio_178 */
+-			OMAP3_CORE1_IOPAD(0x21dc, PIN_INPUT_PULLUP | MUX_MODE4)	/* mcspi2_cs0.gpio_181 */
 -		>;
 -	};
 -
--	leds_pins: pinmux_leds_pins {
+-	hdq_pins: hdq_pins {
 -		pinctrl-single,pins = <
--			OMAP3_WKUP_IOPAD(0x2a24, PIN_OUTPUT_PULLUP | MUX_MODE4)	/* jtag_emu0.gpio_11 */
--			OMAP3_WKUP_IOPAD(0x2a26, PIN_OUTPUT_PULLUP | MUX_MODE4)	/* jtag_emu1.gpio_31 */
--		>;
--	};
--
--	mmc1_pins: pinmux_mmc1_pins {
--		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x2144, PIN_INPUT_PULLUP | MUX_MODE0)	/* sdmmc1_clk.sdmmc1_clk */
--			OMAP3_CORE1_IOPAD(0x2146, PIN_INPUT_PULLUP | MUX_MODE0)	/* sdmmc1_cmd.sdmmc1_cmd */
--			OMAP3_CORE1_IOPAD(0x2148, PIN_INPUT_PULLUP | MUX_MODE0)	/* sdmmc1_dat0.sdmmc1_dat0 */
--			OMAP3_CORE1_IOPAD(0x214a, PIN_INPUT_PULLUP | MUX_MODE0)	/* sdmmc1_dat1.sdmmc1_dat1 */
--			OMAP3_CORE1_IOPAD(0x214c, PIN_INPUT_PULLUP | MUX_MODE0)	/* sdmmc1_dat2.sdmmc1_dat2 */
--			OMAP3_CORE1_IOPAD(0x214e, PIN_INPUT_PULLUP | MUX_MODE0)	/* sdmmc1_dat3.sdmmc1_dat3 */
--			OMAP3_CORE1_IOPAD(0x2150, PIN_INPUT_PULLUP | MUX_MODE4) /* sdmmc1_dat4.gpio_126 */
--			OMAP3_CORE1_IOPAD(0x2152, PIN_INPUT_PULLUP | MUX_MODE4) /* sdmmc1_dat5.gpio_127 */
+-			OMAP3_CORE1_IOPAD(0x21c6, PIN_INPUT_PULLUP | MUX_MODE0) /* hdq_sio */
 -		>;
 -	};
 -
 -	pwm_pins: pinmux_pwm_pins {
 -		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x21dc, PIN_OUTPUT | MUX_MODE1)       /* mcspi2_cs0.gpt11_pwm */
+-			OMAP3_CORE1_IOPAD(0x20B8, PIN_OUTPUT | PIN_OFF_OUTPUT_LOW | MUX_MODE3)       /* gpmc_ncs5.gpt_10_pwm_evt */
+-		>;
+-	};
+-
+-	led_pins: pinmux_led_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x21d8, PIN_OUTPUT | MUX_MODE4)	/* gpio_179 */
+-			OMAP3_CORE1_IOPAD(0x21da, PIN_OUTPUT | MUX_MODE4)	/* gpio_180 */
+-		>;
+-	};
+-
+-	mmc1_pins: pinmux_mmc1_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x2144, PIN_OUTPUT | MUX_MODE0)	/* sdmmc1_clk.sdmmc1_clk */
+-			OMAP3_CORE1_IOPAD(0x2146, PIN_INPUT | MUX_MODE0)	/* sdmmc1_cmd.sdmmc1_cmd */
+-			OMAP3_CORE1_IOPAD(0x2148, PIN_INPUT | MUX_MODE0)	/* sdmmc1_dat0.sdmmc1_dat0 */
+-			OMAP3_CORE1_IOPAD(0x214a, PIN_INPUT | MUX_MODE0)	/* sdmmc1_dat1.sdmmc1_dat1 */
+-			OMAP3_CORE1_IOPAD(0x214c, PIN_INPUT | MUX_MODE0)	/* sdmmc1_dat2.sdmmc1_dat2 */
+-			OMAP3_CORE1_IOPAD(0x214e, PIN_INPUT | MUX_MODE0)	/* sdmmc1_dat3.sdmmc1_dat3 */
+-		>;
+-	};
+-
+-	tsc2004_pins: pinmux_tsc2004_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x2186, PIN_INPUT | MUX_MODE4)	/* mcbsp4_dr.gpio_153 */
 -		>;
 -	};
 -
 -	backlight_pins: pinmux_backlight_pins {
 -		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x21de, PIN_OUTPUT | MUX_MODE4)       /* mcspi2_cs1.gpio_182 */
+-			OMAP3_CORE1_IOPAD(0x2188, PIN_OUTPUT | PIN_OFF_OUTPUT_LOW | MUX_MODE4)       /* mcbsp4_dx.gpio_154 */
 -		>;
 -	};
 -
--	dss_dpi_pins: pinmux_dss_dpi_pins {
+-	isp_pins: pinmux_isp_pins {
 -		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x21d2, PIN_OUTPUT | MUX_MODE4)       /* mcspi1_cs2.gpio_176 */
--			OMAP3_CORE1_IOPAD(0x20d4, PIN_OUTPUT | MUX_MODE0)       /* dss_pclk.dss_pclk */
--			OMAP3_CORE1_IOPAD(0x20d6, PIN_OUTPUT | MUX_MODE0)       /* dss_hsync.dss_hsync */
--			OMAP3_CORE1_IOPAD(0x20d8, PIN_OUTPUT | MUX_MODE0)       /* dss_vsync.dss_vsync */
--			OMAP3_CORE1_IOPAD(0x20da, PIN_OUTPUT | MUX_MODE0)       /* dss_acbias.dss_acbias */
--			OMAP3_CORE1_IOPAD(0x20dc, PIN_OUTPUT | MUX_MODE0)       /* dss_data0.dss_data0 */
--			OMAP3_CORE1_IOPAD(0x20de, PIN_OUTPUT | MUX_MODE0)       /* dss_data1.dss_data1 */
--			OMAP3_CORE1_IOPAD(0x20e0, PIN_OUTPUT | MUX_MODE0)       /* dss_data2.dss_data2 */
--			OMAP3_CORE1_IOPAD(0x20e2, PIN_OUTPUT | MUX_MODE0)       /* dss_data3.dss_data3 */
--			OMAP3_CORE1_IOPAD(0x20e4, PIN_OUTPUT | MUX_MODE0)       /* dss_data4.dss_data4 */
--			OMAP3_CORE1_IOPAD(0x20e6, PIN_OUTPUT | MUX_MODE0)       /* dss_data5.dss_data5 */
--			OMAP3_CORE1_IOPAD(0x20e8, PIN_OUTPUT | MUX_MODE0)       /* dss_data6.dss_data6 */
--			OMAP3_CORE1_IOPAD(0x20ea, PIN_OUTPUT | MUX_MODE0)       /* dss_data7.dss_data7 */
--			OMAP3_CORE1_IOPAD(0x20ec, PIN_OUTPUT | MUX_MODE0)       /* dss_data8.dss_data8 */
--			OMAP3_CORE1_IOPAD(0x20ee, PIN_OUTPUT | MUX_MODE0)       /* dss_data9.dss_data9 */
--			OMAP3_CORE1_IOPAD(0x20f0, PIN_OUTPUT | MUX_MODE0)       /* dss_data10.dss_data10 */
--			OMAP3_CORE1_IOPAD(0x20f2, PIN_OUTPUT | MUX_MODE0)       /* dss_data11.dss_data11 */
--			OMAP3_CORE1_IOPAD(0x20f4, PIN_OUTPUT | MUX_MODE0)       /* dss_data12.dss_data12 */
--			OMAP3_CORE1_IOPAD(0x20f6, PIN_OUTPUT | MUX_MODE0)       /* dss_data13.dss_data13 */
--			OMAP3_CORE1_IOPAD(0x20f8, PIN_OUTPUT | MUX_MODE0)       /* dss_data14.dss_data14 */
--			OMAP3_CORE1_IOPAD(0x20fa, PIN_OUTPUT | MUX_MODE0)       /* dss_data15.dss_data15 */
+-			OMAP3_CORE1_IOPAD(0x210c, PIN_INPUT | MUX_MODE0)   /* cam_hs.cam_hs */
+-			OMAP3_CORE1_IOPAD(0x210e, PIN_INPUT | MUX_MODE0)   /* cam_vs.cam_vs */
+-			OMAP3_CORE1_IOPAD(0x2110, PIN_INPUT | MUX_MODE0)   /* cam_xclka.cam_xclka */
+-			OMAP3_CORE1_IOPAD(0x2112, PIN_INPUT | MUX_MODE0)   /* cam_pclk.cam_pclk */
+-
+-			OMAP3_CORE1_IOPAD(0x2116, PIN_INPUT | MUX_MODE0)   /* cam_d0.cam_d0 */
+-			OMAP3_CORE1_IOPAD(0x2118, PIN_INPUT | MUX_MODE0)   /* cam_d1.cam_d1 */
+-			OMAP3_CORE1_IOPAD(0x211a, PIN_INPUT | MUX_MODE0)   /* cam_d2.cam_d2 */
+-			OMAP3_CORE1_IOPAD(0x211c, PIN_INPUT | MUX_MODE0)   /* cam_d3.cam_d3 */
+-			OMAP3_CORE1_IOPAD(0x211e, PIN_INPUT | MUX_MODE0)   /* cam_d4.cam_d4 */
+-			OMAP3_CORE1_IOPAD(0x2120, PIN_INPUT | MUX_MODE0)   /* cam_d5.cam_d5 */
+-			OMAP3_CORE1_IOPAD(0x2122, PIN_INPUT | MUX_MODE0)   /* cam_d6.cam_d6 */
+-			OMAP3_CORE1_IOPAD(0x2124, PIN_INPUT | MUX_MODE0)   /* cam_d7.cam_d7 */
 -		>;
 -	};
 -
--	hsusb1_rst_pins: pinmux_hsusb1_rst_pins {
+-	panel_pwr_pins: pinmux_panel_pwr_pins {
 -		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x20ba, PIN_OUTPUT | MUX_MODE4)	/* gpmc_ncs6.gpio_57 */
+-			OMAP3_CORE1_IOPAD(0x218a, PIN_OUTPUT | PIN_OFF_OUTPUT_LOW | MUX_MODE4)       /* mcbsp4_fs.gpio_155 */
+-		>;
+-	};
+-
+-	dss_dpi_pins1: pinmux_dss_dpi_pins1 {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x20d4, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_pclk.dss_pclk */
+-			OMAP3_CORE1_IOPAD(0x20d6, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_hsync.dss_hsync */
+-			OMAP3_CORE1_IOPAD(0x20d8, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_vsync.dss_vsync */
+-			OMAP3_CORE1_IOPAD(0x20da, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_acbias.dss_acbias */
+-
+-			OMAP3_CORE1_IOPAD(0x20e8, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_data6.dss_data6 */
+-			OMAP3_CORE1_IOPAD(0x20ea, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_data7.dss_data7 */
+-			OMAP3_CORE1_IOPAD(0x20ec, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_data8.dss_data8 */
+-			OMAP3_CORE1_IOPAD(0x20ee, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_data9.dss_data9 */
+-			OMAP3_CORE1_IOPAD(0x20f0, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_data10.dss_data10 */
+-			OMAP3_CORE1_IOPAD(0x20f2, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_data11.dss_data11 */
+-			OMAP3_CORE1_IOPAD(0x20f4, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_data12.dss_data12 */
+-			OMAP3_CORE1_IOPAD(0x20f6, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_data13.dss_data13 */
+-			OMAP3_CORE1_IOPAD(0x20f8, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_data14.dss_data14 */
+-			OMAP3_CORE1_IOPAD(0x20fa, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_data15.dss_data15 */
+-			OMAP3_CORE1_IOPAD(0x20fc, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_data16.dss_data16 */
+-			OMAP3_CORE1_IOPAD(0x20fe, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE0)   /* dss_data17.dss_data17 */
+-
+-			OMAP3_CORE1_IOPAD(0x2100, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE3)   /* dss_data18.dss_data0 */
+-			OMAP3_CORE1_IOPAD(0x2102, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE3)   /* dss_data19.dss_data1 */
+-			OMAP3_CORE1_IOPAD(0x2104, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE3)   /* dss_data20.dss_data2 */
+-			OMAP3_CORE1_IOPAD(0x2106, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE3)   /* dss_data21.dss_data3 */
+-			OMAP3_CORE1_IOPAD(0x2108, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE3)   /* dss_data22.dss_data4 */
+-			OMAP3_CORE1_IOPAD(0x210a, PIN_OUTPUT_PULLDOWN | PIN_OFF_OUTPUT_LOW | MUX_MODE3)   /* dss_data23.dss_data5 */
 -		>;
 -	};
 -};
 -
--&omap3_pmx_core2 {
--
--	hsusb1_pins: pinmux_hsusb1_pins {
+-&omap3_pmx_wkup {
+-	gpio_key_pins_wkup: pinmux_gpio_key_pins_wkup {
 -		pinctrl-single,pins = <
--			OMAP3430_CORE2_IOPAD(0x25d8, PIN_OUTPUT | MUX_MODE3)	/* etk_clk.hsusb1_stp */
--			OMAP3430_CORE2_IOPAD(0x25da, PIN_OUTPUT | MUX_MODE3)	/* etk_ctl.hsusb1_clk */
--			OMAP3430_CORE2_IOPAD(0x25ec, PIN_INPUT | MUX_MODE3)	/* etk_d8.hsusb1_dir */
--			OMAP3430_CORE2_IOPAD(0x25ee, PIN_INPUT | MUX_MODE3)	/* etk_d9.hsusb1_nxt */
--			OMAP3430_CORE2_IOPAD(0x25dc, PIN_INPUT | MUX_MODE3)	/* etk_d0.hsusb1_data0 */
--			OMAP3430_CORE2_IOPAD(0x25de, PIN_INPUT | MUX_MODE3)	/* etk_d1.hsusb1_data1 */
--			OMAP3430_CORE2_IOPAD(0x25e0, PIN_INPUT | MUX_MODE3)	/* etk_d2.hsusb1_data2 */
--			OMAP3430_CORE2_IOPAD(0x25ea, PIN_INPUT | MUX_MODE3)	/* etk_d7.hsusb1_data3 */
--			OMAP3430_CORE2_IOPAD(0x25e4, PIN_INPUT | MUX_MODE3)	/* etk_d4.hsusb1_data4 */
--			OMAP3430_CORE2_IOPAD(0x25e6, PIN_INPUT | MUX_MODE3)	/* etk_d5.hsusb1_data5 */
--			OMAP3430_CORE2_IOPAD(0x25e8, PIN_INPUT | MUX_MODE3)	/* etk_d6.hsusb1_data6 */
--			OMAP3430_CORE2_IOPAD(0x25e2, PIN_INPUT | MUX_MODE3)	/* etk_d3.hsusb1_data7 */
+-			OMAP3_WKUP_IOPAD(0x2a0a, PIN_INPUT_PULLUP | MUX_MODE4)	/* sys_boot0.gpio_2 */
+-			OMAP3_WKUP_IOPAD(0x2a14, PIN_INPUT_PULLUP | MUX_MODE4)	/* sys_boot5.gpio_7 */
+-		>;
+-	};
+-
+-	lan9221_pins: pinmux_lan9221_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_WKUP_IOPAD(0x2a5a, PIN_INPUT | MUX_MODE4)		/* reserved.gpio_129 */
+-		>;
+-	};
+-
+-	mmc1_cd: pinmux_mmc1_cd {
+-		pinctrl-single,pins = <
+-			OMAP3_WKUP_IOPAD(0x2a54, PIN_INPUT_PULLUP | MUX_MODE4)	/* reserved.gpio_127 */
 -		>;
 -	};
 -};
-diff --git a/arch/arm/dts/am3517-som.dtsi b/arch/arm/dts/am3517-som.dtsi
+-
+-&i2c2 {
+-	mt9p031@48 {
+-		compatible = "aptina,mt9p031";
+-		reg = <0x48>;
+-		clocks = <&isp 0>;
+-		vaa-supply = <&vaux4>;
+-		vdd-supply = <&vaux4>;
+-		vdd_io-supply = <&vaux4>;
+-		port {
+-			mt9p031_out: endpoint {
+-				input-clock-frequency = <24000000>;
+-				pixel-clock-frequency = <72000000>;
+-				remote-endpoint = <&ccdc_ep>;
+-			};
+-		};
+-	};
+-};
+-
+-&i2c3 {
+-	touchscreen: tsc2004@48 {
+-		compatible = "ti,tsc2004";
+-		reg = <0x48>;
+-		vio-supply = <&vaux1>;
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&tsc2004_pins>;
+-		interrupts-extended = <&gpio5 25 IRQ_TYPE_EDGE_RISING>; /* gpio 153 */
+-
+-		touchscreen-fuzz-x = <4>;
+-		touchscreen-fuzz-y = <7>;
+-		touchscreen-fuzz-pressure = <2>;
+-		touchscreen-size-x = <4096>;
+-		touchscreen-size-y = <4096>;
+-		touchscreen-max-pressure = <2048>;
+-
+-		ti,x-plate-ohms = <280>;
+-		ti,esd-recovery-timeout-ms = <8000>;
+-	};
+-};
+-
+-&mcspi1 {
+-	at25@0 {
+-		compatible = "atmel,at25";
+-		reg = <0>;
+-		spi-max-frequency = <5000000>;
+-		spi-cpha;
+-		spi-cpol;
+-
+-		pagesize = <64>;
+-		size = <32768>;
+-		address-width = <16>;
+-	};
+-};
+-
+-&isp {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&isp_pins>;
+-	ports {
+-		port@0 {
+-			reg = <0>;
+-			ccdc_ep: endpoint {
+-				remote-endpoint = <&mt9p031_out>;
+-				bus-width = <8>;
+-				hsync-active = <1>;
+-				vsync-active = <1>;
+-				pclk-sample = <0>;
+-			};
+-		};
+-	};
+-};
+-
+-&uart1 {
+-	interrupts-extended = <&intc 72 &omap3_pmx_core OMAP3_UART1_RX>;
+-};
+-
+-/* Wired to the tps65950 on the SOM, only the USB connector is on the devkit */
+-&usb_otg_hs {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&hsusb_otg_pins>;
+-	interface-type = <0>;
+-	usb-phy = <&usb2_phy>;
+-	phys = <&usb2_phy>;
+-	phy-names = "usb2-phy";
+-	mode = <3>;
+-	power = <50>;
+-};
+diff --git a/arch/arm/dts/logicpd-torpedo-som.dtsi b/arch/arm/dts/logicpd-torpedo-som.dtsi
 deleted file mode 100644
-index 8b669e2eaf..0000000000
---- a/arch/arm/dts/am3517-som.dtsi
+index 3a5228562b..0000000000
+--- a/arch/arm/dts/logicpd-torpedo-som.dtsi
 +++ /dev/null
-@@ -1,234 +0,0 @@
+@@ -1,203 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0-only
--/*
-- * Copyright (C) 2016 Derald D. Woods <woods.technical@gmail.com>
-- *
-- * Based on am3517-evm.dts
-- */
+-
+-#include <dt-bindings/input/input.h>
 -
 -/ {
+-	chosen {
+-		stdout-path = &uart1;
+-	};
+-
 -	cpus {
 -		cpu@0 {
--			cpu0-supply = <&vdd_core_reg>;
+-			cpu0-supply = <&vcc>;
 -		};
 -	};
 -
--	wl12xx_buffer: wl12xx_buf {
--		compatible = "regulator-fixed";
--		regulator-name = "wl1271_buf";
--		regulator-min-microvolt = <1800000>;
--		regulator-max-microvolt = <1800000>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&wl12xx_buffer_pins>;
--		gpio = <&gpio5 1 GPIO_ACTIVE_LOW>; /* gpio 129 */
--		regulator-always-on;
--		vin-supply = <&vdd_1v8_reg>;
+-	memory@80000000 {
+-		device_type = "memory";
+-		reg = <0x80000000 0>;
 -	};
 -
--	wl12xx_vmmc2: wl12xx_vmmc2 {
--		compatible = "regulator-fixed";
--		regulator-name = "vwl1271";
--		regulator-min-microvolt = <1800000>;
--		regulator-max-microvolt = <1800000>;
--		pinctrl-names = "default";
--		pinctrl-0 = <&wl12xx_wkup_pins>;
--		gpio = <&gpio1 3 GPIO_ACTIVE_HIGH >; /* gpio 3 */
--		startup-delay-us = <70000>;
--		enable-active-high;
--		regulator-always-on;
--		vin-supply = <&wl12xx_buffer>;
+-	leds {
+-		compatible = "gpio-leds";
+-		user0 {
+-			label = "user0";
+-			gpios = <&twl_gpio 18 GPIO_ACTIVE_LOW>;	/* LEDA */
+-			linux,default-trigger = "none";
+-		};
 -	};
+-
+-	/* fixed 26MHz oscillator */
+-	hfclk_26m: oscillator {
+-		#clock-cells = <0>;
+-		compatible = "fixed-clock";
+-		clock-frequency = <26000000>;
+-	};
+-};
+-
+-/* The Torpedo doesn't route the USB host pins */
+-&usbhshost {
+-	status = "disabled";
 -};
 -
 -&gpmc {
@@ -500,10 +740,14 @@ index 8b669e2eaf..0000000000
 -
 -	nand@0,0 {
 -		compatible = "ti,omap2-nand";
--		linux,mtd-name = "micron,mt29f4g16abchch";
 -		reg = <0 0 4>; /* CS0, offset 0, IO size 4 */
+-		interrupt-parent = <&gpmc>;
+-		interrupts = <0 IRQ_TYPE_NONE>, /* fifoevent */
+-			     <1 IRQ_TYPE_NONE>;	/* termcount */
+-		linux,mtd-name = "micron,mt29f4g16abbda3w";
 -		nand-bus-width = <16>;
 -		ti,nand-ecc-opt = "bch8";
+-		rb-gpios = <&gpmc 0 GPIO_ACTIVE_HIGH>; /* gpmc_wait0 */
 -		gpmc,sync-clk-ps = <0>;
 -		gpmc,cs-on-ns = <0>;
 -		gpmc,cs-rd-off-ns = <44>;
@@ -525,429 +769,168 @@ index 8b669e2eaf..0000000000
 -};
 -
 -&i2c1 {
--	clock-frequency = <400000>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&i2c1_pins>;
+-	clock-frequency = <2600000>;
 -
--	s35390a: s35390a@30 {
--		compatible = "sii,s35390a";
--		reg = <0x30>;
--
--		pinctrl-names = "default";
--		pinctrl-0 = <&rtc_pins>;
--		interrupts-extended = <&gpio2 23 IRQ_TYPE_EDGE_FALLING>; /* gpio_55 */
--	};
--
--	tps: tps65023@48 {
--		compatible = "ti,tps65023";
+-	twl: twl@48 {
 -		reg = <0x48>;
+-		interrupts = <7>; /* SYS_NIRQ cascaded to intc */
+-		interrupt-parent = <&intc>;
+-		clocks = <&hfclk_26m>;
+-		clock-names = "fck";
 -
--		regulators {
--			vdd_core_reg: VDCDC1 {
--				regulator-name = "vdd_core";
--				regulator-always-on;
--				regulator-min-microvolt = <1200000>;
--				regulator-max-microvolt = <1200000>;
--			};
--
--			vdd_io_reg: VDCDC2 {
--				regulator-name = "vdd_io";
--				regulator-always-on;
--				regulator-min-microvolt = <3300000>;
--				regulator-max-microvolt = <3300000>;
--			};
--
--			vdd_1v8_reg: VDCDC3 {
--				regulator-name = "vdd_1v8";
--				regulator-always-on;
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <1800000>;
--			};
--
--			vdd_usb18_reg: LDO1 {
--				regulator-name = "vdd_usb18";
--				regulator-always-on;
--				regulator-min-microvolt = <1800000>;
--				regulator-max-microvolt = <1800000>;
--			};
--
--			vdd_usb33_reg: LDO2 {
--				regulator-name = "vdd_usb33";
--				regulator-always-on;
--				regulator-min-microvolt = <3300000>;
--				regulator-max-microvolt = <3300000>;
+-		twl_audio: audio {
+-			compatible = "ti,twl4030-audio";
+-			codec {
 -			};
 -		};
 -	};
--
--	touchscreen: tsc2004@4b {
--		compatible = "ti,tsc2004";
--		reg = <0x4b>;
--
--		vio-supply = <&vdd_io_reg>;
--
--		pinctrl-names = "default";
--		pinctrl-0 = <&tsc2004_pins>;
--		interrupts-extended = <&gpio3 1 IRQ_TYPE_EDGE_RISING>; /* gpio_65 */
--
--		touchscreen-fuzz-x = <4>;
--		touchscreen-fuzz-y = <7>;
--		touchscreen-fuzz-pressure = <2>;
--		touchscreen-size-x = <480>;
--		touchscreen-size-y = <272>;
--		touchscreen-max-pressure = <2048>;
--
--		ti,x-plate-ohms = <280>;
--		ti,esd-recovery-timeout-ms = <8000>;
--	};
 -};
 -
--&mmc2 {
--	interrupts-extended = <&intc 86 /* &omap3_pmx_core 0x12c */>;
--
--	status = "okay";
+-&i2c2 {
 -	pinctrl-names = "default";
--	pinctrl-0 = <&mmc2_pins>;
--	vmmc-supply = <&wl12xx_vmmc2>;
--	non-removable;
--	bus-width = <4>;
--	cap-power-off-card;
--	#address-cells = <1>;
--	#size-cells = <0>;
--	wlcore: wlcore@2 {
--		compatible = "ti,wl1271";
--		reg = <2>;
--		interrupt-parent = <&gpio6>;
--		interrupts = <10 IRQ_TYPE_EDGE_RISING>; /* gpio_170 */
--		ref-clock-frequency = <26000000>;
--		tcxo-clock-frequency = <26000000>;
--	};
+-	pinctrl-0 = <&i2c2_pins>;
+-	clock-frequency = <400000>;
 -};
 -
--&uart2 {
+-&i2c3 {
 -	pinctrl-names = "default";
--	pinctrl-0 = <&uart2_pins>;
--
--	bluetooth {
--		compatible = "ti,wl1271-st";
--		enable-gpios = <&gpio2 24 GPIO_ACTIVE_HIGH>; /* gpio 56 */
--		max-speed = <3000000>;
+-	pinctrl-0 = <&i2c3_pins>;
+-	clock-frequency = <400000>;
+-	at24@50 {
+-		compatible = "atmel,24c64";
+-		readonly;
+-		reg = <0x50>;
 -	};
 -};
 -
 -&omap3_pmx_core {
--
--	wl12xx_buffer_pins: pinmux_wl12xx_buffer_pins {
+-	mcbsp2_pins: pinmux_mcbsp2_pins {
 -		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x2156, PIN_OUTPUT | MUX_MODE4)  /* mmc1_dat7.gpio_129 */
+-			OMAP3_CORE1_IOPAD(0x213c, PIN_INPUT | MUX_MODE0)        /* mcbsp2_fsx */
+-			OMAP3_CORE1_IOPAD(0x213e, PIN_INPUT | MUX_MODE0)        /* mcbsp2_clkx */
+-			OMAP3_CORE1_IOPAD(0x2140, PIN_INPUT | MUX_MODE0)        /* mcbsp2_dr */
+-			OMAP3_CORE1_IOPAD(0x2142, PIN_OUTPUT | MUX_MODE0)       /* mcbsp2_dx */
 -		>;
 -	};
--
--	mmc2_pins: pinmux_mmc2_pins {
--		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x2158, PIN_INPUT_PULLUP | MUX_MODE0)  /* mmc2_clk.mmc2_clk */
--			OMAP3_CORE1_IOPAD(0x215a, PIN_INPUT_PULLUP | MUX_MODE0)  /* mmc2_cmd.mmc2_cmd */
--			OMAP3_CORE1_IOPAD(0x215c, PIN_INPUT_PULLUP | MUX_MODE0)  /* mmc2_dat0.mmc2_dat0 */
--			OMAP3_CORE1_IOPAD(0x215e, PIN_INPUT_PULLUP | MUX_MODE0)  /* mmc2_dat1.mmc2_dat1 */
--			OMAP3_CORE1_IOPAD(0x2160, PIN_INPUT_PULLUP | MUX_MODE0)  /* mmc2_dat2.mmc2_dat2 */
--			OMAP3_CORE1_IOPAD(0x2162, PIN_INPUT_PULLUP | MUX_MODE0)  /* mmc2_dat3.mmc2_dat3 */
--			OMAP3_CORE1_IOPAD(0x2164, PIN_OUTPUT | MUX_MODE1) /* mmc2_dat4.mmc2_dir_dat0 */
--			OMAP3_CORE1_IOPAD(0x2166, PIN_OUTPUT | MUX_MODE1) /* mmc2_dat5.mmc2_dir_dat1 */
--			OMAP3_CORE1_IOPAD(0x2168, PIN_OUTPUT | MUX_MODE1) /* mmc2_dat6.mmc2_dir_cmd */
--			OMAP3_CORE1_IOPAD(0x216a, PIN_INPUT | MUX_MODE1) /* mmc2_dat7.mmc2_clkin */
--			OMAP3_CORE1_IOPAD(0x21c6, PIN_INPUT_PULLUP | MUX_MODE4)	/* hdq_sio.gpio_170 */
--		>;
--	};
--
--	rtc_pins: pinmux_rtc_pins {
--		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x20b6, PIN_INPUT_PULLUP | MUX_MODE4) /* gpmc_ncs4.gpio_55 */
--		>;
--	};
--
--	tsc2004_pins: pinmux_tsc2004_pins {
--		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x20d2, PIN_INPUT | MUX_MODE4) /* gpmc_wait3.gpio_65 */
--		>;
--	};
--
 -	uart2_pins: pinmux_uart2_pins {
 -		pinctrl-single,pins = <
--			OMAP3_CORE1_IOPAD(0x2174, PIN_INPUT_PULLUP | MUX_MODE0)		/* uart2_cts */
--			OMAP3_CORE1_IOPAD(0x2176, PIN_OUTPUT_PULLUP | MUX_MODE0)	/* uart2_rts */
--			OMAP3_CORE1_IOPAD(0x2178, PIN_OUTPUT | MUX_MODE0)		/* uart2_tx */
--			OMAP3_CORE1_IOPAD(0x217a, PIN_INPUT | MUX_MODE0)		/* uart2_rx */
--			OMAP3_CORE1_IOPAD(0x20b8, PIN_INPUT | MUX_MODE0)		/* gpio_56 */
+-			OMAP3_CORE1_IOPAD(0x2174, PIN_INPUT | MUX_MODE0)	/* uart2_cts.uart2_cts */
+-			OMAP3_CORE1_IOPAD(0x2176, PIN_OUTPUT | MUX_MODE0)	/* uart2_rts .uart2_rts*/
+-			OMAP3_CORE1_IOPAD(0x2178, PIN_OUTPUT | MUX_MODE0)	/* uart2_tx.uart2_tx */
+-			OMAP3_CORE1_IOPAD(0x217a, PIN_INPUT | MUX_MODE0)	/* uart2_rx.uart2_rx */
+-			OMAP3_CORE1_IOPAD(0x2198, PIN_OUTPUT | MUX_MODE4)	/* GPIO_162,BT_EN */
 -		>;
 -	};
--};
--
--&omap3_pmx_wkup {
--
--	wl12xx_wkup_pins: pinmux_wl12xx_wkup_pins {
+-	mcspi1_pins: pinmux_mcspi1_pins {
 -		pinctrl-single,pins = <
--			OMAP3_WKUP_IOPAD(0x2a0c, PIN_OUTPUT | MUX_MODE4)	/* sys_boot1.gpio_3 */
+-			OMAP3_CORE1_IOPAD(0x21c8, PIN_INPUT | MUX_MODE0)        /* mcspi1_clk.mcspi1_clk */
+-			OMAP3_CORE1_IOPAD(0x21ca, PIN_OUTPUT | MUX_MODE0)       /* mcspi1_simo.mcspi1_simo */
+-			OMAP3_CORE1_IOPAD(0x21cc, PIN_INPUT_PULLUP | MUX_MODE0) /* mcspi1_somi.mcspi1_somi */
+-			OMAP3_CORE1_IOPAD(0x21ce, PIN_OUTPUT | MUX_MODE0)       /* mcspi1_cs0.mcspi1_cs0 */
+-		>;
+-	};
+-	hsusb_otg_pins: pinmux_hsusb_otg_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x21a2, PIN_INPUT | MUX_MODE0)	/* hsusb0_clk.hsusb0_clk */
+-			OMAP3_CORE1_IOPAD(0x21a4, PIN_OUTPUT | MUX_MODE0)	/* hsusb0_stp.hsusb0_stp */
+-			OMAP3_CORE1_IOPAD(0x21a6, PIN_INPUT | MUX_MODE0)	/* hsusb0_dir.hsusb0_dir */
+-			OMAP3_CORE1_IOPAD(0x21a8, PIN_INPUT | MUX_MODE0)	/* hsusb0_nxt.hsusb0_nxt */
+-
+-			OMAP3_CORE1_IOPAD(0x21aa, PIN_INPUT | MUX_MODE0)	/* hsusb0_data0.hsusb0_data0 */
+-			OMAP3_CORE1_IOPAD(0x21ac, PIN_INPUT | MUX_MODE0)	/* hsusb0_data1.hsusb0_data1 */
+-			OMAP3_CORE1_IOPAD(0x21ae, PIN_INPUT | MUX_MODE0)	/* hsusb0_data2.hsusb0_data2 */
+-			OMAP3_CORE1_IOPAD(0x21b0, PIN_INPUT | MUX_MODE0)	/* hsusb0_data3.hsusb0_data3 */
+-			OMAP3_CORE1_IOPAD(0x21b2, PIN_INPUT | MUX_MODE0)	/* hsusb0_data4.hsusb0_data4 */
+-			OMAP3_CORE1_IOPAD(0x21b4, PIN_INPUT | MUX_MODE0)	/* hsusb0_data5.hsusb0_data5 */
+-			OMAP3_CORE1_IOPAD(0x21b6, PIN_INPUT | MUX_MODE0)	/* hsusb0_data6.hsusb0_data6 */
+-			OMAP3_CORE1_IOPAD(0x21b8, PIN_INPUT | MUX_MODE0)	/* hsusb0_data7.hsusb0_data7 */
+-		>;
+-	};
+-	i2c1_pins: pinmux_i2c1_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x21ba, PIN_INPUT | MUX_MODE0)        /* i2c1_scl.i2c1_scl */
+-			OMAP3_CORE1_IOPAD(0x21bc, PIN_INPUT | MUX_MODE0)        /* i2c1_sda.i2c1_sda */
+-		>;
+-	};
+-	i2c2_pins: pinmux_i2c2_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x21be, PIN_INPUT | MUX_MODE0)	/* i2c2_scl */
+-			OMAP3_CORE1_IOPAD(0x21c0, PIN_INPUT | MUX_MODE0)	/* i2c2_sda */
+-		>;
+-	};
+-	i2c3_pins: pinmux_i2c3_pins {
+-		pinctrl-single,pins = <
+-			OMAP3_CORE1_IOPAD(0x21c2, PIN_INPUT | MUX_MODE0)	/* i2c3_scl */
+-			OMAP3_CORE1_IOPAD(0x21c4, PIN_INPUT | MUX_MODE0)	/* i2c3_sda */
 -		>;
 -	};
 -};
-diff --git a/arch/arm/dts/am3517.dtsi b/arch/arm/dts/am3517.dtsi
-deleted file mode 100644
-index 2633fae14b..0000000000
---- a/arch/arm/dts/am3517.dtsi
-+++ /dev/null
-@@ -1,109 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-only
--/*
-- * Device Tree Source for am3517 SoC
-- *
-- * Copyright (C) 2013 Texas Instruments Incorporated - https://www.ti.com/
-- */
 -
--#include "omap3.dtsi"
+-&uart2 {
+-	interrupts-extended = <&intc 73 &omap3_pmx_core OMAP3_UART2_RX>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&uart2_pins>;
+-};
 -
--/ {
--	aliases {
--		serial3 = &uart4;
--		can = &hecc;
--	};
+-&mcspi1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcspi1_pins>;
+-};
 -
--	ocp@68000000 {
--		am35x_otg_hs: am35x_otg_hs@5c040000 {
--			compatible = "ti,omap3-musb";
--			ti,hwmods = "am35x_otg_hs";
--			status = "disabled";
--			reg = <0x5c040000 0x1000>;
--			interrupts = <71>;
--			interrupt-names = "mc";
--		};
+-#include "twl4030.dtsi"
+-#include "twl4030_omap3.dtsi"
 -
--		davinci_emac: ethernet@5c000000 {
--			compatible = "ti,am3517-emac";
--			ti,hwmods = "davinci_emac";
--			status = "disabled";
--			reg = <0x5c000000 0x30000>;
--			interrupts = <67 68 69 70>;
--			syscon = <&scm_conf>;
--			ti,davinci-ctrl-reg-offset = <0x10000>;
--			ti,davinci-ctrl-mod-reg-offset = <0>;
--			ti,davinci-ctrl-ram-offset = <0x20000>;
--			ti,davinci-ctrl-ram-size = <0x2000>;
--			ti,davinci-rmii-en = /bits/ 8 <1>;
--			local-mac-address = [ 00 00 00 00 00 00 ];
--			clocks = <&emac_ick>;
--			clock-names = "ick";
--		};
--
--		davinci_mdio: mdio@5c030000 {
--			compatible = "ti,davinci_mdio";
--			ti,hwmods = "davinci_mdio";
--			status = "disabled";
--			reg = <0x5c030000 0x1000>;
--			bus_freq = <1000000>;
--			#address-cells = <1>;
--			#size-cells = <0>;
--			clocks = <&emac_fck>;
--			clock-names = "fck";
--		};
--
--		uart4: serial@4809e000 {
--			compatible = "ti,omap3-uart";
--			ti,hwmods = "uart4";
--			status = "disabled";
--			reg = <0x4809e000 0x400>;
--			interrupts = <84>;
--			dmas = <&sdma 55 &sdma 54>;
--			dma-names = "tx", "rx";
--			clock-frequency = <48000000>;
--		};
--
--		omap3_pmx_core2: pinmux@480025d8 {
--			compatible = "ti,omap3-padconf", "pinctrl-single";
--			reg = <0x480025d8 0x24>;
--			#address-cells = <1>;
--			#size-cells = <0>;
--			#pinctrl-cells = <1>;
--			#interrupt-cells = <1>;
--			interrupt-controller;
--			pinctrl-single,register-width = <16>;
--			pinctrl-single,function-mask = <0xff1f>;
--		};
--
--		hecc: can@5c050000 {
--			compatible = "ti,am3517-hecc";
--			status = "disabled";
--			reg = <0x5c050000 0x80>,
--			      <0x5c053000 0x180>,
--			      <0x5c052000 0x200>;
--			reg-names = "hecc", "hecc-ram", "mbx";
--			interrupts = <24>;
--			clocks = <&hecc_ck>;
--		};
+-&twl {
+-	twl_power: power {
+-		compatible = "ti,twl4030-power-idle-osc-off", "ti,twl4030-power-idle";
+-		ti,use_poweroff;
 -	};
 -};
 -
--/* Table Table 5-79 of the TRM shows 480ab000 is reserved */
--&usb_otg_hs {
+-&twl_gpio {
+-	ti,use-leds;
+-};
+-
+-&twl_keypad {
 -	status = "disabled";
 -};
--
--&iva {
--	status = "disabled";
--};
--
--&mailbox {
--	status = "disabled";
--};
--
--&mmu_isp {
--	status = "disabled";
--};
--
--/include/ "am35xx-clocks.dtsi"
--/include/ "omap36xx-am35xx-omap3430es2plus-clocks.dtsi"
-diff --git a/arch/arm/dts/am35xx-clocks.dtsi b/arch/arm/dts/am35xx-clocks.dtsi
-deleted file mode 100644
-index 220d0a5279..0000000000
---- a/arch/arm/dts/am35xx-clocks.dtsi
-+++ /dev/null
-@@ -1,125 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0-only
--/*
-- * Device Tree Source for OMAP3 clock data
-- *
-- * Copyright (C) 2013 Texas Instruments, Inc.
-- */
--&scm_clocks {
--	emac_ick: emac_ick@32c {
--		#clock-cells = <0>;
--		compatible = "ti,am35xx-gate-clock";
--		clocks = <&ipss_ick>;
--		reg = <0x032c>;
--		ti,bit-shift = <1>;
--	};
--
--	emac_fck: emac_fck@32c {
--		#clock-cells = <0>;
--		compatible = "ti,gate-clock";
--		clocks = <&rmii_ck>;
--		reg = <0x032c>;
--		ti,bit-shift = <9>;
--	};
--
--	vpfe_ick: vpfe_ick@32c {
--		#clock-cells = <0>;
--		compatible = "ti,am35xx-gate-clock";
--		clocks = <&ipss_ick>;
--		reg = <0x032c>;
--		ti,bit-shift = <2>;
--	};
--
--	vpfe_fck: vpfe_fck@32c {
--		#clock-cells = <0>;
--		compatible = "ti,gate-clock";
--		clocks = <&pclk_ck>;
--		reg = <0x032c>;
--		ti,bit-shift = <10>;
--	};
--
--	hsotgusb_ick_am35xx: hsotgusb_ick_am35xx@32c {
--		#clock-cells = <0>;
--		compatible = "ti,am35xx-gate-clock";
--		clocks = <&ipss_ick>;
--		reg = <0x032c>;
--		ti,bit-shift = <0>;
--	};
--
--	hsotgusb_fck_am35xx: hsotgusb_fck_am35xx@32c {
--		#clock-cells = <0>;
--		compatible = "ti,gate-clock";
--		clocks = <&sys_ck>;
--		reg = <0x032c>;
--		ti,bit-shift = <8>;
--	};
--
--	hecc_ck: hecc_ck@32c {
--		#clock-cells = <0>;
--		compatible = "ti,am35xx-gate-clock";
--		clocks = <&sys_ck>;
--		reg = <0x032c>;
--		ti,bit-shift = <3>;
--	};
--};
--&cm_clocks {
--	ipss_ick: ipss_ick@a10 {
--		#clock-cells = <0>;
--		compatible = "ti,am35xx-interface-clock";
--		clocks = <&core_l3_ick>;
--		reg = <0x0a10>;
--		ti,bit-shift = <4>;
--	};
--
--	rmii_ck: rmii_ck {
--		#clock-cells = <0>;
--		compatible = "fixed-clock";
--		clock-frequency = <50000000>;
--	};
--
--	pclk_ck: pclk_ck {
--		#clock-cells = <0>;
--		compatible = "fixed-clock";
--		clock-frequency = <27000000>;
--	};
--
--	uart4_ick_am35xx: uart4_ick_am35xx@a10 {
--		#clock-cells = <0>;
--		compatible = "ti,omap3-interface-clock";
--		clocks = <&core_l4_ick>;
--		reg = <0x0a10>;
--		ti,bit-shift = <23>;
--	};
--
--	uart4_fck_am35xx: uart4_fck_am35xx@a00 {
--		#clock-cells = <0>;
--		compatible = "ti,wait-gate-clock";
--		clocks = <&core_48m_fck>;
--		reg = <0x0a00>;
--		ti,bit-shift = <23>;
--	};
--};
--
--&cm_clockdomains {
--	core_l3_clkdm: core_l3_clkdm {
--		compatible = "ti,clockdomain";
--		clocks = <&sdrc_ick>, <&ipss_ick>, <&emac_ick>, <&vpfe_ick>,
--			 <&hsotgusb_ick_am35xx>, <&hsotgusb_fck_am35xx>,
--			 <&hecc_ck>;
--	};
--
--	core_l4_clkdm: core_l4_clkdm {
--		compatible = "ti,clockdomain";
--		clocks = <&cpefuse_fck>, <&ts_fck>, <&usbtll_fck>,
--			 <&usbtll_ick>, <&mmchs3_ick>, <&mmchs3_fck>,
--			 <&mmchs2_fck>, <&mmchs1_fck>, <&i2c3_fck>, <&i2c2_fck>,
--			 <&i2c1_fck>, <&mcspi4_fck>, <&mcspi3_fck>,
--			 <&mcspi2_fck>, <&mcspi1_fck>, <&uart2_fck>,
--			 <&uart1_fck>, <&hdq_fck>, <&mmchs2_ick>, <&mmchs1_ick>,
--			 <&hdq_ick>, <&mcspi4_ick>, <&mcspi3_ick>,
--			 <&mcspi2_ick>, <&mcspi1_ick>, <&i2c3_ick>, <&i2c2_ick>,
--			 <&i2c1_ick>, <&uart2_ick>, <&uart1_ick>, <&gpt11_ick>,
--			 <&gpt10_ick>, <&mcbsp5_ick>, <&mcbsp1_ick>,
--			 <&omapctrl_ick>, <&aes2_ick>, <&sha12_ick>,
--			 <&uart4_ick_am35xx>, <&uart4_fck_am35xx>;
--	};
--};
-diff --git a/configs/am3517_evm_defconfig b/configs/am3517_evm_defconfig
-index 66bb4f6371..70498ca7fb 100644
---- a/configs/am3517_evm_defconfig
-+++ b/configs/am3517_evm_defconfig
-@@ -8,7 +8,7 @@ CONFIG_TI_COMMON_CMD_OPTIONS=y
+diff --git a/configs/omap35_logic_defconfig b/configs/omap35_logic_defconfig
+index f9b8ac5c07..23b2e50338 100644
+--- a/configs/omap35_logic_defconfig
++++ b/configs/omap35_logic_defconfig
+@@ -9,7 +9,7 @@ CONFIG_TI_COMMON_CMD_OPTIONS=y
  CONFIG_NR_DRAM_BANKS=2
  CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
  CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
--CONFIG_DEFAULT_DEVICE_TREE="am3517-evm"
-+CONFIG_DEFAULT_DEVICE_TREE="ti/omap/am3517-evm"
+-CONFIG_DEFAULT_DEVICE_TREE="logicpd-torpedo-35xx-devkit"
++CONFIG_DEFAULT_DEVICE_TREE="ti/omap/logicpd-torpedo-35xx-devkit"
  CONFIG_SPL_TEXT_BASE=0x40200000
- CONFIG_TARGET_AM3517_EVM=y
- CONFIG_EMIF4=y
-@@ -58,6 +58,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:512k(MLO),1920k(u-boot),256k(u-bo
+ CONFIG_TARGET_OMAP3_LOGIC=y
+ # CONFIG_SPL_OMAP3_ID_NAND is not set
+@@ -59,6 +59,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:512k(MLO),1792k(u-boot),128k(spl-
+ CONFIG_CMD_UBI=y
+ CONFIG_OF_CONTROL=y
+ CONFIG_SPL_OF_CONTROL=y
++CONFIG_OF_UPSTREAM=y
+ CONFIG_ENV_OVERWRITE=y
+ # CONFIG_ENV_IS_IN_FAT is not set
+ CONFIG_ENV_IS_IN_NAND=y
+diff --git a/configs/omap3_logic_defconfig b/configs/omap3_logic_defconfig
+index 00c4d847d2..d081d4e0fb 100644
+--- a/configs/omap3_logic_defconfig
++++ b/configs/omap3_logic_defconfig
+@@ -9,7 +9,7 @@ CONFIG_TI_COMMON_CMD_OPTIONS=y
+ CONFIG_NR_DRAM_BANKS=2
+ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x4020ff00
+-CONFIG_DEFAULT_DEVICE_TREE="logicpd-torpedo-37xx-devkit"
++CONFIG_DEFAULT_DEVICE_TREE="ti/omap/logicpd-torpedo-37xx-devkit"
+ CONFIG_SPL_TEXT_BASE=0x40200000
+ CONFIG_TARGET_OMAP3_LOGIC=y
+ # CONFIG_SPL_OMAP3_ID_NAND is not set
+@@ -58,6 +58,7 @@ CONFIG_MTDPARTS_DEFAULT="mtdparts=omap2-nand.0:512k(MLO),1792k(u-boot),128k(spl-
  CONFIG_CMD_UBI=y
  CONFIG_OF_CONTROL=y
  CONFIG_SPL_OF_CONTROL=y
