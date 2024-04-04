@@ -4,70 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC38CD1284
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 16:37:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA823CD1284
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 16:43:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C364B883D3;
-	Thu,  4 Apr 2024 18:37:24 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 16709883DB;
+	Thu,  4 Apr 2024 18:43:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="w69yozjC";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="wgKGGw9V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAC75883D6; Thu,  4 Apr 2024 18:37:23 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DCB6A883D6; Thu,  4 Apr 2024 18:43:18 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8EF488259
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 18:37:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCA45881D0
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 18:43:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=bb@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 434GbFUb116221;
- Thu, 4 Apr 2024 11:37:15 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1712248635;
- bh=g/BYYlgzEl/MrJrYNWb6uRvkb57dqaeuWur0+zEAvfQ=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=w69yozjC6e/LDkAB2GwwLRm04B6P8F4XjVS54e6FM2WOBKpBuTmXDrtCrxL6P1D7U
- fdYhNuMycUBVljr8HfPyqCj+x/bhPmv02N9o9aT4oCa/6K1/W3E+R6JtWoDETu8PEL
- GTg1ZVoiJ07vPCFVORSkY87hpnSyk290lOI4JCws=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 434GbF6Z088143
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Apr 2024 11:37:15 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Apr 2024 11:37:14 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Apr 2024 11:37:14 -0500
-Received: from localhost (bb.dhcp.ti.com [128.247.81.12])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 434GbE6c102873;
- Thu, 4 Apr 2024 11:37:14 -0500
-Date: Thu, 4 Apr 2024 11:37:14 -0500
-From: Bryan Brattlof <bb@ti.com>
-To: Jayesh Choudhary <j-choudhary@ti.com>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <jh80.chung@samsung.com>,
- <lukma@denx.de>, <seanga2@gmail.com>, <vaishnav.a@ti.com>,
- <n-francis@ti.com>, <u-kumar1@ti.com>, <sumit.garg@linaro.org>,
- <vigneshr@ti.com>, <nm@ti.com>, <afd@ti.com>, <rogerq@kernel.org>,
- <r-gunasekaran@ti.com>
-Subject: Re: [RFC PATCH 08/15] arm: mach-k3: j722s: introduce clock and
- device files for wkup spl
-Message-ID: <20240404163714.p2wonpenkiz44cnd@bryanbrattlof.com>
-X-PGP-Fingerprint: D3D1 77E4 0A38 DF4D 1853 FEEF 41B9 0D5D 71D5 6CE0
-References: <20240404090039.87458-1-j-choudhary@ti.com>
- <20240404090039.87458-9-j-choudhary@ti.com>
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <20240404090039.87458-9-j-choudhary@ti.com>
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1712248996;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=X4Znux1Elr/o6SEmLLJbm3OoUQfyh7ZZwzgS6Pz/e4o=;
+ b=wgKGGw9VNMw2up63r70m3xOh2DYUXi7Fwdle4E2usV+IVeY8ubfDnGNNGSBwFrsGwlESxW
+ 6qWQNRVXQIcJzQ1sq/mBNkC8lvedotapoMypXXK4/veJsJ5D8AC2k5EULhSsTNL2TGbnXW
+ DdwQ7K7UXGU9CiLfFZZsKVLmyO2bXBK6a6Onb/Is0We7uKm+46P0QYet3WrLy6PZ9nnWxL
+ a4vRNnMecjSfpcoFUu0tAL6Y0XW+FyxBW6U0hmCHVdnCUttLKF1Ur05B35es9pXrtT5edZ
+ MzxrwVMowQm8nZfu4J2GtcyP7LF1Z8achyairUZStMRCSNTU3vGJi+D5yNAcPw==
+Date: Thu, 04 Apr 2024 18:43:15 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: =?UTF-8?Q?Ahelenia_Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v3] tools: copyfile: use 64k instead of 512 buffer
+In-Reply-To: <af5db6b1165d5f800f21463592779f8e@manjaro.org>
+References: <2894747cef36c9533b2915b803ce754f@manjaro.org>
+ <u2jkzgrq4tbtvvazqzamuixjiwhdrwvnla7sdbfm6ia2si52i7@tarta.nabijaczleweli.xyz>
+ <af5db6b1165d5f800f21463592779f8e@manjaro.org>
+Message-ID: <a59e4fbaef7338ab750eeab5446e9d8c@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,27 +70,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On April  4, 2024 thus sayeth Jayesh Choudhary:
-> Include the clock and lpsc tree files needed for the wkup spl to
-> initialize the proper PLLs and power domains to boot the SoC.
-> 
-> Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
-> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
-> ---
->  arch/arm/mach-k3/r5/Makefile           |   1 +
->  arch/arm/mach-k3/r5/j722s/Makefile     |   6 +
->  arch/arm/mach-k3/r5/j722s/clk-data.c   | 312 +++++++++++++++++++++++++
->  arch/arm/mach-k3/r5/j722s/dev-data.c   |  69 ++++++
->  drivers/clk/ti/clk-k3.c                |   6 +
->  drivers/power/domain/ti-power-domain.c |   6 +
->  include/k3-clk.h                       |   1 +
->  include/k3-dev.h                       |   1 +
->  8 files changed, 402 insertions(+)
->  create mode 100644 arch/arm/mach-k3/r5/j722s/Makefile
->  create mode 100644 arch/arm/mach-k3/r5/j722s/clk-data.c
->  create mode 100644 arch/arm/mach-k3/r5/j722s/dev-data.c
-> 
+Hello Ahelenia,
 
-Reviewed-by: Bryan Brattlof <bb@ti.com>
+Just checking, have you forgotten about this patch?
 
-~Bryan
+
+On 2024-03-21 21:50, Dragan Simic wrote:
+> On 2024-03-21 21:37, Ahelenia Ziemiańska wrote:
+>> This is a trivial but significant optimization:
+>> mkimage took >200ms (and 49489 writes (of which 49456 512)),
+>> now it takes  110ms (and   419 writes (of which   386 64k)).
+>> 
+>> sendfile is much more appropriate for this and is done in one syscall,
+>> but doesn't bring any significant speedups over 64k r/w
+>> at the 13M size ranges, so there's no need to introduce
+>> 	#if __linux__
+>> 	while((size = sendfile(fd_dst, fd_src, NULL, 128 * 1024 * 1024)) > 0)
+>> 		;
+>> 	if(size != -1) {
+>> 		ret = 0;
+>> 		goto out;
+>> 	}
+>> 	#endif
+>> 
+>> Also extract the buffer size to a constant.
+>> 
+>> Signed-off-by: Ahelenia Ziemiańska <nabijaczleweli@nabijaczleweli.xyz>
+>> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+> 
+> Please, remove my Reviewed-by tag from this version of the patch,
+> because it no longer applies.
+> 
+>> ---
+>> On Thu, Mar 21, 2024 at 08:49:52PM +0100, Dragan Simic wrote:
+>>> On 2024-03-21 19:29, Ahelenia Ziemiańska wrote:
+>>> > This is a trivial but significant optimisation:
+>>> s/optimisation/optimization/
+>> This seems to run counter to precedent of not doing americans'
+>> imperialism for them for free
+>> (I see -ise/-ize in free variation even in my 100-deep checkout).
+> 
+> Well, that's politics, which I have no interest about.
+> 
+>>> > +#define copyfile_bufsize (64 * 1024)
+>>> This is not the right place for such a preprocessor directive.
+>>> Instead, it should be placed at the start of the file.
+>>> 
+>>> Also, it should use all uppercase letters.
+>> FTR, neither of these points seem to be universal;
+>> I modelled this after tools/mtk_image.c (also cf. 
+>> scripts/kconfig/expr.c),
+>> but there are at least 25 other function-local macros
+>> (as in git grep -B1 '^#define' | grep -c -A1 -e '-{' returns 27).
+> 
+> AFAICT, scripts/kconfig/expr.c could use come cleanups.
+> 
+>> Also kinda weird to explicitly request a macro
+>> only to review it back to a constant, but whatever.
+> 
+> Well, it isn't weird.  See, the instances of a preprocessor #define
+> directive are replaced with its definition before the source code
+> reaches the compiler, making it, in this case, a bit easier for the
+> compiler to do its job.
+> 
+> The way you wrote it below, the compiler will almost surely optimize
+> out the constant variable and replace it with the literal number in
+> the generated object code, but that puts unnecessary burden on the
+> compiler, which can be avoided by feeding it with the literal number,
+> using a preprocessor directive.
+> 
+>>  tools/fit_common.c | 5 +++--
+>>  1 file changed, 3 insertions(+), 2 deletions(-)
+>> 
+>> diff --git a/tools/fit_common.c b/tools/fit_common.c
+>> index 2d417d47..37066203 100644
+>> --- a/tools/fit_common.c
+>> +++ b/tools/fit_common.c
+>> @@ -129,6 +129,7 @@ int copyfile(const char *src, const char *dst)
+>>  {
+>>  	int fd_src = -1, fd_dst = -1;
+>>  	void *buf = NULL;
+>> +	const size_t bufsize = 64 * 1024;
+>>  	ssize_t size;
+>>  	size_t count;
+>>  	int ret = -1;
+>> @@ -145,14 +146,14 @@ int copyfile(const char *src, const char *dst)
+>>  		goto out;
+>>  	}
+>> 
+>> -	buf = calloc(1, 512);
+>> +	buf = calloc(1, bufsize);
+>>  	if (!buf) {
+>>  		printf("Can't allocate buffer to copy file\n");
+>>  		goto out;
+>>  	}
+>> 
+>>  	while (1) {
+>> -		size = read(fd_src, buf, 512);
+>> +		size = read(fd_src, buf, bufsize);
+>>  		if (size < 0) {
+>>  			printf("Can't read file %s\n", src);
+>>  			goto out;
