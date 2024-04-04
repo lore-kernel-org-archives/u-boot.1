@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B18CCD1292
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 09:02:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEFA3CD1292
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 09:02:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87AC688418;
-	Thu,  4 Apr 2024 11:01:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 250668844B;
+	Thu,  4 Apr 2024 11:01:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YC9WT/7p";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Pqc+37Im";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7262488417; Thu,  4 Apr 2024 11:01:10 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id CAB8088408; Thu,  4 Apr 2024 11:01:10 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5528688437
+ by phobos.denx.de (Postfix) with ESMTPS id 9BDCC88433
  for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 11:01:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43490qBJ122432;
- Thu, 4 Apr 2024 04:00:52 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43490uuP110185;
+ Thu, 4 Apr 2024 04:00:56 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1712221252;
- bh=4SFSqRb/QQt0Amcyh5PpPmFULpKZBwfsXqTsM/AL1ak=;
+ s=ti-com-17Q1; t=1712221256;
+ bh=BDADuWPMCFt5gS5DcpPhCn1oV+k8iuD68sC7gTYe/kk=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=YC9WT/7pxA1KKvkOSVHzkjaHpPSTxQ0zFirTIhJYS+W47WmnxLCuEhMdr6EeUDHji
- AfticbK/WErYSe6MOYDFLXXQMsGKA8uE8BS08aCggIpzm1xLg9ZrblvVUUYX8P8gHI
- qjjF8Pp88OVTpYVthi7pHc0bqLF+NQK+smM7Ohz8=
+ b=Pqc+37Imps5VCIcuqEo6Q1wiuwnkKumybPcdBnTgV6NgFb33Vooef78fUnOo1UIHP
+ x7RctW2bC7966XaFiuGLewTyu5N29Y+Q2VGMI7aolB79C52ezWZMWb2evhb8hxQxe3
+ OZ/bkDUGIsNltg4RWiY4muBtqCSrhPGoRF+rjD9s=
 Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43490qvq030271
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43490tmK091442
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Apr 2024 04:00:52 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE102.ent.ti.com
+ Thu, 4 Apr 2024 04:00:56 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE102.ent.ti.com
  (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Apr 2024 04:00:52 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 04:00:55 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Apr 2024 04:00:52 -0500
+ Frontend Transport; Thu, 4 Apr 2024 04:00:55 -0500
 Received: from localhost (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com
  [172.24.227.252])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43490pOh010938;
- Thu, 4 Apr 2024 04:00:52 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43490s8I011009;
+ Thu, 4 Apr 2024 04:00:55 -0500
 From: Jayesh Choudhary <j-choudhary@ti.com>
 To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <jh80.chung@samsung.com>,
  <lukma@denx.de>, <seanga2@gmail.com>, <vaishnav.a@ti.com>,
@@ -58,10 +58,10 @@ To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <jh80.chung@samsung.com>,
  <sumit.garg@linaro.org>
 CC: <vigneshr@ti.com>, <nm@ti.com>, <afd@ti.com>, <bb@ti.com>,
  <rogerq@kernel.org>, <r-gunasekaran@ti.com>
-Subject: [RFC PATCH 08/15] arm: mach-k3: j722s: introduce clock and device
- files for wkup spl
-Date: Thu, 4 Apr 2024 14:30:32 +0530
-Message-ID: <20240404090039.87458-9-j-choudhary@ti.com>
+Subject: [RFC PATCH 10/15] arch: mach-k3: Introduce basic files to support
+ J722S SoC family
+Date: Thu, 4 Apr 2024 14:30:34 +0530
+Message-ID: <20240404090039.87458-11-j-choudhary@ti.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240404090039.87458-1-j-choudhary@ti.com>
 References: <20240404090039.87458-1-j-choudhary@ti.com>
@@ -85,500 +85,569 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Include the clock and lpsc tree files needed for the wkup spl to
-initialize the proper PLLs and power domains to boot the SoC.
+Introduce the basic functions and definitions needed to properly
+initialize TI J722S family of SoCs.
 
+Co-developed-by: Vaishnav Achath <vaishnav.a@ti.com>
 Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
 Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
 ---
- arch/arm/mach-k3/r5/Makefile           |   1 +
- arch/arm/mach-k3/r5/j722s/Makefile     |   6 +
- arch/arm/mach-k3/r5/j722s/clk-data.c   | 312 +++++++++++++++++++++++++
- arch/arm/mach-k3/r5/j722s/dev-data.c   |  69 ++++++
- drivers/clk/ti/clk-k3.c                |   6 +
- drivers/power/domain/ti-power-domain.c |   6 +
- include/k3-clk.h                       |   1 +
- include/k3-dev.h                       |   1 +
- 8 files changed, 402 insertions(+)
- create mode 100644 arch/arm/mach-k3/r5/j722s/Makefile
- create mode 100644 arch/arm/mach-k3/r5/j722s/clk-data.c
- create mode 100644 arch/arm/mach-k3/r5/j722s/dev-data.c
+ arch/arm/mach-k3/Kconfig                      |   7 +-
+ arch/arm/mach-k3/Makefile                     |   1 +
+ arch/arm/mach-k3/include/mach/hardware.h      |   4 +
+ .../arm/mach-k3/include/mach/j722s_hardware.h |  83 ++++++
+ arch/arm/mach-k3/include/mach/j722s_spl.h     |  49 ++++
+ arch/arm/mach-k3/include/mach/spl.h           |   4 +
+ arch/arm/mach-k3/j722s/Kconfig                |  32 ++
+ arch/arm/mach-k3/j722s_init.c                 | 276 ++++++++++++++++++
+ 8 files changed, 455 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/mach-k3/include/mach/j722s_hardware.h
+ create mode 100644 arch/arm/mach-k3/include/mach/j722s_spl.h
+ create mode 100644 arch/arm/mach-k3/j722s/Kconfig
+ create mode 100644 arch/arm/mach-k3/j722s_init.c
 
-diff --git a/arch/arm/mach-k3/r5/Makefile b/arch/arm/mach-k3/r5/Makefile
-index f1e61c8548..d3886caa06 100644
---- a/arch/arm/mach-k3/r5/Makefile
-+++ b/arch/arm/mach-k3/r5/Makefile
-@@ -9,6 +9,7 @@ obj-$(CONFIG_SOC_K3_AM62P5) += am62px/
- obj-$(CONFIG_SOC_K3_J721E) += j721e/
- obj-$(CONFIG_SOC_K3_J721E) += j7200/
- obj-$(CONFIG_SOC_K3_J721S2) += j721s2/
-+obj-$(CONFIG_SOC_K3_J722S) += j722s/
- obj-$(CONFIG_SOC_K3_J784S4) += j784s4/
+diff --git a/arch/arm/mach-k3/Kconfig b/arch/arm/mach-k3/Kconfig
+index 2bb970c2d4..f3f42b3921 100644
+--- a/arch/arm/mach-k3/Kconfig
++++ b/arch/arm/mach-k3/Kconfig
+@@ -25,6 +25,9 @@ config SOC_K3_J721E
+ config SOC_K3_J721S2
+ 	bool "TI's K3 based J721S2 SoC Family Support"
  
- obj-y += common.o
-diff --git a/arch/arm/mach-k3/r5/j722s/Makefile b/arch/arm/mach-k3/r5/j722s/Makefile
++config SOC_K3_J722S
++	bool "TI's K3 based J722S SoC Family Support"
++
+ config SOC_K3_J784S4
+ 	bool "TI's K3 based J784S4 SoC Family Support"
+ 
+@@ -84,6 +87,7 @@ config SYS_K3_BOOT_PARAM_TABLE_INDEX
+ 	default 0x43c3f290 if SOC_K3_AM62A7 && CPU_V7R
+ 	default 0x7000f290 if SOC_K3_AM62A7 && ARM64
+ 	default 0x43c4f290 if SOC_K3_AM62P5
++	default 0x43c7f290 if SOC_K3_J722S
+ 	help
+ 	  Address at which ROM stores the value which determines if SPL
+ 	  is booted up by primary boot media or secondary boot media.
+@@ -122,7 +126,7 @@ config K3_EARLY_CONS_IDX
+ 
+ config K3_ATF_LOAD_ADDR
+ 	hex "Load address of ATF image"
+-	default 0x80000000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5)
++	default 0x80000000 if (SOC_K3_AM625 || SOC_K3_AM62A7 || SOC_K3_AM62P5 || SOC_K3_J722S)
+ 	default 0x70000000
+ 	help
+ 	  The load address for the ATF image. This value is used to build the
+@@ -163,6 +167,7 @@ source "arch/arm/mach-k3/am62ax/Kconfig"
+ source "arch/arm/mach-k3/am62px/Kconfig"
+ source "arch/arm/mach-k3/j721e/Kconfig"
+ source "arch/arm/mach-k3/j721s2/Kconfig"
++source "arch/arm/mach-k3/j722s/Kconfig"
+ source "arch/arm/mach-k3/j784s4/Kconfig"
+ 
+ endif
+diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
+index 6ee9864c72..87baa6f313 100644
+--- a/arch/arm/mach-k3/Makefile
++++ b/arch/arm/mach-k3/Makefile
+@@ -23,5 +23,6 @@ obj-$(CONFIG_SOC_K3_AM625) += am625_init.o
+ obj-$(CONFIG_SOC_K3_AM62A7) += am62a7_init.o
+ obj-$(CONFIG_SOC_K3_J784S4) += j784s4_init.o
+ obj-$(CONFIG_SOC_K3_AM62P5) += am62p5_init.o
++obj-$(CONFIG_SOC_K3_J722S) += j722s_init.o
+ endif
+ obj-y += common.o security.o
+diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
+index b4bc121cbf..e8abe01137 100644
+--- a/arch/arm/mach-k3/include/mach/hardware.h
++++ b/arch/arm/mach-k3/include/mach/hardware.h
+@@ -36,6 +36,10 @@
+ #include "j721s2_hardware.h"
+ #endif
+ 
++#ifdef CONFIG_SOC_K3_J722S
++#include "j722s_hardware.h"
++#endif
++
+ #ifdef CONFIG_SOC_K3_J784S4
+ #include "j784s4_hardware.h"
+ #endif
+diff --git a/arch/arm/mach-k3/include/mach/j722s_hardware.h b/arch/arm/mach-k3/include/mach/j722s_hardware.h
 new file mode 100644
-index 0000000000..2a0dbf5f5a
+index 0000000000..8d0bec2206
 --- /dev/null
-+++ b/arch/arm/mach-k3/r5/j722s/Makefile
-@@ -0,0 +1,6 @@
-+# SPDX-License-Identifier:	GPL-2.0+
++++ b/arch/arm/mach-k3/include/mach/j722s_hardware.h
+@@ -0,0 +1,83 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * K3: J722S SoC definitions, structures etc.
++ *
++ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ */
++
++#ifndef __ASM_ARCH_J722S_HARDWARE_H
++#define __ASM_ARCH_J722S_HARDWARE_H
++
++#include <config.h>
++#ifndef __ASSEMBLY__
++#include <linux/bitops.h>
++#endif
++
++#define PADCFG_MMR0_BASE			0x04080000
++#define PADCFG_MMR1_BASE			0x000f0000
++#define CTRL_MMR0_BASE				0x00100000
++#define MCU_CTRL_MMR0_BASE			0x04500000
++#define WKUP_CTRL_MMR0_BASE			0x43000000
++
++#define CTRLMMR_MAIN_DEVSTAT			(WKUP_CTRL_MMR0_BASE + 0x30)
++#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK	GENMASK(6, 3)
++#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT	3
++#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK	GENMASK(9, 7)
++#define MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT	7
++#define MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK	GENMASK(12, 10)
++#define MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT	10
++#define MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK	BIT(13)
++#define MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT	13
++
++/* Primary Bootmode MMC Config macros */
++#define MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK	0x4
++#define MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT	2
++#define MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK	0x1
++#define MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_SHIFT	0
++
++/* Primary Bootmode USB Config macros */
++#define MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT	1
++#define MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK	0x02
++
++/* Backup Bootmode USB Config macros */
++#define MAIN_DEVSTAT_BACKUP_USB_MODE_MASK	0x01
++
++/*
++ * The CTRL_MMR0 memory space is divided into several equally-spaced
++ * partitions, so defining the partition size allows us to determine
++ * register addresses common to those partitions.
++ */
++#define CTRL_MMR0_PARTITION_SIZE		0x4000
++
++/*
++ * CTRL_MMR0, WKUP_CTRL_MMR0, and MCU_CTRL_MMR0 lock/kick-mechanism
++ * shared register definitions. The same registers are also used for
++ * PADCFG_MMR lock/kick-mechanism.
++ */
++#define CTRLMMR_LOCK_KICK0			0x1008
++#define CTRLMMR_LOCK_KICK0_UNLOCK_VAL		0x68ef3490
++#define CTRLMMR_LOCK_KICK1			0x100c
++#define CTRLMMR_LOCK_KICK1_UNLOCK_VAL		0xd172bc5a
++
++#define MCU_CTRL_LFXOSC_CTRL			(MCU_CTRL_MMR0_BASE + 0x8038)
++#define MCU_CTRL_LFXOSC_TRIM			(MCU_CTRL_MMR0_BASE + 0x803c)
++#define MCU_CTRL_LFXOSC_32K_DISABLE_VAL		BIT(7)
++
++#define MCU_CTRL_DEVICE_CLKOUT_32K_CTRL		(MCU_CTRL_MMR0_BASE + 0x8058)
++#define MCU_CTRL_DEVICE_CLKOUT_LFOSC_SELECT_VAL	(0x3)
++
++#define ROM_EXTENDED_BOOT_DATA_INFO		0x43c7f1e0
++
++#define K3_BOOT_PARAM_TABLE_INDEX_OCRAM		0x7000F290
++
++#define TI_SRAM_SCRATCH_BOARD_EEPROM_START	0x43c30000
++
++#if defined(CONFIG_SYS_K3_SPL_ATF) && !defined(__ASSEMBLY__)
++
++static const u32 put_device_ids[] = {};
++
++static const u32 put_core_ids[] = {};
++
++#endif
++
++#endif /* __ASM_ARCH_J722S_HARDWARE_H */
+diff --git a/arch/arm/mach-k3/include/mach/j722s_spl.h b/arch/arm/mach-k3/include/mach/j722s_spl.h
+new file mode 100644
+index 0000000000..eab8c511b7
+--- /dev/null
++++ b/arch/arm/mach-k3/include/mach/j722s_spl.h
+@@ -0,0 +1,49 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ */
++
++#ifndef _ASM_ARCH_J722S_SPL_H_
++#define _ASM_ARCH_J722S_SPL_H_
++
++/* Primary BootMode devices */
++#define BOOT_DEVICE_SPI_NAND		0x00
++#define BOOT_DEVICE_RAM			0xFF
++#define BOOT_DEVICE_OSPI		0x01
++#define BOOT_DEVICE_QSPI		0x02
++#define BOOT_DEVICE_SPI			0x03
++#define BOOT_DEVICE_CPGMAC		0x04
++#define BOOT_DEVICE_ETHERNET_RGMII	0x04
++#define BOOT_DEVICE_ETHERNET_RMII	0x05
++#define BOOT_DEVICE_I2C			0x06
++#define BOOT_DEVICE_UART		0x07
++#define BOOT_DEVICE_MMC			0x08
++#define BOOT_DEVICE_EMMC		0x09
++
++#define BOOT_DEVICE_USB			0x2A
++#define BOOT_DEVICE_DFU			0x0A
++#define BOOT_DEVICE_GPMC_NAND		0x0B
++#define BOOT_DEVICE_GPMC_NOR		0x0C
++#define BOOT_DEVICE_XSPI		0x0E
++#define BOOT_DEVICE_NOBOOT		0x0F
++
++/* U-Boot used aliases */
++#define BOOT_DEVICE_ETHERNET		0x04
++#define BOOT_DEVICE_SPINAND		0x10
++#define BOOT_DEVICE_MMC2		0x08
++#define BOOT_DEVICE_MMC1		0x09
++/* Invalid */
++#define BOOT_DEVICE_MMC2_2		0x1F
++
++/* Backup BootMode devices */
++#define BACKUP_BOOT_DEVICE_DFU		0x01
++#define BACKUP_BOOT_DEVICE_UART		0x03
++#define BACKUP_BOOT_DEVICE_ETHERNET	0x04
++#define BACKUP_BOOT_DEVICE_MMC		0x05
++#define BACKUP_BOOT_DEVICE_SPI		0x06
++#define BACKUP_BOOT_DEVICE_I2C		0x07
++#define BACKUP_BOOT_DEVICE_USB		0x09
++
++#define K3_PRIMARY_BOOTMODE		0x0
++
++#endif /* _ASM_ARCH_J722S_SPL_H_ */
+diff --git a/arch/arm/mach-k3/include/mach/spl.h b/arch/arm/mach-k3/include/mach/spl.h
+index 8394277922..ac1a34502e 100644
+--- a/arch/arm/mach-k3/include/mach/spl.h
++++ b/arch/arm/mach-k3/include/mach/spl.h
+@@ -38,4 +38,8 @@
+ #include "am62p_spl.h"
+ #endif
+ 
++#ifdef CONFIG_SOC_K3_J722S
++#include "j722s_spl.h"
++#endif
++
+ #endif /* _ASM_ARCH_SPL_H_ */
+diff --git a/arch/arm/mach-k3/j722s/Kconfig b/arch/arm/mach-k3/j722s/Kconfig
+new file mode 100644
+index 0000000000..9d450d8dc4
+--- /dev/null
++++ b/arch/arm/mach-k3/j722s/Kconfig
+@@ -0,0 +1,32 @@
++# SPDX-License-Identifier: GPL-2.0+
 +#
 +# Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++#
 +
-+obj-y += clk-data.o
-+obj-y += dev-data.o
-diff --git a/arch/arm/mach-k3/r5/j722s/clk-data.c b/arch/arm/mach-k3/r5/j722s/clk-data.c
++if SOC_K3_J722S
++
++choice
++	prompt "TI K3 J722S based boards"
++	optional
++
++config TARGET_J722S_A53_EVM
++	bool "TI K3 based J722S EVM running on A53"
++	select ARM64
++	select BINMAN
++
++config TARGET_J722S_R5_EVM
++	bool "TI K3 based J722S EVM running on R5"
++	select CPU_V7R
++	select SYS_THUMB_BUILD
++	select K3_LOAD_SYSFW
++	select RAM
++	select SPL_RAM
++	select K3_DDRSS
++	select BINMAN
++	imply SYS_K3_SPL_ATF
++
++endchoice
++
++source "board/ti/j722s/Kconfig"
++
++endif
+diff --git a/arch/arm/mach-k3/j722s_init.c b/arch/arm/mach-k3/j722s_init.c
 new file mode 100644
-index 0000000000..b4f27af333
+index 0000000000..0a6e06f0cb
 --- /dev/null
-+++ b/arch/arm/mach-k3/r5/j722s/clk-data.c
-@@ -0,0 +1,312 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/arch/arm/mach-k3/j722s_init.c
+@@ -0,0 +1,276 @@
++// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * J722S specific clock platform data
-+ *
-+ * This file is auto generated. Please do not hand edit and report any issues
-+ * to Bryan Brattlof <bb@ti.com>.
++ * J722S: SoC specific initialization
 + *
 + * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
 + */
 +
-+#include <linux/clk-provider.h>
-+#include "k3-clk.h"
++#include <spl.h>
++#include <asm/io.h>
++#include <asm/arch/hardware.h>
++#include "sysfw-loader.h"
++#include "common.h"
++#include <dm.h>
++#include <dm/uclass-internal.h>
++#include <dm/pinctrl.h>
 +
-+static const char * const gluelogic_hfosc0_clkout_parents[] = {
-+	NULL,
-+	NULL,
-+	"osc_24_mhz",
-+	"osc_25_mhz",
-+	"osc_26_mhz",
-+	NULL,
++struct fwl_data cbass_main_fwls[] = {
++	{ "FSS_DAT_REG3", 7, 8 },
 +};
 +
-+static const char * const clk_32k_rc_sel_out0_parents[] = {
-+	"gluelogic_rcosc_clk_1p0v_97p65k",
-+	"gluelogic_hfosc0_clkout",
-+	"gluelogic_rcosc_clk_1p0v_97p65k",
-+	"gluelogic_lfosc0_clkout",
-+};
-+
-+static const char * const main_emmcsd1_io_clklb_sel_out0_parents[] = {
-+	"board_0_mmc1_clklb_out",
-+	"board_0_mmc1_clk_out",
-+};
-+
-+static const char * const main_ospi_loopback_clk_sel_out0_parents[] = {
-+	"board_0_ospi0_dqs_out",
-+	"board_0_ospi0_lbclko_out",
-+};
-+
-+static const char * const main_usb0_refclk_sel_out0_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"postdiv4_16ff_main_0_hsdivout8_clk",
-+};
-+
-+static const char * const sam62_pll_ctrl_wrap_main_0_sysclkout_clk_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"hsdiv4_16fft_main_0_hsdivout0_clk",
-+};
-+
-+static const char * const sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"hsdiv4_16fft_mcu_0_hsdivout0_clk",
-+};
-+
-+static const char * const clkout0_ctrl_out0_parents[] = {
-+	"hsdiv4_16fft_main_2_hsdivout1_clk",
-+	"hsdiv4_16fft_main_2_hsdivout1_clk",
-+};
-+
-+static const char * const main_emmcsd0_refclk_sel_out0_parents[] = {
-+	"postdiv4_16ff_main_0_hsdivout5_clk",
-+	"hsdiv4_16fft_main_2_hsdivout2_clk",
-+};
-+
-+static const char * const main_emmcsd1_refclk_sel_out0_parents[] = {
-+	"postdiv4_16ff_main_0_hsdivout5_clk",
-+	"hsdiv4_16fft_main_2_hsdivout2_clk",
-+};
-+
-+static const char * const main_gtcclk_sel_out0_parents[] = {
-+	"postdiv4_16ff_main_2_hsdivout5_clk",
-+	"postdiv4_16ff_main_0_hsdivout6_clk",
-+	"board_0_cp_gemac_cpts0_rft_clk_out",
-+	NULL,
-+	"board_0_mcu_ext_refclk0_out",
-+	"board_0_ext_refclk1_out",
-+	"sam62_pll_ctrl_wrap_mcu_0_chip_div1_clk_clk",
-+	"sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk",
-+};
-+
-+static const char * const main_ospi_ref_clk_sel_out0_parents[] = {
-+	"hsdiv4_16fft_main_0_hsdivout1_clk",
-+	"postdiv1_16fft_main_1_hsdivout5_clk",
-+};
-+
-+static const char * const main_timerclkn_sel_out0_parents[] = {
-+	"gluelogic_hfosc0_clkout",
-+	"clk_32k_rc_sel_out0",
-+	"postdiv4_16ff_main_0_hsdivout7_clk",
-+	"gluelogic_rcosc_clkout",
-+	"board_0_mcu_ext_refclk0_out",
-+	"board_0_ext_refclk1_out",
-+	NULL,
-+	"board_0_cp_gemac_cpts0_rft_clk_out",
-+	"hsdiv4_16fft_main_1_hsdivout3_clk",
-+	"postdiv4_16ff_main_2_hsdivout6_clk",
-+	NULL,
-+	NULL,
-+	NULL,
-+	NULL,
-+	NULL,
-+	NULL,
-+};
-+
-+static const char * const wkup_clkout_sel_out0_parents[] = {
-+	NULL,
-+	"gluelogic_lfosc0_clkout",
-+	"hsdiv4_16fft_main_0_hsdivout2_clk",
-+	"hsdiv4_16fft_main_1_hsdivout2_clk",
-+	"postdiv4_16ff_main_2_hsdivout9_clk",
-+	"clk_32k_rc_sel_out0",
-+	"gluelogic_rcosc_clkout",
-+	"gluelogic_hfosc0_clkout",
-+};
-+
-+static const char * const wkup_clkout_sel_io_out0_parents[] = {
-+	"wkup_clkout_sel_out0",
-+	"gluelogic_hfosc0_clkout",
-+};
-+
-+static const char * const wkup_clksel_out0_parents[] = {
-+	"hsdiv3_16fft_main_15_hsdivout0_clk",
-+	"hsdiv4_16fft_mcu_0_hsdivout0_clk",
-+};
-+
-+static const char * const main_usart0_fclk_sel_out0_parents[] = {
-+	"usart_programmable_clock_divider_out0",
-+	"hsdiv4_16fft_main_1_hsdivout1_clk",
-+};
-+
-+static const struct clk_data clk_list[] = {
-+	CLK_FIXED_RATE("osc_26_mhz", 26000000, 0),
-+	CLK_FIXED_RATE("osc_25_mhz", 25000000, 0),
-+	CLK_FIXED_RATE("osc_24_mhz", 24000000, 0),
-+	CLK_MUX("gluelogic_hfosc0_clkout", gluelogic_hfosc0_clkout_parents, 6, 0x43000030, 0, 3, 0),
-+	CLK_FIXED_RATE("gluelogic_rcosc_clkout", 12500000, 0),
-+	CLK_FIXED_RATE("gluelogic_rcosc_clk_1p0v_97p65k", 97656, 0),
-+	CLK_FIXED_RATE("board_0_cp_gemac_cpts0_rft_clk_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_ext_refclk1_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_i2c0_scl_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_mcu_ext_refclk0_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_mmc1_clklb_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_mmc1_clk_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_ospi0_dqs_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_ospi0_lbclko_out", 0, 0),
-+	CLK_FIXED_RATE("board_0_tck_out", 0, 0),
-+	CLK_FIXED_RATE("dmtimer_dmc1ms_main_0_timer_pwm", 0, 0),
-+	CLK_FIXED_RATE("emmcsd4ss_main_0_emmcsdss_io_clk_o", 0, 0),
-+	CLK_FIXED_RATE("fss_ul_main_0_ospi_0_ospi_oclk_clk", 0, 0),
-+	CLK_FIXED_RATE("mshsi2c_main_0_porscl", 0, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_0_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x680000, 0),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk_subdiv", 0x680038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_PLL_DEFFREQ("pllfracf2_ssmod_16fft_main_1_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x681000, 0, 1920000000),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk_subdiv", 0x681038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_12_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x68c000, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_15_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x68f000, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_2_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x682000, 0),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk_subdiv", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682038, 16, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_DIV("pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk_subdiv", 0x682038, 24, 3, 0, CLK_DIVIDER_ONE_BASED),
-+	CLK_PLL("pllfracf2_ssmod_16fft_main_8_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x688000, 0),
-+	CLK_PLL("pllfracf2_ssmod_16fft_mcu_0_foutvcop_clk", "gluelogic_hfosc0_clkout", 0x4040000, 0),
-+	CLK_DIV("postdiv1_16fft_main_1_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_1_foutpostdiv_clk", 0x681094, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_0_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x680094, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_0_hsdivout6_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x680098, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_0_hsdivout7_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x68009c, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_0_hsdivout8_clk", "pllfracf2_ssmod_16fft_main_0_foutpostdiv_clk", 0x6800a0, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_2_hsdivout5_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x682094, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_2_hsdivout6_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x682098, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_2_hsdivout8_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x6820a0, 0, 7, 0, 0),
-+	CLK_DIV("postdiv4_16ff_main_2_hsdivout9_clk", "pllfracf2_ssmod_16fft_main_2_foutpostdiv_clk", 0x6820a4, 0, 7, 0, 0),
-+	CLK_MUX("clk_32k_rc_sel_out0", clk_32k_rc_sel_out0_parents, 4, 0x4508058, 0, 2, 0),
-+	CLK_MUX("main_emmcsd1_io_clklb_sel_out0", main_emmcsd1_io_clklb_sel_out0_parents, 2, 0x108168, 16, 1, 0),
-+	CLK_MUX("main_ospi_loopback_clk_sel_out0", main_ospi_loopback_clk_sel_out0_parents, 2, 0x108500, 4, 1, 0),
-+	CLK_MUX("main_usb0_refclk_sel_out0", main_usb0_refclk_sel_out0_parents, 2, 0x43008190, 0, 1, 0),
-+	CLK_DIV("hsdiv0_16fft_main_12_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_12_foutvcop_clk", 0x68c080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv0_16fft_main_8_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_8_foutvcop_clk", 0x688080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv3_16fft_main_15_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_15_foutvcop_clk", 0x68f080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680080, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680084, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680088, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout3_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x68008c, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_0_hsdivout4_clk", "pllfracf2_ssmod_16fft_main_0_foutvcop_clk", 0x680090, 0, 7, 0, 0),
-+	CLK_DIV_DEFFREQ("hsdiv4_16fft_main_1_hsdivout0_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681080, 0, 7, 0, 0, 192000000),
-+	CLK_DIV("hsdiv4_16fft_main_1_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681084, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_1_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x681088, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_1_hsdivout3_clk", "pllfracf2_ssmod_16fft_main_1_foutvcop_clk", 0x68108c, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_2_hsdivout1_clk", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682084, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_main_2_hsdivout2_clk", "pllfracf2_ssmod_16fft_main_2_foutvcop_clk", 0x682088, 0, 7, 0, 0),
-+	CLK_DIV("hsdiv4_16fft_mcu_0_hsdivout0_clk", "pllfracf2_ssmod_16fft_mcu_0_foutvcop_clk", 0x4040080, 0, 7, 0, 0),
-+	CLK_MUX_PLLCTRL("sam62_pll_ctrl_wrap_main_0_sysclkout_clk", sam62_pll_ctrl_wrap_main_0_sysclkout_clk_parents, 2, 0x410000, 0),
-+	CLK_DIV("sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk", "sam62_pll_ctrl_wrap_main_0_sysclkout_clk", 0x410118, 0, 5, 0, 0),
-+	CLK_MUX_PLLCTRL("sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk_parents, 2, 0x4020000, 0),
-+	CLK_DIV("sam62_pll_ctrl_wrap_mcu_0_chip_div1_clk_clk", "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", 0x4020118, 0, 5, 0, 0),
-+	CLK_MUX("clkout0_ctrl_out0", clkout0_ctrl_out0_parents, 2, 0x108010, 0, 1, 0),
-+	CLK_MUX("main_emmcsd0_refclk_sel_out0", main_emmcsd0_refclk_sel_out0_parents, 2, 0x108160, 0, 1, 0),
-+	CLK_MUX("main_emmcsd1_refclk_sel_out0", main_emmcsd1_refclk_sel_out0_parents, 2, 0x108168, 0, 1, 0),
-+	CLK_MUX("main_gtcclk_sel_out0", main_gtcclk_sel_out0_parents, 8, 0x43008030, 0, 3, 0),
-+	CLK_MUX("main_ospi_ref_clk_sel_out0", main_ospi_ref_clk_sel_out0_parents, 2, 0x108500, 0, 1, 0),
-+	CLK_MUX("main_timerclkn_sel_out0", main_timerclkn_sel_out0_parents, 16, 0x1081b0, 0, 4, 0),
-+	CLK_DIV_DEFFREQ("usart_programmable_clock_divider_out0", "hsdiv4_16fft_main_1_hsdivout0_clk", 0x108240, 0, 2, 0, 0, 48000000),
-+	CLK_MUX("wkup_clkout_sel_out0", wkup_clkout_sel_out0_parents, 8, 0x43008020, 0, 3, 0),
-+	CLK_MUX("wkup_clkout_sel_io_out0", wkup_clkout_sel_io_out0_parents, 2, 0x43008020, 24, 1, 0),
-+	CLK_MUX("wkup_clksel_out0", wkup_clksel_out0_parents, 2, 0x43008010, 0, 1, 0),
-+	CLK_MUX("main_usart0_fclk_sel_out0", main_usart0_fclk_sel_out0_parents, 2, 0x108280, 0, 1, 0),
-+	CLK_DIV("sam62_pll_ctrl_wrap_main_0_chip_div24_clk_clk", "sam62_pll_ctrl_wrap_main_0_sysclkout_clk", 0x41011c, 0, 5, 0, 0),
-+	CLK_DIV("sam62_pll_ctrl_wrap_mcu_0_chip_div24_clk_clk", "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", 0x402011c, 0, 5, 0, 0),
-+};
-+
-+static const struct dev_clk soc_dev_clk_data[] = {
-+	DEV_CLK(16, 0, "hsdiv4_16fft_main_0_hsdivout1_clk"),
-+	DEV_CLK(16, 1, "hsdiv4_16fft_main_0_hsdivout2_clk"),
-+	DEV_CLK(16, 2, "hsdiv4_16fft_main_0_hsdivout3_clk"),
-+	DEV_CLK(16, 3, "hsdiv4_16fft_main_0_hsdivout4_clk"),
-+	DEV_CLK(16, 4, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(16, 5, "board_0_ext_refclk1_out"),
-+	DEV_CLK(16, 6, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(16, 7, "postdiv4_16ff_main_2_hsdivout8_clk"),
-+	DEV_CLK(16, 8, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(16, 9, "board_0_ext_refclk1_out"),
-+	DEV_CLK(16, 10, "gluelogic_rcosc_clkout"),
-+	DEV_CLK(16, 11, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(16, 12, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(36, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(36, 2, "main_timerclkn_sel_out0"),
-+	DEV_CLK(36, 3, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(36, 4, "clk_32k_rc_sel_out0"),
-+	DEV_CLK(36, 5, "postdiv4_16ff_main_0_hsdivout7_clk"),
-+	DEV_CLK(36, 6, "gluelogic_rcosc_clkout"),
-+	DEV_CLK(36, 7, "board_0_mcu_ext_refclk0_out"),
-+	DEV_CLK(36, 8, "board_0_ext_refclk1_out"),
-+	DEV_CLK(36, 10, "board_0_cp_gemac_cpts0_rft_clk_out"),
-+	DEV_CLK(36, 11, "hsdiv4_16fft_main_1_hsdivout3_clk"),
-+	DEV_CLK(36, 12, "postdiv4_16ff_main_2_hsdivout6_clk"),
-+	DEV_CLK(57, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(57, 2, "main_emmcsd0_refclk_sel_out0"),
-+	DEV_CLK(57, 3, "postdiv4_16ff_main_0_hsdivout5_clk"),
-+	DEV_CLK(57, 4, "hsdiv4_16fft_main_2_hsdivout2_clk"),
-+	DEV_CLK(58, 0, "main_emmcsd1_io_clklb_sel_out0"),
-+	DEV_CLK(58, 1, "board_0_mmc1_clklb_out"),
-+	DEV_CLK(58, 2, "board_0_mmc1_clk_out"),
-+	DEV_CLK(58, 5, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(58, 6, "main_emmcsd1_refclk_sel_out0"),
-+	DEV_CLK(58, 7, "postdiv4_16ff_main_0_hsdivout5_clk"),
-+	DEV_CLK(58, 8, "hsdiv4_16fft_main_2_hsdivout2_clk"),
-+	DEV_CLK(61, 0, "main_gtcclk_sel_out0"),
-+	DEV_CLK(61, 1, "postdiv4_16ff_main_2_hsdivout5_clk"),
-+	DEV_CLK(61, 2, "postdiv4_16ff_main_0_hsdivout6_clk"),
-+	DEV_CLK(61, 3, "board_0_cp_gemac_cpts0_rft_clk_out"),
-+	DEV_CLK(61, 5, "board_0_mcu_ext_refclk0_out"),
-+	DEV_CLK(61, 6, "board_0_ext_refclk1_out"),
-+	DEV_CLK(61, 7, "sam62_pll_ctrl_wrap_mcu_0_chip_div1_clk_clk"),
-+	DEV_CLK(61, 8, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(61, 9, "wkup_clksel_out0"),
-+	DEV_CLK(61, 10, "hsdiv3_16fft_main_15_hsdivout0_clk"),
-+	DEV_CLK(61, 11, "hsdiv4_16fft_mcu_0_hsdivout0_clk"),
-+	DEV_CLK(75, 0, "board_0_ospi0_dqs_out"),
-+	DEV_CLK(75, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(75, 2, "main_ospi_loopback_clk_sel_out0"),
-+	DEV_CLK(75, 3, "board_0_ospi0_dqs_out"),
-+	DEV_CLK(75, 4, "board_0_ospi0_lbclko_out"),
-+	DEV_CLK(75, 6, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(75, 7, "main_ospi_ref_clk_sel_out0"),
-+	DEV_CLK(75, 8, "hsdiv4_16fft_main_0_hsdivout1_clk"),
-+	DEV_CLK(75, 9, "postdiv1_16fft_main_1_hsdivout5_clk"),
-+	DEV_CLK(77, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(102, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(102, 1, "board_0_i2c0_scl_out"),
-+	DEV_CLK(102, 2, "hsdiv4_16fft_main_1_hsdivout0_clk"),
-+	DEV_CLK(135, 0, "hsdiv0_16fft_main_8_hsdivout0_clk"),
-+	DEV_CLK(146, 0, "main_usart0_fclk_sel_out0"),
-+	DEV_CLK(146, 1, "usart_programmable_clock_divider_out0"),
-+	DEV_CLK(146, 2, "hsdiv4_16fft_main_1_hsdivout1_clk"),
-+	DEV_CLK(146, 5, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(157, 54, "clkout0_ctrl_out0"),
-+	DEV_CLK(157, 55, "hsdiv4_16fft_main_2_hsdivout1_clk"),
-+	DEV_CLK(157, 56, "hsdiv4_16fft_main_2_hsdivout1_clk"),
-+	DEV_CLK(157, 62, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(157, 74, "mshsi2c_main_0_porscl"),
-+	DEV_CLK(157, 135, "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk"),
-+	DEV_CLK(157, 143, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
-+	DEV_CLK(157, 145, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
-+	DEV_CLK(157, 157, "fss_ul_main_0_ospi_0_ospi_oclk_clk"),
-+	DEV_CLK(157, 159, "fss_ul_main_0_ospi_0_ospi_oclk_clk"),
-+	DEV_CLK(157, 173, "sam62_pll_ctrl_wrap_main_0_sysclkout_clk"),
-+	DEV_CLK(157, 174, "wkup_clkout_sel_io_out0"),
-+	DEV_CLK(157, 175, "wkup_clkout_sel_out0"),
-+	DEV_CLK(157, 176, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(157, 178, "dmtimer_dmc1ms_main_0_timer_pwm"),
-+	DEV_CLK(161, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(161, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(161, 2, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(161, 3, "main_usb0_refclk_sel_out0"),
-+	DEV_CLK(161, 4, "gluelogic_hfosc0_clkout"),
-+	DEV_CLK(161, 5, "postdiv4_16ff_main_0_hsdivout8_clk"),
-+	DEV_CLK(161, 10, "board_0_tck_out"),
-+	DEV_CLK(166, 3, "hsdiv0_16fft_main_8_hsdivout0_clk"),
-+	DEV_CLK(166, 5, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(169, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(169, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+	DEV_CLK(170, 1, "hsdiv0_16fft_main_12_hsdivout0_clk"),
-+	DEV_CLK(170, 2, "board_0_tck_out"),
-+	DEV_CLK(170, 3, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-+};
-+
-+const struct ti_k3_clk_platdata j722s_clk_platdata = {
-+	.clk_list = clk_list,
-+	.clk_list_cnt = ARRAY_SIZE(clk_list),
-+	.soc_dev_clk_data = soc_dev_clk_data,
-+	.soc_dev_clk_data_cnt = ARRAY_SIZE(soc_dev_clk_data),
-+};
-diff --git a/arch/arm/mach-k3/r5/j722s/dev-data.c b/arch/arm/mach-k3/r5/j722s/dev-data.c
-new file mode 100644
-index 0000000000..59176c9899
---- /dev/null
-+++ b/arch/arm/mach-k3/r5/j722s/dev-data.c
-@@ -0,0 +1,69 @@
-+// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * J722S specific device platform data
-+ *
-+ * This file is auto generated. Please do not hand edit and report any issues
-+ * to Bryan Brattlof <bb@ti.com>.
-+ *
-+ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ * This uninitialized global variable would normal end up in the .bss section,
++ * but the .bss is cleared between writing and reading this variable, so move
++ * it to the .data section.
 + */
++u32 bootindex __section(".data");
++static struct rom_extended_boot_data bootdata __section(".data");
 +
-+#include "k3-dev.h"
++static void store_boot_info_from_rom(void)
++{
++	bootindex = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
++	memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
++	       sizeof(struct rom_extended_boot_data));
++}
 +
-+static struct ti_psc soc_psc_list[] = {
-+	[0] = PSC(0, 0x00400000),
-+};
++static void ctrl_mmr_unlock(void)
++{
++	/* Unlock all WKUP_CTRL_MMR0 module registers */
++	mmr_unlock(WKUP_CTRL_MMR0_BASE, 0);
++	mmr_unlock(WKUP_CTRL_MMR0_BASE, 1);
++	mmr_unlock(WKUP_CTRL_MMR0_BASE, 2);
++	mmr_unlock(WKUP_CTRL_MMR0_BASE, 3);
++	mmr_unlock(WKUP_CTRL_MMR0_BASE, 4);
++	mmr_unlock(WKUP_CTRL_MMR0_BASE, 5);
++	mmr_unlock(WKUP_CTRL_MMR0_BASE, 6);
++	mmr_unlock(WKUP_CTRL_MMR0_BASE, 7);
 +
-+static struct ti_pd soc_pd_list[] = {
-+	[0] = PSC_PD(0, &soc_psc_list[0], NULL),
-+	[1] = PSC_PD(3, &soc_psc_list[0], &soc_pd_list[0]),
-+	[2] = PSC_PD(4, &soc_psc_list[0], &soc_pd_list[1]),
-+	[3] = PSC_PD(13, &soc_psc_list[0], &soc_pd_list[0]),
-+};
++	/* Unlock all CTRL_MMR0 module registers */
++	mmr_unlock(CTRL_MMR0_BASE, 0);
++	mmr_unlock(CTRL_MMR0_BASE, 1);
++	mmr_unlock(CTRL_MMR0_BASE, 2);
++	mmr_unlock(CTRL_MMR0_BASE, 4);
++	mmr_unlock(CTRL_MMR0_BASE, 5);
++	mmr_unlock(CTRL_MMR0_BASE, 6);
 +
-+static struct ti_lpsc soc_lpsc_list[] = {
-+	[0] = PSC_LPSC(0, &soc_psc_list[0], &soc_pd_list[0], NULL),
-+	[1] = PSC_LPSC(12, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[5]),
-+	[2] = PSC_LPSC(13, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[5]),
-+	[3] = PSC_LPSC(20, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
-+	[4] = PSC_LPSC(21, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
-+	[5] = PSC_LPSC(23, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
-+	[6] = PSC_LPSC(28, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
-+	[7] = PSC_LPSC(34, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
-+	[8] = PSC_LPSC(53, &soc_psc_list[0], &soc_pd_list[1], &soc_lpsc_list[7]),
-+	[9] = PSC_LPSC(56, &soc_psc_list[0], &soc_pd_list[2], &soc_lpsc_list[8]),
-+	[10] = PSC_LPSC(72, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[7]),
-+	[11] = PSC_LPSC(73, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[10]),
-+	[12] = PSC_LPSC(74, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[11]),
-+};
++	/* Unlock all MCU_CTRL_MMR0 module registers */
++	mmr_unlock(MCU_CTRL_MMR0_BASE, 0);
++	mmr_unlock(MCU_CTRL_MMR0_BASE, 1);
++	mmr_unlock(MCU_CTRL_MMR0_BASE, 2);
++	mmr_unlock(MCU_CTRL_MMR0_BASE, 3);
++	mmr_unlock(MCU_CTRL_MMR0_BASE, 4);
++	mmr_unlock(MCU_CTRL_MMR0_BASE, 6);
 +
-+static struct ti_dev soc_dev_list[] = {
-+	PSC_DEV(16, &soc_lpsc_list[0]),
-+	PSC_DEV(77, &soc_lpsc_list[0]),
-+	PSC_DEV(61, &soc_lpsc_list[0]),
-+	PSC_DEV(178, &soc_lpsc_list[1]),
-+	PSC_DEV(179, &soc_lpsc_list[2]),
-+	PSC_DEV(57, &soc_lpsc_list[3]),
-+	PSC_DEV(58, &soc_lpsc_list[4]),
-+	PSC_DEV(161, &soc_lpsc_list[5]),
-+	PSC_DEV(75, &soc_lpsc_list[6]),
-+	PSC_DEV(36, &soc_lpsc_list[7]),
-+	PSC_DEV(102, &soc_lpsc_list[7]),
-+	PSC_DEV(146, &soc_lpsc_list[7]),
-+	PSC_DEV(166, &soc_lpsc_list[8]),
-+	PSC_DEV(135, &soc_lpsc_list[9]),
-+	PSC_DEV(170, &soc_lpsc_list[10]),
-+	PSC_DEV(177, &soc_lpsc_list[11]),
-+	PSC_DEV(55, &soc_lpsc_list[12]),
-+};
++	/* Unlock PADCFG_CTRL_MMR padconf registers */
++	mmr_unlock(PADCFG_MMR0_BASE, 1);
++	mmr_unlock(PADCFG_MMR1_BASE, 1);
++}
 +
-+const struct ti_k3_pd_platdata j722s_pd_platdata = {
-+	.psc = soc_psc_list,
-+	.pd = soc_pd_list,
-+	.lpsc = soc_lpsc_list,
-+	.devs = soc_dev_list,
-+	.num_psc = ARRAY_SIZE(soc_psc_list),
-+	.num_pd = ARRAY_SIZE(soc_pd_list),
-+	.num_lpsc = ARRAY_SIZE(soc_lpsc_list),
-+	.num_devs = ARRAY_SIZE(soc_dev_list),
-+};
-diff --git a/drivers/clk/ti/clk-k3.c b/drivers/clk/ti/clk-k3.c
-index a3c6e79db7..c1fc4f426f 100644
---- a/drivers/clk/ti/clk-k3.c
-+++ b/drivers/clk/ti/clk-k3.c
-@@ -94,6 +94,12 @@ static const struct soc_attr ti_k3_soc_clk_data[] = {
- 		.data = &j721s2_clk_platdata,
- 	},
- #endif
-+#if IS_ENABLED(CONFIG_SOC_K3_J722S)
-+	{
-+		.family = "J722S",
-+		.data = &j722s_clk_platdata,
-+	},
-+#endif
- #if IS_ENABLED(CONFIG_SOC_K3_J784S4)
- 	{
- 		.family = "J784S4",
-diff --git a/drivers/power/domain/ti-power-domain.c b/drivers/power/domain/ti-power-domain.c
-index a280859aa5..79ae075a5c 100644
---- a/drivers/power/domain/ti-power-domain.c
-+++ b/drivers/power/domain/ti-power-domain.c
-@@ -106,6 +106,12 @@ static const struct soc_attr ti_k3_soc_pd_data[] = {
- 		.data = &j721s2_pd_platdata,
- 	},
- #endif
-+#if IS_ENABLED(CONFIG_SOC_K3_J722S)
-+	{
-+		.family = "J722S",
-+		.data = &j722s_pd_platdata,
-+	},
-+#endif
- #if IS_ENABLED(CONFIG_SOC_K3_J784S4)
- 	{
- 		.family = "J784S4",
-diff --git a/include/k3-clk.h b/include/k3-clk.h
-index 7bc42ecbb0..855d31c9ae 100644
---- a/include/k3-clk.h
-+++ b/include/k3-clk.h
-@@ -178,6 +178,7 @@ extern const struct ti_k3_clk_platdata am62x_clk_platdata;
- extern const struct ti_k3_clk_platdata am62ax_clk_platdata;
- extern const struct ti_k3_clk_platdata j784s4_clk_platdata;
- extern const struct ti_k3_clk_platdata am62px_clk_platdata;
-+extern const struct ti_k3_clk_platdata j722s_clk_platdata;
- 
- struct clk *clk_register_ti_pll(const char *name, const char *parent_name,
- 				void __iomem *reg);
-diff --git a/include/k3-dev.h b/include/k3-dev.h
-index 0c5ae9aa42..23b316701e 100644
---- a/include/k3-dev.h
-+++ b/include/k3-dev.h
-@@ -82,6 +82,7 @@ extern const struct ti_k3_pd_platdata am62x_pd_platdata;
- extern const struct ti_k3_pd_platdata am62ax_pd_platdata;
- extern const struct ti_k3_pd_platdata j784s4_pd_platdata;
- extern const struct ti_k3_pd_platdata am62px_pd_platdata;
-+extern const struct ti_k3_pd_platdata j722s_pd_platdata;
- 
- u8 ti_pd_state(struct ti_pd *pd);
- u8 lpsc_get_state(struct ti_lpsc *lpsc);
++void board_init_f(ulong dummy)
++{
++	struct udevice *dev;
++	int ret;
++
++	if (IS_ENABLED(CONFIG_CPU_V7R))
++		setup_k3_mpu_regions();
++
++	/*
++	 * Cannot delay this further as there is a chance that
++	 * K3_BOOT_PARAM_TABLE_INDEX can be over written by SPL MALLOC section.
++	 */
++	store_boot_info_from_rom();
++
++	ctrl_mmr_unlock();
++
++	/* Init DM early */
++	ret = spl_early_init();
++	if (ret)
++		panic("spl_early_init() failed: %d\n", ret);
++
++	/*
++	 * Process pinctrl for the serial0 a.k.a. WKUP_UART0 module and continue
++	 * regardless of the result of pinctrl. Do this without probing the
++	 * device, but instead by searching the device that would request the
++	 * given sequence number if probed. The UART will be used by the DM
++	 * firmware image for various purposes and TIFS depends on us to
++	 * initialize its pin settings.
++	 */
++	ret = uclass_find_device_by_seq(UCLASS_SERIAL, 0, &dev);
++	if (!ret)
++		pinctrl_select_state(dev, "default");
++
++	if (IS_ENABLED(CONFIG_K3_EARLY_CONS)) {
++		/*
++		 * Allow establishing an early console as required for example
++		 * when doing a UART-based boot. Note that this console may not
++		 * "survive" through a SYSFW PM-init step and will need a re-init
++		 * in some way due to changing module clock frequencies.
++		 */
++		ret = early_console_init();
++		if (ret)
++			panic("early_console_init() failed: %d\n", ret);
++	}
++
++	if (IS_ENABLED(CONFIG_K3_LOAD_SYSFW)) {
++		/*
++		 * Configure and start up system controller firmware. Provide
++		 * the U-Boot console init function to the SYSFW post-PM
++		 * configuration callback hook, effectively switching on (or
++		 * over) the console output.
++		 */
++		ret = is_rom_loaded_sysfw(&bootdata);
++		if (!ret)
++			panic("ROM has not loaded TIFS firmware\n");
++
++		k3_sysfw_loader(true, NULL, NULL);
++	}
++
++	/*
++	 * Force probe of clk_k3 driver here to ensure basic default clock
++	 * configuration is always done.
++	 */
++	if (IS_ENABLED(CONFIG_SPL_CLK_K3)) {
++		ret = uclass_get_device_by_driver(UCLASS_CLK,
++						  DM_DRIVER_GET(ti_clk),
++						  &dev);
++		if (ret)
++			printf("Failed to initialize clk-k3!\n");
++	}
++
++	preloader_console_init();
++
++	/* Output System Firmware version info */
++	k3_sysfw_print_ver();
++
++	if (IS_ENABLED(CONFIG_CPU_V7R)) {
++		/* Disable ROM configured firewalls right after loading sysfw */
++		remove_fwl_configs(cbass_main_fwls, ARRAY_SIZE(cbass_main_fwls));
++	}
++
++	if (IS_ENABLED(CONFIG_K3_AM62A_DDRSS)) {
++		ret = uclass_get_device(UCLASS_RAM, 0, &dev);
++		if (ret)
++			panic("DRAM init failed: %d\n", ret);
++	}
++
++	debug("j722s_init: %s done\n", __func__);
++}
++
++static u32 __get_backup_bootmedia(u32 devstat)
++{
++	u32 bkup_bootmode = (devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
++				MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
++	u32 bkup_bootmode_cfg =
++			(devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
++				MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
++
++	switch (bkup_bootmode) {
++	case BACKUP_BOOT_DEVICE_UART:
++		return BOOT_DEVICE_UART;
++
++	case BACKUP_BOOT_DEVICE_USB:
++		return BOOT_DEVICE_USB;
++
++	case BACKUP_BOOT_DEVICE_ETHERNET:
++		return BOOT_DEVICE_ETHERNET;
++
++	case BACKUP_BOOT_DEVICE_MMC:
++		if (bkup_bootmode_cfg)
++			return BOOT_DEVICE_MMC2;
++		return BOOT_DEVICE_MMC1;
++
++	case BACKUP_BOOT_DEVICE_SPI:
++		return BOOT_DEVICE_SPI;
++
++	case BACKUP_BOOT_DEVICE_I2C:
++		return BOOT_DEVICE_I2C;
++
++	case BACKUP_BOOT_DEVICE_DFU:
++		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
++			return BOOT_DEVICE_USB;
++		return BOOT_DEVICE_DFU;
++	};
++
++	return BOOT_DEVICE_RAM;
++}
++
++static u32 __get_primary_bootmedia(u32 devstat)
++{
++	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
++				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
++	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
++				MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
++
++	switch (bootmode) {
++	case BOOT_DEVICE_OSPI:
++		fallthrough;
++	case BOOT_DEVICE_QSPI:
++		fallthrough;
++	case BOOT_DEVICE_XSPI:
++		fallthrough;
++	case BOOT_DEVICE_SPI:
++		return BOOT_DEVICE_SPI;
++
++	case BOOT_DEVICE_ETHERNET_RGMII:
++		fallthrough;
++	case BOOT_DEVICE_ETHERNET_RMII:
++		return BOOT_DEVICE_ETHERNET;
++
++	case BOOT_DEVICE_EMMC:
++		return BOOT_DEVICE_MMC1;
++
++	case BOOT_DEVICE_SPI_NAND:
++		return BOOT_DEVICE_SPINAND;
++
++	case BOOT_DEVICE_MMC:
++		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
++				MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
++			return BOOT_DEVICE_MMC2;
++		return BOOT_DEVICE_MMC1;
++
++	case BOOT_DEVICE_DFU:
++		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
++		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
++			return BOOT_DEVICE_USB;
++		return BOOT_DEVICE_DFU;
++
++	case BOOT_DEVICE_NOBOOT:
++		return BOOT_DEVICE_RAM;
++	}
++
++	return bootmode;
++}
++
++u32 spl_boot_device(void)
++{
++	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
++	u32 bootmedia;
++
++	if (bootindex == K3_PRIMARY_BOOTMODE)
++		bootmedia = __get_primary_bootmedia(devstat);
++	else
++		bootmedia = __get_backup_bootmedia(devstat);
++
++	debug("j722s_init: %s: devstat = 0x%x bootmedia = 0x%x bootindex = %d\n",
++	      __func__, devstat, bootmedia, bootindex);
++	return bootmedia;
++}
++
++u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
++{
++	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
++	u32 bootmode = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
++				MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
++	u32 bootmode_cfg = (devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
++			    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
++
++	switch (bootmode) {
++	case BOOT_DEVICE_EMMC:
++		return MMCSD_MODE_EMMCBOOT;
++	case BOOT_DEVICE_MMC:
++		if (bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_FS_RAW_MASK)
++			return MMCSD_MODE_RAW;
++	default:
++		return MMCSD_MODE_FS;
++	}
++}
 -- 
 2.25.1
 
