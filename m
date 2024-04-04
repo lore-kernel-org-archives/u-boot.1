@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CE72CD128A
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 02:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B16FCD128A
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 03:00:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A3A0881EA;
-	Thu,  4 Apr 2024 04:59:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BDEC188263;
+	Thu,  4 Apr 2024 04:59:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FXB/ZF+S";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="k623KUX/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA6B3807EC; Thu,  4 Apr 2024 04:59:43 +0200 (CEST)
+ id 4A7B188263; Thu,  4 Apr 2024 04:59:50 +0200 (CEST)
 Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
  [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BA8588279
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 04:59:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E4682882B4
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 04:59:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aford173@gmail.com
 Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-789d76ad270so32630685a.0
- for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 19:59:40 -0700 (PDT)
+ af79cd13be357-789d0c90cadso28704985a.3
+ for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 19:59:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712199579; x=1712804379; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1712199584; x=1712804384; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ySpOg+y9teuAUiMletWpc//Pn10Q9GVnglKXOq5gOhE=;
- b=FXB/ZF+S4VhivO/w5VHnp+sPhl0EHGNXvo+4dAX1Lqi2KfxD2YtceHb9fEo19f9nHI
- /HIdFI5MjeDcikS+8hUKRKr8JGqM+QbZg/lNX3/KBYjapwkB9GzNWGwRuAlt+YIPUQKV
- kYPbcfVSByrTW117xiDeVoM+47j0pBvckx0DldApMdxv9SiKrf0ySOoMR0NYESAvNp0y
- xnHFPKOcKhxR1G+UVV/85jk0x47D5qzYgotE5y/A8aqnvOyT45zqPUl4ggdQMsgmR2KM
- Snzf1rAqwbGkC/s1CUTjsXF5rx7bhkhywicHzzFXY4jqQDmjK2MXhbLRAVWBMO5orcKK
- o0jA==
+ bh=LvBW1MbLtVZZqSMlwV0SRyBe0GQj02u+AgsMmlALNqY=;
+ b=k623KUX/EeQ/qDttkaq6qK7NcZap4jYhmI5qCNfZa5nPBPXi+GWtP0JhRvb2yUoQ+I
+ pE32UhdX4pedcQcPWmB5lrNWbkoS0Qf/naIcmuP3E/bvs6hDoYc1+d7vZ5FEsenJgfJh
+ OwKYSJJTQFxGUmt8wdqqwDlFLuFpe1R0uTYX/qpe4WFwsuB3jfHp3qir5fNhluQtTBwv
+ iYUYLP/p4lXtDfV06A4U3pZQXl7E6PlpVrpPUkYhn1lJ7AqDel7SKeJKtQtJ7mfMQlv2
+ pkUDUSwDbadO2w27GQQP9CGkv+A12tkbJmLHQ6zWBvLrciavLfWvg5IFgp92BcEbi9nq
+ QTlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712199579; x=1712804379;
+ d=1e100.net; s=20230601; t=1712199584; x=1712804384;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ySpOg+y9teuAUiMletWpc//Pn10Q9GVnglKXOq5gOhE=;
- b=HvuSWqpIYeqvSy6KRe7lrJL3SL+szMKeXVP1MfgzfFs2eMK5chrgzb9wMzug47Eh+0
- qXb0X2rQ90M8DDAlxUJ/FdDHax3kPeglvsXLHil904RTvC/SsdsnFUFGZahS4fcciV4c
- iao7zZ/o0pQc0SFg5LocBwXIBQy69nR2pBstmkSZRwn3O54J0nmFQv/xnfUEvEt574Yl
- JjMIItd64iVxRoHQvXXS+W/Ku7j6gqtlSnU9VJnxjpyeBvSKLPjmLdIqW37cf9a0Tf5A
- Ea8sK+2fOiGP/9YnsrGxyGbEvnUqhXfQhMGAeN/8S/fFetLKOpO3myD9kG0p7qO54nO7
- ynWw==
-X-Gm-Message-State: AOJu0YyKuBtXMkPhdmbDlrsckq/S6MHGWOgPw4HXVWSB+TgTAjQ0Kga3
- pSx5El5kBJeBgxEdOb41oddZ3005Xi66y6E9BIYCHp3TWIJXKGYOnvQ0hJSB
-X-Google-Smtp-Source: AGHT+IEzGbe4ioYOx/vVBLeNEf/tBDbjKMMNrtJqWdt983PYKjExGYBABjmSyVf/z3V+pphqLTc4sA==
-X-Received: by 2002:ae9:e209:0:b0:78d:3b50:5cb9 with SMTP id
- c9-20020ae9e209000000b0078d3b505cb9mr1156300qkc.31.1712199579353; 
- Wed, 03 Apr 2024 19:59:39 -0700 (PDT)
+ bh=LvBW1MbLtVZZqSMlwV0SRyBe0GQj02u+AgsMmlALNqY=;
+ b=aH19BPiYhkNC5i/q0or8ZTOH1xW6p7N7fcez1iS/uLICVZW2I+W+lGeC3ggwWqtd30
+ Zp2XoV5FzRCNcKAAyy+BJZEE1Q1V53rcm3n6bX12g/WNE6ZITi/yIE08iMm5yQriMnut
+ VgiRVHiktq41KJy4TxeWJAEiriiL6dG7THdR38aFhCEXkkSX0bkrl9BUA2uTW7gzkSEh
+ lKyCFbnCmKPoUc/HRGxFM3sL2oFa8Q5ulN7Vnt/1SPkybY+lBrR04fH3yBbzPVRXpjl7
+ x7wlDATKyPq5Bw9sE2l/yUWn7FM2Ybqp220RF9U0gnwwTaa5CwUXO4DttlVVqeTwaaLA
+ 4OvQ==
+X-Gm-Message-State: AOJu0YwybcGm4JNoKphc4KITHDOiPBRTQzvKJsplzdvPGdECXhe8nd7+
+ A9dkqLLGcv+YpI6lt9Dy5bubDeBH7dnZ3X9gXlBQU7WWK1es9s0CkgXSuJ4N
+X-Google-Smtp-Source: AGHT+IGMgypjZAMRUcFg6YbUyY+wp6EqQU2KQLIPRyEIrHLya0gDefRBdjuphAxnq9BzrvToRFBv+A==
+X-Received: by 2002:a05:620a:1918:b0:78b:d7c6:f2fb with SMTP id
+ bj24-20020a05620a191800b0078bd7c6f2fbmr1507604qkb.2.1712199584404; 
+ Wed, 03 Apr 2024 19:59:44 -0700 (PDT)
 Received: from aford-System-Version.lan
  ([2601:447:d002:5be:85bc:852d:ae70:b16a])
  by smtp.gmail.com with ESMTPSA id
- c28-20020a05620a165c00b0078bc4cad726sm5034618qko.72.2024.04.03.19.59.37
+ c28-20020a05620a165c00b0078bc4cad726sm5034618qko.72.2024.04.03.19.59.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 19:59:38 -0700 (PDT)
+ Wed, 03 Apr 2024 19:59:43 -0700 (PDT)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.denx.de
 Cc: aford@beaconembedded.com, Adam Ford <aford173@gmail.com>,
@@ -79,12 +79,12 @@ Cc: aford@beaconembedded.com, Adam Ford <aford173@gmail.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Hai Pham <hai.pham.ud@renesas.com>,
  Peng Fan <peng.fan@nxp.com>, Hugo Villeneuve <hvilleneuve@dimonoff.com>,
- Gilles Talis <gilles.talis@gmail.com>, Patrick Wildt <patrick@blueri.se>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>
-Subject: [PATCH 2/3] arm64: imx: imx8mm-beacon: Migrate to OF_UPSTREAM
-Date: Wed,  3 Apr 2024 21:59:07 -0500
-Message-ID: <20240404025920.4466-2-aford173@gmail.com>
+ Patrick Wildt <patrick@blueri.se>, Gilles Talis <gilles.talis@gmail.com>,
+ Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Subject: [PATCH 3/3] arm64: imx: imx8mn-beacon: Migrate to OF_UPSTREAM
+Date: Wed,  3 Apr 2024 21:59:08 -0500
+Message-ID: <20240404025920.4466-3-aford173@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240404025920.4466-1-aford173@gmail.com>
 References: <20240404025920.4466-1-aford173@gmail.com>
@@ -106,27 +106,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The imx8mm-beacon boards can migrate to OF_UPSTREAM which also
+The imx8mn-beacon boards can migrate to OF_UPSTREAM which also
 allows for the removal the device tree files.
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 
 diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 04ffa1f165..443d651827 100644
+index 443d651827..6ddd6e311e 100644
 --- a/arch/arm/dts/Makefile
 +++ b/arch/arm/dts/Makefile
 @@ -1091,7 +1091,6 @@ dtb-$(CONFIG_ARCH_IMX8M) += \
  	imx8mn-evk.dtb \
  	imx8mn-var-som-symphony.dtb \
  	imx8mq-evk.dtb \
--	imx8mm-beacon-kit.dtb \
- 	imx8mn-beacon-kit.dtb \
+-	imx8mn-beacon-kit.dtb \
  	imx8mq-mnt-reform2.dtb \
  	imx8mq-phanbell.dtb \
-diff --git a/arch/arm/dts/imx8mm-beacon-kit.dts b/arch/arm/dts/imx8mm-beacon-kit.dts
+ 	imx8mp-data-modul-edm-sbc.dtb \
+diff --git a/arch/arm/dts/imx8mn-beacon-kit.dts b/arch/arm/dts/imx8mn-beacon-kit.dts
 deleted file mode 100644
-index 74a7b0cc10..0000000000
---- a/arch/arm/dts/imx8mm-beacon-kit.dts
+index 1392ce0258..0000000000
+--- a/arch/arm/dts/imx8mn-beacon-kit.dts
 +++ /dev/null
 @@ -1,19 +0,0 @@
 -// SPDX-License-Identifier: (GPL-2.0 OR MIT)
@@ -136,24 +136,24 @@ index 74a7b0cc10..0000000000
 -
 -/dts-v1/;
 -
--#include "imx8mm.dtsi"
--#include "imx8mm-beacon-som.dtsi"
--#include "imx8mm-beacon-baseboard.dtsi"
+-#include "imx8mn.dtsi"
+-#include "imx8mn-beacon-som.dtsi"
+-#include "imx8mn-beacon-baseboard.dtsi"
 -
 -/ {
--	model = "Beacon EmbeddedWorks i.MX8M Mini Development Kit";
--	compatible = "beacon,imx8mm-beacon-kit", "fsl,imx8mm";
+-	model = "Beacon EmbeddedWorks i.MX8M Nano Development Kit";
+-	compatible = "beacon,imx8mn-beacon-kit", "fsl,imx8mn";
 -
 -	chosen {
 -		stdout-path = &uart2;
 -	};
 -};
-diff --git a/arch/arm/dts/imx8mm-beacon-som.dtsi b/arch/arm/dts/imx8mm-beacon-som.dtsi
+diff --git a/arch/arm/dts/imx8mn-beacon-som.dtsi b/arch/arm/dts/imx8mn-beacon-som.dtsi
 deleted file mode 100644
-index cf07987ccc..0000000000
---- a/arch/arm/dts/imx8mm-beacon-som.dtsi
+index 1133cded9b..0000000000
+--- a/arch/arm/dts/imx8mn-beacon-som.dtsi
 +++ /dev/null
-@@ -1,461 +0,0 @@
+@@ -1,472 +0,0 @@
 -// SPDX-License-Identifier: (GPL-2.0 OR MIT)
 -/*
 - * Copyright 2020 Compass Electronics Group, LLC
@@ -163,6 +163,7 @@ index cf07987ccc..0000000000
 -	aliases {
 -		rtc0 = &rtc;
 -		rtc1 = &snvs_rtc;
+-		spi0 = &flexspi;
 -	};
 -
 -	usdhc1_pwrseq: usdhc1_pwrseq {
@@ -197,6 +198,13 @@ index cf07987ccc..0000000000
 -	cpu-supply = <&buck2_reg>;
 -};
 -
+-/* DDR controller is running LPDDR at 800MHz which requires 0.95V */
+-&a53_opp_table {
+-	opp-1200000000 {
+-		opp-microvolt = <950000>;
+-	};
+-};
+-
 -&ddrc {
 -	operating-points-v2 = <&ddrc_opp_table>;
 -
@@ -211,8 +219,8 @@ index cf07987ccc..0000000000
 -			opp-hz = /bits/ 64 <100000000>;
 -		};
 -
--		opp-750M {
--			opp-hz = /bits/ 64 <750000000>;
+-		opp-800M {
+-			opp-hz = /bits/ 64 <800000000>;
 -		};
 -	};
 -};
@@ -222,6 +230,8 @@ index cf07987ccc..0000000000
 -	pinctrl-0 = <&pinctrl_fec1>;
 -	phy-mode = "rgmii-id";
 -	phy-handle = <&ethphy0>;
+-	phy-supply = <&buck6_reg>;
+-	phy-reset-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
 -	fsl,magic-packet;
 -	status = "okay";
 -
@@ -266,7 +276,6 @@ index cf07987ccc..0000000000
 -		interrupt-parent = <&gpio1>;
 -		interrupts = <3 IRQ_TYPE_LEVEL_LOW>;
 -		rohm,reset-snvs-powered;
--
 -		#clock-cells = <0>;
 -		clocks = <&osc_32k 0>;
 -		clock-output-names = "clk-32k-out";
@@ -393,8 +402,8 @@ index cf07987ccc..0000000000
 -&uart1 {
 -	pinctrl-names = "default";
 -	pinctrl-0 = <&pinctrl_uart1>;
--	assigned-clocks = <&clk IMX8MM_CLK_UART1>;
--	assigned-clock-parents = <&clk IMX8MM_SYS_PLL1_80M>;
+-	assigned-clocks = <&clk IMX8MN_CLK_UART1>;
+-	assigned-clock-parents = <&clk IMX8MN_SYS_PLL1_80M>;
 -	uart-has-rtscts;
 -	status = "okay";
 -
@@ -416,6 +425,8 @@ index cf07987ccc..0000000000
 -	pinctrl-0 = <&pinctrl_usdhc1>;
 -	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
 -	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
+-	vmmc-supply = <&buck4_reg>;
+-	vqmmc-supply = <&buck5_reg>;
 -	bus-width = <4>;
 -	non-removable;
 -	cap-power-off-card;
@@ -454,205 +465,218 @@ index cf07987ccc..0000000000
 -&iomuxc {
 -	pinctrl_fec1: fec1grp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_ENET_MDC_ENET1_MDC		0x3
--			MX8MM_IOMUXC_ENET_MDIO_ENET1_MDIO	0x3
--			MX8MM_IOMUXC_ENET_TD3_ENET1_RGMII_TD3	0x1f
--			MX8MM_IOMUXC_ENET_TD2_ENET1_RGMII_TD2	0x1f
--			MX8MM_IOMUXC_ENET_TD1_ENET1_RGMII_TD1	0x1f
--			MX8MM_IOMUXC_ENET_TD0_ENET1_RGMII_TD0	0x1f
--			MX8MM_IOMUXC_ENET_RD3_ENET1_RGMII_RD3	0x91
--			MX8MM_IOMUXC_ENET_RD2_ENET1_RGMII_RD2	0x91
--			MX8MM_IOMUXC_ENET_RD1_ENET1_RGMII_RD1	0x91
--			MX8MM_IOMUXC_ENET_RD0_ENET1_RGMII_RD0	0x91
--			MX8MM_IOMUXC_ENET_TXC_ENET1_RGMII_TXC	0x1f
--			MX8MM_IOMUXC_ENET_RXC_ENET1_RGMII_RXC	0x91
--			MX8MM_IOMUXC_ENET_RX_CTL_ENET1_RGMII_RX_CTL	0x91
--			MX8MM_IOMUXC_ENET_TX_CTL_ENET1_RGMII_TX_CTL	0x1f
--			MX8MM_IOMUXC_SAI2_RXC_GPIO4_IO22	0x19
+-			MX8MN_IOMUXC_ENET_MDC_ENET1_MDC		0x3
+-			MX8MN_IOMUXC_ENET_MDIO_ENET1_MDIO	0x3
+-			MX8MN_IOMUXC_ENET_TD3_ENET1_RGMII_TD3	0x1f
+-			MX8MN_IOMUXC_ENET_TD2_ENET1_RGMII_TD2	0x1f
+-			MX8MN_IOMUXC_ENET_TD1_ENET1_RGMII_TD1	0x1f
+-			MX8MN_IOMUXC_ENET_TD0_ENET1_RGMII_TD0	0x1f
+-			MX8MN_IOMUXC_ENET_RD3_ENET1_RGMII_RD3	0x91
+-			MX8MN_IOMUXC_ENET_RD2_ENET1_RGMII_RD2	0x91
+-			MX8MN_IOMUXC_ENET_RD1_ENET1_RGMII_RD1	0x91
+-			MX8MN_IOMUXC_ENET_RD0_ENET1_RGMII_RD0	0x91
+-			MX8MN_IOMUXC_ENET_TXC_ENET1_RGMII_TXC	0x1f
+-			MX8MN_IOMUXC_ENET_RXC_ENET1_RGMII_RXC	0x91
+-			MX8MN_IOMUXC_ENET_RX_CTL_ENET1_RGMII_RX_CTL	0x91
+-			MX8MN_IOMUXC_ENET_TX_CTL_ENET1_RGMII_TX_CTL	0x1f
+-			MX8MN_IOMUXC_SAI2_RXC_GPIO4_IO22	0x19
 -		>;
 -	};
 -
 -	pinctrl_i2c1: i2c1grp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_I2C1_SCL_I2C1_SCL		0x400001c3
--			MX8MM_IOMUXC_I2C1_SDA_I2C1_SDA		0x400001c3
+-			MX8MN_IOMUXC_I2C1_SCL_I2C1_SCL		0x400001c3
+-			MX8MN_IOMUXC_I2C1_SDA_I2C1_SDA		0x400001c3
 -		>;
 -	};
 -
 -	pinctrl_i2c3: i2c3grp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_I2C3_SCL_I2C3_SCL		0x400001c3
--			MX8MM_IOMUXC_I2C3_SDA_I2C3_SDA		0x400001c3
+-			MX8MN_IOMUXC_I2C3_SCL_I2C3_SCL		0x400001c3
+-			MX8MN_IOMUXC_I2C3_SDA_I2C3_SDA		0x400001c3
 -		>;
 -	};
 -
 -	pinctrl_flexspi: flexspigrp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_NAND_ALE_QSPI_A_SCLK               0x1c2
--			MX8MM_IOMUXC_NAND_CE0_B_QSPI_A_SS0_B            0x82
--			MX8MM_IOMUXC_NAND_DATA00_QSPI_A_DATA0           0x82
--			MX8MM_IOMUXC_NAND_DATA01_QSPI_A_DATA1           0x82
--			MX8MM_IOMUXC_NAND_DATA02_QSPI_A_DATA2           0x82
--			MX8MM_IOMUXC_NAND_DATA03_QSPI_A_DATA3           0x82
+-			MX8MN_IOMUXC_NAND_ALE_QSPI_A_SCLK               0x1c2
+-			MX8MN_IOMUXC_NAND_CE0_B_QSPI_A_SS0_B            0x82
+-			MX8MN_IOMUXC_NAND_DATA00_QSPI_A_DATA0           0x82
+-			MX8MN_IOMUXC_NAND_DATA01_QSPI_A_DATA1           0x82
+-			MX8MN_IOMUXC_NAND_DATA02_QSPI_A_DATA2           0x82
+-			MX8MN_IOMUXC_NAND_DATA03_QSPI_A_DATA3           0x82
 -		>;
 -	};
 -
 -	pinctrl_pmic: pmicirqgrp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_GPIO1_IO03_GPIO1_IO3	0x141
+-			MX8MN_IOMUXC_GPIO1_IO03_GPIO1_IO3		0x141
 -		>;
 -	};
 -
 -	pinctrl_uart1: uart1grp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_UART1_RXD_UART1_DCE_RX	0x140
--			MX8MM_IOMUXC_UART1_TXD_UART1_DCE_TX	0x140
--			MX8MM_IOMUXC_UART3_RXD_UART1_DCE_CTS_B	0x140
--			MX8MM_IOMUXC_UART3_TXD_UART1_DCE_RTS_B	0x140
--			MX8MM_IOMUXC_SD1_DATA4_GPIO2_IO6	0x19
--			MX8MM_IOMUXC_SD1_DATA5_GPIO2_IO7	0x19
--			MX8MM_IOMUXC_SD1_DATA6_GPIO2_IO8	0x19
--			MX8MM_IOMUXC_GPIO1_IO00_ANAMIX_REF_CLK_32K	0x141
+-			MX8MN_IOMUXC_UART1_RXD_UART1_DCE_RX	0x140
+-			MX8MN_IOMUXC_UART1_TXD_UART1_DCE_TX	0x140
+-			MX8MN_IOMUXC_UART3_RXD_UART1_DCE_CTS_B	0x140
+-			MX8MN_IOMUXC_UART3_TXD_UART1_DCE_RTS_B	0x140
+-			MX8MN_IOMUXC_SD1_DATA4_GPIO2_IO6	0x19
+-			MX8MN_IOMUXC_SD1_DATA5_GPIO2_IO7	0x19
+-			MX8MN_IOMUXC_SD1_DATA6_GPIO2_IO8	0x19
+-			MX8MN_IOMUXC_GPIO1_IO00_ANAMIX_REF_CLK_32K	0x141
 -		>;
 -	};
 -
 -	pinctrl_usdhc1_gpio: usdhc1gpiogrp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_SD1_RESET_B_GPIO2_IO10	0x41
+-			MX8MN_IOMUXC_SD1_RESET_B_GPIO2_IO10	0x41
 -		>;
 -	};
 -
 -	pinctrl_usdhc1: usdhc1grp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_SD1_CLK_USDHC1_CLK		0x190
--			MX8MM_IOMUXC_SD1_CMD_USDHC1_CMD		0x1d0
--			MX8MM_IOMUXC_SD1_DATA0_USDHC1_DATA0	0x1d0
--			MX8MM_IOMUXC_SD1_DATA1_USDHC1_DATA1	0x1d0
--			MX8MM_IOMUXC_SD1_DATA2_USDHC1_DATA2	0x1d0
--			MX8MM_IOMUXC_SD1_DATA3_USDHC1_DATA3	0x1d0
+-			MX8MN_IOMUXC_SD1_CLK_USDHC1_CLK		0x190
+-			MX8MN_IOMUXC_SD1_CMD_USDHC1_CMD		0x1d0
+-			MX8MN_IOMUXC_SD1_DATA0_USDHC1_DATA0	0x1d0
+-			MX8MN_IOMUXC_SD1_DATA1_USDHC1_DATA1	0x1d0
+-			MX8MN_IOMUXC_SD1_DATA2_USDHC1_DATA2	0x1d0
+-			MX8MN_IOMUXC_SD1_DATA3_USDHC1_DATA3	0x1d0
 -		>;
 -	};
 -
 -	pinctrl_usdhc1_100mhz: usdhc1-100mhzgrp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_SD1_CLK_USDHC1_CLK		0x194
--			MX8MM_IOMUXC_SD1_CMD_USDHC1_CMD		0x1d4
--			MX8MM_IOMUXC_SD1_DATA0_USDHC1_DATA0	0x1d4
--			MX8MM_IOMUXC_SD1_DATA1_USDHC1_DATA1	0x1d4
--			MX8MM_IOMUXC_SD1_DATA2_USDHC1_DATA2	0x1d4
--			MX8MM_IOMUXC_SD1_DATA3_USDHC1_DATA3	0x1d4
+-			MX8MN_IOMUXC_SD1_CLK_USDHC1_CLK		0x194
+-			MX8MN_IOMUXC_SD1_CMD_USDHC1_CMD		0x1d4
+-			MX8MN_IOMUXC_SD1_DATA0_USDHC1_DATA0	0x1d4
+-			MX8MN_IOMUXC_SD1_DATA1_USDHC1_DATA1	0x1d4
+-			MX8MN_IOMUXC_SD1_DATA2_USDHC1_DATA2	0x1d4
+-			MX8MN_IOMUXC_SD1_DATA3_USDHC1_DATA3	0x1d4
 -		>;
 -	};
 -
 -	pinctrl_usdhc1_200mhz: usdhc1-200mhzgrp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_SD1_CLK_USDHC1_CLK		0x196
--			MX8MM_IOMUXC_SD1_CMD_USDHC1_CMD		0x1d6
--			MX8MM_IOMUXC_SD1_DATA0_USDHC1_DATA0	0x1d6
--			MX8MM_IOMUXC_SD1_DATA1_USDHC1_DATA1	0x1d6
--			MX8MM_IOMUXC_SD1_DATA2_USDHC1_DATA2	0x1d6
--			MX8MM_IOMUXC_SD1_DATA3_USDHC1_DATA3	0x1d6
+-			MX8MN_IOMUXC_SD1_CLK_USDHC1_CLK		0x196
+-			MX8MN_IOMUXC_SD1_CMD_USDHC1_CMD		0x1d6
+-			MX8MN_IOMUXC_SD1_DATA0_USDHC1_DATA0	0x1d6
+-			MX8MN_IOMUXC_SD1_DATA1_USDHC1_DATA1	0x1d6
+-			MX8MN_IOMUXC_SD1_DATA2_USDHC1_DATA2	0x1d6
+-			MX8MN_IOMUXC_SD1_DATA3_USDHC1_DATA3	0x1d6
 -		>;
 -	};
 -
 -	pinctrl_usdhc3: usdhc3grp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_NAND_WE_B_USDHC3_CLK		0x190
--			MX8MM_IOMUXC_NAND_WP_B_USDHC3_CMD		0x1d0
--			MX8MM_IOMUXC_NAND_DATA04_USDHC3_DATA0		0x1d0
--			MX8MM_IOMUXC_NAND_DATA05_USDHC3_DATA1		0x1d0
--			MX8MM_IOMUXC_NAND_DATA06_USDHC3_DATA2		0x1d0
--			MX8MM_IOMUXC_NAND_DATA07_USDHC3_DATA3		0x1d0
--			MX8MM_IOMUXC_NAND_RE_B_USDHC3_DATA4		0x1d0
--			MX8MM_IOMUXC_NAND_CE2_B_USDHC3_DATA5		0x1d0
--			MX8MM_IOMUXC_NAND_CE3_B_USDHC3_DATA6		0x1d0
--			MX8MM_IOMUXC_NAND_CLE_USDHC3_DATA7		0x1d0
--			MX8MM_IOMUXC_NAND_CE1_B_USDHC3_STROBE		0x190
+-			MX8MN_IOMUXC_NAND_WE_B_USDHC3_CLK		0x190
+-			MX8MN_IOMUXC_NAND_WP_B_USDHC3_CMD		0x1d0
+-			MX8MN_IOMUXC_NAND_DATA04_USDHC3_DATA0		0x1d0
+-			MX8MN_IOMUXC_NAND_DATA05_USDHC3_DATA1		0x1d0
+-			MX8MN_IOMUXC_NAND_DATA06_USDHC3_DATA2		0x1d0
+-			MX8MN_IOMUXC_NAND_DATA07_USDHC3_DATA3		0x1d0
+-			MX8MN_IOMUXC_NAND_RE_B_USDHC3_DATA4		0x1d0
+-			MX8MN_IOMUXC_NAND_CE2_B_USDHC3_DATA5		0x1d0
+-			MX8MN_IOMUXC_NAND_CE3_B_USDHC3_DATA6		0x1d0
+-			MX8MN_IOMUXC_NAND_CLE_USDHC3_DATA7		0x1d0
+-			MX8MN_IOMUXC_NAND_CE1_B_USDHC3_STROBE		0x190
 -		>;
 -	};
 -
 -	pinctrl_usdhc3_100mhz: usdhc3-100mhzgrp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_NAND_WE_B_USDHC3_CLK		0x194
--			MX8MM_IOMUXC_NAND_WP_B_USDHC3_CMD		0x1d4
--			MX8MM_IOMUXC_NAND_DATA04_USDHC3_DATA0		0x1d4
--			MX8MM_IOMUXC_NAND_DATA05_USDHC3_DATA1		0x1d4
--			MX8MM_IOMUXC_NAND_DATA06_USDHC3_DATA2		0x1d4
--			MX8MM_IOMUXC_NAND_DATA07_USDHC3_DATA3		0x1d4
--			MX8MM_IOMUXC_NAND_RE_B_USDHC3_DATA4		0x1d4
--			MX8MM_IOMUXC_NAND_CE2_B_USDHC3_DATA5		0x1d4
--			MX8MM_IOMUXC_NAND_CE3_B_USDHC3_DATA6		0x1d4
--			MX8MM_IOMUXC_NAND_CLE_USDHC3_DATA7		0x1d4
--			MX8MM_IOMUXC_NAND_CE1_B_USDHC3_STROBE		0x194
+-			MX8MN_IOMUXC_NAND_WE_B_USDHC3_CLK		0x194
+-			MX8MN_IOMUXC_NAND_WP_B_USDHC3_CMD		0x1d4
+-			MX8MN_IOMUXC_NAND_DATA04_USDHC3_DATA0		0x1d4
+-			MX8MN_IOMUXC_NAND_DATA05_USDHC3_DATA1		0x1d4
+-			MX8MN_IOMUXC_NAND_DATA06_USDHC3_DATA2		0x1d4
+-			MX8MN_IOMUXC_NAND_DATA07_USDHC3_DATA3		0x1d4
+-			MX8MN_IOMUXC_NAND_RE_B_USDHC3_DATA4		0x1d4
+-			MX8MN_IOMUXC_NAND_CE2_B_USDHC3_DATA5		0x1d4
+-			MX8MN_IOMUXC_NAND_CE3_B_USDHC3_DATA6		0x1d4
+-			MX8MN_IOMUXC_NAND_CLE_USDHC3_DATA7		0x1d4
+-			MX8MN_IOMUXC_NAND_CE1_B_USDHC3_STROBE		0x194
 -		>;
 -	};
 -
 -	pinctrl_usdhc3_200mhz: usdhc3-200mhzgrp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_NAND_WE_B_USDHC3_CLK		0x196
--			MX8MM_IOMUXC_NAND_WP_B_USDHC3_CMD		0x1d6
--			MX8MM_IOMUXC_NAND_DATA04_USDHC3_DATA0		0x1d6
--			MX8MM_IOMUXC_NAND_DATA05_USDHC3_DATA1		0x1d6
--			MX8MM_IOMUXC_NAND_DATA06_USDHC3_DATA2		0x1d6
--			MX8MM_IOMUXC_NAND_DATA07_USDHC3_DATA3		0x1d6
--			MX8MM_IOMUXC_NAND_RE_B_USDHC3_DATA4		0x1d6
--			MX8MM_IOMUXC_NAND_CE2_B_USDHC3_DATA5		0x1d6
--			MX8MM_IOMUXC_NAND_CE3_B_USDHC3_DATA6		0x1d6
--			MX8MM_IOMUXC_NAND_CLE_USDHC3_DATA7		0x1d6
--			MX8MM_IOMUXC_NAND_CE1_B_USDHC3_STROBE		0x196
+-			MX8MN_IOMUXC_NAND_WE_B_USDHC3_CLK		0x196
+-			MX8MN_IOMUXC_NAND_WP_B_USDHC3_CMD		0x1d6
+-			MX8MN_IOMUXC_NAND_DATA04_USDHC3_DATA0		0x1d6
+-			MX8MN_IOMUXC_NAND_DATA05_USDHC3_DATA1		0x1d6
+-			MX8MN_IOMUXC_NAND_DATA06_USDHC3_DATA2		0x1d6
+-			MX8MN_IOMUXC_NAND_DATA07_USDHC3_DATA3		0x1d6
+-			MX8MN_IOMUXC_NAND_RE_B_USDHC3_DATA4		0x1d6
+-			MX8MN_IOMUXC_NAND_CE2_B_USDHC3_DATA5		0x1d6
+-			MX8MN_IOMUXC_NAND_CE3_B_USDHC3_DATA6		0x1d6
+-			MX8MN_IOMUXC_NAND_CLE_USDHC3_DATA7		0x1d6
+-			MX8MN_IOMUXC_NAND_CE1_B_USDHC3_STROBE		0x196
 -		>;
 -	};
 -
 -	pinctrl_wdog: wdoggrp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_GPIO1_IO02_WDOG1_WDOG_B		0x166
+-			MX8MN_IOMUXC_GPIO1_IO02_WDOG1_WDOG_B		0xc6
 -		>;
 -	};
 -
 -	pinctrl_wlan: wlangrp {
 -		fsl,pins = <
--			MX8MM_IOMUXC_SD1_DATA7_GPIO2_IO9		0x111
+-			MX8MN_IOMUXC_SD1_DATA7_GPIO2_IO9		0x111
 -		>;
 -	};
 -};
 diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kconfig
-index dd6ced5b28..3592f6736b 100644
+index 3592f6736b..0bd40bce3b 100644
 --- a/arch/arm/mach-imx/imx8m/Kconfig
 +++ b/arch/arm/mach-imx/imx8m/Kconfig
-@@ -272,6 +272,7 @@ config TARGET_IMX8MM_BEACON
+@@ -282,6 +282,7 @@ config TARGET_IMX8MN_BEACON
  	select FSL_CAAM
  	select ARCH_MISC_INIT
  	select SPL_CRYPTO if SPL
 +	imply OF_UPSTREAM
  
- config TARGET_IMX8MN_BEACON
- 	bool "imx8mn Beacon Embedded devkit"
-diff --git a/configs/imx8mm_beacon_defconfig b/configs/imx8mm_beacon_defconfig
-index b926798ae0..0b601bb862 100644
---- a/configs/imx8mm_beacon_defconfig
-+++ b/configs/imx8mm_beacon_defconfig
-@@ -10,7 +10,7 @@ CONFIG_SF_DEFAULT_SPEED=10000000
+ config TARGET_PHYCORE_IMX8MM
+ 	bool "PHYTEC PHYCORE i.MX8MM"
+diff --git a/configs/imx8mn_beacon_2g_defconfig b/configs/imx8mn_beacon_2g_defconfig
+index 2d4cd1fd97..e8009c410a 100644
+--- a/configs/imx8mn_beacon_2g_defconfig
++++ b/configs/imx8mn_beacon_2g_defconfig
+@@ -11,7 +11,7 @@ CONFIG_SF_DEFAULT_SPEED=40000000
  CONFIG_ENV_SIZE=0x2000
  CONFIG_ENV_OFFSET=0xFFFFDE00
  CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="imx8mm-beacon-kit"
-+CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mm-beacon-kit"
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_TARGET_IMX8MM_BEACON=y
- CONFIG_SYS_MONITOR_LEN=524288
-diff --git a/configs/imx8mm_beacon_fspi_defconfig b/configs/imx8mm_beacon_fspi_defconfig
-index 341ea47d98..eaf8dce3b5 100644
---- a/configs/imx8mm_beacon_fspi_defconfig
-+++ b/configs/imx8mm_beacon_fspi_defconfig
-@@ -11,7 +11,7 @@ CONFIG_ENV_SIZE=0x2000
+-CONFIG_DEFAULT_DEVICE_TREE="imx8mn-beacon-kit"
++CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mn-beacon-kit"
+ CONFIG_SPL_TEXT_BASE=0x912000
+ CONFIG_TARGET_IMX8MN_BEACON=y
+ CONFIG_IMX8MN_BEACON_2GB_LPDDR=y
+diff --git a/configs/imx8mn_beacon_defconfig b/configs/imx8mn_beacon_defconfig
+index ec933019aa..ed671cf4a7 100644
+--- a/configs/imx8mn_beacon_defconfig
++++ b/configs/imx8mn_beacon_defconfig
+@@ -11,7 +11,7 @@ CONFIG_SF_DEFAULT_SPEED=40000000
+ CONFIG_ENV_SIZE=0x2000
  CONFIG_ENV_OFFSET=0xFFFFDE00
- CONFIG_IMX_CONFIG="board/freescale/imx8mm_evk/imximage-8mm-lpddr4-fspi.cfg"
  CONFIG_DM_GPIO=y
--CONFIG_DEFAULT_DEVICE_TREE="imx8mm-beacon-kit"
-+CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mm-beacon-kit"
- CONFIG_SPL_TEXT_BASE=0x7E2000
- CONFIG_TARGET_IMX8MM_BEACON=y
- CONFIG_SYS_MONITOR_LEN=524288
+-CONFIG_DEFAULT_DEVICE_TREE="imx8mn-beacon-kit"
++CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mn-beacon-kit"
+ CONFIG_SPL_TEXT_BASE=0x912000
+ CONFIG_TARGET_IMX8MN_BEACON=y
+ CONFIG_OF_LIBFDT_OVERLAY=y
+diff --git a/configs/imx8mn_beacon_fspi_defconfig b/configs/imx8mn_beacon_fspi_defconfig
+index 458afba441..11c257a756 100644
+--- a/configs/imx8mn_beacon_fspi_defconfig
++++ b/configs/imx8mn_beacon_fspi_defconfig
+@@ -11,7 +11,7 @@ CONFIG_SF_DEFAULT_SPEED=40000000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_ENV_OFFSET=0xFFFFDE00
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="imx8mn-beacon-kit"
++CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mn-beacon-kit"
+ CONFIG_SPL_TEXT_BASE=0x912000
+ CONFIG_TARGET_IMX8MN_BEACON=y
+ CONFIG_OF_LIBFDT_OVERLAY=y
 -- 
 2.43.0
 
