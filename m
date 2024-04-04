@@ -4,95 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 761BACD1292
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 07:22:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 130F7CD1292
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 07:36:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B13BA8801A;
-	Thu,  4 Apr 2024 09:22:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 37C6D88164;
+	Thu,  4 Apr 2024 09:36:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HlXFbcrl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZVdk0UIV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3C8988044; Thu,  4 Apr 2024 09:22:15 +0200 (CEST)
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
- [IPv6:2a00:1450:4864:20::536])
+ id E6C6288235; Thu,  4 Apr 2024 09:36:31 +0200 (CEST)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D4EF87F2D
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 09:22:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9247F88044
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 09:36:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x536.google.com with SMTP id
- 4fb4d7f45d1cf-56bf6591865so886754a12.0
- for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 00:22:13 -0700 (PDT)
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2d68cf90ec4so8410261fa.1
+ for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 00:36:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712215333; x=1712820133; darn=lists.denx.de;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date:from:to
- :cc:subject:date:message-id:reply-to;
- bh=+L4qlF2QqHMP40Q27yn1cuK/1KvNz0frfaBn96uTKTk=;
- b=HlXFbcrlxWNmqUh6mwUFGX3FbmQIK1TOhiMOsywfjLNLoI6NVPHIXGZrR1PbFfroZ9
- h+LWUUbPhkuN3xbBj6KKUta8nteCU3JDoJ66DyLLy1Rl1NZEwgy6uSiKHbQIbLfyl5HC
- JkNgxFxSdzKtRKP6lMkYhHvKeU8XxnbfTDmc9YyqH8u5HWO+yeTJLl/cSbZsJirXGHk3
- zQ38NQYbRqb1v67O61zovEE4IOq3yL2dUUz+wnwyq3Lu1F6ltBmptF33LwiIjLoznmde
- 4nu88g7OLI17MMO3/GR2LHhP0GVeftIUyXzGuJnovO4jxaV6MN56KEAH64jfNPC+sfUN
- TOlw==
+ d=linaro.org; s=google; t=1712216187; x=1712820987; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=N9JIN/eiBd2SJwJumOU92DnI2L08i89ib8txoVLS1sY=;
+ b=ZVdk0UIVjuZDbZhCzPtVp6tIH2JPvLvrVzKywTIGKLz7ubsXrHd+YJvaEdf7Fmg+Mn
+ bKEYtliAVjhROC02oR4g+P/F2wNgHWzuvyx/8gmwaubGCqdzCYe0mjtwHWK12dCzPsCg
+ ZUVVC9wKc+HKjcx2ipXOcWDEIOOXUr2UzPwnAjkg8Wnrj0bg/QPhLqUbSZnOEw9jbsSZ
+ 8HcCCWacVx/rIRwj3ReP5IiPX9H/DfDKf2FMr3+VfsaOtn5Ht4EWUtazoExSb3MVxKMW
+ ek9OziUVV2EW86YK+uXb3OpRRINIKAI6+PWfObxKKc7fFwKnbGU/ruRoQ2djWx2x4Q8H
+ 3nLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712215333; x=1712820133;
- h=in-reply-to:content-transfer-encoding:content-disposition
- :mime-version:references:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+L4qlF2QqHMP40Q27yn1cuK/1KvNz0frfaBn96uTKTk=;
- b=J3UoIgbKzvdprPm11GhKjQR6+pwWk8Cgz2rS+zDmqtBH6qBDA5YMvXTLeic1pqmzk9
- XJuLBZoL1/5mae6RrDfKk1heCw00xQOjPGNCsX5CVTEdnno1VAXpBk8qWp5GJ0ClJKvG
- B1sfVMupziBKC9/1akuDj7WczSCDGL7fjmP2SMcTr+HzCKhw5rlCS4YDF+z90MVsAFlq
- HejbT5GHW1hkKl+y1YiXh0BKv97HVafD2b9nKUsiXficekj/8cQBMb0iA/qzKTAKOXKL
- Msxmjch4KanOWtMeCSIhlkLXgz35eDSOJz4mZdAVU7IZ5Oqoda0VXz0/oWicKHNXhbZR
- Tsrw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXQDBCsFMrjwz/tvqoU4jt4KKWBHdGzrtvsYzwfa3yYU3s6vHWmOprwMoykHdTkGe6XxBR8J30e3DnvgNH3DS+oKRB41w==
-X-Gm-Message-State: AOJu0YxrLOpiazX9jO88wxmV6Nvs9whODsR+NPJk+qbsX+/IwuuydPlK
- 0sjbKsJSFYDm5TG8lOtwzYX9TQE9vshVMIL/3YWhP67P6/3OsRkfQnToIYhHC2g=
-X-Google-Smtp-Source: AGHT+IFXzqySWd55Kc6Rf3LIVV54T1BOW5DGuuaf1zajEPYda7Dr1s+O2Vm724BUY5G3AHVhtis/wQ==
-X-Received: by 2002:a50:d696:0:b0:56c:5990:813e with SMTP id
- r22-20020a50d696000000b0056c5990813emr935195edi.13.1712215333098; 
- Thu, 04 Apr 2024 00:22:13 -0700 (PDT)
-Received: from hera (ppp089210071137.access.hol.gr. [89.210.71.137])
- by smtp.gmail.com with ESMTPSA id
- ig10-20020a056402458a00b0056c0a668316sm1827108edb.3.2024.04.04.00.22.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Apr 2024 00:22:12 -0700 (PDT)
-Date: Thu, 4 Apr 2024 10:22:09 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bin Meng <bmeng@tinylab.org>,
- Etienne Carriere <etienne.carriere@foss.st.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jens Wiklander <jens.wiklander@linaro.org>,
- Jorge Ramirez-Ortiz <jorge@foundries.io>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Roger Knecht <rknecht@pm.me>, Sean Edmond <seanedmond@microsoft.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH v3 0/6] TEE: minor cleanup
-Message-ID: <Zg5VIfnPElreq3ls@hera>
-References: <20240304174454.1484507-1-igor.opaniuk@gmail.com>
- <CAByghJY17Z42heuQiAruJPHKpQ-3_Ge-bqt70LC3g+2M7dAyvg@mail.gmail.com>
- <CAC_iWj+Uq0NZhBKuAbbM5asvUuTBku0OZDSu+b68rtqNFqFCDA@mail.gmail.com>
+ d=1e100.net; s=20230601; t=1712216187; x=1712820987;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=N9JIN/eiBd2SJwJumOU92DnI2L08i89ib8txoVLS1sY=;
+ b=mKEmjIXMuqy9x+9nt9kj5uNHjbEhxuQSZ4V6e+Uk30RyYboKX+Ft8V13XaDW71qwGf
+ 6agX/at1P7IJS8wPQdo/4xXD+5Eu1QahbAPmXww/D3az7UBwWqZkxgid+xnK9FT6AJPH
+ T4EGbrteHvjlLSUT9/knumoPp2Uw6IRFmArjAdsEobTTsxlrxJV+jDvzpbXc8Czb/l0t
+ SIRdgaZHWdAh6iyEb4d420E4aBn+JOxeUp22BKBMf0H04MU3IMVcihUNTvIOSZKk6sD+
+ iScr2vT3qSZGALpj2o3ZT85PyWnW1as6KdJekFKIytgTG0tTAT6Y1LND5K8rkaELN5A8
+ V5sw==
+X-Gm-Message-State: AOJu0YzQXH7MkgB1XRKBi7OkTra0NwPmqR1n4AJmkUZtVfaiIet64onC
+ hwA1iUf3zuETKPfedk4ryt3O7XyuyQeBnjAUJ9YFX3/+e4dKt7kFYxYDxVgZn7JknOYxVhuEjtr
+ p5PZMLGWsHZtCiy7X/ECA+1LyUGZU60p9wDmA2qTQHwVjxDXFH/4=
+X-Google-Smtp-Source: AGHT+IF6bJCOYLSrO/aZsRNbbK5LyOL2yg+Jw4vacteuiJWbmX4eDXdaJ71qWck+PvFwUxUp28WBt34ayts+/BbLV0o=
+X-Received: by 2002:a2e:9058:0:b0:2d8:2d48:18f7 with SMTP id
+ n24-20020a2e9058000000b002d82d4818f7mr1250193ljg.9.1712216187267; Thu, 04 Apr
+ 2024 00:36:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAC_iWj+Uq0NZhBKuAbbM5asvUuTBku0OZDSu+b68rtqNFqFCDA@mail.gmail.com>
+References: <20240402090950.3819705-1-kojima.masahisa@socionext.com>
+In-Reply-To: <20240402090950.3819705-1-kojima.masahisa@socionext.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 4 Apr 2024 10:35:51 +0300
+Message-ID: <CAC_iWjLtDjj1GXK5GaOfG90hRHk_n9R0Uy89q=7eRykjX1Gu3w@mail.gmail.com>
+Subject: Re: [PATCH v2] efi_loader: fix append write behavior to non-existent
+ variable
+To: Masahisa Kojima <kojima.masahisa@socionext.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,82 +86,146 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Igor,
+On Tue, 2 Apr 2024 at 12:09, Masahisa Kojima
+<kojima.masahisa@socionext.com> wrote:
+>
+> Current "variables" efi_selftest result is inconsistent
+> between the U-Boot file storage and the tee-based StandaloneMM
+> RPMB secure storage.
+>
+> U-Boot file storage implementation does not accept SetVariale
+> call to non-existent variable with EFI_VARIABLE_APPEND_WRITE,
+> it return EFI_NOT_FOUND.
+> However it is accepted and new variable is created in EDK II
+> StandaloneMM implementation if valid data and size are specified.
+> If data size is 0, EFI_SUCCESS is returned.
+>
+> Since UEFI specification does not clearly describe the behavior
+> of the append write to non-existent variable, let's update
+> the U-Boot file storage implementation to get aligned with
+> the EDK II reference implementation.
+>
+> Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+> ---
+> v1 -> v2
+> - return EFI_SUCCESS for append write with data size 0
+> - add comment that we follow the EDK II implementation
+>
+>  lib/efi_loader/efi_variable.c             | 26 +++++++++---
+>  lib/efi_selftest/efi_selftest_variables.c | 48 ++++++++++++++++++++++-
+>  2 files changed, 66 insertions(+), 8 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+> index 40f7a0fb10..d1db7ade0a 100644
+> --- a/lib/efi_loader/efi_variable.c
+> +++ b/lib/efi_loader/efi_variable.c
+> @@ -282,11 +282,21 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+>                 }
+>                 time = var->time;
+>         } else {
+> -               if (delete || append)
+> -                       /*
+> -                        * Trying to delete or to update a non-existent
+> -                        * variable.
+> -                        */
+> +               /*
+> +                * UEFI specification does not clearly describe the expected
+> +                * behavior of append write with data size 0, we follow
+> +                * the EDK II reference implementation.
+> +                */
+> +               if (append && !data_size)
+> +                       return EFI_SUCCESS;
+> +
+> +               /*
+> +                * EFI_VARIABLE_APPEND_WRITE to non-existent variable is accepted
+> +                * and new variable is created in EDK II reference implementation.
+> +                * We follow it and only check the deletion here.
+> +                */
+> +               if (delete)
+> +                       /* Trying to delete a non-existent variable. */
+>                         return EFI_NOT_FOUND;
+>         }
+>
+> @@ -329,7 +339,11 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+>                 /* EFI_NOT_FOUND has been handled before */
+>                 attributes = var->attr;
+>                 ret = EFI_SUCCESS;
+> -       } else if (append) {
+> +       } else if (append && var) {
+> +               /*
+> +                * data is appended if EFI_VARIABLE_APPEND_WRITE is set and
+> +                * variable exists.
+> +                */
+>                 u16 *old_data = var->name;
+>
+>                 for (; *old_data; ++old_data)
+> diff --git a/lib/efi_selftest/efi_selftest_variables.c b/lib/efi_selftest/efi_selftest_variables.c
+> index c7a3fdbaa6..39ad03a090 100644
+> --- a/lib/efi_selftest/efi_selftest_variables.c
+> +++ b/lib/efi_selftest/efi_selftest_variables.c
+> @@ -131,13 +131,57 @@ static int execute(void)
+>                             (unsigned int)len);
+>         if (memcmp(data, v, len))
+>                 efi_st_todo("GetVariable returned wrong value\n");
+> -       /* Append variable 2 */
+> +
+> +       /* Append variable 2, write to non-existent variable with datasize=0 */
+> +       ret = runtime->set_variable(u"efi_none", &guid_vendor1,
+> +                                   EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> +                                   EFI_VARIABLE_APPEND_WRITE,
+> +                                   0, v);
+> +       if (ret != EFI_SUCCESS) {
+> +               efi_st_error(
+> +                       "SetVariable(APPEND_WRITE) with size 0 to non-existent variable returns wrong code\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +       len = EFI_ST_MAX_DATA_SIZE;
+> +       ret = runtime->get_variable(u"efi_none", &guid_vendor1,
+> +                                   &attr, &len, data);
+> +       if (ret != EFI_NOT_FOUND) {
+> +               efi_st_error("Variable must not be created\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +       /* Append variable 2, write to non-existent variable with valid data size*/
+>         ret = runtime->set_variable(u"efi_none", &guid_vendor1,
+>                                     EFI_VARIABLE_BOOTSERVICE_ACCESS |
+>                                     EFI_VARIABLE_APPEND_WRITE,
+>                                     15, v);
+> +       if (ret != EFI_SUCCESS) {
+> +               efi_st_error("SetVariable(APPEND_WRITE) with valid size and data to non-existent variable must be succcessful\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +       len = EFI_ST_MAX_DATA_SIZE;
+> +       ret = runtime->get_variable(u"efi_none", &guid_vendor1,
+> +                                   &attr, &len, data);
+> +       if (ret != EFI_SUCCESS) {
+> +               efi_st_error("GetVariable failed\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +       if (len != 15)
+> +               efi_st_todo("GetVariable returned wrong length %u\n",
+> +                           (unsigned int)len);
+> +       if (memcmp(data, v, len))
+> +               efi_st_todo("GetVariable returned wrong value\n");
+> +       /* Delete variable efi_none */
+> +       ret = runtime->set_variable(u"efi_none", &guid_vendor1,
+> +                                   0, 0, NULL);
+> +       if (ret != EFI_SUCCESS) {
+> +               efi_st_error("SetVariable failed\n");
+> +               return EFI_ST_FAILURE;
+> +       }
+> +       len = EFI_ST_MAX_DATA_SIZE;
+> +       ret = runtime->get_variable(u"efi_none", &guid_vendor1,
+> +                                   &attr, &len, data);
+>         if (ret != EFI_NOT_FOUND) {
+> -               efi_st_error("SetVariable(APPEND_WRITE) with size 0 to non-existent variable returns wrong code\n");
+> +               efi_st_error("Variable was not deleted\n");
+>                 return EFI_ST_FAILURE;
+>         }
+>         /* Enumerate variables */
+> --
+> 2.34.1
+>
 
-I tried to apply this to master and send a PR, but unfortunately it needs
-rebasing. Can you rebase it and resend it?
-
-Thanks
-/Ilias
-On Wed, Mar 27, 2024 at 04:17:09PM +0200, Ilias Apalodimas wrote:
-> Hi Igor,
->
-> On Wed, 27 Mar 2024 at 14:13, Igor Opaniuk <igor.opaniuk@gmail.com> wrote:
-> >
-> > Ilias,
-> >
-> > On Mon, Mar 4, 2024 at 6:45 PM Igor Opaniuk <igor.opaniuk@gmail.com> wrote:
-> >>
-> >> - Address some spelling errors and typos
-> >> - Support CMD_OPTEE_RPMB for SANDBOX configurations and add python tests
-> >> - Remove common.h inclusion for drivers/tee
-> >> - Add calls for closing tee session after every read/write operation.
-> >>
-> >> CI build:
-> >> [1] https://dev.azure.com/igoropaniuk/u-boot/_build/results?buildId=28&view=results
-> >>
-> >> Changes in v3:
-> >> - Added calls for closing tee session after every read/write operation
-> >>
-> >> Changes in v2:
-> >> - Fixed chimp_optee.c:37:9: error: implicit declaration of function 'memset'
-> >> - Applied R-b and T-b tags
-> >>
-> >> Igor Opaniuk (6):
-> >>   tee: optee: fix description in Kconfig
-> >>   tee: sandbox: fix spelling errors
-> >>   cmd: optee_rpmb: close tee session
-> >>   cmd: optee_rpmb: build cmd for sandbox
-> >>   test: py: add optee_rpmb tests
-> >>   tee: remove common.h inclusion
-> >>
-> >>  cmd/Kconfig                        |  4 +++-
-> >>  cmd/optee_rpmb.c                   | 23 +++++++++++++++++------
-> >>  drivers/tee/broadcom/chimp_optee.c |  3 ++-
-> >>  drivers/tee/optee/Kconfig          |  2 +-
-> >>  drivers/tee/optee/core.c           |  1 -
-> >>  drivers/tee/optee/i2c.c            |  1 -
-> >>  drivers/tee/optee/rpmb.c           |  1 -
-> >>  drivers/tee/optee/supplicant.c     |  2 +-
-> >>  drivers/tee/sandbox.c              | 10 +++++-----
-> >>  drivers/tee/tee-uclass.c           |  1 -
-> >>  test/py/tests/test_optee_rpmb.py   | 20 ++++++++++++++++++++
-> >>  11 files changed, 49 insertions(+), 19 deletions(-)
-> >>  create mode 100644 test/py/tests/test_optee_rpmb.py
-> >>
-> >> --
-> >> 2.34.1
-> >>
-> >
-> > Are there currently any comments/objections that can prevent these cosmetic
-> > changes from being applied? CI is happy now and all tests are passing successfully.
-> >
-> > If there are any - just let me know, thanks
->
-> IIRC I did run this version on the CI and everything looked fine. I'll
-> send a PR to Tom with it -- apologies for the delay
->
-> Regards
-> /Ilias
-> >
-> > Regards,
-> > Igor
-> >
-> > --
-> > Best regards - Atentamente - Meilleures salutations
-> >
-> > Igor Opaniuk
-> >
-> > mailto: igor.opaniuk@gmail.com
-> > skype: igor.opanyuk
-> > https://www.linkedin.com/in/iopaniuk
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
