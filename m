@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47CD0CD1292
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 07:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F49BCD1292
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 07:08:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AC8B882B5;
+	by phobos.denx.de (Postfix) with ESMTP id F34B0883A5;
 	Thu,  4 Apr 2024 09:08:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wtyjcB6x";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vXxCQUrA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0604688235; Thu,  4 Apr 2024 09:08:22 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 07D4C8839D; Thu,  4 Apr 2024 09:08:23 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED7EC88278
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 09:08:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78F34882B4
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 09:08:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=danishanwar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 434787Zj083268;
- Thu, 4 Apr 2024 02:08:07 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43478DTw101753;
+ Thu, 4 Apr 2024 02:08:13 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1712214487;
- bh=QpMocZTJaQzqVQ9bDfwOVNOS7UMqTMo8pRrDcOZaj3I=;
- h=From:To:CC:Subject:Date;
- b=wtyjcB6x33KyYJXXq3vgrSQ/IMEsqoP3R23x+7KH7c0tpSztXoeSGnCwKSnDwnBqf
- PGlvmkPo+iwg5jNrLxnvXcylNb0eHbM4MmHeaRtg8f4Ml1/YxIJwtnbcUVMPPyPNLR
- LiKMhCfWWiWuLNnbxfYpILxidAXQOztZ9oBxH6tc=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 434787qV056967
+ s=ti-com-17Q1; t=1712214493;
+ bh=1cTfeG+r2HXvYyd35IZKBfi88HyJLX30jUwegJoI69c=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=vXxCQUrAI28JfaxLVT4tyslZJBg64x0vuaboL1foTu8UsM7Qr07VKyUEKN/eFGgPw
+ bEdddJyRYzKgmDVUC812nRnpTJNEZFisHuElK04ERanThkDFIul4ct6jnb8inhqC6d
+ YBHOSiEgt07UKs/DvQZLgxaUaMU1XGSCLs2ncO+U=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43478DlQ020670
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 4 Apr 2024 02:08:07 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 4 Apr 2024 02:08:13 -0500
+Received: from DFLE115.ent.ti.com (10.64.6.36) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 4
- Apr 2024 02:08:06 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 02:08:12 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 4 Apr 2024 02:08:06 -0500
+ Frontend Transport; Thu, 4 Apr 2024 02:08:12 -0500
 Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 434786c0091028;
- Thu, 4 Apr 2024 02:08:06 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43478Cea044090;
+ Thu, 4 Apr 2024 02:08:12 -0500
 Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
- by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 4347853p013450;
- Thu, 4 Apr 2024 02:08:06 -0500
+ by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 43478BMh013464;
+ Thu, 4 Apr 2024 02:08:12 -0500
 From: MD Danish Anwar <danishanwar@ti.com>
 To: Ravi Gunasekaran <r-gunasekaran@ti.com>, Maxime Ripard
  <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
@@ -65,10 +65,12 @@ To: Ravi Gunasekaran <r-gunasekaran@ti.com>, Maxime Ripard
  Davis <afd@ti.com>, Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
  <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>
-Subject: [PATCH v5 0/5] Introduce ICSSG Ethernet driver
-Date: Thu, 4 Apr 2024 12:37:58 +0530
-Message-ID: <20240404070803.2455207-1-danishanwar@ti.com>
+Subject: [PATCH v5 3/5] net: ti: icssg: Add icssg queues APIs and macros
+Date: Thu, 4 Apr 2024 12:38:01 +0530
+Message-ID: <20240404070803.2455207-4-danishanwar@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240404070803.2455207-1-danishanwar@ti.com>
+References: <20240404070803.2455207-1-danishanwar@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -89,99 +91,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce ICSSG PRUETH support in uboot. The ICSSG driver is used in TI
-AM654 SR2.0.
+Add icssg_queue.c file. This file introduces macros and APIs related to
+ICSSG queues. These will be used by ICSSG Ethernet driver.
 
-The ICSSG PRU Sub-system runs on EMAC firmware. This series Introduces
-support for ICSSG driver in uboot.
-
-This series has been tested on AM65x SR2.0, and the ICSSG interface is
-able to ping / dhcp and boot kernel using tftp in uboot.
-
-To use ICSSG2 ethernet, the ICSSG firmware needs to be loaded to PRU RPROC
-cores and RPROC cores need to be booted with the firmware. This step is
-done inside driver similar to kernel.
-
-The remoteproc driver uses request_fw_into_buf() API from fs-loader driver
-to load and start rproc with the required firmwares.
-
-This series only introduces driver files. The device tree and config
-changes to enable ICSSG driver will be introduced later.
-
-This is v5 of the series [1].
-
-Changes from v4 [4] to v5:
-*) Fixed URL(s/http/https) in all the patches as asked by
-   Ravi Gunasekaran <r-gunasekaran@ti.com>
-*) Collected RB tags of Ravi Gunasekaran <r-gunasekaran@ti.com> for patch
-   1/5, 3/5 and 5/5.
-*) Used PKTSIZE macro instead of hardcoding 1522 in the definition of
-   UDMA_RX_BUF_SIZE in patch 4/5
-
-Changes from v3 [3] to v4:
-*) Dropped the dependncy patches and posted them seprately.
-*) Dropped the DTS and config patches, will post them seprately.
-*) Modified patch 4/5 to have multi port independent MAC mode support.
-*) Rebased the series on latest u-boot/next.
-
-Changes from v2 [2] to v3:
-*) No functional changes.
-*) Rebased the series on latest u-boot/next.
-*) Dropped the RFC tag.
-
-Changes from v1 [1] to v2:
-*) Modified the driver to load the firmware inside the driver only instead
-   of loading the firmware using commands at u-boot prompt. Added patch
-   3/16 for this.
-*) Rebased the series on the latest u-boot/next.
-*) Modified conf-0 configuration in k3-am65x-binman.dtsi as suggested by
-   Roger.
-*) Dropped patch [5] as the patch is no longer needed.
-*) Added patch 2/15 to modify fs-loader driver to use fw_storage_interface
-   env instead of storage_interface and keep the env storage_interface as
-   fallback as suggested by Roger.
-*) Added patch 15/15 to set default values to env fw_storage_interface and
-   fw_dev_part.
-
-[1] https://lore.kernel.org/all/20231219103418.3445886-1-danishanwar@ti.com/
-[2] https://lore.kernel.org/all/20240111070611.342701-1-danishanwar@ti.com/
-[3] https://lore.kernel.org/all/20240124064930.1787929-1-danishanwar@ti.com/
-[4] https://lore.kernel.org/all/20240327052841.1692469-1-danishanwar@ti.com/
-[5] https://lore.kernel.org/all/20231219103418.3445886-16-danishanwar@ti.com/
-
-Thanks and Regards,
-MD Danish Anwar
-
-MD Danish Anwar (5):
-  net: ti: icssg: Add Firmware Interface for ICSSG Ethernet driver.
-  net: ti: icssg: Add Firmware config and classification APIs.
-  net: ti: icssg: Add icssg queues APIs and macros
-  net: ti: icssg: Add ICSSG ethernet driver
-  net: ti: icssg: Add support sending FDB command to update rx_flow_id
-
- arch/arm/mach-k3/common.c         |  11 +
- drivers/net/ti/Kconfig            |  13 +
- drivers/net/ti/Makefile           |   1 +
- drivers/net/ti/icss_mii_rt.h      | 192 +++++++++
- drivers/net/ti/icssg_classifier.c | 376 ++++++++++++++++
- drivers/net/ti/icssg_config.c     | 474 ++++++++++++++++++++
- drivers/net/ti/icssg_config.h     | 195 +++++++++
- drivers/net/ti/icssg_prueth.c     | 691 ++++++++++++++++++++++++++++++
- drivers/net/ti/icssg_prueth.h     |  97 +++++
- drivers/net/ti/icssg_queues.c     |  51 +++
- drivers/net/ti/icssg_switch_map.h | 209 +++++++++
- 11 files changed, 2310 insertions(+)
- create mode 100644 drivers/net/ti/icss_mii_rt.h
- create mode 100644 drivers/net/ti/icssg_classifier.c
- create mode 100644 drivers/net/ti/icssg_config.c
- create mode 100644 drivers/net/ti/icssg_config.h
- create mode 100644 drivers/net/ti/icssg_prueth.c
- create mode 100644 drivers/net/ti/icssg_prueth.h
+Reviewed-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
+Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+---
+ drivers/net/ti/icssg_prueth.h |  5 ++++
+ drivers/net/ti/icssg_queues.c | 51 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 56 insertions(+)
  create mode 100644 drivers/net/ti/icssg_queues.c
- create mode 100644 drivers/net/ti/icssg_switch_map.h
 
-
-base-commit: bc39e06778168a34bb4e0a34fbee4edbde4414d8
+diff --git a/drivers/net/ti/icssg_prueth.h b/drivers/net/ti/icssg_prueth.h
+index 33137739a7..fc0f557db3 100644
+--- a/drivers/net/ti/icssg_prueth.h
++++ b/drivers/net/ti/icssg_prueth.h
+@@ -80,4 +80,9 @@ void icssg_config_ipg(struct prueth_priv *priv, int speed, int mii);
+ int icssg_config(struct prueth_priv *priv);
+ int emac_set_port_state(struct prueth_priv *priv, enum icssg_port_state_cmd cmd);
+ 
++/* Buffer queue helpers */
++int icssg_queue_pop(struct prueth *prueth, u8 queue);
++void icssg_queue_push(struct prueth *prueth, int queue, u16 addr);
++u32 icssg_queue_level(struct prueth *prueth, int queue);
++
+ #endif /* __NET_TI_ICSSG_PRUETH_H */
+diff --git a/drivers/net/ti/icssg_queues.c b/drivers/net/ti/icssg_queues.c
+new file mode 100644
+index 0000000000..fc4d33dbb2
+--- /dev/null
++++ b/drivers/net/ti/icssg_queues.c
+@@ -0,0 +1,51 @@
++// SPDX-License-Identifier: GPL-2.0
++/* ICSSG Buffer queue helpers
++ *
++ * Copyright (C) 2018-2024 Texas Instruments Incorporated - https://www.ti.com
++ */
++
++#include <dm/ofnode.h>
++#include <regmap.h>
++#include "icssg_prueth.h"
++
++#define ICSSG_QUEUES_MAX		64
++#define ICSSG_QUEUE_OFFSET		0xd00
++#define ICSSG_QUEUE_PEEK_OFFSET		0xe00
++#define ICSSG_QUEUE_CNT_OFFSET		0xe40
++#define	ICSSG_QUEUE_RESET_OFFSET	0xf40
++
++int icssg_queue_pop(struct prueth *prueth, u8 queue)
++{
++	u32 val, cnt;
++
++	if (queue >= ICSSG_QUEUES_MAX)
++		return -EINVAL;
++
++	regmap_read(prueth->miig_rt, ICSSG_QUEUE_CNT_OFFSET + 4 * queue, &cnt);
++	if (!cnt)
++		return -EINVAL;
++
++	regmap_read(prueth->miig_rt, ICSSG_QUEUE_OFFSET + 4 * queue, &val);
++
++	return val;
++}
++
++void icssg_queue_push(struct prueth *prueth, int queue, u16 addr)
++{
++	if (queue >= ICSSG_QUEUES_MAX)
++		return;
++
++	regmap_write(prueth->miig_rt, ICSSG_QUEUE_OFFSET + 4 * queue, addr);
++}
++
++u32 icssg_queue_level(struct prueth *prueth, int queue)
++{
++	u32 reg;
++
++	if (queue >= ICSSG_QUEUES_MAX)
++		return 0;
++
++	regmap_read(prueth->miig_rt, ICSSG_QUEUE_CNT_OFFSET + 4 * queue, &reg);
++
++	return reg;
++}
 -- 
 2.34.1
 
