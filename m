@@ -4,80 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8072CD1284
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 06:37:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAF01CD1297
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 06:38:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 018F188279;
-	Thu,  4 Apr 2024 08:37:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7E910882A2;
+	Thu,  4 Apr 2024 08:38:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Nt0vM8DJ";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1712212688;
+	bh=+v5c99J0Fu3ZYYHifA6S0ssZ+yk60Sk2m7TppIx1DRc=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=iUa1BRzYAsv9tBJUf8rE28QeTTC3j/1sjGj9qgoFrgiOHOyRMQ8EZmotTt9Jm5Q6/
+	 VUE5grGGi5ExmRMotxMYHDhRg+GJwPl0bqplAxHPMi1qiSLr9FuWV8hCKa1PoXOYPn
+	 KNUFi90SduQP+eYfZN9Ie2qaplZYBXFiPAhlpnkLdzUakPMqWsTJ7LDzt7IH9X3Ou4
+	 Sxis+2yEnV6K6P4GZRgrdJ0Olx4N+EoOHuCZiYBzSeNQHTv/ek3vyL+6Wc4AL7MBo6
+	 EERp4c4dxHgHsErJwzANQjTDaFkxh+wnuFdMkkhh5iRNcbpafcQz4CQtzL9QGhk8qe
+	 WGN8+DjkVGQBg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15C9B8827A; Thu,  4 Apr 2024 08:37:44 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E9FC9882B5; Thu,  4 Apr 2024 08:38:07 +0200 (CEST)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3811387C2D
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 08:37:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C4E1387C2D
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 08:38:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-56e030624d1so904298a12.2
- for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 23:37:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712212661; x=1712817461; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Tq1Z25wnNY6uLOtH9Yd9BJZfR+Nn7OwI4j/AkSOvG4c=;
- b=Nt0vM8DJKqm+p+KuPu/zUgJ+z9TqeHcpL2+VjUpUatSub01MNjc5d1jdTNAYXojrux
- /baoAG99ILS9g6mFIuKe2U3krG15iuWWVw6A8utY8ttrgte42Za+RB5R1yPSCUgWLR6/
- qpN/IDTdu8O59BsOjpxR47r4EcdZaOoOsjV/ktGRXsSDk9JI/93S39AmoWMBlAKVs+oJ
- iXNeqjdwj5pt+tCBPEi+TtqpgzjACNNMu0FCm+LRRInN1LBpvWfN3xea8S6P6cI2Czsu
- EXoT5cxA/IrJOE+AOOnOvb1EmHNWMQII/O+UsVi9IWK8nDjGxO0wBQ3vNiUU07TaHfAE
- z9KQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712212661; x=1712817461;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Tq1Z25wnNY6uLOtH9Yd9BJZfR+Nn7OwI4j/AkSOvG4c=;
- b=H4Bh1SzVKyQwgySt4PC2g+RAYYljQPrXnUTF/R4/NAKBWWuRikOEuvp6XfvEiiwATD
- idn1SWahCPq/iB9O4I6El1YH6bhOTgJPR2pPDUA+U4oVHhcvlfegu9q8nRSv6UyaLpP2
- lDHFW71PyY0G/KtkEEXDsPsOnJrrcGxekuP6PbMtkvg7elYM8Ir1SdryP5iPmLpuxa4J
- iF/x4URIRiGLdyA0TTVNP5x9IZmD8kLQ/k/n1rP/PYCV2OiVcWtrGqYutY17p7ZEbT0L
- +zppfaBgzoLYlqDGt9octQ7onx/L/wsh7gkVBoenLjoQhnzfllzchQXXCXmiDDTQJvBN
- WOFw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXoR8Z9FTUUhApQFSK1hTWPM7U3FLdKiKGKNviXgi5lo+GOjI6z8Xima/tGXY4S8208GgNOT+NVCL2kKmibDJsBXrSUXw==
-X-Gm-Message-State: AOJu0YzDaJLqHD9H8Y6GgAed8wNjH2PRiJjB9arwMGgInqfa54oKySp2
- o7y/b5uR4SHkhJD1v54uFjUOX8LdF3uKBGqEGJdKqNKgAqLDlBRwVAtB7fS50P8=
-X-Google-Smtp-Source: AGHT+IEX6gCshMYXEplA3bVAv8DabnMXTDGwrqmUbgbD/Cj6RKNt03Pm19jceG/+Q7BUxMKjzqWxSg==
-X-Received: by 2002:a17:906:5603:b0:a4e:8024:87f6 with SMTP id
- f3-20020a170906560300b00a4e802487f6mr1088208ejq.66.1712212661702; 
- Wed, 03 Apr 2024 23:37:41 -0700 (PDT)
-Received: from localhost.localdomain (ppp089210071137.access.hol.gr.
- [89.210.71.137]) by smtp.gmail.com with ESMTPSA id
- lw7-20020a170906bcc700b00a4df01f4232sm8622356ejb.189.2024.04.03.23.37.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 03 Apr 2024 23:37:41 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: heinrich.schuchardt@canonical.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng@tinylab.org>, Simon Glass <sjg@chromium.org>,
- Sam Edwards <CFSworks@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: access __efi_runtime_rel_start/stop without &
-Date: Thu,  4 Apr 2024 09:37:37 +0300
-Message-ID: <20240404063738.470494-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ dmarc=fail (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4V9Bkz2tFPz9sQm;
+ Thu,  4 Apr 2024 08:38:03 +0200 (CEST)
+Message-ID: <b37ad950-46e4-443d-98b9-9d34bb47bde0@denx.de>
+Date: Thu, 4 Apr 2024 08:38:02 +0200
 MIME-Version: 1.0
+Subject: Re: [PATCH u-boot-mvebu v3 00/18] Turris Omnia - New board revision
+ support
+To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
+Cc: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+References: <20240327162355.24584-1-kabel@kernel.org>
+Content-Language: en-US
+From: Stefan Roese <sr@denx.de>
+In-Reply-To: <20240327162355.24584-1-kabel@kernel.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-Rspamd-Queue-Id: 4V9Bkz2tFPz9sQm
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,42 +71,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A symbol defined in a linker script (e.g. __efi_runtime_rel_start = .;)
-is only a symbol, not a variable and should not be dereferenced.
-The common practice is either define it as
-extern uint32_t __efi_runtime_rel_start or
-extern char __efi_runtime_rel_start[] and access it as
-&__efi_runtime_rel_start or __efi_runtime_rel_start respectively.
+Hi Marek,
 
-So let's access it properly since we define it as an array
+On 3/27/24 17:23, Marek Behún wrote:
+> Hi Stefan,
+> 
+> this is v3 of series adding support for new board revision of Turris
+> Omnia.
+> 
+> Changes since v2:
+> - patch 2: updated MCU command interface header
+> - patch 6: fixed bug setting \0 as end of string in src array instead
+>             of dst array after bin2hex() call
+> - patch 16: updated commit message (added the bit about ctrl+c)
+> 
+> v1 and v2 at:
+>    https://patchwork.ozlabs.org/project/uboot/cover/20240304152148.3847-1-kabel@kernel.org/
+>    https://patchwork.ozlabs.org/project/uboot/cover/20240323180711.5498-1-kabel@kernel.org/
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- lib/efi_loader/efi_runtime.c | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+After pushing there changes in my current master I get these build
+errors for "turris_omnia_defconfig":
 
-diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
-index 9185f1894c47..fdf2fbd9ba3d 100644
---- a/lib/efi_loader/efi_runtime.c
-+++ b/lib/efi_loader/efi_runtime.c
-@@ -669,14 +669,14 @@ static __efi_runtime void efi_relocate_runtime_table(ulong offset)
- void efi_runtime_relocate(ulong offset, struct efi_mem_desc *map)
- {
- #ifdef IS_RELA
--	struct elf_rela *rel = (void*)&__efi_runtime_rel_start;
-+	struct elf_rela *rel = (void *)__efi_runtime_rel_start;
- #else
--	struct elf_rel *rel = (void*)&__efi_runtime_rel_start;
-+	struct elf_rel *rel = (void *)__efi_runtime_rel_start;
- 	static ulong lastoff = CONFIG_TEXT_BASE;
- #endif
- 
- 	debug("%s: Relocating to offset=%lx\n", __func__, offset);
--	for (; (ulong)rel < (ulong)&__efi_runtime_rel_stop; rel++) {
-+	for (; (ulong)rel < (ulong)__efi_runtime_rel_stop; rel++) {
- 		ulong base = CONFIG_TEXT_BASE;
- 		ulong *p;
- 		ulong newaddr;
+make[1]: *** No rule to make target 
+'board/CZ.NIC/turris_omnia/../turris_common.o', needed by 
+'board/CZ.NIC/turris_omnia/built-in.o'.  Stop.
+make[1]: *** Waiting for unfinished jobs....
+board/CZ.NIC/turris_omnia/../turris_atsha_otp.c:14:10: fatal error: 
+turris_common.h: No such file or directory
+    14 | #include "turris_common.h"
+       |          ^~~~~~~~~~~~~~~~~
+compilation terminated.
+make[1]: *** [scripts/Makefile.build:257: 
+board/CZ.NIC/turris_omnia/../turris_atsha_otp.o] Error 1
+board/CZ.NIC/turris_omnia/turris_omnia.c:36:10: fatal error: 
+../turris_common.h: No such file or directory
+    36 | #include "../turris_common.h"
+       |          ^~~~~~~~~~~~~~~~~~~~
+compilation terminated.
+
+Available here:
+
+https://source.denx.de/u-boot/custodians/u-boot-marvell/-/commits/master?ref_type=heads
+
+Could you please have a look?
+
+Thanks,
+Stefan
+
+> Marek Behún (18):
+>    arm: mvebu: turris_omnia: Enable LTO by default on Turris Omnia
+>    arm: mvebu: turris_omnia: Add header containing MCU command interface
+>      and use it
+>    arm: mvebu: turris_{omnia, mox}: Don't print model two times
+>    arm: mvebu: turris_omnia: Update MCU status and features reading
+>    arm: mvebu: turris_omnia: Implement getting board information from MCU
+>    arm: mvebu: turris_omnia: Print board ECDSA public key if available
+>    arm: mvebu: turris_omnia: Disable Atmel SHA node if not present
+>    arm: mvebu: spl: Do not build mvebu-reset in SPL
+>    arm: mvebu: system-controller: Rework to use UCLASS_SYSCON
+>    arm: mvebu: system-controller: Select mvebu-reset if DM_RESET &&
+>      PCI_MVEBU
+>    arm: mvebu: system-controller: Add support for SYSRESET
+>    gpio: turris_omnia_mcu: Use byteorder conversion functions
+>    gpio: turris_omnia_mcu: Update firmware features reading
+>    gpio: turris_omnia_mcu: Add support for system power off via sysreset
+>    arm: mvebu: turris_omnia: Enable poweroff command via sysreset in
+>      defconfig
+>    cmd: rng: Print "Abort" on -EINTR
+>    misc: turris_omnia_mcu: Add support for rng provided by MCU
+>    arm: mvebu: turris_omnia: Enable rng command in defconfig
+> 
+>   arch/arm/mach-mvebu/Kconfig              |  25 ++
+>   arch/arm/mach-mvebu/Makefile             |   3 +-
+>   arch/arm/mach-mvebu/cpu.c                |   2 +
+>   arch/arm/mach-mvebu/system-controller.c  | 144 ++++++--
+>   board/CZ.NIC/turris_atsha_otp.c          |  27 +-
+>   board/CZ.NIC/turris_mox/turris_mox.c     |   5 +-
+>   board/CZ.NIC/turris_omnia/Makefile       |   2 +-
+>   board/CZ.NIC/turris_omnia/turris_omnia.c | 310 ++++++++++++-----
+>   cmd/rng.c                                |   7 +-
+>   configs/turris_omnia_defconfig           |   6 +
+>   drivers/gpio/Kconfig                     |   7 -
+>   drivers/gpio/Makefile                    |   1 -
+>   drivers/gpio/turris_omnia_mcu.c          | 316 -----------------
+>   drivers/misc/Kconfig                     |  11 +
+>   drivers/misc/Makefile                    |   1 +
+>   drivers/misc/turris_omnia_mcu.c          | 411 +++++++++++++++++++++++
+>   include/turris-omnia-mcu-interface.h     | 248 ++++++++++++++
+>   17 files changed, 1044 insertions(+), 482 deletions(-)
+>   delete mode 100644 drivers/gpio/turris_omnia_mcu.c
+>   create mode 100644 drivers/misc/turris_omnia_mcu.c
+>   create mode 100644 include/turris-omnia-mcu-interface.h
+> 
+
+Viele Grüße,
+Stefan Roese
+
 -- 
-2.43.0
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
