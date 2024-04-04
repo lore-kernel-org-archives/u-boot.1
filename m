@@ -4,57 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAF01CD1297
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 06:38:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 922D9CD1292
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 06:59:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E910882A2;
-	Thu,  4 Apr 2024 08:38:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E28CE8815D;
+	Thu,  4 Apr 2024 08:59:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1712212688;
-	bh=+v5c99J0Fu3ZYYHifA6S0ssZ+yk60Sk2m7TppIx1DRc=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=iUa1BRzYAsv9tBJUf8rE28QeTTC3j/1sjGj9qgoFrgiOHOyRMQ8EZmotTt9Jm5Q6/
-	 VUE5grGGi5ExmRMotxMYHDhRg+GJwPl0bqplAxHPMi1qiSLr9FuWV8hCKa1PoXOYPn
-	 KNUFi90SduQP+eYfZN9Ie2qaplZYBXFiPAhlpnkLdzUakPMqWsTJ7LDzt7IH9X3Ou4
-	 Sxis+2yEnV6K6P4GZRgrdJ0Olx4N+EoOHuCZiYBzSeNQHTv/ek3vyL+6Wc4AL7MBo6
-	 EERp4c4dxHgHsErJwzANQjTDaFkxh+wnuFdMkkhh5iRNcbpafcQz4CQtzL9QGhk8qe
-	 WGN8+DjkVGQBg==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="EI+3FLpV";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9FC9882B5; Thu,  4 Apr 2024 08:38:07 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
+ id 29A2B88253; Thu,  4 Apr 2024 08:59:04 +0200 (CEST)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4E1387C2D
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 08:38:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0948A8807F
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 08:58:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=cmax@mailbox.org
 Received: from smtp2.mailbox.org (smtp2.mailbox.org
  [IPv6:2001:67c:2050:b231:465::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4V9Bkz2tFPz9sQm;
- Thu,  4 Apr 2024 08:38:03 +0200 (CEST)
-Message-ID: <b37ad950-46e4-443d-98b9-9d34bb47bde0@denx.de>
-Date: Thu, 4 Apr 2024 08:38:02 +0200
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4V9CC40BDyz9tRC;
+ Thu,  4 Apr 2024 08:58:56 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1712213936;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=xV4Hfe5wc6jRsUI1nBk7gY7OvSl7POxDhopxXA0M9q0=;
+ b=EI+3FLpV3NrB3imn7gzjJeeP8p7ImUpRn8Dr7WmhIo9Mt+FUcXLWivl8V42REUo1lor4LH
+ L63hHsKrc1JbsVRZwy1aPMBmN/X2Z42ePQKNPL6gVzMgetTRBlnH1iqoJ8Xtqh2w4zlCVZ
+ 8N3LTIrB2nJpc6cFPni1hedRwGOvSPulmDtfvZeZxHyhFbf4o/doP7pMan4WAqj0V7f4Xm
+ skrbp56eSAxTOjW7pNwQiHF/ogDGagAWqGrQWoQd7l/bBReaXx7feynJq3PHKbNg8e+vBm
+ BUY+Jhim6IcPeLz3nZQBArxQXICFKKxQO4/vhFZlzXh457GWWlZcmQ9G+bqPYg==
+From: cmax@mailbox.org
+To: u-boot@lists.denx.de
+Cc: Maximilian Brune <maximilian.brune@9elements.com>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [PATCH v2] mmc: arm_pl180: Limit data transfer to U16_MAX
+Date: Thu,  4 Apr 2024 08:58:22 +0200
+Message-ID: <20240404065839.9351-1-cmax@mailbox.org>
+In-Reply-To: <20240227201857.25814-1-cmax@mailbox.org>
+References: <20240227201857.25814-1-cmax@mailbox.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH u-boot-mvebu v3 00/18] Turris Omnia - New board revision
- support
-To: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>
-Cc: u-boot@lists.denx.de, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-References: <20240327162355.24584-1-kabel@kernel.org>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20240327162355.24584-1-kabel@kernel.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4V9Bkz2tFPz9sQm
+X-MBO-RS-ID: d70b245d1b6f127bc12
+X-MBO-RS-META: i4gcmz76qtpfenhkziuaujjhpf63t4i4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,103 +73,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+From: Maximilian Brune <maximilian.brune@9elements.com>
 
-On 3/27/24 17:23, Marek Behún wrote:
-> Hi Stefan,
-> 
-> this is v3 of series adding support for new board revision of Turris
-> Omnia.
-> 
-> Changes since v2:
-> - patch 2: updated MCU command interface header
-> - patch 6: fixed bug setting \0 as end of string in src array instead
->             of dst array after bin2hex() call
-> - patch 16: updated commit message (added the bit about ctrl+c)
-> 
-> v1 and v2 at:
->    https://patchwork.ozlabs.org/project/uboot/cover/20240304152148.3847-1-kabel@kernel.org/
->    https://patchwork.ozlabs.org/project/uboot/cover/20240323180711.5498-1-kabel@kernel.org/
+Currently fetching files bigger that cause a data transfer greater than
+U16_MAX fails.
 
-After pushing there changes in my current master I get these build
-errors for "turris_omnia_defconfig":
+The reason is that the specification defines the datalength register
+as a 16 bit wide register, but in u-boot it is used as if it is an
+32 bit register. Therefore values greater than U16_MAX cause an
+infinite loop inside u-boot. U-boot expects to get more data from
+interface/hardware then it will ever get and therefore inifintely waits
+for more data that will never come.
 
-make[1]: *** No rule to make target 
-'board/CZ.NIC/turris_omnia/../turris_common.o', needed by 
-'board/CZ.NIC/turris_omnia/built-in.o'.  Stop.
-make[1]: *** Waiting for unfinished jobs....
-board/CZ.NIC/turris_omnia/../turris_atsha_otp.c:14:10: fatal error: 
-turris_common.h: No such file or directory
-    14 | #include "turris_common.h"
-       |          ^~~~~~~~~~~~~~~~~
-compilation terminated.
-make[1]: *** [scripts/Makefile.build:257: 
-board/CZ.NIC/turris_omnia/../turris_atsha_otp.o] Error 1
-board/CZ.NIC/turris_omnia/turris_omnia.c:36:10: fatal error: 
-../turris_common.h: No such file or directory
-    36 | #include "../turris_common.h"
-       |          ^~~~~~~~~~~~~~~~~~~~
-compilation terminated.
+Signed-off-by: Maximilian Brune <maximilian.brune@9elements.com>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Jaehoon Chung <jh80.chung@samsung.com>
+---
+ drivers/mmc/arm_pl180_mmci.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-Available here:
-
-https://source.denx.de/u-boot/custodians/u-boot-marvell/-/commits/master?ref_type=heads
-
-Could you please have a look?
-
-Thanks,
-Stefan
-
-> Marek Behún (18):
->    arm: mvebu: turris_omnia: Enable LTO by default on Turris Omnia
->    arm: mvebu: turris_omnia: Add header containing MCU command interface
->      and use it
->    arm: mvebu: turris_{omnia, mox}: Don't print model two times
->    arm: mvebu: turris_omnia: Update MCU status and features reading
->    arm: mvebu: turris_omnia: Implement getting board information from MCU
->    arm: mvebu: turris_omnia: Print board ECDSA public key if available
->    arm: mvebu: turris_omnia: Disable Atmel SHA node if not present
->    arm: mvebu: spl: Do not build mvebu-reset in SPL
->    arm: mvebu: system-controller: Rework to use UCLASS_SYSCON
->    arm: mvebu: system-controller: Select mvebu-reset if DM_RESET &&
->      PCI_MVEBU
->    arm: mvebu: system-controller: Add support for SYSRESET
->    gpio: turris_omnia_mcu: Use byteorder conversion functions
->    gpio: turris_omnia_mcu: Update firmware features reading
->    gpio: turris_omnia_mcu: Add support for system power off via sysreset
->    arm: mvebu: turris_omnia: Enable poweroff command via sysreset in
->      defconfig
->    cmd: rng: Print "Abort" on -EINTR
->    misc: turris_omnia_mcu: Add support for rng provided by MCU
->    arm: mvebu: turris_omnia: Enable rng command in defconfig
-> 
->   arch/arm/mach-mvebu/Kconfig              |  25 ++
->   arch/arm/mach-mvebu/Makefile             |   3 +-
->   arch/arm/mach-mvebu/cpu.c                |   2 +
->   arch/arm/mach-mvebu/system-controller.c  | 144 ++++++--
->   board/CZ.NIC/turris_atsha_otp.c          |  27 +-
->   board/CZ.NIC/turris_mox/turris_mox.c     |   5 +-
->   board/CZ.NIC/turris_omnia/Makefile       |   2 +-
->   board/CZ.NIC/turris_omnia/turris_omnia.c | 310 ++++++++++++-----
->   cmd/rng.c                                |   7 +-
->   configs/turris_omnia_defconfig           |   6 +
->   drivers/gpio/Kconfig                     |   7 -
->   drivers/gpio/Makefile                    |   1 -
->   drivers/gpio/turris_omnia_mcu.c          | 316 -----------------
->   drivers/misc/Kconfig                     |  11 +
->   drivers/misc/Makefile                    |   1 +
->   drivers/misc/turris_omnia_mcu.c          | 411 +++++++++++++++++++++++
->   include/turris-omnia-mcu-interface.h     | 248 ++++++++++++++
->   17 files changed, 1044 insertions(+), 482 deletions(-)
->   delete mode 100644 drivers/gpio/turris_omnia_mcu.c
->   create mode 100644 drivers/misc/turris_omnia_mcu.c
->   create mode 100644 include/turris-omnia-mcu-interface.h
-> 
-
-Viele Grüße,
-Stefan Roese
-
+diff --git a/drivers/mmc/arm_pl180_mmci.c b/drivers/mmc/arm_pl180_mmci.c
+index 5cf5502ed5..cad73ea106 100644
+--- a/drivers/mmc/arm_pl180_mmci.c
++++ b/drivers/mmc/arm_pl180_mmci.c
+@@ -231,6 +231,7 @@ static int do_data_transfer(struct mmc *dev,
+ 	u32 blksz = 0;
+ 	u32 data_ctrl = 0;
+ 	u32 data_len = (u32) (data->blocks * data->blocksize);
++	assert(data_len < U16_MAX); /* should be ensured by arm_pl180_get_b_max */
+ 
+ 	if (!host->version2) {
+ 		blksz = (ffs(data->blocksize) - 1);
+@@ -358,6 +359,14 @@ static int  host_set_ios(struct mmc *dev)
+ 	return 0;
+ }
+ 
++static int arm_pl180_get_b_max(struct udevice *dev, void *dst, lbaint_t blkcnt)
++{
++	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
++	struct mmc *mmc = upriv->mmc;
++
++	return U16_MAX / mmc->read_bl_len;
++}
++
+ #ifndef CONFIG_DM_MMC
+ /* MMC uses open drain drivers in the enumeration phase */
+ static int mmc_host_reset(struct mmc *dev)
+@@ -373,6 +382,7 @@ static const struct mmc_ops arm_pl180_mmci_ops = {
+ 	.send_cmd = host_request,
+ 	.set_ios = host_set_ios,
+ 	.init = mmc_host_reset,
++	.get_b_max = arm_pl180_get_b_max,
+ };
+ 
+ /*
+@@ -531,6 +541,7 @@ static const struct dm_mmc_ops arm_pl180_dm_mmc_ops = {
+ 	.send_cmd = dm_host_request,
+ 	.set_ios = dm_host_set_ios,
+ 	.get_cd = dm_mmc_getcd,
++	.get_b_max = arm_pl180_get_b_max,
+ };
+ 
+ static int arm_pl180_mmc_of_to_plat(struct udevice *dev)
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+2.44.0
+
