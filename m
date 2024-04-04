@@ -4,72 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37297CD1284
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 06:27:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA6A1CD1284
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 06:35:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0395788260;
-	Thu,  4 Apr 2024 08:26:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 5914488249;
+	Thu,  4 Apr 2024 08:35:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mXQVbUcw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mtxopZCy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C06B882AE; Thu,  4 Apr 2024 08:26:09 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8E0B288251; Thu,  4 Apr 2024 08:35:45 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBFD788286
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 08:26:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E57F87C2D
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 08:35:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 11A1BCE2F91;
- Thu,  4 Apr 2024 06:25:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 47BE6C433F1;
- Thu,  4 Apr 2024 06:25:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1712211957;
- bh=220EKJrUzV/oO3xmhRzS/xreBpoyeA6NUX+he0WXNOA=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=mXQVbUcwLRtxWaFaZGVxv4QXsfqHImxIs6a5Eu6l0+u60q7HfTwighSPZVJSuZi6R
- 0NADlzwYKfWF9Mo6IEz/hXlm1PTwswt2M1aTyhrE+diVfAwAdYna1JYLXn2a8G9r+u
- /z4s85mIeHy2a978Rqa/epQ1BnngLxfsGW8Wzom+GQGXGxKPCo4+ycNpQasGIR3UUB
- uX/+AjSmr+En+dfpM4EmrqHWpqr3LKeEVbMbhTHqQuE2xOC/s4Sx87wVOEgycwphl0
- 9IfD3kDENYc4QyyDyWFYk5aY7sbCE7zohtGk52fFbVEyAm2OEvQadq0CKDvKgaXhWd
- FVMB2PGK8KDTQ==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 33AC3CD1288;
- Thu,  4 Apr 2024 06:25:57 +0000 (UTC)
-From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Thu, 04 Apr 2024 08:25:49 +0200
-Subject: [PATCH v4 1/6] usb: xhci: refactor xhci_set_configuration
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a47385a4379so334039866b.0
+ for <u-boot@lists.denx.de>; Wed, 03 Apr 2024 23:35:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1712212543; x=1712817343; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rI7+huMMf554nNUWoRAF56i0M5LoXr1nnc/rX5fps6o=;
+ b=mtxopZCyWFvL7jGTCsiHzOy5EqlYd1uz2xZroxlHR5k2RZNae2VDIqUS88fpZhv5vK
+ mtUxaFUDryIRgWcDgCGwtDuDBhLGct8LlbUQiU5PW+0i8u0cI+bGMJ2l4VGIxClHQYK1
+ hnl18s6lS+Bdtbu31c1I6tA++YW5M6Wqh4SORQel1FRecoRcI35FDh7dPdIWoBh2j73O
+ U5sB56GGPtMvoiI/T2Qg9QBKS3xHUoVTSBUpyGJ/nJdqmCiqRRR8erTjJoRLk2U7/It9
+ ofwm6AA+9rLIVv5AjrYQIMApaCxT83xOgUYZ8ez/EelHbiqqKnXdlRREiH9fsCD340e3
+ A5yQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712212543; x=1712817343;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rI7+huMMf554nNUWoRAF56i0M5LoXr1nnc/rX5fps6o=;
+ b=aKSpG24XiFHbga4iFNhjPwIZ0lm6b5hgTTdx/eRZo11AbQaUkO1NG4NdKSbZHL12ld
+ 4+jsmd03MKGssyabfth4lHqKfAsoGWzAu95Yw384K3rt29fFRyzjK7xgkFzS5lNLCBvp
+ BxGAC9h9uePYbHS/QinMevyn0NPsFnUkeE+xhiQWlSObjTi6GxI3PkklZSSD1zLpr+hA
+ JF4tzjOn3Z6d5CqqS91ovWriE9NLZdqdqKunX4dWHIj1E4oEj2ObxqHGx6pr/q6pD2TK
+ SOpjTMix/nAX0zZsnD8hRX81OavUCpCVMh6Csjr4ITDbVRXU1wr1XgDjyzChgaBLObYy
+ BzZw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUvdUx1p37HGXbWFOtBgLAyy8K/ESz92/y94U30KzR8w4Y/C42gFFplNyUncHo3ZexKr0bQUdMla7WdBYQavm5qfxFaYw==
+X-Gm-Message-State: AOJu0YzCg5ZgHqA/Y/aLxFOHBGm7Xy8O0BPh0Zso0JuZevSxGdgPX5Eu
+ 1tyxMBtB6HGidMkibNuOIC71OpByKRcE2KvdHuX7FwRtkGBUHphz2Z7/KScTJ2o=
+X-Google-Smtp-Source: AGHT+IGKpHiEGDb5awMDnqY8+lJWx6tocv7NFRYuZT0e5DF0geI4AAAVJLYw31AH165hQ/Od1/vSsQ==
+X-Received: by 2002:a17:906:6a1e:b0:a4f:b398:2f47 with SMTP id
+ qw30-20020a1709066a1e00b00a4fb3982f47mr3633114ejc.25.1712212543048; 
+ Wed, 03 Apr 2024 23:35:43 -0700 (PDT)
+Received: from localhost.localdomain (ppp089210071137.access.hol.gr.
+ [89.210.71.137]) by smtp.gmail.com with ESMTPSA id
+ du14-20020a17090772ce00b00a518c69c4e3sm212987ejc.23.2024.04.03.23.35.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 03 Apr 2024 23:35:42 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: heinrich.schuchardt@canonical.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Bin Meng <bmeng@tinylab.org>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: access __efi_runtime_start/stop without &
+Date: Thu,  4 Apr 2024 09:35:35 +0300
+Message-ID: <20240404063535.469995-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240404-asahi-keyboards-v4-1-2266033feaff@jannau.net>
-References: <20240404-asahi-keyboards-v4-0-2266033feaff@jannau.net>
-In-Reply-To: <20240404-asahi-keyboards-v4-0-2266033feaff@jannau.net>
-To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Joe Hershberger <joe.hershberger@ni.com>
-Cc: u-boot@lists.denx.de, asahi@lists.linux.dev, 
- Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5846; i=j@jannau.net;
- h=from:subject:message-id;
- bh=sLcpqWf1O0mOubKx/OeFG6FJtQQ1T3S30o68YjijtcA=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhjQ+908Gr17+6OeqfifwhkG1pq6Dpacz7VeoptFX1u9CJ
- f8eFgp3lLIwiHExyIopsiRpv+xgWF2jGFP7IAxmDisTyBAGLk4BuEgMwz+7lV4KFR6bI7sZNR6t
- K/C8tfi494dpD///8twU9s3n9tmzjAz3TNzV3dg877Wcq3OufdedlWSdyvJmj53azxPirCeOaTA
- AAA==
-X-Developer-Key: i=j@jannau.net; a=openpgp;
- fpr=8B336A6BE4E5695E89B8532B81E806F586338419
-X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
-X-Original-From: Janne Grunau <j@jannau.net>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,187 +88,40 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: j@jannau.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Janne Grunau <j@jannau.net>
+A symbol defined in a linker script (e.g. __efi_runtime_start = .;) is
+only a symbol, not a variable and should not be dereferenced.
+The common practice is either define it as
+extern uint32_t __efi_runtime_start or
+extern char __efi_runtime_start[] and access it as
+&__efi_runtime_start or __efi_runtime_start respectively.
 
-In the next step endpoints for multiple interfaces are set up. Move most
-of the per endpoint initialization to separate function to avoid another
-identation level.
+So let's access it properly since we define it as an array
 
-Reviewed-by: Marek Vasut <marex@denx.de>
-Reviewed-by: Neal Gompa <neal@gompa.dev>
-Signed-off-by: Janne Grunau <j@jannau.net>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- drivers/usb/host/xhci.c | 119 +++++++++++++++++++++++++++++-------------------
- 1 file changed, 73 insertions(+), 46 deletions(-)
+ lib/efi_loader/efi_memory.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
-index d13cbff9b3..534c4b973f 100644
---- a/drivers/usb/host/xhci.c
-+++ b/drivers/usb/host/xhci.c
-@@ -475,67 +475,34 @@ static int xhci_configure_endpoints(struct usb_device *udev, bool ctx_change)
- }
- 
- /**
-- * Configure the endpoint, programming the device contexts.
-+ * Fill endpoint contexts for interface descriptor ifdesc.
-  *
-- * @param udev	pointer to the USB device structure
-- * Return: returns the status of the xhci_configure_endpoints
-+ * @param udev		pointer to the USB device structure
-+ * @param ctrl		pointer to the xhci pravte device structure
-+ * @param virt_dev	pointer to the xhci virtual device structure
-+ * @param ifdesc	pointer to the USB interface config descriptor
-+ * Return: returns the status of xhci_init_ep_contexts_if
-  */
--static int xhci_set_configuration(struct usb_device *udev)
-+static int xhci_init_ep_contexts_if(struct usb_device *udev,
-+				    struct xhci_ctrl *ctrl,
-+				    struct xhci_virt_device *virt_dev,
-+				    struct usb_interface *ifdesc
-+	)
- {
--	struct xhci_container_ctx *in_ctx;
--	struct xhci_container_ctx *out_ctx;
--	struct xhci_input_control_ctx *ctrl_ctx;
--	struct xhci_slot_ctx *slot_ctx;
- 	struct xhci_ep_ctx *ep_ctx[MAX_EP_CTX_NUM];
- 	int cur_ep;
--	int max_ep_flag = 0;
- 	int ep_index;
- 	unsigned int dir;
- 	unsigned int ep_type;
--	struct xhci_ctrl *ctrl = xhci_get_ctrl(udev);
--	int num_of_ep;
--	int ep_flag = 0;
- 	u64 trb_64 = 0;
--	int slot_id = udev->slot_id;
--	struct xhci_virt_device *virt_dev = ctrl->devs[slot_id];
--	struct usb_interface *ifdesc;
- 	u32 max_esit_payload;
- 	unsigned int interval;
- 	unsigned int mult;
- 	unsigned int max_burst;
- 	unsigned int avg_trb_len;
- 	unsigned int err_count = 0;
-+	int num_of_ep = ifdesc->no_of_ep;
- 
--	out_ctx = virt_dev->out_ctx;
--	in_ctx = virt_dev->in_ctx;
--
--	num_of_ep = udev->config.if_desc[0].no_of_ep;
--	ifdesc = &udev->config.if_desc[0];
--
--	ctrl_ctx = xhci_get_input_control_ctx(in_ctx);
--	/* Initialize the input context control */
--	ctrl_ctx->add_flags = cpu_to_le32(SLOT_FLAG);
--	ctrl_ctx->drop_flags = 0;
--
--	/* EP_FLAG gives values 1 & 4 for EP1OUT and EP2IN */
--	for (cur_ep = 0; cur_ep < num_of_ep; cur_ep++) {
--		ep_flag = xhci_get_ep_index(&ifdesc->ep_desc[cur_ep]);
--		ctrl_ctx->add_flags |= cpu_to_le32(1 << (ep_flag + 1));
--		if (max_ep_flag < ep_flag)
--			max_ep_flag = ep_flag;
--	}
--
--	xhci_inval_cache((uintptr_t)out_ctx->bytes, out_ctx->size);
--
--	/* slot context */
--	xhci_slot_copy(ctrl, in_ctx, out_ctx);
--	slot_ctx = xhci_get_slot_ctx(ctrl, in_ctx);
--	slot_ctx->dev_info &= ~(cpu_to_le32(LAST_CTX_MASK));
--	slot_ctx->dev_info |= cpu_to_le32(LAST_CTX(max_ep_flag + 1) | 0);
--
--	xhci_endpoint_copy(ctrl, in_ctx, out_ctx, 0);
--
--	/* filling up ep contexts */
- 	for (cur_ep = 0; cur_ep < num_of_ep; cur_ep++) {
- 		struct usb_endpoint_descriptor *endpt_desc = NULL;
- 		struct usb_ss_ep_comp_descriptor *ss_ep_comp_desc = NULL;
-@@ -561,7 +528,8 @@ static int xhci_set_configuration(struct usb_device *udev)
- 		avg_trb_len = max_esit_payload;
- 
- 		ep_index = xhci_get_ep_index(endpt_desc);
--		ep_ctx[ep_index] = xhci_get_ep_ctx(ctrl, in_ctx, ep_index);
-+		ep_ctx[ep_index] = xhci_get_ep_ctx(ctrl, virt_dev->in_ctx,
-+						   ep_index);
- 
- 		/* Allocate the ep rings */
- 		virt_dev->eps[ep_index].ring = xhci_ring_alloc(ctrl, 1, true);
-@@ -614,6 +582,65 @@ static int xhci_set_configuration(struct usb_device *udev)
- 		}
- 	}
- 
-+	return 0;
-+}
-+
-+/**
-+ * Configure the endpoint, programming the device contexts.
-+ *
-+ * @param udev	pointer to the USB device structure
-+ * Return: returns the status of the xhci_configure_endpoints
-+ */
-+static int xhci_set_configuration(struct usb_device *udev)
-+{
-+	struct xhci_container_ctx *out_ctx;
-+	struct xhci_container_ctx *in_ctx;
-+	struct xhci_input_control_ctx *ctrl_ctx;
-+	struct xhci_slot_ctx *slot_ctx;
-+	int err;
-+	int cur_ep;
-+	int max_ep_flag = 0;
-+	struct xhci_ctrl *ctrl = xhci_get_ctrl(udev);
-+	int num_of_ep;
-+	int ep_flag = 0;
-+	int slot_id = udev->slot_id;
-+	struct xhci_virt_device *virt_dev = ctrl->devs[slot_id];
-+	struct usb_interface *ifdesc;
-+
-+	out_ctx = virt_dev->out_ctx;
-+	in_ctx = virt_dev->in_ctx;
-+
-+	num_of_ep = udev->config.if_desc[0].no_of_ep;
-+	ifdesc = &udev->config.if_desc[0];
-+
-+	ctrl_ctx = xhci_get_input_control_ctx(in_ctx);
-+	/* Initialize the input context control */
-+	ctrl_ctx->add_flags = cpu_to_le32(SLOT_FLAG);
-+	ctrl_ctx->drop_flags = 0;
-+
-+	/* EP_FLAG gives values 1 & 4 for EP1OUT and EP2IN */
-+	for (cur_ep = 0; cur_ep < num_of_ep; cur_ep++) {
-+		ep_flag = xhci_get_ep_index(&ifdesc->ep_desc[cur_ep]);
-+		ctrl_ctx->add_flags |= cpu_to_le32(1 << (ep_flag + 1));
-+		if (max_ep_flag < ep_flag)
-+			max_ep_flag = ep_flag;
-+	}
-+
-+	xhci_inval_cache((uintptr_t)out_ctx->bytes, out_ctx->size);
-+
-+	/* slot context */
-+	xhci_slot_copy(ctrl, in_ctx, out_ctx);
-+	slot_ctx = xhci_get_slot_ctx(ctrl, in_ctx);
-+	slot_ctx->dev_info &= ~(cpu_to_le32(LAST_CTX_MASK));
-+	slot_ctx->dev_info |= cpu_to_le32(LAST_CTX(max_ep_flag + 1) | 0);
-+
-+	xhci_endpoint_copy(ctrl, in_ctx, out_ctx, 0);
-+
-+	/* filling up ep contexts */
-+	err = xhci_init_ep_contexts_if(udev, ctrl, virt_dev, ifdesc);
-+	if (err < 0)
-+		return err;
-+
- 	return xhci_configure_endpoints(udev, false);
- }
- 
-
+diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+index edfad2d95a1d..98f104390c8d 100644
+--- a/lib/efi_loader/efi_memory.c
++++ b/lib/efi_loader/efi_memory.c
+@@ -933,8 +933,8 @@ static void add_u_boot_and_runtime(void)
+ 	 * Add Runtime Services. We mark surrounding boottime code as runtime as
+ 	 * well to fulfill the runtime alignment constraints but avoid padding.
+ 	 */
+-	runtime_start = (ulong)&__efi_runtime_start & ~runtime_mask;
+-	runtime_end = (ulong)&__efi_runtime_stop;
++	runtime_start = (ulong)__efi_runtime_start & ~runtime_mask;
++	runtime_end = (ulong)__efi_runtime_stop;
+ 	runtime_end = (runtime_end + runtime_mask) & ~runtime_mask;
+ 	runtime_pages = (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
+ 	efi_add_memory_map_pg(runtime_start, runtime_pages,
 -- 
-2.44.0
-
+2.43.0
 
