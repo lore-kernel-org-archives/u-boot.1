@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC1EECD1292
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 07:53:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CB19CD1284
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 07:53:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 04A57883D1;
+	by phobos.denx.de (Postfix) with ESMTP id 82AD7883FA;
 	Thu,  4 Apr 2024 09:51:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Ui33p/ZD";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="KtXGtvCu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6CBDA883F8; Thu,  4 Apr 2024 09:51:29 +0200 (CEST)
+ id 496DD883B6; Thu,  4 Apr 2024 09:51:30 +0200 (CEST)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org
  [IPv6:2604:1380:4641:c500::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAC57883DC
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 09:51:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B7D5883E3
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 09:51:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id A3A3A612EC;
+ by dfw.source.kernel.org (Postfix) with ESMTP id D9509615B8;
+ Thu,  4 Apr 2024 07:51:26 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BFA00C433F1;
  Thu,  4 Apr 2024 07:51:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 8A5CBC43394;
- Thu,  4 Apr 2024 07:51:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1712217085;
- bh=q7+0qCRmgRKTBItzZQLGIlrX0nV806wTpbR2+Bkec+M=;
+ s=k20201202; t=1712217086;
+ bh=O6qS1auojZ/EDhxyPXBkS+KLo4FWEEF2dnCtWhX0Hdc=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=Ui33p/ZDyQab7Uy8KIBR8XsVIMBLb7+5Hia+E4YsRpvN+HvMGm6+YZkfv48b3ytfV
- UTzap1s+npxFXEcIUqC8Qvd4CGLStEABL7FMN1yFyMWgk0KJG8RQHAUPZxZ2ffBnYH
- DXHkeegUofiqC8DFquJmAFt0qGx63+SdXxgq4OIpczRW0ag4/sNWfiicXUkYFML9LP
- YbPY0VpxV/ovAmpKn3Q8wjiQDnYk32EIH/7HBGhR50RgpNa/LUkOr5Lephuv8fFgQV
- Jrbf3H2UydrcsUETkO2VWl7jhKsL1+vSgrMRtvQQyajPGi1AD5QAHrS4GGiAeO7U26
- PHmkEFY5LUmUw==
+ b=KtXGtvCuyh23As+fJ8+AxZymuwc61xzbR4ylKaXJkgauz0KnUJX5J86wF3AouePjH
+ KcP0cYkG5pOY2iCHV1gQTWapFLaUAuL0yzq7M93wx28CStzFJa2HuR9dccjrrjYZqi
+ I7iTlztHA529BIpmIMThemYUUMS9eR3/rE+eFD3fBbblwGZvpPjfbsmlHPGmNmSLWo
+ qskdgq7o6hKSC3mSkuphThIy7qMDjyJwzRuz2c6rEcesDZxkVw4wwU3/vMgnerocRx
+ o23Sb67687S04yr456CkgI39WNH2n9khslf1iTZ2DJfYlYVnhYTQxqljooBNi9OazQ
+ nSSjfNYbNSyjA==
 From: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
 To: Stefan Roese <sr@denx.de>
 Cc: u-boot@lists.denx.de,
 	=?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>
-Subject: [PATCH u-boot-mvebu v4 11/18] arm: mvebu: system-controller: Add
- support for SYSRESET
-Date: Thu,  4 Apr 2024 09:51:00 +0200
-Message-ID: <20240404075107.19636-12-kabel@kernel.org>
+Subject: [PATCH u-boot-mvebu v4 12/18] gpio: turris_omnia_mcu: Use byteorder
+ conversion functions
+Date: Thu,  4 Apr 2024 09:51:01 +0200
+Message-ID: <20240404075107.19636-13-kabel@kernel.org>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240404075107.19636-1-kabel@kernel.org>
 References: <20240404075107.19636-1-kabel@kernel.org>
@@ -70,194 +70,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add driver model support for sysreset via mvebu system controller. This is
-currently only available for U-Boot proper.
+Use byteorder conversion function instead of manually assembling data
+from/to MCU.
 
 Signed-off-by: Marek Behún <kabel@kernel.org>
 Reviewed-by: Stefan Roese <sr@denx.de>
 ---
- arch/arm/mach-mvebu/Kconfig             | 18 +++++-
- arch/arm/mach-mvebu/Makefile            |  2 +-
- arch/arm/mach-mvebu/cpu.c               |  2 +
- arch/arm/mach-mvebu/system-controller.c | 75 +++++++++++++++++++++++--
- 4 files changed, 90 insertions(+), 7 deletions(-)
+ drivers/gpio/turris_omnia_mcu.c | 80 +++++++++++++++++++--------------
+ 1 file changed, 46 insertions(+), 34 deletions(-)
 
-diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
-index 623432a60e..f15d3cc5ed 100644
---- a/arch/arm/mach-mvebu/Kconfig
-+++ b/arch/arm/mach-mvebu/Kconfig
-@@ -19,6 +19,7 @@ config ARMADA_32BIT
- 	select SPL_SYS_NO_VECTOR_TABLE if SPL
- 	select ARCH_VERY_EARLY_INIT
- 	select ARMADA_32BIT_SYSCON_RESET if DM_RESET && PCI_MVEBU
-+	select ARMADA_32BIT_SYSCON_SYSRESET if SYSRESET
+diff --git a/drivers/gpio/turris_omnia_mcu.c b/drivers/gpio/turris_omnia_mcu.c
+index da9a6efe6d..c441d07d69 100644
+--- a/drivers/gpio/turris_omnia_mcu.c
++++ b/drivers/gpio/turris_omnia_mcu.c
+@@ -5,6 +5,7 @@
+ #include <dm.h>
+ #include <i2c.h>
+ #include <turris-omnia-mcu-interface.h>
++#include <asm/byteorder.h>
+ #include <asm/gpio.h>
+ #include <linux/log2.h>
  
- # ARMv7 SoCs...
- config ARMADA_375
-@@ -457,16 +458,29 @@ config SF_DEFAULT_MODE
- 	default 0x0
- 	depends on MVEBU_SPL_BOOT_DEVICE_SPI
- 
-+config ARMADA_32BIT_SYSCON
-+	bool
-+	depends on ARMADA_32BIT
-+	select REGMAP
-+	select SYSCON
-+
- config ARMADA_32BIT_SYSCON_RESET
- 	bool "Support Armada XP/375/38x/39x reset controller"
- 	depends on ARMADA_32BIT
- 	depends on DM_RESET
--	select REGMAP
--	select SYSCON
-+	select ARMADA_32BIT_SYSCON
- 	help
- 	  Build support for Armada XP/375/38x/39x reset controller. This is
- 	  needed for PCIe support.
- 
-+config ARMADA_32BIT_SYSCON_SYSRESET
-+	bool "Support Armada XP/375/38x/39x sysreset via driver model"
-+	depends on ARMADA_32BIT
-+	depends on SYSRESET
-+	select ARMADA_32BIT_SYSCON
-+	help
-+	  Build support for Armada XP/375/38x/39x system reset via driver model.
-+
- source "board/solidrun/clearfog/Kconfig"
- source "board/kobol/helios4/Kconfig"
- 
-diff --git a/arch/arm/mach-mvebu/Makefile b/arch/arm/mach-mvebu/Makefile
-index d44ca3a0df..329c2e4915 100644
---- a/arch/arm/mach-mvebu/Makefile
-+++ b/arch/arm/mach-mvebu/Makefile
-@@ -28,7 +28,7 @@ obj-$(CONFIG_ARMADA_38X) += ../../../drivers/ddr/marvell/a38x/xor.o
- obj-$(CONFIG_ARMADA_XP) += ../../../drivers/ddr/marvell/axp/xor.o
- obj-$(CONFIG_ARMADA_MSYS) += ../../../drivers/ddr/marvell/axp/xor.o
- 
--obj-$(CONFIG_ARMADA_32BIT_SYSCON_RESET) += system-controller.o
-+obj-$(CONFIG_ARMADA_32BIT_SYSCON) += system-controller.o
- 
- ifdef CONFIG_ARMADA_38X
- obj-$(CONFIG_MVEBU_EFUSE) += efuse.o
-diff --git a/arch/arm/mach-mvebu/cpu.c b/arch/arm/mach-mvebu/cpu.c
-index 8e0de93538..7c62a5dbb6 100644
---- a/arch/arm/mach-mvebu/cpu.c
-+++ b/arch/arm/mach-mvebu/cpu.c
-@@ -52,6 +52,7 @@ void lowlevel_init(void)
- 	 */
- }
- 
-+#if defined(CONFIG_SPL_BUILD) || !defined(CONFIG_ARMADA_32BIT_SYSCON_SYSRESET)
- void reset_cpu(void)
+@@ -51,27 +52,31 @@ static int turris_omnia_mcu_get_function(struct udevice *dev, uint offset)
+ static int turris_omnia_mcu_get_value(struct udevice *dev, uint offset)
  {
- 	struct mvebu_system_registers *reg =
-@@ -62,6 +63,7 @@ void reset_cpu(void)
- 	while (1)
- 		;
- }
-+#endif
+ 	struct turris_omnia_mcu_info *info = dev_get_plat(dev);
+-	u8 val16[2];
+-	u8 val32[4];
++	u32 val32;
++	u16 val16;
+ 	int ret;
  
- u32 get_boot_device(void)
+ 	switch (offset) {
+ 	/* bank 0 */
+ 	case 0 ... 15:
+-		ret = dm_i2c_read(dev, CMD_GET_STATUS_WORD, val16, 2);
++		ret = dm_i2c_read(dev, CMD_GET_STATUS_WORD, (void *)&val16,
++				  sizeof(val16));
+ 		if (ret)
+ 			return ret;
+-		return ((((u16)val16[1] << 8) | val16[0]) >> offset) & 0x1;
++
++		return !!(le16_to_cpu(val16) & BIT(offset));
+ 
+ 	/* bank 1 - supported only when FEAT_EXT_CMDS is set */
+ 	case (16 + 0) ... (16 + 31):
+ 		if (!(info->features & FEAT_EXT_CMDS))
+ 			return -EINVAL;
+-		ret = dm_i2c_read(dev, CMD_GET_EXT_STATUS_DWORD, val32, 4);
++
++		ret = dm_i2c_read(dev, CMD_GET_EXT_STATUS_DWORD, (void *)&val32,
++				  sizeof(val32));
+ 		if (ret)
+ 			return ret;
+-		return ((((u32)val32[3] << 24) | ((u32)val32[2] << 16) |
+-			 ((u32)val32[1] << 8) | val32[0]) >> (offset - 16)) & 0x1;
++
++		return !!(le32_to_cpu(val32) & BIT(offset - 16));
+ 
+ 	/* bank 2 - supported only when FEAT_EXT_CMDS and FEAT_PERIPH_MCU is set */
+ 	case (16 + 32 + 0) ... (16 + 32 + 15):
+@@ -79,10 +84,13 @@ static int turris_omnia_mcu_get_value(struct udevice *dev, uint offset)
+ 			return -EINVAL;
+ 		if (!(info->features & FEAT_PERIPH_MCU))
+ 			return -EINVAL;
+-		ret = dm_i2c_read(dev, CMD_GET_EXT_CONTROL_STATUS, val16, 2);
++
++		ret = dm_i2c_read(dev, CMD_GET_EXT_CONTROL_STATUS,
++				  (void *)&val16, sizeof(val16));
+ 		if (ret)
+ 			return ret;
+-		return ((((u16)val16[1] << 8) | val16[0]) >> (offset - 16 - 32)) & 0x1;
++
++		return !!(le16_to_cpu(val16) & BIT(offset - 16 - 32));
+ 
+ 	default:
+ 		return -EINVAL;
+@@ -92,30 +100,33 @@ static int turris_omnia_mcu_get_value(struct udevice *dev, uint offset)
+ static int turris_omnia_mcu_set_value(struct udevice *dev, uint offset, int value)
  {
-diff --git a/arch/arm/mach-mvebu/system-controller.c b/arch/arm/mach-mvebu/system-controller.c
-index c5c05922f2..682431ee11 100644
---- a/arch/arm/mach-mvebu/system-controller.c
-+++ b/arch/arm/mach-mvebu/system-controller.c
-@@ -10,11 +10,24 @@
- #include <regmap.h>
- #include <reset-uclass.h>
- #include <syscon.h>
-+#include <sysreset.h>
- #include <asm/io.h>
+ 	struct turris_omnia_mcu_info *info = dev_get_plat(dev);
+-	u8 val16[2];
+-	u8 val32[4];
++	u16 valmask16[2];
++	u8 valmask8[2];
  
--#define MVEBU_SOC_CONTROL_1_REG 0x4
-+#define MVEBU_SOC_CONTROL_1_REG		0x4
+ 	switch (offset) {
+ 	/* bank 0 */
+ 	case 0 ... 15:
+ 		switch (offset) {
+ 		case ilog2(STS_USB30_PWRON):
+-			val16[1] = CTL_USB30_PWRON;
++			valmask8[1] = CTL_USB30_PWRON;
+ 			break;
+ 		case ilog2(STS_USB31_PWRON):
+-			val16[1] = CTL_USB31_PWRON;
++			valmask8[1] = CTL_USB31_PWRON;
+ 			break;
+ 		case ilog2(STS_ENABLE_4V5):
+-			val16[1] = CTL_ENABLE_4V5;
++			valmask8[1] = CTL_ENABLE_4V5;
+ 			break;
+ 		case ilog2(STS_BUTTON_MODE):
+-			val16[1] = CTL_BUTTON_MODE;
++			valmask8[1] = CTL_BUTTON_MODE;
+ 			break;
+ 		default:
+ 			return -EINVAL;
+ 		}
+-		val16[0] = value ? val16[1] : 0;
+-		return dm_i2c_write(dev, CMD_GENERAL_CONTROL, val16, sizeof(val16));
++
++		valmask8[0] = value ? valmask8[1] : 0;
++
++		return dm_i2c_write(dev, CMD_GENERAL_CONTROL, valmask8,
++				    sizeof(valmask8));
  
--#define MVEBU_PCIE_ID 0
-+#if defined(CONFIG_ARMADA_375)
-+# define MVEBU_RSTOUTN_MASK_REG		0x54
-+# define MVEBU_SYS_SOFT_RST_REG		0x58
-+#else
-+# define MVEBU_RSTOUTN_MASK_REG		0x60
-+# define MVEBU_SYS_SOFT_RST_REG		0x64
-+#endif
+ 	/* bank 2 - supported only when FEAT_EXT_CMDS and FEAT_PERIPH_MCU is set */
+ 	case (16 + 32 + 0) ... (16 + 32 + 15):
+@@ -123,11 +134,12 @@ static int turris_omnia_mcu_set_value(struct udevice *dev, uint offset, int valu
+ 			return -EINVAL;
+ 		if (!(info->features & FEAT_PERIPH_MCU))
+ 			return -EINVAL;
+-		val32[3] = BIT(offset - 16 - 32) >> 8;
+-		val32[2] = BIT(offset - 16 - 32) & 0xff;
+-		val32[1] = value ? val32[3] : 0;
+-		val32[0] = value ? val32[2] : 0;
+-		return dm_i2c_write(dev, CMD_EXT_CONTROL, val32, sizeof(val32));
 +
-+#define MVEBU_GLOBAL_SOFT_RST_BIT	BIT(0)
++		valmask16[1] = cpu_to_le16(BIT(offset - 16 - 32));
++		valmask16[0] = value ? valmask16[1] : 0;
 +
-+#define MVEBU_PCIE_ID			0
-+
-+#if IS_ENABLED(CONFIG_ARMADA_32BIT_SYSCON_RESET)
++		return dm_i2c_write(dev, CMD_EXT_CONTROL, (void *)valmask16,
++				    sizeof(valmask16));
  
- static int mvebu_reset_of_xlate(struct reset_ctl *rst,
- 				struct ofnode_phandle_args *args)
-@@ -90,11 +103,65 @@ U_BOOT_DRIVER(mvebu_reset) = {
- 	.ops = &mvebu_reset_ops,
- };
- 
-+#endif /* IS_ENABLED(CONFIG_ARMADA_32BIT_SYSCON_RESET) */
-+
-+#if IS_ENABLED(CONFIG_ARMADA_32BIT_SYSCON_SYSRESET)
-+
-+static int mvebu_sysreset_request(struct udevice *dev, enum sysreset_t type)
-+{
-+	struct regmap *regmap = syscon_get_regmap(dev->parent);
-+	uint bit;
-+
-+	if (type != SYSRESET_COLD)
-+		return -EPROTONOSUPPORT;
-+
-+	bit = MVEBU_GLOBAL_SOFT_RST_BIT;
-+
-+	regmap_update_bits(regmap, MVEBU_RSTOUTN_MASK_REG, bit, bit);
-+	regmap_update_bits(regmap, MVEBU_SYS_SOFT_RST_REG, bit, bit);
-+
-+	/* Loop while waiting for the reset */
-+	while (1)
-+		;
-+
-+	return 0;
-+}
-+
-+static struct sysreset_ops mvebu_sysreset_ops = {
-+	.request = mvebu_sysreset_request,
-+};
-+
-+U_BOOT_DRIVER(mvebu_sysreset) = {
-+	.name = "mvebu-sysreset",
-+	.id = UCLASS_SYSRESET,
-+	.ops = &mvebu_sysreset_ops,
-+};
-+
-+#endif /* IS_ENABLED(CONFIG_ARMADA_32BIT_SYSCON_SYSRESET) */
-+
- static int mvebu_syscon_bind(struct udevice *dev)
+ 	default:
+ 		return -EINVAL;
+@@ -216,25 +228,25 @@ static int turris_omnia_mcu_probe(struct udevice *dev)
  {
-+	int ret = 0;
-+
- 	/* bind also mvebu-reset, with the same ofnode */
--	return device_bind_driver_to_node(dev, "mvebu-reset", "mvebu-reset",
--					  dev_ofnode(dev), NULL);
-+	if (IS_ENABLED(CONFIG_ARMADA_32BIT_SYSCON_RESET)) {
-+		ret = device_bind_driver_to_node(dev, "mvebu-reset",
-+						 "mvebu-reset", dev_ofnode(dev),
-+						 NULL);
-+		if (ret < 0)
-+			return ret;
-+	}
-+
-+	/* bind also mvebu-sysreset, with the same ofnode */
-+	if (IS_ENABLED(CONFIG_ARMADA_32BIT_SYSCON_SYSRESET)) {
-+		ret = device_bind_driver_to_node(dev, "mvebu-sysreset",
-+						 "mvebu-sysreset",
-+						 dev_ofnode(dev), NULL);
-+		if (ret < 0)
-+			return ret;
-+	}
-+
-+	return ret;
- }
+ 	struct turris_omnia_mcu_info *info = dev_get_plat(dev);
+ 	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
+-	u16 status;
+-	u8 val[2];
++	u16 val;
+ 	int ret;
  
- static const struct udevice_id mvebu_syscon_of_match[] = {
+-	ret = dm_i2c_read(dev, CMD_GET_STATUS_WORD, val, 2);
+-	if (ret) {
+-		printf("Error: turris_omnia_mcu CMD_GET_STATUS_WORD failed: %d\n", ret);
++	ret = dm_i2c_read(dev, CMD_GET_STATUS_WORD, (void *)&val, sizeof(val));
++	if (ret < 0) {
++		printf("Error: turris_omnia_mcu CMD_GET_STATUS_WORD failed: %d\n",
++		       ret);
+ 		return ret;
+ 	}
+ 
+-	status = ((u16)val[1] << 8) | val[0];
+-
+-	if (status & STS_FEATURES_SUPPORTED) {
+-		ret = dm_i2c_read(dev, CMD_GET_FEATURES, val, 2);
+-		if (ret) {
+-			printf("Error: turris_omnia_mcu CMD_GET_FEATURES failed: %d\n", ret);
++	if (le16_to_cpu(val) & STS_FEATURES_SUPPORTED) {
++		ret = dm_i2c_read(dev, CMD_GET_FEATURES, (void *)&val,
++				  sizeof(val));
++		if (ret < 0) {
++			printf("Error: turris_omnia_mcu CMD_GET_FEATURES failed: %d\n",
++			       ret);
+ 			return ret;
+ 		}
+-		info->features = ((u16)val[1] << 8) | val[0];
++		info->features = le16_to_cpu(val);
+ 	}
+ 
+ 	uc_priv->bank_name = "mcu_";
 -- 
 2.43.2
 
