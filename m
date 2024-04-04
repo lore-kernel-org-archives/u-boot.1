@@ -4,49 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C339CD1284
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 12:08:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53200CD1284
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 12:22:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1398988417;
-	Thu,  4 Apr 2024 14:08:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 88003881AE;
+	Thu,  4 Apr 2024 14:22:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1712232502;
-	bh=nuKOKjKI/c9r1fXxDbuIxScBsmIKz03AkwPfI89vsXE=;
-	h=Date:To:From:Subject:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=YTDm/IGsuTFR+de0ElBASGulZ4DEeGGxJ2IqUWROwdJEuON7PlFArp0WXEd046Dny
-	 tUqnLY7ygL3a9Dgg0rwfU6bvWqjutKArzY6NsVhWNdb2joFt9MQdnIqcMuBlgg4oxU
-	 xH3axg1yNNk0E2CKMGCTJ7zs26BhRyd9tx2TTZxe0JNJEIJhCZ4BpCC5kc3JDdewF1
-	 82Pi14sqqNHyIekDhngJJI4xunqhg1ikA96uvz1UFmOpHgSMXxSa3/e6l+ZivW3XV3
-	 TW3Ki8HZVVVZXwXIXiKUKjGXEias3ORmse3LAc9VFxXRf5PjvVq5g2/HxXopl5aIUL
-	 xeOYU2qrcWgjQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A68E88444; Thu,  4 Apr 2024 14:08:21 +0200 (CEST)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org [80.241.59.204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B634287842
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 14:08:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="Tz1yeoXd";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 88E1F88415; Thu,  4 Apr 2024 12:58:29 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4V9L403C3sz9sRW;
- Thu,  4 Apr 2024 14:08:16 +0200 (CEST)
-Message-ID: <5f2e055c-bc20-471d-8b98-90807f1dba0c@denx.de>
-Date: Thu, 4 Apr 2024 14:08:15 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 21E7B88428
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 12:58:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=avromanov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 8078C120017;
+ Thu,  4 Apr 2024 13:58:26 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 8078C120017
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1712228306;
+ bh=XaZ1/Inqf9UnNv/0dRrxZURrMeHv484+aTu1FAWc1r0=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=Tz1yeoXd9HjOxG0AWrrmV9ZUkvn2Lz3P8qur8ksN4Cm5Z6L2nawwyRfFCwEdZ/de+
+ hjb4Ja0yOLykbshGw45ZXE6rAbt1Mzf4dEZ6eeP+WZ7G5hRATCh9gaztNPbEd8TMvY
+ 6RzUIGef/bVKL7zkMvtIGWwO5/sBsOrreJA+gdV/LGPhnSa5cld2eR4Z2asJk5Znfh
+ J42o8YADj50kPTEotdZ9mPSpkn6GKH3eMV/N5g9PrI50xS+BVWf2b8xVv43ygSzrUb
+ bnFx28oe5zbNYV7zT24rucEaiPWjZB+N6XZKVBjlfmHSTjlpPV4cUq6dqYJvS+s6Zp
+ 7osZ8uP84u/sQ==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Thu,  4 Apr 2024 13:58:26 +0300 (MSK)
+Received: from user-A520M-DS3H.sigma.sbrf.ru (100.64.160.123) by
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Thu, 4 Apr 2024 13:58:24 +0300
+From: Alexey Romanov <avromanov@salutedevices.com>
+To: <dario.binacchi@amarulasolutions.com>, <michael@amarulasolutions.com>,
+ <frieder.schrempf@kontron.de>, <kmpark@infradead.org>, <hs@denx.de>,
+ <joe.hershberger@ni.com>, <dunaev@tecon.ru>, <sjg@chromium.org>,
+ <bmeng@tinylab.org>, <xypron.glpk@gmx.de>, <tobias@waldekranz.com>,
+ <jpewhacker@gmail.com>, <marek.vasut+renesas@mailbox.org>,
+ <kever.yang@rock-chips.com>, <jbx6244@gmail.com>,
+ <abdellatif.elkhlifi@arm.com>, <mikhail.kshevetskiy@iopsys.eu>,
+ <jagan@amarulasolutions.com>
+CC: <kernel@salutedevices.com>, <u-boot@lists.denx.de>, Alexey Romanov
+ <avromanov@salutedevices.com>
+Subject: [PATCH v3 0/3] Introduce mtdblock device
+Date: Thu, 4 Apr 2024 13:58:10 +0300
+Message-ID: <20240404105813.1520732-1-avromanov@salutedevices.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
-From: Stefan Roese <sr@denx.de>
-Subject: Please pull u-boot-marvell/master
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 184578 [Apr 04 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 14 0.3.14
+ 5a0c43d8a1c3c0e5b0916cc02a90d4b950c01f96, {Tracking_uf_ne_domains},
+ {Tracking_from_domain_doesnt_match_to}, lore.kernel.org:7.1.1;
+ smtp.sberdevices.ru:7.1.1,5.0.1; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
+ salutedevices.com:7.1.1; 127.0.0.199:7.1.2;
+ 100.64.160.123:7.1.2, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean, bases: 2024/04/04 09:20:00
+X-KSMG-LinksScanning: Clean, bases: 2024/04/04 09:20:00
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/04/04 07:34:00 #24651931
+X-KSMG-AntiVirus-Status: Clean, skipped
+X-Mailman-Approved-At: Thu, 04 Apr 2024 14:22:35 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,203 +109,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hello!
 
-please pull the first batch of mostly Marvell related patches:
+This series adds support for the mtdblock device, which
+allows to read/write data block by block. For example,
+it can now be used for BCB or Android AB command:
 
-----------------------------------------------------------------
-- kirkwood: Switch to using upstream dts/dtsi files (Tony)
-- mvebu: Turris Omnia - New board revision support (Marek)
-----------------------------------------------------------------
+  $ bcb load mtd 0 part_name
 
-Here the Azure build, without any issues:
+Tested only on SPI NAND, so bind is made only for
+SPI NAND drivers.
 
-https://dev.azure.com/sr0718/u-boot/_build/results?buildId=343&view=results
+---
 
-Thanks,
-Stefan
+Changes V1 -> V2 [1]:
 
-The following changes since commit cdfcc37428e06f4730ab9a17cc084eeb7676ea1a:
+  - Drop patch [2].
+  - Add warning if bind NAND mtdblock device.
+  - Move documentation of mtdblock implementation
+    from commit message to the source code.
+  - Remove __maybe_unused from mtd partition functions
+    description.
+  - Use blk_enabled() instead of #ifdefs.
 
-   Merge tag 'u-boot-dfu-next-20240402' of 
-https://source.denx.de/u-boot/custodians/u-boot-dfu (2024-04-02 22:37:23 
--0400)
+Changes V2 -> V3 [2]:
 
-are available in the Git repository at:
+  - Rebased over [3].
+  - Rename mtd_bread/bwrite -> mtd_blk_read/write.
+  - Fix GPL-2.0 license short name definiton in headers.
+  - Add empty line after MTD_ENTRY_NUMBERS define.
 
-   git@source.denx.de:u-boot/custodians/u-boot-marvell.git
+Links:
 
-for you to fetch changes up to 53bdcd1e9eacd6992d990b288fd6d48f43d94a0b:
+  - [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@salutedevices.com/
+  - [2] https://lore.kernel.org/all/20240227100441.1811047-5-avromanov@salutedevices.com/
+  - [3] https://lore.kernel.org/u-boot/20240403114047.84030-1-heinrich.schuchardt@canonical.com/T/#u
 
-   arm: mvebu: turris_omnia: Enable rng command in defconfig (2024-04-04 
-10:45:27 +0200)
+Alexey Romanov (3):
+  disk: support MTD partitions
+  drivers: introduce mtdblock abstraction
+  spinand: bind mtdblock
 
-----------------------------------------------------------------
-Marek Behún (18):
-       arm: mvebu: turris_omnia: Enable LTO by default on Turris Omnia
-       arm: mvebu: turris_omnia: Add header containing MCU command 
-interface and use it
-       arm: mvebu: turris_{omnia, mox}: Don't print model two times
-       arm: mvebu: turris_omnia: Update MCU status and features reading
-       arm: mvebu: turris_omnia: Implement getting board information 
-from MCU
-       arm: mvebu: turris_omnia: Print board ECDSA public key if available
-       arm: mvebu: turris_omnia: Disable Atmel SHA node if not present
-       arm: mvebu: spl: Do not build mvebu-reset in SPL
-       arm: mvebu: system-controller: Rework to use UCLASS_SYSCON
-       arm: mvebu: system-controller: Select mvebu-reset if DM_RESET && 
-PCI_MVEBU
-       arm: mvebu: system-controller: Add support for SYSRESET
-       gpio: turris_omnia_mcu: Use byteorder conversion functions
-       gpio: turris_omnia_mcu: Update firmware features reading
-       gpio: turris_omnia_mcu: Add support for system power off via sysreset
-       arm: mvebu: turris_omnia: Enable poweroff command via sysreset in 
-defconfig
-       cmd: rng: Print "Abort" on -EINTR
-       misc: turris_omnia_mcu: Add support for rng provided by MCU
-       arm: mvebu: turris_omnia: Enable rng command in defconfig
+ disk/part.c                 |   3 +-
+ drivers/block/blk-uclass.c  |   1 +
+ drivers/mtd/Kconfig         |   1 +
+ drivers/mtd/Makefile        |   1 +
+ drivers/mtd/mtdblock.c      | 227 ++++++++++++++++++++++++++++++++++++
+ drivers/mtd/mtdpart.c       |  69 +++++++++++
+ drivers/mtd/nand/spi/core.c |  20 ++++
+ include/linux/mtd/mtd.h     |  12 ++
+ include/part.h              |   3 +
+ 9 files changed, 336 insertions(+), 1 deletion(-)
+ create mode 100644 drivers/mtd/mtdblock.c
 
-Tony Dinh (2):
-       arm: dts: kirkwood: Enable upstream DT on Kirkwood boards
-       arm: dts: kirkwood: Remove DTS files for Kirkwood boards
+-- 
+2.34.1
 
-  arch/arm/dts/Makefile                          |  28 +-
-  arch/arm/dts/kirkwood-6192.dtsi                |  88 ---
-  arch/arm/dts/kirkwood-6281.dtsi                |  90 ---
-  arch/arm/dts/kirkwood-6282.dtsi                | 161 -----
-  arch/arm/dts/kirkwood-98dx4122.dtsi            |  53 --
-  arch/arm/dts/kirkwood-blackarmor-nas220.dts    | 172 -----
-  arch/arm/dts/kirkwood-d2net.dts                |  45 --
-  arch/arm/dts/kirkwood-dns325.dts               |  63 --
-  arch/arm/dts/kirkwood-dnskw.dtsi               | 235 -------
-  arch/arm/dts/kirkwood-dockstar.dts             | 110 ----
-  arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi    |   7 +
-  arch/arm/dts/kirkwood-dreamplug.dts            | 131 ----
-  arch/arm/dts/kirkwood-ds109.dts                |  40 --
-  arch/arm/dts/kirkwood-goflexnet.dts            | 190 ------
-  arch/arm/dts/kirkwood-guruplug-server-plus.dts | 133 ----
-  arch/arm/dts/kirkwood-ib62x0.dts               | 146 -----
-  arch/arm/dts/kirkwood-iconnect.dts             | 195 ------
-  arch/arm/dts/kirkwood-is2.dts                  |  40 --
-  arch/arm/dts/kirkwood-lschlv2-u-boot.dtsi      |   6 +-
-  arch/arm/dts/kirkwood-lschlv2.dts              |  20 -
-  arch/arm/dts/kirkwood-lsxhl-u-boot.dtsi        |   6 +-
-  arch/arm/dts/kirkwood-lsxhl.dts                |  20 -
-  arch/arm/dts/kirkwood-lsxl.dtsi                | 241 -------
-  arch/arm/dts/kirkwood-net2big.dts              |  63 --
-  arch/arm/dts/kirkwood-netxbig.dtsi             | 232 -------
-  arch/arm/dts/kirkwood-ns2-common.dtsi          |  97 ---
-  arch/arm/dts/kirkwood-ns2.dts                  |  40 --
-  arch/arm/dts/kirkwood-ns2lite.dts              |  35 -
-  arch/arm/dts/kirkwood-ns2max.dts               |  59 --
-  arch/arm/dts/kirkwood-ns2mini.dts              |  60 --
-  arch/arm/dts/kirkwood-nsa310s.dts              | 319 ---------
-  arch/arm/dts/kirkwood-nsa325-u-boot.dtsi       |   7 +
-  arch/arm/dts/kirkwood-nsa325.dts               | 231 -------
-  arch/arm/dts/kirkwood-nsa3x0-common.dtsi       | 157 -----
-  arch/arm/dts/kirkwood-openrd-base.dts          |  39 --
-  arch/arm/dts/kirkwood-openrd-client.dts        |  73 ---
-  arch/arm/dts/kirkwood-openrd-ultimate.dts      |  55 --
-  arch/arm/dts/kirkwood-openrd.dtsi              | 122 ----
-  arch/arm/dts/kirkwood-pogo_e02.dts             | 132 ----
-  arch/arm/dts/kirkwood-pogoplug-series-4.dts    | 180 ------
-  arch/arm/dts/kirkwood-sheevaplug-common.dtsi   | 104 ---
-  arch/arm/dts/kirkwood-sheevaplug.dts           |  42 --
-  arch/arm/dts/kirkwood-synology.dtsi            | 855 
--------------------------
-  arch/arm/dts/kirkwood.dtsi                     | 393 ------------
-  arch/arm/mach-kirkwood/Kconfig                 |   2 +
-  arch/arm/mach-mvebu/Kconfig                    |  25 +
-  arch/arm/mach-mvebu/Makefile                   |   3 +-
-  arch/arm/mach-mvebu/cpu.c                      |   2 +
-  arch/arm/mach-mvebu/system-controller.c        | 145 ++++-
-  board/CZ.NIC/turris_atsha_otp.c                |  27 +-
-  board/CZ.NIC/turris_common.c                   |  42 ++
-  board/CZ.NIC/turris_common.h                   |  10 +
-  board/CZ.NIC/turris_mox/turris_mox.c           |   5 +-
-  board/CZ.NIC/turris_omnia/Makefile             |   2 +-
-  board/CZ.NIC/turris_omnia/turris_omnia.c       | 310 ++++++---
-  cmd/rng.c                                      |   7 +-
-  configs/SBx81LIFKW_defconfig                   |   1 +
-  configs/SBx81LIFXCAT_defconfig                 |   1 +
-  configs/d2net_v2_defconfig                     |   2 +-
-  configs/dns325_defconfig                       |   2 +-
-  configs/dockstar_defconfig                     |   2 +-
-  configs/dreamplug_defconfig                    |   2 +-
-  configs/ds109_defconfig                        |   2 +-
-  configs/goflexhome_defconfig                   |   2 +-
-  configs/guruplug_defconfig                     |   2 +-
-  configs/ib62x0_defconfig                       |   2 +-
-  configs/iconnect_defconfig                     |   2 +-
-  configs/inetspace_v2_defconfig                 |   2 +-
-  configs/lschlv2_defconfig                      |   2 +-
-  configs/lsxhl_defconfig                        |   2 +-
-  configs/nas220_defconfig                       |   2 +-
-  configs/net2big_v2_defconfig                   |   2 +-
-  configs/netspace_lite_v2_defconfig             |   2 +-
-  configs/netspace_max_v2_defconfig              |   2 +-
-  configs/netspace_mini_v2_defconfig             |   2 +-
-  configs/netspace_v2_defconfig                  |   2 +-
-  configs/nsa310s_defconfig                      |   2 +-
-  configs/nsa325_defconfig                       |   2 +-
-  configs/openrd_base_defconfig                  |   2 +-
-  configs/openrd_client_defconfig                |   2 +-
-  configs/openrd_ultimate_defconfig              |   2 +-
-  configs/pogo_e02_defconfig                     |   2 +-
-  configs/pogo_v4_defconfig                      |   2 +-
-  configs/sheevaplug_defconfig                   |   2 +-
-  configs/turris_omnia_defconfig                 |   6 +
-  drivers/gpio/Kconfig                           |   7 -
-  drivers/gpio/Makefile                          |   1 -
-  drivers/gpio/turris_omnia_mcu.c                | 316 ---------
-  drivers/misc/Kconfig                           |  11 +
-  drivers/misc/Makefile                          |   1 +
-  drivers/misc/turris_omnia_mcu.c                | 411 ++++++++++++
-  include/turris-omnia-mcu-interface.h           | 248 +++++++
-  92 files changed, 1150 insertions(+), 6000 deletions(-)
-  delete mode 100644 arch/arm/dts/kirkwood-6192.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-6281.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-6282.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-98dx4122.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-blackarmor-nas220.dts
-  delete mode 100644 arch/arm/dts/kirkwood-d2net.dts
-  delete mode 100644 arch/arm/dts/kirkwood-dns325.dts
-  delete mode 100644 arch/arm/dts/kirkwood-dnskw.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-dockstar.dts
-  create mode 100644 arch/arm/dts/kirkwood-dreamplug-u-boot.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-dreamplug.dts
-  delete mode 100644 arch/arm/dts/kirkwood-ds109.dts
-  delete mode 100644 arch/arm/dts/kirkwood-goflexnet.dts
-  delete mode 100644 arch/arm/dts/kirkwood-guruplug-server-plus.dts
-  delete mode 100644 arch/arm/dts/kirkwood-ib62x0.dts
-  delete mode 100644 arch/arm/dts/kirkwood-iconnect.dts
-  delete mode 100644 arch/arm/dts/kirkwood-is2.dts
-  delete mode 100644 arch/arm/dts/kirkwood-lschlv2.dts
-  delete mode 100644 arch/arm/dts/kirkwood-lsxhl.dts
-  delete mode 100644 arch/arm/dts/kirkwood-lsxl.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-net2big.dts
-  delete mode 100644 arch/arm/dts/kirkwood-netxbig.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-ns2-common.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-ns2.dts
-  delete mode 100644 arch/arm/dts/kirkwood-ns2lite.dts
-  delete mode 100644 arch/arm/dts/kirkwood-ns2max.dts
-  delete mode 100644 arch/arm/dts/kirkwood-ns2mini.dts
-  delete mode 100644 arch/arm/dts/kirkwood-nsa310s.dts
-  create mode 100644 arch/arm/dts/kirkwood-nsa325-u-boot.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-nsa325.dts
-  delete mode 100644 arch/arm/dts/kirkwood-nsa3x0-common.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-openrd-base.dts
-  delete mode 100644 arch/arm/dts/kirkwood-openrd-client.dts
-  delete mode 100644 arch/arm/dts/kirkwood-openrd-ultimate.dts
-  delete mode 100644 arch/arm/dts/kirkwood-openrd.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-pogo_e02.dts
-  delete mode 100644 arch/arm/dts/kirkwood-pogoplug-series-4.dts
-  delete mode 100644 arch/arm/dts/kirkwood-sheevaplug-common.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood-sheevaplug.dts
-  delete mode 100644 arch/arm/dts/kirkwood-synology.dtsi
-  delete mode 100644 arch/arm/dts/kirkwood.dtsi
-  create mode 100644 board/CZ.NIC/turris_common.c
-  create mode 100644 board/CZ.NIC/turris_common.h
-  delete mode 100644 drivers/gpio/turris_omnia_mcu.c
-  create mode 100644 drivers/misc/turris_omnia_mcu.c
-  create mode 100644 include/turris-omnia-mcu-interface.h
