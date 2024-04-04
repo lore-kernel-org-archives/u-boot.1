@@ -4,69 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 699DFCD1284
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 04:50:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B49ACD1297
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 06:26:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BED8188280;
-	Thu,  4 Apr 2024 06:50:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 334F98824E;
+	Thu,  4 Apr 2024 08:26:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Hd5EJmuS";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="uAdtcDdb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 845048815A; Thu,  4 Apr 2024 06:50:29 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8BFF788093; Thu,  4 Apr 2024 08:26:01 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44DB788260
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 06:50:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57C7288249
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 08:25:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4344oPxU062965;
- Wed, 3 Apr 2024 23:50:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1712206225;
- bh=tM0NcfOL2ILwm26VyoTD8hBxU1fKT8U65XBH3lZUenc=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Hd5EJmuSi5wptNi2ix4wGpkrXQSFep4iQn6YfbrNxRIKRiG6RK6CZrEV9nc7mSybn
- a4Ff7ecvkjJUKY0ZWzRbtO8tpPb+7J/vl29W/ryANWna0Bo9K2nneyoFStD6nhUHSU
- 6abB6SNAgPP1IENu44OEFRN0qtnxcPYRK99sUbsQ=
-Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4344oOGf007152
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 3 Apr 2024 23:50:25 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE106.ent.ti.com
- (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 3
- Apr 2024 23:50:24 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 3 Apr 2024 23:50:24 -0500
-Received: from [172.24.227.36]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4344oMwo053588;
- Wed, 3 Apr 2024 23:50:23 -0500
-Message-ID: <967ef615-58f8-48e7-bb8e-1c9903e771db@ti.com>
-Date: Thu, 4 Apr 2024 10:20:21 +0530
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 0A5FE614D2;
+ Thu,  4 Apr 2024 06:25:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 8B338C433B1;
+ Thu,  4 Apr 2024 06:25:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1712211957;
+ bh=xpx0/NNe83yCRC+vVlcvHAc/0Ae5UbUFLTbDMDNGRlI=;
+ h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
+ b=uAdtcDdbypBHcmR0sQZzmbnTfSEq7tIII1zACc7uH2b3ypr6fCXagjlISgQ5fFHMG
+ EkhFAwp7zXvQRSpKZ7ZMWG6rB4qRm2Nz2C6m5GEs5le7IntuVwXC7+ttdpZw+8zdkL
+ Me9no+ubFYwoyIL5gE45QK87QlJCRT2r1/viLYOoEgkOUf6SSXfaZvUsqNt83IcqJq
+ 99Xhvnz2Gp+rv/gHmdGlKGbrZS4KuSveN1iaQKmEROGo+ZgMSRcX1xX8T6X7+Vua9T
+ zIbWAWJ35XRlPcuv3yUynDYMCEA8yBtY1Iu7HgBImk7tH7vqzCrjczauu81cavnK0H
+ fuxonNSyf5wpw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 8355ECD1284;
+ Thu,  4 Apr 2024 06:25:57 +0000 (UTC)
+From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
+Date: Thu, 04 Apr 2024 08:25:54 +0200
+Subject: [PATCH v4 6/6] usb: kbd: Add probe quirk for Apple and Keychron
+ keyboards
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] arm: dts: k3: binman: am625: add support for signing
- TIFSSTUB Images
-To: Dhruva Gole <d-gole@ti.com>, <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>, Vibhore Vardhan <vibhore@ti.com>, Kamlesh
- Gurudasani <kamlesh@ti.com>
-References: <20240403120309.4026170-1-d-gole@ti.com>
- <20240403120309.4026170-3-d-gole@ti.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20240403120309.4026170-3-d-gole@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Message-Id: <20240404-asahi-keyboards-v4-6-2266033feaff@jannau.net>
+References: <20240404-asahi-keyboards-v4-0-2266033feaff@jannau.net>
+In-Reply-To: <20240404-asahi-keyboards-v4-0-2266033feaff@jannau.net>
+To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>, 
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>
+Cc: u-boot@lists.denx.de, asahi@lists.linux.dev, 
+ Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>
+X-Mailer: b4 0.13.0
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2657; i=j@jannau.net;
+ h=from:subject:message-id;
+ bh=bgC5VMp6aw6U5Uhn14jI61Gw7z5YE8JE2SujySRwwJE=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhjQ+98/uJ2eL+qZYXv4c3f/fa4eku3jLhOZ1T997R72XY
+ ihtCVnaUcrCIMbFICumyJKk/bKDYXWNYkztgzCYOaxMIEMYuDgFYCLVcxgZTkocmFEnzvYwjlE+
+ o28a/90H4rc3B0cUtX6c71kRfyRpHSPDRdUHLu48C+ZkbLzuyfn6hfU5w/yMB9a7Uo/OXTpJ2bG
+ cFwA=
+X-Developer-Key: i=j@jannau.net; a=openpgp;
+ fpr=8B336A6BE4E5695E89B8532B81E806F586338419
+X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
+X-Original-From: Janne Grunau <j@jannau.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,212 +83,86 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j@jannau.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dhruva
+From: Janne Grunau <j@jannau.net>
 
-On 03/04/24 17:33, Dhruva Gole wrote:
-> From: Kamlesh Gurudasani <kamlesh@ti.com>
-> 
-> Add support for signing of TIFSSTUB images for HSSE, HSFS and GP devices
-> and include them in tispl.bin and tispl.bin_unsigned.
-> 
-> Signed-off-by: Kamlesh Gurudasani <kamlesh@ti.com>
-> Signed-off-by: Dhruva Gole <d-gole@ti.com>
-> ---
->   arch/arm/dts/k3-am625-sk-binman.dtsi | 141 ++++++++++++++++++++++++++-
->   1 file changed, 139 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/dts/k3-am625-sk-binman.dtsi b/arch/arm/dts/k3-am625-sk-binman.dtsi
-> index 5b058bd03a07..dfd38d64f638 100644
-> --- a/arch/arm/dts/k3-am625-sk-binman.dtsi
-> +++ b/arch/arm/dts/k3-am625-sk-binman.dtsi
-> @@ -151,11 +151,107 @@
->   			filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
->   		};
->   	};
-> +
-> +	tifsstub-hs {
-> +		filename = "tifsstub.bin_hs";
-> +		ti-secure-rom {
-> +			content = <&tifsstub_hs_cert>;
-> +			core = "secure";
-> +			load = <0x40000>;
-> +			sw-rev = <CONFIG_K3_X509_SWRV>;
-> +			keyfile = "custMpk.pem";
-> +			countersign;
-> +			tifsstub;
-> +		};
-> +		tifsstub_hs_cert: tifsstub-hs-cert.bin {
-> +			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
-> +			type = "blob-ext";
-> +			optional;
-> +		};
-> +		tifsstub_hs_enc: tifsstub-hs-enc.bin {
-> +			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
-> +			type = "blob-ext";
-> +			optional;
-> +		};
-> +	};
-> +
-> +	tifsstub-fs {
-> +		filename = "tifsstub.bin_fs";
-> +		tifsstub_fs_cert: tifsstub-fs-cert.bin {
-> +			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
-> +			type = "blob-ext";
-> +			optional;
-> +		};
-> +		tifsstub_fs_enc: tifsstub-fs-enc.bin {
-> +			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
-> +			type = "blob-ext";
-> +			optional;
-> +		};
-> +
-> +	};
-> +
-> +	tifsstub-gp {
-> +		filename = "tifsstub.bin_gp";
-> +		ti-secure-rom {
-> +			content = <&tifsstub_gp>;
-> +			core = "secure";
-> +			load = <0x60000>;
-> +			sw-rev = <CONFIG_K3_X509_SWRV>;
-> +			keyfile = "ti-degenerate-key.pem";
-> +			tifsstub;
-> +		};
-> +		tifsstub_gp: tifsstub-gp.bin {
-> +			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
-> +			type = "blob-ext";
-> +			optional;
-> +		};
-> +	};
-> +
->   	ti-spl {
->   		insert-template = <&ti_spl_template>;
->   
->   		fit {
->   			images {
-> +
-> +				tifsstub-hs {
-> +					description = "TIFSSTUB";
-> +					type = "firmware";
-> +					arch = "arm32";
-> +					compression = "none";
-> +					os = "tifsstub-hs";
-> +					load = <0x9dc00000>;
-> +					entry = <0x9dc00000>;
-> +					blob-ext {
-> +						filename = "tifsstub.bin_hs";
-> +					};
-> +				};
-> +
-> +				tifsstub-fs {
-> +					description = "TIFSSTUB";
-> +					type = "firmware";
-> +					arch = "arm32";
-> +					compression = "none";
-> +					os = "tifsstub-fs";
-> +					load = <0x9dc00000>;
-> +					entry = <0x9dc00000>;
-> +					blob-ext {
-> +						filename = "tifsstub.bin_fs";
-> +					};
-> +				};
-> +
-> +				tifsstub-gp {
-> +					description = "TIFSSTUB";
-> +					type = "firmware";
-> +					arch = "arm32";
-> +					compression = "none";
-> +					os = "tifsstub-gp";
-> +					load = <0x9dc00000>;
-> +					entry = <0x9dc00000>;
-> +					blob-ext {
-> +						filename = "tifsstub.bin_gp";
-> +					};
-> +				};
-> +
->   				dm {
->   					ti-secure {
->   						content = <&dm>;
-> @@ -189,7 +285,8 @@
->   				conf-0 {
->   					description = "k3-am625-sk";
->   					firmware = "atf";
-> -					loadables = "tee", "dm", "spl";
-> +					loadables = "tee", "tifsstub-hs", "tifsstub-fs",
-> +					"tifsstub-gp", "dm", "spl";
->   					fdt = "fdt-0";
->   				};
->   			};
-> @@ -247,6 +344,45 @@
->   		fit {
->   			images {
->   
-> +				tifsstub-hs {
-> +					description = "tifsstub";
-> +					type = "firmware";
-> +					arch = "arm32";
-> +					compression = "none";
-> +					os = "tifsstub-hs";
-> +					load = <0x9dc00000>;
-> +					entry = <0x9dc00000>;
-> +					blob-ext {
-> +						filename = "tifsstub.bin_hs";
-> +					};
-> +				};
-> +
-> +				tifsstub-fs {
-> +					description = "tifsstub";
-> +					type = "firmware";
-> +					arch = "arm32";
-> +					compression = "none";
-> +					os = "tifsstub-fs";
-> +					load = <0x9dc00000>;
-> +					entry = <0x9dc00000>;
-> +					blob-ext {
-> +						filename = "tifsstub.bin_fs";
-> +					};
-> +				};
-> +
-> +				tifsstub-gp {
-> +					description = "tifsstub";
-> +					type = "firmware";
-> +					arch = "arm32";
-> +					compression = "none";
-> +					os = "tifsstub-gp";
-> +					load = <0x9dc00000>;
-> +					entry = <0x9dc00000>;
-> +					blob-ext {
-> +						filename = "tifsstub.bin_gp";
-> +					};
-> +				};
-> +
->   				dm {
->   					ti-dm {
->   						filename = "ti-dm.bin";
-> @@ -270,7 +406,8 @@
->   				conf-0 {
->   					description = "k3-am625-sk";
->   					firmware = "atf";
-> -					loadables = "tee", "dm", "spl";
-> +					loadables = "tee", "tifsstub-hs", "tifsstub-fs",
-> +						  "tifsstub-gp", "dm", "spl";
->   					fdt = "fdt-0";
->   				};
->   			};
+Those keyboards do not return the current device state. Polling will
+timeout unless there are key presses. This is not a problem during
+operation but the initial device state query during probing will fail.
+Skip this step in usb_kbd_probe_dev() to make these devices useable.
+Not all Apple keyboards behave like this. A keyboard with USB
+vendor/product ID 05ac:0221 is reported to work with the current code.
+Unfortunately some Keychron keyboards "re-use" Apple's vendor ID and
+show the same behavior (Keychron C2, 05ac:024f for example).
 
+Reviewed-by: Marek Vasut <marex@denx.de>
+Reviewed-by: Neal Gompa <neal@gompa.dev>
+Signed-off-by: Janne Grunau <j@jannau.net>
+---
+ common/usb_kbd.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-If there are multiple boards that will support TIFSSTUB in future, I would 
-prefer templating these out and putting them in k3-binman.dtsi. However 
-considering there's a lot of movement currently (cleanup and OF_STREAM) in that 
-file, you can maybe take this up when adding support for the next board.
-
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+diff --git a/common/usb_kbd.c b/common/usb_kbd.c
+index b2361bbf18..820f591fc5 100644
+--- a/common/usb_kbd.c
++++ b/common/usb_kbd.c
+@@ -31,6 +31,10 @@
+ #define USB_DEVICE_ID_APPLE_MAGIC_KEYBOARD_FINGERPRINT_2021	0x029a
+ #define USB_DEVICE_ID_APPLE_MAGIC_KEYBOARD_NUMPAD_2021		0x029f
+ 
++#define USB_VENDOR_ID_KEYCHRON	0x3434
++
++#define USB_HID_QUIRK_POLL_NO_REPORT_IDLE	BIT(0)
++
+ /*
+  * If overwrite_console returns 1, the stdin, stderr and stdout
+  * are switched to the serial port, else the settings in the
+@@ -474,6 +478,7 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
+ 	struct usb_interface *iface;
+ 	struct usb_endpoint_descriptor *ep;
+ 	struct usb_kbd_pdata *data;
++	unsigned int quirks = 0;
+ 	int epNum;
+ 
+ 	if (dev->descriptor.bNumConfigurations != 1)
+@@ -506,6 +511,15 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
+ 
+ 	debug("USB KBD: found interrupt EP: 0x%x\n", ep->bEndpointAddress);
+ 
++	switch (dev->descriptor.idVendor) {
++	case USB_VENDOR_ID_APPLE:
++	case USB_VENDOR_ID_KEYCHRON:
++		quirks |= USB_HID_QUIRK_POLL_NO_REPORT_IDLE;
++		break;
++	default:
++		break;
++	}
++
+ 	data = malloc(sizeof(struct usb_kbd_pdata));
+ 	if (!data) {
+ 		printf("USB KBD: Error allocating private data\n");
+@@ -546,6 +560,14 @@ static int usb_kbd_probe_dev(struct usb_device *dev, unsigned int ifnum)
+ 	usb_set_idle(dev, iface->desc.bInterfaceNumber, 0, 0);
+ #endif
+ 
++	/*
++	 * Apple and Keychron keyboards do not report the device state. Reports
++	 * are only returned during key presses.
++	 */
++	if (quirks & USB_HID_QUIRK_POLL_NO_REPORT_IDLE) {
++		debug("USB KBD: quirk: skip testing device state\n");
++		return 1;
++	}
+ 	debug("USB KBD: enable interrupt pipe...\n");
+ #ifdef CONFIG_SYS_USB_EVENT_POLL_VIA_INT_QUEUE
+ 	data->intq = create_int_queue(dev, data->intpipe, 1,
 
 -- 
-Thanking You
-Neha Malcom Francis
+2.44.0
+
+
