@@ -4,80 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A198C67861
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 21:54:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 253E9CD1284
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 23:55:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA2C1882A3;
-	Thu,  4 Apr 2024 23:54:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7D8EA87D66;
+	Fri,  5 Apr 2024 01:55:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=digi.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kGehxb0J";
+	dkim=pass (2048-bit key; unprotected) header.d=digi.com header.i=@digi.com header.b="eGAGtYLK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FE6087DCA; Thu,  4 Apr 2024 23:54:31 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AC95888277; Thu,  4 Apr 2024 17:11:28 +0200 (CEST)
+Received: from outbound-ip24a.ess.barracuda.com
+ (outbound-ip24a.ess.barracuda.com [209.222.82.206])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2980F882B6
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 23:54:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55A968826D
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 17:11:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=digi.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a45f257b81fso209703166b.0
- for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 14:54:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712267668; x=1712872468; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pxmJkGKh2t5bnk3OrDqRYpAJhA8sqM/1wqs3K5yuQlI=;
- b=kGehxb0JvlGKrPJ6tMNMtc1eIp3MGgNyeF8Q84jqZFSQJRk19BABcVHlWpV1EOzbI4
- zftKZHVA6wd4E+18We8QiJs1TtN8pufseHzsZc2Hj1E7wNBb8BJKWkoGCyP23iIOZvsD
- ZCxmgoUM6FwRAI9K86e784Ce7cqxYN/LBD3Wa2ar7nYSMsSKRyv9W1K5N5UlXMOK+EzO
- sZjsRh90YMMAxqYQ9wxZU785d7Vq+I4n0deXqERzmKsR6L5GtLCoI++Zn0mpzYPfrFXh
- zTO2jW1eOnxNq3ZGbR6F6nyWD6Zx5zCG2A6TOOGiJ8l37SAZAJD7A2QZbunj//dWDY/w
- Nw+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712267668; x=1712872468;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pxmJkGKh2t5bnk3OrDqRYpAJhA8sqM/1wqs3K5yuQlI=;
- b=LEag5PzoALywdMtFhqJDnGHAo/XiPNoks3XD9ceOQ9HgNNoDQs6+KasBAgJyPta3TU
- 7+aff6zgaEa3AeX3NZ8+53S1PxIs4GSPk6k6F7Ag2b5bI4WKGQyaCeZMrYSoL/CGSep4
- fuMxUSnF431vJDQFRJ+QXYXGASA19rWphaHEN/wC/4KJakKeszYqiI2rgTZBR1fAP+uw
- I/D4XT8ist0dB/cS2vx6gS/kX6Ku5Lr8qfk/ro5TDBDgRk69vA6/TFiA8MsMdLoWLTi/
- 6sbsrIdgXFNhfC7HCnEFCNUYwYe2Vdcau6iI67hXc10WGzbMyiFKD0q0oyIEB4HrqUSv
- BZ8A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVVIPY5jWlnwBLJLu+PEZd47LSu+fxXs5VXy/SJLC8g9ILk0ySOoF9YMtXjpZ8eXwBu0Rgmi/u9q+mjicPl5PALSGbapA==
-X-Gm-Message-State: AOJu0YzKv+mD+6BwV4P8mcC+0n4Rt/V/JMctRGUkblpA2w5u0sYtMEd6
- 7//2DELJRXjvDYQSf63jd6cgzRUdi0VpVSL5Qttj+fQkPWvSSTm/a4242NXO8pk=
-X-Google-Smtp-Source: AGHT+IFDCf+lPMcUpOv79kqq1zRmlVD9FSnYOFIZ6zmqYNNgYRJtaayP/yN2foeyFkdXrj876rPQMw==
-X-Received: by 2002:a17:906:1397:b0:a4e:37ac:79c8 with SMTP id
- f23-20020a170906139700b00a4e37ac79c8mr481334ejc.5.1712267668392; 
- Thu, 04 Apr 2024 14:54:28 -0700 (PDT)
-Received: from cymric.caleb.rex.connolly.tech ([2a02:8109:aa0d:be00::570d])
- by smtp.gmail.com with ESMTPSA id
- v7-20020a170906488700b00a471481ef3csm53756ejq.124.2024.04.04.14.54.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Apr 2024 14:54:28 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Volodymyr Babchuk <volodymyr_babchuk@epam.com>,
- Bhupesh Sharma <bhupesh.linux@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
- Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PULL] Please pull qcom-next-2024Apr04 (attempt 2)
-Date: Thu,  4 Apr 2024 23:52:57 +0200
-Message-ID: <20240404215421.2151698-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.44.0
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=Javier.Viguera@digi.com
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11lp2168.outbound.protection.outlook.com [104.47.56.168]) by
+ mx-outbound47-164.us-east-2c.ess.aws.cudaops.com (version=TLSv1.2
+ cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Thu, 04 Apr 2024 15:11:22 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=OTZIOIMjnjM/d4qE6HfJiN6DMq+JSjYctD4DqlQkm29GavUX66/rFXLDXhURKoF2RVO3oLWx3wsvY60LaByN6EFvSXjMBh8XsR3o/0pk+zfafZMh3oqQ5HfiPgdzcRfpReB65pGvVWglGGJCZd9csKPDhSSn1vTd/7q3y3eUzTNmbrz8KbNWad0ktVkyuvlxtEB2cxs/J8i0vlgA8d1V3qKhGezNu8UQ6pgE6H39IzsKd1PmOZRajvZkoCl3DajO06LvKequWpM2z96rx8wGuZ47R0FyHGVeEBJt9CXw7rzWKPcAIXCMoPD29L3G5Gmln5H77wTL4SOkC3d967m4AA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=hcRgNvnX2NuxeF3iPKqc0uJFl8rcVI0GO2Eul885FLk=;
+ b=CLjs23Dr5oRiXkO3urWzH/rXEQ3usV/H20BawWPLusJ1T4QrV3al6wPBtG3Pq3UYZAxyR9vTRcrbpMK8jTKYG9FNRAk5Xnf2qxcd9byf2JtntimDOe1PeyKIouTLQPi6ZXbpFgFLsbsRq1YOLUJDXPfQPBRKZr3HvZzg9OoubB0QbdWJpCpdbddRp57eQ/ncTWz+rZ9C8b3QWuNwwYKLBxF/0BVG6TiGoYBZ4bPWcfukCLJSpeckd0ND/RWibR8JnuUlar12sEF0zsaYB6qjoUuSFU+VN17NFydGt9gRGd0p7vezuJQwypwezxVSuoXZb7gF4D1UYD3tRiwlwwft7A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=digi.com; dmarc=pass action=none header.from=digi.com;
+ dkim=pass header.d=digi.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=digi.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hcRgNvnX2NuxeF3iPKqc0uJFl8rcVI0GO2Eul885FLk=;
+ b=eGAGtYLKirzxX7JkUurnuL33tu4zOJ6YWXM1HqrUw6Lx/nSQGHcGypwzzsz08HBSF3brnTTkoKM+Tsb7EXJq1Ynm8XamaS1xJzTGAzf3GZTvge6+vHVhx+2Bb1T/6V3Nr0CAJRaaQfwUaQDocixZnaUNBWx0NLglnE7mFTy7DCgLxDQcOeuKJ2+zD8oz/7qFQyzD7dbz18Se2DGi/HO3HlqIpXVbBssKMnhaXckdn0k01hcZEdy+Bb5efPx7DWnJhAI+hjDY7q8EOq5QM4nQ0VvJqD/iS7/vi0nXf1gShNRnqNwadxHQCBz0sNVU08P4Vly2HULHqMu4YCiSj4n3mg==
+Received: from DS7PR10MB5167.namprd10.prod.outlook.com (2603:10b6:5:38e::9) by
+ CH0PR10MB4875.namprd10.prod.outlook.com (2603:10b6:610:de::7) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.7409.46; Thu, 4 Apr 2024 15:11:20 +0000
+Received: from DS7PR10MB5167.namprd10.prod.outlook.com
+ ([fe80::2991:3274:498f:f9d5]) by DS7PR10MB5167.namprd10.prod.outlook.com
+ ([fe80::2991:3274:498f:f9d5%4]) with mapi id 15.20.7409.042; Thu, 4 Apr 2024
+ 15:11:20 +0000
+From: Javier Viguera <javier.viguera@digi.com>
+To: u-boot@lists.denx.de,
+	uboot-imx@nxp.com,
+	festevam@gmail.com
+Cc: javier.viguera@digi.com
+Subject: [PATCH v2] arm: imx: fix signature_block_hdr struct fields order
+Date: Thu,  4 Apr 2024 17:11:09 +0200
+Message-ID: <20240404151110.2890691-1-javier.viguera@digi.com>
+X-Mailer: git-send-email 2.43.2
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: FR4P281CA0426.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:d1::9) To DS7PR10MB5167.namprd10.prod.outlook.com
+ (2603:10b6:5:38e::9)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS7PR10MB5167:EE_|CH0PR10MB4875:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 6OeMIwqN9M9/0PVuLHpWZBDePyKcT19lDt+xuYXp+R9l2fzGY4eymG1SpcpuICv2mCUKMwht+htuQ9GVxKIuW9X2cDFEI/T4n7ZPXSpgGSb7XzT9PFHf0HEG6K40iw+HyRPqqS10bz09on7edUBI4zAz01QAk8UysHBUsm+H1062lKKc3KNNW0Cw3LDUFU06cV2byJukfczeDq8bK/btol5ddLiG52lV4iIXMlAZn5kIwZRNmZqIGnqA5HP3pe9OIEM7NHSIfnClOIKHOzO7mE9qaefunqFTExCXkEvqDoXGEkfQzbewu+ceTIkgd7d/pvw0SLmSyb7C5rvrzTq8SiW6hsD9h1Bg7FxN3Dq8orqTbZTS+7EZowabs3XfIvsC7uhMD9vLNPkADOrzoMP/wy6hdXiiulmB/7Gkwkkrn4s/E+7ngpUgiorQauhLKQkWel9y6v9+3+5Rg4Ua4dUOhxptaQXtKBI06DTYhko+BcXkukNSX7PUA08gZn6mPMot3vmAkPVGCn2soWkVJjFUrVSX2484iL8g0U1TCy2UO3VqigMh5QqsDju52V147SzS9wGkpjAnhVc1F/bb/LSsQuqN3OiFOJN/0zriiRduYwCuSqeIki11tpOgbeaW9lHPqw/mt5A/kx3WdeaQGMWFQ+eyX8lm4ybMYZp0Drpch+LD4a480VlRvnzd54MjqIyHu9o/9jXblahA+w3j5F1TbUGT4EFDv9/xjYfg5a3P++4=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DS7PR10MB5167.namprd10.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(52116005)(376005)(1800799015)(366007)(38350700005); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?49s8vndvfglRFfjPo9cWKujp48v6HRqDzcX3v67YjTIR505IZN8rQV/s6s3+?=
+ =?us-ascii?Q?PwERMxRmJ9nySrNc3UOEzSEV99vbI8ChxbiV+AzA5FoEoQ/cQCovn1mJFbje?=
+ =?us-ascii?Q?wBpe3AfJqW1X8qX9XZqvPq+5Jl6oU6qt4OG6yrioLIP84s6bdcM/cG1bs2S+?=
+ =?us-ascii?Q?MrVGwB0OBXJtEO9rHNAtnA9s9mxE2NU8bRY5UVPaVNrNAFR0yeUt3Sz0rUCF?=
+ =?us-ascii?Q?IU54X2xPIi1DRuqK/eT+NQM/USMKMTn9/NG7Z9pa7T9ulpi/S6ZOFKqI71Bb?=
+ =?us-ascii?Q?ZbBXQdK9JF780LYdkVvv4hV2RDLzN8izlrvBJ0UghpZTYLWF5t2KYwavRhps?=
+ =?us-ascii?Q?6DA1tVRgTdqSg3Ip8exnPs1KDNgbj0UZ7c4ndSs0SZ1weiabUNABSJ3abO7v?=
+ =?us-ascii?Q?dynaDpkcCwRzG1EDsbXoxi8sjx/pQiBdTDLjF8yUWffGtrTyJyemHosN9zbn?=
+ =?us-ascii?Q?71NhqaDXWzh7lx12O8ks8Ysh2FnCYxpyY6piOGrERAqVVzxN5h+cxs0YDgkw?=
+ =?us-ascii?Q?WlPWbmSFv8HTOAAo0krjXQdxKIBkJj185h2aP8w1qQWoUEsTI1EF1OgFyiKP?=
+ =?us-ascii?Q?RMQd3XMG8UV3u49oZxNWKHB1LXlMsk2ZqhooSZVvX93SGMeYx+qeEop9Q52N?=
+ =?us-ascii?Q?8kTUzBDVRdmiToJkSKM1NUvORM8e6PDSMh1z2IlnGuEUL86VmXNHWHJhpT9f?=
+ =?us-ascii?Q?IKct51G+AJspACIrttiPs0/+aTSa9ksF25bbYSxBMlaXR8pDoaRimwaAUdQs?=
+ =?us-ascii?Q?lKqE399SkgZQe0rugGiJkDoj6MVLyisYhLbl1cNjYf5BpM/Dbn1ZlPNo83dV?=
+ =?us-ascii?Q?nS9GjzciaFflXZ50SEjYB2EvB1sq0phB+77klA+7oe84ZieyiE2Y34WzQLHd?=
+ =?us-ascii?Q?L/+56k41KrMolg8lThuDLLhJx+kjXkDusv+dzPGzUB2kklPVBhCVJoxaEH4b?=
+ =?us-ascii?Q?6bUY9F1wXuQyZttCCJnQRi6xDlF8PIgTeMy0BHRJD6+YFvMDFUM0LcVdOIp0?=
+ =?us-ascii?Q?yq+yQSxM7hZbWBP98TQmL4YnMt01f73SCDAKGibn6FAZhMKoFJOycTjeVq4M?=
+ =?us-ascii?Q?txYuQ8aMeyij+3CsFf3tL10dws8lBuyp8v7HhsF/PpdFT0xA/e+PSsIL8zwq?=
+ =?us-ascii?Q?wpx7GAMP0ewb1jKjj2sq6zppZDfopYRvqMauuoFdPupyrSC/DaFn7AaV1p/C?=
+ =?us-ascii?Q?XgAzzym7xTgLIZZWwWPfnXHR1BmEwzkRP7l4fmI+LwJREPcQnqSh0YinM5SL?=
+ =?us-ascii?Q?bpTBaC/fHol4cXo/rx7yX3QDP+Wo/uiUD0AJjvK6OwWKmiRKHBdKufot1gjr?=
+ =?us-ascii?Q?MomaBkJuoe2Fsr+LzTGgOIFZBYx7fP7Fqi1a7yFtSWC0XDCIg0n4UD8c+2Do?=
+ =?us-ascii?Q?eHnul/YpNVJOz0VapoeXKsr+aClqOw7D+g8tontLU4jCnRBnfoele7BZRnVe?=
+ =?us-ascii?Q?FfZNv4X8idMjly6qm8+6dT6y1IvtRGAbDC2+Q4Oapxuoa0yCpnG4bdYsKu8t?=
+ =?us-ascii?Q?Fk3j3IOSWulu0AdcWhEm/Z4efEdDmVB3Uf7hvb1wVReSbSGlyOw7EBJKOT8C?=
+ =?us-ascii?Q?A2uWBQ+oXVCSocxHn3AwkzY4ZoqJTcd4vREAoL74?=
+X-OriginatorOrg: digi.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2ac2f9bf-22bb-414f-a086-08dc54b97bb2
+X-MS-Exchange-CrossTenant-AuthSource: DS7PR10MB5167.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Apr 2024 15:11:20.4376 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: abb4cdb7-1b7e-483e-a143-7ebfd1184b9e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 61Uw70LVC8jjhJZcEq2m2mgBhtw9MaaUS/iDzEADHeNXXiRWqcZd1iqnPb9gJS2N0Wall7me2FoCRpuGxeiJdg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH0PR10MB4875
+X-BESS-ID: 1712243481-112196-11141-4444-1
+X-BESS-VER: 2019.1_20240403.2023
+X-BESS-Apparent-Source-IP: 104.47.56.168
+X-BESS-Parts: H4sIAAAAAAACA4uuVkqtKFGyUioBkjpK+cVKVoZmZmZAVgZQMNnCMMUoOcUyxd
+ LUNCXJLNUg1cwoxSgpyczEzMI4OdVCqTYWAJKl+qRBAAAA
+X-BESS-Outbound-Spam-Score: 0.00
+X-BESS-Outbound-Spam-Report: Code version 3.2,
+ rules version 3.2.2.255334 [from 
+ cloudscan20-202.us-east-2b.ess.aws.cudaops.com]
+ Rule breakdown below
+ pts rule name              description
+ ---- ---------------------- --------------------------------
+ 0.00 BSF_BESS_OUTBOUND      META: BESS Outbound 
+X-BESS-Outbound-Spam-Status: SCORE=0.00 using account:ESS112744 scores of
+ KILL_LEVEL=7.0 tests=BSF_BESS_OUTBOUND
+X-BESS-BRTS-Status: 1
+X-Mailman-Approved-At: Fri, 05 Apr 2024 01:55:23 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,97 +150,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+According to the documentation (for example NXP's AN13994 on encrypted
+boot on AHAB-enabled devices), the format of the signature block is:
 
-Sorry for the noise, totally fluffed that PR... Please ignore the previous
-email.
+  +--------------+--------------+--------------+-------------+
+  | Tag          | Length - msb | Length - lsb | Version     |
+  +--------------+--------------+--------------+-------------+
+  | SRK Table offset            | Certificate offset         |
+  +-----------------------------+----------------------------+
+  | Blob offset                 | Signature offset           |
+  +-----------------------------+----------------------------+
 
-Some new Qualcomm features for you:
+There is no runtime error in the current u-boot code. The only user of
+struct signature_block_hdr is the "get_container_size" function in the
+"arch/arm/mach-imx/image-container.c" file, and it's only using the very
+first fields of the struct (which are in the correct position) and thus
+there is no runtime failure.
 
-* Ethernet, i2c, and USB support are now enabled by default
-* The clock driver gets some bug fixes and cleanup
-* Invalid FDTs are now properly detected in board_fdt_blob_setup().
-* The pinctrl driver gains preparatory support for per-pin function muxes.
-* Support is added for two generations of Qualcomm HighSpeed USB PHY
-* A power domain driver is added for the Globall Distributed Switch Controllers
-  on the GCC hardware block.
-* SDM845 gains USB host mode support.
-* OF_LIVE is enabled by default for Qualcomm platforms
-* Some U-Boot devicetree compatibility fixups are added during init to improve
-  compatbility with upstream DT.
+On the other hand, extending the code to get the data encryption key
+blob offset on the signature header gives a wrong value as the field is
+in the wrong order.
 
-The following changes since commit cdfcc37428e06f4730ab9a17cc084eeb7676ea1a:
+Signed-off-by: Javier Viguera <javier.viguera@digi.com>
+---
 
-  Merge tag 'u-boot-dfu-next-20240402' of https://source.denx.de/u-boot/custodians/u-boot-dfu (2024-04-02 22:37:23 -0400)
+Notes:
+    v2:
+      - Improve commit log
 
-are available in the Git repository at:
+ include/imx_container.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-  git@source.denx.de:u-boot/custodians/u-boot-snapdragon.git tags/qcom-next-2024Apr04
-
-for you to fetch changes up to b2511143fba4c0631446c968fb4c0d962b01d850:
-
-  qcom_defconfig: enable USB (2024-04-04 17:46:48 +0200)
-
-----------------------------------------------------------------
-Bhupesh Sharma (2):
-      phy: qcom: add Qualcomm QUSB2 USB PHY driver
-      phy: qcom: Add SNPS femto v2 USB HS phy
-
-Caleb Connolly (13):
-      mailmap: update Bhupesh's email address
-      mach-snapdragon: disable power-domains for pre-reloc drivers
-      clk/qcom: use offsets for RCG registers
-      clk/qcom: sdm845: add gdscs
-      clk/qcom: sdm845: add USB clocks
-      gpio: msm_gpio: add .set_flags op
-      serial: msm-geni: support livetree
-      mach-snapdragon: fixup USB nodes
-      mach-snapdragon: fixup power-domains
-      mach-snapdragon: call regulators_enable_boot_on()
-      dts: sdm845-db845c: add u-boot fixups
-      qcom_defconfig: enable livetree
-      qcom_defconfig: enable USB
-
-Sumit Garg (1):
-      qcom_defconfig: Enable ethernet and I2C support
-
-Volodymyr Babchuk (4):
-      qcom: board: validate fdt before trying to use it
-      clk: qcom: clear div mask before assigning a new divider
-      clk: qcom: add support for power domains uclass
-      pinctrl: qcom: pass pin number to get_function_mux callback
-
- .mailmap                                  |   1 +
- arch/arm/Kconfig                          |   1 +
- arch/arm/dts/sdm845-db845c-u-boot.dtsi    |   9 +
- arch/arm/mach-snapdragon/Makefile         |   1 +
- arch/arm/mach-snapdragon/board.c          |  10 +-
- arch/arm/mach-snapdragon/of_fixup.c       | 155 +++++++++++
- arch/arm/mach-snapdragon/qcom-priv.h      |  20 ++
- configs/qcom_defconfig                    |  31 ++-
- drivers/clk/qcom/Kconfig                  |   2 +-
- drivers/clk/qcom/clock-apq8016.c          |  39 +--
- drivers/clk/qcom/clock-apq8096.c          |  28 +-
- drivers/clk/qcom/clock-qcom.c             | 159 +++++++++--
- drivers/clk/qcom/clock-qcom.h             |  22 +-
- drivers/clk/qcom/clock-qcs404.c           | 122 ++-------
- drivers/clk/qcom/clock-sdm845.c           |  61 +++--
- drivers/gpio/msm_gpio.c                   |  27 +-
- drivers/phy/qcom/Kconfig                  |  15 ++
- drivers/phy/qcom/Makefile                 |   2 +
- drivers/phy/qcom/phy-qcom-qusb2.c         | 429 ++++++++++++++++++++++++++++++
- drivers/phy/qcom/phy-qcom-snps-femto-v2.c | 216 +++++++++++++++
- drivers/pinctrl/qcom/pinctrl-apq8016.c    |   3 +-
- drivers/pinctrl/qcom/pinctrl-apq8096.c    |   3 +-
- drivers/pinctrl/qcom/pinctrl-ipq4019.c    |   3 +-
- drivers/pinctrl/qcom/pinctrl-qcom.c       |   4 +-
- drivers/pinctrl/qcom/pinctrl-qcom.h       |   3 +-
- drivers/pinctrl/qcom/pinctrl-qcs404.c     |   3 +-
- drivers/pinctrl/qcom/pinctrl-sdm845.c     |   3 +-
- drivers/serial/serial_msm_geni.c          |  15 +-
- 28 files changed, 1150 insertions(+), 237 deletions(-)
- create mode 100644 arch/arm/dts/sdm845-db845c-u-boot.dtsi
- create mode 100644 arch/arm/mach-snapdragon/of_fixup.c
- create mode 100644 arch/arm/mach-snapdragon/qcom-priv.h
- create mode 100644 drivers/phy/qcom/phy-qcom-qusb2.c
- create mode 100644 drivers/phy/qcom/phy-qcom-snps-femto-v2.c
+diff --git a/include/imx_container.h b/include/imx_container.h
+index 54cd684e35d5..691c764b3e5b 100644
+--- a/include/imx_container.h
++++ b/include/imx_container.h
+@@ -50,10 +50,10 @@ struct signature_block_hdr {
+ 	u8 length_lsb;
+ 	u8 length_msb;
+ 	u8 tag;
+-	u16 srk_table_offset;
+ 	u16 cert_offset;
+-	u16 blob_offset;
++	u16 srk_table_offset;
+ 	u16 signature_offset;
++	u16 blob_offset;
+ 	u32 reserved;
+ } __packed;
+ 
