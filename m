@@ -4,82 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DF05CD1284
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 13:20:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C0DDCD1284
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 13:20:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D52AF882BE;
-	Thu,  4 Apr 2024 15:20:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 607D58828B;
+	Thu,  4 Apr 2024 15:20:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="feHVlK8K";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ITTEIPmp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD5278828B; Thu,  4 Apr 2024 15:20:09 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 9AF09883A9; Thu,  4 Apr 2024 15:20:11 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D12E88276
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 15:20:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2C0188288
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 15:20:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2d84a5f4a20so2170801fa.1
- for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 06:20:08 -0700 (PDT)
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-513d492c3cdso264320e87.0
+ for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 06:20:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712236806; x=1712841606; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1712236809; x=1712841609; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=g2xJmeqV7J9yDPWcWLWnQojhOFW5Vl2ZjST8ffro7Ow=;
- b=feHVlK8KJ4a1++cHsMVFkYdcmtV96FJ0XskBlCk4xDxm4GYzrjWwkkjAF74+VeUp71
- VajND63WuwEG9PbrrqZYvQ3/p5nzOl65X/Q1j0xXjdz12Yr7KKHf1iT9sl7XoCKMBrn7
- b5aczpSA3KJg87Sgj7xune0UnFzZzFSrJm1hs0io9Qcc6EB37vUorZH4aAn7XIy9hIuq
- WoovLzXawtBw6+b11y7yNshehbwUe20YmOyTqoxpFhbP79ZuxYHChWaou0RZ6ECVXJCS
- IQUrPK3nksLznlHTiJURegs/MEyC5tTSWnCdr2MzZV6yy9oR75Zi6bzS1htSVyJwc6b9
- qQcg==
+ bh=YJtJUJcbedJqKOLkywTj0CdSYjis/eHZTLZ328mQ3BU=;
+ b=ITTEIPmpvvnDZzVgUuvRdD1AVaXW/3FsEUHpYu9i/KxyPyfzOMAz8o4QN2ykkkIWx4
+ 3TZVZH5Bna/YkB/tBJmEzrf4BlV0stxmwA0u56mi70NRNs/yBghGIRcdBO+bGYiRitRs
+ SVSaZbx4HKZaBBBldiuQXH9Cdth+QmCLOD7HBFS8u4dJuIKkWPFzmxP+7ABcWb3wGHio
+ a9SKRUzroVxm1scRSzyaaTEIL29Ysj1gmS0BjJFL+wH2dHSN3+wD3ETNqKmuXsTX/+jl
+ Lz8Rz7K0w6rS+bthVBX6hDcArkkdIgpLOTLAABHd5qTtDRlGAMpGv7JH8ECvuNja6O1u
+ fKEQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712236806; x=1712841606;
+ d=1e100.net; s=20230601; t=1712236809; x=1712841609;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=g2xJmeqV7J9yDPWcWLWnQojhOFW5Vl2ZjST8ffro7Ow=;
- b=Cwvr6zycY8FUWEciWYXdQwLNHxE3pF1AtSYnJUqmKdcLMiVoTF84G/xY94W0XTwtaV
- eoByDEWVSONTsQTRetHjAsybBuN8zDtQzNiIQ+SC1aTyTmUu0UQ8LhtFqlaoae8Zulm9
- Wyi+PO5IQTuL4MMA644fmXWCn+dtq8FB4MKpUN5SqSz0vZOlf8kaXkU0oPr2B0TOFoC4
- LKqMx79+iBTFx87ifdedFBGFIh6HoVxp3D9lyA2JOg8grpnM/AaLivGuzPV3KdtBKquR
- 8cKteRFYaM1rhi5cL6rAZPdanqfN9scr1iiiKDB8DTHys3tbGfFUPGgV4h25Maf++K2X
- o7Qw==
-X-Gm-Message-State: AOJu0YwHUkYczay8Lw5N0WFwMFEVIkIhp1eYaOJnfynVr3Eav5lpjHjO
- 1fu9tTjt3kPPCALqTmpCQhRYR2D/1COvctZ6abnkcx8soRsIY590uVvFyZzfAU9dqQ==
-X-Google-Smtp-Source: AGHT+IEP7BtDVSIiGBNRXe1XbMJWfxrMW6glTHrRhyWuiLOJG73iXexRfYvEkhzyAL+O+blTWZtGTQ==
-X-Received: by 2002:a2e:99cf:0:b0:2d6:c59e:37bd with SMTP id
- l15-20020a2e99cf000000b002d6c59e37bdmr1783542ljj.3.1712236806513; 
- Thu, 04 Apr 2024 06:20:06 -0700 (PDT)
+ bh=YJtJUJcbedJqKOLkywTj0CdSYjis/eHZTLZ328mQ3BU=;
+ b=El0g1Qq/2t/hj5m/G9DJ+dfQQ4Ar5WETcRid860Zxuu8a/zz+RmHWt1bF09tiz9CI/
+ M0CcqjYIcDZo1SY1aE5evD88tqSUTAnF8V0VxftfTy+IaYU2fKGYKSBzGds9MPkAx8k9
+ 7GlKN5TLSqeAV95e9PKd7nRoyHThao9DKdk8c651O12g0AYcqz5AHr+Q3yWKD5s8Hkyd
+ RxVJ9eWXJigNrBzva1MHVyQXU3hEWu0QQ0scqMT7BmLwpCSX63Mu/ZnBfo4UQ5M7VYbO
+ j9JCdtZarZK8bfmmIQWeBl/UHZtUAYM6zmNkWDhuQ/eJLPStaPQm/A8BI6hF+R4BcnUq
+ CXSA==
+X-Gm-Message-State: AOJu0Yzm6Lsd0loQNSleZvobXENfEvklIxhNJU/xta347RZOg0NCzzBm
+ LLzoUJxmkIKyE3a74mKJrhNbM+xlj7O3PJ0gJ88OSCGGQK26jmZ5ys0M4YzhSgXFQQ==
+X-Google-Smtp-Source: AGHT+IHIwlBn9GLZ5HhWeexdPSG4hHMqSyIJkcw8f+6QHTpCFyyY5X+145NIeALmmcjd3806CEOtWQ==
+X-Received: by 2002:ac2:46f7:0:b0:516:d0ba:68fc with SMTP id
+ q23-20020ac246f7000000b00516d0ba68fcmr586239lfo.6.1712236808589; 
+ Thu, 04 Apr 2024 06:20:08 -0700 (PDT)
 Received: from localhost ([185.186.156.113]) by smtp.gmail.com with ESMTPSA id
- i15-20020a2e808f000000b002d2e81c0f18sm2170424ljg.45.2024.04.04.06.20.03
+ z19-20020a195e53000000b00516cc2153d0sm166737lfi.103.2024.04.04.06.20.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Apr 2024 06:20:04 -0700 (PDT)
+ Thu, 04 Apr 2024 06:20:07 -0700 (PDT)
 From: Igor Opaniuk <igor.opaniuk@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, jens.wiklander@linaro.org,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Bin Meng <bmeng@tinylab.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Sean Edmond <seanedmond@microsoft.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v5 3/5] cmd: optee_rpmb: build cmd for sandbox
-Date: Thu,  4 Apr 2024 15:19:49 +0200
-Message-Id: <20240404131952.3252301-4-igor.opaniuk@gmail.com>
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v5 4/5] test: py: add optee_rpmb tests
+Date: Thu,  4 Apr 2024 15:19:50 +0200
+Message-Id: <20240404131952.3252301-5-igor.opaniuk@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240404131952.3252301-1-igor.opaniuk@gmail.com>
 References: <20240404131952.3252301-1-igor.opaniuk@gmail.com>
@@ -101,44 +91,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Support CMD_OPTEE_RPMB for SANDBOX configurations.
-Test:
+Add read/write tests for optee_rpmb cmd.
 
-$ ./u-boot -d arch/sandbox/dts/test.dtb
-...
-=> optee_rpmb write_pvalue test_variable test_value
-Wrote 11 bytes
-=> optee_rpmb read_pvalue test_variable 11
-Read 11 bytes, value = test_value
-
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Applied R-b and T-b tags
+ test/py/tests/test_optee_rpmb.py | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 test/py/tests/test_optee_rpmb.py
 
- cmd/Kconfig | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 61e280fb1a4..227d66a7eea 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1394,7 +1394,9 @@ config CMD_CLONE
- 
- config CMD_OPTEE_RPMB
- 	bool "Enable read/write support on RPMB via OPTEE"
--	depends on SUPPORT_EMMC_RPMB && OPTEE
-+	depends on (SUPPORT_EMMC_RPMB && OPTEE) || SANDBOX_TEE
-+	default y if SANDBOX_TEE
-+	select OPTEE_TA_AVB if SANDBOX_TEE
- 	help
- 	  Enable the commands for reading, writing persistent named values
- 	  in the Replay Protection Memory Block partition in eMMC by
+diff --git a/test/py/tests/test_optee_rpmb.py b/test/py/tests/test_optee_rpmb.py
+new file mode 100644
+index 00000000000..8a081b5c494
+--- /dev/null
++++ b/test/py/tests/test_optee_rpmb.py
+@@ -0,0 +1,20 @@
++# SPDX-License-Identifier:  GPL-2.0+
++#
++# Tests for OP-TEE RPMB read/write support
++
++"""
++This tests optee_rpmb cmd in U-Boot
++"""
++
++import pytest
++import u_boot_utils as util
++
++@pytest.mark.buildconfigspec('cmd_optee_rpmb')
++def test_optee_rpmb_read_write(u_boot_console):
++    """Test OP-TEE RPMB cmd read/write
++    """
++    response = u_boot_console.run_command('optee_rpmb write_pvalue test_variable test_value')
++    assert response == 'Wrote 11 bytes'
++
++    response = u_boot_console.run_command('optee_rpmb read_pvalue test_variable 11')
++    assert response == 'Read 11 bytes, value = test_value'
+\ No newline at end of file
 -- 
 2.34.1
 
