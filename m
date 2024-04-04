@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B37A8CD1284
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 11:48:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FE5DCD1292
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 11:49:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 140C588449;
-	Thu,  4 Apr 2024 13:48:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8D9BF88441;
+	Thu,  4 Apr 2024 13:49:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Op0iBGrA";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Rt+OeyhF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A806488449; Thu,  4 Apr 2024 13:48:40 +0200 (CEST)
+ id 95D1B88447; Thu,  4 Apr 2024 13:49:17 +0200 (CEST)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D435188408
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 13:48:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BADAA88408
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 13:49:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
- [209.85.208.197])
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 4D92D424A1
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 11:48:19 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 8B3AE424B5
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 11:48:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1712231299;
- bh=ZsNrXEjzH9d/q1bW5jchAdJPqRzvHFF54iiL4NLWtc8=;
+ s=20210705; t=1712231315;
+ bh=3nBZVv03WTyeQ4Fd5e0Yn8JXJ75KJB3GamdqMVq+sDs=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=Op0iBGrAf3BEeWbo9AIbzK8FOFOulJp9SYNCfIzZ9X8Z8QRMcdSp2gT8UlIfj4n2/
- HlMZi8jottLjVgg3ygPO9lcBxaoGkP8DNxuM0eOVG3Wh1ITfqnjdQFDzIgi1NQC0KV
- fYM2XLrHVcO06jhPQdEr0mOldx1EbkwymjidM0uL32EqGjWNhiLzWLNUX4vO+K3Y1g
- Ek7QW8e/n2KMFIThSrFIooqa9a8KfmUODH5y9g6fVlYAZdbXuHw+gl9tOIntFQDzCU
- QwQdJjlwTgcnJmnmlvwM9iH0oOxV1TKuakJ8iO8d+jkA61xMpTq91Mgt8yCEZGdSlH
- EYi+lUHdnmiGw==
-Received: by mail-lj1-f197.google.com with SMTP id
- 38308e7fff4ca-2d85b9e7504so3405191fa.1
- for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 04:48:19 -0700 (PDT)
+ b=Rt+OeyhFAw1Q2bf9Ppmr+Io+QCJOqw17Y8ArqwfnS9mO0vv2tgs87u3SOnkvY74mo
+ HSvdbIkGXG242tmK8FROj9ZHrCM7Xnx+XjlRiVyeZn0HB+sp9MIAmp8TjHyzw307Mg
+ wE0YwKu1VcU9KrjOssgOQXtYE1wuiZO+4BgnGhbg4mjEB1MMFkf7pMEKeFN0257yhN
+ CnkKY++kqpPtKmChRs8mpmjHAC2agtt76ZRQk0yM6YTf/yFlisnUBJAn3ycmX4LqDY
+ J0iCIwm9/dfaEmKD/lu/WkzfEXwJL1KWu9IeDYhesGWygS7Fnj3cMurgeuJRzNbcls
+ inCqagZLlB9ww==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-416259a5fe5so4445065e9.0
+ for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 04:48:35 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712231275; x=1712836075;
+ d=1e100.net; s=20230601; t=1712231277; x=1712836077;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ZsNrXEjzH9d/q1bW5jchAdJPqRzvHFF54iiL4NLWtc8=;
- b=CUUJaU3j+kVsilV3vkid4EE6NuKf7Tgcp9qyQdsL07gIHTawatNDjL3irFiSNeX9Xv
- eMC4Rp+FzzZjQna22O3EpvNYY1lBbHDWuWl4+dkvHXYllzkBMe5Tmu8s38SaYqGlnlPb
- 9PxE7Ptmcu6ffCxGqRM8HNTMo4N9q2Z/pqXuLCncBuBfP4oyT7GrtA0+DYJzxkKlqkGx
- l2gOFFZVPcGXVXhpIbmq6EOwmOx8xgKtcUSg8cPc+RHjC5Uhs0mfAOC5exMkpyKin2Bl
- btv8ysESRcuAU+aX5qm7++OyCEjGfh/M4njyQbTSQ9PKYK5wdV/Bs3MPzQikGM0IFDSB
- oL6w==
+ bh=3nBZVv03WTyeQ4Fd5e0Yn8JXJ75KJB3GamdqMVq+sDs=;
+ b=L98hgagTxFOBqfR9iz/9zBRDnrkmjEJPKcWljnpNkSZvSveknxAIbBLAy8W1B9sayc
+ BLvOGRiLZ4IJWlXDwtOekSqYB9Qk4HSbwdw0kDIvPIK0nTR3Il8CYAjaR4owHCk0b+ia
+ FNeR0NAv38Fq57eDyXztpJynqr7msIV767ZsyNTl3tAMDfq+3eDKopxt+mR1DfJsp8WC
+ vCv0B9WeFQxIj+wRALR2Pf8Uo6a49IoY9gaDqG6Z+DrBssI/8Dl59Fd4fRaPCzZOOj2e
+ PqOE/QAf0uAGXk4G/dpEVm4w1xU3MKz7dFGZFGylNCJ7V8aDiSfPz7kFS1Am2/qFqt/I
+ rCOw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUFAHrtZn4xChvtvNDSrcVSPsWJN3QCMvqpwfIDQbwhD8R6yLfAXFIyyiHZoZ+nwh48y995IQnmzPViLOhBO48ueX+4ww==
-X-Gm-Message-State: AOJu0YwpQlcnvddGAh5VgndXVX/68Y/di/38AjZ0J5UncGE3uy/it5yo
- Lr22PFGmx0pgj1VzHXgLaaVW97qhEULMrGSjKVIMce1uKgU8u4UgUR259VW/uh/W+gM5nWUlOgz
- wPFGuDV09uQX0flzuaIrDgfl9NNA5RqWh8lSiga9WoXnxa68hjxsLEmiDidr3NULO19g=
-X-Received: by 2002:a2e:8509:0:b0:2d8:3e60:b9c9 with SMTP id
- j9-20020a2e8509000000b002d83e60b9c9mr1726143lji.33.1712231275437; 
- Thu, 04 Apr 2024 04:47:55 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGRWlyNelr7+wShMv/Jo7A/lEGZy0mDYZf191xb7lkDVipGMbC9eBhct+DXwmc87IIt41s1cw==
-X-Received: by 2002:a2e:8509:0:b0:2d8:3e60:b9c9 with SMTP id
- j9-20020a2e8509000000b002d83e60b9c9mr1726122lji.33.1712231275039; 
- Thu, 04 Apr 2024 04:47:55 -0700 (PDT)
+ AJvYcCVv/gemlKWT4GxjdR9dUTSD8i3iD2qx4aLvWzjymQVF1tzSmZDABl2IlMkKIioM6F33HQytWu1gTG843VrlFuEmZtMlYQ==
+X-Gm-Message-State: AOJu0YzmQ2XGHThONryn9G1SNI3Ea5OdFs8CRRn7ue5Sv8Qf71BaJW/M
+ DGBl8+kE3GAsyb+ESL6dSpezxtpRJqDrdNs7wXHG94mgeVClgQXETP5+bslPG/kwkvf9W03Tx1m
+ Hxf+EABiZnuvPfKbegNkO41BuUANh52njRIvDGN2F+9PsjibxdyYof71aMaIWyaEoibU=
+X-Received: by 2002:a05:600c:20e:b0:413:f3f0:c591 with SMTP id
+ 14-20020a05600c020e00b00413f3f0c591mr2159697wmi.41.1712231277380; 
+ Thu, 04 Apr 2024 04:47:57 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFah1cphi853x9b0fIPlqlBSabTD+n9t+g+oXWNbVHuET9FltoNgSg54k46lXGjfaSNf+jo3w==
+X-Received: by 2002:a05:600c:20e:b0:413:f3f0:c591 with SMTP id
+ 14-20020a05600c020e00b00413f3f0c591mr2159678wmi.41.1712231277096; 
+ Thu, 04 Apr 2024 04:47:57 -0700 (PDT)
 Received: from workstation5.fritz.box
  (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
  by smtp.gmail.com with ESMTPSA id
- h2-20020a05600c350200b00414906f1ea1sm2422134wmq.17.2024.04.04.04.47.53
+ h2-20020a05600c350200b00414906f1ea1sm2422134wmq.17.2024.04.04.04.47.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Apr 2024 04:47:54 -0700 (PDT)
+ Thu, 04 Apr 2024 04:47:56 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>,
@@ -92,9 +92,9 @@ Cc: Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, E Shattow <lucent@gmail.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v2 2/4] boot: enable booting via EFI boot manager by default
-Date: Thu,  4 Apr 2024 13:47:40 +0200
-Message-ID: <20240404114742.81187-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 4/4] boot: correct finding the default EFI binary
+Date: Thu,  4 Apr 2024 13:47:42 +0200
+Message-ID: <20240404114742.81187-5-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240404114742.81187-1-heinrich.schuchardt@canonical.com>
 References: <20240404114742.81187-1-heinrich.schuchardt@canonical.com>
@@ -116,67 +116,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If UEFI is enabled in U-Boot, we want it to conform to the UEFI
-specification. This requires enabling the boot manager boot method.
+* The sandbox must not use an arbitrary file name bootsbox.efi but the
+  file name matching the host architecture to properly boot the respective
+  file. We already have an include which provides a macro with the name of
+  the EFI binary. Use it.
 
-Reported-by: E Shattow <lucent@gmail.com>
+* The path to the EFI binary should be absolute.
+
+* The path and the file name must be capitalized to conform to the UEFI
+  specification. This is important when reading from case sensitive
+  file systems.
+
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
 v2:
-	fix building with EFI_BOOT_MGR but w/o BOOTSTD
+	new patch
 ---
- boot/Kconfig           | 10 ++++++++++
- boot/Makefile          |  2 +-
- lib/efi_loader/Kconfig |  1 -
- 3 files changed, 11 insertions(+), 2 deletions(-)
+ boot/bootmeth_efi.c  | 44 +++-----------------------------------------
+ test/boot/bootflow.c |  4 +++-
+ 2 files changed, 6 insertions(+), 42 deletions(-)
 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 3d7aabd27d6..d9a6c270059 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -558,6 +558,16 @@ config BOOTMETH_EFILOADER
+diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+index a46b6c9c805..aebc5207fc0 100644
+--- a/boot/bootmeth_efi.c
++++ b/boot/bootmeth_efi.c
+@@ -14,6 +14,7 @@
+ #include <bootmeth.h>
+ #include <command.h>
+ #include <dm.h>
++#include <efi_default_filename.h>
+ #include <efi_loader.h>
+ #include <fs.h>
+ #include <malloc.h>
+@@ -23,43 +24,7 @@
+ #include <pxe_utils.h>
+ #include <linux/sizes.h>
  
- 	  This provides a way to try out standard boot on an existing boot flow.
+-#define EFI_DIRNAME	"efi/boot/"
+-
+-/**
+- * get_efi_leafname() - Get the leaf name for the EFI file we expect
+- *
+- * @str: Place to put leaf name for this architecture, e.g. "bootaa64.efi".
+- *	Must have at least 16 bytes of space
+- * @max_len: Length of @str, must be >=16
+- */
+-static int get_efi_leafname(char *str, int max_len)
+-{
+-	const char *base;
+-
+-	if (max_len < 16)
+-		return log_msg_ret("spc", -ENOSPC);
+-	if (IS_ENABLED(CONFIG_ARM64))
+-		base = "bootaa64";
+-	else if (IS_ENABLED(CONFIG_ARM))
+-		base = "bootarm";
+-	else if (IS_ENABLED(CONFIG_X86_RUN_32BIT))
+-		base = "bootia32";
+-	else if (IS_ENABLED(CONFIG_X86_RUN_64BIT))
+-		base = "bootx64";
+-	else if (IS_ENABLED(CONFIG_ARCH_RV32I))
+-		base = "bootriscv32";
+-	else if (IS_ENABLED(CONFIG_ARCH_RV64I))
+-		base = "bootriscv64";
+-	else if (IS_ENABLED(CONFIG_SANDBOX))
+-		base = "bootsbox";
+-	else
+-		return -EINVAL;
+-
+-	strcpy(str, base);
+-	strcat(str, ".efi");
+-
+-	return 0;
+-}
++#define EFI_DIRNAME	"/EFI/BOOT/"
  
-+config BOOTMETH_EFI_BOOTMGR
-+	bool "Bootdev support for EFI boot manager"
-+	depends on EFI_BOOTMGR
-+	select BOOTMETH_GLOBAL
-+	default y
-+	help
-+	  Enable booting via the UEFI boot manager. Based on the EFI variables
-+	  the EFI binary to be launched is determined. To set the EFI variables
-+	  use the eficonfig command.
-+
- config BOOTMETH_VBE
- 	bool "Bootdev support for Verified Boot for Embedded"
- 	depends on FIT
-diff --git a/boot/Makefile b/boot/Makefile
-index f0a279cde16..84ccfeaecec 100644
---- a/boot/Makefile
-+++ b/boot/Makefile
-@@ -34,8 +34,8 @@ obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_CROS) += bootm.o bootm_os.o bootmeth_cros.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SANDBOX) += bootmeth_sandbox.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_SCRIPT) += bootmeth_script.o
- obj-$(CONFIG_$(SPL_TPL_)CEDIT) += cedit.o
-+obj-$(CONFIG_$(SPL_TPL_)BOOTMETH_EFI_BOOTMGR) += bootmeth_efi_mgr.o
- ifdef CONFIG_$(SPL_TPL_)BOOTSTD_FULL
--obj-$(CONFIG_EFI_BOOTMGR) += bootmeth_efi_mgr.o
- obj-$(CONFIG_$(SPL_TPL_)EXPO) += bootflow_menu.o
- obj-$(CONFIG_$(SPL_TPL_)BOOTSTD) += bootflow_menu.o
- endif
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index a7c3e05c13a..e13a6f9f4c3 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -44,7 +44,6 @@ config EFI_BINARY_EXEC
- config EFI_BOOTMGR
- 	bool "UEFI Boot Manager"
- 	default y
--	select BOOTMETH_GLOBAL if BOOTSTD
- 	help
- 	  Select this option if you want to select the UEFI binary to be booted
- 	  via UEFI variables Boot####, BootOrder, and BootNext. You should also
+ static int get_efi_pxe_arch(void)
+ {
+@@ -259,10 +224,7 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
+ 		return -ENOENT;
+ 
+ 	strcpy(fname, EFI_DIRNAME);
+-	ret = get_efi_leafname(fname + strlen(fname),
+-			       sizeof(fname) - strlen(fname));
+-	if (ret)
+-		return log_msg_ret("leaf", ret);
++	strcat(fname, BOOTEFI_NAME);
+ 
+ 	if (bflow->blk)
+ 		 desc = dev_get_uclass_plat(bflow->blk);
+diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+index e60e9309fa9..674d4c05f83 100644
+--- a/test/boot/bootflow.c
++++ b/test/boot/bootflow.c
+@@ -13,6 +13,7 @@
+ #include <bootstd.h>
+ #include <cli.h>
+ #include <dm.h>
++#include <efi_default_filename.h>
+ #include <expo.h>
+ #ifdef CONFIG_SANDBOX
+ #include <asm/test.h>
+@@ -179,7 +180,8 @@ static int bootflow_cmd_scan_e(struct unit_test_state *uts)
+ 	ut_assert_nextline("  3  efi          media   mmc          0  mmc1.bootdev.whole        ");
+ 	ut_assert_nextline("     ** No partition found, err=-2: No such file or directory");
+ 	ut_assert_nextline("  4  extlinux     ready   mmc          1  mmc1.bootdev.part_1       /extlinux/extlinux.conf");
+-	ut_assert_nextline("  5  efi          fs      mmc          1  mmc1.bootdev.part_1       efi/boot/bootsbox.efi");
++	ut_assert_nextline("  5  efi          fs      mmc          1  mmc1.bootdev.part_1       /EFI/BOOT/"
++			   BOOTEFI_NAME);
+ 
+ 	ut_assert_skip_to_line("Scanning bootdev 'mmc0.bootdev':");
+ 	ut_assert_skip_to_line(
 -- 
 2.43.0
 
