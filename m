@@ -4,54 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 869CFCD1297
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 06:26:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB356CD1284
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 06:26:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C085883AF;
-	Thu,  4 Apr 2024 08:26:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 88A67882AE;
+	Thu,  4 Apr 2024 08:26:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="k44dY3EK";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="mgCcM7Bk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E248188260; Thu,  4 Apr 2024 08:26:03 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
+ id 02C6C882AE; Thu,  4 Apr 2024 08:26:08 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3057288278
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 08:26:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EE03988293
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 08:26:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id 362CBCE2F8E;
+ by sin.source.kernel.org (Postfix) with ESMTP id 23FB9CE2F93;
  Thu,  4 Apr 2024 06:25:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 6EF4AC433A6;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 54ADCC43390;
  Thu,  4 Apr 2024 06:25:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1712211957;
- bh=Z4SzvQbg2Nn0Yo9untMHNeLq+1/xEkY3waFx9nS2fg0=;
+ bh=We0gQy1bkxXG2iYKIgi1QvBSJpwjqCLJEj2Dhg2GXh0=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=k44dY3EKgLuPbcLElD31iX6/LTbRWj3Q5Pbi/9VaI6fSJQGnSM5wiH4dvXLsS1Ywd
- nPRJ/jhdatfP/2K9IRh3ptQnOWC7IzaqieQ9JZQURLy5Ov9xj0pv/kLpIizPIfqv7h
- hrByv2Y5fTN7bvKOqElmJ+OoT5WOi6ypoUNx5N1qM7ClvdwHoaHM1D8Z3NCJcVnPTT
- oH2H3aUozQKZq7XbfZ41DauG+7geWBd3f8AwqkHN7MWaoP2KSelA88IFtRWNBQKfib
- q7RkSX+WIIVohylCAEm05TjLZIytgyh3ECgwHXUT3bVhkQIlO7wj+63lA8z+FB0akx
- XPzMdwNQAlplg==
+ b=mgCcM7Bk0U2GOwemVFzIIo2KcYAwRK2qKaF7u3L6GYY/ZyJ8pPStj4CREBGOlvBZ9
+ rmid9yfXFeKZF985PkPX9vgW30b0NvJLphQAxXnmwQvqGGA83nBGWRclkX4AdMJA1Y
+ NWEUL2EMj046JfuwGakBIEugqLnXSyMmecKTh3tuwzEi4LDLCZsX/flS28udcrOi5H
+ SYIH5nokecPBq2SuzYHFXfoYlFHofwZchwnIglV19kfuP8q8X13ZE4FLfd9RxcAegK
+ fNaXdr89+W+XbdalWdplS8DFLk4Mo9B6XhhzQugfHmSRKlDigcTRgrisIn9aUYmTen
+ NB2V0+ttB0KHg==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 66BD7CD129A;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 45D51CD1299;
  Thu,  4 Apr 2024 06:25:57 +0000 (UTC)
 From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Thu, 04 Apr 2024 08:25:52 +0200
-Subject: [PATCH v4 4/6] usb: Add environment based device ignorelist
+Date: Thu, 04 Apr 2024 08:25:50 +0200
+Subject: [PATCH v4 2/6] usb: xhci: Set up endpoints for the first 2 interfaces
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240404-asahi-keyboards-v4-4-2266033feaff@jannau.net>
+Message-Id: <20240404-asahi-keyboards-v4-2-2266033feaff@jannau.net>
 References: <20240404-asahi-keyboards-v4-0-2266033feaff@jannau.net>
 In-Reply-To: <20240404-asahi-keyboards-v4-0-2266033feaff@jannau.net>
 To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>, 
@@ -60,13 +59,13 @@ To: Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marex@denx.de>,
 Cc: u-boot@lists.denx.de, asahi@lists.linux.dev, 
  Janne Grunau <j@jannau.net>, Neal Gompa <neal@gompa.dev>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5463; i=j@jannau.net;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3588; i=j@jannau.net;
  h=from:subject:message-id;
- bh=F5Mqgr6BIYt/bv/GWdjY+VTDA0h3dv9SbJy1oTwzanU=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhjQ+98+6PxZf3ffSykpwovfaj1cfLLJOcXHN7ftQf+PTr
- ZsiLveMO0pZGMS4GGTFFFmStF92MKyuUYypfRAGM4eVCWQIAxenAEzEbgUjw3Il518XA1Yu/bP8
- 2wn/6cxu8x51a5VdX7Sr95okWz2jaRsjw1mxk9aChx7lBbrbrtj6/MdNiRWF9lKe22dPu/eao7N
- hPx8A
+ bh=C+QptQG0I4SLRE163S23N4sr3v3/vF84MwYBdfUC3T0=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhjQ+98/rFwR8cX6zSG2u3lJ77558NY/HJUv9D+b4HVq55
+ v2Ck4osHaUsDGJcDLJiiixJ2i87GFbXKMbUPgiDmcPKBDKEgYtTACayk4WR4c+l589/d03fLHj5
+ yhuOT8oPlk8SSrO+eLLl6+7QozOFzfIZGe49yBN18mnKO3TH0EJ8n7uUsP7/uC1NvsmnH1zbek7
+ lCS8A
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
@@ -90,161 +89,100 @@ X-Virus-Status: Clean
 
 From: Janne Grunau <j@jannau.net>
 
-Add the environment variable "usb_ignorelist" to prevent USB devices
-listed in it from being bound to drivers. This allows to ignore devices
-which are undesirable or trigger bugs in u-boot's USB stack.
-Devices emulating keyboards are one example of undesirable devices as
-u-boot currently supports only a single USB keyboard device. Most
-commonly, people run into this with Yubikeys, so let's ignore those in
-the default environment.
+The xhci driver currently only does the necessary initialization for
+endpoints found in the first interface descriptor. Apple USB keyboards
+(released 2021) use the second interface descriptor for the HID keyboard
+boot protocol. To allow USB drivers to use endpoints from other
+interface descriptors the xhci driver needs to ensure these endpoints
+are initialized as well.
+Use USB_MAX_ACTIVE_INTERFACES to control how many interface descriptors
+are considered during endpoint initialisation.
+For now define it to 2 as that is sufficient for supporting the Apple
+keyboards.
 
-Based on previous USB keyboard specific patches for the same purpose.
-
-Link: https://lore.kernel.org/u-boot/7ab604fb-0fec-4f5e-8708-7a3a7e2cb568@denx.de/
-Reviewed-by: Neal Gompa <neal@gompa.dev>
 Reviewed-by: Marek Vasut <marex@denx.de>
+Reviewed-by: Neal Gompa <neal@gompa.dev>
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- common/usb.c              | 64 +++++++++++++++++++++++++++++++++++++++++++++++
- doc/usage/environment.rst | 13 ++++++++++
- include/env_default.h     | 11 ++++++++
- 3 files changed, 88 insertions(+)
+ drivers/usb/host/xhci.c | 31 +++++++++++++++++++------------
+ include/usb.h           |  6 ++++++
+ 2 files changed, 25 insertions(+), 12 deletions(-)
 
-diff --git a/common/usb.c b/common/usb.c
-index 836506dcd9..44db07742e 100644
---- a/common/usb.c
-+++ b/common/usb.c
-@@ -28,6 +28,7 @@
- #include <common.h>
- #include <command.h>
- #include <dm.h>
-+#include <dm/device_compat.h>
- #include <log.h>
- #include <malloc.h>
- #include <memalign.h>
-@@ -1084,6 +1085,48 @@ static int usb_prepare_device(struct usb_device *dev, int addr, bool do_read,
- 	return 0;
- }
+diff --git a/drivers/usb/host/xhci.c b/drivers/usb/host/xhci.c
+index 534c4b973f..741e186ee0 100644
+--- a/drivers/usb/host/xhci.c
++++ b/drivers/usb/host/xhci.c
+@@ -606,24 +606,28 @@ static int xhci_set_configuration(struct usb_device *udev)
+ 	int slot_id = udev->slot_id;
+ 	struct xhci_virt_device *virt_dev = ctrl->devs[slot_id];
+ 	struct usb_interface *ifdesc;
++	unsigned int ifnum;
++	unsigned int max_ifnum = min((unsigned int)USB_MAX_ACTIVE_INTERFACES,
++				     (unsigned int)udev->config.no_of_if);
  
-+static int usb_device_is_ignored(u16 id_vendor, u16 id_product)
-+{
-+	ulong vid, pid;
-+	char *end;
-+	const char *cur = env_get("usb_ignorelist");
-+
-+	/* parse "usb_ignorelist" strictly */
-+	while (cur && cur[0] != '\0') {
-+		vid = simple_strtoul(cur, &end, 0);
-+		/*
-+		 * If strtoul did not parse a single digit or the next char is
-+		 * not ':' the ignore list is malformed.
-+		 */
-+		if (cur == end || end[0] != ':')
-+			return -EINVAL;
-+
-+		cur = end + 1;
-+		pid = simple_strtoul(cur, &end, 0);
-+		/* Consider '*' as wildcard for the product ID */
-+		if (cur == end && end[0] == '*') {
-+			pid = U16_MAX + 1;
-+			end++;
+ 	out_ctx = virt_dev->out_ctx;
+ 	in_ctx = virt_dev->in_ctx;
+ 
+-	num_of_ep = udev->config.if_desc[0].no_of_ep;
+-	ifdesc = &udev->config.if_desc[0];
+-
+ 	ctrl_ctx = xhci_get_input_control_ctx(in_ctx);
+ 	/* Initialize the input context control */
+ 	ctrl_ctx->add_flags = cpu_to_le32(SLOT_FLAG);
+ 	ctrl_ctx->drop_flags = 0;
+ 
+-	/* EP_FLAG gives values 1 & 4 for EP1OUT and EP2IN */
+-	for (cur_ep = 0; cur_ep < num_of_ep; cur_ep++) {
+-		ep_flag = xhci_get_ep_index(&ifdesc->ep_desc[cur_ep]);
+-		ctrl_ctx->add_flags |= cpu_to_le32(1 << (ep_flag + 1));
+-		if (max_ep_flag < ep_flag)
+-			max_ep_flag = ep_flag;
++	for (ifnum = 0; ifnum < max_ifnum; ifnum++) {
++		ifdesc = &udev->config.if_desc[ifnum];
++		num_of_ep = ifdesc->no_of_ep;
++		/* EP_FLAG gives values 1 & 4 for EP1OUT and EP2IN */
++		for (cur_ep = 0; cur_ep < num_of_ep; cur_ep++) {
++			ep_flag = xhci_get_ep_index(&ifdesc->ep_desc[cur_ep]);
++			ctrl_ctx->add_flags |= cpu_to_le32(1 << (ep_flag + 1));
++			if (max_ep_flag < ep_flag)
++				max_ep_flag = ep_flag;
 +		}
-+		/*
-+		 * The ignore list is malformed if no product ID / wildcard was
-+		 * parsed or entries are not separated by ',' or terminated with
-+		 * '\0'.
-+		 */
-+		if (cur == end || (end[0] != ',' && end[0] != '\0'))
-+			return -EINVAL;
-+
-+		if (id_vendor == vid && (pid > U16_MAX || id_product == pid))
-+			return -ENODEV;
-+
-+		if (end[0] == '\0')
-+			break;
-+		cur = end + 1;
-+	}
-+
-+	return 0;
-+}
-+
- int usb_select_config(struct usb_device *dev)
- {
- 	unsigned char *tmpbuf = NULL;
-@@ -1099,6 +1142,27 @@ int usb_select_config(struct usb_device *dev)
- 	le16_to_cpus(&dev->descriptor.idProduct);
- 	le16_to_cpus(&dev->descriptor.bcdDevice);
+ 	}
  
-+	/* ignore devices from usb_ignorelist */
-+	err = usb_device_is_ignored(dev->descriptor.idVendor,
-+				    dev->descriptor.idProduct);
-+	if (err == -ENODEV) {
-+		dev_dbg(dev->dev, "Ignoring USB device 0x%x:0x%x\n",
-+			dev->descriptor.idVendor, dev->descriptor.idProduct);
-+		return err;
-+	} else if (err == -EINVAL) {
-+		/*
-+		 * Continue on "usb_ignorelist" parsing errors. The list is
-+		 * parsed for each device returning the error would result in
-+		 * ignoring all USB devices.
-+		 * Since the parsing error is independent of the probed device
-+		 * report errors with printf instead of dev_err.
-+		 */
-+		printf("usb_ignorelist parse error in \"%s\"\n",
-+		       env_get("usb_ignorelist"));
-+	} else if (err < 0) {
-+		return err;
-+	}
-+
- 	/*
- 	 * Kingston DT Ultimate 32GB USB 3.0 seems to be extremely sensitive
- 	 * about this first Get Descriptor request. If there are any other
-diff --git a/doc/usage/environment.rst b/doc/usage/environment.rst
-index ebf75fa948..7d4b448cb3 100644
---- a/doc/usage/environment.rst
-+++ b/doc/usage/environment.rst
-@@ -366,6 +366,19 @@ tftpwindowsize
-     This means the count of blocks we can receive before
-     sending ack to server.
+ 	xhci_inval_cache((uintptr_t)out_ctx->bytes, out_ctx->size);
+@@ -637,9 +641,12 @@ static int xhci_set_configuration(struct usb_device *udev)
+ 	xhci_endpoint_copy(ctrl, in_ctx, out_ctx, 0);
  
-+usb_ignorelist
-+    Ignore USB devices to prevent binding them to an USB device driver. This can
-+    be used to ignore devices are for some reason undesirable or causes crashes
-+    u-boot's USB stack.
-+    An example for undesired behavior is the keyboard emulation of security keys
-+    like Yubikeys. U-boot currently supports only a single USB keyboard device
-+    so try to probe an useful keyboard device. The default environment blocks
-+    Yubico devices as common devices emulating keyboards.
-+    Devices are matched by idVendor and idProduct. The variable contains a comma
-+    separated list of idVendor:idProduct pairs as hexadecimal numbers joined
-+    by a colon. '*' functions as a wildcard for idProduct to block all devices
-+    with the specified idVendor.
+ 	/* filling up ep contexts */
+-	err = xhci_init_ep_contexts_if(udev, ctrl, virt_dev, ifdesc);
+-	if (err < 0)
+-		return err;
++	for (ifnum = 0; ifnum < max_ifnum; ifnum++) {
++		ifdesc = &udev->config.if_desc[ifnum];
++		err = xhci_init_ep_contexts_if(udev, ctrl, virt_dev, ifdesc);
++		if (err < 0)
++			return err;
++	}
+ 
+ 	return xhci_configure_endpoints(udev, false);
+ }
+diff --git a/include/usb.h b/include/usb.h
+index 09e3f0cb30..3aafdc8bfd 100644
+--- a/include/usb.h
++++ b/include/usb.h
+@@ -49,6 +49,12 @@ extern bool usb_started; /* flag for the started/stopped USB status */
+  */
+ #define USB_TIMEOUT_MS(pipe) (usb_pipebulk(pipe) ? 5000 : 1000)
+ 
++/*
++ * The xhcd hcd driver prepares only a limited number interfaces / endpoints.
++ * Define this limit so that drivers do not exceed it.
++ */
++#define USB_MAX_ACTIVE_INTERFACES	2
 +
- vlan
-     When set to a value < 4095 the traffic over
-     Ethernet is encapsulated/received over 802.1q
-diff --git a/include/env_default.h b/include/env_default.h
-index 2ca4a087d3..8ee500d170 100644
---- a/include/env_default.h
-+++ b/include/env_default.h
-@@ -99,6 +99,17 @@ const char default_environment[] = {
- #ifdef CONFIG_SYS_SOC
- 	"soc="		CONFIG_SYS_SOC			"\0"
- #endif
-+#ifdef CONFIG_USB_HOST
-+	"usb_ignorelist="
-+#ifdef CONFIG_USB_KEYBOARD
-+	/* Ignore Yubico devices. Currently only a single USB keyboard device is
-+	 * supported and the emulated HID keyboard Yubikeys present is useless
-+	 * as keyboard.
-+	 */
-+	"0x1050:*,"
-+#endif
-+	"\0"
-+#endif
- #ifdef CONFIG_ENV_IMPORT_FDT
- 	"env_fdt_path="	CONFIG_ENV_FDT_PATH		"\0"
- #endif
+ /* device request (setup) */
+ struct devrequest {
+ 	__u8	requesttype;
 
 -- 
 2.44.0
