@@ -4,81 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79E04CD1292
-	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 11:46:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6C4DCD1296
+	for <u-boot@archiver.kernel.org>; Thu,  4 Apr 2024 11:48:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A0F68842C;
-	Thu,  4 Apr 2024 13:46:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3CE508843D;
+	Thu,  4 Apr 2024 13:48:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="D/zOVGL6";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Y6RuhxLS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AE6B88436; Thu,  4 Apr 2024 13:46:50 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5A8E888440; Thu,  4 Apr 2024 13:48:22 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00BE1883D6
- for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 13:46:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 694A6883D6
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 13:48:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2d4886a1cb4so10617701fa.0
- for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 04:46:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712231207; x=1712836007; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VdlVW73c4LSN2MpqDmucKvZQzPPMCfRmddQdCVSzcDE=;
- b=D/zOVGL6tZI88q/tHrhFV9eVRDBNRUPuvcedD5zhPdlHYlp6BpYS5cvxWQb+4oT7IQ
- tMWsX63GOTerGXEDl2Us8JtC/7zJU5hbxB40MJ2VP85xcafCp6Vmjf86Z1bkvICqsRiW
- pPjRuSGiURtqXPP/vhga9cvWJ63DbgUyA8wNvjlkY2QZHcxyLaEVucUJhnIw8fcoJfwz
- 3shGPxQ2ULL2L6KrZlmj4D+0v65YoX1yr2MmNGafDzbirM8WbTkFvbwHHEiXVdd26rCQ
- aYUQYP1oqN2sD7eH+5v52olGjMM4JU42IbNyH25R7yqLGwBfLwqbpH5MW5hYQFkytZnH
- bEmg==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id B994E4248C
+ for <u-boot@lists.denx.de>; Thu,  4 Apr 2024 11:47:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1712231274;
+ bh=P29MOpz1iRI2T5F8PX3Of+suRGBv9a+oGO/TX8f5dBc=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=Y6RuhxLSLlTdvRVNiC0eVqdkf3+YHSMuc9/h36sEhDJyjfBJEMp2yuVL4AKjnbSJu
+ 5fg/Hx24hDOlTynR/WunqwRLo+PP2sADkWL29sKKw10cD3P2/psNYSTO+EjCmBvB3F
+ 72wVtWkxLpMQNosdMpWXqNbW3nhCJJqQc7WUbEd1KEUkI5rkb/EnONKQAzV6LTIooT
+ CWtHDsUYxu0zYOO3OmYvL/LoLWMcZDYFNsmal+6MkQA38tZuN5zvnLII12SPIDIWDN
+ rd9I+k3CZjgT9RKM9JnXptvJO+yXmBb+zcfk/9epsYCYmQpepSoHSdsw4OBmAprRpG
+ OHsoCPlQmXSKQ==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-41485831b2dso6369585e9.3
+ for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 04:47:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712231207; x=1712836007;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VdlVW73c4LSN2MpqDmucKvZQzPPMCfRmddQdCVSzcDE=;
- b=J63DDWIf1dh/0ryEdFpGKyNHAfYgOBh9u6Od7P2B43K9MHM4sZ2RenQP7I1QzCV2pw
- LTzlsfW1fnPCMKtOuf2Zdjg9CQM45nTIk4L17ckQtfNa5nduMH7cX/6VBmiApocs8dNQ
- zs8sUULYnRINYqqgO/rJhjlDhL06O/MzuaANAB7tvywS2aTRSxHMRICocWjSTd1MIV2D
- N3kRVaZxdwx4JvS//TS1fJOXDEsu6RUMx1YN8ZuUHK5cYD1GJYGIisKZT+I544HZxZpr
- 4NNkzPacm3BMk92vZMVzY4RgYbCbZp/WrOJpBkjqVAEs0gabcS6FgmIJuLxjvdkzPaDM
- X3QQ==
+ d=1e100.net; s=20230601; t=1712231273; x=1712836073;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=P29MOpz1iRI2T5F8PX3Of+suRGBv9a+oGO/TX8f5dBc=;
+ b=chUm3gXzL6B50leipZMSOWeQsrywCwq5rSj2p7AtqVdqEJKOhl64rw45sWjTkTi5hY
+ ppkFwmNjfLjlzgk4uHXkdKtpZyBuRBUbl0KhoqA4Zxe3YCqqlE5eLGdz9K1EO430aaEN
+ DgrrXYOmFhY9EF9ryocdWeTQ+1dL/ywXmoag/qDCl8uf34HLi2Rf423DEWi1BqF1llcS
+ mBS5yBl4kKaAfnx/vFizGFK5aK5hAbd9VtP8jwiw1q3+SeVen6aq7j7YcPekmI4v7Fza
+ s5KR+4wYsib7zKYM4oTfHEY5metvqDr/gOmUdZsUqxGc9DveTqzTuDN2mpNe5SEi6c6U
+ +zsw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVEWUxw02ww2tQXAJoB5RD6QqnkYv1kxtR0gQsL9tBLYTroMdXFSq3jebkCs1tXN0uADCh8V75hvT+y0oniKhbrlgKFTw==
-X-Gm-Message-State: AOJu0YwfAor5lnWHgjGmz8cmJZ4UFt58PzSCST1MTfjHUQYu81rMIELJ
- 2waprYnsLcT6W+u9x2n83c/CpItIv7YnH2JKYzDT2wWtv7Hk3Rle9hj3/P8doBHArzJk5TU8/bG
- QFVY6t+EXTmKPyi8SPw2xR+vlGj6WckH2K9Z/+w==
-X-Google-Smtp-Source: AGHT+IFLYJHupiWaNhjMwaGmYJTzNutnxu9DzZGljBNHTtdz3gOU4YApx1CwWTEjA5JtZ7q9I5NPfQ6O+96BXb6lwF4=
-X-Received: by 2002:a2e:8ed2:0:b0:2d6:b582:58b8 with SMTP id
- e18-20020a2e8ed2000000b002d6b58258b8mr1921252ljl.52.1712231207214; Thu, 04
- Apr 2024 04:46:47 -0700 (PDT)
+ AJvYcCU3FWNtKq7IveiYUShJLxekWUAw7QNdyW2d5wwlPg9Wrs88sfSW8Ov79InnhwPqRl64XEsNtQTLFzE3EJhCwE/wu/72pA==
+X-Gm-Message-State: AOJu0Yz4xOeY9AvpdqEHUrbxTdCJYDos/XnzDDGUx8MKmRoSCk+jWHhv
+ HnfUiH2lrPUtgNxX4c+Mgep3S9tXqw7SG07ttSdN9BeR3Tg91cHl978phWEEfBo9ks5OxAMTMja
+ 9gIYxcueQzOiVK1tdJ6FuQGHvA+UxlJ3r9JbDTY+fjccaY49uVAhnJEL7JgsIGSX4bFU=
+X-Received: by 2002:a05:600c:252:b0:414:8c06:5c32 with SMTP id
+ 18-20020a05600c025200b004148c065c32mr2111956wmj.14.1712231273179; 
+ Thu, 04 Apr 2024 04:47:53 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGZ9jSexF5j1GCWfabtiqx7ycxjt2iMCYYQpZRZMKWNwpDxPK80j6rz+QyxhPSxDS/+A4n99g==
+X-Received: by 2002:a05:600c:252:b0:414:8c06:5c32 with SMTP id
+ 18-20020a05600c025200b004148c065c32mr2111932wmj.14.1712231272754; 
+ Thu, 04 Apr 2024 04:47:52 -0700 (PDT)
+Received: from workstation5.fritz.box
+ (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ by smtp.gmail.com with ESMTPSA id
+ h2-20020a05600c350200b00414906f1ea1sm2422134wmq.17.2024.04.04.04.47.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Apr 2024 04:47:52 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Bryan Brattlof <bb@ti.com>,
+ Jesse Taube <mr.bossman075@gmail.com>,
+ "Leon M . Busch-George" <leon@georgemail.eu>,
+ Eddie James <eajames@linux.ibm.com>, Bin Meng <bmeng@tinylab.org>,
+ Shantur Rathore <i@shantur.com>, Mark Kettenis <kettenis@openbsd.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Sean Edmond <seanedmond@microsoft.com>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, E Shattow <lucent@gmail.com>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2 0/4] boot: fix EFI boot methods
+Date: Thu,  4 Apr 2024 13:47:38 +0200
+Message-ID: <20240404114742.81187-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240404081352.3224643-1-igor.opaniuk@gmail.com>
- <20240404081352.3224643-3-igor.opaniuk@gmail.com> <Zg5ngbQinAX6bOjM@hera>
- <CAC_iWjL48gDx2dKnB=+OO=3kLMdvU+9cOst4Oj4gtX2bN=7toQ@mail.gmail.com>
- <CAByghJZ+5J7uDzL54_apX3cAb5tGSk5yQmtR7cOaEtNTFZ-dLA@mail.gmail.com>
- <CAC_iWjLCQHRjNbgxoth4cRH8Ju+PBoRXmNwpkZjae2zxCy1cBw@mail.gmail.com>
- <CAByghJZVRbnFUwJdgU534tvGA+DX2pArf0i7ySik=BrXgADe3Q@mail.gmail.com>
-In-Reply-To: <CAByghJZVRbnFUwJdgU534tvGA+DX2pArf0i7ySik=BrXgADe3Q@mail.gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 4 Apr 2024 14:46:10 +0300
-Message-ID: <CAC_iWjKkvS_bH=MiYgX00nyRSLga2_J9UaJ5o4VTG3C3WYkyug@mail.gmail.com>
-Subject: Re: [PATCH v4 2/5] cmd: optee_rpmb: close tee session
-To: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: jens.wiklander@linaro.org, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,225 +113,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Igor,
+The default sequence of boot methods is determined by alphabetical sorting
+during linkage.
 
+* efi_mgr must run before efi to be UEFI compliant
+* pxe should run as last resort
 
-On Thu, 4 Apr 2024 at 14:40, Igor Opaniuk <igor.opaniuk@gmail.com> wrote:
->
-> Ilias,
->
-> On Thu, Apr 4, 2024 at 1:00=E2=80=AFPM Ilias Apalodimas <ilias.apalodimas=
-@linaro.org> wrote:
->>
->> Hi Igor,
->>
->> On Thu, 4 Apr 2024 at 13:18, Igor Opaniuk <igor.opaniuk@gmail.com> wrote=
-:
->> >
->> > Hi Ilias,
->> >
->> > On Thu, Apr 4, 2024 at 10:54=E2=80=AFAM Ilias Apalodimas <ilias.apalod=
-imas@linaro.org> wrote:
->> >>
->> >> Hi Igor,
->> >>
->> >> On Thu, 4 Apr 2024 at 11:40, Ilias Apalodimas
->> >> <ilias.apalodimas@linaro.org> wrote:
->> >> >
->> >> > Hi Igor,
->> >> >
->> >> > I was about to apply the series, but noticed neither me or Jens wer=
-e cc'ed
->> >> > on this. Adding Jens to the party
->> >> >
->> >> > On Thu, Apr 04, 2024 at 10:13:49AM +0200, Igor Opaniuk wrote:
->> >> > > Add calls for closing tee session after every read/write operatio=
-n.
->> >> >
->> >> > What the patch is pretty obvious, but I am missing an explanation o=
-f why
->> >> > this is needed
->> >> >
->> >> > >
->> >> > > Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
->> >> > > ---
->> >> > >
->> >> > > (no changes since v1)
->> >> > >
->> >> > >  cmd/optee_rpmb.c | 23 +++++++++++++++++------
->> >> > >  1 file changed, 17 insertions(+), 6 deletions(-)
->> >> > >
->> >> > > diff --git a/cmd/optee_rpmb.c b/cmd/optee_rpmb.c
->> >> > > index e0e44bbed04..b3cafd92410 100644
->> >> > > --- a/cmd/optee_rpmb.c
->> >> > > +++ b/cmd/optee_rpmb.c
->> >> > > @@ -87,8 +87,10 @@ static int read_persistent_value(const char *n=
-ame,
->> >> > >
->> >> > >       rc =3D tee_shm_alloc(tee, name_size,
->> >> > >                          TEE_SHM_ALLOC, &shm_name);
->> >> > > -     if (rc)
->> >> > > -             return -ENOMEM;
->> >> > > +     if (rc) {
->> >> > > +             rc =3D -ENOMEM;
->> >> > > +             goto close_session;
->> >> > > +     }
->> >> >
->> >> > I don't think you need the session to be opened to allocate memory.
->> >> > So instead of of doing this, why don't we just move the alloc call =
-before
->> >> > opening the session?
->> >>
->> >> Looking at it again, we do need tee !=3D NULL, but I think it's clean=
-er
->> >> to add something like
->> >> if (!dev)
->> >>     return -ENODEV
->> >> to __tee_shm_add() instead.
->> >
->> > Do you mind if I address that in a separate patch series, as tbh I
->> > don't want to add additional patches to the existing series?
->>
->> We still completely change the functionality. So, the patchset is not
->> a 'tiny cleanup', it instead closes the session every time instead of
->> keeping it open.
->> There are a few things going on, that aren't explained clearly in the
->> commit message
->> - Why is this needed? Looking at the code it is an actual problem
->> since sessions tied to the AVB uuid will remain open
->> - Is there any side effect by always closing the session?
->> I don't mind merging it as is with a proper commit message, but I
->> think the alternative is just easier.
->
-> I'll provide a bit more context here. The problem initially was in the TE=
-E sandbox
-> driver implementation(drivers/tee/sandbox.c) and it's limitations, which =
-doesn't
-> permit to have multiple simultaneous sessions with different TAs.
-> This is what actually happened in this CI run [1], firstly "optee_rpmb"
-> cmd was executed (and after execution we had one session open), and
-> then "scp03", which also makes calls to OP-TEE, however it fails
-> in sandbox_tee_open_session() because of this check:
->
-> if (state->ta) {
->     printf("A session is already open\n");
->     return -EBUSY;
-> }
->
-> So basically I had two ways in mind to address that:
-> 1. Close a session on each optee_rpmb cmd invocation.
-> I don't see any reason to keep this session open, as obviously
-> there is no other mechanism (tbh, I don't know if DM calls ".remove" for =
-active
-> devices) to close it automatically before handing over control to
-> Linux kernel. As a result we might end up with some orphaned sessions
-> registered in OP-TEE OS core (obvious resource leak).
-> 2. Extend TEE sandbox driver, add support for multiple
-> simultaneous sessions just to handle the case.
->
-> I've chosen the first approach, as IMO it was "kill two birds with one st=
-one",
-> I could address resource leak in OP-TEE and bypass limitations of
-> TEE sandbox driver.
+If UEFI is enabled in U-Boot, we want it to conform to the UEFI
+specification. This requires enabling the boot manager boot method.
 
-Thanks, this helps.
-All this needs to be in the commit message, instead of a mail thread.
-Can you send a new revision with the commit message amended?
+The sandbox must not use an arbitrary file name bootsbox.efi but the
+file name matching the host architecture to properly boot the respective
+file. We already have an include which provides a macro with the name of
+the EFI binary. Use it.
 
-Thanks
-/Ilias
->
-> [1] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/jobs/792216
->
->>
->>
->> Thanks
->> /Ilias
->>
->> >
->> >>
->> >>
->> >> Cheers
->> >> /Ilias
->> >> >
->> >> > >
->> >> > >       rc =3D tee_shm_alloc(tee, buffer_size,
->> >> > >                          TEE_SHM_ALLOC, &shm_buf);
->> >> > > @@ -125,6 +127,9 @@ out:
->> >> > >       tee_shm_free(shm_buf);
->> >> > >  free_name:
->> >> > >       tee_shm_free(shm_name);
->> >> > > +close_session:
->> >> > > +     tee_close_session(tee, session);
->> >> > > +     tee =3D NULL;
->> >> > >
->> >> > >       return rc;
->> >> > >  }
->> >> > > @@ -139,17 +144,20 @@ static int write_persistent_value(const cha=
-r *name,
->> >> > >       struct tee_param param[2];
->> >> > >       size_t name_size =3D strlen(name) + 1;
->> >> > >
->> >> > > +     if (!value_size)
->> >> > > +             return -EINVAL;
->> >> > > +
->> >> > >       if (!tee) {
->> >> > >               if (avb_ta_open_session())
->> >> > >                       return -ENODEV;
->> >> > >       }
->> >> > > -     if (!value_size)
->> >> > > -             return -EINVAL;
->> >> > >
->> >> > >       rc =3D tee_shm_alloc(tee, name_size,
->> >> > >                          TEE_SHM_ALLOC, &shm_name);
->> >> > > -     if (rc)
->> >> > > -             return -ENOMEM;
->> >> > > +     if (rc) {
->> >> > > +             rc =3D -ENOMEM;
->> >> > > +             goto close_session;
->> >> > > +     }
->> >> >
->> >> > ditto
->> >> >
->> >> > >
->> >> > >       rc =3D tee_shm_alloc(tee, value_size,
->> >> > >                          TEE_SHM_ALLOC, &shm_buf);
->> >> > > @@ -178,6 +186,9 @@ out:
->> >> > >       tee_shm_free(shm_buf);
->> >> > >  free_name:
->> >> > >       tee_shm_free(shm_name);
->> >> > > +close_session:
->> >> > > +     tee_close_session(tee, session);
->> >> > > +     tee =3D NULL;
->> >> > >
->> >> > >       return rc;
->> >> > >  }
->> >> > > --
->> >> > > 2.34.1
->> >> > >
->> >> >
->> >> > Thanks
->> >> > /Ilias
->> >
->> >
->> >
->> >
->> > --
->> > Best regards - Atentamente - Meilleures salutations
->> >
->> > Igor Opaniuk
->> >
->> > mailto: igor.opaniuk@gmail.com
->> > skype: igor.opanyuk
->> > https://www.linkedin.com/in/iopaniuk
->
->
->
-> --
-> Best regards - Atentamente - Meilleures salutations
->
-> Igor Opaniuk
->
-> mailto: igor.opaniuk@gmail.com
-> skype: igor.opanyuk
-> https://www.linkedin.com/in/iopaniuk
+The path to the EFI binary should be absolute.
+
+The path and the file name must be capitalized to conform to the UEFI
+specification. This is important when reading from case sensitive
+file systems.
+
+v2:
+	fix building with EFI_BOOT_MGR but w/o BOOTSTD
+	correct finding the default EFI binary
+
+Heinrich Schuchardt (4):
+  boot: correct the default sequence of boot methods
+  boot: enable booting via EFI boot manager by default
+  efi_loader: move HOST_ARCH to version_autogenerated.h
+  boot: correct finding the default EFI binary
+
+ Makefile                |  1 +
+ arch/sandbox/config.mk  |  2 --
+ boot/Kconfig            | 10 +++++++++
+ boot/Makefile           |  2 +-
+ boot/bootmeth_efi.c     | 46 ++++-------------------------------------
+ boot/bootmeth_efi_mgr.c |  2 +-
+ boot/bootmeth_pxe.c     |  2 +-
+ include/host_arch.h     |  2 ++
+ lib/efi_loader/Kconfig  |  1 -
+ lib/efi_loader/Makefile |  3 +--
+ test/boot/bootflow.c    |  6 ++++--
+ 11 files changed, 25 insertions(+), 52 deletions(-)
+
+-- 
+2.43.0
+
