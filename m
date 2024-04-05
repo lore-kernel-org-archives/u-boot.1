@@ -4,50 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD7ECD11C2
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 06:54:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E5C5CD11C2
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 06:54:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDB818844C;
-	Fri,  5 Apr 2024 08:54:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 639A88845C;
+	Fri,  5 Apr 2024 08:54:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0D32B88433; Fri,  5 Apr 2024 08:54:05 +0200 (CEST)
+ id 6052488456; Fri,  5 Apr 2024 08:54:06 +0200 (CEST)
 Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40AA98841D
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 08:54:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 81CF188440
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 08:54:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=csgroup.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
 Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
- by localhost (Postfix) with ESMTP id 4V9q2w6CJqz9sy4;
- Fri,  5 Apr 2024 08:54:00 +0200 (CEST)
+ by localhost (Postfix) with ESMTP id 4V9q2y4FdBz9sx4;
+ Fri,  5 Apr 2024 08:54:02 +0200 (CEST)
 Received: from pegase1.c-s.fr ([192.168.12.234])
  by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id K37132OjyWzo; Fri,  5 Apr 2024 08:54:00 +0200 (CEST)
+ with ESMTP id yblid7azmbFf; Fri,  5 Apr 2024 08:54:02 +0200 (CEST)
 Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase1.c-s.fr (Postfix) with ESMTP id 4V9q2t4NZkz9sx4;
+ by pegase1.c-s.fr (Postfix) with ESMTP id 4V9q2t73Jrz9syj;
  Fri,  5 Apr 2024 08:53:58 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 930158B779;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id EEDED8B766;
  Fri,  5 Apr 2024 08:53:58 +0200 (CEST)
 Received: from messagerie.si.c-s.fr ([127.0.0.1])
  by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id r995QkrsFq9Y; Fri,  5 Apr 2024 08:53:58 +0200 (CEST)
+ with ESMTP id XFgGZCkwwiil; Fri,  5 Apr 2024 08:53:58 +0200 (CEST)
 Received: from PO20335.idsi0.si.c-s.fr (unknown [192.168.232.100])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 40B378B766;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 952868B77A;
  Fri,  5 Apr 2024 08:53:58 +0200 (CEST)
 From: Christophe Leroy <christophe.leroy@csgroup.eu>
 To: jean-michel.casaubon@csgroup.eu, hugo.dubois.ext@csgroup.eu,
  Tom Rini <trini@konsulko.com>
 Cc: Christophe Leroy <christophe.leroy@csgroup.eu>,
 	u-boot@lists.denx.de
-Subject: [PATCH 3/4] board: cssi: Initialise port F on MIAE
-Date: Fri,  5 Apr 2024 08:53:20 +0200
-Message-ID: <22947030f698129049768653335944c41031ffb4.1712299502.git.christophe.leroy@csgroup.eu>
+Subject: [PATCH 4/4] board: cssi: Properly initialise MAC address for fibre on
+ CMPC885 board
+Date: Fri,  5 Apr 2024 08:53:21 +0200
+Message-ID: <d9052dbeab702f87980adb6839a381c9aed73b7e.1712299502.git.christophe.leroy@csgroup.eu>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1712299502.git.christophe.leroy@csgroup.eu>
 References: <cover.1712299502.git.christophe.leroy@csgroup.eu>
@@ -71,69 +72,31 @@ X-Virus-Status: Clean
 
 From: Hugo Dubois <hugo.dubois.ext@csgroup.eu>
 
-When equiped with the SRSA audio board, MIAE equipment
-has an additional port called port F.
-
-Initialise that port just like other ports of the board, so
-that it is already configured when starting Linux kernel.
+CMPC885 board can be pluged on a mother board with fibre interface, so
+fibre interface MAC address must be initialised for that case.
 
 Signed-off-by: Hugo Dubois <hugo.dubois.ext@csgroup.eu>
 Reviewed-by: CASAUBON Jean Michel <jean-michel.casaubon@csgroup.eu>
 Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
 ---
- board/cssi/common/common.c | 36 ++++++++++++++++++++++++++++++++++--
- 1 file changed, 34 insertions(+), 2 deletions(-)
+ board/cssi/cmpc885/cmpc885.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/board/cssi/common/common.c b/board/cssi/common/common.c
-index 7ecf772620..54e8c3cd03 100644
---- a/board/cssi/common/common.c
-+++ b/board/cssi/common/common.c
-@@ -208,12 +208,44 @@ void misc_init_r_common(void)
- 	}
- }
+diff --git a/board/cssi/cmpc885/cmpc885.c b/board/cssi/cmpc885/cmpc885.c
+index e11cfafaa5..49c13056ed 100644
+--- a/board/cssi/cmpc885/cmpc885.c
++++ b/board/cssi/cmpc885/cmpc885.c
+@@ -114,8 +114,10 @@ static int setup_mac(void)
+ 	if (memcmp(din + EE_OFF_MAC1, &ident, sizeof(ident)) == 0)
+ 		eth_env_set_enetaddr("ethaddr", din + EE_OFF_MAC1);
  
-+static void iop_setup_fpgam_common(void)
-+{
-+	u8 far_id = in_8(ADDR_FPGA_R_BASE + 0x43) >> 5;
-+
-+	if(far_id == FAR_CASRSA) {
-+		/*
-+		 * PFDIR[15]  = 0 [0x01]
-+		 * PFDIR[14]  = 1 [0x02]
-+		 * PFDIR[13]  = 1 [0x04]
-+		 */
-+		clrsetbits_8(ADDR_FPGA_R_BASE + 0x37, 0x01, 0x06);
-+		/*
-+		 * PFODR[15]  = 1 [0x01]
-+		 * PFODR[14]  = 0 [0x02]
-+		 * PFODR[13]  = 0 [0x04]
-+		 */
-+		clrsetbits_8(ADDR_FPGA_R_BASE + 0x39, 0x06, 0x01);
-+		/*
-+		 * PFDAT[15]  = 0 [0x01]
-+		 * PFDAT[14]  = 1 [0x02]
-+		 * PFDAT[13]  = 1 [0x04]
-+		 * PFDAT[12]  = 1 [0x08]
-+		 */
-+		clrsetbits_8(ADDR_FPGA_R_BASE + 0x3B, 0x01, 0x0E);
-+
-+		/* Setup TOR_OUT */
-+		out_8(ADDR_FPGA_R_BASE + 0x32, 0x2A);
+-	if (memcmp(din + EE_OFF_MAC2, &ident, sizeof(ident)) == 0)
++	if (memcmp(din + EE_OFF_MAC2, &ident, sizeof(ident)) == 0) {
+ 		eth_env_set_enetaddr("eth1addr", din + EE_OFF_MAC2);
++		eth_env_set_enetaddr("eth2addr", din + EE_OFF_MAC2);
 +	}
-+}
-+
- void iop_setup_common(void)
- {
- 	u8 type = in_8(ADDR_FPGA_R_BASE);
  
--	if (type == TYPE_MCR)
-+	if (type == TYPE_MCR) {
- 		iop_setup_mcr();
--	else if (type == TYPE_MIAE)
-+	} else if (type == TYPE_MIAE) {
- 		iop_setup_miae();
-+		iop_setup_fpgam_common();
-+	}
+ 	return 0;
  }
 -- 
 2.43.0
