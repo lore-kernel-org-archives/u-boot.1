@@ -4,73 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D1E1CD11C2
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 07:18:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E0BECD11C2
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 07:33:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D953E88457;
-	Fri,  5 Apr 2024 09:18:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5F88288089;
+	Fri,  5 Apr 2024 09:33:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TwLxPBFm";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oXGghtsI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 888138845A; Fri,  5 Apr 2024 09:18:33 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9A94688089; Fri,  5 Apr 2024 09:33:35 +0200 (CEST)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AEA1882B2
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 09:18:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 57B9087E2C
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 09:33:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-choudhary@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4357IGBW036228;
- Fri, 5 Apr 2024 02:18:16 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1712301496;
- bh=AHBzSCMGq231av705BG0jpZHKyog52HvyNLFvx0g0PA=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=TwLxPBFmZsYFoQa5ZVTlKZWmd9SGWzvdtDVi/gvhFatPiRkUv6Zf/6UgrzftZyJbQ
- BSKJxz8UKQ2k1jRKO0qHcjHOIntdQophqwtJw1ZtWgP6Xyrt3eVa/QBdUvffpyJK2E
- 3mlhcjtpA0mReZmsxNH8PNWjwsgfeFUm4ldLO3wk=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4357IGwK035858
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 5 Apr 2024 02:18:16 -0500
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 5
- Apr 2024 02:18:15 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 5 Apr 2024 02:18:15 -0500
-Received: from [172.24.227.252]
- (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com [172.24.227.252])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4357IAD6130708;
- Fri, 5 Apr 2024 02:18:11 -0500
-Message-ID: <e7c3882f-ef6a-4f3a-a5ec-2e2aa7cc2b45@ti.com>
-Date: Fri, 5 Apr 2024 12:48:10 +0530
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2d4886a1cb4so23671361fa.0
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 00:33:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712302412; x=1712907212;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+fZFJVOFXpiZXRfLSdKBxclf2cHFIvhnjDj5FKsaL04=;
+ b=oXGghtsIpWQnugyvtYg0iKXeavrXDcVFdzqBrKzne1wpcy05wxi9LyOvjbzaTG+FZs
+ HU1FAdrg3Orhiso7DyxoRV17PAyKetHMCXBMHJp0tGy7LkXHcUU5qPUOXqGWsBcMZGcW
+ ZDJWpfScHqdvPFvsgBDLg5R7Bj/nQmYgGDxFH8AgFJyDwZzGIslO/jlpyxlPlzH2FABw
+ 0Rkic1MOQIDJjuUUe9WvuRouOQweIdKNt53KY+oXXrraDuoZYLBCD2xYlJXVsC4q7b2c
+ f3Puvpaxs8FMvjsjYXJZa2lIXxcqh6/quWC+yYAOURmMhbuieMg8aSjCPJgHrwHin6Q0
+ ge8Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712302412; x=1712907212;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+fZFJVOFXpiZXRfLSdKBxclf2cHFIvhnjDj5FKsaL04=;
+ b=J0LTgpugOcVikRQDexRivlGqphWKuCZrACMpNDrKjCXbPtEEUxtKLBuZ4EKNTwljL8
+ laMOrjbi1YMeIevZ/JzYPNCNL25SCR1HrY4J1BAWvUeeJawZlfoVvpDUhZcSdP10sRSZ
+ uecaw1dKhNivM350KtEFg/iQ3TyVVs+mZ43GOxxb0MxLI5B/3b68jMRpTB9wK0PhUKij
+ iYEe/zh/aE7l1K8fiv/64FbAt10cWqhZL329GbKyaTy9EmKR/Cy4CqHTL8Urj47rxmeY
+ u3ch7XKOSZAPVb3kCP2wCo8tARahc4SVoehCTHL8RXzllUnSwGhdyGYPdCdnQPlLHBjD
+ itmw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUCLiofxNSzf2+qJ13HZlcbkEdUGUnG0KRRX14v3ej+n9lDEpjBesDSYTw1FSYMhCgu4MD+yD0DjM2iuPhHAnyAixGDrQ==
+X-Gm-Message-State: AOJu0YwpQS0kNyfRPoBuH0TPulB5xABk7+3gatOVyQ3CAT5KfoaoFOC/
+ mZh3KItw/Yqn/TWmIvpgKCKclvVA/fq6rwOPBLowFa8bNbFblit4dkUK3a8p21c=
+X-Google-Smtp-Source: AGHT+IEBQqlyy3F8Ar27N5PJ+3p47L2PAS8POO6tF55z286VaQF2ELef8YYVEkFY2ZYYO5lW55U1LA==
+X-Received: by 2002:a2e:a408:0:b0:2d8:3e52:66bb with SMTP id
+ p8-20020a2ea408000000b002d83e5266bbmr514924ljn.42.1712302412328; 
+ Fri, 05 Apr 2024 00:33:32 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ m17-20020adfa3d1000000b0034355b7e995sm1348391wrb.13.2024.04.05.00.33.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Apr 2024 00:33:31 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Dmitrii Merkurev <dimorinny@google.com>, u-boot@lists.denx.de
+Cc: rammuthiah@google.com, Dmitrii Merkurev <dimorinny@google.com>, Patrick
+ Delaunay <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>,
+ Ying-Chun Liu <paul.liu@linaro.org>
+Subject: Re: [PATCH 2/4] fastboot: blk: add block device flashing configuration
+In-Reply-To: <20240306185921.1854109-2-dimorinny@google.com>
+References: <20240306185921.1854109-1-dimorinny@google.com>
+ <20240306185921.1854109-2-dimorinny@google.com>
+Date: Fri, 05 Apr 2024 09:33:31 +0200
+Message-ID: <87ttkgfelw.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 13/15] arm: dts: Introduce J722S U-Boot dts files
-To: Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>, <trini@konsulko.com>,
- <jh80.chung@samsung.com>, <lukma@denx.de>, <seanga2@gmail.com>,
- <vaishnav.a@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
- <sumit.garg@linaro.org>
-CC: <vigneshr@ti.com>, <nm@ti.com>, <bb@ti.com>, <rogerq@kernel.org>,
- <r-gunasekaran@ti.com>
-References: <20240404090039.87458-1-j-choudhary@ti.com>
- <20240404090039.87458-14-j-choudhary@ti.com>
- <d738eaaf-6f13-4502-98a1-ef1bfe82d2ff@ti.com>
-Content-Language: en-US
-From: Jayesh Choudhary <j-choudhary@ti.com>
-In-Reply-To: <d738eaaf-6f13-4502-98a1-ef1bfe82d2ff@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,106 +94,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Dmitrii,
 
-On 04/04/24 20:59, Andrew Davis wrote:
-> On 4/4/24 4:00 AM, Jayesh Choudhary wrote:
->> Include the uboot device tree files needed to boot the board.
->>
->> Co-developed-by: Vaishnav Achath <vaishnav.a@ti.com>
->> Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
->> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
->> ---
->>   arch/arm/dts/Makefile                      |    2 +
->>   arch/arm/dts/k3-j722s-binman.dtsi          |  171 ++
->>   arch/arm/dts/k3-j722s-ddr-lp4-50-3733.dtsi | 2795 ++++++++++++++++++++
->>   arch/arm/dts/k3-j722s-evm-u-boot.dtsi      |   36 +
->>   arch/arm/dts/k3-j722s-r5-evm.dts           |   82 +
->>   5 files changed, 3086 insertions(+)
->>   create mode 100644 arch/arm/dts/k3-j722s-binman.dtsi
->>   create mode 100644 arch/arm/dts/k3-j722s-ddr-lp4-50-3733.dtsi
->>   create mode 100644 arch/arm/dts/k3-j722s-evm-u-boot.dtsi
->>   create mode 100644 arch/arm/dts/k3-j722s-r5-evm.dts
->>
-> 
-> [...]
-> 
->> diff --git a/arch/arm/dts/k3-j722s-evm-u-boot.dtsi 
->> b/arch/arm/dts/k3-j722s-evm-u-boot.dtsi
->> new file mode 100644
->> index 0000000000..056ef08455
->> --- /dev/null
->> +++ b/arch/arm/dts/k3-j722s-evm-u-boot.dtsi
->> @@ -0,0 +1,36 @@
->> +// SPDX-License-Identifier: GPL-2.0
->> +/*
->> + * Common J722S EVM dts file for SPLs
->> + * Copyright (C) 2024 Texas Instruments Incorporated - 
->> https://www.ti.com/
->> + */
->> +
->> +#include "k3-j722s-binman.dtsi"
->> +
->> +/ {
->> +    chosen {
->> +        stdout-path = "serial2:115200n8";
->> +        tick-timer = &main_timer0;
->> +    };
->> +};
->> +
->> +&main_pktdma {
->> +    reg = <0x00 0x485c0000 0x00 0x000100>,
->> +          <0x00 0x4a800000 0x00 0x020000>,
->> +          <0x00 0x4aa00000 0x00 0x040000>,
->> +          <0x00 0x4b800000 0x00 0x400000>,
->> +          <0x00 0x485e0000 0x00 0x020000>,
->> +          <0x00 0x484a0000 0x00 0x004000>,
->> +          <0x00 0x484c0000 0x00 0x002000>,
->> +          <0x00 0x48430000 0x00 0x004000>;
->> +    reg-names = "gcfg", "rchanrt", "tchanrt", "ringrt",
->> +            "cfg", "tchan", "rchan", "rflow";
-> 
-> Is this needed? Do we still not have the correct regs in
-> upstream kernel?
+Thank you for the patch and sorry for the review delay.
 
-I missed this change when I was going through j722s dts changes.
+On mer., mars 06, 2024 at 18:59, Dmitrii Merkurev <dimorinny@google.com> wrote:
 
-u-boot dts currently does not have this fixed.
-Tag v6.9-rc1-dts from devicetree-rebasing would have this fix.
+> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+> ---
+>  drivers/fastboot/Kconfig | 20 ++++++++++++++++++--
+>  1 file changed, 18 insertions(+), 2 deletions(-)
+>
+> diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
+> index 5e5855a76c..460c5e98d7 100644
+> --- a/drivers/fastboot/Kconfig
+> +++ b/drivers/fastboot/Kconfig
+> @@ -87,7 +87,7 @@ config FASTBOOT_USB_DEV
+>  config FASTBOOT_FLASH
+>  	bool "Enable FASTBOOT FLASH command"
+>  	default y if ARCH_SUNXI || ARCH_ROCKCHIP
+> -	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS)
+> +	depends on MMC || (MTD_RAW_NAND && CMD_MTDPARTS) || BLK
+>  	select IMAGE_SPARSE
+>  	help
+>  	  The fastboot protocol includes a "flash" command for writing
+> @@ -109,12 +109,16 @@ choice
+>  
+>  config FASTBOOT_FLASH_MMC
+>  	bool "FASTBOOT on MMC"
+> -	depends on MMC
+> +	depends on MMC && BLK
+>  
+>  config FASTBOOT_FLASH_NAND
+>  	bool "FASTBOOT on NAND"
+>  	depends on MTD_RAW_NAND && CMD_MTDPARTS
+>  
+> +config FASTBOOT_FLASH_BLOCK
+> +	bool "FASTBOOT on block device"
+> +	depends on BLK
+> +
 
-Will keep this in mind.
+If we just apply this patch, then this KConfig option is unused. Can we
+please squash this into patch 3/4?
 
-Also from TRM memory map, the range is off for 'tchanrt'
-Will send a fix patch for that after checking for all platforms
-to linux upstream if required.
+>  endchoice
+>  
+>  config FASTBOOT_FLASH_MMC_DEV
+> @@ -189,6 +193,18 @@ config FASTBOOT_MMC_USER_NAME
+>  	  defined here.
+>  	  The default target name for erasing EMMC_USER is "mmc0".
+>  
+> +config FASTBOOT_FLASH_BLOCK_INTERFACE_NAME
+> +	string "Define FASTBOOT block interface name"
+> +	depends on FASTBOOT_FLASH_BLOCK
+> +	help
+> +	  "Fastboot block interface name (mmc, virtio, etc)"
 
-> 
->> +};
->> +
->> +&dmsc {
->> +    bootph-pre-ram;
->> +
->> +    k3_sysreset: sysreset-controller {
->> +        compatible = "ti,sci-sysreset";
->> +        bootph-pre-ram;
-> 
-> This node won't be needed soon either[0]. Should mean an
-> almost empty -u-boot.dtsi file, which should be the goal.
-> 
+There is a finite list of supported options for this. Can we please
+document all of them so that users know what is valid and what not?
+If so, we can drop the "etc" part in the help string.
 
-Okay. I will remove the node.
+> +
+> +config FASTBOOT_FLASH_BLOCK_DEVICE_ID
+> +	int "Define FASTBOOT block device id"
+> +	depends on FASTBOOT_FLASH_BLOCK
+> +	help
+> +	  "Fastboot block device id"
 
-Should I mark [0] as dependency or is it okay without it.
-Impact would only be on U-Boot RESET I think. Base support
-would still be functional.
+When FASTBOOT_FLASH_BLOCK=="mmc", how is FASTBOOT_FLASH_BLOCK_DEVICE_ID
+different from FASTBOOT_FLASH_MMC_DEV?
 
-Thanks,
-Jayesh
+If they are similar, are we sure this symbol really needed?
 
-> Andrew
-> 
-> [0] https://lore.kernel.org/all/20240402160908.508974-1-afd@ti.com/
-> 
->> +    };
-
-[...]
+> +
+>  config FASTBOOT_GPT_NAME
+>  	string "Target name for updating GPT"
+>  	depends on FASTBOOT_FLASH_MMC && EFI_PARTITION
+> -- 
+> 2.44.0.278.ge034bb2e1d-goog
