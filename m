@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2B65CD11C2
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 15:32:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0F06CD11C2
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 15:32:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56A6388456;
+	by phobos.denx.de (Postfix) with ESMTP id CC4388846A;
 	Fri,  5 Apr 2024 17:32:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="YIzMsadb";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="6p4WsPnK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 361B588385; Fri,  5 Apr 2024 16:46:08 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id 133A7883F5; Fri,  5 Apr 2024 16:46:42 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1555888358
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 16:46:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB297883E6
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 16:46:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=48250e1be4=christophe.roullier@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 4359kJmB010468; Fri, 5 Apr 2024 16:45:53 +0200
+ 4359kiVP019377; Fri, 5 Apr 2024 16:46:29 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:references:cc:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=C0CCnNckjm36qANRCTjoPtdKB/G/OmnCcr1zK8gFeL8=; b=YI
- zMsadb8gvmLpeeI3VM5F1i5FP1BssZfe4y7aLRhsZ2Pkyg9tDNhzfsAJg5mHyJOJ
- gDiB5WCc2d9y1G1uy+PIWc+kB0A8gupFA1ih3oUTsHh8MC1sADlQB76PPhAJbc0X
- IsVynXkR28Es31bgsMf2LZgRxkIYiaxR2NaDekGr/e4k93mTWUAUpIpIFh5kl/V2
- iv3ZwpdwWICh2RRR47YWHhGmh1mt/zxB32mmi060IRvEFbKuzbmoYcPpWGbSDLL0
- PYC5Wo31R2CJZFtjp5h8mCRwtwYggT8eA+hmrgSIpS5VTupp3jpKZcpP5ECsnoio
- WLoB90UMXknAeAEyL+cQ==
+ selector1; bh=TrQHkHx3jtiLwm11zCcas7VXl9CSPGfFkqpK1Y6vsqY=; b=6p
+ 4WsPnKbletiPxY+mfFmTXhXuCxbF+BoT2flC0Nb4h45Cwd4+EqIT3MKr9uIJpzg6
+ H+P8upGVvn4wTjjuQgiUbJeoGNL8ionUe1zHoalsKuRFFERlNMfQHcURel4SFiKA
+ 9aHJiVsM+EUakC8hPRYswGLme1ztkf5+1LeeJJNVD6eAvkdoJy1DB1UtDFjixYbK
+ wF3WEIIA7/hFgtl747uYJilhk4HKKGQdDTP7hIg5IKpPTZgvKBSX34psetE2UZHd
+ N0VwK7rW89NsKDxP1HBB8sWV7WjaYlv1mpD/gmHh2/UG/Hu+NnxmmGQLMHA+13xa
+ iuyCHiTCSh0nruLegUqg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3x9emwr50t-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3x9emwfyt3-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 05 Apr 2024 16:45:53 +0200 (MEST)
+ Fri, 05 Apr 2024 16:46:29 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 21B7E40046;
- Fri,  5 Apr 2024 16:45:48 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CA06C4002D;
+ Fri,  5 Apr 2024 16:44:28 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node2.st.com [10.75.129.70])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3F384211970;
- Fri,  5 Apr 2024 16:45:30 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 359FE2194F5;
+ Fri,  5 Apr 2024 16:44:03 +0200 (CEST)
 Received: from [10.252.15.227] (10.252.15.227) by SHFDAG1NODE2.st.com
  (10.75.129.70) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 5 Apr
- 2024 16:45:29 +0200
-Message-ID: <6aeba369-c124-46ec-a548-9a6f0115b286@foss.st.com>
-Date: Fri, 5 Apr 2024 16:45:29 +0200
+ 2024 16:44:00 +0200
+Message-ID: <88903132-e95d-4389-8584-39cf55ec502b@foss.st.com>
+Date: Fri, 5 Apr 2024 16:43:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 03/11] net: dwc_eth_qos: Fold board_interface_eth_init
  into STM32 glue code
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>, "Cc: Patrice Chotard"
+ <patrice.chotard@foss.st.com>
 References: <20240309021831.264018-1-marex@denx.de>
  <20240309021831.264018-4-marex@denx.de>
  <68ca30b2-9e93-46f0-81c1-9ada0addf0c6@foss.st.com>
  <DU2PR10MB7787BA306F6CFD9961AC62118F2A2@DU2PR10MB7787.EURPRD10.PROD.OUTLOOK.COM>
 Content-Language: en-US
-CC: Patrice CHOTARD - foss <patrice.chotard@foss.st.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Patrick DELAUNAY - foss
+CC: Joe Hershberger <joe.hershberger@ni.com>, Patrick DELAUNAY - foss
  <patrick.delaunay@foss.st.com>,
  Ramon Fried <rfried.dev@gmail.com>, <u-boot@dh-electronics.com>,
  <uboot-stm32@st-md-mailman.stormreply.com>
@@ -96,6 +96,7 @@ Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
+
 
 > On 3/9/24 03:11, Marek Vasut wrote:
 >> Move board_interface_eth_init() into eqos_probe_syscfg_stm32() in
