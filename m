@@ -4,74 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CC7FC67861
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 16:46:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 733F9C67861
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 16:47:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06C6B8849E;
-	Fri,  5 Apr 2024 18:46:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BC79F884A0;
+	Fri,  5 Apr 2024 18:47:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="isXM7P5B";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hCvunlw5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB179884A0; Fri,  5 Apr 2024 18:46:13 +0200 (CEST)
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com
- [IPv6:2607:f8b0:4864:20::431])
+ id BA3BA884B1; Fri,  5 Apr 2024 18:47:12 +0200 (CEST)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 245D0883E0
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 18:46:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7532883E0
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 18:47:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pf1-x431.google.com with SMTP id
- d2e1a72fcca58-6ed057140e9so45046b3a.1
- for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 09:46:11 -0700 (PDT)
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2a2fbbd6cd6so335407a91.1
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 09:47:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712335569; x=1712940369; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CEALu89KOlOdmXDVQZOLAK86d2k7+OiJJ0gKYxRuMQs=;
- b=isXM7P5BY7WJmM268dQjS6TRcsX3R/a626F/h9q1vWbUU17AiHNNFDWyFH9GbATzIV
- hmvZccnfexwo40dPkwr21fEQ/4F+P82hp0ErevAaD2nAcxOz1dTvxYr1DKcUDCk7bGI3
- S6FRqmWwO8v8JR+Y7TjDWuMjIK/I/EANURnda2QU5Wd5ZpliWlbovB25OkBBhKlAvcyr
- K4cmZt1b+hhSowUdRP6UJrutKESd6W0U/9D2ovXgpL2RthBLJ5yMuv061WR3p2Z6aoZP
- hu926L/i6lws621P0lLQOSoHueUOXgj+Ju+Xip8N5X0LMme71wjeOta9UiK/yBrxucJ1
- vZVQ==
+ d=gmail.com; s=20230601; t=1712335629; x=1712940429; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0BMoFFnC+TpaoltojlNDSFtVDhjHmB+MnxD/8vTc/QA=;
+ b=hCvunlw58+lTa7B3Idja6JKu9OiIdWv9G2A9loRhukOkwf86r0jV71WlEA874aVHyq
+ 3gEh0fJc2AnCYGEO4nb+ckMBtnkdKp+6pmH9fFAgFpL2F+WkCckcz2pkrVaA1wn7ZcKm
+ 8MzrPiUzzoirrIrSpA/FI8PhhrzgrZTzfw0iz8qfC91AVksaEwQFkzzTeXjS1by9CvIO
+ gOSKBn2pVVE700XXQceEGljoS6Suud5aiXxr6vwFFBqhMGUrtZgVL4dL4SXhXNk5D7AQ
+ 1yqMDwrnaSwTKmc7/Au1K0yuf2CO1Yjnu0yAvG4Ib171DmdbdwNEmQan3Z4o5ZyL+aHt
+ z2RQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712335569; x=1712940369;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CEALu89KOlOdmXDVQZOLAK86d2k7+OiJJ0gKYxRuMQs=;
- b=BTI0jWfziB7PrztdcEwup8EKFCJDbr0Frh/jWaaZFMM7FfEfiSlkfrwNhidE5/8t3h
- nj/5G5pN11/zEpSDMw+RnOEq43449tLg3ARdIal3Kg5jHqqG6jDhoOASvi2ruFcyZw4O
- 5RuNZfdgMMKCH3/KrOBqW6foZh17nKaU0B7WBExdw37zTX1pPfHL9aDCukC9iyDtozKn
- S6hTp+yP0cLlWjSSrnydlxaPCbdu+YLDr1No5unTH9YAwPE2UnvrHNMFchCOt/7XcJUu
- +H+IsX7xGxqdEi+PKiCCgdR7wG6RUJEaKLmxJt00YECPF/66BVk8kx+umK5lO/QUoVxs
- fpvA==
-X-Gm-Message-State: AOJu0YzD8/vTUXXRioho5ifhnbqwMpvKzuaw+VPEEmQSZxXqfv17k15l
- CIyIpHnOW1Y5mnVwrC48pKgDpLLvjyYS2zsla9mbircFJ2i1+MK5zBll1QU0
-X-Google-Smtp-Source: AGHT+IH2SrpUQ0BJ0ETjatDUR35SUeI78CtDkZUbHVh8k3qQguxqzptA3wBj3aUxaLED6AhSd7cMWQ==
-X-Received: by 2002:a05:6a00:6908:b0:6ec:ee44:17bb with SMTP id
- hs8-20020a056a00690800b006ecee4417bbmr2048093pfb.2.1712335569554; 
- Fri, 05 Apr 2024 09:46:09 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:1a99:dd72:cf95:e04])
- by smtp.gmail.com with ESMTPSA id
- v16-20020aa799d0000000b006e567c81d14sm1719299pfi.43.2024.04.05.09.46.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Apr 2024 09:46:09 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-master-20240405
-Date: Fri,  5 Apr 2024 13:46:05 -0300
-Message-Id: <20240405164605.920442-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1712335629; x=1712940429;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0BMoFFnC+TpaoltojlNDSFtVDhjHmB+MnxD/8vTc/QA=;
+ b=Y2O3Ct5L2LWDGP0gWflRbpZLsgfNOc6S4l+DIT25HGEwn4R2to+VF9mL1DaImqd51K
+ zGQzDIVtacdDXYRKssljCBxlN6HVu1k320w7Xz+uNyk5J4odythFOHPS08OSbPnKc3nB
+ 8SUYJiOcD0iAn/p7p2k6tryNsqSp7LKEWooXJtJVjjLDYDeEoCFDe/sk+RJGjXF8hbbi
+ frvEdGhc12ZY8vYMCtxFOWNM/KF0DkrA0qJZObSHiXpLRwqmCQxdWnzY73DihDOpbJkK
+ F6jgI/BQ8jWYQn8KcjMnI36OaF/q0/B8guLyJp97zEcIq9aJQTPOdGuW+gXTRCosGvWD
+ 0wHg==
+X-Gm-Message-State: AOJu0Yw0arYYzcKKHznZQ6i//dPGabYKcGtK7n6VPlrcwP911zeF8fUb
+ QtlYwmI9JH0sAH3cWOznc6EMzAzU9FFprtURU6kYIXhyCha+FuBm3DQ27g9QO0D/C6PjP1oJTK7
+ +UhtwVTwxmw6PX4hlV2r9DI3s1cE=
+X-Google-Smtp-Source: AGHT+IEpw+tMVTbfOeRnqqMytdbNLZCPhvdug29tEIAw6YNBRwbfRoXwD8SOTYOmFto/GYX5PNH0Gwr5tukw5iw5EcU=
+X-Received: by 2002:a17:90b:244:b0:2a2:666f:966d with SMTP id
+ fz4-20020a17090b024400b002a2666f966dmr1911082pjb.1.1712335629093; Fri, 05 Apr
+ 2024 09:47:09 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240312211628.32842-1-marex@denx.de>
+In-Reply-To: <20240312211628.32842-1-marex@denx.de>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 5 Apr 2024 13:46:56 -0300
+Message-ID: <CAOMZO5CBpkCiFRvO-1Ome5BqQhyyxJPDx_uCmUJPpyguB2R6KQ@mail.gmail.com>
+Subject: Re: [PATCH] ARM: imx: stm32: Test whether ethernet node is enabled
+ before reading MAC EEPROM on DHSOM
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Andreas Geisreiter <ageisreiter@dh-electronics.de>, 
+ Christoph Niedermaier <cniedermaier@dh-electronics.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, Stefano Babic <sbabic@denx.de>,
+ u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,113 +93,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Tue, Mar 12, 2024 at 6:16=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+>
+> Check whether the ethernet interface is enabled at all before reading
+> MAC EEPROM. As a cost saving measure, it can happen that the MAC EEPROM
+> is not populated on SoMs which do not use ethernet.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
-Please pull this material for from u-boot-imx/master, thanks.
-
-The following changes since commit cdfcc37428e06f4730ab9a17cc084eeb7676ea1a:
-
-  Merge tag 'u-boot-dfu-next-20240402' of https://source.denx.de/u-boot/custodians/u-boot-dfu (2024-04-02 22:37:23 -0400)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240405
-
-for you to fetch changes up to f6be41c83c17c09dddfb1e29a7ca391b5190634d:
-
-  arm: imx: fix signature_block_hdr struct fields order (2024-04-05 09:39:18 -0300)
-
-u-boot-imx-master-20240405
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/20228
-
-- Convert imx8mp-beacon and verdin-imx8mm/verdin-imx8mp to OF_UPSTREAM.
-- Enable PCIe NVMe support on imx8mp_beacon.
-- Fix Ethernet and board detection on mx6cuboxi.
-- Fix signature_block_hdr struct fields.
-- Fix imx9_probe_mu prototype and make it to get called in EVT_DM_POST_INIT_R.
-- Test whether ethernet node is enabled before reading MAC EEPROM on DHSOM SoMs.
-----------------------------------------------------------------
-Adam Ford (4):
-      arm64: imx: imx8mp-beacon: Migrate to OF_UPSTREAM
-      arm64: imx: imx8mm-beacon: Migrate to OF_UPSTREAM
-      arm64: imx: imx8mn-beacon: Migrate to OF_UPSTREAM
-      configs: imx8mp_beacon: Enable PCIe NVMe drives
-
-Fabio Estevam (1):
-      mx6cuboxi: Do not print devicetree model
-
-Javier Viguera (1):
-      arm: imx: fix signature_block_hdr struct fields order
-
-Josua Mayer (1):
-      mx6cuboxi: Fix Ethernet after DT sync with Linux
-
-Marcel Ziswiler (1):
-      verdin-imx8mm/verdin-imx8mp: move imx verdins to OF_UPSTREAM
-
-Marek Vasut (1):
-      ARM: imx: stm32: Test whether ethernet node is enabled before reading MAC EEPROM on DHSOM
-
-Ye Li (2):
-      arm: imx9: Correct imx9_probe_mu prototype
-      arm: imx9: Call imx9_probe_mu for DM post in board_r
-
- arch/arm/dts/Makefile                              |    5 -
- .../imx6qdl-hummingboard2-emmc-som-v15-u-boot.dtsi |    1 +
- arch/arm/dts/imx6qdl-sr-som-u-boot.dtsi            |   49 +
- arch/arm/dts/imx8mm-beacon-kit.dts                 |   19 -
- arch/arm/dts/imx8mm-beacon-som.dtsi                |  461 -------
- arch/arm/dts/imx8mm-verdin-dev.dtsi                |  160 ---
- arch/arm/dts/imx8mm-verdin-wifi-dev.dts            |   18 -
- arch/arm/dts/imx8mm-verdin-wifi.dtsi               |   94 --
- arch/arm/dts/imx8mm-verdin.dtsi                    | 1319 ------------------
- arch/arm/dts/imx8mn-beacon-kit.dts                 |   19 -
- arch/arm/dts/imx8mn-beacon-som.dtsi                |  472 -------
- arch/arm/dts/imx8mp-beacon-kit.dts                 |  783 -----------
- arch/arm/dts/imx8mp-beacon-som.dtsi                |  487 -------
- arch/arm/dts/imx8mp-verdin-dev.dtsi                |  165 ---
- arch/arm/dts/imx8mp-verdin-wifi-dev.dts            |   18 -
- arch/arm/dts/imx8mp-verdin-wifi.dtsi               |   87 --
- arch/arm/dts/imx8mp-verdin.dtsi                    | 1438 --------------------
- arch/arm/include/asm/arch-imx9/mu.h                |    2 +-
- arch/arm/mach-imx/imx8m/Kconfig                    |    5 +
- arch/arm/mach-imx/imx9/soc.c                       |    1 +
- board/dhelectronics/common/dh_common.c             |   16 +
- board/dhelectronics/common/dh_common.h             |    8 +
- board/dhelectronics/dh_imx6/dh_imx6.c              |    3 +
- board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c  |    6 +
- board/dhelectronics/dh_stm32mp1/board.c            |    6 +
- board/freescale/imx93_evk/spl.c                    |    2 +-
- board/phytec/phycore_imx93/spl.c                   |    2 +-
- board/solidrun/mx6cuboxi/mx6cuboxi.c               |   40 +-
- board/toradex/verdin-imx8mm/MAINTAINERS            |    4 -
- board/toradex/verdin-imx8mp/MAINTAINERS            |    4 -
- board/variscite/imx93_var_som/spl.c                |    2 +-
- configs/imx8mm_beacon_defconfig                    |    2 +-
- configs/imx8mm_beacon_fspi_defconfig               |    2 +-
- configs/imx8mn_beacon_2g_defconfig                 |    2 +-
- configs/imx8mn_beacon_defconfig                    |    2 +-
- configs/imx8mn_beacon_fspi_defconfig               |    2 +-
- configs/imx8mp_beacon_defconfig                    |    8 +-
- configs/mx6cuboxi_defconfig                        |    1 +
- configs/verdin-imx8mm_defconfig                    |    2 +-
- configs/verdin-imx8mp_defconfig                    |    2 +-
- include/imx_container.h                            |    4 +-
- 41 files changed, 124 insertions(+), 5599 deletions(-)
- create mode 100644 arch/arm/dts/imx6qdl-sr-som-u-boot.dtsi
- delete mode 100644 arch/arm/dts/imx8mm-beacon-kit.dts
- delete mode 100644 arch/arm/dts/imx8mm-beacon-som.dtsi
- delete mode 100644 arch/arm/dts/imx8mm-verdin-dev.dtsi
- delete mode 100644 arch/arm/dts/imx8mm-verdin-wifi-dev.dts
- delete mode 100644 arch/arm/dts/imx8mm-verdin-wifi.dtsi
- delete mode 100644 arch/arm/dts/imx8mm-verdin.dtsi
- delete mode 100644 arch/arm/dts/imx8mn-beacon-kit.dts
- delete mode 100644 arch/arm/dts/imx8mn-beacon-som.dtsi
- delete mode 100644 arch/arm/dts/imx8mp-beacon-kit.dts
- delete mode 100644 arch/arm/dts/imx8mp-beacon-som.dtsi
- delete mode 100644 arch/arm/dts/imx8mp-verdin-dev.dtsi
- delete mode 100644 arch/arm/dts/imx8mp-verdin-wifi-dev.dts
- delete mode 100644 arch/arm/dts/imx8mp-verdin-wifi.dtsi
- delete mode 100644 arch/arm/dts/imx8mp-verdin.dtsi
+Applied, thanks.
