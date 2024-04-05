@@ -4,92 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE4CAC67861
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 08:27:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFA27CD11C2
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 08:27:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D1A6884B7;
-	Fri,  5 Apr 2024 10:27:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EF238884BF;
+	Fri,  5 Apr 2024 10:27:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Bw1QbbSH";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ndHyd16J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9A4988433; Fri,  5 Apr 2024 10:27:31 +0200 (CEST)
-Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
- [IPv6:2a00:1450:4864:20::234])
+ id 2CAF5884BC; Fri,  5 Apr 2024 10:27:33 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDC21884B3
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 10:27:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C3545884B6
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 10:27:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-lj1-x234.google.com with SMTP id
- 38308e7fff4ca-2d68cf90ec4so22367811fa.1
- for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 01:27:29 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-4162c2107d3so8048075e9.0
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 01:27:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712305649; x=1712910449; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712305650; x=1712910450; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5tG9OEKHZ9GG9A3n0H5H0kdpfyuBggnADdmpWFzu+8Y=;
- b=Bw1QbbSHN+R4swSVfIOdMRYwEC/BVyczq7ZAWM5PsO45pqTKSbZZ8Z+qKI87Uv/FI0
- laKkP447dI4zUKcAGDNos8+IUwHzqEX65xIOzgnbNLcS2lBdeZmHs4IV+Oyvf34V9o2y
- 0pX/HOdnQjZd3CBMpysinpGvxoN5ef+cdaIx2itKWCKBT8vdhs80qXgEjF5rpzurlzFx
- X/GDimM5xnOSDL1tJbItz1/eVGY3eYxdQJ/BuMvxELjz0G4Ld44mFswwaK46gN+FawtW
- re1Yf84DpNie7wyYw9Ax9OiSj+SSJrAhohNgamofyuEIpOqtI6TAejZaBtuw1VebCUB+
- MgoQ==
+ :reply-to; bh=jBSNxz5F9Gk1/5Z3CGIi5kb5sg8VWXyRTlXhpfzbQLI=;
+ b=ndHyd16JbaI6suCq7VbipjO1nL8myU7IV/YHiQeldjlBmkWTxpGwR8Kd0nzoJ0BoJL
+ 8xN/Y+Qk+0H1TFZQSD1K0KzIGY1i7rLznPHuUKsKArifOOKK3F7pL05TvZHZFx7VviSz
+ wD285IajOT+PhSOD+TdHuvGQbTRKUnZncz7TdWE/THJm67hBJsjvrg3S0FXOv5jEx/1Z
+ JIPlOrREGIOLp7EN2e2I+U/DB9A2G/YLJFW0UaL69EVyYLKR2Zjd1imkUjHVke06GgDz
+ M/NesiaJzXeOhbm8AO7mGHHxFOkvvojd2N2UHPKzsi6OSmd0JwnMYeamg+EzHt/OFL+s
+ ZQUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712305649; x=1712910449;
+ d=1e100.net; s=20230601; t=1712305650; x=1712910450;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5tG9OEKHZ9GG9A3n0H5H0kdpfyuBggnADdmpWFzu+8Y=;
- b=K/3HPyN2XQanX2eBHCjYkVT2cJRCWYgZcvcL1htrkI9aQ1U0IAX287xEXz1cS+PvZU
- kNTblUd38FD70h3YbI2wHCivpPkscgN4vFi3B0a/D55yq6SWoQXL82RsngGJhHWb+B0G
- RAdb744YGd2c1g5IefKeK2wNZErhgoypUU2QRUbswJXLeGouzWcB701HISysQan/BO6I
- XBVqqw5/CcLTRTwG0mAnP2osJG/UlDmKB3QFXezgjldcgN0kMT17g85mj2K9V6gV/bXi
- sL7VG/dlSjtDh4DE46AWzzG1R2aZ1odSEfZ4tL3u05AljduBCpA473UPY5qzsm/0rpYW
- k2xA==
-X-Gm-Message-State: AOJu0Yx1q6eG+rzEmEAj7rOeFqe/qjngPLW/8BaUbUcerIp7YDBK48rg
- kQMo1thQZm/hnEin8/KCMTCfiJlWacBMRNKAF2z8lFjYSdCoyYZfh4HC5uFABpA=
-X-Google-Smtp-Source: AGHT+IEqA3jjCxHiBKUscncYn6JxyvpL9EwGGZfEZR7UVP6lFT82zqIogfmj7AZj3bYiCUDexBwB5g==
-X-Received: by 2002:a05:651c:1545:b0:2d8:394c:6e7e with SMTP id
- y5-20020a05651c154500b002d8394c6e7emr740049ljp.15.1712305649225; 
+ bh=jBSNxz5F9Gk1/5Z3CGIi5kb5sg8VWXyRTlXhpfzbQLI=;
+ b=uQDYojqcaWjUpZdbya9xEzxsgMgmyOUfd0DSKJo2oVKI2yK+4PJ3S4biK8o2gW5nGm
+ 9Nrm8eXMADrsVPpKv6pVVoVWcfXhx6rHgAQEUAlufculnRE3PiJPcpqkloh24eC8Z9jM
+ 5XXfKZq0qiY514JL7nYWq1oB8Dp2areGzurLKB0ZwJHtAQgm2gwrrSA57rLerNNBBSPQ
+ 7OamASqZ77MRUxNRnSeupp1K6dmzWrQuMtOHduXpPss4OcUujpP/R3BFEQ7P4P7nL5te
+ R/P8Z9mQi2uAHzXyV+q86fTtI/63q0z8/RUS3tfB3E6UXJo1lHKmewJiOeWPQeGjzDKV
+ Mnag==
+X-Gm-Message-State: AOJu0YzAGA8+vBJvw1nJwf1gDclvE9TUCz1eJaVo6096YnD+kfbwhuAK
+ 08v/IMI7162jvJa9D/n8Wrbz/RvJtbSutXdMbl7iuoDBMRsT6XGNl1eT/9XXht8=
+X-Google-Smtp-Source: AGHT+IEYdMBy84w25wLJeetOMsXoL6E6tnojjiC3y3woNq2DjYO+K3eFAFYOd8IcQv3yl7uaQPohng==
+X-Received: by 2002:a05:600c:1e13:b0:416:321d:e124 with SMTP id
+ ay19-20020a05600c1e1300b00416321de124mr213163wmb.41.1712305649902; 
  Fri, 05 Apr 2024 01:27:29 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- s11-20020a05600c45cb00b004162d06768bsm2721593wmo.21.2024.04.05.01.27.28
+ s11-20020a05600c45cb00b004162d06768bsm2721593wmo.21.2024.04.05.01.27.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Apr 2024 01:27:28 -0700 (PDT)
+ Fri, 05 Apr 2024 01:27:29 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 05 Apr 2024 10:27:24 +0200
-Subject: [PATCH 1/3] gpio: qcom_pmic_gpio: add support for pm8550-gpio
+Date: Fri, 05 Apr 2024 10:27:25 +0200
+Subject: [PATCH 2/3] button: qcom-pmic: move node name checks to btn_data
+ struct
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240405-topic-sm8x50-spmi-clients-v1-1-c28603ebcf18@linaro.org>
+Message-Id: <20240405-topic-sm8x50-spmi-clients-v1-2-c28603ebcf18@linaro.org>
 References: <20240405-topic-sm8x50-spmi-clients-v1-0-c28603ebcf18@linaro.org>
 In-Reply-To: <20240405-topic-sm8x50-spmi-clients-v1-0-c28603ebcf18@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1891;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4681;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=xkMJDuFEMyhRf5H8OJG4VW0ni9nAowsKz123H//kizI=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmD7XuAmoEUzgr4bdEkIN9tr6mYBglVw/+RmeR2MGs
- zEcevQeJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZg+17gAKCRB33NvayMhJ0fP8EA
- C+meNekyNp8128i8zlvIp5z6NwcuhLvpiDfE3eDn/VB4wwWfpYc0Zntl5VDbFMEVIpw7wonqUX2qFI
- kekuaETWklMzxyA1tEA5xO1qoH+SewJb6b9H7RYSg++y4NE1HH932qPd+EXNBEechxmjY+NsubaANh
- ApPRRbmU8n5usCi6jd4/V/1UtuwOgb5cMV39Wk5q9UHqFIr8x6itAhkRtXfCs22MUCyL2zc+S+SyDX
- u9lsDKrU828xCS4nJzORBIndXux9OC7uI5gy8EJk8UhtqnfETfS3mq/qFxehbO5JgeuJnm8sb+FbPV
- mneO8KigU5zFwc5GzN/KWZcOs1uuQifCBlNyXz+o2TuQf076RFXGIvtE2LBKel6oSb3ilVZQAZ9cJ7
- JedEfXKKoYlQa3bOJl6be4b5j8JErrOYeAcXlIRPtuCyZmUcdMSAjsCZvaS0RfuaimuuLCYGvD6+aR
- oEyi9Jkmp/s6yNtWHF9VM87pu4T6eR8L0pVR1QnoYAj5LLnQRCynCRDGANadglQucvsYKi7SllI8BH
- TmldaFQnIa26cH8hs42huZp2UX8hvsmz3bg+ZMBqpPcc7Dav1Xwu4Qu8hqPN2sCbg/T682ojcaFEEp
- gA+AAXXnndjX2/izb0xE/gKkB+QyrglpKuvY/0QpidiyDcqz9IQ3dPbw6NOw==
+ bh=JuJX938A0kKhn4aUDQEOACwit9CMWv30OBUpj8p+Arg=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmD7XuUBZtZJzHN5zwN0xo0PMd+0M9JPa7CF0hUHtc
+ KTZ9IaCJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZg+17gAKCRB33NvayMhJ0YK3EA
+ Cdjup1HYiCHQlRNfsU2y7ZEVl8r8SCSPyhGNc47511KOmPx+Pw1bJjghjSSKF/HjWXPIWzXADchXAF
+ uLlz4fE1yofPcBU251M/siuV24ThnPnnvnHDxrKTWWr7wXytIEvoF6HXcdsFwbbgzCkfKNt63vloKK
+ Z8dS1+pswON8UJRik0WAKdOx/V6XRUDcWUjWJco0GKW9HOvcitRpPg9Ih4ceRBCv7dwBfdTNUZoEHY
+ RgEF86HdYjS6BX5Le3c0FhnF+k8UbiWJrKKY8CSBTZ7HEzdBmnw+uhXkmXdBzVqtMwqhtQG2fztcJ8
+ SiH/VH0pErLfhTDfm4AYPFgpUoj5KakzF8SjqvQDma7HfrgTbshxbxJUlPbZCY7bhHFm9/8HLziThv
+ i8I6+FcP1GuiCjoqIPsUuzrcAl+Yj2GoLDKoPWSvoDxuukOMrSUqb5NYtmNe74a9QCWGhZFLUMkPJn
+ 2VmmIumTBAfrtMiSEOt6PPSv7HG5LURBzwvZElcs/amob9WBFt7INRH/M/PHXZqKReOUUmTMLmVsbT
+ xvl71fONnw9J1ys8y4dRMoj9V4u7Lo1hTcPNjXwXKPb0dP41kgYUHnIp+JWubTkHC9FUtXKZO3Ngzb
+ jMqsHVsytnXX6dIyBhhRHhDGONyil8k4fZDsolS1a/u0BVJI59mujpqyLz/A==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -108,58 +109,166 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for PM8550 GPIO controller variant, keep read-only
-until the GPIO and Pinctrl setup is fixed for new PMICs.
+Move node name checks to a proper data struct with all information
+for the supported subnodes.
+
+Replace the key offset defines with the Linux driver ones.
 
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- drivers/gpio/qcom_pmic_gpio.c | 18 ++++++++++++++++--
- 1 file changed, 16 insertions(+), 2 deletions(-)
+ drivers/button/button-qcom-pmic.c | 84 ++++++++++++++++++++++++++-------------
+ 1 file changed, 56 insertions(+), 28 deletions(-)
 
-diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-index 14a8210522b..dfb70faf94b 100644
---- a/drivers/gpio/qcom_pmic_gpio.c
-+++ b/drivers/gpio/qcom_pmic_gpio.c
-@@ -35,6 +35,8 @@
- #define REG_SUBTYPE_GPIOC_8CH	0xd
- #define REG_SUBTYPE_GPIO_LV	0x10
- #define REG_SUBTYPE_GPIO_MV	0x11
-+#define REG_SUBTYPE_GPIO_LV_VIN2          0x12
-+#define REG_SUBTYPE_GPIO_MV_VIN3          0x13
+diff --git a/drivers/button/button-qcom-pmic.c b/drivers/button/button-qcom-pmic.c
+index bad445efa86..f6da958097c 100644
+--- a/drivers/button/button-qcom-pmic.c
++++ b/drivers/button/button-qcom-pmic.c
+@@ -19,6 +19,13 @@
+ #define REG_TYPE		0x4
+ #define REG_SUBTYPE		0x5
  
- #define REG_STATUS             0x08
- #define REG_STATUS_VAL_MASK    0x1
-@@ -322,9 +324,20 @@ static int qcom_gpio_probe(struct udevice *dev)
- 		return log_msg_ret("bad type", -ENXIO);
- 
- 	val = pmic_reg_read(plat->pmic, plat->pid + REG_SUBTYPE);
--	if (val != REG_SUBTYPE_GPIO_4CH && val != REG_SUBTYPE_GPIOC_4CH &&
--	    val != REG_SUBTYPE_GPIO_LV && val != REG_SUBTYPE_GPIO_MV)
-+	switch (val) {
-+	case REG_SUBTYPE_GPIO_4CH:
-+	case REG_SUBTYPE_GPIOC_4CH:
-+		plat->lv_mv_type = false;
-+		break;
-+	case REG_SUBTYPE_GPIO_LV:
-+	case REG_SUBTYPE_GPIO_MV:
-+	case REG_SUBTYPE_GPIO_LV_VIN2:
-+	case REG_SUBTYPE_GPIO_MV_VIN3:
-+		plat->lv_mv_type = true;
-+		break;
-+	default:
- 		return log_msg_ret("bad subtype", -ENXIO);
-+	}
- 
- 	plat->lv_mv_type = val == REG_SUBTYPE_GPIO_LV ||
- 			   val == REG_SUBTYPE_GPIO_MV;
-@@ -351,6 +364,7 @@ static const struct udevice_id qcom_gpio_ids[] = {
- 	{ .compatible = "qcom,pm8994-gpio" },	/* 22 GPIO's */
- 	{ .compatible = "qcom,pm8998-gpio", .data = QCOM_PMIC_QUIRK_READONLY },
- 	{ .compatible = "qcom,pms405-gpio" },
-+	{ .compatible = "qcom,pm8550-gpio", .data = QCOM_PMIC_QUIRK_READONLY },
- 	{ }
++struct qcom_pmic_btn_data {
++	char *compatible;
++	unsigned int status_bit;
++	int code;
++	char *label;
++};
++
+ struct qcom_pmic_btn_priv {
+ 	u32 base;
+ 	u32 status_bit;
+@@ -27,11 +34,8 @@ struct qcom_pmic_btn_priv {
  };
  
+ #define PON_INT_RT_STS                        0x10
+-#define KPDPWR_ON_INT_BIT                     0
+-#define RESIN_ON_INT_BIT                      1
+-
+-#define NODE_IS_PWRKEY(node) (!strncmp(ofnode_get_name(node), "pwrkey", strlen("pwrkey")))
+-#define NODE_IS_RESIN(node) (!strncmp(ofnode_get_name(node), "resin", strlen("resin")))
++#define  PON_KPDPWR_N_SET		0
++#define  PON_RESIN_N_SET		1
+ 
+ static enum button_state_t qcom_pwrkey_get_state(struct udevice *dev)
+ {
+@@ -52,10 +56,39 @@ static int qcom_pwrkey_get_code(struct udevice *dev)
+ 	return priv->code;
+ }
+ 
++static const struct qcom_pmic_btn_data qcom_pmic_btn_data_table[] = {
++	{
++		.compatible = "qcom,pm8941-pwrkey",
++		.status_bit = PON_KPDPWR_N_SET,
++		.code = KEY_ENTER,
++		.label = "pwrkey",
++	},
++	{
++		.compatible = "qcom,pm8941-resin",
++		.status_bit = PON_RESIN_N_SET,
++		.code = KEY_DOWN,
++		.label = "vol_down",
++	},
++};
++
++static const struct qcom_pmic_btn_data *button_qcom_pmic_match(ofnode node)
++{
++	int i;
++
++	for (i = 0; i < ARRAY_SIZE(qcom_pmic_btn_data_table); ++i) {
++		if (ofnode_device_is_compatible(node,
++						qcom_pmic_btn_data_table[i].compatible))
++			return &qcom_pmic_btn_data_table[i];
++	}
++
++	return NULL;
++}
++
+ static int qcom_pwrkey_probe(struct udevice *dev)
+ {
+ 	struct button_uc_plat *uc_plat = dev_get_uclass_plat(dev);
+ 	struct qcom_pmic_btn_priv *priv = dev_get_priv(dev);
++	const struct qcom_pmic_btn_data *btn_data;
+ 	ofnode node = dev_ofnode(dev);
+ 	int ret;
+ 	u64 base;
+@@ -64,6 +97,14 @@ static int qcom_pwrkey_probe(struct udevice *dev)
+ 	if (!uc_plat->label)
+ 		return 0;
+ 
++	/* Get the data for the node compatible */
++	btn_data = button_qcom_pmic_match(node);
++	if (!btn_data)
++		return -EINVAL;
++
++	priv->status_bit = btn_data->status_bit;
++	priv->code = btn_data->code;
++
+ 	/* the pwrkey and resin nodes are children of the "pon" node, get the
+ 	 * PMIC device to use in pmic_reg_* calls.
+ 	 */
+@@ -87,23 +128,10 @@ static int qcom_pwrkey_probe(struct udevice *dev)
+ 
+ 	ret = pmic_reg_read(priv->pmic, priv->base + REG_SUBTYPE);
+ 	if (ret < 0 || (ret & 0x7) == 0) {
+-		printf("%s: unexpected PMCI function subtype %d\n", dev->name, ret);
++		printf("%s: unexpected PMIC function subtype %d\n", dev->name, ret);
+ 		return -ENXIO;
+ 	}
+ 
+-	if (NODE_IS_PWRKEY(node)) {
+-		priv->status_bit = 0;
+-		priv->code = KEY_ENTER;
+-	} else if (NODE_IS_RESIN(node)) {
+-		priv->status_bit = 1;
+-		priv->code = KEY_DOWN;
+-	} else {
+-		/* Should not get here! */
+-		printf("Invalid pon node '%s' should be 'pwrkey' or 'resin'\n",
+-		       ofnode_get_name(node));
+-		return -EINVAL;
+-	}
+-
+ 	return 0;
+ }
+ 
+@@ -114,12 +142,20 @@ static int button_qcom_pmic_bind(struct udevice *parent)
+ 	int ret;
+ 
+ 	dev_for_each_subnode(node, parent) {
++		const struct qcom_pmic_btn_data *btn_data;
+ 		struct button_uc_plat *uc_plat;
+ 		const char *label;
+ 
+ 		if (!ofnode_is_enabled(node))
+ 			continue;
+ 
++		/* Get the data for the node compatible */
++		btn_data = button_qcom_pmic_match(node);
++		if (!btn_data) {
++			debug("Unknown button node '%s'\n", ofnode_get_name(node));
++			continue;
++		}
++
+ 		ret = device_bind_driver_to_node(parent, "qcom_pwrkey",
+ 						 ofnode_get_name(node),
+ 						 node, &dev);
+@@ -128,15 +164,7 @@ static int button_qcom_pmic_bind(struct udevice *parent)
+ 			return ret;
+ 		}
+ 		uc_plat = dev_get_uclass_plat(dev);
+-		if (NODE_IS_PWRKEY(node)) {
+-			uc_plat->label = "pwrkey";
+-		} else if (NODE_IS_RESIN(node)) {
+-			uc_plat->label = "vol_down";
+-		} else {
+-			debug("Unknown button node '%s' should be 'pwrkey' or 'resin'\n",
+-			       ofnode_get_name(node));
+-			device_unbind(dev);
+-		}
++		uc_plat->label = btn_data->label;
+ 	}
+ 
+ 	return 0;
 
 -- 
 2.34.1
