@@ -4,58 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF93CC67861
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 07:42:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37ECEC67861
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 07:50:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AE098846F;
-	Fri,  5 Apr 2024 09:42:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 8BE0188393;
+	Fri,  5 Apr 2024 09:50:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="NfZsEUg0";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EB398846A; Fri,  5 Apr 2024 09:42:49 +0200 (CEST)
-Received: from mail.3ffe.de (0001.3ffe.de [159.69.201.130])
+ id 23ABD88463; Fri,  5 Apr 2024 09:50:17 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99CC688470
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 09:42:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4307388382
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 09:50:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=michael@walle.cc
-Received: from localhost (unknown [IPv6:2a02:810b:4340:6430:4685:ff:fe12:5967])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mail.3ffe.de (Postfix) with ESMTPSA id 7F35B6F4;
- Fri,  5 Apr 2024 09:42:46 +0200 (CEST)
-Mime-Version: 1.0
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1712303413; x=1712908213; i=xypron.glpk@gmx.de;
+ bh=wmmN7kvzYFharwPQtW02S+Lu5/9Y1cnPEuklxrrvut0=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=NfZsEUg0CmTXTGZsaiL4Lc52PNelHNDcbpP4AgMQN55ezNmQJIWyb/g5qH2yjJxj
+ xhtzKY7/do+ym4yVnyML0bPlPgMCdwqsFc/Gsde+EChdiL9sWdRTOvIDCFKlx7RE7
+ p156S9f3iE/NOQZSH42WuwfUppLvjuMSAtD8yRGn0OXfxouIJcOxNk8KL4AvgGbgd
+ rOr1YLjjcOkF2eT39CNZELj5UEBJnoq9BVfchu6pcYGeSxxStnydKn1JEbRYwJPc5
+ jS+bF85YBCBMUowB/7zW0zqXp7UBoPCg4EEzQfLJpk7Vm/F9MQXNmBWYI4hSyok3a
+ RnAxaTt2g1Lk9XISMg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MIMbU-1s4j8y4BPQ-00EPef; Fri, 05
+ Apr 2024 09:50:13 +0200
+Message-ID: <18ad5e3b-4b24-4e02-a3cc-4785c3a964c8@gmx.de>
+Date: Fri, 5 Apr 2024 09:50:05 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] doc: build: fix gen_compile_commands section level
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Joao Marcos Costa <jmcosta944@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>
+References: <20240405-doc-fix-headings-v1-1-455387c85e54@baylibre.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240405-doc-fix-headings-v1-1-455387c85e54@baylibre.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Fri, 05 Apr 2024 09:42:46 +0200
-Message-Id: <D0C0QR6BEJ2K.32AR9PQA0BM9E@kernel.org>
-Subject: Re: [PATCH 3/4] arm: dts: k3-*-binman.dtsi: Clean up and templatize
- boot binaries
-Cc: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
- <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
- <sumit.garg@linaro.org>, <michal.simek@amd.com>, <marex@denx.de>,
- <neil.armstrong@linaro.org>, <afd@ti.com>, <vigneshr@ti.com>,
- <kamlesh@ti.com>, <u-kumar1@ti.com>
-From: "Michael Walle" <mwalle@kernel.org>
-To: "Neha Malcom Francis" <n-francis@ti.com>, "Matthias Schiffer"
- <matthias.schiffer@ew.tq-group.com>, "Manorit Chawdhry" <m-chawdhry@ti.com>
-X-Mailer: aerc 0.16.0
-References: <20240322131011.1029620-1-n-francis@ti.com>
- <20240322131011.1029620-4-n-francis@ti.com>
- <D03Q9AGO5ND9.1TJM3KSNA71WG@kernel.org>
- <83c6532a-e994-4bcd-bc48-9e22ecdec644@ti.com>
- <D04LUAJJ6LC7.1JVGVTJ0UCMVR@kernel.org>
- <062f7c42-7088-4813-a2d6-ecb7ab22b4ba@ti.com>
- <D05D4N00QDKO.2PJ7VW4BNGQ11@kernel.org>
- <2e817727-524e-47e5-9f5e-2ee13d99a9bb@ti.com>
- <20240403103458.mn2xkemiyymidipo@uda0497581>
- <D0ALVJNAVD8U.3UYSZULLZ6YG5@kernel.org>
- <d23bdaec46343155c752fcfb5287d9b39ac44918.camel@ew.tq-group.com>
- <f4059b33-e36c-41d0-8205-9f8b1b665843@ti.com>
-In-Reply-To: <f4059b33-e36c-41d0-8205-9f8b1b665843@ti.com>
+X-Provags-ID: V03:K1:UT7tzZA2z4HYhOC+IKWY9hrVSEtXxsrJm3wpvcE7z6/g9WOkEZY
+ Mw92EFgF0yGkCHHXBrm4hQUEFUIHzXl0Dtny/zUo3REzPs5NCjD/RzkXgg7YTlS3L9iL/Ut
+ kHWbBGDxlWCcorGIGf3US3hPt6hNDnqHW5/zrw0LbQ8cepiq8uj4JSY3VG2qcxQp0pqCvXZ
+ xhdUuUReLmfy2q4wzLIJQ==
+UI-OutboundReport: notjunk:1;M01:P0:NaYzWtAEloY=;ENtpMgMrPCxKS7K3CApuVZPRWgJ
+ BYv7FhAFvZJhfF024+nhK7Ra2JiwiM9fcO3dRZaaw3Zdc+uP20LdLIFzhH7d9MVGz5qgbE+q6
+ gnfAbNNdLqbWhLb9BdE0/DhfUcZTczGkjj8IzsCwBC/nf7pb0d6KgMCmeJLzvgBXRtB2yYQ2n
+ PbklarJg9g9WZsJqXrdRUV5XTP8GAVP98fbffjQTOjcyxa+OhSaa5jbwJIzUeEkw1gyCBeWpy
+ mAQvuYYQxY5L+WZbiQWuib6iqC1/0sYXkDxqRw+3EvSSax5A6tUOLwj/hzlH+/Ut6bMMV0uX5
+ kITXl7bDyz5yhygYh7Z3vU1SUAIZ84ISJu/Jreg5uh1xW5SN0zDBznfVgUbrzDBud0Ll1NP4o
+ 7GNgnvPHAhxjrerhXtd17SG1RIBwhmEjrF0KEgX+sgNqebZttXbuyKiJH2AVbNW1l1HVV5WNP
+ /Vd0pEvi+ManWUXZmu7QKgBCSy9C8W016RwNlu51axeP8dUetQsU5TKV0xshGebyfVOCNNd0Y
+ UBMY31AjffBZI87m1vcYL7IBT9jJ36Gv0obNa5HN7ptel/JZhYb3ksCbZY4R8hhtLSbtN5NvV
+ oIXb5Zgy3uF6YzSofsvBXrVATy2gBa0ZOJ/7YRStIiMmLxcrfYsrBGDm+wAMOl2ULgdlV0kZe
+ FjExMXdevXTYzq24oaB41kSm2fUcUqa4HMcyTJ2XyVc/99xUmV+ibboLGpri9OlRcIbcRWHMD
+ OysZ5w78QhW7gF4GG40IkSamAi3btqThfQ5kqqMppDJ1nZ7i71peD40za42RonqGTNfp0Ub0f
+ Qtkv8P9et2Gscqf8SvbQCG31PGNZhXYfj5w+A+uNdcUqs=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,16 +88,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On 4/5/24 08:18, Mattijs Korpershoek wrote:
+> The 2 subsections of this page ("Compatible IDEs" and "Usage") are using
+> the same header level as the title (with "=3D=3D=3D").
+> Because of this, they always appear in the HTML rendered ToC.
+>
+> Drop the subsections one level lower by replacing "=3D" by "-".
+> This fixes the HTML rendering.
+>
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-On Thu Apr 4, 2024 at 11:10 AM CEST, Neha Malcom Francis wrote:
-> But again in the interest of time... this would mean this cleaning up eff=
-ort be=20
-> kept on hold. If we can agree to move to using the generator later as the=
- final=20
-> solution, can we pick up this series for now?
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Agreed. I just saw the new RFC for the j722s support. It should also
-make use of this cleanup then, btw.
+> ---
+>   doc/build/gen_compile_commands.rst | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/doc/build/gen_compile_commands.rst b/doc/build/gen_compile_=
+commands.rst
+> index 50305cec4a83..d503764f9e3f 100644
+> --- a/doc/build/gen_compile_commands.rst
+> +++ b/doc/build/gen_compile_commands.rst
+> @@ -42,7 +42,7 @@ needed for it to be usable by the LSP, unless you set =
+a name for the database
+>   other than it's default one (compile_commands.json).
+>
+>   Compatible IDEs
+> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> +---------------
+>
+>   Several popular integrated development environments (IDEs) support the=
+ use
+>   of JSON compilation databases for C/C++ development, making it easier =
+to
+> @@ -73,7 +73,7 @@ compile_commands.json in the root of the repository sh=
+ould suffice to enable
+>   code navigation.
+>
+>   Usage
+> -=3D=3D=3D=3D=3D
+> +-----
+>
+>   For further details on the script's options, please refer to its help =
+message,
+>   as in the example below.
+>
+> ---
+> base-commit: cdfcc37428e06f4730ab9a17cc084eeb7676ea1a
+> change-id: 20240405-doc-fix-headings-6109365355a3
+>
+> Best regards,
 
--michael
