@@ -4,76 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39595CD11C2
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 08:18:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A3E1C67861
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 08:20:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 87A5D8848D;
-	Fri,  5 Apr 2024 10:18:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 2395E87F52;
+	Fri,  5 Apr 2024 10:20:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="oZ1PVuEo";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="N17knXPw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37C7D8848D; Fri,  5 Apr 2024 10:18:34 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F2E2687D8E; Fri,  5 Apr 2024 10:20:01 +0200 (CEST)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 496FB87F52
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 10:18:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9B9D88488
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 10:19:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=482502c049=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 4351CBxr021122; Fri, 5 Apr 2024 10:18:24 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=0nQVGUF4CX6bR8C3pNbETg6x5scjpZwkgtB0+Y0suj0=; b=oZ
- 1PVuEohg1RGIN487es28I40pL0p1yvAQRoo01wwHvDgX+eqy3G81fHYoPahA/kOs
- hoGLRubDkIT43hYVNCqXX8G+66270+9scz1zNtAFZZmNhi00Npt6Hmtw7Fx6vSc5
- bnKPDYmkc3CERRMiGVGz9ga/mnDrMn7HcDOjt2io5cVmuR9fCJ2FpIp0V2F6oBWa
- jbmiUPgFVt4fRBOC9S0B/GcDoLLiQNgLHu6IcUTKQ9E4sr9X9j4HuRwZUbiQ5BnS
- MQl0OvxFCqCPtrSrm2mamLZyp17NUrRAOA0L4MgCUkhouZO4CSVsbPEyOKUnGrOR
- U/Al262mod85J5Mf0mVw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3x9emneeba-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 05 Apr 2024 10:18:24 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id E23534002D;
- Fri,  5 Apr 2024 10:18:20 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 44D5820F54F;
- Fri,  5 Apr 2024 10:18:03 +0200 (CEST)
-Received: from [10.252.29.225] (10.252.29.225) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 5 Apr
- 2024 10:18:02 +0200
-Message-ID: <91111fd9-8c9d-4d4b-8d3b-ce25a57fb29d@foss.st.com>
-Date: Fri, 5 Apr 2024 10:18:02 +0200
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-415523d9824so19345525e9.3
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 01:19:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712305199; x=1712909999;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=WKP0P78SUqWZrEyX8yd8psXFXshmKdf1erVhYXB7/kY=;
+ b=N17knXPw5hvOEUgJG8SW2zk2upELcT4NB2AiBXDlEgBtAMrm1aeIbs94XxWC5kCp50
+ CcZ5C0W3t32QsOtE8zCsdowgS9sYOjQeM7Im4sIe4CGOvWlgS7+hVYVaT0ktbS1fdgqS
+ aLJQFTWMvIXYbufprFN4M39sTXDSxADOLqsuIR6Pb9RaVEmT538kV5HY++C5liBUDDrA
+ dgmne/GpwIPY6b1N3OXs/OOc8bSArUzBainBWdFX1QoNWPe8ZpqSytGsV+GUOIivvhzo
+ EKSywX+bAAMQiAXWSFuYFABcGmeNY7qeTCqAuPFRyREHSYykEUmVJcIXgP19DHhg2gl6
+ +RQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712305199; x=1712909999;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=WKP0P78SUqWZrEyX8yd8psXFXshmKdf1erVhYXB7/kY=;
+ b=M0AVCsWLNkg1WAnrM5VYt4ZzNJOOmGdRhnUzT8NSWbzMnT87C58uHIAF85MqE+tiBw
+ d3XD+DP/e9ryA3RlGejds4+HrML+8OQ2qCVjJJyNFc/ECGffEvLaF+08pwa+Lnsl8S/w
+ dkOyYC69havFmsMbVnpV9p+325lB/E2IgdQgQYjGAerlIiMlrDwB5mQT9lrYy4zaTcAd
+ TmA5Ym7H5+dh2QiSaWv5Sqw3Wv4ek8UdrL3AtLxrRwkYAy6v8F+7UJDKeBc7yhRLQ2KT
+ W4YgYU7GzTwuli0u/aDn3vA4d8CLoq6V/2L4sHb6eeH32Rxfs53KCod7qR6sXd+SFF9Q
+ kkHQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX5mxLoxW7NMt/rTP3pIhAT8gtakNVhpEGzQRz7ab1LwpMLUuXQ+T/Q4dpdsIuXm1eKnuG4L9JIb2AmD6lq5id8hcFkwQ==
+X-Gm-Message-State: AOJu0YzZZ58aVAM3aZ/qh8WVlzPHzgeLoia76Ld+aN5n2rlPxTKd8htF
+ 7zlME2WSUXKWTpygTvrCIGzMoMJtcMEExR7w3YR3pno3BTabaDMqVUEKpwVejxAUPnkqooBwtjK
+ p
+X-Google-Smtp-Source: AGHT+IFx5EvLwLJVIhwFQSaLjGEi1NiJtG1tD+6NxJBtADjtpQJJKcO1eqKs79G+tCmbmBXyUgDvVQ==
+X-Received: by 2002:a05:600c:1d25:b0:413:f4d1:199e with SMTP id
+ l37-20020a05600c1d2500b00413f4d1199emr752090wms.31.1712305199131; 
+ Fri, 05 Apr 2024 01:19:59 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ dr20-20020a5d5f94000000b0033ea499c645sm1443447wrb.4.2024.04.05.01.19.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Apr 2024 01:19:58 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Dmitrii Merkurev <dimorinny@google.com>, u-boot@lists.denx.de
+Cc: rammuthiah@google.com, Dmitrii Merkurev <dimorinny@google.com>, Alex
+ Kiernan <alex.kiernan@gmail.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Ying-Chun
+ Liu <paul.liu@linaro.org>
+Subject: Re: [PATCH 4/4] fastboot: integrate block flashing back-end
+In-Reply-To: <20240306185921.1854109-4-dimorinny@google.com>
+References: <20240306185921.1854109-1-dimorinny@google.com>
+ <20240306185921.1854109-4-dimorinny@google.com>
+Date: Fri, 05 Apr 2024 10:19:57 +0200
+Message-ID: <87o7aofcgi.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Jump to ep on successful resume in PSCI
- suspend code
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240331182202.335923-1-marex@denx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240331182202.335923-1-marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.29.225]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-04-05_07,2024-04-04_01,2023-05-22_02
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,69 +96,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Dmitrii,
 
+Thank you for the patch and sorry for the review delay.
 
-On 3/31/24 20:21, Marek Vasut wrote:
-> In case the system has resumed successfully, the PSCI suspend resume
-> code has to jump to the 'ep' successful resume entry point code path,
-> otherwise the code has to jump to content of the LR register, which
-> points to failed resume code path.
-> 
-> To implement this distinction, rewrite LR register stored on stack
-> with 'ep' value in case of a successful resume, which is really in
-> every case unless some catastrophic failure occurred during suspend.
-> 
-> Without this change, Linux counts every resume as failed in
-> /sys/power/suspend_stats/fail
-> 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+On mer., mars 06, 2024 at 18:59, Dmitrii Merkurev <dimorinny@google.com> wrote:
+
+> 1. Get partition info/size
+> 2. Erase partition
+> 3. Flash partition
+> 4. BCB
+>
+> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
+> Cc: Alex Kiernan <alex.kiernan@gmail.com>
 > Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
 > ---
->  arch/arm/mach-stm32mp/psci.c | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
-> 
-> diff --git a/arch/arm/mach-stm32mp/psci.c b/arch/arm/mach-stm32mp/psci.c
-> index 8cdeb0ab3f2..4f2379df45f 100644
-> --- a/arch/arm/mach-stm32mp/psci.c
-> +++ b/arch/arm/mach-stm32mp/psci.c
-> @@ -703,6 +703,8 @@ void __secure psci_system_suspend(u32 __always_unused function_id,
+>  drivers/fastboot/fb_command.c |  8 ++++++++
+>  drivers/fastboot/fb_common.c  | 15 +++++++++++----
+>  drivers/fastboot/fb_getvar.c  |  8 +++++++-
+>  3 files changed, 26 insertions(+), 5 deletions(-)
+>
+> diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+> index f95f4e4ae1..67ebe02efa 100644
+> --- a/drivers/fastboot/fb_command.c
+> +++ b/drivers/fastboot/fb_command.c
+> @@ -9,6 +9,7 @@
+>  #include <env.h>
+>  #include <fastboot.h>
+>  #include <fastboot-internal.h>
+> +#include <fb_block.h>
+>  #include <fb_mmc.h>
+>  #include <fb_nand.h>
+>  #include <part.h>
+> @@ -331,6 +332,10 @@ void fastboot_data_complete(char *response)
+>   */
+>  static void __maybe_unused flash(char *cmd_parameter, char *response)
 >  {
->  	u32 saved_mcudivr, saved_pll3cr, saved_pll4cr, saved_mssckselr;
->  	u32 gicd_addr = stm32mp_get_gicd_base_address();
-> +	u32 cpu = psci_get_cpu_id();
-> +	u32 sp = (u32)__secure_stack_end - (cpu << ARM_PSCI_STACK_SHIFT);
->  	bool iwdg1_wake = false;
->  	bool iwdg2_wake = false;
->  	bool other_wake = false;
-> @@ -805,4 +807,16 @@ void __secure psci_system_suspend(u32 __always_unused function_id,
->  
->  	writel(SYSCFG_CMPENR_MPUEN, STM32_SYSCFG_BASE + SYSCFG_CMPENSETR);
->  	clrbits_le32(STM32_SYSCFG_BASE + SYSCFG_CMPCR, SYSCFG_CMPCR_SW_CTRL);
+> +	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK))
+> +		fastboot_block_flash_write(cmd_parameter, fastboot_buf_addr,
+> +					   image_size, response);
 > +
-> +	/*
-> +	 * The system has resumed successfully. Rewrite LR register stored
-> +	 * on stack with 'ep' value, so that on return from this PSCI call,
-> +	 * the code would jump to that 'ep' resume entry point code path
-> +	 * instead of the previous 'lr' register content which (e.g. with
-> +	 * Linux) points to resume failure code path.
-> +	 *
-> +	 * See arch/arm/cpu/armv7/psci.S _smc_psci: for the stack layout
-> +	 * used here, SP-4 is PC, SP-8 is LR, SP-12 is R7, and so on.
-> +	 */
-> +	writel(ep, sp - 8);
->  }
+>  	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
+>  		fastboot_mmc_flash_write(cmd_parameter, fastboot_buf_addr,
+>  					 image_size, response);
+> @@ -351,6 +356,9 @@ static void __maybe_unused flash(char *cmd_parameter, char *response)
+>   */
+>  static void __maybe_unused erase(char *cmd_parameter, char *response)
+>  {
+> +	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK))
+> +		fastboot_block_erase(cmd_parameter, response);
+> +
+>  	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
+>  		fastboot_mmc_erase(cmd_parameter, response);
+>  
+> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
+> index 3576b06772..7602653c0b 100644
+> --- a/drivers/fastboot/fb_common.c
+> +++ b/drivers/fastboot/fb_common.c
+> @@ -97,16 +97,23 @@ int __weak fastboot_set_reboot_flag(enum fastboot_reboot_reason reason)
+>  		[FASTBOOT_REBOOT_REASON_FASTBOOTD] = "boot-fastboot",
+>  		[FASTBOOT_REBOOT_REASON_RECOVERY] = "boot-recovery"
+>  	};
+> -	const int mmc_dev = config_opt_enabled(CONFIG_FASTBOOT_FLASH_MMC,
+> -					       CONFIG_FASTBOOT_FLASH_MMC_DEV, -1);
+>  
+> -	if (!IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
+> +	int device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+> +					CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
+> +	if (device == -1) {
+> +		device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_MMC,
+> +					    CONFIG_FASTBOOT_FLASH_MMC_DEV, -1);
+> +	}
+> +	char *bcb_iface = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
 
-Hi Marek
+Can this be made const?
 
-This patch is not based on last next or master branch, psci.c is now located in 
-arch/arm/mach-stm32mp/stm32mp1/psci.c 
+With the above addressed:
 
-Nevertheless, you can add my RB on the V2.
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-Thanks
-Patrice
+> +					     CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME, "mmc");
+> +
+> +	if (device == -1)
+>  		return -EINVAL;
+>  
+>  	if (reason >= FASTBOOT_REBOOT_REASONS_COUNT)
+>  		return -EINVAL;
+>  
+> -	ret = bcb_find_partition_and_load("mmc", mmc_dev, "misc");
+> +	ret = bcb_find_partition_and_load(bcb_iface, device, "misc");
+>  	if (ret)
+>  		goto out;
+>  
+> diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
+> index f65519c57b..71507009ab 100644
+> --- a/drivers/fastboot/fb_getvar.c
+> +++ b/drivers/fastboot/fb_getvar.c
+> @@ -8,6 +8,7 @@
+>  #include <fastboot.h>
+>  #include <fastboot-internal.h>
+>  #include <fb_mmc.h>
+> +#include <fb_block.h>
+>  #include <fb_nand.h>
+>  #include <fs.h>
+>  #include <part.h>
+> @@ -114,7 +115,12 @@ static int getvar_get_part_info(const char *part_name, char *response,
+>  	struct disk_partition disk_part;
+>  	struct part_info *part_info;
+>  
+> -	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC)) {
+> +	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK)) {
+> +		r = fastboot_block_get_part_info(part_name, &dev_desc, &disk_part,
+> +						 response);
+> +		if (r >= 0 && size)
+> +			*size = disk_part.size * disk_part.blksz;
+> +	} else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC)) {
+>  		r = fastboot_mmc_get_part_info(part_name, &dev_desc, &disk_part,
+>  					       response);
+>  		if (r >= 0 && size)
+> -- 
+> 2.44.0.278.ge034bb2e1d-goog
