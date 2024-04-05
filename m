@@ -4,82 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A3E1C67861
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 08:20:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E2A3C67861
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 08:22:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2395E87F52;
-	Fri,  5 Apr 2024 10:20:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id CD441884A2;
+	Fri,  5 Apr 2024 10:22:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="N17knXPw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ClQkT0X0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2E2687D8E; Fri,  5 Apr 2024 10:20:01 +0200 (CEST)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 3022C884A1; Fri,  5 Apr 2024 10:22:01 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9B9D88488
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 10:19:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2469188498
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 10:21:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-415523d9824so19345525e9.3
- for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 01:19:59 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-516cbf3fd3dso2030016e87.2
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 01:21:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712305199; x=1712909999;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=WKP0P78SUqWZrEyX8yd8psXFXshmKdf1erVhYXB7/kY=;
- b=N17knXPw5hvOEUgJG8SW2zk2upELcT4NB2AiBXDlEgBtAMrm1aeIbs94XxWC5kCp50
- CcZ5C0W3t32QsOtE8zCsdowgS9sYOjQeM7Im4sIe4CGOvWlgS7+hVYVaT0ktbS1fdgqS
- aLJQFTWMvIXYbufprFN4M39sTXDSxADOLqsuIR6Pb9RaVEmT538kV5HY++C5liBUDDrA
- dgmne/GpwIPY6b1N3OXs/OOc8bSArUzBainBWdFX1QoNWPe8ZpqSytGsV+GUOIivvhzo
- EKSywX+bAAMQiAXWSFuYFABcGmeNY7qeTCqAuPFRyREHSYykEUmVJcIXgP19DHhg2gl6
- +RQA==
+ d=linaro.org; s=google; t=1712305318; x=1712910118; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=O06h+69DZ0NsCiH7qpAb42rstTrVclPL7bvVfO1OMQo=;
+ b=ClQkT0X0QhHxY29MXBVRXHWH4r9j+cgb2PGu3Gsuwyop0QMelabkLlXW2r2BG1+WF8
+ tvp0zYRiwmeoTx5eJaszkLQc9q24ZnmRgNkvNTlKef9kZ6if2RS+J74UzcMwHpaqAJ2p
+ R8T0BGXsUdgegLZnxVngoJ9NXnl+ErgjpDrqRgKSDkQiJqgQvGncOY7Ty2sCYt0caELG
+ 70ZbLewECakLm1V4olA6TFXSfiCrOiyxCL/ig5yo+7FuGmPzfZcq44jjiYr4FdOH6S4B
+ BhotV5wQPvaqREP5htMnhIQ/iPma36jmv2szqzaXjwMK7E+BqBMOf6m0k8qsGulBdK0f
+ pT8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712305199; x=1712909999;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WKP0P78SUqWZrEyX8yd8psXFXshmKdf1erVhYXB7/kY=;
- b=M0AVCsWLNkg1WAnrM5VYt4ZzNJOOmGdRhnUzT8NSWbzMnT87C58uHIAF85MqE+tiBw
- d3XD+DP/e9ryA3RlGejds4+HrML+8OQ2qCVjJJyNFc/ECGffEvLaF+08pwa+Lnsl8S/w
- dkOyYC69havFmsMbVnpV9p+325lB/E2IgdQgQYjGAerlIiMlrDwB5mQT9lrYy4zaTcAd
- TmA5Ym7H5+dh2QiSaWv5Sqw3Wv4ek8UdrL3AtLxrRwkYAy6v8F+7UJDKeBc7yhRLQ2KT
- W4YgYU7GzTwuli0u/aDn3vA4d8CLoq6V/2L4sHb6eeH32Rxfs53KCod7qR6sXd+SFF9Q
- kkHQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX5mxLoxW7NMt/rTP3pIhAT8gtakNVhpEGzQRz7ab1LwpMLUuXQ+T/Q4dpdsIuXm1eKnuG4L9JIb2AmD6lq5id8hcFkwQ==
-X-Gm-Message-State: AOJu0YzZZ58aVAM3aZ/qh8WVlzPHzgeLoia76Ld+aN5n2rlPxTKd8htF
- 7zlME2WSUXKWTpygTvrCIGzMoMJtcMEExR7w3YR3pno3BTabaDMqVUEKpwVejxAUPnkqooBwtjK
- p
-X-Google-Smtp-Source: AGHT+IFx5EvLwLJVIhwFQSaLjGEi1NiJtG1tD+6NxJBtADjtpQJJKcO1eqKs79G+tCmbmBXyUgDvVQ==
-X-Received: by 2002:a05:600c:1d25:b0:413:f4d1:199e with SMTP id
- l37-20020a05600c1d2500b00413f4d1199emr752090wms.31.1712305199131; 
- Fri, 05 Apr 2024 01:19:59 -0700 (PDT)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ d=1e100.net; s=20230601; t=1712305318; x=1712910118;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=O06h+69DZ0NsCiH7qpAb42rstTrVclPL7bvVfO1OMQo=;
+ b=FFWLBE+X9MJELTarRmLktw8hlK/q0jjc74JB/MXq1tk3a242e+R2skAgCOflSokMP5
+ 0Fpidn70LJR6LxqWhTs2umJ3S18kuasC9ZJO6TMZatTSRL0/ijoAfuK9WJmFsYTjrGGE
+ HoOZQ3wK6YyDzgt4S0s80Ca2yfHh3fztxlbLoVILIaxdMB5jzO5ppFpqE/ikXZjq02vi
+ A1/O7jNGdXtD+8HKsu1PP6RhOdskOheqfvmwH243fUZpEZ40uIjEqravBxqv9dJWD1zd
+ 1i4+vySV2XAzmM0YpzrgArej3NwJwCKXrcL7/jchzPDSfnoIKBszX9T5wA+C3VubC3R2
+ V4/w==
+X-Gm-Message-State: AOJu0Yz7fp1bEsjsMSu4zDsjQ9A1lpuGMa+Oj9B8BNuiDaTGBj+wGHHW
+ FDu56riVaUlMJpN38Q6sGdeLEq0dIIW53lbCQolxZ9eu4NR+KEDav1HrVuUhC0w=
+X-Google-Smtp-Source: AGHT+IFTOn9pyBMIkpRAq9+ofeekq0FnwEmb72u/7h5E/QR8nmHizHxh8btPly2HPaG26ywWiOe7Xg==
+X-Received: by 2002:a05:6512:b8e:b0:515:d4a6:215 with SMTP id
+ b14-20020a0565120b8e00b00515d4a60215mr594616lfv.7.1712305318208; 
+ Fri, 05 Apr 2024 01:21:58 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
  by smtp.gmail.com with ESMTPSA id
- dr20-20020a5d5f94000000b0033ea499c645sm1443447wrb.4.2024.04.05.01.19.58
+ j27-20020adfb31b000000b00341d84f641asm1452326wrd.8.2024.04.05.01.21.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Apr 2024 01:19:58 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Dmitrii Merkurev <dimorinny@google.com>, u-boot@lists.denx.de
-Cc: rammuthiah@google.com, Dmitrii Merkurev <dimorinny@google.com>, Alex
- Kiernan <alex.kiernan@gmail.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Ying-Chun
- Liu <paul.liu@linaro.org>
-Subject: Re: [PATCH 4/4] fastboot: integrate block flashing back-end
-In-Reply-To: <20240306185921.1854109-4-dimorinny@google.com>
-References: <20240306185921.1854109-1-dimorinny@google.com>
- <20240306185921.1854109-4-dimorinny@google.com>
-Date: Fri, 05 Apr 2024 10:19:57 +0200
-Message-ID: <87o7aofcgi.fsf@baylibre.com>
+ Fri, 05 Apr 2024 01:21:57 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH 0/4] smpi: msm: fix version 5 and add version 7 support
+Date: Fri, 05 Apr 2024 10:21:52 +0200
+Message-Id: <20240405-topic-sm8x50-spmi-fixes-v1-0-031a9e5efab4@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKC0D2YC/x2LQQqAMAzAviI9W5ibgvoV8TBn1R7UsYoIsr9bJ
+ KcQ8oJQYhLoixcS3Sx8HipVWUDY/LES8qwO1tjaKHidkQPK3j6NQYk748IPCXoK3eQ621ZuAr1
+ joj/oPIw5f4cqOm9pAAAA
+To: Caleb Connolly <caleb.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Mateusz Kulikowski <mateusz.kulikowski@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Dzmitry Sankouski <dsankouski@gmail.com>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1074;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=npPLhJ/xzSzqZk9f+xZiyPr2D96RcAgpqYhaNbaRtyI=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmD7SjHVwdH31Zxso0qXVYI7ltJ6s0GxiCSZPINJ9c
+ KOxexdyJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZg+0owAKCRB33NvayMhJ0fYZEA
+ DM6NYLmejviLzotSzJhLtjYeUiowTJzxoqXbt5mTfUOxj5l4yxRpha5p81SwuZZfkwL+6SktGl2qQW
+ zUebQihuDkTOSjr3rVYPTeG2RHZtiryEArTS2XWHuUk66f2Uq4h0aqxLKg1m+mRvJYvk0fkOpMNfMk
+ SW5jHiRsYukLeoNwyN8oxFWdLxD8oamgmf6dFQy3gxVuwO4K4QNKbmgLnxFcqnQPPE5C2Zg911h/VK
+ 67NwInqBkThoq9j24JZwNQ/oeyi2480DxRdgLKVfa1SwkjQ2FyeH/zK4Txh5hvOcubkgK6QqbD7uY3
+ P9AEpcZz8W4gpU2gbD0LKH2Dlcg5tJShIdokvsnnrdJG0Py0HtWbcqgzp18GM8eYoBnSw89ndoXmIN
+ JRxgfsDcsEN2gmQ1R/sxOqGrw5lmsD0IPv73nAgFJb2N1I5+wNMRJ0jTgMVEkecrKKCwxslPvmfuvD
+ WBgldAhos3IavsC9TBjT7lvgmNmN6dyQqmd3MeJH2qkflfbT4KmiT3/nxmrnt8EI7pANZwU3rlK/qh
+ BGp/dDiMAww1D3GOz+gt9WvsasbyA01dwVCWHTJXUZFPzT0jJrKVvlSaz+AYewAnQ4qeuMZ04R/fjl
+ t+0ctKWYIK4NtXevl55gKwmC9ZY7yJJxWjZVzWgHQ3IkmG1zbVCrbgp30eAQ==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,126 +111,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dmitrii,
+First, fix version 5 support by using the right ch_offset in
+then msm_spmi_write() reg accesses.
 
-Thank you for the patch and sorry for the review delay.
+Then:
+- properly format command by importing helpers from Linux driver and
+  use a switch/case to handle all versions in msm_spmi_write/read() command.
+- handle peripheral ownership by poking into the cnfg registers and
+  mark periperal as read-only when the owner id doesn't match
+- finally add version 7 defines
 
-On mer., mars 06, 2024 at 18:59, Dmitrii Merkurev <dimorinny@google.com> wrote:
+SPMI Arbiter Version 7 is present on SM8450, SM8550 and SM8650 SoC.
 
-> 1. Get partition info/size
-> 2. Erase partition
-> 3. Flash partition
-> 4. BCB
->
-> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
-> Cc: Alex Kiernan <alex.kiernan@gmail.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> Cc: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
-> ---
->  drivers/fastboot/fb_command.c |  8 ++++++++
->  drivers/fastboot/fb_common.c  | 15 +++++++++++----
->  drivers/fastboot/fb_getvar.c  |  8 +++++++-
->  3 files changed, 26 insertions(+), 5 deletions(-)
->
-> diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
-> index f95f4e4ae1..67ebe02efa 100644
-> --- a/drivers/fastboot/fb_command.c
-> +++ b/drivers/fastboot/fb_command.c
-> @@ -9,6 +9,7 @@
->  #include <env.h>
->  #include <fastboot.h>
->  #include <fastboot-internal.h>
-> +#include <fb_block.h>
->  #include <fb_mmc.h>
->  #include <fb_nand.h>
->  #include <part.h>
-> @@ -331,6 +332,10 @@ void fastboot_data_complete(char *response)
->   */
->  static void __maybe_unused flash(char *cmd_parameter, char *response)
->  {
-> +	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK))
-> +		fastboot_block_flash_write(cmd_parameter, fastboot_buf_addr,
-> +					   image_size, response);
-> +
->  	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
->  		fastboot_mmc_flash_write(cmd_parameter, fastboot_buf_addr,
->  					 image_size, response);
-> @@ -351,6 +356,9 @@ static void __maybe_unused flash(char *cmd_parameter, char *response)
->   */
->  static void __maybe_unused erase(char *cmd_parameter, char *response)
->  {
-> +	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK))
-> +		fastboot_block_erase(cmd_parameter, response);
-> +
->  	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
->  		fastboot_mmc_erase(cmd_parameter, response);
->  
-> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
-> index 3576b06772..7602653c0b 100644
-> --- a/drivers/fastboot/fb_common.c
-> +++ b/drivers/fastboot/fb_common.c
-> @@ -97,16 +97,23 @@ int __weak fastboot_set_reboot_flag(enum fastboot_reboot_reason reason)
->  		[FASTBOOT_REBOOT_REASON_FASTBOOTD] = "boot-fastboot",
->  		[FASTBOOT_REBOOT_REASON_RECOVERY] = "boot-recovery"
->  	};
-> -	const int mmc_dev = config_opt_enabled(CONFIG_FASTBOOT_FLASH_MMC,
-> -					       CONFIG_FASTBOOT_FLASH_MMC_DEV, -1);
->  
-> -	if (!IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC))
-> +	int device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
-> +					CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
-> +	if (device == -1) {
-> +		device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_MMC,
-> +					    CONFIG_FASTBOOT_FLASH_MMC_DEV, -1);
-> +	}
-> +	char *bcb_iface = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+---
+Neil Armstrong (4):
+      spmi: msm: fix version 5 support
+      spmi: msm: properly format command
+      spmi: msm: handle peripheral ownership
+      spmi: msm: support controller version 7
 
-Can this be made const?
+ drivers/spmi/spmi-msm.c | 148 +++++++++++++++++++++++++++++++++++++-----------
+ 1 file changed, 116 insertions(+), 32 deletions(-)
+---
+base-commit: f0e6aba1218bca578605697eed8aa94582bf57bb
+change-id: 20240404-topic-sm8x50-spmi-fixes-aec9b392813b
 
-With the above addressed:
+Best regards,
+-- 
+Neil Armstrong <neil.armstrong@linaro.org>
 
-Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-
-> +					     CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME, "mmc");
-> +
-> +	if (device == -1)
->  		return -EINVAL;
->  
->  	if (reason >= FASTBOOT_REBOOT_REASONS_COUNT)
->  		return -EINVAL;
->  
-> -	ret = bcb_find_partition_and_load("mmc", mmc_dev, "misc");
-> +	ret = bcb_find_partition_and_load(bcb_iface, device, "misc");
->  	if (ret)
->  		goto out;
->  
-> diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
-> index f65519c57b..71507009ab 100644
-> --- a/drivers/fastboot/fb_getvar.c
-> +++ b/drivers/fastboot/fb_getvar.c
-> @@ -8,6 +8,7 @@
->  #include <fastboot.h>
->  #include <fastboot-internal.h>
->  #include <fb_mmc.h>
-> +#include <fb_block.h>
->  #include <fb_nand.h>
->  #include <fs.h>
->  #include <part.h>
-> @@ -114,7 +115,12 @@ static int getvar_get_part_info(const char *part_name, char *response,
->  	struct disk_partition disk_part;
->  	struct part_info *part_info;
->  
-> -	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC)) {
-> +	if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_BLOCK)) {
-> +		r = fastboot_block_get_part_info(part_name, &dev_desc, &disk_part,
-> +						 response);
-> +		if (r >= 0 && size)
-> +			*size = disk_part.size * disk_part.blksz;
-> +	} else if (IS_ENABLED(CONFIG_FASTBOOT_FLASH_MMC)) {
->  		r = fastboot_mmc_get_part_info(part_name, &dev_desc, &disk_part,
->  					       response);
->  		if (r >= 0 && size)
-> -- 
-> 2.44.0.278.ge034bb2e1d-goog
