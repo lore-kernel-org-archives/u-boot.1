@@ -4,80 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A86EC67861
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 07:36:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD4AEC67861
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 07:37:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95CE3882B2;
-	Fri,  5 Apr 2024 09:36:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 1DDD28846B;
+	Fri,  5 Apr 2024 09:37:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="mqm1tnYa";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BAmWZW3J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07BC788466; Fri,  5 Apr 2024 09:36:33 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B2C2F88471; Fri,  5 Apr 2024 09:37:14 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E6E487F4B
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 09:36:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D6738846A
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 09:37:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=482502c049=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 4353bZp8028951; Fri, 5 Apr 2024 09:36:21 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=yzL9ksV/ItUtRQRrv8N9RNuHb8DoH5nwHlFFCag8dTc=; b=mq
- m1tnYa5fE7NPryPF6rti+OFqTa/YRl2EkENQBZds5VyvhbcJkPU/dvUXakj4utys
- AQgtp2z5Fa6ERp3GksnZNifJfR4nkToD5yu56Qv9YGkfeVUWRcGjsUaGA24RqgJN
- kiOpZk/htDl5d5PYg8E/CB0Vozm2IeKnlaksKWxXhVIf61nv4euGDXPPjzGbfgQJ
- NLdybDEBGRHDp5iKBEHvl16pDWU7CCAQgIyRBaWR3lNMvEXW/GrXTGwbJSuO4EXx
- yiTOVKAAseBigVO2SDur5u43kEH0Uc6dp3G/Ucr/K9UqLBAs/78UfuYASlcwIRHy
- Jg1IFVzm0gNAcRrATQqw==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3x9empp1uf-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 05 Apr 2024 09:36:20 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 8EA704002D;
- Fri,  5 Apr 2024 09:36:16 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id EB9D020F2AD;
- Fri,  5 Apr 2024 09:35:40 +0200 (CEST)
-Received: from [10.252.29.225] (10.252.29.225) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 5 Apr
- 2024 09:35:40 +0200
-Message-ID: <3e214800-4b78-4bbf-b559-633326bf2f1a@foss.st.com>
-Date: Fri, 5 Apr 2024 09:35:40 +0200
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id B903D3F594
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 07:37:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1712302631;
+ bh=bN4thyh9QNBwmVXvxbaJu0KT2vQYjlSn5sS+Y2Ow9Pc=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=BAmWZW3J+Ucj2Kqcg++d5o+DMInpbS+T1J8VM91ToGF9vY7HPRovhqbpEfDjocXjz
+ TUk5ncYpWAiJP+5yZ/ndhtmg/d4nKJ2NYTycc8/jyo+zfo/nIBaBttPcCuAGWf8519
+ WC3GXRVreSWKnXG23FPy6z53+6I+DYz0N7ebeH/NQ3gbTO+gAe9oQLMbsFqhtv+kW+
+ zUEk43YaPgcUMk31F35LwP0WvER8BuzE4G2WPIq11JLrQCC35O51RGweGhhLFk2LSc
+ AihU3zfsShvt82ameUnWN/yEWJWWeWn+2rUghRiLOLWLXHzO23cMllm6Y3Q9rcYRRK
+ o1HAmn7R33PBg==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-414042da713so14946715e9.0
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 00:37:11 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712302631; x=1712907431;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=bN4thyh9QNBwmVXvxbaJu0KT2vQYjlSn5sS+Y2Ow9Pc=;
+ b=lSFgrdPAD84XYm96fYFrr8gAMYiLT+wFXYndfGf2gRRABYXJzLNP+Au77soZn/BpZi
+ sSfJRZ2Dc22yUVbmjJ7GG9VvHVOkPDxxBwRXflBUG4zBywxNnHTdzhBk5J2HuHMDgNMW
+ 91CeW/DctagxMhIhSjxqR2iFtsuR0hhoLI18Zw/QYRfkOhdBGwF5FmQjM5hDAVndqfRM
+ tUox2PxcGePvdrSroMTC/qs3nFelWJnPWg5CjpsK6nbECDK4pFnuBsX5h53EF2R/zUHO
+ vSXtFnoZ4tkyEwJqYm4lSLMP2KXTNQpwLus5TCcAA/TxvXpwa8ES/0ihH0F7xELG6sjF
+ eBAw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXQXaMoP0rWGs2CT7WGFNxJpwJuNKkbpPxzHK/EF+cz31Zl0Y9Xb5kEyl7LMAkyfDhl663ofrYjtaeNXn5QXczoCUISaA==
+X-Gm-Message-State: AOJu0Yw+0uPBr0M2JqVo1GMeZgqU6Wved2k8kk/I756qtnrsMo2Di+C3
+ 04WOSuual4c0aY+SJdUjNQ/Ax09SoqKhxG5prKZqB5CYfFVCnLi8/j02Ix2alrRn8DA4HS5DtVH
+ p+3y5AWvDQHGUovHzH9KGPi5tIGwHGQN0h69swsQTWw5VSqrLRFpXNco0IFXuzBs0zyg=
+X-Received: by 2002:a05:600c:3502:b0:416:1b17:ba4 with SMTP id
+ h2-20020a05600c350200b004161b170ba4mr1487313wmq.16.1712302631370; 
+ Fri, 05 Apr 2024 00:37:11 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEUx53/TQECGtye5zfhRwxhunKjxXWHF3KjHNkje8BAuVRbqRK5C8x8/V78GOlzDZmrzsIBmQ==
+X-Received: by 2002:a05:600c:3502:b0:416:1b17:ba4 with SMTP id
+ h2-20020a05600c350200b004161b170ba4mr1487289wmq.16.1712302630977; 
+ Fri, 05 Apr 2024 00:37:10 -0700 (PDT)
+Received: from [192.168.123.161]
+ (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ by smtp.gmail.com with ESMTPSA id
+ u10-20020adff88a000000b00343e01d3f6dsm1212921wrp.3.2024.04.05.00.37.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 05 Apr 2024 00:37:10 -0700 (PDT)
+Message-ID: <c32e4a59-ed4a-4f6d-ad69-bf861c21f76e@canonical.com>
+Date: Fri, 5 Apr 2024 09:37:09 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: imx: stm32: Test whether ethernet node is enabled
- before reading MAC EEPROM on DHSOM
+Subject: Re: [PATCH v2] efi_loader: move efi_var_collect to common functions
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Ilias Apalodimas <apalos@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, AKASHI Takahiro
+ <takahiro.akashi@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
+References: <20240405065058.591452-1-ilias.apalodimas@linaro.org>
 Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: NXP i.MX U-Boot Team <uboot-imx@nxp.com>, Andreas Geisreiter
- <ageisreiter@dh-electronics.de>, Christoph Niedermaier
- <cniedermaier@dh-electronics.com>, Fabio Estevam <festevam@gmail.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>, Stefano Babic
- <sbabic@denx.de>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240312211628.32842-1-marex@denx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240312211628.32842-1-marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240405065058.591452-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.29.225]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-04-05_06,2024-04-04_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,153 +110,213 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 3/12/24 22:15, Marek Vasut wrote:
-> Check whether the ethernet interface is enabled at all before reading
-> MAC EEPROM. As a cost saving measure, it can happen that the MAC EEPROM
-> is not populated on SoMs which do not use ethernet.
+On 4/5/24 08:50, Ilias Apalodimas wrote:
+> From: Ilias Apalodimas <apalos@gmail.com>
 > 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-> Cc: Andreas Geisreiter <ageisreiter@dh-electronics.de>
-> Cc: Christoph Niedermaier <cniedermaier@dh-electronics.com>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Stefano Babic <sbabic@denx.de>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
-> NOTE: It is probably best if this goes in via either imx or stm32 tree,
->       I can break the patch up, but that would introduce dependency
->       between two PRs in different trees. Let me know what you prefer.
-> ---
->  board/dhelectronics/common/dh_common.c           | 16 ++++++++++++++++
->  board/dhelectronics/common/dh_common.h           |  8 ++++++++
->  board/dhelectronics/dh_imx6/dh_imx6.c            |  3 +++
->  .../dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c  |  6 ++++++
->  board/dhelectronics/dh_stm32mp1/board.c          |  6 ++++++
->  5 files changed, 39 insertions(+)
+> efi_var_collect() was initially placed in efi_var_file.c, since back
+> then we only supported efi variables stored in a file. Since then we
+> support variables stored in an RPMB as well and use that function to
+> collect variables that should be present at runtime.
 > 
-> diff --git a/board/dhelectronics/common/dh_common.c b/board/dhelectronics/common/dh_common.c
-> index 67e3d59b1f3..34094a020b0 100644
-> --- a/board/dhelectronics/common/dh_common.c
-> +++ b/board/dhelectronics/common/dh_common.c
-> @@ -18,6 +18,19 @@ bool dh_mac_is_in_env(const char *env)
->  	return eth_env_get_enetaddr(env, enetaddr);
->  }
->  
-> +int dh_get_mac_is_enabled(const char *alias)
-> +{
-> +	ofnode node = ofnode_path(alias);
+> So let's move it around in efi_var_common.c which makes more sense
+> 
+> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Signed-off-by: Ilias Apalodimas <apalos@gmail.com>
+
+Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
+> ---
+> Changes since v1:
+> - Clean up the makefile as well
+> - fix checkpatch error
+> 
+>   lib/efi_loader/Makefile         |  2 +-
+>   lib/efi_loader/efi_var_common.c | 74 +++++++++++++++++++++++++++++++++
+>   lib/efi_loader/efi_var_file.c   | 64 ----------------------------
+>   3 files changed, 75 insertions(+), 65 deletions(-)
+> 
+> diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+> index fcb0af7e7d6d..6a0ce6c32c88 100644
+> --- a/lib/efi_loader/Makefile
+> +++ b/lib/efi_loader/Makefile
+> @@ -72,11 +72,11 @@ obj-y += efi_string.o
+>   obj-$(CONFIG_EFI_UNICODE_COLLATION_PROTOCOL2) += efi_unicode_collation.o
+>   obj-y += efi_var_common.o
+>   obj-y += efi_var_mem.o
+> -obj-y += efi_var_file.o
+>   ifeq ($(CONFIG_EFI_MM_COMM_TEE),y)
+>   obj-y += efi_variable_tee.o
+>   else
+>   obj-y += efi_variable.o
+> +obj-y += efi_var_file.o
+>   obj-$(CONFIG_EFI_VARIABLES_PRESEED) += efi_var_seed.o
+>   endif
+>   obj-y += efi_watchdog.o
+> diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
+> index d528747f3fb4..4268850990f5 100644
+> --- a/lib/efi_loader/efi_var_common.c
+> +++ b/lib/efi_loader/efi_var_common.c
+> @@ -9,6 +9,7 @@
+>   #include <efi_loader.h>
+>   #include <efi_variable.h>
+>   #include <stdlib.h>
+> +#include <u-boot/crc.h>
+> 
+>   enum efi_secure_mode {
+>   	EFI_MODE_SETUP,
+> @@ -416,3 +417,76 @@ void *efi_get_var(const u16 *name, const efi_guid_t *vendor, efi_uintn_t *size)
+> 
+>   	return buf;
+>   }
 > +
-> +	if (!ofnode_valid(node))
-> +		return -EINVAL;
-> +
-> +	if (!ofnode_is_enabled(node))
-> +		return -ENODEV;
-> +
-> +	return 0;
-> +}
-> +
->  int dh_get_mac_from_eeprom(unsigned char *enetaddr, const char *alias)
->  {
->  	struct udevice *dev;
-> @@ -57,6 +70,9 @@ __weak int dh_setup_mac_address(void)
->  	if (dh_mac_is_in_env("ethaddr"))
->  		return 0;
->  
-> +	if (dh_get_mac_is_enabled("ethernet0"))
-> +		return 0;
-> +
->  	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
->  		return eth_env_set_enetaddr("ethaddr", enetaddr);
->  
-> diff --git a/board/dhelectronics/common/dh_common.h b/board/dhelectronics/common/dh_common.h
-> index 2b24637d96d..a2de5b1553e 100644
-> --- a/board/dhelectronics/common/dh_common.h
-> +++ b/board/dhelectronics/common/dh_common.h
-> @@ -11,6 +11,14 @@
->   */
->  bool dh_mac_is_in_env(const char *env);
->  
-> +/*
-> + * dh_get_mac_is_enabled - Test if ethernet MAC is enabled in DT
+> +/**
+> + * efi_var_collect() - Copy EFI variables mstching attributes mask
 > + *
-> + * @alias: alias for ethernet MAC device tree node
-> + * Return: 0 if OK, other value on error
+> + * @bufp:	buffer containing variable collection
+> + * @lenp:	buffer length
+> + * @attr_mask:	mask of matched attributes
+> + *
+> + * Return:	Status code
 > + */
-> +int dh_get_mac_is_enabled(const char *alias);
+> +efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *lenp,
+> +					    u32 check_attr_mask)
+> +{
+> +	size_t len = EFI_VAR_BUF_SIZE;
+> +	struct efi_var_file *buf;
+> +	struct efi_var_entry *var, *old_var;
+> +	size_t old_var_name_length = 2;
 > +
->  /*
->   * dh_get_mac_from_eeprom - Get MAC address from eeprom and write it to enetaddr
->   *
-> diff --git a/board/dhelectronics/dh_imx6/dh_imx6.c b/board/dhelectronics/dh_imx6/dh_imx6.c
-> index 07fc9b1fe6d..0676587c38a 100644
-> --- a/board/dhelectronics/dh_imx6/dh_imx6.c
-> +++ b/board/dhelectronics/dh_imx6/dh_imx6.c
-> @@ -92,6 +92,9 @@ int dh_setup_mac_address(void)
->  	if (dh_mac_is_in_env("ethaddr"))
->  		return 0;
->  
-> +	if (dh_get_mac_is_enabled("ethernet0"))
-> +		return 0;
+> +	*bufp = NULL; /* Avoid double free() */
+> +	buf = calloc(1, len);
+> +	if (!buf)
+> +		return EFI_OUT_OF_RESOURCES;
+> +	var = buf->var;
+> +	old_var = var;
+> +	for (;;) {
+> +		efi_uintn_t data_length, var_name_length;
+> +		u8 *data;
+> +		efi_status_t ret;
 > +
->  	if (!dh_imx_get_mac_from_fuse(enetaddr))
->  		goto out;
->  
-> diff --git a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-> index 5f12d787d38..ff2c0e87215 100644
-> --- a/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-> +++ b/board/dhelectronics/dh_imx8mp/imx8mp_dhcom_pdk2.c
-> @@ -47,6 +47,9 @@ static int dh_imx8_setup_ethaddr(void)
->  	if (dh_mac_is_in_env("ethaddr"))
->  		return 0;
->  
-> +	if (dh_get_mac_is_enabled("ethernet0"))
-> +		return 0;
+> +		if ((uintptr_t)buf + len <=
+> +		    (uintptr_t)var->name + old_var_name_length)
+> +			return EFI_BUFFER_TOO_SMALL;
 > +
->  	if (!dh_imx_get_mac_from_fuse(enetaddr))
->  		goto out;
->  
-> @@ -66,6 +69,9 @@ static int dh_imx8_setup_eth1addr(void)
->  	if (dh_mac_is_in_env("eth1addr"))
->  		return 0;
->  
-> +	if (dh_get_mac_is_enabled("ethernet1"))
-> +		return 0;
+> +		var_name_length = (uintptr_t)buf + len - (uintptr_t)var->name;
+> +		memcpy(var->name, old_var->name, old_var_name_length);
+> +		guidcpy(&var->guid, &old_var->guid);
+> +		ret = efi_get_next_variable_name_int(
+> +				&var_name_length, var->name, &var->guid);
+> +		if (ret == EFI_NOT_FOUND)
+> +			break;
+> +		if (ret != EFI_SUCCESS) {
+> +			free(buf);
+> +			return ret;
+> +		}
+> +		old_var_name_length = var_name_length;
+> +		old_var = var;
 > +
->  	if (!dh_imx_get_mac_from_fuse(enetaddr))
->  		goto increment_out;
->  
-> diff --git a/board/dhelectronics/dh_stm32mp1/board.c b/board/dhelectronics/dh_stm32mp1/board.c
-> index 88eb7d1b8d4..b3309c9d330 100644
-> --- a/board/dhelectronics/dh_stm32mp1/board.c
-> +++ b/board/dhelectronics/dh_stm32mp1/board.c
-> @@ -129,6 +129,9 @@ static int dh_stm32_setup_ethaddr(void)
->  	if (dh_mac_is_in_env("ethaddr"))
->  		return 0;
->  
-> +	if (dh_get_mac_is_enabled("ethernet0"))
-> +		return 0;
+> +		data = (u8 *)var->name + old_var_name_length;
+> +		data_length = (uintptr_t)buf + len - (uintptr_t)data;
+> +		ret = efi_get_variable_int(var->name, &var->guid,
+> +					   &var->attr, &data_length, data,
+> +					   &var->time);
+> +		if (ret != EFI_SUCCESS) {
+> +			free(buf);
+> +			return ret;
+> +		}
+> +		if ((var->attr & check_attr_mask) == check_attr_mask) {
+> +			var->length = data_length;
+> +			var = (struct efi_var_entry *)ALIGN((uintptr_t)data + data_length, 8);
+> +		}
+> +	}
 > +
->  	if (!dh_get_mac_from_eeprom(enetaddr, "eeprom0"))
->  		return eth_env_set_enetaddr("ethaddr", enetaddr);
->  
-> @@ -142,6 +145,9 @@ static int dh_stm32_setup_eth1addr(void)
->  	if (dh_mac_is_in_env("eth1addr"))
->  		return 0;
->  
-> +	if (dh_get_mac_is_enabled("ethernet1"))
-> +		return 0;
+> +	buf->reserved = 0;
+> +	buf->magic = EFI_VAR_FILE_MAGIC;
+> +	len = (uintptr_t)var - (uintptr_t)buf;
+> +	buf->crc32 = crc32(0, (u8 *)buf->var,
+> +			   len - sizeof(struct efi_var_file));
+> +	buf->length = len;
+> +	*bufp = buf;
+> +	*lenp = len;
 > +
->  	if (dh_stm32_mac_is_in_ks8851())
->  		return 0;
->  
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> +	return EFI_SUCCESS;
+> +}
+> diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
+> index 532b6b40eefe..413e1794e88c 100644
+> --- a/lib/efi_loader/efi_var_file.c
+> +++ b/lib/efi_loader/efi_var_file.c
+> @@ -52,70 +52,6 @@ static efi_status_t __maybe_unused efi_set_blk_dev_to_system_partition(void)
+>   	return EFI_SUCCESS;
+>   }
+> 
+> -efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *lenp,
+> -					    u32 check_attr_mask)
+> -{
+> -	size_t len = EFI_VAR_BUF_SIZE;
+> -	struct efi_var_file *buf;
+> -	struct efi_var_entry *var, *old_var;
+> -	size_t old_var_name_length = 2;
+> -
+> -	*bufp = NULL; /* Avoid double free() */
+> -	buf = calloc(1, len);
+> -	if (!buf)
+> -		return EFI_OUT_OF_RESOURCES;
+> -	var = buf->var;
+> -	old_var = var;
+> -	for (;;) {
+> -		efi_uintn_t data_length, var_name_length;
+> -		u8 *data;
+> -		efi_status_t ret;
+> -
+> -		if ((uintptr_t)buf + len <=
+> -		    (uintptr_t)var->name + old_var_name_length)
+> -			return EFI_BUFFER_TOO_SMALL;
+> -
+> -		var_name_length = (uintptr_t)buf + len - (uintptr_t)var->name;
+> -		memcpy(var->name, old_var->name, old_var_name_length);
+> -		guidcpy(&var->guid, &old_var->guid);
+> -		ret = efi_get_next_variable_name_int(
+> -				&var_name_length, var->name, &var->guid);
+> -		if (ret == EFI_NOT_FOUND)
+> -			break;
+> -		if (ret != EFI_SUCCESS) {
+> -			free(buf);
+> -			return ret;
+> -		}
+> -		old_var_name_length = var_name_length;
+> -		old_var = var;
+> -
+> -		data = (u8 *)var->name + old_var_name_length;
+> -		data_length = (uintptr_t)buf + len - (uintptr_t)data;
+> -		ret = efi_get_variable_int(var->name, &var->guid,
+> -					   &var->attr, &data_length, data,
+> -					   &var->time);
+> -		if (ret != EFI_SUCCESS) {
+> -			free(buf);
+> -			return ret;
+> -		}
+> -		if ((var->attr & check_attr_mask) == check_attr_mask) {
+> -			var->length = data_length;
+> -			var = (struct efi_var_entry *)ALIGN((uintptr_t)data + data_length, 8);
+> -		}
+> -	}
+> -
+> -	buf->reserved = 0;
+> -	buf->magic = EFI_VAR_FILE_MAGIC;
+> -	len = (uintptr_t)var - (uintptr_t)buf;
+> -	buf->crc32 = crc32(0, (u8 *)buf->var,
+> -			   len - sizeof(struct efi_var_file));
+> -	buf->length = len;
+> -	*bufp = buf;
+> -	*lenp = len;
+> -
+> -	return EFI_SUCCESS;
+> -}
+> -
+>   /**
+>    * efi_var_to_file() - save non-volatile variables as file
+>    *
+> --
+> 2.43.0
+> 
 
-Thanks
-Patrice
