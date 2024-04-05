@@ -4,93 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A060DCD11C2
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 08:03:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A2FBC67861
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 08:05:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 039ED88463;
-	Fri,  5 Apr 2024 10:03:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id BDF8D88122;
+	Fri,  5 Apr 2024 10:05:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="vjm9vvMF";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Nl1Ziey8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6422B8845A; Fri,  5 Apr 2024 10:03:11 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 39F2A88432; Fri,  5 Apr 2024 10:05:08 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 642A68845A
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 10:03:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CA0BD87EBD
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 10:05:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 930343FAEA
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 08:03:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1712304186;
- bh=AAPPJoScNUPwvI0DFQBp84Z3ed0SuoO2+/aZj/UXOg4=;
- h=Message-ID:Date:MIME-Version:Subject:To:References:Cc:From:
- In-Reply-To:Content-Type;
- b=vjm9vvMFY30VPStbx5avfk17mtS6bxy10+c81Y10vCR0EGvqTElo7SLS9pQlDzwm5
- 9mzWTTdgwMfVBcRU6NnXxaX2KSek9IbAjnD2mAwsAuTpdloabbpt76DWZEGrS58WnM
- 85tEJuJwbCq8i9Ehsv74PF+Opv8WBmmwvk+AGukXV1aMQ25Bck8VPVJTOojroGWsEU
- 4t3ULpcZllpaZjYNqOie/Wcm24h+5bDKKV7i59jy1Jv2FcbW22whNLzcf9+Dq/bKMB
- OQGP27zvm9YiJsGA2JiOmITO/X3T2Wzbcmu8CqxW7s8amSiEr/4tI0qzYBU4ugRbv4
- tHrBs/dCFt3eA==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4162b9b1702so6529055e9.2
- for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 01:03:06 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-415523d9824so19224595e9.3
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 01:05:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712304305; x=1712909105;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=C6ov5uYJgD1UD1YYevfoPhMnvkDHqnItJx8IB88ap8o=;
+ b=Nl1Ziey8RJ/MvicyB69a7IAU77l45Zagtyh/32oacdMeUEZgLGGJCEB9ZD60qsInSP
+ q2d8jiMVHLFhYMl2zvOqLYevC5/MpB7ClfHTJO05CerloTNgzu0KyYdGrRLsRn3nE77q
+ MZmyHtzm6MW2BOc0zhaPIxlRyXz3P6TH0BJYomtF36m10V4k0S5zwA4D6YW7pdgg2BUn
+ Ozs/FMzUM2P5eCHjBQkmQudpjKhZsHDWO6zx7/RWzRO2K+4uoeAMwGr85Ksf21pSwAQ5
+ LlYAMUJzk7QXoKtqMC7hAeIXw/EKipM71YdToDQXeZCiWYCwnjIDfk+zDMdHRhNktA+Z
+ OLKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712304186; x=1712908986;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=AAPPJoScNUPwvI0DFQBp84Z3ed0SuoO2+/aZj/UXOg4=;
- b=fkBbIWDHMCK4u2tZLwDJwG2hxrotNNrXd22jqUvWe9EQASRFn6GdfWBYuFvjsqkBu6
- 5wJDMTqMFAI5driiaWvinYET2kZP9nkXEHm9klos4froTyr2YImccSgfY9OzgSwf9icf
- +fO05Ih1SqgTNtYIAWESYWnwTg7DAC8qymTxCuJjr0aWviAq7icUNW+zewKIfJGfMYXd
- JzTLS5c0s/hcuqBV+NwCYorfjdmqs1KYaV6J8uvgiLQss6rKxLB/V4VQ4C4u+toPA8lf
- OAor7wdGkZZvW3urXJv4pFdDo/qcLBf/PwNsdXWtTvjm23yPjdf60nL6BEw/lOuUhY3/
- ebfA==
-X-Gm-Message-State: AOJu0YzRzHIOsk49HryRFJwnr4fubmBR83Hv4xecXhzJ6Z4iDhPnvQuI
- LF/XmBHwdIT4mQLB+t5qqR52his34B/78kP0dzgf08pqy2qUhopWmYdc9903K4BLyYt6bFAmw7B
- UEXWDbSFs+TqNjSQvwucPvgRNc4oN2hUxyNWSlSeqVJBm8ZDDxlz1lGYvpl5Q3JSnpCs=
-X-Received: by 2002:a05:600c:1554:b0:414:63da:a2a2 with SMTP id
- f20-20020a05600c155400b0041463daa2a2mr523623wmg.29.1712304185742; 
- Fri, 05 Apr 2024 01:03:05 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFlb0zj8YVjT6ghhGWxWqxYFldl+KAXy1xcq8BLktwN5b4JWYjk34R41kmK0CkvNKlI51mpMg==
-X-Received: by 2002:a05:600c:1554:b0:414:63da:a2a2 with SMTP id
- f20-20020a05600c155400b0041463daa2a2mr523604wmg.29.1712304185337; 
- Fri, 05 Apr 2024 01:03:05 -0700 (PDT)
-Received: from [192.168.123.161]
- (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ d=1e100.net; s=20230601; t=1712304305; x=1712909105;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=C6ov5uYJgD1UD1YYevfoPhMnvkDHqnItJx8IB88ap8o=;
+ b=M6xe7GyOt3mV2HDRrIIalfmzWf431+8fVh1ehHWXVjS2VZhxgRhVvWZVjcWnjGi5+9
+ FKYCh8l8JdSwQWqK2LdIgclxQOxrG+Pf32yDRRRCq5U1EdgRl8dpR/HJZInZAFR65HUe
+ pzPA9VP9QQ3RzQ6laCBfftjOcxkxkPLnv9FI7I1k4q4Z4cL07NLYM7vypPvFY/5QuoQ7
+ YPSFya/ao3tG9zB09DjwgR0HTvx/C+F7+ebYYMir7QAKE0jKkMLNPQUr96LH98bSvI5g
+ 3WS40dEYBy9FT6oyU+eY58SYnxN+sXhoGnBLysuYmrik9LIV8DEfjmloEMsc2KqbLEJj
+ Zy4w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWgkI1fQuqP9Yqv7x6tl4WBBUobk7CjdeXtEg9yMSrYkCq9UMNtqayB7i5ZxKVH0YiCFQapDsZK7YFRX25VOzLDFlLEhw==
+X-Gm-Message-State: AOJu0YzU0XBZYVqc11yjL2nRFq/cE83v8W6xwwVjd3vuw0w4RsCoQ3ML
+ IExmMWLLg0abgB6LACsdARsFER80tUBHWAeVnTaPpQWyNSZPXx+wDFgaOwuj8Ak=
+X-Google-Smtp-Source: AGHT+IFIgnWyfmDvPN+KMDiDFBvcI57EPU6oAHpPxHppuSd15Sbd8cWfxucUrykwt12WyPWxFG/dnQ==
+X-Received: by 2002:a05:600c:1d25:b0:413:f4d1:199e with SMTP id
+ l37-20020a05600c1d2500b00413f4d1199emr714080wms.31.1712304305239; 
+ Fri, 05 Apr 2024 01:05:05 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- l8-20020a1c7908000000b004155387c08esm1981349wme.27.2024.04.05.01.03.04
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Apr 2024 01:03:04 -0700 (PDT)
-Message-ID: <52ad00c9-bd87-4384-81de-133c79c4e6f4@canonical.com>
-Date: Fri, 5 Apr 2024 10:03:03 +0200
+ hn3-20020a05600ca38300b004162b578d8bsm1982317wmb.1.2024.04.05.01.05.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Apr 2024 01:05:04 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Dmitrii Merkurev <dimorinny@google.com>, u-boot@lists.denx.de
+Cc: rammuthiah@google.com, Dmitrii Merkurev <dimorinny@google.com>, Alex
+ Kiernan <alex.kiernan@gmail.com>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Ying-Chun
+ Liu <paul.liu@linaro.org>
+Subject: Re: [PATCH 3/4] fastboot: blk: introduce fastboot block flashing
+ support
+In-Reply-To: <20240306185921.1854109-3-dimorinny@google.com>
+References: <20240306185921.1854109-1-dimorinny@google.com>
+ <20240306185921.1854109-3-dimorinny@google.com>
+Date: Fri, 05 Apr 2024 10:05:04 +0200
+Message-ID: <87r0fkfd5b.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 33/33] doc: boards: amlogic: add documentation for
- ODROID-HC4
-To: Christian Hewitt <christianshewitt@gmail.com>
-References: <20230320114609.930145-1-christianshewitt@gmail.com>
- <20230320114609.930145-34-christianshewitt@gmail.com>
-Content-Language: en-US
-Cc: u-boot@lists.denx.de, u-boot-amlogic@groups.io,
- linux-amlogic@lists.infradead.org
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20230320114609.930145-34-christianshewitt@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,192 +96,522 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/20/23 12:46, Christian Hewitt wrote:
-> Add separate documentation for the ODROID-HC4 board to ensure
-> users build U-Boot using the HC4 defconfig that enables PCIe
-> SATA boot. This avoids user frustration trying to boot after
-> using the C4 recipe which only works from SD card.
-> 
-> Signed-off-by: Christian Hewitt <christianshewitt@gmail.com>
+Hi Dmitrii,
+
+Thank you for the patch and sorry for the review delay.
+
+On mer., mars 06, 2024 at 18:59, Dmitrii Merkurev <dimorinny@google.com> wrote:
+
+> Reuse common logic between existing mmc and new introduced
+> block implementation
+>
+> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
+> Cc: Alex Kiernan <alex.kiernan@gmail.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+
+This change (when applied along with 1/4 and 2/4) introduces a build for
+sandbox:
+
+$ make sandbox_defconfig
+$ make
+
+[...]
+
+drivers/fastboot/fb_mmc.c: In function 'fastboot_mmc_erase':
+drivers/fastboot/fb_mmc.c:596:16: warning: implicit declaration of function 'fb_block_write'; did you mean 'blk_write'? [-Wimplicit-function-declaration]
+  596 |         blks = fb_block_write(dev_desc, blks_start, blks_size, NULL);
+      |                ^~~~~~~~~~~~~~
+      |                blk_write
+
+[...]
+
+LTO     u-boot
+/usr/bin/ld: /tmp/cczd5cS1.ltrans18.ltrans.o: in function `erase.lto_priv.0':
+/mnt/work/upstream/u-boot/drivers/fastboot/fb_mmc.c:596: undefined reference to `fb_block_write'
+collect2: error: ld returned 1 exit status
+make: *** [Makefile:1798: u-boot] Error 1
+
+
 > ---
->   doc/board/amlogic/index.rst      |   1 +
->   doc/board/amlogic/odroid-hc4.rst | 141 +++++++++++++++++++++++++++++++
->   2 files changed, 142 insertions(+)
->   create mode 100644 doc/board/amlogic/odroid-hc4.rst
-> 
-> diff --git a/doc/board/amlogic/index.rst b/doc/board/amlogic/index.rst
-> index 7c4c161e0d..9b76bca427 100644
-> --- a/doc/board/amlogic/index.rst
-> +++ b/doc/board/amlogic/index.rst
-> @@ -101,6 +101,7 @@ Board Documentation
->      nanopi-k2
->      odroid-c2
->      odroid-c4
-> +   odroid-hc4
->      odroid-n2
->      odroid-n2l
->      odroid-go-ultra
-> diff --git a/doc/board/amlogic/odroid-hc4.rst b/doc/board/amlogic/odroid-hc4.rst
+>  drivers/fastboot/Makefile   |   4 +-
+>  drivers/fastboot/fb_block.c | 200 ++++++++++++++++++++++++++++++++++++
+>  drivers/fastboot/fb_mmc.c   | 120 ++--------------------
+>  include/fb_block.h          |  70 +++++++++++++
+>  4 files changed, 281 insertions(+), 113 deletions(-)
+>  create mode 100644 drivers/fastboot/fb_block.c
+>  create mode 100644 include/fb_block.h
+>
+> diff --git a/drivers/fastboot/Makefile b/drivers/fastboot/Makefile
+> index 048af5aa82..91e98763e8 100644
+> --- a/drivers/fastboot/Makefile
+> +++ b/drivers/fastboot/Makefile
+> @@ -3,5 +3,7 @@
+>  obj-y += fb_common.o
+>  obj-y += fb_getvar.o
+>  obj-y += fb_command.o
+> -obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_mmc.o
+> +obj-$(CONFIG_FASTBOOT_FLASH_BLOCK) += fb_block.o
+> +# MMC reuses block implementation
+> +obj-$(CONFIG_FASTBOOT_FLASH_MMC) += fb_block.o fb_mmc.o
+>  obj-$(CONFIG_FASTBOOT_FLASH_NAND) += fb_nand.o
+> diff --git a/drivers/fastboot/fb_block.c b/drivers/fastboot/fb_block.c
 > new file mode 100644
-> index 0000000000..94c3312022
+> index 0000000000..908decd544
 > --- /dev/null
-> +++ b/doc/board/amlogic/odroid-hc4.rst
-> @@ -0,0 +1,141 @@
-> +.. SPDX-License-Identifier: GPL-2.0+
+> +++ b/drivers/fastboot/fb_block.c
+> @@ -0,0 +1,200 @@
+> +// SPDX-License-Identifier: BSD-2-Clause
+> +/*
+> + * Copyright (C) 2024 The Android Open Source Project
+> + */
 > +
-> +U-Boot for ODROID-HC4 (S905X3)
-> +==============================
+> +#include <blk.h>
+> +#include <div64.h>
+> +#include <fastboot-internal.h>
+> +#include <fastboot.h>
+> +#include <fb_block.h>
+> +#include <image-sparse.h>
+> +#include <part.h>
 > +
-> +ODROID-HC4 is a variant of the ODROID-C4 single board computer manufactured by Hardkernel
-> +with the following specification:
+> +/**
+> + * FASTBOOT_MAX_BLOCKS_ERASE - maximum blocks to erase per derase call
+> + *
+> + * in the ERASE case we can have much larger buffer size since
+> + * we're not transferring an actual buffer
+> + */
+> +#define FASTBOOT_MAX_BLOCKS_ERASE 1048576
+> +/**
+> + * FASTBOOT_MAX_BLOCKS_WRITE - maximum blocks to write per dwrite call
+> + */
+> +#define FASTBOOT_MAX_BLOCKS_WRITE 65536
 > +
-> + - Amlogic S905X3 Arm Cortex-A55 quad-core SoC
-> + - 4GB DDR4 SDRAM
-> + - 16MB XT25F128B SPI-NOR flash
-> + - Gigabit Ethernet
-> + - HDMI 2.1 display
-> + - 7-pin GPIO header for OLED display and RTC
-> + - 1x USB 2.0 host (micro)
-> + - 2x SATA ports via ASM1061 PCIe to SATA controller
-> + - microSD
-> + - UART serial
-> + - Infrared receiver
+> +struct fb_block_sparse {
+> +	struct blk_desc	*dev_desc;
+> +};
 > +
-> +Schematics are available on the manufacturer website.
+> +static lbaint_t fb_block_write(struct blk_desc *block_dev, lbaint_t start,
+> +			       lbaint_t blkcnt, const void *buffer)
+> +{
+> +	lbaint_t blk = start;
+> +	lbaint_t blks_written = 0;
+> +	lbaint_t cur_blkcnt = 0;
+> +	lbaint_t blks = 0;
+> +	int step = buffer ? FASTBOOT_MAX_BLOCKS_WRITE : FASTBOOT_MAX_BLOCKS_ERASE;
+> +	int i;
 > +
-> +U-Boot Compilation
-> +------------------
+> +	for (i = 0; i < blkcnt; i += step) {
+> +		cur_blkcnt = min((int)blkcnt - i, step);
+> +		if (buffer) {
+> +			if (fastboot_progress_callback)
+> +				fastboot_progress_callback("writing");
+> +			blks_written = blk_dwrite(block_dev, blk, cur_blkcnt,
+> +						  buffer + (i * block_dev->blksz));
+> +		} else {
+> +			if (fastboot_progress_callback)
+> +				fastboot_progress_callback("erasing");
+> +			blks_written = blk_derase(block_dev, blk, cur_blkcnt);
+> +		}
+> +		blk += blks_written;
+> +		blks += blks_written;
+> +	}
+> +	return blks;
+> +}
 > +
-> +.. code-block:: bash
+> +static lbaint_t fb_block_sparse_write(struct sparse_storage *info,
+> +				      lbaint_t blk, lbaint_t blkcnt,
+> +				      const void *buffer)
+> +{
+> +	struct fb_block_sparse *sparse = info->priv;
+> +	struct blk_desc *dev_desc = sparse->dev_desc;
 > +
-> +    $ export CROSS_COMPILE=aarch64-none-elf-
-> +    $ make odroid-hc4_defconfig
-> +    $ make
+> +	return fb_block_write(dev_desc, blk, blkcnt, buffer);
+> +}
 > +
-> +U-Boot Signing with Pre-Built FIP repo
-> +--------------------------------------
+> +static lbaint_t fb_block_sparse_reserve(struct sparse_storage *info,
+> +					lbaint_t blk, lbaint_t blkcnt)
+> +{
+> +	return blkcnt;
+> +}
 > +
-> +.. code-block:: bash
-> +    $ git clone https://github.com/LibreELEC/amlogic-boot-fip --depth=1
-> +    $ cd amlogic-boot-fip
-> +    $ mkdir my-output-dir
-> +    $ ./build-fip.sh odroid-hc4 /path/to/u-boot/u-boot.bin my-output-dir
+> +int fastboot_block_get_part_info(const char *part_name,
+> +				 struct blk_desc **dev_desc,
+> +				 struct disk_partition *part_info,
+> +				 char *response)
+> +{
+> +	int ret;
+> +	const char *interface = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+> +						   CONFIG_FASTBOOT_FLASH_BLOCK_INTERFACE_NAME,
+> +						   NULL);
+> +	const int device = config_opt_enabled(CONFIG_FASTBOOT_FLASH_BLOCK,
+> +					      CONFIG_FASTBOOT_FLASH_BLOCK_DEVICE_ID, -1);
 > +
-> +U-Boot Manual Signing
-> +---------------------
+> +	if (!part_name || !strcmp(part_name, "")) {
+> +		fastboot_fail("partition not given", response);
+> +		return -ENOENT;
+> +	}
+> +	if (!interface || !strcmp(interface, "")) {
+> +		fastboot_fail("block interface isn't provided", response);
+> +		return -EINVAL;
+> +	}
 > +
-> +Amlogic does not provide sources for the firmware and tools needed to create a bootloader
-> +image so it is necessary to obtain binaries from sources published by the board vendor:
+> +	*dev_desc = blk_get_dev(interface, device);
+> +	if (!dev_desc) {
+> +		fastboot_fail("no such device", response);
+> +		return -ENODEV;
+> +	}
 > +
-> +.. code-block:: bash
+> +	ret = part_get_info_by_name(*dev_desc, part_name, part_info);
+> +	if (ret < 0)
+> +		fastboot_fail("failed to get partition info", response);
 > +
-> +    $ wget https://releases.linaro.org/archive/13.11/components/toolchain/binaries/gcc-linaro-aarch64-none-elf-4.8-2013.11_linux.tar.xz
-> +    $ wget https://releases.linaro.org/archive/13.11/components/toolchain/binaries/gcc-linaro-arm-none-eabi-4.8-2013.11_linux.tar.xz
-> +    $ tar xvfJ gcc-linaro-aarch64-none-elf-4.8-2013.11_linux.tar.xz
-> +    $ tar xvfJ gcc-linaro-arm-none-eabi-4.8-2013.11_linux.tar.xz
-> +    $ export PATH=$PWD/gcc-linaro-aarch64-none-elf-4.8-2013.11_linux/bin:$PWD/gcc-linaro-arm-none-eabi-4.8-2013.11_linux/bin:$PATH
+> +	return ret;
+> +}
 > +
-> +    $ DIR=odroid-hc4
-> +    $ git clone --depth 1 https://github.com/hardkernel/u-boot.git -b odroidg12-v2015.01 $DIR
+> +void fastboot_block_erase(const char *part_name, char *response)
+> +{
+> +	struct blk_desc *dev_desc;
+> +	struct disk_partition part_info;
+> +	lbaint_t written;
 > +
-> +    $ cd odroid-hc4
-> +    $ make odroidc4_defconfig
-> +    $ make
-> +    $ export UBOOTDIR=$PWD
+> +	if (fastboot_block_get_part_info(part_name, &dev_desc, &part_info, response) < 0)
+> +		return;
 > +
-> +Go back to mainline U-Boot source tree then:
+> +	written = fb_block_write(dev_desc, part_info.start, part_info.size, NULL);
+> +	if (written != part_info.size) {
+> +		fastboot_fail("failed to erase partition", response);
+> +		return;
+> +	}
 > +
-> +.. code-block:: bash
+> +	fastboot_okay(NULL, response);
+> +}
 > +
-> +    $ mkdir fip
-
-Thanks a lot for providing all these board descriptions.
-
-Prefixing with $ makes copy-/pasting multiple commands impossible.
-
-I personally feel distracted by the prompts. But if you really want 
-those $ signs displayed, please, use
-
-     .. prompt:: bash $
-
-       mkdir fip
-
-Best regards
-
-Heinrich
-
+> +void fastboot_block_write_raw_image(struct blk_desc *dev_desc,
+> +				    struct disk_partition *info, const char *part_name,
+> +				    void *buffer, u32 download_bytes, char *response)
+> +{
+> +	lbaint_t blkcnt;
+> +	lbaint_t blks;
 > +
-> +    $ wget https://github.com/BayLibre/u-boot/releases/download/v2017.11-libretech-cc/blx_fix_g12a.sh -O fip/blx_fix.sh
-> +    $ cp $UBOOTDIR/build/scp_task/bl301.bin fip/
-> +    $ cp $UBOOTDIR/build/board/hardkernel/odroidc4/firmware/acs.bin fip/
-> +    $ cp $UBOOTDIR/fip/g12a/bl2.bin fip/
-> +    $ cp $UBOOTDIR/fip/g12a/bl30.bin fip/
-> +    $ cp $UBOOTDIR/fip/g12a/bl31.img fip/
-> +    $ cp $UBOOTDIR/fip/g12a/ddr3_1d.fw fip/
-> +    $ cp $UBOOTDIR/fip/g12a/ddr4_1d.fw fip/
-> +    $ cp $UBOOTDIR/fip/g12a/ddr4_2d.fw fip/
-> +    $ cp $UBOOTDIR/fip/g12a/diag_lpddr4.fw fip/
-> +    $ cp $UBOOTDIR/fip/g12a/lpddr3_1d.fw fip/
-> +    $ cp $UBOOTDIR/fip/g12a/lpddr4_1d.fw fip/
-> +    $ cp $UBOOTDIR/fip/g12a/lpddr4_2d.fw fip/
-> +    $ cp $UBOOTDIR/fip/g12a/piei.fw fip/
-> +    $ cp $UBOOTDIR/fip/g12a/aml_ddr.fw fip/
-> +    $ cp u-boot.bin fip/bl33.bin
+> +	/* determine number of blocks to write */
+> +	blkcnt = ((download_bytes + (info->blksz - 1)) & ~(info->blksz - 1));
+> +	blkcnt = lldiv(blkcnt, info->blksz);
 > +
-> +    $ sh fip/blx_fix.sh \
-> +         fip/bl30.bin \
-> +         fip/zero_tmp \
-> +         fip/bl30_zero.bin \
-> +         fip/bl301.bin \
-> +         fip/bl301_zero.bin \
-> +         fip/bl30_new.bin \
-> +         bl30
+> +	if (blkcnt > info->size) {
+> +		pr_err("too large for partition: '%s'\n", part_name);
+> +		fastboot_fail("too large for partition", response);
+> +		return;
+> +	}
 > +
-> +    $ sh fip/blx_fix.sh \
-> +         fip/bl2.bin \
-> +         fip/zero_tmp \
-> +         fip/bl2_zero.bin \
-> +         fip/acs.bin \
-> +         fip/bl21_zero.bin \
-> +         fip/bl2_new.bin \
-> +         bl2
+> +	puts("Flashing Raw Image\n");
 > +
-> +    $ $UBOOTDIR/fip/g12a/aml_encrypt_g12a --bl30sig --input fip/bl30_new.bin \
-> +                                                    --output fip/bl30_new.bin.g12a.enc \
-> +                                                    --level v3
-> +    $ $UBOOTDIR/fip/g12a/aml_encrypt_g12a --bl3sig --input fip/bl30_new.bin.g12a.enc \
-> +                                                   --output fip/bl30_new.bin.enc \
-> +                                                   --level v3 --type bl30
-> +    $ $UBOOTDIR/fip/g12a/aml_encrypt_g12a --bl3sig --input fip/bl31.img \
-> +                                                   --output fip/bl31.img.enc \
-> +                                                   --level v3 --type bl31
-> +    $ $UBOOTDIR/fip/g12a/aml_encrypt_g12a --bl3sig --input fip/bl33.bin --compress lz4 \
-> +                                                   --output fip/bl33.bin.enc \
-> +                                                   --level v3 --type bl33 --compress lz4
-> +    $ $UBOOTDIR/fip/g12a/aml_encrypt_g12a --bl2sig --input fip/bl2_new.bin \
-> +                                                   --output fip/bl2.n.bin.sig
-> +    $ $UBOOTDIR/fip/g12a/aml_encrypt_g12a --bootmk \
-> +                                          --output fip/u-boot.bin \
-> +                                          --bl2 fip/bl2.n.bin.sig \
-> +                                          --bl30 fip/bl30_new.bin.enc \
-> +                                          --bl31 fip/bl31.img.enc \
-> +                                          --bl33 fip/bl33.bin.enc \
-> +                                          --ddrfw1 fip/ddr4_1d.fw \
-> +                                          --ddrfw2 fip/ddr4_2d.fw \
-> +                                          --ddrfw3 fip/ddr3_1d.fw \
-> +                                          --ddrfw4 fip/piei.fw \
-> +                                          --ddrfw5 fip/lpddr4_1d.fw \
-> +                                          --ddrfw6 fip/lpddr4_2d.fw \
-> +                                          --ddrfw7 fip/diag_lpddr4.fw \
-> +                                          --ddrfw8 fip/aml_ddr.fw \
-> +                                          --ddrfw9 fip/lpddr3_1d.fw \
-> +                                          --level v3
+> +	blks = fb_block_write(dev_desc, info->start, blkcnt, buffer);
 > +
-> +Then write U-Boot to SD or SPI-NOR with:
+> +	if (blks != blkcnt) {
+> +		pr_err("failed writing to device %d\n", dev_desc->devnum);
+> +		fastboot_fail("failed writing to device", response);
+> +		return;
+> +	}
 > +
-> +.. code-block:: bash
+> +	printf("........ wrote " LBAFU " bytes to '%s'\n", blkcnt * info->blksz,
+> +	       part_name);
+> +	fastboot_okay(NULL, response);
+> +}
 > +
-> +    $ DEV=/dev/boot_device
-> +    $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=512 skip=1 seek=1
-> +    $ dd if=fip/u-boot.bin.sd.bin of=$DEV conv=fsync,notrunc bs=1 count=440
-
+> +void fastboot_block_write_sparse_image(struct blk_desc *dev_desc, struct disk_partition *info,
+> +				       const char *part_name, void *buffer, char *response)
+> +{
+> +	struct fb_block_sparse sparse_priv;
+> +	struct sparse_storage sparse;
+> +	int err;
+> +
+> +	sparse_priv.dev_desc = dev_desc;
+> +
+> +	sparse.blksz = info->blksz;
+> +	sparse.start = info->start;
+> +	sparse.size = info->size;
+> +	sparse.write = fb_block_sparse_write;
+> +	sparse.reserve = fb_block_sparse_reserve;
+> +	sparse.mssg = fastboot_fail;
+> +
+> +	printf("Flashing sparse image at offset " LBAFU "\n",
+> +	       sparse.start);
+> +
+> +	sparse.priv = &sparse_priv;
+> +	err = write_sparse_image(&sparse, part_name, buffer,
+> +				 response);
+> +	if (!err)
+> +		fastboot_okay(NULL, response);
+> +}
+> +
+> +void fastboot_block_flash_write(const char *part_name, void *download_buffer,
+> +				u32 download_bytes, char *response)
+> +{
+> +	struct blk_desc *dev_desc;
+> +	struct disk_partition part_info;
+> +
+> +	if (fastboot_block_get_part_info(part_name, &dev_desc, &part_info, response) < 0)
+> +		return;
+> +
+> +	if (is_sparse_image(download_buffer)) {
+> +		fastboot_block_write_sparse_image(dev_desc, &part_info, part_name,
+> +						  download_buffer, response);
+> +	} else {
+> +		fastboot_block_write_raw_image(dev_desc, &part_info, part_name,
+> +					       download_buffer, download_bytes, response);
+> +	}
+> +}
+> diff --git a/drivers/fastboot/fb_mmc.c b/drivers/fastboot/fb_mmc.c
+> index 060918e491..7894f01f63 100644
+> --- a/drivers/fastboot/fb_mmc.c
+> +++ b/drivers/fastboot/fb_mmc.c
+> @@ -9,6 +9,7 @@
+>  #include <env.h>
+>  #include <fastboot.h>
+>  #include <fastboot-internal.h>
+> +#include <fb_block.h>
+>  #include <fb_mmc.h>
+>  #include <image-sparse.h>
+>  #include <image.h>
+> @@ -21,10 +22,6 @@
+>  
+>  #define BOOT_PARTITION_NAME "boot"
+>  
+> -struct fb_mmc_sparse {
+> -	struct blk_desc	*dev_desc;
+> -};
+> -
+>  static int raw_part_get_info_by_name(struct blk_desc *dev_desc,
+>  				     const char *name,
+>  				     struct disk_partition *info)
+> @@ -115,88 +112,6 @@ static int part_get_info_by_name_or_alias(struct blk_desc **dev_desc,
+>  	return do_get_part_info(dev_desc, name, info);
+>  }
+>  
+> -/**
+> - * fb_mmc_blk_write() - Write/erase MMC in chunks of FASTBOOT_MAX_BLK_WRITE
+> - *
+> - * @block_dev: Pointer to block device
+> - * @start: First block to write/erase
+> - * @blkcnt: Count of blocks
+> - * @buffer: Pointer to data buffer for write or NULL for erase
+> - */
+> -static lbaint_t fb_mmc_blk_write(struct blk_desc *block_dev, lbaint_t start,
+> -				 lbaint_t blkcnt, const void *buffer)
+> -{
+> -	lbaint_t blk = start;
+> -	lbaint_t blks_written;
+> -	lbaint_t cur_blkcnt;
+> -	lbaint_t blks = 0;
+> -	int i;
+> -
+> -	for (i = 0; i < blkcnt; i += FASTBOOT_MAX_BLK_WRITE) {
+> -		cur_blkcnt = min((int)blkcnt - i, FASTBOOT_MAX_BLK_WRITE);
+> -		if (buffer) {
+> -			if (fastboot_progress_callback)
+> -				fastboot_progress_callback("writing");
+> -			blks_written = blk_dwrite(block_dev, blk, cur_blkcnt,
+> -						  buffer + (i * block_dev->blksz));
+> -		} else {
+> -			if (fastboot_progress_callback)
+> -				fastboot_progress_callback("erasing");
+> -			blks_written = blk_derase(block_dev, blk, cur_blkcnt);
+> -		}
+> -		blk += blks_written;
+> -		blks += blks_written;
+> -	}
+> -	return blks;
+> -}
+> -
+> -static lbaint_t fb_mmc_sparse_write(struct sparse_storage *info,
+> -		lbaint_t blk, lbaint_t blkcnt, const void *buffer)
+> -{
+> -	struct fb_mmc_sparse *sparse = info->priv;
+> -	struct blk_desc *dev_desc = sparse->dev_desc;
+> -
+> -	return fb_mmc_blk_write(dev_desc, blk, blkcnt, buffer);
+> -}
+> -
+> -static lbaint_t fb_mmc_sparse_reserve(struct sparse_storage *info,
+> -		lbaint_t blk, lbaint_t blkcnt)
+> -{
+> -	return blkcnt;
+> -}
+> -
+> -static void write_raw_image(struct blk_desc *dev_desc,
+> -			    struct disk_partition *info, const char *part_name,
+> -			    void *buffer, u32 download_bytes, char *response)
+> -{
+> -	lbaint_t blkcnt;
+> -	lbaint_t blks;
+> -
+> -	/* determine number of blocks to write */
+> -	blkcnt = ((download_bytes + (info->blksz - 1)) & ~(info->blksz - 1));
+> -	blkcnt = lldiv(blkcnt, info->blksz);
+> -
+> -	if (blkcnt > info->size) {
+> -		pr_err("too large for partition: '%s'\n", part_name);
+> -		fastboot_fail("too large for partition", response);
+> -		return;
+> -	}
+> -
+> -	puts("Flashing Raw Image\n");
+> -
+> -	blks = fb_mmc_blk_write(dev_desc, info->start, blkcnt, buffer);
+> -
+> -	if (blks != blkcnt) {
+> -		pr_err("failed writing to device %d\n", dev_desc->devnum);
+> -		fastboot_fail("failed writing to device", response);
+> -		return;
+> -	}
+> -
+> -	printf("........ wrote " LBAFU " bytes to '%s'\n", blkcnt * info->blksz,
+> -	       part_name);
+> -	fastboot_okay(NULL, response);
+> -}
+> -
+>  #if defined(CONFIG_FASTBOOT_MMC_BOOT_SUPPORT) || \
+>  	defined(CONFIG_FASTBOOT_MMC_USER_SUPPORT)
+>  static int fb_mmc_erase_mmc_hwpart(struct blk_desc *dev_desc)
+> @@ -205,7 +120,7 @@ static int fb_mmc_erase_mmc_hwpart(struct blk_desc *dev_desc)
+>  
+>  	debug("Start Erasing mmc hwpart[%u]...\n", dev_desc->hwpart);
+>  
+> -	blks = fb_mmc_blk_write(dev_desc, 0, dev_desc->lba, NULL);
+> +	blks = fb_block_write(dev_desc, 0, dev_desc->lba, NULL);
+>  
+>  	if (blks != dev_desc->lba) {
+>  		pr_err("Failed to erase mmc hwpart[%u]\n", dev_desc->hwpart);
+> @@ -249,7 +164,7 @@ static void fb_mmc_boot_ops(struct blk_desc *dev_desc, void *buffer,
+>  
+>  		debug("Start Flashing Image to EMMC_BOOT%d...\n", hwpart);
+>  
+> -		blks = fb_mmc_blk_write(dev_desc, 0, blkcnt, buffer);
+> +		blks = fb_block_write(dev_desc, 0, blkcnt, buffer);
+>  
+>  		if (blks != blkcnt) {
+>  			pr_err("Failed to write EMMC_BOOT%d\n", hwpart);
+> @@ -610,30 +525,11 @@ void fastboot_mmc_flash_write(const char *cmd, void *download_buffer,
+>  		return;
+>  
+>  	if (is_sparse_image(download_buffer)) {
+> -		struct fb_mmc_sparse sparse_priv;
+> -		struct sparse_storage sparse;
+> -		int err;
+> -
+> -		sparse_priv.dev_desc = dev_desc;
+> -
+> -		sparse.blksz = info.blksz;
+> -		sparse.start = info.start;
+> -		sparse.size = info.size;
+> -		sparse.write = fb_mmc_sparse_write;
+> -		sparse.reserve = fb_mmc_sparse_reserve;
+> -		sparse.mssg = fastboot_fail;
+> -
+> -		printf("Flashing sparse image at offset " LBAFU "\n",
+> -		       sparse.start);
+> -
+> -		sparse.priv = &sparse_priv;
+> -		err = write_sparse_image(&sparse, cmd, download_buffer,
+> -					 response);
+> -		if (!err)
+> -			fastboot_okay(NULL, response);
+> +		fastboot_block_write_sparse_image(dev_desc, &info, cmd,
+> +						  download_buffer, response);
+>  	} else {
+> -		write_raw_image(dev_desc, &info, cmd, download_buffer,
+> -				download_bytes, response);
+> +		fastboot_block_write_raw_image(dev_desc, &info, cmd, download_buffer,
+> +					       download_bytes, response);
+>  	}
+>  }
+>  
+> @@ -697,7 +593,7 @@ void fastboot_mmc_erase(const char *cmd, char *response)
+>  	printf("Erasing blocks " LBAFU " to " LBAFU " due to alignment\n",
+>  	       blks_start, blks_start + blks_size);
+>  
+> -	blks = fb_mmc_blk_write(dev_desc, blks_start, blks_size, NULL);
+> +	blks = fb_block_write(dev_desc, blks_start, blks_size, NULL);
+>  
+>  	if (blks != blks_size) {
+>  		pr_err("failed erasing from device %d\n", dev_desc->devnum);
+> diff --git a/include/fb_block.h b/include/fb_block.h
+> new file mode 100644
+> index 0000000000..90208e21a7
+> --- /dev/null
+> +++ b/include/fb_block.h
+> @@ -0,0 +1,70 @@
+> +/* SPDX-License-Identifier: BSD-2-Clause */
+> +/*
+> + * Copyright (C) 2024 The Android Open Source Project
+> + */
+> +
+> +#ifndef _FB_BLOCK_H_
+> +#define _FB_BLOCK_H_
+> +
+> +struct blk_desc;
+> +struct disk_partition;
+> +
+> +/**
+> + * fastboot_block_get_part_info() - Lookup block partition by name
+> + *
+> + * @part_name: Named partition to lookup
+> + * @dev_desc: Pointer to returned blk_desc pointer
+> + * @part_info: Pointer to returned struct disk_partition
+> + * @response: Pointer to fastboot response buffer
+> + */
+> +int fastboot_block_get_part_info(const char *part_name,
+> +				 struct blk_desc **dev_desc,
+> +				 struct disk_partition *part_info,
+> +				 char *response);
+> +
+> +/**
+> + * fastboot_block_erase() - Erase partition on block device for fastboot
+> + *
+> + * @part_name: Named partition to erase
+> + * @response: Pointer to fastboot response buffer
+> + */
+> +void fastboot_block_erase(const char *part_name, char *response);
+> +
+> +/**
+> + * fastboot_block_write_raw_image() - Write raw image to block device
+> + *
+> + * @dev_desc: Block device we're going write to
+> + * @info: Partition we're going write to
+> + * @part_name: Name of partition we're going write to
+> + * @buffer: Downloaded buffer pointer
+> + * @download_bytes: Size of content on downloaded buffer pointer
+> + * @response: Pointer to fastboot response buffer
+> + */
+> +void fastboot_block_write_raw_image(struct blk_desc *dev_desc,
+> +				    struct disk_partition *info, const char *part_name,
+> +				    void *buffer, u32 download_bytes, char *response);
+> +
+> +/**
+> + * fastboot_block_write_sparse_image() - Write sparse image to block device
+> + *
+> + * @dev_desc: Block device we're going write to
+> + * @info: Partition we're going write to
+> + * @part_name: Name of partition we're going write to
+> + * @buffer: Downloaded buffer pointer
+> + * @response: Pointer to fastboot response buffer
+> + */
+> +void fastboot_block_write_sparse_image(struct blk_desc *dev_desc, struct disk_partition *info,
+> +				       const char *part_name, void *buffer, char *response);
+> +
+> +/**
+> + * fastboot_block_flash_write() - Write image to block device for fastboot
+> + *
+> + * @part_name: Named partition to write image to
+> + * @download_buffer: Pointer to image data
+> + * @download_bytes: Size of image data
+> + * @response: Pointer to fastboot response buffer
+> + */
+> +void fastboot_block_flash_write(const char *part_name, void *download_buffer,
+> +				u32 download_bytes, char *response);
+> +
+> +#endif // _FB_BLOCK_H_
+> -- 
+> 2.44.0.278.ge034bb2e1d-goog
