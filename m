@@ -4,74 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 578E9CD11C2
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 16:49:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFC16CD11C2
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 16:50:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1C5B884EC;
-	Fri,  5 Apr 2024 18:49:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 710C688444;
+	Fri,  5 Apr 2024 18:50:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XKlUMH09";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dL6+i97C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 921E1884F7; Fri,  5 Apr 2024 18:49:41 +0200 (CEST)
-Received: from mail-pg1-x529.google.com (mail-pg1-x529.google.com
- [IPv6:2607:f8b0:4864:20::529])
+ id 1D76588440; Fri,  5 Apr 2024 18:50:27 +0200 (CEST)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7AED8883E0
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 18:49:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2821188444
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 18:50:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x529.google.com with SMTP id
- 41be03b00d2f7-5cfcf509fbdso440348a12.1
- for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 09:49:39 -0700 (PDT)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2a2fbbd6cd6so336014a91.1
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 09:50:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712335778; x=1712940578; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1712335822; x=1712940622; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V0+NWBUEHS5Pc8OPryk6IJy+B7I6izI2nBilH8G5cEI=;
- b=XKlUMH09X6NNQnRT3viS4KKcpA8Dr3TSTd0C2PfOuqt6kPStkp2m5NS2sqh3IIQvMp
- wEX2+Nbg+RoceeTiub/ZggL4HFjQarRZFhaOQ/9Xd9OO2Al/73y/sL0w+OwHTqNt/kVj
- DbkWJemmaVDOC2nDGetHYXiNC/ZE+sP4YyZHGjabAjG19z6wlmK7WXW9AMXu5ZVQajQH
- q1XXK0WX7WGH+03HCxMiIldNZ+waJpAEy1YtwgNRFBvLT9CbPIN1uVHJvyAuMCFK+SGp
- 2WBz7P3jRmJkPEEEhBXJ3ZLYdub5Ct6CslFaZaqNqVIDwTNPLTMdiyJQrWnCJTIZgOKx
- Mu0w==
+ bh=nCm9ziP1yAp8Nr84lDAn7DO5AeOUFdU/xc69tF/+WpA=;
+ b=dL6+i97CyMEAlVD3mM8phxCievBDlHNY5D4r9RWPVEOTJjb+P1I/RECR7U2p1SFOmF
+ +o2wKWHbpp0z/qbYXXCzll0AVK1nHcwVb58LYGsB3Y4ehtdKJHR7gTeR9w0avm1PVyNO
+ uqzg0vU55iuoBn2JekLNvNhcn2kkI5UBo9TH2ypS524y4eBpWdi3Vib5RX36lhyei5aL
+ YYogf1oGuiae8mTo3zLKpQ1TszZmqKMR6Y8yOzhCwjDOOzdwNZ1laD6v2Le4T+Ld9nBi
+ Y340cq/S3d5bAI1X4is50NTP5LwL5Mjy2M9aQKAg0WHRaX74UD02NnbOrfUDrbFrILxC
+ dzWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712335778; x=1712940578;
+ d=1e100.net; s=20230601; t=1712335822; x=1712940622;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=V0+NWBUEHS5Pc8OPryk6IJy+B7I6izI2nBilH8G5cEI=;
- b=Bwap8HNs6cN3NzX/lZsxap2LLSLmIGeJkak4dYQkGS0BIsdePqD83Paqzui4rMimzs
- iaAbOfvKWShAXRlZnqVtE7/GrjDf4FDtEank6Xkeylkxsq2CmmcnrHEe9dijQDN2JCOH
- kokZRAJNVedl92bQQv7zKNWKfe1PtZD9kDgv8699PRzPofYrDpgwPg0l3VfIqbA8XzFS
- 0jYtoUOIwfHP7FCqG6gr9BNw/oezPqMyE8PaUlnaSShh/eAzt8GNgaaK/kSp8YqBefih
- VAAAzSm5KHRKm9VtMDYOxBsZ/z5wPimPOk8v8MeTOj3UHIalA7fnRHDQWP2lAdgOgi/U
- YT4Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX7Fius8kbAG9Zv2roXg99worURckFjWbi7pGJKIqSm0LI3G+BCZCZ6ZkGZmHEr0N5Wygepll13XyhB7yauzUjmqS00/A==
-X-Gm-Message-State: AOJu0YwAE/xsjRTKYiQkdNlHOg9lzgFj9fdGVmR6OQZ47mtUSI1vqU8s
- MiTz8X9ZtRfL2wFv3ja5h35ka4d6fHyY3X/tI/cRcuBpv7f1FcdwZkJrCED44sEszKRzXz1CY/n
- V2Q7L/3gaxwjmYvyKbUVeQ+SN2PE=
-X-Google-Smtp-Source: AGHT+IFPqCoi57/KewXLZxj82yuGHKEYKWYhcn9DFjl6fC/PgCFTQQ0t1BwQ6PJFH0mJc+/3Q8UppmvF5spOJ4yY+fM=
-X-Received: by 2002:a17:90a:c695:b0:2a4:949f:3220 with SMTP id
- n21-20020a17090ac69500b002a4949f3220mr427866pjt.3.1712335778046; Fri, 05 Apr
- 2024 09:49:38 -0700 (PDT)
+ bh=nCm9ziP1yAp8Nr84lDAn7DO5AeOUFdU/xc69tF/+WpA=;
+ b=mAQ3FCtJvKra6mR/CUiJA95U11jAi/NPGHpJwD27EzDOtO67sYowmDGhG7IS5AIwvL
+ xb8tqXYwnD+lMpXHpftKRNzcyiMAnWWSZ71qQ8n32GP4QnoWEdWXOe4FZC5VVCWrp7vr
+ NgAuj43XYEhOa3cw4H0+Dw7hKxT22vSN8H5b+VLuK4GP/bMC1QTQWLCfMDl5M30TMgJb
+ zNA0zUSkPrF33H3wgKY9woXPyYOZWTJOZ5FGQuDDP3EYCXBiFaunMvNTL2mw3gkJB9yg
+ zQl4tHSnwWJBsMJozkc2BBiGde2gHtJlimgj6P4TnwflvLTIsXG1SmhSbXoRQ7Zv1o9c
+ svuQ==
+X-Gm-Message-State: AOJu0YwUUyQmx7VgLS8gseIPs/RV2SEPqIy5o1FM6a2GuZ6/TXvJbPp4
+ G//n83N8PV2gxUS2sU+dETFsdVBhkzsN/GijdmIuq3Zmix2uzsgNKZrm1bisseiP24gYEvKRxJS
+ Uld9zQCuO18yaIHKErqGQuqIiWxg=
+X-Google-Smtp-Source: AGHT+IG4iRy55KZWEZRaKKA4CrYI35wkutOPmzlFFsW+xaMy7i3Iu5NcQxcnFf+xjad50iBL//k+6Gi5fWzKZF+8S0o=
+X-Received: by 2002:a17:90b:244:b0:2a2:666f:966d with SMTP id
+ fz4-20020a17090b024400b002a2666f966dmr1918736pjb.1.1712335822638; Fri, 05 Apr
+ 2024 09:50:22 -0700 (PDT)
 MIME-Version: 1.0
-References: <1711935669-26353-1-git-send-email-ye.li@nxp.com>
-In-Reply-To: <1711935669-26353-1-git-send-email-ye.li@nxp.com>
+References: <20240403071555.400843-1-marcel@ziswiler.com>
+In-Reply-To: <20240403071555.400843-1-marcel@ziswiler.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 5 Apr 2024 13:49:26 -0300
-Message-ID: <CAOMZO5Cth=tZOiP3NEZyvzu1_GHRrSS-sH_WkgsyiThKRTXNWQ@mail.gmail.com>
-Subject: Re: [PATCH v2 1/2] arm: imx9: Correct imx9_probe_mu prototype
-To: Ye Li <ye.li@nxp.com>
-Cc: sbabic@denx.de, u-boot@lists.denx.de, peng.fan@nxp.com, uboot-imx@nxp.com, 
- ye.li@oss.nxp.com
+Date: Fri, 5 Apr 2024 13:50:10 -0300
+Message-ID: <CAOMZO5Cz9eNmo5ayMkNe9JJTu8O+XiNVEvvbVYtkQekkmePauA@mail.gmail.com>
+Subject: Re: [PATCH v1] verdin-imx8mm/verdin-imx8mp: move imx verdins to
+ OF_UPSTREAM
+To: Marcel Ziswiler <marcel@ziswiler.com>
+Cc: u-boot@lists.denx.de, "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Adam Ford <aford173@gmail.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Gilles Talis <gilles.talis@gmail.com>, 
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>, Marek Vasut <marex@denx.de>, 
+ Martyn Welch <martyn.welch@collabora.com>, Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Patrick Wildt <patrick@blueri.se>, 
+ Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>,
+ Stefano Babic <sbabic@denx.de>, 
+ Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,14 +102,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Mar 31, 2024 at 10:41=E2=80=AFPM Ye Li <ye.li@nxp.com> wrote:
+On Wed, Apr 3, 2024 at 4:16=E2=80=AFAM Marcel Ziswiler <marcel@ziswiler.com=
+> wrote:
 >
-> Since the event callback imx9_probe_mu is re-defined, update
-> its prototype.
+> From: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 >
-> Signed-off-by: Ye Li <ye.li@nxp.com>
-> ---
-> Changes in v2:
->  Fix imx93_var_som and phycore_imx93 as well
+> Move verdin-imx8mm and verdin-imx8mp to OF_UPSTREAM:
+> - handle the fact that dtbs now have a 'freescale/' prefix
+> - imply OF_UPSTREAM
+> - remove redundant files from arch/arm/dts leaving only the
+>   *-u-boot.dtsi files
+> - update MAINTAINERS files
+>
+> Signed-off-by: Marcel Ziswiler <marcel.ziswiler@toradex.com>
 
-Applied both, thanks.
+Applied, thanks.
