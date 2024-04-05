@@ -4,84 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAD74CD11C2
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 06:18:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2F61CD11C2
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 06:28:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C3B2883EC;
-	Fri,  5 Apr 2024 08:18:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A4DE86DEE;
+	Fri,  5 Apr 2024 08:28:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="NKQrr9dv";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tPzucFD1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA702883EE; Fri,  5 Apr 2024 08:18:46 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 66C0E87D59; Fri,  5 Apr 2024 08:28:05 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D25F883C9
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 08:18:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5AD9580245
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 08:28:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4162b0e21b0so8647215e9.0
- for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 23:18:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712297924; x=1712902724;
- darn=lists.denx.de; 
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=tzSFqr8+hBYLqBOcZvf6xQbmq/SAkHhgASLmZ/OiV0U=;
- b=NKQrr9dvbKLZE6wKwfxftrLD7gMibjzSnVpgDtepiKkDOQqkwshq74DNhII0STws+q
- 7q0rhrBoK56uaQpaoCV6J4CRXZhGIvvhGaUmqxP4RG1l22JP0XIRZ/FW0wZ0RiuOlsoW
- xVvmj9P3NjU8ktD2vj5Yli+7ybRWiNHZQizsqzAFoAcWivzQy/8eHj1ynD6rvleuu60/
- 78WrmGel8yL2Sa2miJYSztc1w9wELRvpUw5Bmg6NjRwhgPIdxiNR8v4A3ba3XZYPEWu8
- tOjEW0Ms4vpsIIa7ReJFjrEvXzWLEY1HwGrXl6jm926tf/fivP1CTtUf5DmUbRZ2EQQs
- CNsA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712297924; x=1712902724;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tzSFqr8+hBYLqBOcZvf6xQbmq/SAkHhgASLmZ/OiV0U=;
- b=eYyUCLEJwSoskYtB4qaoXoFiLAdVsUuRj9alr6NgEJMfM1O+7fqn8eyz5kcvFhz+Ch
- oNVXvNx7OpJgBOAkgdeyFjO/twEhCRO1uvCFE06/pEBJuGZhi253P4NhJO84AiUVzJgt
- Xyu6FVOBtouwnIzftGDMcO4Dc2M+1u1atOE/s7d9xt3cu2K4d9r8C6+fBfFPElQrcYB0
- hoKm3gmFj4b31SflLDn7HO9noDRNLiMndrCxVBHwnPBCTHUEIeGT3E7QjqCSDAPvRdt6
- jvcWCa23qOkM9ZW5+0MuAwkH+eVM+5vu3Gw5bTtHQP3T1n9qR2+sBSMcU6npE2CzRzCb
- j5VA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUYsZfGofpXq98BMs63qEgvYGfvTbpSH2d20ougU584KZPamhJu1jpcr2sVPtcGe7INNWpDkvvFP2g61bPTWh1ZZX4QAw==
-X-Gm-Message-State: AOJu0YzxOHwIl/eKHsMy12KXQ8qUcKimicGA7V5X2kMiN9NRfA5h7Ox4
- BVavzuKO1NR+jBfQamI6JcKuehQsHIEHR9mBc++LFuj4/Dod/YJQZ4UaMWB0wMc0Wmx/76EE5r6
- X
-X-Google-Smtp-Source: AGHT+IHILQCMIyPfMPQe6WeyPThzKkA6F6F8akmatY8Zd4B2ON0TIeRkE9XZq9DSwmOsC3TKCGYvGA==
-X-Received: by 2002:a05:600c:4e06:b0:416:306b:dc91 with SMTP id
- b6-20020a05600c4e0600b00416306bdc91mr227126wmq.41.1712297924423; 
- Thu, 04 Apr 2024 23:18:44 -0700 (PDT)
-Received: from [192.168.1.20] ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
- by smtp.gmail.com with ESMTPSA id
- q18-20020a05600c46d200b00414659ba8c2sm1687528wmo.37.2024.04.04.23.18.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 04 Apr 2024 23:18:44 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Date: Fri, 05 Apr 2024 08:18:42 +0200
-Subject: [PATCH] doc: build: fix gen_compile_commands section level
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1712298481; x=1712903281; i=xypron.glpk@gmx.de;
+ bh=7KL1VLY8LHaI0Zl9BK1GFBxh6HsyeSWgdj/q2z+ub5Q=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=tPzucFD1LtbEkVBOFpxmOSP4VA4FRzpqOzGucdPdBExb0zYcqwJCYEU6w926WGeL
+ 3xoPTLRoZt0OpaXBg+18pODiVdq1kl43ogxTV23u9tXEW3iKDTJpAD8tw0wDnCfKK
+ raiTj0n8L9Qhu8kJi/AeJJ8yziZAbqmHN/zJiphO40SVWXYF8lD3R2xP8LS2ryvQ7
+ pTt1gNZSlTFsI9GabQHfzt5OxZdjqg8hivSa5BIhap79f035OCOXGPnAJqLnQ23/W
+ SxOnjZ4LO0sK+04Ues3cBwRlSwb8Vq5jgW71bJ2gsVJdIHZYtfOkVQb0WqnyuVZn2
+ yv8/FUagMvEkUgNUwQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N1Obh-1sp9oo19Fj-012nMw; Fri, 05
+ Apr 2024 08:28:01 +0200
+Message-ID: <eb1c51e3-17e0-4c76-a703-da18a85a1ba7@gmx.de>
+Date: Fri, 5 Apr 2024 08:27:55 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240405-doc-fix-headings-v1-1-455387c85e54@baylibre.com>
-X-B4-Tracking: v=1; b=H4sIAMGXD2YC/x2MQQqAMAzAviI9W+icFfQr4mG4qr1ssoEI4t8tH
- kNIHqhSVCpMzQNFLq2ak4FrG1iPkHZBjcbQUddTT4wxr7jpjYeEqGmvODga/cCeOXiw7Cxi/l/
- Oy/t+h34r72IAAAA=
-To: Tom Rini <trini@konsulko.com>
-Cc: Joao Marcos Costa <jmcosta944@gmail.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, u-boot@lists.denx.de, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-X-Mailer: b4 0.13.1-dev-5d32f
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: move efi_var_collect to common functions
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Ilias Apalodimas <apalos@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Weizhao Ouyang <o451686892@gmail.com>,
+ u-boot@lists.denx.de
+References: <20240404074819.52156-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240404074819.52156-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:ozfHq9MeRHkdIh8v75VViXDAL3KvKnZdCYFFUSFsTo6ryxD2qiE
+ VbaWv4GECn+vG3am+mIly0MT90fMrLQGJnLbVjWtduaUmHt3ZXOX+Q1RppLtonMH+FHXInH
+ wcW0BaQY0el3zzNm3GoG+qYeHL9knYxkFk5cUqC/rU680nGwmT37zZ4k5SVNH8bh0zP3N5D
+ FAqh8uGME5dsKtSFpiNjQ==
+UI-OutboundReport: notjunk:1;M01:P0:QFEXKYTj5oo=;XcqFbdXJxVZ0HZttJoluRpYHseu
+ sbh2kkWm1hRKwi0g5Ng/E6pOt1NZ+pBb9AvvDjPDrOLgZquf1v/9+nfYEa9uugq4qzOggO5q/
+ VVv7cqPysGnUH8OYb+O7bnke0FaOzBbTV5KjKWbA0nb0LGneRIM7rqjvvScDn2DExT4cepV5g
+ ot2dSnqj/JebPCpOXwF1qPe8a2loyHFqpoKccQ6o4nsIK5pIr3uUtqwhnUF6QyZj7V+e6tEZG
+ lOQpMWmAwebWnYlXolvBeTo5NO4CbD7cwOVZEqt0rOrgbMC4kHwmbmDKbu3PVKG1tXuTge0xk
+ iUcrpPjIaBbN7/V+eswNrfMKlofedHN15xWHjiQRAU8h4YvI/W/XtRjcrfc4Q1CR4SuOvqvev
+ MtbK+lf8xlW77xYXJ/NtSlLJ0hi9Tz/zZlWTX0/vuVyj5W0ID6Lg6C/EJi5vsmXe6MspNUlZY
+ R+wkumqS5Ip8ztZVNphENYbaB7XZmaAL7wD5/+0BO3bhWwjyMoOMevRdirUKrtfBWrwZ0BN7T
+ 0Ez+2Gib4KCjuYT2rV1i1U55wFbpO57Uamgstp2fZDdsE8xzuLGaPr4haFesI0ZvHPSi0Doum
+ wH1Xcp2MrRgX9YP6Z70Z30uf2SX8eXrGQ0A0Wq2BYlhFYrXzDurr/78caKAVeM2b4GTwQuwyB
+ ij7qPybwUAJX7WB/Q/mDW3fOBtdrVLkvCzQl0t1Sr90lRjRfYWGGqbqxBIunIN8/jZAp5dGZ6
+ 36BLyMKRTwlPbHscsQWuvSCQL1G7cy1yT/JEK6SpBgoX55mkMkc9Q0EiRK+q/s2tnvo9xOwTo
+ aD/9wqgsGwodQ7rqfmFb0xDz6waS2h+FJutlDOzO4Vkc8=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,46 +88,231 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The 2 subsections of this page ("Compatible IDEs" and "Usage") are using
-the same header level as the title (with "===").
-Because of this, they always appear in the HTML rendered ToC.
+On 4/4/24 09:48, Ilias Apalodimas wrote:
+> From: Ilias Apalodimas <apalos@gmail.com>
+>
+> efi_var_collect() was initially placed in efi_var_file.c, since back
+> then we only supported efi variables stored in a file. Since then we
+> support variables stored in an RPMB as well and use that function to
+> collect variables that should be present at runtime.
 
-Drop the subsections one level lower by replacing "=" by "-".
-This fixes the HTML rendering.
+Thanks for cleaning this up.
 
-Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
----
- doc/build/gen_compile_commands.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+In the CONFIG_EFI_MM_COMM_TEE=3Dy case we seem not to need efi_var_file.c
+anymore. Can we add this diff:
 
-diff --git a/doc/build/gen_compile_commands.rst b/doc/build/gen_compile_commands.rst
-index 50305cec4a83..d503764f9e3f 100644
---- a/doc/build/gen_compile_commands.rst
-+++ b/doc/build/gen_compile_commands.rst
-@@ -42,7 +42,7 @@ needed for it to be usable by the LSP, unless you set a name for the database
- other than it's default one (compile_commands.json).
- 
- Compatible IDEs
--===============
-+---------------
- 
- Several popular integrated development environments (IDEs) support the use
- of JSON compilation databases for C/C++ development, making it easier to
-@@ -73,7 +73,7 @@ compile_commands.json in the root of the repository should suffice to enable
- code navigation.
- 
- Usage
--=====
-+-----
- 
- For further details on the script's options, please refer to its help message,
- as in the example below.
+=2D-- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -72,11 +72,11 @@ obj-y +=3D efi_string.o
+  obj-$(CONFIG_EFI_UNICODE_COLLATION_PROTOCOL2) +=3D efi_unicode_collation=
+.o
+  obj-y +=3D efi_var_common.o
+  obj-y +=3D efi_var_mem.o
+-obj-y +=3D efi_var_file.o
+  ifeq ($(CONFIG_EFI_MM_COMM_TEE),y)
+  obj-y +=3D efi_variable_tee.o
+  else
+  obj-y +=3D efi_variable.o
++obj-y +=3D efi_var_file.o
+  obj-$(CONFIG_EFI_VARIABLES_PRESEED) +=3D efi_var_seed.o
+  endif
+  obj-y +=3D efi_watchdog.o
 
----
-base-commit: cdfcc37428e06f4730ab9a17cc084eeb7676ea1a
-change-id: 20240405-doc-fix-headings-6109365355a3
+Another comment below.
 
-Best regards,
--- 
-Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>
+> So let's move it around in efi_var_common.c which makes more sense
+>
+> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Signed-off-by: Ilias Apalodimas <apalos@gmail.com>
+> ---
+>   lib/efi_loader/efi_var_common.c | 76 +++++++++++++++++++++++++++++++++
+>   lib/efi_loader/efi_var_file.c   | 64 ---------------------------
+>   2 files changed, 76 insertions(+), 64 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_co=
+mmon.c
+> index 16b2c3d48828..07b9603d49f3 100644
+> --- a/lib/efi_loader/efi_var_common.c
+> +++ b/lib/efi_loader/efi_var_common.c
+> @@ -9,6 +9,7 @@
+>   #include <efi_loader.h>
+>   #include <efi_variable.h>
+>   #include <stdlib.h>
+> +#include <u-boot/crc.h>
+>
+>   enum efi_secure_mode {
+>   	EFI_MODE_SETUP,
+> @@ -416,3 +417,78 @@ void *efi_get_var(const u16 *name, const efi_guid_t=
+ *vendor, efi_uintn_t *size)
+>
+>   	return buf;
+>   }
+> +
+> +/**
+> + * efi_var_collect() - Copy EFI variables mstching attributes mask
+> + *
+> + * @bufp:	buffer containing variable collection
+> + * @lenp:	buffer length
+> + * @attr_mask:	mask of matched attributes
+> + *
+> + * Return:	Status code
+> + */
+> +efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp,=
+ loff_t *lenp,
+> +					    u32 check_attr_mask)
+> +{
+> +	size_t len =3D EFI_VAR_BUF_SIZE;
+> +	struct efi_var_file *buf;
+> +	struct efi_var_entry *var, *old_var;
+> +	size_t old_var_name_length =3D 2;
+> +
+> +	*bufp =3D NULL; /* Avoid double free() */
+> +	buf =3D calloc(1, len);
+> +	if (!buf)
+> +		return EFI_OUT_OF_RESOURCES;
+> +	var =3D buf->var;
+> +	old_var =3D var;
+> +	for (;;) {
+> +		efi_uintn_t data_length, var_name_length;
+> +		u8 *data;
+> +		efi_status_t ret;
+> +
+> +		if ((uintptr_t)buf + len <=3D
+> +		    (uintptr_t)var->name + old_var_name_length)
+> +			return EFI_BUFFER_TOO_SMALL;
+> +
+> +		var_name_length =3D (uintptr_t)buf + len - (uintptr_t)var->name;
+> +		memcpy(var->name, old_var->name, old_var_name_length);
+> +		guidcpy(&var->guid, &old_var->guid);
+> +		ret =3D efi_get_next_variable_name_int(
+> +				&var_name_length, var->name, &var->guid);
+> +		if (ret =3D=3D EFI_NOT_FOUND)
+> +			break;
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			free(buf);
+> +			return ret;
+> +		}
+> +		old_var_name_length =3D var_name_length;
+> +		old_var =3D var;
+> +
+> +		data =3D (u8 *)var->name + old_var_name_length;
+> +		data_length =3D (uintptr_t)buf + len - (uintptr_t)data;
+> +		ret =3D efi_get_variable_int(var->name, &var->guid,
+> +					   &var->attr, &data_length, data,
+> +					   &var->time);
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			free(buf);
+> +			return ret;
+> +		}
+> +		if ((var->attr & check_attr_mask) =3D=3D check_attr_mask) {
+> +			var->length =3D data_length;
+> +			var =3D (struct efi_var_entry *)ALIGN((uintptr_t)data + data_length,=
+ 8);
+> +		}
+> +	}
+> +
+> +	buf->reserved =3D 0;
+> +	buf->magic =3D EFI_VAR_FILE_MAGIC;
+> +	len =3D (uintptr_t)var - (uintptr_t)buf;
+> +	buf->crc32 =3D crc32(0, (u8 *)buf->var,
+> +			   len - sizeof(struct efi_var_file));
+> +	buf->length =3D len;
+> +	*bufp =3D buf;
+> +	*lenp =3D len;
+> +
+> +	return EFI_SUCCESS;
+> +}
+> +
+> +
+
+This produces a warning
+
+.git/rebase-apply/patch:95: new blank line at EOF.
+
+Could you, please, remove the blank lines at the end of the file.
+
+Best regards
+
+Heinrich
+
+> diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file=
+.c
+> index 532b6b40eefe..413e1794e88c 100644
+> --- a/lib/efi_loader/efi_var_file.c
+> +++ b/lib/efi_loader/efi_var_file.c
+> @@ -52,70 +52,6 @@ static efi_status_t __maybe_unused efi_set_blk_dev_to=
+_system_partition(void)
+>   	return EFI_SUCCESS;
+>   }
+>
+> -efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp,=
+ loff_t *lenp,
+> -					    u32 check_attr_mask)
+> -{
+> -	size_t len =3D EFI_VAR_BUF_SIZE;
+> -	struct efi_var_file *buf;
+> -	struct efi_var_entry *var, *old_var;
+> -	size_t old_var_name_length =3D 2;
+> -
+> -	*bufp =3D NULL; /* Avoid double free() */
+> -	buf =3D calloc(1, len);
+> -	if (!buf)
+> -		return EFI_OUT_OF_RESOURCES;
+> -	var =3D buf->var;
+> -	old_var =3D var;
+> -	for (;;) {
+> -		efi_uintn_t data_length, var_name_length;
+> -		u8 *data;
+> -		efi_status_t ret;
+> -
+> -		if ((uintptr_t)buf + len <=3D
+> -		    (uintptr_t)var->name + old_var_name_length)
+> -			return EFI_BUFFER_TOO_SMALL;
+> -
+> -		var_name_length =3D (uintptr_t)buf + len - (uintptr_t)var->name;
+> -		memcpy(var->name, old_var->name, old_var_name_length);
+> -		guidcpy(&var->guid, &old_var->guid);
+> -		ret =3D efi_get_next_variable_name_int(
+> -				&var_name_length, var->name, &var->guid);
+> -		if (ret =3D=3D EFI_NOT_FOUND)
+> -			break;
+> -		if (ret !=3D EFI_SUCCESS) {
+> -			free(buf);
+> -			return ret;
+> -		}
+> -		old_var_name_length =3D var_name_length;
+> -		old_var =3D var;
+> -
+> -		data =3D (u8 *)var->name + old_var_name_length;
+> -		data_length =3D (uintptr_t)buf + len - (uintptr_t)data;
+> -		ret =3D efi_get_variable_int(var->name, &var->guid,
+> -					   &var->attr, &data_length, data,
+> -					   &var->time);
+> -		if (ret !=3D EFI_SUCCESS) {
+> -			free(buf);
+> -			return ret;
+> -		}
+> -		if ((var->attr & check_attr_mask) =3D=3D check_attr_mask) {
+> -			var->length =3D data_length;
+> -			var =3D (struct efi_var_entry *)ALIGN((uintptr_t)data + data_length,=
+ 8);
+> -		}
+> -	}
+> -
+> -	buf->reserved =3D 0;
+> -	buf->magic =3D EFI_VAR_FILE_MAGIC;
+> -	len =3D (uintptr_t)var - (uintptr_t)buf;
+> -	buf->crc32 =3D crc32(0, (u8 *)buf->var,
+> -			   len - sizeof(struct efi_var_file));
+> -	buf->length =3D len;
+> -	*bufp =3D buf;
+> -	*lenp =3D len;
+> -
+> -	return EFI_SUCCESS;
+> -}
+> -
+>   /**
+>    * efi_var_to_file() - save non-volatile variables as file
+>    *
 
