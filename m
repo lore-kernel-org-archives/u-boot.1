@@ -4,94 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED22DC67861
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 07:12:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F02C67861
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 07:16:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4CA0C883EE;
-	Fri,  5 Apr 2024 09:12:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 108CC882BB;
+	Fri,  5 Apr 2024 09:16:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="V6519GP+";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="dnYIxjvA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2197883EE; Fri,  5 Apr 2024 09:12:40 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2899E882BB; Fri,  5 Apr 2024 09:16:33 +0200 (CEST)
+Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
+ [IPv6:2a00:1450:4864:20::42a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9951687F4E
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 09:12:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE831882B2
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 09:16:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 13D643F594
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 07:12:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1712301158;
- bh=MHjoJf+iXove5/U8iPU7hqGSnSEbG186fD+fmhPZ8xY=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=V6519GP+ckyqhFP96iwBp8dblQWEkuBq8DJzYaksm+28X5ffb6A2iVv6MXdJFSnlZ
- Fhbq5+eHakC66Yot5u0OEBHIr6FzZmqDQ0FIVqsGR5p36q9Vi0vRihQGA78/CdCwm6
- BfwUf69y4RLmwQ1tVthDPSnCPchaEBVzrMzfz1vTuicYvZaAQmeU/fn6CKdDqmjyBM
- t3/KfhZGxg/+7EPm/AFPwjcsKxMv8FwnbrJayfKBiQ3xQ69wCTI2VgTLv7daFzJD6M
- oCYz7qsGaAvif7LphA4yynloaYexUZeoFSJSyCYQhuctAHvKZsGxDIHorUZ5pWr95p
- cOqH/003EYddA==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-33ec4fb1a83so818161f8f.2
- for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 00:12:38 -0700 (PDT)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x42a.google.com with SMTP id
+ ffacd0b85a97d-343e7c20686so191467f8f.1
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 00:16:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712301390; x=1712906190;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=PgPpVmvLy7Kg0tG3W8WKTYp5GHZkripSEn6iBZes88M=;
+ b=dnYIxjvAMnc2od7GvGBMwb5i5jnzfoo0TGkvAc8Yzs3s7j7pCabjcHdqZRCVg/Lv8H
+ 1b/JWdNlTeDK9qxzX2rkVx2J02lsaHZ6JjEEyfJK89Vg8D7shKnNI3vT6HhB2dzm6qeE
+ 8YvfJAH95Bsp9dk1hKCVTm3NbNfeVrK9GqP3ZGK1ycFLqqEUo7G6oIWMIEXMi+w+JyTn
+ IhgOT9xRb1/qtAPgBUCuKCYufZPnpBynnnIqedKMyrvjU7OBmPQAz9PysbFayXwxLRbh
+ XwXTvQvhzJGOTLHBkuHFBhis1kCQKhMFa+xEVjcYjnlnvy4xt6B3vajeF3W40H9Q4KQ8
+ z4lA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712301157; x=1712905957;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=MHjoJf+iXove5/U8iPU7hqGSnSEbG186fD+fmhPZ8xY=;
- b=iPaoZ8zVj4UJb2I+g0n5N51OcvACwxI9+zUMbSq/7VvR6Dn87jSSoXNgpxfz/ow8uz
- n4OuNU4aTvJlNcc8uTyfAhgudVQ2fIniyL0xJay5hor44zl1LH/2W6xaH/Vd7BgnztGS
- hZTMWG9sfl0ocnutbGyObgKEkyY3uGm6Bn9NPGTqKl+R6VnqJup3Ekh8SnIwGtf7lEKp
- z8DMWaDSGEhcZfQn9S9x5QwmX0A1FSDoN1EKWDd1JNxVeuclfX6b4AuW//xiy5g7CY8t
- 71dnaOSaIzV9DkUhZVbBcQ+OUjNqWZP7LMA8X2iR7r8NDZC+D0Lmxa/zTWf+vrtvU7qf
- cIzQ==
+ d=1e100.net; s=20230601; t=1712301390; x=1712906190;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=PgPpVmvLy7Kg0tG3W8WKTYp5GHZkripSEn6iBZes88M=;
+ b=fTi4BxnVw1a4xj8vKrXbhduBSFM+HIqnQTfsEbSsbqY0LnuIxLVCryioVn79iLzeMn
+ XevAnGKjGp5oDMKL5b45Ao/SsG+3lo9rbR7eAcaSke/NTE+II0wrAi0x1xrnCjafA17O
+ D00PLhUal87L+rAhp6G1KR5XUGp/+zQBYEUkyxweEk076rI3IkIvshozkzxKi6J6uIao
+ 7sV6Dp2xX9X4etSjYDPYr7vSwhJIOS/wgzURirUWliDwdXBOA/T93dZrIRWPRQPHm41U
+ 0nDkKeYIDLeadR2RhEdvXqaYbQgfaIlnovniOvQnTZ9k4/2ZtdXD1Ut3c+/zhH6INzZh
+ Oj9g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUq7g/76RM8Ge96V0hxrO5/11DJNgzwA7cQ9B6MxFMHhn14lBdjhEM3CZVhF2+quTFTmk7/3EFFczUDcHKnj7WMDVsDiA==
-X-Gm-Message-State: AOJu0YzufBKuRdi6yUIHvPrw+6iLFwbXRLvNOLkrnnSTuyelRE7nZJei
- dMmA1BaMAOAlg5ksKHZJU8/UacIVSL3ucgPwKPM78yge0JqgzhjRxQ0Yguc7qzQQwysv43spQGq
- vekXZjWhyk9DWIONuUnLBbeuitkZF5wnU3nwv86mHGBPljBJGZJeCqTNglZQyl0dG3JM=
-X-Received: by 2002:a5d:4045:0:b0:33e:bf11:a007 with SMTP id
- w5-20020a5d4045000000b0033ebf11a007mr394101wrp.31.1712301157745; 
- Fri, 05 Apr 2024 00:12:37 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHaMlOLdQuSrLseQAG2TC9ayWDXtXNfI3LB4eHrj3u3zz/AZEhlXGJF47QEIXCLnqh25lKARg==
-X-Received: by 2002:a5d:4045:0:b0:33e:bf11:a007 with SMTP id
- w5-20020a5d4045000000b0033ebf11a007mr394087wrp.31.1712301157371; 
- Fri, 05 Apr 2024 00:12:37 -0700 (PDT)
-Received: from [192.168.123.161]
- (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ AJvYcCUI+YUQYYXa1HSTzzrAx+ikYIAUXE5wiCJvjiFiFGkBSrK3mxKyDlVe1ycffVWVeJgaYL5pxzdJou/DrJtkVhVkvG3//g==
+X-Gm-Message-State: AOJu0YwhqxKaNy3+ywIMuYz1HcgAU1T1hYPvWE+dNnc0IYm6D/vxMwss
+ YkV5iAp24i6jBjT+rhm+UXEaFm8lCys6q6VRPqgG5Zyn3iZjQ2ItLdujBc+R/BU=
+X-Google-Smtp-Source: AGHT+IGC040YPKSjonltCAGxgjYeh4JEjEx8Md97EnXzSv9hL9lmxB0TBEILusVT6wNwkLgSwMqmDg==
+X-Received: by 2002:a05:6000:b0f:b0:343:97c9:528 with SMTP id
+ dj15-20020a0560000b0f00b0034397c90528mr443852wrb.64.1712301390198; 
+ Fri, 05 Apr 2024 00:16:30 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- y4-20020a056000108400b00343bccbe0c7sm1273412wrw.26.2024.04.05.00.12.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Apr 2024 00:12:36 -0700 (PDT)
-Message-ID: <e9a8767d-27af-45cd-87b7-e2cbe188db56@canonical.com>
-Date: Fri, 5 Apr 2024 09:12:34 +0200
+ s7-20020adfea87000000b0033e7de97214sm1287674wrm.40.2024.04.05.00.16.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Apr 2024 00:16:29 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Dmitrii Merkurev <dimorinny@google.com>, u-boot@lists.denx.de
+Cc: rammuthiah@google.com, Dmitrii Merkurev <dimorinny@google.com>, Cody
+ Schuffelen <schuffelen@google.com>, Tuomas Tynkkynen
+ <tuomas.tynkkynen@iki.fi>, Simon Glass <sjg@chromium.org>, Ying-Chun Liu
+ <paul.liu@linaro.org>, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [PATCH 1/4] virtio: blk: introduce virtio-block erase support
+In-Reply-To: <20240306185921.1854109-1-dimorinny@google.com>
+References: <20240306185921.1854109-1-dimorinny@google.com>
+Date: Fri, 05 Apr 2024 09:16:28 +0200
+Message-ID: <87wmpcffeb.fsf@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: access __efi_runtime_start/stop without &
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Bin Meng <bmeng@tinylab.org>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-References: <20240404063535.469995-1-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240404063535.469995-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,52 +94,289 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/4/24 08:35, Ilias Apalodimas wrote:
-> A symbol defined in a linker script (e.g. __efi_runtime_start = .;) is
-> only a symbol, not a variable and should not be dereferenced.
-> The common practice is either define it as
-> extern uint32_t __efi_runtime_start or
-> extern char __efi_runtime_start[] and access it as
-> &__efi_runtime_start or __efi_runtime_start respectively.
-> 
-> So let's access it properly since we define it as an array
+Hi Dmitrii,
 
-Thanks for investigating this.
+Thank you for the patch.
 
-Beyond this patch I guess we should eliminate these duplicate defintions:
+I'm not the virtio maintainer in U-Boot:
 
-include/asm-generic/sections.h:38:extern char __efi_runtime_start[], 
-__efi_runtime_stop[];
-include/efi_loader.h:348:extern char __efi_runtime_start[], 
-__efi_runtime_stop[];
+/mnt/work/upstream/u-boot/ $ ./scripts/get_maintainer.pl drivers/virtio/
+Bin Meng <bmeng.cn@gmail.com> (maintainer:VirtIO)
+[...]
 
-> 
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+I've added Bin to the Cc list, please include him if you re-submit.
+
+On mer., mars 06, 2024 at 18:59, Dmitrii Merkurev <dimorinny@google.com> wrote:
+
+> Co-developed-by: Cody Schuffelen <schuffelen@google.com>
+> Signed-off-by: Cody Schuffelen <schuffelen@google.com>
+> Signed-off-by: Dmitrii Merkurev <dimorinny@google.com>
+> Cc: Tuomas Tynkkynen <tuomas.tynkkynen@iki.fi>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+> Cc: Ying-Chun Liu (PaulLiu) <paul.liu@linaro.org>
+
+I'm not super familiar with virtio, so I've not reviewed this.
+
+However, I tested the sandbox unit tests:
+
+uboot@db354723333a:/mnt/work/upstream/u-boot$ ./u-boot -T -c "ut dm virtio*"
+Bloblist at b000 not found (err=-2)
+sandbox_serial serial: pinctrl_select_state_full: uclass_get_device_by_phandle_id: err=-19
+
+
+U-Boot 2024.04-00137-g075feb52299 (Apr 05 2024 - 07:12:35 +0000)
+
+Reset Status: WARM Reset Status: COLD
+Model: sandbox
+DRAM:  256 MiB
+[nvmxip-qspi1@08000000]: the block device blk#2 ready for use
+[nvmxip-qspi2@08200000]: the block device blk#2 ready for use
+Core:  286 devices, 101 uclasses, devicetree: board
+WDT:   Not starting wdt-gpio-toggle
+WDT:   Not starting wdt-gpio-level
+WDT:   Not starting wdt@0
+NAND:  4100 MiB
+MMC:   mmc2: 2 (SD), mmc1: 1 (SD), mmc0: 0 (SD)
+Loading Environment from nowhere... OK
+In:    serial,cros-ec-keyb,usbkbd
+Out:   serial,vidconsole
+Err:   serial,vidconsole
+Model: sandbox
+Net:   eth0: eth@10002000, eth5: eth@10003000, eth3: sbe5, eth6: eth@10004000, eth8: phy-test-eth, eth4: dsa-test-eth, eth2: lan0, eth7: lan1
+Test: dm_test_virtio_all_ops: virtio_device.c
+Test: dm_test_virtio_all_ops: virtio_device.c (flat tree)
+Test: dm_test_virtio_base: virtio_device.c
+Test: dm_test_virtio_base: virtio_device.c (flat tree)
+Test: dm_test_virtio_missing_ops: virtio.c
+Test: dm_test_virtio_missing_ops: virtio.c (flat tree)
+Test: dm_test_virtio_remove: virtio_device.c
+Test: dm_test_virtio_remove: virtio_device.c (flat tree)
+Test: dm_test_virtio_ring: virtio_device.c
+Test: dm_test_virtio_ring: virtio_device.c (flat tree)
+Test: dm_test_virtio_rng_check_len: virtio_rng.c
+Test: dm_test_virtio_rng_check_len: virtio_rng.c (flat tree)
+Failures: 0
+
+Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # sandbox
+
 > ---
->   lib/efi_loader/efi_memory.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index edfad2d95a1d..98f104390c8d 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -933,8 +933,8 @@ static void add_u_boot_and_runtime(void)
->   	 * Add Runtime Services. We mark surrounding boottime code as runtime as
->   	 * well to fulfill the runtime alignment constraints but avoid padding.
->   	 */
-> -	runtime_start = (ulong)&__efi_runtime_start & ~runtime_mask;
-> -	runtime_end = (ulong)&__efi_runtime_stop;
-> +	runtime_start = (ulong)__efi_runtime_start & ~runtime_mask;
-
-Using (uintptr_t) would make it clearer that we are converting from a 
-pointer to an integer type.
-
-Best regards
-
-Heinrich
-
-> +	runtime_end = (ulong)__efi_runtime_stop;
->   	runtime_end = (runtime_end + runtime_mask) & ~runtime_mask;
->   	runtime_pages = (runtime_end - runtime_start) >> EFI_PAGE_SHIFT;
->   	efi_add_memory_map_pg(runtime_start, runtime_pages,
-
+>  drivers/virtio/virtio_blk.c | 91 +++++++++++++++++++++++++++++++------
+>  drivers/virtio/virtio_blk.h | 47 +++++++++++++++++++
+>  2 files changed, 124 insertions(+), 14 deletions(-)
+>
+> diff --git a/drivers/virtio/virtio_blk.c b/drivers/virtio/virtio_blk.c
+> index 9581058286..225b65c4d1 100644
+> --- a/drivers/virtio/virtio_blk.c
+> +++ b/drivers/virtio/virtio_blk.c
+> @@ -19,30 +19,82 @@ struct virtio_blk_priv {
+>  	struct virtqueue *vq;
+>  };
+>  
+> +static const u32 feature[] = {
+> +	VIRTIO_BLK_F_WRITE_ZEROES
+> +};
+> +
+> +static void virtio_blk_init_header_sg(struct udevice *dev, u64 sector, u32 type,
+> +				      struct virtio_blk_outhdr *out_hdr, struct virtio_sg *sg)
+> +{
+> +	const bool sector_is_needed = type == VIRTIO_BLK_T_IN ||
+> +				      type == VIRTIO_BLK_T_OUT;
+> +
+> +	out_hdr->type = cpu_to_virtio32(dev, type);
+> +	out_hdr->sector = cpu_to_virtio64(dev, sector_is_needed ? sector : 0);
+> +
+> +	sg->addr = out_hdr;
+> +	sg->length = sizeof(*out_hdr);
+> +}
+> +
+> +static void virtio_blk_init_write_zeroes_sg(struct udevice *dev, u64 sector, lbaint_t blkcnt,
+> +					    struct virtio_blk_discard_write_zeroes *wz,
+> +					    struct virtio_sg *sg)
+> +{
+> +	wz->sector = cpu_to_virtio64(dev, sector);
+> +	wz->num_sectors = cpu_to_virtio32(dev, blkcnt);
+> +	wz->flags = cpu_to_virtio32(dev, 0);
+> +
+> +	sg->addr = wz;
+> +	sg->length = sizeof(*wz);
+> +}
+> +
+> +static void virtio_blk_init_status_sg(u8 *status, struct virtio_sg *sg)
+> +{
+> +	sg->addr = status;
+> +	sg->length = sizeof(*status);
+> +}
+> +
+> +static void virtio_blk_init_data_sg(void *buffer, lbaint_t blkcnt, struct virtio_sg *sg)
+> +{
+> +	sg->addr = buffer;
+> +	sg->length = blkcnt * 512;
+> +}
+> +
+>  static ulong virtio_blk_do_req(struct udevice *dev, u64 sector,
+>  			       lbaint_t blkcnt, void *buffer, u32 type)
+>  {
+>  	struct virtio_blk_priv *priv = dev_get_priv(dev);
+> +	struct virtio_blk_outhdr out_hdr;
+> +	struct virtio_blk_discard_write_zeroes wz_hdr;
+>  	unsigned int num_out = 0, num_in = 0;
+> +	struct virtio_sg hdr_sg, wz_sg, data_sg, status_sg;
+>  	struct virtio_sg *sgs[3];
+>  	u8 status;
+>  	int ret;
+>  
+> -	struct virtio_blk_outhdr out_hdr = {
+> -		.type = cpu_to_virtio32(dev, type),
+> -		.sector = cpu_to_virtio64(dev, sector),
+> -	};
+> -	struct virtio_sg hdr_sg = { &out_hdr, sizeof(out_hdr) };
+> -	struct virtio_sg data_sg = { buffer, blkcnt * 512 };
+> -	struct virtio_sg status_sg = { &status, sizeof(status) };
+> -
+> +	virtio_blk_init_header_sg(dev, sector, type, &out_hdr, &hdr_sg);
+>  	sgs[num_out++] = &hdr_sg;
+>  
+> -	if (type & VIRTIO_BLK_T_OUT)
+> -		sgs[num_out++] = &data_sg;
+> -	else
+> -		sgs[num_out + num_in++] = &data_sg;
+> -
+> +	switch (type) {
+> +	case VIRTIO_BLK_T_IN:
+> +	case VIRTIO_BLK_T_OUT:
+> +		virtio_blk_init_data_sg(buffer, blkcnt, &data_sg);
+> +		if (type & VIRTIO_BLK_T_OUT)
+> +			sgs[num_out++] = &data_sg;
+> +		else
+> +			sgs[num_out + num_in++] = &data_sg;
+> +		break;
+> +
+> +	case VIRTIO_BLK_T_WRITE_ZEROES:
+> +		virtio_blk_init_write_zeroes_sg(dev, sector, blkcnt, &wz_hdr, &wz_sg);
+> +		sgs[num_out++] = &wz_sg;
+> +		break;
+> +
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +
+> +	virtio_blk_init_status_sg(&status, &status_sg);
+>  	sgs[num_out + num_in++] = &status_sg;
+>  	log_debug("dev=%s, active=%d, priv=%p, priv->vq=%p\n", dev->name,
+>  		  device_active(dev), priv, priv->vq);
+> @@ -76,6 +128,15 @@ static ulong virtio_blk_write(struct udevice *dev, lbaint_t start,
+>  				 VIRTIO_BLK_T_OUT);
+>  }
+>  
+> +static ulong virtio_blk_erase(struct udevice *dev, lbaint_t start,
+> +			      lbaint_t blkcnt)
+> +{
+> +	if (!virtio_has_feature(dev, VIRTIO_BLK_F_WRITE_ZEROES))
+> +		return -EOPNOTSUPP;
+> +
+> +	return virtio_blk_do_req(dev, start, blkcnt, NULL, VIRTIO_BLK_T_WRITE_ZEROES);
+> +}
+> +
+>  static int virtio_blk_bind(struct udevice *dev)
+>  {
+>  	struct virtio_dev_priv *uc_priv = dev_get_uclass_priv(dev->parent);
+> @@ -105,7 +166,8 @@ static int virtio_blk_bind(struct udevice *dev)
+>  	desc->bdev = dev;
+>  
+>  	/* Indicate what driver features we support */
+> -	virtio_driver_features_init(uc_priv, NULL, 0, NULL, 0);
+> +	virtio_driver_features_init(uc_priv, feature, ARRAY_SIZE(feature),
+> +				    NULL, 0);
+>  
+>  	return 0;
+>  }
+> @@ -132,6 +194,7 @@ static int virtio_blk_probe(struct udevice *dev)
+>  static const struct blk_ops virtio_blk_ops = {
+>  	.read	= virtio_blk_read,
+>  	.write	= virtio_blk_write,
+> +	.erase	= virtio_blk_erase,
+>  };
+>  
+>  U_BOOT_DRIVER(virtio_blk) = {
+> diff --git a/drivers/virtio/virtio_blk.h b/drivers/virtio/virtio_blk.h
+> index 8d8e02fa2e..b37ba264df 100644
+> --- a/drivers/virtio/virtio_blk.h
+> +++ b/drivers/virtio/virtio_blk.h
+> @@ -17,6 +17,8 @@
+>  #define VIRTIO_BLK_F_BLK_SIZE	6	/* Block size of disk is available */
+>  #define VIRTIO_BLK_F_TOPOLOGY	10	/* Topology information is available */
+>  #define VIRTIO_BLK_F_MQ		12	/* Support more than one vq */
+> +#define VIRTIO_BLK_F_DISCARD	13	/* Discard is supported */
+> +#define VIRTIO_BLK_F_WRITE_ZEROES	14	/* Write zeroes is supported */
+>  
+>  /* Legacy feature bits */
+>  #ifndef VIRTIO_BLK_NO_LEGACY
+> @@ -65,6 +67,39 @@ struct __packed virtio_blk_config {
+>  
+>  	/* number of vqs, only available when VIRTIO_BLK_F_MQ is set */
+>  	__u16 num_queues;
+> +
+> +	/* the next 3 entries are guarded by VIRTIO_BLK_F_DISCARD */
+> +	/*
+> +	 * The maximum discard sectors (in 512-byte sectors) for
+> +	 * one segment.
+> +	 */
+> +	__u32 max_discard_sectors;
+> +	/*
+> +	 * The maximum number of discard segments in a
+> +	 * discard command.
+> +	 */
+> +	__u32 max_discard_seg;
+> +	/* Discard commands must be aligned to this number of sectors. */
+> +	__u32 discard_sector_alignment;
+> +
+> +	/* the next 3 entries are guarded by VIRTIO_BLK_F_WRITE_ZEROES */
+> +	/*
+> +	 * The maximum number of write zeroes sectors (in 512-byte sectors) in
+> +	 * one segment.
+> +	 */
+> +	__u32 max_write_zeroes_sectors;
+> +	/*
+> +	 * The maximum number of segments in a write zeroes
+> +	 * command.
+> +	 */
+> +	__u32 max_write_zeroes_seg;
+> +	/*
+> +	 * Set if a VIRTIO_BLK_T_WRITE_ZEROES request may result in the
+> +	 * deallocation of one or more of the sectors.
+> +	 */
+> +	__u8 write_zeroes_may_unmap;
+> +
+> +	__u8 unused1[3];
+>  };
+>  
+>  /*
+> @@ -93,6 +128,9 @@ struct __packed virtio_blk_config {
+>  /* Get device ID command */
+>  #define VIRTIO_BLK_T_GET_ID	8
+>  
+> +/* Write zeroes command */
+> +#define VIRTIO_BLK_T_WRITE_ZEROES 13
+> +
+>  #ifndef VIRTIO_BLK_NO_LEGACY
+>  /* Barrier before this op */
+>  #define VIRTIO_BLK_T_BARRIER	0x80000000
+> @@ -112,6 +150,15 @@ struct virtio_blk_outhdr {
+>  	__virtio64 sector;
+>  };
+>  
+> +struct virtio_blk_discard_write_zeroes {
+> +	/* discard/write zeroes start sector */
+> +	__virtio64 sector;
+> +	/* number of discard/write zeroes sectors */
+> +	__virtio32 num_sectors;
+> +	/* flags for this range */
+> +	__virtio32 flags;
+> +};
+> +
+>  #ifndef VIRTIO_BLK_NO_LEGACY
+>  struct virtio_scsi_inhdr {
+>  	__virtio32 errors;
+> -- 
+> 2.44.0.278.ge034bb2e1d-goog
