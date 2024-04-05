@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B30E2CD1284
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 06:37:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4F6CCD11C2
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 06:48:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AFF6883E5;
-	Fri,  5 Apr 2024 08:37:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F37188019;
+	Fri,  5 Apr 2024 08:48:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jaCEAeRU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ijxVVNxR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 702D7883EA; Fri,  5 Apr 2024 08:37:42 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
+ id 584DE883EE; Fri,  5 Apr 2024 08:48:05 +0200 (CEST)
+Received: from mail-pf1-x42f.google.com (mail-pf1-x42f.google.com
+ [IPv6:2607:f8b0:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4898D87C2D
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 08:37:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CEAAC87F2F
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 08:48:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-516cbf3fd3dso1936277e87.2
- for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 23:37:40 -0700 (PDT)
+ spf=pass smtp.mailfrom=tkuw584924@gmail.com
+Received: by mail-pf1-x42f.google.com with SMTP id
+ d2e1a72fcca58-6e46dcd8feaso980628b3a.2
+ for <u-boot@lists.denx.de>; Thu, 04 Apr 2024 23:48:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712299059; x=1712903859; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2C2WprXsHoLlw4JqqO4ZcN8gNLvjskbyEInmedDKP0k=;
- b=jaCEAeRUN5MoRTBvr0LRuK0crMwtA2bMhRVZaFIPr57wecu4jRvcTS9WMMnYbDuDB3
- C4mBCl+PNee8EReKsmXwj6PihYQERLKj7Siue8p02jChoBbrg5nMzh+TFXJBfpDxi1sa
- CCe4MUnO0HPuhJV30PuwFMvgR1p7Y46oftMW+IZdiGn0fXc4pZAVMtKQeY3EZo9Lp6u1
- GJXThaMt9XmQ6pxQGlF9TH0/zBso+/rAvlPlpnBIphNq9poRqt2SXyEKWMSRlljNbThT
- x4AoXmEwgOqywT3D5RPpmcgwnIVoRzLAw9hUe4lNzMd/1Xq+SnA6J8MT9cy+eXJiGnU4
- ON1w==
+ d=gmail.com; s=20230601; t=1712299681; x=1712904481; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=mpKTgVngRkGsutErWGFn4SEv49ceTBFIoNudkPTtrxI=;
+ b=ijxVVNxRfjP2ivl4NphQcQGk4vnLiVWexDIlR1Snfirv/6ZMumrREHDJXkaixyULkz
+ Tlos6AfLjMx7ItFZVuILuaned9t3XRvRrPeHD4eIlVkRlLPKL3S9McfwGYAxF42F0J4c
+ 5gqIMImK+EqCfIQXUJ/zcGCxQUUE3uXRvF9LgqC6lPjfSUjXuIdwIYG74GCfJR0Bpg0l
+ 9TwOmigQOZfVW+0p7QFoUFMBHxVh6PUl5PzxWGkVCDl91vRnQlLdyVqkI/9QbZhdGdyh
+ D9GE2tJiVLrRYix88ZrgIqMIqvLu6ThB+t9gkQjafyPHi3pft4PP2/mhPvv8JGQFMpBI
+ 0a3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712299059; x=1712903859;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1712299681; x=1712904481;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=2C2WprXsHoLlw4JqqO4ZcN8gNLvjskbyEInmedDKP0k=;
- b=UaIosgPpXsnuYBMCpRjGp4j5PzPFr3Hl44g1yXp47zyYlqD4hje5OamAaR52IUBS9E
- FppItPLYL5nEYVHjBDMTFVTgvIpzSPR3gikaotWmdOGB4QRE05aluzAndzGOnvBnXOdq
- C2vgPlTjc/E5gKxOllBdil/UjS4lMI/+L6DvBuD0i8BVjoq1dfJPlizp8KX28ZWg7E3C
- MHKDhgobedZo+551mZ8XzbVm0L5ZylVC4joZz4ljYWNTOEdeeujwfXD9A+Y2TtMd+JPW
- 7kQPHETS53KrbSWl0YUsqywYBrgqa6sk/BJC2QAVbaaaZBaaJ+N7IRgZTUvtXX2BlMn7
- p8LQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX7MlgOo/O7c7zQa+G+r7kFD4uLjPOskHUNknGGr9XqN8rzKC2sYrZHflba1r1xNvlYmlSJSj/w57iZ6Xub6tkIOSSDPw==
-X-Gm-Message-State: AOJu0YwsBSJm9FcPZlUPqbA4EiN+dxh8QJxlled3iGlosH1uF4UvhZuI
- JNOiO+44a4RA+9PK0pnwbz2kRGU9TJ4Xqmp6wx4pDU69MZlLVHntKbxTeSUDm0+yu93EBSJk7XJ
- Qe7lcgVZIKaCbQMj6R5BWe5/XEqO58XMGt1o5dw==
-X-Google-Smtp-Source: AGHT+IGcNI2SqKmWjJWnJ02FZjzpnGua4R06n9FNzRHQz+7ScURtTZncR1TlWDx/L2SI2J4hCxPd6y2yZNB8wdas3tU=
-X-Received: by 2002:ac2:42c9:0:b0:516:c8e5:9647 with SMTP id
- n9-20020ac242c9000000b00516c8e59647mr317617lfl.19.1712299059528; Thu, 04 Apr
- 2024 23:37:39 -0700 (PDT)
+ bh=mpKTgVngRkGsutErWGFn4SEv49ceTBFIoNudkPTtrxI=;
+ b=dn9bgOJ2UZax5JWs6UVYYosaamqI4oXscykks0Zm8nPHB3991DPmNmFyEK/fmFq+vM
+ ruVlnxvO5ZlzqLQwQXXinD5WC5b8mp1KEfmFjRByEg3nmKfXK3HfKdpRmunviVKl4wNO
+ 0V8etdxWbDwj5NqYBX4dWMGv+DT5W+PiNE6mjftNQi4fKY4lX4igU9io//yqkvWtI/FN
+ n+3a4zYg5iAHeuE/eJLFMaBsB1YDCRnbNtpCP7sUE5Tn/iswd5+dVAQZFIUZceP1cxK9
+ jA0Rokgt07T+EDqVKrjrJ+pdo0NlU7lrqwhI3gBHFhoQ9iiOpIYRBNakjl3EWWR6CwOB
+ 1I1A==
+X-Gm-Message-State: AOJu0YzVYsBpFBfq3q/s4Oibee7NYj2Wm5r4+TBdxgbcyHX7i++FZ63k
+ bVeJjiZPcWJiZFVR0c5cne464MS3y8CWUcJv2cSoqodNNYxnG/y+wjuhJYEM
+X-Google-Smtp-Source: AGHT+IHy9b0rCng+AsB4KRahU7SQ5jWWrPCrcb7IixTfNy1xKQygzCZmuKJb2RcsARuXD22lz+cg7w==
+X-Received: by 2002:a05:6a21:1aa:b0:1a5:698e:505c with SMTP id
+ le42-20020a056a2101aa00b001a5698e505cmr754171pzb.10.1712299681195; 
+ Thu, 04 Apr 2024 23:48:01 -0700 (PDT)
+Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
+ [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
+ n13-20020a170903110d00b001e0a61cb886sm769595plh.120.2024.04.04.23.47.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 04 Apr 2024 23:48:00 -0700 (PDT)
+From: tkuw584924@gmail.com
+X-Google-Original-From: Takahiro.Kuwano@infineon.com
+To: u-boot@lists.denx.de
+Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
+ d-gole@ti.com, pratyush@kernel.org, tkuw584924@gmail.com,
+ Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Subject: [PATCH] mtd: spi-nor: Add support for Infineon S25FS-S family
+Date: Fri,  5 Apr 2024 15:47:46 +0900
+Message-Id: <20240405064746.1600-1-Takahiro.Kuwano@infineon.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240404074819.52156-1-ilias.apalodimas@linaro.org>
- <eb1c51e3-17e0-4c76-a703-da18a85a1ba7@gmx.de>
-In-Reply-To: <eb1c51e3-17e0-4c76-a703-da18a85a1ba7@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 5 Apr 2024 09:37:03 +0300
-Message-ID: <CAC_iWjLq9_3OFo4kwcgREzv7RR84bBCh7jYHtP6KTGbMk_RfLw@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: move efi_var_collect to common functions
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <apalos@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, 
- Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,229 +91,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 5 Apr 2024 at 09:33, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->
-> On 4/4/24 09:48, Ilias Apalodimas wrote:
-> > From: Ilias Apalodimas <apalos@gmail.com>
-> >
-> > efi_var_collect() was initially placed in efi_var_file.c, since back
-> > then we only supported efi variables stored in a file. Since then we
-> > support variables stored in an RPMB as well and use that function to
-> > collect variables that should be present at runtime.
->
-> Thanks for cleaning this up.
->
-> In the CONFIG_EFI_MM_COMM_TEE=y case we seem not to need efi_var_file.c
-> anymore. Can we add this diff:
->
-> --- a/lib/efi_loader/Makefile
-> +++ b/lib/efi_loader/Makefile
-> @@ -72,11 +72,11 @@ obj-y += efi_string.o
->   obj-$(CONFIG_EFI_UNICODE_COLLATION_PROTOCOL2) += efi_unicode_collation.o
->   obj-y += efi_var_common.o
->   obj-y += efi_var_mem.o
-> -obj-y += efi_var_file.o
->   ifeq ($(CONFIG_EFI_MM_COMM_TEE),y)
->   obj-y += efi_variable_tee.o
->   else
->   obj-y += efi_variable.o
-> +obj-y += efi_var_file.o
->   obj-$(CONFIG_EFI_VARIABLES_PRESEED) += efi_var_seed.o
->   endif
->   obj-y += efi_watchdog.o
+From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-Yes, I'll add it on v2
+The S25FS064S, S25FS128S, and S25FS256S are the same family of SPI NOR
+Flash devices with S25FS512S. Some difference depending on the device
+densities are taken care in fixup hooks.
 
-Thanks
-/Ilias
->
-> Another comment below.
->
-> >
-> > So let's move it around in efi_var_common.c which makes more sense
-> >
-> > Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> > Signed-off-by: Ilias Apalodimas <apalos@gmail.com>
-> > ---
-> >   lib/efi_loader/efi_var_common.c | 76 +++++++++++++++++++++++++++++++++
-> >   lib/efi_loader/efi_var_file.c   | 64 ---------------------------
-> >   2 files changed, 76 insertions(+), 64 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
-> > index 16b2c3d48828..07b9603d49f3 100644
-> > --- a/lib/efi_loader/efi_var_common.c
-> > +++ b/lib/efi_loader/efi_var_common.c
-> > @@ -9,6 +9,7 @@
-> >   #include <efi_loader.h>
-> >   #include <efi_variable.h>
-> >   #include <stdlib.h>
-> > +#include <u-boot/crc.h>
-> >
-> >   enum efi_secure_mode {
-> >       EFI_MODE_SETUP,
-> > @@ -416,3 +417,78 @@ void *efi_get_var(const u16 *name, const efi_guid_t *vendor, efi_uintn_t *size)
-> >
-> >       return buf;
-> >   }
-> > +
-> > +/**
-> > + * efi_var_collect() - Copy EFI variables mstching attributes mask
-> > + *
-> > + * @bufp:    buffer containing variable collection
-> > + * @lenp:    buffer length
-> > + * @attr_mask:       mask of matched attributes
-> > + *
-> > + * Return:   Status code
-> > + */
-> > +efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *lenp,
-> > +                                         u32 check_attr_mask)
-> > +{
-> > +     size_t len = EFI_VAR_BUF_SIZE;
-> > +     struct efi_var_file *buf;
-> > +     struct efi_var_entry *var, *old_var;
-> > +     size_t old_var_name_length = 2;
-> > +
-> > +     *bufp = NULL; /* Avoid double free() */
-> > +     buf = calloc(1, len);
-> > +     if (!buf)
-> > +             return EFI_OUT_OF_RESOURCES;
-> > +     var = buf->var;
-> > +     old_var = var;
-> > +     for (;;) {
-> > +             efi_uintn_t data_length, var_name_length;
-> > +             u8 *data;
-> > +             efi_status_t ret;
-> > +
-> > +             if ((uintptr_t)buf + len <=
-> > +                 (uintptr_t)var->name + old_var_name_length)
-> > +                     return EFI_BUFFER_TOO_SMALL;
-> > +
-> > +             var_name_length = (uintptr_t)buf + len - (uintptr_t)var->name;
-> > +             memcpy(var->name, old_var->name, old_var_name_length);
-> > +             guidcpy(&var->guid, &old_var->guid);
-> > +             ret = efi_get_next_variable_name_int(
-> > +                             &var_name_length, var->name, &var->guid);
-> > +             if (ret == EFI_NOT_FOUND)
-> > +                     break;
-> > +             if (ret != EFI_SUCCESS) {
-> > +                     free(buf);
-> > +                     return ret;
-> > +             }
-> > +             old_var_name_length = var_name_length;
-> > +             old_var = var;
-> > +
-> > +             data = (u8 *)var->name + old_var_name_length;
-> > +             data_length = (uintptr_t)buf + len - (uintptr_t)data;
-> > +             ret = efi_get_variable_int(var->name, &var->guid,
-> > +                                        &var->attr, &data_length, data,
-> > +                                        &var->time);
-> > +             if (ret != EFI_SUCCESS) {
-> > +                     free(buf);
-> > +                     return ret;
-> > +             }
-> > +             if ((var->attr & check_attr_mask) == check_attr_mask) {
-> > +                     var->length = data_length;
-> > +                     var = (struct efi_var_entry *)ALIGN((uintptr_t)data + data_length, 8);
-> > +             }
-> > +     }
-> > +
-> > +     buf->reserved = 0;
-> > +     buf->magic = EFI_VAR_FILE_MAGIC;
-> > +     len = (uintptr_t)var - (uintptr_t)buf;
-> > +     buf->crc32 = crc32(0, (u8 *)buf->var,
-> > +                        len - sizeof(struct efi_var_file));
-> > +     buf->length = len;
-> > +     *bufp = buf;
-> > +     *lenp = len;
-> > +
-> > +     return EFI_SUCCESS;
-> > +}
-> > +
-> > +
->
-> This produces a warning
->
-> .git/rebase-apply/patch:95: new blank line at EOF.
->
-> Could you, please, remove the blank lines at the end of the file.
->
-> Best regards
->
-> Heinrich
->
-> > diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
-> > index 532b6b40eefe..413e1794e88c 100644
-> > --- a/lib/efi_loader/efi_var_file.c
-> > +++ b/lib/efi_loader/efi_var_file.c
-> > @@ -52,70 +52,6 @@ static efi_status_t __maybe_unused efi_set_blk_dev_to_system_partition(void)
-> >       return EFI_SUCCESS;
-> >   }
-> >
-> > -efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp, loff_t *lenp,
-> > -                                         u32 check_attr_mask)
-> > -{
-> > -     size_t len = EFI_VAR_BUF_SIZE;
-> > -     struct efi_var_file *buf;
-> > -     struct efi_var_entry *var, *old_var;
-> > -     size_t old_var_name_length = 2;
-> > -
-> > -     *bufp = NULL; /* Avoid double free() */
-> > -     buf = calloc(1, len);
-> > -     if (!buf)
-> > -             return EFI_OUT_OF_RESOURCES;
-> > -     var = buf->var;
-> > -     old_var = var;
-> > -     for (;;) {
-> > -             efi_uintn_t data_length, var_name_length;
-> > -             u8 *data;
-> > -             efi_status_t ret;
-> > -
-> > -             if ((uintptr_t)buf + len <=
-> > -                 (uintptr_t)var->name + old_var_name_length)
-> > -                     return EFI_BUFFER_TOO_SMALL;
-> > -
-> > -             var_name_length = (uintptr_t)buf + len - (uintptr_t)var->name;
-> > -             memcpy(var->name, old_var->name, old_var_name_length);
-> > -             guidcpy(&var->guid, &old_var->guid);
-> > -             ret = efi_get_next_variable_name_int(
-> > -                             &var_name_length, var->name, &var->guid);
-> > -             if (ret == EFI_NOT_FOUND)
-> > -                     break;
-> > -             if (ret != EFI_SUCCESS) {
-> > -                     free(buf);
-> > -                     return ret;
-> > -             }
-> > -             old_var_name_length = var_name_length;
-> > -             old_var = var;
-> > -
-> > -             data = (u8 *)var->name + old_var_name_length;
-> > -             data_length = (uintptr_t)buf + len - (uintptr_t)data;
-> > -             ret = efi_get_variable_int(var->name, &var->guid,
-> > -                                        &var->attr, &data_length, data,
-> > -                                        &var->time);
-> > -             if (ret != EFI_SUCCESS) {
-> > -                     free(buf);
-> > -                     return ret;
-> > -             }
-> > -             if ((var->attr & check_attr_mask) == check_attr_mask) {
-> > -                     var->length = data_length;
-> > -                     var = (struct efi_var_entry *)ALIGN((uintptr_t)data + data_length, 8);
-> > -             }
-> > -     }
-> > -
-> > -     buf->reserved = 0;
-> > -     buf->magic = EFI_VAR_FILE_MAGIC;
-> > -     len = (uintptr_t)var - (uintptr_t)buf;
-> > -     buf->crc32 = crc32(0, (u8 *)buf->var,
-> > -                        len - sizeof(struct efi_var_file));
-> > -     buf->length = len;
-> > -     *bufp = buf;
-> > -     *lenp = len;
-> > -
-> > -     return EFI_SUCCESS;
-> > -}
-> > -
-> >   /**
-> >    * efi_var_to_file() - save non-volatile variables as file
-> >    *
->
+Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+---
+Datasheets:
+https://www.infineon.com/dgdl/Infineon-S25FS064S_64_Mb_8_MB_FS-S_Flash_SPI_Multi-I_O_1-DataSheet-v10_00-EN.pdf?fileId=8ac78c8c7d0d8da4017d0ed526b25412
+https://www.infineon.com/dgdl/Infineon-S25FS128S_S25FS256S_1.8_V_Serial_Peripheral_Interface_with_Multi-I_O_MirrorBit(R)_Non-Volatile_Flash-DataSheet-v15_00-EN.pdf?fileId=8ac78c8c7d0d8da4017d0ed6b5ab5758
+---
+ drivers/mtd/spi/spi-nor-core.c | 28 +++++++++++++++++++++-------
+ drivers/mtd/spi/spi-nor-ids.c  |  7 +++++--
+ 2 files changed, 26 insertions(+), 9 deletions(-)
+
+diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
+index f86003ca8c..9b81b31e8e 100644
+--- a/drivers/mtd/spi/spi-nor-core.c
++++ b/drivers/mtd/spi/spi-nor-core.c
+@@ -3299,8 +3299,10 @@ static int s25fs_s_quad_enable(struct spi_nor *nor)
+ 
+ static int s25fs_s_erase_non_uniform(struct spi_nor *nor, loff_t addr)
+ {
++	u8 opcode = nor->addr_width == 4 ? SPINOR_OP_BE_4K_4B : SPINOR_OP_BE_4K;
++
+ 	/* Support 8 x 4KB sectors at bottom */
+-	return spansion_erase_non_uniform(nor, addr, SPINOR_OP_BE_4K_4B, 0, SZ_32K);
++	return spansion_erase_non_uniform(nor, addr, opcode, 0, SZ_32K);
+ }
+ 
+ static int s25fs_s_setup(struct spi_nor *nor, const struct flash_info *info,
+@@ -3354,12 +3356,24 @@ static int s25fs_s_post_bfpt_fixup(struct spi_nor *nor,
+ static void s25fs_s_post_sfdp_fixup(struct spi_nor *nor,
+ 				    struct spi_nor_flash_parameter *params)
+ {
+-	/* READ_1_1_2 is not supported */
+-	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
+-	/* READ_1_1_4 is not supported */
+-	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
+-	/* PP_1_1_4 is not supported */
+-	params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
++	/*
++	 * The S25FS064S(8MB) supports 1-1-2 and 1-1-4 commands, but params for
++	 * read ops in SFDP are wrong. The other density parts do not support
++	 * 1-1-2 and 1-1-4 commands.
++	 */
++	if (params->size == SZ_8M) {
++		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_2],
++					  0, 8, SPINOR_OP_READ_1_1_2,
++					  SNOR_PROTO_1_1_2);
++		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_4],
++					  0, 8, SPINOR_OP_READ_1_1_4,
++					  SNOR_PROTO_1_1_4);
++	} else {
++		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
++		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
++		params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
++	}
++
+ 	/* Use volatile register to enable quad */
+ 	params->quad_enable = s25fs_s_quad_enable;
+ }
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index 4e83b8c94c..9ca1f244f0 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -338,9 +338,12 @@ const struct flash_info spi_nor_ids[] = {
+ 	 */
+ 	{ INFO("s25sl032p",  0x010215, 0x4d00,  64 * 1024,  64, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+ 	{ INFO("s25sl064p",  0x010216, 0x4d00,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+-	{ INFO("s25fl256s0", 0x010219, 0x4d00, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+-	{ INFO("s25fl256s1", 0x010219, 0x4d01,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
++	{ INFO6("s25fl256s0", 0x010219, 0x4d0080, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
++	{ INFO6("s25fl256s1", 0x010219, 0x4d0180,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+ 	{ INFO6("s25fl512s",  0x010220, 0x4d0080, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
++	{ INFO6("s25fs064s",  0x010217, 0x4d0181,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
++	{ INFO6("s25fs128s",  0x012018, 0x4d0181,  64 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
++	{ INFO6("s25fs256s",  0x010219, 0x4d0181,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+ 	{ INFO6("s25fs512s",  0x010220, 0x4d0081, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+ 	{ INFO("s25fl512s_256k",  0x010220, 0x4d00, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+ 	{ INFO("s25fl512s_64k",  0x010220, 0x4d01, 64 * 1024, 1024, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+-- 
+2.34.1
+
