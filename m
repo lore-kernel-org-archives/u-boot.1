@@ -4,56 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99307C67861
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 08:13:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39C98C67861
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 08:15:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ED2FE8847C;
-	Fri,  5 Apr 2024 10:13:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 909288815A;
+	Fri,  5 Apr 2024 10:15:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RExz5+v0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R/knAc4u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C06A8847F; Fri,  5 Apr 2024 10:13:09 +0200 (CEST)
-Received: from smtp-relay-canonical-0.canonical.com
- (smtp-relay-canonical-0.canonical.com [185.125.188.120])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1967488485; Fri,  5 Apr 2024 10:15:17 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 958DB87D64
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 10:13:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2805887F52
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 10:15:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.fritz.box (ip-062-143-245-032.um16.pools.vodafone-ip.de
- [62.143.245.32])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 79B883F3BA; 
- Fri,  5 Apr 2024 08:13:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1712304786;
- bh=tr4pf87L+GSTNG47/O+jgTDeWXENM7Tk7GXKwFJCoSg=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=RExz5+v0by2MbzMa9kY6NtKSRpoZPRWo/jPox/+jjvtku2lQOWlHQmos6dlTwDMEn
- BUaQSJtV2bvnehj2lBFkUl1QJuuoM7mKjr5XkbxXiiQiSIVlupMLK1SZS5Ica95esi
- YVHnqMGagJx6KHz1oBBDadzK5gyE8a61OEw0GrPUdPI9bNxeG2KDn8wDRSGhraWQB5
- VdaeaJh9VlMuBebIsuiiinZNnRrvozDyMITKz4s7UPtlpw/KlwvijeGNSeveFF9zQS
- c6FE7SM1esFe7lcfXVdyO50bWXTFePOQLQ9VpQg/RD6PxHkPAnV3MZNS5MgiaPk1pa
- QjGvHQGTbSr5Q==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_loader: eliminate duplicate runtime section
- definitions
-Date: Fri,  5 Apr 2024 10:12:57 +0200
-Message-ID: <20240405081257.9515-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-4162b74f2a1so9642355e9.3
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 01:15:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1712304914; x=1712909714; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=V2SS4/2t/c6En9Spd9NiFTrW5lny8h6oQLSCLmmKFKc=;
+ b=R/knAc4u2zJmyt/OA+bJgbtdN17YkPiq3rmVwAySGxUFEoHJGtNzIckEXR/0JxLrp+
+ PGd69avO8GJMMAx0+pV8JBihmtGxt5qG2CjIbOK3G4TTiPzLGX0yTN0/GXCF29e9dS1d
+ tgOlUp+qwCTbnk58r+2wpPMk2IlhiQmeR/9tuCWYPj5OKQGx1bG3b/5QozXq2i5LcS6E
+ jAso4VYtabnjLq+/UC3uvQxFH/diOKJPYMldtcd+fSGgLReu76UOFEDVfcJPNEfV3mo5
+ mGmu3tCDGFpGIa9HajHzNSYFp7Z4GLZ2uBOpEKTX0Rhf+72V5K63w5SVV6mn5SmPWrWr
+ EwZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712304914; x=1712909714;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=V2SS4/2t/c6En9Spd9NiFTrW5lny8h6oQLSCLmmKFKc=;
+ b=R4VHNTqtoWRpVpO2BjbagfIkwHE5mWIZBxVaq+fS1U36HCe/sb630TVzy1k4xHNmkR
+ WoiuU9iuwyYef3zYkTrW1Mnv4upp6BfiRcpUyGMgOHi34fAqOGhR8/SllZS19ovd0QyG
+ oNmvgPb2YV4+3lqdFMBqRBST+QqI8NRdmQj8cMo9rdJsNvjHpHewoFCa9kP2x+99thZK
+ VudTkAm8+cYR/9ME7Scu+30/iB+P+oo2yzwnAvzCk3yBK+5OavnWIhcbKzePkEpyCOHE
+ ySBKKP+q0WtaL9ae9TgivTok41j/R/PzifE7g695ACI+tegXRE+X+qI/8sLXdc8ogO9g
+ KQDA==
+X-Gm-Message-State: AOJu0YyvjjnqjIMnddTzLtiUEWgCDTdpPAGLipMAqURdC66Q4Vq2nSVH
+ 2d1PfYXxF0BgM5X4MS5KUTEseniCV7+5REb9zFgg34JYB/bKcQV/j/bnB2L1g3I=
+X-Google-Smtp-Source: AGHT+IESbeJXwKXt1MkPHT9NIwjr1/JLPKPwSEQiHI1IxEGKPOlGYZNY8gv09I/YEPxQFRtVfiS4ng==
+X-Received: by 2002:a05:600c:5107:b0:414:63c6:8665 with SMTP id
+ o7-20020a05600c510700b0041463c68665mr828527wms.2.1712304914215; 
+ Fri, 05 Apr 2024 01:15:14 -0700 (PDT)
+Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
+ by smtp.gmail.com with ESMTPSA id
+ jg24-20020a05600ca01800b004162d5233d5sm2034407wmb.42.2024.04.05.01.15.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Apr 2024 01:15:13 -0700 (PDT)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: [PATCH 0/3] qcom: add pinctrl driver for SM8550 and SM8650
+Date: Fri, 05 Apr 2024 10:15:09 +0200
+Message-Id: <20240405-topic-sm8x50-pinctrl-v1-0-92d563c28c90@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAA2zD2YC/x2MywqAIBAAfyX23IJa0eNXooPYVgulohKB9O9Jz
+ GkOMxkiBaYIU5Uh0M2RnS0i6wrMoe1OyGtxUEK1ooDJeTYYr+HpBHq2JoUTpZCbNr0aV9VASX2
+ gjZ9/Oy/v+wFk9R27ZgAAAA==
+To: Tom Rini <trini@konsulko.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1018;
+ i=neil.armstrong@linaro.org; h=from:subject:message-id;
+ bh=iQN+VcFYeJg8JZuruoIqZi7VFWp9omzTnuAU9UaNbWA=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmD7MPqr46pMFWCqJ9L1+fglqYBolOchqCWRuSrZDI
+ GzBgD0+JAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZg+zDwAKCRB33NvayMhJ0YGLEA
+ CHWhB4rK8EKRXZ3N8ohttIAmOrE/xTbOv7m2LyZ9Y5QKVj/lPc3PdxQ/q3uZCEztFNyT6Mz1jSQ9vi
+ RenAbXyPZ4lcSWjqzwHA1ClJlPPqbCaoFp/ip+B2r6CMyiNdQ5f4CrSVltoLQhZJJl0n0mj+vClROC
+ FuI7HDZ2/VnNOPvmuckWaEcePZGcoSdsNO0mfy5oQB2eETMeObPnmlqjkIifCMHp2AxIwlPi0HU5ie
+ kNrXtXorwhCPwzzIqI5g5CNcNxO5Hu0x3sghyaI/ZcZqjm4/NP9yQW04xuNWu2xKhiTjs1o5wx/VkM
+ h3dE7IwEeLmFZmKsRCcLXsmPKEnSMhC3BPyY2zdW4s3JVUZuL63sFUCKVMZjDyZMCNQSdwW4DjVaiZ
+ pGBgCB/MqF+da9NY9eQqOtGnfiCQBPg0dMuKhIIWJhcVIoTyW+EPd0unHK7R3tYXRW0XHSUGfkALfB
+ gQdFFfYMs/YwDj2ggzyqZmOqkdYPCxtSNZ96cj6KjTdTZOfdo346XhrQp0amEFJeKBYJmjFdZ1JY8W
+ R2ykMaBZMKjfBzSVyFZL5IzZqd23em9LhrY9ltDXtoEAnMVlINF9OJ9TbCpm1a4ChBatktImA/E4Es
+ a36YmwxG8k6jkMgO75PfvbpFlkBWG0GX32zd+9iLj8bMs/eTunnw5KWhn57Q==
+X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
+ fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,47 +110,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following symbols are defined in two includes:
+Add pinctrl driver for the TLMM block found in the SM8550 & SM8650 SoCs.
 
-* __efi_runtime_start[]
-* __efi_runtime_stop[]
-* __efi_runtime_rel_start[]
-* __efi_runtime_rel_stop[]
+This driver only handles the gpio and qup debug uart pinmux, and makes sure
+the pinconf applies on SDC2 pins.
 
-Eliminate the definitions in efi_loader.h.
+Finally enable both drivers in the Qualcomm defconfig
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
- include/efi_loader.h        | 3 ---
- lib/efi_loader/efi_memory.c | 1 +
- 2 files changed, 1 insertion(+), 3 deletions(-)
+Neil Armstrong (3):
+      pinctrl: qcom: Add SM8550 pinctrl driver
+      pinctrl: qcom: Add SM8650 pinctrl driver
+      qcom_defconfig: enable SM8550 & SM8650 pinctrl driver
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 7daca0afba..bb51c02817 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -345,9 +345,6 @@ extern const efi_guid_t smbios3_guid;
- extern const efi_guid_t efi_guid_text_input_protocol;
- extern const efi_guid_t efi_guid_text_output_protocol;
- 
--extern char __efi_runtime_start[], __efi_runtime_stop[];
--extern char __efi_runtime_rel_start[], __efi_runtime_rel_stop[];
--
- /**
-  * struct efi_open_protocol_info_item - open protocol info item
-  *
-diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-index edfad2d95a..81f5f98a8a 100644
---- a/lib/efi_loader/efi_memory.c
-+++ b/lib/efi_loader/efi_memory.c
-@@ -15,6 +15,7 @@
- #include <watchdog.h>
- #include <asm/cache.h>
- #include <asm/global_data.h>
-+#include <asm/sections.h>
- #include <linux/list_sort.h>
- #include <linux/sizes.h>
- 
+ configs/qcom_defconfig                |  2 +
+ drivers/pinctrl/qcom/Kconfig          | 14 +++++++
+ drivers/pinctrl/qcom/Makefile         |  2 +
+ drivers/pinctrl/qcom/pinctrl-sm8550.c | 75 +++++++++++++++++++++++++++++++++++
+ drivers/pinctrl/qcom/pinctrl-sm8650.c | 75 +++++++++++++++++++++++++++++++++++
+ 5 files changed, 168 insertions(+)
+---
+base-commit: cec1c47bdaf84a643f318d480b1218bfff1041ff
+change-id: 20240404-topic-sm8x50-pinctrl-101fac729d23
+
+Best regards,
 -- 
-2.43.0
+Neil Armstrong <neil.armstrong@linaro.org>
 
