@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 901E8CD11C2
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 15:47:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F2ACC67861
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 16:16:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D1BD088473;
-	Fri,  5 Apr 2024 17:47:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 861B188465;
+	Fri,  5 Apr 2024 18:16:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LJJl4MlK";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="YULnrLc5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77A2188479; Fri,  5 Apr 2024 17:47:24 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3CF1988469; Fri,  5 Apr 2024 18:16:44 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C68E88465
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 17:47:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A1308845D
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 18:16:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-516c403cc46so4476788e87.3
- for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 08:47:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712332041; x=1712936841; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=QrjIkI9yHW9nUY0mizWpMKbrDwDglmVl9caDEDtgxQI=;
- b=LJJl4MlKYhBKmyo1Y+tO5azTe9lQPNAObl0rUkVqsUEw8LaVFyOCNNYkuKlJ+SjNeu
- 0N2irpHBimYwrRnf4Pw86BmlPQlwPQnQW3/yrDQZdTIuSJQ9R82W3bd/06QZB3+3SPqV
- 1ZqHRPhl7wSBqZTMOO01SyEF+yMEvHHafMwPpa4VorCXPnyU7RxqQmBVsfTX6bhaZr+p
- lSjAyt8kAHAX+mddZ0BSA6TSuZRPExslUAKj2rtcaaDfHwXMIPZWCU4iZczknZBNURHW
- LzsmkePyAYczabbZ6pcD0nF5RCUAGbpXmly83fZaa8BddXybfYb/fFw9ReQybSH/eYpS
- 5CPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712332041; x=1712936841;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=QrjIkI9yHW9nUY0mizWpMKbrDwDglmVl9caDEDtgxQI=;
- b=mXzjr2Ceiu+G5WZDhymmSuAAb23J/axu+tCidZ9uOCP3136sxUj5+/JT1+kNqdp6Lu
- IgNx31d6oZpBP2kj1ohgE8hK0hdQSPOwJQSRxVIZkh1fjtsAPSfCIH4im6Ya0xpTAmz0
- D0n+ScJws6APbIm/RJFHRRXjAPU/g9HUy4LKTjJLG0wqbJ4a4xxsV16PvkeA+aZIisDU
- tNPMvMmG2wyYk/f15F6610UuUna5LkDnZmj+Lgz+njYjnV0SbYQfCea60QvcJ0rNye/h
- Igx70+kmQkMh1JeDhKXuuigSMLuQCVdlnMSufshaA++AQ6ccvjoZQrrzfnv5Wj8lFQyE
- /ogw==
-X-Gm-Message-State: AOJu0YzyE+zROMbLsyNQQ65X6wi9nEsJsT1aShOrfMKyegeU4mckx6vJ
- rXWTHHaJiborACAM8uaCNZhmpLFxBLu6NRiPAgWOGDYzpF3oDTjkvmYm4V9w7EY=
-X-Google-Smtp-Source: AGHT+IHt1EYjbBgdRkBc6YJyvMXxqJh85ytJWpJiKw0UVegLw09DyjQDt1qZHZBp3FXiufrSQhByfw==
-X-Received: by 2002:ac2:51a7:0:b0:515:cf42:117b with SMTP id
- f7-20020ac251a7000000b00515cf42117bmr1816886lfk.60.1712332041419; 
- Fri, 05 Apr 2024 08:47:21 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::4716? ([2a02:8109:aa0d:be00::4716])
- by smtp.gmail.com with ESMTPSA id
- gs9-20020a170906f18900b00a4e07f8b6bfsm963442ejb.59.2024.04.05.08.47.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 05 Apr 2024 08:47:20 -0700 (PDT)
-Message-ID: <532211b2-b654-43d8-bcd3-b98c51598637@linaro.org>
-Date: Fri, 5 Apr 2024 17:47:19 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=482502c049=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 435EZbx0030619; Fri, 5 Apr 2024 18:16:36 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=ld332YC
+ OaCBFkcO37QfO0KXWTfHnAU9fFlo7oW1yIgA=; b=YULnrLc5P2C2eaCUY8XjSnS
+ I6oMHOUrkZPNQ0Qs2eoXRv7Ryo0inmWsAi5paRJIR0UnJOsW6BxcR9sOCLveOUuR
+ vVt8h1GHSEpnh1XYeFglVmmQBuU5PvSlFigcctSZ/d+UgeemuwtXvM0by/wURf91
+ IMY8Oub7gVg+kzfWZ0mPX+ALAn2Gd13KMdSDnabsTY+dpSbe/GGFm43V5Za3OyKV
+ JFn/jtWI8k+OHqbSYHI8sqAMz0XSJgrArVadxYyFV6CaHsE4tnLd3l7sxh/8fWvD
+ tBsJoOgMnbHP0Iu44ojG03a7l2EVhkEXokakn9uyUIXCIf9mzuoiRloKVvVv7ug=
+ =
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3x9emv8jty-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 05 Apr 2024 18:16:36 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 164A84002D;
+ Fri,  5 Apr 2024 18:16:31 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C1CE821684D;
+ Fri,  5 Apr 2024 18:15:32 +0200 (CEST)
+Received: from localhost (10.252.29.225) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 5 Apr
+ 2024 18:15:32 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Elmar Psilog <epsi@gmx.de>, Joe
+ Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Ley Foon Tan
+ <leyfoon.tan@starfivetech.com>, Ramon Fried <rfried.dev@gmail.com>, Sean
+ Anderson <seanga2@gmail.com>, Sebastian Reichel
+ <sebastian.reichel@collabora.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, Yanhong Wang <yanhong.wang@starfivetech.com>
+Subject: [PATCH] net: dwc_eth_qos: Fix compilation warning in eqos_free_pkt()
+Date: Fri, 5 Apr 2024 18:15:29 +0200
+Message-ID: <20240405161529.1419902-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/3] qcom: add pinctrl driver for SM8550 and SM8650
-To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
- <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de
-References: <20240405-topic-sm8x50-pinctrl-v1-0-92d563c28c90@linaro.org>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240405-topic-sm8x50-pinctrl-v1-0-92d563c28c90@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.252.29.225]
+X-ClientProxiedBy: SAFCAS1NODE1.st.com (10.75.90.11) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-04-05_17,2024-04-05_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,36 +93,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Fix compilation warning:
 
+../arch/arm/include/asm/io.h: In function 'eqos_free_pkt':
+../arch/arm/include/asm/io.h:103:32: warning: 'rx_desc' may be used uninitialized [-Wmaybe-uninitialized]
+  103 | #define writel(v,c)     ({ u32 __v = v; __iowmb(); __arch_putl(__v,c); __v; })
+      |                                ^~~
+../drivers/net/dwc_eth_qos.c:1220:27: note: 'rx_desc' was declared here
+ 1220 |         struct eqos_desc *rx_desc;
+      |                           ^~~~~~~
 
-On 05/04/2024 10:15, Neil Armstrong wrote:
-> Add pinctrl driver for the TLMM block found in the SM8550 & SM8650 SoCs.
-> 
-> This driver only handles the gpio and qup debug uart pinmux, and makes sure
-> the pinconf applies on SDC2 pins.
-> 
-> Finally enable both drivers in the Qualcomm defconfig
-> 
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
-> Neil Armstrong (3):
->        pinctrl: qcom: Add SM8550 pinctrl driver
->        pinctrl: qcom: Add SM8650 pinctrl driver
->        qcom_defconfig: enable SM8550 & SM8650 pinctrl driver
-> 
->   configs/qcom_defconfig                |  2 +
->   drivers/pinctrl/qcom/Kconfig          | 14 +++++++
->   drivers/pinctrl/qcom/Makefile         |  2 +
->   drivers/pinctrl/qcom/pinctrl-sm8550.c | 75 +++++++++++++++++++++++++++++++++++
->   drivers/pinctrl/qcom/pinctrl-sm8650.c | 75 +++++++++++++++++++++++++++++++++++
->   5 files changed, 168 insertions(+)
-> ---
-> base-commit: cec1c47bdaf84a643f318d480b1218bfff1041ff
-> change-id: 20240404-topic-sm8x50-pinctrl-101fac729d23
-> 
-> Best regards,
+ drivers/net/dwc_eth_qos.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
+index 9b3bce1dc87..9df3dde14f1 100644
+--- a/drivers/net/dwc_eth_qos.c
++++ b/drivers/net/dwc_eth_qos.c
+@@ -1217,7 +1217,7 @@ static int eqos_free_pkt(struct udevice *dev, uchar *packet, int length)
+ 	struct eqos_priv *eqos = dev_get_priv(dev);
+ 	u32 idx, idx_mask = eqos->desc_per_cacheline - 1;
+ 	uchar *packet_expected;
+-	struct eqos_desc *rx_desc;
++	struct eqos_desc *rx_desc = NULL;
+ 
+ 	debug("%s(packet=%p, length=%d)\n", __func__, packet, length);
+ 
 -- 
-// Caleb (they/them)
+2.25.1
+
