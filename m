@@ -4,83 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EE01C67861
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 09:01:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DF35CD11C2
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 09:03:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEB7488460;
-	Fri,  5 Apr 2024 11:01:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CBCC2884DB;
+	Fri,  5 Apr 2024 11:03:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="cNqyAAYr";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="3IRYfnKp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E05A1884C7; Fri,  5 Apr 2024 11:01:29 +0200 (CEST)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
+ id 62B22884DE; Fri,  5 Apr 2024 11:03:02 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D56188460
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 11:01:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 54E64884D6
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 11:03:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-4162b8cb3e9so14268765e9.0
- for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 02:01:27 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-34388753650so883060f8f.3
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 02:03:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712307687; x=1712912487;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712307780; x=1712912580;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=agx9DK8GrnQ38BQicYso2L59l/ba/7FFixdGSXQOUas=;
- b=cNqyAAYrzciko3wmWlLG66qsqB8qQSraXv2JEa9tVAjRxX008WzAUzJuyC+nJrYm9O
- fit4U2XjVFX3MBcA92RNx6Qcx24D6ke9fSsPFE6NKfG2LITL3QaybJxIK1+0ZBwPQ1Zn
- tFbHuBOwF4LFj96dbD4GjsVDcY7JDINnowuysG3/+pDk7Z7kxVQOkjBidSvqamwTgWek
- v6VmbhI6Px/PnWann9CJ5dUtbLuiPmqfKUIECXlr91NucW9FDmD4KLVrYX3ixjN/sPlk
- L2c81YbQB/V/AAsrYRyyWNU8lZyPVxmdOCoVdf70xgiQmsG6xjGTbkloOOvMF4yolxhp
- pkrA==
+ bh=KvLdyck/117IRX4bwLJCT/So7X2UX+XqZruYZgpX08k=;
+ b=3IRYfnKpMC7sAWaV6KYhkBxUicpmlFJbtkCp4aRiMg/hWe3V0925Sn3wNDLaLoH6LP
+ zHZdkdiWBfvVb8XkUReyzMUp8YfiU1zr/P9lBe717BRiM+tVRfZ7NgMtiuPbcAmpevRP
+ AKAObF4qB9sn36pBPCQg2f7mbcBwCyASQ+eYy4YKb+l952mvcjYJuszbkPs37UOJO+Az
+ wJ6EriFYIkeqVIarLUYFz2on3EWliMsUbPDmj0GKmddnBOV78qBXjYTvlbly83r8VzA9
+ I0In2yD02pCbQsdWp2KZUxx9oquC3zOn6t6E8gXhFGN+O3sW7485icR8KvwwVFPa1iA/
+ DHRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712307687; x=1712912487;
+ d=1e100.net; s=20230601; t=1712307780; x=1712912580;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=agx9DK8GrnQ38BQicYso2L59l/ba/7FFixdGSXQOUas=;
- b=cK/aB14pJgo6cLg/N+G+afXwF7DiFgMwLARxUQXTNAsUfbI4IQT7bCdwgvMzXgvG5K
- SHuFYTztxygKsEJ2GrqmWFEOmsogG6IgbxW5W8fHvjZ/ipl4ZXK/ZO+SHHQoXkyNTemJ
- D0qtcjJbn1EmXcnfXZ/LB0zQ0hG30i3HwicbucpCicw9yFxXhDjQ+ptszuo8n/Vxl8xr
- WmNSwARPIbcCLNZS7eBsNX9VMuc9DKnh4WPei3n7BkitjFRdO5jeEqEG4LjObB4TSIpI
- 0YG0NJRexvmXCt7ksDucEQD0U1RUbeHcDGBfMGbI6bFZ40045smw1CppgXLj1siLkUhi
- 5kfw==
+ bh=KvLdyck/117IRX4bwLJCT/So7X2UX+XqZruYZgpX08k=;
+ b=XPkQvgy5Dzq9g4luJtXS02T+DuqF5I4XLJ+E6LqtONxv2xpA3pCPoYYFAiMURHviib
+ +zUyCirugs2MAiR/WdDAs2Hqz8vLEkN7A404Bj8PAl+l/KB8YyDOqmdqyLzjAfo2m1R7
+ 27sWgjca4wcn7ye+IVAAuNfnmFdFolnXAy/7W9S86QOYEXLOfJOcvKc53hKPg+8v1IvB
+ naBp8i/YBlCFmJfBd2dix38xdItGYjkyw8ZI2DII439Py5CrXBwRAxsRF5YycT/qe/ma
+ 1EdnTgXQtcjiXmxS2ULJ2aSMsVWJckCB+LGNb5xPy1eZ7dGKff8e9ttJcWF/hNSyXl4G
+ ocGQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUqlTRhhnoSU34lxitgLRcduRKhCD5O+2W5jIHEG9OH8F5BBZj52LpqWPD/+zO0vzs0DhAaCuntok/O6+J3U+PZsX2Dbw==
-X-Gm-Message-State: AOJu0Yw89mZKvnbg5GLIJiYkIIh3P3RdSlTa9ff69F0eMCTw0OHdbW8a
- xBoZwlVijOreGdoiwly54cncWiIY9yf6ExgUhoT19kyD/Dch7kVIHs8rEyD8kW4=
-X-Google-Smtp-Source: AGHT+IGPneEGW0BJKtctt487gL5uaBL6FxUnR7rNiKa2PuwloNro5xIy2UjqXFkf3jipENuzKAb0Rw==
-X-Received: by 2002:a5d:570e:0:b0:33e:7a7c:a058 with SMTP id
- a14-20020a5d570e000000b0033e7a7ca058mr841781wrv.18.1712307686912; 
- Fri, 05 Apr 2024 02:01:26 -0700 (PDT)
+ AJvYcCXCToAOr12brxeU0GUsWTm9RzCxdeBy88YmysreHsuISwGIE0fBKB/wSr9gFKcSXuS3iy0lmxWnNQRem3p5PK0b2ocBVg==
+X-Gm-Message-State: AOJu0YxgYr/dqW/35zg51KwW8uFJLE2ske+Egy1X1GIwjKtRIWQ/JaJ2
+ MRtNMA9upTD6qwjTcwAxTgIk72rmJBeQLK7PfGFzxeuRaLrPb5JK+3VG8oicHrLVANA1PDJyGaX
+ l
+X-Google-Smtp-Source: AGHT+IGsxlFDqulJ8NSRSngYZDZllKkGRhbWhri9P49da37Zk7g/8KYesTVvWsf4+I8+Di+VfgjRLg==
+X-Received: by 2002:a05:6000:1864:b0:343:5cac:8d9e with SMTP id
+ d4-20020a056000186400b003435cac8d9emr776159wri.33.1712307779703; 
+ Fri, 05 Apr 2024 02:02:59 -0700 (PDT)
 Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- i8-20020adfb648000000b00343e46c9a9esm1198801wre.11.2024.04.05.02.01.26
+ m15-20020adffe4f000000b0033ed7181fd1sm1501712wrs.62.2024.04.05.02.02.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Apr 2024 02:01:26 -0700 (PDT)
+ Fri, 05 Apr 2024 02:02:59 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Alexey Romanov <avromanov@salutedevices.com>
 Cc: "sjg@chromium.org" <sjg@chromium.org>, "hs@denx.de" <hs@denx.de>,
  "sean.anderson@seco.com" <sean.anderson@seco.com>, "dimorinny@google.com"
  <dimorinny@google.com>, "patrick.delaunay@foss.st.com"
  <patrick.delaunay@foss.st.com>, kernel <kernel@sberdevices.ru>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Neil Armstrong
- <neil.armstrong@linaro.org>
-Subject: Re: [RFC PATCH v2 1/2] fastboot: introduce 'oem board' subcommand
-In-Reply-To: <20240304141126.otcp6tl7v6pupgzl@cab-wsm-0029881.sigma.sbrf.ru>
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [RFC PATCH v2 2/2] board: ad401: example of fastboot oem board
+ realization
+In-Reply-To: <20240304140257.f3tguxyg3z47mhbi@cab-wsm-0029881.sigma.sbrf.ru>
 References: <20240201092027.6258-1-avromanov@salutedevices.com>
- <20240201092027.6258-2-avromanov@salutedevices.com>
- <874jeaytqy.fsf@baylibre.com>
- <20240304141126.otcp6tl7v6pupgzl@cab-wsm-0029881.sigma.sbrf.ru>
-Date: Fri, 05 Apr 2024 11:01:25 +0200
-Message-ID: <87h6ggfaje.fsf@baylibre.com>
+ <20240201092027.6258-3-avromanov@salutedevices.com>
+ <871q9eytac.fsf@baylibre.com>
+ <20240304140257.f3tguxyg3z47mhbi@cab-wsm-0029881.sigma.sbrf.ru>
+Date: Fri, 05 Apr 2024 11:02:58 +0200
+Message-ID: <87edbkfagt.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -101,169 +102,293 @@ X-Virus-Status: Clean
 
 Hi Alexey,
 
-On lun., mars 04, 2024 at 14:11, Alexey Romanov <avromanov@salutedevices.com> wrote:
+On lun., mars 04, 2024 at 14:03, Alexey Romanov <avromanov@salutedevices.com> wrote:
 
-> Hello,
+> Hello Mattijs,
 >
-> On Thu, Feb 15, 2024 at 10:14:13AM +0100, Mattijs Korpershoek wrote:
->> Hi Alexey,
->> 
->> Thank you for the patch.
->> 
+> On Thu, Feb 15, 2024 at 10:24:11AM +0100, Mattijs Korpershoek wrote:
 >> On jeu., f'evr. 01, 2024 at 12:20, Alexey Romanov <avromanov@salutedevices.com> wrote:
 >> 
->> > Currently, fastboot protocol in U-Boot has no opportunity
->> > to execute vendor custom code with verifed boot. This patch
->> > introduce new fastboot subcommand fastboot oem board:<cmd>,
->> > which allow to run custom oem_board function.
+>> > An example of how we use fastboot oeam board subcommand
+>> > for Sean Anderson.
 >> >
->> > Default implementation is __weak. Vendor must redefine it in
->> > board/ folder with his own logic.
+>> > 1 - OEM_BOARD_WRITE_BOOTLOADER_CMD:
 >> >
->> > For example, some vendors have their custom nand/emmc partition
->> > flashing or erasing. Here some typical command for such use cases:
+>> > We use it for custom Amlogic bootloader + tpl
+>> > flashing protocol.
 >> >
->> > - flashing:
+>> > 2 - OEM_BOARD_ERASE_CMD:
 >> >
->> >   $ fastboot stage bootloader.img
+>> > Custom logic for erasing the env-emulated partition,
+>> > which isn't in the mtd markup map.
+>> >
+>> > Example of the script which completely flashes the device:
+>> >
+>> >   $ fastboot erase bootloader
+>> >   $ fastboot stage u-boot.bin
 >> >   $ fastboot oem board:write_bootloader
->> >
->> > - erasing:
->> >
+>> >   $ fastboot reboot-bootloader
 >> >   $ fastboot oem board:erase_env
+>> >   $ fastboot erase misc
+>> >   $ fastboot erase super
+>> >   $ fastboot flash super rootfs
+>> >   $ fastboot reboot
 >> >
 >> > Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
->> 
->> Sorry for the delay. I needed time to give this some thoughts and I
->> waited for Sean to chime as well on this.
->> 
->> I've heard from Neil that this might be related to:
->> https://github.com/superna9999/pyamlboot/pull/20
->
-> Yeah, pyamlboot also uses the same 'bootloader' partition flashing
-> scheme as I present in the patch 2. This is custom Amlogic protocol.
->
->> 
->> I think this can be useful. Not necessarily for writing custom
->> partitions, but I see this could be used for other things:
->> 
->> 1. Provision SoC-specific fuses (serialno/mac addr) at the factory line
->>    (for production devices)
->>    Examples:
->>    $ fastboot oem board:write_serialno ABCDEF
->>    $ fastboot oem board:write_macaddr AA:BB:CC:DD:EE
->> 
->> 2. Access secure storage (via an Trusted Application)
->
-> Agree, you are completely right.
->
->> 
->> But both examples could also be in a fastboot flash format:
->> $ fastboot flash serialno ABCDEF
->
-> But this case requires to 'serialno' partition definition in schema?
-> I didn't fully understand you.
-
-I meant more in a "conceptual way". (from a end user perspective)
-
-"fastboot flash" is generic command that's just supposed to write data
-somewhere.
-
-The back-end (partitioning etc) depends on the storage the device uses
-so that's a "implementation detail".
-
-In any case, I don't have a proper alternative to what you are proposing
-so as send in [1], I'm okay picking this up after some minor review
-comments are addressed.
-
-[1] https://lore.kernel.org/all/87jzlcfang.fsf@baylibre.com/
-
->
->> 
->> One concern I have is that U-Boot forks might use this command as
->> an excuse to not makes things generic.
->> 
->> I hope that others will chime in on this as well.
->> I'd like to discuss this more because once this command is in we cannot
->> remove it later.
->> 
 >> > ---
->> >  drivers/fastboot/Kconfig      |  7 +++++++
->> >  drivers/fastboot/fb_command.c | 15 +++++++++++++++
->> >  include/fastboot.h            |  1 +
->> >  3 files changed, 23 insertions(+)
+>> >  board/amlogic/ad401/fastboot.c | 222 +++++++++++++++++++++++++++++++++
+>> >  1 file changed, 222 insertions(+)
+>> >  create mode 100644 board/amlogic/ad401/fastboot.c
 >> >
->> > diff --git a/drivers/fastboot/Kconfig b/drivers/fastboot/Kconfig
->> > index a4313d60a9..4d94391a76 100644
->> > --- a/drivers/fastboot/Kconfig
->> > +++ b/drivers/fastboot/Kconfig
->> > @@ -241,6 +241,13 @@ config FASTBOOT_OEM_RUN
->> >  	  this feature if you are using verified boot, as it will allow an
->> >  	  attacker to bypass any restrictions you have in place.
->> >  
->> > +config FASTBOOT_OEM_BOARD
->> > +	bool "Enable the 'oem board' command"
->> > +	help
->> > +	  This extends the fastboot protocol with an "oem board" command. This
->> > +	  command allows running vendor custom code defined in board/ files.
->> > +	  Otherwise, it will do nothing and send fastboot fail.
->> 
->> If we move forward with this, please also document the new command in:
->> doc/android/fastboot.rst
->> 
+>> > diff --git a/board/amlogic/ad401/fastboot.c b/board/amlogic/ad401/fastboot.c
+>> > new file mode 100644
+>> > index 0000000000..01da8efa5b
+>> > --- /dev/null
+>> > +++ b/board/amlogic/ad401/fastboot.c
+>> > @@ -0,0 +1,222 @@
+>> > +// SPDX-License-Identifier: GPL-2.0+
+>> > +/*
+>> > + * (C) Copyright 2023 SaluteDevices, Inc.
+>> > + */
 >> > +
->> >  endif # FASTBOOT
->> >  
->> >  endmenu
->> > diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
->> > index 5fcadcdf50..2298815770 100644
->> > --- a/drivers/fastboot/fb_command.c
->> > +++ b/drivers/fastboot/fb_command.c
->> > @@ -40,6 +40,7 @@ static void reboot_recovery(char *, char *);
->> >  static void oem_format(char *, char *);
->> >  static void oem_partconf(char *, char *);
->> >  static void oem_bootbus(char *, char *);
->> > +static void oem_board(char *, char *);
->> >  static void run_ucmd(char *, char *);
->> >  static void run_acmd(char *, char *);
->> >  
->> > @@ -107,6 +108,10 @@ static const struct {
->> >  		.command = "oem run",
->> >  		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_OEM_RUN, (run_ucmd), (NULL))
->> >  	},
->> > +	[FASTBOOT_COMMAND_OEM_BOARD] = {
->> > +		.command = "oem board",
->> > +		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_OEM_BOARD, (oem_board), (NULL))
->> > +	},
->> >  	[FASTBOOT_COMMAND_UCMD] = {
->> >  		.command = "UCmd",
->> >  		.dispatch = CONFIG_IS_ENABLED(FASTBOOT_UUU_SUPPORT, (run_ucmd), (NULL))
->> > @@ -490,3 +495,13 @@ static void __maybe_unused oem_bootbus(char *cmd_parameter, char *response)
->> >  	else
->> >  		fastboot_okay(NULL, response);
->> >  }
+>> > +#include <common.h>
+>> > +#include <env.h>
+>> > +#include <fastboot.h>
+>> > +#include <nand.h>
+>> > +#include <asm/arch/nand.h>
+>> > +#include <jffs2/load_kernel.h>
+>> > +#include <linux/sizes.h>
+>> > +#include <linux/types.h>
+>> > +#include <linux/mtd/mtd.h>
 >> > +
->> > +void __weak fastboot_oem_board(char *cmd_parameter, void *data, u32 size, char *response)
+>> > +enum {
+>> > +	OEM_BOARD_ERASE_CMD,
+>> > +	OEM_BOARD_WRITE_BOOTLOADER_CMD,
+>> > +};
+>> > +
+>> > +struct defenv {
+>> > +	char *name;
+>> > +	char value[256];
+>> > +};
+>> > +
+>> > +static void save_defenv(struct defenv *e, size_t cnt)
 >> > +{
->> > +	fastboot_fail("oem board function not defined", response);
+>> > +	int i;
+>> > +
+>> > +	for (i = 0; i < cnt; i++) {
+>> > +		const char *env_val = env_get(e[i].name);
+>> > +
+>> > +		if (env_val)
+>> > +			strlcpy(e[i].value, env_val, sizeof(e[i].value));
+>> > +		else
+>> > +			e[i].value[0] = '\0';
+>> > +	}
 >> > +}
 >> > +
->> > +static void __maybe_unused oem_board(char *cmd_parameter, char *response)
+>> > +static void set_defenv(struct defenv *e, size_t cnt)
 >> > +{
->> > +	fastboot_oem_board(cmd_parameter, fastboot_buf_addr, image_size, response);
+>> > +	int i;
+>> > +
+>> > +	for (i = 0; i < cnt; i++)
+>> > +		env_set(e[i].name, e[i].value);
 >> > +}
->> > diff --git a/include/fastboot.h b/include/fastboot.h
->> > index 296451f89d..06c1f26b6c 100644
->> > --- a/include/fastboot.h
->> > +++ b/include/fastboot.h
->> > @@ -37,6 +37,7 @@ enum {
->> >  	FASTBOOT_COMMAND_OEM_PARTCONF,
->> >  	FASTBOOT_COMMAND_OEM_BOOTBUS,
->> >  	FASTBOOT_COMMAND_OEM_RUN,
->> > +	FASTBOOT_COMMAND_OEM_BOARD,
->> >  	FASTBOOT_COMMAND_ACMD,
->> >  	FASTBOOT_COMMAND_UCMD,
->> >  	FASTBOOT_COMMAND_COUNT
+>> > +
+>> > +static int fastboot_erase_env(void)
+>> > +{
+>> > +	char *const defenv_names[] = { "lock", "mtdparts", "mtdids" };
+>> > +	struct defenv env[ARRAY_SIZE(defenv_names)];
+>> > +	int err, i;
+>> > +
+>> > +	for (i = 0; i < ARRAY_SIZE(env); i++)
+>> > +		env[i].name = defenv_names[i];
+>> > +
+>> > +	printf("ENV is being erased...\n");
+>> > +
+>> > +	/*
+>> > +	 * Reset environment to the default, excluding 'lock' variable,
+>> > +	 * because it reflects the fastboot's state after execution of
+>> > +	 * 'flashing unlock' command, hence it must survive the env-erasing.
+>> > +	 * Otherwise, further erase commands will fail on check_lock().
+>> > +	 *
+>> > +	 * Also, we have to save 'mtdparts' and 'mtdids' variables
+>> > +	 * because they are necessary to obtain partition map.
+>> > +	 */
+>> > +
+>> > +	save_defenv(env, ARRAY_SIZE(env));
+>> > +	env_set_default(NULL, 0);
+>> > +	set_defenv(env, ARRAY_SIZE(env));
+>> > +
+>> > +	err = env_save();
+>> > +	if (err) {
+>> > +		pr_err("Can't overwrite ENV-partition\n");
+>> > +		return err;
+>> > +	}
+>> 
+>> Hmm so the fastboot locked state is saved in the U-Boot environment.
+>> There is probably a good reason for this (no secure storage for
+>> example). But this does not feel board specific.
+>> 
+>> Wouldn't it be better if we could just run "fastboot erase bootenv" and
+>> that the generic fastboot code does the right thing?
+>
+> Are you proposing to modify the code of fastboot in such a way
+> that if user send 'erase bootenv' string, then we call generic
+> function to cleanup environment, instead of try to search (and erase)
+> in partition schema 'bootenv' partition?
+
+I would have liked to have a generic "erase bootenv" command yes, but
+your solution seems fine so no need to do something different.
+
+Thank you for your patience with this !
+
+>
+>> (which is env default, and ignoring some magic/specific variables)
+>> 
+>> > +
+>> > +	return 0;
+>> > +}
+>> > +
+>> > +static int fastboot_nand_write_tpl(struct mtd_info *mtd, void *buffer,
+>> > +				   u32 offset, size_t size, int flags)
+>> > +{
+>> > +	int boot_cpy_num = meson_bootloader_copy_num(BOOT_TPL);
+>> > +	u64 size_per_copy = meson_bootloader_copy_size(mtd, BOOT_TPL);
+>> > +	int i;
+>> > +
+>> > +	for (i = 0; i < boot_cpy_num; i++) {
+>> > +		size_t retlen, len = size;
+>> > +		int ret;
+>> > +
+>> > +		ret = nand_write_skip_bad(mtd, offset + (i * size_per_copy),
+>> > +					  &len, &retlen, offset + size_per_copy,
+>> > +					  buffer, flags);
+>> > +		if (ret)
+>> > +			return ret;
+>> > +	}
+>> > +
+>> > +	return 0;
+>> > +}
+>> > +
+>> > +static int fastboot_nand_write_bl2(struct mtd_info *mtd, void *buffer,
+>> > +				   u32 offset, size_t size, int flags)
+>> > +{
+>> > +	int boot_cpy_num = meson_bootloader_copy_num(BOOT_BL2);
+>> > +	u64 size_per_copy = meson_bootloader_copy_size(mtd, BOOT_BL2);
+>> > +	int i;
+>> > +
+>> > +	for (i = 0; i < boot_cpy_num; i++) {
+>> > +		int ret;
+>> > +
+>> > +		ret = meson_bootloader_write_bl2(mtd, buffer,
+>> > +						 offset + (i * size_per_copy),
+>> > +					         size, flags);
+>> > +		if (ret)
+>> > +			return ret;
+>> > +	}
+>> > +
+>> > +	return meson_bootloader_write_info_pages();
+>> > +}
+>> > +
+>> > +static int fastboot_nand_write_bootloader(void *buffer, u32 size)
+>> > +{
+>> > +	struct part_info *part;
+>> > +	struct mtd_info *mtd = NULL;
+>> > +	struct mtd_device *dev;
+>> > +	u8 pnum;
+>> > +	int ret;
+>> > +
+>> > +	if (size < BL2_SIZE)
+>> > +		return 0;
+>> > +
+>> > +	if (!buffer)
+>> > +		return -EINVAL;
+>> > +
+>> > +	ret = mtdparts_init();
+>> > +	if (ret) {
+>> > +		pr_err("Cannot initialize MTD partitions\n");
+>> > +		return ret;
+>> > +	}
+>> > +
+>> > +	ret = find_dev_and_part("bootloader", &dev, &pnum, &part);
+>> > +	if (ret) {
+>> > +		pr_err("cannot find 'bootloader' partition\n");
+>> > +		return ret;
+>> > +	}
+>> > +
+>> > +	mtd = get_nand_dev_by_index(dev->id->num);
+>> > +	if (!mtd)
+>> > +		return -EINVAL;
+>> > +
+>> > +	ret = fastboot_nand_write_bl2(mtd, buffer, part->offset,
+>> > +				      BL2_SIZE, WITH_WR_VERIFY);
+>> > +	if (ret) {
+>> > +		pr_err("fastboot: failed to write BL2\n");
+>> > +		return ret;
+>> > +	}
+>> > +
+>> > +	ret = find_dev_and_part("tpl", &dev, &pnum, &part);
+>> > +	if (ret) {
+>> > +		pr_err("cannot find 'bootloader' partition\n");
+>> > +		return ret;
+>> > +	}
+>> > +
+>> > +	mtd = get_nand_dev_by_index(dev->id->num);
+>> > +	if (!mtd)
+>> > +		return -EINVAL;
+>> > +
+>> > +	ret = fastboot_nand_write_tpl(mtd, buffer + BL2_SIZE, part->offset,
+>> > +				      size - BL2_SIZE, WITH_WR_VERIFY);
+>> > +	if (ret) {
+>> > +		pr_err("fastboot: failed to write TPL\n");
+>> > +		return ret;
+>> > +	}
+>> > +
+>> > +	return 0;
+>> > +}
+>> > +
+>> > +int get_oem_board_command(const char *cmd)
+>> > +{
+>> > +	const char *oem_commands[] = {
+>> > +		[OEM_BOARD_ERASE_CMD] = "erase_env",
+>> > +		[OEM_BOARD_WRITE_BOOTLOADER_CMD] = "write_bootloader",
+>> > +	};
+>> > +	int i;
+>> > +
+>> > +	for (i = 0; i < ARRAY_SIZE(oem_commands); i++)
+>> > +		if (!strcmp(cmd, oem_commands[i]))
+>> > +			return i;
+>> > +
+>> > +	return -EINVAL;
+>> > +}
+>> > +
+>> > +void fastboot_oem_board(const char *cmd_parameter, void *data, u32 size,
+>> > +			char *response)
+>> > +{
+>> > +	char buf[128] = { 0 };
+>> > +	int ret, cmd;
+>> > +
+>> > +	cmd = get_oem_board_command(cmd_parameter);
+>> > +
+>> > +	switch (cmd) {
+>> > +		case OEM_BOARD_ERASE_CMD:
+>> > +			ret = fastboot_erase_env();
+>> > +			break;
+>> > +		case OEM_BOARD_WRITE_BOOTLOADER_CMD:
+>> > +			ret = fastboot_nand_write_bootloader(data, size);
+>> > +			break;
+>> > +		default:
+>> > +			snprintf(buf, sizeof(buf),
+>> > +				 "Command 'oem board %s' not supported",
+>> > +				 cmd_parameter);
+>> > +			fastboot_fail(buf, response);
+>> > +			return;
+>> > +	}
+>> > +
+>> > +	if (ret < 0)
+>> > +		fastboot_fail("Failed to erase env partition", response);
+>> > +	else
+>> > +		fastboot_okay(NULL, response);
+>> > +}
 >> > -- 
 >> > 2.30.1
 >
