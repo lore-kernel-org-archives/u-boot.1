@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2F61CD11C2
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 06:28:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33667CD11C2
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 06:29:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A4DE86DEE;
-	Fri,  5 Apr 2024 08:28:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id AF6A988120;
+	Fri,  5 Apr 2024 08:29:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="tPzucFD1";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Aw1m0LnW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 66C0E87D59; Fri,  5 Apr 2024 08:28:05 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9376F8814B; Fri,  5 Apr 2024 08:29:03 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5AD9580245
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 08:28:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2145E80245
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 08:28:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1712298481; x=1712903281; i=xypron.glpk@gmx.de;
- bh=7KL1VLY8LHaI0Zl9BK1GFBxh6HsyeSWgdj/q2z+ub5Q=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=tPzucFD1LtbEkVBOFpxmOSP4VA4FRzpqOzGucdPdBExb0zYcqwJCYEU6w926WGeL
- 3xoPTLRoZt0OpaXBg+18pODiVdq1kl43ogxTV23u9tXEW3iKDTJpAD8tw0wDnCfKK
- raiTj0n8L9Qhu8kJi/AeJJ8yziZAbqmHN/zJiphO40SVWXYF8lD3R2xP8LS2ryvQ7
- pTt1gNZSlTFsI9GabQHfzt5OxZdjqg8hivSa5BIhap79f035OCOXGPnAJqLnQ23/W
- SxOnjZ4LO0sK+04Ues3cBwRlSwb8Vq5jgW71bJ2gsVJdIHZYtfOkVQb0WqnyuVZn2
- yv8/FUagMvEkUgNUwQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N1Obh-1sp9oo19Fj-012nMw; Fri, 05
- Apr 2024 08:28:01 +0200
-Message-ID: <eb1c51e3-17e0-4c76-a703-da18a85a1ba7@gmx.de>
-Date: Fri, 5 Apr 2024 08:27:55 +0200
+ spf=pass smtp.mailfrom=j-choudhary@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 4356SmPP129008;
+ Fri, 5 Apr 2024 01:28:48 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1712298528;
+ bh=PDBh9vmh/CYu4FP9Pr2uAMy3HTysVL0YCoY8vF4nO0k=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Aw1m0LnWnEFZ0urc1s+EUixV8MImuM6KjSTJN7WuCfDUrx4JInovUBbzofRFV4xse
+ 2nyw0iERAUEgvMPaHtxFZWHW88WUQyWnTASEI0OYQwEmHKTkPjvfYVPlBm3m26UcWG
+ yVC4FXTyGnWUVNEuHUOBCtDxpIttzoWD0ftIsacA=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 4356SmIw126589
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 5 Apr 2024 01:28:48 -0500
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 5
+ Apr 2024 01:28:47 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 5 Apr 2024 01:28:47 -0500
+Received: from [172.24.227.252]
+ (jayesh-hp-probook-440-g8-notebook-pc.dhcp.ti.com [172.24.227.252])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 4356Shx1079439;
+ Fri, 5 Apr 2024 01:28:44 -0500
+Message-ID: <dc4a301c-2752-40d9-9d9e-71740041f5e7@ti.com>
+Date: Fri, 5 Apr 2024 11:58:42 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: move efi_var_collect to common functions
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Ilias Apalodimas <apalos@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Weizhao Ouyang <o451686892@gmail.com>,
- u-boot@lists.denx.de
-References: <20240404074819.52156-1-ilias.apalodimas@linaro.org>
+Subject: Re: [RFC PATCH 15/15] doc: board: ti: Add J722S-EVM documentation
+To: Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>, <trini@konsulko.com>,
+ <jh80.chung@samsung.com>, <lukma@denx.de>, <seanga2@gmail.com>,
+ <vaishnav.a@ti.com>, <n-francis@ti.com>, <u-kumar1@ti.com>,
+ <sumit.garg@linaro.org>
+CC: <vigneshr@ti.com>, <nm@ti.com>, <bb@ti.com>, <rogerq@kernel.org>,
+ <r-gunasekaran@ti.com>
+References: <20240404090039.87458-1-j-choudhary@ti.com>
+ <20240404090039.87458-16-j-choudhary@ti.com>
+ <ac5780c5-f1ca-4138-a027-d3ed65911733@ti.com>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240404074819.52156-1-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:ozfHq9MeRHkdIh8v75VViXDAL3KvKnZdCYFFUSFsTo6ryxD2qiE
- VbaWv4GECn+vG3am+mIly0MT90fMrLQGJnLbVjWtduaUmHt3ZXOX+Q1RppLtonMH+FHXInH
- wcW0BaQY0el3zzNm3GoG+qYeHL9knYxkFk5cUqC/rU680nGwmT37zZ4k5SVNH8bh0zP3N5D
- FAqh8uGME5dsKtSFpiNjQ==
-UI-OutboundReport: notjunk:1;M01:P0:QFEXKYTj5oo=;XcqFbdXJxVZ0HZttJoluRpYHseu
- sbh2kkWm1hRKwi0g5Ng/E6pOt1NZ+pBb9AvvDjPDrOLgZquf1v/9+nfYEa9uugq4qzOggO5q/
- VVv7cqPysGnUH8OYb+O7bnke0FaOzBbTV5KjKWbA0nb0LGneRIM7rqjvvScDn2DExT4cepV5g
- ot2dSnqj/JebPCpOXwF1qPe8a2loyHFqpoKccQ6o4nsIK5pIr3uUtqwhnUF6QyZj7V+e6tEZG
- lOQpMWmAwebWnYlXolvBeTo5NO4CbD7cwOVZEqt0rOrgbMC4kHwmbmDKbu3PVKG1tXuTge0xk
- iUcrpPjIaBbN7/V+eswNrfMKlofedHN15xWHjiQRAU8h4YvI/W/XtRjcrfc4Q1CR4SuOvqvev
- MtbK+lf8xlW77xYXJ/NtSlLJ0hi9Tz/zZlWTX0/vuVyj5W0ID6Lg6C/EJi5vsmXe6MspNUlZY
- R+wkumqS5Ip8ztZVNphENYbaB7XZmaAL7wD5/+0BO3bhWwjyMoOMevRdirUKrtfBWrwZ0BN7T
- 0Ez+2Gib4KCjuYT2rV1i1U55wFbpO57Uamgstp2fZDdsE8xzuLGaPr4haFesI0ZvHPSi0Doum
- wH1Xcp2MrRgX9YP6Z70Z30uf2SX8eXrGQ0A0Wq2BYlhFYrXzDurr/78caKAVeM2b4GTwQuwyB
- ij7qPybwUAJX7WB/Q/mDW3fOBtdrVLkvCzQl0t1Sr90lRjRfYWGGqbqxBIunIN8/jZAp5dGZ6
- 36BLyMKRTwlPbHscsQWuvSCQL1G7cy1yT/JEK6SpBgoX55mkMkc9Q0EiRK+q/s2tnvo9xOwTo
- aD/9wqgsGwodQ7rqfmFb0xDz6waS2h+FJutlDOzO4Vkc8=
+From: Jayesh Choudhary <j-choudhary@ti.com>
+In-Reply-To: <ac5780c5-f1ca-4138-a027-d3ed65911733@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,231 +87,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/4/24 09:48, Ilias Apalodimas wrote:
-> From: Ilias Apalodimas <apalos@gmail.com>
->
-> efi_var_collect() was initially placed in efi_var_file.c, since back
-> then we only supported efi variables stored in a file. Since then we
-> support variables stored in an RPMB as well and use that function to
-> collect variables that should be present at runtime.
+Hello Andrew,
 
-Thanks for cleaning this up.
+On 04/04/24 21:19, Andrew Davis wrote:
+> On 4/4/24 4:00 AM, Jayesh Choudhary wrote:
+>> Introduce basic documentation for the J722S-EVM.
+>>
+>> Signed-off-by: Jayesh Choudhary <j-choudhary@ti.com>
+>> ---
+>>   doc/board/ti/j722s_evm.rst | 262 +++++++++++++++++++++++++++++++++++++
+>>   doc/board/ti/k3.rst        |   1 +
+>>   2 files changed, 263 insertions(+)
+>>   create mode 100644 doc/board/ti/j722s_evm.rst
+>>
+>> diff --git a/doc/board/ti/j722s_evm.rst b/doc/board/ti/j722s_evm.rst
+>> new file mode 100644
+>> index 0000000000..150330f637
+>> --- /dev/null
+>> +++ b/doc/board/ti/j722s_evm.rst
+>> @@ -0,0 +1,262 @@
+>> +.. SPDX-License-Identifier: GPL-2.0+ OR BSD-3-Clause
+>> +.. sectionauthor:: Jayesh Choudhary <j-choudhary@ti.com>
+>> +
+>> +J722S-EVM Platform
+>> +==================
+>> +
 
-In the CONFIG_EFI_MM_COMM_TEE=3Dy case we seem not to need efi_var_file.c
-anymore. Can we add this diff:
+[...]
 
-=2D-- a/lib/efi_loader/Makefile
-+++ b/lib/efi_loader/Makefile
-@@ -72,11 +72,11 @@ obj-y +=3D efi_string.o
-  obj-$(CONFIG_EFI_UNICODE_COLLATION_PROTOCOL2) +=3D efi_unicode_collation=
-.o
-  obj-y +=3D efi_var_common.o
-  obj-y +=3D efi_var_mem.o
--obj-y +=3D efi_var_file.o
-  ifeq ($(CONFIG_EFI_MM_COMM_TEE),y)
-  obj-y +=3D efi_variable_tee.o
-  else
-  obj-y +=3D efi_variable.o
-+obj-y +=3D efi_var_file.o
-  obj-$(CONFIG_EFI_VARIABLES_PRESEED) +=3D efi_var_seed.o
-  endif
-  obj-y +=3D efi_watchdog.o
 
-Another comment below.
+>> +
+>> +.. code-block:: bash
+>> +
+>> + $ export UBOOT_CFG_CORTEXR=j722s_evm_r5_defconfig
+>> + $ export UBOOT_CFG_CORTEXA=j722s_evm_a53_defconfig
+>> + $ export TFA_BOARD=lite
+>> + $ # we dont use any extra TFA parameters
+>> + $ unset TFA_EXTRA_ARGS
+> 
+> Why unset, who is setting in the first place?
 
->
-> So let's move it around in efi_var_common.c which makes more sense
->
-> Suggested-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> Signed-off-by: Ilias Apalodimas <apalos@gmail.com>
-> ---
->   lib/efi_loader/efi_var_common.c | 76 +++++++++++++++++++++++++++++++++
->   lib/efi_loader/efi_var_file.c   | 64 ---------------------------
->   2 files changed, 76 insertions(+), 64 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_co=
-mmon.c
-> index 16b2c3d48828..07b9603d49f3 100644
-> --- a/lib/efi_loader/efi_var_common.c
-> +++ b/lib/efi_loader/efi_var_common.c
-> @@ -9,6 +9,7 @@
->   #include <efi_loader.h>
->   #include <efi_variable.h>
->   #include <stdlib.h>
-> +#include <u-boot/crc.h>
->
->   enum efi_secure_mode {
->   	EFI_MODE_SETUP,
-> @@ -416,3 +417,78 @@ void *efi_get_var(const u16 *name, const efi_guid_t=
- *vendor, efi_uintn_t *size)
->
->   	return buf;
->   }
-> +
-> +/**
-> + * efi_var_collect() - Copy EFI variables mstching attributes mask
-> + *
-> + * @bufp:	buffer containing variable collection
-> + * @lenp:	buffer length
-> + * @attr_mask:	mask of matched attributes
-> + *
-> + * Return:	Status code
-> + */
-> +efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp,=
- loff_t *lenp,
-> +					    u32 check_attr_mask)
-> +{
-> +	size_t len =3D EFI_VAR_BUF_SIZE;
-> +	struct efi_var_file *buf;
-> +	struct efi_var_entry *var, *old_var;
-> +	size_t old_var_name_length =3D 2;
-> +
-> +	*bufp =3D NULL; /* Avoid double free() */
-> +	buf =3D calloc(1, len);
-> +	if (!buf)
-> +		return EFI_OUT_OF_RESOURCES;
-> +	var =3D buf->var;
-> +	old_var =3D var;
-> +	for (;;) {
-> +		efi_uintn_t data_length, var_name_length;
-> +		u8 *data;
-> +		efi_status_t ret;
-> +
-> +		if ((uintptr_t)buf + len <=3D
-> +		    (uintptr_t)var->name + old_var_name_length)
-> +			return EFI_BUFFER_TOO_SMALL;
-> +
-> +		var_name_length =3D (uintptr_t)buf + len - (uintptr_t)var->name;
-> +		memcpy(var->name, old_var->name, old_var_name_length);
-> +		guidcpy(&var->guid, &old_var->guid);
-> +		ret =3D efi_get_next_variable_name_int(
-> +				&var_name_length, var->name, &var->guid);
-> +		if (ret =3D=3D EFI_NOT_FOUND)
-> +			break;
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			free(buf);
-> +			return ret;
-> +		}
-> +		old_var_name_length =3D var_name_length;
-> +		old_var =3D var;
-> +
-> +		data =3D (u8 *)var->name + old_var_name_length;
-> +		data_length =3D (uintptr_t)buf + len - (uintptr_t)data;
-> +		ret =3D efi_get_variable_int(var->name, &var->guid,
-> +					   &var->attr, &data_length, data,
-> +					   &var->time);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			free(buf);
-> +			return ret;
-> +		}
-> +		if ((var->attr & check_attr_mask) =3D=3D check_attr_mask) {
-> +			var->length =3D data_length;
-> +			var =3D (struct efi_var_entry *)ALIGN((uintptr_t)data + data_length,=
- 8);
-> +		}
-> +	}
-> +
-> +	buf->reserved =3D 0;
-> +	buf->magic =3D EFI_VAR_FILE_MAGIC;
-> +	len =3D (uintptr_t)var - (uintptr_t)buf;
-> +	buf->crc32 =3D crc32(0, (u8 *)buf->var,
-> +			   len - sizeof(struct efi_var_file));
-> +	buf->length =3D len;
-> +	*bufp =3D buf;
-> +	*lenp =3D len;
-> +
-> +	return EFI_SUCCESS;
-> +}
-> +
-> +
+Ok this might be unnecessary. Could be removed.
 
-This produces a warning
+> 
+>> + $ export OPTEE_PLATFORM=k3-am62x
+> 
+> None of the addresses OPTEE cares about changed from AM62?
 
-.git/rebase-apply/patch:95: new blank line at EOF.
+Nope. We have been carrying the same OPTEE flavour since AM62
+in AM62A, AM62P and now in J722S
 
-Could you, please, remove the blank lines at the end of the file.
+Yocto machine configurations:
 
-Best regards
+AM62A: 
+<https://git.ti.com/cgit/arago-project/meta-ti/tree/meta-ti-bsp/conf/machine/include/am62axx.inc#n18>
+AM62P: 
+<https://git.ti.com/cgit/arago-project/meta-ti/tree/meta-ti-bsp/conf/machine/include/am62pxx.inc#n15>
+J722S: 
+<https://git.ti.com/cgit/arago-project/meta-ti/tree/meta-ti-bsp/conf/machine/include/j722s.inc#n15>
 
-Heinrich
+> 
+>> + $ export OPTEE_EXTRA_ARGS="CFG_WITH_SOFTWARE_PRNG=y"
+> 
+> Do you still need this, the HW RNG should work now.
+> 
 
-> diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file=
-.c
-> index 532b6b40eefe..413e1794e88c 100644
-> --- a/lib/efi_loader/efi_var_file.c
-> +++ b/lib/efi_loader/efi_var_file.c
-> @@ -52,70 +52,6 @@ static efi_status_t __maybe_unused efi_set_blk_dev_to=
-_system_partition(void)
->   	return EFI_SUCCESS;
->   }
->
-> -efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp,=
- loff_t *lenp,
-> -					    u32 check_attr_mask)
-> -{
-> -	size_t len =3D EFI_VAR_BUF_SIZE;
-> -	struct efi_var_file *buf;
-> -	struct efi_var_entry *var, *old_var;
-> -	size_t old_var_name_length =3D 2;
-> -
-> -	*bufp =3D NULL; /* Avoid double free() */
-> -	buf =3D calloc(1, len);
-> -	if (!buf)
-> -		return EFI_OUT_OF_RESOURCES;
-> -	var =3D buf->var;
-> -	old_var =3D var;
-> -	for (;;) {
-> -		efi_uintn_t data_length, var_name_length;
-> -		u8 *data;
-> -		efi_status_t ret;
-> -
-> -		if ((uintptr_t)buf + len <=3D
-> -		    (uintptr_t)var->name + old_var_name_length)
-> -			return EFI_BUFFER_TOO_SMALL;
-> -
-> -		var_name_length =3D (uintptr_t)buf + len - (uintptr_t)var->name;
-> -		memcpy(var->name, old_var->name, old_var_name_length);
-> -		guidcpy(&var->guid, &old_var->guid);
-> -		ret =3D efi_get_next_variable_name_int(
-> -				&var_name_length, var->name, &var->guid);
-> -		if (ret =3D=3D EFI_NOT_FOUND)
-> -			break;
-> -		if (ret !=3D EFI_SUCCESS) {
-> -			free(buf);
-> -			return ret;
-> -		}
-> -		old_var_name_length =3D var_name_length;
-> -		old_var =3D var;
-> -
-> -		data =3D (u8 *)var->name + old_var_name_length;
-> -		data_length =3D (uintptr_t)buf + len - (uintptr_t)data;
-> -		ret =3D efi_get_variable_int(var->name, &var->guid,
-> -					   &var->attr, &data_length, data,
-> -					   &var->time);
-> -		if (ret !=3D EFI_SUCCESS) {
-> -			free(buf);
-> -			return ret;
-> -		}
-> -		if ((var->attr & check_attr_mask) =3D=3D check_attr_mask) {
-> -			var->length =3D data_length;
-> -			var =3D (struct efi_var_entry *)ALIGN((uintptr_t)data + data_length,=
- 8);
-> -		}
-> -	}
-> -
-> -	buf->reserved =3D 0;
-> -	buf->magic =3D EFI_VAR_FILE_MAGIC;
-> -	len =3D (uintptr_t)var - (uintptr_t)buf;
-> -	buf->crc32 =3D crc32(0, (u8 *)buf->var,
-> -			   len - sizeof(struct efi_var_file));
-> -	buf->length =3D len;
-> -	*bufp =3D buf;
-> -	*lenp =3D len;
-> -
-> -	return EFI_SUCCESS;
-> -}
-> -
->   /**
->    * efi_var_to_file() - save non-volatile variables as file
->    *
+Yes. We still need SW RNG.
 
+Warm Regards,
+-Jayesh
+
+[...]
