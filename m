@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E104FCD1299
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 08:59:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EE01C67861
+	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 09:01:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3DC8A88416;
-	Fri,  5 Apr 2024 10:59:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AEB7488460;
+	Fri,  5 Apr 2024 11:01:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="sXNW30Op";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="cNqyAAYr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAC6288416; Fri,  5 Apr 2024 10:59:05 +0200 (CEST)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id E05A1884C7; Fri,  5 Apr 2024 11:01:29 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33AC787E7F
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 10:59:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D56188460
+ for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 11:01:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2d4886a1cb4so24635621fa.0
- for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 01:59:02 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4162b8cb3e9so14268765e9.0
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 02:01:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712307541; x=1712912341;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712307687; x=1712912487;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=j6jOjpO7Bs3iQJWY2G8qBTp17Dv0jRpcXQulsr7k4QU=;
- b=sXNW30OpAZbalMH4e5p5E9cLHGA08J4yYey8pEWsfRINeSSIFln4QuMOWuTrwSNiZJ
- YJ/wiSGR50eQJsr9A5XCkm0Q5LlRMcddcKhnHyfRZzVN+vtS6DqCPHvb8WwrXBsioB3U
- tGSBAALdeCoMbDOucJAE8iDdGxXVAb+WQXhPoSp/z2zhlI22C0H3Ro0SwVAAL82XhOMf
- KWjcivLKH726cMLQuKVYUletApizDSaAO/r+9xIK9doB4QYa/Ot6g8V9phjRf+VMkKMv
- LPuq4MLvGGdd+i8VUoIecLd6pDvM73CED6JvATEBpAX716zUkdOV2Bih9+GqUJf4cemf
- TqLg==
+ bh=agx9DK8GrnQ38BQicYso2L59l/ba/7FFixdGSXQOUas=;
+ b=cNqyAAYrzciko3wmWlLG66qsqB8qQSraXv2JEa9tVAjRxX008WzAUzJuyC+nJrYm9O
+ fit4U2XjVFX3MBcA92RNx6Qcx24D6ke9fSsPFE6NKfG2LITL3QaybJxIK1+0ZBwPQ1Zn
+ tFbHuBOwF4LFj96dbD4GjsVDcY7JDINnowuysG3/+pDk7Z7kxVQOkjBidSvqamwTgWek
+ v6VmbhI6Px/PnWann9CJ5dUtbLuiPmqfKUIECXlr91NucW9FDmD4KLVrYX3ixjN/sPlk
+ L2c81YbQB/V/AAsrYRyyWNU8lZyPVxmdOCoVdf70xgiQmsG6xjGTbkloOOvMF4yolxhp
+ pkrA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712307541; x=1712912341;
+ d=1e100.net; s=20230601; t=1712307687; x=1712912487;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=j6jOjpO7Bs3iQJWY2G8qBTp17Dv0jRpcXQulsr7k4QU=;
- b=Ofl6joVK5k5XFjZ+vRrqJpzSu3mSSCARBgrTy/TETou0xy20C1XgUdpzFVYrO7xOFV
- FewmbvhRvKQELJgxvCpiuwjcsTHVfML4oKQBWhH3SeL4o25qtZqHZ6rYSRSm5hL7dKjI
- BrNImN86dEraLYv4uDsTW72UCHXbKoI9+WHRWTDR50qVk6G7+GDwepJEiab4ir0B+42w
- 871Qnlfg7jD82Gyj020c8nwdswTV0l9RPlHIw91PP20qikbc/2tUq3xvu7p+DSmPMchW
- SmxGKRoK1CbgrAz8PVqiFwyvDQiRw4IMJVXJXlcrslGpJ1hkCFLR80Mfj+3brsAb88hP
- 8bBg==
+ bh=agx9DK8GrnQ38BQicYso2L59l/ba/7FFixdGSXQOUas=;
+ b=cK/aB14pJgo6cLg/N+G+afXwF7DiFgMwLARxUQXTNAsUfbI4IQT7bCdwgvMzXgvG5K
+ SHuFYTztxygKsEJ2GrqmWFEOmsogG6IgbxW5W8fHvjZ/ipl4ZXK/ZO+SHHQoXkyNTemJ
+ D0qtcjJbn1EmXcnfXZ/LB0zQ0hG30i3HwicbucpCicw9yFxXhDjQ+ptszuo8n/Vxl8xr
+ WmNSwARPIbcCLNZS7eBsNX9VMuc9DKnh4WPei3n7BkitjFRdO5jeEqEG4LjObB4TSIpI
+ 0YG0NJRexvmXCt7ksDucEQD0U1RUbeHcDGBfMGbI6bFZ40045smw1CppgXLj1siLkUhi
+ 5kfw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXg6vJq+Iu4M29CaoWnDtmgJAYgiNqmy57jGu4B5Keh82Pa1JYHBbvNU2nlsjAcG4HLCFlVCjVHSLxZNtl288fjpYLV6A==
-X-Gm-Message-State: AOJu0Yzs8hpf3y/7KFgk3klLX/Vf+spb+0DhrmifvR06x1mVTAZTpa6o
- IuPqP2XYo6VpFEYqPFmzLJ6XelWY0PLPxniMAc5xU8FDp2iUBFTi7Cd0oB1vI6g=
-X-Google-Smtp-Source: AGHT+IFCEg4EsMClf1obOs2JLyPCPp49wHzHj2D+bI+GIr+ZicKCbSUsPgVsIrUugHqxgqcBkFEwZA==
-X-Received: by 2002:a2e:86c9:0:b0:2d8:63a2:50d2 with SMTP id
- n9-20020a2e86c9000000b002d863a250d2mr701082ljj.6.1712307541321; 
- Fri, 05 Apr 2024 01:59:01 -0700 (PDT)
+ AJvYcCUqlTRhhnoSU34lxitgLRcduRKhCD5O+2W5jIHEG9OH8F5BBZj52LpqWPD/+zO0vzs0DhAaCuntok/O6+J3U+PZsX2Dbw==
+X-Gm-Message-State: AOJu0Yw89mZKvnbg5GLIJiYkIIh3P3RdSlTa9ff69F0eMCTw0OHdbW8a
+ xBoZwlVijOreGdoiwly54cncWiIY9yf6ExgUhoT19kyD/Dch7kVIHs8rEyD8kW4=
+X-Google-Smtp-Source: AGHT+IGPneEGW0BJKtctt487gL5uaBL6FxUnR7rNiKa2PuwloNro5xIy2UjqXFkf3jipENuzKAb0Rw==
+X-Received: by 2002:a5d:570e:0:b0:33e:7a7c:a058 with SMTP id
+ a14-20020a5d570e000000b0033e7a7ca058mr841781wrv.18.1712307686912; 
+ Fri, 05 Apr 2024 02:01:26 -0700 (PDT)
 Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- c24-20020a7bc018000000b00414887d9329sm2104455wmb.46.2024.04.05.01.59.00
+ i8-20020adfb648000000b00343e46c9a9esm1198801wre.11.2024.04.05.02.01.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Apr 2024 01:59:00 -0700 (PDT)
+ Fri, 05 Apr 2024 02:01:26 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Alexey Romanov <avromanov@salutedevices.com>
 Cc: "sjg@chromium.org" <sjg@chromium.org>, "hs@denx.de" <hs@denx.de>,
@@ -74,13 +74,13 @@ Cc: "sjg@chromium.org" <sjg@chromium.org>, "hs@denx.de" <hs@denx.de>,
  "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Neil Armstrong
  <neil.armstrong@linaro.org>
 Subject: Re: [RFC PATCH v2 1/2] fastboot: introduce 'oem board' subcommand
-In-Reply-To: <20240403084900.5yxzfp7lz2u56y57@cab-wsm-0029881>
+In-Reply-To: <20240304141126.otcp6tl7v6pupgzl@cab-wsm-0029881.sigma.sbrf.ru>
 References: <20240201092027.6258-1-avromanov@salutedevices.com>
  <20240201092027.6258-2-avromanov@salutedevices.com>
  <874jeaytqy.fsf@baylibre.com>
- <20240403084900.5yxzfp7lz2u56y57@cab-wsm-0029881>
-Date: Fri, 05 Apr 2024 10:58:59 +0200
-Message-ID: <87jzlcfang.fsf@baylibre.com>
+ <20240304141126.otcp6tl7v6pupgzl@cab-wsm-0029881.sigma.sbrf.ru>
+Date: Fri, 05 Apr 2024 11:01:25 +0200
+Message-ID: <87h6ggfaje.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -101,21 +101,9 @@ X-Virus-Status: Clean
 
 Hi Alexey,
 
-On mer., avril 03, 2024 at 08:49, Alexey Romanov <avromanov@salutedevices.com> wrote:
+On lun., mars 04, 2024 at 14:11, Alexey Romanov <avromanov@salutedevices.com> wrote:
 
-> Hello Mattijs,
-> is there any feedback?
-
-Sorry for the late reply. I was both swamped with other work and awaiting.
-feedback from others.
-
-I don't have strong enough arguments to state that this is not useful to
-others, I have re-considered this and I'm willing to pick it up.
-
-Please rebase, as this no longer applies.
-
-Also see some review comments below
-
+> Hello,
 >
 > On Thu, Feb 15, 2024 at 10:14:13AM +0100, Mattijs Korpershoek wrote:
 >> Hi Alexey,
@@ -151,6 +139,10 @@ Also see some review comments below
 >> 
 >> I've heard from Neil that this might be related to:
 >> https://github.com/superna9999/pyamlboot/pull/20
+>
+> Yeah, pyamlboot also uses the same 'bootloader' partition flashing
+> scheme as I present in the patch 2. This is custom Amlogic protocol.
+>
 >> 
 >> I think this can be useful. Not necessarily for writing custom
 >> partitions, but I see this could be used for other things:
@@ -162,9 +154,31 @@ Also see some review comments below
 >>    $ fastboot oem board:write_macaddr AA:BB:CC:DD:EE
 >> 
 >> 2. Access secure storage (via an Trusted Application)
+>
+> Agree, you are completely right.
+>
 >> 
 >> But both examples could also be in a fastboot flash format:
 >> $ fastboot flash serialno ABCDEF
+>
+> But this case requires to 'serialno' partition definition in schema?
+> I didn't fully understand you.
+
+I meant more in a "conceptual way". (from a end user perspective)
+
+"fastboot flash" is generic command that's just supposed to write data
+somewhere.
+
+The back-end (partitioning etc) depends on the storage the device uses
+so that's a "implementation detail".
+
+In any case, I don't have a proper alternative to what you are proposing
+so as send in [1], I'm okay picking this up after some minor review
+comments are addressed.
+
+[1] https://lore.kernel.org/all/87jzlcfang.fsf@baylibre.com/
+
+>
 >> 
 >> One concern I have is that U-Boot forks might use this command as
 >> an excuse to not makes things generic.
@@ -196,9 +210,6 @@ Also see some review comments below
 >> 
 >> If we move forward with this, please also document the new command in:
 >> doc/android/fastboot.rst
-
-This still applies, document the command please.
-
 >> 
 >> > +
 >> >  endif # FASTBOOT
@@ -241,10 +252,6 @@ This still applies, document the command please.
 >> > +{
 >> > +	fastboot_oem_board(cmd_parameter, fastboot_buf_addr, image_size, response);
 >> > +}
-
-Please also document the functions with comment headers, as done for the
-other oem_ functions.
-
 >> > diff --git a/include/fastboot.h b/include/fastboot.h
 >> > index 296451f89d..06c1f26b6c 100644
 >> > --- a/include/fastboot.h
