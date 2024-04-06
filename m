@@ -4,75 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E390C3A59D
-	for <u-boot@archiver.kernel.org>; Sat,  6 Apr 2024 00:46:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD71DC67861
+	for <u-boot@archiver.kernel.org>; Sat,  6 Apr 2024 14:02:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C477087F77;
-	Sat,  6 Apr 2024 02:46:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C327087F00;
+	Sat,  6 Apr 2024 16:02:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PavOJR9n";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="un9ZUU1A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B89288119; Sat,  6 Apr 2024 02:46:37 +0200 (CEST)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id 006A087F3A; Sat,  6 Apr 2024 16:02:21 +0200 (CEST)
+Received: from mail-lj1-x234.google.com (mail-lj1-x234.google.com
+ [IPv6:2a00:1450:4864:20::234])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0500287F6F
- for <u-boot@lists.denx.de>; Sat,  6 Apr 2024 02:46:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 94D0E87EA8
+ for <u-boot@lists.denx.de>; Sat,  6 Apr 2024 16:02:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-6151d79db7bso31822507b3.1
- for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 17:46:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x234.google.com with SMTP id
+ 38308e7fff4ca-2d858501412so35763631fa.0
+ for <u-boot@lists.denx.de>; Sat, 06 Apr 2024 07:02:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712364394; x=1712969194; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=VNzUBvCNeq+VjGKHmFzBb4lpsWZUSP5yVZYbHxjJWMw=;
- b=PavOJR9nGCWvCZGNEPWM2GIp3q1VoPr+xFM2L4dorfcNB7om6gRJnCjPmZ/TtIQ4G9
- zQS90W2cKXG+ABD/QHntCt4UYjOrCMykL0Qwkrf+vZTjg9zVMZtAeLanUORPDTpPHOSW
- SzUSxZJPe5fq55LfXhXG5JfwSWGWx6N0PxCks=
+ d=linaro.org; s=google; t=1712412138; x=1713016938; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=128MPsUpnBMBJL7kWRT++tO9IWOd5ocVBD7CqfU2C40=;
+ b=un9ZUU1ADNB61xaLh+6yNh5KxkbHKTvTYEEEzt0L098/tqNBFvgwSvsvRfSn7Wfzy/
+ Ww16th5cSo/mEf0SZbrJqka0XOHm8dzPeAbtKuoCkdBm3kughvt01JjpcXjAuWKoUjvx
+ NCwNER+bk/IvXNJ//X/oNbJ4KhVPt0jKiUc39i4aThJXJNlGCiavZ9FP6qsejw+Y8T2I
+ PUZCNUcMhBtpvG18uSAT/S6bKbAQDHVm0cbnfzbMynjjeA0azx6eL9uFbrJYxZW81CmP
+ leu9iMCPr2eO2s4+MaAAuXovHO3DJ9k3jBBtU6oz6TNRyIryuDzbheoLtuS/axPG+lEf
+ iO1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712364394; x=1712969194;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VNzUBvCNeq+VjGKHmFzBb4lpsWZUSP5yVZYbHxjJWMw=;
- b=NRDrjCCCEoGpd5j85SHRRyiaM/FPPVIquTHFA8td2O8Ei/xSfRz4lvyQtyLNsotHLk
- fgzClhjl2plGbO0qw9BJUWvoiFUil8KSd0rKjF5aNXch3EP8u/ykv5US3Lyn+8+9n7ef
- /RiqcO17JcqTTtYZsBUQPDc6mNpPaK7exBhXk7OUV2Wy8fHl7c8L/hna5780DXyL4CgD
- VHX2L/clem/miuS8FEgOgzsQuGH2FXEpLM4DfMPSILlYXz1wzeLzvdfVfx7djaZ88SK0
- EsMP/M1Dfo4SWun/k9bX2yNK1cPKdbXGUW9uUk3itZdMH8I+7nKeB9ohws9kgo52zSQZ
- WfDA==
-X-Gm-Message-State: AOJu0YxXJUaFT8MIcgB0CrYVOafIpx9zACHg1J608bycqIzYLEwrjfSy
- 2bMye6P63GwTQh5f0NJKQanL2i2LjBy4WVoLnb0ymZ3ZtVNY3vl0vho2DST8jNY=
-X-Google-Smtp-Source: AGHT+IFIL8W2JRtVy+NqhBKGBARVYA2nSnOqUs6XyU3IOEVS2MtBkXrXThm6o+ODMpF9ZHr+oXcEoA==
-X-Received: by 2002:a81:df11:0:b0:615:1d51:6188 with SMTP id
- c17-20020a81df11000000b006151d516188mr2915666ywn.26.1712364393825; 
- Fri, 05 Apr 2024 17:46:33 -0700 (PDT)
-Received: from bill-the-cat ([187.144.96.143])
+ d=1e100.net; s=20230601; t=1712412138; x=1713016938;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=128MPsUpnBMBJL7kWRT++tO9IWOd5ocVBD7CqfU2C40=;
+ b=NNzEsVCKniTjOsI6mOhT8klZj1Q59zWYCdfMQ/cNFOZ9JcouGI8PgPy6qWmI7yQrWZ
+ sT/VwOPPk+2BPK3CS17QAZhOwxWFGXjgfMrr6xTE7KVSZ+9WEhJTCXfg1SjPcfXxRMfz
+ x7UNGTHV5n2I96rtyiFlD/bh0sHfjbOwrqtXj9QDMURHhwBrJ1VgH7ChEu7slKtfC+aY
+ e5TwXNR378CVU6HpoIdZ3kR5jcleekBJtVCfY6Bi+5SUOOSi109J/VVB98HJSmPUpyAZ
+ 8ytNjnGZFhy6/S2TwtKMsaN5bND/IYD5Ehj7A2aa3dGQrJ107McqzavSB4ZNVeqRY+XX
+ BSYA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW6CrW4CPyaltSE50Q+EKOLuMbgNeM6YRuDKBwHFZ2QSaNMQmwbMx5yy2V+CkjGpwpjeciB/az2lL4LoxDMIrIF5q1Ftw==
+X-Gm-Message-State: AOJu0Yzds358gjPKgl8sMBqb8MNIvhzSIr/JTwAe8hl48RB8p1Asegq/
+ 4ypvgoQYgrJF/+LRipKVIjVRomquW+AgrxEVAcC4T7vrrEUV4uKQuqOw5yT52SA=
+X-Google-Smtp-Source: AGHT+IEnmTD1d1UwovMAzh0XRdzwdHweYKGXtvNFFZi3KiFR5PG7Pj0FOpWYxeW/k8KHkeK62NBXUQ==
+X-Received: by 2002:a2e:bb85:0:b0:2d8:677a:8dcc with SMTP id
+ y5-20020a2ebb85000000b002d8677a8dccmr2651608lje.47.1712412137671; 
+ Sat, 06 Apr 2024 07:02:17 -0700 (PDT)
+Received: from hades.. (ppp089210071137.access.hol.gr. [89.210.71.137])
  by smtp.gmail.com with ESMTPSA id
- jd6-20020a05622a718600b00432ba01f939sm1264259qtb.88.2024.04.05.17.46.32
+ j19-20020a05600c1c1300b004163de6cfabsm1729756wms.11.2024.04.06.07.02.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 05 Apr 2024 17:46:33 -0700 (PDT)
-Date: Fri, 5 Apr 2024 20:46:01 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [GIT PULL] Please pull u-boot-imx-master-20240405
-Message-ID: <20240406004601.GE114971@bill-the-cat>
-References: <20240405164605.920442-1-festevam@gmail.com>
+ Sat, 06 Apr 2024 07:02:17 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de,
+	kettenis@openbsd.org
+Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
+ quic_llindhol@quicinc.com, ardb@kernel.org, pbrobinson@gmail.com,
+ pjones@redhat.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, Bin Meng <bmeng@tinylab.org>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Eddie James <eajames@linux.ibm.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH v1 0/4] Enable SetvariableRT
+Date: Sat,  6 Apr 2024 17:01:51 +0300
+Message-Id: <20240406140203.248211-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.37.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="K2ECv2IGZ0ygLD9Z"
-Content-Disposition: inline
-In-Reply-To: <20240405164605.920442-1-festevam@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,57 +102,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi all,
 
---K2ECv2IGZ0ygLD9Z
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This is an updated version of [0].
 
-On Fri, Apr 05, 2024 at 01:46:05PM -0300, Fabio Estevam wrote:
+When EFI variables are stored on file we don't allow SetVariableRT,
+since the OS doesn't know how to access or write that file.  At the same
+time keeping the U-Boot drivers alive in runtime sections and performing
+writes from the firmware is dangerous -- if at all possible.
 
-> Hi Tom,
->=20
-> Please pull this material for from u-boot-imx/master, thanks.
->=20
-> The following changes since commit cdfcc37428e06f4730ab9a17cc084eeb7676ea=
-1a:
->=20
->   Merge tag 'u-boot-dfu-next-20240402' of https://source.denx.de/u-boot/c=
-ustodians/u-boot-dfu (2024-04-02 22:37:23 -0400)
->=20
-> are available in the Git repository at:
->=20
->   https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx=
--master-20240405
->=20
-> for you to fetch changes up to f6be41c83c17c09dddfb1e29a7ca391b5190634d:
->=20
->   arm: imx: fix signature_block_hdr struct fields order (2024-04-05 09:39=
-:18 -0300)
->=20
-> u-boot-imx-master-20240405
+For GetVariableRT  we copy runtime variables in RAM and expose them to
+the OS. Add a Kconfig option and provide SetVariableRT using the same
+memory back end. The OS will be responsible for syncing the RAM contents
+to the file, otherwise any changes made during runtime won't persist
+reboots.
 
-Applied to u-boot/master, thanks!
+It's worth noting that the variable store format is defined in EBBR [1]
+and authenticated variables are explicitly prohibited, since they have
+to be stored on a medium that's tamper and rollback protected.
 
---=20
-Tom
+The original RFC was just enabling the memory back end. This is a more
+complete version and we should be able, with small adjustments of
+userspace tools, fix SetVariableRT. If enabled the firmware will add two
+new RO EFI variables after ExitBootServices.
 
---K2ECv2IGZ0ygLD9Z
-Content-Type: application/pgp-signature; name="signature.asc"
+RTStorageVolatile -- contains the filename, relative to the ESP
+VarToFile -- an EFI variable that holds all the BS,RT, NV variables and can
+be copied to the file defined by RTStorageVolatile.
 
------BEGIN PGP SIGNATURE-----
+If any errors occur during the variable init, the firmware will delete them
+and adjust the RT_PROP table accordingly, disabling SetvarRT.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYQm0kACgkQFHw5/5Y0
-tyxe3gv/Rv0iPBkeukWQgPmN9nVHL8E9UeLODvDeSLCVyJKA2NOaPI8L7R2Letb4
-0s5n/zBD7AkGaKBHY0/hcES+VMyBVwGL3i9vxVScMY0hTg2ZhI9iUQ9VDumggFud
-EV14yGkHBrGvRDm6DaEL8c8ciTkanM8HW9yQUjA+GKuwOTFoseQTft6sbJAn3ELm
-SJ87BWPEmejCV4f8p48zEvaEJ6Zl3Y9UK48/hA0ZjFXiDo93Y/NSf9y0STCm6Mzn
-PhpdQxWpNTF2CKjmsUjflzWbgvILYH42Q8L/pW2yT3pIbPe+VweFYggHbPexc4Ii
-UlhO6MOiLA532OC/dGDD30jqW9bae/1+WlcELl31kZgzYmsOQoKUsSManrGcnflN
-fBRtD9R7qiSZZfzuiXPHkSkQSFnMlPWBqE3bVly+1oEBkLMJYheREIxEu8seQqEs
-5/z17VP0cZvDyzXYZSWrVhc2V9rLIgfRon5gUKZDvwo5lcEsnMP+zqjq+sBlPktS
-zD8JbH9P
-=GLj+
------END PGP SIGNATURE-----
+- pre-patch
+$~ mount | grep efiva
+efivarfs on /sys/firmware/efi/efivars type efivarfs (ro,nosuid,nodev,noexec,relatime)
 
---K2ECv2IGZ0ygLD9Z--
+$~ efibootmgr -n 0001
+Could not set BootNext: Read-only file system
+
+- post-patch
+$~ mount | grep efiva
+efivarfs on /sys/firmware/efi/efivars type efivarfs (rw,nosuid,nodev,noexec,relatime)
+, disabling SetvarRT.
+$~ efibootmgr -n 0001
+BootNext: 0001
+BootCurrent: 0000
+BootOrder: 0000,0001
+Boot0000* debian        HD(1,GPT,bdae5610-3331-4e4d-9466-acb5caf0b4a6,0x800,0x100000)/File(EFI\debian\grubaa64.efi)
+Boot0001* virtio 0      VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,850000001f000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,1600850000000000){auto_created_boot_option}
+
+$~ efivar -p -n 8be4df61-93ca-11d2-aa0d-00e098032b8c-BootNext
+GUID: 8be4df61-93ca-11d2-aa0d-00e098032b8c
+Name: "BootNext"
+Attributes:
+        Non-Volatile
+        Boot Service Access
+        Runtime Service Access
+Value:
+00000000  01 00
+
+[0] https://lore.kernel.org/u-boot/20240329071929.2461441-1-ilias.apalodimas@linaro.org/
+[1] https://arm-software.github.io/ebbr/index.html#document-chapter5-variable-storage
+
+Changes since the RFC:
+- Return EFI_INVALID_PARAM if attributes are not volatile
+- Add EFI_WRITE_PROTECTED checks for BS, RT *only* variables
+- Add 2 EFI variables and allow userspace to write the file
+- Add selftests
+
+Ilias Apalodimas (4):
+  efi_loader: conditionally enable SetvariableRT
+  efi_loader: Add OS notifications for SetVariableRT in RAM
+  efi_loader: add an EFI variable with the variable file contents
+  efi_selftest: add tests for setvariableRT
+
+ include/efi_loader.h                          |   4 +
+ include/efi_variable.h                        |  15 +-
+ lib/efi_loader/Kconfig                        |  16 ++
+ lib/efi_loader/efi_boottime.c                 |   2 +
+ lib/efi_loader/efi_runtime.c                  |   1 +
+ lib/efi_loader/efi_var_common.c               |  43 ++--
+ lib/efi_loader/efi_var_file.c                 |   1 -
+ lib/efi_loader/efi_var_mem.c                  |  90 +++-----
+ lib/efi_loader/efi_variable.c                 | 210 +++++++++++++++++-
+ lib/efi_loader/efi_variable_tee.c             |   1 -
+ .../efi_selftest_variables_runtime.c          | 116 +++++++++-
+ 11 files changed, 401 insertions(+), 98 deletions(-)
+
+--
+2.37.2
+
