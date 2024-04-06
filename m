@@ -4,90 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9682BC67861
-	for <u-boot@archiver.kernel.org>; Sat,  6 Apr 2024 14:04:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D2CCC67861
+	for <u-boot@archiver.kernel.org>; Sat,  6 Apr 2024 16:33:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B83BD882A8;
-	Sat,  6 Apr 2024 16:03:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 158D487F63;
+	Sat,  6 Apr 2024 18:33:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="L5+wwykP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vkBUloRq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 238ED88168; Sat,  6 Apr 2024 16:03:04 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id CB02487FCD; Sat,  6 Apr 2024 18:33:14 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C47E6882CE
- for <u-boot@lists.denx.de>; Sat,  6 Apr 2024 16:03:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1177C87F3B
+ for <u-boot@lists.denx.de>; Sat,  6 Apr 2024 18:33:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-41649734f87so683505e9.1
- for <u-boot@lists.denx.de>; Sat, 06 Apr 2024 07:03:01 -0700 (PDT)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-516d2b9cd69so2108479e87.2
+ for <u-boot@lists.denx.de>; Sat, 06 Apr 2024 09:33:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712412181; x=1713016981; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=FMqfUdl76G4qBulxCLMeh65myWO0ylZWG10h5H0frZ8=;
- b=L5+wwykPDDu26a1mlEw+4YEiWVin5KUN7Kqaoih99gqkae8eYJWOpv6q8y95Tmjbv4
- XgEOoKzfFURx0eVpcDGYusavgGylnTSBss+Jj3lvh3MfM7iSbnHg1tJ4NaYzjrSHkMDi
- V7PcNIV+9uow1E3iG+0qIgSIXsWUI1wtROeFc8KURfLTHHbteWIA7RkAzvJSOcPQ1AZZ
- aIqdAYQq41bTXvCTOYMWihLtF5jXgzOAML/sMzMzFdiq1xskO0IJ7J7+nz/7rAYWukzu
- Bj+tzkRPn/Zi10zQ5XaNBenMh3mPzCgEJVm6duw8nRkRg5QAT9iPWnstcdA5/KBajirl
- CDew==
+ d=linaro.org; s=google; t=1712421191; x=1713025991; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=6os5j5Tytplhfq9APwdwTDrdXixCRZXQKOQi1WF7Uy8=;
+ b=vkBUloRqFjwcp5iROjbFiX8758M9v/oq00aV5y80dI1x5e/QzjGj78yyNnB5A6LBLq
+ es0o27/6TyHUlucM0uoPJwh23yopPLMQb+tCrlQOPuWMBE3v53gZhbHEgCbYcglNoRfA
+ HkRaEYep3xFUXSI9DR6lNdaXI5M9/u/vBKZtm8xWrtRcJT5ouS4ICgxn4wxqCEzTSuWX
+ IBVR7TEBq1XYXmMXxC77Z9NP87pRq/DJ3cs35rD/TZcQuYX6fKKEwiTsHlHEvIeGI422
+ dj/Gcmz3GyZTCEAja0iVKoImU9Yygmm/BYLw5/kRod5hxN5PeFqzHYgIpiOtkO4uIG+O
+ 73ZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712412181; x=1713016981;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=FMqfUdl76G4qBulxCLMeh65myWO0ylZWG10h5H0frZ8=;
- b=kZwDWFyKbzrCDaPjDhCSSVhQCvIkx+XppRv3v6n2mUbBgZ9XNR80ng9D3TDOuDFn4t
- HSnWjwxX3mZVyfITfNJTQFwjkCLvjhA7OJC+P0PzxYFaiaYAHCcEpYGi0AOmpz+NpSYH
- ZGyEEbKW/+cwQaFxsOQsigLjsATiPvNM1LKTI3u+XPo8JTRMK9jZgmMxpG/Am4FdUXCf
- DjV2hWNWRxWJ/JeX9z4+6H4GQJ7rkNp3eFaRpWvSymuHpjBYCt2957PBwm+ReJCaSOTe
- H60DGTMMoAC2Qdrp3Cmvz4L2KBhHG9OaYbBVtAjqkTY60hwYvkLCOOHxZ6etvCUO53BI
- o6jQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUOLYjgsmaMapjozKWejQroSC/UyFSXtEeJhAxnm1FTIiXdG7vostdhOZ/fNXOWwNQ2X0a6sOKi/TljahneWNku7Mz54Q==
-X-Gm-Message-State: AOJu0YzYyqfgT6uN2TtB0SLdZyRVfj5pWkuhAp4cOlvuaXXSnwmlXfq/
- m3A6QwI1kyK3zFxLWSSHlA+lDZoL7sapQEjDRMQ36VX11l3mBKVsqJIeMtNPn4s=
-X-Google-Smtp-Source: AGHT+IFW1oIR0liZcaJAhYfSUcfg7cPWlQ3kzhNweQu+9/cxnEaRi/GPtq9wvYDisi0taOWPWs2kgA==
-X-Received: by 2002:a05:600c:3acd:b0:416:3aa1:54ad with SMTP id
- d13-20020a05600c3acd00b004163aa154admr1205820wms.0.1712412181340; 
- Sat, 06 Apr 2024 07:03:01 -0700 (PDT)
-Received: from hades.. (ppp089210071137.access.hol.gr. [89.210.71.137])
- by smtp.gmail.com with ESMTPSA id
- j19-20020a05600c1c1300b004163de6cfabsm1729756wms.11.2024.04.06.07.02.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Apr 2024 07:03:01 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de,
-	kettenis@openbsd.org
-Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
- quic_llindhol@quicinc.com, ardb@kernel.org, pbrobinson@gmail.com,
- pjones@redhat.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>, Bin Meng <bmeng@tinylab.org>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Weizhao Ouyang <o451686892@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH v1 4/4] efi_selftest: add tests for setvariableRT
-Date: Sat,  6 Apr 2024 17:02:00 +0300
-Message-Id: <20240406140203.248211-10-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.37.2
-In-Reply-To: <20240406140203.248211-1-ilias.apalodimas@linaro.org>
-References: <20240406140203.248211-1-ilias.apalodimas@linaro.org>
+ d=1e100.net; s=20230601; t=1712421191; x=1713025991;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6os5j5Tytplhfq9APwdwTDrdXixCRZXQKOQi1WF7Uy8=;
+ b=QtZ9dOh/DJqbKX4jQVrZPJqwonAA5JaUFf5xaki+xS5+ItKReR77+dZNqiHcpWcYr9
+ AcY3fE/w8DkbsMBhqJIbb1ZDnoO0dbJSNCgMaJUVIhYpiVV8KdCyxKh8cH8OQXh/TsNj
+ FI8PDetLRZ/d+RZhAsoysu5B2OOZCovyeP92jTyKTqe1+KyZR+36WMuXgsVawTK31Q6E
+ CPz719hRaQ2a0Qn3dj4JY5UHnzyiwinIuM8U7gPkUvsUI2gPRqrAfhuEOhNOM28+M7JL
+ FE4aQmoKSb2f+oIuQbjsfmHOGsqxgB8579DYdV6lwGmtKZU9juGII2q2nkAZL3b8oLRI
+ Yemw==
+X-Gm-Message-State: AOJu0YwLif4jNZF7OeKL3ANbc184LPvlXG8VtLRV5+Uldzk5Ga0VloB0
+ AewvH9gfVH0e87/Wgjc4675JqcV5bYfGOyN52zBcUYa0AXyK2LKtpuKAZVylO9RM2B1S23erpz7
+ DuCuhZn14Jup6K3TBguEXGjnW7SeToKuABhMXtTFqXKjzDZ8QsFk=
+X-Google-Smtp-Source: AGHT+IFXiiUtDlpLd8lOg3GqWp3xx9YmzmgmlSKYs+VNpwRgxLzb5wWuo+8VF/zAQ2mRjHmgeE1INkkGudWwIgbwzRk=
+X-Received: by 2002:ac2:5f87:0:b0:515:d1c8:e486 with SMTP id
+ r7-20020ac25f87000000b00515d1c8e486mr3370219lfe.35.1712421190961; Sat, 06 Apr
+ 2024 09:33:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240405001722.2876240-1-tharvey@gateworks.com>
+In-Reply-To: <20240405001722.2876240-1-tharvey@gateworks.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Sat, 6 Apr 2024 19:32:33 +0300
+Message-ID: <CAC_iWjL7nHxq7Yio6XqenxrMwfVBC-VK3UCDLX=4oNQWvcfTBQ@mail.gmail.com>
+Subject: Re: [PATCH v3] tpm-v2: allow algoirthm name to be configured for
+ pcr_read and pcr_extend
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, Eddie James <eajames@linux.ibm.com>,
+ slee@gateworks.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,165 +87,392 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since we support SetVariableRT now add the relevant tests
+Hi Tim,
 
-- Search for the RTStorageVolatile and VarToFile variables after EBS
-- Try to update with invalid variales (BS, RT only)
-- Try to write a variable bigger than our backend storage
-- Write a variable that fits and check VarToFile has been updated
-  correclty
-- Append to the variable and check VarToFile changes
-- Try to delete VarToFile which is write protected
+Thanks for the patch
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- .../efi_selftest_variables_runtime.c          | 103 ++++++++++++++++++
- 1 file changed, 103 insertions(+)
+I'll be away next week, I'll try to find time and take a closer look.
+The pipeline [0] shows some TPM related failures
 
-diff --git a/lib/efi_selftest/efi_selftest_variables_runtime.c b/lib/efi_selftest/efi_selftest_variables_runtime.c
-index 4c9405c0a7c7..eb4820e7deab 100644
---- a/lib/efi_selftest/efi_selftest_variables_runtime.c
-+++ b/lib/efi_selftest/efi_selftest_variables_runtime.c
-@@ -10,6 +10,7 @@
-  */
- 
- #include <efi_selftest.h>
-+#include <efi_variable.h>
- 
- #define EFI_ST_MAX_DATA_SIZE 16
- #define EFI_ST_MAX_VARNAME_SIZE 40
-@@ -17,6 +18,8 @@
- static struct efi_boot_services *boottime;
- static struct efi_runtime_services *runtime;
- static const efi_guid_t guid_vendor0 = EFI_GLOBAL_VARIABLE_GUID;
-+static const efi_guid_t __efi_runtime_data efi_rt_var_guid =
-+						U_BOOT_EFI_RT_VAR_FILE_GUID;
- 
- /*
-  * Setup unit test.
-@@ -45,11 +48,14 @@ static int execute(void)
- 	u32 attr;
- 	u8 v[16] = {0x5d, 0xd1, 0x5e, 0x51, 0x5a, 0x05, 0xc7, 0x0c,
- 		    0x35, 0x4a, 0xae, 0x87, 0xa5, 0xdf, 0x0f, 0x65,};
-+	u8 v2[CONFIG_EFI_VAR_BUF_SIZE];
- 	u8 data[EFI_ST_MAX_DATA_SIZE];
-+	u8 data2[CONFIG_EFI_VAR_BUF_SIZE];
- 	u16 varname[EFI_ST_MAX_VARNAME_SIZE];
- 	efi_guid_t guid;
- 	u64 max_storage, rem_storage, max_size;
- 
-+	memset(v2, 0x1, sizeof(v2));
- 	ret = runtime->query_variable_info(EFI_VARIABLE_BOOTSERVICE_ACCESS,
- 					   &max_storage, &rem_storage,
- 					   &max_size);
-@@ -63,10 +69,107 @@ static int execute(void)
- 				    EFI_VARIABLE_RUNTIME_ACCESS,
- 				    3, v + 4);
- 	if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
-+		efi_uintn_t prev_len, delta;
-+
- 		if (ret != EFI_INVALID_PARAMETER) {
- 			efi_st_error("SetVariable failed\n");
- 			return EFI_ST_FAILURE;
- 		}
-+
-+		len = sizeof(data);
-+		ret = runtime->get_variable(u"RTStorageVolatile",
-+					    &efi_rt_var_guid,
-+					    &attr, &len, data);
-+		if (ret != EFI_SUCCESS) {
-+			efi_st_error("GetVariable failed\n");
-+			return EFI_ST_FAILURE;
-+		}
-+
-+		len = sizeof(data2);
-+		ret = runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
-+					    &attr, &len, data2);
-+		if (ret != EFI_SUCCESS) {
-+			efi_st_error("GetVariable failed\n");
-+			return EFI_ST_FAILURE;
-+		}
-+		/*
-+		 * VarToFile will size must change once a variable is inserted
-+		 * Store it now, we'll use it later
-+		 */
-+		prev_len = len;
-+		ret = runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+					    EFI_VARIABLE_RUNTIME_ACCESS |
-+					    EFI_VARIABLE_NON_VOLATILE,
-+					    sizeof(v2) / 2,
-+					    v2 + (sizeof(v2) / 2));
-+		/*
-+		 * This will try to update VarToFile as well and must fail,
-+		 * without changing or deleting VarToFile
-+		 */
-+		if (ret != EFI_OUT_OF_RESOURCES) {
-+			efi_st_error("SetVariable failed\n");
-+			return EFI_ST_FAILURE;
-+		}
-+		len = sizeof(data2);
-+		ret = runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
-+					    &attr, &len, data2);
-+		if (ret != EFI_SUCCESS || prev_len != len) {
-+			efi_st_error("Get/SetVariable failed\n");
-+			return EFI_ST_FAILURE;
-+		}
-+
-+		/* SetVariableRT updates VarToFile with efi_st_var0 */
-+		ret = runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+					    EFI_VARIABLE_RUNTIME_ACCESS |
-+					    EFI_VARIABLE_NON_VOLATILE,
-+					    sizeof(v), v);
-+		if (ret != EFI_SUCCESS) {
-+			efi_st_error("SetVariable failed\n");
-+			return EFI_ST_FAILURE;
-+		}
-+		len = sizeof(data2);
-+		delta = 2 * (u16_strlen(u"efi_st_var0") + 1) + sizeof(v) +
-+			sizeof(struct efi_var_entry);
-+		ret = runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
-+					    &attr, &len, data2);
-+		if (ret != EFI_SUCCESS || prev_len + delta != len) {
-+			efi_st_error("Get/SetVariable failed\n");
-+			return EFI_ST_FAILURE;
-+		}
-+
-+		/* append on an existing variable will updateVarToFile */
-+		ret = runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-+					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+					    EFI_VARIABLE_RUNTIME_ACCESS |
-+					    EFI_VARIABLE_APPEND_WRITE |
-+					    EFI_VARIABLE_NON_VOLATILE,
-+					    sizeof(v), v);
-+		if (ret != EFI_SUCCESS) {
-+			efi_st_error("SetVariable failed\n");
-+			return EFI_ST_FAILURE;
-+		}
-+		prev_len = len;
-+		delta = sizeof(v);
-+		len = sizeof(data2);
-+		ret = runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
-+					    &attr, &len, data2);
-+		if (ret != EFI_SUCCESS || prev_len + delta != len) {
-+			efi_st_error("Get/SetVariable failed\n");
-+			return EFI_ST_FAILURE;
-+		}
-+
-+		/* Variables that are BS, RT and volatile are RO after EBS */
-+		ret = runtime->set_variable(u"VarToFile", &efi_rt_var_guid,
-+					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-+					    EFI_VARIABLE_RUNTIME_ACCESS |
-+					    EFI_VARIABLE_NON_VOLATILE,
-+					    sizeof(v), v);
-+		if (ret != EFI_WRITE_PROTECTED) {
-+			efi_st_error("Get/SetVariable failed\n");
-+			return EFI_ST_FAILURE;
-+		}
- 	} else {
- 		if (ret != EFI_UNSUPPORTED) {
- 			efi_st_error("SetVariable failed\n");
--- 
-2.37.2
+[0] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/commit/9b4be64e41454e17269a968397933eeff300c380
 
+Cheers
+/Ilias
+
+On Fri, 5 Apr 2024 at 03:17, Tim Harvey <tharvey@gateworks.com> wrote:
+>
+> For pcr_read and pcr_extend commands allow the digest algorithm to be
+> specified by an additional argument. If not specified it will default to
+> SHA256 for backwards compatibility.
+>
+> A follow-on to this could be to extend all PCR banks with the detected
+> algo when the <digest_algo> argument is 'auto'.
+>
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> ---
+> v3:
+>  - replace tpm2_supported_algorithms with struct and use this to relate hash algoirthm
+>    details
+> v2:
+>  - use tpm2_algorithm_to_len
+>  - use enum tpm2_algorithms
+>  - make function names and parameter names more consistent with existing
+>    tpm-v2 functions
+>  - fix various spelling errors
+> ---
+>  cmd/tpm-v2.c              | 49 ++++++++++++++++++++--------
+>  include/tpm-v2.h          | 67 ++++++++++++++++++++++++++++++++++++++-
+>  lib/efi_loader/efi_tcg2.c |  4 +--
+>  lib/tpm-v2.c              | 62 +++++++++++++++++++++++-------------
+>  4 files changed, 143 insertions(+), 39 deletions(-)
+>
+> diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
+> index 7e479b9dfe36..2343b4d9cb9e 100644
+> --- a/cmd/tpm-v2.c
+> +++ b/cmd/tpm-v2.c
+> @@ -99,11 +99,19 @@ static int do_tpm2_pcr_extend(struct cmd_tbl *cmdtp, int flag, int argc,
+>         struct tpm_chip_priv *priv;
+>         u32 index = simple_strtoul(argv[1], NULL, 0);
+>         void *digest = map_sysmem(simple_strtoul(argv[2], NULL, 0), 0);
+> +       int algo = TPM2_ALG_SHA256;
+> +       int algo_len;
+>         int ret;
+>         u32 rc;
+>
+> -       if (argc != 3)
+> +       if (argc < 3 || argc > 4)
+>                 return CMD_RET_USAGE;
+> +       if (argc == 4) {
+> +               algo = tpm2_name_to_algorithm(argv[3]);
+> +               if (algo < 0)
+> +                       return CMD_RET_FAILURE;
+> +       }
+> +       algo_len = tpm2_algorithm_to_len(algo);
+>
+>         ret = get_tpm(&dev);
+>         if (ret)
+> @@ -116,8 +124,12 @@ static int do_tpm2_pcr_extend(struct cmd_tbl *cmdtp, int flag, int argc,
+>         if (index >= priv->pcr_count)
+>                 return -EINVAL;
+>
+> -       rc = tpm2_pcr_extend(dev, index, TPM2_ALG_SHA256, digest,
+> -                            TPM2_DIGEST_LEN);
+> +       rc = tpm2_pcr_extend(dev, index, algo, digest, algo_len);
+> +       if (!rc) {
+> +               printf("PCR #%u extended with %d byte %s digest\n", index,
+> +                      algo_len, tpm2_algorithm_name(algo));
+> +               print_byte_string(digest, algo_len);
+> +       }
+>
+>         unmap_sysmem(digest);
+>
+> @@ -127,15 +139,23 @@ static int do_tpm2_pcr_extend(struct cmd_tbl *cmdtp, int flag, int argc,
+>  static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
+>                            char *const argv[])
+>  {
+> +       enum tpm2_algorithms algo = TPM2_ALG_SHA256;
+>         struct udevice *dev;
+>         struct tpm_chip_priv *priv;
+>         u32 index, rc;
+> +       int algo_len;
+>         unsigned int updates;
+>         void *data;
+>         int ret;
+>
+> -       if (argc != 3)
+> +       if (argc < 3 || argc > 4)
+>                 return CMD_RET_USAGE;
+> +       if (argc == 4) {
+> +               algo = tpm2_name_to_algorithm(argv[3]);
+> +               if (algo < 0)
+> +                       return CMD_RET_FAILURE;
+> +       }
+> +       algo_len = tpm2_algorithm_to_len(algo);
+>
+>         ret = get_tpm(&dev);
+>         if (ret)
+> @@ -151,11 +171,12 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
+>
+>         data = map_sysmem(simple_strtoul(argv[2], NULL, 0), 0);
+>
+> -       rc = tpm2_pcr_read(dev, index, priv->pcr_select_min, TPM2_ALG_SHA256,
+> -                          data, TPM2_DIGEST_LEN, &updates);
+> +       rc = tpm2_pcr_read(dev, index, priv->pcr_select_min, algo,
+> +                          data, algo_len, &updates);
+>         if (!rc) {
+> -               printf("PCR #%u content (%u known updates):\n", index, updates);
+> -               print_byte_string(data, TPM2_DIGEST_LEN);
+> +               printf("PCR #%u %s %d byte content (%u known updates):\n", index,
+> +                      tpm2_algorithm_name(algo), algo_len, updates);
+> +               print_byte_string(data, algo_len);
+>         }
+>
+>         unmap_sysmem(data);
+> @@ -415,14 +436,14 @@ U_BOOT_CMD(tpm2, CONFIG_SYS_MAXARGS, 1, do_tpm, "Issue a TPMv2.x command",
+>  "    <hierarchy> is one of:\n"
+>  "        * TPM2_RH_LOCKOUT\n"
+>  "        * TPM2_RH_PLATFORM\n"
+> -"pcr_extend <pcr> <digest_addr>\n"
+> -"    Extend PCR #<pcr> with digest at <digest_addr>.\n"
+> +"pcr_extend <pcr> <digest_addr> [<digest_algo>]\n"
+> +"    Extend PCR #<pcr> with digest at <digest_addr> with digest_algo.\n"
+>  "    <pcr>: index of the PCR\n"
+> -"    <digest_addr>: address of a 32-byte SHA256 digest\n"
+> -"pcr_read <pcr> <digest_addr>\n"
+> -"    Read PCR #<pcr> to memory address <digest_addr>.\n"
+> +"    <digest_addr>: address of digest of digest_algo type (defaults to SHA256)\n"
+> +"pcr_read <pcr> <digest_addr> [<digest_algo>]\n"
+> +"    Read PCR #<pcr> to memory address <digest_addr> with <digest_algo>.\n"
+>  "    <pcr>: index of the PCR\n"
+> -"    <digest_addr>: address to store the a 32-byte SHA256 digest\n"
+> +"    <digest_addr>: address of digest of digest_algo type (defaults to SHA256)\n"
+>  "get_capability <capability> <property> <addr> <count>\n"
+>  "    Read and display <count> entries indexed by <capability>/<property>.\n"
+>  "    Values are 4 bytes long and are written at <addr>.\n"
+> diff --git a/include/tpm-v2.h b/include/tpm-v2.h
+> index 33dd103767c4..263f9529e55d 100644
+> --- a/include/tpm-v2.h
+> +++ b/include/tpm-v2.h
+> @@ -386,7 +386,54 @@ enum tpm2_algorithms {
+>         TPM2_ALG_SM3_256        = 0x12,
+>  };
+>
+> -extern const enum tpm2_algorithms tpm2_supported_algorithms[4];
+> +/**
+> + * struct digest_info - details of supported digests
+> + *
+> + * @hash_name:                 hash name
+> + * @hash_alg:                  hash algorithm id
+> + * @hash_mask:                 hash registry mask
+> + * @hash_len:                  hash digest length
+> + */
+> +struct digest_info {
+> +       const char *hash_name;
+> +       u16 hash_alg;
+> +       u32 hash_mask;
+> +       u16 hash_len;
+> +};
+> +
+> +/* Algorithm Registry */
+> +#define TCG2_BOOT_HASH_ALG_SHA1    0x00000001
+> +#define TCG2_BOOT_HASH_ALG_SHA256  0x00000002
+> +#define TCG2_BOOT_HASH_ALG_SHA384  0x00000004
+> +#define TCG2_BOOT_HASH_ALG_SHA512  0x00000008
+> +#define TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
+> +
+> +static const struct digest_info hash_algo_list[] = {
+> +       {
+> +               "sha1",
+> +               TPM2_ALG_SHA1,
+> +               TCG2_BOOT_HASH_ALG_SHA1,
+> +               TPM2_SHA1_DIGEST_SIZE,
+> +       },
+> +       {
+> +               "sha256",
+> +               TPM2_ALG_SHA256,
+> +               TCG2_BOOT_HASH_ALG_SHA256,
+> +               TPM2_SHA256_DIGEST_SIZE,
+> +       },
+> +       {
+> +               "sha384",
+> +               TPM2_ALG_SHA384,
+> +               TCG2_BOOT_HASH_ALG_SHA384,
+> +               TPM2_SHA384_DIGEST_SIZE,
+> +       },
+> +       {
+> +               "sha512",
+> +               TPM2_ALG_SHA512,
+> +               TCG2_BOOT_HASH_ALG_SHA512,
+> +               TPM2_SHA512_DIGEST_SIZE,
+> +       },
+> +};
+>
+>  static inline u16 tpm2_algorithm_to_len(enum tpm2_algorithms a)
+>  {
+> @@ -965,4 +1012,22 @@ u32 tpm2_enable_nvcommits(struct udevice *dev, uint vendor_cmd,
+>   */
+>  u32 tpm2_auto_start(struct udevice *dev);
+>
+> +/**
+> + * tpm2_name_to_algorithm() - Return an algorithm id given a supported
+> + *                           algorithm name
+> + *
+> + * @name: algorithm name
+> + * Return: enum tpm2_algorithms or -EINVAL
+> + */
+> +enum tpm2_algorithms tpm2_name_to_algorithm(const char *name);
+> +
+> +/**
+> + * tpm2_algorithm_name() - Return an algorithm name string for a
+> + *                        supported algorithm id
+> + *
+> + * @algorithm_id: algorithm defined in enum tpm2_algorithms
+> + * Return: algorithm name string or ""
+> + */
+> +const char *tpm2_algorithm_name(enum tpm2_algorithms);
+> +
+>  #endif /* __TPM_V2_H */
+> diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
+> index b07e0099c27e..cf5d8de018a7 100644
+> --- a/lib/efi_loader/efi_tcg2.c
+> +++ b/lib/efi_loader/efi_tcg2.c
+> @@ -414,8 +414,8 @@ static efi_status_t tcg2_hash_pe_image(void *efi, u64 efi_size,
+>         }
+>
+>         digest_list->count = 0;
+> -       for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); i++) {
+> -               u16 hash_alg = tpm2_supported_algorithms[i];
+> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); i++) {
+> +               u16 hash_alg = hash_algo_list[i].hash_alg;
+>
+>                 if (!(active & tpm2_algorithm_to_mask(hash_alg)))
+>                         continue;
+> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
+> index 68eaaa639f89..83f490c82541 100644
+> --- a/lib/tpm-v2.c
+> +++ b/lib/tpm-v2.c
+> @@ -22,13 +22,6 @@
+>
+>  #include "tpm-utils.h"
+>
+> -const enum tpm2_algorithms tpm2_supported_algorithms[4] = {
+> -       TPM2_ALG_SHA1,
+> -       TPM2_ALG_SHA256,
+> -       TPM2_ALG_SHA384,
+> -       TPM2_ALG_SHA512,
+> -};
+> -
+>  int tcg2_get_active_pcr_banks(struct udevice *dev, u32 *active_pcr_banks)
+>  {
+>         u32 supported = 0;
+> @@ -82,14 +75,14 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
+>                 return rc;
+>
+>         digest_list->count = 0;
+> -       for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
+> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
+>                 u32 mask =
+> -                       tpm2_algorithm_to_mask(tpm2_supported_algorithms[i]);
+> +                       tpm2_algorithm_to_mask(hash_algo_list[i].hash_alg);
+>
+>                 if (!(active & mask))
+>                         continue;
+>
+> -               switch (tpm2_supported_algorithms[i]) {
+> +               switch (hash_algo_list[i].hash_alg) {
+>                 case TPM2_ALG_SHA1:
+>                         sha1_starts(&ctx);
+>                         sha1_update(&ctx, input, length);
+> @@ -116,12 +109,12 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
+>                         break;
+>                 default:
+>                         printf("%s: unsupported algorithm %x\n", __func__,
+> -                              tpm2_supported_algorithms[i]);
+> +                              hash_algo_list[i].hash_alg);
+>                         continue;
+>                 }
+>
+>                 digest_list->digests[digest_list->count].hash_alg =
+> -                       tpm2_supported_algorithms[i];
+> +                       hash_algo_list[i].hash_alg;
+>                 memcpy(&digest_list->digests[digest_list->count].digest, final,
+>                        len);
+>                 digest_list->count++;
+> @@ -208,13 +201,13 @@ static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
+>                 return rc;
+>
+>         event_size = offsetof(struct tcg_efi_spec_id_event, digest_sizes);
+> -       for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
+> -               mask = tpm2_algorithm_to_mask(tpm2_supported_algorithms[i]);
+> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
+> +               mask = tpm2_algorithm_to_mask(hash_algo_list[i].hash_alg);
+>
+>                 if (!(active & mask))
+>                         continue;
+>
+> -               switch (tpm2_supported_algorithms[i]) {
+> +               switch (hash_algo_list[i].hash_alg) {
+>                 case TPM2_ALG_SHA1:
+>                 case TPM2_ALG_SHA256:
+>                 case TPM2_ALG_SHA384:
+> @@ -253,17 +246,17 @@ static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
+>         put_unaligned_le32(count, &ev->number_of_algorithms);
+>
+>         count = 0;
+> -       for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
+> -               mask = tpm2_algorithm_to_mask(tpm2_supported_algorithms[i]);
+> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
+> +               mask = tpm2_algorithm_to_mask(hash_algo_list[i].hash_alg);
+>
+>                 if (!(active & mask))
+>                         continue;
+>
+> -               len = tpm2_algorithm_to_len(tpm2_supported_algorithms[i]);
+> +               len = hash_algo_list[i].hash_len;
+>                 if (!len)
+>                         continue;
+>
+> -               put_unaligned_le16(tpm2_supported_algorithms[i],
+> +               put_unaligned_le16(hash_algo_list[i].hash_alg,
+>                                    &ev->digest_sizes[count].algorithm_id);
+>                 put_unaligned_le16(len, &ev->digest_sizes[count].digest_size);
+>                 count++;
+> @@ -304,7 +297,7 @@ static int tcg2_replay_eventlog(struct tcg2_event_log *elog,
+>                 pos = offsetof(struct tcg_pcr_event2, digests) +
+>                         offsetof(struct tpml_digest_values, count);
+>                 count = get_unaligned_le32(log + pos);
+> -               if (count > ARRAY_SIZE(tpm2_supported_algorithms) ||
+> +               if (count > ARRAY_SIZE(hash_algo_list) ||
+>                     (digest_list->count && digest_list->count != count))
+>                         return 0;
+>
+> @@ -407,7 +400,7 @@ static int tcg2_log_parse(struct udevice *dev, struct tcg2_event_log *elog)
+>                 return 0;
+>
+>         count = get_unaligned_le32(&event->number_of_algorithms);
+> -       if (count > ARRAY_SIZE(tpm2_supported_algorithms))
+> +       if (count > ARRAY_SIZE(hash_algo_list))
+>                 return 0;
+>
+>         calc_size = offsetof(struct tcg_efi_spec_id_event, digest_sizes) +
+> @@ -1110,7 +1103,7 @@ int tpm2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
+>          * We only support 5 algorithms for now so check against that
+>          * instead of TPM2_NUM_PCR_BANKS
+>          */
+> -       if (pcrs.count > ARRAY_SIZE(tpm2_supported_algorithms) ||
+> +       if (pcrs.count > ARRAY_SIZE(hash_algo_list) ||
+>             pcrs.count < 1) {
+>                 printf("%s: too many pcrs: %u\n", __func__, pcrs.count);
+>                 return -EMSGSIZE;
+> @@ -1555,3 +1548,28 @@ u32 tpm2_enable_nvcommits(struct udevice *dev, uint vendor_cmd,
+>
+>         return 0;
+>  }
+> +
+> +enum tpm2_algorithms tpm2_name_to_algorithm(const char *name)
+> +{
+> +       size_t i;
+> +
+> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
+> +               if (!strcasecmp(name, hash_algo_list[i].hash_name))
+> +                       return hash_algo_list[i].hash_alg;
+> +       }
+> +       printf("%s: unsupported algorithm %s\n", __func__, name);
+> +
+> +       return -EINVAL;
+> +}
+> +
+> +const char *tpm2_algorithm_name(enum tpm2_algorithms algo)
+> +{
+> +       size_t i;
+> +
+> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
+> +               if (hash_algo_list[i].hash_alg == algo)
+> +                       return hash_algo_list[i].hash_name;
+> +       }
+> +
+> +       return "";
+> +}
+> --
+> 2.25.1
+>
