@@ -4,73 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D2CCC67861
-	for <u-boot@archiver.kernel.org>; Sat,  6 Apr 2024 16:33:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE7B6C67861
+	for <u-boot@archiver.kernel.org>; Sat,  6 Apr 2024 18:53:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 158D487F63;
-	Sat,  6 Apr 2024 18:33:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E818E87F1F;
+	Sat,  6 Apr 2024 20:53:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vkBUloRq";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id CB02487FCD; Sat,  6 Apr 2024 18:33:14 +0200 (CEST)
-Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
- [IPv6:2a00:1450:4864:20::12a])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1712429613;
+	bh=XGRQjEO1A5SqcnrAYKgRQhMItlMHVyK2RoegUJtZUX0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=B+z/F8bYIQX1tYXcYEauqHjzVEgjnYVv9Vjo6yJseYcieiwBPReOc6us683w0dRZJ
+	 VmIjNwthYqEXoCZJH3zlECoC8L2ojZLijI/LYog3bMaSAQTJdJGrVi+NHEDzllM6v/
+	 e4osyWj7u7ScaM6eb7rkOFTIwxtTjE15kQI68mdzDokcXRI207O0d4tCNTdUhpV9pE
+	 BLjw35bBk8RuWb2kN/z+/RAyEhjFS8ce1mK9Z0ihCBwbKJNpbpej1qSYes85u1C0a2
+	 dxxplIBmObrVSTWxLDuGINb5eY+YWQ9r+PJM0JlceVXMEwIWKyp9aPQq/N4TMLJzfZ
+	 buTcm2rVvnIIA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1177C87F3B
- for <u-boot@lists.denx.de>; Sat,  6 Apr 2024 18:33:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12a.google.com with SMTP id
- 2adb3069b0e04-516d2b9cd69so2108479e87.2
- for <u-boot@lists.denx.de>; Sat, 06 Apr 2024 09:33:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712421191; x=1713025991; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6os5j5Tytplhfq9APwdwTDrdXixCRZXQKOQi1WF7Uy8=;
- b=vkBUloRqFjwcp5iROjbFiX8758M9v/oq00aV5y80dI1x5e/QzjGj78yyNnB5A6LBLq
- es0o27/6TyHUlucM0uoPJwh23yopPLMQb+tCrlQOPuWMBE3v53gZhbHEgCbYcglNoRfA
- HkRaEYep3xFUXSI9DR6lNdaXI5M9/u/vBKZtm8xWrtRcJT5ouS4ICgxn4wxqCEzTSuWX
- IBVR7TEBq1XYXmMXxC77Z9NP87pRq/DJ3cs35rD/TZcQuYX6fKKEwiTsHlHEvIeGI422
- dj/Gcmz3GyZTCEAja0iVKoImU9Yygmm/BYLw5/kRod5hxN5PeFqzHYgIpiOtkO4uIG+O
- 73ZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712421191; x=1713025991;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6os5j5Tytplhfq9APwdwTDrdXixCRZXQKOQi1WF7Uy8=;
- b=QtZ9dOh/DJqbKX4jQVrZPJqwonAA5JaUFf5xaki+xS5+ItKReR77+dZNqiHcpWcYr9
- AcY3fE/w8DkbsMBhqJIbb1ZDnoO0dbJSNCgMaJUVIhYpiVV8KdCyxKh8cH8OQXh/TsNj
- FI8PDetLRZ/d+RZhAsoysu5B2OOZCovyeP92jTyKTqe1+KyZR+36WMuXgsVawTK31Q6E
- CPz719hRaQ2a0Qn3dj4JY5UHnzyiwinIuM8U7gPkUvsUI2gPRqrAfhuEOhNOM28+M7JL
- FE4aQmoKSb2f+oIuQbjsfmHOGsqxgB8579DYdV6lwGmtKZU9juGII2q2nkAZL3b8oLRI
- Yemw==
-X-Gm-Message-State: AOJu0YwLif4jNZF7OeKL3ANbc184LPvlXG8VtLRV5+Uldzk5Ga0VloB0
- AewvH9gfVH0e87/Wgjc4675JqcV5bYfGOyN52zBcUYa0AXyK2LKtpuKAZVylO9RM2B1S23erpz7
- DuCuhZn14Jup6K3TBguEXGjnW7SeToKuABhMXtTFqXKjzDZ8QsFk=
-X-Google-Smtp-Source: AGHT+IFXiiUtDlpLd8lOg3GqWp3xx9YmzmgmlSKYs+VNpwRgxLzb5wWuo+8VF/zAQ2mRjHmgeE1INkkGudWwIgbwzRk=
-X-Received: by 2002:ac2:5f87:0:b0:515:d1c8:e486 with SMTP id
- r7-20020ac25f87000000b00515d1c8e486mr3370219lfe.35.1712421190961; Sat, 06 Apr
- 2024 09:33:10 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4380187EEA;
+ Sat,  6 Apr 2024 20:53:31 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1712429611;
+ bh=XGRQjEO1A5SqcnrAYKgRQhMItlMHVyK2RoegUJtZUX0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=BHdc5SQMnGfpBG86IalF4UfuaB7g01/pgf9KUL09B4fEYV7qcyDCwmkvMfNIl0x04
+ p5u5rzg98q3QOoBT4Sz+egLGy5/qp1oz1sFAz3BNlQ0Br+WBmoJcpbZdlPRmj2JXWs
+ mWpcw0zPE+5CRE79Jq6ooVqGho2kMckk0Px5u+oTzl1t2PSKO2xvygjo3aEKlsBAWy
+ Tg+zTAPh+GhlCM/f3G3v4sZCVvS+mNgis4eHvULYJbTvhxlvSh3e/DxwOBusEP26Gc
+ +aLivchCs7/QeB1lzsnn8o7ArRkoeIKLnOg1qw/lJEC60vb6JaNeNgXd8DsACDKQ8S
+ TsQUf/DcsaRiw==
+Message-ID: <5467f380-de35-4776-8c32-90b8e08aeda7@denx.de>
+Date: Sat, 6 Apr 2024 20:52:17 +0200
 MIME-Version: 1.0
-References: <20240405001722.2876240-1-tharvey@gateworks.com>
-In-Reply-To: <20240405001722.2876240-1-tharvey@gateworks.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 6 Apr 2024 19:32:33 +0300
-Message-ID: <CAC_iWjL7nHxq7Yio6XqenxrMwfVBC-VK3UCDLX=4oNQWvcfTBQ@mail.gmail.com>
-Subject: Re: [PATCH v3] tpm-v2: allow algoirthm name to be configured for
- pcr_read and pcr_extend
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Eddie James <eajames@linux.ibm.com>,
- slee@gateworks.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/6] USB keyboard improvements for asahi / desktop
+ systems
+To: Janne Grunau <j@jannau.net>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ u-boot@lists.denx.de, asahi@lists.linux.dev, Neal Gompa <neal@gompa.dev>
+References: <20240404-asahi-keyboards-v4-0-2266033feaff@jannau.net>
+ <356b892a-a681-4ae0-a6c8-ed1b4b5a8717@denx.de> <ZhBLfQfxB_UEwvyY@robin>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <ZhBLfQfxB_UEwvyY@robin>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,392 +72,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
+On 4/5/24 9:05 PM, Janne Grunau wrote:
+> On Fri, Apr 05, 2024 at 04:52:32PM +0200, Marek Vasut wrote:
+>> On 4/4/24 8:25 AM, Janne Grunau via B4 Relay wrote:
+>>> Apple USB Keyboards from 2021 need quirks to be useable. The boot HID
+>>> keyboard protocol is unfortunately not described in the first interface
+>>> descriptor but the second. This needs several changes. The USB keyboard
+>>> driver has to look at all (2) interface descriptors during probing.
+>>> Since I didn't want to rebuild the USB driver probe code the Apple
+>>> keyboards are bound to the keyboard driver via USB vendor and product
+>>> IDs.
+>>> To make the keyboards useable on Apple silicon devices the xhci driver
+>>> needs to initializes rings for the endpoints of the first two interface
+>>> descriptors. If this is causes concerns regarding regressions or memory
+>>> use the USB_MAX_ACTIVE_INTERFACES define could be turned into a CONFIG
+>>> option.
+>>> Even after this changes the keyboards still do not probe successfully
+>>> since they apparently do not behave HID standard compliant. They only
+>>> generate reports on key events. This leads the final check whether the
+>>> keyboard is operational to fail unless the user presses keys during the
+>>> probe. Skip this check for known keyboards.
+>>> Keychron seems to emulate Apple keyboards (some models even "re-use"
+>>> Apple's USB vendor ID) so apply this quirk as well.
+>>>
+>>> Some devices like Yubikeys emulate a keyboard. since u-boot only binds a
+>>> single keyboard block this kind of devices from the USB keyboard driver.
+>>>
+>>> Signed-off-by: Janne Grunau <j@jannau.net>
+>>
+>> I picked the series, but CI indicates build errors, can you have a look ?
+>>
+>> https://source.denx.de/u-boot/custodians/u-boot-usb/-/pipelines/20215
+> 
+> The issue seems to be that the field dev in struct usb_device exists
+> only for DM_USB. That means we can't use dev_dbg.
+> Either take the following fixup patch or I can resend the series.
 
-Thanks for the patch
+I squashed the extra patch in, but I think the CI still complains:
 
-I'll be away next week, I'll try to find time and take a closer look.
-The pipeline [0] shows some TPM related failures
+Pipeline #20236 ( 
+https://source.denx.de/u-boot/custodians/u-boot-usb/-/pipelines/20236 ) 
+triggered by Marek Vasut ( https://source.denx.de/marex )
+had 1 failed job.
 
-[0] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/commit/9b4be64e41454e17269a968397933eeff300c380
+Job #812215 ( 
+https://source.denx.de/u-boot/custodians/u-boot-usb/-/jobs/812215/raw )
 
-Cheers
-/Ilias
-
-On Fri, 5 Apr 2024 at 03:17, Tim Harvey <tharvey@gateworks.com> wrote:
->
-> For pcr_read and pcr_extend commands allow the digest algorithm to be
-> specified by an additional argument. If not specified it will default to
-> SHA256 for backwards compatibility.
->
-> A follow-on to this could be to extend all PCR banks with the detected
-> algo when the <digest_algo> argument is 'auto'.
->
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> ---
-> v3:
->  - replace tpm2_supported_algorithms with struct and use this to relate hash algoirthm
->    details
-> v2:
->  - use tpm2_algorithm_to_len
->  - use enum tpm2_algorithms
->  - make function names and parameter names more consistent with existing
->    tpm-v2 functions
->  - fix various spelling errors
-> ---
->  cmd/tpm-v2.c              | 49 ++++++++++++++++++++--------
->  include/tpm-v2.h          | 67 ++++++++++++++++++++++++++++++++++++++-
->  lib/efi_loader/efi_tcg2.c |  4 +--
->  lib/tpm-v2.c              | 62 +++++++++++++++++++++++-------------
->  4 files changed, 143 insertions(+), 39 deletions(-)
->
-> diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-> index 7e479b9dfe36..2343b4d9cb9e 100644
-> --- a/cmd/tpm-v2.c
-> +++ b/cmd/tpm-v2.c
-> @@ -99,11 +99,19 @@ static int do_tpm2_pcr_extend(struct cmd_tbl *cmdtp, int flag, int argc,
->         struct tpm_chip_priv *priv;
->         u32 index = simple_strtoul(argv[1], NULL, 0);
->         void *digest = map_sysmem(simple_strtoul(argv[2], NULL, 0), 0);
-> +       int algo = TPM2_ALG_SHA256;
-> +       int algo_len;
->         int ret;
->         u32 rc;
->
-> -       if (argc != 3)
-> +       if (argc < 3 || argc > 4)
->                 return CMD_RET_USAGE;
-> +       if (argc == 4) {
-> +               algo = tpm2_name_to_algorithm(argv[3]);
-> +               if (algo < 0)
-> +                       return CMD_RET_FAILURE;
-> +       }
-> +       algo_len = tpm2_algorithm_to_len(algo);
->
->         ret = get_tpm(&dev);
->         if (ret)
-> @@ -116,8 +124,12 @@ static int do_tpm2_pcr_extend(struct cmd_tbl *cmdtp, int flag, int argc,
->         if (index >= priv->pcr_count)
->                 return -EINVAL;
->
-> -       rc = tpm2_pcr_extend(dev, index, TPM2_ALG_SHA256, digest,
-> -                            TPM2_DIGEST_LEN);
-> +       rc = tpm2_pcr_extend(dev, index, algo, digest, algo_len);
-> +       if (!rc) {
-> +               printf("PCR #%u extended with %d byte %s digest\n", index,
-> +                      algo_len, tpm2_algorithm_name(algo));
-> +               print_byte_string(digest, algo_len);
-> +       }
->
->         unmap_sysmem(digest);
->
-> @@ -127,15 +139,23 @@ static int do_tpm2_pcr_extend(struct cmd_tbl *cmdtp, int flag, int argc,
->  static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
->                            char *const argv[])
->  {
-> +       enum tpm2_algorithms algo = TPM2_ALG_SHA256;
->         struct udevice *dev;
->         struct tpm_chip_priv *priv;
->         u32 index, rc;
-> +       int algo_len;
->         unsigned int updates;
->         void *data;
->         int ret;
->
-> -       if (argc != 3)
-> +       if (argc < 3 || argc > 4)
->                 return CMD_RET_USAGE;
-> +       if (argc == 4) {
-> +               algo = tpm2_name_to_algorithm(argv[3]);
-> +               if (algo < 0)
-> +                       return CMD_RET_FAILURE;
-> +       }
-> +       algo_len = tpm2_algorithm_to_len(algo);
->
->         ret = get_tpm(&dev);
->         if (ret)
-> @@ -151,11 +171,12 @@ static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int argc,
->
->         data = map_sysmem(simple_strtoul(argv[2], NULL, 0), 0);
->
-> -       rc = tpm2_pcr_read(dev, index, priv->pcr_select_min, TPM2_ALG_SHA256,
-> -                          data, TPM2_DIGEST_LEN, &updates);
-> +       rc = tpm2_pcr_read(dev, index, priv->pcr_select_min, algo,
-> +                          data, algo_len, &updates);
->         if (!rc) {
-> -               printf("PCR #%u content (%u known updates):\n", index, updates);
-> -               print_byte_string(data, TPM2_DIGEST_LEN);
-> +               printf("PCR #%u %s %d byte content (%u known updates):\n", index,
-> +                      tpm2_algorithm_name(algo), algo_len, updates);
-> +               print_byte_string(data, algo_len);
->         }
->
->         unmap_sysmem(data);
-> @@ -415,14 +436,14 @@ U_BOOT_CMD(tpm2, CONFIG_SYS_MAXARGS, 1, do_tpm, "Issue a TPMv2.x command",
->  "    <hierarchy> is one of:\n"
->  "        * TPM2_RH_LOCKOUT\n"
->  "        * TPM2_RH_PLATFORM\n"
-> -"pcr_extend <pcr> <digest_addr>\n"
-> -"    Extend PCR #<pcr> with digest at <digest_addr>.\n"
-> +"pcr_extend <pcr> <digest_addr> [<digest_algo>]\n"
-> +"    Extend PCR #<pcr> with digest at <digest_addr> with digest_algo.\n"
->  "    <pcr>: index of the PCR\n"
-> -"    <digest_addr>: address of a 32-byte SHA256 digest\n"
-> -"pcr_read <pcr> <digest_addr>\n"
-> -"    Read PCR #<pcr> to memory address <digest_addr>.\n"
-> +"    <digest_addr>: address of digest of digest_algo type (defaults to SHA256)\n"
-> +"pcr_read <pcr> <digest_addr> [<digest_algo>]\n"
-> +"    Read PCR #<pcr> to memory address <digest_addr> with <digest_algo>.\n"
->  "    <pcr>: index of the PCR\n"
-> -"    <digest_addr>: address to store the a 32-byte SHA256 digest\n"
-> +"    <digest_addr>: address of digest of digest_algo type (defaults to SHA256)\n"
->  "get_capability <capability> <property> <addr> <count>\n"
->  "    Read and display <count> entries indexed by <capability>/<property>.\n"
->  "    Values are 4 bytes long and are written at <addr>.\n"
-> diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-> index 33dd103767c4..263f9529e55d 100644
-> --- a/include/tpm-v2.h
-> +++ b/include/tpm-v2.h
-> @@ -386,7 +386,54 @@ enum tpm2_algorithms {
->         TPM2_ALG_SM3_256        = 0x12,
->  };
->
-> -extern const enum tpm2_algorithms tpm2_supported_algorithms[4];
-> +/**
-> + * struct digest_info - details of supported digests
-> + *
-> + * @hash_name:                 hash name
-> + * @hash_alg:                  hash algorithm id
-> + * @hash_mask:                 hash registry mask
-> + * @hash_len:                  hash digest length
-> + */
-> +struct digest_info {
-> +       const char *hash_name;
-> +       u16 hash_alg;
-> +       u32 hash_mask;
-> +       u16 hash_len;
-> +};
-> +
-> +/* Algorithm Registry */
-> +#define TCG2_BOOT_HASH_ALG_SHA1    0x00000001
-> +#define TCG2_BOOT_HASH_ALG_SHA256  0x00000002
-> +#define TCG2_BOOT_HASH_ALG_SHA384  0x00000004
-> +#define TCG2_BOOT_HASH_ALG_SHA512  0x00000008
-> +#define TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
-> +
-> +static const struct digest_info hash_algo_list[] = {
-> +       {
-> +               "sha1",
-> +               TPM2_ALG_SHA1,
-> +               TCG2_BOOT_HASH_ALG_SHA1,
-> +               TPM2_SHA1_DIGEST_SIZE,
-> +       },
-> +       {
-> +               "sha256",
-> +               TPM2_ALG_SHA256,
-> +               TCG2_BOOT_HASH_ALG_SHA256,
-> +               TPM2_SHA256_DIGEST_SIZE,
-> +       },
-> +       {
-> +               "sha384",
-> +               TPM2_ALG_SHA384,
-> +               TCG2_BOOT_HASH_ALG_SHA384,
-> +               TPM2_SHA384_DIGEST_SIZE,
-> +       },
-> +       {
-> +               "sha512",
-> +               TPM2_ALG_SHA512,
-> +               TCG2_BOOT_HASH_ALG_SHA512,
-> +               TPM2_SHA512_DIGEST_SIZE,
-> +       },
-> +};
->
->  static inline u16 tpm2_algorithm_to_len(enum tpm2_algorithms a)
->  {
-> @@ -965,4 +1012,22 @@ u32 tpm2_enable_nvcommits(struct udevice *dev, uint vendor_cmd,
->   */
->  u32 tpm2_auto_start(struct udevice *dev);
->
-> +/**
-> + * tpm2_name_to_algorithm() - Return an algorithm id given a supported
-> + *                           algorithm name
-> + *
-> + * @name: algorithm name
-> + * Return: enum tpm2_algorithms or -EINVAL
-> + */
-> +enum tpm2_algorithms tpm2_name_to_algorithm(const char *name);
-> +
-> +/**
-> + * tpm2_algorithm_name() - Return an algorithm name string for a
-> + *                        supported algorithm id
-> + *
-> + * @algorithm_id: algorithm defined in enum tpm2_algorithms
-> + * Return: algorithm name string or ""
-> + */
-> +const char *tpm2_algorithm_name(enum tpm2_algorithms);
-> +
->  #endif /* __TPM_V2_H */
-> diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.c
-> index b07e0099c27e..cf5d8de018a7 100644
-> --- a/lib/efi_loader/efi_tcg2.c
-> +++ b/lib/efi_loader/efi_tcg2.c
-> @@ -414,8 +414,8 @@ static efi_status_t tcg2_hash_pe_image(void *efi, u64 efi_size,
->         }
->
->         digest_list->count = 0;
-> -       for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); i++) {
-> -               u16 hash_alg = tpm2_supported_algorithms[i];
-> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); i++) {
-> +               u16 hash_alg = hash_algo_list[i].hash_alg;
->
->                 if (!(active & tpm2_algorithm_to_mask(hash_alg)))
->                         continue;
-> diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> index 68eaaa639f89..83f490c82541 100644
-> --- a/lib/tpm-v2.c
-> +++ b/lib/tpm-v2.c
-> @@ -22,13 +22,6 @@
->
->  #include "tpm-utils.h"
->
-> -const enum tpm2_algorithms tpm2_supported_algorithms[4] = {
-> -       TPM2_ALG_SHA1,
-> -       TPM2_ALG_SHA256,
-> -       TPM2_ALG_SHA384,
-> -       TPM2_ALG_SHA512,
-> -};
-> -
->  int tcg2_get_active_pcr_banks(struct udevice *dev, u32 *active_pcr_banks)
->  {
->         u32 supported = 0;
-> @@ -82,14 +75,14 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
->                 return rc;
->
->         digest_list->count = 0;
-> -       for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
-> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
->                 u32 mask =
-> -                       tpm2_algorithm_to_mask(tpm2_supported_algorithms[i]);
-> +                       tpm2_algorithm_to_mask(hash_algo_list[i].hash_alg);
->
->                 if (!(active & mask))
->                         continue;
->
-> -               switch (tpm2_supported_algorithms[i]) {
-> +               switch (hash_algo_list[i].hash_alg) {
->                 case TPM2_ALG_SHA1:
->                         sha1_starts(&ctx);
->                         sha1_update(&ctx, input, length);
-> @@ -116,12 +109,12 @@ int tcg2_create_digest(struct udevice *dev, const u8 *input, u32 length,
->                         break;
->                 default:
->                         printf("%s: unsupported algorithm %x\n", __func__,
-> -                              tpm2_supported_algorithms[i]);
-> +                              hash_algo_list[i].hash_alg);
->                         continue;
->                 }
->
->                 digest_list->digests[digest_list->count].hash_alg =
-> -                       tpm2_supported_algorithms[i];
-> +                       hash_algo_list[i].hash_alg;
->                 memcpy(&digest_list->digests[digest_list->count].digest, final,
->                        len);
->                 digest_list->count++;
-> @@ -208,13 +201,13 @@ static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
->                 return rc;
->
->         event_size = offsetof(struct tcg_efi_spec_id_event, digest_sizes);
-> -       for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
-> -               mask = tpm2_algorithm_to_mask(tpm2_supported_algorithms[i]);
-> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-> +               mask = tpm2_algorithm_to_mask(hash_algo_list[i].hash_alg);
->
->                 if (!(active & mask))
->                         continue;
->
-> -               switch (tpm2_supported_algorithms[i]) {
-> +               switch (hash_algo_list[i].hash_alg) {
->                 case TPM2_ALG_SHA1:
->                 case TPM2_ALG_SHA256:
->                 case TPM2_ALG_SHA384:
-> @@ -253,17 +246,17 @@ static int tcg2_log_init(struct udevice *dev, struct tcg2_event_log *elog)
->         put_unaligned_le32(count, &ev->number_of_algorithms);
->
->         count = 0;
-> -       for (i = 0; i < ARRAY_SIZE(tpm2_supported_algorithms); ++i) {
-> -               mask = tpm2_algorithm_to_mask(tpm2_supported_algorithms[i]);
-> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-> +               mask = tpm2_algorithm_to_mask(hash_algo_list[i].hash_alg);
->
->                 if (!(active & mask))
->                         continue;
->
-> -               len = tpm2_algorithm_to_len(tpm2_supported_algorithms[i]);
-> +               len = hash_algo_list[i].hash_len;
->                 if (!len)
->                         continue;
->
-> -               put_unaligned_le16(tpm2_supported_algorithms[i],
-> +               put_unaligned_le16(hash_algo_list[i].hash_alg,
->                                    &ev->digest_sizes[count].algorithm_id);
->                 put_unaligned_le16(len, &ev->digest_sizes[count].digest_size);
->                 count++;
-> @@ -304,7 +297,7 @@ static int tcg2_replay_eventlog(struct tcg2_event_log *elog,
->                 pos = offsetof(struct tcg_pcr_event2, digests) +
->                         offsetof(struct tpml_digest_values, count);
->                 count = get_unaligned_le32(log + pos);
-> -               if (count > ARRAY_SIZE(tpm2_supported_algorithms) ||
-> +               if (count > ARRAY_SIZE(hash_algo_list) ||
->                     (digest_list->count && digest_list->count != count))
->                         return 0;
->
-> @@ -407,7 +400,7 @@ static int tcg2_log_parse(struct udevice *dev, struct tcg2_event_log *elog)
->                 return 0;
->
->         count = get_unaligned_le32(&event->number_of_algorithms);
-> -       if (count > ARRAY_SIZE(tpm2_supported_algorithms))
-> +       if (count > ARRAY_SIZE(hash_algo_list))
->                 return 0;
->
->         calc_size = offsetof(struct tcg_efi_spec_id_event, digest_sizes) +
-> @@ -1110,7 +1103,7 @@ int tpm2_get_pcr_info(struct udevice *dev, u32 *supported_pcr, u32 *active_pcr,
->          * We only support 5 algorithms for now so check against that
->          * instead of TPM2_NUM_PCR_BANKS
->          */
-> -       if (pcrs.count > ARRAY_SIZE(tpm2_supported_algorithms) ||
-> +       if (pcrs.count > ARRAY_SIZE(hash_algo_list) ||
->             pcrs.count < 1) {
->                 printf("%s: too many pcrs: %u\n", __func__, pcrs.count);
->                 return -EMSGSIZE;
-> @@ -1555,3 +1548,28 @@ u32 tpm2_enable_nvcommits(struct udevice *dev, uint vendor_cmd,
->
->         return 0;
->  }
-> +
-> +enum tpm2_algorithms tpm2_name_to_algorithm(const char *name)
-> +{
-> +       size_t i;
-> +
-> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-> +               if (!strcasecmp(name, hash_algo_list[i].hash_name))
-> +                       return hash_algo_list[i].hash_alg;
-> +       }
-> +       printf("%s: unsupported algorithm %s\n", __func__, name);
-> +
-> +       return -EINVAL;
-> +}
-> +
-> +const char *tpm2_algorithm_name(enum tpm2_algorithms algo)
-> +{
-> +       size_t i;
-> +
-> +       for (i = 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-> +               if (hash_algo_list[i].hash_alg == algo)
-> +                       return hash_algo_list[i].hash_name;
-> +       }
-> +
-> +       return "";
-> +}
-> --
-> 2.25.1
->
