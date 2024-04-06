@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC9A1CD1284
-	for <u-boot@archiver.kernel.org>; Sat,  6 Apr 2024 14:02:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B1D5C67861
+	for <u-boot@archiver.kernel.org>; Sat,  6 Apr 2024 14:02:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 38F8A87FCD;
-	Sat,  6 Apr 2024 16:02:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A33D487FE8;
+	Sat,  6 Apr 2024 16:02:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u6+Dg09k";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VhvXh1DY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAC1E87FF2; Sat,  6 Apr 2024 16:02:25 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
+ id 9C53387FC6; Sat,  6 Apr 2024 16:02:31 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67DBE87FC6
- for <u-boot@lists.denx.de>; Sat,  6 Apr 2024 16:02:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9253E88047
+ for <u-boot@lists.denx.de>; Sat,  6 Apr 2024 16:02:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-4162b8cb3e9so25610795e9.0
- for <u-boot@lists.denx.de>; Sat, 06 Apr 2024 07:02:23 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-41551500a7eso25057865e9.2
+ for <u-boot@lists.denx.de>; Sat, 06 Apr 2024 07:02:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712412143; x=1713016943; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712412148; x=1713016948; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QLCePymBroPg8dvI0tS2hkmlyqZYdv2aHSDV4Y0HTyA=;
- b=u6+Dg09kmauvjSWl+pWlbzCWBxdm2rB7JkIKE26LTuUy4yAlymkrzM9ZnYA2ni4lPW
- dpW6N6Lawm53SwmPTjFpy2k7MAjRGUyO94pOCCEPrPq1gSaS+uZ7Lu4o2kZRKa61+hcL
- G/rbPS2rli5RpdacAS278Y5P1wG6Ba+O2nWdWDDPXv+ZEJ7FcrMdmoKXCpOJZIX7ZF6v
- QgsKqO/qxgNBHr8+JJ036gfEOwuoMokghM+u1U5iNmp5ehv2NtBIqbpSrJdt8mh9SgBA
- mPpTG+o4m44uzJsNMBw7f6m+hYhdfW5jD8/K96NNuSkz6PDpNVPlNLeZb6avBPh/jqsd
- kO7A==
+ bh=uNYWRtTcfYPoyKQ45AFg9FBU9+hEW4peULAuPL/Us60=;
+ b=VhvXh1DYrKyFhDI591ysTDH+x1wPQaiInVkbXCaZxDh89Ti97V8Y4ePzzQF/EIrI35
+ ia1zMgMagzBHK5aLEshjYXH1JTZVB3EQAfMt9tzQnJ6GBkhlpM2g7hvyDhPu/to3XNSM
+ EvQr2hT+zqLsKZuH97IKo6KTbvLhgCPk40fvtOCwqVWfrgTcVAxEuui0pRyOl10DAICl
+ bk+8jcZRiTMK5WzTJc0uEh23vAFrV/e+2iB4/qL2pLRrkCc9w3xFBqK5Rr3Se40ZeGqu
+ 31wI+Zxz/ZpDH3ljOHSY+yhvkxfq5pm9R9TYvBLVA9IVd5L7X9rqQXeFmmeHCFgePtza
+ xsMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712412143; x=1713016943;
+ d=1e100.net; s=20230601; t=1712412148; x=1713016948;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QLCePymBroPg8dvI0tS2hkmlyqZYdv2aHSDV4Y0HTyA=;
- b=ERmcl31vAWSvxGxggDDTUPZDjMTcrZP/Nsl31uF0cJxsQLml3avFuXgIUby1Sien1o
- 5AeimU3nIUTLbE2si4oa4z4yMVwxi1AfyQ0nKaVeVk/bgU1r6/o0PFvxAsDT26nOh9ue
- 75ko7+wmjGaun0U84YMUcI/5993rH/lrmzHRvLGgwh62Ec7g5DQlJinY38v+sm6XUgZV
- jralQhKKDEe8iWD2hinatV2drjcVb5+9yj/MRL4RHsz5vKJxyGEvSusnPKb41sEUUB1C
- 4ycNNjdniM1OqQFoNrYHZ88iVyh/Z80wcrBM7ZEnFJvQS+XP+5hDmDVd1aPjkF/dMWGC
- 31Zg==
+ bh=uNYWRtTcfYPoyKQ45AFg9FBU9+hEW4peULAuPL/Us60=;
+ b=xRomLl/R1pkxnPXVAcYtzWu/9dEDZjiG7UxsfqQgoRVf5B9gkUMz/WTubzhx83mZM3
+ dg70stv9FFwkY5hhAANMko8fpDwl6PB+ArJNYWexfoS9yOJTz7oZC0gjvkFUm7+PMur9
+ WOXiVxXhYHTmDC9Gv3p3xbZM8K9Mx3+tI1aRYuRHEkZ0ctNYhbk0Qxq78CrfgbfKdp6m
+ 6BN3fdNkqpQUtXW/89B5rlvGW1PnZvS79pxxg4iZpmqJqKTXb1kZRB0Agw4t3FNtKG31
+ NfOfbQzhUbxkHB8/21toPR3KTrW/2aY1RqXd8twPpqizzlkCNqhdn3mkj8MgRhASfcOe
+ FnoA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU1ax3h6PFPxeLNLl6hqSS1TksoAb/wIMBWX2FCBu3ML8JBXyzbnNtfIz99gcKcS9qEnYMepDBdUjICOxbtJfu/img86Q==
-X-Gm-Message-State: AOJu0Yx0HSAG1MmUKfJiFeALuTgQ1ookcdMiF+RX7QAT2aCCDTisPfk/
- W5iZr18E6mg9ctYEMxVW2ZoL+ixtv4j3MR0RkABcEhXptXq/Vymmr2vLm4Il/sk=
-X-Google-Smtp-Source: AGHT+IETc4f0cGZ/0Ehkm3l41SYdqADdd7gvK4MIRMQbf9R2s83njoQpVUoGscuJ2Dflrt5qcB6X5Q==
-X-Received: by 2002:a05:600c:1986:b0:416:4973:4d87 with SMTP id
- t6-20020a05600c198600b0041649734d87mr289584wmq.3.1712412142616; 
- Sat, 06 Apr 2024 07:02:22 -0700 (PDT)
+ AJvYcCW4jUunfH2QKYSUh4b/XD24ptZAv8gWcmc249uUf9oTLCKGuqQC872IRMJfJaXsvomM74SG+dH0oojVB0S0Or91B1VjHw==
+X-Gm-Message-State: AOJu0YzpYWJO7bqsIdPuFfzI1AqorWLINOxRfMsxp8xR63oPFS/Q/M6l
+ jhGLzMU6Rz6iz9zz5pfZJ8igBOkBRQl4sixHmAff0oT+1r4nzO587A9RF/GewjM=
+X-Google-Smtp-Source: AGHT+IES/cd5C+ohy9MJgr2KirIja9wZXRzIOwx7A+v81F4AZfE8j5ZNB1i41YKkQm4yruwoNIOWqw==
+X-Received: by 2002:a05:600c:1382:b0:413:ff06:83cd with SMTP id
+ u2-20020a05600c138200b00413ff0683cdmr3009001wmf.3.1712412147886; 
+ Sat, 06 Apr 2024 07:02:27 -0700 (PDT)
 Received: from hades.. (ppp089210071137.access.hol.gr. [89.210.71.137])
  by smtp.gmail.com with ESMTPSA id
- j19-20020a05600c1c1300b004163de6cfabsm1729756wms.11.2024.04.06.07.02.20
+ j19-20020a05600c1c1300b004163de6cfabsm1729756wms.11.2024.04.06.07.02.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 06 Apr 2024 07:02:22 -0700 (PDT)
+ Sat, 06 Apr 2024 07:02:27 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de,
 	kettenis@openbsd.org
@@ -78,11 +78,12 @@ Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
  Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
-Subject: [PATCH v1 1/4] efi_loader: conditionally enable SetvariableRT
-Date: Sat,  6 Apr 2024 17:01:52 +0300
-Message-Id: <20240406140203.248211-2-ilias.apalodimas@linaro.org>
+ Weizhao Ouyang <o451686892@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH v1 2/4] efi_loader: Add OS notifications for SetVariableRT in
+ RAM
+Date: Sat,  6 Apr 2024 17:01:53 +0300
+Message-Id: <20240406140203.248211-3-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.37.2
 In-Reply-To: <20240406140203.248211-1-ilias.apalodimas@linaro.org>
 References: <20240406140203.248211-1-ilias.apalodimas@linaro.org>
@@ -104,273 +105,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When EFI variables are stored on file we don't allow SetVariableRT,
-since the OS doesn't know how to access or write that file.  At the same
-time keeping the U-Boot drivers alive in runtime sections and performing
-writes from the firmware is dangerous -- if at all possible.
+Previous patches enable SetVariableRT using a volatile storage backend
+using EFI_RUNTIME_SERVICES_DATA allocared memory. Since there's no
+recommendation from the spec on how to notify the OS, add a volatile
+EFI variable that contains the filename relative to the ESP. OS'es
+can use that file and update it at runtime
 
-For GetVariableRT  we copy runtime variables in RAM and expose them to
-the OS. Add a Kconfig option and provide SetVariableRT using the same
-memory backend. The OS will be responsible for syncing the RAM contents
-to the file, otherwise any changes made during runtime won't persist
-reboots.
-
-It's worth noting that the variable store format is defined in EBBR [0]
-and authenticated variables are explicitly prohibited, since they have
-to be stored on a medium that's tamper and rollback protected.
-
-- pre-patch
-$~ mount | grep efiva
-efivarfs on /sys/firmware/efi/efivars type efivarfs (ro,nosuid,nodev,noexec,relatime)
-
-$~ efibootmgr -n 0001
-Could not set BootNext: Read-only file system
-
-- post-patch
-$~ mount | grep efiva
-efivarfs on /sys/firmware/efi/efivars type efivarfs (rw,nosuid,nodev,noexec,relatime)
-
-$~ efibootmgr -n 0001
-BootNext: 0001
-BootCurrent: 0000
-BootOrder: 0000,0001
-Boot0000* debian        HD(1,GPT,bdae5610-3331-4e4d-9466-acb5caf0b4a6,0x800,0x100000)/File(EFI\debian\grubaa64.efi)
-Boot0001* virtio 0      VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,0000000000000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,850000001f000000)/VenHw(e61d73b9-a384-4acc-aeab-82e828f3628b,1600850000000000){auto_created_boot_option}
-
-$~ efivar -p -n 8be4df61-93ca-11d2-aa0d-00e098032b8c-BootNext
-GUID: 8be4df61-93ca-11d2-aa0d-00e098032b8c
-Name: "BootNext"
+$~ efivar -p -n b2ac5fc9-92b7-4acd-aeac-11e818c3130c-RTStorageVolatile
+GUID: b2ac5fc9-92b7-4acd-aeac-11e818c3130c
+Name: "RTStorageVolatile"
 Attributes:
-        Non-Volatile
-        Boot Service Access
-        Runtime Service Access
+	Boot Service Access
+	Runtime Service Access
 Value:
-00000000  01 00
-
-[0] https://arm-software.github.io/ebbr/index.html#document-chapter5-variable-storage
+00000000  75 62 6f 6f 74 65 66 69  2e 76 61 72 00           |ubootefi.var.   |
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- lib/efi_loader/Kconfig                        |  16 +++
- lib/efi_loader/efi_runtime.c                  |   5 +
- lib/efi_loader/efi_variable.c                 | 114 ++++++++++++++++--
- .../efi_selftest_variables_runtime.c          |  13 +-
- 4 files changed, 135 insertions(+), 13 deletions(-)
+ include/efi_loader.h          |  4 ++++
+ lib/efi_loader/efi_runtime.c  |  4 ----
+ lib/efi_loader/efi_variable.c | 20 ++++++++++++++++++++
+ 3 files changed, 24 insertions(+), 4 deletions(-)
 
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index a7c3e05c13a0..b210ceea6d64 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -63,6 +63,22 @@ config EFI_VARIABLE_FILE_STORE
- 	  Select this option if you want non-volatile UEFI variables to be
- 	  stored as file /ubootefi.var on the EFI system partition.
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 7daca0afba2b..25551fe18948 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -159,6 +159,10 @@ static inline void efi_set_bootdev(const char *dev, const char *devnr,
+ #define EFICONFIG_AUTO_GENERATED_ENTRY_GUID \
+ 	EFI_GUID(0x8108ac4e, 0x9f11, 0x4d59, \
+ 		 0x85, 0x0e, 0xe2, 0x1a, 0x52, 0x2c, 0x59, 0xb2)
++#define U_BOOT_EFI_RT_VAR_FILE_GUID \
++	EFI_GUID(0xb2ac5fc9, 0x92b7, 0x4acd, \
++		 0xae, 0xac, 0x11, 0xe8, 0x18, 0xc3, 0x13, 0x0c)
++
  
-+config EFI_RT_VOLATILE_STORE
-+	bool "Allow variable runtime services in volatile storage (e.g RAM)"
-+	depends on EFI_VARIABLE_FILE_STORE
-+	help
-+	  When EFI variables are stored on file we don't allow SetVariableRT,
-+	  since the OS doesn't know how to write that file. At he same time
-+	  we copy runtime variables in DRAM and support GetVariableRT
-+
-+	  Enable this option to allow SetVariableRT on the RAM backend of
-+	  the EFI variable storage. The OS will be responsible for syncing
-+	  the RAM contents to the file, otherwise any changes made during
-+	  runtime won't persist reboots.
-+	  Authenticated variables are not supported. Note that this will
-+	  violate the EFI spec since writing auth variables will return
-+	  EFI_INVALID_PARAMETER
-+
- config EFI_MM_COMM_TEE
- 	bool "UEFI variables storage service via the trusted world"
- 	depends on OPTEE
+ /* Use internal device tree when starting UEFI application */
+ #define EFI_FDT_USE_INTERNAL NULL
 diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
-index 18da6892e796..8ebbea7e5c69 100644
+index 8ebbea7e5c69..d898ba6c268f 100644
 --- a/lib/efi_loader/efi_runtime.c
 +++ b/lib/efi_loader/efi_runtime.c
-@@ -10,6 +10,7 @@
- #include <dm.h>
- #include <elf.h>
- #include <efi_loader.h>
-+#include <efi_variable.h>
- #include <log.h>
- #include <malloc.h>
- #include <rtc.h>
-@@ -126,6 +127,10 @@ efi_status_t efi_init_runtime_supported(void)
+@@ -127,10 +127,6 @@ efi_status_t efi_init_runtime_supported(void)
  				EFI_RT_SUPPORTED_SET_VIRTUAL_ADDRESS_MAP |
  				EFI_RT_SUPPORTED_CONVERT_POINTER;
  
-+	if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE))
-+		rt_table->runtime_services_supported |=
-+			EFI_RT_SUPPORTED_SET_VARIABLE;
-+
+-	if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE))
+-		rt_table->runtime_services_supported |=
+-			EFI_RT_SUPPORTED_SET_VARIABLE;
+-
  	/*
  	 * This value must be synced with efi_runtime_detach_list
  	 * as well as efi_runtime_services.
 diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
-index 6fe3792a12a5..f79041e6bedd 100644
+index f79041e6bedd..f97c8c57f75c 100644
 --- a/lib/efi_loader/efi_variable.c
 +++ b/lib/efi_loader/efi_variable.c
-@@ -218,17 +218,20 @@ efi_get_next_variable_name_int(efi_uintn_t *variable_name_size,
- 	return efi_get_next_variable_name_mem(variable_name_size, variable_name, vendor);
- }
- 
--efi_status_t efi_set_variable_int(const u16 *variable_name,
--				  const efi_guid_t *vendor,
--				  u32 attributes, efi_uintn_t data_size,
--				  const void *data, bool ro_check)
-+/**
-+ * setvariable_allowed() - checks defined by the UEFI spec for setvariable
-+ *
-+ * @variable_name:	name of the variable
-+ * @vendor:		vendor GUID
-+ * @attributes:		attributes of the variable
-+ * @data_size:		size of the buffer with the variable value
-+ * @data:		buffer with the variable value
-+ * Return:		status code
-+ */
-+static efi_status_t __efi_runtime
-+setvariable_allowed(const u16 *variable_name, const efi_guid_t *vendor,
-+		    u32 attributes, efi_uintn_t data_size, const void *data)
+@@ -554,6 +554,26 @@ if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
+  */
+ void efi_variables_boot_exit_notify(void)
  {
--	struct efi_var_entry *var;
--	efi_uintn_t ret;
--	bool append, delete;
--	u64 time = 0;
--	enum efi_auth_var_type var_type;
--
- 	if (!variable_name || !*variable_name || !vendor)
- 		return EFI_INVALID_PARAMETER;
- 
-@@ -260,6 +263,25 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
- 	     !(attributes & EFI_VARIABLE_BOOTSERVICE_ACCESS)))
- 		return EFI_INVALID_PARAMETER;
- 
-+	return EFI_SUCCESS;
-+}
++	const efi_guid_t efi_guid_efi_rt_var_file = U_BOOT_EFI_RT_VAR_FILE_GUID;
++	const efi_guid_t rt_prop_guid = EFI_RT_PROPERTIES_TABLE_GUID;
++	efi_status_t ret;
 +
-+efi_status_t efi_set_variable_int(const u16 *variable_name,
-+				  const efi_guid_t *vendor,
-+				  u32 attributes, efi_uintn_t data_size,
-+				  const void *data, bool ro_check)
-+{
-+	struct efi_var_entry *var;
-+	efi_uintn_t ret;
-+	bool append, delete;
-+	u64 time = 0;
-+	enum efi_auth_var_type var_type;
-+
-+	ret = setvariable_allowed(variable_name, vendor, attributes, data_size,
-+				  data);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
- 	/* check if a variable exists */
- 	var = efi_var_mem_find(vendor, variable_name, NULL);
- 	append = !!(attributes & EFI_VARIABLE_APPEND_WRITE);
-@@ -452,6 +474,78 @@ efi_set_variable_runtime(u16 *variable_name, const efi_guid_t *vendor,
- 			 u32 attributes, efi_uintn_t data_size,
- 			 const void *data)
- {
-+if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
-+	struct efi_var_entry *var;
-+	efi_uintn_t ret;
-+	bool append, delete;
-+	u64 time = 0;
-+
-+	/*
-+	 * Authenticated variables are not supported the rest of the checks
-+	 * are in setvariable_allowed()
-+	 */
-+	if (attributes & EFI_VARIABLE_TIME_BASED_AUTHENTICATED_WRITE_ACCESS)
-+		return EFI_INVALID_PARAMETER;
-+	/* BS only variables are hidden deny writing them */
-+	if (!(attributes & EFI_VARIABLE_RUNTIME_ACCESS))
-+		return EFI_INVALID_PARAMETER;
-+
-+	ret = setvariable_allowed(variable_name, vendor, attributes, data_size,
-+				  data);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
-+	/* check if a variable exists */
-+	var = efi_var_mem_find(vendor, variable_name, NULL);
-+	append = !!(attributes & EFI_VARIABLE_APPEND_WRITE);
-+	attributes &= ~EFI_VARIABLE_APPEND_WRITE;
-+	delete = !append && (!data_size || !attributes);
-+
-+	if (var) {
-+		if (var->attr & EFI_VARIABLE_READ_ONLY ||
-+		    !(var->attr & EFI_VARIABLE_NON_VOLATILE))
-+			return EFI_WRITE_PROTECTED;
-+
-+		/* attributes won't be changed */
-+		if (!delete && (((var->attr & ~EFI_VARIABLE_READ_ONLY) !=
-+		    (attributes & ~EFI_VARIABLE_READ_ONLY))))
-+			return EFI_INVALID_PARAMETER;
-+		time = var->time;
-+	} else {
-+		if (!(attributes & EFI_VARIABLE_NON_VOLATILE))
-+			return EFI_INVALID_PARAMETER;
-+		if (append && !data_size)
-+			return EFI_SUCCESS;
-+		if (delete)
-+			return EFI_NOT_FOUND;
-+	}
-+
-+	if (delete) {
-+		/* EFI_NOT_FOUND has been handled before */
-+		attributes = var->attr;
-+		ret = EFI_SUCCESS;
-+	} else if (append && var) {
-+		u16 *old_data = var->name;
-+
-+		for (; *old_data; ++old_data)
-+			;
-+		++old_data;
-+		ret = efi_var_mem_ins(variable_name, vendor, attributes,
-+				      var->length, old_data, data_size, data,
-+				      time);
-+	} else {
-+		ret = efi_var_mem_ins(variable_name, vendor, attributes,
-+				      data_size, data, 0, NULL, time);
-+	}
-+
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+	/* We are always inserting new variables, get rid of the old copy */
-+	efi_var_mem_del(var);
-+
-+	return EFI_SUCCESS;
-+} else
-+
- 	return EFI_UNSUPPORTED;
- }
- 
-diff --git a/lib/efi_selftest/efi_selftest_variables_runtime.c b/lib/efi_selftest/efi_selftest_variables_runtime.c
-index 4700d9424105..4c9405c0a7c7 100644
---- a/lib/efi_selftest/efi_selftest_variables_runtime.c
-+++ b/lib/efi_selftest/efi_selftest_variables_runtime.c
-@@ -62,9 +62,16 @@ static int execute(void)
- 				    EFI_VARIABLE_BOOTSERVICE_ACCESS |
- 				    EFI_VARIABLE_RUNTIME_ACCESS,
- 				    3, v + 4);
--	if (ret != EFI_UNSUPPORTED) {
--		efi_st_error("SetVariable failed\n");
--		return EFI_ST_FAILURE;
 +	if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
-+		if (ret != EFI_INVALID_PARAMETER) {
-+			efi_st_error("SetVariable failed\n");
-+			return EFI_ST_FAILURE;
-+		}
-+	} else {
-+		if (ret != EFI_UNSUPPORTED) {
-+			efi_st_error("SetVariable failed\n");
-+			return EFI_ST_FAILURE;
-+		}
- 	}
- 	len = EFI_ST_MAX_DATA_SIZE;
- 	ret = runtime->get_variable(u"PlatformLangCodes", &guid_vendor0,
++		struct efi_rt_properties_table *rt_prop =
++			efi_get_configuration_table(&rt_prop_guid);
++
++		ret = efi_set_variable_int(u"RTStorageVolatile",
++					   &efi_guid_efi_rt_var_file,
++					   EFI_VARIABLE_BOOTSERVICE_ACCESS |
++					   EFI_VARIABLE_RUNTIME_ACCESS |
++					   EFI_VARIABLE_READ_ONLY,
++					   sizeof(EFI_VAR_FILE_NAME),
++					   EFI_VAR_FILE_NAME, false);
++		if (ret != EFI_SUCCESS)
++			rt_prop->runtime_services_supported |= ~EFI_RT_SUPPORTED_SET_VARIABLE;
++		else
++			log_err("Can't RTStorage. SetVariableRT won't be available\n");
++	}
+ 	/* Switch variable services functions to runtime version */
+ 	efi_runtime_services.get_variable = efi_get_variable_runtime;
+ 	efi_runtime_services.get_next_variable_name =
 -- 
 2.37.2
 
