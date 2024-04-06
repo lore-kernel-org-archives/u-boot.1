@@ -4,91 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 613B8C67861
-	for <u-boot@archiver.kernel.org>; Fri,  5 Apr 2024 19:05:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4098C3A59D
+	for <u-boot@archiver.kernel.org>; Sat,  6 Apr 2024 00:42:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CE098812F;
-	Fri,  5 Apr 2024 21:05:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=jannau.net
+	by phobos.denx.de (Postfix) with ESMTP id AABAA87ED0;
+	Sat,  6 Apr 2024 02:42:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jannau.net header.i=@jannau.net header.b="F0DondE1";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="sBVAL2Fh";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="S30oVF8k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9B8187DF3; Fri,  5 Apr 2024 21:05:42 +0200 (CEST)
-Received: from fout3-smtp.messagingengine.com (fout3-smtp.messagingengine.com
- [103.168.172.146])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A5E9587F3A; Sat,  6 Apr 2024 02:42:32 +0200 (CEST)
+Received: from mail-oi1-x230.google.com (mail-oi1-x230.google.com
+ [IPv6:2607:f8b0:4864:20::230])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2FDC884B8
- for <u-boot@lists.denx.de>; Fri,  5 Apr 2024 21:05:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D65487E1D
+ for <u-boot@lists.denx.de>; Sat,  6 Apr 2024 02:42:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=jannau.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=janne@jannau.net
-Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
- by mailfout.nyi.internal (Postfix) with ESMTP id B5C6E1380073;
- Fri,  5 Apr 2024 15:05:36 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute5.internal (MEProxy); Fri, 05 Apr 2024 15:05:36 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jannau.net; h=cc
- :cc:content-type:content-type:date:date:from:from:in-reply-to
- :in-reply-to:message-id:mime-version:references:reply-to:subject
- :subject:to:to; s=fm1; t=1712343936; x=1712430336; bh=j+g3mhmYqs
- xyXMEcsuyZxmVG1iSCSsV/w7wrzW6e59k=; b=F0DondE1m0DRvPPS4RfK2nGtcu
- Y5SLO/im6fiICQhdvkisneEfS1bz64D7cBso4eoWtS5litaTH8B4XtZKXDoNNSfe
- 7l7m0TPyBKrjsAyS7gOfV2Z0suKRgJ6gsiKj4AJdLP8M7gpWK7mMGWpOzGk3Yd3M
- k7c0Zm5lDy22lZ/Yzb9VmYdCs/k0c5kugqleOicpN9L4mqj8dRpYP/6teccF1ZFG
- YDFuNhUtE40DYyzxf51f6AccoWzliBSUoq9L+MNolTkBCyyfNDfs986vikYX12jT
- IyXV2xrzZYxI4FeQAxcUXswK5z87gDEDK7BhrEX2XPOSJFITTGMQdY7cY+8A==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-type:content-type:date:date
- :feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
- :message-id:mime-version:references:reply-to:subject:subject:to
- :to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
- fm2; t=1712343936; x=1712430336; bh=j+g3mhmYqsxyXMEcsuyZxmVG1iSC
- SsV/w7wrzW6e59k=; b=sBVAL2Fh0xeEvQSKTckRjxIe7oj9S4A99svCyafuZ5Uf
- DQL4qGELwAVSEgEnZgK24sum0myZDRzM4lLPOG6baqMtZfjmw/ErOq4ezy1Bz+rR
- cNSsXlnHlgajEM0tBMCljtEo0gU4Yn3hjEGmwPmN4E/b9WEYDeXVmpz4r3wIDARP
- 19TWqWrbnNj+IBoMSRKDktRKfnuhPoFlG5lIyic5BTKj1KhD8Jl5Vf9TOqd+yhW2
- SI+OYZi7ohbh5qFqVvWzYOS9W9Il6Gufl1/FUpwfTCjSFEItTK4xhiEkrR9c4HeK
- ihx5wGcXODm+ByW1bbgrf0tBpIdzCMHOtB4K9qvqkg==
-X-ME-Sender: <xms:gEsQZrKiGbqf_sBLlddkKk07_feHxQD7PykBHYgF5yg3TH3fTOPnaA>
- <xme:gEsQZvJNJOXSdzrnJ-d4ESdyOMckZT7AuQ3Jt9VhGTXRt9y-CqJaEZCibpQ9k9Kfz
- 7CqoZaJj_3OM9hjQ2I>
-X-ME-Received: <xmr:gEsQZjv09NyYSF7aOxZfCb_Km0b2JNkfZvzzd3awCE5ZA4mtdUeuYM6-tzYus_PkXzQC8abBOsiIhoJIVOn4ee4euZZUpEIVtA>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrudegtddgudefhecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
- enucfjughrpeffhffvvefukfhfgggtuggjsehmtderredttdejnecuhfhrohhmpeflrghn
- nhgvucfirhhunhgruhcuoehjsehjrghnnhgruhdrnhgvtheqnecuggftrfgrthhtvghrnh
- epgfekveetieelgeefkefhueelueegvddtuefhudeuffeigeeutdfgiefffefhkeegnecu
- ffhomhgrihhnpeguvghngidruggvnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrg
- hmpehmrghilhhfrhhomhepjhgrnhhnvgesjhgrnhhnrghurdhnvght
-X-ME-Proxy: <xmx:gEsQZkZrAL3ZERmMw6iO4JyGKDGwXtnerqKWKBURrsW241JbG-C3_g>
- <xmx:gEsQZiZVWq7RW07jw53hFyKORRNmyGrcMjpr1GhaaZLSec0F4W2eyg>
- <xmx:gEsQZoAB5VjuSUSYADfxVY6GpzDceX_N0I6E6NXGBMmxjGRPEzSZEg>
- <xmx:gEsQZgY1eG02GzFrMHPGl9Ip8qd-oLroGfRXrKx9T4vK-8l6JIEOeQ>
- <xmx:gEsQZonpvvbU7XWx2ETdujDBKy4Q2i-zN0w3b7OCvr1tBiCyyQVSavbJ>
-Feedback-ID: i47b949f6:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 5 Apr 2024 15:05:35 -0400 (EDT)
-Date: Fri, 5 Apr 2024 21:05:33 +0200
-From: Janne Grunau <j@jannau.net>
-To: Marek Vasut <marex@denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Joe Hershberger <joe.hershberger@ni.com>, u-boot@lists.denx.de,
- asahi@lists.linux.dev, Neal Gompa <neal@gompa.dev>
-Subject: Re: [PATCH v4 0/6] USB keyboard improvements for asahi / desktop
- systems
-Message-ID: <ZhBLfQfxB_UEwvyY@robin>
-References: <20240404-asahi-keyboards-v4-0-2266033feaff@jannau.net>
- <356b892a-a681-4ae0-a6c8-ed1b4b5a8717@denx.de>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x230.google.com with SMTP id
+ 5614622812f47-3c3d3710018so1835265b6e.0
+ for <u-boot@lists.denx.de>; Fri, 05 Apr 2024 17:42:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1712364149; x=1712968949; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=eRYi5RMB+OTGRF6CfsFhaYtUzIDaZtqWPON4293fEBQ=;
+ b=S30oVF8kwCrwXbIZOO5RT58fvEIme8ZGb7sV1h9k/OwSjXb7cQ0SANzzivxWveBlvO
+ cVH8afvdcrAq8s4haV/pOlod5xkaA0erHc/J8rc54wGkJICZOYzBSaKCcLX5X98KjKbA
+ 7ZGqV4ug9XG5oWY8gVKsoR7TG1CZprB32hfuk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712364149; x=1712968949;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eRYi5RMB+OTGRF6CfsFhaYtUzIDaZtqWPON4293fEBQ=;
+ b=GBDPGUJfby2wVqhk3B2HmzUnBJ5PXDblQmZI9xKgsK4m47DOxOyr4K5HFq6cc/fhf3
+ aentlT2G3Q0XhVTrY9zyn9YAca4wwomo/X7EKNi0I9+TmYtssz5muns2iJcusRgmbQUL
+ 773cGACIsfWd/i4Hn0TWswLIoD2DYOnK7YLIT4cEABDNpjyFONYPmnUyl8tUPso6kp/H
+ f2Sh+g0SSuagjVcjjMSjOvkrUSJ3YRzD7cncVGSn2DEEXYvQNEP8kHrBcQ1Mq2E/2CC4
+ urUcA4FI7uomsUJbBGcX/8SFCTSNtD4xst4wP1GJc9+0uyO1JY3loiqjBriDcv/QJlK0
+ WkOQ==
+X-Gm-Message-State: AOJu0Yxj8lwGnDeZmORXEwcuswtKPMcPoB5KYiBORGis1ATrZ++e90wv
+ UAjrSSlWp1EiRID5zgB1lCbmZchojmoSB1UIzfUDJLaDiTL5lM47MKeEVDmyEY8=
+X-Google-Smtp-Source: AGHT+IE2H5REhrJZ0ah8RS+G5vpR55xEacJpd+U5pj42VheKtOOQCMqG/qSks3NrJHGQk8myyi8KJw==
+X-Received: by 2002:a05:6808:8:b0:3c3:e78d:f1be with SMTP id
+ u8-20020a056808000800b003c3e78df1bemr2731734oic.57.1712364149202; 
+ Fri, 05 Apr 2024 17:42:29 -0700 (PDT)
+Received: from bill-the-cat ([187.144.96.143])
+ by smtp.gmail.com with ESMTPSA id
+ ha13-20020a05622a2b0d00b004344bcaee33sm1254990qtb.63.2024.04.05.17.42.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 05 Apr 2024 17:42:27 -0700 (PDT)
+Date: Fri, 5 Apr 2024 20:41:54 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Minkyu Kang <mk7.kang@samsung.com>
+Cc: u-boot@lists.denx.de, promsoft@gmail.com
+Subject: Re: Please pull u-boot-samsung master
+Message-ID: <20240406004154.GA114971@bill-the-cat>
+References: <CGME20240404085411epcas1p3f10e648bd35670e090592cb4fbb97d58@epcas1p3.samsung.com>
+ <1ff501da866d$a93e2370$fbba6a50$@samsung.com>
 MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="qEwtrBI5m2hdEo53"
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="2wW3yP3OzM8b7hIS"
 Content-Disposition: inline
-In-Reply-To: <356b892a-a681-4ae0-a6c8-ed1b4b5a8717@denx.de>
+In-Reply-To: <1ff501da866d$a93e2370$fbba6a50$@samsung.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,78 +91,51 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---qEwtrBI5m2hdEo53
-Content-Type: text/plain; charset=utf-8
+--2wW3yP3OzM8b7hIS
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 05, 2024 at 04:52:32PM +0200, Marek Vasut wrote:
-> On 4/4/24 8:25 AM, Janne Grunau via B4 Relay wrote:
-> > Apple USB Keyboards from 2021 need quirks to be useable. The boot HID
-> > keyboard protocol is unfortunately not described in the first interface
-> > descriptor but the second. This needs several changes. The USB keyboard
-> > driver has to look at all (2) interface descriptors during probing.
-> > Since I didn't want to rebuild the USB driver probe code the Apple
-> > keyboards are bound to the keyboard driver via USB vendor and product
-> > IDs.
-> > To make the keyboards useable on Apple silicon devices the xhci driver
-> > needs to initializes rings for the endpoints of the first two interface
-> > descriptors. If this is causes concerns regarding regressions or memory
-> > use the USB_MAX_ACTIVE_INTERFACES define could be turned into a CONFIG
-> > option.
-> > Even after this changes the keyboards still do not probe successfully
-> > since they apparently do not behave HID standard compliant. They only
-> > generate reports on key events. This leads the final check whether the
-> > keyboard is operational to fail unless the user presses keys during the
-> > probe. Skip this check for known keyboards.
-> > Keychron seems to emulate Apple keyboards (some models even "re-use"
-> > Apple's USB vendor ID) so apply this quirk as well.
-> > 
-> > Some devices like Yubikeys emulate a keyboard. since u-boot only binds a
-> > single keyboard block this kind of devices from the USB keyboard driver.
-> > 
-> > Signed-off-by: Janne Grunau <j@jannau.net>
-> 
-> I picked the series, but CI indicates build errors, can you have a look ?
-> 
-> https://source.denx.de/u-boot/custodians/u-boot-usb/-/pipelines/20215
+On Thu, Apr 04, 2024 at 05:54:10PM +0900, Minkyu Kang wrote:
 
-The issue seems to be that the field dev in struct usb_device exists
-only for DM_USB. That means we can't use dev_dbg.
-Either take the following fixup patch or I can resend the series.
+> Dear Tom,
+>=20
+> The following changes since commit dde373bde392c38649c8c4420e0c98ef8d38d9=
+dc:
+>=20
+>   Prepare v2024.04-rc5 (2024-03-25 21:56:50 -0400)
+>=20
+> are available in the git repository at:
+>=20
+>   git@source.denx.de:u-boot/custodians/u-boot-samsung.git master
+>=20
+> for you to fetch changes up to 1751ba9a3b79ea5083ff5c4de58fe3bd9588f32a:
+>=20
+>   clk: exynos: Add CMU_CORE and CMU_HSI for Exynos850 (2024-03-26 18:56:55
+> +0900)
+>=20
 
-Thanks
+Applied to u-boot/master, thanks!
 
-Janne
+--=20
+Tom
 
---qEwtrBI5m2hdEo53
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline;
-	filename="0001-fixup-usb-Add-environment-based-device-ignorelist.patch"
+--2wW3yP3OzM8b7hIS
+Content-Type: application/pgp-signature; name="signature.asc"
 
-From 57d54303eb2b60e92bd478e4250a9cc63cfc277e Mon Sep 17 00:00:00 2001
-From: Janne Grunau <j@jannau.net>
-Date: Fri, 5 Apr 2024 21:00:44 +0200
-Subject: [PATCH 1/1] fixup! usb: Add environment based device ignorelist
+-----BEGIN PGP SIGNATURE-----
 
----
- common/usb.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYQmk4ACgkQFHw5/5Y0
+tyyDSwv9GVTP6epg3tCJ8qjGGK0++9SEuVwYuWpzj8UewEhYpG9kq/pxLi19AK3C
+/EmALR0gqLO6kEfGmOJ5lDZ2hAyH75RdwkFRFrVG7XO8p9KcTcF8CHIswp9WwDUF
+yNLjghRpmSP/IbQcNNKII3R2XAOd6h++fzLHnGA2Yi2FCy7KPQWHDH33QAfsEemq
+vVf+kKCkXWm69Qymk/sSZHTwn54nm04NwBnHHi1YNNKVvY2gjEYSpk7eCv1WIVZ3
+Y1MF97CvHcArm4+IhaGSF2b+7wxMzweDio/tsL7YHPoMczrRGdpRkE+7tvSxpli2
+xTNEwGCp9/opUm1H5zyojPJnc/hoPgJ2MfPZdySH9WlUulV7H2EHmFwDQ52yJugf
+UnFoSkQJq3QE3gXN3V0dU3O2vgQj/Ni4BSAcv6j+XYsNHnf0z4FkVeHWgnyuXh2R
+WV9ulLDN9QNK2YUFNAOBDpV7PB1a2HOtp2S3m5pZNZ+ed0T+LJsBUtukf71iXZIQ
+qHC3N/m2
+=+1mL
+-----END PGP SIGNATURE-----
 
-diff --git a/common/usb.c b/common/usb.c
-index 44db07742e..8bc85c58b2 100644
---- a/common/usb.c
-+++ b/common/usb.c
-@@ -1146,7 +1146,7 @@ int usb_select_config(struct usb_device *dev)
- 	err = usb_device_is_ignored(dev->descriptor.idVendor,
- 				    dev->descriptor.idProduct);
- 	if (err == -ENODEV) {
--		dev_dbg(dev->dev, "Ignoring USB device 0x%x:0x%x\n",
-+		debug("Ignoring USB device 0x%x:0x%x\n",
- 			dev->descriptor.idVendor, dev->descriptor.idProduct);
- 		return err;
- 	} else if (err == -EINVAL) {
--- 
-2.44.0
-
-
---qEwtrBI5m2hdEo53--
+--2wW3yP3OzM8b7hIS--
