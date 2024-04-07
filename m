@@ -4,59 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F5DCC67861
-	for <u-boot@archiver.kernel.org>; Sun,  7 Apr 2024 01:06:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34EFAC67861
+	for <u-boot@archiver.kernel.org>; Sun,  7 Apr 2024 02:00:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C00287EF5;
-	Sun,  7 Apr 2024 03:06:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 45B0587BA8;
+	Sun,  7 Apr 2024 04:00:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mailtundra.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1712451961;
-	bh=9JqXDj/rXgoJgojFGAsKJG1JWQSvC6wGIbZKUeYzfg8=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=R1fvDjg9Veh07wWjMlkDuIpoIMmfhbbotYNRr8l/FW0bcVbfKd6MKvsisSBuQu/I3
-	 m5Ij3SkVyKXqK9AHlOQfleulw1HCLKFMCVbKYGycRTWFRLzBzQifB/CBOqPvsiz6Av
-	 UYDjL9pv73I/iFqlgFioowsNtCgXJLPfqjUnwx4gAdbjSeeG1NIDf6YPn3rkeMismU
-	 xvyglgzBW4Otbx0Anyv2xEGyZXPcUTKf/nqJ/GGlbtnvzOsWiDD6AP6o9+OexkF19p
-	 q28EIlXcexYDbg/pho3LVJz0+O9w0OGNNaxZ42gFcAXDR+vK1J2Li4/laUEo+f3UEU
-	 1pqVZjZugd1Xw==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailtundra.com header.i=@mailtundra.com header.b="CQLbFhd+";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6F5CA87FE0; Sun,  7 Apr 2024 03:47:48 +0200 (CEST)
+Received: from mail-40110.protonmail.ch (mail-40110.protonmail.ch
+ [185.70.40.110])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 06C5887EAF;
- Sun,  7 Apr 2024 03:05:59 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1712451960;
- bh=9JqXDj/rXgoJgojFGAsKJG1JWQSvC6wGIbZKUeYzfg8=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=wwXwsTZK99EZpWegyRIrp8DgXQ4LReGo2pdvv/tVbb2y4/ah4A7wDGz/rbB6Bc7sM
- LvEAo79+aS5GlkCG13sIgrgQ0T3W8TX6QkmYm2Sh59j2TLib9/HPi1qr8fjtkEpOxH
- 6sX3yzBrU+D35R0l4sbKNJd6I5XDbfiycHQhvvCSvl/6ge8wOHEMNsf94VqT0C68Fa
- qgZQw0+XSf1a51CE6ehn2suNDObesM2UlG4UgkqnxAMEiwpoo7I76RnxFfkLTClyLv
- zSv0tZt51H4Wxo70blu8L5zzud4VQoj6ApXvPe2k8+2qtguRvLD3l7jgs5biS0DFsV
- 0hYqh+PbwSzBg==
-Message-ID: <5ed4e6d2-edc7-461d-8183-e91d7b994aa5@denx.de>
-Date: Sun, 7 Apr 2024 03:05:59 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 9BF8087FBF
+ for <u-boot@lists.denx.de>; Sun,  7 Apr 2024 03:47:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mailtundra.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mwleeds@mailtundra.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailtundra.com;
+ s=protonmail2; t=1712454466; x=1712713666;
+ bh=Tlfo6jmAs/CaD2+mOiA93p8oXVYlRDK/W+yxQAa32yg=;
+ h=From:To:Subject:Date:Message-ID:From:To:Cc:Date:Subject:Reply-To:
+ Feedback-ID:Message-ID:BIMI-Selector;
+ b=CQLbFhd+j51ElQmH+rfdUJtBrG1hqtdSrgZEnD0SJqAfw0Sy0y6Yg2eHKBoKsGn/L
+ z+TjenoPpzXGDXmmrKGYINliK5FUW+2Fu8evSQtkaQHKL2sIM/nYmfBLYBhZz/vXct
+ OTPyI4MYGIhkNV7tkMy0ftcz6ETM3DvC2TIzMN1R0eORuxQ9ZJM+K1zQ3IH3WIqZQp
+ KytuYUZ3eHDIiO78KxJD3Qa3GnvvYvqGXnzymYGVlA1M8rdz5jJJtfRWL2vLjvexIc
+ RwmE9Hf46KJnThuwFiqS1pav1Id5vf8TehUR1Ezt5MOVX9OrgQSNhzhJmU03AYuMoD
+ 9LM5CfwF4q3+Q==
+X-Pm-Submission-Id: 4VBw8c5ZFMz4wwdR
+From: mwleeds@mailtundra.com
+To: u-boot@lists.denx.de
+Subject: [PATCH 0/5] zfs: Fix zfs support on aarch64
+Date: Sat,  6 Apr 2024 18:47:24 -0700
+Message-ID: <20240407014743.13872-1-mwleeds@mailtundra.com>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/6] USB keyboard improvements for asahi / desktop
- systems
-To: Janne Grunau <j@jannau.net>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
- u-boot@lists.denx.de, asahi@lists.linux.dev, Neal Gompa <neal@gompa.dev>
-References: <20240404-asahi-keyboards-v4-0-2266033feaff@jannau.net>
- <356b892a-a681-4ae0-a6c8-ed1b4b5a8717@denx.de> <ZhBLfQfxB_UEwvyY@robin>
- <5467f380-de35-4776-8c32-90b8e08aeda7@denx.de> <ZhGq0U_pkrYMe4S1@robin>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <ZhGq0U_pkrYMe4S1@robin>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 07 Apr 2024 04:00:03 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,70 +63,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/6/24 10:04 PM, Janne Grunau wrote:
-> On Sat, Apr 06, 2024 at 08:52:17PM +0200, Marek Vasut wrote:
->> On 4/5/24 9:05 PM, Janne Grunau wrote:
->>> On Fri, Apr 05, 2024 at 04:52:32PM +0200, Marek Vasut wrote:
->>>> On 4/4/24 8:25 AM, Janne Grunau via B4 Relay wrote:
->>>>> Apple USB Keyboards from 2021 need quirks to be useable. The boot HID
->>>>> keyboard protocol is unfortunately not described in the first interface
->>>>> descriptor but the second. This needs several changes. The USB keyboard
->>>>> driver has to look at all (2) interface descriptors during probing.
->>>>> Since I didn't want to rebuild the USB driver probe code the Apple
->>>>> keyboards are bound to the keyboard driver via USB vendor and product
->>>>> IDs.
->>>>> To make the keyboards useable on Apple silicon devices the xhci driver
->>>>> needs to initializes rings for the endpoints of the first two interface
->>>>> descriptors. If this is causes concerns regarding regressions or memory
->>>>> use the USB_MAX_ACTIVE_INTERFACES define could be turned into a CONFIG
->>>>> option.
->>>>> Even after this changes the keyboards still do not probe successfully
->>>>> since they apparently do not behave HID standard compliant. They only
->>>>> generate reports on key events. This leads the final check whether the
->>>>> keyboard is operational to fail unless the user presses keys during the
->>>>> probe. Skip this check for known keyboards.
->>>>> Keychron seems to emulate Apple keyboards (some models even "re-use"
->>>>> Apple's USB vendor ID) so apply this quirk as well.
->>>>>
->>>>> Some devices like Yubikeys emulate a keyboard. since u-boot only binds a
->>>>> single keyboard block this kind of devices from the USB keyboard driver.
->>>>>
->>>>> Signed-off-by: Janne Grunau <j@jannau.net>
->>>>
->>>> I picked the series, but CI indicates build errors, can you have a look ?
->>>>
->>>> https://source.denx.de/u-boot/custodians/u-boot-usb/-/pipelines/20215
->>>
->>> The issue seems to be that the field dev in struct usb_device exists
->>> only for DM_USB. That means we can't use dev_dbg.
->>> Either take the following fixup patch or I can resend the series.
->>
->> I squashed the extra patch in, but I think the CI still complains:
->>
->> Pipeline #20236 (
->> https://source.denx.de/u-boot/custodians/u-boot-usb/-/pipelines/20236 )
->> triggered by Marek Vasut ( https://source.denx.de/marex )
->> had 1 failed job.
->>
->> Job #812215 (
->> https://source.denx.de/u-boot/custodians/u-boot-usb/-/jobs/812215/raw )
-> 
-> env_get() missing without CONFIG_ENV_SUPPORT. I'm too accustomed to the
-> kernel's stub functions. Best option seems to to just #if the
-> functionality out in this case. See attached fixup patch.
-> 
-> Sorry,
+This patch series is needed to get U-Boot to boot from a ZFS filesystem
+on an aarch64 computer. Some of the patches are not architecture specific
+and would be needed to boot ZFS on other platforms as well. The ZFS
+support in U-Boot hasn't been substantively touched in several years and
+to me it seems like it must have been broken for a long time on all
+platforms, but I have only tested on aarch64.
 
-No worries.
+Since there doesn't seem to be a mantainer for this area who I can cc,
+I'm hoping these patches get seen and pulled in by a general U-Boot
+maintainer.
 
-Does it work if you do this instead ?
+Phaedrus Leeds (5):
+  zfs: Fix malloc() success check
+  zfs: Add a comment to clarify nvlist memory layout
+  zfs: Fix unaligned read of uint64
+  zfs: Fix return value of fs_devread()
+  zfs: Fix zfs_read() to actually work
 
-  static int usb_device_is_ignored(u16 id_vendor, u16 id_product)
-  {
-         ulong vid, pid;
-+       /* No env support, nothing can be ignored */
-+       if (CONFIG_IS_ENABLED(ENV_SUPPORT))
-+           return 0;
+ fs/zfs/dev.c |  2 +-
+ fs/zfs/zfs.c | 30 ++++++++++++++++++++++++++----
+ 2 files changed, 27 insertions(+), 5 deletions(-)
 
-That way, the function is always compiled and if it is unreachable, then 
-compiler throws it out. This should improve code compile coverage.
+-- 
+2.44.0
+
