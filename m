@@ -4,57 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D81BCD11C2
-	for <u-boot@archiver.kernel.org>; Sun,  7 Apr 2024 17:03:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10D38CD1292
+	for <u-boot@archiver.kernel.org>; Sun,  7 Apr 2024 20:21:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 778FB87CF9;
-	Sun,  7 Apr 2024 19:03:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EA76C87F07;
+	Sun,  7 Apr 2024 22:21:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="sCML4e5k";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8033587A80; Sun,  7 Apr 2024 19:02:59 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1712521295;
+	bh=oXTJeLM/cLp+5fa3J2+NG/lpfLHd8xfKgLjgwqnGKp8=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=s5hpdYFifkTtLymrc1GCKtORPH57aXS7hDSYnvfN73igb8RdQKaPtwb/RgNqG7GIW
+	 /4u654neB98ke4CqXaPm8GrW/ENCocX8kME1j9ztzyKKcNJ16ixRSNgirTsL6SHtYt
+	 VvAry3SgH+niJhmUOOCLCXECVY+nTrnfE6pJIYIgvXZSQpIwAR+SHnYEsxXpIywjPI
+	 VGYjcJtXOpa1q3tNDJtl0u447wN4iTis1yAv/rTKm2FKcqToHDvmltBJsZy/FWFlDy
+	 o7ud2quEzPJ/MJYFV/V5YQZxv9DhQHeFKhTNHlxPRfWkdOs6WJDTFL4/lI05wGc7v/
+	 I6aMm9/W/Y5ig==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E83C587CF9
- for <u-boot@lists.denx.de>; Sun,  7 Apr 2024 19:02:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 8AEDD87DAB;
+ Sun,  7 Apr 2024 22:21:32 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1712521292;
+ bh=oXTJeLM/cLp+5fa3J2+NG/lpfLHd8xfKgLjgwqnGKp8=;
+ h=From:To:Cc:Subject:Date:From;
+ b=GFU5gE7q6yXrOxoclnCgyhI/HFhsP0pH/UdVp6zSv0u2EOhIVxF2gFgPAJHw+XmKP
+ LZ3fO5K/ZSkG5j32cSyMIQLz4G5pz/mRhQ+xTBg/xXvEJkFNhFagPSHpyN7bgekC7K
+ CsR84uA1PnQeK0jz/4TW/nfPDM2+DqPuq3hlY6UoyekZ8qAzxv0MW1tJHJksdvc5eN
+ DvFBv6NzGYPqvijRLtLI2UKElJYdUinlqfCyZCzuXM/veML7gG3XjfXe177jPrcluE
+ hHJn0EQogJuP1Ywm+PWE2jhLf2V33w54HVamRavPqU74k55+ihkWHgGxZBKIviILvY
+ GGib0d/sh2/Dw==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v2] ARM: stm32: Jump to ep on successful resume in PSCI
+ suspend code
+Date: Sun,  7 Apr 2024 22:21:07 +0200
+Message-ID: <20240407202118.51854-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1712509374;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=dK//UuiJ200DCVE2uyJoomfXVJPw6t7CZ7FDWy8sKfE=;
- b=sCML4e5kaGRnNE963f5T/ceQPt3mG59DbYnKASzJhDOsEha/vn1yARAffueEkKSaFFNlgA
- 0pC1Oa2zuMSUk6KM5DGZqg6g6/2yvDytbhK0fm5l1ltYWuFW1Ks7EVS9rPPjbycofGgbFq
- OWsa1NTZ5cZgSw1BsjIDIpBNKL9KVb9YWvoobUOqwUbRV0tpUsvkHudNCochJzJdnntd7O
- W4Is6fXgIMhapFyVl+ClWWlFD5dA+bhJJ57w5yQkiihGcKLvYmDFNHGdHbd8wYl0l8YjQc
- a5oDlSNNkmNXDfEo9l/UV7TdcBJ34aZNX8noYaIK+uPn9pbfsa4CQTi6oDI/WA==
-Date: Sun, 07 Apr 2024 19:02:54 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-Cc: =?UTF-8?Q?S=C3=A9bastien_Szymanski?= <sebastien.szymanski@armadeus.com>,
- Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, "NXP
- i.MX U-Boot Team" <uboot-imx@nxp.com>, Mathieu Othacehe
- <m.othacehe@gmail.com>, u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>
-Subject: Re: [PATCH v4 0/5] imx93: Conver to OF_UPSTREAM
-In-Reply-To: <20240328-imx93-of-v2-v4-0-338d15a65c36@nxp.com>
-References: <20240328-imx93-of-v2-v4-0-338d15a65c36@nxp.com>
-Message-ID: <edaddffda19931bf872db692fdbd5b24@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
 Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,90 +66,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Peng,
+In case the system has resumed successfully, the PSCI suspend resume
+code has to jump to the 'ep' successful resume entry point code path,
+otherwise the code has to jump to content of the LR register, which
+points to failed resume code path.
 
-Some minor nitpicks...  s/Conver to/Convert to/ in the patch subject,
-and a couple more below.
+To implement this distinction, rewrite LR register stored on stack
+with 'ep' value in case of a successful resume, which is really in
+every case unless some catastrophic failure occurred during suspend.
 
+Without this change, Linux counts every resume as failed in
+/sys/power/suspend_stats/fail
 
-On 2024-03-28 06:05, Peng Fan (OSS) wrote:
-> A few nodes were added to soc and board u-boot.dtsi(lpi2c, usbotg), 
-> those nodes
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+V2: Rebase on u-boot/master
+---
+ arch/arm/mach-stm32mp/stm32mp1/psci.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
 
-s/soc/SoC/
+diff --git a/arch/arm/mach-stm32mp/stm32mp1/psci.c b/arch/arm/mach-stm32mp/stm32mp1/psci.c
+index 8cdeb0ab3f2..4f2379df45f 100644
+--- a/arch/arm/mach-stm32mp/stm32mp1/psci.c
++++ b/arch/arm/mach-stm32mp/stm32mp1/psci.c
+@@ -703,6 +703,8 @@ void __secure psci_system_suspend(u32 __always_unused function_id,
+ {
+ 	u32 saved_mcudivr, saved_pll3cr, saved_pll4cr, saved_mssckselr;
+ 	u32 gicd_addr = stm32mp_get_gicd_base_address();
++	u32 cpu = psci_get_cpu_id();
++	u32 sp = (u32)__secure_stack_end - (cpu << ARM_PSCI_STACK_SHIFT);
+ 	bool iwdg1_wake = false;
+ 	bool iwdg2_wake = false;
+ 	bool other_wake = false;
+@@ -805,4 +807,16 @@ void __secure psci_system_suspend(u32 __always_unused function_id,
+ 
+ 	writel(SYSCFG_CMPENR_MPUEN, STM32_SYSCFG_BASE + SYSCFG_CMPENSETR);
+ 	clrbits_le32(STM32_SYSCFG_BASE + SYSCFG_CMPCR, SYSCFG_CMPCR_SW_CTRL);
++
++	/*
++	 * The system has resumed successfully. Rewrite LR register stored
++	 * on stack with 'ep' value, so that on return from this PSCI call,
++	 * the code would jump to that 'ep' resume entry point code path
++	 * instead of the previous 'lr' register content which (e.g. with
++	 * Linux) points to resume failure code path.
++	 *
++	 * See arch/arm/cpu/armv7/psci.S _smc_psci: for the stack layout
++	 * used here, SP-4 is PC, SP-8 is LR, SP-12 is R7, and so on.
++	 */
++	writel(ep, sp - 8);
+ }
+-- 
+2.43.0
 
-> could be dropped after upstream linux supports them.
-
-s/linux/Linux/
-
-> To support OF_UPSTREAM, a few driver changes are included.
-> For TMU, still use U-Boot node, I will prepare a kernel update,
-> then back to U-Boot support.
-> 
->  Mathieu: please help test the boards you maintain when you have time.
-> 
-> Thanks,
-> Peng.
-> 
-> To: Sébastien Szymanski <sebastien.szymanski@armadeus.com>
-> To: Stefano Babic <sbabic@denx.de>
-> To: Fabio Estevam <festevam@gmail.com>
-> To: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-> To: Mathieu Othacehe <m.othacehe@gmail.com>
-> Cc: u-boot@lists.denx.de
-> Signed-off-by: Peng Fan <peng.fan@nxp.com>
-> 
-> Changes in v4:
->  - Convert all i.MX93 boards
->  - Link to v3:
-> https://lore.kernel.org/r/20240328-imx93-of-v3-0-4e7f341ed7ea@nxp.com
-> 
-> Changes in v3:
->  - Update patch 5, to drop the imx8mp-evk changes which are wrongly
->    included
->  - Link to v2:
-> https://lore.kernel.org/r/20240328-imx93-of-v2-0-909f5d37da87@nxp.com
-> 
-> Changes in v2:
->  - Add a new patch to sync clock header to avoid breaking
->  - Drop the Makefile change which change including order
->  - Link to v1:
-> https://lore.kernel.org/r/20240327-imx93-of-v1-0-afab6b31422a@nxp.com
-> 
-> ---
-> Peng Fan (5):
->       gpio: imx_rgpio2p: support one address
->       serial: lpuart: use ipg clk for i.MX7ULP
->       cpu: drop imx9_cpu
->       clk: imx93: fix anatop base
->       imx93: convert to OF_UPSTREAM
-> 
->  arch/arm/dts/Makefile                           |   5 -
->  arch/arm/dts/imx93-11x11-evk-u-boot.dtsi        | 119 ++++
->  arch/arm/dts/imx93-11x11-evk.dts                | 322 ---------
->  arch/arm/dts/imx93-phyboard-segin.dts           | 117 ---
->  arch/arm/dts/imx93-phycore-som.dtsi             | 126 ----
->  arch/arm/dts/imx93-pinfunc.h                    | 623 ----------------
->  arch/arm/dts/imx93-u-boot.dtsi                  |  80 +++
->  arch/arm/dts/imx93-var-som-symphony-u-boot.dtsi |  22 +
->  arch/arm/dts/imx93-var-som-symphony.dts         | 323 ---------
->  arch/arm/dts/imx93-var-som.dtsi                 | 111 ---
->  arch/arm/dts/imx93.dtsi                         | 906 
-> ------------------------
->  arch/arm/mach-imx/imx9/Kconfig                  |   1 +
->  configs/imx93-phyboard-segin_defconfig          |   2 +-
->  configs/imx93_11x11_evk_defconfig               |   2 +-
->  configs/imx93_11x11_evk_ld_defconfig            |   2 +-
->  configs/imx93_var_som_defconfig                 |   2 +-
->  drivers/clk/imx/clk-imx93.c                     |   2 +-
->  drivers/cpu/imx9_cpu.c                          | 224 ------
->  drivers/gpio/imx_rgpio2p.c                      |  42 +-
->  drivers/serial/serial_lpuart.c                  |   9 +-
->  include/dt-bindings/clock/imx93-clock.h         | 208 ------
->  include/dt-bindings/power/fsl,imx93-power.h     |  15 -
->  22 files changed, 273 insertions(+), 2990 deletions(-)
-> ---
-> base-commit: 280f34ba7d68bb50c0b8eaa040322c1f3b37d46e
-> change-id: 20240328-imx93-of-v2-f879efef737d
-> 
-> Best regards,
