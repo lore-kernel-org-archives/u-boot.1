@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F134C67861
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 21:17:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37CD2C67861
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 21:17:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 672F8880FB;
-	Mon,  8 Apr 2024 23:17:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7587088165;
+	Mon,  8 Apr 2024 23:17:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="kwmZ9+ga";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="mG2uk6CE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7586E88134; Mon,  8 Apr 2024 23:17:15 +0200 (CEST)
+ id 43E4C8817C; Mon,  8 Apr 2024 23:17:27 +0200 (CEST)
 Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94B9787EB4
- for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 23:17:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E58188165
+ for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 23:17:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1712611033;
+ t=1712611045;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=DhP7ycA9AxYkntS6kkpb1dHpZ5oYiFVLZGaHMpLmQbk=;
- b=kwmZ9+gaFxFniirYgFfA8Bhe4LyNvDN11osxjF1Px8RjeNCquyaiYZ3mM4jSWL117v+yKG
- FuvbjBVibaaLghxxo8S8Dkg8+y0/1JXjnhDYEt4NTJ0LdNj2PUgZMjl1+XD2kcAn7zMesA
- Ko/wbrU0M9cIoydjwT1tWfTQFkPxkQ93+2Wql+JeM6C8bYaFj7Vo0VLn94uzc8WPXq52qS
- 1eRPt5xOvCKQOvPb/3umvDal9HsJ7GSuGVHhkn604OSlLbjiAbr9VnLdfSN0GgRj+GPd+A
- mf4cP12EevkVZsoAKHJPSLZrBJSkgEtB/STewLKVmP+0+wREzMnfR6dxfDMEPQ==
-Date: Mon, 08 Apr 2024 23:17:12 +0200
+ bh=RGZPQpAN01ckjtqeo2bf9+p7HfyADyYvt6/8FIrVD4E=;
+ b=mG2uk6CEVcUfD+OtF0Ke4sitvDnWwwXspoTKKk7kBFqkSEXrqwOmYND4PE6RtNqgpkhauE
+ WCJ57BCYHyoEAlBVrOw4g8IyipIxUjCvIJ/gq6Wz/LBiES9b6QDbf5qkHipBx/wf506XtV
+ Y5MSXul5UOwLuvIdDaqceRSc9Ye+aQcP+1BCBpTW2Xt/rh1N7d78Om+M0qEvKfIhAOidfs
+ Sp4qsj667j2a7sAAzsfHWlvT8Q9GXeVzkW8C+CXA8FbMh4wtGx619wYPBM0Tt0TK2iyqhB
+ Vjsm81Zanqwg2+rDHRLQY/PanmNzCGXD/ZwJugkW6dsQ2XJsKjwR9GTpVyiiwQ==
+Date: Mon, 08 Apr 2024 23:17:25 +0200
 From: Dragan Simic <dsimic@manjaro.org>
 To: Jonas Karlman <jonas@kwiboo.se>
 Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom
  Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] mmc: Imply HS200 cap with mmc-hs400 prop to match
- linux
-In-Reply-To: <20240408210619.3749231-1-jonas@kwiboo.se>
+Subject: Re: [PATCH 2/2] mmc: Add support for the no-mmc-hs400 prop
+In-Reply-To: <20240408210619.3749231-2-jonas@kwiboo.se>
 References: <20240408210619.3749231-1-jonas@kwiboo.se>
-Message-ID: <a3181a7c7f718818fc7646658b574fed@manjaro.org>
+ <20240408210619.3749231-2-jonas@kwiboo.se>
+Message-ID: <8a08e5e3d7b1001f28878154078412b4@manjaro.org>
 X-Sender: dsimic@manjaro.org
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
@@ -70,17 +70,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jonas,
-
 On 2024-04-08 23:06, Jonas Karlman wrote:
-> eMMC nodes in linux device tree files typically only contain a 
-> mmc-hs400
-> prop to signal support for both HS400 and HS200. However, U-Boot 
-> require
-> an explicit mmc-hs200 prop to signal support for the HS200 mode.
+> The linux commit f722e650d965 ("mmc: core: add support for disabling
+> HS400 mode via DT") added support for a no-mmc-hs400 prop.
 > 
-> Fix this by follow linux and imply HS200 cap when HS400 cap is signaled
-> using a mmc-hs400 prop.
+> Add support for the no-mmc-hs400 prop to disable HS400 host caps.
 > 
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
@@ -92,26 +86,21 @@ Otherwise, looking good to me.  Great job catching this!
 Reviewed-by: Dragan Simic <dsimic@manjaro.org>
 
 > ---
-> This fixes booting from eMMC on nanopc-t6-rk3588 and quartzpro64-rk3588
-> that probably broke with commit 6de9d7b2f13c ("rockchip: rk35xx: Enable
-> eMMC HS200 mode by default").
-> ---
->  drivers/mmc/mmc-uclass.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+>  drivers/mmc/mmc-uclass.c | 3 +++
+>  1 file changed, 3 insertions(+)
 > 
 > diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-> index 328456831dd2..1349da72b102 100644
+> index 1349da72b102..1b454e8ec758 100644
 > --- a/drivers/mmc/mmc-uclass.c
 > +++ b/drivers/mmc/mmc-uclass.c
-> @@ -251,9 +251,9 @@ int mmc_of_parse(struct udevice *dev, struct
+> @@ -256,6 +256,9 @@ int mmc_of_parse(struct udevice *dev, struct
 > mmc_config *cfg)
->  	if (dev_read_bool(dev, "mmc-hs200-1_2v"))
->  		cfg->host_caps |= MMC_CAP(MMC_HS_200);
->  	if (dev_read_bool(dev, "mmc-hs400-1_8v"))
-> -		cfg->host_caps |= MMC_CAP(MMC_HS_400);
-> +		cfg->host_caps |= MMC_CAP(MMC_HS_400) | MMC_CAP(MMC_HS_200);
->  	if (dev_read_bool(dev, "mmc-hs400-1_2v"))
-> -		cfg->host_caps |= MMC_CAP(MMC_HS_400);
-> +		cfg->host_caps |= MMC_CAP(MMC_HS_400) | MMC_CAP(MMC_HS_200);
+>  		cfg->host_caps |= MMC_CAP(MMC_HS_400) | MMC_CAP(MMC_HS_200);
 >  	if (dev_read_bool(dev, "mmc-hs400-enhanced-strobe"))
 >  		cfg->host_caps |= MMC_CAP(MMC_HS_400_ES);
+> +	if (dev_read_bool(dev, "no-mmc-hs400"))
+> +		cfg->host_caps &= ~(MMC_CAP(MMC_HS_400) |
+> +				    MMC_CAP(MMC_HS_400_ES));
+> 
+>  	if (dev_read_bool(dev, "non-removable")) {
+>  		cfg->host_caps |= MMC_CAP_NONREMOVABLE;
