@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE31C67861
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:51:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E0DEC67861
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:51:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BFF78824B;
+	by phobos.denx.de (Postfix) with ESMTP id 831FF88254;
 	Tue,  9 Apr 2024 00:46:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eXV9KTj4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="AdNMZA7n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F9A3880FE; Mon,  8 Apr 2024 23:24:02 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ id 8EE7388172; Mon,  8 Apr 2024 23:24:02 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5809488193
+ by phobos.denx.de (Postfix) with ESMTPS id 9FA7388196
  for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 23:23:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LNlKb100291;
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LNl73096262;
  Mon, 8 Apr 2024 16:23:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1712611427;
- bh=hEysH64j6q8IFRNjlvm/E/svTBQKL3lrCLZ32MizxRA=;
- h=From:To:CC:Subject:Date;
- b=eXV9KTj4I38oj77uMxPDzEMyTlyeJQ9V9ZAAoqhNfWxyGDjuigScMd5IiAL993UHj
- pcbMy48gc8RJamhyWXixETYDTDGQGxBtFTdtvpskH+e3IPImczyuukgaiUYO8pE1On
- 5Y1nKEPt4v9XU4GAwKF0Kz7ykk82b/i9KOK8CDH0=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LNl27077991
+ bh=YvS5JCQ1zctBXJMcgUS5xnAVlyNXFK5GspTMWluc3sI=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=AdNMZA7n9PBn8cRKDVk0MC+7Hqb8UpVRkxuUNJu8soMdPHcQyS4Tk/cTsdGiwULGB
+ CFRI+BpX2sBqnYsNBc36uZNfxoA/wQ6/dEFmwsQs0+R/6GCQd0P8ex/G1BRYlv7l6f
+ 0Ob+kAscCEqEQux9NdSDM1PCMV/r85f3mBqR6udg=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LNl15018689
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 8 Apr 2024 16:23:47 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
  Apr 2024 16:23:47 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Mon, 8 Apr 2024 16:23:47 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LNl3l086440;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LNlof033632;
  Mon, 8 Apr 2024 16:23:47 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -64,10 +64,12 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
  Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH 00/16] EFI: ti: Enable EFI capsule updates
-Date: Mon, 8 Apr 2024 16:22:39 -0500
-Message-ID: <20240408212255.95255-1-j-humphreys@ti.com>
+Subject: [PATCH 01/16] board: Define GUIDs for firmware images
+Date: Mon, 8 Apr 2024 16:22:40 -0500
+Message-ID: <20240408212255.95255-2-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240408212255.95255-1-j-humphreys@ti.com>
+References: <20240408212255.95255-1-j-humphreys@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -89,50 +91,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable on disk capsule updates, which includes defining the firmware components
-(tiboot3, spl, u-boot) and enabling processing of raw capsule updates.
+Define GUIDs for the different firmware images (tiboot3.bin, tispl.bin,
+u-boot.img, sysfw).
 
-This is enabled for several TI SoC based platforms: AM64, AM62, AM62p,
-BeaglePlay, J7, and BeagleboneAI.
+Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+---
+ include/configs/ti_armv7_common.h | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-This series also includes enabling seral flash DFU for AM62 and MMC DFU for
-beagleplay, and adding the sysreset controller node for AM62 to enable system
-reset.
-
-Jonathan Humphreys (16):
-  board: Define GUIDs for firmware images
-  board: am64x: Define capsule update firmware info
-  configs: am64x: Enable EFI capsule update
-  board: j721e: Define capsule update firmware info
-  configs: j721e: Enable EFI capsule update
-  board: beagleplay: Define capsule update firmware info
-  configs: beagleplay: Enable DFU for MMC
-  configs: beagleplay: Enable EFI capsule update
-  board: am62px: Define capsule update firmware info
-  configs: am62px: Enable EFI capsule update
-  configs: am62x: Enable serial flash DFU
-  arm: dts: k3-am625-sk-u-boot: Add sysreset-controller node
-  board: am62x: Define capsule update firmware info
-  configs: am62x: Enable EFI capsule update
-  board: beagleboneai64: Define capsule update firmware info
-  configs: beagleboneai64: Enable EFI capsule update
-
- arch/arm/dts/k3-am625-sk-u-boot.dtsi         |  9 +++++
- board/beagle/beagleboneai64/beagleboneai64.c | 33 +++++++++++++++++
- board/beagle/beagleplay/beagleplay.c         | 33 +++++++++++++++++
- board/ti/am62px/evm.c                        | 32 +++++++++++++++++
- board/ti/am62x/evm.c                         | 32 +++++++++++++++++
- board/ti/am64x/evm.c                         | 33 +++++++++++++++++
- board/ti/j721e/evm.c                         | 38 ++++++++++++++++++++
- configs/am62px_evm_a53_defconfig             |  2 ++
- configs/am62x_beagleplay_a53_defconfig       |  5 +++
- configs/am62x_evm_a53_defconfig              |  3 ++
- configs/am64x_evm_a53_defconfig              |  2 ++
- configs/j721e_beagleboneai64_a72_defconfig   |  2 ++
- configs/j721e_evm_a72_defconfig              |  2 ++
- include/configs/ti_armv7_common.h            | 17 +++++++++
- 14 files changed, 243 insertions(+)
-
+diff --git a/include/configs/ti_armv7_common.h b/include/configs/ti_armv7_common.h
+index 3def7b1027e..4ce14a9b84c 100644
+--- a/include/configs/ti_armv7_common.h
++++ b/include/configs/ti_armv7_common.h
+@@ -16,6 +16,23 @@
+ #ifndef __CONFIG_TI_ARMV7_COMMON_H__
+ #define __CONFIG_TI_ARMV7_COMMON_H__
+ 
++/* GUIDs for capsule updatable firmware images */
++#define K3_TIBOOT3_IMAGE_GUID \
++	EFI_GUID(0xe672b518, 0x7cd7, 0x4014, 0xbd, 0x8d, \
++		 0x40, 0x72, 0x4d, 0x0a, 0xd4, 0xdc)
++
++#define K3_SPL_IMAGE_GUID \
++	EFI_GUID(0x86f710ad, 0x10cf, 0x46ea, 0xac, 0x67, \
++		 0x85, 0x6a, 0xe0, 0x6e, 0xfa, 0xd2)
++
++#define K3_UBOOT_IMAGE_GUID \
++	EFI_GUID(0x81b58fb0, 0x3b00, 0x4add, 0xa2, 0x0a, \
++		 0xc1, 0x85, 0xbb, 0xac, 0xa1, 0xed)
++
++#define K3_SYSFW_IMAGE_GUID \
++	EFI_GUID(0x6fd10680, 0x361b, 0x431f, 0x80, 0xaa, \
++		 0x89, 0x94, 0x55, 0x81, 0x9e, 0x11)
++
+ /*
+  * We setup defaults based on constraints from the Linux kernel, which should
+  * also be safe elsewhere.  We have the default load at 32MB into DDR (for
 -- 
 2.34.1
 
