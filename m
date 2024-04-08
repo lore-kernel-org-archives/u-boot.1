@@ -4,98 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8748ECD128A
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 13:08:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FABBCD128A
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 13:11:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63D058811D;
-	Mon,  8 Apr 2024 15:08:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 0CA1E87DEA;
+	Mon,  8 Apr 2024 15:11:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gx6YRkSs";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="TYiyMgXw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 998E28811C; Mon,  8 Apr 2024 15:08:12 +0200 (CEST)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6E28C87FBF; Mon,  8 Apr 2024 15:11:05 +0200 (CEST)
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::228])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C55C187A80
- for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 15:08:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 298BE87BA8
+ for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 15:11:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-56e136cbcecso6002723a12.3
- for <u-boot@lists.denx.de>; Mon, 08 Apr 2024 06:08:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712581690; x=1713186490; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=mV4VyN0YmkTsIiuWVCwOOeVRvkCnX1jRxymwdbxZogc=;
- b=Gx6YRkSsHsDUdpKVoFJorC7Pd49IkUw8a+/RR+yEEp5xbVjTdfd182e6gH0zI3ftLU
- jayZP7XLYOfJejA4HUUqyNBPwHJzYW3OMRyAPNnu4ERmae7MN6OriEzlErszEFcmhRdc
- KUKPMx+8wAAMfZyTB3gCYJIvQD5X4xp/G/NLl9tK1VcLqLn68nJeLd34qpNNjWq7lNP/
- oEIqIkAUne6IGLT/ZoEkhNfkPjNWkjkLsT7FLNiKByyvszjFjG0vs0237UF498GpkxKS
- Ndu2+aP4rc3K/Slb3FHkb+S08siZwaD3Wp+CRbAD2iWEHRPgqAYqzcVy1HKT37/iihQ7
- w23w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712581690; x=1713186490;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mV4VyN0YmkTsIiuWVCwOOeVRvkCnX1jRxymwdbxZogc=;
- b=TJUhjw5EUzlc28P0K6Y2KoCQxP/glu0TT1jqGfl7zTPjLbQaYiTKKjYN+/imBOmCLU
- XXjNuXKudxpGT8P7Tn9dzhbQzAX4A1fQTGpsPEb8ms00ErYpY7DFtvJgJ+7iFh9pLC7W
- WUEC5vLFO9iok9Syk1CCDhSGp6bAh8xjrz6Nsa6GrfKOZNAt97Y1lvVAVCZonxoHw5X9
- bUswn5rILtOpGpWORmj8PAGMEv+Lo37wx7dBWy4DNi/oukmVMoYzf9Oy08nuFLQt+t0W
- Br3A7xjHoiN8eXmyHRh3BbC0s/hHSttw45HbEqLM+hu70MV/kA+FuVLH5qYJy7b1p5K2
- 0MWQ==
-X-Gm-Message-State: AOJu0YziVNxDgukhT/S1HFqbodenpOpzcvB9IHZDTv0qNhoNF/IseReG
- fkZPlbAefkgljgTqXSH12DVNVlxVuN2ZS8PLgjiosYsLYFVU301wTs2rm+0OS1SArSiSh/h70Y4
- 9H8Y=
-X-Google-Smtp-Source: AGHT+IEm7cSo68fo+gX9equHXfMiRvcZoB8m+Z43jhAOIRNOlu9JuwHkYsDdZa3tEST5CzAfpBT8EQ==
-X-Received: by 2002:a17:906:f584:b0:a51:dd18:bd21 with SMTP id
- cm4-20020a170906f58400b00a51dd18bd21mr1463734ejd.16.1712581689017; 
- Mon, 08 Apr 2024 06:08:09 -0700 (PDT)
-Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::570d])
- by smtp.gmail.com with ESMTPSA id
- e11-20020a170906844b00b00a4e23486a5dsm4394815ejy.20.2024.04.08.06.08.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Apr 2024 06:08:08 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 08 Apr 2024 15:07:42 +0200
-Subject: [PATCH 4/4] qcom_defconfig: enable pinctrl for new
- qcm2290/sm6115/sm8250
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id 6A7F71BF209;
+ Mon,  8 Apr 2024 13:11:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1712581862;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=irIHF5I8mXyLCKw8dni+/EZgNZOMISZkd0b9zPdDuaU=;
+ b=TYiyMgXw+kQUQbK4L36ZVzZLv2VElfGQi5RM0DQOm15l7UTgnBnIa2WeyMU64WSAuJk3Hg
+ CNMMw3B0XKX+E9glwfXqm0qIbnWAoc95Ny5x9NI8vCCv8xmSmGkyu9RgpHJWDTIeNIUYGR
+ vCx6aUkoYFE/V4erY7lNKihCMVCNJcx88NGbr7t0aif/OiDlpaRqjJ6fjbrAZZJs4PXK/N
+ El0IMjmjarmPGeFprPCSVP9ppKT+1ikNUOiLQ+5FkfQf2enZx+VhvkG9Vxju0XkMvKz5xJ
+ a8ZJlglJfwPz3UzatjI5SXuHUCy8OF1MlrvbLMTZlW//jpCc2Dxo6QuRFQH0zw==
+Date: Mon, 8 Apr 2024 15:10:57 +0200
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: devicetree@vger.kernel.org, Michael Walle <mwalle@kernel.org>, U-Boot
+ Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, Rob
+ Herring <robh@kernel.org>, linux-mtd@lists.infradead.org, Conor Dooley
+ <conor+dt@kernel.org>, Krzysztof Kozlowski
+ <krzysztof.kozlowski+dt@linaro.org>, =?UTF-8?B?UmFmYcWCIE1pxYJlY2tp?=
+ <rafal@milecki.pl>, Richard Weinberger <richard@nod.at>, Vignesh
+ Raghavendra <vigneshr@ti.com>, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v10 1/2] dt-bindings: mtd: fixed-partitions: Add
+ alignment properties
+Message-ID: <20240408151057.1d1fcfb3@xps-13>
+In-Reply-To: <20240326200645.1182803-1-sjg@chromium.org>
+References: <20240326200645.1182803-1-sjg@chromium.org>
+Organization: Bootlin
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240408-b4-qcom-rbx-soc-v1-4-900db37b8bdf@linaro.org>
-References: <20240408-b4-qcom-rbx-soc-v1-0-900db37b8bdf@linaro.org>
-In-Reply-To: <20240408-b4-qcom-rbx-soc-v1-0-900db37b8bdf@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=768;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=nt/kdXq58BK/SmtljSbyBJYK8Pqm5tkbT9Y/WjWgtfk=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmE+w0nEqeA/rq9aXZmFaOXJNyLRHfuBqOd3siA
- B3wxdSeHqKJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZhPsNAAKCRAFgzErGV9k
- tsTED/90nl1/UV8KON5wwBXaJOjyJ501RLAjgGQARmha65LTCYdIH694D7wdzwCZy+Zh8TV0K6L
- 5zgBZ32ovXXmYI3/Zc8eHWuos1OEdMd34hd7/U1KWPbV0AAATDI2rz6uqUAazFfaA1OycueP6Lb
- g1RKSyYD1XqqOk1TQ274TH8FAyhdHMAO+oqQ87j0BQIljaMkrEowXzVMZojeNfQ6FGLxqXFFRAA
- joCBYnpclYk7nSg59tBRxZmjpPNykwX0ymy925+tqrGIkEgskPx4R9j3ZFEIzDGdAZU8ydyIbPp
- mj4cR1a3OopH8Q6dMVkYMJftDSNri6pLakms2qGq0NKCdpOzV/wHxxmVQYghj2YL6k36VlH7el+
- SH41DQuKy7nf05XARkvizPZr809W+ux3ZFdzLO9WjtNIgMqEOC0JmOWh+SzF8CU553QdEGXuHeD
- U90h0aZ4yDU1hK+G10RkKdZlkGVjEMQlJL4rkhAtSPPgGUP1zjmdO73nMjdw0dmL9TPKs0U2+ju
- qFs426SYoCB9oawLvyNOFKDKtXugHzgn3xInzCYjE0d+yufeci9urzCfcIoFcpCLRDG2+k6TrLT
- /L5cCJGIGkocWn5Oe1ZpOB0PJtalRHHYfAeUC/A5jHS05z4TlB6+2dsJDBDrmWixUC3+Ns1LRx7
- 0sBJsAKBEPJKWDw==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,32 +77,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the clock and pinctrl drivers for qcm2290, sm6115, and sm8250.
+Hi Simon,
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- configs/qcom_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+sjg@chromium.org wrote on Tue, 26 Mar 2024 14:06:44 -0600:
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index ae9c5b2461d4..592ffceb2077 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -67,10 +67,13 @@ CONFIG_RGMII=y
- CONFIG_PHY=y
- CONFIG_PHY_QCOM_QUSB2=y
- CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=y
- CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_QCOM_QCM2290=y
- CONFIG_PINCTRL_QCOM_QCS404=y
- CONFIG_PINCTRL_QCOM_SDM845=y
-+CONFIG_PINCTRL_QCOM_SM6115=y
-+CONFIG_PINCTRL_QCOM_SM8250=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_QCOM=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
+> Add three properties for controlling alignment of partitions, aka
+> 'entries' in fixed-partition.
+>=20
+> For now there is no explicit mention of hierarchy, so a 'section' is
+> just the 'fixed-partitions' node.
+>=20
+> These new properties are inputs to the Binman packaging process, but are
+> also needed if the firmware is repacked, to ensure that alignment
+> constraints are not violated. Therefore they are provided as part of
+> the schema.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Reviewed-by: Rob Herring <robh@kernel.org>
+> ---
+>=20
+> Changes in v10:
+> - Update the minimum to 2
+>=20
+> Changes in v9:
+> - Move binding example to next batch to avoid build error
+>=20
+> Changes in v7:
+> - Drop patch 'Add binman compatible'
+> - Put the alignment properties into the fixed-partition binding
+>=20
+> Changes in v6:
+> - Correct schema-validation errors missed due to older dt-schema
+>   (enum fix and reg addition)
+>=20
+> Changes in v5:
+> - Add value ranges
+> - Consistently mention alignment must be power-of-2
+> - Mention that alignment refers to bytes
+>=20
+> Changes in v2:
+> - Fix 'a' typo in commit message
+>=20
+>  .../bindings/mtd/partitions/partition.yaml    | 51 +++++++++++++++++++
+>  1 file changed, 51 insertions(+)
+>=20
+> diff --git a/Documentation/devicetree/bindings/mtd/partitions/partition.y=
+aml b/Documentation/devicetree/bindings/mtd/partitions/partition.yaml
+> index 1ebe9e2347ea..656ca3db1762 100644
+> --- a/Documentation/devicetree/bindings/mtd/partitions/partition.yaml
+> +++ b/Documentation/devicetree/bindings/mtd/partitions/partition.yaml
+> @@ -57,6 +57,57 @@ properties:
+>        user space from
+>      type: boolean
+> =20
+> +  align:
+> +    $ref: /schemas/types.yaml#/definitions/uint32
+> +    minimum: 2
+> +    maximum: 0x80000000
+> +    multipleOf: 2
+> +    description:
+> +      This sets the alignment of the entry in bytes.
+> +
+> +      The entry offset is adjusted so that the entry starts on an aligned
+> +      boundary within the containing section or image. For example =E2=
+=80=98align =3D
+> +      <16>=E2=80=99 means that the entry will start on a 16-byte boundar=
+y. This may
+> +      mean that padding is added before the entry. The padding is part of
+> +      the containing section but is not included in the entry, meaning t=
+hat
+> +      an empty space may be created before the entry starts. Alignment
+> +      must be a power of 2. If =E2=80=98align=E2=80=99 is not provided, =
+no alignment is
+> +      performed.
+> +
+> +  align-size:
+> +    $ref: /schemas/types.yaml#/definitions/uint32
+> +    minimum: 2
+> +    maximum: 0x80000000
+> +    multipleOf: 2
+> +    description:
+> +      This sets the alignment of the entry size in bytes. It must be a p=
+ower
+> +      of 2.
+> +
+> +      For example, to ensure that the size of an entry is a multiple of =
+64
+> +      bytes, set this to 64. While this does not affect the contents of =
+the
+> +      entry within binman itself (the padding is performed only when its
+> +      parent section is assembled), the end result is that the entry ends
+> +      with the padding bytes, so may grow. If =E2=80=98align-size=E2=80=
+=99 is not provided,
+> +      no alignment is performed.
 
--- 
-2.44.0
+I don't think we should mention binman here. Can we have a software
+agnostic description? This should be understandable from anyone playing
+with mtd partitions I guess.
 
+> +
+> +  align-end:
+> +    $ref: /schemas/types.yaml#/definitions/uint32
+> +    minimum: 2
+> +    maximum: 0x80000000
+> +    multipleOf: 2
+
+seems not to perfectly match the constraint, but I don't know if there
+is a powerOf keyword? (same above)
+
+> +    description:
+> +      This sets the alignment (in bytes) of the end of an entry with res=
+pect
+> +      to the containing section. It must be a power of 2.
+> +
+> +      Some entries require that they end on an alignment boundary,
+> +      regardless of where they start. This does not move the start of the
+> +      entry, so the contents of the entry will still start at the beginn=
+ing.
+> +      But there may be padding at the end. While this does not affect the
+> +      contents of the entry within binman itself (the padding is perform=
+ed
+
+content?				same comment about binman?
+
+> +      only when its parent section is assembled), the end result is that=
+ the
+> +      entry ends with the padding bytes, so may grow. If =E2=80=98align-=
+end=E2=80=99 is not
+> +      provided, no alignment is performed.
+> +
+>  if:
+>    not:
+>      required: [ reg ]
+
+
+Thanks,
+Miqu=C3=A8l
