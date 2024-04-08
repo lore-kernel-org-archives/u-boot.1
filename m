@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6607C67861
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 18:16:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B044FC67861
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 18:17:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 860F188146;
-	Mon,  8 Apr 2024 20:15:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E47488167;
+	Mon,  8 Apr 2024 20:15:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="IUn56zqR";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="wb78h2SZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B947C8816E; Mon,  8 Apr 2024 20:15:34 +0200 (CEST)
+ id DE16688167; Mon,  8 Apr 2024 20:15:36 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F25B788145
- for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 20:15:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D0C78816D
+ for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 20:15:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,21 +28,20 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1712600113; bh=O3PCKZ+RfXsKDDAtYwBH9IpZADd72F06JdGVBHYC4Rk=;
- b=IUn56zqRzyoSsbggkqYYRx6GPQJN8gB3sLiL0nRgpy/nmGTOYbBM/ITmxCjO3ve7nvwouXlOL
- ToFfi8qrnJyesm5xiFZY40uhWuOrCy/zE8rEzUShDbu4zoZod5lRjuZ9OZNOnjfAmdHCjfTLECa
- xf3MhbZVO4Rm8WWSz82vgyWH7mMEe7eaDGQ3lF3WKdvUe/rhuB05wv1IAK0PrzIz3Ipebd5yi5b
- pLZwh+ZyH3sRu3cSHdzGtoVkGZooIXnPcvIdTNuQ42qrEaO8Kn1OmiC12yA7MKzqs9KjmQswWI9
- r6pVBKaLmnLQVJnT4b8rlpBHY4wqncWcvyqin9OVyn0w==
+ t=1712600120; bh=bq6zJ/aiv6ZAiSgtqgzTT/DfotH1TcpMm/yM/tSzWtU=;
+ b=wb78h2SZVbLMML72p9ZxnNtZ5fXvJM4adkG0b1VUymIidtFZMshs5CmrO402psAbcVUtGxQpU
+ VyLUinH5ipjr1hcBceRG1gffC4JmTgf8hlrenlBYCtp0V7Fmd01/qWn3oKwSJpVZcz13ycZlFCj
+ hTP9T3GwFigswMXQvuMO1IbmumhO6vYsxqL0yC+rHUKuI6b7VGgV1VSU3MEBb6whC/qf1OnjXPQ
+ EvQw4p+lBZDXJ1K0Jg+YZ5womOdKWvL0To+qS8tPGa54CfonfyO3OPxwTCVQoAMrsRJF6wQ1jZZ
+ AbNpO1DOfOk/LeyZZSpYE9VXXnUlFthOkEku8izfs2JA==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Andy Yan <andy.yan@rock-chips.com>
-Cc: Akash Gajjar <gajjar04akash@gmail.com>, u-boot@lists.denx.de, Jonas
- Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 11/14] rockchip: rk3308-evb: Update defconfig
-Date: Mon,  8 Apr 2024 18:14:08 +0000
-Message-ID: <20240408181429.3676856-12-jonas@kwiboo.se>
+ Akash Gajjar <gajjar04akash@gmail.com>, Jonas Karlman <jonas@kwiboo.se>
+Cc: Andy Yan <andy.yan@rock-chips.com>, u-boot@lists.denx.de
+Subject: [PATCH v2 13/14] rockchip: rk3308-rock-pi-s: Update defconfig
+Date: Mon,  8 Apr 2024 18:14:10 +0000
+Message-ID: <20240408181429.3676856-14-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240408181429.3676856-1-jonas@kwiboo.se>
 References: <20240408181429.3676856-1-jonas@kwiboo.se>
@@ -54,7 +53,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  149.28.215.223
-X-ForwardEmail-ID: 6614343045fff4c2aa5b4ac2
+X-ForwardEmail-ID: 6614343745fff4c2aa5b4ae9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,14 +70,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update defconfig for rk3308-evb with new defaults.
+Update defconfig for rk3308-rock-pi-s with new defaults.
 
 Add OF_LIBFDT_OVERLAY=y to support device tree overlays.
 
 Remove the SPL_DRIVERS_MISC=y option, no misc driver is used in SPL.
-
-Use DEBUG_UART_BASE=0xFF0E0000 and disable DEBUG_UART_BOARD_INIT to
-make debug uart use uart4, same as stdout-path prop.
 
 Remove BOOTDELAY=0, SYS_CONSOLE_INFO_QUIET=y and enable more CMD to
 allow use of U-Boot cmdline.
@@ -90,37 +86,59 @@ allow full use of USB 2.0 host and otg ports.
 
 Enable EFI_LOADER to allow EFI boot.
 
+Also fix use of USB 2.0 otg port by removing improper use of phy-supply
+and regulator-always-on props.
+
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-v2: Fix DEBUG_UART_BASE and disable DEBUG_UART_BOARD_INIT
+v2: Keep DEBUG_UART_BOARD_INIT disabled
 ---
- configs/evb-rk3308_defconfig | 37 +++++++++++++++---------------------
- 1 file changed, 15 insertions(+), 22 deletions(-)
+ arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi |  8 ++++++
+ configs/rock-pi-s-rk3308_defconfig        | 32 +++++++++--------------
+ 2 files changed, 20 insertions(+), 20 deletions(-)
 
-diff --git a/configs/evb-rk3308_defconfig b/configs/evb-rk3308_defconfig
-index 9dc7d9c0caea..04a94e13a68a 100644
---- a/configs/evb-rk3308_defconfig
-+++ b/configs/evb-rk3308_defconfig
-@@ -3,41 +3,32 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_DEFAULT_DEVICE_TREE="rk3308-evb"
-+CONFIG_OF_LIBFDT_OVERLAY=y
+diff --git a/arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi b/arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi
+index 8d34ed1b3a36..a6fb8b12da38 100644
+--- a/arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi
++++ b/arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi
+@@ -15,6 +15,10 @@
+ 	bootph-some-ram;
+ };
+ 
++&u2phy_otg {
++	/delete-property/ phy-supply;
++};
++
+ &uart0 {
+ 	bootph-all;
+ 	clock-frequency = <24000000>;
+@@ -32,6 +36,10 @@
+ 	bootph-all;
+ };
+ 
++&vcc5v0_otg {
++	/delete-property/ regulator-always-on;
++};
++
+ &vdd_core {
+ 	regulator-init-microvolt = <1015000>;
+ };
+diff --git a/configs/rock-pi-s-rk3308_defconfig b/configs/rock-pi-s-rk3308_defconfig
+index 27ee24a62290..37a124eae181 100644
+--- a/configs/rock-pi-s-rk3308_defconfig
++++ b/configs/rock-pi-s-rk3308_defconfig
+@@ -6,7 +6,6 @@ CONFIG_DEFAULT_DEVICE_TREE="rk3308-rock-pi-s"
+ CONFIG_OF_LIBFDT_OVERLAY=y
  CONFIG_DM_RESET=y
  CONFIG_ROCKCHIP_RK3308=y
 -CONFIG_SPL_DRIVERS_MISC=y
  CONFIG_TARGET_EVB_RK3308=y
--CONFIG_DEBUG_UART_BASE=0xFF0C0000
-+CONFIG_DEBUG_UART_BASE=0xFF0E0000
+ CONFIG_DEBUG_UART_BASE=0xFF0A0000
  CONFIG_DEBUG_UART_CLOCK=24000000
-+# CONFIG_DEBUG_UART_BOARD_INIT is not set
- CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_DEBUG_UART=y
- CONFIG_ANDROID_BOOT_IMAGE=y
+@@ -17,28 +16,19 @@ CONFIG_ANDROID_BOOT_IMAGE=y
  CONFIG_FIT=y
  CONFIG_FIT_VERBOSE=y
--CONFIG_BOOTDELAY=0
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3308-evb.dtb"
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3308-rock-pi-s.dtb"
 -CONFIG_SYS_CONSOLE_INFO_QUIET=y
  # CONFIG_DISPLAY_CPUINFO is not set
 -CONFIG_SPL_MAX_SIZE=0x20000
@@ -152,7 +170,7 @@ index 9dc7d9c0caea..04a94e13a68a 100644
  CONFIG_SPL_OF_CONTROL=y
  CONFIG_OF_LIVE=y
  CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-@@ -51,9 +42,11 @@ CONFIG_SYS_I2C_ROCKCHIP=y
+@@ -52,9 +42,11 @@ CONFIG_SYS_I2C_ROCKCHIP=y
  CONFIG_SUPPORT_EMMC_RPMB=y
  CONFIG_MMC_DW=y
  CONFIG_MMC_DW_ROCKCHIP=y
@@ -165,7 +183,7 @@ index 9dc7d9c0caea..04a94e13a68a 100644
  CONFIG_PINCTRL=y
  CONFIG_REGULATOR_PWM=y
  CONFIG_DM_REGULATOR_FIXED=y
-@@ -62,15 +55,15 @@ CONFIG_RAM=y
+@@ -63,15 +55,15 @@ CONFIG_RAM=y
  CONFIG_BAUDRATE=1500000
  CONFIG_DEBUG_UART_SHIFT=2
  CONFIG_SYS_NS16550_MEM32=y
