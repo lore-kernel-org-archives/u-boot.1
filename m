@@ -4,132 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 938E4CD1292
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 18:37:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E74AACD1292
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 19:31:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3644788145;
-	Mon,  8 Apr 2024 20:36:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=aeronix.com
+	by phobos.denx.de (Postfix) with ESMTP id 52774880F1;
+	Mon,  8 Apr 2024 21:31:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=aeronix.com header.i=@aeronix.com header.b="Ku+0v95u";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="RPrWLGd2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEA02880A5; Mon,  8 Apr 2024 16:14:13 +0200 (CEST)
-Received: from USG02-CY1-obe.outbound.protection.office365.us
- (mail-cy1usg02on0729.outbound.protection.office365.us
- [IPv6:2001:489a:2202:d::729])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6244C880F4; Mon,  8 Apr 2024 21:31:43 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6715B88074
- for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 16:14:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=aeronix.com
+ by phobos.denx.de (Postfix) with ESMTPS id 61880880E5
+ for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 21:31:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mrainey@aeronix.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector5401; d=microsoft.com; cv=none;
- b=UfbCcqfBRTxN7iFS8gnsg/vdxhp0xvVwPHrxbiEGZgIsjn6VG9lSIlSvJHYEMa6hJtj5lMSquo7Jro9VwRriTy2xh6MrqIbys256/BrwRighFeepN26Nr9r6AzTIsCDIeBfPugupm6nKmw+bHwp+QOi6+sn64L22zOc7jNq3d9vNL6dPKofmrDzRXqfMbPon2vU3TxzYniL0QKIGyPaH5tDQmar63lxGGNjuSGeyWaIly0kHfyCHDFUP9fwWK+FjiYMN12hoTYX0XKaUCks7I1KeiIso8AL2b4CB22Qql62E3ijAUV+ozISaAsvnZIIfvFAwI3DIWtyGrHpJLsAt4g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector5401;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=L48mGcJ54x6fTgUkdEduZnpTbwvT8Fk1LWHmV33V0iI=;
- b=qMRWTmWS4EFWNCy6vMzW2rYuqPfFxotIhqRII601ZuQpxoxYV2eQx4RcJYLzR4LKkwxnCt5xi2tOvTWKaCLcLZgCJvP69pwG3UiPvIA7G8r5/iCl1qpgtSH1XPjhEtsQKUNcKcQVNrjayHWItNLjJgL5k8jx0KkHibzbI8exHEpEtbCI6PGWMwV4Obl36RcitLmhrHVqWODbn7fKDM8dRl1PVU+b2oyfsyfsml/x0PcGrieCK0MUZ8EXseE3kcqpelnO3pmioUjS5QiycE9YwzcNTma5wNoSouEeZ7W5hIn7+hcj91VrGCG9/9NNj+eT66fLU+CGXsaRx+k42nFe+w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=aeronix.com; dmarc=pass action=none header.from=aeronix.com;
- dkim=pass header.d=aeronix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aeronix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=L48mGcJ54x6fTgUkdEduZnpTbwvT8Fk1LWHmV33V0iI=;
- b=Ku+0v95uoAxRBMG/ARDdITDrJirmVZR+KG2YE+0vZC9W3jIxOtwMTfAcrq4J8vvytld3Tt6LyKagDscV1Ddr7knTTLfA/DBF2rj6Z+so51m8rMloUrEg3FSK2OQkn1mwRwfT694QEo/gJ9nGPdErhm32jzogcO4xoYzkQY9SgKn7zY5ZTZDlBByqtNoUVjzmYnscWtQjOkfBnFpxfFrBmQgRAbM6AQIh1Z+Zhxu3TMdw26ueejTOVl3PlBQrXmcnogAjeys7BBQlYEmdT0jAcNfOexH2f1vUqki5pgRc2O+4pqEcp2IYGEery8jhZOdaDuKs0TSBATSV1+NYSmfMqw==
-Received: from CY1P110MB0920.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:14a::21)
- by CY1P110MB0726.NAMP110.PROD.OUTLOOK.COM (2001:489a:200:14c::28)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.55; Mon, 8 Apr
- 2024 14:14:05 +0000
-Received: from CY1P110MB0920.NAMP110.PROD.OUTLOOK.COM
- ([fe80::ed26:2260:8a79:d86]) by CY1P110MB0920.NAMP110.PROD.OUTLOOK.COM
- ([fe80::ed26:2260:8a79:d86%5]) with mapi id 15.20.7409.053; Mon, 8 Apr 2024
- 14:14:05 +0000
-From: Matthew Rainey <mrainey@aeronix.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Issues reading large files from nand ubifs ARM64
-Thread-Topic: Issues reading large files from nand ubifs ARM64
-Thread-Index: AdqJvnmeB3VXHsR2Qz+2l51IoDFtGQ==
-Date: Mon, 8 Apr 2024 14:14:05 +0000
-Message-ID: <CY1P110MB0920FE308300F8F69313B119B600A@CY1P110MB0920.NAMP110.PROD.OUTLOOK.COM>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-msip_labels: MSIP_Label_02736c20-5498-4b4f-a78c-11e6c0248834_ActionId=073580ca-52ff-4824-b7fc-a74c1a943f08;
- MSIP_Label_02736c20-5498-4b4f-a78c-11e6c0248834_ContentBits=0;
- MSIP_Label_02736c20-5498-4b4f-a78c-11e6c0248834_Enabled=true;
- MSIP_Label_02736c20-5498-4b4f-a78c-11e6c0248834_Method=Standard;
- MSIP_Label_02736c20-5498-4b4f-a78c-11e6c0248834_Name=Public
- - No Sensitive Content;
- MSIP_Label_02736c20-5498-4b4f-a78c-11e6c0248834_SetDate=2024-04-08T11:14:55Z;
- MSIP_Label_02736c20-5498-4b4f-a78c-11e6c0248834_SiteId=825eadac-5e35-4ca7-a5df-7aae43ed5741;
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=aeronix.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CY1P110MB0920:EE_|CY1P110MB0726:EE_
-x-ms-office365-filtering-correlation-id: c21c8886-50ee-49a3-5b50-08dc57d625f2
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: UJLgo0sjDzQ2YAE2+6yw+sWRxfCa+X2JquA5ZUtFXy56KIbk8wGGpNaa5pX5400GcHMPzw/HRwEHhfydPDc3znjq59QkKBUY19yLWQMZZwJeYqBoscq26MCoLE4bFprw6+fXU5K6ffMyuNvBLplJipwP8viMHSP8hxKeMB2E+olSSq7x9eI3P8gyXruryJVVtcXPnuhLxpsT64P+hRmzZ0JqghGWVF1TN0bckMNE7GFAYDVUZokK5WldcMI641z77gwc3WWj1o5UgT48bgAnFcpMMM54UG8t2lQk5oTnaVCnt6nYoUQMzV1Wwo8Aht4bF0w3mJxRb1uO1PhDIZN/r7PTrew1ykNc1i/QOt3K0BdIozt/parSZI6/Z3j9v5z7kuGEWWGIOEmsRiIke2iPV7HkHYJAG8ZNFT3fH9gnOAmpnyHnburQACrlp1hFVaMz8QTH5OKZyL2Q//WQrOsGv7lUUbe/ZKQUsexUQEl6xMXdJ01kVBDLJEKhGwPOyxnOuHCUuemP+A0CFY/QQjb65z3l2DL1R9R8JoXpsBJ4PznnHd33zQB2kh0u+GNjs87NXkwSHFgDrrzrO+PctM/oPmHI6pN80YWfy+I4iE/b9V8oNBNE25WJxtw+nl4iNqqmrm2mEvQTTNJiTH6jCZXYSycytnPAuZ/vReGvIj/2HpE=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:CY1P110MB0920.NAMP110.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(41320700004)(366007)(1800799015)(38070700009); DIR:OUT;
- SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?YzNaMFA5a0ZKVk5NWU9MMzNQN3hOZ1UwWHd1aVVBYzJHWFZEZERXRmpTS0JQ?=
- =?utf-8?B?bitKRmNyOXViei9GRktWWkxMd2lPU3MyRjNVakZXQ2x3NGtMZ0xNOFBkUlZX?=
- =?utf-8?B?aUlncHBzZGJhTjFFU0NFZVp3Q3JCQTJjbzdqS0ZVdmp2WEFNRENMbmtESGti?=
- =?utf-8?B?dkhXZG9HcXMwL0NHNklxZHBhUFlCS3NRUFRqelc4M0V3ZWVBaWw3bzFnMzNC?=
- =?utf-8?B?RWNuZFV2cndNYlUzTHNKT3FPQUJOVGw3TkxjTHpFNU51T1pmSzBCK1lNVy9B?=
- =?utf-8?B?eWZ5aVVTeUw3MVVueFJFaGFIU1NVcTZxb09HUXZqQm5aWUZ1SkEwY1lBMjJq?=
- =?utf-8?B?QjluSFQrZ0pQNm5kZEVjRjdjN1NSSlZQM21pOUJQQ0tHYmxnNHJDUHhEajI2?=
- =?utf-8?B?Mlp1dzZSb2tIaHFoYWJ6WCsvZ2VKei9CSXVtK1BHNmx5NjErTjR3NjVKYW1F?=
- =?utf-8?B?M0l0Ym1RTHhZWkJwRDd3dGMzNlBRTmtYbHg1cmpuQ3h2Zm9PWnlsbUlnVTNq?=
- =?utf-8?B?eWhWSUd1VS9mS3NUR1czdGVoRFVvOUZ4SXRmUXFMQml6ZjBqaDgrTTZ1ZWZv?=
- =?utf-8?B?NHV0NnBVQk5QbVloYS8rbnEzeEhPcnl0RFlLSnhOb1ZNQk5PNFUwUDNUdEl6?=
- =?utf-8?B?Sklsd2wreUZBWjIrN1Q4VkcwUGJ6aEQ4ZWoxd3p2TXFFaGVPTXl2VTU4OFZJ?=
- =?utf-8?B?dGNodUlZMkFWK0JqK1NrdEUzY0RBdEY0d281MENPUktTZW1CeG9hYlVOUW5E?=
- =?utf-8?B?dk5KVDBuUkJvZFVOVllFZm9DYTZnZDVMQ0IyWTRleEVJSlZPaHVMKzhCM3RK?=
- =?utf-8?B?enZreUVMVEQ3R3JvQ05oVVpiN2NNNFl6Tk1pSGNUeXkzSHcyWkVYemQ2RHNN?=
- =?utf-8?B?QnU3RFA1ajJjZmpGMHo2NjYyR0VCMXFlREl5VzVlNzNLc0NOUnlOcHZabDds?=
- =?utf-8?B?cnZvMHhiRkJjMVQyS2tPVDdhTzd2Z3ZRUjkvZ2haR3JuWjNXSDZuUStwT0Ni?=
- =?utf-8?B?MXpiaHMwaHR5R3FBdWgxWjRjSUZWRGYrVHNSWUJOdEV2dWUrY3pYa2hueWp0?=
- =?utf-8?B?OHhETkhhM21EWEJNTUlaYjF0ZHR3cVJLTUxKeDRMT1VXVVI1NjZjMFRudkk5?=
- =?utf-8?B?MVIrMEdSTW5razI2MUl5RXNrS2NKNTN0ZmZlekRLWWxlV1RmNFJTN1Y2NFRF?=
- =?utf-8?B?akZZVFhLK05PczdzWW5YK1YwWU9KM1hoQ0psRERudVRTOXJFTzhCcnVVbGcr?=
- =?utf-8?B?SEEwK3NiZWg2VUNoWWk4ZHUrOUtKK3ozRE1HZ01WUUtuVUhoa2ZuYkdDcVJ1?=
- =?utf-8?B?Y0YwaUNXdjhQRVlCMGhSMzBiNUFOdTM3N2NyUzF1THhkTC95SGx0RndBcmY1?=
- =?utf-8?B?bEFJaThtUjE0ZTA4NnplVDd5bWN4emh0b2FLY1hRM09IUmk0Vnh1WStpaHI5?=
- =?utf-8?B?WUdqNTFCcjJuczFVRkZuYlp2cXNMYVBCM25nYlZEZEtSbVAzQVNJRGw3NGFw?=
- =?utf-8?B?Nm01YUZxSDIxbFREeXlJYzhUSE9yUEpWRW9mWHpIeUE3ZEdGMWJNTlhwU2Rz?=
- =?utf-8?B?bXNKYW1yaXJtZW9vK1RpdjB0cUJ2Rzd3UDU2L1FNYXdPczlHS08wMWZ2Yk1x?=
- =?utf-8?B?SUY2dEVVam5yT1hCNFlNQUNTemorcmxEczgxSllzbjFVdndQbUx2c1d6c0Mx?=
- =?utf-8?B?eWhMT2loYThIb1k2bWwzT0JvZlJCcFpUL0Nvd01Mb0tJK2lNZGx5NmgzZ2dO?=
- =?utf-8?B?MDhJUXlVRGtCOHRHMERtSjNXb01PNHpxeXdFcDhDeUR3MFg5NHQ2MUdOV0xB?=
- =?utf-8?B?aTR2Q2t6MjNNaEFucllZaWc4ZEZZSnVqOUllVEpIRW5aOEN4cTVpWTFmT3lZ?=
- =?utf-8?B?Y0NoOTNRZHB6REhFdkozT2tPTm9XUGRoNm9uUGxOellaTnZKd0o3UUlTMlJ5?=
- =?utf-8?B?MnVWSjZ6NXRjTExaSzArSDhSMlVzQ3V5ekxaVlF4dXZHMWN0L0E3OG9UVGVl?=
- =?utf-8?Q?NRfibm+o/II9hp8LxGiYM1wYRCGa/g=3D?=
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=0d79=LO=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: Cc:
+ References: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1712604694;
+ bh=jCwIX1d6atp8VGpURF5T12Q2Nf6DM+UxxzuF9Z3P7X0=;
+ b=RPrWLGd2E33GJwQ9NvB0b/hXH7g7KxSV598f9cKGWwwLjqxeW7YLjKqaRC3/oSvI3aJB7ZQof
+ 5zaubmASD8EZMRWSpk7WTUy8j15+G9yAQSfX2wW8bea3Kec8OaClbSRvRl4c+cEGm2uD/ozYuG3
+ iWYM2QrggYoJrSfGkXVeGRYNN8wa7fm7+vOTrbcaqfki8g2WZDz+NaUlux2tIQoRoH/Afm9uMhG
+ u06VTPEqfm4FS3ninXK6KT5ZU+ApCv+fu+H0OGCrK8/nd114POw5r0VDSDsS5/WNJ+XnUIOcd9Z
+ b/ouilDsEv98St2PYZTEQuxy4Y7wO2QElKN0KV60/ysA==
+Message-ID: <7db1cc51-3a9c-44c3-ac16-369566f2ef20@kwiboo.se>
+Date: Mon, 8 Apr 2024 21:31:28 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: aeronix.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CY1P110MB0920.NAMP110.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: c21c8886-50ee-49a3-5b50-08dc57d625f2
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Apr 2024 14:14:05.0641 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 825eadac-5e35-4ca7-a5df-7aae43ed5741
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY1P110MB0726
-X-Mailman-Approved-At: Mon, 08 Apr 2024 20:36:16 +0200
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: Can't get U-Boot working on Geniatech XPI-3566-ZERO
+To: "=?UTF-8?Q?Mizsei_Zolt=C3=A1n?=" <zmizsei@extrowerk.com>
+References: <cf475658-6c25-474b-934b-15da1363a39f@app.fastmail.com>
+Content-Language: en-US
+Cc: u-boot@lists.denx.de
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <cf475658-6c25-474b-934b-15da1363a39f@app.fastmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 661446159ad98c55d9e4da58
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -146,32 +71,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGVsbG8gVS1Cb290IGNvbW11bml0eSwNCg0KSSBhbSBoYXZpbmcgaXNzdWVzIHJlYWRpbmcgbGFy
-Z2UgZmlsZXMgKH4yMCBNaUIgYW5kIGxhcmdlcikgZnJvbSBuYW5kIGZsYXNoIG9uIGFuIGFybTY0
-IGRldmVsb3BtZW50IGJvYXJkLiBTbWFsbGVyIGZpbGVzIGxvYWQgYW5kIHdvcmsgYXMgaW50ZW5k
-ZWQuIEkgaGF2ZSB0ZXN0ZWQgdGhpcyBpbiBsaW51eCwgd2hpY2ggYWxzbyB3b3JrcyBhcyBpbnRl
-bmRlZC4gSG93ZXZlciwgaW4gVS1Cb290LCBpdCBnaXZlcyB0aGUgZm9sbG93aW5nIGVycm9yOg0K
-DQp1Ymlmc2xvYWQgMHg5MDAwMDAwMCAiY29yZS1pbWFnZS1taW5pbWFsLWxzMTA0NmFmcnd5LmNw
-aW8uZ3oudS1ib290Ig0KTG9hZGluZyBmaWxlICdjb3JlLWltYWdlLW1pbmltYWwtbHMxMDQ2YWZy
-d3kuY3Bpby5nei51LWJvb3QnIHRvIGFkZHIgMHg5MDAwMDAwMC4uLg0KVUJJRlMgZXJyb3IgKHVi
-aTA6MCBwaWQgMCk6IGRvX3JlYWRwYWdlOiBjYW5ub3QgcmVhZCBwYWdlIDU1NTMgb2YgaW5vZGUg
-NjYsIGVycm9yIC0xMg0KRXJyb3IgcmVhZGluZyBmaWxlICdjb3JlLWltYWdlLW1pbmltYWwtbHMx
-MDQ2YWZyd3kuY3Bpby5nei51LWJvb3QnDQoqKiBGaWxlIG5vdCBmb3VuZCBjb3JlLWltYWdlLW1p
-bmltYWwtbHMxMDQ2YWZyd3kuY3Bpby5nei51LWJvb3QgKioNCg0KSXQgc2VlbXMgdG8gZmFpbCBv
-biBhIHJhbmRvbSBwYWdlIGJldHdlZW4gMzAwIGFuZCA2MDAwLiBOYW5kIHJlYWRzIGFmdGVyIHRo
-aXMgZXJyb3IgY2F1c2UgVS1Cb290IHRvIHBhbmljLg0KDQpEaWdnaW5nIGEgYml0IGRlZXBlciwg
-ZXJyb3IgLTEyICgtRU5PTUVNKSBzZWVtcyB0byBjb21lIGZyb20gbGluZSAyNzQgYW5kIDQxMyBp
-biB0bmNfbWlzYy5jLiBJdCBzZWVtcyB0byBhbHRlcm5hdGUgYmV0d2VlbiB0aGUgdHdvLg0KaHR0
-cHM6Ly9naXRodWIuY29tL3UtYm9vdC91LWJvb3QvYmxvYi9tYXN0ZXIvZnMvdWJpZnMvdG5jX21p
-c2MuYw0KDQpJIGxvb2tlZCBhcm91bmQgYW5kIGRvbuKAmXQgc2VlIGFuIG9idmlvdXMgbWVtb3J5
-IGxlYWsuIEkgaGF2ZSA0IEdpQiBvZiByYW0sIHdoaWNoIHNob3VsZCBiZSBwbGVudHkuIFRoaXMg
-aXNzdWUgYWxzbyBkb2VzbuKAmXQgZXhpc3QgdXNpbmcganVzdCBVQkkgKG5vdCB1YmlmcykgdG8g
-dGhlIHNhbWUgbG9jYXRpb24sIHNvIEl0IGZlZWxzIGxpa2UgdGhlIHViaWZzIGRyaXZlciBpcyBt
-ZXNzaW5nIHVwLiBJIGhhdmUgdHJpZWQgVS1Cb290IDIwMTkuMTAgYW5kIDIwMjIuMDQsIGFuZCB0
-aGV5IGJvdGggcHJlc2VudCB0aGUgc2FtZSBpc3N1ZS4NCg0KSeKAmW0gdXNpbmcgdGhpcyB0byBs
-b2FkIGEgcm9vdGZzIHJhbWRpc2sgKH4xNDEgTWlCKSBpbnRvIHJhbS4gQXMgYW4gYWJzb2x1dGUg
-bGFzdCByZXNvcnQsIEkgY291bGQgc3BsaXQgdGhlIHJvb3RmcyBpbnRvIDE2IE1pQiBmaWxlcywg
-YW5kIHN0aXRjaCB0aGVtIHRvZ2V0aGVyIGluIHUtYm9vdC4gSG9wZWZ1bGx5IEkgd29u4oCZdCBo
-YXZlIHRvIGRvIHRoYXQg8J+Yig0KDQpJZiB5b3UgbmVlZCBhZGRpdGlvbmFsIGluZm9ybWF0aW9u
-LCBwbGVhc2UgZG8gbm90IGhlc2l0YXRlIHRvIGNvbnRhY3QgbWUuDQpUaGFuayB5b3UsDQpNYXR0
-DQo=
+Hi Z,
+
+On 2024-04-08 09:40, Mizsei Zoltán wrote:
+> Hi,
+> 
+> I'm trying to get a mainline U-Boot running on the Geniatech XPI-3566-ZERO RK3566 based SBC [1], but all my attempts have failed so far.
+> 
+> The SBC doesn't have any SD-Card slot, please keep this in mind!
+> 
+> I can build U-Boot, but when I write the resulting binary to the eMMC using rkdeveloptool, the boot stops and I see no output on the UART pins using 1500000 baud transfer rate.
+> 
+> My steps were the following:
+> 
+> - git clone https://github.com/u-boot/u-boot
+> - cd u-boot
+> - CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64 make rk3568_defconfig
+
+There is no rk3568_defconfig target but generic-rk3568_defconfig may work better.
+
+> - ROCKCHIP_TPL='rkbin/bin/rk35/rk3566_ddr_1056MHz_v1.21.bin'  BL31='rkbin/bin/rk35/rk3568_bl31_v1.44.elf' CROSS_COMPILE=aarch64-linux-gnu- make
+> - rkdeveloptool db MiniLoaderAll.bin
+> - rkdeveloptool wl 64 u-boot-rockchip.bin
+> 
+> After that I can no longer communicate with the board via UART and it no longer boots.
+
+After looking at the specification for this board it looks like GPIO pin 8 and 10 is connected to uart1 and not uart2 that is typically used for debug uart on rockchip devices.
+
+> 
+> I've built uboot countless times, I've followed all sorts of guides, I've tried modifying FDT and transplanting the DTS from the official SDK, I have tried vanilla defconfigs and tried to modify them aswell, I think I've tried everything, but no matter what I do I just can't get it working.
+> The vendored U-Boot works ok, but I plant to run OpenBSD, for which an upstream U-Boot would be better situated (according to the OBSD mailing list).
+> 
+> Please give me some hints because I'm running out of ideas. I've spent countless hours trying to get this to work but haven't succeeded.
+
+You can try changing stdout-path to "serial1:1500000n8" and enable the uart1 node in generic-rk3568.dts.
+Also change to CONFIG_DEBUG_UART_BASE=0xFE650000, and also use rkbin tools/ddrbin_tool and change to use uart1 on ddr bin.
+
+After that you should probably start seeing something on uart and that may help you get a little bit further.
+
+Regards,
+Jonas
+
+> 
+> Thank You very much!
+> 
+> Best Regards,
+> 
+> --Z--
+> 
+> [1] https://www.geniatech.com/product/xpi-3566-zero/
+
