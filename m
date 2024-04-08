@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CCC8C67861
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:57:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 007A5C67861
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:57:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D18858838B;
-	Tue,  9 Apr 2024 00:46:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4C05388392;
+	Tue,  9 Apr 2024 00:46:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="U2B9buCq";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ivCLin8Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D1A088134; Tue,  9 Apr 2024 00:32:12 +0200 (CEST)
+ id 83D9488134; Tue,  9 Apr 2024 00:32:13 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5C358816E
- for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 00:32:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5180F8817A
+ for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 00:32:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438MVw2W111534;
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438MVwBW111551;
  Mon, 8 Apr 2024 17:31:58 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1712615518;
- bh=mDXVc0dFG5DiBqrrDt4M5g0PP05dAG9RCYZ716vTZ9g=;
+ bh=ONlIS0Q7CBrBdiaBhkE+jcabI/4bifLe0IHzLND9cUg=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=U2B9buCqRUA6Cx2nSsPlwsGKZ0uykYvvg9TbIphKmYFGHwByMJ8VhaQ8iIjUvYlvo
- D4GqsewUr2tKQ1CeHVH3z4zh5JyMd91Z+TAugo2/mN5OGOsBNxGntSBtnGrkdm59LW
- oyb6Iohl/yLdmNQcUEdHyReoNucoZ0vGGDFv2+YE=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438MVw4r116270
+ b=ivCLin8Q3/80xA7c7FbWi6p6I1HIC2f0DhY4RqqvDtpYZJD6G4yoMFy2s8R6eFLU1
+ 34a5nE7ymZxlsrTT20fAKf1eIH019AdpGVwKmzCeU46LP0ZCiXosEwZm5fR91+Lbn6
+ MIERfndqDaLRjZCb1kTWelfi9B/6FsLeNVa8mOTo=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438MVwcM032316
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 8 Apr 2024 17:31:58 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
- Apr 2024 17:31:57 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 17:31:58 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 8 Apr 2024 17:31:57 -0500
+ Frontend Transport; Mon, 8 Apr 2024 17:31:58 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438MVv9M081170;
- Mon, 8 Apr 2024 17:31:57 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438MVwVM027869;
+ Mon, 8 Apr 2024 17:31:58 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
@@ -64,9 +64,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
  Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v2 05/16] configs: j721e: Enable EFI capsule update
-Date: Mon, 8 Apr 2024 17:31:23 -0500
-Message-ID: <20240408223134.165877-6-j-humphreys@ti.com>
+Subject: [PATCH v2 16/16] configs: beagleboneai64: Enable EFI capsule update
+Date: Mon, 8 Apr 2024 17:31:34 -0500
+Message-ID: <20240408223134.165877-17-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240408223134.165877-1-j-humphreys@ti.com>
 References: <20240408223134.165877-1-j-humphreys@ti.com>
@@ -93,16 +93,16 @@ X-Virus-Status: Clean
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- configs/j721e_evm_a72_defconfig | 2 ++
+ configs/j721e_beagleboneai64_a72_defconfig | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
-index 077bf508328..b8840a556e1 100644
---- a/configs/j721e_evm_a72_defconfig
-+++ b/configs/j721e_evm_a72_defconfig
-@@ -210,3 +210,5 @@ CONFIG_UFS=y
- CONFIG_CADENCE_UFS=y
- CONFIG_TI_J721E_UFS=y
+diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
+index 3d234bc1a8f..e74ee68e23e 100644
+--- a/configs/j721e_beagleboneai64_a72_defconfig
++++ b/configs/j721e_beagleboneai64_a72_defconfig
+@@ -172,3 +172,5 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x6163
+ CONFIG_SPL_DFU=y
+ CONFIG_LZO=y
  CONFIG_EFI_SET_TIME=y
 +CONFIG_EFI_CAPSULE_ON_DISK=y
 +CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
