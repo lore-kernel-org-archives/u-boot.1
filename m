@@ -4,67 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 541B7C67861
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:48:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C94B6CD1292
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:49:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71946881D3;
+	by phobos.denx.de (Postfix) with ESMTP id F01C0881DA;
 	Tue,  9 Apr 2024 00:46:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mw8QOQW0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ggUAvIjL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1263E88170; Mon,  8 Apr 2024 23:12:28 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 30D368818B; Mon,  8 Apr 2024 23:23:57 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 128F088179
- for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 23:12:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E0D48814A
+ for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 23:23:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LCDOn050440;
- Mon, 8 Apr 2024 16:12:13 -0500
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LNlxt023534;
+ Mon, 8 Apr 2024 16:23:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1712610733;
- bh=wtahfY1QRO77+Yv/t3FAjbkncV02ag0M81bkLfErKOk=;
+ s=ti-com-17Q1; t=1712611427;
+ bh=ATBI1/im8AkDcJrPvFeK9DIbS5D9vNrOGjGy5hWEJuM=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=mw8QOQW0tbRfZM5CMekRhc5bKpqj1zGcNvQazz0UzhoysFdKumJExEI+nH9dPgwj/
- MwIBSiZ15jlmoB/9SR47woHmEMCVo91Kl+L5K5uyNAbxcAmJ/5Vx/pV/QM5yAQimK0
- viuJEh40ASvgszVX98X3E59mHmx1V3mvz7S9GOag=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LCDsx069520
+ b=ggUAvIjLxT0t67WVgingWPwp0PPgzeqXSipswkka6zXhZtKUZBRuh4iElhom+162e
+ tbF7gkJ53sv5xPZCB+V75vSGXT6RxikBXskA3VRDH3eRiNFInFHzDJgv/NReQHyuJb
+ Kt5syPbSakIi3FcGKZRRzpDaGJ/Kk2kCmMZ98Voo=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LNlRE077999
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 8 Apr 2024 16:12:13 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 8 Apr 2024 16:23:47 -0500
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
- Apr 2024 16:12:12 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 16:23:47 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 8 Apr 2024 16:12:12 -0500
+ Frontend Transport; Mon, 8 Apr 2024 16:23:47 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LCCQp067488;
- Mon, 8 Apr 2024 16:12:12 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LNlp4033635;
+ Mon, 8 Apr 2024 16:23:47 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
-To: Simon Glass <sjg@chromium.org>, Neha Malcom Francis <n-francis@ti.com>,
- Nikhil M Jain <n-jain1@ti.com>, Andrew Davis <afd@ti.com>, Roger Quadros
- <rogerq@kernel.org>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
+ Nikhil M Jain <n-jain1@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Maxime Ripard
+ <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>,
  Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>
+ Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH 04/15] configs: j721e: Enable basic EFI CMD support
-Date: Mon, 8 Apr 2024 16:10:49 -0500
-Message-ID: <20240408211100.93936-5-j-humphreys@ti.com>
+Subject: [PATCH 03/16] configs: am64x: Enable EFI capsule update
+Date: Mon, 8 Apr 2024 16:22:42 -0500
+Message-ID: <20240408212255.95255-4-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240408211100.93936-1-j-humphreys@ti.com>
-References: <20240408211100.93936-1-j-humphreys@ti.com>
+In-Reply-To: <20240408212255.95255-1-j-humphreys@ti.com>
+References: <20240408212255.95255-1-j-humphreys@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -88,31 +93,19 @@ X-Virus-Status: Clean
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- configs/j721e_evm_a72_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ configs/am64x_evm_a53_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
-index 019ddcca7e8..5028caa1782 100644
---- a/configs/j721e_evm_a72_defconfig
-+++ b/configs/j721e_evm_a72_defconfig
-@@ -63,7 +63,9 @@ CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=y
- CONFIG_SPL_SPI_LOAD=y
- CONFIG_SYS_SPI_U_BOOT_OFFS=0x280000
- CONFIG_SPL_YMODEM_SUPPORT=y
-+CONFIG_CMD_BOOTEFI_SELFTEST=y
- CONFIG_CMD_ASKENV=y
-+CONFIG_CMD_NVEDIT_EFI=y
- CONFIG_CMD_DFU=y
- # CONFIG_CMD_FLASH is not set
- CONFIG_CMD_GPIO=y
-@@ -75,6 +77,7 @@ CONFIG_CMD_REMOTEPROC=y
- CONFIG_CMD_UFS=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
-+CONFIG_CMD_EFIDEBUG=y
- CONFIG_CMD_TIME=y
- CONFIG_CMD_EXT4_WRITE=y
- CONFIG_MTDIDS_DEFAULT="nor0=47040000.spi.0,nor0=47034000.hyperbus"
+diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
+index 61b498b49a6..8ba17ea89f9 100644
+--- a/configs/am64x_evm_a53_defconfig
++++ b/configs/am64x_evm_a53_defconfig
+@@ -177,3 +177,5 @@ CONFIG_USB_FUNCTION_MASS_STORAGE=y
+ CONFIG_SPL_DFU=y
+ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+ CONFIG_EFI_SET_TIME=y
++CONFIG_EFI_CAPSULE_ON_DISK=y
++CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
 -- 
 2.34.1
 
