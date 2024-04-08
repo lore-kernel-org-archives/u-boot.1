@@ -4,79 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B433FCD1292
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 20:22:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEEDCCD1292
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 20:28:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03F998813C;
-	Mon,  8 Apr 2024 22:22:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=loftorbital.com
+	by phobos.denx.de (Postfix) with ESMTP id 5D8BD88152;
+	Mon,  8 Apr 2024 22:28:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=loftorbital.com header.i=@loftorbital.com header.b="c+IwvwWG";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="CROM3VxQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A432D88113; Mon,  8 Apr 2024 22:13:29 +0200 (CEST)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4B4F388153; Mon,  8 Apr 2024 22:28:51 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7C48B8813A
- for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 22:13:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=loftorbital.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=charlie.johnston@loftorbital.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-1e411e339b8so11203855ad.3
- for <u-boot@lists.denx.de>; Mon, 08 Apr 2024 13:13:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=loftorbital.com; s=google; t=1712607206; x=1713212006; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0WGaGfXi+L6Xasm/YVsN8PeJyWv14tPjM9kv/gU9Nak=;
- b=c+IwvwWGUp0uHQj8GuY7TxIlgbbAi3Jyw2JhaNHLiNzkDq7T9/Ou9ldiPOrh6sDElf
- n3BFnx0qhOtVdeZVeFl7AAgEQ3ZHwIBcAjBcRSwRR50n/gRnktFUl3ugAcCX/bQegfaw
- RMcWTMoDoxTo3FsG8EBMT0uPY8sZF/k+WueQh3/GyhjXz/TqrvrrjriKYIIinrZRTv+H
- 7AzVIgA627vXGAjc4bOvi01FoRMEjK/2MjBPMvN/+WorJjcjsALqBUAWG7JjNtUCGuj6
- 9eRYQV45UZfes0JFnTywk3EQejWajnTqYJ+dkj8Vnr9JSy4ypB5uZE4iN+ClcZ56WAPx
- oM+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712607206; x=1713212006;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0WGaGfXi+L6Xasm/YVsN8PeJyWv14tPjM9kv/gU9Nak=;
- b=W5pIpmd00bQYvbcHSHE//x5Eg8Oq9jKIeJcLrhMRwYL6aZEdFjFOAWsVpcG1o786sf
- AChRbmHkEhX/xU6ghjY6Vvhyp17GTjDf0DfPvRFTjc1T6ZnztldGilb2M237Nf0U4T7I
- zQYx9a12MYMLRLDER5YlA0j2/XicqCQA6VLluY8ZKX1O1Msoo4LzafTEDu9/y3+D8z18
- 2b2FHCHEQK3wRnkfvu9XIv3wxt7rb1hogKbTNVkAytMKpjYrp3UZr3LL8EpRxaBDqgoS
- S5tXvYk3APSWtE90SMDvUhegBxP41ME5SzJ+noYG1UucQoj0JLh/2oL634rWYZqkJMy6
- u81w==
-X-Gm-Message-State: AOJu0YxsVfBYOOg1fj42MzMMbPpnITBryX7y314k+EInfkuX+llSxZGP
- d8ard6Xz+gSQ4nKAIRdeLyxxIuvUe6hmR9qlVgsjMHbbaWPFj2A3Xllh+iITZrAfkGZo6CV0QmJ
- HNE4=
-X-Google-Smtp-Source: AGHT+IF3TSh80gc8PR655nAF825DmRc5LUut8Bvzz2mwqXMkOwwIW11dBgtcc+iH3+qNFvSdNPomkA==
-X-Received: by 2002:a17:903:41d0:b0:1df:f859:91bd with SMTP id
- u16-20020a17090341d000b001dff85991bdmr12396193ple.4.1712607205839; 
- Mon, 08 Apr 2024 13:13:25 -0700 (PDT)
-Received: from cjohnsto-vivado-vm.. ([12.172.216.189])
- by smtp.gmail.com with ESMTPSA id
- y9-20020a17090264c900b001e3dff1cb4bsm5150982pli.19.2024.04.08.13.13.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Apr 2024 13:13:25 -0700 (PDT)
-From: Charlie Johnston <charlie.johnston@loftorbital.com>
-To: u-boot@lists.denx.de
-Cc: michal.simek@amd.com, Charlie Johnston <charlie.johnston@loftorbital.com>
-Subject: [PATCH 2/2] arch: zynqmp: Move CMD_ZYNQMP Kconfig from board to arch
-Date: Mon,  8 Apr 2024 13:13:13 -0700
-Message-Id: <20240408201313.10183-3-charlie.johnston@loftorbital.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240408201313.10183-1-charlie.johnston@loftorbital.com>
-References: <20240408201313.10183-1-charlie.johnston@loftorbital.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 0805587FBF
+ for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 22:28:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1712608127; x=1713212927; i=xypron.glpk@gmx.de;
+ bh=6RmMYJMp05k2VK1FUZoDEVIhoZPnapiZGc3io3T5P+Q=;
+ h=X-UI-Sender-Class:Date:To:Cc:From:Subject;
+ b=CROM3VxQMd9hei9ri5CxA6ES+HEfGkkVUS+9JHtNYOFX7jUnwR2RAC/tkWJCbEIy
+ pqdbS5RLYfy9mXKZSdjanEigVi96B8cuL0qyI1eWFBrzpHgE+GrzDNa4cWoOY2Os5
+ I+dbZkWs30Nib3BNLGWoPE7Mp+Hgaw6Kyt95fA3WU+K7pwm0WsY8Bzv7VwOfrmQsZ
+ BbCl/4ffKGrEJfvv2GkauD6mPWx7ISJDAuheF40P/YIHKuGYwws+Q7WydvcyNAND2
+ CAWuReE69B72KBOKn1JjXhqfD+956VrCxPpYxEJVBrlI6Lxc0fEUe/N89QHCI16Md
+ QfcMPIwERexFsvqeBA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MMGN2-1sAuUb0gq6-00JGPV; Mon, 08
+ Apr 2024 22:28:47 +0200
+Message-ID: <d34e7f84-a22d-40ed-b756-c10ef935c49e@gmx.de>
+Date: Mon, 8 Apr 2024 22:28:42 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Mon, 08 Apr 2024 22:22:35 +0200
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Masahisa Kojima <masahisa.kojima@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request efi-2024-07-rc1
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:RC/PM4HASZAoqyvqZvhrmVAQ//XeqTStTg12bSdxHo2hOD8upZT
+ VfmEsEvvsA3VfXvy8wAzgsSzGgFXcNW5i/bRALJdaP/cqJt7/FBv6AW64Qy+P0iGw8QX71m
+ IkAC4ZyCdnGBj7zlCWhNkODmEgBTEme5IJfl0frB5KjuH56RQ4b1Z8f0Q7HlDQmdK56cIcS
+ LNSPKvFVN41VDhqY2IXqQ==
+UI-OutboundReport: notjunk:1;M01:P0:Ycc8b90IHg4=;SdYjGyJMMXN625jsTkJl28Vlm/p
+ G1aap/aKjPx3/rq6wn+sm0sUp6wkU/3e2MPyJrFQZEULFtagTquo3PmlWEKTpzy27D04sUROX
+ vvWNXdIEEaDbGuU0xnkFbDE8p7sTA74hjLgFKAVY09d1lJwviE8mtXt1yj4dGQA8TGq4JQoJR
+ FYvT2DlgISFXx7R/Rtrpcr2YQB8jWUVPFMa/3ZhKyHm9fMgpHfYFRdoU0kRAl9ppowqTAzFjw
+ SNdaquivzXG6RaFW2FIvwmyoWy+nEuiskf3oI3lBkshyJaKG/ncv3LvJATbsFyjH6tCzuGQNJ
+ EDkjuPQoBQbKi4e1Jk2wXkTLGdIW7kAMsqXGIzEHCe2SYBbxUkv2rCYisRn5m4OnaP7xYfGng
+ QBY5xUvoqA7Q2R7UnRUqfYB9TKjREg3K1+R8FU/QYAowlfzJ4uA+BqBJjWtpOlf+XAWpTaPhR
+ ajJtq3f8OcKPKebiVXowymXrAz7d5IgWQGOAUnOWz4xWdhVvTN+4uFSfmo8TchckaK4pStHNJ
+ PDY0/cnYfmzCQURanWLAOo4q7UhbBZqxzwvlPXBKTNMgtX53FOORr4sDZeoOUfhuhWnJ+KzWu
+ H2wLWULWgPeCLdC9yA+qt+zVYfjtV5Aioe627hDcTPtn5IlZia8Fs45+BGIeqTb9cKGFSJ1uH
+ JjrsYT+yEdknMlAZ+DKzG4ryxP4PQSjweeT9uayWcSkK7vEKkVhORvqI9jxfLGotnJJLDVfrb
+ JY04fsz9/bhqjOBNp8+A1QO445SQi9S2cHCWoXULMk+O2DAaX7WDihURkrai+7qABMC3pYj3X
+ lMW5EKnRfS0ie2xbdmImsKzA3ZAnb41lk/zhdgcZhzPcw=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,66 +86,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since the previous commit moved the zynqmp command to cmds and the
-command depends on the arch rather than the board, this commit
-moves the Kconfig entry into the arch/arm/mach-zynqmp/Kconfig
+Dear Tom,
 
-Signed-off-by: Charlie Johnston <charlie.johnston@loftorbital.com>
----
- arch/arm/mach-zynqmp/Kconfig | 13 ++++++++++++-
- board/xilinx/zynqmp/Kconfig  | 19 -------------------
- 2 files changed, 12 insertions(+), 20 deletions(-)
- delete mode 100644 board/xilinx/zynqmp/Kconfig
+The following changes since commit 9cba29b19f43f9450117e8bc89e7dda691ed5ab=
+5:
 
-diff --git a/arch/arm/mach-zynqmp/Kconfig b/arch/arm/mach-zynqmp/Kconfig
-index 6a7be0b427..ed0aa29c12 100644
---- a/arch/arm/mach-zynqmp/Kconfig
-+++ b/arch/arm/mach-zynqmp/Kconfig
-@@ -212,7 +212,18 @@ config SD1_LSHFT_MODE
- 
- endchoice
- 
-+config CMD_ZYNQMP
-+	bool "Enable ZynqMP specific commands"
-+	depends on ZYNQMP_FIRMWARE
-+	default y
-+	help
-+	  Enable ZynqMP specific commands like "zynqmp secure"
-+	  which is used for zynqmp secure image verification.
-+	  The secure image is a xilinx specific BOOT.BIN with
-+	  either authentication or encryption or both encryption
-+	  and authentication feature enabled while generating
-+	  BOOT.BIN using Xilinx bootgen tool.
-+
- source "board/xilinx/Kconfig"
--source "board/xilinx/zynqmp/Kconfig"
- 
- endif
-diff --git a/board/xilinx/zynqmp/Kconfig b/board/xilinx/zynqmp/Kconfig
-deleted file mode 100644
-index ffa2f0215d..0000000000
---- a/board/xilinx/zynqmp/Kconfig
-+++ /dev/null
-@@ -1,19 +0,0 @@
--# Copyright (c) 2018, Xilinx, Inc.
--#
--# SPDX-License-Identifier: GPL-2.0
--
--if ARCH_ZYNQMP
--
--config CMD_ZYNQMP
--	bool "Enable ZynqMP specific commands"
--	depends on ZYNQMP_FIRMWARE
--	default y
--	help
--	  Enable ZynqMP specific commands like "zynqmp secure"
--	  which is used for zynqmp secure image verification.
--	  The secure image is a xilinx specific BOOT.BIN with
--	  either authentication or encryption or both encryption
--	  and authentication feature enabled while generating
--	  BOOT.BIN using Xilinx bootgen tool.
--
--endif
--- 
-2.34.1
+   Merge tag 'u-boot-imx-master-20240405' of
+https://gitlab.denx.de/u-boot/custodians/u-boot-imx (2024-04-05 17:23:58
+-0400)
 
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/efi-2024-07-rc1
+
+for you to fetch changes up to 3f8d13044b32ddd906bb9f2fc705b988ec93df35:
+
+   efi_loader: access __efi_runtime_rel_start/stop without & (2024-04-08
+13:05:50 +0200)
+
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/20252
+
+=2D---------------------------------------------------------------
+Pull request efi-2024-07-rc1
+
+Documentation:
+
+* improve description of FAT partition name generation
+* add missing :: in doc/usage/cmd/itest.rst
+
+UEFI:
+
+* fix address mode for __efi_runtime_start/stop,
+   __efi_runtime_rel_start/stop
+* fix size of variable attribute constants
+* enable booting via EFI boot manager by default
+* correct the sequence of the EFI boot methods
+* correct finding the default EFI binary
+* don't delete variable from memory if update failed
+* fix append write behavior to non-existent variable
+* Use binman for testing capsule updates on the sandbox
+* Consider capsule test files in .gitignore and make clean
+
+=2D---------------------------------------------------------------
+Heinrich Schuchardt (9):
+       doc: missing :: in doc/usage/cmd/itest.rst
+       doc: improve description of FAT partition name generation
+       efi_loader: all variable attributes are 32bit
+       efi_loader: EFI_VARIABLE_READ_ONLY should be 32bit
+       efi_loader: handle EFI_VARIABLE_ENHANCED_AUTHENTICATED_ACCESS
+       boot: correct the default sequence of boot methods
+       boot: enable booting via EFI boot manager by default
+       efi_loader: move HOST_ARCH to version_autogenerated.h
+       boot: correct finding the default EFI binary
+
+Ilias Apalodimas (3):
+       efi_loader: Don't delete variable from memory if adding a new one
+failed
+       efi_loader: access __efi_runtime_start/stop without &
+       efi_loader: access __efi_runtime_rel_start/stop without &
+
+Masahisa Kojima (1):
+       efi_loader: fix append write behavior to non-existent variable
+
+Sughosh Ganu (4):
+       sandbox: capsule: remove capsule related configs
+       sandbox: capsule: binman: generate some capsules as part of build
+       capsule: add the generated capsules to gitignore
+       capsule: Makefile: add the generated files to CLEAN_FILES list
+
+  .gitignore                                         |   3 +
+  Makefile                                           |   4 +-
+  arch/sandbox/config.mk                             |   2 -
+  arch/sandbox/dts/sandbox.dts                       |   4 +
+  arch/sandbox/dts/sandbox_capsule.dtsi              | 169
++++++++++++++++++++++
+  arch/sandbox/dts/test.dts                          |   4 +
+  boot/Kconfig                                       |  10 ++
+  boot/Makefile                                      |   2 +-
+  boot/bootmeth_efi.c                                |  46 +-----
+  boot/bootmeth_efi_mgr.c                            |   2 +-
+  boot/bootmeth_pxe.c                                |   2 +-
+  configs/sandbox64_defconfig                        |   5 -
+  configs/sandbox_noinst_defconfig                   |   2 -
+  configs/sandbox_spl_defconfig                      |   2 -
+  configs/sandbox_vpl_defconfig                      |   2 -
+  doc/usage/cmd/itest.rst                            |   2 +
+  doc/usage/partitions.rst                           |  17 ++-
+  include/efi.h                                      |  18 ++-
+  include/efi_variable.h                             |   2 +-
+  include/host_arch.h                                |   2 +
+  lib/efi_loader/Kconfig                             |   1 -
+  lib/efi_loader/Makefile                            |   3 +-
+  lib/efi_loader/efi_memory.c                        |   4 +-
+  lib/efi_loader/efi_runtime.c                       |   6 +-
+  lib/efi_loader/efi_var_common.c                    |   2 +-
+  lib/efi_loader/efi_variable.c                      |  45 ++++--
+  lib/efi_selftest/efi_selftest_variables.c          |  48 +++++-
+  test/boot/bootflow.c                               |   6 +-
+  .../tests/test_efi_capsule/capsule_gen_binman.dts  | 167
++-------------------
+  test/py/tests/test_efi_capsule/conftest.py         |   1 +
+  30 files changed, 326 insertions(+), 257 deletions(-)
+  create mode 100644 arch/sandbox/dts/sandbox_capsule.dtsi
