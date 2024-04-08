@@ -4,78 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82517C67861
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 13:14:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 321ADC67861
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 13:16:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E37BB8810E;
-	Mon,  8 Apr 2024 15:14:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 960A687F78;
+	Mon,  8 Apr 2024 15:16:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jVphqmKY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Sqtk8zYz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1491488118; Mon,  8 Apr 2024 15:14:08 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id DC6D18808D; Mon,  8 Apr 2024 15:16:42 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E978B87BA8
- for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 15:14:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CEC7887D08
+ for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 15:16:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a51addddbd4so295125566b.0
- for <u-boot@lists.denx.de>; Mon, 08 Apr 2024 06:14:05 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-41693741eceso1412925e9.3
+ for <u-boot@lists.denx.de>; Mon, 08 Apr 2024 06:16:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712582045; x=1713186845; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Gr8exj3MADmarQxyGZ2PsOGXrpJuCB1uJDlLoDoKlyM=;
- b=jVphqmKYoerDf8sduHIxsOcHbYPBurDzZfSbjVxtk1HavAgY2LdXDUe+VUM6VCC7so
- HBZG8Q+N3c3As3Onx7QICmqmCk+Vd9JH4uqpvQVvHca88/KJoAAhfs/6QvPEIcn/ohux
- 0RIWNwXPud9/MPM4elon8KjCBmnhSpwTL+/IUp4mhoHX1WIJV6P5a1aIC+drTSJV7uGE
- UD74Ph1CpGrMTdXk2EbFywwK8w1CGqpahRbWWJsvi6m4u8VOjsFWDLiYwESS512nDlYC
- erGnbY3UPUeqMvUObmnXSRt0HC9YbidUmu/la+cGLBZDJnl6EnBOKhKzptPl60OFBoXy
- YsnQ==
+ d=linaro.org; s=google; t=1712582200; x=1713187000; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=qKuT+usC2O0AihMVxRuPc/+uJFqGIXBIcRmUiK8iyfA=;
+ b=Sqtk8zYz6mGhRjV0CE2bt/WFCRdJQmVBxC+k+W29HuDuWS6gQJj4GEpNU5+eH49iYI
+ HjNICdojUfLX6P+QnoAAE6OpwAEYxnogSIrb2O69IEm80WgRMTLntvIi/JHtQd6SzdsM
+ DqGU50NhRsJ4VmvCZ2r2y/98dgHnpmrMdhf4ue0BUIGCiPu10h4GXvZFLmchAkF9RPwF
+ eg+17ghL2U8TH+gcsHCOFd9nCLtF0Bezi5BkNFZAOc7DSyHobVaZXewEr3f3PfmtxHeU
+ FVJ6rSCRHOPv9SCfiIY6FilFRXDn+ODF6Q6KIkuL3kRfCd+qehiKkGI81Dv8YIpB1Z/P
+ IXdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712582045; x=1713186845;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Gr8exj3MADmarQxyGZ2PsOGXrpJuCB1uJDlLoDoKlyM=;
- b=nlGkpUN/oS+P8JKovkTNm/XAGGmBv3BTX4zB2sqKeCKw4ACX19l9NNjNCrNwg4n2qF
- 2jhX3uXNM1fnNtYx/Vw0s7zqnpTHYTNL9DiHJd+ekf8Als7aRpoDkMKJdkQ60MtsMAH5
- AGoYW4jhH0ZPBH3GLWxQUnGaTSQxRXvLDs/0oIhdfrGTi8IbKJmaEE/s+Q3aX3a/1xKf
- qI8GE157ETrxAD6YD9Ufqmfx+W3Hrv9eRyCwKMw+kLu0Ba/7VCf9IPa2IKq5HvGlm2Tq
- 8dK6SoEoUn6YqRp4cw5X7/DjweAyD4ktm8c8kdkuMjvpC6ed+ynGwm0wlEi5Ox2CnWFL
- 4eFQ==
-X-Gm-Message-State: AOJu0Yxly08BIBP7MKu3LEnjq4JGdMsTG1QBZJoeKGgUFr0hpPhT+RF3
- 005c+sJeKgexq2jcf90xKIgMIBuIG9e6JpbHP8diWcoPYqYXgpOHFd7jGklQVzk=
-X-Google-Smtp-Source: AGHT+IG4ZbboO3BbA7gj0coNqPydnrKSXHFYI8/kokOr0PaKe/FX/OWZRGK17SS6WDGD1jV/pY8q2A==
-X-Received: by 2002:a17:906:11da:b0:a4e:146c:ff09 with SMTP id
- o26-20020a17090611da00b00a4e146cff09mr5636412eja.7.1712582045297; 
- Mon, 08 Apr 2024 06:14:05 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::570d? ([2a02:8109:aa0d:be00::570d])
+ d=1e100.net; s=20230601; t=1712582200; x=1713187000;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=qKuT+usC2O0AihMVxRuPc/+uJFqGIXBIcRmUiK8iyfA=;
+ b=XJ9lXkEJQ38STfOMhdBFMV+L+csWc2dgjajTwGj1IoU2B9Px8SK9iyNqiG/H4TMQG0
+ ACUSPAdUpom9tLY1wQYuChnr/Tod5Ekoa9rQGAXC1/hkIRBDiX92BINJDtBK+XjI5VNd
+ zuKIGCyoBRIfKl8z70+EGgopVzEQB6PHV8JdPan3zQ7Ir5fNU6AxXTjoY9EmssgUSD4T
+ 6FrVjWtH04DP88iu+gfTlF0ustJ/9TqSETMAOibTZbDHDJ2LVEK2sbhJbMWi+dUkIMpx
+ c8Ktntn+1uDnMC9AsvwNMJOph7pvvBQqQ7hfErLwJbMuzw7qPG4ZQj4ASUwcxkCo3wQ/
+ XcMw==
+X-Gm-Message-State: AOJu0Yxoc/GJtSYwvSO+v7O6BA6OhkhmzcvP9tcbZO1vK5zC0GHi2IKZ
+ x/GFuakRN/TKWVQcxC80sB1N0Jf4k3zLMW+t6WkVKp8BSxzlQZHWdr2sFPzIeT4=
+X-Google-Smtp-Source: AGHT+IEnXeT1nY3fk9ulLGYBWWC7RIpu4XO9f/EkimPmLgS5aPpnqFAOGYWKb99cTZEat5bZ2u6xAQ==
+X-Received: by 2002:a05:600c:3b97:b0:416:6a35:cd1a with SMTP id
+ n23-20020a05600c3b9700b004166a35cd1amr1940754wms.13.1712582199842; 
+ Mon, 08 Apr 2024 06:16:39 -0700 (PDT)
+Received: from ?IPV6:2a01:e0a:982:cbb0:b0c8:7091:4315:491e?
+ ([2a01:e0a:982:cbb0:b0c8:7091:4315:491e])
  by smtp.gmail.com with ESMTPSA id
- g7-20020a056402428700b0056e664f732dsm812414edc.43.2024.04.08.06.14.04
+ m6-20020a05600c3b0600b0041668162b45sm4462643wms.26.2024.04.08.06.16.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 08 Apr 2024 06:14:04 -0700 (PDT)
-Message-ID: <e9dcc5f1-238f-4949-9ef5-86a2b4955a4b@linaro.org>
-Date: Mon, 8 Apr 2024 15:14:03 +0200
+ Mon, 08 Apr 2024 06:16:39 -0700 (PDT)
+Message-ID: <e7383615-8a11-4d7e-bd3f-e7a6c68aeabe@linaro.org>
+Date: Mon, 8 Apr 2024 15:16:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
 Subject: Re: [PATCH 3/4] pinctrl: qcom: add sm8250 pinctrl driver
-To: Tom Rini <trini@konsulko.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de
 References: <20240408-b4-qcom-rbx-soc-v1-0-900db37b8bdf@linaro.org>
  <20240408-b4-qcom-rbx-soc-v1-3-900db37b8bdf@linaro.org>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
 In-Reply-To: <20240408-b4-qcom-rbx-soc-v1-3-900db37b8bdf@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
@@ -90,12 +117,11 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
-
-
 
 On 08/04/2024 15:07, Caleb Connolly wrote:
 > This SoC features a pinctrl block with north, south, and west tiles
@@ -167,11 +193,6 @@ On 08/04/2024 15:07, Caleb Connolly wrote:
 > +								 { "gpio", 0 },
 > +								 {
 > +									 "sdc2_clk",
-
-Not sure what happened here.
-
-Also this patch is missing the special pins configuration. will fix both 
-in v2.
 > +								 } };
 > +
 > +static const unsigned int sm8250_pin_offsets[] = {
@@ -237,6 +258,10 @@ in v2.
 > +static const struct udevice_id msm_pinctrl_ids[] = { { .compatible = "qcom,sm8250-pinctrl",
 > +						       .data = (ulong)&sm8250_data },
 > +						     { /* Sentinal */ } };
+
+
+You may also want to fix aligment here and s/Sentinal/Sentinel/
+
 > +
 > +U_BOOT_DRIVER(pinctrl_sm8250) = {
 > +	.name = "pinctrl_sm8250",
@@ -247,5 +272,3 @@ in v2.
 > +};
 > 
 
--- 
-// Caleb (they/them)
