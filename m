@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A850CD1292
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:58:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6964ACD1292
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:58:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E84C8837D;
-	Tue,  9 Apr 2024 00:46:49 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 17E4D8836D;
+	Tue,  9 Apr 2024 00:46:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="uWIPfxEd";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="UKs26Xl7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C18988134; Tue,  9 Apr 2024 00:32:14 +0200 (CEST)
+ id 4B1E6880FE; Tue,  9 Apr 2024 00:32:14 +0200 (CEST)
 Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B7B388188
- for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 00:32:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B759E880DB
+ for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 00:32:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438MVwYx111555;
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438MVwug111536;
  Mon, 8 Apr 2024 17:31:58 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1712615518;
- bh=0sXOS8f9FZ3Ab/6MEPFVQk53Ry4TTDBtb0N96af8rPU=;
+ bh=YvS5JCQ1zctBXJMcgUS5xnAVlyNXFK5GspTMWluc3sI=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=uWIPfxEd0kAhY7EtGSa0P/VTm3/J+Ic20NB+CGXi4OkloN2tcBM32Cu97zqy/Tb9O
- yYOEZ44Qi8Q/0Fy45yB/yp553i9U3XhfRxYJOu/y3vBlPGt7i7seJog/0HUaj6Z9jA
- +P2wQr0buljepaO8S0tQPiS89wQLHq1RHd5rTPBE=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438MVwul116288
+ b=UKs26Xl797cB+N2LTpdHPb6diaqltacjrJLsFYsd2zoM8EuzX1l8pyst35QcPzbaX
+ rrZMeax/82gl8IfTeOtOhGWBOc0WM40Y588uDnYqW9oB3UL4UYnEa6Kj+872y2ra67
+ VKAtRsfmVQe8ADm7yOKRkcPlsYhxPx/RZM9Enlig=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438MVwkb003377
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 8 Apr 2024 17:31:58 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
- Apr 2024 17:31:58 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 17:31:57 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 8 Apr 2024 17:31:58 -0500
+ Frontend Transport; Mon, 8 Apr 2024 17:31:57 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438MVwAZ081199;
- Mon, 8 Apr 2024 17:31:58 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438MVvho081164;
+ Mon, 8 Apr 2024 17:31:57 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
@@ -64,10 +64,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
  Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v2 15/16] board: beagleboneai64: Define capsule update
- firmware info
-Date: Mon, 8 Apr 2024 17:31:33 -0500
-Message-ID: <20240408223134.165877-16-j-humphreys@ti.com>
+Subject: [PATCH v2 01/16] board: Define GUIDs for firmware images
+Date: Mon, 8 Apr 2024 17:31:19 -0500
+Message-ID: <20240408223134.165877-2-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240408223134.165877-1-j-humphreys@ti.com>
 References: <20240408223134.165877-1-j-humphreys@ti.com>
@@ -92,67 +91,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Define GUIDs for the different firmware images (tiboot3.bin, tispl.bin,
+u-boot.img, sysfw).
+
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- board/beagle/beagleboneai64/beagleboneai64.c | 38 ++++++++++++++++++++
- 1 file changed, 38 insertions(+)
+ include/configs/ti_armv7_common.h | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
 
-diff --git a/board/beagle/beagleboneai64/beagleboneai64.c b/board/beagle/beagleboneai64/beagleboneai64.c
-index c5b4ff7df47..b6ef1c137cb 100644
---- a/board/beagle/beagleboneai64/beagleboneai64.c
-+++ b/board/beagle/beagleboneai64/beagleboneai64.c
-@@ -7,6 +7,7 @@
-  * Copyright (C) 2022-2023 Robert Nelson, BeagleBoard.org Foundation
-  */
+diff --git a/include/configs/ti_armv7_common.h b/include/configs/ti_armv7_common.h
+index 3def7b1027e..4ce14a9b84c 100644
+--- a/include/configs/ti_armv7_common.h
++++ b/include/configs/ti_armv7_common.h
+@@ -16,6 +16,23 @@
+ #ifndef __CONFIG_TI_ARMV7_COMMON_H__
+ #define __CONFIG_TI_ARMV7_COMMON_H__
  
-+#include <efi_loader.h>
- #include <cpu_func.h>
- #include <env.h>
- #include <fdt_support.h>
-@@ -14,6 +15,43 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
-+struct efi_fw_image fw_images[] = {
-+	{
-+		.image_type_id = K3_TIBOOT3_IMAGE_GUID,
-+		.fw_name = u"K3_TIBOOT3",
-+		.image_index = 1,
-+	},
-+	{
-+		.image_type_id = K3_SPL_IMAGE_GUID,
-+		.fw_name = u"K3_SPL",
-+		.image_index = 2,
-+	},
-+	{
-+		.image_type_id = K3_UBOOT_IMAGE_GUID,
-+		.fw_name = u"K3_UBOOT",
-+		.image_index = 3,
-+	},
-+	{
-+		.image_type_id = K3_SYSFW_IMAGE_GUID,
-+		.fw_name = u"K3_SYSFW",
-+		.image_index = 4,
-+	}
-+};
++/* GUIDs for capsule updatable firmware images */
++#define K3_TIBOOT3_IMAGE_GUID \
++	EFI_GUID(0xe672b518, 0x7cd7, 0x4014, 0xbd, 0x8d, \
++		 0x40, 0x72, 0x4d, 0x0a, 0xd4, 0xdc)
 +
-+struct efi_capsule_update_info update_info = {
-+	.dfu_string = "mmc 0=tiboot3.bin raw 0 2000 mmcpart 1;tispl.bin fat 0 1;u-boot.img fat 0 1; sysfw.itb fat 0 1",
-+	.num_images = ARRAY_SIZE(fw_images),
-+	.images = fw_images,
-+};
++#define K3_SPL_IMAGE_GUID \
++	EFI_GUID(0x86f710ad, 0x10cf, 0x46ea, 0xac, 0x67, \
++		 0x85, 0x6a, 0xe0, 0x6e, 0xfa, 0xd2)
 +
-+void set_dfu_alt_info(char *interface, char *devstr)
-+{
-+	env_set("dfu_alt_info", update_info.dfu_string);
-+}
++#define K3_UBOOT_IMAGE_GUID \
++	EFI_GUID(0x81b58fb0, 0x3b00, 0x4add, 0xa2, 0x0a, \
++		 0xc1, 0x85, 0xbb, 0xac, 0xa1, 0xed)
 +
-+#endif /* EFI_HAVE_CAPSULE_SUPPORT */
++#define K3_SYSFW_IMAGE_GUID \
++	EFI_GUID(0x6fd10680, 0x361b, 0x431f, 0x80, 0xaa, \
++		 0x89, 0x94, 0x55, 0x81, 0x9e, 0x11)
 +
- int board_init(void)
- {
- 	return 0;
+ /*
+  * We setup defaults based on constraints from the Linux kernel, which should
+  * also be safe elsewhere.  We have the default load at 32MB into DDR (for
 -- 
 2.34.1
 
