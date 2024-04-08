@@ -4,56 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37CD2C67861
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 21:17:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E771EC67861
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:46:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7587088165;
-	Mon,  8 Apr 2024 23:17:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E85AF88165;
+	Tue,  9 Apr 2024 00:46:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="mG2uk6CE";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NElryqob";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43E4C8817C; Mon,  8 Apr 2024 23:17:27 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 26B0088179; Mon,  8 Apr 2024 23:12:20 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E58188165
- for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 23:17:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 1383587EB4
+ for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 23:12:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LCDqa094168;
+ Mon, 8 Apr 2024 16:12:13 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1712610733;
+ bh=9W0+l4l62NJVAbXaSqfNqMrwakrEVeTqcaj3CX6FRXI=;
+ h=From:To:CC:Subject:Date;
+ b=NElryqobLq5ru3qp3KHaJChFN45ouqfssZW0XDTG8HhMulzg7HVt1b1bGOAfqJjLh
+ 5jGfLSfKYJrIZCO8DSuXZAwU7hdAeMNbW9IFCCp9rdZ8/gDFQUTZ0VvMuPoE4m8+vp
+ NyVMJ4wzngokQNWnMJW/VG1CA/972Lr/Y9D6k9fk=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LCD2c052298
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 8 Apr 2024 16:12:13 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
+ Apr 2024 16:12:12 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 8 Apr 2024 16:12:12 -0500
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LCCnx014533;
+ Mon, 8 Apr 2024 16:12:12 -0500
+From: Jonathan Humphreys <j-humphreys@ti.com>
+To: Simon Glass <sjg@chromium.org>, Neha Malcom Francis <n-francis@ti.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Andrew Davis <afd@ti.com>, Roger Quadros
+ <rogerq@kernel.org>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>
+CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
+Subject: [PATCH 00/15] configs: ti: Enable basic settings for SystemReady ACS
+Date: Mon, 8 Apr 2024 16:10:45 -0500
+Message-ID: <20240408211100.93936-1-j-humphreys@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1712611045;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RGZPQpAN01ckjtqeo2bf9+p7HfyADyYvt6/8FIrVD4E=;
- b=mG2uk6CEVcUfD+OtF0Ke4sitvDnWwwXspoTKKk7kBFqkSEXrqwOmYND4PE6RtNqgpkhauE
- WCJ57BCYHyoEAlBVrOw4g8IyipIxUjCvIJ/gq6Wz/LBiES9b6QDbf5qkHipBx/wf506XtV
- Y5MSXul5UOwLuvIdDaqceRSc9Ye+aQcP+1BCBpTW2Xt/rh1N7d78Om+M0qEvKfIhAOidfs
- Sp4qsj667j2a7sAAzsfHWlvT8Q9GXeVzkW8C+CXA8FbMh4wtGx619wYPBM0Tt0TK2iyqhB
- Vjsm81Zanqwg2+rDHRLQY/PanmNzCGXD/ZwJugkW6dsQ2XJsKjwR9GTpVyiiwQ==
-Date: Mon, 08 Apr 2024 23:17:25 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom
- Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/2] mmc: Add support for the no-mmc-hs400 prop
-In-Reply-To: <20240408210619.3749231-2-jonas@kwiboo.se>
-References: <20240408210619.3749231-1-jonas@kwiboo.se>
- <20240408210619.3749231-2-jonas@kwiboo.se>
-Message-ID: <8a08e5e3d7b1001f28878154078412b4@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Mailman-Approved-At: Tue, 09 Apr 2024 00:46:15 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,37 +84,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-04-08 23:06, Jonas Karlman wrote:
-> The linux commit f722e650d965 ("mmc: core: add support for disabling
-> HS400 mode via DT") added support for a no-mmc-hs400 prop.
-> 
-> Add support for the no-mmc-hs400 prop to disable HS400 host caps.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Set basic settings needed for System Ready IR ACS testing, for several TI SoC
+based platforms: AM64, AM62, AM62p, BeaglePlay, J7, and BeagleboneAI.
 
-The description above should use "Linux" instead od "linux", but that's
-perhaps not worth sending the v2.
+For AM64, AM62, and AM62p, also includes some config cleanup.  Should be no
+functional change.
 
-Otherwise, looking good to me.  Great job catching this!
+Jonathan Humphreys (15):
+  configs: am64x: cosmetic config cleanup
+  configs: am64x: Enable basic EFI CMD support
+  configs: am64x: Enable RTC emulation
+  configs: j721e: Enable basic EFI CMD support
+  configs: j721e: Enable RTC emulation
+  configs: beagleplay: Enable basic EFI CMD support
+  configs: beagleplay: Enable RTC emulation
+  configs: am62px: cosmetic config cleanup
+  configs: am62px: Enable basic EFI CMD support
+  configs: am62px: Enable RTC emulation
+  configs: am62x: cosmetic config cleanup
+  configs: am62x: Enable basic EFI CMD support
+  configs: am62x: Enable RTC emulation
+  configs: beagleboneai64: Enable basic EFI CMD support
+  configs: beagleboneai64: Enable RTC emulation
 
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+ configs/am62px_evm_a53_defconfig           | 21 +++++++++++----------
+ configs/am62x_beagleplay_a53_defconfig     |  6 ++++++
+ configs/am62x_evm_a53_defconfig            | 14 ++++++++++----
+ configs/am64x_evm_a53_defconfig            | 16 +++++++++++-----
+ configs/j721e_beagleboneai64_a72_defconfig |  6 ++++++
+ configs/j721e_evm_a72_defconfig            |  6 ++++++
+ 6 files changed, 50 insertions(+), 19 deletions(-)
 
-> ---
->  drivers/mmc/mmc-uclass.c | 3 +++
->  1 file changed, 3 insertions(+)
-> 
-> diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-> index 1349da72b102..1b454e8ec758 100644
-> --- a/drivers/mmc/mmc-uclass.c
-> +++ b/drivers/mmc/mmc-uclass.c
-> @@ -256,6 +256,9 @@ int mmc_of_parse(struct udevice *dev, struct
-> mmc_config *cfg)
->  		cfg->host_caps |= MMC_CAP(MMC_HS_400) | MMC_CAP(MMC_HS_200);
->  	if (dev_read_bool(dev, "mmc-hs400-enhanced-strobe"))
->  		cfg->host_caps |= MMC_CAP(MMC_HS_400_ES);
-> +	if (dev_read_bool(dev, "no-mmc-hs400"))
-> +		cfg->host_caps &= ~(MMC_CAP(MMC_HS_400) |
-> +				    MMC_CAP(MMC_HS_400_ES));
-> 
->  	if (dev_read_bool(dev, "non-removable")) {
->  		cfg->host_caps |= MMC_CAP_NONREMOVABLE;
+-- 
+2.34.1
+
