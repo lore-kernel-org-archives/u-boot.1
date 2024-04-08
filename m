@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D4E9C67861
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 08:49:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 706E0C67861
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 08:50:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48BD387947;
-	Mon,  8 Apr 2024 10:49:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C123587FA3;
+	Mon,  8 Apr 2024 10:50:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="N1ePygAg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="l7GcF+A1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E46E1879AF; Mon,  8 Apr 2024 10:49:54 +0200 (CEST)
-Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
- [IPv6:2607:f8b0:4864:20::329])
+ id A0F7A8800C; Mon,  8 Apr 2024 10:50:35 +0200 (CEST)
+Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
+ [IPv6:2607:f8b0:4864:20::436])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A609186E40
- for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 10:49:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8957687947
+ for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 10:50:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-ot1-x329.google.com with SMTP id
- 46e09a7af769-6ea147a6a95so407171a34.3
- for <u-boot@lists.denx.de>; Mon, 08 Apr 2024 01:49:52 -0700 (PDT)
+Received: by mail-pf1-x436.google.com with SMTP id
+ d2e1a72fcca58-6ecf8ebff50so2355527b3a.1
+ for <u-boot@lists.denx.de>; Mon, 08 Apr 2024 01:50:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712566191; x=1713170991; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1712566232; x=1713171032; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1CniNeUP/B4JGx10cOVk2Yr6HgVOymiIFFDhXaDZYoc=;
- b=N1ePygAgM4z+Z0s3n8vqNnoZXf0bnhqKmI/r21g3M/c5N3naFq4UvzPj5olxuX9ml5
- 5//jBxjZ+399ZGY3/ByagWHPdoIaRF1IrsVG9UFxtg3fTpblmB0SCHwIAA57Z7umuprf
- fw849gdfUiT5UbzxugjKpdjWiEztLYRJ/Q3LuU/V5aNNSe4Z3lIfJZIflB6dke8r2QMI
- 4SvtzYEf3148N+VCU0VOCnkOwjwHCP8oIIxUBF2aQYtJE6CMF8khSetX4F+VgyO9tta0
- y2tcRDLcEEEekIEJ8Cu+kEpMi/lwqE9H1h9sB/+6RYkHV691XEMtIQ8pTGal0ZLz13Y9
- G5mw==
+ bh=2WiVyr3KhEMRv+2m6ButUw/PNeVo6sjHFNftN/JTiGQ=;
+ b=l7GcF+A1Y+ldnzytlO28pV4bPgaizkkv4HhfmhdAgcO86+oZkbNH/6h01crSqvJAk5
+ M0hScnGXaMwVRZ7GAqwIRo0vUOdJVY93qPrVdMrP0sc6YeHCQOG242jllzsSKyEdzj1v
+ JxrBDWp5/QEh2+FFsKB0V6JHESfEnC7uPfGP7rti/xvmlVrRQs4vOsovfxh44wI+Tmb1
+ /1dJC2/sUVsO77xpke/44x4zvHywMx2fvMSJMD/+cxf4t1hfxw24zttJVz+2ox28lIOt
+ kkXG7YVP+iIpqp3hvaqfJnN16cDUTRg5LrzZ6FSaMMZd4vFUdjbFosLE7PB/cODdloU7
+ LwXw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712566191; x=1713170991;
+ d=1e100.net; s=20230601; t=1712566232; x=1713171032;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1CniNeUP/B4JGx10cOVk2Yr6HgVOymiIFFDhXaDZYoc=;
- b=BoydAmUEQJ++mX8Eiwg11BI7ySKcj+4LOLHyXVICd6YirjcRoo0+c4+cIEmq3D1VB9
- cxhFN1y6nQUZ8XUiIeEWJPab5LdJqRMJl2Ra43JMbosYIrbkEB0l5lpX99A0DM4kv+Hb
- fXLEFFHcG3IaYZLQg7CceacmIfkSyHl1OggyDShOZHeJJTeIY7hodCbN5Lz1l4Mf9PXm
- IaYgeYoZayCkXlQRQIB5VGz1JZ9CxdXgfIozEIkuV7j/HY8Ds+aEzWbveGBRgnk3qNL4
- Wdak+gZaGLc2hRsCEdOSNYNrYC2SBgY2Mv4Fvh0fHEL5drfOR8s+7jYR8msqUFzONMws
- U0gA==
-X-Gm-Message-State: AOJu0Yx6k8Np4rjuQrfxpcE4ccQpQu+2ME6Q1HLMcCRvUx/eLsKZpnAS
- +dvmiHHBpauy/XahtYCzaK5reHrldxBLMFcWHoqOzIU4A9eA0Jue
-X-Google-Smtp-Source: AGHT+IFNyQLw8KX2KdFeRxMdS7QGPV09D9oyb6MRn8cjAoTnZtRcng/x1oxRfES2SOFYlBVHlb62KA==
-X-Received: by 2002:aca:2204:0:b0:3c5:f133:1398 with SMTP id
- b4-20020aca2204000000b003c5f1331398mr2794208oic.25.1712566191280; 
- Mon, 08 Apr 2024 01:49:51 -0700 (PDT)
+ bh=2WiVyr3KhEMRv+2m6ButUw/PNeVo6sjHFNftN/JTiGQ=;
+ b=m6Oy4ecCVsbq40k9Ky0RZPrMqxGIxGIfGYvABb63w1TvsB30wzcFuSF/AhyiXD7A3k
+ Jh5jDwyh2La7jvXhw5VHzqWfGDCu0tjGb+Vy/KMSj4NYUSzn+SNNVwHd4z8WlGBv9PeE
+ h0B0OMnc0AYiBaY/iYcmugIicg7ABnaL1uomVaAirEl0TrP8A+yDHXLT54DZxZ0peOY6
+ OKEV785NxVgkMVscTLUPNVlI81ktfZCACdPanLNOOz9BLpwbu+zq9Yjdqdxc45w+IWlZ
+ IGaeaEEttfwhST/c/z9ABU6nRmKu7M2IjAiJSWj9AsHM8vPpBLX/m1Xhi1Pexm4QF8An
+ fDBg==
+X-Gm-Message-State: AOJu0Yw28HQwXR36FUd2w6FXcq/MJyNxRCzaqRujPF5ZB+L7ALo4SDgn
+ eIk5OFJ9OkT7kfiUyMesxwDui63MX3jee4XB6jZRo+63TUzpr4JA
+X-Google-Smtp-Source: AGHT+IGlwGoKJatk/2H9Pntq+VgsKSn3wFxaUYf/tT0JSSIrGtGXcZdztEQ7BKKiJw/+Qc/P43vUWg==
+X-Received: by 2002:aa7:8884:0:b0:6ed:41f4:1886 with SMTP id
+ z4-20020aa78884000000b006ed41f41886mr1757493pfe.8.1712566231996; 
+ Mon, 08 Apr 2024 01:50:31 -0700 (PDT)
 Received: from localhost.localdomain ([116.89.141.171])
  by smtp.gmail.com with ESMTPSA id
- h5-20020a056a00218500b006ed4f616ec4sm723355pfi.57.2024.04.08.01.49.48
+ z18-20020aa79912000000b006eaa21301a7sm5973228pff.162.2024.04.08.01.50.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Apr 2024 01:49:50 -0700 (PDT)
+ Mon, 08 Apr 2024 01:50:31 -0700 (PDT)
 From: Jim Liu <jim.t90615@gmail.com>
 X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
 To: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, jim.t90615@gmail.com,
  joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com
 Cc: u-boot@lists.denx.de,
 	Parvathi Bhogaraju <pbhogaraju@microsoft.com>
-Subject: [PATCH v1] net: designware: Invalidate RX buffer cache before freeing
- the DMA descriptor
-Date: Mon,  8 Apr 2024 16:49:02 +0800
-Message-Id: <20240408084902.2848964-1-JJLIU0@nuvoton.com>
+Subject: [PATCH v1] net: designware: Pass all multicast frames in designware
+ driver
+Date: Mon,  8 Apr 2024 16:50:17 +0800
+Message-Id: <20240408085017.2849211-1-JJLIU0@nuvoton.com>
 X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,13 +92,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In IPv6 context, the ICMP and UDP checksum byte in the RX packet
-is initially set to 0, recaclculated, and then re-inserted.
-This process can result in a dirty cache line. To prevent issues,
-it is essential to invalidate cache for the RX buffer before freeing
-the descriptor for next DMA transfer.
-This ensure that the dirty cache line doesn't inadvertently written back
-due to cache eviction, there by corrupting the RX buffer
+Allowing multicast packets is required for IPv6 neighbor discovery
+protocol.
 
 Signed-off-by: Parvathi Bhogaraju <pbhogaraju@microsoft.com>
 Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
@@ -107,21 +102,21 @@ Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
  1 file changed, 5 insertions(+)
 
 diff --git a/drivers/net/designware.c b/drivers/net/designware.c
-index c222197b11..03b531c667 100644
+index 03b531c667..4c1642b29a 100644
 --- a/drivers/net/designware.c
 +++ b/drivers/net/designware.c
-@@ -554,6 +554,11 @@ static int _dw_free_pkt(struct dw_eth_dev *priv)
- 	ulong desc_start = (ulong)desc_p;
- 	ulong desc_end = desc_start +
- 		roundup(sizeof(*desc_p), ARCH_DMA_MINALIGN);
-+	ulong data_start = desc_p->dmamac_addr;
-+	ulong data_end = data_start + roundup(CFG_ETH_BUFSIZE, ARCH_DMA_MINALIGN);
-+
-+	/* Invalidate the descriptor buffer data */
-+	invalidate_dcache_range(data_start, data_end);
+@@ -352,6 +352,11 @@ static int dw_adjust_link(struct dw_eth_dev *priv, struct eth_mac_regs *mac_p,
+ 	       (phydev->duplex) ? "full" : "half",
+ 	       (phydev->port == PORT_FIBRE) ? ", fiber mode" : "");
  
- 	/*
- 	 * Make the current descriptor valid again and go to
++#ifdef CONFIG_ARCH_NPCM8XX
++	/* Pass all Multicast Frames */
++	setbits_le32(&mac_p->framefilt, BIT(4));
++
++#endif
+ 	return 0;
+ }
+ 
 -- 
 2.25.1
 
