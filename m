@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FCFBC67861
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:50:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE31C67861
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:51:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9619D88246;
-	Tue,  9 Apr 2024 00:46:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1BFF78824B;
+	Tue,  9 Apr 2024 00:46:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qN13stEv";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eXV9KTj4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7C66B8818E; Mon,  8 Apr 2024 23:24:01 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 2F9A3880FE; Mon,  8 Apr 2024 23:24:02 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74E1B88195
+ by phobos.denx.de (Postfix) with ESMTPS id 5809488193
  for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 23:23:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LNlhF055296;
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LNlKb100291;
  Mon, 8 Apr 2024 16:23:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1712611427;
- bh=ADn6TZ404glnlENxMU4EfL0J6gAPszMkg7xwx8Vaqlw=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=qN13stEvn6rqVjpHOK5reV1LMoYnGYXvO0xHHqVmnTadlSTsXCnmYdB8R1K3Yglyk
- W1OgbguHeoaqZqkADjoTcXQwNhK3xvgcYjRYWLLC+SdceRqUZ00P51iLKeR41o1z+H
- ejdP+gahCGIPgPn892JZLbuenmsprsi13dIGUpGk=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LNlhF018702
+ bh=hEysH64j6q8IFRNjlvm/E/svTBQKL3lrCLZ32MizxRA=;
+ h=From:To:CC:Subject:Date;
+ b=eXV9KTj4I38oj77uMxPDzEMyTlyeJQ9V9ZAAoqhNfWxyGDjuigScMd5IiAL993UHj
+ pcbMy48gc8RJamhyWXixETYDTDGQGxBtFTdtvpskH+e3IPImczyuukgaiUYO8pE1On
+ 5Y1nKEPt4v9XU4GAwKF0Kz7ykk82b/i9KOK8CDH0=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LNl27077991
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 8 Apr 2024 16:23:47 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
  Apr 2024 16:23:47 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Mon, 8 Apr 2024 16:23:47 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LNlBf086455;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LNl3l086440;
  Mon, 8 Apr 2024 16:23:47 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -64,12 +64,10 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
  Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH 08/16] configs: beagleplay: Enable EFI capsule update
-Date: Mon, 8 Apr 2024 16:22:47 -0500
-Message-ID: <20240408212255.95255-9-j-humphreys@ti.com>
+Subject: [PATCH 00/16] EFI: ti: Enable EFI capsule updates
+Date: Mon, 8 Apr 2024 16:22:39 -0500
+Message-ID: <20240408212255.95255-1-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240408212255.95255-1-j-humphreys@ti.com>
-References: <20240408212255.95255-1-j-humphreys@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -91,21 +89,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
----
- configs/am62x_beagleplay_a53_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+Enable on disk capsule updates, which includes defining the firmware components
+(tiboot3, spl, u-boot) and enabling processing of raw capsule updates.
 
-diff --git a/configs/am62x_beagleplay_a53_defconfig b/configs/am62x_beagleplay_a53_defconfig
-index 68e103f58dc..23b9c466248 100644
---- a/configs/am62x_beagleplay_a53_defconfig
-+++ b/configs/am62x_beagleplay_a53_defconfig
-@@ -124,3 +124,5 @@ CONFIG_EXT4_WRITE=y
- CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
- CONFIG_LZO=y
- CONFIG_EFI_SET_TIME=y
-+CONFIG_EFI_CAPSULE_ON_DISK=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+This is enabled for several TI SoC based platforms: AM64, AM62, AM62p,
+BeaglePlay, J7, and BeagleboneAI.
+
+This series also includes enabling seral flash DFU for AM62 and MMC DFU for
+beagleplay, and adding the sysreset controller node for AM62 to enable system
+reset.
+
+Jonathan Humphreys (16):
+  board: Define GUIDs for firmware images
+  board: am64x: Define capsule update firmware info
+  configs: am64x: Enable EFI capsule update
+  board: j721e: Define capsule update firmware info
+  configs: j721e: Enable EFI capsule update
+  board: beagleplay: Define capsule update firmware info
+  configs: beagleplay: Enable DFU for MMC
+  configs: beagleplay: Enable EFI capsule update
+  board: am62px: Define capsule update firmware info
+  configs: am62px: Enable EFI capsule update
+  configs: am62x: Enable serial flash DFU
+  arm: dts: k3-am625-sk-u-boot: Add sysreset-controller node
+  board: am62x: Define capsule update firmware info
+  configs: am62x: Enable EFI capsule update
+  board: beagleboneai64: Define capsule update firmware info
+  configs: beagleboneai64: Enable EFI capsule update
+
+ arch/arm/dts/k3-am625-sk-u-boot.dtsi         |  9 +++++
+ board/beagle/beagleboneai64/beagleboneai64.c | 33 +++++++++++++++++
+ board/beagle/beagleplay/beagleplay.c         | 33 +++++++++++++++++
+ board/ti/am62px/evm.c                        | 32 +++++++++++++++++
+ board/ti/am62x/evm.c                         | 32 +++++++++++++++++
+ board/ti/am64x/evm.c                         | 33 +++++++++++++++++
+ board/ti/j721e/evm.c                         | 38 ++++++++++++++++++++
+ configs/am62px_evm_a53_defconfig             |  2 ++
+ configs/am62x_beagleplay_a53_defconfig       |  5 +++
+ configs/am62x_evm_a53_defconfig              |  3 ++
+ configs/am64x_evm_a53_defconfig              |  2 ++
+ configs/j721e_beagleboneai64_a72_defconfig   |  2 ++
+ configs/j721e_evm_a72_defconfig              |  2 ++
+ include/configs/ti_armv7_common.h            | 17 +++++++++
+ 14 files changed, 243 insertions(+)
+
 -- 
 2.34.1
 
