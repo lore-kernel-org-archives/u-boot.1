@@ -4,72 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96DE9C67861
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:51:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E7EFC67861
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:52:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3BC74882AD;
+	by phobos.denx.de (Postfix) with ESMTP id 9F72D882C0;
 	Tue,  9 Apr 2024 00:46:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kKTlE2cU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GxjmqSSK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57F138815E; Mon,  8 Apr 2024 23:24:04 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 912FF8814A; Mon,  8 Apr 2024 23:29:08 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4FD78819D
- for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 23:23:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18C8F880FE
+ for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 23:29:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LNlpa055292;
- Mon, 8 Apr 2024 16:23:47 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LT0Xh101119;
+ Mon, 8 Apr 2024 16:29:00 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1712611427;
- bh=mDXVc0dFG5DiBqrrDt4M5g0PP05dAG9RCYZ716vTZ9g=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=kKTlE2cUHY2Q2poTUA1yKWUvLFtqheww8YzH4ksoxxZ11XyAjHtJInfNavyudtIie
- Bx/QdrmJUIxyejeLJu67LMTUgK2uMgf6tuEempxw49ztSZtTPoM75YdSgFSERtBxxX
- ErxpWUOQ/llp5ijMvRcyPmKiocq8gWLzUbA60n/U=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LNlRD077999
+ s=ti-com-17Q1; t=1712611740;
+ bh=zpA3YmYCQZn/aMvhd1f2eG6EuOksF362zz8JDkB9Aak=;
+ h=From:To:CC:Subject:Date;
+ b=GxjmqSSKsbIQCwUERqaAkyZt9OSqQMFie8dskYAMCjst7bsqFWNxnOQl5vdYCvoNv
+ YFn7ruIDhQw5eDP34D5nOdFsH662iHbu/HwxwhFW+q1z3YySjSmdQSaQO24lVb+5RF
+ f/tNC63Bz5DVTQ4+WsQLYomhLGlsIvPwJ61vq+bc=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LT0Mq022525
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 8 Apr 2024 16:23:47 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 8 Apr 2024 16:29:00 -0500
+Received: from DLEE100.ent.ti.com (157.170.170.30) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
- Apr 2024 16:23:47 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 16:28:59 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 8 Apr 2024 16:23:47 -0500
+ Frontend Transport; Mon, 8 Apr 2024 16:28:59 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LNlEp086449;
- Mon, 8 Apr 2024 16:23:47 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LSx3U041379;
+ Mon, 8 Apr 2024 16:28:59 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
- <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, Christian Gmeiner
- <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
- Nikhil M Jain <n-jain1@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Maxime Ripard
- <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>
+To: Masahisa Kojima <kojima.masahisa@socionext.com>, Sumit Garg
+ <sumit.garg@linaro.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, Ilias
+ Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH 05/16] configs: j721e: Enable EFI capsule update
-Date: Mon, 8 Apr 2024 16:22:44 -0500
-Message-ID: <20240408212255.95255-6-j-humphreys@ti.com>
+Subject: [PATCH] Makefile.lib: find capsule ESL dtsi file with
+ CONFIG_OF_UPSTREAM
+Date: Mon, 8 Apr 2024 16:28:43 -0500
+Message-ID: <20240408212843.95871-1-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240408212255.95255-1-j-humphreys@ti.com>
-References: <20240408212255.95255-1-j-humphreys@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -91,21 +82,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When CONFIG_OF_UPSTREAM is enabled, DTS files are in SOC subdirectories (vs the
+top level dts directory), but when CONFIG_EFI_CAPSULE_AUTHENTICATE is enabled,
+the dynamically created dtsi file containing the capsule ESL DT node is in the
+parent directory. This results in a build failure because the #include inserted
+in the DTS file is local to the current directory.  Update Makefile to have the
+DT preprocessing of #includes search in the parent (dts top level) directory
+too.
+
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- configs/j721e_evm_a72_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ scripts/Makefile.lib | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/configs/j721e_evm_a72_defconfig b/configs/j721e_evm_a72_defconfig
-index 077bf508328..b8840a556e1 100644
---- a/configs/j721e_evm_a72_defconfig
-+++ b/configs/j721e_evm_a72_defconfig
-@@ -210,3 +210,5 @@ CONFIG_UFS=y
- CONFIG_CADENCE_UFS=y
- CONFIG_TI_J721E_UFS=y
- CONFIG_EFI_SET_TIME=y
-+CONFIG_EFI_CAPSULE_ON_DISK=y
-+CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 12857316c58..62f87517c09 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -334,7 +334,7 @@ cmd_dtc = mkdir -p $(dir ${dtc-tmp}) ; \
+ 	(cat $< > $(pre-tmp)); \
+ 	$(foreach f,$(subst $(quote),,$(dtsi_include_list)), \
+ 	  echo '$(pound)include "$(f)"' >> $(pre-tmp);) \
+-	$(HOSTCC) -E $(dtc_cpp_flags) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
++	$(HOSTCC) -E $(dtc_cpp_flags) -I$(obj) -x assembler-with-cpp -o $(dtc-tmp) $(pre-tmp) ; \
+ 	$(DTC) -O dtb -o $@ -b 0 \
+ 		-i $(dir $<) -i $(u_boot_dtsi_loc) $(DTC_FLAGS) \
+ 		-d $(depfile).dtc.tmp $(dtc-tmp) || \
 -- 
 2.34.1
 
