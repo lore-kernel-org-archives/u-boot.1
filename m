@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 136C2CD128A
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 13:08:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0AC2CD128A
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 13:08:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 281178808A;
+	by phobos.denx.de (Postfix) with ESMTP id 8BFF3880FC;
 	Mon,  8 Apr 2024 15:08:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VGHMNYzt";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rRVw4LY5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9213F880AE; Mon,  8 Apr 2024 15:08:08 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 93B45880FB; Mon,  8 Apr 2024 15:08:09 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4542875E9
- for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 15:08:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 96A5187FBF
+ for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 15:08:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a4715991c32so629088066b.1
- for <u-boot@lists.denx.de>; Mon, 08 Apr 2024 06:08:06 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a51addddbd4so294144866b.0
+ for <u-boot@lists.denx.de>; Mon, 08 Apr 2024 06:08:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712581686; x=1713186486; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712581687; x=1713186487; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=WpEo3xuwcmeG5XEZhc+q8FFKON3jx1or5TkMtm3IpG4=;
- b=VGHMNYztwq4zkWEvP4okPmgPJu2gsuo/bEmCzSIldxPNpysfN/aqTraE2EilE8OOAr
- 6SOnDlKBrrkT9hwlQ2/8aywKF6wemxiyYu+0PaJzhKjJUYNMMq61KZMS8bM9s6OLHU/8
- kvNd45m1CssW+hSxBPh0XWTdkR1/gLT1jNuMh0R5s6IAgJaoTF6GWMWTDVl8XLAZm6Da
- V3XaZ3gWVPtu35200xZ7jzEpdKzTYV3mZ6GpOgCThbT44ctlb7w+2QYBfrt1xvqEL0Tc
- fwqsxuddw013j3xzLYdduOM+Ufls31UL63DkM9R2y5+Yp7Q52uV8zCXIezeUVDbhG2va
- 5L2g==
+ :reply-to; bh=zAKZhYDSuQcqPl1qjLpWz1cUc8FnuEEAUAT2nyBVm4Y=;
+ b=rRVw4LY5KZi9w79/VG2HSxLmRacMsKRn5EaOIV2tTzja5ylDcVO9EyJMCizoGMI4P1
+ CRwi40ufDkOTIr8mWVmQFw4Ev0z/Q9ApacTFN8kg9z6tWKGVgq+0v6hD1C7MORQJE80m
+ Dw4UA0dq8FEdCKZ8Duek14evQF1uQ7/H0eXiMXlWTgE6rpOBSgWoG02R5Y8SB3H3G/+j
+ PoCzyH+nih+F4GmCPmI2VoPj/PL0S+9i3alxM19Qu08tVhfjAXwPseeynZyYgja83Ym5
+ JXWg0exs5BAae2zMcr7bTao3drXZI0gGdCaWYIYdG76dR6FY3zGwbxj/B1F/kkj8GTuZ
+ 1KMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712581686; x=1713186486;
+ d=1e100.net; s=20230601; t=1712581687; x=1713186487;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WpEo3xuwcmeG5XEZhc+q8FFKON3jx1or5TkMtm3IpG4=;
- b=DPeA1CUq4Hpt+aCkgJZwvgfmHSK1AXEuMw0SHQ66X3gkgfZM/8wbSuPFuqYTNz4FvW
- dFy2xt8Jas8AlJ2jaeWGmerhmTTngJ2bBNslARTPAeXOjfPbOa95n9Pq5lhIeOKam0VC
- wHsvv0EfAfK6ETxTistmHiB7tC85alZqzj01RamAoAv8dEJH/JckrXKLEgsgWDlarTCt
- IlENRRFLU3g8sbDvV3cclPdLGx5VughZnsqtwmGRJ1PEPJ9dhy9+N+Pz1N8KcTOGvCsV
- igXjYjaPmNXKpbZyADTDC8zdMKin5/TodwmpFddhe2y+2NyIFZ30YjEPXpb3MpZIXORr
- eWpQ==
-X-Gm-Message-State: AOJu0YxG5b15yk/AM37m+y4+iD/JCNxx7vrNrbpTyzXPzOt8srJIJL13
- If/QXuyAOzv8d+5n7aVFcFBOD7uV7Np6WGeqWPUm8q/YUzPFCXMRHa++o5Jl2Dc=
-X-Google-Smtp-Source: AGHT+IGe0REVk55dd9Yt/wbWc4rsHiqelhNIOQvzNzEIJX5AgNlkMvXG7D+n5zM/JWlgVF/lgiQI/g==
-X-Received: by 2002:a17:907:72c2:b0:a4e:2570:ff56 with SMTP id
- du2-20020a17090772c200b00a4e2570ff56mr7637890ejc.0.1712581686137; 
- Mon, 08 Apr 2024 06:08:06 -0700 (PDT)
+ bh=zAKZhYDSuQcqPl1qjLpWz1cUc8FnuEEAUAT2nyBVm4Y=;
+ b=EERuDHlksh0djuNrrk9oBl/aIGi/R//YRWwr0+cX3JQ69KGhu90lBDxfxHZ4DGu7Br
+ 0lTbkDG6ZbrTVmp2OYtLGzC1njIjQwdDtJRT+pfHRJA6N5tCflfDTQGwM2DWZ3INc7+D
+ iSbhDCZe+qW8PgundJNHvkDaMPCY1zuZkR+MhIVkX2+8GM+vwFPEqgENHxGTCzQKFw8T
+ 1XI6NcBZskddp2wUeRfuBpAfXqredGg/H+nJaAeD7KXHgDpR0UY+ohsa7CqL9Sc1F0sv
+ nmKRIYjRlWV/cD5jVrbSXWlZGnP1YI8otHt5booOQt3ZSUEy/iGD2/ZsSJi8dg08HBHu
+ YNPA==
+X-Gm-Message-State: AOJu0Yy1wmCSw60EvNXPB/NfOLAUP/anqdgrOd8NkhhV1bxxBq95WHcn
+ nVP14wmaEcNy9duzHWXQe+14O64ca+wp6msRb3qKsT9sBRSZtL7Wa/1wGMV0AkM=
+X-Google-Smtp-Source: AGHT+IHfBctIlVbgSdDIt5N3kjKtM3CCSwMIs53FoQMYluwFzFrwRL08gVtxr3aJLGxC52jML0MLfA==
+X-Received: by 2002:a17:907:9810:b0:a4e:299f:7f4f with SMTP id
+ ji16-20020a170907981000b00a4e299f7f4fmr6517050ejc.48.1712581687092; 
+ Mon, 08 Apr 2024 06:08:07 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::570d])
  by smtp.gmail.com with ESMTPSA id
- e11-20020a170906844b00b00a4e23486a5dsm4394815ejy.20.2024.04.08.06.08.05
+ e11-20020a170906844b00b00a4e23486a5dsm4394815ejy.20.2024.04.08.06.08.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Apr 2024 06:08:05 -0700 (PDT)
+ Mon, 08 Apr 2024 06:08:06 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 08 Apr 2024 15:07:39 +0200
-Subject: [PATCH 1/4] pinctrl: qcom: add qcm2290 pinctrl driver
+Date: Mon, 08 Apr 2024 15:07:40 +0200
+Subject: [PATCH 2/4] pinctrl: qcom: add sm6115 pinctrl driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240408-b4-qcom-rbx-soc-v1-1-900db37b8bdf@linaro.org>
+Message-Id: <20240408-b4-qcom-rbx-soc-v1-2-900db37b8bdf@linaro.org>
 References: <20240408-b4-qcom-rbx-soc-v1-0-900db37b8bdf@linaro.org>
 In-Reply-To: <20240408-b4-qcom-rbx-soc-v1-0-900db37b8bdf@linaro.org>
 To: Tom Rini <trini@konsulko.com>, 
@@ -77,21 +77,21 @@ To: Tom Rini <trini@konsulko.com>,
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3691;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5760;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=dkjlxIYjmZqHcciS/NcT6tSSQUIBu5Zi+tWMsHILD6o=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmE+w01CVhWGC7dUsuA7Oyeyzg/uNYauPpfcIzI
- VTmQ6CLGVGJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZhPsNAAKCRAFgzErGV9k
- tk3OD/wJ/7ryHgEywbVDumIwh0WCzdyukrv5jXpLKmu7v3Ci/lejGSDvjZUB6KY7N2k6jeNq2+M
- 5XqX99yAbuSG8ZOLv32oY7CMKkSKis1nvxEQM5aW0iSEVAZqgummH7+x1yR0LbxdUz17+heRE05
- AP7ys/6VkHdbkgXFQJbSIzY5xzVDWCgwqsNnrbqqkGLAHfUWs9rNZMtwBvrXu+uyqrDerYXTxNb
- 29LGFB+zeswxXpqGWBSrWkmjpJZL3CfjoUCTmwRLGOVMHRu2zPKhmc+MA1GSQRFu6wwHzvGBR4e
- ogu8yenVvvXwept6Ty9wVDVQI5nji6Ji7Etw3KwxWddKU9UZKU8EHtJXNiqPh6Y2Z/cRLjFb7H4
- MLgSnzsgJkD81L2WQHSnwPjMHzDYXKVkF/QguM6nTsYMXqdWgZtkug7jYEKSpR8e0QrxPjjk8XM
- nF2MNBsXCSImGxp3x1iQflSqVg5VAyK9dD8ef5EN0DSVWv++mD0ZCIRDPQqkFkdXekN8pcZYzeC
- hufb2Ft+lPdgnIGJBj9t3IIVABxEgVAPz5qZUSUX6RKu75CB+DivHjRFeW1U+cN87yvlw7GNkgU
- nJQ9ANXLh0nmn+MlwXlTjb0ggulJ7MuwkBylGlZKS6MqYefS48p70t8qZFX49w9GeNrI3RMsFTR
- UdYtrR95BPWghBg==
+ bh=EiH6heaJx3ch02x6lG1mmDB6rdmgcxf+so3ByUaPDzk=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmE+w0+NCjFhK7JzgXYP6Hcm6OA10UCe2rhlK/l
+ /qwYkwxQFiJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZhPsNAAKCRAFgzErGV9k
+ tkoyD/kBfWUmqvdCgwdZxjnooIzlPnH9QYQs034mY6eU7S63TAOJvB8uHjKKuUOPP3UzFc2aODw
+ lUvxZku/Re0Ijdm45qLBWVIksefNX2irUDAkI915mn33pHbO+GzGT78nik38kYspgNPhGpP8CY4
+ rqUiQI09vhIFyiyn5GIT87aw3klkGimGaIxWaQvq8kzr5P7gJsLcIjAQl3vYXDsDHZEa8DGKb0+
+ J1xwH/A76PLT8wnfUPPZainWV1I+TuB5JU4SV1a4Tjh4A+RqUvyTQ0cnSqnLW85fh8Y6cT+HSJH
+ b5fL2SZpaQrg8wtMPQo6FLEwmUNhRGP7fHy3cYzfzKYI/FCayuFdDjEpBs/peelT0Vi/rRP7Rg7
+ sC1mLn/HqL1nFZUbg6KS3SGKMOIsFCiT1QyUExTiw733k2bCIjRT7QzjQk1QANUvNTlPWUf99Fn
+ gfQtHAvCEHq5Q+jAtiBks3MGUiwHbfiOG2KoYBBaTcUd+ZTtl3p5FXrOjkz+1ptzHoCojFaT64q
+ wYbLPSYMjuBMPYgRWBCuMEdstIbrW3fZSeskj3CbILhrPdfWP0+uvOmz7nx91nHoSNAgrUzvBsM
+ ohb4K2S3n000D72PqbzruJ/zVY/D3rgTV3Hf9F9yLkc+0W+9Mi0lIvhaRI1VJ8HsFETfCZ9f1se
+ Pd2u/raMN7rkiJg==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -110,56 +110,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This SoC has a basic pinctrl block with no tiles.
+This SoC features a pinctrl block with west, east, and south tiles.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/pinctrl/qcom/Kconfig           |  7 ++++
- drivers/pinctrl/qcom/Makefile          |  1 +
- drivers/pinctrl/qcom/pinctrl-qcm2290.c | 67 ++++++++++++++++++++++++++++++++++
- 3 files changed, 75 insertions(+)
+ drivers/pinctrl/qcom/Kconfig          |   7 ++
+ drivers/pinctrl/qcom/Makefile         |   1 +
+ drivers/pinctrl/qcom/pinctrl-sm6115.c | 197 ++++++++++++++++++++++++++++++++++
+ 3 files changed, 205 insertions(+)
 
 diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-index 2fe639814785..35140efd5b62 100644
+index 35140efd5b62..e7a9853ce47a 100644
 --- a/drivers/pinctrl/qcom/Kconfig
 +++ b/drivers/pinctrl/qcom/Kconfig
-@@ -26,8 +26,15 @@ config PINCTRL_QCOM_IPQ4019
+@@ -47,7 +47,14 @@ config PINCTRL_QCOM_SDM845
  	help
- 	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
+ 	  Say Y here to enable support for pinctrl on the Snapdragon 845 SoC,
  	  as well as the associated GPIO driver.
  
-+config PINCTRL_QCOM_QCM2290
-+	bool "Qualcomm QCM2290 GCC"
++config PINCTRL_QCOM_SM6115
++	bool "Qualcomm SM6115 GCC"
 +	select PINCTRL_QCOM
 +	help
-+	  Say Y here to enable support for pinctrl on the Snapdragon QCM2290 SoC,
++	  Say Y here to enable support for pinctrl on the Snapdragon SM6115 SoC,
 +	  as well as the associated GPIO driver.
 +
- config PINCTRL_QCOM_QCS404
- 	bool "Qualcomm QCS404 GCC"
- 	select PINCTRL_QCOM
- 	help
+ endmenu
+ 
+ endif
 diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-index 6d9aca6d7b7e..0b1d610ea3e8 100644
+index 0b1d610ea3e8..f00c4e6e10cc 100644
 --- a/drivers/pinctrl/qcom/Makefile
 +++ b/drivers/pinctrl/qcom/Makefile
-@@ -5,6 +5,7 @@
- obj-$(CONFIG_PINCTRL_QCOM) += pinctrl-qcom.o
- obj-$(CONFIG_PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
- obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
+@@ -8,4 +8,5 @@ obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
  obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
-+obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
+ obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
  obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
  obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
-diff --git a/drivers/pinctrl/qcom/pinctrl-qcm2290.c b/drivers/pinctrl/qcom/pinctrl-qcm2290.c
++obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
+diff --git a/drivers/pinctrl/qcom/pinctrl-sm6115.c b/drivers/pinctrl/qcom/pinctrl-sm6115.c
 new file mode 100644
-index 000000000000..e2abb53ba4e5
+index 000000000000..740931a74104
 --- /dev/null
-+++ b/drivers/pinctrl/qcom/pinctrl-qcm2290.c
-@@ -0,0 +1,67 @@
++++ b/drivers/pinctrl/qcom/pinctrl-sm6115.c
+@@ -0,0 +1,197 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Qualcomm qcm2290 pinctrl
++ * Qualcomm sm6115 pinctrl
 + *
 + * (C) Copyright 2024 Linaro Ltd.
 + *
@@ -169,6 +166,10 @@ index 000000000000..e2abb53ba4e5
 +
 +#include "pinctrl-qcom.h"
 +
++#define WEST 0x00000000
++#define SOUTH 0x00400000
++#define EAST 0x00800000
++
 +#define MAX_PIN_NAME_LEN 32
 +static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
 +
@@ -177,48 +178,174 @@ index 000000000000..e2abb53ba4e5
 +	{ "gpio", 0 },
 +};
 +
-+static const char *qcm2290_get_function_name(struct udevice *dev, unsigned int selector)
++static const unsigned int sm6115_pin_offsets[] = {
++	[0] = WEST,
++	[1] = WEST,
++	[2] = WEST,
++	[3] = WEST,
++	[4] = WEST,
++	[5] = WEST,
++	[6] = WEST,
++	[7] = WEST,
++	[8] = EAST,
++	[9] = EAST,
++	[10] = EAST,
++	[11] = EAST,
++	[12] = WEST,
++	[13] = WEST,
++	[14] = WEST,
++	[15] = WEST,
++	[16] = WEST,
++	[17] = WEST,
++	[18] = EAST,
++	[19] = EAST,
++	[20] = EAST,
++	[21] = EAST,
++	[22] = EAST,
++	[23] = EAST,
++	[24] = EAST,
++	[25] = EAST,
++	[26] = EAST,
++	[27] = EAST,
++	[28] = EAST,
++	[29] = EAST,
++	[30] = EAST,
++	[31] = EAST,
++	[32] = EAST,
++	[33] = EAST,
++	[34] = EAST,
++	[35] = EAST,
++	[36] = EAST,
++	[37] = EAST,
++	[38] = EAST,
++	[39] = EAST,
++	[40] = EAST,
++	[41] = EAST,
++	[42] = EAST,
++	[43] = EAST,
++	[44] = EAST,
++	[45] = EAST,
++	[46] = EAST,
++	[47] = EAST,
++	[48] = EAST,
++	[49] = EAST,
++	[50] = EAST,
++	[51] = EAST,
++	[52] = EAST,
++	[53] = EAST,
++	[54] = EAST,
++	[55] = EAST,
++	[56] = EAST,
++	[57] = EAST,
++	[58] = EAST,
++	[59] = EAST,
++	[60] = EAST,
++	[61] = EAST,
++	[62] = EAST,
++	[63] = EAST,
++	[64] = EAST,
++	[65] = WEST,
++	[66] = WEST,
++	[67] = WEST,
++	[68] = WEST,
++	[69] = WEST,
++	[70] = WEST,
++	[71] = WEST,
++	[72] = SOUTH,
++	[73] = SOUTH,
++	[74] = SOUTH,
++	[75] = SOUTH,
++	[76] = SOUTH,
++	[77] = SOUTH,
++	[78] = SOUTH,
++	[79] = SOUTH,
++	[80] = WEST,
++	[81] = WEST,
++	[82] = WEST,
++	[83] = WEST,
++	[84] = WEST,
++	[85] = WEST,
++	[86] = WEST,
++	[87] = EAST,
++	[88] = EAST,
++	[89] = WEST,
++	[90] = EAST,
++	[91] = EAST,
++	[92] = WEST,
++	[93] = WEST,
++	[94] = WEST,
++	[95] = WEST,
++	[96] = WEST,
++	[97] = WEST,
++	[98] = SOUTH,
++	[99] = SOUTH,
++	[100] = SOUTH,
++	[101] = SOUTH,
++	[102] = SOUTH,
++	[103] = SOUTH,
++	[104] = SOUTH,
++	[105] = SOUTH,
++	[106] = SOUTH,
++	[107] = SOUTH,
++	[108] = SOUTH,
++	[109] = SOUTH,
++	[110] = SOUTH,
++	[111] = SOUTH,
++	[112] = SOUTH,
++	/* Special pins */
++	[113] = 0,
++	[114] = 0,
++	[115] = 0,
++	[116] = 0,
++	[117] = 0,
++	[118] = 0,
++	[119] = 0,
++	[120] = 0,
++};
++
++static const char *sm6115_get_function_name(struct udevice *dev, unsigned int selector)
 +{
 +	return msm_pinctrl_functions[selector].name;
 +}
 +
-+static const char *qcm2290_get_pin_name(struct udevice *dev, unsigned int selector)
++static const char *sm6115_get_pin_name(struct udevice *dev, unsigned int selector)
 +{
-+	static const char *const special_pins_names[] = {
-+		"sdc1_rclk", "sdc1_clk", "sdc1_cmd",  "sdc1_data",
-+		"sdc2_clk",  "sdc2_cmd", "sdc2_data",
++	static const char *special_pins_names[] = {
++		"ufs_reset", "sdc1_rclk", "sdc1_clk", "sdc1_cmd",
++		"sdc1_data", "sdc2_clk",  "sdc2_cmd", "sdc2_data",
 +	};
 +
-+	if (selector >= 127 && selector <= 133)
-+		snprintf(pin_name, MAX_PIN_NAME_LEN, special_pins_names[selector - 127]);
++	if (selector >= 113 && selector <= 120)
++		snprintf(pin_name, MAX_PIN_NAME_LEN, special_pins_names[selector - 113]);
 +	else
 +		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
 +
 +	return pin_name;
 +}
 +
-+static unsigned int qcm2290_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
++static unsigned int sm6115_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
 +{
 +	return msm_pinctrl_functions[selector].val;
 +}
 +
-+struct msm_pinctrl_data qcm2290_data = {
++struct msm_pinctrl_data sm6115_data = {
 +	.pin_data = {
-+		.pin_count = 133,
-+		.special_pins_start = 127,
++		.pin_offsets = sm6115_pin_offsets,
++		.pin_count = ARRAY_SIZE(sm6115_pin_offsets),
++		.special_pins_start = 113,
 +	},
 +	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
-+	.get_function_name = qcm2290_get_function_name,
-+	.get_function_mux = qcm2290_get_function_mux,
-+	.get_pin_name = qcm2290_get_pin_name,
++	.get_function_name = sm6115_get_function_name,
++	.get_function_mux = sm6115_get_function_mux,
++	.get_pin_name = sm6115_get_pin_name,
 +};
 +
-+static const struct udevice_id msm_pinctrl_ids[] = { { .compatible = "qcom,qcm2290-tlmm",
-+						       .data = (ulong)&qcm2290_data },
++static const struct udevice_id msm_pinctrl_ids[] = { { .compatible = "qcom,sm6115-tlmm",
++						       .data = (ulong)&sm6115_data },
 +						     { /* Sentinal */ } };
 +
-+U_BOOT_DRIVER(pinctrl_qcm2290) = {
-+	.name = "pinctrl_qcm2290",
++U_BOOT_DRIVER(pinctrl_sm6115) = {
++	.name = "pinctrl_sm6115",
 +	.id = UCLASS_NOP,
 +	.of_match = msm_pinctrl_ids,
 +	.ops = &msm_pinctrl_ops,
