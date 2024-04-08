@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA994CD1292
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:50:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97200CD1292
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:50:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6E4088239;
-	Tue,  9 Apr 2024 00:46:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2F3268823E;
+	Tue,  9 Apr 2024 00:46:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hS/5gGVK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="kr8on5Xe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE699880FE; Mon,  8 Apr 2024 23:24:00 +0200 (CEST)
+ id E352C88159; Mon,  8 Apr 2024 23:24:00 +0200 (CEST)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24A1B88190
+ by phobos.denx.de (Postfix) with ESMTPS id 4877988191
  for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 23:23:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
 Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LNmXl055304;
- Mon, 8 Apr 2024 16:23:48 -0500
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LNlwJ055298;
+ Mon, 8 Apr 2024 16:23:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1712611428;
- bh=TWTAIE2gtsjJBn2EcSX8RvsFu5XkKgMX93oUMBDulf8=;
+ bh=NNLRLQkDtVT2v5KWSoja5Y8U5nHhOv3hXSPv+GC1nkk=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=hS/5gGVK0TV8/Co70JDbODlH+R2MlBMtcsIf5F4dthcYJAjCXp8E9Yew5nVmrukdR
- 4OMaHWRhqq43DPwbl1kPJD5aghi5vknv1lCCJPeIGQESDkJ34iHHMWptMNw7L1vHZZ
- LzQMUAy8+sppCMqWHt1A3oN7V+3nPvdgOOgJKuDQ=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LNlPE061310
+ b=kr8on5Xe/Y9p3zWgDfrmGznWQzj5Mu7R0YsM8/ga1i4uZFkiJByHFRNNxg56H9Hko
+ /QiDJU1jDCtPxqj1SjsMX9Fs+IGfvNmYSHznoPLJpL8R0OHqq7F2uwpclk7amjvhic
+ GrqQxuWXFNUpEn3WMJQAxHOAcH/+WYg/dexTPfpM=
+Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LNlCT061305
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 8 Apr 2024 16:23:48 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ Mon, 8 Apr 2024 16:23:47 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
  Apr 2024 16:23:47 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Mon, 8 Apr 2024 16:23:47 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LNl7T086464;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LNlXp033654;
  Mon, 8 Apr 2024 16:23:47 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -64,10 +64,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
  Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH 12/16] arm: dts: k3-am625-sk-u-boot: Add sysreset-controller
- node
-Date: Mon, 8 Apr 2024 16:22:51 -0500
-Message-ID: <20240408212255.95255-13-j-humphreys@ti.com>
+Subject: [PATCH 13/16] board: am62x: Define capsule update firmware info
+Date: Mon, 8 Apr 2024 16:22:52 -0500
+Message-ID: <20240408212255.95255-14-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240408212255.95255-1-j-humphreys@ti.com>
 References: <20240408212255.95255-1-j-humphreys@ti.com>
@@ -92,28 +91,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Define the firmwares updatable via EFI capsule update.
+
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- arch/arm/dts/k3-am625-sk-u-boot.dtsi | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ board/ti/am62x/evm.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-index fa778b0ff4c..35bfeae75a0 100644
---- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-@@ -46,3 +46,12 @@
- &cpsw_port2 {
- 	status = "disabled";
- };
-+
-+&dmsc {
-+	bootph-pre-ram;
-+
-+	k3_sysreset: sysreset-controller {
-+		compatible = "ti,sci-sysreset";
-+		bootph-pre-ram;
-+	};
+diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
+index b3e8680dfab..595c98982bb 100644
+--- a/board/ti/am62x/evm.c
++++ b/board/ti/am62x/evm.c
+@@ -7,6 +7,7 @@
+  *
+  */
+ 
++#include <efi_loader.h>
+ #include <env.h>
+ #include <spl.h>
+ #include <init.h>
+@@ -46,6 +47,37 @@ int splash_screen_prepare(void)
+ }
+ #endif
+ 
++#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
++struct efi_fw_image fw_images[] = {
++	{
++		.image_type_id = K3_TIBOOT3_IMAGE_GUID,
++		.fw_name = u"K3_TIBOOT3",
++		.image_index = 1,
++	},
++	{
++		.image_type_id = K3_SPL_IMAGE_GUID,
++		.fw_name = u"K3_SPL",
++		.image_index = 2,
++	},
++	{
++		.image_type_id = K3_UBOOT_IMAGE_GUID,
++		.fw_name = u"K3_UBOOT",
++		.image_index = 3,
++	},
 +};
++
++struct efi_capsule_update_info update_info = {
++	.dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;tispl.bin raw 80000 200000;u-boot.img raw 280000 480000",
++	.num_images = ARRAY_SIZE(fw_images),
++	.images = fw_images,
++};
++
++void set_dfu_alt_info(char *interface, char *devstr)
++{
++	env_set("dfu_alt_info", update_info.dfu_string);
++}
++#endif /* EFI_HAVE_CAPSULE_SUPPORT */
++
+ int board_init(void)
+ {
+ 	return 0;
 -- 
 2.34.1
 
