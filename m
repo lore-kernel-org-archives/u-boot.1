@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1138C67861
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 06:41:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B87DCD128A
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 06:42:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33C8587F13;
-	Mon,  8 Apr 2024 08:41:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id B14E68802E;
+	Mon,  8 Apr 2024 08:42:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="jTSFecN2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EyncGvpZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9196087FB5; Mon,  8 Apr 2024 08:41:39 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 34BD48803A; Mon,  8 Apr 2024 08:42:29 +0200 (CEST)
+Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
+ [IPv6:2a00:1450:4864:20::131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2A0787C77
- for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 08:41:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3003B87C77
+ for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 08:42:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1712558462; x=1713163262; i=xypron.glpk@gmx.de;
- bh=r9MYgSFdZ2Y0U+9TCCSaU1owihZk9Hsw02IkCzoKwyw=;
- h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
- In-Reply-To;
- b=jTSFecN2dJyqvwD0G8zHrNi/P1MdsUgKZH2OzmoLb28A4475woqNNCi1Y46bMPiY
- Zm6EDX/Fa2b+OOZ6/98cKRSkZ01cW/4pUqavsU7UVh4Niv0NzTCcwP3nBAp3vulBj
- BMYC5gRw3vGKZ/kuyEGUF+XFdN331dJWjkTOtOuT8CIXw765XFmfTNKpd5lSiMVWM
- QgDqb7FGss1ntkMZ5fs1MSsnnoXy3r6GO66xzrmtheoOgh5txhaD22BtEkljK+g+P
- wecmGslmO5VTaoC4U+t2+BfBXGfCg+PvDIjawbThsLYJIy5Sbav02orqlbU/mHGnS
- dBExjXsmHB7MxbBJqg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N1wq3-1svDKJ0X1d-012FFp; Mon, 08
- Apr 2024 08:41:02 +0200
-Message-ID: <6c399b8c-f5f8-4b1b-a74a-0de72ef9002e@gmx.de>
-Date: Mon, 8 Apr 2024 08:41:00 +0200
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x131.google.com with SMTP id
+ 2adb3069b0e04-516d2600569so3989332e87.0
+ for <u-boot@lists.denx.de>; Sun, 07 Apr 2024 23:42:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1712558546; x=1713163346; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hA6m//3FwAT6RRGx6I6EBsnFan0W2fx08XsEH/2BKRk=;
+ b=EyncGvpZidzvJ3dIkTOynY5SlVg5O6AHF3XDHApm5miPp8qBV96sBzZ6AXc7nnqy0X
+ 4PrICa7FZhwm7+JPOVev1/QrBY5SEL6B+ZWrV3rjzCswOzU4pGk6gvlRC2Cs4Y+m3331
+ HlmiOAryyPAa4Vk1tdPtvbj+ENeFbplf41g0Ix+Rz+IT8WJZKxSRzqw2jXlIrXrIHB+5
+ YrSQIiPWo7XrHPVCFzaTaVmcEocZhDoKvEf1qHDhjW8qhED6FttV4HWaKK/661rGem1O
+ 3ecQ0DPaoCxEuT+1qxjuQLts8RETgWoc+03YfZMlH6UChGdcHavTg2KlLEGyAzRA73Uu
+ A+Lw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712558546; x=1713163346;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hA6m//3FwAT6RRGx6I6EBsnFan0W2fx08XsEH/2BKRk=;
+ b=Jo2DDPqxdEgbw+0jvww2I6f/QFhU9YjQ7YbA/Vql+YWzIZxtD5ssccIkLklsi183fZ
+ EQKp4ysLIrNue0lOsMxQDrdnrmfiUknvRi+ddqPX/LlrIS9wGSKFH/f5eDvmBe3/fybz
+ 3Ge0sasIgtMhHmDUWsrVebF2UumGf5hAPmhRgg5z9Ax9+4tHC1U17jr74caLVKl+8ent
+ +79ID1HCz9tbuw9HXZ06MBKAOqOdcWSQp486trENoPx8o8K34SbYUHmPZBWMHT9kARy+
+ 5onMWX0ISV6CmeAJBDwcseH9nJVAfd9Qwrq9yCeu1zTXU59w5C2u+87cM2gJBItztcYH
+ eZng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW6qP19n1cAH2hCqFNoHhKVWKaXMOtcGw4L+dR43ulq2vmSwZaDi/Y7UrkJ2eV7imNKSm0PXSrMGuIXnvwZ+ndrmoZbyQ==
+X-Gm-Message-State: AOJu0YynNpwnkhHXvC37A3SrVDTemIUQ8ZGk3f9vYgudq9xf1SFDqcjW
+ g4SBlri8JiKLYuZzSEV/eQw1WSDEj8bv3443R8bbbdMCGnX70Wh2pKHpM3ve67ArAUwE6TD0LlT
+ UqW1dOf577/aCj71/Lnoxm5TiTvdNSPKWa1eOtg==
+X-Google-Smtp-Source: AGHT+IHncamLf0EW8FYC7E38d4NsznXIuwA8RpotWALRHSKIWH1+9popu1yO/MFGge7uAkMjHxyA2WgzL/lk1n6k+2w=
+X-Received: by 2002:a19:8c5d:0:b0:516:ce6a:6f32 with SMTP id
+ i29-20020a198c5d000000b00516ce6a6f32mr5846348lfj.44.1712558546453; Sun, 07
+ Apr 2024 23:42:26 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/4] efi_loader: add an EFI variable with the variable
- file contents
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
- quic_llindhol@quicinc.com, ardb@kernel.org, pbrobinson@gmail.com,
- pjones@redhat.com, Tom Rini <trini@konsulko.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- AKASHI Takahiro <takahiro.akashi@linaro.org>, Bin Meng <bmeng@tinylab.org>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Weizhao Ouyang
- <o451686892@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- u-boot@lists.denx.de, kettenis@openbsd.org
 References: <20240406140203.248211-1-ilias.apalodimas@linaro.org>
- <20240406140203.248211-4-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240406140203.248211-4-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:cVX9pROFJEI2nIPriVkMmP8DTfu2q6U3CjaW9rXw++OJv+X9W8T
- Foq3h43SSKYCxNf1os2OhoCJHOR5yfxt5IUQM3x4s79caW5nAtvVv4hsWU2AlYfZKWZ1lV5
- RKSHmfR6lat0fqbEUGq636DhZgkrnqMiBWWkCdYoyuwqingXPgYN6Y3vSCHCb+KJo7pf4Oh
- QIgzo5QFJbMWDF0UMzfYA==
-UI-OutboundReport: notjunk:1;M01:P0:HMKMwMqg+GY=;/e0zJnCkpll2vldK6pmkULtK9oo
- qji0wh8HyYPo8cMVzOfL0NjEYh/eOOsFBt7vYBO8vwcZlx445W61W09oHLJQfddaQa0cmj4YG
- Zia0vOj4RfOiWZyjKzUxD2PPuoF7PK35yGC/3hv1MnIYybo11qd6fqlpIuJjJVW54J4LbBcE0
- m80bFW4CFGM909ybRaF5+EKDwxseZbwZ5LvBjVVrFz4WqeWL6VhtQk42hGz7vjx3qwLwAdO2e
- e35J5I06D++Qv18R4SE4acg1AbmJ0cvSLELiOzi0xx0UHKroTxEFOTNnHXNRf12zE+IcnEp7G
- +fxAIB8Cdf+lHpCNcUsH+psMN0aQcZYn6C4Basxb6nc5FFG6rc1mBVjwwNk3NuUa4g53aPMa8
- NlKCaUrvSOvQFyeKNCLysDRqe4SA7u58oUFIftJp9GugU3I1yQTdK91VNVrGjP+xbTQtPtAln
- DQz4s7LYJVSEaOWkiXazGigBbNSx8tDTJHHbgqa0z/Yb766UxSgtypb5ZAeq3r6m80xgv/r30
- R4GfDclJkFhzb3doMWCkq7nVeLcQAfPYFMxWslbClrxOcIDg9vuRjaVIAh84Q68P8fDh2vMoP
- FEBWJFnpww8jCivYWK7YbloYgWQRkkJBC80OA3tM5ee8m/jAluIuuDHAF3/+04rU8xG14ZaRs
- rtzNXdKPaXI6WCP3YUyYkdpY210rFHpf5syni3Hx8oQnmA4gsCUobT1iMKQjh7u3eXNg21MZ+
- iaf15EbwJ6gxAPC7Krl/hlL36pA1JHo5mMXRdCiWqPburWO9ZBdjfYgum72o882Gs84QieELQ
- ZTjfXgcIKGOPCawk/eMkpVTnRSjpyV2hZ5EcPE8vtzfYg=
+ <20240406140203.248211-3-ilias.apalodimas@linaro.org>
+ <641bf875-ea16-4dd3-9859-4eb0b029efde@gmx.de>
+In-Reply-To: <641bf875-ea16-4dd3-9859-4eb0b029efde@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 8 Apr 2024 09:41:50 +0300
+Message-ID: <CAC_iWj+fg6f2d5+rAeLcX5McM1AQO2ph65p-=1CKGQHOckuW6g@mail.gmail.com>
+Subject: Re: [PATCH v1 2/4] efi_loader: Add OS notifications for SetVariableRT
+ in RAM
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org, 
+ quic_llindhol@quicinc.com, ardb@kernel.org, pbrobinson@gmail.com, 
+ pjones@redhat.com, Tom Rini <trini@konsulko.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ AKASHI Takahiro <takahiro.akashi@linaro.org>, Bin Meng <bmeng@tinylab.org>, 
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Weizhao Ouyang <o451686892@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de, 
+ kettenis@openbsd.org
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,652 +100,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/6/24 16:01, Ilias Apalodimas wrote:
-> Previous patches enabled SetVariableRT using a RAM backend.
-> Although EBBR [0] defines a variable format we can teach userspace tools
-> and write the altered variables, it's better if we skip the ABI
-> requirements completely.
->
-> So let's add a new variable, in its own namespace called "VarToFile"
-> which contains a binary dump of the updated RT, BS and, NV variables.
->
-> Some adjustments are needed to do that. Currently we discard BS-only
-> variables in EBS(). We need to preserve those on the OS RAM backend
-> that exposes the variables. Since BS-only variables can't appear at RT
-> we need to move the memory masking checks from efi_var_collect() to
-> efi_get_next_variable_name_mem()/efi_get_variable_mem() and do the
-> filtering at runtime. We also need to make efi_var_collect() available
-> at runtime, in order to construct the "VarToFile" buffer with BS, RT &
-> NV variables.
->
-> All users and applications (for linux) have to do when updating a variab=
-le
-> is dd that variable in the file described by "RTStorageVolatile".
->
-> Linux efivarfs uses a first 4 bytes of the output to represent attribute=
-s
-> in little-endian format. So, storing variables works like this:
->
-> $~ efibootmgr -n 0001
-> $~ dd if=3D/sys/firmware/efi/efivars/VarToFile-b2ac5fc9-92b7-4acd-aeac-1=
-1e818c3130c of=3D/boot/efi/ubootefi.var skip=3D4 bs=3D1
->
-> [0] https://arm-software.github.io/ebbr/index.html#document-chapter5-var=
-iable-storage
+Hi Heinrich,
 
-This change actually doubles the amount of memory needed to store a
-variable at runtime. How do you reflect this in QueryVariableInfo()?
+> > +
+> >
+> >   /* Use internal device tree when starting UEFI application */
+> >   #define EFI_FDT_USE_INTERNAL NULL
+> > diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+> > index 8ebbea7e5c69..d898ba6c268f 100644
+> > --- a/lib/efi_loader/efi_runtime.c
+> > +++ b/lib/efi_loader/efi_runtime.c
+> > @@ -127,10 +127,6 @@ efi_status_t efi_init_runtime_supported(void)
+> >                               EFI_RT_SUPPORTED_SET_VIRTUAL_ADDRESS_MAP |
+> >                               EFI_RT_SUPPORTED_CONVERT_POINTER;
+> >
+> > -     if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE))
+> > -             rt_table->runtime_services_supported |=
+> > -                     EFI_RT_SUPPORTED_SET_VARIABLE;
+> > -
+>
+[...]
 
->
-> Suggested-by:Ard Biesheuvel <ardb@kernel.org> # dumping all variables to=
- a variable
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->   include/efi_variable.h            |  15 +++-
->   lib/efi_loader/efi_boottime.c     |   2 +
->   lib/efi_loader/efi_var_common.c   |  43 +++++------
->   lib/efi_loader/efi_var_file.c     |   1 -
->   lib/efi_loader/efi_var_mem.c      |  90 ++++++++++-------------
->   lib/efi_loader/efi_variable.c     | 118 ++++++++++++++++++++++++------
->   lib/efi_loader/efi_variable_tee.c |   1 -
->   7 files changed, 164 insertions(+), 106 deletions(-)
->
-> diff --git a/include/efi_variable.h b/include/efi_variable.h
-> index 42a2b7c52bef..8963339b9bb6 100644
-> --- a/include/efi_variable.h
-> +++ b/include/efi_variable.h
-> @@ -271,13 +271,15 @@ const efi_guid_t *efi_auth_var_get_guid(const u16 =
-*name);
->    *
->    * @variable_name_size:	size of variable_name buffer in bytes
->    * @variable_name:	name of uefi variable's name in u16
-> + * @mask:		bitmask with required attributes of variables to be collecte=
-d.
-> + *                      variables are only collected if all of the requ=
-ired
->    * @vendor:		vendor's guid
->    *
->    * Return: status code
->    */
->   efi_status_t __efi_runtime
->   efi_get_next_variable_name_mem(efi_uintn_t *variable_name_size, u16 *v=
-ariable_name,
-> -			       efi_guid_t *vendor);
-> +			       efi_guid_t *vendor, u32 mask);
->   /**
->    * efi_get_variable_mem() - Runtime common code across efi variable
->    *                          implementations for GetVariable() from
-> @@ -289,12 +291,14 @@ efi_get_next_variable_name_mem(efi_uintn_t *variab=
-le_name_size, u16 *variable_na
->    * @data_size:		size of the buffer to which the variable value is copi=
-ed
->    * @data:		buffer to which the variable value is copied
->    * @timep:		authentication time (seconds since start of epoch)
-> + * @mask:		bitmask with required attributes of variables to be collecte=
-d.
-> + *                      variables are only collected if all of the requ=
-ired
-
-This line looks incomplete.
-
->    * Return:		status code
->    */
->   efi_status_t __efi_runtime
->   efi_get_variable_mem(const u16 *variable_name, const efi_guid_t *vendo=
-r,
->   		     u32 *attributes, efi_uintn_t *data_size, void *data,
-> -		     u64 *timep);
-> +		     u64 *timep, u32 mask);
->
->   /**
->    * efi_get_variable_runtime() - runtime implementation of GetVariable(=
-)
-> @@ -334,4 +338,11 @@ efi_get_next_variable_name_runtime(efi_uintn_t *var=
-iable_name_size,
->    */
->   void efi_var_buf_update(struct efi_var_file *var_buf);
->
-> +/**
-> + * efi_prealloced_rt_memory() - Get a pointer to preallocated EFI memor=
-y
-> + *                              available at runtime
-> + *
-> + * Return: pointer to preallocated runtime usable buffer
-> + */
-> +void __efi_runtime *efi_prealloced_rt_memory(void);
->   #endif
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime=
-.c
-> index 1951291747cd..39481c89a688 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -97,6 +97,8 @@ const efi_guid_t efi_guid_load_file_protocol =3D EFI_L=
-OAD_FILE_PROTOCOL_GUID;
->   const efi_guid_t efi_guid_load_file2_protocol =3D EFI_LOAD_FILE2_PROTO=
-COL_GUID;
->   /* GUID of the SMBIOS table */
->   const efi_guid_t smbios_guid =3D SMBIOS_TABLE_GUID;
-> +/* used by special U-Boot variables during SetVariableRT */
-> +const efi_guid_t efi_guid_efi_rt_var_file =3D U_BOOT_EFI_RT_VAR_FILE_GU=
-ID;
->
->   static efi_status_t EFIAPI efi_disconnect_controller(
->   					efi_handle_t controller_handle,
-> diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_co=
-mmon.c
-> index 07b9603d49f3..4abc90e411e7 100644
-> --- a/lib/efi_loader/efi_var_common.c
-> +++ b/lib/efi_loader/efi_var_common.c
-> @@ -182,7 +182,8 @@ efi_get_variable_runtime(u16 *variable_name, const e=
-fi_guid_t *guid,
->   {
->   	efi_status_t ret;
->
-> -	ret =3D efi_get_variable_mem(variable_name, guid, attributes, data_siz=
-e, data, NULL);
-> +	ret =3D efi_get_variable_mem(variable_name, guid, attributes, data_siz=
-e,
-> +				   data, NULL, EFI_VARIABLE_RUNTIME_ACCESS);
->
->   	/* Remove EFI_VARIABLE_READ_ONLY flag */
->   	if (attributes)
-> @@ -195,7 +196,8 @@ efi_status_t __efi_runtime EFIAPI
->   efi_get_next_variable_name_runtime(efi_uintn_t *variable_name_size,
->   				   u16 *variable_name, efi_guid_t *guid)
->   {
-> -	return efi_get_next_variable_name_mem(variable_name_size, variable_nam=
-e, guid);
-> +	return efi_get_next_variable_name_mem(variable_name_size, variable_nam=
-e,
-> +					      guid, EFI_VARIABLE_RUNTIME_ACCESS);
->   }
->
->   /**
-> @@ -427,18 +429,15 @@ void *efi_get_var(const u16 *name, const efi_guid_=
-t *vendor, efi_uintn_t *size)
->    *
->    * Return:	Status code
->    */
-> -efi_status_t __maybe_unused efi_var_collect(struct efi_var_file **bufp,=
- loff_t *lenp,
-> -					    u32 check_attr_mask)
-> +efi_status_t __efi_runtime
-> +efi_var_collect(struct efi_var_file **bufp, loff_t *lenp, u32 check_att=
-r_mask)
->   {
->   	size_t len =3D EFI_VAR_BUF_SIZE;
->   	struct efi_var_file *buf;
->   	struct efi_var_entry *var, *old_var;
->   	size_t old_var_name_length =3D 2;
->
-> -	*bufp =3D NULL; /* Avoid double free() */
-> -	buf =3D calloc(1, len);
-> -	if (!buf)
-> -		return EFI_OUT_OF_RESOURCES;
-> +	buf =3D (struct efi_var_file *)efi_prealloced_rt_memory();
->   	var =3D buf->var;
->   	old_var =3D var;
->   	for (;;) {
-> @@ -451,32 +450,26 @@ efi_status_t __maybe_unused efi_var_collect(struct=
- efi_var_file **bufp, loff_t *
->   			return EFI_BUFFER_TOO_SMALL;
->
->   		var_name_length =3D (uintptr_t)buf + len - (uintptr_t)var->name;
-> -		memcpy(var->name, old_var->name, old_var_name_length);
-> -		guidcpy(&var->guid, &old_var->guid);
-> -		ret =3D efi_get_next_variable_name_int(
-> -				&var_name_length, var->name, &var->guid);
-> +		efi_memcpy_runtime(var->name, old_var->name, old_var_name_length);
-> +		efi_memcpy_runtime(&var->guid, &old_var->guid, sizeof(efi_guid_t));
-> +		ret =3D efi_get_next_variable_name_mem(&var_name_length, var->name,
-> +						     &var->guid, check_attr_mask);
->   		if (ret =3D=3D EFI_NOT_FOUND)
->   			break;
-> -		if (ret !=3D EFI_SUCCESS) {
-> -			free(buf);
-> +		if (ret !=3D EFI_SUCCESS)
->   			return ret;
-> -		}
->   		old_var_name_length =3D var_name_length;
->   		old_var =3D var;
->
->   		data =3D (u8 *)var->name + old_var_name_length;
->   		data_length =3D (uintptr_t)buf + len - (uintptr_t)data;
-> -		ret =3D efi_get_variable_int(var->name, &var->guid,
-> +		ret =3D efi_get_variable_mem(var->name, &var->guid,
->   					   &var->attr, &data_length, data,
-> -					   &var->time);
-> -		if (ret !=3D EFI_SUCCESS) {
-> -			free(buf);
-> +					   &var->time, check_attr_mask);
-> +		if (ret !=3D EFI_SUCCESS)
->   			return ret;
-> -		}
-> -		if ((var->attr & check_attr_mask) =3D=3D check_attr_mask) {
-> -			var->length =3D data_length;
-> -			var =3D (struct efi_var_entry *)ALIGN((uintptr_t)data + data_length,=
- 8);
-> -		}
-> +		var->length =3D data_length;
-> +		var =3D (struct efi_var_entry *)ALIGN((uintptr_t)data + data_length, =
-8);
->   	}
->
->   	buf->reserved =3D 0;
-> @@ -490,5 +483,3 @@ efi_status_t __maybe_unused efi_var_collect(struct e=
-fi_var_file **bufp, loff_t *
->
->   	return EFI_SUCCESS;
->   }
-> -
-> -
-> diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file=
-.c
-> index 413e1794e88c..8614e3d34706 100644
-> --- a/lib/efi_loader/efi_var_file.c
-> +++ b/lib/efi_loader/efi_var_file.c
-> @@ -83,7 +83,6 @@ efi_status_t efi_var_to_file(void)
->   error:
->   	if (ret !=3D EFI_SUCCESS)
->   		log_err("Failed to persist EFI variables\n");
-> -	free(buf);
->   	return ret;
->   #else
->   	return EFI_SUCCESS;
-> diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
-> index 6c21cec5d457..a7af0604733e 100644
-> --- a/lib/efi_loader/efi_var_mem.c
-> +++ b/lib/efi_loader/efi_var_mem.c
-> @@ -16,6 +16,7 @@
->    * relocation during SetVirtualAddressMap().
->    */
->   static struct efi_var_file __efi_runtime_data *efi_var_buf;
-> +static void __efi_runtime_data *efi_rt_prealloced;
->   static struct efi_var_entry __efi_runtime_data *efi_current_var;
->
->   /**
-> @@ -184,53 +185,6 @@ u64 __efi_runtime efi_var_mem_free(void)
->   	       sizeof(struct efi_var_entry);
->   }
->
-> -/**
-> - * efi_var_mem_bs_del() - delete boot service only variables
-> - */
-> -static void efi_var_mem_bs_del(void)
-> -{
-> -	struct efi_var_entry *var =3D efi_var_buf->var;
-> -
-> -	for (;;) {
-> -		struct efi_var_entry *last;
-> -
-> -		last =3D (struct efi_var_entry *)
-> -		       ((uintptr_t)efi_var_buf + efi_var_buf->length);
-> -		if (var >=3D last)
-> -			break;
-> -		if (var->attr & EFI_VARIABLE_RUNTIME_ACCESS) {
-> -			u16 *data;
-> -
-> -			/* skip variable */
-> -			for (data =3D var->name; *data; ++data)
-> -				;
-> -			++data;
-> -			var =3D (struct efi_var_entry *)
-> -			      ALIGN((uintptr_t)data + var->length, 8);
-> -		} else {
-> -			/* delete variable */
-> -			efi_var_mem_del(var);
-> -		}
-> -	}
-> -}
-> -
-> -/**
-> - * efi_var_mem_notify_exit_boot_services() - ExitBootService callback
-> - *
-> - * @event:	callback event
-> - * @context:	callback context
-> - */
-> -static void EFIAPI
-> -efi_var_mem_notify_exit_boot_services(struct efi_event *event, void *co=
-ntext)
-> -{
-> -	EFI_ENTRY("%p, %p", event, context);
-> -
-> -	/* Delete boot service only variables */
-> -	efi_var_mem_bs_del();
-> -
-> -	EFI_EXIT(EFI_SUCCESS);
-> -}
-> -
->   /**
->    * efi_var_mem_notify_exit_boot_services() - SetVirtualMemoryMap callb=
-ack
->    *
-> @@ -241,6 +195,7 @@ static void EFIAPI __efi_runtime
->   efi_var_mem_notify_virtual_address_map(struct efi_event *event, void *=
-context)
->   {
->   	efi_convert_pointer(0, (void **)&efi_var_buf);
-> +	efi_convert_pointer(0, (void **)&efi_rt_prealloced);
->   	efi_current_var =3D NULL;
->   }
->
-> @@ -261,13 +216,21 @@ efi_status_t efi_var_mem_init(void)
->   	efi_var_buf->magic =3D EFI_VAR_FILE_MAGIC;
->   	efi_var_buf->length =3D (uintptr_t)efi_var_buf->var -
->   			      (uintptr_t)efi_var_buf;
-> -	/* crc32 for 0 bytes =3D 0 */
->
-> -	ret =3D efi_create_event(EVT_SIGNAL_EXIT_BOOT_SERVICES, TPL_CALLBACK,
-> -			       efi_var_mem_notify_exit_boot_services, NULL,
-> -			       NULL, &event);
-> +	/*
-> +	 * efi_var_collect() needs to run at runtime and provide us
-> +	 * copies of variables used for the VarToFile variable.
-> +	 * Preallocate memory equal to the variable storage and
-> +	 * preserve it to copy variables around
-> +	 */
-> +	ret =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
-> +				 EFI_RUNTIME_SERVICES_DATA,
-> +				 efi_size_in_pages(EFI_VAR_BUF_SIZE),
-> +				 &memory);
->   	if (ret !=3D EFI_SUCCESS)
->   		return ret;
-> +	efi_rt_prealloced =3D (void *)(uintptr_t)memory;
-> +
->   	ret =3D efi_create_event(EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE, TPL_CALLB=
-ACK,
->   			       efi_var_mem_notify_virtual_address_map, NULL,
->   			       NULL, &event);
-> @@ -279,7 +242,7 @@ efi_status_t efi_var_mem_init(void)
->   efi_status_t __efi_runtime
->   efi_get_variable_mem(const u16 *variable_name, const efi_guid_t *vendo=
-r,
->   		     u32 *attributes, efi_uintn_t *data_size, void *data,
-> -		     u64 *timep)
-> +		     u64 *timep, u32 mask)
->   {
->   	efi_uintn_t old_size;
->   	struct efi_var_entry *var;
-> @@ -291,6 +254,9 @@ efi_get_variable_mem(const u16 *variable_name, const=
- efi_guid_t *vendor,
->   	if (!var)
->   		return EFI_NOT_FOUND;
->
-> +	if (mask && !((var->attr & mask) =3D=3D mask))
-> +		return EFI_NOT_FOUND;
-> +
->   	if (attributes)
->   		*attributes =3D var->attr;
->   	if (timep)
-> @@ -315,7 +281,8 @@ efi_get_variable_mem(const u16 *variable_name, const=
- efi_guid_t *vendor,
->
->   efi_status_t __efi_runtime
->   efi_get_next_variable_name_mem(efi_uintn_t *variable_name_size,
-> -			       u16 *variable_name, efi_guid_t *vendor)
-> +			       u16 *variable_name, efi_guid_t *vendor,
-> +			       u32 mask)
->   {
->   	struct efi_var_entry *var;
->   	efi_uintn_t len, old_size;
-> @@ -324,6 +291,7 @@ efi_get_next_variable_name_mem(efi_uintn_t *variable=
-_name_size,
->   	if (!variable_name_size || !variable_name || !vendor)
->   		return EFI_INVALID_PARAMETER;
->
-> +skip:
->   	len =3D *variable_name_size >> 1;
->   	if (u16_strnlen(variable_name, len) =3D=3D len)
->   		return EFI_INVALID_PARAMETER;
-> @@ -347,6 +315,11 @@ efi_get_next_variable_name_mem(efi_uintn_t *variabl=
-e_name_size,
->   	efi_memcpy_runtime(variable_name, var->name, *variable_name_size);
->   	efi_memcpy_runtime(vendor, &var->guid, sizeof(efi_guid_t));
->
-> +	if (mask && !((var->attr & mask) =3D=3D mask)) {
-> +		*variable_name_size =3D old_size;
-> +		goto skip;
-> +	}
-> +
->   	return EFI_SUCCESS;
->   }
->
-> @@ -354,3 +327,14 @@ void efi_var_buf_update(struct efi_var_file *var_bu=
-f)
->   {
->   	memcpy(efi_var_buf, var_buf, EFI_VAR_BUF_SIZE);
->   }
-> +
-> +void __efi_runtime *efi_prealloced_rt_memory(void)
-> +{
-> +	char *s;
-> +	int count =3D EFI_VAR_BUF_SIZE;
-> +
-> +	s =3D (char *)efi_rt_prealloced;
-> +	while (count--)
-> +		*s++ =3D 0;
-> +	return efi_rt_prealloced;
-> +}
-> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable=
-.c
-> index f97c8c57f75c..4f529169ea54 100644
-> --- a/lib/efi_loader/efi_variable.c
-> +++ b/lib/efi_loader/efi_variable.c
-> @@ -22,6 +22,8 @@
->   #include <u-boot/crc.h>
->   #include <asm/sections.h>
->
-> +static const efi_guid_t __efi_runtime_data efi_guid_efi_rt_var_file =3D
-> +						U_BOOT_EFI_RT_VAR_FILE_GUID;
->   #ifdef CONFIG_EFI_SECURE_BOOT
->
->   /**
-> @@ -208,14 +210,16 @@ efi_get_variable_int(const u16 *variable_name, con=
-st efi_guid_t *vendor,
->   		     u32 *attributes, efi_uintn_t *data_size, void *data,
->   		     u64 *timep)
->   {
-> -	return efi_get_variable_mem(variable_name, vendor, attributes, data_si=
-ze, data, timep);
-> +	return efi_get_variable_mem(variable_name, vendor, attributes, data_si=
-ze,
-> +				    data, timep, 0);
->   }
->
->   efi_status_t __efi_runtime
->   efi_get_next_variable_name_int(efi_uintn_t *variable_name_size,
->   			       u16 *variable_name, efi_guid_t *vendor)
->   {
-> -	return efi_get_next_variable_name_mem(variable_name_size, variable_nam=
-e, vendor);
-> +	return efi_get_next_variable_name_mem(variable_name_size, variable_nam=
-e,
-> +					      vendor, 0);
->   }
->
->   /**
-> @@ -479,6 +483,8 @@ if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
->   	efi_uintn_t ret;
->   	bool append, delete;
->   	u64 time =3D 0;
-> +	struct efi_var_file *buf;
-> +	loff_t len;
->
->   	/*
->   	 * Authenticated variables are not supported the rest of the checks
-> @@ -520,30 +526,60 @@ if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
->   			return EFI_NOT_FOUND;
->   	}
->
-> -	if (delete) {
-> +	if (!delete) {
-> +		/*
-> +		 * We always insert new variabes and delete the old one when
-> +		 * appending
-> +		 */
-> +		len =3D 2 * (u16_strlen(variable_name) + 1) + data_size +
-> +			sizeof(struct efi_var_entry);
-> +		if (var && append)
-> +			 len +=3D 2 * var->length;
-> +		/*
-> +		 * We will copy the variable update into VarToFile,
-> +		 * account for it twice
-> +		 */
-> +		len *=3D 2;
-> +		if (len > efi_var_mem_free())
-> +			return EFI_OUT_OF_RESOURCES;
-> +		if (append && var) {
-> +			u16 *old_data =3D var->name;
-> +
-> +			for (; *old_data; ++old_data)
-> +				;
-> +			++old_data;
-> +			ret =3D efi_var_mem_ins(variable_name, vendor, attributes,
-> +					      var->length, old_data, data_size,
-> +					      data, time);
-> +		} else {
-> +			ret =3D efi_var_mem_ins(variable_name, vendor, attributes,
-> +					      data_size, data, 0, NULL, time);
-> +		}
-> +	} else {
->   		/* EFI_NOT_FOUND has been handled before */
->   		attributes =3D var->attr;
->   		ret =3D EFI_SUCCESS;
-> -	} else if (append && var) {
-> -		u16 *old_data =3D var->name;
-> -
-> -		for (; *old_data; ++old_data)
-> -			;
-> -		++old_data;
-> -		ret =3D efi_var_mem_ins(variable_name, vendor, attributes,
-> -				      var->length, old_data, data_size, data,
-> -				      time);
-> -	} else {
-> -		ret =3D efi_var_mem_ins(variable_name, vendor, attributes,
-> -				      data_size, data, 0, NULL, time);
->   	}
-> -
->   	if (ret !=3D EFI_SUCCESS)
->   		return ret;
->   	/* We are always inserting new variables, get rid of the old copy */
->   	efi_var_mem_del(var);
->
-> -	return EFI_SUCCESS;
-> +	/*
-> +	 * Create a volatile variable that userspace apps can dd and
-> +	 * update the file contents
-> +	 */
-> +	ret =3D efi_var_collect(&buf, &len, EFI_VARIABLE_NON_VOLATILE);
-> +	if (ret !=3D EFI_SUCCESS)
-> +		return ret;
-> +	var =3D efi_var_mem_find(&efi_guid_efi_rt_var_file, u"VarToFile", NULL=
-);
-> +	if (var)
-> +		efi_var_mem_del(var);
-> +
-> +	ret =3D efi_var_mem_ins(u"VarToFile", &efi_guid_efi_rt_var_file,
-> +			      EFI_VARIABLE_RUNTIME_ACCESS, len, buf, 0,
-> +			      NULL, time);
-> +	return ret;
->   } else
->
->   	return EFI_UNSUPPORTED;
-> @@ -557,11 +593,11 @@ void efi_variables_boot_exit_notify(void)
->   	const efi_guid_t efi_guid_efi_rt_var_file =3D U_BOOT_EFI_RT_VAR_FILE_=
-GUID;
->   	const efi_guid_t rt_prop_guid =3D EFI_RT_PROPERTIES_TABLE_GUID;
->   	efi_status_t ret;
-> +	struct efi_var_file *buf;
-> +	loff_t len;
-> +	bool fail =3D false;
->
->   	if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
-> -		struct efi_rt_properties_table *rt_prop =3D
-> -			efi_get_configuration_table(&rt_prop_guid);
-> -
->   		ret =3D efi_set_variable_int(u"RTStorageVolatile",
->   					   &efi_guid_efi_rt_var_file,
->   					   EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> @@ -569,11 +605,47 @@ void efi_variables_boot_exit_notify(void)
->   					   EFI_VARIABLE_READ_ONLY,
->   					   sizeof(EFI_VAR_FILE_NAME),
->   					   EFI_VAR_FILE_NAME, false);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			fail =3D true;
-> +			goto out;
-> +		}
-> +
-> +		ret =3D efi_var_collect(&buf, &len, EFI_VARIABLE_NON_VOLATILE);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			fail =3D true;
-> +			goto out;
-> +		}
-> +
-> +		ret =3D efi_set_variable_int(u"VarToFile",
-> +					   &efi_guid_efi_rt_var_file,
-> +					   EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +					   EFI_VARIABLE_RUNTIME_ACCESS,
-> +					   len,
-> +					   buf, false);
->   		if (ret !=3D EFI_SUCCESS)
-> -			rt_prop->runtime_services_supported |=3D ~EFI_RT_SUPPORTED_SET_VARIA=
-BLE;
-> -		else
-> -			log_err("Can't RTStorage. SetVariableRT won't be available\n");
-> +			fail =3D true;
-> +out:
-> +		if (fail) {
-> +			efi_set_variable_int(u"RTStorageVolatile",
-> +					     &efi_guid_efi_rt_var_file,
-> +					     EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +					     EFI_VARIABLE_RUNTIME_ACCESS |
-> +					     EFI_VARIABLE_READ_ONLY, 0, 0,
-> +					     false);
-
-Not providing VarToFile because the memory buffer is more than half
-filled before ExitBootServices() is unexpected behavior. This needs rework=
-.
-
-It is not necessary to create VarToFile in the internal memory buffer.
-You could generate it when the user calls GetVariable() in the user
-provided buffer.
-
-Best regards
-
-Heinrich
-
-> +			efi_set_variable_int(u"VarToFile",
-> +					     &efi_guid_efi_rt_var_file,
-> +					     EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +					     EFI_VARIABLE_RUNTIME_ACCESS, 0, 0,
-> +					     false);
-> +		} else {
-> +			struct efi_rt_properties_table *rt_prop =3D
-> +				efi_get_configuration_table(&rt_prop_guid);
-> +
-> +			rt_prop->runtime_services_supported |=3D
-> +					EFI_RT_SUPPORTED_SET_VARIABLE;
-> +		}
->   	}
-> +
->   	/* Switch variable services functions to runtime version */
->   	efi_runtime_services.get_variable =3D efi_get_variable_runtime;
->   	efi_runtime_services.get_next_variable_name =3D
-> diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_vari=
-able_tee.c
-> index dde135fd9f81..9d0e270591ea 100644
-> --- a/lib/efi_loader/efi_variable_tee.c
-> +++ b/lib/efi_loader/efi_variable_tee.c
-> @@ -969,7 +969,6 @@ void efi_variables_boot_exit_notify(void)
->   		log_err("Can't populate EFI variables. No runtime variables will be =
-available\n");
->   	else
->   		efi_var_buf_update(var_buf);
-> -	free(var_buf);
->
->   	/* Update runtime service table */
->   	efi_runtime_services.query_variable_info =3D
-> --
-> 2.37.2
+> Why do you want to remove this flag?
 >
 
+I don't, I messed this up during my rebase before sending the patches.
+
+The code in EBS() was supposed to re-enable it.
+It's all fixed in patch #3, but this patch needs a change as well
+rt_prop->runtime_services_supported |= ~EFI_RT_SUPPORTED_SET_VARIABLE;
+should be
+rt_prop->runtime_services_supported |= EFI_RT_SUPPORTED_SET_VARIABLE;
+in efi_variables_boot_exit_notify()
+
+Thanks
+/Ilias
+
+> Best regards
+>
+> Heinrich
+>
+> >       /*
+> >        * This value must be synced with efi_runtime_detach_list
+> >        * as well as efi_runtime_services.
+> > diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+> > index f79041e6bedd..f97c8c57f75c 100644
+> > --- a/lib/efi_loader/efi_variable.c
+> > +++ b/lib/efi_loader/efi_variable.c
+> > @@ -554,6 +554,26 @@ if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
+> >    */
+> >   void efi_variables_boot_exit_notify(void)
+> >   {
+> > +     const efi_guid_t efi_guid_efi_rt_var_file = U_BOOT_EFI_RT_VAR_FILE_GUID;
+> > +     const efi_guid_t rt_prop_guid = EFI_RT_PROPERTIES_TABLE_GUID;
+> > +     efi_status_t ret;
+> > +
+> > +     if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
+> > +             struct efi_rt_properties_table *rt_prop =
+> > +                     efi_get_configuration_table(&rt_prop_guid);
+> > +
+> > +             ret = efi_set_variable_int(u"RTStorageVolatile",
+> > +                                        &efi_guid_efi_rt_var_file,
+> > +                                        EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> > +                                        EFI_VARIABLE_RUNTIME_ACCESS |
+> > +                                        EFI_VARIABLE_READ_ONLY,
+> > +                                        sizeof(EFI_VAR_FILE_NAME),
+> > +                                        EFI_VAR_FILE_NAME, false);
+> > +             if (ret != EFI_SUCCESS)
+> > +                     rt_prop->runtime_services_supported |= ~EFI_RT_SUPPORTED_SET_VARIABLE;
+> > +             else
+> > +                     log_err("Can't RTStorage. SetVariableRT won't be available\n");
+> > +     }
+> >       /* Switch variable services functions to runtime version */
+> >       efi_runtime_services.get_variable = efi_get_variable_runtime;
+> >       efi_runtime_services.get_next_variable_name =
+>
