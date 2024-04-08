@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B85CCD1292
-	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:53:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B17C67861
+	for <u-boot@archiver.kernel.org>; Mon,  8 Apr 2024 22:54:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB9128830F;
-	Tue,  9 Apr 2024 00:46:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3D1F788315;
+	Tue,  9 Apr 2024 00:46:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="i+DbAJpH";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="iDqxwXBN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9E608814A; Mon,  8 Apr 2024 23:34:24 +0200 (CEST)
+ id D7CD787DEA; Mon,  8 Apr 2024 23:34:24 +0200 (CEST)
 Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 230CA88180
+ by phobos.denx.de (Postfix) with ESMTPS id 6574788188
  for <u-boot@lists.denx.de>; Mon,  8 Apr 2024 23:34:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LYCWs058289;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 438LYCRk058297;
  Mon, 8 Apr 2024 16:34:12 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1712612052;
- bh=pypH7MvIrIHepPFVPZxMMeCh7NilQhAHEfF+r9/Vpkw=;
+ bh=MPbG93Y36cDB6zEGPkFum+ZW/A8U9kV9su2vW0nB/HI=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=i+DbAJpHGYM7D2s8vgqm4KMQhuiz2xxhrYciFDueAmZGHDGucHfpSfZ+TMKRHWpc5
- 6akCVbCEId3ShIOspxm3FY1VQGARFEFPr/mn2FtroxrANpMr7WYPlrcEPCLADid3zD
- ky1BJgAjhl186VmJZ8hgATmIgyWynt/r/MJ5DkGA=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LYCHI086506
+ b=iDqxwXBN2acBMjZD8P6/iSVVg4jmGmimP8lslbwdUQ7/Uxe8oISvKCsXUlzKfWbk5
+ 78IODd2VjSTT9HlZzXm9NAI0mmhj0LGE9jc/l9ueQRDouTOS16Rrgn2d8U56OmGU3D
+ 5rxMoaNdMC3f3CzdWMyLSTdu4uIDRvDzMwBjaV7A=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 438LYCYM069554
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 8 Apr 2024 16:34:12 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 8
  Apr 2024 16:34:12 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Mon, 8 Apr 2024 16:34:12 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LYCFp106516;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 438LYCNV053878;
  Mon, 8 Apr 2024 16:34:12 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Simon Glass <sjg@chromium.org>, Neha Malcom Francis <n-francis@ti.com>,
@@ -59,9 +59,9 @@ To: Simon Glass <sjg@chromium.org>, Neha Malcom Francis <n-francis@ti.com>,
  Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini
  <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH 08/13] configs: am62px: Set capsule update signature list file
-Date: Mon, 8 Apr 2024 16:33:44 -0500
-Message-ID: <20240408213349.96610-9-j-humphreys@ti.com>
+Subject: [PATCH 13/13] configs: beagleboneai64: Enable capsule authentication
+Date: Mon, 8 Apr 2024 16:33:49 -0500
+Message-ID: <20240408213349.96610-14-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240408213349.96610-1-j-humphreys@ti.com>
 References: <20240408213349.96610-1-j-humphreys@ti.com>
@@ -88,18 +88,19 @@ X-Virus-Status: Clean
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- configs/am62px_evm_a53_defconfig | 1 +
+ configs/j721e_beagleboneai64_a72_defconfig | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
-index 15ba1079760..ea72eaf2d42 100644
---- a/configs/am62px_evm_a53_defconfig
-+++ b/configs/am62px_evm_a53_defconfig
-@@ -178,3 +178,4 @@ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
+diff --git a/configs/j721e_beagleboneai64_a72_defconfig b/configs/j721e_beagleboneai64_a72_defconfig
+index 5aeb4c08d31..c1d30b3db68 100644
+--- a/configs/j721e_beagleboneai64_a72_defconfig
++++ b/configs/j721e_beagleboneai64_a72_defconfig
+@@ -174,4 +174,5 @@ CONFIG_LZO=y
  CONFIG_EFI_SET_TIME=y
  CONFIG_EFI_CAPSULE_ON_DISK=y
  CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-+CONFIG_EFI_CAPSULE_ESL_FILE="arch/arm/mach-k3/keys/custMpk.esl"
++CONFIG_EFI_CAPSULE_AUTHENTICATE=y
+ CONFIG_EFI_CAPSULE_ESL_FILE="arch/arm/mach-k3/keys/custMpk.esl"
 -- 
 2.34.1
 
