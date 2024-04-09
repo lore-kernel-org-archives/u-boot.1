@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97FEFCD128A
-	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 18:04:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B3BC67861
+	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 18:04:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58B5888196;
-	Tue,  9 Apr 2024 20:03:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id BFD8F87F01;
+	Tue,  9 Apr 2024 20:03:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I2MnXh24";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="v2kzf1sa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E7FD87F01; Tue,  9 Apr 2024 20:03:17 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 7081487DCA; Tue,  9 Apr 2024 20:03:20 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF94E880D6
- for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 20:03:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FC2B88198
+ for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 20:03:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a51a1c8d931so546023166b.0
- for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 11:03:15 -0700 (PDT)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a51addddbd4so479014166b.0
+ for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 11:03:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712685795; x=1713290595; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712685796; x=1713290596; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=R0pR7USvI+Ih/FdJ1dMA4BzTcYnSBcRZgZ9bLcEt9nA=;
- b=I2MnXh24vDVbLzOb9Drwnhcw/oUWbMrFQGRqZQSUxo1iNLRcx+OEai8k8EkgI1scjF
- 85w1xgHSSAQUXUpFiD2DXG3BVC+YGO5FDFwpfGvwZopdT593dGlU90oqv8RqME2RZrSX
- GcuJ6xDXAW49ByQMjjnX3ai4dJt84L7UQCVv4K3MJt9kw32FWMJhW/sDcG80yfFzW2vY
- pxIjkwS2+Gg5cCNIB6QR/62soIgh+TW+T1ad28Lc9j34Sa2KNZ3Sysu3D+XWmqkTm006
- AUbUvRkqHREpZcKE4LLyVF/Io88s7GIoez7qDgSXlVMc/onnj3FduGdXuwW7vFuy50S3
- 4DYw==
+ :reply-to; bh=fZ0Qlh1Opm2kOOa7cUT1mrSTjeJPcggoDsoX+RHEsXs=;
+ b=v2kzf1sad34wKXK/L/RiuBt5XDE9jHV7k/d36m2yQLB38BCvd0OBP0OSr2mG27mxwl
+ m3784li5Qcb87ycJm/hkfaZqcGrW1qFu6H/juaQe9/rHXSloDHT8wGgOXkgonjAj2nSx
+ oJNexpZyXvA5TxX3XsHbbAWgJJN+onfiuOH1C3SHvpPukj3IM9jGsKbbLH234iofN0Zh
+ L6NHLIm2BUKmpZPb2OraiRSWZ6VF8/WvE8Vm49A+kBCN+mEgz3gyhH3yd1j89neAa4ai
+ kwFGgQfT/FbmJQx26/MHTLlaqXAgsYZ5ijDu+vFEOAouQkbHZckFPvIK7mG5qjsvwqNS
+ UFzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712685795; x=1713290595;
+ d=1e100.net; s=20230601; t=1712685796; x=1713290596;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R0pR7USvI+Ih/FdJ1dMA4BzTcYnSBcRZgZ9bLcEt9nA=;
- b=j/Y0oPfmjbcZ6/lkTP0BgEgTCe8fE5MgynHHAMg3e6n1EOicO0xqktZQpSEBxy1CWV
- jsmbFdJ8xXH/TGl0iShLprkIienAPJjqh7aBzwu77uDMnsURxpUoxZKSQST6f79oNKP7
- +mociLG10egkJXdBzufFetPs3klM1meuKNXKFad8L5Yf8jYymN3O0bdIJNHAdpAVrXaz
- dhtNP3ZSOzUDuYxfs40q0APVnMPBZeKSnRbG2XDBLkeRjVQKM+FB380CJK4y/AI5YhFK
- W6Qfk+KouxzYFlXkf9FrEyvuxZGcN5Er2O+6OQmO98kPLF9l+xA4Tl3mA22/WsV9x+Zc
- OPJQ==
-X-Gm-Message-State: AOJu0YzrSzF/hW7HWX4cbivH+GDAEbTWKgE+93P2r61P7geuniLuHRI0
- Jr/95Sucl/U7OdK8ys037sdZnviT/AeXr5pMq0oFCxyi9cEtY6aobMwjR3F4SBQ=
-X-Google-Smtp-Source: AGHT+IFivJsQC90EJjqy8hFHPRxm5R8NznND09OtYTIy5FM+sDwhDTFxE3Yujfnng3919KiIeyg6sA==
-X-Received: by 2002:a17:906:3492:b0:a51:b931:59c2 with SMTP id
- g18-20020a170906349200b00a51b93159c2mr146451ejb.73.1712685795284; 
- Tue, 09 Apr 2024 11:03:15 -0700 (PDT)
+ bh=fZ0Qlh1Opm2kOOa7cUT1mrSTjeJPcggoDsoX+RHEsXs=;
+ b=kT7N6CCiJv9s/wGyxPOR0hAqis0dEXJvm/GPEcWf/ciCiCTJ70egkZrM9ksbGbqonW
+ Lbqtqf4d29O/Xg4OhaHDXsI8pT9uCnwPw20izcfsN1ID3MuqHva1gjch5c5M/xhdSnXb
+ yca3LaFAQII876o25R7xE3wZxsTnRbLWwCa6J1wzaAl68lnlRAep6sqB1rudyTuspHxL
+ 8FshAGrr+8Lfj4F6oUpW2kmaAC7Yo1SPt7uhc/j+ztMyLQQ0aBMBUhKBIKsXs+B9dz3T
+ PQ18hwDbuITxEpI7abo9hzZ65EmzImV3wP/5HcoIOGautoKrxmWV7KTKVNd1u721wKOq
+ LM4w==
+X-Gm-Message-State: AOJu0YxOn7/7YCZ8KGulB/bFCjntfb5QSKhQ9YIL7oJFB0l47hBmKWWY
+ 2soBEioBNv5GlJY/n9LcjfU5yhD5RXoHCHtc7O6G/8Ufqj4arT87zCJN6gX/BZo=
+X-Google-Smtp-Source: AGHT+IETF1WAPhv6F990uFFHDwn50WBmt85FR2sqygrJ1tNzR+UO+olmrkkbU5RK/36BGv0xcweS+w==
+X-Received: by 2002:a17:907:968b:b0:a51:d1f6:3938 with SMTP id
+ hd11-20020a170907968b00b00a51d1f63938mr166603ejc.42.1712685796674; 
+ Tue, 09 Apr 2024 11:03:16 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::570d])
  by smtp.gmail.com with ESMTPSA id
- d4-20020a170907272400b00a4e5866448bsm5928783ejl.155.2024.04.09.11.03.14
+ d4-20020a170907272400b00a4e5866448bsm5928783ejl.155.2024.04.09.11.03.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Apr 2024 11:03:14 -0700 (PDT)
+ Tue, 09 Apr 2024 11:03:15 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 09 Apr 2024 20:03:05 +0200
-Subject: [PATCH 6/7] pinctrl: qcom: sdm845: add special pin names
+Date: Tue, 09 Apr 2024 20:03:06 +0200
+Subject: [PATCH 7/7] dts: sdm845-db845c-u-boot: adjust MMC clocks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240409-b4-qcom-mmc-fixes-v1-6-5039164ecbf7@linaro.org>
+Message-Id: <20240409-b4-qcom-mmc-fixes-v1-7-5039164ecbf7@linaro.org>
 References: <20240409-b4-qcom-mmc-fixes-v1-0-5039164ecbf7@linaro.org>
 In-Reply-To: <20240409-b4-qcom-mmc-fixes-v1-0-5039164ecbf7@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>, 
@@ -80,21 +80,21 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1218;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=784;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=kvJA2hpDrvXL5Le9dVlPd02xqhweuffSPTKkrxeYBNo=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmFYLY2jKbBZWPPDKbWgwMi5egMc6k4+UAoMEDM
- LiuclyMnQOJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZhWC2AAKCRAFgzErGV9k
- ts/VD/wIVwIsYAsl4ZJEe+Wl3x9b/5kKfmPqgbHLcaV4V9BL4VcA+JQmnkbpb6PKIdHIIFDI5Gg
- iIGxITozvsLJREZplFmmIRKe9rq02M3UW0sML9ST0IuLv2gmu/pXboYaG/LdjeqWsHs1bIxdFr8
- /5cG8VJfrSqyPp8BqgeyALcxD8E/m4Qg8tcX3Gpo7sUjSPmXG9eUSx8IQP3J+roGGEahUcn/ErP
- 3URw8mDuBGZHBxVdS3M7Xotk2V36XANcPDokRBBa47tn9EQdFX9W02KHqogPRYjKRtpF4t/Xp1d
- P8To2o1uRveyEVmI7jaDFnkPmvk58HstsVq5wuvRGz6lufeG1hhas7OmwnpRDxzUcqz5DdtS8ww
- IwKJnol1PRVxuKf3dZDw4zUjC5vcahhC7hNCL195pZlS/fMxJ4lJ6VI9HvNbPPgU94EbV3Mq1+h
- +QsrTBGea5tDtH1n732Pt0L1jQujpChoPkTddj6NdwkG27rYeoASMsqOFzWXuMRrwDStxbX10Tn
- 5GEgqMDWstjMET5Utz5lbaVdVa3KNHFVvXtzPPZ33IKsDOCC9UcxcrfPSQDTOqhp1WEsNxQ4I7f
- AgokHlQIMKvMZcRqXaDQ4djfpoeBw9OQDyk/1Qju/WPQpxgPxJKjACU/mTAElU+VwbJdKYLskcI
- 5Avbzl5cYrkhEmw==
+ bh=SvaptCVs6q8sz0/p15Ii66d2UrAbTXUC6dXIwR0+daY=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmFYLYDj4JPK9t5f5YjCjTOm/b8ewsIb0hfJ4pU
+ IlHsvkhGpiJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZhWC2AAKCRAFgzErGV9k
+ tkJtD/9Wik1GfDq6hwS/r6fi+xnhfUzHID75m6nq9tVFXqYSyeqMh71pszCTvrZ5NIMmG1IiWo/
+ ZUoozBtT3D6zNyn3zQvg/vpvgkJ3/weZ/vpeoTxziGjzkz8MXn1gpn0HjP+qqW24L7RXPyqLTH/
+ eRFFX0MSSr6NJhO+f6rG1hdzjTZDCtWIY2P4pQ2bOA1jZohsjufMLxNmp1lUEAUaGF1Bky4NR/h
+ 9OniuPB/ow7ReVMID4JiPXANzxQSS+jVyuY+zcxSL1wxAnfYkPOSQZ4bq92IjI4PUwhGxU2Niyj
+ CyKkAM1uaGH6eGl/4rC1NLRMjeqlOffReqi9a4R4UGcgpvdaJ/SWndlyaPnGdY7wLKHKMQlvaK2
+ 7XD3mnCC/HwPBbPb+dcETRJSN8SNGqbZ61havOAhslwHKipCPyxSEP9Pr7PzrSCOIjUmcvNZ4JQ
+ 3Gov8tq3uvPQzQVmI/aQbVx9RJ04UQctgrocja6E3cgruKdejrhBTHt3IrrEl4LXXR0GO3vZgXb
+ C9/H+OwWg2bne6G1bL7dnEcI3pw0SKm2ta0qK8z3z4aeRDs3JY8EhMwHKkajPcirnqHfdPnwjkJ
+ UYrBFCZ8qJ/RDECgY3KKqGA3fP9viI7uRGs58fsEJ3RtSl7tZAj/4bIYecpXFLdvnVg5VYi+be4
+ hKCwTFst7qmlRhg==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -113,40 +113,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust sdm845_get_pin_name() to return the correct names for the special
-pins. This fixes a non-fatal -ENOSYS error when probing MMC.
+Remove the reference to the xo clock which is on the unsupported rpmhcc
+clock controller. It isn't needed for MMC functionality.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/pinctrl/qcom/pinctrl-sdm845.c | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+ arch/arm/dts/sdm845-db845c-u-boot.dtsi | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-sdm845.c b/drivers/pinctrl/qcom/pinctrl-sdm845.c
-index 459a4329ec80..c1e5cc01fded 100644
---- a/drivers/pinctrl/qcom/pinctrl-sdm845.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sdm845.c
-@@ -65,9 +65,20 @@ static const char *sdm845_get_function_name(struct udevice *dev,
- 
- static const char *sdm845_get_pin_name(struct udevice *dev,
- 					unsigned int selector)
- {
--	snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-+	static const char *special_pins_names[] = {
-+		"ufs_reset",
-+		"sdc2_clk",
-+		"sdc2_cmd",
-+		"sdc2_data",
-+	};
+diff --git a/arch/arm/dts/sdm845-db845c-u-boot.dtsi b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
+index 906f9faa5451..9e4533e603c5 100644
+--- a/arch/arm/dts/sdm845-db845c-u-boot.dtsi
++++ b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
+@@ -6,4 +6,11 @@
+  */
+ &pcie0_3p3v_dual {
+ 	regulator-always-on;
+ };
 +
-+	if (selector >= 150 && selector <= 154)
-+		snprintf(pin_name, MAX_PIN_NAME_LEN, special_pins_names[selector - 150]);
-+	else
-+		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-+
- 	return pin_name;
- }
- 
- static unsigned int sdm845_get_function_mux(__maybe_unused unsigned int pin,
++&sdhc_2 {
++	/* Remove the unsupported rpmhcc xo clock reference */
++	clocks = <&gcc GCC_SDCC2_AHB_CLK>,
++		 <&gcc GCC_SDCC2_APPS_CLK>;
++	clock-names = "iface", "core";
++};
 
 -- 
 2.44.0
