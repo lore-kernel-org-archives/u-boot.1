@@ -4,59 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D75CECD1284
-	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 12:57:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78672CD1284
+	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 12:58:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08C0587F01;
+	by phobos.denx.de (Postfix) with ESMTP id 7831788150;
 	Tue,  9 Apr 2024 14:57:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nabijaczleweli.xyz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kzkQe1rp";
+	dkim=pass (2048-bit key; secure) header.d=nabijaczleweli.xyz header.i=@nabijaczleweli.xyz header.b="Wqty4nu5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10081880BB; Tue,  9 Apr 2024 13:54:26 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
+ id 0ED468817B; Tue,  9 Apr 2024 14:14:37 +0200 (CEST)
+Received: from tarta.nabijaczleweli.xyz (tarta.nabijaczleweli.xyz
+ [139.28.40.42])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7AC487A4B
- for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 13:54:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=pratyush@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 78B96614F0;
- Tue,  9 Apr 2024 11:54:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id D0262C433F1;
- Tue,  9 Apr 2024 11:54:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1712663662;
- bh=T7qRp73RXIBA1ShlCndYs67DU+Q/MejpgSPCDslo37g=;
- h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
- b=kzkQe1rpMJU2gcfBOAfHgKonZnApGGPkUfBR3cadXx8yuoAGX5YsIi9kj68WC6bwI
- UVUVSTm0zp3YD6CFO5cwZXtuofRfZDg6bEzzNw6QppOZgxcJFivLoLwS9P3ZZbWHzp
- KxyfywRmrSSvUVvSpAP5aG2a0P8XOz32QaQpO6DDRHw4JaCw/I0qxf8+Wj9PufeZm9
- rNO+UyjuWxQ9B5fhK+moAEWdO3QET0/kE8gjrl7Oq4inJaw8HpBE2w81TTV75LCGDz
- 9Nc8dFLjo7ygOcNrcE72v8GI7pHo0DTBYQhh4kkT1NJEffGL27vqs3mwPJD67/lnBY
- 8BBhRbhNZLBxA==
-From: Pratyush Yadav <pratyush@kernel.org>
-To: tkuw584924@gmail.com
-Cc: u-boot@lists.denx.de,  jagan@amarulasolutions.com,  vigneshr@ti.com,
- tudor.ambarus@linaro.org,  pratyush@kernel.org,  d-gole@ti.com,
- Bacem.Daassi@infineon.com,  Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: Re: [PATCH v2 3/3] mtd: spi-nor-id: Add S25FS064S, S25FS128S,
- S25FS256S IDs
-In-Reply-To: <37d92e2931b646f97f73650c0306adb736bd0efc.1712638210.git.Takahiro.Kuwano@infineon.com>
- (tkuw's message of "Tue, 9 Apr 2024 15:20:22 +0900")
-References: <cover.1712638210.git.Takahiro.Kuwano@infineon.com>
- <37d92e2931b646f97f73650c0306adb736bd0efc.1712638210.git.Takahiro.Kuwano@infineon.com>
-Date: Tue, 09 Apr 2024 13:54:19 +0200
-Message-ID: <mafs0edbe92fo.fsf@kernel.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ by phobos.denx.de (Postfix) with ESMTPS id 09A9088173
+ for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 14:14:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=nabijaczleweli.xyz
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=nabijaczleweli@nabijaczleweli.xyz
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=nabijaczleweli.xyz;
+ s=202305; t=1712664874;
+ bh=D2ed9BT0RCkQTXzQzGDA+t3yschimo5ULgA58lJrrB8=;
+ h=Date:From:To:Subject:References:In-Reply-To:From;
+ b=Wqty4nu5bXlLVsCgJ1tiT/MvwWY3zpsGZYbY1YxRu9TElR/jiWe3CRAzoxOmlNubs
+ SZUAi/8AZfLZKbrotEz0GH3dlkTiro8xynkuoZR0tqcH/86Uo9E0mZ62Y9iSABJIj6
+ FGp9JKAX7Sy1N1lvBPO1Z4BTCuZXu/Ubu284XrSerK0FDSQuWOHBXHBXNCLKmvrpEu
+ tIpwQQrSsHBjbTRMoFFvdjh9RGEqK4IPR+IFwEAIEvt+X2LduSsRZoe7YlVMMuTBBv
+ KO93qipYzjiN5bmLZQ9hJ6WjBM9AulOswY6qoDhXq4Lu6csAd6iPuHUxiv1LSQ4Umg
+ 87eHp0fd7nJZQ==
+Received: from tarta.nabijaczleweli.xyz (unknown [192.168.1.250])
+ by tarta.nabijaczleweli.xyz (Postfix) with ESMTPSA id 677F8293E;
+ Tue,  9 Apr 2024 14:14:34 +0200 (CEST)
+Date: Tue, 9 Apr 2024 14:14:34 +0200
+From: Ahelenia =?utf-8?Q?Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>
+To: Dragan Simic <dsimic@manjaro.org>, Tom Rini <trini@konsulko.com>, 
+ u-boot@lists.denx.de
+Subject: [PATCH v4] tools: copyfile: use 64k instead of 512 buffer
+Message-ID: <xp66c7g532kqzu6tai7enm3ribhhvftsr2o7uqfv3qmodcxy5l@tarta.nabijaczleweli.xyz>
+References: <af5db6b1165d5f800f21463592779f8e@manjaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="mddm2rigptc5oo7l"
+Content-Disposition: inline
+In-Reply-To: <af5db6b1165d5f800f21463592779f8e@manjaro.org>
+User-Agent: NeoMutt/20231221-2-4202cf-dirty
 X-Mailman-Approved-At: Tue, 09 Apr 2024 14:57:26 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -74,78 +69,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 09 2024, tkuw584924@gmail.com wrote:
 
-> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
->
-> The S25FS064S, S25FS128S, and S25FS256S are the same family of SPI NOR
-> Flash devices with S25FS512S. Some difference depending on the device
-> densities are taken care in post SFDP fixup.
->
-> Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-> ---
->  drivers/mtd/spi/spi-nor-core.c | 24 ++++++++++++++++++------
->  drivers/mtd/spi/spi-nor-ids.c  |  3 +++
->  2 files changed, 21 insertions(+), 6 deletions(-)
->
-> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-> index 9620852817..9b81b31e8e 100644
-> --- a/drivers/mtd/spi/spi-nor-core.c
-> +++ b/drivers/mtd/spi/spi-nor-core.c
-> @@ -3356,12 +3356,24 @@ static int s25fs_s_post_bfpt_fixup(struct spi_nor *nor,
->  static void s25fs_s_post_sfdp_fixup(struct spi_nor *nor,
->  				    struct spi_nor_flash_parameter *params)
->  {
-> -	/* READ_1_1_2 is not supported */
-> -	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
-> -	/* READ_1_1_4 is not supported */
-> -	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
-> -	/* PP_1_1_4 is not supported */
-> -	params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
-> +	/*
-> +	 * The S25FS064S(8MB) supports 1-1-2 and 1-1-4 commands, but params for
-> +	 * read ops in SFDP are wrong. The other density parts do not support
-> +	 * 1-1-2 and 1-1-4 commands.
-> +	 */
-> +	if (params->size == SZ_8M) {
-> +		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_2],
-> +					  0, 8, SPINOR_OP_READ_1_1_2,
-> +					  SNOR_PROTO_1_1_2);
-> +		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_4],
-> +					  0, 8, SPINOR_OP_READ_1_1_4,
-> +					  SNOR_PROTO_1_1_4);
-> +	} else {
-> +		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
-> +		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
-> +		params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
-> +	}
-> +
+--mddm2rigptc5oo7l
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Pratyush Yadav <pratyush@kernel.org>
+This is a trivial but significant optimization:
+mkimage took >200ms (and 49489 writes (of which 49456 512)),
+now it takes  110ms (and   419 writes (of which   386 64k)).
 
-BTW (not directly related to this patch), I looked at the datasheet you
-provided in the cover letter and it says dual and quad I/O is supported
-for the 16 MB and 32 MB parts as well. Why do you mask them out here
-then?
+sendfile is much more appropriate for this and is done in one syscall,
+but doesn't bring any significant speedups over 64k r/w
+at the 13M size ranges, so there's no need to introduce
+	#if __linux__
+	while((size =3D sendfile(fd_dst, fd_src, NULL, 128 * 1024 * 1024)) > 0)
+		;
+	if(size !=3D -1) {
+		ret =3D 0;
+		goto out;
+	}
+	#endif
 
->  	/* Use volatile register to enable quad */
->  	params->quad_enable = s25fs_s_quad_enable;
->  }
-> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-> index a3dca506a3..9ca1f244f0 100644
-> --- a/drivers/mtd/spi/spi-nor-ids.c
-> +++ b/drivers/mtd/spi/spi-nor-ids.c
-> @@ -341,6 +341,9 @@ const struct flash_info spi_nor_ids[] = {
->  	{ INFO6("s25fl256s0", 0x010219, 0x4d0080, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
->  	{ INFO6("s25fl256s1", 0x010219, 0x4d0180,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
->  	{ INFO6("s25fl512s",  0x010220, 0x4d0080, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-> +	{ INFO6("s25fs064s",  0x010217, 0x4d0181,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-> +	{ INFO6("s25fs128s",  0x012018, 0x4d0181,  64 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-> +	{ INFO6("s25fs256s",  0x010219, 0x4d0181,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
->  	{ INFO6("s25fs512s",  0x010220, 0x4d0081, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
->  	{ INFO("s25fl512s_256k",  0x010220, 0x4d00, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
->  	{ INFO("s25fl512s_64k",  0x010220, 0x4d01, 64 * 1024, 1024, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+Also extract the buffer size to a macro.
 
--- 
-Regards,
-Pratyush Yadav
+Signed-off-by: Ahelenia Ziemia=C5=84ska <nabijaczleweli@nabijaczleweli.xyz>
+---
+ tools/fit_common.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/tools/fit_common.c b/tools/fit_common.c
+index 2d417d47..d1cde16c 100644
+--- a/tools/fit_common.c
++++ b/tools/fit_common.c
+@@ -23,6 +23,8 @@
+ #include <image.h>
+ #include <u-boot/crc.h>
+=20
++#define COPYFILE_BUFSIZE (64 * 1024)
++
+ void fit_print_header(const void *fit, struct image_tool_params *params)
+ {
+ 	fit_print_contents(fit);
+@@ -145,14 +147,14 @@ int copyfile(const char *src, const char *dst)
+ 		goto out;
+ 	}
+=20
+-	buf =3D calloc(1, 512);
++	buf =3D calloc(1, COPYFILE_BUFSIZE);
+ 	if (!buf) {
+ 		printf("Can't allocate buffer to copy file\n");
+ 		goto out;
+ 	}
+=20
+ 	while (1) {
+-		size =3D read(fd_src, buf, 512);
++		size =3D read(fd_src, buf, COPYFILE_BUFSIZE);
+ 		if (size < 0) {
+ 			printf("Can't read file %s\n", src);
+ 			goto out;
+--=20
+2.39.2
+
+--mddm2rigptc5oo7l
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEfWlHToQCjFzAxEFjvP0LAY0mWPEFAmYVMScACgkQvP0LAY0m
+WPGLIA//YTtuqh1Kc60X/BDTFEMZfbaCLrlXkBFGEts3oRxBoMG4ykUJgJkXHiJ8
+GJ+Vo+EEExKQNvWYqtE4Rp8IdQ3uts9Yr2Xn3gK1LQId0guVxWn+G/4xnnutIoPM
+7jMGMmUNTYiv6qzXUvn5r+U2qR4jVhgddbekt9w2+hjnQExUhx78WK5DBG+ZgBeW
+8/VeV/ZA0sixPaMtOeR1SVWC2rcizhsz2cGry7bXWVYj3gF2O9Q2yGzq6ozGyfO4
+EbylKBwQU13gSl+3ireS4oey5pe0SJl34BYj/0SQmr8paBXC0HxEGiho1NhsOeYK
+WqGRviaFgaDObPPagBv1Iw12N/Fs3QBIJ/i5sTJqi7ehlx2rp1em/93lLNp+i6GS
+b6D75+xwb693vdb6cuFLD2SatLP6FNoDnH6ggABy6SoLIna4oEsQd9PhLfPkawzx
+Pgh9IVeQdMHbq4gWSZ3KEC6gBaDZ2BA/E1Je4qvx2/lBWUzslwQO/18p7ImXrvkW
+ng5eamrfeVaUU6nNtTQpaRmuOxqWJFod/8kQY+xhtrwFIkVXbR+uFAAT42cw5XGB
+8wWrmCjnIk28UP6rY8WUA4RMfhptlVB2BZx80Ia+uCrxym+2wI4U2FBDoDGjOwEV
+OFPxkKjx5oLVF6zbqjPOPmAkPoWrMZLBxrOpizxJrSfwa+mTPxs=
+=ISAu
+-----END PGP SIGNATURE-----
+
+--mddm2rigptc5oo7l--
