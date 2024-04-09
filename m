@@ -4,79 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D016ACD1284
-	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 06:21:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A747CD1284
+	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 07:56:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2EEC88166;
-	Tue,  9 Apr 2024 08:20:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 360008801A;
+	Tue,  9 Apr 2024 09:56:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Wb36j/fY";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ROkRe/mK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EE9B8815E; Tue,  9 Apr 2024 08:20:51 +0200 (CEST)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7B9938811D; Tue,  9 Apr 2024 09:56:00 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE110881A8
- for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 08:20:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4128D87F6F
+ for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 09:55:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-1e2c725e234so29231225ad.1
- for <u-boot@lists.denx.de>; Mon, 08 Apr 2024 23:20:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712643647; x=1713248447; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=2r1Ou44GS5k8o9rSKegI5Hz3Q2vJGJ+NmUdjFC1sLM4=;
- b=Wb36j/fYcsCqFl7B+iRSJDQDYVrpbLV+jy4hTS4iuTvfHKW0Ix03ZApl3bB6ECbwqn
- QrjR4b5xuwTnM01U72P/KBjiDHIlffgzw2r5VVfsp0D3MAAM8y+xMZDYvt87zqUcY8Gd
- t0vZemV/t00HAQkY4pDdESF+nfGGA5CjqO1EojnC1sNUXtQVk0PPlQvrsJIFnAQQlNcl
- BctI05rH6KEtme2EmZs5b36ZP7sDO0rM63jn22/hl2GArNFrbBc0OQ98SiWeKKmWcrU+
- RcYoRbPQOqQBWoFLY8DmEQJhCMmwKzdH5PD8XgPlzveoE2B5OApHb9h/edD7zenighxM
- zSaw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id BAB7A3F16A
+ for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 07:55:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1712649357;
+ bh=TWwWizBVzKu0R1L4zsef6HpVDW2TBIGwQbFh5KS8ggs=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=ROkRe/mKK+Wl+rX4bHCe2UOF6wcxTh2ifEDQ1ItWEt3pEvZdwH4ODKDzEbDgE6bSN
+ IqIwcYWtYeImNjGKy5Fkc16L/WgtHRd4wK4MRE35IiYekdI8avjP5qWd0/UNAn4xry
+ P4rmZrCmswkk2X1Nxg/1NNNrV4zzBl1bnRthfEGl6sM2NW4NBRMG8T1vfQ1U3l/+ks
+ UAzG/WROB0FDnAW9WztFv1lDpr3vCwI574sOjZIr4Cn7Y41S3/C/JL+5iTuF2YG8mD
+ C3H5l2p7zmByoB6ADurtUPcOA76fVIWFOlFyw/jU0yelkjwTIaeaUkizICYLVK2w8q
+ 6mR3GrN26if0g==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-343efa26688so2124446f8f.3
+ for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 00:55:57 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712643647; x=1713248447;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=2r1Ou44GS5k8o9rSKegI5Hz3Q2vJGJ+NmUdjFC1sLM4=;
- b=sLPFjiB6ACzhSIszxRaPSO+wMMhGyjH0AI5+Q6KkB50OspoHvKpW52C/0GOWHp160l
- 8xKtiGZKT2ihBD3BEFkuFcW3p413SpMK7ApScIglUZHziXN4REtrrjnYs18sKruU78kA
- eJY1ZLgNKxBwcYPyE1Mk9lAfJrNiR3rDPwaQyHdz8daRQeaslVmggBTW2LBsbmMOP3YT
- bRnzloD5XiYtt6Qtu5wuTyfU8PShLcxYthxNztLyy3sqiNo6sL0Daa+V66n+dnz+Zwcg
- bH4Hz54IpIEDUP1ZjTerSITBsMG0KiqGqe7OwYCUEKmCRB/7EM/RIQYwMpiwlORIX8Hn
- q4mQ==
-X-Gm-Message-State: AOJu0Yz7yPgFuyEUbg2S4FLzyrPZOOYuZcAKnIw+nGGV2g8X9MoX+4lF
- D/f86EIBbnAgaSdr0QUvGE24Hs6VTdgvTlxL+wyZANdhNjIKbFQ7hVzuL3Gn
-X-Google-Smtp-Source: AGHT+IE5XyetoHZ9IE1vLV8L4nikTEm9Q9rAb31YV+6/PhoS+o8L/yH1hMYQuQlzRrbf9s3jCaP8NA==
-X-Received: by 2002:a17:902:b685:b0:1e2:be24:9eac with SMTP id
- c5-20020a170902b68500b001e2be249eacmr2027904pls.9.1712643647400; 
- Mon, 08 Apr 2024 23:20:47 -0700 (PDT)
-Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
- [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- x3-20020a1709029a4300b001db5fc51d71sm8037985plv.160.2024.04.08.23.20.44
+ d=1e100.net; s=20230601; t=1712649357; x=1713254157;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TWwWizBVzKu0R1L4zsef6HpVDW2TBIGwQbFh5KS8ggs=;
+ b=KmpCl7OiSQetitmwnUuzclyNBw87AEeXk07gI5YQcXYWlFlBHXhWuBJybYe0VZBgPa
+ zIv3ND8iIt0IPk2Gd/YRe59bdGgxXro+xr73aCuSv8vXISSW+ywSGKm0yF0DRHAzR0lP
+ /82CjfcFyxKRGCt7R2BsT3hJT2umQZb9FyDeoaqAPTIlzlutBIN/YPhIZ/DQWlGfBJEp
+ iCCWI5lfdRGcYOZK1tPUXAf4yFhVyhGWHd318WV2IAyprNkdbEEq0Sx2sNLl7MfsjCMu
+ ZEt0aSQ773eZKlg3Soyr7PnvPh5bpHZz8w+v9rNEETLA9Wy6vTUL3g6ZPZ85VKGXHTRZ
+ rlWg==
+X-Gm-Message-State: AOJu0YwhIqzXmwf/Kokt+DTONmFyI+RxjceeEgZhlr0IFhpzFrRtJJ3U
+ k3xkFg47dzbOI65HgLilhWDHyu34JfNPFrl5HY+BDqdNNXX5w9HFWQ2Dn58azUxQxbjhXq2QuWs
+ jhALFPNjLuBlyvDIo5JlL8pwwQpb9g514DDLgMeeqe9noR20sDLA/4zxv9UVGUu8czM4=
+X-Received: by 2002:adf:f74e:0:b0:343:68d6:5636 with SMTP id
+ z14-20020adff74e000000b0034368d65636mr6829617wrp.43.1712649357326; 
+ Tue, 09 Apr 2024 00:55:57 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFt941rryGY4jrmb1F/8fc+MsaCYj+3BNvDy8CmE92eGSIO3K8CnmOS/KN4Yx/kXbEqMnBfkw==
+X-Received: by 2002:adf:f74e:0:b0:343:68d6:5636 with SMTP id
+ z14-20020adff74e000000b0034368d65636mr6829603wrp.43.1712649356917; 
+ Tue, 09 Apr 2024 00:55:56 -0700 (PDT)
+Received: from workstation5.fritz.box
+ (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ by smtp.gmail.com with ESMTPSA id
+ s7-20020adfea87000000b0033e7de97214sm10792157wrm.40.2024.04.09.00.55.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 08 Apr 2024 23:20:47 -0700 (PDT)
-From: tkuw584924@gmail.com
-X-Google-Original-From: Takahiro.Kuwano@infineon.com
-To: u-boot@lists.denx.de
-Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
- pratyush@kernel.org, d-gole@ti.com, tkuw584924@gmail.com,
- Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [PATCH v2 3/3] mtd: spi-nor-id: Add S25FS064S, S25FS128S,
- S25FS256S IDs
-Date: Tue,  9 Apr 2024 15:20:22 +0900
-Message-Id: <37d92e2931b646f97f73650c0306adb736bd0efc.1712638210.git.Takahiro.Kuwano@infineon.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <cover.1712638210.git.Takahiro.Kuwano@infineon.com>
-References: <cover.1712638210.git.Takahiro.Kuwano@infineon.com>
+ Tue, 09 Apr 2024 00:55:56 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] test: typo curren
+Date: Tue,  9 Apr 2024 09:55:49 +0200
+Message-ID: <20240409075549.12514-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -95,67 +100,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Fix typos in test_eficonfig.py: %s/curren/current/
 
-The S25FS064S, S25FS128S, and S25FS256S are the same family of SPI NOR
-Flash devices with S25FS512S. Some difference depending on the device
-densities are taken care in post SFDP fixup.
-
-Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- drivers/mtd/spi/spi-nor-core.c | 24 ++++++++++++++++++------
- drivers/mtd/spi/spi-nor-ids.c  |  3 +++
- 2 files changed, 21 insertions(+), 6 deletions(-)
+ test/py/tests/test_eficonfig/test_eficonfig.py | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index 9620852817..9b81b31e8e 100644
---- a/drivers/mtd/spi/spi-nor-core.c
-+++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -3356,12 +3356,24 @@ static int s25fs_s_post_bfpt_fixup(struct spi_nor *nor,
- static void s25fs_s_post_sfdp_fixup(struct spi_nor *nor,
- 				    struct spi_nor_flash_parameter *params)
- {
--	/* READ_1_1_2 is not supported */
--	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
--	/* READ_1_1_4 is not supported */
--	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
--	/* PP_1_1_4 is not supported */
--	params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
-+	/*
-+	 * The S25FS064S(8MB) supports 1-1-2 and 1-1-4 commands, but params for
-+	 * read ops in SFDP are wrong. The other density parts do not support
-+	 * 1-1-2 and 1-1-4 commands.
-+	 */
-+	if (params->size == SZ_8M) {
-+		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_2],
-+					  0, 8, SPINOR_OP_READ_1_1_2,
-+					  SNOR_PROTO_1_1_2);
-+		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_4],
-+					  0, 8, SPINOR_OP_READ_1_1_4,
-+					  SNOR_PROTO_1_1_4);
-+	} else {
-+		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
-+		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
-+		params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
-+	}
-+
- 	/* Use volatile register to enable quad */
- 	params->quad_enable = s25fs_s_quad_enable;
- }
-diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
-index a3dca506a3..9ca1f244f0 100644
---- a/drivers/mtd/spi/spi-nor-ids.c
-+++ b/drivers/mtd/spi/spi-nor-ids.c
-@@ -341,6 +341,9 @@ const struct flash_info spi_nor_ids[] = {
- 	{ INFO6("s25fl256s0", 0x010219, 0x4d0080, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO6("s25fl256s1", 0x010219, 0x4d0180,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO6("s25fl512s",  0x010220, 0x4d0080, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs064s",  0x010217, 0x4d0181,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs128s",  0x012018, 0x4d0181,  64 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
-+	{ INFO6("s25fs256s",  0x010219, 0x4d0181,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO6("s25fs512s",  0x010220, 0x4d0081, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO("s25fl512s_256k",  0x010220, 0x4d00, 256 * 1024, 256, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
- 	{ INFO("s25fl512s_64k",  0x010220, 0x4d01, 64 * 1024, 1024, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+diff --git a/test/py/tests/test_eficonfig/test_eficonfig.py b/test/py/tests/test_eficonfig/test_eficonfig.py
+index b0a6cc47df2..1d8e033f75d 100644
+--- a/test/py/tests/test_eficonfig/test_eficonfig.py
++++ b/test/py/tests/test_eficonfig/test_eficonfig.py
+@@ -224,7 +224,7 @@ def test_efi_eficonfig(u_boot_console, efi_eficonfig_data):
+ 
+         # Change the Boot Order
+         press_up_down_enter_and_wait(0, 2, True, None)
+-        # Check the curren BootOrder
++        # Check the current BootOrder
+         for i in ('test 2', 'test 1', 'host 0:1', 'Save', 'Quit'):
+             u_boot_console.p.expect([i])
+         # move 'test 2' to the second entry
+@@ -269,7 +269,7 @@ def test_efi_eficonfig(u_boot_console, efi_eficonfig_data):
+         u_boot_console.run_command('eficonfig', wait_for_prompt=False)
+         # Select 'Edit Boot Option'
+         press_up_down_enter_and_wait(0, 1, True, None)
+-        # Check the curren BootOrder
++        # Check the current BootOrder
+         for i in ('test 1', 'Quit'):
+             u_boot_console.p.expect([i])
+         press_up_down_enter_and_wait(0, 0, True, None)
+@@ -326,7 +326,7 @@ def test_efi_eficonfig(u_boot_console, efi_eficonfig_data):
+ 
+         # Select 'Delete Boot Option'
+         press_up_down_enter_and_wait(0, 3, True, None)
+-        # Check the curren BootOrder
++        # Check the current BootOrder
+         for i in ('test 3', 'Quit'):
+             u_boot_console.p.expect([i])
+ 
 -- 
-2.34.1
+2.43.0
 
