@@ -4,65 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66AFEC67861
-	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 15:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F2A3C67861
+	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 15:07:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A9E588221;
-	Tue,  9 Apr 2024 17:06:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AAA9B8820C;
+	Tue,  9 Apr 2024 17:06:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Z6HWk2ng";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="FoOoxhew";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 772518820C; Tue,  9 Apr 2024 17:06:07 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id BDB6D88207; Tue,  9 Apr 2024 17:06:58 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6BAAE881E7
- for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 17:06:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F1F08881E5
+ for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 17:06:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=482956ac1a=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 439B5tkA026813; Tue, 9 Apr 2024 17:06:00 +0200
+ 439CmHAi012712; Tue, 9 Apr 2024 17:06:56 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  from:to:cc:subject:date:message-id:in-reply-to:references
  :mime-version:content-transfer-encoding:content-type; s=
- selector1; bh=ZYVS+yjceVO08fV4A9HS6oaZD0NojpZixb1ZvY/EAFc=; b=Z6
- HWk2ngNnDK6Me9Y+P6WGTjlGQFPuwmBpT9sojDZbtd9sLcQLfjEBid2DsMQavOek
- j6WAdjZ0xtym6tTW9OmHgaPXv+PVsxxi6PdvSjiBXmlWhBcSt9nkSAYshZmTzVr2
- VpHw7BBy9gEMfmY8tUSIvncZY7L3Qw3hWg+SEnJiu3AHhiTYnqXcFwqLeBQqqNe/
- htqBpyBQrm3BHnB0rAGcs54PFUGvOqlzARchz2hBR7wnngjzuGzXN5hfNGCAPv62
- 1d4zjeturIOpYbP03Dws8gkOIfEfdTvCJHWO7VvnZbGnnSPEhQpKR+3r2VPkNNNG
- BMbVXiNhtZGwlT7v9bQA==
+ selector1; bh=e43hl3m9J81+aeUhxrRcH4sRS0EYUOLq+L7Hwn3y+l4=; b=Fo
+ OoxhewIEOmkqPaFM2z59j0J90aibPfxI8lptz/je7QJXO9tQw8kUDKOMck5ASWn9
+ oXBblMjMNLRGkxcvCVZY3uGPLbw4X6oXyTR8eBFc4ROoXIb6AnvTRYY/VDIF3AjC
+ gDRV0gWCmF1lkQidg1ClStHyBQYCzshnRJ1LIYsntzHRkBdQ8x2NG1TTAYHXHV7n
+ SElmR5QRXXNvFpWia4ShO4SaZyAKpeg++hH38o9tGDIj8x6N4OJ1mAV5JzkM8bXy
+ gRoozxq2TIVUl+fMwVYf3imfJVt2NHTt4GTMukQoFT0ck5tfoUaYtjeBsX5tw5pj
+ PiUv/Vx4srEb4IieAm8w==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xbhbj1ryu-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xautfv6cj-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 09 Apr 2024 17:06:00 +0200 (MEST)
+ Tue, 09 Apr 2024 17:06:56 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id E98AD40045;
- Tue,  9 Apr 2024 17:05:57 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 2D8A940045;
+ Tue,  9 Apr 2024 17:06:53 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 013032207BC;
- Tue,  9 Apr 2024 17:05:36 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 561712207D3;
+ Tue,  9 Apr 2024 17:06:40 +0200 (CEST)
 Received: from localhost (10.48.86.98) by SHFDAG1NODE1.st.com (10.75.129.69)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Tue, 9 Apr
- 2024 17:05:35 +0200
+ 2024 17:06:40 +0200
 From: Patrice Chotard <patrice.chotard@foss.st.com>
 To: <u-boot@lists.denx.de>
 CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
  <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1 18/25] ARM: dts: stm32: Add gpio-keys for
- stm32mp157c-ed1-u-boot
-Date: Tue, 9 Apr 2024 17:02:08 +0200
-Message-ID: <20240409150215.2497778-19-patrice.chotard@foss.st.com>
+ <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v1 23/25] ARM: dts: stm32: Don't probe red led at boot for
+ stm32mp157c-ed1-scmi-u-boot
+Date: Tue, 9 Apr 2024 17:02:13 +0200
+Message-ID: <20240409150215.2497778-24-patrice.chotard@foss.st.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240409150215.2497778-1-patrice.chotard@foss.st.com>
 References: <20240409150215.2497778-1-patrice.chotard@foss.st.com>
@@ -91,62 +90,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add 2 gpio-keys :
-  _ button-user-1 for stm32prog mode activation.
-  _ button-user-2 for fastboot mode activation.
+red led and button dedicated to fastboot share the same gpio GPIOA13.
+Led driver is probed early so the corresponding gpio is taken and
+configured in output which forbid fastboot and stm32prog button usage.
 
-Remove proprietary st,fastboot-gpios and st,stm32prog-gpios.
+To avoid this, remove the "default-state" property from red led node.
+
+This will avoid to trigger the led driver probe() to configure the led
+default state during startup.
 
 Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
 
- arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi | 19 +++++++++++++++++--
- 1 file changed, 17 insertions(+), 2 deletions(-)
+ arch/arm/dts/stm32mp157c-ed1-scmi-u-boot.dtsi | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-index ef91088aa37..e6a452c9d8e 100644
---- a/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi
-@@ -4,6 +4,7 @@
-  */
- 
- #include <dt-bindings/clock/stm32mp1-clksrc.h>
-+#include <dt-bindings/input/linux-event-codes.h>
- #include "stm32mp15-u-boot.dtsi"
- #include "stm32mp15-ddr3-2x4Gb-1066-binG.dtsi"
- 
-@@ -16,8 +17,6 @@
- 		u-boot,boot-led = "heartbeat";
- 		u-boot,error-led = "error";
- 		u-boot,mmc-env-partition = "fip";
--		st,fastboot-gpios = <&gpioa 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
--		st,stm32prog-gpios = <&gpioa 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
- 	};
- 
- #if defined(CONFIG_STM32MP15X_STM32IMAGE) || defined(CONFIG_SPL)
-@@ -43,6 +42,22 @@
- 	};
- #endif
- 
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+
-+		button-user-1 {
-+			label = "User-1";
-+			linux,code = <BTN_1>;
-+			gpios = <&gpioa 14 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-+		};
-+
-+		button-user-2 {
-+			label = "User-2";
-+			linux,code = <BTN_2>;
-+			gpios = <&gpioa 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-+		};
-+	};
-+
- 	led {
+diff --git a/arch/arm/dts/stm32mp157c-ed1-scmi-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ed1-scmi-u-boot.dtsi
+index 84920f53496..2abd512e297 100644
+--- a/arch/arm/dts/stm32mp157c-ed1-scmi-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157c-ed1-scmi-u-boot.dtsi
+@@ -37,7 +37,6 @@
  		red {
  			label = "error";
+ 			gpios = <&gpioa 13 GPIO_ACTIVE_LOW>;
+-			default-state = "off";
+ 			status = "okay";
+ 		};
+ 	};
 -- 
 2.25.1
 
