@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00253C67861
-	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 18:05:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85546CD128A
+	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 18:45:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 84D1E87EA9;
-	Tue,  9 Apr 2024 20:05:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B886B8758B;
+	Tue,  9 Apr 2024 20:45:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="X5HOkUqH";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KiwACCIM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C06387F01; Tue,  9 Apr 2024 20:05:08 +0200 (CEST)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 6ED3887666; Tue,  9 Apr 2024 20:45:53 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67A0687DCA
- for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 20:05:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9078B87572
+ for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 20:45:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,28 +31,26 @@ Received: from LT2ubnt.fritz.box (ip-062-143-245-032.um16.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 471F83F148; 
- Tue,  9 Apr 2024 18:05:05 +0000 (UTC)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 3208F40F4A; 
+ Tue,  9 Apr 2024 18:45:50 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1712685905;
- bh=69ZLQIYq+IVoTOjoe7gnvMTCu1LfvaeDkUbEgZdGNdw=;
+ s=20210705; t=1712688350;
+ bh=V5Imf4cPSjHOcpogt+PFMyi99usRFQux3JL4RrkzPiQ=;
  h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=X5HOkUqHzhJ0nhATFIk5+N28LZnD6FWU/qaaOw0u9/8a1hk4uz/TYahAwJg2lQBCj
- YG3/0jHhauJTnxc7Bwh983NSLVrvbovK8sloVLsbpk3VAQLBE52WaaO+8+6VxfBNjd
- 5uWEB6W7zLPEL8hMOnDNRG8DSbpLVgBuaJ/N5IDX43YiDQEVJUj0iijriXzvUMN6nN
- SzuxzvyejH24C5aF7eas4mlT1nlAXs72KhqWBxb2hM6dp6szncDxpmsuC919ht+mvt
- y82J4Icax+L3EpOfKeonPLmxncAIABkum/GIaaMtw7LOyPK7MtPoHuyqJrAgyBSFE5
- iTkW0MPQWJVSA==
+ b=KiwACCIM0n/VK1CxcOsI7A3YSxu80t5BtRaCVKEioEA+7jqJQhZgYO/UE5EslLmYw
+ atLhdWxNMX39v7NytuHIljE/B4zSE8/ibe0JhajiqmZJmIvAPdgDqEMn0sq8soD/3M
+ VKNUquvQyVXKMqAfWrKX60q3by4ZOSz9IyHplUjuiAFbMfq3J5rhVK324xDHiv3Dx5
+ EnrfBFL8GRlmaZw6yhJBaAyV/lLX0NbyN6TLEtTQkkgJOgirZCsH+3wB1PsHpSQwB0
+ SD04S13YVaMIhIPJWJAL/5DKB9lyn/21KMgtj5H3ucufEd5ubno43997pHVZO9Uhs7
+ MSAj4SdAtb05Q==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Christian Taedcke <christian.taedcke@weidmueller.com>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+Cc: Simon Glass <sjg@chromium.org>, Nandor Han <nandor.han@vaisala.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] fs: fat: convert change month correctly
-Date: Tue,  9 Apr 2024 20:04:56 +0200
-Message-ID: <20240409180456.39581-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] reboot-mode: must depend on CONFIG_DM_RTC
+Date: Tue,  9 Apr 2024 20:44:22 +0200
+Message-ID: <20240409184422.45023-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -72,29 +70,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The month is stored in 5 - 8. We need to shift it by 5 bits.
+Reading the boot mode from RTC memory requires a real time clock.
+Add the missing Kconfig dependency.
 
-Cf. Microsoft FAT Specification, 2005-08-30
-
-Fixes: 13c11c665320 ("fs: fat: add file attributes to struct fs_dirent")
+Fixes: c74675bd904b ("reboot-mode: read the boot mode from RTC memory")
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- fs/fat/fat.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/reboot-mode/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/fs/fat/fat.c b/fs/fat/fat.c
-index 14e53cf2d5a..2dd9d4e72dc 100644
---- a/fs/fat/fat.c
-+++ b/fs/fat/fat.c
-@@ -1254,7 +1254,7 @@ out:
- static void __maybe_unused fat2rtc(u16 date, u16 time, struct rtc_time *tm)
- {
- 	tm->tm_mday = date & 0x1f;
--	tm->tm_mon = (date & 0x1e0) >> 4;
-+	tm->tm_mon = (date & 0x1e0) >> 5;
- 	tm->tm_year = (date >> 9) + 1980;
+diff --git a/drivers/reboot-mode/Kconfig b/drivers/reboot-mode/Kconfig
+index d57baacc93d..bb518935188 100644
+--- a/drivers/reboot-mode/Kconfig
++++ b/drivers/reboot-mode/Kconfig
+@@ -24,6 +24,7 @@ config DM_REBOOT_MODE_GPIO
  
- 	tm->tm_sec = (time & 0x1f) << 1;
+ config DM_REBOOT_MODE_RTC
+ 	bool "Use RTC as reboot mode backend"
++	depends on DM_RTC
+ 	depends on DM_REBOOT_MODE
+ 	help
+ 		Use RTC non volatile memory to control the reboot mode. This will allow users to boot
 -- 
 2.43.0
 
