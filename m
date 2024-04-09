@@ -4,108 +4,129 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 669F9C67861
-	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 15:13:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9568ACD1296
+	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 15:27:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C82A3879A0;
-	Tue,  9 Apr 2024 17:13:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D01FD87947;
+	Tue,  9 Apr 2024 17:27:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KqeIgqeI";
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="D8bPfp/H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31CB787E86; Tue,  9 Apr 2024 17:13:10 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 419DB879E2; Tue,  9 Apr 2024 17:27:22 +0200 (CEST)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260d::701])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ECCED87519
- for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 17:13:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2d094bc2244so60783851fa.1
- for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 08:13:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712675587; x=1713280387; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=PpY0MEaK901iCvwiALdyhnoHZwaDrhOBkVgv3cqdgdg=;
- b=KqeIgqeIFEk1r/CeT/KmrParVsJyM1ACLZTze8vGF2w5n1RaQkhKhuOE76Q8OurVUj
- 5NcsAhUdhrY+X+BWlxPQynnq0ff5ar1bEwuUCFU/KA2zltWDE0t6gyXiUXxdmP7eM9PD
- MebCGW0RXqTt8tEREur9C6/2xUyKBSpLhBwmY1djVoe6zGU0wlduxv0VYzDzrdSKUeoq
- +pcUhh1eqjJDqSsNAftQM09+MWsjSqR8Rg4l76z83i/YJqRRGc1nVjR664vF//blXN3c
- wOP9xZH4csGUgoUJIccJUlljlnGRQgcFvHZMu8nqKhl5RYGttJF6Bsi/+4wPEwiJY1vx
- 9xfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712675587; x=1713280387;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=PpY0MEaK901iCvwiALdyhnoHZwaDrhOBkVgv3cqdgdg=;
- b=RCWmMv9hMcCrgZ0wGSMdz0DdV9pjDRXJmVWyeqgiizYBI+wxf3YM6X3uyyHVfoyiPk
- Q1ffDs3ieHs+6LHLfuE43mFlhviv/oKVTRca+xFk/VvsUkVpcbl2otMHexL83NmMHRQ8
- bMyh4kSBLbFsN3/O5nJPuy2IkGIREVcD7xKteKXlNwkjhReA9BFN4gLhiOFZqTfF89xJ
- GDJwgm2TF01qpCwVWbhpMXoRrnAneC9e5aMLn6yvJ3eQQOcOpvL5ckuXQPjiz+IplTSZ
- 8knierq0ITsjnLp2ArXknwSQjD7rd577kh23iGYmpYfxceE7tY1i9oc1/IPUouEErafW
- nGfA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWJbvEkX5owM/vUzZQBcZAnSjtmkmqZccaznUQV8NY9uSQpwfMaODIJc46SLFM/O3s47en2ajUnZEbNKZof8H59gsLzGA==
-X-Gm-Message-State: AOJu0YyizzJ1T72j+mkTA66m2h/QwQSlN4bWJNLExNn9dj/mCXkTIxxG
- OdkLJb0lkkSrrYu7fpzPxlcQFlhHOSwthMGYWBhrSSywTMB3/qkl28zQNIpg8jg=
-X-Google-Smtp-Source: AGHT+IFQ9beifkNh+nxwXG1D8uPKUp0BTmlx2lSVJ/SoFbD1Wcjser71Bpj5rLMsQW7YjTV12npRaA==
-X-Received: by 2002:a2e:a223:0:b0:2d6:c0eb:41cb with SMTP id
- i3-20020a2ea223000000b002d6c0eb41cbmr97323ljm.3.1712675586846; 
- Tue, 09 Apr 2024 08:13:06 -0700 (PDT)
-Received: from ?IPV6:2a01:e0a:982:cbb0:f55f:39:b3eb:53ba?
- ([2a01:e0a:982:cbb0:f55f:39:b3eb:53ba])
- by smtp.gmail.com with ESMTPSA id
- n10-20020a05600c294a00b00416a97a0ae5sm980135wmd.0.2024.04.09.08.13.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Apr 2024 08:13:06 -0700 (PDT)
-Message-ID: <4f5901e2-ff22-40f3-bf44-73a7b1497e9b@linaro.org>
-Date: Tue, 9 Apr 2024 17:13:05 +0200
-MIME-Version: 1.0
+ by phobos.denx.de (Postfix) with ESMTPS id 3B5E787861
+ for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 17:27:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=theobroma-systems.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=quentin.schulz@theobroma-systems.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JjdvlLmYu1PAfkaEVjEqyYZ2X3sHO+EKIk0SqBMe41TI2H/oZZ211/S7WPUcsvPJqmQTONrhIIv7DkQTQEsVtYmERtXsfi6dmE6p6CoqwZUHSTV1K9dac+R5n7WiDVNcES95RU5UU/1mXCwBnazqVfYQlrqDL7eDz4lmShOx5pFKiygxih40+/HnMdwRNk6pEwJFZ3uGYkQqpMdkdKLnPww/08qx8VA3nFiWI2NIYBCiMUWvVsCDq4nqUxSlNsJtI9mC4tKz5c/MfGEznTUA6zjq4G+St1NDNkoaiCeH9Zzsmir5AgbvUvICQSPq17o/4R/Kfc+swxpZxx0GJt2wZw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=FWmpMOk6BKJTcXvRkfxeelL2tWbmD4TAZUEQxcVxi6o=;
+ b=GhHh3o7IGR9R1RGx+V7R8ot9KeeoSBwij8RYY52Iul/ahQ5i74LDp82yl0b5t3pizT5ezeTSZ4KK/mPBgP5v/0OXJHI7HF83xev62nsIzIs7WDQDR9wCrDZoRHZ7llu0Go6tTpyi1vprsln1O55VvmN08H6Ye4e5Oan5GX6rR8AU6+MMqeus82SUuIrcnoWgij4HwTunAktUH1i7pMXNSHo9g1Hol+1zCU1oUtl60JEMjSR/PkOlLzjIFk0HS0K16K+JQwR3mJlSVER8DnqJJ9MlEmLIlCAGSZT58hLjPd5kUl9pYIAF0+bEtDFNnYTm/UzWAF9pJZcpu9brwgB4Fg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
+ header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=FWmpMOk6BKJTcXvRkfxeelL2tWbmD4TAZUEQxcVxi6o=;
+ b=D8bPfp/HeZvIK2GUapSzA03KkLEH+pSD0ac7l3xMkQoVLqfLhrVyDP0kWf13rdgWsaUhDXbGog8uZKOOU7H/Nq3J3wVe+RRodjsVJNIK5IWaFrdlnd+H9dkqGsvvBNpK2WgXm+Vmr0IHxp6PsVwMeKkg6OHeFMVAin3Fp8qtllWlMRxh8x3tk3rtZP0kOpw96rkvFqyj/ryykW5esLT2mZcTw99+pIMnRlh86s09YhYAiFWtvj/xrSFstyO0MJ6Lc7I6tYOo3TH3O2iKVkN2IRtHveMWdcIz5RFbfTS/eITvTlyEDgrnmU9qGiTBX6etdArEdeP/XzkDsifl7tvAHQ==
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
+ by DB9PR04MB8313.eurprd04.prod.outlook.com (2603:10a6:10:241::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.54; Tue, 9 Apr
+ 2024 15:27:18 +0000
+Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::3e70:7029:faf2:7779]) by DU2PR04MB8536.eurprd04.prod.outlook.com
+ ([fe80::3e70:7029:faf2:7779%3]) with mapi id 15.20.7409.042; Tue, 9 Apr 2024
+ 15:27:18 +0000
+Message-ID: <496013c1-7a57-4d12-bf31-c5257f35ee8c@theobroma-systems.com>
+Date: Tue, 9 Apr 2024 17:27:16 +0200
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH] MAINTAINERS: add Qualcomm mailing list
-To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-References: <20240409150252.561029-1-caleb.connolly@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20240409150252.561029-1-caleb.connolly@linaro.org>
+Subject: Re: [PATCH 1/2] mmc: Imply HS200 cap with mmc-hs400 prop to match
+ linux
+To: Jonas Karlman <jonas@kwiboo.se>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240408210619.3749231-1-jonas@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+In-Reply-To: <20240408210619.3749231-1-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA2P291CA0025.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1f::6) To DU2PR04MB8536.eurprd04.prod.outlook.com
+ (2603:10a6:10:2d7::10)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|DB9PR04MB8313:EE_
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: VDkHblG7cOQ/fjiq89f+H4pQvPPLxUiuHNyaFq2MUa2KtvIG+fNwURHDfK6ycSffg7/OfphP2WrzjE3NUP8741RToh353pSZnbZKCzhk2EIcA3XLLtlAWU8ZuKKsCym4uOTF4bSDAKbCP7Rt6/ww2/GUH1izKXIVOZSxqh0V2XnemOR2jWCsCp+wHKuVybqDt7J2ftDtJ2NMoxbbQIsZkFFnBcfbL4fGZHKpC5ZOEV/wSVba5pI5EixBj6KiYR7DQdKUPU5pNGHgoL5s1yNmMHn6auXC+aqlTv9ImmGfzgJuhrwcDSfItE9fsK88qtiQoihOR6jHWolgfsvaKExpWkgSJp4cRVIR4cfU5y5Y1AzzsTlAE7mnxe4c4Iqv9UYuwwEkCrCpCs6iZTA+au3bHzj9G1ZxroD9a2IvqjboX1WAXXK7DSN/Tfdc8DAYD0jStlMfDoKTxeSJ0FdOhMzn0Mi//MnFWI4NPzu/OlPEWeXnZUs5mtBjmRE8FKJ+1tRz6PbG5ey9sPaN0j75DBWZfpX3UgplJ8ZhgTO6Kz4z9aXA/LNO4o5Q2eYHVgHTt3RXewodfy0EUQZq4IAYamuANc1hkMXsLvEIWe/PelhQUVPwwcXyzjKOHaFt5JQSXicDb/yfXs67snasGTaX4oq+l1WFcVvQgmphCB53fyBOWeY=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(376005)(1800799015); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZFA1QmV6WXRYUFh0aDZDVjgzZ3V4S3d6dVdIN0Fia2RnSENQcTRKZVMvbTRQ?=
+ =?utf-8?B?VHNjaGk2bW1ZaVBpRFVnWVh1WXQxSHBua0pUaFc3R0ZlSE5ZMzhYVVk4cEM2?=
+ =?utf-8?B?RXFyZmwwNHJhd3dlVFJoc1NOZjhOY0Q4T0xuV1pqNFM4VEdPblEwL1RZbGU2?=
+ =?utf-8?B?aThMQ3pHYy92U0FNSDJvRGM0c1FaaVZnQmI4SXJFOCtwRVdSWFBXWnBFMEVq?=
+ =?utf-8?B?OTY5S09MZmlXNXlYN3FCOXo2ai8vZ2ZtaEd5eVY5a0RnN2RtYWV1VjhRNGJ3?=
+ =?utf-8?B?SnR5Smw4M0lIcnN4M1Eyek9hdjdqT3BtaEVNejlSZTloKzFGcjBubXRXWHl6?=
+ =?utf-8?B?SzFuWnhudnpLQ3hDZVAzRzZhdnJIQ1lTcDB1UWtNeUpFU09WZHRib1ZPMDJD?=
+ =?utf-8?B?WlVObXhRbEs2b3FJTWluWTQvR1lCTE8zYldSZCs5MzJLVUh4bVhqTjlORlFo?=
+ =?utf-8?B?bTZvRlRlc0VhU0J2QnBlVE1sTkJMSk94SkpqSTZZeTdscytnaXd3QU45RW12?=
+ =?utf-8?B?ZkwrajNtTHRNUnBIQ3NCU3dwQTdaeS9WYzFFRDJhdjlacENpZDZKNmNSUUQx?=
+ =?utf-8?B?Vlo2MzR1MDhIMC9PWjFDNWljdHd4c3o1ZmdvdFdkeXViNUhrRHg2YjI5OXcr?=
+ =?utf-8?B?VEFVR1luaVphelhBUG1FakdYU0s4TzhocVFwUWdvdUdTakp1NHh1MTlSTlBU?=
+ =?utf-8?B?ME5FVk8rZ3NGUzk3MEk2QlpCZ2FLUFdYRjZORTh3QUF1WUdrQWQ2S3VNUk1R?=
+ =?utf-8?B?eUV0ZFhGVUMyYnI1LzJOTDdmMG1LS3ZhUGczSnRGQWtQbGRldGRUdEpaSWJx?=
+ =?utf-8?B?aG5GZFd6Q1gwNFFWTDhNaDZIcC9RMWo1MC9LU2pweUdaZDI0NUFrSHBrY2ZI?=
+ =?utf-8?B?VXhIS1ZsSno4SU9CS21hN0tZcHVFUlN6Y3pwMmpXbXQyclRiS21rV3ZaZ3o1?=
+ =?utf-8?B?cWp6VzNqNmNiNkRnZHNia1E5TmtaWVlBNVNsWllGSjNTeGpRc2dGaUJ5b0Jk?=
+ =?utf-8?B?bUg3UGFFY1d0aE5GWlcweHpqSmpkV1hGTVhwK3MvdlhkRHRhTFRBandzWjRR?=
+ =?utf-8?B?WHBwV0ZWeVBWa2JGNVhpS3Z6VG1CZEZxbHo0SGNmYnlVOGV2VFA4bmVaRTRZ?=
+ =?utf-8?B?ek1DYmpUdDloTWFUVHBPUzJoS04ybVdDd2NOVTdXdFFOeWZTWkR3MGpsQkFM?=
+ =?utf-8?B?R1RBN0EzMWZLd2N6bmlRNWpRVTVRTE5oY01USTBpN3BON01aa3R0dCsweTlD?=
+ =?utf-8?B?M3FKd09ZZDJzUE1HK0tZcGNrWWh4eXFsVEFxbGNmc0dTcGplUVJBeXZ4cXJq?=
+ =?utf-8?B?bU1sL0lEWVpzdkdwRzgzS0w0U1NhSm53cGpScWwwMGZRYXpVOG9HOWw4QXVP?=
+ =?utf-8?B?QkRCTTFOTFBqUjR0RFo1YzZ0UUtUc3A1VE96RUhuSGRzWWZ0RTc2U0g4UUtm?=
+ =?utf-8?B?RHRkZVptbGs5VXAvM1UrM0pIUUdlbkVrNzFqNlBJbk5RbUxsVnBBSE1RaEdI?=
+ =?utf-8?B?WTdpZEJNTzBpb0R6Y2U5MHJvNjlzS216elpkeEZOUzVWdHM4TzN1SmJpL0Nt?=
+ =?utf-8?B?VVJQT0twQm52OUFwWjNheUszdnVSSHRYRnVIWGhMaE1qYzRrQVc1enZrOXh2?=
+ =?utf-8?B?UmoyWW5wZE10T21KS2hMVFlXbGlpZmlRWkVGTEc3MUt3QVdDN3MyWE1MMjVm?=
+ =?utf-8?B?Mit1RE16Qm13K2tRZUN0NXNmUkR5dElBNytwSExyK3lYbDF6c2Fycm1oMjRo?=
+ =?utf-8?B?MVJDazNGNmkyRWpleWJldEtva21MSE96SWZETGhEVVVVcWdpeVA2QU1FdWda?=
+ =?utf-8?B?eTBValZLaWNsNk5oT3l2S0Rpd1ZMcTJPZ0Q1bGw3ZFlJMElqbXRYV0NzR2g0?=
+ =?utf-8?B?dHhLRXBPRVJwVXVQNmo4dlJVTG9VRzhaRHJLeGtGUE5HWHVBSTNOZnVLVXFR?=
+ =?utf-8?B?TEI2eS9vZk85elZtS3RsY1Bsa1hEa0JHMUJtK2poN0d5Y1h0QlVKdFFvNitt?=
+ =?utf-8?B?K0pKQlJiU2NMRjFPRHFJUlIzdFUyQUhBcDBkandNd09mVHpjU051Zlp4M2Fz?=
+ =?utf-8?B?RzhDRENFUmhLNWE3UW5jdFNlS29ZUFd3c0VEUnhnOWFtS0NqNHZKMVE4OGZ0?=
+ =?utf-8?B?VVhNMnBNUVdhWmx6aHpobWRsOUFKNVpycFpiZkZHV3pScnQrOUMrNGlIYzQx?=
+ =?utf-8?Q?hN+iMyV9lCcWqZ1SdN6ykRs=3D?=
+X-OriginatorOrg: theobroma-systems.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 84b68a43-55ae-4ee0-9f68-08dc58a98ab4
+X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2024 15:27:18.1015 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: uowT6iZYXATSDYeZymq643nADH7AN0X/0MLmxT/bQQYiXw3WXHCRUP3IXRqPwxUjHJh9x6OYzQgUuYQHTHXwANCf9OfIerlBekMf4XQBovInPwDtDLdE0h7XQnI/IU4R
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR04MB8313
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,43 +138,57 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09/04/2024 17:02, Caleb Connolly wrote:
-> Add the newly created u-boot-qcom mailing list to keep track of Qualcomm
-> patches.
-> 
-> Additionally, link to the U-Boot Snapdragon custodian tree.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
-> 
-> Cc: Neil Armstrong <neil.armstrong@linaro.org>
-> Cc: Sumit Garg <sumit.garg@linaro.org>
-> Cc: u-boot@lists.denx.de
-> ---
->   MAINTAINERS | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 0462ade4ac60..c0d2b5138fca 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -602,9 +602,11 @@ F:	arch/arm/dts/am335x-sancloud*
->   ARM SNAPDRAGON
->   M:	Caleb Connolly <caleb.connolly@linaro.org>
->   M:	Neil Armstrong <neil.armstrong@linaro.org>
->   R:	Sumit Garg <sumit.garg@linaro.org>
-> +L:	u-boot-qcom@groups.io
->   S:	Maintained
-> +T:	git https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git
->   F:	arch/arm/dts/msm8*.dtsi
->   F:	arch/arm/dts/pm8???.dtsi
->   F:	arch/arm/dts/pms405.dtsi
->   F:	arch/arm/dts/sdm845.dtsi
+Hi Jonas,
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+On 4/8/24 23:06, Jonas Karlman wrote:
+> eMMC nodes in linux device tree files typically only contain a mmc-hs400
+> prop to signal support for both HS400 and HS200. However, U-Boot require
+> an explicit mmc-hs200 prop to signal support for the HS200 mode.
+>  > Fix this by follow linux and imply HS200 cap when HS400 cap is signaled
+> using a mmc-hs400 prop.
+> 
+
+Technically speaking, the DT binding should be the one and only source 
+of truth and should be implementation-agnostic.
+
+There it says:
+"""
+   mmc-hs400-1_2v:
+     $ref: /schemas/types.yaml#/definitions/flag
+     description:
+       eMMC HS400 mode (1.2V I/O) is supported.
+
+   mmc-hs400-1_8v:
+     $ref: /schemas/types.yaml#/definitions/flag
+     description:
+       eMMC HS400 mode (1.8V I/O) is supported.
+"""
+
+So I'd say, the DTs should be fixed to add mmc-hs200 as well wherever it 
+makes sense.
+
+The point of the DT/DT binding is to be system-agnostic and 
+representative of the **HW** implementation. At least that's what the DT 
+people want it to be.
+
+If the eMMC standard doesn't allow to have HS400 without HS200, then I 
+think this change is acceptable as is, because it is the reality of the 
+HW standard. Couldn't find this implied in the standard though (but I 
+just skimmed through).
+
+It's also quite surprising, as it's not because the eMMC works with 
+HS400 that it necessarily does with HS200 or that it's desired (EMI, 
+signal integrity/stability, etc...)?
+
+Now, it wouldn't be the first time U-Boot follows whatever is done in 
+Linux, so... up to you/the maintainers :)
+
+Reviewed-by: Quentin Schulz <quentin.schulz@theobrma-systems.com>
+
+Cheers,
+Quentin
