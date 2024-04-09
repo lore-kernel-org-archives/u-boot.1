@@ -4,86 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A747CD1284
-	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 07:56:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99B77C67861
+	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 08:25:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 360008801A;
-	Tue,  9 Apr 2024 09:56:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id C285487DEA;
+	Tue,  9 Apr 2024 10:25:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ROkRe/mK";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B9938811D; Tue,  9 Apr 2024 09:56:00 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 585C087EA9; Tue,  9 Apr 2024 10:25:52 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4128D87F6F
- for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 09:55:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0290287DCA
+ for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 10:25:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id BAB7A3F16A
- for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 07:55:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1712649357;
- bh=TWwWizBVzKu0R1L4zsef6HpVDW2TBIGwQbFh5KS8ggs=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=ROkRe/mKK+Wl+rX4bHCe2UOF6wcxTh2ifEDQ1ItWEt3pEvZdwH4ODKDzEbDgE6bSN
- IqIwcYWtYeImNjGKy5Fkc16L/WgtHRd4wK4MRE35IiYekdI8avjP5qWd0/UNAn4xry
- P4rmZrCmswkk2X1Nxg/1NNNrV4zzBl1bnRthfEGl6sM2NW4NBRMG8T1vfQ1U3l/+ks
- UAzG/WROB0FDnAW9WztFv1lDpr3vCwI574sOjZIr4Cn7Y41S3/C/JL+5iTuF2YG8mD
- C3H5l2p7zmByoB6ADurtUPcOA76fVIWFOlFyw/jU0yelkjwTIaeaUkizICYLVK2w8q
- 6mR3GrN26if0g==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-343efa26688so2124446f8f.3
- for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 00:55:57 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712649357; x=1713254157;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=TWwWizBVzKu0R1L4zsef6HpVDW2TBIGwQbFh5KS8ggs=;
- b=KmpCl7OiSQetitmwnUuzclyNBw87AEeXk07gI5YQcXYWlFlBHXhWuBJybYe0VZBgPa
- zIv3ND8iIt0IPk2Gd/YRe59bdGgxXro+xr73aCuSv8vXISSW+ywSGKm0yF0DRHAzR0lP
- /82CjfcFyxKRGCt7R2BsT3hJT2umQZb9FyDeoaqAPTIlzlutBIN/YPhIZ/DQWlGfBJEp
- iCCWI5lfdRGcYOZK1tPUXAf4yFhVyhGWHd318WV2IAyprNkdbEEq0Sx2sNLl7MfsjCMu
- ZEt0aSQ773eZKlg3Soyr7PnvPh5bpHZz8w+v9rNEETLA9Wy6vTUL3g6ZPZ85VKGXHTRZ
- rlWg==
-X-Gm-Message-State: AOJu0YwhIqzXmwf/Kokt+DTONmFyI+RxjceeEgZhlr0IFhpzFrRtJJ3U
- k3xkFg47dzbOI65HgLilhWDHyu34JfNPFrl5HY+BDqdNNXX5w9HFWQ2Dn58azUxQxbjhXq2QuWs
- jhALFPNjLuBlyvDIo5JlL8pwwQpb9g514DDLgMeeqe9noR20sDLA/4zxv9UVGUu8czM4=
-X-Received: by 2002:adf:f74e:0:b0:343:68d6:5636 with SMTP id
- z14-20020adff74e000000b0034368d65636mr6829617wrp.43.1712649357326; 
- Tue, 09 Apr 2024 00:55:57 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFt941rryGY4jrmb1F/8fc+MsaCYj+3BNvDy8CmE92eGSIO3K8CnmOS/KN4Yx/kXbEqMnBfkw==
-X-Received: by 2002:adf:f74e:0:b0:343:68d6:5636 with SMTP id
- z14-20020adff74e000000b0034368d65636mr6829603wrp.43.1712649356917; 
- Tue, 09 Apr 2024 00:55:56 -0700 (PDT)
-Received: from workstation5.fritz.box
- (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
- by smtp.gmail.com with ESMTPSA id
- s7-20020adfea87000000b0033e7de97214sm10792157wrm.40.2024.04.09.00.55.55
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Apr 2024 00:55:56 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] test: typo curren
-Date: Tue,  9 Apr 2024 09:55:49 +0200
-Message-ID: <20240409075549.12514-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 4398PgE0016374;
+ Tue, 9 Apr 2024 16:25:42 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.498.0;
+ Tue, 9 Apr 2024 16:25:39 +0800
+Date: Tue, 9 Apr 2024 16:25:36 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <rick@andestech.com>, <ycliang@andestech.com>
+Subject: [GIT PULL] u-boot-riscv/master
+Message-ID: <ZhT7gPuUWx2sNkXJ@swlinux02>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 4398PgE0016374
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,44 +60,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Fix typos in test_eficonfig.py: %s/curren/current/
+Hi Tom,
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- test/py/tests/test_eficonfig/test_eficonfig.py | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+The following changes since commit 069d07396e30aa9be396c1dd3fc158ac199e6843:
 
-diff --git a/test/py/tests/test_eficonfig/test_eficonfig.py b/test/py/tests/test_eficonfig/test_eficonfig.py
-index b0a6cc47df2..1d8e033f75d 100644
---- a/test/py/tests/test_eficonfig/test_eficonfig.py
-+++ b/test/py/tests/test_eficonfig/test_eficonfig.py
-@@ -224,7 +224,7 @@ def test_efi_eficonfig(u_boot_console, efi_eficonfig_data):
- 
-         # Change the Boot Order
-         press_up_down_enter_and_wait(0, 2, True, None)
--        # Check the curren BootOrder
-+        # Check the current BootOrder
-         for i in ('test 2', 'test 1', 'host 0:1', 'Save', 'Quit'):
-             u_boot_console.p.expect([i])
-         # move 'test 2' to the second entry
-@@ -269,7 +269,7 @@ def test_efi_eficonfig(u_boot_console, efi_eficonfig_data):
-         u_boot_console.run_command('eficonfig', wait_for_prompt=False)
-         # Select 'Edit Boot Option'
-         press_up_down_enter_and_wait(0, 1, True, None)
--        # Check the curren BootOrder
-+        # Check the current BootOrder
-         for i in ('test 1', 'Quit'):
-             u_boot_console.p.expect([i])
-         press_up_down_enter_and_wait(0, 0, True, None)
-@@ -326,7 +326,7 @@ def test_efi_eficonfig(u_boot_console, efi_eficonfig_data):
- 
-         # Select 'Delete Boot Option'
-         press_up_down_enter_and_wait(0, 3, True, None)
--        # Check the curren BootOrder
-+        # Check the current BootOrder
-         for i in ('test 3', 'Quit'):
-             u_boot_console.p.expect([i])
- 
--- 
-2.43.0
+  Merge tag 'efi-2024-07-rc1' of https://source.denx.de/u-boot/custodians/u-boot-efi (2024-04-08 14:33:59 -0600)
 
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-riscv.git 
+
+for you to fetch changes up to c1f78a4f632276bb4d77f8c79fe203709a9fa397:
+
+  doc: describe Milk-V Mars board (2024-04-09 11:30:37 +0800)
+
+CI result shows no issue: https://source.denx.de/u-boot/custodians/u-boot-riscv/-/pipelines/20256
+----------------------------------------------------------------
+
+- RISC-V: Support backtrace and improve isa extension parsing
+- cpu: Add cv1800b SoC support
+- board: Add Milk-V Mars board support
+- board: Add Milk-V Duo SD card support
+
+----------------------------------------------------------------
+Ben Dooks (1):
+      riscv: add backtrace support
+
+Conor Dooley (2):
+      riscv: don't read riscv, isa in the riscv cpu's get_desc()
+      riscv: support extension probing using riscv, isa-extensions
+
+Heinrich Schuchardt (7):
+      riscv: starfive: MMC card detect
+      riscv: do not set default fdt for VisionFive 2
+      eeprom: starfive: function get_product_id_from_eeprom()
+      riscv: set fdtfile on Milk-V Mars
+      board: starfive: support Milk-V Mars board
+      riscv: starfive: avoid including common.h
+      doc: describe Milk-V Mars board
+
+Kongyang Liu (5):
+      riscv: cpu: cv1800b: Add support for cv1800b SoC
+      riscv: cache: Implement dcache for cv1800b
+      mmc: cv1800b: Add sdhci driver support for cv1800b SoC
+      riscv: dts: sophgo: Add clk node and sdhci node
+      configs: milkv_duo: Add SD card configs
+
+Łukasz Stelmach (1):
+      riscv: Move virtio scan to board_late_init()
+
+ arch/riscv/Kconfig                                 |  22 ++++
+ arch/riscv/Makefile                                |   4 +
+ arch/riscv/cpu/cpu.c                               |  60 +++++++----
+ arch/riscv/cpu/cv1800b/Kconfig                     |  12 +++
+ arch/riscv/cpu/cv1800b/Makefile                    |   7 ++
+ arch/riscv/cpu/cv1800b/cache.c                     |  45 ++++++++
+ arch/riscv/cpu/cv1800b/cpu.c                       |   9 ++
+ arch/riscv/cpu/cv1800b/dram.c                      |  21 ++++
+ arch/riscv/cpu/start.S                             |   1 +
+ arch/riscv/dts/cv1800b-milkv-duo.dts               |   8 ++
+ arch/riscv/dts/cv1800b.dtsi                        |   4 +
+ arch/riscv/dts/cv18xx.dtsi                         |  22 ++++
+ arch/riscv/dts/jh7110-starfive-visionfive-2.dtsi   |   2 +-
+ arch/riscv/include/asm/arch-jh7110/eeprom.h        |   9 ++
+ arch/riscv/lib/interrupts.c                        |  35 +++++++
+ board/emulation/qemu-riscv/qemu-riscv.c            |  12 +--
+ board/sophgo/milkv_duo/Kconfig                     |   4 +-
+ board/starfive/visionfive2/spl.c                   | 100 +++++++++++++++---
+ board/starfive/visionfive2/starfive_visionfive2.c  |  48 ++++++---
+ .../starfive/visionfive2/visionfive2-i2c-eeprom.c  |   9 +-
+ configs/milkv_duo_defconfig                        |  10 ++
+ configs/starfive_visionfive2_defconfig             |   1 -
+ doc/board/starfive/index.rst                       |   1 +
+ doc/board/starfive/milk-v_mars.rst                 | 111 ++++++++++++++++++++
+ doc/board/starfive/visionfive2.rst                 |  18 ++++
+ drivers/cpu/riscv_cpu.c                            |   8 +-
+ drivers/mmc/Kconfig                                |  13 +++
+ drivers/mmc/Makefile                               |   1 +
+ drivers/mmc/cv1800b_sdhci.c                        | 116 +++++++++++++++++++++
+ 29 files changed, 649 insertions(+), 64 deletions(-)
+ create mode 100644 arch/riscv/cpu/cv1800b/Kconfig
+ create mode 100644 arch/riscv/cpu/cv1800b/Makefile
+ create mode 100644 arch/riscv/cpu/cv1800b/cache.c
+ create mode 100644 arch/riscv/cpu/cv1800b/cpu.c
+ create mode 100644 arch/riscv/cpu/cv1800b/dram.c
+ create mode 100644 doc/board/starfive/milk-v_mars.rst
+ create mode 100644 drivers/mmc/cv1800b_sdhci.c
+
+Best regards,
+Leo
