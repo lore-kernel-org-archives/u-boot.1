@@ -4,131 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBFB2C67861
-	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 15:45:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B00CD1297
+	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 15:59:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E7F587E06;
-	Tue,  9 Apr 2024 17:45:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
+	by phobos.denx.de (Postfix) with ESMTP id D0DED87F24;
+	Tue,  9 Apr 2024 17:59:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="Nk/KO7xh";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="c1m3G3QO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEA4988172; Tue,  9 Apr 2024 17:45:56 +0200 (CEST)
-Received: from EUR04-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur04on20700.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2611::700])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 80A7487EA9; Tue,  9 Apr 2024 17:59:11 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 997E787073
- for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 17:45:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=theobroma-systems.com
+ by phobos.denx.de (Postfix) with ESMTPS id 58E3A87A4B
+ for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 17:59:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=quentin.schulz@theobroma-systems.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=XcmlcpvlTM+lQ+WKula5UtkoDi9dS/vLVf+jAhTqwsXXt1HuUvnZOBIw2cRFZqO75FoSuHxSbWzkjsz2aKRTwVb5/cNJmdzaDzaRf+ndgQRqBcoRSS9C0OE64WR5+anYFOee0or0AZ9eJVBwXDtjkuDquabwTq9OT9rfM0rmdZlw1f7O8ycTO7jKzfuPWkKDPymimSC+5jVvSSSfH8wbHXtYyvSP+17dO8wQ9gDi/4lZ5XvymEh4CIColJFGiieS1TL7d8tklJvlg9DYnVaWmSsArXV1arz0c3pdC8HHxYVplDZDRXzJqTSbqvyjoj5+x3sC3LvCUKnDqUCWbwjB0Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BENPVa8nSsYhq7shMbH4MuENbvhmE/duO3TQKGkXCmw=;
- b=m4VFTcIWuZxnyOK/5BLEAf7WWXu/5c+S+tT+46uMjoDLUXYf4qfk8ygrGozSZX+Mc02zkhypT1ZtA+JAUMF3VJ7eepwF2bzB9Zjcf/QgIvn6iUTYOuEddYNjNeubj63QmSsJZwJY7wVBLNEeaU50aadQNJ9D1193m2LPYJIYLIdkIHPZbFHQJ/Nl71IvE4veRACJQoFYAVtP6fEMlUlLYvXSjzjlrg2YMJYabATyf9g5cgycv6PfH9H7waLtlnvJunQUY9Jzzc7S2iHkTu5BSVzLvLtjItH0yzDQPBhZ04uWwOQDcEL7d5X22on1pfy6Au5qbWQFNvz8nyRsNKln1Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
- header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BENPVa8nSsYhq7shMbH4MuENbvhmE/duO3TQKGkXCmw=;
- b=Nk/KO7xh2A3fJhDvSMhpqpTqG3v3xa3quvk5inIEamscVo4tEe3WvtlZ4P2KJV07RKKNCrK6xqdlVtvJjDoqmwYp9GECW7wGR785uhx89U0kiA7KM8ghg4Yte8BetNwDWObvsAzOsHeg0BJlGZ9iQ6zbdLSHHwoTyna2CA/Df50mEDSCicakEbUa0Rlb8Oc+TpWPAUuvYERiXnZMpBvl/PoiqjcQBAbPDgTWFIkGGkWIxCk8nNkhTxnZWOZEV186Kir34hTgpk3aO25AVW+wrPODRemmqRPAlLTcywxHiX/BJJeqADLxumSKiN950pGhcDWh0iqMCKOGYh24AjveQQ==
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
- by AM9PR04MB8842.eurprd04.prod.outlook.com (2603:10a6:20b:409::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.55; Tue, 9 Apr
- 2024 15:45:52 +0000
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::3e70:7029:faf2:7779]) by DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::3e70:7029:faf2:7779%3]) with mapi id 15.20.7409.042; Tue, 9 Apr 2024
- 15:45:52 +0000
-Message-ID: <3fb8bdca-042a-4153-ae0f-114bbafcb82f@theobroma-systems.com>
-Date: Tue, 9 Apr 2024 17:45:50 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 05/14] rockchip: rk3308: Enable random generator
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>
-Cc: Andy Yan <andy.yan@rock-chips.com>, Akash Gajjar
- <gajjar04akash@gmail.com>, u-boot@lists.denx.de
-References: <20240408181429.3676856-1-jonas@kwiboo.se>
- <20240408181429.3676856-6-jonas@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <20240408181429.3676856-6-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA2P291CA0033.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1f::13) To DU2PR04MB8536.eurprd04.prod.outlook.com
- (2603:10a6:10:2d7::10)
+ smtp.mailfrom=SRS0=445b=LP=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1712678326;
+ bh=TOqGxoeIv9UehA1m7mf7zhmz8Ysgj3jHdmJ+13qOZSE=;
+ b=c1m3G3QOIam6KwQkf84d5RIZ7yYD3RCv9PMAKjdbjG0WL8si/999nkpXuVdE2PrtYaJ1jUdC7
+ XO9yPgplzdwBUhOdYVlTkFJca9gzvES8EbOj50KN5bTGo1d5pMl5NH/EH9tZAzmWZln2mBTcuGs
+ hfo9cAPb7ZXCpm5g/aXl3eqZO5pzcpRQ2t7T7soKhCVVOJZh8tAjTUUvg85NJuYoFnj55EMBlgd
+ O3AX7ORi1jXaYEaC8TAezUFK3KKBsixV+nX4xqO2SUMEnBOK32P1gJfXn8XWJ316h1CtYNNPZND
+ OlP1OGdFKiHAg4gUZC6sHsmPkuM1bRPRThQWJhKzSX0g==
+Message-ID: <3b2643b4-dea7-43cd-9f9c-da63e6588281@kwiboo.se>
+Date: Tue, 9 Apr 2024 17:58:42 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|AM9PR04MB8842:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: weQMxLApA/OCIrEqnISJpaQOKXRwjFXFSL0rOPD+vHuB/BFDraJdgu0ij661H11Eh3YOpFSL5OtPm4ps87+BHf5OLaMYc+3/DJVJ5y3PUP0cLIsgNQ5BcoSUjhkv1sKPXTs6F74qx2KHndH79/i+XFoWPTsLbVNz6qXFK7olMP8O+90qey8/2cNQsv6Zw44C/pqbk6JPzenNunNhAocw/221JIvXfy9SHkVP7RDxr1MB6IphaQXvHDYlHhQSiD/i9JT3IJl4Ci6rPaYg0/g9onAoI9NhcUAbhOfWszLQsjsQGOx/lC6RZPle1H/ED1CLf5Dm1toaAdLEywGw6Ogyx/zzoooh5JU1yUUZJA1TGHs/LnT5gBdetOhl69qd3A0PBolEvJ8BQy0So7oyeUpzqQzpLYYgjmP2prbGd8km81k+U3LpsxQXzl53opSHrMBx5sz8kJaNk1q2CJ0TPRZRYuvUUXqEIhRRsqxaSFM2EAP0MjQAZ6+irc8WvjPXaDu9epapUu+IvWP/H3ap0QkAzWDgZHIT2ozUItyZxMTs8Dk9ZTm3w9dyUJ8Iomsouat4xLkHs3IN3SROyu6up1sw9uZkEt0g9O0ZSylqCaxi0fQ=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366007)(376005)(1800799015); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TVBXNFUzLy8rSjVaWExnbEd6a0dqSk4ySmNobG81OXhpRk5SSXhaUkpmaWMv?=
- =?utf-8?B?UUFZV0FRM0R0TTBIaW1MQmJtZnV1YzZaY2xCMkdCNFRVdTFncElrMEFRamti?=
- =?utf-8?B?QVkxbVUzcUJWdHluN2t6YVZaWTh4SUZjeWNFUjhUK0RMMW1oOEtMNUw2OHl6?=
- =?utf-8?B?Yy9CMnpKNHVSNmVLRjE4bDEvWW8wbnIxN2pxeXdPcmNBMVZFTzJmT0hMVWF4?=
- =?utf-8?B?cGxzaE5TNHFXb0tIZEY2L2RyRXYrT2h1NEtldFJiVFlLaldBYmJIdDRRSzBL?=
- =?utf-8?B?ME5DSE5LdDJWRXovdlFqMzVKMDZuM0kxTkFMa2EvT2tWV2dmcXdnN21OaHNo?=
- =?utf-8?B?MnB0eTdtUHhLQzVROGpkTWNYN3kvU3lZandBTHpDcUpKNjFRbGthajExMndF?=
- =?utf-8?B?emd2eHhFMmQweC82djREdXQ2cDRyZGVjVUdQdzZRV29WLzlhajJUaGhSbEc5?=
- =?utf-8?B?aUtGQzhKMG5CSFNSaytJOElDNGR0NmloeWhlNTl5eHdxNXlScVlNWVdqeDFJ?=
- =?utf-8?B?Q2NmR1Q1c24yVXY3NmlUbitCV1FRT2NLd3JjbXRKeVI2WDZMN1JlV295N3l3?=
- =?utf-8?B?K3hWVzdnNGY3RHFYL1dydjBxYzV3OEZpQm5XbEU0em9aajU5L0RxNDFHSjls?=
- =?utf-8?B?MC9GNkcwTmVudXQ5TVRzczQ1eldGVkYwU1I2OGkvREVJK1VUQ3EwcFhBSUJR?=
- =?utf-8?B?T2pSOXgvSjh4VExMYVNpeGNBRFlFb3BsRlgwakgrdlhBcU5CK0hVaDU4MXZ6?=
- =?utf-8?B?clRFTE1OYXN0QTVncWhRaHZyNldSMVlCV3hmYlhtQmZSTk9VOWFueitpa1Vw?=
- =?utf-8?B?OXAxbklhUVoyeDJmOThSdUxnRWFkSC9XSlYvZ2RVZU85OSt6dnU3WWVaSlpG?=
- =?utf-8?B?TXc5bWxMMDFjOEdCKy9HbDBpYTNBNVJqeEU3YVF6MUkyUkRkQ3ZuSUFJMkZn?=
- =?utf-8?B?eWVPQnNidlZZclM5TGxPUUs2TUIzNkVmYmpaSkpFQTkrdDFJYzF1MDh3aFE1?=
- =?utf-8?B?MHAvUEttQ1ZIaW1mVkdFdDBPbnNCMVIvWXRhZGdLVGRrUzV2dHpzM01Oei8r?=
- =?utf-8?B?ajBBN2p3dysvcW11VGtXZkhoTGZKbkE1TFdBa3NrN1VncnFaWlE1NmgrWUEw?=
- =?utf-8?B?eHlyWFVBaDNFc1I3emRRRzV3SUFCU0cvdkZBNXlKdXlFMDFDRzJ1UWhSTjE3?=
- =?utf-8?B?Q3RjbHBNQm1xYTFod1k2dENHMG1saDBiVDBQU281TWMwYU95V2lQbW8zRFJY?=
- =?utf-8?B?a0RoSksrYXhyNTBiV2RJazYyY21xSTBZY0xaL2ZvR0ZaenRURGRpUDRZWCtm?=
- =?utf-8?B?YktkTTVRS2RGUXBYOEkreFF6bG5IbkFNSjhZdmxxTmN6RWd4bVk4Tkx2Zis4?=
- =?utf-8?B?TERHdHQzcXlHZEtXbmdxSStwYkJQZm5VTFdwQ1hHa2FWR0gyNUkvenRzZVRm?=
- =?utf-8?B?OVFHTEdHVEZwQXZKOU5mTTVLK1BlbldqVUY0eXlqdlBVMjVEcWY5dW5yM2M3?=
- =?utf-8?B?b1Y5THFwaHBMWURFTm43SzRIRlJjb0V0VEcvb3hzb1JHTWFhWGc1VDlLanBW?=
- =?utf-8?B?VFJ1WWxyaGhvajR4T2xMRGE2Tlp1RUFqOE12UldmcXRHZy8zM2Y2c1hEdmht?=
- =?utf-8?B?aEtOMVFrZ3RYUnJHUzQ5RTVWVktYZnQvcFl3ZWFTdEVkeWpPZCtFcGtXa3Vj?=
- =?utf-8?B?eDNEemt0UTBHZkszRGNBZGpYYWdrMCt4ZXQwSEdJdDZjaVBSRTVqUmpsUFZF?=
- =?utf-8?B?L0xGYU5HUkFndDFPQ2ZmM0xEeXZTTUtERVBVZWZLa2tVbjkxVWVDMnNJNW5m?=
- =?utf-8?B?Rm5aL3orTitjbXRwV3VCOXU0a1VEc1RVVHBKR21TRWNGamQyajlQTEh1Z2lr?=
- =?utf-8?B?OUdPL3dsUDg5ek9VRE9sUWk2b1dYdDVLOFpMeXdyQmczcnhxMnVmSVdXTE90?=
- =?utf-8?B?Vy9ySzFUYURSZ24yb1BYaU9jc2JXN2pobzVlMlNPZ2NYTW5lT003WFNJNkZH?=
- =?utf-8?B?ZnR2dGFXU3hPYWxVTy9odC9IaUZPakxZcUxCUGNoOVRRUHR3a3MwdHFqWkRZ?=
- =?utf-8?B?VE5US1pvdG5yNGxLK0JGQ2xVQ3grZ3hoMUsxclN0RTR5UXF2aEV6VzEzL3F6?=
- =?utf-8?B?TUJEUjJDOGg4WlcyMnpkTm92dWhWT05hdlk2T2ZFbW5yT2pra0F6S3AzQWp6?=
- =?utf-8?Q?ueanbbro1iK6a0TgGzJDYVg=3D?=
-X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 64b73a27-9b43-446e-a075-08dc58ac22ec
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Apr 2024 15:45:52.4822 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: KJVccdgIiPIKzwzfGC0X2zVpKDAl6DkWCOoFT/AUTiFBtvaJKppu+UVucdDLjGqF0naYAtOCcxY5h5yXjY7qjW7w6SpZ/abPFqfIDN5nohDvD/sdgsBRbStcQ5c7sxBw
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8842
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] mmc: Imply HS200 cap with mmc-hs400 prop to match
+ linux
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>, Peng Fan
+ <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini
+ <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240408210619.3749231-1-jonas@kwiboo.se>
+ <496013c1-7a57-4d12-bf31-c5257f35ee8c@theobroma-systems.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <496013c1-7a57-4d12-bf31-c5257f35ee8c@theobroma-systems.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 661565b520d77aab6d7071bb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,43 +75,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Quentin,
 
-On 4/8/24 20:14, Jonas Karlman wrote:
-> The RK3308 SoC contain a crypto engine block that can generate random
-> numbers.
+On 2024-04-09 17:27, Quentin Schulz wrote:
+> Hi Jonas,
 > 
-> Add rng node to soc u-boot.dtsi and enable Kconfig options to take
-> advantage of the random generator.
+> On 4/8/24 23:06, Jonas Karlman wrote:
+>> eMMC nodes in linux device tree files typically only contain a mmc-hs400
+>> prop to signal support for both HS400 and HS200. However, U-Boot require
+>> an explicit mmc-hs200 prop to signal support for the HS200 mode.
+>>  > Fix this by follow linux and imply HS200 cap when HS400 cap is signaled
+>> using a mmc-hs400 prop.
+>>
 > 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
-> v2: No change
-> ---
->   arch/arm/dts/rk3308-u-boot.dtsi | 5 +++++
->   arch/arm/mach-rockchip/Kconfig  | 2 ++
->   2 files changed, 7 insertions(+)
+> Technically speaking, the DT binding should be the one and only source 
+> of truth and should be implementation-agnostic.
 > 
-> diff --git a/arch/arm/dts/rk3308-u-boot.dtsi b/arch/arm/dts/rk3308-u-boot.dtsi
-> index 436f66d1b87d..fa31c838d34d 100644
-> --- a/arch/arm/dts/rk3308-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3308-u-boot.dtsi
-> @@ -26,6 +26,11 @@
->   			reg = <0x07 0x10>;
->   		};
->   	};
-> +
-> +	rng: rng@ff2f0000 {
-> +		compatible = "rockchip,cryptov2-rng";
-> +		reg = <0x0 0xff2f0000 0x0 0x4000>;
+> There it says:
+> """
+>    mmc-hs400-1_2v:
+>      $ref: /schemas/types.yaml#/definitions/flag
+>      description:
+>        eMMC HS400 mode (1.2V I/O) is supported.
+> 
+>    mmc-hs400-1_8v:
+>      $ref: /schemas/types.yaml#/definitions/flag
+>      description:
+>        eMMC HS400 mode (1.8V I/O) is supported.
+> """
+> 
+> So I'd say, the DTs should be fixed to add mmc-hs200 as well wherever it 
+> makes sense.
+> 
+> The point of the DT/DT binding is to be system-agnostic and 
+> representative of the **HW** implementation. At least that's what the DT 
+> people want it to be.
+> 
+> If the eMMC standard doesn't allow to have HS400 without HS200, then I 
+> think this change is acceptable as is, because it is the reality of the 
+> HW standard. Couldn't find this implied in the standard though (but I 
+> just skimmed through).
+> 
+> It's also quite surprising, as it's not because the eMMC works with 
+> HS400 that it necessarily does with HS200 or that it's desired (EMI, 
+> signal integrity/stability, etc...)?
+> 
+> Now, it wouldn't be the first time U-Boot follows whatever is done in 
+> Linux, so... up to you/the maintainers :)
 
-Downstream says something different:
+Agree that implying HS200 does not fully make sense, however it was part
+of the original Linux binding when HS400 was added in v3.16-rc1 [1] so I
+think that this is the expected behavior and changing it may be an ABI
+breakage.
 
-https://github.com/rockchip-linux/kernel/blob/develop-5.10/arch/arm64/boot/dts/rockchip/rk3308.dtsi#L1007-L1020
+The original Linux commit [1] mention:
+"Specially, if host can support HS400, it means that host can also
+support HS200."
 
-I couldn't quickly find the TRM for the RK3308 so cannot check myself :/
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=c373eb489b27b268c9b8c267b212d10864bc8cdd
 
-Also seems to be missing clocks and resets?
+Regards,
+Jonas
 
-Cheers,
-Quentin
+> 
+> Reviewed-by: Quentin Schulz <quentin.schulz@theobrma-systems.com>
+> 
+> Cheers,
+> Quentin
+
