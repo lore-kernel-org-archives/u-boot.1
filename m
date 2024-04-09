@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90284CD128A
-	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 18:03:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EF91CD128A
+	for <u-boot@archiver.kernel.org>; Tue,  9 Apr 2024 18:03:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF61787F24;
-	Tue,  9 Apr 2024 20:03:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 15A658817B;
+	Tue,  9 Apr 2024 20:03:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rQDlAFiu";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QNa6ALX3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E2298815E; Tue,  9 Apr 2024 20:03:12 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id 6C48B88172; Tue,  9 Apr 2024 20:03:13 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6726687E06
- for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 20:03:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FD4187F24
+ for <u-boot@lists.denx.de>; Tue,  9 Apr 2024 20:03:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-516d3776334so6133460e87.1
- for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 11:03:10 -0700 (PDT)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-56e69888a36so2976795a12.3
+ for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 11:03:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712685790; x=1713290590; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712685791; x=1713290591; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=ar+GLkq8olXtXCFZ6gNxbEZsIwgSsM7ajECkSqXCbvU=;
- b=rQDlAFiucTNy7ku3nZNOF89rRfYA5qFIjS9whbJrvvSQ7krqHHdT9YebB84JA8SIUU
- SKkFSpnpjtnmZyD0ZXFJ7IEsbhPHJyAju+6ukDIA4R47J1WkjMAXjlX8jKxzd7GWASc4
- rzHAP2eQYCXhvF1oKGogEKyFaCzsvw/temTYb1kis7kRxstupvDl4BNVRGlbdM3ZJEkj
- tzELMo5sKRv/UEkN/r85PDgC7TY/JM4fI+sCCINWIZOVvleGFVO5JMbSLdHwyssNLaIs
- pi4xcpm8sRaRvpQm39r2GCnOX/yT8Tjc7ee80Mit+3Yx6RUR9YgglsnygmNejy6sBa0F
- o+wg==
+ :reply-to; bh=ZgEG3rmw2m86fm+snm16flsW59XHaQ+wiKwyMIxO4Oo=;
+ b=QNa6ALX3seQCPLf2+fWRHGYYqbCsKqt78z53IqXo24QPZ/ISr2gV5y45OXZYgKdSdx
+ 6ocQ6i+ouXgSSuIJQeibUrzMmSBQKByv5Uip6yfpGJu/nTwUYVJgLEu8MWeUuYn7A5MI
+ gtN3Nci3D+SZEjFfGY69vJfFCicepWmnrcIG/M57TSN7F6VpT9clpOGhrLY7CjrPLoZn
+ tJvSpp3S7WkZ8ykbDdTJMVHxdoLQIqQ7CZ1ttVl1O01zFI5C1APtDUmMwb1S94/L5gm2
+ gPVA/dztX6SHgmwVh9oZ80QYyjozBCD3pUg0iMXK9Mbzd8mdGOiUmOMzBXMI+G4r6E8W
+ LT/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712685790; x=1713290590;
+ d=1e100.net; s=20230601; t=1712685791; x=1713290591;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ar+GLkq8olXtXCFZ6gNxbEZsIwgSsM7ajECkSqXCbvU=;
- b=d+YLEtu6KbHl0mLrbj+Nbfza5+RgBqtBvGSUnRDyisVXAsS8I2nont7pOxDvkLCusm
- DdScP9D0abXY6Ukm+FQqTmeJ4ZWBn7GjWCgS6s9e84JvMhpA3UEzm7Y3hlaNQWVPIgXa
- d2GFF3E5RarstOOvBFuTuUWdpV01LnENCM1E+hCLn2aGlVRG0rDFN51RS9L12ON2/lJO
- FOe0etwvBRxCNZlfBtibVbZ9N08qO7/3c6BPSZWL7jYUVmvRxzb8pfd4Xk0JbpvkEj3L
- FvaXdIG4MksWXIEUq298qK9KX2+Y3SXfjEPG4XwVCIUdAO/L7aDlmn6wNty3HBMKL49f
- Cl+Q==
-X-Gm-Message-State: AOJu0Ywdc+DxBmuiZuc4IeM4iOfL9NwXCPMIV528PtJuLUZhj352Al+e
- DVlucVaHh+VyfjyRjijapUe6wzqUD56a7I6CsAMFFL9HP4GVk3nHBtKv6J7/7QE=
-X-Google-Smtp-Source: AGHT+IHAHvfYi+kK/KT9MFrNBuQP6Us7cetEBBm2YruJ5s90S/r8/aWwWotLw++lrWnManSCoepbKA==
-X-Received: by 2002:a05:6512:471:b0:516:cd83:a967 with SMTP id
- x17-20020a056512047100b00516cd83a967mr115188lfd.39.1712685789585; 
- Tue, 09 Apr 2024 11:03:09 -0700 (PDT)
+ bh=ZgEG3rmw2m86fm+snm16flsW59XHaQ+wiKwyMIxO4Oo=;
+ b=FJfBdaPBZxunBkZcggPA7DB/AnUbZGkcB/a7/sKdcNLHoUIx6dp28feW7SawFUIygT
+ Ysu5uiK1Wjo1Kd2Em6cBXj0MZwa9ifKd1zE4N8kpOba40QWfO5MiBq7YpOYtG5AQvFq+
+ 1huDWDVzQ4M5sUaZBSAPCtTf1eofbvE2qTfVIpq6KdvJkGatfAGnFEXjyoZC8uJPLFx7
+ VXv7A9wM9u3L8W60JXxL2TdBNtqq3Zq5azr61Do9IgDfUCbqxam0jEexbR7kgLfkI/ZK
+ D9hqiZpr+PIj1tjqi2MeAa2L7ZZBn7WzbSv9y8ib5eotxz4qaRx+3Mgck7BZtcZAqSsr
+ knpg==
+X-Gm-Message-State: AOJu0YyGX+5772IM2WkC/A9+ue5BUBU+Zi1L9i0PGD2DhPXXkv3w+wqp
+ EE5aKc5Fr9PRnO0idmsQw5GUQ6Q2a5nj0NkLmyD2BvlOTSwAz0MVQUSvPZfDDDM=
+X-Google-Smtp-Source: AGHT+IGirUAFI4X9YmxAu4iH7vI4Ic2woRQqt6bu+Wwe0D4NR0kXFwxtaq666j6TDh8pJYarMwfMHw==
+X-Received: by 2002:a17:906:f28f:b0:a51:7b1c:bee9 with SMTP id
+ gu15-20020a170906f28f00b00a517b1cbee9mr113460ejb.25.1712685791169; 
+ Tue, 09 Apr 2024 11:03:11 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::570d])
  by smtp.gmail.com with ESMTPSA id
- d4-20020a170907272400b00a4e5866448bsm5928783ejl.155.2024.04.09.11.03.08
+ d4-20020a170907272400b00a4e5866448bsm5928783ejl.155.2024.04.09.11.03.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Apr 2024 11:03:08 -0700 (PDT)
+ Tue, 09 Apr 2024 11:03:10 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Tue, 09 Apr 2024 20:03:01 +0200
-Subject: [PATCH 2/7] mmc: msm_sdhci: use modern DT handling
+Date: Tue, 09 Apr 2024 20:03:02 +0200
+Subject: [PATCH 3/7] mmc: msm_sdhci: print core version
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240409-b4-qcom-mmc-fixes-v1-2-5039164ecbf7@linaro.org>
+Message-Id: <20240409-b4-qcom-mmc-fixes-v1-3-5039164ecbf7@linaro.org>
 References: <20240409-b4-qcom-mmc-fixes-v1-0-5039164ecbf7@linaro.org>
 In-Reply-To: <20240409-b4-qcom-mmc-fixes-v1-0-5039164ecbf7@linaro.org>
 To: Caleb Connolly <caleb.connolly@linaro.org>, 
@@ -80,21 +80,21 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2155;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=721;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=GNkT+VoVVSHYWOeeCeepO0GYTFZwgAuMqkw0qhSSg8I=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmFYLYpDY2H860LTRSC0PYBg1Tki71CFX/6j3Fe
- AKMDQYudLeJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZhWC2AAKCRAFgzErGV9k
- tkaAEACSYQavKHBDJWC0X9y/ZhoR/i3dgRrhBgyRkrehUJJ+DLMnMqPMfGwEH+2LUGM7X32JKP5
- Bqs8Wx6DhcDMTnkkqPsPulg1oJNHsyEWhLHHW0lS0HZ2tdGv2Xf2gItmlAZ9nUiFr9djsFPuJX8
- 2+CUhvqiammCdr9CJ1IB4+3D/9iGMRsUhuTuWii1VEQpXu3D+LIJ+4jJ8FO4Cp6q1GZPiFcUPWN
- TXB7GtXMPipaj1aMLX1ZRJWCHmIvE71TRCgRquIpexqJoLfjPmTfQhHz7cdN8yE79iS+bSMU3Hj
- /spcexaFDS7D6GWQpEvkpzNrSB/N5cFZnQc/2/ez3y5PFKsr97G+X+fYAdB2CcR8IZ6qAUrR1ac
- 2pk+WNAMQ7Wy+8nr2TJuH8PGB6Ie/SxBC7ill/RRcHP79jYMyKheLgV00QvMmsNjGVZndnfXGTx
- vJveU++hds/X1+1vS+xcjd0IdZbvG2hXox8a4uMSrJoMEGnZW8P0H2pENtrgZmkKYFxZvIYw/7b
- lKfJa88iFb8RZqGpkw7JwFawcEfElr8ygyX+tUHhc9TYHiIrwNdZ1uTEa4Ntjalz5e+Nz37bb6l
- 9C9kDuMiMgR/bE5xqOz3k1i9emVN5PIipUtzX+3taRqHT3s1O3xAAaSPJHd7JeNsagbaf+WHhvv
- d5orHiJ/YiqweuA==
+ bh=sDXDePlQ5M1HOT4v1jH1rXmnlYmrOwy5I5iKM2kamzk=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmFYLY6DkWzkeQsDVIUh8fQK1f4IxoB/s7BkAeb
+ ajP/UwbyLWJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZhWC2AAKCRAFgzErGV9k
+ tv2JD/9S5szF6MUP6V3wUnJg4pE42iifFmnLmWtw+1pIz6IyAavJkeZ9Q6BNSoy+MXnAkC2bwPQ
+ OAIwYtYw+NJbJnIONH10k5VYW/FxIx+VPNFN1y0zLbUZfXk5/xVNrX7csAYGRX2wELeUfF29LL9
+ n3SWaPQYhCwaDrIJftH3hKfCrBHLT8pct6xvRxXWxqCSk1UUrvGZulHJPudvI9rTHreAnZc4cob
+ zMFML7vCcAbgAH0EZ4KgzS2hrt5JGoUY9WPzv5xf4hK2FqoiYW76moq1RD2dPVVA2ZUE+v5ilEF
+ RDibNu7uRKWb/+osoEHNA3zM2TWBeZ1dm4h3ZkaD+nJMxXfrot3IRZ4aeBroXl2Mkj3gubu9B49
+ kWxdt3uRflJck9xQPtzuv2Lbi3Mh6k4FJlkcMohMYU5Snbuc1Cnx+oum5E3bghCUasAvI1W9JS9
+ r7bh8LTLUnmMh062U0RQ+MmLCgSbjYpxkTsFpoaxYVPz/AA+CNgt37NiLjUuQkV4StL8otTsiNq
+ UinbFR4e4LdzCxYwT+5svTRYuZVzwAkFLwVh/sQkhPrqfwFN+KboOJQayiZtidCAoaRB3sIJK5T
+ mgK6QOhduZLpgxgmpRXUuXv0mgynBME4TXqdPRP2ihXBHDPJmGZy7F0IOvaJ5ENTbNrjhMZsf38
+ VkPBynUZ6zHz15g==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -113,72 +113,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-using fdtdec_* functions is incompatible with OF_LIVE and generally
-offers a less friendly interface. Update to use dev_read_* functions
-instead.
+This is useful for debugging.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/mmc/msm_sdhci.c | 28 +++++++++++++++++++---------
- 1 file changed, 19 insertions(+), 9 deletions(-)
+ drivers/mmc/msm_sdhci.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
 diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-index f23d425144ef..5689b4765122 100644
+index 5689b4765122..ea5d6b4cbbee 100644
 --- a/drivers/mmc/msm_sdhci.c
 +++ b/drivers/mmc/msm_sdhci.c
-@@ -205,9 +205,9 @@ static int msm_sdc_remove(struct udevice *dev)
+@@ -172,8 +172,10 @@ static int msm_sdc_probe(struct udevice *dev)
+ 	core_major >>= SDCC_VERSION_MAJOR_SHIFT;
  
- 	var_info = (void *)dev_get_driver_data(dev);
+ 	core_minor = core_version & SDCC_VERSION_MINOR_MASK;
  
- 	/* Disable host-controller mode */
--	if (!var_info->mci_removed)
-+	if (!var_info->mci_removed && priv->base)
- 		writel(0, priv->base + SDCC_MCI_HC_MODE);
- 
- 	clk_release_bulk(&priv->clks);
- 
-@@ -215,23 +215,33 @@ static int msm_sdc_remove(struct udevice *dev)
- }
- 
- static int msm_of_to_plat(struct udevice *dev)
- {
--	struct udevice *parent = dev->parent;
- 	struct msm_sdhc *priv = dev_get_priv(dev);
-+	const struct msm_sdhc_variant_info *var_info;
- 	struct sdhci_host *host = &priv->host;
--	int node = dev_of_offset(dev);
-+	int ret;
++	log_debug("SDCC version %d.%d\n", core_major, core_minor);
 +
-+	var_info = (void*)dev_get_driver_data(dev);
- 
- 	host->name = strdup(dev->name);
- 	host->ioaddr = dev_read_addr_ptr(dev);
--	host->bus_width = fdtdec_get_int(gd->fdt_blob, node, "bus-width", 4);
--	host->index = fdtdec_get_uint(gd->fdt_blob, node, "index", 0);
--	priv->base = (void *)fdtdec_get_addr_size_auto_parent(gd->fdt_blob,
--			dev_of_offset(parent), node, "reg", 1, NULL, false);
--	if (priv->base == (void *)FDT_ADDR_T_NONE ||
--	    host->ioaddr == (void *)FDT_ADDR_T_NONE)
-+	ret = dev_read_u32(dev, "bus-width", &host->bus_width);
-+	if (ret)
-+		host->bus_width = 4;
-+	ret = dev_read_u32(dev, "index", &host->index);
-+	if (ret)
-+		host->index = 0;
-+	priv->base = dev_read_addr_index_ptr(dev, 1);
-+
-+	if (!host->ioaddr)
- 		return -EINVAL;
- 
-+	if (!var_info->mci_removed && !priv->base) {
-+		printf("msm_sdhci: MCI base address not found\n");
-+		return -EINVAL;
-+	}
-+
- 	return 0;
- }
- 
- static int msm_sdc_bind(struct udevice *dev)
+ 	/*
+ 	 * Support for some capabilities is not advertised by newer
+ 	 * controller versions and must be explicitly enabled.
+ 	 */
 
 -- 
 2.44.0
