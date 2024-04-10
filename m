@@ -4,101 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2780CD128A
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 17:54:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96C15CD128A
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 18:14:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 453D488206;
-	Wed, 10 Apr 2024 19:53:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B72FB870AB;
+	Wed, 10 Apr 2024 20:14:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="U18hLzpY";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="V6EjZyD5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C94F7881EA; Wed, 10 Apr 2024 19:53:37 +0200 (CEST)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CB58887D8E; Wed, 10 Apr 2024 20:14:07 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E109A86FCE
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 19:53:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 50CF687073
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 20:14:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-56e346224bdso5170534a12.1
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 10:53:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712771615; x=1713376415; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=4rpzDfQYf5cMEMh29T5n5U2KfjY50giwhr+sD3d5Ib0=;
- b=U18hLzpYZI4eMmsnyjk5KXvb9/u7h7KOI2j7p5Y6MqsBr3el814yLEe/43fEIhtgB5
- gq/qvTEdkLZEYVU2IKwigKVgM+9jbDZnFyf4pBJQQuuuORqvPIMEi//HkzL/JpiFL/ju
- f4E5u6gVpepG3w7uLH9OmTLAEGYQGcNSFHO9iU/98yDb0zSl1I3JUz+1t1CJGNz+irSi
- xMIlcfqpPw0wU8R99ChUGPeiPiOZKHGYqzo48QQLPOR5lYrwpgTZPGeX5ZCdUAmX+8RM
- mf4/kRuvSCMoVmx6HiRLWqMA81hD7fZbZA3w9PVCs0d10IPCSDysLWmwSc+HqdaoyCqZ
- iN1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712771615; x=1713376415;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4rpzDfQYf5cMEMh29T5n5U2KfjY50giwhr+sD3d5Ib0=;
- b=H7vl8AaF6+dC83Tv5zCYylKmaoss53ssyx0PMIQIa85w6PshQRGN+eKtcTjfgieP6q
- oKxetnt62brPQf2mslOQIJ08YdvGcUoNv7HUGHIKwqDviaGqyXmPDtTYyuxBoAqXNq0M
- CO3NR8bVrDJYIfZkkNUyyUDWl+8iqa0GhDETR3zou4PTJAu276OW5qiq7zh1jzHn/UL0
- ibfjNks8DzHba5JLrreAXLasr9eIigdHDBIWqdYJb8jHgKi/UjtFi58LUTKzbdeKGOFr
- LjsmCBvfhwJweRYyddqiT4zhk5RmaitaJgLhLzuxFHpaEAJ2xBl2rd5lP3d8zEc0nbwD
- rl2A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUFLILe404IppdZKiTXBCFcixJ49f7gT1FhQ8zRjx89uOkVqZ6gurDFbGuCQWfn5iWhdT3mbxIbBt+QixUCI8dos3wzSQ==
-X-Gm-Message-State: AOJu0Yxwoj30cmZ78A5JzajMr4XD8lEMTKmIYjtS9T5X+7s6jmEAacRA
- Oo3pD3/hCR/EbEb7BkW6WKMZewZR0GToDzUKfJ0gApnwnkIRAF40cz3B+vLXpVlvqIPnwt5Ycui
- DUzg=
-X-Google-Smtp-Source: AGHT+IGG6ZzSp0zryMOycJlTNQQ9LjtWbOh9TWfN8TA6EG2MQUQT6jdSCrrjjl46GPmKJ53rvSlP8g==
-X-Received: by 2002:a50:954d:0:b0:56e:64a:2a47 with SMTP id
- v13-20020a50954d000000b0056e064a2a47mr1627591eda.42.1712771615429; 
- Wed, 10 Apr 2024 10:53:35 -0700 (PDT)
-Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::4716])
- by smtp.gmail.com with ESMTPSA id
- w1-20020a056402128100b0056e2b351956sm6543599edv.22.2024.04.10.10.53.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Apr 2024 10:53:34 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Wed, 10 Apr 2024 19:52:39 +0200
-Subject: [PATCH v2 4/4] qcom_defconfig: enable pinctrl for new
- qcm2290/sm6115/sm8250
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=d-gole@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43AIDvge068336;
+ Wed, 10 Apr 2024 13:13:57 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1712772837;
+ bh=PzZ+lZCpQqfXihEL3Oy0OSNBKFDyPi0vYcEqS0Soies=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=V6EjZyD5gZf7DzrFEubtWaVzLWu8QpTF+YjgkJyXR9vKSOehU3wwz+ZJfNE02ELhe
+ T6n9wiO5TDaNVUsBQJhExS7eNom3s4AXwlzTI8uU7Au+zU7we7JzA96XXWGrvmA+3Z
+ EXfITrPY0/6mtIghRBub+qO0KZAywol2sR6/DGpw=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43AIDvxs029860
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 10 Apr 2024 13:13:57 -0500
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 10
+ Apr 2024 13:13:56 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 10 Apr 2024 13:13:56 -0500
+Received: from localhost (dhruva.dhcp.ti.com [172.24.227.68])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43AIDtln038246;
+ Wed, 10 Apr 2024 13:13:56 -0500
+Date: Wed, 10 Apr 2024 23:43:55 +0530
+From: Dhruva Gole <d-gole@ti.com>
+To: <tkuw584924@gmail.com>
+CC: <u-boot@lists.denx.de>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
+ <tudor.ambarus@linaro.org>, <pratyush@kernel.org>,
+ <Bacem.Daassi@infineon.com>, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Subject: Re: [PATCH v2 2/3] mtd: spi-nor-id: Use INFO6 macro for S25FL-S
+Message-ID: <20240410181355.v2yq5cip7fwlxa36@dhruva>
+References: <cover.1712638210.git.Takahiro.Kuwano@infineon.com>
+ <a988761256bdfd8a55a009d127b8b44b3f9aac92.1712638210.git.Takahiro.Kuwano@infineon.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240410-b4-qcom-rbx-soc-v2-4-5120a9c7f6ce@linaro.org>
-References: <20240410-b4-qcom-rbx-soc-v2-0-5120a9c7f6ce@linaro.org>
-In-Reply-To: <20240410-b4-qcom-rbx-soc-v2-0-5120a9c7f6ce@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Caleb Connolly <caleb.connolly@linaro.org>
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=768;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=hMWh0MxTk8RqhtiwFxgyLvAAt+XgDe+lu4UrQWrmPRY=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmFtIZT+WahLcLSy67AJuRkjJrZQhaRfkKXzfhS
- M4vdr1xBFGJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZhbSGQAKCRAFgzErGV9k
- tkdBD/9Uoi/BicpTRRzvIFLk+dSEhwzd3gK1tZxWqWtRgEdPuBx+mETijMvfYGfuwNfHtfhHWNH
- 6SFIF3+It3zkYM+AkSzCNSz7R7aQhxCAaMsu7l4sHM9SSFw+PQ55di/OzlyxgSUDPUmi6moFFCf
- 7olPbfLQ1n3kucDDpg9s/Ag0+YtvbUSPw6WaPq7mraAUo+X4msBLBLEEJjfO5BrHNmZgej9wXfY
- 6RrRHix3YKkVpUrDat+Sz14uVBhtSsAWIqbiAa657OeMntIr26rHZp1Rfq2a/TH6CYyrkNqSZu0
- Q/vT5d9s46QE0eXEAReyRSPAZX/RVBSSYLLB+KknZl7BR6kjTAOeD55+2Zdnn1RlZlDnKc0srNB
- PJzGIxLTzhkZDUEDWDmPEFwwFulWsYMBigtSTxKgWM6Ks0h1OhdwbR/12EPyGwWlMUJfTWCvuiI
- jFYJnxoPdMPYnNOHM5n4xAiDdZoYfXCZvydvHAwPUTOKpuz4IBpUpA5yFNluvaTRTvwPYxgAK9D
- gvNdPQwmjlJ+P/dWxY9zsWFLRYtS2ThnFCzb+v3r9D3yWpGQZIZ1TOrIorwND9GpbMa2mtCoh+y
- JdPKLNNa05kQlgPObJlP7azWHN6S6VO4o5F6pbWo0JRT0wkTqWpyaf/IDYIdlOcM/A+kFGCBpEd
- 1SK3vWVUoOfFMlg==
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <a988761256bdfd8a55a009d127b8b44b3f9aac92.1712638210.git.Takahiro.Kuwano@infineon.com>
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,32 +80,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the clock and pinctrl drivers for qcm2290, sm6115, and sm8250.
+On Apr 09, 2024 at 15:20:21 +0900, tkuw584924@gmail.com wrote:
+> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+> 
+> The 6th ID byte is needed to distiguish S25FL-S and S25FS-S families.
+> 
+> Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+> ---
+>  drivers/mtd/spi/spi-nor-ids.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+> index 4e83b8c94c..a3dca506a3 100644
+> --- a/drivers/mtd/spi/spi-nor-ids.c
+> +++ b/drivers/mtd/spi/spi-nor-ids.c
+> @@ -338,8 +338,8 @@ const struct flash_info spi_nor_ids[] = {
+>  	 */
+>  	{ INFO("s25sl032p",  0x010215, 0x4d00,  64 * 1024,  64, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+>  	{ INFO("s25sl064p",  0x010216, 0x4d00,  64 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ) },
+> -	{ INFO("s25fl256s0", 0x010219, 0x4d00, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+> -	{ INFO("s25fl256s1", 0x010219, 0x4d01,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+> +	{ INFO6("s25fl256s0", 0x010219, 0x4d0080, 256 * 1024, 128, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
+> +	{ INFO6("s25fl256s1", 0x010219, 0x4d0180,  64 * 1024, 512, SPI_NOR_DUAL_READ | SPI_NOR_QUAD_READ | USE_CLSR) },
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- configs/qcom_defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+Reviewed-by: Dhruva Gole <d-gole@ti.com>
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index a0921ad55519..5e08ea392386 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -66,10 +66,13 @@ CONFIG_RGMII=y
- CONFIG_PHY=y
- CONFIG_PHY_QCOM_QUSB2=y
- CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=y
- CONFIG_PINCTRL=y
-+CONFIG_PINCTRL_QCOM_QCM2290=y
- CONFIG_PINCTRL_QCOM_QCS404=y
- CONFIG_PINCTRL_QCOM_SDM845=y
-+CONFIG_PINCTRL_QCOM_SM6115=y
-+CONFIG_PINCTRL_QCOM_SM8250=y
- CONFIG_DM_PMIC=y
- CONFIG_PMIC_QCOM=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
 
 -- 
-2.44.0
-
+Best regards,
+Dhruva
