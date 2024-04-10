@@ -4,98 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36745CD11C2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 16:01:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97FD7CD11C2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 17:07:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DFC1881CD;
-	Wed, 10 Apr 2024 18:01:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7F82F88149;
+	Wed, 10 Apr 2024 19:07:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yKvVAv4u";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YPZoksps";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02F1D881C2; Wed, 10 Apr 2024 18:01:21 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 898F488199; Wed, 10 Apr 2024 19:07:12 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21AB7881B8
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 18:01:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7ED1286DEE
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 19:07:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-41551639550so47737455e9.2
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 09:01:18 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-56e6f4ee104so3383543a12.2
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 10:07:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712764877; x=1713369677; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=U397QMxjRPtL4eZUzJ/Kl79N5zgnre2QvU7AvDmK8pI=;
- b=yKvVAv4u0z0o4kolkous+Dq63r2qxvtvySb5GEEcayVtkKJgcvBJpXJMPsQsbXEN5/
- dkJwEFW4ZdVfYsVmpmA8VkBQwE/pLvUwGGoAL/Pf6LhNijbxsQf3zrjgGAqzEa86If3j
- vCf+mKpP3HM5QbuIQiZBdzHbJUFPNGlFvQWWf4wCgErPxoVTpizfnZx2ObsXps1TsDLv
- L3iGv2xMQp94XGl/DEHFi/i+NlZzZ96vhTe4UwKaZocNi5nkVfNLP3KIPopCLYNQR6zu
- 4RZZOZKZJX4uFRAQFY5l2jazgdM9BB2b/rN93rCL4HrWnkIXvfBwFrDsUN31wrkYFFKb
- SVrA==
+ d=linaro.org; s=google; t=1712768829; x=1713373629; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=aQUb+FK6W/uKL+R1cxgB7/kHhipNmDzJ7arSoMHulF8=;
+ b=YPZokspsQBcRyVXhPbJKOG58okyFuNrmFuFEKM7joqs6eLHtoLygpycjsd/FnfXUdP
+ MijZwL1xzhad4noUs8UU9QxMNvQ2C01uLCCWU0eD14qv1AwuxuURNqI/De6TpJNLuRPG
+ T/tLwoCZnHMjTaW3ltf8mN7ySnTrqtArQbtL/YAFIkITSFxSgQtjxEEcRKaBFTVyuC0f
+ GLePPRYS/wNUMq6lukkqn93+H6qqagZzRq4RatxfiSEQ/EZH8IVlqvFCVT43/NbqoroM
+ mNK1MTKIrCnluLyEG2n3MZTB06I/aerGssIhFotrclU0Vh/OWoNPJu1M6vuWAAgizMfv
+ /SLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712764877; x=1713369677;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=U397QMxjRPtL4eZUzJ/Kl79N5zgnre2QvU7AvDmK8pI=;
- b=TJ5tX9XiJa6EUM8P6XcXLVVIwr3D1bO9xNmfGrOTxxhQCybPhW81qU8TaBq1ENx19W
- S6GsLyMPl04uv7ipPsfSjvfgUeU9w+br19iIm+zA1avDU6GkAxUT04siNDMs/FHwvyur
- XG6du5viJZ5KBztKCQ39CrZOrMDXngwfKTqkdlVNc55+PP/RzwUNU4rWys2qsMm/tqLl
- q/U+N46SpZWx2DaqVdbbx2CMuZqWZ8jiziN5g+ujmRSD0y1xhGScXRg3zGfQFxOSPwWD
- j7RSEmw8yj9R1Rh4RbMOL9NZVlbm4NDjI7aKNR67gIFOX6epXftsV7dlxhjD3r2UAJmP
- j2Eg==
-X-Gm-Message-State: AOJu0YyDKfDY2qgO10hg+cvUNhznPA4L5S3w2+Rr9R4/8k5D5IZoAIaJ
- EEQGdMODFJsnrrJWaXbjLhxvwwQBNX7ws64BJygNHAAp4OH4bclY63up8FySc/vnmJCw7ZWE4HU
- 6z9o=
-X-Google-Smtp-Source: AGHT+IElH2eiS8gsZRIJzc+YdYDtDVl+/IQM2dpZbY7lSXE/UnIlu/mHy8lNkIpld2xXK9qqIso7FA==
-X-Received: by 2002:a5d:420f:0:b0:343:ae9a:b8c0 with SMTP id
- n15-20020a5d420f000000b00343ae9ab8c0mr1923280wrq.65.1712764877326; 
- Wed, 10 Apr 2024 09:01:17 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:52eb:f6ff:feb3:451a])
+ d=1e100.net; s=20230601; t=1712768829; x=1713373629;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aQUb+FK6W/uKL+R1cxgB7/kHhipNmDzJ7arSoMHulF8=;
+ b=GBKsELRJQjtG7XvMVkMbr3GTrM43ri8rbKxSnc7iNS8PvVBTPKBqirExOIa8FeRdRg
+ g+jYMOJfzg1SkJ7JoKL2b8WlheAlNFWf4Uje3x9Cbh8GFI3/ByH0Gr5ZLLeZ2ZM3+NRE
+ E1+htk/lJU4n0lrQgSUo1JyxUE0lSAga4H0jrXYlSX0U74d8JvXV7mQdbqw1qBDArPXs
+ aKcQTzws32NsyeJGbfn4rWtYDrWt5PD0LMbbNDFmz64xI1BLiK2pTcH9+z9xlzzZIaes
+ LLUq4Z1neh6Rhr2Kr//hT0qNRtcDVaX5dmXh6GCkLh5AbciIv2ruEknBz/5sIquDCtll
+ ByZg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWK6LvDEXobOCowRiVD8KKn3TJUI6fNzRvIc/Mppy0Xcg5/LJ3KKWIY61LXDrgLGBORIaWPbLn8YHdqCQhSxqJKXPSeoQ==
+X-Gm-Message-State: AOJu0YyuveNaPWIuMomCFRxpT9bNefXp9JiUBAeBtehSlknzYytwGJQ1
+ eu+b6NG3jIzt93c22kl0xHkzax3LpSxMTdfvVuWQcOX0tW1hx3K7LjdIK2AYssc=
+X-Google-Smtp-Source: AGHT+IFx5KQNNIZRhjSYoySJu7GalEE8b2ds982/L+cy8djrC4KNvX0d8U0gb9fO4wDi7eG8+XEXGQ==
+X-Received: by 2002:a17:906:a0c7:b0:a51:e5ac:7b7 with SMTP id
+ bh7-20020a170906a0c700b00a51e5ac07b7mr1864948ejb.71.1712768828935; 
+ Wed, 10 Apr 2024 10:07:08 -0700 (PDT)
+Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::4716])
  by smtp.gmail.com with ESMTPSA id
- l10-20020adfe58a000000b003434f526cb5sm13872624wrm.95.2024.04.10.09.01.16
+ fw14-20020a170906c94e00b00a51def4861bsm3331881ejb.91.2024.04.10.10.07.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Apr 2024 09:01:17 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Wed, 10 Apr 2024 18:01:13 +0200
-Subject: [PATCH v2 2/2] qcom_defconfig: enable the Qualcomm Synopsys eUSB2
- PHY driver
+ Wed, 10 Apr 2024 10:07:08 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH 0/2] dm: add support for stubbing optional devices
+Date: Wed, 10 Apr 2024 19:06:56 +0200
+Message-Id: <20240410-b4-stub-drivers-v1-0-6935bd2c07d1@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240410-topic-sm8x50-usb-phy-v2-2-9d2d90bd04da@linaro.org>
-References: <20240410-topic-sm8x50-usb-phy-v2-0-9d2d90bd04da@linaro.org>
-In-Reply-To: <20240410-topic-sm8x50-usb-phy-v2-0-9d2d90bd04da@linaro.org>
-To: Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=openpgp-sha256; l=603;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=boXUB3s3CNQ8QkpPwrcBtwUbJTpUbLx5DIWT8T92m44=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmFrfKClfocR6hTVDizYyT063ftUP7PC08FsjyJQZl
- ftLURAeJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZha3ygAKCRB33NvayMhJ0azzD/
- 4nhFR8zskr36If+HjDpWDqC3mvCAPrmamV0P/tP9xwll6jrkiy2S6KtY0s5VClNVqMHHDU+JnkNMbK
- T8XBft+IhRDZsWkQeHw2l7NO09n89L/YnM65gMskA1QF/k8NhITIALpDzp+qHv+9LCV1oacq8wwnjP
- sBexjhNpgMZJWRj3syvUMy+5mCTW10gfhayKZZSoGrd3zqqGYDz6l7mJQ8CbJcldZMqP5BL+/2uU6E
- TA2r4UpXjqGmm9H1q3KBFvB2eElDJollH1ZJ+AUsGWLGnCjoDs4xrPgP1cUGwrKBgy9bjyVdsxEMH5
- EjIz1nQqjUX9n68XFFuq/h4FXjlr40IvYz+5VEGJMRU3N51FCtVLv0Q+rzrRmCP5adD7F0kdIyR94c
- HhGB3NoQNrc5VdxvJND+9pQzBi618aUg/XEv3bgxasstFvE4kA+2PLFL2dA6Mn21Ar/9QpUipzx74H
- GTae5Ynhpnr+fj7svNBC5CIN1AuFRj7XWiiZGVWEgV2uNpe4Ywbcv3YdaoG5oDX4pYI03XhUS/9fTe
- pXm1nVkEa14jPuhjsBbDINXqQ05z8fArASz9BG59oPZLKdfZyhxv5VXkdQemUUl1N7jRZrGFIY1OHl
- /Q/TnLnhTUb6uy5iN7t6AVxzGi0zYsenCCf0q4l0ROT/8/bMCefhOxjaHnYQ==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+X-B4-Tracking: v=1; b=H4sIADDHFmYC/x3MMQqAMAxA0auUzAZaaTt4FXGwGjVLlURFKN7d4
+ viG/wsoCZNCZwoI3ay85wrXGJi2Ma+EPFdDa1tvvbOYPOp5JZyFbxJFN7kQQ0o2jhFqdQgt/Pz
+ HfnjfDxaeKdhhAAAA
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, u-boot-qcom@groups.io, 
+ u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3341;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=XINuneVKbG+kZoRURRsdn3GenyKIhRi2tP9PSdZpE2w=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmFsc7uteZYO0oPwiPHfsSsP7UtQ7r8gmbOx+nm
+ 5+242rjRhmJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZhbHOwAKCRAFgzErGV9k
+ tlMuD/0ZXd4+g82fvcinj1XrCXWEGWR8P7VTlfp7OQKsXsgddrHIvk0+2VxM8CPq1EtsEkYg704
+ fwNzLkOEUQLqY+VkqOCaWFjsKSx1G1Mo9fsj91NzVGpPvtrS6TzrW0oFT1B0Hfkmxlcj5kkxMiO
+ sCGaIT67ZT2LHV5BpPFsK69zTf6zj5kddSpLcoQdkXx1RyVlXiNBllr6S/2rOVQka7T9sJyU4UA
+ OtUnVfj6iIOjTDAJ8Fl7HQvkQlGKgmnnjZZvLMQqMthKZ6HmFKsC1/WqM0Ec9LUoY6R67vpzIz9
+ 35JIson5ejGHbccjfBg4Q6yIum/rI55H1lFS+xCsItm01AnfgQnk/PdQPmBxHNwEIAhQtN5KDZG
+ caaBxxbxfSR6oHTjtacB7BexE1d1cx3xxIIDb6F990C15XWnk+q8W945tA0ApU7Y5TjGqBJbdj0
+ Ou81PtlsktoT19zN1ninX/SxyclSL5dbZTQNwerrMkCPAiNJve1Dse5kFgjyAxR5ufTY+Z1K3bH
+ ZxoB/mwBSq2U/gUO8GkGhHqrSTroD2snhwkg3Kq21zHT07XrsvPMz3k6fdPhSZWP6ImqZ+tuWy9
+ +ZsDwcYjLJd4HSi8eINBL2utNkl38BXz4RxJ+XjniBbl4I8jBFex8RTJYCLd3oUsySWPm8PBiRu
+ foxWGw9e/nMvUcg==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,26 +116,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the Qualcomm Synopsys eUSB2 PHY driver in Qualcomm defconfig.
+As U-Boot works to align itself with upstream devicetrees, there are
+some common issues we start to run into, that of hardware blocks which
+might be important for an OS like Linux, but which aren't useful in
+U-Boot.
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+To offer an example: Qualcomm platforms feature a Resource Power Manager
+(RPM(h)) co-processor, it can opportunistically ramp down rails and
+clocks based on usage. This necessitates placing votes on these
+resources for every peripheral that uses them, and as a result means
+that many peripherals that we want to use in U-Boot contain references
+to the RPMh clock controller. However, we don't actually need to do this
+in the context of U-Boot, this is mostly something an OS would care
+about.
+
+With CONFIG_OF_LIVE it would be possible to dynamically remove such
+references (we could for example add a "bootph-os" property to indicate
+that the device should be ignored by U-Boot). However OF_LIVE is not
+available on all boards, and is only available post-relocation. This
+approach would also require adding a new DT property for every
+arch/platform/board that we want to ignore.
+
+We could instead try to handle this at the driver level, but this
+becomes intractable when trying to scale across all of the drivers and
+for all of the supported hardware generations. It also complicates thing
+if we actually want/need to use this previously optional resource in the
+future.
+
+== The stub approach ==
+
+The approach taken with this series is instead to allow for a stub
+driver to be defined per-uclass, with the clock subsystem being the
+first user. This stub driver is used as a fall back in the case where a
+driver requests a device of a specific type (such as a clock controller)
+and where no other driver binds to the node.
+
+This solution allows us to immediately solve this issue for Qualcomm
+platforms, and for any other architectures with similar issues. An
+obvious next step is to do the same for optional power-domain
+controllers.
+
+Another benefit to this approach is that it is easy to introspect, the
+stub drivers will show up in "dm tree". So the case of forgetting to
+enable a driver will be much more obvious than if we tried to find the
+clock, failed, and just did nothing.
+
+== Future expansion ==
+
+The exact scope of the stub driver (when it should match, how it should
+behave) obviously depends heavily on the uclass, as such I think it
+should be up to the subsystem maintainers.
+
+An obvious next choice would be the power domain uclass. The current
+architecture of U-Boot requires either disabling CONFIG_POWER_DOMAIN,
+supporting every single power domain controller on your platform, or
+adding DM_FLAG_DEFAULT_PD_CTRL_OFF to a bunch of drivers.
+
 ---
- configs/qcom_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Caleb Connolly (2):
+      dm: core: add support for fallback drivers
+      clk: introduce a fallback stub driver
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 1abb57345ff..b0ae5eb4df3 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -63,6 +63,7 @@ CONFIG_RGMII=y
- CONFIG_PHY=y
- CONFIG_PHY_QCOM_QUSB2=y
- CONFIG_PHY_QCOM_USB_SNPS_FEMTO_V2=y
-+CONFIG_PHY_QCOM_SNPS_EUSB2=y
- CONFIG_PINCTRL=y
- CONFIG_PINCTRL_QCOM_QCS404=y
- CONFIG_PINCTRL_QCOM_SDM845=y
+ drivers/clk/Makefile       |  1 +
+ drivers/clk/clk-fallback.c | 39 +++++++++++++++++++++++++++++++++++++++
+ drivers/clk/clk-uclass.c   |  4 ++++
+ drivers/core/Kconfig       | 20 ++++++++++++++++++++
+ drivers/core/uclass.c      | 24 +++++++++++++++++++++++-
+ include/dm/uclass.h        |  3 +++
+ 6 files changed, 90 insertions(+), 1 deletion(-)
+---
+change-id: 20240410-b4-stub-drivers-1c1565bb06a6
+base-commit: 56c4a3aa2ed15b64eabd067a10be2091d28a5f2f
 
--- 
-2.34.1
+// Caleb (they/them)
 
