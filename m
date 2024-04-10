@@ -4,77 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A37D0CD11C2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 09:27:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C3C0CD1296
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 09:30:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE20F88089;
-	Wed, 10 Apr 2024 11:27:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2357187F52;
+	Wed, 10 Apr 2024 11:30:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yrOvj+cc";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oqzFvbK4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3241687F52; Wed, 10 Apr 2024 11:27:16 +0200 (CEST)
-Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
- [IPv6:2607:f8b0:4864:20::931])
+ id 5AD8D88089; Wed, 10 Apr 2024 11:30:19 +0200 (CEST)
+Received: from mail-lf1-x12f.google.com (mail-lf1-x12f.google.com
+ [IPv6:2a00:1450:4864:20::12f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CB6288089
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 11:27:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 62E5087666
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 11:30:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x931.google.com with SMTP id
- a1e0cc1a2514c-7e7af556187so114386241.1
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 02:27:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12f.google.com with SMTP id
+ 2adb3069b0e04-516cdb21b34so8407097e87.1
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 02:30:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712741231; x=1713346031; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712741416; x=1713346216; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=8sC8iBO2Xgx8g7PxGdEVC0afJ7Lt22tc4c298RuzwgI=;
- b=yrOvj+cc+RlvepVwm0LC/6GtHnS3ABy34ut7Cns0VEb1zMG0d2vB0FIvxkBd0F1zhR
- JHhoC9OdRBsA0qv95rSG0E7M+o13EERFkMk7FDlUzI/dQ0J9vhAZEXlsWI4dPpKYNQg8
- JPjvopBpSzPRDjmoepEgi5I/ZOBUNfMQqsDpB2SZPL3YEk+d19tfyjVE8EhRJMjjMVnC
- s1n841CRIfWLPZb86J20sPjXI9kTGzfcbBwJMBZXJu8qU6wc4R6WnBopp4ouOZtCnNWc
- w8UAANGuW7nJQoLR1u+PaTnaoDqgkZIPaqzqO7H9Z58oufuC6v2p8OnV6OrcOLw4Khs4
- wpqQ==
+ bh=VC25ZZW8rYQQhA6Ae0l1Os16CxB3LHyjpIJv/GZwh08=;
+ b=oqzFvbK4fJktF+cLiyOF3Ntv0qhkzf2RIzMHfR2WmPtMD5yYbFxE7GW0tHz2z1QrXC
+ KwpKvQ3Wwo7uaGewHUF3OVYI3nwBnnJgng3/GVWWFxrKHRzpLPRxWG+LPEfUuv7Hc8zX
+ 1dpUMSB2yr59Ar0yVVC+6igCz758KomOKgBnVy5Apo1gpWFpb8DGsdosQCoVM2KX7PbG
+ CeKbGdose+H2SodvPoRSat58jBIk/bg4BNMmG3wu3LZyUGoI6hUge5WV1YFrEefNtRco
+ eChYKDhWBkYtvjeaLRA0eos9q4y8fN2sot+LKtpGXX/y8F6Wk2IYanrUrfxAfLAWoMrK
+ Ilig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712741231; x=1713346031;
+ d=1e100.net; s=20230601; t=1712741416; x=1713346216;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=8sC8iBO2Xgx8g7PxGdEVC0afJ7Lt22tc4c298RuzwgI=;
- b=sL77XaUSZL+xC8lpH0MpwY3Qm9EcffUy/NrhS6wqC7TFwEiCerp90rorKWx0Ifb9BG
- Izm0y/HaU++kSvg56Gl7dlwDZAQG8dOjIgIGIOQBZcUAVurq4kCDYnITSeFJNHYmW4gI
- +Mq9/ZfB1IGR6rLY0Y5yTeG5veBIqMIWXJ6vnlJtjsQ02UNCBelKeJWwBaB4ur/QcxlR
- QPugdDh8NaO8Skax/GS1ParknVNfL226/S+CrhLK7P/vP4+pybpbYs+i10kOcTX+Webx
- FOqe++RXZmFV0IIvOCvF2l+1G7Mj0h/44zvMCrs3/+UrS3yvt9QtFhcKBizRrNIhzLY2
- MlWQ==
+ bh=VC25ZZW8rYQQhA6Ae0l1Os16CxB3LHyjpIJv/GZwh08=;
+ b=N7vo/nj0/bWsEkIud9CqN7SMO9d3EOxEbbY6wVcwIbR7GaqdzIwn8AUZiQ3uKRvc9Z
+ jhBs/ZOWJCF+T9RDUgNPZzcCXwmR4RTZeonIB54KOwbJ67K0mEiYrMverRAwqkL0brEA
+ YiaGPhtqB5dPE1bKiwzQey2CQOybeBq5jR+DwNQ5DZrWYvvzi3sI+ufUE+0ZGcdJbVzr
+ P8/EjrJuqGH86NPIoC4C+rAJJ2JM1pewayI3pUulnuzoiJv8EL2+WHVA3tILtnKUK4z5
+ YPDPDO5q7wPlT/LdRsr4ujbz50KDncKBa0cUN4FmIHsLBelnGt3Gt9ELD+6zuOOWbA2B
+ iEtg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUscCp5KfodCvGyvfYyZJqblnho6O5AFr7MmDwvEHi6zT3va/etFhyz8jM1waYIp/+C9CB6VAOOmz+gGWr6X1w/PYQ52Q==
-X-Gm-Message-State: AOJu0YxQEEHPECT1JOhsGl8O0hT4mRUAvknmzRoLagCbiNLmjSgIN6yM
- F8pW+aTFZCWvfTsRjS2BOvmqXVIr43kkaGaMfI1d0nSzpX/L9/4S3rAXgmaVav89J87QjbEURG8
- U438esw2cat+CB4+npjlE2yMtlZbR7rG4nqjiUA==
-X-Google-Smtp-Source: AGHT+IG/A+HydNdU0jZu75waEU17coN9Eq9afeLC+Dw157KyzbPoPn6MisCOyw8XySV8+OjzgFQt127fgXsNREj9/Hg=
-X-Received: by 2002:a05:6102:950:b0:47a:2cd2:c24d with SMTP id
- a16-20020a056102095000b0047a2cd2c24dmr125236vsi.11.1712741231196; Wed, 10 Apr
- 2024 02:27:11 -0700 (PDT)
+ AJvYcCU0gnLRtkAecUIbHcohzXlA106DViwX1WXLj+IPywaDSlZ3l2IMHk8QOsJKLY3fOERPiIzWtpFZyj30tGXDt4FIFJx0JA==
+X-Gm-Message-State: AOJu0Yz5vYG/tCH5+vfSfTxEpq/yuCgQOy05ieuNQHyye7jHfdSUM358
+ 7dqo2ktWbrrZC7UM+D86kNRHrx0B9RWWoFT/R6wklesmgz3/1IJd4J0zc5Luf589/mFUkJMRXLZ
+ mlMVHFAHxmsJNgViAPpMq5O86wVQcFbnFCRQg8Q==
+X-Google-Smtp-Source: AGHT+IH3a52IGQ6t3sH4SCaIIblR4t6M5X/K9Fczpef4FFps4CwsSHYlAgJeG3MOkTJ9oobVcBSlxZXqBSRox60nmXo=
+X-Received: by 2002:ac2:5a0b:0:b0:516:ce9e:73ce with SMTP id
+ q11-20020ac25a0b000000b00516ce9e73cemr1205609lfn.21.1712741415614; Wed, 10
+ Apr 2024 02:30:15 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240404-topic-sm8x50-clock-v1-0-0c8ea7fad003@linaro.org>
- <20240404-topic-sm8x50-clock-v1-1-0c8ea7fad003@linaro.org>
- <CAFA6WYPwCMk2b-U0JA0nKEE-E_TSpaX7-60JYfsCT3TU_mzktg@mail.gmail.com>
- <1961c187-702b-4cb3-b37e-69d8b4658013@linaro.org>
-In-Reply-To: <1961c187-702b-4cb3-b37e-69d8b4658013@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 10 Apr 2024 14:57:00 +0530
-Message-ID: <CAFA6WYNEfXDa42OaF72pf3V4UH7AU_dxVjYeJBx7wnhRP3dyUw@mail.gmail.com>
-Subject: Re: [PATCH 1/3] clk: qcom: Add SM8550 clock driver
-To: neil.armstrong@linaro.org
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, u-boot@lists.denx.de
+References: <20240408223134.165877-1-j-humphreys@ti.com>
+ <20240408223134.165877-2-j-humphreys@ti.com>
+ <cac63a03-b019-4aed-83de-db2effa1a2f1@gmx.de>
+ <86zfu2z1p4.fsf@udb0321960.dhcp.ti.com>
+ <a2fb8782-66d5-44ad-8238-d565e0934de9@gmx.de>
+In-Reply-To: <a2fb8782-66d5-44ad-8238-d565e0934de9@gmx.de>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 10 Apr 2024 11:29:39 +0200
+Message-ID: <CAC_iWjLEzeXmhc=EiGT3++1a5W5JRrZHivgSN=JMN+mQtpTZeQ@mail.gmail.com>
+Subject: Re: [PATCH v2 01/16] board: Define GUIDs for firmware images
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Jon Humphreys <j-humphreys@ti.com>, u-boot@lists.denx.de, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>, Judith Mendez <jm@ti.com>, 
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, 
+ Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>, 
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Maxime Ripard <mripard@kernel.org>, 
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>,
+ Bryan Brattlof <bb@ti.com>, 
+ Vignesh Raghavendra <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,248 +103,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 10 Apr 2024 at 14:46, Neil Armstrong <neil.armstrong@linaro.org> wrote:
->
-> On 10/04/2024 11:13, Sumit Garg wrote:
-> > Hi Neil,
-> >
-> > On Thu, 4 Apr 2024 at 22:16, Neil Armstrong <neil.armstrong@linaro.org> wrote:
-> >>
-> >> Add the GCC and TCSRCC clock driver for the SM8550 SoC.
-> >>
-> >> The GCC driver uses the clk-qcom infrastructure to support GDSCs,
-> >> Resets and gates. While the TCSRCC is a simpler clock driver which
-> >> only supports gates.
-> >>
-> >> The GCC enable and set_rate callbacks contains some tweaks to
-> >> setup clocks for Debug UART, SDCard controller and USB.
-> >
-> > Okay so these are the peripherals you intend to support to begin with.
-> >
-> >>
-> >> The TCSRCC gates returns the XO frequency, which is used by the
-> >> Synopsys eUSB2 driver to determine the PHY configuration.
-> >>
-> >> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
-> >> ---
-> >>   drivers/clk/qcom/Kconfig        |   8 +
-> >>   drivers/clk/qcom/Makefile       |   1 +
-> >>   drivers/clk/qcom/clock-sm8550.c | 335 ++++++++++++++++++++++++++++++++++++++++
-> >>   3 files changed, 344 insertions(+)
-> >>
-> >> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-> >> index 8dae635ac2c..c908a3d19c9 100644
-> >> --- a/drivers/clk/qcom/Kconfig
-> >> +++ b/drivers/clk/qcom/Kconfig
-> >> @@ -47,6 +47,14 @@ config CLK_QCOM_SDM845
-> >>            on the Snapdragon 845 SoC. This driver supports the clocks
-> >>            and resets exposed by the GCC hardware block.
-> >>
-> >> +config CLK_QCOM_SM8550
-> >> +       bool "Qualcomm SM8550 GCC"
-> >> +       select CLK_QCOM
-> >> +       help
-> >> +         Say Y here to enable support for the Global Clock Controller
-> >> +         on the Snapdragon SM8550 SoC. This driver supports the clocks
-> >> +         and resets exposed by the GCC hardware block.
-> >> +
-> >>   endmenu
-> >>
-> >>   endif
-> >> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-> >> index cb179fdac58..d9ac5719f49 100644
-> >> --- a/drivers/clk/qcom/Makefile
-> >> +++ b/drivers/clk/qcom/Makefile
-> >> @@ -8,3 +8,4 @@ obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
-> >>   obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
-> >>   obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
-> >>   obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
-> >> +obj-$(CONFIG_CLK_QCOM_SM8550) += clock-sm8550.o
-> >> diff --git a/drivers/clk/qcom/clock-sm8550.c b/drivers/clk/qcom/clock-sm8550.c
-> >> new file mode 100644
-> >> index 00000000000..c0249925cc7
-> >> --- /dev/null
-> >> +++ b/drivers/clk/qcom/clock-sm8550.c
-> >> @@ -0,0 +1,335 @@
-> >> +// SPDX-License-Identifier: BSD-3-Clause
-> >> +/*
-> >> + * Clock drivers for Qualcomm sm8550
-> >> + *
-> >> + * (C) Copyright 2024 Linaro Ltd.
-> >> + */
-> >> +
-> >> +#include <clk-uclass.h>
-> >> +#include <dm.h>
-> >> +#include <linux/delay.h>
-> >> +#include <errno.h>
-> >> +#include <asm/io.h>
-> >> +#include <linux/bug.h>
-> >> +#include <linux/bitops.h>
-> >> +#include <dt-bindings/clock/qcom,sm8550-gcc.h>
-> >> +#include <dt-bindings/clock/qcom,sm8550-tcsr.h>
-> >> +
-> >> +#include "clock-qcom.h"
-> >> +
-> >> +/* On-board TCXO, TOFIX get from DT */
-> >> +#define TCXO_RATE      38400000
-> >> +
-> >> +/* bi_tcxo_div2 divided after RPMh output */
-> >> +#define TCXO_DIV2_RATE (TCXO_RATE / 2)
-> >> +
-> >> +static const struct freq_tbl ftbl_gcc_qupv3_wrap1_s2_clk_src[] = {
-> >> +       F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
-> >> +       F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
-> >> +       F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
-> >> +       F(29491200, CFG_CLK_SRC_GPLL0_EVEN, 1, 1536, 15625),
-> >> +       F(32000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 75),
-> >> +       F(48000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 25),
-> >> +       F(51200000, CFG_CLK_SRC_GPLL0_EVEN, 1, 64, 375),
-> >> +       F(64000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 16, 75),
-> >> +       F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
-> >> +       F(80000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 15),
-> >> +       F(96000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 25),
-> >> +       F(100000000, CFG_CLK_SRC_GPLL0, 6, 0, 0),
-> >> +       { }
-> >> +};
-> >> +
-> >> +static const struct freq_tbl ftbl_gcc_sdcc2_apps_clk_src[] = {
-> >> +       F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
-> >> +       F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 12, 0, 0),
-> >> +       F(37500000, CFG_CLK_SRC_GPLL0_EVEN, 8, 0, 0),
-> >> +       F(50000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 0, 0),
-> >> +       F(100000000, CFG_CLK_SRC_GPLL0_EVEN, 3, 0, 0),
-> >> +       /* TOFIX F(202000000, CFG_CLK_SRC_GPLL9, 4, 0, 0), */
-> >> +       { }
-> >> +};
-> >> +
-> >> +static const struct freq_tbl ftbl_gcc_usb30_prim_master_clk_src[] = {
-> >> +       F(66666667, CFG_CLK_SRC_GPLL0_EVEN, 4.5, 0, 0),
-> >> +       F(133333333, CFG_CLK_SRC_GPLL0, 4.5, 0, 0),
-> >> +       F(200000000, CFG_CLK_SRC_GPLL0, 3, 0, 0),
-> >> +       F(240000000, CFG_CLK_SRC_GPLL0, 2.5, 0, 0),
-> >> +       { }
-> >> +};
-> >> +
-> >> +static ulong sm8550_set_rate(struct clk *clk, ulong rate)
-> >> +{
-> >> +       struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> >> +       const struct freq_tbl *freq;
-> >> +
-> >> +       switch (clk->id) {
-> >> +       case GCC_QUPV3_WRAP1_S7_CLK: /* UART7 */
-> >> +               freq = qcom_find_freq(ftbl_gcc_qupv3_wrap1_s2_clk_src, rate);
-> >> +               clk_rcg_set_rate_mnd(priv->base, 0x18898,
-> >> +                                    freq->pre_div, freq->m, freq->n, freq->src, 16);
-> >> +               return freq->freq;
-> >> +       case GCC_SDCC2_APPS_CLK:
-> >> +               freq = qcom_find_freq(ftbl_gcc_sdcc2_apps_clk_src, rate);
-> >> +               clk_rcg_set_rate_mnd(priv->base, 0x14018,
-> >> +                                    freq->pre_div, freq->m, freq->n, freq->src, 8);
-> >> +               return freq->freq;
-> >> +       case GCC_USB30_PRIM_MASTER_CLK:
-> >> +               freq = qcom_find_freq(ftbl_gcc_usb30_prim_master_clk_src, rate);
-> >> +               clk_rcg_set_rate_mnd(priv->base, 0x3902c,
-> >> +                                    freq->pre_div, freq->m, freq->n, freq->src, 8);
-> >> +               return freq->freq;
-> >> +       case GCC_USB30_PRIM_MOCK_UTMI_CLK:
-> >> +               clk_rcg_set_rate(priv->base, 0x39044, 0, 0);
-> >> +               return TCXO_DIV2_RATE;
-> >> +       case GCC_USB3_PRIM_PHY_AUX_CLK_SRC:
-> >> +               clk_rcg_set_rate(priv->base, 0x39070, 0, 0);
-> >> +               return TCXO_DIV2_RATE;
-> >> +       default:
-> >> +               return 0;
-> >> +       }
-> >> +}
-> >> +
-> >> +static const struct gate_clk sm8550_clks[] = {
-> >> +       GATE_CLK(GCC_AGGRE_NOC_PCIE_AXI_CLK,            0x52000, BIT(12)),
-> >> +       GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK,             0x770e4, BIT(0)),
-> >> +       GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_HW_CTL_CLK,      0x770e4, BIT(1)),
-> >> +       GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK,           0x3908c, BIT(0)),
-> >> +       GATE_CLK(GCC_CNOC_PCIE_SF_AXI_CLK,              0x52008, BIT(6)),
-> >> +       GATE_CLK(GCC_DDRSS_GPU_AXI_CLK,                 0x71154, BIT(0)),
-> >> +       GATE_CLK(GCC_DDRSS_PCIE_SF_QTB_CLK,             0x52000, BIT(19)),
-> >> +       GATE_CLK(GCC_PCIE_0_AUX_CLK,                    0x52008, BIT(3)),
-> >> +       GATE_CLK(GCC_PCIE_0_CFG_AHB_CLK,                0x52008, BIT(2)),
-> >> +       GATE_CLK(GCC_PCIE_0_MSTR_AXI_CLK,               0x52008, BIT(1)),
-> >> +       GATE_CLK(GCC_PCIE_0_PHY_RCHNG_CLK,              0x52000, BIT(22)),
-> >> +       GATE_CLK(GCC_PCIE_0_PIPE_CLK,                   0x52008, BIT(4)),
-> >> +       GATE_CLK(GCC_PCIE_0_SLV_AXI_CLK,                0x52008, BIT(0)),
-> >> +       GATE_CLK(GCC_PCIE_0_SLV_Q2A_AXI_CLK,            0x52008, BIT(5)),
-> >> +       GATE_CLK(GCC_PCIE_1_AUX_CLK,                    0x52000, BIT(29)),
-> >> +       GATE_CLK(GCC_PCIE_1_CFG_AHB_CLK,                0x52000, BIT(28)),
-> >> +       GATE_CLK(GCC_PCIE_1_MSTR_AXI_CLK,               0x52000, BIT(27)),
-> >> +       GATE_CLK(GCC_PCIE_1_PHY_AUX_CLK,                0x52000, BIT(24)),
-> >> +       GATE_CLK(GCC_PCIE_1_PHY_RCHNG_CLK,              0x52000, BIT(23)),
-> >> +       GATE_CLK(GCC_PCIE_1_PIPE_CLK,                   0x52000, BIT(30)),
-> >> +       GATE_CLK(GCC_PCIE_1_SLV_AXI_CLK,                0x52000, BIT(26)),
-> >> +       GATE_CLK(GCC_PCIE_1_SLV_Q2A_AXI_CLK,            0x52000, BIT(25)),
-> >> +       GATE_CLK(GCC_QUPV3_I2C_CORE_CLK,                0x52008, BIT(8)),
-> >> +       GATE_CLK(GCC_QUPV3_I2C_S0_CLK,                  0x52008, BIT(10)),
-> >> +       GATE_CLK(GCC_QUPV3_I2C_S1_CLK,                  0x52008, BIT(11)),
-> >> +       GATE_CLK(GCC_QUPV3_I2C_S2_CLK,                  0x52008, BIT(12)),
-> >> +       GATE_CLK(GCC_QUPV3_I2C_S3_CLK,                  0x52008, BIT(13)),
-> >> +       GATE_CLK(GCC_QUPV3_I2C_S4_CLK,                  0x52008, BIT(14)),
-> >> +       GATE_CLK(GCC_QUPV3_I2C_S5_CLK,                  0x52008, BIT(15)),
-> >> +       GATE_CLK(GCC_QUPV3_I2C_S6_CLK,                  0x52008, BIT(16)),
-> >> +       GATE_CLK(GCC_QUPV3_I2C_S7_CLK,                  0x52008, BIT(17)),
-> >> +       GATE_CLK(GCC_QUPV3_I2C_S8_CLK,                  0x52010, BIT(14)),
-> >> +       GATE_CLK(GCC_QUPV3_I2C_S9_CLK,                  0x52010, BIT(15)),
-> >> +       GATE_CLK(GCC_QUPV3_I2C_S_AHB_CLK,               0x52008, BIT(7)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP1_CORE_2X_CLK,           0x52008, BIT(18)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP1_CORE_CLK,              0x52008, BIT(19)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP1_S0_CLK,                0x52008, BIT(22)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP1_S1_CLK,                0x52008, BIT(23)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP1_S2_CLK,                0x52008, BIT(24)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP1_S3_CLK,                0x52008, BIT(25)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP1_S4_CLK,                0x52008, BIT(26)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP1_S5_CLK,                0x52008, BIT(27)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP1_S6_CLK,                0x52008, BIT(28)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP1_S7_CLK,                0x52010, BIT(16)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP2_CORE_2X_CLK,           0x52010, BIT(3)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP2_CORE_CLK,              0x52010, BIT(0)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP2_S0_CLK,                0x52010, BIT(4)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP2_S1_CLK,                0x52010, BIT(5)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP2_S2_CLK,                0x52010, BIT(6)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP2_S3_CLK,                0x52010, BIT(7)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP2_S4_CLK,                0x52010, BIT(8)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP2_S5_CLK,                0x52010, BIT(9)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP2_S6_CLK,                0x52010, BIT(10)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP2_S7_CLK,                0x52010, BIT(17)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP_1_M_AHB_CLK,            0x52008, BIT(20)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP_1_S_AHB_CLK,            0x52008, BIT(21)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP_2_M_AHB_CLK,            0x52010, BIT(2)),
-> >> +       GATE_CLK(GCC_QUPV3_WRAP_2_S_AHB_CLK,            0x52010, BIT(1)),
-> >> +       GATE_CLK(GCC_SDCC2_AHB_CLK,                     0x14010, BIT(0)),
-> >> +       GATE_CLK(GCC_SDCC2_APPS_CLK,                    0x14004, BIT(0)),
-> >> +       GATE_CLK(GCC_UFS_PHY_AHB_CLK,                   0x77024, BIT(0)),
-> >> +       GATE_CLK(GCC_UFS_PHY_AXI_CLK,                   0x77018, BIT(0)),
-> >> +       GATE_CLK(GCC_UFS_PHY_AXI_HW_CTL_CLK,            0x77018, BIT(1)),
-> >> +       GATE_CLK(GCC_UFS_PHY_ICE_CORE_CLK,              0x77074, BIT(0)),
-> >> +       GATE_CLK(GCC_UFS_PHY_ICE_CORE_HW_CTL_CLK,       0x77074, BIT(1)),
-> >> +       GATE_CLK(GCC_UFS_PHY_PHY_AUX_CLK,               0x770b0, BIT(0)),
-> >> +       GATE_CLK(GCC_UFS_PHY_PHY_AUX_HW_CTL_CLK,        0x770b0, BIT(1)),
-> >> +       GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_0_CLK,           0x7702c, BIT(0)),
-> >> +       GATE_CLK(GCC_UFS_PHY_RX_SYMBOL_1_CLK,           0x770cc, BIT(0)),
-> >> +       GATE_CLK(GCC_UFS_PHY_TX_SYMBOL_0_CLK,           0x77028, BIT(0)),
-> >> +       GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_CLK,           0x77068, BIT(0)),
-> >> +       GATE_CLK(GCC_UFS_PHY_UNIPRO_CORE_HW_CTL_CLK,    0x77068, BIT(1)),
-> >> +       GATE_CLK(GCC_USB30_PRIM_MASTER_CLK,             0x39018, BIT(0)),
-> >> +       GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK,          0x39028, BIT(0)),
-> >> +       GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK,              0x39024, BIT(0)),
-> >> +       GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK,             0x39060, BIT(0)),
-> >> +       GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK,         0x39064, BIT(0)),
-> >> +       GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK,            0x39068, BIT(0)),
-> >> +};
-> >
-> > Shouldn't this list be trimmed down to supported peripherals only?
->
-> It's already the case, I also intend to support PCIe so I added the gates already,
-> it would need some proper support in sm8550_set_rate/sm8550_enable when I'll
-> figure out what's needed.
+Hi both
 
-Is that all you need? Do we have the Qcom PCIe driver in U-Boot to
-start with? So please don't add unsupported code.
+On Wed, 10 Apr 2024 at 10:36, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 09.04.24 23:05, Jon Humphreys wrote:
+> > Heinrich Schuchardt <xypron.glpk@gmx.de> writes:
+> >
+> >> On 4/9/24 00:31, Jonathan Humphreys wrote:
+> >>> Define GUIDs for the different firmware images (tiboot3.bin, tispl.bin,
+> >>> u-boot.img, sysfw). >
+> >>> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+> >>> ---
+> >>>    include/configs/ti_armv7_common.h | 17 +++++++++++++++++
+> >>>    1 file changed, 17 insertions(+)
+> >>>
+> >>> diff --git a/include/configs/ti_armv7_common.h b/include/configs/ti_armv7_common.h
+> >>> index 3def7b1027e..4ce14a9b84c 100644
+> >>> --- a/include/configs/ti_armv7_common.h
+> >>> +++ b/include/configs/ti_armv7_common.h
+> >>> @@ -16,6 +16,23 @@
+> >>>    #ifndef __CONFIG_TI_ARMV7_COMMON_H__
+> >>>    #define __CONFIG_TI_ARMV7_COMMON_H__
+> >>>
+> >>> +/* GUIDs for capsule updatable firmware images */
+> >>
+> >> Please, provide code comments for the GUIDs, e.g.
+> >>
+> >> /**
+> >>    * define K3_TIBOOT3_IMAGE_GUID - firmware GUID for K3 tiboot3.bin
+> >>    *
+> >>    * This GUID is used in capsules updates to identify the tiboot3.bin
+> >>    * binary.
+> >>    */
 
--Sumit
+I'd go one step further tbh.  Those GUIDs can be used by OEMs/ODMs
+producing capsules for their future products.
+Currently, we don't have a documented way to allow users to redefine
+this (but Linaro is working on it).  If both TI and an OEM use the
+same GUID and try to upload the firmware to LVFS, we will have a GUID
+clash.
+I think we should have that on the comment as well, until we can
+properly sort it out
+
+Thanks
+/Ilias
+> >>
+> >> Cf.
+> >> https://docs.kernel.org/doc-guide/kernel-doc.html#object-like-macro-documentation
+> >>
+> >> Best regards
+> >>
+> >> Heinrich
+> >>
+> >
+> > Heinrich, thanks for reviewing!
+> >
+> > I modelled the GUID macros after how other boards and even core code
+> > defined there's.  (eg, include/configs/kontron-sl-mx8mm.h or
+> > include/efi_api.h).
+> >
+> > However, if this is the new direction, I will format as you suggest.
+> > Please confirm.
+>
+> Hello Jon,
+>
+> Without properly documenting macros we make the live of developers more
+> difficult. Yes, we still have a lot of missing code documentation. But
+> we should not follow poor example.
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > thanks
+> > Jon
+> >
+> >>> +#define K3_TIBOOT3_IMAGE_GUID \
+> >>> +   EFI_GUID(0xe672b518, 0x7cd7, 0x4014, 0xbd, 0x8d, \
+> >>> +            0x40, 0x72, 0x4d, 0x0a, 0xd4, 0xdc)
+> >>> +
+> >>> +#define K3_SPL_IMAGE_GUID \
+> >>> +   EFI_GUID(0x86f710ad, 0x10cf, 0x46ea, 0xac, 0x67, \
+> >>> +            0x85, 0x6a, 0xe0, 0x6e, 0xfa, 0xd2)
+> >>> +
+> >>> +#define K3_UBOOT_IMAGE_GUID \
+> >>> +   EFI_GUID(0x81b58fb0, 0x3b00, 0x4add, 0xa2, 0x0a, \
+> >>> +            0xc1, 0x85, 0xbb, 0xac, 0xa1, 0xed)
+> >>> +
+> >>> +#define K3_SYSFW_IMAGE_GUID \
+> >>> +   EFI_GUID(0x6fd10680, 0x361b, 0x431f, 0x80, 0xaa, \
+> >>> +            0x89, 0x94, 0x55, 0x81, 0x9e, 0x11)
+> >>> +
+> >>>    /*
+> >>>     * We setup defaults based on constraints from the Linux kernel, which should
+> >>>     * also be safe elsewhere.  We have the default load at 32MB into DDR (for
+>
