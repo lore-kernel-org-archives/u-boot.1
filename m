@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DAE3CD128A
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 17:44:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 022D2CD128A
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 17:44:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7759A881A9;
-	Wed, 10 Apr 2024 19:43:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E29F0881B7;
+	Wed, 10 Apr 2024 19:43:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hpkdbtFf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IvQFRlRW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79881881CF; Wed, 10 Apr 2024 19:43:24 +0200 (CEST)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id 53687881D0; Wed, 10 Apr 2024 19:43:25 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60CBA881AF
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 19:43:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4592988191
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 19:43:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-78d543db3a4so292452785a.0
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 10:43:22 -0700 (PDT)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-78d555254b7so6690385a.1
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 10:43:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712771001; x=1713375801; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1712771002; x=1713375802; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mZM6TIvkLaPTSWqfMfiIsYKYzqJBr8F+WsnCbsvsM2Y=;
- b=hpkdbtFft8MGQ8w8Vjqk5/zPMay7/x9k96H/HXQPaloB9PbbXl2K5PRO389f2Qhj4k
- nY3WWTDe8UB6tmowf1qhUt1i/1GISYOH5JzpgGnDYF3zHp2/tBpK+E+wDAuXCnWlQlPU
- fkAwLj9quV1B+Y5yiyLXgzcHnONk3/bcD7W8Q=
+ bh=6O4RmzC48rpe24s8YfqtxatwOkNqa+88VR4Nq6aWyaQ=;
+ b=IvQFRlRWOYESG+DJua9uC4jnfDumjTDev3p8Wa+TTugmtvti8f5VZShPuoYwur32ON
+ nzzQM3nIwdOJB4iikxuU48znGWwYRHAEPvYaB4mhLni6VPA2u+4kvLCzk6qf+Ytq6MMP
+ CBjd3ytopj0EbkXcJ+G9SpCxbJUf7Bbe6sdNY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712771001; x=1713375801;
+ d=1e100.net; s=20230601; t=1712771002; x=1713375802;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mZM6TIvkLaPTSWqfMfiIsYKYzqJBr8F+WsnCbsvsM2Y=;
- b=HXGWtLBd41wnu8cUCk/n2UBHO/BtxNfQHZKStM35fDsnhkMCxMPRe/3lFs9zW6/LSF
- lZuFPnQ7zgzyU11BSz34HGiO9uuqE+KgeWDcd5xIf6EbtYM8d4lLbouQuKBl1ybtbPMm
- 0lCQgb6kTt9bjQ6KHlbsMJpQ6oDl5niCMSnReLHA8icXzBYwwHslKVzJYLIHGAJ5+sRF
- 0cLqjIy2eZ71apWCdk4yY9dufPLgiF1EuYgWKYaAr6eS0caQarE3Kg6w8N48x1UXU4xI
- Xx2UtqeDP7qvUfvNQK+q4nEpnRHseKhxYtmsos4QaCof1iTCPd2CmnSqjSjJcHLBXJby
- tuyw==
-X-Gm-Message-State: AOJu0Yz3R962T0nd31hEgxfCo0JjHZgp415hk8Rwx5Vwla0F0G99DYVJ
- 2xeilIgefY09NVvD+FKMoOJU8GorIXeBTZsZ3XiP8Y2LsVPoKyQWXBN/IMt3+sQOfc36zG9qcxo
- ZG+c2Qw==
-X-Google-Smtp-Source: AGHT+IHLmOWZAl+VhImQ5Le7iwHOB3oFStBaF+iz4h6FD3gCHl2MpLYME8ei0FZTG34qT3DCtnUinA==
-X-Received: by 2002:a05:620a:20ca:b0:78d:5ea3:e750 with SMTP id
- f10-20020a05620a20ca00b0078d5ea3e750mr3409613qka.58.1712771000902; 
- Wed, 10 Apr 2024 10:43:20 -0700 (PDT)
+ bh=6O4RmzC48rpe24s8YfqtxatwOkNqa+88VR4Nq6aWyaQ=;
+ b=fZ5mAjnWGwvr4FwXMotQPl4dzEs75I/f15jyD8kIbmrtHBFyGzyLH9nntoeYzp1nS9
+ JChWrWwoDNN4dqJ3nZGV4nRbCsA/bh7VJl0iSGI4jlLgz9DGyAagzx1+eUhB0THkIWVA
+ NeatcyLDmx89q+PI/BW7dDHt9Q6nBfRNeDeSHjeCan/Nwz4otAB+xKJSAXyqjcjbX86d
+ hgytVIU8KZqTEic5J3nyVrWP2V9IH2W6Slef/ZehQaQut9puP3aqSXVjk+DvZno9a69u
+ 0YTHASNZroiAva9fGIMdbjso+12QcMkddXB/euhEPrtkSICLujD5tZ8dt0begGMv/ZGU
+ 1Eyg==
+X-Gm-Message-State: AOJu0Yw7KwxOqa2UnQejX+z5DliQYb/ia3Ia7nhbGmoU5ZAMr5DJ4qjb
+ nbU5BuvZ5pS5e/IMb97YNPgy2jnv+WuEfJCoYHhw37Cb8mOSJ9zb66Mqp5iFIZtZyQZ9pKSKK/x
+ WZ7yfwA==
+X-Google-Smtp-Source: AGHT+IH1IzNHtboSbicE3By+Hidg4bOYMNS3IRdNR+hLuZES+Y5Jfq9wJJ40FyjgSndZizDX+zVv+Q==
+X-Received: by 2002:a05:620a:2948:b0:78e:be11:c245 with SMTP id
+ n8-20020a05620a294800b0078ebe11c245mr582870qkp.6.1712771001751; 
+ Wed, 10 Apr 2024 10:43:21 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- vq3-20020a05620a558300b0078d6b676b9csm2308177qkn.17.2024.04.10.10.43.19
+ vq3-20020a05620a558300b0078d6b676b9csm2308177qkn.17.2024.04.10.10.43.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 10 Apr 2024 10:43:20 -0700 (PDT)
+ Wed, 10 Apr 2024 10:43:21 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Greg Malysa <greg.malysa@timesys.com>
-Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>, 
- Ian Roberts <ian.roberts@timesys.com>, 
- Andre Przywara <andre.przywara@arm.com>, 
- Christophe Leroy <christophe.leroy@csgroup.eu>, 
- Hai Pham <hai.pham.ud@renesas.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jesse Taube <mr.bossman075@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>, 
- Shengyu Qu <wiagn233@outlook.com>, Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240320021607.9518-1-greg.malysa@timesys.com>
-References: <20240320021607.9518-1-greg.malysa@timesys.com>
-Subject: Re: [PATCH v2] build: Revive and update LDR format support
-Message-Id: <171277099930.98421.14647698347484285172.b4-ty@konsulko.com>
-Date: Wed, 10 Apr 2024 11:43:19 -0600
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20240320132352.46102-1-heinrich.schuchardt@canonical.com>
+References: <20240320132352.46102-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] fs: ext4: make "File System is consistent\n" a
+ debug message
+Message-Id: <171277100104.98421.12267930022432340741.b4-ty@konsulko.com>
+Date: Wed, 10 Apr 2024 11:43:21 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,19 +90,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 19 Mar 2024 22:16:07 -0400, Greg Malysa wrote:
+On Wed, 20 Mar 2024 14:23:52 +0100, Heinrich Schuchardt wrote:
 
-> LDR format files are used primarily by Analog Devices processors but may
-> be of interest to other vendors. Previously support existed for this
-> format as part of the U-Boot build, but it has been unmaintained and
-> unused for a long time. In preparation for adding support for modern ADI
-> processors that use LDR, modernize the LDR support:
+> When accessing an ext2 system the message "File System is consistent\n" is
+> shown after each write. This is superfluous noise. Only write a debug
+> message.
 > 
-> - Introduce CONFIG_LDR_CPU as the CPU string recognized by the LDR tool
->   may not be the same as CONFIG_CPU
-> - Add an SPL target that repackages u-boot-spl inside an LDR file
 > 
-> [...]
 
 Applied to u-boot/master, thanks!
 
