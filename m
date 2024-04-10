@@ -4,73 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E777FCD11C2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 13:18:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE157CD11C2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 13:22:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24030881AF;
-	Wed, 10 Apr 2024 15:18:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 3EBC8881BF;
+	Wed, 10 Apr 2024 15:22:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="TKAaSj3Q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cERUIvv2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B87C7881AC; Wed, 10 Apr 2024 15:18:15 +0200 (CEST)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
+ id C796D881B9; Wed, 10 Apr 2024 15:22:42 +0200 (CEST)
+Received: from mail-vk1-xa34.google.com (mail-vk1-xa34.google.com
+ [IPv6:2607:f8b0:4864:20::a34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A034869F7
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 15:18:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AB46E81F9A
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 15:22:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-dcbc6a6808fso6610658276.2
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 06:18:13 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-vk1-xa34.google.com with SMTP id
+ 71dfb90a1353d-4dad331b828so1190205e0c.2
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 06:22:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1712755092; x=1713359892;
- darn=lists.denx.de; 
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WTUOlSZ9YF8uobWO1z7sub0taVwcgwWQQy0Ho6pD0p0=;
- b=TKAaSj3QKpJVgHRsqygDIvr9iBIXHcpsSaH7xCLQI4viCaT6xmmkFryEPaySNhr7+x
- TGVatxL0m0iS4tQhQfUft291nheQZhczeW9RzIyGTZyz3QvR2k1g+8iYKQXS+cgW2ljg
- AkRg7wAI0vgjHZ9urnseQl7TBGsCXoYp24Uj8O22qE1aTwBx2l26GxAEvpajzy3HLnew
- bseOLMn0J6fasXNECSgB6AT5QEKprKMHuMRzUjoyk7+htea46NZ1wmg+dADqWyLJ3oYh
- ErJ2hclHexR33eo9Mi2sUtK4y3KCcz5+Y2e+zenQtJ4L4XcweI8aozsKFb61jG/Y2GWu
- hMwg==
+ d=konsulko.com; s=google; t=1712755359; x=1713360159; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=z6R07w24eAM4sICHXV7y+GE32Nxi8zTDWNULqv85sHo=;
+ b=cERUIvv2/tkfdiplXMgzk9zG0MWRD0SI4EaG2Ip7iU7kqyu+AvPBIvbYKzGdC4kZtq
+ yxTVuL5fRxKwjN03S0wMGHKvrjEia6ghsrpArVjijESEjLTenWKP2/aa26BksB1z3848
+ wobcTb1o+Kllco8bO1EchbXSUfxwVPH4XFWoQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712755092; x=1713359892;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=WTUOlSZ9YF8uobWO1z7sub0taVwcgwWQQy0Ho6pD0p0=;
- b=jUZO5oC4sJsed3Rwi9SGibBST3WrW2kjk1pc43grMXT1KslBoWgvuLhg9hlR+tfE+7
- qNEgSZbP9qkCCnBpceTCtehfBK16DDES7rSJAAq5sk+GpvgZ4m0EOB44yZ7y1ulKyv80
- WQdjhbFjMkeurMOPIpOPLnXJbRKiWLLbGBXBudkwDIe2I6uCzJhKAE/fnAEBb9vvOFaS
- E18ij3hZLBC31/a3bzvJCdsgq8jcBIWPO5QnZmHkrdi6OdW5JWXltwXPMO/Unp8D/gdE
- Skjru1UxCWoy21WnCprN42WU1uEDbRyHUp77GXwG1f1jgqaarhYCMyVHXq912wSvmFRR
- 2tOA==
-X-Gm-Message-State: AOJu0YzEyzSVsRiIeUUODbnvR+pNuwBPEChh44I8mzOX+PYBfBnUWUeW
- XbpB21P8Mze4ymNlMi7U0NvDuC32UsgVsohphL4J+4xPb6Qw7NvA4TzWZ67kk2HCQTDXH/vpOf7
- LS9VIZbbCZLZLaZTWjbwghzFI42w2CCQjOXkb
-X-Google-Smtp-Source: AGHT+IGWtLvOSNEDvrYnGpiGzCY9fQp6kCN8ths5zBf69Bx8O36X1uXlqSl4t5x96WJCXdSxOh1nZ2N5cwZI+DmZBOY=
-X-Received: by 2002:a05:6902:4d0:b0:dc7:6192:c688 with SMTP id
- v16-20020a05690204d000b00dc76192c688mr2556922ybs.65.1712755092041; Wed, 10
- Apr 2024 06:18:12 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240404114422.2905194-1-petr.zejdl@cern.ch>
-In-Reply-To: <20240404114422.2905194-1-petr.zejdl@cern.ch>
-From: Michal Simek <monstr@monstr.eu>
-Date: Wed, 10 Apr 2024 15:18:00 +0200
-Message-ID: <CAHTX3d+-CGGN5RptDugPAroLebVH1p40ZgKUPonj9ELr0tWd=A@mail.gmail.com>
-Subject: Re: [PATCH] xilinx: common: Fix MAC address read from EEPROM
-To: Petr Zejdl <petr.zejdl@cern.ch>
+ d=1e100.net; s=20230601; t=1712755359; x=1713360159;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=z6R07w24eAM4sICHXV7y+GE32Nxi8zTDWNULqv85sHo=;
+ b=MLWwfoKIRNQ/3QJwegFOJZoovJz6SdgbguIHdzlI+A0NvREIlmRHw37oeT1/ItXiho
+ MvND19Hb0ifd3mzh2qNQVfc38CNgpmvU0UKL1LIxyVAqEL/D1V1gQCE3PEyQR2mNMWyZ
+ umMqaB7L+k374eu7jlS+g1w96gckgo433ZYhYfgHhtO7BZXqjsO7bB0cwdS9vzv/xXvM
+ i2KNYIzHEEzOVi0uAm6LZGtT/5BL4zq8Z2wMpA32o5VNC5Zu86Ilcf2luyFJC/szsOpB
+ Z6nCIjtkA4bfqrrYI8ZFtOQFSOGfgGw9rKwjFgSMVhOdFfrHwlnecBEmMfnwt211u9m7
+ 6/aA==
+X-Gm-Message-State: AOJu0Yzk1Yd/yGP335tunitwZjnXJyHyz9RySak2LQIqu0qW12bzzuUp
+ e6bV74/nHWvMGY/Sht4A012ONWZZqpJtRhNs+Bwsv/ePx2a8Q5qhWm+xwLIJlzTB/xBOCIh6hoR
+ azee7ng==
+X-Google-Smtp-Source: AGHT+IEDUZnf752sihEHHY3BIZZiooE4yXSbHsrfac4U5tg/otZSmi4sLKWeFBfXLHh7NMaCbT7fXQ==
+X-Received: by 2002:a05:6122:985:b0:4d3:3adc:b639 with SMTP id
+ g5-20020a056122098500b004d33adcb639mr2881200vkd.6.1712755359431; 
+ Wed, 10 Apr 2024 06:22:39 -0700 (PDT)
+Received: from bill-the-cat ([187.144.96.143])
+ by smtp.gmail.com with ESMTPSA id
+ a14-20020a0ce38e000000b00692bd4905c9sm5058534qvl.15.2024.04.10.06.22.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Apr 2024 06:22:39 -0700 (PDT)
+Date: Wed, 10 Apr 2024 07:22:36 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Subject: Re: [PATCH 1/1] api: add missing cookie checks for network access
+Message-ID: <20240410132236.GF2493117@bill-the-cat>
+References: <20240409131655.59157-1-heinrich.schuchardt@canonical.com>
+ <20240410004350.GD2493117@bill-the-cat>
+ <dc804b91-2ba5-4f13-9e96-474eadea569c@canonical.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="n6Nh3uy358bkuRDs"
+Content-Disposition: inline
+In-Reply-To: <dc804b91-2ba5-4f13-9e96-474eadea569c@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,57 +92,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=C4=8Dt 4. 4. 2024 v 14:23 odes=C3=ADlatel Petr Zejdl <petr.zejdl@cern.ch> =
-napsal:
 
-> The upper-to-lowercase character conversion now avoids altering the
-> MAC address field. In the previous version, this alteration corrupted
-> the MAC address.
->
-> Signed-off-by: Petr Zejdl <petr.zejdl@cern.ch>
-> ---
->  board/xilinx/common/board.c | 12 ++++++++----
->  1 file changed, 8 insertions(+), 4 deletions(-)
->
-> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
-> index 66edf857f1..49dc5d10cc 100644
-> --- a/board/xilinx/common/board.c
-> +++ b/board/xilinx/common/board.c
-> @@ -101,10 +101,14 @@ static void xilinx_eeprom_legacy_cleanup(char
-> *eeprom, int size)
->         for (i =3D 0; i < size; i++) {
->                 byte =3D eeprom[i];
->
-> -               /* Remove all non printable chars but ignore MAC address =
-*/
-> -               if ((i < offsetof(struct xilinx_legacy_format, eth_mac) |=
-|
-> -                    i >=3D offsetof(struct xilinx_legacy_format, unused1=
-))
-> &&
-> -                    (byte < '!' || byte > '~')) {
-> +               /* Ignore MAC address */
-> +               if (i >=3D offsetof(struct xilinx_legacy_format, eth_mac)=
- &&
-> +                   i < offsetof(struct xilinx_legacy_format, unused1)) {
-> +                       continue;
-> +               }
-> +
-> +               /* Remove all non printable chars */
-> +               if (byte < '!' || byte > '~') {
->                         eeprom[i] =3D 0;
->                         continue;
->                 }
-> --
-> 2.31.1
->
->
-Applied.
-M
+--n6Nh3uy358bkuRDs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Apr 10, 2024 at 07:13:21AM +0200, Heinrich Schuchardt wrote:
+> On 4/10/24 02:43, Tom Rini wrote:
+> > On Tue, Apr 09, 2024 at 03:16:55PM +0200, Heinrich Schuchardt wrote:
+> >=20
+> > > dev_write_net() and dev_read_net() should validate the provided cooki=
+e.
+> > >=20
+> > > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > > ---
+> > >   api/api_net.c | 6 ++++--
+> > >   1 file changed, 4 insertions(+), 2 deletions(-)
+> > >=20
+> > > diff --git a/api/api_net.c b/api/api_net.c
+> > > index 7515c26e8b4..0b931a80787 100644
+> > > --- a/api/api_net.c
+> > > +++ b/api/api_net.c
+> > > @@ -72,14 +72,16 @@ int dev_enum_net(struct device_info *di)
+> > >   int dev_write_net(void *cookie, void *buf, int len)
+> > >   {
+> > > -	/* XXX verify that cookie points to a valid net device??? */
+> > > +	if (!dev_valid_net(cookie))
+> > > +		return API_ENODEV;
+> > >   	return eth_send(buf, len);
+> > >   }
+> > >   int dev_read_net(void *cookie, void *buf, int len)
+> > >   {
+> > > -	/* XXX verify that cookie points to a valid net device??? */
+> > > +	if (!dev_valid_net(cookie))
+> > > +		return API_ENODEV;
+> > >   	return eth_receive(buf, len);
+> > >   }
+> >=20
+> > Is this right? Probably. But what triggered looking in to this to start
+> > with? I don't think anything is enabling the API support these days
+> > even.
+> >=20
+>=20
+> We should either properly test the API in our CI or or remove it.
+>=20
+> What once was done via the API could be done via an EFI payload in a more
+> portable way today.
+
+Yes, we should indeed likely remove it.
 
 --=20
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
+Tom
+
+--n6Nh3uy358bkuRDs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYWkpkACgkQFHw5/5Y0
+tyymkgv/Z4kpCsYpHAog/G3zAW0v7NxW5IjxetkEzvmXBRQnOvms0BUHmRTjFNg2
+nyXCsoixRvDI6CwKV0nEC9nUGGTPp4rCOCPCDCWkxyrpWz1zJpDnKqpjY1icxyFk
+lliNvVhXeyK9jZyNwRuGDc5XhdI0XMLfPi0AT/fLfYTuuhTFIt35Y8/LRWN5viYh
+ZgVe2uV35fNd74/nfzhIGuteaI+THq/JLOROmkcLV5lKzFP8KFv5QGyZGap4oRzl
+shRE5oRtQFPYT56hZUTmCfhe0UStkTIc0kq3BQxa5E7wVtOF5sQFGSi4Gj0lrUH1
+DcEB0SWkTbI8yQpTdCt0rH0F9Al25GY6CTnYQFP40jgyVw/4auyT3bZJjk5Kmmt/
+LUauAaVv7mENmx8Y2R6XWdJsHdMcggKpGNuNYo5iQ0ATyLUUE5NDqzTnqCYWyTaI
+oiXn3X7cbtEdM+Inyd6qWXVh1/mObRvbIvqYJ+fG1xvC8ZvllEPqftG3stSxGy9r
+9hiJORyJ
+=yrAo
+-----END PGP SIGNATURE-----
+
+--n6Nh3uy358bkuRDs--
