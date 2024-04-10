@@ -4,92 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D00B0CD1297
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 05:13:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF5C1CD1297
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 05:54:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2F5E88176;
-	Wed, 10 Apr 2024 07:13:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id DB6908772A;
+	Wed, 10 Apr 2024 07:54:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cKSx8Vh+";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U9WUTZUF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2C8988180; Wed, 10 Apr 2024 07:13:28 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CE8208772A; Wed, 10 Apr 2024 07:54:52 +0200 (CEST)
+Received: from mail-oa1-x2f.google.com (mail-oa1-x2f.google.com
+ [IPv6:2001:4860:4864:20::2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B500F87FDD
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 07:13:26 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CEFCD86EB5
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 07:54:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 05AD13FFE2
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 05:13:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1712726005;
- bh=KFBZa2b1AKslCMGe9nnAb/TGslZtH0MOlV8MLntfC7k=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=cKSx8Vh+MjhXYDJkwwY698Q1masb5XfL4sCC/ls6n4pqSCX4i6wPuxLCT7BY0XeRR
- uBfq7alGs/Bq4RN2AH+AYuHsuWNB9GgZl6ABBnaFWWhe7PRIxJGB2g9tNYGM1h8p9g
- 1dgqTnlBgPANBA3z8fgM53L+TF2EnOi8xoYl/xYzSIUVeUy+S2pGfqhSepxWT7shIh
- rIilnhvHMsG0+dkseA75cS26F2foejZYi0/8eMW6+HLrSl8H4xfUz69gFrfFFezHPz
- FvRMeSi4eqeACNY+hU3RB5Ii507wuzUqQZWMm85MGtJ7lNz4EjLlUf7bs2MIib/97F
- 3cVtkM6K7DNCQ==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-34368e90fcdso1635675f8f.0
- for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 22:13:25 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jim.t90615@gmail.com
+Received: by mail-oa1-x2f.google.com with SMTP id
+ 586e51a60fabf-22f01274622so2215297fac.1
+ for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 22:54:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1712728489; x=1713333289; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8kkb4qkupCS+NNQR4Ik16AqUtkd2DyAEszjMHDOKflE=;
+ b=U9WUTZUF9dOGn09Jh9MjMGHVxMceCeeIfo5Wu5DIzqsCD8FM+B9KWZzSQyWm0GFCwd
+ g8MzPks7MHAKB8vaByMEy9Xo8O6/zz/LGlfQblp1ICSF9KQuwJ7b+qYwgStHXx64Vvgt
+ 1cc/9LOoVj7i4WR1oajkNu7Ks22fzXYxqp7MjHrjok0jEId0QRpgLrIiCwNPiSeosND/
+ JEQD+HeVQy+cw10xYawsscu/LYWTu9dWKPsAG+7OVf6n91xfDWNXUU7n97wWShYt9vfQ
+ mR8UtjC0nZM8zYvMQBWKDmanbZ6jjB+W6WI0RYdyjNwhqDdPmbxRJ1ilWVSWQyqWfCPc
+ X0SA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712726004; x=1713330804;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=KFBZa2b1AKslCMGe9nnAb/TGslZtH0MOlV8MLntfC7k=;
- b=UVcGN2yMVTBYqmGqcB59IXIlYfzNXU5kZ6KrgzqgAjdtkEUgmHlfu0d8DGJnC1d3bm
- lpPZSHmJhIyQKkq4GjNVZMSBPujeMHVbwe9yt84yOaMAXGX0DZmgWROy2wIef43K65y+
- VV/lFT4zZ1ONzB3q7+gdmh55Y5f/850KDC3IVUVO4IHhwQVCnsqbk+wjD/3Sa9TJtlYz
- qUUG47rA5sHLPXsUoLu/l70uxjJgiVIFRSc5KThB3B9V6kxgKiDyD8JP0CcU0pOk3CrQ
- ps06po7gIuBbSm807CQti0V/PvqaXJpLt5BJJkno1etLAiALmpIo2EnfNQwBUgSATtQ4
- zHHA==
-X-Gm-Message-State: AOJu0YzeKzZAlNg23XCo2f29oulNr9HiwDHXIHf1y4RUyvMdyh+3PDlz
- oitUFB62a4sO49kNx7HOqx29lD4fw5Hpk9In8zGGfP7sUj3yYgvuAjFUp74l8vP9xxiEN/VoLCa
- 4aNpS2omFXCxsHSgB24mTEmAwLvgF24aaQ4AUYSqZ2yceExzm4y3NpDQFkyK0SF1EspyEit9yGk
- w=
-X-Received: by 2002:adf:f107:0:b0:33e:9292:b194 with SMTP id
- r7-20020adff107000000b0033e9292b194mr1101417wro.14.1712726003715; 
- Tue, 09 Apr 2024 22:13:23 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFKMgrm2VvEqyMfjIP5UldZeagp43IKmTwRKc0pzUsGrE0HkX57epj9xSk2K/bTaBBHhHct/w==
-X-Received: by 2002:adf:f107:0:b0:33e:9292:b194 with SMTP id
- r7-20020adff107000000b0033e9292b194mr1101408wro.14.1712726003272; 
- Tue, 09 Apr 2024 22:13:23 -0700 (PDT)
-Received: from [192.168.123.161]
- (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ d=1e100.net; s=20230601; t=1712728489; x=1713333289;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8kkb4qkupCS+NNQR4Ik16AqUtkd2DyAEszjMHDOKflE=;
+ b=MW1LUl6RLnO7tykTZyhuQEEM0vilZoV3+dPKkBbK2YHSYex5He9bB25IwwT2LUHD3R
+ lqtD6rLIDxOGo37RLjMAwRy18JigCA+geysp2vBI31Km56UvFlOk2hGo6tXNOgj60hfm
+ tadrLrhsuwUzKigbuD3gflLKB2xvQmNm48uagKX0habh2VQ781c0M2sOvm6hh2IOM52e
+ NmoOxiysXCeM/QWRzerNw3eUjvOHMpj8cJADZI3I0FXiwTsfHNBWIThALQtDvcQcEl3B
+ A/cEp7lqhCTGaFRfV2iAeCFdR0EFsKwBnnijfiUSKUJAGfhccyxyk//X4V9xKD9RzmVr
+ QMLg==
+X-Gm-Message-State: AOJu0YxtoPozpM/idqkzxpjXQKyQXF2UcGi8M+RUpeuA2Wg32r7hwW+4
+ CTUuZBF8GeOBqvdbADSXZYoJauewPh+1J41PTYgButGHYpWtiMdnuV+F/U+g
+X-Google-Smtp-Source: AGHT+IFkW/xX8R+U3Msoq4hQxRBRrEXxe+R/2J+YGA9FusOkrEUt+9Whr4viPs4tnrkoPrsaYjAQ5g==
+X-Received: by 2002:a05:6870:b4a3:b0:22e:9792:97e5 with SMTP id
+ y35-20020a056870b4a300b0022e979297e5mr1865422oap.30.1712728489538; 
+ Tue, 09 Apr 2024 22:54:49 -0700 (PDT)
+Received: from localhost.localdomain ([180.217.145.139])
  by smtp.gmail.com with ESMTPSA id
- e8-20020a5d4e88000000b003438cc1d2b4sm12974890wru.59.2024.04.09.22.13.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Apr 2024 22:13:22 -0700 (PDT)
-Message-ID: <dc804b91-2ba5-4f13-9e96-474eadea569c@canonical.com>
-Date: Wed, 10 Apr 2024 07:13:21 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/1] api: add missing cookie checks for network access
-To: Tom Rini <trini@konsulko.com>
+ le8-20020a056a004fc800b006ed2709ada6sm5476131pfb.65.2024.04.09.22.54.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 09 Apr 2024 22:54:49 -0700 (PDT)
+From: Jim Liu <jim.t90615@gmail.com>
+X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
+To: JJLIU0@nuvoton.com, YSCHU@nuvoton.com, KWLIU@nuvoton.com,
+ trini@konsulko.com, jim.t90615@gmail.com
 Cc: u-boot@lists.denx.de
-References: <20240409131655.59157-1-heinrich.schuchardt@canonical.com>
- <20240410004350.GD2493117@bill-the-cat>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240410004350.GD2493117@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: [PATCH v1] configs: arbel: Use generic timer and npcm reset driver
+Date: Wed, 10 Apr 2024 13:54:37 +0800
+Message-Id: <20240410055437.3439213-1-JJLIU0@nuvoton.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,51 +90,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/10/24 02:43, Tom Rini wrote:
-> On Tue, Apr 09, 2024 at 03:16:55PM +0200, Heinrich Schuchardt wrote:
-> 
->> dev_write_net() and dev_read_net() should validate the provided cookie.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   api/api_net.c | 6 ++++--
->>   1 file changed, 4 insertions(+), 2 deletions(-)
->>
->> diff --git a/api/api_net.c b/api/api_net.c
->> index 7515c26e8b4..0b931a80787 100644
->> --- a/api/api_net.c
->> +++ b/api/api_net.c
->> @@ -72,14 +72,16 @@ int dev_enum_net(struct device_info *di)
->>   
->>   int dev_write_net(void *cookie, void *buf, int len)
->>   {
->> -	/* XXX verify that cookie points to a valid net device??? */
->> +	if (!dev_valid_net(cookie))
->> +		return API_ENODEV;
->>   
->>   	return eth_send(buf, len);
->>   }
->>   
->>   int dev_read_net(void *cookie, void *buf, int len)
->>   {
->> -	/* XXX verify that cookie points to a valid net device??? */
->> +	if (!dev_valid_net(cookie))
->> +		return API_ENODEV;
->>   
->>   	return eth_receive(buf, len);
->>   }
-> 
-> Is this right? Probably. But what triggered looking in to this to start
-> with? I don't think anything is enabling the API support these days
-> even.
-> 
+Modify defconfig to use generic timer and npcm reset driver
 
-We should either properly test the API in our CI or or remove it.
+Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+---
+ configs/arbel_evb_defconfig | 3 ---
+ 1 file changed, 3 deletions(-)
 
-What once was done via the API could be done via an EFI payload in a 
-more portable way today.
-
-Best regards
-
-Heinrich
+diff --git a/configs/arbel_evb_defconfig b/configs/arbel_evb_defconfig
+index 45fafe790c..08753aebc0 100644
+--- a/configs/arbel_evb_defconfig
++++ b/configs/arbel_evb_defconfig
+@@ -80,7 +80,6 @@ CONFIG_PINCONF=y
+ CONFIG_PINCTRL_NPCM8XX=y
+ CONFIG_DM_REGULATOR=y
+ CONFIG_DM_REGULATOR_NPCM8XX=y
+-CONFIG_RESET_SYSCON=y
+ CONFIG_RNG_NPCM=y
+ CONFIG_DM_SERIAL=y
+ CONFIG_NPCM_SERIAL=y
+@@ -90,8 +89,6 @@ CONFIG_NPCM_FIU_SPI=y
+ CONFIG_NPCM_PSPI=y
+ CONFIG_TEE=y
+ CONFIG_OPTEE=y
+-CONFIG_TIMER=y
+-CONFIG_NPCM_TIMER=y
+ CONFIG_TPM2_FTPM_TEE=y
+ CONFIG_USB=y
+ CONFIG_USB_EHCI_HCD=y
+-- 
+2.25.1
 
