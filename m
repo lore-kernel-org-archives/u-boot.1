@@ -4,92 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03E4DCD1297
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 00:44:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4696C67861
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 01:56:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 365B0879E2;
-	Wed, 10 Apr 2024 02:44:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 77CD48809E;
+	Wed, 10 Apr 2024 03:56:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KonlOmH2";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NAebWbP6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8FAB8815D; Wed, 10 Apr 2024 02:44:48 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id DC372880F8; Wed, 10 Apr 2024 03:56:08 +0200 (CEST)
+Received: from mail-ua1-x92f.google.com (mail-ua1-x92f.google.com
+ [IPv6:2607:f8b0:4864:20::92f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6308E87572
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 02:44:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A0D387DCA
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 03:56:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-69b1effececso11513546d6.3
- for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 17:44:46 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-ua1-x92f.google.com with SMTP id
+ a1e0cc1a2514c-7e7af556183so5518241.2
+ for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 18:56:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712709885; x=1713314685; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=S1SdZyGJCibM3wembT9VSAdvLrOZ5GC+e7aXO++QZ6U=;
- b=KonlOmH2larJHkC3PpkQk7xUnQjOGGEgvs/vd6KodkUpRF2AuoDLB+iMrGJ3LwdKmr
- qjaMBRlxjJ76Je4viYeq/SQ8DEwEsIIgpu0iuMGUiSz8Tw4DuzpEhRuH7qHdvL4n8qHT
- sTwh3/F+Wvf3KRhN/ZvcyY/rSSk/AP64KUSNQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712709885; x=1713314685;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1712714161; x=1713318961; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S1SdZyGJCibM3wembT9VSAdvLrOZ5GC+e7aXO++QZ6U=;
- b=OL//4lWkQPgBk3qHO7WxG1+gvv1My8ZLmxV0VD0b0WvgiGtxsJZpeXAiLqNiia+Fag
- ND4XfrZc9oN8dAGHhwYEkwbRXolfW5oKUCvvgqeKZXexXFIQKevVyCN1gYFfKTzoPpPN
- 2MEtl4/TwRLT4+foypc5X61AxSZlagyHxWLByrhE6R7Qbj/EgrlguDttRZGiqA9TwmuN
- V5RH1ZOtj/8Ir5qT7AWcsMjCL17TMJ/NVgzr2fWU8JKwrj8Bfe/IH8bHkBQYG1SwyQlJ
- s6/M78k+RyfBquPwwnS0lI8gheZUJbcKAcPH2HUMFlJrZY5CuB7lGp79ZkcF95QOMRdl
- TSyw==
+ bh=5kuDairqxyZ+jhmiMT5/gimp7lzdnFFFikKSz84/3Fc=;
+ b=NAebWbP6Lc8ecYI1qBQbr/v0J/tPRBYaP7tg5oy18GrFuIQBJm0SPaoVA9UeZk/rWH
+ Noq3lqEKWs44unLW4FDAFSxl7ATf9W+L2An3Ngv/TtP+KAnPigKIbYm+p25wIdOxQSIB
+ yxR3wMsPgoriex5oMG08X7onVwMsu6/dKvuAtzR1BAx+1OZM1ExdM6Nwd8oxxo/LubK7
+ sV2DPYmgtbbneVZHsumnKEPTu5DIG1y1WWd/LcFkJe6Yv1ME82thBc+daeLEHkWj8uN+
+ y4vnNHV7/sYAwSnK7sO3MLFeA8hMxvTHMqPWTU1HpvIeiYrjMUYsQtAmiZQpMIrnZy4p
+ CxCA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712714161; x=1713318961;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5kuDairqxyZ+jhmiMT5/gimp7lzdnFFFikKSz84/3Fc=;
+ b=UhtsvXnSB3r0yPmGAL6Ub2isBFc2FZKHlajs7QFRGlqSQbKJI5DWslqs50faLVLID4
+ Gmro/yzobHzwLkwlwkpBpU3yR2RhIJUgO8XSBEqyIxh0EzVNbJkevTlYNf0l2rhHqMxv
+ ftLQoimUfNTGHX1aXKthBQPhvnIznJepIdwc2MX7dI9tq7w29ZvdI5YezrdaFzR2jwLr
+ ioo/soSkXCenpdZjsaIea/s+uvldfVa8vyHNRaZwchhlaSk/cAf64vGAj6YkIaiLCAmN
+ mW2Tv/i3PvK3B2xbv9H1SBkotpXhC6zPI7KScAEuAvO6PdZWkITzYWyRB60vhMTLqCQ/
+ BTRQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWiMWuAP0w/54qwEeguIGtdGRi8JIPtDOrskIFVdDS0jLmIeW0v+j8bwgEJoI9w6kBALnVjwwfypL1z4HKuPcaG4VSAaQ==
-X-Gm-Message-State: AOJu0YzHGjVO1zQtMm4G6XJdDJ8Ab4TyAqAVunL4VCIYEmzzC/4llhxH
- 1Du7vgonOWHoEf7gsIP0ak5Kx3xQWmIF8Y8nepoPdyl+8i2F68UewIWWJB0caFA=
-X-Google-Smtp-Source: AGHT+IFDKtHoK7nGkYdtxrKl+/QuuxYQwjlumqUeJGXMhyqHEBWEa58v0PIvfZTtVt2LzDBz98gqaQ==
-X-Received: by 2002:a05:6214:1bc8:b0:696:8ecc:7e7a with SMTP id
- m8-20020a0562141bc800b006968ecc7e7amr1308312qvc.25.1712709885214; 
- Tue, 09 Apr 2024 17:44:45 -0700 (PDT)
-Received: from bill-the-cat ([187.144.96.143])
- by smtp.gmail.com with ESMTPSA id
- p6-20020ad452e6000000b0069b3b3b9c68sm40369qvu.41.2024.04.09.17.44.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 09 Apr 2024 17:44:44 -0700 (PDT)
-Date: Tue, 9 Apr 2024 18:44:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Jonathan Humphreys <j-humphreys@ti.com>, u-boot@lists.denx.de,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Judith Mendez <jm@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
- Nikhil M Jain <n-jain1@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Maxime Ripard <mripard@kernel.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH v2 02/16] board: am64x: Define capsule update firmware info
-Message-ID: <20240410004440.GE2493117@bill-the-cat>
-References: <20240408223134.165877-1-j-humphreys@ti.com>
- <20240408223134.165877-3-j-humphreys@ti.com>
- <185bd37a-9e1d-4daf-8bd6-57ce598e95fc@gmx.de>
+ AJvYcCWRha6QqOmKOLitVtk3HJUFlIxwGbZPSdL+0RF43QiGBVT0A/ysjqwmx/Jki4TjJrB2etGpcpKm8Oc6TKVJKlCsEjiADQ==
+X-Gm-Message-State: AOJu0Yy3YgFDOTz+Hob4ix1apEmcJMLDl/f5M0VcZ2X0ma83qc/feeYc
+ GoIe5JkasGwrK8fgMGPItQGGU7U7hmIH0NJ/+4eZooZJZLV0DWxsS/v92PlKd1mqyap7WjKucvL
+ dCCmIrVXU2+LHjTUQmXsDPphiHs0=
+X-Google-Smtp-Source: AGHT+IHdFRq2w69yBBEuhwEHXkEMWh+j20N+/n9HteZdRacqyb+o6sOO3AxBjz/xtjra8zzZx6fwGtqTiAOqgjwM4p0=
+X-Received: by 2002:a67:ef45:0:b0:47a:217c:f1f with SMTP id
+ k5-20020a67ef45000000b0047a217c0f1fmr1012945vsr.19.1712714161125; Tue, 09 Apr
+ 2024 18:56:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kwG1cxX70OPWDLW7"
-Content-Disposition: inline
-In-Reply-To: <185bd37a-9e1d-4daf-8bd6-57ce598e95fc@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <1709694011-683-1-git-send-email-ganboing@gmail.com>
+ <ZQ2PR01MB13079F11D2A7B2A20968F4FDE62BA@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+In-Reply-To: <ZQ2PR01MB13079F11D2A7B2A20968F4FDE62BA@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+From: E Shattow <lucent@gmail.com>
+Date: Tue, 9 Apr 2024 18:55:49 -0700
+Message-ID: <CANV2PTMPrQVZhWvNFxi8-RA0ZC4UAF1sHBbHiipUc01aWx6oqg@mail.gmail.com>
+Subject: Re: [PATCH] riscv: dts: jh7110: Enable PLL node in SPL
+To: Hal Feng <hal.feng@starfivetech.com>
+Cc: Bo Gan <ganboing@gmail.com>, "rick@andestech.com" <rick@andestech.com>, 
+ "ycliang@andestech.com" <ycliang@andestech.com>,
+ "trini@konsulko.com" <trini@konsulko.com>, 
+ "yanhong.wang@starfivetech.com" <yanhong.wang@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>, 
+ "duwe@suse.de" <duwe@suse.de>, "namcao@linutronix.de" <namcao@linutronix.de>, 
+ Xingyu Wu <xingyu.wu@starfivetech.com>, Mason Huo <mason.huo@starfivetech.com>,
+ "chanho61.park@samsung.com" <chanho61.park@samsung.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,44 +97,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Original speed class SD cards fail with this change "unable to change mode"=
+.
 
---kwG1cxX70OPWDLW7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Apr 09, 2024 at 06:31:02AM +0200, Heinrich Schuchardt wrote:
-> On 4/9/24 00:31, Jonathan Humphreys wrote:
-[snip]
-> The series has been assigned to me in Patchwork.
->=20
-> But changes should be tested and reviewed by the respective board
-> maintainers (Vignesh, Tom for AM64x) as I have no access to TI boards.
-
-I'll pick it up once you're happy with the capsule side of things if you
-like, but in my mind it's more important to emphasize that this is what
-capsule support looks like as it rolls out to more platforms, is
-everyone happy with this?
-
---=20
-Tom
-
---kwG1cxX70OPWDLW7
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYV4PgACgkQFHw5/5Y0
-tyzURwwAo84lL8QqCH9aEnigJfEltuiYCzvsG1RJLGYa5Bb5eQSv64DYxiCuKDkj
-ikrQ8wElglZIyvsz0j8QYASBKhQUKCVwDNGG6lbcyc9rE2DR6sHYFCCP+7HL4aW0
-A3sGC12b7crubQf0ZAtM8opdVnwJQMYSV8wjRFXjauKWBB2r9APrqybAONDXPfFh
-YbXXoY3hkkXgmRu1tREApAWstuOF6kNW2ra3eOhKejqBIz+bBnSv/ZFau99aNAHt
-rHKETTeyfeoKhxPOtHyMNxi1phwFHzaeSJ8AChbjVUDLetwucbHYhR8SLCis9qC4
-OHBIKey9XRdhncTOuBdQMaiT8Eaf5DqxFRRsxm/4Wxgt0YPWM1iLm2d1XEtyaU90
-RgGbm/vvWr8In2L7D7JuwXYRuSoIle4xA2NVHcPQQinPSjveyGaVB90KjYWAs1eO
-oXCnFqc+W50PNjXCWvnhOGJu4LUUqN0IE82lcGOjVztzwsY5+6Vo9BVX4hTzTtA3
-W0ZQHll8
-=6/ml
------END PGP SIGNATURE-----
-
---kwG1cxX70OPWDLW7--
+On Tue, Mar 12, 2024 at 4:12=E2=80=AFAM Hal Feng <hal.feng@starfivetech.com=
+> wrote:
+>
+> > On 06.03.24 11:00, Bo Gan wrote:
+> >
+> > Previously PLL node was missing from SPL dts. This caused BUS_ROOT to s=
+tay on
+> > OSC clock (24Mhz). As a result, all peripherals have to run at a much l=
+ower
+> > frequency, and loading from sdcard/emmc is slow.
+> > Thus, enabling PLL node in dts to fix this.
+> >
+> > Signed-off-by: Bo Gan <ganboing@gmail.com>
+>
+> Reviewed-by: Hal Feng <hal.feng@starfivetech.com>
+>
