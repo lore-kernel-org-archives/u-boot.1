@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70B97CD11C2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 08:48:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83433CD11C2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 08:56:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D630187FDD;
-	Wed, 10 Apr 2024 10:48:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E43C08809E;
+	Wed, 10 Apr 2024 10:56:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="WmQIXaK9";
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="aUeINTP1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 895E587FDD; Wed, 10 Apr 2024 10:48:03 +0200 (CEST)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260f::701])
+ id 377B0880F8; Wed, 10 Apr 2024 10:56:55 +0200 (CEST)
+Received: from EUR03-DBA-obe.outbound.protection.outlook.com
+ (mail-dbaeur03on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260d::700])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DBD587E1B
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 10:48:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CD5687E3E
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 10:56:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=quentin.schulz@theobroma-systems.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=ZfdvlnUGXBmUy96IFgl6YNRf+J/5M5kl+IWd6irf0RwC/q+6/IggkvjW5eS/UZl+QlGGoRMEHc3O/0/nslWrKd8/KiM7kSCmKyZpc39/3sSpFAQtVnKJenn+2xTbG27bI05XqQXDJJiJdlE6oaclsHWZAb20mw9AxuFXeeYLjjWjG9cnN7FPp9HyBTOZh9LBPO9/RUDpc11nQlSyno9g/t+Kf04QTKll7I6vtWir/zEOmAMF9iNuzihhmBfP4Nn46THqnbNzos9DiM5XeBEhWSoxUAdhzc4fdbqQTTVvWR0rUqi5li5c4ETXy/Nm5BS35Xf4Qf/c9X4KdJ3pRXsNPg==
+ b=ZPflJlLh2ydngpKmQV/FFD41can+xQix0aaQbeJgFwXGxpXWP3pxXdW59vYzeJox8pIhTMmHWtbohX9GUiQVBj3j3UZc+ESQR7DNuYi6LPtP++7VVnJ4hyWRR10MpQJG/uX/P7EfcgWpvG/QRUmPPoqn1sp77odxoQSSXUEVehVyqweGjj1BzLAJbctvqfJ7Q7xVB91GuxjNPafUFnGK6l1Gmo+11K1UoxMUaEtWSMgh9hnjHi9it2I50SEzhpPtulgUG5aFyL5VeGqIxQkAbo0UZCnFEWlRzWqGVkuKrHqzLY9GhKFLFg/HYaswqgHjz6ZudtkDiCH4JREopzNzfw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=eajgaM5fzkXgCVb7EugTXfsU2KWNZdzmQcMiVpY3eSk=;
- b=FoYHisA8aisHyZMQskx3oRUcZ5Nc5C33AsxCA0jWN7D0vkLupBT1mLKA8yK+urSGKHiJU41A/1NW+GAAuFEDz+QpYevS84ufWlpFCGjBG/TACWHLL91YghbrHJ+Y4AnXja2jvfeU7U9WS5ZPm0gRCmHbSYDLpSbQINQ0rNi8UZiApukSZye0e79vO70AI6M36ZEUuwNGW+b9TP4g7XYbA5dGz4J0bHYIqIeWzg2pa35WAOa841fqB5PEw82mlQh0vg/MR1GWMs1jtSj4hngPzSHY5d8K2w26KVNAnSDlchY538SsqWXsTN0CtH7vmbKyqil1MfS3sCi9n5/MwMU9ow==
+ bh=hxfiCCmIMOlGaxKRvwOivdTC+tzKseeqAsroUtxOi1w=;
+ b=Tc/r9oFty9QZPCzmz15y99IYSh3YHqaQq0OKrZ76t3XUbvPORibEB7lTTkaPiQ0YSV9NOL82ar+DtgCi1yUWPIsAvU1Wwq5/nrNs2FukOFGdCJzsoWggKj2CStiB39xzkwJhrybZs9JYKI0cs0pRAzLC6af0FXj1BIljI+J3hpAkkEEfgL4Zde4ICA9NrUBOqJwxiUsyQflx5h+M38zYwfrwH3IYlCK4JKGKS6/8aty//J6sRpt5Z4MnHZGoGUF4AhHooz/uz6RfUKr2yfvJmMXmhY/SIXfripzflEfP2k0pdW/KEpB4byCpVTBYXlqeAjy/R2WBBM3pqVNbsZUelA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
  header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
@@ -41,98 +41,98 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=eajgaM5fzkXgCVb7EugTXfsU2KWNZdzmQcMiVpY3eSk=;
- b=WmQIXaK9Zh+eosaiNMpVfCbMkTDJWWw0qOS4HSdbBafBEeEoBYX28ksyFuER8o/+UkUjWHh29y806ubGb1U8IL5nKc24YrC1Jr5GB3yRYBQDVrDb//ldWm2EVmtphMm9Ue0MZ7OMjY8MvT6SLG1moGDbucusWkgqI39shECut+cOvUGLDQwPBjbW2lff7wEydeeSZ7Lx/W5F/gnH1QhwH8cZ66pht0T/bsVVCAibbxpWn15xd8mRkZ6FFTas3tA8TP1f9Ge9yUr6ZyB14d8jq80pZPQNztGSr+icF2keUOG2IN59NLOHtiP76dfBrPYLdke8s3G9u4SS2ljtfi8sfQ==
+ bh=hxfiCCmIMOlGaxKRvwOivdTC+tzKseeqAsroUtxOi1w=;
+ b=aUeINTP1+4SiMX/sN8wX6nrs9EN+hbnBWQi4ZN5wauP7ROsy5v9uGXkx3litLKNFWQyX6FNLjjpCA9RlgqsMXjWkWIhFg+3Isfd6BxCiLBc7Qe2p2k2UxdNtu4cgSjSGiYFqldi/XJ/Z1frtvEkinXlbogDQ2xmpgZmSLctP/lq/TeryCnGQG625gyeaoXu6X5xTgpIuo7Pevh+sW+pucyAkfnpVLNhw8wp6AOpD8Honz9D6HsZsheapQyAxW4VPzJD2kqbbnuZ74grvMm/h0YF1/uht5Hcr106zTTmfpJN9jMHf0ADzXBX+wcnoBL5Ky0uiJycHXa8Rc5znpPoM/g==
 Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
- by PAXPR04MB8093.eurprd04.prod.outlook.com (2603:10a6:102:1c9::23)
+ by AM0PR04MB7074.eurprd04.prod.outlook.com (2603:10a6:208:196::13)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.55; Wed, 10 Apr
- 2024 08:47:59 +0000
+ 2024 08:56:51 +0000
 Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
  ([fe80::3e70:7029:faf2:7779]) by DU2PR04MB8536.eurprd04.prod.outlook.com
  ([fe80::3e70:7029:faf2:7779%3]) with mapi id 15.20.7409.042; Wed, 10 Apr 2024
- 08:47:59 +0000
-Message-ID: <3f0733d4-1739-45f8-adf4-57070ad21d2b@theobroma-systems.com>
-Date: Wed, 10 Apr 2024 10:47:57 +0200
+ 08:56:51 +0000
+Message-ID: <8fec34b8-8d04-40ba-baca-5394762a4d27@theobroma-systems.com>
+Date: Wed, 10 Apr 2024 10:56:49 +0200
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 1/2] mmc: Imply HS200 cap with mmc-hs400 prop to match
  linux
-To: Dragan Simic <dsimic@manjaro.org>, Jonas Karlman <jonas@kwiboo.se>
-Cc: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+To: Dragan Simic <dsimic@manjaro.org>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
 References: <20240408210619.3749231-1-jonas@kwiboo.se>
  <496013c1-7a57-4d12-bf31-c5257f35ee8c@theobroma-systems.com>
  <3b2643b4-dea7-43cd-9f9c-da63e6588281@kwiboo.se>
  <ac394528-ca53-41d5-8c4c-7c10943a7c92@theobroma-systems.com>
- <e73b2576-4a0c-4965-a1f8-debe6b364af3@kwiboo.se>
- <1cb93207c400d43518e95c713115723d@manjaro.org>
+ <9b62bbedf2c6d52b76a8ce1ce57dd35d@manjaro.org>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <1cb93207c400d43518e95c713115723d@manjaro.org>
+In-Reply-To: <9b62bbedf2c6d52b76a8ce1ce57dd35d@manjaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: WA2P291CA0020.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1e::9) To DU2PR04MB8536.eurprd04.prod.outlook.com
+X-ClientProxiedBy: WA2P291CA0015.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1e::28) To DU2PR04MB8536.eurprd04.prod.outlook.com
  (2603:10a6:10:2d7::10)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|PAXPR04MB8093:EE_
+X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|AM0PR04MB7074:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: srW3kfBRbFY26XuH/uHjGtlCIAe90k65MepbN5MkUNQZC/mlAsr7wIaZ9Tg/irnvFyBbuRZGbBxsT1KM8jbKoEMvPa2HbeHu/YziOL22eTt7AFq/Gk2DPm4B1ku2N1gVeJ3Yr3hP8Wqpbho20qJYrDM706aNHzSgBZY9PATdOvIYZMEur5cMRkw02YIFD7BVA/jGDDdA/CP71E+yW10Q+BwmHw2mUjF7YRUDjIgV3Q+UnM90fydnb4Al2ZZ2HOcM4Laq5bNP+HBsjogpAm07u33mY7tEJjsXkKAlqsGzaFm5m7S0CFKyX5PASugvJYYkYPc7fcFqwdbfCGOYtg2jnFKAIg1stOtaGrkgsueFyeBXOoUn1af/ZCO6FYenTyPpfhFxBACLB5KHrY1k8q9MImmORk+TV7Q1T94akGCw0trV5Fs6j6S2gB07QyBQ3P/p37S9f2WwDAQbAPmv+3UtlvYzCpYm6ihIcxsDNDNP8ZFWAMI65Lag1BCcK1ALq2nWUJQRa+2uySmd8utl5nuAnZ9iHKgMruZB6Fh0QTqsocU/+qS2qu8rFQ1dsrqUyNOEBLX9vbLE6doQaJi5cquUy12xH+2hWVZyYnNs34IPLLwmZXOS+TaE/i4Ye/I1jayl924qmMlHAtwQbd00xdKKtdTVxV/1evMmWNANhI6Hum4=
+X-Microsoft-Antispam-Message-Info: Q+0I2TqAQs3ezHAG/QAGtgEPbldpOscHCnr6Agl3jb6foHhzTchbNCjQlfewv/ltyNmm8+9KmXmP6rtIiZHSvzKxzN8b46KIFj+3zRJAjKXXXfwp0BCDWyEHmZizFwtYq+Cupbm0pih51vHNsBkEaxn56OgkNzADNALHNUnNIx2O0bEWAFwTaLuoN/T77N/8AgBoZCcMZbOVr1XwGRw6sJq40a7UfkiXu7cOv8yJr3uFjxlDhXg2myEF6QtUdZz18+Q0H7MGWzw9KIzGLHW287CW7dmfb0b4n71uYZ7jCuK6qWnWAH84VA17mJiBbVMXV7+fY1qaqqk9IW+Vzt+D+M8aiK/FAs+5MKUc1U8Ymiguyev6fHqhaEk1jIGlS5mGVohjBliT42KaMtZlvaczmcpARzjw2tvPEHpJ9bCp/tf+mnFJHTqa7fcAKa+uwOp4PkOx/9cLBrSjoidQ3xpRW1nFYGqH2fgGcK3CZRywdUwZrX5ct0axi5hGHNku2DHC+Tw1Z0bvazZs0M3vFEzrDmxgshDaZQwl3r1LxkPsLscibCKi7d7zvc9RdeH0xsh3x/pZlB8XcYyL03FHqyWGZBtCVharrwX36nLCXLlTwZNK2EU1UYTjulKvmt+8lBCQgaDl7B4S8ZByhbGh75YO4K1XJzOCB3WYMxb+SZNLlcM=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(366007)(1800799015); DIR:OUT; SFP:1102; 
+ SFS:(13230031)(376005)(1800799015)(366007); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?N3d4L3pJd1Z2djBSNTl2bHQyM2NUY1BYVFNROVBuQlBHK1E5TGp4UzZOb2F0?=
- =?utf-8?B?SlRWeHIxRng3bFpQdUVOM3dmV05pWkV6TG9pdHlucUx6bTZOcnNoMU5mV1F0?=
- =?utf-8?B?RkVTSHA0eGhPRVZacStXSjFnb01SSGtCdEg0VzZ2cEIvZStLMmhHU0dMMlhN?=
- =?utf-8?B?R1FrWTYwYnNwQU5vVTlCWGpQY0szQ0RSQlo2S1kxc1ppZzhOeHBjZFhJRkRC?=
- =?utf-8?B?QTdFZ1ZvVWFkb21pWC85MDBvaGlCb2Q2Mm5ZY205ODZ3d1hBTEJ3TDgwMXRy?=
- =?utf-8?B?ejkzZFRITXRNL0Y0RFY5U09TbkdzTFA5dDNKdkhVeE5XSmJZUHJyOS9PQzA3?=
- =?utf-8?B?VkZKbzZKOHZGNVpMV29SZlNqRk55dFo4bE5sa0dkTTRmVXNPNGRaNTUrZlNG?=
- =?utf-8?B?UWFyT1kyVUFobDRObUVhQTlQekFmS3RxQUMwVUFoZGRoZktMdjczNnB5WkdS?=
- =?utf-8?B?VlZJTGFDTkdDdUpTdHZiK3JhdWV6SGpDRlNLS0NlQURIMjFZRFpNVE9IYU1B?=
- =?utf-8?B?czJxSFMxKzJmQmhQbTJ5MkR1bUl4K1BIZkJESXRuS2JTTFZteXlHUC9wUkxU?=
- =?utf-8?B?YVdQdzdRczcyL2RMaGdweUU0WTZNa2NNUXJvemhLeW9YbGFkSDZ3Rzk2SFVa?=
- =?utf-8?B?YzUwZ2p6eFF5TFBwVHJIYlRSZlNhVUlrTnJoM1pEcHlReDRqM3FiQ0lzZWZM?=
- =?utf-8?B?SCtZZUoyR3lZd3dRVTZOanFKdWtqOWw4U21OcFdLenMxTlRxZ3NJNDU1Q2ZY?=
- =?utf-8?B?ckt0cE5ER09YcGxaZFZkRTcvcEEzSGQwUUl6d1NucFRTWnh1NEc4VWVIcStx?=
- =?utf-8?B?Z256dXhZSjllYnVEbFdvUGgrR3BOZkdMT0kvVlJveFNFSTk3b0dKMlNKMmgx?=
- =?utf-8?B?eFlQM05ZZHFKelIxNzNSb2F4R29YMjk4bHVoR01GQ1dWd2duaHRrUkRiQytM?=
- =?utf-8?B?bmVLck4rRGRXeTBUajRIeDFxMG10TEZsL1VYdjlPcWNmSG81OHZ3bGFIdUVT?=
- =?utf-8?B?MDRIOHVXaDAvMFZHbHdHVEN6UEVGc1lBYlU1OWJzZWt5aEhITjU2eEVqWjMw?=
- =?utf-8?B?dmtFUm1wVkYvcEYwcHFudEtzMkJKd1JqZzhVZEVrbFRPOHF1L3pSYnNSVzlR?=
- =?utf-8?B?bmZ2QUtEY0diZUhibHd6UWdudFR4SzRVNXRlZ3NyOThGUCs3RitMSXozek9L?=
- =?utf-8?B?Q2pSSjlVZU5oMS9QNDNZRDdVZWxzSlA5TTdrQzB0YW1ZQmVwUjdCcjFXWHR1?=
- =?utf-8?B?RWloVzB6NElrZGFtZ3g2NjhpMTRSTDRSNFpaNFNMRVhiNmtrcW1xSElmRzF2?=
- =?utf-8?B?T0QySWNUemgxTjVuK3FMVm9USTYydjN6Ynl2eVR1Y3Z5ZXpWUFpPbnY1SVFT?=
- =?utf-8?B?Q21BaWtJUEpXdU1IMy9yYkRoYmM3U2d0emRlOXhSTFN2ZXU2NW4zQU5NTzJ6?=
- =?utf-8?B?TUxDVWo4b3QwLzk2bmpPNWtTT0h6SlFNRkMwT0xZRm13K0owcVhIYXoxRGRM?=
- =?utf-8?B?MzE1VVkwdStMRDlPeDNPMGhYSEhyVUNpZ0ZGejdZU2QxWEZDYW5FbnBMOVhY?=
- =?utf-8?B?L1VhUy9IM1dBZ0ZNOGNoVEJRZkNZc1lSaTByTlExNk1MY2NnSkhGSEFYMjdz?=
- =?utf-8?B?VGpzUnlUSGpZcmJKL3h2ZE5DN3hmRU5tT2tqM0hZNEJrVlFqeFgrOVlld1l5?=
- =?utf-8?B?cWYydVREK00zSFozRUNVZ2lBYlVadmJMN1h5akdzTE5IdWdlbDdnZEVxajFD?=
- =?utf-8?B?K0swdjdhc1M1bVhibzI0c0o5Z1dXNlpPZFo4U0NBb1VEc2pidlhFdWlGMWo4?=
- =?utf-8?B?NWVTS2xkbXNVMXBsdzdmYUtEeS9NTmpVZEZaZmI3Y29JNTFZblpxYzFtWE9j?=
- =?utf-8?B?elpXNWJXdWVzdmJOTlZTSUs4eHM1TUpNNStnVm1hZytnMzZ1ZXdaZXFLcmtI?=
- =?utf-8?B?WUowZkpsKzRPQkozR2pjSDBBbVp2RnJxM09JeDY5dmtmSFZTY0h1TXpCSUZy?=
- =?utf-8?B?bUtvc25kcXBaaXJMTXhzVy9RNzdKeVZ5V2I0UW5RdVM0b1YrcG1RalZCbDQ1?=
- =?utf-8?B?THJDLzVreE9lS0l2ODdFR0FUdWk1KzE2blB5ZWV4dDQyWVBaWDZheVVpOUtw?=
- =?utf-8?B?aG9HZWNvNVIyOWFMRDIyTDZMZEVwYUFUNWxrUktvbU9veDRxQWQ4R3FzWWF1?=
- =?utf-8?B?UzFKY1hUemhIVFZ5Q0JVeXRBN2tDOFZ6M01KaWp2a1dnL2FnQXJsRnNHcTM4?=
- =?utf-8?B?WTV6a1pNTkdKd1J2d0paSS9FZEV3PT0=?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?VE5nVHF5RmkyMUpBMHozdHJoYS9USk5jbzRkRnRkR2xlS2ZxbndDUWxhSjdW?=
+ =?utf-8?B?QXQzbHplMjBZT1VGaWpSZ3huMXJUK2x0SUJRK1hOdG9HYUR6dDFTYmo3N1JV?=
+ =?utf-8?B?Uk1zdFlFSWcyTm9ja3E2bnlJT2RYeHFWZHVWUmFVK3NvZDkyTndOSXR6Um1F?=
+ =?utf-8?B?RndacUhoeUlYNXUySzUrVDR5U2dralNscFB0aDB0eklxRWVvRzBRbEw5SS9L?=
+ =?utf-8?B?Z2xaK0JMTk04ZnB3aWt4SlZsQmNMNy9MTlR5Sks3cG9aME1jemlPMWJmRGMz?=
+ =?utf-8?B?WUQvVzIzRnBvcGtJWUJKNHVFSTVGWG1GdXlTUUZFVjJhUElzSy84WHVhaDRM?=
+ =?utf-8?B?QkR5eDhuYUExc0ZSUjZ2QndNZldvd2xKSElWZVJqZ0tTdHNTY0JuZGMvM3Bi?=
+ =?utf-8?B?czkyVkczb3ZvZzR0WHZYR2orSXZpM0NyY1IrYlE1aGhFaCtDM29oSE9vY3Y4?=
+ =?utf-8?B?S0ZRZWRsTlNOVitsTWR4MVdxdG53Mi9oUVhKaE5vWUc0d3V3RnV4THFFZFJn?=
+ =?utf-8?B?Y3RZWFRRcUJRZklpVE9NekJuQzF4UnJMRVkzVDE3Wk9qK3V1cW4yZlhNQ04r?=
+ =?utf-8?B?WG40Ni9UNW43VVI2cUhsemlSL0FCS2hhcHJvYjJzUEE0RmFNOTFoRzIzOEIz?=
+ =?utf-8?B?bGNjNUs2TGtycmJMRDBqOFFieHN4NXlHamFXOHc5WXJNVlBQb2QvdEVKY1pG?=
+ =?utf-8?B?QVJWUmprMEs4NHBmb0Y4Z2c1WG1zSS9qZEVGemVzd09JSHpaUEhudHNuNkg4?=
+ =?utf-8?B?TXp4bHlIVEtJei85N010NjJOcjhSVVlzR1dqc1RsSnRIRGk0cDFSdU93dTlJ?=
+ =?utf-8?B?MzJpRzlyQUZDdGR3RVg0SjFQYUhKUUxNN3NMR2hvUjJrT3kvZTFpNGQzaW1r?=
+ =?utf-8?B?ZHdqRkJuWnJTeVNpSTZ1K2hjbVFIQXZGclB5Q3lXcG9qc2doUWg5d0tOeVY3?=
+ =?utf-8?B?K2hXTnQ1djFDZUF4M0x4eldLL0p2V3g5ckovc3NFY3RMUWNjTVJDeXhnZHRV?=
+ =?utf-8?B?V1licC9TVVpGenVBUHg0K1dDZ25Vb1JXeTdYZWRONGxwRUhjWHJpWnRsMjZ4?=
+ =?utf-8?B?dU03N3Z4ZWZTMFFKY0p0RU5OemtSaDYyanNSbUZHaG9hOXlITGRROWNvQnh5?=
+ =?utf-8?B?dHA1ZXAzaU9rSDQwUEcvcEw1T0VQZnp1UFVsN3lCQjg5cWtFUGsxWjV1SkYy?=
+ =?utf-8?B?RWwzWTNMUWZtN1VYaGRxd0lsa0pQY3RKakNaZlJ1d2tQbTNpVXc0cDdqZnJs?=
+ =?utf-8?B?QzlBTXRMNGp2TzllODYxZUhSdGVZbjFGeXFpa0pTckRQajZoR0RWQ2pIeTlz?=
+ =?utf-8?B?SmtOeVUvSnMwYTN2YVdpU3BSYkJwMnhaSnd3RzlIRklUMEprYXQ5eWpBbmFI?=
+ =?utf-8?B?THAvVmRIZ1ZmNFhHL1lNa3pBSnQzY2ZIREk0TWJFMTRIMnJ0MGpEYmFaL3B6?=
+ =?utf-8?B?VEs3RGRha3hFM1FQR2YzVi9wZENCeFI0enpKVnovZG16TEY5VThGb1RXSHpr?=
+ =?utf-8?B?WEc0a2N5NjRsaFUrL1RXNWdYVHZ6UW96TWVCbUR0NXpHNlpsSU9GTkEwcVhj?=
+ =?utf-8?B?R3h3ejY0anlEaHFzdHpzZTNiM3dGdTlCTEd5M3o5Y1ZIZ01XZzl2bHlRZUpV?=
+ =?utf-8?B?Vm1JcGhlZHV1T3ZqQnZPV3pYYWljSUliYnBMRWFSYVBJTUF2Rk9DUUVnSWJu?=
+ =?utf-8?B?WXRRWjRpU1F3Qy9YUnB3QlRqMFYvNnEwMjVlaXptTjZjSVBPdVlETENkK2Iw?=
+ =?utf-8?B?RXlrSXBDNHFrOERnZGc4U3JaVWovc2R4ZkFKZmp3dmV3R1VaaVpPRitscmRT?=
+ =?utf-8?B?U2hOSngxWUJKeWNZMHN6WDJORWZtMVNzVzcwUUZaMHlZS2g0L2l5LzgwS01Z?=
+ =?utf-8?B?RUtsaEF6Rk0wdXdpQVFvU25pZGYxUzF3WGRKTE5KK2hLZklMUnM4Uk54SjFV?=
+ =?utf-8?B?Qk95UFRyRGNaU0VCQWRmckd3ZTJRRDQ1S2lTeWpEankraVNNUXlORFZJNXRs?=
+ =?utf-8?B?djJJT2JGTEo5RmxVU3ZWOGorbkgyeGkvb1FrbytLenE4aFIvSVRJQzVsa2dN?=
+ =?utf-8?B?ek5WTzAzdlYzYjFDU3V0WkJPbkNRTllWQU9iWm1IaHdOL3lYbVdwbCtFQW5S?=
+ =?utf-8?B?V3RNK1NRWEhUWkFnQTBRV0Y0SWYrN0oyZUNSdStKVG9wa2NhODBGaXJoOG1W?=
+ =?utf-8?B?Y0VaV0w3Y3FRYkxTR3g3VXpscDZ4cjJxZ3pYQm5HZ05veFZ3TDdNZStKM3VK?=
+ =?utf-8?B?eGVPS2NIYjBNU2YxL1poWGQrTk9BPT0=?=
 X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3e9562c9-ec0b-4162-3cc6-08dc593aeccc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 46e7ece5-4ef0-4515-6c7e-08dc593c29d1
 X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2024 08:47:59.6770 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2024 08:56:51.7163 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: scyp9kiLABRlRJGKNHvUaF4ijUVlopNQZjsTHR/yJS6hm51vDuhsugojLWdt1OLUXPTjOdSj6mboV2lWVWHSp8jO9U0227qrSY+xLdJP8tt7ZpUfhDjNnwQmd16fLNrD
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB8093
+X-MS-Exchange-CrossTenant-UserPrincipalName: vSPYfoRJaNLPDOmzvE0XHwFaw9pk9aY5ze7N24+fuIq9u31hvwDsa175OywMC2clwX2jhvXPqUKkt+/ZIVJcelzi4M7/CujQ5uN7hb3jSCh0kBh/EHkY1Smw8F641RCO
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR04MB7074
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,91 +151,45 @@ X-Virus-Status: Clean
 
 Hi Dragan,
 
-On 4/9/24 21:30, Dragan Simic wrote:
-> Hello Jonas,
-> 
-> On 2024-04-09 18:30, Jonas Karlman wrote:
->> On 2024-04-09 18:02, Quentin Schulz wrote:
->>> On 4/9/24 17:58, Jonas Karlman wrote:
->>>> On 2024-04-09 17:27, Quentin Schulz wrote:
->>>>> On 4/8/24 23:06, Jonas Karlman wrote:
->>>>>> eMMC nodes in linux device tree files typically only contain a 
->>>>>> mmc-hs400
->>>>>> prop to signal support for both HS400 and HS200. However, U-Boot 
->>>>>> require
->>>>>> an explicit mmc-hs200 prop to signal support for the HS200 mode.
->>>>>>   > Fix this by follow linux and imply HS200 cap when HS400 cap is 
->>>>>> signaled
->>>>>> using a mmc-hs400 prop.
->>>>>
->>>>> Technically speaking, the DT binding should be the one and only source
->>>>> of truth and should be implementation-agnostic.
->>>>>
->>>>> There it says:
->>>>> """
->>>>>     mmc-hs400-1_2v:
->>>>>       $ref: /schemas/types.yaml#/definitions/flag
->>>>>       description:
->>>>>         eMMC HS400 mode (1.2V I/O) is supported.
->>>>>
->>>>>     mmc-hs400-1_8v:
->>>>>       $ref: /schemas/types.yaml#/definitions/flag
->>>>>       description:
->>>>>         eMMC HS400 mode (1.8V I/O) is supported.
->>>>> """
->>>>>
->>>>> So I'd say, the DTs should be fixed to add mmc-hs200 as well 
->>>>> wherever it
->>>>> makes sense.
->>>>>
->>>>> The point of the DT/DT binding is to be system-agnostic and
->>>>> representative of the **HW** implementation. At least that's what 
->>>>> the DT
->>>>> people want it to be.
->>>>>
->>>>> If the eMMC standard doesn't allow to have HS400 without HS200, then I
->>>>> think this change is acceptable as is, because it is the reality of 
->>>>> the
->>>>> HW standard. Couldn't find this implied in the standard though (but I
->>>>> just skimmed through).
->>>>>
->>>>> It's also quite surprising, as it's not because the eMMC works with
->>>>> HS400 that it necessarily does with HS200 or that it's desired (EMI,
->>>>> signal integrity/stability, etc...)?
->>>>>
->>>>> Now, it wouldn't be the first time U-Boot follows whatever is done in
->>>>> Linux, so... up to you/the maintainers :)
->>>>
->>>> Agree that implying HS200 does not fully make sense, however it was 
->>>> part
->>>> of the original Linux binding when HS400 was added in v3.16-rc1 [1] 
->>>> so I
->>>> think that this is the expected behavior and changing it may be an ABI
->>>> breakage.
->>>
->>> I'm not advocating undoing the kernel "hack", but rather make it so that
->>> we add hs200 to DTs where it's actually supported instead of doing the
->>> same hack the kernel does. In that case, we wouldn't need the hack 
->>> anymore.
->>
->> I will add a patch that adds the missing mmc-hs200 props to affected
->> rk3588 boards, nanopc-t4 and quartzpro64 in v2 of the "rockchip: rk35xx:
->> Miscellaneous fixes and updates" series.
->>
->> Also turns out the issue with those boards was because of my other "mmc:
->> rockchip_sdhci: Revert 4 blocks PIO mode read limit for RK35xx" patch,
->> so will need to rework that revert some more before posting a v2 of that
->> patch.
->>
->> For this patch it is fully up to the maintainers if U-Boot wants to
->> mimic Linux kernel or not.
-> 
-> I think that the logic used in the Linux kernel should be followed,
-> because one of the goals should be to add as few "touches" to the
-> upstream DT files in U-Boot as possible.
+On 4/9/24 21:28, Dragan Simic wrote:
+
+[...]
+
+> Let's keep in mind that the troublesome DT properties describe the
+> capabilities of the MMC controller and the board, not the capabilities
+> of the MMC storage device.  As we know, eMMC devices provide automatic
+> detection capabilities, to allow the host to determine its supported
+> modes, and match them with the ones the host is configured to support.
+> It's all described in the JEDEC standards.
 > 
 
-I was suggesting to fix the upstream DT files as well.
+So why do we have those properties specified in board DTSes instead of 
+in the SoC DTSI? Logic would want us to have this defined in one place 
+only. I assume the issue is that even if the eMMC chip itself says it 
+supports HS400 but the HW routing or some other issue make it impossible 
+to use, we need a way to disable it from the DT for that board?
+
+> Having that in mind, I find the approach in the Linux kernel rather
+> reasonable, because I highly doubt that some MMC controllers support,
+> for example, HS400 without supporting DDR52, or HS400 without supporting
+> DDR52.  A reasonable approach for an MMC IP block is to make it capable
+> of supporting all the speeds below its highest supported speed, to make
+> itself capable of supporting more, if not all, MMC storage devices.
+> 
+
+That's true for the IP block which is self-contained in the SoC, but 
+it's forgetting about the other part, the eMMC chip/card. It depends on 
+the HW routing, where mistakes/limitations can happen. And I don't think 
+we have a mechanism today to disable the modes set in the MMC controller 
+for a given MMC card from DT (aside from /delete-property/ in board files).
+
+> In fact, I'll probably go ahead and submit a Linux kernel patch that
+> updates the descriptions in the binding, to hopefully eliminate any
+> ambiguities like these.  I hope you agree.
+
+I for sure do not have enough knowledge in MMC to argue more than I just 
+did, so having people with more experience/knowledge have a look at this 
+would make sense, let's see what they have to say :)
 
 Cheers,
 Quentin
