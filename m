@@ -4,103 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E6DFCD128A
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 13:04:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E777FCD11C2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 13:18:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C34A8881B0;
-	Wed, 10 Apr 2024 15:04:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 24030881AF;
+	Wed, 10 Apr 2024 15:18:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="nH5TnBSb";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="TKAaSj3Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F17128772A; Wed, 10 Apr 2024 14:43:07 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B87C7881AC; Wed, 10 Apr 2024 15:18:15 +0200 (CEST)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D9A5879A0
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 14:43:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4A034869F7
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 15:18:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 7B29F100071;
- Wed, 10 Apr 2024 15:43:03 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 7B29F100071
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1712752983;
- bh=wIG6Sfcs+2bFhS0W3UmnD8Y+HJ7BexsThDoNgCm73hU=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=nH5TnBSb7Ro/TqU8NKf5u7vex0+qyz/bizDQRd/pYZHmdpkz1cIrGjf7TQWRcle52
- bOB0Eq+53g3/ADeUSNKT0+LCjLfcg5wE0xY4tRWa5pUgvaEgoGrd7FQv65+MNiceif
- QzlnIGZKCKi+kjab2prodJpR/b9P3WVGIkhsyn3QztSHedIFSPYDY3CA9AnI8C53sO
- 9syDhsPnXEf3uFXcRSvVw8c+WWNeNVqOXXf+ZdXtBdz2yWyuV1NjtGqadR3PDJZ5p7
- Ld9esm4adyiwThSfrGxEpkanr9auDrh0qvi1HL7X/h7s7fo36ey7s5iEeB37gn5Rud
- J4awUHyACkHUw==
-Received: from smtp.sberdevices.ru (p-i-exch-a-m1.sberdevices.ru
- [172.24.196.116])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Wed, 10 Apr 2024 15:43:03 +0300 (MSK)
-Received: from p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) by
- p-i-exch-a-m1.sberdevices.ru (172.24.196.116) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.4; Wed, 10 Apr 2024 15:43:02 +0300
-Received: from p-i-exch-sc-m02.sberdevices.ru ([fe80::10c3:6e04:fd07:c511]) by
- p-i-exch-sc-m02.sberdevices.ru ([fe80::10c3:6e04:fd07:c511%9]) with
- mapi id 15.02.1118.040; Wed, 10 Apr 2024 15:43:02 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- "mkorpershoek@baylibre.com" <mkorpershoek@baylibre.com>
-CC: "sjg@chromium.org" <sjg@chromium.org>, "hs@denx.de" <hs@denx.de>,
- "sean.anderson@seco.com" <sean.anderson@seco.com>, "dimorinny@google.com"
- <dimorinny@google.com>, "patrick.delaunay@foss.st.com"
- <patrick.delaunay@foss.st.com>, kernel <kernel@sberdevices.ru>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v4 1/1] fastboot: introduce 'oem board' subcommand
-Thread-Topic: [PATCH v4 1/1] fastboot: introduce 'oem board' subcommand
-Thread-Index: AQHaizX/1A9erjw9rEuSh9/cxo0mpbFhNSuAgAALWIA=
-Date: Wed, 10 Apr 2024 12:43:02 +0000
-Message-ID: <20240410124257.3zc673n2jb3msiep@cab-wsm-0029881.sigma.sbrf.ru>
-References: <20240410105804.22757-1-avromanov@salutedevices.com>
- <20240410105804.22757-2-avromanov@salutedevices.com>
- <20917bf6-2be2-4a1f-8c87-a69a2241d1fc@theobroma-systems.com>
-In-Reply-To: <20917bf6-2be2-4a1f-8c87-a69a2241d1fc@theobroma-systems.com>
-Accept-Language: ru-RU, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.18.92]
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <F255A55CB9D63F4F8C21C15FAE18746C@sberdevices.ru>
-Content-Transfer-Encoding: quoted-printable
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-dcbc6a6808fso6610658276.2
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 06:18:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1712755092; x=1713359892;
+ darn=lists.denx.de; 
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=WTUOlSZ9YF8uobWO1z7sub0taVwcgwWQQy0Ho6pD0p0=;
+ b=TKAaSj3QKpJVgHRsqygDIvr9iBIXHcpsSaH7xCLQI4viCaT6xmmkFryEPaySNhr7+x
+ TGVatxL0m0iS4tQhQfUft291nheQZhczeW9RzIyGTZyz3QvR2k1g+8iYKQXS+cgW2ljg
+ AkRg7wAI0vgjHZ9urnseQl7TBGsCXoYp24Uj8O22qE1aTwBx2l26GxAEvpajzy3HLnew
+ bseOLMn0J6fasXNECSgB6AT5QEKprKMHuMRzUjoyk7+htea46NZ1wmg+dADqWyLJ3oYh
+ ErJ2hclHexR33eo9Mi2sUtK4y3KCcz5+Y2e+zenQtJ4L4XcweI8aozsKFb61jG/Y2GWu
+ hMwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712755092; x=1713359892;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=WTUOlSZ9YF8uobWO1z7sub0taVwcgwWQQy0Ho6pD0p0=;
+ b=jUZO5oC4sJsed3Rwi9SGibBST3WrW2kjk1pc43grMXT1KslBoWgvuLhg9hlR+tfE+7
+ qNEgSZbP9qkCCnBpceTCtehfBK16DDES7rSJAAq5sk+GpvgZ4m0EOB44yZ7y1ulKyv80
+ WQdjhbFjMkeurMOPIpOPLnXJbRKiWLLbGBXBudkwDIe2I6uCzJhKAE/fnAEBb9vvOFaS
+ E18ij3hZLBC31/a3bzvJCdsgq8jcBIWPO5QnZmHkrdi6OdW5JWXltwXPMO/Unp8D/gdE
+ Skjru1UxCWoy21WnCprN42WU1uEDbRyHUp77GXwG1f1jgqaarhYCMyVHXq912wSvmFRR
+ 2tOA==
+X-Gm-Message-State: AOJu0YzEyzSVsRiIeUUODbnvR+pNuwBPEChh44I8mzOX+PYBfBnUWUeW
+ XbpB21P8Mze4ymNlMi7U0NvDuC32UsgVsohphL4J+4xPb6Qw7NvA4TzWZ67kk2HCQTDXH/vpOf7
+ LS9VIZbbCZLZLaZTWjbwghzFI42w2CCQjOXkb
+X-Google-Smtp-Source: AGHT+IGWtLvOSNEDvrYnGpiGzCY9fQp6kCN8ths5zBf69Bx8O36X1uXlqSl4t5x96WJCXdSxOh1nZ2N5cwZI+DmZBOY=
+X-Received: by 2002:a05:6902:4d0:b0:dc7:6192:c688 with SMTP id
+ v16-20020a05690204d000b00dc76192c688mr2556922ybs.65.1712755092041; Wed, 10
+ Apr 2024 06:18:12 -0700 (PDT)
 MIME-Version: 1.0
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 184652 [Apr 10 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 16 0.3.16
- 6e64c33514fcbd07e515710c86ba61de7f56194e, {Track_E25351},
- {Tracking_from_domain_doesnt_match_to},
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 127.0.0.199:7.1.2;
- salutedevices.com:7.1.1; smtp.sberdevices.ru:5.0.1,7.1.1;
- cab-wsm-0029881.sigma.sbrf.ru:5.0.1,7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/04/10 11:03:00 #24738255
-X-KSMG-AntiVirus-Status: Clean, skipped
-X-Mailman-Approved-At: Wed, 10 Apr 2024 15:04:14 +0200
+References: <20240404114422.2905194-1-petr.zejdl@cern.ch>
+In-Reply-To: <20240404114422.2905194-1-petr.zejdl@cern.ch>
+From: Michal Simek <monstr@monstr.eu>
+Date: Wed, 10 Apr 2024 15:18:00 +0200
+Message-ID: <CAHTX3d+-CGGN5RptDugPAroLebVH1p40ZgKUPonj9ELr0tWd=A@mail.gmail.com>
+Subject: Re: [PATCH] xilinx: common: Fix MAC address read from EEPROM
+To: Petr Zejdl <petr.zejdl@cern.ch>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,79 +87,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi guys,
+=C4=8Dt 4. 4. 2024 v 14:23 odes=C3=ADlatel Petr Zejdl <petr.zejdl@cern.ch> =
+napsal:
 
-On Wed, Apr 10, 2024 at 02:02:21PM +0200, Quentin Schulz wrote:
-> Hi Alexey,
->=20
-> On 4/10/24 12:58, Alexey Romanov wrote:
-> > Currently, fastboot protocol in U-Boot has no opportunity
-> > to execute vendor custom code with verifed boot. This patch
-> > introduce new fastboot subcommand fastboot oem board:<cmd>,
-> > which allow to run custom oem_board function.
-> >=20
-> > Default implementation is __weak. Vendor must redefine it in
-> > board/ folder with his own logic.
-> >=20
-> > For example, some vendors have their custom nand/emmc partition
-> > flashing or erasing. Here some typical command for such use cases:
-> >=20
-> > - flashing:
-> >=20
-> >    $ fastboot stage bootloader.img
-> >    $ fastboot oem board:write_bootloader
-> >=20
-> > - erasing:
-> >=20
-> >    $ fastboot oem board:erase_env
-> >=20
-> > Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-> > Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> > ---
-> >   doc/android/fastboot.rst      | 18 ++++++++++++++++++
-> >   drivers/fastboot/Kconfig      |  7 +++++++
-> >   drivers/fastboot/fb_command.c | 30 ++++++++++++++++++++++++++++++
-> >   include/fastboot.h            |  1 +
-> >   4 files changed, 56 insertions(+)
-> >=20
-> > diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
-> > index 1ad8a897c8..2a627f9890 100644
-> > --- a/doc/android/fastboot.rst
-> > +++ b/doc/android/fastboot.rst
-> > @@ -29,6 +29,7 @@ The following OEM commands are supported (if enabled)=
-:
-> >     with <arg> =3D boot_ack boot_partition
-> >   - ``oem bootbus``  - this executes ``mmc bootbus %x %s`` to configure=
- eMMC
-> >   - ``oem run`` - this executes an arbitrary U-Boot command
-> > +- ``oem board`` - this executes a custom board function which is defin=
-ed by the vendor
-> >   Support for both eMMC and NAND devices is included.
-> > @@ -245,6 +246,23 @@ including multiple commands (using e.g. ``;`` or `=
-`&&``) and control structures
-> >   (``if``, ``while``, etc.). The exit code of ``fastboot`` will reflect=
- the exit
-> >   code of the command you ran.
-> > +Running Custom Vendor Code
-> > +^^^^^^^^^^^^^^^^^^^^^^^^^^
-> > +
-> > +U-Boot allows you to execute custom fastboot logic, which can be defin=
-ed
-> > +in board/ files. It can still be used for production devices with veri=
-fied
-> > +boot, because the vendor define logic at compile time by implementing
->=20
-> I think it should be "defines" here?
-
-Yep. If there are no more comments, maybe Mattijs will correct this when
-he picks up a patch? So that I don't send a new series with typo fix :)
-
->=20
-> Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
->=20
-> Thanks,
-> Quentin
+> The upper-to-lowercase character conversion now avoids altering the
+> MAC address field. In the previous version, this alteration corrupted
+> the MAC address.
+>
+> Signed-off-by: Petr Zejdl <petr.zejdl@cern.ch>
+> ---
+>  board/xilinx/common/board.c | 12 ++++++++----
+>  1 file changed, 8 insertions(+), 4 deletions(-)
+>
+> diff --git a/board/xilinx/common/board.c b/board/xilinx/common/board.c
+> index 66edf857f1..49dc5d10cc 100644
+> --- a/board/xilinx/common/board.c
+> +++ b/board/xilinx/common/board.c
+> @@ -101,10 +101,14 @@ static void xilinx_eeprom_legacy_cleanup(char
+> *eeprom, int size)
+>         for (i =3D 0; i < size; i++) {
+>                 byte =3D eeprom[i];
+>
+> -               /* Remove all non printable chars but ignore MAC address =
+*/
+> -               if ((i < offsetof(struct xilinx_legacy_format, eth_mac) |=
+|
+> -                    i >=3D offsetof(struct xilinx_legacy_format, unused1=
+))
+> &&
+> -                    (byte < '!' || byte > '~')) {
+> +               /* Ignore MAC address */
+> +               if (i >=3D offsetof(struct xilinx_legacy_format, eth_mac)=
+ &&
+> +                   i < offsetof(struct xilinx_legacy_format, unused1)) {
+> +                       continue;
+> +               }
+> +
+> +               /* Remove all non printable chars */
+> +               if (byte < '!' || byte > '~') {
+>                         eeprom[i] =3D 0;
+>                         continue;
+>                 }
+> --
+> 2.31.1
+>
+>
+Applied.
+M
 
 --=20
-Thank you,
-Alexey=
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal SoCs
