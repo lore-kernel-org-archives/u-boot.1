@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94119CD1296
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 08:40:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3882BCD11C2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 08:40:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0946F870AB;
-	Wed, 10 Apr 2024 10:40:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 858388814B;
+	Wed, 10 Apr 2024 10:40:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Da0xTPbX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OB3gHhFI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BE3588116; Wed, 10 Apr 2024 10:39:58 +0200 (CEST)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 0A4668818C; Wed, 10 Apr 2024 10:40:09 +0200 (CEST)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B74687073
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 10:39:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A06787073
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 10:40:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-345b857d7adso1978178f8f.1
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 01:39:56 -0700 (PDT)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-3465921600dso595924f8f.3
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 01:40:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712738396; x=1713343196; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712738406; x=1713343206; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=Xy8azzE46+R8vbhNFGjb9CnMzXBuYCZA5IMeQtBTAHk=;
- b=Da0xTPbXwlrErSIq8Ebb9uaXD07ALzkR/DVNJ5mPJ3K+uyqFxo38md+mZbEKboAcnM
- R6OsTaW4Co/ar/qGdsaTJcyCWLBPE85xAHJF7lWLdmu+Ad6YOT1fDvBdMlpqcAPi/RB8
- Smc9cpHwGunJ9jZL8MtB5nRLcQQZ70J+9SubYmf5xWT/eYL4Qhcgp5wtFhh+cz9XZlrT
- TOrw1aWlOeCRIeRE3lKwxXGgsS3r0cv9Xe4c3XYc9QbvPBXVMW68k/oI2UJ4MQtV+LYN
- nkN7piJrVBie5JmnGU2aFPsX48jOsWnuDExrfVv171miPk3hEbpoMOe41yv26hG9ZPeU
- 1yoQ==
+ :reply-to; bh=KmK7QLISS0jZAEf3O7hmnkIUWsAp1Jj3K2SeBXgpm00=;
+ b=OB3gHhFIpaoYZg+2b+8HqabOgzx+AjlOaYdE/66BCYDS6I3Dhyu5IcwFdywqcyT3J7
+ 9/306OCaRr7H7rOW4ike3hCZcdmOmnSq5w3XCp6xRLzUmsLp8r5YOwMpMBLW2LfC6v+e
+ sPFQyJ1Axb1tbymzV9LOFXmutXDzo4GMvkWM1++tdDgyMuRTp+ATrPhsmSDawlhoiHWI
+ ND2lJaUWykiX53FZmKJyG2sV1qGed26LPxodsBNuIlbRkP4v0SPXhXwtEpFb7qsjK2jY
+ YWKwvEf4PUDSJzxu5o9zpQJYj1VLq3MzWcO5yiXzreEn7SYyI9in2xaxbayc2O2ZUseM
+ Qhxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712738396; x=1713343196;
+ d=1e100.net; s=20230601; t=1712738406; x=1713343206;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=Xy8azzE46+R8vbhNFGjb9CnMzXBuYCZA5IMeQtBTAHk=;
- b=NHep6/u3C5urMDYGVSsDu76VmFClx+y3HDgQwjgTTSTg+uFHEbu77y+bwRc6AaYsce
- z0d4UsK+B6QShPRPMjo/oJS3/cLAWJ4jPDyHDvQXHzq5BbBjUQG/4MCQ/sQwfawSoZVH
- 0HFxYXGY0sEbnmlUwsltCO2KfpJVPQFpcJred2q5fzIU4GakmKJvyhEE9TJpgJr1/l37
- tyCfYxa114ceKgquG6RuZkGNw7+djAiq4nhg40SyJSDFK0ILN1QHd80RBr4FGvRzt3G+
- pku72K8LYc2sPGJgnKsWxC9qDP6Qjj7VmH8mEwS32MzkFHCoQM0sJS/GllIDemGcloHU
- YOlg==
-X-Gm-Message-State: AOJu0YxX5rqJnnXcm8fbXGWEUvzfXfa0x2Os3wwK0vTCnGe6pwTa8VQb
- WDaJ11Cc8JGJCcsVxJrKcsKADQgMQX5gqIdSO7yLQcRn4p21WLonEMwJIIm+jAU=
-X-Google-Smtp-Source: AGHT+IFcfhRBi8Pjleg5Ld+SYUkJ8S2onj86bh/+yvZDGEB15hobeTWtFcnaso12BCcyfFYNFTv4tg==
-X-Received: by 2002:a05:6000:2a3:b0:346:4160:99b9 with SMTP id
- l3-20020a05600002a300b00346416099b9mr2274933wry.4.1712738395489; 
- Wed, 10 Apr 2024 01:39:55 -0700 (PDT)
+ bh=KmK7QLISS0jZAEf3O7hmnkIUWsAp1Jj3K2SeBXgpm00=;
+ b=l2VU1Wm0xi7zuHYfxSUMuky85qw15JnGUw+HUg/8zgq3v851fHdfbgWnpX+V/Rbtr/
+ MpDWlPXdsh3DW5Gs7a1TA0Z4Vlkk+z9H10ibd9SX4CIKcfsih3KT1fDaR0HjoZ0ufGGq
+ sjjlPBlI+S92cB7elZONPy+AOboBGHA25u1DbEeV91uct8sfKrL5fCJE27toL6uNCIbn
+ ynW4yhcQKCAAGSDuomW2mYVD4kqkuqbHXLSJ04PDIVxSHHNkv9ZMsbemEyc8tUahwMEp
+ dQAXtOkblEcIRVl5OZLyw23Cu1IQJ4+LNvBdTJmylEa4aGcvLqMAtgJzBsgdJ9/V1FYD
+ gGPQ==
+X-Gm-Message-State: AOJu0YyZ0VMS5mG/JXTBpp04pTZ70W2nrOyA9ebaB+0bWpA681DmeVui
+ 0EPDQ9IfdM0zpVnXvZNPZFsHf15IBTMq6n7CTxnqwikRwmHpColCoPRRjH8t5yE=
+X-Google-Smtp-Source: AGHT+IEerYDzhUMGRrGPYVrjvzWLc125wWAvUPyirzHmoo1Q2g11+GMI5ClVcn99Vdg3h2+zDGrIlQ==
+X-Received: by 2002:a5d:6d81:0:b0:346:75ae:471b with SMTP id
+ l1-20020a5d6d81000000b0034675ae471bmr640478wrs.51.1712738406436; 
+ Wed, 10 Apr 2024 01:40:06 -0700 (PDT)
 Received: from ?IPV6:2a01:e0a:982:cbb0:7b0c:6cd:4afa:674b?
  ([2a01:e0a:982:cbb0:7b0c:6cd:4afa:674b])
  by smtp.gmail.com with ESMTPSA id
- y16-20020adff6d0000000b0034335f13570sm13287825wrp.116.2024.04.10.01.39.54
+ t7-20020a0560001a4700b0033ec94c6277sm13264922wry.115.2024.04.10.01.40.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Apr 2024 01:39:55 -0700 (PDT)
-Message-ID: <f6725bd9-1944-4f9a-9b5a-ffc4346be09f@linaro.org>
-Date: Wed, 10 Apr 2024 10:39:53 +0200
+ Wed, 10 Apr 2024 01:40:06 -0700 (PDT)
+Message-ID: <f49a8b0c-6557-49a8-a699-ade7905cdea1@linaro.org>
+Date: Wed, 10 Apr 2024 10:40:05 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 4/7] mmc: msm_sdhci: use a more sensible default clock rate
+Subject: Re: [PATCH 3/7] mmc: msm_sdhci: print core version
 To: Caleb Connolly <caleb.connolly@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Peng Fan <peng.fan@nxp.com>,
  Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
@@ -79,7 +79,7 @@ To: Caleb Connolly <caleb.connolly@linaro.org>,
  Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 References: <20240409-b4-qcom-mmc-fixes-v1-0-5039164ecbf7@linaro.org>
- <20240409-b4-qcom-mmc-fixes-v1-4-5039164ecbf7@linaro.org>
+ <20240409-b4-qcom-mmc-fixes-v1-3-5039164ecbf7@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -106,7 +106,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20240409-b4-qcom-mmc-fixes-v1-4-5039164ecbf7@linaro.org>
+In-Reply-To: <20240409-b4-qcom-mmc-fixes-v1-3-5039164ecbf7@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -126,36 +126,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
-
 On 09/04/2024 20:03, Caleb Connolly wrote:
-> We currently default to the lowest rate but this actually doesn't work
-> on most platforms. Default to the HS400 speed instead which is most
-> common on Qualcomm platforms.
+> This is useful for debugging.
 > 
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   drivers/mmc/msm_sdhci.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   drivers/mmc/msm_sdhci.c | 2 ++
+>   1 file changed, 2 insertions(+)
 > 
 > diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-> index ea5d6b4cbbee..2144772ac325 100644
+> index 5689b4765122..ea5d6b4cbbee 100644
 > --- a/drivers/mmc/msm_sdhci.c
 > +++ b/drivers/mmc/msm_sdhci.c
-> @@ -61,9 +61,9 @@ static int msm_sdc_clk_init(struct udevice *dev)
->   	const char *clk_name;
+> @@ -172,8 +172,10 @@ static int msm_sdc_probe(struct udevice *dev)
+>   	core_major >>= SDCC_VERSION_MAJOR_SHIFT;
 >   
->   	ret = ofnode_read_u32(node, "clock-frequency", (uint *)(&clk_rate));
->   	if (ret)
-> -		clk_rate = 400000;
-> +		clk_rate = 201500000;
-
-I think we may either use INT_MAX so the clock driver uses the max freq in the table,
-or we could also parse the DT OPPs and take the max frequency ?
-
+>   	core_minor = core_version & SDCC_VERSION_MINOR_MASK;
 >   
->   	ret = clk_get_bulk(dev, &prv->clks);
->   	if (ret) {
->   		log_warning("Couldn't get mmc clocks: %d\n", ret);
+> +	log_debug("SDCC version %d.%d\n", core_major, core_minor);
+> +
+>   	/*
+>   	 * Support for some capabilities is not advertised by newer
+>   	 * controller versions and must be explicitly enabled.
+>   	 */
 > 
 
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
