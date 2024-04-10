@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8459ECD11C2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 14:53:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA63FCD128A
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 15:20:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB3D286E40;
-	Wed, 10 Apr 2024 16:53:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 48CC487073;
+	Wed, 10 Apr 2024 17:20:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="uzkjYrPx";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Itysgl1E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F54A87F52; Wed, 10 Apr 2024 16:53:50 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 51CF78772A; Wed, 10 Apr 2024 17:20:50 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA0C283348
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 16:53:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B9B4586EB5
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 17:20:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2d89346eb45so42646521fa.0
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 07:53:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1712760827; x=1713365627;
- darn=lists.denx.de; 
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=svEU2SI6ox9dbBTKva5/0T+ECDUC697EVQHzd+pCuI0=;
- b=uzkjYrPxawhQbpFuSMEBRy0DHzuHHpHTsPn8Ll/kl2pDkHMCf1GuZ4MRilrPoHftQ2
- tlblyzMyGFm2xbA2ufF6D0pwSLhuhSLKkeW9xmIbRIwtJoywqSOhCiMFyaVGDOA4mRLc
- ovrtkGbm1v9xhLTtuec85r+SBYcYP7J+l8bKRW6sY8VewHfmvMk9C4YN2rx2jN2VApdg
- VyN7RrZ1JNcfo5moh7Qe1lsqXqz06pyNtXnnGtITaI1U+/ZV7t5zIdo9KVQNebUqrUhK
- oCZJHYkJcjhNB6ziZrHEOiD6rRqQXs9oyAyJ2B+pAxZoHOdXZqpVJ20kEjBDgzVBwDVu
- dyNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712760827; x=1713365627;
- h=content-transfer-encoding:subject:from:cc:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=svEU2SI6ox9dbBTKva5/0T+ECDUC697EVQHzd+pCuI0=;
- b=UcFsK4sP5CO+Y4fqhjPqWqwhtd53/MCXNi48pNDkP1nEEnsdSBAEa90tBHHOUdwJQE
- 0mMJD9GKJFUS1vAxLEpM+rs2fTfRJMJx4EgUxd3C4MOpYJy2uRenFR2t2IGinB6J7hfX
- HMRi3hosPXMxOEmxumJBH+NL5fHXsjq4csQmoFOBKneGKb05JWa4timEvRhGnRI3P77+
- 3Ih49VRQ+TyneQxYgSnLPO93aqVO9XfuPnM5ol7YZUvZfJ7WJIgklq4SPR3+GDKkrS1a
- RKvVaSX1KdXBjfvAIqSrxfX9VuWz1PF87u0+RI5AyEyKsSglzfpojcZ/rlA0a4BRdVv9
- omNA==
-X-Gm-Message-State: AOJu0Yy2BmtIItb4h8ji3T+cCzfFF1fp3ZN7mCXS/O/O8zsDbZibfxGt
- 9nYQdGlNEufDu9nPWha60sdGIPrpRXGptmc/WiE2PAaFoDQGBnbwaLL1mx2IiminUQog21GYq4W
- e+Q==
-X-Google-Smtp-Source: AGHT+IHUhxf5K685qX+MPZLQ5MNoRLQsMYrCy8b0La+z0/VLBa/h/Fr36j92slxY1uPb58MrsgDaaA==
-X-Received: by 2002:a2e:a223:0:b0:2d6:8e88:5a8b with SMTP id
- i3-20020a2ea223000000b002d68e885a8bmr2641696ljm.32.1712760826818; 
- Wed, 10 Apr 2024 07:53:46 -0700 (PDT)
-Received: from [10.254.183.223] ([149.199.62.131])
- by smtp.gmail.com with ESMTPSA id
- xi1-20020a170906dac100b00a51d3785c7bsm4135960ejb.196.2024.04.10.07.53.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Apr 2024 07:53:46 -0700 (PDT)
-Message-ID: <5559177c-9db3-4470-be0b-90562422de72@monstr.eu>
-Date: Wed, 10 Apr 2024 16:53:41 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43AFKbor103969;
+ Wed, 10 Apr 2024 10:20:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1712762437;
+ bh=o2xvuCKciBvknySuBg7O3x3zlAuDdcXMUgdBfhaq56o=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=Itysgl1EvI7S0Su4P04ljJFqJ/Cgxy6IRHOWjBwgUhgft3pCO3FVn+iUPyR6NC++6
+ k0BM+y5hwqYepxrQoJO9DJWMGuzjr6m+2Mid6sW5jwej445En3zmEfpUT6EHBUbZcD
+ 3/2c4OtaKvxaBRrMgAlKYDQzVsbyWB0/0uyAKdpc=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43AFKbW8012990
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 10 Apr 2024 10:20:37 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 10
+ Apr 2024 10:20:37 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 10 Apr 2024 10:20:37 -0500
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43AFKajm114364;
+ Wed, 10 Apr 2024 10:20:36 -0500
+Message-ID: <6b2294cd-3611-4aa0-8034-57f11faaffb9@ti.com>
+Date: Wed, 10 Apr 2024 10:20:36 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 01/13] ti:keys Add EFI signature list
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+CC: Heinrich Schuchardt <xypron.glpk@gmx.de>, <u-boot@lists.denx.de>, Simon
+ Glass <sjg@chromium.org>, Neha Malcom Francis <n-francis@ti.com>, Roger
+ Quadros <rogerq@kernel.org>, Nikhil M Jain <n-jain1@ti.com>, Mattijs
+ Korpershoek <mkorpershoek@baylibre.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini
+ <trini@konsulko.com>, Jonathan Humphreys <j-humphreys@ti.com>
+References: <20240408213349.96610-1-j-humphreys@ti.com>
+ <20240408213349.96610-2-j-humphreys@ti.com>
+ <ee9a13b7-6b52-4bc8-8876-e194e1a66f92@gmx.de>
+ <ec241b23-5523-45d6-aa05-5d1667c34773@ti.com>
+ <2a818e83-9971-4626-9695-24e7d9c2fdd5@gmx.de>
+ <44af30a5-c9c4-47d6-b2e6-7226e01a60ae@ti.com>
+ <CAC_iWjJgAmCpxqk_Tty9jxfjauo_jVyVH9a4fxhiyjqg2UVPAw@mail.gmail.com>
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-From: Michal Simek <monstr@monstr.eu>
-Subject: [GIT PULL] xilinx patches for v2024.07-rc1
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <CAC_iWjJgAmCpxqk_Tty9jxfjauo_jVyVH9a4fxhiyjqg2UVPAw@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,156 +92,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 4/10/24 4:38 AM, Ilias Apalodimas wrote:
+> On Tue, 9 Apr 2024 at 23:14, Andrew Davis <afd@ti.com> wrote:
+>>
+>> On 4/9/24 2:26 PM, Heinrich Schuchardt wrote:
+>>> On 4/9/24 14:14, Andrew Davis wrote:
+>>>> On 4/8/24 10:34 PM, Heinrich Schuchardt wrote:
+>>>>> On 4/8/24 23:33, Jonathan Humphreys wrote:
+>>>>>> EFI signature list using TI dummy keys.
+>>>>>
+>>>>> Adding vendor public keys into the code base to lock down generated
+>>>>> binaries to the vendors unpublished private key does not match well with
+>>>>> the intent of the GNU public license.
+>>>>>
+>>>>
+>>>> The matching private keys are already published in this same
+>>>> repo/directory (arch/arm/mach-k3/keys).
+>>>>
+>>>> Andrew
+>>>
+>>> Why should we create signed capsules which are already compromised by
+>>> publishing the private key?
+>>>
+>>
+>> If you buy these devices you have two options, you can burn real
+>> keys, or you can burn these dummy keys. If you burn dummy keys
+>> then these images will boot and so will any image you or anyone
+>> else wants to boot on the device. (since the keys are published
+>> anyone can make images for them, that is how we do GP (general
+>> purpose) devices these days)
+>>
+>> If you burn your own keys, then you switch out these keys here
+>> and your device will only boot images that you permit by signing
+>> with your keys.
+> 
+> I am not sure I am following you here.  We don't burn anything in the
+> case of EFI keys. They are placed in an elf section and we assume the
+> device will have a chain of trust enabled, naturally verifying those
+> keys along with the u-boot binary.
+> 
 
-please apply these patches to your tree. Gitlab CI is not showing any issue and 
-buildman for our platforms is also not showing any issue.
+Right, you can (and probably should) use different keys stored in the
+boot stages to verify the next stages. I was more giving the background
+to why we publish our "private" keys at all here. Using the same keys
+for every stage (including burning it in as the HW root of trust key)
+is to make the examples here easier, but I think I see what you
+are saying. It could be better to generate a key-pair as part of
+this build for the EFI keys.
 
-If you have time please take a look at this
-https://lore.kernel.org/r/CAHTX3d+qAMKgL9T5Fo6y=rvXDiMS_mCiCEGazHt07eiVN32Fgw@mail.gmail.com
-because we have issue in initcall code in connection to reporting issue back.
+>>
+>> You'll find plenty of open source projects do the same and
+>> give out example keys to show how to use real keys, even
+>> official GNU projects.
+> 
+> Yes, but the keys defined here are useless unless you have a default
+> defconfig that uses them and embeds them in the binary. I am not cc'ed
+> in all the patches of the series, is that added somewhere? And if you
+> unconditionally enable secure boot It would be far more interesting to
+> embed the MS SHIM key along with that special key you are trying to
+> define, so that firmware can boot COTS distros as well
+> 
+
+Using MS SHIM keys here does sound interesting, I'll let Jon comment
+on if we want to add that to this series or save for later.
 
 Thanks,
-Michal
+Andrew
 
-The following changes since commit abd4fb5ac13215733569925a06991e0a182ede14:
-
-   Merge patch series "Dockerfile: Build coreboot from source" (2024-02-27 
-16:28:57 -0500)
-
-are available in the Git repository at:
-
-   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git 
-tags/xilinx-for-v2024.07-rc1
-
-for you to fetch changes up to f03f962c602c428a1091c3e0fad25b4cf64c9497:
-
-   xilinx: common: Fix MAC address read from EEPROM (2024-04-10 15:16:57 +0200)
-
-----------------------------------------------------------------
-Xilinx changes for v2024.07-rc1
-
-xilinx:
-- Do not call env_get_location when !ENV_IS_NOWHERE
-- Add FDT_FIXUP_PARTITIONS support
-- Fix legacy format MAC decoding
-
-zynqmp:
-- Enable semihosting SPL support
-- DT updates
-- Kconfig resort/cleanup
-- Don't describe second image/capsule if !SPL
-- Add support for dfu/capsule description via MTD
-- Support JTAG as alternative boot mode
-- Add support for TEG soc variant
-
-zynqmp-kria:
-- Wire usb4 boot device
-- Update SDIO tristate pin configuration
-- Disable SPI_FLASH_BAR to avoid issue with SPI after update
-
-mbv:
-- Enable SPL and binman
-- Small platform changes
-
-zynqmp-nand:
-- Error out in case of unsupported SW ECC
-- Clean error path
-
-versal-net:
-- Support multiple locations for variables
-
-----------------------------------------------------------------
-James Hilliard (1):
-       xilinx: zynq: add FDT_FIXUP_PARTITIONS support
-
-Lukas Funke (1):
-       arm64: zynqmp: Add label to pmu fwnode
-
-Manikanta Guntupalli (1):
-       arm64: zynqmp: dts: Add required properties for rs485 support for KD240
-
-Michal Simek (15):
-       arm64: zynqmp: Remove snps,enable_guctl1_ipd_quirk property
-       riscv: mbv: Align addresses with default DT
-       riscv: mbv: Enable REMAKE_ELF by default
-       riscv: mbv: Switch to OF_SEPARATE with fixed address
-       riscv: mbv: Moving little_endian variable to data section
-       riscv: mbv: Enable SPL and binman
-       arm64: zynqmp: Fix gpio-key DT description
-       arm64: zynqmp: Remove additional compatible string for sc-revB
-       arm64: zynqmp: Describe USB wakeup interrupt
-       arm64: zynqmp: Do not setup default SPL options without SPL
-       arm64: zynqmp: Do not describe u-boot.itb if SPL is disabled
-       arm64: zynqmp: Also support JTAG as alternative boot mode
-       xilinx: Do not call private env_get_location() when !ENV_IS_NOWHERE
-       arm64: zynqmp: Generate desc when SPL_FS_LOAD_PAYLOAD_NAME is valid
-       arm64: zynqmp: Add MTD partition handling for dfu_alt_info generation
-
-Petr Zejdl (1):
-       xilinx: common: Fix MAC address read from EEPROM
-
-Sean Anderson (1):
-       arm64: zynqmp: Support semihosting boot method
-
-Shubhangi Shrikrushna Mahalle (1):
-       arm64: zynqmp: Add bootcmd_usb4 variable
-
-Tejas Bhumkar (2):
-       arm64: zynqmp: Disable Tri-state for SDIO
-       configs: zynqmp_kria: Deactivate CONFIG_SPI_FLASH_BAR
-
-Venkatesh Yadav Abbarapu (6):
-       arm64: zynqmp: Add usb4 to the boot targets
-       mtd: nand: arasan: Print warning for unsupported ecc modes
-       mtd: nand: arasan: Fix the crash caused by use after free
-       xilinx: versal-net: Add support for saving env based on bootmode
-       arm64: dts: zynqmp: make hw-ecc as the default ecc mode
-       soc: zynqmp: Add the IDcode for TEG variant
-
-Vishal Sagar (1):
-       arm64: zynqmp: Describe DisplayPort connector for Kria
-
-  arch/arm/Kconfig                           |  8 +++
-  arch/arm/dts/zynqmp-mini-nand.dts          |  6 ++
-  arch/arm/dts/zynqmp-sc-revB.dts            |  4 +-
-  arch/arm/dts/zynqmp-sck-kd-g-revA.dtso     |  2 +
-  arch/arm/dts/zynqmp-sck-kr-g-revB.dtso     | 20 +++++++
-  arch/arm/dts/zynqmp-sck-kv-g-revA.dtso     |  1 +
-  arch/arm/dts/zynqmp-sck-kv-g-revB.dtso     | 21 +++++++
-  arch/arm/dts/zynqmp-vp-x-a2785-00-revA.dts |  2 +-
-  arch/arm/dts/zynqmp-vpk120-revA.dts        |  2 +-
-  arch/arm/dts/zynqmp-zc1751-xm017-dc3.dts   |  6 +-
-  arch/arm/dts/zynqmp-zcu208-revA.dts        |  2 +-
-  arch/arm/dts/zynqmp-zcu216-revA.dts        |  2 +-
-  arch/arm/dts/zynqmp-zcu670-revA.dts        |  2 +-
-  arch/arm/dts/zynqmp-zcu670-revB.dts        |  2 +-
-  arch/arm/dts/zynqmp.dtsi                   | 14 ++---
-  arch/arm/mach-zynqmp/Kconfig               | 27 +--------
-  arch/arm/mach-zynqmp/spl.c                 | 15 +++--
-  arch/riscv/dts/xilinx-mbv32.dts            |  3 +
-  board/xilinx/Kconfig                       |  1 +
-  board/xilinx/common/board.c                | 31 ++++++++--
-  board/xilinx/mbv/Kconfig                   | 14 ++++-
-  board/xilinx/mbv/board.c                   | 10 ++++
-  board/xilinx/versal-net/board.c            | 32 ++++++++++
-  board/xilinx/versal/board.c                |  2 +
-  board/xilinx/zynqmp/zynqmp.c               | 62 +++++++++++++++++---
-  board/xilinx/zynqmp/zynqmp_kria.env        |  4 +-
-  configs/xilinx_mbv32_defconfig             | 23 ++++++--
-  configs/xilinx_mbv32_smode_defconfig       | 25 ++++++--
-  configs/xilinx_versal_net_virt_defconfig   |  3 +
-  configs/xilinx_zynqmp_kria_defconfig       |  1 -
-  drivers/mtd/nand/raw/arasan_nfc.c          | 34 +++++++----
-  drivers/serial/serial_xuartlite.c          |  2 +-
-  drivers/soc/soc_xilinx_zynqmp.c            |  8 +++
-  env/Kconfig                                |  2 +-
-  34 files changed, 302 insertions(+), 91 deletions(-)
-
--- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+> Thanks
+> /Ilias
+> 
+> 
+>>
+>> https://github.com/gpg/gnupg/tree/master/tests/openpgp/samplekeys
+>>
+>> Andrew
+>>
+>>> Best regards
+>>>
+>>> Heinrich
+>>>
+>>>>
+>>>>> Best regards
+>>>>>
+>>>>> Heinrich
+>>>>>
+>>>>>>
+>>>>>> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+>>>>>> ---
+>>>>>>    arch/arm/mach-k3/keys/custMpk.esl | Bin 0 -> 1523 bytes
+>>>>>>    1 file changed, 0 insertions(+), 0 deletions(-)
+>>>>>>    create mode 100644 arch/arm/mach-k3/keys/custMpk.esl
+>>>>>>
+>>>>>> diff --git a/arch/arm/mach-k3/keys/custMpk.esl
+>>>>>> b/arch/arm/mach-k3/keys/custMpk.esl
+>>>>>> new file mode 100644
+>>>>>> index
+>>>>>> 0000000000000000000000000000000000000000..2feb704e0a5fd126410de451d3c0fa4d3edccc52
+>>>>>> GIT binary patch
+>>>>>> literal 1523
+>>>>>> zcmZ1&d0^?2Da*aux2_hA(f&~MnUw(yu0v@E4?-F=u^u*PVqVQ8QZ((-^A*$m*Kg7c
+>>>>>> z&78AJODc2mtxpELY@Awc9&O)w85y}*84Mcd8gd(OvN4CUun9AT2E#ZUJWL@GhWtR)
+>>>>>> zKpA!(HkZVloWx>7bput902hy3NNPo5v4Uq_aY<2WZfaf$h@G5YRFGekSdyAzC~P1I
+>>>>>> zQpnB26;PC)oLXF*UsMbeWai-t@l*&dEdVMmF_blshP#N9QH-w`BJNO<sh6CeYal1i
+>>>>>> zYh-L-W?*PwYGi0=7A4MWYz$;tLb-$9{Y^|t$U)A?%D~*j#Lr;R#Kgta#Kg$3Uu2!<
+>>>>>> zjryX?*~({Md+?>+QS$x7=il`0?bc6sZ`Vxxl^6N{>i2E;SY*4-T$+0G;)5dxe+2CR
+>>>>>> z@4+)sDPWdQb@%6KTpDVdm)v}?GSpG(w_UV)&i+#e3fJowDZO)JR83lIcbw(hMu}}Y
+>>>>>> z2ZZwYAI-LVx@^G;HdkgxaX&Hnl_l3&{H|3l7uX@Vl5di{>fQQ{pDynFlySp2(z~g)
+>>>>>> z{LIBUzm&K9j_CMw_SIFfPdcT#zmg6g<ji}(R`6geJLk-#o7bK^&&fT}#2zsD`=c9g
+>>>>>> zFUCK<Fz@{2kel&$W6zl<d|WNk#ZsNRd{_N_SJxWvh0*K$j!m)c@oT>{#b(Lp`M3Uj
+>>>>>> zGOKycyEe+n{G(Rmg}jB!)0ySk-!kkj_R7#OT+}pcG0VXh?f+ftRvnyw#hUea^Iyfn
+>>>>>> ze|zgKPKrqe@jYWU?v<50X(n^lZ*G%j$JyCh`*Px|H*K=2WXP)hx>jng+}Q}N^KoDN
+>>>>>> z8dh8T-~Dmrp2?yk3O6Gqbz7O@<TEz<^zIa7d#PKtHKHeAg?V0DMSin^o3F|IEfQWk
+>>>>>> zcmJwBy6&2hKub%G{j3IK(?7m@uI43#1e~wSZJ5sTtDjrp@7@{O3(faN{`Gp}x{$M5
+>>>>>> z{A7`c@pjfYq1Z=JvgZ^-zCC<(HFTBwYhTX$k`7IJX`SM!H}f`Mv+(Op6uVY(<(^o4
+>>>>>> zpyXAj9nF_c-1A<UIel9%6Eh<NBXSA>W=dcRVPvS;*B%(4`P|iK>Vg$XDgN9sr}Df{
+>>>>>> z7X0es=RPHr8RB+*)}q}h%gn?x9PO4y*Qog};x<<LS+lxk$@$kYlG_hXu6p%jvB<%l
+>>>>>> zmcsdI9w!^rFPt^&c~{1?L~DJ4TRPv>t%rn8xi;KBE9A!Dppb9yru|>RCb9PcXWpE>
+>>>>>> zKlQ}fzw*izXI|}|r!O*nb&cP9#VhHRn;B<SRflN2Jl(*;W4e0LD$ORRIdjjhURZH+
+>>>>>> zXWR0Vllb2@>`1LC^xvIctvLCYhRA_6yCS~2&!0SH1xwv(O~<l(HQxHJxzF!T_>+5t
+>>>>>> z^|E$S{MM^8j9J5`sQ6pud{2Lz?k`zncbjvHj%eutjusUol}8;%cbPLCO|e;ZJ^tXe
+>>>>>> z_N{pmM}uCi3UWO3=hMc<s}m1Jx4GS4F(<_N`R|o+)eAK3Yx{o$ygRe!;<_EoF&UhP
+>>>>>> zrslJ=2XA9^$j#UDYwo;ZvZwb!|L%YP%v|ie|7-1PP+q3DZ&vEWgHHrjHv|NzEVjO?
+>>>>>> zKFeRbXv>iTPl?N16Xv@buq_d@TU<MB;uD_jX^$J`&*C>`uX0_s&g9M2C6cKx4E;{?
+>>>>>> zt`1&)Tk-yb?sKMPI~!}xt*d*!tMat!r1`}jul#i@lDB8rnu>ba_-^4!iQ5{|tb3TX
+>>>>>> z>fTMIw2!Me3{Dw*WZotC<4@h<H`zaL+~Es<{Ccj5yS7zyNU!YsTG`^JqA6NkU%vnV
+>>>>>> D66<<J
+>>>>>>
+>>>>>> literal 0
+>>>>>> HcmV?d00001
+>>>>>>
+>>>>>
+>>>
