@@ -4,86 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFC7ECD11C2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 12:23:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 410D9CD11C2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 12:24:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4BF5187527;
-	Wed, 10 Apr 2024 14:23:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BB6FD877AF;
+	Wed, 10 Apr 2024 14:24:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="po8mqkeo";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="RbZ6F3O6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4869786E40; Wed, 10 Apr 2024 14:23:56 +0200 (CEST)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2CB8B881A7; Wed, 10 Apr 2024 14:24:47 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B56E87527
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 14:23:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 55F7987527
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 14:24:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-2d485886545so116993991fa.2
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 05:23:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712751833; x=1713356633; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=DuNKVH0lbb24AZLxO1hFKpWTLtvB3l4Vw46W+xKsETs=;
- b=po8mqkeoa4H3YUTm8BPkcFUcES22UFrcrTFGXzL3ZC/yYczqB2FIE8VjF67OiTI+xC
- PimesYsbdof7ci9bn82NcMMLlH4Qe+kfrXDHGu/WvnQ2cdiwE+gRyPkZsfkV+NgCN8JZ
- o7SCCk/UcoNii4spNSsI+oTH9SKgq2Nr/BfOB/5bBv3g303rV7A7LRD/et/ITJu7Eq8Y
- icCaI0pW0euaXumxZGevJplP/fX9J/sHkJeZvCeUGjC02f+VnFH+HgCXEQQuVmAoFNKT
- IVQBgmc6RleZbmzB5nmOsvcbX8ooRn1EbW3D81+T82Rwp1lcGSV08YJJx3/XBakxf7J3
- B94Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712751833; x=1713356633;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=DuNKVH0lbb24AZLxO1hFKpWTLtvB3l4Vw46W+xKsETs=;
- b=tE3BAzyV5xRszQTBicqQ2CnlvY6gLP0EoxDtE2Xqhu/9ONlAYQZcKPWKJeZlOcY3r6
- op2ojgTWLFmdv3G9ubJoqgqFPsGCwEY0E5deddnN9FzsjHr7AES1+kDVM7VpQoduxvjt
- ij5jOryAOkzG9l9ZOj1DgAow+DBCdaYZ5jCLgFqrMW5lJBFLkslaBJX9KuJbYVQ0CLEd
- hntnTU2exHJo/Ny3BE7Vhd6wW6QZTFEuDyFLf2zrlVDghm7GJwS48cAWVsvcZVQyNhE2
- RiN3YoiAKxNoqAykWiJjIaFlK+ulrf5CwBFVn1yMOtlr3N17b3tPhPeyqAgN+opBesan
- h7Ow==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVI9nV4j13rmKBplgACwMs8PaLNrh4rXrQN27wi/w+uoqL0LA0icg19j3QihSo/xlm2rjd/0/rsBn00lKQ+w1JRFRthTQ==
-X-Gm-Message-State: AOJu0Yxhx+nHZzfVcQU6RFaAqpK1gb6uJATmUGZBkGHXz+d/GBMYRu8O
- nuy67jJDY0h1Owvcd8W4CRfJlBKw/w40hU/XV87x9op0gltcwqT7+XvlEVCd830=
-X-Google-Smtp-Source: AGHT+IE3kp7XbcpobC4qkqN8ti98fEkSLGLhl48xzg5r+xD+Zliafx9G+mk0jFmSn0FbqLvC01arHg==
-X-Received: by 2002:a2e:a612:0:b0:2d8:5b34:b9ab with SMTP id
- v18-20020a2ea612000000b002d85b34b9abmr2246798ljp.34.1712751833306; 
- Wed, 10 Apr 2024 05:23:53 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::4716? ([2a02:8109:aa0d:be00::4716])
- by smtp.gmail.com with ESMTPSA id
- gc7-20020a170906c8c700b00a51a259fa60sm6828811ejb.118.2024.04.10.05.23.52
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Apr 2024 05:23:52 -0700 (PDT)
-Message-ID: <12434fc9-c17a-4cd9-98cd-940ecb71aa84@linaro.org>
-Date: Wed, 10 Apr 2024 14:23:51 +0200
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1712751879; x=1713356679; i=xypron.glpk@gmx.de;
+ bh=AWZITCpxCWkOezPWQU0QCBXG8YjuYJz42wsWiZ708HI=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:
+ References:Cc:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=RbZ6F3O6H+g2lUn+VO9aZxssi2xaWLlxPUr39JhTg23Blar3/sk1+3VDZkmV9wkM
+ w0sQexXRW1GUJY2Bq17Y2l3tLvT6jzuYf7lBcgfHVp/j/n2tjNH9sV1TXTOZNVKuf
+ MYuweBTZ6grHd5+W1YTztPV4/ytGebKuaMbx2cmDIjK1ib5wyrM39u5ObIkXxJyFp
+ V1NHc8UIU7rXThNsphZyqJjEscsF58mumZ472s2K4LYK3OTnrvrp24fkq+MCyou89
+ 3zB+tPgtnfhAepmRLmRr/qZV0EoR1wzODtJiGNuVJIA0WLENE26m+oj/ik9u/895v
+ khCs4ILdmI8aEuic8A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1McpJg-1sT2o8462E-00ZxZH; Wed, 10
+ Apr 2024 14:24:39 +0200
+Message-ID: <400d93c5-d49e-48a3-b677-b61182ad6fcd@gmx.de>
+Date: Wed, 10 Apr 2024 14:24:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 7/7] dts: sdm845-db845c-u-boot: adjust MMC clocks
-To: Sumit Garg <sumit.garg@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>,
- Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
-References: <20240409-b4-qcom-mmc-fixes-v1-0-5039164ecbf7@linaro.org>
- <20240409-b4-qcom-mmc-fixes-v1-7-5039164ecbf7@linaro.org>
- <CAFA6WYOX4AviWiYfwrz=aF7x3iwyGzjwf5ZY1eGBu8kG0j6Hqg@mail.gmail.com>
+Subject: Re: [PATCH] efi_loader: using EFI_UNSUPPORTED for private
+ authenticated variables
+To: Weizhao Ouyang <o451686892@gmail.com>
+References: <20240410121933.152265-1-o451686892@gmail.com>
 Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAFA6WYOX4AviWiYfwrz=aF7x3iwyGzjwf5ZY1eGBu8kG0j6Hqg@mail.gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240410121933.152265-1-o451686892@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Jpst74rOLZ+N1JriYwZOcVpBI/oyslw04amHLw6/mzD5fT8IdbW
+ PtdcV1S36ZRoO/+4kCom2XlciGL41JZdlb92PTqSKQmVcm1R/5lOX/HZE2kEKbc0Ab/30FB
+ 5wEAf7MAyvPmKuWOBIKrHwXusqE9v3t2hQi0XURhdg/ZtYTfaLoM3MROsuROQca+i5kD+Fm
+ XKvgdW9FE4jLwezpNodtg==
+UI-OutboundReport: notjunk:1;M01:P0:hTr9il5hYSY=;r247hv/SyylVOzvdAPX8WjDClpW
+ Ekk/qEB/BU1GH5Ees6kzq2X9Zer5yrdi3Z8/bQIe6rkCzb6V2AhCpLUDHKddPYSTNmdWDFsR7
+ LmZSMkOgiMeEZyd8u+lMHihHmNsiH/VwQBxep3OJUD7qEjuwXSiU9yWO62t/SLGbtl9+fIlkc
+ 6NKRfkAyxsHfSnXXJMPIAZekrQEU3wG39FM51VTIawgvl0mrN/jpUDX74f40Um7JjfJ9siInn
+ XTuxcuhPARPZnh0/EZdi95QjfmhA7z821Ax2Kg+r3NkCnmDPJjuKgMo66AAXvGD6KvUKGUgqF
+ YqCodZbbB/60UPX0wdPMOgUhZELTh0rOgvjFn99hTSJqXKZlggLCDUefPk2HolJBPUYRQBAuZ
+ bTe+0EnH/2m4yQAYv+53lKZcvLpTj3m03P0ZXRYHfQnXd50jt8rsPfvZOfmPpqjU2Ob8IBvUH
+ KA8AET03875bVf8LSUF7p4MNJenWYmDL73z0HInk1/Wff39ZP4AYAZ701jIXJkdwaoJ8YPiyQ
+ KckhiU2GKEif7RA7ujpGF1bXzDVns2EtVbK6UUSb2YncDxDZw8Ofr/gfmV2EwGFJCBkEbeTus
+ SsJeKwzj7pwpgEGEN/DQf2C2TWL6SlQ6qawwBlunS12KYg0WP2OsoFk82uWYMbRhLLWv6j4EO
+ nhclBB3Yi4fykb0wG6WCODpF3X0kqwe1fIu95s16UenrYv/zTikuF2iMSiRKHCnDHgCmjdGAO
+ cuDpWRp6iwyzl2ymha7hR089m5CioCr99aDmsEdx9AWfGIZ0nW5/hxFJS4xT5sl6oXza4dVlb
+ yATn3nc/OCvd6H9/fsB+pPLySSDGRyOsyvRHCdqwfKjkI=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,55 +92,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 10.04.24 14:19, Weizhao Ouyang wrote:
+> Improve error message for UEFI SCT tests.
+>
+> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+> ---
+>   lib/efi_loader/efi_variable.c | 1 +
+>   1 file changed, 1 insertion(+)
+>
+> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable=
+.c
+> index 2951dc78c7..e6c1219a11 100644
+> --- a/lib/efi_loader/efi_variable.c
+> +++ b/lib/efi_loader/efi_variable.c
+> @@ -163,6 +163,7 @@ static efi_status_t efi_variable_authenticate(const =
+u16 *variable,
+>   		break;
+>   	default:
+>   		/* TODO: support private authenticated variables */
+> +		ret =3D EFI_UNSUPPORTED;
 
+This looks more adequate than EFI_SECURITY_VIOLATION. Thanks.
 
-On 10/04/2024 12:56, Sumit Garg wrote:
-> Hi Caleb,
-> 
-> On Tue, 9 Apr 2024 at 23:33, Caleb Connolly <caleb.connolly@linaro.org> wrote:
->>
->> Remove the reference to the xo clock which is on the unsupported rpmhcc
->> clock controller. It isn't needed for MMC functionality.
-> 
-> Can it rather be handled via a NOP clock driver for rpmhcc? I suppose
-> this kind of DT modifications would push us away from upstream DT
-> compatibility.
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-Yes, I plan to switch to that eventually with these patches (which I'll 
-try and send soon). I just didn't want to leave this broken in the meantime.
+>   		goto err;
+>   	}
+>
 
-https://git.codelinaro.org/linaro/qcomlt/u-boot/-/commit/85f5fc736777c9a0807c2187a613428f7cd305df
-
-https://git.codelinaro.org/linaro/qcomlt/u-boot/-/commit/973279605dd19e823569d6f92962de9157d33a30
-> 
-> -Sumit
-> 
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>   arch/arm/dts/sdm845-db845c-u-boot.dtsi | 7 +++++++
->>   1 file changed, 7 insertions(+)
->>
->> diff --git a/arch/arm/dts/sdm845-db845c-u-boot.dtsi b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
->> index 906f9faa5451..9e4533e603c5 100644
->> --- a/arch/arm/dts/sdm845-db845c-u-boot.dtsi
->> +++ b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
->> @@ -6,4 +6,11 @@
->>    */
->>   &pcie0_3p3v_dual {
->>          regulator-always-on;
->>   };
->> +
->> +&sdhc_2 {
->> +       /* Remove the unsupported rpmhcc xo clock reference */
->> +       clocks = <&gcc GCC_SDCC2_AHB_CLK>,
->> +                <&gcc GCC_SDCC2_APPS_CLK>;
->> +       clock-names = "iface", "core";
->> +};
->>
->> --
->> 2.44.0
->>
-
--- 
-// Caleb (they/them)
