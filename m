@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D5FECD11C2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 09:13:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1309CD1296
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 09:15:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E5FA88122;
-	Wed, 10 Apr 2024 11:13:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2451C88089;
+	Wed, 10 Apr 2024 11:15:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w/Q+P41U";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fShDrmnW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B621488166; Wed, 10 Apr 2024 11:13:45 +0200 (CEST)
-Received: from mail-vs1-xe2a.google.com (mail-vs1-xe2a.google.com
- [IPv6:2607:f8b0:4864:20::e2a])
+ id 6BF5F88089; Wed, 10 Apr 2024 11:15:37 +0200 (CEST)
+Received: from mail-vs1-xe29.google.com (mail-vs1-xe29.google.com
+ [IPv6:2607:f8b0:4864:20::e29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1737488089
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 11:13:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D811F87F52
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 11:15:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe2a.google.com with SMTP id
- ada2fe7eead31-479de65e08fso1478030137.1
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 02:13:43 -0700 (PDT)
+Received: by mail-vs1-xe29.google.com with SMTP id
+ ada2fe7eead31-47a1a2c4c7cso494245137.2
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 02:15:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712740422; x=1713345222; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712740533; x=1713345333; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=FprdwbpZYn5S+H7wsoE7muKzLwyRdkP3HAXREeqGTqE=;
- b=w/Q+P41UhePvVCcl0s9Iuy0So8DdvLY01R81q/wCU2EkVZuh6JpKRawprE+C8+CTml
- o55M9C+qmXZFPLDunuLzena87uM8X7xfw9Faa728SyIH0lrVUe5V95UODf5Q9p+4tsxn
- 0wUWEjhE6R1p8ZwW3i5MzPGum/dfWJb8J6PGExiPSxIJKeGTlMCIqznKjkSqy/GE28Qe
- a9vjVylMST/z32yH6eE+CiNbmJMmN4HUWPENMBoFijclOLw2c0zdaMM36D7r/R6aaKSd
- eSR7NTu0cufQXWJcfcE4h0SV+Ssb4h9U9BEqAuHDPs7eIV1QviSRj0VFLdDApmaQ/Lxj
- 0NJg==
+ bh=SFi/zXqh4G0meZ3aPHfnx6LrfYTRt4pVeSk3flZUHwA=;
+ b=fShDrmnWQWj/HgExMRMOLKxaYFlT5RsezipKDuVc5mckn50pmRT7PId8J0hJmWAkOm
+ V+uNeLArnNajMs6CnnUuJODN1yMTvhh+SPSiaobm5SJ1Y3S4RA1pj/lm/1sVTeWSeukz
+ YFNHIgja5F6pnVcDRBhWv4LrwIaitvBfYR8dmSOYgx5CyOXOY0um7iMnNLYt5XdRHkbv
+ 9S0Bwwm2suVAyQnABRSV4wdnP0gQo3wh4IXyuXtF67y5E7Q3cn/3s75RTp1mgdgDpo+x
+ RMLgO41fdHyIjXvrmEsnIvYFRz3jF2f0au6vuwguQagFBMeFiF34hmnES+GcK4JERUGh
+ UBiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712740422; x=1713345222;
+ d=1e100.net; s=20230601; t=1712740533; x=1713345333;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=FprdwbpZYn5S+H7wsoE7muKzLwyRdkP3HAXREeqGTqE=;
- b=SRfzQjgUEfhpvy/9gRpzecPbDOAtLMZjTtg8A2mu6uRh2OgTGHs1wwrIHs7m3mJBCN
- OvL/ebs603d9jBeL0+tmoM9WG1bEm8VoJdR6NmaFq+pRaMN9kYK8vpofMxATwczAzKe6
- 2goDUb7FXHhhEUKCgfyCgEX6gqsLhIQ5lfmd47f7N1OZ2+M0AzLeTVd79lv1mGU6Qu3/
- aN5ZiFObU89LxsKECF2ZfGBFI30wQ4eobIK9PHJJwzGfZwliuFiG3AZsKNeKgouDHk+2
- 5y3jysVQ29oZ2JOz/41TXBFq2zI99TJsvP9ej7O5H9sCz9WtBfyDimEk7hfbvWfcEYmH
- qxGQ==
+ bh=SFi/zXqh4G0meZ3aPHfnx6LrfYTRt4pVeSk3flZUHwA=;
+ b=ArB0VTDU2LIP/h/YWeI6Dtp1AmzZvbwKG04vJ5zLNwqL4PfGjCWA0iaEANI/FqwJvm
+ matx7XCNgVnkHpVH6pB5pR48FCLW9rB5Dvbjlxc4bvVaMtnghR9CRtyCirJNoxL2/n02
+ bF3sMHz/VJg5SymGFyC5Y78Ss5duOmOJvzylyth9UnE5lxWFEofmDrENaXqXIyH4AVs3
+ 2UAG9K+ulEcYYESvZd4X8TWZsifbFlU9wNfHBqW5raEcEPDTDF+kNEJ3JopWZA56+b6l
+ +Kbrd8ISjCDDkzyledHkTfGYnZWnSejfaDbcnSe2kwhMUBGM55qeuoW74FI6YrMdSTnU
+ vafA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUgjQ1t1xMVeYIkcKWh5ZHh57+2wb/1GH4W+9T6N34P8o7hf/aDtIe/45hWVYk2X7TtDpibC3YrNlROjLbdmuoJjb2bxw==
-X-Gm-Message-State: AOJu0YygEvOCfodDqi2ISYUYSi+5EGDcyy5l1NeN7C9gYk7Ljd/z9+vP
- ZfYIZMJmOEiLXFeeRQRvpqn0QA6gKwi6ikU+osVQX9k0zx2AZ812Bf07yv788cajuZ174aEA7xA
- MBqhTwQOizGIpZH6a/AoCVe9A+4WaozxFr3Z8/A==
-X-Google-Smtp-Source: AGHT+IFtNGrHSmXg2HRRu7kW0APiYFRddabeVYfDxJYXe0LT7nD8PzYndyJtKRfBfYz95xhT+GFivrcFTT1O9HSCcaE=
-X-Received: by 2002:a67:ef45:0:b0:476:fbbb:14bc with SMTP id
- k5-20020a67ef45000000b00476fbbb14bcmr1636133vsr.30.1712740420321; Wed, 10 Apr
- 2024 02:13:40 -0700 (PDT)
+ AJvYcCXOFImn/Yg3AVsXXYBlZN6fvQR/2wPFp9AfDejqyEtNZErv4/Mzdfbp6ayAd3+urnyFSYhgFZwMR/y4IuROlaF4AjDU7g==
+X-Gm-Message-State: AOJu0YwH2pmHkWfPfSfB4vujcLhdR8fyvM2uGXe2tlZZcM74OUZ6P/AH
+ RkS7Xu8bJ6BtqUf4So2TNgRnLo0/oVFWqgOVN4j0gFDjKM+zOKpVk7/4k6MsAtauRhfWIiMvTO6
+ SgnthqJ0n05wUAeIGp7crxL3dinEuOplI0s4g+g==
+X-Google-Smtp-Source: AGHT+IGM/DWqLD3+3WNu6nKyehv0GpIpFjaihY6KQaaN6Y51zp392/bthF29fvHRRghl1tIYfieA4Nz5jUwCqraHluQ=
+X-Received: by 2002:a05:6102:c4e:b0:47a:29b6:ef52 with SMTP id
+ y14-20020a0561020c4e00b0047a29b6ef52mr346476vss.2.1712740533510; Wed, 10 Apr
+ 2024 02:15:33 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240404-topic-sm8x50-clock-v1-0-0c8ea7fad003@linaro.org>
- <20240404-topic-sm8x50-clock-v1-1-0c8ea7fad003@linaro.org>
-In-Reply-To: <20240404-topic-sm8x50-clock-v1-1-0c8ea7fad003@linaro.org>
+ <20240404-topic-sm8x50-clock-v1-2-0c8ea7fad003@linaro.org>
+In-Reply-To: <20240404-topic-sm8x50-clock-v1-2-0c8ea7fad003@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Wed, 10 Apr 2024 14:43:29 +0530
-Message-ID: <CAFA6WYPwCMk2b-U0JA0nKEE-E_TSpaX7-60JYfsCT3TU_mzktg@mail.gmail.com>
-Subject: Re: [PATCH 1/3] clk: qcom: Add SM8550 clock driver
+Date: Wed, 10 Apr 2024 14:45:22 +0530
+Message-ID: <CAFA6WYM-Uu144sikVkdUavhGW35XpRxnvuiwOAWfcmtbXyx2fQ@mail.gmail.com>
+Subject: Re: [PATCH 2/3] clk: qcom: Add SM8650 clock driver
 To: Neil Armstrong <neil.armstrong@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, 
@@ -90,11 +90,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neil,
-
 On Thu, 4 Apr 2024 at 22:16, Neil Armstrong <neil.armstrong@linaro.org> wrote:
 >
-> Add the GCC and TCSRCC clock driver for the SM8550 SoC.
+> Add the GCC and TCSRCC clock driver for the SM8650 SoC.
 >
 > The GCC driver uses the clk-qcom infrastructure to support GDSCs,
 > Resets and gates. While the TCSRCC is a simpler clock driver which
@@ -102,10 +100,13 @@ On Thu, 4 Apr 2024 at 22:16, Neil Armstrong <neil.armstrong@linaro.org> wrote:
 >
 > The GCC enable and set_rate callbacks contains some tweaks to
 > setup clocks for Debug UART, SDCard controller and USB.
-
-Okay so these are the peripherals you intend to support to begin with.
-
 >
+
+Similar comments as on patch#1, we should drop the bits that we don't
+intend to support as of now.
+
+-Sumit
+
 > The TCSRCC gates returns the XO frequency, which is used by the
 > Synopsys eUSB2 driver to determine the PHY configuration.
 >
@@ -113,46 +114,46 @@ Okay so these are the peripherals you intend to support to begin with.
 > ---
 >  drivers/clk/qcom/Kconfig        |   8 +
 >  drivers/clk/qcom/Makefile       |   1 +
->  drivers/clk/qcom/clock-sm8550.c | 335 ++++++++++++++++++++++++++++++++++++++++
->  3 files changed, 344 insertions(+)
+>  drivers/clk/qcom/clock-sm8650.c | 332 ++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 341 insertions(+)
 >
 > diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-> index 8dae635ac2c..c908a3d19c9 100644
+> index c908a3d19c9..a9216ea30d4 100644
 > --- a/drivers/clk/qcom/Kconfig
 > +++ b/drivers/clk/qcom/Kconfig
-> @@ -47,6 +47,14 @@ config CLK_QCOM_SDM845
->           on the Snapdragon 845 SoC. This driver supports the clocks
+> @@ -55,6 +55,14 @@ config CLK_QCOM_SM8550
+>           on the Snapdragon SM8550 SoC. This driver supports the clocks
 >           and resets exposed by the GCC hardware block.
 >
-> +config CLK_QCOM_SM8550
-> +       bool "Qualcomm SM8550 GCC"
+> +config CLK_QCOM_SM8650
+> +       bool "Qualcomm SM8650 GCC"
 > +       select CLK_QCOM
 > +       help
 > +         Say Y here to enable support for the Global Clock Controller
-> +         on the Snapdragon SM8550 SoC. This driver supports the clocks
+> +         on the Snapdragon SM8650 SoC. This driver supports the clocks
 > +         and resets exposed by the GCC hardware block.
 > +
 >  endmenu
 >
 >  endif
 > diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-> index cb179fdac58..d9ac5719f49 100644
+> index d9ac5719f49..3ccb4ffae76 100644
 > --- a/drivers/clk/qcom/Makefile
 > +++ b/drivers/clk/qcom/Makefile
-> @@ -8,3 +8,4 @@ obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
->  obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
+> @@ -9,3 +9,4 @@ obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
 >  obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
 >  obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
-> +obj-$(CONFIG_CLK_QCOM_SM8550) += clock-sm8550.o
-> diff --git a/drivers/clk/qcom/clock-sm8550.c b/drivers/clk/qcom/clock-sm8550.c
+>  obj-$(CONFIG_CLK_QCOM_SM8550) += clock-sm8550.o
+> +obj-$(CONFIG_CLK_QCOM_SM8650) += clock-sm8650.o
+> diff --git a/drivers/clk/qcom/clock-sm8650.c b/drivers/clk/qcom/clock-sm8650.c
 > new file mode 100644
-> index 00000000000..c0249925cc7
+> index 00000000000..0ce83e9b243
 > --- /dev/null
-> +++ b/drivers/clk/qcom/clock-sm8550.c
-> @@ -0,0 +1,335 @@
+> +++ b/drivers/clk/qcom/clock-sm8650.c
+> @@ -0,0 +1,332 @@
 > +// SPDX-License-Identifier: BSD-3-Clause
 > +/*
-> + * Clock drivers for Qualcomm sm8550
+> + * Clock drivers for Qualcomm sm8650
 > + *
 > + * (C) Copyright 2024 Linaro Ltd.
 > + */
@@ -164,8 +165,8 @@ Okay so these are the peripherals you intend to support to begin with.
 > +#include <asm/io.h>
 > +#include <linux/bug.h>
 > +#include <linux/bitops.h>
-> +#include <dt-bindings/clock/qcom,sm8550-gcc.h>
-> +#include <dt-bindings/clock/qcom,sm8550-tcsr.h>
+> +#include <dt-bindings/clock/qcom,sm8650-gcc.h>
+> +#include <dt-bindings/clock/qcom,sm8650-tcsr.h>
 > +
 > +#include "clock-qcom.h"
 > +
@@ -175,14 +176,13 @@ Okay so these are the peripherals you intend to support to begin with.
 > +/* bi_tcxo_div2 divided after RPMh output */
 > +#define TCXO_DIV2_RATE (TCXO_RATE / 2)
 > +
-> +static const struct freq_tbl ftbl_gcc_qupv3_wrap1_s2_clk_src[] = {
+> +static const struct freq_tbl ftbl_gcc_qupv3_wrap1_s3_clk_src[] = {
 > +       F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
 > +       F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
 > +       F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
 > +       F(29491200, CFG_CLK_SRC_GPLL0_EVEN, 1, 1536, 15625),
 > +       F(32000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 75),
 > +       F(48000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 25),
-> +       F(51200000, CFG_CLK_SRC_GPLL0_EVEN, 1, 64, 375),
 > +       F(64000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 16, 75),
 > +       F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
 > +       F(80000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 15),
@@ -194,8 +194,6 @@ Okay so these are the peripherals you intend to support to begin with.
 > +static const struct freq_tbl ftbl_gcc_sdcc2_apps_clk_src[] = {
 > +       F(400000, CFG_CLK_SRC_CXO, 12, 1, 4),
 > +       F(25000000, CFG_CLK_SRC_GPLL0_EVEN, 12, 0, 0),
-> +       F(37500000, CFG_CLK_SRC_GPLL0_EVEN, 8, 0, 0),
-> +       F(50000000, CFG_CLK_SRC_GPLL0_EVEN, 6, 0, 0),
 > +       F(100000000, CFG_CLK_SRC_GPLL0_EVEN, 3, 0, 0),
 > +       /* TOFIX F(202000000, CFG_CLK_SRC_GPLL9, 4, 0, 0), */
 > +       { }
@@ -209,15 +207,15 @@ Okay so these are the peripherals you intend to support to begin with.
 > +       { }
 > +};
 > +
-> +static ulong sm8550_set_rate(struct clk *clk, ulong rate)
+> +static ulong sm8650_set_rate(struct clk *clk, ulong rate)
 > +{
 > +       struct msm_clk_priv *priv = dev_get_priv(clk->dev);
 > +       const struct freq_tbl *freq;
 > +
 > +       switch (clk->id) {
-> +       case GCC_QUPV3_WRAP1_S7_CLK: /* UART7 */
-> +               freq = qcom_find_freq(ftbl_gcc_qupv3_wrap1_s2_clk_src, rate);
-> +               clk_rcg_set_rate_mnd(priv->base, 0x18898,
+> +       case GCC_QUPV3_WRAP2_S7_CLK: /* UART15 */
+> +               freq = qcom_find_freq(ftbl_gcc_qupv3_wrap1_s3_clk_src, rate);
+> +               clk_rcg_set_rate_mnd(priv->base, 0x1e898,
 > +                                    freq->pre_div, freq->m, freq->n, freq->src, 16);
 > +               return freq->freq;
 > +       case GCC_SDCC2_APPS_CLK:
@@ -241,7 +239,7 @@ Okay so these are the peripherals you intend to support to begin with.
 > +       }
 > +}
 > +
-> +static const struct gate_clk sm8550_clks[] = {
+> +static const struct gate_clk sm8650_clks[] = {
 > +       GATE_CLK(GCC_AGGRE_NOC_PCIE_AXI_CLK,            0x52000, BIT(12)),
 > +       GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_CLK,             0x770e4, BIT(0)),
 > +       GATE_CLK(GCC_AGGRE_UFS_PHY_AXI_HW_CTL_CLK,      0x770e4, BIT(1)),
@@ -321,11 +319,8 @@ Okay so these are the peripherals you intend to support to begin with.
 > +       GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK,         0x39064, BIT(0)),
 > +       GATE_CLK(GCC_USB3_PRIM_PHY_PIPE_CLK,            0x39068, BIT(0)),
 > +};
-
-Shouldn't this list be trimmed down to supported peripherals only?
-
 > +
-> +static int sm8550_enable(struct clk *clk)
+> +static int sm8650_enable(struct clk *clk)
 > +{
 > +       struct msm_clk_priv *priv = dev_get_priv(clk->dev);
 > +
@@ -344,7 +339,7 @@ Shouldn't this list be trimmed down to supported peripherals only?
 > +       return 0;
 > +}
 > +
-> +static const struct qcom_reset_map sm8550_gcc_resets[] = {
+> +static const struct qcom_reset_map sm8650_gcc_resets[] = {
 > +       [GCC_CAMERA_BCR] = { 0x26000 },
 > +       [GCC_DISPLAY_BCR] = { 0x27000 },
 > +       [GCC_GPU_BCR] = { 0x71000 },
@@ -364,6 +359,7 @@ Shouldn't this list be trimmed down to supported peripherals only?
 > +       [GCC_PDM_BCR] = { 0x33000 },
 > +       [GCC_QUPV3_WRAPPER_1_BCR] = { 0x18000 },
 > +       [GCC_QUPV3_WRAPPER_2_BCR] = { 0x1e000 },
+> +       [GCC_QUPV3_WRAPPER_3_BCR] = { 0x19000 },
 > +       [GCC_QUPV3_WRAPPER_I2C_BCR] = { 0x17000 },
 > +       [GCC_QUSB2PHY_PRIM_BCR] = { 0x12000 },
 > +       [GCC_QUSB2PHY_SEC_BCR] = { 0x12004 },
@@ -377,16 +373,12 @@ Shouldn't this list be trimmed down to supported peripherals only?
 > +       [GCC_USB3_PHY_SEC_BCR] = { 0x5000c },
 > +       [GCC_USB3PHY_PHY_PRIM_BCR] = { 0x50004 },
 > +       [GCC_USB3PHY_PHY_SEC_BCR] = { 0x50010 },
-> +       [GCC_USB_PHY_CFG_AHB2PHY_BCR] = { 0x6a000 },
 > +       [GCC_VIDEO_AXI0_CLK_ARES] = { 0x32018, 2 },
 > +       [GCC_VIDEO_AXI1_CLK_ARES] = { 0x32024, 2 },
 > +       [GCC_VIDEO_BCR] = { 0x32000 },
 > +};
-
-Ditto.
-
 > +
-> +static const struct qcom_power_map sm8550_gdscs[] = {
+> +static const struct qcom_power_map sm8650_gdscs[] = {
 > +       [PCIE_0_GDSC] = { 0x6b004 },
 > +       [PCIE_0_PHY_GDSC] = { 0x6c000 },
 > +       [PCIE_1_GDSC] = { 0x8d004 },
@@ -396,57 +388,52 @@ Ditto.
 > +       [USB30_PRIM_GDSC] = { 0x39004 },
 > +       [USB3_PHY_GDSC] = { 0x50018 },
 > +};
-
-Ditto.
-
--Sumit
-
 > +
-> +static struct msm_clk_data sm8550_gcc_data = {
-> +       .resets = sm8550_gcc_resets,
-> +       .num_resets = ARRAY_SIZE(sm8550_gcc_resets),
-> +       .clks = sm8550_clks,
-> +       .num_clks = ARRAY_SIZE(sm8550_clks),
-> +       .power_domains = sm8550_gdscs,
-> +       .num_power_domains = ARRAY_SIZE(sm8550_gdscs),
+> +static struct msm_clk_data sm8650_gcc_data = {
+> +       .resets = sm8650_gcc_resets,
+> +       .num_resets = ARRAY_SIZE(sm8650_gcc_resets),
+> +       .clks = sm8650_clks,
+> +       .num_clks = ARRAY_SIZE(sm8650_clks),
+> +       .power_domains = sm8650_gdscs,
+> +       .num_power_domains = ARRAY_SIZE(sm8650_gdscs),
 > +
-> +       .enable = sm8550_enable,
-> +       .set_rate = sm8550_set_rate,
+> +       .enable = sm8650_enable,
+> +       .set_rate = sm8650_set_rate,
 > +};
 > +
-> +static const struct udevice_id gcc_sm8550_of_match[] = {
+> +static const struct udevice_id gcc_sm8650_of_match[] = {
 > +       {
-> +               .compatible = "qcom,sm8550-gcc",
-> +               .data = (ulong)&sm8550_gcc_data,
+> +               .compatible = "qcom,sm8650-gcc",
+> +               .data = (ulong)&sm8650_gcc_data,
 > +       },
 > +       { }
 > +};
 > +
-> +U_BOOT_DRIVER(gcc_sm8550) = {
-> +       .name           = "gcc_sm8550",
+> +U_BOOT_DRIVER(gcc_sm8650) = {
+> +       .name           = "gcc_sm8650",
 > +       .id             = UCLASS_NOP,
-> +       .of_match       = gcc_sm8550_of_match,
+> +       .of_match       = gcc_sm8650_of_match,
 > +       .bind           = qcom_cc_bind,
 > +       .flags          = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
 > +};
 > +
 > +/* TCSRCC */
 > +
-> +static const struct gate_clk sm8550_tcsr_clks[] = {
-> +       GATE_CLK(TCSR_PCIE_0_CLKREF_EN,         0x15100, BIT(0)),
-> +       GATE_CLK(TCSR_PCIE_1_CLKREF_EN,         0x15114, BIT(0)),
-> +       GATE_CLK(TCSR_UFS_CLKREF_EN,            0x15110, BIT(0)),
-> +       GATE_CLK(TCSR_UFS_PAD_CLKREF_EN,        0x15104, BIT(0)),
-> +       GATE_CLK(TCSR_USB2_CLKREF_EN,           0x15118, BIT(0)),
-> +       GATE_CLK(TCSR_USB3_CLKREF_EN,           0x15108, BIT(0)),
+> +static const struct gate_clk sm8650_tcsr_clks[] = {
+> +       GATE_CLK(TCSR_PCIE_0_CLKREF_EN,         0x31100, BIT(0)),
+> +       GATE_CLK(TCSR_PCIE_1_CLKREF_EN,         0x31114, BIT(0)),
+> +       GATE_CLK(TCSR_UFS_CLKREF_EN,            0x31110, BIT(0)),
+> +       GATE_CLK(TCSR_UFS_PAD_CLKREF_EN,        0x31104, BIT(0)),
+> +       GATE_CLK(TCSR_USB2_CLKREF_EN,           0x31118, BIT(0)),
+> +       GATE_CLK(TCSR_USB3_CLKREF_EN,           0x31108, BIT(0)),
 > +};
 > +
-> +static struct msm_clk_data sm8550_tcsrcc_data = {
-> +       .clks = sm8550_tcsr_clks,
-> +       .num_clks = ARRAY_SIZE(sm8550_tcsr_clks),
+> +static struct msm_clk_data sm8650_tcsrcc_data = {
+> +       .clks = sm8650_tcsr_clks,
+> +       .num_clks = ARRAY_SIZE(sm8650_tcsr_clks),
 > +};
 > +
-> +static int tcsrcc_sm8550_clk_enable(struct clk *clk)
+> +static int tcsrcc_sm8650_clk_enable(struct clk *clk)
 > +{
 > +       struct msm_clk_priv *priv = dev_get_priv(clk->dev);
 > +
@@ -455,12 +442,12 @@ Ditto.
 > +       return 0;
 > +}
 > +
-> +static ulong tcsrcc_sm8550_clk_get_rate(struct clk *clk)
+> +static ulong tcsrcc_sm8650_clk_get_rate(struct clk *clk)
 > +{
 > +       return TCXO_RATE;
 > +}
 > +
-> +static int tcsrcc_sm8550_clk_probe(struct udevice *dev)
+> +static int tcsrcc_sm8650_clk_probe(struct udevice *dev)
 > +{
 > +       struct msm_clk_data *data = (struct msm_clk_data *)dev_get_driver_data(dev);
 > +       struct msm_clk_priv *priv = dev_get_priv(dev);
@@ -474,26 +461,26 @@ Ditto.
 > +       return 0;
 > +}
 > +
-> +static struct clk_ops tcsrcc_sm8550_clk_ops = {
-> +       .enable = tcsrcc_sm8550_clk_enable,
-> +       .get_rate = tcsrcc_sm8550_clk_get_rate,
+> +static struct clk_ops tcsrcc_sm8650_clk_ops = {
+> +       .enable = tcsrcc_sm8650_clk_enable,
+> +       .get_rate = tcsrcc_sm8650_clk_get_rate,
 > +};
 > +
-> +static const struct udevice_id tcsrcc_sm8550_of_match[] = {
+> +static const struct udevice_id tcsrcc_sm8650_of_match[] = {
 > +       {
-> +               .compatible = "qcom,sm8550-tcsr",
-> +               .data = (ulong)&sm8550_tcsrcc_data,
+> +               .compatible = "qcom,sm8650-tcsr",
+> +               .data = (ulong)&sm8650_tcsrcc_data,
 > +       },
 > +       { }
 > +};
 > +
-> +U_BOOT_DRIVER(tcsrcc_sm8550) = {
-> +       .name           = "tcsrcc_sm8550",
+> +U_BOOT_DRIVER(tcsrcc_sm8650) = {
+> +       .name           = "tcsrcc_sm8650",
 > +       .id             = UCLASS_CLK,
-> +       .of_match       = tcsrcc_sm8550_of_match,
-> +       .ops            = &tcsrcc_sm8550_clk_ops,
+> +       .of_match       = tcsrcc_sm8650_of_match,
+> +       .ops            = &tcsrcc_sm8650_clk_ops,
 > +       .priv_auto      = sizeof(struct msm_clk_priv),
-> +       .probe          = tcsrcc_sm8550_clk_probe,
+> +       .probe          = tcsrcc_sm8650_clk_probe,
 > +       .flags          = DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
 > +};
 >
