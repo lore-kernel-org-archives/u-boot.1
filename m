@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31867CD128A
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 17:27:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2DEFCD11C2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 17:43:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 892D087D8E;
-	Wed, 10 Apr 2024 19:27:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id BB1EF8819D;
+	Wed, 10 Apr 2024 19:43:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="MsJzrXtq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fCAehNZm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D7D5888149; Wed, 10 Apr 2024 19:27:22 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8380288180; Wed, 10 Apr 2024 19:43:19 +0200 (CEST)
+Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
+ [IPv6:2607:f8b0:4864:20::331])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D12EF87B71
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 19:27:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 69C71878A1
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 19:43:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1712770038; x=1713374838; i=xypron.glpk@gmx.de;
- bh=RG1vq/9D0F1K9Zv7FI28LYvtnM6DtCXuTmQQfGZip2E=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:
- References;
- b=MsJzrXtqJD2uxHZbkHE1Rcr5xbpsJgAc3SeGHUmT+5BXvDMTNWqLne2Q3AABIOTP
- ke/cShR5yRTkinQMpmDaRf81u6aWINkW2mpDHhJHywYsiXHFYjCrfSdljxu0+7GoV
- LyyP65hITe9C9uchOUch/Qr6KVel305gw1zsuwKrHWxFsMQ6K2WQIbKEE4qk1Ok8/
- 1ChEnlm3OAGC3KR5EUEULdf6E9hgeBjhFAhVh6XwcvvbKFhnrpiGrKaHpPeyyxIx+
- RK0bU1MOlOH9VSWDTAxUrEWGDTcpB3qtJ/nPBzcoythyhTZBLGmpWbaJeErlJnUHX
- XUcQNH4VClQ2wgVGsA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([62.143.245.32]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N1wq3-1swUoR2cUT-012IlU; Wed, 10
- Apr 2024 19:27:18 +0200
-Date: Wed, 10 Apr 2024 19:27:17 +0200
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>
-CC: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] dm: core: add support for fallback drivers
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20240410-b4-stub-drivers-v1-1-6935bd2c07d1@linaro.org>
-References: <20240410-b4-stub-drivers-v1-0-6935bd2c07d1@linaro.org>
- <20240410-b4-stub-drivers-v1-1-6935bd2c07d1@linaro.org>
-Message-ID: <1EFAA3ED-7C3B-43DA-AA0A-FC520FF16290@gmx.de>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x331.google.com with SMTP id
+ 46e09a7af769-6ea4b4d1024so161296a34.2
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 10:43:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1712770996; x=1713375796; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jYDh89+DhnWyu/+jYBAtTJ2+6O2xxMBegutxChmdlWQ=;
+ b=fCAehNZm140wvjew07o8a+Tz3EWEu0sFCx7LbqKdBxVgq1Qu2rFH8LvvsFLmXlRAf/
+ izv34nbqwe+jNdhbWyg7ckpIpd87L+0kO/ivBq4UL7v2XgaM6TzWtRjoZsLFDG36D7KE
+ heVVESetY9b2I6amEoratOQRja8LAr+PIg37k=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712770996; x=1713375796;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=jYDh89+DhnWyu/+jYBAtTJ2+6O2xxMBegutxChmdlWQ=;
+ b=EQtk8k4atmOJJEnBskwdhayoz8Cme6mOjUQZbTGdrAjR/zPl4cBHNl7ZebGj2bqyzg
+ 0iMCQBVu+4Uvj1oVS/UZiiQ4dHYSPfwZIMlsXAD+bJQ8sBlIJqQOUCcK7fV5DnsjYWpJ
+ 8JU8KUoBFVijnn/4Pfe0iq35WiCaR0vqSeja3gWFpVwI6DQ15dOez2bUCChWIAZ8dRvK
+ OQujQh4fupeT7BWz+xXRAUch5i/6JTssZvS3kNX3mBR8F1z4tVnmPIsWzcb6ZIpn132x
+ NW2J8lx+2FFoOG0MQUTyoxSFDGqtF5tAi1/2oiPIu3ule/r7j4ku4lfCSsMpG9Rod+eW
+ 64CQ==
+X-Gm-Message-State: AOJu0YxvHgsEPumu7g7jvD4rKE+7gxBiIDI54sFr36X8/Wfntx6fXs3A
+ 5ojxhB2DTmHiy2yQ/YfuSwnxR72nC50tuqYxuD3Med8sWmu7LXm7OZeRf1eyfI66PO9bKcNKz68
+ wiEhUIA==
+X-Google-Smtp-Source: AGHT+IGFpYS/fuN55XPCmpgZyMVZ+0EZOrAKz6DCc/Tb1I2UghZSLJFw2HnxUJ10pDY8xaaRFuDD1A==
+X-Received: by 2002:a05:6830:6b91:b0:6ea:1365:9fda with SMTP id
+ dd17-20020a0568306b9100b006ea13659fdamr3546489otb.30.1712770995952; 
+ Wed, 10 Apr 2024 10:43:15 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
+ vq3-20020a05620a558300b0078d6b676b9csm2308177qkn.17.2024.04.10.10.43.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 10 Apr 2024 10:43:15 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, 
+ =?utf-8?q?Pierre-Cl=C3=A9ment_Tosi?= <ptosi@google.com>
+Cc: Marc Zyngier <maz@kernel.org>, Fabio Estevam <festevam@gmail.com>
+In-Reply-To: <43haokus4jdxguk4arig5tsqcgq2wbezwpbj7oti6pdkvrfual@wa7vz2iypcv5>
+References: <43haokus4jdxguk4arig5tsqcgq2wbezwpbj7oti6pdkvrfual@wa7vz2iypcv5>
+Subject: Re: [PATCH] arm64: Fix map_range() not splitting mapped blocks
+Message-Id: <171277099498.98421.4154709400340682931.b4-ty@konsulko.com>
+Date: Wed, 10 Apr 2024 11:43:14 -0600
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:psZBGLp1/T5hTtJ4yuSs533IxSN3ccXhm89f/AtWa2GxZVRSxGF
- ijZs9ruNzctvgV+GOtxQIEz2cTbUd502yx6ExK2BLxtceEq2KOKSsnB2rJvu9abSjFxV8E0
- FRqPHVkuQ0pKXqD5cHERz6hsUw0Ckd608kTW6vkMh+SrqY2K3BjYRKom5kw2huAfYYJnHr5
- R2yj21+GGubGos5OAIqjA==
-UI-OutboundReport: notjunk:1;M01:P0:EquyjtwI/mU=;xHPikNAmb0EeZq96iVemOS90MUE
- vZx3q55YPNL/YlzFJBTmf7cSIWq/Y6uVztcS6zB8q0UWs0GuNU1MJoRPS7a17uCBFHIwbfLob
- cWtZimZ8EzGGC4niM9Er0oU66TbTrQFGJVSzMgeJwX3eMVs/++rSaYdUvebKjJv9GG5Gvvbij
- NAsGaSbcfqvDT9oNTVpRrT2zDllmYECu96nrUkYO+EzwWOuTnpCelY3D2CrmHBNiCk3wX3P9p
- IFAwWg9HbMiQYAG3lyLkgMomcb5vSqxz8nykR2+ZZrxChI+HjaCfltCCP80efcMqfquq59Jno
- gpFnXlZB4vQiBXGKkZXhaTrFCAD7QslRqEp3BySSPDLk7zc9cw3oI+tA6PBYpqt3+3iMoXPsd
- pZc07vh3mWrZLQTB+TvB32PbK1vw/XwSDgK0v1ZrFpKv5UH88yyfpevkzkII/v20UlpNSPIO0
- 0QbKAK9944xNaz/WMHLzIqD88CSfpELXKDgUUO4Hy6cQu72pyzdJeHjEuU4WvsLpMtbyxOhOj
- EflYDXER2d3lFxrlBcnfuksUwgqHg42q7cqdJWV7uaSXbkix7ykWx9SphXonUY4YQ0orwx4Yk
- b79PvFv2eA6V0pWh0YBMg9tOB5gmSZuj1KS4aPCxEKcxf2BVpogWE8ESaqPBGfIo6Gk/RpSdL
- a2mbKNHdbX8GUkkpvHa/7Np2U2O12un3j4Q7PU60wWmGPPqM95sINB7c48qGW87i84H31kbNh
- HiH0lgU9LUIG/QMzKlTfX/Flf1+o2k3JxSN/reiR0xS3A13SJuTJWV6gzlp/GT2lU383/L4IE
- bjFY0Z95eICX2HktWGhPYtXHndAtMvWJWSj+zoZNYCyTo=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,132 +90,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Mon, 18 Mar 2024 19:35:49 +0000, Pierre-Clément Tosi wrote:
+
+> The implementation of map_range() creates the requested mapping by
+> walking the page tables, iterating over multiple PTEs and/or descending
+> into existing table mappings as needed. When doing so, it assumes any
+> pre-existing valid PTE to be a table mapping. This assumption is wrong
+> if the platform code attempts to successively map two overlapping ranges
+> where the latter intersects a block mapping created for the former.
+> 
+> [...]
+
+Applied to u-boot/master, thanks!
+
+-- 
+Tom
 
 
-Am 10=2E April 2024 19:06:57 MESZ schrieb Caleb Connolly <caleb=2Econnolly=
-@linaro=2Eorg>:
->Introduce support for a uclass to provide a fallback/stub driver which
->can be used when no device is found for a given node=2E This might be
->useful for handling non-essential clock controllers like the RPMh on
->Qualcomm platforms, or during early bringup to get UART output before a
->real clock driver has been created=2E
->
->Signed-off-by: Caleb Connolly <caleb=2Econnolly@linaro=2Eorg>
->---
-> drivers/core/Kconfig  | 10 ++++++++++
-> drivers/core/uclass=2Ec | 24 +++++++++++++++++++++++-
-> include/dm/uclass=2Eh   |  3 +++
-> 3 files changed, 36 insertions(+), 1 deletion(-)
->
->diff --git a/drivers/core/Kconfig b/drivers/core/Kconfig
->index 1081d61fcf01=2E=2E09075b9b7a15 100644
->--- a/drivers/core/Kconfig
->+++ b/drivers/core/Kconfig
->@@ -466,5 +466,15 @@ config BOUNCE_BUFFER
->=20
-> 	  A second possible use of bounce buffers is their ability to
-> 	  provide aligned buffers for DMA operations=2E
->=20
->+menuconfig FALLBACK_DRIVERS
-
-Wouldn't it be preferable to mark individual drivers as fallback drivers i=
-n their declaration?
-
-This would allow alternative fallback drivers and would not require any de=
-finitions at uclass level=2E
-
-Just by building a fallback driver you would enable the fallback behavior =
-for its uclass=2E
-
-Best regards
-
-Heinrich
-
->+	bool "Enable per-uclass fallback drivers"
->+	depends on DM
->+	help
->+	  If a driver requests a resource (like a clock) from a node which
->+	  isn't bound to a driver, the driver model will look for a fallback
->+	  driver to "stub" the resource=2E These stubs usually do nothing and
->+	  are therefore only suitable in instances where the resource is not
->+	  required=2E
->+
-> endmenu
->diff --git a/drivers/core/uclass=2Ec b/drivers/core/uclass=2Ec
->index e46d5717aa62=2E=2E91d3a48d77b8 100644
->--- a/drivers/core/uclass=2Ec
->+++ b/drivers/core/uclass=2Ec
->@@ -378,8 +378,26 @@ int uclass_find_device_by_of_offset(enum uclass_id i=
-d, int node,
->=20
-> 	return -ENODEV;
-> }
->=20
->+static int uclass_bind_fallback(struct uclass *uc, ofnode node, struct u=
-device **devp)
->+{
->+	struct driver *drv;
->+
->+	log(LOGC_DM, LOGL_ERR, "   - binding fallback '%s' driver '%s'\n",
->+	    uc->uc_drv->name, uc->uc_drv->fallback_drv_name);
->+
->+	drv =3D lists_driver_lookup_name(uc->uc_drv->fallback_drv_name);
->+	if (!drv) {
->+		log(LOGC_DM, LOGL_DEBUG, "   - Can't find stub driver '%s' for uclass =
-'%s'\n",
->+		    uc->uc_drv->fallback_drv_name, uc->uc_drv->name);
->+		return -ENOENT;
->+	}
->+
->+	return device_bind_with_driver_data(gd->dm_root, drv,
->+					  ofnode_get_name(node), 0, node, devp);
->+}
->+
-> int uclass_find_device_by_ofnode(enum uclass_id id, ofnode node,
-> 				 struct udevice **devp)
-> {
-> 	struct uclass *uc;
->@@ -401,9 +419,13 @@ int uclass_find_device_by_ofnode(enum uclass_id id, =
-ofnode node,
-> 			*devp =3D dev;
-> 			goto done;
-> 		}
-> 	}
->-	ret =3D -ENODEV;
->+
->+	if (CONFIG_IS_ENABLED(FALLBACK_DRIVERS) && uc->uc_drv->fallback_drv_nam=
-e)
->+		ret =3D uclass_bind_fallback(uc, node, devp);
->+	else
->+		ret =3D -ENODEV;
->=20
-> done:
-> 	log(LOGC_DM, LOGL_DEBUG, "   - result for %s: %s (ret=3D%d)\n",
-> 	    ofnode_get_name(node), *devp ? (*devp)->name : "(none)", ret);
->diff --git a/include/dm/uclass=2Eh b/include/dm/uclass=2Eh
->index 456eef7f2f31=2E=2Eb99e36485bc5 100644
->--- a/include/dm/uclass=2Eh
->+++ b/include/dm/uclass=2Eh
->@@ -67,8 +67,10 @@ struct udevice;
->  * @child_pre_probe: Called before a child in this uclass is probed
->  * @child_post_probe: Called after a child in this uclass is probed
->  * @init: Called to set up the uclass
->  * @destroy: Called to destroy the uclass
->+ * @stub_drv_name: Name of a stub driver to use for devices that are not
->+ * supported by any other driver=2E
->  * @priv_auto: If non-zero this is the size of the private data
->  * to be allocated in the uclass's ->priv pointer=2E If zero, then the u=
-class
->  * driver is responsible for allocating any data required=2E
->  * @per_device_auto: Each device can hold private data owned
->@@ -98,8 +100,9 @@ struct uclass_driver {
-> 	int (*child_pre_probe)(struct udevice *dev);
-> 	int (*child_post_probe)(struct udevice *dev);
-> 	int (*init)(struct uclass *class);
-> 	int (*destroy)(struct uclass *class);
->+	const char *fallback_drv_name;
-> 	int priv_auto;
-> 	int per_device_auto;
-> 	int per_device_plat_auto;
-> 	int per_child_auto;
->
