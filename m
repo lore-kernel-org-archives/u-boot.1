@@ -4,59 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BAEBFCD11C2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 06:12:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99A5ACD11C2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 06:16:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C8AD087C40;
-	Wed, 10 Apr 2024 08:12:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 019EE87861;
+	Wed, 10 Apr 2024 08:16:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="LRIXFcxn";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="N9m0whbT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1347387C40; Wed, 10 Apr 2024 08:12:37 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20711.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::711])
+ id 68E6087916; Wed, 10 Apr 2024 08:16:03 +0200 (CEST)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20700.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::700])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3DE888166
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 08:12:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 16FD78758B
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 08:16:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=IlKNGc/+hsLTNLJbAIfP3CCHC2SFKSH5s+sgCsoEIDjGb0BWmzjSlGcLyTOSmFQPUqW7WO24TlvC6HufsnjMljaGBMTguyKtGRpQQ7sXA7hXyXuLivG94uIjTEpd9wN+B5aaAalMYYlH+W/JcnrAp7SniZLy/s/jX8BSZum6Dw4/oZ9oIzmJKX8JBmXAG/pJm0bCPE/5PIzfJyMQWOGWm1zASy/v1QteERy9JyXcfU3yRxsweMplpBGC/8NwJwjhrRlY7VqtKGd9YdPqXX0CXzIaImdNeyrxc5Slc7fWnihiH00nZjqByT1SbxkUdZQMZ2Bn8knme2JrAkYTzAkW4A==
+ b=CA3PfitDZv27D+DmMI8xwjg9FFtp7iduydRBMcf3DcMgb1SAbJ7gvRrw2NehYimGS+lPWEpdssIbmcKQvxUIR8YdIg+tbWnS1em8AubEPewXYXleXcziM91x+sI6iIyoPKP6chaTAmxMZKI/9miJFjm5Xyqse8N5rXlYJAZNzE9eNr3N2cw1z/CR5DZiu+heO9LPokUHrAygvmKFUDBVAsTY+1tHw/esT4axUk4Wh8P5Kvfp1bbaJELgO7N0+G6wfD6FQ3gVzI0cdK3s6p7GyPPbnGo5HpupD75XrsuNffVQTpxp1f5muluin/ZmroiyYPAAe/6G/1ooGT+eXN8JqA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=BGI+fU0DIllN6aDNS/JCOiAbupMUNgOh7R/szVj/Zv4=;
- b=CvIDwBq+xMviW0pByfvs90+7ooLEANaP+K50gRqxz2kAipTIF4/dTDei8IV3PpuoAWiHvlhKhOSoiEEsLNzfZB6dsl/DLdm/s/gKx6+AMMVtRFmuXHxEGYTHc3n+HgyBr9bdVYh0fdmmv3mU2FW63lE5elDMOYBrANpsZZADGcbSWnmxH51QELOY2Klw7g2R/B8SoqTlpB1h/4OYmpG+xYy69rdbRznOociQG7tyg/VPiJwIbqGlZoiOE7PEp2XoYv7DhaoCCR1ULKfdtsB95CrwkazqN37cLcRz3OIByMmv1x8ni5nC6olV0l0OPd0HYeajrVC+JtFJEZL9SElzjg==
+ bh=w2zwPLePfWXmNO9echQhzIfMkEF128ZAfx3G7ExnBlM=;
+ b=Yx5bAxI0ff4i4iL7+Ex/dE0leYuviyvYzS70+lpP5ajJAdOxcRjfxYSlPnj8PlaKt8Qf9QQs+bbQ2XnnGIE6lXjes08Oy/8t1+ZTg3sHseaIrLKMHkN7gtholYOT6/tcAtkDZgSaRCESSCmnAlazVDe6/yOhQYdKgqPskgeZf6EtTkcWNC9pfk85M7ZcFFJfsQPWr2yqFhwcxVKeYqJG33qjMkV/9HCbI+ui/db8CtcfR/wGBKh4eMvFgZFPMz4PhGnc/TIlTXCQn3JPyYYcEpqV3Gq1lSigC+5Mv2xP2pMjOc0AVzNQu+ddsBlePOXPN+DPkEpjFXFYIRAYubMsjA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=BGI+fU0DIllN6aDNS/JCOiAbupMUNgOh7R/szVj/Zv4=;
- b=LRIXFcxnZ32XvwS3ciSb50/fxictSNqVrT9l0aWCYRHLNaL8nuO7PwEiUKKH9gl32uwWPV5OF+oMyyP1CisbQpPbJiiESccYCcqeEzb18O55uuPI33uwH/bQKHOJcEFP0wJKEsQKSh9Pj3/t1WxstWSC/WtBoVHXlz2ZSi9WgTU=
+ bh=w2zwPLePfWXmNO9echQhzIfMkEF128ZAfx3G7ExnBlM=;
+ b=N9m0whbT83W2QX2CyTj2oUP04DPNDdJ8pARKON1LGn+b76hACXWapZYDbbB7BMs9DDiDXyQBzq2uSEwqdel2kmJl93b0Y/HXuBYG249+dRgdEhNJdAJ3d84mrziF2ZBjw68/TRHGewISElQ7vMEr21KJAL3Bwar6NERRs3ouINY=
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by DM6PR12MB4481.namprd12.prod.outlook.com (2603:10b6:5:2af::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.55; Wed, 10 Apr
- 2024 06:12:31 +0000
+ by SN7PR12MB8003.namprd12.prod.outlook.com (2603:10b6:806:32a::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Wed, 10 Apr
+ 2024 06:15:58 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::6622:ec76:9367:3907]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::6622:ec76:9367:3907%2]) with mapi id 15.20.7409.046; Wed, 10 Apr 2024
- 06:12:31 +0000
-Message-ID: <164ee02a-101a-438b-bd25-4ca8acbec6ce@amd.com>
-Date: Wed, 10 Apr 2024 08:12:19 +0200
+ 06:15:58 +0000
+Message-ID: <7b1bae99-0e2d-4b78-8463-5192153525a4@amd.com>
+Date: Wed, 10 Apr 2024 08:15:47 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] configs: zynqmp_kria: Deactivate CONFIG_SPI_FLASH_BAR
-To: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, u-boot@lists.denx.de
-Cc: trini@konsulko.com, venkatesh.abbarapu@amd.com, git@amd.com
-References: <20240409094826.4131643-1-tejas.arvind.bhumkar@amd.com>
+Subject: Re: [PATCH 1/2] board: zynqmp: Move zynqmp commands from board/ to
+ cmd/
+To: Charlie Johnston <charlie.johnston@loftorbital.com>, u-boot@lists.denx.de
+References: <20240408201313.10183-1-charlie.johnston@loftorbital.com>
+ <20240408201313.10183-2-charlie.johnston@loftorbital.com>
 Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
@@ -103,70 +104,69 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20240409094826.4131643-1-tejas.arvind.bhumkar@amd.com>
+In-Reply-To: <20240408201313.10183-2-charlie.johnston@loftorbital.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR06CA0155.eurprd06.prod.outlook.com
- (2603:10a6:803:a0::48) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: VI1PR07CA0290.eurprd07.prod.outlook.com
+ (2603:10a6:800:130::18) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DM6PR12MB4481:EE_
-X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SN7PR12MB8003:EE_
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: dgzOO4dGlNpW7KQmRXqF0gKCj+PH4z92ORBrDmNfvtvbJ/VHwJkNXNnb6eLYhNqmZEtoN6NhclzKDpNNvcxcsfLoUbSmlqzoh95Twn3lF3RaFMuZFwOFzPtqz/h5aip35KibvmZS3OMutDNO+qo7y0xuptUoJm6y4HVVRh5TvelOMML4koSoIvHBCxl66EKQX5l/+hhza4COaTAJqgjTvyCku9mNwh4d6fNKVaZ1UbHipDbsIMkmhFbgN46+3Cds1OFp6RdA/rxInZzmB2cpa4SCfyjdavCdD1+dvrJGQLpjVgieQooy2hcjnbuAH2a68kAfeIoRZf6+wOoXAQGsx84CfAejsK6WlHBW9TVpLXlIzc3RBSCHVePNF59o9VrTv6QFGyJhA6PrxRFxM4slpIcf17yvGOzp30kjyObhJ74TzJwCtqV8WhLcjx89YcWZTI2pCuuSmlgs6OL2AKWCbXdfb/I7jzGfHN7zjd6F0HbNeEYx2wBseZSA7w1Nq9RaxjxdKmT+aT2dh105efIU/wDHrgp1ubU73tuN0Rwyh1SbzWD3sPjpcm/Xhv2POvzwLVpgtud52/nJNMIHQZcOdq9MoiWXA+JAQE7QGEDCkYvcpMfRGJVBAXQIxMIrHG7tCHs0M0vt8Z5bE8IufJ3V6vnE3SXvUDnpVzHbG7Pyfqg=
+X-Microsoft-Antispam-Message-Info: qXJFoFY9tCfQ+nFwdWX5gBfwo06uYlbkIt3vqBXzj5qYoqklRrYdUHH4hFq/eUWBDxTu25qI9wQ0B7X3SK0k9+N4+JFkRmmBd63jCQlHu+euxFgVgiAVVpZQJYPGriHRvI70oyx1gHR9jXI5YvIz/plqOQt+b/y1+rzJIVvnxCubXlhAirbXWPxguHYk9F2qcmvyy+2yc6cQ4sIzxMobqN9LlMwhW161ruvxP/DbkUKPoTHMx35wQuVU7xxm90/nIW9jDDySGu9Or0BGF5V47q9PkTS99qAnpT4vzOTa+dtS0F+8zRLd6qD+OT/StozLl2iJ3/tL5rMSUmxuKmybeepOG2sWfGinOyjocxrMmgNPgbLLvkOULAjCxYxPo67251x5h+pBwFMoCF+DpkUAHRssJtPLwVfjdt9NYmDdEi9+zZpGdJGxTWdJwl1tNjCxTOjBPuCZ8tus+coDy18ATqF5RplAIekTQBsGczs6Gb5XYHZjn4H3Z9MmelLuyL4+ZWAvtP6whzkSuZMfSbm/8NdX/gL4vsbaYx3wTo1/rAAtfgAoXRbg7xjn+hLJLZbd/+3P30v431V5BhLkOfYheh7rNxGEF37KYeEqZW5DESvroCPJSAyxATqRmHuazURjUpjXfNK4BzmUs2kWClmtqlYGVoqH7KIWARB9w3NHwz0=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230031)(376005)(1800799015)(366007); DIR:OUT; SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QjFwMU5qRVdOTE9YS1ovc2ZwVlBLK1pVWUtMdWZQckVxbEkzdjZDQ1lDNGRB?=
- =?utf-8?B?UGdEYzdISWpYVjFZTTI3M3BpMWpWL29MSEdJaWhoNURiRjZ4YkdTbFc1c2ha?=
- =?utf-8?B?WFgrZmVNcXZrRHhMS25QZWN0VFY3VjFCdldJSmlLYzNYc1FOemUxZStMNFo0?=
- =?utf-8?B?Uzl0bzF2cTlCRlZCbEN3VXl6eTc1aVdUZDZkYVJ3ZnNaMVJiaGdXeW1ZQmt0?=
- =?utf-8?B?UlJBQnJBZjdtSEtFeXFtbUJZMk1DRjhrUUVGa21mWjB6Ym4wMWUySnFCdDFL?=
- =?utf-8?B?cFZ5cXQ2b2hublVJS1lvbUtZK0p1Uk5wdjB5Nnk1TGh5M0h6VUZjNjNIWVJT?=
- =?utf-8?B?TDVLL0U2dUhnYW1FNWl2cys1R09SMlNteUkzRzRzL3ZJbTNLbXM3cVA4anFh?=
- =?utf-8?B?ek5EUEIzUjJVT0k1Wkc3WXloQmt1QS9LUTNqMnQwWFdzTEV1UGRoVzJrTFdS?=
- =?utf-8?B?MWVLWjhSWTBtZXptbkNBenZOR1BQZDdqMzIzaksxZW5GdE5Zb0trS0gzeHpm?=
- =?utf-8?B?V2hnT3h6QmhTVzRybnpsNTVwTHlsV2kreG9yS0FRVkJDZitPZWg0ZEFFQysw?=
- =?utf-8?B?MnZia3MyY2UrVlRHdnNKZ1BPS3FTZmF0a0ZHSHRwSWZTUHhuNHZlVzkrY2t2?=
- =?utf-8?B?cTN4S1A1dkQ1MTlGelpieHE2UEZWdjNSMXFTUFY4c1RYQVFmaFY1ZHlpOERM?=
- =?utf-8?B?YkNCQW9HcmRmMUJYa0hmRG01VU5QVnVseTFVOHlrdnEyb0M1dzVXTGd2TFpR?=
- =?utf-8?B?VHZhMTlmSldRbDNtWVljd2hVSjh1dHNVcDZ4azBQeEJtbzZ4T2t0SmFkNkFJ?=
- =?utf-8?B?VWJ2N25qeWlGckNsMTdrYWJsbk85cENScHVGemZQeThkTVpxbk9xcVd1TTJR?=
- =?utf-8?B?SmdtYk9UcnVLTURRUUNJdXg0TWxyMHQ4ZXpWMklxaWI5OHBPeGhac3JDbzcw?=
- =?utf-8?B?UkZTV0luSEhDWjV5b0hIeEZ2Y2Fnd09FYitTR3RxZllYbHBsR3ZoaWpSVURS?=
- =?utf-8?B?b2NoejVjZXBObUhzSGhvSmZGMlAycHlkVnp4R2dyN05MY1J5UjFjcE5aemp5?=
- =?utf-8?B?RHFUR1lTdUljK014bDlMWThxNEtJUkNjb3BmZFc5ZEQ1L1NiYmFqeE1mRkI2?=
- =?utf-8?B?NENxS0NyMTRTSTl3SXlHZ0ZrOUdlZUMvTDMzOXV2bGtJMU00K2Y1QlREcTZT?=
- =?utf-8?B?cldKTTlXSUF0azA5ZmttM3grQzZ3Q002NG0zYm5aL0lxMWZhQ3JDcjl4MXdB?=
- =?utf-8?B?VC9RS3VMNUNJbVBGNDh0ZnduWnZMS2laWDltRm9kZm8xM2QvQW5KWkt5VU13?=
- =?utf-8?B?bkdmV3BTa1VGWE1qWFVkQmoyR0pDQU9tQ1NWU096TC80QjhzMFZ0akFQOUIr?=
- =?utf-8?B?dTNVdnNpaU50bHlFSnNIdWtRS1AwanN5SmhYeG1NQytLSWZsYmVPUVdYWGhu?=
- =?utf-8?B?SXR2MlE2NURhMGpyTUFrMnZ0bnZ2VzhXRTdzU1AzVzBMWTlEdmR0T0VQcEZo?=
- =?utf-8?B?VER1bXFLNHlmUGQzOUZaZjNWdmh2UDBIbVpsYzFCenZzeTZzWUpobmZLa08y?=
- =?utf-8?B?WXp3NkNTU2lXaTNDV0dUdlYyMWJUQ1ZoNFNEWEYyMDRKbU4rUWVVSXRUNVFq?=
- =?utf-8?B?NytwR3VQQ0xNMHJuMHNtN1FnR1pOdmZEd1pBLzJVLys1VHJPYXBxVHRaN0VR?=
- =?utf-8?B?YkFDUThtdXBJemVYcFRWL2pIVkp2OEMrencvQlFZVGxzam1VRHdQT0lQRSt1?=
- =?utf-8?B?R0RhdHhzdldoTW9kU2pBdWtrSm9GbHJ2cUtYRDVmWmFlLzBjYmsxNThEd2c5?=
- =?utf-8?B?Ymp1QkYvbXR6YWhONkFPRUptTTV0b3pwOEZsaHZOdEVzcHRNQ0lBZ0luK0p6?=
- =?utf-8?B?V29iUW9sQ2grWWs2eCs5cldSV25WUFdXQlRlZEFXbVRtWld5Z1dFSHBtV0NW?=
- =?utf-8?B?Y0dGU2VQQlF2Z1NwZkFEUnhDVkltSjh3bFlYTnppRUNDcndJcGNJMktpNHFX?=
- =?utf-8?B?QjFtekVpVG9HZ2FiRnpqd2FuTmR3Wk8zMmNiUzdyZ0lZMEkrYTRzN29kcW5w?=
- =?utf-8?B?ZndPdm1SR01FWEpLMVJGd2xvVkhaY1NrVEsvNGNFeFkzcHBUdTM4OXhQZUFX?=
- =?utf-8?Q?yLHwx5bvQ/XP50ssMAokzRzui?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QTI2elRoSzR2UGlXMitSZzdtREU2TTg0c0pIWGNLSzZGR0VDMExMMGVTWTVv?=
+ =?utf-8?B?TnIwWHdsZnNVakwvSzBRYmxxMER3cmNvRURMV2Z6bDJMQUxGU1BjUXRoZ1Jq?=
+ =?utf-8?B?L0xuV0RFYUtmTE1ZN005VUNsd1FvMFUyVWNzaWpjQVY3WjI2dk94bEdyVHgx?=
+ =?utf-8?B?bldiVFpQMTJTbHhkdjh4VElkZ2hLd2NIaS9rRVgzeHJGVExIVXJkaVZNb3oz?=
+ =?utf-8?B?Q0dpcXhsWFVrZVhTdTlTN01NdWZpSDFvQUtkVXlrZ2pNOUhUWFNCNHJreVFX?=
+ =?utf-8?B?ZFRtY0lMQTFIemthejBhbXprTERCT1NFYTdSNm16THFsSHBuUXhSeHlRclY5?=
+ =?utf-8?B?Zkg5NEZJaEQvYVhxOEhHeTFBSkllYkNReSsyTnNNOTJ0NXZES3hGcHhSL0l2?=
+ =?utf-8?B?bVZHQmU4VUJpaklyZlRvM3dBYW01MmhwaVBaQ010clR0UE9oMXNkcGREN3B4?=
+ =?utf-8?B?ZE0vd3Jla3V2R0V3akYwdUVwaHVnM05Db2QwM2ExVjBTaGZVQTF0TDV1anY0?=
+ =?utf-8?B?U2FGcWhHK3ZhbTdSOTkxTS9kenBHQ3hiaHovenBScEU0Vmp5MmtqRTJYNUF3?=
+ =?utf-8?B?Q1YvREJ0N0lHdTZZaXVWbmJhcll4VEVVRVVWS3hvN0RGeWhzM041djRjV2hM?=
+ =?utf-8?B?R21rdm5NMFBzdTltUmhPNDJrcG4wSTFKYXRXTHVSdnl6cU9NcmZmMzFidHk0?=
+ =?utf-8?B?dEJ2SHVCb09wTTRhd0ZGQ2pOS0M2M2NRd3NaQmhsSkVFVHRtTFI3S1NUdC9D?=
+ =?utf-8?B?MnNSNC81MENHY1hlaXE3YnBDNXFQMDlpcjdCWS9ZYWVibytZL0VGOXNLR2tL?=
+ =?utf-8?B?UG5KU3Q3cldVR292WGVNSDBPeGo2WVBuWlhkYWxlQ3Q0TFdWTVFEL0hJNnlh?=
+ =?utf-8?B?TWkvNzA5WEJpWFdNaTJ5S3ZtSk03elh2M3JoTUwwUUtUWlpwR1QrcktFdWNB?=
+ =?utf-8?B?TnlhdnRMZGhjUGtOeHdQWXUxZkRZOGNUbXZ6VVFDMFc2S2Uwc1BzSEUzSDBm?=
+ =?utf-8?B?UGlWMllldXhtQ1BLRmg5RUJYYkdyWkxpbVhxN1Z4eVhYWkkybnc3SVMwYTFV?=
+ =?utf-8?B?eHJmdWE1eThpS09INzZSRm10bGE5dTRnUk1pOVNCQjRaT0VoM1dGTm1EN0Ni?=
+ =?utf-8?B?VW93YVJhelhqbzY0K2RxMy96SmUwMExjYmZEM2psSkd3dEdaazA0NXB6cklS?=
+ =?utf-8?B?djd6RlFmemF4MzlUSzFFWWl2N2xHdWQwRWEwek9yQ2ZVUjU4dk1mVFNSNFlk?=
+ =?utf-8?B?WE9EZVpROWl4dkNrL2sxeURrZi9XYnRlQlJpRGxFNllxVXRnN2hWNzFBWjk5?=
+ =?utf-8?B?Wmk4YzBCQWF6ZkNEdDNrc0hMT1ZYU2tOME9zR1Y1SlRYN2pIV25zWnRodVVF?=
+ =?utf-8?B?bGxKUkx6NVFIRU8zaHVBN0JDa0pDU3VOSW10dXpxOGo4VmUwMmpTOG9xZlVa?=
+ =?utf-8?B?QUx5T2xUY2MwMUpheEFodlVzNGZNK0cxY01CQXJwbzVhSjFXallBTGlhRmFN?=
+ =?utf-8?B?bnVuSkk4QWJSMis0OVFqMk5oWm5DdFJhclpqYTQwL3pUUVZKRENuRVBEY0tj?=
+ =?utf-8?B?WSs1T0xEWlBjRUZqa3BBeGhtTlBTSmlldzNPZzVDQjQ0OWZsbVRua1JIMkFP?=
+ =?utf-8?B?ZEtzN2VpcVRSOW8rRm5KRHh3Rkc4bHdnMXNxTjBoMkhnOXNCOVVRZGJweWZ0?=
+ =?utf-8?B?SUdObWs3WHFUM3FvVnM5K0lTYk5tTUxmanovOG9pL3pma3phbGExTWp1eklJ?=
+ =?utf-8?B?R0NRQUVaaUY5bk9VRXJlVU1RTjZSZXIwL2F5djZzR2pFenQ4clo1T3ROeU1v?=
+ =?utf-8?B?SXNVZ1pta3NWdTk5R2tGajBOdU5SRTBSbis2T3FCVkJVSzNURFZKcGh3N3Nh?=
+ =?utf-8?B?ZWtBWUZsZGljaWpmK0NPbVBWc1kvMkZQdzU1c1VtN3N6eDNyRWRIYzM3RVZC?=
+ =?utf-8?B?OUdwbEM4WEttWE8rdCthL29rcU5xY3lYZmdNMnhybjlYU2FSdjV2dWJrTmhF?=
+ =?utf-8?B?VTlzdklZM05mWkVvNEYwQktuOHNaSlZvTUY4YnFUMitMcVRkYUhyODZNRmN4?=
+ =?utf-8?B?Sk1uOTVFcUhLbllaYkF1MVNBT3VZYkdDYllJVkpLaFFETmhvSjk0N1NrY3Bs?=
+ =?utf-8?Q?eXobiqJHVPU2E8DYRoydDwebw?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 82361ad1-e8a7-4959-2d8b-08dc592534eb
+X-MS-Exchange-CrossTenant-Network-Message-Id: 724197d1-dd34-4309-57fc-08dc5925afde
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2024 06:12:31.7139 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2024 06:15:58.1394 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1BtF2x9SornUV48nfweOOCVOYqkw1I+ymEm2J9U6D894mFtGJgD3R34ebFFeVnCG
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4481
+X-MS-Exchange-CrossTenant-UserPrincipalName: GPZHkuWjClLXZOuGV0N0vHKtEcdPd3jJexAaHlHLSSlCnGVbwWt8ugC0LAVpzqJU
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8003
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -185,36 +185,62 @@ X-Virus-Status: Clean
 
 
 
-On 4/9/24 11:48, Tejas Bhumkar wrote:
-> The Kria board features a recovery application that activates
-> when the FW_EN button is pressed.
-> Upon power-up flash operates in 3B mode, However, the recovery
-> application changes it back to 4B mode.
-> Currently, after a reset, u-boot activates CONFIG_SPI_FLASH_BAR
-> and assumes the flash is in 3B mode. However, there's no code
-> or reset lines connected to the flash that could return it to
-> 3B mode. To resolve this issue, changes were made to disable
-> CONFIG_SPI_FLASH_BAR, which activates 4-byte opcodes.
+On 4/8/24 22:13, Charlie Johnston wrote:
+> The zynqmp cmds.c is currently tied to the board but the commands
+> contained within are more closely tied to the architecture. To
+> allow usage of those commands when the architecture is ZynqMP but
+> the board is not, this change moves the cmds into the cmd/ tree
+> instead of the board tree that would only be included if the board
+> were also a ZynqMP predefined board.
 > 
-> Signed-off-by: Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>
+> Signed-off-by: Charlie Johnston <charlie.johnston@loftorbital.com>
 > ---
-> Changes in v2: Updated commit message.
+>   board/xilinx/zynqmp/Makefile               | 4 ----
+>   cmd/Makefile                               | 3 +++
+>   board/xilinx/zynqmp/cmds.c => cmd/zynqmp.c | 0
+>   3 files changed, 3 insertions(+), 4 deletions(-)
+>   rename board/xilinx/zynqmp/cmds.c => cmd/zynqmp.c (100%)
 > 
->   configs/xilinx_zynqmp_kria_defconfig | 1 -
->   1 file changed, 1 deletion(-)
-> 
-> diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
-> index 7cb8b62d32..7af8b27be9 100644
-> --- a/configs/xilinx_zynqmp_kria_defconfig
-> +++ b/configs/xilinx_zynqmp_kria_defconfig
-> @@ -155,7 +155,6 @@ CONFIG_MMC_HS200_SUPPORT=y
->   CONFIG_MMC_SDHCI=y
->   CONFIG_MMC_SDHCI_ZYNQ=y
->   CONFIG_DM_MTD=y
-> -CONFIG_SPI_FLASH_BAR=y
->   CONFIG_SPI_FLASH_STMICRO=y
->   # CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
->   CONFIG_SPI_FLASH_MTD=y
+> diff --git a/board/xilinx/zynqmp/Makefile b/board/xilinx/zynqmp/Makefile
+> index 204e4fadf0..9ab50eca40 100644
+> --- a/board/xilinx/zynqmp/Makefile
+> +++ b/board/xilinx/zynqmp/Makefile
+> @@ -40,10 +40,6 @@ $(obj)/pm_cfg_obj.o: $(shell cd $(srctree); readlink -f $(CONFIG_ZYNQMP_SPL_PM_C
+>   endif
+>   endif
+>   
+> -ifndef CONFIG_SPL_BUILD
+> -obj-$(CONFIG_CMD_ZYNQMP) += cmds.o
+> -endif
+> -
+>   # Suppress "warning: function declaration isn't a prototype"
+>   CFLAGS_REMOVE_psu_init_gpl.o := -Wstrict-prototypes
+>   
+> diff --git a/cmd/Makefile b/cmd/Makefile
+> index 87133cc27a..7afb1c9a7c 100644
+> --- a/cmd/Makefile
+> +++ b/cmd/Makefile
+> @@ -232,6 +232,9 @@ obj-$(CONFIG_CMD_SCP03) += scp03.o
+>   
+>   obj-$(CONFIG_HUSH_SELECTABLE) += cli.o
+>   
+> +# ZynqMP
+> +obj-$(CONFIG_CMD_ZYNQMP) += zynqmp.o
+> +
+>   obj-$(CONFIG_ARM) += arm/
+>   obj-$(CONFIG_RISCV) += riscv/
+>   obj-$(CONFIG_SANDBOX) += sandbox/
+> diff --git a/board/xilinx/zynqmp/cmds.c b/cmd/zynqmp.c
+> similarity index 100%
+> rename from board/xilinx/zynqmp/cmds.c
+> rename to cmd/zynqmp.c
 
-Applied.
-M
+I have no problem of moving these commands to architecture and when I grep
+git grep U_BOOT_CMD I see that commands are defined inside arch/arm/mach-* folders.
+That's why I would prefer to move it there instead of cmd/ which is supposed to 
+be used for generic command not really soc specific.
+
+Also please squash both patches together and do it via single one.
+
+Thanks,
+Michal
