@@ -4,131 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97FE2CD11C2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 12:02:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80807CD11C2
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 12:09:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B95E688122;
-	Wed, 10 Apr 2024 14:02:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
+	by phobos.denx.de (Postfix) with ESMTP id 976DD8272A;
+	Wed, 10 Apr 2024 14:09:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="auIXQ5xt";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="fLioGwEr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B646787C40; Wed, 10 Apr 2024 14:02:29 +0200 (CEST)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20701.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::701])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DDC6B88176; Wed, 10 Apr 2024 14:09:47 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 241A888122
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 14:02:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=theobroma-systems.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=quentin.schulz@theobroma-systems.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=fLqAYGH39xeOqUtGv+pfo3dffgJgSdyZve9koM+DLkuYHSWJpaLz4zITk9/CN94+1ZneBMX9quiDgmLM98wGIhAiJf85kVplW/A/RVlAQUm5F3jmLsRLAOwWzS/lv//AsU/o9TFdkDLg//LK4lziRlmYUzG3TOSxuBAL1WN/kkiMHjaYpsC2UuyHxw5ySvpCGnJA2S+TvrC9nRPy+QZxGD39fgwwIR6dS2wz6otfNka0Yvq744x/uXAgBvhl7VOJBvcmudEQWhvitW3aiftb4DuOD8DHoDOkVtxxYGCRR8+t4yZQpawXR3V4t7Y2Zwkj0272b+IhnsmX/Pefdei9MQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6FZ5zsg937kr2m7lssARpQQy8Tl5m8K4dr0sw5yjcPY=;
- b=Q1uCNAVs6h1W781IkYtcOl6HT5cwBvajF7xcl/vWL/rW9SNMSG8AwY1aiCM6EZH44RLC/Ju3d0FdE9tE+/f7flcNrtfT2e/xhwmqxUfCAjumnm7MjbnBfaWvEsgN8BsuV6fs0HeRtTvugEneC8nuF0rkNgjDn28A/Pu8Z350AQxMTzmkAOLybK5ym6tabUCiPoxI1kb1/cevn+qXf+uk8XxXPBL2bIAZm/7gPr6obetOUdMo//gZjoTzYGYM9VWkAaTKoTzv5OH3rnyhxILhYpym6/ok/SJ7ZgabKc2HfMnl3CRhsbWc7CwqI2GkOnFXdE2p7NeBRRPiV9fCXt5IpA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
- header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6FZ5zsg937kr2m7lssARpQQy8Tl5m8K4dr0sw5yjcPY=;
- b=auIXQ5xtPQWY/+EBWrlBdqtWkiBRuVKgtr67KK5aKaEVSWNN1x4+LtLArbugU7AOcSKgGdJ1eg8ViiD6YfisJUQWlt0j7pdNp2QAaTQpdMSYfoeCQw8JXUvLYNaIXXTyolYZDrBjfIVvOyQNiQSDDNak2MBpJI3UQiOT3LbD1wvdqu6OzBSLBL4g45BB3xdsYAJam6OnkcGoOw+Kzp3h0bcKYhr5vL5tlZ33orSEvhX3/LONIL2LZQ58NynVGu8m9Q7TkS2vy0u8iu5X2HdLMvbv8/Z+HgX5Dr//yIb9yLV0v8t3JgHRtR803kY6NuAbxHz8jrWi+ZkUIqM3CmX/gQ==
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com (2603:10a6:10:2d7::10)
- by VI1PR04MB9954.eurprd04.prod.outlook.com (2603:10a6:800:1d7::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.55; Wed, 10 Apr
- 2024 12:02:24 +0000
-Received: from DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::3e70:7029:faf2:7779]) by DU2PR04MB8536.eurprd04.prod.outlook.com
- ([fe80::3e70:7029:faf2:7779%3]) with mapi id 15.20.7409.042; Wed, 10 Apr 2024
- 12:02:24 +0000
-Message-ID: <20917bf6-2be2-4a1f-8c87-a69a2241d1fc@theobroma-systems.com>
-Date: Wed, 10 Apr 2024 14:02:21 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/1] fastboot: introduce 'oem board' subcommand
-To: Alexey Romanov <avromanov@salutedevices.com>, sjg@chromium.org,
- hs@denx.de, sean.anderson@seco.com, dimorinny@google.com,
- mkorpershoek@baylibre.com, patrick.delaunay@foss.st.com
-Cc: kernel@salutedevices.com, u-boot@lists.denx.de
-References: <20240410105804.22757-1-avromanov@salutedevices.com>
- <20240410105804.22757-2-avromanov@salutedevices.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <20240410105804.22757-2-avromanov@salutedevices.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA0P291CA0016.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1::28) To DU2PR04MB8536.eurprd04.prod.outlook.com
- (2603:10a6:10:2d7::10)
+ by phobos.denx.de (Postfix) with ESMTPS id 84A4F81F9A
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 14:09:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1712750976; x=1713355776; i=xypron.glpk@gmx.de;
+ bh=NAdsaLulD5EkFWWTi/Pf3iqNkB8RXProTSBHzChAaes=;
+ h=X-UI-Sender-Class:Date:Subject:To:Cc:References:From:
+ In-Reply-To;
+ b=fLioGwErbNJx+qyYxcxmzuXUPl3ns+Ptq1coTW89RIq/YrrwPKoi8rhyO6ZOkz9o
+ QzlEWx9jKUGlNsxgcizxOhsoJ6pDTRXtvqsM5+2SOLfII7hWgoGpyndE/pllsi0Fy
+ MWCLXvtOsJWTPklXW7Bwt+h0v7IRqwj00Zp9cKkfNo0DCTiMeAvhG5oklAP0FH3O7
+ ZoMK0w7EFAeJtyaLAN4stxMS5382Ie0y6faUJ74S0OhRH/d8iRuEAQPs0DN3HQVih
+ D7ZyKozY278+3npLU4CFXRGRfZGviEl2MFPauhgyPi9+sPfbQxeOYX5sKAFM/yZ45
+ 8Q5bnQCPCa0fBau43A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1M3lY1-1ruFmt0vTP-000rfZ; Wed, 10
+ Apr 2024 14:09:36 +0200
+Message-ID: <ace09b2b-f22c-4bcf-af8f-e6a5eb5ac0f6@gmx.de>
+Date: Wed, 10 Apr 2024 14:09:34 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU2PR04MB8536:EE_|VI1PR04MB9954:EE_
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: hhjQwkg0b6oeT4fa3Q9a5YdD570PrjgNBGmLVSSplu9ZZx1M8nAAJZ4jk0xJze+qq/jun+8IbIvktifOxJCH7vlq8UgBy1zevSPk/0WV7YnSguyBsClc7P5PsrSqjxJen9CqY2gVywvy+og+FH44iMWhLhvw4LJYLf1U9gIE62HAnvo+xczBLsdL0BjoyWaUnBhSmIromb57ScAkFdL86kD53GVwBzXqM8Pmco7LbY/+CEDPzJ48r1BuEAvqcgxIoK+o03mRR2hPRPpFroEode6HQGXoWKFm2yEXIxoNLeqDqPcRq3rGFWpDYoaD/l7mvjwufUVC9Ky2oGYWDoJRu6ZhkN8FaRyq6eyUOMLoqLMMRl4D44ezeZT/zrpuwd4SeK3Jri/MNbpbF947az87FRDJ13gBw/JfQyVpITdXLaPUdYyX/1wo/ASszkbuX3Evhbo3hYpDciJDvV6C2x/JMn/+AwBREQusLJE7QG97v+8s7VtUkanLkgsN4BHn2t/98RENmlJDjT8U+cTNxrvVZ4EvNbLaYqEj4fhon46B+qROlT50Vwr4rbriZ0s68HvUWpgk4lZhpumiVps7YbPSpaQRHFuBAHGucOC3grOUpouoVCjHQgtl9BW6tHGRCQE0IWe7nULXbFYYJah5Aw2Y28k3tUQUfPbJz+LORoUF/v0=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DU2PR04MB8536.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(1800799015)(376005)(366007); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cFZlWUtKYU5SRHFxckVEWXRCSDcvVkxoYzJRWlNJT3Avc3g0ZE9sa3hZeW8z?=
- =?utf-8?B?N0pWL1JSZVNjQWZMVGp2b2s3aUVUTmxKYm5iT1NlTmNaVSs1SXpHcXBkaU1P?=
- =?utf-8?B?OC9iNkxSQTg2MGlOU1N5TzBlQWtIQnNsV0MwbXdQWHdRRms1bWxRQzlrakxv?=
- =?utf-8?B?MXIrak9icVRuZ3ZDRU5xMHJyNHNhdFA4RXVyR3RQZytWZmo1bE1xNEZBNDdN?=
- =?utf-8?B?YmQvMWJIUXFSMjJCYzlBQ3lRUWpkdU1rR1FwK3djNkg2MUJsRnd6SlZqR0t2?=
- =?utf-8?B?dVFsYWxSbndPZnRCQ0VCdXhpMGEvcDVBRTlSZVdDVWtvYWE5UUhmY2V4UG5F?=
- =?utf-8?B?cllLbDl4S3NPNXJmcjNWbDFYdDVUZEZsekJTa1Axd0RkbDVSQlRpM05ONjBJ?=
- =?utf-8?B?Rkw0bDBISG5KNzlMbW14SUVOazRiRGlUUXVlSngzbC9GbVZ0b3FmQ2pwa3g4?=
- =?utf-8?B?eDY4RUZoeWs1Z2xNTFRxM0o1L2NBeEl2NXI0bkd2QVBxYnNKUWRQMnFXUjQ0?=
- =?utf-8?B?MHN6emFuK0ZBT01EME5mL1dEaXZFSndmUzRhdHNGK290RnRxUWpNQUJZZEhq?=
- =?utf-8?B?S3RBMEk0aTU2NXJYcy9ZeWVYeFpEWi9heHEzMkZXZ09DemxGYmxFZ0s2eGVV?=
- =?utf-8?B?RjVYbG1RRnpuOWVVeTJXaVk4Y3QwVWtRa1ljZVQwallrRmExZEdFWVVzNjJ2?=
- =?utf-8?B?VUdaUk5DYXI3RVlOUC94NVp4YWZTTUdKeXdHQUFHZDYwUlE2bExGZTVuQWt4?=
- =?utf-8?B?QVNCQlBBZGhvZ0FYNnl3dWtQUGZBd3dlOG1jOWVyZy9mbFZPR1YzSllrV1dY?=
- =?utf-8?B?OXFUWE5nUk54bVE1elZPUlp5ZUUyYmtCZXdaY2lZUGlmeHJ6Y0xoa2ZQTU5H?=
- =?utf-8?B?Szc1UGlrcVR1cEt6QTJsWUR2bEgydURBVURNU3g2aFg4MzBENGhNVE13OG9u?=
- =?utf-8?B?NVl3cUk1QzM4OW04NWtVQ2d0UVpzR2NJMjBVMHRPbmU1VEc4elN5d1o4WVcr?=
- =?utf-8?B?bFlnbnZ4eTFramZnK2d3c3BjZHRTQm9pOUxCZmNUSnFDRlY3NGR5aFlhajBM?=
- =?utf-8?B?ZW5HT2prOFpWQUhlTGREekhpYnl6dVgyT1pLM2x3SzBMRmdXZVBXcVZ4c0tx?=
- =?utf-8?B?SnpSdnhhK0gwZis2U01xRFNzRVJOKzEvQVJ6eTltTjkrTTl2YlNzYkVzK21v?=
- =?utf-8?B?clBpajlLaHlwa00vQVREeE9MN3lQMnpQU2M5QVVVc3kxRHdRK3lHUnRHSERD?=
- =?utf-8?B?QmpHVlNrVXRpU0pIQ0JaUUNNSlJrRXpHM1pVYWUrNkhReXhKOUNOL3QxVmZz?=
- =?utf-8?B?T1dhcWlPV0JySHpPOG82WFBOZ2dORUdnTERmZDhTaVJlTUNKRG45WDJDN3NO?=
- =?utf-8?B?UlVDNWdhVDRIRTA0NEJnSnVDamhwdmxpb1ZVNHMrYlhWbVpUNTlkQUFCOGV4?=
- =?utf-8?B?Mmo0NlZYMDJWQVE1aXkvU0Z5Umt4dXUxUWt0bWZnSGV6MGZwU2dweXVMaFhM?=
- =?utf-8?B?OFJtc1N0S3FkRVVjUkpjSnQ5VFFoWVJVVVdHS1NXVlBScWtJZXBtamNBdnRF?=
- =?utf-8?B?bDVrVmhGdzM1UmxLdGlXbGl3a1BJYlA3SlNGaGdpQjliWkFNZUNObGtka3gy?=
- =?utf-8?B?eDJqZGFOMHRvYllBdDNLM3AxdUNEcys5NGJwMm43TnhSelhoTkZyMzBNZjFm?=
- =?utf-8?B?VDlYeWNaR2RjQ2xSNVJhN0E0eXFpeTdXZyswMHVqM1IyYTdaNmtJVldPb0J3?=
- =?utf-8?B?MVFqZHVxTFRhQkYwYkUreUVrN0tCUkJIakJ3U1I4ZWRLSnVSR01NV2dIeU9h?=
- =?utf-8?B?bjRQVWxRYVF2Rm9TRmg4VDRFMlRzQjc1aHo0K3d2b2hHd0NFaDVneTEvNVJr?=
- =?utf-8?B?MWpQeG83OHZiejBNd0FlNzR1VFh0RVpZcFpnbFJBcWluZUtzYTBDREZiZW5J?=
- =?utf-8?B?RGt0bmkrTEtFRExSVWFOeThkd2w3OThZVWdZY0FIdmNDbTdHVmRsUU84Q3F0?=
- =?utf-8?B?MXkza29vK0RjVjhyeXNhVUxzQnZXZVN4N1pnekVnbTVaUkd3bkhkQ3QvaWh6?=
- =?utf-8?B?SSt1OUtINlVOeTl1QlJPM2VzYnRFdE4rN0w5QWVYaWlYK3Z5RVBpYTNKcStO?=
- =?utf-8?B?Zlo1clBJRm5wQWt1UlJKVFlMYzZ6ZUg4YzJlaHNqd0hTM25vbVQ2MDJnQUdW?=
- =?utf-8?B?cDl0UEdlWnFhbW5WaWo1R241MnppNW92K0gvamlleFVOZzI1WEVuVzM2UStJ?=
- =?utf-8?B?Mmg2NGNDVjlJb1liQy9SSXREWXhBPT0=?=
-X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d94dc1c9-e33a-415d-72bc-08dc5956151a
-X-MS-Exchange-CrossTenant-AuthSource: DU2PR04MB8536.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Apr 2024 12:02:24.1664 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0yaS9p0Y+AEvS9F1dsN2XMEaWeHNELDsqBi9nZNDXfnFcMaKUDOfcXspn9PNPaZ3LVPBuSQ7Zi4NZibYsxKnejBfLilPuIYMPLHd9asOr5DZ31R/jHP3UjGvsmDmw8l+
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB9954
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH] efi_loader: Fix EFI_VARIABLE_APPEND_WRITE hash check
+To: Weizhao Ouyang <o451686892@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Michal Simek <michal.simek@amd.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Joao Marcos Costa <jmcosta944@gmail.com>, u-boot@lists.denx.de
+References: <20240327140628.106143-1-o451686892@gmail.com>
+ <e2262678-5a0b-4130-af8d-5e3b93b16aaa@gmx.de>
+ <CAHk0HosTU1-gfDGYf+gp+LzDxJY_z=ZO8jYHrAChDtprd-xWcA@mail.gmail.com>
+ <CAHk0Hos1NAJoFYrvgvaT2AaU8B+8UTau34x16715k9yNoWd5NA@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAHk0Hos1NAJoFYrvgvaT2AaU8B+8UTau34x16715k9yNoWd5NA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Gi1QpZY3qNAt/aGAKTnvaXGOB9eQeNah9AOYEICvaW2DWR+rE2x
+ +ZDNtHx0wnQt2W/b97Al77cnHUcN8no1ThU6pX3dgUBL+6K/LTTr9NqKW4cM2Fs/+rIH3dd
+ sbJm9t0xPPFnm3TqZsKjDQKxFIFeJP+uBN4yY4Hkxjf24m+lviFcnlCiArn6vbUWGiI3/LU
+ bQWsvojcwJJW9wpkbl0zA==
+UI-OutboundReport: notjunk:1;M01:P0:vvs/wwcwZdk=;IA5YYdUpsyrMdZBgnjrz9OTbwU7
+ X8Frej5VlwQZ+UXVFA3vcVIvr54xAjg0nCCVQasMCXTZdii6brQECBg0nHtgwSuUwIxAL0Zpk
+ CEPgo7xuuAqjvqhDZoMd3VGjZhobmaqcTwWdsytBirve/D/P9ZG3wb2kMx47CdJXaJ1GlI7s+
+ rflad8/P304AmG+Pm/gylsjIQdcUCHRs2KIHRpWBvTKOeb5o8YknPVzdN4ezW00plLn4pDg78
+ 6TqNTbSGW4EDsiam2NRXJRIt77dA+KyKew184UpP3zaWjCHlqqgBuyeZgAs0SIQgiiK7XuRuT
+ 2hBH4uR2e5ARF4nkKt0qtoL0Ttty1BTZXl7A6eXuDX7XgBt6PLbMyY5MI0G4WJAwgLXWt4UGJ
+ BpK0BvTNW6EWdmaX2fhYQdN4pp/Hi+9swH8fb/dY8VVF0IdZUCK7Hgx3f+SKeild5+96XQcZY
+ SRqhuvb2F6gBPgSz95/f94GgMiEeHJMwEYNX7kHKhBGx6lWpeXoA1VRpPBFrjETYI+mOw3uo9
+ XtOLxCptKk8ZiVyvuXDJorSEyHGdz5TH9qG8gCCU8L78IHtXNvGgn2HN7fXw5Jk4F4VdeUP1t
+ nE0sFwpr67iqqczFmlBw3IXVHmscJmjHbFQlQC6+NIzHx0n6u4YT3wJt0gBnj0GmIZRVd5lAO
+ c27dmP4wIV81W3O++i2Ze3ichuFPRkRCOq7Iy0xXuyFAjKmhzOelL30p9wytSZD+snXYSqtlN
+ E6GfQ/Q14Vwaj83zHv75jScCRUS94yBt4AGM14CCdkZCJcXVjCSOWTIgMhxQud0JmzRtKjvb7
+ QDiAcdl8j/+xds3rsZQSamG9ngzHj/PE3nyBLkQqFIYPQ=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,64 +95,292 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alexey,
+On 10.04.24 13:53, Weizhao Ouyang wrote:
+> On Thu, Apr 4, 2024 at 1:48=E2=80=AFAM Weizhao Ouyang <o451686892@gmail.=
+com> wrote:
+>>
+>> Hi Heinrich,
+>>
+>> On Wed, Apr 3, 2024 at 10:54=E2=80=AFPM Heinrich Schuchardt <xypron.glp=
+k@gmx.de> wrote:
+>>>
+>>> On 27.03.24 15:06, Weizhao Ouyang wrote:
+>>>> According to UEFI v2.10 spec section 8.2.6, if a caller invokes the
+>>>> SetVariables() service, it will produce a digest from hash(VariableNa=
+me,
+>>>> VendorGuid, Attributes, TimeStamp, DataNew_variable_content), then th=
+e
+>>>> firmware that implements the SetVariable() service will compare the
+>>>> digest with the result of applying the signer=E2=80=99s public key to=
+ the
+>>>> signature. For EFI variable append write, efitools sign-efi-sig-list =
+has
+>>>> an option "-a" to add EFI_VARIABLE_APPEND_WRITE attr, and u-boot will
+>>>> drop this attribute in efi_set_variable_int(). So if a caller uses
+>>>> "sign-efi-sig-list -a" to create the authenticated variable, this app=
+end
+>>>> write will fail in the u-boot due to "hash check failed".
+>>>
+>>> Currently U-Boot does not allow to use EFI_VARIABLE_APPEND_WRITE for a=
+ny
+>>> non-existent variable, signed or not. This does not match the EDK II
+>>> behavior.
+>>
+>> I'm not referring to the non-existent variable situation, it's a normal
+>> existent variable update.
+>>
+>> I mean:
+>> 1. process PK
+>> 2. process KEK
+>> 3. process a new APPEND_WRITE KEK (came from "sign-efi-sig-list -a ..."=
+,
+>>     so the digest and attrtibute of the KEK auth file will contain
+>>     APPEND_WRITE)
+>> Then the hash check will fail.
+>>
+>>>
+>>> There is a patch queued for this issue:
+>>>
+>>> [PATCH v2] efi_loader: fix append write behavior to non-existent varia=
+ble
+>>> https://lore.kernel.org/u-boot/20240402090950.3819705-1-kojima.masahis=
+a@socionext.com/
+>>>
+>>> Could you, please, retest with that patch.
+>>>
+>>>>
+>>>> This patch resumes writing the EFI_VARIABLE_APPEND_WRITE attr to ensu=
+re
+>>>> that the hash check is correct. And also update the "test_efi_secboot=
+"
+>>>> test case to compliance with the change.
+>>>>
+>>>> Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
+>>>> ---
+>>>>    lib/efi_loader/efi_variable.c                  |  3 +--
+>>>>    test/py/tests/test_efi_secboot/conftest.py     | 10 ++++++++++
+>>>>    test/py/tests/test_efi_secboot/test_authvar.py |  4 ++--
+>>>>    test/py/tests/test_efi_secboot/test_signed.py  | 10 +++++-----
+>>>>    4 files changed, 18 insertions(+), 9 deletions(-)
+>>>>
+>>>> diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_varia=
+ble.c
+>>>> index 40f7a0fb10..f41aa8f9ad 100644
+>>>> --- a/lib/efi_loader/efi_variable.c
+>>>> +++ b/lib/efi_loader/efi_variable.c
+>>>> @@ -259,7 +259,6 @@ efi_status_t efi_set_variable_int(const u16 *vari=
+able_name,
+>>>>        /* check if a variable exists */
+>>>>        var =3D efi_var_mem_find(vendor, variable_name, NULL);
+>>>>        append =3D !!(attributes & EFI_VARIABLE_APPEND_WRITE);
+>>>> -     attributes &=3D ~(u32)EFI_VARIABLE_APPEND_WRITE;
+>>>
+>>> According to the UEFI specification for GetVariable():
+>>>
+>>> "The EFI_VARIABLE_APPEND_WRITE attribute will never be set in the
+>>> returned Attributes bitmask parameter."
+>>
+>> Yes, that's why I called it a RFC patch.
+>>
+>>>
+>>> We don't want to set EFI_VARIABLE_APPEND_WRITE in a variable when
+>>> calling efi_var_mem_ins().
+>>
+>> The APPEND_WRITE attribute is allowed to be set prior to invoking the
+>> service (UEFI section 8.2.6). So anyway we should consider compatibilit=
+y
+>> with this case, along with making changes to GetVariable().
+>
+> Part of the process in edk2 is:
+>
+> VerifyTimeBasedPayloadAndUpdate
+> --> VerifyTimeBasedPayload // calculate digest and compare digest
+> --> AuthServiceInternalUpdateVariableWithTimeStamp
+>      --> VariableExLibUpdateVariable
+>          --> UpdateVariable // unset the APPEND_WRITE
+>
+> We can align with this implementation.
 
-On 4/10/24 12:58, Alexey Romanov wrote:
-> Currently, fastboot protocol in U-Boot has no opportunity
-> to execute vendor custom code with verifed boot. This patch
-> introduce new fastboot subcommand fastboot oem board:<cmd>,
-> which allow to run custom oem_board function.
-> 
-> Default implementation is __weak. Vendor must redefine it in
-> board/ folder with his own logic.
-> 
-> For example, some vendors have their custom nand/emmc partition
-> flashing or erasing. Here some typical command for such use cases:
-> 
-> - flashing:
-> 
->    $ fastboot stage bootloader.img
->    $ fastboot oem board:write_bootloader
-> 
-> - erasing:
-> 
->    $ fastboot oem board:erase_env
-> 
-> Signed-off-by: Alexey Romanov <avromanov@salutedevices.com>
-> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-> ---
->   doc/android/fastboot.rst      | 18 ++++++++++++++++++
->   drivers/fastboot/Kconfig      |  7 +++++++
->   drivers/fastboot/fb_command.c | 30 ++++++++++++++++++++++++++++++
->   include/fastboot.h            |  1 +
->   4 files changed, 56 insertions(+)
-> 
-> diff --git a/doc/android/fastboot.rst b/doc/android/fastboot.rst
-> index 1ad8a897c8..2a627f9890 100644
-> --- a/doc/android/fastboot.rst
-> +++ b/doc/android/fastboot.rst
-> @@ -29,6 +29,7 @@ The following OEM commands are supported (if enabled):
->     with <arg> = boot_ack boot_partition
->   - ``oem bootbus``  - this executes ``mmc bootbus %x %s`` to configure eMMC
->   - ``oem run`` - this executes an arbitrary U-Boot command
-> +- ``oem board`` - this executes a custom board function which is defined by the vendor
->   
->   Support for both eMMC and NAND devices is included.
->   
-> @@ -245,6 +246,23 @@ including multiple commands (using e.g. ``;`` or ``&&``) and control structures
->   (``if``, ``while``, etc.). The exit code of ``fastboot`` will reflect the exit
->   code of the command you ran.
->   
-> +Running Custom Vendor Code
-> +^^^^^^^^^^^^^^^^^^^^^^^^^^
-> +
-> +U-Boot allows you to execute custom fastboot logic, which can be defined
-> +in board/ files. It can still be used for production devices with verified
-> +boot, because the vendor define logic at compile time by implementing
+I was referring to the attribute value passed to efi_var_mem_ins(), not
+to the value passed to SetVariable().
 
-I think it should be "defines" here?
+efi_var_mem_ins() does not remove the EFI_VARIABLE_APPEND_WRITE bit. The
+code calling efi_var_mem_ins() should not pass such a value.
 
-Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Best regards
 
-Thanks,
-Quentin
+Heinrich
+
+>
+> BR,
+> Weizhao
+>
+>>
+>> BR,
+>> Weizhao
+>>
+>>>
+>>>>        delete =3D !append && (!data_size || !attributes);
+>>>>
+>>>>        /* check attributes */
+>>>> @@ -275,7 +274,7 @@ efi_status_t efi_set_variable_int(const u16 *vari=
+able_name,
+>>>>
+>>>>                /* attributes won't be changed */
+>>>>                if (!delete &&
+>>>> -                 ((ro_check && var->attr !=3D attributes) ||
+>>>> +                 ((ro_check && var->attr !=3D (attributes & ~(u32)EF=
+I_VARIABLE_APPEND_WRITE)) ||
+>>>>                     (!ro_check && ((var->attr & ~(u32)EFI_VARIABLE_RE=
+AD_ONLY)
+>>>
+>>> The (u32) conversions are superfluous.
+>>>
+>>> Best regards
+>>>
+>>> Heinrich
+>>>
+>>>>                                    !=3D (attributes & ~(u32)EFI_VARIA=
+BLE_READ_ONLY))))) {
+>>>>                        return EFI_INVALID_PARAMETER;
+>>>> diff --git a/test/py/tests/test_efi_secboot/conftest.py b/test/py/tes=
+ts/test_efi_secboot/conftest.py
+>>>> index ff7ac7c810..0fa0747fc7 100644
+>>>> --- a/test/py/tests/test_efi_secboot/conftest.py
+>>>> +++ b/test/py/tests/test_efi_secboot/conftest.py
+>>>> @@ -64,6 +64,12 @@ def efi_boot_env(request, u_boot_config):
+>>>>            check_call('cd %s; %scert-to-efi-sig-list -g %s db1.crt db=
+1.esl; %ssign-efi-sig-list -t "2020-04-05" -c KEK.crt -k KEK.key db db1.es=
+l db1.auth'
+>>>>                       % (mnt_point, EFITOOLS_PATH, GUID, EFITOOLS_PAT=
+H),
+>>>>                       shell=3DTrue)
+>>>> +        # db2 (APPEND_WRITE)
+>>>> +        check_call('cd %s; openssl req -x509 -sha256 -newkey rsa:204=
+8 -subj /CN=3DTEST_db2/ -keyout db2.key -out db2.crt -nodes -days 365'
+>>>> +                   % mnt_point, shell=3DTrue)
+>>>> +        check_call('cd %s; %scert-to-efi-sig-list -g %s db2.crt db2.=
+esl; %ssign-efi-sig-list -a -c KEK.crt -k KEK.key db db2.esl db2.auth'
+>>>> +                   % (mnt_point, EFITOOLS_PATH, GUID, EFITOOLS_PATH)=
+,
+>>>> +                   shell=3DTrue)
+>>>>            # dbx (TEST_dbx certificate)
+>>>>            check_call('cd %s; openssl req -x509 -sha256 -newkey rsa:2=
+048 -subj /CN=3DTEST_dbx/ -keyout dbx.key -out dbx.crt -nodes -days 365'
+>>>>                       % mnt_point, shell=3DTrue)
+>>>> @@ -84,6 +90,10 @@ def efi_boot_env(request, u_boot_config):
+>>>>            check_call('cd %s; %scert-to-efi-hash-list -g %s -s 256 db=
+1.crt dbx_hash1.crl; %ssign-efi-sig-list -t "2020-04-06" -c KEK.crt -k KEK=
+.key dbx dbx_hash1.crl dbx_hash1.auth'
+>>>>                       % (mnt_point, EFITOOLS_PATH, GUID, EFITOOLS_PAT=
+H),
+>>>>                       shell=3DTrue)
+>>>> +        # dbx_hash2 (digest of TEST_db2 certificate, with APPEND_WRI=
+TE)
+>>>> +        check_call('cd %s; %scert-to-efi-hash-list -g %s -s 256 db2.=
+crt dbx_hash2.crl; %ssign-efi-sig-list -a -c KEK.crt -k KEK.key dbx dbx_ha=
+sh2.crl dbx_hash2.auth'
+>>>> +                   % (mnt_point, EFITOOLS_PATH, GUID, EFITOOLS_PATH)=
+,
+>>>> +                   shell=3DTrue)
+>>>>            # dbx_db (with TEST_db certificate)
+>>>>            check_call('cd %s; %ssign-efi-sig-list -t "2020-04-05" -c =
+KEK.crt -k KEK.key dbx db.esl dbx_db.auth'
+>>>>                       % (mnt_point, EFITOOLS_PATH),
+>>>> diff --git a/test/py/tests/test_efi_secboot/test_authvar.py b/test/py=
+/tests/test_efi_secboot/test_authvar.py
+>>>> index f99b8270a6..d5aeb65048 100644
+>>>> --- a/test/py/tests/test_efi_secboot/test_authvar.py
+>>>> +++ b/test/py/tests/test_efi_secboot/test_authvar.py
+>>>> @@ -183,7 +183,7 @@ class TestEfiAuthVar(object):
+>>>>                assert 'db:' in ''.join(output)
+>>>>
+>>>>                output =3D u_boot_console.run_command_list([
+>>>> -                'fatload host 0:1 4000000 db1.auth',
+>>>> +                'fatload host 0:1 4000000 db2.auth',
+>>>>                    'setenv -e -nv -bs -rt -a -i 4000000:$filesize db'=
+])
+>>>>                assert 'Failed to set EFI variable' in ''.join(output)
+>>>>
+>>>> @@ -197,7 +197,7 @@ class TestEfiAuthVar(object):
+>>>>            with u_boot_console.log.section('Test Case 3c'):
+>>>>                # Test Case 3c, update with correct signature
+>>>>                output =3D u_boot_console.run_command_list([
+>>>> -                'fatload host 0:1 4000000 db1.auth',
+>>>> +                'fatload host 0:1 4000000 db2.auth',
+>>>>                    'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize=
+ db',
+>>>>                    'printenv -e -n -guid d719b2cb-3d3a-4596-a3bc-dad0=
+0e67656f db'])
+>>>>                assert 'Failed to set EFI variable' not in ''.join(out=
+put)
+>>>> diff --git a/test/py/tests/test_efi_secboot/test_signed.py b/test/py/=
+tests/test_efi_secboot/test_signed.py
+>>>> index 2f862a259a..34719ad1f2 100644
+>>>> --- a/test/py/tests/test_efi_secboot/test_signed.py
+>>>> +++ b/test/py/tests/test_efi_secboot/test_signed.py
+>>>> @@ -177,7 +177,7 @@ class TestEfiSignedImage(object):
+>>>>            with u_boot_console.log.section('Test Case 5b'):
+>>>>                # Test Case 5b, authenticated if both signatures are v=
+erified
+>>>>                output =3D u_boot_console.run_command_list([
+>>>> -                'fatload host 0:1 4000000 db1.auth',
+>>>> +                'fatload host 0:1 4000000 db2.auth',
+>>>>                    'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize=
+ db'])
+>>>>                assert 'Failed to set EFI variable' not in ''.join(out=
+put)
+>>>>                output =3D u_boot_console.run_command_list([
+>>>> @@ -201,7 +201,7 @@ class TestEfiSignedImage(object):
+>>>>            with u_boot_console.log.section('Test Case 5d'):
+>>>>                # Test Case 5d, rejected if both of signatures are rev=
+oked
+>>>>                output =3D u_boot_console.run_command_list([
+>>>> -                'fatload host 0:1 4000000 dbx_hash1.auth',
+>>>> +                'fatload host 0:1 4000000 dbx_hash2.auth',
+>>>>                    'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize=
+ dbx'])
+>>>>                assert 'Failed to set EFI variable' not in ''.join(out=
+put)
+>>>>                output =3D u_boot_console.run_command_list([
+>>>> @@ -223,7 +223,7 @@ class TestEfiSignedImage(object):
+>>>>                    'setenv -e -nv -bs -rt -at -i 4000000:$filesize KE=
+K',
+>>>>                    'fatload host 0:1 4000000 PK.auth',
+>>>>                    'setenv -e -nv -bs -rt -at -i 4000000:$filesize PK=
+',
+>>>> -                'fatload host 0:1 4000000 db1.auth',
+>>>> +                'fatload host 0:1 4000000 db2.auth',
+>>>>                    'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize=
+ db',
+>>>>                    'fatload host 0:1 4000000 dbx_hash1.auth',
+>>>>                    'setenv -e -nv -bs -rt -at -i 4000000:$filesize db=
+x'])
+>>>> @@ -300,7 +300,7 @@ class TestEfiSignedImage(object):
+>>>>                    'setenv -e -nv -bs -rt -at -i 4000000:$filesize KE=
+K',
+>>>>                    'fatload host 0:1 4000000 PK.auth',
+>>>>                    'setenv -e -nv -bs -rt -at -i 4000000:$filesize PK=
+',
+>>>> -                'fatload host 0:1 4000000 db1.auth',
+>>>> +                'fatload host 0:1 4000000 db2.auth',
+>>>>                    'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize=
+ db',
+>>>>                    'fatload host 0:1 4000000 dbx_hash384.auth',
+>>>>                    'setenv -e -nv -bs -rt -at -i 4000000:$filesize db=
+x'])
+>>>> @@ -323,7 +323,7 @@ class TestEfiSignedImage(object):
+>>>>                    'setenv -e -nv -bs -rt -at -i 4000000:$filesize KE=
+K',
+>>>>                    'fatload host 0:1 4000000 PK.auth',
+>>>>                    'setenv -e -nv -bs -rt -at -i 4000000:$filesize PK=
+',
+>>>> -                'fatload host 0:1 4000000 db1.auth',
+>>>> +                'fatload host 0:1 4000000 db2.auth',
+>>>>                    'setenv -e -nv -bs -rt -at -a -i 4000000:$filesize=
+ db',
+>>>>                    'fatload host 0:1 4000000 dbx_hash512.auth',
+>>>>                    'setenv -e -nv -bs -rt -at -i 4000000:$filesize db=
+x'])
+>>>
+
