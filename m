@@ -4,83 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBAFEC67861
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 02:22:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D00B0CD1297
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 05:13:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DF7787E1B;
-	Wed, 10 Apr 2024 04:22:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D2F5E88176;
+	Wed, 10 Apr 2024 07:13:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JXkyhXis";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cKSx8Vh+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7144587E86; Wed, 10 Apr 2024 04:22:48 +0200 (CEST)
-Received: from mail-oa1-x2b.google.com (mail-oa1-x2b.google.com
- [IPv6:2001:4860:4864:20::2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A2C8988180; Wed, 10 Apr 2024 07:13:28 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B91B87A4B
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 04:22:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B500F87FDD
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 07:13:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-oa1-x2b.google.com with SMTP id
- 586e51a60fabf-229d01e81f1so3477870fac.2
- for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 19:22:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712715764; x=1713320564; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=PzzHOn5+JY5avA2w9i/AF3UcvGcNq/5f2bLvOR9Yyg8=;
- b=JXkyhXisfHws561gH43T/IkVuA8k9pt4CkfTKfS7RYAZ5ZQJ/JL8/GXYCL42Ph7UZG
- Yo0jUYOl0610B40Tft4+LT7bNEE548AcsJ46thP66O7uD48y5+/OkJNSGCwJBYC1BAcZ
- U6kV6TZed1o8/Cu/AgO0N+DlMqehUAOybT8Q/vuKo3lbHSk9f6OE8NVtsVofFzzKE27P
- sbkJFszGc1aPrLdYpKAFYCSz0sW1wVVMAg09nPbR5gzmxgreKZbDBKnBxTJZPxdsqe3N
- 3cWWjvvWcLXxFOtuSXoSDIvQeiGeuneBN6pid9eraEdYR8Nf1T2cD1//VbumKaszuZ1e
- yV0A==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 05AD13FFE2
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 05:13:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1712726005;
+ bh=KFBZa2b1AKslCMGe9nnAb/TGslZtH0MOlV8MLntfC7k=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=cKSx8Vh+MjhXYDJkwwY698Q1masb5XfL4sCC/ls6n4pqSCX4i6wPuxLCT7BY0XeRR
+ uBfq7alGs/Bq4RN2AH+AYuHsuWNB9GgZl6ABBnaFWWhe7PRIxJGB2g9tNYGM1h8p9g
+ 1dgqTnlBgPANBA3z8fgM53L+TF2EnOi8xoYl/xYzSIUVeUy+S2pGfqhSepxWT7shIh
+ rIilnhvHMsG0+dkseA75cS26F2foejZYi0/8eMW6+HLrSl8H4xfUz69gFrfFFezHPz
+ FvRMeSi4eqeACNY+hU3RB5Ii507wuzUqQZWMm85MGtJ7lNz4EjLlUf7bs2MIib/97F
+ 3cVtkM6K7DNCQ==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-34368e90fcdso1635675f8f.0
+ for <u-boot@lists.denx.de>; Tue, 09 Apr 2024 22:13:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712715764; x=1713320564;
+ d=1e100.net; s=20230601; t=1712726004; x=1713330804;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PzzHOn5+JY5avA2w9i/AF3UcvGcNq/5f2bLvOR9Yyg8=;
- b=Zej0ffTXQx58gUTCcEsx0WPAjUtFLC5VkZRWdoP/KP+2OOWVpCvuuIIBAB0PvAXau1
- p6IVD/ePXYditydMliX9I+tfoL2Ono4Jfo5uz42aHKq0qtH4PKhk0d9ge6a+yLDjGCiO
- Two44NFjvFdF0qZXG0ObU68W2vOBd0dW8WbfSlRqHjV7MDVorTMQd2/QGEl6jRBnAHBX
- x1LD2P/HcqximXkG9RM+mEGB7fplSP1daXQ8l+IC1bz/Ib+oydswdJZJg0Oy7whNC+pp
- AanOIZrWr9TR6IwuBbn95cPAfYy7Svq00oDt3D9Dix+QkzT9JUfKu9dMepM+iV9CXwbD
- ZGnw==
-X-Gm-Message-State: AOJu0YwlczplLvbZyi02AveBuJaUbdVGIUIB817FosU5dwYzY32deLto
- UvbKK99hQEDkOOMN0A10mIUnlf3izBOzIyDxjBjCiGieevZENyH7
-X-Google-Smtp-Source: AGHT+IHwDVqxKAaDBxZcAg2au34KTwfpbbGGwKtjXFMCOmuRMUok+P6QEdnjLXMTEl1MZxLBzrXHGw==
-X-Received: by 2002:a05:6870:2009:b0:22e:9c5a:233e with SMTP id
- o9-20020a056870200900b0022e9c5a233emr1477628oab.43.1712715763724; 
- Tue, 09 Apr 2024 19:22:43 -0700 (PDT)
-Received: from [192.168.0.8] (KD106168128197.ppp-bb.dion.ne.jp.
- [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- o4-20020a056a001b4400b006e623639a80sm9408531pfv.19.2024.04.09.19.22.41
+ bh=KFBZa2b1AKslCMGe9nnAb/TGslZtH0MOlV8MLntfC7k=;
+ b=UVcGN2yMVTBYqmGqcB59IXIlYfzNXU5kZ6KrgzqgAjdtkEUgmHlfu0d8DGJnC1d3bm
+ lpPZSHmJhIyQKkq4GjNVZMSBPujeMHVbwe9yt84yOaMAXGX0DZmgWROy2wIef43K65y+
+ VV/lFT4zZ1ONzB3q7+gdmh55Y5f/850KDC3IVUVO4IHhwQVCnsqbk+wjD/3Sa9TJtlYz
+ qUUG47rA5sHLPXsUoLu/l70uxjJgiVIFRSc5KThB3B9V6kxgKiDyD8JP0CcU0pOk3CrQ
+ ps06po7gIuBbSm807CQti0V/PvqaXJpLt5BJJkno1etLAiALmpIo2EnfNQwBUgSATtQ4
+ zHHA==
+X-Gm-Message-State: AOJu0YzeKzZAlNg23XCo2f29oulNr9HiwDHXIHf1y4RUyvMdyh+3PDlz
+ oitUFB62a4sO49kNx7HOqx29lD4fw5Hpk9In8zGGfP7sUj3yYgvuAjFUp74l8vP9xxiEN/VoLCa
+ 4aNpS2omFXCxsHSgB24mTEmAwLvgF24aaQ4AUYSqZ2yceExzm4y3NpDQFkyK0SF1EspyEit9yGk
+ w=
+X-Received: by 2002:adf:f107:0:b0:33e:9292:b194 with SMTP id
+ r7-20020adff107000000b0033e9292b194mr1101417wro.14.1712726003715; 
+ Tue, 09 Apr 2024 22:13:23 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFKMgrm2VvEqyMfjIP5UldZeagp43IKmTwRKc0pzUsGrE0HkX57epj9xSk2K/bTaBBHhHct/w==
+X-Received: by 2002:adf:f107:0:b0:33e:9292:b194 with SMTP id
+ r7-20020adff107000000b0033e9292b194mr1101408wro.14.1712726003272; 
+ Tue, 09 Apr 2024 22:13:23 -0700 (PDT)
+Received: from [192.168.123.161]
+ (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ by smtp.gmail.com with ESMTPSA id
+ e8-20020a5d4e88000000b003438cc1d2b4sm12974890wru.59.2024.04.09.22.13.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 09 Apr 2024 19:22:43 -0700 (PDT)
-Message-ID: <2d6d938d-0ba7-4ea8-b325-a698d30e8dea@gmail.com>
-Date: Wed, 10 Apr 2024 11:22:40 +0900
+ Tue, 09 Apr 2024 22:13:22 -0700 (PDT)
+Message-ID: <dc804b91-2ba5-4f13-9e96-474eadea569c@canonical.com>
+Date: Wed, 10 Apr 2024 07:13:21 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] mtd: spi-nor-id: Add S25FS064S, S25FS128S,
- S25FS256S IDs
-To: Pratyush Yadav <pratyush@kernel.org>
-Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com, vigneshr@ti.com,
- tudor.ambarus@linaro.org, d-gole@ti.com, Bacem.Daassi@infineon.com,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-References: <cover.1712638210.git.Takahiro.Kuwano@infineon.com>
- <37d92e2931b646f97f73650c0306adb736bd0efc.1712638210.git.Takahiro.Kuwano@infineon.com>
- <mafs0edbe92fo.fsf@kernel.org>
+Subject: Re: [PATCH 1/1] api: add missing cookie checks for network access
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240409131655.59157-1-heinrich.schuchardt@canonical.com>
+ <20240410004350.GD2493117@bill-the-cat>
 Content-Language: en-US
-From: Takahiro Kuwano <tkuw584924@gmail.com>
-In-Reply-To: <mafs0edbe92fo.fsf@kernel.org>
-Content-Type: text/plain; charset=UTF-8
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240410004350.GD2493117@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,67 +106,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/9/2024 8:54 PM, Pratyush Yadav wrote:
-> On Tue, Apr 09 2024, tkuw584924@gmail.com wrote:
+On 4/10/24 02:43, Tom Rini wrote:
+> On Tue, Apr 09, 2024 at 03:16:55PM +0200, Heinrich Schuchardt wrote:
 > 
->> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+>> dev_write_net() and dev_read_net() should validate the provided cookie.
 >>
->> The S25FS064S, S25FS128S, and S25FS256S are the same family of SPI NOR
->> Flash devices with S25FS512S. Some difference depending on the device
->> densities are taken care in post SFDP fixup.
->>
->> Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 >> ---
->>  drivers/mtd/spi/spi-nor-core.c | 24 ++++++++++++++++++------
->>  drivers/mtd/spi/spi-nor-ids.c  |  3 +++
->>  2 files changed, 21 insertions(+), 6 deletions(-)
+>>   api/api_net.c | 6 ++++--
+>>   1 file changed, 4 insertions(+), 2 deletions(-)
 >>
->> diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
->> index 9620852817..9b81b31e8e 100644
->> --- a/drivers/mtd/spi/spi-nor-core.c
->> +++ b/drivers/mtd/spi/spi-nor-core.c
->> @@ -3356,12 +3356,24 @@ static int s25fs_s_post_bfpt_fixup(struct spi_nor *nor,
->>  static void s25fs_s_post_sfdp_fixup(struct spi_nor *nor,
->>  				    struct spi_nor_flash_parameter *params)
->>  {
->> -	/* READ_1_1_2 is not supported */
->> -	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
->> -	/* READ_1_1_4 is not supported */
->> -	params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
->> -	/* PP_1_1_4 is not supported */
->> -	params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
->> +	/*
->> +	 * The S25FS064S(8MB) supports 1-1-2 and 1-1-4 commands, but params for
->> +	 * read ops in SFDP are wrong. The other density parts do not support
->> +	 * 1-1-2 and 1-1-4 commands.
->> +	 */
->> +	if (params->size == SZ_8M) {
->> +		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_2],
->> +					  0, 8, SPINOR_OP_READ_1_1_2,
->> +					  SNOR_PROTO_1_1_2);
->> +		spi_nor_set_read_settings(&params->reads[SNOR_CMD_READ_1_1_4],
->> +					  0, 8, SPINOR_OP_READ_1_1_4,
->> +					  SNOR_PROTO_1_1_4);
->> +	} else {
->> +		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_2;
->> +		params->hwcaps.mask &= ~SNOR_HWCAPS_READ_1_1_4;
->> +		params->hwcaps.mask &= ~SNOR_HWCAPS_PP_1_1_4;
->> +	}
->> +
+>> diff --git a/api/api_net.c b/api/api_net.c
+>> index 7515c26e8b4..0b931a80787 100644
+>> --- a/api/api_net.c
+>> +++ b/api/api_net.c
+>> @@ -72,14 +72,16 @@ int dev_enum_net(struct device_info *di)
+>>   
+>>   int dev_write_net(void *cookie, void *buf, int len)
+>>   {
+>> -	/* XXX verify that cookie points to a valid net device??? */
+>> +	if (!dev_valid_net(cookie))
+>> +		return API_ENODEV;
+>>   
+>>   	return eth_send(buf, len);
+>>   }
+>>   
+>>   int dev_read_net(void *cookie, void *buf, int len)
+>>   {
+>> -	/* XXX verify that cookie points to a valid net device??? */
+>> +	if (!dev_valid_net(cookie))
+>> +		return API_ENODEV;
+>>   
+>>   	return eth_receive(buf, len);
+>>   }
 > 
-> Reviewed-by: Pratyush Yadav <pratyush@kernel.org>
+> Is this right? Probably. But what triggered looking in to this to start
+> with? I don't think anything is enabling the API support these days
+> even.
 > 
-> BTW (not directly related to this patch), I looked at the datasheet you
-> provided in the cover letter and it says dual and quad I/O is supported
-> for the 16 MB and 32 MB parts as well. Why do you mask them out here
-> then?
->
-In the datasheet,
-1-2-2 and 1-4-4 read are named as dual and quad I/O read.
-1-1-2 and 1-1-4 read are named as dual and quad output read.
- 
-Dual and quad I/O read (1-2-2 and 1-4-4) is supported in all S25FS-S parts.
-Dual and quad output read (1-1-2 and 1-1-4) is only supported in S25FS064S.
 
-Thank you for reviewing!
-Takahiro
+We should either properly test the API in our CI or or remove it.
+
+What once was done via the API could be done via an EFI payload in a 
+more portable way today.
+
+Best regards
+
+Heinrich
+
