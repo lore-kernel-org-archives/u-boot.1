@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BC10CD11C2
-	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 10:35:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E3A3CD128A
+	for <u-boot@archiver.kernel.org>; Wed, 10 Apr 2024 10:56:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E5C38815A;
-	Wed, 10 Apr 2024 12:35:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 754FF88122;
+	Wed, 10 Apr 2024 12:56:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wBw4W/WF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aatdU3ZH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7014488196; Wed, 10 Apr 2024 12:35:38 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 375A788122; Wed, 10 Apr 2024 12:56:36 +0200 (CEST)
+Received: from mail-ua1-x936.google.com (mail-ua1-x936.google.com
+ [IPv6:2607:f8b0:4864:20::936])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C5F58815A
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 12:35:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C53A187EEB
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 12:56:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-516a01c8490so6259948e87.1
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 03:35:36 -0700 (PDT)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x936.google.com with SMTP id
+ a1e0cc1a2514c-7e7b787142aso127543241.0
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 03:56:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712745336; x=1713350136; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712746591; x=1713351391; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HnJVr4S+FDpgO/rvcDP8wX4LcpztcH9eblQtNAVD/LQ=;
- b=wBw4W/WFpEVqpev5bXvsR5j+GXKr6aE53W8OGyEt9RDqe/oFOQEAcqUJDtG2goPrTd
- /4K1kZH/kDd3s73mxMw+66Rmz9e2mt3Eg37MssS/onl+lAvdXsAde2JpFZWNUijBckTs
- kN9NmJTWQWRjBJajLTqHC/FBNzxv4M3PNuf649v0gt/XLuMA2jX3pryzqi4nBG5CjfKF
- eeVfbvRCp2XOZGTBqn4Og2Ke5OTuDNt/DsgSwcxEOW4ZEVgJGpn+9vfsqXkMkBOMosbZ
- cT02uLP/nvZRLGfktrzbRUtgRJYO0zC+I5jFI3e51SU+4bf3JasHnc/KtVu4VHrw4GAS
- OBFw==
+ bh=oSWEVwS9p7p+wgX5N2CxVL0WG5EmDrvtjR5Twi6fk/c=;
+ b=aatdU3ZHYrmacSclGAnNMFKlZBXdqG+NSpkEgeSYSokBJvlBy8LWObY+sC7z9hetme
+ xBXuu3pinWyXnEzS4euI6UiqS3+kvb3rBWaJPjscp82Sk1OF8+PFMxeDrJZTkvoVjz2i
+ mGAEw3/pGZ/FfO9gZr5yHVxEjspEj7xiljZ5wa2jNEhNNoMzwQ0dw8ozB16/9ebooQIo
+ 1Y8xGHH/TWWQzbwalGV2avFBiJee+l/2Y+vnRCcZy+pCIwNJEh0+xVsJx4yPfj5U9awM
+ Ir3TyPffybTShguwoQS8AVxTOiBbmjURKKtmHeUrc3Q92ET71oS2QGW20RnFt0ZR2zxg
+ hycA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712745336; x=1713350136;
+ d=1e100.net; s=20230601; t=1712746591; x=1713351391;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HnJVr4S+FDpgO/rvcDP8wX4LcpztcH9eblQtNAVD/LQ=;
- b=qS0+kcIXpxk31ZF7Ga/qOKwfIjPHx6/1dbG4Tvyjy5FGVbZB111p73qx7OE7vfScze
- s3OBc7BIqZR3eVa1olxgsE3CbH8QJb6XsjTKwx1Uggu87BBRFTSWBAeKm9aYoVs7LJvL
- Wx0vTojZfO792L4aVmcRKzkfYU60eqbNoF6OkbpxN34h9rLKewpFV+x1byrL9btoeVmC
- WuiMOI0xAf8h292XUzZ7I1HuBD+coU+aB7Tq/F+kV4eSLS4VOlJW26F6Heraqgpn3qLd
- jrfFGgdzpm57Kzf5HTYFWaWbblFpGeD9SZzSTwL76Rmh667YcgAD1ef9vHH6IkcwsiZ5
- oo1g==
+ bh=oSWEVwS9p7p+wgX5N2CxVL0WG5EmDrvtjR5Twi6fk/c=;
+ b=HJ5v7f/bgUX8q6T3/6I0m+ozXFW7dOZEpWfIXY1aRYm4DYDHdRsijn/IWp3/Nlbyu7
+ UpYp6t058HfnR7Cxdfmd58jewojHZZxxIAo8Vv8OK3UVTpG9PO+gSdvq1pIkDgZ4DlaS
+ YQCGFC3bye3557uYafPDzd+at4Pn/hA6k6DoVDpR85FHTDozrQ+07zvB8bu0zvCL38gX
+ oah0qldX2fjrKw8GmMTay2qHmbmK7VUs7KaNya+d5AwEbyXqkEedJBoF2jOk4Ph1Zivq
+ aNpkcbKsY8r70me5eZ30cUBb773pTO6vHJTSlNy6/GQfrKpRhn9uGrxdiSVrzvuYt3WW
+ k9BA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXAGTtxtoOebM7TsfdGgqCzAz6ksNiQQRW6ZJ2EHNEJm7kOa4PRNGeUaoyNfJLKahhfURydxABc3EDQOpJ9GXhp6ZthSA==
-X-Gm-Message-State: AOJu0Yx9rqigeAKXTb/RfOW7Nm7HSzEGsLBEhGb/W5tv+n8UGKEcwQ/0
- b/4w+bDhFQHsQt55nf5GnUvgAMJ4r1asKuHFhLo5mHGUYNPoBVlfSNtByg2ONFubHv/7bIIuW/8
- BfcCKBo4RRtZgvpVQQ+EvtnvNCiCAO77YnsIg+A==
-X-Google-Smtp-Source: AGHT+IFVbhF/UBg4Ky735X0zJppZ3TxqnIhcD7HNVs8jdaqY6m/2FIPXZRedPzPhE0fg/l5p9zT55RVGf/egG+T5IwM=
-X-Received: by 2002:a05:6512:548:b0:517:30a3:d000 with SMTP id
- h8-20020a056512054800b0051730a3d000mr724799lfl.28.1712745335630; Wed, 10 Apr
- 2024 03:35:35 -0700 (PDT)
+ AJvYcCVdS6B40LISSKgX/1J9hTN90gY1gZdaqDZcJ1PoYH0HpD8OAHoj8Mx0ERkSPDdwBF91lVuLX2EZQdFFMTOwvmB6tH6PEQ==
+X-Gm-Message-State: AOJu0YwsNNLg1pR1kFhrrK+uLoptMir+r+VRBhPdR1UIbeCrX2mFEUe4
+ KU+wFx+hoqiVuUekZO6t0cJEEIhM1P4N+cRycfIRPrFEmlKzyi7srGjaIthvf+na/OjaQZzgkGa
+ ohGjlG/Tw3PIKmEwHsQ6EPsZR9eMof0fpc6mgOw==
+X-Google-Smtp-Source: AGHT+IEBXqdTMAyvjC/jQR3bTxiavx3O7tpwKm158wP5LRmmS4edv8nG8pRy7paGvEpLIg2Mzilao9VEwCTCk6WYoTw=
+X-Received: by 2002:a05:6102:c05:b0:479:dbcf:bfc4 with SMTP id
+ x5-20020a0561020c0500b00479dbcfbfc4mr2025190vss.9.1712746591512; Wed, 10 Apr
+ 2024 03:56:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240409-b4-dfu-scsi-v1-0-3e1441a60376@linaro.org>
- <20240409-b4-dfu-scsi-v1-2-3e1441a60376@linaro.org>
-In-Reply-To: <20240409-b4-dfu-scsi-v1-2-3e1441a60376@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 10 Apr 2024 12:34:59 +0200
-Message-ID: <CAC_iWjLZiQabqPURiE5YGsvcstV38-rJ-Hq0NmN0u7HbD2QCfQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] disk: expose partition type flags
+References: <20240409-b4-qcom-mmc-fixes-v1-0-5039164ecbf7@linaro.org>
+ <20240409-b4-qcom-mmc-fixes-v1-7-5039164ecbf7@linaro.org>
+In-Reply-To: <20240409-b4-qcom-mmc-fixes-v1-7-5039164ecbf7@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Wed, 10 Apr 2024 16:26:20 +0530
+Message-ID: <CAFA6WYOX4AviWiYfwrz=aF7x3iwyGzjwf5ZY1eGBu8kG0j6Hqg@mail.gmail.com>
+Subject: Re: [PATCH 7/7] dts: sdm845-db845c-u-boot: adjust MMC clocks
 To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,57 +91,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 9 Apr 2024 at 15:55, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+Hi Caleb,
+
+On Tue, 9 Apr 2024 at 23:33, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> GPT partition tables include two bytes worth of vendor defined
-> attributes, per partition. ChromeOS and Qualcomm both use these (with
-> different encoding!) to handle A/B slot switching with a retry counter.
->
-> Expose these via the disk_partition struct so that they can be parsed by
-> the relevant board code.
->
-> This will be used on Qualcomm boards to determine which slot we're
-> booting on so that we can flash capsule updates to the correct one.
+> Remove the reference to the xo clock which is on the unsupported rpmhcc
+> clock controller. It isn't needed for MMC functionality.
+
+Can it rather be handled via a NOP clock driver for rpmhcc? I suppose
+this kind of DT modifications would push us away from upstream DT
+compatibility.
+
+-Sumit
+
 >
 > Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  disk/part_efi.c | 1 +
->  include/part.h  | 1 +
->  2 files changed, 2 insertions(+)
+>  arch/arm/dts/sdm845-db845c-u-boot.dtsi | 7 +++++++
+>  1 file changed, 7 insertions(+)
 >
-> diff --git a/disk/part_efi.c b/disk/part_efi.c
-> index 4ce9243ef25c..d3ce4dd01dcd 100644
-> --- a/disk/part_efi.c
-> +++ b/disk/part_efi.c
-> @@ -292,8 +292,9 @@ int part_get_info_efi(struct blk_desc *desc, int part,
->         snprintf((char *)info->name, sizeof(info->name), "%s",
->                  print_efiname(&gpt_pte[part - 1]));
->         strcpy((char *)info->type, "U-Boot");
->         info->bootable = get_bootable(&gpt_pte[part - 1]);
-> +       info->type_flags = gpt_pte[part - 1].attributes.fields.type_guid_specific;
->         if (CONFIG_IS_ENABLED(PARTITION_UUIDS)) {
->                 uuid_bin_to_str(gpt_pte[part - 1].unique_partition_guid.b,
->                                 (char *)disk_partition_uuid(info),
->                                 UUID_STR_FORMAT_GUID);
-> diff --git a/include/part.h b/include/part.h
-> index 32ee40488563..afae51f1b933 100644
-> --- a/include/part.h
-> +++ b/include/part.h
-> @@ -68,8 +68,9 @@ struct disk_partition {
->          * PART_BOOTABLE                the MBR bootable flag is set
->          * PART_EFI_SYSTEM_PARTITION    the partition is an EFI system partition
->          */
->         int     bootable;
-> +       u16     type_flags;     /* top 16 bits of GPT partition attributes      */
->  #if CONFIG_IS_ENABLED(PARTITION_UUIDS)
->         char    uuid[UUID_STR_LEN + 1]; /* filesystem UUID as string, if exists */
->  #endif
->  #ifdef CONFIG_PARTITION_TYPE_GUID
+> diff --git a/arch/arm/dts/sdm845-db845c-u-boot.dtsi b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
+> index 906f9faa5451..9e4533e603c5 100644
+> --- a/arch/arm/dts/sdm845-db845c-u-boot.dtsi
+> +++ b/arch/arm/dts/sdm845-db845c-u-boot.dtsi
+> @@ -6,4 +6,11 @@
+>   */
+>  &pcie0_3p3v_dual {
+>         regulator-always-on;
+>  };
+> +
+> +&sdhc_2 {
+> +       /* Remove the unsupported rpmhcc xo clock reference */
+> +       clocks = <&gcc GCC_SDCC2_AHB_CLK>,
+> +                <&gcc GCC_SDCC2_APPS_CLK>;
+> +       clock-names = "iface", "core";
+> +};
 >
 > --
 > 2.44.0
 >
-I think this would make more sense to be sent along with the capsule
-update patches
-In any case
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
