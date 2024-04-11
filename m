@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C6ABCD1297
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 03:16:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4068CD129C
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 03:18:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 872E487F70;
-	Thu, 11 Apr 2024 05:16:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 578F887F70;
+	Thu, 11 Apr 2024 05:18:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TPlspEKL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Fuso2qrc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C04988140; Thu, 11 Apr 2024 05:16:24 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 719B187B71; Thu, 11 Apr 2024 05:18:19 +0200 (CEST)
+Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
+ [IPv6:2607:f8b0:4864:20::831])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41182881B7
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:16:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C1BE881C9
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:18:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-69b10ead8f5so23996866d6.0
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 20:16:21 -0700 (PDT)
+Received: by mail-qt1-x831.google.com with SMTP id
+ d75a77b69052e-434a76386feso28694971cf.1
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 20:18:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712805380; x=1713410180; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1712805496; x=1713410296; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=ai7L3lDbdvP1AH0FxXvLGNUR/2Li257RF1T6Dw0nXJs=;
- b=TPlspEKLbMu8dhcYlFFZgQuzIOZV97JkGZ/7+bPenWfNk0KQ9h8AUpzrmH2jHVakaC
- vy5EVSl6T1aqZmTf0PDKl2Wr2ykV3UkWRqSpuej0AGEx5wfW5vmmeT6+AQo4Si3GUpU/
- 7TxlrxvRAxT+QDyX2xrwq5CdUsqgaRnwobOz36r0m+SpVz7m4Uc2oo9GCJIi6Dm2uG7r
- C6zwyR9tijWU2VqoQAcnaVarj0kGYeqK+QbvrYaJcyddu5/84r+wrfA8y7wK9gb6Em5t
- ZuuFQMZRcgzQrxoQsB/1quxw4/T+63A9+gre7Lq+AF0lumBX4rd06GfErI7cDqVXdNs6
- D8Qw==
+ bh=UjBjI6ucSQp1DNOkpjK0Ur65ciQY7jvjZutvfHUAfX8=;
+ b=Fuso2qrcosLuuAMBr88gnjMP55fWkONztQgQEWs3K2jCnXhKA4j7AnZ1At7JgsdoGF
+ aLnO/iU2/desg58SEzoVEriL/Jg1sD+S8ib/gIKXZewsk7b/hGymT+ZRrCcIgfINejeW
+ 5GE5kWNYm6qULLOZl+gOFyZ+HegjPSIe6jvhql7kpPPsdItEH+12hkABWJVRkc7uy+hD
+ 34h7ZC6StDPpzksIc/MvnzHw4Rk5KcqVQ5+/VKJWPk1FWHHgZosVs5gEue4QWJuMSrvJ
+ igagOwf9U5lj3okGP5O6+3hMAJJe6duFUOp5bexaTOVa+4F2jiIUVyOvRHIBo5piXt6X
+ o7CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712805380; x=1713410180;
+ d=1e100.net; s=20230601; t=1712805496; x=1713410296;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ai7L3lDbdvP1AH0FxXvLGNUR/2Li257RF1T6Dw0nXJs=;
- b=M76/JwZ2rQ2EWytGkSN58/v6+mlO5l02k9QURl/io0fPHy1vtUSf6fmSe7G9gPNCL4
- 9eNl4Smabah0T8aGGF8pC4YvoQogiHpYj7et5ycPZYXnsSGBymLx3vJQFCk3lefu0WnB
- QIR42hxy7lpXUL7YNFqE3ZR9Tnc+ZzflhfxQnod2t5VUZK1YamYr9POQAWo9DypbQ2CY
- vBjv83xtQSg9UwRdv+YMF49bV0/IYpwGMRUgLxxfJwW9kj/v+H1N5ZMih6AlFCkkR5Mx
- KWf4yhNKCOqtV4xS8JM+/HmEc9NSw9hcgZfoCAQuDQ8EsAOApCghPUKRyKgp1/TMtXtI
- Oz6g==
-X-Gm-Message-State: AOJu0Yz7MeNBoH8nE5m0rUZM7vDgfGJ5Qk4cu3HJm7WVrn1u9e7uDeas
- ISIKqnwvPtHvJirOQIweinOtdAeIrBVzyxRv9jT3XTTuWwI+SgJw4RKIvw==
-X-Google-Smtp-Source: AGHT+IEUcBVvVUyYw2lfcOsk3vdwbSg+pxb+fQkd2G5yM1qJFlFP45RhL1GxwO72IF76M7dyQ+YIVQ==
-X-Received: by 2002:a05:6214:1bc5:b0:69b:213e:a6d1 with SMTP id
- m5-20020a0562141bc500b0069b213ea6d1mr4778497qvc.21.1712805379916; 
- Wed, 10 Apr 2024 20:16:19 -0700 (PDT)
+ bh=UjBjI6ucSQp1DNOkpjK0Ur65ciQY7jvjZutvfHUAfX8=;
+ b=VKor6m3fjg9kwmLCe6LLPTNrMl/592fOXb6oWSOj+Bm9LBEdVcb+P0AMMQvEzYGHz0
+ oFgjiGTx3N3j5ss9GV4+4ZVEaC5wZgekizI4919u5AWQJZ/ba+9PQzSHP/atfjexKlhF
+ /NgCy2bgwmfGwpVIlzRPNxzzXnlHndpS/EqrcyAvLnb9rJgFJMWd1OPEHKFJ1M6wqLZ5
+ NTM0NX8oY8aADHs3eRjOR3OMRhiVaZWvUwScvnAlpqlxB53y9ZvWm3+4lewwDmrxm4x8
+ t0Cla3lsczZkVGT4JFc2IlYQQHbkOLdJXxKeCFRtZlcj88cstyUNRGp/kxbrHnY4P7U9
+ gR6w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVsuH7/ytnWdw2jjWiiLT0X7pSePWnUt+JFifayXpYjE0xGC5KL6WR/T4eQlp8DOpHHQdc4uaHpsH8QNdVSy8MmS2CLqw==
+X-Gm-Message-State: AOJu0Yzc6xbJfDE2gYUpfnr6+aA4aFYhDHHr7uIWGrMO/e7oJ4FqxkPm
+ eq5PhntncE+Cc4giY3fQ0/GY9I6fRoSMCxFlHDCn2qPyYHtqHPTs
+X-Google-Smtp-Source: AGHT+IEfl9MDTmbCbuMF2GnqSEourBqnk6fVK1jGAtvc0thPaIRB9PgbZ8D33buiUQklqJKk1rV5TA==
+X-Received: by 2002:a05:622a:15cd:b0:435:ecc5:847f with SMTP id
+ d13-20020a05622a15cd00b00435ecc5847fmr3798513qty.10.1712805496119; 
+ Wed, 10 Apr 2024 20:18:16 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- h18-20020a0ceed2000000b006991de7276asm371718qvs.94.2024.04.10.20.16.19
+ k3-20020ac86043000000b004347627f12esm361086qtm.11.2024.04.10.20.18.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Apr 2024 20:16:19 -0700 (PDT)
-Message-ID: <ea965f53-7848-17af-d591-59a9ed54a5ad@gmail.com>
-Date: Wed, 10 Apr 2024 23:16:18 -0400
+ Wed, 10 Apr 2024 20:18:15 -0700 (PDT)
+Message-ID: <e3bebfc1-685f-6439-d7e2-d3b0ec3b09b6@gmail.com>
+Date: Wed, 10 Apr 2024 23:18:15 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH 1/1] clk: sifive: avoid declaring static variables in
- includes
+Subject: Re: [PATCH] clk: imx8mp: add pwm clocks support
 Content-Language: en-US
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Lukasz Majewski <lukma@denx.de>
-Cc: u-boot@lists.denx.de, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>
-References: <20240216231804.141470-1-heinrich.schuchardt@canonical.com>
+To: Tommaso Merciai <tomm.merciai@gmail.com>, Stefano Babic <sbabic@denx.de>, 
+ Fabio Estevam <festevam@gmail.com>
+Cc: linuxfancy@googlegroups.com, Lukasz Majewski <lukma@denx.de>,
+ u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+References: <20230310151544.1111042-1-tomm.merciai@gmail.com>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240216231804.141470-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20230310151544.1111042-1-tomm.merciai@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -97,157 +98,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/16/24 18:18, Heinrich Schuchardt wrote:
-> The existing code is unnecessarily convoluted:
+On 3/10/23 10:15, Tommaso Merciai wrote:
+> Add clocks support for the PWM controllers. This is ported from
+> Linux v6.3.0-rc1
 > 
-> Arrays __prci_init_clocks_fu[5|7]40  are initialized with data.
-> In separate includes fu[5|7]40-prci.h the size of the arrays is provided as
-> constants.
-> 
-> By moving the structures prci_clk_fu[5|7]40 to the respective code modules
-> we can directly use ARRAY_SIZE() to access the size of the data used for
-> initialization.
-> 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Tommaso Merciai <tomm.merciai@gmail.com>
 > ---
->   drivers/clk/sifive/fu540-prci.c  |  7 ++++++-
->   drivers/clk/sifive/fu540-prci.h  | 22 ----------------------
->   drivers/clk/sifive/fu740-prci.c  |  7 ++++++-
->   drivers/clk/sifive/fu740-prci.h  | 22 ----------------------
->   drivers/clk/sifive/sifive-prci.c |  3 +--
->   drivers/clk/sifive/sifive-prci.h |  4 ++++
->   6 files changed, 17 insertions(+), 48 deletions(-)
->   delete mode 100644 drivers/clk/sifive/fu540-prci.h
->   delete mode 100644 drivers/clk/sifive/fu740-prci.h
+>   drivers/clk/imx/clk-imx8mp.c | 24 ++++++++++++++++++++++++
+>   1 file changed, 24 insertions(+)
 > 
-> diff --git a/drivers/clk/sifive/fu540-prci.c b/drivers/clk/sifive/fu540-prci.c
-> index ceb2c6fab0d..e55a26ab8fd 100644
-> --- a/drivers/clk/sifive/fu540-prci.c
-> +++ b/drivers/clk/sifive/fu540-prci.c
-> @@ -58,7 +58,7 @@ static const struct __prci_clock_ops sifive_fu540_prci_tlclksel_clk_ops = {
->   };
+> diff --git a/drivers/clk/imx/clk-imx8mp.c b/drivers/clk/imx/clk-imx8mp.c
+> index ffbc1d1ba9..fac87ff505 100644
+> --- a/drivers/clk/imx/clk-imx8mp.c
+> +++ b/drivers/clk/imx/clk-imx8mp.c
+> @@ -122,6 +122,22 @@ static const char *imx8mp_gic_sels[] = {"clock-osc-24m", "sys_pll2_200m", "sys_p
+>   					"sys_pll2_100m", "sys_pll1_800m",
+>   					"sys_pll2_500m", "clk_ext4", "audio_pll2_out" };
 >   
->   /* List of clock controls provided by the PRCI */
-> -struct __prci_clock __prci_init_clocks_fu540[] = {
-> +static struct __prci_clock __prci_init_clocks_fu540[] = {
->   	[PRCI_CLK_COREPLL] = {
->   		.name = "corepll",
->   		.parent_name = "hfclk",
-> @@ -83,3 +83,8 @@ struct __prci_clock __prci_init_clocks_fu540[] = {
->   		.ops = &sifive_fu540_prci_tlclksel_clk_ops,
->   	},
->   };
+> +static const char * const imx8mp_pwm1_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll1_160m",
+> +					"sys_pll1_40m", "sys_pll3_out", "clk_ext1",
+> +					"sys_pll1_80m", "video_pll1_out", };
 > +
-> +const struct prci_clk_desc prci_clk_fu540 = {
-> +	.clks = __prci_init_clocks_fu540,
-> +	.num_clks = ARRAY_SIZE(__prci_init_clocks_fu540),
-> +};
-> diff --git a/drivers/clk/sifive/fu540-prci.h b/drivers/clk/sifive/fu540-prci.h
-> deleted file mode 100644
-> index 113301107da..00000000000
-> --- a/drivers/clk/sifive/fu540-prci.h
-> +++ /dev/null
-> @@ -1,22 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0 */
-> -/*
-> - * Copyright (C) 2020-2021 SiFive, Inc.
-> - * Zong Li
-> - * Pragnesh Patel
-> - */
-> -
-> -#ifndef __SIFIVE_CLK_FU540_PRCI_H
-> -#define __SIFIVE_CLK_FU540_PRCI_H
-> -
-> -#include "sifive-prci.h"
-> -
-> -#define NUM_CLOCK_FU540	4
-> -
-> -extern struct __prci_clock __prci_init_clocks_fu540[NUM_CLOCK_FU540];
-> -
-> -static const struct prci_clk_desc prci_clk_fu540 = {
-> -	.clks = __prci_init_clocks_fu540,
-> -	.num_clks = ARRAY_SIZE(__prci_init_clocks_fu540),
-> -};
-> -
-> -#endif /* __SIFIVE_CLK_FU540_PRCI_H */
-> diff --git a/drivers/clk/sifive/fu740-prci.c b/drivers/clk/sifive/fu740-prci.c
-> index 5edc864e4bd..4274b215d2f 100644
-> --- a/drivers/clk/sifive/fu740-prci.c
-> +++ b/drivers/clk/sifive/fu740-prci.c
-> @@ -102,7 +102,7 @@ static const struct __prci_clock_ops sifive_fu740_prci_pcieaux_clk_ops = {
->   };
->   
->   /* List of clock controls provided by the PRCI */
-> -struct __prci_clock __prci_init_clocks_fu740[] = {
-> +static struct __prci_clock __prci_init_clocks_fu740[] = {
->   	[FU740_PRCI_CLK_COREPLL] = {
->   		.name = "corepll",
->   		.parent_name = "hfclk",
-> @@ -156,3 +156,8 @@ struct __prci_clock __prci_init_clocks_fu740[] = {
->   		.pwd = &__prci_pcieaux_data,
->   	}
->   };
+> +static const char * const imx8mp_pwm2_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll1_160m",
+> +					"sys_pll1_40m", "sys_pll3_out", "clk_ext1",
+> +					"sys_pll1_80m", "video_pll1_out", };
 > +
-> +const struct prci_clk_desc prci_clk_fu740 = {
-> +	.clks = __prci_init_clocks_fu740,
-> +	.num_clks = ARRAY_SIZE(__prci_init_clocks_fu740),
-> +};
-> diff --git a/drivers/clk/sifive/fu740-prci.h b/drivers/clk/sifive/fu740-prci.h
-> deleted file mode 100644
-> index b74f0789061..00000000000
-> --- a/drivers/clk/sifive/fu740-prci.h
-> +++ /dev/null
-> @@ -1,22 +0,0 @@
-> -/* SPDX-License-Identifier: GPL-2.0 */
-> -/*
-> - * Copyright (C) 2020-2021 SiFive, Inc.
-> - * Zong Li
-> - * Pragnesh Patel
-> - */
-> -
-> -#ifndef __SIFIVE_CLK_FU740_PRCI_H
-> -#define __SIFIVE_CLK_FU740_PRCI_H
-> -
-> -#include "sifive-prci.h"
-> -
-> -#define NUM_CLOCK_FU740		9
-> -
-> -extern struct __prci_clock __prci_init_clocks_fu740[NUM_CLOCK_FU740];
-> -
-> -static const struct prci_clk_desc prci_clk_fu740 = {
-> -	.clks = __prci_init_clocks_fu740,
-> -	.num_clks = ARRAY_SIZE(__prci_init_clocks_fu740),
-> -};
-> -
-> -#endif /* __SIFIVE_CLK_FU740_PRCI_H */
-> diff --git a/drivers/clk/sifive/sifive-prci.c b/drivers/clk/sifive/sifive-prci.c
-> index c8fb6002907..603a176d06a 100644
-> --- a/drivers/clk/sifive/sifive-prci.c
-> +++ b/drivers/clk/sifive/sifive-prci.c
-> @@ -34,8 +34,7 @@
->   #include <linux/math64.h>
->   #include <dt-bindings/clock/sifive-fu740-prci.h>
->   
-> -#include "fu540-prci.h"
-> -#include "fu740-prci.h"
-> +#include "sifive-prci.h"
->   
->   /*
->    * Private functions
-> diff --git a/drivers/clk/sifive/sifive-prci.h b/drivers/clk/sifive/sifive-prci.h
-> index 5ce33d61846..b391698081d 100644
-> --- a/drivers/clk/sifive/sifive-prci.h
-> +++ b/drivers/clk/sifive/sifive-prci.h
-> @@ -320,4 +320,8 @@ unsigned long sifive_prci_hfpclkplldiv_recalc_rate(struct __prci_clock *pc,
->   
->   int sifive_prci_clock_enable(struct __prci_clock *pc, bool enable);
->   
-> +/* Clock driver data */
-> +extern const struct prci_clk_desc prci_clk_fu540;
-> +extern const struct prci_clk_desc prci_clk_fu740;
+> +static const char * const imx8mp_pwm3_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll1_160m",
+> +					"sys_pll1_40m", "sys_pll3_out", "clk_ext2",
+> +					"sys_pll1_80m", "video_pll1_out", };
 > +
->   #endif /* __SIFIVE_CLK_SIFIVE_PRCI_H */
+> +static const char * const imx8mp_pwm4_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll1_160m",
+> +					"sys_pll1_40m", "sys_pll3_out", "clk_ext2",
+> +					"sys_pll1_80m", "video_pll1_out", };
+> +
+>   static const char *imx8mp_ecspi1_sels[] = {"clock-osc-24m", "sys_pll2_200m", "sys_pll1_40m",
+>   						  "sys_pll1_160m", "sys_pll1_800m", "sys_pll3_out",
+>   						  "sys_pll2_250m", "audio_pll2_out", };
+> @@ -270,6 +286,10 @@ static int imx8mp_clk_probe(struct udevice *dev)
+>   	clk_dm(IMX8MP_CLK_GIC, imx8m_clk_composite_critical("gic", imx8mp_gic_sels, base + 0xb200));
+>   	clk_dm(IMX8MP_CLK_ECSPI1, imx8m_clk_composite("ecspi1", imx8mp_ecspi1_sels, base + 0xb280));
+>   	clk_dm(IMX8MP_CLK_ECSPI2, imx8m_clk_composite("ecspi2", imx8mp_ecspi2_sels, base + 0xb300));
+> +	clk_dm(IMX8MP_CLK_PWM1, imx8m_clk_composite_critical("pwm1", imx8mp_pwm1_sels, base + 0xb380));
+> +	clk_dm(IMX8MP_CLK_PWM2, imx8m_clk_composite_critical("pwm2", imx8mp_pwm2_sels, base + 0xb400));
+> +	clk_dm(IMX8MP_CLK_PWM3, imx8m_clk_composite_critical("pwm3", imx8mp_pwm3_sels, base + 0xb480));
+> +	clk_dm(IMX8MP_CLK_PWM4, imx8m_clk_composite_critical("pwm4", imx8mp_pwm4_sels, base + 0xb500));
+>   	clk_dm(IMX8MP_CLK_ECSPI3, imx8m_clk_composite("ecspi3", imx8mp_ecspi3_sels, base + 0xc180));
+>   
+>   	clk_dm(IMX8MP_CLK_WDOG, imx8m_clk_composite("wdog", imx8mp_wdog_sels, base + 0xb900));
+> @@ -292,6 +312,10 @@ static int imx8mp_clk_probe(struct udevice *dev)
+>   	clk_dm(IMX8MP_CLK_I2C2_ROOT, imx_clk_gate4("i2c2_root_clk", "i2c2", base + 0x4180, 0));
+>   	clk_dm(IMX8MP_CLK_I2C3_ROOT, imx_clk_gate4("i2c3_root_clk", "i2c3", base + 0x4190, 0));
+>   	clk_dm(IMX8MP_CLK_I2C4_ROOT, imx_clk_gate4("i2c4_root_clk", "i2c4", base + 0x41a0, 0));
+> +	clk_dm(IMX8MP_CLK_PWM1_ROOT, imx_clk_gate4("pwm1_root_clk", "pwm1", base + 0x4280, 0));
+> +	clk_dm(IMX8MP_CLK_PWM2_ROOT, imx_clk_gate4("pwm2_root_clk", "pwm2", base + 0x4290, 0));
+> +	clk_dm(IMX8MP_CLK_PWM3_ROOT, imx_clk_gate4("pwm3_root_clk", "pwm3", base + 0x42a0, 0));
+> +	clk_dm(IMX8MP_CLK_PWM4_ROOT, imx_clk_gate4("pwm4_root_clk", "pwm4", base + 0x42b0, 0));
+>   	clk_dm(IMX8MP_CLK_QSPI_ROOT, imx_clk_gate4("qspi_root_clk", "qspi", base + 0x42f0, 0));
+>   	clk_dm(IMX8MP_CLK_I2C5_ROOT, imx_clk_gate2("i2c5_root_clk", "i2c5", base + 0x4330, 0));
+>   	clk_dm(IMX8MP_CLK_I2C6_ROOT, imx_clk_gate2("i2c6_root_clk", "i2c6", base + 0x4340, 0));
 
-How does this affect SPL size?
+Acked-by: Sean Anderson <seanga2@gmail.com>
 
---Sean
+But I would like to see a RB from one of the i.MX maintainers (CC'd).
