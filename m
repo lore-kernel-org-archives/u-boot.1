@@ -4,74 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0D6BCD1292
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 06:09:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F1BCD1292
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 06:45:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B36488137;
-	Thu, 11 Apr 2024 08:09:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id C793C88344;
+	Thu, 11 Apr 2024 08:45:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="LmF8eOeA";
+	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="dKkoDo3g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F92A881CF; Thu, 11 Apr 2024 08:09:38 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C16B588361; Thu, 11 Apr 2024 08:45:32 +0200 (CEST)
+Received: from out-189.mta0.migadu.com (out-189.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::bd])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2752588137
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 08:09:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9248588344
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 08:45:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=jookia.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-56e509baddaso4511769a12.1
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 23:09:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1712815775; x=1713420575;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kbDa/AJE2PjhvNrIotV6ILgqwhL0g7j3a3MTSfnrTqY=;
- b=LmF8eOeA+aPGpg+qkSaGrUY7RzaIXsXJDaUiRRwyUHYYjGlsdfyLbydZYU+X72CG43
- SxwB6wmBoJHd2yjaGyA9t0b5TvMrq1cp/1j0U7mb5cnEFlgWAaKnqEVc+PMk3PaUnLQm
- gwQMF3glyDtxDjNGJzaMbxaurvznst+1VOSEo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712815775; x=1713420575;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=kbDa/AJE2PjhvNrIotV6ILgqwhL0g7j3a3MTSfnrTqY=;
- b=bVvO2pdviboPak8BqCod7sE5tsqijWemlRcqjYxGnLACescHxTA9B79/wyiRuoyosf
- zGL0AvQkwOMOSjlL2dqzV0EZlSxxoksoOi+C31M/U8wQXx2K7RaJwisfhG93o2kRT/Lc
- 5roQHS0DFpeqQTVhqJx+VxmkkMmk/A9MwMnJnFo4FWmJB3hnkt00udiM5meaA6d0zg4p
- 3GlNJTGaTRQ8UynG9nCc+Aw/fFFHkAnuricbdctG68MLlBSu0YcHFPmQdQ7WTeg+8nm6
- NO1DpTAUS+1IRSoBuMCV1U8N2wk7sCQ0/K3vMi16wjqpQakVYamPofHce5rOwFn8++m8
- XFBA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU0lHHrO+4+Q9a1N/8J8SGvXZU8w70WknYyvUhYmQcRMSj7N8t4E2eMVe2NWnr2BqEK0NucajQXeTBJn3XE/3gUmmKUOA==
-X-Gm-Message-State: AOJu0YzV7kFlClflQjD6XycZtSVgFV/CPajnhMuwg/mMotnnel/6xsUC
- /2LaxP+41jd1zK49fNrmW9XxyRzUdsKtpfgXvks8v7ylPPIQjqIBZLZlJSIIn6S6lSfAzG4rzAE
- T0as6t9pmPSWq7tVmBjhe/rnuNDpPZgeL/iamTw==
-X-Google-Smtp-Source: AGHT+IFzvab37N1XZJE0nVhZr2vlt5ktRIjJWlUhE269Gg+13gb2ehlkuwIT9Dl/d8LEhhGeWUrJBjQ5gOjzuE6CJPg=
-X-Received: by 2002:a17:906:c14c:b0:a51:da1d:c0e1 with SMTP id
- dp12-20020a170906c14c00b00a51da1dc0e1mr3424780ejc.50.1712815775433; Wed, 10
- Apr 2024 23:09:35 -0700 (PDT)
+ spf=none smtp.mailfrom=contact@jookia.org
+Date: Thu, 11 Apr 2024 16:45:04 +1000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
+ t=1712817928;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=hMaXI2XBTZV9AucirTQS0EosFfNCb4ki5KWjAf/eqLU=;
+ b=dKkoDo3gFVF6/VTZ5HUctqRHZUxKMLdxYO8hGPSWMSAck7AUqa/AUlxqgv73vMN595FgEl
+ LwSTMzEiHI6XRMk5IqRqKuu9U6bASQxjWgoUzlaSJ4qQGIuoY76LJq6i80rHFAnQaFlICC
+ NaXuzeJ8MVGKdCjLAXtNo5H1D+D/o5/3gRnbnNMdQ+SitYat7gFlTE3+NG3L1p8t0RIIhf
+ LA7VnRFRiciVOoSqLkuymB8pb6vP7meQklBgHtWoqy/XPW2JhvA2f84GrAK71H/ep6VHB2
+ tDWVNM0LU+oUzwhHAmzOi33TqezEkIFsKB4MGPsQ7QulfJHUOSfrCkXZp+H5uQ==
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: John Watts <contact@jookia.org>
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v2 0/2] sunxi, usb: UDC/DM gadget model support
+Message-ID: <ZheG8J8h-X5GPdwX@titan>
+References: <20230608195631.55364-1-CFSworks@gmail.com>
 MIME-Version: 1.0
-References: <20240411-mtd-v1-1-fe300f6ab657@jookia.org>
-In-Reply-To: <20240411-mtd-v1-1-fe300f6ab657@jookia.org>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Thu, 11 Apr 2024 08:09:24 +0200
-Message-ID: <CAOf5uwmcrh6M-GGYwZVk3D4LzZRnk8fE+88JJgtOAHJ_X2=P2Q@mail.gmail.com>
-Subject: Re: [PATCH] ubi: Depend on MTD
-To: John Watts <contact@jookia.org>
-Cc: Kyungmin Park <kmpark@infradead.org>, Heiko Schocher <hs@denx.de>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20230608195631.55364-1-CFSworks@gmail.com>
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,59 +68,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+Hi there,
 
-On Thu, Apr 11, 2024 at 7:06=E2=80=AFAM John Watts <contact@jookia.org> wro=
-te:
->
-> UBI required MTD to build correctly, add it as a Kconfig dependency.
->
-> Signed-off-by: John Watts <contact@jookia.org>
-> ---
-> While working with UBI on my SPI NAND patch series I found it was
-> possible to enable it without enabling the MTD subsystem.
-> Add a Kconfig option to solve this.
-> ---
->  drivers/mtd/ubi/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/drivers/mtd/ubi/Kconfig b/drivers/mtd/ubi/Kconfig
-> index 5783d36c04..fd446d6efb 100644
-> --- a/drivers/mtd/ubi/Kconfig
-> +++ b/drivers/mtd/ubi/Kconfig
-> @@ -9,6 +9,7 @@ config UBI_SILENCE_MSG
->
->  config MTD_UBI
->         bool "Enable UBI - Unsorted block images"
-> +       depends on MTD
->         select RBTREE
->         select MTD_PARTITIONS
->         help
->
-> ---
+I've tested this patch and it seems to support the gadget model, but I'm having
+a lot of USB errors. What device did you test this on?
 
-Reviewed-by: Michael Trimarchi <michael@amarulasolutins.com>
+John.
 
-> base-commit: 777c28460947371ada40868dc994dfe8537d7115
-> change-id: 20240411-mtd-d2e811e17cc8
->
-
-
-> Best regards,
-> --
-> John Watts <contact@jookia.org>
->
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+On Thu, Jun 08, 2023 at 01:56:29PM -0600, Sam Edwards wrote:
+> Happy Thursday, U-Boot list!
+> 
+> Here is attempt 2 at making this USB controller driver compatible with
+> DM's gadget model, following what most of the other musb variants do.
+> 
+> v2 removes the unwanted printfs in the probe func, per feedback from Marek.
+> I received no other feedback against v1 of this patch.
+> 
+> Cheers,
+> Sam
+> 
+> Sam Edwards (2):
+>   usb: musb-new: sunxi: remove unwanted printfs
+>   usb: musb-new: sunxi: make compatible with UDC/DM gadget model
+> 
+>  drivers/usb/musb-new/sunxi.c | 52 +++++++++++++++++++++---------------
+>  1 file changed, 31 insertions(+), 21 deletions(-)
+> 
+> -- 
+> 2.39.2
+> 
