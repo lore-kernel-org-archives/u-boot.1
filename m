@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 438B4CD1292
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 04:26:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2C52CD1297
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 04:27:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 642C187F1E;
-	Thu, 11 Apr 2024 06:26:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C947A88149;
+	Thu, 11 Apr 2024 06:27:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="LgWlp8mz";
+	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="u+kBPUEZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B58187F1E; Thu, 11 Apr 2024 06:26:56 +0200 (CEST)
-Received: from out-178.mta0.migadu.com (out-178.mta0.migadu.com
- [91.218.175.178])
+ id 73D8888013; Thu, 11 Apr 2024 06:27:04 +0200 (CEST)
+Received: from out-189.mta1.migadu.com (out-189.mta1.migadu.com
+ [IPv6:2001:41d0:203:375::bd])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F05F987D8E
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 06:26:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6443D88120
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 06:27:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=jookia.org
 Authentication-Results: phobos.denx.de;
@@ -29,41 +29,41 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
- t=1712809612;
+ t=1712809621;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding;
- bh=NCLxEs15xpPjw4EBMO0macnyKP0cJxProVVji/MKH0k=;
- b=LgWlp8mzqZ1zDWMa8lF2CVh/JOLwV63mhtuL0g7c0llMWadi/uviL80vpBz1agDjcqDRe4
- dDtVh82M/BqsRY517lUW6y+QHSKmiwp/qd0q2YKJFGiWYrYxHgY/BUyGgOK1oniKE/6OCL
- 3mJP6FF+4f8NVN3CxET4jOdyKbjHZIOJ5vH+ZqAFCl+AqjaiDIDUKSU4kfzfGC6eg4jjX6
- P/dN2Ms6+pX5pIWPmxEgPSJ/k7D9SQZP1TxHORWeYSp7cmcCwrboU6BbkVEK64OJ3VwfS0
- J0HNLx6LbKy7fctajGn3+2rXBjnvWaNE1ylnCJkr3DK75rbWzH5/6b1pLYqyvg==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=5lKMVJ73f6Nb2LMmcsNBMmQfTNk9cknfMRLApBsRpi4=;
+ b=u+kBPUEZXD/FSqZbzixBk9Gz5EM/CcJbIFmNNqSWcZDLDOYV3eiXAEqbwLeOXEuO0ok0CX
+ DRZsTNvSzpHXULxerMpAPLuNHzwVMT/m/aI4qY67oyMdf8MdYBolPNu/2/6NK3JqBstZHv
+ 2r1T2Ccdub/+2Xek8cxxGoGjlV/xAz6k9n4kZ34lo3dXMFoP85/j0rjHoMbDa0IRu4+YQO
+ sGwPbn7rAcAxzCaktZo88cARDXn+87SWIEXJYwlyJEXW8pSkzokA/zWkJRnB3J2cvTHZcR
+ Yc5ILzzzHHt9ipxGxgGncna5Yb30B+ZHkeQiUL+V6XZjV796UrISyxt752+Pag==
 From: John Watts <contact@jookia.org>
-Subject: [PATCH RFC 00/15] Support SPI NAND booting on the T113
-Date: Thu, 11 Apr 2024 14:25:17 +1000
-Message-Id: <20240411-spinand-v1-0-62d31bb188e8@jookia.org>
+Date: Thu, 11 Apr 2024 14:25:18 +1000
+Subject: [PATCH RFC 01/15] sunxi: SPL SPI: Add SPI boot support for the
+ Allwinner R528/T113 SoCs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAC1mF2YC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDE0ND3eKCzLzEvBTd1CTzFAtjQ0sLQ+MkJaDqgqLUtMwKsEnRSkFuzkq
- xtbUA0T/ee14AAAA=
+Message-Id: <20240411-spinand-v1-1-62d31bb188e8@jookia.org>
+References: <20240411-spinand-v1-0-62d31bb188e8@jookia.org>
+In-Reply-To: <20240411-spinand-v1-0-62d31bb188e8@jookia.org>
 To: Jagan Teki <jagan@amarulasolutions.com>, 
  Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>, 
  Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
  Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, John Watts <contact@jookia.org>, 
- Maksim Kiselev <bigunclemax@gmail.com>, Sam Edwards <CFSworks@gmail.com>, 
- Icenowy Zheng <uwu@icenowy.me>, Samuel Holland <samuel@sholland.org>
-X-Developer-Signature: v=1; a=openssh-sha256; t=1712809527; l=2185;
+ Maksim Kiselev <bigunclemax@gmail.com>, Sam Edwards <CFSworks@gmail.com>
+X-Developer-Signature: v=1; a=openssh-sha256; t=1712809531; l=7921;
  i=contact@jookia.org; h=from:subject:message-id;
- bh=4/7aYLEqMPIX+CWQATKyoWd1casydJstCGlxGIQRSjA=;
+ bh=Yy4X+xhTna7kJp5ZjASMnzURZHw5est2CSExE+NooWo=;
  b=U1NIU0lHAAAAAQAAAEoAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAAAgpGuA3uho2
  8zVxm554DVLHyl4gq5/nBHglU5WIWN8/zYAAAAEc3NoOgAAAAZwYXRhdHQAAAAAAAAABnNoYTUx
- MgAAAGcAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAABABDKM3Mx3ishpHd6qk8sENcs
- 1uPFaXVYbM7j6xHf+v2SD+3DLs6mgh2MfRh+DpGuHPCHbM4OiY83KfTJQDNBQAgUAAOkG
+ MgAAAGcAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAABAfUoIKBc4YpT18/X0QDuO64V
+ 4JOdBU0lSjC4k5COXhXWw4YdvuDgOnc+VzQW6+ISyHlGx5PeeO58KjaxXblmBBQUAAOkU
 X-Developer-Key: i=contact@jookia.org; a=openssh;
  fpr=SHA256:6LBQmZH5u7i/edmEZXzCTwCrpSevs/ZshZxNmlD1thY
 X-Migadu-Flow: FLOW_OUT
@@ -83,58 +83,206 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series is my current working and tested setup for booting from
-SPI NAND chips on the Allwinner T113.
+From: Maksim Kiselev <bigunclemax@gmail.com>
 
-I have included the following patches from others. I may have modified
-them to work with the latest mainline:
+R528/T113 SoCs uses the same SPI IP as the H6, also have the same clocks
+and reset bits layout, but the CCU base is different. Another difference
+is that the new SoCs do not have a clock divider inside. Instead of this
+we should configure sample mode depending on input clock rate.
 
-https://lore.kernel.org/all/20221014030520.3067228-1-uwu@icenowy.me/
-https://lore.kernel.org/all/20231111133432.755363-2-bigunclemax@gmail.com/
+The pin assignment is also different: the H6 uses PC0, the R528/T113 PC4
+instead. This makes for a change in spi0_pinmux_setup() routine.
 
-Hopefully this can get the ball rolling on how to properly implement
-SPI NAND support in mainline U-Boot.
+This patch extends the H6/H616 #ifdef guards to also cover the R528/T113,
+using the shared CONFIG_SUNXI_GEN_NCAT2 and CONFIG_MACH_SUN8I_R528
+symbols. Also use CONFIG_SUNXI_GEN_NCAT2 symbol for the Kconfig
+dependency.
 
-Signed-off-by: John Watts <contact@jookia.org>
+Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+Tested-by: Sam Edwards <CFSworks@gmail.com>
 ---
-Icenowy Zheng (5):
-      sunxi: SPL SPI: extract code for doing SPI transfer
-      sunxi: SPL SPI: add support for read command with 2 byte address
-      sunxi: SPL SPI: allow multiple boot attempt
-      sunxi: SPL SPI: add initial support for booting from SPI NAND
-      sunxi: enable support for SPI NAND booting on SUNIV
+ arch/arm/mach-sunxi/Kconfig         |  2 +-
+ arch/arm/mach-sunxi/spl_spi_sunxi.c | 78 +++++++++++++++++++++++++++----------
+ 2 files changed, 58 insertions(+), 22 deletions(-)
 
-John Watts (9):
-      sunxi: Separate boot device and boot position
-      spl: Add BOOT_DEVICE_SPINAND option
-      sunxi: Implement BOOT_DEVICE_SPINAND in SPL
-      spl: Add SPL_SPINAND configuration options
-      sunxi: Use SPL_SPINAND for configuration
-      nand: Add spinand_ helper functions
-      sunxi: Implement spinand_ helpers
-      spl: Support SPI NAND boot in UBI
-      spl: Support loading FIT images in UBI
+diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+index fe89aec6b9..ddf9414b08 100644
+--- a/arch/arm/mach-sunxi/Kconfig
++++ b/arch/arm/mach-sunxi/Kconfig
+@@ -1078,7 +1078,7 @@ config SPL_STACK_R_ADDR
+ 
+ config SPL_SPI_SUNXI
+ 	bool "Support for SPI Flash on Allwinner SoCs in SPL"
+-	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUNXI_H3_H5 || MACH_SUN50I || MACH_SUN8I_R40 || SUN50I_GEN_H6 || MACH_SUNIV
++	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUNXI_H3_H5 || MACH_SUN50I || MACH_SUN8I_R40 || SUN50I_GEN_H6 || MACH_SUNIV || SUNXI_GEN_NCAT2
+ 	help
+ 	  Enable support for SPI Flash. This option allows SPL to read from
+ 	  sunxi SPI Flash. It uses the same method as the boot ROM, so does
+diff --git a/arch/arm/mach-sunxi/spl_spi_sunxi.c b/arch/arm/mach-sunxi/spl_spi_sunxi.c
+index 72faa7171c..7acb44f52a 100644
+--- a/arch/arm/mach-sunxi/spl_spi_sunxi.c
++++ b/arch/arm/mach-sunxi/spl_spi_sunxi.c
+@@ -72,18 +72,27 @@
+ #define SUN6I_CTL_ENABLE            BIT(0)
+ #define SUN6I_CTL_MASTER            BIT(1)
+ #define SUN6I_CTL_SRST              BIT(31)
++#define SUN6I_TCR_SDM               BIT(13)
+ #define SUN6I_TCR_XCH               BIT(31)
+ 
+ /*****************************************************************************/
+ 
+-#define CCM_AHB_GATING0             (0x01C20000 + 0x60)
+-#define CCM_H6_SPI_BGR_REG          (0x03001000 + 0x96c)
+-#ifdef CONFIG_SUN50I_GEN_H6
+-#define CCM_SPI0_CLK                (0x03001000 + 0x940)
++#if IS_ENABLED(CONFIG_SUN50I_GEN_H6)
++#define CCM_BASE                    0x03001000
++#elif IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2)
++#define CCM_BASE                    0x02001000
+ #else
+-#define CCM_SPI0_CLK                (0x01C20000 + 0xA0)
++#define CCM_BASE                    0x01C20000
+ #endif
+-#define SUN6I_BUS_SOFT_RST_REG0     (0x01C20000 + 0x2C0)
++
++#define CCM_AHB_GATING0             (CCM_BASE + 0x60)
++#define CCM_H6_SPI_BGR_REG          (CCM_BASE + 0x96c)
++#if IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2)
++#define CCM_SPI0_CLK                (CCM_BASE + 0x940)
++#else
++#define CCM_SPI0_CLK                (CCM_BASE + 0xA0)
++#endif
++#define SUN6I_BUS_SOFT_RST_REG0     (CCM_BASE + 0x2C0)
+ 
+ #define AHB_RESET_SPI0_SHIFT        20
+ #define AHB_GATE_OFFSET_SPI0        20
+@@ -101,17 +110,22 @@
+  */
+ static void spi0_pinmux_setup(unsigned int pin_function)
+ {
+-	/* All chips use PC0 and PC2. */
+-	sunxi_gpio_set_cfgpin(SUNXI_GPC(0), pin_function);
++	/* All chips use PC2. And all chips use PC0, except R528/T113 */
++	if (!IS_ENABLED(CONFIG_MACH_SUN8I_R528))
++		sunxi_gpio_set_cfgpin(SUNXI_GPC(0), pin_function);
++
+ 	sunxi_gpio_set_cfgpin(SUNXI_GPC(2), pin_function);
+ 
+-	/* All chips except H6 and H616 use PC1. */
+-	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6))
++	/* All chips except H6/H616/R528/T113 use PC1. */
++	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6) &&
++	    !IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+ 		sunxi_gpio_set_cfgpin(SUNXI_GPC(1), pin_function);
+ 
+-	if (IS_ENABLED(CONFIG_MACH_SUN50I_H6))
++	if (IS_ENABLED(CONFIG_MACH_SUN50I_H6) ||
++	    IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+ 		sunxi_gpio_set_cfgpin(SUNXI_GPC(5), pin_function);
+-	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616))
++	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616) ||
++	    IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+ 		sunxi_gpio_set_cfgpin(SUNXI_GPC(4), pin_function);
+ 
+ 	/* Older generations use PC23 for CS, newer ones use PC3. */
+@@ -125,7 +139,8 @@ static void spi0_pinmux_setup(unsigned int pin_function)
+ static bool is_sun6i_gen_spi(void)
+ {
+ 	return IS_ENABLED(CONFIG_SUNXI_GEN_SUN6I) ||
+-	       IS_ENABLED(CONFIG_SUN50I_GEN_H6);
++	       IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
++	       IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2);
+ }
+ 
+ static uintptr_t spi0_base_address(void)
+@@ -136,6 +151,9 @@ static uintptr_t spi0_base_address(void)
+ 	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6))
+ 		return 0x05010000;
+ 
++	if (IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
++		return 0x04025000;
++
+ 	if (!is_sun6i_gen_spi() ||
+ 	    IS_ENABLED(CONFIG_MACH_SUNIV))
+ 		return 0x01C05000;
+@@ -151,23 +169,30 @@ static void spi0_enable_clock(void)
+ 	uintptr_t base = spi0_base_address();
+ 
+ 	/* Deassert SPI0 reset on SUN6I */
+-	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6))
++	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
++	    IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+ 		setbits_le32(CCM_H6_SPI_BGR_REG, (1U << 16) | 0x1);
+ 	else if (is_sun6i_gen_spi())
+ 		setbits_le32(SUN6I_BUS_SOFT_RST_REG0,
+ 			     (1 << AHB_RESET_SPI0_SHIFT));
+ 
+ 	/* Open the SPI0 gate */
+-	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6))
++	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6) &&
++	    !IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+ 		setbits_le32(CCM_AHB_GATING0, (1 << AHB_GATE_OFFSET_SPI0));
+ 
+ 	if (IS_ENABLED(CONFIG_MACH_SUNIV)) {
+ 		/* Divide by 32, clock source is AHB clock 200MHz */
+ 		writel(SPI0_CLK_DIV_BY_32, base + SUN6I_SPI0_CCTL);
+ 	} else {
+-		/* Divide by 4 */
+-		writel(SPI0_CLK_DIV_BY_4, base + (is_sun6i_gen_spi() ?
+-					  SUN6I_SPI0_CCTL : SUN4I_SPI0_CCTL));
++		/* New SoCs do not have a clock divider inside */
++		if (!IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2)) {
++			/* Divide by 4 */
++			writel(SPI0_CLK_DIV_BY_4,
++			       base + (is_sun6i_gen_spi() ? SUN6I_SPI0_CCTL :
++			       SUN4I_SPI0_CCTL));
++		}
++
+ 		/* 24MHz from OSC24M */
+ 		writel((1 << 31), CCM_SPI0_CLK);
+ 	}
+@@ -179,6 +204,14 @@ static void spi0_enable_clock(void)
+ 		/* Wait for completion */
+ 		while (readl(base + SUN6I_SPI0_GCR) & SUN6I_CTL_SRST)
+ 			;
++
++		/*
++		 * For new SoCs we should configure sample mode depending on
++		 * input clock. As 24MHz from OSC24M is used, we could use
++		 * normal sample mode by setting SDM bit in the TCR register
++		 */
++		if (IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
++			setbits_le32(base + SUN6I_SPI0_TCR, SUN6I_TCR_SDM);
+ 	} else {
+ 		/* Enable SPI in the master mode and reset FIFO */
+ 		setbits_le32(base + SUN4I_SPI0_CTL, SUN4I_CTL_MASTER |
+@@ -205,11 +238,13 @@ static void spi0_disable_clock(void)
+ 		writel(0, CCM_SPI0_CLK);
+ 
+ 	/* Close the SPI0 gate */
+-	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6))
++	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6) &&
++	    !IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+ 		clrbits_le32(CCM_AHB_GATING0, (1 << AHB_GATE_OFFSET_SPI0));
+ 
+ 	/* Assert SPI0 reset on SUN6I */
+-	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6))
++	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
++	    IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+ 		clrbits_le32(CCM_H6_SPI_BGR_REG, (1U << 16) | 0x1);
+ 	else if (is_sun6i_gen_spi())
+ 		clrbits_le32(SUN6I_BUS_SOFT_RST_REG0,
+@@ -223,7 +258,8 @@ static void spi0_init(void)
+ 	if (IS_ENABLED(CONFIG_MACH_SUN50I) ||
+ 	    IS_ENABLED(CONFIG_SUN50I_GEN_H6))
+ 		pin_function = SUN50I_GPC_SPI0;
+-	else if (IS_ENABLED(CONFIG_MACH_SUNIV))
++	else if (IS_ENABLED(CONFIG_MACH_SUNIV) ||
++		 IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+ 		pin_function = SUNIV_GPC_SPI0;
+ 
+ 	spi0_pinmux_setup(pin_function);
 
-Maksim Kiselev (1):
-      sunxi: SPL SPI: Add SPI boot support for the Allwinner R528/T113 SoCs
-
- arch/arm/include/asm/arch-sunxi/spl.h |   3 +-
- arch/arm/include/asm/spl.h            |   1 +
- arch/arm/mach-sunxi/Kconfig           |   2 +-
- arch/arm/mach-sunxi/board.c           |  31 +--
- arch/arm/mach-sunxi/spl_spi_sunxi.c   | 348 +++++++++++++++++++++++++---------
- arch/mips/include/asm/spl.h           |   1 +
- arch/riscv/include/asm/spl.h          |   1 +
- arch/sandbox/include/asm/spl.h        |   1 +
- common/spl/Kconfig                    |  21 ++
- common/spl/spl_ubi.c                  |  49 ++++-
- include/nand.h                        |   3 +
- 11 files changed, 354 insertions(+), 107 deletions(-)
----
-base-commit: 777c28460947371ada40868dc994dfe8537d7115
-change-id: 20240411-spinand-eb7d8319813b
-
-Best regards,
 -- 
-John Watts <contact@jookia.org>
+2.44.0
 
