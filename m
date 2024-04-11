@@ -4,74 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ED4ACD1284
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 08:37:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57B35CD1284
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 08:37:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 639B887FA0;
-	Thu, 11 Apr 2024 10:37:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CAC1088384;
+	Thu, 11 Apr 2024 10:37:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VMQzUFKH";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RDBO11PP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6D1188334; Thu, 11 Apr 2024 10:37:05 +0200 (CEST)
-Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
- [IPv6:2a00:1450:4864:20::12e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 695D48838F; Thu, 11 Apr 2024 10:37:42 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE25D86FCE
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 10:37:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 575ED86FCE
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 10:37:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12e.google.com with SMTP id
- 2adb3069b0e04-516d68d7a8bso555444e87.1
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 01:37:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712824623; x=1713429423; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lKpgCSOtbrGE3i2CGMWjUE+cBkA4j7LYrqGpfSA9Cc0=;
- b=VMQzUFKH415L2SVIkNEjd3VHtxJDMLxrQfLMirajSgugUSpo1AzDy0jjBOp9UJVln2
- GEg5TVHKIYdk4MfUe+4t2/JG+UH9348Ib1Zr4X8pN5I/KpwtT6F4QKkpu4fhYI2lEpvM
- eLSZz2Uj/myF6gDqi46umn1TwTP61/9hz1L8CmBKevSELIyj5gIcvTwd4WR/GkWjIV/E
- ZsycHIvoeOl42xHeK1tw1ZjaU65HCG7+jN5CWLnREj5xlmXIDVOkPKV4E95NLQadsDlb
- Uaejaov4Dtcw3PcdHayoeeTu7uA1eK0fWXaYUzEu2NT5FIchMje0iW2H292LR4SaEY7E
- 7ljw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
+ [209.85.208.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 768C33F5CF
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 08:37:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1712824659;
+ bh=QaN8XXIPNchqSSXDCYh9r8QryuT71zk3m5J/RKSgqQs=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=RDBO11PPB1Cz+L33RJf2LFGKuB5bsRKuj6sEqscJWy3FjSleACNhH0UwzekpqPWpy
+ Tkyc22YZ+ezkO/HVM/YOTIq1lHheLkYsWVAiSkOs3LFuFhZiB7nzfxego5SfdMjQ5g
+ B/5SZ4Re55eJcs09LJi6RnuUOOPpQ8PXZpx38cB2u4Mycg2Q+hQwWBppNV4QTasF/r
+ Su9r7Z8R4MhC6fMZuZxhtRbNZvnOhk6j5VvvwPBWUDwvALFwvYcOouTCPUuGimm8Kz
+ ffurVTgeoH9HvOP502IBxvvAAgmrwkjTrIRykVQbl7AeuYIC9jLcRvgqTvMiQP9/E+
+ MBvV9u2ffVSRQ==
+Received: by mail-lj1-f197.google.com with SMTP id
+ 38308e7fff4ca-2d87d146022so42713461fa.3
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 01:37:39 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712824623; x=1713429423;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lKpgCSOtbrGE3i2CGMWjUE+cBkA4j7LYrqGpfSA9Cc0=;
- b=FozuBpbAIqQkJpMD3+sB7/3dzlAZPvA1RPB+aewg5LN2Ma7f6w4Bu/snkXLKDMu/gD
- HUuXCXsxqA3RVtyAi261g7y9B+NIYtsBDdb3XtnkQJMNt331RR/VQd+XqeKViSI+KHDI
- T/PtcbzzXzsOYFYBUjVn60CaKc3XJNawyfA/+VJ164VPO2a+qBtzwuDOLt3yJqpdFUlb
- XxstHQ3qw2pIiK4Dt8aytahaFxTKnFX2yz8R0EfQg+roxEITi+O5m6sY8eAFuW7LV5Vu
- KCPIjYCiU6OVuCObXHRP3hC2x7RMQlc1J27BCOnpKSsFhRZo2YNwKss1cG+DBY6iFq5Q
- u97w==
+ d=1e100.net; s=20230601; t=1712824659; x=1713429459;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=QaN8XXIPNchqSSXDCYh9r8QryuT71zk3m5J/RKSgqQs=;
+ b=Q7UY3C3WRlKPY1nYuVzuwIuBEP56DCeDY5WMagFZiVX28fE6gNYlLkvgxNkavDz/Zz
+ h5LSF/4HwAsPxkc1WiDybrFZ7H9RwhDOYXRSTHtDk0DcfakQUSLU1JThbkS2aeTpTz3u
+ 0D9vmYIYpjJrEyOEe1ymiItxj0D0ZQ8wS7q0VcGXtgbrSrIrEoEOOLMHhIFSOgN3a49S
+ T7E8lR4p0h1or9PuwPFEin9+5LEyoFG4WVOX8BRIZluHECGTAlaKYAf8wYeOoZuAwhY1
+ K7/p6b4kh0oSiuB7UB614xtCs8vJdEl+/s0mXOmFCcVfHZhpTMGeQR+mjdsfnyeniXdz
+ OWRg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX7JeCEkAn2igp+thu6LGXta226sfrtsTZoc7NCHKKLXMUa4si70g8xhnkrRQYKKCSSOUkSHmzYdldSgOxTD5MXw5A+GA==
-X-Gm-Message-State: AOJu0Yz4raVi40ZWhYu4RszrlG3Lhh3NT0gkk9SRnpVpAO1NSoHSY88Q
- a0oYrUOEEMYuE2QmuvOkJb9MU/MtDBcuIzbGrmAQDg0Pe+dhohSRFz3y5ZDQ1+fjqyGlkqgY+Ft
- 8f/vdpSw/N80D8C0JLx1JWHeL17t0SykrLUJZK32Z4Kn2zzEOqlTFTw==
-X-Google-Smtp-Source: AGHT+IEtK+Gzzx3TEWTHn/DQPIv2AnO1dMZKbENvXZRV7arT9k1VQBUzrDi7Iht7I1Tx7qsaUlI0kUT5l49cEVGqoYg=
-X-Received: by 2002:ac2:4894:0:b0:516:c1fb:5ea7 with SMTP id
- x20-20020ac24894000000b00516c1fb5ea7mr463604lfc.14.1712824622927; Thu, 11 Apr
- 2024 01:37:02 -0700 (PDT)
+ AJvYcCV+RTz3V6mcxkTWA01Lb5nGhO4mIFP/coTRnI6FVbYnsGIpaTCdV5xGs8iBvxnr9xVTsp8j4Cy649SvdZ3tecRrhNLGkA==
+X-Gm-Message-State: AOJu0YxW3g/dp7u+WUJ8nHLT1XkTXnFK2FVYxOaCIIBSti2THzfH0Kgg
+ PjgYuASd49LGC5+eocXwBwMd+Euyu9pMyoPYxc9iQW5ELGxWKLWT9+eSuToZuii+K5Huq519fd1
+ 6Ne629e/8gHEod/3XhtwKPcEtApRFcOHg+efTtat9Xi0ArCVnzvx5KAj1ZUuPCVK49k4=
+X-Received: by 2002:a2e:bc23:0:b0:2d6:c23f:7dff with SMTP id
+ b35-20020a2ebc23000000b002d6c23f7dffmr3903966ljf.44.1712824658933; 
+ Thu, 11 Apr 2024 01:37:38 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEBXHwOHxiaMH7bmQ4yhiz8E+8ruwzWHTV+GdL1oM3P4Qwlz724Kii6ITtFAt+iy0Q3c4TlZg==
+X-Received: by 2002:a2e:bc23:0:b0:2d6:c23f:7dff with SMTP id
+ b35-20020a2ebc23000000b002d6c23f7dffmr3903946ljf.44.1712824658516; 
+ Thu, 11 Apr 2024 01:37:38 -0700 (PDT)
+Received: from [192.168.123.126]
+ (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ by smtp.gmail.com with ESMTPSA id
+ d16-20020adff2d0000000b003418364032asm1216013wrp.112.2024.04.11.01.37.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 11 Apr 2024 01:37:38 -0700 (PDT)
+Message-ID: <2ee61041-2fe6-4b3a-96af-f657242ce9a3@canonical.com>
+Date: Thu, 11 Apr 2024 10:37:37 +0200
 MIME-Version: 1.0
-References: <20240410225043.40100-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240410225043.40100-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 11 Apr 2024 10:36:27 +0200
-Message-ID: <CAC_iWjKP8oq0nG0j54+Z8TP2bxhzZ2wMxH0zdQepy3p__TBLdA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: sanitize efi_tcg2_final_events_table
- definition
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Eddie James <eajames@linux.ibm.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/1] clk: sifive: append missing \n to messages
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Anup Patel <Anup.Patel@wdc.com>, u-boot@lists.denx.de,
+ Lukasz Majewski <lukma@denx.de>, Paul Walmsley <paul.walmsley@sifive.com>
+References: <20240216163535.275085-1-heinrich.schuchardt@canonical.com>
+ <d98c06e7-ba9f-f09b-2f59-f678de6d4b93@gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <d98c06e7-ba9f-f09b-2f59-f678de6d4b93@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,48 +108,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 11 Apr 2024 at 00:50, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> The length of the variable name typically is not 1.
-> Neither the length of the variable name nor the size of the appended
-> data is known in the include.
->
-> * Define the size of element variable_name as variable.
-> * Remove the unusable element variable_data.
->
-> Addresses-Coverity-ID: 467400 Out-of-bounds read
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  include/efi_tcg2.h | 8 +++-----
->  1 file changed, 3 insertions(+), 5 deletions(-)
->
-> diff --git a/include/efi_tcg2.h b/include/efi_tcg2.h
-> index b21c5cb3dd6..a75b5a35b6e 100644
-> --- a/include/efi_tcg2.h
-> +++ b/include/efi_tcg2.h
-> @@ -150,16 +150,14 @@ struct efi_tcg2_final_events_table {
->   *                             the variable.
->   * @variable_data_length:      The size of the variable data.
->   * @unicode_name:              The CHAR16 unicode name of the variable
-> - *                             without NULL-terminator.
-> - * @variable_data:             The data parameter of the efi variable
-> - *                             in the GetVariable() API.
-> + *                             without NULL-terminator followed by data.
->   */
->  struct efi_tcg2_uefi_variable_data {
->         efi_guid_t variable_name;
->         u64 unicode_name_length;
->         u64 variable_data_length;
-> -       u16 unicode_name[1];
-> -       u8 variable_data[1];
-> +       u16 unicode_name[];
-> +       // u8 variable_data[];
->  };
->
->  /**
-> --
-> 2.43.0
->
+On 11.04.24 05:13, Sean Anderson wrote:
+> On 2/16/24 11:35, Heinrich Schuchardt wrote:
+>> If multiple messages are written, line-feeds improve the readability.
+>>
+>> Fixes: c40b6df87fc0 ("clk: Add SiFive FU540 PRCI clock driver")
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>   drivers/clk/analogbits/wrpll-cln28hpc.c | 6 +++---
+>>   1 file changed, 3 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/drivers/clk/analogbits/wrpll-cln28hpc.c 
+>> b/drivers/clk/analogbits/wrpll-cln28hpc.c
+>> index a3cb109d357..537c696b727 100644
+>> --- a/drivers/clk/analogbits/wrpll-cln28hpc.c
+>> +++ b/drivers/clk/analogbits/wrpll-cln28hpc.c
+>> @@ -81,7 +81,7 @@ static int __wrpll_calc_filter_range(unsigned long 
+>> post_divr_freq)
+>>   {
+>>       if (post_divr_freq < MIN_POST_DIVR_FREQ ||
+>>           post_divr_freq > MAX_POST_DIVR_FREQ) {
+>> -        WARN(1, "%s: post-divider reference freq out of range: %lu",
+>> +        WARN(1, "%s: post-divider reference freq out of range: %lu\n",
+>>                __func__, post_divr_freq);
+>>           return -ERANGE;
+>>       }
+>> @@ -229,7 +229,7 @@ int wrpll_configure_for_rate(struct wrpll_cfg *c, 
+>> u32 target_rate,
+>>       int range;
+>>       if (c->flags == 0) {
+>> -        WARN(1, "%s called with uninitialized PLL config", __func__);
+>> +        WARN(1, "%s called with uninitialized PLL config\n", __func__);
+>>           return -EINVAL;
+>>       }
+>> @@ -335,7 +335,7 @@ unsigned long wrpll_calc_output_rate(const struct 
+>> wrpll_cfg *c,
+>>       u64 n;
+>>       if (c->flags & WRPLL_FLAGS_EXT_FEEDBACK_MASK) {
+>> -        WARN(1, "external feedback mode not yet supported");
+>> +        WARN(1, "external feedback mode not yet supported\n");
+>>           return ULONG_MAX;
+>>       }
+> 
+> Reviewed-by: Sean Anderson <seanga2@gmail.com>
+> 
+> But maybe these should be dev_dbg?
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+The messages look like indicating misconfiguration. So the user should 
+see these.
+
+The kernel code also uses WARN() (and also lacks the line-feeds).
+
+CCing Paul as the Linux maintainer and author.
+
+Best regards
+
+Heinrich
