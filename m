@@ -4,85 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD958CD1292
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 07:54:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94B7DCD128A
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 08:10:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1103087F52;
-	Thu, 11 Apr 2024 09:54:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 0209087F70;
+	Thu, 11 Apr 2024 10:10:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="WhKIvBat";
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="O8DJOPQo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA85A87F3F; Thu, 11 Apr 2024 09:54:45 +0200 (CEST)
-Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
- [IPv6:2a00:1450:4864:20::334])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 392CB87FA0; Thu, 11 Apr 2024 10:10:53 +0200 (CEST)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2607::701])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87145881B2
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 09:54:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x334.google.com with SMTP id
- 5b1f17b1804b1-417d092f39aso2752375e9.1
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 00:54:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712822083; x=1713426883;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=M8e+PNFNonfWc2kO6DsY89E93Tz9C36XlOf+fkptQdE=;
- b=WhKIvBatQvuZS0069NMZ+rTjd/rPwOikhp7IYEAjXvCfnU6VX6wp0KFryZ78ef4jEQ
- PHrYbmA6LCZVZRKu0ZbI3GU92MJoUgI3UE0VrBbSbw/NA6s91bib/0X3aiZnRq+eHRWm
- P4j7uU7ZnPnoL7o66FbPZWLo5Zepdne/t8EAV1rqI5oMu34qhWQhyaUpDVGz29athAZi
- MHZAgQzRnuop+Z3gAAGZzVikzXJZ+eekbETChoaGg1NEgqajGuGri/j1hcz4Yrm7mLgj
- 2mXBEsWXyS1/kyuW/JEQIT5XF0eaeFhTaYaqQX1K2cDg+WMGz85Y6PtCy0bTtpbtATVS
- GAFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712822083; x=1713426883;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=M8e+PNFNonfWc2kO6DsY89E93Tz9C36XlOf+fkptQdE=;
- b=dTGANrfY0cidTU3DSxL9JcMDCnzzY/f9/AluNfE5zVf/8H2zEHeZJ5ztZhUqgk8tbW
- KNpobY8+2mZ8jQ8NBkU+3ooKx1Nx+mGnM3H/LW4i7dLUlwn5zmSuwkXxhFpQlwuJcUb5
- E8T9hAFdRGTKE16FMCVnjC1UJxMoX8ySDnAw1VHLNJVzOs9u0WaOsmq9WHBFNKopnJ5c
- llF0XhnqpQSIXzfHt3DjPCzHEePy2LZ8qjdeJZCUCM98MfFL2DwZEQpLyhh2PUj2XWVc
- LOQ3+Ex/Ve1YRnvGAjqSMs6O2SKK8ER08W7JCEG9ohgqhFOY6Dm//ySIp5Mlhk+wwP4s
- 0BFQ==
-X-Gm-Message-State: AOJu0Yyo+MMx4w1sVlBsA4eOEdlpeHTArRkppPo7r61L66F4gaPpLXte
- qnOjUc29IC1F67Nhe1IbheGoyMpsqBOOvri8jRPu/0JW6GRdhKGogpYw/JFK6PM=
-X-Google-Smtp-Source: AGHT+IHrF9+28z1Fyt5OjOo+QxB2ShdLU6n+yEuFj8fQa1Vlkat2ehCGskzcNJGIM/8lI+F+wY4izA==
-X-Received: by 2002:a05:600c:19d4:b0:417:5be9:1319 with SMTP id
- u20-20020a05600c19d400b004175be91319mr1782306wmq.12.1712822082906; 
- Thu, 11 Apr 2024 00:54:42 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- n9-20020a05600c500900b00416290b3e1dsm1537972wmr.24.2024.04.11.00.54.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 00:54:42 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Jonathan Humphreys <j-humphreys@ti.com>, Kamlesh Gurudasani
- <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, Christian
- Gmeiner <christian.gmeiner@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
- Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>, Neha
- Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Maxime
- Ripard <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: Re: [PATCH v2 12/16] arm: dts: k3-am625-sk-u-boot: Add
- sysreset-controller node
-In-Reply-To: <20240408223134.165877-13-j-humphreys@ti.com>
-References: <20240408223134.165877-1-j-humphreys@ti.com>
- <20240408223134.165877-13-j-humphreys@ti.com>
-Date: Thu, 11 Apr 2024 09:54:38 +0200
-Message-ID: <87cyqwe3lt.fsf@baylibre.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 1E54B87F52
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 10:10:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=theobroma-systems.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=quentin.schulz@theobroma-systems.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=KVagfOWc8rODhXcjEvkRmwah/CQjVF9apVfLR2kwn6MBLfJcQ3+XgNuXFZyyjaVmta8H7yTaHr1RApOUL8ZnyDOLw4yvAjtnvAZdsY09LtNaIuqyUeBDW8QUqFRRiTjSTQXAvprHQG0N4jEF5CDhoVMWZAZxOJ+PV7EiwvWpbgobwY7+O98a2QdNnI4BAEWyXfAopScK42EcD2QMml3Hx7lYT1WhAkXV+nHJ8Mj0deHxDQq4vKbVv11DGfrL4J7C0o8DVo8Yzpu95Q+UqTCWokoEFc6ety+uBz8jSicj8sdre1L/b47dv3AiC/UIUSfXkMH7Wo4UHvhMkWMzeK2mZg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=j/cECzum2I85wJmTb8HHObbyyLaC7Np2cSVd5QXYESg=;
+ b=TtefeJNlCx8ljp722KTT7QHKF/Urb71Ok8ESAUm3l8Q5+yyiPJAmAGmAsIYxSZ+R33SfRBePQIDz6Won2bAmRz1c+OhyWBJmqe8TN9iZGY7Lm68WlhisV/jOIVmhu9jq/vz1GGEZA0QRJLMli7BZUZdjZihti33O4mf3chIzwvhqeVx/L+VqOeizHTkSz5jTEgoL/UScN3VAT9RvwM652+doxHVKlebDYLSpUUD7HWL+u1kt94swzzhc4eg7mCg1X5iGXkmd9kBRtVPQgJuZ08FQLQ/KIO8cpjK+08ONbUngUivPHq3iB0c5pz97/V2VsbnAp6cDuxBmkZm/hMFoKg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
+ header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=j/cECzum2I85wJmTb8HHObbyyLaC7Np2cSVd5QXYESg=;
+ b=O8DJOPQoeB7NMiG+3lu7+ADlZLaJlNoScLy9TEALQ+hlMSK19i+rLBGPTq8/PYI+dJ74yVhwGhge+s3nTYksyTOWyPIgU6qQTZ1yF/U5ywA9rSGMX24GE5feFoSZdMBxqmCFxcjY2Koh6qswsaMIYa2Pkp46F/DIi+7Zazjb67/8j+iai1fmrzsBbgZR7EaCNH0C3pMb8HLFNdpkHnuRS8TUrs9pVOdI1nTf4Ibh86pRUG4llCbLB8ZqI8oGtcr9bqVBDn0CyvNeInw2zax50TcUUBZ8O+gb4fB792Q/ZWCry3sC1x3B38FuIONnoXYvlKHzukyNOoDr2HqskF1nlw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
+Received: from DB7PR04MB4842.eurprd04.prod.outlook.com (2603:10a6:10:1b::13)
+ by AM7PR04MB7063.eurprd04.prod.outlook.com (2603:10a6:20b:11e::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Thu, 11 Apr
+ 2024 08:10:48 +0000
+Received: from DB7PR04MB4842.eurprd04.prod.outlook.com
+ ([fe80::bdc7:4b2c:e74e:1504]) by DB7PR04MB4842.eurprd04.prod.outlook.com
+ ([fe80::bdc7:4b2c:e74e:1504%7]) with mapi id 15.20.7409.042; Thu, 11 Apr 2024
+ 08:10:48 +0000
+Message-ID: <a87a142c-0511-4fa2-adc2-c0bb254a55d6@theobroma-systems.com>
+Date: Thu, 11 Apr 2024 10:10:44 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] cmd: bootm: add ELF file support
+To: Maxim Moskalets <maximmosk4@gmail.com>, marek.vasut+renesas@mailbox.org,
+ mkorpershoek@baylibre.com, ralph.siemsen@linaro.org, sean.anderson@seco.com,
+ sjg@chromium.org, souajih@baylibre.com, takahiro.akashi@linaro.org,
+ trini@konsulko.com, u-boot@lists.denx.de, xypron.glpk@gmx.de
+Cc: Maxim.Moskalets@kaspersky.com
+References: <20240410212153.6854-1-Maxim.Moskalets@kaspersky.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+In-Reply-To: <20240410212153.6854-1-Maxim.Moskalets@kaspersky.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA1P291CA0022.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:19::29) To DB7PR04MB4842.eurprd04.prod.outlook.com
+ (2603:10a6:10:1b::13)
 MIME-Version: 1.0
-Content-Type: text/plain
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB7PR04MB4842:EE_|AM7PR04MB7063:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2796b06a-d023-4867-ac74-08dc59fee53e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: oauTXaUrby6ssDNnM7oa9kMn2ax1N5hnz/ui6v9URzSe89sqsGDU26Ha2B+J5I+qPhgan7c2f+glt5DnFz4zHEsl56Ot9aw61/8Y3e0bAnpTmwb7pk4vE6taVTnMq1jMIjExSmfyXXyBk1mjyo74yuWYOR3rkhl1mftQXyGi19UgwUqEQuqLHca7A4+7WIVrRg21Kq6nBEANPfVeVkyyf6OBWQMzI6UHiY7Dy9p2TLLOa7aUa8vQ1I9YYMYbzgFxSsuPvllozwDx8iToIUn+a7RWLdeSV5llqEq2POI4+Mx1CN2Pwa2nHCAv1WzFfQoG5dC20Nw6IqkRLYnmTfVUsdTQzwJul020ArsEk1mDCCMikK4TPgzm4pZWp45EayJsrNKpTphpypkgDTm8vv6YxoD0Dvwy7+FFazMciaxuUs/EWKycanaZDdoV/09vcM8VY/u8trfNeA+yMTZjGdyR4bj6VawhxOEPYNXmVdXSfQ4H9D33TdocDm70N+G8P6jM8oGjZKuKJUINsG/MM+EQn8Q4gUlitMVGbFnbCosbPj4oKRdoOu9i33uld8acSeAnMuCHY5C3rwueRPF3IV/+rq1LhNUhfMc+UWKVZ6JXWUv4CFKumVgp9yobqRwOH5dTjtC0DRwqgNYLqp4oIq1EUZGlAY2vVfzEieVTD7TJ0refbFzfFBCB+fy1Ek7oX5tAfANPo02FZra0kTeMQ7agOg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB7PR04MB4842.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(1800799015)(7416005)(376005)(921011); DIR:OUT; SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?S0lPWVNteXBtK3pjd2llREhFYWFBcGdkQ2RhUWRkNHJPU3FjRkxHa2QrZDRO?=
+ =?utf-8?B?RXhFcnl2SEIxV0E1WTNydkhsZHpoYk9rMzVxU0k2UGdsdWdtZzdMS3E2V21Y?=
+ =?utf-8?B?SkpTVWt5S0h2L0c0eVpIMzZHQ0U1Wm5yWTRWNHpUUG5KTGRBWlJCdk5sYUto?=
+ =?utf-8?B?cFlzeWJqQ3JjejZPaUxwbHE5ci90SmlCelk1azJmYk43Wm5qZzFweGVCRTI1?=
+ =?utf-8?B?YmZwcXBkUjkwN3lQWFBTaDJrOG9DYzE1U3cyZURqeU1lRjk3WTJnZHUwaGRt?=
+ =?utf-8?B?Y0dIcCt5dDlhTHFwVjl5aGNUNDVsVzdLQVJ1ZGkwVldESFc3L3lMUUlBQWdV?=
+ =?utf-8?B?bjU3UVo1V3dVY1N1cDNBNW9MaUY3K1lMVUhMZFI5UFJpaGF2S2dnVXhaYVpx?=
+ =?utf-8?B?LzVYSDE1RDFwUkpaWlpPVGhjWWtOa3k1T2xJVmRTbGZHUUNMQmdJVkVyd1hN?=
+ =?utf-8?B?cG9RTko1aFRHMjBHWlVUc3Z1TFZPejltZ21aM3E4QURaY0JHR2RxNWU1bFJK?=
+ =?utf-8?B?Yjcxd3BRd0w5bGxlZERoS2xIVGhmRmNTVGFEam9YM0lWNDBDVDJ5Y1RRUEtK?=
+ =?utf-8?B?VzZ4RndwTzd5K0NaVHhkQmtUSVBKVFNpa2k5MmtzTzdKZy9DWEJlaUZ2c1k5?=
+ =?utf-8?B?Y1NycDNwN2ZldnBYeWZCM2Y1bVRSM3Z6VUxRMmRaV09WV1hscnhXUXdxaFhB?=
+ =?utf-8?B?SFdSWnFpYXBpWnA2VmVibmdEK1NsdytncFhzUmF6dVpRQ05QbnlKUEt4STJX?=
+ =?utf-8?B?MlVEUHI1bEZtazZWL20xejFUcktMVll0ek12eENrTlRySlJQcCtjYjJqZG4y?=
+ =?utf-8?B?WFhyeU9WWUcrK3ZMOUJSdnBWSmQvbEtidk0xL3o2eXpNa1EvdnpqclFvMTd4?=
+ =?utf-8?B?NWdQa1pLVGJvQis3bzZqQzJrQVB0VzFvVGsvbU1CSHFNUXNqTG1scXVZY0Zj?=
+ =?utf-8?B?RGJWdUpWLzhjODF4WTg1a1dJMmpZY2hnWjgydmI2ZEVodjJZMmJ0b280UHFj?=
+ =?utf-8?B?Z2ZHT25qQ2kvaGlSYXg1U3k3eEhJSEtPelJrbjRteGpGb1MwNlFQcUI5eDVI?=
+ =?utf-8?B?VWhpNmFUclI2U0RlWmJjcnZIUEJoeHJuRnFvUjdpdDRMd1FzLzh0RVd5eTRs?=
+ =?utf-8?B?OE1jTDgyR0trTkpocDNUNVg1ckljcXBDdE16cy81M0N6VXFCbFdsV0ZjZWFJ?=
+ =?utf-8?B?bEZrbjIrMzFJZm1kMFRmbjBZSDdPM1gwY1NNVURESWFHaiswZnhJRnRkWGdK?=
+ =?utf-8?B?NDRxMytJWUYyN3BTMW9PUG03L2laaVBsdkc5MzlFSkpkVnFKNEp5VitCZEFw?=
+ =?utf-8?B?K3Z0THFmb0hDRE1ZQ3E3Q2FkMEhJS3dvbFduYUNTL0U4YUVVUzlPeldzWE9C?=
+ =?utf-8?B?UGIyYTFGcWNHYzdIQ3FMNi83djdmZzRMZldFQUtJS2ZVUWc3R3lSUTIrdkhM?=
+ =?utf-8?B?K3NIK0pqLzd4Rmtxb3dQaFRzbU1FbFRVc1NWVzkrZndBd21pN3RlN2ZIdlla?=
+ =?utf-8?B?amlIMW1MNWU4cHo1bks1RWV0RGRpRzk1OWhYQ2pKMDRHdjZCTEU4ODFLSFZy?=
+ =?utf-8?B?cTVIelFDeHBnUU0xbHFhcHB2Y1VkT2JZbkdGeW1lNzBZdklibEFYZ1BVS05Z?=
+ =?utf-8?B?WnMxZGNCb3I5SkcxSCtpTjZMRG54S29yVHRDY0p1U3g1dGVJS3BXUTR3T3FW?=
+ =?utf-8?B?WjYrbTkwNXZHSGMyUUI3Q3RUbW9LQXd3cGNaWW9naGpLUFVRVXVNK0M2MUZI?=
+ =?utf-8?B?RHZpQzU2NHJtMlhieTV3dTMxdFRHWTJkNUFUdVNjb21pNGl1OEo5VTNhSGdj?=
+ =?utf-8?B?eSsxMUw0aEJsb2lmRFVFOWN1NWZMS2duM0R3TDdXdU9ybkZuQjRvczF3ZmV1?=
+ =?utf-8?B?VDlJV2pXWVBpSng4NjE3Z1U3VzFqbW1yRTV5VnBJNGUrS3F5YzkvV29mOGtH?=
+ =?utf-8?B?VkZZMFVyc3lqQnNQUzVqaHh3L1VLZUZ5aVE5OWsvWEc4eG52ZG5pQVdSMTV5?=
+ =?utf-8?B?RWdSMmZjSlZzS0FBUXNWbE1wbnhMaHpkVTJUWkVCVlpNWVJWYU0wQWtuZ25s?=
+ =?utf-8?B?c09lS3JiTFFkN2JYMmJyVitnbXN0d0pwNnlvaU1tajdweGtwdlQzOGt0cTFz?=
+ =?utf-8?B?MjB0aUlqeDF1MlhiNXFOWXJOWFBxRys4MGlFTUw3NjBsKytWei9lYk9UQXhM?=
+ =?utf-8?B?NkdkbXRzeUlQVlkyaUNMbFBGdHlGcEh6Wi95MHVBdjVnVTY5R0VBZ2ZtTzFP?=
+ =?utf-8?B?bGZKb1VNckdSZFdQaWE2OGpGSGh3PT0=?=
+X-OriginatorOrg: theobroma-systems.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2796b06a-d023-4867-ac74-08dc59fee53e
+X-MS-Exchange-CrossTenant-AuthSource: DB7PR04MB4842.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Apr 2024 08:10:48.5485 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: RxHL59E+7k+tjVe6VLFQ07jzOwrvWsmtYxoe/taAw4oFbBhCR+KVmhOqlHOYjOFyc2uJBZyyFiKiGQvU/7uHClXQCFXUziAbgwKkpxxvdgsusMTAN1RBzqqJPwQbjthp
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR04MB7063
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,70 +148,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonathan,
+Hi Maxim,
 
-Thank you for the patch.
-
-On lun., avril 08, 2024 at 17:31, Jonathan Humphreys <j-humphreys@ti.com> wrote:
-
-> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
-
-Please consider adding a commit message body.
-
-On the TI vendor tree, there is a similar patch with a commit message:
-https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2023.04&id=c5296d943c2c84dd6dcb3b91305d006ac46f3157
-
-Before patch:
-=> reset
-resetting ...
-System reset not supported on this platform
-### ERROR ### Please RESET the board ###
-
-With patch applied:
-=> reset
-resetting ...
-
-Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on am62x sk evm
-
-Andrew also suggested to me that if we are interested by A53 reset only,
-we can PSCI reset instead for all k3 architecture:
-
- --- a/arch/arm/Kconfig
- +++ b/arch/arm/Kconfig
- @@ -784,6 +784,9 @@ config ARCH_K3
-          bool "Texas Instruments' K3 Architecture"
-          select SPL
-          select SUPPORT_SPL
- +       select PSCI_RESET if ARM64
- +       select SYSRESET if ARM64
- +       select SYSRESET_PSCI if ARM64
-          select FIT
-          select REGEX
-          select FIT_SIGNATURE if ARM64
-
-Has the above been considered?
-
-
+On 4/10/24 23:21, Maxim Moskalets wrote:
+> From: Maxim Moskalets <maximmosk4@gmail.com>
+> 
+> Some operating systems (e.g. seL4) and embedded applications are ELF
+> images. It is convenient to use FIT-images to implement trusted boot.
+> Added "elf" image type for booting using bootm command.
+> 
+> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
 > ---
->  arch/arm/dts/k3-am625-sk-u-boot.dtsi | 9 +++++++++
->  1 file changed, 9 insertions(+)
->
-> diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-> index fa778b0ff4c..35bfeae75a0 100644
-> --- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-> +++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-> @@ -46,3 +46,12 @@
->  &cpsw_port2 {
->  	status = "disabled";
->  };
+>   boot/bootm_os.c  | 24 ++++++++++++++++++++++++
+>   boot/image-fit.c |  3 ++-
+>   boot/image.c     |  3 +++
+>   include/image.h  |  1 +
+>   4 files changed, 30 insertions(+), 1 deletion(-)
+> 
+> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
+> index ccde72d22c..1c92b8149c 100644
+> --- a/boot/bootm_os.c
+> +++ b/boot/bootm_os.c
+> @@ -395,6 +395,27 @@ static int do_bootm_qnxelf(int flag, struct bootm_info *bmi)
+>   }
+>   #endif
+>   
+> +#if defined(CONFIG_CMD_ELF)
+> +static int do_bootm_elf(int flag, struct bootm_info *bmi)
+> +{
+> +	struct bootm_headers *images = bmi->images;
+> +	char *local_args[2] = {NULL};
+> +	char str[19] = ""; /* "0x" + 16 digits + "\0" */
 > +
-> +&dmsc {
-> +	bootph-pre-ram;
+> +	if (flag != BOOTM_STATE_OS_GO)
+> +		return 0;
 > +
-> +	k3_sysreset: sysreset-controller {
-> +		compatible = "ti,sci-sysreset";
-> +		bootph-pre-ram;
-> +	};
-> +};
-> -- 
-> 2.34.1
+> +	sprintf(str, "0x%lx", images->ep); /* write entry-point into string */
+> +	str[18] = '\0';
+
+This does seem like snprintf would be useful here?
+
+"""
+snprintf(str, 19, "0x%lx", images-ep);
+"""
+
+safest and also merges the two instructions in one.
+
+Also, have another question, do we want to 0-left-pad the value so that 
+it's always a 16 hex-digit number?
+
+e.g. 0x%016lx
+
+Cheers,
+Quentin
