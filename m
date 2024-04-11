@@ -4,56 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D86BCD1292
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 07:29:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD958CD1292
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 07:54:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA24A86D38;
-	Thu, 11 Apr 2024 09:29:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=flokli.de
+	by phobos.denx.de (Postfix) with ESMTP id 1103087F52;
+	Thu, 11 Apr 2024 09:54:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=flokli.de header.i=@flokli.de header.b="VG9WdmvL";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="WhKIvBat";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAB1B85B66; Thu, 11 Apr 2024 09:29:53 +0200 (CEST)
-Received: from mail.flokli.de (mail.flokli.de [IPv6:2a01:4f8:1c1e:e12f::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DA85A87F3F; Thu, 11 Apr 2024 09:54:45 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4D9586EB5
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 09:29:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87145881B2
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 09:54:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=flokli.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=flokli@flokli.de
-Date: Thu, 11 Apr 2024 10:29:40 +0300
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flokli.de; s=mail;
- t=1712820590; bh=sDe0CPFMl5x2C/s8SmDMLzyqAalhLF8BK/ByyDJ3Ceo=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=VG9WdmvLLBdue1RlgLzcOOSF7btYc5Jv3XdTubP/0FIec8HRMlAt7XUtzrvL/jmSN
- 5DBzvvCm4/fTan4fI/yPezhqXxse8HFmy+4T52ZxUbEWP+awNyOV4mdL3mmS/7mRqe
- p/x7XcLZDlUYPYXv9EKH9e+DRphEKio+Vm8/uLfU=
-From: Florian Klink <flokli@flokli.de>
-To: Joshua Riek <jjriek@verizon.net>
-Cc: Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Sam Edwards <CFSworks@gmail.com>, Jagan Teki <jagan@edgeble.ai>, 
- Eugen Hristev <eugen.hristev@collabora.com>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, 
- John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Chris Morgan <macromorgan@hotmail.com>, 
- Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
- Johan Jonker <jbx6244@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] board: rockchip: Add the Turing RK1 SoM
-Message-ID: <4lspwhoesvjvbaxlsx4fl6fbsnfte2qbpq2tmfupdpw5jh6vqp@oculnryb7ue6>
-References: <20231214234647.296129-1-jjriek.ref@verizon.net>
- <20231214234647.296129-1-jjriek@verizon.net>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-417d092f39aso2752375e9.1
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 00:54:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1712822083; x=1713426883;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=M8e+PNFNonfWc2kO6DsY89E93Tz9C36XlOf+fkptQdE=;
+ b=WhKIvBatQvuZS0069NMZ+rTjd/rPwOikhp7IYEAjXvCfnU6VX6wp0KFryZ78ef4jEQ
+ PHrYbmA6LCZVZRKu0ZbI3GU92MJoUgI3UE0VrBbSbw/NA6s91bib/0X3aiZnRq+eHRWm
+ P4j7uU7ZnPnoL7o66FbPZWLo5Zepdne/t8EAV1rqI5oMu34qhWQhyaUpDVGz29athAZi
+ MHZAgQzRnuop+Z3gAAGZzVikzXJZ+eekbETChoaGg1NEgqajGuGri/j1hcz4Yrm7mLgj
+ 2mXBEsWXyS1/kyuW/JEQIT5XF0eaeFhTaYaqQX1K2cDg+WMGz85Y6PtCy0bTtpbtATVS
+ GAFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712822083; x=1713426883;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=M8e+PNFNonfWc2kO6DsY89E93Tz9C36XlOf+fkptQdE=;
+ b=dTGANrfY0cidTU3DSxL9JcMDCnzzY/f9/AluNfE5zVf/8H2zEHeZJ5ztZhUqgk8tbW
+ KNpobY8+2mZ8jQ8NBkU+3ooKx1Nx+mGnM3H/LW4i7dLUlwn5zmSuwkXxhFpQlwuJcUb5
+ E8T9hAFdRGTKE16FMCVnjC1UJxMoX8ySDnAw1VHLNJVzOs9u0WaOsmq9WHBFNKopnJ5c
+ llF0XhnqpQSIXzfHt3DjPCzHEePy2LZ8qjdeJZCUCM98MfFL2DwZEQpLyhh2PUj2XWVc
+ LOQ3+Ex/Ve1YRnvGAjqSMs6O2SKK8ER08W7JCEG9ohgqhFOY6Dm//ySIp5Mlhk+wwP4s
+ 0BFQ==
+X-Gm-Message-State: AOJu0Yyo+MMx4w1sVlBsA4eOEdlpeHTArRkppPo7r61L66F4gaPpLXte
+ qnOjUc29IC1F67Nhe1IbheGoyMpsqBOOvri8jRPu/0JW6GRdhKGogpYw/JFK6PM=
+X-Google-Smtp-Source: AGHT+IHrF9+28z1Fyt5OjOo+QxB2ShdLU6n+yEuFj8fQa1Vlkat2ehCGskzcNJGIM/8lI+F+wY4izA==
+X-Received: by 2002:a05:600c:19d4:b0:417:5be9:1319 with SMTP id
+ u20-20020a05600c19d400b004175be91319mr1782306wmq.12.1712822082906; 
+ Thu, 11 Apr 2024 00:54:42 -0700 (PDT)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ n9-20020a05600c500900b00416290b3e1dsm1537972wmr.24.2024.04.11.00.54.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Apr 2024 00:54:42 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Jonathan Humphreys <j-humphreys@ti.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, Christian
+ Gmeiner <christian.gmeiner@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Simon Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>, Neha
+ Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Maxime
+ Ripard <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Jonathan Humphreys <j-humphreys@ti.com>
+Subject: Re: [PATCH v2 12/16] arm: dts: k3-am625-sk-u-boot: Add
+ sysreset-controller node
+In-Reply-To: <20240408223134.165877-13-j-humphreys@ti.com>
+References: <20240408223134.165877-1-j-humphreys@ti.com>
+ <20240408223134.165877-13-j-humphreys@ti.com>
+Date: Thu, 11 Apr 2024 09:54:38 +0200
+Message-ID: <87cyqwe3lt.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20231214234647.296129-1-jjriek@verizon.net>
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,60 +99,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23-12-14 18:46:47, Joshua Riek wrote:
->The Turing RK1 is a Rockchip RK3588 based SoM from Turing Machines.
+Hi Jonathan,
+
+Thank you for the patch.
+
+On lun., avril 08, 2024 at 17:31, Jonathan Humphreys <j-humphreys@ti.com> wrote:
+
+> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+
+Please consider adding a commit message body.
+
+On the TI vendor tree, there is a similar patch with a commit message:
+https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2023.04&id=c5296d943c2c84dd6dcb3b91305d006ac46f3157
+
+Before patch:
+=> reset
+resetting ...
+System reset not supported on this platform
+### ERROR ### Please RESET the board ###
+
+With patch applied:
+=> reset
+resetting ...
+
+Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on am62x sk evm
+
+Andrew also suggested to me that if we are interested by A53 reset only,
+we can PSCI reset instead for all k3 architecture:
+
+ --- a/arch/arm/Kconfig
+ +++ b/arch/arm/Kconfig
+ @@ -784,6 +784,9 @@ config ARCH_K3
+          bool "Texas Instruments' K3 Architecture"
+          select SPL
+          select SUPPORT_SPL
+ +       select PSCI_RESET if ARM64
+ +       select SYSRESET if ARM64
+ +       select SYSRESET_PSCI if ARM64
+          select FIT
+          select REGEX
+          select FIT_SIGNATURE if ARM64
+
+Has the above been considered?
+
+
+> ---
+>  arch/arm/dts/k3-am625-sk-u-boot.dtsi | 9 +++++++++
+>  1 file changed, 9 insertions(+)
 >
->Specifications:
->
->    Rockchip RK3588 SoC
->    4x ARM Cortex-A76, 4x ARM Cortex-A55
->    8/16/32GB memory LPDDR4x
->    Mali G610MC4 GPU
->    32GB eMMC HS400
->    2x USB 2.0, 2x USB 3.0
->    2x MIPI CSI 4x lanes
->    1x MIPI-DSI DPHY 2x lanes
->    PCIe 2.0 x1, PCIe 3.0 x4
->    1x HDMI 2.1 output, 1x DP 1.4 output
->    Gigabit Ethernet
->    Size: 69.6mm x 45mm (260-pin SO-DIMM connector)
->
->Kernel commit:
->2806a69f3fef ("arm64: dts: rockchip: Add Turing RK1 SoM support")
-
-[…]
-
->diff --git a/configs/turing-rk1-rk3588_defconfig b/configs/turing-rk1-rk3588_defconfig
->new file mode 100644
->index 0000000000..289f2da775
->--- /dev/null
->+++ b/configs/turing-rk1-rk3588_defconfig
->@@ -0,0 +1,133 @@
->+CONFIG_ARM=y
->+CONFIG_SKIP_LOWLEVEL_INIT=y
->+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
->+CONFIG_COUNTER_FREQUENCY=24000000
->+CONFIG_ARCH_ROCKCHIP=y
->+CONFIG_TEXT_BASE=0x00a00000
->+CONFIG_SPL_LIBCOMMON_SUPPORT=y
->+CONFIG_SPL_LIBGENERIC_SUPPORT=y
->+CONFIG_NR_DRAM_BANKS=2
->+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
->+CONFIG_SF_DEFAULT_SPEED=24000000
->+CONFIG_SF_DEFAULT_MODE=0x2000
->+CONFIG_DEFAULT_DEVICE_TREE="rk3588-turing-rk1"
->+CONFIG_ROCKCHIP_RK3588=y
->+CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
->+CONFIG_ROCKCHIP_SPI_IMAGE=y
-
-Does the RK1 have an SPI chip attached, and is is possible to flash
-u-boot into SPI and boot from it?
-
-This has sparked some confusion on whether "u-boot-rockchip-spi.bin"
-should be provided in a downstream build or not.
-
-[…]
-
-Thanks,
-Florian
+> diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+> index fa778b0ff4c..35bfeae75a0 100644
+> --- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+> +++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+> @@ -46,3 +46,12 @@
+>  &cpsw_port2 {
+>  	status = "disabled";
+>  };
+> +
+> +&dmsc {
+> +	bootph-pre-ram;
+> +
+> +	k3_sysreset: sysreset-controller {
+> +		compatible = "ti,sci-sysreset";
+> +		bootph-pre-ram;
+> +	};
+> +};
+> -- 
+> 2.34.1
