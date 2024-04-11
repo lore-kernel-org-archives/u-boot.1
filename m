@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B4A8CD128A
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:43:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C4ABCD1284
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:43:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7BF59882B1;
-	Thu, 11 Apr 2024 14:43:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E4661882D1;
+	Thu, 11 Apr 2024 14:43:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q8ZoftUe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gsBWv33N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D9A1B88280; Thu, 11 Apr 2024 14:43:11 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 962158828A; Thu, 11 Apr 2024 14:43:12 +0200 (CEST)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 336348828A
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:43:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1B1A88244
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:43:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a47385a4379so157487866b.0
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:43:09 -0700 (PDT)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-a5200202c1bso316308766b.0
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:43:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712839388; x=1713444188; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712839390; x=1713444190; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pw93TmDPDQAkwl5pKSFrKySzCNLuFRwznyTmTT4BPnc=;
- b=Q8ZoftUezFZoOFhmCXDrWUkM0CxpWadAoXnvz98gPE/EoOgeu1WjQwErrEjJfVQOl2
- m8SNIaju67Te3ppsm/P+Nz+B/r8MzLgeM58GIAiOy5qRuD+AJJVDfo3/IQOI6Ybbw9dZ
- CSPdrhtZRaKVGLO1dKHx0oFL7kJwSNN7lzztqoCmJdnP4r9p0/dCQ+1l+ugwXu53e1Mo
- 7W4Qaqhews2dqQ7VjuYg26DEKZ1XkznfO/cSvgTgNQ70FgY+a9ZSp7mYO3TgIppV5NL4
- qZBA6ng3OnMGce8dI3sgociPIFMwXNWPkJstB47ch/+pbLWu/TO0ZkR7m7j0ED1d2RNE
- fAUw==
+ bh=IuMi8bw6KQdrLWQuG753Oo7nB7A+KFfgT7rmsQ2fL4g=;
+ b=gsBWv33NMv2rB5DNqZvUgPTSnS37SRgF3TsRPEAlxU9eEHDDKDqwb+K12BfNkuy7Dq
+ JaB3R+Nofbpy8/idLePwGYYn+uTQ6YS+TraZ0BLWt9DIM/ARF+UXLOgG8a8mYyscs/MV
+ MylnzOVv5EROa1nAiLT2aXNI9C02O0bHCYXpSW36rtQdKYJ/lBeYWRjD9JkI2eVSU0Uz
+ dRzsVDcCZRwmwusajZHjkKxstZN/jludgPIZwHQG4fZs8Ug83n/zEEcmwQ1GSRso+fjM
+ 3aexRULBTj0uNFLesgqqvJba3+n+v9NGA4dm8AJ2EXi7DV47OPRHOrdmvd8pfXqsqlgK
+ RUXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712839388; x=1713444188;
+ d=1e100.net; s=20230601; t=1712839390; x=1713444190;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Pw93TmDPDQAkwl5pKSFrKySzCNLuFRwznyTmTT4BPnc=;
- b=ivJAWC6OqjVQZjYFiUCo5PgMQlZn7Ga5HARxpeCNeQz3wfPjcYOoiJIWdTba/jW8Dj
- NMn+rsQkRPNbkzQtYQhK6yKRiVXlKx6odFvNymVTztqqCZK92ZYxIQ2qb53xhbn3t2Xr
- 9uQuRiqWJwDekkvmpW6LzbGK05ULMO1pNnnBTL+itizRDcFAzd98ITXgdnBIneJeTjQE
- QOauyhETkCx8cJXO9Woi02D2ozYqlJg+X0h2JqvkytAc5udDnWMmQ8WcGikfIhy78rA4
- VwuBpp/1Q3lCrBhe7FP7wDOlTjkYWFca0TYMXLUB1jFRmm5BUz555XYxZd4QoOmiHtfy
- C5SQ==
-X-Gm-Message-State: AOJu0YxFoCCa0OnL0MbSQ58KbHo6M+QTn/FKCIn5E/r5AsZcd1PxooXB
- 06DXcWzSkQ6lnQpPFKZNvxiZ++EpvbwVk18vVbWyCBxBHj9G1uFjOZW6VKUxhmo=
-X-Google-Smtp-Source: AGHT+IErVWJABI82gNrDBeWuw/tGLSn1HoF37LSrAAMMVrAoDj08cUbIdOIDSG5IYT4cg4X/d2UZJw==
-X-Received: by 2002:a17:907:7d8c:b0:a52:2238:abd7 with SMTP id
- oz12-20020a1709077d8c00b00a522238abd7mr1568026ejc.32.1712839388741; 
- Thu, 11 Apr 2024 05:43:08 -0700 (PDT)
+ bh=IuMi8bw6KQdrLWQuG753Oo7nB7A+KFfgT7rmsQ2fL4g=;
+ b=Jyj46b9bwz7Du6DyqaKrvoeCv3M0l2joEhosrRZG3PKv4QYZPjdMxvbrWl7oU0s3P2
+ 5t7VaFSf+n0/SIXMcvrvSC1jIZXvgi58WbtpaZ23r8kWf3bKhL9rlGj+gZCQlDbGyEfG
+ iXq03hHZwNDHHdC0MthBhQFc4T/2cQO2oSgySZMjiXUfFx0bG/dlcZVAx2Rv7ZaE+KEe
+ EQftyuc6BeW8J/KH0/SIRIew2a9OaHMNklocoIoCjR38c5pRhgjevXAB4s30W7TPCRQb
+ 2H+9SpHlAqd0bWNfMWLdGnr3UzmYtBvymTLsddODy/3KchLHhlUzmyaskIpi5/DTTYsT
+ QgMg==
+X-Gm-Message-State: AOJu0YzxHiNR5dknDZ+9bRge6htQRuwT/beZPDee+VzgfAHg+OUzWqiI
+ F0wXlkP+u6377JJxksXBHjS6jntAOhxo5+NG+8vcnWiOADZjPxTZjabXQv7MqmznHlZfK2vjtn5
+ p
+X-Google-Smtp-Source: AGHT+IFvghBJaHN2GAX4nGmAS/yjhJ55wwvxv75a5NsAmzpxXmpzmI70jzmYihXQlTapeKTLoY6bDw==
+X-Received: by 2002:a17:906:c10d:b0:a52:696:5c6d with SMTP id
+ do13-20020a170906c10d00b00a5206965c6dmr5017647ejc.37.1712839389847; 
+ Thu, 11 Apr 2024 05:43:09 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::570d])
  by smtp.gmail.com with ESMTPSA id
- e1-20020a170906844100b00a4e8a47107asm710491ejy.200.2024.04.11.05.43.07
+ e1-20020a170906844100b00a4e8a47107asm710491ejy.200.2024.04.11.05.43.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 05:43:08 -0700 (PDT)
+ Thu, 11 Apr 2024 05:43:09 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>, 
+To: Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
  Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20240405-topic-sm8x50-pinctrl-v1-0-92d563c28c90@linaro.org>
-References: <20240405-topic-sm8x50-pinctrl-v1-0-92d563c28c90@linaro.org>
-Subject: Re: [PATCH 0/3] qcom: add pinctrl driver for SM8550 and SM8650
-Message-Id: <171283938769.622116.15145320526567860572.b4-ty@linaro.org>
-Date: Thu, 11 Apr 2024 14:43:07 +0200
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+In-Reply-To: <20240410-topic-sm8x50-spmi-clients-v2-0-783e20d66c25@linaro.org>
+References: <20240410-topic-sm8x50-spmi-clients-v2-0-783e20d66c25@linaro.org>
+Subject: Re: [PATCH v2 0/3] qcom: support SPMI buttons on SM8550 and SM8650
+Message-Id: <171283938892.622116.10808128600906494293.b4-ty@linaro.org>
+Date: Thu, 11 Apr 2024 14:43:08 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,24 +95,21 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Fri, 05 Apr 2024 10:15:09 +0200, Neil Armstrong wrote:
-> Add pinctrl driver for the TLMM block found in the SM8550 & SM8650 SoCs.
+On Wed, 10 Apr 2024 17:59:42 +0200, Neil Armstrong wrote:
+> First add PMIC gpio variant on pm8550-gpio, then rework the
+> qcom-pmic button driver to support data structs for each PMIC
+> variant and finally add the data for the pmk8350 button configs.
 > 
-> This driver only handles the gpio and qup debug uart pinmux, and makes sure
-> the pinconf applies on SDC2 pins.
 > 
-> Finally enable both drivers in the Qualcomm defconfig
-> 
-> [...]
 
 Applied, thanks!
 
-[1/3] pinctrl: qcom: Add SM8550 pinctrl driver
-      commit: 225c991b41a2255054dfcafb7667979c6a88bffd
-[2/3] pinctrl: qcom: Add SM8650 pinctrl driver
-      commit: b0725abe0ae5c41c03dfc9af921120fe501f07f5
-[3/3] qcom_defconfig: enable SM8550 & SM8650 pinctrl driver
-      commit: c32ab322d04eed52d5ad30b19d45fe041c19a250
+[1/3] gpio: qcom_pmic_gpio: add support for pm8550-gpio
+      commit: 21e19a823aba68fe585ab48ff89c1414554ac929
+[2/3] button: qcom-pmic: move node name checks to btn_data struct
+      commit: 28b264674fdd0b50a396a22115e097dae47945fa
+[3/3] button: qcom-pmic: add support for pmk8350 button configs
+      commit: 43923bfb5040c245645aa91bc000b92117c587dd
 
 Best regards,
 -- 
