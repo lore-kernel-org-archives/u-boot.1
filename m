@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A606C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 15:36:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EE2FC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 16:06:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4F2387F2A;
-	Thu, 11 Apr 2024 17:36:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id CBDA987F04;
+	Thu, 11 Apr 2024 18:06:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T/9QmyKv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cM2RyJdo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99C8487F2A; Thu, 11 Apr 2024 17:36:12 +0200 (CEST)
-Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
- [IPv6:2607:f8b0:4864:20::22a])
+ id CD8F787EFA; Thu, 11 Apr 2024 18:06:03 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47DB487DB1
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 17:36:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C833E87F04
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 18:06:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x22a.google.com with SMTP id
- 5614622812f47-3c5fdd1598fso700084b6e.3
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 08:36:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-56e78970853so1644377a12.0
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 09:06:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712849768; x=1713454568; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TCVvTNHpEdExalrrWAJKOzPkOZcZnNFXe8MFzmVxu8s=;
- b=T/9QmyKvXC0inZN3oa52TAc7q+wVy19XuwuwMqxsRQZQ51EMIbVnkpsGsYL59mkibT
- SdI9S+hrSdyFEmoD58RtjZH2qIZWahZ+/JyKnqvqwq6sKV1Emg4aZCddTNkgcR4ret06
- 4w7NsaRepzZoMHXHwjYhriWS+GIUuyOIlqHlM=
+ d=linaro.org; s=google; t=1712851561; x=1713456361; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=1YsdJ2lKnRMlY5iscf2Hs8TNoURjfkofgrTPZyUqYWY=;
+ b=cM2RyJdob5Ruwv2Rq2lCUQrbEr47JDN/u7traxl6uI6p8U8ZpON/WBlRj8sIJDVC2p
+ 4BAwNEHFKwa+9zAVFkG3TFdOgypT8/jmjHRSDhWuvY/WxL7hSPUgZTVRshyP/K+qwjqh
+ mcHTpIyKppSPXlcpkkT7pm0VzANRWn0j5afHFK9f87hPM3yH38rtvd7PCfauDNNARch9
+ xauiIwzyGfrP7TQMB3GPBup4G2X136w+PsqF2VE+CM9wLPfiEumubVCVyyOREj9Ky75I
+ J03r4C60jhrvRIi2W3X9uaJhAPZBaiGnrbOJP/9SAljnQYchqXqCkJKr4w7+gaLT8ryG
+ lZ0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712849768; x=1713454568;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TCVvTNHpEdExalrrWAJKOzPkOZcZnNFXe8MFzmVxu8s=;
- b=gcfI+dyGOAM2Iz/sOQyezL+ck+XwVsMDKLJTclxB8Di0iwgizz5hdgrdWinoXAqrZL
- ALpjvSq/0muUdiDodPiMwNsjLEP915LP0OVSh2i2/aHqvR0RqAHgoFPXTPBafVaw3pFQ
- P3+o081G6lz5HnD7KVCcl0SXBQvrd+p8qbK6qfqnJR8wFBorJe4q9lAc5+fttjPWCmNR
- ytDO6t3ucpObndnzV5dr+0wMAbHnyiD4n+LIrqiZZTwxjbeZByOxR8d099maydbUVxuM
- Ur1FelQI9sEWBnMmOZiHqOD2XysdgcuGTYs3vof5MjYCVcxaeDWrLuYRVvhxPgKAEFh8
- SjRg==
-X-Gm-Message-State: AOJu0Yx+Iq8+GAJ6ErQzekPYNUsTspir51qOvSEYv2M6t2UVIoBEm2Mk
- 60hG7NZem57R82MvVHkR7mBQLxDr0WtA+L9o5Vojp40v0VWgk0wlQyY2O1kpww4=
-X-Google-Smtp-Source: AGHT+IHiFO1sn1cg/E4vOxC0pIy4KBYJ4L+vn/l8w3BGjEHL4uftEjeZJFH4/I645ZNl3OVjmzm3eg==
-X-Received: by 2002:a05:6808:1524:b0:3c6:943:d47c with SMTP id
- u36-20020a056808152400b003c60943d47cmr6883252oiw.40.1712849768017; 
- Thu, 11 Apr 2024 08:36:08 -0700 (PDT)
-Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- d24-20020ac85358000000b004364d940d3dsm1026014qto.96.2024.04.11.08.36.06
+ d=1e100.net; s=20230601; t=1712851561; x=1713456361;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=1YsdJ2lKnRMlY5iscf2Hs8TNoURjfkofgrTPZyUqYWY=;
+ b=mPI7alt4jEvwIHMzrrbhqwhlr3WpfvzBRpzHjiPB4mq47PQ6LX3iQiknMEiVpWnkc1
+ fAVVQkWAndvs3Dt0oJAz3TD3eQGPuMxBvhee0pBmYipOsPKFjub2X6rQqElpaOqB7yND
+ H6vK9kveLwQH0G/IduO5ryLyOQ2PtL+v/DCsLVdW3QrD7a6D0+ahvTLgEFKlMZX9yMD2
+ WwoD3LSINxQgeX6QN1HcjmN4e+LK4HeDU4jvCPEypSRuyrNfkfz2RNqxprvGrlsVWWy2
+ y0PCASMW7Dsn884J2SiGLWkMnAYfBmZrULZ5CsZvByie0T6boO73KPOv2RK7/q9xLiaM
+ gwXA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWWh4oRDtPIWq9D+otOg2T1gvhEfIAdcI22mIj8z7Dh1tJJLcFkpaOtymR1baMPiqb2/ek4MYJjDdj/MnOZbb8BB4Ny3g==
+X-Gm-Message-State: AOJu0YxOwl5MemHEyy77RR/JhGwyb+Y4uJFOdc60zQ8KiQ9U97qnCMBI
+ To7yxrhzDiTsp1aoU7Yvh1DfzCFGU2gvvrR1IZH4cNITe5I1Ub8l53dSNb4L89I=
+X-Google-Smtp-Source: AGHT+IHBlpS11v2WMJ5rhFOda1BxC3zuns5Q01+/3m6ZIGlRNBSSE2TezonyzHYL+wX7IteuHANfvw==
+X-Received: by 2002:a50:c05e:0:b0:56b:dd7c:ac3d with SMTP id
+ u30-20020a50c05e000000b0056bdd7cac3dmr81034edd.10.1712851561205; 
+ Thu, 11 Apr 2024 09:06:01 -0700 (PDT)
+Received: from cymric.caleb.rex.connolly.tech ([2a02:8109:aa0d:be00::570d])
+ by smtp.gmail.com with ESMTPSA id
+ v19-20020aa7d653000000b0056fd85df9ccsm814019edr.47.2024.04.11.09.05.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 08:36:07 -0700 (PDT)
-Date: Thu, 11 Apr 2024 09:36:04 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>
-Subject: Re: [PATCH v2 00/19] x86: expo: Add support for editing coreboot
- CMOS RAM settings
-Message-ID: <20240411153604.GA280191@bill-the-cat>
-References: <20240104151152.697855-1-sjg@chromium.org>
+ Thu, 11 Apr 2024 09:05:55 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Igor Prusov <ivprusov@salutedevices.com>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+Subject: [PATCH] usb: dwc3: support USB 3.1 controllers
+Date: Thu, 11 Apr 2024 18:05:12 +0200
+Message-ID: <20240411160527.835767-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="FCkw4ZusAiNtNJ6k"
-Content-Disposition: inline
-In-Reply-To: <20240104151152.697855-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,57 +94,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The revision is different for these, add the additional check as in
+xhci-dwc3 core_init code.
 
---FCkw4ZusAiNtNJ6k
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+ drivers/usb/dwc3/core.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-On Thu, Jan 04, 2024 at 08:11:33AM -0700, Simon Glass wrote:
+diff --git a/drivers/usb/dwc3/core.c b/drivers/usb/dwc3/core.c
+index 96e850b7170f..db045f5822d4 100644
+--- a/drivers/usb/dwc3/core.c
++++ b/drivers/usb/dwc3/core.c
+@@ -594,9 +594,10 @@ static int dwc3_core_init(struct dwc3 *dwc)
+ 	int			ret;
+ 
+ 	reg = dwc3_readl(dwc->regs, DWC3_GSNPSID);
+ 	/* This should read as U3 followed by revision number */
+-	if ((reg & DWC3_GSNPSID_MASK) != 0x55330000) {
++	if ((reg & DWC3_GSNPSID_MASK) != 0x55330000 &&
++	    (reg & DWC3_GSNPSID_MASK) != 0x33310000) {
+ 		dev_err(dwc->dev, "this is not a DesignWare USB3 DRD Core\n");
+ 		ret = -ENODEV;
+ 		goto err0;
+ 	}
+-- 
+2.44.0
 
-> U-Boot provides support for editing settings with an 'expo', as well as
-> reading and writing settings to CMOS RAM.
->=20
-> This series integrates expo functionality with coreboot, using the
-> sysinfo table to get a list of settings, creating an expo with them and
-> allowing them to be edited.
->=20
-> A new CI test provides coverage for some coreboot-related commands. For
-> this to work, a number of minor tweaks are made to existing tests, so
-> that they pass on coreboot (x86) or at least are skipped when they
-> cannot pass. Likely most of these fixes will apply to other boards too.
->=20
-> It includes several other fixes and improvements:
-> - new -m flag for 'bootflow scan' so it can display a menu automatically
-> - Fix for video-scrolling crash with Truetype
-> - menu items can now have individual integer values
-> - menu items are lined up according to the width of all menu labels
-
-This needs to be rebased on top of master where I suspect the biggest
-problem is that we need to reconfigure coreboot that we build now? All
-of the new tests fail:
-https://source.denx.de/u-boot/u-boot/-/jobs/814728
-and we're just building a standard defconfig for coreboot now.
-
---=20
-Tom
-
---FCkw4ZusAiNtNJ6k
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYYA14ACgkQFHw5/5Y0
-tyzNNwv+KhPNLADO6vFo7uvr7DnbT4WvisLRDAz7p9Zb0HqppZlrdjkcs4/PYEIy
-fw0LiFJmDmhS1vDTXntTYdiiAvS4rBPKdvFjd/9howByqSeV/xAsZn7BDhYlRgW+
-YaSHsacA18A3OZCMOgOEnLt4B6O3aevc+SLDC8IwDWFnuSJY20hjUqwx62+RNzF6
-hLcHZA9LC7+/P/gA8YUnNLwk43z3N/Li4jh+4VFUYcNEvHGD8LIGLnZBWtjVqRGP
-3E0AcYmviNsywuV5NWiiio3q1YIK+u7mIb1WrGrbbeRmRRqgfMkYVK9W0VHJeNIz
-HvZL+GgJ1CbpBUhitjm96eyW3ur46pUjSJtQbFTnoZ6YYN5jVBmhtX6teEBEJEAj
-WXRuTzTl1GWV+WuvDNJ4D3HbMoBpijv1RwldvOkPz6c1YMad2UhhYPbs2DiTEPJS
-10zI0UpNhmCUuiKa+73wYkqx3rb5gP7wHLUrjfg8GrAYwJ2W71sijWpIFW+mr/01
-NnOfME5H
-=j2Fi
------END PGP SIGNATURE-----
-
---FCkw4ZusAiNtNJ6k--
