@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C45CD1284
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:44:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F1BACD128A
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:44:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 777D588289;
+	by phobos.denx.de (Postfix) with ESMTP id D602F882F6;
 	Thu, 11 Apr 2024 14:43:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ADmu8vCB";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="r25hRqH1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 066D9882F0; Thu, 11 Apr 2024 14:43:17 +0200 (CEST)
-Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
- [IPv6:2a00:1450:4864:20::62a])
+ id 18F5B882A3; Thu, 11 Apr 2024 14:43:18 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3015288263
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:43:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 230FF88244
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:43:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62a.google.com with SMTP id
- a640c23a62f3a-a47385a4379so157500766b.0
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:43:14 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a46a7208eedso1112488266b.0
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:43:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712839393; x=1713444193; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712839394; x=1713444194; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hYTkj4uQfPz+WYGtrV6o+CVLqYvyjgK3MiMNEhM7dBw=;
- b=ADmu8vCBgeK2oBRqppe2v5RY+kM1joA2hZH545ZIUewqt+lusyo1BWpze1oNo8W+oF
- g/QJ/v3E/0rKy9niC5I8r5ukvAgMjuMfp5FrwhTToMzMq2Y+L596UMnDA5LF7s/4ysTm
- rKCaJw21YdYH3tpeRXCiegb7xBywO/hL/Ppfvaj+qA0/E05FfcxfnNldpGLErZHXbH97
- RswvgUn8NQtZgkPZIgyDc2HNvBBjm6psF4u3giawUfY9iEGrUweyN3sDaG0K47xU2xeo
- Bf708ljMWB05pAqwgXVAQYWqxg15w3wQKah4uSSs2vTNLfyvQhOwWCyGZ71pQoQaPNPc
- gYYA==
+ bh=nNQVEnGCaMOzbjq/F3aiu8UEOCqOLxB1anBPCdNiiW8=;
+ b=r25hRqH1mDWynClas2DbdSHB+n9pcIXbBrlFByw8ss2NY9mcGkbo5sQ3aD6a1QTwAG
+ k5xP1ZkOp57rkQNuocGLVhf1tfykRIbiEiN7k31ETPri/fEyyPFUqnTeiBLCCu4NQNB8
+ 2zIFwxKO4fjQ+elk0QIixdDQ7ZQeuPNcGZgLHyqZ1Nftc1Amfuz5OBlc4CyAI0rJRYMX
+ tlvQN6LhIeA4HaP8qtCRHnHjqrVfV99K+Z8nb3lar3OyvnREHa+fzgofcAKP0h3ClK8X
+ WzZtZr8HP0HN+TL1ZdxDRPAv4pES9lAgpFSnDWhAXXKrxsOA8HCPfM5Wz2o6BZR7JKDd
+ g8VQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712839393; x=1713444193;
+ d=1e100.net; s=20230601; t=1712839394; x=1713444194;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hYTkj4uQfPz+WYGtrV6o+CVLqYvyjgK3MiMNEhM7dBw=;
- b=RKjyZP+N0w1MmMUiGYzxieAsjtXjnrHijdyGSnwXHUbbHjaRIkCxj8Bitsi6/Kh73F
- EULPtFylZJ/Kf+Lv02qBiP+et56ZIPoAQB7HiUeHwtKEWiWkyjH7GWjJqJY3Zvs3D4g2
- GNnDVF9qGSRcg8swCH+ImmB+Qr4jEtLGedHBgHTGWIuqwl0/tprpnkCe9K4IGNmR3tQt
- 99CqstO1s+F7BwCWVE9nJ3Ehx9ROL+wYq188prtdpHExi4oVLLGVXoC/JEy1GvX9dOFX
- iT17WOsJVcYMz05ljOEf9Vh2kXxoH6Ljg9i40SWyzoojSN5xh4dBLOxw20e5D7tofid0
- 1SPA==
-X-Gm-Message-State: AOJu0Yx0QMY9xqjTVJGImF+zOPO3UT2qr2Z1ZG7ykTnAO3yFhTnYVNnZ
- DHVQaZNbeQf3dsAeAeMz/Kt8S6aHAvwTZ0juI6UyGcu99Y2q8IUriDtgX4uPUVhIf9Pn/AWl5Bz
- 1
-X-Google-Smtp-Source: AGHT+IGVmYxolpESg9iPT8tLzi2juQ0PQnYCfRz7DG9jh2RfnGsxXb3L4u1jZdGftGT6A/+QyBoP4w==
-X-Received: by 2002:a17:907:1c2a:b0:a4e:410e:9525 with SMTP id
- nc42-20020a1709071c2a00b00a4e410e9525mr2456750ejc.30.1712839393564; 
- Thu, 11 Apr 2024 05:43:13 -0700 (PDT)
+ bh=nNQVEnGCaMOzbjq/F3aiu8UEOCqOLxB1anBPCdNiiW8=;
+ b=Q/ko21lFBgiEw6DwRvNH2dy8oYMBV0/joUMceUKNkYBgZNhzfdeuf65xz0KSuHQMW+
+ vrg2vNZVZX0dbfBSVOLBCDtXLERZSgSWNKq45JDSk/104Hx6mnnifNNEZ3PAf5FdFNvM
+ 2BGkIgNoK8wKKZ6/zkJmL2CWQQm5EJvX+UOgBMzqgt5441FCxZuwyLeVkM05jxJkG+y3
+ yZ8UxG7RGfytCiKH7g9TwdFY8fesNF39xgYRT/xZi0hQg2rFkVi7LgLbIEryXCNuFPho
+ q59+hwmjaNIGsidtFrykHH0pBoBxe2kwn+1asT6wv3t7Xm4cazRN4yiuDmyI7RMxJVx3
+ cx6Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXI9VylxLHU2+XrAkvHM5X5Mxz4dap8YXiREI4OvnnOC+Fj8vfaFwzstQ8b9bNNjsF8/Xzyjb3bP8OLfNtklm4Ulp5iRQ==
+X-Gm-Message-State: AOJu0YxH6W+MgE2LeFRcYcTwAr3Pp82bTEh6eVgmTdhdnVauKL/nckjj
+ bR83eecdBtafkznvaQNsf600BiSIFtSZiqiUg+2Udv7owvCB05HDvupPceykc9SS3I6jwJ2hPZ7
+ 7
+X-Google-Smtp-Source: AGHT+IEDfhTth2gtLDTk+JnAVmTj4zYOLeEXBQUZAlrHDxj50M3QKER3d/XBVy+MV93wFSx0+L3sog==
+X-Received: by 2002:a17:906:b2d8:b0:a4e:a7a:84e0 with SMTP id
+ cf24-20020a170906b2d800b00a4e0a7a84e0mr3267026ejb.34.1712839394780; 
+ Thu, 11 Apr 2024 05:43:14 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::570d])
  by smtp.gmail.com with ESMTPSA id
- e1-20020a170906844100b00a4e8a47107asm710491ejy.200.2024.04.11.05.43.12
+ e1-20020a170906844100b00a4e8a47107asm710491ejy.200.2024.04.11.05.43.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 05:43:13 -0700 (PDT)
+ Thu, 11 Apr 2024 05:43:14 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>
-Cc: neil.armstrong@linaro.org, trini@konsulko.com, stephan@gerhold.net
-In-Reply-To: <20240411123726.356173-1-sumit.garg@linaro.org>
-References: <20240411123726.356173-1-sumit.garg@linaro.org>
-Subject: Re: [PATCH v2] mach-snapdragon: Allow other board vendors apart
- from Qcom
-Message-Id: <171283939290.622116.11354369414400233489.b4-ty@linaro.org>
-Date: Thu, 11 Apr 2024 14:43:12 +0200
+To: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
+In-Reply-To: <20240409150252.561029-1-caleb.connolly@linaro.org>
+References: <20240409150252.561029-1-caleb.connolly@linaro.org>
+Subject: Re: [PATCH] MAINTAINERS: add Qualcomm mailing list
+Message-Id: <171283939376.622116.1340488880042920142.b4-ty@linaro.org>
+Date: Thu, 11 Apr 2024 14:43:13 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,17 +97,18 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Thu, 11 Apr 2024 18:07:26 +0530, Sumit Garg wrote:
-> Qcom SoCs derived boards can come from various OEMs/ODMs and not just
-> Qcom itself. So allow CONFIG_SYS_VENDOR to be set correctly
-> corressponding to the actual board vendor.
+On Tue, 09 Apr 2024 17:02:51 +0200, Caleb Connolly wrote:
+> Add the newly created u-boot-qcom mailing list to keep track of Qualcomm
+> patches.
+> 
+> Additionally, link to the U-Boot Snapdragon custodian tree.
 > 
 > 
 
 Applied, thanks!
 
-[1/1] mach-snapdragon: Allow other board vendors apart from Qcom
-      commit: 68f98096c09734257e5218897500a7279c6c4ca2
+[1/1] MAINTAINERS: add Qualcomm mailing list
+      commit: b46a2aec4cd5937ef6cd77601ac02ac0fcfdb4c4
 
 Best regards,
 -- 
