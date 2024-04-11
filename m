@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A843CCD1297
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 05:03:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0061ACD1297
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 05:06:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D870887861;
-	Thu, 11 Apr 2024 07:03:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 75921881C8;
+	Thu, 11 Apr 2024 07:06:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="jReI4t0+";
+	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="QHL2oh3d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 526E687F52; Thu, 11 Apr 2024 07:03:37 +0200 (CEST)
-Received: from out-188.mta0.migadu.com (out-188.mta0.migadu.com
- [91.218.175.188])
+ id B9CCE87150; Thu, 11 Apr 2024 07:06:06 +0200 (CEST)
+Received: from out-185.mta1.migadu.com (out-185.mta1.migadu.com
+ [95.215.58.185])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A8E887150
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 07:03:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 34801881CA
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 07:06:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=jookia.org
 Authentication-Results: phobos.denx.de;
@@ -29,35 +29,36 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
- t=1712811813;
+ t=1712811963;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding;
- bh=Rz6G6lulTKX0bZCXO358d3VfKIraDSF/CiY6Zq9IT9s=;
- b=jReI4t0+MH/5WtpPIDgu6g21M03BEBDhZu4seTLSLmuoEAhIWPGW2redpW/L6xcIMgrWur
- RCpt1RUlp2fdSysvaQ0+i+JTphl8PY+XAu67LNkUij3e0pTehSpsUiMdKvogNEiXXm4SB9
- Io/dGqEkouEOcI4qt9SF+m07VUPXcPsYhRzVQz8Krvih6COe1EdUkeAneR8aV/kBA959I1
- K9OP9jb2aGzgflisxuUusLLnkOg4XDNTiOAxA8VFV8v2+7pxAxSMRCkuFC7oUCnY3ui//e
- P1RXgzvuUgmawTbOxXZW0yqwwNSknp5NtGyysNpaLGH/0cCCMC8HIl6ZL8yc9w==
+ bh=IUUYXVN3mzwX8BxGblUquqcQSrzKJLL2OveASMu8FrA=;
+ b=QHL2oh3dgI60JHhgKBng1u8v/1O/4ROd/vVyEBez1xprlEzO/yOUNqxTXwTcmqYyF5x7YC
+ b5NjrwXpFZlKJ8Bj9G2ZDolhKo3D/ClsGn3fT0H6oF0E86GrKfI9PYCH7rBK0PpCR/WQc9
+ bH7nmW53lq1tAp/X+p5EAcBQOVx4FxEYJPuXLSaSpwrGBIVEzdUvedTWEGFF7TWeQFsXru
+ +GHalIsM0HqslcgZlIQmqy0yzccKacBSw8cJQ4n1W5+vrwhybIbZYzICBFsy1T0DG3Z0Wt
+ C00i2FAERLaaLO1iKmpeJP3QuEDH8BGtFZqgzgW129eocVasjcjWjbq/x2gsyw==
 From: John Watts <contact@jookia.org>
-Date: Thu, 11 Apr 2024 15:03:20 +1000
-Subject: [PATCH] boot: Pass baud rate to stdout-path
+Date: Thu, 11 Apr 2024 15:05:48 +1000
+Subject: [PATCH] ubi: Depend on MTD
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240411-stdout-v1-1-66ebe5bb152f@jookia.org>
-X-B4-Tracking: v=1; b=H4sIABdvF2YC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
- vPSU3UzU4B8JSMDIxMDE0ND3eKSlPzSEl2TNEvDJFMzs0SDNCMloOKCotS0zAqwQdGxtbUAvkB
- AuVgAAAA=
-To: Tom Rini <trini@konsulko.com>
+Message-Id: <20240411-mtd-v1-1-fe300f6ab657@jookia.org>
+X-B4-Tracking: v=1; b=H4sIAKtvF2YC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDE0ND3dySFN0Uo1QLQ8NUQ/PkZAsloMqCotS0zAqwKdGxtbUAuXCeXVU
+ AAAA=
+To: Kyungmin Park <kmpark@infradead.org>, Heiko Schocher <hs@denx.de>, 
+ Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, John Watts <contact@jookia.org>
-X-Developer-Signature: v=1; a=openssh-sha256; t=1712811800; l=1243;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1712811949; l=851;
  i=contact@jookia.org; h=from:subject:message-id;
- bh=PBzIiRJvURzUdzKwPgAUizG81jtcZvhqhpNIiwY81WM=;
+ bh=w7S4ACvp0R03h7fSTwESarFfxxs2LkGLi2y5LsVOtuo=;
  b=U1NIU0lHAAAAAQAAAEoAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAAAgpGuA3uho2
  8zVxm554DVLHyl4gq5/nBHglU5WIWN8/zYAAAAEc3NoOgAAAAZwYXRhdHQAAAAAAAAABnNoYTUx
- MgAAAGcAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAABAvbPd/p2oX/MmRaPaeap5sel
- ev1gDCaw1eguHlQhRvhUTiM7x7wTTlnlOrTta691/LuHH/hsP2h5hU9kJFQCEAAUAAOmT
+ MgAAAGcAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAABALE+dHJ+657x2hDU8H++8kmg
+ hh8bYApAPK8fcg0NDXNbDsci8xOraBLIprh1BEVzbmvUQ8mSBbxPTxYzPljJ9DQUAAOmW
 X-Developer-Key: i=contact@jookia.org; a=openssh;
  fpr=SHA256:6LBQmZH5u7i/edmEZXzCTwCrpSevs/ZshZxNmlD1thY
 X-Migadu-Flow: FLOW_OUT
@@ -77,38 +78,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Linux might use the wrong baud rate such as 9600 by default, make sure
-to specify it when passing the serial port over.
+UBI required MTD to build correctly, add it as a Kconfig dependency.
 
 Signed-off-by: John Watts <contact@jookia.org>
 ---
-On my board at least (a sunxi T113) the serial console will initialize
-as 9600 baud instead of the set baud. Pass the baud with the serial
-device to Linux to solve this issue.
+While working with UBI on my SPI NAND patch series I found it was
+possible to enable it without enabling the MTD subsystem.
+Add a Kconfig option to solve this.
 ---
- boot/fdt_support.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/mtd/ubi/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-index 090d82ee80..83e62f47b5 100644
---- a/boot/fdt_support.c
-+++ b/boot/fdt_support.c
-@@ -153,9 +153,9 @@ static int fdt_fixup_stdout(void *fdt, int chosenoff)
- 	}
+diff --git a/drivers/mtd/ubi/Kconfig b/drivers/mtd/ubi/Kconfig
+index 5783d36c04..fd446d6efb 100644
+--- a/drivers/mtd/ubi/Kconfig
++++ b/drivers/mtd/ubi/Kconfig
+@@ -9,6 +9,7 @@ config UBI_SILENCE_MSG
  
- 	/* fdt_setprop may break "path" so we copy it to tmp buffer */
--	memcpy(tmp, path, len);
-+	len = sprintf(tmp, "%.*s:%d", len, (char *)path, CONFIG_BAUDRATE);
- 
--	err = fdt_setprop(fdt, chosenoff, "linux,stdout-path", tmp, len);
-+	err = fdt_setprop(fdt, chosenoff, "linux,stdout-path", tmp, len + 1);
- 	if (err < 0)
- 		printf("WARNING: could not set linux,stdout-path %s.\n",
- 		       fdt_strerror(err));
+ config MTD_UBI
+ 	bool "Enable UBI - Unsorted block images"
++	depends on MTD
+ 	select RBTREE
+ 	select MTD_PARTITIONS
+ 	help
 
 ---
 base-commit: 777c28460947371ada40868dc994dfe8537d7115
-change-id: 20240411-stdout-4f91b566a0f2
+change-id: 20240411-mtd-d2e811e17cc8
 
 Best regards,
 -- 
