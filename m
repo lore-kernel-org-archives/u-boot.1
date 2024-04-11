@@ -4,53 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F1BCD1292
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 06:45:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83452CD129C
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 06:47:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C793C88344;
-	Thu, 11 Apr 2024 08:45:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AB2AB88344;
+	Thu, 11 Apr 2024 08:47:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="dKkoDo3g";
+	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="XgrT3aTw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C16B588361; Thu, 11 Apr 2024 08:45:32 +0200 (CEST)
-Received: from out-189.mta0.migadu.com (out-189.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::bd])
+ id 391E1883CD; Thu, 11 Apr 2024 08:46:57 +0200 (CEST)
+Received: from out-173.mta1.migadu.com (out-173.mta1.migadu.com
+ [95.215.58.173])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9248588344
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 08:45:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3DCB8838C
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 08:46:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=jookia.org
 Authentication-Results: phobos.denx.de;
  spf=none smtp.mailfrom=contact@jookia.org
-Date: Thu, 11 Apr 2024 16:45:04 +1000
+Date: Thu, 11 Apr 2024 16:46:17 +1000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
- t=1712817928;
+ t=1712818013;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  in-reply-to:in-reply-to:references:references;
- bh=hMaXI2XBTZV9AucirTQS0EosFfNCb4ki5KWjAf/eqLU=;
- b=dKkoDo3gFVF6/VTZ5HUctqRHZUxKMLdxYO8hGPSWMSAck7AUqa/AUlxqgv73vMN595FgEl
- LwSTMzEiHI6XRMk5IqRqKuu9U6bASQxjWgoUzlaSJ4qQGIuoY76LJq6i80rHFAnQaFlICC
- NaXuzeJ8MVGKdCjLAXtNo5H1D+D/o5/3gRnbnNMdQ+SitYat7gFlTE3+NG3L1p8t0RIIhf
- LA7VnRFRiciVOoSqLkuymB8pb6vP7meQklBgHtWoqy/XPW2JhvA2f84GrAK71H/ep6VHB2
- tDWVNM0LU+oUzwhHAmzOi33TqezEkIFsKB4MGPsQ7QulfJHUOSfrCkXZp+H5uQ==
+ bh=l/45kKiJWS76tnvoJKCOcV/eMtdCk47DpxrPuyZSTjo=;
+ b=XgrT3aTwLJXB09NtqNjoPRcMfF/xZ7lep1GrYc+mVtcEnBTZLsjJ3N/G/fsJEQG7WXZDP9
+ weoQYE91LarF7l3TfRFijhLRrUSz3m2YSttEpWgFfdaICRuYokkNkDmoIrmYCUDYAfw5qT
+ bG6C4gnhVmhz8a2AlgV96eQaM5nSOGNDwa86zZoKKd4sSz2iidBjXrpFYc3ueXrl5wbdGK
+ Jr3t4P91fB8reDDxhKglwX8lUDnYpfN1f8i9+goPVOhlkNa9602CJlm1hNcCU7PguipfPx
+ sNq2RzVm13QxgS6dgSsB6lfaLIm/6YBdKJ1BmZSAP1bVYVoyOvGDDMJ1v6oyxw==
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 From: John Watts <contact@jookia.org>
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>,
- Jagan Teki <jagan@amarulasolutions.com>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v2 0/2] sunxi, usb: UDC/DM gadget model support
-Message-ID: <ZheG8J8h-X5GPdwX@titan>
-References: <20230608195631.55364-1-CFSworks@gmail.com>
+To: Aren Moynihan <aren@peacevolution.org>
+Cc: u-boot@lists.denx.de, Sam Edwards <cfsworks@gmail.com>,
+ Samuel Holland <samuel@sholland.org>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH] usb: musb-new: sunxi: support usage with DM_USB_GADGET
+Message-ID: <ZheHOZebMGze5X09@titan>
+References: <20231231203930.1955090-1-aren@peacevolution.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20230608195631.55364-1-CFSworks@gmail.com>
+In-Reply-To: <20231231203930.1955090-1-aren@peacevolution.org>
 X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -68,32 +70,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sun, Dec 31, 2023 at 03:38:37PM -0500, Aren Moynihan wrote:
+> Add support for building the sunxi-musb driver with DM_USB_GADGET
+> including adding a separate IRQ handling function and registering the
+> driver with the musb system differently.
+
 Hi there,
 
-I've tested this patch and it seems to support the gadget model, but I'm having
-a lot of USB errors. What device did you test this on?
+Were you aware of this similar patch?
+
+https://lore.kernel.org/u-boot/20230608195631.55364-1-CFSworks@gmail.com/
+
+If not you might want to test it and compare it.
 
 John.
 
-On Thu, Jun 08, 2023 at 01:56:29PM -0600, Sam Edwards wrote:
-> Happy Thursday, U-Boot list!
+> The implementation of usb_gadget_register_driver from
+> musb-new/musb_uboot.c only works when the gadget driver for the device
+> has already been probed and has called musb_register. On the pinephone
+> (using a allwinner a64 processor) this causes issues when trying to use
+> usb gadget mode (such as from the ums command) and CONFIG_USB_ETHER is
+> disabled.
 > 
-> Here is attempt 2 at making this USB controller driver compatible with
-> DM's gadget model, following what most of the other musb variants do.
+> The implementation of usb_gadget_register_driver provided when
+> DM_USB_GADGET is enabled will probe the necessary drivers when it's
+> called.
 > 
-> v2 removes the unwanted printfs in the probe func, per feedback from Marek.
-> I received no other feedback against v1 of this patch.
+> Without the patch, this is what the error condition looks like:
+> => ums 0 mmc 1
+> UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x3a3e000
+> Controller uninitialized
+> g_dnl_register: failed!, error: -6
+> g_dnl_register failed
 > 
-> Cheers,
-> Sam
+> based on:
+> commit 2e4865bc6486 ("musb-new: omap2430: fix compiling in DM_USB_GADGET config")
 > 
-> Sam Edwards (2):
->   usb: musb-new: sunxi: remove unwanted printfs
->   usb: musb-new: sunxi: make compatible with UDC/DM gadget model
-> 
->  drivers/usb/musb-new/sunxi.c | 52 +++++++++++++++++++++---------------
->  1 file changed, 31 insertions(+), 21 deletions(-)
-> 
-> -- 
-> 2.39.2
-> 
+> Signed-off-by: Aren Moynihan <aren@peacevolution.org>
