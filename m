@@ -4,82 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F1BACD128A
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:44:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27A3BCD1284
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:44:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D602F882F6;
-	Thu, 11 Apr 2024 14:43:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 4CD2A88311;
+	Thu, 11 Apr 2024 14:43:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="r25hRqH1";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18F5B882A3; Thu, 11 Apr 2024 14:43:18 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 230FF88244
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:43:16 +0200 (CEST)
+ id 618E7882B3; Thu, 11 Apr 2024 14:43:42 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id EF77988311
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:43:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a46a7208eedso1112488266b.0
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:43:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712839394; x=1713444194; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nNQVEnGCaMOzbjq/F3aiu8UEOCqOLxB1anBPCdNiiW8=;
- b=r25hRqH1mDWynClas2DbdSHB+n9pcIXbBrlFByw8ss2NY9mcGkbo5sQ3aD6a1QTwAG
- k5xP1ZkOp57rkQNuocGLVhf1tfykRIbiEiN7k31ETPri/fEyyPFUqnTeiBLCCu4NQNB8
- 2zIFwxKO4fjQ+elk0QIixdDQ7ZQeuPNcGZgLHyqZ1Nftc1Amfuz5OBlc4CyAI0rJRYMX
- tlvQN6LhIeA4HaP8qtCRHnHjqrVfV99K+Z8nb3lar3OyvnREHa+fzgofcAKP0h3ClK8X
- WzZtZr8HP0HN+TL1ZdxDRPAv4pES9lAgpFSnDWhAXXKrxsOA8HCPfM5Wz2o6BZR7JKDd
- g8VQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712839394; x=1713444194;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=nNQVEnGCaMOzbjq/F3aiu8UEOCqOLxB1anBPCdNiiW8=;
- b=Q/ko21lFBgiEw6DwRvNH2dy8oYMBV0/joUMceUKNkYBgZNhzfdeuf65xz0KSuHQMW+
- vrg2vNZVZX0dbfBSVOLBCDtXLERZSgSWNKq45JDSk/104Hx6mnnifNNEZ3PAf5FdFNvM
- 2BGkIgNoK8wKKZ6/zkJmL2CWQQm5EJvX+UOgBMzqgt5441FCxZuwyLeVkM05jxJkG+y3
- yZ8UxG7RGfytCiKH7g9TwdFY8fesNF39xgYRT/xZi0hQg2rFkVi7LgLbIEryXCNuFPho
- q59+hwmjaNIGsidtFrykHH0pBoBxe2kwn+1asT6wv3t7Xm4cazRN4yiuDmyI7RMxJVx3
- cx6Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXI9VylxLHU2+XrAkvHM5X5Mxz4dap8YXiREI4OvnnOC+Fj8vfaFwzstQ8b9bNNjsF8/Xzyjb3bP8OLfNtklm4Ulp5iRQ==
-X-Gm-Message-State: AOJu0YxH6W+MgE2LeFRcYcTwAr3Pp82bTEh6eVgmTdhdnVauKL/nckjj
- bR83eecdBtafkznvaQNsf600BiSIFtSZiqiUg+2Udv7owvCB05HDvupPceykc9SS3I6jwJ2hPZ7
- 7
-X-Google-Smtp-Source: AGHT+IEDfhTth2gtLDTk+JnAVmTj4zYOLeEXBQUZAlrHDxj50M3QKER3d/XBVy+MV93wFSx0+L3sog==
-X-Received: by 2002:a17:906:b2d8:b0:a4e:a7a:84e0 with SMTP id
- cf24-20020a170906b2d800b00a4e0a7a84e0mr3267026ejb.34.1712839394780; 
- Thu, 11 Apr 2024 05:43:14 -0700 (PDT)
-Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::570d])
- by smtp.gmail.com with ESMTPSA id
- e1-20020a170906844100b00a4e8a47107asm710491ejy.200.2024.04.11.05.43.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 05:43:14 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-In-Reply-To: <20240409150252.561029-1-caleb.connolly@linaro.org>
-References: <20240409150252.561029-1-caleb.connolly@linaro.org>
-Subject: Re: [PATCH] MAINTAINERS: add Qualcomm mailing list
-Message-Id: <171283939376.622116.1340488880042920142.b4-ty@linaro.org>
-Date: Thu, 11 Apr 2024 14:43:13 +0200
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EC8F7113E;
+ Thu, 11 Apr 2024 05:44:08 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9F1FC3F64C;
+ Thu, 11 Apr 2024 05:43:38 -0700 (PDT)
+Date: Thu, 11 Apr 2024 13:43:36 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: John Watts <contact@jookia.org>
+Cc: Maksim Kiselev <bigunclemax@gmail.com>, u-boot@lists.denx.de, Sam
+ Edwards <CFSworks@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>
+Subject: Re: [PATCH v1 1/2] sunxi: SPL SPI: Add SPI boot support for the
+ Allwinner R528/T113 SoCs
+Message-ID: <20240411134336.49a8a790@donnerap.manchester.arm.com>
+In-Reply-To: <ZhdnhgKlz3fAsKm6@titan>
+References: <20231111133432.755363-1-bigunclemax@gmail.com>
+ <20231111133432.755363-2-bigunclemax@gmail.com>
+ <ZhdnhgKlz3fAsKm6@titan>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14-dev
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +60,230 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 11 Apr 2024 14:31:02 +1000
+John Watts <contact@jookia.org> wrote:
 
-On Tue, 09 Apr 2024 17:02:51 +0200, Caleb Connolly wrote:
-> Add the newly created u-boot-qcom mailing list to keep track of Qualcomm
-> patches.
+Hi,
+
+> Hi there,
 > 
-> Additionally, link to the U-Boot Snapdragon custodian tree.
+> I've been using my own independent implementation of this patch but
+> today I gave this one a test in my tree and found out it works.
 > 
+> The code looks fine in comparison, so here's a Tested-by and a
+> Reviewed-by.
 > 
+> John.
+> 
+> Tested-by: John Watts <contact@jookia.org>
+> Reviewed-by: John Watts <contact@jookia.org>
 
-Applied, thanks!
+Thanks for that. I considered this patch already for the last cycle, but
+dropped it last minute, since I had some doubts and couldn't test it. I
+will have a look again.
 
-[1/1] MAINTAINERS: add Qualcomm mailing list
-      commit: b46a2aec4cd5937ef6cd77601ac02ac0fcfdb4c4
+Cheers,
+Andre
 
-Best regards,
--- 
-Caleb Connolly <caleb.connolly@linaro.org>
+> On Sat, Nov 11, 2023 at 04:33:07PM +0300, Maksim Kiselev wrote:
+> > R528/T113 SoCs uses the same SPI IP as the H6, also have the same clocks
+> > and reset bits layout, but the CCU base is different. Another difference
+> > is that the new SoCs do not have a clock divider inside. Instead of this
+> > we should configure sample mode depending on input clock rate.
+> > 
+> > The pin assignment is also different: the H6 uses PC0, the R528/T113 PC4
+> > instead. This makes for a change in spi0_pinmux_setup() routine.
+> > 
+> > This patch extends the H6/H616 #ifdef guards to also cover the R528/T113,
+> > using the shared CONFIG_SUNXI_GEN_NCAT2 and CONFIG_MACH_SUN8I_R528
+> > symbols. Also use CONFIG_SUNXI_GEN_NCAT2 symbol for the Kconfig
+> > dependency.
+> > 
+> > Signed-off-by: Maksim Kiselev <bigunclemax@gmail.com>
+> > Tested-by: Sam Edwards <CFSworks@gmail.com>
+> > ---
+> >  arch/arm/mach-sunxi/Kconfig         |  2 +-
+> >  arch/arm/mach-sunxi/spl_spi_sunxi.c | 78 +++++++++++++++++++++--------
+> >  2 files changed, 58 insertions(+), 22 deletions(-)
+> > 
+> > diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+> > index a10e4c06b6..732f60821a 100644
+> > --- a/arch/arm/mach-sunxi/Kconfig
+> > +++ b/arch/arm/mach-sunxi/Kconfig
+> > @@ -1044,7 +1044,7 @@ config SPL_STACK_R_ADDR
+> >  
+> >  config SPL_SPI_SUNXI
+> >  	bool "Support for SPI Flash on Allwinner SoCs in SPL"
+> > -	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUNXI_H3_H5 || MACH_SUN50I || MACH_SUN8I_R40 || SUN50I_GEN_H6 || MACH_SUNIV
+> > +	depends on MACH_SUN4I || MACH_SUN5I || MACH_SUN7I || MACH_SUNXI_H3_H5 || MACH_SUN50I || MACH_SUN8I_R40 || SUN50I_GEN_H6 || MACH_SUNIV || SUNXI_GEN_NCAT2
+> >  	help
+> >  	  Enable support for SPI Flash. This option allows SPL to read from
+> >  	  sunxi SPI Flash. It uses the same method as the boot ROM, so does
+> > diff --git a/arch/arm/mach-sunxi/spl_spi_sunxi.c b/arch/arm/mach-sunxi/spl_spi_sunxi.c
+> > index c2410dd7bb..ba3b1579f0 100644
+> > --- a/arch/arm/mach-sunxi/spl_spi_sunxi.c
+> > +++ b/arch/arm/mach-sunxi/spl_spi_sunxi.c
+> > @@ -73,18 +73,27 @@
+> >  #define SUN6I_CTL_ENABLE            BIT(0)
+> >  #define SUN6I_CTL_MASTER            BIT(1)
+> >  #define SUN6I_CTL_SRST              BIT(31)
+> > +#define SUN6I_TCR_SDM               BIT(13)
+> >  #define SUN6I_TCR_XCH               BIT(31)
+> >  
+> >  /*****************************************************************************/
+> >  
+> > -#define CCM_AHB_GATING0             (0x01C20000 + 0x60)
+> > -#define CCM_H6_SPI_BGR_REG          (0x03001000 + 0x96c)
+> > -#ifdef CONFIG_SUN50I_GEN_H6
+> > -#define CCM_SPI0_CLK                (0x03001000 + 0x940)
+> > +#if IS_ENABLED(CONFIG_SUN50I_GEN_H6)
+> > +#define CCM_BASE                    0x03001000
+> > +#elif IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2)
+> > +#define CCM_BASE                    0x02001000
+> >  #else
+> > -#define CCM_SPI0_CLK                (0x01C20000 + 0xA0)
+> > +#define CCM_BASE                    0x01C20000
+> >  #endif
+> > -#define SUN6I_BUS_SOFT_RST_REG0     (0x01C20000 + 0x2C0)
+> > +
+> > +#define CCM_AHB_GATING0             (CCM_BASE + 0x60)
+> > +#define CCM_H6_SPI_BGR_REG          (CCM_BASE + 0x96c)
+> > +#if IS_ENABLED(CONFIG_SUN50I_GEN_H6) || IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2)
+> > +#define CCM_SPI0_CLK                (CCM_BASE + 0x940)
+> > +#else
+> > +#define CCM_SPI0_CLK                (CCM_BASE + 0xA0)
+> > +#endif
+> > +#define SUN6I_BUS_SOFT_RST_REG0     (CCM_BASE + 0x2C0)
+> >  
+> >  #define AHB_RESET_SPI0_SHIFT        20
+> >  #define AHB_GATE_OFFSET_SPI0        20
+> > @@ -102,17 +111,22 @@
+> >   */
+> >  static void spi0_pinmux_setup(unsigned int pin_function)
+> >  {
+> > -	/* All chips use PC0 and PC2. */
+> > -	sunxi_gpio_set_cfgpin(SUNXI_GPC(0), pin_function);
+> > +	/* All chips use PC2. And all chips use PC0, except R528/T113 */
+> > +	if (!IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+> > +		sunxi_gpio_set_cfgpin(SUNXI_GPC(0), pin_function);
+> > +
+> >  	sunxi_gpio_set_cfgpin(SUNXI_GPC(2), pin_function);
+> >  
+> > -	/* All chips except H6 and H616 use PC1. */
+> > -	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6))
+> > +	/* All chips except H6/H616/R528/T113 use PC1. */
+> > +	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6) &&
+> > +	    !IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+> >  		sunxi_gpio_set_cfgpin(SUNXI_GPC(1), pin_function);
+> >  
+> > -	if (IS_ENABLED(CONFIG_MACH_SUN50I_H6))
+> > +	if (IS_ENABLED(CONFIG_MACH_SUN50I_H6) ||
+> > +	    IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+> >  		sunxi_gpio_set_cfgpin(SUNXI_GPC(5), pin_function);
+> > -	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616))
+> > +	if (IS_ENABLED(CONFIG_MACH_SUN50I_H616) ||
+> > +	    IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+> >  		sunxi_gpio_set_cfgpin(SUNXI_GPC(4), pin_function);
+> >  
+> >  	/* Older generations use PC23 for CS, newer ones use PC3. */
+> > @@ -126,7 +140,8 @@ static void spi0_pinmux_setup(unsigned int pin_function)
+> >  static bool is_sun6i_gen_spi(void)
+> >  {
+> >  	return IS_ENABLED(CONFIG_SUNXI_GEN_SUN6I) ||
+> > -	       IS_ENABLED(CONFIG_SUN50I_GEN_H6);
+> > +	       IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
+> > +	       IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2);
+> >  }
+> >  
+> >  static uintptr_t spi0_base_address(void)
+> > @@ -137,6 +152,9 @@ static uintptr_t spi0_base_address(void)
+> >  	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6))
+> >  		return 0x05010000;
+> >  
+> > +	if (IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+> > +		return 0x04025000;
+> > +
+> >  	if (!is_sun6i_gen_spi() ||
+> >  	    IS_ENABLED(CONFIG_MACH_SUNIV))
+> >  		return 0x01C05000;
+> > @@ -152,23 +170,30 @@ static void spi0_enable_clock(void)
+> >  	uintptr_t base = spi0_base_address();
+> >  
+> >  	/* Deassert SPI0 reset on SUN6I */
+> > -	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6))
+> > +	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
+> > +	    IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+> >  		setbits_le32(CCM_H6_SPI_BGR_REG, (1U << 16) | 0x1);
+> >  	else if (is_sun6i_gen_spi())
+> >  		setbits_le32(SUN6I_BUS_SOFT_RST_REG0,
+> >  			     (1 << AHB_RESET_SPI0_SHIFT));
+> >  
+> >  	/* Open the SPI0 gate */
+> > -	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6))
+> > +	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6) &&
+> > +	    !IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+> >  		setbits_le32(CCM_AHB_GATING0, (1 << AHB_GATE_OFFSET_SPI0));
+> >  
+> >  	if (IS_ENABLED(CONFIG_MACH_SUNIV)) {
+> >  		/* Divide by 32, clock source is AHB clock 200MHz */
+> >  		writel(SPI0_CLK_DIV_BY_32, base + SUN6I_SPI0_CCTL);
+> >  	} else {
+> > -		/* Divide by 4 */
+> > -		writel(SPI0_CLK_DIV_BY_4, base + (is_sun6i_gen_spi() ?
+> > -					  SUN6I_SPI0_CCTL : SUN4I_SPI0_CCTL));
+> > +		/* New SoCs do not have a clock divider inside */
+> > +		if (!IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2)) {
+> > +			/* Divide by 4 */
+> > +			writel(SPI0_CLK_DIV_BY_4,
+> > +			       base + (is_sun6i_gen_spi() ? SUN6I_SPI0_CCTL :
+> > +			       SUN4I_SPI0_CCTL));
+> > +		}
+> > +
+> >  		/* 24MHz from OSC24M */
+> >  		writel((1 << 31), CCM_SPI0_CLK);
+> >  	}
+> > @@ -180,6 +205,14 @@ static void spi0_enable_clock(void)
+> >  		/* Wait for completion */
+> >  		while (readl(base + SUN6I_SPI0_GCR) & SUN6I_CTL_SRST)
+> >  			;
+> > +
+> > +		/*
+> > +		 * For new SoCs we should configure sample mode depending on
+> > +		 * input clock. As 24MHz from OSC24M is used, we could use
+> > +		 * normal sample mode by setting SDM bit in the TCR register
+> > +		 */
+> > +		if (IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+> > +			setbits_le32(base + SUN6I_SPI0_TCR, SUN6I_TCR_SDM);
+> >  	} else {
+> >  		/* Enable SPI in the master mode and reset FIFO */
+> >  		setbits_le32(base + SUN4I_SPI0_CTL, SUN4I_CTL_MASTER |
+> > @@ -206,11 +239,13 @@ static void spi0_disable_clock(void)
+> >  		writel(0, CCM_SPI0_CLK);
+> >  
+> >  	/* Close the SPI0 gate */
+> > -	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6))
+> > +	if (!IS_ENABLED(CONFIG_SUN50I_GEN_H6) &&
+> > +	    !IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+> >  		clrbits_le32(CCM_AHB_GATING0, (1 << AHB_GATE_OFFSET_SPI0));
+> >  
+> >  	/* Assert SPI0 reset on SUN6I */
+> > -	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6))
+> > +	if (IS_ENABLED(CONFIG_SUN50I_GEN_H6) ||
+> > +	    IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2))
+> >  		clrbits_le32(CCM_H6_SPI_BGR_REG, (1U << 16) | 0x1);
+> >  	else if (is_sun6i_gen_spi())
+> >  		clrbits_le32(SUN6I_BUS_SOFT_RST_REG0,
+> > @@ -224,7 +259,8 @@ static void spi0_init(void)
+> >  	if (IS_ENABLED(CONFIG_MACH_SUN50I) ||
+> >  	    IS_ENABLED(CONFIG_SUN50I_GEN_H6))
+> >  		pin_function = SUN50I_GPC_SPI0;
+> > -	else if (IS_ENABLED(CONFIG_MACH_SUNIV))
+> > +	else if (IS_ENABLED(CONFIG_MACH_SUNIV) ||
+> > +		 IS_ENABLED(CONFIG_MACH_SUN8I_R528))
+> >  		pin_function = SUNIV_GPC_SPI0;
+> >  
+> >  	spi0_pinmux_setup(pin_function);
+> > -- 
+> > 2.40.1
+> >   
 
