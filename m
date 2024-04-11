@@ -4,56 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83452CD129C
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 06:47:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4810DCD128A
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 06:52:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB2AB88344;
-	Thu, 11 Apr 2024 08:47:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
+	by phobos.denx.de (Postfix) with ESMTP id AC139883B5;
+	Thu, 11 Apr 2024 08:52:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="XgrT3aTw";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="NJ40uadq";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="12HH5p9N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 391E1883CD; Thu, 11 Apr 2024 08:46:57 +0200 (CEST)
-Received: from out-173.mta1.migadu.com (out-173.mta1.migadu.com
- [95.215.58.173])
+ id 0DA98883C9; Thu, 11 Apr 2024 08:52:31 +0200 (CEST)
+Received: from galois.linutronix.de (Galois.linutronix.de
+ [IPv6:2a0a:51c0:0:12e:550::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3DCB8838C
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 08:46:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=jookia.org
+ by phobos.denx.de (Postfix) with ESMTPS id 24669883AC
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 08:52:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=none smtp.mailfrom=contact@jookia.org
-Date: Thu, 11 Apr 2024 16:46:17 +1000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
- t=1712818013;
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=namcao@linutronix.de
+Date: Thu, 11 Apr 2024 08:52:25 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1712818348;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=l/45kKiJWS76tnvoJKCOcV/eMtdCk47DpxrPuyZSTjo=;
- b=XgrT3aTwLJXB09NtqNjoPRcMfF/xZ7lep1GrYc+mVtcEnBTZLsjJ3N/G/fsJEQG7WXZDP9
- weoQYE91LarF7l3TfRFijhLRrUSz3m2YSttEpWgFfdaICRuYokkNkDmoIrmYCUDYAfw5qT
- bG6C4gnhVmhz8a2AlgV96eQaM5nSOGNDwa86zZoKKd4sSz2iidBjXrpFYc3ueXrl5wbdGK
- Jr3t4P91fB8reDDxhKglwX8lUDnYpfN1f8i9+goPVOhlkNa9602CJlm1hNcCU7PguipfPx
- sNq2RzVm13QxgS6dgSsB6lfaLIm/6YBdKJ1BmZSAP1bVYVoyOvGDDMJ1v6oyxw==
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: John Watts <contact@jookia.org>
-To: Aren Moynihan <aren@peacevolution.org>
-Cc: u-boot@lists.denx.de, Sam Edwards <cfsworks@gmail.com>,
- Samuel Holland <samuel@sholland.org>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH] usb: musb-new: sunxi: support usage with DM_USB_GADGET
-Message-ID: <ZheHOZebMGze5X09@titan>
-References: <20231231203930.1955090-1-aren@peacevolution.org>
+ bh=KeLzG/9o+1n1hnKiN6otSFoXfzV5VcLQzMIVuvN3ve4=;
+ b=NJ40uadqjGY9UC3RoNczKT3KVunFuq4Zeo2Vk/t3prD8yYXbuMdRLzlBEZkP4NaJfWBmrT
+ 4s8u+S43hNDGyJf4x0sUvbmMSp8SrxlWsZ7ph+9KUl1MDI7F6vvcMqK2nRwN4jvLI1+lCi
+ 2CSNgz7bgrkgaBbrmqm0pUoS7VGrsULE1J9qoisURxtfFkeZHM5Jrf7KkbW/yRfoHqGQk3
+ SXAOQgjcBx2Fu38Ck1YNQM5ITOlYm18BC2216Pu1MRxkAOY7lJSkMrgHgC/Tfl1ShZcKXy
+ YUsgC01luQ/HDLlLONrDo7bFk8br+JQCfpqdm8rWzgXMvNzjZC3bh7zJAKQyfg==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1712818348;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=KeLzG/9o+1n1hnKiN6otSFoXfzV5VcLQzMIVuvN3ve4=;
+ b=12HH5p9NKxOTbiOw6xLoo9yGzqV2aHt/NhZ/U5b2y4lnCkx7TEcuJCXfbn4EloT6zi9mw9
+ k+k56j4ybLLt8fDA==
+From: Nam Cao <namcao@linutronix.de>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Bin Meng
+ <bmeng.cn@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] bootflow: always initialize bootflow_iter_set_dev
+ parameters
+Message-ID: <20240411085225.0b36a0e0@namcao>
+In-Reply-To: <20240410221206.22782-1-heinrich.schuchardt@canonical.com>
+References: <20240410221206.22782-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20231231203930.1955090-1-aren@peacevolution.org>
-X-Migadu-Flow: FLOW_OUT
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,40 +77,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Dec 31, 2023 at 03:38:37PM -0500, Aren Moynihan wrote:
-> Add support for building the sunxi-musb driver with DM_USB_GADGET
-> including adding a separate IRQ handling function and registering the
-> driver with the musb system differently.
-
-Hi there,
-
-Were you aware of this similar patch?
-
-https://lore.kernel.org/u-boot/20230608195631.55364-1-CFSworks@gmail.com/
-
-If not you might want to test it and compare it.
-
-John.
-
-> The implementation of usb_gadget_register_driver from
-> musb-new/musb_uboot.c only works when the gadget driver for the device
-> has already been probed and has called musb_register. On the pinephone
-> (using a allwinner a64 processor) this causes issues when trying to use
-> usb gadget mode (such as from the ums command) and CONFIG_USB_ETHER is
-> disabled.
+On 11/Apr/2024 Heinrich Schuchardt wrote:
+> method_flags may be passed uninitialized to bootflow_iter_set_dev()
+> if dev is not NULL.
 > 
-> The implementation of usb_gadget_register_driver provided when
-> DM_USB_GADGET is enabled will probe the necessary drivers when it's
-> called.
+> Always initialize method_flags.
 > 
-> Without the patch, this is what the error condition looks like:
-> => ums 0 mmc 1
-> UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x3a3e000
-> Controller uninitialized
-> g_dnl_register: failed!, error: -6
-> g_dnl_register failed
+> Addresses-Coverity-ID: 467057 Uninitialized scalar variable
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+
+Reviewed-by: Nam Cao <namcao@linutronix.de>
+
+> ---
+>  boot/bootflow.c | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
 > 
-> based on:
-> commit 2e4865bc6486 ("musb-new: omap2430: fix compiling in DM_USB_GADGET config")
-> 
-> Signed-off-by: Aren Moynihan <aren@peacevolution.org>
+> diff --git a/boot/bootflow.c b/boot/bootflow.c
+> index 68bf99329ab..f659a414c79 100644
+> --- a/boot/bootflow.c
+> +++ b/boot/bootflow.c
+> @@ -244,7 +244,7 @@ static int iter_incr(struct bootflow_iter *iter)
+>  	if (iter->flags & BOOTFLOWIF_SINGLE_DEV) {
+>  		ret = -ENOENT;
+>  	} else {
+> -		int method_flags;
+> +		int method_flags = 0;
+>  
+>  		ret = 0;
+>  		dev = iter->dev;
+> @@ -263,7 +263,6 @@ static int iter_incr(struct bootflow_iter *iter)
+>  		} else if (IS_ENABLED(CONFIG_BOOTSTD_FULL) &&
+>  			   iter->flags & BOOTFLOWIF_SINGLE_MEDIA) {
+>  			log_debug("next in single\n");
+> -			method_flags = 0;
+>  			do {
+>  				/*
+>  				 * Move to the next bootdev child of this media
+> @@ -305,7 +304,6 @@ static int iter_incr(struct bootflow_iter *iter)
+>  				}
+>  			} else {
+>  				ret = bootdev_next_prio(iter, &dev);
+> -				method_flags = 0;
+>  			}
+>  		}
+>  		log_debug("ret=%d, dev=%p %s\n", ret, dev,
+
