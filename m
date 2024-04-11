@@ -4,52 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EF61C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 23:52:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B919FC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 23:59:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 965F5881E7;
-	Fri, 12 Apr 2024 01:52:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=flokli.de
+	by phobos.denx.de (Postfix) with ESMTP id DF5EB88137;
+	Fri, 12 Apr 2024 01:59:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=flokli.de header.i=@flokli.de header.b="gJnCjgvB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YV+5B8zY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94A2C881D6; Fri, 12 Apr 2024 01:52:41 +0200 (CEST)
-Received: from mail.flokli.de (mail.flokli.de [116.203.226.116])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 871F3881D6; Fri, 12 Apr 2024 01:53:07 +0200 (CEST)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3209E881D6
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 01:52:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64F9488211
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 01:52:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=flokli.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=flokli@flokli.de
-Date: Fri, 12 Apr 2024 02:52:35 +0300
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flokli.de; s=mail;
- t=1712879557; bh=j+sGEEc02OSUnuZecJ0RNcWZ8wqZU4y5rTwPo/bs1vc=;
- h=Date:From:To:Cc:Subject;
- b=gJnCjgvBl4B4XyWPPd8ZF4nBOYcLgDRsTAQiFasqbNunPa55j0CeqLLuxpZQm2CHh
- ZQqFqdQNxX5atue+MVk6IP6BrkUlesi7fXXRFxj4PrI/+wxu67UU/NlijoILmyBbEQ
- 6tQhzlmL93wQ1XgAEXcrrU3iiqYhxe7Qn+GypK0E=
-From: Florian Klink <flokli@flokli.de>
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: Joshua Riek <jjriek@verizon.net>, Simon Glass <sjg@chromium.org>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Jagan Teki <jagan@edgeble.ai>, Eugen Hristev <eugen.hristev@collabora.com>, 
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, John Clark <inindev@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, 
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Chris Morgan <macromorgan@hotmail.com>, 
- Massimo Pegorer <massimo.pegorer+oss@gmail.com>,
- Johan Jonker <jbx6244@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] board: rockchip: Add the Turing RK1 SoM
-Message-ID: <w3ylmzqfuvkdioxue67lfm7f6pr4kdtzrp2doj7hyvset35vii@6fva7xxc2bvj>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-78d62c1e82bso21520585a.3
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 16:52:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1712879577; x=1713484377; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=XalpfpZe71VzTnV5XROTRkFEj0iwJ8bz9IQKqPLnZI4=;
+ b=YV+5B8zYQebH4tfFkepcb50U6J04lk4uy6ruaQf4AifDz92kKEN1LP9Z3C0NDdgWen
+ eWj6wdY0NjOqFRVd/5toHl58+sXkG/fmCQOeoNJB2RIQATyrvomWOjrLkmtKrksJzlR4
+ 7d4fTuV3TaSNeVcaJjqb1zMCj7G8EWf8agjP8=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712879577; x=1713484377;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=XalpfpZe71VzTnV5XROTRkFEj0iwJ8bz9IQKqPLnZI4=;
+ b=Zzxqu7pRSDUHswE6toP6HxkjOy7oPQTUjIdqk+hrULlEkt15r5SHeziY/go0j6mrcy
+ hOET+MOZaqmM3K56TA9RlpBLru99vs4Pr8Lx61ICLzpVJbhL33tqX0bjJO4FQRQhX4fQ
+ STkNLHXhoY0BEzi1oqSz0xD5VSOwCnMd2Fd9xlmo7BhGy9IvQVME3/0ylwCW9AXiHazX
+ JjfJw3vNNVCuDZdToHDESM1gsj/gyx4FP9tFbR3ZUAIu8Liyp0gq4CMZ3mDngLAK+76Y
+ 8WftPSiSOBptba1dmwtQQR2FS6L8v1EBC3ihvcEOQCjwhOwHw4ZhN2wvrtkA5Gz3ZdCY
+ LTCA==
+X-Gm-Message-State: AOJu0Yx7DuGCiY8/jpd1pFSEJyRm0FmZKOz3ISxHYrNGEx+L7AlIezrF
+ bDaTc6xZ2d5cX5yHngXF/hyXO1c6yT+9xr3bV/L6sy3Lecn20uqTEcDE9Lbwccc=
+X-Google-Smtp-Source: AGHT+IGGIMoMbgOFfcV75GA6icdqGbXK6CZE+kWBDAC3lP9mWsDopjmh8GTb0EBBnxhA2vh7LSxc3Q==
+X-Received: by 2002:a05:620a:7fb:b0:78e:c0db:c2e6 with SMTP id
+ k27-20020a05620a07fb00b0078ec0dbc2e6mr1112314qkk.32.1712879577140; 
+ Thu, 11 Apr 2024 16:52:57 -0700 (PDT)
+Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
+ xx1-20020a05620a5d8100b0078d6e468099sm1637381qkn.113.2024.04.11.16.52.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Apr 2024 16:52:56 -0700 (PDT)
+Date: Thu, 11 Apr 2024 17:52:50 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Greg Malysa <greg.malysa@timesys.com>
+Cc: u-boot@lists.denx.de, Matthew McClintock <Matthew.Mcclintock@analog.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Alison Wang <alison.wang@nxp.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
+ Andy Fleming <afleming@gmail.com>, Angelo Dureghello <angelo@sysam.it>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ian Roberts <ian.roberts@timesys.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Linus Walleij <linus.walleij@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Manorit Chawdhry <m-chawdhry@ti.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Marek Vasut <marex@denx.de>, Mario Six <mario.six@gdsys.cc>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <monstr@monstr.eu>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Priyanka Jain <priyanka.jain@nxp.com>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Samuel Holland <samuel@sholland.org>, Scott McNutt <smcnutt@psyent.com>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
+ Thomas Chou <thomas@wytron.com.tw>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Wolfgang Denk <wd@denx.de>, Yang Xiwen <forbidden405@outlook.com>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>
+Subject: Re: [PATCH 0/3] arm: Add Analog Devices SC5xx Machine Type
+Message-ID: <20240411235250.GK2493117@bill-the-cat>
+References: <20240411234021.14534-1-greg.malysa@timesys.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5is1G2jMx0W1JCfv"
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20240411234021.14534-1-greg.malysa@timesys.com>
+X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Fri, 12 Apr 2024 01:59:21 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,122 +125,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey Sam,
 
-On 24-04-11 16:35:57, Sam Edwards wrote:
->On Thu, Apr 11, 2024 at 1:29 AM Florian Klink <flokli@flokli.de> wrote:
->>
->> On 23-12-14 18:46:47, Joshua Riek wrote:
->> >The Turing RK1 is a Rockchip RK3588 based SoM from Turing Machines.
->> >
->> >Specifications:
->> >
->> >    Rockchip RK3588 SoC
->> >    4x ARM Cortex-A76, 4x ARM Cortex-A55
->> >    8/16/32GB memory LPDDR4x
->> >    Mali G610MC4 GPU
->> >    32GB eMMC HS400
->> >    2x USB 2.0, 2x USB 3.0
->> >    2x MIPI CSI 4x lanes
->> >    1x MIPI-DSI DPHY 2x lanes
->> >    PCIe 2.0 x1, PCIe 3.0 x4
->> >    1x HDMI 2.1 output, 1x DP 1.4 output
->> >    Gigabit Ethernet
->> >    Size: 69.6mm x 45mm (260-pin SO-DIMM connector)
->> >
->> >Kernel commit:
->> >2806a69f3fef ("arm64: dts: rockchip: Add Turing RK1 SoM support")
->>
->> […]
->>
->> >diff --git a/configs/turing-rk1-rk3588_defconfig b/configs/turing-rk1-rk3588_defconfig
->> >new file mode 100644
->> >index 0000000000..289f2da775
->> >--- /dev/null
->> >+++ b/configs/turing-rk1-rk3588_defconfig
->> >@@ -0,0 +1,133 @@
->> >+CONFIG_ARM=y
->> >+CONFIG_SKIP_LOWLEVEL_INIT=y
->> >+CONFIG_SYS_HAS_NONCACHED_MEMORY=y
->> >+CONFIG_COUNTER_FREQUENCY=24000000
->> >+CONFIG_ARCH_ROCKCHIP=y
->> >+CONFIG_TEXT_BASE=0x00a00000
->> >+CONFIG_SPL_LIBCOMMON_SUPPORT=y
->> >+CONFIG_SPL_LIBGENERIC_SUPPORT=y
->> >+CONFIG_NR_DRAM_BANKS=2
->> >+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
->> >+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc00000
->> >+CONFIG_SF_DEFAULT_SPEED=24000000
->> >+CONFIG_SF_DEFAULT_MODE=0x2000
->> >+CONFIG_DEFAULT_DEVICE_TREE="rk3588-turing-rk1"
->> >+CONFIG_ROCKCHIP_RK3588=y
->> >+CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y
->> >+CONFIG_ROCKCHIP_SPI_IMAGE=y
->>
->
->Hi Florian,
->
->Thanks for getting in touch!
->
->> Does the RK1 have an SPI chip attached, and is is possible to flash
->> u-boot into SPI and boot from it?
->
->The answer you want is "no." Though the RK1 does have an unpopulated
->pad for SPI flash, actually installing one would be a pretty involved
->user modification, and those users almost certainly can/will build the
->SPI boot image themselves.
->
->> This has sparked some confusion on whether "u-boot-rockchip-spi.bin"
->> should be provided in a downstream build or not.
->
->Ah yeah the CONFIG_ROCKCHIP_SPI_IMAGE=y might not be a sensible
->default given that 99.9% of users don't need it. Is that config entry
->the main thing creating the confusion? I think it should be removed
->here in U-Boot if so.
+--5is1G2jMx0W1JCfv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Yes, it caused a "u-boot-rockchip-spi.bin" to be produced, and we were
-wondering on whether it should be provided as a result of our build to
-downstream users [1].
+On Thu, Apr 11, 2024 at 07:37:27PM -0400, Greg Malysa wrote:
+>=20
+> This series adds support for the ADI SC5xx machine type and includes two
+> core drivers that are required for being able to boot any board--a UART
+> driver and the clock tree driver. Our corresponding Linux support relies
+> on u-boot configuring the clocks correctly before booting, so it is not
+> possible to boot any board without the CGU/CDU configuration happening
+> here. The clock tree itself is only used by the UART in this minimal
+> patch set, but is of course broadly useful for all other peripheral
+> drivers to be submitted in future patch sets. There are also no board
+> files or defconfigs included here, but some common definitions that will
+> be used to build board files currently are.
+>=20
+> Some of the configuration code in dmcinit and clkinit is quite scary and
+> causes a lot of checkpatch violations. It is modified from code
+> initially provided by ADI, but it has not been fully rewritten. There's
+> a question of how important it is to clean up this code--it has some
+> quality violations, but it has been in use (including in production) for
+> over two years and is known to work for performing the low level SoC
+> initialization, while a rewrite might introduce bugs that could take a
+> significant amount of time to detect in the future.
+>=20
+> Please provide any feedback or comments that will be helpful in creating
+> a v2 of this patch that will be ready to submit for inclusion into the
+> main tree, as well as general observations that we should consider in
+> other driver patches before submitting them.
 
-Removing it from the `defconfig` sounds like the best way to prevent
-this confusion. If people solder on a SPI Flash manually, they probably
-know how to re-add it to the uboot config ;-)
+Does this series pass CI currently? Thanks.
 
-Could you send a patch for that?
+--=20
+Tom
 
->Note that the RK1 is a little different from most RK3588 boards in
->that UART9 at 115200 baud is the generally-accepted debug UART (due
->both to the popularity of pairing it with the Turing Pi 2
->clusterboard, and for pin-compatibility with most NVIDIA Jetson SoMs),
->and setting this very early in boot requires using Rockchip's
->"ddrbin_tool" to change the configuration embedded in the ddrbin/TPL
->image. If you're already supporting other targets that require ddrbin
->configuration changes, please add these for RK1:
->
->uart id=9
->uart iomux=0
->uart baudrate=115200
->
->...but if this would require going significantly out of your way,
->don't worry about it. IIUC this is only required to get TPL+SPL output
->routed correctly: the U-Boot monitor + kernel will still
->(re)initialize UART9 appropriately.
+--5is1G2jMx0W1JCfv
+Content-Type: application/pgp-signature; name="signature.asc"
 
-We currently simply use
-`bin/rk3588_ddr_lp4_2112MHz_lp5_2400MHz_v1.16.bin`
-from https://github.com/rockchip-linux/rkbin for all RK3588 targets as
-`ROCKCHIP_TPL`.
+-----BEGIN PGP SIGNATURE-----
 
-There doesn't seem to be a RK1-specific blob in the repo, and so far
-we're not invoking the closed-source x86_64-linux-only
-`tools/ddrbin_tool` binary to produce an alternative version of the SPL
-for other targets either.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYYd88ACgkQFHw5/5Y0
+tyxxJAwAiU27UcaYCKF7E96m5dS7xlEIMCJmgCb6PgoEdtfagRK2jAlndAoo62Bq
+ZXFkvW6AnB1YJMit4+V6ZPoBN+gpTl5PZqpF50H/Bzy70ahdijifphzhTaqbahfD
+K7ol4Yx2wrC8pfkRQ0Q70SuRrydRgO/nGCyPhj4ftL+E98HQGlE7EXYIqYPy/j12
+BPmhKoPlRkBhdvoWfgtEhGzB3mMGVugIpzSdF5mbfm/xPRs8f5dgOdWQ3QXBH9gR
+OWZgVG9huxVH0XU+nDaApkyMJdqvVArOaUG+kTxqltMSxyljAfBZy4UBRTtiCqIJ
+T3O3wL+Q4TMocNYCnp3uz3JZ8e+bghytY4VmUizjTXXRviFcLgFfT2v1nojSlAWU
+LF8Stqhqbb+58okR6mmwgdV7vFuFa3Zm5BKOFUSW63JsbM/bkMDItAlOD+ZBILSn
+yC+3JZPlzLZ+DyJ0GiDp1FGycsZ3u74eSRiLRrazz8Yu/XZOXki4m0ovrVzN3nnS
+ro73gd+U
+=8s0c
+-----END PGP SIGNATURE-----
 
-So if it also works without doing that (maybe with a little bit less
-debug serial output during early boot) we'd probably keep it like this
-;-)
-
-Thanks,
-Florian
-
-[1]: https://github.com/NixOS/nixpkgs/pull/302138#discussion_r1560349114
+--5is1G2jMx0W1JCfv--
