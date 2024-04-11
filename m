@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF845C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 17:53:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C33A3C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 20:05:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EE52E881F6;
-	Thu, 11 Apr 2024 19:53:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A1477881D2;
+	Thu, 11 Apr 2024 22:05:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LF/9AmRY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V7ySfzYP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 130C3881FC; Thu, 11 Apr 2024 19:53:11 +0200 (CEST)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id 7A34187E91; Thu, 11 Apr 2024 22:05:15 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BC6A881F1
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 19:53:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5EC0481F9A
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 22:05:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2d9fe2b37acso362961fa.2
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 10:53:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-69b3d05e945so1409696d6.2
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 13:05:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712857988; x=1713462788; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=1AeII3r5MVcCQpaq1ln/8s1eOrE8HbiWZ4EfXHkUwfc=;
- b=LF/9AmRYQNSzsjf82hqELCEC7VbVioda9nI9/3KVwFshQvdUdZZJO7LeqYBtXgxvi9
- uyntU8XvnOomTIDDfq9K4mqDv1qoZZ1Yje20RNxSV7fe+0zo3daqUrHyeHD+Muz3F9R0
- aqQn4h1e9ZJsvTsCTVASj9+UPGRsYZLWq6UVfpCYxGLo/qAYLl6H4n1YDiG8RH4bljlK
- Nr+CHqO6u/uc3vaILp3W4WZTn8m3pvwEdfDa9/xOXymNC3xGX9lvEexmh++suuBXxe35
- XIrDTB9BELWAoihf+gvNHUxifR6ug82XFtZA/nrJk3iCuj7/6I9tkUc5Bc9MLzJvXzX+
- gtEg==
+ d=konsulko.com; s=google; t=1712865912; x=1713470712; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZIbpdVkjyjY7NzqaBNfVyODmHEgHFcAXpODOa6lou50=;
+ b=V7ySfzYPzihS93APk4+97Bjry+Pi5q7qHPKsBYwsWOWSHMwTX5/Gja+EZQ5ozOu74Y
+ ljO6gVkxk4EzRKsLGVaBcwNiXDfP67xz3CKS0Kb6GVQWtCiKv/EpvVnFABTdhFzj1k3m
+ BGSg8uquxEiV2fCKBTqSXnsPAtzCLuSL31YOU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712857988; x=1713462788;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1AeII3r5MVcCQpaq1ln/8s1eOrE8HbiWZ4EfXHkUwfc=;
- b=rZtzJg5lJeg8I4/sZ3CJkQGGyQaWJ5TyH1rrceRgtSVBZfDqMVBl4upYTkhnHY8k/2
- oJCrDFzcZz8UtT+QpBes06xCgQH9+pGwo8w9km9mFDFZzrjIV4GU2IYmPyLwcCLwX1Jv
- uPBoEDv5KSHrb+b54Y8aabuv0Q1jHoBfFytCmCLCd+Rslm7G5RSfF+gJS2v7FF7Tvhlx
- n71a6NVLSFQlh2j2fDkn3YISPSXNfwf5OLFoBelMtTHiEO1pv6j3C7IxamA2ZCQIWnaX
- zdowLk7MM624eddcgOC6thZ5DrSUiCtca1Gh3jbJwYqdiOhbjE/oI3zRYMyQ5MU914Y+
- WtpA==
-X-Gm-Message-State: AOJu0YzqJv6d0lDfSjlFjRmWLrt/7grfRyIwT66X9Bogyj6BGy5GZyFw
- cOylz6nita6HaspN7iOsCO40mJOhefaIgn2a2uoS6UCkBDm57ZKTHw38RYQ2wOA=
-X-Google-Smtp-Source: AGHT+IEpuhL7tlq9uM0Eo3GBt7tbifZ1OaCQGlolOReFd81rGQJxAUG7NTRHaxb8ZZRNEh50cIsieg==
-X-Received: by 2002:a05:6512:485c:b0:513:bc95:50c3 with SMTP id
- ep28-20020a056512485c00b00513bc9550c3mr302566lfb.12.1712857988153; 
- Thu, 11 Apr 2024 10:53:08 -0700 (PDT)
-Received: from cymric.caleb.rex.connolly.tech ([2a02:8109:aa0d:be00::570d])
- by smtp.gmail.com with ESMTPSA id
- j7-20020a170906254700b00a4655513f0bsm951925ejb.88.2024.04.11.10.53.07
+ d=1e100.net; s=20230601; t=1712865912; x=1713470712;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZIbpdVkjyjY7NzqaBNfVyODmHEgHFcAXpODOa6lou50=;
+ b=czLm2EXXKUE84x0/3h2HpTHDfpiHjbbFSL4fOIplTaPqIL6Tf64wsF2XITLtfnTHIR
+ P0xGnwDLVIO4sw/BTV+K/6A5KFPO5sZ9a6m0qu3hzd6/vkz9dZ/judbIuaHVCsmLTerj
+ i5dqcuG7/+CzaYyD/2apTQQxBWUkqAA7XzhMHIr/ijxn6zKdmljtZYbdAK3aWMpFBH+r
+ f5Shh9iBULEnuTFhAFDJv07SkLmAEb9b7ZBbLWY/5B+xSEMmIgb6H3awT6r0uKvqYSu/
+ A7JuCEuB1JyEZzjF5cf4sH4yX5ARpSxvMUuvF+obRWOKmodkf4J4ROnfmJABAvAGouDa
+ rykg==
+X-Gm-Message-State: AOJu0YwF/XsYeF6VChzfFWIAacINw8/C+9fFYL57279kSRuXmAUPWrxn
+ 6UhQrPSJM/0rdlACWwEKX4nPxQfOZK7yo/OCWo5k/pDEiEiTeNVOUuy/CLedILI=
+X-Google-Smtp-Source: AGHT+IER62yIvy82RnP+pMhGMWjbT1rG6n2KJLg1oMyp4aYKvrD0gl1GCaIelEAnMlFVXKNNf4cb2g==
+X-Received: by 2002:a0c:fba2:0:b0:696:a48d:26a0 with SMTP id
+ m2-20020a0cfba2000000b00696a48d26a0mr794692qvp.46.1712865912249; 
+ Thu, 11 Apr 2024 13:05:12 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
+ f15-20020a0cc30f000000b0069b114bcb2esm1349715qvi.46.2024.04.11.13.05.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 10:53:07 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Dzmitry Sankouski <dsankouski@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] input: button_kbd: gracefully handle buttons that fail probe
-Date: Thu, 11 Apr 2024 19:52:37 +0200
-Message-ID: <20240411175244.937795-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.44.0
+ Thu, 11 Apr 2024 13:05:11 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>, 
+ Simon Glass <sjg@chromium.org>
+In-Reply-To: <20240326221431.55346-1-marek.vasut+renesas@mailbox.org>
+References: <20240326221431.55346-1-marek.vasut+renesas@mailbox.org>
+Subject: Re: [PATCH v4 1/6] boot: fdt: Change type of env_get_bootm_low()
+ to phys_addr_t
+Message-Id: <171286591122.298989.8603089527631856478.b4-ty@konsulko.com>
+Date: Thu, 11 Apr 2024 14:05:11 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,59 +92,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If a button device fails to probe, it will still be added to the uclass
-device list, and therefore will still be iterated over in
-button_read_keys() resulting in a UAF on the buttons private data.
+On Tue, 26 Mar 2024 23:13:11 +0100, Marek Vasut wrote:
 
-Resolve this by unbinding button devices that aren't active after
-probing, and print a warning so it's clear that the button is broken.
+> Change type of ulong env_get_bootm_low() to phys_addr_t env_get_bootm_low().
+> The PPC/LS systems already treat env_get_bootm_low() result as phys_addr_t,
+> while the function itself still returns ulong. This is potentially dangerous
+> on 64bit systems, where ulong might not be large enough to hold the content
+> of "bootm_low" environment variable. Fix it by using phys_addr_t, similar to
+> what env_get_bootm_size() does, which returns phys_size_t .
+> 
+> [...]
 
-Fixes: e8779962898e ("dm: input: add button_kbd driver")
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- drivers/input/button_kbd.c | 18 +++++++++++++++++-
- 1 file changed, 17 insertions(+), 1 deletion(-)
+Applied to u-boot/master, thanks!
 
-diff --git a/drivers/input/button_kbd.c b/drivers/input/button_kbd.c
-index 74fadfca8bb8..c73d3b18be9c 100644
---- a/drivers/input/button_kbd.c
-+++ b/drivers/input/button_kbd.c
-@@ -33,9 +33,10 @@ struct button_kbd_priv {
- static int button_kbd_start(struct udevice *dev)
- {
- 	struct button_kbd_priv *priv = dev_get_priv(dev);
- 	int i = 0;
--	struct udevice *button_gpio_devp;
-+	struct udevice *button_gpio_devp, *next_devp;
-+	struct uclass *uc;
- 
- 	uclass_foreach_dev_probe(UCLASS_BUTTON, button_gpio_devp) {
- 		struct button_uc_plat *uc_plat = dev_get_uclass_plat(button_gpio_devp);
- 		/* Ignore the top-level button node */
-@@ -45,8 +46,23 @@ static int button_kbd_start(struct udevice *dev)
- 		      uc_plat->label, i, button_gpio_devp->name);
- 		i++;
- 	}
- 
-+	if (uclass_get(UCLASS_BUTTON, &uc))
-+		return -ENOENT;
-+
-+	/*
-+	 * Unbind any buttons that failed to probe so we don't iterate over
-+	 * them when polling.
-+	 */
-+	uclass_foreach_dev_safe(button_gpio_devp, next_devp, uc) {
-+		if (!(dev_get_flags(button_gpio_devp) & DM_FLAG_ACTIVATED)) {
-+			log_warning("Button %s failed to probe\n",
-+				    button_gpio_devp->name);
-+			device_unbind(button_gpio_devp);
-+		}
-+	}
-+
- 	priv->button_size = i;
- 	priv->old_state = calloc(i, sizeof(int));
- 
- 	return 0;
 -- 
-2.44.0
+Tom
+
 
