@@ -4,59 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35E69C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 15:11:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A606C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 15:36:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B15E8803E;
-	Thu, 11 Apr 2024 17:11:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id B4F2387F2A;
+	Thu, 11 Apr 2024 17:36:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="TuQS1gID";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T/9QmyKv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88CEB87FED; Thu, 11 Apr 2024 17:11:50 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.185])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 99C8487F2A; Thu, 11 Apr 2024 17:36:12 +0200 (CEST)
+Received: from mail-oi1-x22a.google.com (mail-oi1-x22a.google.com
+ [IPv6:2607:f8b0:4864:20::22a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BD5B8758B
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 17:11:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 47DB487DB1
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 17:36:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: a7a9acef-f815-11ee-99a6-005056999439
-Received: from smtp.kpnmail.nl (unknown [10.31.155.7])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id a7a9acef-f815-11ee-99a6-005056999439;
- Thu, 11 Apr 2024 17:10:38 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=TghoWTH6tI6uckEBhMtPJJYx0LM5DPqUlX/gXvOi2HQ=;
- b=TuQS1gIDZ6Z8eVvGIrA8N7wiC7iEizKv6XAWHnaSUF/cpsKS1PWRCcdjr7xChp3kLleZNtxl3BdiQ
- 12noXaAF3z4fJ6TcObc52uN4uZdGP3PE468RNPnhUUT04XsrEAXQK4pg1xz/O8apdXKipJyRDQK5ig
- 6aGa2Am/nkIO/9uD6WoFx3Gc9DXq0QANMqJqf/ZBDFg8EUl1/btIk6xcRfDnWcPQaC1jsoXGYiA5JH
- Vw4VxObxr2T7ilVmmvmlPKWmecNW+2FFa8sGydoGjIuPkxc3Lq6TahHYXwfZDfUde32+57yXyOPs3t
- 8PE3noeuBjHgw0v3xOb+ww6CG4tr2Sg==
-X-KPN-MID: 33|amiacTXLMC3bgDRGfsuF3gq4ClvekR+piNojkhVlMPeP/FvYilLAY0LQplHNsl1
- FbopCrTFLOzCmtvxZcyA4NrOoAR9dJtOqqsiyYlqh9b4=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|T7vRMpKQeDxU95HE/B10pgplLvohmiCt7vPgr515kKe1DtjI88X/WAdUCDFb1Iz
- 6uNBXOEHd1F99Cd0B+/AwLA==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id d02d3896-f815-11ee-9b3e-005056998788;
- Thu, 11 Apr 2024 17:11:47 +0200 (CEST)
-Date: Thu, 11 Apr 2024 17:11:46 +0200
-Message-Id: <87r0fcgci5.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: John Watts <contact@jookia.org>
-Cc: trini@konsulko.com, u-boot@lists.denx.de, contact@jookia.org
-In-Reply-To: <20240411-stdout-v1-1-66ebe5bb152f@jookia.org> (message from John
- Watts on Thu, 11 Apr 2024 15:03:20 +1000)
-Subject: Re: [PATCH] boot: Pass baud rate to stdout-path
-References: <20240411-stdout-v1-1-66ebe5bb152f@jookia.org>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22a.google.com with SMTP id
+ 5614622812f47-3c5fdd1598fso700084b6e.3
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 08:36:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1712849768; x=1713454568; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=TCVvTNHpEdExalrrWAJKOzPkOZcZnNFXe8MFzmVxu8s=;
+ b=T/9QmyKvXC0inZN3oa52TAc7q+wVy19XuwuwMqxsRQZQ51EMIbVnkpsGsYL59mkibT
+ SdI9S+hrSdyFEmoD58RtjZH2qIZWahZ+/JyKnqvqwq6sKV1Emg4aZCddTNkgcR4ret06
+ 4w7NsaRepzZoMHXHwjYhriWS+GIUuyOIlqHlM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712849768; x=1713454568;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=TCVvTNHpEdExalrrWAJKOzPkOZcZnNFXe8MFzmVxu8s=;
+ b=gcfI+dyGOAM2Iz/sOQyezL+ck+XwVsMDKLJTclxB8Di0iwgizz5hdgrdWinoXAqrZL
+ ALpjvSq/0muUdiDodPiMwNsjLEP915LP0OVSh2i2/aHqvR0RqAHgoFPXTPBafVaw3pFQ
+ P3+o081G6lz5HnD7KVCcl0SXBQvrd+p8qbK6qfqnJR8wFBorJe4q9lAc5+fttjPWCmNR
+ ytDO6t3ucpObndnzV5dr+0wMAbHnyiD4n+LIrqiZZTwxjbeZByOxR8d099maydbUVxuM
+ Ur1FelQI9sEWBnMmOZiHqOD2XysdgcuGTYs3vof5MjYCVcxaeDWrLuYRVvhxPgKAEFh8
+ SjRg==
+X-Gm-Message-State: AOJu0Yx+Iq8+GAJ6ErQzekPYNUsTspir51qOvSEYv2M6t2UVIoBEm2Mk
+ 60hG7NZem57R82MvVHkR7mBQLxDr0WtA+L9o5Vojp40v0VWgk0wlQyY2O1kpww4=
+X-Google-Smtp-Source: AGHT+IHiFO1sn1cg/E4vOxC0pIy4KBYJ4L+vn/l8w3BGjEHL4uftEjeZJFH4/I645ZNl3OVjmzm3eg==
+X-Received: by 2002:a05:6808:1524:b0:3c6:943:d47c with SMTP id
+ u36-20020a056808152400b003c60943d47cmr6883252oiw.40.1712849768017; 
+ Thu, 11 Apr 2024 08:36:08 -0700 (PDT)
+Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
+ d24-20020ac85358000000b004364d940d3dsm1026014qto.96.2024.04.11.08.36.06
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Apr 2024 08:36:07 -0700 (PDT)
+Date: Thu, 11 Apr 2024 09:36:04 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Anatolij Gustschin <agust@denx.de>
+Subject: Re: [PATCH v2 00/19] x86: expo: Add support for editing coreboot
+ CMOS RAM settings
+Message-ID: <20240411153604.GA280191@bill-the-cat>
+References: <20240104151152.697855-1-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="FCkw4ZusAiNtNJ6k"
+Content-Disposition: inline
+In-Reply-To: <20240104151152.697855-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,80 +90,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: John Watts <contact@jookia.org>
-> Date: Thu, 11 Apr 2024 15:03:20 +1000
-> 
-> Linux might use the wrong baud rate such as 9600 by default, make sure
-> to specify it when passing the serial port over.
-> 
-> Signed-off-by: John Watts <contact@jookia.org>
-> ---
-> On my board at least (a sunxi T113) the serial console will initialize
-> as 9600 baud instead of the set baud. Pass the baud with the serial
-> device to Linux to solve this issue.
 
-You probably should fix this by making sure the device tree you're
-using has the appropriate stdout-path node.  Because I think the
-functionality you're trying to use here is deprecated:
+--FCkw4ZusAiNtNJ6k
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-* The linux,stdout-path property has been superseded by the
-  stdout-path property.
+On Thu, Jan 04, 2024 at 08:11:33AM -0700, Simon Glass wrote:
 
-* The description of the OF_STDOUT_VIA_ALIAS option suggests that it
-  is seprecated as well:
+> U-Boot provides support for editing settings with an 'expo', as well as
+> reading and writing settings to CMOS RAM.
+>=20
+> This series integrates expo functionality with coreboot, using the
+> sysinfo table to get a list of settings, creating an expo with them and
+> allowing them to be edited.
+>=20
+> A new CI test provides coverage for some coreboot-related commands. For
+> this to work, a number of minor tweaks are made to existing tests, so
+> that they pass on coreboot (x86) or at least are skipped when they
+> cannot pass. Likely most of these fixes will apply to other boards too.
+>=20
+> It includes several other fixes and improvements:
+> - new -m flag for 'bootflow scan' so it can display a menu automatically
+> - Fix for video-scrolling crash with Truetype
+> - menu items can now have individual integer values
+> - menu items are lined up according to the width of all menu labels
 
-    This option currently references CONFIG_CONS_INDEX, which is
-    incorrect when used with device tree as this option does not
-    exist / should not be used.
+This needs to be rebased on top of master where I suspect the biggest
+problem is that we need to reconfigure coreboot that we build now? All
+of the new tests fail:
+https://source.denx.de/u-boot/u-boot/-/jobs/814728
+and we're just building a standard defconfig for coreboot now.
 
-  It just happens that sunxi is one of the few remaining "modenr"
-  platforms that still uses CONFIG_CONS_INDEX.
+--=20
+Tom
 
-That said, the diff is interesting.  To me it doesn't really make
-sense that you can change the serial port and its parameters in
-U-Boot, but that this choice doesn't always make it into the device
-tree that is passed to the OS.
+--FCkw4ZusAiNtNJ6k
+Content-Type: application/pgp-signature; name="signature.asc"
 
-A particular case that I'm dealing with is the default speed of
-1500000 that the various Rockchip SoCs use.  This doesn't work with
-many of the USB-to-serial interfaces on the market and is also rather
-susceptible to line noise.  So for OpenBSD packages I've decide to use
-115200 instead.  But that means I have to patch all the device trees
-in addition to changing the CONFIG_BAUDRATE setting.  If U-Boot would
-tweak the stdout-path property based on CONFIG_BAUDRATE that would
-make things easier.
+-----BEGIN PGP SIGNATURE-----
 
-Cheers,
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYYA14ACgkQFHw5/5Y0
+tyzNNwv+KhPNLADO6vFo7uvr7DnbT4WvisLRDAz7p9Zb0HqppZlrdjkcs4/PYEIy
+fw0LiFJmDmhS1vDTXntTYdiiAvS4rBPKdvFjd/9howByqSeV/xAsZn7BDhYlRgW+
+YaSHsacA18A3OZCMOgOEnLt4B6O3aevc+SLDC8IwDWFnuSJY20hjUqwx62+RNzF6
+hLcHZA9LC7+/P/gA8YUnNLwk43z3N/Li4jh+4VFUYcNEvHGD8LIGLnZBWtjVqRGP
+3E0AcYmviNsywuV5NWiiio3q1YIK+u7mIb1WrGrbbeRmRRqgfMkYVK9W0VHJeNIz
+HvZL+GgJ1CbpBUhitjm96eyW3ur46pUjSJtQbFTnoZ6YYN5jVBmhtX6teEBEJEAj
+WXRuTzTl1GWV+WuvDNJ4D3HbMoBpijv1RwldvOkPz6c1YMad2UhhYPbs2DiTEPJS
+10zI0UpNhmCUuiKa+73wYkqx3rb5gP7wHLUrjfg8GrAYwJ2W71sijWpIFW+mr/01
+NnOfME5H
+=j2Fi
+-----END PGP SIGNATURE-----
 
-Mark
-
-> ---
->  boot/fdt_support.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/boot/fdt_support.c b/boot/fdt_support.c
-> index 090d82ee80..83e62f47b5 100644
-> --- a/boot/fdt_support.c
-> +++ b/boot/fdt_support.c
-> @@ -153,9 +153,9 @@ static int fdt_fixup_stdout(void *fdt, int chosenoff)
->  	}
->  
->  	/* fdt_setprop may break "path" so we copy it to tmp buffer */
-> -	memcpy(tmp, path, len);
-> +	len = sprintf(tmp, "%.*s:%d", len, (char *)path, CONFIG_BAUDRATE);
->  
-> -	err = fdt_setprop(fdt, chosenoff, "linux,stdout-path", tmp, len);
-> +	err = fdt_setprop(fdt, chosenoff, "linux,stdout-path", tmp, len + 1);
->  	if (err < 0)
->  		printf("WARNING: could not set linux,stdout-path %s.\n",
->  		       fdt_strerror(err));
-> 
-> ---
-> base-commit: 777c28460947371ada40868dc994dfe8537d7115
-> change-id: 20240411-stdout-4f91b566a0f2
-> 
-> Best regards,
-> -- 
-> John Watts <contact@jookia.org>
-> 
-> 
+--FCkw4ZusAiNtNJ6k--
