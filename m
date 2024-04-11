@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFE69CD1292
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 04:28:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7191BCD1297
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 04:28:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23671881DA;
-	Thu, 11 Apr 2024 06:28:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8A36C88213;
+	Thu, 11 Apr 2024 06:28:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="mwEOQmP0";
+	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="TV6GS536";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2270C88203; Thu, 11 Apr 2024 06:28:14 +0200 (CEST)
-Received: from out-180.mta0.migadu.com (out-180.mta0.migadu.com
- [91.218.175.180])
+ id E549388205; Thu, 11 Apr 2024 06:28:22 +0200 (CEST)
+Received: from out-182.mta0.migadu.com (out-182.mta0.migadu.com
+ [91.218.175.182])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D77B8820E
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 06:28:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 327C188208
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 06:28:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=jookia.org
 Authentication-Results: phobos.denx.de;
@@ -29,24 +29,24 @@ Authentication-Results: phobos.denx.de;
 X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
  include these headers.
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
- t=1712809691;
+ t=1712809699;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=lzs7HYKNmS8KRA+RhF5cYoNWJ1CvTbrvpODy7HDViKE=;
- b=mwEOQmP0Yf5aapZVeaT4nkpZq40fonBI/wJBZlC13uLXJfNJm86ezv/lf7AT7tf7mGQSPP
- /x876VlNM2NtNUPFsJEhqHAuwPel6pDwvIXtFhWXYC+SFKrGxJ3ai2t0buDrgDwPnRE50g
- NWsshndBV6YjXnmb99wXEBpj+j64trqfyet4Wic/5EO3ltiYQJyCgslwOULwTm2k/aey6o
- wiyW6aKxslyZbDnAFoSFKF3FUkgZWNrVIY0DALMT8e827MAenVv8RGCOTRJL5pRWIsyO11
- hQmp+p7IHhLXpuULCvChufTT6Ef36dzNaZJECU2mi2laquWHURslXgCNdoRrHA==
+ bh=4lR9pbVoAsxiiKijSXHGIAktKYyg316HJ+R0kotHJbI=;
+ b=TV6GS536CpQ7xGBDPEQPlULRrNY5ZU/lsUnsVWyg6SIJapEDAzN9/b8aTJkccov09zvEqt
+ I6rBh6NS/WROi48M8DafplQRImfZkXsE2+PRdSQVgG4/5w2nKh2C5wfmgv+N6ab7+RzykX
+ 95ByTbSIhOOM5PUk0sIUe+L8IS0RKcFzFyL7D+K9NRwRDICM9UylitQwx2vZVZ/q2XyKmx
+ vSuT3K0mWs3q1QOG8UJXhQECxbSn5Op6ZdVt87fEViI5ehSHM8kn1DC7K9MFt34O5usje7
+ HseVoVcY2V0NZwczkVU59Z02YCXPvrZ5hkukYr1kQNxgDGS0qORXbx1Zl+gOGw==
 From: John Watts <contact@jookia.org>
-Date: Thu, 11 Apr 2024 14:25:26 +1000
-Subject: [PATCH RFC 09/15] sunxi: Implement BOOT_DEVICE_SPINAND in SPL
+Date: Thu, 11 Apr 2024 14:25:27 +1000
+Subject: [PATCH RFC 10/15] spl: Add SPL_SPINAND configuration options
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240411-spinand-v1-9-62d31bb188e8@jookia.org>
+Message-Id: <20240411-spinand-v1-10-62d31bb188e8@jookia.org>
 References: <20240411-spinand-v1-0-62d31bb188e8@jookia.org>
 In-Reply-To: <20240411-spinand-v1-0-62d31bb188e8@jookia.org>
 To: Jagan Teki <jagan@amarulasolutions.com>, 
@@ -55,13 +55,13 @@ To: Jagan Teki <jagan@amarulasolutions.com>,
  Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
  Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, John Watts <contact@jookia.org>
-X-Developer-Signature: v=1; a=openssh-sha256; t=1712809569; l=3428;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1712809574; l=1420;
  i=contact@jookia.org; h=from:subject:message-id;
- bh=cTqOnM6hyf6ac+zBdGu6hwVzSP3wio7VTt6aVDxcf6g=;
+ bh=v3TLI0FGR3ybC+CFJhwtlipDsaQ/z6IqQ0q0Je4f7+E=;
  b=U1NIU0lHAAAAAQAAAEoAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAAAgpGuA3uho2
  8zVxm554DVLHyl4gq5/nBHglU5WIWN8/zYAAAAEc3NoOgAAAAZwYXRhdHQAAAAAAAAABnNoYTUx
- MgAAAGcAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAABAfS6yjjVEv8eDGSESIhK8f5G
- 9XPmZs+BWvmdhX+ov6KXpGYqDO4oMOSSYnNTBBSzHASGShLs9KID4TBj/jbLLCQUAAOlR
+ MgAAAGcAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAABAl7lxkT67gz9VnULOHmqyDgD
+ D/bNJSBGkm+IWCxpIanhZ2BYcj3ssDdwPPes2uC0Y7Xm7Zb+KC7N6CyOGDJ4lDgUAAOlU
 X-Developer-Key: i=contact@jookia.org; a=openssh;
  fpr=SHA256:6LBQmZH5u7i/edmEZXzCTwCrpSevs/ZshZxNmlD1thY
 X-Migadu-Flow: FLOW_OUT
@@ -81,106 +81,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Instead of trying to boot from SPI NAND then SPI NOR in series, select
-one based on the current boot device.
+Boards that support SPI NAND need to specify the page and eraseblock
+size. Add those as Kconfig options.
 
 Signed-off-by: John Watts <contact@jookia.org>
 ---
- arch/arm/include/asm/arch-sunxi/spl.h |  1 +
- arch/arm/mach-sunxi/board.c           |  5 ++++-
- arch/arm/mach-sunxi/spl_spi_sunxi.c   | 28 ++++++++++++++++++----------
- 3 files changed, 23 insertions(+), 11 deletions(-)
+ common/spl/Kconfig | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
-diff --git a/arch/arm/include/asm/arch-sunxi/spl.h b/arch/arm/include/asm/arch-sunxi/spl.h
-index 92be936d56..a9b7c0daca 100644
---- a/arch/arm/include/asm/arch-sunxi/spl.h
-+++ b/arch/arm/include/asm/arch-sunxi/spl.h
-@@ -16,6 +16,7 @@
- #define SUNXI_BOOTED_FROM_NAND	1
- #define SUNXI_BOOTED_FROM_MMC2	2
- #define SUNXI_BOOTED_FROM_SPI	3
-+#define SUNXI_BOOTED_FROM_SPINAND	4
+diff --git a/common/spl/Kconfig b/common/spl/Kconfig
+index 6405374bcc..51d1f9f59d 100644
+--- a/common/spl/Kconfig
++++ b/common/spl/Kconfig
+@@ -906,6 +906,27 @@ config SPL_MUSB_NEW
+ 	  the drivers in drivers/usb/musb-new as part of an SPL build. The
+ 	  old drivers are in drivers/usb/musb.
  
- /*
-  * Values taken from the F1C200s BootROM stack
-diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
-index 7f4ee92991..e374b75ac2 100644
---- a/arch/arm/mach-sunxi/board.c
-+++ b/arch/arm/mach-sunxi/board.c
-@@ -222,11 +222,12 @@ static int suniv_get_boot_source(void)
- 	switch (brom_call) {
- 	case SUNIV_BOOTED_FROM_MMC0:
- 		return SUNXI_BOOTED_FROM_MMC0;
--	case SUNIV_BOOTED_FROM_SPI:
- 	case SUNIV_BOOTED_FROM_NAND:
- 		return SUNXI_BOOTED_FROM_SPI;
- 	case SUNIV_BOOTED_FROM_MMC1:
- 		return SUNXI_BOOTED_FROM_MMC2;
-+	case SUNIV_BOOTED_FROM_SPI:
-+		return SUNXI_BOOTED_FROM_SPINAND;
- 	}
- 	/* If we get here something went wrong try to boot from FEL.*/
- 	printf("Unknown boot source from BROM: 0x%x\n", brom_call);
-@@ -306,6 +307,8 @@ uint32_t sunxi_get_boot_device(void)
- 		return BOOT_DEVICE_MMC2;
- 	case SUNXI_BOOTED_FROM_SPI:
- 		return BOOT_DEVICE_SPI;
-+	case SUNXI_BOOTED_FROM_SPINAND:
-+		return BOOT_DEVICE_SPINAND;
- 	}
- 
- 	panic("Unknown boot source %d\n", boot_source);
-diff --git a/arch/arm/mach-sunxi/spl_spi_sunxi.c b/arch/arm/mach-sunxi/spl_spi_sunxi.c
-index 7ecde2b753..46db2900ca 100644
---- a/arch/arm/mach-sunxi/spl_spi_sunxi.c
-+++ b/arch/arm/mach-sunxi/spl_spi_sunxi.c
-@@ -494,28 +494,36 @@ static int spl_spi_load_image(struct spl_image_info *spl_image,
- 	int ret = 0;
- 	uint32_t load_offset = sunxi_get_spl_size();
- 	struct spl_load_info load;
-+	bool allow_raw = false;
- 
- 	load_offset = max_t(uint32_t, load_offset, CONFIG_SYS_SPI_U_BOOT_OFFS);
- 
- 	spi0_init();
- 
-+	switch (bootdev->boot_device) {
- #if defined(CONFIG_SPL_SPI_SUNXI_NAND)
--	spi0_nand_reset();
--	load.read = spi_load_read_nand;
--	spl_set_bl_len(&load, 1);
--	ret = spl_spi_try_load(spl_image, bootdev, &load, load_offset, false);
--	if (!ret)
--		goto out;
-+	case BOOT_DEVICE_SPINAND:
-+		spi0_nand_reset();
-+		load.read = spi_load_read_nand;
-+		spl_set_bl_len(&load, 1);
-+		break;
- #endif
-+	case BOOT_DEVICE_SPI:
-+		load.read = spi_load_read_nor;
-+		spl_set_bl_len(&load, 1);
-+		allow_raw = true;
-+		break;
-+	}
- 
--	spl_set_bl_len(&load, 1);
--	load.read = spi_load_read_nor;
--	ret = spl_spi_try_load(spl_image, bootdev, &load, load_offset, true);
-+	ret = spl_spi_try_load(spl_image, bootdev, &load, load_offset, allow_raw);
- 
--out:
- 	spi0_deinit();
- 
- 	return ret;
- }
- /* Use priorty 0 to override the default if it happens to be linked in */
- SPL_LOAD_IMAGE_METHOD("sunxi SPI", 0, BOOT_DEVICE_SPI, spl_spi_load_image);
++config SPL_SPINAND_SUPPORT
++	bool "Support SPINAND flash"
++	help
++	  Enable support for SPINAND (Negative AND) flash in SPL. SPINAND flash
++	  can be used to allow SPL to load U-Boot from supported devices.
 +
-+#if IS_ENABLED(CONFIG_SPL_SPI_SUNXI_NAND)
-+SPL_LOAD_IMAGE_METHOD("sunxi SPI NAND", 0, BOOT_DEVICE_SPINAND, spl_spi_load_image);
-+#endif
++config SPL_SPINAND_PAGE_SIZE
++        hex "SPINAND chip page size"
++        depends on SPL_SPINAND_SUPPORT
++        help
++          Number of data bytes in one page for the SPINAND chip on the
++          board, not including the OOB area.
++
++config SPL_SPINAND_BLOCK_SIZE
++        hex "SPINAND chip eraseblock size"
++        depends on SPL_SPINAND_SUPPORT
++        help
++          Number of data bytes in one eraseblock for the SPINAND chip on the
++          board. This is the multiple of SPINAND_PAGE_SIZE and the number of
++          pages.
++
+ config SPL_NAND_SUPPORT
+ 	bool "Support NAND flash"
+ 	select SPL_LOAD_BLOCK
 
 -- 
 2.44.0
