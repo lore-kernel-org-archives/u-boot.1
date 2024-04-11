@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 689C0CD1284
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:43:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C45CD1284
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:44:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03452882F7;
-	Thu, 11 Apr 2024 14:43:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 777D588289;
+	Thu, 11 Apr 2024 14:43:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FycGAtMI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ADmu8vCB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54633882D9; Thu, 11 Apr 2024 14:43:15 +0200 (CEST)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 066D9882F0; Thu, 11 Apr 2024 14:43:17 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72E1F882AC
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:43:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3015288263
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:43:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-a51a1c8d931so769805366b.0
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:43:13 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a47385a4379so157500766b.0
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:43:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=linaro.org; s=google; t=1712839393; x=1713444193; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iOFU19Zs31qDDB4sUs+9fRbqzwbYCicW94Twa6AOfOg=;
- b=FycGAtMIKP9sJMHkXv3X8QXXxPnhlgINnPnXgxcGN1pT9vNpK+DSBdcBim4YopTezs
- KzosNFoD78jRcpK+Ub1b84YMAggMyLIngEvUVCmgGAnNf5bKqvqorM9sywpBAWe2LOQw
- 4+napdxQJOLbTF6SEVsobFmqp1XTixXd50+qbigqKLFiOz8mxMdBwf/myXcJGaaFgKcy
- emwYGzNLKYLOgZwYxjNAZttn+6laKWfY/wx7dCMBjm/me3n0OaJ0dVjEPSMiFMv4mdgU
- iGSXlGK4gLWxTB2+W3hYLxzI8mb8CfM4gOqsZwKWBR+BAx9zs3iK06+VRC0iZkue6zvm
- 0FnQ==
+ bh=hYTkj4uQfPz+WYGtrV6o+CVLqYvyjgK3MiMNEhM7dBw=;
+ b=ADmu8vCBgeK2oBRqppe2v5RY+kM1joA2hZH545ZIUewqt+lusyo1BWpze1oNo8W+oF
+ g/QJ/v3E/0rKy9niC5I8r5ukvAgMjuMfp5FrwhTToMzMq2Y+L596UMnDA5LF7s/4ysTm
+ rKCaJw21YdYH3tpeRXCiegb7xBywO/hL/Ppfvaj+qA0/E05FfcxfnNldpGLErZHXbH97
+ RswvgUn8NQtZgkPZIgyDc2HNvBBjm6psF4u3giawUfY9iEGrUweyN3sDaG0K47xU2xeo
+ Bf708ljMWB05pAqwgXVAQYWqxg15w3wQKah4uSSs2vTNLfyvQhOwWCyGZ71pQoQaPNPc
+ gYYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1712839393; x=1713444193;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iOFU19Zs31qDDB4sUs+9fRbqzwbYCicW94Twa6AOfOg=;
- b=VHDRm29e/WXUJ5unOokprTLkv4uvQQNOySsDlnUSbqFc++aEs65wKbLd9gDE3zyoXV
- +qBod0gL0IQbLs62Lvz0lj5KIaULOs4bz92RWycSBCon4PArXq2OpvjPyfeoTyWzmEgo
- bg56YfHSh4I4tLeKoJmuCytkYPrkNN0hEMFDA77i5jpoDAmIEjDzy0GUrmTMULLqslyj
- Er/ua5tB+tad2gvHkkRKjSqqXPXLUNmsK8rNTP4SnRn/H3Lv3maYHzflz+ns/fDmdk55
- BU8f2F5yEh3I9JbOqsoFJN3sJ3rAb2CGOspIpKDScSai6FCFL/VXFwCBIVpZSLjG+WUq
- t0Sw==
-X-Gm-Message-State: AOJu0Yz+KusfbgLeqN0GOZEwpsVSDwQF4rxcyaPv1PANgWRtPXGQ8QCo
- 1xZJ7Hb5nU49m0ilugF1UJKNADgwAdq33/z0/M5MaWn7cwAVQEMK4k1GQkTNxA/tB/mMNBoAsXX
- i
-X-Google-Smtp-Source: AGHT+IElncH99BKyXjP2AoXPmCicDwBjybpPftH2ciqYWiBufUk/wMFBeiE56dewDHIhQlOS1fCaFA==
-X-Received: by 2002:a17:906:c103:b0:a52:22e7:4003 with SMTP id
- do3-20020a170906c10300b00a5222e74003mr1319564ejc.49.1712839392701; 
- Thu, 11 Apr 2024 05:43:12 -0700 (PDT)
+ bh=hYTkj4uQfPz+WYGtrV6o+CVLqYvyjgK3MiMNEhM7dBw=;
+ b=RKjyZP+N0w1MmMUiGYzxieAsjtXjnrHijdyGSnwXHUbbHjaRIkCxj8Bitsi6/Kh73F
+ EULPtFylZJ/Kf+Lv02qBiP+et56ZIPoAQB7HiUeHwtKEWiWkyjH7GWjJqJY3Zvs3D4g2
+ GNnDVF9qGSRcg8swCH+ImmB+Qr4jEtLGedHBgHTGWIuqwl0/tprpnkCe9K4IGNmR3tQt
+ 99CqstO1s+F7BwCWVE9nJ3Ehx9ROL+wYq188prtdpHExi4oVLLGVXoC/JEy1GvX9dOFX
+ iT17WOsJVcYMz05ljOEf9Vh2kXxoH6Ljg9i40SWyzoojSN5xh4dBLOxw20e5D7tofid0
+ 1SPA==
+X-Gm-Message-State: AOJu0Yx0QMY9xqjTVJGImF+zOPO3UT2qr2Z1ZG7ykTnAO3yFhTnYVNnZ
+ DHVQaZNbeQf3dsAeAeMz/Kt8S6aHAvwTZ0juI6UyGcu99Y2q8IUriDtgX4uPUVhIf9Pn/AWl5Bz
+ 1
+X-Google-Smtp-Source: AGHT+IGVmYxolpESg9iPT8tLzi2juQ0PQnYCfRz7DG9jh2RfnGsxXb3L4u1jZdGftGT6A/+QyBoP4w==
+X-Received: by 2002:a17:907:1c2a:b0:a4e:410e:9525 with SMTP id
+ nc42-20020a1709071c2a00b00a4e410e9525mr2456750ejc.30.1712839393564; 
+ Thu, 11 Apr 2024 05:43:13 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::570d])
  by smtp.gmail.com with ESMTPSA id
- e1-20020a170906844100b00a4e8a47107asm710491ejy.200.2024.04.11.05.43.11
+ e1-20020a170906844100b00a4e8a47107asm710491ejy.200.2024.04.11.05.43.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 05:43:12 -0700 (PDT)
+ Thu, 11 Apr 2024 05:43:13 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20240409-b4-qcom-mmc-fixes-v1-0-5039164ecbf7@linaro.org>
-References: <20240409-b4-qcom-mmc-fixes-v1-0-5039164ecbf7@linaro.org>
-Subject: Re: [PATCH 0/7] qcom: mmc fixes and sdm845 support
-Message-Id: <171283939135.622116.8766547419622647056.b4-ty@linaro.org>
-Date: Thu, 11 Apr 2024 14:43:11 +0200
+To: u-boot@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>
+Cc: neil.armstrong@linaro.org, trini@konsulko.com, stephan@gerhold.net
+In-Reply-To: <20240411123726.356173-1-sumit.garg@linaro.org>
+References: <20240411123726.356173-1-sumit.garg@linaro.org>
+Subject: Re: [PATCH v2] mach-snapdragon: Allow other board vendors apart
+ from Qcom
+Message-Id: <171283939290.622116.11354369414400233489.b4-ty@linaro.org>
+Date: Thu, 11 Apr 2024 14:43:12 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -99,28 +95,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Tue, 09 Apr 2024 20:02:59 +0200, Caleb Connolly wrote:
-> This series does some long overdue cleanup to the msm_sdhci driver,
-> fixes v5 support, and adds the necessary clock configuration to get the
-> sdcard up and running on the RB3.
+On Thu, 11 Apr 2024 18:07:26 +0530, Sumit Garg wrote:
+> Qcom SoCs derived boards can come from various OEMs/ODMs and not just
+> Qcom itself. So allow CONFIG_SYS_VENDOR to be set correctly
+> corressponding to the actual board vendor.
+> 
 > 
 
 Applied, thanks!
 
-[1/7] mmc: msm_sdhci: correct vendor_spec_cap0 register for v5
-      commit: a737d8962cae2a37634bf0fe9f2b6907f7a047a7
-[2/7] mmc: msm_sdhci: use modern DT handling
-      commit: 5fc028897fb16abd0823b545b6f7b8a1df54d4dd
-[3/7] mmc: msm_sdhci: print core version
-      commit: 0dc3cd3e5e501a575d0579b78b238bdd1b2a8274
-[4/7] mmc: msm_sdhci: use a more sensible default clock rate
-      commit: 6d327bca5ac7112f168fef8f2284e67211637e6c
-[5/7] clk/qcom: sdm845: enable SDCC2 core clock
-      commit: da74cd018493b5a1f6bb8785bf6cc7754e42dfd8
-[6/7] pinctrl: qcom: sdm845: add special pin names
-      commit: 691e3cfc645504397a5f0da7afd2db96e4445f26
-[7/7] dts: sdm845-db845c-u-boot: adjust MMC clocks
-      commit: 17cfde60a2fcaf3365fdef7755a825aeddc6179a
+[1/1] mach-snapdragon: Allow other board vendors apart from Qcom
+      commit: 68f98096c09734257e5218897500a7279c6c4ca2
 
 Best regards,
 -- 
