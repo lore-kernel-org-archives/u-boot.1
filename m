@@ -4,84 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F006C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 22:07:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E7D6C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 22:36:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D0E53881D7;
-	Fri, 12 Apr 2024 00:07:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9656987B82;
+	Fri, 12 Apr 2024 00:36:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MD5tNntQ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T6UKhYBL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89EE0881EA; Fri, 12 Apr 2024 00:07:49 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 2303F881F1; Fri, 12 Apr 2024 00:36:11 +0200 (CEST)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F3683881A8
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 00:07:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 296048758B
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 00:36:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6ea1f98f3b9so183119a34.1
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 15:07:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-56fc155b646so294527a12.3
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 15:36:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712873266; x=1713478066; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=qae2j2Mi4TIWqgRHJAElYvrxAJ2Bi/VlrlnrQ5nKx2M=;
- b=MD5tNntQnQimGjuCwBrVrNue5sx05kduw+Ru+5DQIKI061z+LRfhX7NEHZ+hv7gNLS
- IZcEYkyhkT/ogITYST7hIFyFw0dzVCK4HqWAna/ZQuLN5vb84/CNeHEgVfKwCvjnZLph
- 86iHDMvNfPYoh+ckVAwaKGIaAPHweSsoLAPxg=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712873266; x=1713478066;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1712874968; x=1713479768; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=qae2j2Mi4TIWqgRHJAElYvrxAJ2Bi/VlrlnrQ5nKx2M=;
- b=GWfvbwIQavNRSxWoB7v/KhCCNxDh8xV1r/MtdhUe06D5MB6mEXgJkYbp758YmjgvjH
- 0vIjH4sug8Fgw4BHnQ9ZuGjlBb2/b2ZLNHrnbtthoaCH3LB9cWX4kr6K3zJot/g6IrUn
- qY+rsUh7xGVSRDftA/Bm1Vju9C0ZXT5uRIY7+3TcUrfHfZBral24nljBWmO4bBMupHxz
- I79UFB1OtJT4L/fUdyPIlw2WeAtSBUgbAWZajYb1U12B0uYe3oxyPymo7bzHwAE6ptOF
- DQEcnoJGAn0R4MJaX2KO9gXl1wHumCrbgOrWbkhBp9p9BXVf9MZafIdMJsvAguLr75aa
- mJcQ==
+ bh=WvipsxHfgo1oQDqzqwQenJDwHaokKwE5SmZ2AVua5Fg=;
+ b=T6UKhYBLabC8ZWBIX//Py9AIZFIYUDx9iS0jiT6IXveCX0Hl/04uB4dCUWLT0RFWR7
+ ySY7q11M/EEeCZm0ibZ3C9ifWAQeWVWoyWdMmCiva+XvwlKwh12we6fVsh1w5BAv+TXq
+ rOWO0njLb5G2Jgj+dzruIJ3Tq2l1mI/y2YAkZ9Bms6ZQNcCg773+QH/vxGCVuK8U6pR0
+ m9xMzaHi6qCtIdF14nrRfLz+IDf5IXAeYx2M6mxa2yMQayqK9WxLReUA9wupeowMzvQu
+ WCJtDO8rm4sKKNc0r1mBDln55cgYz1GY6aUYJRScoL1D9W2pLm21yOtnKgol6RlwKeXH
+ K4wA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712874968; x=1713479768;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=WvipsxHfgo1oQDqzqwQenJDwHaokKwE5SmZ2AVua5Fg=;
+ b=ZWaqcGORlhTVcb4qN7yZ3eUBV+AeE9AGZN22ehrvSxrQXj/Mt/fZIH+PyRY+qjC6Il
+ N1YX56J7pT/44HwbrsMH8Yg7Uv2qgQk/W4eUX0AD13HxSjZq1FMFI2i5QHGq/hyDYUN6
+ THrc++pT1LNDI6AKJ5oYLGqyaJ0l16crVuBiwOPs2XD6NLSSxVXLyQUlAG08gbAPE1D0
+ d2+oxIhl4LdHfrEjpii5rAdm2wpt7UuO/EA/cI0zrsOw39tDgHrG9Vy/WT0rSfvohSsC
+ JZJKPAdHm8j4ew9zPYzDveo3h7xOtVitDNKhwthzI+Rl9KBEGjyeW/I/OEG1+cW0EfiP
+ ZHbQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWNroOPEnMzlaWaZKx/7DjnkT1WDsYX/nj2OIyat4DHPmZPm/45b58Cpm/oYdCQmR3FZGedSdGE64/En/xUzS50/IvH6A==
-X-Gm-Message-State: AOJu0YyHn7HNL79NAalO1s+XO80fxcBXdxnum680WiZoCQH3ic1gd5gc
- vaTa5ubBz6gSRG7fjGa8KhRirNmDMjSz5oH4yYVnRC7GEjtKa3c9U2wyDJfcpwU=
-X-Google-Smtp-Source: AGHT+IEWvAsc70Bdw0bG4v4xPqO+e87Y2fjkBmL+HZZKzraOIwZ7OIqofa4vZ6XpN+Gn2L6iL5UVoQ==
-X-Received: by 2002:a05:6830:1698:b0:6ea:13ae:73a2 with SMTP id
- k24-20020a056830169800b006ea13ae73a2mr1007122otr.11.1712873265674; 
- Thu, 11 Apr 2024 15:07:45 -0700 (PDT)
-Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- f10-20020a05620a15aa00b0078d76c1178esm1552907qkk.119.2024.04.11.15.07.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 15:07:45 -0700 (PDT)
-Date: Thu, 11 Apr 2024 16:07:41 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Chintan Vankar <c-vankar@ti.com>
-Cc: Siddharth Vadapalli <s-vadapalli@ti.com>, sjg@chromium.org,
- marex@denx.de, nm@ti.com, afd@ti.com, vigneshr@ti.com,
- u-boot@lists.denx.de, dannenberg@ti.com, srk@ti.com
-Subject: Re: [PATCH 01/10] board: ti: am62x: Init DRAM size in R5/A53 SPL
-Message-ID: <20240411220741.GJ2493117@bill-the-cat>
-References: <20240112064759.1801600-1-s-vadapalli@ti.com>
- <20240112064759.1801600-2-s-vadapalli@ti.com>
- <20240112132607.GO1610741@bill-the-cat>
- <a1d7ca85-8723-4d73-8e1c-357c6aa6294f@ti.com>
- <20240120164141.GA3652023@bill-the-cat>
- <48c63fc4-9f06-4066-b206-a0a548936dcd@ti.com>
- <892b473b-5b76-4e44-af27-52d50cb24877@ti.com>
+ AJvYcCUUQGvJ2zqXkCgBTCOs4J015i11VryyCjUypDmgjka063kgLvy8szz1NapOHsDAm7+/g8MeF+nqcVbdUSRh+RxJklHmkg==
+X-Gm-Message-State: AOJu0YzYP1lr6a5uXg+O9EqjUXdDRt9Vt/K+xP3n6qOmdfSM1BlUwMkw
+ cPtnVj8+HcMF/eDWIq/edIZqGMByYACryaqmvGWMH9f5IppH4JGBU6Zbv4zAWzXb0Kq3qZWI858
+ KnLIe3xlMvZXfWpq0T3Bl9TXl/3I=
+X-Google-Smtp-Source: AGHT+IH7dou6eciDKMntmiJA9cseX6FZTy69qpl8YCpfYfosg79UorWhcasc32lrk3zh3ctPXUsPAG90eRy5ArRko64=
+X-Received: by 2002:a17:907:8689:b0:a52:3627:ba3f with SMTP id
+ qa9-20020a170907868900b00a523627ba3fmr86261ejc.29.1712874968323; Thu, 11 Apr
+ 2024 15:36:08 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="s8Q0kpBCjRAm5LVQ"
-Content-Disposition: inline
-In-Reply-To: <892b473b-5b76-4e44-af27-52d50cb24877@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20231214234647.296129-1-jjriek.ref@verizon.net>
+ <20231214234647.296129-1-jjriek@verizon.net>
+ <4lspwhoesvjvbaxlsx4fl6fbsnfte2qbpq2tmfupdpw5jh6vqp@oculnryb7ue6>
+In-Reply-To: <4lspwhoesvjvbaxlsx4fl6fbsnfte2qbpq2tmfupdpw5jh6vqp@oculnryb7ue6>
+From: Sam Edwards <cfsworks@gmail.com>
+Date: Thu, 11 Apr 2024 16:35:57 -0600
+Message-ID: <CAH5Ym4hRtvJk4mBa=_uEp8FsFWUs2P-OOybZD80NODyrFVURAA@mail.gmail.com>
+Subject: Re: [PATCH v2] board: rockchip: Add the Turing RK1 SoM
+To: Florian Klink <flokli@flokli.de>
+Cc: Joshua Riek <jjriek@verizon.net>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Jagan Teki <jagan@edgeble.ai>, Eugen Hristev <eugen.hristev@collabora.com>, 
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, John Clark <inindev@gmail.com>, 
+ Jonas Karlman <jonas@kwiboo.se>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, 
+ Chris Morgan <macromorgan@hotmail.com>,
+ Massimo Pegorer <massimo.pegorer+oss@gmail.com>, 
+ Johan Jonker <jbx6244@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,102 +101,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, Apr 11, 2024 at 1:29=E2=80=AFAM Florian Klink <flokli@flokli.de> wr=
+ote:
+>
+> On 23-12-14 18:46:47, Joshua Riek wrote:
+> >The Turing RK1 is a Rockchip RK3588 based SoM from Turing Machines.
+> >
+> >Specifications:
+> >
+> >    Rockchip RK3588 SoC
+> >    4x ARM Cortex-A76, 4x ARM Cortex-A55
+> >    8/16/32GB memory LPDDR4x
+> >    Mali G610MC4 GPU
+> >    32GB eMMC HS400
+> >    2x USB 2.0, 2x USB 3.0
+> >    2x MIPI CSI 4x lanes
+> >    1x MIPI-DSI DPHY 2x lanes
+> >    PCIe 2.0 x1, PCIe 3.0 x4
+> >    1x HDMI 2.1 output, 1x DP 1.4 output
+> >    Gigabit Ethernet
+> >    Size: 69.6mm x 45mm (260-pin SO-DIMM connector)
+> >
+> >Kernel commit:
+> >2806a69f3fef ("arm64: dts: rockchip: Add Turing RK1 SoM support")
+>
+> [=E2=80=A6]
+>
+> >diff --git a/configs/turing-rk1-rk3588_defconfig b/configs/turing-rk1-rk=
+3588_defconfig
+> >new file mode 100644
+> >index 0000000000..289f2da775
+> >--- /dev/null
+> >+++ b/configs/turing-rk1-rk3588_defconfig
+> >@@ -0,0 +1,133 @@
+> >+CONFIG_ARM=3Dy
+> >+CONFIG_SKIP_LOWLEVEL_INIT=3Dy
+> >+CONFIG_SYS_HAS_NONCACHED_MEMORY=3Dy
+> >+CONFIG_COUNTER_FREQUENCY=3D24000000
+> >+CONFIG_ARCH_ROCKCHIP=3Dy
+> >+CONFIG_TEXT_BASE=3D0x00a00000
+> >+CONFIG_SPL_LIBCOMMON_SUPPORT=3Dy
+> >+CONFIG_SPL_LIBGENERIC_SUPPORT=3Dy
+> >+CONFIG_NR_DRAM_BANKS=3D2
+> >+CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=3Dy
+> >+CONFIG_CUSTOM_SYS_INIT_SP_ADDR=3D0xc00000
+> >+CONFIG_SF_DEFAULT_SPEED=3D24000000
+> >+CONFIG_SF_DEFAULT_MODE=3D0x2000
+> >+CONFIG_DEFAULT_DEVICE_TREE=3D"rk3588-turing-rk1"
+> >+CONFIG_ROCKCHIP_RK3588=3Dy
+> >+CONFIG_SPL_ROCKCHIP_COMMON_BOARD=3Dy
+> >+CONFIG_ROCKCHIP_SPI_IMAGE=3Dy
+>
 
---s8Q0kpBCjRAm5LVQ
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Florian,
 
-On Wed, Apr 03, 2024 at 06:18:01PM +0530, Chintan Vankar wrote:
->=20
->=20
-> On 22/01/24 10:11, Siddharth Vadapalli wrote:
-> >=20
-> >=20
-> > On 20/01/24 22:11, Tom Rini wrote:
-> > > On Mon, Jan 15, 2024 at 01:42:51PM +0530, Siddharth Vadapalli wrote:
-> > > > Hello Tom,
-> > > >=20
-> > > > On 12/01/24 18:56, Tom Rini wrote:
-> >=20
-> > ...
-> >=20
-> > > > > The list of conditionals in common/spl/spl.c::board_init_r() shou=
-ld be
-> > > > > updated and probably use SPL_NET as the option to check for.
-> > > >=20
-> > > > Thank you for reviewing the patch and pointing this out. I wasn't a=
-ware of it. I
-> > > > assume that you are referring to the following change:
-> > > >=20
-> > > >          if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HA=
-NDOFF) ||
-> > > > -           IS_ENABLED(CONFIG_SPL_ATF))
-> > > > +           IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(CONFIG_SPL_NET=
-))
-> > > >                  dram_init_banksize();
-> > > >=20
-> > > > I shall replace the current patch with the above change in the v2 s=
-eries. Since
-> > > > this is in the common section, is there a generic reason I could pr=
-ovide in the
-> > > > commit message rather than the existing commit message which seems =
-to be board
-> > > > specific? Also, I hope that the above change will not cause regress=
-ions for
-> > > > other non-TI devices. Please let me know.
-> > >=20
-> > > Yes, that's the area, and just note that networking also requires the
-> > > DDR to be initialized.
-> > >=20
-> >=20
-> > Thank you for confirming and providing your suggestion for the contents=
- of the
-> > commit message.
-> >=20
-> Following Tom's Suggestion of adding CONFIG_SPL_NET in common/spl/spl.c
-> "dram_init_banksize()", the issue of fetching a file at SPL stage seemed
-> to be fixed. However the commit "ba20b2443c29", which sets gd->ram_top
-> for the very first time in "spl_enable_cache()" results in
-> "arch_lmb_reserve()" function reserving memory region from Stack pointer
-> at "0x81FFB820" to gd->ram_top pointing to "0x100000000". Previously
-> when gd->ram_top was zero "arch_lmb_reserve()" was noop. Now using TFTP
-> to fetch U-Boot image at SPL stage results in "tftp_init_load_addr()"
-> function call that invokes "arch_lmb_reserve()" function, which reserves
-> entire memory starting from Stack Pointer to gd->ram_top leaving no
-> space to load U-Boot image via TFTP since TFTP loads files at pre
-> configured memory address at "0x82000000".
->=20
-> As a workaround for this issue, one solution we can propose is to
-> disable the checks "lmb_get_free_size()" at SPL and U-Boot stage. For
-> that we can define a new config option for LMB reserve checks as
-> "SPL_LMB". This config will be enable by default for the backword
-> compatibility and disable for our use case at SPL and U-Boot stage.
+Thanks for getting in touch!
 
-The problem here is that we need LMB for booting an OS, which is
-something we'll want in SPL in non-cortex-R cases too, which means this
-platform, so that's a no-go. I think you need to dig harder and see if
-you can correct the logic somewhere so that we don't over reserve?
+> Does the RK1 have an SPI chip attached, and is is possible to flash
+> u-boot into SPI and boot from it?
 
---=20
-Tom
+The answer you want is "no." Though the RK1 does have an unpopulated
+pad for SPI flash, actually installing one would be a pretty involved
+user modification, and those users almost certainly can/will build the
+SPI boot image themselves.
 
---s8Q0kpBCjRAm5LVQ
-Content-Type: application/pgp-signature; name="signature.asc"
+> This has sparked some confusion on whether "u-boot-rockchip-spi.bin"
+> should be provided in a downstream build or not.
 
------BEGIN PGP SIGNATURE-----
+Ah yeah the CONFIG_ROCKCHIP_SPI_IMAGE=3Dy might not be a sensible
+default given that 99.9% of users don't need it. Is that config entry
+the main thing creating the confusion? I think it should be removed
+here in U-Boot if so.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYYXyoACgkQFHw5/5Y0
-tyyi0AwAh7DYPdt9c96jr7/X9xGvI7BI+8wtVm7UTDoFwcAxP9b2dZK+iEkjZygM
-0RpjByJZRjcIZ5ddt6e86xqG4ak6hjhTDc5G4L+AinoZSqfrCJqWUrcfK/2Li2t5
-kp5rF3nmWUJovSQs6zBn81rbpHMZIhELluO9X61Ug/bllheU4OCK2+JM1uwCMGWw
-uE42JzJB/OW0hKzhxmpfOecoY70CxIC1Yxq7PPIind+ueXj/nVW8eabjzFU3jchu
-rIhZ0MFIHTYMLHhxPfMgARG7xRnI1+GPY/vD2u/R4OCt7Rj3P+Zog7UVB3bxIUB0
-+Udjyjwh82fKqdyRwDjS3n4hqKAuM1SBqdABHSkr/htoerz46L6ZEQhPyNwCmkxr
-s9tffzwhKOq90F/bp1z9iEIUqFjQqeW+YBmBBnSONCyR7GXP9+qTV4z8T/Xed64H
-LjVjDzxY5o9zpcijcTnonBkQ+BeMNB8nP9GFf1KAIwnqu7DCoj5ggXDxOQ/yvEfI
-Ykk01KIz
-=j78w
------END PGP SIGNATURE-----
+Note that the RK1 is a little different from most RK3588 boards in
+that UART9 at 115200 baud is the generally-accepted debug UART (due
+both to the popularity of pairing it with the Turing Pi 2
+clusterboard, and for pin-compatibility with most NVIDIA Jetson SoMs),
+and setting this very early in boot requires using Rockchip's
+"ddrbin_tool" to change the configuration embedded in the ddrbin/TPL
+image. If you're already supporting other targets that require ddrbin
+configuration changes, please add these for RK1:
 
---s8Q0kpBCjRAm5LVQ--
+uart id=3D9
+uart iomux=3D0
+uart baudrate=3D115200
+
+...but if this would require going significantly out of your way,
+don't worry about it. IIUC this is only required to get TPL+SPL output
+routed correctly: the U-Boot monitor + kernel will still
+(re)initialize UART9 appropriately.
+
+Cheers,
+Sam
+
+>
+> [=E2=80=A6]
+>
+> Thanks,
+> Florian
