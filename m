@@ -4,82 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41DD3CD1297
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 02:42:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35119CD11C2
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 02:53:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9247088149;
-	Thu, 11 Apr 2024 04:42:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9D8FD87F6E;
+	Thu, 11 Apr 2024 04:53:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UmW9NlaR";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fFZJBqfZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1844F8816C; Thu, 11 Apr 2024 04:42:11 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id AF510874AC; Thu, 11 Apr 2024 04:53:10 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 03239865D0
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 04:42:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7319587F6E
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 04:53:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6964b1c529cso54814746d6.0
- for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 19:42:08 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-434925427c6so19530231cf.1
+ for <u-boot@lists.denx.de>; Wed, 10 Apr 2024 19:53:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712803328; x=1713408128; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1712803986; x=1713408786; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=PsEaIPXEAsLbV/VgWFeGRtvVM0PrzJqqYnte6mqBg9k=;
- b=UmW9NlaRFyq/3x7f+uV8VoAJmYy1YKODPBg27UvHQxFlogyqgR7FxVV/GXKHX4CeiA
- CGmMZSrb+D5+Qw08oQWJIpQ5N8StRGR6BbYcDYEFeF0Rhi5veUGx6GZ2+drW5X8QtY/g
- YMpRv31YyBaARHyUdEZsLSvZO3QaJYQpXpd3ASVokPZBiq2yVE06yXEG7jHJMe9syu+p
- ggr9ZIFsgE4CQ2NbekhcQLX2L0H2/pidqE44PFtYky+1ckGYkUdMTBLGQkGqeY5A0S2D
- 7NOB2QI5DEcsexvYL1F7OofXCiwB9KxCrhgfIBLqLyxBygAPxIOcW5z4xxwUmA8Rg7nl
- fzeQ==
+ bh=fvJ965EQf6oHtkMOeWhmeB8CjTWyBqhjei9mHRQdEPk=;
+ b=fFZJBqfZJxih1nusjxBK1gN0Y5kEFseFln4G2Q2oivjksRmKxlmxd0WZdzkonEj2YQ
+ Z+LLWAicjBSvdT1YC+jumeQ0JItD3KV2tLMTRamyH8OGYo+Nyfj7s+7cFJUEx0b/K5OU
+ jffr+yPNM1uZy3hJB0l/igkkNHpiO18dTnJPvnTlXB2iRKt3unts7wD7R4Z0zNx909eS
+ DHR7cQgEY7SE5K0vSHIpKuGEMzT+C3+lFf+OLfSc6CGWIspV3JooAueH1OBWOZHfP5Rw
+ 2QBCvhRm1L6jGfQCEYblJLtI65uKofs6X5L8EUMUf5gqeVJPkOMTmyNxxDXuoFKoU/xy
+ 2abQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712803328; x=1713408128;
+ d=1e100.net; s=20230601; t=1712803986; x=1713408786;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PsEaIPXEAsLbV/VgWFeGRtvVM0PrzJqqYnte6mqBg9k=;
- b=gR81cAUXCMEPs1p6B2C4958GsPimLuJ5S1NM059Y7kAp+gqjzxPuCUqRURJgMvvkcg
- tJixhF9us7RxL0cXtDpoMyv8U7f8fBXG4tV+naQ+58Ulu5XZAXnS6bxBWQmVHvapmtK5
- 6BkV5f0nYDLu8fpereHy3Ts7/3acaxqnLBwxZDbVTm6Tn+obytBdZu6oibpN1bdZYcnF
- Id1/S6flG4B9uw6hMUgdTu5RcVoR3QoRuwzybZZIb5hrQ+tDYWsRvjxLygambQhX5QTF
- sgczI5AffpN+NudwrS2/YXRVUAAKqleNvAUU34BCE+uw4ZihVOWCqtXl7wWv4KcKSlzk
- t+2A==
+ bh=fvJ965EQf6oHtkMOeWhmeB8CjTWyBqhjei9mHRQdEPk=;
+ b=UY24i4O2aiKAiOIDnJcow1l7KY0wgtNHCF9o/yCIouBgGzjhTBpFTH9pD3qEm0KbUC
+ SmVCDTz1oAaz4n0syydOIlmtSzG4T0yopvPk1EUEpFVEgxJNyaGRsC28bJDAiAQmp42z
+ bcTV7ThCoDMdz0Kkw3FhrCXKtHq6sSF3fH96T3GZyl5/bKBmfGfnK1mv/6tE0FXG8tLm
+ Cq3eAc8SEeYRemOtTRPB1Vzf7eWBOMWQAkuEJuJy23F1sfRjQVGjza08QsgjUOKsc20n
+ 09xenByRkG9z/7U3ekPgnT6I+dtaa6rJI1/MonDh6qdDDU0zuc0g/VT+TnS6AL2J7NyF
+ cGXQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV8SatFGszfj5TR0LTyQO3jR9gUja1dr7rjvdBqMbM+ya1z+r4ac+J7iLXhMM97wJXLsIm07njQx5Wq5BguUsmSpO0/uQ==
-X-Gm-Message-State: AOJu0YwSJW4o9hCjLIMWAqQoEJgrbTRE0G09D23TSaAp3pjnPUH4d1v0
- be6Aimbnog60OeInOQP3xt445OFzhgtz4ylZr9AnFroG3oraQlUqauHolQ==
-X-Google-Smtp-Source: AGHT+IGFFv9xisNUU0KckI+kQ424703+gr2z7VMQMWwGrhRM46dKUtTJN73lPDY3SGjxg/Vwn9KFCA==
-X-Received: by 2002:a05:6214:1c46:b0:69b:1056:242d with SMTP id
- if6-20020a0562141c4600b0069b1056242dmr5507555qvb.30.1712803327864; 
- Wed, 10 Apr 2024 19:42:07 -0700 (PDT)
+ AJvYcCX9EcvJUp8r+IAukxzz7XQJn5jZLy5StYbYT/OVm0HK7mOMy3OC3vHMN5/F/PXGLIU3lacSRolTXVZMEErQ6y9Pkuo+rQ==
+X-Gm-Message-State: AOJu0Yzu3UNO6skFbTRPDaNDgx8KnTBiRXa6RBndxas5hYxcATkM5AkG
+ Y9RyQWcBarYYojjxNaXNC8gvKSoAdCEAzttXluMCqIAIfBNFmkoL
+X-Google-Smtp-Source: AGHT+IHH+DY1UUliupFJdoZu+f8BOnXjctUyDslEzPMQ0iXaFSf3HNdGwHZFCZfbh22AX5sLeZCaWQ==
+X-Received: by 2002:a05:622a:610:b0:435:cd14:3372 with SMTP id
+ z16-20020a05622a061000b00435cd143372mr3637118qta.37.1712803986227; 
+ Wed, 10 Apr 2024 19:53:06 -0700 (PDT)
 Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- l2-20020ad44082000000b0069942271b41sm345777qvp.24.2024.04.10.19.42.07
+ kq1-20020ac86181000000b00434c31fa60csm328936qtb.92.2024.04.10.19.53.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 10 Apr 2024 19:42:07 -0700 (PDT)
-Message-ID: <566997e4-a429-5bd7-6e5f-26e19700786c@gmail.com>
-Date: Wed, 10 Apr 2024 22:42:06 -0400
+ Wed, 10 Apr 2024 19:53:05 -0700 (PDT)
+Message-ID: <a135888e-0d97-1382-c1f9-5bf097a7ffe3@gmail.com>
+Date: Wed, 10 Apr 2024 22:53:05 -0400
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.11.0
-Subject: Re: [PATCH 1/1] sandbox: use sane access rights for files
+Subject: Re: [PATCH] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE
+ present
 Content-Language: en-US
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, Mike Frysinger <vapier@gentoo.org>,
+To: Sam Protsenko <semen.protsenko@linaro.org>,
+ Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>
+Cc: Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Yang Xiwen <forbidden405@outlook.com>, Julien Masson <jmasson@baylibre.com>,
  u-boot@lists.denx.de
-References: <20240410083828.20650-1-heinrich.schuchardt@canonical.com>
+References: <20240308000432.32369-1-semen.protsenko@linaro.org>
 From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240410083828.20650-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240308000432.32369-1-semen.protsenko@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,53 +103,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/10/24 04:38, Heinrich Schuchardt wrote:
-> When writing an executable, allowing other users to modify it introduces
-> a security issue.
+On 3/7/24 19:04, Sam Protsenko wrote:
+> Sometimes clocks provided to a consumer might not have .set_rate
+> operation (like gate or mux clocks), but have CLK_SET_PARENT_RATE flag
+> set. In that case it's usually possible to find a parent up the tree
+> which is capable of setting the rate (div, pll, etc). Implement a simple
+> lookup procedure for such cases, to traverse the clock tree until
+> .set_rate capable parent is found, and use that parent to actually
+> change the rate. The search will stop once the first .set_rate capable
+> clock is found, which is usually enough to handle most cases.
 > 
-> Generally we should avoid giving other users write access to our files by
-> default.
-> 
-> Replace chmod(777) by chmod(755) and chmod(644).
-> 
-> Fixes: 47f5fcfb4169 ("sandbox: Add os_jump_to_image() to run another executable")
-> Fixes: d9165153caea ("sandbox: add flags for open() call")
-> Fixes: 5c2859cdc302 ("sandbox: Allow reading/writing of RAM buffer")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
 > ---
->   arch/sandbox/cpu/os.c | 6 +++---
->   1 file changed, 3 insertions(+), 3 deletions(-)
+>   drivers/clk/clk-uclass.c | 16 ++++++++++++++--
+>   1 file changed, 14 insertions(+), 2 deletions(-)
 > 
-> diff --git a/arch/sandbox/cpu/os.c b/arch/sandbox/cpu/os.c
-> index cbae5109e85..1cf41578010 100644
-> --- a/arch/sandbox/cpu/os.c
-> +++ b/arch/sandbox/cpu/os.c
-> @@ -109,7 +109,7 @@ int os_open(const char *pathname, int os_flags)
->   	 */
->   	flags |= O_CLOEXEC;
+> diff --git a/drivers/clk/clk-uclass.c b/drivers/clk/clk-uclass.c
+> index ed6e60bc4841..755f05f34669 100644
+> --- a/drivers/clk/clk-uclass.c
+> +++ b/drivers/clk/clk-uclass.c
+> @@ -571,8 +571,20 @@ ulong clk_set_rate(struct clk *clk, ulong rate)
+>   		return 0;
+>   	ops = clk_dev_ops(clk->dev);
 >   
-> -	return open(pathname, flags, 0777);
-> +	return open(pathname, flags, 0644);
->   }
+> -	if (!ops->set_rate)
+> -		return -ENOSYS;
+> +	/* Try to find parents which can set rate */
+> +	while (!ops->set_rate) {
+> +		struct clk *parent;
+> +
+> +		if (!(clk->flags & CLK_SET_RATE_PARENT))
+> +			return -ENOSYS;
+> +
+> +		parent = clk_get_parent(clk);
+> +		if (IS_ERR_OR_NULL(parent) || !clk_valid(parent))
+> +			return -ENODEV;
+> +
+> +		clk = parent;
+> +		ops = clk_dev_ops(clk->dev);
+> +	}
 >   
->   int os_close(int fd)
-> @@ -746,7 +746,7 @@ int os_write_ram_buf(const char *fname)
->   	struct sandbox_state *state = state_get_current();
->   	int fd, ret;
->   
-> -	fd = open(fname, O_CREAT | O_WRONLY, 0777);
-> +	fd = open(fname, O_CREAT | O_WRONLY, 0644);
->   	if (fd < 0)
->   		return -ENOENT;
->   	ret = write(fd, state->ram_buf, state->ram_size);
-> @@ -791,7 +791,7 @@ static int make_exec(char *fname, const void *data, int size)
->   	if (write(fd, data, size) < 0)
->   		return -EIO;
->   	close(fd);
-> -	if (chmod(fname, 0777))
-> +	if (chmod(fname, 0755))
->   		return -ENOEXEC;
->   
->   	return 0;
+>   	/* get private clock struct used for cache */
+>   	clk_get_priv(clk, &clkp);
 
-Reviewed-by: Sean Anderson <seanga2@gmail.com>
+Can you give an example of where this is needed?
+
+--Sean
