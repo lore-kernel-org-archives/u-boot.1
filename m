@@ -4,82 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D058CCD128A
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:20:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 744D1CD128A
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:37:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 292B38822B;
-	Thu, 11 Apr 2024 14:20:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 951C488250;
+	Thu, 11 Apr 2024 14:37:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YmjmlVTF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZcsR7omN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 454AB88244; Thu, 11 Apr 2024 14:20:44 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id AC2C288251; Thu, 11 Apr 2024 14:37:38 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FAEB87E47
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:20:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 82D988824A
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:37:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a46ea03c2a5so134428066b.1
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:20:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1e3f17c6491so39692335ad.2
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:37:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712838041; x=1713442841; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=ZRuN9ITnnFJ7BN2bEAbha3KCYr2Xx3bPIOxShXj1ycs=;
- b=YmjmlVTFqjzUmE2d0GFU67TyE7xOniVhQC7DSjSwlLB4/b/UQTVAd49SiZKOOpFp72
- 1LL2WD75P16nGbaWJxQCuyoJQfZqMI1KLljQGKwtQzSp4u58GIgP7a93H8pkVPrG5bF4
- Tbj6OjgUOnPx38/o6LUm+t0krQ4JLOWF4XD4ninxAg0DpWFHDwXCSQb1vFYBr0noY0uv
- 1uLe3Oi07/u5cvHHil4rEpjsgPL45iknwAuHXA0BmSf7AuNiPQahwrJ+veBWLAY8EmsF
- 5imI1vm3ldQ0+yjM21fhrNfgeoxizCGLQOH2lCCr0l5fqzJ7toWwA8htaXPOD1YDpO+w
- aHdw==
+ d=linaro.org; s=google; t=1712839055; x=1713443855; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6DBZc8ZrpmQ9Qf2RjsaspwKuPUVLKAeV7lutQMDhdz4=;
+ b=ZcsR7omN/8gHrLglpF+O9t4ZGmy138u9YAfhk4QHTEqZbuC0u1BUqeJTgPMZV9OhTa
+ VDQBwOAUuA9qvX/gYHbw6D6iX+X87/JfbfpRtvkeDpi40/j79u5fNA2YwxtbKkq8kyTB
+ BWistxQxHZDzuTbba8qYV274v2Y+3G635CfPgF2Bstj/4l8Ji1c0SM+VSSGhd458JQWI
+ Mbf8N6fcdZ2Tg0GCOHzIew42o4iZPK3ndY6vp9dxs2FExnEp61k4r4apJee6VcWRJYrj
+ E5aVB4xtqsT03vcXnxzhKcTPV4sxkc3tIbe4gTODYsWKSBhzJQGAZ7AJD3/uz9rAKFV2
+ eoOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712838041; x=1713442841;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ZRuN9ITnnFJ7BN2bEAbha3KCYr2Xx3bPIOxShXj1ycs=;
- b=m1MllLAvPdB/faSBhq8wsWcACE3jC2c1BNnq2CUgwfDqFHPvgyHULWO62LbLkGH933
- Sy0ACbkHrPx47HXRqhmCR+Sqo+SjmLT5prbf96qSJtjT3ZmpBvbZ/XmvS9H77nRcscdU
- 5+1/QwoUHvk3mdyVJxpgxNS7Uc5jLL2FmGmsV3mtngFM7HkCLklRvk1326VE8gxOy43T
- Gl6XaY6ksM2nuxJB5FTqYcRJJVw31hpDYlWCr17B0h9lDPHEHB+Lq/T8suw44RRGdV9n
- /trrIppSiN9YXSLapA3fIucTH7Ikok9qBofo1TWSB+W9LRdcflpx32byAXFicBr8W/kJ
- 6G9Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUp44jjCccgYT4ljqLnQL3Fte/KYI6YB9YqTalN+juRjZYCElwkqJcmrkxicYhcFvUPyBHmEldEtuFab85krHdQWjoaHQ==
-X-Gm-Message-State: AOJu0YyLoBg1DkP1HDxtpTn7QvhnnuyZo6q9QFgFJUsyq6+Qq+g1wD8G
- OHFmdQ9XfQyJLYYnhm68MJLO+9zvcSwBdc3p4qYSuUHrWeG0vVQ2zthRnz3ibBUKv8sT+L2PQrE
- n
-X-Google-Smtp-Source: AGHT+IHkirHMc4CeSK4nmhJiEURgAvV9kwhhG36K59P8EZqyRnFoRQpTV28f7QzKRhzPs58j0RpztQ==
-X-Received: by 2002:a17:907:1c2a:b0:a4e:410e:9525 with SMTP id
- nc42-20020a1709071c2a00b00a4e410e9525mr2390804ejc.30.1712838041537; 
- Thu, 11 Apr 2024 05:20:41 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::570d? ([2a02:8109:aa0d:be00::570d])
- by smtp.gmail.com with ESMTPSA id
- gv15-20020a170906f10f00b00a517995c070sm703673ejb.33.2024.04.11.05.20.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 11 Apr 2024 05:20:41 -0700 (PDT)
-Message-ID: <1ba79d58-8bf9-413d-845b-b91133a166e7@linaro.org>
-Date: Thu, 11 Apr 2024 14:20:40 +0200
+ d=1e100.net; s=20230601; t=1712839055; x=1713443855;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=6DBZc8ZrpmQ9Qf2RjsaspwKuPUVLKAeV7lutQMDhdz4=;
+ b=kZgDh7HQOfOU//jx76e5LL0REq9TLKJgHCIaQEK4PQA8hKjXBAgGLGESwElsStRFwK
+ OydLaKkdyFe7EDS8YHW+bQDxgEQILrGVCsfuPhlgyagJmPgyyPTalRGxXVH+J3NHB302
+ yyOILeaOlqb32J9dWuFA60NOfamCEcHKL7AsCO53TZTU77fC4mc/1wxrP0+HZy/V1Emu
+ MESTEuJ3Vkc4hZTwuUEwb+k2KaWk51v3NAnvuEElnx5AEV9OvQMYoRzw/LWIcIpqmneH
+ kTFMNdcImGVFn+gejHRYVpLVmCVyY616nEO78ZV6bx3ftugqMpLIcgp4GrTb1R8msU/a
+ bN6Q==
+X-Gm-Message-State: AOJu0YwmVeUDq+pemRj7Vx+tMGqGfSd7I3Vkup62z8Iwk1Jhpx1BeZGh
+ UdjibSZW8MldJD5k9SE3RhMOE03UkMT/9iwhC8DIE+LqBeOZOeTKILsArxxMPzwOVySsMk/ilAA
+ m
+X-Google-Smtp-Source: AGHT+IFaESuj1qW+FJyRxHSgF6OrSpFQG4UYCXLlLX96KVNaTQ4BH6T1pAXtbW0KZqEVbRORLkfk7g==
+X-Received: by 2002:a17:903:41cc:b0:1e4:434d:395b with SMTP id
+ u12-20020a17090341cc00b001e4434d395bmr8187194ple.35.1712839054669; 
+ Thu, 11 Apr 2024 05:37:34 -0700 (PDT)
+Received: from sumit-X1.. ([223.178.210.92]) by smtp.gmail.com with ESMTPSA id
+ u6-20020a170902e5c600b001dda32430b3sm1079652plf.89.2024.04.11.05.37.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Apr 2024 05:37:34 -0700 (PDT)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: u-boot@lists.denx.de
+Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, trini@konsulko.com,
+ stephan@gerhold.net, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH v2] mach-snapdragon: Allow other board vendors apart from Qcom
+Date: Thu, 11 Apr 2024 18:07:26 +0530
+Message-Id: <20240411123726.356173-1-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mach-snapdragon: Allow other board vendors apart from Qcom
-To: Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de
-Cc: neil.armstrong@linaro.org, trini@konsulko.com, stephan@gerhold.net
-References: <20240411115116.344595-1-sumit.garg@linaro.org>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240411115116.344595-1-sumit.garg@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,81 +89,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sumit,
+Qcom SoCs derived boards can come from various OEMs/ODMs and not just
+Qcom itself. So allow CONFIG_SYS_VENDOR to be set correctly
+corressponding to the actual board vendor.
 
-On 11/04/2024 13:51, Sumit Garg wrote:
-> Qcom SoCs derived boards can come from various OEMs/ODMs and not just
-> Qcom itself. So allow CONFIG_SYS_VENDOR to be set correctly
-> corressponding to the actual board vendor.
-> 
-> Suggested-by: Stephan Gerhold <stephan@gerhold.net>
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> ---
->   arch/arm/mach-snapdragon/Kconfig  | 15 +++++++++------
->   configs/dragonboard410c_defconfig |  1 +
->   configs/dragonboard820c_defconfig |  1 +
->   3 files changed, 11 insertions(+), 6 deletions(-)
-> 
-> diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
-> index 96e44e2c549..4615a140d0d 100644
-> --- a/arch/arm/mach-snapdragon/Kconfig
-> +++ b/arch/arm/mach-snapdragon/Kconfig
-> @@ -4,7 +4,11 @@ config SYS_SOC
->   	default "snapdragon"
->   
->   config SYS_VENDOR
-> -	default "qualcomm"
-
-Can you keep the default rather than adding it to the defconfig?
-
-With that
-
+Suggested-by: Stephan Gerhold <stephan@gerhold.net>
 Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-> +	string "Snapdragon board vendor"
-> +	help
-> +	  Allows to specify vendor for the Snapdragon SoCs based boards.
-> +	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
-> +	  will be used as the custom board directory.
->   
->   config SYS_MALLOC_F_LEN
->   	default 0x2000
-> @@ -19,12 +23,11 @@ config LNX_KRNL_IMG_TEXT_OFFSET_BASE
->   	default 0x80000000
->   
->   config SYS_BOARD
-> -	string "Qualcomm custom board"
-> +	string "Snapdragon SoCs based board"
->   	help
-> -	  The Dragonboard 410c and 820c have additional board init
-> -	  code that isn't shared with other Qualcomm boards.
-> -	  Based on this option board/qualcomm/<CONFIG_SYS_BOARD> will
-> -	  be used.
-> +	  Allows to specify the Snapdragon SoCs based board name.
-> +	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
-> +	  will be used as the custom board directory.
->   
->   config SYS_CONFIG_NAME
->   	string "Board configuration name"
-> diff --git a/configs/dragonboard410c_defconfig b/configs/dragonboard410c_defconfig
-> index 260a8349d3b..3b6f50307a3 100644
-> --- a/configs/dragonboard410c_defconfig
-> +++ b/configs/dragonboard410c_defconfig
-> @@ -1,4 +1,5 @@
->   CONFIG_ARM=y
-> +CONFIG_SYS_VENDOR="qualcomm"
->   CONFIG_SYS_BOARD="dragonboard410c"
->   CONFIG_COUNTER_FREQUENCY=19000000
->   CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
-> diff --git a/configs/dragonboard820c_defconfig b/configs/dragonboard820c_defconfig
-> index ebc80eb2a46..a795497ef5d 100644
-> --- a/configs/dragonboard820c_defconfig
-> +++ b/configs/dragonboard820c_defconfig
-> @@ -1,4 +1,5 @@
->   CONFIG_ARM=y
-> +CONFIG_SYS_VENDOR="qualcomm"
->   CONFIG_SYS_BOARD="dragonboard820c"
->   CONFIG_COUNTER_FREQUENCY=19000000
->   CONFIG_ARCH_SNAPDRAGON=y
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+---
 
+Changes in v2:
+- Retained default vendor being "qualcomm".
+- Collected review tag.
+
+ arch/arm/mach-snapdragon/Kconfig | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index 96e44e2c549..536960b83c3 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -4,7 +4,12 @@ config SYS_SOC
+ 	default "snapdragon"
+ 
+ config SYS_VENDOR
++	string "Snapdragon board vendor"
+ 	default "qualcomm"
++	help
++	  Allows to specify vendor for the Snapdragon SoCs based boards.
++	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
++	  will be used as the custom board directory.
+ 
+ config SYS_MALLOC_F_LEN
+ 	default 0x2000
+@@ -19,12 +24,11 @@ config LNX_KRNL_IMG_TEXT_OFFSET_BASE
+ 	default 0x80000000
+ 
+ config SYS_BOARD
+-	string "Qualcomm custom board"
++	string "Snapdragon SoCs based board"
+ 	help
+-	  The Dragonboard 410c and 820c have additional board init
+-	  code that isn't shared with other Qualcomm boards.
+-	  Based on this option board/qualcomm/<CONFIG_SYS_BOARD> will
+-	  be used.
++	  Allows to specify the Snapdragon SoCs based board name.
++	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
++	  will be used as the custom board directory.
+ 
+ config SYS_CONFIG_NAME
+ 	string "Board configuration name"
 -- 
-// Caleb (they/them)
+2.34.1
+
