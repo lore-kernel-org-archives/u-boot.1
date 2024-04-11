@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C002C001CC
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 23:40:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB567C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 23:41:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4DFB87EDF;
-	Fri, 12 Apr 2024 01:40:51 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5856D881ED;
+	Fri, 12 Apr 2024 01:40:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="tyNcSIgG";
+	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="QC9QphV6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AECF87D50; Fri, 12 Apr 2024 01:40:51 +0200 (CEST)
+ id 0B294881FA; Fri, 12 Apr 2024 01:40:54 +0200 (CEST)
 Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
  [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B77C8821D
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 01:40:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8ECF888216
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 01:40:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=greg.malysa@timesys.com
 Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-617e6c873f3so3506127b3.2
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 16:40:47 -0700 (PDT)
+ 00721157ae682-6181d032bf9so3262177b3.3
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 16:40:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1712878846; x=1713483646;
+ d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1712878845; x=1713483645;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3tmjaI4dMrt1WGXODIcoGm2vbyuVVVDfhM1PZt3/LpY=;
- b=tyNcSIgGbWBWNvy68ZePHcIMYdGXUWCRVKQawqKvd9ruG3Fzn1/iUVXAlFDudCuek1
- mSEmQ4HGq6C77xaKBupMZKFYLLznI2/+g/tvXGVyGYl6oPXo4kjLIL1bOZYqS/a4Z9by
- bfl5MBJIAtGRnIesqQnUu8FpZPz+04bSSvTqm3+ASMzCvP+ZDcb72QAjC/qmt/+nrcuw
- YPgxsiNE6HHRWp0KyUqt2i1FccZbfWIfHOQnCmDPfCV7aBUhvO1zFiykDxWd6qdjOO6D
- V9ax4kHk3RRxDlVkAvdEX+2ulcPZlMGk65Zz6vifogwtuPe+dl4FtFOKeJDzuF1dFIds
- Aiuw==
+ bh=esCgvyUmw+mVcob/7DE4tJji2S8fbvhfeqW81lvYzsY=;
+ b=QC9QphV6EiHTyhJPxTgXGUS2Vnzzt3wE1gzSEbMteeHqtnoO+1+EqfSfM3NZGaD/Du
+ 7SVMM25zrgHbqJDaYqXDjZ8tobckTSEyAoS+RQy/M26thSz+EAHTgf1UiY/lvqjzTDk1
+ JWRohu2YpNkVXF/ukTaj13/qZAs14QBwjh02qh6ecY7P7cpunQRzURIw9snYxk25K3+C
+ wunsu4/SnESXrND3tl8xNkS4wHcZaK4f2RNVQ3hjw21NYCDtJOP/0np6buMdthjLWE7d
+ AcIPBurvqBUbv4pNUcgrYCBe2dLiOpgmC+0Y2jrbGoxjKwZIdSMqfMx+W3tyTF/fnq1+
+ S6Sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712878846; x=1713483646;
+ d=1e100.net; s=20230601; t=1712878845; x=1713483645;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3tmjaI4dMrt1WGXODIcoGm2vbyuVVVDfhM1PZt3/LpY=;
- b=BH2pz5YbBtqdcA9hkjV34c7OEb8elj68yXlL4gXaqNZg8R2NQXpIFoLr4oUJucIrFw
- PfEKbCsU8f+lPxIB+vXMuqPHxMBBayVpUKz/rhc4VuYCRppCTS43kMz08+zu6PyyPbVv
- bT511NqsTW82+qgzn0SQrVo8gEv4QaSkKkVdqXbvDGN9OcKJ9oav+3qXsPM2uM/LPKve
- hHovcw7cBL0J1Bi1fxtJ0gy7smA2t9i3WysqYXQtfdVPafQf0BnZE298ar9SzYHmXW9M
- +kVXV0AkVXAGLF1l9eOuraIyuHG89qLk2srCQg1XjZgXkpmE4j5gXV6JvhsI6QWlwVBU
- /PHg==
-X-Gm-Message-State: AOJu0Yy69BRf5T8jcZle4dr31q3t8IdpQ8rT47VOCTfkOFg+g3yTVXoB
- G179kSk4ovlx7oq6+Zt9YulwRQlqOMOcmrOvN3mXScqFISWtQ4nwijs78LQvDJkA430KMqZqkGQ
- pxA==
-X-Google-Smtp-Source: AGHT+IFd6z0PjbqNJQYs6+ImL+XncEgT1h3bTMLiaWFH6GqqGGq5NZOI4oEzZSUlTM2qQsdawkaZ7A==
-X-Received: by 2002:a05:690c:3804:b0:618:7f77:bd7c with SMTP id
- jx4-20020a05690c380400b006187f77bd7cmr317660ywb.3.1712878845859; 
- Thu, 11 Apr 2024 16:40:45 -0700 (PDT)
+ bh=esCgvyUmw+mVcob/7DE4tJji2S8fbvhfeqW81lvYzsY=;
+ b=KpOs4aO09E9qwIiolh4fTI9184xrmG6Yh/Pqg1EYJm/J5AtNCvSV6pdvb0N5bQR0Wh
+ ZgPrViZKEokNino6JM4Nu/L/DRvt5lxElFuKbKpC1YxgaQmL0Zn23+Chd9G56oxzq1Lv
+ LoQJV7aJ/oFAxLa4/YWKuLdaatT3eA+aZl7ZxSSw4SGznCrFDXayto+1Cyl0WAqA2LXb
+ am05ePCaGHiaEdjR/+lLw0Rmg5OP0aVLBngZjfsWInIkvIzJo+Qqnf9Rn3E9oIk9KnUd
+ reEuTM2ohz9xjoRSVOjNdcXeTY/oajTxr1n7cYIKggckOBnEJZIYPrGB2RrBKFIOywKh
+ pbwA==
+X-Gm-Message-State: AOJu0Yy05SeQz+7R5RfYGnXveqtBTfg6DkZW3gA30m2xOjuqe6if+vLJ
+ zhuDyYJbKqe6rkWJfNdy+/M0CP/S0V+46juUKq9XKV+cx3n1/lTHzzFgkYl3narMfsVPLNB9EVJ
+ JRA==
+X-Google-Smtp-Source: AGHT+IE3fKb4/oMgvd2iNC2KpdowbiBUKkMJecjnZ6cf7ucxKtCJi5pY+MfMjK7IZPPIuHoRMVdJNw==
+X-Received: by 2002:a0d:dd47:0:b0:618:3a50:1553 with SMTP id
+ g68-20020a0ddd47000000b006183a501553mr969976ywe.23.1712878844756; 
+ Thu, 11 Apr 2024 16:40:44 -0700 (PDT)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- j19-20020a81ec13000000b00617b17f8572sm533855ywm.104.2024.04.11.16.40.45
+ j19-20020a81ec13000000b00617b17f8572sm533855ywm.104.2024.04.11.16.40.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 16:40:45 -0700 (PDT)
+ Thu, 11 Apr 2024 16:40:44 -0700 (PDT)
 From: Greg Malysa <greg.malysa@timesys.com>
 To: u-boot@lists.denx.de
 Cc: Matthew McClintock <Matthew.Mcclintock@analog.com>,
@@ -75,19 +75,23 @@ Cc: Matthew McClintock <Matthew.Mcclintock@analog.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
  Utsav Agarwal <utsav.agarwal@analog.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Andre Przywara <andre.przywara@arm.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Frieder Schrempf <frieder.schrempf@kontron.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
  Manorit Chawdhry <m-chawdhry@ti.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/3] drivers: serial: Add in UART for ADI SC5XX-family
- processors
-Date: Thu, 11 Apr 2024 19:37:30 -0400
-Message-ID: <20240411234021.14534-4-greg.malysa@timesys.com>
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Samuel Holland <samuel@sholland.org>, Sean Anderson <seanga2@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Yanhong Wang <yanhong.wang@starfivetech.com>
+Subject: [PATCH 2/3] drivers: clk: adi: Add in SC5XX-family clock driver
+Date: Thu, 11 Apr 2024 19:37:29 -0400
+Message-ID: <20240411234021.14534-3-greg.malysa@timesys.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240411234021.14534-1-greg.malysa@timesys.com>
 References: <20240411234021.14534-1-greg.malysa@timesys.com>
@@ -111,6 +115,10 @@ X-Virus-Status: Clean
 
 From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 
+This adds support for the SC5XX clock trees which are required for reading
+clock speeds on the SoCs. This is largely a port of the same support for
+Linux, which has not yet been submitted upstream.
+
 Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
 Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
 Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
@@ -121,267 +129,1724 @@ Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
 Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 ---
 
- MAINTAINERS                       |   1 +
- drivers/serial/Makefile           |   1 +
- drivers/serial/serial_adi_uart4.c | 228 ++++++++++++++++++++++++++++++
- 3 files changed, 230 insertions(+)
- create mode 100644 drivers/serial/serial_adi_uart4.c
+ MAINTAINERS                                 |   1 +
+ drivers/clk/Kconfig                         |   1 +
+ drivers/clk/Makefile                        |   1 +
+ drivers/clk/adi/Kconfig                     |  83 ++++++
+ drivers/clk/adi/Makefile                    |  16 +
+ drivers/clk/adi/clk-adi-pll.c               |  94 ++++++
+ drivers/clk/adi/clk-adi-sc57x.c             | 205 +++++++++++++
+ drivers/clk/adi/clk-adi-sc58x.c             | 221 ++++++++++++++
+ drivers/clk/adi/clk-adi-sc594.c             | 230 +++++++++++++++
+ drivers/clk/adi/clk-adi-sc598.c             | 307 ++++++++++++++++++++
+ drivers/clk/adi/clk-shared.c                |  48 +++
+ drivers/clk/adi/clk.h                       | 122 ++++++++
+ include/dt-bindings/clock/adi-sc5xx-clock.h | 271 +++++++++++++++++
+ 13 files changed, 1600 insertions(+)
+ create mode 100644 drivers/clk/adi/Kconfig
+ create mode 100644 drivers/clk/adi/Makefile
+ create mode 100644 drivers/clk/adi/clk-adi-pll.c
+ create mode 100644 drivers/clk/adi/clk-adi-sc57x.c
+ create mode 100644 drivers/clk/adi/clk-adi-sc58x.c
+ create mode 100644 drivers/clk/adi/clk-adi-sc594.c
+ create mode 100644 drivers/clk/adi/clk-adi-sc598.c
+ create mode 100644 drivers/clk/adi/clk-shared.c
+ create mode 100644 drivers/clk/adi/clk.h
+ create mode 100644 include/dt-bindings/clock/adi-sc5xx-clock.h
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index a9f52a6c7e..b1f206bb05 100644
+index 9693b86ddd..a9f52a6c7e 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -610,6 +610,7 @@ T:	git https://github.com/analogdevicesinc/lnxdsp-u-boot
+@@ -609,6 +609,7 @@ S:	Supported
+ T:	git https://github.com/analogdevicesinc/lnxdsp-u-boot
  F:	arch/arm/include/asm/arch-adi/
  F:	arch/arm/mach-sc5xx/
- F:	drivers/clk/adi/
-+F:	drivers/serial/serial_adi_uart4.c
++F:	drivers/clk/adi/
  F:	include/configs/sc_adi_common.h
  
  ARM SNAPDRAGON
-diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
-index 403ab1ded6..dbe598b740 100644
---- a/drivers/serial/Makefile
-+++ b/drivers/serial/Makefile
-@@ -65,3 +65,4 @@ obj-$(CONFIG_S5P4418_PL011_SERIAL) += serial_s5p4418_pl011.o
- ifndef CONFIG_SPL_BUILD
- obj-$(CONFIG_USB_TTY) += usbtty.o
- endif
-+obj-$(CONFIG_UART4_SERIAL) += serial_adi_uart4.o
-diff --git a/drivers/serial/serial_adi_uart4.c b/drivers/serial/serial_adi_uart4.c
+diff --git a/drivers/clk/Kconfig b/drivers/clk/Kconfig
+index 017dd260a5..d8c619add4 100644
+--- a/drivers/clk/Kconfig
++++ b/drivers/clk/Kconfig
+@@ -246,6 +246,7 @@ config CLK_ZYNQMP
+ 	  This clock driver adds support for clock realted settings for
+ 	  ZynqMP platform.
+ 
++source "drivers/clk/adi/Kconfig"
+ source "drivers/clk/analogbits/Kconfig"
+ source "drivers/clk/at91/Kconfig"
+ source "drivers/clk/exynos/Kconfig"
+diff --git a/drivers/clk/Makefile b/drivers/clk/Makefile
+index 638ad04bae..847b9b2911 100644
+--- a/drivers/clk/Makefile
++++ b/drivers/clk/Makefile
+@@ -12,6 +12,7 @@ obj-$(CONFIG_$(SPL_TPL_)CLK_CCF) += clk-fixed-factor.o
+ obj-$(CONFIG_$(SPL_TPL_)CLK_COMPOSITE_CCF) += clk-composite.o
+ obj-$(CONFIG_$(SPL_TPL_)CLK_GPIO) += clk-gpio.o
+ 
++obj-y += adi/
+ obj-y += analogbits/
+ obj-y += imx/
+ obj-$(CONFIG_CLK_JH7110) += starfive/
+diff --git a/drivers/clk/adi/Kconfig b/drivers/clk/adi/Kconfig
 new file mode 100644
-index 0000000000..b92ce3ddd1
+index 0000000000..5745bedf88
 --- /dev/null
-+++ b/drivers/serial/serial_adi_uart4.c
-@@ -0,0 +1,228 @@
++++ b/drivers/clk/adi/Kconfig
+@@ -0,0 +1,83 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# (C) Copyright 2022 - Analog Devices, Inc.
++#
++# Written and/or maintained by Timesys Corporation
++#
++# Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++# Contact: Greg Malysa <greg.malysa@timesys.com>
++#
++
++config COMMON_CLK_ADI_SHARED
++	bool "Enable shared ADI clock framework code"
++	help
++	  Required for shared code between SoC clock drivers. Automatically
++	  selected by an appropriate SoC-specific clock driver version.
++
++config COMMON_CLK_ADI_SC598
++	bool "Clock driver for ADI SC598 SoCs"
++	select DM
++	select CLK
++	select CLK_CCF
++	select OF_CONTROL
++	select CMD_CLK
++	select SPL_DM if SPL
++	select SPL_CLK if SPL
++	select SPL_CLK_CCF if SPL
++	select SPL_OF_CONTROL if SPL
++	select COMMON_CLK_ADI_SHARED
++	depends on SC59X_64
++	help
++	  This driver supports the system clocks on Analog Devices SC598-series
++	  SoCs. It includes CGU and CDU clocks and supports gating unused clocks.
++	  Modifying PLL configuration is not supported; that must be done prior
++	  to booting the kernel. Clock dividers after the PLLs may be configured.
++
++config COMMON_CLK_ADI_SC594
++	bool "Clock driver for ADI SC594 SoCs"
++	select DM
++	select CLK
++	select CLK_CCF
++	select OF_CONTROL
++	select CMD_CLK
++	select SPL_DM if SPL
++	select SPL_CLK if SPL
++	select SPL_CLK_CCF if SPL
++	select SPL_OF_CONTROL if SPL
++	select COMMON_CLK_ADI_SHARED
++	depends on SC59X
++	help
++	  This driver supports the system clocks on Analog Devices SC594-series
++	  SoCs. It includes CGU and CDU clocks and supports gating unused clocks.
++	  Modifying PLL configuration is not supported; that must be done prior
++	  to booting the kernel. Clock dividers after the PLLs may be configured.
++
++config COMMON_CLK_ADI_SC58X
++	bool "Clock driver for ADI SC58X SoCs"
++	select DM
++	select CLK
++	select CLK_CCF
++	select OF_CONTROL
++	select CMD_CLK
++	select COMMON_CLK_ADI_SHARED
++	depends on SC58X
++	help
++	  This driver supports the system clocks on Analog Devices SC58x-series
++	  SoCs. It includes CGU and CDU clocks and supports gating unused clocks.
++	  Modifying PLL configuration is not supported; that must be done prior
++	  to booting the kernel. Clock dividers after the PLLs may be configured.
++
++config COMMON_CLK_ADI_SC57X
++	bool "Clock driver for ADI SC57X SoCs"
++	select DM
++	select CLK
++	select CLK_CCF
++	select OF_CONTROL
++	select CMD_CLK
++	select COMMON_CLK_ADI_SHARED
++	depends on SC57X
++	help
++	  This driver supports the system clocks on Analog Devices SC57x-series
++	  SoCs. It includes CGU and CDU clocks and supports gating unused clocks.
++	  Modifying PLL configuration is not supported; that must be done prior
++	  to booting the kernel. Clock dividers after the PLLs may be configured.
+diff --git a/drivers/clk/adi/Makefile b/drivers/clk/adi/Makefile
+new file mode 100644
+index 0000000000..f3f1fd92e5
+--- /dev/null
++++ b/drivers/clk/adi/Makefile
+@@ -0,0 +1,16 @@
++# SPDX-License-Identifier: GPL-2.0-or-later
++#
++# (C) Copyright 2022 - Analog Devices, Inc.
++#
++# Written and/or maintained by Timesys Corporation
++#
++# Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++# Contact: Greg Malysa <greg.malysa@timesys.com>
++#
++
++obj-$(CONFIG_COMMON_CLK_ADI_SHARED) += clk-shared.o clk-adi-pll.o
++
++obj-$(CONFIG_COMMON_CLK_ADI_SC594)  += clk-adi-sc594.o
++obj-$(CONFIG_COMMON_CLK_ADI_SC598)  += clk-adi-sc598.o
++obj-$(CONFIG_COMMON_CLK_ADI_SC58X)  += clk-adi-sc58x.o
++obj-$(CONFIG_COMMON_CLK_ADI_SC57X)  += clk-adi-sc57x.o
+diff --git a/drivers/clk/adi/clk-adi-pll.c b/drivers/clk/adi/clk-adi-pll.c
+new file mode 100644
+index 0000000000..6a99011b86
+--- /dev/null
++++ b/drivers/clk/adi/clk-adi-pll.c
+@@ -0,0 +1,94 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
 + * (C) Copyright 2022 - Analog Devices, Inc.
 + *
 + * Written and/or maintained by Timesys Corporation
 + *
-+ * Converted to driver model by Nathan Barrett-Morrison
++ * Author: Greg Malysa <greg.malysa@timesys.com>
++ *
++ * Ported from Linux: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++ */
++
++#include <asm/io.h>
++#include <div64.h>
++#include <malloc.h>
++#include <clk-uclass.h>
++#include <dm/device.h>
++#include <dm/devres.h>
++#include <dm/uclass.h>
++#include <clk.h>
++#include "clk.h"
++#include <linux/err.h>
++
++#define ADI_CLK_PLL_GENERIC "adi_clk_pll_generic"
++
++struct clk_sc5xx_cgu_pll {
++	struct clk clk;
++	void __iomem *base;
++	u32 mask;
++	u32 max;
++	u32 m_offset;
++	u8 shift;
++	bool half_m;
++};
++
++#define to_clk_sc5xx_cgu_pll(_clk) container_of(_clk, struct clk_sc5xx_cgu_pll, clk)
++
++static unsigned long sc5xx_cgu_pll_get_rate(struct clk *clk)
++{
++	struct clk_sc5xx_cgu_pll *pll = to_clk_sc5xx_cgu_pll(dev_get_clk_ptr(clk->dev));
++	unsigned long parent_rate = clk_get_parent_rate(clk);
++
++	u32 reg = readl(pll->base);
++	u32 m = ((reg & pll->mask) >> pll->shift) + pll->m_offset;
++
++	if (m == 0)
++		m = pll->max;
++
++	if (pll->half_m)
++		return parent_rate * m * 2;
++	return parent_rate * m;
++}
++
++static const struct clk_ops clk_sc5xx_cgu_pll_ops = {
++	.get_rate = sc5xx_cgu_pll_get_rate,
++};
++
++struct clk *sc5xx_cgu_pll(const char *name, const char *parent_name,
++			  void __iomem *base, u8 shift, u8 width, u32 m_offset,
++			  bool half_m)
++{
++	struct clk_sc5xx_cgu_pll *pll;
++	struct clk *clk;
++	int ret;
++	char *drv_name = ADI_CLK_PLL_GENERIC;
++
++	pll = kzalloc(sizeof(*pll), GFP_KERNEL);
++	if (!pll)
++		return ERR_PTR(-ENOMEM);
++
++	pll->base = base;
++	pll->shift = shift;
++	pll->mask = GENMASK(width - 1, 0) << shift;
++	pll->max = pll->mask + 1;
++	pll->m_offset = m_offset;
++	pll->half_m = half_m;
++
++	clk = &pll->clk;
++
++	ret = clk_register(clk, drv_name, name, parent_name);
++	if (ret) {
++		pr_err("Failed to register %s in %s: %d\n", name, __func__, ret);
++		kfree(pll);
++		return ERR_PTR(ret);
++	}
++
++	return clk;
++}
++
++U_BOOT_DRIVER(clk_adi_pll_generic) = {
++	.name	= ADI_CLK_PLL_GENERIC,
++	.id	= UCLASS_CLK,
++	.ops	= &clk_sc5xx_cgu_pll_ops,
++	.flags = DM_FLAG_PRE_RELOC,
++};
+diff --git a/drivers/clk/adi/clk-adi-sc57x.c b/drivers/clk/adi/clk-adi-sc57x.c
+new file mode 100644
+index 0000000000..6756c9f77c
+--- /dev/null
++++ b/drivers/clk/adi/clk-adi-sc57x.c
+@@ -0,0 +1,205 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2022 - Analog Devices, Inc.
++ *
++ * Written and/or maintained by Timesys Corporation
++ *
++ * Author: Greg Malysa <greg.malysa@timesys.com>
++ *
++ * Ported from Linux: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++ */
++
++#include <clk.h>
++#include <clk-uclass.h>
++#include <dm.h>
++#include <log.h>
++#include <linux/types.h>
++#include <linux/clk-provider.h>
++#include <linux/ioport.h>
++#include <linux/io.h>
++#include <dt-bindings/clock/adi-sc5xx-clock.h>
++
++#include "clk.h"
++
++static const char * const cgu1_in_sels[] = {"sys_clkin0", "sys_clkin1"};
++static const char * const sharc0_sels[] = {"cclk0_0", "sysclk_0", "dummy", "dummy"};
++static const char * const sharc1_sels[] = {"cclk0_0", "sysclk_0", "dummy", "dummy"};
++static const char * const arm_sels[] = {"cclk1_0", "sysclk_0", "dummy", "dummy"};
++static const char * const cdu_ddr_sels[] = {"dclk_0", "dclk_1", "dummy", "dummy"};
++static const char * const can_sels[] = {"oclk_0", "oclk_1", "dclk_1", "oclk_0_half"};
++static const char * const spdif_sels[] = {"oclk_0", "oclk_1", "dclk_1", "dclk_0"};
++static const char * const gige_sels[] = {"sclk1_0", "sclk1_1", "cclk0_1", "oclk_0"};
++static const char * const sdio_sels[] = {"oclk_0_half", "cclk1_1_half", "cclk1_1",
++	"dclk_1"};
++
++static int sc57x_clock_probe(struct udevice *dev)
++{
++	void __iomem *cgu0;
++	void __iomem *cgu1;
++	void __iomem *cdu;
++	int ret;
++	struct resource res;
++
++	struct clk *clks[ADSP_SC57X_CLK_END];
++	struct clk dummy, clkin0, clkin1;
++
++	ret = dev_read_resource_byname(dev, "cgu0", &res);
++	if (ret)
++		return ret;
++	cgu0 = devm_ioremap(dev, res.start, resource_size(&res));
++
++	ret = dev_read_resource_byname(dev, "cgu1", &res);
++	if (ret)
++		return ret;
++	cgu1 = devm_ioremap(dev, res.start, resource_size(&res));
++
++	ret = dev_read_resource_byname(dev, "cdu", &res);
++	if (ret)
++		return ret;
++	cdu = devm_ioremap(dev, res.start, resource_size(&res));
++
++	// Input clock configuration
++	clk_get_by_name(dev, "dummy", &dummy);
++	clk_get_by_name(dev, "sys_clkin0", &clkin0);
++	clk_get_by_name(dev, "sys_clkin1", &clkin1);
++
++	clks[ADSP_SC57X_CLK_DUMMY] = &dummy;
++	clks[ADSP_SC57X_CLK_SYS_CLKIN0] = &clkin0;
++	clks[ADSP_SC57X_CLK_SYS_CLKIN1] = &clkin1;
++
++	clks[ADSP_SC57X_CLK_CGU1_IN] = clk_register_mux(NULL, "cgu1_in_sel", cgu1_in_sels,
++							2, CLK_SET_RATE_PARENT,
++							cdu + CDU_CLKINSEL, 0, 1, 0);
++
++	// CGU configuration and internal clocks
++	clks[ADSP_SC57X_CLK_CGU0_PLL_IN] = clk_register_divider(NULL, "cgu0_df",
++								"sys_clkin0",
++								CLK_SET_RATE_PARENT,
++								cgu0 + CGU_CTL, 0, 1, 0);
++	clks[ADSP_SC57X_CLK_CGU1_PLL_IN] = clk_register_divider(NULL, "cgu1_df",
++								"cgu1_in_sel",
++								CLK_SET_RATE_PARENT,
++								cgu1 + CGU_CTL, 0, 1, 0);
++
++	// VCO output == PLL output
++	clks[ADSP_SC57X_CLK_CGU0_PLLCLK] = sc5xx_cgu_pll("cgu0_pllclk", "cgu0_df",
++							 cgu0 + CGU_CTL, CGU_MSEL_SHIFT,
++							 CGU_MSEL_WIDTH, 0, false);
++	clks[ADSP_SC57X_CLK_CGU1_PLLCLK] = sc5xx_cgu_pll("cgu1_pllclk", "cgu1_df",
++							 cgu1 + CGU_CTL, CGU_MSEL_SHIFT,
++							 CGU_MSEL_WIDTH, 0, false);
++
++	// Dividers from pll output
++	clks[ADSP_SC57X_CLK_CGU0_CDIV] = cgu_divider("cgu0_cdiv", "cgu0_pllclk",
++						     cgu0 + CGU_DIV, 0, 5, 0);
++	clks[ADSP_SC57X_CLK_CGU0_SYSCLK] = cgu_divider("sysclk_0", "cgu0_pllclk",
++						       cgu0 + CGU_DIV, 8, 5, 0);
++	clks[ADSP_SC57X_CLK_CGU0_DDIV] = cgu_divider("cgu0_ddiv", "cgu0_pllclk",
++						     cgu0 + CGU_DIV, 16, 5, 0);
++	clks[ADSP_SC57X_CLK_CGU0_ODIV] = cgu_divider("cgu0_odiv", "cgu0_pllclk",
++						     cgu0 + CGU_DIV, 22, 7, 0);
++	clks[ADSP_SC57X_CLK_CGU0_S0SELDIV] = cgu_divider("cgu0_s0seldiv", "sysclk_0",
++							 cgu0 + CGU_DIV, 5, 3, 0);
++	clks[ADSP_SC57X_CLK_CGU0_S1SELDIV] = cgu_divider("cgu0_s1seldiv", "sysclk_0",
++							 cgu0 + CGU_DIV, 13, 3, 0);
++
++	clks[ADSP_SC57X_CLK_CGU1_CDIV] = cgu_divider("cgu1_cdiv", "cgu1_pllclk",
++						     cgu1 + CGU_DIV, 0, 5, 0);
++	clks[ADSP_SC57X_CLK_CGU1_SYSCLK] = cgu_divider("sysclk_1", "cgu1_pllclk",
++						       cgu1 + CGU_DIV, 8, 5, 0);
++	clks[ADSP_SC57X_CLK_CGU1_DDIV] = cgu_divider("cgu1_ddiv", "cgu1_pllclk",
++						     cgu1 + CGU_DIV, 16, 5, 0);
++	clks[ADSP_SC57X_CLK_CGU1_ODIV] = cgu_divider("cgu1_odiv", "cgu1_pllclk",
++						     cgu1 + CGU_DIV, 22, 7, 0);
++	clks[ADSP_SC57X_CLK_CGU1_S0SELDIV] = cgu_divider("cgu1_s0seldiv",
++							 "sysclk_1", cgu1 + CGU_DIV, 5,
++							 3, 0);
++	clks[ADSP_SC57X_CLK_CGU1_S1SELDIV] = cgu_divider("cgu1_s1seldiv",
++							 "sysclk_1", cgu1 + CGU_DIV, 13,
++							 3, 0);
++
++	// Gates to enable CGU outputs
++	clks[ADSP_SC57X_CLK_CGU0_CCLK0] = cgu_gate("cclk0_0", "cgu0_cdiv",
++						   cgu0 + CGU_CCBF_DIS, 0);
++	clks[ADSP_SC57X_CLK_CGU0_CCLK1] = cgu_gate("cclk1_0", "cgu0_cdiv",
++						   cgu1 + CGU_CCBF_DIS, 1);
++	clks[ADSP_SC57X_CLK_CGU0_OCLK] = cgu_gate("oclk_0", "cgu0_odiv",
++						  cgu0 + CGU_SCBF_DIS, 3);
++	clks[ADSP_SC57X_CLK_CGU0_DCLK] = cgu_gate("dclk_0", "cgu0_ddiv",
++						  cgu0 + CGU_SCBF_DIS, 2);
++	clks[ADSP_SC57X_CLK_CGU0_SCLK1] = cgu_gate("sclk1_0", "cgu0_s1seldiv",
++						   cgu0 + CGU_SCBF_DIS, 1);
++	clks[ADSP_SC57X_CLK_CGU0_SCLK0] = cgu_gate("sclk0_0", "cgu0_s0seldiv",
++						   cgu0 + CGU_SCBF_DIS, 0);
++
++	clks[ADSP_SC57X_CLK_CGU1_CCLK0] = cgu_gate("cclk0_1", "cgu1_cdiv",
++						   cgu1 + CGU_CCBF_DIS, 0);
++	clks[ADSP_SC57X_CLK_CGU1_CCLK1] = cgu_gate("cclk1_1", "cgu1_cdiv",
++						   cgu1 + CGU_CCBF_DIS, 1);
++	clks[ADSP_SC57X_CLK_CGU1_OCLK] = cgu_gate("oclk_1", "cgu1_odiv",
++						  cgu1 + CGU_SCBF_DIS, 3);
++	clks[ADSP_SC57X_CLK_CGU1_DCLK] = cgu_gate("dclk_1", "cgu1_ddiv",
++						  cgu1 + CGU_SCBF_DIS, 2);
++	clks[ADSP_SC57X_CLK_CGU1_SCLK1] = cgu_gate("sclk1_1", "cgu1_s1seldiv",
++						   cgu1 + CGU_SCBF_DIS, 1);
++	clks[ADSP_SC57X_CLK_CGU1_SCLK0] = cgu_gate("sclk0_1", "cgu1_s0seldiv",
++						   cgu1 + CGU_SCBF_DIS, 0);
++
++	// Extra half rate clocks generated in the CDU
++	clks[ADSP_SC57X_CLK_OCLK0_HALF] = clk_register_fixed_factor(NULL, "oclk_0_half",
++								    "oclk_0",
++								    CLK_SET_RATE_PARENT,
++								    1, 2);
++	clks[ADSP_SC57X_CLK_CCLK1_1_HALF] = clk_register_fixed_factor(NULL,
++								      "cclk1_1_half",
++								      "cclk1_1",
++								      CLK_SET_RATE_PARENT,
++								      1, 2);
++
++	// CDU output muxes
++	clks[ADSP_SC57X_CLK_SHARC0_SEL] = cdu_mux("sharc0_sel", cdu + CDU_CFG0,
++						  sharc0_sels);
++	clks[ADSP_SC57X_CLK_SHARC1_SEL] = cdu_mux("sharc1_sel", cdu + CDU_CFG1,
++						  sharc1_sels);
++	clks[ADSP_SC57X_CLK_ARM_SEL] = cdu_mux("arm_sel", cdu + CDU_CFG2, arm_sels);
++	clks[ADSP_SC57X_CLK_CDU_DDR_SEL] = cdu_mux("cdu_ddr_sel", cdu + CDU_CFG3,
++						   cdu_ddr_sels);
++	clks[ADSP_SC57X_CLK_CAN_SEL] = cdu_mux("can_sel", cdu + CDU_CFG4, can_sels);
++	clks[ADSP_SC57X_CLK_SPDIF_SEL] = cdu_mux("spdif_sel", cdu + CDU_CFG5, spdif_sels);
++	clks[ADSP_SC57X_CLK_GIGE_SEL] = cdu_mux("gige_sel", cdu + CDU_CFG7, gige_sels);
++	clks[ADSP_SC57X_CLK_SDIO_SEL] = cdu_mux("sdio_sel", cdu + CDU_CFG9, sdio_sels);
++
++	// CDU output enable gates
++	clks[ADSP_SC57X_CLK_SHARC0] = cdu_gate("sharc0", "sharc0_sel", cdu + CDU_CFG0,
++					       CLK_IS_CRITICAL);
++	clks[ADSP_SC57X_CLK_SHARC1] = cdu_gate("sharc1", "sharc1_sel", cdu + CDU_CFG1,
++					       CLK_IS_CRITICAL);
++	clks[ADSP_SC57X_CLK_ARM] = cdu_gate("arm", "arm_sel", cdu + CDU_CFG2,
++					    CLK_IS_CRITICAL);
++	clks[ADSP_SC57X_CLK_CDU_DDR] = cdu_gate("cdu_ddr", "cdu_ddr_sel", cdu + CDU_CFG3,
++						CLK_IS_CRITICAL);
++	clks[ADSP_SC57X_CLK_CAN] = cdu_gate("can", "can_sel", cdu + CDU_CFG4, 0);
++	clks[ADSP_SC57X_CLK_SPDIF] = cdu_gate("spdif", "spdif_sel", cdu + CDU_CFG5, 0);
++	clks[ADSP_SC57X_CLK_GIGE] = cdu_gate("gige", "gige_sel", cdu + CDU_CFG7, 0);
++	clks[ADSP_SC57X_CLK_SDIO] = cdu_gate("sdio", "sdio_sel", cdu + CDU_CFG9, 0);
++
++	ret = cdu_check_clocks(clks, ARRAY_SIZE(clks));
++	if (ret)
++		pr_err("CDU error detected\n");
++
++	return ret;
++}
++
++static const struct udevice_id adi_sc57x_clk_ids[] = {
++	{ .compatible = "adi,sc57x-clocks" },
++	{ },
++};
++
++U_BOOT_DRIVER(adi_sc57x_clk) = {
++	.name = "clk_adi_sc57x",
++	.id = UCLASS_CLK,
++	.of_match = adi_sc57x_clk_ids,
++	.ops		= &adi_clk_ops,
++	.probe = sc57x_clock_probe,
++	.flags = DM_FLAG_PRE_RELOC,
++};
+diff --git a/drivers/clk/adi/clk-adi-sc58x.c b/drivers/clk/adi/clk-adi-sc58x.c
+new file mode 100644
+index 0000000000..07df7acaa5
+--- /dev/null
++++ b/drivers/clk/adi/clk-adi-sc58x.c
+@@ -0,0 +1,221 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2022 - Analog Devices, Inc.
++ *
++ * Written and/or maintained by Timesys Corporation
++ *
++ * Author: Greg Malysa <greg.malysa@timesys.com>
++ *
++ * Ported from Linux: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++ */
++
++#include <clk.h>
++#include <clk-uclass.h>
++#include <dm.h>
++#include <log.h>
++#include <linux/types.h>
++#include <linux/clk-provider.h>
++#include <linux/ioport.h>
++#include <linux/io.h>
++#include <dt-bindings/clock/adi-sc5xx-clock.h>
++
++#include "clk.h"
++
++static const char * const cgu1_in_sels[] = {"sys_clkin0", "sys_clkin1"};
++static const char * const sharc0_sels[] = {"cclk0_0", "sysclk_0", "dummy", "dummy"};
++static const char * const sharc1_sels[] = {"cclk0_0", "sysclk_0", "dummy", "dummy"};
++static const char * const arm_sels[] = {"cclk1_0", "sysclk_0", "dummy", "dummy"};
++static const char * const cdu_ddr_sels[] = {"dclk_0", "dclk_1", "dummy", "dummy"};
++static const char * const can_sels[] = {"oclk_0", "oclk_1", "dclk_1", "dummy"};
++static const char * const spdif_sels[] = {"oclk_0", "oclk_1", "dclk_1", "dclk_0"};
++static const char * const reserved_sels[] = {"sclk0_0", "oclk_0", "dummy", "dummy"};
++static const char * const gige_sels[] = {"sclk0_0", "sclk1_1", "cclk0_1", "oclk_0"};
++static const char * const lp_sels[] = {"sclk0_0", "sclk0_1", "cclk1_1", "dclk_1"};
++static const char * const sdio_sels[] = {"oclk_0_half", "cclk1_1_half", "cclk1_1",
++	"dclk_1"};
++
++static int sc58x_clock_probe(struct udevice *dev)
++{
++	void __iomem *cgu0;
++	void __iomem *cgu1;
++	void __iomem *cdu;
++	int ret;
++	struct resource res;
++
++	struct clk *clks[ADSP_SC58X_CLK_END];
++	struct clk dummy, clkin0, clkin1;
++
++	ret = dev_read_resource_byname(dev, "cgu0", &res);
++	if (ret)
++		return ret;
++	cgu0 = devm_ioremap(dev, res.start, resource_size(&res));
++
++	ret = dev_read_resource_byname(dev, "cgu1", &res);
++	if (ret)
++		return ret;
++	cgu1 = devm_ioremap(dev, res.start, resource_size(&res));
++
++	ret = dev_read_resource_byname(dev, "cdu", &res);
++	if (ret)
++		return ret;
++	cdu = devm_ioremap(dev, res.start, resource_size(&res));
++
++	// Input clock configuration
++	clk_get_by_name(dev, "dummy", &dummy);
++	clk_get_by_name(dev, "sys_clkin0", &clkin0);
++	clk_get_by_name(dev, "sys_clkin1", &clkin1);
++
++	clks[ADSP_SC58X_CLK_DUMMY] = &dummy;
++	clks[ADSP_SC58X_CLK_SYS_CLKIN0] = &clkin0;
++	clks[ADSP_SC58X_CLK_SYS_CLKIN1] = &clkin1;
++
++	clks[ADSP_SC58X_CLK_CGU1_IN] = clk_register_mux(NULL, "cgu1_in_sel", cgu1_in_sels,
++							2, CLK_SET_RATE_PARENT,
++							cdu + CDU_CLKINSEL, 0, 1, 0);
++
++	// CGU configuration and internal clocks
++	clks[ADSP_SC58X_CLK_CGU0_PLL_IN] = clk_register_divider(NULL, "cgu0_df",
++								"sys_clkin0",
++								CLK_SET_RATE_PARENT,
++								cgu0 + CGU_CTL, 0, 1, 0);
++	clks[ADSP_SC58X_CLK_CGU1_PLL_IN] = clk_register_divider(NULL, "cgu1_df",
++								"cgu1_in_sel",
++								CLK_SET_RATE_PARENT,
++								cgu1 + CGU_CTL, 0, 1, 0);
++
++	// VCO output inside PLL
++	clks[ADSP_SC58X_CLK_CGU0_VCO_OUT] = sc5xx_cgu_pll("cgu0_vco", "cgu0_df",
++							  cgu0 + CGU_CTL, CGU_MSEL_SHIFT,
++							  CGU_MSEL_WIDTH, 0, false);
++	clks[ADSP_SC58X_CLK_CGU1_VCO_OUT] = sc5xx_cgu_pll("cgu1_vco", "cgu1_df",
++							  cgu1 + CGU_CTL, CGU_MSEL_SHIFT,
++							  CGU_MSEL_WIDTH, 0, false);
++
++	// Final PLL output
++	clks[ADSP_SC58X_CLK_CGU0_PLLCLK] = clk_register_fixed_factor(NULL, "cgu0_pllclk",
++								     "cgu0_vco",
++								     CLK_SET_RATE_PARENT,
++								     1, 1);
++	clks[ADSP_SC58X_CLK_CGU1_PLLCLK] = clk_register_fixed_factor(NULL, "cgu1_pllclk",
++								     "cgu1_vco",
++								     CLK_SET_RATE_PARENT,
++								     1, 1);
++
++	// Dividers from pll output
++	clks[ADSP_SC58X_CLK_CGU0_CDIV] = cgu_divider("cgu0_cdiv", "cgu0_pllclk",
++						     cgu0 + CGU_DIV, 0, 5, 0);
++	clks[ADSP_SC58X_CLK_CGU0_SYSCLK] = cgu_divider("sysclk_0", "cgu0_pllclk",
++						       cgu0 + CGU_DIV, 8, 5, 0);
++	clks[ADSP_SC58X_CLK_CGU0_DDIV] = cgu_divider("cgu0_ddiv", "cgu0_pllclk",
++						     cgu0 + CGU_DIV, 16, 5, 0);
++	clks[ADSP_SC58X_CLK_CGU0_ODIV] = cgu_divider("cgu0_odiv", "cgu0_pllclk",
++						     cgu0 + CGU_DIV, 22, 7, 0);
++	clks[ADSP_SC58X_CLK_CGU0_S0SELDIV] = cgu_divider("cgu0_s0seldiv", "sysclk_0",
++							 cgu0 + CGU_DIV, 5, 3, 0);
++	clks[ADSP_SC58X_CLK_CGU0_S1SELDIV] = cgu_divider("cgu0_s1seldiv", "sysclk_0",
++							 cgu0 + CGU_DIV, 13, 3, 0);
++
++	clks[ADSP_SC58X_CLK_CGU1_CDIV] = cgu_divider("cgu1_cdiv", "cgu1_pllclk",
++						     cgu1 + CGU_DIV, 0, 5, 0);
++	clks[ADSP_SC58X_CLK_CGU1_SYSCLK] = cgu_divider("sysclk_1", "cgu1_pllclk",
++						       cgu1 + CGU_DIV, 8, 5, 0);
++	clks[ADSP_SC58X_CLK_CGU1_DDIV] = cgu_divider("cgu1_ddiv", "cgu1_pllclk",
++						     cgu1 + CGU_DIV, 16, 5, 0);
++	clks[ADSP_SC58X_CLK_CGU1_ODIV] = cgu_divider("cgu1_odiv", "cgu1_pllclk",
++						     cgu1 + CGU_DIV, 22, 7, 0);
++	clks[ADSP_SC58X_CLK_CGU1_S0SELDIV] = cgu_divider("cgu1_s0seldiv", "sysclk_1",
++							 cgu1 + CGU_DIV, 5, 3, 0);
++	clks[ADSP_SC58X_CLK_CGU1_S1SELDIV] = cgu_divider("cgu1_s1seldiv", "sysclk_1",
++							 cgu1 + CGU_DIV, 13, 3, 0);
++
++	// Gates to enable CGU outputs
++	clks[ADSP_SC58X_CLK_CGU0_CCLK0] = cgu_gate("cclk0_0", "cgu0_cdiv",
++						   cgu0 + CGU_CCBF_DIS, 0);
++	clks[ADSP_SC58X_CLK_CGU0_CCLK1] = cgu_gate("cclk1_0", "cgu0_cdiv",
++						   cgu1 + CGU_CCBF_DIS, 1);
++	clks[ADSP_SC58X_CLK_CGU0_OCLK] = cgu_gate("oclk_0", "cgu0_odiv",
++						  cgu0 + CGU_SCBF_DIS, 3);
++	clks[ADSP_SC58X_CLK_CGU0_DCLK] = cgu_gate("dclk_0", "cgu0_ddiv",
++						  cgu0 + CGU_SCBF_DIS, 2);
++	clks[ADSP_SC58X_CLK_CGU0_SCLK1] = cgu_gate("sclk1_0", "cgu0_s1seldiv",
++						   cgu0 + CGU_SCBF_DIS, 1);
++	clks[ADSP_SC58X_CLK_CGU0_SCLK0] = cgu_gate("sclk0_0", "cgu0_s0seldiv",
++						   cgu0 + CGU_SCBF_DIS, 0);
++
++	clks[ADSP_SC58X_CLK_CGU1_CCLK0] = cgu_gate("cclk0_1", "cgu1_cdiv",
++						   cgu1 + CGU_CCBF_DIS, 0);
++	clks[ADSP_SC58X_CLK_CGU1_CCLK1] = cgu_gate("cclk1_1", "cgu1_cdiv",
++						   cgu1 + CGU_CCBF_DIS, 1);
++	clks[ADSP_SC58X_CLK_CGU1_OCLK] = cgu_gate("oclk_1", "cgu1_odiv",
++						  cgu1 + CGU_SCBF_DIS, 3);
++	clks[ADSP_SC58X_CLK_CGU1_DCLK] = cgu_gate("dclk_1", "cgu1_ddiv",
++						  cgu1 + CGU_SCBF_DIS, 2);
++	clks[ADSP_SC58X_CLK_CGU1_SCLK1] = cgu_gate("sclk1_1", "cgu1_s1seldiv",
++						   cgu1 + CGU_SCBF_DIS, 1);
++	clks[ADSP_SC58X_CLK_CGU1_SCLK0] = cgu_gate("sclk0_1", "cgu1_s0seldiv",
++						   cgu1 + CGU_SCBF_DIS, 0);
++
++	// Extra half rate clocks generated in the CDU
++	clks[ADSP_SC58X_CLK_OCLK0_HALF] = clk_register_fixed_factor(NULL, "oclk_0_half",
++								    "oclk_0",
++								    CLK_SET_RATE_PARENT,
++								    1, 2);
++	clks[ADSP_SC58X_CLK_CCLK1_1_HALF] = clk_register_fixed_factor(NULL,
++								      "cclk1_1_half",
++								      "cclk1_1",
++								      CLK_SET_RATE_PARENT,
++								      1, 2);
++
++	// CDU output muxes
++	clks[ADSP_SC58X_CLK_SHARC0_SEL] = cdu_mux("sharc0_sel", cdu + CDU_CFG0,
++						  sharc0_sels);
++	clks[ADSP_SC58X_CLK_SHARC1_SEL] = cdu_mux("sharc1_sel", cdu + CDU_CFG1,
++						  sharc1_sels);
++	clks[ADSP_SC58X_CLK_ARM_SEL] = cdu_mux("arm_sel", cdu + CDU_CFG2, arm_sels);
++	clks[ADSP_SC58X_CLK_CDU_DDR_SEL] = cdu_mux("cdu_ddr_sel", cdu + CDU_CFG3,
++						   cdu_ddr_sels);
++	clks[ADSP_SC58X_CLK_CAN_SEL] = cdu_mux("can_sel", cdu + CDU_CFG4, can_sels);
++	clks[ADSP_SC58X_CLK_SPDIF_SEL] = cdu_mux("spdif_sel", cdu + CDU_CFG5, spdif_sels);
++	clks[ADSP_SC58X_CLK_RESERVED_SEL] = cdu_mux("reserved_sel", cdu + CDU_CFG6,
++						    reserved_sels);
++	clks[ADSP_SC58X_CLK_GIGE_SEL] = cdu_mux("gige_sel", cdu + CDU_CFG7, gige_sels);
++	clks[ADSP_SC58X_CLK_LP_SEL] = cdu_mux("lp_sel", cdu + CDU_CFG8, lp_sels);
++	clks[ADSP_SC58X_CLK_SDIO_SEL] = cdu_mux("sdio_sel", cdu + CDU_CFG9, sdio_sels);
++
++	// CDU output enable gates
++	clks[ADSP_SC58X_CLK_SHARC0] = cdu_gate("sharc0", "sharc0_sel", cdu + CDU_CFG0,
++					       CLK_IS_CRITICAL);
++	clks[ADSP_SC58X_CLK_SHARC1] = cdu_gate("sharc1", "sharc1_sel", cdu + CDU_CFG1,
++					       CLK_IS_CRITICAL);
++	clks[ADSP_SC58X_CLK_ARM] = cdu_gate("arm", "arm_sel", cdu + CDU_CFG2,
++					    CLK_IS_CRITICAL);
++	clks[ADSP_SC58X_CLK_CDU_DDR] = cdu_gate("cdu_ddr", "cdu_ddr_sel", cdu + CDU_CFG3,
++						CLK_IS_CRITICAL);
++	clks[ADSP_SC58X_CLK_CAN] = cdu_gate("can", "can_sel", cdu + CDU_CFG4, 0);
++	clks[ADSP_SC58X_CLK_SPDIF] = cdu_gate("spdif", "spdif_sel", cdu + CDU_CFG5, 0);
++	clks[ADSP_SC58X_CLK_RESERVED] = cdu_gate("reserved", "reserved_sel",
++						 cdu + CDU_CFG6, 0);
++	clks[ADSP_SC58X_CLK_GIGE] = cdu_gate("gige", "gige_sel", cdu + CDU_CFG7, 0);
++	clks[ADSP_SC58X_CLK_LP] = cdu_gate("lp", "lp_sel", cdu + CDU_CFG8, 0);
++	clks[ADSP_SC58X_CLK_SDIO] = cdu_gate("sdio", "sdio_sel", cdu + CDU_CFG9, 0);
++
++	ret = cdu_check_clocks(clks, ARRAY_SIZE(clks));
++	if (ret)
++		pr_err("CDU error detected\n");
++
++	return ret;
++}
++
++static const struct udevice_id adi_sc58x_clk_ids[] = {
++	{ .compatible = "adi,sc58x-clocks" },
++	{ },
++};
++
++U_BOOT_DRIVER(adi_sc58x_clk) = {
++	.name = "clk_adi_sc58x",
++	.id = UCLASS_CLK,
++	.of_match = adi_sc58x_clk_ids,
++	.ops		= &adi_clk_ops,
++	.probe = sc58x_clock_probe,
++	.flags = DM_FLAG_PRE_RELOC,
++};
+diff --git a/drivers/clk/adi/clk-adi-sc594.c b/drivers/clk/adi/clk-adi-sc594.c
+new file mode 100644
+index 0000000000..b248f8ea97
+--- /dev/null
++++ b/drivers/clk/adi/clk-adi-sc594.c
+@@ -0,0 +1,230 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2022 - Analog Devices, Inc.
++ *
++ * Written and/or maintained by Timesys Corporation
++ *
++ * Author: Greg Malysa <greg.malysa@timesys.com>
++ *
++ * Ported from Linux: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++ */
++
++#include <clk.h>
++#include <clk-uclass.h>
++#include <dm.h>
++#include <log.h>
++#include <linux/types.h>
++#include <linux/clk-provider.h>
++#include <linux/ioport.h>
++#include <linux/io.h>
++#include <dt-bindings/clock/adi-sc5xx-clock.h>
++
++#include "clk.h"
++
++static const char * const cgu1_in_sels[] = {"sys_clkin0", "sys_clkin1"};
++static const char * const cgu0_s1sels[] = {"cgu0_s1seldiv", "cgu0_s1selexdiv"};
++static const char * const cgu1_s1sels[] = {"cgu1_s1seldiv", "cgu1_s1selexdiv"};
++static const char * const sharc0_sels[] = {"cclk0_0", "dummy", "dummy", "dummy"};
++static const char * const sharc1_sels[] = {"cclk0_0", "dummy", "dummy", "dummy"};
++static const char * const arm_sels[] = {"cclk1_0", "dummy", "dummy", "dummy"};
++static const char * const cdu_ddr_sels[] = {"dclk_0", "dclk_1", "dummy", "dummy"};
++static const char * const can_sels[] = {"oclk_0", "oclk_1", "dummy", "dummy"};
++static const char * const spdif_sels[] = {"sclk1_0", "dummy", "dummy", "dummy"};
++static const char * const spi_sels[] = {"sclk0_0", "oclk_0", "dummy", "dummy"};
++static const char * const gige_sels[] = {"sclk0_0", "sclk0_1", "cclk0_1", "dummy"};
++static const char * const lp_sels[] = {"oclk_0", "sclk0_0", "cclk0_1", "dummy"};
++static const char * const lpddr_sels[] = {"oclk_0", "dclk_0", "sysclkin_1", "dummy"};
++static const char * const ospi_sels[] = {"sysclk_0", "sclk0_0", "sclk1_1", "dummy"};
++static const char * const trace_sels[] = {"sclk0_0", "dummy", "dummy", "dummy"};
++
++static int sc594_clock_probe(struct udevice *dev)
++{
++	void __iomem *cgu0;
++	void __iomem *cgu1;
++	void __iomem *cdu;
++	int ret;
++	struct resource res;
++
++	struct clk *clks[ADSP_SC594_CLK_END];
++	struct clk dummy, clkin0, clkin1;
++
++	ret = dev_read_resource_byname(dev, "cgu0", &res);
++	if (ret)
++		return ret;
++	cgu0 = devm_ioremap(dev, res.start, resource_size(&res));
++
++	ret = dev_read_resource_byname(dev, "cgu1", &res);
++	if (ret)
++		return ret;
++	cgu1 = devm_ioremap(dev, res.start, resource_size(&res));
++
++	ret = dev_read_resource_byname(dev, "cdu", &res);
++	if (ret)
++		return ret;
++	cdu = devm_ioremap(dev, res.start, resource_size(&res));
++
++	// Input clock configuration
++	clk_get_by_name(dev, "dummy", &dummy);
++	clk_get_by_name(dev, "sys_clkin0", &clkin0);
++	clk_get_by_name(dev, "sys_clkin1", &clkin1);
++
++	clks[ADSP_SC594_CLK_DUMMY] = &dummy;
++	clks[ADSP_SC594_CLK_SYS_CLKIN0] = &clkin0;
++	clks[ADSP_SC594_CLK_SYS_CLKIN1] = &clkin1;
++	clks[ADSP_SC594_CLK_CGU1_IN] = clk_register_mux(NULL, "cgu1_in_sel", cgu1_in_sels,
++							2, CLK_SET_RATE_PARENT,
++							cdu + CDU_CLKINSEL, 0, 1, 0);
++
++	// CGU configuration and internal clocks
++	clks[ADSP_SC594_CLK_CGU0_PLL_IN] = clk_register_divider(NULL, "cgu0_df",
++								"sys_clkin0",
++								CLK_SET_RATE_PARENT,
++								cgu0 + CGU_CTL, 0, 1, 0);
++	clks[ADSP_SC594_CLK_CGU1_PLL_IN] = clk_register_divider(NULL, "cgu1_df",
++								"cgu1_in_sel",
++								CLK_SET_RATE_PARENT,
++								cgu1 + CGU_CTL, 0, 1, 0);
++
++	// VCO output inside PLL
++	clks[ADSP_SC594_CLK_CGU0_VCO_OUT] = sc5xx_cgu_pll("cgu0_vco", "cgu0_df",
++							  cgu0 + CGU_CTL, CGU_MSEL_SHIFT,
++							  CGU_MSEL_WIDTH, 0, false);
++	clks[ADSP_SC594_CLK_CGU1_VCO_OUT] = sc5xx_cgu_pll("cgu1_vco", "cgu1_df",
++							  cgu1 + CGU_CTL, CGU_MSEL_SHIFT,
++							  CGU_MSEL_WIDTH, 0, false);
++
++	// Final PLL output
++	clks[ADSP_SC594_CLK_CGU0_PLLCLK] = clk_register_fixed_factor(NULL, "cgu0_pllclk",
++								     "cgu0_vco",
++								     CLK_SET_RATE_PARENT,
++								     1, 1);
++	clks[ADSP_SC594_CLK_CGU1_PLLCLK] = clk_register_fixed_factor(NULL, "cgu1_pllclk",
++								     "cgu1_vco",
++								     CLK_SET_RATE_PARENT,
++								     1, 1);
++
++	// Dividers from pll output
++	clks[ADSP_SC594_CLK_CGU0_CDIV] = cgu_divider("cgu0_cdiv", "cgu0_pllclk",
++						     cgu0 + CGU_DIV, 0, 5, 0);
++	clks[ADSP_SC594_CLK_CGU0_SYSCLK] = cgu_divider("sysclk_0", "cgu0_pllclk",
++						       cgu0 + CGU_DIV, 8, 5, 0);
++	clks[ADSP_SC594_CLK_CGU0_DDIV] = cgu_divider("cgu0_ddiv", "cgu0_pllclk",
++						     cgu0 + CGU_DIV, 16, 5, 0);
++	clks[ADSP_SC594_CLK_CGU0_ODIV] = cgu_divider("cgu0_odiv", "cgu0_pllclk",
++						     cgu0 + CGU_DIV, 22, 7, 0);
++	clks[ADSP_SC594_CLK_CGU0_S0SELDIV] = cgu_divider("cgu0_s0seldiv", "sysclk_0",
++							 cgu0 + CGU_DIV, 5, 3, 0);
++	clks[ADSP_SC594_CLK_CGU0_S1SELDIV] = cgu_divider("cgu0_s1seldiv", "sysclk_0",
++							 cgu0 + CGU_DIV, 13, 3, 0);
++	clks[ADSP_SC594_CLK_CGU0_S1SELEXDIV] = cgu_divider("cgu0_s1selexdiv",
++							   "cgu0_pllclk",
++							   cgu0 + CGU_DIVEX, 16, 8, 0);
++	clks[ADSP_SC594_CLK_CGU0_S1SEL] = clk_register_mux(NULL, "cgu0_sclk1sel",
++							   cgu0_s1sels, 2,
++							   CLK_SET_RATE_PARENT,
++							   cgu0 + CGU_CTL, 17, 1, 0);
++
++	clks[ADSP_SC594_CLK_CGU1_CDIV] = cgu_divider("cgu1_cdiv", "cgu1_pllclk",
++						     cgu1 + CGU_DIV, 0, 5, 0);
++	clks[ADSP_SC594_CLK_CGU1_SYSCLK] = cgu_divider("sysclk_1", "cgu1_pllclk",
++						       cgu1 + CGU_DIV, 8, 5, 0);
++	clks[ADSP_SC594_CLK_CGU1_DDIV] = cgu_divider("cgu1_ddiv", "cgu1_pllclk",
++						     cgu1 + CGU_DIV, 16, 5, 0);
++	clks[ADSP_SC594_CLK_CGU1_ODIV] = cgu_divider("cgu1_odiv", "cgu1_pllclk",
++						     cgu1 + CGU_DIV, 22, 7, 0);
++	clks[ADSP_SC594_CLK_CGU1_S0SELDIV] = cgu_divider("cgu1_s0seldiv", "sysclk_1",
++							 cgu1 + CGU_DIV, 5, 3, 0);
++	clks[ADSP_SC594_CLK_CGU1_S1SELDIV] = cgu_divider("cgu1_s1seldiv", "sysclk_1",
++							 cgu1 + CGU_DIV, 13, 3, 0);
++	clks[ADSP_SC594_CLK_CGU1_S1SELEXDIV] = cgu_divider("cgu1_s1selexdiv",
++							   "cgu1_pllclk",
++							   cgu1 + CGU_DIVEX, 16, 8, 0);
++	clks[ADSP_SC594_CLK_CGU1_S1SEL] = clk_register_mux(NULL, "cgu1_sclk1sel",
++							   cgu1_s1sels, 2,
++							   CLK_SET_RATE_PARENT,
++							   cgu1 + CGU_CTL, 17, 1, 0);
++
++	// Gates to enable CGU outputs
++	clks[ADSP_SC594_CLK_CGU0_CCLK0] = cgu_gate("cclk0_0", "cgu0_cdiv",
++						   cgu0 + CGU_CCBF_DIS, 0);
++	clks[ADSP_SC594_CLK_CGU0_CCLK1] = cgu_gate("cclk1_0", "cgu0_cdiv",
++						   cgu1 + CGU_CCBF_DIS, 1);
++	clks[ADSP_SC594_CLK_CGU0_OCLK] = cgu_gate("oclk_0", "cgu0_odiv",
++						  cgu0 + CGU_SCBF_DIS, 3);
++	clks[ADSP_SC594_CLK_CGU0_DCLK] = cgu_gate("dclk_0", "cgu0_ddiv",
++						  cgu0 + CGU_SCBF_DIS, 2);
++	clks[ADSP_SC594_CLK_CGU0_SCLK1] = cgu_gate("sclk1_0", "cgu0_sclk1sel",
++						   cgu0 + CGU_SCBF_DIS, 1);
++	clks[ADSP_SC594_CLK_CGU0_SCLK0] = cgu_gate("sclk0_0", "cgu0_s0seldiv",
++						   cgu0 + CGU_SCBF_DIS, 0);
++
++	clks[ADSP_SC594_CLK_CGU1_CCLK0] = cgu_gate("cclk0_1", "cgu1_cdiv",
++						   cgu1 + CGU_CCBF_DIS, 0);
++	clks[ADSP_SC594_CLK_CGU1_CCLK1] = cgu_gate("cclk1_1", "cgu1_cdiv",
++						   cgu1 + CGU_CCBF_DIS, 1);
++	clks[ADSP_SC594_CLK_CGU1_OCLK] = cgu_gate("oclk_1", "cgu1_odiv",
++						  cgu1 + CGU_SCBF_DIS, 3);
++	clks[ADSP_SC594_CLK_CGU1_DCLK] = cgu_gate("dclk_1", "cgu1_ddiv",
++						  cgu1 + CGU_SCBF_DIS, 2);
++	clks[ADSP_SC594_CLK_CGU1_SCLK1] = cgu_gate("sclk1_1", "cgu1_sclk1sel",
++						   cgu1 + CGU_SCBF_DIS, 1);
++	clks[ADSP_SC594_CLK_CGU1_SCLK0] = cgu_gate("sclk0_1", "cgu1_s0seldiv",
++						   cgu1 + CGU_SCBF_DIS, 0);
++
++	// CDU output muxes
++	clks[ADSP_SC594_CLK_SHARC0_SEL] = cdu_mux("sharc0_sel", cdu + CDU_CFG0,
++						  sharc0_sels);
++	clks[ADSP_SC594_CLK_SHARC1_SEL] = cdu_mux("sharc1_sel", cdu + CDU_CFG1,
++						  sharc1_sels);
++	clks[ADSP_SC594_CLK_ARM_SEL] = cdu_mux("arm_sel", cdu + CDU_CFG2, arm_sels);
++	clks[ADSP_SC594_CLK_CDU_DDR_SEL] = cdu_mux("cdu_ddr_sel", cdu + CDU_CFG3,
++						   cdu_ddr_sels);
++	clks[ADSP_SC594_CLK_CAN_SEL] = cdu_mux("can_sel", cdu + CDU_CFG4, can_sels);
++	clks[ADSP_SC594_CLK_SPDIF_SEL] = cdu_mux("spdif_sel", cdu + CDU_CFG5, spdif_sels);
++	clks[ADSP_SC594_CLK_RESERVED_SEL] = cdu_mux("spi_sel", cdu + CDU_CFG6, spi_sels);
++	clks[ADSP_SC594_CLK_GIGE_SEL] = cdu_mux("gige_sel", cdu + CDU_CFG7, gige_sels);
++	clks[ADSP_SC594_CLK_LP_SEL] = cdu_mux("lp_sel", cdu + CDU_CFG8, lp_sels);
++	clks[ADSP_SC594_CLK_LPDDR_SEL] = cdu_mux("lpddr_sel", cdu + CDU_CFG9, lpddr_sels);
++	clks[ADSP_SC594_CLK_OSPI_SEL] = cdu_mux("ospi_sel", cdu + CDU_CFG10,
++						ospi_sels);
++	clks[ADSP_SC594_CLK_TRACE_SEL] = cdu_mux("trace_sel", cdu + CDU_CFG12,
++						 trace_sels);
++
++	// CDU output enable gates
++	clks[ADSP_SC594_CLK_SHARC0] = cdu_gate("sharc0", "sharc0_sel",
++					       cdu + CDU_CFG0, CLK_IS_CRITICAL);
++	clks[ADSP_SC594_CLK_SHARC1] = cdu_gate("sharc1", "sharc1_sel",
++					       cdu + CDU_CFG1, CLK_IS_CRITICAL);
++	clks[ADSP_SC594_CLK_ARM] = cdu_gate("arm", "arm_sel", cdu + CDU_CFG2,
++					    CLK_IS_CRITICAL);
++	clks[ADSP_SC594_CLK_CDU_DDR] = cdu_gate("cdu_ddr", "cdu_ddr_sel",
++						cdu + CDU_CFG3, CLK_IS_CRITICAL);
++	clks[ADSP_SC594_CLK_CAN] = cdu_gate("can", "can_sel", cdu + CDU_CFG4, 0);
++	clks[ADSP_SC594_CLK_SPDIF] = cdu_gate("spdif", "spdif_sel", cdu + CDU_CFG5, 0);
++	clks[ADSP_SC594_CLK_SPI] = cdu_gate("spi", "spi_sel", cdu + CDU_CFG6, 0);
++	clks[ADSP_SC594_CLK_GIGE] = cdu_gate("gige", "gige_sel", cdu + CDU_CFG7, 0);
++	clks[ADSP_SC594_CLK_LP] = cdu_gate("lp", "lp_sel", cdu + CDU_CFG8, 0);
++	clks[ADSP_SC594_CLK_LPDDR] = cdu_gate("lpddr", "lpddr_sel", cdu + CDU_CFG9, 0);
++	clks[ADSP_SC594_CLK_OSPI] = cdu_gate("ospi", "ospi_sel", cdu + CDU_CFG10, 0);
++	clks[ADSP_SC594_CLK_TRACE] = cdu_gate("trace", "trace_sel", cdu + CDU_CFG12, 0);
++
++	ret = cdu_check_clocks(clks, ARRAY_SIZE(clks));
++	if (ret)
++		pr_err("CDU error detected\n");
++
++	return ret;
++}
++
++static const struct udevice_id adi_sc594_clk_ids[] = {
++	{ .compatible = "adi,sc594-clocks" },
++	{ },
++};
++
++U_BOOT_DRIVER(adi_sc594_clk) = {
++	.name = "clk_adi_sc594",
++	.id = UCLASS_CLK,
++	.of_match = adi_sc594_clk_ids,
++	.ops		= &adi_clk_ops,
++	.probe = sc594_clock_probe,
++	.flags = DM_FLAG_PRE_RELOC,
++};
+diff --git a/drivers/clk/adi/clk-adi-sc598.c b/drivers/clk/adi/clk-adi-sc598.c
+new file mode 100644
+index 0000000000..7b63ba6b60
+--- /dev/null
++++ b/drivers/clk/adi/clk-adi-sc598.c
+@@ -0,0 +1,307 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2022 - Analog Devices, Inc.
++ *
++ * Written and/or maintained by Timesys Corporation
++ *
++ * Author: Greg Malysa <greg.malysa@timesys.com>
++ *
++ * Ported from Linux: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++ */
++
++#include <clk.h>
++#include <clk-uclass.h>
++#include <dm.h>
++#include <log.h>
++#include <linux/types.h>
++#include <linux/clk-provider.h>
++#include <linux/ioport.h>
++#include <linux/io.h>
++#include <dt-bindings/clock/adi-sc5xx-clock.h>
++
++#include "clk.h"
++
++static const char * const cgu1_in_sels[] = {"sys_clkin0", "sys_clkin1"};
++static const char * const cgu0_s1sels[] = {"cgu0_s1seldiv", "cgu0_s1selexdiv"};
++static const char * const cgu1_s0sels[] = {"cgu1_s0seldiv", "cgu1_s0selexdiv"};
++static const char * const cgu1_s1sels[] = {"cgu1_s1seldiv", "cgu1_s1selexdiv"};
++static const char * const sharc0_sels[] = {"cclk0_0", "dummy", "dummy", "dummy"};
++static const char * const sharc1_sels[] = {"cclk0_0", "dummy", "dummy", "dummy"};
++static const char * const arm_sels[] = {"dummy", "dummy", "cclk2_0", "cclk2_1"};
++static const char * const cdu_ddr_sels[] = {"dclk_0", "dclk_1", "dummy", "dummy"};
++static const char * const can_sels[] = {"dummy", "oclk_1", "dummy", "dummy"};
++static const char * const spdif_sels[] = {"sclk1_0", "dummy", "dummy", "dummy"};
++static const char * const spi_sels[] = {"sclk0_0", "oclk_0", "dummy", "dummy"};
++static const char * const gige_sels[] = {"sclk0_0", "sclk0_1", "dummy", "dummy"};
++static const char * const lp_sels[] = {"oclk_0", "sclk0_0", "cclk0_1", "dummy"};
++static const char * const lp_ddr_sels[] = {"oclk_0", "dclk_0", "sysclk_1", "dummy"};
++static const char * const ospi_refclk_sels[] = {"sysclk_0", "sclk0_0", "sclk1_1",
++	"dummy"};
++static const char * const trace_sels[] = {"sclk0_0", "dummy", "dummy", "dummy"};
++static const char * const emmc_sels[] = {"oclk_0", "sclk0_1", "dclk_0_half",
++	"dclk_1_half"};
++static const char * const emmc_timer_sels[] = {"dummy", "sclk1_1_half", "dummy",
++	"dummy"};
++static const char * const ddr_sels[] = {"cdu_ddr", "3pll_ddiv"};
++
++static int sc598_clock_probe(struct udevice *dev)
++{
++	void __iomem *cgu0;
++	void __iomem *cgu1;
++	void __iomem *cdu;
++	void __iomem *pll3;
++	int ret;
++	struct resource res;
++
++	struct clk *clks[ADSP_SC598_CLK_END];
++	struct clk dummy, clkin0, clkin1;
++
++	ret = dev_read_resource_byname(dev, "cgu0", &res);
++	if (ret)
++		return ret;
++	cgu0 = devm_ioremap(dev, res.start, resource_size(&res));
++
++	ret = dev_read_resource_byname(dev, "cgu1", &res);
++	if (ret)
++		return ret;
++	cgu1 = devm_ioremap(dev, res.start, resource_size(&res));
++
++	ret = dev_read_resource_byname(dev, "cdu", &res);
++	if (ret)
++		return ret;
++	cdu = devm_ioremap(dev, res.start, resource_size(&res));
++
++	ret = dev_read_resource_byname(dev, "pll3", &res);
++	if (ret)
++		return ret;
++	pll3 = devm_ioremap(dev, res.start, resource_size(&res));
++
++	// We only access this one register for pll3
++	pll3 = pll3 + PLL3_OFFSET;
++
++	// Input clock configuration
++	clk_get_by_name(dev, "dummy", &dummy);
++	clk_get_by_name(dev, "sys_clkin0", &clkin0);
++	clk_get_by_name(dev, "sys_clkin1", &clkin1);
++
++	clks[ADSP_SC598_CLK_DUMMY] = &dummy;
++	clks[ADSP_SC598_CLK_SYS_CLKIN0] = &clkin0;
++	clks[ADSP_SC598_CLK_SYS_CLKIN1] = &clkin1;
++
++	clks[ADSP_SC598_CLK_CGU1_IN] = clk_register_mux(NULL, "cgu1_in_sel", cgu1_in_sels,
++							2, CLK_SET_RATE_PARENT,
++							cdu + CDU_CLKINSEL, 0, 1, 0);
++
++	// 3rd pll reuses cgu1 clk in selection, feeds directly into 3pll df
++	// changing the cgu1 in sel mux will affect 3pll so reuse the same clocks
++
++	// CGU configuration and internal clocks
++	clks[ADSP_SC598_CLK_CGU0_PLL_IN] = clk_register_divider(NULL, "cgu0_df",
++								"sys_clkin0",
++								CLK_SET_RATE_PARENT,
++								cgu0 + CGU_CTL, 0, 1, 0);
++	clks[ADSP_SC598_CLK_CGU1_PLL_IN] = clk_register_divider(NULL, "cgu1_df",
++								"cgu1_in_sel",
++								CLK_SET_RATE_PARENT,
++								cgu1 + CGU_CTL, 0, 1, 0);
++	clks[ADSP_SC598_CLK_3PLL_PLL_IN] = clk_register_divider(NULL, "3pll_df",
++								"cgu1_in_sel",
++								CLK_SET_RATE_PARENT,
++								pll3, 3, 1, 0);
++
++	// VCO output inside PLL
++	clks[ADSP_SC598_CLK_CGU0_VCO_OUT] = sc5xx_cgu_pll("cgu0_vco", "cgu0_df",
++							  cgu0 + CGU_CTL, CGU_MSEL_SHIFT,
++							  CGU_MSEL_WIDTH, 0, true);
++	clks[ADSP_SC598_CLK_CGU1_VCO_OUT] = sc5xx_cgu_pll("cgu1_vco", "cgu1_df",
++							  cgu1 + CGU_CTL, CGU_MSEL_SHIFT,
++							  CGU_MSEL_WIDTH, 0, true);
++	clks[ADSP_SC598_CLK_3PLL_VCO_OUT] = sc5xx_cgu_pll("3pll_vco", "3pll_df",
++							  pll3, PLL3_MSEL_SHIFT,
++							  PLL3_MSEL_WIDTH, 1, true);
++
++	// Final PLL output
++	clks[ADSP_SC598_CLK_CGU0_PLLCLK] = clk_register_fixed_factor(NULL, "cgu0_pllclk",
++								     "cgu0_vco",
++								     CLK_SET_RATE_PARENT,
++								     1, 2);
++	clks[ADSP_SC598_CLK_CGU1_PLLCLK] = clk_register_fixed_factor(NULL, "cgu1_pllclk",
++								     "cgu1_vco",
++								     CLK_SET_RATE_PARENT,
++								     1, 2);
++	clks[ADSP_SC598_CLK_3PLL_PLLCLK] = clk_register_fixed_factor(NULL, "3pll_pllclk",
++								     "3pll_vco",
++								     CLK_SET_RATE_PARENT,
++								     1, 2);
++
++	// Dividers from pll output
++	clks[ADSP_SC598_CLK_CGU0_CDIV] = cgu_divider("cgu0_cdiv", "cgu0_pllclk",
++						     cgu0 + CGU_DIV, 0, 5, 0);
++	clks[ADSP_SC598_CLK_CGU0_SYSCLK] = cgu_divider("sysclk_0", "cgu0_pllclk",
++						       cgu0 + CGU_DIV, 8, 5, 0);
++	clks[ADSP_SC598_CLK_CGU0_DDIV] = cgu_divider("cgu0_ddiv", "cgu0_pllclk",
++						     cgu0 + CGU_DIV, 16, 5, 0);
++	clks[ADSP_SC598_CLK_CGU0_ODIV] = cgu_divider("cgu0_odiv", "cgu0_pllclk",
++						     cgu0 + CGU_DIV, 22, 7, 0);
++	clks[ADSP_SC598_CLK_CGU0_S0SELDIV] = cgu_divider("cgu0_s0seldiv", "sysclk_0",
++							 cgu0 + CGU_DIV, 5, 3, 0);
++	clks[ADSP_SC598_CLK_CGU0_S1SELDIV] = cgu_divider("cgu0_s1seldiv", "sysclk_0",
++							 cgu0 + CGU_DIV, 13, 3, 0);
++	clks[ADSP_SC598_CLK_CGU0_S1SELEXDIV] = cgu_divider("cgu0_s1selexdiv",
++							   "cgu0_pllclk",
++							   cgu0 + CGU_DIVEX, 16, 8, 0);
++	clks[ADSP_SC598_CLK_CGU0_S1SEL] = clk_register_mux(NULL, "cgu0_sclk1sel",
++							   cgu0_s1sels, 2,
++							   CLK_SET_RATE_PARENT,
++							   cgu0 + CGU_CTL, 17, 1, 0);
++	clks[ADSP_SC598_CLK_CGU0_CCLK2] = clk_register_fixed_factor(NULL, "cclk2_0",
++								    "cgu0_vco",
++								    CLK_SET_RATE_PARENT,
++								    1, 3);
++
++	clks[ADSP_SC598_CLK_CGU1_CDIV] = cgu_divider("cgu1_cdiv", "cgu1_pllclk",
++						     cgu1 + CGU_DIV, 0, 5, 0);
++	clks[ADSP_SC598_CLK_CGU1_SYSCLK] = cgu_divider("sysclk_1", "cgu1_pllclk",
++						       cgu1 + CGU_DIV, 8, 5, 0);
++	clks[ADSP_SC598_CLK_CGU1_DDIV] = cgu_divider("cgu1_ddiv", "cgu1_pllclk",
++						     cgu1 + CGU_DIV, 16, 5, 0);
++	clks[ADSP_SC598_CLK_CGU1_ODIV] = cgu_divider("cgu1_odiv", "cgu1_pllclk",
++						     cgu1 + CGU_DIV, 22, 7, 0);
++	clks[ADSP_SC598_CLK_CGU1_S0SELDIV] = cgu_divider("cgu1_s0seldiv", "sysclk_1",
++							 cgu1 + CGU_DIV, 5, 3, 0);
++	clks[ADSP_SC598_CLK_CGU1_S1SELDIV] = cgu_divider("cgu1_s1seldiv", "sysclk_1",
++							 cgu1 + CGU_DIV, 13, 3, 0);
++	clks[ADSP_SC598_CLK_CGU1_S0SELEXDIV] = cgu_divider("cgu1_s0selexdiv",
++							   "cgu1_pllclk",
++							   cgu1 + CGU_DIVEX, 0, 8, 0);
++	clks[ADSP_SC598_CLK_CGU1_S1SELEXDIV] = cgu_divider("cgu1_s1selexdiv",
++							   "cgu1_pllclk",
++							   cgu1 + CGU_DIVEX, 16, 8, 0);
++	clks[ADSP_SC598_CLK_CGU1_S0SEL] = clk_register_mux(NULL, "cgu1_sclk0sel",
++							   cgu1_s0sels, 2,
++							   CLK_SET_RATE_PARENT,
++							   cgu1 + CGU_CTL, 16, 1, 0);
++	clks[ADSP_SC598_CLK_CGU1_S1SEL] = clk_register_mux(NULL, "cgu1_sclk1sel",
++							   cgu1_s1sels, 2,
++							   CLK_SET_RATE_PARENT,
++							   cgu1 + CGU_CTL, 17, 1, 0);
++	clks[ADSP_SC598_CLK_CGU1_CCLK2] = clk_register_fixed_factor(NULL, "cclk2_1",
++								    "cgu1_vco",
++								    CLK_SET_RATE_PARENT,
++								    1, 3);
++
++	clks[ADSP_SC598_CLK_3PLL_DDIV] = clk_register_divider(NULL, "3pll_ddiv",
++							      "3pll_pllclk",
++							      CLK_SET_RATE_PARENT, pll3,
++							      12, 5, 0);
++
++	// Gates to enable CGU outputs
++	clks[ADSP_SC598_CLK_CGU0_CCLK0] = cgu_gate("cclk0_0", "cgu0_cdiv",
++						   cgu0 + CGU_CCBF_DIS, 0);
++	clks[ADSP_SC598_CLK_CGU0_OCLK] = cgu_gate("oclk_0", "cgu0_odiv",
++						  cgu0 + CGU_SCBF_DIS, 3);
++	clks[ADSP_SC598_CLK_CGU0_DCLK] = cgu_gate("dclk_0", "cgu0_ddiv",
++						  cgu0 + CGU_SCBF_DIS, 2);
++	clks[ADSP_SC598_CLK_CGU0_SCLK1] = cgu_gate("sclk1_0", "cgu0_sclk1sel",
++						   cgu0 + CGU_SCBF_DIS, 1);
++	clks[ADSP_SC598_CLK_CGU0_SCLK0] = cgu_gate("sclk0_0", "cgu0_s0seldiv",
++						   cgu0 + CGU_SCBF_DIS, 0);
++
++	clks[ADSP_SC598_CLK_CGU1_CCLK0] = cgu_gate("cclk0_1", "cgu1_cdiv",
++						   cgu1 + CGU_CCBF_DIS, 0);
++	clks[ADSP_SC598_CLK_CGU1_OCLK] = cgu_gate("oclk_1", "cgu1_odiv",
++						  cgu1 + CGU_SCBF_DIS, 3);
++	clks[ADSP_SC598_CLK_CGU1_DCLK] = cgu_gate("dclk_1", "cgu1_ddiv",
++						  cgu1 + CGU_SCBF_DIS, 2);
++	clks[ADSP_SC598_CLK_CGU1_SCLK1] = cgu_gate("sclk1_1", "cgu1_sclk1sel",
++						   cgu1 + CGU_SCBF_DIS, 1);
++	clks[ADSP_SC598_CLK_CGU1_SCLK0] = cgu_gate("sclk0_1", "cgu1_sclk0sel",
++						   cgu1 + CGU_SCBF_DIS, 0);
++
++	// Extra half rate clocks generated in the CDU
++	clks[ADSP_SC598_CLK_DCLK0_HALF] = clk_register_fixed_factor(NULL, "dclk_0_half",
++								    "dclk_0",
++								    CLK_SET_RATE_PARENT,
++								    1, 2);
++	clks[ADSP_SC598_CLK_DCLK1_HALF] = clk_register_fixed_factor(NULL, "dclk_1_half",
++								    "dclk_1",
++								    CLK_SET_RATE_PARENT,
++								    1, 2);
++	clks[ADSP_SC598_CLK_CGU1_SCLK1_HALF] = clk_register_fixed_factor(NULL,
++									 "sclk1_1_half",
++									 "sclk1_1",
++									 CLK_SET_RATE_PARENT,
++									 1, 2);
++
++	// CDU output muxes
++	clks[ADSP_SC598_CLK_SHARC0_SEL] = cdu_mux("sharc0_sel", cdu + CDU_CFG0,
++						  sharc0_sels);
++	clks[ADSP_SC598_CLK_SHARC1_SEL] = cdu_mux("sharc1_sel", cdu + CDU_CFG1,
++						  sharc1_sels);
++	clks[ADSP_SC598_CLK_ARM_SEL] = cdu_mux("arm_sel", cdu + CDU_CFG2, arm_sels);
++	clks[ADSP_SC598_CLK_CDU_DDR_SEL] = cdu_mux("cdu_ddr_sel", cdu + CDU_CFG3,
++						   cdu_ddr_sels);
++	clks[ADSP_SC598_CLK_CAN_SEL] = cdu_mux("can_sel", cdu + CDU_CFG4, can_sels);
++	clks[ADSP_SC598_CLK_SPDIF_SEL] = cdu_mux("spdif_sel", cdu + CDU_CFG5, spdif_sels);
++	clks[ADSP_SC598_CLK_SPI_SEL] = cdu_mux("spi_sel", cdu + CDU_CFG6, spi_sels);
++	clks[ADSP_SC598_CLK_GIGE_SEL] = cdu_mux("gige_sel", cdu + CDU_CFG7, gige_sels);
++	clks[ADSP_SC598_CLK_LP_SEL] = cdu_mux("lp_sel", cdu + CDU_CFG8, lp_sels);
++	clks[ADSP_SC598_CLK_LP_DDR_SEL] = cdu_mux("lp_ddr_sel", cdu + CDU_CFG9,
++						  lp_ddr_sels);
++	clks[ADSP_SC598_CLK_OSPI_REFCLK_SEL] = cdu_mux("ospi_refclk_sel", cdu + CDU_CFG10,
++						       ospi_refclk_sels);
++	clks[ADSP_SC598_CLK_TRACE_SEL] = cdu_mux("trace_sel", cdu + CDU_CFG12,
++						 trace_sels);
++	clks[ADSP_SC598_CLK_EMMC_SEL] = cdu_mux("emmc_sel", cdu + CDU_CFG13, emmc_sels);
++	clks[ADSP_SC598_CLK_EMMC_TIMER_QMC_SEL] = cdu_mux("emmc_timer_qmc_sel",
++							  cdu + CDU_CFG14,
++							  emmc_timer_sels);
++
++	// CDU output enable gates
++	clks[ADSP_SC598_CLK_SHARC0] = cdu_gate("sharc0", "sharc0_sel", cdu + CDU_CFG0,
++					       CLK_IS_CRITICAL);
++	clks[ADSP_SC598_CLK_SHARC1] = cdu_gate("sharc1", "sharc1_sel", cdu + CDU_CFG1,
++					       CLK_IS_CRITICAL);
++	clks[ADSP_SC598_CLK_ARM] = cdu_gate("arm", "arm_sel", cdu + CDU_CFG2,
++					    CLK_IS_CRITICAL);
++	clks[ADSP_SC598_CLK_CDU_DDR] = cdu_gate("cdu_ddr", "cdu_ddr_sel", cdu + CDU_CFG3,
++						0);
++	clks[ADSP_SC598_CLK_CAN] = cdu_gate("can", "can_sel", cdu + CDU_CFG4, 0);
++	clks[ADSP_SC598_CLK_SPDIF] = cdu_gate("spdif", "spdif_sel", cdu + CDU_CFG5, 0);
++	clks[ADSP_SC598_CLK_SPI] = cdu_gate("spi", "spi_sel", cdu + CDU_CFG6, 0);
++	clks[ADSP_SC598_CLK_GIGE] = cdu_gate("gige", "gige_sel", cdu + CDU_CFG7, 0);
++	clks[ADSP_SC598_CLK_LP] = cdu_gate("lp", "lp_sel", cdu + CDU_CFG8, 0);
++	clks[ADSP_SC598_CLK_LP_DDR] = cdu_gate("lp_ddr", "lp_ddr_sel", cdu + CDU_CFG9, 0);
++	clks[ADSP_SC598_CLK_OSPI_REFCLK] = cdu_gate("ospi_refclk", "ospi_refclk_sel",
++						    cdu + CDU_CFG10, 0);
++	clks[ADSP_SC598_CLK_TRACE] = cdu_gate("trace", "trace_sel", cdu + CDU_CFG12, 0);
++	clks[ADSP_SC598_CLK_EMMC] = cdu_gate("emmc", "emmc_sel", cdu + CDU_CFG13, 0);
++	clks[ADSP_SC598_CLK_EMMC_TIMER_QMC] = cdu_gate("emmc_timer_qmc",
++						       "emmc_timer_qmc_sel",
++						       cdu + CDU_CFG14, 0);
++
++	// Dedicated DDR output mux
++	clks[ADSP_SC598_CLK_DDR] = clk_register_mux(NULL, "ddr", ddr_sels, 2,
++						    CLK_SET_RATE_PARENT | CLK_IS_CRITICAL,
++						    pll3, 11, 1, 0);
++
++	ret = cdu_check_clocks(clks, ARRAY_SIZE(clks));
++	if (ret)
++		pr_err("CDU error detected\n");
++
++	return ret;
++}
++
++static const struct udevice_id adi_sc598_clk_ids[] = {
++	{ .compatible = "adi,sc598-clocks" },
++	{ },
++};
++
++U_BOOT_DRIVER(adi_sc598_clk) = {
++	.name = "clk_adi_sc598",
++	.id = UCLASS_CLK,
++	.of_match = adi_sc598_clk_ids,
++	.ops		= &adi_clk_ops,
++	.probe = sc598_clock_probe,
++	.flags = DM_FLAG_PRE_RELOC,
++};
+diff --git a/drivers/clk/adi/clk-shared.c b/drivers/clk/adi/clk-shared.c
+new file mode 100644
+index 0000000000..dcadcafa9d
+--- /dev/null
++++ b/drivers/clk/adi/clk-shared.c
+@@ -0,0 +1,48 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2022 - Analog Devices, Inc.
++ *
++ * Written and/or maintained by Timesys Corporation
++ *
++ * Author: Greg Malysa <greg.malysa@timesys.com>
++ */
++
++#include "clk.h"
++
++static ulong adi_get_rate(struct clk *clk)
++{
++	struct clk *c;
++	int ret;
++
++	ret = clk_get_by_id(clk->id, &c);
++	if (ret)
++		return ret;
++
++	return clk_get_rate(c);
++}
++
++static ulong adi_set_rate(struct clk *clk, ulong rate)
++{
++	//Not yet implemented
++	return 0;
++}
++
++static int adi_enable(struct clk *clk)
++{
++	//Not yet implemented
++	return 0;
++}
++
++static int adi_disable(struct clk *clk)
++{
++	//Not yet implemented
++	return 0;
++}
++
++const struct clk_ops adi_clk_ops = {
++	.set_rate = adi_set_rate,
++	.get_rate = adi_get_rate,
++	.enable = adi_enable,
++	.disable = adi_disable,
++};
++
+diff --git a/drivers/clk/adi/clk.h b/drivers/clk/adi/clk.h
+new file mode 100644
+index 0000000000..7cceda412a
+--- /dev/null
++++ b/drivers/clk/adi/clk.h
+@@ -0,0 +1,122 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * (C) Copyright 2022 - Analog Devices, Inc.
++ *
++ * Written and/or maintained by Timesys Corporation
++ *
++ * Author: Greg Malysa <greg.malysa@timesys.com>
++ *
++ * Ported from Linux: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++ */
++
++#ifndef CLK_ADI_CLK_H
++#define CLK_ADI_CLK_H
++
++#include <linux/types.h>
++#include <linux/clk-provider.h>
++
++#define CGU_CTL         0x00
++#define CGU_PLLCTL      0x04
++#define CGU_STAT        0x08
++#define CGU_DIV         0x0C
++#define CGU_CLKOUTSEL   0x10
++#define CGU_OSCWDCTL    0x14
++#define CGU_TSCTL       0x18
++#define CGU_TSVALUE0    0x1C
++#define CGU_TSVALUE1    0x20
++#define CGU_TSCOUNT0    0x24
++#define CGU_TSCOUNT1    0x28
++#define CGU_CCBF_DIS    0x2C
++#define CGU_CCBF_STAT   0x30
++#define CGU_SCBF_DIS    0x38
++#define CGU_SCBF_STAT   0x3C
++#define CGU_DIVEX       0x40
++#define CGU_REVID       0x48
++
++#define CDU_CFG0     0x00
++#define CDU_CFG1     0x04
++#define CDU_CFG2     0x08
++#define CDU_CFG3     0x0C
++#define CDU_CFG4     0x10
++#define CDU_CFG5     0x14
++#define CDU_CFG6     0x18
++#define CDU_CFG7     0x1C
++#define CDU_CFG8     0x20
++#define CDU_CFG9     0x24
++#define CDU_CFG10    0x28
++#define CDU_CFG11    0x2C
++#define CDU_CFG12    0x30
++#define CDU_CFG13    0x34
++#define CDU_CFG14    0x38
++
++#define PLL3_OFFSET 0x2c
++
++#define CDU_CLKINSEL 0x44
++
++#define CGU_MSEL_SHIFT 8
++#define CGU_MSEL_WIDTH 7
++
++#define PLL3_MSEL_SHIFT 4
++#define PLL3_MSEL_WIDTH 7
++
++#define CDU_MUX_SIZE 4
++#define CDU_MUX_SHIFT 1
++#define CDU_MUX_WIDTH 2
++#define CDU_EN_BIT 0
++
++extern const struct clk_ops adi_clk_ops;
++
++struct clk *sc5xx_cgu_pll(const char *name, const char *parent_name,
++			  void __iomem *base, u8 shift, u8 width, u32 m_offset, bool half_m);
++
++/**
++ * All CDU clock muxes are the same size
++ */
++static inline struct clk *cdu_mux(const char *name, void __iomem *reg,
++				  const char * const *parents)
++{
++	return clk_register_mux(NULL, name, parents, CDU_MUX_SIZE,
++		CLK_SET_RATE_PARENT, reg, CDU_MUX_SHIFT, CDU_MUX_WIDTH, 0);
++}
++
++static inline struct clk *cgu_divider(const char *name, const char *parent,
++				      void __iomem *reg, u8 shift, u8 width, u8 extra_flags)
++{
++	return clk_register_divider(NULL, name, parent, CLK_SET_RATE_PARENT,
++		reg, shift, width, CLK_DIVIDER_MAX_AT_ZERO | extra_flags);
++}
++
++static inline struct clk *cdu_gate(const char *name, const char *parent,
++				   void __iomem *reg, u32 flags)
++{
++	return clk_register_gate(NULL, name, parent, CLK_SET_RATE_PARENT | flags,
++		reg, CDU_EN_BIT, 0, NULL);
++}
++
++static inline struct clk *cgu_gate(const char *name, const char *parent,
++				   void __iomem *reg, u8 bit)
++{
++	return clk_register_gate(NULL, name, parent, CLK_SET_RATE_PARENT, reg, bit,
++		CLK_GATE_SET_TO_DISABLE, NULL);
++}
++
++static inline int cdu_check_clocks(struct clk *clks[], size_t count)
++{
++	size_t i;
++
++	for (i = 0; i < count; ++i) {
++		if (clks[i]) {
++			if (IS_ERR(clks[i])) {
++				pr_err("Clock %zu failed to register: %ld\n", i, PTR_ERR(clks[i]));
++				return PTR_ERR(clks[i]);
++			}
++			clks[i]->id = i;
++		} else {
++			pr_err("ADI Clock framework: Null pointer detected on clock %zu\n", i);
++		}
++	}
++
++	return 0;
++}
++
++#endif
+diff --git a/include/dt-bindings/clock/adi-sc5xx-clock.h b/include/dt-bindings/clock/adi-sc5xx-clock.h
+new file mode 100644
+index 0000000000..4a5373d114
+--- /dev/null
++++ b/include/dt-bindings/clock/adi-sc5xx-clock.h
+@@ -0,0 +1,271 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * (C) Copyright 2022 - Analog Devices, Inc.
++ *
++ * Written and/or maintained by Timesys Corporation
 + *
 + * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 + * Contact: Greg Malysa <greg.malysa@timesys.com>
 + *
 + */
 +
-+#include <dm.h>
-+#include <errno.h>
-+#include <post.h>
-+#include <watchdog.h>
-+#include <serial.h>
-+#include <asm/io.h>
-+#include <linux/compiler.h>
-+#include <linux/bitops.h>
-+#include <clk.h>
++#ifndef DT_BINDINGS_CLOCK_ADI_SC5XX_CLOCK_H
++#define DT_BINDINGS_CLOCK_ADI_SC5XX_CLOCK_H
 +
-+/*
-+ * UART4 Masks
-+ */
++//ADSP-SC594
++#define ADSP_SC594_CLK_DUMMY 0
++#define ADSP_SC594_CLK_SYS_CLKIN0 1
++#define ADSP_SC594_CLK_SYS_CLKIN1 2
++#define ADSP_SC594_CLK_CGU1_IN 3
++#define ADSP_SC594_CLK_CGU0_PLL_IN 4
++#define ADSP_SC594_CLK_CGU1_PLL_IN 5
++#define ADSP_SC594_CLK_CGU0_VCO_OUT 6
++#define ADSP_SC594_CLK_CGU1_VCO_OUT 7
++#define ADSP_SC594_CLK_CGU0_PLLCLK 8
++#define ADSP_SC594_CLK_CGU1_PLLCLK 9
++#define ADSP_SC594_CLK_CGU0_CDIV 10
++#define ADSP_SC594_CLK_CGU0_SYSCLK 11
++#define ADSP_SC594_CLK_CGU0_DDIV 12
++#define ADSP_SC594_CLK_CGU0_ODIV 13
++#define ADSP_SC594_CLK_CGU0_S0SELDIV 14
++#define ADSP_SC594_CLK_CGU0_S1SELDIV 15
++#define ADSP_SC594_CLK_CGU0_S1SELEXDIV 16
++#define ADSP_SC594_CLK_CGU0_S1SEL 17
++#define ADSP_SC594_CLK_CGU1_CDIV 18
++#define ADSP_SC594_CLK_CGU1_SYSCLK 19
++#define ADSP_SC594_CLK_CGU1_DDIV 20
++#define ADSP_SC594_CLK_CGU1_ODIV 21
++#define ADSP_SC594_CLK_CGU1_S0SELDIV 22
++#define ADSP_SC594_CLK_CGU1_S1SELDIV 23
++#define ADSP_SC594_CLK_CGU1_S1SELEXDIV 24
++#define ADSP_SC594_CLK_CGU1_S1SEL 25
++#define ADSP_SC594_CLK_CGU0_CCLK0 26
++#define ADSP_SC594_CLK_CGU0_CCLK1 27
++#define ADSP_SC594_CLK_CGU0_OCLK 28
++#define ADSP_SC594_CLK_CGU0_DCLK 29
++#define ADSP_SC594_CLK_CGU0_SCLK1 30
++#define ADSP_SC594_CLK_CGU0_SCLK0 31
++#define ADSP_SC594_CLK_CGU1_CCLK0 32
++#define ADSP_SC594_CLK_CGU1_CCLK1 33
++#define ADSP_SC594_CLK_CGU1_OCLK 34
++#define ADSP_SC594_CLK_CGU1_DCLK 35
++#define ADSP_SC594_CLK_CGU1_SCLK1 36
++#define ADSP_SC594_CLK_CGU1_SCLK0 37
++#define ADSP_SC594_CLK_SHARC0_SEL 38
++#define ADSP_SC594_CLK_SHARC1_SEL 39
++#define ADSP_SC594_CLK_ARM_SEL 40
++#define ADSP_SC594_CLK_CDU_DDR_SEL 41
++#define ADSP_SC594_CLK_CAN_SEL 42
++#define ADSP_SC594_CLK_SPDIF_SEL 43
++#define ADSP_SC594_CLK_RESERVED_SEL 44
++#define ADSP_SC594_CLK_GIGE_SEL 45
++#define ADSP_SC594_CLK_LP_SEL 46
++#define ADSP_SC594_CLK_LPDDR_SEL 47
++#define ADSP_SC594_CLK_OSPI_SEL 48
++#define ADSP_SC594_CLK_TRACE_SEL 49
++#define ADSP_SC594_CLK_SHARC0 50
++#define ADSP_SC594_CLK_SHARC1 51
++#define ADSP_SC594_CLK_ARM 52
++#define ADSP_SC594_CLK_CDU_DDR 53
++#define ADSP_SC594_CLK_CAN 54
++#define ADSP_SC594_CLK_SPDIF 55
++#define ADSP_SC594_CLK_SPI 56
++#define ADSP_SC594_CLK_GIGE 57
++#define ADSP_SC594_CLK_LP 58
++#define ADSP_SC594_CLK_LPDDR 59
++#define ADSP_SC594_CLK_OSPI 60
++#define ADSP_SC594_CLK_TRACE 61
++#define ADSP_SC594_CLK_END 62
 +
-+/* UART_CONTROL */
-+#define UEN			BIT(0)
-+#define LOOP_ENA		BIT(1)
-+#define UMOD			(3 << 4)
-+#define UMOD_UART		(0 << 4)
-+#define UMOD_MDB		BIT(4)
-+#define UMOD_IRDA		BIT(4)
-+#define WLS			(3 << 8)
-+#define WLS_5			(0 << 8)
-+#define WLS_6			BIT(8)
-+#define WLS_7			(2 << 8)
-+#define WLS_8			(3 << 8)
-+#define STB			BIT(12)
-+#define STBH			BIT(13)
-+#define PEN			BIT(14)
-+#define EPS			BIT(15)
-+#define STP			BIT(16)
-+#define FPE			BIT(17)
-+#define FFE			BIT(18)
-+#define SB			BIT(19)
-+#define FCPOL			BIT(22)
-+#define RPOLC			BIT(23)
-+#define TPOLC			BIT(24)
-+#define MRTS			BIT(25)
-+#define XOFF			BIT(26)
-+#define ARTS			BIT(27)
-+#define ACTS			BIT(28)
-+#define RFIT			BIT(29)
-+#define RFRT			BIT(30)
++//ADSP-SC598
++#define ADSP_SC598_CLK_DUMMY 0
++#define ADSP_SC598_CLK_SYS_CLKIN0 1
++#define ADSP_SC598_CLK_SYS_CLKIN1 2
++#define ADSP_SC598_CLK_CGU0_PLL_IN 3
++#define ADSP_SC598_CLK_CGU0_VCO_OUT 4
++#define ADSP_SC598_CLK_CGU0_PLLCLK 5
++#define ADSP_SC598_CLK_CGU1_IN 6
++#define ADSP_SC598_CLK_CGU1_PLL_IN 7
++#define ADSP_SC598_CLK_CGU1_VCO_OUT 8
++#define ADSP_SC598_CLK_CGU1_PLLCLK 9
++#define ADSP_SC598_CLK_CGU0_CDIV 10
++#define ADSP_SC598_CLK_CGU0_SYSCLK 11
++#define ADSP_SC598_CLK_CGU0_DDIV 12
++#define ADSP_SC598_CLK_CGU0_ODIV 13
++#define ADSP_SC598_CLK_CGU0_S0SELDIV 14
++#define ADSP_SC598_CLK_CGU0_S1SELDIV 15
++#define ADSP_SC598_CLK_CGU0_S1SELEXDIV 16
++#define ADSP_SC598_CLK_CGU0_S1SEL 17
++#define ADSP_SC598_CLK_CGU1_CDIV 18
++#define ADSP_SC598_CLK_CGU1_SYSCLK 19
++#define ADSP_SC598_CLK_CGU1_DDIV 20
++#define ADSP_SC598_CLK_CGU1_ODIV 21
++#define ADSP_SC598_CLK_CGU1_S0SELDIV 22
++#define ADSP_SC598_CLK_CGU1_S1SELDIV 23
++#define ADSP_SC598_CLK_CGU1_S0SELEXDIV 24
++#define ADSP_SC598_CLK_CGU1_S1SELEXDIV 25
++#define ADSP_SC598_CLK_CGU1_S0SEL 26
++#define ADSP_SC598_CLK_CGU1_S1SEL 27
++#define ADSP_SC598_CLK_CGU0_CCLK2 28
++#define ADSP_SC598_CLK_CGU0_CCLK0 29
++#define ADSP_SC598_CLK_CGU0_OCLK 30
++#define ADSP_SC598_CLK_CGU0_DCLK 31
++#define ADSP_SC598_CLK_CGU0_SCLK1 32
++#define ADSP_SC598_CLK_CGU0_SCLK0 33
++#define ADSP_SC598_CLK_CGU1_CCLK0 34
++#define ADSP_SC598_CLK_CGU1_OCLK 35
++#define ADSP_SC598_CLK_CGU1_DCLK 36
++#define ADSP_SC598_CLK_CGU1_SCLK1 37
++#define ADSP_SC598_CLK_CGU1_SCLK0 38
++#define ADSP_SC598_CLK_CGU1_CCLK2 39
++#define ADSP_SC598_CLK_DCLK0_HALF 40
++#define ADSP_SC598_CLK_DCLK1_HALF 41
++#define ADSP_SC598_CLK_CGU1_SCLK1_HALF 42
++#define ADSP_SC598_CLK_SHARC0_SEL 43
++#define ADSP_SC598_CLK_SHARC1_SEL 44
++#define ADSP_SC598_CLK_ARM_SEL 45
++#define ADSP_SC598_CLK_CDU_DDR_SEL 46
++#define ADSP_SC598_CLK_CAN_SEL 47
++#define ADSP_SC598_CLK_SPDIF_SEL 48
++#define ADSP_SC598_CLK_SPI_SEL 49
++#define ADSP_SC598_CLK_GIGE_SEL 50
++#define ADSP_SC598_CLK_LP_SEL 51
++#define ADSP_SC598_CLK_LP_DDR_SEL 52
++#define ADSP_SC598_CLK_OSPI_REFCLK_SEL 53
++#define ADSP_SC598_CLK_TRACE_SEL 54
++#define ADSP_SC598_CLK_EMMC_SEL 55
++#define ADSP_SC598_CLK_EMMC_TIMER_QMC_SEL 56
++#define ADSP_SC598_CLK_SHARC0 57
++#define ADSP_SC598_CLK_SHARC1 58
++#define ADSP_SC598_CLK_ARM 59
++#define ADSP_SC598_CLK_CDU_DDR 60
++#define ADSP_SC598_CLK_CAN 61
++#define ADSP_SC598_CLK_SPDIF 62
++#define ADSP_SC598_CLK_SPI 63
++#define ADSP_SC598_CLK_GIGE 64
++#define ADSP_SC598_CLK_LP 65
++#define ADSP_SC598_CLK_LP_DDR 66
++#define ADSP_SC598_CLK_OSPI_REFCLK 67
++#define ADSP_SC598_CLK_TRACE 68
++#define ADSP_SC598_CLK_EMMC 69
++#define ADSP_SC598_CLK_EMMC_TIMER_QMC 70
++#define ADSP_SC598_CLK_3PLL_PLL_IN 71
++#define ADSP_SC598_CLK_3PLL_VCO_OUT 72
++#define ADSP_SC598_CLK_3PLL_PLLCLK 73
++#define ADSP_SC598_CLK_3PLL_DDIV 74
++#define ADSP_SC598_CLK_DDR 75
++#define ADSP_SC598_CLK_END 76
 +
-+/* UART_STATUS */
-+#define DR			BIT(0)
-+#define OE			BIT(1)
-+#define PE			BIT(2)
-+#define FE			BIT(3)
-+#define BI			BIT(4)
-+#define THRE			BIT(5)
-+#define TEMT			BIT(7)
-+#define TFI			BIT(8)
-+#define ASTKY			BIT(9)
-+#define ADDR			BIT(10)
-+#define RO			BIT(11)
-+#define SCTS			BIT(12)
-+#define CTS			BIT(16)
-+#define RFCS			BIT(17)
++//ADSP-SC58X
++#define ADSP_SC58X_CLK_DUMMY 0
++#define ADSP_SC58X_CLK_SYS_CLKIN0 1
++#define ADSP_SC58X_CLK_SYS_CLKIN1 2
++#define ADSP_SC58X_CLK_CGU0_PLL_IN 3
++#define ADSP_SC58X_CLK_CGU0_VCO_OUT 4
++#define ADSP_SC58X_CLK_CGU0_PLLCLK 5
++#define ADSP_SC58X_CLK_CGU1_IN 6
++#define ADSP_SC58X_CLK_CGU1_PLL_IN 7
++#define ADSP_SC58X_CLK_CGU1_VCO_OUT 8
++#define ADSP_SC58X_CLK_CGU1_PLLCLK 9
++#define ADSP_SC58X_CLK_CGU0_CDIV 10
++#define ADSP_SC58X_CLK_CGU0_SYSCLK 11
++#define ADSP_SC58X_CLK_CGU0_DDIV 12
++#define ADSP_SC58X_CLK_CGU0_ODIV 13
++#define ADSP_SC58X_CLK_CGU0_S0SELDIV 14
++#define ADSP_SC58X_CLK_CGU0_S1SELDIV 15
++#define ADSP_SC58X_CLK_CGU1_CDIV 16
++#define ADSP_SC58X_CLK_CGU1_SYSCLK 17
++#define ADSP_SC58X_CLK_CGU1_DDIV 18
++#define ADSP_SC58X_CLK_CGU1_ODIV 19
++#define ADSP_SC58X_CLK_CGU1_S0SELDIV 20
++#define ADSP_SC58X_CLK_CGU1_S1SELDIV 21
++#define ADSP_SC58X_CLK_CGU0_CCLK0 22
++#define ADSP_SC58X_CLK_CGU0_CCLK1 23
++#define ADSP_SC58X_CLK_CGU0_OCLK 24
++#define ADSP_SC58X_CLK_CGU0_DCLK 25
++#define ADSP_SC58X_CLK_CGU0_SCLK1 26
++#define ADSP_SC58X_CLK_CGU0_SCLK0 27
++#define ADSP_SC58X_CLK_CGU1_CCLK0 28
++#define ADSP_SC58X_CLK_CGU1_CCLK1 29
++#define ADSP_SC58X_CLK_CGU1_OCLK 30
++#define ADSP_SC58X_CLK_CGU1_DCLK 31
++#define ADSP_SC58X_CLK_CGU1_SCLK1 32
++#define ADSP_SC58X_CLK_CGU1_SCLK0 33
++#define ADSP_SC58X_CLK_OCLK0_HALF 34
++#define ADSP_SC58X_CLK_CCLK1_1_HALF 35
++#define ADSP_SC58X_CLK_SHARC0_SEL 36
++#define ADSP_SC58X_CLK_SHARC1_SEL 37
++#define ADSP_SC58X_CLK_ARM_SEL 38
++#define ADSP_SC58X_CLK_CDU_DDR_SEL 39
++#define ADSP_SC58X_CLK_CAN_SEL 40
++#define ADSP_SC58X_CLK_SPDIF_SEL 41
++#define ADSP_SC58X_CLK_RESERVED_SEL 42
++#define ADSP_SC58X_CLK_GIGE_SEL 43
++#define ADSP_SC58X_CLK_LP_SEL 44
++#define ADSP_SC58X_CLK_SDIO_SEL 45
++#define ADSP_SC58X_CLK_SHARC0 46
++#define ADSP_SC58X_CLK_SHARC1 47
++#define ADSP_SC58X_CLK_ARM 48
++#define ADSP_SC58X_CLK_CDU_DDR 49
++#define ADSP_SC58X_CLK_CAN 50
++#define ADSP_SC58X_CLK_SPDIF 51
++#define ADSP_SC58X_CLK_RESERVED 52
++#define ADSP_SC58X_CLK_GIGE 53
++#define ADSP_SC58X_CLK_LP 54
++#define ADSP_SC58X_CLK_SDIO 55
++#define ADSP_SC58X_CLK_END 56
 +
-+/* UART_EMASK */
-+#define ERBFI			BIT(0)
-+#define ETBEI			BIT(1)
-+#define ELSI			BIT(2)
-+#define EDSSI			BIT(3)
-+#define EDTPTI			BIT(4)
-+#define ETFI			BIT(5)
-+#define ERFCI			BIT(6)
-+#define EAWI			BIT(7)
-+#define ERXS			BIT(8)
-+#define ETXS			BIT(9)
++//ADSP-SC57X
++#define ADSP_SC57X_CLK_DUMMY 0
++#define ADSP_SC57X_CLK_SYS_CLKIN0 1
++#define ADSP_SC57X_CLK_SYS_CLKIN1 2
++#define ADSP_SC57X_CLK_CGU0_PLL_IN 3
++#define ADSP_SC57X_CLK_CGU0_PLLCLK 4
++#define ADSP_SC57X_CLK_CGU1_IN 5
++#define ADSP_SC57X_CLK_CGU1_PLL_IN 6
++#define ADSP_SC57X_CLK_CGU1_PLLCLK 7
++#define ADSP_SC57X_CLK_CGU0_CDIV 8
++#define ADSP_SC57X_CLK_CGU0_SYSCLK 9
++#define ADSP_SC57X_CLK_CGU0_DDIV 10
++#define ADSP_SC57X_CLK_CGU0_ODIV 11
++#define ADSP_SC57X_CLK_CGU0_S0SELDIV 12
++#define ADSP_SC57X_CLK_CGU0_S1SELDIV 13
++#define ADSP_SC57X_CLK_CGU1_CDIV 14
++#define ADSP_SC57X_CLK_CGU1_SYSCLK 15
++#define ADSP_SC57X_CLK_CGU1_DDIV 16
++#define ADSP_SC57X_CLK_CGU1_ODIV 17
++#define ADSP_SC57X_CLK_CGU1_S0SELDIV 18
++#define ADSP_SC57X_CLK_CGU1_S1SELDIV 19
++#define ADSP_SC57X_CLK_CGU0_CCLK0 20
++#define ADSP_SC57X_CLK_CGU0_CCLK1 21
++#define ADSP_SC57X_CLK_CGU0_OCLK 22
++#define ADSP_SC57X_CLK_CGU0_DCLK 23
++#define ADSP_SC57X_CLK_CGU0_SCLK1 24
++#define ADSP_SC57X_CLK_CGU0_SCLK0 25
++#define ADSP_SC57X_CLK_CGU1_CCLK0 26
++#define ADSP_SC57X_CLK_CGU1_CCLK1 27
++#define ADSP_SC57X_CLK_CGU1_OCLK 28
++#define ADSP_SC57X_CLK_CGU1_DCLK 29
++#define ADSP_SC57X_CLK_CGU1_SCLK1 30
++#define ADSP_SC57X_CLK_CGU1_SCLK0 31
++#define ADSP_SC57X_CLK_OCLK0_HALF 32
++#define ADSP_SC57X_CLK_CCLK1_1_HALF 33
++#define ADSP_SC57X_CLK_SHARC0_SEL 34
++#define ADSP_SC57X_CLK_SHARC1_SEL 35
++#define ADSP_SC57X_CLK_ARM_SEL 36
++#define ADSP_SC57X_CLK_CDU_DDR_SEL 37
++#define ADSP_SC57X_CLK_CAN_SEL 38
++#define ADSP_SC57X_CLK_SPDIF_SEL 39
++#define ADSP_SC57X_CLK_GIGE_SEL 40
++#define ADSP_SC57X_CLK_SDIO_SEL 41
++#define ADSP_SC57X_CLK_SHARC0 42
++#define ADSP_SC57X_CLK_SHARC1 43
++#define ADSP_SC57X_CLK_ARM 44
++#define ADSP_SC57X_CLK_CDU_DDR 45
++#define ADSP_SC57X_CLK_CAN 46
++#define ADSP_SC57X_CLK_SPDIF 47
++#define ADSP_SC57X_CLK_GIGE 48
++#define ADSP_SC57X_CLK_SDIO 49
++#define ADSP_SC57X_CLK_END 50
 +
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+struct uart4_reg {
-+	u32 revid;
-+	u32 control;
-+	u32 status;
-+	u32 scr;
-+	u32 clock;
-+	u32 emask;
-+	u32 emaskst;
-+	u32 emaskcl;
-+	u32 rbr;
-+	u32 thr;
-+	u32 taip;
-+	u32 tsr;
-+	u32 rsr;
-+	u32 txdiv_cnt;
-+	u32 rxdiv_cnt;
-+};
-+
-+struct adi_uart4_platdata {
-+	// Hardware registers
-+	struct uart4_reg *regs;
-+
-+	// Enable divide-by-one baud rate setting
-+	bool edbo;
-+};
-+
-+static int adi_uart4_set_brg(struct udevice *dev, int baudrate)
-+{
-+	struct adi_uart4_platdata *plat = dev_get_plat(dev);
-+	struct uart4_reg *regs = plat->regs;
-+	u32 divisor, uart_base_clk_rate;
-+	struct clk uart_base_clk;
-+
-+	if (clk_get_by_index(dev, 0, &uart_base_clk)) {
-+		printf("%s: Could not get UART base clock\n", dev->name);
-+		return -1;
-+	}
-+
-+	uart_base_clk_rate = clk_get_rate(&uart_base_clk);
-+
-+	if (plat->edbo) {
-+		u16 divisor16 = (uart_base_clk_rate + (baudrate / 2)) / baudrate;
-+
-+		divisor = divisor16 | BIT(31);
-+	} else {
-+		// Divisor is only 16 bits
-+		divisor = 0x0000ffff & ((uart_base_clk_rate + (baudrate * 8)) / (baudrate * 16));
-+	}
-+
-+	writel(divisor, &regs->clock);
-+	return 0;
-+}
-+
-+static int adi_uart4_pending(struct udevice *dev, bool input)
-+{
-+	struct adi_uart4_platdata *plat = dev_get_plat(dev);
-+	struct uart4_reg *regs = plat->regs;
-+
-+	if (input)
-+		return (readl(&regs->status) & DR) ? 1 : 0;
-+	else
-+		return (readl(&regs->status) & THRE) ? 0 : 1;
-+}
-+
-+static int adi_uart4_getc(struct udevice *dev)
-+{
-+	struct adi_uart4_platdata *plat = dev_get_plat(dev);
-+	struct uart4_reg *regs = plat->regs;
-+	int uart_rbr_val;
-+
-+	if (!adi_uart4_pending(dev, true))
-+		return -EAGAIN;
-+
-+	uart_rbr_val = readl(&regs->rbr);
-+	writel(-1, &regs->status);
-+
-+	return uart_rbr_val;
-+}
-+
-+static int adi_uart4_putc(struct udevice *dev, const char ch)
-+{
-+	struct adi_uart4_platdata *plat = dev_get_plat(dev);
-+	struct uart4_reg *regs = plat->regs;
-+
-+	if (adi_uart4_pending(dev, false))
-+		return -EAGAIN;
-+
-+	writel(ch, &regs->thr);
-+	return 0;
-+}
-+
-+static const struct dm_serial_ops adi_uart4_serial_ops = {
-+	.setbrg = adi_uart4_set_brg,
-+	.getc = adi_uart4_getc,
-+	.putc = adi_uart4_putc,
-+	.pending = adi_uart4_pending,
-+};
-+
-+static int adi_uart4_of_to_plat(struct udevice *dev)
-+{
-+	struct adi_uart4_platdata *plat = dev_get_plat(dev);
-+	fdt_addr_t addr;
-+
-+	addr = dev_read_addr(dev);
-+	if (addr == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+
-+	plat->regs = (struct uart4_reg *)addr;
-+	plat->edbo = dev_read_bool(dev, "adi,enable-edbo");
-+
-+	return 0;
-+}
-+
-+static int adi_uart4_probe(struct udevice *dev)
-+{
-+	struct adi_uart4_platdata *plat = dev_get_plat(dev);
-+	struct uart4_reg *regs = plat->regs;
-+
-+	/* always enable UART to 8-bit mode */
-+	writel(UEN | UMOD_UART | WLS_8, &regs->control);
-+
-+	writel(-1, &regs->status);
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id adi_uart4_serial_ids[] = {
-+	{ .compatible = "adi,uart4" },
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(serial_adi_uart4) = {
-+	.name = "serial_adi_uart4",
-+	.id = UCLASS_SERIAL,
-+	.of_match = adi_uart4_serial_ids,
-+	.of_to_plat = adi_uart4_of_to_plat,
-+	.plat_auto = sizeof(struct adi_uart4_platdata),
-+	.probe = adi_uart4_probe,
-+	.ops = &adi_uart4_serial_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
++#endif
 -- 
 2.43.2
 
