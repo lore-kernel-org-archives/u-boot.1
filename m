@@ -4,111 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE523C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 20:31:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B6E4C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 20:31:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6077587F00;
+	by phobos.denx.de (Postfix) with ESMTP id D9FD1881CA;
 	Thu, 11 Apr 2024 22:31:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="kNfzOd7v";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tQFjmmIR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99A2487EFA; Thu, 11 Apr 2024 18:09:36 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx1.sberdevices.ru [37.18.73.165])
+ id 9EB16878AA; Thu, 11 Apr 2024 22:31:15 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D34988208
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 18:09:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 29F288573F
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 22:31:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avromanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk01 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id E4C7110003A;
- Thu, 11 Apr 2024 19:09:29 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru E4C7110003A
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1712851769;
- bh=Wnnqbf9DEiw0neNFZEaVnitKAB0QhrKYyX1xREucgu8=;
- h=From:To:Subject:Date:Message-ID:Content-Type:MIME-Version:From;
- b=kNfzOd7vxBQcqnAkUuxr5CWgGf3u9pO/4tp7uYgMb4Qn83XwzmQWH+yFitKcaBVBl
- Y3tx41rQZ0F5a+tzKhheJUEoyM/ElweXTLfpXrBFYQPWHle33F+LwXHwUwBfgJWVJ9
- oJI+vzMp7aWgLXI1tjtyfBJ9YycF/cUJCLv0lMaLCbmeoLJKIqquygbFhWZW9RWlqp
- wCdPbrCXoBRLnNMHTCqdEUKWbl8Tgl/yXeGR8smDQ+HbVMvZtB8a2Uh7Iv2SDGB3fq
- 6NpyoUb3EJ9FK9CxfH4rj7APMHZkZ72hypS+VmZlLLugWOWLb6ICEkNkEykPBuHFcX
- aml0g621s6Sjw==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m01.sberdevices.ru
- [172.16.192.107])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu, 11 Apr 2024 19:09:29 +0300 (MSK)
-Received: from p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) by
- p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Thu, 11 Apr 2024 19:09:29 +0300
-Received: from p-i-exch-sc-m02.sberdevices.ru ([fe80::10c3:6e04:fd07:c511]) by
- p-i-exch-sc-m02.sberdevices.ru ([fe80::10c3:6e04:fd07:c511%9]) with
- mapi id 15.02.1118.040; Thu, 11 Apr 2024 19:09:29 +0300
-From: Alexey Romanov <avromanov@salutedevices.com>
-To: "dario.binacchi@amarulasolutions.com"
- <dario.binacchi@amarulasolutions.com>, "michael@amarulasolutions.com"
- <michael@amarulasolutions.com>, "frieder.schrempf@kontron.de"
- <frieder.schrempf@kontron.de>, "kmpark@infradead.org" <kmpark@infradead.org>, 
- "hs@denx.de" <hs@denx.de>, "joe.hershberger@ni.com" <joe.hershberger@ni.com>, 
- "dunaev@tecon.ru" <dunaev@tecon.ru>, "sjg@chromium.org" <sjg@chromium.org>,
- "bmeng@tinylab.org" <bmeng@tinylab.org>, "xypron.glpk@gmx.de"
- <xypron.glpk@gmx.de>, "tobias@waldekranz.com" <tobias@waldekranz.com>,
- "jpewhacker@gmail.com" <jpewhacker@gmail.com>,
- "marek.vasut+renesas@mailbox.org" <marek.vasut+renesas@mailbox.org>,
- "kever.yang@rock-chips.com" <kever.yang@rock-chips.com>, "jbx6244@gmail.com"
- <jbx6244@gmail.com>, "abdellatif.elkhlifi@arm.com"
- <abdellatif.elkhlifi@arm.com>, "mikhail.kshevetskiy@iopsys.eu"
- <mikhail.kshevetskiy@iopsys.eu>, "jagan@amarulasolutions.com"
- <jagan@amarulasolutions.com>
-CC: kernel <kernel@sberdevices.ru>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 0/3] Introduce mtdblock device
-Thread-Topic: [PATCH v3 0/3] Introduce mtdblock device
-Thread-Index: AQHahn8E065oAbZrwUS8pgiLN8ifkbFjFfGA
-Date: Thu, 11 Apr 2024 16:09:29 +0000
-Message-ID: <20240411160857.fb6a2neossmz2d4y@cab-wsm-0029881.sigma.sbrf.ru>
-References: <20240404105813.1520732-1-avromanov@salutedevices.com>
-In-Reply-To: <20240404105813.1520732-1-avromanov@salutedevices.com>
-Accept-Language: ru-RU, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.16.18.92]
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <6FEAB6AF68693B40A7A68A6690DFFBB4@sberdevices.ru>
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43BKUxRj031110;
+ Thu, 11 Apr 2024 15:30:59 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1712867459;
+ bh=gBfPEPFdAaG1pqPtXWTVhNV1/LNkQ9S3MINIHw9KtQY=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=tQFjmmIR72u3roZQtFe06q/CkTuSXSi5fyXBC86uqCfHuaV1JqA8N0AnhhERHqfSU
+ ViAX+IKxbGgT/EKOUyKv2oRw2c1bUGNu/lGb9EzUExwwh9ozL1vIWd79EL1vRWWu1y
+ +PPK7onOnqHkJigKzW7W9trRWxSpPfYJMO/Uhrao=
+Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43BKUxl1022763
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 11 Apr 2024 15:30:59 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 11
+ Apr 2024 15:30:58 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 11 Apr 2024 15:30:58 -0500
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43BKUwRN012876;
+ Thu, 11 Apr 2024 15:30:58 -0500
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
+ <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ "Heinrich Schuchardt" <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>,
+ "Christian Gmeiner" <christian.gmeiner@gmail.com>,
+ Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
+ Nikhil M Jain <n-jain1@ti.com>, "Neha Malcom Francis"
+ <n-francis@ti.com>, Andrew Davis <afd@ti.com>, "Maxime Ripard"
+ <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
+ "Vignesh Raghavendra" <vigneshr@ti.com>,
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+Subject: Re: [PATCH v2 12/16] arm: dts: k3-am625-sk-u-boot: Add
+ sysreset-controller node
+In-Reply-To: <87cyqwe3lt.fsf@baylibre.com>
+References: <20240408223134.165877-1-j-humphreys@ti.com>
+ <20240408223134.165877-13-j-humphreys@ti.com>
+ <87cyqwe3lt.fsf@baylibre.com>
+Date: Thu, 11 Apr 2024 15:30:58 -0500
+Message-ID: <86edbbzlod.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 184677 [Apr 11 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: avromanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 16 0.3.16
- 6e64c33514fcbd07e515710c86ba61de7f56194e, {Tracking_uf_ne_domains},
- {Track_E25351}, {Tracking_from_domain_doesnt_match_to},
- smtp.sberdevices.ru:7.1.1,5.0.1; lore.kernel.org:7.1.1;
- cab-wsm-0029881.sigma.sbrf.ru:7.1.1,5.0.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; salutedevices.com:7.1.1;
- 127.0.0.199:7.1.2, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2024/04/11 07:46:00
-X-KSMG-LinksScanning: Clean, bases: 2024/04/11 07:47:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/04/11 11:38:00 #24745823
-X-KSMG-AntiVirus-Status: Clean, skipped
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-Mailman-Approved-At: Thu, 11 Apr 2024 22:31:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -126,69 +92,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello! Ping.
+Mattijs Korpershoek <mkorpershoek@baylibre.com> writes:
 
-On Thu, Apr 04, 2024 at 01:58:10PM +0300, Alexey Romanov wrote:
-> Hello!
->=20
-> This series adds support for the mtdblock device, which
-> allows to read/write data block by block. For example,
-> it can now be used for BCB or Android AB command:
->=20
->   $ bcb load mtd 0 part_name
->=20
-> Tested only on SPI NAND, so bind is made only for
-> SPI NAND drivers.
->=20
-> ---
->=20
-> Changes V1 -> V2 [1]:
->=20
->   - Drop patch [2].
->   - Add warning if bind NAND mtdblock device.
->   - Move documentation of mtdblock implementation
->     from commit message to the source code.
->   - Remove __maybe_unused from mtd partition functions
->     description.
->   - Use blk_enabled() instead of #ifdefs.
->=20
-> Changes V2 -> V3 [2]:
->=20
->   - Rebased over [3].
->   - Rename mtd_bread/bwrite -> mtd_blk_read/write.
->   - Fix GPL-2.0 license short name definiton in headers.
->   - Add empty line after MTD_ENTRY_NUMBERS define.
->=20
-> Links:
->=20
->   - [1] https://lore.kernel.org/all/20240227100441.1811047-1-avromanov@sa=
-lutedevices.com/
->   - [2] https://lore.kernel.org/all/20240227100441.1811047-5-avromanov@sa=
-lutedevices.com/
->   - [3] https://lore.kernel.org/u-boot/20240403114047.84030-1-heinrich.sc=
-huchardt@canonical.com/T/#u
->=20
-> Alexey Romanov (3):
->   disk: support MTD partitions
->   drivers: introduce mtdblock abstraction
->   spinand: bind mtdblock
->=20
->  disk/part.c                 |   3 +-
->  drivers/block/blk-uclass.c  |   1 +
->  drivers/mtd/Kconfig         |   1 +
->  drivers/mtd/Makefile        |   1 +
->  drivers/mtd/mtdblock.c      | 227 ++++++++++++++++++++++++++++++++++++
->  drivers/mtd/mtdpart.c       |  69 +++++++++++
->  drivers/mtd/nand/spi/core.c |  20 ++++
->  include/linux/mtd/mtd.h     |  12 ++
->  include/part.h              |   3 +
->  9 files changed, 336 insertions(+), 1 deletion(-)
->  create mode 100644 drivers/mtd/mtdblock.c
->=20
-> --=20
-> 2.34.1
->=20
+> Hi Jonathan,
+>
+> Thank you for the patch.
+>
+> On lun., avril 08, 2024 at 17:31, Jonathan Humphreys <j-humphreys@ti.com> wrote:
+>
+>> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+>
+> Please consider adding a commit message body.
 
---=20
-Thank you,
-Alexey=
+Got it.  thanks.
+
+BTW, the next version of this series will drop this patch as Andrew has
+submitted another patch removing the need for this one.  See
+https://lore.kernel.org/r/20240402160908.508974-1-afd@ti.com.
+
+>
+> On the TI vendor tree, there is a similar patch with a commit message:
+> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2023.04&id=c5296d943c2c84dd6dcb3b91305d006ac46f3157
+>
+> Before patch:
+> => reset
+> resetting ...
+> System reset not supported on this platform
+> ### ERROR ### Please RESET the board ###
+>
+> With patch applied:
+> => reset
+> resetting ...
+>
+> Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on am62x sk evm
+>
+> Andrew also suggested to me that if we are interested by A53 reset only,
+> we can PSCI reset instead for all k3 architecture:
+>
+>  --- a/arch/arm/Kconfig
+>  +++ b/arch/arm/Kconfig
+>  @@ -784,6 +784,9 @@ config ARCH_K3
+>           bool "Texas Instruments' K3 Architecture"
+>           select SPL
+>           select SUPPORT_SPL
+>  +       select PSCI_RESET if ARM64
+>  +       select SYSRESET if ARM64
+>  +       select SYSRESET_PSCI if ARM64
+>           select FIT
+>           select REGEX
+>           select FIT_SIGNATURE if ARM64
+>
+> Has the above been considered?
+
+I am not aware.  I would think that you want full reset, unless you are
+thinking about specifying a reset level?
+
+Jon
+
+>
+>
+>> ---
+>>  arch/arm/dts/k3-am625-sk-u-boot.dtsi | 9 +++++++++
+>>  1 file changed, 9 insertions(+)
+>>
+>> diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+>> index fa778b0ff4c..35bfeae75a0 100644
+>> --- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+>> +++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+>> @@ -46,3 +46,12 @@
+>>  &cpsw_port2 {
+>>  	status = "disabled";
+>>  };
+>> +
+>> +&dmsc {
+>> +	bootph-pre-ram;
+>> +
+>> +	k3_sysreset: sysreset-controller {
+>> +		compatible = "ti,sci-sysreset";
+>> +		bootph-pre-ram;
+>> +	};
+>> +};
+>> -- 
+>> 2.34.1
