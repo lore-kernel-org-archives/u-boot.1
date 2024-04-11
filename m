@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86E4BC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 21:54:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F006C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 22:07:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A53F488120;
-	Thu, 11 Apr 2024 23:54:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D0E53881D7;
+	Fri, 12 Apr 2024 00:07:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hFW+TOI7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MD5tNntQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B228D880A8; Thu, 11 Apr 2024 23:54:06 +0200 (CEST)
-Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com
- [IPv6:2a00:1450:4864:20::231])
+ id 89EE0881EA; Fri, 12 Apr 2024 00:07:49 +0200 (CEST)
+Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
+ [IPv6:2607:f8b0:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DD5588120
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 23:54:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F3683881A8
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 00:07:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-lj1-x231.google.com with SMTP id
- 38308e7fff4ca-2d6c9678cbdso2916891fa.2
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:54:03 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x32f.google.com with SMTP id
+ 46e09a7af769-6ea1f98f3b9so183119a34.1
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 15:07:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712872443; x=1713477243; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vzaVb6x4UCTdbd58jPL+C9xLkdZbCIJlFvTCQNZCH7Q=;
- b=hFW+TOI7A+2BZT1gRooJI5m2VNGYxT5MdBkXYXJBEIxySa3/+ATyerJTE2dPDF7Hii
- YHYiwPck65lw0x1PLosoIZ1hKKajx1k4NlAMZ0dvLpA7uYEQzH+UmOf4yyqoQsXWIxpX
- usVsthxfNZXREQQL71kdFTW98TmKPY6HCkhFaPewwtWMDw32ZRtMA30sRC72DSaWFvgd
- j3g1A6hRxrI/MNfAwBayrlRjaNSEBTFthfZ7Gvcq8/FbaES0hivP1mviy6NJO3f+Lezx
- /Oy1uWEprXWdNaT2qTGbGVINGk7YSIcYwDsEdeltCx4gCEs/1NQYNzh9rBOQNM1gJJX9
- ulnA==
+ d=konsulko.com; s=google; t=1712873266; x=1713478066; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=qae2j2Mi4TIWqgRHJAElYvrxAJ2Bi/VlrlnrQ5nKx2M=;
+ b=MD5tNntQnQimGjuCwBrVrNue5sx05kduw+Ru+5DQIKI061z+LRfhX7NEHZ+hv7gNLS
+ IZcEYkyhkT/ogITYST7hIFyFw0dzVCK4HqWAna/ZQuLN5vb84/CNeHEgVfKwCvjnZLph
+ 86iHDMvNfPYoh+ckVAwaKGIaAPHweSsoLAPxg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712872443; x=1713477243;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vzaVb6x4UCTdbd58jPL+C9xLkdZbCIJlFvTCQNZCH7Q=;
- b=NbpV79dMbSA7FAjqOVtMtKzq/6zr4JRWOOjdMBBKIV3Ps6pfgVOxT0W4HPrCNT6FEI
- RGdx7hsdkF6sSABN7IOBCiGAL7XuAxJo+LeZmQtsrlrEJT+tdaCw1AQEwdqGJ3j3CP3u
- t34gWLAuz/tmavwpFXy3B4utkObhC57Vcs2wY9c+NSEqlI8FhiCDRQXfw62DgImzSQc7
- f0p/Wh7XlpOb7IbYUOasl3Wr0nJ0Ktn2eYmIZxFZ9D1jx+AcRk6lr39F0EoB+Q54ACW1
- A8p83xS3wSOUwhtdydKZ4pl29XLaHLTu1CEx3n/EOHUKkoW8i22M7/HXGu0ohOd6P8J3
- erbA==
-X-Gm-Message-State: AOJu0YwGPdAh9k1SbnyeDbGjl3y0JKi95PIdyc74yx9CSP8lCEzIPMgA
- +UA5yfySYgq0Bo1mo817cnRe36asaG+26u1KGblFtKs+u8tS8kXPxstGktFOI2OuAA/8hVI+ub1
- 8f6np1CraZFocV5nL5Kdb7paOTJk=
-X-Google-Smtp-Source: AGHT+IGmZoRkgPiMTb8ImoeFsH4kSaSsVxy0TD8XyhDk5bxCclZvb3FK6EdK67OUMOTB1hp9K7ZNKCCrFDi4Y9LBDo0=
-X-Received: by 2002:a2e:a385:0:b0:2d8:5cc7:fa97 with SMTP id
- r5-20020a2ea385000000b002d85cc7fa97mr375460lje.26.1712872442595; Thu, 11 Apr
- 2024 14:54:02 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1712873266; x=1713478066;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qae2j2Mi4TIWqgRHJAElYvrxAJ2Bi/VlrlnrQ5nKx2M=;
+ b=GWfvbwIQavNRSxWoB7v/KhCCNxDh8xV1r/MtdhUe06D5MB6mEXgJkYbp758YmjgvjH
+ 0vIjH4sug8Fgw4BHnQ9ZuGjlBb2/b2ZLNHrnbtthoaCH3LB9cWX4kr6K3zJot/g6IrUn
+ qY+rsUh7xGVSRDftA/Bm1Vju9C0ZXT5uRIY7+3TcUrfHfZBral24nljBWmO4bBMupHxz
+ I79UFB1OtJT4L/fUdyPIlw2WeAtSBUgbAWZajYb1U12B0uYe3oxyPymo7bzHwAE6ptOF
+ DQEcnoJGAn0R4MJaX2KO9gXl1wHumCrbgOrWbkhBp9p9BXVf9MZafIdMJsvAguLr75aa
+ mJcQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWNroOPEnMzlaWaZKx/7DjnkT1WDsYX/nj2OIyat4DHPmZPm/45b58Cpm/oYdCQmR3FZGedSdGE64/En/xUzS50/IvH6A==
+X-Gm-Message-State: AOJu0YyHn7HNL79NAalO1s+XO80fxcBXdxnum680WiZoCQH3ic1gd5gc
+ vaTa5ubBz6gSRG7fjGa8KhRirNmDMjSz5oH4yYVnRC7GEjtKa3c9U2wyDJfcpwU=
+X-Google-Smtp-Source: AGHT+IEWvAsc70Bdw0bG4v4xPqO+e87Y2fjkBmL+HZZKzraOIwZ7OIqofa4vZ6XpN+Gn2L6iL5UVoQ==
+X-Received: by 2002:a05:6830:1698:b0:6ea:13ae:73a2 with SMTP id
+ k24-20020a056830169800b006ea13ae73a2mr1007122otr.11.1712873265674; 
+ Thu, 11 Apr 2024 15:07:45 -0700 (PDT)
+Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
+ f10-20020a05620a15aa00b0078d76c1178esm1552907qkk.119.2024.04.11.15.07.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Apr 2024 15:07:45 -0700 (PDT)
+Date: Thu, 11 Apr 2024 16:07:41 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Chintan Vankar <c-vankar@ti.com>
+Cc: Siddharth Vadapalli <s-vadapalli@ti.com>, sjg@chromium.org,
+ marex@denx.de, nm@ti.com, afd@ti.com, vigneshr@ti.com,
+ u-boot@lists.denx.de, dannenberg@ti.com, srk@ti.com
+Subject: Re: [PATCH 01/10] board: ti: am62x: Init DRAM size in R5/A53 SPL
+Message-ID: <20240411220741.GJ2493117@bill-the-cat>
+References: <20240112064759.1801600-1-s-vadapalli@ti.com>
+ <20240112064759.1801600-2-s-vadapalli@ti.com>
+ <20240112132607.GO1610741@bill-the-cat>
+ <a1d7ca85-8723-4d73-8e1c-357c6aa6294f@ti.com>
+ <20240120164141.GA3652023@bill-the-cat>
+ <48c63fc4-9f06-4066-b206-a0a548936dcd@ti.com>
+ <892b473b-5b76-4e44-af27-52d50cb24877@ti.com>
 MIME-Version: 1.0
-References: <20230608195631.55364-1-CFSworks@gmail.com>
- <ZheG8J8h-X5GPdwX@titan>
- <CAH5Ym4gEJi693VRtrdgQAUmqQuQCCmQ1ASYJofQw92M6nBHyXA@mail.gmail.com>
- <ZheThnKWQJ3Zah-t@titan>
-In-Reply-To: <ZheThnKWQJ3Zah-t@titan>
-From: Sam Edwards <cfsworks@gmail.com>
-Date: Thu, 11 Apr 2024 15:53:51 -0600
-Message-ID: <CAH5Ym4jgSbRsRQF21LbuQAft6-q5i6ssJc21p+S1qXfyme0mng@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] sunxi, usb: UDC/DM gadget model support
-To: John Watts <contact@jookia.org>
-Cc: u-boot@lists.denx.de, Andre Przywara <andre.przywara@arm.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, Marek Vasut <marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="s8Q0kpBCjRAm5LVQ"
+Content-Disposition: inline
+In-Reply-To: <892b473b-5b76-4e44-af27-52d50cb24877@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,207 +98,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 11, 2024 at 1:40=E2=80=AFAM John Watts <contact@jookia.org> wro=
-te:
->
-> On Thu, Apr 11, 2024 at 12:52:14AM -0600, Sam Edwards wrote:
-> > Hi John,
-> >
-> > This patch was developed against (and used very heavily on) the Turing
-> > Pi 2, which has an Allwinner T113-s3 SoC. Likely it should work for
-> > any T113/D1 board. I haven't been encountering any USB errors but also
-> > my use case hasn't gone much beyond the `udc` command. What
-> > device/errors do you have over there?
-> >
-> > Cheers,
-> > Sam
->
-> Hi Sam,
->
-> I made a list of things that do work:
->
-> - DFU (slowly, probably due to no DMA) to RAM
-> - CDC serial console
->
-> Running a command like this:
->
-> ubi part ubi; ubifsmount ubi:root; ums 0 ubi 0;
 
-Hi John,
+--s8Q0kpBCjRAm5LVQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Ahh I see the problem. In U-Boot, `ubi` isn't actually a block device:
-it's implemented as a stub in the block layer, and the filesystem
-layer redirects `ubi` accesses to the currently-mounted ubifs instead.
-But the `ums` command works on the block layer, so it's not being
-intercepted, and instead hitting that stub and likely crashing. In the
-spirit of the Linux ubiblock driver, I have another patchset[1] I've
-been working on[2] to expose static ubivols as true read-only block
-devices. Note that this only works for static volumes: the access
-semantics of dynamic volumes are too flash-like to support block
-device access, so accessing them with `ums` likely will never work
-like users expect.
+On Wed, Apr 03, 2024 at 06:18:01PM +0530, Chintan Vankar wrote:
+>=20
+>=20
+> On 22/01/24 10:11, Siddharth Vadapalli wrote:
+> >=20
+> >=20
+> > On 20/01/24 22:11, Tom Rini wrote:
+> > > On Mon, Jan 15, 2024 at 01:42:51PM +0530, Siddharth Vadapalli wrote:
+> > > > Hello Tom,
+> > > >=20
+> > > > On 12/01/24 18:56, Tom Rini wrote:
+> >=20
+> > ...
+> >=20
+> > > > > The list of conditionals in common/spl/spl.c::board_init_r() shou=
+ld be
+> > > > > updated and probably use SPL_NET as the option to check for.
+> > > >=20
+> > > > Thank you for reviewing the patch and pointing this out. I wasn't a=
+ware of it. I
+> > > > assume that you are referring to the following change:
+> > > >=20
+> > > >          if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HA=
+NDOFF) ||
+> > > > -           IS_ENABLED(CONFIG_SPL_ATF))
+> > > > +           IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(CONFIG_SPL_NET=
+))
+> > > >                  dram_init_banksize();
+> > > >=20
+> > > > I shall replace the current patch with the above change in the v2 s=
+eries. Since
+> > > > this is in the common section, is there a generic reason I could pr=
+ovide in the
+> > > > commit message rather than the existing commit message which seems =
+to be board
+> > > > specific? Also, I hope that the above change will not cause regress=
+ions for
+> > > > other non-TI devices. Please let me know.
+> > >=20
+> > > Yes, that's the area, and just note that networking also requires the
+> > > DDR to be initialized.
+> > >=20
+> >=20
+> > Thank you for confirming and providing your suggestion for the contents=
+ of the
+> > commit message.
+> >=20
+> Following Tom's Suggestion of adding CONFIG_SPL_NET in common/spl/spl.c
+> "dram_init_banksize()", the issue of fetching a file at SPL stage seemed
+> to be fixed. However the commit "ba20b2443c29", which sets gd->ram_top
+> for the very first time in "spl_enable_cache()" results in
+> "arch_lmb_reserve()" function reserving memory region from Stack pointer
+> at "0x81FFB820" to gd->ram_top pointing to "0x100000000". Previously
+> when gd->ram_top was zero "arch_lmb_reserve()" was noop. Now using TFTP
+> to fetch U-Boot image at SPL stage results in "tftp_init_load_addr()"
+> function call that invokes "arch_lmb_reserve()" function, which reserves
+> entire memory starting from Stack Pointer to gd->ram_top leaving no
+> space to load U-Boot image via TFTP since TFTP loads files at pre
+> configured memory address at "0x82000000".
+>=20
+> As a workaround for this issue, one solution we can propose is to
+> disable the checks "lmb_get_free_size()" at SPL and U-Boot stage. For
+> that we can define a new config option for LMB reserve checks as
+> "SPL_LMB". This config will be enable by default for the backword
+> compatibility and disable for our use case at SPL and U-Boot stage.
 
-Still, there could be some interaction issue between `ums`<->USB that
-I haven't identified. Could you try with mmc (if available) or a
-ramdisk (otherwise) just to confirm that `ums` is fine?
+The problem here is that we need LMB for booting an OS, which is
+something we'll want in SPL in non-cortex-R cases too, which means this
+platform, so that's a no-go. I think you need to dig harder and see if
+you can correct the logic somewhere so that we don't over reserve?
 
-Regards,
-Sam
+--=20
+Tom
 
-[1] https://lore.kernel.org/u-boot/20230812000606.72319-1-CFSworks@gmail.co=
-m/T/
-[2] Not very diligently; if you're interested in helping test it, I'd
-love to get back to it.
+--s8Q0kpBCjRAm5LVQ
+Content-Type: application/pgp-signature; name="signature.asc"
 
->
-> Gives this output in dmesg:
->
-> [3633079.772330] usb-storage 1-1.1:1.0: USB Mass Storage device detected
-> [3633079.772506] scsi host9: usb-storage 1-1.1:1.0
-> [3633080.794607] scsi 9:0:0:0: Direct-Access     Linux    UMS disk 0     =
-  ffff PQ: 0 ANSI: 2
-> [3633080.794941] sd 9:0:0:0: Attached scsi generic sg6 type 0
-> [3633080.795214] sd 9:0:0:0: [sdg] 3942645758 512-byte logical blocks: (2=
-.02 TB/1.83 TiB)
-> [3633080.795220] sd 9:0:0:0: [sdg] 3925868545-byte physical blocks
-> [3633080.795341] sd 9:0:0:0: [sdg] Write Protect is off
-> [3633080.795345] sd 9:0:0:0: [sdg] Mode Sense: 0f 00 00 00
-> [3633080.795462] sd 9:0:0:0: [sdg] Write cache: enabled, read cache: enab=
-led, doesn't support DPO or FUA
-> [3633080.907359] usb 1-1.1: reset high-speed USB device number 44 using x=
-hci_hcd
-> [3633081.021905] usb 1-1.1: device descriptor read/64, error -71
-> [3633081.238566] usb 1-1.1: device descriptor read/64, error -71
-> [3633081.448573] usb 1-1.1: reset high-speed USB device number 44 using x=
-hci_hcd
-> [3633081.558566] usb 1-1.1: device descriptor read/64, error -71
-> [3633081.775236] usb 1-1.1: device descriptor read/64, error -71
-> [3633081.988559] usb 1-1.1: reset high-speed USB device number 44 using x=
-hci_hcd
-> [3633086.788615] usb 1-1.1: Device not responding to setup address.
-> [3633091.799190] usb 1-1.1: Device not responding to setup address.
-> [3633092.008482] usb 1-1.1: device not accepting address 44, error -71
-> [3633092.747719] usb 1-1.1: USB disconnect, device number 44
-> [3633092.748488] device offline error, dev sdg, sector 0 op 0x0:(READ) fl=
-ags 0x0 phys_seg 2 prio class 2
-> [3633092.748502] buffer_io_error: 10 callbacks suppressed
-> [3633092.748504] Buffer I/O error on dev sdg, logical block 0, async page=
- read
-> [3633092.748511] Buffer I/O error on dev sdg, logical block 1, async page=
- read
-> [3633092.748520] device offline error, dev sdg, sector 4 op 0x0:(READ) fl=
-ags 0x0 phys_seg 2 prio class 2
-> [3633092.748525] Buffer I/O error on dev sdg, logical block 2, async page=
- read
-> [3633092.748529] Buffer I/O error on dev sdg, logical block 3, async page=
- read
-> [3633092.748582] device offline error, dev sdg, sector 0 op 0x0:(READ) fl=
-ags 0x0 phys_seg 4 prio class 2
-> [3633092.748594] Buffer I/O error on dev sdg, logical block 0, async page=
- read
-> [3633092.748600] Buffer I/O error on dev sdg, logical block 1, async page=
- read
-> [3633092.748605] Buffer I/O error on dev sdg, logical block 2, async page=
- read
-> [3633092.748609] Buffer I/O error on dev sdg, logical block 3, async page=
- read
-> [3633092.748621] ldm_validate_partition_table(): Disk read failed.
-> [3633092.748638] device offline error, dev sdg, sector 0 op 0x0:(READ) fl=
-ags 0x0 phys_seg 2 prio class 2
-> [3633092.748644] Buffer I/O error on dev sdg, logical block 0, async page=
- read
-> [3633092.748649] Buffer I/O error on dev sdg, logical block 1, async page=
- read
-> [3633092.748665] device offline error, dev sdg, sector 4 op 0x0:(READ) fl=
-ags 0x0 phys_seg 2 prio class 2
-> [3633092.748686] device offline error, dev sdg, sector 0 op 0x0:(READ) fl=
-ags 0x0 phys_seg 2 prio class 2
-> [3633092.748704] device offline error, dev sdg, sector 4 op 0x0:(READ) fl=
-ags 0x0 phys_seg 2 prio class 2
-> [3633092.748726] device offline error, dev sdg, sector 0 op 0x0:(READ) fl=
-ags 0x0 phys_seg 2 prio class 2
-> [3633092.748744] device offline error, dev sdg, sector 4 op 0x0:(READ) fl=
-ags 0x0 phys_seg 2 prio class 2
-> [3633092.748754]  sdg: unable to read partition table
-> [3633092.748825] sd 9:0:0:0: [sdg] Attached SCSI removable disk
->
-> Hitting Ctrl-C in U-Boot then re-running the command gives this output:
->
-> CTRL+C - Operation aborted
-> =3D> ubi part ubi; ubifsmount ubi:root; ums 0 ubi 0;
-> UBI partition 'ubi' already selected
-> UMS: LUN 0, dev ubi -352321538, hwpart 234, sector 0x0, count 0xeafffffe
-> prefetch abort
-> pc : [<e8fd9ffa>]          lr : [<45fb7665>]
-> reloc pc : [<e5e53ffa>]    lr : [<42e31665>]
-> sp : 45d5f970  ip : 45dd66a8     fp : 00000000
-> r10: 45ff88ec  r9 : 45d65eb0     r8 : 45dd1fe8
-> r7 : 45dd1fd8  r6 : 45ff5f18     r5 : 45dd5600  r4 : 45fff4f0
-> r3 : e8fd9fff  r2 : 45ff3260     r1 : 00000005  r0 : 45dd5594
-> Flags: Nzcv  IRQs off  FIQs off  Mode SVC_32 (T)
-> Code: ffff ffff fefd ffff (ffff) ffff
-> Resetting CPU ...
->
-> Fastboot instantly downloads an image but produces this output:
->
-> =3D> fastboot 0
-> musb-hdrc: peripheral reset irq lost!
-> Starting download of 7317504 bytes
-> .......................................................
-> downloading of 7317504 bytes finished
-> Booting kernel at 42000000...
->
->
-> Wrong Image Type for bootm command
-> ERROR -91: can't get kernel image!
-> resetting ...
->
->
-> Running 'fastboot stage' to just upload an image then hitting Ctrl-C in U=
--Boot gives this error:
->
-> undefined instruction
-> pc : [<45d69280>]          lr : [<45fb8c0b>]
-> reloc pc : [<42be3280>]    lr : [<42e32c0b>]
-> sp : 45d5fa28  ip : 45d6b59c     fp : 00000000
-> r10: 00000002  r9 : 45d65eb0     r8 : 00000000
-> r7 : 00000002  r6 : 45d68c3c     r5 : 00000000  r4 : 45d69288
-> r3 : 45d69280  r2 : 00000001     r1 : 00001238  r0 : 45d69288
-> Flags: nZCv  IRQs off  FIQs off  Mode SVC_32
-> Code: ffffffff ffffffff ffffffff ffffffff (ffffffff)
-> Resetting CPU ...
->
-> Not too sure what's happening here.
->
-> John.
->
-> >
-> > >
-> > > John.
-> > >
-> > > On Thu, Jun 08, 2023 at 01:56:29PM -0600, Sam Edwards wrote:
-> > > > Happy Thursday, U-Boot list!
-> > > >
-> > > > Here is attempt 2 at making this USB controller driver compatible w=
-ith
-> > > > DM's gadget model, following what most of the other musb variants d=
-o.
-> > > >
-> > > > v2 removes the unwanted printfs in the probe func, per feedback fro=
-m Marek.
-> > > > I received no other feedback against v1 of this patch.
-> > > >
-> > > > Cheers,
-> > > > Sam
-> > > >
-> > > > Sam Edwards (2):
-> > > >   usb: musb-new: sunxi: remove unwanted printfs
-> > > >   usb: musb-new: sunxi: make compatible with UDC/DM gadget model
-> > > >
-> > > >  drivers/usb/musb-new/sunxi.c | 52 +++++++++++++++++++++-----------=
-----
-> > > >  1 file changed, 31 insertions(+), 21 deletions(-)
-> > > >
-> > > > --
-> > > > 2.39.2
-> > > >
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYYXyoACgkQFHw5/5Y0
+tyyi0AwAh7DYPdt9c96jr7/X9xGvI7BI+8wtVm7UTDoFwcAxP9b2dZK+iEkjZygM
+0RpjByJZRjcIZ5ddt6e86xqG4ak6hjhTDc5G4L+AinoZSqfrCJqWUrcfK/2Li2t5
+kp5rF3nmWUJovSQs6zBn81rbpHMZIhELluO9X61Ug/bllheU4OCK2+JM1uwCMGWw
+uE42JzJB/OW0hKzhxmpfOecoY70CxIC1Yxq7PPIind+ueXj/nVW8eabjzFU3jchu
+rIhZ0MFIHTYMLHhxPfMgARG7xRnI1+GPY/vD2u/R4OCt7Rj3P+Zog7UVB3bxIUB0
++Udjyjwh82fKqdyRwDjS3n4hqKAuM1SBqdABHSkr/htoerz46L6ZEQhPyNwCmkxr
+s9tffzwhKOq90F/bp1z9iEIUqFjQqeW+YBmBBnSONCyR7GXP9+qTV4z8T/Xed64H
+LjVjDzxY5o9zpcijcTnonBkQ+BeMNB8nP9GFf1KAIwnqu7DCoj5ggXDxOQ/yvEfI
+Ykk01KIz
+=j78w
+-----END PGP SIGNATURE-----
+
+--s8Q0kpBCjRAm5LVQ--
