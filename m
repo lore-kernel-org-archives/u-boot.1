@@ -4,68 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B4EAC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 22:38:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B266C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 22:38:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16E258821D;
-	Fri, 12 Apr 2024 00:37:48 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3713088235;
+	Fri, 12 Apr 2024 00:37:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="MMpFPVeL";
+	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="IXMUZQ2P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A82B8821D; Fri, 12 Apr 2024 00:37:46 +0200 (CEST)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
+ id 8357D881FD; Fri, 12 Apr 2024 00:37:46 +0200 (CEST)
+Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
+ [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 302AE88203
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 00:37:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E5C1688202
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 00:37:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=greg.malysa@timesys.com
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-dc23bf7e5aaso351789276.0
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 15:37:44 -0700 (PDT)
+Received: by mail-yw1-x1136.google.com with SMTP id
+ 00721157ae682-6181d032bf9so2868087b3.3
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 15:37:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1712875063; x=1713479863;
+ d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1712875062; x=1713479862;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DNxj6UVPinaepYnUbjkM2PEvKLXZlIWzfOwKwE/yf38=;
- b=MMpFPVeLU7I7/hMB1eUQzLpIJCtBDqugDxFE2OU/tiwdCdR0dYJuBvm+peVyXQKZg8
- F0r6pTHGkr9CITLjI1t+b14KEbOf6NyfboF8Jsk7Blvxjc427iLQjAhvzQYQVIZ1BbjG
- LCH1G5AibPv+GyfvrNt5OWt/c5ocQiXDeWvFZ6jZmGqtmzt6OGeu2FVxBQ80JIQcB5dl
- I0o7t3e0MkL0gv1EMiVLQar3DMhIpaeysxAqYPKh7S/GknL2NcORu9AhDpVbZxyQQFF8
- sUZk6t9Mkl+yq6Xz/toUeXV3ixJRZf2Lt/KkPlo2RW8GvHJ4ISBAzWJg2xZD6D7Uk7sT
- wEgA==
+ bh=TZGOt78qiZteGmXNos080gB0AWFgnQINCSKqCGF7BkA=;
+ b=IXMUZQ2Pv8+BDNpqQUGjnA7qNZfUulZWyXuSINfpDxauMGKDCzUEy5PAy5psEx5/GL
+ VFa5GRSCxVEy/DOtSEN8wxFG5YAIsszybGWRFxGqdaOfKLl5JPq999Ld0ZDQ7KyxXnmG
+ gxpidNydb/snn38xTiYr0HrGnEwZz5iFGrxt67vo+qCIzwlGWcJk8VV17lj7z7MSNwW+
+ m1CfCJnmnIgIjFmsYgObwqJDvRrf+KDJV82n5EDIOJAc/EiCGV5JHzkIWEWOGH8XmDO+
+ IWpEEuicGdLPPQoWrtAFVzW60P1Gr6FplnBmIKCw1ADEr1UqePeQlD7Zr0jioBSLGInL
+ 1g9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712875063; x=1713479863;
+ d=1e100.net; s=20230601; t=1712875062; x=1713479862;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DNxj6UVPinaepYnUbjkM2PEvKLXZlIWzfOwKwE/yf38=;
- b=nELv6Bbp0G+npmewLpJiqQSVjN0koRQKi6buL9RxPD7L2dslFHkfQMPJ5kvMcx+X80
- E3AnAu51p10hA3pVt6jhn2bYE3jCSnl9+C447qRYzQ/+sWbZ+kB/kL0w9SncQEMLWal/
- aTRSQTCF5Yt7EA/WAJZ98iCOjRATq0bgVjbRPMFwiuFPnpprGETDjqJ+7iwSx/ADtrbT
- NZ7NM7AwSTRwiiyKnncNGDH4mpwcgvx7/75ePDi2NI3ihEWNf9ddIgpMScO4BssAlhzW
- gpk6A7xhecCdAXuQXmcdNj+pWFOCWtGi4PGK/QLUbynD/BZb37HTXVB8pk8VsADIbZ2U
- ENww==
-X-Gm-Message-State: AOJu0Yxs58pQYHCgf1oUoW2KKPrNKW9yFSiveqXH+SFkGWmY6ufpSxAP
- ChSUmOWlPtJikYru43wvZCoyV8YkEpdhN0vltI3ZT8aCszwAfAOvTkEOiDkid2P18C8ZMFwE99Z
- O2g==
-X-Google-Smtp-Source: AGHT+IFTVzsw+3G+J1IhpVmx+xJH0M3eKGZUP3W2XVdEMcHYBa3KBCcUbS9Ve4xLtNlkWpbbncNrfA==
-X-Received: by 2002:a25:b204:0:b0:dcc:5a73:1cad with SMTP id
- i4-20020a25b204000000b00dcc5a731cadmr873283ybj.42.1712875062959; 
+ bh=TZGOt78qiZteGmXNos080gB0AWFgnQINCSKqCGF7BkA=;
+ b=o3dRzpWc/B7cpx1f+mqB+Bu1N97WWK/DCRRhDMxHiCkWdJ6TjxNW4Eh0eF/VcewEpl
+ ge5zgFTxD6V1d2xkxnsW4yGNhVHbR4Ml+rW60mTDg5bQYDasyX8JXSRnNZrcl9xP8MMX
+ kRdFoYeMDZko992672StfKSJMmsPU8KTYn/RbH/5QLJDuSj/ZAAUga70qm5kNyQ5VQzQ
+ zKgktaTYYiIHAQsfHrK1XWFg/qxMBbLX20OzpMeYREh+/JCwvdyhamWxyONxiBveiX3V
+ cOg81ryUlWQjogEQSBEBpwcrXWw/w7iYVmo3XWi735T2CCtCbC6fkSJrcaC6qr6DHGmq
+ vzdQ==
+X-Gm-Message-State: AOJu0Yyj3GhYRaP/EbT51l042l1Ym9PlYhMCmbq6YvWp5cJtN4pSjta4
+ /a0g4rgVMO7YndzYaHbadB8reWpEAdxNnnbaVXpijePFN8VnxHfBL5CG/k/rFs0lJoKPfun4VV3
+ zzA==
+X-Google-Smtp-Source: AGHT+IHRMu8bDYH5mSUp+uY/hIlXrMDxH7r+k+0NP4sdjdURiYxCBufwUNdpZGSzelSr0qhKAds0eg==
+X-Received: by 2002:a25:8106:0:b0:dc6:de64:f74 with SMTP id
+ o6-20020a258106000000b00dc6de640f74mr875406ybk.9.1712875062308; 
  Thu, 11 Apr 2024 15:37:42 -0700 (PDT)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- q11-20020a25f90b000000b00dcbbea79ffcsm482744ybe.42.2024.04.11.15.37.42
+ q11-20020a25f90b000000b00dcbbea79ffcsm482744ybe.42.2024.04.11.15.37.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 15:37:42 -0700 (PDT)
+ Thu, 11 Apr 2024 15:37:41 -0700 (PDT)
 From: Greg Malysa <greg.malysa@timesys.com>
 To: u-boot@lists.denx.de
 Cc: Arturs.Artamonovs@analog.com, Vasileios.Bimpikas@analog.com,
@@ -74,11 +74,11 @@ Cc: Arturs.Artamonovs@analog.com, Vasileios.Bimpikas@analog.com,
  Greg Malysa <greg.malysa@timesys.com>, Apurva Nandan <a-nandan@ti.com>,
  Dhruva Gole <d-gole@ti.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Jan Kiszka <jan.kiszka@siemens.com>,
- Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
- Tom Rini <trini@konsulko.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH 05/11] spi: cadence-quadspi: disable automatic write enable
-Date: Thu, 11 Apr 2024 18:36:49 -0400
-Message-ID: <20240411223709.573-6-greg.malysa@timesys.com>
+ Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 04/11] spi: cadence-quadspi: enable opcode extension based on
+ command length
+Date: Thu, 11 Apr 2024 18:36:48 -0400
+Message-ID: <20240411223709.573-5-greg.malysa@timesys.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240411223709.573-1-greg.malysa@timesys.com>
 References: <20240411223709.573-1-greg.malysa@timesys.com>
@@ -102,11 +102,10 @@ X-Virus-Status: Clean
 
 From: Ian Roberts <ian.roberts@timesys.com>
 
-The spi-nor subsystem issues the write enable command manually. So
-this automatic feature sends duplicate commands and also introduces
-the possibility of erroneous writes.
-
-Disable the automatic write enable feature by default.
+Some flash chips use dual opcodes in other modes. For example, the
+Macronix MX66 requires dual opcodes for STR octal operation. Thus,
+enable opcode extension based on the length of the command instead
+of the DTR mode of the controller.
 
 Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
@@ -114,34 +113,126 @@ Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
 Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
 ---
 
- drivers/spi/cadence_qspi.h     | 1 +
- drivers/spi/cadence_qspi_apb.c | 1 +
- 2 files changed, 2 insertions(+)
+ drivers/spi/cadence_qspi_apb.c | 66 +++++++++++++++++++++++++---------
+ 1 file changed, 49 insertions(+), 17 deletions(-)
 
-diff --git a/drivers/spi/cadence_qspi.h b/drivers/spi/cadence_qspi.h
-index 72e92cc997..355919cb23 100644
---- a/drivers/spi/cadence_qspi.h
-+++ b/drivers/spi/cadence_qspi.h
-@@ -73,6 +73,7 @@
- 
- #define CQSPI_REG_WR_INSTR                      0x08
- #define CQSPI_REG_WR_INSTR_OPCODE_LSB           0
-+#define CQSPI_REG_WR_INSTR_WELDIS_MASK		BIT(8)
- #define CQSPI_REG_WR_INSTR_TYPE_ADDR_LSB	12
- #define CQSPI_REG_WR_INSTR_TYPE_DATA_LSB	16
- 
 diff --git a/drivers/spi/cadence_qspi_apb.c b/drivers/spi/cadence_qspi_apb.c
-index eb9f4ed63d..176cff5338 100644
+index 34cacf1880..eb9f4ed63d 100644
 --- a/drivers/spi/cadence_qspi_apb.c
 +++ b/drivers/spi/cadence_qspi_apb.c
-@@ -842,6 +842,7 @@ int cadence_qspi_apb_write_setup(struct cadence_spi_priv *priv,
+@@ -412,19 +412,27 @@ static int cadence_qspi_enable_dtr(struct cadence_spi_priv *priv,
+ 
+ 	reg = readl(priv->regbase + CQSPI_REG_CONFIG);
+ 
+-	if (enable) {
+-		reg |= CQSPI_REG_CONFIG_DTR_PROTO;
++	switch (op->cmd.nbytes) {
++	case 1:
++		reg &= ~CQSPI_REG_CONFIG_DUAL_OPCODE;
++		break;
++	case 2:
+ 		reg |= CQSPI_REG_CONFIG_DUAL_OPCODE;
+ 
+ 		/* Set up command opcode extension. */
+ 		ret = cadence_qspi_setup_opcode_ext(priv, op, shift);
+ 		if (ret)
+ 			return ret;
+-	} else {
+-		reg &= ~CQSPI_REG_CONFIG_DTR_PROTO;
+-		reg &= ~CQSPI_REG_CONFIG_DUAL_OPCODE;
++		break;
++	default:
++		return log_msg_ret("QSPI: Invalid command length", -EINVAL);
  	}
  
++	if (enable)
++		reg |= CQSPI_REG_CONFIG_DTR_PROTO;
++	else
++		reg &= ~CQSPI_REG_CONFIG_DTR_PROTO;
++
+ 	writel(reg, priv->regbase + CQSPI_REG_CONFIG);
+ 
+ 	return 0;
+@@ -465,10 +473,16 @@ int cadence_qspi_apb_command_read(struct cadence_spi_priv *priv,
+ 	unsigned int dummy_clk;
+ 	u8 opcode;
+ 
+-	if (priv->dtr)
+-		opcode = op->cmd.opcode >> 8;
+-	else
++	switch (op->cmd.nbytes) {
++	case 1:
+ 		opcode = op->cmd.opcode;
++		break;
++	case 2:
++		opcode = op->cmd.opcode >> 8;
++		break;
++	default:
++		return log_msg_ret("QSPI: Invalid command length", -EINVAL);
++	}
+ 
+ 	if (opcode == CMD_4BYTE_OCTAL_READ && !priv->dtr)
+ 		opcode = CMD_4BYTE_FAST_READ;
+@@ -557,10 +571,16 @@ int cadence_qspi_apb_command_write(struct cadence_spi_priv *priv,
+ 	void *reg_base = priv->regbase;
+ 	u8 opcode;
+ 
+-	if (priv->dtr)
+-		opcode = op->cmd.opcode >> 8;
+-	else
++	switch (op->cmd.nbytes) {
++	case 1:
+ 		opcode = op->cmd.opcode;
++		break;
++	case 2:
++		opcode = op->cmd.opcode >> 8;
++		break;
++	default:
++		return log_msg_ret("QSPI: Invalid command length", -EINVAL);
++	}
+ 
+ 	reg |= opcode << CQSPI_REG_CMDCTRL_OPCODE_LSB;
+ 
+@@ -634,10 +654,16 @@ int cadence_qspi_apb_read_setup(struct cadence_spi_priv *priv,
+ 	       priv->regbase + CQSPI_REG_INDIRECTTRIGGER);
+ 
+ 	/* Configure the opcode */
+-	if (priv->dtr)
+-		opcode = op->cmd.opcode >> 8;
+-	else
++	switch (op->cmd.nbytes) {
++	case 1:
+ 		opcode = op->cmd.opcode;
++		break;
++	case 2:
++		opcode = op->cmd.opcode >> 8;
++		break;
++	default:
++		return log_msg_ret("QSPI: Invalid command length", -EINVAL);
++	}
+ 
+ 	rd_reg = opcode << CQSPI_REG_RD_INSTR_OPCODE_LSB;
+ 	rd_reg |= op->cmd.dtr ? CQSPI_REG_RD_INSTR_DDR_EN_MASK : 0;
+@@ -804,10 +830,16 @@ int cadence_qspi_apb_write_setup(struct cadence_spi_priv *priv,
+ 	       priv->regbase + CQSPI_REG_INDIRECTTRIGGER);
+ 
+ 	/* Configure the opcode */
+-	if (priv->dtr)
+-		opcode = op->cmd.opcode >> 8;
+-	else
++	switch (op->cmd.nbytes) {
++	case 1:
+ 		opcode = op->cmd.opcode;
++		break;
++	case 2:
++		opcode = op->cmd.opcode >> 8;
++		break;
++	default:
++		return log_msg_ret("QSPI: Invalid command length", -EINVAL);
++	}
+ 
  	reg = opcode << CQSPI_REG_WR_INSTR_OPCODE_LSB;
-+	reg |= CQSPI_REG_WR_INSTR_WELDIS_MASK;
  	reg |= priv->data_width << CQSPI_REG_WR_INSTR_TYPE_DATA_LSB;
- 	reg |= priv->addr_width << CQSPI_REG_WR_INSTR_TYPE_ADDR_LSB;
- 	writel(reg, priv->regbase + CQSPI_REG_WR_INSTR);
 -- 
 2.43.2
 
