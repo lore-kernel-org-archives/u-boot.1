@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1BA1CD128A
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:03:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BA1FCD128A
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:04:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6B2E87F39;
-	Thu, 11 Apr 2024 14:03:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D7DCE8825A;
+	Thu, 11 Apr 2024 14:04:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n4nojJRN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cMjHhl+X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 709858824A; Thu, 11 Apr 2024 14:03:15 +0200 (CEST)
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com
- [IPv6:2607:f8b0:4864:20::32f])
+ id 7AC4388261; Thu, 11 Apr 2024 14:04:23 +0200 (CEST)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD55E87E47
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:03:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 18F5487E47
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:04:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ot1-x32f.google.com with SMTP id
- 46e09a7af769-6ea2ef1c6b6so1166961a34.1
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:03:12 -0700 (PDT)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3c5f91cc169so1910471b6e.0
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:04:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712836991; x=1713441791; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712837060; x=1713441860; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=MIDagdf8YLb9egZaLnmUjL5gAJnAn31KQ0vjz9i1OTI=;
- b=n4nojJRNv+7TjAmLT8Obh3eg96ULi9IcD28mPRLaNpKIvYxoCTPBSpeRZkV6doqR9F
- M0X2EuBa7mYO0gnkycEJzq8W1YuVRbIT6Xxy/j+JTMwqPL7AKVow1zwYx332Zw1QfxUs
- ybmX0ojhFSUkmvZzS/gvb3kVeCqBaRig9xoDvqP4drSCw6/HtYOV4w67E7l3yAmtiTvh
- qTCBAntxouvKRXjbJbc2GyQwUMfYCahJ2fMprjkCNKwgKZYScmUmDW0gqO93494xwxBo
- /m+dDpBTJ6MTnx6WCuDZyqAMCK4cdJE0um828AIUG4XALbJWHjraZducWLVx/9ZoaXyM
- KGIQ==
+ bh=Zc540aKxPupNGiFP5/Gdfbh7FQhsqjR/FLRZrY5C34g=;
+ b=cMjHhl+Xl3wfPZPHLfRaTCoS1AL2HSG7IyRkkyw0nr6yz63wVyxKXt2DZ2NpcDprH6
+ wAoYMTMTyH3LmacC1VukqTcQ4++5Dfop8pK4WIAnjAYBPxZ9eWtZF8ysLeLp9O6wIaYz
+ Jm5cK6u8iUa8Ovihqi63P2+Z1yPZlcvnSqOjyPr5CpapjB5MxL0SSex1oUPleZtTltq+
+ L67aOv8ljfdbw8OFWJUt3Y48nM6B8mc96sdeYPlpMA9vkAdOosXD0QPtYdjde0mkck5T
+ 0jgWcIOncivKPmcCeSvqkii6EpWf7YYHddfC67gRMA/VdNcV6mFpncKs3Asn8UqFWZj9
+ igTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712836991; x=1713441791;
+ d=1e100.net; s=20230601; t=1712837060; x=1713441860;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MIDagdf8YLb9egZaLnmUjL5gAJnAn31KQ0vjz9i1OTI=;
- b=asZBglIHTYFjunRbLdILsTsieMhiW9mFe0DA2Ti3f42BU2z7ckTf2u7hqwH6bq6i5k
- PRaMbCFX20N/H/6P+d21t15nehFXGCLC5AO3MkLOwVvri+06LJ5yfXC3UL8iE68ZqB+C
- ur2keH2cxWnVnL1yTpQHxVXijWeigKiiKjgdoaLx/0nEBGD6AhxOvUycivJQFEcEXlpg
- EqYM8fdD4PpPhHJngRJ5Lw2fOKGSTpjw96PTTZRvR4u0r3VreDWhkmL6seTIgNi22H4U
- 8xzEiYtCCsc9IPu5htDhjfSYpmXHa0DHWsLv37rr7wksCF48CmG+UOw3A6XiG38/5hmL
- 092g==
+ bh=Zc540aKxPupNGiFP5/Gdfbh7FQhsqjR/FLRZrY5C34g=;
+ b=Zt8jJYZ7CNoA0Y7jGlVsHe2FfUBfCUSYewAWe41gZLR7oLHK6qqUJHtSnobFEhve/u
+ ehyyo4xH/GW4aXv3S6wuMyp2geijq2GVUrnVYA8s1yHYpIeTpsUoTCVY74iTUNm7YsAY
+ m6Qj1FRGGGrUverLqX1McckNQ8vxkQCcLelTxpoG9UvPxnsrJHAtGx13wvn9wYEcTJHw
+ RJ+AnuJS4SYu7DFM4IyyldFxuarm1rFJnf5D35kSeFNJX8ka+a7mS2B81qG8b76XXlq3
+ jHVYs1vb+aUpSCTUmYMuTPrHAOr5TkQXkFFnLHcG3+h8NDJv6olI7WMWzcofTAiUDgFI
+ SAtQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWhdlvLO5MNNkZWQ6l0VuHqWH4RkWUZ+a1xUPXrLZHxinPNAX0lVyK6Ji0iVgwbk31G07Rtz3pfgPiRA9NnbR/MS1TdGA==
-X-Gm-Message-State: AOJu0YzDRvlqsrGjMy1z7mAl16eUdDC+BsWqRZCGkL70JwWdknWJxWDp
- ntQeBbNq7yItrUZ9GNAUuMsKUYJmLXJm3wT4+86/Sl9f33uK8Tg5QBH5pR45YWIe3VgCpNpKrzc
- QuIyBnxszN/+VBC0XjZh3ZR1Tubka8N1bJUtoBA==
-X-Google-Smtp-Source: AGHT+IEdp3Nbi2kj+MILmwxWWyYWO63+SfhQeEaNBVHuD6LI9DpE9MIqi3mKY12zWaajElCmwOBaODBffmIVkBS/L50=
-X-Received: by 2002:a05:6808:2228:b0:3c5:e2dc:8a6a with SMTP id
- bd40-20020a056808222800b003c5e2dc8a6amr6789659oib.24.1712836991559; Thu, 11
- Apr 2024 05:03:11 -0700 (PDT)
+ AJvYcCW8NIWwF6GaThnadxY2h0NeTwJUOqmrk8kbuMk7EATqqcfhI05tFsy4y+gJZwY0UAfV42EPTut5GeqFZG3OgbupNKny9Q==
+X-Gm-Message-State: AOJu0YxtrINZAWZCHVRk+m5M5S+YDLnh60yFSe+LQUluJwWCbmtVw1lg
+ Rjo74A2J1gTmNBBa/lS9MKPSaEodKidDpK8TVnzcBkCHhEgewKJEQ7v4tz326phY/AU7hwPDz3Z
+ NgJ9QBKlTPXQFblhpfwMLf7x1bpH5bZsniAHGGg==
+X-Google-Smtp-Source: AGHT+IH58td14+VAyAz+viDHETB0rZFJYjKc0RmdGYhxzQeYmcfnm1144Yd9jTD+ySEmsE6xHMtp+4Dpf7NTGbjfep4=
+X-Received: by 2002:a05:6808:1524:b0:3c6:942:4dd0 with SMTP id
+ u36-20020a056808152400b003c609424dd0mr5964888oiw.57.1712837058407; Thu, 11
+ Apr 2024 05:04:18 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240410-topic-sm8x50-usb-phy-v2-0-9d2d90bd04da@linaro.org>
-In-Reply-To: <20240410-topic-sm8x50-usb-phy-v2-0-9d2d90bd04da@linaro.org>
+References: <20240410-b4-qcom-rbx-soc-v2-0-5120a9c7f6ce@linaro.org>
+In-Reply-To: <20240410-b4-qcom-rbx-soc-v2-0-5120a9c7f6ce@linaro.org>
 From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 11 Apr 2024 17:32:59 +0530
-Message-ID: <CAFA6WYOAXg0+74k2iudvjt7tHuvGi44y9VaJkDqTY_Qsc9KXBg@mail.gmail.com>
-Subject: Re: [PATCH v2 0/2] phy: qcom: add support for the Qualcomm Synopsys
- eUSB2 PHY
-To: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
+Date: Thu, 11 Apr 2024 17:34:06 +0530
+Message-ID: <CAFA6WYNBnj_CvTO0d8HKMRozks2XWGVzmGyGTx4U3=L9YrGAYw@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] qcom: pinctrl drivers for qcm2290/sm6115/sm8250
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
+ u-boot-qcom@groups.io, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,39 +88,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 10 Apr 2024 at 21:31, Neil Armstrong <neil.armstrong@linaro.org> wrote:
+On Wed, 10 Apr 2024 at 23:23, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Add support for the new Qualcomm Synopsys eUSB2 PHY found in the
-> SM8550 and SM8650 SoCs.
+> Introduce pinctrl drivers for three new SoCs and enable them.
 >
-> Finally enable the driver in the Qualcomm defconfig.
->
-> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
 > Changes in v2:
-> - fixed driver build failure due to missin }
-> - Link to v1: https://lore.kernel.org/r/20240405-topic-sm8x50-usb-phy-v1-0-8a8604bf818f@linaro.org
+> - Fix a few formatting issues
+> - Link to v1: https://lore.kernel.org/r/20240408-b4-qcom-rbx-soc-v1-0-900db37b8bdf@linaro.org
 >
 > ---
-> Neil Armstrong (2):
->       phy: qcom: add Synopsys eUSB2 PHY driver
->       qcom_defconfig: enable the Qualcomm Synopsys eUSB2 PHY driver
+> Caleb Connolly (4):
+>       pinctrl: qcom: add qcm2290 pinctrl driver
+>       pinctrl: qcom: add sm6115 pinctrl driver
+>       pinctrl: qcom: add sm8250 pinctrl driver
+>       qcom_defconfig: enable pinctrl for new qcm2290/sm6115/sm8250
 >
 
 Acked-by: Sumit Garg <sumit.garg@linaro.org>
 
 -Sumit
 
->  configs/qcom_defconfig                 |   1 +
->  drivers/phy/qcom/Kconfig               |   8 +
->  drivers/phy/qcom/Makefile              |   1 +
->  drivers/phy/qcom/phy-qcom-snps-eusb2.c | 366 +++++++++++++++++++++++++++++++++
->  4 files changed, 376 insertions(+)
+>  configs/qcom_defconfig                 |   3 +
+>  drivers/pinctrl/qcom/Kconfig           |  21 ++++
+>  drivers/pinctrl/qcom/Makefile          |   3 +
+>  drivers/pinctrl/qcom/pinctrl-qcm2290.c |  70 ++++++++++++
+>  drivers/pinctrl/qcom/pinctrl-sm6115.c  | 200 +++++++++++++++++++++++++++++++++
+>  drivers/pinctrl/qcom/pinctrl-sm8250.c  |  99 ++++++++++++++++
+>  6 files changed, 396 insertions(+)
 > ---
-> base-commit: f0e6aba1218bca578605697eed8aa94582bf57bb
-> change-id: 20240404-topic-sm8x50-usb-phy-d09a98f72d1b
+> change-id: 20240408-b4-qcom-rbx-soc-44ee99c8b799
+> base-commit: 4ba549b0a4e67c563785ab144edf47e108b34822
 >
-> Best regards,
-> --
-> Neil Armstrong <neil.armstrong@linaro.org>
+> // Caleb (they/them)
 >
