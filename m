@@ -4,105 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE10C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 22:51:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 965DDC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 23:27:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B16F387EFA;
-	Fri, 12 Apr 2024 00:51:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
+	by phobos.denx.de (Postfix) with ESMTP id B5070881A8;
+	Fri, 12 Apr 2024 01:27:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="VOgcMrUi";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gVsIb4m7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90D4F8758B; Fri, 12 Apr 2024 00:37:36 +0200 (CEST)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
+ id D782A881D6; Fri, 12 Apr 2024 01:27:22 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0AFE387B82
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 00:37:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2CB5888123
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 01:27:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=timesys.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=greg.malysa@timesys.com
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-dc74435c428so311356276.2
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 15:37:33 -0700 (PDT)
+ spf=pass smtp.mailfrom=cfsworks@gmail.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-56e2e09fc27so580073a12.0
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 16:27:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1712875053; x=1713479853;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dGXPROmXYbIMQfLOaTHpvb9aWxe0oVsLcWqFJvzaw4c=;
- b=VOgcMrUiYzeqSkdjGPq1uZ4m9GxDiQbTfibWzZGJp9M2wukPt0uxSLf5UPUQM2PdSu
- sttxgxNoHIc2xB7EYvLOr2HzIJKmXLXM0ckyYthCkSI7rPu8VTaIbuceVucBrOfKLaow
- PPWSCoif/hz1Alu7/vX3LX3QssYeqasME9NY/JWj2dI2KyTdjeNOLu1V7VwFT2JmXmpE
- vNVOkTSCXTXBNzGVRmK6+IkBZQd3brh7VeuH7t62KAOnWQ3D3vNUrMtprXvOuK0H+r2a
- +t6zEbkjtS+eb4Vu1vTwaffTwyJnqUye++fwSWdVmWYb4bawWdh0Ef9d+BlaT3xTONoW
- K/qQ==
+ d=gmail.com; s=20230601; t=1712878039; x=1713482839; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CVW4yGkmHID4cCcaJcn0SWupSxU4LV0MbKbfDUcLT/g=;
+ b=gVsIb4m70xdEEchcFOT2tcRkXpymvrQvyJSKa187+iu676FWVQY9nY18F6pfIboEY0
+ udGLqJQDtEGUYxwyH9FLdh8TTe9+TpJOBIFzYqs7TfgCqVfz7z0I9ulPwSd8QLQZAKOU
+ v002KOMB9lv7aBJvDPrI/52jVoKIxY1/z3hqFuFpx1LMkftpeZ0rP2ZkIjKCiknbN/MB
+ h23mZdS2WVUBOByqqvFmo+ZXQtPAbMv51V33L/0BoAmL4Az90o05g7Oauwr4hEd9SEC5
+ H/LsEcgdLEi2IOt+Ov9A9l4MfVPLsol25s4WWLRBNHz/3XEvJS511YgbOsUXL1nhFuvx
+ uEmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712875053; x=1713479853;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dGXPROmXYbIMQfLOaTHpvb9aWxe0oVsLcWqFJvzaw4c=;
- b=RWnHuFTxZ/Byt6bY0um4lq2DFtvMYWdysBqSLtwSA/E+d73k35dO+Qht3hDlRlB0gD
- 4AWhHqrVXqWLUjPwyjyT3XaxOCLvSgddqD7EMKpxPur6Y23CXTV7K9SoMLEpD55+RACA
- ivqwA0izqFT2YMZlL5IDIPnEPhriGxy4qQ4LteKRAn1F0jxaBTBRTQhGv3N+T3V7CZWW
- ex/x7a+mVM/UhP5MIdp+HnbnylFgXu0BAoJX4wdGOoOs4IBNChOHuWlif+fe4GDF40pp
- K+cSR7yXitsC7trrXj9lyOn55uJgWxXHBEqqEDDNvTtKKx7VTs00CmOS47eb1b2fD1kU
- sWsw==
-X-Gm-Message-State: AOJu0YxY6d99DusEvksqz/ycqObvRbVjQ3XuNSLfvW98YPRLmsa12HUV
- qfPS38wz6po+CvgpErAp61sPUrH1pT2Y+cG6Crxk4LZ84S0bsdX4wObNsVOTWW4sjLUfLW/l/Q/
- N6Q==
-X-Google-Smtp-Source: AGHT+IG278zXb+pV0NyufYKac6oyL1kpA12N5NoU2+ST2Q/jPsaDJCCCgDI6qanJ1g1UcLc2PGYt2w==
-X-Received: by 2002:a25:bc82:0:b0:dcc:1c6c:430d with SMTP id
- e2-20020a25bc82000000b00dcc1c6c430dmr939718ybk.12.1712875052675; 
- Thu, 11 Apr 2024 15:37:32 -0700 (PDT)
-Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
- by smtp.gmail.com with ESMTPSA id
- q11-20020a25f90b000000b00dcbbea79ffcsm482744ybe.42.2024.04.11.15.37.32
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 15:37:32 -0700 (PDT)
-From: Greg Malysa <greg.malysa@timesys.com>
-To: u-boot@lists.denx.de
-Cc: Arturs.Artamonovs@analog.com, Vasileios.Bimpikas@analog.com,
- Utsav.Agarwal@analog.com, Greg Malysa <greg.malysa@timesys.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Apurva Nandan <a-nandan@ti.com>,
- Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
- Bruce Suen <bruce_suen@163.com>, Dhruva Gole <d-gole@ti.com>,
- Francesco Dolcini <francesco.dolcini@toradex.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ian Roberts <ian.roberts@timesys.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Jan Kiszka <jan.kiszka@siemens.com>, Jim Liu <jim.t90615@gmail.com>,
- Jit Loon Lim <jit.loon.lim@intel.com>, Johan Jonker <jbx6244@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Marek Vasut <marex@denx.de>,
- Max Krummenacher <max.krummenacher@toradex.com>,
- Michal Simek <michal.simek@amd.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neal Frager <neal.frager@amd.com>, Neha Malcom Francis <n-francis@ti.com>,
- Nishanth Menon <nm@ti.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>,
- Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
- Tom Rini <trini@konsulko.com>, Udit Kumar <u-kumar1@ti.com>,
- Vaishnav Achath <vaishnav.a@ti.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Vignesh R <vigneshr@ti.com>
-Subject: [PATCH 00/11] cadence-qspi: Add DTR support including PHY mode
- calibration
-Date: Thu, 11 Apr 2024 18:36:44 -0400
-Message-ID: <20240411223709.573-1-greg.malysa@timesys.com>
-X-Mailer: git-send-email 2.43.2
+ d=1e100.net; s=20230601; t=1712878039; x=1713482839;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CVW4yGkmHID4cCcaJcn0SWupSxU4LV0MbKbfDUcLT/g=;
+ b=AAVAG31Xv7R9N9S2HaHtBAli6CuuLHwlHmQY0fgSzESR3A/OZ4t5U5vJeBJAILfRRA
+ EGNF88Go+1hGF1os2V8XENl0CsG+jAgmZwDOObkur/velmQe1JTRKntMHWAGHYn7QUlx
+ BvXD6E4XnvxLM6j6o9Ol9m9k+lH1mmWOzNMYplceo8DCkyyjO1r9qDy7kBtE7rYU1bub
+ Gb7jpOE0PzGDcmZ+hCEDtWOr3DFag+ra1SEjdeb+BL5NfIocbz0AS7hxVvvivYMmxJdH
+ hUI4+DkKLVYIcgVeZhvH3g48J2O88P80spMvOtTnpvNMT4qzzxS/BN6oE+hzzLQn3Xzp
+ J+oA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVbQAUOHOBk3mN5+yF2jwR0DUVZYZrAXvrabnEoikqM9391mJDEx4bcEYYswrNdixD2wjPPoogjp1FWSmY/cCOxsYVd1Q==
+X-Gm-Message-State: AOJu0YzJz8Jd4Dso21cdBhEX9g/9kBR071R3ZTtg7Wb3pnrAuIiYrgYh
+ 552JnmI0on296cVf3lteXmScfo6fXzXMSZXWC4FydyrMZuwB5b8wNirB1xL8liIvyty7UMvetnW
+ HR7CRPpgLampxs+ZAVjtIRxfTAsI=
+X-Google-Smtp-Source: AGHT+IFLxkct+80l0LfY7iYevPyC87xecZEo0cq2bBilk9QmtEydT1zsHT25uZ8ekbEcwYp6DlBgMQrvkBAR59PrlHM=
+X-Received: by 2002:a50:d7da:0:b0:56d:f29d:c80d with SMTP id
+ m26-20020a50d7da000000b0056df29dc80dmr961850edj.5.1712878039352; Thu, 11 Apr
+ 2024 16:27:19 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 12 Apr 2024 00:51:44 +0200
+References: <20240411-spinand-v1-0-62d31bb188e8@jookia.org>
+In-Reply-To: <20240411-spinand-v1-0-62d31bb188e8@jookia.org>
+From: Sam Edwards <cfsworks@gmail.com>
+Date: Thu, 11 Apr 2024 17:27:08 -0600
+Message-ID: <CAH5Ym4j_u8cx_efju70LxrirTH6g0_L_c_PGXO3H=L=cgB5S=w@mail.gmail.com>
+Subject: Re: [PATCH RFC 00/15] Support SPI NAND booting on the T113
+To: John Watts <contact@jookia.org>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
+ Maksim Kiselev <bigunclemax@gmail.com>, Icenowy Zheng <uwu@icenowy.me>, 
+ Samuel Holland <samuel@sholland.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,49 +95,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Apr 10, 2024 at 10:26=E2=80=AFPM John Watts <contact@jookia.org> wr=
+ote:
+>
+> This series is my current working and tested setup for booting from
+> SPI NAND chips on the Allwinner T113.
+>
+> I have included the following patches from others. I may have modified
+> them to work with the latest mainline:
+>
+> https://lore.kernel.org/all/20221014030520.3067228-1-uwu@icenowy.me/
+> https://lore.kernel.org/all/20231111133432.755363-2-bigunclemax@gmail.com=
+/
+>
+> Hopefully this can get the ball rolling on how to properly implement
+> SPI NAND support in mainline U-Boot.
+>
+> Signed-off-by: John Watts <contact@jookia.org>
 
-This series introduces support for DTR mode for the Cadence QSPI/OSPI
-IP. We have been developing it against the SC594/SC598 from ADI, so
-there are some limitations specific to our hardware's capabilities.
-Ideally this series could be enhanced with features introduced in a
-patch series submitted by AMD, but currently no work has been done to
-reconcile the two. So this is somewhere between an RFC patch and
-a patch series we wish to submit as-is for inclusion.
+Hi John,
 
-Beyond the specific support for the QSPI peripheral, this series also
-introduces a more general calibration framework as part of the spi
-system in order to facilitate integration of calibration support for
-other controllers within a consistent approach.
+It doesn't look like I was sent the whole series (only 00 and 01), but
+I was able to find it on Patchwork and sift through it. A few general
+comments follow:
 
+The introduction of `SUNXI_BOOTED_FROM_SPINAND` is the right call,
+since the newer sunxis use this for SPI-NAND, and
+`SUNXI_BOOTED_FROM_SPI` for SPI-NOR. The older sunxis, however, will
+use `SUNXI_BOOTED_FROM_SPI` for "it's either SPI-NAND or SPI-NOR, have
+fun figuring out which." While the rationale in 09/15 ("Instead of
+trying to boot from SPI NAND then SPI NOR in series, select one based
+on the current boot device.") is solid, we still need some code
+(perhaps in/called from `sunxi_get_boot_device`?) to handle the
+`SUNXI_BOOTED_FROM_SPI` case by performing flash type detection --
+disabled for those sunxis known to use `SUNXI_BOOTED_FROM_SPINAND`, of
+course.
 
-Ian Roberts (11):
-  mtd: spi-nor: Add calibration hook for high speed SPI
-  mtd: spi-nor: Octal DTR support for IS25*x
-  spi: cadence-quadspi: Enable DDR bit for DTR commands
-  spi: cadence-quadspi: enable opcode extension based on command length
-  spi: cadence-quadspi: disable automatic write enable
-  spi: cadence-quadspi: unconditionally disable auto status register
-    reads
-  spi: cadence-quadspi: Remove redundant DTR state
-  spi: cadence-quadspi: Direct mode does not support zero length
-    addresses
-  spi: cadence-quadspi: Add support for memory DMA channel transfers
-  spi: cadence-quadspi: Add DT control of max Read Delay Capture value
-  spi: cadence-quadspi: Implement high speed calibration
+06/15 ("sunxi: enable support for SPI NAND booting on SUNIV") should
+be dropped from the series. You are updating `suniv_get_boot_source`
+when introducing `SUNXI_BOOTED_FROM_SPINAND` anyway, so you can just
+hook up `SUNIV_BOOTED_FROM_NAND` at that time (and a heads-up: I think
+you got it wired backwards in this version of the series).
 
- doc/device-tree-bindings/spi/spi-bus.txt     |   4 +
- doc/device-tree-bindings/spi/spi-cadence.txt |  11 +
- drivers/mtd/spi/Kconfig                      |  12 +
- drivers/mtd/spi/spi-nor-core.c               | 246 ++++++++
- drivers/mtd/spi/spi-nor-ids.c                |   6 +-
- drivers/spi/cadence_qspi.c                   | 444 ++++++++++----
- drivers/spi/cadence_qspi.h                   | 105 +++-
- drivers/spi/cadence_qspi_apb.c               | 572 +++++++++++++++----
- drivers/spi/spi-mem.c                        |  24 +
- include/linux/mtd/spi-nor.h                  |  13 +
- include/spi-mem.h                            |  19 +
- 11 files changed, 1226 insertions(+), 230 deletions(-)
+On a more fundamental note: I am hesitant about the overall approach
+of having NAND reading code in `arch/arm/mach-sunxi/spl_spi_sunxi.c`.
+NANDs are more complex than NORs (requiring e.g. bad block handling)
+and U-Boot generally keeps the SPL load methods in
+`common/spl/spl_*.c`. It's good that the UBI-on-SPI-NAND method is
+hooked up there, but the "U-Boot image follows the (good) blocks of
+the SPL in NAND" method should probably live in the same directory.
 
--- 
-2.43.2
+Here's what I'd like to explore: can we introduce a
+`common/spl/spl_spinand.c` and update the `drivers/mtd/nand/spi/*.c`
+code to support running in SPL? This way
+`arch/arm/mach-sunxi/spl_spi_sunxi.c` must only provide the SPL-mode
+implementation of SPI -- that is, the actual sunxi-specific bit. Also,
+updating the `drivers/mtd/nand/spi/*.c` drivers for SPL-friendliness
+will mean dropping those `SPL_SPINAND_{PAGE,BLOCK}_SIZE` configuration
+options: the tables in the drivers will be the ones providing those
+after NAND autodetection.
 
+Thoughts?
+
+Cheers,
+Sam
+
+> ---
+> Icenowy Zheng (5):
+>       sunxi: SPL SPI: extract code for doing SPI transfer
+>       sunxi: SPL SPI: add support for read command with 2 byte address
+>       sunxi: SPL SPI: allow multiple boot attempt
+>       sunxi: SPL SPI: add initial support for booting from SPI NAND
+>       sunxi: enable support for SPI NAND booting on SUNIV
+>
+> John Watts (9):
+>       sunxi: Separate boot device and boot position
+>       spl: Add BOOT_DEVICE_SPINAND option
+>       sunxi: Implement BOOT_DEVICE_SPINAND in SPL
+>       spl: Add SPL_SPINAND configuration options
+>       sunxi: Use SPL_SPINAND for configuration
+>       nand: Add spinand_ helper functions
+>       sunxi: Implement spinand_ helpers
+>       spl: Support SPI NAND boot in UBI
+>       spl: Support loading FIT images in UBI
+>
+> Maksim Kiselev (1):
+>       sunxi: SPL SPI: Add SPI boot support for the Allwinner R528/T113 So=
+Cs
+>
+>  arch/arm/include/asm/arch-sunxi/spl.h |   3 +-
+>  arch/arm/include/asm/spl.h            |   1 +
+>  arch/arm/mach-sunxi/Kconfig           |   2 +-
+>  arch/arm/mach-sunxi/board.c           |  31 +--
+>  arch/arm/mach-sunxi/spl_spi_sunxi.c   | 348 +++++++++++++++++++++++++---=
+------
+>  arch/mips/include/asm/spl.h           |   1 +
+>  arch/riscv/include/asm/spl.h          |   1 +
+>  arch/sandbox/include/asm/spl.h        |   1 +
+>  common/spl/Kconfig                    |  21 ++
+>  common/spl/spl_ubi.c                  |  49 ++++-
+>  include/nand.h                        |   3 +
+>  11 files changed, 354 insertions(+), 107 deletions(-)
+> ---
+> base-commit: 777c28460947371ada40868dc994dfe8537d7115
+> change-id: 20240411-spinand-eb7d8319813b
+>
+> Best regards,
+> --
+> John Watts <contact@jookia.org>
+>
