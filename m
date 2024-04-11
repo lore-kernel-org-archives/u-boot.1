@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CCD3CD1284
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:43:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B4A8CD128A
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 12:43:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FCE18824A;
+	by phobos.denx.de (Postfix) with ESMTP id 7BF59882B1;
 	Thu, 11 Apr 2024 14:43:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LgySK2pY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Q8ZoftUe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D1C1D8829F; Thu, 11 Apr 2024 14:43:11 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id D9A1B88280; Thu, 11 Apr 2024 14:43:11 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 72E0688280
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:43:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 336348828A
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 14:43:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2d89346eb45so55466121fa.0
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:43:08 -0700 (PDT)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a47385a4379so157487866b.0
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 05:43:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712839387; x=1713444187; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712839388; x=1713444188; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3FuqcYjlNNVsBXLzXpvA0uXb1Pn1TvkPDbDuuYvHoMQ=;
- b=LgySK2pYsRHwXU6y0JZ6b29gPCr655xH0H81eb0hJEOt3aKHN3mXPE6Z0Oit/l9WYq
- 44qo4xiJY+w8m2yCzKC+KZRHTxVsyKRSdRsXkQZuSMtNJxrrCEKYpoKgqbQWq+mxIDK7
- YjH9MuxDKY8RlgaMkl3JDSZ5nJuha6NRIs4ph8XeSLdxiGHasuZyC82BJ/MHcSR+9d8v
- ZmlbV5snAsoyhqavdr2wKvS0MfxUL04bY37+1JfmE/4CSbJSt5ewptYmgfL0nY2gaFxJ
- hkWGs1ZOhlQSB9NHLDqFB0/7TLj+C3oAMSE+1wKgPnnhMA9tAp1QtEvhVZLaLS0pOIAS
- 5o1g==
+ bh=Pw93TmDPDQAkwl5pKSFrKySzCNLuFRwznyTmTT4BPnc=;
+ b=Q8ZoftUezFZoOFhmCXDrWUkM0CxpWadAoXnvz98gPE/EoOgeu1WjQwErrEjJfVQOl2
+ m8SNIaju67Te3ppsm/P+Nz+B/r8MzLgeM58GIAiOy5qRuD+AJJVDfo3/IQOI6Ybbw9dZ
+ CSPdrhtZRaKVGLO1dKHx0oFL7kJwSNN7lzztqoCmJdnP4r9p0/dCQ+1l+ugwXu53e1Mo
+ 7W4Qaqhews2dqQ7VjuYg26DEKZ1XkznfO/cSvgTgNQ70FgY+a9ZSp7mYO3TgIppV5NL4
+ qZBA6ng3OnMGce8dI3sgociPIFMwXNWPkJstB47ch/+pbLWu/TO0ZkR7m7j0ED1d2RNE
+ fAUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712839387; x=1713444187;
+ d=1e100.net; s=20230601; t=1712839388; x=1713444188;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3FuqcYjlNNVsBXLzXpvA0uXb1Pn1TvkPDbDuuYvHoMQ=;
- b=PJiY7JrtNGTKfsYiiao1d2TqeKeqqY1ScLsjbEf/EQMQIz+K8X4iGWZ4c8rn5ywxdH
- maq83Io0M/PNHgWF42uzPSPR2h+5bAeGqSBTsypTlkKB+GpvDAQVRmwYx0lBWRyLu7e9
- icfM6Eu5RgBXRSkwPW2WXJyS2+p1lm7jfrkolfqjIGxsmcsNLafh57rA1S2k4+gCyjDA
- 4NbBgPB6KuF9/InQN9O4lterpHgbnYERAbYnau0JUgohG8eZ9NEjxutmJGDos0AJk2Rl
- 08xwyTkIPpNDpFpGSeIpUItkScCmByaWy9XNS8H0RKm9TTIWPH1vs32CCHGQk94vwhLw
- lWvQ==
-X-Gm-Message-State: AOJu0YwlIfvijhVqauXW773J/2OQ4Mh1emFaFvqIl0ccmwW7deFNL0/a
- R1igCxdyQvbE55pk+8nkar3z7dyTN6LaSje+sdKdHKaN8El5ncNm1lfhjczuIrKL+nQe4gbL38l
- 4
-X-Google-Smtp-Source: AGHT+IFmm6jn/03c6L0j7wbfdgWYdEuKCPVAL9rGUGxdKCx4Gk0bgvGwJMYSRkXsUMSWk4YWA5z3+w==
-X-Received: by 2002:a2e:9e57:0:b0:2d8:7266:ae74 with SMTP id
- g23-20020a2e9e57000000b002d87266ae74mr4502637ljk.26.1712839387429; 
- Thu, 11 Apr 2024 05:43:07 -0700 (PDT)
+ bh=Pw93TmDPDQAkwl5pKSFrKySzCNLuFRwznyTmTT4BPnc=;
+ b=ivJAWC6OqjVQZjYFiUCo5PgMQlZn7Ga5HARxpeCNeQz3wfPjcYOoiJIWdTba/jW8Dj
+ NMn+rsQkRPNbkzQtYQhK6yKRiVXlKx6odFvNymVTztqqCZK92ZYxIQ2qb53xhbn3t2Xr
+ 9uQuRiqWJwDekkvmpW6LzbGK05ULMO1pNnnBTL+itizRDcFAzd98ITXgdnBIneJeTjQE
+ QOauyhETkCx8cJXO9Woi02D2ozYqlJg+X0h2JqvkytAc5udDnWMmQ8WcGikfIhy78rA4
+ VwuBpp/1Q3lCrBhe7FP7wDOlTjkYWFca0TYMXLUB1jFRmm5BUz555XYxZd4QoOmiHtfy
+ C5SQ==
+X-Gm-Message-State: AOJu0YxFoCCa0OnL0MbSQ58KbHo6M+QTn/FKCIn5E/r5AsZcd1PxooXB
+ 06DXcWzSkQ6lnQpPFKZNvxiZ++EpvbwVk18vVbWyCBxBHj9G1uFjOZW6VKUxhmo=
+X-Google-Smtp-Source: AGHT+IErVWJABI82gNrDBeWuw/tGLSn1HoF37LSrAAMMVrAoDj08cUbIdOIDSG5IYT4cg4X/d2UZJw==
+X-Received: by 2002:a17:907:7d8c:b0:a52:2238:abd7 with SMTP id
+ oz12-20020a1709077d8c00b00a522238abd7mr1568026ejc.32.1712839388741; 
+ Thu, 11 Apr 2024 05:43:08 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::570d])
  by smtp.gmail.com with ESMTPSA id
- e1-20020a170906844100b00a4e8a47107asm710491ejy.200.2024.04.11.05.43.06
+ e1-20020a170906844100b00a4e8a47107asm710491ejy.200.2024.04.11.05.43.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 05:43:06 -0700 (PDT)
+ Thu, 11 Apr 2024 05:43:08 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>, 
  Neil Armstrong <neil.armstrong@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-In-Reply-To: <20240410-topic-sm8x50-usb-phy-v2-0-9d2d90bd04da@linaro.org>
-References: <20240410-topic-sm8x50-usb-phy-v2-0-9d2d90bd04da@linaro.org>
-Subject: Re: [PATCH v2 0/2] phy: qcom: add support for the Qualcomm
- Synopsys eUSB2 PHY
-Message-Id: <171283938659.622116.10661068866793180391.b4-ty@linaro.org>
-Date: Thu, 11 Apr 2024 14:43:06 +0200
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20240405-topic-sm8x50-pinctrl-v1-0-92d563c28c90@linaro.org>
+References: <20240405-topic-sm8x50-pinctrl-v1-0-92d563c28c90@linaro.org>
+Subject: Re: [PATCH 0/3] qcom: add pinctrl driver for SM8550 and SM8650
+Message-Id: <171283938769.622116.15145320526567860572.b4-ty@linaro.org>
+Date: Thu, 11 Apr 2024 14:43:07 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,20 +94,24 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Wed, 10 Apr 2024 18:01:11 +0200, Neil Armstrong wrote:
-> Add support for the new Qualcomm Synopsys eUSB2 PHY found in the
-> SM8550 and SM8650 SoCs.
+On Fri, 05 Apr 2024 10:15:09 +0200, Neil Armstrong wrote:
+> Add pinctrl driver for the TLMM block found in the SM8550 & SM8650 SoCs.
 > 
-> Finally enable the driver in the Qualcomm defconfig.
+> This driver only handles the gpio and qup debug uart pinmux, and makes sure
+> the pinconf applies on SDC2 pins.
 > 
+> Finally enable both drivers in the Qualcomm defconfig
 > 
+> [...]
 
 Applied, thanks!
 
-[1/2] phy: qcom: add Synopsys eUSB2 PHY driver
-      commit: 01d9217273df37c5150bab45018b0ee54cb1f30e
-[2/2] qcom_defconfig: enable the Qualcomm Synopsys eUSB2 PHY driver
-      commit: 1e6adb446297fdaea5561c001e58cc9f2cb7a743
+[1/3] pinctrl: qcom: Add SM8550 pinctrl driver
+      commit: 225c991b41a2255054dfcafb7667979c6a88bffd
+[2/3] pinctrl: qcom: Add SM8650 pinctrl driver
+      commit: b0725abe0ae5c41c03dfc9af921120fe501f07f5
+[3/3] qcom_defconfig: enable SM8550 & SM8650 pinctrl driver
+      commit: c32ab322d04eed52d5ad30b19d45fe041c19a250
 
 Best regards,
 -- 
