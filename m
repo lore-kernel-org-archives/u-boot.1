@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B9D7EB64AC
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 13:23:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F9C6C04AB7
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 13:23:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBDF8878AA;
-	Thu, 11 Apr 2024 15:23:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 282CB882A1;
+	Thu, 11 Apr 2024 15:23:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QH6kQ+qM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NEZ8PH2T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ACA50878AA; Thu, 11 Apr 2024 15:23:14 +0200 (CEST)
-Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
- [IPv6:2a00:1450:4864:20::136])
+ id 204A1882A1; Thu, 11 Apr 2024 15:23:41 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6A5D8332E
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 15:23:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 310E58332E
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 15:23:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x136.google.com with SMTP id
- 2adb3069b0e04-516f2e0edb7so5726555e87.1
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 06:23:12 -0700 (PDT)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-516d536f6f2so6915569e87.2
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 06:23:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712841792; x=1713446592; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712841818; x=1713446618; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=s+XlmVfqeJnpWTFQJGMpCkh6cZi7bX6+mgimOy5LURA=;
- b=QH6kQ+qMTodMS9yyUxOTBmq7f9SafiSc0f8ckvJXX6ERBwiuKQCDdtvM2hz4i+Fxs2
- nPwUPo8pkxF5RawPJZv4bjTnUQ4i1KxYdBzpgu1LIVnjC1xISIHn2fnyPNSlm2PHLfBG
- LmVZjazZT+EnzHEZmuXZERFaCpHN8BpGiOuxHJTAoWOD6syFReUXKCJ/o52ljwA14x5f
- TkvwC/opkBgcRTr9pzIW1yLDrPAK5aLwISFYtz2m3kHRVPW1CeCrzhZ+mrIhx9s0BneE
- MDvN453bvEEcLHHM8HP3SWq476IPZs7qGSpxx3C1IbBsHnNcUoRKQYF9eGlvIF/FwZ/n
- 18Vw==
+ bh=EWNk4NbKuJqXYmL1LyX1Lv0d8l3BfwA52j3xyheLFy8=;
+ b=NEZ8PH2TfxesaAQ3eva0GV9xK4enBsxsNzFexRYO0f+F0W5EpETluwsMDzdiDoTwN3
+ GjSd5rLBAp/90ktFMr6K7qU0Fglg+QwNP+FoTOMfULIzvlNNOouN9if8l/9X0FIyU3Jv
+ 4tO1+d1zwKgmGiKMKLHyNPfTRfGt+qR6PfUTsCSKg4VwAdrYJDRflFUQXGmd7KF+/07V
+ cIkeF8Adm2zufZ2QWwUvA9wc6xFPxRbzfrA3VKsvD20MB2mGWzOhbxzodnXqCNDQV0xu
+ RRKba47+CvK255wST6PFH6Qj4uy0GfuQknxLkmLqTh5LImBRl5Zi20sd1JyRvH/Q2+NZ
+ aJEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712841792; x=1713446592;
+ d=1e100.net; s=20230601; t=1712841818; x=1713446618;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=s+XlmVfqeJnpWTFQJGMpCkh6cZi7bX6+mgimOy5LURA=;
- b=qJVhs7zdRKDxXrJCCnC9Us8q8J6bX7nRD3oeWNaEPMXF4l08enocW6pvuRqcx0I8b2
- t+RED+jwzMbH+h72TT+k6tWpQM/iWxG/sFZNtfUf+KioR25C9ybbGlw8gs3QZYSFmZ7r
- HTsr/U7LnZWtOrZmmUUWtJRsBy9j9x6CWHDI/rSFQB4OH2u4azNK7+vfqUd10y8gqfZa
- uQDLQ7gRZPTYUm0lYyDEiZNNuahGIqqcPmZUhpODhblcr3t+eKcIWEct9Yc+scZHCoHd
- j9puchI7IM6/0q3wZtMU8V4pBzIbGz7U5HB7vmteesDq5zF1n9Xf9aRe2Q/aK1CM47qp
- ahug==
+ bh=EWNk4NbKuJqXYmL1LyX1Lv0d8l3BfwA52j3xyheLFy8=;
+ b=W4fIYPYicKILd2/wDzXJdPcg1UAVJmTLMB91fh9Rp2pCOTE3Na6VhFJdPs6pf/0cFh
+ 593spegHhUMcJ/i8hiWHCTzcrBIf8bqNFSmPuabUiOkR08OLrfIaRVBrIxU5kjl1oBnI
+ P8u2PKG+tkKVhRPa4JEkbEZTEdx9rYUBLxAYhqh1fJDPn9S7vdzjLBWllR4VB6NG8vuu
+ x+PWJAOqKc4ULURXCoavmHlUBvUePxXHi0jgvRjsrtxFo84HtB77ZCocAhpCKtOIZyh+
+ fCR5iCVDXiHqhhLFXZXvfJbRsYyZ95MKd9UH9NDK383MX8w7p4Lhm17LWCo0aEcdcvj1
+ eR9w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVCRiTT2X1lMhBnyD2fib7Qder6OLjvd4yd4gov/K8RbQJLyOtXPP3eP3PlmbxgMdjzgAEXpDnhCaAMk/lN5xQoBHi1nw==
-X-Gm-Message-State: AOJu0YyP4EBIIe+q9mVMKjTFQuVEgJLpT/yyByWXvG6HDDqlgI8gjLlb
- Eg5wAqBeUJ1EM3AADCAxd/zuhpj9m/rY+1L4vecWCsSrGtaqhC766mn8ybwQwdQpFLF+FsF/9eK
- aXq1S+SRw9laYNeSGwuWLHSyCeHNTHVPQSe4wKw==
-X-Google-Smtp-Source: AGHT+IEm9IwyeEQOiERvMdn5iakN203WdQhGnCbSIq8ksCQg/JfyE1FMis1E/IweRsMCPwac2zo01BbSNTW4F/VxfBU=
-X-Received: by 2002:a19:f014:0:b0:517:8ad8:c64 with SMTP id
- p20-20020a19f014000000b005178ad80c64mr1477628lfc.21.1712841791871; Thu, 11
- Apr 2024 06:23:11 -0700 (PDT)
+ AJvYcCW5NkWLmdH9mIizE5iktBwWDg7PeUbXhWP4aW5u3Nd6+/GLwa9nq1ZeW/fSkNRxWs1Y2xKQIX+I+p3aYV4JxAp7za9qYA==
+X-Gm-Message-State: AOJu0YzD1rVLkirncr4kWWWjC2sJwS8CWZGq/dTMghV9ut32V8mmVPNT
+ PPu8iH1Nas2hPIgAptGiXB5hTtZg7lVgmouE4n2PGYW9DkbXoAj34GyS+OrDb0seyOe+q9wX4Fk
+ Y33Tvg+HgDU+DAq/Bk2x8vP/5qKP2ParoGEX5lfwqxzoXtzCjVTnrew==
+X-Google-Smtp-Source: AGHT+IE4jUPSAOljhW5/oYQEfrztVui5eApGGyqtKN3DrYVUrkqYZl1cBh08Fith++jhr6sGXbFIgA5MqG+fg4h5m7U=
+X-Received: by 2002:ac2:5192:0:b0:516:d04f:b58e with SMTP id
+ u18-20020ac25192000000b00516d04fb58emr4094289lfi.30.1712841818374; Thu, 11
+ Apr 2024 06:23:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240410121933.152265-1-o451686892@gmail.com>
- <400d93c5-d49e-48a3-b677-b61182ad6fcd@gmx.de>
-In-Reply-To: <400d93c5-d49e-48a3-b677-b61182ad6fcd@gmx.de>
+References: <20240409180456.39581-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240409180456.39581-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 11 Apr 2024 15:22:36 +0200
-Message-ID: <CAC_iWj+hsbRg9XX3S6f23i00DiCFPAYu-ARz2ftDd=yzzV7gUg@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: using EFI_UNSUPPORTED for private
- authenticated variables
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Weizhao Ouyang <o451686892@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Masahisa Kojima <kojima.masahisa@socionext.com>,
- u-boot@lists.denx.de
+Date: Thu, 11 Apr 2024 15:23:02 +0200
+Message-ID: <CAC_iWjL5NxUq4XTrWAM1ja2xnYbbjUj9VOxPqbEh9eCSCRMDCg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] fs: fat: convert change month correctly
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, 
+ Christian Taedcke <christian.taedcke@weidmueller.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,33 +90,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 10 Apr 2024 at 14:29, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 9 Apr 2024 at 20:05, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On 10.04.24 14:19, Weizhao Ouyang wrote:
-> > Improve error message for UEFI SCT tests.
-> >
-> > Signed-off-by: Weizhao Ouyang <o451686892@gmail.com>
-> > ---
-> >   lib/efi_loader/efi_variable.c | 1 +
-> >   1 file changed, 1 insertion(+)
-> >
-> > diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
-> > index 2951dc78c7..e6c1219a11 100644
-> > --- a/lib/efi_loader/efi_variable.c
-> > +++ b/lib/efi_loader/efi_variable.c
-> > @@ -163,6 +163,7 @@ static efi_status_t efi_variable_authenticate(const u16 *variable,
-> >               break;
-> >       default:
-> >               /* TODO: support private authenticated variables */
-> > +             ret = EFI_UNSUPPORTED;
+> The month is stored in 5 - 8. We need to shift it by 5 bits.
 >
-> This looks more adequate than EFI_SECURITY_VIOLATION. Thanks.
+> Cf. Microsoft FAT Specification, 2005-08-30
 >
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+> Fixes: 13c11c665320 ("fs: fat: add file attributes to struct fs_dirent")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  fs/fat/fat.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> >               goto err;
-> >       }
-> >
+> diff --git a/fs/fat/fat.c b/fs/fat/fat.c
+> index 14e53cf2d5a..2dd9d4e72dc 100644
+> --- a/fs/fat/fat.c
+> +++ b/fs/fat/fat.c
+> @@ -1254,7 +1254,7 @@ out:
+>  static void __maybe_unused fat2rtc(u16 date, u16 time, struct rtc_time *tm)
+>  {
+>         tm->tm_mday = date & 0x1f;
+> -       tm->tm_mon = (date & 0x1e0) >> 4;
+> +       tm->tm_mon = (date & 0x1e0) >> 5;
+>         tm->tm_year = (date >> 9) + 1980;
+>
+>         tm->tm_sec = (time & 0x1f) << 1;
+> --
+> 2.43.0
 >
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
