@@ -4,78 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B6E4C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 20:31:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0084C001CC
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 21:00:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9FD1881CA;
-	Thu, 11 Apr 2024 22:31:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 369FA87F4B;
+	Thu, 11 Apr 2024 23:00:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tQFjmmIR";
+	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="e1eu1kQ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EB16878AA; Thu, 11 Apr 2024 22:31:15 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 5B62C88005; Thu, 11 Apr 2024 23:00:37 +0200 (CEST)
+Received: from out-184.mta1.migadu.com (out-184.mta1.migadu.com
+ [95.215.58.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29F288573F
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 22:31:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E7E3F87E91
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 23:00:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=jookia.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43BKUxRj031110;
- Thu, 11 Apr 2024 15:30:59 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1712867459;
- bh=gBfPEPFdAaG1pqPtXWTVhNV1/LNkQ9S3MINIHw9KtQY=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=tQFjmmIR72u3roZQtFe06q/CkTuSXSi5fyXBC86uqCfHuaV1JqA8N0AnhhERHqfSU
- ViAX+IKxbGgT/EKOUyKv2oRw2c1bUGNu/lGb9EzUExwwh9ozL1vIWd79EL1vRWWu1y
- +PPK7onOnqHkJigKzW7W9trRWxSpPfYJMO/Uhrao=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43BKUxl1022763
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 11 Apr 2024 15:30:59 -0500
-Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 11
- Apr 2024 15:30:58 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 11 Apr 2024 15:30:58 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43BKUwRN012876;
- Thu, 11 Apr 2024 15:30:58 -0500
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
- <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- "Heinrich Schuchardt" <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>,
- "Christian Gmeiner" <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
- Nikhil M Jain <n-jain1@ti.com>, "Neha Malcom Francis"
- <n-francis@ti.com>, Andrew Davis <afd@ti.com>, "Maxime Ripard"
- <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
- "Vignesh Raghavendra" <vigneshr@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 12/16] arm: dts: k3-am625-sk-u-boot: Add
- sysreset-controller node
-In-Reply-To: <87cyqwe3lt.fsf@baylibre.com>
-References: <20240408223134.165877-1-j-humphreys@ti.com>
- <20240408223134.165877-13-j-humphreys@ti.com>
- <87cyqwe3lt.fsf@baylibre.com>
-Date: Thu, 11 Apr 2024 15:30:58 -0500
-Message-ID: <86edbbzlod.fsf@udb0321960.dhcp.ti.com>
+ spf=none smtp.mailfrom=contact@jookia.org
+Date: Fri, 12 Apr 2024 06:58:04 +1000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
+ t=1712869232;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ in-reply-to:in-reply-to:references:references;
+ bh=OG2/x6humJsmhnK8OM6b7VCuWaFjnKMlY/yFSHm0FT4=;
+ b=e1eu1kQ2nlenegCptyMZmFO7vb/cG+mUgNPBF/BVEyywHtOpqDFrWTnMandTfpuUgwatV5
+ 1ZEoCts7fximdMlcW3wm3Uyh9Eb17GTaAKHFYXKp2eTainOYvuh7F+K/yltSzdTQX2Pl9T
+ r7RmEcROY3olaoZjRdSmwWedYRMOi1WV/dI0+9F4SsHxGCJPDy0eu8emuJ5C5mT+xpXswS
+ jJbAHc/jIoqDnW7+igaFkS7XANEKWDp8XysGJZG1L+HAAoOoQNuE2YPRoxnjaigf9GbN5T
+ A+xDVcgVmbKh5Lz4xcgTc9RoECUK9SkyKLSWPaug+OQ517wlNhvX2M0OaFDTXg==
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Jookia <contact@jookia.org>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 0/2] sunxi: Support UART1 and UART2 on the T113
+Message-ID: <ZhhO3F688TvkEyvD@titan>
+References: <20240411-t113serial-v1-0-41ff858a1235@jookia.org>
+ <20240411133738.3209aa12@donnerap.manchester.arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
-X-Mailman-Approved-At: Thu, 11 Apr 2024 22:31:40 +0200
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240411133738.3209aa12@donnerap.manchester.arm.com>
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,85 +69,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Mattijs Korpershoek <mkorpershoek@baylibre.com> writes:
+On Thu, Apr 11, 2024 at 01:37:38PM +0100, Andre Przywara wrote:
+> Hi John,
+> 
+> > The T113 supports UART1 and UART2 on PG and PD pins respectively.
+> > Add support for these in U-Boot so we can use them.
+> 
+> So those bits are just for the *debug* UARTs. Traditionally this is UART0,
+> with some particular pinmux, sometimes UART2 on older SoCs.
 
-> Hi Jonathan,
->
-> Thank you for the patch.
->
-> On lun., avril 08, 2024 at 17:31, Jonathan Humphreys <j-humphreys@ti.com> wrote:
->
->> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
->
-> Please consider adding a commit message body.
+Hi Andre,
 
-Got it.  thanks.
+No board uses this by default, so I'll just carry this out of tree then.
+Thanks for looking at the patch!
 
-BTW, the next version of this series will drop this patch as Andrew has
-submitted another patch removing the need for this one.  See
-https://lore.kernel.org/r/20240402160908.508974-1-afd@ti.com.
+> So is there a board that uses those pins for a debug console? I want to
+> avoid making this code even messier than it already is, without good
+> reasons. Also please note that I tried to clean this up here:
+> https://patchwork.ozlabs.org/project/uboot/patch/20240103001239.17482-20-andre.przywara@arm.com/
 
->
-> On the TI vendor tree, there is a similar patch with a commit message:
-> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2023.04&id=c5296d943c2c84dd6dcb3b91305d006ac46f3157
->
-> Before patch:
-> => reset
-> resetting ...
-> System reset not supported on this platform
-> ### ERROR ### Please RESET the board ###
->
-> With patch applied:
-> => reset
-> resetting ...
->
-> Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on am62x sk evm
->
-> Andrew also suggested to me that if we are interested by A53 reset only,
-> we can PSCI reset instead for all k3 architecture:
->
->  --- a/arch/arm/Kconfig
->  +++ b/arch/arm/Kconfig
->  @@ -784,6 +784,9 @@ config ARCH_K3
->           bool "Texas Instruments' K3 Architecture"
->           select SPL
->           select SUPPORT_SPL
->  +       select PSCI_RESET if ARM64
->  +       select SYSRESET if ARM64
->  +       select SYSRESET_PSCI if ARM64
->           select FIT
->           select REGEX
->           select FIT_SIGNATURE if ARM64
->
-> Has the above been considered?
+I'll give this a test and review for you when I can.
 
-I am not aware.  I would think that you want full reset, unless you are
-thinking about specifying a reset level?
-
-Jon
-
->
->
->> ---
->>  arch/arm/dts/k3-am625-sk-u-boot.dtsi | 9 +++++++++
->>  1 file changed, 9 insertions(+)
->>
->> diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
->> index fa778b0ff4c..35bfeae75a0 100644
->> --- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
->> +++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
->> @@ -46,3 +46,12 @@
->>  &cpsw_port2 {
->>  	status = "disabled";
->>  };
->> +
->> +&dmsc {
->> +	bootph-pre-ram;
->> +
->> +	k3_sysreset: sysreset-controller {
->> +		compatible = "ti,sci-sysreset";
->> +		bootph-pre-ram;
->> +	};
->> +};
->> -- 
->> 2.34.1
+John.
