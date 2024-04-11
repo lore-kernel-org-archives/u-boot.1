@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9488ECD128A
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 10:58:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED7E8CD1284
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 11:51:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A61D088261;
-	Thu, 11 Apr 2024 12:58:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 3363488249;
+	Thu, 11 Apr 2024 13:51:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="i0cHpEUp";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WslZDaTA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5EA0B88268; Thu, 11 Apr 2024 12:58:06 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0755F8824A; Thu, 11 Apr 2024 13:51:30 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 423CE8803E
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 12:58:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B1CF687FED
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 13:51:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1712833071; x=1713437871; i=xypron.glpk@gmx.de;
- bh=yScjtKFYA+g8J/Wj8/wrLGP4KtvlrgKRJnpXmlVbiXo=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=i0cHpEUpEIAt0pe9TNnSTLtg/iD9fwg8zVwuTFGsOvqKNijldP89D9m/Ahn1OIBH
- oY+K7hqvOlD35jnsRokBnWsNajmmn8H8FdtNznH9RXn+jkse3Aa0coWKwlDTtDukX
- PWp/qSUmHl9NPXC7q/ZBzrpof09Z+4mc1H6bCzwT/SyEelkMvXiCj128BuHnIX2wv
- lirrx02/8VirulfEZNAaEGvw61UM1+2/ULxQ7tts4nk7h6oW2sumTN9SX55dvNUDI
- O8k9MBy5TQ+FLQm9k6R47E1fBbZHrDyWoQRIaXUVNnpZ7zxnWq03C8sw35/j2V+qO
- qobLBGlj0f7LzLnWMg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M1Ygz-1rwFpk22TD-0036fM; Thu, 11
- Apr 2024 12:57:51 +0200
-Message-ID: <0d07390c-54e7-4e28-a5a3-48a6e72a9880@gmx.de>
-Date: Thu, 11 Apr 2024 12:57:46 +0200
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1e2c725e234so5882295ad.1
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 04:51:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1712836286; x=1713441086; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=8/aa3gScZqXXsGSX/yLIBh8w5anFgh4CEr50CxkBb2M=;
+ b=WslZDaTA3FtniG2bMy2A9DejJYipkJj01wVFEOtuMWeDYr9SWcRpCAD/SvVxkLJr3N
+ eb1rsDQs6dy7ZKh6NnwzX6yasFWmQ6AMSips9/P/Z6VxeUVJ6W2sa+eUV7WcamboxNAL
+ mGj4OhAi3VQdjxpMS4XArtidAZk+2P225ICsTk6LEJChrPdRMnlrENHMdYXw5ycBU2oo
+ Yh3oj4UprJiCbcgp/Bsqv6GMaRu6tJiwQ61sgE1BBm8AC2OqLwB4OiICYOlnqOS4SVdq
+ fcAaFwvQ92AcKvh234tYBoQenx2nAq9qSJ8x9QQh1C0ok+wWf0ebaxCWhuTl1TOE04xo
+ 7QWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712836286; x=1713441086;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8/aa3gScZqXXsGSX/yLIBh8w5anFgh4CEr50CxkBb2M=;
+ b=JqdzQGRitNscbefj0luSwckd4xX9xfmqoDFECnlkL6pCoT9SMrmqhqdqW1wXZSfDLT
+ nvgVX5UUScMEdEP/UZr0nsHey5+RZ5VTCGRaDf/JkegMPIN46aOzxebTAg+Jzs9sUAci
+ 5YzYjr6m73EFKhjpnnnn1rcUsutqq104Ig9yJoEnaoPlsyFyf48K0MTD0hiBIAX7NM9p
+ J+WoMHRfXoXsLdbnmJDzI6gpgZ1upBR9HiR6mHwhCNIOm0ys2TGbtKja+emdzT8TLS28
+ RqrTqSZlnv9QGO9PYj/RleULmgFeIv7lB3Cyi66gxvex0UYnb1ndk+Q9J3hZUNF/s3MZ
+ b1Jw==
+X-Gm-Message-State: AOJu0Yyzd/RVqL4YGeTZbAynMOLgzzp1/Kb7HQ8MySwpOdZQ+GjP2QmR
+ n/LyoQwCcxV9OPEcrffOaBsG/GBe/AZ6Qzrewm3Uy4peM8y7m8/h9n4wzUcie9Igf2rmzqklqwR
+ s
+X-Google-Smtp-Source: AGHT+IHsqHDopi0UXQ+qFpdMueNMWaSfXzNX0ZYtx43c8ofVIo6Kr+wDE6TuaTNSCEr1LfZmgts+pw==
+X-Received: by 2002:a17:902:e811:b0:1e3:cb8d:e28f with SMTP id
+ u17-20020a170902e81100b001e3cb8de28fmr3019966plg.31.1712836285923; 
+ Thu, 11 Apr 2024 04:51:25 -0700 (PDT)
+Received: from sumit-X1.. ([223.178.210.92]) by smtp.gmail.com with ESMTPSA id
+ f13-20020a170902ce8d00b001e3e0aa9776sm1008456plg.27.2024.04.11.04.51.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 11 Apr 2024 04:51:25 -0700 (PDT)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: u-boot@lists.denx.de
+Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, trini@konsulko.com,
+ stephan@gerhold.net, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH] mach-snapdragon: Allow other board vendors apart from Qcom
+Date: Thu, 11 Apr 2024 17:21:16 +0530
+Message-Id: <20240411115116.344595-1-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] cmd: bootm: add ELF file support
-To: Maxim Moskalets <maximmosk4@gmail.com>
-Cc: Maxim.Moskalets@kaspersky.com, marek.vasut+renesas@mailbox.org,
- mkorpershoek@baylibre.com, ralph.siemsen@linaro.org, sean.anderson@seco.com,
- sjg@chromium.org, souajih@baylibre.com, takahiro.akashi@linaro.org,
- trini@konsulko.com, u-boot@lists.denx.de,
- quentin.schulz@theobroma-systems.com
-References: <20240411085738.31779-1-Maxim.Moskalets@kaspersky.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240411085738.31779-1-Maxim.Moskalets@kaspersky.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:wDDRDjQtV67pawnh9B4Ld74m0pQA9zXzgQgMStXyuV2GQMO/mF8
- +Jb9NTo7Z6e0+DOGol4/z5TlRFboHdJdIcsdOe82PpKFXlgIH4fu/45RCcAzsuss95AnGrI
- 4NUwqXu1CAMFOULjllYbU4dEHEPijan4s9XlQrqdvi5xV23t8vGL+VY8tx+6jo77lP8T4XA
- QM8si9t5hpIeniIYqmH6w==
-UI-OutboundReport: notjunk:1;M01:P0:0EgnBJ/6ei8=;Ua0Dr0tpmYfTXDPfZproCTt7IFy
- qlcUz9M3WgG25HkwCTkbesRAil2cy/ZZ+UotsHVTCfQz7VcmLslxCPlnBDklYkF7ovJhyyNsk
- KL1PqJjlBgPQUOjUcZEbn+BOJxbtKion4X2HGUkRnEp4bDhTzj8m3ZsmL17ALexCtvzUu1C3P
- YLrQUCwBn086qZHP8nLQ/0NpcX4aaoa415dep6S4q6S/2y8CUVXbZSmXwv7m0U0iYoCcXxLD9
- YfpUEzzx10WGTZkRKBTHp9w0Z5h3s1aZ6aeiDDvg5g/3nGqz/eqy4RtlSCjSrrCxaoTzpa/a/
- G/Sm2UtLk6WaQdrSz3OvC9JnayC8hDbLdH5g6mYlPrbxr4oOhPA9chMqDvsr0QAXaDlWNiFDo
- Q1Fe5lrPRde2sVg8Jbf0T1wznMvQ66If13ijps8syMVkdoJDcsLacT1MvnoTfaratmHtv9XQl
- mE+vcZ6OFsvApGbAJZNxCKfa1X/4nNFU0MMMBw3L+FV6go2XCJbZaK1V/LNjLpNkprhtkXeVV
- Yx6VhsWeFlhpGbHVwvFh6l9ULDgxEbjo+YLIdQrkbfS7WRLfgh6BTNsaXkuPrGCShwChuVD2J
- n1zLeO6kP1Q4q1wN/inarD150zspS3+qyTXSuN1KQwapstMOMzabXxXcwLjCcf6BbK7bB90U+
- 6nlGy8iE2v6boXwNP91l6tZ+0jaSblGyAa36Tx6PyU9fnEgGuuhERP4SEtdYLrDd9D+goYtAB
- RRzRivFgNGwXEQdn/1f8YwKAKJYRv5iO6nLgzO4fULb6lvSZ0131AC+wgACqU5SNBcpKugoLk
- GW9AQCdq5k4ZHTiOGws5xSHcFHluhTxfRHNqadg2V/QDw=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,115 +89,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 11.04.24 10:57, Maxim Moskalets wrote:
-> From: Maxim Moskalets <maximmosk4@gmail.com>
->
-> Some operating systems (e.g. seL4) and embedded applications are ELF
-> images. It is convenient to use FIT-images to implement trusted boot.
-> Added "elf" image type for booting using bootm command.
->
-> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
-> ---
->   boot/bootm_os.c  | 23 +++++++++++++++++++++++
->   boot/image-fit.c |  3 ++-
->   boot/image.c     |  3 +++
->   include/image.h  |  1 +
->   4 files changed, 29 insertions(+), 1 deletion(-)
->
-> diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-> index ccde72d22c..f6b46cf57f 100644
-> --- a/boot/bootm_os.c
-> +++ b/boot/bootm_os.c
-> @@ -395,6 +395,26 @@ static int do_bootm_qnxelf(int flag, struct bootm_i=
-nfo *bmi)
->   }
->   #endif
->
-> +#if defined(CONFIG_CMD_ELF)
-> +static int do_bootm_elf(int flag, struct bootm_info *bmi)
-> +{
-> +	struct bootm_headers *images =3D bmi->images;
-> +	char *local_args[2] =3D {NULL};
-> +	char str[19] =3D ""; /* "0x" + 16 digits + "\0" */
-> +
-> +	if (flag !=3D BOOTM_STATE_OS_GO)
-> +		return 0;
-> +
-> +	snprintf(str, ARRAY_SIZE(str), "0x%lx", images->ep); /* write entry-po=
-int into string */
-> +	local_args[0] =3D bmi->argv[0];
-> +	local_args[1] =3D str;	/* and provide it via the arguments */
-> +
-> +	do_bootelf(NULL, 0, 2, local_args);
+Qcom SoCs derived boards can come from various OEMs/ODMs and not just
+Qcom itself. So allow CONFIG_SYS_VENDOR to be set correctly
+corressponding to the actual board vendor.
 
-Booting should be possible without having a command line interface.
-See commit 7c4647b8fb44 (Merge patch series "Complete decoupling of
-bootm logic from commands")
+Suggested-by: Stephan Gerhold <stephan@gerhold.net>
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+---
+ arch/arm/mach-snapdragon/Kconfig  | 15 +++++++++------
+ configs/dragonboard410c_defconfig |  1 +
+ configs/dragonboard820c_defconfig |  1 +
+ 3 files changed, 11 insertions(+), 6 deletions(-)
 
-The functionality to boot an ELF binary should be carved out into
-library function. The interface should not use argv[], argc.
-
-Best regards
-
-Heinrich
-
-> +
-> +	return 1;
-> +}
-> +#endif
-> +
->   #ifdef CONFIG_INTEGRITY
->   static int do_bootm_integrity(int flag, struct bootm_info *bmi)
->   {
-> @@ -536,6 +556,9 @@ static boot_os_fn *boot_os[] =3D {
->   #ifdef CONFIG_BOOTM_EFI
->   	[IH_OS_EFI] =3D do_bootm_efi,
->   #endif
-> +#if defined(CONFIG_CMD_ELF)
-> +	[IH_OS_ELF] =3D do_bootm_elf,
-> +#endif
->   };
->
->   /* Allow for arch specific config before we boot */
-> diff --git a/boot/image-fit.c b/boot/image-fit.c
-> index 89e377563c..0419bef6d2 100644
-> --- a/boot/image-fit.c
-> +++ b/boot/image-fit.c
-> @@ -2180,7 +2180,8 @@ int fit_image_load(struct bootm_headers *images, u=
-long addr,
->   		fit_image_check_os(fit, noffset, IH_OS_TEE) ||
->   		fit_image_check_os(fit, noffset, IH_OS_OPENRTOS) ||
->   		fit_image_check_os(fit, noffset, IH_OS_EFI) ||
-> -		fit_image_check_os(fit, noffset, IH_OS_VXWORKS);
-> +		fit_image_check_os(fit, noffset, IH_OS_VXWORKS) ||
-> +		fit_image_check_os(fit, noffset, IH_OS_ELF);
->
->   	/*
->   	 * If either of the checks fail, we should report an error, but
-> diff --git a/boot/image.c b/boot/image.c
-> index 073931cd7a..5b88d6808c 100644
-> --- a/boot/image.c
-> +++ b/boot/image.c
-> @@ -134,6 +134,9 @@ static const table_entry_t uimage_os[] =3D {
->   #endif
->   	{	IH_OS_OPENSBI,	"opensbi",	"RISC-V OpenSBI",	},
->   	{	IH_OS_EFI,	"efi",		"EFI Firmware" },
-> +#ifdef CONFIG_CMD_ELF
-> +	{	IH_OS_ELF,	"elf",		"ELF Image" },
-> +#endif
->
->   	{	-1,		"",		"",			},
->   };
-> diff --git a/include/image.h b/include/image.h
-> index 21de70f0c9..9a40bca22c 100644
-> --- a/include/image.h
-> +++ b/include/image.h
-> @@ -100,6 +100,7 @@ enum {
->   	IH_OS_TEE,			/* Trusted Execution Environment */
->   	IH_OS_OPENSBI,			/* RISC-V OpenSBI */
->   	IH_OS_EFI,			/* EFI Firmware (e.g. GRUB2) */
-> +	IH_OS_ELF,			/* ELF Image (e.g. seL4) */
->
->   	IH_OS_COUNT,
->   };
+diff --git a/arch/arm/mach-snapdragon/Kconfig b/arch/arm/mach-snapdragon/Kconfig
+index 96e44e2c549..4615a140d0d 100644
+--- a/arch/arm/mach-snapdragon/Kconfig
++++ b/arch/arm/mach-snapdragon/Kconfig
+@@ -4,7 +4,11 @@ config SYS_SOC
+ 	default "snapdragon"
+ 
+ config SYS_VENDOR
+-	default "qualcomm"
++	string "Snapdragon board vendor"
++	help
++	  Allows to specify vendor for the Snapdragon SoCs based boards.
++	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
++	  will be used as the custom board directory.
+ 
+ config SYS_MALLOC_F_LEN
+ 	default 0x2000
+@@ -19,12 +23,11 @@ config LNX_KRNL_IMG_TEXT_OFFSET_BASE
+ 	default 0x80000000
+ 
+ config SYS_BOARD
+-	string "Qualcomm custom board"
++	string "Snapdragon SoCs based board"
+ 	help
+-	  The Dragonboard 410c and 820c have additional board init
+-	  code that isn't shared with other Qualcomm boards.
+-	  Based on this option board/qualcomm/<CONFIG_SYS_BOARD> will
+-	  be used.
++	  Allows to specify the Snapdragon SoCs based board name.
++	  Based on this option board/<CONFIG_SYS_VENDOR>/<CONFIG_SYS_BOARD>
++	  will be used as the custom board directory.
+ 
+ config SYS_CONFIG_NAME
+ 	string "Board configuration name"
+diff --git a/configs/dragonboard410c_defconfig b/configs/dragonboard410c_defconfig
+index 260a8349d3b..3b6f50307a3 100644
+--- a/configs/dragonboard410c_defconfig
++++ b/configs/dragonboard410c_defconfig
+@@ -1,4 +1,5 @@
+ CONFIG_ARM=y
++CONFIG_SYS_VENDOR="qualcomm"
+ CONFIG_SYS_BOARD="dragonboard410c"
+ CONFIG_COUNTER_FREQUENCY=19000000
+ CONFIG_ENABLE_ARM_SOC_BOOT0_HOOK=y
+diff --git a/configs/dragonboard820c_defconfig b/configs/dragonboard820c_defconfig
+index ebc80eb2a46..a795497ef5d 100644
+--- a/configs/dragonboard820c_defconfig
++++ b/configs/dragonboard820c_defconfig
+@@ -1,4 +1,5 @@
+ CONFIG_ARM=y
++CONFIG_SYS_VENDOR="qualcomm"
+ CONFIG_SYS_BOARD="dragonboard820c"
+ CONFIG_COUNTER_FREQUENCY=19000000
+ CONFIG_ARCH_SNAPDRAGON=y
+-- 
+2.34.1
 
