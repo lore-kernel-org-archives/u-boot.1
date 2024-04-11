@@ -4,82 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 018B9CD129D
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 08:32:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ED4ACD1284
+	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 08:37:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4992E88344;
-	Thu, 11 Apr 2024 10:32:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 639B887FA0;
+	Thu, 11 Apr 2024 10:37:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FPrVKPot";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VMQzUFKH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4269787FA0; Thu, 11 Apr 2024 10:32:09 +0200 (CEST)
-Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
- [IPv6:2a00:1450:4864:20::135])
+ id D6D1188334; Thu, 11 Apr 2024 10:37:05 +0200 (CEST)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4808188319
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 10:32:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE25D86FCE
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 10:37:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maximmosk4@gmail.com
-Received: by mail-lf1-x135.google.com with SMTP id
- 2adb3069b0e04-516a01c8490so439580e87.1
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 01:32:07 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-516d68d7a8bso555444e87.1
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 01:37:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712824326; x=1713429126; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=a0RsAWqVfLBrh8MbUhrtAj4WDFa/8zx7Tjc1FdXbimE=;
- b=FPrVKPotQd88EtMNWbycCBlS5/exbd9o19a4JBEJMu5vxSLiRuwP9ZlRRZVfiqhwSV
- zlQJIqU5QeWvuC+bW63fxXegimZ0ZlGZ3Yu0mmq0NLW5c/s6vGEAjkiT65lmUxhfNiBZ
- rhzd/wrZCHKd4t06T3Lh2Xzvb1DkEjPoVl91sb5qrlxXhk9mOmo0WYI9s68eS0TlRjgu
- Z4/JQQpAvEb7Vp2eaZErVSPR9JMCuWlbE0YDgrtGgUDzhLP/dZcFGqTTmbbVyYTsbW7T
- 1G7cutIaz+7iB8L+KU0IUQh3QA+C42H/KkWkBcH/W6hxyCOME1MXhYdnLK+jup4TD+zn
- S0SQ==
+ d=linaro.org; s=google; t=1712824623; x=1713429423; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lKpgCSOtbrGE3i2CGMWjUE+cBkA4j7LYrqGpfSA9Cc0=;
+ b=VMQzUFKH415L2SVIkNEjd3VHtxJDMLxrQfLMirajSgugUSpo1AzDy0jjBOp9UJVln2
+ GEg5TVHKIYdk4MfUe+4t2/JG+UH9348Ib1Zr4X8pN5I/KpwtT6F4QKkpu4fhYI2lEpvM
+ eLSZz2Uj/myF6gDqi46umn1TwTP61/9hz1L8CmBKevSELIyj5gIcvTwd4WR/GkWjIV/E
+ ZsycHIvoeOl42xHeK1tw1ZjaU65HCG7+jN5CWLnREj5xlmXIDVOkPKV4E95NLQadsDlb
+ Uaejaov4Dtcw3PcdHayoeeTu7uA1eK0fWXaYUzEu2NT5FIchMje0iW2H292LR4SaEY7E
+ 7ljw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712824326; x=1713429126;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1712824623; x=1713429423;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=a0RsAWqVfLBrh8MbUhrtAj4WDFa/8zx7Tjc1FdXbimE=;
- b=mAzjVRa0+sxMmXNMptN62nUcdYvUIa4TQu0K8sC58LbKGUnPQ8W/aOqmDS6aYdNRm7
- COo2MOBixgKdj9uoP90DDRBYsYg5q2xyZdZ9AdLalAMEiY+Ht9Db2YRY88nxthi/pheP
- IBZiCGZ9QOMjBXS6TK0GmOhXFM0wG6n9Yh3ZijPqTcdBf+PHK/JPEos2ppTjdZHN+mCv
- jECcWdRN6faYv5yl27cGR5m3CTLg8mgGP7cO5pYOWbfGTjw1Wkwipm5vpDWNLpsPqegH
- jYuUPInoZwtFEZVRv++R4CWXxVKtPESaDWWwiXnHNBpAgRQWFAswwjkSBC7S0HqravOS
- Wrxg==
+ bh=lKpgCSOtbrGE3i2CGMWjUE+cBkA4j7LYrqGpfSA9Cc0=;
+ b=FozuBpbAIqQkJpMD3+sB7/3dzlAZPvA1RPB+aewg5LN2Ma7f6w4Bu/snkXLKDMu/gD
+ HUuXCXsxqA3RVtyAi261g7y9B+NIYtsBDdb3XtnkQJMNt331RR/VQd+XqeKViSI+KHDI
+ T/PtcbzzXzsOYFYBUjVn60CaKc3XJNawyfA/+VJ164VPO2a+qBtzwuDOLt3yJqpdFUlb
+ XxstHQ3qw2pIiK4Dt8aytahaFxTKnFX2yz8R0EfQg+roxEITi+O5m6sY8eAFuW7LV5Vu
+ KCPIjYCiU6OVuCObXHRP3hC2x7RMQlc1J27BCOnpKSsFhRZo2YNwKss1cG+DBY6iFq5Q
+ u97w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVJWWj/7UiUqmeJ3E89Qu5T7Y6PmSWgltBrlFOvWzxMWejekapMdw9fGSNw9e2GVm+E+8ybvgqdqltzY0QbE+JVZ+Qd0g==
-X-Gm-Message-State: AOJu0YwbTNTM1mcFGh+Yq7db3WgxFnk0mTvAgNLemHr8WbOeEHXoE4jO
- SigI8gcjx0ZKM6K6CxdmUwy0I13RNlRtGBfxaajuVr6PAvZAHjt/
-X-Google-Smtp-Source: AGHT+IFlCb6XRzp7h/IE7BpdafUhx/3q2f9o5jEqz/iN/OVnLl4XJOxGVEP6PnYl1BanVMO1juRvGg==
-X-Received: by 2002:ac2:5619:0:b0:513:e1b6:40b9 with SMTP id
- v25-20020ac25619000000b00513e1b640b9mr608558lfd.28.1712824326276; 
- Thu, 11 Apr 2024 01:32:06 -0700 (PDT)
-Received: from moskalets-nb.avp.ru ([2a00:1fa0:4110:4a8c:111a:1a9f:9667:892b])
- by smtp.gmail.com with ESMTPSA id
- q6-20020ac25106000000b00516d282df53sm143288lfb.253.2024.04.11.01.32.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 01:32:05 -0700 (PDT)
-From: Maxim Moskalets <maximmosk4@gmail.com>
-X-Google-Original-From: Maxim Moskalets <Maxim.Moskalets@kaspersky.com>
-To: marek.vasut+renesas@mailbox.org, mkorpershoek@baylibre.com,
- ralph.siemsen@linaro.org, sean.anderson@seco.com, sjg@chromium.org,
- souajih@baylibre.com, takahiro.akashi@linaro.org, trini@konsulko.com,
- u-boot@lists.denx.de, xypron.glpk@gmx.de,
- quentin.schulz@theobroma-systems.com
-Cc: maximmosk4@gmail.com,
-	Maxim.Moskalets@kaspersky.com
-Subject: [PATCH v3] cmd: bootm: add ELF file support
-Date: Thu, 11 Apr 2024 11:32:02 +0300
-Message-Id: <20240411083202.20730-1-Maxim.Moskalets@kaspersky.com>
-X-Mailer: git-send-email 2.39.2
+ AJvYcCX7JeCEkAn2igp+thu6LGXta226sfrtsTZoc7NCHKKLXMUa4si70g8xhnkrRQYKKCSSOUkSHmzYdldSgOxTD5MXw5A+GA==
+X-Gm-Message-State: AOJu0Yz4raVi40ZWhYu4RszrlG3Lhh3NT0gkk9SRnpVpAO1NSoHSY88Q
+ a0oYrUOEEMYuE2QmuvOkJb9MU/MtDBcuIzbGrmAQDg0Pe+dhohSRFz3y5ZDQ1+fjqyGlkqgY+Ft
+ 8f/vdpSw/N80D8C0JLx1JWHeL17t0SykrLUJZK32Z4Kn2zzEOqlTFTw==
+X-Google-Smtp-Source: AGHT+IEtK+Gzzx3TEWTHn/DQPIv2AnO1dMZKbENvXZRV7arT9k1VQBUzrDi7Iht7I1Tx7qsaUlI0kUT5l49cEVGqoYg=
+X-Received: by 2002:ac2:4894:0:b0:516:c1fb:5ea7 with SMTP id
+ x20-20020ac24894000000b00516c1fb5ea7mr463604lfc.14.1712824622927; Thu, 11 Apr
+ 2024 01:37:02 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240410225043.40100-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240410225043.40100-1-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 11 Apr 2024 10:36:27 +0200
+Message-ID: <CAC_iWjKP8oq0nG0j54+Z8TP2bxhzZ2wMxH0zdQepy3p__TBLdA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_loader: sanitize efi_tcg2_final_events_table
+ definition
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Eddie James <eajames@linux.ibm.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,101 +88,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Maxim Moskalets <maximmosk4@gmail.com>
+On Thu, 11 Apr 2024 at 00:50, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> The length of the variable name typically is not 1.
+> Neither the length of the variable name nor the size of the appended
+> data is known in the include.
+>
+> * Define the size of element variable_name as variable.
+> * Remove the unusable element variable_data.
+>
+> Addresses-Coverity-ID: 467400 Out-of-bounds read
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  include/efi_tcg2.h | 8 +++-----
+>  1 file changed, 3 insertions(+), 5 deletions(-)
+>
+> diff --git a/include/efi_tcg2.h b/include/efi_tcg2.h
+> index b21c5cb3dd6..a75b5a35b6e 100644
+> --- a/include/efi_tcg2.h
+> +++ b/include/efi_tcg2.h
+> @@ -150,16 +150,14 @@ struct efi_tcg2_final_events_table {
+>   *                             the variable.
+>   * @variable_data_length:      The size of the variable data.
+>   * @unicode_name:              The CHAR16 unicode name of the variable
+> - *                             without NULL-terminator.
+> - * @variable_data:             The data parameter of the efi variable
+> - *                             in the GetVariable() API.
+> + *                             without NULL-terminator followed by data.
+>   */
+>  struct efi_tcg2_uefi_variable_data {
+>         efi_guid_t variable_name;
+>         u64 unicode_name_length;
+>         u64 variable_data_length;
+> -       u16 unicode_name[1];
+> -       u8 variable_data[1];
+> +       u16 unicode_name[];
+> +       // u8 variable_data[];
+>  };
+>
+>  /**
+> --
+> 2.43.0
+>
 
-Some operating systems (e.g. seL4) and embedded applications are ELF
-images. It is convenient to use FIT-images to implement trusted boot.
-Added "elf" image type for booting using bootm command.
-
-Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
----
- boot/bootm_os.c  | 24 ++++++++++++++++++++++++
- boot/image-fit.c |  3 ++-
- boot/image.c     |  3 +++
- include/image.h  |  1 +
- 4 files changed, 30 insertions(+), 1 deletion(-)
-
-diff --git a/boot/bootm_os.c b/boot/bootm_os.c
-index ccde72d22c..1c92b8149c 100644
---- a/boot/bootm_os.c
-+++ b/boot/bootm_os.c
-@@ -395,6 +395,27 @@ static int do_bootm_qnxelf(int flag, struct bootm_info *bmi)
- }
- #endif
- 
-+#if defined(CONFIG_CMD_ELF)
-+static int do_bootm_elf(int flag, struct bootm_info *bmi)
-+{
-+	struct bootm_headers *images = bmi->images;
-+	char *local_args[2] = {NULL};
-+	char str[19] = ""; /* "0x" + 16 digits + "\0" */
-+
-+	if (flag != BOOTM_STATE_OS_GO)
-+		return 0;
-+
-+	snprintf(str, sizeof str, "0x%lx", images->ep); /* write entry-point into string */
-+	local_args[0] = bmi->argv[0];
-+	local_args[1] = str;	/* and provide it via the arguments */
-+
-+	do_bootelf(NULL, 0, 2, local_args);
-+
-+	return 1;
-+}
-+#endif
-+
- #ifdef CONFIG_INTEGRITY
- static int do_bootm_integrity(int flag, struct bootm_info *bmi)
- {
-@@ -536,6 +557,9 @@ static boot_os_fn *boot_os[] = {
- #ifdef CONFIG_BOOTM_EFI
- 	[IH_OS_EFI] = do_bootm_efi,
- #endif
-+#if defined(CONFIG_CMD_ELF)
-+	[IH_OS_ELF] = do_bootm_elf,
-+#endif
- };
- 
- /* Allow for arch specific config before we boot */
-diff --git a/boot/image-fit.c b/boot/image-fit.c
-index 89e377563c..0419bef6d2 100644
---- a/boot/image-fit.c
-+++ b/boot/image-fit.c
-@@ -2180,7 +2180,8 @@ int fit_image_load(struct bootm_headers *images, ulong addr,
- 		fit_image_check_os(fit, noffset, IH_OS_TEE) ||
- 		fit_image_check_os(fit, noffset, IH_OS_OPENRTOS) ||
- 		fit_image_check_os(fit, noffset, IH_OS_EFI) ||
--		fit_image_check_os(fit, noffset, IH_OS_VXWORKS);
-+		fit_image_check_os(fit, noffset, IH_OS_VXWORKS) ||
-+		fit_image_check_os(fit, noffset, IH_OS_ELF);
- 
- 	/*
- 	 * If either of the checks fail, we should report an error, but
-diff --git a/boot/image.c b/boot/image.c
-index 073931cd7a..5b88d6808c 100644
---- a/boot/image.c
-+++ b/boot/image.c
-@@ -134,6 +134,9 @@ static const table_entry_t uimage_os[] = {
- #endif
- 	{	IH_OS_OPENSBI,	"opensbi",	"RISC-V OpenSBI",	},
- 	{	IH_OS_EFI,	"efi",		"EFI Firmware" },
-+#ifdef CONFIG_CMD_ELF
-+	{	IH_OS_ELF,	"elf",		"ELF Image" },
-+#endif
- 
- 	{	-1,		"",		"",			},
- };
-diff --git a/include/image.h b/include/image.h
-index 21de70f0c9..9a40bca22c 100644
---- a/include/image.h
-+++ b/include/image.h
-@@ -100,6 +100,7 @@ enum {
- 	IH_OS_TEE,			/* Trusted Execution Environment */
- 	IH_OS_OPENSBI,			/* RISC-V OpenSBI */
- 	IH_OS_EFI,			/* EFI Firmware (e.g. GRUB2) */
-+	IH_OS_ELF,			/* ELF Image (e.g. seL4) */
- 
- 	IH_OS_COUNT,
- };
--- 
-2.39.2
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
