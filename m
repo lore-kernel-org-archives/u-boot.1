@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B68AC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 18:52:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73875C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 18:53:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB02488216;
-	Fri, 12 Apr 2024 20:52:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5607988206;
+	Fri, 12 Apr 2024 20:52:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YBXFra31";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fz4buEg0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8FF388020; Fri, 12 Apr 2024 20:52:25 +0200 (CEST)
-Received: from mail-oa1-x2d.google.com (mail-oa1-x2d.google.com
- [IPv6:2001:4860:4864:20::2d])
+ id 7E4FA88207; Fri, 12 Apr 2024 20:52:29 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C25088221
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 20:52:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 14E1C88020
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 20:52:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x2d.google.com with SMTP id
- 586e51a60fabf-22f01274622so756554fac.1
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 11:52:23 -0700 (PDT)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-78d68c08df7so66957385a.2
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 11:52:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712947942; x=1713552742; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1712947946; x=1713552746; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=jDnMVfzbnp9AVFhFhNH4yoEdijWBTdiK9jqWRxsXXh8=;
- b=YBXFra31gv4YiXMMGFX/D4IK/Rx0jx9JWaAn6ko/3mem9A2SCszkMp5omO1ZHLo8gQ
- JWA/m0Fn2ZDRcClcTNhTN90j5+Ba7Bg2RJTmrmcloTRjkDfl2/+nVj0y8UsZwQ34JUdg
- P5umeRjuNmm8vWeqn8QtpYH7QrNnx9depQ/Ck=
+ bh=Vreo6mUDP0paEhUwiH2NI7IR1NldD3g1vs7s5JPUQko=;
+ b=fz4buEg0ab8p2euXHEdpXgj+8urmeUu64q5vPWhEk6L7A612OZ9kFqkrGlbLD418Ob
+ 2Gfb2ycW81VQrs9yM973YbIJI7InO88YVKwaNgrPvjJKSK3q+pFuXELtrbU4PC3nMc2e
+ Tk3mGvHm1uwaofk4Hm/GU2bI4MtWwVFJV1Ss0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712947942; x=1713552742;
+ d=1e100.net; s=20230601; t=1712947946; x=1713552746;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jDnMVfzbnp9AVFhFhNH4yoEdijWBTdiK9jqWRxsXXh8=;
- b=k4kLxTzHDhlk0GFPpfFn4m/TOEGMwHPPIn4QhU2CYYEd8+1dGAadgZ4QuX64WYip/6
- lgOQ3wsuXYFS5vFsxuQNXqswNnjt7LNuzaOMOiSjkvcpZfjD3G7afQU+Ru3UKTaRBcdk
- WjsZTZTvKVcZ12ROAkYcJmCY9VShHa3Fza6hjyoammRBkobl99M90JG/cFS7h8uISZFT
- ccjjCCgG10jFh4LxTeFmMDmNkp6VFXKQ2Hbkr2hO81ZgLs8gDD6ruLvuxMVKQCBwlN1h
- f6ihtzQmTwIcxjjHG360TivokNk8WebiLNoAg3kTtqKCIPok5idFldBFe2GdYhhOlXY8
- +Q5Q==
+ bh=Vreo6mUDP0paEhUwiH2NI7IR1NldD3g1vs7s5JPUQko=;
+ b=Y3sE/K3/bZngHxKB4nZ+CdzFGy7rTWXzzscBbCVNvEE8SRL+dfw+XiqnMcb8leAnef
+ Kz3Gd6l4iq9a1UnC+NlvCRwFQDnYdYxRVVgkaFl+fPs0dd+z9ZP4rGDZe5BLn89kAlpM
+ 81sWRjb1tevW3WShl/ILAOEn1qCK1r0WsUJHAqTjubK5DXMZ+dhw8qJ45n3xrheVHAJf
+ +oHf/hU69pNam0B1dsNFahPHzSwyCRsQhvw+Kg56WXYS/jYqGy47Zi8bx0smzfhWiyP6
+ b/5AITAZt6AHSYuT/BsUdjxdkF9xRqF1iFIs9WkytIkZjLgctEDl7GsLZxSJoQ/x1Blo
+ eSgg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVS0c/fdZaBAxKLYT1PjklK/6/zDPWoNiXXy96bm1J0CqbdX3ZOlNl85ZExlU/Ml+I9uupWN331UD5Kqm6qA8dXPBZf9A==
-X-Gm-Message-State: AOJu0YzJ5k5mp4zsj+DE+DUsCrgqQ2zfcqm0d8gIMDiPydSzB3MSj0jn
- i3DOPZwPSmkQK1bmGSCI9+5acNe9wHePyLb+zjMIbptGwKZfnEDtCHA/mW/KQYtJl4uqpVXB8sE
- 8Twg=
-X-Google-Smtp-Source: AGHT+IEi7FtBqtMygq3cgcDhLGVownHlqJbZtxygt3+t3Qe03aQ8CxDC8Y/anhbPnHbd2GRT2i70Bw==
-X-Received: by 2002:a05:6870:b619:b0:22b:5bc1:66f5 with SMTP id
- cm25-20020a056870b61900b0022b5bc166f5mr3868997oab.16.1712947940809; 
- Fri, 12 Apr 2024 11:52:20 -0700 (PDT)
+ AJvYcCWgbd286J3CtaUK1vgdofRoNfPhRCHpgs7NdPxpx+pv9e4oH1ue9i5IZG1/CHrQPKObIhKqSYuuJs4Y+ah6PKLw3JDeag==
+X-Gm-Message-State: AOJu0Yy4Fpl6WaAnz0OXmtmF4+JRCiXJNE5FRmreqrijKQoBy57K5bkE
+ cxDqEfPLa9/fKXs9Xp9mrzrq88ZL11JrwrkswP5DJvSTYnwrC3Rj2AUqeeuUtAg=
+X-Google-Smtp-Source: AGHT+IFwCNDscapOtueF7d82pKrp7Cf1wxwwBbgWQ/ZaPXQq4fLmwbmlJUXb2ESvhh6OJsH8xQtYOA==
+X-Received: by 2002:a0c:ab19:0:b0:69b:16bb:d6a1 with SMTP id
+ h25-20020a0cab19000000b0069b16bbd6a1mr3702919qvb.37.1712947945897; 
+ Fri, 12 Apr 2024 11:52:25 -0700 (PDT)
 Received: from bill-the-cat ([2806:102e:18:245e:b648:93e1:5c61:68a3])
  by smtp.gmail.com with ESMTPSA id
- g13-20020a05620a108d00b0078ec439a9a7sm2296215qkk.62.2024.04.12.11.52.19
+ j12-20020a056214032c00b0069b50de8fd8sm2054020qvu.24.2024.04.12.11.52.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Apr 2024 11:52:20 -0700 (PDT)
-Date: Fri, 12 Apr 2024 12:52:17 -0600
+ Fri, 12 Apr 2024 11:52:25 -0700 (PDT)
+Date: Fri, 12 Apr 2024 12:52:22 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Francis Laniel <francis.laniel@amarulasolutions.com>,
- Evgeny Bachinin <EABachinin@sberdevices.ru>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/1] cli: always show cursor
-Message-ID: <20240412185217.GT2493117@bill-the-cat>
-References: <20240329160922.127095-1-heinrich.schuchardt@canonical.com>
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, David Virag <virag.david003@gmail.com>,
+ Masahiro Yamada <masahiroy@kernel.org>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Hugo Villeneuve <hvilleneuve@dimonoff.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] fdt: Fix fdt_pack_reg() on 64-bit platforms
+Message-ID: <20240412185222.GU2493117@bill-the-cat>
+References: <20240330005553.30869-1-semen.protsenko@linaro.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="G5wSswT8hh5BSCbx"
+ protocol="application/pgp-signature"; boundary="cyZNaU48wDRQrtJk"
 Content-Disposition: inline
-In-Reply-To: <20240329160922.127095-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240330005553.30869-1-semen.protsenko@linaro.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,39 +96,76 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---G5wSswT8hh5BSCbx
+--cyZNaU48wDRQrtJk
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Mar 29, 2024 at 05:09:22PM +0100, Heinrich Schuchardt wrote:
+On Fri, Mar 29, 2024 at 07:55:53PM -0500, Sam Protsenko wrote:
 
-> We may enter the command line interface in a state where on the remote
-> console the cursor is not shown. Send an escape sequence to enable it.
+> When "memory" node is being processed in fdt_pack_reg() on ARM64
+> platforms, an unaligned bus access might happen, which leads to
+> "synchronous abort" CPU exception. Consider next dts example:
 >=20
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>     / {
+>         #address-cells =3D <2>;
+>         #size-cells =3D <1>;
+>=20
+>         memory@80000000 {
+>             device_type =3D "memory";
+>             reg =3D <0x0 0x80000000 0x3ab00000>,
+>                   <0x0 0xc0000000 0x40000000>,
+>                   <0x8 0x80000000 0x80000000>;
+>         };
+>     };
+>=20
+> After fdt_pack_reg() reads the first addr/size entry from such memory
+> node, the "p" pointer becomes 12 bytes shifted from its original value
+> (8 bytes for two address cells + 4 bytes for one size cell). So now it's
+> not 64-bit aligned, and an attempt to do 64-bit bus access to that
+> address will cause an abort like this:
+>=20
+>     "Synchronous Abort" handler, esr 0x96000021, far 0xba235efc
+>=20
+> This issue was originally reported by David Virag [1] who observed it
+> happening on Samsung Exynos7885 SoC (ARM64), and later the same issue
+> was observed on Samsung Exynos850 (ARM64).
+>=20
+> Fix the issue by using put_unaligned_be64() helper, which takes care of
+> possible unaligned 64-bit accesses. That solution was proposed by Simon
+> Glass in the original thread [1].
+>=20
+> [1] https://lists.denx.de/pipermail/u-boot/2023-July/522074.html
+>=20
+> Fixes: 739a01ed8e02 ("fdt_support: fix an endian bug of fdt_fixup_memory_=
+banks")
+> Suggested-by: Simon Glass <sjg@google.com>
+> Reported-by: David Virag <virag.david003@gmail.com>
+> Closes: https://lists.denx.de/pipermail/u-boot/2023-July/522074.html
+> Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
 Applied to u-boot/master, thanks!
 
 --=20
 Tom
 
---G5wSswT8hh5BSCbx
+--cyZNaU48wDRQrtJk
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYZguEACgkQFHw5/5Y0
-tyxoMQv7B3Z7gs/877bqCaGmkn5J9eH5zAQrQs4+CLSvZx47khgZRSAM9oCUnZl3
-MelLDcPUwdM1N0wYSC+JPK/JN2NPIBGn2G+KEkLNajVjJfkzCYfztI4nsP8SF92f
-ubcsiGlauBBjGvUu7RF23fnbVZAeMtB1b5QjKk9VrbRUDdDnfmVbu14kKKeYZ2NS
-4i+ChNgO5WinrEbSt8a3aEpO2LG8mDN3kwjWzkWkHcHi9D2mCGrYf82NXMx4OVwD
-rbJ5UHHXUGC3pjMoAXgahGVFfzj6oftqDBJofHj0q3Ju5Bysfs3l+OelXVUtp1Um
-44BanYBTy8okUXQn3j/SXWd47uiUbkxEyxrpiIAnOIr1lIWveKuwj+bInzmhgz+k
-FTXTlwouAQve9xzSKsm3EpNpFJb1J7vD1c0wSLZPcUeZjX0FHLAidIvX1DIephmV
-EXk/cxoxe+ZafN8OGIaub5uCIiFlfhs1qaULWGsIq3axZJGVpk/U+UZUr7JtFtXK
-+BO1UFPs
-=S5SX
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYZguYACgkQFHw5/5Y0
+tyw+Qwv/T5AB1qNcB7f60kgfUIQ26EnsGk5Yanzko33kazAYS9ahm6pi6/VH7DDv
+kCz+xOluFN5ucDywMptbFi3QZsutT27haiFjSbO+U8QD/BfzBz02qWMhp7ZBMksF
+9XgyIP21JxyqnLkrGopAh1vm4H3BZJbxVsEUDTpKyOnMKqCJC+b9pbtt5XfpAg+o
+9WTOXJy1N5HlsH0SzJMcR//DsaacG7zEvO56ffnyWncGIDvJkdlsiVtqjY3pe3/z
+Glzscgmr2CrV3x8okwJNeFKADtWFSU3MKoO6g0gsJAGGjmLkJkDA0Jahc64+GOoL
+D4ZmvOHyWpUPcQcHuiftUyY6JA30uiAElw4si26n/QFYIlsPXbqNPSYUQicFd8MY
+RV4tiu+fL67NNJRO51/jMPIaveIC9KVpQiP3HMtwAmMu9JBF5/uKGQSQfXyiy/r5
+wRDGnweYxP3Xh1qm5bPv4WiWp4JZ+DnpYj4zcJzDTBo/fC/GuLh6NeMB+N8jE+bC
+uB77NdiV
+=HibH
 -----END PGP SIGNATURE-----
 
---G5wSswT8hh5BSCbx--
+--cyZNaU48wDRQrtJk--
