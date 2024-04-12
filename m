@@ -4,55 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13C03C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 13:29:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A04B6C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 13:29:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 723F487F04;
+	by phobos.denx.de (Postfix) with ESMTP id E87B388120;
 	Fri, 12 Apr 2024 15:29:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=163.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=163.com header.i=@163.com header.b="DLErBudE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="IGcEsDZu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94F8C87E74; Fri, 12 Apr 2024 12:11:54 +0200 (CEST)
-Received: from m15.mail.163.com (m16.mail.163.com [117.135.210.5])
- by phobos.denx.de (Postfix) with ESMTP id 42BF58785F
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 12:11:50 +0200 (CEST)
+ id DEB3287E82; Fri, 12 Apr 2024 12:34:28 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 065BE87E9D
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 12:34:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=163.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=18304935041@163.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
- s=s110527; h=Date:From:Subject:Content-Type:MIME-Version:
- Message-ID; bh=MpSAPU6r6E9K0SDY4K0u02cO4G/R5N3NS6CiFHBJKG0=; b=D
- LErBudEUnWvcAYV28nHOcNwlaiRZ0U/MzQN9IhIxr77CAFIHFnuEqlCMt4oP7bbf
- CKYCpiKYqk3xg0Lr+yxT7Ehx+hOaVgFzoEqsirhNbkvLwMZw5EmQWxqAEE0bm+7X
- FTrkfNohvnKrJJmbJUbx4ZNO1g7+fF472nbNB2Wyxo=
-Received: from 18304935041$163.com ( [121.18.90.146] ) by
- ajax-webmail-wzpm-k8s-gz (Coremail) ; Fri, 12 Apr 2024 18:11:46 +0800
- (GMT+08:00)
-X-Originating-IP: [121.18.90.146]
-Date: Fri, 12 Apr 2024 18:11:46 +0800 (GMT+08:00)
-From: 18304935041 <18304935041@163.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [U-Boot] [PATCH] mmc: dw-mmc: support DesignWare MMC controller
-X-Priority: 3
-X-Mailer: Coremail Webmail Server Version 2023.1-cmXT build
- 20230828(bca80109) MailMasterPC/5.0.9.1006_(10.0.22631) Copyright (c)
- 2002-2024 www.mailtech.cn 163com
-X-CM-CTRLMSGS: EBUio3RyYWNlS2V5PTY5YmI3ZTVjZDhhZGI3Njk5MDJkNzliOTMxZDZhY2Qz
-X-NTES-SC: AL_Qu2aAPWauU8r4CefbOkfm0cUgek7W8qyvP8h2YRVO51wjATuxjwKbXNqIFnm1eaSDgCxiDG+XB5V8M9YVIRlb5AX6yl4+g3WxKVKWY8SmXZllg==
+ spf=pass smtp.mailfrom=noname.nuno@gmail.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-344047ac7e4so1082962f8f.0
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 03:34:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1712918066; x=1713522866; darn=lists.denx.de;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=1b5lvzCkdwZfsYhuffDcMKb7DaA9r0ouxBD08Th7wec=;
+ b=IGcEsDZu/v1GT7umrpQt2ouieWOndyL3v+8QRV8i4x+9g6SYUMspUciCUxqysOfXCu
+ tJ0KNHYrg9J08a56RuHg84sqlO17Re0CZQcz9sQGWb/bw4SxR2J0Hdv7Z9afuQICfKU7
+ yvTs3lWOM33iM0DdBPjeOATjSTFYZ+Qlgg7k1HEB6L3305GR2Zzc4bqG2/2FDCf4g8og
+ C9jZBkY8jUsJzj0U4ZKegqMVTT82Gmbr+6lt4lFMEJH/Wm1fV7KHEj8sHcnzh1tMHc+R
+ 49K06eSp6DP/RifdtPttHUzbGHmLz1gkM4mjZu3om9gLRHtDfWULQK6aJGGOPsxTFGU1
+ lNfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712918066; x=1713522866;
+ h=mime-version:user-agent:content-transfer-encoding:references
+ :in-reply-to:date:cc:to:from:subject:message-id:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=1b5lvzCkdwZfsYhuffDcMKb7DaA9r0ouxBD08Th7wec=;
+ b=oqV9RNh6k1mT3nbM7vpP6v6Oom5wAG02mYF+2S2PaUsN1C9//BqLxb7jruVsYNPAmz
+ KOm77UHhk9er8aHeSdsIDRxTCKQqyVNdtVW0Z3hnn4FuAJWp6O4BsaWDDu5EcMHC0xM8
+ fJcUfY8aiEyJLrCLpuhll4fI46CtdCFXhriIImO5yDJ5zBjSrMBYe2ZBPRhAYCppN2I7
+ QU1OR70DuNrmGkxQziGGlm9I52hqycY3o6FR5FBmkgYzrqUPRdyuiym/B69xobyFpV4D
+ O45bXjwuRXZaVC1buoa2PJbty1H0MGka8JhMFTznIADTAGy7HdEy4sSR46GngfWgOCkf
+ f5DA==
+X-Gm-Message-State: AOJu0YziCzDIr3bERSTTQpn3iQ9OMTIdNDXaZMFqFxwX1ZbgsUgmhMIM
+ Yl1ItE6k8YAmWJPqWEebh/NClMghmbRUsXus/UvqhZVM6jJAjKyx
+X-Google-Smtp-Source: AGHT+IEuIcks7LHjb+znAfpj2HoGgedEKIKROPCwKLIDkzNby1oSL5xhMdkDNmmfP6DNaSakYmT+pA==
+X-Received: by 2002:adf:ee49:0:b0:343:8097:213d with SMTP id
+ w9-20020adfee49000000b003438097213dmr4471155wro.20.1712918066160; 
+ Fri, 12 Apr 2024 03:34:26 -0700 (PDT)
+Received: from ?IPv6:2001:a61:343e:8301:d737:22b0:7431:8d01?
+ ([2001:a61:343e:8301:d737:22b0:7431:8d01])
+ by smtp.gmail.com with ESMTPSA id
+ d27-20020adfa41b000000b003471f8ea4e1sm595012wra.74.2024.04.12.03.34.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Apr 2024 03:34:25 -0700 (PDT)
+Message-ID: <88357ffaf8a3625656cb3c22c744de5ea943de0d.camel@gmail.com>
+Subject: Re: [PATCH 0/3] arm: Add Analog Devices SC5xx Machine Type
+From: Nuno =?ISO-8859-1?Q?S=E1?= <noname.nuno@gmail.com>
+To: Greg Malysa <greg.malysa@timesys.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Matthew McClintock
+ <Matthew.Mcclintock@analog.com>,  AKASHI Takahiro
+ <takahiro.akashi@linaro.org>, Abdellatif El Khlifi
+ <abdellatif.elkhlifi@arm.com>, Alexey Brodkin
+ <alexey.brodkin@synopsys.com>, Alison Wang <alison.wang@nxp.com>, Alper
+ Nebi Yasak <alpernebiyasak@gmail.com>, Andre Przywara
+ <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>, Andy Fleming
+ <afleming@gmail.com>, Angelo Dureghello <angelo@sysam.it>, Arturs
+ Artamonovs <arturs.artamonovs@analog.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Daniel Schwierzeck
+ <daniel.schwierzeck@gmail.com>, Frieder Schrempf
+ <frieder.schrempf@kontron.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ian Roberts <ian.roberts@timesys.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Kever Yang <kever.yang@rock-chips.com>, Linus Walleij
+ <linus.walleij@linaro.org>, Lukasz Majewski <lukma@denx.de>, Manorit
+ Chawdhry <m-chawdhry@ti.com>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, Mario Six
+ <mario.six@gdsys.cc>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Michal Simek <monstr@monstr.eu>, Nathan Barrett-Morrison
+ <nathan.morrison@timesys.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peter Robinson
+ <pbrobinson@gmail.com>, Priyanka Jain <priyanka.jain@nxp.com>, Rayagonda
+ Kokatanur <rayagonda.kokatanur@broadcom.com>, Sam Protsenko
+ <semen.protsenko@linaro.org>,  Samuel Holland <samuel@sholland.org>, Scott
+ McNutt <smcnutt@psyent.com>, Sean Anderson <seanga2@gmail.com>,  Simon
+ Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>, Sumit Garg
+ <sumit.garg@linaro.org>, Thomas Chou <thomas@wytron.com.tw>, Utsav Agarwal
+ <utsav.agarwal@analog.com>, Vasileios Bimpikas
+ <vasileios.bimpikas@analog.com>, Venkatesh Yadav Abbarapu
+ <venkatesh.abbarapu@amd.com>,  Wolfgang Denk <wd@denx.de>, Yang Xiwen
+ <forbidden405@outlook.com>, Yanhong Wang <yanhong.wang@starfivetech.com>
+Date: Fri, 12 Apr 2024 12:34:23 +0200
+In-Reply-To: <CAAjXUaoPoD_pN3QU=rxN6x3uOHex3TYgwkZDA_YZdj-Z_nmxfw@mail.gmail.com>
+References: <20240411234021.14534-1-greg.malysa@timesys.com>
+ <20240411235250.GK2493117@bill-the-cat>
+ <CAAjXUaoPoD_pN3QU=rxN6x3uOHex3TYgwkZDA_YZdj-Z_nmxfw@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.50.4 (3.50.4-1.fc39) 
 MIME-Version: 1.0
-Message-ID: <1e0e4980.3448f.18ed1cab5e1.Coremail.18304935041@163.com>
-X-Coremail-Locale: zh_CN
-X-CM-TRANSID: _____wDnj87jCBlmIAENAA--.56508W
-X-CM-SenderInfo: jpryjiiuztkiiur6il2tof0z/1tbiqA2tz2VOC-ws6AAEsb
-X-Coremail-Antispam: 1U5529EdanIXcx71UUUUU7vcSsGvfC2KfnxnUU==
 X-Mailman-Approved-At: Fri, 12 Apr 2024 15:29:37 +0200
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,9 +126,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RGVhciBNci4gSmFlaG9vbiBDaHVuZywgSGVsbG8hCgpJIGFtIGxlYXJuaW5nIHRvIHdyaXRlIGFu
-IG1tYyBkcml2ZXIsIEkgc2F3IHRoaXMgZHJpdmVyIGNvZGUgeW91IHdyb3RlIGluIDIwMTIgaW4g
-VS1ib290IHNvdXJjZSBjb2RlLCBJIGNhbid0IGRvd25sb2FkIHRoZSBkb2N1bWVudGF0aW9uIG9m
-IERlc2lnbldhcmUgTU1DIGNvbnRyb2xsZXIsIHNvIEkgY2FuJ3Qgd29yayBvbiBteSBkcml2ZXIg
-ZGV2ZWxvcG1lbnQuIApJIGhvcGUgeW91IGNhbiBwcm92aWRlIHNvbWUgaGVscCEgSGF2ZSBhIG5p
-Y2UgbGlmZSE=
+On Thu, 2024-04-11 at 20:18 -0400, Greg Malysa wrote:
+> I'm afraid I have to admit I don't know. I'll work with our IT team to
+> make sure we can run CI locally, and when v2 comes around the answer
+> will be yes.
+>=20
+
+AFAIR, I think you the only exception to open a PR in the github fork is to=
+ run CI.
+
+- Nuno S=C3=A1
+
+
