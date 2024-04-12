@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44124C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 21:58:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86867C00A94
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 21:59:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 76D7A87E43;
-	Fri, 12 Apr 2024 23:58:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 057BC881D7;
+	Fri, 12 Apr 2024 23:59:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="F0R3gSFO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pjSgRfc1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BB3287E01; Fri, 12 Apr 2024 23:58:47 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 04C9D881EA; Fri, 12 Apr 2024 23:59:32 +0200 (CEST)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D79387E01
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 23:58:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02D1F87E01
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 23:59:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43CLwWFH076090;
- Fri, 12 Apr 2024 16:58:32 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1712959112;
- bh=ypen7t1CQlH6wubbHAspij8MTckdlYWxtjejAqZn+kg=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=F0R3gSFO/OHOhHHybBZawHlPWqXJbsLNnligIiR49ZOEo2Qk3HtUxsI9J5Q5nP7e0
- 2osbb+bbhPpNwWgrZ/t7UKJRvCp2EK/z8hi036xHYxCCJVq9SesYjhvFZbfrQr5ZLH
- BewbHgc79FJeuDxHAGEYcIQEn6ci9R5+oEzSTJGQ=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43CLwW4N021735
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 12 Apr 2024 16:58:32 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 12
- Apr 2024 16:58:31 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 12 Apr 2024 16:58:31 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43CLwVHk118287;
- Fri, 12 Apr 2024 16:58:31 -0500
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>
-CC: <u-boot@lists.denx.de>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Judith Mendez <jm@ti.com>,
- Christian Gmeiner <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, "Simon Glass" <sjg@chromium.org>,
- Nikhil M Jain <n-jain1@ti.com>,
- "Neha Malcom Francis" <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
- Maxime Ripard <mripard@kernel.org>, Siddharth Vadapalli
- <s-vadapalli@ti.com>, "Roger Quadros" <rogerq@kernel.org>, Bryan Brattlof
- <bb@ti.com>, "Vignesh Raghavendra" <vigneshr@ti.com>, Robert Nelson
- <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>, Tom Rini
- <trini@konsulko.com>
-Subject: Re: [PATCH v2 01/16] board: Define GUIDs for firmware images
-In-Reply-To: <CAC_iWjLEzeXmhc=EiGT3++1a5W5JRrZHivgSN=JMN+mQtpTZeQ@mail.gmail.com>
-References: <20240408223134.165877-1-j-humphreys@ti.com>
- <20240408223134.165877-2-j-humphreys@ti.com>
- <cac63a03-b019-4aed-83de-db2effa1a2f1@gmx.de>
- <86zfu2z1p4.fsf@udb0321960.dhcp.ti.com>
- <a2fb8782-66d5-44ad-8238-d565e0934de9@gmx.de>
- <CAC_iWjLEzeXmhc=EiGT3++1a5W5JRrZHivgSN=JMN+mQtpTZeQ@mail.gmail.com>
-Date: Fri, 12 Apr 2024 16:58:31 -0500
-Message-ID: <868r1iz1iw.fsf@udb0321960.dhcp.ti.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-1e3ff14f249so10597275ad.1
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 14:59:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1712959166; x=1713563966; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=OPVT0BYK7d4uZyibyxy3PowH2+HIhFxi9gd/Ki0UC5s=;
+ b=pjSgRfc12Xvza9ctZc/+54zJdaEV3sF8FI1Ruiv2EgYvMtQxRh7Lp00tc+ZKxa3pKM
+ jYt1R2ggb1isthjt8TgEjp/iJlYHG301FxJFx1H9DyLG+7lYYa3PdZFOZ8wrIAfTW7dD
+ +thP1c3OwRd9l7uwKe76+Oz7rdEuxb+skftXg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1712959166; x=1713563966;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=OPVT0BYK7d4uZyibyxy3PowH2+HIhFxi9gd/Ki0UC5s=;
+ b=PjY4kNRDynteiKgp6zrsIflFid2UJMcOzyTLmRdOXqYDUJTIsHB8ImteJF56NZRBL+
+ vHkdchy1/7+nd5QVANokbY9RvA9f6xOrIj2d9BJn6t/Wu1ymAnNdvo1ABljCxfokFm2A
+ iDavCDQXN0zcdjXqdXUuRDlV3HU1dT4Kd1reJ+rdB9UQs5p/W6w1e2TWtg5otJTfbxNJ
+ CJiPVSdlg/xVJdhTHf5hpGfmsfEKXDkuWOWkiFNg88QAwsy+oEKXtIo52AH9d44zMOiu
+ lTplD/pkaP1bKMzREVKyXE8GvRC/vQNib8qRdUkS9WO7GPCEiZb9liI69/uu1M/Yl0Xi
+ VSMQ==
+X-Gm-Message-State: AOJu0YzxT7EbwresNB3k98Ml7fsbFkxmqDiD/a6AbOUzB8RI4lVgCPiS
+ iVlWcG84INHCiwUKlS2wBcsBSBsOiEzqW94pNx8OKpp7TZRMCEpBzJdSkwl8aIdE7aJM6EUgeta
+ mQ4mwCA==
+X-Google-Smtp-Source: AGHT+IFrgHIpOEcyHijFCHIdGwFuoBP3dyp7gbZWLKFyTwcbMH4WK/ePfHwYcIxckbarXe72HSsr/A==
+X-Received: by 2002:a17:902:e885:b0:1e4:52c2:d05c with SMTP id
+ w5-20020a170902e88500b001e452c2d05cmr5050246plg.29.1712959166458; 
+ Fri, 12 Apr 2024 14:59:26 -0700 (PDT)
+Received: from [127.0.1.1] ([2806:102e:18:245e:b648:93e1:5c61:68a3])
+ by smtp.gmail.com with ESMTPSA id
+ kw7-20020a170902f90700b001e45240eca4sm3472958plb.196.2024.04.12.14.59.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Apr 2024 14:59:26 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, git@xilinx.com, Michal Simek <michal.simek@amd.com>
+Cc: Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
+ Simon Glass <sjg@chromium.org>
+In-Reply-To: <cover.1711548887.git.michal.simek@amd.com>
+References: <cover.1711548887.git.michal.simek@amd.com>
+Subject: Re: [PATCH 0/4] zlib: Address CVE-2016-9841
+Message-Id: <171295916545.1044279.17310073514978206531.b4-ty@konsulko.com>
+Date: Fri, 12 Apr 2024 15:59:25 -0600
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,116 +91,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+On Wed, 27 Mar 2024 15:14:49 +0100, Michal Simek wrote:
 
-> Hi both
->
-> On Wed, 10 Apr 2024 at 10:36, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->>
->> On 09.04.24 23:05, Jon Humphreys wrote:
->> > Heinrich Schuchardt <xypron.glpk@gmx.de> writes:
->> >
->> >> On 4/9/24 00:31, Jonathan Humphreys wrote:
->> >>> Define GUIDs for the different firmware images (tiboot3.bin, tispl.bin,
->> >>> u-boot.img, sysfw). >
->> >>> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
->> >>> ---
->> >>>    include/configs/ti_armv7_common.h | 17 +++++++++++++++++
->> >>>    1 file changed, 17 insertions(+)
->> >>>
->> >>> diff --git a/include/configs/ti_armv7_common.h b/include/configs/ti_armv7_common.h
->> >>> index 3def7b1027e..4ce14a9b84c 100644
->> >>> --- a/include/configs/ti_armv7_common.h
->> >>> +++ b/include/configs/ti_armv7_common.h
->> >>> @@ -16,6 +16,23 @@
->> >>>    #ifndef __CONFIG_TI_ARMV7_COMMON_H__
->> >>>    #define __CONFIG_TI_ARMV7_COMMON_H__
->> >>>
->> >>> +/* GUIDs for capsule updatable firmware images */
->> >>
->> >> Please, provide code comments for the GUIDs, e.g.
->> >>
->> >> /**
->> >>    * define K3_TIBOOT3_IMAGE_GUID - firmware GUID for K3 tiboot3.bin
->> >>    *
->> >>    * This GUID is used in capsules updates to identify the tiboot3.bin
->> >>    * binary.
->> >>    */
->
-> I'd go one step further tbh.  Those GUIDs can be used by OEMs/ODMs
-> producing capsules for their future products.
-> Currently, we don't have a documented way to allow users to redefine
-> this (but Linaro is working on it).  If both TI and an OEM use the
-> same GUID and try to upload the firmware to LVFS, we will have a GUID
-> clash.
-> I think we should have that on the comment as well, until we can
-> properly sort it out
+> it looks like that only CVE-2016-9841 is not fixed and this series is
+> trying to address it. The first two patches are just preparation based on
+> changes which happened in past. The third one is actual fix and the last
+> one is following what has been done in Linux kernel long time ago and don't
+> use incorrect zlib version string.
+> 
+> I tested it with and I can't see any issue.
+> ./test/py/test.py --bd sandbox --build -s
+> 
+> [...]
 
-Ilias, I realized I may have defined the GUID's a bit incorrectly.  I
-was thinking that the GUID's identify the firmware type (eg, SPL vs
-Uboot for TI devices).  However, the SPL binary for say am62 will be
-different than the SPL binary for say am64, so I should have unique
-GUID's per firmware type *per board*.  Correct?
+Applied to u-boot/master, thanks!
 
-If so, I'll need to move these definitions to the board .h files, and my
-generic capsule binman nodes will need to have each board override the
-image GUID used.
+-- 
+Tom
 
-thanks
-Jon
 
->
-> Thanks
-> /Ilias
->> >>
->> >> Cf.
->> >> https://docs.kernel.org/doc-guide/kernel-doc.html#object-like-macro-documentation
->> >>
->> >> Best regards
->> >>
->> >> Heinrich
->> >>
->> >
->> > Heinrich, thanks for reviewing!
->> >
->> > I modelled the GUID macros after how other boards and even core code
->> > defined there's.  (eg, include/configs/kontron-sl-mx8mm.h or
->> > include/efi_api.h).
->> >
->> > However, if this is the new direction, I will format as you suggest.
->> > Please confirm.
->>
->> Hello Jon,
->>
->> Without properly documenting macros we make the live of developers more
->> difficult. Yes, we still have a lot of missing code documentation. But
->> we should not follow poor example.
->>
->> Best regards
->>
->> Heinrich
->>
->> >
->> > thanks
->> > Jon
->> >
->> >>> +#define K3_TIBOOT3_IMAGE_GUID \
->> >>> +   EFI_GUID(0xe672b518, 0x7cd7, 0x4014, 0xbd, 0x8d, \
->> >>> +            0x40, 0x72, 0x4d, 0x0a, 0xd4, 0xdc)
->> >>> +
->> >>> +#define K3_SPL_IMAGE_GUID \
->> >>> +   EFI_GUID(0x86f710ad, 0x10cf, 0x46ea, 0xac, 0x67, \
->> >>> +            0x85, 0x6a, 0xe0, 0x6e, 0xfa, 0xd2)
->> >>> +
->> >>> +#define K3_UBOOT_IMAGE_GUID \
->> >>> +   EFI_GUID(0x81b58fb0, 0x3b00, 0x4add, 0xa2, 0x0a, \
->> >>> +            0xc1, 0x85, 0xbb, 0xac, 0xa1, 0xed)
->> >>> +
->> >>> +#define K3_SYSFW_IMAGE_GUID \
->> >>> +   EFI_GUID(0x6fd10680, 0x361b, 0x431f, 0x80, 0xaa, \
->> >>> +            0x89, 0x94, 0x55, 0x81, 0x9e, 0x11)
->> >>> +
->> >>>    /*
->> >>>     * We setup defaults based on constraints from the Linux kernel, which should
->> >>>     * also be safe elsewhere.  We have the default load at 32MB into DDR (for
->>
