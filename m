@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CEC06C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 02:13:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B59EC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 03:03:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 252FA88225;
-	Fri, 12 Apr 2024 04:12:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DC8F487F4F;
+	Fri, 12 Apr 2024 05:03:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lEOQ9qrt";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CkGijFl4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 617D288225; Fri, 12 Apr 2024 04:12:50 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B147C87F30; Fri, 12 Apr 2024 05:03:26 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B2B088229
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 04:12:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A3C7887EFA
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 05:03:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-78d743f3654so32063385a.0
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 19:12:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712887966; x=1713492766; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=x9XaF2bkr7HmlSgZ8AYTTyWH+dPT0bFi5w6GCJD7VHU=;
- b=lEOQ9qrtmvAY/DKC9+6+UXHSTJxCLx8ny0kZ9jXTh8AiEdyqhpFjoO/1awA46Ng++P
- aY7H/o1sK2pDg44Vr4j9l9mKreSZKGtURRRmeG3584oclMjRBNSiVz47qIQeJGWiUY7s
- u5q5WtCJKtt6i0LrQUbBR9sNRpvLWQAJACauM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712887966; x=1713492766;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=x9XaF2bkr7HmlSgZ8AYTTyWH+dPT0bFi5w6GCJD7VHU=;
- b=eax+9JLYcdDglS/ZwZSMwO/HHesBk8A4jED0FVgsjQ7XdzLDPOTFLL5HPcjAiuwqCO
- Sfn8uL0mxoCSWT/n/Aa5SARsMrv+a4uaTn29EZVf777bkW8gBBRYjWq/1P6+SPLb12eq
- oknKZuNH7EP+9XAqyS1Zi+1MtnfA1vBpL/YWpxePleYu0ZGU1tSqo8ObZbo2UcOCqsIB
- G+AHbKyzpkUJm5N7XnnCvEx5CjmHogfSHibawVhJn7qWd9SSufCVST43kOjl8eO2Smet
- KyuVQPsisR/jLO/Xe67KRSKQfkNzRD015zvMOxnba0iNL2LqYXHtQw+HxO5vBvdzihtt
- 1cJg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWQ2KW9e3Stcwb/ffXj/Bzfhvl6fWMOpsij0fBm2l+yyTIWhy/EZCTDKYuFDrkqWVWqRgqWWNCxwIAATDtQAp4dostVLg==
-X-Gm-Message-State: AOJu0YxDpskuO7d3BXgavSthmO+4pYyuWfa0K0Pt+0Tqcrr9Rx6OM9D2
- eS+mcB83It0jiP7gokPeNFNzSh+i7tN6H1+A+CtkvOVBI3F4P+c39uclRX9OVpo=
-X-Google-Smtp-Source: AGHT+IEGc7oNOpsVCZ4Hy0cqvQRGRLMzXkiiXu0BOgB2bmWYqaKyfxBMXTbM+or8ZvX4Wle/6KX6Rw==
-X-Received: by 2002:a37:e205:0:b0:78d:632e:be98 with SMTP id
- g5-20020a37e205000000b0078d632ebe98mr1391289qki.58.1712887966549; 
- Thu, 11 Apr 2024 19:12:46 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- g13-20020a05620a108d00b0078ec439a9a7sm1348922qkk.62.2024.04.11.19.12.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 19:12:46 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Michael Walle <mwalle@kernel.org>
-Cc: Vignesh Raghavendra <vigneshr@ti.com>, u-boot@lists.denx.de
-In-Reply-To: <20240403143155.3995102-1-mwalle@kernel.org>
-References: <20240403143155.3995102-1-mwalle@kernel.org>
-Subject: Re: [PATCH] net: ti: am65-cpsw: Fix buffer overflow
-Message-Id: <171288796555.897536.12800268327722881164.b4-ty@konsulko.com>
-Date: Thu, 11 Apr 2024 20:12:45 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43C337HB048178;
+ Thu, 11 Apr 2024 22:03:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1712890987;
+ bh=xj7Yp6tVZUZ4a3PgEKW/iKE0UNOlpBWxUwsTdzYglY0=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=CkGijFl4sjXkiuiHgs4yQJ5VQNaRmtPnPyi/RXZat9s8GT9EDm+NY7vWn4/tr6eTo
+ H4aQhSi71mw01E3huabYCE8WFRTo6xKInls5FKtwLdbrVRT7agf6Do0q3O8a6g8N73
+ X5ckqx2aiawVBWErMHSVI0vSyqWFlKzG/SGOFwGQ=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43C337sZ057855
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 11 Apr 2024 22:03:07 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 11
+ Apr 2024 22:03:06 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 11 Apr 2024 22:03:06 -0500
+Received: from [172.24.227.36]
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43C330Pi073324;
+ Thu, 11 Apr 2024 22:03:01 -0500
+Message-ID: <4b346a1e-e979-4438-ae50-f2a74b29ab44@ti.com>
+Date: Fri, 12 Apr 2024 08:33:00 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/4] arm: dts: k3-*-binman.dtsi: Clean up and templatize
+ boot binaries
+To: Michael Walle <mwalle@kernel.org>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>, Manorit Chawdhry <m-chawdhry@ti.com>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>,
+ <alpernebiyasak@gmail.com>, <bb@ti.com>, <nm@ti.com>,
+ <sumit.garg@linaro.org>, <michal.simek@amd.com>, <marex@denx.de>,
+ <neil.armstrong@linaro.org>, <afd@ti.com>, <vigneshr@ti.com>,
+ <kamlesh@ti.com>, <u-kumar1@ti.com>
+References: <20240322131011.1029620-1-n-francis@ti.com>
+ <20240322131011.1029620-4-n-francis@ti.com>
+ <D03Q9AGO5ND9.1TJM3KSNA71WG@kernel.org>
+ <83c6532a-e994-4bcd-bc48-9e22ecdec644@ti.com>
+ <D04LUAJJ6LC7.1JVGVTJ0UCMVR@kernel.org>
+ <062f7c42-7088-4813-a2d6-ecb7ab22b4ba@ti.com>
+ <D05D4N00QDKO.2PJ7VW4BNGQ11@kernel.org>
+ <2e817727-524e-47e5-9f5e-2ee13d99a9bb@ti.com>
+ <20240403103458.mn2xkemiyymidipo@uda0497581>
+ <D0ALVJNAVD8U.3UYSZULLZ6YG5@kernel.org>
+ <d23bdaec46343155c752fcfb5287d9b39ac44918.camel@ew.tq-group.com>
+ <f4059b33-e36c-41d0-8205-9f8b1b665843@ti.com>
+ <D0C0QR6BEJ2K.32AR9PQA0BM9E@kernel.org>
+Content-Language: en-US
+From: Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <D0C0QR6BEJ2K.32AR9PQA0BM9E@kernel.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,22 +98,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 03 Apr 2024 16:31:55 +0200, Michael Walle wrote:
+Hi Michael
 
-> The device name is a concatenation of the device node name of the cpsw
-> device and of the device node name of the port. In my case that is
+On 05/04/24 13:12, Michael Walle wrote:
+> Hi,
 > 
->   ethernet@8000000
->   port@1
+> On Thu Apr 4, 2024 at 11:10 AM CEST, Neha Malcom Francis wrote:
+>> But again in the interest of time... this would mean this cleaning up effort be
+>> kept on hold. If we can agree to move to using the generator later as the final
+>> solution, can we pick up this series for now?
 > 
-> First the buffer is really too small, but more importantly, there is no
-> boundary check. Use snprintf() and increase the buffer size.
+> Agreed. I just saw the new RFC for the j722s support. It should also
+> make use of this cleanup then, btw.
 > 
-> [...]
 
-Applied to u-boot/master, thanks!
+Right, I'll sync with J722S efforts as well.
+
+So is this series good to go?
+
+> -michael
 
 -- 
-Tom
-
-
+Thanking You
+Neha Malcom Francis
