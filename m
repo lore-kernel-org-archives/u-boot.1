@@ -4,138 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF986C04FF9
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 20:34:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF684C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 21:18:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64BAF881BB;
-	Fri, 12 Apr 2024 22:34:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id EE0BA87DF3;
+	Fri, 12 Apr 2024 23:18:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=extrowerk.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="YDLSXcZD";
+	dkim=pass (2048-bit key; unprotected) header.d=extrowerk.com header.i=@extrowerk.com header.b="oM9lj40f";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="h0aTbAVR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02D19881BB; Fri, 12 Apr 2024 22:34:52 +0200 (CEST)
-Received: from EUR04-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur04on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260f::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6A96087ED3; Fri, 12 Apr 2024 19:27:23 +0200 (CEST)
+Received: from fout1-smtp.messagingengine.com (fout1-smtp.messagingengine.com
+ [103.168.172.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C50988080
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 22:34:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1ACF687E82
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 19:27:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=none (p=none dis=none) header.from=extrowerk.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=K4pbyRnGJC75Zd3aLShbuB/H/bGbjtHlmvpZFl/Ch2/tpJ0D2gN9lND8V+BmmEuKiGYFsrjDdXlvUpdjRq+ILWnyMh31FaE35wov00VHrLw+bt6IwIllOsuAAWO7pTF6vXJzExHZ4qBP3y/ilhqQeLaOLXnFeU1kCNrkVr9VEtcKPY64/+MUppK92st55o3+ZdhbK0ExZTJSLqo7IIDCVOHF3UYxGPxawistHxYgzSQPjBn/ZnqEn8Fm6KX9ol+zsji/cedMeU18gtAjHJALeG12t5f1XFLxaAvesSeB6vsxEghIpGwdW611QkzON21QsbPz5262DQQDlprw1f6bTw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=n9Cg1EpXlLVlVwj8W3kErLRZFEMbgYBlebt4e7uzaK8=;
- b=D+b91k3GVbUxtQQ7eoyC4dUbodG2TDdHp9ZxRgmW/hEwleSVs3xd1zZWiRPexm+EmHj/h9Z7HNAQQP21VpRUe2ys/EXxp4uMFbXoPHO5PENNxrC9pGktFxFjbG2RfKmznpsfsAUYxGEZx9db/OOkbhfnDvuzevHj+MkJaXfmkF/wjVd0/nTtNSaj3HxY3YzqHDE89mz0vf+vKD3s9M/JaqE4tDPnopadDTSBQqDlK/O91i4rMUMclGFJGdy7RMMqIE1Zmq7pHE7V08zNuSHKVRTywxkOOjdbQGxxzbPeQwcfzdWhSMMV3jTKqFi26x8OjlLDiwwRroQWEsW0vnxYfQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=n9Cg1EpXlLVlVwj8W3kErLRZFEMbgYBlebt4e7uzaK8=;
- b=YDLSXcZDy5Ijo9pL1J2CvO2VH9UN8y9x2I3u1U4KEijKGnPE44QJVN4WSV5l5SoynZMCJRmDKzoOw0Pz/IoNx9ngBFC2TabjxL12aKFOsnbwKWodotP3DDyyBwoNrJxFUPYM4dFHp/KZqi1NYw+mdMNMebyTUWWE9bmY/Vo0PYYpAECuPs5YxEmKLhKQWsHzwJMZZtwzsayBDfUTZj2VMjLU0lmHxJEFUJdK0JB8He3yATWxiSNfgWYLf7WQF80QhuIq+qJyu+/OppCTIKmYRU3sK3Ug8lv+ZDuD/nB3RKxl117OxZZPzOuSX9B8huZ6cEOdtHxYTyRh/WNRntePog==
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::22)
- by DB8PR10MB3912.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:169::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.55; Fri, 12 Apr
- 2024 20:34:48 +0000
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4]) by AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4%5]) with mapi id 15.20.7409.053; Fri, 12 Apr 2024
- 20:34:48 +0000
-From: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, "sjoerd@collabora.com"
- <sjoerd@collabora.com>
-CC: "rogerq@kernel.org" <rogerq@kernel.org>, "nm@ti.com" <nm@ti.com>,
- "hayashi.kunihiko@socionext.com" <hayashi.kunihiko@socionext.com>,
- "marex@denx.de" <marex@denx.de>, "martyn.welch@collabora.com"
- <martyn.welch@collabora.com>, "mkorpershoek@baylibre.com"
- <mkorpershoek@baylibre.com>
-Subject: Re: [PATCH v4 1/7] usb: dwc3: Add dwc3 glue driver for am62
-Thread-Topic: [PATCH v4 1/7] usb: dwc3: Add dwc3 glue driver for am62
-Thread-Index: AQHaRTTXpz9MrTdfEUCr+V0Sdlq6vLFlp08A
-Date: Fri, 12 Apr 2024 20:34:48 +0000
-Message-ID: <19f06316d3bf3c07d2e67d79bc9a4ef24c2b0ad4.camel@siemens.com>
-References: <20240112085317.1866449-1-sjoerd@collabora.com>
- <20240112085317.1866449-2-sjoerd@collabora.com>
-In-Reply-To: <20240112085317.1866449-2-sjoerd@collabora.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR10MB6867:EE_|DB8PR10MB3912:EE_
-x-ms-office365-filtering-correlation-id: 1655980e-de88-4a3a-3cd2-08dc5b2fff56
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: LFcDF1qVJbRmHJ2ZolMpqz77J64/vQzVhWXB/N2jZ0C896GQ7sEIyiC2IbEsOBAwHYmT3Dw9b7UNmkmg6L+1VYoLFipaPmxdU7lRE+FneuEU7pQFt9riAdlDMlpOEFfsS0ThFPc+9n0SVGH0l0ulNK9PXyYE7CXZpVXCpBTDcSIJEtRqDX2jQTWTpAt7aeV8jcbF+dr7hGLBFGslTOlSTNiWAZt1UjZewj7kAL3J2dhLyePJpV1wEEj/R1QuznPcip/Mors2BCFo1yNMTHtLACqkluS/c9ffzWW3V9rRSWgnZ0RV49qIx+Y8EoQ04O7jghogXGrPnl2+/7ixF7FtFzsDxJ+cgj7BAXD+FHuCUF7LDDd04kX2cmT3BOSml0q02rDoOZH7le+i9kHwklJ5Jwx3NnoR0sJgru21nLylcI7yixS/J58BsPwwJYll1n5a9/YPbUmcNQ44XCs9ayjCCq4dMp4eVZ4O2HA0dtFTOWFrh5rLIaxtn8VonTmnSPUOM7zxKwvgwR8DuB6Aj3Fgq2IAO74EFnTU+3swLKr/Kfy5fggyGQifyZtGir/7Ve3vIDzvjggOdGhANMxHWXX8M/L9u3r+EsKMlDugrQtMxsuhmYcdV8tjKYND2vCD0Ca+UPEj1DO+RwW3dsJ67pCarD3qcsjeoF10TbRHkKGdyJM=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(1800799015)(366007)(376005)(38070700009); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?Rm9qam1tb2c4emEwQm8yQXFHQ3ZHdGs5T0tYSmV5S3pkYmxkNVhFRUR4Ny9r?=
- =?utf-8?B?Z2pIdHZkdVlqNEU2cnJ3ekJGelVFZXdDMEVtSXhjY1Q2ZHBuNEpaa3hkK0lM?=
- =?utf-8?B?V1VLNDhsY3A3TE9SczFROFgybEc3MmJQUkVFQi9zYy9LQTJOZWsvWmFiMTJQ?=
- =?utf-8?B?QXl4VlJsZ2RUeTBOQm1vS2lMQ24rK2FCbUZjOFF2T29MdUczNG5IVHlnbnhS?=
- =?utf-8?B?ODdJYURwRExIKzBiQ09jTkIvdDF0VnpMb3ppaFVLNW1EcTR0Z0tDcVhNL2Nt?=
- =?utf-8?B?SGd0U2MrOEducS9LOHlWZzN1dUlUdVBKSERPRDVzSHR3MTIwb3BHQ1dsNUpE?=
- =?utf-8?B?OUhSMExyVkxSMXhnZ3JyTXlWSTdmR0xjc0swV0YwZjNpMHdvdlNaTHBpeVFB?=
- =?utf-8?B?S1V4QlVVZnJDbDJLUkQ0Mlk3M1NveEJqNStMeDE5a1p5bXhwNjVtRjd1c1NE?=
- =?utf-8?B?WmtuR3I5VTVYRndvdUcvNFZPQlNlRElkYWtFSEJWRXpjRDd0M21VeW5QdmdC?=
- =?utf-8?B?ZkFWYTRqWVB4UjNYZEN2UmlOcmlJcmFPQ2Q5Y3FMZXNzYTFKcEs4a3FrZ0xr?=
- =?utf-8?B?ai9pWS9kQmxKYmJ2dyt0Um41YXdsdmN5Q2JsL1hvYXRRSWxTWWxOUWZTVytT?=
- =?utf-8?B?WnZTSVdyWE95TW5pdWh3WmttVGdRVDVQdEsvSnFOcEdZWDEwNENhT0orYWpy?=
- =?utf-8?B?S3ZFRWxLMnVpV05pK25MZm11UFpzdWZHdVVBeHpoeXhKR2VVa0NHRHM5MXhI?=
- =?utf-8?B?SjBWWXlXQXlvS044YzVJSXpNTVhmMDB0bjBkM1lINE1aN21JR0taeGd5dzFx?=
- =?utf-8?B?WWptUWlRcUhnQk1NWUFYRDJJMFFLUXVSOGpsbHRpTUpJOUdFVEhieGVVYlI3?=
- =?utf-8?B?NlBTN2dSdm10TVFDZEd1K0lnWTlRdXByK2Fya1ZzdGdBZms4QVhneFhTZ2h3?=
- =?utf-8?B?R3lSalBRcWUzWlN0bnQyZXU4QThKdmwvT3IwTmxtZGpIUUxHaWZCVWVpaE5L?=
- =?utf-8?B?OFB3RThDeUFQQVZJL283a0pPWjlBZFg1WERNbThIT3RxclBjT3VBODFiVGNo?=
- =?utf-8?B?RThBVFJSL3NURmdHeVBESXRXYWxGUWpTOG5ZZ3g2OVhnZlVBRHNTLzV2bGdG?=
- =?utf-8?B?c2UzWDdTb1R4bCtybnY5OGNuQ0kwcHpKRDdvVzU1cDIvOTRycW11bDl3N0lL?=
- =?utf-8?B?RWNiV2FNUFpnbFNvbXpWbDI5aENUT0VPNjhhQzkvSldwRXhBQTgrQ2x6ZER0?=
- =?utf-8?B?RUhjdzA0VUlmaForc281c2xyWHBUTGpyTGVZQVVuZkoxQ3BXOTZ1SjRGZnZQ?=
- =?utf-8?B?anFBL3dCdytEM0t4L3dhWmVqMFFQQjIzbElwZkFZVUhxZGxVMzhoV2JONUdD?=
- =?utf-8?B?OUg4UHpyenpFV2FONm1lN2UyT2NuZU1JV282S3BiVUkyL1N3ZUdpMmVoWG9W?=
- =?utf-8?B?cU5EVFVuT3ZNQXVuR0RJQ21saXQ5VHloVFlrUjIrcnk3MERueU02UjBYVXVM?=
- =?utf-8?B?SkVEaVRuamxReVV0NTJ6bmtsbXQwZUJkeEVsZ0t3MnZiWElRR0h5WEtqcjRI?=
- =?utf-8?B?Zk12VWUvWWV5bHFGK1U4SzQ2cW9jd2Y4YU50QS9lQ0Rld2M3d0M0SWFFMHJU?=
- =?utf-8?B?NXpTYWlSMDNHUnNkL0YrYWsyeEFuc1BaMUxWdWUzckZxOXZmaVdPdE1ncEZM?=
- =?utf-8?B?cUtlT1JoOGoweU5HRENsTEdNL1o0UkdmR3F1M0F2MnBZeE9DRHFYNWM5WFk0?=
- =?utf-8?B?S2FSOFVuSGhJZzNiVXc0N0Z3WjZFNldOaGd0TVNJMHVRc2ZYdnVrTE1UMkRH?=
- =?utf-8?B?OHRzREpOTktLbkZXeHRIWkVwalNLUlE1N0NsdXQ1NERSWVM1QTNHRUJsaWdU?=
- =?utf-8?B?YzdkVFM3aFRtN3NmSmttb0d6Qks5eVlOQktMRlQzcXhuR2tWTHJaSENSSzBa?=
- =?utf-8?B?bytaWjQ1SHlMV1BzRXFQOGJhOU1YSGZKMUFqL3NHUEtydUhwZ1NsbUhPZ0hv?=
- =?utf-8?B?a2orVVM5NUt1VjBFT3VXbnhZNmtNWGQxMDRJdHQyVUM0VXQ2QXlHM1pMR0Z0?=
- =?utf-8?B?TmlVRU14ZFlUYmJ5Qkl1V2NSR29TVHBRZ1Q3RkhlaXgwZVJDRnc4ekRqckdq?=
- =?utf-8?B?clpKa0FEMGQydVY0YjNYTWM0UmdaZHhlNExzWEtDZUFxYXNHdEhyemVGbFpu?=
- =?utf-8?B?cWhxbFBaVjJzSmt3Mmt6WDRyOTB2YittOThyRWp3Q1E4cWg3THAxNGV6ZEl0?=
- =?utf-8?Q?SJTHDL/pQ46aEeBOL/k2VChN160rIpJJv2dUjLE114=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <329B29A3F4A9CB41A57D6F7F7DA21A14@EURPRD10.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=zmizsei@extrowerk.com
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.46])
+ by mailfout.nyi.internal (Postfix) with ESMTP id D311D13802AD;
+ Fri, 12 Apr 2024 13:27:18 -0400 (EDT)
+Received: from imap43 ([10.202.2.93])
+ by compute2.internal (MEProxy); Fri, 12 Apr 2024 13:27:18 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=extrowerk.com;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm2;
+ t=1712942838; x=1713029238; bh=bJVLb1E/XIRf1lndfgug7a1d4Fpsy7Cf
+ 5yXlJ9UJ5ak=; b=oM9lj40fIPXNkibmbsvJhbOxkln/U8XksJnBbnZbkJolwwro
+ XRMEn+4Bu8NtBLV1g3uwzA2XUQGmevaZs8xtTDQ6zOjQ4wpFb61hSgDh7wP4vzfA
+ 03I+7qWd1WCD3+y/afge51TypU3jeg/lsB6J8A0VuIUz4+sLu862cYXJhGQNtyre
+ iWmkOYxj++ds/23yReioHHeqHW/st4UIDnZBb77krLT7vBMU291DS+z3CnKrpRro
+ SBkFLktst03SZuID645YHr6Hx0FOEOg/JjvAzmydoVXFNIyxBAf154T1SYtqJ+4C
+ Dy0GsP/h5OTjV2ewZ3JHJ6mGhK1F6IKFpenBWA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=1712942838; x=
+ 1713029238; bh=bJVLb1E/XIRf1lndfgug7a1d4Fpsy7Cf5yXlJ9UJ5ak=; b=h
+ 0aTbAVRAshuF6Vcm990MNu3sGi20bCPKeYtn7W/0ILK8kepvAnvFxpgqMB896SCa
+ h3QjXgkenuwFiKIm64kE4xDXcaURl84kKFushgJBLW+XAERYGiE6+Gt0KRcvHIqb
+ et0eHnRBf5266Z24kh+r7Omcf/282AxhipoMxhVZJjS9KPS0GRwvrRw3cNpP3Kwq
+ XYq3n6Z3Ss/qMwU+4sYoapB3TTyKnG6i6xwwD+z7a0C9n09rKSbAEhNwHyZoY52e
+ z2XB/iHqBl6E7xSVcbtzRxR8m6Kt4QIUN51wBAgVi3Oz8MNc4Gq7LlIEHTzOOS9B
+ 9osnliu4xDnpdg96+E58A==
+X-ME-Sender: <xms:9m4ZZmPJlp5SFw5G6Z8H8fGDJDl9pC1eGApkkoVzCm-4ntUZolD9Dg>
+ <xme:9m4ZZk_NXMjrePew2hMDrwCP1vX2bCPDjx6gnyh7IP__32rHQbTz3ODc8UCm_mBGx
+ 8leJyKLId-vvb2B2OE>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrudeiuddguddugecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+ necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+ enucfjughrpefofgggkfgjfhffhffvvefutgfgsehtqhertderreejnecuhfhrohhmpefo
+ ihiishgvihcukgholhhtjohnuceoiihmihiishgvihesvgigthhrohifvghrkhdrtghomh
+ eqnecuggftrfgrthhtvghrnhepueevfffhgffhheekhffgudejvdefheettdehgfdvkeel
+ geegieevudekhfehheeknecuffhomhgrihhnpehgihhthhhusgdrtghomhdpghgvnhhirg
+ htvggthhdrtghomhenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrihhl
+ fhhrohhmpeiimhhiiihsvghisegvgihtrhhofigvrhhkrdgtohhm
+X-ME-Proxy: <xmx:9m4ZZtS8LG5Y_WGSXz2CangKrZ2-_GtQ1wiadcnV3eqSqZsWgJYyIw>
+ <xmx:9m4ZZmtKBks_hNViFzxWaHprWao-8N5OeX8cadrjGNkkcA5tDh3QMA>
+ <xmx:9m4ZZueVcTkbtBVfZUvDKz63T4P5cuOPxp1urxMq-APhf7JdCVqsHw>
+ <xmx:9m4ZZq355IWbBFPb72zYOAXpRNCyWn1mNGD_QWo3GJ918FvvgGsxKA>
+ <xmx:9m4ZZiEY1uXPXQxuoJEYx9sirnw_Lu3ji34lGep2CfSwpY51rNVF0MdN>
+Feedback-ID: i46594767:Fastmail
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+ id 376042D4007D; Fri, 12 Apr 2024 13:27:18 -0400 (EDT)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.11.0-alpha0-379-gabd37849b7-fm-20240408.001-gabd37849
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1655980e-de88-4a3a-3cd2-08dc5b2fff56
-X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Apr 2024 20:34:48.4705 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 7mlYQ+CEx0FOxW9mlkEgPSrFUebtcCihoGw7xVw9l+NDDmy5e2CeKgbC6BJ98WFlMFB7tEkhUXwNlbxqbHWV9vCJs+SASjf7wDlFqZGxXYA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR10MB3912
+Message-Id: <080d0515-e36b-464e-bbf4-b77235826d6a@app.fastmail.com>
+In-Reply-To: <7db1cc51-3a9c-44c3-ac16-369566f2ef20@kwiboo.se>
+References: <cf475658-6c25-474b-934b-15da1363a39f@app.fastmail.com>
+ <7db1cc51-3a9c-44c3-ac16-369566f2ef20@kwiboo.se>
+Date: Fri, 12 Apr 2024 19:26:56 +0200
+From: =?UTF-8?Q?Mizsei_Zolt=C3=A1n?= <zmizsei@extrowerk.com>
+To: "Jonas Karlman" <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
+Subject: Re: Can't get U-Boot working on Geniatech XPI-3566-ZERO
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Fri, 12 Apr 2024 23:18:50 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,21 +107,184 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgU2pvZXJkIQ0KDQpUaGFuayB5b3UgZm9yIHlvdXIgZWZmb3J0cyBvbiB0aGUgdG9waWMhDQoN
-Ck9uIEZyaSwgMjAyNC0wMS0xMiBhdCAwOTo1MiArMDEwMCwgU2pvZXJkIFNpbW9ucyB3cm90ZToN
-Cj4gQWRkIGdsdWUgY29kZSBmb3IgVEkgQU02MiB0byB0aGUgZHdjMyBkcml2ZXI7IE1vc3QgY29k
-ZSBhZG9wdGVkIGZyb20NCj4gVEkgdmVuZG9yIHUtYm9vdCBjb2RlLg0KPiANCj4gU2lnbmVkLW9m
-Zi1ieTogU2pvZXJkIFNpbW9ucyA8c2pvZXJkQGNvbGxhYm9yYS5jb20+DQo+IFJldmlld2VkLWJ5
-OiBNYXR0aWpzIEtvcnBlcnNob2VrIDxta29ycGVyc2hvZWtAYmF5bGlicmUuY29tPg0KDQpXb3Jr
-cyBmb3IgbWUgb24gQU02MjMyOg0KDQpUZXN0ZWQtYnk6IEFsZXhhbmRlciBTdmVyZGxpbiA8YWxl
-eGFuZGVyLnN2ZXJkbGluQHNpZW1lbnMuY29tPg0KDQo+IC0tLQ0KPiANCj4gQ2hhbmdlcyBpbiB2
-NDoNCj4gLSBBZGQgY29uZmlnIGRlcGVuZGVuY3kgb24gU1lTQ09ODQo+IC0gTW92ZSBkZWZpbmVz
-IGFuZCBjb25zdGFudHMgb3V0c2lkZSBvdXQgb2YgZnVuY3Rpb24gc2NvcGUNCj4gDQo+IENoYW5n
-ZXMgaW4gdjI6DQo+IC0gU3dpdGNoIGR3YzMgZ2x1ZSB0byBhIHNlcGVyYXRlIGRyaXZlciByYXRo
-ZXIgdGhlbiBpbiBkd2MtZ2VuZXJpYw0KPiANCj4gwqBkcml2ZXJzL3VzYi9kd2MzL0tjb25maWfC
-oMKgwqDCoCB8wqAgMTQgKysrKw0KPiDCoGRyaXZlcnMvdXNiL2R3YzMvTWFrZWZpbGXCoMKgwqAg
-fMKgwqAgMSArDQo+IMKgZHJpdmVycy91c2IvZHdjMy9kd2MzLWFtNjIuYyB8IDEyNSArKysrKysr
-KysrKysrKysrKysrKysrKysrKysrKysrKysrKw0KPiDCoDMgZmlsZXMgY2hhbmdlZCwgMTQwIGlu
-c2VydGlvbnMoKykNCj4gwqBjcmVhdGUgbW9kZSAxMDA2NDQgZHJpdmVycy91c2IvZHdjMy9kd2Mz
-LWFtNjIuYw0KDQotLSANCkFsZXhhbmRlciBTdmVyZGxpbg0KU2llbWVucyBBRw0Kd3d3LnNpZW1l
-bnMuY29tDQo=
+Hi Jonas,
+
+thank You, i tried my best to follow your hints as good as possible. Thi=
+s is what i did:
+
+- git clone https://github.com/rockchip-linux/rkbin
+- git clone https://github.com/u-boot/u-boot
+- modified the following files:
+
+```
+diff --git a/arch/arm/dts/rk3568-generic.dts b/arch/arm/dts/rk3568-gener=
+ic.dts
+index 88eb1bfd..847ebd51 100644
+--- a/arch/arm/dts/rk3568-generic.dts
++++ b/arch/arm/dts/rk3568-generic.dts
+@@ -16,7 +16,7 @@
+        };
+=20
+        chosen {
+-               stdout-path =3D "serial2:1500000n8";
++               stdout-path =3D "serial1:1500000n8";
+        };
+ };
+=20
+@@ -43,6 +43,7 @@
+        status =3D "okay";
+ };
+=20
+-&uart2 {
++&uart1 {
+        status =3D "okay";
+ };
++
+diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_d=
+efconfig
+index e7d5e55b..aeb117e7 100644
+--- a/configs/generic-rk3568_defconfig
++++ b/configs/generic-rk3568_defconfig
+@@ -6,7 +6,7 @@ CONFIG_NR_DRAM_BANKS=3D2
+ CONFIG_DEFAULT_DEVICE_TREE=3D"rk3568-generic"
+ CONFIG_ROCKCHIP_RK3568=3Dy
+ CONFIG_SPL_SERIAL=3Dy
+-CONFIG_DEBUG_UART_BASE=3D0xFE660000
++CONFIG_DEBUG_UART_BASE=3D0xFE650000
+ CONFIG_DEBUG_UART_CLOCK=3D24000000
+ CONFIG_SYS_LOAD_ADDR=3D0xc00800
+ CONFIG_DEBUG_UART=3Dy
+```
+
+- modified this file:=20
+```
+diff --git a/tools/ddrbin_param.txt b/tools/ddrbin_param.txt
+index 0dfdd31..826f927 100644
+--- a/tools/ddrbin_param.txt
++++ b/tools/ddrbin_param.txt
+@@ -9,7 +9,7 @@ lp4_freq=3D
+ lp4x_freq=3D
+ lp5_freq=3D
+=20
+-uart id=3D
++uart id=3D1
+ uart iomux=3D
+ uart baudrate=3D
+```
+
+- Runned the following command:
+# ./ddrbin_tool rk3566 ddrbin_param.txt ~/rkbin/bin/rk35/rk3566_ddr_920M=
+Hz_v1.21.bin=20
+version v1.19 20240117
+chip rk3566
+version 5
+
+new bin config:
+uart id: 1
+modify end
+
+The file modification date changed, so i assume it should be ok.
+
+- Runned the following commands:
+# CROSS_COMPILE=3Daarch64-linux-gnu- ARCH=3Darm64 make generic-rk3568_de=
+fconfig O=3D"build/generic-rk3568_defconfig"
+#ROCKCHIP_TPL=3D'~/rkbin/bin/rk35/rk3566_ddr_920MHz_v1.21.bin'  BL31=3D'=
+~/rkbin/bin/rk35/rk3568_bl31_v1.44.elf' CROSS_COMPILE=3Daarch64-linux-gn=
+u- make O=3D"build/generic-rk3568_defconfig"
+
+I have acquired the MiniLoaderAll.bin via extracting the official update=
+.img from the vendor.
+# rkdeveloptool db MiniLoaderAll.bin
+# rkdeveloptool wl 64 '~/u-boot/build/generic-rk3568_defconfig/u-boot-ro=
+ckchip.bin'
+
+- Then i have connected my USB-UART adapter to=20
+BOARD PIN 8 (GND)  -> USB UART PIN GND
+BOARD PIN 10 (UART1_TX)   -> USB UART PIN RX
+BOARD PIN 12 (UART1_RX)  -> USB UART PIN TX
+
+- Started minicom:
+# minicom -D /dev/ttyUSB0 -b 1500000
+
+But i still don't get any output at all.
+
+Any idea what iam i doing wrong here?
+
+Best Regards,
+-- ext
+
+
+Jonas Karlman =C3=ADrta 2024. =C3=A1pr.. 8, H-n 21:31 =C3=B3rakor:
+> Hi Z,
+>
+> On 2024-04-08 09:40, Mizsei Zolt=C3=A1n wrote:
+>> Hi,
+>>=20
+>> I'm trying to get a mainline U-Boot running on the Geniatech XPI-3566=
+-ZERO RK3566 based SBC [1], but all my attempts have failed so far.
+>>=20
+>> The SBC doesn't have any SD-Card slot, please keep this in mind!
+>>=20
+>> I can build U-Boot, but when I write the resulting binary to the eMMC=
+ using rkdeveloptool, the boot stops and I see no output on the UART pin=
+s using 1500000 baud transfer rate.
+>>=20
+>> My steps were the following:
+>>=20
+>> - git clone https://github.com/u-boot/u-boot
+>> - cd u-boot
+>> - CROSS_COMPILE=3Daarch64-linux-gnu- ARCH=3Darm64 make rk3568_defconf=
+ig
+>
+> There is no rk3568_defconfig target but generic-rk3568_defconfig may=20
+> work better.
+>
+>> - ROCKCHIP_TPL=3D'rkbin/bin/rk35/rk3566_ddr_1056MHz_v1.21.bin'  BL31=3D=
+'rkbin/bin/rk35/rk3568_bl31_v1.44.elf' CROSS_COMPILE=3Daarch64-linux-gnu=
+- make
+>> - rkdeveloptool db MiniLoaderAll.bin
+>> - rkdeveloptool wl 64 u-boot-rockchip.bin
+>>=20
+>> After that I can no longer communicate with the board via UART and it=
+ no longer boots.
+>
+> After looking at the specification for this board it looks like GPIO=20
+> pin 8 and 10 is connected to uart1 and not uart2 that is typically use=
+d=20
+> for debug uart on rockchip devices.
+>
+>>=20
+>> I've built uboot countless times, I've followed all sorts of guides, =
+I've tried modifying FDT and transplanting the DTS from the official SDK=
+, I have tried vanilla defconfigs and tried to modify them aswell, I thi=
+nk I've tried everything, but no matter what I do I just can't get it wo=
+rking.
+>> The vendored U-Boot works ok, but I plant to run OpenBSD, for which a=
+n upstream U-Boot would be better situated (according to the OBSD mailin=
+g list).
+>>=20
+>> Please give me some hints because I'm running out of ideas. I've spen=
+t countless hours trying to get this to work but haven't succeeded.
+>
+> You can try changing stdout-path to "serial1:1500000n8" and enable the=20
+> uart1 node in generic-rk3568.dts.
+> Also change to CONFIG_DEBUG_UART_BASE=3D0xFE650000, and also use rkbin=20
+> tools/ddrbin_tool and change to use uart1 on ddr bin.
+>
+> After that you should probably start seeing something on uart and that=20
+> may help you get a little bit further.
+>
+> Regards,
+> Jonas
+>
+>>=20
+>> Thank You very much!
+>>=20
+>> Best Regards,
+>>=20
+>> --Z--
+>>=20
+>> [1] https://www.geniatech.com/product/xpi-3566-zero/
+
+--=20
+--Z--
