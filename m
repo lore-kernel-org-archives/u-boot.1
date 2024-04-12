@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 827D6C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 14:52:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58663C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 15:53:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F1779880A8;
-	Fri, 12 Apr 2024 16:52:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AAACB88020;
+	Fri, 12 Apr 2024 17:53:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TFT+U3cM";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="6fg0QKFr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5142881A8; Fri, 12 Apr 2024 16:52:41 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C88B68803B; Fri, 12 Apr 2024 17:53:19 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 45F0688027
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 16:52:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D60E587DDF
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 17:53:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-6ed04c91c46so1018362b3a.0
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 07:52:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712933558; x=1713538358; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=lTpEmUap4Wly1aB3S3tH/cgnlV0kyDb5egPWVX6Awn4=;
- b=TFT+U3cMDCxfO7TBP7e1+op61xJXotYxri/mAs9ubkI6ovL0lLjmhG64JY+EKu10ck
- YlI85IDFfPnJDWCX6/JobUmSbLvJVWaYsm1o92yhvktHjheYSEn4PFGLr1wMPugAw2sz
- 431ZE3RIqJXifM2xqup0sbph5cktwAD9aaujk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712933558; x=1713538358;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=lTpEmUap4Wly1aB3S3tH/cgnlV0kyDb5egPWVX6Awn4=;
- b=bfNApI9UZ437krPd6ZqcCxupHOSLU0pDzvQJ7Xye0Up3GOqH5LgrFpKz1k0AZw4QfK
- hBCwNS3T74sJ5KZLSgEwE0DXZHP3o1Y3NasTJAZS62PYZIv95SYpVwPROig6t8A1Qsvb
- K527dFc3LwNYpKsWgxwor/0F8swJbw9jJzDeO/8mIqj0aeOVn1gKvVtxM//zDI+VZ/DS
- 5JQqH3b2M1jFp/A+IxgoCe1ei8v8ISFzjH9jJhb8GtCoBQST5KW4Ay0DpXScw4tiX1D/
- XGN3qsyFr64bXL3bFU/zcDexo4CTpvQ5j8aPTtodHylcSgp6Y90kroG9+1hFacAT6FkD
- tvxg==
-X-Gm-Message-State: AOJu0Yxy/+Pf5gQCa42fku4h0WoR+3nazlKAg2CbY1S3JYMH1pyTy8QC
- zR0Mm3hBd9B9279BBxWU6BcOAvgrWbxm2pvYSVaPZ+BG6KIZs98YGMyQbYh6Vw0=
-X-Google-Smtp-Source: AGHT+IGEyNLpqsFgSF1ZLabSwX4y42Of4XpNnOEmSSamJmCznA5Pn2UgESEEjRTE0r0YhgU+yORjLQ==
-X-Received: by 2002:a05:6a20:3a87:b0:1a9:3cf2:508d with SMTP id
- d7-20020a056a203a8700b001a93cf2508dmr2583184pzh.38.1712933557678; 
- Fri, 12 Apr 2024 07:52:37 -0700 (PDT)
-Received: from oliver.lan ([2806:102e:18:245e:2606:71da:664:f052])
- by smtp.gmail.com with ESMTPSA id
- e20-20020a170902f1d400b001e3e09690c6sm3087871plc.199.2024.04.12.07.52.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Apr 2024 07:52:37 -0700 (PDT)
-Date: Fri, 12 Apr 2024 08:52:34 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Wadim Egorov <w.egorov@phytec.de>
-Cc: u-boot@lists.denx.de, nm@ti.com, upstream@lists.phytec.de, bb@ti.com,
- vigneshr@ti.com
-Subject: Re: [PATCH v2 0/3] *** Introduce get_boot_device() for K3 platform ***
-Message-ID: <20240412145234.GA361815@oliver.lan>
-References: <20240403135911.1987293-1-w.egorov@phytec.de>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=4832881ce4=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 43CDJZaf017054; Fri, 12 Apr 2024 17:53:15 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ from:to:cc:subject:date:message-id:mime-version
+ :content-transfer-encoding:content-type; s=selector1; bh=SiB5GQy
+ PiAuiNdoql0Tm8yOpMzRfI6JOeOxBORvBkJc=; b=6fg0QKFrGWHfAxeT3u3L6k9
+ +atcLouSyN+lB8/Jx5zdkiRg6Abe2WDKX3CjwpLjfYW+RuxGrxGG+gJocgIs1DU+
+ ecun9K+wgsgFcGs2fIc4OFU8yIH6PctdV3OZwsiIkYxKHrH7ab87ojxhA46ArezD
+ snIEJ4TBlhaJ3lH2K2BK5xKOzRhinuH9UZml3Y1tCXile0lh9w0zxsf/6PqT/b7c
+ zqqyO6SKQbKzy1XIt503kXFfK7y99yeZCb9p6wnQne9g7mrkNFLOvEi3XFUzlNQH
+ 30KJsLKYyUR7zERW2GKvCiA21nsu+xbppJjAEGLEREH+QFTzkKTZkitEuMrBqIw=
+ =
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xauh5j0dt-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 12 Apr 2024 17:53:14 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 20D844005D;
+ Fri, 12 Apr 2024 17:53:11 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DCB4421A22B;
+ Fri, 12 Apr 2024 17:53:10 +0200 (CEST)
+Received: from localhost (10.252.26.170) by SHFDAG1NODE1.st.com (10.75.129.69)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 12 Apr
+ 2024 17:53:10 +0200
+From: Patrice Chotard <patrice.chotard@foss.st.com>
+To: <u-boot@lists.denx.de>
+CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Udit Kumar <u-kumar1@ti.com>
+Subject: [PATCH v2 1/2] lmb: Avoid to add identical region in
+ lmb_add_region_flags()
+Date: Fri, 12 Apr 2024 17:53:05 +0200
+Message-ID: <20240412155307.735631-1-patrice.chotard@foss.st.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vXWN8JFAXrvoP55q"
-Content-Disposition: inline
-In-Reply-To: <20240403135911.1987293-1-w.egorov@phytec.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.252.26.170]
+X-ClientProxiedBy: SAFCAS1NODE2.st.com (10.75.90.13) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-04-12_12,2024-04-09_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,41 +90,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+In case lmb_add_region_flags() is called with the same parameter than
+an already existing lmb and this lmb is adjacent to its previous lmb with
+different flag, this lmb is added again.
 
---vXWN8JFAXrvoP55q
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Instead breaking the loop, continue, at the next iteration, we are able
+to detect that this region already exist.
 
-On Wed, Apr 03, 2024 at 03:59:08PM +0200, Wadim Egorov wrote:
+Issue reproduced on STM32MP157-DK2 with SCMI DT, bdinfo command's output
+shows:
 
-> It is handy to have some u-boot environment variables set based on
-> the current booting device.
-> Provide a way to obtain the boot device for non SPLs by factoring out
-> spl_boot_device() into an own function get_boot_device().
+Before this patch, the last LMB [0xde000000-0xdfffffff] is duplicated:
+...
+lmb_dump_all:nnn
+ memory.cnt = 0x1 / max = 0x2
+ memory[0]      [0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
+ reserved.cnt = 0x6 / max = 0x10
+ reserved[0]    [0x10000000-0x10045fff], 0x00046000 bytes flags: 4
+ reserved[1]    [0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
+ reserved[2]    [0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
+ reserved[3]    [0xdaadf000-0xdfffffff], 0x05521000 bytes flags: 0
+ reserved[4]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
+ reserved[5]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
+...
 
-Applied to u-boot/master now (but I seem to have missed this in b4 ty),
-thanks.
+After this patch:
+...
+lmb_dump_all:
+ memory.cnt = 0x1 / max = 0x2
+ memory[0]      [0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
+ reserved.cnt = 0x5 / max = 0x10
+ reserved[0]    [0x10000000-0x10045fff], 0x00046000 bytes flags: 4
+ reserved[1]    [0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
+ reserved[2]    [0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
+ reserved[3]    [0xdaadf000-0xdfffffff], 0x05521000 bytes flags: 0
+ reserved[4]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
+...
 
---=20
-Tom
+Fixes: 59c0ea5df33f ("lmb: Add support of flags for no-map properties")
 
---vXWN8JFAXrvoP55q
-Content-Type: application/pgp-signature; name="signature.asc"
+Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+---
 
------BEGIN PGP SIGNATURE-----
+(no changes since v1)
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYZSrIACgkQFHw5/5Y0
-tywhpwv9EkFvq2vUuKgTBk8CoivF6T/CTDJPuzvQNveNW4asehj91xgd1P7p5BG2
-tA92pTxgyQJBqDMW53nQKHczflOQFtYDvS4iNj9FuOv+xJM4tlArqYYllhiSfcVm
-Qq9UZMZe+7uQS00/nOycI3Y1WibalEqo+YJ0xrbPisMiUjbPxK5UYA3keiUQDrwY
-+VLXqTMN1mPVcGzpKKjDsE0ekTc0zmVhTg81w69KBQo274Fr1hQMjhOxdooxXGvi
-ydLMRqM/fqTvZ7h8g7If9CCLFT1blhgj447JNhdBnhFmA8SQE5tisYsj0hay1gI6
-rNbhuygcVyqG8FIQ24vhQHQ/oY0jAmBg+DFch75a9k/WKxSf/hcMp5gY1IOGJcfT
-ummRwAdH8rj2vMcZtY89Zp56dokamHIS9AuwZ+kxyKayIeKz3sNBFh0jtXWCLDad
-nKdJX2emTVIvoyfpfkg+qDb8hbSIe7S9c1Xp85uAupsv6+vSeXe/g8zVrdCy56sx
-KEvFvGyv
-=sOLG
------END PGP SIGNATURE-----
+ lib/lmb.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
---vXWN8JFAXrvoP55q--
+diff --git a/lib/lmb.c b/lib/lmb.c
+index 44f98205310..b6afb731440 100644
+--- a/lib/lmb.c
++++ b/lib/lmb.c
+@@ -285,14 +285,14 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
+ 		adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+ 		if (adjacent > 0) {
+ 			if (flags != rgnflags)
+-				break;
++				continue;
+ 			rgn->region[i].base -= size;
+ 			rgn->region[i].size += size;
+ 			coalesced++;
+ 			break;
+ 		} else if (adjacent < 0) {
+ 			if (flags != rgnflags)
+-				break;
++				continue;
+ 			rgn->region[i].size += size;
+ 			coalesced++;
+ 			break;
+-- 
+2.25.1
+
