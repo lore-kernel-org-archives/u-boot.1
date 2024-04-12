@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACBC7C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 20:26:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F592C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 20:26:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EEED881C2;
+	by phobos.denx.de (Postfix) with ESMTP id 7DDE9881D0;
 	Fri, 12 Apr 2024 22:26:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="J3TIs7lT";
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="cncCLPk/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2CA8A8800D; Fri, 12 Apr 2024 22:26:25 +0200 (CEST)
-Received: from mta-65-227.siemens.flowmailer.net
- (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ id 328B088020; Fri, 12 Apr 2024 22:26:25 +0200 (CEST)
+Received: from mta-65-226.siemens.flowmailer.net
+ (mta-65-226.siemens.flowmailer.net [185.136.65.226])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B1298802D
+ by phobos.denx.de (Postfix) with ESMTPS id C793688120
  for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 22:26:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
-Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
- 20240412202620ad3fb8d703e17cf33d for <u-boot@lists.denx.de>;
+Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
+ 2024041220262193138d676588a380f1 for <u-boot@lists.denx.de>;
  Fri, 12 Apr 2024 22:26:21 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=alexander.sverdlin@siemens.com;
  h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=TptvjDK6304vfY4bTji66U8hdyZ/wkCaFvaW3jpxQAg=;
- b=J3TIs7lTqVfczidbCgKkxvoJmeas+hhPsvdkN8Du3T/Qv02IowQQDrpXTlz+yYrqnL/lJI
- ghsgFHVNeDc5QWuj3/f4hBeEnihw6jzdBvBX2Z1cjg+ey+DvDIcLFQb4tQZUAX6NiQNPx+GP
- JFKzqKGBRNfgwPLDDbxbSt3pYXQGM=;
+ bh=yekPJOmbRPtEn5PeQAQumefYvGncnJaumvYYPqXh9UI=;
+ b=cncCLPk/tecbsiyebcNfhmy95CwO2QQhUAWHbQEXNU7DXIYAhdp6CQ0oRAkhAHiVcN332C
+ x1vesMK2L1/02132xP1yJrKckrdOd8Hc0g4FwQaXSpiF5geVQh4I0UR2RSMFHo+iOfyU9+qk
+ s0eos16zJJv9LOnjYUjnkjK60Ph2Q=;
 From: "A. Sverdlin" <alexander.sverdlin@siemens.com>
 To: u-boot@lists.denx.de
 Cc: Felipe Balbi <felipe.balbi@linux.intel.com>, Marek Vasut <marex@denx.de>,
  Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Nishanth Menon <nm@ti.com>,
  Sjoerd Simons <sjoerd@collabora.com>,
  Alexander Sverdlin <alexander.sverdlin@siemens.com>
-Subject: [PATCH 1/6] usb: dwc3: gadget: combine return points into a single one
-Date: Fri, 12 Apr 2024 22:26:01 +0200
-Message-ID: <20240412202611.3565052-2-alexander.sverdlin@siemens.com>
+Subject: [PATCH 2/6] usb: dwc3: gadget: clear SUSPHY bit before ep cmds
+Date: Fri, 12 Apr 2024 22:26:02 +0200
+Message-ID: <20240412202611.3565052-3-alexander.sverdlin@siemens.com>
 In-Reply-To: <20240412202611.3565052-1-alexander.sverdlin@siemens.com>
 References: <20240412202611.3565052-1-alexander.sverdlin@siemens.com>
 MIME-Version: 1.0
@@ -69,62 +69,63 @@ X-Virus-Status: Clean
 
 From: Felipe Balbi <felipe.balbi@linux.intel.com>
 
-Upstream Linux commit c0ca324d09a0.
+Upstream Linux commit 2b0f11df84bb.
 
-dwc3_send_gadget_ep_cmd() had three return
-points. That becomes a pain to track when we need to
-debug something or if we need to add more code
-before returning.
+Synopsys Databook 2.60a has a note that if we're
+sending an endpoint command we _must_ make sure that
+DWC3_GUSB2PHY(n).SUSPHY bit is cleared.
 
-Let's combine all three return points into a single
-one just by introducing a local 'ret' variable.
+This patch implements that particular detail.
 
 Signed-off-by: Felipe Balbi <felipe.balbi@linux.intel.com>
 Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 ---
- drivers/usb/dwc3/gadget.c | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ drivers/usb/dwc3/gadget.c | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
 
 diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
-index 69d9fe40e2f87..17c19285f1c24 100644
+index 17c19285f1c24..8f6513752f085 100644
 --- a/drivers/usb/dwc3/gadget.c
 +++ b/drivers/usb/dwc3/gadget.c
-@@ -302,6 +302,7 @@ int dwc3_send_gadget_ep_cmd(struct dwc3 *dwc, unsigned ep,
+@@ -302,8 +302,25 @@ int dwc3_send_gadget_ep_cmd(struct dwc3 *dwc, unsigned ep,
  {
  	u32			timeout = 500;
  	u32			reg;
-+	int			ret = -EINVAL;
++
++	int			susphy = false;
+ 	int			ret = -EINVAL;
  
++	/*
++	 * Synopsys Databook 2.60a states, on section 6.3.2.5.[1-8], that if
++	 * we're issuing an endpoint command, we must check if
++	 * GUSB2PHYCFG.SUSPHY bit is set. If it is, then we need to clear it.
++	 *
++	 * We will also set SUSPHY bit to what it was before returning as stated
++	 * by the same section on Synopsys databook.
++	 */
++	reg = dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(0));
++	if (unlikely(reg & DWC3_GUSB2PHYCFG_SUSPHY)) {
++		susphy = true;
++		reg &= ~DWC3_GUSB2PHYCFG_SUSPHY;
++		dwc3_writel(dwc->regs, DWC3_GUSB2PHYCFG(0), reg);
++	}
++
  	dwc3_writel(dwc->regs, DWC3_DEPCMDPAR0(ep), params->param0);
  	dwc3_writel(dwc->regs, DWC3_DEPCMDPAR1(ep), params->param1);
-@@ -313,7 +314,8 @@ int dwc3_send_gadget_ep_cmd(struct dwc3 *dwc, unsigned ep,
- 		if (!(reg & DWC3_DEPCMD_CMDACT)) {
- 			dev_vdbg(dwc->dev, "Command Complete --> %d\n",
- 					DWC3_DEPCMD_STATUS(reg));
--			return 0;
-+			ret = 0;
-+			break;
- 		}
- 
- 		/*
-@@ -321,11 +323,15 @@ int dwc3_send_gadget_ep_cmd(struct dwc3 *dwc, unsigned ep,
- 		 * interrupt context.
- 		 */
- 		timeout--;
--		if (!timeout)
--			return -ETIMEDOUT;
-+		if (!timeout) {
-+			ret = -ETIMEDOUT;
-+			break;
-+		}
- 
+ 	dwc3_writel(dwc->regs, DWC3_DEPCMDPAR2(ep), params->param2);
+@@ -331,6 +348,12 @@ int dwc3_send_gadget_ep_cmd(struct dwc3 *dwc, unsigned ep,
  		udelay(1);
  	} while (1);
+ 
++	if (unlikely(susphy)) {
++		reg = dwc3_readl(dwc->regs, DWC3_GUSB2PHYCFG(0));
++		reg |= DWC3_GUSB2PHYCFG_SUSPHY;
++		dwc3_writel(dwc->regs, DWC3_GUSB2PHYCFG(0), reg);
++	}
 +
-+	return ret;
+ 	return ret;
  }
  
- static dma_addr_t dwc3_trb_dma_offset(struct dwc3_ep *dep,
 -- 
 2.44.0
 
