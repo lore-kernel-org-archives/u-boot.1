@@ -4,82 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB681C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 18:57:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAB78C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 19:06:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FC7288080;
-	Fri, 12 Apr 2024 20:57:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 48F78881C8;
+	Fri, 12 Apr 2024 21:06:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PbdtuKMF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QZj4jF+L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E83D0881FA; Fri, 12 Apr 2024 20:57:45 +0200 (CEST)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id 9AB18881CD; Fri, 12 Apr 2024 21:06:20 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2DBCA88020
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 20:57:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 832E9881BB
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 21:06:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-2d87660d5dbso11418551fa.3
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 11:57:43 -0700 (PDT)
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-41804f10c68so4721545e9.3
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 12:06:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712948262; x=1713553062; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :to:from:subject:user-agent:mime-version:date:message-id:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xomxgqf/FBpGVvSEdeZMxCFACsbVXX9hSEObY+NCTCM=;
- b=PbdtuKMFn495BXGqfoUJVGStvk67610EXmJC9ejCsmZ2zZYk9bkUH/aI0l+Nu279/3
- Tp+0TeU7cjI4Y1yQW7xoaLZ5Mza/o+GoPCY2GAqzlJejVUiKpo2P6PD023idlveSNoZJ
- 4eb5i426W1kNGz8625G91Q3j9iPdGU522/kR4ByyRfyQtnpndmpeWeCCjVHUUvT7rok/
- H+C1Iu5rOVEXYOpCO8Ij6CzEfs/7Rag1d4s1BDESQ1eUv/d+rBbTmqKlkw9M+THVg34b
- jYtQbO9TRqetYClhFWdTch6hDcnk4GupFCATnPa0wKZCrSQNYmW4VMY20a7T42QHo/ke
- G8sA==
+ d=linaro.org; s=google; t=1712948778; x=1713553578; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=QB/8ep8thFQQU4ta2bSV2+q9DJBmJSoE10CldHQqNHI=;
+ b=QZj4jF+LjFKwvpu1bxFNz/iS7yaSLTp2sekQhw1URgX3roPuMLk4Yp+XiG1egpQfMB
+ R9cvge1uCM+yMBsrlwT+uE3xUjlLF5h29O/0HVycw77bVJCI6H4PIzvtY3UoaISCtuJR
+ zLImUahrJ+z1Asb/+GujM3ZEuaHL8+7ZxchoQTB0qWpmza1VACuMhhdB4EfvTb4X7spr
+ nOUtihAyTtuglxpwj55iVXOkoNq4gNiE7aou9A3f0kdpT5L5SkPOZe2qMOV1wBWiEPCg
+ R+uKgi7PqZar2UTBBzAogRmSKj5NZk5J1Z4JYM9d0Unb9vQX0yPAvHoCPo9eZ4nLgnN+
+ ykZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712948262; x=1713553062;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :to:from:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xomxgqf/FBpGVvSEdeZMxCFACsbVXX9hSEObY+NCTCM=;
- b=tUps80Jvhrozf2BK5zcdqNQOAoHY8GS5mRPUFqvUeixMX1f0V9EU5CqnySaRxSXRcB
- TpHaEsLaj9W13JrTgZdjLTBiDSCjAC58GZOyec+dQ9WXq91BzD+VhODYQm6MPTM4juR6
- d7IlyT7ZDEcB5myPTF0SghQ/nzlrMJxuE7ElxW9+c7sVIO4w3tsQhoVV5mGsixbT+B2s
- i05fhvmNXyz9zuNTdi6LYRT1injWl0wpjPb4IJGVnU952l9o2NKE2Bqpqj5rMDASrf41
- Z1q9j5DEL8wua3pGN5H+r0CL7ft3k+FHxpKaPCmhjtIjxdszgQxTJhzTdn6ZW/xZq1bU
- Q6lA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXwkQxJ4IA7ibZ/pv+Wr7Zakce9bKoyy5DNRcHXIwGLFHGjBLp4MNr3V4pLf9NsfEINm2L9ZKplJnNlIq2vn8/RS4iTOA==
-X-Gm-Message-State: AOJu0YxmgnQXKhskH+K8BzHns0XQoHOdOp0ZsZ81GV8UpzR4uJ9UhjV2
- OsKt8ev2PLH+ZmIh/Pluk0yGl8NFLx3yA5PSj8pidGEN3PnUuo0hUhZAPG3VDnzVON5seQ7SAFM
- K6aI=
-X-Google-Smtp-Source: AGHT+IGh7N+bRqWsCtlB6DQxV3O38vS9t3sXLZWd+4Es24zZuhILNSIXYahGzVp9znbI9W6GzBLIFg==
-X-Received: by 2002:a2e:3c05:0:b0:2d8:abb2:6f6e with SMTP id
- j5-20020a2e3c05000000b002d8abb26f6emr2091055lja.21.1712948262211; 
- Fri, 12 Apr 2024 11:57:42 -0700 (PDT)
-Received: from [192.168.114.140] (92.40.204.173.threembb.co.uk.
+ d=1e100.net; s=20230601; t=1712948778; x=1713553578;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=QB/8ep8thFQQU4ta2bSV2+q9DJBmJSoE10CldHQqNHI=;
+ b=LWOJdjiEZtujFt2FOoYWDp5mTwOt9qWfa9xg3MjacqRTzQugmKB4j3fr77/CaiLo0I
+ 3aw7on5P+0hEYlTij8XW+2R26WK0yGTvNupj3pAX7BRKOaLyGzdwOamnipqZEjZp0xB4
+ 7NtFJvAeQpmLsRqldVUcIeQnzWLsOVFhp0Z47ravDT2dQalqb3zvw3NiV45RwYKBpUIZ
+ lsy387htf/tLXAjhWp9Tqdm0oCeGDJkDT7g/+ji3aE0nDzMtNnb2k9vbEKRVWzKr1Ow/
+ d368QxEnZNeSD8DX8PVW1KH/AJyYVZU5YyEhEjKMagklsM6/Vyr9mZKMcNcgyAROiaes
+ qJUg==
+X-Gm-Message-State: AOJu0YxneTBWU9RmqMW2BmMlS1egmaWHvZ5stWTKElIG6kHu4f3lyeeM
+ LQ2MUA8Uqvxmh4JtBgfRr4++Z4ugnTOqwuwlU0o+0q+PVxZtRKH9CWpWS90d5DU=
+X-Google-Smtp-Source: AGHT+IFsOZbxWiRPoKB+eOPEITuhNqOxwzshYItGOQHsXMMa1D32LHjrOMdhtsf3uimD80gnLS55dA==
+X-Received: by 2002:a05:6000:a8d:b0:343:7ed6:765b with SMTP id
+ dh13-20020a0560000a8d00b003437ed6765bmr2399361wrb.39.1712948777969; 
+ Fri, 12 Apr 2024 12:06:17 -0700 (PDT)
+Received: from cymric.caleb.rex.connolly.tech (92.40.204.173.threembb.co.uk.
  [92.40.204.173]) by smtp.gmail.com with ESMTPSA id
- z20-20020a05600c0a1400b004180e7b5141sm1581081wmp.36.2024.04.12.11.57.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Apr 2024 11:57:41 -0700 (PDT)
-Message-ID: <fd804a81-c8d4-466b-bc48-f9a21a242c03@linaro.org>
-Date: Fri, 12 Apr 2024 20:57:36 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] zfs: Fix unaligned read of uint64
+ z15-20020adfe54f000000b00345c2f84d5asm4838062wrm.10.2024.04.12.12.06.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Apr 2024 12:06:17 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: mwleeds@mailtundra.com, u-boot@lists.denx.de
-References: <20240407014743.13872-1-mwleeds@mailtundra.com>
- <20240407014743.13872-4-mwleeds@mailtundra.com>
- <16d96fa3-4d95-4bfa-beac-6585426dc703@linaro.org>
-Content-Language: en-US
-In-Reply-To: <16d96fa3-4d95-4bfa-beac-6585426dc703@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Artur Rojek <artur@conclusive.pl>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Chanho Park <chanho61.park@samsung.com>,
+ Christian Taedcke <christian.taedcke@weidmueller.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Shiji Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] event: add an event for livetree fixups
+Date: Fri, 12 Apr 2024 20:04:02 +0100
+Message-ID: <20240412190542.1576801-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.44.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,152 +96,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Introduce a new EVT_OF_LIVE event to allow for the livetree to be
+modified before dm_init_and_scan(). Boards can perform fixups here to
+handle incompatibilities between U-Boot drivers and upstream DT.
 
+This will be used by Qualcomm platforms in future patches to enable
+setting the dr_mode property if the board doesn't provide one. This has to be
+set before dm_init_and_scan() is called as this property effects the binding of
+drivers.
 
-On 12/04/2024 20:50, Caleb Connolly wrote:
-> Hi Phaedrus,
-> 
-> On 07/04/2024 03:47, mwleeds@mailtundra.com wrote:
->> Without this patch, when trying to boot zfs using U-Boot on a Jetson TX2
->> NX (which is aarch64), I get a CPU reset error like so:
->>
->> "Synchronous Abort" handler, esr 0x96000021
->> elr: 00000000800c9000 lr : 00000000800c8ffc (reloc)
->> elr: 00000000fff77000 lr : 00000000fff76ffc
->> x0 : 00000000ffb40f04 x1 : 0000000000000000
->> x2 : 000000000000000a x3 : 0000000003100000
->> x4 : 0000000003100000 x5 : 0000000000000034
->> x6 : 00000000fff9cc6e x7 : 000000000000000f
->> x8 : 00000000ff7f84a0 x9 : 0000000000000008
->> x10: 00000000ffb40f04 x11: 0000000000000006
->> x12: 000000000001869f x13: 0000000000000001
->> x14: 00000000ff7f84bc x15: 0000000000000010
->> x16: 0000000000002080 x17: 00000000001fffff
->> x18: 00000000ff7fbdd8 x19: 00000000ffb405f8
->> x20: 00000000ffb40dd0 x21: 00000000fffabe5e
->> x22: 000000ea77940000 x23: 00000000ffb42090
->> x24: 0000000000000000 x25: 0000000000000000
->> x26: 0000000000000000 x27: 0000000000000000
->> x28: 0000000000bab10c x29: 00000000ff7f85f0
->>
->> Code: d00001a0 9103a000 94006ac6 f9401ba0 (f9400000)
->> Resetting CPU ...
->>
->> This happens when be64_to_cpu() is called on a value that exists at a
->> memory address that's 4 byte aligned but not 8 byte aligned (e.g. an
->> address ending in 04). The call stack where that happens is:
->> check_pool_label() ->
->> zfs_nvlist_lookup_uint64(vdevnvlist, ZPOOL_CONFIG_ASHIFT,...) ->
->> be64_to_cpu()
-> 
-> This is very odd, aarch64 doesn't generally have these restrictions. I 
-> got a bit nerdsniped when I saw this so I did some digging and figured 
-> this:
-> 
-> 1. Your abort exception doesn't include the FAR_ELx register (which 
-> should contain the address that was being accessed when the abort 
-> occured). This means your board is running in EL3.
-> 2. It turns out there is an "A" flag in the SCTLR_ELx register, when set 
-> this flag causes a fault when trying to load from an address that isn't 
-> aligned to the size of the data element (see "A, bit" on 
-> https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-Registers/SCTLR-EL3--System-Control-Register--EL3-
-> 
-> I'm not sure who's in the "wrong" here, maybe the driver should avoid 
-> unaligned accesses? But then again, I don't think you should be running 
-> a ZFS driver in EL3.
-> 
-> I'm not familiar with the Jetson Nano, but maybe there's a documented 
-> way to run U-Boot so that it isn't executing in EL3? Or if not you could 
-> also try unsetting the A flag.
-> 
-> If this really is something to fix in the driver, I don't think 
-> hotpatching every unaligned access with a malloc() is the right solution.
-> 
->>
->> Signed-off-by: Phaedrus Leeds <mwleeds@mailtundra.com>
->> Tested-by: Phaedrus Leeds <mwleeds@mailtundra.com>
-> 
-> regarding your question about re-sending to remove these tags, I'd say 
-> probably yes, and especially if you're going to send a new revision anyway.
-> 
-> fwiw you seem to have gotten pretty much everything else about the patch 
-> submission process spot on :)
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+ common/board_r.c |  1 +
+ common/event.c   |  2 ++
+ include/event.h  | 12 ++++++++++++
+ 3 files changed, 15 insertions(+)
 
-Oh, by the way, instead of Tested-by tags, can you add Fixes tags on the 
-patches that contain bug fixes?
-
-In case you're unfamiliar, you can generate them like this:
-
-$ git config --global pretty.fixes = "Fixes: %h (\"%s\")"
-$ git log --oneline --pretty=fixes <SHA>
-
-Probably for all of yours that will be:
-
-Fixes: 4d3c95f5ea7c ("zfs: Add ZFS filesystem support")
-> 
-> Kind regards,
->> ---
->>   fs/zfs/zfs.c | 18 ++++++++++++++++++
->>   1 file changed, 18 insertions(+)
->>
->> diff --git a/fs/zfs/zfs.c b/fs/zfs/zfs.c
->> index 61d58fce68..9a50deac18 100644
->> --- a/fs/zfs/zfs.c
->> +++ b/fs/zfs/zfs.c
->> @@ -1552,35 +1552,53 @@ nvlist_find_value(char *nvlist, char *name, 
->> int valtype, char **val,
->>               if (nelm_out)
->>                   *nelm_out = nelm;
->>               return 1;
->>           }
->>           nvlist += encode_size;    /* goto the next nvpair */
->>       }
->>       return 0;
->>   }
->> +int is_word_aligned_ptr(void *ptr) {
->> +    return ((uintptr_t)ptr & (sizeof(void *) - 1)) == 0;
->> +}
->> +
->>   int
->>   zfs_nvlist_lookup_uint64(char *nvlist, char *name, uint64_t *out)
->>   {
->>       char *nvpair;
->>       size_t size;
->>       int found;
->>       found = nvlist_find_value(nvlist, name, DATA_TYPE_UINT64, 
->> &nvpair, &size, 0);
->>       if (!found)
->>           return 0;
->>       if (size < sizeof(uint64_t)) {
->>           printf("invalid uint64\n");
->>           return ZFS_ERR_BAD_FS;
->>       }
->> +    /* On arm64, calling be64_to_cpu() on a value stored at a memory 
->> address
->> +     * that's not 8-byte aligned causes the CPU to reset. Avoid that 
->> by copying the
->> +     * value somewhere else if needed.
->> +     */
->> +    if (!is_word_aligned_ptr((void *)nvpair)) {
->> +        uint64_t *alignedptr = malloc(sizeof(uint64_t));
->> +        if (!alignedptr)
->> +            return 0;
->> +        memcpy(alignedptr, nvpair, sizeof(uint64_t));
->> +        *out = be64_to_cpu(*alignedptr);
->> +        free(alignedptr);
->> +        return 1;
->> +    }
->> +
->>       *out = be64_to_cpu(*(uint64_t *) nvpair);
->>       return 1;
->>   }
->>   char *
->>   zfs_nvlist_lookup_string(char *nvlist, char *name)
->>   {
->>       char *nvpair;
->>       char *ret;
->>       size_t slen;
-> 
-
+diff --git a/common/board_r.c b/common/board_r.c
+index da0b80f24ff0..7d2da51193ab 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -217,8 +217,9 @@ static int initr_of_live(void)
+ 				    (struct device_node **)gd_of_root_ptr());
+ 		bootstage_accum(BOOTSTAGE_ID_ACCUM_OF_LIVE);
+ 		if (ret)
+ 			return ret;
++		event_notify_null(EVT_OF_LIVE);
+ 	}
+ 
+ 	return 0;
+ }
+diff --git a/common/event.c b/common/event.c
+index 16c2ba6cc921..db32ea0d06f8 100644
+--- a/common/event.c
++++ b/common/event.c
+@@ -45,8 +45,10 @@ const char *const type_name[] = {
+ 
+ 	/* fdt hooks */
+ 	"ft_fixup",
+ 
++	"of_live",
++
+ 	/* main loop events */
+ 	"main_loop",
+ };
+ 
+diff --git a/include/event.h b/include/event.h
+index a8f046da3c32..c6436c07d16f 100644
+--- a/include/event.h
++++ b/include/event.h
+@@ -144,8 +144,20 @@ enum event_t {
+ 	 * images fail.
+ 	 */
+ 	EVT_FT_FIXUP,
+ 
++	/**
++	 * @EVT_OF_LIVE:
++	 * This event is triggered when using CONFIG_OF_LIVE immediately after
++	 * the live tree has been created. It has no parameters, the live tree
++	 * can be accessed from gd->of_root, or using the of_* helpers.
++	 *
++	 * This is intended to be used for performing board specific fixups
++	 * on the tree before it is used by U-Boot. It is much more efficient
++	 * to access and modify than the FDT.
++	 */
++	EVT_OF_LIVE,
++
+ 	/**
+ 	 * @EVT_MAIN_LOOP:
+ 	 * This event is triggered immediately before calling main_loop() which
+ 	 * is the entry point of the command line. Its parameter is NULL.
 -- 
-// Caleb (they/them)
+2.44.0
+
