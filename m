@@ -4,78 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE1FC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 22:00:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E6A2C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 22:59:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8321C881C9;
-	Fri, 12 Apr 2024 23:59:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D31087D74;
+	Sat, 13 Apr 2024 00:59:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=peacevolution.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XHjWNkqU";
+	dkim=pass (1024-bit key; unprotected) header.d=peacevolution.org header.i=@peacevolution.org header.b="iqQ/eQ1P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 553A288229; Fri, 12 Apr 2024 23:59:39 +0200 (CEST)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4484087ED8; Sat, 13 Apr 2024 00:54:29 +0200 (CEST)
+Received: from a.peacevolution.org (a.peacevolution.org [206.189.193.133])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C63BC88211
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 23:59:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89C1B87D64
+ for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 00:54:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=peacevolution.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-1e3f17c64daso11335835ad.3
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 14:59:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712959175; x=1713563975; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=GBX5Zfg7THoRqAnb/lutndw2wzNo54hBAAJqHPjo55w=;
- b=XHjWNkqULYM2/YO8aPLnJ6DO0BVeH4+uC6Ri9Tfqq4G83Pb+rVEkH48iAdC/S4eLgS
- JFuuGkDvYCczHBjpQdPAJ7A3nGGhVSN7P3vWcjI7ik3FC2EYH9kn42TpIlWxNVdrFgO8
- YqwHY3FxxAFJGo7Pi8QqudiGy0Lu0TjYUdI6w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712959175; x=1713563975;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=GBX5Zfg7THoRqAnb/lutndw2wzNo54hBAAJqHPjo55w=;
- b=NQtMvVkPGNu7j6puih6OKxMEVu9e/YrNCB4lGJZefH0N1FeYt8qg6GUsya1vuzAT30
- nHxzakZi7dTs2MWvIhNgPNygYqKQK6o/k090xFLGh/7wxl/oLhMdBtGZK57LaV2nMdEn
- PD0O1m8Hqv0izQXJLkOtCO9wcX5fWbYvx2h44s7uhjzkA33lpEau8POwc6A35xxX4her
- g1tdiJgS+zQJducTBZyZPzVPFZXlzWKF0IZsKPRrT8z9gExkx5HEqYBCfAAHBeqDn8xb
- CJR1FMOUahV40hAFWe6xrb2KwXEHmupcFGCHr4kh2zwZx3UW5MNIgz7jM5tubFCZz1Cj
- V2FQ==
-X-Gm-Message-State: AOJu0YxKXqmVZ3RiM8RtnTxwBWGDctoXYaNeNkZ3yv435MSicRMdo3YP
- gzF/JerMoM7UXHfp4meofTO3aVnF+xQyQ7U9B4UCX/AQ/FjIC8k9X8zORcNS+1H//o7+AlD5ZO/
- 4SsiG+A==
-X-Google-Smtp-Source: AGHT+IGTRKw5UA9LEng4eAOH2V3ll1IkH4rVnKC7VipAXpmXfcbDMQjnh037dyDLss/GruQCLqtS7A==
-X-Received: by 2002:a17:902:fc44:b0:1e1:1d5:f857 with SMTP id
- me4-20020a170902fc4400b001e101d5f857mr4206664plb.34.1712959174971; 
- Fri, 12 Apr 2024 14:59:34 -0700 (PDT)
-Received: from [127.0.1.1] ([2806:102e:18:245e:b648:93e1:5c61:68a3])
- by smtp.gmail.com with ESMTPSA id
- kw7-20020a170902f90700b001e45240eca4sm3472958plb.196.2024.04.12.14.59.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Apr 2024 14:59:34 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, joe.hershberger@ni.com, 
- rfried.dev@gmail.com, Jim Liu <jim.t90615@gmail.com>
-Cc: u-boot@lists.denx.de, Parvathi Bhogaraju <pbhogaraju@microsoft.com>
-In-Reply-To: <20240408085017.2849211-1-JJLIU0@nuvoton.com>
-References: <20240408085017.2849211-1-JJLIU0@nuvoton.com>
-Subject: Re: [PATCH v1] net: designware: Pass all multicast frames in
- designware driver
-Message-Id: <171295917369.1044279.15563244192142114449.b4-ty@konsulko.com>
-Date: Fri, 12 Apr 2024 15:59:33 -0600
+ spf=pass smtp.mailfrom=aren@peacevolution.org
+Received: from authenticated-user (PRIMARY_HOSTNAME [PUBLIC_IP])
+ by a.peacevolution.org (Postfix) with ESMTPA id 5550B45BEB;
+ Fri, 12 Apr 2024 22:54:24 +0000 (UTC)
+Date: Fri, 12 Apr 2024 18:54:21 -0400
+From: Aren <aren@peacevolution.org>
+To: John Watts <contact@jookia.org>
+Cc: u-boot@lists.denx.de, Sam Edwards <cfsworks@gmail.com>, 
+ Samuel Holland <samuel@sholland.org>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH] usb: musb-new: sunxi: support usage with DM_USB_GADGET
+Message-ID: <ewekir7xqzojtzn56vtv3tw5u7rdrywewmowbhrd6kjm7efdo5@wrin6nf5vmjc>
+References: <20231231203930.1955090-1-aren@peacevolution.org>
+ <ZheHOZebMGze5X09@titan>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <ZheHOZebMGze5X09@titan>
+X-Spamd-Bar: /
+Authentication-Results: auth=pass smtp.auth=aren@peacevolution.org
+ smtp.mailfrom=aren@peacevolution.org
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=peacevolution.org;
+ s=dkim; t=1712962465;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references;
+ bh=LFHEt/U8RIgglC4yLDShfBXTJ4Dh19gLZiv47PZok7s=;
+ b=iqQ/eQ1P66/HrMW1jhEXZYazmuA6MZv3c2soiqTK+WR9mN4UCRRGeTD0Fu5aPfpXcbCs+W
+ ZqLW4vnFkVyg6DRYcpB/raRMAZWv9QIadvJatuj3dysqh8R1u9pFVtHT1dVNB3Qda5l5sf
+ rmBfui61V+pWvfjT4UaH9F8Vcsl44wA=
+X-Mailman-Approved-At: Sat, 13 Apr 2024 00:59:41 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,16 +69,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 08 Apr 2024 16:50:17 +0800, Jim Liu wrote:
-
-> Allowing multicast packets is required for IPv6 neighbor discovery
-> protocol.
+On Thu, Apr 11, 2024 at 04:46:17PM +1000, John Watts wrote:
+> On Sun, Dec 31, 2023 at 03:38:37PM -0500, Aren Moynihan wrote:
+> > Add support for building the sunxi-musb driver with DM_USB_GADGET
+> > including adding a separate IRQ handling function and registering the
+> > driver with the musb system differently.
 > 
+> Hi there,
 > 
+> Were you aware of this similar patch?
+> 
+> https://lore.kernel.org/u-boot/20230608195631.55364-1-CFSworks@gmail.com/
+> 
+> If not you might want to test it and compare it.
+> 
+> John.
 
-Applied to u-boot/master, thanks!
+I was not aware of that patch, it looks like it does the same thing as
+this one, but without some of the bugs. When comparing with it I
+realized that my dm_usb_gadget_handle_interrupts function is just plain
+wrong.
 
--- 
-Tom
+I'll try to find time to test it soon.
 
+Thanks for the link
+ - Aren
 
+> > The implementation of usb_gadget_register_driver from
+> > musb-new/musb_uboot.c only works when the gadget driver for the device
+> > has already been probed and has called musb_register. On the pinephone
+> > (using a allwinner a64 processor) this causes issues when trying to use
+> > usb gadget mode (such as from the ums command) and CONFIG_USB_ETHER is
+> > disabled.
+> > 
+> > The implementation of usb_gadget_register_driver provided when
+> > DM_USB_GADGET is enabled will probe the necessary drivers when it's
+> > called.
+> > 
+> > Without the patch, this is what the error condition looks like:
+> > => ums 0 mmc 1
+> > UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x3a3e000
+> > Controller uninitialized
+> > g_dnl_register: failed!, error: -6
+> > g_dnl_register failed
+> > 
+> > based on:
+> > commit 2e4865bc6486 ("musb-new: omap2430: fix compiling in DM_USB_GADGET config")
+> > 
+> > Signed-off-by: Aren Moynihan <aren@peacevolution.org>
