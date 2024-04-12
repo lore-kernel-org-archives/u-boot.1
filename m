@@ -4,66 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 390E1C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 09:55:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48062C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 09:55:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A58B9881CD;
-	Fri, 12 Apr 2024 11:55:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23675881F8;
+	Fri, 12 Apr 2024 11:55:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cDjxNxuX";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VR5HzBCc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E87CC881CA; Fri, 12 Apr 2024 11:55:13 +0200 (CEST)
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com
- [IPv6:2607:f8b0:4864:20::42c])
+ id B18F288080; Fri, 12 Apr 2024 11:55:18 +0200 (CEST)
+Received: from mail-oo1-xc2b.google.com (mail-oo1-xc2b.google.com
+ [IPv6:2607:f8b0:4864:20::c2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 743BC881D7
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 11:55:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FE81881FA
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 11:55:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-pf1-x42c.google.com with SMTP id
- d2e1a72fcca58-6ed2170d89fso1135127b3a.1
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 02:55:10 -0700 (PDT)
+Received: by mail-oo1-xc2b.google.com with SMTP id
+ 006d021491bc7-5aa27dba8a1so443815eaf.0
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 02:55:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712915709; x=1713520509; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1712915714; x=1713520514; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OQQFm53Y6noFLmaH27wGfZfjy164/8YCVf5iflGTt5w=;
- b=cDjxNxuXnlL67GGUoepR4ljQtz8Y7N73ys/iPsZF0hl/NR+kQm1JkLiU62fiYP8CHY
- 8QjG8psg23eZ5lhyvVKLy4UZJELhrAdGFw7S8Vg38BU1pg8xHMWng4mcw2g1nf7BWsXP
- 3uX6U4XtA7JeExFJE5ZkyFLiIXPennATyWJmQ8VqsDkLdR9mKW86rWd9foi1nAZ4UxnL
- bAJZn3z02vhC4wjQlHvxv9TRLCG55DZ0izmMEkaXcvOvxZy3Jkjs8HvurOL6GpCzDmyo
- Hfp/V7QOc7m9GIkjjpt1r+4835x2wrWynEVgvWDFTKRPWq73jUiQ1vJ9v8AKjLbur9LY
- n/5g==
+ bh=rK9W2AGbnOfcXupe9xf5SOw7PSXaV/7az0Pvlu4dzww=;
+ b=VR5HzBCcjkJBKPDmB0odWhX86oG1cYny9Cwzy6yK6BfHiUUmQb5cSDyM0WvKV8p4JN
+ IJPWshf0TjV9PH5oULYq/gRuiby9XIc5itbfR/FaSytssi3EvNq3GnGEuM5jV/bslupg
+ h1DToxhkbqz9Xrir8fdml4CAtAwAzdtZpGl7hz7Z4zGDk3MSuweif1VwOCPr/Lbac7qX
+ V4Q3SZUu2tjo0uMO4wgJQVfUZrBP3kn7eH7Hvzs6iwLmF2MH2qnLvSEIiD7ZtDT1uAcS
+ Jzy3iLrh8aqPhQKoBlJbBi7F6PdeDNQXqxJeS6duWAXEwJt+HbMhSm+a5DlU1zjeDVOM
+ 36dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712915709; x=1713520509;
+ d=1e100.net; s=20230601; t=1712915714; x=1713520514;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=OQQFm53Y6noFLmaH27wGfZfjy164/8YCVf5iflGTt5w=;
- b=VT+sW4spcw2wGAJRGrQKx50VVAw0Nt8HhQfiyWh7jdzNgNzRYGexHNsbBBsG/46kID
- Ah6ZsaSjh3Y4cg7I7AcbH6AM2tvmXZuSg3M1TKr0cXGw2BG7hvydx9+3lDHq8EXyXneS
- Ifrj5y5/AtpyVyRp1kHyPcmUx34/6ApFLw93HxlP5vJQ/SLPW5OKVIeVq7HNfAaZfSOQ
- XAbibltuudfGyw0vAjon9AAreuNpEMTAYfNjT+RVv5FyUOE7qNGpJtSyMxayH0DK5O4Y
- Tr2qkOzike7JZMSB7rpOwmBsrhCnoNxSI1AmScnsIStQoISi0d7chY9o0yOIJqoqFPed
- FUuQ==
-X-Gm-Message-State: AOJu0Yzyl66AzNwpdbU+AqsODpIncPSWwlzvHduv2pE7Hrn+4ot8BNht
- BucO4s7u733zt3EwcFYSuyOnWvQTOc91HVUl7ik+ZWVpL909x/bzG1KAy+m08MtxTD/53ZijcWT
- 9
-X-Google-Smtp-Source: AGHT+IFRy+5tUSiMSTJukyM3p9cJk4pDEaFFA8uYmi3El2vbtDvkgcWhnKUnzTET87lbO3bWGeHIeg==
-X-Received: by 2002:a05:6a21:3e07:b0:1a7:a422:7394 with SMTP id
- bk7-20020a056a213e0700b001a7a4227394mr2727697pzc.17.1712915708383; 
- Fri, 12 Apr 2024 02:55:08 -0700 (PDT)
+ bh=rK9W2AGbnOfcXupe9xf5SOw7PSXaV/7az0Pvlu4dzww=;
+ b=sueONotIGt+OaDLkgk/v1iRc/GLDmAr4CYPl9CdiKTGZFw+dzX8FlzI8NW4shuqh3q
+ iG95R3XWTo9OIi8R/Yqqrm9EqYC4IZyoxD59R1IzDNvzjG1i0jDS8Bz39nyXisZCUiSA
+ sGyOBNX3E4dODOMYBTNnS9vepR3V7WzccSn50WojFHtIYTjAZpWOAI9TcB+xAQ1NJEW4
+ x0YSQxF44/ISz90NmMoOrdTmg5uDGeS0VtbJOizvoC7MayLi3gT0ZCGcgR6HbkN2pG4L
+ 30J6UXxmd1G58+OhILY0vIYLR3rTcieoeXHazzNXmCk1jPvxvO3iCV1ltkQxdx5b1Q2d
+ UfDw==
+X-Gm-Message-State: AOJu0Yy7O+Z/8aWknkGQbquZdHz00p2FEDcLXf2q/ujOMJH4KrqW8kBh
+ VOApfr6IaC1T0FjvDFgVRGXLtMOuPkjlw8QQtc0RoN4jEaxpwlbvtZ2PnOmR4Yig0KDe4ZN5cKG
+ /
+X-Google-Smtp-Source: AGHT+IEUCCDsYKC/Vam04l7Luei99sk+RSG0+0a3VWHA3+AOuiGeXdp/CpqqK4OudO8+WPEknHjiFg==
+X-Received: by 2002:a05:6358:9786:b0:183:4d1d:dcae with SMTP id
+ f6-20020a056358978600b001834d1ddcaemr3131096rwb.28.1712915713734; 
+ Fri, 12 Apr 2024 02:55:13 -0700 (PDT)
 Received: from sumit-X1.. ([223.178.210.92]) by smtp.gmail.com with ESMTPSA id
- bn19-20020a056a00325300b006ed0b798f1fsm2534839pfb.119.2024.04.12.02.55.03
+ bn19-20020a056a00325300b006ed0b798f1fsm2534839pfb.119.2024.04.12.02.55.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Apr 2024 02:55:08 -0700 (PDT)
+ Fri, 12 Apr 2024 02:55:13 -0700 (PDT)
 From: Sumit Garg <sumit.garg@linaro.org>
 To: u-boot@lists.denx.de
 Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, trini@konsulko.com,
@@ -72,9 +72,9 @@ Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, trini@konsulko.com,
  jimmy.lalande@se.com, benjamin.missey@non.se.com,
  daniel.thompson@linaro.org, stephan@gerhold.net,
  Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v4 4/7] pinctrl: qcom: Add support for driving GPIO pins output
-Date: Fri, 12 Apr 2024 15:24:35 +0530
-Message-Id: <20240412095438.410570-5-sumit.garg@linaro.org>
+Subject: [PATCH v4 5/7] pinctrl: qcom: apq8016: Add GPIO pinctrl function
+Date: Fri, 12 Apr 2024 15:24:36 +0530
+Message-Id: <20240412095438.410570-6-sumit.garg@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240412095438.410570-1-sumit.garg@linaro.org>
 References: <20240412095438.410570-1-sumit.garg@linaro.org>
@@ -96,68 +96,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for driving the GPIO pins as output low or high.
+Add GPIO pinctrl function to enable driving GPIO pins as output low or
+high.
 
 Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 ---
- drivers/pinctrl/qcom/pinctrl-qcom.c | 25 ++++++++++++++++++++-----
- 1 file changed, 20 insertions(+), 5 deletions(-)
+ drivers/pinctrl/qcom/pinctrl-apq8016.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
-index 909e566acf5..e68971b37ff 100644
---- a/drivers/pinctrl/qcom/pinctrl-qcom.c
-+++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
-@@ -29,15 +29,24 @@ struct msm_pinctrl_priv {
- #define GPIO_CONFIG_REG(priv, x) \
- 	(qcom_pin_offset((priv)->data->pin_data.pin_offsets, x))
- 
--#define TLMM_GPIO_PULL_MASK GENMASK(1, 0)
--#define TLMM_FUNC_SEL_MASK GENMASK(5, 2)
--#define TLMM_DRV_STRENGTH_MASK GENMASK(8, 6)
--#define TLMM_GPIO_DISABLE BIT(9)
-+#define GPIO_IN_OUT_REG(priv, x) \
-+	(GPIO_CONFIG_REG(priv, x) + 0x4)
-+
-+#define TLMM_GPIO_PULL_MASK	GENMASK(1, 0)
-+#define TLMM_FUNC_SEL_MASK	GENMASK(5, 2)
-+#define TLMM_DRV_STRENGTH_MASK	GENMASK(8, 6)
-+#define TLMM_GPIO_OUTPUT_MASK	BIT(1)
-+#define TLMM_GPIO_OE_MASK	BIT(9)
-+
-+/* GPIO register shifts. */
-+#define GPIO_OUT_SHIFT		1
- 
- static const struct pinconf_param msm_conf_params[] = {
- 	{ "drive-strength", PIN_CONFIG_DRIVE_STRENGTH, 2 },
- 	{ "bias-disable", PIN_CONFIG_BIAS_DISABLE, 0 },
- 	{ "bias-pull-up", PIN_CONFIG_BIAS_PULL_UP, 3 },
-+	{ "output-high", PIN_CONFIG_OUTPUT, 1, },
-+	{ "output-low", PIN_CONFIG_OUTPUT, 0, },
+diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c b/drivers/pinctrl/qcom/pinctrl-apq8016.c
+index 1ee8b7db1a2..b14a8921af4 100644
+--- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
++++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
+@@ -29,6 +29,7 @@ static const char * const msm_pinctrl_pins[] = {
  };
  
- static int msm_get_functions_count(struct udevice *dev)
-@@ -90,7 +99,7 @@ static int msm_pinmux_set(struct udevice *dev, unsigned int pin_selector,
- 		return 0;
- 
- 	clrsetbits_le32(priv->base + GPIO_CONFIG_REG(priv, pin_selector),
--			TLMM_FUNC_SEL_MASK | TLMM_GPIO_DISABLE, func << 2);
-+			TLMM_FUNC_SEL_MASK | TLMM_GPIO_OE_MASK, func << 2);
- 	return 0;
- }
- 
-@@ -117,6 +126,12 @@ static int msm_pinconf_set(struct udevice *dev, unsigned int pin_selector,
- 		clrsetbits_le32(priv->base + GPIO_CONFIG_REG(priv, pin_selector),
- 				TLMM_GPIO_PULL_MASK, argument);
- 		break;
-+	case PIN_CONFIG_OUTPUT:
-+		writel(argument << GPIO_OUT_SHIFT,
-+		       priv->base + GPIO_IN_OUT_REG(priv, pin_selector));
-+		setbits_le32(priv->base + GPIO_CONFIG_REG(priv, pin_selector),
-+			     TLMM_GPIO_OE_MASK);
-+		break;
- 	default:
- 		return 0;
- 	}
+ static const struct pinctrl_function msm_pinctrl_functions[] = {
++	{"gpio", 0},
+ 	{"blsp_uart1", 2},
+ 	{"blsp_uart2", 2},
+ };
 -- 
 2.34.1
 
