@@ -4,47 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 878CDC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 20:26:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACBC7C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 20:26:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B842588020;
-	Fri, 12 Apr 2024 22:26:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1EEED881C2;
+	Fri, 12 Apr 2024 22:26:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="Q8u76rqo";
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="J3TIs7lT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5124881F8; Fri, 12 Apr 2024 22:26:23 +0200 (CEST)
-Received: from mta-65-226.siemens.flowmailer.net
- (mta-65-226.siemens.flowmailer.net [185.136.65.226])
+ id 2CA8A8800D; Fri, 12 Apr 2024 22:26:25 +0200 (CEST)
+Received: from mta-65-227.siemens.flowmailer.net
+ (mta-65-227.siemens.flowmailer.net [185.136.65.227])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5CCF87E4D
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 22:26:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B1298802D
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 22:26:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
- 202404122026205380a31e15cb814457 for <u-boot@lists.denx.de>;
- Fri, 12 Apr 2024 22:26:20 +0200
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
+ 20240412202620ad3fb8d703e17cf33d for <u-boot@lists.denx.de>;
+ Fri, 12 Apr 2024 22:26:21 +0200
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
  d=siemens.com; i=alexander.sverdlin@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=ExaRqNnoCUqk4zsDiRtsvxMAbtPhKkNUF3cYcPMdizw=;
- b=Q8u76rqoB3GhU/vlnAEa25yte5BOpmGR17FeZe2mUyTBF237/RpF7pZ1acgGyO9tieAyqU
- zagmWIokQuWVgtq8xLtlIuhSSfXoMofjWldcmQKZEpcd+XmT9Bt625m/2q0OZSFYopWU+kC7
- /7sg3VOIfU992f6goHxauqYMW3Aj8=;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
+ bh=TptvjDK6304vfY4bTji66U8hdyZ/wkCaFvaW3jpxQAg=;
+ b=J3TIs7lTqVfczidbCgKkxvoJmeas+hhPsvdkN8Du3T/Qv02IowQQDrpXTlz+yYrqnL/lJI
+ ghsgFHVNeDc5QWuj3/f4hBeEnihw6jzdBvBX2Z1cjg+ey+DvDIcLFQb4tQZUAX6NiQNPx+GP
+ JFKzqKGBRNfgwPLDDbxbSt3pYXQGM=;
 From: "A. Sverdlin" <alexander.sverdlin@siemens.com>
 To: u-boot@lists.denx.de
-Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Marek Vasut <marex@denx.de>, Felipe Balbi <felipe.balbi@linux.intel.com>,
+Cc: Felipe Balbi <felipe.balbi@linux.intel.com>, Marek Vasut <marex@denx.de>,
  Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Nishanth Menon <nm@ti.com>,
- Sjoerd Simons <sjoerd@collabora.com>
-Subject: [PATCH 0/6] usb: dwc3: gadget: avoid EP command timeout
-Date: Fri, 12 Apr 2024 22:26:00 +0200
-Message-ID: <20240412202611.3565052-1-alexander.sverdlin@siemens.com>
+ Sjoerd Simons <sjoerd@collabora.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Subject: [PATCH 1/6] usb: dwc3: gadget: combine return points into a single one
+Date: Fri, 12 Apr 2024 22:26:01 +0200
+Message-ID: <20240412202611.3565052-2-alexander.sverdlin@siemens.com>
+In-Reply-To: <20240412202611.3565052-1-alexander.sverdlin@siemens.com>
+References: <20240412202611.3565052-1-alexander.sverdlin@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Flowmailer-Platform: Siemens
@@ -65,67 +67,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+From: Felipe Balbi <felipe.balbi@linux.intel.com>
 
-While there are happy users who successfully have been using DFU on TI
-AM62x [1][2], there are also others who were not so lucky up to now [3].
+Upstream Linux commit c0ca324d09a0.
 
-I felt into latter category and was wondering why I observe this:
+dwc3_send_gadget_ep_cmd() had three return
+points. That becomes a pain to track when we need to
+debug something or if we need to add more code
+before returning.
 
---
-U-Boot SPL 2024.04-61876f393762 (Apr 11 2024 - 09:27:15 +0000)
-...
-Trying to boot from DFU
-dwc3-generic-peripheral usb@31000000: found 16 IN and 16 OUT endpoints
-dwc3-generic-peripheral usb@31000000: Event buf 81e0a200 dma 00000000x length -2115984896
-...
-dwc3-generic-peripheral usb@31000000: initializing ep0out
-...
-dwc3-generic-peripheral usb@31000000: initializing ep15in
-registering UDC driver []
-dwc3-generic-peripheral usb@31000000: gadget no-function data soft-connect
-dwc3-generic-peripheral usb@31000000: Enabling ep0out
-dwc3-generic-peripheral usb@31000000: Command Complete --> 0
-dwc3-generic-peripheral usb@31000000: failed to enable ep0out
-failed to start : -110
-g_dnl_register: failed!, error: -110
-g_dnl_register failedSPL: failed to boot from all boot devices
-### ERROR ### Please RESET the board ###
---
+Let's combine all three return points into a single
+one just by introducing a local 'ret' variable.
 
-It turned out the timeout happened in dwc3_send_gadget_ep_cmd() on
-DWC3_DEPCMD_SETEPCONFIG command and while the "timeout" has been increased
-in Linux from 500 to 1000 and later 5000, in my case it took more than
-77000 1us cycles to successfully complete.
+Signed-off-by: Felipe Balbi <felipe.balbi@linux.intel.com>
+Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+---
+ drivers/usb/dwc3/gadget.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
 
-It turns out that Linux DWC3 gadget code has been improved in the meanwhile
-to follow DWC3 programming guide more precisely. Porting the following
-Linux patches solved the timeout issue in U-Boot SPL on TI AM6232.
-
-Strictly speaking
-"usb: dwc3: gadget: Disable GUSB2PHYCFG.SUSPHY for End Transfer" and
-"usb: dwc3: gadget: properly check ep cmd" are not required to tackle
-the observed timeout, but it keeps the whole code block in sync with
-Linux v6.8.
-
-Felipe Balbi (4):
-  usb: dwc3: gadget: combine return points into a single one
-  usb: dwc3: gadget: clear SUSPHY bit before ep cmds
-  usb: dwc3: gadget: only resume USB2 PHY in <=HIGHSPEED
-  usb: dwc3: gadget: properly check ep cmd
-
-Thinh Nguyen (2):
-  usb: dwc3: gadget: Check ENBLSLPM before sending ep command
-  usb: dwc3: gadget: Disable GUSB2PHYCFG.SUSPHY for End Transfer
-
- drivers/usb/dwc3/core.h   |  2 ++
- drivers/usb/dwc3/gadget.c | 47 ++++++++++++++++++++++++++++++++++++---
- 2 files changed, 46 insertions(+), 3 deletions(-)
-
-1: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/configs/am62x_evm_r5_usbdfu_defconfig?h=09.02.00.009
-2: https://lore.kernel.org/all/20240112085317.1866449-1-sjoerd@collabora.com/T/
-3: https://e2e.ti.com/support/processors-group/processors/f/processors-forum/1162644/sk-am62-am62-android-fastboot-0-issue?tisearch=e2e-sitesearch&keymatch=SK-AM62
-
+diff --git a/drivers/usb/dwc3/gadget.c b/drivers/usb/dwc3/gadget.c
+index 69d9fe40e2f87..17c19285f1c24 100644
+--- a/drivers/usb/dwc3/gadget.c
++++ b/drivers/usb/dwc3/gadget.c
+@@ -302,6 +302,7 @@ int dwc3_send_gadget_ep_cmd(struct dwc3 *dwc, unsigned ep,
+ {
+ 	u32			timeout = 500;
+ 	u32			reg;
++	int			ret = -EINVAL;
+ 
+ 	dwc3_writel(dwc->regs, DWC3_DEPCMDPAR0(ep), params->param0);
+ 	dwc3_writel(dwc->regs, DWC3_DEPCMDPAR1(ep), params->param1);
+@@ -313,7 +314,8 @@ int dwc3_send_gadget_ep_cmd(struct dwc3 *dwc, unsigned ep,
+ 		if (!(reg & DWC3_DEPCMD_CMDACT)) {
+ 			dev_vdbg(dwc->dev, "Command Complete --> %d\n",
+ 					DWC3_DEPCMD_STATUS(reg));
+-			return 0;
++			ret = 0;
++			break;
+ 		}
+ 
+ 		/*
+@@ -321,11 +323,15 @@ int dwc3_send_gadget_ep_cmd(struct dwc3 *dwc, unsigned ep,
+ 		 * interrupt context.
+ 		 */
+ 		timeout--;
+-		if (!timeout)
+-			return -ETIMEDOUT;
++		if (!timeout) {
++			ret = -ETIMEDOUT;
++			break;
++		}
+ 
+ 		udelay(1);
+ 	} while (1);
++
++	return ret;
+ }
+ 
+ static dma_addr_t dwc3_trb_dma_offset(struct dwc3_ep *dep,
 -- 
 2.44.0
 
