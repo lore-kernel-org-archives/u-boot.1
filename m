@@ -4,78 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8272CC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 15:53:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47CB1C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 15:55:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 044FE881F6;
-	Fri, 12 Apr 2024 17:53:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id C4E1488020;
+	Fri, 12 Apr 2024 17:54:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mailtundra.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="uJqcR1yP";
+	dkim=pass (2048-bit key; secure) header.d=mailtundra.com header.i=@mailtundra.com header.b="anoxzftf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04677881FB; Fri, 12 Apr 2024 17:53:28 +0200 (CEST)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9E8B8881CA; Fri, 12 Apr 2024 17:54:56 +0200 (CEST)
+Received: from mail-4323.proton.ch (mail-4323.proton.ch [185.70.43.23])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F022881D7
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 17:53:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B7A487EA8
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 17:54:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mailtundra.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=4832881ce4=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43CDhas5027966; Fri, 12 Apr 2024 17:53:19 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- from:to:cc:subject:date:message-id:in-reply-to:references
- :mime-version:content-transfer-encoding:content-type; s=
- selector1; bh=Rii30/jm+NBxVQpfj+6GhRwGy8HkmvwzjoeA1pJGpE0=; b=uJ
- qcR1yPQ+j5lBbRMuFCSATKLJauEDhf7YDC1TKir+HKgToTvcqpc0x3lalXvWrMXZ
- 5aZSJgcgPONtT4XElOUWdK8ettRDNhvb54kX2vpMC4/S9/ephwD1nV5BfjvUuocW
- bLB5Fr85vLs8x8TC2NyBKZhF3vawbo0xsSH7HDVIDb7wiVytoWmakH7TuBbCsnmS
- CyeJlj0kKC/yaFwYzyyK1/rW3rkID68TLp+bOrIdZPKf6XwH+/DpvW7wgMXUvsX0
- ER97EZRgDJwS9/4qsocWGArpyWAAd/4DnnzfuSr75kgblMdGt5YpwFhW08y0Ew74
- AXXT7Id+pkl6DxSX+UaA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xbhbjfvtk-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 12 Apr 2024 17:53:19 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 7BF904004A;
- Fri, 12 Apr 2024 17:53:15 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 4313C21A22E;
- Fri, 12 Apr 2024 17:53:15 +0200 (CEST)
-Received: from localhost (10.252.26.170) by SHFDAG1NODE1.st.com (10.75.129.69)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 12 Apr
- 2024 17:53:14 +0200
-From: Patrice Chotard <patrice.chotard@foss.st.com>
-To: <u-boot@lists.denx.de>
-CC: Patrice CHOTARD <patrice.chotard@foss.st.com>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Kumar Gala
- <galak@kernel.crashing.org>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH v2 2/2] lmb: Fix adjacent region merge in
- lmb_add_region_flags()
-Date: Fri, 12 Apr 2024 17:53:06 +0200
-Message-ID: <20240412155307.735631-2-patrice.chotard@foss.st.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240412155307.735631-1-patrice.chotard@foss.st.com>
-References: <20240412155307.735631-1-patrice.chotard@foss.st.com>
+ spf=pass smtp.mailfrom=mwleeds@mailtundra.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailtundra.com;
+ s=protonmail2; t=1712937292; x=1713196492;
+ bh=dNZlZkubsa0f6Kp+PhZ8t04voLPR2TpBB3cpK4xlAuo=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=anoxzftf9395AWNcweVXqU7q1JgO+h1+PADDb5KS5xx//Rk6GFoS7mxbVgk3/aOv2
+ t0oFJYnQRnZ/u3ftRIPzYhCG05VXVhfwJrD6jXKsopCsDt7rDDJT7tvJB9+b1OT5xZ
+ p0ls3nbocX0HjWRGfjvorzU87QHv18jkCcNcXYxNpCbgNvYu9XWNy5pgSzdO99T+HD
+ +Dy8aPtHGigS0gLYUwEO5E53XoozyQnodyZgt5VzfuPTKB0bxmxjAsCI7BynGAhzzH
+ g/twTrSMHwlsAi7Z7HWkSoQWy8g17K1a82Pacbf1lSyy28j3Cc2/4bOACDbwF3cBuE
+ Yt//9YuhCXy+Q==
+Date: Fri, 12 Apr 2024 15:54:37 +0000
+To: Igor Opaniuk <igor.opaniuk@gmail.com>
+From: mwleeds@mailtundra.com
+Cc: mwleeds@mailtundra.com, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/5] zfs: Fix malloc() success check
+Message-ID: <8lIRr3dbYRwsHsoM6-2NglI1f0-7Hf11XjddBZNdS3lhUGfoNZDpGBuk53TC40fO6ZzBbuUcp9YvmvNo8-wt9vRTJzmXGOZsdegS6wMwdhA=@mailtundra.com>
+In-Reply-To: <CAByghJb7nkhZqeGqJxbs9DujSJP02tvCmD20zor8U5KhwD9PMg@mail.gmail.com>
+References: <20240407014743.13872-1-mwleeds@mailtundra.com>
+ <20240407014743.13872-2-mwleeds@mailtundra.com>
+ <CAByghJb7nkhZqeGqJxbs9DujSJP02tvCmD20zor8U5KhwD9PMg@mail.gmail.com>
+Feedback-ID: 106267484:user:proton
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.252.26.170]
-X-ClientProxiedBy: SAFCAS1NODE2.st.com (10.75.90.13) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-04-12_12,2024-04-09_01,2023-05-22_02
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,154 +67,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case a new region is adjacent to a previous region with
-similar flag, this region is merged with its predecessor, but no
-check are done if this new added region is overlapping another region
-present in lmb (see reserved[3] which overlaps reserved[4]).
+On Sunday, April 7th, 2024 at 4:22 AM, Igor Opaniuk <igor.opaniuk@gmail.com=
+> wrote:
 
-This occurs when the LMB [0xdaafd000-0xddb18000] is added and overlaps
-the LMB [0xdbaf4380-0xddffffff].
+> Hi Phaedrus,
+>=20
+> On Sun, Apr 7, 2024 at 4:00=E2=80=AFAM mwleeds@mailtundra.com wrote:
+>=20
+> > This code was hitting the error code path whenever malloc() succeeded
+> > rather than when it failed, so presumably this part of the code hasn't
+> > been tested. I had to apply this fix (and others) to get U-Boot to boot
+> > from ZFS on an Nvidia Jetson TX2 NX SoM (an aarch64 computer).
+> >=20
+> > Signed-off-by: Phaedrus Leeds mwleeds@mailtundra.com
+> > Tested-by: Phaedrus Leeds mwleeds@mailtundra.com
+>=20
+> It's an abuse of the Tested-by tag. If you are the author of the patch,
+> that obviously implies that you tested it before sending to ML.
+> Signed-off-by is enough in this case.
+>=20
 
-Call lmb_overlaps_region() before merging the new region with the
-adjacent region already present in lmb.
+That makes sense. Sorry I'm a bit new to this way of submitting patches and=
+ more accustomed to pull requests. It seems like a minor thing though; shou=
+ld I re-submit the patches?
 
-In case of adjacent region found, code is 90% similar in case
-adjacent region is located before/after the new region.
-Factorize adjacent region management in lmb_add_region_flags().
-
-Issue reproduced on STM32MP157-DK2 with SCMI DT, bdinfo command's output
-shows:
-
-before this patch:
-...
-lmb_dump_all:
- memory.cnt = 0x1 / max = 0x2
- memory[0]      [0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
- reserved.cnt = 0x5 / max = 0x10
- reserved[0]    [0x10000000-0x10045fff], 0x00046000 bytes flags: 4
- reserved[1]    [0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
- reserved[2]    [0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
- reserved[3]    [0xdaae1000-0xdfffffff], 0x0551f000 bytes flags: 0
- reserved[4]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
-...
-
-after this patch:
-
-...
-lmb_dump_all:
- memory.cnt = 0x1 / max = 0x2
- memory[0]      [0xc0000000-0xdfffffff], 0x20000000 bytes flags: 0
- reserved.cnt = 0x5 / max = 0x10
- reserved[0]    [0x10000000-0x10045fff], 0x00046000 bytes flags: 4
- reserved[1]    [0x30000000-0x3003ffff], 0x00040000 bytes flags: 4
- reserved[2]    [0x38000000-0x3800ffff], 0x00010000 bytes flags: 4
- reserved[3]    [0xdaae1000-0xddffffff], 0x0351f000 bytes flags: 0
- reserved[4]    [0xde000000-0xdfffffff], 0x02000000 bytes flags: 4
-...
-
-Fixes: 4ed6552f7159 ("[new uImage] Introduce lmb from linux kernel for memory mgmt of boot images")
-
-Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
----
-
-Changes in v2:
-  _ Fix lmb_add_region_flags() by updating test which leads to
-    extend an existing region
-
- lib/lmb.c | 57 +++++++++++++++++++++++++++++--------------------------
- 1 file changed, 30 insertions(+), 27 deletions(-)
-
-diff --git a/lib/lmb.c b/lib/lmb.c
-index b6afb731440..4ed60f4a843 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -130,6 +130,22 @@ static void lmb_fix_over_lap_regions(struct lmb_region *rgn, unsigned long r1,
- 	lmb_remove_region(rgn, r2);
- }
- 
-+static long lmb_overlaps_region(struct lmb_region *rgn, phys_addr_t base,
-+				phys_size_t size)
-+{
-+	unsigned long i;
-+
-+	for (i = 0; i < rgn->cnt; i++) {
-+		phys_addr_t rgnbase = rgn->region[i].base;
-+		phys_size_t rgnsize = rgn->region[i].size;
-+
-+		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize))
-+			break;
-+	}
-+
-+	return (i < rgn->cnt) ? i : -1;
-+}
-+
- void lmb_init(struct lmb *lmb)
- {
- #if IS_ENABLED(CONFIG_LMB_USE_MAX_REGIONS)
-@@ -257,7 +273,7 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
- 				 phys_size_t size, enum lmb_flags flags)
- {
- 	unsigned long coalesced = 0;
--	long adjacent, i;
-+	long adjacent, i, overlap;
- 
- 	if (rgn->cnt == 0) {
- 		rgn->region[0].base = base;
-@@ -283,19 +299,21 @@ static long lmb_add_region_flags(struct lmb_region *rgn, phys_addr_t base,
- 		}
- 
- 		adjacent = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
--		if (adjacent > 0) {
--			if (flags != rgnflags)
--				continue;
--			rgn->region[i].base -= size;
--			rgn->region[i].size += size;
--			coalesced++;
--			break;
--		} else if (adjacent < 0) {
-+		if (adjacent != 0) {
- 			if (flags != rgnflags)
- 				continue;
--			rgn->region[i].size += size;
--			coalesced++;
--			break;
-+			overlap = lmb_overlaps_region(rgn, base, size);
-+			if (overlap < 0 || flags == rgn->region[overlap].flags) {
-+				/*
-+				 * no overlap detected or overlap with same flags detected,
-+				 * extend region
-+				 */
-+				if  (adjacent > 0)
-+					rgn->region[i].base -= size;
-+				rgn->region[i].size += size;
-+				coalesced++;
-+				break;
-+			}
- 		} else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
- 			/* regions overlap */
- 			return -1;
-@@ -420,21 +438,6 @@ long lmb_reserve(struct lmb *lmb, phys_addr_t base, phys_size_t size)
- 	return lmb_reserve_flags(lmb, base, size, LMB_NONE);
- }
- 
--static long lmb_overlaps_region(struct lmb_region *rgn, phys_addr_t base,
--				phys_size_t size)
--{
--	unsigned long i;
--
--	for (i = 0; i < rgn->cnt; i++) {
--		phys_addr_t rgnbase = rgn->region[i].base;
--		phys_size_t rgnsize = rgn->region[i].size;
--		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize))
--			break;
--	}
--
--	return (i < rgn->cnt) ? i : -1;
--}
--
- phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align)
- {
- 	return lmb_alloc_base(lmb, size, align, LMB_ALLOC_ANYWHERE);
--- 
-2.25.1
-
+> ---
+>=20
+> > fs/zfs/zfs.c | 2 +-
+> > 1 file changed, 1 insertion(+), 1 deletion(-)
+> >=20
+> > diff --git a/fs/zfs/zfs.c b/fs/zfs/zfs.c
+> > index 1fec96cd5c..14779dee32 100644
+> > --- a/fs/zfs/zfs.c
+> > +++ b/fs/zfs/zfs.c
+> > @@ -648,21 +648,21 @@ dmu_read(dnode_end_t *dn, uint64_t blkid, void **=
+buf,
+> > if (bp_array !=3D dn->dn.dn_blkptr) {
+> > free(bp_array);
+> > bp_array =3D 0;
+> > }
+> >=20
+> > if (BP_IS_HOLE(bp)) {
+> > size_t size =3D zfs_to_cpu16(dn->dn.dn_datablkszsec,
+> >=20
+> > dn->endian)
+> > << SPA_MINBLOCKSHIFT;
+> > *buf =3D malloc(size);
+> > - if (*buf) {
+> > + if (!*buf) {
+> > err =3D ZFS_ERR_OUT_OF_MEMORY;
+> > break;
+> > }
+> > memset(*buf, 0, size);
+> > endian =3D (zfs_to_cpu64(bp->blk_prop, endian) >>
+> > 63) & 1;
+> > break;
+> > }
+> > if (level =3D=3D 0) {
+> > err =3D zio_read(bp, endian, buf, 0, data);
+> > endian =3D (zfs_to_cpu64(bp->blk_prop, endian) >>
+> > 63) & 1;
+> > --
+> > 2.44.0
+>=20
+>=20
+> --
+> Best regards - Atentamente - Meilleures salutations
+>=20
+> Igor Opaniuk
+>=20
+> mailto: igor.opaniuk@gmail.com
+> skype: igor.opanyuk
+> https://www.linkedin.com/in/iopaniuk http://ua.linkedin.com/in/iopaniuk
