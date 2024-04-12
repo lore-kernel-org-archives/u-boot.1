@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48207C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 16:25:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D551C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 16:26:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4ECD8881F6;
+	by phobos.denx.de (Postfix) with ESMTP id BA90B88204;
 	Fri, 12 Apr 2024 18:25:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mzKh5rGG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RIJh/CH+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F07C8881A8; Fri, 12 Apr 2024 17:32:55 +0200 (CEST)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id A90F7881A8; Fri, 12 Apr 2024 17:32:57 +0200 (CEST)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9844880A8
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 17:32:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2805488020
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 17:32:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-7c8ad87b2acso28812339f.3
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 08:32:53 -0700 (PDT)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-7d644c91834so42233739f.1
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 08:32:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1712935972; x=1713540772; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=uqDcmcdfEAxpSmSYIoRjoyegxjm8YY6DAayxwa7eB28=;
- b=mzKh5rGGHJC0i7oKLP4uQaPezdSh8InJ4sXw/sDgMjQvYYfxCG9sbdLMeAV4pumyAs
- K9GO3gOy9RZULFGlIBEy63o6majxsNZPF1YOTwaSjpHKK6GeWRSG19LKsFoaxZU+pNCF
- Ov2Z51eUWqmthp6MtWftkv+UgVc8jMyguzjIA=
+ d=chromium.org; s=google; t=1712935974; x=1713540774; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mVk91NoB1mb4Ya4VZgNI4Mqy/+sMIdBT8JrdncMceds=;
+ b=RIJh/CH+4SpDe9Rtea4VeMiKTSG8SynO37XHZOIDCvEy5apz9TiaoCJFJxtaAMmnET
+ J5u8WqOIaUJgiOwExm7pSD+fwQ5V6I/CbVxdESF6VeAhQJNl5bi5Z00iOYI6cnW+VpSa
+ tklIqqIDMDeQDpj02lSb3sGWHbQeMB8QZiJIs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712935972; x=1713540772;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=uqDcmcdfEAxpSmSYIoRjoyegxjm8YY6DAayxwa7eB28=;
- b=PXbQZPTJn+LR5BDZKb5hf81gEJn5KJo0g0zs7jjcK6ZhpEIAmBqvH+1nW/Rt6onCHY
- HEdYLN/JjnufsWVzHC6FIWq2jQ367VafPHs5uQhguJliRlvI29LB9mUL1/tkJSB315Dz
- pyAM/OfSWoekxGRilJvpREUpf61ALzrRpwMR9Lm+ACIsCbFnuqmCQnSYEx70yFcHdGzM
- iCIXgI9Astu7pGE1RdFQKFnPpDaX6xVlBqcA+/iCjbDuhHzjmk/pVwwJzqXTgp+roQap
- ixjveg6niEO3qHnjRPZMRAE/7HVOmIlQdtgt5mPtawuAJge4hME+M/pAtNajnY30FVhd
- gQPQ==
-X-Gm-Message-State: AOJu0YxelsuseGp2V8NkiKiBFu5WcNAiw2ltrpJ7W7KT8HqzoQ2PcBGC
- 400BhqoTCthICyBAY6xkTyN9YmTv94nDbZksmv3M/6pDiwzrQF+jhKzHusAXSA==
-X-Google-Smtp-Source: AGHT+IHbtl8u5oM4YD0V1cyL9JOfCkw7w+xIl41C6otd6LoyoE8+lKTPybLQ5MBLMHKFw5O2MCIjbw==
-X-Received: by 2002:a05:6602:1a98:b0:7d6:3f52:2f27 with SMTP id
- bn24-20020a0566021a9800b007d63f522f27mr3223842iob.0.1712935972439; 
- Fri, 12 Apr 2024 08:32:52 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1712935974; x=1713540774;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mVk91NoB1mb4Ya4VZgNI4Mqy/+sMIdBT8JrdncMceds=;
+ b=pq7ADoO3o3kiRvDMZsbLlYmRUc8wSWp8b/dK7/ttYoucDamYQQXSl1Afyf2/ghJovj
+ 8RmLNhazsHPSBcCM/3VYTILa+WrUForkV775axPxQZhwshtr1FlfMSMwT/zsvPAsEtzA
+ GocAqbL/V++SQJ0tdXgRPcr3JcfbNOtIh+uHKD90uLx1DLqvzk6L7L54BZ5ax7jNkDwm
+ sUyFpOVjIUu1bnb2pVMUMQZKsNhpued1bkPLfsSIe5RiKlzk6/xmK2U2dE5ZUuYXJsUQ
+ JIXuzDGDNF3Cg5mdAsNPTLdQLn4Hpf98GR9plh59xIBuhRN48RVYSobP4NQa5K9gUxvw
+ aiAA==
+X-Gm-Message-State: AOJu0YxGskGd388Hy/4y2UBCtCTtfSb965nGQANPQPuMisrd9mJAgCqg
+ 0qPnxh+hVkdoL8mKllomoz519XXXxal4yIRSqZ49ztyRNs9LWjwPPtT2vPhtXQ==
+X-Google-Smtp-Source: AGHT+IGkiz6PwnIU+zNzBRMsgrX6Di+Gl2zPGrx8z9DynYpgkn7YBpjO4V9dGup0bH7vtQLmpvwvBw==
+X-Received: by 2002:a05:6602:3d6:b0:7d5:f3d4:201c with SMTP id
+ g22-20020a05660203d600b007d5f3d4201cmr3209346iov.21.1712935973913; 
+ Fri, 12 Apr 2024 08:32:53 -0700 (PDT)
 Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
  [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ik14-20020a0566026c0e00b007d65a95d95csm1093828iob.42.2024.04.12.08.32.51
+ ik14-20020a0566026c0e00b007d65a95d95csm1093828iob.42.2024.04.12.08.32.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Apr 2024 08:32:52 -0700 (PDT)
+ Fri, 12 Apr 2024 08:32:53 -0700 (PDT)
 From: Simon Glass <sjg@chromium.org>
 To: devicetree@vger.kernel.org
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
@@ -70,13 +71,14 @@ Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>,
  Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
  linux-kernel@vger.kernel.org
-Subject: [PATCH v11 1/2] dt-bindings: mtd: fixed-partitions: Add alignment
- properties
-Date: Fri, 12 Apr 2024 09:32:48 -0600
-Message-Id: <20240412153249.100787-1-sjg@chromium.org>
+Subject: [PATCH v11 2/2] dt-bindings: mtd: fixed-partition: Add binman
+ compatibles
+Date: Fri, 12 Apr 2024 09:32:49 -0600
+Message-Id: <20240412153249.100787-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240412153249.100787-1-sjg@chromium.org>
+References: <20240412153249.100787-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 12 Apr 2024 18:25:40 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -95,112 +97,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add three properties for controlling alignment of partitions, aka
-'entries' in fixed-partition.
+Add two compatibles for binman entries, as a starting point for the
+schema.
 
-For now there is no explicit mention of hierarchy, so a 'section' is
-just the 'fixed-partitions' node.
+Note that, after discussion on v2, we decided to keep the existing
+meaning of label so as not to require changes to existing userspace
+software when moving to use binman nodes to specify the firmware
+layout.
 
-These new properties are inputs to the Binman packaging process, but are
-also needed if the firmware is repacked, to ensure that alignment
-constraints are not violated. Therefore they are provided as part of
-the schema.
+Note also that, after discussion on v6, we decided to use the same
+'fixed-partition' schema for the binman features, so this version
+adds a new 'binman.yaml' file providing the new compatibles to the
+existing partition.yaml binding.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Rob Herring <robh@kernel.org>
 ---
 
-Changes in v11:
-- Drop mention of Binman
-- Use 'content' instead of 'contents'
+(no changes since v10)
 
 Changes in v10:
-- Update the minimum to 2
+- Drop binman,entry since it is likely not necessary
+- Put the description back
 
-Changes in v9:
-- Move binding example to next batch to avoid build error
+Changes in v8:
+- Switch the patch ordering so the partition change comes first
 
 Changes in v7:
-- Drop patch 'Add binman compatible'
-- Put the alignment properties into the fixed-partition binding
-
-Changes in v6:
-- Correct schema-validation errors missed due to older dt-schema
-  (enum fix and reg addition)
+- Adjust MAINTAINERS entry
+- Put compatible strings into the 'fixed-partition' binding
 
 Changes in v5:
-- Add value ranges
-- Consistently mention alignment must be power-of-2
-- Mention that alignment refers to bytes
+- Add mention of why 'binman' is the vendor
+- Drop  'select: false'
+- Tidy up the compatible setings
+- Use 'tfa-bl31' instead of 'atf-bl31'
+
+Changes in v4:
+- Correct selection of multiple compatible strings
+
+Changes in v3:
+- Drop fixed-partitions from the example
+- Use compatible instead of label
 
 Changes in v2:
-- Fix 'a' typo in commit message
+- Use plain partition@xxx for the node name
 
- .../bindings/mtd/partitions/partition.yaml    | 51 +++++++++++++++++++
- 1 file changed, 51 insertions(+)
+ .../bindings/mtd/partitions/binman.yaml       | 53 +++++++++++++++++++
+ .../bindings/mtd/partitions/partition.yaml    | 21 ++++++++
+ MAINTAINERS                                   |  5 ++
+ 3 files changed, 79 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
 
+diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+new file mode 100644
+index 000000000000..bb4b08546184
+--- /dev/null
++++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
+@@ -0,0 +1,53 @@
++# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Binman entries
++
++description: |
++  This corresponds to a binman 'entry'. It is a single partition which holds
++  data of a defined type.
++
++  Binman uses the type to indicate what data file / type to place in the
++  partition. There are quite a number of binman-specific entry types, such as
++  section, fill and files, to be added later.
++
++maintainers:
++  - Simon Glass <sjg@chromium.org>
++
++allOf:
++  - $ref: /schemas/mtd/partitions/partition.yaml#
++
++properties:
++  compatible:
++    enum:
++      - u-boot       # u-boot.bin from U-Boot project
++      - tfa-bl31     # bl31.bin or bl31.elf from TF-A project
++
++required:
++  - compatible
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    partitions {
++        compatible = "fixed-partitions";
++        #address-cells = <1>;
++        #size-cells = <1>;
++
++        partition@100000 {
++            compatible = "u-boot";
++            reg = <0x100000 0xf00000>;
++            align-size = <0x1000>;
++            align-end = <0x10000>;
++        };
++
++        partition@200000 {
++            compatible = "tfa-bl31";
++            reg = <0x200000 0x100000>;
++            align = <0x4000>;
++        };
++    };
 diff --git a/Documentation/devicetree/bindings/mtd/partitions/partition.yaml b/Documentation/devicetree/bindings/mtd/partitions/partition.yaml
-index 1ebe9e2347ea..31bbeb161396 100644
+index 31bbeb161396..80d0452a2a33 100644
 --- a/Documentation/devicetree/bindings/mtd/partitions/partition.yaml
 +++ b/Documentation/devicetree/bindings/mtd/partitions/partition.yaml
-@@ -57,6 +57,57 @@ properties:
-       user space from
-     type: boolean
+@@ -118,3 +118,24 @@ then:
  
-+  align:
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    minimum: 2
-+    maximum: 0x80000000
-+    multipleOf: 2
-+    description:
-+      This sets the alignment of the entry in bytes.
+ # This is a generic file other binding inherit from and extend
+ additionalProperties: true
 +
-+      The entry offset is adjusted so that the entry starts on an aligned
-+      boundary within the containing section or image. For example ‘align =
-+      <16>’ means that the entry will start on a 16-byte boundary. This may
-+      mean that padding is added before the entry. The padding is part of
-+      the containing section but is not included in the entry, meaning that
-+      an empty space may be created before the entry starts. Alignment
-+      must be a power of 2. If ‘align’ is not provided, no alignment is
-+      performed.
++examples:
++  - |
++    partitions {
++        compatible = "fixed-partitions";
++        #address-cells = <1>;
++        #size-cells = <1>;
 +
-+  align-size:
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    minimum: 2
-+    maximum: 0x80000000
-+    multipleOf: 2
-+    description:
-+      This sets the alignment of the entry size in bytes. It must be a power
-+      of 2.
++        partition@100000 {
++            compatible = "u-boot";
++            reg = <0x100000 0xf00000>;
++            align-size = <0x1000>;
++            align-end = <0x10000>;
++        };
 +
-+      For example, to ensure that the size of an entry is a multiple of 64
-+      bytes, set this to 64. While this does not affect the content of the
-+      entry itself (the padding is performed only when its parent section is
-+      assembled), the end result is that the entry ends with the padding
-+      bytes, so may grow. If ‘align-size’ is not provided, no alignment is
-+      performed.
++        partition@200000 {
++            compatible = "tfa-bl31";
++            reg = <0x200000 0x100000>;
++            align = <0x4000>;
++        };
++    };
+diff --git a/MAINTAINERS b/MAINTAINERS
+index b1b074ce2cf3..b1a4ca692578 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -3684,6 +3684,11 @@ F:	Documentation/filesystems/bfs.rst
+ F:	fs/bfs/
+ F:	include/uapi/linux/bfs_fs.h
+ 
++BINMAN
++M:	Simon Glass <sjg@chromium.org>
++S:	Supported
++F:	Documentation/devicetree/bindings/mtd/partitions/binman*
 +
-+  align-end:
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    minimum: 2
-+    maximum: 0x80000000
-+    multipleOf: 2
-+    description:
-+      This sets the alignment (in bytes) of the end of an entry with respect
-+      to the containing section. It must be a power of 2.
-+
-+      Some entries require that they end on an alignment boundary,
-+      regardless of where they start. This does not move the start of the
-+      entry, so the content of the entry will still start at the beginning.
-+      But there may be padding at the end. While this does not affect the
-+      content of the entry itself (the padding is performed only when its
-+      parent section is assembled), the end result is that the entry ends
-+      with the padding bytes, so may grow. If ‘align-end’ is not provided,
-+      no alignment is performed.
-+
- if:
-   not:
-     required: [ reg ]
+ BITMAP API
+ M:	Yury Norov <yury.norov@gmail.com>
+ R:	Rasmus Villemoes <linux@rasmusvillemoes.dk>
 -- 
 2.34.1
 
