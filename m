@@ -4,81 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28130C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 18:12:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07795C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 18:26:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D21687ED3;
-	Fri, 12 Apr 2024 20:12:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6A1C387ED3;
+	Fri, 12 Apr 2024 20:26:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WcnVaDOF";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C384B87ED9; Fri, 12 Apr 2024 20:12:45 +0200 (CEST)
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
- [IPv6:2a00:1450:4864:20::330])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1712946381;
+	bh=OORJlIY4ad/CcaDiqCOIPnoBKUr+zx8Ml2cQeW1Uxcw=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=XwpmvEjFTagYZ6sbJpeSgAi5YTTM2byjCsTqUzHKi6HCyoQF21wrlMsnlde8vxn8u
+	 boagqxn1BZyzClrckg7OejvtCdOzNCnHV98RJt+YQm8G51q+rTl/UMVwWHd6xnDw5z
+	 i8FJgpAJSFBCb8L51lsxA7RMG+qGT7de4J5l0ZX3Xuy/8ZPoGDVu+dt4jy6Uo7LPXE
+	 WOBO+TpcB9EC4Ig+r/GZgDz/U2g9kwWQtcesQu45u8YNY0NYdfJKIRYa2xTJ2pWXK7
+	 mNOOcFNxDjXqydGJI1UqmC+DpHPloRt0Ku47fdW77mwFtn4HPvEir4mpGDP4C8qGVy
+	 cEdrsGp73AWEA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9EB887E82
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 20:12:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x330.google.com with SMTP id
- 5b1f17b1804b1-41802f985baso5137465e9.3
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 11:12:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712945563; x=1713550363; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HUiPhXuktebOyfc7alB0E1zjrecTZlfSYJGiwPsFgBc=;
- b=WcnVaDOFR5+wge3yEByIMAnSgxdQAsXK92+FTSwoshkqYP7OudW4eqeLeEyF5m1T2R
- Es0ksnm5nCx5awLUn0TWNlkSBYO6+v1/xjyf9HB/f3JSnHJjCWTmGQaHxf29NgChmfcI
- 9wpVOVLgRs4YfcpDI5IcVUuLleRr/ePIP7p7eU9qT7UG44Ebm0EcUhnGNpNJUcW80E47
- RgLhwxXkdkeUwYaanPRXPG9J7i5h3MRGxeM3dzpY/UbE4u1wLQlvZCb6gfrKb1m8g3wt
- YviyK1a3+m9FyPbjmEBDN5S09Ch4vfu8U91qaJAWH2MnhwqYVxkMyxAlvJI2AeQikL1p
- +Kkw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712945563; x=1713550363;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=HUiPhXuktebOyfc7alB0E1zjrecTZlfSYJGiwPsFgBc=;
- b=lAvPXmnMw3rP2oowwFgu+eX7dA5ykmvvU1+ePZpQJMlpfr86krNyk9BFJ37rb8WurT
- bI5LtZgQFRNNuG7w+SLpd4m8NcAHZxQkVBPjV4jHhF2w+jxRXK0fsn0FtNSmYIFOIwcC
- rVlcFubVGDg/8HmMcH4ku9HB4bP0iDqha5bRrPg64cOArFHxRnUoHcA6kflQuN9yt7lc
- 1Sb0IDD3ccNqueFCP8OhUSJmhlUEfx/zOp86OFP8uvY82KylkA76dTWNk+uYe4bSZ6Tu
- kT2cbAq0/Rw+bo/4aWvh7KXVd5D+COctMvR0WwNhVDen/mbi8jZsH4XsiRDS7pzum+Z5
- 914w==
-X-Gm-Message-State: AOJu0YxWMbQ2hOryrDAyYRHv5vFIokEAikwwsw70bCOOwB7Y4Tl9qLfp
- wBaD0Qpf4eNJexgb55+4BAKfgIloZmfzbQ1ekbq0SvJwxlJtxLH61zbTe+xrpa0=
-X-Google-Smtp-Source: AGHT+IE61iJL0RUYPnFMPkNyB844V7zu6faj5ZvvPI/pMpmdMjdvfLz9w9fdg93uMoC4Ck1YN3tpEg==
-X-Received: by 2002:a1c:7902:0:b0:417:d44f:5c50 with SMTP id
- l2-20020a1c7902000000b00417d44f5c50mr2707209wme.41.1712945563153; 
- Fri, 12 Apr 2024 11:12:43 -0700 (PDT)
-Received: from [192.168.114.141] (92.40.205.163.threembb.co.uk.
- [92.40.205.163]) by smtp.gmail.com with ESMTPSA id
- t13-20020a05600c450d00b004171f151a5csm6294733wmo.16.2024.04.12.11.12.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Apr 2024 11:12:42 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Jaehoon Chung <jh80.chung@samsung.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>, 
- Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
-In-Reply-To: <20240412181031.1513372-1-caleb.connolly@linaro.org>
-References: <20240412181031.1513372-1-caleb.connolly@linaro.org>
-Subject: Re: [PATCH] mmc: msm_sdhci: fix vendor_spec_cap0 registers
-Message-Id: <171294556150.1516536.5026780778600808079.b4-ty@linaro.org>
-Date: Fri, 12 Apr 2024 20:12:41 +0200
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 40B5187DFF;
+ Fri, 12 Apr 2024 20:26:19 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1712946379;
+ bh=OORJlIY4ad/CcaDiqCOIPnoBKUr+zx8Ml2cQeW1Uxcw=;
+ h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
+ b=JFO46zX9RHJLrDW3XOk87OcEwZJb7saeyF/dim2g+PwLzr9346lelUcdu8kSitVYB
+ 2awjO2FU6KXsptKqPZ052kgu4h4IAnqCg4DsXPvh01i62wdPQkr+Yur/GAX9Z+5hVZ
+ q7dWj6JLwZAx8lp6G7/UjrIEwTwMAMIsxp+IDm+x7CSmP1iPyKLHqJJEhFwz6T3Rvd
+ ee1PSZiQNqY/A0/mn1VIDrRGIBNgqNhH6URdMneeLi2/QuDTZcleYGR3wep4eMdjpp
+ spw+ff9mUbqmPBsePsgR0CE+8+fs7cyd/w7DKCpP0Y3nC33IjCbYhcAwgBNvyK79nc
+ CyFopyz3xKqeg==
+Message-ID: <d65ea7c0-cb89-4cb9-8378-11839a6ee63e@denx.de>
+Date: Fri, 12 Apr 2024 20:26:18 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/6] USB keyboard improvements for asahi / desktop
+ systems
+From: Marek Vasut <marex@denx.de>
+To: Janne Grunau <j@jannau.net>
+Cc: Bin Meng <bmeng.cn@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ u-boot@lists.denx.de, asahi@lists.linux.dev, Neal Gompa <neal@gompa.dev>
+References: <20240404-asahi-keyboards-v4-0-2266033feaff@jannau.net>
+ <356b892a-a681-4ae0-a6c8-ed1b4b5a8717@denx.de> <ZhBLfQfxB_UEwvyY@robin>
+ <5467f380-de35-4776-8c32-90b8e08aeda7@denx.de> <ZhGq0U_pkrYMe4S1@robin>
+ <5ed4e6d2-edc7-461d-8183-e91d7b994aa5@denx.de> <ZhOg81sBEDLgCSIa@robin>
+ <83e48e51-f88d-49d4-bcf9-340e229fdf76@denx.de>
+Content-Language: en-US
+In-Reply-To: <83e48e51-f88d-49d4-bcf9-340e229fdf76@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14-dev
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,18 +75,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 4/12/24 2:53 PM, Marek Vasut wrote:
 
-On Fri, 12 Apr 2024 20:10:21 +0200, Caleb Connolly wrote:
-> The addresses were mistakenly swapped. Put them right.
+Hi,
+
+>> Seems to work here with a broken imx8 config from the CI. Is it ok to
+>> rely on dead code elimination? Apparently it is, build with KCFLAGS=-O0
+>> has already several other missing symbols.
+>>
+>> See attached fixup
 > 
-> 
+> Thanks, squashed, let's see how CI likes this.
 
-Applied, thanks!
+I think we are getting closer, but still ...
 
-[1/1] mmc: msm_sdhci: fix vendor_spec_cap0 registers
-      commit: f09537bdd940c051b851c235e8906f1ba83233d1
+Pipeline #20308 has failed!
 
-Best regards,
--- 
-Caleb Connolly <caleb.connolly@linaro.org>
+Project: USB U-Boot Custodian Tree ( 
+https://source.denx.de/u-boot/custodians/u-boot-usb )
+Branch: master ( 
+https://source.denx.de/u-boot/custodians/u-boot-usb/-/commits/master )
 
+Commit: 63f6a449 ( 
+https://source.denx.de/u-boot/custodians/u-boot-usb/-/commit/63f6a449bffe46beca89580d3efa48e5d041025c 
+)
+Commit Message: usb: kbd: Add probe quirk for Apple and Keychro...
+Commit Author: Janne Grunau
+Committed by: Marek Vasut ( https://source.denx.de/marex )
+
+
+Pipeline #20308 ( 
+https://source.denx.de/u-boot/custodians/u-boot-usb/-/pipelines/20308 ) 
+triggered by Marek Vasut ( https://source.denx.de/marex )
+had 1 failed job.
+
+Job #815411 ( 
+https://source.denx.de/u-boot/custodians/u-boot-usb/-/jobs/815411/raw )
+
+Stage: world build
+Name: build all 64bit ARM platforms
