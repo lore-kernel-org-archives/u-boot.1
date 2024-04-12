@@ -4,76 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBB4FC04FF9
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 19:58:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 878CDC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 20:26:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F320987E62;
-	Fri, 12 Apr 2024 21:58:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B842588020;
+	Fri, 12 Apr 2024 22:26:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UBhV27Lj";
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="Q8u76rqo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27EF987DF3; Fri, 12 Apr 2024 21:58:54 +0200 (CEST)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D5124881F8; Fri, 12 Apr 2024 22:26:23 +0200 (CEST)
+Received: from mta-65-226.siemens.flowmailer.net
+ (mta-65-226.siemens.flowmailer.net [185.136.65.226])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7C5986784
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 21:58:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5CCF87E4D
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 22:26:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-1e3f17c64daso10538885ad.3
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 12:58:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712951930; x=1713556730; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=SnNF5dxZ+ZzrneJGKh+nI6jBWQfa/+JBHxOtxW+TFIo=;
- b=UBhV27LjkieitACCkNLlb5jsN8hM90q2f9m6PJDe+DsKFAlBbjtzaK9KzeMbX52cv0
- tSzpvsiw0sMGY9oY5SlQ75mcKFVAwpLaBU586AR/I3zkNZvFXgnUzVPibUcykJSg83Fs
- drF+8LrYYHXgSQV3ELqKxE+8Pgl6xXVA/zhds=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712951930; x=1713556730;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SnNF5dxZ+ZzrneJGKh+nI6jBWQfa/+JBHxOtxW+TFIo=;
- b=i4ML0JTQncTbRHDz+w6/MJwWk4Rqbw0KCGjdCF6sNYdqMwAB2lJgApRMsKKNloKEhp
- Jdgj6MMd76fzDN1TQnF/OduxlgZpf+VkMt6BFY13bM7idp+AIqwPVuBJjAE5xbDNhYp8
- +gwaEkZGsrjKT3z2q5tdLnqgwbU0DImS6wQQ5ajtWhbK9AHQ8KISBOBxcCE/u8QUFWXc
- rASqAzNcBeUT4612banS9MNVZQXFycwo3OG20ybjJiF7a22/XVW7YhsPGMlVHdAJfxG4
- mGA63Ds7SwR4WeLeoemzGRvAFLJwGNMZoLPX4uRv+rwMek3RwXIlZ1dGMCwlJtDRK2OO
- 93DQ==
-X-Gm-Message-State: AOJu0YwDDWcphqjJd0xBuXPwyoPia7FxFf3Jnoho1EbpuERz3D7qf6tA
- S5Rq6fXYxxL3+Lj+GTftACC3952zbJH+95Y2hCFRrJvmq7LDHYHw3rDlV8MdTAo=
-X-Google-Smtp-Source: AGHT+IGbkQMacE/W+Tjzg8ebdpe0Su5nNH2LrPkQiDCuzzxM+s9fSAYwACDqCoRYh8q5jm3XusmaBw==
-X-Received: by 2002:a17:903:284:b0:1e4:55d8:dfae with SMTP id
- j4-20020a170903028400b001e455d8dfaemr3999345plr.4.1712951930329; 
- Fri, 12 Apr 2024 12:58:50 -0700 (PDT)
-Received: from oliver.lan ([2806:102e:18:245e:2606:71da:664:f052])
- by smtp.gmail.com with ESMTPSA id
- im22-20020a170902bb1600b001e3d2314f4bsm3428169plb.132.2024.04.12.12.58.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Apr 2024 12:58:49 -0700 (PDT)
-Date: Fri, 12 Apr 2024 13:58:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Charles Hardin <ckhardin@gmail.com>
-Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com
-Subject: Re: [PATCH 1/1] net: add support to parse the NIS domain for the
- dhcp options
-Message-ID: <20240412195847.GA401419@oliver.lan>
-References: <20240401191319.62652-1-ckhardin@gmail.com>
+ spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
+Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
+ 202404122026205380a31e15cb814457 for <u-boot@lists.denx.de>;
+ Fri, 12 Apr 2024 22:26:20 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=alexander.sverdlin@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=ExaRqNnoCUqk4zsDiRtsvxMAbtPhKkNUF3cYcPMdizw=;
+ b=Q8u76rqoB3GhU/vlnAEa25yte5BOpmGR17FeZe2mUyTBF237/RpF7pZ1acgGyO9tieAyqU
+ zagmWIokQuWVgtq8xLtlIuhSSfXoMofjWldcmQKZEpcd+XmT9Bt625m/2q0OZSFYopWU+kC7
+ /7sg3VOIfU992f6goHxauqYMW3Aj8=;
+From: "A. Sverdlin" <alexander.sverdlin@siemens.com>
+To: u-boot@lists.denx.de
+Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Marek Vasut <marex@denx.de>, Felipe Balbi <felipe.balbi@linux.intel.com>,
+ Thinh Nguyen <Thinh.Nguyen@synopsys.com>, Nishanth Menon <nm@ti.com>,
+ Sjoerd Simons <sjoerd@collabora.com>
+Subject: [PATCH 0/6] usb: dwc3: gadget: avoid EP command timeout
+Date: Fri, 12 Apr 2024 22:26:00 +0200
+Message-ID: <20240412202611.3565052-1-alexander.sverdlin@siemens.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3nj/xt1fP7fGciPo"
-Content-Disposition: inline
-In-Reply-To: <20240401191319.62652-1-ckhardin@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-456497:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,73 +65,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 
---3nj/xt1fP7fGciPo
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+While there are happy users who successfully have been using DFU on TI
+AM62x [1][2], there are also others who were not so lucky up to now [3].
 
-On Mon, Apr 01, 2024 at 12:13:19PM -0700, Charles Hardin wrote:
+I felt into latter category and was wondering why I observe this:
 
-> There is code in the bootp parsing for NIS domain and add the
-> same support for the dhcp options as well. This allows the same
-> usage of the data when the dhcp command is used in the boot
-> command.
->=20
-> Signed-off-by: Charles Hardin <ckhardin@gmail.com>
-> ---
->  net/bootp.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
->=20
-> diff --git a/net/bootp.c b/net/bootp.c
-> index 6800290963..046caf3685 100644
-> --- a/net/bootp.c
-> +++ b/net/bootp.c
-> @@ -883,6 +883,14 @@ static void dhcp_process_options(uchar *popt, uchar =
-*end)
->  			break;
->  		case 28:	/* Ignore Broadcast Address Option */
->  			break;
-> +		case 40:	/* NIS Domain name */
-> +			if (net_nis_domain[0] =3D=3D 0) {
-> +				size =3D truncate_sz("NIS Domain Name",
-> +					sizeof(net_nis_domain), size);
-> +				memcpy(&net_nis_domain, ext + 2, size);
-> +				net_nis_domain[size] =3D 0;
-> +			}
-> +			break;
->  #if defined(CONFIG_CMD_SNTP) && defined(CONFIG_BOOTP_NTPSERVER)
->  		case 42:	/* NTP server IP */
->  			net_copy_ip(&net_ntp_server, (popt + 2));
+--
+U-Boot SPL 2024.04-61876f393762 (Apr 11 2024 - 09:27:15 +0000)
+...
+Trying to boot from DFU
+dwc3-generic-peripheral usb@31000000: found 16 IN and 16 OUT endpoints
+dwc3-generic-peripheral usb@31000000: Event buf 81e0a200 dma 00000000x length -2115984896
+...
+dwc3-generic-peripheral usb@31000000: initializing ep0out
+...
+dwc3-generic-peripheral usb@31000000: initializing ep15in
+registering UDC driver []
+dwc3-generic-peripheral usb@31000000: gadget no-function data soft-connect
+dwc3-generic-peripheral usb@31000000: Enabling ep0out
+dwc3-generic-peripheral usb@31000000: Command Complete --> 0
+dwc3-generic-peripheral usb@31000000: failed to enable ep0out
+failed to start : -110
+g_dnl_register: failed!, error: -110
+g_dnl_register failedSPL: failed to boot from all boot devices
+### ERROR ### Please RESET the board ###
+--
 
-This fails to build:
-net/bootp.c: In function 'dhcp_process_options':
-net/bootp.c:890:57: error: 'ext' undeclared (first use in this function)
-  890 |                                 memcpy(&net_nis_domain, ext + 2, si=
-ze);
-      |                                                         ^~~
-net/bootp.c:890:57: note: each undeclared identifier is reported only once =
-for each function it appears in
+It turned out the timeout happened in dwc3_send_gadget_ep_cmd() on
+DWC3_DEPCMD_SETEPCONFIG command and while the "timeout" has been increased
+in Linux from 500 to 1000 and later 5000, in my case it took more than
+77000 1us cycles to successfully complete.
 
---=20
-Tom
+It turns out that Linux DWC3 gadget code has been improved in the meanwhile
+to follow DWC3 programming guide more precisely. Porting the following
+Linux patches solved the timeout issue in U-Boot SPL on TI AM6232.
 
---3nj/xt1fP7fGciPo
-Content-Type: application/pgp-signature; name="signature.asc"
+Strictly speaking
+"usb: dwc3: gadget: Disable GUSB2PHYCFG.SUSPHY for End Transfer" and
+"usb: dwc3: gadget: properly check ep cmd" are not required to tackle
+the observed timeout, but it keeps the whole code block in sync with
+Linux v6.8.
 
------BEGIN PGP SIGNATURE-----
+Felipe Balbi (4):
+  usb: dwc3: gadget: combine return points into a single one
+  usb: dwc3: gadget: clear SUSPHY bit before ep cmds
+  usb: dwc3: gadget: only resume USB2 PHY in <=HIGHSPEED
+  usb: dwc3: gadget: properly check ep cmd
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYZknQACgkQFHw5/5Y0
-tyzXOwv/XeL44CaVk4fuRFTtdK8TsGr51qbqGoPiLyidXU+USJk0gn26+43z0ahr
-K3yLFeB67iCTt9m4ARb0+bZqKzlpjvLDPAmiOQLEpVyfMjG5Nv897CFuIlM/VGNp
-j1+HHmKkvX2lbe6ZgrnsD44iZrczvIpTjchHEdxy/7SkDjUNEwYNNE8LczU9zW4D
-/5+bogMA81BL9Yt54yDQRUEnp4rao1VcwbhKFIVgfIpgkn4pg2W4TiM7pDkmLII/
-in+h35pwpum05bXRjIXzdcia6sD3mvIMqbI9U2/+tsKKJObET1MGXOuOL0ySJzKa
-bIB2nxen2jZfDvm6lNGpHNfyp/c0IkbTqgpWZDruwo970QIzRUckvyiHZoiZFdQ8
-krklofZ+7Bq4ubjgl9LCfkZzeafMelV3Y30DpP28C8TYaaM9VOdQkOq0CZCy/gqc
-ck7c/EfFakKBzdZP5T1oWIXtvjiUzMdl/a7msqBJTvy628ImuU9Kk8js5VCR03Ih
-usz9MkjB
-=8EWc
------END PGP SIGNATURE-----
+Thinh Nguyen (2):
+  usb: dwc3: gadget: Check ENBLSLPM before sending ep command
+  usb: dwc3: gadget: Disable GUSB2PHYCFG.SUSPHY for End Transfer
 
---3nj/xt1fP7fGciPo--
+ drivers/usb/dwc3/core.h   |  2 ++
+ drivers/usb/dwc3/gadget.c | 47 ++++++++++++++++++++++++++++++++++++---
+ 2 files changed, 46 insertions(+), 3 deletions(-)
+
+1: https://git.ti.com/cgit/ti-u-boot/ti-u-boot/tree/configs/am62x_evm_r5_usbdfu_defconfig?h=09.02.00.009
+2: https://lore.kernel.org/all/20240112085317.1866449-1-sjoerd@collabora.com/T/
+3: https://e2e.ti.com/support/processors-group/processors/f/processors-forum/1162644/sk-am62-am62-android-fastboot-0-issue?tisearch=e2e-sitesearch&keymatch=SK-AM62
+
+-- 
+2.44.0
+
