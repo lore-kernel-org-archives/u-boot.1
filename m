@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9045C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 02:12:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34502C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 02:13:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F0BC88206;
-	Fri, 12 Apr 2024 04:12:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 17F7988216;
+	Fri, 12 Apr 2024 04:12:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l/IdrJ53";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YX6m/rcY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C1A0881FB; Fri, 12 Apr 2024 04:12:43 +0200 (CEST)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id B86C38820E; Fri, 12 Apr 2024 04:12:44 +0200 (CEST)
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
+ [IPv6:2607:f8b0:4864:20::72c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23B8B88080
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 04:12:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AAF0C87F77
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 04:12:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-78d575054c8so25151985a.3
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 19:12:41 -0700 (PDT)
+Received: by mail-qk1-x72c.google.com with SMTP id
+ af79cd13be357-78d5751901bso31325185a.1
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 19:12:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712887960; x=1713492760; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1712887961; x=1713492761; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=/QDTkJTElcu7aVtK4GPNxCf/nRZI5HPQPrAx0FptpdM=;
- b=l/IdrJ53h/pQsJ2ijbfwQbyG0moa2uLypveQ1kqj4n95Qvfo3RcSSw/p38yneInScI
- 76r7Dkf08YKkv+hmhEJY8QQWcyTTMYrwVZu3pJoMZB3H883gn2QFXdQT137+mTp1ZLBC
- KMuCwDSDw6BNHIZMdWFSmcWd0qVcF5L8Smmmw=
+ bh=k0PlbQXwVjlqV05MucI7ecNC4GCc/A/CgzBtvi+Q+c4=;
+ b=YX6m/rcYCOC4iQEa5+L5Zz65rDyr6ZqvzwYKglxHXoblC45e7CRGPAcuwR0WVOR3/s
+ fk+cPeJOx82cyXoLnG6nPWhoPcSMTh25KiEhKvj27dWlS7bJFtNI3LL9uVN5KVVe7BcS
+ YgbGx+sdYmT+Sns7f7f0XxQYgeGXlhXGKX+ic=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712887960; x=1713492760;
+ d=1e100.net; s=20230601; t=1712887961; x=1713492761;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=/QDTkJTElcu7aVtK4GPNxCf/nRZI5HPQPrAx0FptpdM=;
- b=tL0wrRYlcGYpyo3XoTmhCTRKr9d2E/ws7+X/lFIMA2/DuP86xG4YW00SAAs93PqUwT
- HmTL+xX0pAstXyvPXv8OCRwq6qcQwUlKHUEOmAaYnwOuD+Jx/+guXaDdvjVyAV/OGzT+
- 3cdqG1EwOQ/7k2jEgPXMNfATyebJb3u/T64tWuforVo4nw/Tsr4PR1SlRCuO/00PXbMR
- VP9vuY5Id5ZV6DIMS3H/LrYOA5/GP1M/9BQl/BtbIAmSz/44tdqPYsWJarUhfa4pmJA+
- 7G5F5eaAd+9qOFOeAiNp2cY8WwqBChy7CAnihHI8rpl3QWRcfuQqWj08cU0C77fem3PM
- /7fg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVZSozHW2Gp/RIEpKEgR4/HXIM/HgPViCGpHuUcbDkQoU96LODnimWe2DYiguVDDeISDoEUyseHdq1sROHVvzGUt7SagA==
-X-Gm-Message-State: AOJu0YyMiZwaTqA7oV2M5qXon3PgfL/+HdId05uK4xsLknycKfCZkYT+
- oUZz/iRXMsFxpg7pk7LB6kUuzVzu2cb4ajuiMvvsnN5FlFIo50qHd/Iy0fvGCag=
-X-Google-Smtp-Source: AGHT+IFlKKJqu1sVw8sA6+kh1FoRc+BpuT0MS4H9Nix7B0gwWlQD5+R5PZi85YcqfcfLIGjaVFhpmA==
-X-Received: by 2002:ae9:ea03:0:b0:789:eccd:cb4e with SMTP id
- f3-20020ae9ea03000000b00789eccdcb4emr1568742qkg.36.1712887959989; 
- Thu, 11 Apr 2024 19:12:39 -0700 (PDT)
+ bh=k0PlbQXwVjlqV05MucI7ecNC4GCc/A/CgzBtvi+Q+c4=;
+ b=Cea0IXrCXhAidZp1j0nkVevrmOQtqzmDr5OCD/XCpIk4gv1RK+FlfFvzhzhxTx5b9I
+ 8kXWZ19lI7an2iiHSqxb2aN4JouKD7AtmyRmpnFQ8EFsf59H7wfPKZqBHEGD0JcgJFf5
+ aQiQkt7+tAG9ncihncBhu+7BZme5r/DQH2S8C2XZVqNTZPGQmQ5ipZnYakW6+aKH8qwE
+ Cq/kGu8il3e2f2UkI4OjwYMwxJiak5t/obgJZScHkSOSWrupJXEBEgsM/Bz8kLNgGRU4
+ JrtiziHYrH7xSfYTJYgeMjAhmwSro3XjkbBetUeRTD6NnYySMrSOn/vT6CcQtIsq3Ga+
+ 1H9Q==
+X-Gm-Message-State: AOJu0YxhPPHV/RN/7tg99RjqcHfgAz1qu1DIw90XOS4Kena9RlgemqDp
+ owvzLABZdVtViVLCKT0k340fzflV/h0DL/PBR9aUTrwxqICps6OIbQmUMOKcG9I=
+X-Google-Smtp-Source: AGHT+IFAHlpKze1eOniaB8IrL8LdQW5xoFjc0dS7ZIVb+0NaMtLpwge3VV8ORN12vvnmRABjALiziQ==
+X-Received: by 2002:a05:620a:344:b0:78d:73f4:d100 with SMTP id
+ t4-20020a05620a034400b0078d73f4d100mr1554396qkm.27.1712887961612; 
+ Thu, 11 Apr 2024 19:12:41 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- g13-20020a05620a108d00b0078ec439a9a7sm1348922qkk.62.2024.04.11.19.12.39
+ g13-20020a05620a108d00b0078ec439a9a7sm1348922qkk.62.2024.04.11.19.12.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 19:12:39 -0700 (PDT)
+ Thu, 11 Apr 2024 19:12:41 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Joao Paulo Goncalves <jpaulo.silvagoncalves@gmail.com>
-Cc: Joao Paulo Goncalves <joao.goncalves@toradex.com>, 
- Vignesh Raghavendra <vigneshr@ti.com>, u-boot@lists.denx.de
-In-Reply-To: <20240320121632.105730-1-jpaulo.silvagoncalves@gmail.com>
-References: <20240320121632.105730-1-jpaulo.silvagoncalves@gmail.com>
-Subject: Re: [PATCH 0/2] arm: mach-k3: am62: change a53 clock frequency by
- speed grade
-Message-Id: <171288795912.897536.8167739270175383736.b4-ty@konsulko.com>
-Date: Thu, 11 Apr 2024 20:12:39 -0600
+To: Simon Glass <sjg@chromium.org>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>
+Cc: u-boot@lists.denx.de, Vignesh Raghavendra <vigneshr@ti.com>, 
+ Andrew Davis <afd@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>, 
+ Udit Kumar <u-kumar1@ti.com>, Neha Malcom Francis <n-francis@ti.com>
+In-Reply-To: <20240326-b4-upstream-jtag-debug-unlock-v1-1-720d8635a4f4@ti.com>
+References: <20240326-b4-upstream-jtag-debug-unlock-v1-1-720d8635a4f4@ti.com>
+Subject: Re: [PATCH] binman: ti-secure: Enable debug extension for combined
+ boot
+Message-Id: <171288796021.897536.3389089210066652359.b4-ty@konsulko.com>
+Date: Thu, 11 Apr 2024 20:12:40 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -92,17 +93,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 20 Mar 2024 09:16:30 -0300, Joao Paulo Goncalves wrote:
+On Tue, 26 Mar 2024 13:37:06 +0530, Manorit Chawdhry wrote:
 
-> From: Joao Paulo Goncalves <joao.goncalves@toradex.com>
+> To debug using jtag, ROM needs to unlock jtag debugging on HS devices
+> and it does that looking at this debug extension.
 > 
-> This series introduces a method to dynamically set the AM62 A53 CPU frequency
-> based on its speed grade. It adds a new function to retrieve the A53 frequency
-> value by reading the speed grade from the hardware. Subsequently, it adjusts the
-> Cortex R5 device tree at runtime  with the frequency value before initializing
-> the remote processor.
+> Add the debug extension and enable it by default.
 > 
-> [...]
+> 
 
 Applied to u-boot/master, thanks!
 
