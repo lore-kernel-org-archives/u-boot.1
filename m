@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61FE8C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 21:19:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B33AC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 21:48:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFA16881EA;
-	Fri, 12 Apr 2024 23:18:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3F5B287E43;
+	Fri, 12 Apr 2024 23:48:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OCem5mRJ";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tKXUUE/H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D09B8800D; Fri, 12 Apr 2024 22:45:54 +0200 (CEST)
-Received: from mail-ot1-x335.google.com (mail-ot1-x335.google.com
- [IPv6:2607:f8b0:4864:20::335])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5E9F987E50; Fri, 12 Apr 2024 23:48:42 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63D1887DD3
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 22:45:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1097787D98
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 23:48:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ckhardin@gmail.com
-Received: by mail-ot1-x335.google.com with SMTP id
- 46e09a7af769-6e0f43074edso962797a34.1
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 13:45:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1712954750; x=1713559550; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=S/K2Ufg/yMYFQ8nc6KbnGC81lE/m+K+SC8nttV4KaXk=;
- b=OCem5mRJOYCC3fT/oQVjKiWlG/AL7X17OPszJwisxHDvt9O2h3LJqr6QFhfuf/R9oA
- KaSAq1dq+bRmY0YditnQqmiWVmou/pPGz0fn/c59pAY1GcP9s7T9lr6yIotnbgxdL5Ls
- V7icsPniFFbS1jg9wNZyyvF7Bw1YpKVww5cRrksGLkTwV0ZaVeDMJUJ3/N6vN4Bs/iRj
- vJVEbIRhsfUmaTFB5fJnFNVLzKhc//7RO/w/h1WDhw56s0jUQUeBOdfQGy528QUPZyEE
- kb0ypgXt8xKFQWlZL63q3kp7tGtcxSR+N1Q21e9Qn22m7akyq/rHiBj4BlnjgmkrjC5k
- X22g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712954750; x=1713559550;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=S/K2Ufg/yMYFQ8nc6KbnGC81lE/m+K+SC8nttV4KaXk=;
- b=KG0LYx2pPxCcliFl7wL8mArkprQb+xmqMN/wU7+9I1m3moMhzfYHlXflK1p9iuXiC2
- qYR5AK8XXHPIuyDAwbl/hiq6o3AbeWx9mGail7xgQ6EfYP9Wi8hxXrfQeNywXaJzfuyN
- /YrxN41M/AXBhvtNnB1feNq7NWFB166XUMYTl6EzUZHdChV/B/duBEvqzepOgJ6A69Ff
- cEJJY3C65e9HXDIjk3vCJWCoMZIcwAZHx4Zpbt0xJ/ED3oEJnWr1Nb/3x+RZSMoJDhfH
- 6MtNJyCCEeCIGr/1pElxBZ9bQlTuV3Rk5YhZZARW2Ce86A83qS6xjOfrAF/H4StIiXsY
- N4Jg==
-X-Gm-Message-State: AOJu0YwqUp/mpXTnIySEYyOBKKg4z1x1BBuxmg+SDaFC8Vh/dqEGSlkx
- XvoVZXfUZf5U7U6LPOQ75TvddxUxyQNewb6Dn2hWilxZr5gaC+yoXuJtBw==
-X-Google-Smtp-Source: AGHT+IFp/BZ0He7HCr5p0YZxp4y4v1h33IwA1ZrF+FKnEuBide2Ol49bAd/4CGw1T+L99hdfaklz4Q==
-X-Received: by 2002:a05:6830:1e1b:b0:6ea:1791:9203 with SMTP id
- s27-20020a0568301e1b00b006ea17919203mr3374891otr.28.1712954750284; 
- Fri, 12 Apr 2024 13:45:50 -0700 (PDT)
-Received: from purgatory.attlocal.net
- ([2600:1700:65a0:14f0:8c8a:e1d:21bd:eeed])
- by smtp.gmail.com with ESMTPSA id
- q18-20020a9d6652000000b006ea19aa0e4fsm823327otm.29.2024.04.12.13.45.49
- (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
- Fri, 12 Apr 2024 13:45:49 -0700 (PDT)
-From: Charles Hardin <ckhardin@gmail.com>
-To: u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
- Charles Hardin <ckhardin@gmail.com>
-Subject: [PATCHv2] net: add support to parse the NIS domain for the dhcp
- options
-Date: Fri, 12 Apr 2024 13:45:33 -0700
-Message-Id: <20240412204533.83605-1-ckhardin@gmail.com>
-X-Mailer: git-send-email 2.39.3 (Apple Git-146)
-In-Reply-To: <20240401191319.62652-1-ckhardin@gmail.com>
-References: <20240401191319.62652-1-ckhardin@gmail.com>
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43CLmKpX014276;
+ Fri, 12 Apr 2024 16:48:20 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1712958500;
+ bh=N1ue0qPlY+FLhQ4+TI++3do78I00m/Ra+ZHwk3yEKi4=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=tKXUUE/H/8977ffKCFi1zHcPxyCFXqsJ140T51HOJL63kb4MNbzq57Rn/vdLEzcs5
+ OW+Z5xZKQ4naarL9ojFcAh4tb+FXom94rqOCPIAOo9InK56EEE92KXIe+84W128bXG
+ b95tyHviW/ZO+plNVVnOyQR7TaSv6xv/9EBQHhT8=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43CLmK2O012170
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 12 Apr 2024 16:48:20 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 12
+ Apr 2024 16:48:19 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 12 Apr 2024 16:48:19 -0500
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43CLmJ4k116044;
+ Fri, 12 Apr 2024 16:48:19 -0500
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+CC: Andrew Davis <afd@ti.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>, Neha Malcom Francis
+ <n-francis@ti.com>, Roger Quadros <rogerq@kernel.org>, Nikhil M Jain
+ <n-jain1@ti.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>, "Kamlesh
+ Gurudasani" <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, "Robert
+ Nelson" <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>, "Bryan
+ Brattlof" <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini
+ <trini@konsulko.com>
+Subject: Re: [PATCH 01/13] ti:keys Add EFI signature list
+In-Reply-To: <CAC_iWjKhj8OJmAYBDxa8nx0pY+gaYCv+2hXecnVZmOCGGw0gBg@mail.gmail.com>
+References: <20240408213349.96610-1-j-humphreys@ti.com>
+ <20240408213349.96610-2-j-humphreys@ti.com>
+ <ee9a13b7-6b52-4bc8-8876-e194e1a66f92@gmx.de>
+ <ec241b23-5523-45d6-aa05-5d1667c34773@ti.com>
+ <2a818e83-9971-4626-9695-24e7d9c2fdd5@gmx.de>
+ <44af30a5-c9c4-47d6-b2e6-7226e01a60ae@ti.com>
+ <CAC_iWjJgAmCpxqk_Tty9jxfjauo_jVyVH9a4fxhiyjqg2UVPAw@mail.gmail.com>
+ <86r0fdysku.fsf@udb0321960.dhcp.ti.com>
+ <CAC_iWjKhj8OJmAYBDxa8nx0pY+gaYCv+2hXecnVZmOCGGw0gBg@mail.gmail.com>
+Date: Fri, 12 Apr 2024 16:48:19 -0500
+Message-ID: <86bk6ez1zw.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 12 Apr 2024 23:18:50 +0200
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,35 +92,197 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There is code in the bootp parsing for NIS domain and add the
-same support for the dhcp options as well. This allows the same
-usage of the data when the dhcp command is used in the boot
-command.
+Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
 
-Signed-off-by: Charles Hardin <ckhardin@gmail.com>
----
- net/bootp.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+> Hi Jon,
+>
+>
+> On Wed, 10 Apr 2024 at 20:35, Jon Humphreys <j-humphreys@ti.com> wrote:
+>>
+>> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+>>
+>> > On Tue, 9 Apr 2024 at 23:14, Andrew Davis <afd@ti.com> wrote:
+>> >>
+>> >> On 4/9/24 2:26 PM, Heinrich Schuchardt wrote:
+>> >> > On 4/9/24 14:14, Andrew Davis wrote:
+>> >> >> On 4/8/24 10:34 PM, Heinrich Schuchardt wrote:
+>> >> >>> On 4/8/24 23:33, Jonathan Humphreys wrote:
+>> >> >>>> EFI signature list using TI dummy keys.
+>> >> >>>
+>> >> >>> Adding vendor public keys into the code base to lock down generated
+>> >> >>> binaries to the vendors unpublished private key does not match well with
+>> >> >>> the intent of the GNU public license.
+>> >> >>>
+>> >> >>
+>> >> >> The matching private keys are already published in this same
+>> >> >> repo/directory (arch/arm/mach-k3/keys).
+>> >> >>
+>> >> >> Andrew
+>> >> >
+>> >> > Why should we create signed capsules which are already compromised by
+>> >> > publishing the private key?
+>> >> >
+>> >>
+>> >> If you buy these devices you have two options, you can burn real
+>> >> keys, or you can burn these dummy keys. If you burn dummy keys
+>> >> then these images will boot and so will any image you or anyone
+>> >> else wants to boot on the device. (since the keys are published
+>> >> anyone can make images for them, that is how we do GP (general
+>> >> purpose) devices these days)
+>> >>
+>> >> If you burn your own keys, then you switch out these keys here
+>> >> and your device will only boot images that you permit by signing
+>> >> with your keys.
+>> >
+>> > I am not sure I am following you here.  We don't burn anything in the
+>> > case of EFI keys. They are placed in an elf section and we assume the
+>> > device will have a chain of trust enabled, naturally verifying those
+>> > keys along with the u-boot binary.
+>> >
+>> >>
+>> >> You'll find plenty of open source projects do the same and
+>> >> give out example keys to show how to use real keys, even
+>> >> official GNU projects.
+>> >
+>> > Yes, but the keys defined here are useless unless you have a default
+>> > defconfig that uses them and embeds them in the binary. I am not cc'ed
+>> > in all the patches of the series, is that added somewhere? And if you
+>>
+>> Yes, they are part of this series
+>> https://lore.kernel.org/r/20240408213349.96610-1-j-humphreys@ti.com.
+>> Thanks for the reviews.
+>>
+>> > unconditionally enable secure boot It would be far more interesting to
+>> > embed the MS SHIM key along with that special key you are trying to
+>> > define, so that firmware can boot COTS distros as well
+>>
+>> Yes, we should consider.  But since that is outside of the EFI capsule
+>> use case, I would rather take it up in a separate patch.
+>
+> Ok, the commit message wasn't clear, and based on Andrews's initial
+> response I thought you wanted to use those for UEFI secure boot, not
+> capsule updates.
+> Those are your boards so I won't NAK this, but I'd strongly advise
+> *not* to add this.  I assume you want capsule auth by default because
+> SystemReady-IR >=2.0 mandates it?
+>
+> In that case, it would be a far better idea to document the process of
+> creating signed capsules clearly either in U-Boots EFI docs and/or
+> your board docs.
+> I am pretty confident that if we merge this now we will have future
+> products using the keys above
 
-diff --git a/net/bootp.c b/net/bootp.c
-index 6800290963..c15472f5d3 100644
---- a/net/bootp.c
-+++ b/net/bootp.c
-@@ -883,6 +883,14 @@ static void dhcp_process_options(uchar *popt, uchar *end)
- 			break;
- 		case 28:	/* Ignore Broadcast Address Option */
- 			break;
-+		case 40:	/* NIS Domain name */
-+			if (net_nis_domain[0] == 0) {
-+				size = truncate_sz("NIS Domain Name",
-+					sizeof(net_nis_domain), size);
-+				memcpy(&net_nis_domain, popt + 2, size);
-+				net_nis_domain[size] = 0;
-+			}
-+			break;
- #if defined(CONFIG_CMD_SNTP) && defined(CONFIG_BOOTP_NTPSERVER)
- 		case 42:	/* NTP server IP */
- 			net_copy_ip(&net_ntp_server, (popt + 2));
--- 
-2.39.3 (Apple Git-146)
+Thanks Ilias.
 
+If I understand you correctly, I don't agree with the approach of not
+having a working implementation so that developers are forced to think
+through their support.  Not having a feature enabled in upstream leads
+to latent bugs, bit rot, lack of coordination and openess, etc.  It
+worries me that there are so many claims of authenticated capsule
+support but nothing in upstream on those devices.
+
+But I absolutely acknowledge your concern that if we make this 'just
+work' then developers will overlook the details and not properly secure
+their solutions.
+
+What I suggest to mitigate this:
+1) as you say, add documentation, including a 'porting guide' section so
+   developers know what steps they need to take, and
+2) Add a developer config that is set by default.  With this config set,
+   during capsule updates, emit a warning message that
+   instructs them to read the porting section of the doc to ensure they
+   have secured their solution.  To remove the warning, a developer would
+   follow the porting guidelines and then unset the "developer config"
+   configuration to signify they have secured the solution.  This is
+   what optee does, emitting the below during boot, until the config is
+   unset:
+
+I/TC: WARNING: This OP-TEE configuration might be insecure!
+I/TC: WARNING: Please check
+https://optee.readthedocs.io/en/latest/architecture/porting_guidelines.html
+
+Last, I am pondering the idea of not including the actual .esl
+certificate, but rather adding a make step that would generate the
+certificate from a given keypair.  For the TI upstream implementation,
+we would point to the open developer keys already being used to
+demonstrate secure boot.  As part of porting, the developer would point
+to their own keys. That way the certificate has the developer's info,
+even if they are using our open keys for development purposes.
+Thoughts?
+
+Outside of the capsule authentication aspect, the porting section would
+be a good place to remind the developer to define his own capsule GUIDs
+as well.
+
+Jon
+
+>
+> Thanks
+> /Ilias
+>>
+>> >
+>> > Thanks
+>> > /Ilias
+>> >
+>> >
+>> >>
+>> >> https://github.com/gpg/gnupg/tree/master/tests/openpgp/samplekeys
+>> >>
+>> >> Andrew
+>> >>
+>> >> > Best regards
+>> >> >
+>> >> > Heinrich
+>> >> >
+>> >> >>
+>> >> >>> Best regards
+>> >> >>>
+>> >> >>> Heinrich
+>> >> >>>
+>> >> >>>>
+>> >> >>>> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+>> >> >>>> ---
+>> >> >>>>   arch/arm/mach-k3/keys/custMpk.esl | Bin 0 -> 1523 bytes
+>> >> >>>>   1 file changed, 0 insertions(+), 0 deletions(-)
+>> >> >>>>   create mode 100644 arch/arm/mach-k3/keys/custMpk.esl
+>> >> >>>>
+>> >> >>>> diff --git a/arch/arm/mach-k3/keys/custMpk.esl
+>> >> >>>> b/arch/arm/mach-k3/keys/custMpk.esl
+>> >> >>>> new file mode 100644
+>> >> >>>> index
+>> >> >>>> 0000000000000000000000000000000000000000..2feb704e0a5fd126410de451d3c0fa4d3edccc52
+>> >> >>>> GIT binary patch
+>> >> >>>> literal 1523
+>> >> >>>> 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
+>> >> >>>> D66<<J
+>> >> >>>>
+>> >> >>>> literal 0
+>> >> >>>> HcmV?d00001
+>> >> >>>>
+>> >> >>>
+>> >> >
