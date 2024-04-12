@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67AB8C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 18:50:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E158C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 18:52:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAFBA8800D;
-	Fri, 12 Apr 2024 20:50:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 97C5288120;
+	Fri, 12 Apr 2024 20:52:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dN7vA6/Z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iMRT92Q2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F72488020; Fri, 12 Apr 2024 20:50:44 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id D96CC87D64; Fri, 12 Apr 2024 20:51:58 +0200 (CEST)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB14387D64
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 20:50:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAC8187D64
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 20:51:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-343f62d8124so875483f8f.2
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 11:50:41 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-617dfcf80aeso13685227b3.3
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 11:51:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712947841; x=1713552641; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=Q99eOkoMaR75qwNiNU/YsTlQUFkMKnjBgosqoMZlTUs=;
- b=dN7vA6/ZOWpMeShsrGwxfVDYRk9anILtPgniX3qRlgPGaAcvZ2Lb0kHAfrtADf3zbN
- +lRjxS1yuvGqK9ZRRfAYDmTyQU+C8m9QH1LwS1/tnLw7torloYI6oAkrD/WLnjEy8aDE
- 1dLfr9o8LS4TVebf1IpRPXqOCp4pOQzV9tyVLvr/SgiU4J9AdXVtQAMJAuE6kOffWP3b
- gjUztLbYcJIgUzuoxTwOF0aQDMr/nBxilqnv0dQeqITJ1tqjaBsOwDOOqE5gBKlsQn8X
- yrdaBp4Qi5ykUg6pp9u3zHhKx+YCXGc8keJLl2rzF0rWA42FV3D1R3m555uuJSckgcq8
- Gjeg==
+ d=konsulko.com; s=google; t=1712947915; x=1713552715; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=rIHs5kRtgNdk1Nm6eEj5HR8bsVbRTWAc1ErwZVnEzeQ=;
+ b=iMRT92Q2CBUQaLNTfKmoqaqrRktM5rFIJx0JRNTG0jXoFggAXkVIearvB4QqQv+ek1
+ LXuoCnT4YlBiq6BacTUYWGjv+JEkQOLkCezq3okmjF9FzsF4m1EBlrI5gs0u0eJDS03U
+ o1YnQA8GYZw1GAOrhSYsSWK9W2bO7A2YTUbB4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712947841; x=1713552641;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Q99eOkoMaR75qwNiNU/YsTlQUFkMKnjBgosqoMZlTUs=;
- b=GrVLfY9ypdsoItj9DdPpFKhVEZgFn8X8TRWw//iGRBvV8+lQJAjlK5JXBFHFHObXw9
- 0NjNsuyGIN253ZmtkoOVhuQ7IqsCc2s/eJTOZRyvcBZzYHD3EYxuMfOreIXE6ro+j/0S
- 8mOznrIu+v4+7lzk86hGJXrOIfvHvB2X32PYiNyxjiCu2RGTmhsTzuoLuY9puDk8f9ZY
- 560meCWxfXirUwFYBFKZy3Vo0VNjyhNHQeHyd7htpMxfxLlUsntZtQZw/LoxCSEF7kb/
- a3pzfXDVLkBXrzs8DMBoEJgOSGIzAFXxtdEUYrX8T7KLfUiIh0cIuCNiwbCMd/dJx4J9
- YVKQ==
+ d=1e100.net; s=20230601; t=1712947915; x=1713552715;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rIHs5kRtgNdk1Nm6eEj5HR8bsVbRTWAc1ErwZVnEzeQ=;
+ b=DDf8Ck60rZN3IDl3DIGugX6PYyC/vuFgF1uUOj7JxN56SJSfKFNd92eIyGdQx3igq7
+ LAoaIEPHv+E/s19a7XskLqKN6/WJ1pCBrPcqu7Qm7yXbmee2ZaV8S0ZpAoxBYu8bofCL
+ uH0Smi6xQJ7CR7cckx3DYxrw8jD7NKFhKn4/g7NeIbXERQzfsLHK/0CwPyP4W7KXwI04
+ 7NAyKhaE/yTtgOUDXGtkBKpVee+6J2P4xpx4L5JmS7ra9wIMYXVpd+Jhl2uYv+JQ+fK2
+ ZXpEmpJKCV16NyVzn/VeJjiPjXJtaIbSfwbptPeWwwSusbhS641FPtBWmi/pI9Tj1JMu
+ jj5w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXdRruHYoS64TUuu1c5Qm3mrM5llwri9stPw611bJOr1C6NZ+B7IRTFBV/05bgwwk1ActtEHEo6T89dgN+zreqohUHrNQ==
-X-Gm-Message-State: AOJu0YxNnyXfYlt1T01B+tBYA+X2xWOUo8Y9de4gWcQumucyD2FhQ0rM
- hQCMSSfIdHKm9p7eHhqqHdAIQ+9cBwYQRyovJXDZogN8ZSPp/Bjw4b+OQTzA9FRq4smgBrIIVcl
- B17E=
-X-Google-Smtp-Source: AGHT+IHYuvq5vnZodOpKaR0LLXXnoI5cjJBxfolwpwdNlQX/GxxmvskxD5bS9CUpe4m+uvOMxk7KWA==
-X-Received: by 2002:a5d:61c8:0:b0:344:3dd:5092 with SMTP id
- q8-20020a5d61c8000000b0034403dd5092mr2164730wrv.16.1712947840969; 
- Fri, 12 Apr 2024 11:50:40 -0700 (PDT)
-Received: from [192.168.114.140] (92.40.204.173.threembb.co.uk.
- [92.40.204.173]) by smtp.gmail.com with ESMTPSA id
- u7-20020adfeb47000000b0033ec9ddc638sm4818474wrn.31.2024.04.12.11.50.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 12 Apr 2024 11:50:40 -0700 (PDT)
-Message-ID: <16d96fa3-4d95-4bfa-beac-6585426dc703@linaro.org>
-Date: Fri, 12 Apr 2024 20:50:37 +0200
+ AJvYcCUeyN+NFmjQmLx5PBlzcPmkOhdxUnSWe7Yye2SOlNWfS1CuKj3saHZcHcppQVJ13U7cQhlh2OgMEs8+AOIyNMosWtSmiA==
+X-Gm-Message-State: AOJu0Yx1C0/8mjXiZJlZBy96mEIFqg1lKsd6ntmKHN+Wx4qwtXKnQqSF
+ 2jGD9qXSz4Azbzksu0QOQvm988k230k57MtOWeksN9lThZwjNce4m/ombasJzKQ=
+X-Google-Smtp-Source: AGHT+IHwMq6uvAfaJDTmHhHJvdj9Sp7fmGTtPH7BO98ZDJ4569rCRJEBNSOSCGRpvp25UhMsLoxklw==
+X-Received: by 2002:a81:6d8f:0:b0:618:485f:747f with SMTP id
+ i137-20020a816d8f000000b00618485f747fmr3723328ywc.8.1712947915520; 
+ Fri, 12 Apr 2024 11:51:55 -0700 (PDT)
+Received: from bill-the-cat ([2806:102e:18:245e:b648:93e1:5c61:68a3])
+ by smtp.gmail.com with ESMTPSA id
+ f10-20020a05620a15aa00b0078d76c1178esm2724226qkk.119.2024.04.12.11.51.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 12 Apr 2024 11:51:55 -0700 (PDT)
+Date: Fri, 12 Apr 2024 12:51:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] sandbox: missing return value checks in eth-raw-os
+Message-ID: <20240412185152.GO2493117@bill-the-cat>
+References: <20240107082713.41539-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/5] zfs: Fix unaligned read of uint64
-To: mwleeds@mailtundra.com, u-boot@lists.denx.de
-References: <20240407014743.13872-1-mwleeds@mailtundra.com>
- <20240407014743.13872-4-mwleeds@mailtundra.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240407014743.13872-4-mwleeds@mailtundra.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qSYJKOzHai/Ig5/A"
+Content-Disposition: inline
+In-Reply-To: <20240107082713.41539-1-heinrich.schuchardt@canonical.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,136 +91,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Phaedrus,
 
-On 07/04/2024 03:47, mwleeds@mailtundra.com wrote:
-> Without this patch, when trying to boot zfs using U-Boot on a Jetson TX2
-> NX (which is aarch64), I get a CPU reset error like so:
-> 
-> "Synchronous Abort" handler, esr 0x96000021
-> elr: 00000000800c9000 lr : 00000000800c8ffc (reloc)
-> elr: 00000000fff77000 lr : 00000000fff76ffc
-> x0 : 00000000ffb40f04 x1 : 0000000000000000
-> x2 : 000000000000000a x3 : 0000000003100000
-> x4 : 0000000003100000 x5 : 0000000000000034
-> x6 : 00000000fff9cc6e x7 : 000000000000000f
-> x8 : 00000000ff7f84a0 x9 : 0000000000000008
-> x10: 00000000ffb40f04 x11: 0000000000000006
-> x12: 000000000001869f x13: 0000000000000001
-> x14: 00000000ff7f84bc x15: 0000000000000010
-> x16: 0000000000002080 x17: 00000000001fffff
-> x18: 00000000ff7fbdd8 x19: 00000000ffb405f8
-> x20: 00000000ffb40dd0 x21: 00000000fffabe5e
-> x22: 000000ea77940000 x23: 00000000ffb42090
-> x24: 0000000000000000 x25: 0000000000000000
-> x26: 0000000000000000 x27: 0000000000000000
-> x28: 0000000000bab10c x29: 00000000ff7f85f0
-> 
-> Code: d00001a0 9103a000 94006ac6 f9401ba0 (f9400000)
-> Resetting CPU ...
-> 
-> This happens when be64_to_cpu() is called on a value that exists at a
-> memory address that's 4 byte aligned but not 8 byte aligned (e.g. an
-> address ending in 04). The call stack where that happens is:
-> check_pool_label() ->
-> zfs_nvlist_lookup_uint64(vdevnvlist, ZPOOL_CONFIG_ASHIFT,...) ->
-> be64_to_cpu()
+--qSYJKOzHai/Ig5/A
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This is very odd, aarch64 doesn't generally have these restrictions. I 
-got a bit nerdsniped when I saw this so I did some digging and figured this:
+On Sun, Jan 07, 2024 at 09:27:12AM +0100, Heinrich Schuchardt wrote:
 
-1. Your abort exception doesn't include the FAR_ELx register (which 
-should contain the address that was being accessed when the abort 
-occured). This means your board is running in EL3.
-2. It turns out there is an "A" flag in the SCTLR_ELx register, when set 
-this flag causes a fault when trying to load from an address that isn't 
-aligned to the size of the data element (see "A, bit" on 
-https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-Registers/SCTLR-EL3--System-Control-Register--EL3-
+> We should check the return value of fcntl().
+>=20
+> Addresses-Coverity-ID: 131108 ("Unchecked return value from library")
+> Addresses-Coverity-ID: 131109 ("Unchecked return value from library")
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-I'm not sure who's in the "wrong" here, maybe the driver should avoid 
-unaligned accesses? But then again, I don't think you should be running 
-a ZFS driver in EL3.
+Applied to u-boot/master, thanks!
 
-I'm not familiar with the Jetson Nano, but maybe there's a documented 
-way to run U-Boot so that it isn't executing in EL3? Or if not you could 
-also try unsetting the A flag.
+--=20
+Tom
 
-If this really is something to fix in the driver, I don't think 
-hotpatching every unaligned access with a malloc() is the right solution.
+--qSYJKOzHai/Ig5/A
+Content-Type: application/pgp-signature; name="signature.asc"
 
-> 
-> Signed-off-by: Phaedrus Leeds <mwleeds@mailtundra.com>
-> Tested-by: Phaedrus Leeds <mwleeds@mailtundra.com>
+-----BEGIN PGP SIGNATURE-----
 
-regarding your question about re-sending to remove these tags, I'd say 
-probably yes, and especially if you're going to send a new revision anyway.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYZgsUACgkQFHw5/5Y0
+tyxf0wv9GvHfbjmBaH34PeFATrlxGgLp2chQMsyNnNT4AAPpc3H9syo2gOWVl/HB
+YxzDYh8OFKxHz5qXBKQYyQElmfVYAft3GwNv7V/L/XwJUGK20PcMCT30ieTXwmIy
+VXC3Cb0FlKdY2Q/OMsKF40vJ24GXSXWBJTCsmIlNXcSiPnDiT6/cwDsqrpOHKB/2
+im51yAV14ZiHFGOqkRzrPx3/aNrjutAdScH0BaTkwz7wfBrc0mdXQaN4EVs98YjD
+UOi/NfMquH59Bj4ZCA0kDDbFKhEoYxbP/LU4SjmmXpodBrYqtGwqqf2hFLmcSVMq
+eFso+YphOJmr1aZZ7u5kBXloL0jgUBab4e9VsdbE78p8/LC/C/rSy55BxOkK6MDO
+BDaQDsbrBlCazaGPrfPwm6Xoni12TscVGx+3sl7zNdAdQXx2DJiscfR07x/6r3Nt
+uWPoyTaL0bxAnI3+8fyfdRXGhJWwSTVr4xk1+YaVbbMUARfbxHIZE9GYLr7S7KBq
+P8iVsF5v
+=Xe9r
+-----END PGP SIGNATURE-----
 
-fwiw you seem to have gotten pretty much everything else about the patch 
-submission process spot on :)
-
-Kind regards,
-> ---
->   fs/zfs/zfs.c | 18 ++++++++++++++++++
->   1 file changed, 18 insertions(+)
-> 
-> diff --git a/fs/zfs/zfs.c b/fs/zfs/zfs.c
-> index 61d58fce68..9a50deac18 100644
-> --- a/fs/zfs/zfs.c
-> +++ b/fs/zfs/zfs.c
-> @@ -1552,35 +1552,53 @@ nvlist_find_value(char *nvlist, char *name, int valtype, char **val,
->   			if (nelm_out)
->   				*nelm_out = nelm;
->   			return 1;
->   		}
->   
->   		nvlist += encode_size;	/* goto the next nvpair */
->   	}
->   	return 0;
->   }
->   
-> +int is_word_aligned_ptr(void *ptr) {
-> +	return ((uintptr_t)ptr & (sizeof(void *) - 1)) == 0;
-> +}
-> +
->   int
->   zfs_nvlist_lookup_uint64(char *nvlist, char *name, uint64_t *out)
->   {
->   	char *nvpair;
->   	size_t size;
->   	int found;
->   
->   	found = nvlist_find_value(nvlist, name, DATA_TYPE_UINT64, &nvpair, &size, 0);
->   	if (!found)
->   		return 0;
->   	if (size < sizeof(uint64_t)) {
->   		printf("invalid uint64\n");
->   		return ZFS_ERR_BAD_FS;
->   	}
->   
-> +	/* On arm64, calling be64_to_cpu() on a value stored at a memory address
-> +	 * that's not 8-byte aligned causes the CPU to reset. Avoid that by copying the
-> +	 * value somewhere else if needed.
-> +	 */
-> +	if (!is_word_aligned_ptr((void *)nvpair)) {
-> +		uint64_t *alignedptr = malloc(sizeof(uint64_t));
-> +		if (!alignedptr)
-> +			return 0;
-> +		memcpy(alignedptr, nvpair, sizeof(uint64_t));
-> +		*out = be64_to_cpu(*alignedptr);
-> +		free(alignedptr);
-> +		return 1;
-> +	}
-> +
->   	*out = be64_to_cpu(*(uint64_t *) nvpair);
->   	return 1;
->   }
->   
->   char *
->   zfs_nvlist_lookup_string(char *nvlist, char *name)
->   {
->   	char *nvpair;
->   	char *ret;
->   	size_t slen;
-
--- 
-// Caleb (they/them)
+--qSYJKOzHai/Ig5/A--
