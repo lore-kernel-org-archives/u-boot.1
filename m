@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6FE6DC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 22:00:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CE1FC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 22:00:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D41688227;
-	Fri, 12 Apr 2024 23:59:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8321C881C9;
+	Fri, 12 Apr 2024 23:59:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="U+KisBGt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XHjWNkqU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80ED48821D; Fri, 12 Apr 2024 23:59:37 +0200 (CEST)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id 553A288229; Fri, 12 Apr 2024 23:59:39 +0200 (CEST)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5ACCA881F8
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 23:59:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C63BC88211
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 23:59:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-1e4f341330fso13317865ad.0
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 14:59:35 -0700 (PDT)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-1e3f17c64daso11335835ad.3
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 14:59:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712959173; x=1713563973; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1712959175; x=1713563975; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=nlwKeRsDy+kfJhv9p2vAF581ljJYvnxPui/T5R0IvCM=;
- b=U+KisBGt2nRLyu98FUUhw2eClkWRQg8sgN1HKYfZnJtJCiP+zXHW5GXhUOEzAv15W+
- xxhHtRJ1db48HVLMegW2oyFLDSmGDJ89yDTMqWCnKNb355VfubOcAZLd9NN8mWOG3g59
- XWzc9yow9WrQZ70pjWFe8NuLJkgAHAnMZ4C0c=
+ bh=GBX5Zfg7THoRqAnb/lutndw2wzNo54hBAAJqHPjo55w=;
+ b=XHjWNkqULYM2/YO8aPLnJ6DO0BVeH4+uC6Ri9Tfqq4G83Pb+rVEkH48iAdC/S4eLgS
+ JFuuGkDvYCczHBjpQdPAJ7A3nGGhVSN7P3vWcjI7ik3FC2EYH9kn42TpIlWxNVdrFgO8
+ YqwHY3FxxAFJGo7Pi8QqudiGy0Lu0TjYUdI6w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712959173; x=1713563973;
+ d=1e100.net; s=20230601; t=1712959175; x=1713563975;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=nlwKeRsDy+kfJhv9p2vAF581ljJYvnxPui/T5R0IvCM=;
- b=YqadmBHJdP06qq8MBArU4AIu0YNnQW2xh1luNOhNmijnCAJt+NbLV2Z11pmSgp+IDS
- MjIZ2ezSVwbv/TfF4vD8AI4e0w1wPVWFgNFILS2FPlXOti203/olP9VskYWXFxy0yavE
- J4mtK1wAKnmNyhDIh5lGtOvp+6LgjXeVBOdFtKysXSysOHPj6COQ152VpJYmXGv1eVCa
- C1T2pUeQHTtrQfsU+FNxZR2EoRY5OUR2AOE+ndH8/aOUPeal9D02IgKgFnSYyoBy4UNO
- UXw2ZOh92TcgV8HNjC78uJ5YbA8SiEkVbj+wGFn4cDIkLOrdKUXbXGqw3z3JpMP5jD35
- ZH6w==
-X-Gm-Message-State: AOJu0Ywu0/5GYjS/MSzAEUYeq9oy1+UoxWBwMIIr2wxkLgJu2xsZthqA
- qmarfwB8cs4ZuV/OOwmqX/B1oayCiOmlvr6B/HUahzCeH/zdikMXBk2AZsCBG+oNhQ/3YwrXPv2
- 5bFtTrw==
-X-Google-Smtp-Source: AGHT+IGFU+cKV1pVnr0EZP0dxII9ha0msYqjg3vZHd526aCIhbHFvB1iaEQiAHJt1N+BnoReuyhGVQ==
-X-Received: by 2002:a17:902:cecb:b0:1e4:2451:c2b5 with SMTP id
- d11-20020a170902cecb00b001e42451c2b5mr4469844plg.13.1712959173514; 
- Fri, 12 Apr 2024 14:59:33 -0700 (PDT)
+ bh=GBX5Zfg7THoRqAnb/lutndw2wzNo54hBAAJqHPjo55w=;
+ b=NQtMvVkPGNu7j6puih6OKxMEVu9e/YrNCB4lGJZefH0N1FeYt8qg6GUsya1vuzAT30
+ nHxzakZi7dTs2MWvIhNgPNygYqKQK6o/k090xFLGh/7wxl/oLhMdBtGZK57LaV2nMdEn
+ PD0O1m8Hqv0izQXJLkOtCO9wcX5fWbYvx2h44s7uhjzkA33lpEau8POwc6A35xxX4her
+ g1tdiJgS+zQJducTBZyZPzVPFZXlzWKF0IZsKPRrT8z9gExkx5HEqYBCfAAHBeqDn8xb
+ CJR1FMOUahV40hAFWe6xrb2KwXEHmupcFGCHr4kh2zwZx3UW5MNIgz7jM5tubFCZz1Cj
+ V2FQ==
+X-Gm-Message-State: AOJu0YxKXqmVZ3RiM8RtnTxwBWGDctoXYaNeNkZ3yv435MSicRMdo3YP
+ gzF/JerMoM7UXHfp4meofTO3aVnF+xQyQ7U9B4UCX/AQ/FjIC8k9X8zORcNS+1H//o7+AlD5ZO/
+ 4SsiG+A==
+X-Google-Smtp-Source: AGHT+IGTRKw5UA9LEng4eAOH2V3ll1IkH4rVnKC7VipAXpmXfcbDMQjnh037dyDLss/GruQCLqtS7A==
+X-Received: by 2002:a17:902:fc44:b0:1e1:1d5:f857 with SMTP id
+ me4-20020a170902fc4400b001e101d5f857mr4206664plb.34.1712959174971; 
+ Fri, 12 Apr 2024 14:59:34 -0700 (PDT)
 Received: from [127.0.1.1] ([2806:102e:18:245e:b648:93e1:5c61:68a3])
  by smtp.gmail.com with ESMTPSA id
- kw7-20020a170902f90700b001e45240eca4sm3472958plb.196.2024.04.12.14.59.32
+ kw7-20020a170902f90700b001e45240eca4sm3472958plb.196.2024.04.12.14.59.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Apr 2024 14:59:33 -0700 (PDT)
+ Fri, 12 Apr 2024 14:59:34 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: JJLIU0@nuvoton.com, KWLIU@nuvoton.com, joe.hershberger@ni.com, 
  rfried.dev@gmail.com, Jim Liu <jim.t90615@gmail.com>
 Cc: u-boot@lists.denx.de, Parvathi Bhogaraju <pbhogaraju@microsoft.com>
-In-Reply-To: <20240408084902.2848964-1-JJLIU0@nuvoton.com>
-References: <20240408084902.2848964-1-JJLIU0@nuvoton.com>
-Subject: Re: [PATCH v1] net: designware: Invalidate RX buffer cache before
- freeing the DMA descriptor
-Message-Id: <171295917233.1044279.9785370721236618454.b4-ty@konsulko.com>
-Date: Fri, 12 Apr 2024 15:59:32 -0600
+In-Reply-To: <20240408085017.2849211-1-JJLIU0@nuvoton.com>
+References: <20240408085017.2849211-1-JJLIU0@nuvoton.com>
+Subject: Re: [PATCH v1] net: designware: Pass all multicast frames in
+ designware driver
+Message-Id: <171295917369.1044279.15563244192142114449.b4-ty@konsulko.com>
+Date: Fri, 12 Apr 2024 15:59:33 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -92,17 +92,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 08 Apr 2024 16:49:02 +0800, Jim Liu wrote:
+On Mon, 08 Apr 2024 16:50:17 +0800, Jim Liu wrote:
 
-> In IPv6 context, the ICMP and UDP checksum byte in the RX packet
-> is initially set to 0, recaclculated, and then re-inserted.
-> This process can result in a dirty cache line. To prevent issues,
-> it is essential to invalidate cache for the RX buffer before freeing
-> the descriptor for next DMA transfer.
-> This ensure that the dirty cache line doesn't inadvertently written back
-> due to cache eviction, there by corrupting the RX buffer
+> Allowing multicast packets is required for IPv6 neighbor discovery
+> protocol.
 > 
-> [...]
+> 
 
 Applied to u-boot/master, thanks!
 
