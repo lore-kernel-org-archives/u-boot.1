@@ -4,82 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAB78C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 19:06:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ADD2C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 19:27:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48F78881C8;
-	Fri, 12 Apr 2024 21:06:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 75D5587E62;
+	Fri, 12 Apr 2024 21:27:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QZj4jF+L";
+	dkim=pass (2048-bit key; secure) header.d=linutronix.de header.i=@linutronix.de header.b="mccGG0x+";
+	dkim=permerror (0-bit key) header.d=linutronix.de header.i=@linutronix.de header.b="U9cKTSty";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AB18881CD; Fri, 12 Apr 2024 21:06:20 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 932668802D; Fri, 12 Apr 2024 21:27:53 +0200 (CEST)
+Received: from galois.linutronix.de (Galois.linutronix.de [193.142.43.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 832E9881BB
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 21:06:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CC3F87DA7
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 21:27:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=linutronix.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-41804f10c68so4721545e9.3
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 12:06:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712948778; x=1713553578; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=QB/8ep8thFQQU4ta2bSV2+q9DJBmJSoE10CldHQqNHI=;
- b=QZj4jF+LjFKwvpu1bxFNz/iS7yaSLTp2sekQhw1URgX3roPuMLk4Yp+XiG1egpQfMB
- R9cvge1uCM+yMBsrlwT+uE3xUjlLF5h29O/0HVycw77bVJCI6H4PIzvtY3UoaISCtuJR
- zLImUahrJ+z1Asb/+GujM3ZEuaHL8+7ZxchoQTB0qWpmza1VACuMhhdB4EfvTb4X7spr
- nOUtihAyTtuglxpwj55iVXOkoNq4gNiE7aou9A3f0kdpT5L5SkPOZe2qMOV1wBWiEPCg
- R+uKgi7PqZar2UTBBzAogRmSKj5NZk5J1Z4JYM9d0Unb9vQX0yPAvHoCPo9eZ4nLgnN+
- ykZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712948778; x=1713553578;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=QB/8ep8thFQQU4ta2bSV2+q9DJBmJSoE10CldHQqNHI=;
- b=LWOJdjiEZtujFt2FOoYWDp5mTwOt9qWfa9xg3MjacqRTzQugmKB4j3fr77/CaiLo0I
- 3aw7on5P+0hEYlTij8XW+2R26WK0yGTvNupj3pAX7BRKOaLyGzdwOamnipqZEjZp0xB4
- 7NtFJvAeQpmLsRqldVUcIeQnzWLsOVFhp0Z47ravDT2dQalqb3zvw3NiV45RwYKBpUIZ
- lsy387htf/tLXAjhWp9Tqdm0oCeGDJkDT7g/+ji3aE0nDzMtNnb2k9vbEKRVWzKr1Ow/
- d368QxEnZNeSD8DX8PVW1KH/AJyYVZU5YyEhEjKMagklsM6/Vyr9mZKMcNcgyAROiaes
- qJUg==
-X-Gm-Message-State: AOJu0YxneTBWU9RmqMW2BmMlS1egmaWHvZ5stWTKElIG6kHu4f3lyeeM
- LQ2MUA8Uqvxmh4JtBgfRr4++Z4ugnTOqwuwlU0o+0q+PVxZtRKH9CWpWS90d5DU=
-X-Google-Smtp-Source: AGHT+IFsOZbxWiRPoKB+eOPEITuhNqOxwzshYItGOQHsXMMa1D32LHjrOMdhtsf3uimD80gnLS55dA==
-X-Received: by 2002:a05:6000:a8d:b0:343:7ed6:765b with SMTP id
- dh13-20020a0560000a8d00b003437ed6765bmr2399361wrb.39.1712948777969; 
- Fri, 12 Apr 2024 12:06:17 -0700 (PDT)
-Received: from cymric.caleb.rex.connolly.tech (92.40.204.173.threembb.co.uk.
- [92.40.204.173]) by smtp.gmail.com with ESMTPSA id
- z15-20020adfe54f000000b00345c2f84d5asm4838062wrm.10.2024.04.12.12.06.16
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Apr 2024 12:06:17 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Artur Rojek <artur@conclusive.pl>, Bin Meng <bmeng.cn@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Chanho Park <chanho61.park@samsung.com>,
- Christian Taedcke <christian.taedcke@weidmueller.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Shiji Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] event: add an event for livetree fixups
-Date: Fri, 12 Apr 2024 20:04:02 +0100
-Message-ID: <20240412190542.1576801-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.44.0
+ spf=pass smtp.mailfrom=namcao@linutronix.de
+Date: Fri, 12 Apr 2024 21:27:46 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020; t=1712950070;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=DahBK8HZYm/poSHHvYuLy2mxwRUo7AclNQ4iUalUHoo=;
+ b=mccGG0x+u5igi92TdzRbhYq6ccs/yhLKaEY9nSuDNQJKDiYIM21YNaT+iS/9Qh5v2K2xYL
+ Te+ELT5ENqQYAvcty4niyJSbsrQy7pr6ZTxBDvL0mu08YfN8xajHI/b7fi+/zbeCk38pj3
+ /WIyKolmzCWcZ+bqxUx0hjFdCzBsffHylmM2w4zROFFwv0bnt2rmhls5wsCaslSsrfe1O/
+ 06CcWgzx4BOLgA071nt5CkhglFN33XqJRVz2qKrcD08L2+nXmwMVL5XUhLdWqkEP5t4Fue
+ C16Iv3CHTGzSoIxdG7qtY9B3+A7r7Kg5UIYxd4C4bhR11O3sBXGGF82rMg/Fgw==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+ s=2020e; t=1712950070;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=DahBK8HZYm/poSHHvYuLy2mxwRUo7AclNQ4iUalUHoo=;
+ b=U9cKTStymcpaseCiw4N5KK/0mNXR8irjHLDUhiwxaoLlaaBmyqkP2iMBjI49QQBHvFnN69
+ L+kEJUN5v0t2E7CA==
+From: Nam Cao <namcao@linutronix.de>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Bin Meng
+ <bmeng.cn@gmail.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/1] bootflow: always initialize bootflow_iter_set_dev
+ parameters
+Message-ID: <20240412212746.6c2fd483@namcao>
+In-Reply-To: <20240411085225.0b36a0e0@namcao>
+References: <20240410221206.22782-1-heinrich.schuchardt@canonical.com>
+ <20240411085225.0b36a0e0@namcao>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,76 +77,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a new EVT_OF_LIVE event to allow for the livetree to be
-modified before dm_init_and_scan(). Boards can perform fixups here to
-handle incompatibilities between U-Boot drivers and upstream DT.
+On 2024-04-11 Nam Cao wrote:
+> On 11/Apr/2024 Heinrich Schuchardt wrote:
+> > method_flags may be passed uninitialized to bootflow_iter_set_dev()
+> > if dev is not NULL.
+> > 
+> > Always initialize method_flags.
+> > 
+> > Addresses-Coverity-ID: 467057 Uninitialized scalar variable
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> 
+> Reviewed-by: Nam Cao <namcao@linutronix.de>
 
-This will be used by Qualcomm platforms in future patches to enable
-setting the dr_mode property if the board doesn't provide one. This has to be
-set before dm_init_and_scan() is called as this property effects the binding of
-drivers.
+Wait hold up.
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- common/board_r.c |  1 +
- common/event.c   |  2 ++
- include/event.h  | 12 ++++++++++++
- 3 files changed, 15 insertions(+)
+I was curious about the Addresses-Coverity-ID thing at looked it up.
+And I discovered that this patch was sent a few months a ago already [1].
 
-diff --git a/common/board_r.c b/common/board_r.c
-index da0b80f24ff0..7d2da51193ab 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -217,8 +217,9 @@ static int initr_of_live(void)
- 				    (struct device_node **)gd_of_root_ptr());
- 		bootstage_accum(BOOTSTAGE_ID_ACCUM_OF_LIVE);
- 		if (ret)
- 			return ret;
-+		event_notify_null(EVT_OF_LIVE);
- 	}
- 
- 	return 0;
- }
-diff --git a/common/event.c b/common/event.c
-index 16c2ba6cc921..db32ea0d06f8 100644
---- a/common/event.c
-+++ b/common/event.c
-@@ -45,8 +45,10 @@ const char *const type_name[] = {
- 
- 	/* fdt hooks */
- 	"ft_fixup",
- 
-+	"of_live",
-+
- 	/* main loop events */
- 	"main_loop",
- };
- 
-diff --git a/include/event.h b/include/event.h
-index a8f046da3c32..c6436c07d16f 100644
---- a/include/event.h
-+++ b/include/event.h
-@@ -144,8 +144,20 @@ enum event_t {
- 	 * images fail.
- 	 */
- 	EVT_FT_FIXUP,
- 
-+	/**
-+	 * @EVT_OF_LIVE:
-+	 * This event is triggered when using CONFIG_OF_LIVE immediately after
-+	 * the live tree has been created. It has no parameters, the live tree
-+	 * can be accessed from gd->of_root, or using the of_* helpers.
-+	 *
-+	 * This is intended to be used for performing board specific fixups
-+	 * on the tree before it is used by U-Boot. It is much more efficient
-+	 * to access and modify than the FDT.
-+	 */
-+	EVT_OF_LIVE,
-+
- 	/**
- 	 * @EVT_MAIN_LOOP:
- 	 * This event is triggered immediately before calling main_loop() which
- 	 * is the entry point of the command line. Its parameter is NULL.
--- 
-2.44.0
+What's the story here? Why is this patch resent? There was a test
+failure report the last time this patch was sent, has that been
+resolved yet?
+
+Best regards,
+Nam
+
+[1] https://lore.kernel.org/u-boot/20240118173802.GA2695740@bill-the-cat/T/
+
+> > ---
+> >  boot/bootflow.c | 4 +---
+> >  1 file changed, 1 insertion(+), 3 deletions(-)
+> > 
+> > diff --git a/boot/bootflow.c b/boot/bootflow.c
+> > index 68bf99329ab..f659a414c79 100644
+> > --- a/boot/bootflow.c
+> > +++ b/boot/bootflow.c
+> > @@ -244,7 +244,7 @@ static int iter_incr(struct bootflow_iter *iter)
+> >  	if (iter->flags & BOOTFLOWIF_SINGLE_DEV) {
+> >  		ret = -ENOENT;
+> >  	} else {
+> > -		int method_flags;
+> > +		int method_flags = 0;
+> >  
+> >  		ret = 0;
+> >  		dev = iter->dev;
+> > @@ -263,7 +263,6 @@ static int iter_incr(struct bootflow_iter *iter)
+> >  		} else if (IS_ENABLED(CONFIG_BOOTSTD_FULL) &&
+> >  			   iter->flags & BOOTFLOWIF_SINGLE_MEDIA) {
+> >  			log_debug("next in single\n");
+> > -			method_flags = 0;
+> >  			do {
+> >  				/*
+> >  				 * Move to the next bootdev child of this media
+> > @@ -305,7 +304,6 @@ static int iter_incr(struct bootflow_iter *iter)
+> >  				}
+> >  			} else {
+> >  				ret = bootdev_next_prio(iter, &dev);
+> > -				method_flags = 0;
+> >  			}
+> >  		}
+> >  		log_debug("ret=%d, dev=%p %s\n", ret, dev,
+> 
 
