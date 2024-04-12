@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D551C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 16:26:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A364AC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 18:11:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA90B88204;
-	Fri, 12 Apr 2024 18:25:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id C2E9A87ED3;
+	Fri, 12 Apr 2024 20:10:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RIJh/CH+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V7/QfB/s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A90F7881A8; Fri, 12 Apr 2024 17:32:57 +0200 (CEST)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id 6745087FED; Fri, 12 Apr 2024 20:10:58 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2805488020
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 17:32:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 64CFF87E82
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 20:10:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-7d644c91834so42233739f.1
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 08:32:55 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4167fce0a41so12819495e9.0
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 11:10:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1712935974; x=1713540774; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mVk91NoB1mb4Ya4VZgNI4Mqy/+sMIdBT8JrdncMceds=;
- b=RIJh/CH+4SpDe9Rtea4VeMiKTSG8SynO37XHZOIDCvEy5apz9TiaoCJFJxtaAMmnET
- J5u8WqOIaUJgiOwExm7pSD+fwQ5V6I/CbVxdESF6VeAhQJNl5bi5Z00iOYI6cnW+VpSa
- tklIqqIDMDeQDpj02lSb3sGWHbQeMB8QZiJIs=
+ d=linaro.org; s=google; t=1712945456; x=1713550256; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hYfRHMxRKccz/VtQHHnfWA50Q3udn+ze01RK20ZMWMQ=;
+ b=V7/QfB/sBII1nR7w9b0jF8EgvDQJeDK+91VGGzJPNYJUPH4jMI2rey2bjX38Ouxl8x
+ EAQWgkvhTDuuWu/NKqUQlFynMEuB285Tv1TGKlQ/Ge5elCOk5TUuA42uJwGhu/al3Uc+
+ /SA0f98CLieo6zkDtWoZ+WiMoKN+HoWh0qxyVhujX7L+fPU/5BNdp1ogokB2v533IYk5
+ gQPksbYEGuNy1Z+tje2IJrY8wZeF3iQTHWZQwUaldfpzwCoSh5/ifUt5+GzARw4LcYWo
+ pdWLcI6itNVtE9FSGjh6rsLFYc469BpWe8hvef2qr+2FTjEvD5t+vyucejFJ6iDJo6zS
+ ezlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712935974; x=1713540774;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=mVk91NoB1mb4Ya4VZgNI4Mqy/+sMIdBT8JrdncMceds=;
- b=pq7ADoO3o3kiRvDMZsbLlYmRUc8wSWp8b/dK7/ttYoucDamYQQXSl1Afyf2/ghJovj
- 8RmLNhazsHPSBcCM/3VYTILa+WrUForkV775axPxQZhwshtr1FlfMSMwT/zsvPAsEtzA
- GocAqbL/V++SQJ0tdXgRPcr3JcfbNOtIh+uHKD90uLx1DLqvzk6L7L54BZ5ax7jNkDwm
- sUyFpOVjIUu1bnb2pVMUMQZKsNhpued1bkPLfsSIe5RiKlzk6/xmK2U2dE5ZUuYXJsUQ
- JIXuzDGDNF3Cg5mdAsNPTLdQLn4Hpf98GR9plh59xIBuhRN48RVYSobP4NQa5K9gUxvw
- aiAA==
-X-Gm-Message-State: AOJu0YxGskGd388Hy/4y2UBCtCTtfSb965nGQANPQPuMisrd9mJAgCqg
- 0qPnxh+hVkdoL8mKllomoz519XXXxal4yIRSqZ49ztyRNs9LWjwPPtT2vPhtXQ==
-X-Google-Smtp-Source: AGHT+IGkiz6PwnIU+zNzBRMsgrX6Di+Gl2zPGrx8z9DynYpgkn7YBpjO4V9dGup0bH7vtQLmpvwvBw==
-X-Received: by 2002:a05:6602:3d6:b0:7d5:f3d4:201c with SMTP id
- g22-20020a05660203d600b007d5f3d4201cmr3209346iov.21.1712935973913; 
- Fri, 12 Apr 2024 08:32:53 -0700 (PDT)
-Received: from chromium.org (c-73-14-173-85.hsd1.co.comcast.net.
- [73.14.173.85]) by smtp.gmail.com with ESMTPSA id
- ik14-20020a0566026c0e00b007d65a95d95csm1093828iob.42.2024.04.12.08.32.53
+ d=1e100.net; s=20230601; t=1712945456; x=1713550256;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hYfRHMxRKccz/VtQHHnfWA50Q3udn+ze01RK20ZMWMQ=;
+ b=F/IGODa5/hRijmcALRN8qAHE8iBsqgmkIrOIm0N2Sn6OIKIa2mP0w15MdCCQXhloRn
+ tDkfOf+wpO87SjC2LID57SmIDnk6K7gChZV3MbGSvbhpvq79VjxJIsD+HETvVC2z9Yke
+ SYYS5HeSI6j3o3b+ZZIryuzcR8dtxpDDt8rYmNlI4BGSZ7bVzuUDhLCX4c7vIysTfk0Q
+ dqKVC76JQfo1vV7dkMvQVf5APTml6QnIbJHkDqLFiqegPRAisSTtvhNeC5fP/cAV7c1q
+ a068Zu/N/GJBxePVPoV8+dMP/dmB2hQiUxF2MO7vMr/r7e41dc32c32vmeyxHhrDriWV
+ Bezg==
+X-Gm-Message-State: AOJu0Yyl3x6mmkzURaibW/JqIPPcpbiDRJnKwHw0NcsfmJtmoap/xWLn
+ MN5VyEDGUtCUbMZaodS3insCkjA5xyTUF9qJzVG0NDdf1YaK4Y4ZScJTM7Vb6Io=
+X-Google-Smtp-Source: AGHT+IGI1HZAabw+IbAgtVK6QqEIT6O4TropCEOSuuhoM/oik0Mrbh2Ms+CdxZ0srIcgORL5fbSySg==
+X-Received: by 2002:a05:6000:e50:b0:347:2489:ba3c with SMTP id
+ dy16-20020a0560000e5000b003472489ba3cmr1454674wrb.3.1712945455745; 
+ Fri, 12 Apr 2024 11:10:55 -0700 (PDT)
+Received: from cymric.caleb.rex.connolly.tech (92.40.205.160.threembb.co.uk.
+ [92.40.205.160]) by smtp.gmail.com with ESMTPSA id
+ o4-20020a05600c4fc400b004170e0aff7asm9188250wmq.35.2024.04.12.11.10.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Apr 2024 08:32:53 -0700 (PDT)
-From: Simon Glass <sjg@chromium.org>
-To: devicetree@vger.kernel.org
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Michael Walle <mwalle@kernel.org>, Tom Rini <trini@konsulko.com>,
- linux-mtd@lists.infradead.org, Miquel Raynal <miquel.raynal@bootlin.com>,
- Rob Herring <robh@kernel.org>, Simon Glass <sjg@chromium.org>,
- Conor Dooley <conor+dt@kernel.org>,
- Krzysztof Kozlowski <krzk+dt@kernel.org>,
- =?UTF-8?q?Rafa=C5=82=20Mi=C5=82ecki?= <rafal@milecki.pl>,
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- linux-kernel@vger.kernel.org
-Subject: [PATCH v11 2/2] dt-bindings: mtd: fixed-partition: Add binman
- compatibles
-Date: Fri, 12 Apr 2024 09:32:49 -0600
-Message-Id: <20240412153249.100787-2-sjg@chromium.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240412153249.100787-1-sjg@chromium.org>
-References: <20240412153249.100787-1-sjg@chromium.org>
+ Fri, 12 Apr 2024 11:10:55 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	u-boot-qcom@groups.io
+Subject: [PATCH] mmc: msm_sdhci: fix vendor_spec_cap0 registers
+Date: Fri, 12 Apr 2024 20:10:21 +0200
+Message-ID: <20240412181031.1513372-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.44.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Fri, 12 Apr 2024 18:25:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,162 +93,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add two compatibles for binman entries, as a starting point for the
-schema.
+The addresses were mistakenly swapped. Put them right.
 
-Note that, after discussion on v2, we decided to keep the existing
-meaning of label so as not to require changes to existing userspace
-software when moving to use binman nodes to specify the firmware
-layout.
-
-Note also that, after discussion on v6, we decided to use the same
-'fixed-partition' schema for the binman features, so this version
-adds a new 'binman.yaml' file providing the new compatibles to the
-existing partition.yaml binding.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Rob Herring <robh@kernel.org>
+Reported-by: Sumit Garg <sumit.garg@linaro.org>
+Fixes: a737d8962cae ("mmc: msm_sdhci: correct vendor_spec_cap0 register for v5")
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
+ drivers/mmc/msm_sdhci.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-(no changes since v10)
-
-Changes in v10:
-- Drop binman,entry since it is likely not necessary
-- Put the description back
-
-Changes in v8:
-- Switch the patch ordering so the partition change comes first
-
-Changes in v7:
-- Adjust MAINTAINERS entry
-- Put compatible strings into the 'fixed-partition' binding
-
-Changes in v5:
-- Add mention of why 'binman' is the vendor
-- Drop  'select: false'
-- Tidy up the compatible setings
-- Use 'tfa-bl31' instead of 'atf-bl31'
-
-Changes in v4:
-- Correct selection of multiple compatible strings
-
-Changes in v3:
-- Drop fixed-partitions from the example
-- Use compatible instead of label
-
-Changes in v2:
-- Use plain partition@xxx for the node name
-
- .../bindings/mtd/partitions/binman.yaml       | 53 +++++++++++++++++++
- .../bindings/mtd/partitions/partition.yaml    | 21 ++++++++
- MAINTAINERS                                   |  5 ++
- 3 files changed, 79 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-
-diff --git a/Documentation/devicetree/bindings/mtd/partitions/binman.yaml b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-new file mode 100644
-index 000000000000..bb4b08546184
---- /dev/null
-+++ b/Documentation/devicetree/bindings/mtd/partitions/binman.yaml
-@@ -0,0 +1,53 @@
-+# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/mtd/partitions/binman.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Binman entries
-+
-+description: |
-+  This corresponds to a binman 'entry'. It is a single partition which holds
-+  data of a defined type.
-+
-+  Binman uses the type to indicate what data file / type to place in the
-+  partition. There are quite a number of binman-specific entry types, such as
-+  section, fill and files, to be added later.
-+
-+maintainers:
-+  - Simon Glass <sjg@chromium.org>
-+
-+allOf:
-+  - $ref: /schemas/mtd/partitions/partition.yaml#
-+
-+properties:
-+  compatible:
-+    enum:
-+      - u-boot       # u-boot.bin from U-Boot project
-+      - tfa-bl31     # bl31.bin or bl31.elf from TF-A project
-+
-+required:
-+  - compatible
-+
-+unevaluatedProperties: false
-+
-+examples:
-+  - |
-+    partitions {
-+        compatible = "fixed-partitions";
-+        #address-cells = <1>;
-+        #size-cells = <1>;
-+
-+        partition@100000 {
-+            compatible = "u-boot";
-+            reg = <0x100000 0xf00000>;
-+            align-size = <0x1000>;
-+            align-end = <0x10000>;
-+        };
-+
-+        partition@200000 {
-+            compatible = "tfa-bl31";
-+            reg = <0x200000 0x100000>;
-+            align = <0x4000>;
-+        };
-+    };
-diff --git a/Documentation/devicetree/bindings/mtd/partitions/partition.yaml b/Documentation/devicetree/bindings/mtd/partitions/partition.yaml
-index 31bbeb161396..80d0452a2a33 100644
---- a/Documentation/devicetree/bindings/mtd/partitions/partition.yaml
-+++ b/Documentation/devicetree/bindings/mtd/partitions/partition.yaml
-@@ -118,3 +118,24 @@ then:
+diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
+index 2144772ac325..5e9d66526a83 100644
+--- a/drivers/mmc/msm_sdhci.c
++++ b/drivers/mmc/msm_sdhci.c
+@@ -255,15 +255,15 @@ static int msm_sdc_bind(struct udevice *dev)
  
- # This is a generic file other binding inherit from and extend
- additionalProperties: true
-+
-+examples:
-+  - |
-+    partitions {
-+        compatible = "fixed-partitions";
-+        #address-cells = <1>;
-+        #size-cells = <1>;
-+
-+        partition@100000 {
-+            compatible = "u-boot";
-+            reg = <0x100000 0xf00000>;
-+            align-size = <0x1000>;
-+            align-end = <0x10000>;
-+        };
-+
-+        partition@200000 {
-+            compatible = "tfa-bl31";
-+            reg = <0x200000 0x100000>;
-+            align = <0x4000>;
-+        };
-+    };
-diff --git a/MAINTAINERS b/MAINTAINERS
-index b1b074ce2cf3..b1a4ca692578 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -3684,6 +3684,11 @@ F:	Documentation/filesystems/bfs.rst
- F:	fs/bfs/
- F:	include/uapi/linux/bfs_fs.h
+ static const struct msm_sdhc_variant_info msm_sdhc_mci_var = {
+ 	.mci_removed = false,
  
-+BINMAN
-+M:	Simon Glass <sjg@chromium.org>
-+S:	Supported
-+F:	Documentation/devicetree/bindings/mtd/partitions/binman*
-+
- BITMAP API
- M:	Yury Norov <yury.norov@gmail.com>
- R:	Rasmus Villemoes <linux@rasmusvillemoes.dk>
+-	.core_vendor_spec_capabilities0 = 0x21c,
++	.core_vendor_spec_capabilities0 = 0x11c,
+ };
+ 
+ static const struct msm_sdhc_variant_info msm_sdhc_v5_var = {
+ 	.mci_removed = true,
+ 
+-	.core_vendor_spec_capabilities0 = 0x11c,
++	.core_vendor_spec_capabilities0 = 0x21c,
+ };
+ 
+ static const struct udevice_id msm_mmc_ids[] = {
+ 	{ .compatible = "qcom,sdhci-msm-v4", .data = (ulong)&msm_sdhc_mci_var },
 -- 
-2.34.1
+2.44.0
 
