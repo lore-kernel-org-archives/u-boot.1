@@ -4,108 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73772C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 11 Apr 2024 23:59:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6C72C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 00:05:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51E4088207;
-	Fri, 12 Apr 2024 01:59:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C2E60881EA;
+	Fri, 12 Apr 2024 02:05:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sDP8HaQP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EntEGRv6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 001EE88211; Fri, 12 Apr 2024 01:58:37 +0200 (CEST)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id B858C87F77; Fri, 12 Apr 2024 02:05:46 +0200 (CEST)
+Received: from mail-oo1-xc29.google.com (mail-oo1-xc29.google.com
+ [IPv6:2607:f8b0:4864:20::c29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26CB588137
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 01:58:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B617881FA
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 02:05:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-61871ad6cabso3630267b3.0
- for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 16:58:35 -0700 (PDT)
+Received: by mail-oo1-xc29.google.com with SMTP id
+ 006d021491bc7-5aa1e9527d1so248011eaf.1
+ for <u-boot@lists.denx.de>; Thu, 11 Apr 2024 17:05:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1712879914; x=1713484714; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1712880343; x=1713485143; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IWpY3yM1Dp+mhEtsdrYAC9H0XyZl3DZvSprCmh384RA=;
- b=sDP8HaQPQGTzMISFhyFZwL9dJW7DcvGPp3CszzLU2Hy9NrBxnD5eoekNR1VzAdm/1K
- jK1OfA+I4bECalE6pH01M2ZWOB7D5TgPY82WYJBFw4WK4Rc17zNoT8L2ScSeju+ohLbp
- OC92z3W63/z8OYlhgHhFz0YRUpyA6bQH1eBB0=
+ bh=kHMoKWFCGLBSmTNh+zTjRPAKQ3KPNEjrgegFKLwW5sI=;
+ b=EntEGRv6P6hXrBEEqkmNIYFfYn2qjG/zyE7gGbAZYjiJ4QBJPf400PtsXHDWC+0Zm9
+ a2obCSacYvG5p1NZs5cK/h2F06PqfUE/qu8WND3yrmMQa+4vguXlnGQLRrFaAXNMgu55
+ W/GXYxevb41eP2IDWcizuHm5MxZCy086itmFA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712879914; x=1713484714;
+ d=1e100.net; s=20230601; t=1712880343; x=1713485143;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IWpY3yM1Dp+mhEtsdrYAC9H0XyZl3DZvSprCmh384RA=;
- b=w/SQhP5Euhy5ETp4V+EdJMBLoYRXuS8fdLKKhNrvXLAnrT8ARP71u4xbHLlnyX9hnM
- a78q5JsR1GRZ8yKgXNui3tpjKMaBR56LYolkDvBS26ZDm0ax+c7XSntV/PFARIDlox6S
- cUhgZjeqIXGnO2fBQMykAnUKY+0Vk2mSUcTFM9LbjgK0zSh77xzx/WTAMEZHORWpcNv7
- N/0jC9msSnKIjrdgYjVr60CmBwaCDP9k031pym7b2lk7Ihzj2r+6TV3EJ3xCC3dvABq1
- FsrHHpXvEKWWqKiErBBaQphQDkC86lWjDO6rHpRpWKfnIx0jF3ud52sHFVFYQiWaWaCk
- hS1Q==
-X-Gm-Message-State: AOJu0Yzq39EUcszp5OPWSFcF5w0hNGhv7YV1H2LpAcO4G7Zaw4ZohIcJ
- rCHv8SmkaJLWYiucn1ej+9O97Z2bo+slrq3ZWUK8Yl4caF5882ORA8/C0dCDe34=
-X-Google-Smtp-Source: AGHT+IGoOfrd26Qg07aSUs4Ri+ouBG5zcra81hZds7QCVG0J28mdvhMqgeQowY2sqgK9rU8DcHmvwA==
-X-Received: by 2002:a25:ae17:0:b0:dc2:65da:d3af with SMTP id
- a23-20020a25ae17000000b00dc265dad3afmr939303ybj.65.1712879913918; 
- Thu, 11 Apr 2024 16:58:33 -0700 (PDT)
+ bh=kHMoKWFCGLBSmTNh+zTjRPAKQ3KPNEjrgegFKLwW5sI=;
+ b=LCN0/5+MHxp6C/cRVJNeqo+BXXcOyKt4EkyvuRqwAo6bW5ostJ7ks6LoMqsSd9CNoO
+ 1IXvTcj9/XWh7Oe+9t/b7E91BPkv5oj/hLjE+eT/+m/dgBf8Q4jatuvsilHyPRByYSeB
+ LdHeczYHhmWDGZ7iJaV5YezpQwcz7c5NmVYb9xYVSBAyFfoLHKBelFWjLlla5SOvD0A3
+ 42hwnUOQq/4Nnxr/tHtG6Lt4nivhK2My1iQ+I6Fy3qq767w6qMWZtc7hiwLqrtrKldgl
+ qTu5P1cviCG1crIpO9tFdq5efOOjp1ynp+YgFchWIn3agvQyLgorTzeApSyTZrybUtvx
+ QJGg==
+X-Gm-Message-State: AOJu0YwEh4aHYPt+Ie+bMgi5Q03S5j82s0F/M+Pu08Ex6n05/Lo4h0l0
+ Y82q4qUo2u71Cr/YiL/a8FAPGHhOPcVr8WjfXrkO2JboI7OuMqsJq3pxf4nrGlg=
+X-Google-Smtp-Source: AGHT+IH2AbDvkPdNsqbuzda1OX+rCeuySicTVTMenbZm1JQTCi+6Y2BhPOYWT7zZrt+Qnvl3cwmJEA==
+X-Received: by 2002:a05:6870:1584:b0:220:a138:f59f with SMTP id
+ j4-20020a056870158400b00220a138f59fmr1201313oab.31.1712880343348; 
+ Thu, 11 Apr 2024 17:05:43 -0700 (PDT)
 Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- a5-20020a0562140c2500b0069b5150712csm959098qvd.56.2024.04.11.16.58.29
+ l20-20020ae9f014000000b0078ec5e88805sm1062731qkg.54.2024.04.11.17.05.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 11 Apr 2024 16:58:33 -0700 (PDT)
-Date: Thu, 11 Apr 2024 17:58:27 -0600
+ Thu, 11 Apr 2024 17:05:42 -0700 (PDT)
+Date: Thu, 11 Apr 2024 18:05:39 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Greg Malysa <greg.malysa@timesys.com>
-Cc: u-boot@lists.denx.de, Matthew McClintock <Matthew.Mcclintock@analog.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>,
- Alison Wang <alison.wang@nxp.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>, Andrew Davis <afd@ti.com>,
- Andy Fleming <afleming@gmail.com>,
- Angelo Dureghello <angelo@sysam.it>, Bin Meng <bmeng.cn@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Linus Walleij <linus.walleij@linaro.org>,
- Manorit Chawdhry <m-chawdhry@ti.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Marek Vasut <marex@denx.de>, Mario Six <mario.six@gdsys.cc>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <monstr@monstr.eu>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Priyanka Jain <priyanka.jain@nxp.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Scott McNutt <smcnutt@psyent.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
- Thomas Chou <thomas@wytron.com.tw>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Wolfgang Denk <wd@denx.de>, Yang Xiwen <forbidden405@outlook.com>
-Subject: Re: [PATCH 1/3] arch: arm: Add Analog Devices SC5xx machine type
-Message-ID: <20240411235827.GL2493117@bill-the-cat>
-References: <20240411234021.14534-1-greg.malysa@timesys.com>
- <20240411234021.14534-2-greg.malysa@timesys.com>
+To: Adam Ford <aford173@gmail.com>
+Cc: u-boot@lists.denx.de, aford@beaconembedded.com,
+ Andrew Davis <afd@ti.com>, Simon Glass <sjg@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Martyn Welch <martyn.welch@collabora.com>
+Subject: Re: [PATCH 1/4] arm: davinci: Migrate da850-evm to OF_UPSTREAM
+Message-ID: <20240412000539.GM2493117@bill-the-cat>
+References: <20240404030031.4726-1-aford173@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="iVDBRvqENaneFU2Z"
+ protocol="application/pgp-signature"; boundary="7vCDhfUjB/zviJOR"
 Content-Disposition: inline
-In-Reply-To: <20240411234021.14534-2-greg.malysa@timesys.com>
+In-Reply-To: <20240404030031.4726-1-aford173@gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Fri, 12 Apr 2024 01:59:21 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,97 +94,41 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---iVDBRvqENaneFU2Z
+--7vCDhfUjB/zviJOR
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 11, 2024 at 07:37:28PM -0400, Greg Malysa wrote:
+On Wed, Apr 03, 2024 at 10:00:09PM -0500, Adam Ford wrote:
 
-> From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+> The da850-evm can remove the U-Boot device trees if migrated
+> to OF_UPSTREAM.  This means pointing the device trees to the
+> ti/davinci directory.
 >=20
-> Add support for the SC5xx machine type from Analog Devices. This
-> includes support for the SC57x, SC58x, SC59x, and SC59x-64 SoCs, which
-> have many common features such as common ADI IP blocks, and SHARC DSP
-> cores. This commit introduces core functionality required for all boards
-> using an SC5xx SoC, such as:
->=20
-> - SPL configuration
-> - Required CPU hooks such as reset
-> - Boot ROM interaction to load the stage 2 bootloader in the reference
->   configuration. Other options are possible but not officially supported
->   at this time
-> - SoC-common configuration expected to be reused by all boards
-> - Early initialization for system clocks and DDR controller
->=20
-> Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
-> Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
-> Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
-> Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
-> Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-> Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
-> Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
-> Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
->=20
-> ---
->=20
->=20
-> ---
->  MAINTAINERS                                  |  13 +
->  arch/arm/Kconfig                             |   6 +
->  arch/arm/Makefile                            |   1 +
->  arch/arm/include/asm/arch-adi/sc5xx/sc5xx.h  | 115 +++
->  arch/arm/include/asm/arch-adi/sc5xx/soc.h    |  18 +
->  arch/arm/include/asm/arch-adi/sc5xx/spl.h    |  41 +
->  arch/arm/include/asm/mach-types.h            |   4 +
+> Signed-off-by: Adam Ford <aford173@gmail.com>
 
-We shouldn't be adding more to mach-types.h.
-
->  arch/arm/mach-sc5xx/Kconfig                  | 464 +++++++++
-
-Here and elsewhere I think I saw whitespace issues (help should be
-<TAB><space><space>) in the entries, along with adding "default n" for
-new options, and that's not needed as n is the default.
-
-[snip]
-> diff --git a/arch/arm/mach-sc5xx/config.mk b/arch/arm/mach-sc5xx/config.mk
-> new file mode 100644
-> index 0000000000..b80644d6dc
-> --- /dev/null
-> +++ b/arch/arm/mach-sc5xx/config.mk
-[snip]
-> +ifndef CONFIG_SC59X_64
-> +	# Select the Analog Devices processor.
-> +	PLATFORM_RELFLAGS +=3D -fno-stack-protector -std=3Dgnu89
-> +endif
-
-We should be using the defaults here.
-
-Also:
-- Please switch to plain text environment instead of defining in board.h
-  and so on.
-- Audit your #include usage, I saw more <config.h> that is likely needed
-  for example.
+This series leads to failure to build for omapl138_lcdk and lego_ev3 or
+was I supposed to bring in something else first? Thanks.
 
 --=20
 Tom
 
---iVDBRvqENaneFU2Z
+--7vCDhfUjB/zviJOR
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYYeSMACgkQFHw5/5Y0
-tyzvSAv+M6l47riLfKUxg2EGhv6AY2Ie1BNs9FB2bFlujGCo/cFg2eJjqxcM1817
-F+6clTgW+jhOyEfR8P4aWyXhmUdG+dciq+QUe1xrxFw0nbAi8K79K3jAKdmMwfqS
-G7LcrJWFbh3urlxC5lLCM03rckPWwGKR3VgD/qnxxsfwJm/PfS/R2TOmPTX0b9xF
-rTVEFf0xOzc0Hu1sIauG13MK+EQwEur2X66aj49aBJOmtWa01Ihhswe0VVC/xtX2
-7qQzaKHoJJL7CwF8DO6iydfV3SRJ4p5yxtGUwFCgA7tqgGKgx6Vny3WKp3lMLFWU
-KaDCIZusC7n/P+obH4QUhREqnGgR+KtLYFnxQsu8sZpbQMmgpX7u7HkCx8LQ82a+
-LeDO2UCtkdSuATLfoh+s3z3Ilr12gL2Ordbmp6glD/HBGRWoq4/R3YjYlj2DsX2G
-cJvYhybIokqaXU0yCkWWP++TUZYYnmrBvqGv5t49zihWkEz26AtA//AAg2X8u8n4
-74yM1DsV
-=slRs
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYYetMACgkQFHw5/5Y0
+tywHpwv/aAvqhExG5BukbcK91fiBFjF2nMzT+qB0Uu5SJJYkMTdiFYn4qE7hpWqK
+/PAhTUFiAilwjg6eEoiTCWi6SUS0KgjgJ6MeGrm4+k754a1oLCA4DgtbE1pS9lGM
+HT8jt5TyMGcANfLLmCvFOuELHb0D4Cnasj3rdVkKlCi1JXeRyWkhuliRAxNWH2Z1
+6Bj+7dlWJu5N6leQirMVFQzuZzeDe4JxIc/IYg7bflnvMMURtTIHNZrDeM0T90at
+XfTfFy+m3LJiX9E5k+pwkXrlcCZ/MBe30IuW2AIUW/90vWX6jbTEVlLo1P4dpmtO
+P27CSsicDHk8Neym+fj3ynMoTFNqLV2HWyJyOJnWBAW/lssQtCfL1xQkfkc8WGy2
+UESL3vFhjKkEhujZL1U9Y/HJBBztVIHsTLVMf0rLrAKSxvoXZrGOaFMcPXfVCIdA
+mVlrqKN3P6MXGfTapSplvV2y0XGSWaESagJ8QplEu2v5Bs6TwBCGWJs/jZtVd159
+f7SLWy+L
+=87Lw
 -----END PGP SIGNATURE-----
 
---iVDBRvqENaneFU2Z--
+--7vCDhfUjB/zviJOR--
