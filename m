@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A364AC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 18:11:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28130C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 12 Apr 2024 18:12:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2E9A87ED3;
-	Fri, 12 Apr 2024 20:10:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7D21687ED3;
+	Fri, 12 Apr 2024 20:12:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V7/QfB/s";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WcnVaDOF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6745087FED; Fri, 12 Apr 2024 20:10:58 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id C384B87ED9; Fri, 12 Apr 2024 20:12:45 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64CFF87E82
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 20:10:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C9EB887E82
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 20:12:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4167fce0a41so12819495e9.0
- for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 11:10:56 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-41802f985baso5137465e9.3
+ for <u-boot@lists.denx.de>; Fri, 12 Apr 2024 11:12:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1712945456; x=1713550256; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hYfRHMxRKccz/VtQHHnfWA50Q3udn+ze01RK20ZMWMQ=;
- b=V7/QfB/sBII1nR7w9b0jF8EgvDQJeDK+91VGGzJPNYJUPH4jMI2rey2bjX38Ouxl8x
- EAQWgkvhTDuuWu/NKqUQlFynMEuB285Tv1TGKlQ/Ge5elCOk5TUuA42uJwGhu/al3Uc+
- /SA0f98CLieo6zkDtWoZ+WiMoKN+HoWh0qxyVhujX7L+fPU/5BNdp1ogokB2v533IYk5
- gQPksbYEGuNy1Z+tje2IJrY8wZeF3iQTHWZQwUaldfpzwCoSh5/ifUt5+GzARw4LcYWo
- pdWLcI6itNVtE9FSGjh6rsLFYc469BpWe8hvef2qr+2FTjEvD5t+vyucejFJ6iDJo6zS
- ezlw==
+ d=linaro.org; s=google; t=1712945563; x=1713550363; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=HUiPhXuktebOyfc7alB0E1zjrecTZlfSYJGiwPsFgBc=;
+ b=WcnVaDOFR5+wge3yEByIMAnSgxdQAsXK92+FTSwoshkqYP7OudW4eqeLeEyF5m1T2R
+ Es0ksnm5nCx5awLUn0TWNlkSBYO6+v1/xjyf9HB/f3JSnHJjCWTmGQaHxf29NgChmfcI
+ 9wpVOVLgRs4YfcpDI5IcVUuLleRr/ePIP7p7eU9qT7UG44Ebm0EcUhnGNpNJUcW80E47
+ RgLhwxXkdkeUwYaanPRXPG9J7i5h3MRGxeM3dzpY/UbE4u1wLQlvZCb6gfrKb1m8g3wt
+ YviyK1a3+m9FyPbjmEBDN5S09Ch4vfu8U91qaJAWH2MnhwqYVxkMyxAlvJI2AeQikL1p
+ +Kkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1712945456; x=1713550256;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hYfRHMxRKccz/VtQHHnfWA50Q3udn+ze01RK20ZMWMQ=;
- b=F/IGODa5/hRijmcALRN8qAHE8iBsqgmkIrOIm0N2Sn6OIKIa2mP0w15MdCCQXhloRn
- tDkfOf+wpO87SjC2LID57SmIDnk6K7gChZV3MbGSvbhpvq79VjxJIsD+HETvVC2z9Yke
- SYYS5HeSI6j3o3b+ZZIryuzcR8dtxpDDt8rYmNlI4BGSZ7bVzuUDhLCX4c7vIysTfk0Q
- dqKVC76JQfo1vV7dkMvQVf5APTml6QnIbJHkDqLFiqegPRAisSTtvhNeC5fP/cAV7c1q
- a068Zu/N/GJBxePVPoV8+dMP/dmB2hQiUxF2MO7vMr/r7e41dc32c32vmeyxHhrDriWV
- Bezg==
-X-Gm-Message-State: AOJu0Yyl3x6mmkzURaibW/JqIPPcpbiDRJnKwHw0NcsfmJtmoap/xWLn
- MN5VyEDGUtCUbMZaodS3insCkjA5xyTUF9qJzVG0NDdf1YaK4Y4ZScJTM7Vb6Io=
-X-Google-Smtp-Source: AGHT+IGI1HZAabw+IbAgtVK6QqEIT6O4TropCEOSuuhoM/oik0Mrbh2Ms+CdxZ0srIcgORL5fbSySg==
-X-Received: by 2002:a05:6000:e50:b0:347:2489:ba3c with SMTP id
- dy16-20020a0560000e5000b003472489ba3cmr1454674wrb.3.1712945455745; 
- Fri, 12 Apr 2024 11:10:55 -0700 (PDT)
-Received: from cymric.caleb.rex.connolly.tech (92.40.205.160.threembb.co.uk.
- [92.40.205.160]) by smtp.gmail.com with ESMTPSA id
- o4-20020a05600c4fc400b004170e0aff7asm9188250wmq.35.2024.04.12.11.10.54
+ d=1e100.net; s=20230601; t=1712945563; x=1713550363;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=HUiPhXuktebOyfc7alB0E1zjrecTZlfSYJGiwPsFgBc=;
+ b=lAvPXmnMw3rP2oowwFgu+eX7dA5ykmvvU1+ePZpQJMlpfr86krNyk9BFJ37rb8WurT
+ bI5LtZgQFRNNuG7w+SLpd4m8NcAHZxQkVBPjV4jHhF2w+jxRXK0fsn0FtNSmYIFOIwcC
+ rVlcFubVGDg/8HmMcH4ku9HB4bP0iDqha5bRrPg64cOArFHxRnUoHcA6kflQuN9yt7lc
+ 1Sb0IDD3ccNqueFCP8OhUSJmhlUEfx/zOp86OFP8uvY82KylkA76dTWNk+uYe4bSZ6Tu
+ kT2cbAq0/Rw+bo/4aWvh7KXVd5D+COctMvR0WwNhVDen/mbi8jZsH4XsiRDS7pzum+Z5
+ 914w==
+X-Gm-Message-State: AOJu0YxWMbQ2hOryrDAyYRHv5vFIokEAikwwsw70bCOOwB7Y4Tl9qLfp
+ wBaD0Qpf4eNJexgb55+4BAKfgIloZmfzbQ1ekbq0SvJwxlJtxLH61zbTe+xrpa0=
+X-Google-Smtp-Source: AGHT+IE61iJL0RUYPnFMPkNyB844V7zu6faj5ZvvPI/pMpmdMjdvfLz9w9fdg93uMoC4Ck1YN3tpEg==
+X-Received: by 2002:a1c:7902:0:b0:417:d44f:5c50 with SMTP id
+ l2-20020a1c7902000000b00417d44f5c50mr2707209wme.41.1712945563153; 
+ Fri, 12 Apr 2024 11:12:43 -0700 (PDT)
+Received: from [192.168.114.141] (92.40.205.163.threembb.co.uk.
+ [92.40.205.163]) by smtp.gmail.com with ESMTPSA id
+ t13-20020a05600c450d00b004171f151a5csm6294733wmo.16.2024.04.12.11.12.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 12 Apr 2024 11:10:55 -0700 (PDT)
+ Fri, 12 Apr 2024 11:12:42 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	u-boot-qcom@groups.io
-Subject: [PATCH] mmc: msm_sdhci: fix vendor_spec_cap0 registers
-Date: Fri, 12 Apr 2024 20:10:21 +0200
-Message-ID: <20240412181031.1513372-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.44.0
+To: Jaehoon Chung <jh80.chung@samsung.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io
+In-Reply-To: <20240412181031.1513372-1-caleb.connolly@linaro.org>
+References: <20240412181031.1513372-1-caleb.connolly@linaro.org>
+Subject: Re: [PATCH] mmc: msm_sdhci: fix vendor_spec_cap0 registers
+Message-Id: <171294556150.1516536.5026780778600808079.b4-ty@linaro.org>
+Date: Fri, 12 Apr 2024 20:12:41 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14-dev
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,37 +95,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The addresses were mistakenly swapped. Put them right.
 
-Reported-by: Sumit Garg <sumit.garg@linaro.org>
-Fixes: a737d8962cae ("mmc: msm_sdhci: correct vendor_spec_cap0 register for v5")
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
- drivers/mmc/msm_sdhci.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Fri, 12 Apr 2024 20:10:21 +0200, Caleb Connolly wrote:
+> The addresses were mistakenly swapped. Put them right.
+> 
+> 
 
-diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-index 2144772ac325..5e9d66526a83 100644
---- a/drivers/mmc/msm_sdhci.c
-+++ b/drivers/mmc/msm_sdhci.c
-@@ -255,15 +255,15 @@ static int msm_sdc_bind(struct udevice *dev)
- 
- static const struct msm_sdhc_variant_info msm_sdhc_mci_var = {
- 	.mci_removed = false,
- 
--	.core_vendor_spec_capabilities0 = 0x21c,
-+	.core_vendor_spec_capabilities0 = 0x11c,
- };
- 
- static const struct msm_sdhc_variant_info msm_sdhc_v5_var = {
- 	.mci_removed = true,
- 
--	.core_vendor_spec_capabilities0 = 0x11c,
-+	.core_vendor_spec_capabilities0 = 0x21c,
- };
- 
- static const struct udevice_id msm_mmc_ids[] = {
- 	{ .compatible = "qcom,sdhci-msm-v4", .data = (ulong)&msm_sdhc_mci_var },
+Applied, thanks!
+
+[1/1] mmc: msm_sdhci: fix vendor_spec_cap0 registers
+      commit: f09537bdd940c051b851c235e8906f1ba83233d1
+
+Best regards,
 -- 
-2.44.0
+Caleb Connolly <caleb.connolly@linaro.org>
 
