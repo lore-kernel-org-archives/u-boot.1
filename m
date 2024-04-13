@@ -4,70 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABAA9C4345F
-	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 12:50:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8388C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 13:57:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3EB087C62;
-	Sat, 13 Apr 2024 14:50:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D254387B77;
+	Sat, 13 Apr 2024 15:57:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=189.cn
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nXe0LZVz";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0961287DF3; Sat, 13 Apr 2024 11:20:21 +0200 (CEST)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3357B87915
- for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 11:20:19 +0200 (CEST)
+ id 4CB008800D; Sat, 13 Apr 2024 15:44:05 +0200 (CEST)
+Received: from 189.cn (ptr.189.cn [183.61.185.101])
+ by phobos.denx.de (Postfix) with ESMTP id 3963687FA3
+ for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 15:44:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=reno.kober179@gmail.com
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-56e4556990cso348161a12.1
- for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 02:20:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713000018; x=1713604818; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=i98xdCYAX2B1gLRKCvqlPi/qfvcJ9qLutGrUeXINYeE=;
- b=nXe0LZVzlonPYliyaqIxyMrKG+Uq65zCW3EbFLutIR3kO7ajkWELEgWEB93rxGbxSy
- PPrWaDs4EuneU9U0iBw6K0GyXddxYML4vrq5ia99FNlFiRZLgBrZ/HopggXVnARYmI9l
- UC7AOK+rZeBDZiuaZd87FzgUGdxad6zPWqApyuKswgKGeghYumcLTr0VHRMouD8oH+pP
- KySxVKTKjuZz9HaAL3Y+yFlTTfwMR3QD3BdaZ1DuxZMMf5H+dljdOi9f/uyU1QbInYX+
- UJx1P523UL6TXcECdvl/Bl0rKMlR4LiqtwYjbl2Tb11sSgfrsYICIUjqSeKsdtbMMql/
- fiOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713000018; x=1713604818;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=i98xdCYAX2B1gLRKCvqlPi/qfvcJ9qLutGrUeXINYeE=;
- b=m5I1r8k8U6YvAuIFReo+Ocxz7+sjJ7ZaQBPkXlvcX7/ByLDTLEBfMPLuWrNVqf5SjG
- zg9JKJ4besNHo7RmqwCPqKHY4hbvBdabSYrejR7t9GNVmCC34wvAhIYPrVLlx7E90Bg9
- MvSvdS4+GnYvBGmlOaOM/eUCfoS4oWct3s6Yl46nlKnpzN+rVzqEeKPF/OLOFUip/sXF
- nIxZLWaFOk/fLLV84XGRZ7W3O4cym0dI3n6EiKGhQh1qA49wHBnjkoW0q+f9MddxGhET
- 7DWM0tr4DSpyuj6o1GL1s4kLZDQug++tBFktU1lAUqP709ujLaVD8yqk9rmdU8S6GqUb
- CLUw==
-X-Gm-Message-State: AOJu0YzriP/L/1NMWdY6oaSYtoqXK7aFdiQD0sa/HXwxXzFav0q526sF
- hNaprX8l6x7O+ZzFxeUHg9eoSoXwMl9SVnUQt7yBH0WhRd5yeiYyg3ti0YezE2NMtQ0mgoNK0L8
- tqWnoDzqRzn2nXp18eWEBqZQxd9zDNc+q
-X-Google-Smtp-Source: AGHT+IEhFiCFTW0KMmZvmXZVLSCAXk3r1eUfh4mID4j7ebzZ3c/br8l3CLiSCAkQ/F1o6SnoQnOHj0yIGekrfrdburU=
-X-Received: by 2002:a17:906:35da:b0:a52:5498:2423 with SMTP id
- p26-20020a17090635da00b00a5254982423mr102933ejb.3.1713000018060; Sat, 13 Apr
- 2024 02:20:18 -0700 (PDT)
-MIME-Version: 1.0
-From: "* *" <reno.kober179@gmail.com>
-Date: Sat, 13 Apr 2024 11:20:07 +0200
-Message-ID: <CAC2Z4u92WO3Fup8s5JkupujRM7e6hpnPDn+khYTSSUxK+W0Y1Q@mail.gmail.com>
-Subject: Re: [PATCH 5/8] clk/qcom: sdm845: add register map for simple gate
- clocks
+ dmarc=none (p=none dis=none) header.from=189.cn
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dazen@189.cn
+HMM_SOURCE_IP: 10.64.8.43:57670.345399815
+HMM_ATTACHE_NUM: 0000
+HMM_SOURCE_TYPE: SMTP
+Received: from clientip-14.145.245.88 (unknown [10.64.8.43])
+ by 189.cn (HERMES) with SMTP id 86364100236;
+ Sat, 13 Apr 2024 21:43:58 +0800 (CST)
+Received: from  ([14.145.245.88])
+ by gateway-153622-dep-65f4d5f786-dtfkj with ESMTP id
+ c8947411125841bf8a0dfa1ae1e68334 for u-boot@lists.denx.de; 
+ Sat, 13 Apr 2024 21:43:59 CST
+X-Transaction-ID: c8947411125841bf8a0dfa1ae1e68334
+X-Real-From: dazen@189.cn
+X-Receive-IP: 14.145.245.88
+X-MEDUSA-Status: 0
+From: dazen@189.cn
 To: u-boot@lists.denx.de
-X-Mailman-Approved-At: Sat, 13 Apr 2024 14:50:51 +0200
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Cc: jagan@amarulasolutions.com, andre.przywara@arm.com, trini@konsulko.com,
+ dazen@189.cn
+Subject: [PATCH] DRAM_SUN50I_H616_TRIM_SIZE
+Date: Sat, 13 Apr 2024 21:43:52 +0800
+Message-ID: <20240413134352.46495-1-dazen@189.cn>
+X-Mailer: git-send-email 2.44.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sat, 13 Apr 2024 15:57:03 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,4 +60,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: lalakii <dazen@189.cn>
+
+Add "DRAM_SUN50I_H616_TRIM_SIZE" option for 1.5gb board.
+
+Signed-off-by: lalakii <dazen@189.cn>
+---
+ arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h |  1 +
+ arch/arm/mach-sunxi/Kconfig                        |  7 +++++++
+ arch/arm/mach-sunxi/dram_sun50i_h616.c             | 11 ++++++++++-
+ 3 files changed, 18 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
+index a8fdda124a..2d2526fead 100644
+--- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
++++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
+@@ -166,6 +166,7 @@ struct dram_config {
+ 	u8 rows;
+ 	u8 ranks;
+ 	u8 bus_full_width;
++	bool trim_size;
+ };
+ 
+ static inline int ns_to_t(int nanoseconds)
+diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+index fe89aec6b9..255a498557 100644
+--- a/arch/arm/mach-sunxi/Kconfig
++++ b/arch/arm/mach-sunxi/Kconfig
+@@ -108,6 +108,13 @@ config DRAM_SUN50I_H616_TPR12
+ 	default 0x0
+ 	help
+ 	  TPR12 value from vendor DRAM settings.
++
++config DRAM_SUN50I_H616_TRIM_SIZE
++        bool "H616 DRAM trim size"
++        help
++          Due to unknown issue, some H616 based boards may need to trim
++          size a bit.
++
+ endif
+ 
+ config SUN6I_PRCM
+diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+index 37c139e0ee..4598d60a57 100644
+--- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
++++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+@@ -1349,8 +1349,15 @@ static unsigned long mctl_calc_size(const struct dram_config *config)
+ {
+ 	u8 width = config->bus_full_width ? 4 : 2;
+ 
++	unsigned long size;
++
++	size = (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
++
++	if (config->trim_size)
++		size = (size * 3) / (width == 4 ? 4 : 8);
++
+ 	/* 8 banks */
+-	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
++	return size;
+ }
+ 
+ static const struct dram_para para = {
+@@ -1379,6 +1386,8 @@ unsigned long sunxi_dram_init(void)
+ 	struct sunxi_prcm_reg *const prcm =
+ 		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
+ 	struct dram_config config;
++	if (IS_ENABLED(CONFIG_DRAM_SUN50I_H616_TRIM_SIZE))
++		config.trim_size = true;
+ 	unsigned long size;
+ 
+ 	setbits_le32(&prcm->res_cal_ctrl, BIT(8));
+-- 
+2.44.0
 
