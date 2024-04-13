@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53CFAC4345F
-	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 18:15:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDB7CC4345F
+	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 18:15:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7C3187FB5;
-	Sat, 13 Apr 2024 20:15:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 49C4D880AE;
+	Sat, 13 Apr 2024 20:15:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="waaaYVu1";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="itCQHCuo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 874F48801F; Sat, 13 Apr 2024 20:14:59 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 36AF188069; Sat, 13 Apr 2024 20:15:20 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E55687FB5
- for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 20:14:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 22DA887CF1
+ for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 20:15:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,22 +28,23 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1713032085; bh=8OqRkAlYnPB/qN/LVWsFqnqmkDmFOR7ElQW7jJ1ZPj4=;
- b=waaaYVu1XyXZV2V28/bcNvPyG0U2+ciVPg8rHTkNoZHt+gT4jdvQMvRz9cTId+rXFFoFHPT8l
- o2qbQUKQvEousRabkatvfXs+Aor983oMkOF/pEneIjsPyxUh9vHYAPKcrY+ogn4DMog9pr1O7xw
- lirW7bN/RETmTHkoQhmwDjkCTLujVCXmCcLwRIRhro0+MDEnz/LUkgEkFim14hZ/AwZLbRmuVE7
- KA5fZY9hCQi5c2VqeJKRiHOVN7kPDwuyctVrTQpXpMiYgu2dLLCvyl7SQ/MTQW57DibBL6dDw5f
- hVZ70djR1mjQY7gweRa63wYfTIFYndeJMh6QmctgQWIg==
+ t=1713032091; bh=/AbHS5yGdcWQ4Nio6PmIjzZODn7Gz9x7SBTdmIZcZGk=;
+ b=itCQHCuoLIDN3j23mGNku0N+S3FWOJj9S4tFcvUTt7FEBlODTBQsYZgbjZXAKQHNj6nyXC33q
+ Ci4j5ZUQiz+hFghs0Nlukxy+dY/tvbJ02/mEfGogBUDMd4FSsNK7WDfI6z8zKj+j0mWCR4AKtvS
+ M+/0vBNwKRmbF583kTUykX/lonaMmIu/STsjajudw32zE5X39MW6OOaAG1UNhGrAEWx2Bgw/ODI
+ n0JSz3+gNL5ihTLX75nMLHidLFpkX0bTalQKXadgBivMHbdCzJvdgS7Vxwg/F2hH13+SdnIbrbU
+ QhYtHvyILt5ZyvQH7Bjfdl1b6Zd+NZ/VXbVeu4TBN4Kg==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>, Eugen
- Hristev <eugen.hristev@collabora.com>, Joshua Riek <jjriek@verizon.net>
+ Tom Rini <trini@konsulko.com>, Jagan Teki <jagan@edgeble.ai>, Tom
+ Fitzhenry <tom@tom-fitzhenry.me.uk>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Jonas Karlman <jonas@kwiboo.se>, Elon Zhang
+ <zhangzj@rock-chips.com>, Joshua Riek <jjriek@verizon.net>
 Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>, Quentin Schulz
  <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 03/23] rockchip: rk35xx: Drop USB_GADGET_PRODUCT_NUM
- Kconfig option
-Date: Sat, 13 Apr 2024 18:13:37 +0000
-Message-ID: <20240413181425.1384357-4-jonas@kwiboo.se>
+Subject: [PATCH v2 04/23] rockchip: rk3588: Drop REGULATOR_PWM Kconfig option
+Date: Sat, 13 Apr 2024 18:13:38 +0000
+Message-ID: <20240413181425.1384357-5-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240413181425.1384357-1-jonas@kwiboo.se>
 References: <20240413181425.1384357-1-jonas@kwiboo.se>
@@ -54,8 +55,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 661acb956fbb975d49a653eb
+ 167.172.40.54
+X-ForwardEmail-ID: 661acb9a6fbb975d49a653fd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,57 +73,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The commit 8c19275fdb13 ("rockchip: Update the default USB Product ID
-value") added default product id for all supported Rockchip SoCs.
-
-Remove USB_GADGET_PRODUCT_NUM options that match default value from
-RK35xx boards.
+RK3588 boards do not have any pwm-regulator compatible nodes in DT, drop
+the superfluous REGULATOR_PWM Kconfig options.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 v2: No change
 ---
- configs/pinetab2-rk3566_defconfig   | 1 -
- configs/rock5b-rk3588_defconfig     | 1 -
- configs/turing-rk1-rk3588_defconfig | 1 -
- 3 files changed, 3 deletions(-)
+ configs/evb-rk3588_defconfig         | 1 -
+ configs/neu6a-io-rk3588_defconfig    | 1 -
+ configs/neu6b-io-rk3588_defconfig    | 1 -
+ configs/quartzpro64-rk3588_defconfig | 1 -
+ configs/rock5b-rk3588_defconfig      | 1 -
+ configs/toybrick-rk3588_defconfig    | 1 -
+ configs/turing-rk1-rk3588_defconfig  | 1 -
+ 7 files changed, 7 deletions(-)
 
-diff --git a/configs/pinetab2-rk3566_defconfig b/configs/pinetab2-rk3566_defconfig
-index bc7a77aa52fd..edeb1d89b993 100644
---- a/configs/pinetab2-rk3566_defconfig
-+++ b/configs/pinetab2-rk3566_defconfig
-@@ -99,7 +99,6 @@ CONFIG_USB_ETHER_ASIX=y
- CONFIG_USB_ETHER_ASIX88179=y
- CONFIG_USB_ETHER_RTL8152=y
- CONFIG_USB_GADGET=y
--CONFIG_USB_GADGET_PRODUCT_NUM=0x350a
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_USB_FUNCTION_ROCKUSB=y
- CONFIG_ERRNO_STR=y
+diff --git a/configs/evb-rk3588_defconfig b/configs/evb-rk3588_defconfig
+index c8db04c076ef..68ecbc54b807 100644
+--- a/configs/evb-rk3588_defconfig
++++ b/configs/evb-rk3588_defconfig
+@@ -52,7 +52,6 @@ CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+ CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+ CONFIG_PHY_ROCKCHIP_USBDP=y
+-CONFIG_REGULATOR_PWM=y
+ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_SPL_RAM=y
+ CONFIG_BAUDRATE=1500000
+diff --git a/configs/neu6a-io-rk3588_defconfig b/configs/neu6a-io-rk3588_defconfig
+index 307a540f4249..bc2d70421ee9 100644
+--- a/configs/neu6a-io-rk3588_defconfig
++++ b/configs/neu6a-io-rk3588_defconfig
+@@ -40,7 +40,6 @@ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
+-CONFIG_REGULATOR_PWM=y
+ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_SPL_RAM=y
+ CONFIG_BAUDRATE=1500000
+diff --git a/configs/neu6b-io-rk3588_defconfig b/configs/neu6b-io-rk3588_defconfig
+index 9ef2bb21fffa..8bc75a5f0dd9 100644
+--- a/configs/neu6b-io-rk3588_defconfig
++++ b/configs/neu6b-io-rk3588_defconfig
+@@ -40,7 +40,6 @@ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
+ CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
+-CONFIG_REGULATOR_PWM=y
+ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_SPL_RAM=y
+ CONFIG_BAUDRATE=1500000
+diff --git a/configs/quartzpro64-rk3588_defconfig b/configs/quartzpro64-rk3588_defconfig
+index b2a66d3f2db0..ee2521f87ae5 100644
+--- a/configs/quartzpro64-rk3588_defconfig
++++ b/configs/quartzpro64-rk3588_defconfig
+@@ -64,7 +64,6 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+ CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+ CONFIG_PHY_ROCKCHIP_USBDP=y
+ CONFIG_SPL_PINCTRL=y
+-CONFIG_REGULATOR_PWM=y
+ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_SPL_RAM=y
+ CONFIG_SCSI=y
 diff --git a/configs/rock5b-rk3588_defconfig b/configs/rock5b-rk3588_defconfig
-index 58c7c44fb4f7..ac4f1ebb4c13 100644
+index ac4f1ebb4c13..8af56baf04d7 100644
 --- a/configs/rock5b-rk3588_defconfig
 +++ b/configs/rock5b-rk3588_defconfig
-@@ -102,7 +102,6 @@ CONFIG_USB_ETHER_MCS7830=y
- CONFIG_USB_ETHER_RTL8152=y
- CONFIG_USB_ETHER_SMSC95XX=y
- CONFIG_USB_GADGET=y
--CONFIG_USB_GADGET_PRODUCT_NUM=0x350b
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_USB_FUNCTION_ROCKUSB=y
- CONFIG_ERRNO_STR=y
+@@ -75,7 +75,6 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+ CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+ CONFIG_PHY_ROCKCHIP_USBDP=y
+ CONFIG_SPL_PINCTRL=y
+-CONFIG_REGULATOR_PWM=y
+ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_SPL_RAM=y
+ CONFIG_SCSI=y
+diff --git a/configs/toybrick-rk3588_defconfig b/configs/toybrick-rk3588_defconfig
+index 6ee92e943138..38fc7906eef2 100644
+--- a/configs/toybrick-rk3588_defconfig
++++ b/configs/toybrick-rk3588_defconfig
+@@ -53,7 +53,6 @@ CONFIG_PHY_REALTEK=y
+ CONFIG_DWC_ETH_QOS=y
+ CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+-CONFIG_REGULATOR_PWM=y
+ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_SPL_RAM=y
+ CONFIG_BAUDRATE=1500000
 diff --git a/configs/turing-rk1-rk3588_defconfig b/configs/turing-rk1-rk3588_defconfig
-index 07f7b848529e..e18ced721789 100644
+index e18ced721789..77aacbc64b6c 100644
 --- a/configs/turing-rk1-rk3588_defconfig
 +++ b/configs/turing-rk1-rk3588_defconfig
-@@ -109,7 +109,6 @@ CONFIG_USB_ETHER_MCS7830=y
- CONFIG_USB_ETHER_RTL8152=y
- CONFIG_USB_ETHER_SMSC95XX=y
- CONFIG_USB_GADGET=y
--CONFIG_USB_GADGET_PRODUCT_NUM=0x350b
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_USB_FUNCTION_ROCKUSB=y
- CONFIG_ERRNO_STR=y
+@@ -81,7 +81,6 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+ CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
+ CONFIG_PHY_ROCKCHIP_USBDP=y
+ CONFIG_SPL_PINCTRL=y
+-CONFIG_REGULATOR_PWM=y
+ CONFIG_PWM_ROCKCHIP=y
+ CONFIG_SPL_RAM=y
+ CONFIG_SCSI=y
 -- 
 2.43.2
 
