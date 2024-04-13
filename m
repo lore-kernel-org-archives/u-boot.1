@@ -4,59 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A736C4345F
-	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 18:19:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63541C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 18:20:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D862688268;
-	Sat, 13 Apr 2024 20:16:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id D41F487D6A;
+	Sat, 13 Apr 2024 20:20:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PmmEakq7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UwPY1kgq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBAC08826A; Sat, 13 Apr 2024 20:16:20 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4B49C88228; Sat, 13 Apr 2024 20:20:08 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A724087CF1
- for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 20:16:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B4CD28785F
+ for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 20:20:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=ef8c=LT=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1713032158; bh=5RT1jkOUNVYHP3OH6iUXT6capVg6P+XNavLacUGm5tY=;
- b=PmmEakq7VkScekU+gYczbr0B87CrOpaQBlr/jCgke8t+aygbkaMbrPf+J02hOdH2UT1uGX4JT
- vnfi8Hl0zedlv4Tn0Six2CSvgVY259jHCFolaeSOLJo/jsKz3UpxF/bXXTHZ36OTVM+nkT2SaQZ
- 2HO9feYa05gXFsgdO7CZEbr5G39P9LtYJ+RoAGb/SWjpD3iYji+cinpIn+J7rWJ2MAugVhYJWOz
- SRdRXRq5qZR7mOaXr50Bc5gIaTm3PxWs6kgFVrQp66EmiS8tfzFMgw2XYZGhq8GsIf56mICrUhT
- H2AEO1+YuUctYiRJBRVuVhKe8z+TNC2u4D2TB3H2eS3Q==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Jagan Teki <jagan@edgeble.ai>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, John Clark <inindev@gmail.com>, Jonas
- Karlman <jonas@kwiboo.se>, Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, Elon
- Zhang <zhangzj@rock-chips.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 23/23] rockchip: rk3588: Enable use of eMMC HS200 mode on a
- few missed boards
-Date: Sat, 13 Apr 2024 18:13:57 +0000
-Message-ID: <20240413181425.1384357-24-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240413181425.1384357-1-jonas@kwiboo.se>
-References: <20240413181425.1384357-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-69629b4ae2bso17100836d6.3
+ for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 11:20:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1713032404; x=1713637204; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+aMJkVrHEf/a/IKaC3J6uzjZRBCcuR4IP+8iJHQUHQA=;
+ b=UwPY1kgqwEMqg8HI+CStIfCCm/L8aUkO8So4EFkKi2jWavQ8rdmKOrNikxcWNLKlwQ
+ PUl+pl76R36elRKpUWKHXABNShh5u8FxmeyNqTPV9tMhipRjXBZ7/OCH7NZw+QZ6x0CV
+ f6EdNtrEaPrr6KRB9Wb0mEbSNBw3IFQVo3oWU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713032404; x=1713637204;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+aMJkVrHEf/a/IKaC3J6uzjZRBCcuR4IP+8iJHQUHQA=;
+ b=sLB4sRSaDI5keQQKIXcx1QI8C7TGwJrNjtNaSsX5ktS62tLIIujrWyOTjnExbJmF+A
+ IXd1ygE3BjQTIEQsQPCEI1Bg6vdUghgf3JZN/Xnof+c+Q+8249CnqrVbvMdBeqx7MZMC
+ 71JwCLe5S3a7uR1z7yrPzM9cgYpMTehs1hux4iGFO5+qgvwFhFlFlMup4iag3z/GouJn
+ GciQUJY6bzIUJF5VUnZM8D5TcNDXZcUjB7fpkX81wWe0x6sMNieWM/PYOijpXiSLNl0x
+ 1zsvrTucdlK/LO5pqz5zkAZt5I8lIOCeMdsOMs4uFLyfrIVDqfTDy7WFmcD/bJUNmidk
+ JSkw==
+X-Gm-Message-State: AOJu0YyEUToBintoCjN4gej9PylH5IucyFzwki/6osNA+zpoXev8bSmW
+ Cve35aErAV7gDDFKRExPY7veL0BMcechrwo6vfiziTVxDvue7Uiv0izHOQ10eTE=
+X-Google-Smtp-Source: AGHT+IG7x4GujClMDJTSOQl0V53aLK1JsMd1nvzyHJqwQlpfw9nf43o6suxv2h6sohMlkYOtBf2dVw==
+X-Received: by 2002:a0c:f548:0:b0:69b:3661:6d39 with SMTP id
+ p8-20020a0cf548000000b0069b36616d39mr5619071qvm.24.1713032404557; 
+ Sat, 13 Apr 2024 11:20:04 -0700 (PDT)
+Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
+ g13-20020ad4514d000000b0069b601f23f6sm1739455qvq.127.2024.04.13.11.20.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 13 Apr 2024 11:20:04 -0700 (PDT)
+Date: Sat, 13 Apr 2024 12:20:01 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ Weizhao Ouyang <o451686892@gmail.com>
+Subject: Re: Pull request efi-2024-07-rc1-2
+Message-ID: <20240413182001.GA1054907@bill-the-cat>
+References: <c17cb6a7-2c98-4408-9b29-27f766edafac@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 661acbdd6fbb975d49a6559c
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1/1Itu0dsB0O1Ugc"
+Content-Disposition: inline
+In-Reply-To: <c17cb6a7-2c98-4408-9b29-27f766edafac@gmx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,116 +92,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A few RK3588 boards are missing a mmc-hs200 prop to signal that HS200
-mode is supported in addition to HS400, this lead to bad performance
-reading FIT in SPL and broken MMC write.
 
-Add cap-mmc-highspeed and mmc-hs200-1_8v to affected boards to enable
-use of eMMC HS200 mode.
+--1/1Itu0dsB0O1Ugc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-v2: New patch
+On Sat, Apr 13, 2024 at 12:28:34PM +0200, Heinrich Schuchardt wrote:
 
-All these mmc-hs200 prop overrides may not be needed if the patch "mmc:
-Imply HS200 cap with mmc-hs400 prop to match linux" [1] gets applied,
-until such time this matches what has been done for all other RK35xx
-boards.
+> Dear Tom,
+>=20
+> The following changes since commit 13c1100335e40acb1066e074eb061387fd103c=
+36:
+>=20
+>   net: designware: Pass all multicast frames in designware driver
+> (2024-04-12 13:59:12 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+> tags/efi-2024-07-rc1-2
+>=20
+> for you to fetch changes up to f1f4b0e6f37d801f01d043a1ed44b88e7fdd1d92:
+>=20
+>   doc/sphinx: Bump idna to 3.7 (2024-04-13 11:16:14 +0200)
+>=20
+> Gitlab CI showed not issues:
+> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/20322
+>=20
 
-[1] https://patchwork.ozlabs.org/patch/1921039/
----
- arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi | 5 +++++
- arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi | 5 +++++
- arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi         | 5 +++++
- arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi        | 5 +++++
- arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi      | 5 +++++
- arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi      | 5 +++++
- 6 files changed, 30 insertions(+)
+Applied to u-boot/master, thanks!
 
-diff --git a/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi b/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
-index dd0058262b7f..fc4b13628b30 100644
---- a/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
-@@ -15,6 +15,11 @@
- 	};
- };
- 
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+};
-+
- &sdmmc {
- 	bus-width = <4>;
- 	status = "okay";
-diff --git a/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi b/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
-index a45b3f5e86ad..a0c62072c34e 100644
---- a/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
-@@ -14,3 +14,8 @@
- 		u-boot,spl-boot-order = &sdmmc;
- 	};
- };
-+
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+};
-diff --git a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
-index e8566785e965..354e4a8d39e3 100644
---- a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
-@@ -10,3 +10,8 @@
- 		u-boot,spl-boot-order = "same-as-spl", &sdhci;
- 	};
- };
-+
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+};
-diff --git a/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi b/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
-index 968385622fa5..7948464ac85f 100644
---- a/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
-@@ -11,6 +11,11 @@
- 	bootph-some-ram;
- };
- 
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+};
-+
- &sfc {
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&fspim1_pins>;
-diff --git a/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi b/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
-index 7b937943a53c..d764135ab661 100644
---- a/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
-@@ -4,3 +4,8 @@
-  */
- 
- #include "rk3588-u-boot.dtsi"
-+
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+};
-diff --git a/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi b/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
-index 1aeb5410e43e..c5c94b421d1e 100644
---- a/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
-+++ b/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
-@@ -10,3 +10,8 @@
- 		u-boot,spl-boot-order = "same-as-spl", &sdhci;
- 	};
- };
-+
-+&sdhci {
-+	cap-mmc-highspeed;
-+	mmc-hs200-1_8v;
-+};
--- 
-2.43.2
+--=20
+Tom
 
+--1/1Itu0dsB0O1Ugc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYazM4ACgkQFHw5/5Y0
+tywDRQv/btivE9ll1gm+gywQsndpZjiARDmqYQL6OsLN3VAJUo8YqtkQukS+yTT6
+OSJ5QOOQJbevy1LYJL92YrzYyiKz1vcnOn8kaO3XQMB0jJDbcOITTNNbUdLvfLWI
+0JEWkI7CFENSUCMcS+z2hfbwlHFNxxJKBBq/+HuSDQgINrIH3RFZVZ4ZXJA4V0vx
+dRJCcgJBjwRnl+RO6vUdqRCHcLiAj8ylJb5gOjtYko91l00OJ5+JrURxI6Lk7rZ0
+Iglye8aPenBTXzInK3f0mbaR5LXTYKhJXmHeYuPnw2U11UJWjeIU4oJxuDT7iZuB
+g20yWRAw1nWay2aFmqEChm5Ui8qDTv8lUkhpTd3/jYmDmdoxp2DQD5Z4Pdb7fEW1
+pZSWQSvMMhraeC2Io9Rvw3np0lBo6QMT9Xy8cmW1CwmVu2Ayap/TXa0DbvXGPQuN
+BW04G/VHh/70sb795Cnwcf0WBZBkQEW1z2m0gru3dxI5gKoDbOziCBLnSTKos6Q9
+OgkA6ICY
+=Un5S
+-----END PGP SIGNATURE-----
+
+--1/1Itu0dsB0O1Ugc--
