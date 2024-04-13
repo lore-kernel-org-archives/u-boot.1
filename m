@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D456C4345F
-	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 09:14:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 299CCC4345F
+	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 10:28:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46A3587E62;
-	Sat, 13 Apr 2024 11:14:20 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4454D87D64;
+	Sat, 13 Apr 2024 12:28:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="N0ay0MgC";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="sj58ZbAT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B56087F13; Sat, 13 Apr 2024 11:14:18 +0200 (CEST)
+ id 9D78487D8F; Sat, 13 Apr 2024 12:28:39 +0200 (CEST)
 Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DB7787DF3
- for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 11:14:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6718187D0A
+ for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 12:28:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1712999654; x=1713604454; i=xypron.glpk@gmx.de;
- bh=ZLl6bWB880tLHMGgrOAHU69DBuYq0PWNp+N+uWc0Gcs=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=N0ay0MgCbdCO+/DDfy4ZdICOi+oHd9ia9l5xg48SVYIa5rpvHiVMaelOfIwiUOCX
- IXGzVhCgZmpDazYBmbzniPr3WqyCu+yfGa6FhqyNlS+dNh/udLnL/dGETOjUkzPFg
- gaKS7DsuUTfxYZQ1KbVTHpHSHlXfhPZ3KGFNivMo5oMl07RxHDyMjjiVcxDmJ+Xiu
- ISQwf/2vNPaddyt2rcIaewDkZfXRUciZQAJAgSRezjIQ0MZGml9ksoE3gRSJb0ANN
- fhOy8OF5MyNa6jxr/eCIoVzszARoBVwizHvScL1GOLKZSmtv5sbVY3VHuZNgox5Yu
- 8W/RHfd0Uvpd97FW2w==
+ s=s31663417; t=1713004114; x=1713608914; i=xypron.glpk@gmx.de;
+ bh=D8tSDdrMfGU+17pIsKmQ3wBlvP4VI86k21hWGrfrRH4=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=sj58ZbAT4EZBEIU5Fd7sHyNRymGekCnfkl96tP5enXLAUDuQfcJoQwf2TUlebvr7
+ iTX+ZsNjxJn/LHeY+XAILuiqkaGZN9LwKfJqFmj3UD9x0ltVKUrWPbYM8f4PDtOha
+ AAitKxHsz8np7LUzt/Zpk7jx5kDZ7+GuzS36AL1kJbqXc+xHbq1x2dPsNbJztnSAc
+ R+mgX2XUsqRm5XuunQkxhdFy1BTSsTQLM1fRl178/Z7tnIEQzfqz2sh9u55hVNBea
+ hMI97wrTPVCTED7HojL9fej7IyDOWgd9EFcWgCG6pbohs5H/1TMsm44hc03vaitzw
+ PDISK/OSdW7Hh7VHkw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx004
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MgeoI-1sPPVS0hC8-00h8AU; Sat, 13
- Apr 2024 11:14:14 +0200
-Message-ID: <ed4601d1-1ad3-4413-872c-9ea260718404@gmx.de>
-Date: Sat, 13 Apr 2024 11:13:59 +0200
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MmDEg-1sdl901s7U-00iFJQ; Sat, 13
+ Apr 2024 12:28:34 +0200
+Message-ID: <c17cb6a7-2c98-4408-9b29-27f766edafac@gmx.de>
+Date: Sat, 13 Apr 2024 12:28:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] Fix references to trace doc
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-References: <20240411164402.111244-1-vincent.stehle@arm.com>
 Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Weizhao Ouyang <o451686892@gmail.com>
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240411164402.111244-1-vincent.stehle@arm.com>
+Subject: Pull request efi-2024-07-rc1-2
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:cWRdfA4b5WijbJcFXi4Qeax4puRU6/UGA2IOGVkDNpIsUPBge6W
- 989qRKLgtqVLSMJO6/5EOS8tXpKYMLlceVRKRXZmn4GdrbDvb2hyuVC5q/c8iDPGxLc8sVL
- JG7qkroaHztRvr+aHVwie4urnVvx4JO6odtoxuCdIufq4oyGx2UK4xfqawQ+tpyt2qypXaG
- 2xq1pPcBxN5HcZbg0TdRg==
-UI-OutboundReport: notjunk:1;M01:P0:Ybru94EadmY=;3lph8ouNgCRZDfa0ZUiyKjdwaYJ
- 19WUN0yxi+sqqaMAV0yW1+lmXiXr4CVzWoHOt/1O9PYtepnzwZQFWqeir1Zhu04I+CrWXbWT6
- IphngtHiQpN7lGPHznqr4F771vuWq0HRdRjSaeAWJ0hoBbAJzgV8AN2fQiqUeNs3I8lBjAp/5
- bxE/aqLXPVZ4czQnp6z5Jqzb0aDeVWiCF+9vECDoEjuvCJHX4X37/18Z1KEa8oUC3XezQPOLW
- sBpsuuHmhgdCXhCOsTW3t3VtmHyFXseK19psknbjEfX/7UVt0yhFGmSt0LLMTZPJ0TS3rR/ic
- Am/IslvJAM6NBoeUlanSf8c5rcNDGPXchAvWc+Cmf5eDCo1KRtGaYnTrEs6bWckluCxBJLM7U
- lviJJjjT2+c6SZ2md30L8fSC5GqNgnJ38jm7d+H+weIVQ0FIamN194q1T7jvq2rYF0FfY5uJs
- AtrdE1XYn8LH3deyftLYI3EPaviYeIN1ew9qsQcwk8mcpok8pAbvfQ8e03xgu0t1Kw1nScWQv
- /Vk0C0J5DSdXzth+QXiPQJoGVNgEYd2OG8KR0uOh5jO1+I/gaOp+fxT4clDf+o06ELC4RlSdn
- nDRzB4MaXBdEtQfHv/ipia5XuOHisQLBdkdxlCpgnqseAGky5NUS5Ux3NeIaZnShgdNOYBZSL
- BjKBijA5FhQVLimFBD+QspT3DSHBgvSnR6c9acJkbyaSBwmoWSl1z1pvpry02PvQ8lH7N+m/y
- 655xdnL3h3YVe5ZKCkrItYwzzj8IfeNuLsRIo5ioVRotnYpqSEniqQFCeIK/+0TMiKhqQdR4x
- UEs6cIDA0YuWDAeBdi1gyf5OOY5rLDuV+TjEfZQTAhoqM=
+X-Provags-ID: V03:K1:r041G7HMW7bo8Sn0nmwZp97D9Ts11RY+JAvxOH5EYbhJoM45o7W
+ Ib8xgqxbVXa63mfyZCQVNMKMmYsH2KOYaTpKw5H6mdTPmSrL9zZHl1dcMLGME5HfmiogZcg
+ YrlRMmYrxHXH+pUBm2tUo5kUqDJ6BgpliHWfYpM+dcuo2rauPYDJ5M3Vd7FLLG3PqaibEc/
+ 2ipvoyOx3jDl6toKPA/1Q==
+UI-OutboundReport: notjunk:1;M01:P0:SKCxgVaV45A=;s+SMUkmVPglx+RXHbcGr6TpgxOV
+ pUgLXU98Xif4NiNOo+woJEIP2cxAg9PZXS8+5vjoubP8ute25K3njRKRcV7vvhExvz4Exv78S
+ rWY2kFG1h4+6xN0zwTRZ945QFkz5PwoO1au4xCYoOOkbGGwm1pHyeaQgSWJZJK+okIUjjUN3c
+ mBwnFuQ6RUKaFjitHklctwhHt1PtW+4ILr7F513tW73HTJGYNVNRLqT1/SdT7ED69bx3q9I8h
+ u9iHKsXfHNr/r5OIpdLargF9NYAGLDSamVwmdopT/20W35J0/Qw+7sRaX20WmKKpg32CekeVb
+ al/oc0vaTu3BEaWhi0Cqhf/8o9SU546x60wgDPtIYBvYzbmzN2LorSMEG5IHTlqRMK2apnnQq
+ fDTv+vLw2c+hWkvVLXYboEdrpMlbXRoe5SeaBGc2Ek6bpgwL5fmKke7cjPBCSGdZW9XgSYMUB
+ 11ivw06kNvwXN6C4LLAds2y7w7jykFYuTxnjbQF6k3B0P6SqEkkUzCZarLauT5H+uEoGITK9t
+ Ut3+BP6qdtMRH6KsW3VSwwDg2iHPqqC7VDlrGGQHwXjksG3anrrnOk9qDMKY1dyvyieswbHUh
+ avam3xASi50Z5Cugo3s3OgLl+U+WHj9/8awsNj5tu0s0dXPvd6QF5yZ4jLCSpyBn8KExyflwP
+ vFjVo58DPANsTjeNYbmder/s3rKsLZ9/3Svz1rVNeuOUkd8+orQXZ0eob8IzcNd0JxaOe9nSK
+ Y7SKQjFVgoZHHE297ySKhOaCxi2mhu5wVDK0lS1yf877jZsGa5aI7jiPi/CcDM1dYqfz8B1yK
+ XOTcvAcsTyBR0gLWlSybid7jK+76/u0kvhQO+I7IQ3AL8=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,79 +90,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/11/24 18:44, Vincent Stehl=C3=A9 wrote:
-> The README.trace has been moved and converted to rst in commit dce26c7d5=
-6ed
-> ("doc: move README.trace to HTML documentation"); fix all the remaining
-> references to this file.
->
-> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-> ---
->   cmd/Kconfig                   | 4 ++--
->   doc/develop/tests_sandbox.rst | 2 +-
->   lib/Kconfig                   | 2 +-
->   3 files changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 38305197602..f9f271616d3 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -2832,8 +2832,8 @@ config CMD_TRACE
->   	  Enables a command to control using of function tracing within
->   	  U-Boot. This allows recording of call traces including timing
->   	  information. The command can write data to memory for exporting
-> -	  for analysis (e.g. using bootchart). See doc/README.trace for full
-> -	  details.
-> +	  for analysis (e.g. using bootchart). See doc/develop/trace.rst
-> +	  for full details.
->
->   config CMD_AVB
->   	bool "avb - Android Verified Boot 2.0 operations"
-> diff --git a/doc/develop/tests_sandbox.rst b/doc/develop/tests_sandbox.r=
-st
-> index bfd3bdb9270..c2824834d07 100644
-> --- a/doc/develop/tests_sandbox.rst
-> +++ b/doc/develop/tests_sandbox.rst
-> @@ -29,7 +29,7 @@ Some of the available tests are:
->        - test/image/test-imagetools.sh - multi-file images
->        - test/py/tests/test-fit.py     - FIT images
->     - tracing: test/trace/test-trace.sh tests the tracing system (see
-> -      README.trace)
-> +      doc/develop/trace.rst)
+Dear Tom,
 
-Thank you Vincent for the documentation fixes.
+The following changes since commit 13c1100335e40acb1066e074eb061387fd103c3=
+6:
 
-Here we should use
+   net: designware: Pass all multicast frames in designware driver
+(2024-04-12 13:59:12 -0600)
 
-   (see :doc:`trace`)
+are available in the Git repository at:
 
-to create a cross reference in the generated HTML.
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/efi-2024-07-rc1-2
 
-I will fix this when merging.
+for you to fetch changes up to f1f4b0e6f37d801f01d043a1ed44b88e7fdd1d92:
 
-Best regards
+   doc/sphinx: Bump idna to 3.7 (2024-04-13 11:16:14 +0200)
 
-Heinrich
+Gitlab CI showed not issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/20322
 
->     - verified boot: test/py/tests/test_vboot.py
->
->   If you change or enhance any U-Boot subsystem, you should write or exp=
-and a
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 37ac14f7bab..efb77978a65 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -348,7 +348,7 @@ config TRACE
->   	  Enables function tracing within U-Boot. This allows recording of ca=
-ll
->   	  traces including timing information. The command can write data to
->   	  memory for exporting for analysis (e.g. using bootchart).
-> -	  See doc/README.trace for full details.
-> +	  See doc/develop/trace.rst for full details.
->
->   config TRACE_BUFFER_SIZE
->   	hex "Size of trace buffer in U-Boot"
+=2D---------------------------------------------------------------
+Pull request efi-2024-07-rc1-2
 
+Documentation:
+
+* bump build dependency idna to 3.7
+* update docker image reference to latest
+* fix section levels in gen_compile_commands
+* fix references to trace doc
+
+UEFI:
+
+* eliminate duplicate runtime section definitions
+* let 'EFI using ACPI tables at' be a debug message
+* sanitize efi_tcg2_final_events_table definition
+* move efi_var_collect to common functions
+* improve error messages in variables unit test by using
+   EFI_UNSUPPORTED for private authenticated variables
+
+=2D---------------------------------------------------------------
+Heinrich Schuchardt (3):
+       efi_loader: eliminate duplicate runtime section definitions
+       efi_loader: 'EFI using ACPI tables at' should be debug message
+       efi_loader: sanitize efi_tcg2_final_events_table definition
+
+Ilias Apalodimas (1):
+       efi_loader: move efi_var_collect to common functions
+
+Mattijs Korpershoek (2):
+       doc: build: update docker image to latest
+       doc: build: fix gen_compile_commands section level
+
+Tom Rini (1):
+       doc/sphinx: Bump idna to 3.7
+
+Vincent Stehl=C3=A9 (1):
+       Fix references to trace doc
+
+Weizhao Ouyang (1):
+       efi_loader: using EFI_UNSUPPORTED for private authenticated variabl=
+es
+
+  cmd/Kconfig                        |  4 +--
+  doc/build/docker.rst               |  2 +-
+  doc/build/gen_compile_commands.rst |  4 +--
+  doc/develop/tests_sandbox.rst      |  4 +--
+  doc/sphinx/requirements.txt        |  2 +-
+  include/efi_loader.h               |  3 --
+  include/efi_tcg2.h                 |  8 ++---
+  lib/Kconfig                        |  2 +-
+  lib/efi_loader/Makefile            |  2 +-
+  lib/efi_loader/efi_acpi.c          |  2 +-
+  lib/efi_loader/efi_memory.c        |  1 +
+  lib/efi_loader/efi_var_common.c    | 74
+++++++++++++++++++++++++++++++++++++++
+  lib/efi_loader/efi_var_file.c      | 64 --------------------------------=
+-
+  lib/efi_loader/efi_variable.c      |  1 +
+  14 files changed, 90 insertions(+), 83 deletions(-)
