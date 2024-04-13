@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D299BC4345F
-	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 18:18:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A736C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 18:19:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77B668801F;
-	Sat, 13 Apr 2024 20:16:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D862688268;
+	Sat, 13 Apr 2024 20:16:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="t/s1RTn/";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PmmEakq7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 44B5387CF1; Sat, 13 Apr 2024 20:16:10 +0200 (CEST)
+ id EBAC08826A; Sat, 13 Apr 2024 20:16:20 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4121C88262
- for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 20:16:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A724087CF1
+ for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 20:16:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,20 +28,23 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1713032154; bh=tcQ5GGwIO4RSEJ93smVGEE9fGA1ValdlXWnE7OLpmRQ=;
- b=t/s1RTn/aANZaYWYZdq9FR9mIcYJaka4x4ENmx/LkN5mYiYbgN5Y9baCG6rbWmwWopLsHiARz
- o0vPp1/hid6lZiTf1pAjBecIxYOt3Q/N+rKc9NlHGFX2HbiUloev4J+L5qiUFM1x0YT2GRCW/3O
- 9gNPSBvLPu09Qk6cTYMPkyVesnfQExPexXYyj0a37H5KrkL0tAfpJjKKNQzkBP4965uEpzUJ+yj
- iaJQb3mnBK2bqvHCh855sli69aqzpWnN1z8rmRnK6KtvSTtz5aXnsW6vH2l0NBs/qL3swhAEX2X
- 4y0NUcmJFiI1XMubuYg0TGEgifz8Un+scSXgMvXgOvug==
+ t=1713032158; bh=5RT1jkOUNVYHP3OH6iUXT6capVg6P+XNavLacUGm5tY=;
+ b=PmmEakq7VkScekU+gYczbr0B87CrOpaQBlr/jCgke8t+aygbkaMbrPf+J02hOdH2UT1uGX4JT
+ vnfi8Hl0zedlv4Tn0Six2CSvgVY259jHCFolaeSOLJo/jsKz3UpxF/bXXTHZ36OTVM+nkT2SaQZ
+ 2HO9feYa05gXFsgdO7CZEbr5G39P9LtYJ+RoAGb/SWjpD3iYji+cinpIn+J7rWJ2MAugVhYJWOz
+ SRdRXRq5qZR7mOaXr50Bc5gIaTm3PxWs6kgFVrQp66EmiS8tfzFMgw2XYZGhq8GsIf56mICrUhT
+ H2AEO1+YuUctYiRJBRVuVhKe8z+TNC2u4D2TB3H2eS3Q==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 22/23] rockchip: rk35xx-generic: Disable unused features
-Date: Sat, 13 Apr 2024 18:13:56 +0000
-Message-ID: <20240413181425.1384357-23-jonas@kwiboo.se>
+ Jagan Teki <jagan@edgeble.ai>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>, John Clark <inindev@gmail.com>, Jonas
+ Karlman <jonas@kwiboo.se>, Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, Elon
+ Zhang <zhangzj@rock-chips.com>
+Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
+Subject: [PATCH v2 23/23] rockchip: rk3588: Enable use of eMMC HS200 mode on a
+ few missed boards
+Date: Sat, 13 Apr 2024 18:13:57 +0000
+Message-ID: <20240413181425.1384357-24-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240413181425.1384357-1-jonas@kwiboo.se>
 References: <20240413181425.1384357-1-jonas@kwiboo.se>
@@ -53,7 +56,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  167.172.40.54
-X-ForwardEmail-ID: 661acbd96fbb975d49a65571
+X-ForwardEmail-ID: 661acbdd6fbb975d49a6559c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,90 +73,116 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The generic RK35xx board targets are intended to be used as a bare
-minimum target that can be used to e.g. boot boards that mostly follow
-reference hw design before a board spefic target has been added or
-flashing and recovery purposes.
+A few RK3588 boards are missing a mmc-hs200 prop to signal that HS200
+mode is supported in addition to HS400, this lead to bad performance
+reading FIT in SPL and broken MMC write.
 
-Disable BOOTMETH_VBE, NET and ADC as these features are not intended to
-ever be used by these minimal generic board targets.
-
-Enable SYSRESET_PSCI to let TF-A handle sysreset from U-Boot proper.
+Add cap-mmc-highspeed and mmc-hs200-1_8v to affected boards to enable
+use of eMMC HS200 mode.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
-v2: Split patch and skip enable of SUPPORT_EMMC_BOOT option
----
- configs/generic-rk3568_defconfig | 5 +++++
- configs/generic-rk3588_defconfig | 5 +++++
- 2 files changed, 10 insertions(+)
+v2: New patch
 
-diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
-index 26114f9cb2a5..76c15ca27cc5 100644
---- a/configs/generic-rk3568_defconfig
-+++ b/configs/generic-rk3568_defconfig
-@@ -18,6 +18,7 @@ CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_FIT_SIGNATURE=y
- CONFIG_SPL_LOAD_FIT=y
-+# CONFIG_BOOTMETH_VBE is not set
- CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3568-generic.dtb"
- # CONFIG_DISPLAY_CPUINFO is not set
-@@ -38,9 +39,12 @@ CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIVE=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+# CONFIG_NET is not set
- CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_SPL_REGMAP=y
- CONFIG_SPL_SYSCON=y
-+# CONFIG_ADC is not set
- CONFIG_SPL_CLK=y
- # CONFIG_USB_FUNCTION_FASTBOOT is not set
- CONFIG_ROCKCHIP_GPIO=y
-@@ -68,6 +72,7 @@ CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
- CONFIG_ROCKCHIP_SFC=y
- CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_PSCI=y
- CONFIG_USB=y
- CONFIG_USB_DWC3=y
- CONFIG_USB_DWC3_GENERIC=y
-diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
-index e96df619b59d..897456111215 100644
---- a/configs/generic-rk3588_defconfig
-+++ b/configs/generic-rk3588_defconfig
-@@ -15,6 +15,7 @@ CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_SPL_FIT_SIGNATURE=y
- CONFIG_SPL_LOAD_FIT=y
-+# CONFIG_BOOTMETH_VBE is not set
- CONFIG_LEGACY_IMAGE_FORMAT=y
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-generic.dtb"
-@@ -34,9 +35,12 @@ CONFIG_CMD_USB_MASS_STORAGE=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIVE=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-+CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+# CONFIG_NET is not set
- CONFIG_SPL_DM_SEQ_ALIAS=y
- CONFIG_SPL_REGMAP=y
- CONFIG_SPL_SYSCON=y
-+# CONFIG_ADC is not set
- CONFIG_SPL_CLK=y
- # CONFIG_USB_FUNCTION_FASTBOOT is not set
- CONFIG_ROCKCHIP_GPIO=y
-@@ -55,6 +59,7 @@ CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
- CONFIG_SYSRESET=y
-+CONFIG_SYSRESET_PSCI=y
- CONFIG_USB=y
- CONFIG_USB_DWC3=y
- CONFIG_USB_DWC3_GENERIC=y
+All these mmc-hs200 prop overrides may not be needed if the patch "mmc:
+Imply HS200 cap with mmc-hs400 prop to match linux" [1] gets applied,
+until such time this matches what has been done for all other RK35xx
+boards.
+
+[1] https://patchwork.ozlabs.org/patch/1921039/
+---
+ arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi | 5 +++++
+ arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi | 5 +++++
+ arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi         | 5 +++++
+ arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi        | 5 +++++
+ arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi      | 5 +++++
+ arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi      | 5 +++++
+ 6 files changed, 30 insertions(+)
+
+diff --git a/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi b/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
+index dd0058262b7f..fc4b13628b30 100644
+--- a/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
+@@ -15,6 +15,11 @@
+ 	};
+ };
+ 
++&sdhci {
++	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
++};
++
+ &sdmmc {
+ 	bus-width = <4>;
+ 	status = "okay";
+diff --git a/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi b/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
+index a45b3f5e86ad..a0c62072c34e 100644
+--- a/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
+@@ -14,3 +14,8 @@
+ 		u-boot,spl-boot-order = &sdmmc;
+ 	};
+ };
++
++&sdhci {
++	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
++};
+diff --git a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
+index e8566785e965..354e4a8d39e3 100644
+--- a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
+@@ -10,3 +10,8 @@
+ 		u-boot,spl-boot-order = "same-as-spl", &sdhci;
+ 	};
+ };
++
++&sdhci {
++	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
++};
+diff --git a/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi b/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
+index 968385622fa5..7948464ac85f 100644
+--- a/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
+@@ -11,6 +11,11 @@
+ 	bootph-some-ram;
+ };
+ 
++&sdhci {
++	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
++};
++
+ &sfc {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&fspim1_pins>;
+diff --git a/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi b/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
+index 7b937943a53c..d764135ab661 100644
+--- a/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
+@@ -4,3 +4,8 @@
+  */
+ 
+ #include "rk3588-u-boot.dtsi"
++
++&sdhci {
++	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
++};
+diff --git a/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi b/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
+index 1aeb5410e43e..c5c94b421d1e 100644
+--- a/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
++++ b/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
+@@ -10,3 +10,8 @@
+ 		u-boot,spl-boot-order = "same-as-spl", &sdhci;
+ 	};
+ };
++
++&sdhci {
++	cap-mmc-highspeed;
++	mmc-hs200-1_8v;
++};
 -- 
 2.43.2
 
