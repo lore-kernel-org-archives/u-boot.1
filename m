@@ -4,46 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8388C4345F
-	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 13:57:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBB62C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 16:18:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D254387B77;
-	Sat, 13 Apr 2024 15:57:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=189.cn
+	by phobos.denx.de (Postfix) with ESMTP id D759D87FB5;
+	Sat, 13 Apr 2024 18:18:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CB008800D; Sat, 13 Apr 2024 15:44:05 +0200 (CEST)
-Received: from 189.cn (ptr.189.cn [183.61.185.101])
- by phobos.denx.de (Postfix) with ESMTP id 3963687FA3
- for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 15:44:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=189.cn
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=dazen@189.cn
-HMM_SOURCE_IP: 10.64.8.43:57670.345399815
-HMM_ATTACHE_NUM: 0000
-HMM_SOURCE_TYPE: SMTP
-Received: from clientip-14.145.245.88 (unknown [10.64.8.43])
- by 189.cn (HERMES) with SMTP id 86364100236;
- Sat, 13 Apr 2024 21:43:58 +0800 (CST)
-Received: from  ([14.145.245.88])
- by gateway-153622-dep-65f4d5f786-dtfkj with ESMTP id
- c8947411125841bf8a0dfa1ae1e68334 for u-boot@lists.denx.de; 
- Sat, 13 Apr 2024 21:43:59 CST
-X-Transaction-ID: c8947411125841bf8a0dfa1ae1e68334
-X-Real-From: dazen@189.cn
-X-Receive-IP: 14.145.245.88
-X-MEDUSA-Status: 0
-From: dazen@189.cn
-To: u-boot@lists.denx.de
-Cc: jagan@amarulasolutions.com, andre.przywara@arm.com, trini@konsulko.com,
- dazen@189.cn
-Subject: [PATCH] DRAM_SUN50I_H616_TRIM_SIZE
-Date: Sat, 13 Apr 2024 21:43:52 +0800
-Message-ID: <20240413134352.46495-1-dazen@189.cn>
-X-Mailer: git-send-email 2.44.0
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rkz6w3tG";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 859E98801F; Sat, 13 Apr 2024 18:18:14 +0200 (CEST)
+Received: from mail-oi1-x22d.google.com (mail-oi1-x22d.google.com
+ [IPv6:2607:f8b0:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6206E87F95
+ for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 18:18:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x22d.google.com with SMTP id
+ 5614622812f47-3c603f6eb37so741322b6e.1
+ for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 09:18:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1713025091; x=1713629891; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=a0JpThIYF4yxkvgymW8gv9Jnd48XmHJMJ8g14ef+F8E=;
+ b=rkz6w3tGKQF6m/NIV4LHJH6ZnSA0UlZnleSuvXL3Ky7d/pCeYUA07dwRaIN87J7zGR
+ yWNUaBNt70pDV/DxcTm5AvHVdDze1kibwU4DUXkkMKspBC4/z84yP04giWn5CMIC1Fus
+ l3oiBhIx3eok+oMfysXDqVQRM5pP8j+PK4bfs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713025091; x=1713629891;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=a0JpThIYF4yxkvgymW8gv9Jnd48XmHJMJ8g14ef+F8E=;
+ b=HhpEso1+rAIjG96xosqrRecvW8yOVqMKY3SSLMjJPMwB4c1JvotwrPLSYIqSKunsUq
+ DZiZMbHfXaMwnnlMhpkIIEXR7npSX/OIENah5jviThYuSwCR1WajprmDCJRJjo9PMuKY
+ dV2K8uTNFuhRas1UIxl30SsoA4s+1OTkiHrfqjZqGOjDM8mNDVjV/N4DDMyuEa/IvOOx
+ 1X/zq7ZU2Ht6zOlcTeK6qYJYDJp9RmxbGXLd5tx4Rl5jcuG9uFmLGOQ+S+B30k/TaETW
+ KwGCbOLKu0R8lIdMbvQRAiD9SCQPjRkiCZpfK4mQUt/31xc4I1MPVh8nEXrmr0CMgvaS
+ qBWQ==
+X-Gm-Message-State: AOJu0YxmRXZ+dUorM6rsD99gENf7+cNIucxgszRnRQoo7EaApGcP+eps
+ Ojv7utJzhkzsnR1ywuSHZjtcUIrL7yBhrxJOlvkBl5PozlALmo9ucgEjqLUP2ouTbl15460gTew
+ MfN48MA==
+X-Google-Smtp-Source: AGHT+IFNw5yyG5LUCXLWSswVjxaIegg/b3j7mxlKO3d9/UsmJ7BBMr4y24CjScrf3nuUKCCNybIPHA==
+X-Received: by 2002:a05:6808:218c:b0:3c5:eddb:47c1 with SMTP id
+ be12-20020a056808218c00b003c5eddb47c1mr7049350oib.5.1713025091154; 
+ Sat, 13 Apr 2024 09:18:11 -0700 (PDT)
+Received: from [127.0.1.1] ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
+ kk5-20020a05622a2c0500b00433002038a2sm3653937qtb.44.2024.04.13.09.18.10
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 13 Apr 2024 09:18:10 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
+To: Eugene Uriev <eugeneuriev@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20240331200327.29141-1-eugeneuriev@gmail.com>
+References: <20240331200327.29141-1-eugeneuriev@gmail.com>
+Subject: Re: [PATCH 0/9] mcheck implementation for U-Boot
+Message-Id: <171302509010.1116517.17419455571970615491.b4-ty@konsulko.com>
+Date: Sat, 13 Apr 2024 10:18:10 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sat, 13 Apr 2024 15:57:03 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.13.0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,77 +89,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: lalakii <dazen@189.cn>
+On Sun, 31 Mar 2024 23:03:18 +0300, Eugene Uriev wrote:
 
-Add "DRAM_SUN50I_H616_TRIM_SIZE" option for 1.5gb board.
+> There was no "mcheck" for U-Boot before.
+> 
+> Since U-Boot has only 1 thread, and normally makes 4000+ - 6000+
+> mallocs, it's better to use havier canaries to protect heap-chunks.
+> My variant uses 2x8 = 16byte-long protector. And
+> the multiplier could be changed to tune speed/protection tradeoff.
+> This protects not only against memset()-s, but against "near" wild
+> pointers too, and makes more probable to catch "distant" ones.
+> 
+> [...]
 
-Signed-off-by: lalakii <dazen@189.cn>
----
- arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h |  1 +
- arch/arm/mach-sunxi/Kconfig                        |  7 +++++++
- arch/arm/mach-sunxi/dram_sun50i_h616.c             | 11 ++++++++++-
- 3 files changed, 18 insertions(+), 1 deletion(-)
+Applied to u-boot/master, thanks!
 
-diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-index a8fdda124a..2d2526fead 100644
---- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-+++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-@@ -166,6 +166,7 @@ struct dram_config {
- 	u8 rows;
- 	u8 ranks;
- 	u8 bus_full_width;
-+	bool trim_size;
- };
- 
- static inline int ns_to_t(int nanoseconds)
-diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-index fe89aec6b9..255a498557 100644
---- a/arch/arm/mach-sunxi/Kconfig
-+++ b/arch/arm/mach-sunxi/Kconfig
-@@ -108,6 +108,13 @@ config DRAM_SUN50I_H616_TPR12
- 	default 0x0
- 	help
- 	  TPR12 value from vendor DRAM settings.
-+
-+config DRAM_SUN50I_H616_TRIM_SIZE
-+        bool "H616 DRAM trim size"
-+        help
-+          Due to unknown issue, some H616 based boards may need to trim
-+          size a bit.
-+
- endif
- 
- config SUN6I_PRCM
-diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-index 37c139e0ee..4598d60a57 100644
---- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
-+++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-@@ -1349,8 +1349,15 @@ static unsigned long mctl_calc_size(const struct dram_config *config)
- {
- 	u8 width = config->bus_full_width ? 4 : 2;
- 
-+	unsigned long size;
-+
-+	size = (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
-+
-+	if (config->trim_size)
-+		size = (size * 3) / (width == 4 ? 4 : 8);
-+
- 	/* 8 banks */
--	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
-+	return size;
- }
- 
- static const struct dram_para para = {
-@@ -1379,6 +1386,8 @@ unsigned long sunxi_dram_init(void)
- 	struct sunxi_prcm_reg *const prcm =
- 		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
- 	struct dram_config config;
-+	if (IS_ENABLED(CONFIG_DRAM_SUN50I_H616_TRIM_SIZE))
-+		config.trim_size = true;
- 	unsigned long size;
- 
- 	setbits_le32(&prcm->res_cal_ctrl, BIT(8));
 -- 
-2.44.0
+Tom
+
 
