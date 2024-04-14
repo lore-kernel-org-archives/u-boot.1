@@ -4,56 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2744C4345F
-	for <u-boot@archiver.kernel.org>; Sun, 14 Apr 2024 15:38:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 098F0C4345F
+	for <u-boot@archiver.kernel.org>; Sun, 14 Apr 2024 17:00:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E749087F0E;
-	Sun, 14 Apr 2024 17:38:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
+	by phobos.denx.de (Postfix) with ESMTP id 46D0087FC1;
+	Sun, 14 Apr 2024 19:00:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="PGdaHKK0";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="u6ZmkYXC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E55B3880A7; Sun, 14 Apr 2024 16:33:12 +0200 (CEST)
-Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 66CFC88052; Sun, 14 Apr 2024 19:00:54 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D236A88049
- for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 16:33:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC2AB87F6F
+ for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 19:00:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gnu.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
-Received: from fencepost.gnu.org ([2001:470:142:3::e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1rw0uq-0005Vk-JA; Sun, 14 Apr 2024 10:33:08 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
- s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
- From; bh=rPUEDlN8rfjY2k/ENqX+QbJik3+D1oDymhZINsOfGGc=; b=PGdaHKK0AY9fApmXYZeN
- lww/26y7ttJSVnRovJSe93d5mPRsDJUVOv4K3nr/9pLWSf8KyTKbDAHo7mFF/lmc0GeGysNtjfxIA
- p3LYbC0wzxebA6Mq9JkOma2V1dPBpxVj9cMMif2mG+4dZnLZKVrKCF1HbTLNt15GDI8c40qep8ETg
- 86FOTpjTf+yOz/Et59nmNyCQ+URDk90Wff4kdjJnxOAHv3D5rN4mnfBP9yhV6UONdlMrX4I0r7IJw
- DjloMyBH5oOFA3ByBtYhlFGIQH35Fq+JdNerkWDeVFxirRr5KUFiwlcHycQ1RKX0wZ7finiF9JrcD
- pRXTU+6tjHypZg==;
-From: Mathieu Othacehe <othacehe@gnu.org>
-To: Peng Fan <peng.fan@nxp.com>
-Cc: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,  Stefano Babic
- <sbabic@denx.de>,  Fabio Estevam <festevam@gmail.com>,  dl-uboot-imx
- <uboot-imx@nxp.com>,  "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v6 5/5] imx93: convert to OF_UPSTREAM
-In-Reply-To: <DU0PR04MB9417A38FD214BC4A20AB82C3880A2@DU0PR04MB9417.eurprd04.prod.outlook.com>
- (Peng Fan's message of "Sun, 14 Apr 2024 12:47:41 +0000")
-References: <20240412-imx93-of-v2-v6-0-c2ad48e46eca@nxp.com>
- <20240412-imx93-of-v2-v6-5-c2ad48e46eca@nxp.com>
- <87il0k2qia.fsf@gnu.org>
- <DU0PR04MB9417A38FD214BC4A20AB82C3880A2@DU0PR04MB9417.eurprd04.prod.outlook.com>
-Date: Sun, 14 Apr 2024 16:33:05 +0200
-Message-ID: <87cyqs815q.fsf@gnu.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=d27d=LU=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1713114022;
+ bh=zI7uQ8p/kUOjOKS9hOi5mgRfFjCYCudOvmBg5yuaVLM=;
+ b=u6ZmkYXCt4xrqNOI7G+rIor64CNe29dMvetFjVtx/EmJDafi6uPwfF8iIAV95B5JKb/bvsWwZ
+ NuMr6nw60pIJA2uz4YrzlYw0HwccrRqMLYjHRw4DfyJjdcVwK46s7WqqwmqMJqpJ8DDsbd6xerk
+ XM5kjsrcdcowWKTvOlQF7KSmlpCIyK7WFK/58Ao/DPqCbvf3rn3QEf0Om4lFcQEzkuWKAVs34zb
+ XYPRfWD3RW7i3oXHD6sDslR9nJxst/Ox4ySGY0cJ53gXxkvZB6Ngo0xRx1ouMpgYSCu8LZpVSis
+ YvMWvYTwxO2SS9j2NhDckdbH19I8MyHl27dzfdKrzKew==
+Message-ID: <50dfa3d6-a1ca-4492-a3fc-8d8c56b40b43@kwiboo.se>
+Date: Sun, 14 Apr 2024 18:58:03 +0200
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Sun, 14 Apr 2024 17:38:50 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 00/16] pxe: Allow extlinux booting without CMDLINE
+ enabled
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+Cc: "U-Boot Mailing List" <u-boot@lists.denx.de>
+References: <20231215041919.2197788-1-sjg@chromium.org>
+ <171279991820.196936.155872099351797064.b4-ty@konsulko.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <171279991820.196936.155872099351797064.b4-ty@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 661c0b1e222b0995dec39151
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,19 +73,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom and Simon,
 
-Hello,
+On 2024-04-11 03:45, Tom Rini wrote:
+> On Thu, 14 Dec 2023 21:18:58 -0700, Simon Glass wrote:
+> 
+>> This series is the culmanation of the current line of refactoring
+>> series. It adjusts pxe to call the booting functionality directly
+>> rather than going through the command-line interface.
+>>
+>> With this is is possible to boot using the extlinux bootmeth without
+>> the command line enabled.
+>>
+>> [...]
+> 
+> Applied to u-boot/master, thanks!
+> 
 
-> Which dts upstream tag are u using?
+This series is causing boot issues using extlinux in bootm_run_states():
 
-You will find it in my previous email.
+  ERROR: booting os 'Invalid OS' (0) is not supported
 
-The command I use is:
-./dts/update-dts-subtree.sh pull 2639a0e2fdbdb7f2dd351d06afe54c895adf9d9d
+Following extlinux.conf was used:
 
-> Do you have time to debug the issue? I not have the board, so not sure what
-> happens here.
+  label linux
+  	kernel /Image.gz
+  	initrd /initramfs.cpio.gz
 
-Not at the moment sorry.
+Before this series booting works, bootm_run_states() is first called
+with states=0x1 (BOOTM_STATE_START):
 
-Mathieu
+  Scanning bootdev 'mmc@fe2b0000.bootdev':
+    1  extlinux     ready   mmc          1  mmc@fe2b0000.bootdev.part /extlinux/extlinux.conf
+  ** Booting bootflow 'mmc@fe2b0000.bootdev.part_1' with extlinux
+  1:      linux
+  Retrieving file: /Image.gz
+  Retrieving file: /initramfs.cpio.gz
+  bootm_run_states(): images->state: 0, states: 1
+  bootm_run_states(): images->os.os: 0
+  bootm_run_states(): images->os.arch: 0
+  bootm_run_states(): boot_fn: 0000000000000000, need_boot_fn: 0
+     Uncompressing Kernel Image to 0
+  ## Flattened Device Tree blob at edef8410
+     Booting using the fdt blob at 0xedef8410
+  Working FDT set to edef8410
+  bootm_run_states(): images->state: 1, states: 1710
+     Loading Ramdisk to ecdfd000, end eceb274d ... OK
+  bootm_run_states(): images->os.os: 5
+  bootm_run_states(): images->os.arch: 16
+  boot_fn: 00000000eff2b83c, need_boot_fn: 0
+     Loading Device Tree to 00000000ecde8000, end 00000000ecdfc97f ... OK
+  Working FDT set to ecde8000
+
+After this series booting fails, bootm_run_states() is first called
+with states=0x1710.
+
+  Scanning bootdev 'mmc@fe2b0000.bootdev':
+    1  extlinux     ready   mmc          1  mmc@fe2b0000.bootdev.part /extlinux/extlinux.conf
+  ** Booting bootflow 'mmc@fe2b0000.bootdev.part_1' with extlinux
+  1:      linux
+  Retrieving file: /Image.gz
+  Retrieving file: /initramfs.cpio.gz
+  bootm_run_states(): images->state: 0, states: 1710
+  bootm_run_states(): images->os.os: 0
+  bootm_run_states(): images->os.arch: 0
+  bootm_run_states(): boot_fn: 0000000000000000, need_boot_fn: 0
+  ERROR: booting os 'Invalid OS' (0) is not supported
+  Boot failed (err=-14)
+
+Looks like booti_start() -> bootm_run_states(bmi, BOOTM_STATE_START) is
+no longer called due to changes in this series.
+
+Regards,
+Jonas
