@@ -4,77 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BF7DC4345F
-	for <u-boot@archiver.kernel.org>; Sun, 14 Apr 2024 19:05:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA7BCC4345F
+	for <u-boot@archiver.kernel.org>; Sun, 14 Apr 2024 19:29:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 917E387F41;
-	Sun, 14 Apr 2024 21:05:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EC04788124;
+	Sun, 14 Apr 2024 21:29:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ideasonboard.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="liOCWL/y";
+	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="ujOJ6i97";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8094288124; Sun, 14 Apr 2024 21:05:03 +0200 (CEST)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9724988131; Sun, 14 Apr 2024 21:29:16 +0200 (CEST)
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
+ [213.167.242.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83CAD87EF4
- for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 21:04:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2a2f2cd61cdso944959a91.1
- for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 12:04:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713121495; x=1713726295; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BBIRMqK40SXMsYQOBgRKNYyKP0ssr+GhPNXiM8xSwjY=;
- b=liOCWL/yJ8noVrhT4UaioW7q14G8CTiCWeKSsigSiS6aLW21PrRXCQdVBd0AcAVsmr
- PikaCxCIy3VIi+aR8T6swpKq9GgCPok0yuC88jvRrMfcaZRJ1CeQuuCFy8W8MjNvYm/w
- ljmbbOAgctJeYrLWI4nw4cvOmh8l/eQYIOAj4A0x9wwNzkUVJzkU5aRLsiXU1CgKTl7p
- a10r+YLju7nmQxx+5GPrPj43y8OS4fLS6z9yfQB6WOuCy1Y2LpVoUSGFLOj3f4TrSymz
- E4umYsBnRDt6sBj0psoPQGedil+zBw1GnJA8SsuozSs0b8gOmLcgn/fmbRxPuBC2/7sM
- 2V/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713121495; x=1713726295;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BBIRMqK40SXMsYQOBgRKNYyKP0ssr+GhPNXiM8xSwjY=;
- b=KZvNK2OQouyN603meeBlOqy2SLZokbkp5fqjiGnVZgP/h5DwndpIfUFKPp68wM8UWt
- Cj55I5J3dVeVlvp+XoqSSvEaUrOm0oj4v7LTMv8dOqEW0FhLSncbmEmPtxUUy9mw1qeb
- 7M9PlS6v5NfXvrWdwV1JkmI72HfJ8c7TIKx73bLjs67yF5oNlVPT+DZ9UtJsGpcoKgQR
- a7ZZG7eBbNUhKEuO7sSN9kjtARJ8a5jyfBmU6mX4aX9d80Ws9jU3FJnQgogadv5Zs4oc
- VP/AWdTRqouFvVNcTucU6muxdzdq9GlvahxE8DBc6JToDevCyvp3TGlMjkuU8Qhb+OB3
- RKNA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXz+FhN7dD6zlW969JkOmjCuQaFeIM4qs2SNtrgcUPkzUeENN2WSs5aRlrgl0dF21y9WeF0MAsVCtRA02krfyvB62TzNg==
-X-Gm-Message-State: AOJu0YwsaZZtpM/n2XKkUPk778K3rgcl72c3n4tuacGAaCWhGgZnQQ7D
- Sp0ZYSLaMaM9EOBdiWjboAgV0yJPm+ajW0MEKNHdj1P8vOn84YG9JhOEHwcz6Kqr7yLvZhg+hMi
- 2X0E2AAOmO26mjqqQ4XN9AZFWiG8=
-X-Google-Smtp-Source: AGHT+IGG6LiHy35lgxySPnCVFFxcTWPl1s+NZRiLIBLBpbLw89Xg9eXEekib1JBEKu2XSCO59dTeng2McDJtKtCK4Rs=
-X-Received: by 2002:a17:90a:db0f:b0:2a6:8e66:d585 with SMTP id
- g15-20020a17090adb0f00b002a68e66d585mr7380511pjv.4.1713121494969; Sun, 14 Apr
- 2024 12:04:54 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id D8C2A88125
+ for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 21:29:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ideasonboard.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=laurent.pinchart@ideasonboard.com
+Received: from pendragon.ideasonboard.com
+ (117.145-247-81.adsl-dyn.isp.belgacom.be [81.247.145.117])
+ by perceval.ideasonboard.com (Postfix) with ESMTPSA id 4FBB6512;
+ Sun, 14 Apr 2024 21:28:28 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+ s=mail; t=1713122908;
+ bh=HCwoylvPVYj+eW/MgoPbwz/e2K4gVkjCDv+x7G2rzZY=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+ b=ujOJ6i97SquBYvgOVuYl9n/idB2+z+/2xUpY/E/mZwMvKyuVPlouFyN7rGrtityrq
+ 9DAcEJw65vEQu97VXW7YUSGC0Cq+kFTTeEQ/4gUZVyvOXCfKTd54cj1MEJr5u849Od
+ j3uCY1fq5YhcYkx4DUrhMk+BpsQ39TiM1WcDeRlk=
+Date: Sun, 14 Apr 2024 22:29:04 +0300
+From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] boot: fdt: Turn all addresses and sizes into u64
+Message-ID: <20240414192904.GA7117@pendragon.ideasonboard.com>
+References: <20240414183759.146925-1-marex@denx.de>
 MIME-Version: 1.0
-References: <20240414104607.5966-1-yasuharu.shibata@gmail.com>
-In-Reply-To: <20240414104607.5966-1-yasuharu.shibata@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 14 Apr 2024 16:04:43 -0300
-Message-ID: <CAOMZO5C2YGDokPoc_8Gr+5prMWfQS7xh8KWRrhjj7BpCVthADQ@mail.gmail.com>
-Subject: Re: [PATCH] net: wget: Support retransmission a dropped packet
-To: Yasuharu Shibata <yasuharu.shibata@gmail.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20240414183759.146925-1-marex@denx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,40 +66,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yasuharu,
+Hi Marek,
 
-On Sun, Apr 14, 2024 at 9:46=E2=80=AFAM Yasuharu Shibata
-<yasuharu.shibata@gmail.com> wrote:
->
-> The server sends multiple packets without waiting for an ACK
-> by window control and if some packets are dropped,
-> wget will return an ACK including the dropped packets.
->
-> Following log indicates this issue.
->
->   wget_handler() wget: Transferring, seq=3D97bbdd4a, ack=3D30,len=3D580
->   wget_handler() wget: Transferring, seq=3D97bbedca, ack=3D30,len=3D580
->
-> First packet of TCP sequence number is 0x97bbdd4a.
-> Second packet of TCP sequence number should be 0x97bbe2ca,
-> however it is 0x97bbedca and returns its ACK, so the server
-> suppose that 0x97bbe2ca and 0x97bbedca are received appropriately.
-> In this case, 0x97bbe2ca was lost and the data of wget was broken.
->
-> In this patch, next_data_seq_num holds the next expected
-> TCP sequence number.
-> If the TCP sequence number different from next_data_seq_num,
-> trying to retransmit the packet.
+Thank you for the patch.
 
-Thanks for your patch.
+On Sun, Apr 14, 2024 at 08:37:20PM +0200, Marek Vasut wrote:
+> In case of systems where DRAM bank ends at the edge of 32bit boundary,
+> start + size calculations would overflow. This happens on STM32MP15xx
+> with 1 DRAM bank starting at 0xc0000000 and 1 GiB of DRAM. This is a
+> usual 32bit system DRAM size overflow, fix it by doing all DRAM size
+> and offset calculations using u64 types.
 
-I tested it in the hope that it would fix the following issue:
-https://lore.kernel.org/u-boot/CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf=
-1CNaZBw@mail.gmail.com/
+I'm not sure I like this much, as it removes a useful indication
+regarding what the variables store. Wouldn't it be better if the code's
+logic could be modified to avoid those overflows ?
 
-but I still get wget corruption when loading large files multiple
-times in a row.
+> This also covers a case where
+> a 32bit PAE system might be able to address up to 36bits of DRAM.
 
-Would you happen to have any suggestions?
+Shouldn't phys_addr_t be a 64-bit type on PAE systems ?
 
-Thanks
+> Fixes: a4df06e41fa2 ("boot: fdt: Change type of env_get_bootm_low() to phys_addr_t")
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
+> Cc: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+>  boot/image-fdt.c | 5 +----
+>  1 file changed, 1 insertion(+), 4 deletions(-)
+> 
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> index 2b92bdaff16..f09716cba30 100644
+> --- a/boot/image-fdt.c
+> +++ b/boot/image-fdt.c
+> @@ -158,13 +158,10 @@ void boot_fdt_add_mem_rsv_regions(struct lmb *lmb, void *fdt_blob)
+>   */
+>  int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
+>  {
+> +	u64	start, size, usable, addr, low, mapsize;
+>  	void	*fdt_blob = *of_flat_tree;
+>  	void	*of_start = NULL;
+> -	phys_addr_t start, size, usable;
+>  	char	*fdt_high;
+> -	phys_addr_t addr;
+> -	phys_addr_t low;
+> -	phys_size_t mapsize;
+>  	ulong	of_len = 0;
+>  	int	bank;
+>  	int	err;
+
+-- 
+Regards,
+
+Laurent Pinchart
