@@ -4,52 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA7BCC4345F
-	for <u-boot@archiver.kernel.org>; Sun, 14 Apr 2024 19:29:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 820CCC4345F
+	for <u-boot@archiver.kernel.org>; Sun, 14 Apr 2024 21:25:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC04788124;
-	Sun, 14 Apr 2024 21:29:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ideasonboard.com
+	by phobos.denx.de (Postfix) with ESMTP id A02D787F00;
+	Sun, 14 Apr 2024 23:25:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ideasonboard.com header.i=@ideasonboard.com header.b="ujOJ6i97";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9724988131; Sun, 14 Apr 2024 21:29:16 +0200 (CEST)
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com
- [213.167.242.64])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1713129909;
+	bh=xUsO84cLafhyncvZzjdllueln0o191l+VDmOFUwnLpQ=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=0CclHooSnijQXH4IQa/zl2odGgN/WLifVRNOzSQX1tglivVqn4kGAD2XNxqFyIFWp
+	 WKxqTA4HxiuyfXkMzcYMPP5Mc2lqx83nwNBD7K4eJjSdiLRA02Gt+rO6BXlTs/M13s
+	 Z3BnKeChj3IWfCR1S7f3IEONcb3WE0fBGIQ8IsVwv12B7prQIobVe1vSMkCAFQTpBI
+	 yzUTi1yRYQXgxGGYbGBpGJKlPtD+cHttkOyXDqfuqU9GHsrxOj1Nd8hEppup8NaG9/
+	 stTYqrl+ensvKjotjT6p4otW+TYLtlmbCHAP9BzI8c2uuNPN8HgkAobmCsG/VuJLJm
+	 4Mw23mO8rMj/w==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8C2A88125
- for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 21:29:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ideasonboard.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=laurent.pinchart@ideasonboard.com
-Received: from pendragon.ideasonboard.com
- (117.145-247-81.adsl-dyn.isp.belgacom.be [81.247.145.117])
- by perceval.ideasonboard.com (Postfix) with ESMTPSA id 4FBB6512;
- Sun, 14 Apr 2024 21:28:28 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
- s=mail; t=1713122908;
- bh=HCwoylvPVYj+eW/MgoPbwz/e2K4gVkjCDv+x7G2rzZY=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=ujOJ6i97SquBYvgOVuYl9n/idB2+z+/2xUpY/E/mZwMvKyuVPlouFyN7rGrtityrq
- 9DAcEJw65vEQu97VXW7YUSGC0Cq+kFTTeEQ/4gUZVyvOXCfKTd54cj1MEJr5u849Od
- j3uCY1fq5YhcYkx4DUrhMk+BpsQ39TiM1WcDeRlk=
-Date: Sun, 14 Apr 2024 22:29:04 +0300
-From: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-To: Marek Vasut <marex@denx.de>
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 78AF187F00;
+ Sun, 14 Apr 2024 23:25:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1713129907;
+ bh=xUsO84cLafhyncvZzjdllueln0o191l+VDmOFUwnLpQ=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=ptA78cE+TBki2vwIdCA3abmsUkbOvUXBhg1aw+9bDbtEAWdI+SwH7Vb1k8l4TQY16
+ M5dpysOWMdPhbkTSw77rCTSL8CB+vTCCGh27ljAnRqWw/+uAfnl9wcM0cEgesN4XS2
+ +QXQcjhZFoTdnyduxBCJjmVHlOlGoAzQGhxQM2H7/ViFopRPjBu9H94jQdWn8Y9LyG
+ roivEPwBQxKtK6/RfX43e7ju83FdlSqqbP+X9vj2JqejlJagCSDgTOFdt/+hMPpoi3
+ pgp85zYb90H9wQG8zq/OBEkJ+8NA1r10LjWw962cVdASiCX5qsJINgN+sAfHvq49+D
+ sZ++C56Bl0SMg==
+Message-ID: <a881fc20-c555-40b9-9ee7-ea28c4913dda@denx.de>
+Date: Sun, 14 Apr 2024 23:25:06 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] boot: fdt: Turn all addresses and sizes into u64
+To: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
 Cc: u-boot@lists.denx.de,
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] boot: fdt: Turn all addresses and sizes into u64
-Message-ID: <20240414192904.GA7117@pendragon.ideasonboard.com>
 References: <20240414183759.146925-1-marex@denx.de>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20240414183759.146925-1-marex@denx.de>
+ <20240414192904.GA7117@pendragon.ideasonboard.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20240414192904.GA7117@pendragon.ideasonboard.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,58 +71,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
-
-Thank you for the patch.
-
-On Sun, Apr 14, 2024 at 08:37:20PM +0200, Marek Vasut wrote:
-> In case of systems where DRAM bank ends at the edge of 32bit boundary,
-> start + size calculations would overflow. This happens on STM32MP15xx
-> with 1 DRAM bank starting at 0xc0000000 and 1 GiB of DRAM. This is a
-> usual 32bit system DRAM size overflow, fix it by doing all DRAM size
-> and offset calculations using u64 types.
-
-I'm not sure I like this much, as it removes a useful indication
-regarding what the variables store. Wouldn't it be better if the code's
-logic could be modified to avoid those overflows ?
-
-> This also covers a case where
-> a 32bit PAE system might be able to address up to 36bits of DRAM.
-
-Shouldn't phys_addr_t be a 64-bit type on PAE systems ?
-
-> Fixes: a4df06e41fa2 ("boot: fdt: Change type of env_get_bootm_low() to phys_addr_t")
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
-> Cc: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->  boot/image-fdt.c | 5 +----
->  1 file changed, 1 insertion(+), 4 deletions(-)
+On 4/14/24 9:29 PM, Laurent Pinchart wrote:
+> Hi Marek,
 > 
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> index 2b92bdaff16..f09716cba30 100644
-> --- a/boot/image-fdt.c
-> +++ b/boot/image-fdt.c
-> @@ -158,13 +158,10 @@ void boot_fdt_add_mem_rsv_regions(struct lmb *lmb, void *fdt_blob)
->   */
->  int boot_relocate_fdt(struct lmb *lmb, char **of_flat_tree, ulong *of_size)
->  {
-> +	u64	start, size, usable, addr, low, mapsize;
->  	void	*fdt_blob = *of_flat_tree;
->  	void	*of_start = NULL;
-> -	phys_addr_t start, size, usable;
->  	char	*fdt_high;
-> -	phys_addr_t addr;
-> -	phys_addr_t low;
-> -	phys_size_t mapsize;
->  	ulong	of_len = 0;
->  	int	bank;
->  	int	err;
+> Thank you for the patch.
+> 
+> On Sun, Apr 14, 2024 at 08:37:20PM +0200, Marek Vasut wrote:
+>> In case of systems where DRAM bank ends at the edge of 32bit boundary,
+>> start + size calculations would overflow. This happens on STM32MP15xx
+>> with 1 DRAM bank starting at 0xc0000000 and 1 GiB of DRAM. This is a
+>> usual 32bit system DRAM size overflow, fix it by doing all DRAM size
+>> and offset calculations using u64 types.
+> 
+> I'm not sure I like this much, as it removes a useful indication
+> regarding what the variables store.
 
--- 
-Regards,
+That's what the variable name is for, not variable type.
 
-Laurent Pinchart
+> Wouldn't it be better if the code's
+> logic could be modified to avoid those overflows ?
+
+I'd prefer to keep the code simple and blanket avoid the overflows for a 
+very long time, rather than play whack-a-mole with various odd corner 
+cases here.
+
+Note that this is a fix for a previous series which changed from 
+u64/ulong to phys_addr/size_t , which clearly was incorrect .
+
+>> This also covers a case where
+>> a 32bit PAE system might be able to address up to 36bits of DRAM.
+> 
+> Shouldn't phys_addr_t be a 64-bit type on PAE systems ?
+
+That depends on CONFIG_PHYS_64BIT , on am57xx this is not set for 
+example, so there phys_addr_t is 32bit .
