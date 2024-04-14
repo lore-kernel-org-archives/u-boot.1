@@ -4,74 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A13EC4345F
-	for <u-boot@archiver.kernel.org>; Sun, 14 Apr 2024 15:04:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2744C4345F
+	for <u-boot@archiver.kernel.org>; Sun, 14 Apr 2024 15:38:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 528F087F84;
-	Sun, 14 Apr 2024 17:04:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E749087F0E;
+	Sun, 14 Apr 2024 17:38:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZMRmTauY";
+	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="PGdaHKK0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EA4588059; Sun, 14 Apr 2024 17:04:25 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E55B3880A7; Sun, 14 Apr 2024 16:33:12 +0200 (CEST)
+Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D244B87F84
- for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 17:04:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D236A88049
+ for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 16:33:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jnhuang95@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1e4f341330fso19497845ad.0
- for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 08:04:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713107061; x=1713711861; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=0ei4iDtfs2+46V/SfaK93I/3fA+TH2IC2IYfC2Hvk8U=;
- b=ZMRmTauYRNEtXfJlTZO21D9m0UoStYCEI07d48uzwo+4QlAn4yOZjKgPJzuC9q/tXS
- tI6qsc0XCunUDQ+i69K/NMGR3y3e2qcJ5qX4Dti5sLxr3rhgrmvWmfCI6gxC03B+HaGs
- IOe2Z8VDzrBiwo7xtPExDLwUWQOScPNt9SkZonGbdnk/dDGcRNaD8+Wr3xjpY/jrMJt7
- rTCtAsM0BBJ+9F7K+1F2M4LkalwPVmRLopn5iElFXqIIpqYSVn9szoj62Oyku3lhBvfC
- R+h44ESLwCYphoSYtiMoNqyIRHiNGBdxaxvHcpjFaOVnJ2z3zRrS67gal5aTreOiOxEp
- M0qQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713107061; x=1713711861;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0ei4iDtfs2+46V/SfaK93I/3fA+TH2IC2IYfC2Hvk8U=;
- b=SSu+hlxqJX1j70moPrAT/axZwmkrs/fS1yIFBFzxAnADtqKINiLLj2FIRRuFLS0vI5
- 7jWa/MNHEQtsE4WVM8fAc9noFhqS7KOLRfbNw1HilPRDkiiG4wGS7SDIpnsKqdy5ylJb
- vGeD7egSjhTbMj+WFvfWSG3xUgb1CKMYKVK0jbTIHZSSygSfpcp7uEjaHBgndqnjb/aS
- FWZD0qPfXk/ROpitbkDS7CwiM6MbqDOVQ/AXK6P5k+DqFaqkLtVyHJq22hSyTLlm3aew
- eRfLQR9N9A8xEEWLoV8OWeN40jA5r/s7g7Ut2u7ZR0Pa0zPgssfBCXR3mQfOqBHCYHw0
- 11FQ==
-X-Gm-Message-State: AOJu0YzS6K9gvRpMjrK1Mg4cMPHbhO27PbHm8lgwVtQvIFEfwGfrJGF6
- UGbcP3Zk7EIHBsp6YdYeh6G+oMJnrbSAhdcbJKNy6HfBxUXW4J32dIm3u12PPMM=
-X-Google-Smtp-Source: AGHT+IHOjM5907Qv5NFSUOo1Zunk+qQN1c9ZSdwaRambCzLaRTo7oTABJYtvP+586MGoO0pmcZsHng==
-X-Received: by 2002:a17:902:eacd:b0:1e2:23b9:eb24 with SMTP id
- p13-20020a170902eacd00b001e223b9eb24mr6159226pld.33.1713107061157; 
- Sun, 14 Apr 2024 08:04:21 -0700 (PDT)
-Received: from server.. ([5.44.249.114]) by smtp.gmail.com with ESMTPSA id
- k18-20020a170902f29200b001e0da190a07sm6130612plc.167.2024.04.14.08.04.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Apr 2024 08:04:20 -0700 (PDT)
-From: Jianan Huang <jnhuang95@gmail.com>
-To: u-boot@lists.denx.de
-Cc: linux-erofs@lists.ozlabs.org,
-	Jianan Huang <jnhuang95@gmail.com>
-Subject: [PATCH] fs/erofs: add DEFLATE algorithm support
-Date: Sun, 14 Apr 2024 23:04:14 +0800
-Message-Id: <20240414150414.231027-1-jnhuang95@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=gnu.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
+Received: from fencepost.gnu.org ([2001:470:142:3::e])
+ by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+ (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
+ id 1rw0uq-0005Vk-JA; Sun, 14 Apr 2024 10:33:08 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
+ s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
+ From; bh=rPUEDlN8rfjY2k/ENqX+QbJik3+D1oDymhZINsOfGGc=; b=PGdaHKK0AY9fApmXYZeN
+ lww/26y7ttJSVnRovJSe93d5mPRsDJUVOv4K3nr/9pLWSf8KyTKbDAHo7mFF/lmc0GeGysNtjfxIA
+ p3LYbC0wzxebA6Mq9JkOma2V1dPBpxVj9cMMif2mG+4dZnLZKVrKCF1HbTLNt15GDI8c40qep8ETg
+ 86FOTpjTf+yOz/Et59nmNyCQ+URDk90Wff4kdjJnxOAHv3D5rN4mnfBP9yhV6UONdlMrX4I0r7IJw
+ DjloMyBH5oOFA3ByBtYhlFGIQH35Fq+JdNerkWDeVFxirRr5KUFiwlcHycQ1RKX0wZ7finiF9JrcD
+ pRXTU+6tjHypZg==;
+From: Mathieu Othacehe <othacehe@gnu.org>
+To: Peng Fan <peng.fan@nxp.com>
+Cc: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>,  Stefano Babic
+ <sbabic@denx.de>,  Fabio Estevam <festevam@gmail.com>,  dl-uboot-imx
+ <uboot-imx@nxp.com>,  "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: Re: [PATCH v6 5/5] imx93: convert to OF_UPSTREAM
+In-Reply-To: <DU0PR04MB9417A38FD214BC4A20AB82C3880A2@DU0PR04MB9417.eurprd04.prod.outlook.com>
+ (Peng Fan's message of "Sun, 14 Apr 2024 12:47:41 +0000")
+References: <20240412-imx93-of-v2-v6-0-c2ad48e46eca@nxp.com>
+ <20240412-imx93-of-v2-v6-5-c2ad48e46eca@nxp.com>
+ <87il0k2qia.fsf@gnu.org>
+ <DU0PR04MB9417A38FD214BC4A20AB82C3880A2@DU0PR04MB9417.eurprd04.prod.outlook.com>
+Date: Sun, 14 Apr 2024 16:33:05 +0200
+Message-ID: <87cyqs815q.fsf@gnu.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Mailman-Approved-At: Sun, 14 Apr 2024 17:38:50 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,154 +70,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch adds DEFLATE compression algorithm support. It's a good choice
-to trade off between compression ratios and performance compared to LZ4.
-Alternatively, DEFLATE could be used for some specific files since EROFS
-supports multiple compression algorithms in one image.
 
-Signed-off-by: Jianan Huang <jnhuang95@gmail.com>
----
- fs/erofs/Kconfig      | 15 ++++++++
- fs/erofs/decompress.c | 83 +++++++++++++++++++++++++++++++++++++++++++
- fs/erofs/erofs_fs.h   |  1 +
- 3 files changed, 99 insertions(+)
+Hello,
 
-diff --git a/fs/erofs/Kconfig b/fs/erofs/Kconfig
-index ee4e777c5c..c8463357ca 100644
---- a/fs/erofs/Kconfig
-+++ b/fs/erofs/Kconfig
-@@ -19,3 +19,18 @@ config FS_EROFS_ZIP
- 	help
- 	  Enable fixed-sized output compression for EROFS.
- 	  If you don't want to enable compression feature, say N.
-+
-+config FS_EROFS_ZIP_DEFLATE
-+	bool "EROFS DEFLATE compressed data support"
-+	depends on FS_EROFS_ZIP
-+	select ZLIB
-+	help
-+	  Saying Y here includes support for reading EROFS file systems
-+	  containing DEFLATE compressed data.  It gives better compression
-+	  ratios than the default LZ4 format, while it costs more CPU
-+	  overhead.
-+
-+	  DEFLATE support is an experimental feature for now and so most
-+	  file systems will be readable without selecting this option.
-+
-+	  If unsure, say N.
-diff --git a/fs/erofs/decompress.c b/fs/erofs/decompress.c
-index e04e5c34a8..ec74816534 100644
---- a/fs/erofs/decompress.c
-+++ b/fs/erofs/decompress.c
-@@ -1,6 +1,85 @@
- // SPDX-License-Identifier: GPL-2.0+
- #include "decompress.h"
- 
-+#if IS_ENABLED(CONFIG_ZLIB)
-+#include <u-boot/zlib.h>
-+
-+/* report a zlib or i/o error */
-+static int zerr(int ret)
-+{
-+	switch (ret) {
-+	case Z_STREAM_ERROR:
-+		return -EINVAL;
-+	case Z_DATA_ERROR:
-+		return -EIO;
-+	case Z_MEM_ERROR:
-+		return -ENOMEM;
-+	case Z_ERRNO:
-+	default:
-+		return -EFAULT;
-+	}
-+}
-+
-+static int z_erofs_decompress_deflate(struct z_erofs_decompress_req *rq)
-+{
-+	u8 *dest = (u8 *)rq->out;
-+	u8 *src = (u8 *)rq->in;
-+	u8 *buff = NULL;
-+	unsigned int inputmargin = 0;
-+	z_stream strm;
-+	int ret;
-+
-+	while (!src[inputmargin & (erofs_blksiz() - 1)])
-+		if (!(++inputmargin & (erofs_blksiz() - 1)))
-+			break;
-+
-+	if (inputmargin >= rq->inputsize)
-+		return -EFSCORRUPTED;
-+
-+	if (rq->decodedskip) {
-+		buff = malloc(rq->decodedlength);
-+		if (!buff)
-+			return -ENOMEM;
-+		dest = buff;
-+	}
-+
-+	/* allocate inflate state */
-+	strm.zalloc = Z_NULL;
-+	strm.zfree = Z_NULL;
-+	strm.opaque = Z_NULL;
-+	strm.avail_in = 0;
-+	strm.next_in = Z_NULL;
-+	ret = inflateInit2(&strm, -15);
-+	if (ret != Z_OK) {
-+		free(buff);
-+		return zerr(ret);
-+	}
-+
-+	strm.next_in = src + inputmargin;
-+	strm.avail_in = rq->inputsize - inputmargin;
-+	strm.next_out = dest;
-+	strm.avail_out = rq->decodedlength;
-+
-+	ret = inflate(&strm, rq->partial_decoding ? Z_SYNC_FLUSH : Z_FINISH);
-+	if (ret != Z_STREAM_END || strm.total_out != rq->decodedlength) {
-+		if (ret != Z_OK || !rq->partial_decoding) {
-+			ret = zerr(ret);
-+			goto out_inflate_end;
-+		}
-+	}
-+
-+	if (rq->decodedskip)
-+		memcpy(rq->out, dest + rq->decodedskip,
-+		       rq->decodedlength - rq->decodedskip);
-+
-+out_inflate_end:
-+	inflateEnd(&strm);
-+	if (buff)
-+		free(buff);
-+	return ret;
-+}
-+#endif
-+
- #if IS_ENABLED(CONFIG_LZ4)
- #include <u-boot/lz4.h>
- static int z_erofs_decompress_lz4(struct z_erofs_decompress_req *rq)
-@@ -93,6 +172,10 @@ int z_erofs_decompress(struct z_erofs_decompress_req *rq)
- #if IS_ENABLED(CONFIG_LZ4)
- 	if (rq->alg == Z_EROFS_COMPRESSION_LZ4)
- 		return z_erofs_decompress_lz4(rq);
-+#endif
-+#if IS_ENABLED(CONFIG_ZLIB)
-+	if (rq->alg == Z_EROFS_COMPRESSION_DEFLATE)
-+		return z_erofs_decompress_deflate(rq);
- #endif
- 	return -EOPNOTSUPP;
- }
-diff --git a/fs/erofs/erofs_fs.h b/fs/erofs/erofs_fs.h
-index 158e2c68a1..5bac4fe1a1 100644
---- a/fs/erofs/erofs_fs.h
-+++ b/fs/erofs/erofs_fs.h
-@@ -304,6 +304,7 @@ enum {
- enum {
- 	Z_EROFS_COMPRESSION_LZ4		= 0,
- 	Z_EROFS_COMPRESSION_LZMA	= 1,
-+	Z_EROFS_COMPRESSION_DEFLATE	= 2,
- 	Z_EROFS_COMPRESSION_MAX
- };
- 
--- 
-2.34.1
+> Which dts upstream tag are u using?
 
+You will find it in my previous email.
+
+The command I use is:
+./dts/update-dts-subtree.sh pull 2639a0e2fdbdb7f2dd351d06afe54c895adf9d9d
+
+> Do you have time to debug the issue? I not have the board, so not sure what
+> happens here.
+
+Not at the moment sorry.
+
+Mathieu
