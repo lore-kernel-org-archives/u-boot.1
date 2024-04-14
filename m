@@ -4,79 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D687C4345F
-	for <u-boot@archiver.kernel.org>; Sun, 14 Apr 2024 12:45:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BCC2C4345F
+	for <u-boot@archiver.kernel.org>; Sun, 14 Apr 2024 12:47:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE0EC880F9;
-	Sun, 14 Apr 2024 14:45:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7559787F41;
+	Sun, 14 Apr 2024 14:47:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ogi1w4Nm";
+	dkim=pass (1024-bit key; unprotected) header.d=nxp.com header.i=@nxp.com header.b="C8+v1LUc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 514F5880C5; Sun, 14 Apr 2024 12:48:35 +0200 (CEST)
-Received: from mail-pf1-x434.google.com (mail-pf1-x434.google.com
- [IPv6:2607:f8b0:4864:20::434])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A349387E83; Sun, 14 Apr 2024 14:47:45 +0200 (CEST)
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur01on0612.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe02::612])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1A8E880AB
- for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 12:48:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 72DA688052
+ for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 14:47:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yasuharu.shibata@gmail.com
-Received: by mail-pf1-x434.google.com with SMTP id
- d2e1a72fcca58-6ecf3943040so1825800b3a.0
- for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 03:48:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713091711; x=1713696511; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=xXA67FPKeOTDfaT1/EcxpI3Jm6mVXffpaFL2NtyUSJk=;
- b=Ogi1w4NmFvFOVUxE47n+T1IZ7i50Iy6B5Pjw4VNthfdpA8uBTicG0LjFGWDqEnbQSK
- S1CXq83/o8rGCYK58fWKStIP4R0Qz1DQCkHbNu1R7kP5jj+qM6zyBXAauP/XPY3od45Y
- FQUFnamp2UjSNuFkbKUmhyj5x5bsTR4QfTWYOtvwN8x4wcNIW+fkp61ycDtfyM9Fhb7a
- KeZe4BK4kTG+fad8iSlraYXr+J8cdy11WMj7S1BWSZ+oQeDV6/aZVcXPiSqd9/faUCXv
- 9rjhArEoP3udHS/9sNQQjEnjVUaKSdoCC11I6IQALGaUv5Uxu5U8M1StVgZDbVuQHBRN
- fbAQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713091711; x=1713696511;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xXA67FPKeOTDfaT1/EcxpI3Jm6mVXffpaFL2NtyUSJk=;
- b=X/5RAhZevGre1wCnU4ZW/F6XgbB2gAQiCW5uOHSEDTvRgOsrho8icF175w/YU9bSo4
- puNuZ/ULs8ioX69JqKYqQjIoJe1F6JP5D82eiXo/ayLYqu2D+ZMXa+wp9X7ZdUlKvotR
- VsSD10uXSbqlsnmhnz16376jJ9nbbRzb8G1uqbfbrIarKCxfsP4T2m6JJIL7GwFb9UYW
- DxlUF0FkLDfADa+N6BzOdnPrBmCp8pavlZi4wuuqp5NOClM3+8t1J4pT+ZCWFRp2nlm2
- rIVCHUj87CzoGY2+S9ebU0BokLE+o+b0HquimiS/cpTEqfVb7dDm4yY8aGoT1EF0r2i2
- s7Qg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVrDbhC6Twr7f9L5p1Prp/nncV7bQl7SnI5p49wX532JfWEewerpYnkgnRpdqCwT7ubeOAwd0zMlDrOnjMbCOEuG7m3bg==
-X-Gm-Message-State: AOJu0YwdjMSpcvzippLCDNHNoDUEp068KmSMeHZtGUl56sdau6aIh/8s
- km4AXRycRRJxQ9hi1lNFphPk12xOj7zjohgGu1VV3St67SvU5dNBoDRvtQ==
-X-Google-Smtp-Source: AGHT+IEfkkZgx6SrAMDJNSsNapCxeqU9oiT2UAyTuhVM4+q5eG6TfjrBgbRHMr+C3AzvdEcW6MZqHQ==
-X-Received: by 2002:a05:6a21:2d06:b0:1a9:c4cc:721d with SMTP id
- tw6-20020a056a212d0600b001a9c4cc721dmr4281724pzb.57.1713091711050; 
- Sun, 14 Apr 2024 03:48:31 -0700 (PDT)
-Received: from localhost.localdomain ([2409:10:d8a0:1500:8e5b:6a40:e20e:7f49])
- by smtp.gmail.com with ESMTPSA id
- q2-20020a17090ad38200b002a232e4f9ddsm5267434pju.34.2024.04.14.03.48.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Apr 2024 03:48:30 -0700 (PDT)
-From: Yasuharu Shibata <yasuharu.shibata@gmail.com>
-To: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Cc: Yasuharu Shibata <yasuharu.shibata@gmail.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH] net: wget: Support retransmission a dropped packet
-Date: Sun, 14 Apr 2024 19:46:07 +0900
-Message-Id: <20240414104607.5966-1-yasuharu.shibata@gmail.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=nxp.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=peng.fan@nxp.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=mXn7RT18SQmuLgU2Ypc03VVgKf4LnmrOqRIB+QRWacDweXNYI5RUFuA14BwENWstnPsdM3L/09HCmxn3ZNUdqLFd9wKy/ffxUI7XmRjs3x6nv8LkUiqgBgB/paXTCRpJVf0xGWhjGEVd0vKKQBCziT1E34SAykYLS1+4r8qpr8nKxPAwAUJWA1RgxE+pj8Ve/3XXA7o51uSh6JzMvgA5tCnGMzoVmaD4Th6x7/SXwFMwpJDjH+665asc7aCbdBtFKYizvYxlZ84dDAysXdeFOLJDrdlNxBScTb7GzTlNkKgWHP0DRonQ4RYwYmoXXTwN1h2RXBjG907g4iLJtdeYaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KOYQ0Qz86oCKK/a42Iypv0tINOAzPMJs9Ki/x9RRQp4=;
+ b=AcLPoUqBprtmN1G8HCsZbm7LMEhTrVDJ1/ZDhqfsKIjlEEV5b1+O1yvF64alX4+DkrxSIYZFhcjcvM0/mqV/wfCeqoCZh9FSpnzGxOXTLT3h2HseSgNQ/xUE76iq0Z19fNASesfmVBx3wru2XrKshO1f5Mn/kZxHGRjvhXckAdtgID3AX4IbtmIbA48K8S10S54rdfEDT2i/S3n+KwXEL7OJGNA7MGMc70RJq/5SPWzswm2Q56IC7GCSZ0Tc63XFTf7p0QBatY7Vg8S/CKWRrjVdeDnCPw6EsqkKWh4gQJLwmvBmKlO6WtkapLin4e8ZG5jyzKYdEoeFdIctlu03pw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KOYQ0Qz86oCKK/a42Iypv0tINOAzPMJs9Ki/x9RRQp4=;
+ b=C8+v1LUce7h5LEbCQWPrZK2c1aqEhBhPDbgauCj4WO+0T2d9dJFfUB9tEEH/ZvIqyKr9laYCz4dhWEVkznX1srSObwW+mAYl0ysfheRCxwFWJvQI1DezjoYr5/qiPp0Tru8eMN7hp5rPPouN+GtdPyJSF+WichumGGNAMtW0J1Q=
+Received: from DU0PR04MB9417.eurprd04.prod.outlook.com (2603:10a6:10:358::11)
+ by AM9PR04MB7570.eurprd04.prod.outlook.com (2603:10a6:20b:281::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.47; Sun, 14 Apr
+ 2024 12:47:41 +0000
+Received: from DU0PR04MB9417.eurprd04.prod.outlook.com
+ ([fe80::d30b:44e7:e78e:662d]) by DU0PR04MB9417.eurprd04.prod.outlook.com
+ ([fe80::d30b:44e7:e78e:662d%4]) with mapi id 15.20.7452.041; Sun, 14 Apr 2024
+ 12:47:41 +0000
+From: Peng Fan <peng.fan@nxp.com>
+To: Mathieu Othacehe <othacehe@gnu.org>, "Peng Fan (OSS)"
+ <peng.fan@oss.nxp.com>
+CC: Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ dl-uboot-imx <uboot-imx@nxp.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Subject: RE: [PATCH v6 5/5] imx93: convert to OF_UPSTREAM
+Thread-Topic: [PATCH v6 5/5] imx93: convert to OF_UPSTREAM
+Thread-Index: AQHajNzRcMdbYHBsqkK26bTMDaGq17FnkYa2gAAnnXA=
+Date: Sun, 14 Apr 2024 12:47:41 +0000
+Message-ID: <DU0PR04MB9417A38FD214BC4A20AB82C3880A2@DU0PR04MB9417.eurprd04.prod.outlook.com>
+References: <20240412-imx93-of-v2-v6-0-c2ad48e46eca@nxp.com>
+ <20240412-imx93-of-v2-v6-5-c2ad48e46eca@nxp.com> <87il0k2qia.fsf@gnu.org>
+In-Reply-To: <87il0k2qia.fsf@gnu.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nxp.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: DU0PR04MB9417:EE_|AM9PR04MB7570:EE_
+x-ms-office365-filtering-correlation-id: 468fc9fa-770b-4e04-c5d4-08dc5c8112cf
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 6W9nuSYeDaQ0/ZBNGqIKOe7lsR5IrQkH3Dj11r7lGU0+I+9MDkhByFqj7y+3TCmps0k14wgdKQput3wE9ZRIJyTldncHmZNvWAGi3ALeP2h+77D9/FuXgIQYSS546XnCc2MziJfyxOHhLThst4s5ChWgl3M/xaLpRvL47hNnLxvXq20jwdeRv8Rxh7PshuWgostHShS+dUyTjPsOfcuB7jy4BEmxQzlwjzev3v/eaqPuiucqvPSGZkFDbeR2UcquwOT1/0R8qT3pJfWOyljjLnYgD4Ka6mOlo4rz53CrE06iDTAzS0SSy+/uPGNGTe/rSOZ1RnJ8KVqbf7a7JsPppFNMhPmFcakuWsLalW1aFzYItFWLdXzcD6MAFGTDdMZCjVBeE5oF5CdHryXuk4FJk347ldH4kW/UWpjOFAMCeUkqwu5IlOl9lW8LXz9dQZchv2H8ZQuXdcw0lHBoSvF7A1ixF3kch28pHYpMpPpL55EF3nsI2/8eHNoPFcXa0ea2v1DIxx8Nn73gu/sHaIRmY2I85cqm9zcqNfG8NUz7LGj/NonzY1Wp48Ij6uC6UF+rYb4FnHuQla1wYHDIOnEegq0rLO+2Gv3BXZxDR5O3NGmNRKCBlSjRcHPzAnea0WOBX741ojtk2zuY9kQo4ULnjwAcdLEcNs3vf+8i90cikX7Li1RaP0rpb5gDCHIEvEdfl02mQAZpmNPGhn4PA+mDsel4kkFvrZeXEeY+z26vbVE=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DU0PR04MB9417.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376005)(1800799015)(366007)(38070700009); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?ir85gJNugVruLcWeotZknQRPtNv6CPJdA/4lGOFA3xi6r6BPdXL/GPguXQtL?=
+ =?us-ascii?Q?tbPbZLFr3YuJCp91MtS/fw2Cu9QSLAVLfX05DYZx+tudf++r4wJAvjcvVHJO?=
+ =?us-ascii?Q?SuSnafYEp7vYaOc9WQo7FLMeOquZu3gPmQhGZprgwRzL7FWRtDZe62Uvxd5x?=
+ =?us-ascii?Q?EuJ9V0rvjw6KW9DzWet9grGWP5AHQ2Ac10/7JiCEKdO+BCPEEGAFYJQyxSIG?=
+ =?us-ascii?Q?paybkBUG55xa2JffJfRbrbT5x278ovyKVw4PQ4kjT8ZX5LXKiV8m9Wgj4LNq?=
+ =?us-ascii?Q?LP3AuYDu0vp74A6zDFGDS0W3HyORgHuXef2gu5XfuChra9jX7qqE1CVKbRaK?=
+ =?us-ascii?Q?pGSJZrDUUHIURogBCIX6/RaGSpNcMNz3vTNqxdY6haZNoHMJMWWn1zJ3Bex1?=
+ =?us-ascii?Q?yq4zhPfk6bPe1goXJ8N+P57YD7fWC/XOFvg86cYKg0MppdR9accU822Wp6/7?=
+ =?us-ascii?Q?Zi9Sa/wCKQMQUo5iRJ8aLRPJ5KCOKBFRhF0mQn3LABnqfD0+e0kCyYi+GnJm?=
+ =?us-ascii?Q?DMk97myZwaIH0+gMWoKKWU8YqTeIdrmUCOR4vr+UKa0+IKxyVa4Y7/5oI3Id?=
+ =?us-ascii?Q?bbispO9m+N761ycExRnF2VEMXmWJEp6nCN6BsDpJlkCR52XDeL1frE8+ircY?=
+ =?us-ascii?Q?0lD5an/0aLZeh5TkhQ3no2kPdUNRKDXCYyx6YqPHoR96AdfTJcv2e06Xy5U6?=
+ =?us-ascii?Q?AIOpwSz/IlPPnp/0GiGb4qr/QJKWOM3tWVhrHU+wf7hgv0znf5q3R7qV5b4r?=
+ =?us-ascii?Q?iFKgor7Nf+HLojpAifpKCRDvPVZ60zvS/iyR0uqEyi6/i6SZRl3oOsKwShcX?=
+ =?us-ascii?Q?7S5xgUoUupeLOm8CZTIAJjnc94XBFo1pjBaPUlErRjqfVVY9hovrWMUnl2ko?=
+ =?us-ascii?Q?4k8leVcCmYtlnw2bCz0FFiqQ/aWte9abVKFWh2RG8dawhAPM/l33SBM/m8Pi?=
+ =?us-ascii?Q?mR+eFrU7g7/ZPrxYNT236sCg06zw18i03ZLC5Vs7VS6LbMF+hvfoy3EpInmF?=
+ =?us-ascii?Q?rwdehBAI2HA31MNGbcC8x5rFWyFCs8PEdFTZZ5w1xLLoZxcvBVT3eos2hMfl?=
+ =?us-ascii?Q?l8JsVRXb32toN5cPV4HQVi6FkuBD14evp2lY6F/JFK4ZQllaV6k7oLva496h?=
+ =?us-ascii?Q?FLzdJQd0aI+qtHM3otuowKN7+EMSIwVSnrZAn/g2OLDPD2q3cv+XMubd/Dgk?=
+ =?us-ascii?Q?maJsjlGwgVzOxhXh7ddj4UBIlOKCDsAEZGw8MzeHo+jdysXY+6DG97iFK6o9?=
+ =?us-ascii?Q?jjipoWEANq5KrZCC6DS1UTw9omoR6Mf67HqYv1tApI8DjISRIWZOmU29dTMv?=
+ =?us-ascii?Q?UbbX5hjKbzU0zxu9N0NG+uMb31s6XxCGb6SuFNMXbRiCdXpQmxIFoaVGHgiM?=
+ =?us-ascii?Q?eAttdHQaUpo40EIyq7JmHhJTqj95rgbDimyb2mn3OcZQ+S41C6kva/77xjYJ?=
+ =?us-ascii?Q?9sFurRtI8xwKJF3WkTawbRV0A1VCZkSg6w23twYuGdLt1LFeI7svkzn0zokG?=
+ =?us-ascii?Q?l4fLvHIU3x71y08OiX4yzhhV4Tvz+xgquP0+v/5q+UyrTg+NtH3ggvc6Fgyo?=
+ =?us-ascii?Q?IOu0G0lXjPRycuypEd0=3D?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 14 Apr 2024 14:45:45 +0200
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: DU0PR04MB9417.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 468fc9fa-770b-4e04-c5d4-08dc5c8112cf
+X-MS-Exchange-CrossTenant-originalarrivaltime: 14 Apr 2024 12:47:41.5620 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: CJ628pkLclrGeWkUBAH9pk6nN1UVwso/eK/ETI5hlPONXd1TTcq5s29x2AdDoibGS3ytyrqXEXHXdZyaJ4KuZQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB7570
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,77 +136,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The server sends multiple packets without waiting for an ACK
-by window control and if some packets are dropped,
-wget will return an ACK including the dropped packets.
+> Subject: Re: [PATCH v6 5/5] imx93: convert to OF_UPSTREAM
+>=20
+>=20
+> Hello,
+>=20
+> I was able to test this series on the imx93-phyboard-segin. Up to that sp=
+ecific
+> commit no issue to report.
+>=20
+> That specific commit however, using an updated dts subtree at 2639a0e2fd,
+> fails to boot.
+>=20
+> There is no more garbage on the UART, but the boot stops after BL31 is
+> started:
+>=20
+> U-Boot SPL 2024.04-rc5-00388-gf81e4e85fd6-dirty (Apr 14 2024 - 12:15:51
+> +0200)
+> SOC: 0xa0009300
+> LC: 0x40040
+> M33 prepare ok
+> Normal Boot
+> WDT:   Started wdog@42490000 with servicing every 1000ms (40s timeout)
+> Trying to boot from BOOTROM
+> Boot Stage: Primary boot
+> image offset 0x8000, pagesize 0x200, ivt offset 0x0 Load image from 0x45c=
+00
+> by ROM_API
+> NOTICE:  BL31: v2.8(release):lf-6.1.36-2.1.0-0-g1a3beeab6-dirty
+> NOTICE:  BL31: Built : 11:39:38, Aug  7 2023
+>=20
+> Not sure where that could come from.
 
-Following log indicates this issue.
+Which dts upstream tag are u using?
 
-  wget_handler() wget: Transferring, seq=97bbdd4a, ack=30,len=580
-  wget_handler() wget: Transferring, seq=97bbedca, ack=30,len=580
+Do you have time to debug the issue? I not have the board, so not sure what
+happens here.
 
-First packet of TCP sequence number is 0x97bbdd4a.
-Second packet of TCP sequence number should be 0x97bbe2ca,
-however it is 0x97bbedca and returns its ACK, so the server
-suppose that 0x97bbe2ca and 0x97bbedca are received appropriately.
-In this case, 0x97bbe2ca was lost and the data of wget was broken.
+Regards,
+Peng.
 
-In this patch, next_data_seq_num holds the next expected
-TCP sequence number.
-If the TCP sequence number different from next_data_seq_num,
-trying to retransmit the packet.
-
-Signed-off-by: Yasuharu Shibata <yasuharu.shibata@gmail.com>
----
- net/wget.c | 12 ++++++++++--
- 1 file changed, 10 insertions(+), 2 deletions(-)
-
-diff --git a/net/wget.c b/net/wget.c
-index 817c5ebd5d..71bac92d84 100644
---- a/net/wget.c
-+++ b/net/wget.c
-@@ -50,6 +50,7 @@ static unsigned long content_length;
- static unsigned int packets;
- 
- static unsigned int initial_data_seq_num;
-+static unsigned int next_data_seq_num;
- 
- static enum  wget_state current_wget_state;
- 
-@@ -272,17 +273,18 @@ static void wget_connected(uchar *pkt, unsigned int tcp_seq_num,
- 
- 		current_wget_state = WGET_TRANSFERRING;
- 
-+		initial_data_seq_num = tcp_seq_num + hlen;
-+		next_data_seq_num    = tcp_seq_num + len;
-+
- 		if (strstr((char *)pkt, http_ok) == 0) {
- 			debug_cond(DEBUG_WGET,
- 				   "wget: Connected Bad Xfer\n");
--			initial_data_seq_num = tcp_seq_num + hlen;
- 			wget_loop_state = NETLOOP_FAIL;
- 			wget_send(action, tcp_seq_num, tcp_ack_num, len);
- 		} else {
- 			debug_cond(DEBUG_WGET,
- 				   "wget: Connctd pkt %p  hlen %x\n",
- 				   pkt, hlen);
--			initial_data_seq_num = tcp_seq_num + hlen;
- 
- 			pos = strstr((char *)pkt, content_len);
- 			if (!pos) {
-@@ -396,6 +398,12 @@ static void wget_handler(uchar *pkt, u16 dport,
- 			   "wget: Transferring, seq=%x, ack=%x,len=%x\n",
- 			   tcp_seq_num, tcp_ack_num, len);
- 
-+		if (next_data_seq_num != tcp_seq_num) {
-+			debug_cond(DEBUG_WGET, "wget: seq=%x packet was lost\n", next_data_seq_num);
-+			return;
-+		}
-+		next_data_seq_num = tcp_seq_num + len;
-+
- 		if (tcp_seq_num >= initial_data_seq_num &&
- 		    store_block(pkt, tcp_seq_num - initial_data_seq_num,
- 				len) != 0) {
--- 
-2.25.1
-
+>=20
+> Mathieu
