@@ -4,82 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0416C4345F
-	for <u-boot@archiver.kernel.org>; Sat, 13 Apr 2024 20:57:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C5D2C4345F
+	for <u-boot@archiver.kernel.org>; Sun, 14 Apr 2024 11:10:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2DF798801F;
-	Sat, 13 Apr 2024 22:56:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4892E88059;
+	Sun, 14 Apr 2024 13:10:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="NokHklXA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ZuzgZGku";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E41198802E; Sat, 13 Apr 2024 22:56:57 +0200 (CEST)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 533338808B; Sun, 14 Apr 2024 13:10:26 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BEDEE87FA3
- for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 22:56:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E758D87DEA
+ for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 13:10:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-36a15df0f8cso9080715ab.1
- for <u-boot@lists.denx.de>; Sat, 13 Apr 2024 13:56:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713041814; x=1713646614; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=10zmAzqimog384XJL/ydDExQv+kXvLu7ARiGF2EEOI0=;
- b=NokHklXAKG9p82L37qwpc5VEt9MwKOvAKvcke39zF532Qh9VJ5Gz5bwndW+O0xQG6b
- dWfadcWwR6rWTbWPjiH8ZFM2I3QXV/cnQky0wH0Mu2ab9Fcb+7bJdO3oPG3Xxrd/2OZr
- p9cO974MyjMzReErVZzfZlTHkdqj+/yyj47YGOPK097U7AWVa+yodSy3UvmzWuDLmQTO
- D1CrOm1DXRgTAB1R1OMTmnJjbh2F8pX5Awt8RDmjHOvTOBsklqpYe4C/G0nZgrgfdFYX
- PCyUab6fEmyqtWPtu9lBXuwflKqwj9365CEvlAic7TRHg7A3w8huxoWCIKCHBzgwchb2
- owZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713041814; x=1713646614;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=10zmAzqimog384XJL/ydDExQv+kXvLu7ARiGF2EEOI0=;
- b=azb6PiWVtG7N6nzzUtqPDJP174WYM4IQV/xNC/X02RXLWcoS4t7mjCqvyq97ujMgM2
- 0/HIW6cCvJQZM+pJNkGLYQTPhhlMtxX1GJHoButaZf1h+dpAG7oc3pWgtRWL17CpzXX2
- 1bZHQfK0YzfwfPnXC7QVe9sLjkpG2eJG1A+mjidVvGZHfWVqZbhMyo3doPbFVue6QjpN
- VA35lIvvQM9jYYkgtw32JccNh15vK0zgd8N2yBZhrPrmE4tL9oHA5O0gL/8fIQQOHF8o
- +wVjp+6nBAQ/5mt0f/5eZqnjLIeC7FIydfp1nw5Mj3O+YN6u1iAld7ewICKqRt+4MtUo
- 7qvw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU4GTT9BWZ99Dgd0o8xAwZLj1cQ3z8f8mDcjogHu7T8vDTlfkXBbApVhJpHu7i/MAzYDufwJnG1bJbR+9C5ha3LB5mWTg==
-X-Gm-Message-State: AOJu0YwiEtWBH+DE1ZfXpt9fXBH/NXICd/FdLdvqBiF2IF5CfxonTZgI
- 4ofq9asquELzsqCpYWfadxbYPSq32Pts4aFVMjEcwO4fWoxpGko39JYW2Ctz
-X-Google-Smtp-Source: AGHT+IF/rgCtyqacuorL8uNC76i5W7jfZFoaqSO9BRk6J6FkhzJ0NKIPFE+csnCvToeu6xZBzhfbsg==
-X-Received: by 2002:a05:6e02:1d98:b0:36a:2d86:90d7 with SMTP id
- h24-20020a056e021d9800b0036a2d8690d7mr8059094ila.5.1713041814431; 
- Sat, 13 Apr 2024 13:56:54 -0700 (PDT)
-Received: from celestia.nettie.lan ([2001:470:42c4:101:e858:7d5f:e2dd:57ff])
- by smtp.gmail.com with ESMTPSA id
- t13-20020a056e02160d00b00369ffbc0176sm1764452ilu.73.2024.04.13.13.56.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 13 Apr 2024 13:56:54 -0700 (PDT)
-From: Sam Edwards <cfsworks@gmail.com>
-X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
-To: Joshua Riek <jjriek@verizon.net>, Tom Rini <trini@konsulko.com>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Christopher Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de,
- Sam Edwards <CFSworks@gmail.com>, Florian Klink <flokli@flokli.de>
-Subject: [RESEND PATCH v2] configs: rk3588-turing-rk1: disable SPI flash by
- default
-Date: Sat, 13 Apr 2024 14:56:36 -0600
-Message-ID: <20240413205636.601625-1-CFSworks@gmail.com>
-X-Mailer: git-send-email 2.43.2
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43EBAEoo075474;
+ Sun, 14 Apr 2024 06:10:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1713093014;
+ bh=zFnGkalkfKCzoN+QaM6zTv/mP9hne0nYR7cW7EYaMdE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=ZuzgZGkuaEFjbeohZwcfAiVBvDbWC2IcgQLyGMerr1hnuJs06sCmcT4Gn46Xp0Dul
+ /Xbyk9Yp9LjWJks/OdjToL3dvyTg2r1uEWPVLyq1laFZU5e96xNkkC0VZK3iLj4BsA
+ 7swX2aHplI1WlFI2WIubb5f0XsXCA8OWMC9SCTqo=
+Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43EBAEPB022691
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Sun, 14 Apr 2024 06:10:14 -0500
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 14
+ Apr 2024 06:10:14 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Sun, 14 Apr 2024 06:10:14 -0500
+Received: from [10.249.141.75] ([10.249.141.75])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43EBABxV059006;
+ Sun, 14 Apr 2024 06:10:11 -0500
+Message-ID: <8c825b9d-7bb6-47e4-915d-a852df60bbc5@ti.com>
+Date: Sun, 14 Apr 2024 16:40:10 +0530
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] lmb: Fix adjacent region merge in
+ lmb_add_region_flags()
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>, tom
+ Rini <trini@konsulko.com>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Kumar Gala
+ <galak@kernel.crashing.org>,
+ Simon Glass <sjg@chromium.org>, <u-kumar1@ti.com>
+References: <20240412155307.735631-1-patrice.chotard@foss.st.com>
+ <20240412155307.735631-2-patrice.chotard@foss.st.com>
+ <fc509f7b-78ba-425b-8a33-7768a4f58bd0@foss.st.com>
+Content-Language: en-US
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <fc509f7b-78ba-425b-8a33-7768a4f58bd0@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,81 +86,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While the Turing RK1 board has a pad on the PCB for SPI flash, it is
-not populated at the factory: supporting SPI flash boot is a user
-modification, not an out-of-the-box feature. The defconfig for this
-board should therefore not be enabling the SPI flash image nor SPI
-support in the SPL, as it causes confusion among downstream users as to
-whether the SPI image needs to be distributed.
+Hello Patrice,
 
-Fixes: 153ac950a599 ("board: rockchip: Add the Turing RK1 SoM")
-Suggested-by: Florian Klink <flokli@flokli.de>
-Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-Acked-by: Joshua Riek <jjriek@verizon.net>
-Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
----
+On 4/13/2024 1:54 PM, Patrice CHOTARD wrote:
+>
+> On 4/12/24 17:53, Patrice Chotard wrote:
+>> In case a new region is adjacent to a previous region with
+>> similar flag, this region is merged with its predecessor, but no
+>> check are done if this new added region is overlapping another region
+>> present in lmb (see reserved[3] which overlaps reserved[4]).
+>>
+>> [..]
+>> phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align)
+>>   {
+>>   	return lmb_alloc_base(lmb, size, align, LMB_ALLOC_ANYWHERE);
+>
+> I think this series (v2) is not correct even if now the CI tests are OK.
+> After re-reading carefully the lib_test_lmb_overlapping_reserve() test
+> it appears to me there is a contradiction.
+>
+> It's indicating that "check that calling lmb_reserve with overlapping regions fails"
+>
+> but the very last test of lib_test_lmb_overlapping_reserve() has this comment :
+> /* allocate 3rd region, coalesce with first and overlap with second */
+> and this test allows this overlap case.
+>
+> It's not clear if LMB region can overlap each other or not ?
 
-Changes v1->v2 (both requested by Jonas):
-- Added back (i.e. made unremoved by patch) CONFIG_USB_GADGET_PRODUCT_NUM value
-  previously automatically removed by savedefconfig.
-- Also disable SPI/SFC driver entirely until SPI/SFC lands in the DT (if ever).
 
----
- configs/turing-rk1-rk3588_defconfig | 14 +-------------
- 1 file changed, 1 insertion(+), 13 deletions(-)
+I would say partial overlap and coalescing with before one
 
-diff --git a/configs/turing-rk1-rk3588_defconfig b/configs/turing-rk1-rk3588_defconfig
-index 07f7b84852..f500b0cf75 100644
---- a/configs/turing-rk1-rk3588_defconfig
-+++ b/configs/turing-rk1-rk3588_defconfig
-@@ -4,17 +4,12 @@ CONFIG_SYS_HAS_NONCACHED_MEMORY=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=2
--CONFIG_SF_DEFAULT_SPEED=24000000
--CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-turing-rk1"
- CONFIG_ROCKCHIP_RK3588=y
--CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_SPL_SERIAL=y
- CONFIG_TARGET_TURINGRK1_RK3588=y
- CONFIG_DEBUG_UART_BASE=0xFEBC0000
- CONFIG_DEBUG_UART_CLOCK=24000000
--CONFIG_SPL_SPI_FLASH_SUPPORT=y
--CONFIG_SPL_SPI=y
- CONFIG_SYS_LOAD_ADDR=0xc00800
- CONFIG_PCI=y
- CONFIG_DEBUG_UART=y
-@@ -31,8 +26,6 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
- CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
--CONFIG_SPL_SPI_LOAD=y
--CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
- CONFIG_SPL_ATF=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
-@@ -66,11 +59,7 @@ CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
--CONFIG_SF_DEFAULT_BUS=5
--CONFIG_SPI_FLASH_SFDP_SUPPORT=y
--CONFIG_SPI_FLASH_MACRONIX=y
--CONFIG_SPI_FLASH_XMC=y
--CONFIG_SPI_FLASH_XTX=y
-+# CONFIG_SPI_FLASH is not set
- CONFIG_PHY_REALTEK=y
- CONFIG_DWC_ETH_QOS=y
- CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-@@ -87,7 +76,6 @@ CONFIG_SPL_RAM=y
- CONFIG_SCSI=y
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
--CONFIG_ROCKCHIP_SFC=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
--- 
-2.43.2
+May be Below can help
 
+/* allocate 2nd region , This should coalesced all region into one
+
+you will get one region as
+
+Address --- Size
+
+0x40010000 --- 0x30000
+
+Next after this  /* allocate 2nd region, which should be added as first 
+region */
+
+we will have two region like
+
+Address --- Size
+
+(0x40000000 -- 0x8000)
+
+(0x40010000 --- 0x30000)
+
+Now third request comes in
+
+/* allocate 3rd region, coalesce with first and overlap with second */
+
+which is address of  0x40008000 and size of  0x10000, Now this region to 
+be added
+
+is coalescing with first (0x40000000 -- 0x8000) and part of this overlap 
+with (0x40010000 --- 0x30000).
+
+So, what this patch does , merge all these into one region
+
+as (0x40000000 -- 0x40000)
+
+> Udit, your patch edb5824be17f ("lmb: remove overlapping region with next range")
+> is authorizing LMB overlapping right ?
+
+As said before this is checking overlap and coalescing and acting 
+accordingly.
+
+> Patrice
+>
+>
+>
+>
+>
