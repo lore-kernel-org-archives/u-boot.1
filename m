@@ -4,80 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8DA3C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 13:55:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83DEFC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 13:59:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 388E187E75;
-	Mon, 15 Apr 2024 15:55:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id EAD6588189;
+	Mon, 15 Apr 2024 15:59:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="d2aTGHjw";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BBFC88089; Mon, 15 Apr 2024 15:55:50 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1713189575;
+	bh=AkLaxEQ40bXSLAy8Wh8a9xLKYnY6eQAsBH2Mmk7rUUg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=DkrXjgE9hOqoQg7bf6D9i58nL1lXJbytBUKs1+wbLIJQ1sCB4vcCSNVHcRhtTB05Q
+	 jNYV5cGYpThcLwSI1h6c62TKC65nRJ+WHdETyAPzznaoJr1JmvoI9h4lhdtOGLqIml
+	 L8OaTSuK0onXO8ym2LicdbYD/j15jZFghpC1AL87hwa2eDahf/Du9F0A9pZ/1gisrW
+	 7+r6+5fVUArWvRxdnoLRABGqNoMeXPHYmZ8WMW+J6tfu9FXRVllUwQCsEnGOUci357
+	 1J/m+qa0HK2b9IrsROTwsx1hzF4yeYw+6M5mM7oSTJbaT2KS+uUtLrjnruJ6DO67Tq
+	 NR9d8C/aO1vIQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FB7F87E4D
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 15:55:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-57030fa7381so779333a12.2
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 06:55:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1713189347; x=1713794147;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ziyggO0UXD4QzVByrEkS5yy3e6nCGZaHjPfkjk/+FzM=;
- b=d2aTGHjwubQSExLpdmjGKRv7xpiqil03BRmWddx9Lz2l1W2utRqnMCyMfnw17Xrk8e
- Tp22HbpllpEIObzdaSwuSiDIeOOOH9XrB419K/1aX2r4Xu8h6JcC7Y0cb4qCu9HSH7kU
- Cd33pQnTxgK9VGvDCPq7RmFhz3P6LXIHmjKvs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713189347; x=1713794147;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ziyggO0UXD4QzVByrEkS5yy3e6nCGZaHjPfkjk/+FzM=;
- b=M7yaHRWiIYjW3N6N8TuNOp+szz/bJeXOM4O9MDpK1Bo8J7mU3eUE35jaX1eyLB6gLg
- N0K2ICx/nkWEZrbn0ajvrD+YRj1GJ/vP0OlXUK6AGmIs5abubgHax0SQALasyFW5dqZD
- 9N3YY38Dpyt07d8gNg5hh6INGQC6TGC6iMQ6u7jrCR1KABEFioOZ/n4/ER2VucegsxiV
- urjpcCXZtt8Cu4W8p3SA7qnUryI6TiHg+yEWE2rBq/jPS+08VlTCMHHqj4572JuWn50c
- cM5yDCshbHNmzHxpooStaj0MuDwEZFm7FG6S9zes4jiJI84diWnoreYTSpZiMEM4v/DL
- Q4ZA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUaU1B10IC3HjXaf1Go8THUcySWvD3g0og34cih9OLw3mio9znG3ulAcjvHtZ24cJKqU5cgNRCDep83H5xOk2wnyssZLw==
-X-Gm-Message-State: AOJu0YyiAL7nqFpFD9loK4KzuQvzBA9fIOKNOBg8o3oODqdyxepcSkdM
- rNVd9z7ndEoPXaR4oGyaakiAwKsvBheUazISUjc3Zjr+5VqQ/hQXfGbDvC7i3uep9ZareG5U6gK
- rbWEIcbTGL5Fy4n27AlCcgq2vP+zzG9TJU8bUDg==
-X-Google-Smtp-Source: AGHT+IFihQ3YhxiLSFd8e6oXjeEtrfIRbvvL4m0MKbP1k+/2KqUjzNZDvn84orLOc0SLudcFITWO7w9wDfdxkbN8+WU=
-X-Received: by 2002:a50:9ec8:0:b0:568:32cc:f808 with SMTP id
- a66-20020a509ec8000000b0056832ccf808mr6368936edf.15.1713189347555; Mon, 15
- Apr 2024 06:55:47 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 5B6288818C;
+ Mon, 15 Apr 2024 15:59:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1713189573;
+ bh=AkLaxEQ40bXSLAy8Wh8a9xLKYnY6eQAsBH2Mmk7rUUg=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=MKxvCkbzhI1X+B/miDnC0OsB6YECL8kUPFgBP5zkHu2X0XWCU36LaPfUKhv9Bcx0i
+ jwfEokUBfXSHr+PUA9dpyMz8bx3Xzyg+39WljQBTHFjsXd71K9TpOhk0swMwlt0TiG
+ TT3bhnHeuNzjlS1EA7UejGlg5AxbaMhV3FkUWxYULe2YrkYrTmvl3eqGPIj7wX0byN
+ SHJIU1byjrQ7dV0cRB8i8jLCwFJ/GCe8eNLWU6xtsbY78ztilgZB8isCFA1JKDw0ty
+ qnWIdIoxX8K/9rFzFC/IkVjYEhL3IaFawXKJtVX8dnRjVwmfO36wYfWzh5VFM2pdRw
+ QmQSxeOfy4q2Q==
+Message-ID: <604d605d-b3a7-4bd7-adce-381ea68e6d60@denx.de>
+Date: Mon, 15 Apr 2024 14:56:40 +0200
 MIME-Version: 1.0
-References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
- <20240415130013.26721-1-yasuharu.shibata@gmail.com>
- <20240415130013.26721-2-yasuharu.shibata@gmail.com>
- <CAOf5uwm23ck7uwr-tAZp=8L9HVb_A0r6BYNZ3C0KCaTNkHG8Og@mail.gmail.com>
- <CALu9rSZeZYyuCwBeUgR+sxMvmqDBh+Q5hyb-gtHP0U8ovHby_g@mail.gmail.com>
-In-Reply-To: <CALu9rSZeZYyuCwBeUgR+sxMvmqDBh+Q5hyb-gtHP0U8ovHby_g@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Mon, 15 Apr 2024 15:55:36 +0200
-Message-ID: <CAOf5uwmqeMKKyf6-vxOnUMisHNZ24TupMRd_M-QT4JdtpnaFjQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] net: wget: fix TCP sequence number wrap around issue
-To: Yasuharu Shibata <yasuharu.shibata@gmail.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>, 
- Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ARM: stm32: Initialize TAMP_SMCR BKP..PROT fields on
+ STM32MP15xx
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
+Cc: Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
+References: <20240414184028.147067-1-marex@denx.de>
+ <f808ec3d-966c-43e6-87be-18e742f976b3@foss.st.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <f808ec3d-966c-43e6-87be-18e742f976b3@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,48 +73,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi
+On 4/15/24 11:48 AM, Patrice CHOTARD wrote:
+> 
+> 
+> On 4/14/24 20:39, Marek Vasut wrote:
+>> In case of an OTP-CLOSED STM32MP15xx system, the CPU core 1 cannot be
+>> released from endless loop in BootROM only by populating TAMP BKPxR 4
+>> and 5 with magic and branch address and sending SGI0 interrupt from
+>> core 0 to core 1 twice. TAMP_SMCR BKP..PROT fields must be initialized
+>> as well to release the core 1 from endless loop during the second SGI0
+>> handling on core 1. Initialize TAMP_SMCR to protect the first 16 backup
+>> registers, the ones which contain the core 1 magic, branch address and
+>> boot information.
+>>
+>> This requirement seems to be undocumented, therefore it was necessary
+>> to trace and analyze the STM32MP15xx BootROM using OpenOCD and objdump.
+>> Ultimately, it turns out that a certain BootROM function reads out the
+>> TAMP_SMCR register and tests whether the BKP..PROT fields are non-zero.
+>> If they are zero, the BootROM code again waits for SGI0 using WFI, else
+>> the execution moves forward until it reaches handoff to the TAMP BKPxR 5
+>> branch address.
+>>
+>> This fixes CPU core 1 release using U-Boot PSCI implementation on an
+>> OTP-CLOSED system, i.e. system with fuse 0 bit 6 set.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> ---
+>> Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
+>> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+>> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> Cc: Simon Glass <sjg@chromium.org
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@dh-electronics.com
+>> Cc: uboot-stm32@st-md-mailman.stormreply.com
+>> ---
+>>   arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 16 ++++++++++++++++
+>>   1 file changed, 16 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+>> index dd99150fbc2..138a6d6b614 100644
+>> --- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+>> +++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+>> @@ -14,6 +14,7 @@
+>>   #include <asm/arch/sys_proto.h>
+>>   #include <dm/device.h>
+>>   #include <dm/uclass.h>
+>> +#include <linux/bitfield.h>
+>>   
+>>   /* RCC register */
+>>   #define RCC_TZCR		(STM32_RCC_BASE + 0x00)
+>> @@ -41,6 +42,9 @@
+>>   #define TZC_REGION_ID_ACCESS0	(STM32_TZC_BASE + 0x114)
+>>   
+>>   #define TAMP_CR1		(STM32_TAMP_BASE + 0x00)
+>> +#define TAMP_SMCR		(STM32_TAMP_BASE + 0x20)
+>> +#define TAMP_SMCR_BKPRWDPROT	GENMASK(7, 0)
+>> +#define TAMP_SMCR_BKPWDPROT	GENMASK(23, 16)
+>>   
+>>   #define PWR_CR1			(STM32_PWR_BASE + 0x00)
+>>   #define PWR_MCUCR		(STM32_PWR_BASE + 0x14)
+>> @@ -136,6 +140,18 @@ static void security_init(void)
+>>   	 */
+>>   	writel(0x0, TAMP_CR1);
+>>   
+>> +	/*
+>> +	 * TAMP: Configure non-zero secure protection settings. This is
+>> +	 * checked by BootROM function 35ac on OTP-CLOSED device during
+>> +	 * CPU core 1 release from endless loop. If secure protection
+>> +	 * fields are zero, the core 1 is not released from endless
+>> +	 * loop on second SGI0.
+>> +	 */
+>> +	clrsetbits_le32(TAMP_SMCR,
+>> +			TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPRWDPROT,
+> 
+> Hi Marek
+> 
+> there is a typo, you used twice TAMP_SMCR_BKPRWDPROT :
+> 
+> TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPRWDPROT  => TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPWDPROT
+>                                      ^~~~~
 
-On Mon, Apr 15, 2024 at 3:48=E2=80=AFPM Yasuharu Shibata
-<yasuharu.shibata@gmail.com> wrote:
->
-> Hi Michael,
->
-> On Mon, 15 Apr 2024 at 22:03, Michael Nazzareno Trimarchi
-> <michael@amarulasolutions.com> wrote:
-> >
-> > I think I have sent some time ago ;)
-> >
-> > Anyway look sane. I was having the same feeling on code inspection
-> >
-> > Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
->
-> Thank you for your review.
-> I already checked the thread, sorry I couldn't find your patch and
-> I couldn't see whether it is the same.
-> In any case, I consider there is a potential issue about
-> wrap around, so I submitted a patch.
->
+Fixed in V2, thanks.
 
-Very good job ;) to fix it. Just add Suggest-by: ;)
-
-Michael
-
-> --
-> Best regards,
-> Yasuharu Shibata
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+btw are there any other such undocumented surprises in the BootROM ?
