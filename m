@@ -4,66 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D879C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 21:28:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71FBBC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 21:50:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC0078815B;
-	Mon, 15 Apr 2024 23:27:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 44480876D3;
+	Mon, 15 Apr 2024 23:49:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mtMSLJU9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PwT3MBNm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E9E48812F; Mon, 15 Apr 2024 23:27:55 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 201AF875B9; Mon, 15 Apr 2024 23:49:57 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B83C2878E2
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 23:27:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B57B87073
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 23:49:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43FLRmth001227;
- Mon, 15 Apr 2024 16:27:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1713216468;
- bh=0OgbSDst028wUmuSCl3sD8bzJIpmMtVHlDOOtVd5ZEc=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=mtMSLJU92OEAUwSBd/AKVkzD2NC3wQgtJUSN5hvI1LtI44Ni2MqGHzMTjY70WXoVJ
- uObX0HziSPLJLfSBU4HQBgWbtWnb4E3VGTJ/+ZfHGR/dwZNK1rtl2IE0GRMjRgrgEx
- HDdFTJX6hFIFJN18l2zKql9c4qe+Awk3bW0gI6R0=
-Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43FLRmDY067163
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 15 Apr 2024 16:27:48 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 15
- Apr 2024 16:27:47 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 15 Apr 2024 16:27:48 -0500
-Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43FLRlu6070400;
- Mon, 15 Apr 2024 16:27:47 -0500
-From: Judith Mendez <jm@ti.com>
-To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom
- Rini <trini@konsulko.com>
-CC: Nitin Yadav <n-yadav@ti.com>, Simon Glass <sjg@chromium.org>,
- <u-boot@lists.denx.de>
-Subject: [PATCH 2/5] mmc: am654_sdhci: Fix OTAP/ITAP delay values
-Date: Mon, 15 Apr 2024 16:27:44 -0500
-Message-ID: <20240415212747.2678974-3-jm@ti.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240415212747.2678974-1-jm@ti.com>
-References: <20240415212747.2678974-1-jm@ti.com>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4167fce0a41so25905775e9.0
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 14:49:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713217794; x=1713822594; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=17Hka02/D6unEqUvDCK1CtzaYVnp8NrK6oFYeijc4y4=;
+ b=PwT3MBNmxWqfviCF0g1/aY/qSN9uXxoh+Oi0eKoNQ+04JIMuILUcKqzMlN6lppbpUY
+ kDTJv12EvYABncQGR8Wtj/SvG89cgW0tv6IOSg/C+56Ow+W5iEeUO5DSuL7CGwYUlXTU
+ L/rdkW2ykrGGMd5e0hS2OHPzf9d5+Yc/RSeQTbzdmRbuO/ZFpTRtZ8FOblWseKys9oZD
+ dHji0lO7dSIno0AC22hG8kUVshAgcYNouzjeDDlXXaQ4A6LJXiqA7Qigt+x4Ep/9woye
+ W/yGUi/bTh3MhISDIqHJTsP2uw0tl8eSR5bDJt8Uh1H9yTMRvCbut405NIK2iKJcMVvJ
+ 1H1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713217794; x=1713822594;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=17Hka02/D6unEqUvDCK1CtzaYVnp8NrK6oFYeijc4y4=;
+ b=ODuRwhysKyyWrUJuqLYMkw4wPjS4FS/9dfHRarLbtMQXKDc6wWZ8m2NEAG/teghQWL
+ aw5FiEpIYQn8NFDHr8ea9kKyZZS3WFzOvtsWTYoO1XOOYUpqTVfXewO8+4Kge/YuAv7K
+ JGmAybIUfdJL9LNZrWWxX0yaUalNZQIuYdlzqkDkiJdPgTXpGhlx/3lbBjDRS6q5nbl5
+ gH8VPtEg5LF+yICQi4svV1AXB9KCVOgQ9S02h2oeqcPk+XYhtkcxYy22BfXZrcFr/+D1
+ iiBaSVuA+adkwtCI/cNGSAIoDK/3u2hv/scNi+ets53tygGGQMICiZrh5Hk7ge0n4mXN
+ CHOA==
+X-Gm-Message-State: AOJu0YzJbU3L6oIEyPvFzpyomGwB6AURs/0c9yW6X2cA4KTmdOssbwvJ
+ tmCvul5+vBMCJap8Oajshj7ubx2ugG8dN+eeB/nF0Micz75tXm5S
+X-Google-Smtp-Source: AGHT+IH244cDYG4NSAVB4r/xSKt6Y+FK5MaK+4J2cpw33WJwDAqmLRTQcd0c9GgQfmwxtgkf5krXIw==
+X-Received: by 2002:a05:600c:3b02:b0:417:d99f:1fef with SMTP id
+ m2-20020a05600c3b0200b00417d99f1fefmr673899wms.3.1713217794420; 
+ Mon, 15 Apr 2024 14:49:54 -0700 (PDT)
+Received: from jernej-laptop.localnet (86-58-6-171.dynamic.telemach.net.
+ [86.58.6.171]) by smtp.gmail.com with ESMTPSA id
+ ay8-20020a05600c1e0800b004181c91d1dcsm11624909wmb.18.2024.04.15.14.49.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Apr 2024 14:49:54 -0700 (PDT)
+From: Jernej =?utf-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
+To: dazen@189.cn, Mikhail Kalashnikov <iuncuim@gmail.com>,
+ Andre Przywara <andre.przywara@arm.com>
+Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com, trini@konsulko.com
+Subject: Re: [PATCH] DRAM_SUN50I_H616_TRIM_SIZE
+Date: Mon, 15 Apr 2024 23:49:53 +0200
+Message-ID: <4338523.ejJDZkT8p0@jernej-laptop>
+In-Reply-To: <20240415012245.75ccaa5b@minigeek.lan>
+References: <20240413134352.46495-1-dazen@189.cn>
+ <20240415012245.75ccaa5b@minigeek.lan>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,63 +93,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Nitin Yadav <n-yadav@ti.com>
+Dne ponedeljek, 15. april 2024 ob 02:22:45 GMT +2 je Andre Przywara napisal(a):
+> On Sat, 13 Apr 2024 21:43:52 +0800
+> dazen@189.cn wrote:
+> 
+> Hi,
+> 
+> thanks for sending a patch!
+> 
+> > From: lalakii <dazen@189.cn>
+> > 
+> > Add "DRAM_SUN50I_H616_TRIM_SIZE" option for 1.5gb board.
+> > 
+> > Signed-off-by: lalakii <dazen@189.cn>
+> > ---
+> >  arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h |  1 +
+> >  arch/arm/mach-sunxi/Kconfig                        |  7 +++++++
+> >  arch/arm/mach-sunxi/dram_sun50i_h616.c             | 11 ++++++++++-
+> >  3 files changed, 18 insertions(+), 1 deletion(-)
+> > 
+> > diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
+> > index a8fdda124a..2d2526fead 100644
+> > --- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
+> > +++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
+> > @@ -166,6 +166,7 @@ struct dram_config {
+> >  	u8 rows;
+> >  	u8 ranks;
+> >  	u8 bus_full_width;
+> > +	bool trim_size;
+> >  };
+> >  
+> >  static inline int ns_to_t(int nanoseconds)
+> > diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
+> > index fe89aec6b9..255a498557 100644
+> > --- a/arch/arm/mach-sunxi/Kconfig
+> > +++ b/arch/arm/mach-sunxi/Kconfig
+> > @@ -108,6 +108,13 @@ config DRAM_SUN50I_H616_TPR12
+> >  	default 0x0
+> >  	help
+> >  	  TPR12 value from vendor DRAM settings.
+> > +
+> > +config DRAM_SUN50I_H616_TRIM_SIZE
+> > +        bool "H616 DRAM trim size"
+> > +        help
+> > +          Due to unknown issue, some H616 based boards may need to trim
+> 
+> Well, it's not really an unknown issue, is it? The problem seems to be
+> that the auto detection code cannot deal with the topology of the 1.5GB
+> DRAM chips.
+> 
+> The general problem with this approach is that it would need to be
+> enabled at build time, which means the generated image will always trim
+> the DRAM size, and would not be universal for each board anymore.
+> 
+> So we need something to auto-detect this situation. Can you describe
+> the failure mode, without this patch? Does the DRAM init code hang or
+> give up already, or does this all pass, and then later on the board
+> hangs or crashes when we try access the missing DRAM area?
+> Maybe a small test access beyond 1.5GB would be able to check for this
+> particular case?
 
-U-Boot is failing to boot class U1 UHS SD cards due to incorrect
-OTAP and ITAP delay select values. Update OTAP and ITAP delay select
-values from DT.
+Vendor DRAM check for 1.5 GB is pretty simple. First, it's checked if 2 GB
+of RAM is detected. If so, 3 different patterns are written to 0x70000000,
+0xa0000000 and 0x80000000 (in that order). Then, pattern from 0xa0000000 is
+read. If it doesn't match to pattern written to this location, 1.5 GB is
+assumed.
 
-Fixes: c7d106b4eb3 ("mmc: am654_sdhci: Update output tap delay writes")
-Signed-off-by: Nitin Yadav <n-yadav@ti.com>
-Signed-off-by: Judith Mendez <jm@ti.com>
----
- drivers/mmc/am654_sdhci.c | 23 +++++++++++++++++++----
- 1 file changed, 19 insertions(+), 4 deletions(-)
+Best regards,
+Jernej
 
-diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
-index e5ad00e2531..1dd032e1e36 100644
---- a/drivers/mmc/am654_sdhci.c
-+++ b/drivers/mmc/am654_sdhci.c
-@@ -513,12 +513,27 @@ static int j721e_4bit_sdhci_set_ios_post(struct sdhci_host *host)
- {
- 	struct udevice *dev = host->mmc->dev;
- 	struct am654_sdhci_plat *plat = dev_get_plat(dev);
--	u32 otap_del_sel, mask, val;
-+	int mode = host->mmc->selected_mode;
-+	u32 otap_del_sel;
-+	u32 itap_del_sel;
-+	u32 mask, val;
-+
-+	otap_del_sel = plat->otap_del_sel[mode];
- 
--	otap_del_sel = plat->otap_del_sel[host->mmc->selected_mode];
- 	mask = OTAPDLYENA_MASK | OTAPDLYSEL_MASK;
--	val = (1 << OTAPDLYENA_SHIFT) | (otap_del_sel << OTAPDLYSEL_SHIFT);
-+	val = (1 << OTAPDLYENA_SHIFT) |
-+	      (otap_del_sel << OTAPDLYSEL_SHIFT);
-+
-+	itap_del_sel = plat->itap_del_sel[mode];
-+
-+	mask |= ITAPDLYENA_MASK | ITAPDLYSEL_MASK;
-+	val = (1 << ITAPDLYENA_SHIFT) |
-+	      (itap_del_sel << ITAPDLYSEL_SHIFT);
-+
-+	regmap_update_bits(plat->base, PHY_CTRL4, ITAPCHGWIN_MASK,
-+			   1 << ITAPCHGWIN_SHIFT);
- 	regmap_update_bits(plat->base, PHY_CTRL4, mask, val);
-+	regmap_update_bits(plat->base, PHY_CTRL4, ITAPCHGWIN_MASK, 0);
- 
- 	regmap_update_bits(plat->base, PHY_CTRL5, CLKBUFSEL_MASK,
- 			   plat->clkbuf_sel);
-@@ -572,7 +587,7 @@ static int sdhci_am654_get_otap_delay(struct udevice *dev,
- 	 * Remove the corresponding capability if an otap-del-sel
- 	 * value is not found
- 	 */
--	for (i = MMC_HS; i <= MMC_HS_400; i++) {
-+	for (i = MMC_LEGACY; i <= MMC_HS_400; i++) {
- 		ret = dev_read_u32(dev, td[i].otap_binding,
- 				   &plat->otap_del_sel[i]);
- 		if (ret) {
--- 
-2.43.2
+> 
+> Cheers,
+> Andre
+> 
+> 
+> > +          size a bit.
+> > +
+> >  endif
+> >  
+> >  config SUN6I_PRCM
+> > diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> > index 37c139e0ee..4598d60a57 100644
+> > --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> > +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
+> > @@ -1349,8 +1349,15 @@ static unsigned long mctl_calc_size(const struct dram_config *config)
+> >  {
+> >  	u8 width = config->bus_full_width ? 4 : 2;
+> >  
+> > +	unsigned long size;
+> > +
+> > +	size = (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
+> > +
+> > +	if (config->trim_size)
+> > +		size = (size * 3) / (width == 4 ? 4 : 8);
+> > +
+> >  	/* 8 banks */
+> > -	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
+> > +	return size;
+> >  }
+> >  
+> >  static const struct dram_para para = {
+> > @@ -1379,6 +1386,8 @@ unsigned long sunxi_dram_init(void)
+> >  	struct sunxi_prcm_reg *const prcm =
+> >  		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
+> >  	struct dram_config config;
+> > +	if (IS_ENABLED(CONFIG_DRAM_SUN50I_H616_TRIM_SIZE))
+> > +		config.trim_size = true;
+> >  	unsigned long size;
+> >  
+> >  	setbits_le32(&prcm->res_cal_ctrl, BIT(8));
+> 
+> 
+
+
+
 
