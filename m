@@ -4,42 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82025C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 00:22:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8995DC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 01:31:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 939E48813F;
-	Mon, 15 Apr 2024 02:22:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id BCF558813D;
+	Mon, 15 Apr 2024 03:31:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BJDtNhtG";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D2E4788134; Mon, 15 Apr 2024 02:22:55 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 5F1B287C7E
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 02:22:53 +0200 (CEST)
+ id 604EE88134; Mon, 15 Apr 2024 03:31:57 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D3C887E43
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 03:31:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EA2DA339;
- Sun, 14 Apr 2024 17:23:20 -0700 (PDT)
-Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9481D3F64C;
- Sun, 14 Apr 2024 17:22:51 -0700 (PDT)
-Date: Mon, 15 Apr 2024 01:22:45 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: dazen@189.cn, Jernej =?UTF-8?B?xaBrcmFiZWM=?=
- <jernej.skrabec@gmail.com>, Mikhail Kalashnikov <iuncuim@gmail.com>
-Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com, trini@konsulko.com
-Subject: Re: [PATCH] DRAM_SUN50I_H616_TRIM_SIZE
-Message-ID: <20240415012245.75ccaa5b@minigeek.lan>
-In-Reply-To: <20240413134352.46495-1-dazen@189.cn>
-References: <20240413134352.46495-1-dazen@189.cn>
-Organization: Arm Ltd.
-X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-78d61a6229bso185097685a.0
+ for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 18:31:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1713144714; x=1713749514; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=+VNFBxjcbK2EChLXIlB3M53Vbj54ywsmdXL0vZ7BLEQ=;
+ b=BJDtNhtGt4XWSFHp63CjZAxlIOpjIeZVs5DQDrimd4ox+SNUtUXAsoUewovwiOtF9y
+ J7rU63sNDXe9ZomoSrIh4C2E9tYEcEh100yl+ED4IH8va660EavwuyY34Ys8gcuqyXDk
+ JLW7b9CshIO0s5kxzd1v5gnvCee30Wn8ad5Y0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713144714; x=1713749514;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+VNFBxjcbK2EChLXIlB3M53Vbj54ywsmdXL0vZ7BLEQ=;
+ b=SY8cVEpFUhqpYpbcuUThIq4WaRzRAWtpGPNitxbySSSDvNzrWjQzYtlKsHhSMks9Ae
+ HuUL+GiweELQi/a+oJURzVupB+4J6U1tEUiuGPVjuTY4b/Z1qx61s44pjkwMxsidYuyw
+ 6X6zfIhfLI7dl+8eZVa3sL7YXXYLFvBje3zSXKjOZyB2bQxldlSo/lzjejs7vNx57+/1
+ aC0DRwlhpM+zrKG6vPgGNBHQ6IxBp9FJ7Rjw6dugeIB16dOL8J+pqll+zO0IGyUHeT7n
+ msK77PxmvIHZbtXlZuUSMxwV7iHI9z02BVTA7rPrP+ALkikVUXJF8Qt8FKGCsGc6HBVk
+ VwWA==
+X-Gm-Message-State: AOJu0YxOsiCrGhHs01UjF+zYYcHR4XoztXrEl+X7fyY1yb8jbqEi/npW
+ Ms9vGO5pjLs1bRnhnadVCjGISNIu7cJBPX/Q9K+cjLnN8e0a7Sqw6wEC0KlG+5U=
+X-Google-Smtp-Source: AGHT+IH3rEuY3XEbcq3WjtA80uVZkduCFsdKX+a0bLZF3ounkcwEyJrkYpRHKXi4b0jePaJgqk22GA==
+X-Received: by 2002:a05:620a:b85:b0:789:e800:b39f with SMTP id
+ k5-20020a05620a0b8500b00789e800b39fmr8342645qkh.76.1713144713719; 
+ Sun, 14 Apr 2024 18:31:53 -0700 (PDT)
+Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
+ c22-20020a05620a165600b0078d667d1085sm5678944qko.84.2024.04.14.18.31.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 14 Apr 2024 18:31:53 -0700 (PDT)
+Date: Sun, 14 Apr 2024 19:31:50 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
+Subject: Re: [PULL] u-boot-usb/master
+Message-ID: <20240415013150.GE1054907@bill-the-cat>
+References: <20240414184549.147802-1-marex@denx.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="st3Ks5wzMd9+mdpT"
+Content-Disposition: inline
+In-Reply-To: <20240414184549.147802-1-marex@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,102 +88,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 13 Apr 2024 21:43:52 +0800
-dazen@189.cn wrote:
 
-Hi,
+--st3Ks5wzMd9+mdpT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-thanks for sending a patch!
+On Sun, Apr 14, 2024 at 08:45:17PM +0200, Marek Vasut wrote:
 
-> From: lalakii <dazen@189.cn>
-> 
-> Add "DRAM_SUN50I_H616_TRIM_SIZE" option for 1.5gb board.
-> 
-> Signed-off-by: lalakii <dazen@189.cn>
-> ---
->  arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h |  1 +
->  arch/arm/mach-sunxi/Kconfig                        |  7 +++++++
->  arch/arm/mach-sunxi/dram_sun50i_h616.c             | 11 ++++++++++-
->  3 files changed, 18 insertions(+), 1 deletion(-)
-> 
-> diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-> index a8fdda124a..2d2526fead 100644
-> --- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-> +++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-> @@ -166,6 +166,7 @@ struct dram_config {
->  	u8 rows;
->  	u8 ranks;
->  	u8 bus_full_width;
-> +	bool trim_size;
->  };
->  
->  static inline int ns_to_t(int nanoseconds)
-> diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-> index fe89aec6b9..255a498557 100644
-> --- a/arch/arm/mach-sunxi/Kconfig
-> +++ b/arch/arm/mach-sunxi/Kconfig
-> @@ -108,6 +108,13 @@ config DRAM_SUN50I_H616_TPR12
->  	default 0x0
->  	help
->  	  TPR12 value from vendor DRAM settings.
-> +
-> +config DRAM_SUN50I_H616_TRIM_SIZE
-> +        bool "H616 DRAM trim size"
-> +        help
-> +          Due to unknown issue, some H616 based boards may need to trim
+> The following changes since commit cdfcc37428e06f4730ab9a17cc084eeb7676ea=
+1a:
+>=20
+>   Merge tag 'u-boot-dfu-next-20240402' of https://source.denx.de/u-boot/c=
+ustodians/u-boot-dfu (2024-04-02 22:37:23 -0400)
+>=20
+> are available in the Git repository at:
+>=20
+>   git://source.denx.de/u-boot-usb.git master
+>=20
+> for you to fetch changes up to 63f6a449bffe46beca89580d3efa48e5d041025c:
+>=20
+>   usb: kbd: Add probe quirk for Apple and Keychron keyboards (2024-04-12 =
+14:53:13 +0200)
+>=20
 
-Well, it's not really an unknown issue, is it? The problem seems to be
-that the auto detection code cannot deal with the topology of the 1.5GB
-DRAM chips.
+Applied to u-boot/master, thanks!
 
-The general problem with this approach is that it would need to be
-enabled at build time, which means the generated image will always trim
-the DRAM size, and would not be universal for each board anymore.
+--=20
+Tom
 
-So we need something to auto-detect this situation. Can you describe
-the failure mode, without this patch? Does the DRAM init code hang or
-give up already, or does this all pass, and then later on the board
-hangs or crashes when we try access the missing DRAM area?
-Maybe a small test access beyond 1.5GB would be able to check for this
-particular case?
+--st3Ks5wzMd9+mdpT
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Cheers,
-Andre
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYcg4AACgkQFHw5/5Y0
+tyzMgAv/VbKvLKWm7SOMhLEmYvGKRBJr8nxWOZUpmqU9keXWONxUpbXzoa107QoK
+aup1UiYtcoBJ9Rhu0AkEDNzzxY1CBWBI4z0J81k/G4Nse0DpfsHDXmNspa68pvk3
+fxgw11UQOsKM7Oj2jp3fKLvyxvDAhVos2BpFCsEAyYx2If8+45tQxLa44Z7LMrxm
+1Q/MDxkbgby413agmL4KhmZUxq0o1BW8OqG1qbf77jm7I3R+om9FgVNT/Vx6xacN
+kQMYwDgYES88GZPjh49SwSHhGojlnhPgAf/noFa8TyeGMEt5L/X+/w4Gcn6AsBkz
+K/o6iuSKJD0g8Fqag83GQk7pSDoy3qzJj3bVTePTZ/vLCacu+lCe+/YEHua7WO4D
+rrVqowQCsrS24Y28tsYQuUX3nT/K3CiJM6LoC+cszCWxTg1LiMb5PYJbzqjNkY1b
+TZ3dvtNuDvy8qfy6Vw+sc8js26L7b7sQQT+ksjRhejSjmSSehWDcvp60JkqkH/Ea
+a+rRfwdu
+=AfN6
+-----END PGP SIGNATURE-----
 
-> +          size a bit.
-> +
->  endif
->  
->  config SUN6I_PRCM
-> diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> index 37c139e0ee..4598d60a57 100644
-> --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> @@ -1349,8 +1349,15 @@ static unsigned long mctl_calc_size(const struct dram_config *config)
->  {
->  	u8 width = config->bus_full_width ? 4 : 2;
->  
-> +	unsigned long size;
-> +
-> +	size = (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
-> +
-> +	if (config->trim_size)
-> +		size = (size * 3) / (width == 4 ? 4 : 8);
-> +
->  	/* 8 banks */
-> -	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
-> +	return size;
->  }
->  
->  static const struct dram_para para = {
-> @@ -1379,6 +1386,8 @@ unsigned long sunxi_dram_init(void)
->  	struct sunxi_prcm_reg *const prcm =
->  		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
->  	struct dram_config config;
-> +	if (IS_ENABLED(CONFIG_DRAM_SUN50I_H616_TRIM_SIZE))
-> +		config.trim_size = true;
->  	unsigned long size;
->  
->  	setbits_le32(&prcm->res_cal_ctrl, BIT(8));
-
+--st3Ks5wzMd9+mdpT--
