@@ -4,61 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A56DC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 13:45:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE142C00A94
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 13:48:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6880588089;
-	Mon, 15 Apr 2024 15:45:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 21BAF88151;
+	Mon, 15 Apr 2024 15:48:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="To7BWjMG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="G/eOU55U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05C3388158; Mon, 15 Apr 2024 15:45:23 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.186])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4706988193; Mon, 15 Apr 2024 15:48:45 +0200 (CEST)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B84587F41
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 15:45:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A37A88189
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 15:48:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 3b307acf-fb2e-11ee-9a83-00505699b430
-Received: from smtp.kpnmail.nl (unknown [10.31.155.5])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 3b307acf-fb2e-11ee-9a83-00505699b430;
- Mon, 15 Apr 2024 15:44:07 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=i3WmzlMMCfzRk3qHLZW1TVz1ONvMbptMvltpQwYNN9Q=;
- b=To7BWjMGRlLRql9Qv0C2cff+bkZ/QrS3XHOFbPrbGrh9e+FoB3HsPKhzIyOkwjUN25w4qyY+4K+54
- L44Xo0xfSPO+5UuXZ8NfuM3D2I5WXHFx3kf29T3H0luc/f8nrzzEoFG+XduxoG+SsQMqwq/VWQPm6I
- eWXBhWqJlSFzWeV8HI9nWZJSYGYQBRD/Pti2QUI/NjSKYLgbl/+PChdr5Cc7zJjtdGnd+JScIm810E
- aj6Twx7bDSwffPqGPZbtGxTdkWWnX5MbeLhtoDgXg36m9gPTqleZmA3a4dCZrmTQHE/uZejH4PcPeV
- pGTnWC+Aa6wpHz8Ye4fIVfavvfYNcKQ==
-X-KPN-MID: 33|FsjQH1OiWUy1X4lIrzF+q232GLLj0K8BSDUw4SCTKRAVNBcFzF4SsFi7fIgVpjn
- INnkaAfosYiRagvUf5O5/cE91qaK7Vlwo7NIf35de0Oc=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|pY67LYVQJoIUVn/0T8gWZUhJaiZ3V6P0sbNu6K9UFVp2kxDsDdTiUtcbYug3/+D
- ho7UwicgTfFTAPrwDzbEZ9A==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 65cca86a-fb2e-11ee-94ef-00505699b758;
- Mon, 15 Apr 2024 15:45:19 +0200 (CEST)
-Date: Mon, 15 Apr 2024 15:45:18 +0200
-Message-Id: <878r1ehh8x.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: <j@jannau.net>
-Cc: kettenis@openbsd.org, trini@konsulko.com, sjg@chromium.org,
- u-boot@lists.denx.de, asahi@lists.linux.dev, j@jannau.net, marcan@marcan.st
-In-Reply-To: <20240317-apple_config-v1-1-1b862bc140a9@jannau.net> (message
- from Janne Grunau via B4 Relay on Sun, 17 Mar 2024 15:54:47 +0100)
-Subject: Re: [PATCH 1/4] apple_m1_defconfig: Turn on CONFIG_SYS_64BIT_LBA
-References: <20240317-apple_config-v1-0-1b862bc140a9@jannau.net>
- <20240317-apple_config-v1-1-1b862bc140a9@jannau.net>
+ spf=pass smtp.mailfrom=yasuharu.shibata@gmail.com
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2a78c2e253aso1099498a91.3
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 06:48:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713188921; x=1713793721; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=fsNHQXQvR7yNqu5Cwqa1Ke93kkCR9e6bfCqx0bPrdXA=;
+ b=G/eOU55UQ8ZJe6vP96oh3OkqUpGIhTB9FS5sXomud4UEn0Hsz8qnrCnvbLtplnpqAK
+ QI4pHaOygdxEsdPBIcpzHHKdfF42/uSLH9n+E+uImLe8lHpTULaDR/2Qjj1nUc+noJli
+ iEt/970S3UZtb+w2YXBZ9qMmE9/koJh5Vuy5vA4k98XBD42Jh7DxqGEu/Kii5xXH2Nfv
+ YhbXbNg199piDvc2zOAI6SLNmpJTgE60hSJ9wTlLRtAKtLv7CKjQS/0FeeQ8114cGi4m
+ 5Ls6apfXDoklGW7UJZDimKAzQQmuYNFaed/jgMLWQayLkDOvnl2g8mAOodWoeCpz86dq
+ /zFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713188921; x=1713793721;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fsNHQXQvR7yNqu5Cwqa1Ke93kkCR9e6bfCqx0bPrdXA=;
+ b=XUR0unPp1xXBpEcfh8JSJB2/7zd6VlOPK1WbrCBfvJC9BgXmuiaHGqIIW/sR0K541w
+ DRfIjYwAsU1YjQl63uL0CiodlGHO055wofS4HY2eIXMywcnXYmVp0RqrjScxi5Aizuis
+ Ik8JyUU9nRB1FoMpaf45pI+spwm0KLwChjN8RseGIrYeRL/95+5HBzzyxL/0KZGBDuwJ
+ XlU9X5LLd0MxM+sD8qZeQkv1B8G4jp7tdNfROpZojimKLv5h5rBbT5kFFl+H5OYUKa0L
+ vd+zF4OAtaMjSHuMS0ERAtPlWdJ9z6KLxGIuj+mHX+BGZiXaCf8fMqGmL4evWtAFXdYu
+ fCOA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW2Pk6lJpl+E+LU7F9Ij8GsFgyz6L9RlJWFWezRwBhcrPORQkAg2w/ug5yuSwJEzTyN5gHo+LkLnIKUFfLkBU4Bwuy/vw==
+X-Gm-Message-State: AOJu0YzjBg/o11uYK01Sa1nSLQRUg5PaQwN8gS2gHXlAlROnLkZDMRIM
+ kLqC4Hhwyl4n6+83BcxgwP9Qb0UTVgSOeqoV8SpPznpvHb+kQcPAVnEYHITFB/gU3kmDf/SxZPv
+ InNs/ucNqCvjmhcfcAKNawe89TPc=
+X-Google-Smtp-Source: AGHT+IF3OrXXdY3CUNCqzw93l4s8brv7eU2yI868a+XeK5d0WJQQxu0yTtbAsWn4jmN34HNWlkM0EqB7ybt/PPU79XA=
+X-Received: by 2002:a17:90a:d718:b0:2a5:4d59:950e with SMTP id
+ y24-20020a17090ad71800b002a54d59950emr7495511pju.27.1713188921556; Mon, 15
+ Apr 2024 06:48:41 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
+ <20240415130013.26721-1-yasuharu.shibata@gmail.com>
+ <20240415130013.26721-2-yasuharu.shibata@gmail.com>
+ <CAOf5uwm23ck7uwr-tAZp=8L9HVb_A0r6BYNZ3C0KCaTNkHG8Og@mail.gmail.com>
+In-Reply-To: <CAOf5uwm23ck7uwr-tAZp=8L9HVb_A0r6BYNZ3C0KCaTNkHG8Og@mail.gmail.com>
+From: Yasuharu Shibata <yasuharu.shibata@gmail.com>
+Date: Mon, 15 Apr 2024 22:48:00 +0900
+Message-ID: <CALu9rSZeZYyuCwBeUgR+sxMvmqDBh+Q5hyb-gtHP0U8ovHby_g@mail.gmail.com>
+Subject: Re: [PATCH 1/1] net: wget: fix TCP sequence number wrap around issue
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>, 
+ Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,40 +93,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-> Date: Sun, 17 Mar 2024 15:54:47 +0100
-> 
-> From: Hector Martin <marcan@marcan.st>
-> 
-> This makes USB HDDs >2TiB work. The only reason this hasn't bitten us
-> for the internal NVMe yet is the 4K sector size, because the largest SSD
-> Apple sells is 8TB and we can handle up to 16TiB with that sector size.
-> Close call.
-> 
-> Signed-off-by: Hector Martin <marcan@marcan.st>
-> Signed-off-by: Janne Grunau <j@jannau.net>
+Hi Michael,
 
-Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
+On Mon, 15 Apr 2024 at 22:03, Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
+>
+> I think I have sent some time ago ;)
+>
+> Anyway look sane. I was having the same feeling on code inspection
+>
+> Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
 
-> ---
->  configs/apple_m1_defconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
-> index e00d72e8be..31d966f0ab 100644
-> --- a/configs/apple_m1_defconfig
-> +++ b/configs/apple_m1_defconfig
-> @@ -10,6 +10,7 @@ CONFIG_SYS_PBSIZE=276
->  CONFIG_DISPLAY_BOARDINFO_LATE=y
->  CONFIG_BOARD_LATE_INIT=y
->  # CONFIG_NET is not set
-> +CONFIG_SYS_64BIT_LBA=y
->  CONFIG_APPLE_SPI_KEYB=y
->  # CONFIG_MMC is not set
->  CONFIG_NVME_APPLE=y
-> 
-> -- 
-> 2.44.0
-> 
-> 
-> 
+Thank you for your review.
+I already checked the thread, sorry I couldn't find your patch and
+I couldn't see whether it is the same.
+In any case, I consider there is a potential issue about
+wrap around, so I submitted a patch.
+
+--
+Best regards,
+Yasuharu Shibata
