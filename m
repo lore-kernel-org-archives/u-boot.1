@@ -4,62 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE9F6C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 08:36:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4C1DC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 08:40:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 195D98815D;
-	Mon, 15 Apr 2024 10:36:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DEC7C88189;
+	Mon, 15 Apr 2024 10:40:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="vJVuW/KZ";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="mkBx+c/K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 875BB881FD; Mon, 15 Apr 2024 10:36:14 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E880888193; Mon, 15 Apr 2024 10:40:50 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41A2D88152
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 10:36:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id DC03688153
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 10:40:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=4835aa2b69=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 43F7oB84024860; Mon, 15 Apr 2024 10:40:36 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=97g4++A4Dk34NRiujTlWOzHb+Nlx1GwZRlxpy8Rnfgo=; b=mk
+ Bx+c/KRRUzT5ScbnxJFkwtkgshVVuQ05sHenCp0X0cBi620uk0QC9wvMtY3QXaoz
+ Ku9b3/xisa+a8m+0mBZLZz8DLwn8bLlSTi129IkhpFt3N/d45HfnfZROgOmoa07Z
+ HUpL4A0dkGIFa84ohanWILfSonYK9yCUIlvzfZrUOmhhVrbNt0gGsTA5sB6poW3c
+ j8pg2PYLy8QAQIu6qbxxftka1oUoz+hsYixFvu5JtC5jMKfa3zHDKEYV2W5PIYTR
+ 3UR5d/IhkcYdN9eQPtcIw4typpwF9cbGcV3rOB+mpMhwfKf5DEtxVZbHls4TQEUW
+ pdDyoifz9sBM1Mye9PAw==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff646gcn-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 15 Apr 2024 10:40:36 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 8121340047;
+ Mon, 15 Apr 2024 10:40:33 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7C354210595;
+ Mon, 15 Apr 2024 10:40:04 +0200 (CEST)
+Received: from [10.48.86.98] (10.48.86.98) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Apr
+ 2024 10:40:03 +0200
+Message-ID: <36598078-5f72-415b-81c8-71c928b35c94@foss.st.com>
+Date: Mon, 15 Apr 2024 10:40:03 +0200
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1713170171;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZXYIpbN7+vS4hsTpqf67bZsS6t3Y7lDKJIHM0da9QTs=;
- b=vJVuW/KZHSZtPdIoUT7Oc4FpfvleeXpkAV48YctNjkMWh5UfupXWZvsfKNJIjMbRAFp05o
- Xu4kIGeZkLbOyLdEuru1aRovE7MQ7yYpQY5tisvXU48zCkW/6orAFMkiWI678WCwLNBhOu
- EL+oLQx+x8m/+sSit9lPkNwrMtjQFypXT4Ujc9/CEBErl1x89294uoX4f2jDMA+f4yU66E
- LH57ArxEy4uZHYaoNMr45W4Nace3y/S6374z5KQH2zYGX7wGS8PduwlNOdk9Pr3C3GcwkL
- YZdSsIHGqu2Ig68zKzoADpLrpHsQwdZ4JKc6RM2CCPk8M86v2c9z4ajRdXCyZQ==
-Date: Mon, 15 Apr 2024 10:36:10 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Jagan Teki <jagan@edgeble.ai>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, John Clark <inindev@gmail.com>, Tom Fitzhenry
- <tom@tom-fitzhenry.me.uk>, Elon Zhang <zhangzj@rock-chips.com>, Quentin
- Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 23/23] rockchip: rk3588: Enable use of eMMC HS200 mode
- on a few missed boards
-In-Reply-To: <05c12e28-c24e-495a-9cdb-d97752cbe6d9@kwiboo.se>
-References: <20240413181425.1384357-1-jonas@kwiboo.se>
- <20240413181425.1384357-24-jonas@kwiboo.se>
- <0bfe98a361956a2e1464d5327756ccab@manjaro.org>
- <05c12e28-c24e-495a-9cdb-d97752cbe6d9@kwiboo.se>
-Message-ID: <a9d04ab75010f358b759eac00acbdef0@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ARM: stm32: Drop superfluous Makefile entry for
+ ecdsa_romapi.o
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Igor Opaniuk <igor.opaniuk@foundries.io>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240414183843.146985-1-marex@denx.de>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20240414183843.146985-1-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+X-Originating-IP: [10.48.86.98]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-04-15_08,2024-04-09_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,157 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-04-15 10:23, Jonas Karlman wrote:
-> On 2024-04-15 09:00, Dragan Simic wrote:
->> Please see my comments below.
->> 
->> On 2024-04-13 20:13, Jonas Karlman wrote:
->>> A few RK3588 boards are missing a mmc-hs200 prop to signal that HS200
->>> mode is supported in addition to HS400, this lead to bad performance
->>> reading FIT in SPL and broken MMC write.
->>> 
->>> Add cap-mmc-highspeed and mmc-hs200-1_8v to affected boards to enable
->>> use of eMMC HS200 mode.
->>> 
->>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> 
->> Shouldn't it be better to follow the Linux kernel's logic in
->> the MMC driver, and enable the HS200 mode when the DT indicates
->> that the HS400 mode is suported?  In other words, exactly what
->> you already submitted to the mailing list. [1]
+On 4/14/24 20:38, Marek Vasut wrote:
+> The source file is in arch/arm/mach-stm32mp/ecdsa_romapi.c and not
+> in arch/arm/mach-stm32mp/stm32mp1/ecdsa_romapi.c . There are two
+> Makefile entries in each subdirectory. Drop the bogus one and keep
+> only the correct one, the one in arch/arm/mach-stm32mp/Makefile .
 > 
-> Yes, this is somewhat what I tried to make aware of with the note and
-> link under "v2: New patch" :-)
-
-Wow, I totally missed that paragraph. :)  Though, that also means
-that we're on the same page. :)
-
->> That would allow a significant cleanup of the U-Boot dtsi files
->> to be performed.
->> 
->> Until that's resolved, the patch is looking good to me.
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Simon Glass <sjg@chromium.org
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>  arch/arm/mach-stm32mp/stm32mp1/Makefile | 1 -
+>  1 file changed, 1 deletion(-)
 > 
-> Fully agree, this will fix the bad performance in SPL and fix MMC write
-> for existing boards making them work same as other RK3588 boards until
-> the MMC maintainer can weigh in on the linked patch.
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/Makefile b/arch/arm/mach-stm32mp/stm32mp1/Makefile
+> index 857148747ef..ebae50f66c9 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/Makefile
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/Makefile
+> @@ -8,7 +8,6 @@ obj-y += cpu.o
+>  obj-$(CONFIG_STM32MP13X) += stm32mp13x.o
+>  obj-$(CONFIG_STM32MP15X) += stm32mp15x.o
+>  
+> -obj-$(CONFIG_STM32_ECDSA_VERIFY) += ecdsa_romapi.o
+>  ifdef CONFIG_SPL_BUILD
+>  obj-y += spl.o
+>  obj-y += tzc400.o
 
-That will be nice.
 
->> Reviewed-by: Dragan Simic <dsimic@manjaro.org>
-> 
-> Thanks!
+Hi Marek
 
-Thank you for all these nice cleanup patches!
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
->> [1] 
->> https://lore.kernel.org/u-boot/20240408210619.3749231-1-jonas@kwiboo.se/
->> 
->>> ---
->>> v2: New patch
->>> 
->>> All these mmc-hs200 prop overrides may not be needed if the patch 
->>> "mmc:
->>> Imply HS200 cap with mmc-hs400 prop to match linux" [1] gets applied,
->>> until such time this matches what has been done for all other RK35xx
->>> boards.
->>> 
->>> [1] https://patchwork.ozlabs.org/patch/1921039/
->>> ---
->>>  arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi | 5 +++++
->>>  arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi | 5 +++++
->>>  arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi         | 5 +++++
->>>  arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi        | 5 +++++
->>>  arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi      | 5 +++++
->>>  arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi      | 5 +++++
->>>  6 files changed, 30 insertions(+)
->>> 
->>> diff --git a/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
->>> b/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
->>> index dd0058262b7f..fc4b13628b30 100644
->>> --- a/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
->>> +++ b/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
->>> @@ -15,6 +15,11 @@
->>>  	};
->>>  };
->>> 
->>> +&sdhci {
->>> +	cap-mmc-highspeed;
->>> +	mmc-hs200-1_8v;
->>> +};
->>> +
->>>  &sdmmc {
->>>  	bus-width = <4>;
->>>  	status = "okay";
->>> diff --git a/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
->>> b/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
->>> index a45b3f5e86ad..a0c62072c34e 100644
->>> --- a/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
->>> +++ b/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
->>> @@ -14,3 +14,8 @@
->>>  		u-boot,spl-boot-order = &sdmmc;
->>>  	};
->>>  };
->>> +
->>> +&sdhci {
->>> +	cap-mmc-highspeed;
->>> +	mmc-hs200-1_8v;
->>> +};
->>> diff --git a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
->>> b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
->>> index e8566785e965..354e4a8d39e3 100644
->>> --- a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
->>> +++ b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
->>> @@ -10,3 +10,8 @@
->>>  		u-boot,spl-boot-order = "same-as-spl", &sdhci;
->>>  	};
->>>  };
->>> +
->>> +&sdhci {
->>> +	cap-mmc-highspeed;
->>> +	mmc-hs200-1_8v;
->>> +};
->>> diff --git a/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
->>> b/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
->>> index 968385622fa5..7948464ac85f 100644
->>> --- a/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
->>> +++ b/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
->>> @@ -11,6 +11,11 @@
->>>  	bootph-some-ram;
->>>  };
->>> 
->>> +&sdhci {
->>> +	cap-mmc-highspeed;
->>> +	mmc-hs200-1_8v;
->>> +};
->>> +
->>>  &sfc {
->>>  	pinctrl-names = "default";
->>>  	pinctrl-0 = <&fspim1_pins>;
->>> diff --git a/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
->>> b/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
->>> index 7b937943a53c..d764135ab661 100644
->>> --- a/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
->>> +++ b/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
->>> @@ -4,3 +4,8 @@
->>>   */
->>> 
->>>  #include "rk3588-u-boot.dtsi"
->>> +
->>> +&sdhci {
->>> +	cap-mmc-highspeed;
->>> +	mmc-hs200-1_8v;
->>> +};
->>> diff --git a/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
->>> b/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
->>> index 1aeb5410e43e..c5c94b421d1e 100644
->>> --- a/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
->>> +++ b/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
->>> @@ -10,3 +10,8 @@
->>>  		u-boot,spl-boot-order = "same-as-spl", &sdhci;
->>>  	};
->>>  };
->>> +
->>> +&sdhci {
->>> +	cap-mmc-highspeed;
->>> +	mmc-hs200-1_8v;
->>> +};
+Thanks
+Patrice
