@@ -4,58 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33A82C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 17:12:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8D80C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 18:44:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2919B87F69;
-	Mon, 15 Apr 2024 19:11:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
+	by phobos.denx.de (Postfix) with ESMTP id 14B0F87B1A;
+	Mon, 15 Apr 2024 20:44:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="S4cENQNd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="M/y07Sqo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F242D87BF1; Mon, 15 Apr 2024 19:02:17 +0200 (CEST)
-Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 33915880F8; Mon, 15 Apr 2024 20:44:50 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7EC7187E4D
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 19:02:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4C7388657F
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 20:44:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gnu.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
-Received: from fencepost.gnu.org ([2001:470:142:3::e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1rwPia-0007ZW-KW; Mon, 15 Apr 2024 13:02:08 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
- s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
- From; bh=nBgCoCmeUWXOxaLfAG+zZZ3YMpz567BAAc8cM5gg4kE=; b=S4cENQNd89F5+9DjM7c2
- dvISz/z4BR7aCXRrx/PloBIrnhT88BYXeTm5N23nZDl1dAKg9D0XVGRbk8V4ZIM4qiIlMBb8zh2SN
- ibOmv3nw3JHcfi43YyQkoHw8o6O6mASSvGWURLJaeT9ND/jbnl4wWszEztPWqjSPcvQl9xy0kVX3Z
- c5yXF0xgwodKAeZUkw1bdzVSNMgmdAyJcySwHYsgQ9p2ZrqJpxGTAW1K6DHivEPtzua1Mvv242gmY
- QDIA36cY9b+T3Byex9HhdDEFhTQnJHfguW4gGxQKTUOUsfDf7indM5agkN8hYXg2QqC2jkv/ROd2y
- EDIp06Pg/iBi6Q==;
-From: Mathieu Othacehe <othacehe@gnu.org>
-To: Peng Fan <peng.fan@nxp.com>
-Cc: Fabio Estevam <festevam@gmail.com>,  "Peng Fan (OSS)"
- <peng.fan@oss.nxp.com>,  Yannic Moog <y.moog@phytec.de>,  Wadim Egorov
- <w.egorov@phytec.de>,  Stefano Babic <sbabic@denx.de>,  dl-uboot-imx
- <uboot-imx@nxp.com>,  "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- PHYTEC upstream <upstream@lists.phytec.de>
-Subject: Re: [PATCH v6 0/5] imx93: Conver to OF_UPSTREAM
-In-Reply-To: <DU0PR04MB9417723DD3E5F4010A2DB96388092@DU0PR04MB9417.eurprd04.prod.outlook.com>
- (Peng Fan's message of "Mon, 15 Apr 2024 12:55:47 +0000")
-References: <20240412-imx93-of-v2-v6-0-c2ad48e46eca@nxp.com>
- <CAOMZO5B6PCqU8G5EXDG+41T7nVmJqFPgwEVfZvpYmryACRFmyg@mail.gmail.com>
- <CAOMZO5ASD3HuvUMXc6tmStE1AKRheW_NLUjRfpN5HuJ64ZF-Cg@mail.gmail.com>
- <DU0PR04MB9417723DD3E5F4010A2DB96388092@DU0PR04MB9417.eurprd04.prod.outlook.com>
-Date: Mon, 15 Apr 2024 19:02:05 +0200
-Message-ID: <871q768sqa.fsf@gnu.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-41884f8f35bso2661485e9.0
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 11:44:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1713206688; x=1713811488; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=uytxUCkmBjUcKmJG02iY+UwP4hk8iZ8X9rAWJytmuN8=;
+ b=M/y07Sqo6xuL4KG/bNsL2GFtWQd7vml5ifnoLQUU5NImkwK1Psw76rVEsVdOfp7H0l
+ Ho8fByoBqRHB1x4ZzFniNlxTfO/w1dHAIUatQBQaMPeOTZ3kQ6KjDE2LaMHSsD0XVm0O
+ OcX/1rzLcRNmNYCziGNdT/8g81x+BrLKbFszeXUucty6W00zKRGINgraICJGb1zn1xpo
+ R8dXaYpTjYpR3c2HzMOvOAW+4UykYOHreB+xZRXR4Rt2u4bE8t9JTadfs4KtzLCI2crh
+ /MRlzMAy/NfbA2CfBnf4g1kDA6tJwpUqpS1aDdJltQcQY/vrIhTLpsorm6FLxW5UYq6e
+ 4kNw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713206688; x=1713811488;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uytxUCkmBjUcKmJG02iY+UwP4hk8iZ8X9rAWJytmuN8=;
+ b=JFb2X50ZnL4tbFY6BAGYWVNWqfBv9fUAxe2OC+8zaAmz5LVck9qdVRRcPZmdtHn+NS
+ wdmAfPH8KKGlbrvy8ik3JtjSob++Gwcm39Bx4rMjaW2FTcuxVH14tiFM7e5jKzmsS+LO
+ HKPJoWkk6BsE5UWwM/5OUizYR7THTzEZiFVD/NTtVgx/UOThgjL+VXQuW4HtO7ZtoEH1
+ v55OSaulQzTJn7WFz7PfGxXFNczppeIqyzVZaRvfeDKpUOjueMBU8auvcOJ95+ZWC1x8
+ UaLH5yXxCopURBklblPxv1Ti58eXfCPUInD219fB7tiZUGb59CduXYcWauowrGmMWFH4
+ OjtA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVmdGuWBHUnSRRiPyvdogFB1hTqX/mccO5Fjwt7KGOxGHyoBcnI+dN4kqxbJuoIKevvs04xvS1g4jBiXF5Df7ssgPqZKg==
+X-Gm-Message-State: AOJu0YxnyBcuUq7QEiOB1RD6bKcq+0bYZYljTAmw133cloruW/azxmkv
+ ZhMPSX1hxpgwrkuEt5ewyLdpTdB39q2l0x53BQG+9LF53R0GWIk5EUoNUHr6oWQ=
+X-Google-Smtp-Source: AGHT+IE1Yir8qWiXM7bA9nJe0XEfspLiiV5zwaUtQEpoz7XQvd9Bo4NWyRx2yKG/dE8Q9DIlCY0VLA==
+X-Received: by 2002:a05:600c:4689:b0:418:4590:2d3a with SMTP id
+ p9-20020a05600c468900b0041845902d3amr3710366wmo.8.1713206687755; 
+ Mon, 15 Apr 2024 11:44:47 -0700 (PDT)
+Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ a14-20020a05600c348e00b004188a8369d9sm294512wmq.47.2024.04.15.11.44.46
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Apr 2024 11:44:47 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: trini@konsulko.com, neil.armstrong@linaro.org, sumit.garg@linaro.org, 
+ sjg@chromium.org, bmeng.cn@gmail.com, marek.vasut+renesas@mailbox.org, 
+ u-boot@lists.denx.de, Robert Marko <robert.marko@sartura.hr>
+In-Reply-To: <20240415105028.432404-1-robert.marko@sartura.hr>
+References: <20240415105028.432404-1-robert.marko@sartura.hr>
+Subject: Re: (subset) [PATCH 1/3] serial: allow selecting MSM debug UART
+ with ARCH_IPQ40XX
+Message-Id: <171320668672.434664.16356200408384700559.b4-ty@linaro.org>
+Date: Mon, 15 Apr 2024 19:44:46 +0100
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Mailman-Approved-At: Mon, 15 Apr 2024 19:11:44 +0200
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14-dev
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,12 +96,23 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-Hey,
+On Mon, 15 Apr 2024 12:49:25 +0200, Robert Marko wrote:
+> Currently, DEBUG_UART_MSM depends on ARCH_SNAPDRAGON only, but IPQ40XX
+> devices also use the same UART HW so they can also use the debug UART.
+> 
+> So, allow selecting DEBUG_UART_MSM when using ARCH_IPQ40XX as well.
+> 
+> 
 
-> Do I need to switch back to only convert i.MX93 11x11 EVK to
-> OF_UPSTREM? 
+Applied, thanks!
 
-That could be an idea. I can take over the switch for the other devices
-when I have some time to perform the debugging.
+[1/3] serial: allow selecting MSM debug UART with ARCH_IPQ40XX
+      commit: aa7fdad4c87d5c665e0f1b74cf7986768d452a4e
+[2/3] serial: msm_serial: remove .clk_rate from debug UART
+      commit: aaba69b461ff7c3118272964d3a807a030277e28
 
-Mathieu
+Best regards,
+-- 
+// Caleb (they/them)
+
+
