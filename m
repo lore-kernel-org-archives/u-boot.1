@@ -4,78 +4,120 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D715EC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 09:49:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE4B9C00A94
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 09:52:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37D94880F8;
-	Mon, 15 Apr 2024 11:49:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 0E9DC88190;
+	Mon, 15 Apr 2024 11:52:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="tZzoU69z";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="fHVb39FD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 629B1881B6; Mon, 15 Apr 2024 11:49:35 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id 12D20881FE; Mon, 15 Apr 2024 11:52:42 +0200 (CEST)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DD8E87D66
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 11:49:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5860C87D66
+ for <U-Boot@lists.denx.de>; Mon, 15 Apr 2024 11:52:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=4835aa2b69=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43F7GpiZ028141; Mon, 15 Apr 2024 11:49:21 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=sykT+1TMX1qERK825VelwYL6Akp5dbtzv6AJFmemsEI=; b=tZ
- zoU69zpq7B6L2hxjffgA1pd3EqhTt5Hz7+49Dz/YsHGqsUrPcK97r3CnWpX/a4aP
- hd3h5pNMdJVAaQgHRh3dGeEzNG5OcKFOLKZ5DnD3hMuaeXQGK/8tNRczcPO5+og8
- Su3aj/sOYUAKl111mmMgRaGrWV3FcrQ/jv/WyegrG4iue/ZmFUPZJ6UwS353FlUt
- WZ7sAAFpUfrmT1HwDUTAsqxmFBviDburYtxfoCkPJjX87ckLRar9BmPwDlZ9FkkK
- yM1hVSEIGgksVIr5bqksUQ9dVC3KA9qb32sR2+xbcSkrljkxczPMrxORm/UzUyce
- jAy7b1oCAn2rGPnw1I8Q==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff646twk-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 15 Apr 2024 11:49:21 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 828294002D;
- Mon, 15 Apr 2024 11:49:17 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CBC142122EC;
- Mon, 15 Apr 2024 11:48:48 +0200 (CEST)
-Received: from [10.48.86.98] (10.48.86.98) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Apr
- 2024 11:48:48 +0200
-Message-ID: <f808ec3d-966c-43e6-87be-18e742f976b3@foss.st.com>
-Date: Mon, 15 Apr 2024 11:48:47 +0200
+ dmarc=pass (p=none dis=none) header.from=samsung.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jh80.chung@samsung.com
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20240415095234epoutp0477567a5b0143acb12e1062f5c949d9ca~Ga1y8PdTQ1344813448epoutp04F
+ for <U-Boot@lists.denx.de>; Mon, 15 Apr 2024 09:52:34 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20240415095234epoutp0477567a5b0143acb12e1062f5c949d9ca~Ga1y8PdTQ1344813448epoutp04F
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1713174754;
+ bh=ZKg09ILm1BZAt/PRQ0NmX4LO2KbFEJ7nV21quTXocMw=;
+ h=Date:To:Cc:From:Subject:References:From;
+ b=fHVb39FD4xnY6fzDCLg2nt42CYs6ZUK44J3LGS8QEEemtJH4OCnOBrln7QSoyKPU7
+ eHcoWpXz0jN1IxE44X33ypau5cc/rF/DruutvwDRswX9MT7sGSDVSFyWfMiLly+Yyy
+ ZfoYSjle6H8Xi8+4p74EoJSOJSmbM+U7FiEHMeFQ=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTP id
+ 20240415095234epcas1p43bc7111bfc52814dc3735764b27d161f~Ga1yt7jZ_0503605036epcas1p4a;
+ Mon, 15 Apr 2024 09:52:34 +0000 (GMT)
+Received: from epsmges1p1.samsung.com (unknown [182.195.38.237]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4VJ2XJ4Xm2z4x9Q1; Mon, 15 Apr
+ 2024 09:52:32 +0000 (GMT)
+Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
+ epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ C1.C4.09662.0E8FC166; Mon, 15 Apr 2024 18:52:32 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
+ 20240415095231epcas1p4106945fe2de51e77e1fd60684c3c83bb~Ga1wWWFgK0503705037epcas1p4T;
+ Mon, 15 Apr 2024 09:52:31 +0000 (GMT)
+Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20240415095231epsmtrp12af03e2257e6ee3299ef3d7a03a50ccd~Ga1wVlpkP2511725117epsmtrp1o;
+ Mon, 15 Apr 2024 09:52:31 +0000 (GMT)
+X-AuditID: b6c32a35-2b3fa700000025be-d3-661cf8e0cac8
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 39.4F.08390.FD8FC166; Mon, 15 Apr 2024 18:52:31 +0900 (KST)
+Received: from [10.113.113.235] (unknown [10.113.113.235]) by
+ epsmtip2.samsung.com (KnoxPortal) with ESMTPA id
+ 20240415095231epsmtip2bd7266797a49061258deedd72f9a66d4~Ga1v43oSs2041920419epsmtip2U;
+ Mon, 15 Apr 2024 09:52:31 +0000 (GMT)
+Message-ID: <6b1625a6-c5b8-4f18-8e3b-0e268936ae4b@samsung.com>
+Date: Mon, 15 Apr 2024 18:52:30 +0900
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: stm32: Initialize TAMP_SMCR BKP..PROT fields on
- STM32MP15xx
 Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Igor Opaniuk <igor.opaniuk@foundries.io>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240414184028.147067-1-marex@denx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240414184028.147067-1-marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <U-Boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Linus Walleij <linus.walleij@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Yang Xiwen
+ <forbidden405@outlook.com>, Jaehoon Chung <jh80.chung@samsung.com>
+From: Jaehoon Chung <jh80.chung@samsung.com>
+Subject: [GIT PULL] Please pull u-boot-mmc master
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.86.98]
-X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-04-15_08,2024-04-09_01,2023-05-22_02
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprLJsWRmVeSWpSXmKPExsWy7bCmnu6DHzJpBi1T5Cz+3dzDbnHjVxur
+ xck3V1kspvxZzmTRuvIOm8XUSZvZLd7u7WS3ODz1A6MDh8eHj3Eerw6sYvc4MeESk8eda3vY
+ PM7e2cHosXP2PiaPza9fMHv0bVnFGMARlW2TkZqYklqkkJqXnJ+SmZduq+QdHO8cb2pmYKhr
+ aGlhrqSQl5ibaqvk4hOg65aZA3SakkJZYk4pUCggsbhYSd/Opii/tCRVISO/uMRWKbUgJafA
+ tECvODG3uDQvXS8vtcTK0MDAyBSoMCE74/rlTywFr8QqVk14xdLA+F6wi5GDQ0LAROLkYpEu
+ Ri4OIYEdjBJXrjSxdDFyAjmfGCVWTuaBSHxjlDh3aC4zSAKkYdqxXjaIor2MEvt3GkHY7xkl
+ 1uwIA7F5Bewk1jy+wgKygEVAVeLtbWaIsKDEyZlPwOaLCshL3L81gx3EZhYQl7j1ZD4TiC0i
+ oCfx+OxRVpC9zAKzmCS23/sFtotNQEdi+7fjYEXCAoYSj2+eYIVolpfY/nYOM0iDhMBMDokt
+ LTNYIA51kXi8egPU0cISr45vYYewpSRe9rexQzQ0M0osXXKQFcLpYZT413CdDaLKWGL/0slM
+ IC8wC2hKrN+lD7GNT+Ld1x5WSNDxSnS0CUFUq0hcev2SCWb+3Sf/WSFsD4mufzPByoUEYiUu
+ LeKcwCg/CyksZiH5fxaSd2Yh7F3AyLKKUSy1oDg3PbXYsMAQHr3J+bmbGMHpVMt0B+PEtx/0
+ DjEycTAeYpTgYFYS4b0mJ5kmxJuSWFmVWpQfX1Sak1p8iNEUGCETmaVEk/OBCT2vJN7QxNLA
+ xMzI2MTC0MxQSZz3zJWyVCGB9MSS1OzU1ILUIpg+Jg5OqQammZ8bF3bP+3HOpEPYM+8Xj8UH
+ G8m6l/fLz6xextW6+ZdLWv/bfyyFd5QZ2bPL0j055svG7Tlm/VzecT2HZpvr+jDXnBOWvbeX
+ 2Px5y+bg/3fOvk7ZiCS9JHuHxjaxbKH/ay8fUArOPC5QWZ1Xd4p/3sXiDZ//mC3a783iH7ly
+ IbNZ0653Zmuu/omf+/nLym9Sl/vzP1l9cZv6JOFpUsSmjaIGi9P5b2q2++f1rXtvu+lcWZn5
+ rOdb5Ot/fXmx6WrB7Lw3v90OxMsU7l9ociLV93r1vbef72ndqD4SWrR84cutwUnf+2ut2482
+ qC2vK1b9qZLLwyg6S1ZpyjvHaM9HVa0nkqVX/3eXKPi12UtPiaU4I9FQi7moOBEASQ8mwjAE
+ AAA=
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrALMWRmVeSWpSXmKPExsWy7bCSvO79HzJpBv9vSlj8u7mH3eLGrzZW
+ i5NvrrJYTPmznMmideUdNoupkzazW7zd28lucXjqB0YHDo8PH+M8Xh1Yxe5xYsIlJo871/aw
+ eZy9s4PRY+fsfUwem1+/YPbo27KKMYAjissmJTUnsyy1SN8ugSvj+uVPLAWvxCpWTXjF0sD4
+ XrCLkZNDQsBEYtqxXrYuRi4OIYHdjBL37z5ng0hISXx+OhXI5gCyhSUOHy6GqHnLKPFk5Uwm
+ kBpeATuJNY+vsIDUsAioSry9zQwRFpQ4OfMJC4gtKiAvcf/WDHYQm1lAXOLWk/lgrSICehKP
+ zx5lBZnJLDCLSWLml4WMIAk2AR2J7d+OgxUJCxhKPL55ghVkPrOAusT6eUIQc+Qltr+dwzyB
+ UWAWknWzkKyYhdAxC0nHAkaWVYySqQXFuem5xYYFRnmp5XrFibnFpXnpesn5uZsYwZGipbWD
+ cc+qD3qHGJk4GA8xSnAwK4nwXpOTTBPiTUmsrEotyo8vKs1JLT7EKM3BoiTO++11b4qQQHpi
+ SWp2ampBahFMlomDU6qByWXarl079d+kCoYH2XFVsM1IELvue+xh/C3xJWtnrD8X+8fU6Oqt
+ b37Kaz/nPHtlGP5nyqolYZvm/6tfHKm5cNKRpVvbc9J+pK5f/VD7RbVPoX7yjceOpwz/PzQX
+ PbE84lzm5fv1whyTJKeZhBavezPXrPjL2+/cVvO14rdZxQns5Hp2Vlnl5WRdxtWsv9g4C04e
+ fKzW9eFLlfQtzcsT5yYtjfi3W1x8vpXQzd0X9Wfv2XMxIOmDcJLt56a0q5mXczavnXT9caR4
+ atYm9stPb65Nf5RVsTO4Y43vtqSbdqcWVyvEh7KU37+cFzrZK2j/9rD68GU5s37JCFlMU7gU
+ fMbqmt6OP9euPTny/uvEwvOLlViKMxINtZiLihMBOe1slAMDAAA=
+X-CMS-MailID: 20240415095231epcas1p4106945fe2de51e77e1fd60684c3c83bb
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20240415095231epcas1p4106945fe2de51e77e1fd60684c3c83bb
+References: <CGME20240415095231epcas1p4106945fe2de51e77e1fd60684c3c83bb@epcas1p4.samsung.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,91 +134,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Dear Tom,
 
+Please pull u-boot-mmc master into u-boot master branch.
+If there is any problem, let me know, plz.
 
-On 4/14/24 20:39, Marek Vasut wrote:
-> In case of an OTP-CLOSED STM32MP15xx system, the CPU core 1 cannot be
-> released from endless loop in BootROM only by populating TAMP BKPxR 4
-> and 5 with magic and branch address and sending SGI0 interrupt from
-> core 0 to core 1 twice. TAMP_SMCR BKP..PROT fields must be initialized
-> as well to release the core 1 from endless loop during the second SGI0
-> handling on core 1. Initialize TAMP_SMCR to protect the first 16 backup
-> registers, the ones which contain the core 1 magic, branch address and
-> boot information.
-> 
-> This requirement seems to be undocumented, therefore it was necessary
-> to trace and analyze the STM32MP15xx BootROM using OpenOCD and objdump.
-> Ultimately, it turns out that a certain BootROM function reads out the
-> TAMP_SMCR register and tests whether the BKP..PROT fields are non-zero.
-> If they are zero, the BootROM code again waits for SGI0 using WFI, else
-> the execution moves forward until it reaches handoff to the TAMP BKPxR 5
-> branch address.
-> 
-> This fixes CPU core 1 release using U-Boot PSCI implementation on an
-> OTP-CLOSED system, i.e. system with fuse 0 bit 6 set.
-> 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Simon Glass <sjg@chromium.org
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
-> 
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-> index dd99150fbc2..138a6d6b614 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-> @@ -14,6 +14,7 @@
->  #include <asm/arch/sys_proto.h>
->  #include <dm/device.h>
->  #include <dm/uclass.h>
-> +#include <linux/bitfield.h>
->  
->  /* RCC register */
->  #define RCC_TZCR		(STM32_RCC_BASE + 0x00)
-> @@ -41,6 +42,9 @@
->  #define TZC_REGION_ID_ACCESS0	(STM32_TZC_BASE + 0x114)
->  
->  #define TAMP_CR1		(STM32_TAMP_BASE + 0x00)
-> +#define TAMP_SMCR		(STM32_TAMP_BASE + 0x20)
-> +#define TAMP_SMCR_BKPRWDPROT	GENMASK(7, 0)
-> +#define TAMP_SMCR_BKPWDPROT	GENMASK(23, 16)
->  
->  #define PWR_CR1			(STM32_PWR_BASE + 0x00)
->  #define PWR_MCUCR		(STM32_PWR_BASE + 0x14)
-> @@ -136,6 +140,18 @@ static void security_init(void)
->  	 */
->  	writel(0x0, TAMP_CR1);
->  
-> +	/*
-> +	 * TAMP: Configure non-zero secure protection settings. This is
-> +	 * checked by BootROM function 35ac on OTP-CLOSED device during
-> +	 * CPU core 1 release from endless loop. If secure protection
-> +	 * fields are zero, the core 1 is not released from endless
-> +	 * loop on second SGI0.
-> +	 */
-> +	clrsetbits_le32(TAMP_SMCR,
-> +			TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPRWDPROT,
+BTW, I'm checking other pending patches in more detail.
+After checking, I will apply them into u-boot-mmc. Sorry for too late.
 
-Hi Marek
+Best Regards,
+Jaehoon Chung
 
-there is a typo, you used twice TAMP_SMCR_BKPRWDPROT :
+CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/20345
 
-TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPRWDPROT  => TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPWDPROT 
-                                    ^~~~~                 
+The following changes since commit b03b49046af5dfca599d2ce8f0aafed89b97aa91:
 
-Patrice
+  Merge https://source.denx.de/u-boot/custodians/u-boot-usb (2024-04-14 15:58:31 -0600)
 
-> +			FIELD_PREP(TAMP_SMCR_BKPRWDPROT, 0x10) |
-> +			FIELD_PREP(TAMP_SMCR_BKPWDPROT, 0x10));
-> +
->  	/* GPIOZ: deactivate the security */
->  	writel(BIT(0), RCC_MP_AHB5ENSETR);
->  	writel(0x0, GPIOZ_SECCFGR);
+are available in the Git repository at:
+
+  git@source.denx.de:u-boot/custodians/u-boot-mmc.git master
+
+for you to fetch changes up to 3657ef738ad6aa2c32c569e7ae67a5557343f7d0:
+
+  mmc: cv1800b_sdhci: Remove the unused argument (2024-04-15 17:58:59 +0900)
+
+----------------------------------------------------------------
+Heinrich Schuchardt (2):
+      mmc: Avoid buffer overrun in mmc_startup()
+      mmc: Don't suggest to build modules in Kconfig.
+
+Jaehoon Chung (1):
+      mmc: cv1800b_sdhci: Remove the unused argument
+
+Jonas Karlman (1):
+      mmc: Add SPL_MMC_PWRSEQ to fix link issue when building SPL
+
+Linus Walleij (1):
+      mmc: arm_pl180_mmci: Rely on DM
+
+Marek Vasut (7):
+      mmc: Drop unused mmc_send_tuning() cmd_error parameter
+      mmc: tmio: Check INFO1 for completion during DMA transfer
+      mmc: renesas-sdhi: Stop transmission in case tuning block transfer fails
+      mmc: Convert hs400_tuning flag from u8 to bool
+      mmc: Add generic tuning flag
+      mmc: renesas-sdhi: Do not access SCC during tuning in send_cmd callback
+      mmc: Unconditionally call mmc_deinit()
+
+Yang Xiwen (3):
+      mmc: hi6220-dwmmc: handle clocks and resets if CONFIG_CLK and CONFIG_DM_RESET enabled
+      mmc: dw_mmc: Don't return error if data busy timeout
+      mmc: hi6220_dw_mmc: add fifoth_val to private data and set it in .probe
+
+ drivers/mmc/Kconfig           | 23 +++++++++-----
+ drivers/mmc/Makefile          |  2 +-
+ drivers/mmc/am654_sdhci.c     |  2 +-
+ drivers/mmc/arm_pl180_mmci.c  | 66 ++-------------------------------------
+ drivers/mmc/cv1800b_sdhci.c   |  2 +-
+ drivers/mmc/dw_mmc.c          |  4 +--
+ drivers/mmc/fsl_esdhc.c       |  2 +-
+ drivers/mmc/fsl_esdhc_imx.c   |  2 +-
+ drivers/mmc/hi6220_dw_mmc.c   | 72 +++++++++++++++++++++++++++++++++++++++++--
+ drivers/mmc/meson_gx_mmc.c    |  2 +-
+ drivers/mmc/mmc-uclass.c      | 21 +++++--------
+ drivers/mmc/mmc.c             | 38 +++++++++++++++++------
+ drivers/mmc/mtk-sd.c          | 21 ++++++-------
+ drivers/mmc/octeontx_hsmmc.c  |  8 ++++-
+ drivers/mmc/omap_hsmmc.c      |  6 ++--
+ drivers/mmc/renesas-sdhi.c    | 21 +++++++------
+ drivers/mmc/rockchip_dw_mmc.c |  2 +-
+ drivers/mmc/sdhci-cadence.c   |  2 +-
+ drivers/mmc/tmio-common.c     |  8 ++++-
+ include/mmc.h                 |  9 +++---
+ 20 files changed, 179 insertions(+), 134 deletions(-)
