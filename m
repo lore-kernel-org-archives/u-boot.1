@@ -4,51 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62CBEC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 12:45:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96A87C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 12:46:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C5B9881B6;
-	Mon, 15 Apr 2024 14:45:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 104C88814B;
+	Mon, 15 Apr 2024 14:46:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="B4rSZcVv";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="tUkIy3Jl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38E6D8818C; Mon, 15 Apr 2024 14:45:03 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6D56688189; Mon, 15 Apr 2024 14:46:04 +0200 (CEST)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 221CB88189
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 14:45:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F082188089
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 14:46:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1713185066; x=1713789866; i=xypron.glpk@gmx.de;
- bh=F9WoIvS0JedWuRDtxSJCA6C6ms0PVVEbIAZasB4uZlc=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=B4rSZcVvPaoYj+rrTPmEvkjvETWpdXlp80hg4arZn/yKXmGxdZ1/vaKPRylZhKds
- FMbAtfp0bb3kPi7cF7oE3QCIUJd4Ij/uWTHMXHWDeEVBZG5Brcag7OwBCPSwpLuPk
- nmZKaS/ZIyuzwO+zMeI3zTQxZagaPWWgP7VDsITLOJnnYM4e5du+HcBOesCGh3daC
- D44iBrO0Ax39J9qrSIAr+04PUnf9T1f240ii2F1OCDzioiSJJNAtRbCcqnpXsoqb2
- 1qL/6JBjtT/fGdgR5Pnt49FNFXWHFIaLc5bphdqMAn/Y1fTc8CRNUO26PjhS+qT2r
- t9rnabn9jkAbYtqhVQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N1OXZ-1suCbR2xT9-012q97; Mon, 15
- Apr 2024 14:44:26 +0200
-Message-ID: <6812d5f7-54fb-459d-8fd1-d899af62d92d@gmx.de>
-Date: Mon, 15 Apr 2024 14:44:23 +0200
-MIME-Version: 1.0
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=UuXLFfiVgH/aVBEuBRokBB/OHEvzTqaOg4pfTIBovztSWXgRNxvGgCXpoayODVcaGcdCMjEB9U1d/xDsmAtCuCeT4kiD7RTt6BBnKWVZ+J0ppY6G6uDTs6CoP1pWiLCSzUf7vHuVn79s6E3es6TMxImnd7lcpV7TuD50U5kYtUM6bY8XUu08j4ngPR+50aaSwt2CAfpmseN21nD7AJm35Py6Fo0XnhdliSsocIQeNA5v2zG1Bvp7WNYoVFg9EI37Fuojk8/A8HHpl3ZT5+ScHE7KC57EENWEVt3QFzWyYdu/MchUk+hpnp968DzplUjLAVs6Rpg8Ypsk2dHXleEEtw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=n7hrdobd4y6h4Pf23px4A1h6adp/5qrZQl3O79MTy84=;
+ b=XRdn03syEzB/pB1sLEjOWd8mG+B0W03Bo8P6oE/L4KCD4VAfFDFG0YF6vmrCJwNN2yKiG8dF8Gb0LdOtFkdI6P7enGoPDnPZMSu9wNNiZMx1WimoulTj5sw01i0RknO8mrkNZzkuKkhmHvfzsJ53msc5ZO3SHI/l70NOvU6DTITF/62qbQSYLWdyV53wRRSk0GFSB15NO4SYUCfGQBrxp4eCShCZoTgMd7QBlE/YzhW2YWqNvsMw79XLcXryu1rWzeo1UJk6GpdErHGEeUiUv4u8bnMrYCadlB+U/g6F0esH++uAGxqdexZek2zd8NwSyGPYmIDkpXb17O4/pRQRHw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=n7hrdobd4y6h4Pf23px4A1h6adp/5qrZQl3O79MTy84=;
+ b=tUkIy3JlczZ5afYSCyL7bbGW0pNwbnVHIkCe2hU7ZEdywXfA16QRhLaivXgOScvSdJWbyNs6oooH7LA/jJcjnZGMOKmnt52Yyjg0N18D7tqrzaAExl/4HkJNXpavbcEC48tyaQFGfURH8bq2kD0GMOZP7USF5cAf8DToRjMPoi0=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
+ by DS0PR12MB7875.namprd12.prod.outlook.com (2603:10b6:8:14d::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.50; Mon, 15 Apr
+ 2024 12:45:59 +0000
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::6622:ec76:9367:3907]) by SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::6622:ec76:9367:3907%2]) with mapi id 15.20.7409.046; Mon, 15 Apr 2024
+ 12:45:59 +0000
+Message-ID: <6ecd5cf3-f961-4a9b-a064-55648424780d@amd.com>
+Date: Mon, 15 Apr 2024 14:45:35 +0200
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 2/4] Kconfig: Add missing quotes around source file
-To: Michal Simek <michal.simek@amd.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
  Bin Meng <bmeng@tinylab.org>, Elon Zhang <zhangzj@rock-chips.com>,
@@ -69,29 +77,117 @@ Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>,
  u-boot@lists.denx.de, git@xilinx.com
 References: <cover.1713180904.git.michal.simek@amd.com>
  <78064c48fd9297b43eae0abdec4783004ea74a07.1713180904.git.michal.simek@amd.com>
+ <6812d5f7-54fb-459d-8fd1-d899af62d92d@gmx.de>
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <78064c48fd9297b43eae0abdec4783004ea74a07.1713180904.git.michal.simek@amd.com>
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <6812d5f7-54fb-459d-8fd1-d899af62d92d@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:LzF3NYqcxY7LHQyMIgg3fo5GqsJLBvgW2KgsAOXQqcrtCznaUP6
- lTMmuxwySlZmhM3A1RkmJjbPFJ97vvM5/dbHSKMlNT5VegiCRfsSRyfyDwm0kYTVyfVEz0F
- rZK/N2mmwGk/nMI3xWlVffK0V0GytfoD2gUA8Nm/AlYYFW/Ks2OxqqXAKQdlFRxByy7zZnR
- NGDhWVjoGyNbVIyZ1fvPA==
-UI-OutboundReport: notjunk:1;M01:P0:pfGXcm132dg=;v5WabRce1j5FIrkf8rxtS8S7W9i
- o7Fm8VlvnsQnKSfPc4/6PIfJAYeZKvtti77nm5p/NUuorLLVqsl8DcCQ7zBuZxEW9OdYfLXsD
- gZfQ3DXJg3wbYUDox5eHI3dd/FDsQPeUrLo8ZcbAeYANEnCNfe61SgyXQhpXVn802vmxKhlh5
- yOr0PxNceIAeU5jTQvbKE6PzsZ1qYIoMzWgiBRRZI4DyMc51EyRzqDg0Y4u5IA+rLJhRixQ2e
- y9c0cvpOjcFRwsQsW7d3jh6hHbMgzzt46CP3gNHGVgCMo/71ZqhtjlyaMh4U1IIZLIVk1FbJD
- jtQV1mbs8X6v0LzyZxgefr6AvzFcSlY9/gFBSMpk/3G3OOE4EsGbSKfwm60wTTkEha6iz1o8c
- FjVlECwCQHwy7vw8OSYp7bNw1IrXxaxKndOzzr9pnLuS1fcyZbA5YemepPIlIOf5ih3xgswMZ
- TsskHdGl7/93e/I4HG7BAE5gLHbZWzAuto2Kg8nogw0O0IBVyaLXTyeTTE9PIVPd9T8tKjN6/
- EYnNVpCtuyTbbFWN4cFRtYYb6GcIlTuD6biFsWOM+kBhwekYhpYIEGL1+lbdhEcTIdOpJosPX
- 3KXrP9eGC2zOb2iBXffZaVGVK/MFqzOOEoV2VkS74k5gTuQCQoXNjrbsMvYRFN0np50SbTiW9
- TKkIhkh3hRZUL9rEZR+M9wCUMQfHtPgfuXN4Obz94s+oR8uBU+RZW3NTeRgUSP1QP21l6DNbr
- 3eLfFAhVcNsCl3IXBpMuoSfIaynt3WbvKnfrOxbihrpgOCffq96SZ5G3fQnvsxLgmu7JHocY3
- as/bmJVIqJVRCb/GzEx7DhufTHLikwxPr9MJvNi9HaLJ5dgSX2PV2ZMC3YEDeFb96PCRuI2X2
- kfhMwHZrWPipl1clmNHgfrBkRR0n/wlopTfc=
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1P189CA0002.EURP189.PROD.OUTLOOK.COM
+ (2603:10a6:802:2a::15) To SJ2PR12MB8109.namprd12.prod.outlook.com
+ (2603:10b6:a03:4f5::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|DS0PR12MB7875:EE_
+X-MS-Office365-Filtering-Correlation-Id: bdfdac76-c573-41cf-b6f5-08dc5d49ffe0
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: fSHnvQC2SSWOOYkGn0DIMnm9XDTzrpjON4xxdb435wTbKX6vWvA0AMWxQQ3nxuSTo8ozrLVImlGQC3NbISRou9DQn/DBxtPaoFICjSVAvVZ15FIdfq7x2PLLi57VOWp9a5QbduRtQXGI2PF7+j46hQDuOLFtR3An7SGRTpQRHykFdOPMxISr/p7jFDbxfD0WY3yZ8rlvVCiPL/OZ3tjPUdHOSGlkTUZn3kg/DnjehwQFwRy3zE26XkeSaXMpoUTPmulCqpUsh3Sn+cuBZIipBG7gLXCzvD19gD+Ei++k9dhdtLVEn6PuaOcs4tH2vY3kSRg9eIYonD/bhgLZVBxmUIhCZULLqQa/6Kdn8CSDF9u+Y4Jg0s0JUriu+jDP/Xgr4gF+MRgdO3Lzvg/G+GsyYlDvH2Zhksj++vcyfO6cdaWLeJMK7u2CbOIbGNO/wHxK06H8n09FlbTjHVeqw4vLKkZfsdvo3wutIXEiRFjAkY+XkxFLIF0piiejN/bQ+8YJ0pSXUX2GFa6ekldBTvgiEe1hfSCHlt3r3Wmop1/AhSk2Y8vtzQaD2mXqBdrHoKnFDsxF1BITUkaxKsiQWaY6jtOBErSXYxDy0rwxovlQ3rFsbvvupWgH+7ADxmBUyDoBWxH7AwN5RIET5+QOk3n8kiqPGcDGrz9yGkW/NS59QaY=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(376005)(1800799015)(7416005)(366007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QWFneENLZjdXQnJubE1lRXZpU2JyWjBxWkZYaU05U3htcjl3bTRlQStKb0hV?=
+ =?utf-8?B?TWt4MmtFb0ttUlF4WDdkT0pFclRhdmV6SFVGTWxNOXFUQWFyNWJNM0dQZVBs?=
+ =?utf-8?B?QzNXeFE5Ry9NV05ZYUVpT3lyaUt4UVlPelhMdHYxcHhqb2pDT0VMdGpMN3Bi?=
+ =?utf-8?B?dE9Ddi9DeEZWUngrSGlNRzVwU3RET1dFVmthK0lZZkRyZWwxcUxaWVJhTXdo?=
+ =?utf-8?B?ZCtmN1pNbTdPN3hlcTlERDU5VllzbzRWZ0VIdWhSRmpVWXJHZ0FGdnNOQWZt?=
+ =?utf-8?B?dTRralcrOUFKL3FOdmNTVkZpSU1FSzYrYWhaR040dVgveGcxb2IxdzdHZmV5?=
+ =?utf-8?B?NGlYcFdUSllCbVpyUFFyYk0vRm5TcWt4UjdmQ2swVXRzVVNXM09nSXZaOXRm?=
+ =?utf-8?B?cjdDY1FnTVV3VExBTkFMYkhMdEtWVkdIUGpSUC9KYno1VEFhUGxOaHRuc1lE?=
+ =?utf-8?B?RjB4d3E3YnRNU2dxTHJUc0xualQ5K09WNm9YaEZQR2RKc29aNGZwN3pJNVdW?=
+ =?utf-8?B?SlVKS2tJeUJBeGFQMmN3NFlyYUJxUzd5cVBPSjI4RkZTTGdKRkllOW1VcHVL?=
+ =?utf-8?B?endpWlJoYUlSZFpEQlk4aVVKcjNtRjQ4QlBKZEpGS05DMkpqVlExc0MxUXRk?=
+ =?utf-8?B?QlZOcC9hczhpM0NwU0FYbStqZ0trZWJ4ck9kNFUyTm9UM0QrczFFWGpoekds?=
+ =?utf-8?B?KzBCNkF0SVRvQzE2N0tBRnRBRGlha0drSzVCTDV4bUp2dGhLenlQYmxYQ0d0?=
+ =?utf-8?B?WjJ3bGE2NkJ4YVB1dHdUckJJeFRGWVd2eXk0R0V4TWNzTXJpN3R2TzhOU056?=
+ =?utf-8?B?K2xna25reEowM0k2QlBxREVXU2M5Wi9JbDFsT08wTmtJTVZKOFEvdUlmVkRF?=
+ =?utf-8?B?dWZmSTRaVnpZUmhSZjBCTDRKaDFBcmVOYTdmRDkzdEhzNFVmYjZKNE1TbzJK?=
+ =?utf-8?B?SEthQzFaSC9wdlEzamM4YXBaMG1zY0w4SFJOMGthSW45NytKL3lIQ2lFVFZr?=
+ =?utf-8?B?MERwbWxxZVM4UlhqTVRxdEdrbDZVR1lnN0RjdjlwYU9LcnN5Ri94ZHNsZ2I1?=
+ =?utf-8?B?VWlDd1BhcnozL0FDRnB5RFV1MEE1QWFUb3F2N1BWL0VtOUp6WkdrdVFNQm1X?=
+ =?utf-8?B?REorY3JRZFFsV29VYXZHdHpmaU5QTE5QTFVTQzZveHZRSURhZ0RmZ3VyQ2xx?=
+ =?utf-8?B?SlZrMDFyeXpPSk13NG1VMnRkaEdvR0ZOTlltL2EvT2dHNzloOU8vTzQvdlE3?=
+ =?utf-8?B?bjlhZXhlVmpTRVpGU09lUURnejFXTjN3RHQ2N2JuU05aSmFQV3ZMWFR3UHpm?=
+ =?utf-8?B?cEZXaEl0Zi93UXdGSnlYTnl6ZTlLNVdHK0RrMVZHNlZXT20xU0NQVGg4a0tE?=
+ =?utf-8?B?S0Q2bkVUOHdsT1VGTW1UdWpyOFE2VjdXUEFmRFJMZHJ4cDNRajR5VCtqNmlH?=
+ =?utf-8?B?OUNZVWsxZ05VNXZKcjAwN1B5azVqV3huSXlHWGFobkxxTEVXTEJaeGQwTFFS?=
+ =?utf-8?B?Ti9NL3Z5dURqMWY5a1VteG1ZQnRSRlB4a0N2bEo4SDF0dEgzRzMwWmFIVUNz?=
+ =?utf-8?B?K0dNc05IbU5MYTJMOWR4NkdiMGt1Z3pOcXNxeWRBazZyOWJYbWxGV2MrWGMv?=
+ =?utf-8?B?SmdaNVZIdGZaeE5YT3p5Tk5VbWRETlRBNUJET2cwcGJSaEVMcm9JM3YwY01S?=
+ =?utf-8?B?R3duekppWnR6bHc0WFFTWFFOR1hCSlRqL2YydDQ2WE9VUXN4MTZKTkdBZ3d2?=
+ =?utf-8?B?K0VhY3RteERDQ1ZaWWkranpXSW1xWjA0MjlNSitCNHBVSEs5MmcwckE4UzYw?=
+ =?utf-8?B?YTdPUlFpdW8xamJUcUo5ZndkOFlMNE5rSWJ3cmxZUVF5OTZsWUtIa0g0bzlD?=
+ =?utf-8?B?K09PVTRKSzBTRHZuRElwSTEwbHFIQ0w3bmRWNWU3OW5LeHJLUmRYZXN0dTRQ?=
+ =?utf-8?B?YVlEL0MrTFI4bDRxMitlMlBtV0xFVUUyR3dQNHpJa0svcTVYZ0hqL1AyWWdr?=
+ =?utf-8?B?OCtlMTJONGo2bWF1VkdGUS9rRHJjN0dDUGVVeTBncGRKQ3VLYlZBZXMvQTRz?=
+ =?utf-8?B?RkViQ3N3Nlh3NzJVdGFXZ1UrSDI4b2krUWM3TWZwUUJwaW0yOFB4d1hjZ1RU?=
+ =?utf-8?Q?e+06BbqnWKEGQ1DcKLIQsECSo?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bdfdac76-c573-41cf-b6f5-08dc5d49ffe0
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2024 12:45:58.9330 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: CBfoj3dXX9MJRDeiBBspl0BsL5FznrlYkdvHYTpYcTb0Il+52/YqgUTQYxID9FIg
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB7875
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,168 +204,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 15.04.24 13:35, Michal Simek wrote:
-> All errors are generated by ./tools/qconfig.py -b -j8 -i whatever.
-> Error look like this:
-> drivers/crypto/Kconfig:9: warning: style: quotes recommended around
-> 'drivers/crypto/nuvoton/Kconfig' in 'source drivers/crypto/nuvoton/Kconf=
-ig'
 
-Should we add a qconfig.py test to our CI?
 
-Best regards
+On 4/15/24 14:44, Heinrich Schuchardt wrote:
+> On 15.04.24 13:35, Michal Simek wrote:
+>> All errors are generated by ./tools/qconfig.py -b -j8 -i whatever.
+>> Error look like this:
+>> drivers/crypto/Kconfig:9: warning: style: quotes recommended around
+>> 'drivers/crypto/nuvoton/Kconfig' in 'source drivers/crypto/nuvoton/Kconfig'
+> 
+> Should we add a qconfig.py test to our CI?
 
-Heinrich
+When things are without warnings that would be the best.
 
->
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
->
->   arch/arm/mach-rockchip/rk3588/Kconfig | 18 +++++++++---------
->   arch/arm/mach-rockchip/rv1108/Kconfig |  4 ++--
->   arch/arm/mach-rockchip/rv1126/Kconfig |  4 ++--
->   cmd/Kconfig                           |  2 +-
->   drivers/crypto/Kconfig                |  8 ++++----
->   lib/Kconfig                           | 18 +++++++++---------
->   6 files changed, 27 insertions(+), 27 deletions(-)
->
-> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockc=
-hip/rk3588/Kconfig
-> index d7e4af31f24c..eb956b097c74 100644
-> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
-> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-> @@ -221,14 +221,14 @@ config ROCKCHIP_COMMON_STACK_ADDR
->   config TEXT_BASE
->   	default 0x00a00000
->
-> -source board/edgeble/neural-compute-module-6/Kconfig
-> -source board/friendlyelec/nanopc-t6-rk3588/Kconfig
-> -source board/pine64/quartzpro64-rk3588/Kconfig
-> -source board/turing/turing-rk1-rk3588/Kconfig
-> -source board/radxa/rock5a-rk3588s/Kconfig
-> -source board/radxa/rock5b-rk3588/Kconfig
-> -source board/rockchip/evb_rk3588/Kconfig
-> -source board/rockchip/toybrick_rk3588/Kconfig
-> -source board/theobroma-systems/jaguar_rk3588/Kconfig
-> +source "board/edgeble/neural-compute-module-6/Kconfig"
-> +source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
-> +source "board/pine64/quartzpro64-rk3588/Kconfig"
-> +source "board/turing/turing-rk1-rk3588/Kconfig"
-> +source "board/radxa/rock5a-rk3588s/Kconfig"
-> +source "board/radxa/rock5b-rk3588/Kconfig"
-> +source "board/rockchip/evb_rk3588/Kconfig"
-> +source "board/rockchip/toybrick_rk3588/Kconfig"
-> +source "board/theobroma-systems/jaguar_rk3588/Kconfig"
->
->   endif
-> diff --git a/arch/arm/mach-rockchip/rv1108/Kconfig b/arch/arm/mach-rockc=
-hip/rv1108/Kconfig
-> index a12216dccf66..28ed0b245812 100644
-> --- a/arch/arm/mach-rockchip/rv1108/Kconfig
-> +++ b/arch/arm/mach-rockchip/rv1108/Kconfig
-> @@ -36,7 +36,7 @@ config SYS_SOC
->   config SYS_MALLOC_F_LEN
->   	default 0x400
->
-> -source board/rockchip/evb_rv1108/Kconfig
-> -source board/elgin/elgin_rv1108/Kconfig
-> +source "board/rockchip/evb_rv1108/Kconfig"
-> +source "board/elgin/elgin_rv1108/Kconfig"
->
->   endif
-> diff --git a/arch/arm/mach-rockchip/rv1126/Kconfig b/arch/arm/mach-rockc=
-hip/rv1126/Kconfig
-> index 55b11121203b..ae323ee91235 100644
-> --- a/arch/arm/mach-rockchip/rv1126/Kconfig
-> +++ b/arch/arm/mach-rockchip/rv1126/Kconfig
-> @@ -64,7 +64,7 @@ config SYS_MALLOC_F_LEN
->   config TEXT_BASE
->   	default 0x600000
->
-> -source board/edgeble/neural-compute-module-2/Kconfig
-> -source board/itead/sonoff-ihost/Kconfig
-> +source "board/edgeble/neural-compute-module-2/Kconfig"
-> +source "board/itead/sonoff-ihost/Kconfig"
->
->   endif
-> diff --git a/cmd/Kconfig b/cmd/Kconfig
-> index 8eeb99eea5ed..45c206369518 100644
-> --- a/cmd/Kconfig
-> +++ b/cmd/Kconfig
-> @@ -398,7 +398,7 @@ config CMD_BOOTEFI_HELLO
->   	  for testing that EFI is working at a basic level, and for bringing
->   	  up EFI support on a new architecture.
->
-> -source lib/efi_selftest/Kconfig
-> +source "lib/efi_selftest/Kconfig"
->   endif
->
->   config CMD_BOOTMENU
-> diff --git a/drivers/crypto/Kconfig b/drivers/crypto/Kconfig
-> index 12ef84ca05ca..8b49997030b4 100644
-> --- a/drivers/crypto/Kconfig
-> +++ b/drivers/crypto/Kconfig
-> @@ -1,11 +1,11 @@
->   menu "Hardware crypto devices"
->
-> -source drivers/crypto/hash/Kconfig
-> +source "drivers/crypto/hash/Kconfig"
->
-> -source drivers/crypto/fsl/Kconfig
-> +source "drivers/crypto/fsl/Kconfig"
->
-> -source drivers/crypto/aspeed/Kconfig
-> +source "drivers/crypto/aspeed/Kconfig"
->
-> -source drivers/crypto/nuvoton/Kconfig
-> +source "drivers/crypto/nuvoton/Kconfig"
->
->   endmenu
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index efb77978a652..189e6eb31aa1 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -416,7 +416,7 @@ config TRACE_EARLY_ADDR
->   config CIRCBUF
->   	bool "Enable circular buffer support"
->
-> -source lib/dhry/Kconfig
-> +source "lib/dhry/Kconfig"
->
->   menu "Security support"
->
-> @@ -429,10 +429,10 @@ config AES
->   	  supported by the algorithm but only a 128-bit key is supported at
->   	  present.
->
-> -source lib/ecdsa/Kconfig
-> -source lib/rsa/Kconfig
-> -source lib/crypto/Kconfig
-> -source lib/crypt/Kconfig
-> +source "lib/ecdsa/Kconfig"
-> +source "lib/rsa/Kconfig"
-> +source "lib/crypto/Kconfig"
-> +source "lib/crypt/Kconfig"
->
->   config TPM
->   	bool "Trusted Platform Module (TPM) Support"
-> @@ -1081,9 +1081,9 @@ config SMBIOS_PARSER
->   	help
->   	  A simple parser for SMBIOS data.
->
-> -source lib/efi/Kconfig
-> -source lib/efi_loader/Kconfig
-> -source lib/optee/Kconfig
-> +source "lib/efi/Kconfig"
-> +source "lib/efi_loader/Kconfig"
-> +source "lib/optee/Kconfig"
->
->   config TEST_FDTDEC
->   	bool "enable fdtdec test"
-> @@ -1148,4 +1148,4 @@ config PHANDLE_CHECK_SEQ
->
->   endmenu
->
-> -source lib/fwu_updates/Kconfig
-> +source "lib/fwu_updates/Kconfig"
-
+M
