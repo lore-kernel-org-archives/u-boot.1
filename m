@@ -4,122 +4,123 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F77EC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:59:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E7AC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 07:00:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51CBF88195;
-	Mon, 15 Apr 2024 08:59:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2858F881E7;
+	Mon, 15 Apr 2024 09:00:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="WqLeRvsJ";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="VpUezhQc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82779881C8; Mon, 15 Apr 2024 08:59:02 +0200 (CEST)
-Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
+ id 19B8688188; Mon, 15 Apr 2024 09:00:11 +0200 (CEST)
+Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5D30874B1
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:58:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E686881E7
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 09:00:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
 Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout2.samsung.com (KnoxPortal) with ESMTP id
- 20240415065857epoutp020c9725d45e9c290c39615aae39aae962~GYeNNODtb3257332573epoutp02Z
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 06:58:57 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
- 20240415065857epoutp020c9725d45e9c290c39615aae39aae962~GYeNNODtb3257332573epoutp02Z
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20240415070005epoutp03f1f1b40db174f5f408a660b1167c1fbc~GYfMwB7Ia0186001860epoutp03e
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 07:00:05 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20240415070005epoutp03f1f1b40db174f5f408a660b1167c1fbc~GYfMwB7Ia0186001860epoutp03e
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1713164337;
- bh=zMuwDz48at7KwVijYxDevApbqIny4SWW8GKLeMzDjEg=;
+ s=mail20170921; t=1713164405;
+ bh=6QpkdFAv3Wss8B0kg4VEq+Veyd0546AJdTSWS7L1kRM=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=WqLeRvsJDmDFjBzKLPIJK1n78JniM9uqvGy+8DZrJ4kWhkibz5PE8IEpMoLxgJ3AR
- RAoUpoCu2CasrPMpAiXjNmJAd7AYtWJV6I89h3Z5ydsK4EzcYvvUGIe8Mr9nYVfWIq
- FGGCr2RA9b4e2ZXnW/YH3J/vTMb8C3acbMh3cCbk=
+ b=VpUezhQczmOeIkv48rdo8y25HuYTqJBa3ZKvlduSkx78tNwAxMpCLseK6mv3n1RFT
+ c+fFGG3K8QA08393yThQL2SXuZvutTwR4Gn53tMWYqrIJkCq7/Ofxc8nC4zpAxW1We
+ 9LH5esEZWAVpZ3cjdTI6uhRqsA2LeU3PZx1lFGMg=
 Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20240415065856epcas1p3b77aba2fb78e59f3b6f4ee8a29acb650~GYeM47WGG0164301643epcas1p3T;
- Mon, 15 Apr 2024 06:58:56 +0000 (GMT)
-Received: from epsmges1p3.samsung.com (unknown [182.195.36.144]) by
- epsnrtp2.localdomain (Postfix) with ESMTP id 4VHygz3rPTz4x9QQ; Mon, 15 Apr
- 2024 06:58:55 +0000 (GMT)
-Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
- 41.EB.09663.F20DC166; Mon, 15 Apr 2024 15:58:55 +0900 (KST)
+ epcas1p2.samsung.com (KnoxPortal) with ESMTP id
+ 20240415070005epcas1p229ae4e1449bea18cf2862e9659f13b27~GYfMkBpEZ3156431564epcas1p2R;
+ Mon, 15 Apr 2024 07:00:05 +0000 (GMT)
+Received: from epsmges1p1.samsung.com (unknown [182.195.38.237]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4VHyjJ1vqlz4x9QW; Mon, 15 Apr
+ 2024 07:00:04 +0000 (GMT)
+Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
+ epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 96.1E.09662.470DC166; Mon, 15 Apr 2024 16:00:04 +0900 (KST)
 Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
  epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20240415065855epcas1p331cb957260728d49f263f735bebc26cb~GYeLYvs2e3178031780epcas1p3W;
- Mon, 15 Apr 2024 06:58:55 +0000 (GMT)
+ 20240415070003epcas1p3e4ff0bdb0f31dbf47adf71dd738d34ae~GYfLXPs452619526195epcas1p3f;
+ Mon, 15 Apr 2024 07:00:03 +0000 (GMT)
 Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
  epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20240415065855epsmtrp182dda569372ff6fe4620e035a44b9d29~GYeLYJ8S51169711697epsmtrp1x;
- Mon, 15 Apr 2024 06:58:55 +0000 (GMT)
-X-AuditID: b6c32a37-b863ba80000025bf-6a-661cd02f5ed6
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ 20240415070003epsmtrp1b53ad1a902973c6ab10fb3950417255c~GYfLWLPcW1256112561epsmtrp1r;
+ Mon, 15 Apr 2024 07:00:03 +0000 (GMT)
+X-AuditID: b6c32a35-8da83a80000025be-89-661cd0742b80
+Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
  epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- D8.28.07541.E20DC166; Mon, 15 Apr 2024 15:58:55 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
+ 08.58.07541.370DC166; Mon, 15 Apr 2024 16:00:03 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
  (KnoxPortal) with ESMTPA id
- 20240415065854epsmtip2ab700e8c0f050b0772518bbba3a6d712~GYeLJ0ovA2903429034epsmtip25;
- Mon, 15 Apr 2024 06:58:54 +0000 (GMT)
+ 20240415070003epsmtip12a83b370c9ebc61412ce27ab40925951~GYfLIJaFQ3166331663epsmtip1R;
+ Mon, 15 Apr 2024 07:00:03 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
 To: "'Yang Xiwen'" <forbidden405@outlook.com>, "'Peng Fan'" <peng.fan@nxp.com>
 Cc: <u-boot@lists.denx.de>
-In-Reply-To: <SEZPR06MB69598F7A966ABC6664BD4724963D2@SEZPR06MB6959.apcprd06.prod.outlook.com>
-Subject: RE: [PATCH v2 2/3] mmc: dw_mmc: Don't return error if data busy
- timeout
-Date: Mon, 15 Apr 2024 15:58:54 +0900
-Message-ID: <008601da8f02$618147e0$2483d7a0$@samsung.com>
+In-Reply-To: <SEZPR06MB6959CC3A9319816B2DFA8AA7963D2@SEZPR06MB6959.apcprd06.prod.outlook.com>
+Subject: RE: [PATCH v2 3/3] mmc: hi6220_dw_mmc: add fifoth_val to private
+ data and set it in .probe
+Date: Mon, 15 Apr 2024 16:00:03 +0900
+Message-ID: <008701da8f02$8a73ea90$9f5bbfb0$@samsung.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQG10PZhwJPp9GmYju4dCS4VuJkgUQFf5ku/AjsSt5QCamZEZgIyqpvHsXCiYfA=
+Thread-Index: AQG10PZhwJPp9GmYju4dCS4VuJkgUQD+pn9xAug65FQCw9e32gJoGQiRsWnMUyA=
 Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrFKsWRmVeSWpSXmKPExsWy7bCmnq7+BZk0g8efZS3+3dzDbvFj1RdW
- i7d7O9kdmD3O3tnB6LHx3Q4mj82vXzAHMEdl22SkJqakFimk5iXnp2TmpdsqeQfHO8ebmhkY
- 6hpaWpgrKeQl5qbaKrn4BOi6ZeYAbVJSKEvMKQUKBSQWFyvp29kU5ZeWpCpk5BeX2CqlFqTk
- FJgW6BUn5haX5qXr5aWWWBkaGBiZAhUmZGds27yaqaBPoGLhU8EGxhs8XYycHBICJhILehaw
- djFycQgJ7GCU6L08hw3C+cQocenPV0YI5xujxLc5HSwwLbsnnYFK7GWU2Li2kwXCeQnk/DvD
- ClLFJqAn8X/RQuYuRg4OEYEAiScXFUDCzAJSEk0ndzGC2JwCsRIdqw+BlQgLBEn8OxgDEmYR
- UJXYdGo32C5eAUuJ3qdb2SFsQYmTM5+wQIyRl9j+dg4zxD0KEj+fLgPbKiLgJ/Fm73QmiBoR
- idmdbcwgp0kIPGKXuDnrIStEg4vEof7TjBC2sMSr41vYIWwpiZf9bewQDc2MEkuXHGSFcHoY
- Jf41XGeDqDKW2L90MhPI1cwCmhLrd+lDbOOTePe1hxUkLCHAK9HRJgRRrSJx6fVLJpj5d5/8
- h7rBQ6Lz20H2CYyKs5D8NgvJb7OQ/DALYdkCRpZVjGKpBcW56anFhgXG8MhOzs/dxAhOhFrm
- Oxinvf2gd4iRiYPxEKMEB7OSCO81Ock0Id6UxMqq1KL8+KLSnNTiQ4ymwNCeyCwlmpwPTMV5
- JfGGJpYGJmZGxiYWhmaGSuK8Z66UpQoJpCeWpGanphakFsH0MXFwSjUwRa26xTX/w+krMxkb
- /92tFrlqOM1B6aHWZbaotpnxN7uMQ39oHSxPrZk42ynwsAOf4/pjjnxSOlxWq9eYN+ocP+/+
- LVbOiu3k26tTLbdxzz3FtnXvW5WdhYLHTE9lSh979b5yUvd7006fq1FKjI4hh+tDvsX1r5he
- vthhtk32Q12vfEYrfa111Z0frBaePW3R5fXh2KR515u4uuoTWh+EWsUwFDx+aJWY6730QPJe
- OxXFn1v+5Pnrr/tkYCNjoa6Qfiw/oVlZKTGquSppHq+lnuIHvbmpew74bMzTqWPoCqrMd5Rs
- sAyN8/qU8Oz6/Pcnq73dSrXMZvn88Yj9uU/nZFqPZW65RgnX1IcJfEosxRmJhlrMRcWJALbA
- L7INBAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrKLMWRmVeSWpSXmKPExsWy7bCSvK7+BZk0g60zmSz+3dzDbvFj1RdW
- i7d7O9kdmD3O3tnB6LHx3Q4mj82vXzAHMEdx2aSk5mSWpRbp2yVwZWzbvJqpoE+gYuFTwQbG
- GzxdjJwcEgImErsnnWHsYuTiEBLYzSjxdtZkJoiElMTnp1PZuhg5gGxhicOHiyFqnjNKHFmx
- BqyGTUBP4v+ihcwgtohAgMTCnW2MIDYzUG/TyV0wQ5kkTnTsAUtwCsRKdKw+BNYgDNTwp/My
- WJxFQFVi06ndLCA2r4ClRO/TrewQtqDEyZlPWCCGaks8vfkUypaX2P52DjPEoQoSP58uY4U4
- wk/izd7pTBA1IhKzO9uYJzAKz0IyahaSUbOQjJqFpGUBI8sqRsnUguLc9NxkwwLDvNRyveLE
- 3OLSvHS95PzcTYzgmNDS2MF4b/4/vUOMTByMhxglOJiVRHivyUmmCfGmJFZWpRblxxeV5qQW
- H2KU5mBREuc1nDE7RUggPbEkNTs1tSC1CCbLxMEp1cBU2vr4yvKtnzadnP1YU91L4eYvG7c1
- EUt+Hjq9RYtF5c8mm76Xk5tvb7roJTGZsWzJj5Ilk/RvfEj1Fil/xszEFy9kE3tQ53VL1l6N
- ozMPblGMXDjh7TmPp1w6ksfjlnsYGPxJrbw6/6NJiuecySEL17xcaf9usnG+6/cz8vu0FgtO
- 5jgSe3o1G8NXs4oLQQ+CXDP89tT3cnzk7kqWX22Xf11KfZOPVu6fhZ/LGKS8C/WCXQvvrl5t
- LOX9n600q3iBteeqqtkVQe0vvttwzN8mNMHwZu2dDTLipU4RPyryQxpl7VdxlYZE2qqYL7sZ
- 2S97gPPawwfbTJYvOxcr5CNnKvc14LLtw+e8h3UDLc2VWIozEg21mIuKEwHmkREx+AIAAA==
-X-CMS-MailID: 20240415065855epcas1p331cb957260728d49f263f735bebc26cb
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrJKsWRmVeSWpSXmKPExsWy7bCmvm7JBZk0g1kdvBb/bu5ht/ix6gur
+ xdu9newOzB5n7+xg9Nj4bgeTx+bXL5gDmKOybTJSE1NSixRS85LzUzLz0m2VvIPjneNNzQwM
+ dQ0tLcyVFPISc1NtlVx8AnTdMnOANikplCXmlAKFAhKLi5X07WyK8ktLUhUy8otLbJVSC1Jy
+ CkwL9IoTc4tL89L18lJLrAwNDIxMgQoTsjNmzF7IXnBZvGJX82HmBsbTQl2MnBwSAiYSM/s3
+ sHcxcnEICexglLi3aiGU84lR4vKVB4wQzjdGiQWTVrB2MXKAtTRMDIWI72WUWPnqKwuE85JR
+ ovvGBkaQuWwCehL/Fy1kBmkQEQiQeHJRASTMLCAl0XRyF1gJp0CsxKaWBhaQEmGBVImO7WBh
+ FgFViZVTrzKB2LwClhIn1i9lgbAFJU7OfMICMUZeYvvbOcwQHyhI/Hy6jBVik5/Emz/iECUi
+ ErM725hBLpMQeMkusa5hNwtEvYvExE+dTBC2sMSr41vYIWwpiZf9bewQDc2MEkuXHGSFcHoY
+ Jf41XGeDqDKW2L90MhPINmYBTYn1u/QhtvFJvPvaAw0fXomONmjoqkhcev2SCWb+3Sf/WSFs
+ D4mGL7dYJjAqzkLy2iwkr81C8sMshGULGFlWMYqlFhTnpqcWGxYYwuM6OT93EyM4DWqZ7mCc
+ +PaD3iFGJg7GQ4wSHMxKIrzX5CTThHhTEiurUovy44tKc1KLDzGaAgN7IrOUaHI+MBHnlcQb
+ mlgamJgZGZtYGJoZKonznrlSliokkJ5YkpqdmlqQWgTTx8TBKdXAVPrg2JfHKSuYPF8K7c+1
+ 7rpQe43v6bKeTR1rC38r129b4/KlTuXFpuRkV70HLjtY+BumrebNaVCwLTzwr5w75uRxVl3P
+ lLCkKM/WT4xb41RO/2c9clpEq7j9saiUe1qL/beE+CnsXz1uiGZe4Hfafv7++SiemZ9Cl/dp
+ 8ZzcnB66v8mRr/9N44tPi2ZcWpGw7r+o0MTFzH8mzH3AfLg7davly50SE/3qpba6cTixvf5d
+ c0Mmb7IUm5XGWdsfAbY7VgTt5V5w/9Wb4h3996b7rTyhIXmGuzSlfJvCy2SHKTmNUcttf2x1
+ nnKhacW0JOY+pj5BLhWVSRZN2gfazh79tDin88pTR/uu6zdyl+ZvVWIpzkg01GIuKk4EAGy4
+ BGEMBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrCLMWRmVeSWpSXmKPExsWy7bCSnG7xBZk0g/5fuhb/bu5ht/ix6gur
+ xdu9newOzB5n7+xg9Nj4bgeTx+bXL5gDmKO4bFJSczLLUov07RK4MmbMXshecFm8YlfzYeYG
+ xtNCXYwcHBICJhINE0O7GLk4hAR2M0r8/HubvYuREyguJfH56VQ2iBphicOHiyFqnjNKXO/f
+ wAxSwyagJ/F/0UIwW0QgQGLhzjZGEJsZqLfp5C5GqKFMEutuzWUCSXAKxEpsamlgAbGFBZIl
+ FlybBdbMIqAqsXLqVbAaXgFLiRPrl7JA2IISJ2c+YYEYqi3x9OZTKFteYvvbOcwQhypI/Hy6
+ jBXkUBEBP4k3f8QhSkQkZne2MU9gFJ6FZNIsJJNmIZk0C0nLAkaWVYySqQXFuem5yYYFhnmp
+ 5XrFibnFpXnpesn5uZsYwRGhpbGD8d78f3qHGJk4GA8xSnAwK4nwXpOTTBPiTUmsrEotyo8v
+ Ks1JLT7EKM3BoiTOazhjdoqQQHpiSWp2ampBahFMlomDU6qByWBFbVPYhcTnXNqafn8P3lDx
+ aJUXebRlvd/KiusJCjPVn1adMy+b5ezUwP5tYfK1hFc7Lpgef8a878fRQ2nqfL+sns/lORA/
+ R9r60ObyM7u2+D351Jf/yfZ5nta5DVdnb/0s6te/5rhxFKvtPe0ZMu6aMZmLDVafWsTz7crT
+ eaXBfwTzVh6UrvzwtVlDVHh1qqf9nrmVymfW7GV0evSNI8Mw9YHQrhLxqBkVHznP7FueecTq
+ 550A7i0cHhnJy7e8nKfJnxDy/Ki2hUxt6H5HeQ+tu6WHSxT7Mw6mtPIsq5mRsyDgUWvzzLxT
+ 7go8Xl/CjBa/uXXwyo+01uhviXJaTleYTqh7Shx2uG1j7D9LVImlOCPRUIu5qDgRAIHrUO33
+ AgAA
+X-CMS-MailID: 20240415070003epcas1p3e4ff0bdb0f31dbf47adf71dd738d34ae
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240403004155epcas1p1fdb3680cde2a4dee4325e22b9b076e6a
+X-CMS-RootMailID: 20240403004345epcas1p3f668ec6887b8e74350e9840682a875c5
 References: <20240201-mmc-v2-0-9f09dc1335fd@outlook.com>
- <20240201-mmc-v2-2-9f09dc1335fd@outlook.com>
- <CGME20240403004155epcas1p1fdb3680cde2a4dee4325e22b9b076e6a@epcas1p1.samsung.com>
- <908bd8cb-b7a3-4701-b636-6d96cd2d2472@samsung.com>
- <SEZPR06MB69598F7A966ABC6664BD4724963D2@SEZPR06MB6959.apcprd06.prod.outlook.com>
+ <20240201-mmc-v2-3-9f09dc1335fd@outlook.com>
+ <CGME20240403004345epcas1p3f668ec6887b8e74350e9840682a875c5@epcas1p3.samsung.com>
+ <56685eac-34ff-4ad9-9128-1ba83a9a48c6@samsung.com>
+ <SEZPR06MB6959CC3A9319816B2DFA8AA7963D2@SEZPR06MB6959.apcprd06.prod.outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -140,62 +141,91 @@ Hi,
 
 > -----Original Message-----
 > From: Yang Xiwen <forbidden405@outlook.com>
-> Sent: Wednesday, April 3, 2024 10:20 AM
+> Sent: Wednesday, April 3, 2024 10:22 AM
 > To: Jaehoon Chung <jh80.chung@samsung.com>; Peng Fan <peng.fan@nxp.com>
 > Cc: u-boot@lists.denx.de
-> Subject: Re: [PATCH v2 2/3] mmc: dw_mmc: Don't return error if data busy timeout
+> Subject: Re: [PATCH v2 3/3] mmc: hi6220_dw_mmc: add fifoth_val to private data and set it in .probe
 > 
-> On 4/3/2024 8:41 AM, Jaehoon Chung wrote:
-> > Hi,
+> On 4/3/2024 8:43 AM, Jaehoon Chung wrote:
+> > Hi
 > >
 > > On 2/1/24 23:05, Yang Xiwen via B4 Relay wrote:
 > >> From: Yang Xiwen <forbidden405@outlook.com>
 > >>
-> >> As described in [1], some poor hardware or cards would fail to release
-> >> the bus and keep driving data lines low. Ignore it and send the next cmd
-> >> directly seems okay for most cases.
-> > This patch seems to be same with previous patch, right?
+> >> The value defaults to 0 and is ignored by dw_mmc code, so the other
+> >> users are not affected.
+> >>
+> >> Setting this explicitly fixes some weird reading error found on Hi3798MV200.
+> >>
+> >> Fixes: 8a5dc8140e62 ("mmc: hi6220_dw_mmc: add compatible for HC2910 support")
+> >>
+> >> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
+
+> >> ---
+> >>   drivers/mmc/hi6220_dw_mmc.c | 11 ++++++++++-
+> >>   1 file changed, 10 insertions(+), 1 deletion(-)
+> >>
+> >> diff --git a/drivers/mmc/hi6220_dw_mmc.c b/drivers/mmc/hi6220_dw_mmc.c
+> >> index a4b8072976..dc0210402b 100644
+> >> --- a/drivers/mmc/hi6220_dw_mmc.c
+> >> +++ b/drivers/mmc/hi6220_dw_mmc.c
+> >> @@ -37,6 +37,7 @@ struct hi6220_dwmmc_priv_data {
+> >>   struct hisi_mmc_data {
+> >>   	unsigned int clock;
+> >>   	bool use_fifo;
+> >> +	u32 fifoth_val;
+> >>   };
+> >>
+> >>   static int hi6220_dwmmc_of_to_plat(struct udevice *dev)
+> >> @@ -125,6 +126,7 @@ static int hi6220_dwmmc_probe(struct udevice *dev)
+> >>   	host->mmc = &plat->mmc;
+> >>
+> >>   	host->fifo_mode = mmc_data->use_fifo;
+> >> +	host->fifoth_val = mmc_data->fifoth_val;
+> >>   	host->mmc->priv = &priv->host;
+> >>   	upriv->mmc = host->mmc;
+> >>   	host->mmc->dev = dev;
+> >> @@ -154,13 +156,20 @@ static const struct hisi_mmc_data hi6220_mmc_data = {
+> >>   	.use_fifo = false,
+> >>   };
+> >>
+> >> +static const struct hisi_mmc_data hi3798mv2x_mmc_data = {
+> >> +	.clock = 50000000,
+> >> +	.use_fifo = false,
+> >> +	// FIFO depth is 256
+> > Removed unnecessary comment.
 > 
 > 
->  From my observation, this patch does fix some weird problems and is
-> mostly okay for other dwmmc users. I can't say it is very well tested
-> because of I can't come up of other tests i can do except some `mmc
-> read` and `mmc write`.
+> Will do. It seems that this should also apply to hi3798cv200-dw-mshc.
+> tests are needed from cv200 users.
+
+In future, It can be removed. Others looks good to me.
+
+Best Regards,
+Jaehoon Chung
+
 > 
 > 
 > >
 > > Best Regards,
 > > Jaehoon Chung
 > >
-> >> [1]: https://patchwork.kernel.org/project/linux-mmc/patch/1424458179-5456-1-git-send-email-
-> dianders@chromium.org/
-> >>
-> >> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
-
-Tested-by: Jaehoon Chung <jh80.chung@samsung.com>
-
-Best Regards,
-Jaehoon Chung
-
-> >> ---
-> >>   drivers/mmc/dw_mmc.c | 4 ++--
-> >>   1 file changed, 2 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
-> >> index 400066fa99..e103664145 100644
-> >> --- a/drivers/mmc/dw_mmc.c
-> >> +++ b/drivers/mmc/dw_mmc.c
-> >> @@ -262,8 +262,8 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
-> >>
-> >>   	while (dwmci_readl(host, DWMCI_STATUS) & DWMCI_BUSY) {
-> >>   		if (get_timer(start) > timeout) {
-> >> -			debug("%s: Timeout on data busy\n", __func__);
-> >> -			return -ETIMEDOUT;
-> >> +			debug("%s: Timeout on data busy, continue anyway\n", __func__);
-> >> +			break;
-> >>   		}
-> >>   	}
-> >>
+> >> +	.fifoth_val = MSIZE(4) | RX_WMARK(0x7f) | TX_WMARK(0x80),
+> >> +};
+> >> +
+> >>   static const struct udevice_id hi6220_dwmmc_ids[] = {
+> >>   	{ .compatible = "hisilicon,hi6220-dw-mshc",
+> >>   	  .data = (ulong)&hi6220_mmc_data },
+> >>   	{ .compatible = "hisilicon,hi3798cv200-dw-mshc",
+> >>   	  .data = (ulong)&hi6220_mmc_data },
+> >>   	{ .compatible = "hisilicon,hi3798mv200-dw-mshc",
+> >> -	  .data = (ulong)&hi6220_mmc_data },
+> >> +	  .data = (ulong)&hi3798mv2x_mmc_data },
+> >>   	{ .compatible = "hisilicon,hi3660-dw-mshc",
+> >>   	  .data = (ulong)&hi3660_mmc_data },
+> >>   	{ }
 > 
 > 
 > --
