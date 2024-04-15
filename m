@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F14F7C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 05:55:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19CD4C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:07:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33CD488150;
-	Mon, 15 Apr 2024 07:55:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 6FF1187CFC;
+	Mon, 15 Apr 2024 08:07:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1713160558;
-	bh=T2E1wntKgb2kZ6i7gPyPcUOE51FuUZnRLxbaFeJXnrM=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=odb8rR4g9m76mlN8I1EST4FENlI8/CR6OR8o5lcweeFYD8oPtobOFuGKKfwcpJpkC
-	 QeeSWn5O0nfc5qtM/JoovreRNK1LvNa9BptgmnUYmruc1AJ+pQ0xBlmU3F7CTwmQyG
-	 y0IPEE6Vq6/M45T7DDHhaRlSl11leq7jf4eP1Z68FoeXIbJB2QOtiF1+3ez9+dojrU
-	 5Ggym4ByveW0sAhaLvuwhZygDOOfld5NipohqngFcHqdUS2xlCcIdBWaKwt8XNWCX2
-	 0JlGQSdKOoiQxeOZg3pQnJeQj+e8xEB+Kif5p3v27mxlBSWfNoBxoE5nhjErrozZeG
-	 j9xU4ZY2WhvQA==
-Received: from [192.168.1.107] (87-97-108-29.pool.digikabel.hu [87.97.108.29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 60FE387C82;
- Mon, 15 Apr 2024 07:55:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1713160556;
- bh=T2E1wntKgb2kZ6i7gPyPcUOE51FuUZnRLxbaFeJXnrM=;
- h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=iucFh8TacN6rqpahvPP03nYxHYe2vONW7VCAVkHV36Y/Gqwqfky/G1rVrh0Ij8ylZ
- DEHk2EjmWqLNXhOr8+PP6QvzY4OVAgLqYRwq9hmNv5voaQXw13J7bx0FCtvaH5jsn6
- 5X7eGeWCZVYjJsrxifY3Tel/XumdZml1b3Vq9jHn/SEMK3lF16UN/2Iqq6yUQCWm9L
- cuaKwEtJQyn9+3EB6tptYYILh81O5BrTAT/imAcvqfOciKUB/s8eGWtQPGPMD2Xg/t
- 11C5mNO9WVrEO+tcdKoAiKHRl3DBQhZAg6foenGICk8RasmEps3Xx4P8W0U/dwgjSV
- Y6OCncetxP0FA==
-Message-ID: <dc245d6c-de67-4757-faea-5a6aa65142b0@denx.de>
-Date: Mon, 15 Apr 2024 07:55:29 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH] ubi: Depend on MTD
-Content-Language: en-US
-To: John Watts <contact@jookia.org>, Kyungmin Park <kmpark@infradead.org>,
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E3E7E87E95; Mon, 15 Apr 2024 08:07:50 +0200 (CEST)
+Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EE41387B1A
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:07:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=csgroup.eu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
+Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
+ by localhost (Postfix) with ESMTP id 4VHxY03mz0z9t0H;
+ Mon, 15 Apr 2024 08:07:48 +0200 (CEST)
+Received: from pegase1.c-s.fr ([192.168.12.234])
+ by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
+ with ESMTP id lNusCfu-sLmM; Mon, 15 Apr 2024 08:07:48 +0200 (CEST)
+Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
+ by pegase1.c-s.fr (Postfix) with ESMTP id 4VHxY037zmz9syj;
+ Mon, 15 Apr 2024 08:07:48 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 6811A8B770;
+ Mon, 15 Apr 2024 08:07:48 +0200 (CEST)
+Received: from messagerie.si.c-s.fr ([127.0.0.1])
+ by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
+ with ESMTP id Z-3T3Z_GS00K; Mon, 15 Apr 2024 08:07:48 +0200 (CEST)
+Received: from PO20335.idsi0.si.c-s.fr (unknown [172.25.230.108])
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 4FAD18B764;
+ Mon, 15 Apr 2024 08:07:48 +0200 (CEST)
+From: Christophe Leroy <christophe.leroy@csgroup.eu>
+To: Jagan Teki <jagan@amarulasolutions.com>,
+ Jean-Michel CASAUBON <jean-michel.casaubon@csgroup.eu>,
+ DUBOIS Hugo <hugo.dubois.ext@csgroup.eu>, florent.trinh-thai@csgroup.eu,
  Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-References: <20240411-mtd-v1-1-fe300f6ab657@jookia.org>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20240411-mtd-v1-1-fe300f6ab657@jookia.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: Christophe Leroy <christophe.leroy@csgroup.eu>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2 00/17] Misc changes for CSSI boards
+Date: Mon, 15 Apr 2024 08:07:13 +0200
+Message-ID: <cover.1713160866.git.christophe.leroy@csgroup.eu>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,34 +64,77 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello John,
+This series contains misc fixes and changes for CSSI boards.
 
-On 11.04.24 07:05, John Watts wrote:
-> UBI required MTD to build correctly, add it as a Kconfig dependency.
-> 
-> Signed-off-by: John Watts <contact@jookia.org>
-> ---
-> While working with UBI on my SPI NAND patch series I found it was
-> possible to enable it without enabling the MTD subsystem.
-> Add a Kconfig option to solve this.
-> ---
->   drivers/mtd/ubi/Kconfig | 1 +
->   1 file changed, 1 insertion(+)
+Main changes are:
+- Fix and optimise mpc8xx SPI driver
+- Add support for LM74 temperature sensor
+- Add support for loading FPGA on MCR3000
 
-Reviewed-by: Heiko Schocher <hs@denx.de>
+I will send a pull request later before close of the merge window.
 
-Thanks!
+Changes since v1:
+- Added temperature and FPGA support and SPI driver optimisation
 
-bye,
-Heiko
+Christophe Leroy (13):
+  board: cssi: Fix SPI nodes in DTS
+  spi: mpc8xx: Add GPIO dependency
+  spi: mpc8xx: Fix transfert when input or output buffer is NULL
+  thermal: Add support for TI LM74
+  board: cssi: Add support for SPI bus on MCR3000 board
+  board: cssi: add support for reading temperature
+  powerpc: 8xx: Set SDMA configuration register correcly
+  spi: mpc8xx: Allow transfer of more than MAX_BUFFER len
+  spi: mpc8xx: Use 16 bit mode for large transfers with even size
+  spi: mpc8xx: Set up speed as requested
+  board: cssi: Use HAVE_VENDOR_COMMON_LIB logic
+  board: cssi: Load FPGA on MCR3000 board
+  board: cssi: Read and display MCR board address
+
+Hugo Dubois (2):
+  board: cssi: Initialise port F on MIAE
+  board: cssi: Properly initialise MAC address for fibre on CMPC885
+    board
+
+Jean-Michel CASAUBON (2):
+  board: cssi: Fix MCR3000 board environment
+  board: cssi: Allow use without HUSH shell
+
+ arch/powerpc/cpu/mpc8xx/cpu_init.c |   6 ++
+ arch/powerpc/dts/cmpc885.dts       |  18 ++++-
+ arch/powerpc/dts/cmpcpro.dts       |  16 +++-
+ arch/powerpc/dts/mcr3000.dts       |  41 +++++++++++
+ board/cssi/cmpc885/Makefile        |   2 +-
+ board/cssi/cmpc885/cmpc885.c       |   4 +-
+ board/cssi/cmpc885/cmpc885.env     |   4 +-
+ board/cssi/cmpcpro/Makefile        |   2 +-
+ board/cssi/cmpcpro/cmpcpro.env     |   4 +-
+ board/cssi/common/Makefile         |   8 ++
+ board/cssi/common/common.c         |  42 ++++++++++-
+ board/cssi/mcr3000/Makefile        |   1 +
+ board/cssi/mcr3000/fpga_code.h     |  10 +++
+ board/cssi/mcr3000/mcr3000.c       |  58 +++++++++++++++
+ board/cssi/mcr3000/mcr3000.env     |   2 +-
+ board/cssi/mcr3000/mcr3000_gpio.c  | 109 ++++++++++++++++++++++++++++
+ configs/CMPC885_defconfig          |   3 +
+ configs/CMPCPRO_defconfig          |   3 +
+ configs/MCR3000_defconfig          |   8 ++
+ drivers/spi/Kconfig                |   2 +-
+ drivers/spi/mpc8xx_spi.c           | 113 ++++++++++++++++++++++++-----
+ drivers/thermal/Kconfig            |   6 ++
+ drivers/thermal/Makefile           |   1 +
+ drivers/thermal/ti-lm74.c          |  52 +++++++++++++
+ 24 files changed, 476 insertions(+), 39 deletions(-)
+ create mode 100644 board/cssi/common/Makefile
+ create mode 100644 board/cssi/mcr3000/fpga_code.h
+ create mode 100644 board/cssi/mcr3000/mcr3000_gpio.c
+ create mode 100644 drivers/thermal/ti-lm74.c
+
 -- 
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+2.43.0
+
