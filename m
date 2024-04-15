@@ -4,121 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D03CC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 11:36:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81173C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 11:36:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A0E1881F8;
-	Mon, 15 Apr 2024 13:35:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 025F487F1F;
+	Mon, 15 Apr 2024 13:36:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="KG9X5NWl";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="LheVx1Fv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECAC988089; Mon, 15 Apr 2024 13:35:44 +0200 (CEST)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20600.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::600])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4C20E87E83; Mon, 15 Apr 2024 13:36:46 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C14218818C
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 13:35:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C34A88132
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 13:36:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Afc9twjzk1GR9VfrBfX+4o9gVDxAHFrrT7Aj8p50bKhi4liH41pAbKp26SCPtllcOaDrlFgKQRxMmy96CofcP4uh4F0I2XWCS3u+jCmtcSkHUIqtg/7FYaF/gTFDfyavBXDW7bQrsvq2pWwGH7gy75pFu779uhjhAwJihFy5psMURKILfuqxieWOSzgo5UtiN1f0Spkeq9lJTXvD//zLvCcvXERNeGTQWCjOemm/l5qdp6j5SeKxUXoA7X2qQIUpIBmEvDZZBLcAcR3ll062mYIcyb+gs2HAfg2jgEEvdkv6Ek8SiF96ObZYedy4LddYT3wgO82Www9FZG7sSLhkfg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1jYXJ/LPe3Qcah60w14HNo9JzRZbyDS260u8y4jZpZg=;
- b=DPaTp+Ds5AGuDMElx4SnZvpONG9ILajA+SdYkJ/pSfmZIJaD38uTfP8zh/kFCWC11bcpQ0Lpg4ddcRuCF7PfxUTFftCVnXqH/sZN66MqSMG7976iqTsSZFIcbZIPznxcUBgwK4f1DiT7KQVFtJKSZM1fYaAJ45AnJaL9vZ9DPSxjTFiVJM14flt5jhWFWxUDFkqqM6ca6pc0tzuPy84EfWJ1h9EKcd67dJbQ9xNHHTumdELHfjQt8Qj/JK5PClpGFvHdBKOzJwLK79Ii7vN5BnLMJA7U5Xgey9p2NE0aQemDhyJlQvCHi0EwcW9LvCoTwGgumSX/ofMuiu59TMnNnA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1jYXJ/LPe3Qcah60w14HNo9JzRZbyDS260u8y4jZpZg=;
- b=KG9X5NWlunL1KxMIWqGFbiGWDEHOcIeHG2PWVcKYbFIZJd0oBDX/8DYatUM3CWIL5i9Fjfrn4vD4npuAMJXI+Y24UspWseQJAJU1LuM7KOzjnfbCOdcEzKecH0A50P1ZzR5AT4Qvpfw224gWyE5RqlM15IW9/1qt6D/IilPvPt8=
-Received: from BLAPR03CA0135.namprd03.prod.outlook.com (2603:10b6:208:32e::20)
- by SA1PR12MB8598.namprd12.prod.outlook.com (2603:10b6:806:253::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Mon, 15 Apr
- 2024 11:35:39 +0000
-Received: from BN3PEPF0000B076.namprd04.prod.outlook.com
- (2603:10b6:208:32e:cafe::c5) by BLAPR03CA0135.outlook.office365.com
- (2603:10b6:208:32e::20) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.33 via Frontend
- Transport; Mon, 15 Apr 2024 11:35:39 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN3PEPF0000B076.mail.protection.outlook.com (10.167.243.121) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7452.22 via Frontend Transport; Mon, 15 Apr 2024 11:35:38 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 15 Apr
- 2024 06:35:37 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Andre Przywara <andre.przywara@arm.com>, Angelo Dureghello
- <angelo@kernel-space.org>, Elon Zhang <zhangzj@rock-chips.com>, Eugen Hristev
- <eugen.hristev@collabora.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jagan Teki <jagan@amarulasolutions.com>, John Clark <inindev@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Joshua Riek <jjriek@verizon.net>, Kever Yang
- <kever.yang@rock-chips.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>, Simon Glass
- <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>, Tim Lunn
- <tim@feathertop.org>, Tom Rini <trini@konsulko.com>, Venkatesh Yadav Abbarapu
- <venkatesh.abbarapu@amd.com>, Vignesh R <vigneshr@ti.com>
-Subject: [PATCH 4/4] Kconfig: Make all Kconfig encoding ascii
-Date: Mon, 15 Apr 2024 13:35:10 +0200
-Message-ID: <55ab78c9f2781b31278395f9e0066041f97b00f6.1713180904.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <cover.1713180904.git.michal.simek@amd.com>
-References: <cover.1713180904.git.michal.simek@amd.com>
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4066; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=jl1ASAa2UJOhYuyZzFzGqZegknKEGyaxN6B+YtyxEck=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhjRZga+rNoj1uomxJdXOWXzd5G/2TcMlzuLvXhkuCUvZ9
- PmQ7+5NHbEsDIJMDLJiiizSNlfO7K2cMUX44mE5mDmsTCBDGLg4BWAi4g4M81R/1d2zr4+dba76
- /rAby6699ovOyDPMD1xfq3A2jLtJeAJz+Za/jK5vj2vNAAA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Type: text/plain; charset="UTF-8"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1713181003;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=RntUY9i7cXRP48x3je+pyCJ/ZbGFqRbqfPuWmDldDcU=;
+ b=LheVx1FvEf7v57hrW56+Vs4krxGYEJcoF7Ny/U+t4cTL1gnGoNAKSBDBbLWPvJk3Hkwyaw
+ hAdqin12M6232nPblZ2PYC37jkaWhpX0CXUA/gZ/gthaEI1G7RjFR97R+9qK8oVWvBmxZJ
+ KzX/vWarA7aifGDolDcJ5TelZlP2MdaqB/TpEkhhkfukBLXUtO79j/VQyT8QY50/hHERwu
+ l5Y4pUvtAx4dQ81NuY0tsGFFJp7ZnXQJuZ8bg6rRaXNt/NUbi4lro2dFFwjHB85RhyoOBT
+ aDAB8dH6Kc+Ha4vpV6UdlrSMUD86reQA8Ry4vc3h2iVKJHi9meWYhN2fKNY1zA==
+Date: Mon, 15 Apr 2024 13:36:43 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Robert Marko <robert.marko@sartura.hr>, marex@denx.de,
+ trini@konsulko.com, jonas@kwiboo.se, kever.yang@rock-chips.com,
+ jagan@amarulasolutions.com, mkorpershoek@baylibre.com, peter@korsgaard.com,
+ sjg@chromium.org, neil.armstrong@linaro.org, u-boot@lists.denx.de,
+ j.beck@linefinity.com
+Subject: Re: [PATCH] usb: dwc3-generic: fix support without DM_REGULATOR
+In-Reply-To: <ed463461-2e96-462f-8b43-1e6ca4aad7a3@linaro.org>
+References: <20240415105405.432679-1-robert.marko@sartura.hr>
+ <a2ea41b8-8656-4734-8594-c1d38a30e25e@linaro.org>
+ <CA+HBbNH=UGLY63-bSoNmmV7ZBkt2zkbS0sdqbTLTmqikzhrb_g@mail.gmail.com>
+ <85a712c7afa962b227d16a2fced6f57c@manjaro.org>
+ <ed463461-2e96-462f-8b43-1e6ca4aad7a3@linaro.org>
+Message-ID: <9af69d78a50999d05ed5838414d70944@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B076:EE_|SA1PR12MB8598:EE_
-X-MS-Office365-Filtering-Correlation-Id: 805cdf30-3ea7-4cba-d600-08dc5d402c9e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: Gq0KHzuDzGI2z2wjh6c6XgFfh2KpFl693CPrF6LiQNyhxi2pBldoCiq/L21rOV2efd7emT3TuQOafcMsvlgaQ6dXVfb4u+ZFLAQ4LkvOjRmnRh3fKbSXAkEDdOg3W8GE+8u1TehO2nvPuJtdiWVmvueo5uNDkkVVGSFN/OCDN54RCvn1IhHahyGQDwqbVdLGajmCkjrdD8Y4AgMNTs63PJKIagfiIth6Bl7s38HSIQcusgMy1ag1RyCHSSeoIoYngQoX9QImMGk9F/Fh3KzswNROvXx4eovOB2/dnh8K25flVSTPYRKviwC6xPHMJfKd6QTluwjp7NtXdaNSoM+gqBlCqk1QdYe6Ml1uVUkPV1nRDwnosDHD9aszmd0HtWPQ2xnqoqt/keZ5fsnRgi95xP7+2SYBwDReqSFQ52Z4UXVTpl1atvB8j5x9jy0Y+9LT3d4/ZJJQaFDzOCWj8h294fMmAZM4bzTdrAS9Z9pD945zRGaerYBoYElWySMlXYExFUZRTgYC8J74vbXCEVJjIFTEm0gO89gGIu5FBzHFugcQOYOtk7RkJm6hU4fkHIVrg2mzXZxGFZGJsxWa1YUaPYUDFZl8Gv5NwqBl3hneF9AQG/sZGUsqJlYjTmUfzTnE22BNJG/8aINSlAOVJEnzoZ2jWoN3RJmNuHB1WU28Vfk6q7RNNFKcIXnyinod6fKuc70Uux6Flx6OeMut24aRHeOPlf29bgeT7ZpKqwKSwgH3btpIuI0x/tCvhRvzqrYU
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(1800799015)(376005)(7416005)(82310400014)(36860700004); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2024 11:35:38.7196 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 805cdf30-3ea7-4cba-d600-08dc5d402c9e
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B076.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8598
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,98 +76,129 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some of Kconfigs are using utf-8 encoding because of used chars. Convert
-all of them to ascii enconging.
+Hello Caleb,
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+On 2024-04-15 13:18, Caleb Connolly wrote:
+> On 15/04/2024 12:14, Dragan Simic wrote:
+>> Hello all,
+>> 
+>> On 2024-04-15 13:11, Robert Marko wrote:
+>>> On Mon, Apr 15, 2024 at 12:57 PM Caleb Connolly
+>>> <caleb.connolly@linaro.org> wrote:
+>>>> 
+>>>> On 15/04/2024 11:53, Robert Marko wrote:
+>>>> > Recent addition of vbus-supply support has broke platform which
+>>>> dont use
+>>>> > controllable regulators for USB.
+>>>> >
+>>>> > Issue is that even withou DM_REGULATOR being enabled regulator related
+>>>> > functions will still build as there is a stub in regulator.h but
+>>>> they will
+>>>> > simply return -ENOSYS which will then make dwc3_generic_host_probe()
+>>>> > return the same error thus breaking probe.
+>>>> 
+>>>> Rather than stubbing out the code, could you check for -ENOSYS and
+>>>> ignore the error in that case? I believe there's only one place 
+>>>> where
+>>>> this matters (marked below).
+>>> 
+>>> Sure, that was my first approach but it did not seem right to me.
+>>> But if its OK with you, I can do that.
+>> 
+>> FWIW, ifdef'ing the code out seems like a cleaner approach to me.
+> 
+> Given that the stub functions exist, imho it makes sense to use them.
+> It's also easy to forget to add those #ifdefs if there are other
+> regulator changes in future patches.
+> 
+> But overall I don't feel too strongly about this, for what it does this
+> code is fine, I'll defer to Marek.
 
-There are other files which are using utf-8 enconding and pretty much I
-think we should convert all of them because there is no reason to use utf-8
-encoding.
+Oh, sorry, I totally failed to notice that the stubs already exist
+for the regulator_set_enable_if_allowed() function and its friends,
+which are actually ifdef'ed code.  Having that in mind, I agree that
+introducing more ifdef's isn't the preferred way to go.
 
----
- arch/arm/mach-rockchip/px30/Kconfig   | 4 ++--
- arch/arm/mach-rockchip/rk3588/Kconfig | 6 +++---
- arch/arm/mach-rockchip/rv1126/Kconfig | 4 ++--
- drivers/mtd/spi/Kconfig               | 2 +-
- 4 files changed, 8 insertions(+), 8 deletions(-)
+Maybe there's something awkward about the stubs and the way they
+need to be used, but that should be resolved by improving the whole
+stubs thing, instead of introducing more ifdef's in the code that
+ends up using the stubs.
 
-diff --git a/arch/arm/mach-rockchip/px30/Kconfig b/arch/arm/mach-rockchip/px30/Kconfig
-index 41893920cb4d..23f8f430c4ae 100644
---- a/arch/arm/mach-rockchip/px30/Kconfig
-+++ b/arch/arm/mach-rockchip/px30/Kconfig
-@@ -36,9 +36,9 @@ config TARGET_PX30_CORE
-             10.1" OF for creating complete PX30.Core C.TOUCH 2.0 10.1" Open Frame.
- 
- config TARGET_RINGNECK_PX30
--	bool "Theobroma Systems PX30-µQ7 (Ringneck)"
-+	bool "Theobroma Systems PX30-uQ7 (Ringneck)"
- 	help
--	  The PX30-uQ7 (Ringneck) SoM is a µQseven-compatible (40mmx70mm,
-+	  The PX30-uQ7 (Ringneck) SoM is a uQseven-compatible (40mmx70mm,
-           MXM-230 connector) system-on-module from Theobroma Systems[1],
- 	  featuring the Rockchip PX30.
- 
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index eb956b097c74..39049ab35a9c 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -66,7 +66,7 @@ config TARGET_NANOPCT6_RK3588
- 	                HDMI2.0, and HDMI1.4
- 	  2x 4-lane MIPI-DSI, compatible with MIPI DPHY 2.0 or CPHY 1.1
- 	  USB-A: USB 3.0, Type A
--	  USB-C: Full function USB Type‑C port, DP display up to 4Kp60, USB 3.0
-+	  USB-C: Full function USB Type-C port, DP display up to 4Kp60, USB 3.0
- 	  40-pin 2.54mm header connector: up to 2x SPIs, 6x UARTs, 1x I2Cs,
- 	                                  8x PWMs, 2x I2Ss, 28x GPIOs
- 	  Debug UART: 3 Pin 2.54mm header, 3V level, 1500000bps
-@@ -117,7 +117,7 @@ config TARGET_ROCK5A_RK3588
- 	  Mali G610MC4 GPU
- 	  MIPI CSI 2 multiple lanes connector
- 	  4-lane MIPI DSI connector
--	  Audio – 3.5mm earphone jack
-+	  Audio - 3.5mm earphone jack
- 	  eMMC module connector
- 	  uSD slot (up to 128GB)
- 	  2x USB 2.0, 2x USB 3.0
-@@ -197,7 +197,7 @@ config TARGET_TOYBRICK_RK3588
- 	  4x ARM Cortex-A76, 4x ARM Cortex-A55
- 	  8/16GB Memory LPDDR4x
- 	  Mali G610MC4 GPU
--	  2× MIPI-CSI0 Connector
-+	  2x MIPI-CSI0 Connector
- 	  1x 2Lanes PCIe3.0 Connector
- 	  1x SATA3.0 Connector
- 	  32GB eMMC Module
-diff --git a/arch/arm/mach-rockchip/rv1126/Kconfig b/arch/arm/mach-rockchip/rv1126/Kconfig
-index ae323ee91235..64a70f61f894 100644
---- a/arch/arm/mach-rockchip/rv1126/Kconfig
-+++ b/arch/arm/mach-rockchip/rv1126/Kconfig
-@@ -6,8 +6,8 @@ config TARGET_RV1126_NEU2
- 	  Neu2:
- 	  Neural Compute Module 2(Neu2) is a 96boards SoM-CB compute module
- 	  based on Rockchip RV1126 from Edgeble AI.
--	  Neu2 powered with Consumer grade (0 to +80 °C) RV1126 SoC.
--	  Neu2k powered with Industrial grade (-40 °C to +85 °C) RV1126K SoC.
-+	  Neu2 powered with Consumer grade (0 to +80 C) RV1126 SoC.
-+	  Neu2k powered with Industrial grade (-40 C to +85 C) RV1126K SoC.
- 
- 	  Neu2-IO:
- 	  Neural Compute Module 2(Neu2) IO board is an industrial form factor
-diff --git a/drivers/mtd/spi/Kconfig b/drivers/mtd/spi/Kconfig
-index d068b7860e1c..bedc4e970e43 100644
---- a/drivers/mtd/spi/Kconfig
-+++ b/drivers/mtd/spi/Kconfig
-@@ -246,7 +246,7 @@ config SPI_FLASH_USE_4K_SECTORS
- 	  to erasing whole blocks (32/64 KiB).
- 	  Changing a small part of the flash's contents is usually faster with
- 	  small sectors. On the other hand erasing should be faster when using
--	  64 KiB block instead of 16 × 4 KiB sectors.
-+	  64 KiB block instead of 16 x 4 KiB sectors.
- 
- 	  Please note that some tools/drivers/filesystems may not work with
- 	  4096 B erase size (e.g. UBIFS requires 15 KiB as a minimum).
--- 
-2.44.0
-
+>>>> > Fixes: de451d5d5b6f ("usb: dwc3-generic: support external vbus
+>>>> regulator")
+>>>> > Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+> 
+> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+>>>> > ---
+>>>> >  drivers/usb/dwc3/dwc3-generic.c | 8 ++++++++
+>>>> >  1 file changed, 8 insertions(+)
+>>>> >
+>>>> > diff --git a/drivers/usb/dwc3/dwc3-generic.c
+>>>> b/drivers/usb/dwc3/dwc3-generic.c
+>>>> > index 7a00529a2a..784d3ec2ed 100644
+>>>> > --- a/drivers/usb/dwc3/dwc3-generic.c
+>>>> > +++ b/drivers/usb/dwc3/dwc3-generic.c
+>>>> > @@ -242,6 +242,7 @@ static int dwc3_generic_host_probe(struct
+>>>> udevice *dev)
+>>>> >       if (rc)
+>>>> >               return rc;
+>>>> >
+>>>> > +#if CONFIG_IS_ENABLED(DM_REGULATOR)
+>>>> >       rc = device_get_supply_regulator(dev, "vbus-supply",
+>>>> &priv->vbus_supply);
+>>>> >       if (rc)
+>>>> >               debug("%s: No vbus regulator found: %d\n", dev->name,
+>>>> rc);
+>>>> > @@ -250,14 +251,17 @@ static int dwc3_generic_host_probe(struct
+>>>> udevice *dev)
+>>>> >       rc = regulator_set_enable_if_allowed(priv->vbus_supply, true);
+>>>> >       if (rc)
+>>>> >               return rc;
+>>>> 
+>>>> Here, if (rc && rc != -ENOSYS)
+>>>> or even if (CONFIG_IS_ENABLED(DM_REGULATOR) && rc) to be verbose 
+>>>> (maybe
+>>>> not the preferred style though).
+>>>> 
+>>>> All the other regulator_* calls either ignore the result or only 
+>>>> print a
+>>>> debug message.
+>>>> > +#endif
+>>>> >
+>>>> >       hccr = (struct xhci_hccr *)priv->gen_priv.base;
+>>>> >       hcor = (struct xhci_hcor *)(priv->gen_priv.base +
+>>>> >                       HC_LENGTH(xhci_readl(&(hccr)->cr_capbase)));
+>>>> >
+>>>> >       rc = xhci_register(dev, hccr, hcor);
+>>>> > +#if CONFIG_IS_ENABLED(DM_REGULATOR)
+>>>> >       if (rc)
+>>>> >               regulator_set_enable_if_allowed(priv->vbus_supply,
+>>>> false);
+>>>> > +#endif
+>>>> >
+>>>> >       return rc;
+>>>> >  }
+>>>> > @@ -265,14 +269,18 @@ static int dwc3_generic_host_probe(struct
+>>>> udevice *dev)
+>>>> >  static int dwc3_generic_host_remove(struct udevice *dev)
+>>>> >  {
+>>>> >       struct dwc3_generic_host_priv *priv = dev_get_priv(dev);
+>>>> > +#if CONFIG_IS_ENABLED(DM_REGULATOR)
+>>>> >       int rc;
+>>>> > +#endif
+>>>> >
+>>>> >       /* This function always returns 0 */
+>>>> >       xhci_deregister(dev);
+>>>> >
+>>>> > +#if CONFIG_IS_ENABLED(DM_REGULATOR)
+>>>> >       rc = regulator_set_enable_if_allowed(priv->vbus_supply, false);
+>>>> >       if (rc)
+>>>> >               debug("%s: Failed to disable vbus regulator: %d\n",
+>>>> dev->name, rc);
+>>>> > +#endif
+>>>> >
+>>>> >       return dwc3_generic_remove(dev, &priv->gen_priv);
+>>>> >  }
+>>>> 
+>>>> --
+>>>> // Caleb (they/them)
