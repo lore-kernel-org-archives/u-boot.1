@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BB32C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:08:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34205C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:09:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1116A88206;
-	Mon, 15 Apr 2024 08:08:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 79D2A881F8;
+	Mon, 15 Apr 2024 08:08:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A6DA88195; Mon, 15 Apr 2024 08:08:13 +0200 (CEST)
+ id C79B088206; Mon, 15 Apr 2024 08:08:14 +0200 (CEST)
 Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F83B881E7
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:08:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D593C88189
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:08:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=csgroup.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
 Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
- by localhost (Postfix) with ESMTP id 4VHxYR0msKz9t1J;
- Mon, 15 Apr 2024 08:08:11 +0200 (CEST)
+ by localhost (Postfix) with ESMTP id 4VHxYS4h2Sz9t2V;
+ Mon, 15 Apr 2024 08:08:12 +0200 (CEST)
 Received: from pegase1.c-s.fr ([192.168.12.234])
  by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id DOVBezxSAyzY; Mon, 15 Apr 2024 08:08:11 +0200 (CEST)
+ with ESMTP id zr2SA_PplQjQ; Mon, 15 Apr 2024 08:08:12 +0200 (CEST)
 Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase1.c-s.fr (Postfix) with ESMTP id 4VHxYK1lZMz9t2k;
+ by pegase1.c-s.fr (Postfix) with ESMTP id 4VHxYK2PJjz9t2s;
  Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 385598B775;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 4E9AF8B775;
  Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 Received: from messagerie.si.c-s.fr ([127.0.0.1])
  by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id Y7Jpra5-ljXL; Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
+ with ESMTP id qORxg18MRGNa; Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 Received: from PO20335.idsi0.si.c-s.fr (unknown [172.25.230.108])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 15D1A8B764;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 2B9638B770;
  Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 From: Christophe Leroy <christophe.leroy@csgroup.eu>
 To: Jagan Teki <jagan@amarulasolutions.com>,
@@ -47,9 +47,10 @@ To: Jagan Teki <jagan@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Christophe Leroy <christophe.leroy@csgroup.eu>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 06/17] spi: mpc8xx: Add GPIO dependency
-Date: Mon, 15 Apr 2024 08:07:19 +0200
-Message-ID: <97c873ee6bb61570bc6162b7dec0768d9feb099a.1713160866.git.christophe.leroy@csgroup.eu>
+Subject: [PATCH v2 07/17] spi: mpc8xx: Fix transfert when input or output
+ buffer is NULL
+Date: Mon, 15 Apr 2024 08:07:20 +0200
+Message-ID: <42dff816b493d4edd8a1fe5e6ab3c4071b447121.1713160866.git.christophe.leroy@csgroup.eu>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1713160866.git.christophe.leroy@csgroup.eu>
 References: <cover.1713160866.git.christophe.leroy@csgroup.eu>
@@ -71,29 +72,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since commit 773ad4ebb1d6 ("spi, mpc8xx: Add support for chipselect via
-GPIO and fixups"), DM_GPIO is required for 8xx SPI.
+xfer ops can be passed a NULL input or output buffer. At the
+time being the driver ignores it and overwrites memory at 0.
 
-Add the missing dependency to avoid build failures.
+Define a dummy buffer and use it when either input or output
+buffer is NULL. Bail out when both are NULL as it shouldn't.
 
-Fixes: 773ad4ebb1d6 ("spi, mpc8xx: Add support for chipselect via GPIO and fixups")
+Also increase MAX_BUFFER len to 32k as the current is pretty
+low.
+
 Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
 ---
- drivers/spi/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/spi/mpc8xx_spi.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
-index 69b184b0d9..612434633b 100644
---- a/drivers/spi/Kconfig
-+++ b/drivers/spi/Kconfig
-@@ -262,7 +262,7 @@ config MESON_SPIFC_A1
+diff --git a/drivers/spi/mpc8xx_spi.c b/drivers/spi/mpc8xx_spi.c
+index 5c8d760935..2aa9c7d5df 100644
+--- a/drivers/spi/mpc8xx_spi.c
++++ b/drivers/spi/mpc8xx_spi.c
+@@ -29,7 +29,7 @@
+ #define CPM_SPI_BASE_RX	CPM_SPI_BASE
+ #define CPM_SPI_BASE_TX	(CPM_SPI_BASE + sizeof(cbd_t))
  
- config MPC8XX_SPI
- 	bool "MPC8XX SPI Driver"
--	depends on MPC8xx
-+	depends on MPC8xx && DM_GPIO
- 	help
- 	  Enable support for SPI on MPC8XX
+-#define MAX_BUFFER	0x104
++#define MAX_BUFFER	0x8000 /* Max possible is 0xffff. We want power of 2 */
+ 
+ struct mpc8xx_priv {
+ 	spi_t __iomem *spi;
+@@ -37,6 +37,8 @@ struct mpc8xx_priv {
+ 	int max_cs;
+ };
+ 
++static char dummy_buffer[MAX_BUFFER];
++
+ static int mpc8xx_spi_set_mode(struct udevice *dev, uint mod)
+ {
+ 	return 0;
+@@ -154,6 +156,8 @@ static int mpc8xx_spi_xfer(struct udevice *dev, unsigned int bitlen,
+ 	int tm;
+ 	size_t count = (bitlen + 7) / 8;
+ 
++	if (!din && !dout)
++		return -EINVAL;
+ 	if (count > MAX_BUFFER)
+ 		return -EINVAL;
+ 
+@@ -165,12 +169,12 @@ static int mpc8xx_spi_xfer(struct udevice *dev, unsigned int bitlen,
+ 		mpc8xx_spi_cs_activate(dev);
+ 
+ 	/* Setting tx bd status and data length */
+-	out_be32(&tbdf->cbd_bufaddr, (ulong)dout);
++	out_be32(&tbdf->cbd_bufaddr, dout ? (ulong)dout : (ulong)dummy_buffer);
+ 	out_be16(&tbdf->cbd_sc, BD_SC_READY | BD_SC_LAST | BD_SC_WRAP);
+ 	out_be16(&tbdf->cbd_datlen, count);
+ 
+ 	/* Setting rx bd status and data length */
+-	out_be32(&rbdf->cbd_bufaddr, (ulong)din);
++	out_be32(&rbdf->cbd_bufaddr, din ? (ulong)din : (ulong)dummy_buffer);
+ 	out_be16(&rbdf->cbd_sc, BD_SC_EMPTY | BD_SC_WRAP);
+ 	out_be16(&rbdf->cbd_datlen, 0);	 /* rx length has no significance */
  
 -- 
 2.43.0
