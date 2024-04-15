@@ -4,60 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB3FAC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 07:00:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CA28C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 07:00:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C01028816D;
-	Mon, 15 Apr 2024 09:00:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9B2C68813F;
+	Mon, 15 Apr 2024 09:00:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="ryimga2J";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eQ1aQozo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A14F8813A; Mon, 15 Apr 2024 09:00:15 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id DD8B888159; Mon, 15 Apr 2024 09:00:47 +0200 (CEST)
+Received: from mail-pf1-x42e.google.com (mail-pf1-x42e.google.com
+ [IPv6:2607:f8b0:4864:20::42e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E8B687B89
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 09:00:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 07594880D6
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 09:00:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tkuw584924@gmail.com
+Received: by mail-pf1-x42e.google.com with SMTP id
+ d2e1a72fcca58-6f00f24f761so51469b3a.3
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 00:00:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713164443; x=1713769243; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=BrJSQ9iIOkVa+czHVOeHxvu0VcPB3KEXB7agGwxpcGs=;
+ b=eQ1aQozoNSkdp9mtD7b5u5fWxGtLcnK0uNGrhokBXXzUJ9E4qHsNMXM8FUj3X7RVli
+ ctnVeB/7pMhjjcPR9tWt+s1TzT7WJpjOM5SXYGU8SxnHiz/05ypDjFCXJqMPPeJTpVxr
+ gJoQLz4yOzARyeoYB9Ie8tQiq+hkf/fWdCH2ASXT1pGej6W3Vn7LMM4WLdq1Ic0Xlcx6
+ cjZybOoo/KhxWhiCbiwXly4GRJaE596n0H9g+uhvvJC8DY22j0X4Ae6MsrbeHIRxiFVK
+ 69uYMPMQ1PIXznoTsulvfHFXl4eE0USUmrNEUWc/dVIMUSjAo+pwaBSMnvavJMph/0VD
+ NDIQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713164443; x=1713769243;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=BrJSQ9iIOkVa+czHVOeHxvu0VcPB3KEXB7agGwxpcGs=;
+ b=M3xAAE2Ch6G/6okBLPNN41d+h7f3w5jLKGG5e3xP1RnoJSCL4c5na4NyJQXXGCYXxy
+ 41EUJeAKNIW8qUipplXEeMYBvU4BC0uFUKzpA7+SDNnhEWUkvqyXnGhURqzR+apHBv3Q
+ rVNJlvwFm18sI7+XlK380CaxKEow6ZbjbU8RcBEAj0G5w1801YG+pqEjOS/IrOoahm8w
+ DjC6EB5Gcq/u3hGhuUKs2sIG9I2LZS7kIS2AFK8NInk4aWQLN9jaWzGgCBo+fUFQNwkF
+ ut5IWUP2Hav3qyb8BCGBosipURMB5bn/ahPlVB5JutqnrmWx3YrlyuDNqnL2u1PZIfYh
+ lcFQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWAQn4ep3xScm661VNKRzMTlrLDKVXoF4B1cuSXoWDImU2hjkgsDDLlr0sz4VXV7XxM6Y/76tubKa1xqK8AAt3I1WjAVQ==
+X-Gm-Message-State: AOJu0Yyg+0EnJTLcIROIp1TGaecnDw69WWGkXTnM5ZIDwFfgWpltk73z
+ z/A+haUKd7hhTP90Y2JJrbeqrvLR03MfodpT0psJ1AF+WloY+VE5
+X-Google-Smtp-Source: AGHT+IEW+rG8P08KUPk6raJMibu3iuH5jC0AKxzw5mtOYeMVBL6dNn55tq5OVUia2frWkITVWdNi1w==
+X-Received: by 2002:a05:6a00:244e:b0:6ed:1012:9565 with SMTP id
+ d14-20020a056a00244e00b006ed10129565mr9916834pfj.15.1713164443424; 
+ Mon, 15 Apr 2024 00:00:43 -0700 (PDT)
+Received: from [192.168.0.8] (KD106168128197.ppp-bb.dion.ne.jp.
+ [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
+ d3-20020a056a00198300b006e6c6a50e5esm6532001pfl.34.2024.04.15.00.00.41
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 15 Apr 2024 00:00:43 -0700 (PDT)
+Message-ID: <a73ad287-be2c-44ea-bba9-d8e2e3d8c3b2@gmail.com>
+Date: Mon, 15 Apr 2024 16:00:40 +0900
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1713164411;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=nnMoA6nlTOQ8Y1FJGNXAYhu5Ygd5cEAwohu4KahR6CI=;
- b=ryimga2Jm9Q0wfTvnO2fx9ph7qnloxCFY0e69ZUfmu5bPzpiYPF/dIuJbv76LBQw+r3mhq
- vG7XHBnEkrWqfC/ENef2yQKrF9JcX8L+p0i0VMvmMH8EFwez9s98FEcYxT7HZg45LmlBQD
- ndZVWOqC7I8a4F01Z7JmiyLFTwAHzWMfM3h4a1yaurOSUIvA4YrPThBhsXKAsx4ZXzydEx
- Lwz0W9MmWJmO3TH5r0ydD2S4dO+qN433jGkKV3h8JzynPwfZfsr89NJSEj8PtwEabkBsjf
- EPeGXEJ/dF0sDei5L+dMwpKhx7ROQmFWCfjqMFVHl/+BtvZvAhXDgiNdwM4Dgw==
-Date: Mon, 15 Apr 2024 09:00:10 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Jagan Teki <jagan@edgeble.ai>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, John Clark <inindev@gmail.com>, Tom Fitzhenry
- <tom@tom-fitzhenry.me.uk>, Elon Zhang <zhangzj@rock-chips.com>, Quentin
- Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 23/23] rockchip: rk3588: Enable use of eMMC HS200 mode
- on a few missed boards
-In-Reply-To: <20240413181425.1384357-24-jonas@kwiboo.se>
-References: <20240413181425.1384357-1-jonas@kwiboo.se>
- <20240413181425.1384357-24-jonas@kwiboo.se>
-Message-ID: <0bfe98a361956a2e1464d5327756ccab@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/4] mtd: Make sure UBIFS does not do multi-pass page
+ programming on flashes that don't support it
+To: Tudor Ambarus <tudor.ambarus@linaro.org>, u-boot@lists.denx.de
+Cc: jagan@amarulasolutions.com, vigneshr@ti.com, pratyush@kernel.org,
+ d-gole@ti.com, Bacem.Daassi@infineon.com,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+References: <cover.1713154967.git.Takahiro.Kuwano@infineon.com>
+ <a2e2d0ea-3a4c-4425-a28b-5422cf9f342a@linaro.org>
+Content-Language: en-US
+From: Takahiro Kuwano <tkuw584924@gmail.com>
+In-Reply-To: <a2e2d0ea-3a4c-4425-a28b-5422cf9f342a@linaro.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,140 +99,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jonas,
-
-Please see my comments below.
-
-On 2024-04-13 20:13, Jonas Karlman wrote:
-> A few RK3588 boards are missing a mmc-hs200 prop to signal that HS200
-> mode is supported in addition to HS400, this lead to bad performance
-> reading FIT in SPL and broken MMC write.
+On 4/15/2024 3:56 PM, Tudor Ambarus wrote:
 > 
-> Add cap-mmc-highspeed and mmc-hs200-1_8v to affected boards to enable
-> use of eMMC HS200 mode.
 > 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> On 4/15/24 05:33, tkuw584924@gmail.com wrote:
+>> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+>>
+>> This series is equivalent to the one for Linux MTD submitted by
+>> Pratyush Yadav.
+>>
+>> https://patchwork.ozlabs.org/project/linux-mtd/list/?series=217759&state=*
+> 
+> Ah, I see you specified it here. I'd argue it's better to mention it in
+> the commit message itself, it spares people searching on the ml archive.
 
-Shouldn't it be better to follow the Linux kernel's logic in
-the MMC driver, and enable the HS200 mode when the DT indicates
-that the HS400 mode is suported?  In other words, exactly what
-you already submitted to the mailing list. [1]
-
-That would allow a significant cleanup of the U-Boot dtsi files
-to be performed.
-
-Until that's resolved, the patch is looking good to me.
-
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
-
-[1] 
-https://lore.kernel.org/u-boot/20240408210619.3749231-1-jonas@kwiboo.se/
-
-> ---
-> v2: New patch
-> 
-> All these mmc-hs200 prop overrides may not be needed if the patch "mmc:
-> Imply HS200 cap with mmc-hs400 prop to match linux" [1] gets applied,
-> until such time this matches what has been done for all other RK35xx
-> boards.
-> 
-> [1] https://patchwork.ozlabs.org/patch/1921039/
-> ---
->  arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi | 5 +++++
->  arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi | 5 +++++
->  arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi         | 5 +++++
->  arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi        | 5 +++++
->  arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi      | 5 +++++
->  arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi      | 5 +++++
->  6 files changed, 30 insertions(+)
-> 
-> diff --git a/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
-> b/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
-> index dd0058262b7f..fc4b13628b30 100644
-> --- a/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-edgeble-neu6a-io-u-boot.dtsi
-> @@ -15,6 +15,11 @@
->  	};
->  };
-> 
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-hs200-1_8v;
-> +};
-> +
->  &sdmmc {
->  	bus-width = <4>;
->  	status = "okay";
-> diff --git a/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
-> b/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
-> index a45b3f5e86ad..a0c62072c34e 100644
-> --- a/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-edgeble-neu6b-io-u-boot.dtsi
-> @@ -14,3 +14,8 @@
->  		u-boot,spl-boot-order = &sdmmc;
->  	};
->  };
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-hs200-1_8v;
-> +};
-> diff --git a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
-> b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
-> index e8566785e965..354e4a8d39e3 100644
-> --- a/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-evb1-v10-u-boot.dtsi
-> @@ -10,3 +10,8 @@
->  		u-boot,spl-boot-order = "same-as-spl", &sdhci;
->  	};
->  };
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-hs200-1_8v;
-> +};
-> diff --git a/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
-> b/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
-> index 968385622fa5..7948464ac85f 100644
-> --- a/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
-> @@ -11,6 +11,11 @@
->  	bootph-some-ram;
->  };
-> 
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-hs200-1_8v;
-> +};
-> +
->  &sfc {
->  	pinctrl-names = "default";
->  	pinctrl-0 = <&fspim1_pins>;
-> diff --git a/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
-> b/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
-> index 7b937943a53c..d764135ab661 100644
-> --- a/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-quartzpro64-u-boot.dtsi
-> @@ -4,3 +4,8 @@
->   */
-> 
->  #include "rk3588-u-boot.dtsi"
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-hs200-1_8v;
-> +};
-> diff --git a/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
-> b/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
-> index 1aeb5410e43e..c5c94b421d1e 100644
-> --- a/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588-toybrick-x0-u-boot.dtsi
-> @@ -10,3 +10,8 @@
->  		u-boot,spl-boot-order = "same-as-spl", &sdhci;
->  	};
->  };
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-hs200-1_8v;
-> +};
+Noted, thanks!
