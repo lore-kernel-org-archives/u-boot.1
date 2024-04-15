@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70BE6C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:08:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65A34C00A94
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:08:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D403C88167;
-	Mon, 15 Apr 2024 08:08:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5114D88159;
+	Mon, 15 Apr 2024 08:08:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 267FB88179; Mon, 15 Apr 2024 08:08:07 +0200 (CEST)
+ id 0D05188189; Mon, 15 Apr 2024 08:08:09 +0200 (CEST)
 Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E90A88157
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DA3088169
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:08:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=csgroup.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
 Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
- by localhost (Postfix) with ESMTP id 4VHxYK0Bmyz9t0b;
- Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
+ by localhost (Postfix) with ESMTP id 4VHxYL0fnWz9tCl;
+ Mon, 15 Apr 2024 08:08:06 +0200 (CEST)
 Received: from pegase1.c-s.fr ([192.168.12.234])
  by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id zHyvF5_Wcw8g; Mon, 15 Apr 2024 08:08:04 +0200 (CEST)
+ with ESMTP id vRzVWe4-QDZl; Mon, 15 Apr 2024 08:08:06 +0200 (CEST)
 Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase1.c-s.fr (Postfix) with ESMTP id 4VHxYJ6hKVz9syj;
+ by pegase1.c-s.fr (Postfix) with ESMTP id 4VHxYJ6t9Qz9t0H;
  Mon, 15 Apr 2024 08:08:04 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id DB7DE8B778;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id E7FEB8B778;
  Mon, 15 Apr 2024 08:08:04 +0200 (CEST)
 Received: from messagerie.si.c-s.fr ([127.0.0.1])
  by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id zM5tgH7lEDBK; Mon, 15 Apr 2024 08:08:04 +0200 (CEST)
+ with ESMTP id pGD5SjoE6jpY; Mon, 15 Apr 2024 08:08:04 +0200 (CEST)
 Received: from PO20335.idsi0.si.c-s.fr (unknown [172.25.230.108])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id C275A8B764;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id CF7908B770;
  Mon, 15 Apr 2024 08:08:04 +0200 (CEST)
 From: Christophe Leroy <christophe.leroy@csgroup.eu>
 To: Jagan Teki <jagan@amarulasolutions.com>,
@@ -47,9 +47,9 @@ To: Jagan Teki <jagan@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Christophe Leroy <christophe.leroy@csgroup.eu>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 01/17] board: cssi: Fix MCR3000 board environment
-Date: Mon, 15 Apr 2024 08:07:14 +0200
-Message-ID: <b22aed7550f121feadca5c98e78d0ffa3ebcecee.1713160866.git.christophe.leroy@csgroup.eu>
+Subject: [PATCH v2 02/17] board: cssi: Fix SPI nodes in DTS
+Date: Mon, 15 Apr 2024 08:07:15 +0200
+Message-ID: <d280bb0e5171d1f09a5e1b2ada4aae7fd8a64637.1713160866.git.christophe.leroy@csgroup.eu>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1713160866.git.christophe.leroy@csgroup.eu>
 References: <cover.1713160866.git.christophe.leroy@csgroup.eu>
@@ -71,30 +71,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jean-Michel CASAUBON <jean-michel.casaubon@csgroup.eu>
+When adding additional SPI peripherals, the reg property needs to
+be added, and this leads to the following error:
 
-Remove a stray semicolon in MCR3000 board environment.
+  arch/powerpc/dts/cmpc885.dtb: Warning (reg_format): /immr@ff000000/spi@aa0/temp@1:reg: property has invalid length (4 bytes) (#address-cells == 1, #size-cells == 1)
+  arch/powerpc/dts/cmpc885.dtb: Warning (reg_format): /immr@ff000000/spi@aa0/temp@2:reg: property has invalid length (4 bytes) (#address-cells == 1, #size-cells == 1)
 
-Signed-off-by: Jean-Michel CASAUBON <jean-michel.casaubon@csgroup.eu>
-Reviewed-by: DUBOIS Hugo <hugo.dubois.ext@csgroup.eu>
+Fix it by removing cell-index and cell-size which is unused and add
+reg property. Also fix node name to be in line with reg value.
+Also add missing compatible for eeprom node.
+
 Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
 ---
- board/cssi/mcr3000/mcr3000.env | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/powerpc/dts/cmpc885.dts | 6 +++---
+ arch/powerpc/dts/cmpcpro.dts | 4 ++--
+ 2 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/board/cssi/mcr3000/mcr3000.env b/board/cssi/mcr3000/mcr3000.env
-index 372ab09094..380c10c4ce 100644
---- a/board/cssi/mcr3000/mcr3000.env
-+++ b/board/cssi/mcr3000/mcr3000.env
-@@ -8,7 +8,7 @@ dhcp_ip=ip=:::::eth0:dhcp
- console_args=console=ttyCPM0,115200N8
- loadkernel=ubi part nand0;ubifsmount ubi0;ubifsload ${loadaddr} /boot/${filename};ubifsumount; ubi detach
- bootcmd=run flashboot
--flashboot=setenv bootargs ${console_args} ip=${ipaddr}:${serverip}:${gatewayip}:${netmask}:mcr3k:eth0:off;${ofl_args}; run loadkernel; bootm ${loadaddr}
-+flashboot=setenv bootargs ${console_args} ip=${ipaddr}:${serverip}:${gatewayip}:${netmask}:mcr3k:eth0:off ${ofl_args}; run loadkernel; bootm ${loadaddr}
- tftpboot=setenv bootargs ${console_args} ip=${ipaddr}:${serverip}:${gatewayip}:${netmask}:mcr3k:eth0:off ${ofl_args}; tftp ${loadaddr} ${filename}; bootm ${loadaddr}
- dhcpboot=dhcp ${loadaddr} ${filename};setenv bootargs ${console_args} ${dhcp_ip} ${ofl_args}; bootm ${loadaddr}
- update=echo 'Updating ubi image'; if tftp 0x2000 $ubifile; then nand erase.chip; nand write 0x2000 0x00 $filesize; fi
+diff --git a/arch/powerpc/dts/cmpc885.dts b/arch/powerpc/dts/cmpc885.dts
+index 7b9566a0fa..9a33e7e77c 100644
+--- a/arch/powerpc/dts/cmpc885.dts
++++ b/arch/powerpc/dts/cmpc885.dts
+@@ -83,13 +83,13 @@
+ 		spi: spi@aa0 {
+ 			status = "okay";
+ 			#address-cells = <1>;
+-			#size-cells = <1>;
+-			cell-index = <0>;
++			#size-cells = <0>;
+ 			compatible = "fsl,mpc8xx-spi";
+ 			gpios = <&CPM1_PIO_B 21 1>; /* /EEPROM_CS ACTIVE_LOW */
+ 
+ 			eeprom@0 {
+-				cell-index = <1>;
++				reg = <0>;
++				compatible = "atmel,at25", "cs,eeprom";
+ 			};
+ 		};
+ 	};
+diff --git a/arch/powerpc/dts/cmpcpro.dts b/arch/powerpc/dts/cmpcpro.dts
+index c27d9dba33..78f8a9f4d3 100644
+--- a/arch/powerpc/dts/cmpcpro.dts
++++ b/arch/powerpc/dts/cmpcpro.dts
+@@ -142,9 +142,9 @@
+ 			mode = "cpu";
+ 			gpios = <&qe_pio_d 3 1>;
+ 			clock-frequency = <0>;
+-			eeprom@3 {
++			eeprom@0 {
++				reg = <0>;
+ 				compatible = "atmel,at25", "cs,eeprom";
+-				cell-index = <1>;
+ 			};
+ 		};
+ 		eth0: ucc@3000 {
 -- 
 2.43.0
 
