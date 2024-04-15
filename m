@@ -4,52 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84224C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 12:56:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12D96C00A94
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 13:01:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F377881EA;
-	Mon, 15 Apr 2024 14:55:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8EF8088190;
+	Mon, 15 Apr 2024 15:00:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1713185756;
-	bh=hWgjOJLqJyHvwoDAHZz0cSmt1A/HkL+e/YEXt6r3I38=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=XSBdavdvKTsob+9EF7XxsPy9yHd4rPI35FJEHpysWH9P0K7vwQayDBnoE1z0jPyMm
-	 0BV5Epf6WQDwLHlCMixiy0FZ9Himk92dmUZ/mGsMEr2M2gUAv37IKU4lHJcyd8yfge
-	 ZiwD+mji7ZSr5GwoLPCB52t79wXNaQyqfMW42SziizE8z470KZV2asUAxs9S2zDx8L
-	 z7tyygWFQDqzlrAmYRDn+8zVsMIiQhxb30dz61fzIZJ1xWZsJfirFSak0TfckE+Lp2
-	 2M4Q+6mrjWCjXrO7W3VshZqslkRXylYg851ytU5oQwgGvTVmOBozcQCKY+1naAbrg3
-	 Y0AXfenAbZR+w==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jv2BCvYd";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id B2B19881AE; Mon, 15 Apr 2024 15:00:57 +0200 (CEST)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 5C9A488198;
- Mon, 15 Apr 2024 14:55:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1713185755;
- bh=hWgjOJLqJyHvwoDAHZz0cSmt1A/HkL+e/YEXt6r3I38=;
- h=From:To:Cc:Subject:Date:From;
- b=SArQO48L0mmxzyZLIQQza6926HNbjWkN8NiSc8E2/eRRhKsh21opjQmJRoP5NYL7n
- ei1GigKZNI22E4S+XKwDOl/nCNeSF/tDx7iZF8eQHWQ3egWg/TFT+64a9pnNweDEYC
- VGM71L9aIfG6jva6Dtv9FJ8Lv6T1BfO4BXvx2QRK23AblsD+U8cFEGOnX+1eS0ebbT
- /TJ1qxLzuxkUe0L04LULoyqkjcDu9RdzgmSHH9CAKpx59OR/KXzYYGjHmoPy/7sBBc
- 3igYNcR23FhLZUdP4BLOoZor4lelL6o7638djtk9y8/rTeaWAv23Hissu5o49LX1aQ
- 7L02mKtTONgFg==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Igor Opaniuk <igor.opaniuk@foundries.io>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2] ARM: stm32: Initialize TAMP_SMCR BKP..PROT fields on
- STM32MP15xx
-Date: Mon, 15 Apr 2024 14:55:10 +0200
-Message-ID: <20240415125541.6547-1-marex@denx.de>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id ECBA688137
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 15:00:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=yasuharu.shibata@gmail.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-1e65a1370b7so10008025ad.3
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 06:00:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713186050; x=1713790850; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AGx8sJU/As6Drl3WKJGTy21sRIyx89B0+r38bVX6Pqs=;
+ b=jv2BCvYdnWt2r/+S9VO0GbzlCgv9gvvsoN8s53bf/QAnWosXx9AnZgCfvY1C4qcM2A
+ unmFhsABM+3W1suv/QQCokJtBKAjnDGTavRdCPQKzQ1qX/aa6CgNZToVOkP+vFkhCg80
+ k1vVncvpspiHztlHX4GjW0M6M/DjvXKLsuXBx+4kVFvm+S1AWooYQ7pJzlidkwjmo0TN
+ nvQQKSO/abz5iZbFYOnz+GAkPDk8cU95D2BTc4dkq4ZF52J3rtqBAvMvpUXpiTIKND81
+ ljXnxOQ/f58Ql0FBNIOsWRKlzHMwUdzAd7ALP2ExHpwGIHT85jdRaUf++AGk5xdDjtzq
+ 12eQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713186050; x=1713790850;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AGx8sJU/As6Drl3WKJGTy21sRIyx89B0+r38bVX6Pqs=;
+ b=XR26oz4JtjWMbKyIOAdsT+LhHnmnUI4utaa+vpjmcSavE7NENVpZEw8Z/kQEhsxwL5
+ EXhz3CzBzECU1GJ1g0wL2WiDJyqG3eiSNTe9COofGMuT73o//2KEQA25Iy8ctHEtFJYw
+ XBMZEvT0P/Y+DYecDamxIbqADxR5OW2Q3M8VFt5I48pq0d5lVGzm1FhS8ClV8HOVlFzS
+ JryEfaLdVdQNnljOMDzYXkaNzbWPTX2kAAErujmwMS51Ghwi3/kSOfIbwtlolWVIFBdc
+ M34FkYdLIrz4OzTIX3x+zBMnWJgCCfusS3xMWvYQPkrv2RJYgKIbzqdzRJg1Fcmxz8IG
+ SAkQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCViP7SSpYeoqct+50zxrJiALA6aW6ZqKnPKmdyQ27ginRrqkNcaqBCIvx3ez74nVNSC0CH9FO8ranUepwkMdq/dEFnL8g==
+X-Gm-Message-State: AOJu0YxtP8pyGUypfwDuest6iqN2uuwcapH50N18HMWH80avNOLHHeUa
+ LRKPIKrw3BTVOuY3TGDOmqvCew+9LNt6kYnpNcGDAGpKc1+VCiUl
+X-Google-Smtp-Source: AGHT+IFnKLFnKPVCw6O7+1iAfw7g2wkujvQk7ciaEOhmaG+MassMoC+TSaNIZX/2amCcVB2Qj5DFwQ==
+X-Received: by 2002:a17:902:e786:b0:1e6:3494:61fc with SMTP id
+ cp6-20020a170902e78600b001e6349461fcmr4452441plb.0.1713186050256; 
+ Mon, 15 Apr 2024 06:00:50 -0700 (PDT)
+Received: from localhost.localdomain ([2409:10:d8a0:1500:d0b1:1308:35d6:2c38])
+ by smtp.gmail.com with ESMTPSA id
+ s3-20020a170902c64300b001d8edfec673sm7851075pls.214.2024.04.15.06.00.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Apr 2024 06:00:49 -0700 (PDT)
+From: Yasuharu Shibata <yasuharu.shibata@gmail.com>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH 0/1] net: wget: fix TCP sequence number wrap around issue
+Date: Mon, 15 Apr 2024 22:00:12 +0900
+Message-Id: <20240415130013.26721-1-yasuharu.shibata@gmail.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
+References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -68,83 +96,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In case of an OTP-CLOSED STM32MP15xx system, the CPU core 1 cannot be
-released from endless loop in BootROM only by populating TAMP BKPxR 4
-and 5 with magic and branch address and sending SGI0 interrupt from
-core 0 to core 1 twice. TAMP_SMCR BKP..PROT fields must be initialized
-as well to release the core 1 from endless loop during the second SGI0
-handling on core 1. Initialize TAMP_SMCR to protect the first 16 backup
-registers, the ones which contain the core 1 magic, branch address and
-boot information.
+Hi,
 
-This requirement seems to be undocumented, therefore it was necessary
-to trace and analyze the STM32MP15xx BootROM using OpenOCD and objdump.
-Ultimately, it turns out that a certain BootROM function reads out the
-TAMP_SMCR register and tests whether the BKP..PROT fields are non-zero.
-If they are zero, the BootROM code again waits for SGI0 using WFI, else
-the execution moves forward until it reaches handoff to the TAMP BKPxR 5
-branch address.
+I send a patch fixing the wget issue.
+There is a wrap around issue as already mentioned in [1].
 
-This fixes CPU core 1 release using U-Boot PSCI implementation on an
-OTP-CLOSED system, i.e. system with fuse 0 bit 6 set.
+The log in [2] indicates the following packets.
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Simon Glass <sjg@chromium.org
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
-V2: Fix up the BKPRWD/BKPWD mask typo
----
- arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+- Success packet
+Packets received 64368, Transfer Successful
+Bytes transferred = 93198937 (58e1a59 hex)
 
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-index dd99150fbc2..a2496361e01 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-@@ -14,6 +14,7 @@
- #include <asm/arch/sys_proto.h>
- #include <dm/device.h>
- #include <dm/uclass.h>
-+#include <linux/bitfield.h>
- 
- /* RCC register */
- #define RCC_TZCR		(STM32_RCC_BASE + 0x00)
-@@ -41,6 +42,9 @@
- #define TZC_REGION_ID_ACCESS0	(STM32_TZC_BASE + 0x114)
- 
- #define TAMP_CR1		(STM32_TAMP_BASE + 0x00)
-+#define TAMP_SMCR		(STM32_TAMP_BASE + 0x20)
-+#define TAMP_SMCR_BKPRWDPROT	GENMASK(7, 0)
-+#define TAMP_SMCR_BKPWDPROT	GENMASK(23, 16)
- 
- #define PWR_CR1			(STM32_PWR_BASE + 0x00)
- #define PWR_MCUCR		(STM32_PWR_BASE + 0x14)
-@@ -136,6 +140,18 @@ static void security_init(void)
- 	 */
- 	writel(0x0, TAMP_CR1);
- 
-+	/*
-+	 * TAMP: Configure non-zero secure protection settings. This is
-+	 * checked by BootROM function 35ac on OTP-CLOSED device during
-+	 * CPU core 1 release from endless loop. If secure protection
-+	 * fields are zero, the core 1 is not released from endless
-+	 * loop on second SGI0.
-+	 */
-+	clrsetbits_le32(TAMP_SMCR,
-+			TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPWDPROT,
-+			FIELD_PREP(TAMP_SMCR_BKPRWDPROT, 0x10) |
-+			FIELD_PREP(TAMP_SMCR_BKPWDPROT, 0x10));
-+
- 	/* GPIOZ: deactivate the security */
- 	writel(BIT(0), RCC_MP_AHB5ENSETR);
- 	writel(0x0, GPIOZ_SECCFGR);
+- Failed packet
+Packets received 64368, Transfer Successful
+Bytes transferred = 26984682 (19bc0ea hex)
+
+"Bytes transferred" are different, but "Packets received" are same.
+First one output by net_boot_file_size that is assigned at store_block().
+Second one output by packets that is incremented at wget_handler().
+Those differences are caused by the following line.
+If tcp_seq_num is wrap around, store_block() isn't called.
+
+```
+static void wget_handler(uchar *pkt, u16 dport,
+...
+                if (tcp_seq_num >= initial_data_seq_num &&
+                    store_block(pkt, tcp_seq_num - initial_data_seq_num,
+                                len) != 0) {
+                        wget_fail("wget: store error\n",
+                                  tcp_seq_num, tcp_ack_num, action);
+                        net_set_state(NETLOOP_FAIL);
+                        return;
+                }
+```
+
+I reproduced the issue and fixed it with the following patch.
+Please check this patch.
+I will recommend to apply patch in [3] with this patch,
+if packets may drop.
+
+[1]: https://lore.kernel.org/u-boot/CAOf5uwmb0vJOwSj81KvfWpK6yobyz0Ozm5vDGCa9K0rZejbZLA@mail.gmail.com/
+[2]: https://lore.kernel.org/u-boot/CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com/
+[3]: https://lore.kernel.org/u-boot/20240414104607.5966-1-yasuharu.shibata@gmail.com/
+
+Yasuharu Shibata (1):
+  net: wget: fix TCP sequence number wrap around issue
+
+ net/wget.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
 -- 
-2.43.0
+2.25.1
 
