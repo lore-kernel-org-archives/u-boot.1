@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D8B6C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 11:18:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF22BC00A94
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 11:21:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88CFF87E95;
-	Mon, 15 Apr 2024 13:18:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 20F9B87E75;
+	Mon, 15 Apr 2024 13:21:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F7mNi6XQ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AsCzgIHr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF8FC87D5F; Mon, 15 Apr 2024 13:18:34 +0200 (CEST)
-Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
- [IPv6:2a00:1450:4864:20::432])
+ id 0EBB187E83; Mon, 15 Apr 2024 13:21:33 +0200 (CEST)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 604D187E95
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 13:18:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 02A2287D5F
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 13:21:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x432.google.com with SMTP id
- ffacd0b85a97d-346f4266e59so2340680f8f.3
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 04:18:31 -0700 (PDT)
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-2da888330b2so11896751fa.2
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 04:21:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713179911; x=1713784711; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=linaro.org; s=google; t=1713180090; x=1713784890; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=y4fuxsb3T/ty4KcOyKPHLvX++k2UA2/FQuR3FZ7o18g=;
- b=F7mNi6XQUqJTTSHAgxW6cMjuS8Ci7V6g5XQA275CesSea3CNwZEo2WWz9uaPC/6S9d
- 2lSSdR+mWO5RZiEiLOaKdCtqIh1vXByRbVNoLYL+TzYTNttSPYWj19egRLBHZqCijOy/
- ibs7c4w93mCruxwFj0T3b3b/l+YS1EzUrX42R/DkT11NuCq+/b4n3gFPGr9d/5VtbkUt
- qOfg5Q1cmnDvl+T/YoNOBb8MXLaftl2hzn7PT0emWJr2S7ZfJMX1hCncb/a79QLnA4tq
- mDOzZTgFy7uAQAyLQeOfKOLbPYcK3CcN3ymTrjShC1z0sb806i8/g6Y8ZajD5nzJNWTd
- KpAg==
+ bh=lFI2Na6vdbhrKhJmFntUZaXICOxX4E89wP1g8WhhIXY=;
+ b=AsCzgIHrjjOE9cHbfqkcUzFQBBcvGO4fYwocPa+C2qWjZUzsly4NrBjfiGymTkBbhF
+ +Ik1VOjiLhzvMuVNCel7e18EuDIOepPyy4ddLj4VtOX3ylCP/Y/HbJKkCWEwVr+Yvogf
+ AlsBL6l9HuxR3baVcNnZb1ylBHUeDBk9kO5QeccbWLqOZ9rCba+LHqET7MF7Et433i98
+ YJzmUAwrRavgTdjOdm7aL8UYsTDEUKl47luoZIZO+hOTu8N0DmN2ASKg+lavomeaPeXt
+ uRwEpV0KSkGQMgjE7S0jXEfC1k5MX6bpkzA9vXieFlI5MihQkrxRueJoKUzuAM38dB1J
+ 20wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713179911; x=1713784711;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ d=1e100.net; s=20230601; t=1713180090; x=1713784890;
+ h=content-transfer-encoding:in-reply-to:from:references:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=y4fuxsb3T/ty4KcOyKPHLvX++k2UA2/FQuR3FZ7o18g=;
- b=wetVs6fV+0yvFo3QpKf5Xi33zL4XSY0xStuvAHIpIvW49Ga0GjNkKsnnh6zSd8+qCb
- BDF4t+Fk63hH12cVldccANCKolC3ejF1NXoLOsy3JXD9qRS0YSt0pnEesz7XEACJ6QBg
- QmDOM9Np3ikRL8Agyq8qzfEwo01KjzomoLOJ/4rjfesJnxyiRPXIwIHn1dA3+6VzCVMb
- F3XrE28uQVTeMcuwieLO4jk8rz+mNfVhTxu3WnQs708FcxommWBazehkusI/aINI5q3s
- ByyTljqq8oveUbuMRnKIRnD93mfyQRKVBefUfJO35OUDWUVyqnlwniLPiBaPx7dekk04
- Wmpw==
+ bh=lFI2Na6vdbhrKhJmFntUZaXICOxX4E89wP1g8WhhIXY=;
+ b=Piuv+PixISD1LIOCxCyl5VBEGvmd8+Mk3tF9K/Zh7WEFEBJDPgbHwJ5fqpCXldRfRK
+ zx1sVBGZbOIK2o+HD7YRLPc69Acvmks+ZlmxyH0uHjlD2PoP4YVkP4BtWNiuN+Mr+GO5
+ 9su4sUxk7WD2Wg3h8cY3t52g80f0z9o+jBk5RisBYriNkUfdSDV+CroymsfY2B584dqi
+ GzK2fDA9E2yeSMxeh0XCJmuwwjFnkXFNounaqCQqKcPzySr5+/vRu7Y4VpTACZ9BWK89
+ ydvHBsv9/jNp1KwCBZu5DwQRi7fxwHHm80f+n2dkduZ/hSt/xrFt6ZxjAfdN7z3DpWPN
+ or7g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWxCx8ZgIOTO8THANZipgchrZ1yUanmT7/td0fvsCJ2R3V1XNxsn0juFJp/uEHfpnJjRkjLIDuujNzpNhwvov5jwTJAHA==
-X-Gm-Message-State: AOJu0YwITQrU2gFRnTMAxT7gAA4t/PDzO33otHpToT+KXin8PI7c9A91
- /LCGRyLFtnnApdBk9vIIwK3prAN7hTr/x2nuoNNTpi8iNLQKmz+G1A7niwQMz9w=
-X-Google-Smtp-Source: AGHT+IH0U9CEAFV0uY+muhmthamv1SBdXsWGsOi/vpnZD4OJEmpT+eSgSDwExpHSTHPRDBksmSxhQg==
-X-Received: by 2002:a5d:6a8b:0:b0:341:907a:bee9 with SMTP id
- s11-20020a5d6a8b000000b00341907abee9mr4473700wru.16.1713179910780; 
- Mon, 15 Apr 2024 04:18:30 -0700 (PDT)
+ AJvYcCVauBp7h00H6O+U8w7oOdUaKrOaboRXmDZqemczgzZnxbXcHm1OQxVYHF3P9cQ4VKcIFbx9pRPNLvwNYOkD6ZuCvgIYAA==
+X-Gm-Message-State: AOJu0YzJUNGbIbMH6uzArUo69vVoJa9WGPUpiheYdquuqfCA/qjmv12r
+ XdPadyYKob5TZw9cwWAtqXCCkjgmlWpw0Hp7NWRroZCGGFMxAgwbHGm0HBD0O/Y=
+X-Google-Smtp-Source: AGHT+IHGo4It66dPc7ef72AqL3a3uhifWmEI9gg9RvUnFdAynuoN59iYMdwua/ziBHuqGyTG2zP5ag==
+X-Received: by 2002:a2e:8e88:0:b0:2d8:6ca7:2165 with SMTP id
+ z8-20020a2e8e88000000b002d86ca72165mr7216547ljk.46.1713180090255; 
+ Mon, 15 Apr 2024 04:21:30 -0700 (PDT)
 Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- w7-20020a5d6807000000b0034354a99d43sm11834420wru.43.2024.04.15.04.18.30
+ fj8-20020a05600c0c8800b0041869d21f42sm2585286wmb.41.2024.04.15.04.21.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Apr 2024 04:18:30 -0700 (PDT)
-Message-ID: <ed463461-2e96-462f-8b43-1e6ca4aad7a3@linaro.org>
-Date: Mon, 15 Apr 2024 12:18:29 +0100
+ Mon, 15 Apr 2024 04:21:29 -0700 (PDT)
+Message-ID: <7c40379e-6a59-493e-922f-3690ff0edd8e@linaro.org>
+Date: Mon, 15 Apr 2024 12:21:29 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: dwc3-generic: fix support without DM_REGULATOR
+Subject: Re: [PATCH 1/3] serial: allow selecting MSM debug UART with
+ ARCH_IPQ40XX
 Content-Language: en-US
-To: Dragan Simic <dsimic@manjaro.org>, Robert Marko <robert.marko@sartura.hr>
-Cc: marex@denx.de, trini@konsulko.com, jonas@kwiboo.se,
- kever.yang@rock-chips.com, jagan@amarulasolutions.com,
- mkorpershoek@baylibre.com, peter@korsgaard.com, sjg@chromium.org,
- neil.armstrong@linaro.org, u-boot@lists.denx.de, j.beck@linefinity.com
-References: <20240415105405.432679-1-robert.marko@sartura.hr>
- <a2ea41b8-8656-4734-8594-c1d38a30e25e@linaro.org>
- <CA+HBbNH=UGLY63-bSoNmmV7ZBkt2zkbS0sdqbTLTmqikzhrb_g@mail.gmail.com>
- <85a712c7afa962b227d16a2fced6f57c@manjaro.org>
+To: Robert Marko <robert.marko@sartura.hr>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@linaro.org, sjg@chromium.org,
+ bmeng.cn@gmail.com, marek.vasut+renesas@mailbox.org, u-boot@lists.denx.de
+References: <20240415105028.432404-1-robert.marko@sartura.hr>
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <85a712c7afa962b227d16a2fced6f57c@manjaro.org>
+In-Reply-To: <20240415105028.432404-1-robert.marko@sartura.hr>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,119 +97,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Robert,
 
+Happy to see someone working on those IPQ platforms. If it makes sense
+to then I'd be happy to adopt them under ARCH_SNAPDRAGON at some point?
+I'm not hugely familiar with the usecase here (but eager to learn more!).
 
-On 15/04/2024 12:14, Dragan Simic wrote:
-> Hello all,
+On 15/04/2024 11:49, Robert Marko wrote:
+> Currently, DEBUG_UART_MSM depends on ARCH_SNAPDRAGON only, but IPQ40XX
+> devices also use the same UART HW so they can also use the debug UART.
 > 
-> On 2024-04-15 13:11, Robert Marko wrote:
->> On Mon, Apr 15, 2024 at 12:57 PM Caleb Connolly
->> <caleb.connolly@linaro.org> wrote:
->>>
->>> On 15/04/2024 11:53, Robert Marko wrote:
->>> > Recent addition of vbus-supply support has broke platform which
->>> dont use
->>> > controllable regulators for USB.
->>> >
->>> > Issue is that even withou DM_REGULATOR being enabled regulator related
->>> > functions will still build as there is a stub in regulator.h but
->>> they will
->>> > simply return -ENOSYS which will then make dwc3_generic_host_probe()
->>> > return the same error thus breaking probe.
->>>
->>> Rather than stubbing out the code, could you check for -ENOSYS and
->>> ignore the error in that case? I believe there's only one place where
->>> this matters (marked below).
->>
->> Sure, that was my first approach but it did not seem right to me.
->> But if its OK with you, I can do that.
+> So, allow selecting DEBUG_UART_MSM when using ARCH_IPQ40XX as well.
 > 
-> FWIW, ifdef'ing the code out seems like a cleaner approach to me.
-
-Given that the stub functions exist, imho it makes sense to use them.
-It's also easy to forget to add those #ifdefs if there are other
-regulator changes in future patches.
-
-But overall I don't feel too strongly about this, for what it does this
-code is fine, I'll defer to Marek.
-
-> 
->>> > Fixes: de451d5d5b6f ("usb: dwc3-generic: support external vbus
->>> regulator")
->>> > Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 
 Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
->>> > ---
->>> >  drivers/usb/dwc3/dwc3-generic.c | 8 ++++++++
->>> >  1 file changed, 8 insertions(+)
->>> >
->>> > diff --git a/drivers/usb/dwc3/dwc3-generic.c
->>> b/drivers/usb/dwc3/dwc3-generic.c
->>> > index 7a00529a2a..784d3ec2ed 100644
->>> > --- a/drivers/usb/dwc3/dwc3-generic.c
->>> > +++ b/drivers/usb/dwc3/dwc3-generic.c
->>> > @@ -242,6 +242,7 @@ static int dwc3_generic_host_probe(struct
->>> udevice *dev)
->>> >       if (rc)
->>> >               return rc;
->>> >
->>> > +#if CONFIG_IS_ENABLED(DM_REGULATOR)
->>> >       rc = device_get_supply_regulator(dev, "vbus-supply",
->>> &priv->vbus_supply);
->>> >       if (rc)
->>> >               debug("%s: No vbus regulator found: %d\n", dev->name,
->>> rc);
->>> > @@ -250,14 +251,17 @@ static int dwc3_generic_host_probe(struct
->>> udevice *dev)
->>> >       rc = regulator_set_enable_if_allowed(priv->vbus_supply, true);
->>> >       if (rc)
->>> >               return rc;
->>>
->>> Here, if (rc && rc != -ENOSYS)
->>> or even if (CONFIG_IS_ENABLED(DM_REGULATOR) && rc) to be verbose (maybe
->>> not the preferred style though).
->>>
->>> All the other regulator_* calls either ignore the result or only print a
->>> debug message.
->>> > +#endif
->>> >
->>> >       hccr = (struct xhci_hccr *)priv->gen_priv.base;
->>> >       hcor = (struct xhci_hcor *)(priv->gen_priv.base +
->>> >                       HC_LENGTH(xhci_readl(&(hccr)->cr_capbase)));
->>> >
->>> >       rc = xhci_register(dev, hccr, hcor);
->>> > +#if CONFIG_IS_ENABLED(DM_REGULATOR)
->>> >       if (rc)
->>> >               regulator_set_enable_if_allowed(priv->vbus_supply,
->>> false);
->>> > +#endif
->>> >
->>> >       return rc;
->>> >  }
->>> > @@ -265,14 +269,18 @@ static int dwc3_generic_host_probe(struct
->>> udevice *dev)
->>> >  static int dwc3_generic_host_remove(struct udevice *dev)
->>> >  {
->>> >       struct dwc3_generic_host_priv *priv = dev_get_priv(dev);
->>> > +#if CONFIG_IS_ENABLED(DM_REGULATOR)
->>> >       int rc;
->>> > +#endif
->>> >
->>> >       /* This function always returns 0 */
->>> >       xhci_deregister(dev);
->>> >
->>> > +#if CONFIG_IS_ENABLED(DM_REGULATOR)
->>> >       rc = regulator_set_enable_if_allowed(priv->vbus_supply, false);
->>> >       if (rc)
->>> >               debug("%s: Failed to disable vbus regulator: %d\n",
->>> dev->name, rc);
->>> > +#endif
->>> >
->>> >       return dwc3_generic_remove(dev, &priv->gen_priv);
->>> >  }
->>>
->>> -- 
->>> // Caleb (they/them)
+> ---
+>  drivers/serial/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+> index 8b19e2684e..1fe4607598 100644
+> --- a/drivers/serial/Kconfig
+> +++ b/drivers/serial/Kconfig
+> @@ -321,7 +321,7 @@ config DEBUG_UART_S5P
+>  
+>  config DEBUG_UART_MSM
+>  	bool "Qualcomm QUP UART debug"
+> -	depends on ARCH_SNAPDRAGON
+> +	depends on ARCH_SNAPDRAGON || ARCH_IPQ40XX
+>  	help
+>  	  Select this to enable a debug UART using the serial_msm driver. You
+>  	  will need to provide parameters to make this work. The driver will
 
 -- 
 // Caleb (they/them)
