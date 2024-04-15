@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79F06C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 07:46:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5971C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 07:55:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD13F881EF;
-	Mon, 15 Apr 2024 09:46:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id 13D638644E;
+	Mon, 15 Apr 2024 09:55:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="Ymvd3Djx";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="C6y96VJL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2945E881EF; Mon, 15 Apr 2024 09:46:10 +0200 (CEST)
-Received: from mail.thorsis.com (mail.thorsis.com [IPv6:2003:a:e28:26e4::10])
+ id B0E44870D2; Mon, 15 Apr 2024 09:55:04 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F7008822C
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 09:46:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 21576148CFA2; Mon, 15 Apr 2024 09:46:03 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1713167163; h=from:subject:date:message-id:to:cc:mime-version:
- content-transfer-encoding:in-reply-to:references;
- bh=WtYVL2+stfQf5nP5HjHbbXcuK38LCDMmHMEoArXQ9iY=;
- b=Ymvd3DjxDPdJzWNRulR3N6YGEYJ+pDbNyh2d1nlsyzihVGnMPhb/oZGLTNkAlDWyYiKK7G
- 7lrQeJhX5+Q7YRBaggHyuiAiPx1IxptpUKO76u02+NXzg1ZR1GaSgy9Mf6ggrdeQULFdbG
- PtFvtWt54QZkBPo52xyPiL7Pvwgk95uuvLD/khJZ0CsZPr5eDQqtwUTUo0nr5ywxtvb4f2
- jPFfq1wZDRimUcbl9QlGBhtOD+MGNiWoFDEHHHnBvaoTziLNxabhexJMszeiicRokVyJDj
- p6X+3GCw8EfVvbVmXeHLRU1ug1nQM+oO1diqTXZn+YSvaK7i2d/PUi11SpZBJA==
-From: Alexander Dahl <ada@thorsis.com>
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Eugen Hristev <eugen.hristev@collabora.com>,
- Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
- Mihai Sain <mihai.sain@microchip.com>, Li Bin <bin.li@microchip.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v3 2/3] cmd: nand: Add new optional sub-command 'onfi'
-Date: Mon, 15 Apr 2024 09:45:46 +0200
-Message-Id: <20240415074547.779264-3-ada@thorsis.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 7ECDF80EED
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 09:55:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
+ [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id 89C941F91E;
+ Mon, 15 Apr 2024 09:55:01 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1713167701;
+ bh=IbG/BGjfYpoJtQwkF9t55mbUQUzJOtO3OBoYyAhvplM=; h=From:To:Subject;
+ b=C6y96VJLLfkmaLXeMHLkG39ADs4v8qZIZ4qQeOzGnOLZnmEg0G5iWm2BcWwro24+8
+ lUwGtbjKS4t0b+jZDg0xHd3UPg1teOjyD5frtDqXoS5VVIsGgj0jvm98LmbWSVvCUB
+ 17wJOISlhGSvT8S8NRmpBJLynrDpg4/w8TMhXqs+Y8UHRTLMyeOR2aIdDU4bWfjxjl
+ MBEMlkbcF6DO57ABb1RLg/Ot2Ki1WDFPV7zCIxKGb88XKiNfwq7++biL96N3d2CIjl
+ JcQCfh5DoTVPRxbIj8jLAhq6S3UjeXJH8LqZcQoNPW8WAVeLouTPYAHN/eJcUO0ukH
+ DEB+vI4qwz72w==
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Parth Pancholi <parth.pancholi@toradex.com>, u-boot@lists.denx.de,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Dhruva Gole <d-gole@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: [PATCH v1] arm: dts: k3-am625-verdin: add tifsstub to tispl.bin
+Date: Mon, 15 Apr 2024 09:54:58 +0200
+Message-Id: <20240415075458.8584-1-francesco@dolcini.it>
 X-Mailer: git-send-email 2.39.2
-In-Reply-To: <20240415074547.779264-1-ada@thorsis.com>
-References: <20240415074547.779264-1-ada@thorsis.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,163 +67,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Override the ONFI timing mode at runtime.
+From: Parth Pancholi <parth.pancholi@toradex.com>
 
-Signed-off-by: Alexander Dahl <ada@thorsis.com>
+Adds tifsstub binaries, this is required for deepsleep functionality.
+
+This implements the same change as commit 128f81290b7d ("arm: dts: k3:
+binman: am625: add support for signing TIFSSTUB Images") did for TI AM62
+SK board.
+
+Signed-off-by: Parth Pancholi <parth.pancholi@toradex.com>
+Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
 ---
+ .../dts/k3-am625-verdin-wifi-dev-binman.dtsi  | 140 +++++++++++++++++-
+ 1 file changed, 138 insertions(+), 2 deletions(-)
 
-Notes:
-    v3:
-    - no changes to this patch
-    
-    v2:
-    - initial patch version (not present in v1)
-
- cmd/Kconfig                      | 10 ++++++
- cmd/nand.c                       | 61 ++++++++++++++++++++++++++++++++
- drivers/mtd/nand/raw/nand_base.c |  2 +-
- include/linux/mtd/rawnand.h      |  1 +
- 4 files changed, 73 insertions(+), 1 deletion(-)
-
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 8eeb99eea5e..5dc47bd3f51 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1382,6 +1382,7 @@ config CMD_NAND
- 	  NAND support.
+diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+index 6f5845024f27..a9b86b61e53e 100644
+--- a/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
++++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
+@@ -150,12 +150,107 @@
+ 			filename = "ti-dm/am62xx/ipc_echo_testb_mcu1_0_release_strip.xer5f";
+ 		};
+ 	};
++
++	tifsstub-hs {
++		filename = "tifsstub.bin_hs";
++		ti-secure-rom {
++			content = <&tifsstub_hs_cert>;
++			core = "secure";
++			load = <0x40000>;
++			sw-rev = <CONFIG_K3_X509_SWRV>;
++			keyfile = "custMpk.pem";
++			countersign;
++			tifsstub;
++		};
++		tifsstub_hs_cert: tifsstub-hs-cert.bin {
++			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
++			type = "blob-ext";
++			optional;
++		};
++		tifsstub_hs_enc: tifsstub-hs-enc.bin {
++			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
++			type = "blob-ext";
++			optional;
++		};
++	};
++
++	tifsstub-fs {
++		filename = "tifsstub.bin_fs";
++		tifsstub_fs_cert: tifsstub-fs-cert.bin {
++			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-cert.bin";
++			type = "blob-ext";
++			optional;
++		};
++		tifsstub_fs_enc: tifsstub-fs-enc.bin {
++			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-hs-enc.bin";
++			type = "blob-ext";
++			optional;
++		};
++
++	};
++
++	tifsstub-gp {
++		filename = "tifsstub.bin_gp";
++		ti-secure-rom {
++			content = <&tifsstub_gp>;
++			core = "secure";
++			load = <0x60000>;
++			sw-rev = <CONFIG_K3_X509_SWRV>;
++			keyfile = "ti-degenerate-key.pem";
++			tifsstub;
++		};
++		tifsstub_gp: tifsstub-gp.bin {
++			filename = "ti-sysfw/ti-fs-stub-firmware-am62x-gp.bin";
++			type = "blob-ext";
++			optional;
++		};
++	};
++
+ 	ti-spl {
+ 		insert-template = <&ti_spl_template>;
  
- if CMD_NAND
-+
- config CMD_NAND_TRIMFFS
- 	bool "nand write.trimffs"
- 	default y if ARCH_SUNXI
-@@ -1398,6 +1399,15 @@ config CMD_NAND_TORTURE
- 	help
- 	  NAND torture support.
+ 		fit {
  
-+config CMD_NAND_ONFI
-+	bool "nand onfi"
-+	help
-+	  Set ONFI timing modes explicitly.
-+	  This is a debugging command to switch to slower ONFI timing
-+	  modes for testing.
-+	  In normal operation determining the timing mode automatically
-+	  should work fine, and you don't need this.
+ 			images {
++				tifsstub-hs {
++					description = "TIFSSTUB";
++					type = "firmware";
++					arch = "arm32";
++					compression = "none";
++					os = "tifsstub-hs";
++					load = <0x9dc00000>;
++					entry = <0x9dc00000>;
++					blob-ext {
++						filename = "tifsstub.bin_hs";
++					};
++				};
 +
- endif # CMD_NAND
++				tifsstub-fs {
++					description = "TIFSSTUB";
++					type = "firmware";
++					arch = "arm32";
++					compression = "none";
++					os = "tifsstub-fs";
++					load = <0x9dc00000>;
++					entry = <0x9dc00000>;
++					blob-ext {
++						filename = "tifsstub.bin_fs";
++					};
++				};
++
++				tifsstub-gp {
++					description = "TIFSSTUB";
++					type = "firmware";
++					arch = "arm32";
++					compression = "none";
++					os = "tifsstub-gp";
++					load = <0x9dc00000>;
++					entry = <0x9dc00000>;
++					blob-ext {
++						filename = "tifsstub.bin_gp";
++					};
++				};
++
+ 				dm {
+ 					ti-secure {
+ 						content = <&dm>;
+@@ -187,7 +282,8 @@
+ 				conf-0 {
+ 					description = "k3-am625-verdin-wifi-dev";
+ 					firmware = "atf";
+-					loadables = "tee", "dm", "spl";
++					loadables = "tee", "tifsstub-hs", "tifsstub-fs",
++						    "tifsstub-gp", "dm", "spl";
+ 					fdt = "fdt-0";
+ 				};
+ 			};
+@@ -243,6 +339,45 @@
  
- config CMD_NVME
-diff --git a/cmd/nand.c b/cmd/nand.c
-index fe834c4ac5c..2b83a5ad1b8 100644
---- a/cmd/nand.c
-+++ b/cmd/nand.c
-@@ -494,6 +494,48 @@ static void adjust_size_for_badblocks(loff_t *size, loff_t offset, int dev)
- 	}
- }
- 
-+#ifdef CONFIG_CMD_NAND_ONFI
-+static int do_nand_onfi(struct mtd_info *mtd, int mode)
-+{
-+	struct nand_chip *chip;
-+	int ret;
-+	int i;
+ 		fit {
+ 			images {
++				tifsstub-hs {
++					description = "tifsstub";
++					type = "firmware";
++					arch = "arm32";
++					compression = "none";
++					os = "tifsstub-hs";
++					load = <0x9dc00000>;
++					entry = <0x9dc00000>;
++					blob-ext {
++						filename = "tifsstub.bin_hs";
++					};
++				};
 +
-+	if (mtd->type != MTD_NANDFLASH) {
-+		printf("MTD device is no NAND flash!\n");
-+		return CMD_RET_FAILURE;
-+	}
++				tifsstub-fs {
++					description = "tifsstub";
++					type = "firmware";
++					arch = "arm32";
++					compression = "none";
++					os = "tifsstub-fs";
++					load = <0x9dc00000>;
++					entry = <0x9dc00000>;
++					blob-ext {
++						filename = "tifsstub.bin_fs";
++					};
++				};
 +
-+	chip = mtd_to_nand(mtd);
++				tifsstub-gp {
++					description = "tifsstub";
++					type = "firmware";
++					arch = "arm32";
++					compression = "none";
++					os = "tifsstub-gp";
++					load = <0x9dc00000>;
++					entry = <0x9dc00000>;
++					blob-ext {
++						filename = "tifsstub.bin_gp";
++					};
++				};
 +
-+	if (mode < 0) {
-+		printf("Reporting current ONFI settings not yet supported!\n");
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	ret = onfi_init_data_interface(chip, chip->data_interface,
-+				       NAND_SDR_IFACE, mode);
-+	if (ret) {
-+		printf("onfi_init_data_interface() for mode %d failed with error %d\n",
-+		       mode, ret);
-+		return CMD_RET_FAILURE;
-+	}
-+
-+	for (i = 0; i < chip->numchips; i++) {
-+		chip->select_chip(mtd, i);
-+		ret = nand_setup_data_interface(chip, i);
-+		chip->select_chip(mtd, -1);
-+		if (ret) {
-+			printf("nand_setup_data_interface() for mode %d failed with error %d\n",
-+			       mode, ret);
-+			return CMD_RET_FAILURE;
-+		}
-+	}
-+
-+	return CMD_RET_SUCCESS;
-+}
-+#endif
-+
- static int do_nand(struct cmd_tbl *cmdtp, int flag, int argc,
- 		   char *const argv[])
- {
-@@ -919,6 +961,21 @@ static int do_nand(struct cmd_tbl *cmdtp, int flag, int argc,
- 	}
- #endif
- 
-+#ifdef CONFIG_CMD_NAND_ONFI
-+	/*
-+	 * Syntax is:
-+	 *   0    1     2
-+	 *   nand onfi [mode]
-+	 */
-+	if (strcmp(cmd, "onfi") == 0) {
-+		int mode = -1;
-+
-+		if (argc > 2)
-+			mode = dectoul(argv[2], NULL);
-+		return do_nand_onfi(mtd, mode);
-+	}
-+#endif
-+
- usage:
- 	return CMD_RET_USAGE;
- }
-@@ -961,6 +1018,10 @@ U_BOOT_LONGHELP(nand,
- 	"    bring nand to lock state or display locked pages\n"
- 	"nand unlock[.allexcept] [offset] [size] - unlock section"
- #endif
-+#ifdef CONFIG_CMD_NAND_ONFI
-+	"\n"
-+	"nand onfi [mode] - set ONFI mode\n"
-+#endif
- #ifdef CONFIG_ENV_OFFSET_OOB
- 	"\n"
- 	"nand env.oob - environment offset in OOB of block 0 of"
-diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
-index 688d17ba3c2..2384425a746 100644
---- a/drivers/mtd/nand/raw/nand_base.c
-+++ b/drivers/mtd/nand/raw/nand_base.c
-@@ -983,7 +983,7 @@ static int nand_onfi_set_timings(struct mtd_info *mtd, struct nand_chip *chip)
-  *
-  * Returns 0 for success or negative error code otherwise.
-  */
--static int nand_setup_data_interface(struct nand_chip *chip, int chipnr)
-+int nand_setup_data_interface(struct nand_chip *chip, int chipnr)
- {
- 	struct mtd_info *mtd = nand_to_mtd(chip);
- 	int ret;
-diff --git a/include/linux/mtd/rawnand.h b/include/linux/mtd/rawnand.h
-index 4abaf4734cf..07bc4cc9051 100644
---- a/include/linux/mtd/rawnand.h
-+++ b/include/linux/mtd/rawnand.h
-@@ -1315,6 +1315,7 @@ void nand_write_buf16(struct mtd_info *mtd, const uint8_t *buf, int len);
- void nand_read_buf(struct mtd_info *mtd, uint8_t *buf, int len);
- void nand_read_buf16(struct mtd_info *mtd, uint8_t *buf, int len);
- uint8_t nand_read_byte(struct mtd_info *mtd);
-+int nand_setup_data_interface(struct nand_chip *chip, int chipnr);
- 
- /* get timing characteristics from ONFI timing mode. */
- const struct nand_sdr_timings *onfi_async_timing_mode_to_sdr_timings(int mode);
+ 				dm {
+ 					ti-dm {
+ 						filename = "ti-dm.bin";
+@@ -266,7 +401,8 @@
+ 				conf-0 {
+ 					description = "k3-am625-verdin-wifi-dev";
+ 					firmware = "atf";
+-					loadables = "tee", "dm", "spl";
++					loadables = "tee", "tifsstub-hs", "tifsstub-fs",
++						    "tifsstub-gp", "dm", "spl";
+ 					fdt = "fdt-0";
+ 				};
+ 			};
 -- 
 2.39.2
 
