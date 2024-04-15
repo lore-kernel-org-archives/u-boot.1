@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD7AC00A94
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:09:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECADDC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:09:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E02E28821D;
-	Mon, 15 Apr 2024 08:08:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BC168820A;
+	Mon, 15 Apr 2024 08:08:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E9AD8820A; Mon, 15 Apr 2024 08:08:15 +0200 (CEST)
+ id 649A288211; Mon, 15 Apr 2024 08:08:16 +0200 (CEST)
 Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5955F88169
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:08:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5021E881E7
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:08:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=csgroup.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
 Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
- by localhost (Postfix) with ESMTP id 4VHxYT12Ytz9t2k;
- Mon, 15 Apr 2024 08:08:13 +0200 (CEST)
+ by localhost (Postfix) with ESMTP id 4VHxYV0lKZz9tMS;
+ Mon, 15 Apr 2024 08:08:14 +0200 (CEST)
 Received: from pegase1.c-s.fr ([192.168.12.234])
  by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id b5w6vd9Duwci; Mon, 15 Apr 2024 08:08:13 +0200 (CEST)
+ with ESMTP id 3tO6yCr8dEEo; Mon, 15 Apr 2024 08:08:14 +0200 (CEST)
 Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase1.c-s.fr (Postfix) with ESMTP id 4VHxYK35SZz9t5L;
+ by pegase1.c-s.fr (Postfix) with ESMTP id 4VHxYK45nVz9t5l;
  Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 64FBC8B775;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 896DD8B775;
  Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 Received: from messagerie.si.c-s.fr ([127.0.0.1])
  by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id cdJTL0yRM3KG; Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
+ with ESMTP id yKcu-wFuP_ni; Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 Received: from PO20335.idsi0.si.c-s.fr (unknown [172.25.230.108])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 41F918B764;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 596AF8B770;
  Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 From: Christophe Leroy <christophe.leroy@csgroup.eu>
 To: Jagan Teki <jagan@amarulasolutions.com>,
@@ -47,9 +47,9 @@ To: Jagan Teki <jagan@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Christophe Leroy <christophe.leroy@csgroup.eu>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 08/17] thermal: Add support for TI LM74
-Date: Mon, 15 Apr 2024 08:07:21 +0200
-Message-ID: <e2240984726e028aed5d9c75c16f4b6b45eb1aeb.1713160866.git.christophe.leroy@csgroup.eu>
+Subject: [PATCH v2 09/17] board: cssi: Add support for SPI bus on MCR3000 board
+Date: Mon, 15 Apr 2024 08:07:22 +0200
+Message-ID: <0eead0833a4fcf83f0e92b55cf665f164fdee10a.1713160866.git.christophe.leroy@csgroup.eu>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1713160866.git.christophe.leroy@csgroup.eu>
 References: <cover.1713160866.git.christophe.leroy@csgroup.eu>
@@ -71,100 +71,238 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-LM74 is a SPI temperature sensor.
+MCR3000 board has some components tied to the SPI bus, like the Texas
+Instruments LM74 temperature sensor.
 
-Implement a driver to read temperature from it.
+Add support for SPI bus. The SPI chipselects are a bit special in the
+way that they are driven by 3 bits in a register of the board's CPLD
+where the value writen in those bits exclusively activates one of the
+7 possible chipselects and value 0 sets all chipselets to inactive.
+
+So add a special GPIO driver that simulates GPIOs for those chipselect.
 
 Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
 ---
- drivers/thermal/Kconfig   |  6 +++++
- drivers/thermal/Makefile  |  1 +
- drivers/thermal/ti-lm74.c | 52 +++++++++++++++++++++++++++++++++++++++
- 3 files changed, 59 insertions(+)
- create mode 100644 drivers/thermal/ti-lm74.c
+ arch/powerpc/dts/mcr3000.dts      |  31 +++++++++
+ board/cssi/mcr3000/Makefile       |   1 +
+ board/cssi/mcr3000/mcr3000.c      |   5 ++
+ board/cssi/mcr3000/mcr3000_gpio.c | 109 ++++++++++++++++++++++++++++++
+ configs/MCR3000_defconfig         |   5 ++
+ 5 files changed, 151 insertions(+)
+ create mode 100644 board/cssi/mcr3000/mcr3000_gpio.c
 
-diff --git a/drivers/thermal/Kconfig b/drivers/thermal/Kconfig
-index 681b621760..440eb64a56 100644
---- a/drivers/thermal/Kconfig
-+++ b/drivers/thermal/Kconfig
-@@ -41,4 +41,10 @@ config TI_DRA7_THERMAL
- 	 Enable thermal support for for the Texas Instruments DRA752 SoC family.
- 	 The driver supports reading CPU temperature.
- 
-+config TI_LM74_THERMAL
-+        bool "Temperature sensor driver for TI LM74 chip"
-+        help
-+	 Enable thermal support for the Texas Instruments LM74 chip.
-+	 The driver supports reading CPU temperature.
+diff --git a/arch/powerpc/dts/mcr3000.dts b/arch/powerpc/dts/mcr3000.dts
+index c4d7737bc6..edcd8358d0 100644
+--- a/arch/powerpc/dts/mcr3000.dts
++++ b/arch/powerpc/dts/mcr3000.dts
+@@ -26,6 +26,37 @@
+ 			timeout-sec = <2>;
+ 			hw_margin_ms = <1000>;
+ 		};
 +
- endif # if DM_THERMAL
-diff --git a/drivers/thermal/Makefile b/drivers/thermal/Makefile
-index 8acc7d20cb..b5ab0fc221 100644
---- a/drivers/thermal/Makefile
-+++ b/drivers/thermal/Makefile
-@@ -9,3 +9,4 @@ obj-$(CONFIG_IMX_THERMAL) += imx_thermal.o
- obj-$(CONFIG_IMX_SCU_THERMAL) += imx_scu_thermal.o
- obj-$(CONFIG_TI_DRA7_THERMAL) += ti-bandgap.o
- obj-$(CONFIG_IMX_TMU) += imx_tmu.o
-+obj-$(CONFIG_TI_LM74_THERMAL) += ti-lm74.o
-diff --git a/drivers/thermal/ti-lm74.c b/drivers/thermal/ti-lm74.c
++		spi: spi@aa0 {
++			status = "okay";
++			#address-cells = <1>;
++			#size-cells = <0>;
++			cell-index = <0>;
++			compatible = "fsl,mpc8xx-spi";
++		};
++	};
++
++	localbus@ff000100 {
++		compatible = "s3k,mcr3000-localbus", "fsl,pq1-localbus", "simple-bus";
++		#address-cells = <2>;
++		#size-cells = <1>;
++		reg = <0xff000100 0x40>;		// ORx and BRx register
++
++		ranges = <0 0 0x04000000 0x04000000 // BOOT
++			  1 0 0x00000000 0x04000000 // SDRAM
++			  2 0 0x08000000 0x04000000 // RAMDP
++			  3 0 0x0C000000 0x04000000 // NAND
++			  4 0 0x10000000 0x04000000 // Periphs
++			  5 0 0x14000000 0x04000000 // FPGA
++			  6 0 0x18000000 0x04000000 // mezzanine
++			  7 0 0x1c000000 0x04000000>; // DSP
++
++		csspi: gpio-controller@2 {
++			#gpio-cells = <2>;
++			compatible = "s3k,mcr3000-cpld-csspi";
++			reg = <4 0x802 2>;
++			gpio-controller;
++		};
+ 	};
+ 
+ 	SERIAL: smc@0 {
+diff --git a/board/cssi/mcr3000/Makefile b/board/cssi/mcr3000/Makefile
+index 7803016af3..846fd680e9 100644
+--- a/board/cssi/mcr3000/Makefile
++++ b/board/cssi/mcr3000/Makefile
+@@ -6,3 +6,4 @@
+ 
+ obj-y += mcr3000.o
+ obj-$(CONFIG_CMD_NAND) += nand.o
++obj-$(CONFIG_MPC8XX_SPI) += mcr3000_gpio.o
+diff --git a/board/cssi/mcr3000/mcr3000.c b/board/cssi/mcr3000/mcr3000.c
+index 8857c9e42c..537d7fa124 100644
+--- a/board/cssi/mcr3000/mcr3000.c
++++ b/board/cssi/mcr3000/mcr3000.c
+@@ -116,6 +116,11 @@ int misc_init_r(void)
+ 	clrbits_be16(&iop->iop_pcpar, 0x4);
+ 	clrbits_be16(&iop->iop_pcdir, 0x4);
+ 
++	/* Activate SPI */
++	clrsetbits_be32(&immr->im_cpm.cp_pbpar, 0x1, 0xe);
++	setbits_be32(&immr->im_cpm.cp_pbdir, 0xf);
++	clrbits_be32(&immr->im_cpm.cp_pbdat, 0x1);
++
+ 	/* if BTN_ACQ_AL is pressed then bootdelay is changed to 60 second */
+ 	if ((in_be16(&iop->iop_pcdat) & 0x0004) == 0)
+ 		env_set("bootdelay", "60");
+diff --git a/board/cssi/mcr3000/mcr3000_gpio.c b/board/cssi/mcr3000/mcr3000_gpio.c
 new file mode 100644
-index 0000000000..7d56f75df0
+index 0000000000..2bba14e6e5
 --- /dev/null
-+++ b/drivers/thermal/ti-lm74.c
-@@ -0,0 +1,52 @@
++++ b/board/cssi/mcr3000/mcr3000_gpio.c
+@@ -0,0 +1,109 @@
 +// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * TI LM74 temperature sensor driver
-+ *
-+ * Copyright (C) 2024 CS GROUP France
-+ *
++ * (C) Copyright 2024 CS GROUP France
++ *	Christophe Leroy <christophe.leroy@csgroup.eu>
 + */
 +
++#include <asm/io.h>
 +#include <dm.h>
-+#include <thermal.h>
-+#include <spi.h>
++#include <mapmem.h>
++#include <asm/gpio.h>
++#include <malloc.h>
 +
-+static int ti_lm74_get_temp(struct udevice *dev, int *temp)
++#include "../common/common.h"
++
++struct mcr3000_spi_gpio_plat {
++	ulong addr;
++};
++
++struct mcr3000_spi_gpio_data {
++	void __iomem *base;
++};
++
++static int mcr3000_spi_gpio_set_value(struct udevice *dev, uint gpio, int value)
 +{
-+	char buf[2];
-+	s16 raw;
-+	int ret;
++	struct mcr3000_spi_gpio_data *data = dev_get_priv(dev);
 +
-+	ret = dm_spi_claim_bus(dev);
-+	if (ret)
-+		return ret;
-+
-+	ret = dm_spi_xfer(dev, 16, NULL, buf, SPI_XFER_BEGIN | SPI_XFER_END);
-+
-+	dm_spi_release_bus(dev);
-+	if (ret)
-+		return ret;
-+
-+	raw = ((buf[0] << 8) + buf[1]) >> 3;
-+
-+	*temp = (((int)raw * 125) + 1000) / 2000;
++	if (value)
++		clrsetbits_be16(data->base, 7 << 5, (gpio & 7) << 5);
++	else
++		clrbits_be16(data->base, 7 << 5);
 +
 +	return 0;
 +}
 +
-+static struct dm_thermal_ops ti_lm74_ops = {
-+	.get_temp	= ti_lm74_get_temp,
++static int mcr3000_spi_gpio_get_value(struct udevice *dev, uint gpio)
++{
++	struct mcr3000_spi_gpio_data *data = dev_get_priv(dev);
++
++	return gpio == ((in_be16(data->base) >> 5) & 7);
++}
++
++static int mcr3000_spi_gpio_direction_input(struct udevice *dev, uint gpio)
++{
++	return 0;
++}
++
++static int mcr3000_spi_gpio_get_function(struct udevice *dev, uint gpio)
++{
++	return GPIOF_OUTPUT;
++}
++
++static int mcr3000_spi_gpio_ofdata_to_platdata(struct udevice *dev)
++{
++	struct mcr3000_spi_gpio_plat *plat = dev_get_plat(dev);
++	fdt_addr_t addr;
++	u32 reg[2];
++
++	dev_read_u32_array(dev, "reg", reg, 2);
++	addr = dev_translate_address(dev, reg);
++
++	plat->addr = addr;
++
++	return 0;
++}
++
++static int mcr3000_spi_gpio_probe(struct udevice *dev)
++{
++	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(dev);
++	struct mcr3000_spi_gpio_data *data = dev_get_priv(dev);
++	struct mcr3000_spi_gpio_plat *plat = dev_get_plat(dev);
++	char name[32], *str;
++
++	data->base = map_sysmem(plat->addr, 2);
++
++	snprintf(name, sizeof(name), "CHIPSELECT@%lx_", plat->addr);
++	str = strdup(name);
++
++	if (!str)
++		return -ENOMEM;
++
++	uc_priv->bank_name = str;
++	uc_priv->gpio_count = 16;
++
++	return 0;
++}
++
++static const struct dm_gpio_ops gpio_mcr3000_spi_ops = {
++	.get_value		= mcr3000_spi_gpio_get_value,
++	.set_value		= mcr3000_spi_gpio_set_value,
++	.direction_input	= mcr3000_spi_gpio_direction_input,
++	.direction_output	= mcr3000_spi_gpio_set_value,
++	.get_function		= mcr3000_spi_gpio_get_function,
 +};
 +
-+static const struct udevice_id of_ti_lm74_match[] = {
-+	{
-+		.compatible = "ti,lm74",
-+	},
-+	{},
++static const struct udevice_id mcr3000_spi_gpio_ids[] = {
++	{ .compatible = "s3k,mcr3000-cpld-csspi"},
++	{ /* sentinel */ }
 +};
 +
-+U_BOOT_DRIVER(ti_bandgap_thermal) = {
-+	.name	= "ti_lm74_thermal",
-+	.id	= UCLASS_THERMAL,
-+	.ops	= &ti_lm74_ops,
-+	.of_match = of_ti_lm74_match,
++U_BOOT_DRIVER(mcr3000_spi_gpio) = {
++	.name	= "mcr3000_spi_chipselect",
++	.id	= UCLASS_GPIO,
++	.ops	= &gpio_mcr3000_spi_ops,
++	.of_to_plat = mcr3000_spi_gpio_ofdata_to_platdata,
++	.plat_auto = sizeof(struct mcr3000_spi_gpio_plat),
++	.of_match = mcr3000_spi_gpio_ids,
++	.probe	= mcr3000_spi_gpio_probe,
++	.priv_auto = sizeof(struct mcr3000_spi_gpio_data),
 +};
+diff --git a/configs/MCR3000_defconfig b/configs/MCR3000_defconfig
+index 8a88fb445c..ce34c2aa88 100644
+--- a/configs/MCR3000_defconfig
++++ b/configs/MCR3000_defconfig
+@@ -2,6 +2,7 @@ CONFIG_PPC=y
+ CONFIG_TEXT_BASE=0x4000000
+ CONFIG_ENV_SIZE=0x2000
+ CONFIG_ENV_SECT_SIZE=0x2000
++CONFIG_DM_GPIO=y
+ CONFIG_DEFAULT_DEVICE_TREE="mcr3000"
+ CONFIG_SYS_MONITOR_LEN=327680
+ CONFIG_SYS_CLK_FREQ=132000000
+@@ -91,6 +92,7 @@ CONFIG_SYS_OR6_PRELIM=0xFFFF0908
+ CONFIG_SYS_BR7_PRELIM_BOOL=y
+ CONFIG_SYS_BR7_PRELIM=0x1C000001
+ CONFIG_SYS_OR7_PRELIM=0xFFFF810A
++CONFIG_MPC8XX_GPIO=y
+ # CONFIG_MMC is not set
+ CONFIG_MTD=y
+ CONFIG_DM_MTD=y
+@@ -102,6 +104,9 @@ CONFIG_SYS_MAX_FLASH_SECT=35
+ CONFIG_MTD_RAW_NAND=y
+ CONFIG_MPC8XX_FEC=y
+ CONFIG_DM_SERIAL=y
++CONFIG_SPI=y
++CONFIG_DM_SPI=y
++CONFIG_MPC8XX_SPI=y
+ CONFIG_WDT=y
+ CONFIG_WDT_MPC8xxx_BME=y
+ CONFIG_LZMA=y
 -- 
 2.43.0
 
