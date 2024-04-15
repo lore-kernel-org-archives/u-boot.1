@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40EDAC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 14:17:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75BF9C00A94
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 14:17:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A42908823D;
-	Mon, 15 Apr 2024 16:17:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0416588246;
+	Mon, 15 Apr 2024 16:17:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1666988177; Mon, 15 Apr 2024 16:17:07 +0200 (CEST)
+ id 87F4988229; Mon, 15 Apr 2024 16:17:07 +0200 (CEST)
 Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
  [IPv6:2001:1600:7:10::bc09])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3D8388167
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 16:17:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DAAD7880FC
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 16:17:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
  [10.4.36.107])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VJ8PT2pdXzBCs;
- Mon, 15 Apr 2024 16:17:01 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VJ8PV4MvczDP8;
+ Mon, 15 Apr 2024 16:17:02 +0200 (CEST)
 Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4VJ8PR6z50zXjp; Mon, 15 Apr 2024 16:16:59 +0200 (CEST)
+ id 4VJ8PT2kRRzWQL; Mon, 15 Apr 2024 16:17:01 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Mon, 15 Apr 2024 16:16:56 +0200
-Subject: [PATCH v3 03/11] rockchip: nanopc-t6-rk3588: use DRAM banks from ATAGS
+Date: Mon, 15 Apr 2024 16:16:57 +0200
+Subject: [PATCH v3 04/11] rockchip: quartzpro64-rk3588: use DRAM banks from
+ ATAGS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240415-rk35xx-dram-atags-v3-3-5bc5475b3c0d@theobroma-systems.com>
+Message-Id: <20240415-rk35xx-dram-atags-v3-4-5bc5475b3c0d@theobroma-systems.com>
 References: <20240415-rk35xx-dram-atags-v3-0-5bc5475b3c0d@theobroma-systems.com>
 In-Reply-To: <20240415-rk35xx-dram-atags-v3-0-5bc5475b3c0d@theobroma-systems.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -80,7 +81,7 @@ instead.
 Since ft_board_setup isn't defined anymore, there's no need for
 selecting CONFIG_OF_BOARD_SETUP.
 
-Similarly, because the nanopc-t6-rk3588.c would be empty, it is simply
+Similarly, because the quartzpro64-rk3588.c would be empty, it is simply
 removed, with the (would-be-empty) Makefile as well.
 
 The CONFIG_NR_DRAM_BANK now defaults to 10 which is a safe bet for
@@ -90,39 +91,36 @@ Co-developed-by: Chris Morgan <macromorgan@hotmail.com>
 Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- board/friendlyelec/nanopc-t6-rk3588/Makefile       |  6 ----
- .../nanopc-t6-rk3588/nanopc-t6-rk3588.c            | 39 ----------------------
- configs/nanopc-t6-rk3588_defconfig                 |  2 --
- 3 files changed, 47 deletions(-)
+ board/pine64/quartzpro64-rk3588/Makefile           |  3 --
+ .../pine64/quartzpro64-rk3588/quartzpro64-rk3588.c | 39 ----------------------
+ configs/quartzpro64-rk3588_defconfig               |  2 --
+ 3 files changed, 44 deletions(-)
 
-diff --git a/board/friendlyelec/nanopc-t6-rk3588/Makefile b/board/friendlyelec/nanopc-t6-rk3588/Makefile
+diff --git a/board/pine64/quartzpro64-rk3588/Makefile b/board/pine64/quartzpro64-rk3588/Makefile
 deleted file mode 100644
-index c1c49b19708..00000000000
---- a/board/friendlyelec/nanopc-t6-rk3588/Makefile
+index 47819d9be93..00000000000
+--- a/board/pine64/quartzpro64-rk3588/Makefile
 +++ /dev/null
-@@ -1,6 +0,0 @@
+@@ -1,3 +0,0 @@
 -# SPDX-License-Identifier:     GPL-2.0+
--#
--# Copyright (c) 2023 Rockchip Electronics Co,. Ltd.
--#
 -
--obj-y += nanopc-t6-rk3588.o
-diff --git a/board/friendlyelec/nanopc-t6-rk3588/nanopc-t6-rk3588.c b/board/friendlyelec/nanopc-t6-rk3588/nanopc-t6-rk3588.c
+-obj-y += quartzpro64-rk3588.o
+diff --git a/board/pine64/quartzpro64-rk3588/quartzpro64-rk3588.c b/board/pine64/quartzpro64-rk3588/quartzpro64-rk3588.c
 deleted file mode 100644
-index 99bbef964e0..00000000000
---- a/board/friendlyelec/nanopc-t6-rk3588/nanopc-t6-rk3588.c
+index bda804a89e2..00000000000
+--- a/board/pine64/quartzpro64-rk3588/quartzpro64-rk3588.c
 +++ /dev/null
 @@ -1,39 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+
 -/*
-- * Copyright (c) 2023 Rockchip Electronics Co,. Ltd.
+- * Copyright 2023 Google, Inc
 - */
 -
 -#include <fdtdec.h>
 -#include <fdt_support.h>
 -
 -#ifdef CONFIG_OF_BOARD_SETUP
--int nanopc_t6_add_reserved_memory_fdt_nodes(void *new_blob)
+-int quartzpro64_add_reserved_memory_fdt_nodes(void *new_blob)
 -{
 -	struct fdt_memory gap1 = {
 -		.start = 0x3fc000000,
@@ -149,27 +147,27 @@ index 99bbef964e0..00000000000
 -
 -int ft_board_setup(void *blob, struct bd_info *bd)
 -{
--	return nanopc_t6_add_reserved_memory_fdt_nodes(blob);
+-	return quartzpro64_add_reserved_memory_fdt_nodes(blob);
 -}
 -#endif
-diff --git a/configs/nanopc-t6-rk3588_defconfig b/configs/nanopc-t6-rk3588_defconfig
-index 5c7bc0b7196..738dda026b0 100644
---- a/configs/nanopc-t6-rk3588_defconfig
-+++ b/configs/nanopc-t6-rk3588_defconfig
+diff --git a/configs/quartzpro64-rk3588_defconfig b/configs/quartzpro64-rk3588_defconfig
+index b2a66d3f2db..e398c7c2c0e 100644
+--- a/configs/quartzpro64-rk3588_defconfig
++++ b/configs/quartzpro64-rk3588_defconfig
 @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
  CONFIG_SYS_HAS_NONCACHED_MEMORY=y
  CONFIG_COUNTER_FREQUENCY=24000000
  CONFIG_ARCH_ROCKCHIP=y
 -CONFIG_NR_DRAM_BANKS=2
- CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_SF_DEFAULT_MODE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-nanopc-t6"
-@@ -23,7 +22,6 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_DEFAULT_DEVICE_TREE="rk3588-quartzpro64"
+ CONFIG_ROCKCHIP_RK3588=y
+ CONFIG_SPL_SERIAL=y
+@@ -19,7 +18,6 @@ CONFIG_FIT_VERBOSE=y
  CONFIG_SPL_FIT_SIGNATURE=y
  CONFIG_SPL_LOAD_FIT=y
  CONFIG_LEGACY_IMAGE_FORMAT=y
 -CONFIG_OF_BOARD_SETUP=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-nanopc-t6.dtb"
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-quartzpro64.dtb"
  # CONFIG_DISPLAY_CPUINFO is not set
  CONFIG_DISPLAY_BOARDINFO_LATE=y
 
