@@ -4,92 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD36FC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 12:45:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62CBEC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 12:45:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3805E8824C;
-	Mon, 15 Apr 2024 14:44:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9C5B9881B6;
+	Mon, 15 Apr 2024 14:45:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qKzySZTa";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="B4rSZcVv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABFFE88241; Mon, 15 Apr 2024 14:44:38 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 38E6D8818C; Mon, 15 Apr 2024 14:45:03 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F1649881E7
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 14:44:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 221CB88189
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 14:45:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-34388753650so1374439f8f.3
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 05:44:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713185074; x=1713789874; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=KKToaQHgyHh55DwkywJHtqMYEmkaeGoRmi5Lqi5pt+A=;
- b=qKzySZTa6GOCDoLPZFr4tx596qfCTf6mDRPq6pCw38pJl0zLUoTuRriCYjFhf73N2Q
- U+uLPknZR7/Qu/P07aLso578j+svWDfOG4b7YhKNTqGqnPnRW9w4GWxDqwuo4Idx0+0I
- 9lot+rUemLbWtZLh66oy+T0xrrrREBl+glUWesMgC0nd8xziW5yFSJwQfHlDYqe5wFoq
- YNov3gZ+xg681CZFkRbv4e6Dz7AHvXFA5zYlRTW6CgHRzg4nsNzuuJjMBh06we4upg2G
- l1sK6IHR8OPgAVVytraDSRI+iJrO33nuX8pdI/a6FTF0E8xpVxruKttQwXTwv3uYrAas
- Jzgw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713185074; x=1713789874;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KKToaQHgyHh55DwkywJHtqMYEmkaeGoRmi5Lqi5pt+A=;
- b=EbQ215oNFbt1OUseCW8qGZ4khEvI4uLbYXEaXOAmHppJ6MdWedJ586Pt156WRGDSlz
- wnxbU+3xEdth+Ci3ki/geeBPKKnA/Ef+z4/krDQW6nHlNhWHyn53fpSIlteYuQpWPFah
- du8VDkCpL+xOEcoWQmrapiVljg4BhgIxqbLfHy6rpWJYLLoraH+7LBuJCnQtjH7mgW1Y
- QFGeqTg3QrbMvOCPutR02Qh/uMlpvQsIYmKR6dMmq8Fewvas3d+4xsB8v3Opyq4lqOnV
- kE8aDoM3fg8aTabuLVrL4XhiIaLT/uQvU91DAsAFgIxf+RJ7UlO40GuRvzY79f9yPUZd
- 490Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV+p0B895qvCYBnTK0yk4ENfg0cQFjjH6qsBiRLyssj5EQWBJ5ulab+AZNxIW1Vs3gGU3quZh+VCuOpKUDHU7ajt5wPCA==
-X-Gm-Message-State: AOJu0Yz6+rq0zny0hY2kw4B6eLRlN0BfN1j3VRNPBJliImhRBvQbHUwS
- MPKDjf31HAtEdgbOkH0Jj0z6YOu2KMlcAD8Q7KcEls4zikeuXZ5/EtFk02AfRy0=
-X-Google-Smtp-Source: AGHT+IHX5FLopbP9Xgjp/lUdHUIUdlcX/0v/KneGcRoqt10gUeVOdqtRX+nX3RExbNnfm5pDdMt+Rw==
-X-Received: by 2002:a5d:47c2:0:b0:343:6b0c:7553 with SMTP id
- o2-20020a5d47c2000000b003436b0c7553mr8020895wrc.55.1713185074486; 
- Mon, 15 Apr 2024 05:44:34 -0700 (PDT)
-Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- g13-20020a5d488d000000b00347321735a6sm7931517wrq.66.2024.04.15.05.44.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Apr 2024 05:44:34 -0700 (PDT)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 15 Apr 2024 13:44:22 +0100
-Subject: [PATCH 3/3] serial: msm: calculate bit clock divider
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1713185066; x=1713789866; i=xypron.glpk@gmx.de;
+ bh=F9WoIvS0JedWuRDtxSJCA6C6ms0PVVEbIAZasB4uZlc=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=B4rSZcVvPaoYj+rrTPmEvkjvETWpdXlp80hg4arZn/yKXmGxdZ1/vaKPRylZhKds
+ FMbAtfp0bb3kPi7cF7oE3QCIUJd4Ij/uWTHMXHWDeEVBZG5Brcag7OwBCPSwpLuPk
+ nmZKaS/ZIyuzwO+zMeI3zTQxZagaPWWgP7VDsITLOJnnYM4e5du+HcBOesCGh3daC
+ D44iBrO0Ax39J9qrSIAr+04PUnf9T1f240ii2F1OCDzioiSJJNAtRbCcqnpXsoqb2
+ 1qL/6JBjtT/fGdgR5Pnt49FNFXWHFIaLc5bphdqMAn/Y1fTc8CRNUO26PjhS+qT2r
+ t9rnabn9jkAbYtqhVQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N1OXZ-1suCbR2xT9-012q97; Mon, 15
+ Apr 2024 14:44:26 +0200
+Message-ID: <6812d5f7-54fb-459d-8fd1-d899af62d92d@gmx.de>
+Date: Mon, 15 Apr 2024 14:44:23 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240415-b4-msm-serial-bitrate-v1-3-5a89f84fd9e7@linaro.org>
-References: <20240415-b4-msm-serial-bitrate-v1-0-5a89f84fd9e7@linaro.org>
-In-Reply-To: <20240415-b4-msm-serial-bitrate-v1-0-5a89f84fd9e7@linaro.org>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: Robert Marko <robert.marko@sartura.hr>, u-boot-qcom@groups.io, 
- u-boot@lists.denx.de
-X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7267;
- i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=KjPPA7P49WyT2oc9h6P0tIcvUxSXbvhrv6AJT0MLtXg=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjRZRf0cneqnr2U0r0wwuyS0I9l9oYzZJ+e/pzN3bNA63
- DVpzV7ejlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCRS/8Z/gq1+aczeX1uUUud
- oFA8ofjwtm3tpooS+muj9l/LaGD41crwP0z4i/W0JRG+Xk+1Ot77y4rtO3Fgvmgiz305xQ6eUz7
- /PgEA
-X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
- fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/4] Kconfig: Add missing quotes around source file
+To: Michal Simek <michal.simek@amd.com>
+Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Bin Meng <bmeng@tinylab.org>, Elon Zhang <zhangzj@rock-chips.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jagan Teki
+ <jagan@edgeble.ai>, John Clark <inindev@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Joshua Riek <jjriek@verizon.net>,
+ Kever Yang <kever.yang@rock-chips.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Oleksandr Suvorov <oleksandr.suvorov@foundries.io>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Sean Anderson <sean.anderson@seco.com>,
+ Sean Edmond <seanedmond@microsoft.com>, Simon Glass <sjg@chromium.org>,
+ Tim Lunn <tim@feathertop.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, git@xilinx.com
+References: <cover.1713180904.git.michal.simek@amd.com>
+ <78064c48fd9297b43eae0abdec4783004ea74a07.1713180904.git.michal.simek@amd.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <78064c48fd9297b43eae0abdec4783004ea74a07.1713180904.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:LzF3NYqcxY7LHQyMIgg3fo5GqsJLBvgW2KgsAOXQqcrtCznaUP6
+ lTMmuxwySlZmhM3A1RkmJjbPFJ97vvM5/dbHSKMlNT5VegiCRfsSRyfyDwm0kYTVyfVEz0F
+ rZK/N2mmwGk/nMI3xWlVffK0V0GytfoD2gUA8Nm/AlYYFW/Ks2OxqqXAKQdlFRxByy7zZnR
+ NGDhWVjoGyNbVIyZ1fvPA==
+UI-OutboundReport: notjunk:1;M01:P0:pfGXcm132dg=;v5WabRce1j5FIrkf8rxtS8S7W9i
+ o7Fm8VlvnsQnKSfPc4/6PIfJAYeZKvtti77nm5p/NUuorLLVqsl8DcCQ7zBuZxEW9OdYfLXsD
+ gZfQ3DXJg3wbYUDox5eHI3dd/FDsQPeUrLo8ZcbAeYANEnCNfe61SgyXQhpXVn802vmxKhlh5
+ yOr0PxNceIAeU5jTQvbKE6PzsZ1qYIoMzWgiBRRZI4DyMc51EyRzqDg0Y4u5IA+rLJhRixQ2e
+ y9c0cvpOjcFRwsQsW7d3jh6hHbMgzzt46CP3gNHGVgCMo/71ZqhtjlyaMh4U1IIZLIVk1FbJD
+ jtQV1mbs8X6v0LzyZxgefr6AvzFcSlY9/gFBSMpk/3G3OOE4EsGbSKfwm60wTTkEha6iz1o8c
+ FjVlECwCQHwy7vw8OSYp7bNw1IrXxaxKndOzzr9pnLuS1fcyZbA5YemepPIlIOf5ih3xgswMZ
+ TsskHdGl7/93e/I4HG7BAE5gLHbZWzAuto2Kg8nogw0O0IBVyaLXTyeTTE9PIVPd9T8tKjN6/
+ EYnNVpCtuyTbbFWN4cFRtYYb6GcIlTuD6biFsWOM+kBhwekYhpYIEGL1+lbdhEcTIdOpJosPX
+ 3KXrP9eGC2zOb2iBXffZaVGVK/MFqzOOEoV2VkS74k5gTuQCQoXNjrbsMvYRFN0np50SbTiW9
+ TKkIhkh3hRZUL9rEZR+M9wCUMQfHtPgfuXN4Obz94s+oR8uBU+RZW3NTeRgUSP1QP21l6DNbr
+ 3eLfFAhVcNsCl3IXBpMuoSfIaynt3WbvKnfrOxbihrpgOCffq96SZ5G3fQnvsxLgmu7JHocY3
+ as/bmJVIqJVRCb/GzEx7DhufTHLikwxPr9MJvNi9HaLJ5dgSX2PV2ZMC3YEDeFb96PCRuI2X2
+ kfhMwHZrWPipl1clmNHgfrBkRR0n/wlopTfc=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,232 +108,168 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The driver currently requires the bit clock divider be hardcoded in
-devicetree (or use the hardcoded default from apq8016).
+On 15.04.24 13:35, Michal Simek wrote:
+> All errors are generated by ./tools/qconfig.py -b -j8 -i whatever.
+> Error look like this:
+> drivers/crypto/Kconfig:9: warning: style: quotes recommended around
+> 'drivers/crypto/nuvoton/Kconfig' in 'source drivers/crypto/nuvoton/Kconf=
+ig'
 
-The bit clock divider is used to derive the baud rate from the core
-clock:
+Should we add a qconfig.py test to our CI?
 
-  baudrate = clk_rate / csr_div
+Best regards
 
-clk_rate is the actual programmed core clock rate which is returned by
-clk_set_rate(), and this UART driver only supports a baudrate of 115200.
-We can therefore determine the appropriate value for UARTDM_CSR by
-iterating over the possible values and finding the one where the
-equation above holds true for a baudrate of 115200.
+Heinrich
 
-Implement this logic and drop the non-standard DT bindings for this
-driver.
-
-Tested on dragonboard410c.
-
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
----
-Cc: Robert Marko <robert.marko@sartura.hr>
----
- doc/device-tree-bindings/serial/msm-serial.txt | 10 ---
- drivers/serial/serial_msm.c                    | 87 +++++++++++++++++++++-----
- 2 files changed, 70 insertions(+), 27 deletions(-)
-
-diff --git a/doc/device-tree-bindings/serial/msm-serial.txt b/doc/device-tree-bindings/serial/msm-serial.txt
-deleted file mode 100644
-index dca995798a90..000000000000
---- a/doc/device-tree-bindings/serial/msm-serial.txt
-+++ /dev/null
-@@ -1,10 +0,0 @@
--Qualcomm UART (Data Mover mode)
--
--Required properties:
--- compatible: must be "qcom,msm-uartdm-v1.4"
--- reg: start address and size of the registers
--- clock: interface clock (must accept baudrate as a frequency)
--
--Optional properties:
--- bit-rate: Data Mover bit rate register value
--			(If not defined then 0xCC is used as default)
-diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
-index 8044d38518db..e461929b4338 100644
---- a/drivers/serial/serial_msm.c
-+++ b/drivers/serial/serial_msm.c
-@@ -31,8 +31,18 @@
- #define UARTDM_RXFS_BUF_SHIFT   0x7  /* Number of bytes in the packing buffer */
- #define UARTDM_RXFS_BUF_MASK    0x7
- #define UARTDM_MR1				 0x00
- #define UARTDM_MR2				 0x04
-+/*
-+ * This is documented on page 1817 of the apq8016e technical reference manual.
-+ * section 6.2.5.3.26
-+ *
-+ * The upper nybble contains the bit clock divider for the RX pin, the lower
-+ * nybble defines the TX pin. In almost all cases these should be the same value.
-+ *
-+ * The baud rate is the core clock frequency divided by the fixed divider value
-+ * programmed into this register (defined in calc_csr_bitrate()).
-+ */
- #define UARTDM_CSR				 0xA0
- 
- #define UARTDM_SR                0xA4 /* Status register */
- #define UARTDM_SR_RX_READY       (1 << 0) /* Word is the receiver FIFO */
-@@ -52,9 +62,8 @@
- 
- #define UARTDM_TF               0x100 /* UART Transmit FIFO register */
- #define UARTDM_RF               0x140 /* UART Receive FIFO register */
- 
--#define UART_DM_CLK_RX_TX_BIT_RATE 0xCC
- #define MSM_BOOT_UART_DM_8_N_1_MODE 0x34
- #define MSM_BOOT_UART_DM_CMD_RESET_RX 0x10
- #define MSM_BOOT_UART_DM_CMD_RESET_TX 0x20
- 
-@@ -63,9 +72,9 @@ DECLARE_GLOBAL_DATA_PTR;
- struct msm_serial_data {
- 	phys_addr_t base;
- 	unsigned chars_cnt; /* number of buffered chars */
- 	uint32_t chars_buf; /* buffered chars */
--	uint32_t clk_bit_rate; /* data mover mode bit rate register value */
-+	uint32_t clk_rate; /* core clock rate */
- };
- 
- static int msm_serial_fetch(struct udevice *dev)
- {
-@@ -155,34 +164,63 @@ static const struct dm_serial_ops msm_serial_ops = {
- 	.pending = msm_serial_pending,
- 	.getc = msm_serial_getc,
- };
- 
--static int msm_uart_clk_init(struct udevice *dev)
-+static long msm_uart_clk_init(struct udevice *dev)
- {
--	uint clk_rate = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
--					"clock-frequency", 115200);
-+	struct msm_serial_data *priv = dev_get_priv(dev);
- 	struct clk clk;
- 	int ret;
-+	long rate;
- 
- 	ret = clk_get_by_name(dev, "core", &clk);
- 	if (ret < 0) {
- 		pr_warn("%s: Failed to get clock: %d\n", __func__, ret);
--		return ret;
-+		return 0;
- 	}
- 
--	ret = clk_set_rate(&clk, clk_rate);
--	if (ret < 0)
--		return ret;
-+	rate = clk_set_rate(&clk, priv->clk_rate);
- 
--	return 0;
-+	return rate;
-+}
-+
-+static int calc_csr_bitrate(struct msm_serial_data *priv)
-+{
-+	/* This table is from the TRE. See the definition of UARTDM_CSR */
-+	unsigned int csr_div_table[] = {24576, 12288, 6144, 3072, 1536, 768, 512, 384,
-+					256,   192,   128,  96,   64,   48,  32,  16};
-+	int i = ARRAY_SIZE(csr_div_table) - 1;
-+	/* Currently we only support one baudrate */
-+	int baud = 115200;
-+
-+	for (; i >= 0; i--) {
-+		int x = priv->clk_rate / csr_div_table[i];
-+
-+		if (x == baud)
-+			/* Duplicate the configuration for RX
-+			 * as the lower nybble only configures TX
-+			 */
-+			return i + (i << 4);
-+	}
-+
-+	return -EINVAL;
- }
- 
- static void uart_dm_init(struct msm_serial_data *priv)
- {
- 	/* Delay initialization for a bit to let pins stabilize if necessary */
- 	mdelay(5);
-+	int bitrate = calc_csr_bitrate(priv);
-+	if (bitrate < 0) {
-+		log_warning("Couldn't calculate bit clock divider! Using default\n");
-+		/* This happens to be the value used on MSM8916 for the hardcoded clockrate
-+		 * in clock-apq8016. It's at least a better guess than a value we *know*
-+		 * is wrong...
-+		 */
-+		bitrate = 0xCC;
-+	}
- 
--	writel(priv->clk_bit_rate, priv->base + UARTDM_CSR);
-+	writel(bitrate, priv->base + UARTDM_CSR);
- 	writel(0x0, priv->base + UARTDM_MR1);
- 	writel(MSM_BOOT_UART_DM_8_N_1_MODE, priv->base + UARTDM_MR2);
- 	writel(MSM_BOOT_UART_DM_CMD_RESET_RX, priv->base + UARTDM_CR);
- 	writel(MSM_BOOT_UART_DM_CMD_RESET_TX, priv->base + UARTDM_CR);
-@@ -191,18 +229,27 @@ static void uart_dm_init(struct msm_serial_data *priv)
- 	writel(0x0, priv->base + UARTDM_DMEN);
- }
- static int msm_serial_probe(struct udevice *dev)
- {
--	int ret;
- 	struct msm_serial_data *priv = dev_get_priv(dev);
-+	long rate;
- 
- 	/* No need to reinitialize the UART after relocation */
- 	if (gd->flags & GD_FLG_RELOC)
- 		return 0;
- 
--	ret = msm_uart_clk_init(dev);
--	if (ret)
--		return ret;
-+	rate = msm_uart_clk_init(dev);
-+	if (rate < 0)
-+		return rate;
-+	if (!rate) {
-+		log_err("Got core clock rate of 0... Please fix your clock driver\n");
-+		return -EINVAL;
-+	}
-+
-+	/* Update the clock rate to the actual programmed rate returned by the
-+	 * clock driver
-+	 */
-+	priv->clk_rate = rate;
- 
- 	uart_dm_init(priv);
- 
- 	return 0;
-@@ -210,15 +257,20 @@ static int msm_serial_probe(struct udevice *dev)
- 
- static int msm_serial_of_to_plat(struct udevice *dev)
- {
- 	struct msm_serial_data *priv = dev_get_priv(dev);
-+	int ret;
- 
- 	priv->base = dev_read_addr(dev);
- 	if (priv->base == FDT_ADDR_T_NONE)
- 		return -EINVAL;
- 
--	priv->clk_bit_rate = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
--							"bit-rate", UART_DM_CLK_RX_TX_BIT_RATE);
-+	ret = dev_read_u32(dev, "clock-frequency", &priv->clk_rate);
-+	if (ret < 0) {
-+		log_debug("No clock frequency specified, using default rate\n");
-+		/* Default for APQ8016 */
-+		priv->clk_rate = 7372800;
-+	}
- 
- 	return 0;
- }
- 
-@@ -241,8 +293,9 @@ U_BOOT_DRIVER(serial_msm) = {
- #ifdef CONFIG_DEBUG_UART_MSM
- 
- static struct msm_serial_data init_serial_data = {
- 	.base = CONFIG_VAL(DEBUG_UART_BASE),
-+	.clk_rate = 7372800,
- };
- 
- #include <debug_uart.h>
- 
-
--- 
-2.44.0
+>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+>
+>   arch/arm/mach-rockchip/rk3588/Kconfig | 18 +++++++++---------
+>   arch/arm/mach-rockchip/rv1108/Kconfig |  4 ++--
+>   arch/arm/mach-rockchip/rv1126/Kconfig |  4 ++--
+>   cmd/Kconfig                           |  2 +-
+>   drivers/crypto/Kconfig                |  8 ++++----
+>   lib/Kconfig                           | 18 +++++++++---------
+>   6 files changed, 27 insertions(+), 27 deletions(-)
+>
+> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockc=
+hip/rk3588/Kconfig
+> index d7e4af31f24c..eb956b097c74 100644
+> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+> @@ -221,14 +221,14 @@ config ROCKCHIP_COMMON_STACK_ADDR
+>   config TEXT_BASE
+>   	default 0x00a00000
+>
+> -source board/edgeble/neural-compute-module-6/Kconfig
+> -source board/friendlyelec/nanopc-t6-rk3588/Kconfig
+> -source board/pine64/quartzpro64-rk3588/Kconfig
+> -source board/turing/turing-rk1-rk3588/Kconfig
+> -source board/radxa/rock5a-rk3588s/Kconfig
+> -source board/radxa/rock5b-rk3588/Kconfig
+> -source board/rockchip/evb_rk3588/Kconfig
+> -source board/rockchip/toybrick_rk3588/Kconfig
+> -source board/theobroma-systems/jaguar_rk3588/Kconfig
+> +source "board/edgeble/neural-compute-module-6/Kconfig"
+> +source "board/friendlyelec/nanopc-t6-rk3588/Kconfig"
+> +source "board/pine64/quartzpro64-rk3588/Kconfig"
+> +source "board/turing/turing-rk1-rk3588/Kconfig"
+> +source "board/radxa/rock5a-rk3588s/Kconfig"
+> +source "board/radxa/rock5b-rk3588/Kconfig"
+> +source "board/rockchip/evb_rk3588/Kconfig"
+> +source "board/rockchip/toybrick_rk3588/Kconfig"
+> +source "board/theobroma-systems/jaguar_rk3588/Kconfig"
+>
+>   endif
+> diff --git a/arch/arm/mach-rockchip/rv1108/Kconfig b/arch/arm/mach-rockc=
+hip/rv1108/Kconfig
+> index a12216dccf66..28ed0b245812 100644
+> --- a/arch/arm/mach-rockchip/rv1108/Kconfig
+> +++ b/arch/arm/mach-rockchip/rv1108/Kconfig
+> @@ -36,7 +36,7 @@ config SYS_SOC
+>   config SYS_MALLOC_F_LEN
+>   	default 0x400
+>
+> -source board/rockchip/evb_rv1108/Kconfig
+> -source board/elgin/elgin_rv1108/Kconfig
+> +source "board/rockchip/evb_rv1108/Kconfig"
+> +source "board/elgin/elgin_rv1108/Kconfig"
+>
+>   endif
+> diff --git a/arch/arm/mach-rockchip/rv1126/Kconfig b/arch/arm/mach-rockc=
+hip/rv1126/Kconfig
+> index 55b11121203b..ae323ee91235 100644
+> --- a/arch/arm/mach-rockchip/rv1126/Kconfig
+> +++ b/arch/arm/mach-rockchip/rv1126/Kconfig
+> @@ -64,7 +64,7 @@ config SYS_MALLOC_F_LEN
+>   config TEXT_BASE
+>   	default 0x600000
+>
+> -source board/edgeble/neural-compute-module-2/Kconfig
+> -source board/itead/sonoff-ihost/Kconfig
+> +source "board/edgeble/neural-compute-module-2/Kconfig"
+> +source "board/itead/sonoff-ihost/Kconfig"
+>
+>   endif
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 8eeb99eea5ed..45c206369518 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -398,7 +398,7 @@ config CMD_BOOTEFI_HELLO
+>   	  for testing that EFI is working at a basic level, and for bringing
+>   	  up EFI support on a new architecture.
+>
+> -source lib/efi_selftest/Kconfig
+> +source "lib/efi_selftest/Kconfig"
+>   endif
+>
+>   config CMD_BOOTMENU
+> diff --git a/drivers/crypto/Kconfig b/drivers/crypto/Kconfig
+> index 12ef84ca05ca..8b49997030b4 100644
+> --- a/drivers/crypto/Kconfig
+> +++ b/drivers/crypto/Kconfig
+> @@ -1,11 +1,11 @@
+>   menu "Hardware crypto devices"
+>
+> -source drivers/crypto/hash/Kconfig
+> +source "drivers/crypto/hash/Kconfig"
+>
+> -source drivers/crypto/fsl/Kconfig
+> +source "drivers/crypto/fsl/Kconfig"
+>
+> -source drivers/crypto/aspeed/Kconfig
+> +source "drivers/crypto/aspeed/Kconfig"
+>
+> -source drivers/crypto/nuvoton/Kconfig
+> +source "drivers/crypto/nuvoton/Kconfig"
+>
+>   endmenu
+> diff --git a/lib/Kconfig b/lib/Kconfig
+> index efb77978a652..189e6eb31aa1 100644
+> --- a/lib/Kconfig
+> +++ b/lib/Kconfig
+> @@ -416,7 +416,7 @@ config TRACE_EARLY_ADDR
+>   config CIRCBUF
+>   	bool "Enable circular buffer support"
+>
+> -source lib/dhry/Kconfig
+> +source "lib/dhry/Kconfig"
+>
+>   menu "Security support"
+>
+> @@ -429,10 +429,10 @@ config AES
+>   	  supported by the algorithm but only a 128-bit key is supported at
+>   	  present.
+>
+> -source lib/ecdsa/Kconfig
+> -source lib/rsa/Kconfig
+> -source lib/crypto/Kconfig
+> -source lib/crypt/Kconfig
+> +source "lib/ecdsa/Kconfig"
+> +source "lib/rsa/Kconfig"
+> +source "lib/crypto/Kconfig"
+> +source "lib/crypt/Kconfig"
+>
+>   config TPM
+>   	bool "Trusted Platform Module (TPM) Support"
+> @@ -1081,9 +1081,9 @@ config SMBIOS_PARSER
+>   	help
+>   	  A simple parser for SMBIOS data.
+>
+> -source lib/efi/Kconfig
+> -source lib/efi_loader/Kconfig
+> -source lib/optee/Kconfig
+> +source "lib/efi/Kconfig"
+> +source "lib/efi_loader/Kconfig"
+> +source "lib/optee/Kconfig"
+>
+>   config TEST_FDTDEC
+>   	bool "enable fdtdec test"
+> @@ -1148,4 +1148,4 @@ config PHANDLE_CHECK_SEQ
+>
+>   endmenu
+>
+> -source lib/fwu_updates/Kconfig
+> +source "lib/fwu_updates/Kconfig"
 
