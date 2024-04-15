@@ -4,84 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE61DC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 10:57:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C869C04FFE
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 11:01:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A46887E87;
-	Mon, 15 Apr 2024 12:57:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B19E887E4D;
+	Mon, 15 Apr 2024 13:01:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wxv5yLj+";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="TCwWWVw8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A57D88158; Mon, 15 Apr 2024 12:57:46 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 5112987DDF; Mon, 15 Apr 2024 13:01:05 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 139D987E87
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 12:57:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1290A87E75
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 13:00:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4185e80adfbso2872005e9.1
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 03:57:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713178663; x=1713783463; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=dvJLBwozfldJrDSK9XFqFb3eKtTyHTbIeyIfALsMIEk=;
- b=wxv5yLj+/n3pYVQxpRyG41HbmKd8alDpGvtOj7ita8n+w4NO2lPoy1slVKSHkvceNo
- Nlmj5bkdoQgO6PB6VV0zR/y4UavzhobysCgkVXzBiWZuQJYp/LTebpWfWYO6kiTAotcF
- JT5rCbZH3Tkb5JNX76iXQdhgGmUPe1nEI/KfUGNxB5hoE2UOAawt10uobDSu1vOlvLp0
- SZhgxg4KHHLeVBwouTkrnWffx3qGgHXnYEHMr/xFl74IWDs7K1MUizGQ3WCy5eZKLzZO
- 5iAKkc2/OMNkjGyhPjIumuAnbdaoHuyj6HG2rIZ9JHjoeoYwUMowS0Tgewu+pyhWiNrq
- 8NEA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713178663; x=1713783463;
- h=content-transfer-encoding:in-reply-to:from:references:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dvJLBwozfldJrDSK9XFqFb3eKtTyHTbIeyIfALsMIEk=;
- b=AO0AMdMZ/Z9bcCJGHd+hlWFYfrUb2v6xhQQQJGOSxw0vNjhXwMPPVUr5qC9Q6F/bQR
- Jxn9QWUysx6YJDd52VdUTqnVoPVqOeaa4wNZ9Br+3SqA/zGAXYbdCIDaOo9RSFzrYUdo
- NtFlq4HSOhTIvf6XjqtmHiI5s/1NdT9Enhk2Uf9IbvtqpLeNfMqunqcXQTGLABqSugnC
- sx3+BDhDvi+9nXJslp9EKDF/VmBo1nb9n6x8o+xFNf558nyxXAnMCp3MXNuypwhZbCNh
- 7Kn4NEC4arowpMDU2TmjBfXNWrqyQxlwHnglgifEXyKSP+96aFRhLunKZEy397l2Phlo
- AWYw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVLgHUQL7o4KM4yO+NIrjCK0JnopXmaZv4kCvtpiOJQLrE9blkAP0EG8LIYuReIz5qLw4K7OnUuNh/jWQ3Tnu3Gr6Wm4Q==
-X-Gm-Message-State: AOJu0Yxsq3DtwCfQq7GG0pWfP4ai0GURXL8KCeS0wPFHH4hJ4ZxO5yZM
- 2NNXbvqGNt8H24pOAmHtXZzoPyYUNKeiP4ZtPKLKe80jixqwAzB+NpsfN/vNpgU=
-X-Google-Smtp-Source: AGHT+IHTt066bnthbyzCQBDVp/Fv8gvPrJmU/leG7wKz/fJvpl5NwOlXrW0m5tNowJtyn1VauaAN+g==
-X-Received: by 2002:a05:600c:1d8c:b0:418:7d90:6b4 with SMTP id
- p12-20020a05600c1d8c00b004187d9006b4mr232069wms.4.1713178663488; 
- Mon, 15 Apr 2024 03:57:43 -0700 (PDT)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- h9-20020a05600c314900b004161bffa48csm15866867wmo.40.2024.04.15.03.57.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Apr 2024 03:57:43 -0700 (PDT)
-Message-ID: <a2ea41b8-8656-4734-8594-c1d38a30e25e@linaro.org>
-Date: Mon, 15 Apr 2024 11:57:42 +0100
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=d27d=LU=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1713178823;
+ bh=Y6HBW5ilv1TLueifZAByHwLkthdLx4YG9GIYG7N1jE0=;
+ b=TCwWWVw8k4jeZ1Mndrl/2xL6h8c7/LiMtRSuWuSf5hlhntp0uWBtR/sC8yo1WbthFdr2PculT
+ FI5ESlA4mExZgHbWU1TVtw+7SpMR7jQPpR6A25crmoJq1jNSgBkRKba0Hoq9JTZBFRqhckOZyyG
+ tn+cRuVxN53OzmTXQbNPkizs/Zh8uAEwmkgcaUI869IZDksoYiS/Y5wpMvAbVf3ZFuJacEAX9ZD
+ xxDPi1dcUALvgqSRXieR5vbgtdlLAs0l/xF5NHl4g1efELMlZ/MKS/qeRCxhpY8PieGs9SfKPv1
+ 0gXEVHpvsftiXn5AMGHDx3Yul6KkXshVBV7h5Q5PplaA==
+Message-ID: <3e1681d6-e682-476d-b2f4-29a34b98e916@kwiboo.se>
+Date: Mon, 15 Apr 2024 12:50:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: dwc3-generic: fix support without DM_REGULATOR
+Subject: Re: [PATCH v2 10/23] rockchip: rk35xx: Sort soc u-boot.dtsi
+ alphabetically
+To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20240413181425.1384357-1-jonas@kwiboo.se>
+ <20240413181425.1384357-11-jonas@kwiboo.se>
+ <3d710c01-c602-447d-b652-c9e613e8b3ee@theobroma-systems.com>
 Content-Language: en-US
-To: Robert Marko <robert.marko@sartura.hr>, marex@denx.de,
- trini@konsulko.com, jonas@kwiboo.se, kever.yang@rock-chips.com,
- jagan@amarulasolutions.com, mkorpershoek@baylibre.com, peter@korsgaard.com,
- sjg@chromium.org, neil.armstrong@linaro.org, u-boot@lists.denx.de,
- j.beck@linefinity.com
-References: <20240415105405.432679-1-robert.marko@sartura.hr>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240415105405.432679-1-robert.marko@sartura.hr>
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <3d710c01-c602-447d-b652-c9e613e8b3ee@theobroma-systems.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 661d06730a38760305bd5a9b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,83 +76,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
-
-On 15/04/2024 11:53, Robert Marko wrote:
-> Recent addition of vbus-supply support has broke platform which dont use
-> controllable regulators for USB.
+On 2024-04-15 10:46, Quentin Schulz wrote:
+> Hi Jonas,
 > 
-> Issue is that even withou DM_REGULATOR being enabled regulator related
-> functions will still build as there is a stub in regulator.h but they will
-> simply return -ENOSYS which will then make dwc3_generic_host_probe()
-> return the same error thus breaking probe.
-
-Rather than stubbing out the code, could you check for -ENOSYS and
-ignore the error in that case? I believe there's only one place where
-this matters (marked below).
+> On 4/13/24 20:13, Jonas Karlman wrote:
+>> Sort nodes and props in RK356x/RK3588 u-boot.dtsi alphabetically, nodes
+>> is sorted by reg addr then by alphabetical order.
+>>
+>> This has no intended change beside sorting existing nodes and removing
+>> a duplicated usbdpphy0_grf node.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>> v2: Follow kernel sort order (Quentin)
+>>
+>> [1] https://www.kernel.org/doc/html/latest/devicetree/bindings/dts-coding-style.html#order-of-properties-in-device-node
+>> ---
+>>   arch/arm/dts/rk356x-u-boot.dtsi  | 98 ++++++++++++++++----------------
+>>   arch/arm/dts/rk3588s-u-boot.dtsi | 69 +++++++++++-----------
+>>   2 files changed, 81 insertions(+), 86 deletions(-)
+>>
+>> diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
+>> index 05367216e118..1ecf719202e9 100644
+>> --- a/arch/arm/dts/rk356x-u-boot.dtsi
+>> +++ b/arch/arm/dts/rk356x-u-boot.dtsi
+>> @@ -38,46 +38,10 @@
 > 
-> Fixes: de451d5d5b6f ("usb: dwc3-generic: support external vbus regulator")
-> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
-> ---
->  drivers/usb/dwc3/dwc3-generic.c | 8 ++++++++
->  1 file changed, 8 insertions(+)
+> [...]
 > 
-> diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-> index 7a00529a2a..784d3ec2ed 100644
-> --- a/drivers/usb/dwc3/dwc3-generic.c
-> +++ b/drivers/usb/dwc3/dwc3-generic.c
-> @@ -242,6 +242,7 @@ static int dwc3_generic_host_probe(struct udevice *dev)
->  	if (rc)
->  		return rc;
->  
-> +#if CONFIG_IS_ENABLED(DM_REGULATOR)
->  	rc = device_get_supply_regulator(dev, "vbus-supply", &priv->vbus_supply);
->  	if (rc)
->  		debug("%s: No vbus regulator found: %d\n", dev->name, rc);
-> @@ -250,14 +251,17 @@ static int dwc3_generic_host_probe(struct udevice *dev)
->  	rc = regulator_set_enable_if_allowed(priv->vbus_supply, true);
->  	if (rc)
->  		return rc;
+>>   #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+>>   &binman {
+>>   	simple-bin-spi {
+> 
+> We could also alphabetically sort the binman node if we wanted.
+> 
+>> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
+>> index 233eb79d9ba2..543327954b1a 100644
+>> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
+>> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
+>> @@ -41,6 +41,17 @@
+>>   		status = "disabled";
+>>   	};
+>>   
+>> +	vo0_grf: syscon@fd5a6000 {
+>> +		compatible = "rockchip,rk3588-vo-grf", "syscon";
+>> +		reg = <0x0 0xfd5a6000 0x0 0x2000>;
+>> +		clocks = <&cru PCLK_VO0GRF>;
+>> +	};
+>> +
+>> +	usb_grf: syscon@fd5ac000 {
+>> +		compatible = "rockchip,rk3588-usb-grf", "syscon";
+>> +		reg = <0x0 0xfd5ac000 0x0 0x4000>;
+>> +	};
+>> +
+>>   	usbdpphy0_grf: syscon@fd5c8000 {
+>>   		compatible = "rockchip,rk3588-usbdpphy-grf", "syscon";
+>>   		reg = <0x0 0xfd5c8000 0x0 0x4000>;
+>> @@ -72,22 +83,6 @@
+>>   		};
+>>   	};
+>>   
+>> -	vo0_grf: syscon@fd5a6000 {
+>> -		compatible = "rockchip,rk3588-vo-grf", "syscon";
+>> -		reg = <0x0 0xfd5a6000 0x0 0x2000>;
+>> -		clocks = <&cru PCLK_VO0GRF>;
+>> -	};
+>> -
+>> -	usb_grf: syscon@fd5ac000 {
+>> -		compatible = "rockchip,rk3588-usb-grf", "syscon";
+>> -		reg = <0x0 0xfd5ac000 0x0 0x4000>;
+>> -	};
+>> -
+>> -	usbdpphy0_grf: syscon@fd5c8000 {
+>> -		compatible = "rockchip,rk3588-usbdpphy-grf", "syscon";
+>> -		reg = <0x0 0xfd5c8000 0x0 0x4000>;
+>> -	};
+>> -
+> 
+> Would have been nice to at least mention this node is removed because it 
+> is duplicated (or have it removed in a different commit to make it more 
+> explicit).
 
-Here, if (rc && rc != -ENOSYS)
-or even if (CONFIG_IS_ENABLED(DM_REGULATOR) && rc) to be verbose (maybe
-not the preferred style though).
+I did mention the removal in the commit message :-)
 
-All the other regulator_* calls either ignore the result or only print a
-debug message.
-> +#endif
->  
->  	hccr = (struct xhci_hccr *)priv->gen_priv.base;
->  	hcor = (struct xhci_hcor *)(priv->gen_priv.base +
->  			HC_LENGTH(xhci_readl(&(hccr)->cr_capbase)));
->  
->  	rc = xhci_register(dev, hccr, hcor);
-> +#if CONFIG_IS_ENABLED(DM_REGULATOR)
->  	if (rc)
->  		regulator_set_enable_if_allowed(priv->vbus_supply, false);
-> +#endif
->  
->  	return rc;
->  }
-> @@ -265,14 +269,18 @@ static int dwc3_generic_host_probe(struct udevice *dev)
->  static int dwc3_generic_host_remove(struct udevice *dev)
->  {
->  	struct dwc3_generic_host_priv *priv = dev_get_priv(dev);
-> +#if CONFIG_IS_ENABLED(DM_REGULATOR)
->  	int rc;
-> +#endif
->  
->  	/* This function always returns 0 */
->  	xhci_deregister(dev);
->  
-> +#if CONFIG_IS_ENABLED(DM_REGULATOR)
->  	rc = regulator_set_enable_if_allowed(priv->vbus_supply, false);
->  	if (rc)
->  		debug("%s: Failed to disable vbus regulator: %d\n", dev->name, rc);
-> +#endif
->  
->  	return dwc3_generic_remove(dev, &priv->gen_priv);
->  }
+"This has no intended change beside sorting existing nodes and removing
+a duplicated usbdpphy0_grf node."
 
--- 
-// Caleb (they/them)
+> 
+> [...]
+> 
+>>   #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
+> 
+> What's below this git context is &binman, which we could also 
+> alphabetically sort if we wanted.
+
+Was unsure about the binman node, ideally we should not be need it in
+the <soc>-u-boot.dtsi file, so I decided not to touch it at all, will
+move it in v3.
+
+Regards,
+Jonas
+
+> 
+> Did the change manually and it matches, so:
+> 
+> Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> 
+> Thanks!
+> Quentin
+
