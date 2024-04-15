@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B4CBC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 12:14:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1541AC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 12:14:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80ACC88167;
+	by phobos.denx.de (Postfix) with ESMTP id E5A5E881A5;
 	Mon, 15 Apr 2024 14:14:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cVCcNDGg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DB8FQJ0L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3954881D0; Mon, 15 Apr 2024 08:47:53 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id 1952788179; Mon, 15 Apr 2024 08:53:06 +0200 (CEST)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF6F688179
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:47:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A68D88169
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:53:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-516cbf3fe68so3430631e87.0
- for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 23:47:51 -0700 (PDT)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-516f2e0edb7so3379477e87.1
+ for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 23:53:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713163671; x=1713768471; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1713163983; x=1713768783; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=EurkQkPBnR6FMEN+44e+enFD2b38D+j9YcAjOPhHjh4=;
- b=cVCcNDGguMIEoC+VW1YIzaNq/j84g1Ew1sjd9li5e5FO1LGx3CMVpmJqT7Os2OyOKU
- DnQNz+amzQ2k7pD2d202tBNvYdBaYY5W2Jp6YmEXf/2P6UfLQJoqCBHMBHEMmu2jfhzn
- hDgXY1Omj9NR2/DMTbWntlsCjcm8pNQQhtgphIKqR9HKjgICfTHV0/6Db9147tx0zWri
- q4PAgL1031813l/GpbFZSi7pNsg4NqqF86t7cF/dEDrLRRRM6xQ84eZotBpvUERt2Ola
- Lh4bE4oS0OeXngIVTZBqMO2OTZb3/dFojDBgGJvyokcFokQ6B+A9EPAa646ryRZeYc5U
- 8UeQ==
+ bh=RECJEbP/Q/4a28c9rYDOEZXH2g5g9zRUBYcBlrwjgD8=;
+ b=DB8FQJ0L2ue9RShhrD6caUYbvqJIaqTWh9+Es6qw0IFU/Yjvg6K8RkbIeOxa3X7S0x
+ ptvet0oGm7D14juaW9QMQ+dfZNV+exRHprrAXbDU7L1fwXCrp8Y6HdWffDxVsy/jctLe
+ 7VFY1Myc+0C6Sj0X5YPn/Zu7d3XMDDIr+xCABpeFgXQsfGaeeLr1semh0xtR6vIInaOQ
+ 4s2m1LdLUhvLZDtOAf5abi1ycSMlHerq8mAOj/gKAaKxVCKbEd+6pwSFXNFyXw9uF571
+ LLLZQU/R03ET088MfkLDK+L/QgynVPyWz6rNVh3XOh1mJZMHXmVH2jZ/RnjlsE8p9P5J
+ NOXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713163671; x=1713768471;
+ d=1e100.net; s=20230601; t=1713163983; x=1713768783;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=EurkQkPBnR6FMEN+44e+enFD2b38D+j9YcAjOPhHjh4=;
- b=UHdPjY/UYhClCfMwoR24RrVT1NbhUi/U5MxAegyIRDQXKfKCX96PxoboTFW9zndHoS
- dupTbtP60b+VXBDPJ5sLcjJ2XbQgsurFoBQeQJmUF01dU2fHTZMXbY6LcjafnYgdHRh5
- zNcwbBQ2FN3Q8G9Slm6a2Gtxj/J/w0pcjRZXyDUJ88qoH+F2bZiTUpmJxvGB64oRJl00
- tTqfwHONbyQy4rqfEL3bEH6PXtZAT0dvaHKSBBj64DJaF97fauytvHcK/gsZsBwMrHhB
- pva2S1kMRy85B3An9LNZ9Cmx/pr9vOoBR5memIYQQ9pTKgdqjlO2vbDUuUK1w/9QT7xf
- sWXQ==
+ bh=RECJEbP/Q/4a28c9rYDOEZXH2g5g9zRUBYcBlrwjgD8=;
+ b=S2Kb+trPwgZ7Ud3EID+9bvnGJfaxnk9TfTtDppipbv2756oLjKtEgUCiQGdWwnDmFY
+ mQcqQDWST0M8VRXxPrkTN27Ocq1HjMYreoBzSHtK8HQiHs/JTBnPKP84bBhb7ErAUp43
+ AgwRJNYfKOdLJYj+mS/DTolhm8vqz8DnAfaXPBcLziHP2WZNmOz87RGv2Ghcbr7YVWRo
+ o1wm9um/3tFy3fUPvDuc4SaQFM7OV8T11F1C4sBEzG2Tg/vnZKIuqFeQkiYjK0VeyEpn
+ cb2INTdOJdcPG52UDBFlhwNYQGSudS6Dlmj8n9EmXyH28EIG8OMKHXrgS1yRJOJssIc9
+ oNxg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUgcbj1YLRwzgBclDpaqZOSGOGsj65mYSUrNl6u4/MLhdA09l3WeQkjlsj7wBhFmrEWpd5O2jQktoNDcrqmx13GNo3djw==
-X-Gm-Message-State: AOJu0YzHXq/w8DKFkyPU0JIzPCGNc1WvoGrzoFDysYwiQ0FPHuUKTLh6
- WMHxQ5X3zABnGOimh7CbaZWTeZXWofmEi+aFAk380p2nsjhbJtaMjBE+4qHCtR4=
-X-Google-Smtp-Source: AGHT+IH9C9L2Il+0EmdXsKDYkcxM7wsCuzhtwg69sWpGZOVlc++DAEauKl4pj+R9GYDXhAtgV8gJng==
-X-Received: by 2002:ac2:46fa:0:b0:518:8e3c:4647 with SMTP id
- q26-20020ac246fa000000b005188e3c4647mr4195054lfo.7.1713163671131; 
- Sun, 14 Apr 2024 23:47:51 -0700 (PDT)
+ AJvYcCVL1iEsnaHySrsShXwh7wW6/hiFkrck6P3x+qNbrJIw0ARwhvwrWGaOSDNw5au+nA2CPDtPplp49W0OK0qJfL/RC7aLSQ==
+X-Gm-Message-State: AOJu0Yz5qObz3GlXeiCsbXYhkvv/HfvIlzXpEnJMXZhYQ4ooQSLcJ11N
+ aNOVk3NyNz5gomje1mBKtvGVzrcX2lV75PN3f7AYrY4ZXUuRUxwU9zKlwPp9j1g=
+X-Google-Smtp-Source: AGHT+IE3WEYNmxIWq83ufd46HzmxCKlhIKeIbKtu34LZqaqSSxOQkoTxtf5C/sI3PhBMoAF4SkBAGA==
+X-Received: by 2002:ac2:518c:0:b0:515:c0ca:d9e6 with SMTP id
+ u12-20020ac2518c000000b00515c0cad9e6mr5615255lfi.38.1713163983289; 
+ Sun, 14 Apr 2024 23:53:03 -0700 (PDT)
 Received: from [192.168.2.107] ([79.115.63.35])
  by smtp.gmail.com with ESMTPSA id
- s11-20020a05600c45cb00b00417f65f148esm11895633wmo.31.2024.04.14.23.47.49
+ p7-20020a05600c358700b004182cd07133sm7445892wmq.3.2024.04.14.23.53.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 14 Apr 2024 23:47:50 -0700 (PDT)
-Message-ID: <377037b3-1bf2-492b-bb88-de233d8b373c@linaro.org>
-Date: Mon, 15 Apr 2024 07:47:47 +0100
+ Sun, 14 Apr 2024 23:53:02 -0700 (PDT)
+Message-ID: <5784f429-1eb1-439e-bccb-b96ab0219625@linaro.org>
+Date: Mon, 15 Apr 2024 07:53:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] mtd: spi-nor-core: Rework default_init() to take
- flash_parameter
+Subject: Re: [PATCH 2/4] mtd: spi-nor: Allow flashes to specify MTD writesize
 To: tkuw584924@gmail.com, u-boot@lists.denx.de
 Cc: jagan@amarulasolutions.com, vigneshr@ti.com, pratyush@kernel.org,
  d-gole@ti.com, Bacem.Daassi@infineon.com,
  Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 References: <cover.1713154967.git.Takahiro.Kuwano@infineon.com>
- <9db9fb39e655b514c21952e0a5005572510ad3ec.1713154967.git.Takahiro.Kuwano@infineon.com>
+ <16e3ddf31a406f6aa4dd8e8267ef5d2a329678ea.1713154967.git.Takahiro.Kuwano@infineon.com>
 Content-Language: en-US
 From: Tudor Ambarus <tudor.ambarus@linaro.org>
-In-Reply-To: <9db9fb39e655b514c21952e0a5005572510ad3ec.1713154967.git.Takahiro.Kuwano@infineon.com>
+In-Reply-To: <16e3ddf31a406f6aa4dd8e8267ef5d2a329678ea.1713154967.git.Takahiro.Kuwano@infineon.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Mon, 15 Apr 2024 14:14:08 +0200
@@ -100,20 +99,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi, Takahiro!
 
 
 On 4/15/24 05:33, tkuw584924@gmail.com wrote:
 > From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 > 
-> default_init() fixup hook should be used to initialize flash parameters
-> when its information is not provided in SFDP. To support that case, it
-> needs to take flash_parameter structure like as other hooks.
+> Some flashes like the Infineon SEMPER NOR flash family use ECC. Under
+> this ECC scheme, multi-pass writes to an ECC block is not allowed.
+> In other words, once data is programmed to an ECC block, it can't be
+> programmed again without erasing it first.
+> 
+> Upper layers like file systems need to be given this information so they
+> do not cause error conditions on the flash by attempting multi-pass
+> programming. This can be done by setting 'writesize' in 'struct
+> mtd_info'.
+> 
+> Set the default to 1 but allow flashes to modify it in fixup hooks. If
+> more flashes show up with this constraint in the future it might be
+> worth it to add it to 'struct flash_info', but for now increasing its
+> size is not worth it.
 > 
 > Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-> ---
+Please specify when a patch follows linux upstream. This follows the
+following upstream linux commit:
 
-I'd like to get rid of the default_init hook, let's not extend it if
-possible. Can you use the late_init hook instead?
+afd473e85827 ("mtd: spi-nor: core: Allow flashes to specify MTD writesize")
 
-Cheers,
-ta
+Acked-by: Tudor Ambarus <tudor.ambarus@linaro.org>
