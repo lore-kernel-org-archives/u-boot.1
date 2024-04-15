@@ -4,80 +4,183 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0690C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 14:39:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D8EDC00A94
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 14:47:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20652877FB;
-	Mon, 15 Apr 2024 16:39:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+	by phobos.denx.de (Postfix) with ESMTP id A921D870AB;
+	Mon, 15 Apr 2024 16:47:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=seco.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="oEA9B3/k";
+	dkim=pass (2048-bit key; unprotected) header.d=seco.com header.i=@seco.com header.b="FOegHZT1";
+	dkim=pass (2048-bit key) header.d=seco.com header.i=@seco.com header.b="FOegHZT1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AF1F87BF1; Mon, 15 Apr 2024 16:39:05 +0200 (CEST)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 417B2871C7; Mon, 15 Apr 2024 16:47:40 +0200 (CEST)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::701])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4407877FB
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 16:39:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A4BA683334
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 16:47:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sartura.hr
+ dmarc=pass (p=reject dis=none) header.from=seco.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-5d4a1e66750so1681379a12.0
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 07:39:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1713191941; x=1713796741; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=x+mv4JEtVjr96VEj7QdYWjZcjtMS6R3Nlas9SDMZflA=;
- b=oEA9B3/k+b6CKqcXYqChumngUFWdlY5YYpouo9PN7kO8e8auAaq0rNqEeSF4w4/Skh
- u9JvCESvOjExamHZrTaqhMv4CXkN8ZLtvb9Quzw5RsZ6T7TdPUqJnDVIViX61HS5CnuR
- GskjGGDT5ot2SXwPHXUYRJtb0lJNj36eJe+aQ9FdvVZMHRMJJ4j9lSOpvoxnBf8f7wYL
- S79SeVDORZ2tBWIMlNYc1y8lHSW+9oLyTenxHw5/OCmb58XwqDiJa77o1a37D+5PUQZK
- x+O3N2zdiWMgw8YfOBFRClFQ9V/ro2dBwfG3CyMzvXwsGp2BIKubzPUH8pxjXlWoE9aH
- hf4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713191941; x=1713796741;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=x+mv4JEtVjr96VEj7QdYWjZcjtMS6R3Nlas9SDMZflA=;
- b=b9WxPyhsTLxN9rNbApBMsxSS6CRK5kcZCyyeusYBgN+Q8yfB/MyTwUKH5byI+6/rWv
- cbyaHU23s0MhwsYnvslcamzl3nu8RpZsdehQdkPNqrnzVhBX9QK9YtLJ3DLJiEJ1Am51
- A+7zb652lbv+sCCycE31JrzW5dYkicY7e7z38ziHV0bbSejo4lvxtfpx1twQa9yeTvow
- NjTSuuzky23+n0piTKOs4vVRdm+AZwA7/k3hhl9ZG+DCL1eXflvtLFYV+TZ/ec+RiK9D
- D8e0ED75zHADITYaOod3OWlNuL2EQaqV6j4WLh/e9O58eM+X9R3PgQ5jMpuZpOlX2fzL
- WReQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUIOLK9m/kE55VTiYmjyO1sHBZClqISdEGdZOOPKS96NXVNPEOeSr3W5Ef9swJf+RTlPzfC1O1MxmzVIVYi22wEbrYrfg==
-X-Gm-Message-State: AOJu0YxmbEJaUeDizaNnArPcOpu5Xk6dgyntJCvBR8fnhtXoEVTvjlAE
- xZyuGQA3Gzwc6jk9IPb7+7AsJh/fbNerAVIwkblv949ywEw0x9+i6i3mRExOw6qFnnzVSF4YW+O
- gKIFdIzr45O9Gbxm+yG/8n5cPyC8Awa8g26MysA==
-X-Google-Smtp-Source: AGHT+IGYhwb0vTqVgmCgaA9PIyJw1KX501HQLOV/AgeaTBHKHsobMG8tOt9gsilYARMPGJeR47DVcvkD1urkAO2R0B8=
-X-Received: by 2002:a17:90a:e149:b0:2a7:398:c943 with SMTP id
- ez9-20020a17090ae14900b002a70398c943mr7276908pjb.5.1713191941090; Mon, 15 Apr
- 2024 07:39:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=sean.anderson@seco.com
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=pass;
+ b=NhUssbLyOBy8N2lcGKFUXV9a0Ft5Uqxv3ZcmNAhIGQvnOVQB8gYmLhgLGOZJQwgO6rSGJXY2eu1Q9EKu47SyXpydYmQatxJ3HThSjXapq3NNFP3k/BRd2a39j+yi/W1EG8W5yxPDMmZ2GbPm6tgddpY4JuYjdTHN5FYx0dhk4SZkP2a2oVzwg/iRbci436sH4e9JX9I4D2Xh3NCFm1qKrTpcS07acFI3PkCdi6xMerKMDKCgMa9fm6Ol3bq8LsCx+nLlzRj1PS865deM3Uup76SdR2B1hSSXZPVAt0WwyrS/7SsIY1ER+J6S6rtvtUGBn35B4vWx9nQAebuBP5yqdA==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qDLJt9QlyGwqRc8kGXJq17TbG4LctiB8WADXo5D7pM0=;
+ b=ddZG0t1HYDaz5YpQ0qLawpEQqJl2LeeGCPUAxSmE9CMnUTATBCzoWzGZwgrBYhPLAV8LJectu43m6H6AB8L0WwFMtbz2SLAzwIaPaCpLdCUXh4+jMM3M/PXtWibBCrdfsGZ4Ft/BOXyHkA/VI5MR+QtPj3fUnc2v5eDIbp7Rr/XPIq0mmTGC6AQ+JXP5qZdP3FBM13giZ1HZxzRxgntpvqQv6fc4Gslpbhh7TLbZWMx/jCFNwuU3qmdexfeVaM45khnfDX26qOEI7GlyEH7K1/4goFc4pYQtCgDIr604LNyWxw1GYXV81+v198X7LZWVxkELfl2DxKayGz7WtgJLbw==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 20.160.56.87) smtp.rcpttodomain=chromium.org smtp.mailfrom=seco.com;
+ dmarc=pass (p=reject sp=reject pct=100) action=none header.from=seco.com;
+ dkim=pass (signature was verified) header.d=seco.com; arc=pass (0 oda=1
+ ltdi=1 spf=[1,1,smtp.mailfrom=seco.com] dkim=[1,1,header.d=seco.com]
+ dmarc=[1,1,header.from=seco.com])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seco.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qDLJt9QlyGwqRc8kGXJq17TbG4LctiB8WADXo5D7pM0=;
+ b=FOegHZT1odxDZcvjqTr2XdybgQgBzRV7C8SRc9wBAkVDJRnhVjLFfNXGAdY8WPIzGv2kFS5YOPD2kb9O36iqcqbduStHkyzkiTG8eDppYsFStvhRwd0wCEVMHVGZH1r7hjv7bP5oaXL5jYt7QeuUew1uBnBRJC7SEMoaCrnljB+RbQMN4paDDxmx3UyakmOswWi1ahZYzEeYHU6Unpzy0f7/txPTtIGWbOSM7TvTTsChyl7wL/edda5DfHxhyY8vgASP4V4mLJQu6lBTjVRGuOBm80f9stoSFpEwFYMUTGGO3/eT9aBBo/E23BLnAnVvWyPdb15V5KEzP716JFVejw==
+Received: from AS9PR06CA0420.eurprd06.prod.outlook.com (2603:10a6:20b:461::7)
+ by GVXPR03MB10336.eurprd03.prod.outlook.com (2603:10a6:150:155::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7409.46; Mon, 15 Apr
+ 2024 14:47:33 +0000
+Received: from AMS0EPF00000195.eurprd05.prod.outlook.com
+ (2603:10a6:20b:461:cafe::4f) by AS9PR06CA0420.outlook.office365.com
+ (2603:10a6:20b:461::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.32 via Frontend
+ Transport; Mon, 15 Apr 2024 14:47:33 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 20.160.56.87)
+ smtp.mailfrom=seco.com; dkim=pass (signature was verified)
+ header.d=seco.com;dmarc=pass action=none header.from=seco.com;
+Received-SPF: Pass (protection.outlook.com: domain of seco.com designates
+ 20.160.56.87 as permitted sender) receiver=protection.outlook.com;
+ client-ip=20.160.56.87; helo=repost-eu.tmcas.trendmicro.com; pr=C
+Received: from repost-eu.tmcas.trendmicro.com (20.160.56.87) by
+ AMS0EPF00000195.mail.protection.outlook.com (10.167.16.215) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.7452.22
+ via Frontend Transport; Mon, 15 Apr 2024 14:47:33 +0000
+Received: from outmta (unknown [192.168.82.132])
+ by repost-eu.tmcas.trendmicro.com (Trend Micro CAS) with ESMTP id
+ D04EA20080F8B; Mon, 15 Apr 2024 14:47:32 +0000 (UTC)
+Received: from EUR01-VE1-obe.outbound.protection.outlook.com (unknown
+ [104.47.1.51])
+ by repre.tmcas.trendmicro.com (Trend Micro CAS) with ESMTPS id 71D402008006F; 
+ Mon, 15 Apr 2024 14:47:31 +0000 (UTC)
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=W+LfpQn+lHaDcY7mGD6erLZK1loWCbyu22h8ItkoKvJBlG6VKrMaFKEV2uDNQv2pk9FkFDY+nz9u8LPKdGMuTTBkK0BGxG6wHcc2hzkttgwRbZiDP8RqVJMeH6n8nbEdda8zJ+s5yf8kblKjZCuhJEhGGi+vfgiS5QjVTLkzFRu58kDWYOP88IMSV41dbkDA29cgHtw3BfHHJneVEfHenUzyAMVoeH9yirH+XJ/88UnX8ilvPAdn4Zchwb+xCD2eNw+hE+q/ss7EOF2LduOMi9mTi89TjeuWvoRd3hLRBk+XaOah+zXgp/Ga2CYz6CLXaMAxAaEy1n7xdhJ17z5IAw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qDLJt9QlyGwqRc8kGXJq17TbG4LctiB8WADXo5D7pM0=;
+ b=B1V2NqDgsbYYWIw7MuYa8+3PXOulKzgpbJyuKjLYiOIguVM5G0lixzXwNWgRS/itqlppKpY03QKgjDJ/78+ppHQF1tDiqXmqj27fBdMypeNpOijOmXF68htDpePqTB1V08n6AR4tjZFxeFe5RUMiBuEL2Nsx8N6vBfo5ehm7OeljT+EAHn314B8PwiWijNmdYMnkSmtxoofhYstvRWK9rEGModv2Gge7o7OZYOEcPE614abnYq2atLeLhIl4hkQNw+9bMFbdh3PhcgT7padanJwMFxgAQP5eFlmp+NS710LSCG+xwOSg+1KcmhPNAEWt8v7wjyEjtPHAB447Kazmsg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=seco.com; dmarc=pass action=none header.from=seco.com;
+ dkim=pass header.d=seco.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=seco.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qDLJt9QlyGwqRc8kGXJq17TbG4LctiB8WADXo5D7pM0=;
+ b=FOegHZT1odxDZcvjqTr2XdybgQgBzRV7C8SRc9wBAkVDJRnhVjLFfNXGAdY8WPIzGv2kFS5YOPD2kb9O36iqcqbduStHkyzkiTG8eDppYsFStvhRwd0wCEVMHVGZH1r7hjv7bP5oaXL5jYt7QeuUew1uBnBRJC7SEMoaCrnljB+RbQMN4paDDxmx3UyakmOswWi1ahZYzEeYHU6Unpzy0f7/txPTtIGWbOSM7TvTTsChyl7wL/edda5DfHxhyY8vgASP4V4mLJQu6lBTjVRGuOBm80f9stoSFpEwFYMUTGGO3/eT9aBBo/E23BLnAnVvWyPdb15V5KEzP716JFVejw==
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=seco.com;
+Received: from DB9PR03MB8847.eurprd03.prod.outlook.com (2603:10a6:10:3dd::13)
+ by GVXPR03MB8428.eurprd03.prod.outlook.com (2603:10a6:150:2::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.49; Mon, 15 Apr
+ 2024 14:47:08 +0000
+Received: from DB9PR03MB8847.eurprd03.prod.outlook.com
+ ([fe80::84d0:c817:1e20:5554]) by DB9PR03MB8847.eurprd03.prod.outlook.com
+ ([fe80::84d0:c817:1e20:5554%7]) with mapi id 15.20.7452.049; Mon, 15 Apr 2024
+ 14:47:08 +0000
+Message-ID: <2a4de3a9-3520-46ac-8309-a2135dc807bc@seco.com>
+Date: Mon, 15 Apr 2024 10:47:04 -0400
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] mmc: sdhci: programmable clock calculation needs
+ multiplier +1
+To: curtis.machida@intel.com, u-boot@lists.denx.de,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Peter Geis <pgwipeout@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20240412192641.2912914-1-curtis.machida@intel.com>
+Content-Language: en-US
+From: Sean Anderson <sean.anderson@seco.com>
+In-Reply-To: <20240412192641.2912914-1-curtis.machida@intel.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BL6PEPF00013E0E.NAMP222.PROD.OUTLOOK.COM
+ (2603:10b6:22e:400:0:1001:0:f) To DB9PR03MB8847.eurprd03.prod.outlook.com
+ (2603:10a6:10:3dd::13)
 MIME-Version: 1.0
-References: <20240415-b4-msm-serial-bitrate-v1-0-5a89f84fd9e7@linaro.org>
- <20240415-b4-msm-serial-bitrate-v1-3-5a89f84fd9e7@linaro.org>
- <CA+HBbNH_mGrFPDt+74r+TOveWmE_wQx4CYy-BGtJa76T6TUJ=A@mail.gmail.com>
- <0ef8c9ad-2344-4de9-9dd8-ff8f6b17e192@linaro.org>
-In-Reply-To: <0ef8c9ad-2344-4de9-9dd8-ff8f6b17e192@linaro.org>
-From: Robert Marko <robert.marko@sartura.hr>
-Date: Mon, 15 Apr 2024 16:38:49 +0200
-Message-ID: <CA+HBbNFrCxV3Apx6b9dHebjd+qkQynDrgHdL2xcnO70WOHC9qQ@mail.gmail.com>
-Subject: Re: [PATCH 3/3] serial: msm: calculate bit clock divider
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot-qcom@groups.io, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-MS-TrafficTypeDiagnostic: DB9PR03MB8847:EE_|GVXPR03MB8428:EE_|AMS0EPF00000195:EE_|GVXPR03MB10336:EE_
+X-MS-Office365-Filtering-Correlation-Id: ea4a4213-5363-4d89-08bb-08dc5d5afbb0
+X-TrendMicro-CAS-OUT-LOOP-IDENTIFIER: 656f966764b7fb185830381c646b41a1
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;
+X-Microsoft-Antispam-Message-Info-Original: =?utf-8?B?UHJpc0VEQWZtVjlNS21KTlJWcG1kQUdWMS9EeGxHSlU2ZkJYS3Q5NW1iLzV5?=
+ =?utf-8?B?QUcyMnY3ekVIZDNTRnlrQjl6Sm8vNDlvRjlERHBGL1R5VUVMVjdjUE5xanRI?=
+ =?utf-8?B?eE9iK1NWVHRhVUM0amRXRDIwbTh3VGQxSlBYZk1SdmhBbnlZK0tDa2s1MUpz?=
+ =?utf-8?B?Q1NjNjcwSVBDcjR4UDFDWmpyWURrcXplQkVaSjlORE5hM1NiTGRFS2ZINE1I?=
+ =?utf-8?B?dUpxZTQyelBkYjV6SnBGYlo3czI0Vkw4MWpRRnRDM3JnSC9iRERRS0ZSYVZQ?=
+ =?utf-8?B?S1ZqVFZKQUFGamVyK2RvVkNBSUFRVHdqM1NVdnBIVGczU3BYR2xDNFBCRHk2?=
+ =?utf-8?B?TmM2RGFDMDV4VGkxTklYZ0dSY0J6MzF1V1JMMHhwdzFmSUFZNWxta0VUOHg4?=
+ =?utf-8?B?WGhlRHlzM2QyOFlhREU3RDQxTTk2VC9FdUlmbHZkQit3OXZWT0FteEFUWTNO?=
+ =?utf-8?B?N29kSW54NzlmdURrVE9xMFZ5cENiTXZGMTFSdVRLYk9MYWxRZTl3ME1palBF?=
+ =?utf-8?B?ZFh1OVRDczgzY1ZmaWNETk9xY2pxSzFiZjZ3MTRxV3RYYVl4R3RFWXRIamxn?=
+ =?utf-8?B?NmE2YzNqU2tMbXlIRFFKSWliRzQvQlN6VSs5dEsyUXRCSUo4eU9mNFVuMGMx?=
+ =?utf-8?B?cTZPK1d5SnhwMDhuV092RDJCVExRSFBNOTd3eHJyV1lQOTlaMVlwaEtVcmoy?=
+ =?utf-8?B?REdmWkNCdTJOdzBta1EyYlhBQndpbzN5MlZvS3BQRmFpbmx6OEhXc25jaGp3?=
+ =?utf-8?B?TFJHazh3aW1JY0laMXg4YzhLRmRTSUV4WTZ5NVNZRUVSK2Ztc29lZDJSWmZ0?=
+ =?utf-8?B?TzNKZnVnTGNBaVhFdE9yWi9EWVd1N3pHRWRWRzl1WVdMc3UvZHZOeitFbHpD?=
+ =?utf-8?B?dUFrMTR2a3lPMGF6bUFtTG9NMXQyang4M0FINnRmZlRFZVlIRlYrKzdZVjg3?=
+ =?utf-8?B?eUtSeEQrc0lRMWZMbXNjcmcxbE9Wc0FFWjdiM3BYTGt5N2hBaUh2Y2REdk42?=
+ =?utf-8?B?UEh4Mk5DcEtERURGWHFrVTdNNzczRG95bHZ3UHlnL3djQnZ2ZVV2NlN1S3dh?=
+ =?utf-8?B?Z1FSckw4Y2JDcnFMT3JkOUJPSUxrc2pBbXdKUXJuSFB2eXByTThDejkzbTZB?=
+ =?utf-8?B?c3paZW13em9HdktWSWN2d0RBcEp0dTZRcjNGWDF3SW5COU0wa1IxSS9BVzR3?=
+ =?utf-8?B?OS80OHMvcnRmdHpndjJkazdtMXlXbnhIOUJZd3VXR0lTbVgwb2syMHJmK3c1?=
+ =?utf-8?B?aFdxRHBueHJZdGhPTWRzVzJsRlpaRzRER2h0a29pNk4yMWl2Q3BzMjk1dE5R?=
+ =?utf-8?B?TzNRV0ovSEF4MUh2S0ZzSzhrUWtXUVM0TmRISE5MYk9ITGxrc3VIOVVyV0Fn?=
+ =?utf-8?B?Z2dQOEZBTTR6aW9DNCswSjFpb3h4MU5rSXlKNUF5QkVkVmorUmhRYkFnbExr?=
+ =?utf-8?B?aUVHWTNWNVdSbHlPclUwNlpaQUw5a0RJSzhOVnd3UDJXN3JyZTBleHJRNFBR?=
+ =?utf-8?B?NWlMMW9nbG5TeC9ycFdxUWtGUkk0N28rQzZrNW04d1JnK3lnT2pDNFRjQ0pm?=
+ =?utf-8?B?ZytTRXJvNGc3S2VVODEyODdNeUhmZmtLMDBLZVVab0tUT041cUlQRjBQeG00?=
+ =?utf-8?B?RUJ3Q2RnRFd0eFBMNDNWUlRKaHFZNVJTMVBVU0N2eEVmTEkzUlJ6d214QU1i?=
+ =?utf-8?B?QStMZHg0VHJrQjdicjhlQk4vOHhpSjlsbDhmekUrUDRwcWVMeGpOVDI2b3Fs?=
+ =?utf-8?B?eVl3eklpV2hvek9wakgvNHpUbjV2M1k5dFlXZkNoTUJ3SGtCdCtUN3NRdkJr?=
+ =?utf-8?B?cSt5aGpVZUNDelNQd1IvUT09?=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255; CTRY:; LANG:en;
+ SCL:1; SRV:; IPV:NLI; SFV:NSPM; H:DB9PR03MB8847.eurprd03.prod.outlook.com;
+ PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(376005)(52116005)(1800799015)(38350700005); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR03MB8428
+X-EOPAttributedMessage: 0
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: AMS0EPF00000195.eurprd05.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 00324535-bd86-440c-8a33-08dc5d5aecf3
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: TWX81DjSuhGR3G5eL9iv2MXhOHlkWUsgfEHnYtwqIngdhNfv2r6NdZvZUgwbFN9jw1WmPvWMb7pNkqFuqW0rsp66n26nAovMPUd0tnDvDUtVvuLWZk2oDWIbuIK18T/IQZpaGRB+uCfpsEz31chjzFvbs0AauFU1phv0YdMU5s6lCBS1HBDmY9UFV49FUjxYooTjZXlgWePagk9giArtGVa56KQ1FZETvDNjBLn/xACzwsCBa35Q3hSNozIUyo4E8BhMNPX1dYdD0zPWmvdqhGFlTPu9AdV7ukS+lGfWBFAVwqO95+dfnDU7CgFiuDtlIakTXmgx7nuPl1G0JowJzRZvoGWwMvSyIbtYg5H746tS2SXVzPyvo5Jv423RTZOzhJe6HRkFXPkdQ401iD2kjjrnpFEiWVnHkkzjPnOeNlg/m3xlcUgO1AZe6IW4GYRKqoEOWFqqsiJ6dFu1df3QK878ApXprWK+RUH6g8Gnw11Tz4MsmPLAe/oHvQk2huhIOjrCm0R2pekIK7VeHBQAbFVJyHsU9qpusNgsjfK39WZVA0eiUVoivO2Swr3pSuiH7jES3hN6PdBuqBi8g7UxNkU8PdYGcjaadnhrs2uH2LFp3U+k6XPSMQhHb9VaW68SgMrULV1OycZPNnuJyFBi7tdDlPV7lAuuSty5GEZjViNyyYd2sK94r0IgkPvvZYV3oaQ0V9vrGL31cQ/rG/AjeBTk6wPl/1gQcjJTBGOsUjs90O6eJRmdGcD4B/e97DUJ
+X-Forefront-Antispam-Report: CIP:20.160.56.87; CTRY:NL; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:repost-eu.tmcas.trendmicro.com;
+ PTR:repost-eu.tmcas.trendmicro.com; CAT:NONE;
+ SFS:(13230031)(82310400014)(376005)(36860700004)(1800799015); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: seco.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2024 14:47:33.0356 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ea4a4213-5363-4d89-08bb-08dc5d5afbb0
+X-MS-Exchange-CrossTenant-Id: bebe97c3-6438-442e-ade3-ff17aa50e733
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=bebe97c3-6438-442e-ade3-ff17aa50e733; Ip=[20.160.56.87];
+ Helo=[repost-eu.tmcas.trendmicro.com]
+X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF00000195.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR03MB10336
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,305 +197,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 15, 2024 at 4:18=E2=80=AFPM Caleb Connolly
-<caleb.connolly@linaro.org> wrote:
->
->
->
-> On 15/04/2024 14:05, Robert Marko wrote:
-> > On Mon, Apr 15, 2024 at 2:44=E2=80=AFPM Caleb Connolly
-> > <caleb.connolly@linaro.org> wrote:
-> >>
-> >> The driver currently requires the bit clock divider be hardcoded in
-> >> devicetree (or use the hardcoded default from apq8016).
-> >>
-> >> The bit clock divider is used to derive the baud rate from the core
-> >> clock:
-> >>
-> >>   baudrate =3D clk_rate / csr_div
-> >>
-> >> clk_rate is the actual programmed core clock rate which is returned by
-> >> clk_set_rate(), and this UART driver only supports a baudrate of 11520=
-0.
-> >> We can therefore determine the appropriate value for UARTDM_CSR by
-> >> iterating over the possible values and finding the one where the
-> >> equation above holds true for a baudrate of 115200.
-> >>
-> >> Implement this logic and drop the non-standard DT bindings for this
-> >> driver.
-> >>
-> >> Tested on dragonboard410c.
-> >>
-> >> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
-> >
-> > Works on Alfa AP120C (IPQ4018) with full DM UART, but debug UART
-> > prints junk since .clk_rate =3D 7372800 is not correct for IPQ40xx.
-> > I would suggest using .clk_rate =3D CONFIG_VAL(DEBUG_UART_CLOCK) instea=
-d
-> > to populate the value per board, this also avoids per ARCH ifdefs.
->
-> Ok awesome, thanks for trying this out. I'll send a v2 with your suggesti=
-on.
->
-> Can I add your Tested-by?
-
-Sure,
-Tested-by: Robert Marko <robert.marko@sartura.hr>
-
-Regards,
-Robert
-> >
-> > Regards,
-> > Robert
-> >> ---
-> >> Cc: Robert Marko <robert.marko@sartura.hr>
-> >> ---
-> >>  doc/device-tree-bindings/serial/msm-serial.txt | 10 ---
-> >>  drivers/serial/serial_msm.c                    | 87 +++++++++++++++++=
-++++-----
-> >>  2 files changed, 70 insertions(+), 27 deletions(-)
-> >>
-> >> diff --git a/doc/device-tree-bindings/serial/msm-serial.txt b/doc/devi=
-ce-tree-bindings/serial/msm-serial.txt
-> >> deleted file mode 100644
-> >> index dca995798a90..000000000000
-> >> --- a/doc/device-tree-bindings/serial/msm-serial.txt
-> >> +++ /dev/null
-> >> @@ -1,10 +0,0 @@
-> >> -Qualcomm UART (Data Mover mode)
-> >> -
-> >> -Required properties:
-> >> -- compatible: must be "qcom,msm-uartdm-v1.4"
-> >> -- reg: start address and size of the registers
-> >> -- clock: interface clock (must accept baudrate as a frequency)
-> >> -
-> >> -Optional properties:
-> >> -- bit-rate: Data Mover bit rate register value
-> >> -                       (If not defined then 0xCC is used as default)
-> >> diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
-> >> index 8044d38518db..e461929b4338 100644
-> >> --- a/drivers/serial/serial_msm.c
-> >> +++ b/drivers/serial/serial_msm.c
-> >> @@ -31,8 +31,18 @@
-> >>  #define UARTDM_RXFS_BUF_SHIFT   0x7  /* Number of bytes in the packin=
-g buffer */
-> >>  #define UARTDM_RXFS_BUF_MASK    0x7
-> >>  #define UARTDM_MR1                              0x00
-> >>  #define UARTDM_MR2                              0x04
-> >> +/*
-> >> + * This is documented on page 1817 of the apq8016e technical referenc=
-e manual.
-> >> + * section 6.2.5.3.26
-> >> + *
-> >> + * The upper nybble contains the bit clock divider for the RX pin, th=
-e lower
-> >> + * nybble defines the TX pin. In almost all cases these should be the=
- same value.
-> >> + *
-> >> + * The baud rate is the core clock frequency divided by the fixed div=
-ider value
-> >> + * programmed into this register (defined in calc_csr_bitrate()).
-> >> + */
-> >>  #define UARTDM_CSR                              0xA0
-> >>
-> >>  #define UARTDM_SR                0xA4 /* Status register */
-> >>  #define UARTDM_SR_RX_READY       (1 << 0) /* Word is the receiver FIF=
-O */
-> >> @@ -52,9 +62,8 @@
-> >>
-> >>  #define UARTDM_TF               0x100 /* UART Transmit FIFO register =
-*/
-> >>  #define UARTDM_RF               0x140 /* UART Receive FIFO register *=
-/
-> >>
-> >> -#define UART_DM_CLK_RX_TX_BIT_RATE 0xCC
-> >>  #define MSM_BOOT_UART_DM_8_N_1_MODE 0x34
-> >>  #define MSM_BOOT_UART_DM_CMD_RESET_RX 0x10
-> >>  #define MSM_BOOT_UART_DM_CMD_RESET_TX 0x20
-> >>
-> >> @@ -63,9 +72,9 @@ DECLARE_GLOBAL_DATA_PTR;
-> >>  struct msm_serial_data {
-> >>         phys_addr_t base;
-> >>         unsigned chars_cnt; /* number of buffered chars */
-> >>         uint32_t chars_buf; /* buffered chars */
-> >> -       uint32_t clk_bit_rate; /* data mover mode bit rate register va=
-lue */
-> >> +       uint32_t clk_rate; /* core clock rate */
-> >>  };
-> >>
-> >>  static int msm_serial_fetch(struct udevice *dev)
-> >>  {
-> >> @@ -155,34 +164,63 @@ static const struct dm_serial_ops msm_serial_ops=
- =3D {
-> >>         .pending =3D msm_serial_pending,
-> >>         .getc =3D msm_serial_getc,
-> >>  };
-> >>
-> >> -static int msm_uart_clk_init(struct udevice *dev)
-> >> +static long msm_uart_clk_init(struct udevice *dev)
-> >>  {
-> >> -       uint clk_rate =3D fdtdec_get_uint(gd->fdt_blob, dev_of_offset(=
-dev),
-> >> -                                       "clock-frequency", 115200);
-> >> +       struct msm_serial_data *priv =3D dev_get_priv(dev);
-> >>         struct clk clk;
-> >>         int ret;
-> >> +       long rate;
-> >>
-> >>         ret =3D clk_get_by_name(dev, "core", &clk);
-> >>         if (ret < 0) {
-> >>                 pr_warn("%s: Failed to get clock: %d\n", __func__, ret=
-);
-> >> -               return ret;
-> >> +               return 0;
-> >>         }
-> >>
-> >> -       ret =3D clk_set_rate(&clk, clk_rate);
-> >> -       if (ret < 0)
-> >> -               return ret;
-> >> +       rate =3D clk_set_rate(&clk, priv->clk_rate);
-> >>
-> >> -       return 0;
-> >> +       return rate;
-> >> +}
-> >> +
-> >> +static int calc_csr_bitrate(struct msm_serial_data *priv)
-> >> +{
-> >> +       /* This table is from the TRE. See the definition of UARTDM_CS=
-R */
-> >> +       unsigned int csr_div_table[] =3D {24576, 12288, 6144, 3072, 15=
-36, 768, 512, 384,
-> >> +                                       256,   192,   128,  96,   64, =
-  48,  32,  16};
-> >> +       int i =3D ARRAY_SIZE(csr_div_table) - 1;
-> >> +       /* Currently we only support one baudrate */
-> >> +       int baud =3D 115200;
-> >> +
-> >> +       for (; i >=3D 0; i--) {
-> >> +               int x =3D priv->clk_rate / csr_div_table[i];
-> >> +
-> >> +               if (x =3D=3D baud)
-> >> +                       /* Duplicate the configuration for RX
-> >> +                        * as the lower nybble only configures TX
-> >> +                        */
-> >> +                       return i + (i << 4);
-> >> +       }
-> >> +
-> >> +       return -EINVAL;
-> >>  }
-> >>
-> >>  static void uart_dm_init(struct msm_serial_data *priv)
-> >>  {
-> >>         /* Delay initialization for a bit to let pins stabilize if nec=
-essary */
-> >>         mdelay(5);
-> >> +       int bitrate =3D calc_csr_bitrate(priv);
-> >> +       if (bitrate < 0) {
-> >> +               log_warning("Couldn't calculate bit clock divider! Usi=
-ng default\n");
-> >> +               /* This happens to be the value used on MSM8916 for th=
-e hardcoded clockrate
-> >> +                * in clock-apq8016. It's at least a better guess than=
- a value we *know*
-> >> +                * is wrong...
-> >> +                */
-> >> +               bitrate =3D 0xCC;
-> >> +       }
-> >>
-> >> -       writel(priv->clk_bit_rate, priv->base + UARTDM_CSR);
-> >> +       writel(bitrate, priv->base + UARTDM_CSR);
-> >>         writel(0x0, priv->base + UARTDM_MR1);
-> >>         writel(MSM_BOOT_UART_DM_8_N_1_MODE, priv->base + UARTDM_MR2);
-> >>         writel(MSM_BOOT_UART_DM_CMD_RESET_RX, priv->base + UARTDM_CR);
-> >>         writel(MSM_BOOT_UART_DM_CMD_RESET_TX, priv->base + UARTDM_CR);
-> >> @@ -191,18 +229,27 @@ static void uart_dm_init(struct msm_serial_data =
-*priv)
-> >>         writel(0x0, priv->base + UARTDM_DMEN);
-> >>  }
-> >>  static int msm_serial_probe(struct udevice *dev)
-> >>  {
-> >> -       int ret;
-> >>         struct msm_serial_data *priv =3D dev_get_priv(dev);
-> >> +       long rate;
-> >>
-> >>         /* No need to reinitialize the UART after relocation */
-> >>         if (gd->flags & GD_FLG_RELOC)
-> >>                 return 0;
-> >>
-> >> -       ret =3D msm_uart_clk_init(dev);
-> >> -       if (ret)
-> >> -               return ret;
-> >> +       rate =3D msm_uart_clk_init(dev);
-> >> +       if (rate < 0)
-> >> +               return rate;
-> >> +       if (!rate) {
-> >> +               log_err("Got core clock rate of 0... Please fix your c=
-lock driver\n");
-> >> +               return -EINVAL;
-> >> +       }
-> >> +
-> >> +       /* Update the clock rate to the actual programmed rate returne=
-d by the
-> >> +        * clock driver
-> >> +        */
-> >> +       priv->clk_rate =3D rate;
-> >>
-> >>         uart_dm_init(priv);
-> >>
-> >>         return 0;
-> >> @@ -210,15 +257,20 @@ static int msm_serial_probe(struct udevice *dev)
-> >>
-> >>  static int msm_serial_of_to_plat(struct udevice *dev)
-> >>  {
-> >>         struct msm_serial_data *priv =3D dev_get_priv(dev);
-> >> +       int ret;
-> >>
-> >>         priv->base =3D dev_read_addr(dev);
-> >>         if (priv->base =3D=3D FDT_ADDR_T_NONE)
-> >>                 return -EINVAL;
-> >>
-> >> -       priv->clk_bit_rate =3D fdtdec_get_int(gd->fdt_blob, dev_of_off=
-set(dev),
-> >> -                                                       "bit-rate", UA=
-RT_DM_CLK_RX_TX_BIT_RATE);
-> >> +       ret =3D dev_read_u32(dev, "clock-frequency", &priv->clk_rate);
-> >> +       if (ret < 0) {
-> >> +               log_debug("No clock frequency specified, using default=
- rate\n");
-> >> +               /* Default for APQ8016 */
-> >> +               priv->clk_rate =3D 7372800;
-> >> +       }
-> >>
-> >>         return 0;
-> >>  }
-> >>
-> >> @@ -241,8 +293,9 @@ U_BOOT_DRIVER(serial_msm) =3D {
-> >>  #ifdef CONFIG_DEBUG_UART_MSM
-> >>
-> >>  static struct msm_serial_data init_serial_data =3D {
-> >>         .base =3D CONFIG_VAL(DEBUG_UART_BASE),
-> >> +       .clk_rate =3D 7372800,
-> >>  };
-> >>
-> >>  #include <debug_uart.h>
-> >>
-> >>
-> >> --
-> >> 2.44.0
-> >>
-> >
-> >
->
+On 4/12/24 15:26, curtis.machida@intel.com wrote:
+> [You don't often get email from curtis.machida@intel.com. Learn why this is important at https://cas5-0-urlprotect.trendmicro.com:443/wis/clicktime/v1/query?url=https%3a%2f%2faka.ms%2fLearnAboutSenderIdentification&umid=4f25273f-b33b-4eb3-8643-c1f6eff8842b&auth=d807158c60b7d2502abde8a2fc01f40662980862-c95c2e418b830130ad99c91e42b2732e3f7e44ee ]
+> 
+> From: cmachida <curtis.machida@intel.com>
+> 
+> According to the SD Host Controller Simplified Specification v4.20,
+> the multiplier value M is one more than the Clock Multiplier field.
+> 
+> Copied code from Linux project.  drivers/mmc/host/sdhci.c line 4405
+> 
+> Signed-off-by: cmachida <curtis.machida@intel.com>
+> ---
+> 
+>  drivers/mmc/sdhci.c | 9 +++++++++
+>  1 file changed, 9 insertions(+)
+> 
+> diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
+> index 0178ed8a11..a8476ec4e9 100644
+> --- a/drivers/mmc/sdhci.c
+> +++ b/drivers/mmc/sdhci.c
+> @@ -929,6 +929,15 @@ int sdhci_setup_cfg(struct mmc_config *cfg, struct sdhci_host *host,
+>                 debug("%s, caps_1: 0x%x\n", __func__, caps_1);
+>                 host->clk_mul = (caps_1 & SDHCI_CLOCK_MUL_MASK) >>
+>                                 SDHCI_CLOCK_MUL_SHIFT;
+> +
+> +               /*
+> +                * In case the value in Clock Multiplier is 0, then programmable
+> +                * clock mode is not supported, otherwise the actual clock
+> +                * multiplier is one more than the value of Clock Multiplier
+> +                * in the Capabilities Register.
+> +                */
+> +               if (host->clk_mul)
+> +                       host->clk_mul += 1;
+>         }
+> 
+>         if (host->max_clk == 0) {
 > --
-> // Caleb (they/them)
+> 2.43.2
+> 
 
-
-
---=20
-Robert Marko
-Staff Embedded Linux Engineer
-Sartura Ltd.
-Lendavska ulica 16a
-10000 Zagreb, Croatia
-Email: robert.marko@sartura.hr
-Web: www.sartura.hr
+Reviewed-by: Sean Anderson <sean.anderson@seco.com>
