@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 561F9C00A94
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 11:57:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E13A4C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 12:14:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE6C788137;
-	Mon, 15 Apr 2024 13:57:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+	by phobos.denx.de (Postfix) with ESMTP id 1CC2888118;
+	Mon, 15 Apr 2024 14:14:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="ojYJh2r3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oqLsIPUQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4F0CC8814B; Mon, 15 Apr 2024 13:57:34 +0200 (CEST)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 9D6278811D; Mon, 15 Apr 2024 08:42:59 +0200 (CEST)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51A7F878ED
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 13:57:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 917C288189
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:42:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sartura.hr
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-518f8a69f82so590377e87.2
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 04:57:32 -0700 (PDT)
+ spf=pass smtp.mailfrom=tudor.ambarus@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-3454fbdd88aso2643508f8f.3
+ for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 23:42:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1713182251; x=1713787051; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/mHpheqTSNTzoRplCg9ahcCFu7L7Gj+Yqe0yjTQbKrE=;
- b=ojYJh2r34IIIb5cKznGpc1zUpa5C2aETKBHRBla/6pof0kYX+NEs5i60jbKwSpDi9g
- caAR5NMiD/r4cLegY9W2Ua8MFWxzS20vFmN8fbK+RydyDsSQ0dPquwUtnD/15aScHoOJ
- 0Va53KI4R7hZ4QEZdHQ4JjE3p4FTpoOHH1LD0xSbnqflMV75J1vWFoAgQnjxLMsLWCWR
- ex7gUmjS/a3HovpKBbhjA870sbTlSpOBeawSVX3l93uWAa8RhlZCCRJPcE1YbNwHbFIc
- 2GpPnfF1J+d/1i8nVlvhED3CM6XVtgLzQgh9pjvTFWUmS4I91RkYDabR4hJ8TXOMvbto
- 2oTw==
+ d=linaro.org; s=google; t=1713163377; x=1713768177; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=m0k1SZW1mcxCUr4yIGa/VaGkFBHOOrJomq/fe550c1w=;
+ b=oqLsIPUQ6kC4265PpjX13ojvJkLIHPprEnBwVYVGotTjkApMPDeZIIkELXv6qj4lRV
+ dmIIbXfweN6fjF0drTZ56CcMmmgtKPuVjrmBQuJWXLubKOx2lifKjsOqlqqEgriuBt63
+ qXZv++tQjYFL1skJzG7R46gUrhnNvhEUlGoigY7OBKE/+3/QVZbBXWqpiZz1b5NsipCt
+ q1ZLiFkAfyQ5H6BJ/YnVtPX8+SVz5Prje6VG8HR9Nr6iFKuVzCCv+Gp9e0RGAbD44ZYv
+ xeOYLFutE/hKnV2465he5iq1+lz+AOh44LzeVW+yD/IfGU/hbmadPiI1MgWdQWeN2WAe
+ PT4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713182251; x=1713787051;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/mHpheqTSNTzoRplCg9ahcCFu7L7Gj+Yqe0yjTQbKrE=;
- b=XKx6OYiKXcLLhChFeEB4kBIx74xjdn8IDnCgetuDZDEBGe4mOLbzf6yUxttSPu9kU7
- JnIaeYClKA8/1PG/LuwYvKr6LAvWmfJywFHuuuzciw4OX1M5AguLAi/HCTbZNQLf4xW6
- qK4b5N1BGP2hdDByvcvl+oy84+jKaJaKMNAe6A2DnDkcIBKhKYmwTmEP+rESQtghb+l6
- h8ZvoS5cDU94pZLqcqUABEnUDn+5qc2a1qRViSAnffHS80+W9BrHrf1s4k4gqXMZpKei
- e/+MyLdKdFx5SDcNiMcA2P2ol5h3Eb6SMbIjOe/SZiKH8adfpIAhfNOy2TGY9JZE4F3o
- JX5w==
+ d=1e100.net; s=20230601; t=1713163377; x=1713768177;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=m0k1SZW1mcxCUr4yIGa/VaGkFBHOOrJomq/fe550c1w=;
+ b=k7z9r0E9r91k4W80dyUHxHIkiIa87cWR4gGCOakjUDZXwbOoVMFNmQMvtNljLH4UjK
+ 3NXz0kWTt5MA5BjlNNhkfl8EiFo8UEGqCD7EmCgZMSNASnVGlv0XQvaL/i9lnXB4tyd/
+ pNrxNuTpVAhFmikSmdd50psLDuRnU7bMvRpeOrW/77m1RClCJcok+1UZ5zyZ1z6DLKeg
+ t3v5dtJPta3MUEwFM/oTzPAstgQMvlt+9x59TNRwUQAFzDhLnf+HW7cBpi/lYOKQETu6
+ fdJHaHubtO2d26ov+0JdafFjZzU894vvew8RS5l3SwHUtvnKLED6FMK1CHfmzLY455fg
+ bz6Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU6cZhkpiYgBULlgiwyN2NqiuCS82hXJkDRIbrjzw20BdcHM2GsTTxhLO2qmbL9F1BybvaPbYzBQBOCjvwxy2yB7GZg3Q==
-X-Gm-Message-State: AOJu0YwN9C5e1c+8CMuQz6/kWvCGkFNn1xsXke4OqrxRlRpXE8ZKRYg5
- MbxXNOewLs7Akke/BYzSR29s1mHR8/gnK5CuEYtallaiElnQbPPRvnzlvbprPXvcbr6x7EqDy/Q
- H
-X-Google-Smtp-Source: AGHT+IGXSM9CtE++O52rCcl7CoTbyEsLixCjaHbm8zRV90AQ8QD+JsXelLGm9UCaShCDSuF5+fFHoQ==
-X-Received: by 2002:a05:6512:158b:b0:516:c763:b4f5 with SMTP id
- bp11-20020a056512158b00b00516c763b4f5mr8264699lfb.3.1713182251467; 
- Mon, 15 Apr 2024 04:57:31 -0700 (PDT)
-Received: from fedora.. (cpe-109-60-83-25.zg3.cable.xnet.hr. [109.60.83.25])
- by smtp.googlemail.com with ESMTPSA id
- j1-20020a5d4641000000b00343e3023fbasm11785051wrs.34.2024.04.15.04.57.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Apr 2024 04:57:31 -0700 (PDT)
-From: Robert Marko <robert.marko@sartura.hr>
-To: marex@denx.de, trini@konsulko.com, jonas@kwiboo.se,
- kever.yang@rock-chips.com, jagan@amarulasolutions.com,
- neil.armstrong@linaro.org, caleb.connolly@linaro.org, sjg@chromium.org,
- peter@korsgaard.com, u-boot@lists.denx.de
-Cc: j.beck@linefinity.com,
-	Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH v2] usb: dwc3-generic: fix support without DM_REGULATOR
-Date: Mon, 15 Apr 2024 13:56:55 +0200
-Message-ID: <20240415115728.448176-1-robert.marko@sartura.hr>
-X-Mailer: git-send-email 2.44.0
+ AJvYcCXp9ay2EoOYv4TAQeFhysa3VGtaR7jquF89NV2/4DHjz1abfSrp1YBkfWjJO1zganP2GWus5+thPxKrcYaKE8v9nQPVqA==
+X-Gm-Message-State: AOJu0Yxqkg3UhWBhbZxOFXjITlNy2x2NhpVr4nPX+78SoYqXBU5KCFKj
+ LpbmhrgewjfayTtQcqw9rxoXr4pKK6PeR/dFttUKn9uYwNOOEUU+SS5tGmAS/PU=
+X-Google-Smtp-Source: AGHT+IG89fuRBeb8QHX2Bf4bnRU1XH1+fARzIh/srw10H/R6nLJH8FuiVPHeqyE/DxtRszBTgZ2mKQ==
+X-Received: by 2002:a5d:5490:0:b0:346:b452:1740 with SMTP id
+ h16-20020a5d5490000000b00346b4521740mr6528077wrv.3.1713163377010; 
+ Sun, 14 Apr 2024 23:42:57 -0700 (PDT)
+Received: from [192.168.2.107] ([79.115.63.35])
+ by smtp.gmail.com with ESMTPSA id
+ s19-20020adfe013000000b00346bb778e8bsm11014376wrh.5.2024.04.14.23.42.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 14 Apr 2024 23:42:56 -0700 (PDT)
+Message-ID: <f9a4bee3-3903-49ca-aec0-33d5d8d95895@linaro.org>
+Date: Mon, 15 Apr 2024 07:42:54 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/4] mtd: ubi: Do not zero out EC and VID on ECC-ed NOR
+ flashes
+To: tkuw584924@gmail.com, u-boot@lists.denx.de
+Cc: jagan@amarulasolutions.com, vigneshr@ti.com, pratyush@kernel.org,
+ d-gole@ti.com, Bacem.Daassi@infineon.com,
+ Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+References: <cover.1713154967.git.Takahiro.Kuwano@infineon.com>
+ <87a8c4db9598aa2deb52c41895191b17070ca156.1713154967.git.Takahiro.Kuwano@infineon.com>
+Content-Language: en-US
+From: Tudor Ambarus <tudor.ambarus@linaro.org>
+In-Reply-To: <87a8c4db9598aa2deb52c41895191b17070ca156.1713154967.git.Takahiro.Kuwano@infineon.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Mon, 15 Apr 2024 14:14:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,38 +100,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Recent addition of vbus-supply support has broke platform which dont use
-controllable regulators for USB.
+Hi, Takahiro,
 
-Issue is that even withou DM_REGULATOR being enabled regulator related
-functions will still build as there is a stub in regulator.h but they will
-simply return -ENOSYS which will then make dwc3_generic_host_probe()
-return the same error thus breaking probe.
 
-So, check whether return code is -ENOSYS before erroring out.
+On 4/15/24 05:33, tkuw584924@gmail.com wrote:
+> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+> 
+> For NOR flashes EC and VID are zeroed out before an erase is issued to
+> make sure UBI does not mistakenly treat the PEB as used and associate it
+> with an LEB.
+> 
+> But on some flashes, like the Infineon Semper NOR flash family,
+> multi-pass page programming is not allowed on the default ECC scheme.
+> This means zeroing out these magic numbers will result in the flash
+> throwing a page programming error.
+> 
+> Do not zero out EC and VID for such flashes. A writesize > 1 is an
+> indication of an ECC-ed flash.
+>
+I'm not familiar with the u-boot requirements, but I think a good
+practice would be to specify if/when a commit follows the upstream linux
+implementation. It helps reviewers, gives a peace of mind to the
+maintainer(s), and gives credit to the author. If something breaks all
+parties can be involved.
 
-Fixes: de451d5d5b6f ("usb: dwc3-generic: support external vbus regulator")
-Signed-off-by: Robert Marko <robert.marko@sartura.hr>
----
-Changes in v2:
-* Drop #ifdefs and check for -ENOSYS that regulator stub returns
+This patch replicates the following upstream linux commit:
+f669e74be820 ("ubi: Do not zero out EC and VID on ECC-ed NOR flashes")
 
- drivers/usb/dwc3/dwc3-generic.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Acked-by: Tudor Ambarus <tudor.ambarus@linaro.org>
 
-diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
-index 7a00529a2a..df0b0b8c02 100644
---- a/drivers/usb/dwc3/dwc3-generic.c
-+++ b/drivers/usb/dwc3/dwc3-generic.c
-@@ -248,7 +248,7 @@ static int dwc3_generic_host_probe(struct udevice *dev)
- 
- 	/* Only returns an error if regulator is valid and failed to enable due to a driver issue */
- 	rc = regulator_set_enable_if_allowed(priv->vbus_supply, true);
--	if (rc)
-+	if (rc && rc != -ENOSYS)
- 		return rc;
- 
- 	hccr = (struct xhci_hccr *)priv->gen_priv.base;
--- 
-2.44.0
-
+Cheers,
+ta
