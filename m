@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C89AC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 10:07:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D4FAC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 10:07:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9601888020;
-	Mon, 15 Apr 2024 12:07:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7F2B888235;
+	Mon, 15 Apr 2024 12:07:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="WdZH/YOI";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="VeIeYz1H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2ECB188089; Mon, 15 Apr 2024 12:07:04 +0200 (CEST)
-Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net
- [IPv6:2001:4b98:dc4:8::229])
+ id 9B45D881FE; Mon, 15 Apr 2024 12:07:08 +0200 (CEST)
+Received: from relay3-d.mail.gandi.net (relay3-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::223])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 685F287FA3
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 12:07:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 33CC4881EF
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 12:07:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
-Received: by mail.gandi.net (Postfix) with ESMTPSA id E93DFFF807;
- Mon, 15 Apr 2024 10:06:57 +0000 (UTC)
+Received: by mail.gandi.net (Postfix) with ESMTPSA id F31B560003;
+ Mon, 15 Apr 2024 10:07:02 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
- t=1713175620;
+ t=1713175624;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=V5QLmDLe7bTBJ0+9ot2S2z1GTRFgNDrJEqWQ4tSiw9M=;
- b=WdZH/YOIxbzPqd9V1i0OXiHiO+KJ3JLh/SY9hmxmROpoq4nqPlR0ecLlQqP4y17L6ppZfE
- J16t1EOO2ixBAFZp7QXfJBxDOoLyzoH1tptJVKNgpB/WeDwSJnsHTFfOShHcSLnxwlR6eD
- 6neDQ32dxdiszoSx4zkvi7nyrvqY8czeyFhO3JiXArWNUvzeYLGSfTF4YwYiFdt4diB7bF
- x2bJ3MNu9VNsPQaOaYW5Uu5ISJNVjU5DFLeVz0ZMVSnSJB3eOZWIIFTYb2jvtMMOo+0KtM
- xxiGqj1fBQXP+9Pf97WBy/BUQgQODkM8kiseLNo6HUZ0WO9m3xuJGsBE0zfS9w==
+ bh=hzh6KDR0h3E2eLm0JI3eKxgZxPnuJOrm7c/ie9flbm8=;
+ b=VeIeYz1HQNTmCzsI6Fi1bUuBwGsHemZZrrcjz152OK1dAtDiI3UqF1TmPNHbrfFFum4gOL
+ skLSAEVI4xYPRc9lIFdoPJmw0VLf+6mtaqEMLAV2yN3LqVzTVeMu+SluWoPdG+pVWME832
+ ebZVHsdToNqrys6A6xxzF1GmSkIXLLJ7KFRW+1znKJYYy1+WzcS9zElrnYG6yCYmY1jzGK
+ ztkLfRUCkEUQRn+0T/TI9LS8uVA7dq1851e1h0t7PLmmQWi7dHTewFgZKk6AoiR2Snd8im
+ JSxUyE6dVKGRJReYEabKOgFmQBLJGuKnziRW3g1CDdYGiQwgGarb/pJ/4cBeaw==
 From: Miquel Raynal <miquel.raynal@bootlin.com>
 To: Simon Glass <sjg@chromium.org>,
 	devicetree@vger.kernel.org
@@ -52,16 +52,16 @@ Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
  =?utf-8?b?UmFmYcWCIE1pxYJlY2tp?= <rafal@milecki.pl>,
  Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
  linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v11 2/2] dt-bindings: mtd: fixed-partition: Add binman
- compatibles
-Date: Mon, 15 Apr 2024 12:06:57 +0200
-Message-Id: <20240415100657.32087-1-miquel.raynal@bootlin.com>
+Subject: Re: [PATCH v11 1/2] dt-bindings: mtd: fixed-partitions: Add alignment
+ properties
+Date: Mon, 15 Apr 2024 12:07:02 +0200
+Message-Id: <20240415100702.32115-1-miquel.raynal@bootlin.com>
 X-Mailer: git-send-email 2.40.1
-In-Reply-To: <20240412153249.100787-2-sjg@chromium.org>
+In-Reply-To: <20240412153249.100787-1-sjg@chromium.org>
 References: 
 MIME-Version: 1.0
 X-linux-mtd-patch-notification: thanks
-X-linux-mtd-patch-commit: b'f48d2d6ebd3bde515f4725a88e53953cd6eccc29'
+X-linux-mtd-patch-commit: b'd8d42d47a9ff9a997abccab1e4ebffe4fce28f32'
 Content-Transfer-Encoding: 8bit
 X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
@@ -80,19 +80,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 2024-04-12 at 15:32:49 UTC, Simon Glass wrote:
-> Add two compatibles for binman entries, as a starting point for the
-> schema.
+On Fri, 2024-04-12 at 15:32:48 UTC, Simon Glass wrote:
+> Add three properties for controlling alignment of partitions, aka
+> 'entries' in fixed-partition.
 > 
-> Note that, after discussion on v2, we decided to keep the existing
-> meaning of label so as not to require changes to existing userspace
-> software when moving to use binman nodes to specify the firmware
-> layout.
+> For now there is no explicit mention of hierarchy, so a 'section' is
+> just the 'fixed-partitions' node.
 > 
-> Note also that, after discussion on v6, we decided to use the same
-> 'fixed-partition' schema for the binman features, so this version
-> adds a new 'binman.yaml' file providing the new compatibles to the
-> existing partition.yaml binding.
+> These new properties are inputs to the Binman packaging process, but are
+> also needed if the firmware is repacked, to ensure that alignment
+> constraints are not violated. Therefore they are provided as part of
+> the schema.
 > 
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > Reviewed-by: Rob Herring <robh@kernel.org>
