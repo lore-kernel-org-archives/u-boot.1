@@ -4,81 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4688AC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 14:07:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 083F3C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 14:12:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3CA087E75;
-	Mon, 15 Apr 2024 16:06:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E01187EDD;
+	Mon, 15 Apr 2024 16:12:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Da4tq0yT";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="sVeSnJyg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58AA0880FC; Mon, 15 Apr 2024 16:06:58 +0200 (CEST)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 04C3088050; Mon, 15 Apr 2024 16:12:00 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E00387C82
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 16:06:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7B6287C82
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 16:11:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2a786f8008aso205766a91.1
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 07:06:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713190012; x=1713794812; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3L+sHsXzI58C12gbzCROx/xauDnwLWVt9PW+P7+biHI=;
- b=Da4tq0yTgs1FTZ99t7Q9UwjNnQFY+GeTmybgDlcH91sQX89yAA/1KRb1QVJfJS+B5G
- NR5VdawdzwTRcgUQMKBriSmCbVM/5aMndKpwtgLjC0yimpcrBzpdLxfVUE8ByYHBfCfG
- 1ICcqSXpaJD2lqzDWNFmMBTODN8wnUsolNTv/WFjqfeuBrx11QjHe38Ey1lUVVriE1GR
- NC/+a2fhk7Tz5An6jkLUBqd85KeNjk33vKuKwpThvT5/9lEah6/JoZPRAyzCgdZjZeWs
- Rh40DLlF1dXoTh2PAeAcGOQ0gxdDHjJdvGnTM3tSRAW728cgbi3xP5tivd7f+wt0t76Y
- fzaQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713190012; x=1713794812;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=3L+sHsXzI58C12gbzCROx/xauDnwLWVt9PW+P7+biHI=;
- b=U/tq2Ai6wDdjtkWAc/cHc2Vrb8tD5k2wANXBIXpKtUQ8xJb9cOJkqEnVK7rBz3WHn6
- Pkw+HzqizpvM0t0RYL6xWll1+Em++nQjODNPDlM+RvUzTRW+oo4xHwdmGi4msiBIcuMs
- JEYL4Oew+EvlqBLe6MfoTqR/dpMoKPnYX6Opc8bsf+jVeJGe1eBENf0426eIXjLUdVI1
- MujViug5JL4mAhBXnXXpUjMBnXMCfOQiAitCoAQzrgEbNx1BctZhxnAgyfqQoZjw3oIE
- 9klivpFVwoQuQtdcPIYNUELaLL8CI6Z8TziOASN7G/3T2IQiXCjCJ80ME+dS8805VPpc
- 6TAg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUL407bx7SUt8CzCgOP0DkxF/RISCS/Kom3UPDqHNCNIcO6E+6tcV6Gcwz56FyKlFaD43PwCttn/mhdlS7I1hh8rVo8tg==
-X-Gm-Message-State: AOJu0Yyz88X95shRivWsmT82bg01b4X7txdsDoqVY6beHi0KscQT4R1U
- ZT2XyQLKAlGL/gwTT1oVFehpOejA/5L683bfhoXEHVul8Ia4mxOhQOiHIFT5pSQe4Xg7m3bOYOp
- z32rnMB1we4yNIKHDfVscnBQFvNg=
-X-Google-Smtp-Source: AGHT+IFo+6qBtBIa/f33BOEW/8+22JMxh5BqN4I/I+QFeS1Iiom818yZfd/4g+99lBjHfYjPjrLOZg4DcvFlntuuny4=
-X-Received: by 2002:a17:90b:243:b0:2a6:d2eb:860f with SMTP id
- fz3-20020a17090b024300b002a6d2eb860fmr8651473pjb.2.1713190011934; Mon, 15 Apr
- 2024 07:06:51 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=123a=LV=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1713190296;
+ bh=UPwPTGGWVlPcnG811e735cZQ7JpkxAdY8/2VLmhg/oY=;
+ b=sVeSnJygDEqNg3SmLPDfHowgE4WXg69V07HEpenlknEKKiQJ1wObbcvUmVx9wrI9NrzLYTJAD
+ tQcF/4LXk7wfAxutieFlqU9ZZRpHlUxm9VIO6phL0R1/sKuw4/Bx0ylvP5iy8+DV7UEKJ2c6CTm
+ 8wosutrattPVv9mPPSa+M+cgvcHqNpXqYlSO8517pvI3m0ML7Rmauw2w771H0MUbax5NluOLwv8
+ RtiJzQcKRs64OgttHfpTiCU+JvCDfOejzZ/s2LGfzazRuzQPCnuAmIgztJGbq3nF0Q8VMMfX+/X
+ iZTHK58MaibmGJx1/S4oguyRy2aRdumO9impQGLe3Gzw==
+Message-ID: <4b6f9196-a5a9-43b6-911d-4dee7576e872@kwiboo.se>
+Date: Mon, 15 Apr 2024 16:11:31 +0200
 MIME-Version: 1.0
-References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
- <20240415130013.26721-1-yasuharu.shibata@gmail.com>
- <20240415130013.26721-2-yasuharu.shibata@gmail.com>
-In-Reply-To: <20240415130013.26721-2-yasuharu.shibata@gmail.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 15 Apr 2024 11:06:40 -0300
-Message-ID: <CAOMZO5CJCtpjM3pAk7SaOu1LySUK-6mvWRWzw0Ni=nmxrQMeCw@mail.gmail.com>
-Subject: Re: [PATCH 1/1] net: wget: fix TCP sequence number wrap around issue
-To: Yasuharu Shibata <yasuharu.shibata@gmail.com>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Tim Harvey <tharvey@gateworks.com>, 
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 14/23] rockchip: rk3588-coolpi: Add boards to
+ documentation
+To: Dragan Simic <dsimic@manjaro.org>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Andy Yan <andyshrk@163.com>, u-boot@lists.denx.de
+References: <20240413181425.1384357-1-jonas@kwiboo.se>
+ <20240413181425.1384357-15-jonas@kwiboo.se>
+ <ad8440ae-d02f-4b02-be58-a37369f3eb52@theobroma-systems.com>
+ <6b46f02336966f5fa1af927101e65298@manjaro.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <6b46f02336966f5fa1af927101e65298@manjaro.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 661d359791f33105f12c2722
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,31 +78,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yasuharu,
+Hi Quentin and Dragan,
 
-On Mon, Apr 15, 2024 at 10:01=E2=80=AFAM Yasuharu Shibata
-<yasuharu.shibata@gmail.com> wrote:
->
-> If tcp_seq_num is wrap around, tcp_seq_num >=3D initial_data_seq_num
-> isn't satisfied and store_block() isn't called.
-> The condition has a wrap around issue, so it is fixed in this patch.
->
-> Signed-off-by: Yasuharu Shibata <yasuharu.shibata@gmail.com>
+On 2024-04-15 10:58, Dragan Simic wrote:
+> Hello Quentin,
+> 
+> On 2024-04-15 10:56, Quentin Schulz wrote:
+>> Hi Jonas,
+>>
+>> On 4/13/24 20:13, Jonas Karlman wrote:
+>>> Add the CoolPi 4 Model B and CoolPi CM5 EVB board to the 
+>>> documentation.
+>>> Also fix .dtb-file entries in Makefile.
+>>>
+>>
+>> When one needs to use a list or say "also", "moreover", etc... it
+>> usually is a tell the commit should be split.
+>>
+>> Here the changes are not related, so please have two separate patches.
+> 
+> Agreed.
 
-Great work!
+I will split this patch for v3.
 
-I applied your previous patch:
-https://lore.kernel.org/u-boot/20240414104607.5966-1-yasuharu.shibata@gmail=
-.com/
+Regards,
+Jonas
 
-and this one against top-of-tree U-Boot and I no longer observe the
-wget corruption.
+> 
+>> The sum of changes is fine though, thanks.
 
-Reported-by: Tim Harvey <tharvey@gateworks.com>
-Tested-by: Fabio Estevam <festevam@denx.de>
-
-Thanks a lot for fixing this long-standing wget bug.
-
-Cheers,
-
-Fabio Estevam
