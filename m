@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54B1FC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:10:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4ED9BC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:10:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9246E88245;
-	Mon, 15 Apr 2024 08:08:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 09FBB881FA;
+	Mon, 15 Apr 2024 08:08:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCF1188225; Mon, 15 Apr 2024 08:08:21 +0200 (CEST)
+ id A218888246; Mon, 15 Apr 2024 08:08:23 +0200 (CEST)
 Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 060B888195
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:08:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE44788220
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:08:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=csgroup.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
 Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
- by localhost (Postfix) with ESMTP id 4VHxYb5j7Gz9t1J;
- Mon, 15 Apr 2024 08:08:19 +0200 (CEST)
+ by localhost (Postfix) with ESMTP id 4VHxYc18DXz9t5l;
+ Mon, 15 Apr 2024 08:08:20 +0200 (CEST)
 Received: from pegase1.c-s.fr ([192.168.12.234])
  by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id 1Qedpq8BOfiL; Mon, 15 Apr 2024 08:08:19 +0200 (CEST)
+ with ESMTP id s_zrRo87hXwn; Mon, 15 Apr 2024 08:08:20 +0200 (CEST)
 Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase1.c-s.fr (Postfix) with ESMTP id 4VHxYL04sPz9tC6;
+ by pegase1.c-s.fr (Postfix) with ESMTP id 4VHxYL0RTmz9tCB;
  Mon, 15 Apr 2024 08:08:06 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id EDE368B77A;
- Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id 072988B770;
+ Mon, 15 Apr 2024 08:08:06 +0200 (CEST)
 Received: from messagerie.si.c-s.fr ([127.0.0.1])
  by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id jMTc3pCREOEi; Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
+ with ESMTP id 9uRx_d6WPsID; Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 Received: from PO20335.idsi0.si.c-s.fr (unknown [172.25.230.108])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id D3CF18B770;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id E16418B775;
  Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 From: Christophe Leroy <christophe.leroy@csgroup.eu>
 To: Jagan Teki <jagan@amarulasolutions.com>,
@@ -47,9 +47,9 @@ To: Jagan Teki <jagan@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Christophe Leroy <christophe.leroy@csgroup.eu>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 14/17] spi: mpc8xx: Set up speed as requested
-Date: Mon, 15 Apr 2024 08:07:27 +0200
-Message-ID: <ccfa222beff47168bded2d05be8611644662eaf9.1713160866.git.christophe.leroy@csgroup.eu>
+Subject: [PATCH v2 15/17] board: cssi: Use HAVE_VENDOR_COMMON_LIB logic
+Date: Mon, 15 Apr 2024 08:07:28 +0200
+Message-ID: <c1e2330cb0082b9b4a4ae3c13005335eda43113b.1713160866.git.christophe.leroy@csgroup.eu>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1713160866.git.christophe.leroy@csgroup.eu>
 References: <cover.1713160866.git.christophe.leroy@csgroup.eu>
@@ -71,51 +71,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set the speed requested through mpc8xx_spi_set_speed() instead
-of hardcoding a fixed speed.
+Instead of cross using cross-directory makefile directives,
+add a Makefile in board/cssi/common/ directory in order to
+benefit from HAVE_VENDOR_COMMON_LIB logic.
 
 Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
 ---
- drivers/spi/mpc8xx_spi.c | 19 +++++++++++++++++--
- 1 file changed, 17 insertions(+), 2 deletions(-)
+ board/cssi/cmpc885/Makefile | 2 +-
+ board/cssi/cmpcpro/Makefile | 2 +-
+ board/cssi/common/Makefile  | 8 ++++++++
+ 3 files changed, 10 insertions(+), 2 deletions(-)
+ create mode 100644 board/cssi/common/Makefile
 
-diff --git a/drivers/spi/mpc8xx_spi.c b/drivers/spi/mpc8xx_spi.c
-index b1abfbf4fc..e1448cc619 100644
---- a/drivers/spi/mpc8xx_spi.c
-+++ b/drivers/spi/mpc8xx_spi.c
-@@ -48,6 +48,21 @@ static int mpc8xx_spi_set_mode(struct udevice *dev, uint mod)
+diff --git a/board/cssi/cmpc885/Makefile b/board/cssi/cmpc885/Makefile
+index baf9e5ab4f..6c055097cd 100644
+--- a/board/cssi/cmpc885/Makefile
++++ b/board/cssi/cmpc885/Makefile
+@@ -5,6 +5,6 @@
+ # Christophe Leroy <christophe.leroy@c-s.fr>
+ #
  
- static int mpc8xx_spi_set_speed(struct udevice *dev, uint speed)
- {
-+	immap_t __iomem *immr = (immap_t __iomem *)CONFIG_SYS_IMMR;
-+	cpm8xx_t __iomem *cp = &immr->im_cpm;
-+	u8 pm = (gd->arch.brg_clk - 1) / (speed * 16);
+-obj-y += cmpc885.o ../common/common.o
++obj-y += cmpc885.o
+ obj-y += sdram.o
+ obj-$(CONFIG_CMD_NAND) += nand.o
+diff --git a/board/cssi/cmpcpro/Makefile b/board/cssi/cmpcpro/Makefile
+index 73ff451ea1..30837781af 100644
+--- a/board/cssi/cmpcpro/Makefile
++++ b/board/cssi/cmpcpro/Makefile
+@@ -5,4 +5,4 @@
+ # SPDX-License-Identifier:	GPL-2.0+
+ #
+ 
+-obj-y += cmpcpro.o nand.o ../common/common.o
++obj-y += cmpcpro.o nand.o
+diff --git a/board/cssi/common/Makefile b/board/cssi/common/Makefile
+new file mode 100644
+index 0000000000..973582639e
+--- /dev/null
++++ b/board/cssi/common/Makefile
+@@ -0,0 +1,8 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2024 CS GROUP France
++# Christophe Leroy <christophe.leroy@csgroup.eu>
++#
 +
-+	if (pm > 16) {
-+		setbits_be16(&cp->cp_spmode, SPMODE_DIV16);
-+		pm /= 16;
-+		if (pm > 16)
-+			pm = 16;
-+	} else {
-+		clrbits_be16(&cp->cp_spmode, SPMODE_DIV16);
-+	}
-+
-+	clrsetbits_be16(&cp->cp_spmode, SPMODE_PM(0xf), SPMODE_PM(pm));
-+
- 	return 0;
- }
- 
-@@ -189,8 +204,8 @@ static int mpc8xx_spi_xfer_one(struct udevice *dev, size_t count,
- 	out_be16(&rbdf->cbd_sc, BD_SC_EMPTY | BD_SC_WRAP);
- 	out_be16(&rbdf->cbd_datlen, 0);	 /* rx length has no significance */
- 
--	clrsetbits_be16(&cp->cp_spmode, ~SPMODE_LOOP, SPMODE_REV | SPMODE_MSTR |
--			SPMODE_EN | spmode_len | SPMODE_PM(0x8));
-+	clrsetbits_be16(&cp->cp_spmode, ~(SPMODE_LOOP | SPMODE_PM(0xf) | SPMODE_DIV16),
-+			SPMODE_REV | SPMODE_MSTR | SPMODE_EN | spmode_len);
- 	out_8(&cp->cp_spim, 0);		/* Mask  all SPI events */
- 	out_8(&cp->cp_spie, SPI_EMASK);	/* Clear all SPI events	*/
- 
++obj-$(CONFIG_TARGET_CMPC885) += common.o
++obj-$(CONFIG_TARGET_CMPCPRO) += common.o
 -- 
 2.43.0
 
