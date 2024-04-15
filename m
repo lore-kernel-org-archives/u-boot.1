@@ -4,61 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29A0FC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 13:55:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8DA3C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 13:55:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A93F788137;
-	Mon, 15 Apr 2024 15:55:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 388E187E75;
+	Mon, 15 Apr 2024 15:55:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="SkimkQUk";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="d2aTGHjw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE3858814A; Mon, 15 Apr 2024 15:54:59 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1BBFC88089; Mon, 15 Apr 2024 15:55:50 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C91BC880FC
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 15:54:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1FB7F87E4D
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 15:55:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 900e21ba-fb2f-11ee-b571-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 900e21ba-fb2f-11ee-b571-005056992ed3;
- Mon, 15 Apr 2024 15:53:39 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=F7i4+D5wx6h53OXDd8u/HmMA49vGCxp0DdUuKlS4l1s=;
- b=SkimkQUkenSxuhkCuI9aZDv4tUdHpJmZCMMYdm6y4E8GTPiuhtz6NPiEYNoSxXkPaDaVpp+Ofs9cS
- x5veDODrL+nzs/4c0m+gj9BzCl6MPqoYJRb7RlheCKp+WNFXEA6rvy0BSscpKVNytxLn0eeyEoU4Vq
- 3+XBqNw1UI72BxUZxunIWFtAOYoJ9k9W0UhXT/gnyISZtNKk/i9mP+0jkX+cY2EFf6tq7mU0KW7JF0
- 8hDUlrQPFUlGxy4TleS9UjN6W9kKr/84Et9sXULGIXW0WZODLJkFvHrMyzuITO4enp/owNwMuOESWH
- lHis6ll5I6Z8U8wXpIo3yddy5qhafeg==
-X-KPN-MID: 33|+tRlo4EicGthqpH4CNUryr5VXNf0NDb9b/wsqDgskfA954N1n87i7Va4PsTMvgB
- NQsP6Js6reUW/pr2Ncveem6YlQvjZOAoXiar2KiSp8Gk=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|o2Ei4hbXENIp5s5K0TSmrfkGohMFifiogRxJIHB2Qj3m5Z/+Q2wj6O+cxAt8fd5
- rm6Z2XhXjBCdR7Jq/vKxR3w==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id be16545b-fb2f-11ee-9eb4-00505699772e;
- Mon, 15 Apr 2024 15:54:57 +0200 (CEST)
-Date: Mon, 15 Apr 2024 15:54:56 +0200
-Message-Id: <875xwihgsv.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: <j@jannau.net>
-Cc: kettenis@openbsd.org, trini@konsulko.com, sjg@chromium.org,
- u-boot@lists.denx.de, asahi@lists.linux.dev, j@jannau.net
-In-Reply-To: <20240317-apple_config-v1-3-1b862bc140a9@jannau.net> (message
- from Janne Grunau via B4 Relay on Sun, 17 Mar 2024 15:54:49 +0100)
-Subject: Re: [PATCH 3/4] configs: apple: Enable CMD_SELECT_FONT and FONT_16X32
-References: <20240317-apple_config-v1-0-1b862bc140a9@jannau.net>
- <20240317-apple_config-v1-3-1b862bc140a9@jannau.net>
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-57030fa7381so779333a12.2
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 06:55:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1713189347; x=1713794147;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ziyggO0UXD4QzVByrEkS5yy3e6nCGZaHjPfkjk/+FzM=;
+ b=d2aTGHjwubQSExLpdmjGKRv7xpiqil03BRmWddx9Lz2l1W2utRqnMCyMfnw17Xrk8e
+ Tp22HbpllpEIObzdaSwuSiDIeOOOH9XrB419K/1aX2r4Xu8h6JcC7Y0cb4qCu9HSH7kU
+ Cd33pQnTxgK9VGvDCPq7RmFhz3P6LXIHmjKvs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713189347; x=1713794147;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ziyggO0UXD4QzVByrEkS5yy3e6nCGZaHjPfkjk/+FzM=;
+ b=M7yaHRWiIYjW3N6N8TuNOp+szz/bJeXOM4O9MDpK1Bo8J7mU3eUE35jaX1eyLB6gLg
+ N0K2ICx/nkWEZrbn0ajvrD+YRj1GJ/vP0OlXUK6AGmIs5abubgHax0SQALasyFW5dqZD
+ 9N3YY38Dpyt07d8gNg5hh6INGQC6TGC6iMQ6u7jrCR1KABEFioOZ/n4/ER2VucegsxiV
+ urjpcCXZtt8Cu4W8p3SA7qnUryI6TiHg+yEWE2rBq/jPS+08VlTCMHHqj4572JuWn50c
+ cM5yDCshbHNmzHxpooStaj0MuDwEZFm7FG6S9zes4jiJI84diWnoreYTSpZiMEM4v/DL
+ Q4ZA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUaU1B10IC3HjXaf1Go8THUcySWvD3g0og34cih9OLw3mio9znG3ulAcjvHtZ24cJKqU5cgNRCDep83H5xOk2wnyssZLw==
+X-Gm-Message-State: AOJu0YyiAL7nqFpFD9loK4KzuQvzBA9fIOKNOBg8o3oODqdyxepcSkdM
+ rNVd9z7ndEoPXaR4oGyaakiAwKsvBheUazISUjc3Zjr+5VqQ/hQXfGbDvC7i3uep9ZareG5U6gK
+ rbWEIcbTGL5Fy4n27AlCcgq2vP+zzG9TJU8bUDg==
+X-Google-Smtp-Source: AGHT+IFihQ3YhxiLSFd8e6oXjeEtrfIRbvvL4m0MKbP1k+/2KqUjzNZDvn84orLOc0SLudcFITWO7w9wDfdxkbN8+WU=
+X-Received: by 2002:a50:9ec8:0:b0:568:32cc:f808 with SMTP id
+ a66-20020a509ec8000000b0056832ccf808mr6368936edf.15.1713189347555; Mon, 15
+ Apr 2024 06:55:47 -0700 (PDT)
+MIME-Version: 1.0
+References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
+ <20240415130013.26721-1-yasuharu.shibata@gmail.com>
+ <20240415130013.26721-2-yasuharu.shibata@gmail.com>
+ <CAOf5uwm23ck7uwr-tAZp=8L9HVb_A0r6BYNZ3C0KCaTNkHG8Og@mail.gmail.com>
+ <CALu9rSZeZYyuCwBeUgR+sxMvmqDBh+Q5hyb-gtHP0U8ovHby_g@mail.gmail.com>
+In-Reply-To: <CALu9rSZeZYyuCwBeUgR+sxMvmqDBh+Q5hyb-gtHP0U8ovHby_g@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Mon, 15 Apr 2024 15:55:36 +0200
+Message-ID: <CAOf5uwmqeMKKyf6-vxOnUMisHNZ24TupMRd_M-QT4JdtpnaFjQ@mail.gmail.com>
+Subject: Re: [PATCH 1/1] net: wget: fix TCP sequence number wrap around issue
+To: Yasuharu Shibata <yasuharu.shibata@gmail.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>, 
+ Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,47 +94,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-> Date: Sun, 17 Mar 2024 15:54:49 +0100
-> 
-> From: Janne Grunau <j@jannau.net>
-> 
-> Apple devices have high DPI displays so the larger fonts are preferable
-> for improved readability. This does not yet change the used font based
-> on the display's pixel density so the standard 8x16 font is still used
-> by default.
-> 
-> Signed-off-by: Janne Grunau <j@jannau.net>
+Hi
 
-Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
+On Mon, Apr 15, 2024 at 3:48=E2=80=AFPM Yasuharu Shibata
+<yasuharu.shibata@gmail.com> wrote:
+>
+> Hi Michael,
+>
+> On Mon, 15 Apr 2024 at 22:03, Michael Nazzareno Trimarchi
+> <michael@amarulasolutions.com> wrote:
+> >
+> > I think I have sent some time ago ;)
+> >
+> > Anyway look sane. I was having the same feeling on code inspection
+> >
+> > Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+>
+> Thank you for your review.
+> I already checked the thread, sorry I couldn't find your patch and
+> I couldn't see whether it is the same.
+> In any case, I consider there is a potential issue about
+> wrap around, so I submitted a patch.
+>
 
-> ---
->  configs/apple_m1_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
-> index 31d966f0ab..c30aec7c55 100644
-> --- a/configs/apple_m1_defconfig
-> +++ b/configs/apple_m1_defconfig
-> @@ -9,6 +9,7 @@ CONFIG_SYS_PBSIZE=276
->  # CONFIG_DISPLAY_CPUINFO is not set
->  CONFIG_DISPLAY_BOARDINFO_LATE=y
->  CONFIG_BOARD_LATE_INIT=y
-> +CONFIG_CMD_SELECT_FONT=y
->  # CONFIG_NET is not set
->  CONFIG_SYS_64BIT_LBA=y
->  CONFIG_APPLE_SPI_KEYB=y
-> @@ -19,6 +20,7 @@ CONFIG_USB_XHCI_DWC3=y
->  CONFIG_USB_XHCI_PCI=y
->  CONFIG_USB_DWC3=y
->  CONFIG_USB_KEYBOARD=y
-> +CONFIG_VIDEO_FONT_16X32=y
->  CONFIG_SYS_WHITE_ON_BLACK=y
->  CONFIG_NO_FB_CLEAR=y
->  CONFIG_VIDEO_SIMPLE=y
-> 
-> -- 
-> 2.44.0
-> 
-> 
-> 
+Very good job ;) to fix it. Just add Suggest-by: ;)
+
+Michael
+
+> --
+> Best regards,
+> Yasuharu Shibata
+
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
