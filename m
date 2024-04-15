@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8995DC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 01:31:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78604C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 04:33:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCF558813D;
-	Mon, 15 Apr 2024 03:31:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3DB4488093;
+	Mon, 15 Apr 2024 06:33:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BJDtNhtG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dc8QL+fy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 604EE88134; Mon, 15 Apr 2024 03:31:57 +0200 (CEST)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id 440A48811D; Mon, 15 Apr 2024 06:33:24 +0200 (CEST)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D3C887E43
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 03:31:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C176D87F4A
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 06:33:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-78d61a6229bso185097685a.0
- for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 18:31:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=tkuw584924@gmail.com
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-1e51398cc4eso27147995ad.2
+ for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 21:33:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713144714; x=1713749514; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+VNFBxjcbK2EChLXIlB3M53Vbj54ywsmdXL0vZ7BLEQ=;
- b=BJDtNhtGt4XWSFHp63CjZAxlIOpjIeZVs5DQDrimd4ox+SNUtUXAsoUewovwiOtF9y
- J7rU63sNDXe9ZomoSrIh4C2E9tYEcEh100yl+ED4IH8va660EavwuyY34Ys8gcuqyXDk
- JLW7b9CshIO0s5kxzd1v5gnvCee30Wn8ad5Y0=
+ d=gmail.com; s=20230601; t=1713155600; x=1713760400; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+mYtvO3WAMcrsWd0olrimNtFRI6Qr9yx/g9zZpVx3zY=;
+ b=dc8QL+fy24sJrIAGnbT0TJhsyexZWqc50uwIyT9pSQCOixZXXinbFYeJVQZBUFfQ0x
+ S8/+Rk/UpG3XTiCYxAMcBjjKCjJ4/RNcygWgz7nfsfD6ml9L1LiM2KFpfxOZcSRgBJ3y
+ wyRGm0qmdISILZeK+d2B0uZoibftg1zQ9n9hubwxru8iNdm0/vZezSmOms7UrEl4A9wt
+ TqwjLy2e6UENQ4XPkIq4RvEzhs/DcCpVJAVkaYkLyU8tLqDGoPapBAHpiIOUUumecajL
+ qnTE52tvuCE+9F6bRx5dGbCvdR4UxI2IH0qWmE7DnJoqwPcIs+IomsprdUZLsNcLOCTS
+ 7vcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713144714; x=1713749514;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+VNFBxjcbK2EChLXIlB3M53Vbj54ywsmdXL0vZ7BLEQ=;
- b=SY8cVEpFUhqpYpbcuUThIq4WaRzRAWtpGPNitxbySSSDvNzrWjQzYtlKsHhSMks9Ae
- HuUL+GiweELQi/a+oJURzVupB+4J6U1tEUiuGPVjuTY4b/Z1qx61s44pjkwMxsidYuyw
- 6X6zfIhfLI7dl+8eZVa3sL7YXXYLFvBje3zSXKjOZyB2bQxldlSo/lzjejs7vNx57+/1
- aC0DRwlhpM+zrKG6vPgGNBHQ6IxBp9FJ7Rjw6dugeIB16dOL8J+pqll+zO0IGyUHeT7n
- msK77PxmvIHZbtXlZuUSMxwV7iHI9z02BVTA7rPrP+ALkikVUXJF8Qt8FKGCsGc6HBVk
- VwWA==
-X-Gm-Message-State: AOJu0YxOsiCrGhHs01UjF+zYYcHR4XoztXrEl+X7fyY1yb8jbqEi/npW
- Ms9vGO5pjLs1bRnhnadVCjGISNIu7cJBPX/Q9K+cjLnN8e0a7Sqw6wEC0KlG+5U=
-X-Google-Smtp-Source: AGHT+IH3rEuY3XEbcq3WjtA80uVZkduCFsdKX+a0bLZF3ounkcwEyJrkYpRHKXi4b0jePaJgqk22GA==
-X-Received: by 2002:a05:620a:b85:b0:789:e800:b39f with SMTP id
- k5-20020a05620a0b8500b00789e800b39fmr8342645qkh.76.1713144713719; 
- Sun, 14 Apr 2024 18:31:53 -0700 (PDT)
-Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- c22-20020a05620a165600b0078d667d1085sm5678944qko.84.2024.04.14.18.31.52
+ d=1e100.net; s=20230601; t=1713155600; x=1713760400;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+mYtvO3WAMcrsWd0olrimNtFRI6Qr9yx/g9zZpVx3zY=;
+ b=bfYKKpw61USXwvXFlU4XVTaPNI3Fw3NLn7k2UemBFoG54a3doV5ycy/smzRnE99suJ
+ wqlj1UJgdqdYCQkZVH8KklmUGdSr6IKTB756+TNf69vycYpDicp6IYRD/IzsCZb1yDJa
+ KeKTC40Nf+gEioZW2IEcvArpv5QlufxjZgh1szgJkM97yjIocyeTIckGOJpKpKY90Mgh
+ pTfkby5eYZd90BCmJ9xGHjtlcMpaEBWYmbm+xaJlTUistzIUyLwzbmX4XY3O8jOjG125
+ 0C3giOomqxl3VcasQwP2t0Ufw+JDj8j4ZLEl8+R2hq4ycMO9QqEU+Yb6AP2wVTNDTagI
+ SLFA==
+X-Gm-Message-State: AOJu0Yxz9CXjP8PqgesVC7a0nPXlXA7A1YKhpsLTWsv9CMreTqtlfBtA
+ 57hbov9TnNtXNnexbS6iyvNEITnXPG8RiZSXPtJTQHeo2weqMWuXjukduA==
+X-Google-Smtp-Source: AGHT+IHs0qlG3479kEdAxio0QgPhg++yL4z02a+dlertKV4DR10ti7Q9oOAUHmnYHjUVI4ZHcXsryw==
+X-Received: by 2002:a17:902:d504:b0:1e5:4f00:37b9 with SMTP id
+ b4-20020a170902d50400b001e54f0037b9mr13620533plg.11.1713155600152; 
+ Sun, 14 Apr 2024 21:33:20 -0700 (PDT)
+Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
+ [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
+ g13-20020a170902d5cd00b001dd88a5dc47sm6902682plh.290.2024.04.14.21.33.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Apr 2024 18:31:53 -0700 (PDT)
-Date: Sun, 14 Apr 2024 19:31:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Janne Grunau <j@jannau.net>
-Subject: Re: [PULL] u-boot-usb/master
-Message-ID: <20240415013150.GE1054907@bill-the-cat>
-References: <20240414184549.147802-1-marex@denx.de>
+ Sun, 14 Apr 2024 21:33:19 -0700 (PDT)
+From: tkuw584924@gmail.com
+X-Google-Original-From: Takahiro.Kuwano@infineon.com
+To: u-boot@lists.denx.de
+Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
+ pratyush@kernel.org, d-gole@ti.com, tkuw584924@gmail.com,
+ Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+Subject: [PATCH 0/4] mtd: Make sure UBIFS does not do multi-pass page
+ programming on flashes that don't support it
+Date: Mon, 15 Apr 2024 13:33:07 +0900
+Message-Id: <cover.1713154967.git.Takahiro.Kuwano@infineon.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="st3Ks5wzMd9+mdpT"
-Content-Disposition: inline
-In-Reply-To: <20240414184549.147802-1-marex@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,51 +92,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
---st3Ks5wzMd9+mdpT
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This series is equivalent to the one for Linux MTD submitted by
+Pratyush Yadav.
 
-On Sun, Apr 14, 2024 at 08:45:17PM +0200, Marek Vasut wrote:
+https://patchwork.ozlabs.org/project/linux-mtd/list/?series=217759&state=*
 
-> The following changes since commit cdfcc37428e06f4730ab9a17cc084eeb7676ea=
-1a:
->=20
->   Merge tag 'u-boot-dfu-next-20240402' of https://source.denx.de/u-boot/c=
-ustodians/u-boot-dfu (2024-04-02 22:37:23 -0400)
->=20
-> are available in the Git repository at:
->=20
->   git://source.denx.de/u-boot-usb.git master
->=20
-> for you to fetch changes up to 63f6a449bffe46beca89580d3efa48e5d041025c:
->=20
->   usb: kbd: Add probe quirk for Apple and Keychron keyboards (2024-04-12 =
-14:53:13 +0200)
->=20
+Takahiro Kuwano (4):
+  mtd: ubi: Do not zero out EC and VID on ECC-ed NOR flashes
+  mtd: spi-nor: Allow flashes to specify MTD writesize
+  mtd: spi-nor-core: Rework default_init() to take flash_parameter
+  mtd: spi-nor: Set ECC unit size to MTD writesize in Infineon SEMPER
+    flashes
 
-Applied to u-boot/master, thanks!
+ drivers/mtd/spi/spi-nor-core.c | 45 +++++++++++++++++++++++++---------
+ drivers/mtd/ubi/build.c        |  4 +--
+ drivers/mtd/ubi/io.c           |  9 ++++++-
+ include/linux/mtd/spi-nor.h    |  1 +
+ 4 files changed, 44 insertions(+), 15 deletions(-)
 
---=20
-Tom
+-- 
+2.34.1
 
---st3Ks5wzMd9+mdpT
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYcg4AACgkQFHw5/5Y0
-tyzMgAv/VbKvLKWm7SOMhLEmYvGKRBJr8nxWOZUpmqU9keXWONxUpbXzoa107QoK
-aup1UiYtcoBJ9Rhu0AkEDNzzxY1CBWBI4z0J81k/G4Nse0DpfsHDXmNspa68pvk3
-fxgw11UQOsKM7Oj2jp3fKLvyxvDAhVos2BpFCsEAyYx2If8+45tQxLa44Z7LMrxm
-1Q/MDxkbgby413agmL4KhmZUxq0o1BW8OqG1qbf77jm7I3R+om9FgVNT/Vx6xacN
-kQMYwDgYES88GZPjh49SwSHhGojlnhPgAf/noFa8TyeGMEt5L/X+/w4Gcn6AsBkz
-K/o6iuSKJD0g8Fqag83GQk7pSDoy3qzJj3bVTePTZ/vLCacu+lCe+/YEHua7WO4D
-rrVqowQCsrS24Y28tsYQuUX3nT/K3CiJM6LoC+cszCWxTg1LiMb5PYJbzqjNkY1b
-TZ3dvtNuDvy8qfy6Vw+sc8js26L7b7sQQT+ksjRhejSjmSSehWDcvp60JkqkH/Ea
-a+rRfwdu
-=AfN6
------END PGP SIGNATURE-----
-
---st3Ks5wzMd9+mdpT--
