@@ -4,52 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6D25C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:38:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E18BC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:41:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1547B8811D;
-	Mon, 15 Apr 2024 08:38:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C190D88159;
+	Mon, 15 Apr 2024 08:41:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="LGAGOnjR";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="hygR2Eug";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99EA488188; Mon, 15 Apr 2024 08:38:01 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
+ id 46CD288169; Mon, 15 Apr 2024 08:41:56 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76944878ED
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:37:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 69B6F8811D
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:41:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1713163079;
+ t=1713163313;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Vj2vV/cKZw+7+On9iYSuYh6EMyLgtWv/EelsnHJWGLc=;
- b=LGAGOnjRduFWCq6H/4MDmQMRIX5JnxWDx8HbbPxq8jOR1ltttyttNVEMUKFA9FaXloVtlD
- ewRd4zPVyEakhN2JHNwlytN1P8Swtp2MGWqbOCIByfzdB66i4va2QyXU6eTBrzp7FwmOA7
- vKv9GStHkowRi5lZ3wJP8EwiKCAq80gmBjbCo2Hgz/nzHFmvd7IufIWBL8rPXwp7OcleHU
- ZU3jepqdzH5MjzuSFFZ/j8+2YZa99lG4GqWlaG1WIlRjgFStgcBtpgvoX1NWOaeSflD/YM
- /rUAZfOonSDBZUUKtJZJuA+yEVEcZIeLO9yUjdlCr5ZiHoSQMNg9utEGATOCXg==
-Date: Mon, 15 Apr 2024 08:37:58 +0200
+ bh=ckm7fh39QmwrK5Xw+4Ip+/OwzW3EpBCcNPKnqbDZomE=;
+ b=hygR2Eug4MwovxDSWgINh1+0xx3Ennf/r2zcS1UZcTFXQMUTUiX8/jZ66NFrYtQFtZwljX
+ wI/8bGDoYBWCF4QqdzqjrzGuOBcXjNzyN7DP9mu4EWxqbQ3lmH3GQeghhQdut3lP0q0S4w
+ Eb+MuDCnh2pjkmdZkK2ZizS+HtFif2EKBLxxyy0Drl1C+fk7jpt9EjBIWfF3Wy7FNttXZJ
+ VRFhqmvZjfLU4zmS7KSeqm5+aoTPd2zNsVRR/uLlLYZt5Ea6tMmBgb17xWBP9JsJjQW9T8
+ DUBoYOCsSnmU3WBvuoOCNPjhu00kFbsQG386FIv2D40WGIpGH+Mv+OQJ/Q/CEw==
+Date: Mon, 15 Apr 2024 08:41:53 +0200
 From: Dragan Simic <dsimic@manjaro.org>
 To: Jonas Karlman <jonas@kwiboo.se>
 Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Chris Morgan
- <macromorgan@hotmail.com>, Tom Rini <trini@konsulko.com>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 07/23] rockchip: rk35xx: Enable random generator
-In-Reply-To: <20240413181425.1384357-8-jonas@kwiboo.se>
+ Tom Rini <trini@konsulko.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 08/23] rockchip: rk35xx: Imply support for GbE PHY
+In-Reply-To: <20240413181425.1384357-9-jonas@kwiboo.se>
 References: <20240413181425.1384357-1-jonas@kwiboo.se>
- <20240413181425.1384357-8-jonas@kwiboo.se>
-Message-ID: <48db0e7566575249499c738bdfc0961c@manjaro.org>
+ <20240413181425.1384357-9-jonas@kwiboo.se>
+Message-ID: <c44f93eb43873af9805a7e25012b68a8@manjaro.org>
 X-Sender: dsimic@manjaro.org
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
@@ -72,126 +71,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jonas,
-
-Please see a couple of comments below.
-
 On 2024-04-13 20:13, Jonas Karlman wrote:
-> The RK35xx SoCs contain a crypto engine block that can generate random
-> numbers.
-> 
-> Enable rng node in soc u-boot.dtsi and enable Kconfig options to take
-> advantage of the random generator.
-> 
+> Imply support for GbE PHY status parsing and configuration when support
+> for onboard ethernet is enabled.
+
+s/ethernet/Ethernet/ -- only if there will be v3
+
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+
+Looking good to me.
+
+Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+
 > ---
-> v2: No change
+> v2: Collect r-b tag
 > ---
->  arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi | 6 ------
->  arch/arm/dts/rk356x-u-boot.dtsi                | 5 +++++
->  arch/arm/dts/rk3588s-u-boot.dtsi               | 1 -
->  arch/arm/mach-rockchip/Kconfig                 | 4 ++++
->  configs/anbernic-rgxx3-rk3566_defconfig        | 2 --
->  5 files changed, 9 insertions(+), 9 deletions(-)
+>  arch/arm/mach-rockchip/Kconfig | 2 ++
+>  1 file changed, 2 insertions(+)
 > 
-> diff --git a/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
-> b/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
-> index 791f16b206f2..793ed4ae8ae0 100644
-> --- a/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->  	chosen {
->  		u-boot,spl-boot-order = "same-as-spl", &sdmmc1, &sdmmc0;
->  	};
-> -
-> -	rng: rng@fe388000 {
-> -		compatible = "rockchip,cryptov2-rng";
-> -		reg = <0x0 0xfe388000 0x0 0x2000>;
-> -		status = "okay";
-> -	};
->  };
-> 
->  &dsi_dphy0 {
-> diff --git a/arch/arm/dts/rk356x-u-boot.dtsi 
-> b/arch/arm/dts/rk356x-u-boot.dtsi
-> index d347080577d9..05367216e118 100644
-> --- a/arch/arm/dts/rk356x-u-boot.dtsi
-> +++ b/arch/arm/dts/rk356x-u-boot.dtsi
-> @@ -21,6 +21,11 @@
->  		bootph-all;
->  	};
-> 
-> +	rng: rng@fe388000 {
-> +		compatible = "rockchip,cryptov2-rng";
-> +		reg = <0x0 0xfe388000 0x0 0x2000>;
-
-Shouldn't
-
-  +		status = "okay";
-
-also be specified here?
-
-> +	};
-> +
->  	otp: nvmem@fe38c000 {
->  		compatible = "rockchip,rk3568-otp";
->  		reg = <0x0 0xfe38c000 0x0 0x4000>;
-> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi 
-> b/arch/arm/dts/rk3588s-u-boot.dtsi
-> index ac67c777adea..233eb79d9ba2 100644
-> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
-> @@ -91,7 +91,6 @@
->  	rng: rng@fe378000 {
->  		compatible = "rockchip,trngv1";
->  		reg = <0x0 0xfe378000 0x0 0x200>;
-> -		status = "disabled";
-
-Shouldn't it be enabled instead?
-
->  	};
-> 
->  	usbdp_phy0: phy@fed80000 {
 > diff --git a/arch/arm/mach-rockchip/Kconfig 
 > b/arch/arm/mach-rockchip/Kconfig
-> index 649c22618f36..247b9a3146c2 100644
+> index 247b9a3146c2..88bab9c7b3bf 100644
 > --- a/arch/arm/mach-rockchip/Kconfig
 > +++ b/arch/arm/mach-rockchip/Kconfig
-> @@ -305,9 +305,11 @@ config ROCKCHIP_RK3568
->  	select BOARD_LATE_INIT
->  	select DM_REGULATOR_FIXED
->  	select DM_RESET
-> +	imply DM_RNG
+> @@ -309,6 +309,7 @@ config ROCKCHIP_RK3568
 >  	imply MISC_INIT_R
 >  	imply MMC_HS200_SUPPORT if MMC_SDHCI_ROCKCHIP
 >  	imply OF_LIBFDT_OVERLAY
-> +	imply RNG_ROCKCHIP
+> +	imply PHY_GIGE if DWC_ETH_QOS_ROCKCHIP
+>  	imply RNG_ROCKCHIP
 >  	imply ROCKCHIP_COMMON_BOARD
 >  	imply ROCKCHIP_OTP
->  	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
-> @@ -334,9 +336,11 @@ config ROCKCHIP_RK3588
->  	select DM_RESET
->  	imply BOOTSTD_FULL
->  	imply CLK_SCMI
-> +	imply DM_RNG
+> @@ -340,6 +341,7 @@ config ROCKCHIP_RK3588
 >  	imply MISC_INIT_R
 >  	imply MMC_HS200_SUPPORT if MMC_SDHCI_ROCKCHIP
 >  	imply OF_LIBFDT_OVERLAY
-> +	imply RNG_ROCKCHIP
+> +	imply PHY_GIGE if DWC_ETH_QOS_ROCKCHIP
+>  	imply RNG_ROCKCHIP
 >  	imply ROCKCHIP_COMMON_BOARD
 >  	imply ROCKCHIP_OTP
->  	imply SCMI_FIRMWARE
-> diff --git a/configs/anbernic-rgxx3-rk3566_defconfig
-> b/configs/anbernic-rgxx3-rk3566_defconfig
-> index 24b050c59b53..110237e798f9 100644
-> --- a/configs/anbernic-rgxx3-rk3566_defconfig
-> +++ b/configs/anbernic-rgxx3-rk3566_defconfig
-> @@ -68,8 +68,6 @@ CONFIG_REGULATOR_RK8XX=y
->  CONFIG_PWM_ROCKCHIP=y
->  CONFIG_SPL_RAM=y
->  # CONFIG_RAM_ROCKCHIP_DEBUG is not set
-> -CONFIG_DM_RNG=y
-> -CONFIG_RNG_ROCKCHIP=y
->  # CONFIG_RNG_SMCCC_TRNG is not set
->  CONFIG_BAUDRATE=1500000
->  CONFIG_DEBUG_UART_SHIFT=2
