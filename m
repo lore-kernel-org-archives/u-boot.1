@@ -4,122 +4,122 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CAEDC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:58:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F77EC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:59:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A618688134;
-	Mon, 15 Apr 2024 08:58:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 51CBF88195;
+	Mon, 15 Apr 2024 08:59:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="sLuDA15V";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="WqLeRvsJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8A8D8813C; Mon, 15 Apr 2024 08:58:07 +0200 (CEST)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+ id 82779881C8; Mon, 15 Apr 2024 08:59:02 +0200 (CEST)
+Received: from mailout2.samsung.com (mailout2.samsung.com [203.254.224.25])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3E8E874B1
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:58:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A5D30874B1
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:58:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20240415065758epoutp0359e4e29f9259f6f486dc9bea4f84b7a0~GYdWUcARD3228932289epoutp03c
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 06:57:58 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20240415065758epoutp0359e4e29f9259f6f486dc9bea4f84b7a0~GYdWUcARD3228932289epoutp03c
+Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
+ by mailout2.samsung.com (KnoxPortal) with ESMTP id
+ 20240415065857epoutp020c9725d45e9c290c39615aae39aae962~GYeNNODtb3257332573epoutp02Z
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 06:58:57 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.samsung.com
+ 20240415065857epoutp020c9725d45e9c290c39615aae39aae962~GYeNNODtb3257332573epoutp02Z
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1713164278;
- bh=b3HGF2Wp7puqY2JAmBh1faa7Zg82FKMf38w/1kqLGTI=;
+ s=mail20170921; t=1713164337;
+ bh=zMuwDz48at7KwVijYxDevApbqIny4SWW8GKLeMzDjEg=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=sLuDA15V/p5YJw7UTQox0XP8OAdJzXWaMBtWbkBV7oZV6WEynNnS4wgoDLmj2Sxw4
- 1btR+A8Z1UgrnxpRAVp0zrWMhfMnq+bAji8+3OMiE590T3sp7dPIw5K2a//ze8VJQb
- Xq9jN+BoWEHyaQZIVTBodkMZ5BNAYJy3dyKNsgfo=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20240415065757epcas1p4de15ef485b798fdf2e6e97366b6a2659~GYdV2G2Ko0474004740epcas1p4w;
- Mon, 15 Apr 2024 06:57:57 +0000 (GMT)
-Received: from epsmgec1p1-new.samsung.com (unknown [182.195.38.233]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4VHyfr5HC6z4x9Q7; Mon, 15 Apr
- 2024 06:57:56 +0000 (GMT)
+ b=WqLeRvsJDmDFjBzKLPIJK1n78JniM9uqvGy+8DZrJ4kWhkibz5PE8IEpMoLxgJ3AR
+ RAoUpoCu2CasrPMpAiXjNmJAd7AYtWJV6I89h3Z5ydsK4EzcYvvUGIe8Mr9nYVfWIq
+ FGGCr2RA9b4e2ZXnW/YH3J/vTMb8C3acbMh3cCbk=
+Received: from epsnrtp2.localdomain (unknown [182.195.42.163]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTP id
+ 20240415065856epcas1p3b77aba2fb78e59f3b6f4ee8a29acb650~GYeM47WGG0164301643epcas1p3T;
+ Mon, 15 Apr 2024 06:58:56 +0000 (GMT)
+Received: from epsmges1p3.samsung.com (unknown [182.195.36.144]) by
+ epsnrtp2.localdomain (Postfix) with ESMTP id 4VHygz3rPTz4x9QQ; Mon, 15 Apr
+ 2024 06:58:55 +0000 (GMT)
 Received: from epcas1p2.samsung.com ( [182.195.41.46]) by
- epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- F5.7F.19431.4FFCC166; Mon, 15 Apr 2024 15:57:56 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20240415065756epcas1p40d86926e39b32e3a8a294f52302aa475~GYdUtsBYG1270112701epcas1p4F;
- Mon, 15 Apr 2024 06:57:56 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240415065756epsmtrp2bd1c3171d55b3fa63f85f3e6d9b79846~GYdUtJzNE0926909269epsmtrp2p;
- Mon, 15 Apr 2024 06:57:56 +0000 (GMT)
-X-AuditID: b6c32a4c-485ff70000004be7-e7-661ccff487a3
+ epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 41.EB.09663.F20DC166; Mon, 15 Apr 2024 15:58:55 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
+ 20240415065855epcas1p331cb957260728d49f263f735bebc26cb~GYeLYvs2e3178031780epcas1p3W;
+ Mon, 15 Apr 2024 06:58:55 +0000 (GMT)
+Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20240415065855epsmtrp182dda569372ff6fe4620e035a44b9d29~GYeLYJ8S51169711697epsmtrp1x;
+ Mon, 15 Apr 2024 06:58:55 +0000 (GMT)
+X-AuditID: b6c32a37-b863ba80000025bf-6a-661cd02f5ed6
 Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 5F.0A.19234.4FFCC166; Mon, 15 Apr 2024 15:57:56 +0900 (KST)
+ epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ D8.28.07541.E20DC166; Mon, 15 Apr 2024 15:58:55 +0900 (KST)
 Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
  (KnoxPortal) with ESMTPA id
- 20240415065756epsmtip2d277188d1e5d0f95670b1898b2e7619b~GYdUhXrNs3253332533epsmtip23;
- Mon, 15 Apr 2024 06:57:56 +0000 (GMT)
+ 20240415065854epsmtip2ab700e8c0f050b0772518bbba3a6d712~GYeLJ0ovA2903429034epsmtip25;
+ Mon, 15 Apr 2024 06:58:54 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
 To: "'Yang Xiwen'" <forbidden405@outlook.com>, "'Peng Fan'" <peng.fan@nxp.com>
 Cc: <u-boot@lists.denx.de>
-In-Reply-To: <SEZPR06MB69599C34A5A8BF84F87C1CC1963D2@SEZPR06MB6959.apcprd06.prod.outlook.com>
-Subject: RE: [PATCH v2 1/3] mmc: hi6220-dwmmc: handle clocks and resets if
- CONFIG_CLK and CONFIG_DM_RESET enabled
-Date: Mon, 15 Apr 2024 15:57:56 +0900
-Message-ID: <008501da8f02$3e8b15e0$bba141a0$@samsung.com>
+In-Reply-To: <SEZPR06MB69598F7A966ABC6664BD4724963D2@SEZPR06MB6959.apcprd06.prod.outlook.com>
+Subject: RE: [PATCH v2 2/3] mmc: dw_mmc: Don't return error if data busy
+ timeout
+Date: Mon, 15 Apr 2024 15:58:54 +0900
+Message-ID: <008601da8f02$618147e0$2483d7a0$@samsung.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQG10PZhwJPp9GmYju4dCS4VuJkgUQLMQqScAO4yJRICPK2E9QL3HAYmsWrwHrA=
+Thread-Index: AQG10PZhwJPp9GmYju4dCS4VuJkgUQFf5ku/AjsSt5QCamZEZgIyqpvHsXCiYfA=
 Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrDKsWRmVeSWpSXmKPExsWy7bCmnu6X8zJpBjN7tSz+3dzDbvFj1RdW
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrFKsWRmVeSWpSXmKPExsWy7bCmnq7+BZk0g8efZS3+3dzDbvFj1RdW
  i7d7O9kdmD3O3tnB6LHx3Q4mj82vXzAHMEdl22SkJqakFimk5iXnp2TmpdsqeQfHO8ebmhkY
  6hpaWpgrKeQl5qbaKrn4BOi6ZeYAbVJSKEvMKQUKBSQWFyvp29kU5ZeWpCpk5BeX2CqlFqTk
- FJgW6BUn5haX5qXr5aWWWBkaGBiZAhUmZGdMOWpeMEW74tCPb8wNjI1KXYycHBICJhKv/yxm
- 6mLk4hAS2MMosfzDaSjnE5CzbyMbnLPj5DyWLkYOsJZ/Wy0g4jsZJZYd74PqeMkocW3NbEaQ
- uWwCehL/Fy1kBmkQEQiQeHJRASTMLCAl0XRyF1gJp0CsxKl7e9lASoQFiiVunLQBCbMIqEq0
- fbkPtopXwFLi72YJkDCvgKDEyZlPWCCmyEtsfzuHGeIBBYmfT5exgtgiAn4SN3YeZYWoEZGY
- 3dnGDHKZhMAjdol5jxdANbhIrJ93BcoWlnh1fAs7hC0l8fndXjaIhmZGiaVLDrJCOD2MEv8a
- rrNBVBlL7F86mQnkOmYBTYn1u/QhtvFJvPvawwoJH16JjjYhiGoViUuvXzLBzL/75D8rhO0h
- 8e3xbPYJjIqzkPw2C8lvs5D8MAth2QJGllWMUqkFxbnpqcmGBYa6eanl8OhOzs/dxAhOhlo+
- Oxi/r/+rd4iRiYPxEKMEB7OSCO81Ock0Id6UxMqq1KL8+KLSnNTiQ4ymwACfyCwlmpwPTMd5
- JfGGJpYGJmZGxiYWhmaGSuK8Z66UpQoJpCeWpGanphakFsH0MXFwSjUwcc2ZlrtyllPN+r0x
- txfGhUx0X/WUmftqzMJlE8yi4hYsvDB3m58Nf7zLqos53M/y/3daHfzMpfTwrMexebnf77SE
- nT18K7bt6v/ee3aHpss/ZSnp2hTxr2UjT0p+hN+1AyyLpN40FOZut1fM+36xROeX+/PYM4J8
- F51WMsfz7jVJ/CCkvnnWhKo5VbX1sfnhghcOTfncz/z4lsB7l5uxm095B26ZxqgvxXmjdKfa
- XJYVidfibHZdl8l7emdGxtoOmXL5mTNPCdu7PalteXRHYebzZAuJO5sjnWyTn/M8XZEVZLLO
- LuP6pvXL/Ne7Zz481264136r6Z7Z+3b/XH28kfFMOP/Br2c+9AnePp2wu0qJpTgj0VCLuag4
- EQD7mD6aDwQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrPLMWRmVeSWpSXmKPExsWy7bCSvO6X8zJpBpu/iVn8u7mH3eLHqi+s
- Fm/3drI7MHucvbOD0WPjux1MHptfv2AOYI7isklJzcksSy3St0vgyphy1LxginbFoR/fmBsY
- G5W6GDk4JARMJP5ttehi5OIQEtjOKLFn0XPWLkZOoLiUxOenU9kgaoQlDh8uhqh5zigx8foT
- ZpAaNgE9if+LFoLZIgIBEgt3tjGC2MxAvU0ndzFCNOxmktjw4BoTSIJTIFbi1L29bCC2sECh
- xOfHl8HiLAKqEm1f7rOALOMVsJT4u1kCJMwrIChxcuYTFoiZ2hJPbz6FsuUltr+dwwxxp4LE
- z6fLWCFu8JO4sfMoK0SNiMTszjbmCYzCs5CMmoVk1Cwko2YhaVnAyLKKUTS1oDg3PTe5wFCv
- ODG3uDQvXS85P3cTIzgOtIJ2MC5b/1fvECMTB+MhRgkOZiUR3mtykmlCvCmJlVWpRfnxRaU5
- qcWHGKU5WJTEeZVzOlOEBNITS1KzU1MLUotgskwcnFINTNl/0ves+ffavfpv0naunYfTpj1d
- 4z1da84JrQK3bdsSfDLknUJfb224ObmP67GKjhz/gfePLHcw3Gi6qGcSJlHzRNyzZfZe/X1d
- TL9kxdal2Ty8Wn3+VWXEprzmp5fjAno/JjzVZxE8rFjloWUW39TCf5t9hehD42aemLTDFiw8
- EyMsohoT/+2eEX4gOqFhwlwhjvZPS2qD35dnnjG9/k7faFKkpuncrrprkscnG1mtspx5oPPM
- s1cXT5aLh8998HZ/6d2/W782h6edu2P6WvngS20x9oWrF6hJWC698fTA37rJ/ZNm15Y6Spnd
- uXF+Q32kaMcZRus/9qfX1TX/Xego0L75ROt1Ho6vfK4bu5RYijMSDbWYi4oTAXFdzZbyAgAA
-X-CMS-MailID: 20240415065756epcas1p40d86926e39b32e3a8a294f52302aa475
+ FJgW6BUn5haX5qXr5aWWWBkaGBiZAhUmZGds27yaqaBPoGLhU8EGxhs8XYycHBICJhILehaw
+ djFycQgJ7GCU6L08hw3C+cQocenPV0YI5xujxLc5HSwwLbsnnYFK7GWU2Li2kwXCeQnk/DvD
+ ClLFJqAn8X/RQuYuRg4OEYEAiScXFUDCzAJSEk0ndzGC2JwCsRIdqw+BlQgLBEn8OxgDEmYR
+ UJXYdGo32C5eAUuJ3qdb2SFsQYmTM5+wQIyRl9j+dg4zxD0KEj+fLgPbKiLgJ/Fm73QmiBoR
+ idmdbcwgp0kIPGKXuDnrIStEg4vEof7TjBC2sMSr41vYIWwpiZf9bewQDc2MEkuXHGSFcHoY
+ Jf41XGeDqDKW2L90MhPI1cwCmhLrd+lDbOOTePe1hxUkLCHAK9HRJgRRrSJx6fVLJpj5d5/8
+ h7rBQ6Lz20H2CYyKs5D8NgvJb7OQ/DALYdkCRpZVjGKpBcW56anFhgXG8MhOzs/dxAhOhFrm
+ Oxinvf2gd4iRiYPxEKMEB7OSCO81Ock0Id6UxMqq1KL8+KLSnNTiQ4ymwNCeyCwlmpwPTMV5
+ JfGGJpYGJmZGxiYWhmaGSuK8Z66UpQoJpCeWpGanphakFsH0MXFwSjUwRa26xTX/w+krMxkb
+ /92tFrlqOM1B6aHWZbaotpnxN7uMQ39oHSxPrZk42ynwsAOf4/pjjnxSOlxWq9eYN+ocP+/+
+ LVbOiu3k26tTLbdxzz3FtnXvW5WdhYLHTE9lSh979b5yUvd7006fq1FKjI4hh+tDvsX1r5he
+ vthhtk32Q12vfEYrfa111Z0frBaePW3R5fXh2KR515u4uuoTWh+EWsUwFDx+aJWY6730QPJe
+ OxXFn1v+5Pnrr/tkYCNjoa6Qfiw/oVlZKTGquSppHq+lnuIHvbmpew74bMzTqWPoCqrMd5Rs
+ sAyN8/qU8Oz6/Pcnq73dSrXMZvn88Yj9uU/nZFqPZW65RgnX1IcJfEosxRmJhlrMRcWJALbA
+ L7INBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrKLMWRmVeSWpSXmKPExsWy7bCSvK7+BZk0g60zmSz+3dzDbvFj1RdW
+ i7d7O9kdmD3O3tnB6LHx3Q4mj82vXzAHMEdx2aSk5mSWpRbp2yVwZWzbvJqpoE+gYuFTwQbG
+ GzxdjJwcEgImErsnnWHsYuTiEBLYzSjxdtZkJoiElMTnp1PZuhg5gGxhicOHiyFqnjNKHFmx
+ BqyGTUBP4v+ihcwgtohAgMTCnW2MIDYzUG/TyV0wQ5kkTnTsAUtwCsRKdKw+BNYgDNTwp/My
+ WJxFQFVi06ndLCA2r4ClRO/TrewQtqDEyZlPWCCGaks8vfkUypaX2P52DjPEoQoSP58uY4U4
+ wk/izd7pTBA1IhKzO9uYJzAKz0IyahaSUbOQjJqFpGUBI8sqRsnUguLc9NxkwwLDvNRyveLE
+ 3OLSvHS95PzcTYzgmNDS2MF4b/4/vUOMTByMhxglOJiVRHivyUmmCfGmJFZWpRblxxeV5qQW
+ H2KU5mBREuc1nDE7RUggPbEkNTs1tSC1CCbLxMEp1cBU2vr4yvKtnzadnP1YU91L4eYvG7c1
+ EUt+Hjq9RYtF5c8mm76Xk5tvb7roJTGZsWzJj5Ilk/RvfEj1Fil/xszEFy9kE3tQ53VL1l6N
+ ozMPblGMXDjh7TmPp1w6ksfjlnsYGPxJrbw6/6NJiuecySEL17xcaf9usnG+6/cz8vu0FgtO
+ 5jgSe3o1G8NXs4oLQQ+CXDP89tT3cnzk7kqWX22Xf11KfZOPVu6fhZ/LGKS8C/WCXQvvrl5t
+ LOX9n600q3iBteeqqtkVQe0vvttwzN8mNMHwZu2dDTLipU4RPyryQxpl7VdxlYZE2qqYL7sZ
+ 2S97gPPawwfbTJYvOxcr5CNnKvc14LLtw+e8h3UDLc2VWIozEg21mIuKEwHmkREx+AIAAA==
+X-CMS-MailID: 20240415065855epcas1p331cb957260728d49f263f735bebc26cb
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240403003945epcas1p4bb700e4390a5c5d29dbe241cb621db7a
+X-CMS-RootMailID: 20240403004155epcas1p1fdb3680cde2a4dee4325e22b9b076e6a
 References: <20240201-mmc-v2-0-9f09dc1335fd@outlook.com>
- <20240201-mmc-v2-1-9f09dc1335fd@outlook.com>
- <CGME20240403003945epcas1p4bb700e4390a5c5d29dbe241cb621db7a@epcas1p4.samsung.com>
- <01f712ed-a07c-4db7-b7c1-9dc0f7efd898@samsung.com>
- <SEZPR06MB69599C34A5A8BF84F87C1CC1963D2@SEZPR06MB6959.apcprd06.prod.outlook.com>
+ <20240201-mmc-v2-2-9f09dc1335fd@outlook.com>
+ <CGME20240403004155epcas1p1fdb3680cde2a4dee4325e22b9b076e6a@epcas1p1.samsung.com>
+ <908bd8cb-b7a3-4701-b636-6d96cd2d2472@samsung.com>
+ <SEZPR06MB69598F7A966ABC6664BD4724963D2@SEZPR06MB6959.apcprd06.prod.outlook.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -140,163 +140,62 @@ Hi,
 
 > -----Original Message-----
 > From: Yang Xiwen <forbidden405@outlook.com>
-> Sent: Wednesday, April 3, 2024 10:16 AM
+> Sent: Wednesday, April 3, 2024 10:20 AM
 > To: Jaehoon Chung <jh80.chung@samsung.com>; Peng Fan <peng.fan@nxp.com>
 > Cc: u-boot@lists.denx.de
-> Subject: Re: [PATCH v2 1/3] mmc: hi6220-dwmmc: handle clocks and resets if CONFIG_CLK and
-> CONFIG_DM_RESET enabled
+> Subject: Re: [PATCH v2 2/3] mmc: dw_mmc: Don't return error if data busy timeout
 > 
-> On 4/3/2024 8:39 AM, Jaehoon Chung wrote:
+> On 4/3/2024 8:41 AM, Jaehoon Chung wrote:
 > > Hi,
 > >
 > > On 2/1/24 23:05, Yang Xiwen via B4 Relay wrote:
 > >> From: Yang Xiwen <forbidden405@outlook.com>
 > >>
-> >> This can avoid hardcoding a clock rate in driver. Also can enable the
-> >> clocks and deassert the resets if the pre-bootloader does not do this
-> >> for us.
-> >>
-> >> Currently only enabled for Hi3798MV200.
-> >>
-> >> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
-
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
-
-
-> >> ---
-> >>   drivers/mmc/hi6220_dw_mmc.c | 61 ++++++++++++++++++++++++++++++++++++++++++++-
-> >>   1 file changed, 60 insertions(+), 1 deletion(-)
-> >>
-> >> diff --git a/drivers/mmc/hi6220_dw_mmc.c b/drivers/mmc/hi6220_dw_mmc.c
-> >> index 71962cd47e..a4b8072976 100644
-> >> --- a/drivers/mmc/hi6220_dw_mmc.c
-> >> +++ b/drivers/mmc/hi6220_dw_mmc.c
-> >> @@ -5,15 +5,24 @@
-> >>    */
-> >>
-> >>   #include <common.h>
-> >> +#include <clk.h>
-> >>   #include <dm.h>
-> >>   #include <dwmmc.h>
-> >>   #include <errno.h>
-> >>   #include <fdtdec.h>
-> >>   #include <malloc.h>
-> >> +#include <reset.h>
-> >>   #include <asm/global_data.h>
-> >> +#include <dm/device_compat.h>
-> >>
-> >>   DECLARE_GLOBAL_DATA_PTR;
-> >>
-> >> +enum hi6220_dwmmc_clk_type {
-> >> +	HI6220_DWMMC_CLK_BIU,
-> >> +	HI6220_DWMMC_CLK_CIU,
-> >> +	HI6220_DWMMC_CLK_CNT,
-> >> +};
-> >> +
-> >>   struct hi6220_dwmmc_plat {
-> >>   	struct mmc_config cfg;
-> >>   	struct mmc mmc;
-> >> @@ -21,6 +30,8 @@ struct hi6220_dwmmc_plat {
-> >>
-> >>   struct hi6220_dwmmc_priv_data {
-> >>   	struct dwmci_host host;
-> >> +	struct clk *clks[HI6220_DWMMC_CLK_CNT];
-> >> +	struct reset_ctl_bulk rsts;
-> >>   };
-> >>
-> >>   struct hisi_mmc_data {
-> >> @@ -32,7 +43,29 @@ static int hi6220_dwmmc_of_to_plat(struct udevice *dev)
-> >>   {
-> >>   	struct hi6220_dwmmc_priv_data *priv = dev_get_priv(dev);
-> >>   	struct dwmci_host *host = &priv->host;
-> >> +	int ret;
-> > If CONFIG_CLK and DM_RESET aren't enabled, this value is a dead code.
-> > It also needs to initialize.
+> >> As described in [1], some poor hardware or cards would fail to release
+> >> the bus and keep driving data lines low. Ignore it and send the next cmd
+> >> directly seems okay for most cases.
+> > This patch seems to be same with previous patch, right?
 > 
 > 
-> I think a alternative solution is replacing the if stmt below with some
-> `#ifdef`s just like some unittests code. So we can mask variable `ret'
-> out if it's not used However, this seems not favored by checkpatch.pl.
-
-It's not a critical thing. If possible to change more generic, I will change them.
-Thanks!
-
-Best Regards,
-Jaehoon Chung
-
+>  From my observation, this patch does fix some weird problems and is
+> mostly okay for other dwmmc users. I can't say it is very well tested
+> because of I can't come up of other tests i can do except some `mmc
+> read` and `mmc write`.
 > 
 > 
-> >
-> >>
-> >> +	if (CONFIG_IS_ENABLED(CLK) && CONFIG_IS_ENABLED(DM_RESET)) {
-> >> +		priv->clks[HI6220_DWMMC_CLK_BIU] = devm_clk_get(dev, "biu");
-> >> +		if (IS_ERR(priv->clks[HI6220_DWMMC_CLK_BIU])) {
-> >> +			ret = PTR_ERR(priv->clks[HI6220_DWMMC_CLK_BIU]);
-> >> +			dev_err(dev, "Failed to get BIU clock(ret = %d).\n", ret);
-> >> +			return log_msg_ret("clk", ret);
-> >> +		}
-> >> +
-> >> +		priv->clks[HI6220_DWMMC_CLK_CIU] = devm_clk_get(dev, "ciu");
-> >> +		if (IS_ERR(priv->clks[HI6220_DWMMC_CLK_CIU])) {
-> >> +			ret = PTR_ERR(priv->clks[HI6220_DWMMC_CLK_CIU]);
-> >> +			dev_err(dev, "Failed to get CIU clock(ret = %d).\n", ret);
-> >> +			return log_msg_ret("clk", ret);
-> >> +		}
-> >> +
-> >> +		ret = reset_get_bulk(dev, &priv->rsts);
-> >> +		if (ret) {
-> >> +			dev_err(dev, "Failed to get resets(ret = %d)", ret);
-> >> +			return log_msg_ret("rst", ret);
-> >> +		}
-> >> +	}
-> >>   	host->name = dev->name;
-> >>   	host->ioaddr = dev_read_addr_ptr(dev);
-> >>   	host->buswidth = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
-> >> @@ -56,11 +89,37 @@ static int hi6220_dwmmc_probe(struct udevice *dev)
-> >>   	struct hi6220_dwmmc_priv_data *priv = dev_get_priv(dev);
-> >>   	struct dwmci_host *host = &priv->host;
-> >>   	struct hisi_mmc_data *mmc_data;
-> >> +	int ret;
-> > Ditto.
-> >
 > >
 > > Best Regards,
 > > Jaehoon Chung
 > >
+> >> [1]: https://patchwork.kernel.org/project/linux-mmc/patch/1424458179-5456-1-git-send-email-
+> dianders@chromium.org/
 > >>
-> >>   	mmc_data = (struct hisi_mmc_data *)dev_get_driver_data(dev);
+> >> Signed-off-by: Yang Xiwen <forbidden405@outlook.com>
+
+Tested-by: Jaehoon Chung <jh80.chung@samsung.com>
+
+Best Regards,
+Jaehoon Chung
+
+> >> ---
+> >>   drivers/mmc/dw_mmc.c | 4 ++--
+> >>   1 file changed, 2 insertions(+), 2 deletions(-)
 > >>
-> >> -	/* Use default bus speed due to absence of clk driver */
-> >>   	host->bus_hz = mmc_data->clock;
-> >> +	if (CONFIG_IS_ENABLED(CLK) && CONFIG_IS_ENABLED(DM_RESET)) {
-> >> +		ret = clk_prepare_enable(priv->clks[HI6220_DWMMC_CLK_BIU]);
-> >> +		if (ret) {
-> >> +			dev_err(dev, "Failed to enable biu clock(ret = %d).\n", ret);
-> >> +			return log_msg_ret("clk", ret);
-> >> +		}
-> >> +
-> >> +		ret = clk_prepare_enable(priv->clks[HI6220_DWMMC_CLK_CIU]);
-> >> +		if (ret) {
-> >> +			dev_err(dev, "Failed to enable ciu clock(ret = %d).\n", ret);
-> >> +			return log_msg_ret("clk", ret);
-> >> +		}
-> >> +
-> >> +		ret = reset_deassert_bulk(&priv->rsts);
-> >> +		if (ret) {
-> >> +			dev_err(dev, "Failed to deassert resets(ret = %d).\n", ret);
-> >> +			return log_msg_ret("rst", ret);
-> >> +		}
-> >> +
-> >> +		host->bus_hz = clk_get_rate(priv->clks[HI6220_DWMMC_CLK_CIU]);
-> >> +		if (host->bus_hz <= 0) {
-> >> +			dev_err(dev, "Failed to get ciu clock rate(ret = %d).\n", ret);
-> >> +			return log_msg_ret("clk", ret);
-> >> +		}
-> >> +	}
-> >> +	dev_dbg(dev, "bus clock rate: %d.\n", host->bus_hz);
+> >> diff --git a/drivers/mmc/dw_mmc.c b/drivers/mmc/dw_mmc.c
+> >> index 400066fa99..e103664145 100644
+> >> --- a/drivers/mmc/dw_mmc.c
+> >> +++ b/drivers/mmc/dw_mmc.c
+> >> @@ -262,8 +262,8 @@ static int dwmci_send_cmd(struct mmc *mmc, struct mmc_cmd *cmd,
 > >>
-> >>   	dwmci_setup_cfg(&plat->cfg, host, host->bus_hz, 400000);
-> >>   	host->mmc = &plat->mmc;
+> >>   	while (dwmci_readl(host, DWMCI_STATUS) & DWMCI_BUSY) {
+> >>   		if (get_timer(start) > timeout) {
+> >> -			debug("%s: Timeout on data busy\n", __func__);
+> >> -			return -ETIMEDOUT;
+> >> +			debug("%s: Timeout on data busy, continue anyway\n", __func__);
+> >> +			break;
+> >>   		}
+> >>   	}
+> >>
 > 
 > 
 > --
