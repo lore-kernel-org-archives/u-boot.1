@@ -4,88 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F85C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 07:35:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CAE8C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 07:36:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9169C88155;
-	Mon, 15 Apr 2024 09:35:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AAF9A8813C;
+	Mon, 15 Apr 2024 09:36:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="amuUKYFm";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="h16P8ER1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 825D688157; Mon, 15 Apr 2024 09:35:06 +0200 (CEST)
-Received: from mail-ot1-x331.google.com (mail-ot1-x331.google.com
- [IPv6:2607:f8b0:4864:20::331])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 290C788134; Mon, 15 Apr 2024 09:36:29 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 47C498813C
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 09:35:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B6D5988179
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 09:36:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-ot1-x331.google.com with SMTP id
- 46e09a7af769-6eb7b6f92d4so557924a34.0
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 00:35:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713166498; x=1713771298; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=48i//kDbHCOowsPNhSZXl5Dn4U8GaQP6nb6xfKgjNBg=;
- b=amuUKYFmPagdEHHHGo2uX86gHS72tSwykv6YctbDTu1uWih0ebc/p3tfmVA21DM2aU
- uz18SLebV/2BoDY4oXellcgCx3Me4ySjajc8Jp69UEkDfYaWzKiZaz2XxvoI0UUzvyCb
- Y2Uht4IeJQWQI7hrFFKEUQ90D37rR4zg+SEZr5H1+kh9/E4HGg1rm0UARvbTWnGtiADE
- e614Xc5xTdutiUAjCxjxZazUF/ZUS9cxe2OEz+d4IZciW7PHzHTTRvweqqJZZpEYo1KD
- cKyjS0LKOqwQZAgqSVD5UN5b/ORmygNWN5T2j8Kkb3T2sPipcwsyreKXjf+IFccOMpCA
- h3aQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713166498; x=1713771298;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=48i//kDbHCOowsPNhSZXl5Dn4U8GaQP6nb6xfKgjNBg=;
- b=M6ZTMLnLrTdJA2G+s0VT8MI278b+Qq8M5W6C2TK9XP/29bC7qrk2IYzp9nKGAf8D7N
- nBAwXITXcL9AlU3NADefDji7IfqPkZwqIvmwlJdpH8I/EIa8er6ZxIzfi03VtQe4LK63
- H5aTwUxsbtJXaBXeAaBf9HVxTNQvZ5iFpNKU11KvrHYJpMy+ORrE/tbfZrn3G3yrLoX9
- Xh/nucQnA1FGP0g2XPEnGcCybWIYbe4ydoRiLROLkeyPJD5oLjyHO+jZhMWspXl/Di/y
- GmTqkiW1ZNTd6fYZ7cDWud+o7MNyzqGAWoeujO6/2rMdEbaABWl94nKNbb7bC18dDzXS
- WNPg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWm+xTq9fVIwM/D1LgsUASUrIrR9nCgq4En2TIAfAsH9ia1yfPydO7dZ6wsEVGMa9rJSs7gFAC0fz0/loF7Bx++EXqJnw==
-X-Gm-Message-State: AOJu0YyUIXpqHPccCdKmvj0G7/SSOpBbzqi/5VGwjDWduxLnVIsztdMZ
- CJarkG3HMbdIwA071qajpw4hrj11LtE8RKsn0HvujSI0IQbRhGYm
-X-Google-Smtp-Source: AGHT+IEmab5bwsyd329CX9Tx3muGqGUFe2idQLscTSuwPy+ikravdkITu3pHoexpZEyZlRaEKr3DAQ==
-X-Received: by 2002:a05:6870:b48a:b0:22a:9f1c:a1e9 with SMTP id
- y10-20020a056870b48a00b0022a9f1ca1e9mr10384296oap.35.1713166497907; 
- Mon, 15 Apr 2024 00:34:57 -0700 (PDT)
-Received: from [192.168.0.8] (KD106168128197.ppp-bb.dion.ne.jp.
- [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- b22-20020a056a000cd600b006ead792b6f2sm6655774pfv.1.2024.04.15.00.34.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 15 Apr 2024 00:34:57 -0700 (PDT)
-Message-ID: <69687d59-bcb9-45e4-b0d3-b69c49282b47@gmail.com>
-Date: Mon, 15 Apr 2024 16:34:55 +0900
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43F7aKCO088947;
+ Mon, 15 Apr 2024 02:36:20 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1713166580;
+ bh=L79ZIncU4aU60aAF1oBaHM8MzEfb/BW8SVPJ1geFlsU=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=h16P8ER1lJWb73pw/I6g6/X8SuTkTFCv754kbDRhDf1t9uXIvIMpnCEpm6Qm4zbhb
+ WaYWgS2Dkyo17yWUnWIRfjtGZjnlkcP8tvIYRqGEJ7iazMPPuc+iYaQl/12rToGIVg
+ K0+kYKe5nAzd3XHhm1t+sAoy0Di69ae6INFBz7SQ=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43F7aKo7011031
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 15 Apr 2024 02:36:20 -0500
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 15
+ Apr 2024 02:36:19 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 15 Apr 2024 02:36:19 -0500
+Received: from [172.24.31.60] (lt5cd2489kgj.dhcp.ti.com [172.24.31.60])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43F7aGfr049938;
+ Mon, 15 Apr 2024 02:36:17 -0500
+Message-ID: <a6928c71-d9f6-4445-b106-9826b71feab8@ti.com>
+Date: Mon, 15 Apr 2024 13:06:16 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] mtd: spi-nor-core: Rework default_init() to take
- flash_parameter
-To: Tudor Ambarus <tudor.ambarus@linaro.org>, u-boot@lists.denx.de
-Cc: jagan@amarulasolutions.com, vigneshr@ti.com, pratyush@kernel.org,
- d-gole@ti.com, Bacem.Daassi@infineon.com,
- Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-References: <cover.1713154967.git.Takahiro.Kuwano@infineon.com>
- <9db9fb39e655b514c21952e0a5005572510ad3ec.1713154967.git.Takahiro.Kuwano@infineon.com>
- <377037b3-1bf2-492b-bb88-de233d8b373c@linaro.org>
- <7149031f-b359-4218-9a52-e4ab0ea16c4c@gmail.com>
- <86a321ed-2ee9-44f8-abbd-7f147420212e@linaro.org>
+Subject: Re: [PATCH v2 2/2] lmb: Fix adjacent region merge in
+ lmb_add_region_flags()
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>, tom
+ Rini <trini@konsulko.com>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Kumar Gala
+ <galak@kernel.crashing.org>, Simon Glass <sjg@chromium.org>
+References: <20240412155307.735631-1-patrice.chotard@foss.st.com>
+ <20240412155307.735631-2-patrice.chotard@foss.st.com>
+ <fc509f7b-78ba-425b-8a33-7768a4f58bd0@foss.st.com>
+ <8c825b9d-7bb6-47e4-915d-a852df60bbc5@ti.com>
+ <c0271e2b-517b-414c-95c3-232f280dd833@foss.st.com>
 Content-Language: en-US
-From: Takahiro Kuwano <tkuw584924@gmail.com>
-In-Reply-To: <86a321ed-2ee9-44f8-abbd-7f147420212e@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: "Kumar, Udit" <u-kumar1@ti.com>
+In-Reply-To: <c0271e2b-517b-414c-95c3-232f280dd833@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,54 +87,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/15/2024 4:27 PM, Tudor Ambarus wrote:
-> 
-> 
-> On 4/15/24 08:09, Takahiro Kuwano wrote:
->> Hi Tudor,
-> 
-> Hi!
-> 
->>
->> On 4/15/2024 3:47 PM, Tudor Ambarus wrote:
->>>
->>>
->>> On 4/15/24 05:33, tkuw584924@gmail.com wrote:
->>>> From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
->>>>
->>>> default_init() fixup hook should be used to initialize flash parameters
->>>> when its information is not provided in SFDP. To support that case, it
->>>> needs to take flash_parameter structure like as other hooks.
->>>>
->>>> Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
->>>> ---
->>>
->>> I'd like to get rid of the default_init hook, let's not extend it if
->>> possible. Can you use the late_init hook instead?
->>>
->> It looks easy to migrate from default_init to late_init so I will do it.
->> Could you provide the links to related discussion in Linux MTD side so that
->> I can summarize it in commit message?
->>
-> 
-> I can't, I don't remember if I brought this up or when, but I can
-> explain why.
-> 
-> default_init() is wrong, it contributes to the maze of initializing
-> flash parameters. We'd like to get rid of it because the flash
-> parameters that it initializes are not really used at SFDP parsing time,
-> thus they can be initialized later.
-> 
-> Ideally we want SFDP to initialize all the flash parameters. If (when)
-> SFDP tables are wrong, we fix them with the post_sfdp/bfpt hooks, to
-> emphasize that SFDP is indeed wrong. When there are parameters that are
-> not covered by SFDP, we initialize them in late_init() - these
-> parameters have nothing to do with SFDP and they are not needed earlier.
-> With this we'll have a clearer view of who initializes what.
-> 
-> Feel free to use this in the commit message if you think it helps.
-> Cheers,
-> ta
+Hello Patrice
 
-Of course it helps!
+On 4/15/2024 12:33 PM, Patrice CHOTARD wrote:
+>
+> On 4/14/24 13:10, Kumar, Udit wrote:
+>> Hello Patrice,
+>>
+>> On 4/13/2024 1:54 PM, Patrice CHOTARD wrote:
+>>> On 4/12/24 17:53, Patrice Chotard wrote:
+>>>> In case a new region is adjacent to a previous region with
+>>>> similar flag, this region is merged with its predecessor, but no
+>>>> check are done if this new added region is overlapping another region
+>>>> present in lmb (see reserved[3] which overlaps reserved[4]).
+>>>>
+>>>> [..]
+>>>> phys_addr_t lmb_alloc(struct lmb *lmb, phys_size_t size, ulong align)
+>>>>    {
+>>>>        return lmb_alloc_base(lmb, size, align, LMB_ALLOC_ANYWHERE);
+>>> I think this series (v2) is not correct even if now the CI tests are OK.
+>>> After re-reading carefully the lib_test_lmb_overlapping_reserve() test
+>>> it appears to me there is a contradiction.
+>>>
+>>> It's indicating that "check that calling lmb_reserve with overlapping regions fails"
+>>>
+>>> but the very last test of lib_test_lmb_overlapping_reserve() has this comment :
+>>> /* allocate 3rd region, coalesce with first and overlap with second */
+>>> and this test allows this overlap case.
+>>>
+>>> It's not clear if LMB region can overlap each other or not ?
+>>
+>> I would say partial overlap and coalescing with before one
+>>
+>> May be Below can help
+>>
+>> /* allocate 2nd region , This should coalesced all region into one
+>>
+>> you will get one region as
+>>
+>> Address --- Size
+>>
+>> 0x40010000 --- 0x30000
+>>
+>> Next after this  /* allocate 2nd region, which should be added as first region */
+>>
+>> we will have two region like
+>>
+>> Address --- Size
+>>
+>> (0x40000000 -- 0x8000)
+>>
+>> (0x40010000 --- 0x30000)
+>>
+>> Now third request comes in
+>>
+>> /* allocate 3rd region, coalesce with first and overlap with second */
+>>
+>> which is address of  0x40008000 and size of  0x10000, Now this region to be added
+>>
+>> is coalescing with first (0x40000000 -- 0x8000) and part of this overlap with (0x40010000 --- 0x30000).
+>>
+>> So, what this patch does , merge all these into one region
+>>
+>> as (0x40000000 -- 0x40000)
+> Hi Udit
+>
+> Ok, but why the second test done in test/lib/lmb.c test should be considered as failed ?
+>
+>
+> 	ret = lmb_reserve(&lmb, 0x40010000, 0x10000);
+> 	ut_asserteq(ret, 0);
+> 	ASSERT_LMB(&lmb, ram, ram_size, 1, 0x40010000, 0x10000,
+> 		   0, 0, 0, 0);
+> 	/* allocate overlapping region should fail */
+> 	ret = lmb_reserve(&lmb, 0x40011000, 0x10000);
+> 	ut_asserteq(ret, -1);
+>
+>
+> The 2 area 0x40010000 -- 0x10000   and 0x40011000 -- 0x10000 area overlaps each other and
+> should be merged in one 0x40010000 -- 11000 ?
+>
+> What is the criteria to merge or not 2 overlapping areas ?
+>
+> For me overlapping shouldn't be authorized.
 
+There are two areas
+
+1) Overlapping : Which are not authorized
+
+2) Overlapping and coalescing , Which is authorized to merge
+
+
+I am ok if you say 'coalescing and overlapping' should be treated as 
+overlapping .
+
+as long as new region is not getting created, for above.
+
+What we see on our J784S4 EVM
+
+without patch bdinfo says , reserved[1] and reserved[2] are overlapping 
+and should not be created.
+
+reserved.cnt = 0x4 reserved[0] [0x9e800000-0xabffffff], 0x0d800000 bytes 
+flags: 4 reserved[1] [0xfce92000-0xffffffff], 0x0316e000 bytes flags: 0 
+reserved[2] [0xfde91ec0-0xfffffffe], 0x0216e13f bytes flags: 0 
+reserved[3] [0x880000000-0xfffffefff], 0x77ffff000 bytes flags: 0
+
+>
+> Patrice
+>
+>>> Udit, your patch edb5824be17f ("lmb: remove overlapping region with next range")
+>>> is authorizing LMB overlapping right ?
+>> As said before this is checking overlap and coalescing and acting accordingly.
+>>
+>>> Patrice
+>>>
+>>>
+>>>
+>>>
+>>>
