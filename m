@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB68CC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 11:51:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DC90C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 11:51:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99C9388216;
-	Mon, 15 Apr 2024 13:50:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F39588233;
+	Mon, 15 Apr 2024 13:51:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="n3O/F3Pc";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="BC1uTJ8k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87C3E88207; Mon, 15 Apr 2024 13:50:57 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id D4D1F88213; Mon, 15 Apr 2024 13:51:01 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B368B87D5F
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 13:50:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9904C8822D
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 13:50:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 43AED411E6
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 11:50:55 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 14A4A4123A
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 11:50:59 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1713181855;
- bh=UtzxNnTA/VmFXmVRwLjWOugIkpJKQGL17xO3ULu9enc=;
+ s=20210705; t=1713181859;
+ bh=9b7IwGGzZUJATp+iJLlqiXGedmkhe/b4Y3xvgNeNLR8=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=n3O/F3Pckdy7zCzjfblsp+gP/OzUBmYHhHu49lM9oINayJXpuhoIeNqYxRU82AvGK
- 0Jf+r2xT3496N5yJc/jDda3lhe9eHXhSGoLBYQUFCHdD0ElQX4IzOK8nVYpWLikKBV
- 8BDxMw2fV6RR3JhJup09SbpfZFtNNW5hl3rJq4miX3yf3U+0iQ3v6olx43u6KxHvLu
- L7XUBdkOhnfLM0lp3jwNep+fOgAdB0ZKZ3tAfeVqLwNRYoxQzHAXDGiEztoQG4CiNR
- SsbApbPpv0WrcwxB9n8cxwPL5AYYGdORb6w5y4KJmyZKh3KSY5692igmoxKx85kWMA
- Wu60x9Hr6EB+w==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-343d7cd8f46so2392406f8f.2
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 04:50:55 -0700 (PDT)
+ b=BC1uTJ8kHeCQG3yO+u1ts4mVTUsoQc0FWhOYgHG5CBTAI/9oUNDkpzoke6VFPonp4
+ x2LfGg7VmdiUZsvSG8ldSIXxAn29CxEzmL/NkyWcUwCeXNHA1VywHMIZjQmpegP53y
+ DQ6B13clodefOWkzJXxqom2fDadYSJNBH5F9OinoFMiPfJY2IHne2QQDkOLNhjS83r
+ YmoDl+OuwgOn/zl1s9VdCBRz6AJ5feRHQRV1VS8rD+8qCb/Pe4RGuh/CYq+Pf4VWxN
+ XApTHdnjH/+iCbf32iVa4goK+dgCDwnR4oHoNdLp2Eplz2i/0YlEZqUuBvVx/r7sSC
+ IUnfllt6I3fJA==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-345fa9052b7so2000629f8f.1
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 04:50:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1713181854; x=1713786654;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UtzxNnTA/VmFXmVRwLjWOugIkpJKQGL17xO3ULu9enc=;
- b=hDEHBB1JHZFTG51Rccv0bIQtuSI/t1TPn63vwuZ/yYQV2C1hAhWGootn+USzZpiq63
- 99RwBuPQm/W3Od6J6pO7KFWGpzfArJwg2jCNp7KpMEE/vhOIq+thISP72ZqiHzicbcZ3
- K33m2WIfZ3iN5OsjmlHYTMoh+PIMGeOyUREjIixqfYGFnQk8XbDN0j1zHg/8JrQySyFx
- 44vXaVm+2SV/jGO9yDag7ZULcMWVX9CtfzZAk+4nfZ788n6HDnzmdridme0FbMb8jKtP
- GK0Os4jD2Cr9GkLa5EtE3zyZvQ7BX2Oc9MlsC3u9gMmN11q0Ioz/ApKnOtfVcA94PuGd
- WQxA==
+ bh=9b7IwGGzZUJATp+iJLlqiXGedmkhe/b4Y3xvgNeNLR8=;
+ b=VcHFoHBs1KBxJ2NJ7LlgVWqATqT97sxL/vW7WroeMhKwgtYhJZ+N48ic4mtODIEBKc
+ t5I+CtLyYfQCjE7SEVhqbUACUlQj4da8+nWE9xu0KcxU7oCr1Vh6V2JK92NmOVB/gw9E
+ s2D08cEyeCSVXZqxlkmWykJEPT6B4jPIL38kAOw4G5Pi51vzE9VHHo5BbEkzoNwe3BCU
+ D8t1CbyBZX7mNPQhYnwRobktr5KPS6LWIJIIv0BTRuOiN0xloe0KQgHtIuZBnuuRYwDM
+ D2P5mEJl69HSeIvlDgDQbL9IYsrGG8ekBgN8e4cIAKj5/nnQbKrj0lHWkbusxXW7Jx41
+ VeUA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV7zZq27MxFAw1VoioxH+5hiTEaXaeosRlPQSW79+P7csHWCt1f2oFdzyEMPUa1pf0D7IGN2Y4XAAgR3yrWh1qZSC+KvQ==
-X-Gm-Message-State: AOJu0YxQ4lSHx34qWR+ziu2D0vZWxIqYixOltnrrQN4iNd5e1I1VgRtT
- i3MIDiUWj8VmGYFcOmes9l5/NJvGNkAZZPwj+1qyN6hpFsVmW2p5zB+DpbaI/70Nc/oEd/Urlmz
- hn8Xk9sEJJCgraNyk5RT8w9tOE8IJzz1z72I7nLqyM/Evh/PWU379MPcGW1tjUohzf+M=
-X-Received: by 2002:a5d:58d4:0:b0:346:dace:5310 with SMTP id
- o20-20020a5d58d4000000b00346dace5310mr6197696wrf.22.1713181854787; 
- Mon, 15 Apr 2024 04:50:54 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHGYuwYaVbpXvr7IP3UIWgGQ0MdmgZ1TAfyOI1G8GCl4/cimJ1yXCa1TO8XMjAyY5xh3hOApA==
-X-Received: by 2002:a5d:58d4:0:b0:346:dace:5310 with SMTP id
- o20-20020a5d58d4000000b00346dace5310mr6197679wrf.22.1713181854511; 
- Mon, 15 Apr 2024 04:50:54 -0700 (PDT)
+ AJvYcCWd5YxJkXmymB/KapZyFu/o5daO1eK8iEU3MLzbDNfVhwQMUoFcE8G82OMEcK/1NjnAUlVRziyz19kr5dcVPrLWjbrj0Q==
+X-Gm-Message-State: AOJu0Ywg5Ne9RtYTcwlIKuXCXveAPTDwYjIKKCzWYCR2+l73qCUsUY99
+ 7UVP7WfAMQ7VOY6t50uk+E7/EGIMaZMMS/1l77PdrU7C7A9MefPIlzbxpC5/EdB2XVsL0HOtJ6F
+ JQk7x1caBSgvrVc1oYtGrNpYe+iH/8Lfjw4PdwkJsHaU9M8DsQ1Xh5Fm+Pain8RCzc+0=
+X-Received: by 2002:a5d:470c:0:b0:343:7ced:8913 with SMTP id
+ y12-20020a5d470c000000b003437ced8913mr9299702wrq.23.1713181853962; 
+ Mon, 15 Apr 2024 04:50:53 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IEQn4EhX0Iuf0b2arj0VCs2YGSMj+Obe+kyFbr3VO4NFX83u1vK+WCMB2dmD+ZIMAE6hdfeqg==
+X-Received: by 2002:a5d:470c:0:b0:343:7ced:8913 with SMTP id
+ y12-20020a5d470c000000b003437ced8913mr9299687wrq.23.1713181853673; 
+ Mon, 15 Apr 2024 04:50:53 -0700 (PDT)
 Received: from workstation5.fritz.box
  (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
  by smtp.gmail.com with ESMTPSA id
- j10-20020adff00a000000b003469e7f5c52sm11924130wro.80.2024.04.15.04.50.53
+ j10-20020adff00a000000b003469e7f5c52sm11924130wro.80.2024.04.15.04.50.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Apr 2024 04:50:54 -0700 (PDT)
+ Mon, 15 Apr 2024 04:50:53 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, Rick Chen <rick@andestech.com>,
@@ -87,9 +87,9 @@ Cc: Lukasz Tekieli <tekieli.lukasz@gmail.com>,
  Seung-Woo Kim <sw0312.kim@samsung.com>, E Shattow <lucent@gmail.com>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 4/4] configs: visionfive2: enable SPL_YMODEM_SUPPORT
-Date: Mon, 15 Apr 2024 13:50:35 +0200
-Message-ID: <20240415115035.46199-5-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 3/4] doc: Milk-V Mars CM and Milk-V Mars CM Lite
+Date: Mon, 15 Apr 2024 13:50:34 +0200
+Message-ID: <20240415115035.46199-4-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240415115035.46199-1-heinrich.schuchardt@canonical.com>
 References: <20240415115035.46199-1-heinrich.schuchardt@canonical.com>
@@ -111,29 +111,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We can use U-Boot for recovering JH7110 based boards via UART
-if CONFIG_SPL_YMODEM_SUPPORT=y.
-
-* Send u-boot-spl.normal.out via XMODEM.
-* Send u-boot.itb via YMODEM.
+Provide a man-page describing the usage of U-Boot on
+the Milk-V Mars CM and Milk-V Mars CM Lite boards.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- configs/starfive_visionfive2_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+ doc/board/starfive/index.rst          |   1 +
+ doc/board/starfive/milk-v_mars_cm.rst | 125 ++++++++++++++++++++++++++
+ 2 files changed, 126 insertions(+)
+ create mode 100644 doc/board/starfive/milk-v_mars_cm.rst
 
-diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-index fa80d489f5e..e2d83c62b28 100644
---- a/configs/starfive_visionfive2_defconfig
-+++ b/configs/starfive_visionfive2_defconfig
-@@ -62,6 +62,7 @@ CONFIG_SPL_I2C=y
- CONFIG_SPL_DM_SPI_FLASH=y
- CONFIG_SPL_DM_RESET=y
- CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SPL_YMODEM_SUPPORT=y
- CONFIG_SYS_PROMPT="StarFive # "
- CONFIG_CMD_EEPROM=y
- CONFIG_SYS_EEPROM_SIZE=512
+diff --git a/doc/board/starfive/index.rst b/doc/board/starfive/index.rst
+index 2762bf74c11..afa85ad2540 100644
+--- a/doc/board/starfive/index.rst
++++ b/doc/board/starfive/index.rst
+@@ -7,4 +7,5 @@ StarFive
+    :maxdepth: 1
+ 
+    milk-v_mars.rst
++   milk-v_mars_cm.rst
+    visionfive2
+diff --git a/doc/board/starfive/milk-v_mars_cm.rst b/doc/board/starfive/milk-v_mars_cm.rst
+new file mode 100644
+index 00000000000..4cd6034281c
+--- /dev/null
++++ b/doc/board/starfive/milk-v_mars_cm.rst
+@@ -0,0 +1,125 @@
++.. SPDX-License-Identifier: GPL-2.0+
++
++Milk-V Mars CM
++==============
++
++U-Boot for the Milk-V Mars CM uses the same U-Boot binaries as the VisionFive 2
++board. In U-Boot SPL the actual board is detected and the device-tree patched
++accordingly.
++
++The Milk-V Mars CM Lite comes without eMMC it needs a different pin muxing.
++The size of the eMMC shows up in the serial number shown by the *mac* command,
++e.g. MARC-V10-2340-D002E016-00000304. The number after the E is the MMC size
++in GB. U-Boot takes a value of E000 as an indicator for the Lite version.
++Unfortunately the vendor has not set this value correctly on some Lite boards.
++Please, use CONFIG_STARFIVE_NO_EMMC=y to indicate a Milk-V Mars CM Lite in this
++case. Otherwise you will not be able to read from eMMC
++
++Building
++~~~~~~~~
++
++1. Add the RISC-V toolchain to your PATH.
++2. Setup ARCH & cross compilation environment variable:
++
++.. code-block:: none
++
++   export CROSS_COMPILE=<riscv64 toolchain prefix>
++
++The M-mode software OpenSBI provides the supervisor binary interface (SBI) and
++is responsible for the switch to S-Mode. It is a prerequisite to build U-Boot.
++Support for the JH7110 was introduced in OpenSBI 1.2. It is recommended to use
++a current release.
++
++.. code-block:: console
++
++	git clone https://github.com/riscv/opensbi.git
++	cd opensbi
++	make PLATFORM=generic FW_TEXT_START=0x40000000 FW_OPTIONS=0
++
++Now build the U-Boot SPL and U-Boot proper.
++
++.. code-block:: console
++
++	cd <U-Boot-dir>
++	make starfive_visionfive2_defconfig
++	make OPENSBI=$(opensbi_dir)/build/platform/generic/firmware/fw_dynamic.bin
++
++This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out) as well
++as the FIT image (u-boot.itb) with OpenSBI and U-Boot.
++
++Device-tree selection
++~~~~~~~~~~~~~~~~~~~~~
++
++Depending on the board version U-Boot sets variable $fdtfile to either
++starfive/jh7110-milkv-mars-cm-emmc.dtb (for the generic version or
++starfive/jh7110-milkv-mars-cm-sdcard.dtb (for the Lite version).
++
++To overrule this selection the variable can be set manually and saved in the
++environment
++
++::
++
++    setenv fdtfile my_device-tree.dtb
++    env save
++
++or the configuration variable CONFIG_DEFAULT_FDT_FILE can be used to set to
++provide a default value.
++
++Boot source selection
++~~~~~~~~~~~~~~~~~~~~~
++
++The low speed connector nRPIBOOT line is used to switch the boot source.
++
++* If nRPIBOOT is connected to ground, the board boots from UART.
++* If nRPIBOOT is not connected, the board boots from SPI flash.
++
++Flashing a new U-Boot version
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++U-Boot SPL is provided as file spl/u-boot-spl.bin.normal.out. Main U-Boot is
++in file u-boot.itb.
++
++Assuming your new U-Boot version is on partition 1 of an SD-card you could
++install to the SPI flash with:
++
++::
++
++    sf probe
++    load mmc 1:1 $kernel_addr_r u-boot-spl.bin.normal.out
++    sf update $kernel_addr_r 0 $filesize
++    load mmc 1:1 $kernel_addr_r u-boot.itb
++    sf update $kernel_addr_r 0x100000 $filesize
++
++After updating U-Boot you may want to reboot and reset the environment to the
++default.
++
++::
++
++    env default -f -a
++    env save
++
++Booting from UART
++~~~~~~~~~~~~~~~~~
++
++For booting via UART U-Boot must be built with CONFIG_SPL_YMODEM_SUPPORT=y.
++
++Upload u-boot-spl.bin.normal.out via XMODEM. Then upload u-boot.itb via
++YMODEM.
++
++The XMODEM implementation in the boot ROM is not fully specification compliant.
++It sends too many NAKs in a row. Some tolerant terminal implementations exist.
++Or use a dedicated recovery tool e.g.
++https://github.com/xypron/JH71xx-tools/tree/VisionFive2:
++
++.. code-block:: bash
++
++    # send U-Boot SPL via XMODEM
++    vf2-recover -D /dev/ttyUSB0 -r u-boot-spl.bin.normal.out
++    # connect to board to transfer main U-Boot via YMODEM
++    picocom --send-cmd 'sz -b -vv' --baud 115200 /dev/ttyUSB0
++    # In Picocom use <CTRL+A>,<CTRL+S> to send u-boot.itb
++
++Booting from SPI flash
++~~~~~~~~~~~~~~~~~~~~~~
++
++Once you power up, you should see the U-Boot prompt on the serial console.
 -- 
 2.43.0
 
