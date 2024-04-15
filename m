@@ -4,63 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30FEFC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 12:40:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FB4BC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 12:41:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D9D787C82;
-	Mon, 15 Apr 2024 14:40:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 112CB88152;
+	Mon, 15 Apr 2024 14:41:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="j6wCJ/ut";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="GXjfx+t/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72F5287B82; Mon, 15 Apr 2024 14:40:32 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 7835B88190; Mon, 15 Apr 2024 14:41:30 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D60F187C82
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 14:40:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E12387B82
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 14:41:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=123a=LV=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1713184814;
- bh=TL4u1qDxtUZCqYz7OmQB5uj3jsicv9aOfxyUzK7lXtY=;
- b=j6wCJ/utf9aJWdxaEv8y3XMJ8hdBhMD7IMmB7wWfy3duJgpMFYcsgAlyemCPbsu0bmNb5Togq
- kr+gnFoHit4auMgpxo+PAzIU9lvsErx5/MpdaRu+6uJmpZ74sejoPVx6lzkiRAsqkcXQ6kCMSyQ
- +2s3AsFtQ2Xu/WRU/ykf91LjJc4Pc+FW32A8XzE2MdLNvxXzRHfErPlRJO9P9HOhUeFtlWSvaw1
- 43ekn1f0kvFLw0z5KefV1Zl2FeL4OKznjY5toU5OYUDKSIzofEiBcRG9X1Ng7gn7BWE5gJtToo8
- +suobb+vXMNcVdHm8UryfLsVa2MlU3smg2ETKkx3dliA==
-Message-ID: <39998d20-45f8-44f2-a50b-31dadd9fb387@kwiboo.se>
-Date: Mon, 15 Apr 2024 14:40:08 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1713184874; x=1713789674; i=xypron.glpk@gmx.de;
+ bh=pJt2RekIQk5asnU8f3TkTeKjMBmokubncfbm+czmSoo=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=GXjfx+t/OaNkIHatLn3UjsGpJMCAhkodghOufhvGdBVHpc1/BZ1apzACTq1wECFR
+ Nwv1cr1MTMyg1jdh82l+6sS+Nt7mOt0fgR0AQVCg823zcxIMcyPl7hTsC/sSIbsp3
+ hd0lNUZPise6ImGWvOA7TmDiX5nE8zto3SmBN5K93pgRQmib/D+oGDxbwdtDS08Ww
+ wsaOeVOQsUy/ApLswUrhqFxQ93gPWpRik/3C6Sq3f6PlW9ueSdDVx+6RCKyOQvtuT
+ 684m1grtWR9RdvIWWZw0PKHYjijuItZbfBsNxwDtjHbSjJNrAx5xEd20EVIXLqQeF
+ CGYITVp5prXbb/Tq4w==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MvbFs-1smo8q1qGU-00sguH; Mon, 15
+ Apr 2024 14:41:14 +0200
+Message-ID: <d311e90a-a9d0-4f45-a440-7d8a0efca199@gmx.de>
+Date: Mon, 15 Apr 2024 14:41:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/23] rockchip: rk3588: Update bootph props
-To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Andy Yan <andyshrk@163.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, John Clark <inindev@gmail.com>, Eugen
- Hristev <eugen.hristev@collabora.com>, Joshua Riek <jjriek@verizon.net>,
- u-boot@lists.denx.de
-References: <20240413181425.1384357-1-jonas@kwiboo.se>
- <20240413181425.1384357-13-jonas@kwiboo.se>
- <7a662cf8-a75f-4202-8cbc-851afe22d093@theobroma-systems.com>
+Subject: Re: [PATCH 3/4] Kconfig: Add missing quotes around default string
+ value
+To: Michal Simek <michal.simek@amd.com>
+Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, git@xilinx.com
+References: <cover.1713180904.git.michal.simek@amd.com>
+ <b8bee323b100ef1f5958e2f64e14e9776ff2bc06.1713180904.git.michal.simek@amd.com>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <7a662cf8-a75f-4202-8cbc-851afe22d093@theobroma-systems.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 661d202d394cb9e911dff83c
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <b8bee323b100ef1f5958e2f64e14e9776ff2bc06.1713180904.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:TbShJs7LK+kCTtJcTGY5/BicsTLthW9A/tymUO4MD0xFht6qJBZ
+ 0x4pOnIVlWqDDeiKy8fGF1BlKG0hAssdErBSQq9R/3zkArc7Y7w9OCg6EscsZ0oSgy1JnjJ
+ 3+vwAhtXUF0RtsnS8eo2AT0bK2cNmNktW+bw2AS+NFJLn/P9LZk1ZE3DWzz0lvaxFqteJo5
+ tDfBj1ueCMA8pfFmo7QEA==
+UI-OutboundReport: notjunk:1;M01:P0:o7RBCVqzdIs=;Ju2s+Vq5sZO7/we/sdJFE6CyNgV
+ jPEq93i+WzuIKUj6EdbxFppoObVknNu3z9d32ehneUFjuGPrdPuG6YnEdyzpJ8i0Sd4rIpP4I
+ dnNgZeFMdmeWatPHjfKmeLnRd2ntNFHE90DgHHrXPGRrPbuyrVd/A9y46b0zgfiKirwFKrDSo
+ uaHxujuQQFJXOzYGVXureaTQ28x+OHTGRAK7iSeFsW7wbpvLkFYHat66lJPcK54e5bG7Atvij
+ QoghGWXAhwdErhhEb5RbTWp6LGBEnurrFk12FfrDRWngBHdAAKcGkXXOoX02DOD5yRzm9S80e
+ pr3d54pIntBtoz2ylG6BCxmdJAkyjsMBlcXyZfmxvzNnFi0xx+AF1T1lMqISD4EfkY9O7gIyn
+ F5CJHnU56P5V/xMPtOBiUykAgxHRmbsRhVojFnNyyTJPmNgpbcWOaQ9h8KEFBCqeB6f3GcS1v
+ Iv41GgNegPyLz2ubdL9265RsTg9QaIexfl1s6AfOcGZzeWKLJ1Q4pSVokGe7BRQRRKRyDXfGU
+ qEE2ysPnDhcmyrsuzZSoLIevQxAr2CWbzbqmVxPT/oyHByrmmG//Ud4iKRddytt69/2GSN/hL
+ xWfmdKpQkxkcpR2qUmSUpxRz2iXbtg47uT4kPY6A+OrpUmuq6D7GYXYeTulG0OJz1urb20Ntq
+ 45xRfZ/g+0a9LS9pHzwvW9Wq2XwtqT+M49aHqnW27wU2aSoBUY+J6LvlKj+C9Ei4tuJiqNAkp
+ IgT4/5f9QymueK76AnuxY6VDr28G5fzOM1t9zGpkWyILDSMjYmpuzU/s3AocFr3TD6jp+rHF2
+ PgATER56AfNEJS4OKuLs4JzhJolXYQNRqKM/9levavISLI0sFqCw25rkMbWCAMgSgA9sdScHS
+ 8HLDaw4GTGTC2gQ==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,144 +97,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+On 15.04.24 13:35, Michal Simek wrote:
+> All errors are generated by ./tools/qconfig.py -b -j8 -i whatever.
+> Error look like this:
+> warning: style: quotes recommended around default value for string symbo=
+l
+> EFI_VAR_SEED_FILE (defined at lib/efi_loader/Kconfig:130)
+>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+>
+>   lib/efi_loader/Kconfig | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+> index e13a6f9f4c3a..a5ab7d1b262f 100644
+> --- a/lib/efi_loader/Kconfig
+> +++ b/lib/efi_loader/Kconfig
+> @@ -129,7 +129,7 @@ if EFI_VARIABLES_PRESEED
+>
+>   config EFI_VAR_SEED_FILE
+>   	string "File with initial values of non-volatile UEFI variables"
+> -	default ubootefi.var
+> +	default "ubootefi.var"
+>   	help
+>   	  File with initial values of non-volatile UEFI variables. The file m=
+ust
+>   	  be in the same format as the storage in the EFI system partition. T=
+he
 
-On 2024-04-15 10:55, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 4/13/24 20:13, Jonas Karlman wrote:
->> After the commit aca95282c1b7 ("Makefile: Use the fdtgrep -u flag")
->> bootph props is propagating to parent nodes.
->>
->> Update bootph props to ensure eMMC, SD-card and SPI flash is available
->> in SPL and U-Boot proper pre-reloc phase also remove unneeded bootph
->> props that automatically is propagated to parent nodes.
->>
->> Also adjust pinctrl nodes to only be included in boot phases where they
->> are needed and add any missing pinctrl node needed in SPL.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->> v2: Add bootph-some-ram props and follow kernel sort order
->>
->> Following bootph props have been applied:
->>
->> CRU, GRF and UART nodes:
->> - bootph-all - needed at all or most stages
->>
->> SD-card regulator related nodes:
->> - bootph-pre-ram (SPL) - regulator pinctrl may be needed to read FIT
->>    from SD-card on some boards
->>
->> eMMC/SD-card/SPI flash related nodes:
->> - bootph-pre-ram (SPL)
->> - bootph-some-ram (U-Boot proper pre-reloc)
->> ---
->>   .../arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi |  8 +--
->>   arch/arm/dts/rk3588-generic.dts               |  1 +
->>   arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi     | 12 ++---
->>   .../dts/rk3588-orangepi-5-plus-u-boot.dtsi    |  7 ++-
->>   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi       |  8 +--
->>   arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi    |  6 ++-
->>   arch/arm/dts/rk3588s-coolpi-4b-u-boot.dtsi    |  8 +--
->>   arch/arm/dts/rk3588s-orangepi-5-u-boot.dtsi   |  9 ++--
->>   arch/arm/dts/rk3588s-u-boot.dtsi              | 50 ++++++++++++++-----
->>   configs/evb-rk3588_defconfig                  |  4 +-
->>   10 files changed, 71 insertions(+), 42 deletions(-)
->>
->> diff --git a/arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi b/arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi
->> index ed15b14ea0ee..f0ef0164664e 100644
->> --- a/arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi
->> +++ b/arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi
->> @@ -3,7 +3,8 @@
->>   #include "rk3588-u-boot.dtsi"
->>   
->>   &fspim2_pins {
->> -	bootph-all;
->> +	bootph-pre-ram;
->> +	bootph-some-ram;
->>   };
->>   
->>   &sdhci {
->> @@ -12,16 +13,15 @@
->>   };
->>   
->>   &sfc {
->> -	bootph-pre-ram;
->> -	u-boot,spl-sfc-no-dma;
->>   	pinctrl-names = "default";
->>   	pinctrl-0 = <&fspim2_pins>;
->>   	status = "okay";
->>   
->>   	flash@0 {
->> -		bootph-pre-ram;
->>   		compatible = "jedec,spi-nor";
->>   		reg = <0>;
->> +		bootph-pre-ram;
->> +		bootph-some-ram;
->>   		spi-max-frequency = <24000000>;
->>   		spi-rx-bus-width = <4>;
->>   		spi-tx-bus-width = <1>;
->> diff --git a/arch/arm/dts/rk3588-generic.dts b/arch/arm/dts/rk3588-generic.dts
->> index e4721d97a87d..baafe7463f1b 100644
->> --- a/arch/arm/dts/rk3588-generic.dts
->> +++ b/arch/arm/dts/rk3588-generic.dts
->> @@ -40,5 +40,6 @@
->>   };
->>   
->>   &uart2 {
->> +	pinctrl-0 = <&uart2m0_xfer>;
-> 
-> I think this should be its own patch.
-
-Sure, will move this to its own patch in v3.
-
-> 
-> [...]
->> diff --git a/configs/evb-rk3588_defconfig b/configs/evb-rk3588_defconfig
->> index 68ecbc54b807..610a8d740fbb 100644
->> --- a/configs/evb-rk3588_defconfig
->> +++ b/configs/evb-rk3588_defconfig
->> @@ -33,7 +33,8 @@ CONFIG_CMD_REGULATOR=y
->>   # CONFIG_SPL_DOS_PARTITION is not set
->>   CONFIG_SPL_OF_CONTROL=y
->>   CONFIG_OF_LIVE=y
->> -CONFIG_OF_SPL_REMOVE_PROPS="pinctrl-0 pinctrl-names clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
->> +CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
->> +CONFIG_SPL_DM_SEQ_ALIAS=y
->>   CONFIG_SPL_REGMAP=y
->>   CONFIG_SPL_SYSCON=y
->>   CONFIG_SPL_CLK=y
->> @@ -52,6 +53,7 @@ CONFIG_DWC_ETH_QOS_ROCKCHIP=y
->>   CONFIG_PHY_ROCKCHIP_INNO_USB2=y
->>   CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
->>   CONFIG_PHY_ROCKCHIP_USBDP=y
->> +CONFIG_SPL_PINCTRL=y
-> 
-> I have a feeling the changes to the defconfig aren't entirely related to 
-> this patch? Specifically, I think at least CONFIG_SPL_DM_SEQ_ALIAS isn't 
-> related?
-
-My original intent of this entire series was to fix/align bootph props
-and pinctrl use across boards, but after more and more testing it has
-grown a little bit out of control ;-)
-
-For proper handling in SPL we also need the SPL_DM_SEQ_ALIAS enabled.
-
-In the future I would like to see a ROCKCHIP_COMMON_OPTIONS or similar
-that imply all these common options, for now this and my other series
-just tries to get more boards to using all these common options.
-
-Will split out to a evb specific patch in v3.
-
-Regards,
-Jonas
-
-> 
-> Otherwise,
-> 
-> Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-> 
-> Thanks,
-> Quentin
-
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
