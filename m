@@ -4,62 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81173C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 11:36:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABF49C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 11:46:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 025F487F1F;
-	Mon, 15 Apr 2024 13:36:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2E3D387E83;
+	Mon, 15 Apr 2024 13:46:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="LheVx1Fv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CELCw3zp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C20E87E83; Mon, 15 Apr 2024 13:36:46 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7005F87F1F; Mon, 15 Apr 2024 13:46:26 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C34A88132
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 13:36:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 6819987D5F
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 13:46:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-415515178ceso18357925e9.0
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 04:46:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1713181584; x=1713786384; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8fHGISDwRPgUkmTxKX2Wes4bgkolLMOZv67ltyRaWQk=;
+ b=CELCw3zpg+XaRQWIW+76rdE9HImwwhYT1/8TdKpFqgdapSdQTo2BXwIw0S6PADLVbY
+ KQjqfp/bTZLatZ0n2R9H4lNTIB5JtS7nzzBJlcQGZ7KDM/lEi20osCYwwf2KY6SUxVCf
+ 1JhjLULSqtgKU5a03XwXsYODkTCYXeDEZwNZp/vO77lma0bJyNY1t0POH6Nfabm24fxb
+ nWs1O/J9kwgMetjRCUfhLT18ruN7OYmPheVBubYaZ4rT0J/2ghpBdRWcp+yxd4eLb1dl
+ wWh5IXYJ6oMM1gC16ugEpeyNbXW3NNnDaA9to1jugnKAOt+GPAkaJVOhf3DQG8fqNeBU
+ A3GQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713181584; x=1713786384;
+ h=content-transfer-encoding:in-reply-to:from:references:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=8fHGISDwRPgUkmTxKX2Wes4bgkolLMOZv67ltyRaWQk=;
+ b=n+YkdV798z5PuUFJOg6L97wxcL0XVg29hyH8YdIZSaVzYslX9bfapFpSToWUkKqx3E
+ lfqYNDjfF0f3la67PFBNjfgp+VvNQ0xT4Yma+/A2N/gWf0mfbWR8kA+kL0xhEnd6Pgjn
+ dfaQlS17IAoh1d/YMIZg2AgK538U6UZ6YbKe+4xUsG18jDh7/lQFukw6dMy8hyCuKxfA
+ 5flg6SZXwbcsl2v+6btAepKQhSMRwOvnzEmJLGJhwPp7KjlZKh0d36hlzcL04kL7rA+f
+ c6y/GqpGh/gq3H6pytF/3hjOA08pe0t+U67QgBPCpAetW42V6x/5i+iTAKU04UYS+5o1
+ 7VYw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUSMzbeheM+vxlDrP++73704fYoAbBAEJ7i9vSv7+XgE0DBfuZ2hzmzNTF2vW3LEc8gpzs27SxE1psYbx28zru3hrynkQ==
+X-Gm-Message-State: AOJu0YyFosBYQHrpR2XOYbR/UQUAFlDDhR/G6eKNYd1hOvumVl+BQ2DO
+ 1UWVBrXeuMyoi8LfJPki8bos6BgrKs2NmfUfctZs2nFYmMcNkF4371HWK3kqafc=
+X-Google-Smtp-Source: AGHT+IGg/kxRGAODgrgy3+g6evGWYwkM+nlSZ9i52JKWX6o89FMdpty5Gsc5Z+edH9P+z0NlBwbAMw==
+X-Received: by 2002:a05:600c:5489:b0:418:af0:3b4a with SMTP id
+ iv9-20020a05600c548900b004180af03b4amr6024111wmb.14.1713181583829; 
+ Mon, 15 Apr 2024 04:46:23 -0700 (PDT)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ bd24-20020a05600c1f1800b00418673b3ca0sm2912972wmb.5.2024.04.15.04.46.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 15 Apr 2024 04:46:23 -0700 (PDT)
+Message-ID: <13b88782-4bf8-4800-8eb2-0617dd30083b@linaro.org>
+Date: Mon, 15 Apr 2024 12:46:22 +0100
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1713181003;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=RntUY9i7cXRP48x3je+pyCJ/ZbGFqRbqfPuWmDldDcU=;
- b=LheVx1FvEf7v57hrW56+Vs4krxGYEJcoF7Ny/U+t4cTL1gnGoNAKSBDBbLWPvJk3Hkwyaw
- hAdqin12M6232nPblZ2PYC37jkaWhpX0CXUA/gZ/gthaEI1G7RjFR97R+9qK8oVWvBmxZJ
- KzX/vWarA7aifGDolDcJ5TelZlP2MdaqB/TpEkhhkfukBLXUtO79j/VQyT8QY50/hHERwu
- l5Y4pUvtAx4dQ81NuY0tsGFFJp7ZnXQJuZ8bg6rRaXNt/NUbi4lro2dFFwjHB85RhyoOBT
- aDAB8dH6Kc+Ha4vpV6UdlrSMUD86reQA8Ry4vc3h2iVKJHi9meWYhN2fKNY1zA==
-Date: Mon, 15 Apr 2024 13:36:43 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Robert Marko <robert.marko@sartura.hr>, marex@denx.de,
- trini@konsulko.com, jonas@kwiboo.se, kever.yang@rock-chips.com,
- jagan@amarulasolutions.com, mkorpershoek@baylibre.com, peter@korsgaard.com,
- sjg@chromium.org, neil.armstrong@linaro.org, u-boot@lists.denx.de,
- j.beck@linefinity.com
-Subject: Re: [PATCH] usb: dwc3-generic: fix support without DM_REGULATOR
-In-Reply-To: <ed463461-2e96-462f-8b43-1e6ca4aad7a3@linaro.org>
-References: <20240415105405.432679-1-robert.marko@sartura.hr>
- <a2ea41b8-8656-4734-8594-c1d38a30e25e@linaro.org>
- <CA+HBbNH=UGLY63-bSoNmmV7ZBkt2zkbS0sdqbTLTmqikzhrb_g@mail.gmail.com>
- <85a712c7afa962b227d16a2fced6f57c@manjaro.org>
- <ed463461-2e96-462f-8b43-1e6ca4aad7a3@linaro.org>
-Message-ID: <9af69d78a50999d05ed5838414d70944@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/3] serial: msm_serial: set .clk_bit_rate in debug UART
+Content-Language: en-US
+To: Robert Marko <robert.marko@sartura.hr>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@linaro.org, sjg@chromium.org,
+ bmeng.cn@gmail.com, marek.vasut+renesas@mailbox.org, u-boot@lists.denx.de
+References: <20240415105028.432404-1-robert.marko@sartura.hr>
+ <20240415105028.432404-3-robert.marko@sartura.hr>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240415105028.432404-3-robert.marko@sartura.hr>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,129 +97,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Caleb,
 
-On 2024-04-15 13:18, Caleb Connolly wrote:
-> On 15/04/2024 12:14, Dragan Simic wrote:
->> Hello all,
->> 
->> On 2024-04-15 13:11, Robert Marko wrote:
->>> On Mon, Apr 15, 2024 at 12:57 PM Caleb Connolly
->>> <caleb.connolly@linaro.org> wrote:
->>>> 
->>>> On 15/04/2024 11:53, Robert Marko wrote:
->>>> > Recent addition of vbus-supply support has broke platform which
->>>> dont use
->>>> > controllable regulators for USB.
->>>> >
->>>> > Issue is that even withou DM_REGULATOR being enabled regulator related
->>>> > functions will still build as there is a stub in regulator.h but
->>>> they will
->>>> > simply return -ENOSYS which will then make dwc3_generic_host_probe()
->>>> > return the same error thus breaking probe.
->>>> 
->>>> Rather than stubbing out the code, could you check for -ENOSYS and
->>>> ignore the error in that case? I believe there's only one place 
->>>> where
->>>> this matters (marked below).
->>> 
->>> Sure, that was my first approach but it did not seem right to me.
->>> But if its OK with you, I can do that.
->> 
->> FWIW, ifdef'ing the code out seems like a cleaner approach to me.
+
+On 15/04/2024 11:49, Robert Marko wrote:
+> Currently, .clk_bit_rate is not being set in init_serial_data for debug
+> UART, but its then used uart_dm_init() and this breaks debug UART on
+> IPQ40xx.
 > 
-> Given that the stub functions exist, imho it makes sense to use them.
-> It's also easy to forget to add those #ifdefs if there are other
-> regulator changes in future patches.
+> So, lets populate .clk_bit_rate for debug UART as well.
+> IPQ40xx requires special value of 0xff, so set it if ARCH_IPQ40XX is
+> selected, otherwise default to the same value that regular DM UART
+> will use.
+
+Ah, I have a patch lying around to configure this automatically, but
+didn't get around to sending it. Could you give it a test on your IPQ
+board if I send it your way?
+
+Kind regards,
 > 
-> But overall I don't feel too strongly about this, for what it does this
-> code is fine, I'll defer to Marek.
-
-Oh, sorry, I totally failed to notice that the stubs already exist
-for the regulator_set_enable_if_allowed() function and its friends,
-which are actually ifdef'ed code.  Having that in mind, I agree that
-introducing more ifdef's isn't the preferred way to go.
-
-Maybe there's something awkward about the stubs and the way they
-need to be used, but that should be resolved by improving the whole
-stubs thing, instead of introducing more ifdef's in the code that
-ends up using the stubs.
-
->>>> > Fixes: de451d5d5b6f ("usb: dwc3-generic: support external vbus
->>>> regulator")
->>>> > Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+> ---
+>  drivers/serial/serial_msm.c | 5 +++++
+>  1 file changed, 5 insertions(+)
 > 
-> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
->>>> > ---
->>>> >  drivers/usb/dwc3/dwc3-generic.c | 8 ++++++++
->>>> >  1 file changed, 8 insertions(+)
->>>> >
->>>> > diff --git a/drivers/usb/dwc3/dwc3-generic.c
->>>> b/drivers/usb/dwc3/dwc3-generic.c
->>>> > index 7a00529a2a..784d3ec2ed 100644
->>>> > --- a/drivers/usb/dwc3/dwc3-generic.c
->>>> > +++ b/drivers/usb/dwc3/dwc3-generic.c
->>>> > @@ -242,6 +242,7 @@ static int dwc3_generic_host_probe(struct
->>>> udevice *dev)
->>>> >       if (rc)
->>>> >               return rc;
->>>> >
->>>> > +#if CONFIG_IS_ENABLED(DM_REGULATOR)
->>>> >       rc = device_get_supply_regulator(dev, "vbus-supply",
->>>> &priv->vbus_supply);
->>>> >       if (rc)
->>>> >               debug("%s: No vbus regulator found: %d\n", dev->name,
->>>> rc);
->>>> > @@ -250,14 +251,17 @@ static int dwc3_generic_host_probe(struct
->>>> udevice *dev)
->>>> >       rc = regulator_set_enable_if_allowed(priv->vbus_supply, true);
->>>> >       if (rc)
->>>> >               return rc;
->>>> 
->>>> Here, if (rc && rc != -ENOSYS)
->>>> or even if (CONFIG_IS_ENABLED(DM_REGULATOR) && rc) to be verbose 
->>>> (maybe
->>>> not the preferred style though).
->>>> 
->>>> All the other regulator_* calls either ignore the result or only 
->>>> print a
->>>> debug message.
->>>> > +#endif
->>>> >
->>>> >       hccr = (struct xhci_hccr *)priv->gen_priv.base;
->>>> >       hcor = (struct xhci_hcor *)(priv->gen_priv.base +
->>>> >                       HC_LENGTH(xhci_readl(&(hccr)->cr_capbase)));
->>>> >
->>>> >       rc = xhci_register(dev, hccr, hcor);
->>>> > +#if CONFIG_IS_ENABLED(DM_REGULATOR)
->>>> >       if (rc)
->>>> >               regulator_set_enable_if_allowed(priv->vbus_supply,
->>>> false);
->>>> > +#endif
->>>> >
->>>> >       return rc;
->>>> >  }
->>>> > @@ -265,14 +269,18 @@ static int dwc3_generic_host_probe(struct
->>>> udevice *dev)
->>>> >  static int dwc3_generic_host_remove(struct udevice *dev)
->>>> >  {
->>>> >       struct dwc3_generic_host_priv *priv = dev_get_priv(dev);
->>>> > +#if CONFIG_IS_ENABLED(DM_REGULATOR)
->>>> >       int rc;
->>>> > +#endif
->>>> >
->>>> >       /* This function always returns 0 */
->>>> >       xhci_deregister(dev);
->>>> >
->>>> > +#if CONFIG_IS_ENABLED(DM_REGULATOR)
->>>> >       rc = regulator_set_enable_if_allowed(priv->vbus_supply, false);
->>>> >       if (rc)
->>>> >               debug("%s: Failed to disable vbus regulator: %d\n",
->>>> dev->name, rc);
->>>> > +#endif
->>>> >
->>>> >       return dwc3_generic_remove(dev, &priv->gen_priv);
->>>> >  }
->>>> 
->>>> --
->>>> // Caleb (they/them)
+> diff --git a/drivers/serial/serial_msm.c b/drivers/serial/serial_msm.c
+> index 8044d38518..80069f5cfb 100644
+> --- a/drivers/serial/serial_msm.c
+> +++ b/drivers/serial/serial_msm.c
+> @@ -242,6 +242,11 @@ U_BOOT_DRIVER(serial_msm) = {
+>  
+>  static struct msm_serial_data init_serial_data = {
+>  	.base = CONFIG_VAL(DEBUG_UART_BASE),
+> +#ifdef CONFIG_ARCH_IPQ40XX
+> +	.clk_bit_rate = 0xff,
+> +#else
+> +	.clk_bit_rate = UART_DM_CLK_RX_TX_BIT_RATE,
+> +#endif
+>  };
+>  
+>  #include <debug_uart.h>
+
+-- 
+// Caleb (they/them)
