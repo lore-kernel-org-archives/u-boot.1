@@ -4,58 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9B6DC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 09:19:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D715EC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 09:49:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F7B6881FB;
-	Mon, 15 Apr 2024 11:19:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 37D94880F8;
+	Mon, 15 Apr 2024 11:49:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="YwskY1yK";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="tZzoU69z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CAF69881FE; Mon, 15 Apr 2024 11:19:12 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 629B1881B6; Mon, 15 Apr 2024 11:49:35 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D483088193
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 11:19:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 6DD8E87D66
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 11:49:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=4835aa2b69=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 43F7GpiZ028141; Mon, 15 Apr 2024 11:49:21 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=sykT+1TMX1qERK825VelwYL6Akp5dbtzv6AJFmemsEI=; b=tZ
+ zoU69zpq7B6L2hxjffgA1pd3EqhTt5Hz7+49Dz/YsHGqsUrPcK97r3CnWpX/a4aP
+ hd3h5pNMdJVAaQgHRh3dGeEzNG5OcKFOLKZ5DnD3hMuaeXQGK/8tNRczcPO5+og8
+ Su3aj/sOYUAKl111mmMgRaGrWV3FcrQ/jv/WyegrG4iue/ZmFUPZJ6UwS353FlUt
+ WZ7sAAFpUfrmT1HwDUTAsqxmFBviDburYtxfoCkPJjX87ckLRar9BmPwDlZ9FkkK
+ yM1hVSEIGgksVIr5bqksUQ9dVC3KA9qb32sR2+xbcSkrljkxczPMrxORm/UzUyce
+ jAy7b1oCAn2rGPnw1I8Q==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff646twk-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 15 Apr 2024 11:49:21 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 828294002D;
+ Mon, 15 Apr 2024 11:49:17 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CBC142122EC;
+ Mon, 15 Apr 2024 11:48:48 +0200 (CEST)
+Received: from [10.48.86.98] (10.48.86.98) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Mon, 15 Apr
+ 2024 11:48:48 +0200
+Message-ID: <f808ec3d-966c-43e6-87be-18e742f976b3@foss.st.com>
+Date: Mon, 15 Apr 2024 11:48:47 +0200
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1713172749;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=jNsoSd+OVj06ItL33N7bTwPLgMNckI04SqFxABthN1w=;
- b=YwskY1yKjrNUMt0OjikstaFJ1WHTTtffMKbDeetoyvjSkTKGCqHtt7tZ6WpmTRKWz1eZJh
- 3yXylUKe/mmK3nmPPM4SLZviI6YC5ebqYQM3NfPg1OgaskJdhSEjHZdNln/9GUdwwX3ocb
- hduWnNso2VJ/kiVm9g9p7LSSiI4Z2vEb/67bjYXdixyns56YY67LKmJ+iSZAMmjzmhTdvm
- gIuFKMDAWwB4zEceiU88u9tgBW4Q7uW53lyMCd1CGmt9lOvWyEE2ILf1W/DFbX3LT+wLp1
- TlrLxgwBIOvXaow8on4sLR5Kap5J0ahkl8RenuJZtxNXNsZQGiFpIYrehau2sQ==
-Date: Mon, 15 Apr 2024 11:19:09 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Philipp
- Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, Quentin
- Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] mmc: rockchip_sdhci: Fix 4 blocks PIO mode read limit
- for RK35xx
-In-Reply-To: <20240410143052.227908-1-jonas@kwiboo.se>
-References: <20240410143052.227908-1-jonas@kwiboo.se>
-Message-ID: <897dbacc895abc96a72bb944196897e3@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ARM: stm32: Initialize TAMP_SMCR BKP..PROT fields on
+ STM32MP15xx
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Igor Opaniuk <igor.opaniuk@foundries.io>, Patrick Delaunay
+ <patrick.delaunay@foss.st.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240414184028.147067-1-marex@denx.de>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20240414184028.147067-1-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+X-Originating-IP: [10.48.86.98]
+X-ClientProxiedBy: EQNCAS1NODE4.st.com (10.75.129.82) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-04-15_08,2024-04-09_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,94 +92,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-04-10 16:30, Jonas Karlman wrote:
-> The commit 2cc6cde647e2 ("mmc: rockchip_sdhci: Limit number of blocks
-> read in a single command") introduced a limit of number of blocks to
-> read to fix a Data End Bit Error on RK3568 and RK3588. This had a side
-> affect of significant slowing down reading FIT from eMMC.
-> 
-> After the commit 6de9d7b2f13c ("rockchip: rk35xx: Enable eMMC HS200 
-> mode
-> by default") the limit of number of blocks to read workaround is no
-> longer necessary and at HS200+ a Data End Bit Error is no longer
-> happening using PIO mode.
-> 
-> Change this limitation to allow reading more than 4 blocks with a 
-> single
-> CMD18 command in PIO mode at HS200+ speed, keep using the 4 blocks
-> limitation when loadig FIT from eMMC at lower speed than HS200.
-> 
-> Fixes: 2cc6cde647e2 ("mmc: rockchip_sdhci: Limit number of blocks read
-> in a single command")
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-Looking good to me.  Thanks for peforming this dynamically, based
-on the actual MMC interface speed/mode.
 
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
-
+On 4/14/24 20:39, Marek Vasut wrote:
+> In case of an OTP-CLOSED STM32MP15xx system, the CPU core 1 cannot be
+> released from endless loop in BootROM only by populating TAMP BKPxR 4
+> and 5 with magic and branch address and sending SGI0 interrupt from
+> core 0 to core 1 twice. TAMP_SMCR BKP..PROT fields must be initialized
+> as well to release the core 1 from endless loop during the second SGI0
+> handling on core 1. Initialize TAMP_SMCR to protect the first 16 backup
+> registers, the ones which contain the core 1 magic, branch address and
+> boot information.
+> 
+> This requirement seems to be undocumented, therefore it was necessary
+> to trace and analyze the STM32MP15xx BootROM using OpenOCD and objdump.
+> Ultimately, it turns out that a certain BootROM function reads out the
+> TAMP_SMCR register and tests whether the BKP..PROT fields are non-zero.
+> If they are zero, the BootROM code again waits for SGI0 using WFI, else
+> the execution moves forward until it reaches handoff to the TAMP BKPxR 5
+> branch address.
+> 
+> This fixes CPU core 1 release using U-Boot PSCI implementation on an
+> OTP-CLOSED system, i.e. system with fuse 0 bit 6 set.
+> 
+> Signed-off-by: Marek Vasut <marex@denx.de>
 > ---
-> v2: Move cfg->b_max configuration to set_ios_post() ops
-> 
-> This significantly speed up FIT loading from eMMC on RK3588 boards with
-> a mmc-hs200 prop in the sdhci node, and boards without a mmc-hs200 prop
-> continue to work.
+> Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Simon Glass <sjg@chromium.org
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
 > ---
->  drivers/mmc/rockchip_sdhci.c | 26 ++++++++++++++++----------
->  1 file changed, 16 insertions(+), 10 deletions(-)
+>  arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
 > 
-> diff --git a/drivers/mmc/rockchip_sdhci.c 
-> b/drivers/mmc/rockchip_sdhci.c
-> index 706fb1235796..c889c7bc9855 100644
-> --- a/drivers/mmc/rockchip_sdhci.c
-> +++ b/drivers/mmc/rockchip_sdhci.c
-> @@ -391,6 +391,8 @@ static int rk3568_sdhci_config_dll(struct
-> sdhci_host *host, u32 clock, bool enab
->  static int rk3568_sdhci_set_ios_post(struct sdhci_host *host)
->  {
->  	struct mmc *mmc = host->mmc;
-> +	struct rockchip_sdhc_plat *plat = dev_get_plat(mmc->dev);
-> +	struct mmc_config *cfg = &plat->cfg;
->  	u32 reg;
-> 
->  	reg = sdhci_readw(host, SDHCI_HOST_CONTROL2);
-> @@ -437,6 +439,20 @@ static int rk3568_sdhci_set_ios_post(struct
-> sdhci_host *host)
-> 
->  	sdhci_writew(host, reg, DWCMSHC_EMMC_EMMC_CTRL);
-> 
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+> index dd99150fbc2..138a6d6b614 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+> @@ -14,6 +14,7 @@
+>  #include <asm/arch/sys_proto.h>
+>  #include <dm/device.h>
+>  #include <dm/uclass.h>
+> +#include <linux/bitfield.h>
+>  
+>  /* RCC register */
+>  #define RCC_TZCR		(STM32_RCC_BASE + 0x00)
+> @@ -41,6 +42,9 @@
+>  #define TZC_REGION_ID_ACCESS0	(STM32_TZC_BASE + 0x114)
+>  
+>  #define TAMP_CR1		(STM32_TAMP_BASE + 0x00)
+> +#define TAMP_SMCR		(STM32_TAMP_BASE + 0x20)
+> +#define TAMP_SMCR_BKPRWDPROT	GENMASK(7, 0)
+> +#define TAMP_SMCR_BKPWDPROT	GENMASK(23, 16)
+>  
+>  #define PWR_CR1			(STM32_PWR_BASE + 0x00)
+>  #define PWR_MCUCR		(STM32_PWR_BASE + 0x14)
+> @@ -136,6 +140,18 @@ static void security_init(void)
+>  	 */
+>  	writel(0x0, TAMP_CR1);
+>  
 > +	/*
-> +	 * Reading more than 4 blocks with a single CMD18 command in PIO mode
-> +	 * triggers Data End Bit Error using a slower mode than HS200. Limit 
-> to
-> +	 * reading max 4 blocks in one command when using PIO mode.
+> +	 * TAMP: Configure non-zero secure protection settings. This is
+> +	 * checked by BootROM function 35ac on OTP-CLOSED device during
+> +	 * CPU core 1 release from endless loop. If secure protection
+> +	 * fields are zero, the core 1 is not released from endless
+> +	 * loop on second SGI0.
 > +	 */
-> +	if (!(host->flags & USE_DMA)) {
-> +		if (mmc->selected_mode == MMC_HS_200 ||
-> +		    mmc->selected_mode == MMC_HS_400 ||
-> +		    mmc->selected_mode == MMC_HS_400_ES)
-> +			cfg->b_max = CONFIG_SYS_MMC_MAX_BLK_COUNT;
-> +		else
-> +			cfg->b_max = 4;
-> +	}
+> +	clrsetbits_le32(TAMP_SMCR,
+> +			TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPRWDPROT,
+
+Hi Marek
+
+there is a typo, you used twice TAMP_SMCR_BKPRWDPROT :
+
+TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPRWDPROT  => TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPWDPROT 
+                                    ^~~~~                 
+
+Patrice
+
+> +			FIELD_PREP(TAMP_SMCR_BKPRWDPROT, 0x10) |
+> +			FIELD_PREP(TAMP_SMCR_BKPWDPROT, 0x10));
 > +
->  	return 0;
->  }
-> 
-> @@ -598,16 +614,6 @@ static int rockchip_sdhci_probe(struct udevice 
-> *dev)
->  	    dev_read_bool(dev, "u-boot,spl-fifo-mode"))
->  		host->flags &= ~USE_DMA;
-> 
-> -	/*
-> -	 * Reading more than 4 blocks with a single CMD18 command in PIO mode
-> -	 * triggers Data End Bit Error on RK3568 and RK3588. Limit to reading
-> -	 * max 4 blocks in one command when using PIO mode.
-> -	 */
-> -	if (!(host->flags & USE_DMA) &&
-> -	    (device_is_compatible(dev, "rockchip,rk3568-dwcmshc") ||
-> -	     device_is_compatible(dev, "rockchip,rk3588-dwcmshc")))
-> -		cfg->b_max = 4;
-> -
->  	return sdhci_probe(dev);
->  }
+>  	/* GPIOZ: deactivate the security */
+>  	writel(BIT(0), RCC_MP_AHB5ENSETR);
+>  	writel(0x0, GPIOZ_SECCFGR);
