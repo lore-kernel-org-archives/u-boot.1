@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AB2DC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:10:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95ABFC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:10:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABFF488225;
-	Mon, 15 Apr 2024 08:08:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 23B558823C;
+	Mon, 15 Apr 2024 08:08:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABB8B8821B; Mon, 15 Apr 2024 08:08:19 +0200 (CEST)
+ id 7A98088235; Mon, 15 Apr 2024 08:08:20 +0200 (CEST)
 Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0C7688195
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:08:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7F6B188220
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:08:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=csgroup.eu
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
 Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
- by localhost (Postfix) with ESMTP id 4VHxYY44qkz9t2V;
- Mon, 15 Apr 2024 08:08:17 +0200 (CEST)
+ by localhost (Postfix) with ESMTP id 4VHxYZ2B3Kz9t2k;
+ Mon, 15 Apr 2024 08:08:18 +0200 (CEST)
 Received: from pegase1.c-s.fr ([192.168.12.234])
  by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id AUQ-S8JRL3Wa; Mon, 15 Apr 2024 08:08:17 +0200 (CEST)
+ with ESMTP id uoIyM7iaR3rf; Mon, 15 Apr 2024 08:08:18 +0200 (CEST)
 Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase1.c-s.fr (Postfix) with ESMTP id 4VHxYK5xFWz9t9W;
+ by pegase1.c-s.fr (Postfix) with ESMTP id 4VHxYK6yQzz9tBG;
  Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id C7F528B770;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id EAA2D8B778;
  Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 Received: from messagerie.si.c-s.fr ([127.0.0.1])
  by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id bhz4YfV5UEOQ; Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
+ with ESMTP id Twzc-gUS9N17; Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 Received: from PO20335.idsi0.si.c-s.fr (unknown [172.25.230.108])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id A43808B775;
+ by messagerie.si.c-s.fr (Postfix) with ESMTP id BB6F58B764;
  Mon, 15 Apr 2024 08:08:05 +0200 (CEST)
 From: Christophe Leroy <christophe.leroy@csgroup.eu>
 To: Jagan Teki <jagan@amarulasolutions.com>,
@@ -47,10 +47,10 @@ To: Jagan Teki <jagan@amarulasolutions.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Christophe Leroy <christophe.leroy@csgroup.eu>,
 	u-boot@lists.denx.de
-Subject: [PATCH v2 12/17] spi: mpc8xx: Allow transfer of more than MAX_BUFFER
- len
-Date: Mon, 15 Apr 2024 08:07:25 +0200
-Message-ID: <0779c545b260b6c2bf1d357f18cc98811e2dcce3.1713160866.git.christophe.leroy@csgroup.eu>
+Subject: [PATCH v2 13/17] spi: mpc8xx: Use 16 bit mode for large transfers
+ with even size
+Date: Mon, 15 Apr 2024 08:07:26 +0200
+Message-ID: <9195d08a754418254471b313d9390bc8773a163b.1713160866.git.christophe.leroy@csgroup.eu>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1713160866.git.christophe.leroy@csgroup.eu>
 References: <cover.1713160866.git.christophe.leroy@csgroup.eu>
@@ -72,94 +72,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Perform multiple transfer of size MAX_BUFFER when the data to be
-transferred is longer than MAX_BUFFER.
+On CPM, the RISC core is a lot more efficiant when doing transfers
+in 16-bits chunks than in 8-bits chunks, but unfortunately the
+words need to be byte swapped.
+
+So, for large tranfers with an even size, allocate a temporary
+buffer and byte-swap data before and after transfer.
+
+This change allows setting higher speed for transfer. For instance
+on an MPC 8xx (CPM1 comms RISC processor), the documentation tells
+that transfer in byte mode at 1 kbit/s uses 0.200% of CPM load
+at 25 MHz while a word transfer at the same speed uses 0.032%
+of CPM load. This means the speed can be 6 times higher in
+word mode for the same CPM load.
+
+For small transfers, the load reduction is not worth the CPU load
+required to allocate the temporary buffer, so do it only when data
+size is over 64 bytes.
 
 Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
 ---
- drivers/spi/mpc8xx_spi.c | 48 ++++++++++++++++++++++++++++------------
- 1 file changed, 34 insertions(+), 14 deletions(-)
+ drivers/spi/mpc8xx_spi.c | 44 +++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 41 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/spi/mpc8xx_spi.c b/drivers/spi/mpc8xx_spi.c
-index 0d142f12e9..a193ac711b 100644
+index a193ac711b..b1abfbf4fc 100644
 --- a/drivers/spi/mpc8xx_spi.c
 +++ b/drivers/spi/mpc8xx_spi.c
-@@ -143,27 +143,17 @@ static void mpc8xx_spi_cs_deactivate(struct udevice *dev)
- 	dm_gpio_set_value(&priv->gpios[platdata->cs], 0);
- }
+@@ -18,6 +18,7 @@
  
--static int mpc8xx_spi_xfer(struct udevice *dev, unsigned int bitlen,
--			    const void *dout, void *din, unsigned long flags)
-+static int mpc8xx_spi_xfer_one(struct udevice *dev, size_t count,
-+			       const void *dout, void *din)
- {
+ #include <common.h>
+ #include <dm.h>
++#include <malloc.h>
+ #include <mpc8xx.h>
+ #include <spi.h>
+ #include <linux/delay.h>
+@@ -30,6 +31,7 @@
+ #define CPM_SPI_BASE_TX	(CPM_SPI_BASE + sizeof(cbd_t))
+ 
+ #define MAX_BUFFER	0x8000 /* Max possible is 0xffff. We want power of 2 */
++#define MIN_HWORD_XFER	64	/* Minimum size for 16 bits transfer */
+ 
+ struct mpc8xx_priv {
+ 	spi_t __iomem *spi;
+@@ -149,23 +151,46 @@ static int mpc8xx_spi_xfer_one(struct udevice *dev, size_t count,
  	immap_t __iomem *immr = (immap_t __iomem *)CONFIG_SYS_IMMR;
  	cpm8xx_t __iomem *cp = &immr->im_cpm;
  	cbd_t __iomem *tbdf, *rbdf;
++	void *bufout, *bufin;
++	u16 spmode_len;
  	int tm;
--	size_t count = (bitlen + 7) / 8;
--
--	if (!din && !dout)
--		return -EINVAL;
--	if (count > MAX_BUFFER)
--		return -EINVAL;
  
  	tbdf = (cbd_t __iomem *)&cp->cp_dpmem[CPM_SPI_BASE_TX];
  	rbdf = (cbd_t __iomem *)&cp->cp_dpmem[CPM_SPI_BASE_RX];
  
--	/* Set CS for device */
--	if (flags & SPI_XFER_BEGIN)
--		mpc8xx_spi_cs_activate(dev);
--
- 	/* Setting tx bd status and data length */
- 	out_be32(&tbdf->cbd_bufaddr, dout ? (ulong)dout : (ulong)dummy_buffer);
- 	out_be16(&tbdf->cbd_sc, BD_SC_READY | BD_SC_LAST | BD_SC_WRAP);
-@@ -196,13 +186,43 @@ static int mpc8xx_spi_xfer(struct udevice *dev, unsigned int bitlen,
- 	}
- 
- 	if (tm >= 1000)
--		printf("*** spi_xfer: Time out while xferring to/from SPI!\n");
-+		return -ETIMEDOUT;
++	if (!(count & 1) && count >= MIN_HWORD_XFER) {
++		spmode_len = SPMODE_LEN(16);
++		if (dout) {
++			int i;
 +
-+	return 0;
-+}
- 
-+static int mpc8xx_spi_xfer(struct udevice *dev, unsigned int bitlen,
-+			   const void *dout, void *din, unsigned long flags)
-+{
-+	size_t count = (bitlen + 7) / 8;
-+	size_t offset = 0;
-+	int ret = 0;
-+
-+	if (!din && !dout)
-+		return -EINVAL;
-+
-+	/* Set CS for device */
-+	if (flags & SPI_XFER_BEGIN)
-+		mpc8xx_spi_cs_activate(dev);
-+
-+	while (count > 0 && !ret) {
-+		size_t chunk = min(count, (size_t)MAX_BUFFER);
-+		const void *out = dout ? dout + offset : NULL;
-+		void *in = din ? din + offset : NULL;
-+
-+		ret = mpc8xx_spi_xfer_one(dev, chunk, out, in);
-+
-+		offset += chunk;
-+		count -= chunk;
++			bufout = malloc(count);
++			for (i = 0; i < count; i += 2)
++				*(u16 *)(bufout + i) = swab16(*(u16 *)(dout + i));
++		} else {
++			bufout = NULL;
++		}
++		if (din)
++			bufin = malloc(count);
++		else
++			bufin = NULL;
++	} else {
++		spmode_len = SPMODE_LEN(8);
++		bufout = (void *)dout;
++		bufin = din;
 +	}
- 	/* Clear CS for device */
- 	if (flags & SPI_XFER_END)
- 		mpc8xx_spi_cs_deactivate(dev);
- 
--	return 0;
-+	if (ret)
-+		printf("*** spi_xfer: Time out while xferring to/from SPI!\n");
 +
-+	return ret;
+ 	/* Setting tx bd status and data length */
+-	out_be32(&tbdf->cbd_bufaddr, dout ? (ulong)dout : (ulong)dummy_buffer);
++	out_be32(&tbdf->cbd_bufaddr, bufout ? (ulong)bufout : (ulong)dummy_buffer);
+ 	out_be16(&tbdf->cbd_sc, BD_SC_READY | BD_SC_LAST | BD_SC_WRAP);
+ 	out_be16(&tbdf->cbd_datlen, count);
+ 
+ 	/* Setting rx bd status and data length */
+-	out_be32(&rbdf->cbd_bufaddr, din ? (ulong)din : (ulong)dummy_buffer);
++	out_be32(&rbdf->cbd_bufaddr, bufin ? (ulong)bufin : (ulong)dummy_buffer);
+ 	out_be16(&rbdf->cbd_sc, BD_SC_EMPTY | BD_SC_WRAP);
+ 	out_be16(&rbdf->cbd_datlen, 0);	 /* rx length has no significance */
+ 
+ 	clrsetbits_be16(&cp->cp_spmode, ~SPMODE_LOOP, SPMODE_REV | SPMODE_MSTR |
+-			SPMODE_EN | SPMODE_LEN(8) | SPMODE_PM(0x8));
++			SPMODE_EN | spmode_len | SPMODE_PM(0x8));
+ 	out_8(&cp->cp_spim, 0);		/* Mask  all SPI events */
+ 	out_8(&cp->cp_spie, SPI_EMASK);	/* Clear all SPI events	*/
+ 
+@@ -188,6 +213,19 @@ static int mpc8xx_spi_xfer_one(struct udevice *dev, size_t count,
+ 	if (tm >= 1000)
+ 		return -ETIMEDOUT;
+ 
++	if (!(count & 1) && count > MIN_HWORD_XFER) {
++		if (dout)
++			free(bufout);
++		if (din) {
++			int i;
++
++			bufout = malloc(count);
++			for (i = 0; i < count; i += 2)
++				*(u16 *)(din + i) = swab16(*(u16 *)(bufin + i));
++			free(bufin);
++		}
++	}
++
+ 	return 0;
  }
  
- static int mpc8xx_spi_ofdata_to_platdata(struct udevice *dev)
 -- 
 2.43.0
 
