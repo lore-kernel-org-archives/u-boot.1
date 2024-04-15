@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71FBBC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 21:50:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42569C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 21:57:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44480876D3;
-	Mon, 15 Apr 2024 23:49:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A43A588081;
+	Mon, 15 Apr 2024 23:57:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PwT3MBNm";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ud3EK89h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 201AF875B9; Mon, 15 Apr 2024 23:49:57 +0200 (CEST)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 770DB875B9; Mon, 15 Apr 2024 23:57:26 +0200 (CEST)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B57B87073
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 23:49:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CBA387C69
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 23:57:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4167fce0a41so25905775e9.0
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 14:49:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-1e4edcde7a1so8142555ad.0
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 14:57:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713217794; x=1713822594; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=17Hka02/D6unEqUvDCK1CtzaYVnp8NrK6oFYeijc4y4=;
- b=PwT3MBNmxWqfviCF0g1/aY/qSN9uXxoh+Oi0eKoNQ+04JIMuILUcKqzMlN6lppbpUY
- kDTJv12EvYABncQGR8Wtj/SvG89cgW0tv6IOSg/C+56Ow+W5iEeUO5DSuL7CGwYUlXTU
- L/rdkW2ykrGGMd5e0hS2OHPzf9d5+Yc/RSeQTbzdmRbuO/ZFpTRtZ8FOblWseKys9oZD
- dHji0lO7dSIno0AC22hG8kUVshAgcYNouzjeDDlXXaQ4A6LJXiqA7Qigt+x4Ep/9woye
- W/yGUi/bTh3MhISDIqHJTsP2uw0tl8eSR5bDJt8Uh1H9yTMRvCbut405NIK2iKJcMVvJ
- 1H1g==
+ d=gmail.com; s=20230601; t=1713218243; x=1713823043; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=lsUamYBgzYv0ZpQ2eQQVarM1rktN9R1+HRMOXeVgc04=;
+ b=Ud3EK89hd5TxECzyaY0pxgFBaZ5V9VfSlptDXdUCqzN0uTQUQBTw2S9nofUh7ZDkH5
+ WoQ88YY0k9BMAdcJuwnekuoeO73w25Dzx3XnzAu9q0gxtzpdJ5S8enB9ggSk9xjhQ0qu
+ gUVEXHK3Uz38bF/UxAnPunXj8VSMCvh/f1lEOZaPh7jmOeIhjER0sxAkZPwK29p5hzlz
+ b2yG+GVtvwYW2SL6tM/YRsup/nNorwAJKzpXNae8KaQI4kol/OG64p3eWPCvoqnLKUb3
+ Uis4DgeQchi9uqWIKGrG8HAL/3TRhnnnb9pex8EkZPFpfth1CWWe/W4mpVlHETB8jc/P
+ KCsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713217794; x=1713822594;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=17Hka02/D6unEqUvDCK1CtzaYVnp8NrK6oFYeijc4y4=;
- b=ODuRwhysKyyWrUJuqLYMkw4wPjS4FS/9dfHRarLbtMQXKDc6wWZ8m2NEAG/teghQWL
- aw5FiEpIYQn8NFDHr8ea9kKyZZS3WFzOvtsWTYoO1XOOYUpqTVfXewO8+4Kge/YuAv7K
- JGmAybIUfdJL9LNZrWWxX0yaUalNZQIuYdlzqkDkiJdPgTXpGhlx/3lbBjDRS6q5nbl5
- gH8VPtEg5LF+yICQi4svV1AXB9KCVOgQ9S02h2oeqcPk+XYhtkcxYy22BfXZrcFr/+D1
- iiBaSVuA+adkwtCI/cNGSAIoDK/3u2hv/scNi+ets53tygGGQMICiZrh5Hk7ge0n4mXN
- CHOA==
-X-Gm-Message-State: AOJu0YzJbU3L6oIEyPvFzpyomGwB6AURs/0c9yW6X2cA4KTmdOssbwvJ
- tmCvul5+vBMCJap8Oajshj7ubx2ugG8dN+eeB/nF0Micz75tXm5S
-X-Google-Smtp-Source: AGHT+IH244cDYG4NSAVB4r/xSKt6Y+FK5MaK+4J2cpw33WJwDAqmLRTQcd0c9GgQfmwxtgkf5krXIw==
-X-Received: by 2002:a05:600c:3b02:b0:417:d99f:1fef with SMTP id
- m2-20020a05600c3b0200b00417d99f1fefmr673899wms.3.1713217794420; 
- Mon, 15 Apr 2024 14:49:54 -0700 (PDT)
-Received: from jernej-laptop.localnet (86-58-6-171.dynamic.telemach.net.
- [86.58.6.171]) by smtp.gmail.com with ESMTPSA id
- ay8-20020a05600c1e0800b004181c91d1dcsm11624909wmb.18.2024.04.15.14.49.53
+ d=1e100.net; s=20230601; t=1713218243; x=1713823043;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lsUamYBgzYv0ZpQ2eQQVarM1rktN9R1+HRMOXeVgc04=;
+ b=viRSV+aeecUPOx18epGT7E3qxN/8756ZL12P5OZ+kKpniztQEridz2BLUoF5XytBjW
+ xyFw44Uxx24us4mGaRHEJRuAU9GavhK2NXnYitR9lRdu20CcoRpr2j784zTopzizWPxt
+ ai+PSy7/BXym95qndNFhY9Ji6RIH47WZJDBBpLFlPl2ht37Yj7F5AG6NkGAf+ujqHgjq
+ sOpXBKNbcPGSvVnpobC7dcvpJ7A0AFdPNjIgVFACQsz9KajooE5+IJ7n7nObBHLt6pzX
+ keUzt2e0n0sWuyXqB1NvDxrt3AQN0vSb8KfQmhieItIUvNUGQZh6QSmoIzHOMN4IxM1a
+ 7bOQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV12jOu3Dt2VBXHHm6PSBNVSzx+qWCN+D+flxHJOqnByd4qh3ay5UC4J4929tLExwqxZhkzHJFiQCYE8UbnomOOW69uLw==
+X-Gm-Message-State: AOJu0YxHEuNau+wZguaNILM71jBqGc4AnnkBmygZSdLc5KEQ5WoqiuTm
+ pkjSqT1dyt4ZPtAb+I1/X5ddxY+xDZVBqYikzXpUZXg2B8FiB63i
+X-Google-Smtp-Source: AGHT+IGlOySjungQTD58nZZSJEj5QVa0F3KlmyfRSJidepYmoTmQzUwZJ8puDZ4m/vYYb5I0xzZwaQ==
+X-Received: by 2002:a17:903:41cf:b0:1dd:85eb:b11 with SMTP id
+ u15-20020a17090341cf00b001dd85eb0b11mr14204568ple.1.1713218242661; 
+ Mon, 15 Apr 2024 14:57:22 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:8353:72e9:781e:a68e])
+ by smtp.gmail.com with ESMTPSA id
+ e20-20020a170902f1d400b001e3e09690c6sm8441128plc.199.2024.04.15.14.57.20
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Apr 2024 14:49:54 -0700 (PDT)
-From: Jernej =?utf-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: dazen@189.cn, Mikhail Kalashnikov <iuncuim@gmail.com>,
- Andre Przywara <andre.przywara@arm.com>
-Cc: u-boot@lists.denx.de, jagan@amarulasolutions.com, trini@konsulko.com
-Subject: Re: [PATCH] DRAM_SUN50I_H616_TRIM_SIZE
-Date: Mon, 15 Apr 2024 23:49:53 +0200
-Message-ID: <4338523.ejJDZkT8p0@jernej-laptop>
-In-Reply-To: <20240415012245.75ccaa5b@minigeek.lan>
-References: <20240413134352.46495-1-dazen@189.cn>
- <20240415012245.75ccaa5b@minigeek.lan>
+ Mon, 15 Apr 2024 14:57:21 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: festevam@gmail.com
+Cc: ye.li@nxp.com, m.othacehe@gmail.com, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@denx.de>
+Subject: [PATCH] imx93: Move SoC and lifeclycle information to debug level
+Date: Mon, 15 Apr 2024 18:57:17 -0300
+Message-Id: <20240415215717.3732484-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,118 +91,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne ponedeljek, 15. april 2024 ob 02:22:45 GMT +2 je Andre Przywara napisal(a):
-> On Sat, 13 Apr 2024 21:43:52 +0800
-> dazen@189.cn wrote:
-> 
-> Hi,
-> 
-> thanks for sending a patch!
-> 
-> > From: lalakii <dazen@189.cn>
-> > 
-> > Add "DRAM_SUN50I_H616_TRIM_SIZE" option for 1.5gb board.
-> > 
-> > Signed-off-by: lalakii <dazen@189.cn>
-> > ---
-> >  arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h |  1 +
-> >  arch/arm/mach-sunxi/Kconfig                        |  7 +++++++
-> >  arch/arm/mach-sunxi/dram_sun50i_h616.c             | 11 ++++++++++-
-> >  3 files changed, 18 insertions(+), 1 deletion(-)
-> > 
-> > diff --git a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-> > index a8fdda124a..2d2526fead 100644
-> > --- a/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-> > +++ b/arch/arm/include/asm/arch-sunxi/dram_sun50i_h616.h
-> > @@ -166,6 +166,7 @@ struct dram_config {
-> >  	u8 rows;
-> >  	u8 ranks;
-> >  	u8 bus_full_width;
-> > +	bool trim_size;
-> >  };
-> >  
-> >  static inline int ns_to_t(int nanoseconds)
-> > diff --git a/arch/arm/mach-sunxi/Kconfig b/arch/arm/mach-sunxi/Kconfig
-> > index fe89aec6b9..255a498557 100644
-> > --- a/arch/arm/mach-sunxi/Kconfig
-> > +++ b/arch/arm/mach-sunxi/Kconfig
-> > @@ -108,6 +108,13 @@ config DRAM_SUN50I_H616_TPR12
-> >  	default 0x0
-> >  	help
-> >  	  TPR12 value from vendor DRAM settings.
-> > +
-> > +config DRAM_SUN50I_H616_TRIM_SIZE
-> > +        bool "H616 DRAM trim size"
-> > +        help
-> > +          Due to unknown issue, some H616 based boards may need to trim
-> 
-> Well, it's not really an unknown issue, is it? The problem seems to be
-> that the auto detection code cannot deal with the topology of the 1.5GB
-> DRAM chips.
-> 
-> The general problem with this approach is that it would need to be
-> enabled at build time, which means the generated image will always trim
-> the DRAM size, and would not be universal for each board anymore.
-> 
-> So we need something to auto-detect this situation. Can you describe
-> the failure mode, without this patch? Does the DRAM init code hang or
-> give up already, or does this all pass, and then later on the board
-> hangs or crashes when we try access the missing DRAM area?
-> Maybe a small test access beyond 1.5GB would be able to check for this
-> particular case?
+From: Fabio Estevam <festevam@denx.de>
 
-Vendor DRAM check for 1.5 GB is pretty simple. First, it's checked if 2 GB
-of RAM is detected. If so, 3 different patterns are written to 0x70000000,
-0xa0000000 and 0x80000000 (in that order). Then, pattern from 0xa0000000 is
-read. If it doesn't match to pattern written to this location, 1.5 GB is
-assumed.
+The following information printed on every boot is not very
+helpful for the users:
 
-Best regards,
-Jernej
+SOC: 0xa0009300
+LC: 0x40040
 
-> 
-> Cheers,
-> Andre
-> 
-> 
-> > +          size a bit.
-> > +
-> >  endif
-> >  
-> >  config SUN6I_PRCM
-> > diff --git a/arch/arm/mach-sunxi/dram_sun50i_h616.c b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> > index 37c139e0ee..4598d60a57 100644
-> > --- a/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> > +++ b/arch/arm/mach-sunxi/dram_sun50i_h616.c
-> > @@ -1349,8 +1349,15 @@ static unsigned long mctl_calc_size(const struct dram_config *config)
-> >  {
-> >  	u8 width = config->bus_full_width ? 4 : 2;
-> >  
-> > +	unsigned long size;
-> > +
-> > +	size = (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
-> > +
-> > +	if (config->trim_size)
-> > +		size = (size * 3) / (width == 4 ? 4 : 8);
-> > +
-> >  	/* 8 banks */
-> > -	return (1ULL << (config->cols + config->rows + 3)) * width * config->ranks;
-> > +	return size;
-> >  }
-> >  
-> >  static const struct dram_para para = {
-> > @@ -1379,6 +1386,8 @@ unsigned long sunxi_dram_init(void)
-> >  	struct sunxi_prcm_reg *const prcm =
-> >  		(struct sunxi_prcm_reg *)SUNXI_PRCM_BASE;
-> >  	struct dram_config config;
-> > +	if (IS_ENABLED(CONFIG_DRAM_SUN50I_H616_TRIM_SIZE))
-> > +		config.trim_size = true;
-> >  	unsigned long size;
-> >  
-> >  	setbits_le32(&prcm->res_cal_ctrl, BIT(8));
-> 
-> 
+Move them to debug() level.
 
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+ board/freescale/imx93_evk/spl.c     | 4 ++--
+ board/phytec/phycore_imx93/spl.c    | 4 ++--
+ board/variscite/imx93_var_som/spl.c | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
 
-
+diff --git a/board/freescale/imx93_evk/spl.c b/board/freescale/imx93_evk/spl.c
+index 7331a20f94c8..6d5e110b2776 100644
+--- a/board/freescale/imx93_evk/spl.c
++++ b/board/freescale/imx93_evk/spl.c
+@@ -120,8 +120,8 @@ void board_init_f(ulong dummy)
+ 	if (ret) {
+ 		printf("Fail to init Sentinel API\n");
+ 	} else {
+-		printf("SOC: 0x%x\n", gd->arch.soc_rev);
+-		printf("LC: 0x%x\n", gd->arch.lifecycle);
++		debug("SOC: 0x%x\n", gd->arch.soc_rev);
++		debug("LC: 0x%x\n", gd->arch.lifecycle);
+ 	}
+ 
+ 	power_init_board();
+diff --git a/board/phytec/phycore_imx93/spl.c b/board/phytec/phycore_imx93/spl.c
+index f03bfee9ffa8..5efa38a14427 100644
+--- a/board/phytec/phycore_imx93/spl.c
++++ b/board/phytec/phycore_imx93/spl.c
+@@ -126,8 +126,8 @@ void board_init_f(ulong dummy)
+ 	if (ret) {
+ 		printf("Fail to init ELE API\n");
+ 	} else {
+-		printf("SOC: 0x%x\n", gd->arch.soc_rev);
+-		printf("LC: 0x%x\n", gd->arch.lifecycle);
++		debug("SOC: 0x%x\n", gd->arch.soc_rev);
++		debug("LC: 0x%x\n", gd->arch.lifecycle);
+ 	}
+ 
+ 	clock_init();
+diff --git a/board/variscite/imx93_var_som/spl.c b/board/variscite/imx93_var_som/spl.c
+index 71f346cf77bd..8852aea156b7 100644
+--- a/board/variscite/imx93_var_som/spl.c
++++ b/board/variscite/imx93_var_som/spl.c
+@@ -125,8 +125,8 @@ void board_init_f(ulong dummy)
+ 	if (ret) {
+ 		printf("Fail to init ELE API\n");
+ 	} else {
+-		printf("SOC: 0x%x\n", gd->arch.soc_rev);
+-		printf("LC: 0x%x\n", gd->arch.lifecycle);
++		debug("SOC: 0x%x\n", gd->arch.soc_rev);
++		debug("LC: 0x%x\n", gd->arch.lifecycle);
+ 	}
+ 	power_init_board();
+ 
+-- 
+2.34.1
 
