@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DC77C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 04:33:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03089C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 04:33:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FF568813F;
-	Mon, 15 Apr 2024 06:33:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C230388134;
+	Mon, 15 Apr 2024 06:33:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RFse5koq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="awbsvWIe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAC6488152; Mon, 15 Apr 2024 06:33:31 +0200 (CEST)
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
- [IPv6:2607:f8b0:4864:20::534])
+ id BC49887F4A; Mon, 15 Apr 2024 06:33:35 +0200 (CEST)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9E4287F4A
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 06:33:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 87B2888134
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 06:33:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pg1-x534.google.com with SMTP id
- 41be03b00d2f7-5ce9555d42eso1637416a12.2
- for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 21:33:29 -0700 (PDT)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1e3ca546d40so18057415ad.3
+ for <u-boot@lists.denx.de>; Sun, 14 Apr 2024 21:33:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713155608; x=1713760408; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1713155612; x=1713760412; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yVABp0aj/N65+2OS5Q6ckzzUCIj/U2v0s8DfimTFZzc=;
- b=RFse5koqI1FCC3q/Oit3S0ZViogKuWfpLa2plIBwNYd/+UWFktgrc/Tjk4koFSTN/c
- J7lRrOXAooaqtJ5U7AbMBaH3NuRaiUETm8HzO8CVikwPW/5fqC0OdCSiejWM/YmFjmv0
- jMsCsL1x9c8Slq1XC5+YKOj+gxjYTM2cVKmINVkQi2viDVCOOYyYFRLySMjqWBHXZjnz
- AxvnJS976qj3xocUkldwTXWWa58JBcaiLxj0K9O1c2/PkgIzxFLl9yUu2QZ7CopyV97V
- 5+VX7PJ4bJQc2xnEs099wkx1WsPWP3lFwGCUpkCMp5TgNE8AwhLvj8HQGWIQhn+Smn1z
- Ty4g==
+ bh=BC4xOW8KGJe8NtIGeEu95axmeUP7IBBHz2Tmc+SFuZM=;
+ b=awbsvWIecwbNZQ/QFIxyoZzeD0vWYvwRUeRBUdfkcPT8Xc01KhGGbm+Dt/U1EylCQ+
+ sZBFjTEWGNwp+w9ZXPiwdaayIFq6owV4aA6LqDfbzqBXI29NpxfiaIrfldyFpAFpBkiD
+ Yq+ke6ung/mvBC+ctK30R2T/QoqK5pGoZxYm/BtfsT89DO9So17GbptNybU/7nQ/VvkH
+ Y0zzbWUgNEpk4ypzDG6HxPOQWb33Yh/GQ++Qde5yohjl+nzrjt86zRyoiOT6JYQGo1/k
+ ZJ7Uh4202lyqBzn/UnonqLl9rYvft6kvStu+8VrhCicFlOwv5VP5QYEwtLqCogDHxMNB
+ K8Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713155608; x=1713760408;
+ d=1e100.net; s=20230601; t=1713155612; x=1713760412;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yVABp0aj/N65+2OS5Q6ckzzUCIj/U2v0s8DfimTFZzc=;
- b=a3lze9YLFe8/ERJOVGh1QEb6DW3WfX06f9R/dNMQMCDd4646CpwejQgXmZjg8w95id
- kR/JWOeCa56Fgs0CahSyanJov3B/NHrYTfBQV8fPUt/4RZpCmJPZ79iUeY5h9fd5J+Sd
- 1CCohXkxt53YgGJ9fhTUU9jkaxAnQe2DDNmPuSauWSD2nmm1KvutC2C6KYUSCfAVwRWo
- s6sIL2LHzApiv2cKlpdoiVcOSKwNLC9laNzNQXN3iEwrZvSoqKCneScwkcOm2NSyb6zH
- P7yYB8iLeb4Yma3uJH58B72tLCrZg7NWBddxfRQPHQ38hc17MsmJilMekSGUZO33ohTn
- X/xg==
-X-Gm-Message-State: AOJu0YwiRyNkJna1gbSLvxQbX5F2N7AZhXPz+7UeEtJ4+H9m+tLIwbFu
- iWsn0aOAi5TKV0FX++acBvHvSICtktz7pJT7IR+c5qRF+GCwiu7M1PuLiw==
-X-Google-Smtp-Source: AGHT+IFVcRXeIfRjD2LPFWmk6Nem4pepg4V6DO6m/RrNKx25tj2EUmG2gAKzFcaGBrIQRqgqyOaWWQ==
-X-Received: by 2002:a17:902:d4c7:b0:1e2:1805:52c5 with SMTP id
- o7-20020a170902d4c700b001e2180552c5mr11097499plg.16.1713155608087; 
- Sun, 14 Apr 2024 21:33:28 -0700 (PDT)
+ bh=BC4xOW8KGJe8NtIGeEu95axmeUP7IBBHz2Tmc+SFuZM=;
+ b=mpv8xlW5EKQRShOeXNFAUGBo7ha9/TsvcHJdSaXklj/+gb/pP+pf/PzT7nUZbggEE+
+ P3Agec2Iaxp0CX5KzERKqz4MxMkzlfZ5ODGfzrZiowNscoHq0q+wdB+qNNeMz7jm9MJU
+ FbcaPSQn1Uoviz+XJYB9HCOdhLLxBiQ/HP0Pcg0W+Q8vTWV7RYDYixyMXiEHZpcLhKWn
+ AdwdakiLA2mkFp0LmluNgkm/dfVaCk+y+ebG0qfXeJzam2nU6w7ryxL+xBKgQnyYM/xN
+ DU+LfsORKsb2giPbqBHB4ONCA6oxC6ZpcXJo5Bf8/ncVK1PnPVzsSuSNHuHMRU+ULSja
+ S2kQ==
+X-Gm-Message-State: AOJu0Yy75bXTIPKbdakLBpHRuE+CPN21ygeJDcGzKWc3PU2qrwb9KOo8
+ 2y2WDeQnA9X1iM3HstfMtK6o8dxfeOYWpnM0Xlkrr2FpZC3T/LfTMigV1g==
+X-Google-Smtp-Source: AGHT+IHDxkMN5Oe3kP2ysx83WLPYTqyhn54hkKcI94QcaFTpmsIdJCSCqmX1OZy3MRrK1peuGU/wbw==
+X-Received: by 2002:a17:902:aa85:b0:1e3:e246:2cd1 with SMTP id
+ d5-20020a170902aa8500b001e3e2462cd1mr7002656plr.62.1713155611983; 
+ Sun, 14 Apr 2024 21:33:31 -0700 (PDT)
 Received: from ISCN5CG2520RPD.infineon.com (KD106168128197.ppp-bb.dion.ne.jp.
  [106.168.128.197]) by smtp.gmail.com with ESMTPSA id
- g13-20020a170902d5cd00b001dd88a5dc47sm6902682plh.290.2024.04.14.21.33.24
+ g13-20020a170902d5cd00b001dd88a5dc47sm6902682plh.290.2024.04.14.21.33.28
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 14 Apr 2024 21:33:27 -0700 (PDT)
+ Sun, 14 Apr 2024 21:33:31 -0700 (PDT)
 From: tkuw584924@gmail.com
 X-Google-Original-From: Takahiro.Kuwano@infineon.com
 To: u-boot@lists.denx.de
 Cc: jagan@amarulasolutions.com, vigneshr@ti.com, tudor.ambarus@linaro.org,
  pratyush@kernel.org, d-gole@ti.com, tkuw584924@gmail.com,
  Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [PATCH 2/4] mtd: spi-nor: Allow flashes to specify MTD writesize
-Date: Mon, 15 Apr 2024 13:33:09 +0900
-Message-Id: <16e3ddf31a406f6aa4dd8e8267ef5d2a329678ea.1713154967.git.Takahiro.Kuwano@infineon.com>
+Subject: [PATCH 3/4] mtd: spi-nor-core: Rework default_init() to take
+ flash_parameter
+Date: Mon, 15 Apr 2024 13:33:10 +0900
+Message-Id: <9db9fb39e655b514c21952e0a5005572510ad3ec.1713154967.git.Takahiro.Kuwano@infineon.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1713154967.git.Takahiro.Kuwano@infineon.com>
 References: <cover.1713154967.git.Takahiro.Kuwano@infineon.com>
@@ -96,60 +97,112 @@ X-Virus-Status: Clean
 
 From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-Some flashes like the Infineon SEMPER NOR flash family use ECC. Under
-this ECC scheme, multi-pass writes to an ECC block is not allowed.
-In other words, once data is programmed to an ECC block, it can't be
-programmed again without erasing it first.
-
-Upper layers like file systems need to be given this information so they
-do not cause error conditions on the flash by attempting multi-pass
-programming. This can be done by setting 'writesize' in 'struct
-mtd_info'.
-
-Set the default to 1 but allow flashes to modify it in fixup hooks. If
-more flashes show up with this constraint in the future it might be
-worth it to add it to 'struct flash_info', but for now increasing its
-size is not worth it.
+default_init() fixup hook should be used to initialize flash parameters
+when its information is not provided in SFDP. To support that case, it
+needs to take flash_parameter structure like as other hooks.
 
 Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 ---
- drivers/mtd/spi/spi-nor-core.c | 3 ++-
- include/linux/mtd/spi-nor.h    | 1 +
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ drivers/mtd/spi/spi-nor-core.c | 28 ++++++++++++++++++----------
+ 1 file changed, 18 insertions(+), 10 deletions(-)
 
 diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index f86003ca8c..1bfef6797f 100644
+index 1bfef6797f..8f371a5213 100644
 --- a/drivers/mtd/spi/spi-nor-core.c
 +++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -2789,6 +2789,7 @@ static int spi_nor_init_params(struct spi_nor *nor,
- 	memset(params, 0, sizeof(*params));
+@@ -203,7 +203,8 @@ struct sfdp_bfpt {
+  * table is broken or not available.
+  */
+ struct spi_nor_fixups {
+-	void (*default_init)(struct spi_nor *nor);
++	void (*default_init)(struct spi_nor *nor,
++			     struct spi_nor_flash_parameter *params);
+ 	int (*post_bfpt)(struct spi_nor *nor,
+ 			 const struct sfdp_parameter_header *bfpt_header,
+ 			 const struct sfdp_bfpt *bfpt,
+@@ -2775,10 +2776,11 @@ static void spi_nor_post_sfdp_fixups(struct spi_nor *nor,
+ 		nor->fixups->post_sfdp(nor, params);
+ }
  
- 	/* Set SPI NOR sizes. */
-+	params->writesize = 1;
- 	params->size = info->sector_size * info->n_sectors;
- 	params->page_size = info->page_size;
+-static void spi_nor_default_init_fixups(struct spi_nor *nor)
++static void spi_nor_default_init_fixups(struct spi_nor *nor,
++					struct spi_nor_flash_parameter *params)
+ {
+ 	if (nor->fixups && nor->fixups->default_init)
+-		nor->fixups->default_init(nor);
++		nor->fixups->default_init(nor, params);
+ }
  
-@@ -4078,7 +4079,7 @@ int spi_nor_scan(struct spi_nor *nor)
- 	mtd->dev = nor->dev;
- 	mtd->priv = nor;
- 	mtd->type = MTD_NORFLASH;
--	mtd->writesize = 1;
-+	mtd->writesize = params.writesize;
- 	mtd->flags = MTD_CAP_NORFLASH;
- 	mtd->size = params.size;
- 	mtd->_erase = spi_nor_erase;
-diff --git a/include/linux/mtd/spi-nor.h b/include/linux/mtd/spi-nor.h
-index d1dbf3eadb..0d37a806c4 100644
---- a/include/linux/mtd/spi-nor.h
-+++ b/include/linux/mtd/spi-nor.h
-@@ -436,6 +436,7 @@ enum spi_nor_pp_command_index {
+ static int spi_nor_init_params(struct spi_nor *nor,
+@@ -2885,7 +2887,7 @@ static int spi_nor_init_params(struct spi_nor *nor,
+ 		}
+ 	}
  
- struct spi_nor_flash_parameter {
- 	u64				size;
-+	u32				writesize;
- 	u32				page_size;
- 	u8				rdsr_dummy;
- 	u8				rdsr_addr_nbytes;
+-	spi_nor_default_init_fixups(nor);
++	spi_nor_default_init_fixups(nor, params);
+ 
+ 	/* Override the parameters with data read from SFDP tables. */
+ 	nor->addr_width = 0;
+@@ -3328,7 +3330,8 @@ static int s25fs_s_setup(struct spi_nor *nor, const struct flash_info *info,
+ 	return spi_nor_default_setup(nor, info, params);
+ }
+ 
+-static void s25fs_s_default_init(struct spi_nor *nor)
++static void s25fs_s_default_init(struct spi_nor *nor,
++				 struct spi_nor_flash_parameter *params)
+ {
+ 	nor->setup = s25fs_s_setup;
+ }
+@@ -3452,7 +3455,8 @@ static int s25_s28_setup(struct spi_nor *nor, const struct flash_info *info,
+ 	return spi_nor_default_setup(nor, info, params);
+ }
+ 
+-static void s25_default_init(struct spi_nor *nor)
++static void s25_default_init(struct spi_nor *nor,
++			     struct spi_nor_flash_parameter *params)
+ {
+ 	nor->setup = s25_s28_setup;
+ }
+@@ -3544,7 +3548,8 @@ static int s25fl256l_setup(struct spi_nor *nor, const struct flash_info *info,
+ 	return -ENOTSUPP; /* Bank Address Register is not supported */
+ }
+ 
+-static void s25fl256l_default_init(struct spi_nor *nor)
++static void s25fl256l_default_init(struct spi_nor *nor,
++				   struct spi_nor_flash_parameter *params)
+ {
+ 	nor->setup = s25fl256l_setup;
+ }
+@@ -3613,7 +3618,8 @@ static int spi_nor_cypress_octal_dtr_enable(struct spi_nor *nor)
+ 	return 0;
+ }
+ 
+-static void s28hx_t_default_init(struct spi_nor *nor)
++static void s28hx_t_default_init(struct spi_nor *nor,
++				 struct spi_nor_flash_parameter *params)
+ {
+ 	nor->octal_dtr_enable = spi_nor_cypress_octal_dtr_enable;
+ 	nor->setup = s25_s28_setup;
+@@ -3705,7 +3711,8 @@ static int spi_nor_micron_octal_dtr_enable(struct spi_nor *nor)
+ 	return 0;
+ }
+ 
+-static void mt35xu512aba_default_init(struct spi_nor *nor)
++static void mt35xu512aba_default_init(struct spi_nor *nor,
++				      struct spi_nor_flash_parameter *params)
+ {
+ 	nor->octal_dtr_enable = spi_nor_micron_octal_dtr_enable;
+ }
+@@ -3795,7 +3802,8 @@ static int spi_nor_macronix_octal_dtr_enable(struct spi_nor *nor)
+ 	return 0;
+ }
+ 
+-static void macronix_octal_default_init(struct spi_nor *nor)
++static void macronix_octal_default_init(struct spi_nor *nor,
++					struct spi_nor_flash_parameter *params)
+ {
+ 	nor->octal_dtr_enable = spi_nor_macronix_octal_dtr_enable;
+ }
 -- 
 2.34.1
 
