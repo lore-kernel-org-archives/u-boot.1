@@ -4,62 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8803EC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 21:28:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83AF9C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 21:28:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 407F588199;
+	by phobos.denx.de (Postfix) with ESMTP id A1BA6881FD;
 	Mon, 15 Apr 2024 23:27:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Fh/JUEHK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="D4NOFLUu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04AD888145; Mon, 15 Apr 2024 23:27:54 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 48BA188145; Mon, 15 Apr 2024 23:27:54 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B943288176
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 23:27:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF7E58819D
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 23:27:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43FLRmYw001233;
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43FLRmBR030464;
  Mon, 15 Apr 2024 16:27:48 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1713216468;
- bh=4+4QKCsepa4nPi9XjtPfjQbWvOGkmYKKzEqKKEQcSjs=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=Fh/JUEHKAvWXF5DPoh0RfCcbWUOm2Eg3+wYlySzV/KLvaHe1NAUED4+3O2GfFR4vk
- MNL6ALIDGtQibd+KRwcHo6KNv2s+1dOwQWlQqDdqVJrbjuyPr2OmIGzsEAwA/9moOT
- O0IP89J+zcYCr1UzGt9XTKo8KvqPXx8nmyRIWlck=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43FLRmuu016816
+ bh=mExe2YRcPgA0lXUNOuzn+em2PEtdvRCYdh7IArKJZ9U=;
+ h=From:To:CC:Subject:Date;
+ b=D4NOFLUuQvQ3nl/oGRfdO7Z60BXfgk3LJ2Y91drwMDybcVwT+z2z/43q40L5QwU8A
+ J4RwB8xNHBi6814nsysTW9aUb4ivBBxj6g5k7P+WNUMPNxXmDOx8tT9QX3MuZNx5hL
+ CXxYD2qwXeflapjxLlC7djDZiIikWy1unQwtjPaQ=
+Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43FLRmSJ017638
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 15 Apr 2024 16:27:48 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE113.ent.ti.com
+ (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 15
- Apr 2024 16:27:48 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 16:27:47 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 15 Apr 2024 16:27:48 -0500
+ Frontend Transport; Mon, 15 Apr 2024 16:27:47 -0500
 Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43FLRlu9070400;
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43FLRlu4070400;
  Mon, 15 Apr 2024 16:27:47 -0500
 From: Judith Mendez <jm@ti.com>
 To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom
  Rini <trini@konsulko.com>
 CC: Nitin Yadav <n-yadav@ti.com>, Simon Glass <sjg@chromium.org>,
  <u-boot@lists.denx.de>
-Subject: [PATCH 5/5] mmc: am654_sdhci: Fix ITAPDLY for HS400 timing
-Date: Mon, 15 Apr 2024 16:27:47 -0500
-Message-ID: <20240415212747.2678974-6-jm@ti.com>
+Subject: [PATCH 0/5] Fix MMC tuning algorithm
+Date: Mon, 15 Apr 2024 16:27:42 -0500
+Message-ID: <20240415212747.2678974-1-jm@ti.com>
 X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240415212747.2678974-1-jm@ti.com>
-References: <20240415212747.2678974-1-jm@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -80,45 +78,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At HS400 mode the ITAPDLY value is that from High Speed mode
-which is incorrect and may cause boot failures.
+The following patch series includes a MMC tuning algorithm
+fix according to the following published paper [0].
 
-The ITAPDLY for HS400 speed mode should be the same as ITAPDLY
-as HS200 timing after tuning is executed. Add the functionality
-to save ITAPDLY from HS200 tuning and save as HS400 ITAPDLY.
+This seris also includes fixes for OTAP/ITAP delay values
+in j721e_4bit_sdhci_set_ios_post and for HS400 mode.
 
-Fixes: c964447ea3d6 ("mmc: am654_sdhci: Add support for input tap delay")
-Signed-off-by: Judith Mendez <jm@ti.com>
----
- drivers/mmc/am654_sdhci.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+For DDR52 mode, also set ENDLL=1 and call am654_sdhci_setup_dll()
+instead of am654_sdhci_setup_delay_chain() according to
+device datasheet[1].
 
-diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
-index dee56dfdbaa..ce3813ea3d0 100644
---- a/drivers/mmc/am654_sdhci.c
-+++ b/drivers/mmc/am654_sdhci.c
-@@ -293,6 +293,11 @@ static int am654_sdhci_set_ios_post(struct sdhci_host *host)
- 			return ret;
- 
- 		plat->dll_enable = true;
-+		if (mode == MMC_HS_400) {
-+			plat->itap_del_ena[mode] = 0x1;
-+			plat->itap_del_sel[mode] = plat->itap_del_sel[mode - 1];
-+		}
-+
- 		am654_sdhci_write_itapdly(plat, plat->itap_del_sel[mode],
- 					  plat->itap_del_ena[mode]);
- 	} else {
-@@ -484,6 +489,9 @@ static int am654_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
- 	itap = am654_sdhci_calculate_itap(dev, fail_window, fail_index,
- 					  plat->dll_enable);
- 
-+	/* Save ITAPDLY */
-+	plat->itap_del_sel[mode] = itap;
-+
- 	am654_sdhci_write_itapdly(plat, itap, plat->itap_del_ena[mode]);
- 
- 	return 0;
+[0] https://www.ti.com/lit/an/spract9/spract9.pdf
+[1] https://www.ti.com/lit/ds/symlink/am62p.pdf
+
+Judith Mendez (4):
+  mmc: am654_sdhci: Add tuning algorithm for delay chain
+  mmc: am654_sdhci: Add itap_del_ena[] to store itapdlyena bit
+  mmc: am654_sdhci: Set ENDLL=1 for DDR52 mode
+  mmc: am654_sdhci: Fix ITAPDLY for HS400 timing
+
+Nitin Yadav (1):
+  mmc: am654_sdhci: Fix OTAP/ITAP delay values
+
+ drivers/mmc/am654_sdhci.c | 170 +++++++++++++++++++++++++++++++-------
+ 1 file changed, 138 insertions(+), 32 deletions(-)
+
+
+base-commit: 27795dd717dadc73091e1b4d6c50952b93aaa819
 -- 
 2.43.2
 
