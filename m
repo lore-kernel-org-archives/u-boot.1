@@ -4,133 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81B06C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 12:15:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA644C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 12:22:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A613A8822C;
-	Mon, 15 Apr 2024 14:14:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 30C7D87DDF;
+	Mon, 15 Apr 2024 14:22:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="edVzkCyV";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="pVWnQdET";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0050388190; Mon, 15 Apr 2024 13:35:30 +0200 (CEST)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20621.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:7e88::621])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id F30378801F; Mon, 15 Apr 2024 14:22:37 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4871987EDD
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 13:35:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E949B87A0E
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 14:22:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=hPoRHN8k3TIcqPbIdLwd5SYmxwhu21QGAenPLOYVe9FfyECtF3JOh56PeiT0EMg2CaaS5Dso5ozRQQJToHXUWaoafRzAHw2lQGu+H2p568/VImLSEbfleMYQOL1nLvUuH8sCEGLY2tHHE3oPn0P8KMcZcv0S/+aJOCBswqit0eehUlGhmmPrusn0Sp9LI5YzhAp+InqaLkAwrPvloztrS/vd7uffAVDurnuW5iQ6L0Dsj32y0ZnJnUUaCYeKboa44MGoU5bD7zrafHOplY2jD+Ax92wRUteuoyBdIGpmhJrx1XFd/1WgJY/GxTKhzjSZqgDR4g4PLPN4/wf8VaK3Ug==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZJ7QV6Xs89ngDI0WlAcxjkb3ByNWFKdq6GBNYgT1UO4=;
- b=UwSY5X7PztWxjlHM5Fz2nCv+kWLwE7RbNzq2FuoiG7e/KUHSBL8Ns1WMVHx2F/SewIJZHBJg2pSpuhAWjqBs/DwuYkOWSsPiWAH9C81EK5Q02XPmZmrdncIS39oN2UNn+QnNuPxiWjzvSXZmJ6VuSowaE9QFUpr80EfBEor5YNv+LbQYkvqKUuj7y9TDzjkByJi26YwIMFDxaAkD1/odvAgmdMy1Sq1Enj2IUaSVs/JaD2hczI2S3LV85H0oB+5DKUTzfoiVqtH7LGBuJrI+PvkrBI0c7YOxVFfetjVKBE0AUbk7T47jAa1JRYhpwahPsfKiLMvtPXjv18JB1YGlcA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZJ7QV6Xs89ngDI0WlAcxjkb3ByNWFKdq6GBNYgT1UO4=;
- b=edVzkCyVwuVIXizL9FdWOictt11GlSKoCsjSZwAmfOwwgDZkCsG6+lEMGKun7WU44Vt63iR/8rliKIjGlNX3c9uP2Bc2QZREHVlSEEPA6lepck+FzxFmzeIuA3u42wLs5Hg3J5aCJ46arxy53FlSy75Gxjdk23rGbgZe0fPr3UQ=
-Received: from BN1PR12CA0014.namprd12.prod.outlook.com (2603:10b6:408:e1::19)
- by PH0PR12MB8032.namprd12.prod.outlook.com (2603:10b6:510:26f::15)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.50; Mon, 15 Apr
- 2024 11:35:23 +0000
-Received: from BN3PEPF0000B071.namprd04.prod.outlook.com
- (2603:10b6:408:e1:cafe::86) by BN1PR12CA0014.outlook.office365.com
- (2603:10b6:408:e1::19) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.33 via Frontend
- Transport; Mon, 15 Apr 2024 11:35:23 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- BN3PEPF0000B071.mail.protection.outlook.com (10.167.243.116) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7452.22 via Frontend Transport; Mon, 15 Apr 2024 11:35:22 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Mon, 15 Apr
- 2024 06:35:21 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: AKASHI Takahiro <takahiro.akashi@linaro.org>, Abdellatif El Khlifi
- <abdellatif.elkhlifi@arm.com>, Andre Przywara <andre.przywara@arm.com>,
- Angelo Dureghello <angelo@kernel-space.org>, Bin Meng <bmeng@tinylab.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Elon Zhang
- <zhangzj@rock-chips.com>, Eugen Hristev <eugen.hristev@collabora.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, "Jagan
- Teki" <jagan@amarulasolutions.com>, Jagan Teki <jagan@edgeble.ai>, John Clark
- <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, Joshua Riek
- <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>, Lukasz Majewski
- <lukma@denx.de>, Manorit Chawdhry <m-chawdhry@ti.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Masahisa Kojima
- <kojima.masahisa@socionext.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Oleksandr Suvorov
- <oleksandr.suvorov@foundries.io>, Peter Robinson <pbrobinson@gmail.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, Sean Anderson
- <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>, Sean Edmond
- <seanedmond@microsoft.com>, Simon Glass <sjg@chromium.org>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>, "Svyatoslav
- Ryhel" <clamor95@gmail.com>, Tim Lunn <tim@feathertop.org>, Tom Rini
- <trini@konsulko.com>, Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Vignesh R <vigneshr@ti.com>, Yanhong Wang <yanhong.wang@starfivetech.com>
-Subject: [PATCH 0/4] Kconfig: some cleanups
-Date: Mon, 15 Apr 2024 13:35:06 +0200
-Message-ID: <cover.1713180904.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.44.0
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1713183731; x=1713788531; i=xypron.glpk@gmx.de;
+ bh=G3n3aRrDG6cVzM1YtFY62xBui6vb8XD79ufDdCehI94=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=pVWnQdET+OvmEzUHub+iGVyvULVXpaxou1Do0IddKP/ndu1Hrd9WyZs+UTFdtqK0
+ 7i4pAlAGFfrMtKDzwbY7T1DmQ+ZE+N2Ee5T8JxzVDlFr10Ufs1fsbUhKkxYtgpKH5
+ O02Lh7xUi1AC/86v22eiwpZYkS1hkp15TQsD+FlBit2eDF1R9hEYKGgQkrqnK2ieD
+ 6tD4tUGVQAgxaqir9W9aBh75WNLEwygIKO0Br/fPCewU2fH8r5AwH9khZLrcnsulH
+ WA81RR3/4LmBIFK1oFsbeV2cqosdJJTBMF6alwBGx8DannKgVgAnK8MRzelLE7KFx
+ nm84Cie8MbD4JKbN+g==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MEm6L-1ryp6u2iN9-00GLPC; Mon, 15
+ Apr 2024 14:22:11 +0200
+Message-ID: <6b45c003-f6a0-4ee4-a01f-e5acc81d68a9@gmx.de>
+Date: Mon, 15 Apr 2024 14:22:02 +0200
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7142; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=ZEXZGiz1Q2/IbxsMMrzMuIIwZmTn7uvskcuiQ6jO9gw=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhjRZgTcn5+6e2bjknE3putmXIr7vvCriu1vpdpV3AtOjF
- /ai/UkFHbEsDIJMDLJiiizSNlfO7K2cMUX44mE5mDmsTCBDGLg4BWAitdsY5tmr79nUlb2yIORO
- hOXck5lePMfcmRjmexRJOW/ZqZt+SD4r6KLcVcGfDxbPAQA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/4] Kconfig: Make all Kconfig encoding ascii
+To: Michal Simek <michal.simek@amd.com>
+Cc: Andre Przywara <andre.przywara@arm.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Elon Zhang <zhangzj@rock-chips.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Jagan Teki <jagan@amarulasolutions.com>, John Clark <inindev@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Joshua Riek <jjriek@verizon.net>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tim Lunn <tim@feathertop.org>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Vignesh R <vigneshr@ti.com>, u-boot@lists.denx.de, git@xilinx.com
+References: <cover.1713180904.git.michal.simek@amd.com>
+ <55ab78c9f2781b31278395f9e0066041f97b00f6.1713180904.git.michal.simek@amd.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <55ab78c9f2781b31278395f9e0066041f97b00f6.1713180904.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B071:EE_|PH0PR12MB8032:EE_
-X-MS-Office365-Filtering-Correlation-Id: 57b750f9-e4bd-45c5-b7d5-08dc5d402311
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 8zDc/yZgvOR37BZeDCWe/MYOQ6dKb4LGVZ4fe3edlWTn5/0Yw2ImRLeN8RuOQgdmC4YCAoMCNdWajPY9oluG5d3z24dC+8/127M3ZtsjWuWFTeCF9picplT4QUrp7hNt4twR/ZDMUeEJ8Mr1tnPAMQEjQmmg6mratZTN/6IfvX9bhW4YJoet72LyXHZ0S+jkZJ5RUWsFvW8WQD14fLlYpy/7v65JkVwrt0iwSgCGfzLfKfbf0u3c+FtpP1o6uWPDEKsS8gC8ofqkxz2n0gxKwQcYkFbLHXdP2iFkBV4ichbl+iFadeUenMDj0HEIiRWLx1jdPZb8ARoRgkSmRVyDJmD7PCcKHnI8Mpgy8Qq+jHpWDK9C+0fYjSszyP0JpN5hkrxziu9E8uD8K8n0Ur5M56zIwBQyUIUBPzy1kkXdjcWhDoRDy7mtf6/g6gKrD7h3vjLULQD/blLD0uc4jMlOHbleJIupWYrIfMKwa2J+0iDEyEIsdvvfOwZEup39dKWDlInpyFe2iQZrVE/rLCGofgxbybbBiG1WoVRZToNtzUTGXQdBmRS8CSVixc65nJ+kVQRitZZVrt2DMsJPaNtaz5eM8c2UkHZC3ePcdxGqyHWdjYX6ou5L9cTh+dGwObIp7LHcVXcv9psA/feHvzQdyn1JljAA+4jm+Z9upH96jAmit6d0WCGGyzoQtkiDXtuV+rsJXgCjUwrsH21xRi0DtNqvWrL6/FhKMmpy6BgSvct4890CQVBNxMYTEHDTbQuX
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(82310400014)(376005)(1800799015)(7416005)(36860700004); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Apr 2024 11:35:22.6640 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 57b750f9-e4bd-45c5-b7d5-08dc5d402311
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF0000B071.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB8032
-X-Mailman-Approved-At: Mon, 15 Apr 2024 14:14:08 +0200
+X-Provags-ID: V03:K1:ta7Uz2QS5896mh3MitpTBoZ/BdgpyI6AAYkNKZjg3rb9LFVmGwL
+ oFOT8B4h+qDH0Z1Xr2vv/1BXg6B4Dq93/N5S8N74dFbh2ncRzmDQKI2qVps+VvbDG7waZeR
+ XtBWG2ip6RRsqnhTE/hUE0+Hh8Yg3DDij2IuewzdDMXExZljqTr5PTKvKGHpqmMcMcBFQPT
+ LvENADJCJAllPRySC275A==
+UI-OutboundReport: notjunk:1;M01:P0:AV5lRK3A+as=;XODdhQG5B1eoL1h3QzO21Y6ZrBJ
+ HMZK3fBJgJR78dixxGePJCyNDW3FKLIVH/x+SyQAITljEy76NAx8kUEHp/PK5kC8blb7QQk9q
+ d3IcifTXEpgyNpn9+m3CcfC6sDYZh99TM3/BRThhXBkpmDeUQ7qCB7Ei8FbAQYIstWB0/HKca
+ sqGsBbl14EUrxdlIdEkJWmyXmdQ+KI4L9hsm4Uz7H1SGkdDAxoYJ2fbdwLGcHhQZKEGkNm6zo
+ uMIKoJq8lL9alREF6xSTGkkLndkiUSjY3Wy9ydkL5oCuRmcEudkSgjYtiRZD1ilgyRAIADniX
+ lbEDDNvSAYD+lDyoVVgOgLIQxHyqt54DsscX1NZyOD6xuboOCHlVGiv+5/zGriiU07dIUGu7w
+ tLWpMgr3T5POx8GQZ8RmictrL99cXMZufj7snf2JXNRJPdrDQqMsyOQkRqMf5j1xB2fsHyImV
+ qMi3rBwnndNeVBCKEXImdH7HoXBslMR2RvT/UWCQYr+qxmdDtj39XiQKayxfsTNWF9Z5Kqvde
+ sCSdS9lQ1jpJSninnDPWYb3wCfcHrN5o0P15cl2zOUzTl34+uA4VbVkoi8HfMtf3THL6RHi67
+ obNnGdcAS3M4moxi+V8ERkCXAg5n6INBOiOgv9hwwMWITAJ/Iwyd1hsteW6DXz/ZhDqD9wsTc
+ Bq5geneEQl1WJruO3x8t7qfvaExkrYl3hAzGfxbBUjjkjByNQb63MagqioWHoZIVwclfH15kV
+ RoYsdo4Jxr2w7C7l/hHlYm11r+JLR0XqqHSaxpO8hb5pwE0JaIFuyu5naWAF7oSe0RyIugYju
+ 3GF6OBtQCwDm6HYIT6oPJWJbd7NNY+CcO/f2pRva0XDDE=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,135 +102,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I looked as cleaning up some dependencies and I found that qconfig is
-reporting some issues. This series is fixing some of them. But there are
-still some other pending. That's why please go and fix them if they are
-related to your board.
+On 15.04.24 13:35, Michal Simek wrote:
+> Some of Kconfigs are using utf-8 encoding because of used chars. Convert
+> all of them to ascii enconging.
+>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+>
+> There are other files which are using utf-8 enconding and pretty much I
+> think we should convert all of them because there is no reason to use ut=
+f-8
+> encoding.
 
-Thanks,
-Michal
+Hello Michal,
 
-drivers/pinctrl/intel/Kconfig:12: warning: style: quotes recommended around=
- 'n' in 'bool n'
-warning: the choice symbol CPU_ARCEM6 (defined at arch/arc/Kconfig:46) is s=
-elected by the following symbols, but select/imply has no effect on choice =
-symbols
- - TARGET_EMSDP (defined at arch/arc/Kconfig:173)
- - TARGET_IOT_DEVKIT (defined at arch/arc/Kconfig:180)
-warning: the choice symbol ARC_MMU_ABSENT (defined at arch/arc/Kconfig:77) =
-is selected by the following symbols, but select/imply has no effect on cho=
-ice symbols
- - CPU_ARCEM6 (defined at arch/arc/Kconfig:46)
- - CPU_ARCHS36 (defined at arch/arc/Kconfig:53)
-warning: the choice symbol ARC_MMU_V2 (defined at arch/arc/Kconfig:82) is s=
-elected by the following symbols, but select/imply has no effect on choice =
-symbols
- - CPU_ARC750D (defined at arch/arc/Kconfig:32)
-warning: the choice symbol ARC_MMU_V3 (defined at arch/arc/Kconfig:89) is s=
-elected by the following symbols, but select/imply has no effect on choice =
-symbols
- - CPU_ARC770D (defined at arch/arc/Kconfig:39)
-warning: the choice symbol ARC_MMU_V4 (defined at arch/arc/Kconfig:97) is s=
-elected by the following symbols, but select/imply has no effect on choice =
-symbols
- - CPU_ARCHS38 (defined at arch/arc/Kconfig:60)
-warning: the choice symbol FSP_VERSION2 (defined at arch/x86/Kconfig:396) i=
-s selected by the following symbols, but select/imply has no effect on choi=
-ce symbols
- - INTEL_APOLLOLAKE (defined at arch/x86/cpu/apollolake/Kconfig:6)
-warning: the choice symbol SPL_RISCV_MMODE (defined at arch/riscv/Kconfig:1=
-84) is implied by the following symbols, but select/imply has no effect on =
-choice symbols
- - BOARD_SPECIFIC_OPTIONS (defined at board/bsh/imx8mn_smm_s2/Kconfig:21, b=
-oard/bsh/imx8mn_smm_s2/Kconfig:41, board/engicam/px30_core/Kconfig:12, boar=
-d/theobroma-systems/ringneck_px30/Kconfig:12, board/radxa/rockpi4-rk3399/Kc=
-onfig:12, board/theobroma-systems/puma_rk3399/Kconfig:12, board/theobroma-s=
-ystems/jaguar_rk3588/Kconfig:12, board/edgeble/neural-compute-module-2/Kcon=
-fig:12, board/itead/sonoff-ihost/Kconfig:12, board/emulation/qemu-arm/Kconf=
-ig:6, board/emulation/qemu-arm/Kconfig:22, board/freescale/ls1012aqds/Kconf=
-ig:27, board/freescale/ls1012ardb/Kconfig:27, board/freescale/ls1012ardb/Kc=
-onfig:76, board/freescale/ls1012afrdm/Kconfig:27, board/advantech/som-db580=
-0-som-6867/Kconfig:18, board/congatec/conga-qeval20-qa3-e3845/Kconfig:17, b=
-oard/coreboot/coreboot/Kconfig:15, board/dfi/dfi-bt700/Kconfig:17, board/ef=
-i/efi-x86_app/Kconfig:12, board/efi/efi-x86_payload/Kconfig:15, board/emula=
-tion/qemu-x86/Kconfig:16, board/google/chromebook_coral/Kconfig:18, board/g=
-oogle/chromebook_link/Kconfig:19, board/google/chromebox_panther/Kconfig:19=
-, board/google/chromebook_samus/Kconfig:19, board/intel/bayleybay/Kconfig:1=
-5, board/intel/cherryhill/Kconfig:15, board/intel/cougarcanyon2/Kconfig:15,=
- board/intel/crownbay/Kconfig:15, board/intel/edison/Kconfig:24, board/inte=
-l/galileo/Kconfig:15, board/intel/minnowmax/Kconfig:15, board/intel/slimboo=
-tloader/Kconfig:19, board/AndesTech/ae350/Kconfig:34, board/emulation/qemu-=
-riscv/Kconfig:32, board/microchip/mpfs_icicle/Kconfig:19, board/openpiton/r=
-iscv64/Kconfig:26, board/sifive/unleashed/Kconfig:26, board/sifive/unmatche=
-d/Kconfig:26, board/sipeed/maix/Kconfig:30, board/sophgo/milkv_duo/Kconfig:=
-24, board/starfive/visionfive2/Kconfig:26, board/thead/th1520_lpi4a/Kconfig=
-:30, board/xilinx/mbv/Kconfig:22, board/keymile/km83xx/Kconfig:34, board/ke=
-ymile/km83xx/Kconfig:54, board/keymile/km83xx/Kconfig:74, board/keymile/km8=
-3xx/Kconfig:93, board/keymile/km83xx/Kconfig:112, board/keymile/km83xx/Kcon=
-fig:131, board/keymile/km83xx/Kconfig:150, board/keymile/kmcent2/Kconfig:12=
-, board/keymile/pg-wcom-ls102xa/Kconfig:15, board/keymile/pg-wcom-ls102xa/K=
-config:35)
-warning: the choice symbol SYS_BIG_ENDIAN (defined at arch/Kconfig:528) is =
-selected by the following symbols, but select/imply has no effect on choice=
- symbols
- - ARC (defined at arch/Kconfig:53)
-warning: the choice symbol SYS_LITTLE_ENDIAN (defined at arch/Kconfig:532) =
-is selected by the following symbols, but select/imply has no effect on cho=
-ice symbols
- - ARC (defined at arch/Kconfig:53)
-warning: the choice symbol OF_SEPARATE (defined at dts/Kconfig:108) is sele=
-cted by the following symbols, but select/imply has no effect on choice sym=
-bols
- - ARCH_MVEBU (defined at arch/arm/Kconfig:620)
- - ARCH_SNAPDRAGON (defined at arch/arm/Kconfig:1074)
- - ARCH_SUNXI (defined at arch/arm/Kconfig:1143)
- - ARCH_S5P4418 (defined at arch/arm/mach-nexell/Kconfig:3)
-warning: the choice symbol MULTI_DTB_FIT_USER_DEFINED_AREA (defined at dts/=
-Kconfig:242) is implied by the following symbols, but select/imply has no e=
-ffect on choice symbols
- - RZG2L (defined at arch/arm/mach-renesas/Kconfig:70)
- - TARGET_BEACON_RZG2M (defined at arch/arm/mach-renesas/Kconfig.rcar3:82)
- - TARGET_HIHOPE_RZG2 (defined at arch/arm/mach-renesas/Kconfig.rcar3:130)
- - TARGET_SALVATOR_X (defined at arch/arm/mach-renesas/Kconfig.rcar3:149)
- - TARGET_ULCB (defined at arch/arm/mach-renesas/Kconfig.rcar3:160)
-warning: the choice symbol SYS_NAND_SOFT_ECC (defined at drivers/mtd/nand/r=
-aw/Kconfig:184) is selected by the following symbols, but select/imply has =
-no effect on choice symbols
- - NAND_SANDBOX (defined at drivers/mtd/nand/raw/Kconfig:450)
-warning: the choice symbol USB_ULPI_VIEWPORT (defined at drivers/usb/ulpi/K=
-config:11) is selected by the following symbols, but select/imply has no ef=
-fect on choice symbols
- - USB_EHCI_MSM (defined at drivers/usb/host/Kconfig:263)
-warning: the choice symbol LIB_RAND (defined at lib/Kconfig:275) is selecte=
-d by the following symbols, but select/imply has no effect on choice symbols
- - CMD_LINK_LOCAL (defined at cmd/Kconfig:1994)
-warning: the choice symbol EFI_APP (defined at lib/efi/Kconfig:15) is selec=
-ted by the following symbols, but select/imply has no effect on choice symb=
-ols
- - TARGET_EFI_APP32 (defined at board/efi/Kconfig:7)
- - TARGET_EFI_APP64 (defined at board/efi/Kconfig:16)
+The commit message does not explain why we should refrain from using UTF-8=
+.
+
+>
+> ---
+>   arch/arm/mach-rockchip/px30/Kconfig   | 4 ++--
+>   arch/arm/mach-rockchip/rk3588/Kconfig | 6 +++---
+>   arch/arm/mach-rockchip/rv1126/Kconfig | 4 ++--
+>   drivers/mtd/spi/Kconfig               | 2 +-
+>   4 files changed, 8 insertions(+), 8 deletions(-)
+>
+> diff --git a/arch/arm/mach-rockchip/px30/Kconfig b/arch/arm/mach-rockchi=
+p/px30/Kconfig
+> index 41893920cb4d..23f8f430c4ae 100644
+> --- a/arch/arm/mach-rockchip/px30/Kconfig
+> +++ b/arch/arm/mach-rockchip/px30/Kconfig
+> @@ -36,9 +36,9 @@ config TARGET_PX30_CORE
+>               10.1" OF for creating complete PX30.Core C.TOUCH 2.0 10.1"=
+ Open Frame.
+>
+>   config TARGET_RINGNECK_PX30
+> -	bool "Theobroma Systems PX30-=C2=B5Q7 (Ringneck)"
+> +	bool "Theobroma Systems PX30-uQ7 (Ringneck)"
+>   	help
+> -	  The PX30-uQ7 (Ringneck) SoM is a =C2=B5Qseven-compatible (40mmx70mm,
+> +	  The PX30-uQ7 (Ringneck) SoM is a uQseven-compatible (40mmx70mm,
+>             MXM-230 connector) system-on-module from Theobroma Systems[1=
+],
+>   	  featuring the Rockchip PX30.
+>
+> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockc=
+hip/rk3588/Kconfig
+> index eb956b097c74..39049ab35a9c 100644
+> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+> @@ -66,7 +66,7 @@ config TARGET_NANOPCT6_RK3588
+>   	                HDMI2.0, and HDMI1.4
+>   	  2x 4-lane MIPI-DSI, compatible with MIPI DPHY 2.0 or CPHY 1.1
+>   	  USB-A: USB 3.0, Type A
+> -	  USB-C: Full function USB Type=E2=80=91C port, DP display up to 4Kp60=
+, USB 3.0
+> +	  USB-C: Full function USB Type-C port, DP display up to 4Kp60, USB 3.=
+0
+>   	  40-pin 2.54mm header connector: up to 2x SPIs, 6x UARTs, 1x I2Cs,
+>   	                                  8x PWMs, 2x I2Ss, 28x GPIOs
+>   	  Debug UART: 3 Pin 2.54mm header, 3V level, 1500000bps
+> @@ -117,7 +117,7 @@ config TARGET_ROCK5A_RK3588
+>   	  Mali G610MC4 GPU
+>   	  MIPI CSI 2 multiple lanes connector
+>   	  4-lane MIPI DSI connector
+> -	  Audio =E2=80=93 3.5mm earphone jack
+> +	  Audio - 3.5mm earphone jack
+>   	  eMMC module connector
+>   	  uSD slot (up to 128GB)
+>   	  2x USB 2.0, 2x USB 3.0
+> @@ -197,7 +197,7 @@ config TARGET_TOYBRICK_RK3588
+>   	  4x ARM Cortex-A76, 4x ARM Cortex-A55
+>   	  8/16GB Memory LPDDR4x
+>   	  Mali G610MC4 GPU
+> -	  2=C3=97 MIPI-CSI0 Connector
+> +	  2x MIPI-CSI0 Connector
+>   	  1x 2Lanes PCIe3.0 Connector
+>   	  1x SATA3.0 Connector
+>   	  32GB eMMC Module
+> diff --git a/arch/arm/mach-rockchip/rv1126/Kconfig b/arch/arm/mach-rockc=
+hip/rv1126/Kconfig
+> index ae323ee91235..64a70f61f894 100644
+> --- a/arch/arm/mach-rockchip/rv1126/Kconfig
+> +++ b/arch/arm/mach-rockchip/rv1126/Kconfig
+> @@ -6,8 +6,8 @@ config TARGET_RV1126_NEU2
+>   	  Neu2:
+>   	  Neural Compute Module 2(Neu2) is a 96boards SoM-CB compute module
+>   	  based on Rockchip RV1126 from Edgeble AI.
+> -	  Neu2 powered with Consumer grade (0 to +80 =C2=B0C) RV1126 SoC.
+> -	  Neu2k powered with Industrial grade (-40 =C2=B0C to +85 =C2=B0C) RV1=
+126K SoC.
+> +	  Neu2 powered with Consumer grade (0 to +80 C) RV1126 SoC.
+> +	  Neu2k powered with Industrial grade (-40 C to +85 C) RV1126K SoC.
+
+C is the sign for coulomb which is the unit of electric charge. How
+about 'deg C'?
+
+Best regards
+
+Heinrich
 
 
-
-Michal Simek (4):
-  Kconfig: Remove trailing whitespace in its prompt
-  Kconfig: Add missing quotes around source file
-  Kconfig: Add missing quotes around default string value
-  Kconfig: Make all Kconfig encoding ascii
-
- arch/arm/mach-rockchip/px30/Kconfig   |  4 ++--
- arch/arm/mach-rockchip/rk3588/Kconfig | 24 ++++++++++++------------
- arch/arm/mach-rockchip/rv1108/Kconfig |  4 ++--
- arch/arm/mach-rockchip/rv1126/Kconfig |  8 ++++----
- cmd/Kconfig                           |  2 +-
- drivers/clk/Kconfig                   | 10 +++++-----
- drivers/crypto/Kconfig                |  8 ++++----
- drivers/ddr/imx/imx8ulp/Kconfig       |  2 +-
- drivers/mtd/spi/Kconfig               |  2 +-
- lib/Kconfig                           | 18 +++++++++---------
- lib/efi_loader/Kconfig                |  2 +-
- 11 files changed, 42 insertions(+), 42 deletions(-)
-
---=20
-2.44.0
+>
+>   	  Neu2-IO:
+>   	  Neural Compute Module 2(Neu2) IO board is an industrial form factor
+> diff --git a/drivers/mtd/spi/Kconfig b/drivers/mtd/spi/Kconfig
+> index d068b7860e1c..bedc4e970e43 100644
+> --- a/drivers/mtd/spi/Kconfig
+> +++ b/drivers/mtd/spi/Kconfig
+> @@ -246,7 +246,7 @@ config SPI_FLASH_USE_4K_SECTORS
+>   	  to erasing whole blocks (32/64 KiB).
+>   	  Changing a small part of the flash's contents is usually faster wit=
+h
+>   	  small sectors. On the other hand erasing should be faster when usin=
+g
+> -	  64 KiB block instead of 16 =C3=97 4 KiB sectors.
+> +	  64 KiB block instead of 16 x 4 KiB sectors.
+>
+>   	  Please note that some tools/drivers/filesystems may not work with
+>   	  4096 B erase size (e.g. UBIFS requires 15 KiB as a minimum).
 
