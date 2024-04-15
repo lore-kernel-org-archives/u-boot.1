@@ -4,57 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 408FCC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:10:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B248C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 06:13:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E966588247;
-	Mon, 15 Apr 2024 08:08:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=csgroup.eu
+	by phobos.denx.de (Postfix) with ESMTP id C229E88190;
+	Mon, 15 Apr 2024 08:13:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="FjtKxTUZ";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9497B88254; Mon, 15 Apr 2024 08:08:25 +0200 (CEST)
-Received: from pegase1.c-s.fr (pegase1.c-s.fr [93.17.236.30])
+ id 78A9F88190; Mon, 15 Apr 2024 08:13:41 +0200 (CEST)
+Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A86A088220
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:08:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=csgroup.eu
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=christophe.leroy@csgroup.eu
-Received: from localhost (mailhub3.si.c-s.fr [192.168.12.233])
- by localhost (Postfix) with ESMTP id 4VHxYf111Fz9t0H;
- Mon, 15 Apr 2024 08:08:22 +0200 (CEST)
-Received: from pegase1.c-s.fr ([192.168.12.234])
- by localhost (pegase1.c-s.fr [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id dAs2zR2IZ4HH; Mon, 15 Apr 2024 08:08:22 +0200 (CEST)
-Received: from messagerie.si.c-s.fr (messagerie.si.c-s.fr [192.168.25.192])
- by pegase1.c-s.fr (Postfix) with ESMTP id 4VHxYL1FhWz9tFS;
- Mon, 15 Apr 2024 08:08:06 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 276688B770;
- Mon, 15 Apr 2024 08:08:06 +0200 (CEST)
-Received: from messagerie.si.c-s.fr ([127.0.0.1])
- by localhost (messagerie.si.c-s.fr [127.0.0.1]) (amavisd-new, port 10023)
- with ESMTP id s9U6e3Yftgi1; Mon, 15 Apr 2024 08:08:06 +0200 (CEST)
-Received: from PO20335.idsi0.si.c-s.fr (unknown [172.25.230.108])
- by messagerie.si.c-s.fr (Postfix) with ESMTP id 061298B764;
- Mon, 15 Apr 2024 08:08:06 +0200 (CEST)
-From: Christophe Leroy <christophe.leroy@csgroup.eu>
-To: Jagan Teki <jagan@amarulasolutions.com>,
- Jean-Michel CASAUBON <jean-michel.casaubon@csgroup.eu>,
- DUBOIS Hugo <hugo.dubois.ext@csgroup.eu>, florent.trinh-thai@csgroup.eu,
- Tom Rini <trini@konsulko.com>
-Cc: Christophe Leroy <christophe.leroy@csgroup.eu>,
-	u-boot@lists.denx.de
-Subject: [PATCH v2 17/17] board: cssi: Read and display MCR board address
-Date: Mon, 15 Apr 2024 08:07:30 +0200
-Message-ID: <f19550f49c2dc75d02225518ba9ae4f50d6eb295.1713160866.git.christophe.leroy@csgroup.eu>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1713160866.git.christophe.leroy@csgroup.eu>
-References: <cover.1713160866.git.christophe.leroy@csgroup.eu>
+ by phobos.denx.de (Postfix) with ESMTPS id 20AD487B1A
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 08:13:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=thorsis.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id A765B148CE80; Mon, 15 Apr 2024 08:13:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
+ t=1713161614; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:in-reply-to:references;
+ bh=vYJN46gomF1fe8DrLkIUuq5muiXoU6HefrZ8vGFWwUI=;
+ b=FjtKxTUZxIl4OFW581+QeCXNIFjh+Ke8sw4qPaFdgW3kP31Uqcy/3eKrGOctvoEnk4uimO
+ Ystec+onh9NBtpy40+0/eT7KGdTz/5hHTojqToyz78Rl3l+q4uEJvMJrYddTUQUGbMWZux
+ ePiQD6/auCdsn+XQfjXF9P90J3+JQfO+UXUFOlyKLx/JG554PPq0hTwoqRVzjT1rfXgjLg
+ gsiDSfXT3875g92qqzQSNfn5xfKtI7NFWY4LJ4fEGY76YAcevGS++B71+Z5y/74PBdz0Vd
+ 1tS0OR89uQc3mzdAfU0WxiqCuIWSGItL6+GyygxqjD4B2Way9abxmdF9lnDg6w==
+Date: Mon, 15 Apr 2024 08:13:25 +0200
+From: Alexander Dahl <ada@thorsis.com>
+To: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Cc: Alexander Dahl <ada@thorsis.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Mihai Sain <mihai.sain@microchip.com>,
+ Li Bin <bin.li@microchip.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH v2 0/6] mtd: nand: raw: Collected improvements
+Message-ID: <20240415-fruit-theorize-e06b014a60cd@thorsis.com>
+Mail-Followup-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Mihai Sain <mihai.sain@microchip.com>,
+ Li Bin <bin.li@microchip.com>, u-boot@lists.denx.de
+References: <20240320090214.40465-1-ada@thorsis.com>
+ <CABGWkvrF3UxEzw2eh1kb7To+aQ8iaWMyrnU8Qz0tYJGumY0QGw@mail.gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <CABGWkvrF3UxEzw2eh1kb7To+aQ8iaWMyrnU8Qz0tYJGumY0QGw@mail.gmail.com>
+User-Agent: Mutt/2.2.12 (2023-09-09)
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,63 +77,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-MCR boards are plugged in racks. The position in the rack can be read
-in a register.
+Hello Dario,
 
-For MCR3000, that's provided by the FPGA so check it is loaded before
-reading the address.
+Am Sun, Apr 14, 2024 at 03:41:38PM +0200 schrieb Dario Binacchi:
+> Hi Alexander,
+> 
+> On Wed, Mar 20, 2024 at 10:02 AM Alexander Dahl <ada@thorsis.com> wrote:
+> >
+> > Hello everyone,
+> >
+> > while working on NAND flash support for a custom board based on the at91
+> > SAM9X60 SoC I stumbled over some issues in the raw nand subsystem.
+> >
+> > Four of six patches are minor fixes.
+> >
+> > Patch 4 introduces a new subcommand for the new atmel nand controller
+> > driver.  Patch 6 introduces a new subcommand for the nand command to
+> > override ONFI timing mode.  Both are are for debugging purposes only and
+> > thus optional, and need to be enabled through menu.  Both helped me a
+> > lot when investigating issues.
+> >
+> > Series is based on upstream next branch, but should also apply to master
+> > cleanly.
+> >
+> > Greets
+> > Alex
+> >
+> > v1:
+> >
+> > Link: https://lore.kernel.org/u-boot/20240307091014.39796-1-ada@thorsis.com/T/#t
+> >
+> > v2:
+> >
+> > - rebased on recent next
+> > - collected tags
+> > - improved patch 4 after feedback from Mihai
+> > - added new patch 5 with another help text fix
+> > - added new patch 6 with a new debug command
+> > - reworded cover letter
+> >
+> > See per patch changes in patches for more detailed changes.
+> >
+> > Alexander Dahl (6):
+> >   mtd: nand: raw: Use macro nand_to_mtd() where appropriate
+> >   mtd: nand: raw: Port another option flag from Linux
+> >   mtd: nand: raw: Fix (most) Kconfig indentation
+> >   mtd: nand: raw: atmel: Introduce optional debug commands
+> >   mtd: nand: raw: atmel: Fix comment in timings preparation
+> >   cmd: nand: Add new optional sub-command 'onfi'
+> >
+> >  cmd/Kconfig                                  |  10 +
+> >  cmd/nand.c                                   |  61 ++++
+> >  drivers/mtd/nand/raw/Kconfig                 | 115 +++----
+> >  drivers/mtd/nand/raw/atmel/nand-controller.c | 299 ++++++++++++++++++-
+> >  drivers/mtd/nand/raw/nand_base.c             |   8 +-
+> >  include/linux/mtd/rawnand.h                  |   8 +
+> >  6 files changed, 441 insertions(+), 60 deletions(-)
+> >
+> >
+> > base-commit: f048104999db28d49362201eaebfc91adb14f47c
+> > --
+> > 2.39.2
+> >
+> Applied to nand-next the first 4 patches.
+> For the others, we will conduct further testing before applying them.
 
-For the other boards, the FPGA is loaded by hardware so it can be
-read inconditionnaly.
+Thanks so far.  :-)
 
-Signed-off-by: Christophe Leroy <christophe.leroy@csgroup.eu>
----
- board/cssi/common/common.c   | 6 +++++-
- board/cssi/mcr3000/mcr3000.c | 7 ++++++-
- 2 files changed, 11 insertions(+), 2 deletions(-)
+I have another fix for the atmel raw nand driver, which I forgot to
+send with this series.  I could add it to v3.  Or should I send it
+separately?
 
-diff --git a/board/cssi/common/common.c b/board/cssi/common/common.c
-index 6848efd43b..0292a9016e 100644
---- a/board/cssi/common/common.c
-+++ b/board/cssi/common/common.c
-@@ -164,7 +164,7 @@ int checkboard_common(void)
- 
- void misc_init_r_common(void)
- {
--	u8 tmp, far_id;
-+	u8 tmp, far_id, addr;
- 	int count = 3;
- 
- 	switch (in_8(ADDR_FPGA_R_BASE)) {
-@@ -173,6 +173,10 @@ void misc_init_r_common(void)
- 		if ((in_8(ADDR_FPGA_R_BASE + 0x31) & FPGA_R_ACQ_AL_FAV) == 0)
- 			env_set("bootdelay", "60");
- 
-+		addr = in_8(ADDR_FPGA_R_BASE + 0x43);
-+		printf("Board address: 0x%2.2x (System %d Rack %d Slot %d)\n",
-+		       addr, addr >> 7, (addr >> 4) & 7, addr & 15);
-+
- 		env_set("config", CFG_BOARD_MCR3000_2G);
- 		env_set("hostname", CFG_BOARD_MCR3000_2G);
- 		break;
-diff --git a/board/cssi/mcr3000/mcr3000.c b/board/cssi/mcr3000/mcr3000.c
-index 15a2d0d946..48e82a902d 100644
---- a/board/cssi/mcr3000/mcr3000.c
-+++ b/board/cssi/mcr3000/mcr3000.c
-@@ -167,7 +167,12 @@ int misc_init_r(void)
- 	setbits_be32(&immr->im_cpm.cp_pbdir, 0xf);
- 	clrbits_be32(&immr->im_cpm.cp_pbdat, 0x1);
- 
--	load_fpga();
-+	if (!load_fpga()) {
-+		u8 addr = in_be16((void *)0x1400009c);
-+
-+		printf("Board address: 0x%2.2x (System %d Rack %d Slot %d)\n",
-+		       addr, addr >> 7, (addr >> 4) & 7, addr & 15);
-+	}
- 
- 	/* if BTN_ACQ_AL is pressed then bootdelay is changed to 60 second */
- 	if ((in_be16(&iop->iop_pcdat) & 0x0004) == 0)
--- 
-2.43.0
-
+Greets
+Alex
