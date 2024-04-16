@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D321C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 12:52:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D07EC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 12:52:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC81088432;
-	Tue, 16 Apr 2024 14:51:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 54D2188437;
+	Tue, 16 Apr 2024 14:51:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="SbJ2guci";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dMZgaM7X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DFDC88300; Tue, 16 Apr 2024 09:53:21 +0200 (CEST)
-Received: from mail-pf1-x435.google.com (mail-pf1-x435.google.com
- [IPv6:2607:f8b0:4864:20::435])
+ id 03FC688302; Tue, 16 Apr 2024 09:53:24 +0200 (CEST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com
+ [IPv6:2607:f8b0:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14410881CE
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 09:53:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D6C18881CE
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 09:53:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seashell11234455@gmail.com
-Received: by mail-pf1-x435.google.com with SMTP id
- d2e1a72fcca58-6eaf9565e6bso2519596b3a.2
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 00:53:19 -0700 (PDT)
+Received: by mail-pg1-x534.google.com with SMTP id
+ 41be03b00d2f7-5f415fd71f8so3167347a12.3
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 00:53:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713253997; x=1713858797; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1713254000; x=1713858800; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=p+pSRHq9IUNtt+FfQAbtamhi30xC0HUXRAdlPl+ed/o=;
- b=SbJ2guci7BbcKWn7AeKBUW74QAiSGaLPmMkl3evbTjxBidcdGtLU/zwn4pzbHeibWn
- JLlDR2LBFSu6tKaznngtgaFuREaxS7uZq3RDxqr3Jxo3/nJ1/2FLA93T9LhukHcA6tEV
- Tn5lXizaDsKj+17sJ66loMFJNCC/Kp8t0bljbChKaNBYtE81VIjS2az242JIzTc9pHMq
- M4suaECJ4qhlIlmwVrL3QynCDy9zikGG5tdVHtyh9lvzIfjY8mg9E2o8Ss4c54ylrnjc
- mDnejncuUf9wLMUL7wYLb6KDPCaS4EY/gkcW7tz/UqTh+taHeWFKV63zMQtXpCUkVw7L
- Ex9A==
+ bh=XJujbw6Wa65Ty3rF13uHN35ZvD5r880M+W+wVV9yM6E=;
+ b=dMZgaM7Xo6NpffEnGRs8XnLHZ4YN4ZMNnaKgaVa8j8ALBBWpkxiZfNDDIfxS3dZeSo
+ d/QRSws61JAEv1PMgFikGbq0mIMmKpBWiWFv3FE7BrvsmImJ+exTwnh98ivTHHb8Eox3
+ IKmuL2MOyDLdmI0pDVmlxZcGhPDvXEMGU8/aS3kAGqawa9ZTB8GaiioxVRAQIeA8xSOu
+ ToKtZ9HShaUz6/TEf8O4zzgvoP39/6zNdjZIjsaX6t2q4oqDEmQzLeGtKT/b+eQAOTIW
+ 8oKhE1Oo4mIppuCB6VUqLNe02NfOLrMSHlTADtN0fHJONb/r9Dr9jH0Yw1mcInQTyV0I
+ 98qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713253997; x=1713858797;
+ d=1e100.net; s=20230601; t=1713254000; x=1713858800;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p+pSRHq9IUNtt+FfQAbtamhi30xC0HUXRAdlPl+ed/o=;
- b=I3u9H3Yx+L//gdkJ2U2xAxQvazbJQbav2x3e280dssgT6RHl/Dkj6Ux4EuWt3UVQrY
- rN/sCRZpbeJL7VTy+auygpi/kmlgPNVZHo/0ElxCf0dv7eWO2Q6+7AUIJg6M2/FrY4CD
- ZXw0Gz+EQATf8fu2RkD4FG7RdvQ6+hzEC0VgplylQ9I6w86H0rOkW7lRrlqx4GJi3MM0
- IGq0eVdXoOip5qFJHqsToWb/KckcXxLNd00R8gfogoCPDec0tpaS0B9x9lNkH3ZLgoxJ
- APfZ0mxbrvm6Exgz/7poZu02YDlxoVovQTdSDt31kWK8+upaWFSdPF8QzSFa6r95mQn2
- CaVg==
-X-Gm-Message-State: AOJu0YyVmIFjP+mBMYK2RGEC9h4Dm7apsQ226UL+Va5WxkOa2s9TK1iW
- Vl/dn91g7BF/F4avBGnLYSSiHzVNwj1qoB6r+yjlZMfFY3DL2GzpHE/K98Ehr/aj6g==
-X-Google-Smtp-Source: AGHT+IHvJo0AmZfksTu4lBwFUPyuRefdXdWA4RzpfWjKf/wPsckduZs/It+Or8E874NE0gKVeT3CiA==
-X-Received: by 2002:a05:6a00:a92:b0:6ed:d5f5:869 with SMTP id
- b18-20020a056a000a9200b006edd5f50869mr12486483pfl.3.1713253996765; 
- Tue, 16 Apr 2024 00:53:16 -0700 (PDT)
+ bh=XJujbw6Wa65Ty3rF13uHN35ZvD5r880M+W+wVV9yM6E=;
+ b=q7AniwAM7nSsNCOO/1qzAllx2y7/wZlSkKVS6WXNkEujAm1tKKsLwFXvFfkXhlhaEb
+ LnLjzm6W80TDhj83i4Qwjr8zm7ARGRFOIkN/bIwCJ7SOB4EP+pwTfDWRXJE4UM2vgvVj
+ 8YaJmekqqVenP/n0wlZWyp4Dh3SgU8/h16ZdVgIBkhd62mk8b/ygPvj2pAT2qJcjLVTn
+ aBWH7il5lul7HTGy5Pe1eWEPtG4GhNLprlEA/cKzktr94u7yEaBt2CgvsyK6DbL7ueRu
+ 1/cYwdtB19cpgNDpVeu6Gf8aNI7GyhqNwybWR5Vv3KFcgpUiYuRJO44O/KqGLZbMKhv0
+ pnjA==
+X-Gm-Message-State: AOJu0YzlBsjzZMzcBysqUYP7YtcYwjwJ8FsdfIwOj6Sh7/p04MWqaKZn
+ VGOGlBqYb5U9yljhiS9VkRSesrmKEl9iFMrWs36Te6rH9BE2XPgp3Qa4zevuYBCC4Q==
+X-Google-Smtp-Source: AGHT+IGRLuV1S3C9dCrNzhCcpxVltkOF0fhL7xuxwsnC4w6RIrF2OvwMznxq9/osTFWJBtd402CVsQ==
+X-Received: by 2002:a05:6a21:1690:b0:1a9:d6e2:66e9 with SMTP id
+ np16-20020a056a21169000b001a9d6e266e9mr5796760pzb.28.1713253999395; 
+ Tue, 16 Apr 2024 00:53:19 -0700 (PDT)
 Received: from localhost.localdomain ([120.204.189.229])
  by smtp.gmail.com with ESMTPSA id
- e12-20020a056a0000cc00b006ed2709ada6sm8391681pfj.65.2024.04.16.00.53.14
+ e12-20020a056a0000cc00b006ed2709ada6sm8391681pfj.65.2024.04.16.00.53.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Apr 2024 00:53:16 -0700 (PDT)
+ Tue, 16 Apr 2024 00:53:18 -0700 (PDT)
 From: Kongyang Liu <seashell11234455@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Leo Yu-Chi Liang <ycliang@andestech.com>,
 	Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/3] board: sophgo: milkv_duo: Bind sysreset driver
-Date: Tue, 16 Apr 2024 15:52:39 +0800
-Message-ID: <20240416075254.13729-3-seashell11234455@gmail.com>
+Subject: [PATCH 3/3] configs: milkv_duo: Add sysreset configs
+Date: Tue, 16 Apr 2024 15:52:40 +0800
+Message-ID: <20240416075254.13729-4-seashell11234455@gmail.com>
 X-Mailer: git-send-email 2.41.0
 In-Reply-To: <20240416075254.13729-1-seashell11234455@gmail.com>
 References: <20240416075254.13729-1-seashell11234455@gmail.com>
@@ -93,31 +93,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Bind cv1800b sysreset driver for Sophgo Milk-V Duo board in board_init
-function.
+Add sysreset configs as well as poweroff and reset commands for Sophgo
+Milk-V Duo board.
 
 Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 ---
 
- board/sophgo/milkv_duo/board.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ configs/milkv_duo_defconfig | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/board/sophgo/milkv_duo/board.c b/board/sophgo/milkv_duo/board.c
-index eaa47be173..e7e28fe248 100644
---- a/board/sophgo/milkv_duo/board.c
-+++ b/board/sophgo/milkv_duo/board.c
-@@ -3,7 +3,11 @@
-  * Copyright (c) 2024, Kongyang Liu <seashell11234455@gmail.com>
-  */
- 
-+ #include <dm/lists.h>
-+
- int board_init(void)
- {
-+	if (IS_ENABLED(CONFIG_SYSRESET_CV1800B))
-+		device_bind_driver(gd->dm_root, "cv1800b_sysreset", "sysreset", NULL);
- 	return 0;
- }
+diff --git a/configs/milkv_duo_defconfig b/configs/milkv_duo_defconfig
+index e8413d7aa9..28bd4b53d3 100644
+--- a/configs/milkv_duo_defconfig
++++ b/configs/milkv_duo_defconfig
+@@ -19,6 +19,7 @@ CONFIG_HUSH_PARSER=y
+ CONFIG_SYS_PROMPT="milkv_duo# "
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PART=y
++CONFIG_CMD_POWEROFF=y
+ CONFIG_CMD_FAT=y
+ CONFIG_CMD_FS_GENERIC=y
+ CONFIG_ENV_OVERWRITE=y
+@@ -30,3 +31,5 @@ CONFIG_MMC_SDHCI_ADMA=y
+ CONFIG_MMC_SDHCI_CV1800B=y
+ CONFIG_SYS_NS16550=y
+ CONFIG_SYS_NS16550_MEM32=y
++CONFIG_SYSRESET=y
++CONFIG_SYSRESET_CV1800B=y
 -- 
 2.41.0
 
