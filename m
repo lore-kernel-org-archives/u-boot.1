@@ -4,68 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED7A6C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 07:00:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 259F4C04FF8
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 07:35:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89553882E7;
-	Tue, 16 Apr 2024 09:00:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 8074C882AC;
+	Tue, 16 Apr 2024 09:35:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="QPelYHpJ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="G0BTBrKo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DF7E882FD; Tue, 16 Apr 2024 09:00:00 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [217.194.8.81])
+ id B42C0882C4; Tue, 16 Apr 2024 09:35:32 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87BB3882CB
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 08:59:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8048A88287
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 09:35:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb (93-49-2-63.ip317.fastwebnet.it [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 230462202D;
- Tue, 16 Apr 2024 08:59:48 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1713250788;
- bh=IuaBrnJHdm5puud+NZC9EOxoi9e3X6HHpPFwkO+HzFg=; h=From:To:Subject;
- b=QPelYHpJ5Ql7sHpW/oAWUbGmbqmcvBoC+NfGfoTn/eeKc90fXq+ttucQUES771//B
- VxlvJh1lZWaC0gZuqwZzHQRzoShi4Wb+g3Wfvt/N/BEfaM+Togkx5rO+72xIolO5ke
- 2/xRdy2777jxN10ne8h8ude5UsQIcPauHeoNSYF9U0VfaAYiU9UPfqo/IY4kVufC4Q
- IUSnAOT5fF8+16T5Wi4zZ54wM9VYbXf//1s1W+4aSVwyWayYpDNG4ntzSy+AUsSZ+3
- lVHwnW3KlVBHpzcazVcVw9epX39ssDZ4BXM2oGw2o6BjNnFQ9gviJi/Ec7O36B8Ht/
- Koszyam3OcJrQ==
-Date: Tue, 16 Apr 2024 08:59:46 +0200
-From: Francesco Dolcini <francesco@dolcini.it>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-062-143-245-032.um16.pools.vodafone-ip.de
+ [62.143.245.32])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 9FF914060B; 
+ Tue, 16 Apr 2024 07:35:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1713252929;
+ bh=ZvVS7RTaXkHnMi8UbkfHAVZb1FOXte6vEqYL7ZAOQu8=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=G0BTBrKo94Kp8TVjbzXM6zD+SlPDM6OgvMzOdzz+T1SMqFcC7VbtsRHp2TK98Ij06
+ BZUEH41S7Xd5u4jN/UG+IxESA/LW2L6B0O7PxQkZhIpX1ZEezXWhT304yASzDcY63H
+ rs4hDGDMkHvrYBJNEllLaMbsqjTvDY0Xk7jDTwabs0+bnHx7RBN3AN4LCIaQ8GLM6+
+ iedK7DLbtwQBYnQjh6Ue+/AuM3OiA34wmq58cxJg4C3fhXwURklruImx7fv73LZEEA
+ gL4G0HgnxlmQJAupi2jmEoFiDkTl9WTLACmfmiQ8gloa06cDZ0BtR1oYUa5w7wteIP
+ /vC1vaxUOMSwg==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michal Simek <michal.simek@amd.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Elon Zhang <zhangzj@rock-chips.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Joshua Riek <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tim Lunn <tim@feathertop.org>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Vignesh R <vigneshr@ti.com>, u-boot@lists.denx.de, git@xilinx.com
-Subject: Re: [PATCH 4/4] Kconfig: Make all Kconfig encoding ascii
-Message-ID: <20240416065946.GC4165@francesco-nb>
-References: <cover.1713180904.git.michal.simek@amd.com>
- <55ab78c9f2781b31278395f9e0066041f97b00f6.1713180904.git.michal.simek@amd.com>
- <6b45c003-f6a0-4ee4-a01f-e5acc81d68a9@gmx.de>
- <20240416003612.GJ1054907@bill-the-cat>
+Cc: Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Bryan Brattlof <bb@ti.com>, Jesse Taube <mr.bossman075@gmail.com>,
+ "Leon M . Busch-George" <leon@georgemail.eu>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] Makefile: don't add -Wno-maybe-uninitialized twice
+Date: Tue, 16 Apr 2024 09:35:24 +0200
+Message-ID: <20240416073524.25764-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20240416003612.GJ1054907@bill-the-cat>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,38 +71,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 16, 2024 at 02:36:12AM +0200, Tom Rini wrote:
-> On Mon, Apr 15, 2024 at 02:22:02PM +0200, Heinrich Schuchardt wrote:
-> > On 15.04.24 13:35, Michal Simek wrote:
-> > > Some of Kconfigs are using utf-8 encoding because of used chars. Convert
-> > > all of them to ascii enconging.
-> > > 
-> > > Signed-off-by: Michal Simek <michal.simek@amd.com>
-> [snip]
-> > > diff --git a/arch/arm/mach-rockchip/rv1126/Kconfig b/arch/arm/mach-rockchip/rv1126/Kconfig
-> > > index ae323ee91235..64a70f61f894 100644
-> > > --- a/arch/arm/mach-rockchip/rv1126/Kconfig
-> > > +++ b/arch/arm/mach-rockchip/rv1126/Kconfig
-> > > @@ -6,8 +6,8 @@ config TARGET_RV1126_NEU2
-> > >   	  Neu2:
-> > >   	  Neural Compute Module 2(Neu2) is a 96boards SoM-CB compute module
-> > >   	  based on Rockchip RV1126 from Edgeble AI.
-> > > -	  Neu2 powered with Consumer grade (0 to +80 °C) RV1126 SoC.
-> > > -	  Neu2k powered with Industrial grade (-40 °C to +85 °C) RV1126K SoC.
-> > > +	  Neu2 powered with Consumer grade (0 to +80 C) RV1126 SoC.
-> > > +	  Neu2k powered with Industrial grade (-40 C to +85 C) RV1126K SoC.
-> > 
-> > C is the sign for coulomb which is the unit of electric charge. How
-> > about 'deg C'?
-> 
-> I'll note that in Linux there's seemingly nothing consistent, and I'm
-> fine with any of "deg C" or "degrees C" or "temperature range (-40 C to
-> +85 C)" as all of those should be clear in context.
+Avoid adding the same flag to KBUILD_CFLAGS twice.
 
-My 2 cents ... while I agree with Tom that the context will make it
-clear, it is not making it correct nor nice. Using just "C" for Celsius
-degrees is horrible ...
+Fixes: 8602d97ca2cf ("Makefile: avoid false positive -Wmaybe-uninitialized")
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Francesco
-
+diff --git a/Makefile b/Makefile
+index 7321fe1499e..47f3ec82b87 100644
+--- a/Makefile
++++ b/Makefile
+@@ -717,7 +717,7 @@ KBUILD_CFLAGS	+= -O2
+ endif
+ 
+ ifdef CONFIG_CC_OPTIMIZE_FOR_DEBUG
+-KBUILD_CFLAGS	+= -Og -Wno-maybe-uninitialized
++KBUILD_CFLAGS	+= -Og
+ # Avoid false positives -Wmaybe-uninitialized
+ # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=78394
+ KBUILD_CFLAGS	+= -Wno-maybe-uninitialized
+-- 
+2.43.0
 
