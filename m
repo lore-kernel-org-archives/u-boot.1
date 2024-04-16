@@ -4,75 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98C19C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 15 Apr 2024 22:21:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BDBDC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 00:30:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B1B4D877AF;
-	Tue, 16 Apr 2024 00:21:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9C77A87B1A;
+	Tue, 16 Apr 2024 02:30:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Yrpy+NB6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZR5Lm39J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C600B881B8; Tue, 16 Apr 2024 00:21:05 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 1A266878ED; Tue, 16 Apr 2024 02:30:11 +0200 (CEST)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C109587BF1
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 00:21:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A748787E4D
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 02:30:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-56fd7df9ea9so4332120a12.0
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 15:21:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=yasuharu.shibata@gmail.com
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1e3ff14f249so29396335ad.1
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 17:30:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713219661; x=1713824461; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UUevteMqqt29zJ7GZ02pwSIVReuAe+ex21hi6p5BtoU=;
- b=Yrpy+NB6nH/WbAFwVq1LbK51RXS1KXhGEJphnkBlMUJuCw9eeMrFIsyDvKm3DdOPoS
- P3CC1QZAKUUGBBZ8lxRmu9b7TsdVorgLEYyo1l+OHFCrTSNEsSjXpOW2Qpw1UKOsOezD
- LZCutIUYFCbeGTsv8tiNTZhN0p3kfgIt0eWCLaiKu4nHo860ksFg7tiabgAguobkXDKN
- SP+AVyr/rgmIPgqXBJer2j1ZuNrPIG/AmoRknaq5Hzzq2sw6/GKIE6XHq8YIHZ+WXYnW
- lut0tt4Tk9Re/HGksKLMtXdEBPor3nYvJ/FNB78YRMXhu2QyhjGJ/a6lLSZM2gbctnZ+
- 2PuA==
+ d=gmail.com; s=20230601; t=1713227407; x=1713832207; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NnrzLHjFPHPzIsRwImRSFfeIzofhfE0BHGpS6fi4KEI=;
+ b=ZR5Lm39JxUpp+Z9PgVUjJLu78fTkbnNvTRMMKWJZKyU1298OrRXEnOJDnfdr1ddnxY
+ yZRLGO2xTzHMwWlfc1zb8Pd8le5w8jeIyV+EadHfvvGQ6ciJJDQqdwJixuDs4TB6QeD8
+ Z5L0qL2cDg0f7TESUxddpACZ7/FeM8LyhAHSTkMMZuOAixk3alj0BrWrk+XuQCW76Ah+
+ 3ZUXjy0MsY1K6tx/6LFL3QV4dz8GBQUNH38KH/FrS/ATaZT3H0y/UtX66f8rjWrIYaNR
+ s8HSuMteNc50SqHdclWOfS1PIY5TDiKz/qIjjKk2mG79w7Udz6s6ZShq5LsqqLF+LPIV
+ 49Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713219661; x=1713824461;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UUevteMqqt29zJ7GZ02pwSIVReuAe+ex21hi6p5BtoU=;
- b=aXkldWYuyL2fkDa4HjFrs5lITLtnW43/xdryrew4FlKtCjLxIrsUMhD/kkjIXm8uJl
- cT+hJODO4A8L0X1BQn3G2qsWQXJ6XJicvEbca4jL/M/tUKFJZnw8XxODZRZIad24/wx6
- vB7w9dAQwErx+/U0p2f2ALX0/1VLtcYBxqU0vArLdQTNYGiDYdugCqyPiJVHNYkHSacQ
- 5aRSnIT9IxRjLX92xwew6wUqXOC16DomFywKlrjW55gIJKTowx5FjGLPBDQcrB80sXq5
- j7x9XfLos/n3j7gAKHjIJ7BaeXAgWUwFW4wDV2rS8EEv0wY1fKWUXH48kshLytMdQ/6s
- wTmg==
+ d=1e100.net; s=20230601; t=1713227407; x=1713832207;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NnrzLHjFPHPzIsRwImRSFfeIzofhfE0BHGpS6fi4KEI=;
+ b=wfTbzQPcanHc3Koe3MZ9MX/9HG2q3QFQTP4kJIPISwg5g3czih6MJJNOl7SBabARIw
+ shFb08NI6M1qXPrv+EnSXGz5M1xjp5g19k1gyJTUGkphiL1i4S8yDlFQUJQXEi85X5Mk
+ yXhpr5K8z19/7LWXmeun6/pbMM8fWyyMd3z5r9fkHrHLYTz957ODf3yCOQsDQNB85hUL
+ YwAAOgJ6OUvp2QuZ8Xv+nA8Erg//iij1PRyfputhBUw1zQ5z27Bb/XbolXf+86wj9y+k
+ pakPdyv+sl0CJoxEUAhB+jRLujISRcifyQ/oDJ3dpAWnpUR3iKPz9UNjKIYRnD0QVDAU
+ XmGg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU5/h1aFHJhIE+G16BaER2qrElBCIxbuXLlLq/RrCzZvlh7uIcVEiB5Oo/ymUYgyvKBwDQBI04L5wt0haGufxTfZCB5Zw==
-X-Gm-Message-State: AOJu0YwZZ2IWxE3SI6C15iqtn9JKR+Aw9HJjN5P+4VGy0vjobSKX3Bkw
- pVoEN/p9UpF9yiWeTmaR+P4oHacsN7A+rDkAiY6dfQMoWpNRtQVJ2oLayxA1H73gSLlDcX884LK
- 2veKUrXyavMwj7QmO9sP8wGFNp6k=
-X-Google-Smtp-Source: AGHT+IGiN1QCrof9xMinbvL70ILXPF9ttskczQ4sAiMqnh7BQsgEXRaVx4JmJLPmnuipnZihxP5NRE1s5ti2kyV4DEk=
-X-Received: by 2002:a50:9e0b:0:b0:570:d50:e7d8 with SMTP id
- z11-20020a509e0b000000b005700d50e7d8mr5015355ede.22.1713219660954; Mon, 15
- Apr 2024 15:21:00 -0700 (PDT)
+ AJvYcCUTiZzjpjQmt7b+4M73kgfQvXfbbdY+iVRFKNTBcAcvBR8zCUjzJf68GxTmzLzD/BOcProL2h9jNp73bN+Mu1rOWX0hWw==
+X-Gm-Message-State: AOJu0YzqRYNB/gS2zQcX2CuLe79JAwFKHpfNeE98h1444JsoaqgIaFRr
+ mTf3Lqusi9cajeLs9BbFqJK1f3q3mLVwYwfheaLUAG8XiLU78G+5
+X-Google-Smtp-Source: AGHT+IFOW9BjzMMFnt6FpS2ltOk9RWOos6vbjHodeDdJ7klmX5DtWusIGnsdV3/BHnI+MeXqhY+mcQ==
+X-Received: by 2002:a17:902:ea04:b0:1e4:39e0:660c with SMTP id
+ s4-20020a170902ea0400b001e439e0660cmr1498882plg.23.1713227406925; 
+ Mon, 15 Apr 2024 17:30:06 -0700 (PDT)
+Received: from localhost.localdomain ([2409:10:d8a0:1500:198a:3f5f:c5af:35a2])
+ by smtp.gmail.com with ESMTPSA id
+ g13-20020a170902d5cd00b001dd88a5dc47sm8547528plh.290.2024.04.15.17.30.04
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 15 Apr 2024 17:30:06 -0700 (PDT)
+From: Yasuharu Shibata <yasuharu.shibata@gmail.com>
+To: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
+ Yasuharu Shibata <yasuharu.shibata@gmail.com>, u-boot@lists.denx.de,
+ Fabio Estevam <festevam@denx.de>
+Subject: [PATCH v2] net: wget: fix TCP sequence number wrap around issue
+Date: Tue, 16 Apr 2024 09:26:24 +0900
+Message-Id: <20240416002624.1909-1-yasuharu.shibata@gmail.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20240415163043.7482-1-kabel@kernel.org>
-In-Reply-To: <20240415163043.7482-1-kabel@kernel.org>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Mon, 15 Apr 2024 15:20:49 -0700
-Message-ID: <CAJaLiFwFYn912mQu9LvPF5ap8ufiQA+k0WrQCeRGSnZf39zkBg@mail.gmail.com>
-Subject: Re: [PATCH u-boot-mvebu 00/10] Turris Omnia DDR training changes
-To: =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>
-Cc: Stefan Roese <sr@denx.de>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,166 +94,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+If tcp_seq_num is wrap around, tcp_seq_num >= initial_data_seq_num
+isn't satisfied and store_block() isn't called.
+The condition has a wrap around issue, so it is fixed in this patch.
 
-I'm running a regression test with this patch on another Armada 385
-board (Synology DS116). And
-it is running without problem.
+Signed-off-by: Yasuharu Shibata <yasuharu.shibata@gmail.com>
+Reviewed-by: Michael Trimarchi <michael@amarulasolutions.com>
+Suggested-by: Michael Trimarchi <michael@amarulasolutions.com>
+Reported-by: Tim Harvey <tharvey@gateworks.com>
+Tested-by: Fabio Estevam <festevam@denx.de>
+---
+v1 -> v2:
+- Add tags in commit message
+- Link to v1: https://lore.kernel.org/u-boot/20240415130013.26721-1-yasuharu.shibata@gmail.com/
+---
+ net/wget.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-I noticed that there is no version bump. Is this still 14.0.0? It's kind of
-hard to see which version we are using without a minor revision such as 14.=
-0.1.
+diff --git a/net/wget.c b/net/wget.c
+index 71bac92d84..abab371e58 100644
+--- a/net/wget.c
++++ b/net/wget.c
+@@ -404,9 +404,7 @@ static void wget_handler(uchar *pkt, u16 dport,
+ 		}
+ 		next_data_seq_num = tcp_seq_num + len;
+ 
+-		if (tcp_seq_num >= initial_data_seq_num &&
+-		    store_block(pkt, tcp_seq_num - initial_data_seq_num,
+-				len) != 0) {
++		if (store_block(pkt, tcp_seq_num - initial_data_seq_num, len) != 0) {
+ 			wget_fail("wget: store error\n",
+ 				  tcp_seq_num, tcp_ack_num, action);
+ 			net_set_state(NETLOOP_FAIL);
+-- 
+2.25.1
 
-All the best,
-Tony
-
-On Mon, Apr 15, 2024 at 9:39=E2=80=AFAM Marek Beh=C3=BAn <kabel@kernel.org>=
- wrote:
->
-> Hi Stefan,
->
-> this series adds some changes to DDR3 training for Armada 38x and
-> Turris Omnia.
->
-> - patches 1-4 are meant to allow for reducing another 10 KiB in the
->   SPL binary. They were also sent to mv-ddr-marvell, via PR on github,
->   https://github.com/MarvellEmbeddedProcessors/mv-ddr-marvell/pull/45/
->   but I am told that Armada team has left Marvell, so who knows if this
->   will ever be merged there
-> - patch 5 enables this reduction for Turris Omnia
-> - patches 6-8 import old DDR3 training code and make some changes so
->   that it works with U-Boot. The reason why this is being done is
->   explained in patch 6
-> - patch 9 glues the old DDR3 training code to current U-Boot
-> - patch 10 allows for dynamic selection of old DDR3 training code on
->   Turris Omnia, via an U-Boot environment variable
->
-> Marek
->
-> Marek Beh=C3=BAn (10):
->   ddr: marvell: a38x: debug: return from ddr3_tip_print_log() early if
->     we won't print anything
->   ddr: marvell: a38x: debug: Remove unused variables
->   ddr: marvell: a38x: debug: Define DDR_VIEWER_TOOL variables only if
->     needed, and make them static
->   ddr: marvell: a38x: debug: Allow compiling with immutable debug
->     settings to reduce binary size
->   arm: mvebu: turris_omnia: Enable immutable debug settings in DDR3
->     training by default
->   ddr: marvell: a38x: Import old DDR training code from 2017 version of
->     U-Boot
->   ddr: marvell: a38x: old: Fix some compiler warning of the old code
->   ddr: marvell: a38x: old: Backport immutable debug settings
->   arm: mvebu: a38x: Add optional support for using old DDR3 training
->     code
->   arm: mvebu: turris_omnia: Support old DDR3 training, selectable via
->     env var
->
->  arch/arm/mach-mvebu/Kconfig                   |   15 +
->  arch/arm/mach-mvebu/include/mach/cpu.h        |    1 +
->  arch/arm/mach-mvebu/spl.c                     |   37 +-
->  board/CZ.NIC/turris_omnia/Makefile            |    1 +
->  board/CZ.NIC/turris_omnia/old_ddr3_training.c |   79 +
->  board/CZ.NIC/turris_omnia/turris_omnia.c      |    2 +-
->  configs/turris_omnia_defconfig                |    1 +
->  drivers/ddr/marvell/a38x/Makefile             |    2 +
->  drivers/ddr/marvell/a38x/ddr3_debug.c         |   30 +-
->  drivers/ddr/marvell/a38x/ddr3_init.c          |    3 +-
->  drivers/ddr/marvell/a38x/ddr3_init.h          |   43 +-
->  drivers/ddr/marvell/a38x/old/Makefile         |   29 +
->  drivers/ddr/marvell/a38x/old/ddr3_a38x.c      |  738 +++++
->  drivers/ddr/marvell/a38x/old/ddr3_a38x.h      |   93 +
->  .../marvell/a38x/old/ddr3_a38x_mc_static.h    |  226 ++
->  .../ddr/marvell/a38x/old/ddr3_a38x_topology.h |   22 +
->  .../ddr/marvell/a38x/old/ddr3_a38x_training.c |   40 +
->  drivers/ddr/marvell/a38x/old/ddr3_debug.c     | 1545 ++++++++++
->  .../marvell/a38x/old/ddr3_hws_hw_training.c   |  148 +
->  .../marvell/a38x/old/ddr3_hws_hw_training.h   |   49 +
->  .../a38x/old/ddr3_hws_hw_training_def.h       |  464 +++
->  .../marvell/a38x/old/ddr3_hws_sil_training.h  |   17 +
->  drivers/ddr/marvell/a38x/old/ddr3_init.c      |  770 +++++
->  drivers/ddr/marvell/a38x/old/ddr3_init.h      |  405 +++
->  .../ddr/marvell/a38x/old/ddr3_logging_def.h   |  101 +
->  .../marvell/a38x/old/ddr3_patterns_64bit.h    |  924 ++++++
->  .../ddr/marvell/a38x/old/ddr3_topology_def.h  |   76 +
->  drivers/ddr/marvell/a38x/old/ddr3_training.c  | 2651 +++++++++++++++++
->  .../ddr/marvell/a38x/old/ddr3_training_bist.c |  289 ++
->  .../a38x/old/ddr3_training_centralization.c   |  712 +++++
->  .../ddr/marvell/a38x/old/ddr3_training_db.c   |  652 ++++
->  .../marvell/a38x/old/ddr3_training_hw_algo.c  |  686 +++++
->  .../marvell/a38x/old/ddr3_training_hw_algo.h  |   14 +
->  .../ddr/marvell/a38x/old/ddr3_training_ip.h   |  178 ++
->  .../marvell/a38x/old/ddr3_training_ip_bist.h  |   54 +
->  .../old/ddr3_training_ip_centralization.h     |   15 +
->  .../marvell/a38x/old/ddr3_training_ip_db.h    |   34 +
->  .../marvell/a38x/old/ddr3_training_ip_def.h   |  173 ++
->  .../a38x/old/ddr3_training_ip_engine.c        | 1355 +++++++++
->  .../a38x/old/ddr3_training_ip_engine.h        |   85 +
->  .../marvell/a38x/old/ddr3_training_ip_flow.h  |  349 +++
->  .../marvell/a38x/old/ddr3_training_ip_pbs.h   |   41 +
->  .../a38x/old/ddr3_training_ip_prv_if.h        |  107 +
->  .../a38x/old/ddr3_training_ip_static.h        |   31 +
->  .../marvell/a38x/old/ddr3_training_leveling.c | 1837 ++++++++++++
->  .../marvell/a38x/old/ddr3_training_leveling.h |   17 +
->  .../ddr/marvell/a38x/old/ddr3_training_pbs.c  |  995 +++++++
->  .../marvell/a38x/old/ddr3_training_static.c   |  538 ++++
->  .../ddr/marvell/a38x/old/ddr_topology_def.h   |  121 +
->  .../ddr/marvell/a38x/old/ddr_training_ip_db.h |   16 +
->  .../marvell/a38x/old/glue_symbol_renames.h    |  247 ++
->  drivers/ddr/marvell/a38x/old/silicon_if.h     |   17 +
->  drivers/ddr/marvell/a38x/old/xor.h            |   92 +
->  53 files changed, 17138 insertions(+), 29 deletions(-)
->  create mode 100644 board/CZ.NIC/turris_omnia/old_ddr3_training.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/Makefile
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x_mc_static.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x_topology.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x_training.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_debug.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_hws_hw_training.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_hws_hw_training.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_hws_hw_training_def=
-.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_hws_sil_training.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_init.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_init.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_logging_def.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_patterns_64bit.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_topology_def.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_bist.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_centraliza=
-tion.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_db.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_hw_algo.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_hw_algo.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_bist.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_central=
-ization.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_db.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_def.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_engine.=
-c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_engine.=
-h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_flow.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_pbs.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_prv_if.=
-h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_static.=
-h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_leveling.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_leveling.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_pbs.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_static.c
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr_topology_def.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/ddr_training_ip_db.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/glue_symbol_renames.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/silicon_if.h
->  create mode 100644 drivers/ddr/marvell/a38x/old/xor.h
->
-> --
-> 2.43.2
->
