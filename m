@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA055C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 09:06:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5235CC05023
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 09:20:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4052588266;
-	Tue, 16 Apr 2024 11:06:55 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 9FE3588342;
+	Tue, 16 Apr 2024 11:20:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="OYPmTupy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mchwccyL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 09E4187F1E; Tue, 16 Apr 2024 11:06:54 +0200 (CEST)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CC13788274; Tue, 16 Apr 2024 11:20:44 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 41CEB88266
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 11:06:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CC40688274
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 11:20:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-516d3a470d5so4763920e87.3
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 02:06:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1713258406; x=1713863206;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=4+OzgpJEWhBg8LkVvRG5SQlSQRxMYPhTnr+pLNYBfnQ=;
- b=OYPmTupy0PiIblzCvjY6AlELxO9E+OPF2YvISTQMFaN47tzYcKt2BASNHZ4YJHscL6
- bx7ILymH40UeDW+5p3UrvSMcbnQizyl79nffWoW7I5QrIUmOv7BER9+UHCyv5+ws+mpq
- Cg/CwW9cU4e7b/97wF5g/PXAOECVSFpz6EG7LRc1nWyfKs2FY+cXAo0ivsFAax9UseNW
- GrOI9qWhChZKXEsRWSXFgaCGpW7dFVDGc8JYu6EkxFRgKMrNLpqbjarvIVwcwSQMIBD5
- B4vUb8bsr665u0mWtlPpI6/4LbZ0BRHT5ybRQZfYX93zL8foA+YGq0rHa0YA9RA4LLeo
- Z6GA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713258406; x=1713863206;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4+OzgpJEWhBg8LkVvRG5SQlSQRxMYPhTnr+pLNYBfnQ=;
- b=mcF6LzcOF+kvbeYzV2Yfbn/YIHL6AUT9Wb5qRV4b0Rp+JT6aNVKigJ+DqaYDRlsIwY
- Vyn8oCNHpkDG+enuCvs3FZ5y73W01jyOqvF1wP7RIA83o3qv9G72B7OMrEdEGImU6DZL
- M0Cb+hF/mridoBjtFBlCoKXUHDPwE0gWF4e0PwrrXdW0oQVyNgwUZwa7c2dpYWZPAuej
- pCtRouClz8EE3AYUWx+9AQQ9NZrfK5buw2uk3uHzkL+43QzH56MSt7Fs154Hjmtv0QQy
- NGjvoOROiNCpKSZfNP3VOgZQJsrM2oBY3wj1HMB+/uoKQfS8Cm/4FSawBnSbXil2Ybc4
- pUng==
-X-Gm-Message-State: AOJu0YyQZXlq3dQiSePdklAnu+arhdqnKA2Fv7MUrPQ22y4LgimdheiH
- MZWKy5j0+dIe37pkz8/7zAJBD6KIAaCZF4+IjWn6LZs5jRsVWoc37AdJsq/Bhwo=
-X-Google-Smtp-Source: AGHT+IGQEA0piHDatdnrTRfoEVbEaIvB10zJ4eBU6fxTT61iBc2vM4dkYYf4343vDV6N100fk++QPA==
-X-Received: by 2002:ac2:5049:0:b0:518:9b42:b846 with SMTP id
- a9-20020ac25049000000b005189b42b846mr6726262lfm.21.1713258406388; 
- Tue, 16 Apr 2024 02:06:46 -0700 (PDT)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- b4-20020a5d4b84000000b0033e786abf84sm14207264wrt.54.2024.04.16.02.06.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Apr 2024 02:06:45 -0700 (PDT)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Greg Malysa <greg.malysa@timesys.com>, Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Nathan Barrett-Morrison
- <nathan.morrison@timesys.com>, Ian Roberts <ian.roberts@timesys.com>,
- Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>, Teik Heng
- Chong <teik.heng.chong@intel.com>, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] usb: dwc2: Add in version 4xx compatibility
-In-Reply-To: <CAAjXUap1DDPOSKQRc3-h0m5ybv_AHZePwW-vxRSeKW1STZp-0g@mail.gmail.com>
-References: <20240326023208.3525-1-greg.malysa@timesys.com>
- <8e4d6360-8722-4358-b981-2b3405373861@denx.de>
- <CAAjXUap1DDPOSKQRc3-h0m5ybv_AHZePwW-vxRSeKW1STZp-0g@mail.gmail.com>
-Date: Tue, 16 Apr 2024 11:06:43 +0200
-Message-ID: <87r0f54qxo.fsf@baylibre.com>
+ spf=pass smtp.mailfrom=danishanwar@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43G9KQSR106264;
+ Tue, 16 Apr 2024 04:20:26 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1713259226;
+ bh=7Owf/3KZkCtkJCZ0mDb0igY3iRNHVNdboZLt0zpW5Vw=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=mchwccyLF2gMsBmCsCACXEppXD+5sxnn+dZQntROB5zkLcrh4L/ux3YPEFiPpsGZf
+ kmY265nXYeZBnDQg6zXeqb43BjQsoqSltSLPrbZ+054cS0qbhKklrn+PVjGVq352PJ
+ h0uZpoRg7bf9zNR9UAINt4we3Tjb3QTGtoijNLIA=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43G9KQPI024959
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 16 Apr 2024 04:20:26 -0500
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 16
+ Apr 2024 04:20:26 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 16 Apr 2024 04:20:25 -0500
+Received: from lelv0854.itg.ti.com (lelv0854.itg.ti.com [10.181.64.140])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43G9KPV9100482;
+ Tue, 16 Apr 2024 04:20:25 -0500
+Received: from localhost (danish-tpc.dhcp.ti.com [10.24.69.25])
+ by lelv0854.itg.ti.com (8.14.7/8.14.7) with ESMTP id 43G9KPvD010785;
+ Tue, 16 Apr 2024 04:20:25 -0500
+From: MD Danish Anwar <danishanwar@ti.com>
+To: Bryan Brattlof <bb@ti.com>, Sean Anderson <seanga2@gmail.com>, Heinrich
+ Schuchardt <xypron.glpk@gmx.de>, Christian Gmeiner
+ <christian.gmeiner@gmail.com>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Nikhil M Jain <n-jain1@ti.com>, Nishanth Menon <nm@ti.com>,
+ Manorit Chawdhry <m-chawdhry@ti.com>, Andrew Davis <afd@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Simon Glass
+ <sjg@chromium.org>, MD Danish Anwar <danishanwar@ti.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Tim Harvey <tharvey@gateworks.com>, Tony Dinh
+ <mibodhi@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>, Jonas Karlman
+ <jonas@kwiboo.se>, Sumit Garg <sumit.garg@linaro.org>, Michal Simek
+ <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>, Kever
+ Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <r-gunasekaran@ti.com>, Roger
+ Quadros <rogerq@kernel.org>
+Subject: [PATCH v4 2/6] arm: dts: k3-am65x-binman: Add ICSSG2 overlay and
+ configuration
+Date: Tue, 16 Apr 2024 14:50:14 +0530
+Message-ID: <20240416092018.3593039-3-danishanwar@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240416092018.3593039-1-danishanwar@ti.com>
+References: <20240416092018.3593039-1-danishanwar@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,100 +96,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Greg,
+Add ICSSG2 overlay and configuration to tispl and u-boot images.
 
-Thank you for the contribution.
+Signed-off-by: MD Danish Anwar <danishanwar@ti.com>
+---
+ arch/arm/dts/k3-am65x-binman.dtsi | 65 +++++++++++++++++++++++++++++--
+ 1 file changed, 61 insertions(+), 4 deletions(-)
 
-On mar., mars 26, 2024 at 11:36, Greg Malysa <greg.malysa@timesys.com> wrot=
-e:
+diff --git a/arch/arm/dts/k3-am65x-binman.dtsi b/arch/arm/dts/k3-am65x-binman.dtsi
+index 8cc24da1f3..d0cd4889cd 100644
+--- a/arch/arm/dts/k3-am65x-binman.dtsi
++++ b/arch/arm/dts/k3-am65x-binman.dtsi
+@@ -98,6 +98,8 @@
+ #define SPL_AM654_EVM_DTB "spl/dts/k3-am654-base-board.dtb"
+ #define AM654_EVM_DTB "u-boot.dtb"
+ 
++#define AM654_EVM_ICSSG2_DTBO "arch/arm/dts/k3-am654-icssg2.dtbo"
++
+ &binman {
+ 	ti-spl {
+ 		insert-template = <&ti_spl_template>;
+@@ -124,6 +126,20 @@
+ 						filename = SPL_AM654_EVM_DTB;
+ 					};
+ 				};
++
++				fdt-1 {
++					description = "k3-am654-icssg2 overlay";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++					ti-secure {
++						content = <&spl_am65x_evm_icssg2_dtb>;
++						keyfile = "custMpk.pem";
++					};
++					spl_am65x_evm_icssg2_dtb: blob-ext {
++						filename = AM654_EVM_ICSSG2_DTBO;
++					};
++				};
+ 			};
+ 
+ 			configurations {
+@@ -133,7 +149,7 @@
+ 					description = "k3-am654-base-board";
+ 					firmware = "atf";
+ 					loadables = "tee", "dm", "spl";
+-					fdt = "fdt-0";
++					fdt = "fdt-0", "fdt-1";
+ 				};
+ 			};
+ 		};
+@@ -168,6 +184,24 @@
+ 					};
+ 				};
+ 
++				fdt-1 {
++					description = "k3-am654-icssg2 overlay";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++					ti-secure {
++						content = <&am65x_evm_icssg2_dtb>;
++						keyfile = "custMpk.pem";
++
++					};
++					am65x_evm_icssg2_dtb: blob-ext {
++						filename = AM654_EVM_ICSSG2_DTBO;
++					};
++					hash {
++						algo = "crc32";
++					};
++				};
++
+ 			};
+ 
+ 			configurations {
+@@ -177,7 +211,7 @@
+ 					description = "k3-am654-base-board";
+ 					firmware = "uboot";
+ 					loadables = "uboot";
+-					fdt = "fdt-0";
++					fdt = "fdt-0", "fdt-1";
+ 				};
+ 			};
+ 		};
+@@ -205,6 +239,16 @@
+ 						filename = SPL_AM654_EVM_DTB;
+ 					};
+ 				};
++
++				fdt-1 {
++					description = "k3-am654-icssg2 overlay";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++					blob {
++						filename = AM654_EVM_ICSSG2_DTBO;
++					};
++				};
+ 			};
+ 
+ 			configurations {
+@@ -214,7 +258,7 @@
+ 					description = "k3-am654-base-board";
+ 					firmware = "atf";
+ 					loadables = "tee", "dm", "spl";
+-					fdt = "fdt-0";
++					fdt = "fdt-0", "fdt-1";
+ 				};
+ 			};
+ 		};
+@@ -243,6 +287,19 @@
+ 						algo = "crc32";
+ 					};
+ 				};
++
++				fdt-1 {
++					description = "k3-am654-icssg2";
++					type = "flat_dt";
++					arch = "arm";
++					compression = "none";
++					blob {
++						filename = AM654_EVM_ICSSG2_DTBO;
++					};
++					hash {
++						algo = "crc32";
++					};
++				};
+ 			};
+ 
+ 			configurations {
+@@ -252,7 +309,7 @@
+ 					description = "k3-am654-base-board";
+ 					firmware = "uboot";
+ 					loadables = "uboot";
+-					fdt = "fdt-0";
++					fdt = "fdt-0", "fdt-1";
+ 				};
+ 			};
+ 		};
+-- 
+2.34.1
 
-Please avoid top-posting when replying, it makes following the
-discussion more difficult:
-https://www.kernel.org/doc/html/latest/process/submitting-patches.html#use-=
-trimmed-interleaved-replies-in-email-discussions
-
-> I'd be happy with that change. Does anyone have access to the
-> associated designware databook (I do not)? We could also check to see
-> if those four bits are all always allocated to the 2/3/4/x version
-> number. I can submit v2 with that change instead once we know.
-
-I don't have access to the databooks either. I usually refer to the
-linux kernel code since it's a more up to date version of this driver.
-
-Looking at
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?=
-id=3D65dc2e725286106f99c6f6b78e3d9c52c15f3a9c
-
-we can see that the following is added:
-#define DWC2_CORE_REV_MASK	0x0000ffff
-
-This makes me believe that the versioning follows a well known pattern.
-
->
-> On Tue, Mar 26, 2024 at 7:50=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
->>
->> On 3/26/24 3:32 AM, Greg Malysa wrote:
->> > From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
->> >
->> > This adds the Synopsys device id for version 4xx of the designware
->> > IP block and extends the version check to include it to permit
->> > new hardware to run. It does not add any 4xx-specific features.
->> >
->> > Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
->> > Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
->> > Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
->> >
->> > ---
->> >
->> >
->> > ---
->> >   drivers/usb/host/dwc2.c | 3 ++-
->> >   drivers/usb/host/dwc2.h | 1 +
->> >   2 files changed, 3 insertions(+), 1 deletion(-)
->> >
->> > diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
->> > index 637eb2dd06..6fdde6a9a7 100644
->> > --- a/drivers/usb/host/dwc2.c
->> > +++ b/drivers/usb/host/dwc2.c
->> > @@ -1180,7 +1180,8 @@ static int dwc2_init_common(struct udevice *dev,=
- struct dwc2_priv *priv)
->> >                snpsid >> 12 & 0xf, snpsid & 0xfff);
->> >
->> >       if ((snpsid & DWC2_SNPSID_DEVID_MASK) !=3D DWC2_SNPSID_DEVID_VER=
-_2xx &&
->> > -         (snpsid & DWC2_SNPSID_DEVID_MASK) !=3D DWC2_SNPSID_DEVID_VER=
-_3xx) {
->> > +         (snpsid & DWC2_SNPSID_DEVID_MASK) !=3D DWC2_SNPSID_DEVID_VER=
-_3xx &&
->> > +         (snpsid & DWC2_SNPSID_DEVID_MASK) !=3D DWC2_SNPSID_DEVID_VER=
-_4xx) {
-
-Note that this change is also part of:
-https://lore.kernel.org/all/20240328131811.94559-1-seashell11234455@gmail.c=
-om/
-
->> >               dev_info(dev, "SNPSID invalid (not DWC2 OTG device): %08=
-x\n",
->> >                        snpsid);
->> >               return -ENODEV;
->> > diff --git a/drivers/usb/host/dwc2.h b/drivers/usb/host/dwc2.h
->> > index 6f022e33a1..f202d55eb2 100644
->> > --- a/drivers/usb/host/dwc2.h
->> > +++ b/drivers/usb/host/dwc2.h
->> > @@ -739,6 +739,7 @@ struct dwc2_core_regs {
->> >   #define DWC2_PCGCCTL_DEEP_SLEEP_OFFSET                      7
->> >   #define DWC2_SNPSID_DEVID_VER_2xx                   (0x4f542 << 12)
->> >   #define DWC2_SNPSID_DEVID_VER_3xx                   (0x4f543 << 12)
->> > +#define DWC2_SNPSID_DEVID_VER_4xx                    (0x4f544 << 12)
->> >   #define DWC2_SNPSID_DEVID_MASK                              (0xfffff=
- << 12)
->> >   #define DWC2_SNPSID_DEVID_OFFSET                    12
->>
->> Maybe it would be better/easier/futureproof to simply check if (snpsid &
->> 0xffff0 =3D=3D 0x4f540) ?
->
->
->
-> --=20
-> Greg Malysa
-> Timesys Corporation
