@@ -4,92 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B20C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 00:36:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5FDBC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 00:45:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CDB8881AC;
-	Tue, 16 Apr 2024 02:36:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 3A95D87E0B;
+	Tue, 16 Apr 2024 02:45:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Q8Ba/gbN";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bGwtOev5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6160488191; Tue, 16 Apr 2024 02:36:26 +0200 (CEST)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 20B5687DB1; Tue, 16 Apr 2024 02:45:27 +0200 (CEST)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44A4E88190
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 02:36:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 011D987FA1
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 02:45:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-78ebc7e1586so494379885a.1
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 17:36:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=yasuharu.shibata@gmail.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2a7e19c43faso1203480a91.2
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 17:45:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713227783; x=1713832583; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=USKN2pGFkDP20YIROQZ5FYJcSA8Ij3EdEzwpfwvE09c=;
- b=Q8Ba/gbN/eACq/5X1dhpzQXaUPusNBLwfXCO1VZyUC23S8zTzXQsUsjX7rN42k00Ot
- 25naMFXq0ESLxK6H3SmLwKd5JPN5KHXLKeWSdpTWC4NtGUy+auvtKyfh9rQq57oOJIIs
- OyQ5g4jWEGOertwUc7nohGcgGFyr59YpI2bi4=
+ d=gmail.com; s=20230601; t=1713228322; x=1713833122; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=9Ba08nCMrUU3CJUXBlgzNo08gw4XV35T+S2rcJRtkGk=;
+ b=bGwtOev5mufEt2R1sFth61ncFGS43r2/Dba0++PmUbiaHfl/B8TJ7r9Wx82sIMc5W9
+ CAWCtOR2+KixQ5vZRLUKjQR4fo2UT20kz1Z1ELZ5TXll3Hmtd1aH/tKmChOv6qZUuUjH
+ hrv9Elkhz5MxMnf4CGnUK8ng7YLwEuKTQYPYf7lPs+JVU+6goQz3m7v6zsAh5Q28DMgw
+ /GoIBfbEHDTC1pvtDuZpGK0lNxfr+sXs5/YaU/GHfF+hDaEmu7g3Qe73E+BiYocbJezg
+ 8qMdrcFZxzZkCQ797sivpjUplB1aEvaJVWw1sQrqLMQ68Suurzz+nh0Ixa3JXPbiejUJ
+ JA/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713227783; x=1713832583;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=USKN2pGFkDP20YIROQZ5FYJcSA8Ij3EdEzwpfwvE09c=;
- b=l6RJtJS1D4fO0XeU0eoWUGln5/6UOdKfjCBYbgvkYk5crNm/P7t41nuz99NYfIwoxh
- 1t1TA0wIsrTIiWOzrGTtLs3c8MjVc5Me0tWTZ0Ntfvw3Z7swRNhtDK2I9Wv4mdX9IMRg
- uUomfzSOTwC7ffJNM1N0P7TKlwF7DZpABSxRFlx668U1TYGJ1wv7vKmJ/vXAnBNcg77/
- KtpM86lLM9wz3ITOsz9R0YUtwk4C41dO+KOGXNbixr4blp7fgoov7UEYidk6yZV+KV/f
- 02yQNcgV8VVkRaeGNwe7gtMXg4tJ3FMpwGkNzoXSOAgXqbA4zUuBG63lpiW4Ob8pboq4
- +/hA==
+ d=1e100.net; s=20230601; t=1713228322; x=1713833122;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=9Ba08nCMrUU3CJUXBlgzNo08gw4XV35T+S2rcJRtkGk=;
+ b=JLYXijE0Oc1oNGBXq/UIBBcZILrxiBbbr7/VtFV3VxFgVYptn7IedcuxXtc0BklBks
+ 9MArT19a46wB+BovF/KH8D3Ds73jGUkMGO4RvOsBVzv3HAJRb4UFxJayNvdgvFqV4ZW/
+ Wi9IBpoQpfl4O5aJswPK/GxFCC1F8I4tKiuVL5JRxnIZxiBkVXvasX+P6i+YEyYHjjQJ
+ LGaKkIYilTWFSTPZZL4xpCiHZB4kjNv+AMQhMsxzSym7Rl2qnyTupY9j0lpx3PPM/1HL
+ 20fkykZ1G0Ph59HjHusf7F2Hrdwbg9UuIX8O/WBEZOID9uwcJmtEDi3SU8YWs0LBR1EA
+ GEZQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXrjcy8c1Bk7iEK1eRRU3JBVL9AAFSF57dWuDqVTpY40g2768EIMl3kAG3Q8N8RfoQgwHchUGFBVPdzinB7NFtOLZyL4A==
-X-Gm-Message-State: AOJu0YwNQxfC1IvfE13IvcRmNO1x8EMvJXPR2wqg1xAAbNyBu3c6IwB8
- zD3FndUhnVejF5UKlgH4XdrRnoN0fGWaDaz3BFxd8B+q4oB9F174ZbO0Kft5QPU=
-X-Google-Smtp-Source: AGHT+IEXVCQHH5O/XM2/o3Qiz9JWDRqRIPL+O4VbkQ5D2YowAIWqBEI6kTwLZlpmiW+45wnGZZkq3w==
-X-Received: by 2002:a05:620a:22f5:b0:78b:cc54:68e with SMTP id
- p21-20020a05620a22f500b0078bcc54068emr808665qki.35.1713227783075; 
- Mon, 15 Apr 2024 17:36:23 -0700 (PDT)
-Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- f9-20020a05620a15a900b0078d6b42ca02sm7031732qkk.120.2024.04.15.17.36.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Apr 2024 17:36:22 -0700 (PDT)
-Date: Tue, 16 Apr 2024 02:36:19 +0200
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andre Przywara <andre.przywara@arm.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Elon Zhang <zhangzj@rock-chips.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Joshua Riek <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tim Lunn <tim@feathertop.org>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Vignesh R <vigneshr@ti.com>, u-boot@lists.denx.de, git@xilinx.com
-Subject: Re: [PATCH 4/4] Kconfig: Make all Kconfig encoding ascii
-Message-ID: <20240416003619.GK1054907@bill-the-cat>
-References: <cover.1713180904.git.michal.simek@amd.com>
- <55ab78c9f2781b31278395f9e0066041f97b00f6.1713180904.git.michal.simek@amd.com>
- <6b45c003-f6a0-4ee4-a01f-e5acc81d68a9@gmx.de>
- <3df9f51d-d37b-41da-94a1-f05936ebd0d6@amd.com>
+ AJvYcCVDz3JWr72xvgTi5C9+QqhDeJ8mx0HcI3sX2oTBh4LbtzxWaB1HJWMIrig1td9CQOPAfncJJzPPVTEaQSOsHy5AwKkHHA==
+X-Gm-Message-State: AOJu0Yy1XnVSX9vicEtTn/oPxrx4H3PH8aW0LVbUjqijWhx5tw8+cpal
+ hae3MSx7c30nRmH/HGbVek4J7Jjve/YCAxo5iTWdGwdvQ4ScHNkZdq9sPxqJsFIu2ZjB6212VCy
+ YhPDOm+P3ziOnxCFGEo/q1vyLygc=
+X-Google-Smtp-Source: AGHT+IFTvVV7IUvP87hqRMp6FwrY4aQHci2DSjRGfSCf947mg2op0QSueIQBQn+qKVLpa5e9zO4m19k7dfOmFSBNSeY=
+X-Received: by 2002:a17:90a:408d:b0:2a2:dcbd:9f01 with SMTP id
+ l13-20020a17090a408d00b002a2dcbd9f01mr8947237pjg.38.1713228322365; Mon, 15
+ Apr 2024 17:45:22 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="+ECXV8zH+JBWxwlU"
-Content-Disposition: inline
-In-Reply-To: <3df9f51d-d37b-41da-94a1-f05936ebd0d6@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAJ+vNU2U9W2NRT6hf1CAEQ_56SDQviUEzuDD1iYOpdf1CNaZBw@mail.gmail.com>
+ <20240415130013.26721-1-yasuharu.shibata@gmail.com>
+ <20240415130013.26721-2-yasuharu.shibata@gmail.com>
+ <CAOf5uwm23ck7uwr-tAZp=8L9HVb_A0r6BYNZ3C0KCaTNkHG8Og@mail.gmail.com>
+ <CALu9rSZeZYyuCwBeUgR+sxMvmqDBh+Q5hyb-gtHP0U8ovHby_g@mail.gmail.com>
+ <CAOf5uwmqeMKKyf6-vxOnUMisHNZ24TupMRd_M-QT4JdtpnaFjQ@mail.gmail.com>
+In-Reply-To: <CAOf5uwmqeMKKyf6-vxOnUMisHNZ24TupMRd_M-QT4JdtpnaFjQ@mail.gmail.com>
+From: Yasuharu Shibata <yasuharu.shibata@gmail.com>
+Date: Tue, 16 Apr 2024 09:45:00 +0900
+Message-ID: <CALu9rSaAgA00m0trimrhL4XwVivr4UFAhENnfmEdGKLsArBtUg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] net: wget: fix TCP sequence number wrap around issue
+To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>, 
+ Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,70 +95,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Michael,
 
---+ECXV8zH+JBWxwlU
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Mon, 15 Apr 2024 at 22:55, Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
+>
+> Very good job ;) to fix it. Just add Suggest-by: ;)
 
-On Mon, Apr 15, 2024 at 02:49:13PM +0200, Michal Simek wrote:
->=20
->=20
-> On 4/15/24 14:22, Heinrich Schuchardt wrote:
-> > On 15.04.24 13:35, Michal Simek wrote:
-> > > Some of Kconfigs are using utf-8 encoding because of used chars. Conv=
-ert
-> > > all of them to ascii enconging.
-> > >=20
-> > > Signed-off-by: Michal Simek <michal.simek@amd.com>
-> > > ---
-> > >=20
-> > > There are other files which are using utf-8 enconding and pretty much=
- I
-> > > think we should convert all of them because there is no reason to use=
- utf-8
-> > > encoding.
-> >=20
-> > Hello Michal,
-> >=20
-> > The commit message does not explain why we should refrain from using UT=
-F-8.
->=20
-> that's a good point. I was thinking about the reason for it and pretty mu=
-ch
-> wanted to get feedback from Tom about it.
->=20
-> In doc/develop/sending_patches.rst is said that patches should be sent as
-> plain text but encoding is not specified. Traditionally this was ASCII an=
-d I
-> pretty much don't see the reason to use UTF encoding (even my name has
-> special czech char which I am not using, the same is for Marek Vasut).
+Thank you for your advice.
+I sent following v2 patch.
+https://lore.kernel.org/u-boot/20240416002624.1909-1-yasuharu.shibata@gmail.com/
 
-My point of view is that I think ASCII should be used in general, with
-the exception being names (I won't force people to ASCII-ize their
-names, modern systems handle UTF-8 just fine). I actually don't know if
-we should also exclude rST doc files from this rule as well as UTF-8
-should render fine and for example "=B0C" reads nicely in web/PDF/etc.
-
---=20
-Tom
-
---+ECXV8zH+JBWxwlU
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYdyAMACgkQFHw5/5Y0
-tyyT9Qv/WWSFXon8Ekzt1GB6SglQYnav34i1m1hEIeTWX7lWqdzV7QalT6Ifz0OZ
-b6s/gfz+zCnpUkECkHLdVUDFH8tdvuUTuO8HUDML9iCtUVAVcE/u4mpR7eydDSHr
-Udbe5Zf+lHmYRscapOrSa0BYxXnnd0Wdt4KnF2tkz0IItRXnJ4tPZcinuS3gRIOV
-THQ3+u0vfDxPsvqhdp+4t7PhtXu5w01LfIWycsI2GfTGwOH3HgCxO2ZfxyMV8dQe
-RYSNWE2gCipNSivpS0cmu/xDDz4iWNPoR4tdkH/aSG7uco1Ir0EpXOo7KuslEBtF
-VDjo9wqfAplbxrroCfFoeEzKVLaQ7G0suiXczLo7FOR70Rt0rN1Ap2tsdCgAgBxP
-eCgjoidvAGPRCvOrRHR4FpimqWutTRwvlNtAYEMy1FaFIbaUyBwbBL2A32Yu6PYx
-tRF3vnOogkICIP1pl3j86aLSeVeP9K6atSZHrReBIfgUdvL4YFlHsDHlWatVYfAT
-W4Im0zJe
-=9JGK
------END PGP SIGNATURE-----
-
---+ECXV8zH+JBWxwlU--
+-- 
+Best regards,
+Yasuharu Shibata
