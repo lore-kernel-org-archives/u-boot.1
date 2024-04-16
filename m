@@ -4,95 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8DDAC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 12:52:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3D20C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 12:52:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B573D8843B;
-	Tue, 16 Apr 2024 14:51:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 54B9388440;
+	Tue, 16 Apr 2024 14:51:18 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZenL25HE";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="p6gSMOLn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8EC6882E2; Tue, 16 Apr 2024 12:14:40 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A60CE88403; Tue, 16 Apr 2024 14:47:18 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A25A388345
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 12:14:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A25BF8839A
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 14:47:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 7AC3661122;
- Tue, 16 Apr 2024 10:14:32 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0CDAEC32781;
- Tue, 16 Apr 2024 10:14:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1713262472;
- bh=ujW8DqFcTlwhrOGCXDWncEn2W+NVuTOeHJlK6znXb6M=;
- h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=ZenL25HEVT9iaJsI4qTvmz9U/fIaylBtb090zrxTR/ifEW9/B+UtXYmXEN7MQOdai
- NxuqHbufqWPAUI/ZD10nVQTbQpbplBxCpFpXQwBv7oEnPwE28BUoN9Z+y5EyfbN0wi
- KS5WCFlSpqpBKolfpVcWV8FcuxycFK9QlHicb0zQOEBC10Gm1Jq9V9LIEPN1OWSKPz
- aNFcUY0z3HJklGcz2nCxfDcdVJ0XwYzlfV8vQHpirf8BuMYY648BhNygsT/Kg2Z6am
- 0Ax2qbFjN+TlQkvc0P2h63RmQOzLtyLNUw6otPeu+2PrI6esaU9o6mnQE1+4A0kjED
- FRNpR8Rm5I+yQ==
-Date: Tue, 16 Apr 2024 12:14:19 +0200
-From: Marek =?UTF-8?B?QmVow7pu?= <kabel@kernel.org>
-To: Michal Simek <michal.simek@amd.com>
-Cc: <u-boot@lists.denx.de>, <git@xilinx.com>, AKASHI Takahiro
- <takahiro.akashi@linaro.org>, Aaron Williams <awilliams@marvell.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, Anastasiia Lukianenko
- <vicooodin@gmail.com>, Anatolij Gustschin <agust@denx.de>, Biju Das
- <biju.das.jz@bp.renesas.com>, Daniel Schwierzeck
- <daniel.schwierzeck@gmail.com>, Dario Binacchi
- <dario.binacchi@amarulasolutions.com>, Doug Zobel
- <douglas.zobel@climate.com>, Enrico Leto <enrico.leto@siemens.com>, Fabio
- Estevam <festevam@gmail.com>, Gatien Chevallier
- <gatien.chevallier@foss.st.com>, Gregory CLEMENT
- <gregory.clement@bootlin.com>, Grzegorz Szymaszek <gszymaszek@short.pl>,
- Heiko Schocher <hs@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Horatiu Vultur <horatiu.vultur@microchip.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Johan Jonker <jbx6244@gmail.com>, Kever Yang
- <kever.yang@rock-chips.com>, Lad Prabhakar
- <prabhakar.mahadev-lad.rj@bp.renesas.com>, Lars Povlsen
- <lars.povlsen@microchip.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- Lukasz Majewski <lukma@denx.de>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Matthias Schiffer
- <matthias.schiffer@ew.tq-group.com>, Matthias Winker
- <matthias.winker@de.bosch.com>, Michael Trimarchi
- <michael@amarulasolutions.com>, Minda Chen <minda.chen@starfivetech.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Oleksandr Andrushchenko
- <oleksandr_andrushchenko@epam.com>, Oliver Graute
- <oliver.graute@kococonnector.com>, Patrice Chotard
- <patrice.chotard@foss.st.com>, Patrick Delaunay
- <patrick.delaunay@foss.st.com>, Paul Barker
- <paul.barker.ct@bp.renesas.com>, =?UTF-8?B?UGF3ZcWC?= Jarosz
- <paweljarosz3691@gmail.com>, Peng Fan <peng.fan@nxp.com>, Philip
- Oberfichtner <pro@denx.de>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <seanga2@gmail.com>, Seung-Woo Kim <sw0312.kim@samsung.com>,
- Shiji Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, Stefan
- Roese <sr@denx.de>, Stefano Babic <sbabic@denx.de>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini
- <trini@konsulko.com>, Viacheslav Bocharov <adeep@lexina.in>, Yanhong Wang
- <yanhong.wang@starfivetech.com>, "open list:VIM3"
- <u-boot-amlogic@groups.io>, "moderated list:ST BOARDS"
- <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [PATCH v2 5/5] common: Convert *.c/h from UTF-8 to ASCII enconfing
-Message-ID: <20240416121419.58ec6def@dellmb>
-In-Reply-To: <abe7e535b9e4ee13cea1e6d1c37c8f1f6e6014e3.1713250508.git.michal.simek@amd.com>
-References: <cover.1713250508.git.michal.simek@amd.com>
- <abe7e535b9e4ee13cea1e6d1c37c8f1f6e6014e3.1713250508.git.michal.simek@amd.com>
-X-Mailer: Claws Mail 4.1.1 (GTK 3.24.39; x86_64-pc-linux-gnu)
+ dmarc=fail (p=none dis=none) header.from=thaumatec.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2d895138d0eso35752301fa.1
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 05:47:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1713271634; x=1713876434;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=BI+6GDgK9usHwcn0oSSEjJRwEIYdlEuEvtxHnqRHNxk=;
+ b=p6gSMOLnLo3JLByxf9CCCDTkGukcU7R/thhbDCA56eBK6ggC4TZPwVXItJaNqicUYn
+ Ei0odZcLsKn/gb8rBxbXwmHdSchp+YDGs0qrTycQDkGonh2Y2/HQFr9KI8b3pdSKGVTp
+ eI/fNSq3QsuopDiic1UylutKbJGQ3xBxSUj61Lv9XwDhp1yghoFXtEIAJDwDhoSXJs/K
+ mXueEitZe3uyBlPW2nYA0G4ovbmjfhqpAFuI0jCiThB9PmtlxmHfa3fAPxs71LYJhJF8
+ kt5X9U8GGcVrPzIZTG11bqRs+4JCc4D91+9LojR8Ds92RKWAfx1SwgnfcnTmcqngejdX
+ CyqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713271634; x=1713876434;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=BI+6GDgK9usHwcn0oSSEjJRwEIYdlEuEvtxHnqRHNxk=;
+ b=XgNophUJOE4ufrygQ7d30itmy2tds2DXHWr44NPlKbpPeIpLKN1Lo+DJwsom9FO6wj
+ j63jncwA2X2xHWhTNsZjnMmLmQzUSLpdEol+MUxu7KvXGWRW/nML7twBHfaW/26LdZYH
+ FdBNnJ3ZFuScW/HlXbqoK5p8ENnibdnxncjUZNdVMSYvcJwbmu54SHkgjnZ8/nWugTs2
+ gZCe3fyJ6gXZWJUdV+eNJSpdRTDeL/lEB8Yw6Y0m0um0vNn6WRBUy16Hzqu8836rpjMQ
+ UakhOsgX5+CL9kbIsII+9KVNQb3KKglR4AmsA8XPpo6zNVmUx6rVMx/OEEDfDZ+gFyx5
+ ysHg==
+X-Gm-Message-State: AOJu0YxYUOcauW+BddAsxT+Td9W2MpWTrt/V3Em/dPdXZaj9jLYXwZft
+ A09IZG92ScWDIsxXK0z+Rqfrl9iyLHSI4goEfDDmAD3CH8O/YlBwt33TpbdnuAi9ItZcTzwJIqw
+ 7Fh4=
+X-Google-Smtp-Source: AGHT+IE9g0swTbZoCPJVwZt6AsgVpnIZn0uwJLcT5qPMnbfXF+6zaJjLove43/sxTuBEpC89f3v9Bw==
+X-Received: by 2002:a05:651c:1546:b0:2da:91f5:a624 with SMTP id
+ y6-20020a05651c154600b002da91f5a624mr3680077ljp.17.1713271634217; 
+ Tue, 16 Apr 2024 05:47:14 -0700 (PDT)
+Received: from localhost.localdomain (ip092042140082.rev.nessus.at.
+ [92.42.140.82]) by smtp.gmail.com with ESMTPSA id
+ r10-20020a05600c35ca00b00415dfa709dasm19860720wmq.15.2024.04.16.05.47.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 16 Apr 2024 05:47:14 -0700 (PDT)
+From: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
+To: u-boot@lists.denx.de
+Cc: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
+Subject: [PATCH] rockchip: px30-board-tpl: Use CONFIG_TPL_BANNER_PRINT flag
+Date: Tue, 16 Apr 2024 14:47:01 +0200
+Message-Id: <20240416124701.157545-1-lukasz.czechowski@thaumatec.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Tue, 16 Apr 2024 14:51:12 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,4 +91,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Acked-by: Marek Beh=C3=BAn <kabel@kernel.org>
+Display TPL init information message only when TPL_BANNER_PRINT
+configuration entry is set. This allows to disable information
+message in case logs on UART are unwanted.
+
+Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
+---
+ arch/arm/mach-rockchip/px30-board-tpl.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm/mach-rockchip/px30-board-tpl.c b/arch/arm/mach-rockchip/px30-board-tpl.c
+index 637a5e1b18..a660816db0 100644
+--- a/arch/arm/mach-rockchip/px30-board-tpl.c
++++ b/arch/arm/mach-rockchip/px30-board-tpl.c
+@@ -46,7 +46,9 @@ void board_init_f(ulong dummy)
+ 	 * printhex8(0x1234);
+ 	 * printascii("string");
+ 	 */
++#if CONFIG_TPL_BANNER_PRINT
+ 	printascii("U-Boot TPL board init\n");
++#endif
+ #endif
+ 
+ 	secure_timer_init();
+-- 
+2.34.1
+
