@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFF29C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 00:35:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C154AC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 00:36:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51C6E87FDB;
-	Tue, 16 Apr 2024 02:35:56 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AC39B8817B;
+	Tue, 16 Apr 2024 02:36:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FTMZRKUa";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lppqT7bc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E745287FA1; Tue, 16 Apr 2024 02:35:54 +0200 (CEST)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id 4B05A88081; Tue, 16 Apr 2024 02:36:00 +0200 (CEST)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68FCD88001
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 02:35:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EAC0E87FA1
+ for <U-Boot@lists.denx.de>; Tue, 16 Apr 2024 02:35:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-78d57b9f3caso242151985a.3
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 17:35:52 -0700 (PDT)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-78d5e80bc42so332228985a.0
+ for <U-Boot@lists.denx.de>; Mon, 15 Apr 2024 17:35:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713227751; x=1713832551; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1713227757; x=1713832557; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=X9lChb86ta86bmN0jEBJK6sZgvdAwWFxcY/pW60X9G4=;
- b=FTMZRKUa6jfbpUsgRVEKo0TnDcyrRZjqYMDKsU+zwPdpAQG3pBXgLGmGqCDGmXoRtW
- LckvYzIOoV04ccJjv/pBNgnc8XmGei+DAWMhUwQy+i3CXDBizRbV1KEKcqoR+r7F1eCB
- 4zkRuPGDb/m36DkPkBv9ZDTst7q3cXtZF4ANk=
+ bh=WCcfmiDcPK9HU7wx7W95ebrcvxRJupNUD6UpFpYIoUQ=;
+ b=lppqT7bclgsapFXC9yk3weQ0VQBSJdhp0lGUulkHM8fktRG5WxbGJQmiUkso3dwCwT
+ 3WduE/xyO1CIduPwCpTZ2tpS86DtZbjpnLxQNeSYITWTx5nfuyx+mCixvt//0A1RDQIF
+ dya63yyQnMqj+4Po/tptcPb/ih5uUajloeTZM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713227751; x=1713832551;
+ d=1e100.net; s=20230601; t=1713227757; x=1713832557;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=X9lChb86ta86bmN0jEBJK6sZgvdAwWFxcY/pW60X9G4=;
- b=GbrYz/1FD6A9jbsnYS6t+TQyh0f4XXiEXjjkQM7iLEoHriIVZz33i6T2GvPFbf2D2/
- nHY8bF8ZSC1pm9Tm8ANY6ozrMINslzpuj0cpzFhzBMDwI7YjRM3EcHwlVTwLIe3qUAmJ
- a5O68wUwpje95k1/Dmw+5GU9KtA83G0Nj2Qjm1VTlPaOfdUoUn1u2nH/D2gKtm/hcJu/
- FDtzab9hDoMxaaAo95eGiQpekzjvZEl/m5MwCShUe2ynwad7s16Ww/f0GASstsRfJzRC
- oznWUHPeupzw3Rb1ZscMPae4QmbIikHuhze1fZ8ZmlsbOPPp9zTrk1Uycdf/QkywdCCU
- hS2A==
-X-Gm-Message-State: AOJu0Yxu/DXg+4Xc6c5hKdw1YGTfXgei4kskhllzJKhW1DW/WUSCbGIN
- K9th04RBnj5PBYxUz4zqqb9Quy/UMqlhbztDe/qcYb+qbkZvog06yJvChGks15I=
-X-Google-Smtp-Source: AGHT+IFl7p2LuR4e0oj7364zMjIpdURGDwfI6BI0jOp0Q+Wd/5SzjsEGktZQ7iamn7XQynlUidl8CA==
-X-Received: by 2002:a0c:c606:0:b0:69b:6707:628a with SMTP id
- v6-20020a0cc606000000b0069b6707628amr6891179qvi.47.1713227751205; 
- Mon, 15 Apr 2024 17:35:51 -0700 (PDT)
+ bh=WCcfmiDcPK9HU7wx7W95ebrcvxRJupNUD6UpFpYIoUQ=;
+ b=wJfnvgluQLOfyScdUJ9VH1/mn9x9h9+wk0/Bs3LnA4jLyvxhdGNN9b+VmEahdmaT4s
+ YXa8Bp0NG6xFN+sSVuxZA/hNnvvUod74S0zzSxC+H822C2yKjt15/38pBcMv78hGnfvn
+ SLPpKdTvoHI6y2oCNVSOnKMKGEP6SYuAHZGuJzgLiJ8PkR5mW98hp5/SjhOL79ZpCh/m
+ O1q7K3YbCL6f7Y/MO7113jkpOsVreNY3kJnDUmwULr0is50eMYOt3YaXUjoNejwQQoX2
+ zfx9nWxxo5svrfrQk5LkBgNR6bzzoMwdb5bvZ5VffjrHyNgj2XYxAalOx2HXx5FIA2Ta
+ XGgA==
+X-Gm-Message-State: AOJu0YwQ8S9QK0Roqu2qgeN9WqHfZ1R+Oa6dhvE1C/qCDURivzclRDyO
+ lyovvVkIgjGT6KeqxBIV6dpX/BZOG9hL6hEHyj8AxrI+3fMpRCsFQ38sNSnFiWQ=
+X-Google-Smtp-Source: AGHT+IEsyRdIsT+L+/gkffCvSsWpOeiZN8vY1RJ0L2W1Kk40pjK3R0lFNwhF5spr8oLjLic9jDwYmA==
+X-Received: by 2002:a05:620a:8106:b0:78e:bd79:f22a with SMTP id
+ os6-20020a05620a810600b0078ebd79f22amr11814824qkn.57.1713227756738; 
+ Mon, 15 Apr 2024 17:35:56 -0700 (PDT)
 Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- u18-20020a0cea52000000b0069b192e63bfsm6858784qvp.91.2024.04.15.17.35.49
+ p18-20020a05620a057200b0078ecd227e5csm5389180qkp.74.2024.04.15.17.35.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Apr 2024 17:35:50 -0700 (PDT)
-Date: Tue, 16 Apr 2024 02:35:46 +0200
+ Mon, 15 Apr 2024 17:35:56 -0700 (PDT)
+Date: Tue, 16 Apr 2024 02:35:53 +0200
 From: Tom Rini <trini@konsulko.com>
-To: "Chee, Tien Fong" <tien.fong.chee@intel.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- "Vasut, Marek" <marex@denx.de>,
- =?utf-8?B?TWljaGHFgiBCYXJuYcWb?= <barnas@google.com>,
- "Lau, Wan Yee" <wan.yee.lau@intel.com>,
- "Hea, Kok Kiang" <kok.kiang.hea@intel.com>
-Subject: Re: Pull Request: Please pull u-boot-socfpga-next-20240415
-Message-ID: <20240416003546.GF1054907@bill-the-cat>
-References: <DM8PR11MB5592D34AF6D95F4F105443B2D2092@DM8PR11MB5592.namprd11.prod.outlook.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: U-Boot Mailing List <U-Boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Yang Xiwen <forbidden405@outlook.com>
+Subject: Re: [GIT PULL] Please pull u-boot-mmc master
+Message-ID: <20240416003553.GG1054907@bill-the-cat>
+References: <CGME20240415095231epcas1p4106945fe2de51e77e1fd60684c3c83bb@epcas1p4.samsung.com>
+ <6b1625a6-c5b8-4f18-8e3b-0e268936ae4b@samsung.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="V5flBhEO2nN7oJlJ"
+ protocol="application/pgp-signature"; boundary="rDSOr/mUHpJ084lS"
 Content-Disposition: inline
-In-Reply-To: <DM8PR11MB5592D34AF6D95F4F105443B2D2092@DM8PR11MB5592.namprd11.prod.outlook.com>
+In-Reply-To: <6b1625a6-c5b8-4f18-8e3b-0e268936ae4b@samsung.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,28 +94,25 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---V5flBhEO2nN7oJlJ
+--rDSOr/mUHpJ084lS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 15, 2024 at 07:34:20AM +0000, Chee, Tien Fong wrote:
+On Mon, Apr 15, 2024 at 06:52:30PM +0900, Jaehoon Chung wrote:
 
 > Dear Tom,
 >=20
-> Please pull the SoCFPGA changes for next from u-boot-socfpga, containing:
+> Please pull u-boot-mmc master into u-boot master branch.
+> If there is any problem, let me know, plz.
 >=20
->   1.  Add option to reprogram FPGA every reboot, enable this as default i=
-n chameleonv3 defconfig.
->   2.  Fixes: Rename CONFIG_SPL_SOCFPGA_SEC_REG to CONFIG_SPL_SOCFPGA_DT_R=
-EG, so the driver can be built when CONFIG_SPL_SOCFPGA_DT_REG is set in def=
-config.
+> BTW, I'm checking other pending patches in more detail.
+> After checking, I will apply them into u-boot-mmc. Sorry for too late.
 >=20
+> Best Regards,
+> Jaehoon Chung
 >=20
->       Build-tested on SoC64 & SoC32 boards.
->=20
-> Best regards,
-> Tien Fong
+> CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/20345
 >=20
 > The following changes since commit b03b49046af5dfca599d2ce8f0aafed89b97aa=
 91:
@@ -124,13 +122,12 @@ config.
 >=20
 > are available in the Git repository at:
 >=20
->   https://source.denx.de/u-boot/custodians/u-boot-socfpga.git tags/u-boot=
--socfpga-next-20240415
+>   git@source.denx.de:u-boot/custodians/u-boot-mmc.git master
 >=20
-> for you to fetch changes up to 27ed98d491521a637f2b4468ac021511294f897f:
+> for you to fetch changes up to 3657ef738ad6aa2c32c569e7ae67a5557343f7d0:
 >=20
->   drivers: misc: Fixes: Rename CONFIG_SPL_SOCFPGA_SEC_REG to CONFIG_SPL_S=
-OCFPGA_DT_REG (2024-04-15 11:16:06 +0800)
+>   mmc: cv1800b_sdhci: Remove the unused argument (2024-04-15 17:58:59 +09=
+00)
 >=20
 
 Applied to u-boot/master, thanks!
@@ -138,22 +135,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---V5flBhEO2nN7oJlJ
+--rDSOr/mUHpJ084lS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYdx98ACgkQFHw5/5Y0
-tyy+ogv+K5InH9RYwxvZER8brp/NA3VR2AvLN+hk6uh6r6FSU4d7mfBjqxG+aWe9
-Ro+MUc/vIVwCGZf6fTbSXaevffDLpYpFn4OpiTkHl5JtrpG78Ff0Wvyp79k7Kia6
-TMSiOCpa47fo7ZPX/g0GoKIvJekbWEbjy9+zC/AC09F/XAzNPTbEtPycjz3wG4hP
-84xgAwm+JYdt8k3OxgFQ9s5nHhugItKqXORfe3rpoQL8pIzPckZYABwDRjk5r20t
-vr1Ba5SQ8FOeRkZWc2gClRzjonh4e6Ogce5bMEHXef9+CI1+yNMqfWCdMDEPIc1L
-qGOxXcYz3fEFrO30R+cFG9z5sKMXp1GW38q2GAc5YUczVIQTkmSjRKO/Xdg+MPwC
-vmrKF9cvOA3yowI+i2veDUF6Ezgh9qk8ALYy9IsA89Q7IKYjjBs3uBdIWb+flJ3S
-urHD28+rUUAt5JFPUgYlQmPuESjrrn2yDoccKGVBTo/NLVeuPIL2WwmH2SAs9+b3
-MwFn+C5d
-=uKpY
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYdx+kACgkQFHw5/5Y0
+tyyaYgwAspGrw6sTgcu9GAyQbitZC1wVfveZIiMHJdJtg4cLo/CSaztzqsfChBmq
+MIoRXLnQ3INeajAi2GOlqSPZhWF508KTOw/b8GVZZwnVkZoWeeme4yYS7i1QqCtz
+5m+Sz+Ts7nQwj8yMh1LFlxfl9BeX70hDprPewE/7GZ5cdZfRj40QosAZS8vZzdBa
+SNOg2biXnrIfX1kv7ifRbk2MOB+XL2yV2tv/l6VMivUkT47AVzzzdhF4jUzMzNkh
+zo2WvSIa4zXi6/cyW9VOQW4rjH/b4MO22TWsRM8uVOqj5aT6jEbRt2tcIUpGcFGu
+pKUfrt+Gd2Adh8ypKNxIehXmyhkcwFmh+dZHCh78f+F3F9LpxgmLR4qDfvbR//8R
+CGWGZ9klXMIS21PdSRaoAe3WHzKW4RmlLXep4dVBOwiA5z3Dt6V71TYCVYo+L75s
+DfXgYlnJ2nbZYE8Dqag3wzsrScfjmjrgImemTqfgTTZmP3WDVApQlQGSuU33B3pn
+F3HCkTsk
+=Q2O9
 -----END PGP SIGNATURE-----
 
---V5flBhEO2nN7oJlJ--
+--rDSOr/mUHpJ084lS--
