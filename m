@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D708C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 09:59:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7ED4FC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 10:03:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCE5588325;
-	Tue, 16 Apr 2024 11:59:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F32C28831C;
+	Tue, 16 Apr 2024 12:03:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="LFZfyd9K";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="nCAppNEf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AEE88832A; Tue, 16 Apr 2024 11:59:44 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id 880D388344; Tue, 16 Apr 2024 12:03:05 +0200 (CEST)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D3D38831C
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 11:59:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6218888325
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 12:03:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-34782776b19so1773050f8f.0
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 02:59:41 -0700 (PDT)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-41896acb32fso2466405e9.0
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 03:03:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1713261581; x=1713866381;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1713261780; x=1713866580;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=kYATZ6riV2+x8Gy0ZXnef25YXZJXop0dlAhh/czpvuE=;
- b=LFZfyd9KB1DbfJy0qFIw3zTYEH8j3R51YpMfG7xhcqmwjkX5DUf06C0/WeKTDtZlkh
- LYL1VZMplh1zFOIkbRVwx3jwNju+lIDfxwhWJDsOKNlNHvE7LRpwl48F+TYSWreeOwaT
- LnPOLVIvPY0ikUGUrmUnTlhtDqcddGtUoOZdKne01Kf4ycqa4Z1GFK+gd7ySIzJkv1QF
- oZwsKRgwEUJGt9Vky3eytIhvisUilmGhuqxZTSwbgbMbi8P07K29D41fq8eyCci6Mt70
- 2CIkQsPWDnC3hnPf/r1/fjiZD4fa/HlTQBkXdnTyr/7c+gg7vo33WMCEXanUyZBkxFNT
- gAFQ==
+ bh=5eiKjkCA9bvJxe7P/eFRE38NDCBbKO7KEnyl1BJDXro=;
+ b=nCAppNEfaL8Mcz5SKTLyP70TqG2s7s32zsemwZZ+EHtLE/PZ7G/pl62vba7wtduAQk
+ aDYajvLXjFDh8vXsq88kWcoh3Z56FxL91NzT6hbVs1xxOKk+lOECod2Nb9921qii2gyn
+ m8y1C+nx0lsRjUthx7nIIUVWRIKNWBm00f3GbR8CW/PoHPlB+XvTSiAWecOCmykKIEIf
+ JN7Gh0dk+GU5YWPRcCs+tZ+bGhHnDhDCW4UwdTvw94pG9J8mvm/zmaG5TWBla5A7chLZ
+ SQoH8k8GUbeCbN03KG/idmiPVl4Qs8j+0XM+gNngW9PLJowAVs1opxIOTD0oPdmBHkWC
+ 5XOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713261581; x=1713866381;
+ d=1e100.net; s=20230601; t=1713261780; x=1713866580;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kYATZ6riV2+x8Gy0ZXnef25YXZJXop0dlAhh/czpvuE=;
- b=d/H783jXze3l5X6xCF6aWHrBaiYI/g/mmCRr+qQHSZVgONZCNcdArdkg8O5ZoOXUEs
- q9rrtS0NZQWVgOFp84qBywe7a/uLqcsDoaZWoN7XEuTUSdbJWxLFDtrU2wXeJ/yU1B9y
- PxdhCvf1cQuGG+WCoNccJlAOhWYLk1zuHt4CJzGFO2jX4nPJO8D+euBJNasTp0l0AAjJ
- dOItVfJCpxP28zsXU+NAg1O4tT2elOAhcqH2gcOrpxA62GbnPyvYhp5e07UV/3GE+hVV
- THzyg/wwPKDVo/VanlBFefoffan6nrPmn5ijZeJ3WNOmFSwm09/u9Ln58H70qRfKIZgd
- U2+Q==
-X-Gm-Message-State: AOJu0YyOouNVqLssoZ+ti6K61gBogQyw6XTHvcYgyVmYCUu+dSNlbHrg
- LiDXqrIKPQFMGpAUPwH+PtC9FP9RteHYSyG+Wp+1URkBHIZaVvMBurGT48fGr6I=
-X-Google-Smtp-Source: AGHT+IG6XC5TZayyq2zf/xaWgoNdnITgBoNQX+qaAcdzAYoqM2luAoa8Qm5GOj1l3H6KrNpirYYolQ==
-X-Received: by 2002:a5d:6e55:0:b0:346:afab:9702 with SMTP id
- j21-20020a5d6e55000000b00346afab9702mr7606891wrz.13.1713261580521; 
- Tue, 16 Apr 2024 02:59:40 -0700 (PDT)
+ bh=5eiKjkCA9bvJxe7P/eFRE38NDCBbKO7KEnyl1BJDXro=;
+ b=qCuiOK4IT8YVmf6XFl5JiPuDaurIqIBo+i9pInfwD65t1tRCidYxiFt2QO6GQEVvZa
+ 7f2AU+ZD4m++/hu2ypIPGfZj66Wohsn5ODMqdKsYD8CSCBQDnaePPdQoZYsl06OECjps
+ XzTo27xx8JmnzYqNqZ2oFVxKn7ieWCsuQcv650HexJptrYZe6akPhrif+bfs7m6uKay/
+ fLfFuXfBGQVaKLv+D/ilUK3lQIn9JXRBfY09vPdELegSCQvGe0l4JW5XryTL4N76uGFf
+ tblFJvg2dbmjmqN6O7qcqDYnVTOZCTdVCitjnYHJn0nlgHtAXrMieZ0L7R72+fAuUpVC
+ Vhtw==
+X-Gm-Message-State: AOJu0YwXF6GUyTU+/Om2tp2KV8LXFDRhO8henTu6w66WaYUnwc3GksIK
+ ibx8h9zaXohsFjQ8qRtqmsDpnGhLUNSyOd4ZN08f8cVxWlA02KpQZxN8UkF3rgA=
+X-Google-Smtp-Source: AGHT+IFGwrllSW7nV3lvmaoDvgw/JNe1nWPu1wG8NT5HkTXjFoTnTEQ0CIu4lh1F3HP+csHPLIVvbQ==
+X-Received: by 2002:a05:600c:3b98:b0:417:e00c:fdb8 with SMTP id
+ n24-20020a05600c3b9800b00417e00cfdb8mr10696233wms.1.1713261779739; 
+ Tue, 16 Apr 2024 03:02:59 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- e3-20020a5d5943000000b00346c169362esm13946080wri.23.2024.04.16.02.59.39
+ bg25-20020a05600c3c9900b004162d06768bsm22882683wmb.21.2024.04.16.03.02.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Apr 2024 02:59:40 -0700 (PDT)
+ Tue, 16 Apr 2024 03:02:59 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Jon Humphreys <j-humphreys@ti.com>, Kamlesh Gurudasani <kamlesh@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, Christian Gmeiner
- <christian.gmeiner@gmail.com>, Devarsh Thakkar <devarsht@ti.com>, Simon
- Glass <sjg@chromium.org>, Nikhil M Jain <n-jain1@ti.com>, Neha Malcom
- Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Maxime Ripard
- <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>, Roger
- Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, Robert Nelson <robertcnelson@gmail.com>,
- Nishanth Menon <nm@ti.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 12/16] arm: dts: k3-am625-sk-u-boot: Add
- sysreset-controller node
-In-Reply-To: <86edbbzlod.fsf@udb0321960.dhcp.ti.com>
-References: <20240408223134.165877-1-j-humphreys@ti.com>
- <20240408223134.165877-13-j-humphreys@ti.com>
- <87cyqwe3lt.fsf@baylibre.com> <86edbbzlod.fsf@udb0321960.dhcp.ti.com>
-Date: Tue, 16 Apr 2024 11:59:37 +0200
-Message-ID: <87frvl4ohi.fsf@baylibre.com>
+To: Aren <aren@peacevolution.org>, John Watts <contact@jookia.org>
+Cc: u-boot@lists.denx.de, Sam Edwards <cfsworks@gmail.com>, Samuel Holland
+ <samuel@sholland.org>, Jagan Teki <jagan@amarulasolutions.com>, Andre
+ Przywara <andre.przywara@arm.com>, Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH] usb: musb-new: sunxi: support usage with DM_USB_GADGET
+In-Reply-To: <ewekir7xqzojtzn56vtv3tw5u7rdrywewmowbhrd6kjm7efdo5@wrin6nf5vmjc>
+References: <20231231203930.1955090-1-aren@peacevolution.org>
+ <ZheHOZebMGze5X09@titan>
+ <ewekir7xqzojtzn56vtv3tw5u7rdrywewmowbhrd6kjm7efdo5@wrin6nf5vmjc>
+Date: Tue, 16 Apr 2024 12:02:56 +0200
+Message-ID: <87cyqp4obz.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -100,97 +92,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jon,
+Hi,
 
-On jeu., avril 11, 2024 at 15:30, Jon Humphreys <j-humphreys@ti.com> wrote:
+On ven., avril 12, 2024 at 18:54, Aren <aren@peacevolution.org> wrote:
 
-> Mattijs Korpershoek <mkorpershoek@baylibre.com> writes:
+> On Thu, Apr 11, 2024 at 04:46:17PM +1000, John Watts wrote:
+>> On Sun, Dec 31, 2023 at 03:38:37PM -0500, Aren Moynihan wrote:
+>> > Add support for building the sunxi-musb driver with DM_USB_GADGET
+>> > including adding a separate IRQ handling function and registering the
+>> > driver with the musb system differently.
+>> 
+>> Hi there,
+>> 
+>> Were you aware of this similar patch?
+>> 
+>> https://lore.kernel.org/u-boot/20230608195631.55364-1-CFSworks@gmail.com/
+>> 
+>> If not you might want to test it and compare it.
+>> 
+>> John.
 >
->> Hi Jonathan,
->>
->> Thank you for the patch.
->>
->> On lun., avril 08, 2024 at 17:31, Jonathan Humphreys <j-humphreys@ti.com> wrote:
->>
->>> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
->>
->> Please consider adding a commit message body.
+> I was not aware of that patch, it looks like it does the same thing as
+> this one, but without some of the bugs. When comparing with it I
+> realized that my dm_usb_gadget_handle_interrupts function is just plain
+> wrong.
 >
-> Got it.  thanks.
->
-> BTW, the next version of this series will drop this patch as Andrew has
-> submitted another patch removing the need for this one.  See
-> https://lore.kernel.org/r/20240402160908.508974-1-afd@ti.com.
+> I'll try to find time to test it soon.
 
-I was not aware of that one. thank you for pointing it out. That seems
-indeed a better solution.
+Please keep me in the loop for both progress on this one and on testing:
 
->
->>
->> On the TI vendor tree, there is a similar patch with a commit message:
->> https://git.ti.com/cgit/ti-u-boot/ti-u-boot/commit/?h=ti-u-boot-2023.04&id=c5296d943c2c84dd6dcb3b91305d006ac46f3157
->>
->> Before patch:
->> => reset
->> resetting ...
->> System reset not supported on this platform
->> ### ERROR ### Please RESET the board ###
->>
->> With patch applied:
->> => reset
->> resetting ...
->>
->> Tested-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # on am62x sk evm
->>
->> Andrew also suggested to me that if we are interested by A53 reset only,
->> we can PSCI reset instead for all k3 architecture:
->>
->>  --- a/arch/arm/Kconfig
->>  +++ b/arch/arm/Kconfig
->>  @@ -784,6 +784,9 @@ config ARCH_K3
->>           bool "Texas Instruments' K3 Architecture"
->>           select SPL
->>           select SUPPORT_SPL
->>  +       select PSCI_RESET if ARM64
->>  +       select SYSRESET if ARM64
->>  +       select SYSRESET_PSCI if ARM64
->>           select FIT
->>           select REGEX
->>           select FIT_SIGNATURE if ARM64
->>
->> Has the above been considered?
->
-> I am not aware.  I would think that you want full reset, unless you are
-> thinking about specifying a reset level?
-
-On my end, I was mostly interested in resetting from the A53 core, but
-the solution you linked previously should work for me.
+https://lore.kernel.org/u-boot/20230608195631.55364-1-CFSworks@gmail.com/
 
 >
-> Jon
+> Thanks for the link
+>  - Aren
 >
->>
->>
->>> ---
->>>  arch/arm/dts/k3-am625-sk-u-boot.dtsi | 9 +++++++++
->>>  1 file changed, 9 insertions(+)
->>>
->>> diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
->>> index fa778b0ff4c..35bfeae75a0 100644
->>> --- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
->>> +++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
->>> @@ -46,3 +46,12 @@
->>>  &cpsw_port2 {
->>>  	status = "disabled";
->>>  };
->>> +
->>> +&dmsc {
->>> +	bootph-pre-ram;
->>> +
->>> +	k3_sysreset: sysreset-controller {
->>> +		compatible = "ti,sci-sysreset";
->>> +		bootph-pre-ram;
->>> +	};
->>> +};
->>> -- 
->>> 2.34.1
+>> > The implementation of usb_gadget_register_driver from
+>> > musb-new/musb_uboot.c only works when the gadget driver for the device
+>> > has already been probed and has called musb_register. On the pinephone
+>> > (using a allwinner a64 processor) this causes issues when trying to use
+>> > usb gadget mode (such as from the ums command) and CONFIG_USB_ETHER is
+>> > disabled.
+>> > 
+>> > The implementation of usb_gadget_register_driver provided when
+>> > DM_USB_GADGET is enabled will probe the necessary drivers when it's
+>> > called.
+>> > 
+>> > Without the patch, this is what the error condition looks like:
+>> > => ums 0 mmc 1
+>> > UMS: LUN 0, dev mmc 1, hwpart 0, sector 0x0, count 0x3a3e000
+>> > Controller uninitialized
+>> > g_dnl_register: failed!, error: -6
+>> > g_dnl_register failed
+>> > 
+>> > based on:
+>> > commit 2e4865bc6486 ("musb-new: omap2430: fix compiling in DM_USB_GADGET config")
+>> > 
+>> > Signed-off-by: Aren Moynihan <aren@peacevolution.org>
