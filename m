@@ -4,50 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E94CBC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 10:27:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9329C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 11:53:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1953688319;
-	Tue, 16 Apr 2024 12:27:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gnu.org
+	by phobos.denx.de (Postfix) with ESMTP id 16FD9883F4;
+	Tue, 16 Apr 2024 13:53:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gnu.org header.i=@gnu.org header.b="j86OzdrV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="nbvMKrtR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F51D87DB1; Tue, 16 Apr 2024 12:27:02 +0200 (CEST)
-Received: from eggs.gnu.org (eggs.gnu.org [IPv6:2001:470:142:3::10])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AB3B9883F7; Tue, 16 Apr 2024 13:53:54 +0200 (CEST)
+Received: from mail-pg1-x535.google.com (mail-pg1-x535.google.com
+ [IPv6:2607:f8b0:4864:20::535])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD14A882AC
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 12:26:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 93DED88346
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 13:53:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gnu.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=othacehe@gnu.org
-Received: from fencepost.gnu.org ([2001:470:142:3::e])
- by eggs.gnu.org with esmtps (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
- (Exim 4.90_1) (envelope-from <othacehe@gnu.org>)
- id 1rwg1d-0003Rw-CI; Tue, 16 Apr 2024 06:26:56 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=gnu.org;
- s=fencepost-gnu-org; h=MIME-Version:Date:References:In-Reply-To:Subject:To:
- From; bh=ypsGyULasiSnxOpar1Ct/gZMnWEDAMvtcHxnZmpwQyM=; b=j86OzdrVH21gilAj3zsu
- Zmc8HrkI/g8U6C1WkjESgQDcrg4jLvvibJJCXLKARIJMjrtJ2rO5WpmYMWIXs9ap/QuEvxncLV56K
- edaKZz/yq3ffrVJmGJsijw7cRHktdBJfpdgR45kZXzSBmFSzjuLJga7G+EDws82FgZNNRHH+EPJte
- dn0kI5rluGKVl9iXy2n6Sa19BJD7nNlpZZEYElNATEl6U8Al4QHCQVIrHyMLb7wX6qc6uBiMnCpyI
- b88gT1u7AG6622dC5/hNGwACJEnfZZ4P9qBGG7jtuSnOyDB+0gMmnXA7hl3NV8fHoaXUAP4sMeInW
- MM9Hdq9HnPGygw==;
-From: Mathieu Othacehe <othacehe@gnu.org>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: ye.li@nxp.com,  u-boot@lists.denx.de,  Fabio Estevam <festevam@denx.de>
-Subject: Re: [PATCH] imx93: Move SoC and lifeclycle information to debug level
-In-Reply-To: <20240415215717.3732484-1-festevam@gmail.com> (Fabio Estevam's
- message of "Mon, 15 Apr 2024 18:57:17 -0300")
-References: <20240415215717.3732484-1-festevam@gmail.com>
-Date: Tue, 16 Apr 2024 12:26:47 +0200
-Message-ID: <87o7a9ob6g.fsf@gnu.org>
-User-Agent: Gnus/5.13 (Gnus v5.13)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pg1-x535.google.com with SMTP id
+ 41be03b00d2f7-5dbf7b74402so2419826a12.0
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 04:53:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713268429; x=1713873229; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Z76fMC7TSY4HttWNujRUUyvj7J5jRQ4H/gKbhqNHB+Q=;
+ b=nbvMKrtRteg1FexzOl9UMnUMMM4JFl3ryIBcrS5wapTztykLWXmJO+K0T+RjelfdQM
+ Vnt55X02CXVb8F9Eyf4NlzldFHCO2IUQNwj+1dfArj4YEjEeG4CdIotyrdKlT2GYNCw8
+ wuh0RccgiwqsSFWCxKbMORnazje4Gwi5Tf/Yu0YdrGiW5cZC1YwfU7jwA1MiccWc5M75
+ OJMidCVTrPfPxVG0s6s22vyWuylupkEu5LEJ8RIjNtryM8qJqS0RiZWAG0XqwJbxEtTu
+ WEh9oq6bcaxR3B7HxXHY65Fyt4ZGvGicVhbbuD6lACCPJxI69PYwli5zOhXsihSHMCyT
+ GDNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713268429; x=1713873229;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Z76fMC7TSY4HttWNujRUUyvj7J5jRQ4H/gKbhqNHB+Q=;
+ b=j+k4nhUzSGid+0BgYHMDXNYUkRZh1JwRUsbZG1LICO6iyqLQtNy6a2KsyoveldURBr
+ rL88eHn0C8L8uNa6BvShiqRTR4Q1e+0dl8/CJHcZosYU23zsXb9iJuJqYZwxTbndKyBK
+ Iidshh+1604aOZank06Dn1RXcczS5OOMq3WRNshwCcgSAyYRqARk1nTNMt7d/hh324Sr
+ qPWcuOi4/YRlWR4SdkFYek8/mY+l6Xg74dA7ECNHrUv2UcT740xaa4P7l6KrbwO/D3Uy
+ WwzV3grUO24ooJB2ElefqtJM5k5EJuGtL5g4o8xSKsZblal7EQsDW5+qKf1SVu6QI2dA
+ aBhg==
+X-Gm-Message-State: AOJu0YzuTAS5hDZS4pym8lgOeiLiPvryMqnQMB9rn9FtW0G7PWxaxRqm
+ opdT/+Bn5Pvuk5UwbCp1KO0g4rJYSh3GPhjD7++F7+mVJdrHyqfP1MNoTxW3mj792CeSJmx3uRj
+ JhJyAb25PqhpAz2z7AlcA88uzweo=
+X-Google-Smtp-Source: AGHT+IHgvXngibSYVfihoYB7sjhrH1/ekPSNNGSG/fbs84hU4buJCMIe5ci8D/ZZ1lXAYF/sYk3WP07jXvSAsSYOfa4=
+X-Received: by 2002:a05:6a20:9c91:b0:1aa:58d9:18fa with SMTP id
+ mj17-20020a056a209c9100b001aa58d918famr626145pzb.48.1713268429398; Tue, 16
+ Apr 2024 04:53:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <20240404030031.4726-1-aford173@gmail.com>
+ <20240412000539.GM2493117@bill-the-cat>
+In-Reply-To: <20240412000539.GM2493117@bill-the-cat>
+From: Adam Ford <aford173@gmail.com>
+Date: Tue, 16 Apr 2024 06:53:37 -0500
+Message-ID: <CAHCN7xJRkUYCQkF9Lvm1PcpcoTjcqJy9fZAfcP=2ebRJsc2E9g@mail.gmail.com>
+Subject: Re: [PATCH 1/4] arm: davinci: Migrate da850-evm to OF_UPSTREAM
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, aford@beaconembedded.com, Andrew Davis <afd@ti.com>, 
+ Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Martyn Welch <martyn.welch@collabora.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,21 +92,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-Hello,
-
-> The following information printed on every boot is not very
-> helpful for the users:
+On Thu, Apr 11, 2024 at 7:05=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> SOC: 0xa0009300
-> LC: 0x40040
+> On Wed, Apr 03, 2024 at 10:00:09PM -0500, Adam Ford wrote:
 >
-> Move them to debug() level.
+> > The da850-evm can remove the U-Boot device trees if migrated
+> > to OF_UPSTREAM.  This means pointing the device trees to the
+> > ti/davinci directory.
+> >
+> > Signed-off-by: Adam Ford <aford173@gmail.com>
 >
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> This series leads to failure to build for omapl138_lcdk and lego_ev3 or
+> was I supposed to bring in something else first? Thanks.
 
-Reviewed-by: Mathieu Othacehe <othacehe@gnu.org>
+I just got back from 10 days in Europe for the Embedded World
+Conference.  It should have been based on [1], but I haven't checked
+to see if it was applied.  I (maybe wrongly) assumed [1] would have
+been applied before this patch was.
 
-Thanks,
+Once I get caught up, I'll look to see what's going one.
 
-Mathieu
+adam
+
+[1] - https://www.mail-archive.com/u-boot@lists.denx.de/msg505123.html
+
+
+
+>
+> --
+> Tom
