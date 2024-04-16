@@ -4,122 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 023B3C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 16:07:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61853C04FF6
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 16:21:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E5D08842A;
-	Tue, 16 Apr 2024 18:07:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BEF598841D;
+	Tue, 16 Apr 2024 18:21:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YJsFjiD+";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="U3brFiBr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5944687F39; Tue, 16 Apr 2024 18:06:53 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7159C88424; Tue, 16 Apr 2024 18:21:28 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 462AD88447
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 18:06:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F47088414
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 18:21:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-69b10c9cdf4so20209756d6.1
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 09:06:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713283599; x=1713888399; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zudjLydLlprH1FXH7ANF4MrkoqmWrSa4F0lk9M5Ad7s=;
- b=YJsFjiD+0eliB182XfNlXOCLPTJOH7C/8kuw9gtxc6Pctdh5nIwMIyryLGmtzUhU1z
- OeG/8SJTPsjGXBL0lXjuwTE3V0MPaTg6xVcxtqvgpDAFAMQa04pLfOQehXMtxHVuwZKo
- nudupncE9bZ/vcJjaJWdM3xTyvllL1N1Le4yU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713283599; x=1713888399;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zudjLydLlprH1FXH7ANF4MrkoqmWrSa4F0lk9M5Ad7s=;
- b=V3aZlhYt8ZkMmgrbCZ+vfQIpzGag3jLPCup0EFEmtje7ljHhT+fCU7kLyqIdd1FcyI
- /KdaPSMoZJ2xEhVVH51B1KkIHa3JZaTfWwdTR8UtLBoItTE036VsPqynH0RXQ6H0buu4
- /jWNpvTdzLNqw9GiIzMB7rm+cmf1tDI4jhI5X0pkYdl/f9Sqi/6bVmlMJ64IYIeJAZmx
- c65Iw68GnCBcE9N/1AOmdvJra/AAGEFVwTKUhsKUPMrzBX37S9desvDvwtPcou6mGZw8
- JT/xpQ3V4f1epijg2mpHSbWz5jEPF+VqaH0kaQPcP1XH75oYcYTsKM4lTpv1ewF1jm/K
- jRkw==
-X-Gm-Message-State: AOJu0YyuVtX0ak2uM/2M3uKRvbIeSaIECG6qeJZ2AnVYI1EWxnSqsL8V
- BDn+adqc08wGL54LPoEbQ1fuiiBzjkdN0AxNX6BQ3XvPKy5R4BNWaFzseJy1TyU=
-X-Google-Smtp-Source: AGHT+IGxRcxCzHs1tvGEv+jXW+Vg+7JJ2kiKVDJLv1TTU36yaq2HZXfkIRRBiavBwttfFKMvBXvxiA==
-X-Received: by 2002:ad4:510f:0:b0:69b:7ed1:7a79 with SMTP id
- g15-20020ad4510f000000b0069b7ed17a79mr673197qvp.35.1713283598702; 
- Tue, 16 Apr 2024 09:06:38 -0700 (PDT)
-Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- k10-20020a0c970a000000b0069b447066bbsm7595296qvd.78.2024.04.16.09.06.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Apr 2024 09:06:38 -0700 (PDT)
-Date: Tue, 16 Apr 2024 18:06:31 +0200
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, git@xilinx.com,
- AKASHI Takahiro <takahiro.akashi@linaro.org>,
- Aaron Williams <awilliams@marvell.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Anastasiia Lukianenko <vicooodin@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Biju Das <biju.das.jz@bp.renesas.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Doug Zobel <douglas.zobel@climate.com>,
- Enrico Leto <enrico.leto@siemens.com>, Fabio Estevam <festevam@gmail.com>,
- Gatien Chevallier <gatien.chevallier@foss.st.com>,
- Gregory CLEMENT <gregory.clement@bootlin.com>,
- Grzegorz Szymaszek <gszymaszek@short.pl>, Heiko Schocher <hs@denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Horatiu Vultur <horatiu.vultur@microchip.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Johan Jonker <jbx6244@gmail.com>, Kever Yang <kever.yang@rock-chips.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Lars Povlsen <lars.povlsen@microchip.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>, Lukasz Majewski <lukma@denx.de>,
- Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Matthias Winker <matthias.winker@de.bosch.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Minda Chen <minda.chen@starfivetech.com>,
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Oliver Graute <oliver.graute@kococonnector.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- =?utf-8?B?UGF3ZcWC?= Jarosz <paweljarosz3691@gmail.com>,
- Peng Fan <peng.fan@nxp.com>, Philip Oberfichtner <pro@denx.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Sean Anderson <seanga2@gmail.com>, Seung-Woo Kim <sw0312.kim@samsung.com>,
- Shiji Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Stefan Roese <sr@denx.de>, Stefano Babic <sbabic@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Viacheslav Bocharov <adeep@lexina.in>,
- Yanhong Wang <yanhong.wang@starfivetech.com>,
- "open list:VIM3" <u-boot-amlogic@groups.io>,
- "moderated list:ST BOARDS" <uboot-stm32@st-md-mailman.stormreply.com>
-Subject: Re: [PATCH v2 5/5] common: Convert *.c/h from UTF-8 to ASCII enconfing
-Message-ID: <20240416160631.GO1054907@bill-the-cat>
-References: <cover.1713250508.git.michal.simek@amd.com>
- <abe7e535b9e4ee13cea1e6d1c37c8f1f6e6014e3.1713250508.git.michal.simek@amd.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43GGLGuX046099;
+ Tue, 16 Apr 2024 11:21:16 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1713284476;
+ bh=jbLwQ8qh5oCNeW5q/YzKJ26bKuqTOLVA9Pxs25BIPiU=;
+ h=From:To:CC:Subject:Date;
+ b=U3brFiBr/sLyuuBbWFu8WQG47/lCeSCqjMbtI6DwtElHweZc2g6txffCEDo+fwg6v
+ cJ1widKSR0j5KxDmzVQQpyRX/wsqYBW5K+NqgJYyKSBiA52X6GUpYAQvXF72TQyqLn
+ 5naD0IPilh3CqY1OCKqyX7S7lL8zb+wA6kClonZk=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43GGLGmo117682
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 16 Apr 2024 11:21:16 -0500
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 16
+ Apr 2024 11:21:15 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 16 Apr 2024 11:21:15 -0500
+Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43GGLFQ2071873;
+ Tue, 16 Apr 2024 11:21:15 -0500
+From: Judith Mendez <jm@ti.com>
+To: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>
+CC: Tom Rini <trini@konsulko.com>, Andrew Davis <afd@ti.com>,
+ <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2] configs: am62px_evm_a53_defconfig: Enable MMC UHS config
+ option
+Date: Tue, 16 Apr 2024 11:21:15 -0500
+Message-ID: <20240416162115.2743405-1-jm@ti.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4OrlngvLVt9BgcPq"
-Content-Disposition: inline
-In-Reply-To: <abe7e535b9e4ee13cea1e6d1c37c8f1f6e6014e3.1713250508.git.michal.simek@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
-X-Mailman-Approved-At: Tue, 16 Apr 2024 18:07:15 +0200
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -136,46 +78,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Enable MMC UHS support for to allow to enter the UHS
+modes for MMC1.
 
---4OrlngvLVt9BgcPq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Judith Mendez <jm@ti.com>
+---
+Changes since v1:
+- Fix typo in patch description
+---
 
-On Tue, Apr 16, 2024 at 08:55:19AM +0200, Michal Simek wrote:
+ configs/am62px_evm_a53_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-> Convert UTF-8 chars to ASCII in cases where make sense. No Copyright or
-> names are converted.
->=20
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
->=20
+diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
+index 2621abb8ce1..d1ae18bedf6 100644
+--- a/configs/am62px_evm_a53_defconfig
++++ b/configs/am62px_evm_a53_defconfig
+@@ -115,6 +115,8 @@ CONFIG_FS_LOADER=y
+ CONFIG_SUPPORT_EMMC_BOOT=y
+ CONFIG_MMC_IO_VOLTAGE=y
+ CONFIG_SPL_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_SPL_MMC_UHS_SUPPORT=y
+ CONFIG_MMC_HS400_SUPPORT=y
+ CONFIG_SPL_MMC_HS400_SUPPORT=y
+ CONFIG_MMC_SDHCI=y
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+base-commit: bc39e06778168a34bb4e0a34fbee4edbde4414d8
+-- 
+2.43.2
 
-Now, how did you test / find these? Given names a CI test is unlikely
-to be doable but if it's otherwise scriptable I can put it in my loops
-and just fixup as needed (like I do today for adding <common.h> for
-example).
-
---=20
-Tom
-
---4OrlngvLVt9BgcPq
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYeogcACgkQFHw5/5Y0
-tyyunQv7BArCU1xcrO+M1bVi2Mxx/0iq718pZj7b9yLXe8ArTp+0A2ih7/qm0EB8
-MYQpBG4DT+ugG8iLSE6eKhUZB/2niAd06z2rdMCwVgRAT6Qqwhf7T7E+wyJVeCu4
-OCkozeNuWZP4qe+NW8R8DkJqVxI7sMk5hLY26H6XIW//GsRCFzLRAr+b8ZlGVBtH
-CJ+DSL6gFl2RWP+fqXtr5W3o0J3b6e37u4swFmEvfPR1MqKOFqnWbZJLCgHEDNiQ
-An4GZAYiUzpNp5YT73Tf8UPBCBcwR9QWnxK2+4tO3GOCseNGkAcvnuWCCk+Dg5/O
-bPIPSR81SDMS5oUQy6OfFdbuPFseWkSWhbV0n6VKKAywo8CvTvHY+LHufST9Gvoo
-387W+5/WdRwsiVJRsmtnLbIjavGxpbmpRcVrrvYtsynj0qJBR7pc9uGG0tCdoYGl
-Um/2RChbaSIhRfZKCImo6tWTLU9chEBhBzOX7wGJSdkczvHtbMahUnvP8pLt/jMa
-JlCQ3PRT
-=gijj
------END PGP SIGNATURE-----
-
---4OrlngvLVt9BgcPq--
