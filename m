@@ -4,187 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6715DC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 10:09:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7D3DC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 10:11:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ABDAC882AC;
-	Tue, 16 Apr 2024 12:09:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 66B8A8832A;
+	Tue, 16 Apr 2024 12:11:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="lZerSh+6";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="iG6xns+V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8342D882AC; Tue, 16 Apr 2024 12:09:42 +0200 (CEST)
-Received: from NAM11-CO1-obe.outbound.protection.outlook.com
- (mail-co1nam11on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2416::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 673AB83339; Tue, 16 Apr 2024 12:11:04 +0200 (CEST)
+Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CBA08833D
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 12:09:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A878D8832A
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 12:11:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=eRwtOvdf61UChBxf6j2KmTt7lYbwhe4tg+SoMsaUvSkUi6+MI6ei9en2V7vdVDX16VuYOSHTEb+LmHAHuhdStcmvfL4OpvnO0/wB0Nn6OIYH7EsZuNdoqye+eiFAdSYEDf05cXCKWJpEANgK6SXt1ntPAdZaEh8/eLxaxjnGm0v/K+Bt7qdYszxC3Gam5CPGEluM7dn34+zN+zytC8NdfZkXO9FsuQins0o4VeEvBxjBDevSwG1uq+yfUTV8YMsvHKqqchDwZS/KNjTAO7j+w850MeU5/luNATULQYR7vc4xTOudHnk0NovEDWFWmQL8eA+rXbtlbwA4yTYsSZZG0g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Zem5IhnySvS2bs3hEn5NhnzMqgnbupwITES6kfU9XGk=;
- b=Lfq3pa7EQWcTJhKS7++SxGcV1ay96/fk8qG1bZBnTuYIhu6DYEa5zO39eVWJIZbZU73Ng+V8yN82ZUxxz12gsyQ/my2pCGZ0He3pGnGSPe8BPOCT4/+Lp/6ZQGEiC2oNWdyYW4VxdbL0FfVwRxds7kQD3a1arsiaWwqp4/GKxBz3/KTkjnLPREhSXH9AQGt6cmYBfb2ICe2NlTPBfnAYMiRuwGVYpg1Rtz5YI07IApp8TOpXGT+S5893DBC//1Y5O1rkcVKQQkCKHet3/XJ2rOuk81CNefrF0EeEmZiYyci2NTwYITwJkirFGyZypRu7r5Z17JpfmlQJQVuOEX7TkA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Zem5IhnySvS2bs3hEn5NhnzMqgnbupwITES6kfU9XGk=;
- b=lZerSh+6ZvOz5R011elU+eQprVA2A53TAy8NoiXZpHwrCzHacR1JQYBaSNWQljCQKFbwqkMGh3i0c1MIb1f6Ebn5hpKVAt5ZceivCFtFgX5wpcWlv4+U4LRIuPGB0gf+qSM9GaxojuaZg4G/jXpEZmLb8kiFvtl3XOfBTbA6BxY=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SN7PR12MB8101.namprd12.prod.outlook.com (2603:10b6:806:321::7)
- by IA1PR12MB8237.namprd12.prod.outlook.com (2603:10b6:208:3f3::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7452.50; Tue, 16 Apr
- 2024 10:09:33 +0000
-Received: from SN7PR12MB8101.namprd12.prod.outlook.com
- ([fe80::40b9:ca6b:89d7:f45f]) by SN7PR12MB8101.namprd12.prod.outlook.com
- ([fe80::40b9:ca6b:89d7:f45f%7]) with mapi id 15.20.7409.053; Tue, 16 Apr 2024
- 10:09:33 +0000
-Message-ID: <bc3ef401-a0aa-41f9-9004-117e7c7b836a@amd.com>
-Date: Tue, 16 Apr 2024 12:09:14 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/4] Kconfig: Make all Kconfig encoding ascii
-To: Francesco Dolcini <francesco@dolcini.it>, Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Andre Przywara <andre.przywara@arm.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Elon Zhang <zhangzj@rock-chips.com>,
- Eugen Hristev <eugen.hristev@collabora.com>,
- Jagan Teki <jagan@amarulasolutions.com>, John Clark <inindev@gmail.com>,
- Jonas Karlman <jonas@kwiboo.se>, Joshua Riek <jjriek@verizon.net>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tim Lunn <tim@feathertop.org>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Vignesh R <vigneshr@ti.com>, u-boot@lists.denx.de, git@xilinx.com
-References: <cover.1713180904.git.michal.simek@amd.com>
- <55ab78c9f2781b31278395f9e0066041f97b00f6.1713180904.git.michal.simek@amd.com>
- <6b45c003-f6a0-4ee4-a01f-e5acc81d68a9@gmx.de>
- <20240416003612.GJ1054907@bill-the-cat> <20240416065946.GC4165@francesco-nb>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20240416065946.GC4165@francesco-nb>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1PR07CA0213.eurprd07.prod.outlook.com
- (2603:10a6:802:58::16) To SN7PR12MB8101.namprd12.prod.outlook.com
- (2603:10b6:806:321::7)
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kabel@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by sin.source.kernel.org (Postfix) with ESMTP id C586BCE0F7E;
+ Tue, 16 Apr 2024 10:10:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0FD08C113CE;
+ Tue, 16 Apr 2024 10:10:57 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1713262258;
+ bh=QVSkUIKNunfneGzo79yzKb7F/bTKddLly8qH5wKd+T8=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=iG6xns+VN6zKghGRHhzoMVlmcsJUVQDe/8kb8Z/ClzGFPOWo24Jde1cwMi7BtN1Op
+ oDASE+Q5+o0x+QI4iMWXz1Jt4s1CjSSrJ5jBH2thxaR6mkWG6swaBAqtr9W1cyuMDB
+ 3bBINk3iYtoVle3LLxuQ3ztn0t5gZg5JUG7drTqalUrflcBiZYkSmFUB+7kYKEICKr
+ CxOvsA4S3CRDEIHhxi0iGk9JZc57BDCALWC987TsZppKR3+dJnUcd+pW1t0oIQOVf4
+ 36+DP4ym3fnXwsHCetZ4WwzsSl74Aj6MpM9DZ60xP7WoOUauL/uoAmBFvGcCEjgQkk
+ ExWY42cNFep0g==
+Date: Tue, 16 Apr 2024 12:10:54 +0200
+From: Marek =?UTF-8?B?QmVow7pu?= <kabel@kernel.org>
+To: Tony Dinh <mibodhi@gmail.com>
+Cc: Stefan Roese <sr@denx.de>, u-boot@lists.denx.de
+Subject: Re: [PATCH u-boot-mvebu 00/10] Turris Omnia DDR training changes
+Message-ID: <20240416121054.4c43824a@dellmb>
+In-Reply-To: <CAJaLiFwFYn912mQu9LvPF5ap8ufiQA+k0WrQCeRGSnZf39zkBg@mail.gmail.com>
+References: <20240415163043.7482-1-kabel@kernel.org>
+ <CAJaLiFwFYn912mQu9LvPF5ap8ufiQA+k0WrQCeRGSnZf39zkBg@mail.gmail.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.39; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8101:EE_|IA1PR12MB8237:EE_
-X-MS-Office365-Filtering-Correlation-Id: 851f0fd8-a7e5-4ade-0831-08dc5dfd4fcd
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 7OCdC1AlFHLETiJThl3S14WC//+A2I/p4uy7MiciQW/WL+uTOgX4olhzAvFPHMlMptUWZc0g7JU/RDEJyTyL9zrQKwoHFhFiqjlCvMsmnWNMWjAF7Ls7++Zd6qGKUkBwLktuUjMBmOEeK+kvR6UYE9k3Q6uYErekJXBbouclnnbwmOjYcKYjksTVtFKfFf81s5UFIx3o/ecuG/F449YH0jc/F4ni5HLK9exG/8sOWpuqb+yRveudW1nK5GFjIPvTUAwKkdcK4DcDxriMQrpQOOtXPwawHjdxwj85bOQI94snKJLgCpZYOEvkWL3+mavUcKlFuso7X4ksOrzriMYr5LCKqeoI+KAnd6q/8OoSi8/4egEx87i8a2hU5GISmfR2Ofdn6tUJW5hx4a2VVuOchms4D5mqFkn6JXaci2DA1iiID2ZyQGZflbpIn8z0yZWAIuD/HloPyorp1cXcYerWyOuRryajiNPRKTfIChB5Z+6kPoSdoNkljpYeYcunmNpNElxBli9RpsiI/pv3T8WNenAc5K2BY3W1jR2EmYXfi9gywWnsIyUokJqlhDgcPYhoAkSaCc9p4DMBsTETWjYatmsm5WWdvZHT+T6Gz8q1ZLcHe8+7Wf2aeOYo+hx8F2na5e/9g1SCxQw2RQPb4q5pF5QWmSVHAHJ3I8m4WsOzKL0=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR12MB8101.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366007)(376005)(1800799015)(7416005); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QU1HZTYwRHhxTnVmVjc3eXl1eWd3Q3ZjeVZ6di95Vk9kNGpTVHBJaFdyWkEw?=
- =?utf-8?B?bHZrQkxMc1Y1Uk9TTmdQSEFxdUJhSHhvSjViMFVCQkNkSVkrcXd4di9UWmww?=
- =?utf-8?B?eEVTOTRLMUNzOW1YbVBnekxCOWlHQVFBU3pNdVlzbDZHblRKWmphbTd5UVMv?=
- =?utf-8?B?Q3Q0S3BwQkcrSEZVOVJmcHkxb2VzVk43U1dMcXRJWDB1K0JMMGhKa3JGTk1N?=
- =?utf-8?B?c1lBVnNwekJHZ0lxb3lDNGZjTVNzYXkreG4xNXE2VjVvUG9ZUDAvRlROVjJF?=
- =?utf-8?B?emwwZ25GQm1PMktrQ2hZbXhYZFM0NTJmQnkvY0Q5QXM2SVNzaTN4Y0ZuUHRI?=
- =?utf-8?B?QVh0VjNGMnBEQXJQYXp3ck1weXdxeTBZbnJVc2lHV3BVVGpBRU5JTGNrcDEw?=
- =?utf-8?B?SWVUQnNaR2JIRlFDWktCbjlXdmVGbW02YmdpRjk4TW5kMlZudVdCSW5oMld6?=
- =?utf-8?B?T1ZBUEZKaVp0WUEzMWlONEdGcUw4LzdJS3JQUkgzTEhMTHRyR2J1QnhjMytl?=
- =?utf-8?B?cnFxOU50dlFWZ2pqS3poUGN0R1hhN1NKV3JpU21qNHBlSUlINWZlQ0pUa0Er?=
- =?utf-8?B?aThuemErSjB5TlVGaXNxUlh5U1B0MHdKME5RK3A2NS8vVnRidUNBUWxXcmpo?=
- =?utf-8?B?RGhwOGRiaU9NUmt6TXJ3Nnh2UjJzWmR0aFByc3NPcWo0bzdMeXh4QXVHNE9p?=
- =?utf-8?B?WUdXYUtkWkdLQmZ6RmV1ZzZ6SnhnZUdOUXJGT0JtRXVOTjBYRmRTSnZqeDJD?=
- =?utf-8?B?SFJ2UWVrN2t3T3pvSnhOb3RiNkErbE9BMFFQcjlaQW1XblZxYUo5MWJSNVM1?=
- =?utf-8?B?RnJyWU9vK1d6STcxUVJBVjA0YzV0aVl5b2ZYMWNNcDJ5QTg2b0dIZE05Mmdy?=
- =?utf-8?B?R2gwVXpUN01Xb0tXVU5sNm5HTVh5ME5iSy82Z1lwcm9TY3VlVmYwOWdRaXVI?=
- =?utf-8?B?L3Nkc05WaHNPa2k2cE5VZUJqWUczTWlKNy96M01zZzlQSHhxTk9BYjhTa04r?=
- =?utf-8?B?SjhnbkQ4bGI0Y2xCWlVVTXdBK1hSYmliVWl1OHE2Z1FhQUk5Vmw0L2lzQkZv?=
- =?utf-8?B?MnREZU9xSDNOK1ZLYzZVRHd3TzR4M2psV3JuOFppZnNST1QxRmtHZE9Ic1VM?=
- =?utf-8?B?YVFjcUwwdUM4c2IxUU1rNW9MY2JTL1djOHVwNW9sOG5VWUh3bmJxTEhPQWhp?=
- =?utf-8?B?L3RjTWtvVTVYNzZEK01KYWZqZit3dWxBblhNM2V6MWh5ckZjMTlsY01zZmtC?=
- =?utf-8?B?UllUaWNnQjZnZzZadUdVYkZ5RE9Pd01yR2FvcW1QVTYvMVpDMGxtVEVkTXZP?=
- =?utf-8?B?cGV3ODhpem1kME9LWmd5bEtnT0tyZitiMkhCOHpONFNmeWg1N2YvcG82c3Jy?=
- =?utf-8?B?cEhPKy9wcHJIMm1nRDcxdGZnZzIraUdGcW5vSUZEWFREU1VWZE85aFVxV3Vr?=
- =?utf-8?B?cXg1eUVVNk1jb3UzWmhEZ3JSS25McGhNUmtIRTYvdWlaZEdjTGUyMVFGbXlo?=
- =?utf-8?B?MVd4b25ObGZTMnNzUTZpcFJVemZmZFpkczhxN3JveDU0ODhmV2F0ZmZzWHpM?=
- =?utf-8?B?VnBPT2h4VmpucEY5R0hJdkZqYXh6dHVIUkVJdXk2S2N1ekhYQ20wV3pqUXc4?=
- =?utf-8?B?QXZQK1U1Y3Rvc2IzaTZianJCVWw5L3ZST2pKbnZ1S2d3RW9SbDRrSVZMV3FI?=
- =?utf-8?B?bnVVUys3NmJIcHpuNEFjWHhXYzZYekVvNEE3UUtVL1NzWW1hRUJlbGt4Tlpv?=
- =?utf-8?B?aEc1ak9zOUlLTSs3QUM0eURMVmRkT2hCY0xGUU1RQUZpeW5oOVVPZ2loY21t?=
- =?utf-8?B?K25hOW5QMGE1YTFBREIyZkY5Y2Q4cEgrd3JLbjhJV1ZBMEJoWGJsVjdQRkcx?=
- =?utf-8?B?UnJyWEIvdGhjdGVoeHEyMjdyOXo0ZE5ZUGRGZmhSanhkWUJGc01lNlR5aFhh?=
- =?utf-8?B?MW1RdDlEdWsyd0ZzMEJQd0xvZ29qczhkNEN3ZGxrY2ZjenlRTmJBb2c1dktB?=
- =?utf-8?B?WHFIcEwwam8xTWoyWURsMVlucmk0WFZyN05SeTZhczJxT2FZSE83YklzcFo0?=
- =?utf-8?B?UmVRM20rL21mSnBORi9FT0w2YU0vbVZhczZ5UEJ4bzZQbkR1bk9nL3Z4Sm4v?=
- =?utf-8?Q?PpxyvyvEomBIddG8g98sL2HfA?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 851f0fd8-a7e5-4ade-0831-08dc5dfd4fcd
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8101.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Apr 2024 10:09:32.9456 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 88YHDz2M91vI1d1I8WIQfxjpm2sA5/7nqDGmMw62kJpgqGsbsMeTqQVEHcQ/JVzG
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8237
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -201,42 +68,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tony,
 
+hmm no I did not change the version number.
 
-On 4/16/24 08:59, Francesco Dolcini wrote:
-> On Tue, Apr 16, 2024 at 02:36:12AM +0200, Tom Rini wrote:
->> On Mon, Apr 15, 2024 at 02:22:02PM +0200, Heinrich Schuchardt wrote:
->>> On 15.04.24 13:35, Michal Simek wrote:
->>>> Some of Kconfigs are using utf-8 encoding because of used chars. Convert
->>>> all of them to ascii enconging.
->>>>
->>>> Signed-off-by: Michal Simek <michal.simek@amd.com>
->> [snip]
->>>> diff --git a/arch/arm/mach-rockchip/rv1126/Kconfig b/arch/arm/mach-rockchip/rv1126/Kconfig
->>>> index ae323ee91235..64a70f61f894 100644
->>>> --- a/arch/arm/mach-rockchip/rv1126/Kconfig
->>>> +++ b/arch/arm/mach-rockchip/rv1126/Kconfig
->>>> @@ -6,8 +6,8 @@ config TARGET_RV1126_NEU2
->>>>    	  Neu2:
->>>>    	  Neural Compute Module 2(Neu2) is a 96boards SoM-CB compute module
->>>>    	  based on Rockchip RV1126 from Edgeble AI.
->>>> -	  Neu2 powered with Consumer grade (0 to +80 °C) RV1126 SoC.
->>>> -	  Neu2k powered with Industrial grade (-40 °C to +85 °C) RV1126K SoC.
->>>> +	  Neu2 powered with Consumer grade (0 to +80 C) RV1126 SoC.
->>>> +	  Neu2k powered with Industrial grade (-40 C to +85 C) RV1126K SoC.
->>>
->>> C is the sign for coulomb which is the unit of electric charge. How
->>> about 'deg C'?
->>
->> I'll note that in Linux there's seemingly nothing consistent, and I'm
->> fine with any of "deg C" or "degrees C" or "temperature range (-40 C to
->> +85 C)" as all of those should be clear in context.
-> 
-> My 2 cents ... while I agree with Tom that the context will make it
-> clear, it is not making it correct nor nice. Using just "C" for Celsius
-> degrees is horrible ...
+The changes are only relevant for debug messages, there is no
+functional changes in how the DDR training is done, unless I made a
+mistake.
 
-I used deg C in v2 version.
+I am not sure that changing the version is a good idea unless this is
+also done for the upstream where I sent the PR. But who knows if
+Marvell will have some people assigned to merge the PR.
 
-Thanks,
-Michal
+Since U-Boot prints its own version, people can easily reproduce the
+code for a given binary from U-Boot version string.
+
+Marek
+
+On Mon, 15 Apr 2024 15:20:49 -0700
+Tony Dinh <mibodhi@gmail.com> wrote:
+
+> Hi Marek,
+>=20
+> I'm running a regression test with this patch on another Armada 385
+> board (Synology DS116). And
+> it is running without problem.
+>=20
+> I noticed that there is no version bump. Is this still 14.0.0? It's kind =
+of
+> hard to see which version we are using without a minor revision such as 1=
+4.0.1.
+>=20
+> All the best,
+> Tony
+>=20
+> On Mon, Apr 15, 2024 at 9:39=E2=80=AFAM Marek Beh=C3=BAn <kabel@kernel.or=
+g> wrote:
+> >
+> > Hi Stefan,
+> >
+> > this series adds some changes to DDR3 training for Armada 38x and
+> > Turris Omnia.
+> >
+> > - patches 1-4 are meant to allow for reducing another 10 KiB in the
+> >   SPL binary. They were also sent to mv-ddr-marvell, via PR on github,
+> >   https://github.com/MarvellEmbeddedProcessors/mv-ddr-marvell/pull/45/
+> >   but I am told that Armada team has left Marvell, so who knows if this
+> >   will ever be merged there
+> > - patch 5 enables this reduction for Turris Omnia
+> > - patches 6-8 import old DDR3 training code and make some changes so
+> >   that it works with U-Boot. The reason why this is being done is
+> >   explained in patch 6
+> > - patch 9 glues the old DDR3 training code to current U-Boot
+> > - patch 10 allows for dynamic selection of old DDR3 training code on
+> >   Turris Omnia, via an U-Boot environment variable
+> >
+> > Marek
+> >
+> > Marek Beh=C3=BAn (10):
+> >   ddr: marvell: a38x: debug: return from ddr3_tip_print_log() early if
+> >     we won't print anything
+> >   ddr: marvell: a38x: debug: Remove unused variables
+> >   ddr: marvell: a38x: debug: Define DDR_VIEWER_TOOL variables only if
+> >     needed, and make them static
+> >   ddr: marvell: a38x: debug: Allow compiling with immutable debug
+> >     settings to reduce binary size
+> >   arm: mvebu: turris_omnia: Enable immutable debug settings in DDR3
+> >     training by default
+> >   ddr: marvell: a38x: Import old DDR training code from 2017 version of
+> >     U-Boot
+> >   ddr: marvell: a38x: old: Fix some compiler warning of the old code
+> >   ddr: marvell: a38x: old: Backport immutable debug settings
+> >   arm: mvebu: a38x: Add optional support for using old DDR3 training
+> >     code
+> >   arm: mvebu: turris_omnia: Support old DDR3 training, selectable via
+> >     env var
+> >
+> >  arch/arm/mach-mvebu/Kconfig                   |   15 +
+> >  arch/arm/mach-mvebu/include/mach/cpu.h        |    1 +
+> >  arch/arm/mach-mvebu/spl.c                     |   37 +-
+> >  board/CZ.NIC/turris_omnia/Makefile            |    1 +
+> >  board/CZ.NIC/turris_omnia/old_ddr3_training.c |   79 +
+> >  board/CZ.NIC/turris_omnia/turris_omnia.c      |    2 +-
+> >  configs/turris_omnia_defconfig                |    1 +
+> >  drivers/ddr/marvell/a38x/Makefile             |    2 +
+> >  drivers/ddr/marvell/a38x/ddr3_debug.c         |   30 +-
+> >  drivers/ddr/marvell/a38x/ddr3_init.c          |    3 +-
+> >  drivers/ddr/marvell/a38x/ddr3_init.h          |   43 +-
+> >  drivers/ddr/marvell/a38x/old/Makefile         |   29 +
+> >  drivers/ddr/marvell/a38x/old/ddr3_a38x.c      |  738 +++++
+> >  drivers/ddr/marvell/a38x/old/ddr3_a38x.h      |   93 +
+> >  .../marvell/a38x/old/ddr3_a38x_mc_static.h    |  226 ++
+> >  .../ddr/marvell/a38x/old/ddr3_a38x_topology.h |   22 +
+> >  .../ddr/marvell/a38x/old/ddr3_a38x_training.c |   40 +
+> >  drivers/ddr/marvell/a38x/old/ddr3_debug.c     | 1545 ++++++++++
+> >  .../marvell/a38x/old/ddr3_hws_hw_training.c   |  148 +
+> >  .../marvell/a38x/old/ddr3_hws_hw_training.h   |   49 +
+> >  .../a38x/old/ddr3_hws_hw_training_def.h       |  464 +++
+> >  .../marvell/a38x/old/ddr3_hws_sil_training.h  |   17 +
+> >  drivers/ddr/marvell/a38x/old/ddr3_init.c      |  770 +++++
+> >  drivers/ddr/marvell/a38x/old/ddr3_init.h      |  405 +++
+> >  .../ddr/marvell/a38x/old/ddr3_logging_def.h   |  101 +
+> >  .../marvell/a38x/old/ddr3_patterns_64bit.h    |  924 ++++++
+> >  .../ddr/marvell/a38x/old/ddr3_topology_def.h  |   76 +
+> >  drivers/ddr/marvell/a38x/old/ddr3_training.c  | 2651 +++++++++++++++++
+> >  .../ddr/marvell/a38x/old/ddr3_training_bist.c |  289 ++
+> >  .../a38x/old/ddr3_training_centralization.c   |  712 +++++
+> >  .../ddr/marvell/a38x/old/ddr3_training_db.c   |  652 ++++
+> >  .../marvell/a38x/old/ddr3_training_hw_algo.c  |  686 +++++
+> >  .../marvell/a38x/old/ddr3_training_hw_algo.h  |   14 +
+> >  .../ddr/marvell/a38x/old/ddr3_training_ip.h   |  178 ++
+> >  .../marvell/a38x/old/ddr3_training_ip_bist.h  |   54 +
+> >  .../old/ddr3_training_ip_centralization.h     |   15 +
+> >  .../marvell/a38x/old/ddr3_training_ip_db.h    |   34 +
+> >  .../marvell/a38x/old/ddr3_training_ip_def.h   |  173 ++
+> >  .../a38x/old/ddr3_training_ip_engine.c        | 1355 +++++++++
+> >  .../a38x/old/ddr3_training_ip_engine.h        |   85 +
+> >  .../marvell/a38x/old/ddr3_training_ip_flow.h  |  349 +++
+> >  .../marvell/a38x/old/ddr3_training_ip_pbs.h   |   41 +
+> >  .../a38x/old/ddr3_training_ip_prv_if.h        |  107 +
+> >  .../a38x/old/ddr3_training_ip_static.h        |   31 +
+> >  .../marvell/a38x/old/ddr3_training_leveling.c | 1837 ++++++++++++
+> >  .../marvell/a38x/old/ddr3_training_leveling.h |   17 +
+> >  .../ddr/marvell/a38x/old/ddr3_training_pbs.c  |  995 +++++++
+> >  .../marvell/a38x/old/ddr3_training_static.c   |  538 ++++
+> >  .../ddr/marvell/a38x/old/ddr_topology_def.h   |  121 +
+> >  .../ddr/marvell/a38x/old/ddr_training_ip_db.h |   16 +
+> >  .../marvell/a38x/old/glue_symbol_renames.h    |  247 ++
+> >  drivers/ddr/marvell/a38x/old/silicon_if.h     |   17 +
+> >  drivers/ddr/marvell/a38x/old/xor.h            |   92 +
+> >  53 files changed, 17138 insertions(+), 29 deletions(-)
+> >  create mode 100644 board/CZ.NIC/turris_omnia/old_ddr3_training.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/Makefile
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x_mc_static.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x_topology.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_a38x_training.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_debug.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_hws_hw_training.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_hws_hw_training.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_hws_hw_training_d=
+ef.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_hws_sil_training.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_init.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_init.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_logging_def.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_patterns_64bit.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_topology_def.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_bist.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_centrali=
+zation.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_db.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_hw_algo.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_hw_algo.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_bist.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_centr=
+alization.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_db.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_def.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_engin=
+e.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_engin=
+e.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_flow.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_pbs.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_prv_i=
+f.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_ip_stati=
+c.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_leveling=
+.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_leveling=
+.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_pbs.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr3_training_static.c
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr_topology_def.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/ddr_training_ip_db.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/glue_symbol_renames.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/silicon_if.h
+> >  create mode 100644 drivers/ddr/marvell/a38x/old/xor.h
+> >
+> > --
+> > 2.43.2
+> > =20
+
