@@ -4,127 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28184C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 23:33:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D78C3C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 23:34:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9EC0988426;
-	Wed, 17 Apr 2024 01:33:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5F1D988414;
+	Wed, 17 Apr 2024 01:34:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="JbzLssmy";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="cH4hI1om";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2893188426; Wed, 17 Apr 2024 01:33:26 +0200 (CEST)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ id 2A2D688414; Wed, 17 Apr 2024 01:34:30 +0200 (CEST)
+Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5B0A88422
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 01:33:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F55A88224
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 01:34:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20240416233318epoutp0145e16b5afe12103fb0e497b54d694f88~G5rr5peEm1582415824epoutp01h
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 23:33:18 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20240416233318epoutp0145e16b5afe12103fb0e497b54d694f88~G5rr5peEm1582415824epoutp01h
+Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
+ by mailout4.samsung.com (KnoxPortal) with ESMTP id
+ 20240416233421epoutp047332da07f8e7eb35e05436cec654b7a6~G5smQdKM41219412194epoutp04I
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 23:34:21 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
+ 20240416233421epoutp047332da07f8e7eb35e05436cec654b7a6~G5smQdKM41219412194epoutp04I
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1713310399;
- bh=K8SLKkKmtVQx+bMJz0sTz2aH1R+EHdqbAB9cMGSsOkI=;
+ s=mail20170921; t=1713310461;
+ bh=Q7U5IygNZBHJZiHxAUyCuGyZHbE54a503XUmBVHnxMM=;
  h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=JbzLssmyK0sbz6iGIsSraSHVR/iMr6vn7fkKM5now/TeXlQA5lDx+8WFTPSozigWH
- GvJy1GAsaQfs/ExKAd8gkr8xki5WMxIxLoAHlANWeKs0Y3StEqhHhsyo6LqML430AS
- fH7tV/CWHK4EkfE23jMM++Zdn8xqUO5l4bw3UsaM=
+ b=cH4hI1omBhXdHu3hbSOjwGCR/b/j4nHONsJNTO9XONP4hp8x/+LNJrXJS9D3oYpVC
+ s6fCe3V54iTk+ybdJIMwiH06YxvMwaQRk+NF42MfhD3wUoz3am9Q2iAlC6INbUwOGR
+ trj+D5nUL77+LhhvqqC/K4ki8pXogHy2Kk6j2KKc=
 Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20240416233318epcas1p30bd96d88cf52fd8a681b6ada371da74f~G5rrrNdOw0406404064epcas1p3X;
- Tue, 16 Apr 2024 23:33:18 +0000 (GMT)
-Received: from epsmges1p3.samsung.com (unknown [182.195.36.136]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4VK0hs6GrJz4x9Q3; Tue, 16 Apr
- 2024 23:33:17 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmges1p3.samsung.com (Symantec Messaging Gateway) with SMTP id
- 1E.E2.09663.DBA0F166; Wed, 17 Apr 2024 08:33:17 +0900 (KST)
+ epcas1p1.samsung.com (KnoxPortal) with ESMTP id
+ 20240416233420epcas1p1defff7303db6764c0c74a78592342fd2~G5sleuMlV0258902589epcas1p1b;
+ Tue, 16 Apr 2024 23:34:20 +0000 (GMT)
+Received: from epsmgec1p1-new.samsung.com (unknown [182.195.36.145]) by
+ epsnrtp1.localdomain (Postfix) with ESMTP id 4VK0k36WLSz4x9Pp; Tue, 16 Apr
+ 2024 23:34:19 +0000 (GMT)
+Received: from epcas1p1.samsung.com ( [182.195.41.45]) by
+ epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 85.28.19431.BFA0F166; Wed, 17 Apr 2024 08:34:19 +0900 (KST)
 Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
  epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20240416233317epcas1p26420d97a49b662dedb5ba8bfd1d36f0f~G5rqgfbpf0292402924epcas1p2U;
- Tue, 16 Apr 2024 23:33:17 +0000 (GMT)
+ 20240416233419epcas1p2fa5e38c121b3169f4be95ed93036fdd7~G5skU2tqV1913019130epcas1p2Q;
+ Tue, 16 Apr 2024 23:34:19 +0000 (GMT)
 Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
  epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20240416233317epsmtrp191c732e5f9b88354b0802da063e2a32e~G5rqf3flH1813518135epsmtrp1i;
- Tue, 16 Apr 2024 23:33:17 +0000 (GMT)
-X-AuditID: b6c32a37-2f9ff700000025bf-52-661f0abd132a
+ 20240416233419epsmtrp10a13cb84638000541c70842e637ce940~G5skUR0Ma1813218132epsmtrp1W;
+ Tue, 16 Apr 2024 23:34:19 +0000 (GMT)
+X-AuditID: b6c32a4c-485ff70000004be7-a1-661f0afb57f6
 Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
  epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- B9.8D.08390.DBA0F166; Wed, 17 Apr 2024 08:33:17 +0900 (KST)
+ 75.9D.08390.BFA0F166; Wed, 17 Apr 2024 08:34:19 +0900 (KST)
 Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
  (KnoxPortal) with ESMTPA id
- 20240416233317epsmtip27212f3b25d68269f0466f42e17fee0e1~G5rqUNaav0196101961epsmtip2X;
- Tue, 16 Apr 2024 23:33:17 +0000 (GMT)
+ 20240416233419epsmtip211fc05db98d3fa115d516e91ef9ed001~G5skIkIBX3116231162epsmtip2T;
+ Tue, 16 Apr 2024 23:34:19 +0000 (GMT)
 From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Quentin Schulz'" <quentin.schulz@theobroma-systems.com>, "'Dragan
- Simic'" <dsimic@manjaro.org>
-Cc: "'Jonas Karlman'" <jonas@kwiboo.se>, "'Peng Fan'" <peng.fan@nxp.com>,
- "'Tom Rini'" <trini@konsulko.com>, <u-boot@lists.denx.de>
-In-Reply-To: <8fec34b8-8d04-40ba-baca-5394762a4d27@theobroma-systems.com>
-Subject: RE: [PATCH 1/2] mmc: Imply HS200 cap with mmc-hs400 prop to match
- linux
-Date: Wed, 17 Apr 2024 08:33:17 +0900
-Message-ID: <000901da9056$75785ae0$606910a0$@samsung.com>
+To: "'Jonas Karlman'" <jonas@kwiboo.se>, "'Peng Fan'" <peng.fan@nxp.com>,
+ "'Tom	Rini'" <trini@konsulko.com>
+Cc: <u-boot@lists.denx.de>
+In-Reply-To: <20240408210619.3749231-2-jonas@kwiboo.se>
+Subject: RE: [PATCH 2/2] mmc: Add support for the no-mmc-hs400 prop
+Date: Wed, 17 Apr 2024 08:34:19 +0900
+Message-ID: <000a01da9056$9a770710$cf651530$@samsung.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7bit
 X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQH4WoF6XMPcZuGkh8wOOqd8YokilwGmXxzLAN3e0OMBSnvFFQHOS2UQAsaHi2YCFY+6A7DcIKBg
+Thread-Index: AQH4WoF6XMPcZuGkh8wOOqd8YokilwJuexB5AeO6+ZaxDWZdkA==
 Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprJJsWRmVeSWpSXmKPExsWy7bCmvu5eLvk0gzO/DSwubFG2OPnmKovF
- j1VfWC1WP9jPajF10mZ2i7d7O9kd2DxeHVjF7nFiwiUmj7N3djB6NBxew+ix8d0OJo+1jzaw
- BLBFZdtkpCampBYppOYl56dk5qXbKnkHxzvHm5oZGOoaWlqYKynkJeam2iq5+AToumXmAJ2h
- pFCWmFMKFApILC5W0rezKcovLUlVyMgvLrFVSi1IySkwLdArTswtLs1L18tLLbEyNDAwMgUq
- TMjOeHBpP2PBCemKyTc2sDcwvhTtYuTkkBAwkWj+8IENxBYS2MEo0fVOrIuRC8j+xCjx5v15
- VgjnG6PEt11TmGA63m5czAjRsZdR4usbEYiil4wS83a/AitiE9CT+L9oITOILSKQJrH+125m
- kCJmgVZGidPth8ESnAKeErvO3QDbLSwQJNEz/zALiM0ioCpxtvc9WJxXwFLi8IrdzBC2oMTJ
- mU/AapgF5CW2v53DDHGRgsTPp8tYIZZFSXRMnc0IUSMiMbuzDWyxhMBMDonbF76yQTS4SJyY
- 2cMIYQtLvDq+hR3ClpJ42d/GDtHQzCixdMlBVginh1HiX8N1qG5jif1LJwP9yQG0QlNi/S59
- iG18Eu++9rCChCUEeCU62oQgqlUkLr1+yQQz/+6T/6wQtofE62WXmSYwKs5C8tssJL/NQvLD
- LIRlCxhZVjGKpRYU56anFhsWGMOjOzk/dxMjOI1qme9gnPb2g94hRiYOxkOMEhzMSiK8LcKy
- aUK8KYmVValF+fFFpTmpxYcYTYGhPZFZSjQ5H5jI80riDU0sDUzMjIxNLAzNDJXEec9cKUsV
- EkhPLEnNTk0tSC2C6WPi4JRqYOr66Kp1bM95zmOSi7P4p9053jc331imkvXI2zmHl26170+d
- qnRrw4R/+/+Jms84+/qL4Nc07m/dzzOVrvXm1pacr1fvk665mH59wb2Pe+68S3W+crZMOM1T
- 3O6uo23MIo9TVzLzs777vXnMwFWg7GIQtE9WWl7wndXXKb4MWrMmOEor9K/9zmux70bTkdRf
- RzO+WJo6LGeRYw/UmXUzeGXLLnZJZ+kcK/sf5x9t/H3Y4cekM3PEpxg/Uow6kXlRpUPI91h+
- SqXp5Re5h573RHVnTataP8HI67rZ4/zltkYiHLb82x+FFR46w8Ahfs3NVrVpgdwTVs/SHdZR
- cxcccmc/cfvPjD+MmZXL586Rn6HEUpyRaKjFXFScCACoGIURLAQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpmkeLIzCtJLcpLzFFi42LZdlhJXncvl3yawYwbEhYXtihbnHxzlcXi
- x6ovrBarH+xntZg6aTO7xdu9newObB6vDqxi9zgx4RKTx9k7Oxg9Gg6vYfTY+G4Hk8faRxtY
- AtiiuGxSUnMyy1KL9O0SuDIeXNrPWHBCumLyjQ3sDYwvRbsYOTkkBEwk3m5czNjFyMUhJLCb
- UeLqjO1MEAkpic9Pp7J1MXIA2cIShw8XQ9Q8Z5TYPGUuG0gNm4CexP9FC5lBbBGBNInms5/B
- BjELdDJKzJ68GaxISGA+s8Tn3dwgNqeAp8SuczfA4sICARLtZ0+A2SwCqhJne9+D2bwClhKH
- V+xmhrAFJU7OfMICYjMLaEs8vfkUypaX2P52DjPEoQoSP58uY4U4IkqiY+psRogaEYnZnW3M
- ExiFZyEZNQvJqFlIRs1C0rKAkWUVo2RqQXFuem6xYYFRXmq5XnFibnFpXrpecn7uJkZwPGlp
- 7WDcs+qD3iFGJg7GQ4wSHMxKIrwtwrJpQrwpiZVVqUX58UWlOanFhxilOViUxHm/ve5NERJI
- TyxJzU5NLUgtgskycXBKNTBZpcySP+Xw+fMmu+jgWpXEEt7I7N4LHledg/f39JxsVu79NukZ
- 95zk5bM6HX/1RWr8uOg2a+0nbR7Po+76socXt+5ODJwzb9/XfAVT/ZZF39YGdWy+cX1bckrt
- 1AvXH/syn318d+Wl8vx9IkrL1F9f/jvr1A8l57sJE0LtfX9KvdbMPnng0eWpZySepdjmr78X
- JLI4omJdjZZ80OayWaKfZt/LsnzI7GC/K2Tp9cRTJs+eSuSk2+kVK++eqXNs/ffvbKaRO894
- bzl8Q3Fh86UKHs7SbL7/z9bPPh7vKqDRFlBc6r5G/LmMiUizLI9F2sSSxbk8q9+cf7hWx8NQ
- 7QDr7jyNA5MZY4xlUo7tO/NTiaU4I9FQi7moOBEAQu5kJBYDAAA=
-X-CMS-MailID: 20240416233317epcas1p26420d97a49b662dedb5ba8bfd1d36f0f
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupgk+LIzCtJLcpLzFFi42LZdlhTV/c3l3yawaK/xhYn31xlsfix6gur
+ xdRJm9kt3u7tZHdg8Xh1YBW7x4kJl5g8zt7Zweix8d0OpgCWqGybjNTElNQihdS85PyUzLx0
+ WyXv4HjneFMzA0NdQ0sLcyWFvMTcVFslF58AXbfMHKCdSgpliTmlQKGAxOJiJX07m6L80pJU
+ hYz84hJbpdSClJwC0wK94sTc4tK8dL281BIrQwMDI1OgwoTsjJOrGxgLDnFXPF66l7mB8TBn
+ FyMnh4SAicTkvWfZuhi5OIQE9jBKXD/7CMr5xChx/NIhdgjnG6PEvzmvWWFaZrcfY4VI7GWU
+ WNHXxQThvGSUOHr4CQtIFZuAnsT/RQuZuxg5OEQEciVu7vMGCTMLSEk0ndzFCGJzCphLTPr8
+ C2yosICzRN+vHnYQm0VAVWL73xtgNq+ApcTflpNQtqDEyZkQ45kF5CW2v53DDHGQgsTPp8tY
+ IVY5STx+bwJRIiIxu7MNquQnu8TNiRIQtovE9+V3WCBsYYlXx7ewQ9hSEi/728AelhBoZpRY
+ uuQgK4TTA/R9w3U2iCpjif1LJzOBLGMW0JRYv0sfYhmfxLuvPWA3SAjwSnS0CUFUq0hcev2S
+ CWb+3Sf/oWHoIXHmzQW2CYyKs5B8NgvJZ7OQvDALYdkCRpZVjFKpBcW56anJhgWGunmp5fAI
+ T87P3cQITpJaPjsYv6//q3eIkYmD8RCjBAezkghvi7BsmhBvSmJlVWpRfnxRaU5q8SFGU2B4
+ T2SWEk3OB6bpvJJ4QxNLAxMzI2MTC0MzQyVx3jNXylKFBNITS1KzU1MLUotg+pg4OKUamDYw
+ G7m91JW7xh7MwWrp9pJjDXtgqCv3th6tb59WeBdfeb43179j6kRLKQXNvv76gNPa++9/sX76
+ 2GKGOG+UurVqcpR6QNUDnwPWx+4V6XgoiHIxvVt7d0XcaavSzo+B3bwfTh6vCRGaWn7/kLS2
+ 0BaFvRzvGK6vPtZ53HuCnsFxJ6OII0FKC4sfZbWohGxxuHzVWTQm8otfkcWZTXdWl92Y8Lag
+ 7H/4Fa2HmZdqXGYqL9Wc9q8/0NbsVOq8tVrBuSYmFj5Hbi6/fILl3jzT1S9u8jzrXDjJ6c1E
+ XUWT2zkTb8ZdubVyRgKDhnfALp29dvrnbh4yz3i2pH3b3fPhN/8H/HT+rL3mWm/+j9s/lJRY
+ ijMSDbWYi4oTAV9dc+YbBAAA
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrPLMWRmVeSWpSXmKPExsWy7bCSvO5vLvk0gynXZCxOvrnKYvFj1RdW
+ i6mTNrNbvN3bye7A4vHqwCp2jxMTLjF5nL2zg9Fj47sdTAEsUVw2Kak5mWWpRfp2CVwZJ1c3
+ MBYc4q54vHQvcwPjYc4uRk4OCQETidntx1i7GLk4hAR2M0pc+fSEHSIhJfH56VS2LkYOIFtY
+ 4vDhYoia54wSl0+/YQGpYRPQk/i/aCEziC0ikC9xZ8YesF5moN6mk7sYIRo2M0pceLaICSTB
+ KWAuMenzL1YQW1jAWaLvVw9YA4uAqsT2vzfAbF4BS4m/LSehbEGJkzOfsEAM1ZZ4evMplC0v
+ sf3tHGaIQxUkfj5dxgpyqIiAk8Tj9yYQJSISszvbmCcwCs9CMmkWkkmzkEyahaRlASPLKkbJ
+ 1ILi3PTcYsMCo7zUcr3ixNzi0rx0veT83E2M4DjR0trBuGfVB71DjEwcjIcYJTiYlUR4W4Rl
+ 04R4UxIrq1KL8uOLSnNSiw8xSnOwKInzfnvdmyIkkJ5YkpqdmlqQWgSTZeLglGpg6t/n21u4
+ +gFr+R+BrIM5B11W5Oe7rFNa5bPhYnxrjd+FQhuvA0t6VE6EV5Wpp++MrhA69nXnZ99bUuyF
+ kWk//txNnPb0Q92fxxN13GSaDFJMRS33hRxd+fscr81a7wMfYk5GSm3X2vhpUQR7ZdncVf9F
+ 1kwOvdt2l+GWp6u+yO4Yv2Z+X7e2X32fZGs3FOm9WOy868a2FJ17TEu/unzl0Kl6LmfEsfNa
+ HJuLUyaT3w455aa1b9XyV7r+6in7eu7IpVrew7m600LFmA9OXFk86+uW1tRXFTLpFgVBF9hE
+ yrb23v38KVVoS//Pj5Orrv86YfuLvax+jm6DzLwpTM5VghueVZnMKxWd7bpisTCzEktxRqKh
+ FnNRcSIAXVirKgIDAAA=
+X-CMS-MailID: 20240416233419epcas1p2fa5e38c121b3169f4be95ed93036fdd7
 X-Msg-Generator: CA
 Content-Type: text/plain; charset="utf-8"
 CMS-TYPE: 101P
 DLP-Filter: Pass
 X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240410085657epcas1p4c824b9243f8e2c6e8bc84e51d5cb1deb
+X-CMS-RootMailID: 20240408210639epcas1p1913a0694e543b863110cfcb62c1237dc
 References: <20240408210619.3749231-1-jonas@kwiboo.se>
- <496013c1-7a57-4d12-bf31-c5257f35ee8c@theobroma-systems.com>
- <3b2643b4-dea7-43cd-9f9c-da63e6588281@kwiboo.se>
- <ac394528-ca53-41d5-8c4c-7c10943a7c92@theobroma-systems.com>
- <9b62bbedf2c6d52b76a8ce1ce57dd35d@manjaro.org>
- <CGME20240410085657epcas1p4c824b9243f8e2c6e8bc84e51d5cb1deb@epcas1p4.samsung.com>
- <8fec34b8-8d04-40ba-baca-5394762a4d27@theobroma-systems.com>
+ <CGME20240408210639epcas1p1913a0694e543b863110cfcb62c1237dc@epcas1p1.samsung.com>
+ <20240408210619.3749231-2-jonas@kwiboo.se>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -141,81 +135,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi
 
 > -----Original Message-----
-> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-> Sent: Wednesday, April 10, 2024 5:57 PM
-> To: Dragan Simic <dsimic@manjaro.org>
-> Cc: Jonas Karlman <jonas@kwiboo.se>; Peng Fan <peng.fan@nxp.com>; Jaehoon Chung
-> <jh80.chung@samsung.com>; Tom Rini <trini@konsulko.com>; u-boot@lists.denx.de
-> Subject: Re: [PATCH 1/2] mmc: Imply HS200 cap with mmc-hs400 prop to match linux
+> From: Jonas Karlman <jonas@kwiboo.se>
+> Sent: Tuesday, April 9, 2024 6:06 AM
+> To: Peng Fan <peng.fan@nxp.com>; Jaehoon Chung <jh80.chung@samsung.com>; Tom Rini <trini@konsulko.com>
+> Cc: Jonas Karlman <jonas@kwiboo.se>; u-boot@lists.denx.de
+> Subject: [PATCH 2/2] mmc: Add support for the no-mmc-hs400 prop
 > 
-> Hi Dragan,
+> The linux commit f722e650d965 ("mmc: core: add support for disabling
+> HS400 mode via DT") added support for a no-mmc-hs400 prop.
 > 
-> On 4/9/24 21:28, Dragan Simic wrote:
+> Add support for the no-mmc-hs400 prop to disable HS400 host caps.
 > 
-> [...]
-> 
-> > Let's keep in mind that the troublesome DT properties describe the
-> > capabilities of the MMC controller and the board, not the capabilities
-> > of the MMC storage device.  As we know, eMMC devices provide automatic
-> > detection capabilities, to allow the host to determine its supported
-> > modes, and match them with the ones the host is configured to support.
-> > It's all described in the JEDEC standards.
-> >
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-I didn't see the above mail in my mailbox. So I can miss something.
-
-> 
-> So why do we have those properties specified in board DTSes instead of
-> in the SoC DTSI? Logic would want us to have this defined in one place
-> only. I assume the issue is that even if the eMMC chip itself says it
-> supports HS400 but the HW routing or some other issue make it impossible
-> to use, we need a way to disable it from the DT for that board?
-> 
-> > Having that in mind, I find the approach in the Linux kernel rather
-> > reasonable, because I highly doubt that some MMC controllers support,
-> > for example, HS400 without supporting DDR52, or HS400 without supporting
-> > DDR52.  A reasonable approach for an MMC IP block is to make it capable
-> > of supporting all the speeds below its highest supported speed, to make
-> > itself capable of supporting more, if not all, MMC storage devices.
-> >
-> 
-> That's true for the IP block which is self-contained in the SoC, but
-> it's forgetting about the other part, the eMMC chip/card. It depends on
-> the HW routing, where mistakes/limitations can happen. And I don't think
-> we have a mechanism today to disable the modes set in the MMC controller
-> for a given MMC card from DT (aside from /delete-property/ in board files).
-
-The both opinions make sense.
-But, It doesn't set to all capabilities when nodes has mmc-hs400-* property.
-
-That's why it's describing to each property is because they want to clarify only which mode they use.
-
-AFAIK, I can't remember exactly, there were some boards that even though HS400 is working fine, 
-but HS200 was not working fine. (It's depends on which IP board is using.)
-
-There were too many cases not to work fine because of *HW* design. 
-eMMC and Host IP were supporting the HS400/200 and all modes, but there was a problem of handling clock.
-So it couldn't use HS200/400 and other dual modes.
-
-And We needs to know if it's working fine. 
-If we want to use hs400 mode, but board can be working to other mode without any error.
-Of course, we can see a mode as log. But it's at least approach to limit.
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 
 Best Regards,
 Jaehoon Chung
 
+> ---
+>  drivers/mmc/mmc-uclass.c | 3 +++
+>  1 file changed, 3 insertions(+)
 > 
-> > In fact, I'll probably go ahead and submit a Linux kernel patch that
-> > updates the descriptions in the binding, to hopefully eliminate any
-> > ambiguities like these.  I hope you agree.
+> diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
+> index 1349da72b102..1b454e8ec758 100644
+> --- a/drivers/mmc/mmc-uclass.c
+> +++ b/drivers/mmc/mmc-uclass.c
+> @@ -256,6 +256,9 @@ int mmc_of_parse(struct udevice *dev, struct mmc_config *cfg)
+>  		cfg->host_caps |= MMC_CAP(MMC_HS_400) | MMC_CAP(MMC_HS_200);
+>  	if (dev_read_bool(dev, "mmc-hs400-enhanced-strobe"))
+>  		cfg->host_caps |= MMC_CAP(MMC_HS_400_ES);
+> +	if (dev_read_bool(dev, "no-mmc-hs400"))
+> +		cfg->host_caps &= ~(MMC_CAP(MMC_HS_400) |
+> +				    MMC_CAP(MMC_HS_400_ES));
 > 
-> I for sure do not have enough knowledge in MMC to argue more than I just
-> did, so having people with more experience/knowledge have a look at this
-> would make sense, let's see what they have to say :)
-> 
-> Cheers,
-> Quentin
+>  	if (dev_read_bool(dev, "non-removable")) {
+>  		cfg->host_caps |= MMC_CAP_NONREMOVABLE;
+> --
+> 2.43.2
+
 
