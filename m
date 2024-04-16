@@ -4,77 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D7A0C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 00:36:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A639CC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 00:36:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E712880D6;
-	Tue, 16 Apr 2024 02:36:14 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C70928815B;
+	Tue, 16 Apr 2024 02:36:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b/elmgvR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ceBLj1bQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6802787FA1; Tue, 16 Apr 2024 02:36:13 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id CCCA388176; Tue, 16 Apr 2024 02:36:19 +0200 (CEST)
+Received: from mail-qk1-x72d.google.com (mail-qk1-x72d.google.com
+ [IPv6:2607:f8b0:4864:20::72d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BD08188158
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 02:36:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACF9488081
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 02:36:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-69b2f6d31c1so9190616d6.0
- for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 17:36:10 -0700 (PDT)
+Received: by mail-qk1-x72d.google.com with SMTP id
+ af79cd13be357-78ec78c4fceso252862385a.0
+ for <u-boot@lists.denx.de>; Mon, 15 Apr 2024 17:36:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713227769; x=1713832569; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1713227776; x=1713832576; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=viIAZl7Bc80JFxwQw33FCmByjtQQFEgGjj/mVfTpZEA=;
- b=b/elmgvRWjQmJqdHfQ66eezHx/Lg9MWcCnyWHkRW32x3qwwzfUJwhgB3dqfPYk1L79
- BVe7RoQ1Lc7zFfoN/l198rVcwR/Pv8H7o+aH8sDjpvgcm4XQsJesVFZvw1aa+6dCFnSc
- efR6/4m59LZvP/1xjV83KFScE8RgWow2JODSE=
+ bh=s/wk5ZWstwPp0yg/4Iv588MetTG2+HBQXy/gRhDBDSw=;
+ b=ceBLj1bQ+0ZybNy/k18xob8izdTW3chB7hWXGATMXzeUTf085lh1Ff03hS5DnqhAJJ
+ zhPcmhr4D7+3YqW5DU0oqJ3FjnR1eYryWpktWsCs2SYkrRsnJuxZGNlzEpugYTh9PaH9
+ glCoeG+TBYxcI6jVwfTmkHhK87ddiCnHHy/Ms=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713227769; x=1713832569;
+ d=1e100.net; s=20230601; t=1713227776; x=1713832576;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=viIAZl7Bc80JFxwQw33FCmByjtQQFEgGjj/mVfTpZEA=;
- b=o2mxKufKf5uQdMXwcOEkabzUyo7p53kXoDdZCPM36P8Q1RG0acwjbgXJi/3XnghTIK
- 3+EZkB3BpaRNG8TG/syK/eiK2rzAQkmKfqYjcS4Fgg6byIc9gJOR4g4iBnWCQXubdBVr
- 5hgv5yrSyFxahBy8xouTzwP859lQ7qEM5GN4Xmb5Z3HRnSTWvYELpx8uov8ryGN7xXka
- v8hZasX+pwyXidzQcsP/HTkkK7VBAJ4l0PGWvRy9+Ibcx3tv7/ojNY4Fjq9EThjyFEn9
- XuAfdf0SDEJ2HRMhuJrryFKeUh9uYu1eKocHqu6hFhY1QJ6hdnuT2vLo8UcQQ+LGqxJV
- FK8A==
+ bh=s/wk5ZWstwPp0yg/4Iv588MetTG2+HBQXy/gRhDBDSw=;
+ b=lBL/T5r+eRRak3Fs2YpYisgJn0B6phuuz6nFrbIAwvjGCv8j2EVDgMC4E7sPZviKzv
+ LcsrNWlZRAj5t6EP61hRh2DptFiAkeEOgT6qyc/O3V29DKe/gXReVPVQ8btX/ZTn8BRZ
+ +S96r5aNy5Z1E7PR1ipFPg+NggsoPtPMqzRdKYGMG39WTtMC0GNiJY/9YcV6OTWHI6M7
+ c4/HJ+B2yl+Ym3TRbAJ1MlpA/zN9Ghl9Eq5uxhwgGeJKLCVorTElZUd+kxg0P9Yrcy4K
+ UNtYkyTIjpEDGxEJ4ZScYwPCMEF5CBn6fImuE8kZBLqaJz7evCqD0j44BP1tB5mc/NNf
+ 3eoQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV9CU7ZIcp3CGxydxc89MD34GzRBLXVRCbwn3JVakDg+BGvgA8b7BG1mRgbRRj5grtmovG88sYgqAM9aI+br5TiMMiOZA==
-X-Gm-Message-State: AOJu0YyiRhTnjesfMPfp8ZoyM/cOFfRbypwoKqiu3OUEEfmATAN87fRH
- 2jCcMhuuAmPKUAxC6uV2X0jV6PugItZ114PIsjk7dioLQbCBElnDWg9SEzen2ZDmcrxRHJsAjej
- dpOA=
-X-Google-Smtp-Source: AGHT+IECYhDfbQAIT0942XGur7DME5xv8Afp5AUVfWtbblGjLsOlssMnrnhoAOVAtnxmltrcjHD/2A==
-X-Received: by 2002:a0c:f94d:0:b0:698:f66f:bdf3 with SMTP id
- i13-20020a0cf94d000000b00698f66fbdf3mr13062289qvo.28.1713227769547; 
- Mon, 15 Apr 2024 17:36:09 -0700 (PDT)
+ AJvYcCV4/JUdlgKXreWx8Ne+TDCrWLyN6oF4oBCjTyslJhKga/4gSCWXmLwMPyr/6pkKz76PnkGF3gGGs58c4r53Tr5sOioRVg==
+X-Gm-Message-State: AOJu0Yy+7YMNN0MZwH2rEbQLwGWPDAaJo3fIY/FL+zkec7vqO9lu6cnk
+ Um7JVOI4APaHYlf+lSqu9Ob4tU2cG23JnDYE7ZunLiJbRKIAnt+gSSJwoTUL0Vw=
+X-Google-Smtp-Source: AGHT+IE1acNll5M+hg0BZ0rSaotAhqowddwYMrcgkQSpxFEdSPR+KHNLrTbK/LblTdOdOVH0Jio/tA==
+X-Received: by 2002:a05:620a:cc7:b0:78e:f443:ba6c with SMTP id
+ b7-20020a05620a0cc700b0078ef443ba6cmr905120qkj.3.1713227776479; 
+ Mon, 15 Apr 2024 17:36:16 -0700 (PDT)
 Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- h19-20020a0cab13000000b006913aa64629sm6907119qvb.22.2024.04.15.17.36.08
+ l26-20020a05620a0c1a00b0078d6b3625fdsm7044921qki.64.2024.04.15.17.36.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 15 Apr 2024 17:36:09 -0700 (PDT)
-Date: Tue, 16 Apr 2024 02:36:06 +0200
+ Mon, 15 Apr 2024 17:36:16 -0700 (PDT)
+Date: Tue, 16 Apr 2024 02:36:12 +0200
 From: Tom Rini <trini@konsulko.com>
-To: Quentin Schulz <foss+uboot@0leil.net>
-Cc: Joe Hershberger <joe.hershberger@ni.com>, u-boot@lists.denx.de,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Subject: Re: [PATCH] env: mmc: print MMC device being read
-Message-ID: <20240416003606.GI1054907@bill-the-cat>
-References: <20240415-mmc-loadenv-dev-v1-1-4dd649e0c298@theobroma-systems.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Michal Simek <michal.simek@amd.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Elon Zhang <zhangzj@rock-chips.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Joshua Riek <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Simon Glass <sjg@chromium.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Tim Lunn <tim@feathertop.org>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Vignesh R <vigneshr@ti.com>, u-boot@lists.denx.de, git@xilinx.com
+Subject: Re: [PATCH 4/4] Kconfig: Make all Kconfig encoding ascii
+Message-ID: <20240416003612.GJ1054907@bill-the-cat>
+References: <cover.1713180904.git.michal.simek@amd.com>
+ <55ab78c9f2781b31278395f9e0066041f97b00f6.1713180904.git.michal.simek@amd.com>
+ <6b45c003-f6a0-4ee4-a01f-e5acc81d68a9@gmx.de>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="4895x11jWCtIxUYb"
+ protocol="application/pgp-signature"; boundary="Q0g2VCNmu2TLOzH8"
 Content-Disposition: inline
-In-Reply-To: <20240415-mmc-loadenv-dev-v1-1-4dd649e0c298@theobroma-systems.com>
+In-Reply-To: <6b45c003-f6a0-4ee4-a01f-e5acc81d68a9@gmx.de>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,56 +106,59 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---4895x11jWCtIxUYb
-Content-Type: text/plain; charset=us-ascii
+--Q0g2VCNmu2TLOzH8
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 15, 2024 at 02:43:57PM +0200, Quentin Schulz wrote:
+On Mon, Apr 15, 2024 at 02:22:02PM +0200, Heinrich Schuchardt wrote:
+> On 15.04.24 13:35, Michal Simek wrote:
+> > Some of Kconfigs are using utf-8 encoding because of used chars. Convert
+> > all of them to ascii enconging.
+> >=20
+> > Signed-off-by: Michal Simek <michal.simek@amd.com>
+[snip]
+> > diff --git a/arch/arm/mach-rockchip/rv1126/Kconfig b/arch/arm/mach-rock=
+chip/rv1126/Kconfig
+> > index ae323ee91235..64a70f61f894 100644
+> > --- a/arch/arm/mach-rockchip/rv1126/Kconfig
+> > +++ b/arch/arm/mach-rockchip/rv1126/Kconfig
+> > @@ -6,8 +6,8 @@ config TARGET_RV1126_NEU2
+> >   	  Neu2:
+> >   	  Neural Compute Module 2(Neu2) is a 96boards SoM-CB compute module
+> >   	  based on Rockchip RV1126 from Edgeble AI.
+> > -	  Neu2 powered with Consumer grade (0 to +80 =B0C) RV1126 SoC.
+> > -	  Neu2k powered with Industrial grade (-40 =B0C to +85 =B0C) RV1126K =
+SoC.
+> > +	  Neu2 powered with Consumer grade (0 to +80 C) RV1126 SoC.
+> > +	  Neu2k powered with Industrial grade (-40 C to +85 C) RV1126K SoC.
+>=20
+> C is the sign for coulomb which is the unit of electric charge. How
+> about 'deg C'?
 
-> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
->=20
-> This prints the MMC device being read similar to how we print the MMC
-> device we write to when e.g. calling saveenv.
->=20
-> One of the side effects is that the boot log now shows from which MMC
-> device the env was loaded:
->=20
-> Loading Environment from MMC... Reading from MMC(1)... OK
->=20
-> This is useful to identify which MMC device the environment was loaded
-> from for boards where there are more than one (e.g. eMMC and SD card)
-> without adding some debug messages manually.
->=20
-> Sadly, there's no way to know which of the default or redundant
-> environment is being read from env_mmc_load before env_import_redund is
-> called so it is printing a bit later (and possibly after error/warning
-> messages).
->=20
-> Cc: Quentin Schulz <foss+uboot@0leil.net>
-> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
+I'll note that in Linux there's seemingly nothing consistent, and I'm
+fine with any of "deg C" or "degrees C" or "temperature range (-40 C to
++85 C)" as all of those should be clear in context.
 
 --=20
 Tom
 
---4895x11jWCtIxUYb
+--Q0g2VCNmu2TLOzH8
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYdx/YACgkQFHw5/5Y0
-tyxBlAv/RJdFeqKB7k8NdO7XFyzio+QsQJ31Q0gqQ7wTymF0Z0WPeWTG9zd0u4XG
-NSaBpPF7jokC3pY/ETSb07KNcLh5zwYUtQTQfWpdSdE8HzCd15nfNqiJBlhtsqVM
-Y1fCZrjkOHBdtQI/DLTPvjy0RUjw5AaDcN9nhw868nl/qzlpYA1TrS7KK4u8MXUJ
-KUswsB41/IIS8NRCcYujzaPiP9zeaLbXgy7+WUbyobpJoOd5dMQcDsrtjk6r5tK7
-OjNrKMqcl6M3ljaFoDWZqDfK7s7fwM29ofrKhQrh88IDwF7eF10xjg/EPm/OgT/2
-W9FYN86N7Z09ODg7fGtXv+PAOp5R58ONXgqXhy/3ISfBa7DuCD4ch8sCCgwYoQ6A
-kMwr0YyKH24cVf0BPsth/kAwFG7Est0yOtRxi+/BIFJjH9PJ52gluxKFKlzgmWHx
-pWx0xxG0whAv+ewdFUzT7nZGrrc2dXayaRvq/XkROP2JlJIcgpRkvUHTQMIS/rNW
-VKf7si2C
-=kVJ+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYdx/wACgkQFHw5/5Y0
+tyzeTAv+KshYT6cWzWeQlrL2CYLUNuFLFRc1b6nrk8cecTbOYOMm344+G7CN5rUq
+6UqZ/nyLwEv50sH7Yvmd/VuVFkiW4UfNMUj9bhl2KlJd+LkG1GOEdrIU3CHawEve
+xV5V2DCzlwk976LzyrqIqhwPfKIsBerDvdN7T4M+0Zuw3tGXcbnKBF+AkCj44Apf
+VTIAakBFMDmTqYcE5ND3gOFPov+p7bHUXuCAkd6JP3QbTvAQlQwkGbOjc6cNos1b
+15qubW/pzdlHa8b0imwfMjByrendGsWaJy5Ib0SCywLPYI5mfFihiXss5WlXPnPg
+FkLfgyCojR5VIJfdts4GEujrlzFmyw1+sOmAdE5Kr6huF3R22f9U2JV4h7g72vz8
+dX52eRbxWB63W+h6StWswJoHLiQ27grWVZCMlpJPiAYUvWMzUC7UC0JSvOiKKgNC
+ZnYj8yvwfMpnpopR/7r1rLgvy+VD3f6eVRDns4vcV5vHr16mgQSHzZs4zBi6hZ80
+ABYsDrgq
+=irO9
 -----END PGP SIGNATURE-----
 
---4895x11jWCtIxUYb--
+--Q0g2VCNmu2TLOzH8--
