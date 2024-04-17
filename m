@@ -4,121 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED300C001CC
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 11:41:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DAE0C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 12:18:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E3A08845D;
-	Wed, 17 Apr 2024 13:41:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 331C288369;
+	Wed, 17 Apr 2024 14:18:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="jRRUFjpO";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LWtBgPiZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 860F988478; Wed, 17 Apr 2024 13:41:03 +0200 (CEST)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 74F428844A; Wed, 17 Apr 2024 14:18:45 +0200 (CEST)
+Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
+ [IPv6:2a00:1450:4864:20::129])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E942388447
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 13:40:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D18288369
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 14:18:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20240417114054epoutp01baf82ea33e85884975d23cadcf674e1f~HDm9NQR1F0525605256epoutp01m
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 11:40:54 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20240417114054epoutp01baf82ea33e85884975d23cadcf674e1f~HDm9NQR1F0525605256epoutp01m
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1713354054;
- bh=PZEq0pqd4rU2Ho1yfk4JBRbX9QWXmAKi0gwWaW0CjgY=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=jRRUFjpOzmwXDnhPYi+Gl66DGRmaZ2bAR52ToBWI34YzmXqoWZZOrc+dMF3UzXVYf
- iqIvDbvlkS1Rk9RkGS4MNAm/51a9/i8+RrFheOwJMgGl1QR4J4r1P0qMxjCo0CVFkw
- ntKG2QwsVt1G/+61IsqnY1YasVUg0bqNyM3dBC5g=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20240417114053epcas1p3d586a3bdedfef722ef6e23bda9c8c4b6~HDm8nsuSm0701807018epcas1p3G;
- Wed, 17 Apr 2024 11:40:53 +0000 (GMT)
-Received: from epsmgec1p1-new.samsung.com (unknown [182.195.38.231]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4VKJrN5tKtz4x9Q1; Wed, 17 Apr
- 2024 11:40:52 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmgec1p1-new.samsung.com (Symantec Messaging Gateway) with SMTP id
- 62.9C.19431.445BF166; Wed, 17 Apr 2024 20:40:52 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTPA id
- 20240417114052epcas1p4c09549fcfdbd59d57ac411e151a518de~HDm7UUYEX2878828788epcas1p4l;
- Wed, 17 Apr 2024 11:40:52 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240417114052epsmtrp23079a9279a957de1d09046bf1ccc4cbc~HDm7TFLS32278022780epsmtrp2O;
- Wed, 17 Apr 2024 11:40:52 +0000 (GMT)
-X-AuditID: b6c32a4c-485ff70000004be7-65-661fb5446d4f
-Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- E6.77.19234.445BF166; Wed, 17 Apr 2024 20:40:52 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
- (KnoxPortal) with ESMTPA id
- 20240417114052epsmtip29dc98cd6e28e186a47b4722e9cd202ac~HDm7Iv2UR2735627356epsmtip2D;
- Wed, 17 Apr 2024 11:40:52 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Kongyang Liu'" <seashell11234455@gmail.com>, <u-boot@lists.denx.de>
-Cc: "'Leo Yu-Chi Liang'" <ycliang@andestech.com>, "'Peng Fan'"
- <peng.fan@nxp.com>, "'Tom Rini'" <trini@konsulko.com>
-In-Reply-To: <20240416073131.8527-1-seashell11234455@gmail.com>
-Subject: RE: [PATCH] mmc: cv1800b: Add transmit tap delay config to fix
- write error
-Date: Wed, 17 Apr 2024 20:40:52 +0900
-Message-ID: <01ff01da90bc$19cd7e80$4d687b80$@samsung.com>
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-lf1-x129.google.com with SMTP id
+ 2adb3069b0e04-516d1ecaf25so7068092e87.2
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 05:18:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1713356322; x=1713961122; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=IlEB52RoYdngmhMY3vUE9U8Z1ZUxjxRP9CCYrkvU/AM=;
+ b=LWtBgPiZVODqWyhdhRyuD4L+CR6HiWjrh2Qizh1KRIZ8Txnfz2Z8EH/rvjo6Ewml9/
+ ifUBRH/WtbbYf5Gzxofch0Xycno1tuPReyvhnrQUd0gU9TxkXkjvLKsiuDx50rfnuR8M
+ xRccKTHfPo5/DgAIlEIG36KjFUUUQbmDq8+BWhcRZTtxv51igGqtFYcpubsHIi7zvC+i
+ jxO4B8afAbjjoz1AgxF6ntOuCaqOuq9hAXTWxqvCSQpBq49eYdvPJ9189a4m+P8wgvoW
+ yzOBKkm49UDrHpHOpGtUFAFORgXSTDefqwgpo9JM0qo+y7rOSjv78kzMtzTivh6QyOMG
+ VyMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713356322; x=1713961122;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=IlEB52RoYdngmhMY3vUE9U8Z1ZUxjxRP9CCYrkvU/AM=;
+ b=n3oyFJSvtkRZujO8MG3dHBuMNrSdN1i1iWcA5VY1WPnJR3eYIMoitCIl0HoPoG+7c4
+ 7jF2OLhWyV/vhufopAuVxzhlhhREDlNDb0zuVEpDgB9IDIZG6rsD5kZYzEBBw6opANFp
+ Hfx9QbuHvkZTjKjUXNHGF5em6A4EQTDHnaRpLynK1BXrfubb5hE7WlMkVi5YBz2vhAx/
+ DIuaAqTBPQ1buqt4hm536HqJiXZx3ZGPw7AobpdxN35QVEM6ZYGYlL2SSYzSvSrQdKKg
+ 9mDJaIwFZCnvWYLhbnRkDjAnuPvDI7QSOqgNJV4CpgB4FiwFr+FKJZJZBLAa3WBpeO/d
+ 1LNg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW6XYHW07xmOcajMhKUSX2e97IrOlmesP5eMpnZ9dbGrQRX1jY/DxERKr9yJMhNgL+fTZ6IgJoZYZbkMfUj53ri9n/r+g==
+X-Gm-Message-State: AOJu0YzaCTnMHrz3LTC/cpny0GKESbZBtOVYVYeyC8U8+xdYYfHlVQr8
+ JZgYAc4wOO7oE2roChwXCxN0g7UvWSd+a7Ex3IiydiZKsdYCt3hkgySc/494VHrDnatNEJI7DSz
+ fadCpCGCx7qaPlO15ntGIrUjxFAGzaFmfUgP4Xg==
+X-Google-Smtp-Source: AGHT+IH8ZKVwysycbSjORh3YqXQ8OH43dRXv+37pVFx2ndtiyWVXMbXhlto/Fl5lGEStGFi3W1oiPyNSQ3yT5r5TGBE=
+X-Received: by 2002:a05:6512:691:b0:518:f8a6:9f3c with SMTP id
+ t17-20020a056512069100b00518f8a69f3cmr5610850lfe.58.1713356322340; Wed, 17
+ Apr 2024 05:18:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQJctH8J5r3lGfoF8xnQ9yoVG6ixbQKHQD9TsFPVEaA=
-Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprCJsWRmVeSWpSXmKPExsWy7bCmga7LVvk0g+9ntC1+rPrCanFs3Ud2
- i6mTNrNbvN3byW7x+NBrJgdWjz2nZzF77Jx1l93j1YFV7B5n7+xg9Nj4bgdTAGtUtk1GamJK
- apFCal5yfkpmXrqtkndwvHO8qZmBoa6hpYW5kkJeYm6qrZKLT4CuW2YO0HYlhbLEnFKgUEBi
- cbGSvp1NUX5pSapCRn5xia1SakFKToFpgV5xYm5xaV66Xl5qiZWhgYGRKVBhQnbGibX7WQt+
- 8FRc/DuVsYHxJFcXIyeHhICJxPdTi1m7GLk4hAT2MEqcv7CHCcL5xCix5vNXVjjn6r0z7F2M
- HGAt1/bYQ8R3Mkrsef4Oquglo8Tv6TNZQeayCehJ/F+0kBnEFhHwlGj4+4MdxGYWKJNo67sN
- ZnMK2EtM2rOAEcQWFgiVeHJqDVicRUBV4lBrM5jNK2ApsWjnDxYIW1Di5MwnLBBz5CW2v53D
- DPGDgsTPp8tYIXZZSTQsa4CqEZGY3dnGDHKchEArh8STpS8ZIRpcJF51TGKHsIUlXh3fAmVL
- SXx+t5cNoqGZUWLpkoOsEE4Po8S/hutsEFXGEvuXTmYChQWzgKbE+l36ENv4JN597WGFBBGv
- REebEES1isSl1y+ZYObfffKfFcL2kDh2bAbzBEbFWUh+m4Xkt1lIfpiFsGwBI8sqRqnUguLc
- 9NRkwwJD3bzUcniUJ+fnbmIEJ08tnx2M39f/1TvEyMTBeIhRgoNZSYS3RVg2TYg3JbGyKrUo
- P76oNCe1+BCjKTDEJzJLiSbnA9N3Xkm8oYmlgYmZkbGJhaGZoZI475krZalCAumJJanZqakF
- qUUwfUwcnFINTMWqvzY/f/rI9kMMb8X89gszpG4fMwnpufUoz3aKblDatoLl7YUOXTXTzxRd
- UimPUo+f1XphltPzH7EipUrny1dfUVly8TdvaueJ6ptM4Rtak/oWrH328VvtX9msEwv9Tvxb
- ONfQ4cL6fXf9d+mLL5sWo7Pj79JCV/Xfh/9c71WJdjmycOZnm9UVR/Vu6jMVR+tW328puXvK
- aE/balX9i/NTpaRXff4ZnHLUdu6dWO4pC1b/+HAtc/O01FNH/TnPKzwW2WO4Pj7p4+Yv294v
- eLujWd9SZ7/pwcD+55f6Y55X3HwT8umGQffL6c5qjzf28c1izd/xwuxxXOofuf6A4uT5fcpa
- KxvfiZXxbL/y5qKAEktxRqKhFnNRcSIAsgUJmicEAAA=
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrMLMWRmVeSWpSXmKPExsWy7bCSvK7LVvk0g1vnhS1+rPrCanFs3Ud2
- i6mTNrNbvN3byW7x+NBrJgdWjz2nZzF77Jx1l93j1YFV7B5n7+xg9Nj4bgdTAGsUl01Kak5m
- WWqRvl0CV8aJtftZC37wVFz8O5WxgfEkVxcjB4eEgInEtT32XYxcHEIC2xklei83sXUxcgLF
- pSQ+P53KBlEjLHH4cDFEzXNGiacdO1lAatgE9CT+L1rIDGKLCHhLXFzcCNbLLFAhsfDIATBb
- SGACo8S6JeYgNqeAvcSkPQsYQWYKCwRLLD8tBBJmEVCVONTazA5i8wpYSiza+YMFwhaUODnz
- CQvESG2JpzefQtnyEtvfzmGGOFNB4ufTZawQJ1hJNCxrgKoRkZjd2cY8gVF4FpJRs5CMmoVk
- 1CwkLQsYWVYxiqYWFOem5yYXGOoVJ+YWl+al6yXn525iBMeLVtAOxmXr/+odYmTiYDzEKMHB
- rCTC2yIsmybEm5JYWZValB9fVJqTWnyIUZqDRUmcVzmnM0VIID2xJDU7NbUgtQgmy8TBKdXA
- JLVihpOA5YHzBnaZGVcfuS145P3x5Sw/MVVeYaeKvYYPnkVnOb+pzmC4ou0m+N/654MjsQdk
- /PLu6zZe2/txdaX2hP6PZb+fPD62UDmb+f75vVlh35bOm/KiImPtzMtnv87w5hLafdGjtKTu
- UO92/b9/JkRaBJbM/ty+7MWh7adeWDxZu3rXobLFO6/XT7gWnPjtxpJvrzvWe88/tyl8bsGm
- nXcfHd5e5M+0xaD6q5VDciP7OkH14nfvZaYtsb74Zga/8Kf/2YXrN12WV7h7677stzkVhj1O
- r9eWXNJ0+XygZdl+lstlLtPsZMW1fwn3dNz7wGxix+exJcltcen1B60FJz75Pdxavb7rZW9W
- 1nUDJZbijERDLeai4kQAWZat6gYDAAA=
-X-CMS-MailID: 20240417114052epcas1p4c09549fcfdbd59d57ac411e151a518de
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240416073148epcas1p23ad0d7f46660f71578f353a35179790b
-References: <CGME20240416073148epcas1p23ad0d7f46660f71578f353a35179790b@epcas1p2.samsung.com>
- <20240416073131.8527-1-seashell11234455@gmail.com>
+References: <20240112064759.1801600-1-s-vadapalli@ti.com>
+ <20240112064759.1801600-2-s-vadapalli@ti.com>
+ <20240112132607.GO1610741@bill-the-cat>
+ <a1d7ca85-8723-4d73-8e1c-357c6aa6294f@ti.com>
+ <20240120164141.GA3652023@bill-the-cat>
+ <48c63fc4-9f06-4066-b206-a0a548936dcd@ti.com>
+ <892b473b-5b76-4e44-af27-52d50cb24877@ti.com>
+ <20240411220741.GJ2493117@bill-the-cat>
+ <2406c7be-114c-4082-9c14-1cd59917b9d8@ti.com>
+ <20240416170027.GQ1054907@bill-the-cat>
+ <97f84067-ba36-47f6-befa-221be47a1d25@ti.com>
+In-Reply-To: <97f84067-ba36-47f6-befa-221be47a1d25@ti.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 17 Apr 2024 17:48:31 +0530
+Message-ID: <CADg8p97udLbFvbZ_FZf9Hfwg3R4=YJMNWrAtqvu97mL7vVYREQ@mail.gmail.com>
+Subject: Re: [PATCH 01/10] board: ti: am62x: Init DRAM size in R5/A53 SPL
+To: Chintan Vankar <c-vankar@ti.com>
+Cc: Tom Rini <trini@konsulko.com>, joe.hershberger@ni.com, 
+ simon.k.r.goldschmidt@gmail.com, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ sjg@chromium.org, 
+ marex@denx.de, nm@ti.com, afd@ti.com, vigneshr@ti.com, u-boot@lists.denx.de, 
+ dannenberg@ti.com, srk@ti.com
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -135,55 +101,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+hi Chintan,
 
+On Wed, 17 Apr 2024 at 13:21, Chintan Vankar <c-vankar@ti.com> wrote:
+>
+>
+>
+> On 16/04/24 22:30, Tom Rini wrote:
+> > On Tue, Apr 16, 2024 at 05:52:58PM +0530, Chintan Vankar wrote:
+> >>
+> >>
+> >> On 12/04/24 03:37, Tom Rini wrote:
+> >>> On Wed, Apr 03, 2024 at 06:18:01PM +0530, Chintan Vankar wrote:
+> >>>>
+> >>>>
+> >>>> On 22/01/24 10:11, Siddharth Vadapalli wrote:
+> >>>>>
+> >>>>>
+> >>>>> On 20/01/24 22:11, Tom Rini wrote:
+> >>>>>> On Mon, Jan 15, 2024 at 01:42:51PM +0530, Siddharth Vadapalli wrote:
+> >>>>>>> Hello Tom,
+> >>>>>>>
+> >>>>>>> On 12/01/24 18:56, Tom Rini wrote:
+> >>>>>
+> >>>>> ...
+> >>>>>
+> >>>>>>>> The list of conditionals in common/spl/spl.c::board_init_r() should be
+> >>>>>>>> updated and probably use SPL_NET as the option to check for.
+> >>>>>>>
+> >>>>>>> Thank you for reviewing the patch and pointing this out. I wasn't aware of it. I
+> >>>>>>> assume that you are referring to the following change:
+> >>>>>>>
+> >>>>>>>            if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HANDOFF) ||
+> >>>>>>> -           IS_ENABLED(CONFIG_SPL_ATF))
+> >>>>>>> +           IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(CONFIG_SPL_NET))
+> >>>>>>>                    dram_init_banksize();
+> >>>>>>>
+> >>>>>>> I shall replace the current patch with the above change in the v2 series. Since
+> >>>>>>> this is in the common section, is there a generic reason I could provide in the
+> >>>>>>> commit message rather than the existing commit message which seems to be board
+> >>>>>>> specific? Also, I hope that the above change will not cause regressions for
+> >>>>>>> other non-TI devices. Please let me know.
+> >>>>>>
+> >>>>>> Yes, that's the area, and just note that networking also requires the
+> >>>>>> DDR to be initialized.
+> >>>>>>
+> >>>>>
+> >>>>> Thank you for confirming and providing your suggestion for the contents of the
+> >>>>> commit message.
+> >>>>>
+> >>>> Following Tom's Suggestion of adding CONFIG_SPL_NET in common/spl/spl.c
+> >>>> "dram_init_banksize()", the issue of fetching a file at SPL stage seemed
+> >>>> to be fixed. However the commit "ba20b2443c29", which sets gd->ram_top
+> >>>> for the very first time in "spl_enable_cache()" results in
+> >>>> "arch_lmb_reserve()" function reserving memory region from Stack pointer
+> >>>> at "0x81FFB820" to gd->ram_top pointing to "0x100000000". Previously
+> >>>> when gd->ram_top was zero "arch_lmb_reserve()" was noop. Now using TFTP
+> >>>> to fetch U-Boot image at SPL stage results in "tftp_init_load_addr()"
+> >>>> function call that invokes "arch_lmb_reserve()" function, which reserves
+> >>>> entire memory starting from Stack Pointer to gd->ram_top leaving no
+> >>>> space to load U-Boot image via TFTP since TFTP loads files at pre
+> >>>> configured memory address at "0x82000000".
+> >>>>
+> >>>> As a workaround for this issue, one solution we can propose is to
+> >>>> disable the checks "lmb_get_free_size()" at SPL and U-Boot stage. For
+> >>>> that we can define a new config option for LMB reserve checks as
+> >>>> "SPL_LMB". This config will be enable by default for the backword
+> >>>> compatibility and disable for our use case at SPL and U-Boot stage.
+> >>>
+> >>> The problem here is that we need LMB for booting an OS, which is
+> >>> something we'll want in SPL in non-cortex-R cases too, which means this
+> >>> platform, so that's a no-go. I think you need to dig harder and see if
+> >>> you can correct the logic somewhere so that we don't over reserve?
+> >>>
+> >> Since this issue is due to function call "lmb_init_and_reserve()"
+> >> function invoked from "tftp_init_load_addr()" function. This function
+> >> is defined by Simon in commit "a156c47e39ad", which fixes
+> >> "CVE-2018-18439" to prevent overwriting reserved memory. Simon, can you
+> >> explain why do we need to call "lmb_init_and_reserve()" function here ?
+> >
+> > This is indeed a tricky area which is why Sughosh is looking in to
+> > trying to re-work the LMB mechanic and we've had a few long threads
+> > about it as well.
+> >
+> > I've honestly forgotten the use case you have here, can you please
+> > remind us?
+> >
+> We are trying to boot AM62x using Ethernet for which we need to load
+> binary files at SPL and U-Boot stage using TFTP. To store the file we
+> need a free memory in RAM, specifically we are storing these files at
+> 0x82000000. But we are facing an issue while loading the file since
+> the memory area having an address 0x82000000 is reserved due to
+> "lmb_init_and_reserve()" function call. This function is called in
+> "tftp_init_load_addr()" function which is getting called exactly before
+> we are trying to get the free memory area by calling
+> "lmb_get_free_size()".
 
-> -----Original Message-----
-> From: Kongyang Liu <seashell11234455@gmail.com>
-> Sent: Tuesday, April 16, 2024 4:31 PM
-> To: u-boot@lists.denx.de
-> Cc: Jaehoon Chung <jh80.chung@samsung.com>; Leo Yu-Chi Liang <ycliang@andestech.com>; Peng Fan
-> <peng.fan@nxp.com>; Tom Rini <trini@konsulko.com>
-> Subject: [PATCH] mmc: cv1800b: Add transmit tap delay config to fix write error
-> 
-> Currently, only the receive delay is configured while the transmit delay
-> is not set, which may result in errors when writing to the file. This issue
-> can be resolved by setting PHY_TX_SRC_INVERT to SDHCI_PHY_TX_RX_DLY.
-> 
-> Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
+I have no idea about your platform but I was wondering if there is any
+particular importance of the load address of 0x82000000? It looks as
+though the current location of the SP when arch_lmb_reserve() gets
+called means that the load address is getting reserved for the U-Boot
+image. Do you not have the option of loading the image at a lower
+address instead?
 
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
-
-Best Regards,
-Jaehoon Chung
-
-> ---
-> 
->  drivers/mmc/cv1800b_sdhci.c | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
-> 
-> diff --git a/drivers/mmc/cv1800b_sdhci.c b/drivers/mmc/cv1800b_sdhci.c
-> index 2275c53777..a50f4cff0d 100644
-> --- a/drivers/mmc/cv1800b_sdhci.c
-> +++ b/drivers/mmc/cv1800b_sdhci.c
-> @@ -12,6 +12,8 @@
->  #define MMC_MAX_CLOCK        375000000
->  #define TUNE_MAX_PHCODE      128
-> 
-> +#define PHY_TX_SRC_INVERT  BIT(8)
-> +
->  struct cv1800b_sdhci_plat {
->  	struct mmc_config cfg;
->  	struct mmc mmc;
-> @@ -19,7 +21,7 @@ struct cv1800b_sdhci_plat {
-> 
->  static void cv1800b_set_tap_delay(struct sdhci_host *host, u16 tap)
->  {
-> -	sdhci_writel(host, tap << 16, SDHCI_PHY_TX_RX_DLY);
-> +	sdhci_writel(host, PHY_TX_SRC_INVERT | tap << 16, SDHCI_PHY_TX_RX_DLY);
->  }
-> 
->  static void cv1800b_sdhci_reset(struct sdhci_host *host, u8 mask)
-> --
-> 2.41.0
-
-
+-sughosh
