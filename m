@@ -4,82 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E601C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 13:14:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F4223C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 13:21:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D1A987F8E;
-	Wed, 17 Apr 2024 15:14:21 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5DCC78835E;
+	Wed, 17 Apr 2024 15:21:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LiLg6s5d";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="guxClz24";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B2758832B; Wed, 17 Apr 2024 15:14:19 +0200 (CEST)
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
- [IPv6:2607:f8b0:4864:20::52c])
+ id 08B308842A; Wed, 17 Apr 2024 15:21:24 +0200 (CEST)
+Received: from mail-lf1-x135.google.com (mail-lf1-x135.google.com
+ [IPv6:2a00:1450:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DE1F87F2A
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 15:14:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E172B87E75
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 15:21:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x52c.google.com with SMTP id
- 41be03b00d2f7-5f77640a4dcso248111a12.3
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 06:14:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x135.google.com with SMTP id
+ 2adb3069b0e04-516d3776334so7077321e87.1
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 06:21:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713359656; x=1713964456; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dpT/48EYVkPEiHZx5fwGcpbn5+ZH9jFD5HNMR7fQ428=;
- b=LiLg6s5dv6tSamj+NRzWfllhFhUOsgtURIeVhDsMZ/MzCVfOpsLfmdHid79WhQCAmb
- PqjDx4vCc+VZbA31WolfDX5fNI6nVunmiLzj9fXFDYnDg0BLzDPEDGcOH05w1kG5zB1U
- BpFP+NO/Y+Gw7w3MAj98wZQhxwXLjcsSXrUN1xxM8kWkqtA7wEVdrPf0VX6r7eFJIzoN
- EXS7QpZ+u5IkQ2AmQfjoQHzSKvCXNtv5adaEg8W32X83ii8bTTJ3d8SeqL030d/0mZRX
- IKZsMwq5v0DFCDccihFy6yi8blzsQKbRLEjQZwK/cSxpejxQd+doL6VVs9G8wCau3Jzm
- Z9fw==
+ d=linaro.org; s=google; t=1713360081; x=1713964881; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3W84USv6siUVoJ0B90ESUfqeJtS9WPTWefKIVO3pg38=;
+ b=guxClz24V4AqvyWfMJuhCn8Mo4+zuu2vgl7iSJurwL+G3nXF2quCXsA4n5biU42J1B
+ s6sSqs2PLaPzodtzxCY9YlSYv8KO7/0imQUlBRA/e/jg4J84E8utQD88YHNFemgA2Blp
+ 0QgF+MKAH3XXoA4VH1OOPYnpshOjDcrHRBmAW95rJgQej6i/xy/S+PxKiWe1yhPhngIP
+ 5OEtrfdyB4ybxBlN6HLfcrKfz+JlGFLHGNXFgsTDhGKvfYYW8axj9M+52MhQTuSfB5/3
+ KJtEeFX45hCfpyGVnlorDiDNSAECRrTmEK0uqIQKK7qgr7aLxeo84LR+trIsPt5sdoIT
+ gwOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713359656; x=1713964456;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dpT/48EYVkPEiHZx5fwGcpbn5+ZH9jFD5HNMR7fQ428=;
- b=bt1yo2en4RvcP4OudNi9+aChMLOR3LLv4TrA/PR4Fmty09cU2y17u63U8Aj3OaVYJF
- /mjqlLbvdSQSW1Nz0Mxxb1p7bj5dB0Xti4mpGBV/7Il4vzXls+gAwcZ2H0I/L2GyxF+p
- RmcA0TK5pvS9ShLM468kBv4IY4MpZc8AwX8XbcxZUQ1zrODJnLXdXE8Sv08bnBP6cr/8
- wAWvo62m3KFCRMIk4VzEOQLEYo4W13Th5PSBWUDK6/bYPj3XKZxwFi3SUkMzy8KdhirI
- e9mNaeCQ/tAjkZOmje+9WBEE8B72T+3DWTCAEn/6KXIj71qs+8P64EcgRFvv/bQ4BnGM
- +1fg==
+ d=1e100.net; s=20230601; t=1713360081; x=1713964881;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3W84USv6siUVoJ0B90ESUfqeJtS9WPTWefKIVO3pg38=;
+ b=inkeetvQh4QSjP7cHGfeiFTXQetVupOHCsrErbB1KB2Bbc6SZZVrHR1BIYYo2SZdcH
+ XpUYzEBF/rCnkCnvxgWf22wqiP3t8SS94QdI2OqhDflq39swWVgGMmW/2MP4ipNAv63R
+ vX8Z5VPleoF8Q5WNovU3rWppq8MYsMHl3YF5K20tymoIYHsa6a1KhK7TfFFtBQPfyB/o
+ XWbr2ruViiVHmXls6LUF5WRysQOkN6gHfD9ri1zu01Q6n07sDZ/LRnhMtiJLyVu42cYM
+ dlNSo3MuDY1IIJiGK06MIALVoMh57RIjl+As3DxGX00F2lqvuwVzrGmy3Zux0/B7kCGU
+ GSMQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWagnhfECldJkT5MijXhRk0BJPiapGRhaz2T+DpoCk/DJWJ1HxVZAoWQ8jHzl65PnnMLginQMQRVYji6KTny7gT9ujMBg==
-X-Gm-Message-State: AOJu0YzIDR8Oq4wuFomLBRxtBw6miRhUJcA8R2v04XrnpI9gPPlGmfA5
- m/yUYc6Xl/R7hvTJvXmf/4Qc9KXDVSWFjDu/uBxNq/1jKIa/7+5HnjId4DavqYD9A4re/oAmB5g
- 5BUkiqpMt3hUROAhey1IxYvMRqDk=
-X-Google-Smtp-Source: AGHT+IGF1IpJCAdi0FjtGivV4zBh9u09VdOgKcjXSKHnlyhtcJjmUNU0VYynEWCP0CXwBfJ2kIUtNhhqz8HRY1Zw3Vc=
-X-Received: by 2002:a17:90b:243:b0:2a6:d2eb:860f with SMTP id
- fz3-20020a17090b024300b002a6d2eb860fmr14511073pjb.2.1713359655794; Wed, 17
- Apr 2024 06:14:15 -0700 (PDT)
+ AJvYcCX5TD/l4g4Tl3+1SJ3dXVvaNA7jVtGiDftrEgjScf0fhVXlur5cfxIXd1eYTANxym9r0Lf+q8gd13PGrb9sQDuQXTppVQ==
+X-Gm-Message-State: AOJu0YyZmdMQKnOARHMD1CXrC8MDguveGZx4okMszxeeOcBahMshmue3
+ oGaAyb+Ez3oeioyXmxFfOqbJHLQUO0KeQkXgZL0JjoBaw+JCJtqvzSiGpaZOJB9qdmWxNL8laRP
+ fM+4tuieJhXBkczS/lxFQioMsHmDfCTPahcGYgA==
+X-Google-Smtp-Source: AGHT+IG7/qI01p4fbI6v4SZEJxrlSYVXdC2dCTPaVEwsO1KwHm2yzJCDlHG/yE62+LCJsEywRK1TP8thxKpi1T+BKbc=
+X-Received: by 2002:a05:6512:1386:b0:519:813:7f5c with SMTP id
+ fc6-20020a056512138600b0051908137f5cmr6496511lfb.0.1713360081110; Wed, 17 Apr
+ 2024 06:21:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240412-imx93-of-v2-v6-0-c2ad48e46eca@nxp.com>
- <CAOMZO5B6PCqU8G5EXDG+41T7nVmJqFPgwEVfZvpYmryACRFmyg@mail.gmail.com>
- <CAOMZO5ASD3HuvUMXc6tmStE1AKRheW_NLUjRfpN5HuJ64ZF-Cg@mail.gmail.com>
- <DU0PR04MB9417723DD3E5F4010A2DB96388092@DU0PR04MB9417.eurprd04.prod.outlook.com>
-In-Reply-To: <DU0PR04MB9417723DD3E5F4010A2DB96388092@DU0PR04MB9417.eurprd04.prod.outlook.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 17 Apr 2024 10:14:03 -0300
-Message-ID: <CAOMZO5AuwY_zp1a+XNpkyQpO=VTxQ+WON0ZmkcXirgg=NvdG5w@mail.gmail.com>
-Subject: Re: [PATCH v6 0/5] imx93: Conver to OF_UPSTREAM
-To: Peng Fan <peng.fan@nxp.com>
-Cc: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, Yannic Moog <y.moog@phytec.de>, 
- Mathieu Othacehe <m.othacehe@gmail.com>, Wadim Egorov <w.egorov@phytec.de>,
- Stefano Babic <sbabic@denx.de>, dl-uboot-imx <uboot-imx@nxp.com>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- PHYTEC upstream <upstream@lists.phytec.de>
+References: <20240417101928.119115-1-ilias.apalodimas@linaro.org>
+ <20240417101928.119115-4-ilias.apalodimas@linaro.org>
+ <9d352b5f-f190-4363-89fa-0b70bc938900@canonical.com>
+In-Reply-To: <9d352b5f-f190-4363-89fa-0b70bc938900@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 17 Apr 2024 16:20:44 +0300
+Message-ID: <CAC_iWjKzDQCXFj817LOgkYHz21gciga1gfonDGgPtXzV+a7MKQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/4] efi_loader: add an EFI variable with the file
+ contents
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org, 
+ quic_llindhol@quicinc.com, ardb@kernel.org, pbrobinson@gmail.com, 
+ pjones@redhat.com, Tom Rini <trini@konsulko.com>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>, 
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Janne Grunau <j@jannau.net>, Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Sam Edwards <CFSworks@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de,
+ kettenis@openbsd.org, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,17 +103,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 15, 2024 at 9:55=E2=80=AFAM Peng Fan <peng.fan@nxp.com> wrote:
+Hi Heinrich,
 
-> ok.
-> Do I need to switch back to only convert i.MX93 11x11 EVK to
-> OF_UPSTREM?
+[...]
 
-Yes, please convert only the imx93 evk board for now.
+> >   {
+> >       int ret = 0;
+> >
+> > diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+> > index c8f7a88ba8db..99ad1f35d8f1 100644
+> > --- a/lib/efi_loader/efi_runtime.c
+> > +++ b/lib/efi_loader/efi_runtime.c
+> > @@ -130,6 +130,8 @@ efi_status_t efi_init_runtime_supported(void)
+> >                               EFI_RT_SUPPORTED_CONVERT_POINTER;
+> >
+> >       if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
+> > +             int s = 0;
+>
+> u8 s = 0;
+> should be enough.
 
-Currently, on the dts/upstream repo in U-Boot master, only the imx93
-evk board is present.
+Sure,
 
-The Variscite and Phytec i.MX93 boards are not there yet.
+> >               }
+> > +             ret = efi_set_variable_int(u"VarToFile",
+> > +                                        &efi_guid_efi_rt_var_file,
+> > +                                        EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> > +                                        EFI_VARIABLE_RUNTIME_ACCESS,
+>
+> Why is the variable set here? A comment would be helpful.
 
-They will show up after the dts/upstream is synced with kernel 6.9.
+We need to set it so it shows up in the efivarfs, fo linux, and the
+variable list in general for other OSes. Otherwise, people won't be
+able to read it, unless they specifically search for it. I'll add a
+comment though
+
+> If you set it for protection, shouldn't it be EFI_VARIABLE_READ_ONLY?
+>
+> An alternative would be to return EFI_INVALID_PARAMETER in
+> efi_set_variable_int for any attempt to set a variable with GUID
+> efi_guid_efi_rt_var_file.
+
+It's not volatile, so it will be treated as RO at runtime. But I'll
+add EFI_VARIABLE_READ_ONLY as well. I prefer using the existing EFI
+APIs instead of treating GUIDs specially
+
+[...]
+
+> > +/**
+> > + * efi_var_collect_mem() - Copy EFI variables matching attributes mask from
+> > + *                         efi_var_buf
+> > + *
+> > + * @buf:     buffer containing variable collection
+> > + * @lenp:    buffer length
+> > + * @mask:    mask of matched attributes
+> > + *
+> > + * Return:   Status code
+> > + */
+> > +efi_status_t __efi_runtime
+> > +efi_var_collect_mem(struct efi_var_file *buf, efi_uintn_t *lenp, u32 mask)
+> > +{
+> > +     static struct efi_var_file __efi_runtime_data hdr = {
+> > +             .magic = EFI_VAR_FILE_MAGIC,
+> > +     };
+> > +     struct efi_var_entry *last, *var, *var_to;
+> > +
+> > +     hdr.length = sizeof(struct efi_var_file);
+> > +
+> > +     var = efi_var_buf->var;
+> > +     last = (struct efi_var_entry *)
+> > +            ((uintptr_t)efi_var_buf + efi_var_buf->length);
+> > +     if (buf)
+> > +             var_to = buf->var;
+> > +
+> > +     while (var < last) {
+> > +             u32 len;
+> > +             struct efi_var_entry *var_next;
+> > +
+> > +             efi_var_mem_compare(var, NULL, u"", &var_next);
+>
+> On IRC you suggested to make u16_strlen __efi_runtime_code to replace
+> this efi_var_mem_compare() call and avoid the modifications of said
+> function. That might be more readable.
+
+Yes it will, I'll change that on v3. That function will also help us
+clean various open-coded sequences of length calculations.
+
+FWIW I just managed to run FWTS over this -- and I also fixed
+QueryVariableInfo at runtime
+We had 22 tests passing and 1 failing. I am still trying to figure out
+what failed, but I'll fix that as well for v3
+
+>
+> Best regards
+>
+> Heinrich
+>
+> > +             len = (uintptr_t)var_next - (uintptr_t)var;
+> > +
+> > +             if ((var->attr & mask) != mask) {
+
+[...]
+
+Thanks
+/Ilias
