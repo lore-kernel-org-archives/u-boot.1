@@ -4,84 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96207C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 04:59:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6C0CC4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 05:40:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBA3E88426;
-	Wed, 17 Apr 2024 06:59:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id D77CA8842B;
+	Wed, 17 Apr 2024 07:40:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZZHE7Bev";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="juY9Vk2N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 239A488431; Wed, 17 Apr 2024 06:59:41 +0200 (CEST)
-Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
- [IPv6:2607:f8b0:4864:20::92e])
+ id C310F8842B; Wed, 17 Apr 2024 07:40:53 +0200 (CEST)
+Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
+ [IPv6:2a00:1450:4864:20::233])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D0DB88422
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 06:59:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CE3088346
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 07:40:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
-Received: by mail-ua1-x92e.google.com with SMTP id
- a1e0cc1a2514c-7e3e0b2f653so1512232241.0
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 21:59:38 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x233.google.com with SMTP id
+ 38308e7fff4ca-2d895e2c6efso66570381fa.0
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 22:40:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713329978; x=1713934778; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1713332450; x=1713937250; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=68ryBmkCR1wWrZ5y4nwFUGHicXmQ/swXWt3fizjPr5Q=;
- b=ZZHE7BevtPBs7cbEW7M5nBapK/sJ1sXpcLb1f47VnvKNrzRp5SdhYueHMjnGWYuLlY
- xzaoh68wQVyEA1Xa32tEAINALJ08WoYgyjfBujex+AaI1RZqhVSTbr1nskuRV8rAUf45
- IFDneDchKw0JktIdlr8vGbIRkjUUeQV33VwdQ8jeHXeKtiOXlZbmLv95oi/QOx7V37Bl
- HU9ApinyPYxg12Km9g0qKr2B9SdrEDgqwX6EwWoYaIRCZAMC/IuBQCs4Z0ZHTp23fS7o
- 6Wm+APaDy+LaCsrmhAsKJqJbUUaLELPdMl53O1+7++rCqQe2wQ6FbGYvm/tZHCOCIeOt
- 3M0w==
+ bh=6KIgNvFN1TyeCpMByiXhB8M6ToNIpe9ahCGsFQZ79uE=;
+ b=juY9Vk2NHW23M38UO7GYGFO6B9gTqk8R1n+rh4eCtpvx7remkOGIxnbLOyKj8CvoOY
+ IKH2i+MWlEqgYt5148bHjBpwlYi1nS8z7inmjF/petfU7hLVfaTAULtKjdtQiWQwNr3u
+ dbYcLF0JQNpktg9Ph7IWI09nYob5g6JG4cCPNWdtIy+R8syoyagtEqVdTsoMqemlMbnt
+ e2CfpvIIaUMa4kS0Bzw6IPZkDFF8m25pTuw1R9qyfV14eWWQisSXl2qTNZMlu5X1FDay
+ fzPvF6pavOiivbKp9kJ+onLAC2GbKFFlIz4opOfHLA0Cfq71sbnn1ILnSrLyQNRJ0gqu
+ /81g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713329978; x=1713934778;
+ d=1e100.net; s=20230601; t=1713332450; x=1713937250;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=68ryBmkCR1wWrZ5y4nwFUGHicXmQ/swXWt3fizjPr5Q=;
- b=XKfsZ9BiUHq6IIBtyobDmZ/b70IgfQzqUR85WNX2wsX53jxU+Qp9PsuQ7ZvRK3hSf8
- iLvctsfFsYn3zVX8qKqxSW5nzj9yvY+3+biJBclYuVB8Lds/L7tCyqzfOSDCTOMNyMkD
- g7/df+oPskCjG0QBI25F2DXFGrQA/BTNbVhFYdlCtG0bFnzgzBNnzXe2yPCwnjtV2jKE
- 0ONtbLRb5gIldrOLArMdHsNNcK62/KEIzGXjr9plda6QxqGvKToC4XQgA7icrCm0HHyi
- 0ToI6uzdqzTmarSFMzPSSoIKh6ZGS6UtNNqHsr+juvqMNag8rlp7RIcRVn7DSS83xZgo
- HOnQ==
+ bh=6KIgNvFN1TyeCpMByiXhB8M6ToNIpe9ahCGsFQZ79uE=;
+ b=eexAXnzJ6dFm7qbwU4yVuj1I6linkbWYqs0byapqoW/6K9DNp7NBzjXwQOEiQ1NOsf
+ B88A+Sf2xJJxuoEx16SWHt/yGRiMYvV7F1cBwN0xZTTNFzsl/KcaeVRzZpi8L8EXOWT7
+ cBTzICIwLLt3Ww1wfUbKVLWh5IEvM52K2cNuoP58TJg+fBE4JJYY6kJPV8UyN4xESO02
+ mNcQxhqoGjhZiP5ufjrR+9Y06k1f/9p45jZYViZMeQgPyZJIn3jggnmCaom8yMXbyR73
+ ZiYa1Vdz3BJZ5+66HIoc6pr6RBYsJPZxOoUvgP3gwonYg/aDtcRADs1tV+b69Itd3WGo
+ t+4A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWLx9436XA81PA+B76b2WboMelE8QJtHugWwjKrbfWwT6WPndWp4gsMhcQsGSTAxJCm74TyxSaZOg7BxW3VbODiiz4D8g==
-X-Gm-Message-State: AOJu0Yz6xUGNxkLfkQHWAI7eesKaksNvKjfzBcPO7v7ufRpMq7wJ4x2A
- R/JPygz4LNb1soGgCj7d2ZPyRfJLT6u7NmVIlz7HAryXZ8kcFzD67eVsnGK5UHJ7k9NgdNXzkq1
- WN3wyowzUZdYoXt0nYrqEff16EaI=
-X-Google-Smtp-Source: AGHT+IFgz2FHTSXwbc/JzdRTCYzv1qQD2ugB1qGDKoVlAAP1T13BalwVM7frJKznnon7CtU9e3l+SIz1/zXyWZn1dfk=
-X-Received: by 2002:a05:6122:d0b:b0:4d4:be1:8196 with SMTP id
- az11-20020a0561220d0b00b004d40be18196mr12768576vkb.11.1713329977807; Tue, 16
- Apr 2024 21:59:37 -0700 (PDT)
+ AJvYcCW8e27L4xInq9TbCLFAPgjIB0g72MMS4ce6BQp3eH2SbdJP5+07mzv6CJCQI3rDdRN4IboyesNbcF0DAtEBxq3uPsY+2Q==
+X-Gm-Message-State: AOJu0YyMQfneUONK1IZoGOJSm/anBh8B05qE2C456/9T22jXFpyMbLMd
+ HXcHPPy934rB1yKTyDLLyMu9WUBbqaBIA2cKInTv4+2Ae8n53bdt5DTCvD4Y4laSx7uT7xZ2w74
+ drCoUQSzxkoW05bWssOmETaACGyaNT94SFh/vmA==
+X-Google-Smtp-Source: AGHT+IF63uj+WRDUetpFgxusdN36/VsYtm9kEZj5bWqkvvnVK6w/hpQjaumsgI7tSM+2RcR0yA8kTWJ0KbXYbSrQzaw=
+X-Received: by 2002:a2e:9e08:0:b0:2d9:fbac:dbee with SMTP id
+ e8-20020a2e9e08000000b002d9fbacdbeemr8424469ljk.31.1713332450557; Tue, 16 Apr
+ 2024 22:40:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <1709694011-683-1-git-send-email-ganboing@gmail.com>
- <ZQ2PR01MB13079F11D2A7B2A20968F4FDE62BA@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
- <CANV2PTMPrQVZhWvNFxi8-RA0ZC4UAF1sHBbHiipUc01aWx6oqg@mail.gmail.com>
- <0eda64cb-4ca8-f8bc-7515-6d2a2d3d4638@gmail.com>
-In-Reply-To: <0eda64cb-4ca8-f8bc-7515-6d2a2d3d4638@gmail.com>
-From: E Shattow <lucent@gmail.com>
-Date: Tue, 16 Apr 2024 21:59:26 -0700
-Message-ID: <CANV2PTP3o1Q2JPCZO8Ewfye+oz9f3TVNTYhYZ3EAKtdYAhvkHg@mail.gmail.com>
-Subject: Re: [PATCH] riscv: dts: jh7110: Enable PLL node in SPL
-To: Bo Gan <ganboing@gmail.com>
-Cc: Hal Feng <hal.feng@starfivetech.com>,
- "rick@andestech.com" <rick@andestech.com>, 
- "ycliang@andestech.com" <ycliang@andestech.com>,
- "trini@konsulko.com" <trini@konsulko.com>, 
- "yanhong.wang@starfivetech.com" <yanhong.wang@starfivetech.com>,
- Minda Chen <minda.chen@starfivetech.com>, 
- "duwe@suse.de" <duwe@suse.de>, "namcao@linutronix.de" <namcao@linutronix.de>, 
- Xingyu Wu <xingyu.wu@starfivetech.com>, Mason Huo <mason.huo@starfivetech.com>,
- "chanho61.park@samsung.com" <chanho61.park@samsung.com>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20240327221205.1871317-1-tharvey@gateworks.com>
+ <CAC_iWjKFHnnFf1iHdH2xmSDZQi2D6iNxkO6dWWMhf+X1cDd7qQ@mail.gmail.com>
+ <20240408092320.086ea1f1@xps-13>
+In-Reply-To: <20240408092320.086ea1f1@xps-13>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 17 Apr 2024 08:40:14 +0300
+Message-ID: <CAC_iWj+DwGznVGX9BK0MRfdYaf0-XpqKNOQheJzJ340cV_-jGg@mail.gmail.com>
+Subject: Re: [PATCH v2] tpm: display warning if using gpio reset with TPM
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Tim Harvey <tharvey@gateworks.com>, u-boot@lists.denx.de, 
+ Jorge Ramirez-Ortiz <jorge@foundries.io>, Adam Ford <aford173@gmail.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -100,32 +93,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 9, 2024 at 11:44=E2=80=AFPM Bo Gan <ganboing@gmail.com> wrote:
+Hi Miquel
+
+On Mon, 8 Apr 2024 at 10:23, Miquel Raynal <miquel.raynal@bootlin.com> wrot=
+e:
 >
-> On 4/9/24 6:55 PM, E Shattow wrote:
-> > Original speed class SD cards fail with this change "unable to change m=
-ode".
+> Hello,
+>
+> ilias.apalodimas@linaro.org wrote on Thu, 28 Mar 2024 09:08:37 +0200:
+>
+> > Thanks Tim
 > >
+> > On Thu, 28 Mar 2024 at 00:12, Tim Harvey <tharvey@gateworks.com> wrote:
+> > >
+> > > Instead of displaying what looks like an error message if a
+> > > gpio-reset dt prop is missing for a TPM display a warning that
+> > > having a gpio reset on a TPM should not be used for a secure producti=
+on
+> > > device.
+> > >
+> > > TCG TIS spec [1] says:
+> > > "The TPM_Init (LRESET#/SPI_RST#) signal MUST be connected to the
+> > > platform CPU Reset signal such that it complies with the requirements
+> > > specified in section 1.2.7 HOST Platform Reset in the PC Client
+> > > Implementation Specification for Conventional BIOS."
+> > >
+> > > The reasoning is that you should not be able to toggle a GPIO and res=
+et
+> > > the TPM without resetting the CPU as well because if an attacker can
+> > > break into your OS via an OS level security flaw they can then reset =
+the
+> > > TPM via GPIO and replay the measurements required to unseal keys
+> > > that you have otherwise protected.
+> > >
+> > > [1] https://trustedcomputinggroup.org/wp-content/uploads/TCG_PCClient=
+TPMInterfaceSpecification_TIS__1-3_27_03212013.pdf
+> > >
+> > > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> > > ---
+> > > v2: change the message to a warning and update commit desc/log
+> > > ---
+> > >  drivers/tpm/tpm2_tis_spi.c | 8 ++++----
+> > >  1 file changed, 4 insertions(+), 4 deletions(-)
+> > >
+> > > diff --git a/drivers/tpm/tpm2_tis_spi.c b/drivers/tpm/tpm2_tis_spi.c
+> > > index de9cf8f21e07..c9c83f6f0fc8 100644
+> > > --- a/drivers/tpm/tpm2_tis_spi.c
+> > > +++ b/drivers/tpm/tpm2_tis_spi.c
+> > > @@ -237,14 +237,14 @@ static int tpm_tis_spi_probe(struct udevice *de=
+v)
+> > >                         /* legacy reset */
+> > >                         ret =3D gpio_request_by_name(dev, "gpio-reset=
+", 0,
+> > >                                                    &reset_gpio, GPIOD=
+_IS_OUT);
+> > > -                       if (ret) {
+> > > -                               log(LOGC_NONE, LOGL_NOTICE,
+> > > -                                   "%s: missing reset GPIO\n", __fun=
+c__);
+> > > +                       if (ret)
+> > >                                 goto init;
+> > > -                       }
+> > >                         log(LOGC_NONE, LOGL_NOTICE,
+> > >                             "%s: gpio-reset is deprecated\n", __func_=
+_);
+> > >                 }
+> > > +               log(LOGC_NONE, LOGL_WARNING,
+> > > +                   "%s: TPM gpio reset should not be used on secure =
+production devices\n",
+> > > +                   dev->name);
+> > >                 dm_gpio_set_value(&reset_gpio, 1);
+> > >                 mdelay(1);
+> > >                 dm_gpio_set_value(&reset_gpio, 0);
 >
-> The BUS_ROOT clock will have to be switched to PLL2 anyway in U-Boot prop=
-er or
-> in Linux, because it's the parent or grandparent clock for *lots* of devi=
-ces,
-> including PCIe, i2c, spi, qspi... If there's an issue with this change, t=
-hen
-> I suspect there's something wrong with the dw_mmc driver.
+> The current logic expects a reset gpio and bails out if it cannot get
+> it with a (questionable) goto statement.
 >
-> Bo
+> You want to invert that logic, and expect no gpio, but only if there is
+> one you want to warn.
+>
+> This is perfectly fine but the logic here must be clarified. I'd go for:
+>
+> ret =3D gpio_request()
+> if (ret) {
+>         ret =3D gpio_request()
+>         if (!ret)
+>                 warn(deprecated)
+> }
+>
+> if (!ret) {
+>         warn(dangerous)
+>         toggle_value()
+> }
+>
+> I would ideally replace the 'if (ret)' clauses with 'if (!reset_gpio)'
+> which would make the checks even clearer.
 
-I've bisected and can confirm this change is what breaks original
-speed SD function on Milk-V Mars CM Lite (DFRobot mini router
-carrier). Class 10 speed SD media does not seem to be affected.
-Reverting the change allows the original speed SD media access to
-function again. SD access is functional in Linux with and without the
-change.
+Fair enough. But the code with the proposed change has no functional
+problems right?
+If so I'll send a PR to Tom as is and rework it as suggested later
 
-How to troubleshoot this?
-
-Thanks,
-
-E
+Thanks
+/Ilias
+>
+> Thanks,
+> Miqu=C3=A8l
