@@ -4,125 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12B02C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 11:11:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3167C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 11:17:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9678A88453;
-	Wed, 17 Apr 2024 13:11:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 1673088452;
+	Wed, 17 Apr 2024 13:17:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="TlVQcDFR";
+	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="Xev1i3WU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBDE588456; Wed, 17 Apr 2024 13:11:35 +0200 (CEST)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6745688456; Wed, 17 Apr 2024 13:16:59 +0200 (CEST)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4671488452
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 13:11:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F4FE8836A
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 13:16:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
+ dmarc=fail (p=none dis=none) header.from=thaumatec.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p2.samsung.com (unknown [182.195.41.46])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20240417111130epoutp038043a92e13ecba0bd316266017bad1aa~HDNSst_v01682216822epoutp03C
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 11:11:30 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20240417111130epoutp038043a92e13ecba0bd316266017bad1aa~HDNSst_v01682216822epoutp03C
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1713352290;
- bh=1V0LaxwIybdeqLa2GN84XZLrBNn4M7/6M44FR4ok68Y=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=TlVQcDFRgAT/jZKuaUAzjU4I/bcKa5UVVC4mKzNYjwf2rwqos31YE6RqwHXvcTvKv
- sjzrmVejiUTXD3hZWKByik95H8CAcYs6SSyLtvhcwHnHQptZgsf8G6tWeBqrqe6/SM
- HISsbCaoQffxj1Mg53nk2dMxZC+MkdQJLi1t1h/E=
-Received: from epsnrtp3.localdomain (unknown [182.195.42.164]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20240417111130epcas1p35da87f3b72a9c62ac339845545d68155~HDNSN3tsh0215002150epcas1p3i;
- Wed, 17 Apr 2024 11:11:30 +0000 (GMT)
-Received: from epsmges1p5.samsung.com (unknown [182.195.38.235]) by
- epsnrtp3.localdomain (Postfix) with ESMTP id 4VKJBT2Xvhz4x9Pr; Wed, 17 Apr
- 2024 11:11:29 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
- BD.15.10076.16EAF166; Wed, 17 Apr 2024 20:11:29 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p2.samsung.com (KnoxPortal) with ESMTPA id
- 20240417111128epcas1p23e29b63a9609ffba0928d4a1c25904b7~HDNQdinAv0634406344epcas1p2Q;
- Wed, 17 Apr 2024 11:11:28 +0000 (GMT)
-Received: from epsmgms1p2new.samsung.com (unknown [182.195.42.42]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240417111128epsmtrp2da641607209f4a466feeaf5bff146b8e~HDNQc1x3N0389803898epsmtrp2V;
- Wed, 17 Apr 2024 11:11:28 +0000 (GMT)
-X-AuditID: b6c32a39-7edf87000000275c-0a-661fae618528
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgms1p2new.samsung.com (Symantec Messaging Gateway) with SMTP id
- EA.E8.08390.06EAF166; Wed, 17 Apr 2024 20:11:28 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20240417111128epsmtip15feebd984fcd1a2376a3021de222e656~HDNQLLhh90640806408epsmtip1z;
- Wed, 17 Apr 2024 11:11:28 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Patrick DELAUNAY'" <patrick.delaunay@foss.st.com>, "'Patrice Chotard'"
- <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-Cc: "'U-Boot STM32'" <uboot-stm32@st-md-mailman.stormreply.com>, "'Peng
- Fan'" <peng.fan@nxp.com>, "'Sean Anderson'" <seanga2@gmail.com>, "'Simon
- Glass'" <sjg@chromium.org>, "'Tom Rini'" <trini@konsulko.com>
-In-Reply-To: <8602799a-7c52-4308-a58e-4986de57210b@foss.st.com>
-Subject: RE: [PATCH 2/2] mmc: stm32_sdmmc2: Fix AARCH64 compilation warnings
-Date: Wed, 17 Apr 2024 20:11:27 +0900
-Message-ID: <01e101da90b7$fe546690$fafd33b0$@samsung.com>
+ spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-349c5732fd1so366141f8f.3
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 04:16:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1713352616; x=1713957416;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XUt9HOPF6U2sKBADg7IzBHjXzTLg5IJKlajlXJvMfdE=;
+ b=Xev1i3WUl5A8EoEXd8fZQXXJGqN7d0fbNYub4yW+FL8u6EZZIcZVFCiHcJSyYBs0Dr
+ 2HxJtmzMWHDQm5css8XG0ESS5d01PCFbniNC4GkaFkwat3xDGOd0c/1JLANEYdYij3LV
+ zSQcRK8YpPdv1iPZoFi2iKD556v1s25hk15jRWDW62QtAbrtsySkzloZlRhA/7XvzeRV
+ zAlmZZYdLz9Tjv8esZDV8V7X5JfRA9fazSIwoZ5J20ni76I0r5ocIKNxAX0TkCwGwZdj
+ gFdNCMBo4S+L0+sT7OruGWtAUim9QoY5meXZuyrVqyaXTWOsE5t6S+PQezD9py0HkOQF
+ XQ6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713352616; x=1713957416;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XUt9HOPF6U2sKBADg7IzBHjXzTLg5IJKlajlXJvMfdE=;
+ b=pkMQHU45/sNae1zZlPvAdakAx6qpBzx7minDLVcQ5GfNT5NnlMlICLn3NUkBpnwgvH
+ qQqoE/tWWm7MX9IOT6AuaeqT1Dsdn/gRLe+T3j8buZoleuHXK1xpOuT6Yci+EV0VVv93
+ ENnb5OdMUvQmfSEICd08qMJhtdW1fL3qDVk2ayF3uZpHm6sL/VD7llBf5SioQ6D4dK9x
+ QyvcuZw7yulFPqbU/BHOOVRwhja4r/VWoPOAQs4jxM9iS4XpfER4XeUcbDJ4Ly5HfD3I
+ NoLZaU4QGeeUItDuYCciLGhN0vO8RognuGhct7nVjmVWyyUgjmT4wiIDPOrXZwEXh8bz
+ moiQ==
+X-Gm-Message-State: AOJu0Yw68L9TCiibajbBKP3BtkIycn3wD10D92iDr/5uhNn1KF58AJ+A
+ RVM9ZniYsm7ePiNkJOfxr3hYLRMNIlAo4xU8A8guLe/X+XQlVMZffVMXpLDGCHDOTYNNbx996AM
+ XIo016w==
+X-Google-Smtp-Source: AGHT+IHjA8kLAV617q0f8Zd13HKopjBCjhlsNjd1DS5/LkjGmfZnlW2qv/G3r88LeHUFECiLOp2iJA==
+X-Received: by 2002:adf:cd11:0:b0:348:b435:2736 with SMTP id
+ w17-20020adfcd11000000b00348b4352736mr4518889wrm.51.1713352616478; 
+ Wed, 17 Apr 2024 04:16:56 -0700 (PDT)
+Received: from localhost.localdomain (ip092042140082.rev.nessus.at.
+ [92.42.140.82]) by smtp.gmail.com with ESMTPSA id
+ g14-20020a5d46ce000000b0034335e47102sm17294978wrs.113.2024.04.17.04.16.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Apr 2024 04:16:56 -0700 (PDT)
+From: lukasz.czechowski@thaumatec.com
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ trini@konsulko.com, Lukasz Czechowski <lukas.czechowski@thaumatec.com>,
+ Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
+Subject: [PATCH] ram: rockchip: px30: Replace misleading log message
+Date: Wed, 17 Apr 2024 13:16:25 +0200
+Message-Id: <20240417111625.288202-1-lukasz.czechowski@thaumatec.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQHEDEWbNqTCtiddf3YFOsrAgyEnTQHFznTAAaEDOzkCU0VHE7Frhq5g
-Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrFJsWRmVeSWpSXmKPExsWy7bCmgW7iOvk0g90HuS1+nnzPbjFp/TV2
- ix+rvrBabL03gcni25ZtjBZTJ21mt3i7t5PdYuHW5SwOHB6zGy6yeDzt38rusXPWXXaPVwdW
- sXucvbOD0WPjux1MHgf3GQawR2XbZKQmpqQWKaTmJeenZOal2yp5B8c7x5uaGRjqGlpamCsp
- 5CXmptoqufgE6Lpl5gBdpaRQlphTChQKSCwuVtK3synKLy1JVcjILy6xVUotSMkpMC3QK07M
- LS7NS9fLSy2xMjQwMDIFKkzIzjh+ch1zwUf+ilf/N7A2ML7k6WLk4JAQMJE4dUO4i5GLQ0hg
- B6PEt5t9LBDOJ0aJH4fbmCGcb4wSay+AOJxgHQfm7mSFSOxllFjY/54RwnnJKDFn+jM2kCo2
- AT2J/4sWgrWLCLQwSrS83wLmMAtcYpSYefYkC0gVp4C9xP43Z1lBbGEBH4m7D26CdbMIqEqc
- P3sQbB+vgKXE26X/WSBsQYmTM5+A2cwC8hLb386BuklB4ufTZWBzRATcJH483MMIUSMiMbsT
- 4gkJgS0cEn23N7FANLhIbPj5mhHCFpZ4dXwLO4QtJfH53V42iIZmRomlSw6yQjg9jBL/Gq6z
- QVQZS+xfOpkJFIDMApoS63fpQ2zjk3j3tYcVEq68Eh1tQhDVKhKXXr9kgpl/98l/VgjbQ+L9
- 3SPsExgVZyH5bRaS32Yh+WEWwrIFjCyrGMVSC4pz01OLDQtM4RGenJ+7iRGcaLUsdzBOf/tB
- 7xAjEwfjIUYJDmYlEd4WYdk0Id6UxMqq1KL8+KLSnNTiQ4ymwNCeyCwlmpwPTPV5JfGGJpYG
- JmZGxiYWhmaGSuK8Z66UpQoJpCeWpGanphakFsH0MXFwSjUwVa6Vu1nreezHubc3rZ7+1OFS
- ucZ6/LDSmdq+RS9yssLyjgoEexvxds7cm9NxbUqg5cLj6YyK1qYtu0zM3E9rxT8P15utJpwh
- vIXfYNM9yQ2qLQl2HYf6ViduSTQpzFr3d/3uzNyVPwv6HnTtFfx//lOzam2ozsNri9ymJ6Xp
- h34VmnK8cN8sa+64nmAJGcOD7ldPSmgF6DvEP1PyFLTI2tloafT9SuzxgxaLDllm2+9LDTJW
- rLijmxTjxXbAun9BQLiQnJLFje1/rQTkPm17VV+62nvFZreiGwyzG4yLVt//+pDpTLRf4VGW
- 8x8VDlnUymhEro1nnC9oqlRlIiasGm6xQN1lTXzXm5r+BiWW4oxEQy3mouJEACfdgNA9BAAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprCIsWRmVeSWpSXmKPExsWy7bCSnG7COvk0g8WH+Cx+nnzPbjFp/TV2
- ix+rvrBabL03gcni25ZtjBZTJ21mt3i7t5PdYuHW5SwOHB6zGy6yeDzt38rusXPWXXaPVwdW
- sXucvbOD0WPjux1MHgf3GQawR3HZpKTmZJalFunbJXBlHD+5jrngI3/Fq/8bWBsYX/J0MXJy
- SAiYSByYu5O1i5GLQ0hgN6PE8u9zGCESUhKfn05l62LkALKFJQ4fLoaoec4oMae7jwmkhk1A
- T+L/ooXMIAkRgTZGiRPLFjCBOMwC1xglzi/+wwbR8g8os3wv2FhOAXuJ/W/OsoLYwgI+Encf
- 3GQDsVkEVCXOnz3IDGLzClhKvF36nwXCFpQ4OfMJmM0soC3x9OZTKFteYvvbOcwQpypI/Hy6
- DGymiICbxI+HexghakQkZne2MU9gFJ6FZNQsJKNmIRk1C0nLAkaWVYySqQXFuem5xYYFRnmp
- 5XrFibnFpXnpesn5uZsYwRGnpbWDcc+qD3qHGJk4GA8xSnAwK4nwtgjLpgnxpiRWVqUW5ccX
- leakFh9ilOZgURLn/fa6N0VIID2xJDU7NbUgtQgmy8TBKdXAxL9xLo/U5EUvlPUOXipf31zK
- uiQlWpaVTWPGApeq2MvCAvLvH3w1fTOB6bhenMb2r5ET836dWXPBoI/p+9LHC+8pqTsz3Lte
- 4xvmFuy2LDK8/d/LVc7VWeoGvJ6qZ5/W1Oy8+TJmd4rZw+X+DKkfltnUL5lZNafD+Zhm59Wy
- cI33bIHBMsJdex26JRsVUtbfP8B7TNMuLDlIe2pqrGfph89zOBLU8vefz9psFnLMzVvM/JtN
- 0/VbwvvOVN7rFEtbtLT1rXboro82e8/HbX2gobc/qegPh1lS1/avMd8c1Lnm5s1o1udiF5+Z
- 9CHxIgv7c/nvHOdPeOqftxV0aeYyvnTif37PcU+hv7Z9khuUWIozEg21mIuKEwHmpFQhJwMA
- AA==
-X-CMS-MailID: 20240417111128epcas1p23e29b63a9609ffba0928d4a1c25904b7
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240417090254epcas1p2141358dc9427f77a9bb8102d88bbff6c
-References: <20240308142614.2700185-1-patrice.chotard@foss.st.com>
- <20240308142614.2700185-2-patrice.chotard@foss.st.com>
- <CGME20240417090254epcas1p2141358dc9427f77a9bb8102d88bbff6c@epcas1p2.samsung.com>
- <8602799a-7c52-4308-a58e-4986de57210b@foss.st.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -139,67 +92,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Lukasz Czechowski <lukas.czechowski@thaumatec.com>
 
+Remove the log message "out" from sdram_init function which
+pollutes the console. It brings no meaningful information and
+might be unwanted in case silencing the console is required.
+Instead, add a debug log with a more meaningful message, printed
+only if DEBUG is set. The same convention is used for other
+boards, i.e. rk3399.
 
-> -----Original Message-----
-> From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-> Sent: Wednesday, April 17, 2024 6:02 PM
-> To: Patrice Chotard <patrice.chotard@foss.st.com>; u-boot@lists.denx.de
-> Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>; Jaehoon Chung <jh80.chung@samsung.com>;
-> Peng Fan <peng.fan@nxp.com>; Sean Anderson <seanga2@gmail.com>; Simon Glass <sjg@chromium.org>; Tom
-> Rini <trini@konsulko.com>
-> Subject: Re: [PATCH 2/2] mmc: stm32_sdmmc2: Fix AARCH64 compilation warnings
-> 
-> Hi,
-> 
-> On 3/8/24 15:26, Patrice Chotard wrote:
-> > When building with AARCH64 defconfig, we got warnings, fix them.
-> >
-> > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> > ---
-> >
-> >   drivers/mmc/stm32_sdmmc2.c | 8 ++++----
-> >   1 file changed, 4 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
-> > index d4982a14281..39ae79ba129 100644
-> > --- a/drivers/mmc/stm32_sdmmc2.c
-> > +++ b/drivers/mmc/stm32_sdmmc2.c
-> > @@ -220,9 +220,9 @@ static void stm32_sdmmc2_start_data(struct udevice *dev,
-> >
-> >   	if (data->flags & MMC_DATA_READ) {
-> >   		data_ctrl |= SDMMC_DCTRL_DTDIR;
-> > -		idmabase0 = (u32)data->dest;
-> > +		idmabase0 = (u32)(long)data->dest;
-> >   	} else {
-> > -		idmabase0 = (u32)data->src;
-> > +		idmabase0 = (u32)(long)data->src;
-> >   	}
-> >
-> >   	/* Set the SDMMC DataLength value */
-> > @@ -463,8 +463,8 @@ retry_cmd:
-> >
-> >   	stm32_sdmmc2_start_cmd(dev, cmd, cmdat, &ctx);
-> >
-> > -	dev_dbg(dev, "send cmd %d data: 0x%x @ 0x%x\n",
-> > -		cmd->cmdidx, data ? ctx.data_length : 0, (unsigned int)data);
-> > +	dev_dbg(dev, "send cmd %d data: 0x%x @ 0x%p\n",
-> > +		cmd->cmdidx, data ? ctx.data_length : 0, data);
-> >
-> >   	ret = stm32_sdmmc2_end_cmd(dev, cmd, &ctx);
-> >
-> 
-> 
-> 
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
+---
+ drivers/ram/rockchip/sdram_px30.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
-
-Best Regards,
-Jaehoon Chung
-
-> 
-> Thanks
-> Patrick
-
+diff --git a/drivers/ram/rockchip/sdram_px30.c b/drivers/ram/rockchip/sdram_px30.c
+index 21498e8957..3b429973cd 100644
+--- a/drivers/ram/rockchip/sdram_px30.c
++++ b/drivers/ram/rockchip/sdram_px30.c
+@@ -712,7 +712,7 @@ int sdram_init(void)
+ 
+ 	sdram_print_ddr_info(&sdram_params->ch.cap_info, &sdram_params->base, 0);
+ 
+-	printascii("out\n");
++	debug("Finish SDRAM initialization...\n");
+ 	return ret;
+ error:
+ 	return (-1);
+-- 
+2.34.1
 
