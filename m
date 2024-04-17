@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 392E1C001CC
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 09:27:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A32C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 09:28:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9FBF787FC8;
-	Wed, 17 Apr 2024 11:27:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=thaumatec.com
+	by phobos.denx.de (Postfix) with ESMTP id 415F587FD7;
+	Wed, 17 Apr 2024 11:28:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thaumatec-com.20230601.gappssmtp.com header.i=@thaumatec-com.20230601.gappssmtp.com header.b="XVnyNokQ";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="rwH9tZ8A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01FCF88453; Wed, 17 Apr 2024 11:27:43 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 90FB28844A; Wed, 17 Apr 2024 11:28:57 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 685AB87ED0
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 11:27:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B5F0387ED0
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 11:28:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=thaumatec.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=lukasz.czechowski@thaumatec.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a5269c3f9c7so394902966b.2
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 02:27:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=thaumatec-com.20230601.gappssmtp.com; s=20230601; t=1713346060; x=1713950860;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UwEz/VDIHZ3+0uWAAIAU6VQ7uW6To/vNT+czRyzmLCA=;
- b=XVnyNokQtzQfeTBxfbMrfVgXIeft1yVwQUfa70e51o3YYH6uBXMsF4uEQGyL4XHBil
- BUB1UazFNXhZYy58rkwOn7ydOfe+tu+PzcTeJHSVw9sH44JIf37KqDvQQc9H07Rjee4/
- DVl8K2yqsQwvynBxB9eWYA50y3GDLx/g3fetzi1qaP4qSFoBVE9lkMRFTKHh9e5Mz/Ml
- bs3rMDCe0JZpCTzmDzqviXZ6RGqV3G0T9KIxgWcACwNoDGB0nHFPfX4nar8HOX+Pdv6g
- IhD58FCA6tHG+BhW/2mYmp/EdPL/eQY1GaGo8/a1iR2lndYb/1jyujoMZ2fpooGfQlG7
- rwDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713346060; x=1713950860;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UwEz/VDIHZ3+0uWAAIAU6VQ7uW6To/vNT+czRyzmLCA=;
- b=wPdYzJrtiW+q+4yzuIt4emxf3wyVpkFpSY7MgDe2oJhz00dXab7DqTolJjxaByRlN/
- ce7YUQuutobFNtUPrSrW8pJBRdiOeRR3qjLkITOnSfTZSDrSzTALMxyXS3kiZ2CQdnR9
- fI4jy0Y1Q4dXEoS8kBlUP66I0MZun2ywLscBBzjsk5YWbvk5TMMJYqUxwq/qr8XfE5mQ
- 7yzcXOVWaTx5B6OriMy1CHD9i0pKS4bU3TD58l5CVBxpL/3YWJXxzKaK19nI6cwjQjKa
- +3MlI8qIgWqTZBPHpotgCZvJ3wl7DN8muzeX1j4b/KyRdpQ2Kt8Msiaef7zd0aGe0stB
- ZOzw==
-X-Gm-Message-State: AOJu0YwwSZy9N7BxIhCnpCQJGGnSm41hjgQRWixWtlEmWTBWI/Rgu/e6
- Nq2zsFneAP39Pe0wqXBV+/YZkvzj+at9kH+1y7DpVlriOACWXRkvRk89bh3P2jKXYllMojn0IDr
- LdOItJGlvsouswxwXLjrj10o5N+sC3SY4JiAWC2UhXWGv4PnncPgA/w==
-X-Google-Smtp-Source: AGHT+IGZ2sd/JsfN9ItFAMrhn/F3sqf3pPr3Hk/MhRCe9P9HtadxyOpV2c9zUvz0qQHijSO0WK+j+Gd77z9BQjEOB2M=
-X-Received: by 2002:a17:907:7b9f:b0:a52:2242:3039 with SMTP id
- ne31-20020a1709077b9f00b00a5222423039mr13070582ejc.50.1713346059840; Wed, 17
- Apr 2024 02:27:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=4837253909=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 43H7gRLT006062; Wed, 17 Apr 2024 11:28:54 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=IVEm0gIFtzaci7JPfqiYEJM8VvZQCTvx0Z9gmaT4Cck=; b=rw
+ H9tZ8AEwEuaRpOpO76YOYiDEGn+a7V6zGjKPtNRKyfU3hHMHkfq69/RgmC4+B7Nb
+ b34Fx0M4R8oz/elKgFW8A6iCgn9l/fHUgiLHiorESoMHW5kcrhJ50akxQiQ2JvOo
+ fB22M5PMrniBKAXaiYB2zH4Q+HsYdUIDrhGC5Ksgtj4seeDnzJpP1ET0iTNmp4h3
+ UM92Xi8/MZuYbuRiWJag/j6g67I4NWUen1uLoUBzWEX0otlnQKpMyK7FgaBn2SfO
+ mjIRWzfs02CdxcE1r6kW92Uv4CJIcqYsXnbYd5WpQvPm0kQkMzkAEvAPTqrNa4mS
+ mk6Dli90F6VBWa6h/WvQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xg3m0px8d-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 17 Apr 2024 11:28:54 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 9924B40044;
+ Wed, 17 Apr 2024 11:28:51 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D956E21075B;
+ Wed, 17 Apr 2024 11:28:37 +0200 (CEST)
+Received: from [10.48.86.112] (10.48.86.112) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 17 Apr
+ 2024 11:28:37 +0200
+Message-ID: <49d96910-1e36-4dc9-bb2d-a700323bd5c8@foss.st.com>
+Date: Wed, 17 Apr 2024 11:28:36 +0200
 MIME-Version: 1.0
-References: <20240416124701.157545-1-lukasz.czechowski@thaumatec.com>
- <ee8b9906-0e32-4c89-ae3d-5dead6f4ca77@theobroma-systems.com>
-In-Reply-To: <ee8b9906-0e32-4c89-ae3d-5dead6f4ca77@theobroma-systems.com>
-From: =?UTF-8?Q?=C5=81ukasz_Czechowski?= <lukasz.czechowski@thaumatec.com>
-Date: Wed, 17 Apr 2024 11:27:28 +0200
-Message-ID: <CABd623u4Yda_k3Zp3-m8Rmt0UuisatDrEfERmZpSFDyBs3JhwQ@mail.gmail.com>
-Subject: Re: [PATCH] rockchip: px30-board-tpl: Use CONFIG_TPL_BANNER_PRINT flag
-To: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, philipp.tomsich@vrull.eu, 
- Kever Yang <kever.yang@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 25/25] ARM: dts: stm32: Add led-blue for
+ stm32mp157c-ed1-scmi-u-boot
+To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
+ <trini@konsulko.com>
+References: <20240409150215.2497778-1-patrice.chotard@foss.st.com>
+ <20240409150215.2497778-26-patrice.chotard@foss.st.com>
+Content-Language: en-US
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20240409150215.2497778-26-patrice.chotard@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.86.112]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-04-17_08,2024-04-16_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,78 +91,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi,
 
-Thanks for the hints. Matching the parent ifdef with non-PX30 TPL
-implementation is indeed a good idea. I'll send the updated version of
-the patch.
+On 4/9/24 17:02, Patrice Chotard wrote:
+> The blue led is used to indicate U-Boot entering / exit indication
+> then Linux heartbeat.
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+>
+>   arch/arm/dts/stm32mp157c-ed1-scmi-u-boot.dtsi | 6 +++++-
+>   1 file changed, 5 insertions(+), 1 deletion(-)
+>
 
-Best regards,
-Lukasz
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
-wt., 16 kwi 2024 o 15:22 Quentin Schulz
-<quentin.schulz@theobroma-systems.com> napisa=C5=82(a):
->
-> Hi Lukasz,
->
-> Please use scripts/get_maintainer.pl to set the Cc and To recipients of
-> your mail to make sure it reaches the appropriate people explicitly.
->
-> $ scripts/get_maintainer.pl arch/arm/mach-rockchip/px30-board-tpl.c
-> Tom Rini <trini@konsulko.com> (maintainer:ARM)
-> Simon Glass <sjg@chromium.org> (maintainer:ARM ROCKCHIP)
-> Philipp Tomsich <philipp.tomsich@vrull.eu> (maintainer:ARM ROCKCHIP)
-> Kever Yang <kever.yang@rock-chips.com> (maintainer:ARM ROCKCHIP)
-> u-boot@lists.denx.de (open list)
->
-> (one can use scripts/get_maintainer.pl on patches instead of files, and
-> it'll return whatever is needed).
->
-> Plugging `b4` here as well, because it's a pretty nice tool to use:
-> https://git.kernel.org/pub/scm/utils/b4/b4.git/ One can install it with
-> pip. I use it for Linux kernel and U-Boot contributions for a couple of
-> years now and I'm not going back to manual workflow :)
->
-> b4 prep --auto-to-cc would set everything up properly for you.
->
-> On 4/16/24 14:47, Lukasz Czechowski wrote:
-> > Display TPL init information message only when TPL_BANNER_PRINT
-> > configuration entry is set. This allows to disable information
-> > message in case logs on UART are unwanted.
-> >
-> > Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
->
-> This matches Rockchip's non-PX30 TPL, so:
->
-> Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
->
-> > ---
-> >   arch/arm/mach-rockchip/px30-board-tpl.c | 2 ++
-> >   1 file changed, 2 insertions(+)
-> >
-> > diff --git a/arch/arm/mach-rockchip/px30-board-tpl.c b/arch/arm/mach-ro=
-ckchip/px30-board-tpl.c
-> > index 637a5e1b18..a660816db0 100644
-> > --- a/arch/arm/mach-rockchip/px30-board-tpl.c
-> > +++ b/arch/arm/mach-rockchip/px30-board-tpl.c
-> > @@ -46,7 +46,9 @@ void board_init_f(ulong dummy)
-> >        * printhex8(0x1234);
-> >        * printascii("string");
-> >        */
-> > +#if CONFIG_TPL_BANNER_PRINT
-> >       printascii("U-Boot TPL board init\n");
-> > +#endif
->
-> I'm wondering if we shouldn't have the parent ifdef also match the logic
-> of the non-PX30 TPL?
->
-> #if defined(CONFIG_DEBUG_UART) && defined(CONFIG_TPL_SERIAL)
->
-> instead of
->
-> #if defined(CONFIG_DEBUG_UART)
->
-> ?
->
-> Thanks,
-> Quentin
+Thanks
+Patrick
+
