@@ -4,96 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38C33C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 10:10:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07C48C001CC
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 10:19:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 795E78840D;
-	Wed, 17 Apr 2024 12:10:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7327B8844A;
+	Wed, 17 Apr 2024 12:19:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O9eieKwj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YkZlDQGM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77AD88842A; Wed, 17 Apr 2024 12:10:27 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 614798842A; Wed, 17 Apr 2024 12:19:38 +0200 (CEST)
+Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
+ [IPv6:2a00:1450:4864:20::12b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10C9B88344
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 12:10:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E25DF88205
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 12:19:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-415515178ceso33690675e9.0
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 03:10:24 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12b.google.com with SMTP id
+ 2adb3069b0e04-516d3776334so6869192e87.1
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 03:19:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713348624; x=1713953424; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=8tNtoqL9GbbgnIZfFJgyckOgXSO5Qi1lhx+TcTZeQtE=;
- b=O9eieKwjiEaTEntjKYixp/MGcAyubgqd38hCAHhSUHVfjW9Z0DwNd9tz1IYrKYRhmu
- PFJvYLSEdg0vjdHQbYEqi/9qod9YTsNg43/CqOxfy4Hi/bhIys2AV/LlM4sayRR8x5Qw
- Keyv6DqKuKTsy1tuZNp370dm/2VGSABSQBYEeBpah8GfQR3XTDWDkc61GhmZt1P7yICt
- vN7ffjNdiFJffJZZbNlYvkyy2gPXOcKyI8GMv8hpm8mSDsEUwgEEu6p2XCILxRwbRVKK
- L6kJb/3Xo1aBYx9NJa2P6wLEtkYT3w5H5SUxG0wSDUbu35QVZ0IYkr+I+C9eQV+ZsDqk
- 9sRw==
+ d=linaro.org; s=google; t=1713349175; x=1713953975; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=15rGpRseOis4+JghA2jAqdK1BOWgy9aMbeziZZwvV6g=;
+ b=YkZlDQGM13LwjN0myCdnSBhElD5nC0QHFdckMg2i9or9d2VUqcUu3mTZ27AosZ/i6P
+ Ki37s+O54xnGD/6CjZBS/77AHqCRdYrs9wkVTiB1avT54BdO1Go9Rjah4IqKz8y77bM4
+ qhitrCxubkQuf9tKJf0C0r+wjjKLBD2dANimWwnpcRz1F+D+MWAOs0f7zS6n3cFpbivB
+ OLu67bfV007Cv97OeH4xOFR6J6rHRHmk2ADLgwvaVUped4eqeY7bWCjfEoDAS0kbvWly
+ 8pgBoljv78crboIT9ToQKyCdQGfHl+qen6vYWam8fMNYn+hHSEwBPYizUw1y1tMGVTHU
+ eEXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713348624; x=1713953424;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=8tNtoqL9GbbgnIZfFJgyckOgXSO5Qi1lhx+TcTZeQtE=;
- b=a+iFT1F8pO2cNfkPNsQOBRDBMjEeQnY6+l1ALcsyaB7o8wlR91JldnBVyzcVo3EN8v
- HsDG8q+NM9po1i/9s/kx+cZXWH9313G/QwGNRE/S5nqw8xRXoXnkPSJe0IwtISnRtplE
- V8gKYiJB3r4TNSygwHEBS1c4xPgSsILFpxjukOx1PfltnLbj3+qjUuC0O4SOx+fifyeq
- bIUCiIlp7KvGo7qxQxCFnghkzqsIAF5eUco14DYPGCsRYD2g5KDH9xLJQM9aKAC+9kyG
- wyOngjDpLBL84PGCAYtbTOT6yT1I/ItoKytsdL+AwnpD/T3pfTwxq7aS7Lgn4igpF4mv
- v/Tg==
-X-Gm-Message-State: AOJu0Yyvxb433vJUTVnXwXfXWnF6jmCZPN50EqH4U5EmMV8kgup1e8W/
- FbJPEuwBhyHdAY0wTzNo2fi7l7KuZtfJjYJ9VJEI7/BfGe5GyzpTfg+gJw+EQn4=
-X-Google-Smtp-Source: AGHT+IG+RjzzJ9F7coMaouA5NHUu2cU8F6RjvTU2lO+gxFBrCVw362C0hzky+JvxCLn4ZGcXhEZxLg==
-X-Received: by 2002:a05:600c:3baa:b0:418:3d29:292b with SMTP id
- n42-20020a05600c3baa00b004183d29292bmr7468947wms.4.1713348624348; 
- Wed, 17 Apr 2024 03:10:24 -0700 (PDT)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ d=1e100.net; s=20230601; t=1713349175; x=1713953975;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=15rGpRseOis4+JghA2jAqdK1BOWgy9aMbeziZZwvV6g=;
+ b=UIZyShztChjdIuGq2iiqvK7jlNRuOTms0A34bq3m2ci6pJ/MLWQI6olPOsAOhIJDU6
+ ziJZzLCRtS1I3dq221oAxBlyAkKy9mvhvC3Oy37jdqxTq0PmheKR4Iz6o3BfFYxnZ+tQ
+ RBeWtJTga/IHUXvLvmr33gr0x3q3Uo/YcpTP/2MI+MhRgdvTX+9Mu7PLgUGoI+n2CZ2+
+ ozSarMRIFzIxmvDBLha/d5OqYxvYmWdolpC0xS4pCkHhdgqMDxE9B73okKdPDUyFtxPS
+ U16pP+edFPbhH40lZY7bF4F3z5RxOLRyhbFIxqUMLNw/SS2PSUGYLFFLvsna6d2L1Tif
+ ZDqA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX8ydHkxNz4aDjQrj8SpI8hbF6stKhMgter2Hu7oxDIth54dgbTid9PWc8KleCdu6V58d8h0mB+zB1ROrTKTPkY7EryYA==
+X-Gm-Message-State: AOJu0YzUUekACfIc7WtFFhABCxUTqG/YarMa4nUr62viXpo5R2uliTS8
+ aLzccghHqcGkaQApaYyGDtFvpZQj3ga6kRhCSwJRwZoXwqNlLdOul+gmVOQbaXc=
+X-Google-Smtp-Source: AGHT+IGg0o5y6wh4buKtV+Brvn9wAOQtz3IIqxQd3I9WCk8SiisgUeMRMF0Uzda3RPLz2LDbMH7D6A==
+X-Received: by 2002:a05:6512:3d02:b0:516:d444:b26b with SMTP id
+ d2-20020a0565123d0200b00516d444b26bmr14369821lfv.46.1713349175163; 
+ Wed, 17 Apr 2024 03:19:35 -0700 (PDT)
+Received: from hades.. (ppp089210071137.access.hol.gr. [89.210.71.137])
  by smtp.gmail.com with ESMTPSA id
- d14-20020a05600c34ce00b004161bffa48csm2193355wmq.40.2024.04.17.03.10.23
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 17 Apr 2024 03:10:23 -0700 (PDT)
-Message-ID: <fe1d6b6a-eb59-45f0-b51b-c0659298f2d5@linaro.org>
-Date: Wed, 17 Apr 2024 11:10:21 +0100
+ g12-20020a5d488c000000b003472489d26fsm13567780wrq.19.2024.04.17.03.19.33
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 17 Apr 2024 03:19:34 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de,
+	kettenis@openbsd.org
+Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
+ quic_llindhol@quicinc.com, ardb@kernel.org, pbrobinson@gmail.com,
+ pjones@redhat.com, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Janne Grunau <j@jannau.net>, Simon Glass <sjg@chromium.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH v2 0/4] Enable SetVariable at runtime
+Date: Wed, 17 Apr 2024 13:19:21 +0300
+Message-Id: <20240417101928.119115-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/16] board: Define GUIDs for firmware images
-Content-Language: en-US
-To: Jon Humphreys <j-humphreys@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
- Judith Mendez <jm@ti.com>, Christian Gmeiner <christian.gmeiner@gmail.com>,
- Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
- Nikhil M Jain <n-jain1@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
- Andrew Davis <afd@ti.com>, Maxime Ripard <mripard@kernel.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Roger Quadros <rogerq@kernel.org>,
- Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>
-References: <20240408223134.165877-1-j-humphreys@ti.com>
- <20240408223134.165877-2-j-humphreys@ti.com>
- <cac63a03-b019-4aed-83de-db2effa1a2f1@gmx.de>
- <86zfu2z1p4.fsf@udb0321960.dhcp.ti.com>
- <a2fb8782-66d5-44ad-8238-d565e0934de9@gmx.de>
- <CAC_iWjLEzeXmhc=EiGT3++1a5W5JRrZHivgSN=JMN+mQtpTZeQ@mail.gmail.com>
- <868r1iz1iw.fsf@udb0321960.dhcp.ti.com>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <868r1iz1iw.fsf@udb0321960.dhcp.ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,130 +105,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi all,
+This is the new version of [0]
+
+The main difference from v1 is that VarToFile is now filled on the fly,
+during a GetVariable call for it, instead of creating it during
+SetVariable.
+
+The advantage of doing that is memory efficiency, since the buffer comes
+from the OS now and we don't have to allocate and preserve runtime memory
+to copy things around. We also don't consume space from the existsing
+variable storage.
+
+The disadvantage is that it complicates the code a bit more since we need
+to check for the variable name in GetVariable. We also need a function to
+collect variables at runtime that operates on the memory backend.
+
+In the future we can clean up and try to unify efi_var_collectXXX() variants,
+but I'd rather keep tha patchset simpler for now.
+We will also need support for QueryVariableInfo, which I will send in
+another series as part of a cleanup since it's mostly supported already.
+
+Changes since v1:
+- Instead of Creating VarToFile at SetVariable, create it on GetVariable.
+  This allows us to get rid of the preallocated RT buffer, since the
+  address is user provided
+- convert Set/GetVariableRT -> Set/GetVariable at runtime
+- return EFI_INVALID_PARAM is NV is not set at runtime
+- Heinrich sent me the efi_var_collect_mem() variant
+
+Changes since the RFC:
+- Return EFI_INVALID_PARAM if attributes are not volatile
+- Add EFI_WRITE_PROTECTED checks for BS, RT *only* variables
+- Add 2 EFI variables and allow userspace to write the file
+- Add selftests
+
+[0] https://lore.kernel.org/u-boot/20240406140203.248211-1-ilias.apalodimas@linaro.org/
 
 
-On 12/04/2024 22:58, Jon Humphreys wrote:
-> Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
-> 
->> Hi both
->>
->> On Wed, 10 Apr 2024 at 10:36, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
->>>
->>> On 09.04.24 23:05, Jon Humphreys wrote:
->>>> Heinrich Schuchardt <xypron.glpk@gmx.de> writes:
->>>>
->>>>> On 4/9/24 00:31, Jonathan Humphreys wrote:
->>>>>> Define GUIDs for the different firmware images (tiboot3.bin, tispl.bin,
->>>>>> u-boot.img, sysfw). >
->>>>>> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
->>>>>> ---
->>>>>>    include/configs/ti_armv7_common.h | 17 +++++++++++++++++
->>>>>>    1 file changed, 17 insertions(+)
->>>>>>
->>>>>> diff --git a/include/configs/ti_armv7_common.h b/include/configs/ti_armv7_common.h
->>>>>> index 3def7b1027e..4ce14a9b84c 100644
->>>>>> --- a/include/configs/ti_armv7_common.h
->>>>>> +++ b/include/configs/ti_armv7_common.h
->>>>>> @@ -16,6 +16,23 @@
->>>>>>    #ifndef __CONFIG_TI_ARMV7_COMMON_H__
->>>>>>    #define __CONFIG_TI_ARMV7_COMMON_H__
->>>>>>
->>>>>> +/* GUIDs for capsule updatable firmware images */
->>>>>
->>>>> Please, provide code comments for the GUIDs, e.g.
->>>>>
->>>>> /**
->>>>>    * define K3_TIBOOT3_IMAGE_GUID - firmware GUID for K3 tiboot3.bin
->>>>>    *
->>>>>    * This GUID is used in capsules updates to identify the tiboot3.bin
->>>>>    * binary.
->>>>>    */
->>
->> I'd go one step further tbh.  Those GUIDs can be used by OEMs/ODMs
->> producing capsules for their future products.
->> Currently, we don't have a documented way to allow users to redefine
->> this (but Linaro is working on it).  If both TI and an OEM use the
->> same GUID and try to upload the firmware to LVFS, we will have a GUID
->> clash.
->> I think we should have that on the comment as well, until we can
->> properly sort it out
-> 
-> Ilias, I realized I may have defined the GUID's a bit incorrectly.  I
-> was thinking that the GUID's identify the firmware type (eg, SPL vs
-> Uboot for TI devices).  However, the SPL binary for say am62 will be
-> different than the SPL binary for say am64, so I should have unique
-> GUID's per firmware type *per board*.  Correct?
-> 
-> If so, I'll need to move these definitions to the board .h files, and my
-> generic capsule binman nodes will need to have each board override the
-> image GUID used.
 
-Yes, consider for example if you wanted to maintain community firmware
-images on LVFS, for a given image (like U-Boot itself) you would
-presumably update it for each board, which requires each board to have
-it's own GUID so you can tell them apart.
+Ilias Apalodimas (4):
+  efi_loader: conditionally enable SetvariableRT
+  efi_loader: Add OS notifications for SetVariable at runtime
+  efi_loader: add an EFI variable with the file contents
+  efi_selftest: add tests for setvariableRT
 
-If one of the payloads is identical for a bunch of boards then it might
-make sense to use one GUID for it.
-> 
-> thanks
-> Jon
-> 
->>
->> Thanks
->> /Ilias
->>>>>
->>>>> Cf.
->>>>> https://docs.kernel.org/doc-guide/kernel-doc.html#object-like-macro-documentation
->>>>>
->>>>> Best regards
->>>>>
->>>>> Heinrich
->>>>>
->>>>
->>>> Heinrich, thanks for reviewing!
->>>>
->>>> I modelled the GUID macros after how other boards and even core code
->>>> defined there's.  (eg, include/configs/kontron-sl-mx8mm.h or
->>>> include/efi_api.h).
->>>>
->>>> However, if this is the new direction, I will format as you suggest.
->>>> Please confirm.
->>>
->>> Hello Jon,
->>>
->>> Without properly documenting macros we make the live of developers more
->>> difficult. Yes, we still have a lot of missing code documentation. But
->>> we should not follow poor example.
->>>
->>> Best regards
->>>
->>> Heinrich
->>>
->>>>
->>>> thanks
->>>> Jon
->>>>
->>>>>> +#define K3_TIBOOT3_IMAGE_GUID \
->>>>>> +   EFI_GUID(0xe672b518, 0x7cd7, 0x4014, 0xbd, 0x8d, \
->>>>>> +            0x40, 0x72, 0x4d, 0x0a, 0xd4, 0xdc)
->>>>>> +
->>>>>> +#define K3_SPL_IMAGE_GUID \
->>>>>> +   EFI_GUID(0x86f710ad, 0x10cf, 0x46ea, 0xac, 0x67, \
->>>>>> +            0x85, 0x6a, 0xe0, 0x6e, 0xfa, 0xd2)
->>>>>> +
->>>>>> +#define K3_UBOOT_IMAGE_GUID \
->>>>>> +   EFI_GUID(0x81b58fb0, 0x3b00, 0x4add, 0xa2, 0x0a, \
->>>>>> +            0xc1, 0x85, 0xbb, 0xac, 0xa1, 0xed)
->>>>>> +
->>>>>> +#define K3_SYSFW_IMAGE_GUID \
->>>>>> +   EFI_GUID(0x6fd10680, 0x361b, 0x431f, 0x80, 0xaa, \
->>>>>> +            0x89, 0x94, 0x55, 0x81, 0x9e, 0x11)
->>>>>> +
->>>>>>    /*
->>>>>>     * We setup defaults based on constraints from the Linux kernel, which should
->>>>>>     * also be safe elsewhere.  We have the default load at 32MB into DDR (for
->>>
+ include/efi_loader.h                          |   4 +
+ include/efi_variable.h                        |  14 +-
+ lib/charset.c                                 |   2 +-
+ lib/efi_loader/Kconfig                        |  16 ++
+ lib/efi_loader/efi_runtime.c                  |  36 +++++
+ lib/efi_loader/efi_var_common.c               |   6 +-
+ lib/efi_loader/efi_var_mem.c                  | 146 +++++++++++-------
+ lib/efi_loader/efi_variable.c                 | 121 +++++++++++++--
+ lib/efi_loader/efi_variable_tee.c             |   5 -
+ .../efi_selftest_variables_runtime.c          | 116 +++++++++++++-
+ 10 files changed, 384 insertions(+), 82 deletions(-)
 
--- 
-// Caleb (they/them)
+--
+2.40.1
+
