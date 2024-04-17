@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62785C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 08:41:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAFC0C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 09:00:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4C1D8842A;
-	Wed, 17 Apr 2024 10:41:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 5257288431;
+	Wed, 17 Apr 2024 11:00:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=epsi@gmx.de header.b="MBpyNegB";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="wEP4IWJ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AEBFC88440; Wed, 17 Apr 2024 10:41:36 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A47C488431; Wed, 17 Apr 2024 11:00:12 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C950588414
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 10:41:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B7DE8844A
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 11:00:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=epsi@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1713343293; x=1713948093; i=epsi@gmx.de;
- bh=VU38Hg+lkR6rToYg/nGPRoYEOC13rPv7b4Kv9BB0Gjc=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:From:To:
- References:In-Reply-To:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=MBpyNegBbD/hbxpvq78X/2lDJFFsMkGhRvCGDISGEH/oNYpVwwhlbXCADe69UOuz
- MwNHnxnXsDvMpk9MD0yKOC/xU6CRZdkg+Laf1Wes1SMdKjhjCQAffswI19O19N9E3
- qyUa9gcy2gKeMxeq8FfmwGrhEGNPwysjsN2Fq8Alkc68WkRgGEDmE+3IhNT3WvDja
- xuEdCUZwzq97s8A4CXvvT93oSRCxhr0iAdCXvl1vax4sFN9Wyh4fZ+yuzeil4KMcp
- kpPCHBG0MvjjXJtNUOBe9emcGB74cXURoIroQYj5SElfCwmtA/Lqmoyi92dKcUU0H
- CsVH4yEKpa0teC+JMg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.3.21] ([217.225.83.13]) by mail.gmx.net (mrgmx105
- [212.227.17.174]) with ESMTPSA (Nemesis) id 1MTzfG-1sMxix3HoQ-00R2yv; Wed, 17
- Apr 2024 10:41:33 +0200
-Message-ID: <5cf38ecf-f02c-4219-90e8-aceccf558b43@gmx.de>
-Date: Wed, 17 Apr 2024 10:41:33 +0200
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=4837253909=patrick.delaunay@foss.st.com
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 43H7cpwD005064; Wed, 17 Apr 2024 11:00:05 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=4QZidN/Nh6urgfOR8x04oBRtCDPYH17tPvBGGp3qM3Q=; b=wE
+ P4IWJ2z0tC4yMecLWeMcKopNrfjlLW4lHgbfTz9798beG5g/iS+t8chry09nhwTP
+ uutSCG4mGvUCIhT78WJgt6bNCW6X29MdypchygNbQ/1Ultsf5JZzb8QHF5J2+6RQ
+ jDCET/MjfFsnG4Vk0Cb275qMfqjnANh2pxwT+T4GJ+Rp8CMOaauDLBy1YQvcdg0q
+ k19BqbOBooJPmtvK9IjgWASt998gv2XIWyrXfzpw5syE6Lw8wIkIQeMZ8rG4hcjv
+ mSZoiioYLEIEksRtt1VJ18vwHG9qBmt/RFuZ3z70rV+4Pjt4JNf54Z52ED48UC99
+ 4Wy8KWwMrm6shUiqpGlA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xffffh519-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 17 Apr 2024 11:00:04 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 9828C4002D;
+ Wed, 17 Apr 2024 11:00:01 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A6626210598;
+ Wed, 17 Apr 2024 10:59:41 +0200 (CEST)
+Received: from [10.48.86.112] (10.48.86.112) by SHFDAG1NODE3.st.com
+ (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 17 Apr
+ 2024 10:59:41 +0200
+Message-ID: <480ef8f6-2cc0-4014-8025-19b5c48a14fd@foss.st.com>
+Date: Wed, 17 Apr 2024 10:59:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [Patch] dwc_eth_qos: Revert regression handling fixed phy
-From: Nicole Battenfeld <epsi@gmx.de>
-To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- Fabio Estevam <festevam@gmail.com>, Ramon Fried <rfried.dev@gmail.com>
-References: <31a9f868-8f5f-2938-a22d-39a2695adba2@gmx.de>
- <31252563-cfe1-343b-cf29-31c374e5287e@denx.de>
- <b94139ba-2135-5f48-aa26-c2b301d13e46@gmx.de>
+Subject: Re: [PATCH 1/3] ARM: dts: stm32: Fix partition node name for
+ stm32mp157c-ev1-u-boot
+To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut
+ <marex@denx.de>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
+References: <20240308135009.2621719-1-patrice.chotard@foss.st.com>
 Content-Language: en-US
-In-Reply-To: <b94139ba-2135-5f48-aa26-c2b301d13e46@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+In-Reply-To: <20240308135009.2621719-1-patrice.chotard@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Provags-ID: V03:K1:Pn0hHLTW0W3CTa2Ku3JEqoOS4NGuAFbxwsZvzV6O8Q7juN8K0S4
- 3DxFudWF2sKvjJQphWGTEdl0A3wM7VcP0fJ+4YrFWDGds7PIMun9X0LDo59yAMmFU6qV7QB
- 0tgIGfx+7uPRjLKH3BHEjakXAsNh8mZx//OTi284I4QyrdNGZ1uszR4cV9Dv/nF5gT/YC9K
- JwPtDyZbThMrrhaTFuFMg==
-UI-OutboundReport: notjunk:1;M01:P0:AJRcZEvhf58=;15esjrpFmdHSl3NItiMkXcE/uAY
- 8e2xLkXd3G+cEyQbYF7TgFmi51BRnFXQEEf/jVQ6q8zAh/Cb8PZkiSzf5Mcwc2t0ZSaJcuRqs
- 4AA/CTA+/XbrnrnvJJuy1dz/lkO1vCW11r+DiODt3nFVyeLPfLLDr+Z/5Wk2/huPoeVJRdtFx
- 28OboOi9HMM2UqMD8blfWoWLG2DVdUN8Z/Spr/+bScbpYP+bohw34AL2F+/THUijgErJcVfUX
- EC54hFqxgBdrrhPVD1DZlT+B3PvO9clmPzzGevjnKLliyT4twPVu3P7j01l5AyfXP0vRV0Z5e
- RcAkatGICSg7qcAgSo9Of2O83EFN5ZNbamTknO5IjHzdN3oL8lOFhtnBMOzp+GUYcXTivtQK1
- YtsgLxpJCodKTEPFjUB3yPs0sSmjG2ODazq2N9dTLmauxoOQ89chPSEUidf7SoJfMyj3Ebu2U
- jX1fEyAEuFzzkzwGftZlAWs4l75x0tYBuwOWUYnXK8GnILeLY9QocZionl7IEDtvypLCXJ7AE
- SEsuGz4+28izQmygOOjcXKxB55LX4KcEe2gWzE9hfx56v0UW0uSe/9CNEiSZyE5/krgU61lKF
- SBSDkBKbOBYGcyK6AYxlU0w9mtTH4UNHaC9mNbFNQh0uwLVLYsGHgjnwnzkbjCp8C1QQymMSL
- 3pDOnOyyZE+xYG3etDXC8rzH0BPIohIO2SIsiL9jn3hbmyZkFFf7s/iATRNMgSABEByPTfyq7
- c416L+Tkz1VyzWhwQk3gFVe+2uDkdUy6EMGwHxqz1Ml7qFnBiTHGu0rdSzjCDzOCuRRKA8D+l
- q6P0nWM0PP+rc9czx7u0OGGR1iZl1yvtWNQNNqAJCnDAU=
+X-Originating-IP: [10.48.86.112]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
+ (10.75.129.71)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-04-17_08,2024-04-16_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,28 +91,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Subject: [PATCH] dwc_eth_qos: Revert regression handling fixed phy
+Hi,
 
-In imx8mp operation on eqos with fixed phy I get without that patch:
-ERROR: no/invalid <fixed-link< property!
----
-  drivers/net/dwc_eth_qos.c | 4 +++-
-  1 file changed, 3 insertions(+), 1 deletion(-)
+On 3/8/24 14:50, Patrice Chotard wrote:
+> Fix flash@0 and nand@0 partition node name with correct offset.
+>
+> Fixes: e91d3c61767b ("arm: dts: stm32: Add partitions in flash0 and nand
+> node for stm32mp15xx-ev1")
+>
+> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> ---
+>
+>   arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi | 8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+> index 139940bd5d4..3515347e91d 100644
+> --- a/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+> +++ b/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+> @@ -33,11 +33,11 @@
+>   			label = "fsbl1";
+>   			reg = <0x00000000 0x00040000>;
+>   		};
+> -		partition@80000 {
+> +		partition@40000 {
+>   			label = "fsbl2";
+>   			reg = <0x00040000 0x00040000>;
+>   		};
+> -		partition@100000 {
+> +		partition@80000 {
+>   			label = "ssbl";
+>   			reg = <0x00080000 0x00200000>;
+>   		};
+> @@ -58,7 +58,7 @@
+>   			label = "fsbl2";
+>   			reg = <0x00040000 0x00040000>;
+>   		};
+> -		partition@100000 {
+> +		partition@80000 {
+>   			label = "fip";
+>   			reg = <0x00080000 0x00400000>;
+>   		};
+> @@ -112,7 +112,7 @@
+>   					label = "fip2";
+>   					reg = <0x00600000 0x00400000>;
+>   				};
+> -				partition@1200000 {
+> +				partition@a00000 {
+>   					label = "UBI";
+>   					reg = <0x00a00000 0x3f600000>;
+>   				};
 
-diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-index 67d80d987f..8ca8adead9 100644
---- a/drivers/net/dwc_eth_qos.c
-+++ b/drivers/net/dwc_eth_qos.c
-@@ -801,8 +801,10 @@ static int eqos_start(struct udevice *dev)
-  		if (IS_ENABLED(CONFIG_PHY_FIXED)) {
-  			fixed_node = ofnode_find_subnode(dev_ofnode(dev),
-  							 "fixed-link");
--			if (ofnode_valid(fixed_node))
-+			if (ofnode_valid(fixed_node)) {
-  				eqos->phy = fixed_phy_create(dev_ofnode(dev));
-+				eqos->phy_of_node = fixed_node;
-+			}
-  		}
 
-  		if (!eqos->phy) {
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+
+Thanks
+Patrick
+
 
