@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F0FCC4345F
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 12:37:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 727BEC4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 12:37:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35C668848B;
+	by phobos.denx.de (Postfix) with ESMTP id 9ACA088492;
 	Wed, 17 Apr 2024 14:37:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PKidouOc";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JNvMMuFf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E657788440; Wed, 17 Apr 2024 10:39:41 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 64D8E8836E; Wed, 17 Apr 2024 10:49:19 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A47CC88414
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 10:39:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B58B68842B
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 10:49:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eichest@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-570c9f49a67so93081a12.1
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 01:39:39 -0700 (PDT)
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-518a3e0d2ecso6835062e87.3
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 01:49:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713343179; x=1713947979; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1713343755; x=1713948555; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ymZEi9ALxxF1VhBANw99OdfCip3ui8QlPEVqpps1OjQ=;
- b=PKidouOcn/eogMXGo3pOfUTLhlplHIjA863UZnVPipzGOUW7CQJgbVU08QO9M296hh
- qjGxxSB7YRg3McEEnx0jtXTeKwU3uHli0r1WdvuXp8ylg5kQB5/6ZiZcoNnY5jdnaT0f
- MnV3fNbvhatH/QO6924dRZq8hzIWCL1zxsNmRfIhGiE0znQ61o43PBIRWnmnD01yuzmz
- X9SBKpmxb5W+L9e46JNOolENPR0//URxfZUO7DH6aD7FMyj1d/C26E3bLZfIr743tZ8I
- HpJpSLNesZJ/U6nGVjFFawFtJ2AyKpiUaiCgXkZKZtfqqZkysGaA0uStcDJWBdHEwXOO
- /EJQ==
+ bh=KvC5DkgQjtZ8tM1BjbOKRa6fkKPc6s/2w2RM/1XZW9E=;
+ b=JNvMMuFf7YYKJTtpRYpBTVq1cOZsTpdOhc3egHaSR3EIUzN7Ip/4D0YVe5Sd/CmG6/
+ kSCYMPT6maJ00EUW3VnfAuLJQXiNRK0jp04s580KMQUV9SdyfIC5Ezuagj6eKQKEFPxE
+ y/uELn5I4ZwEgE55oYzyue+VinVG84XoDF9sLzjYgC08nvjd4PQIw6cTag8Yx8Q+R8UM
+ nqWe+tA86ufPvwGpmmVDIsl9OFaoagzuwilgsTQPiT3oaiyknnyobOPVcLB3ZguCSWqs
+ YPhKnokW9LuBEoy9YfF84nmgJbqO6U2wJ46JMSVqpJUHv9TReBfPNEGeA3w7LDlX9658
+ Ugqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713343179; x=1713947979;
+ d=1e100.net; s=20230601; t=1713343755; x=1713948555;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ymZEi9ALxxF1VhBANw99OdfCip3ui8QlPEVqpps1OjQ=;
- b=siOcH8FY8V/F/1y+Ykq2Xi4ZLcUKBL2KILLEnVp6fabWvSMI3q2fHdr0mDnwOkDgtC
- x7oypgqLduNBdRsVWgttnA8G967areMdXynlMRiD1Wwep0zCH01QvqOrv9cPjmeqXcec
- zas9r3Wzv32ZwFCUQVhkOopsIfuYXLsmJx7O9ia7KAzp4GZfoeEqgb/4Cc901xZ8OSoP
- 1gJNtQAlLwO0+b+oN65+xh7/CxkUGwJiJsQ7W0BEi17NbnVrR34jg8MMApwLxhFEL4G8
- Ea4UxR3cLUCHzkG6ssyn8sAlfQFPafO6xZ54eluZx/qINfeQcg4yeAN8MDjk0m/fH1pM
- XcvA==
-X-Gm-Message-State: AOJu0YxzKoMAkbia+IJEwQno/CgbH9ym9Bps/Y71oaPWjuz3DEbXn5Vv
- MFNXBMZGLx6JTbgUbg6K32nK74qjOBh8a0W4PGUhSUCucNO+NtEm
-X-Google-Smtp-Source: AGHT+IHAQQmCCPhcFrxdN117fw1kjA5A1y42+TV8XmOGX4oD6zksLepxQGkAoGpWb52YkUteUxaXcQ==
-X-Received: by 2002:a50:9515:0:b0:568:8e22:4eff with SMTP id
- u21-20020a509515000000b005688e224effmr9495142eda.37.1713343178814; 
- Wed, 17 Apr 2024 01:39:38 -0700 (PDT)
+ bh=KvC5DkgQjtZ8tM1BjbOKRa6fkKPc6s/2w2RM/1XZW9E=;
+ b=PKqISa7pN6lIZhJ7bTtg1FQP+exxl2aKggb0Df35e54bcweIM7EMjo2aCw1hukXMvG
+ y+W0GRAj/DLYPJ+EwxZJ44JvNBeThZUdBsjN5pFBKq0hcqFzwaP3fl+jAHVrzQ0A6S4b
+ z6fXJLPMC95TS7WCwBxYDiwAQKGjOM7vHAe10x0LJDJQSEatx2KvmepEvsVitLzA6BKn
+ JJCBbe71+xEJEEh0CzvSJJ31elDXuyY35xODeisb4jsn8JTZyFefbFKu83RNyzZUqTsI
+ b54v8sGclLl5OKNXz6JSkkUpPR6rFAYO6PzjvUPcx8BBIocuL48BHJUR93hWj2lHbwXt
+ aKng==
+X-Gm-Message-State: AOJu0Yz0Px00x2LIVLB+MTQiPT2myuC4QuZxGslLHbI8McLJblj3xijr
+ SOpKZcik2BqLN8BuwcpdgBK/mJvhGn7zSysU6PVknJu9zdy8UsW2
+X-Google-Smtp-Source: AGHT+IFOp/CyTiRcW0/9oxI+9z9iV3VNtmhbG3bZGZs0ZhFncEwSNQPd/noEkLZ7c4zrVNyoMx3Emg==
+X-Received: by 2002:ac2:51b6:0:b0:518:bd37:606e with SMTP id
+ f22-20020ac251b6000000b00518bd37606emr8134806lfk.13.1713343754671; 
+ Wed, 17 Apr 2024 01:49:14 -0700 (PDT)
 Received: from eichest-laptop.corp.toradex.com (31-10-206-125.static.upc.ch.
  [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
- eo3-20020a056402530300b0056e45c05ec0sm7039381edb.77.2024.04.17.01.39.38
+ w6-20020a1709064a0600b00a5209dc79c1sm7953155eju.146.2024.04.17.01.49.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Apr 2024 01:39:38 -0700 (PDT)
+ Wed, 17 Apr 2024 01:49:14 -0700 (PDT)
 From: Stefan Eichenberger <eichest@gmail.com>
-To: marcel.ziswiler@toradex.com, trini@konsulko.com, nm@ti.com,
- francesco.dolcini@toradex.com, rogerq@kernel.org,
- stefan.eichenberger@toradex.com, andrejs.cainikovs@toradex.com
+To: marcel.ziswiler@toradex.com, sbabic@denx.de, festevam@gmail.com,
+ uboot-imx@nxp.com, trini@konsulko.com, francesco.dolcini@toradex.com,
+ emanuele.ghidoli@toradex.com, tharvey@gateworks.com,
+ andrejs.cainikovs@toradex.com, stefan.eichenberger@toradex.com
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v1] arm: dts: verdin-am62: use gpio-hog for sleep moci
-Date: Wed, 17 Apr 2024 10:39:21 +0200
-Message-Id: <20240417083921.13367-1-eichest@gmail.com>
+Subject: [PATCH v1] arm: dts: verdin-imx8mm/imx8mp: use gpio-hog for sleep moci
+Date: Wed, 17 Apr 2024 10:49:02 +0200
+Message-Id: <20240417084902.13904-1-eichest@gmail.com>
 X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -97,48 +98,51 @@ In Linux, we allow sleep moci to be turned off when the carrier board
 supports it and the system is in suspend. In U-Boot, however, we want
 the sleep moci to be always on. So we use a gpio hog and disable the
 regulator. This change is necessary because we switched to upstream
-device tree files with commit c07bba7a2c7e ("verdin-am62: move verdin
-am62 to OF_UPSTREAM"). A recent upstream patch removes the gpio hog from
-the Linux device tree, so we need to add it to the u-boot dtsi. The
-following patch will remove the gpio hog from the Linux device tree:
-https://lore.kernel.org/linux-devicetree/20240301084901.16656-1-eichest@gmail.com/
+device tree files with commit 23fe2def1edf
+("verdin-imx8mm/verdin-imx8mp: move imx verdins to OF_UPSTREAM"). A
+recent upstream patch removes the gpio hog from the Linux device tree,
+so we need to add it to the u-boot dtsi. The following patch will remove
+the gpio hog from the Linux device tree:
+https://lore.kernel.org/linux-devicetree/20240405160720.5977-1-eichest@gmail.com/
 The U-Boot patch can be applied without it and will not break the build.
 
 Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 ---
- arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+ arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi | 5 +++++
+ arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi | 4 ++++
+ 2 files changed, 9 insertions(+)
 
-diff --git a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
-index 7fe7ae4154..9ecb305274 100644
---- a/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-verdin-wifi-dev-u-boot.dtsi
-@@ -91,6 +91,14 @@
+diff --git a/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+index 38db56059d..8b397f535c 100644
+--- a/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
++++ b/arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi
+@@ -60,6 +60,11 @@
  
- &main_gpio0 {
- 	bootph-all;
-+
-+	ctrl-sleep-moci-hog {
-+		bootph-all;
+ 	ctrl-sleep-moci-hog {
+ 		bootph-pre-ram;
 +		gpio-hog;
-+		gpios = <31 GPIO_ACTIVE_HIGH>;
-+		line-name = "CTRL_SLEEP_MOCI#";
 +		output-high;
-+	};
++		gpios = <1 GPIO_ACTIVE_HIGH>;
++		line-name = "CTRL_SLEEP_MOCI#";
++
+ 	};
  };
  
- /* On-module I2C - PMIC_I2C */
-@@ -165,10 +173,6 @@
- 	status = "disabled";
+diff --git a/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi b/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi
+index 03f211d5f7..7b45a87450 100644
+--- a/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi
+@@ -58,6 +58,10 @@
+ 
+ 	ctrl-sleep-moci-hog {
+ 		bootph-pre-ram;
++		gpio-hog;
++		output-high;
++		gpios = <29 GPIO_ACTIVE_HIGH>;
++		line-name = "CTRL_SLEEP_MOCI#";
+ 	};
  };
  
--&verdin_ctrl_sleep_moci {
--	bootph-all;
--};
--
- /* Verdin UART_2 */
- &wkup_uart0 {
- 	bootph-all;
 -- 
 2.40.1
 
