@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74FA1C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 09:02:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27B83C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 09:02:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F360988451;
-	Wed, 17 Apr 2024 11:02:30 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7D94988457;
+	Wed, 17 Apr 2024 11:02:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="xOc7E7hd";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="sDMPBViC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7234D88456; Wed, 17 Apr 2024 11:02:29 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id E3EE48845A; Wed, 17 Apr 2024 11:02:53 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4DD1188451
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 11:02:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id AD5A38842B
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 11:02:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=4837253909=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43H7pJSm003618; Wed, 17 Apr 2024 11:02:21 +0200
+ 43H7ix0A005483; Wed, 17 Apr 2024 11:02:45 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=KfP+WFO0rPzAjB/RZTpX04+Tts4DFIGcH2zKaQFquu0=; b=xO
- c7E7hdxpcFXz5aqW//Jw9LdGj+Akdfla55R/9j9rMm8oDxTf8yp6AzLfzC0Yi2GE
- BvkDQlW2aPKRDYBXAYiJopP36M5CYidUzFAkhXfYw9CYHBntPRl0tW6UoTp3g9Wy
- h55TUoiQBI0iV7facvKVyCu3EdNcyGspvnSTNtgb/RL/zfSe/eizsmmtzwZfxpHu
- nobeK+Doo2/vC/xKQj6KiWx3uNpaxonbz/LjVtkAGp8l5bUmdvvVvkW6HcaJAI9j
- qIcmwZu3VNaxa5Fm4oZgQfFNDJzrPiJmAtChsUwXa8xbGSiyxRL/RAcfLHiJKQvP
- kn9gOlWkCmskV0pheNwQ==
+ selector1; bh=uM92mgvbt0Xq+1Qci9tM2Fta1RARSIcAxLvdfj+EgBo=; b=sD
+ MPBViCCROfwGz7GIdn1B+dMaisUZ+wiNFe9dstCN36KLKIu/BdOLPZ/l9+a7sCf2
+ xI+Z725gVmmf0vvALzKGUk0NWKyk1Oh6nhOc2ac9udtvolt3e/MnW71eoPWdnwUS
+ 72sBHLzNnwnD2gPAC280Y0395xntjQWcdAVGzRHpbO7/SUHYtyscKgZRZvh+l0A4
+ rXXvtSu4QxwoRZi6Pr+PNVIbcXk4oft6n5R9ImI6Tekr+jg3kbu55Xvf9qtovvC5
+ cKX1xgHMzK9bbx9XvDDwxsMYTe5hA92KCPUuz9LD63XlfoVMaKJX9G/2fcg+tDS8
+ 0R00vSGEmH6LUfh4SgxA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xgecyd7rv-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xg50hx9x8-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 17 Apr 2024 11:02:21 +0200 (MEST)
+ Wed, 17 Apr 2024 11:02:45 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 482B04004B;
- Wed, 17 Apr 2024 11:02:13 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id DBD0340044;
+ Wed, 17 Apr 2024 11:02:41 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 521782105AF;
- Wed, 17 Apr 2024 11:01:44 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 873BB21058A;
+ Wed, 17 Apr 2024 11:02:12 +0200 (CEST)
 Received: from [10.48.86.112] (10.48.86.112) by SHFDAG1NODE3.st.com
  (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 17 Apr
- 2024 11:01:43 +0200
-Message-ID: <79062d65-359c-4e1a-ae04-da5e9bea1ed6@foss.st.com>
-Date: Wed, 17 Apr 2024 11:01:42 +0200
+ 2024 11:02:11 +0200
+Message-ID: <8602799a-7c52-4308-a58e-4986de57210b@foss.st.com>
+Date: Wed, 17 Apr 2024 11:02:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] mmc: stm32_sdmmc2: Add "st,stm32mp25-sdmmc2"
- compatible
+Subject: Re: [PATCH 2/2] mmc: stm32_sdmmc2: Fix AARCH64 compilation warnings
 To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
 CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Jaehoon Chung
  <jh80.chung@samsung.com>, Peng Fan <peng.fan@nxp.com>, Sean Anderson
  <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Tom Rini
  <trini@konsulko.com>
 References: <20240308142614.2700185-1-patrice.chotard@foss.st.com>
+ <20240308142614.2700185-2-patrice.chotard@foss.st.com>
 Content-Language: en-US
 From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20240308142614.2700185-1-patrice.chotard@foss.st.com>
+In-Reply-To: <20240308142614.2700185-2-patrice.chotard@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.48.86.112]
 X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
  (10.75.129.71)
 X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-04-17_08,2024-04-16_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,34 +95,46 @@ X-Virus-Status: Clean
 Hi,
 
 On 3/8/24 15:26, Patrice Chotard wrote:
-> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> When building with AARCH64 defconfig, we got warnings, fix them.
 >
-> Add compatible used for STM32MP25 family.
->
-> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > ---
 >
->   drivers/mmc/stm32_sdmmc2.c | 1 +
->   1 file changed, 1 insertion(+)
+>   drivers/mmc/stm32_sdmmc2.c | 8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
 >
 > diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
-> index a2b111a8435..d4982a14281 100644
+> index d4982a14281..39ae79ba129 100644
 > --- a/drivers/mmc/stm32_sdmmc2.c
 > +++ b/drivers/mmc/stm32_sdmmc2.c
-> @@ -789,6 +789,7 @@ static int stm32_sdmmc2_bind(struct udevice *dev)
+> @@ -220,9 +220,9 @@ static void stm32_sdmmc2_start_data(struct udevice *dev,
 >   
->   static const struct udevice_id stm32_sdmmc2_ids[] = {
->   	{ .compatible = "st,stm32-sdmmc2" },
-> +	{ .compatible = "st,stm32mp25-sdmmc2" },
->   	{ }
->   };
+>   	if (data->flags & MMC_DATA_READ) {
+>   		data_ctrl |= SDMMC_DCTRL_DTDIR;
+> -		idmabase0 = (u32)data->dest;
+> +		idmabase0 = (u32)(long)data->dest;
+>   	} else {
+> -		idmabase0 = (u32)data->src;
+> +		idmabase0 = (u32)(long)data->src;
+>   	}
 >   
+>   	/* Set the SDMMC DataLength value */
+> @@ -463,8 +463,8 @@ retry_cmd:
+>   
+>   	stm32_sdmmc2_start_cmd(dev, cmd, cmdat, &ctx);
+>   
+> -	dev_dbg(dev, "send cmd %d data: 0x%x @ 0x%x\n",
+> -		cmd->cmdidx, data ? ctx.data_length : 0, (unsigned int)data);
+> +	dev_dbg(dev, "send cmd %d data: 0x%x @ 0x%p\n",
+> +		cmd->cmdidx, data ? ctx.data_length : 0, data);
+>   
+>   	ret = stm32_sdmmc2_end_cmd(dev, cmd, &ctx);
+>   
+
 
 
 Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 
 Thanks
 Patrick
-
 
