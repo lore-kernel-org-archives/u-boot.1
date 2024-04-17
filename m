@@ -4,77 +4,127 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06E26C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 00:25:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B112C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 00:25:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 516A88836E;
-	Wed, 17 Apr 2024 02:25:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F3FC98844B;
+	Wed, 17 Apr 2024 02:25:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q9JpRORV";
+	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="tnNrLXPh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E0C88836E; Wed, 17 Apr 2024 02:25:31 +0200 (CEST)
-Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
- [IPv6:2607:f8b0:4864:20::c2a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4F712881DD; Wed, 17 Apr 2024 02:25:46 +0200 (CEST)
+Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 997E48836E
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 02:25:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A7D888442
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 02:25:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=samsung.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2a.google.com with SMTP id
- 006d021491bc7-5a9ec68784cso3064496eaf.2
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 17:25:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713313527; x=1713918327; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XPnFubqKSZSREu4KeWJtN2oLjDtM2P/0eViX5+3YFno=;
- b=q9JpRORVqNAmIEHsph86BTJqG5pjwZvQy/9PSH8gq0cw0zYNzOTXTSGy1ZvnzpOz/l
- b1rXhHrQBL7rcgZNfOL5HLWBlzFQh1dWp+yrWYxxbhaDmXdJzmcYRM5iQVT1Bf7jSoaj
- hbanEZG9QRHIqtehvkCkEohhfvLzTBUaf2HKM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713313527; x=1713918327;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XPnFubqKSZSREu4KeWJtN2oLjDtM2P/0eViX5+3YFno=;
- b=NljLaCZVmCLtiJIkErH8HGn2lnH0kVrISRsOkaOct/wrPgDNR2pJaNrfHq2ranC0vw
- wSO86OvEmnUBDbdpl92pL/ni9ehCtmkZ7xbAd7sJtBQuMXOPEB/KwJgKaqPOlpfeRkym
- XNUDEKz9ktXqnh3e6CSCgtqLppB+qVPH5YuyIFEJSFs02u+3B1kq6VVvFrDswKvBOM8I
- bWkAReTy19YuozRNhju5GP1HiUenq+l8/dmJHyXFdTkqOxaNSBLMgq2BsrcYBXZepNeW
- Fvt581OQ0qNlE4G87qEw3lgoysiaerObeEKa4ObcxrLUAawfve0lHA/z+0wrwucZNiW7
- gdjg==
-X-Gm-Message-State: AOJu0YwFLSSk1WhW1qbQx0rWUBWA26t4VDDIMXYbJUCmchtKV3w7Z8tz
- r4m38ZS/ZbguZ8mpgOLGMUYbly5tP4nNXlkMJBzho3opzfhCj1P/FcZ6otg4W84=
-X-Google-Smtp-Source: AGHT+IHTIS//2xqmddUvoAVowY7QfRnVP8y/sWvlQwyES4lcarRRfDG/g5Bi1efn54mel2la3WrEuQ==
-X-Received: by 2002:a05:6358:9617:b0:183:645b:cfa5 with SMTP id
- a23-20020a056358961700b00183645bcfa5mr18057063rwb.15.1713313527260; 
- Tue, 16 Apr 2024 17:25:27 -0700 (PDT)
-Received: from bill-the-cat ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- kd23-20020a056214401700b00698f01a958asm7824831qvb.77.2024.04.16.17.25.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 16 Apr 2024 17:25:26 -0700 (PDT)
-Date: Tue, 16 Apr 2024 18:25:24 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, xypron.glpk@gmx.de
-Subject: Re: [PATCH 11/23] efi_loader: switch sha256 to mbedtls
-Message-ID: <20240417002524.GE1054907@bill-the-cat>
-References: <20240416190019.81016-1-raymond.mao@linaro.org>
- <20240416190019.81016-12-raymond.mao@linaro.org>
- <20240416192226.GW1054907@bill-the-cat>
- <CAEfUkUJvct2JPEDmvv02L-EZ9u_BkVbg1T=rafwMfe=pobfibQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=jh80.chung@samsung.com
+Received: from epcas1p4.samsung.com (unknown [182.195.41.48])
+ by mailout3.samsung.com (KnoxPortal) with ESMTP id
+ 20240417002532epoutp034ed321cf1dcb46a4ab9705d93508d5e6~G6ZSTxnDg0503305033epoutp03G
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 00:25:32 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
+ 20240417002532epoutp034ed321cf1dcb46a4ab9705d93508d5e6~G6ZSTxnDg0503305033epoutp03G
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+ s=mail20170921; t=1713313532;
+ bh=3HEDoXBAbmBc06bMcSEHhXE8s63pqxwulkpFLMr6sv8=;
+ h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
+ b=tnNrLXPhT2hHON7ArOScoYpKh4sRk+cL5x+NhfqCJjsuo9TXEX0F4jA90z+jXklpM
+ IM0kjyVGlkvIDiLSgdw03ztR53C4HkSysnZBMp0axlbPsqkMZ+d6lOmZ0uO5xONoHL
+ mZABw3ghog1UOYigTpDRSIshNVdjBEi3JltMlnkM=
+Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
+ epcas1p1.samsung.com (KnoxPortal) with ESMTP id
+ 20240417002532epcas1p1006a725edecbdcc336ecb7ee86533e4b~G6ZR_Swi-1618516185epcas1p1W;
+ Wed, 17 Apr 2024 00:25:32 +0000 (GMT)
+Received: from epsmges1p4.samsung.com (unknown [182.195.36.133]) by
+ epsnrtp4.localdomain (Postfix) with ESMTP id 4VK1s729S8z4x9Q2; Wed, 17 Apr
+ 2024 00:25:31 +0000 (GMT)
+Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
+ epsmges1p4.samsung.com (Symantec Messaging Gateway) with SMTP id
+ B8.64.10158.BF61F166; Wed, 17 Apr 2024 09:25:31 +0900 (KST)
+Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
+ epcas1p1.samsung.com (KnoxPortal) with ESMTPA id
+ 20240417002530epcas1p124ece203dc31bc75acd78b9313d426d4~G6ZQQYhxW3093530935epcas1p1C;
+ Wed, 17 Apr 2024 00:25:30 +0000 (GMT)
+Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
+ epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
+ 20240417002530epsmtrp108c66f0950d86564b7e59d21b82be560~G6ZQPo8yx1794417944epsmtrp1R;
+ Wed, 17 Apr 2024 00:25:30 +0000 (GMT)
+X-AuditID: b6c32a38-b41fa700000027ae-0a-661f16fbeeee
+Received: from epsmtip2.samsung.com ( [182.195.34.31]) by
+ epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
+ 3A.9D.19234.AF61F166; Wed, 17 Apr 2024 09:25:30 +0900 (KST)
+Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip2.samsung.com
+ (KnoxPortal) with ESMTPA id
+ 20240417002530epsmtip270d94c204e390973e45d0d1eaca43c0a~G6ZQAkWX-0147501475epsmtip2e;
+ Wed, 17 Apr 2024 00:25:30 +0000 (GMT)
+From: "Jaehoon Chung" <jh80.chung@samsung.com>
+To: "'Greg Malysa'" <greg.malysa@timesys.com>, <u-boot@lists.denx.de>,
+ "'Peng Fan'" <peng.fan@nxp.com>
+Cc: "'Ian Roberts'" <ian.roberts@timesys.com>, "'Nathan Barrett-Morrison'"
+ <nathan.morrison@timesys.com>, "'Jonas	Karlman'" <jonas@kwiboo.se>, "'Kever
+ Yang'" <kever.yang@rock-chips.com>, "'Peter	Geis'" <pgwipeout@gmail.com>,
+ "'Sean Anderson'" <sean.anderson@seco.com>, "'Simon	Glass'"
+ <sjg@chromium.org>, "'Tom Rini'" <trini@konsulko.com>
+In-Reply-To: <20240326021819.770-1-greg.malysa@timesys.com>
+Subject: RE: [PATCH] mmc: sdhci: introduce adma_write_desc() hook to struct
+ sdhci_ops
+Date: Wed, 17 Apr 2024 09:25:30 +0900
+Message-ID: <002d01da905d$c0d03600$4270a200$@samsung.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="xGZsb+7qUKzNJ8Pc"
-Content-Disposition: inline
-In-Reply-To: <CAEfUkUJvct2JPEDmvv02L-EZ9u_BkVbg1T=rafwMfe=pobfibQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 7bit
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQKEAxbe5xUMRNPs0ZNxHEQLPRoWwAGNs8ZDsAxHlNA=
+Content-Language: ko
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFjrIJsWRmVeSWpSXmKPExsWy7bCmge5vMfk0g/Zd3BanP91gsXh5/x6T
+ xck3V1kstk3/yWZxeeFlRosfq76wWpx95m0x734Lk8W3LdsYLaZO2sxu8XZvJ7sDt8fshoss
+ Hjtn3WX3eHVgFbvHiQmXmDzO3tnB6LHx3Q4mj7+z9rN4PPv3jd1j7/YfTAGcUdk2GamJKalF
+ Cql5yfkpmXnptkrewfHO8aZmBoa6hpYW5koKeYm5qbZKLj4Bum6ZOUDnKimUJeaUAoUCEouL
+ lfTtbIryS0tSFTLyi0tslVILUnIKTAv0ihNzi0vz0vXyUkusDA0MjEyBChOyM/79/85WsMqm
+ YuKS+4wNjN8Muhg5OSQETCT6Hs9g6mLk4hAS2MEosXfaQ1YI5xOjxNtN7awgVWDO2v0ZMB2z
+ JvRBdexklGi+towRwnnJKNG2YjoTSBWbgJ7E/0ULmbsYOThEBDIkNrxhA6lhFrjFJHHnwGaw
+ Gk4Ba4mL04+C2cIC4RIzeo4wg9gsAqoSh+btYwGxeQUsJd7uX88EYQtKnJz5BCzOLCAvsf3t
+ HGaIixQkfj5dBnapiICVxL3Jm5ggakQkZne2MYMslhC4wCGxZ8dJRogGF4llRzugmoUlXh3f
+ wg5hS0m87G9jh2hoZpRYuuQgK4TTwyjxr+E6G0SVscT+pZOZQF5jFtCUWL9LH2Ibn8S7rz2s
+ IGEJAV6JjjYhiGoViUuvXzLBzL/75D8rhO0h8WD2f+YJjIqzkPw2C8lvs5D8MAth2QJGllWM
+ YqkFxbnpqcWGBSbw6E7Oz93ECE7LWhY7GOe+/aB3iJGJg/EQowQHs5IIb4uwbJoQb0piZVVq
+ UX58UWlOavEhRlNgaE9klhJNzgdmhrySeEMTSwMTMyNjEwtDM0Mlcd4zV8pShQTSE0tSs1NT
+ C1KLYPqYODilGph43E/59kyuci5M+De7wffuBN+WjTb7TKP4LrLv//6qV2Ga8YXLWxnme+yL
+ uKNiW3Pq8a/Z71+s8ZafKtc49faxzj29rc5Gee8j37je3nCkfKrfeZMJkUI/L3tIHeBuamuW
+ FIkP1FV8u+fJhJsH9nTHKgdrGM23dfdRfvHdqkV+X0i7jXOyuOXFvrk6l+X83m3t9pLJXXV2
+ 5+t/M89v7J4ls83rokFulmxkxjrliYXpJknCqpFzZr98Znm+QIQ5OfloqNzZD+tVn0zZnnjn
+ 2hODv93JmwzVyxv3/W2awf3IrsZqV3SwBe+6lBMtx01nTU17/9hi/bpDR2xkMt5qf1bQ0Xbb
+ vpDfSVMgUGrdhnVKLMUZiYZazEXFiQAC+VRuVAQAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrOIsWRmVeSWpSXmKPExsWy7bCSvO4vMfk0g0sPBS1Of7rBYvHy/j0m
+ i5NvrrJYbJv+k83i8sLLjBY/Vn1htTj7zNti3v0WJotvW7YxWkydtJnd4u3eTnYHbo/ZDRdZ
+ PHbOusvu8erAKnaPExMuMXmcvbOD0WPjux1MHn9n7WfxePbvG7vH3u0/mAI4o7hsUlJzMstS
+ i/TtErgy/v3/zlawyqZi4pL7jA2M3wy6GDk5JARMJGZN6GPqYuTiEBLYzijxct8jdoiElMTn
+ p1PZuhg5gGxhicOHi0HCQgLPGSXmzkkAsdkE9CT+L1rIDGKLCGRJdH/9wwwyh1ngAZPE6anP
+ 2CGG9jBKHNyzAayKU8Ba4uL0o0wgtrBAqMSkjW9YQGwWAVWJQ/P2gdm8ApYSb/evZ4KwBSVO
+ znwCFmcW0JZ4evMplC0vsf3tHGaIQxUkfj5dxgpxhZXEvcmbmCBqRCRmd7YxT2AUnoVk1Cwk
+ o2YhGTULScsCRpZVjKKpBcW56bnJBYZ6xYm5xaV56XrJ+bmbGMFxqRW0g3HZ+r96hxiZOBgP
+ MUpwMCuJ8LYIy6YJ8aYkVlalFuXHF5XmpBYfYpTmYFES51XO6UwREkhPLEnNTk0tSC2CyTJx
+ cEo1MPHPNHCrXvwqUmv9+a8/TgQfsVh/dLb+s0btlPOfAsX86j/ka8qdjP2+8eyL5+6Hp4eG
+ sVxiyDpv8HtRh695e3HQeY6IKY3mfOarF+tO1ki12N6tYZVprGFtWXDj3NWi5n9L6+0mKnLs
+ LnftX5PnvEzaVtp4zWOVL12FM7fytMsqvuCy+7TrXOjWQ1V/Vm/jPvK+7IPhz/OLNrzQXpvM
+ xd8purv7054tW3Yu1mfr8UjYuue9u0K4un7ZdQ3NjwZiepXsk8o7Lkesv6DwIV3ClcEw2/GM
+ yhtTw+WnpRVXyjj1X7qyQ1XDf+tpxl/tebpPTNc0aNYfWl2/MW56mCxTmuSe++/mHGn+ZSO6
+ 8tCfG0osxRmJhlrMRcWJADb+/y46AwAA
+X-CMS-MailID: 20240417002530epcas1p124ece203dc31bc75acd78b9313d426d4
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+CMS-TYPE: 101P
+DLP-Filter: Pass
+X-CFilter-Loop: Reflected
+X-CMS-RootMailID: 20240326022044epcas1p4c22b3f79421ca2ba3e93988d29016192
+References: <CGME20240326022044epcas1p4c22b3f79421ca2ba3e93988d29016192@epcas1p4.samsung.com>
+ <20240326021819.770-1-greg.malysa@timesys.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,61 +142,210 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---xGZsb+7qUKzNJ8Pc
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 16, 2024 at 08:22:23PM -0400, Raymond Mao wrote:
-> Hi Tom,
->=20
-> On Tue, 16 Apr 2024 at 15:22, Tom Rini <trini@konsulko.com> wrote:
->=20
-> > On Tue, Apr 16, 2024 at 12:00:07PM -0700, Raymond Mao wrote:
-> >
-> > > When MBEDTLS_LIB_CRYPTO is enabled, use the APIs of sha256 from
-> > > hash shim layer instead.
-> > >
-> > > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > > ---
-> > >  lib/efi_loader/efi_tcg2.c | 9 +++++++++
-> > >  1 file changed, 9 insertions(+)
-> >
-> > Why can't we have the abstraction be at the level where we include one
-> > library or the other so that the calling code doesn't change?
-> >
-> > Yes, we can do this - The only reason I added new hash APIs with "_mb" =
-is
-> just to
-> avoid vendor drivers that are using hash functions switch to MbedTLS with
-> this
-> patch set (As a [RFC], I was going to control all effects within the EFI
-> loader).
-> But if you think a complete switching has more benefits for estimation, I
-> can unify
-> all APIs between on/off MbedTLS.
+> -----Original Message-----
+> From: Greg Malysa <greg.malysa@timesys.com>
+> Sent: Tuesday, March 26, 2024 11:18 AM
+> To: u-boot@lists.denx.de; Peng Fan <peng.fan@nxp.com>; Jaehoon Chung <jh80.chung@samsung.com>
+> Cc: Ian Roberts <ian.roberts@timesys.com>; Nathan Barrett-Morrison <nathan.morrison@timesys.com>; Greg
+> Malysa <greg.malysa@timesys.com>; Jonas Karlman <jonas@kwiboo.se>; Kever Yang <kever.yang@rock-
+> chips.com>; Peter Geis <pgwipeout@gmail.com>; Sean Anderson <sean.anderson@seco.com>; Simon Glass
+> <sjg@chromium.org>; Tom Rini <trini@konsulko.com>
+> Subject: [PATCH] mmc: sdhci: introduce adma_write_desc() hook to struct sdhci_ops
+> 
+> From: Ian Roberts <ian.roberts@timesys.com>
+> 
+> Add this hook so that it can be overridden with driver specific
+> implementations. We also let the original sdhci_adma_write_desc()
+> accept &desc so that the function can set its new value. Then export
+> the function so that it could be reused by driver's specific
+> implementations.
+> 
+> The above is a port of Linux kernel commit 54552e4948cbf
+> 
+> In addition, allow drivers to allocate their own ADMA descriptor
+> tables if additional space is required.
+> 
+> Finally, fix the assignment of adma_addr to fix compiler warning
+> on 64-bit platforms that still use 32-bit DMA addressing.
+> 
+> Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+> Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+> Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
+> Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
 
-Yes, please, a complete switch.
+Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com> 
 
---=20
-Tom
+Best Regards,
+Jaehoon Chung
 
---xGZsb+7qUKzNJ8Pc
-Content-Type: application/pgp-signature; name="signature.asc"
+> 
+> ---
+> 
+> 
+> ---
+>  drivers/mmc/fsl_esdhc.c  |  2 +-
+>  drivers/mmc/sdhci-adma.c | 41 +++++++++++++++++++++++++++-------------
+>  drivers/mmc/sdhci.c      |  8 +++++---
+>  include/sdhci.h          | 12 ++++++++++--
+>  4 files changed, 44 insertions(+), 19 deletions(-)
+> 
+> diff --git a/drivers/mmc/fsl_esdhc.c b/drivers/mmc/fsl_esdhc.c
+> index d506666669..bd0671cc52 100644
+> --- a/drivers/mmc/fsl_esdhc.c
+> +++ b/drivers/mmc/fsl_esdhc.c
+> @@ -252,7 +252,7 @@ static void esdhc_setup_dma(struct fsl_esdhc_priv *priv, struct mmc_data *data)
+>  	    priv->adma_desc_table) {
+>  		debug("Using ADMA2\n");
+>  		/* prefer ADMA2 if it is available */
+> -		sdhci_prepare_adma_table(priv->adma_desc_table, data,
+> +		sdhci_prepare_adma_table(NULL, priv->adma_desc_table, data,
+>  					 priv->dma_addr);
+> 
+>  		adma_addr = virt_to_phys(priv->adma_desc_table);
+> diff --git a/drivers/mmc/sdhci-adma.c b/drivers/mmc/sdhci-adma.c
+> index 8213223d3f..8c38448b6a 100644
+> --- a/drivers/mmc/sdhci-adma.c
+> +++ b/drivers/mmc/sdhci-adma.c
+> @@ -9,9 +9,10 @@
+>  #include <malloc.h>
+>  #include <asm/cache.h>
+> 
+> -static void sdhci_adma_desc(struct sdhci_adma_desc *desc,
+> -			    dma_addr_t addr, u16 len, bool end)
+> +void sdhci_adma_write_desc(struct sdhci_host *host, void **next_desc,
+> +			   dma_addr_t addr, int len, bool end)
+>  {
+> +	struct sdhci_adma_desc *desc = *next_desc;
+>  	u8 attr;
+> 
+>  	attr = ADMA_DESC_ATTR_VALID | ADMA_DESC_TRANSFER_DATA;
+> @@ -19,17 +20,30 @@ static void sdhci_adma_desc(struct sdhci_adma_desc *desc,
+>  		attr |= ADMA_DESC_ATTR_END;
+> 
+>  	desc->attr = attr;
+> -	desc->len = len;
+> +	desc->len = len & 0xffff;
+>  	desc->reserved = 0;
+>  	desc->addr_lo = lower_32_bits(addr);
+>  #ifdef CONFIG_DMA_ADDR_T_64BIT
+>  	desc->addr_hi = upper_32_bits(addr);
+>  #endif
+> +
+> +	*next_desc += ADMA_DESC_LEN;
+> +}
+> +
+> +static inline void __sdhci_adma_write_desc(struct sdhci_host *host,
+> +					   void **desc, dma_addr_t addr,
+> +					   int len, bool end)
+> +{
+> +	if (host && host->ops && host->ops->adma_write_desc)
+> +		host->ops->adma_write_desc(host, desc, addr, len, end);
+> +	else
+> +		sdhci_adma_write_desc(host, desc, addr, len, end);
+>  }
+> 
+>  /**
+>   * sdhci_prepare_adma_table() - Populate the ADMA table
+>   *
+> + * @host:	Pointer to the sdhci_host
+>   * @table:	Pointer to the ADMA table
+>   * @data:	Pointer to MMC data
+>   * @addr:	DMA address to write to or read from
+> @@ -39,25 +53,26 @@ static void sdhci_adma_desc(struct sdhci_adma_desc *desc,
+>   * Please note, that the table size depends on CONFIG_SYS_MMC_MAX_BLK_COUNT and
+>   * we don't have to check for overflow.
+>   */
+> -void sdhci_prepare_adma_table(struct sdhci_adma_desc *table,
+> -			      struct mmc_data *data, dma_addr_t addr)
+> +void sdhci_prepare_adma_table(struct sdhci_host *host,
+> +			      struct sdhci_adma_desc *table,
+> +			      struct mmc_data *data, dma_addr_t start_addr)
+>  {
+> +	dma_addr_t addr = start_addr;
+>  	uint trans_bytes = data->blocksize * data->blocks;
+> -	uint desc_count = DIV_ROUND_UP(trans_bytes, ADMA_MAX_LEN);
+> -	struct sdhci_adma_desc *desc = table;
+> -	int i = desc_count;
+> +	void *next_desc = table;
+> +	int i = DIV_ROUND_UP(trans_bytes, ADMA_MAX_LEN);
+> 
+>  	while (--i) {
+> -		sdhci_adma_desc(desc, addr, ADMA_MAX_LEN, false);
+> +		__sdhci_adma_write_desc(host, &next_desc, addr,
+> +					ADMA_MAX_LEN, false);
+>  		addr += ADMA_MAX_LEN;
+>  		trans_bytes -= ADMA_MAX_LEN;
+> -		desc++;
+>  	}
+> 
+> -	sdhci_adma_desc(desc, addr, trans_bytes, true);
+> +	__sdhci_adma_write_desc(host, &next_desc, addr, trans_bytes, true);
+> 
+> -	flush_cache((dma_addr_t)table,
+> -		    ROUND(desc_count * sizeof(struct sdhci_adma_desc),
+> +	flush_cache((phys_addr_t)table,
+> +		    ROUND(next_desc - (void *)table,
+>  			  ARCH_DMA_MINALIGN));
+>  }
+> 
+> diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
+> index 0178ed8a11..65090348ae 100644
+> --- a/drivers/mmc/sdhci.c
+> +++ b/drivers/mmc/sdhci.c
+> @@ -111,7 +111,7 @@ static void sdhci_prepare_dma(struct sdhci_host *host, struct mmc_data *data,
+>  	}
+>  #if CONFIG_IS_ENABLED(MMC_SDHCI_ADMA)
+>  	else if (host->flags & (USE_ADMA | USE_ADMA64)) {
+> -		sdhci_prepare_adma_table(host->adma_desc_table, data,
+> +		sdhci_prepare_adma_table(host, host->adma_desc_table, data,
+>  					 host->start_addr);
+> 
+>  		sdhci_writel(host, lower_32_bits(host->adma_addr),
+> @@ -897,8 +897,10 @@ int sdhci_setup_cfg(struct mmc_config *cfg, struct sdhci_host *host,
+>  		       __func__);
+>  		return -EINVAL;
+>  	}
+> -	host->adma_desc_table = sdhci_adma_init();
+> -	host->adma_addr = (dma_addr_t)host->adma_desc_table;
+> +	if (!host->adma_desc_table) {
+> +		host->adma_desc_table = sdhci_adma_init();
+> +		host->adma_addr = virt_to_phys(host->adma_desc_table);
+> +	}
+> 
+>  #ifdef CONFIG_DMA_ADDR_T_64BIT
+>  	host->flags |= USE_ADMA64;
+> diff --git a/include/sdhci.h b/include/sdhci.h
+> index a1b74e3bd7..4bde7db5c7 100644
+> --- a/include/sdhci.h
+> +++ b/include/sdhci.h
+> @@ -291,6 +291,11 @@ struct sdhci_ops {
+>  	 * Return: 0 if successful, -ve on error
+>  	 */
+>  	int	(*set_enhanced_strobe)(struct sdhci_host *host);
+> +
+> +#if CONFIG_IS_ENABLED(MMC_SDHCI_ADMA)
+> +	void	(*adma_write_desc)(struct sdhci_host *host, void **desc,
+> +				   dma_addr_t addr, int len, bool end);
+> +#endif
+>  };
+> 
+>  #define ADMA_MAX_LEN	65532
+> @@ -526,8 +531,11 @@ extern const struct dm_mmc_ops sdhci_ops;
+>  #else
+>  #endif
+> 
+> +void sdhci_adma_write_desc(struct sdhci_host *host, void **next_desc,
+> +			   dma_addr_t addr, int len, bool end);
+>  struct sdhci_adma_desc *sdhci_adma_init(void);
+> -void sdhci_prepare_adma_table(struct sdhci_adma_desc *table,
+> -			      struct mmc_data *data, dma_addr_t addr);
+> +void sdhci_prepare_adma_table(struct sdhci_host *host,
+> +			      struct sdhci_adma_desc *table,
+> +			      struct mmc_data *data, dma_addr_t start_addr);
+> 
+>  #endif /* __SDHCI_HW_H */
+> --
+> 2.43.2
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYfFvMACgkQFHw5/5Y0
-tyy8xAv+M4SZOb8YKCFdPtzUFy/erR1go0BQ8s6KoC8kUOG4WrrI9aJIlVJgwqxQ
-pnjp9TChSC995zwBOx7nGbr9wgLXUSZqaFM9iA85WBRVcZM6Rppz1XZLIztOluEh
-zKU2dqibuy8Bl3RFCuCbvTIa1VCG/BVvVWHDt04KVdCBxiYjdIwhBhnYtmZDwLcP
-yn0mtDIC3GTfWfalTZCCPo1WkgI7mqAzHR0KPEGgA14OwyTqHilEMR5YNxV8mFCx
-RJvzPqNepTjKu6W3P1vGwkHknFYy13MS1cycfVaJnNAxCT+2S9ut/DcG0KnIb5O2
-WSm56ElqbUNcw9bJUOeclNAl2MAw2MprmCa3Yb2OfgHxCCwSUw6ERSWY9G/nOd4q
-RRIpspPSOrRwMwu/1NZRvsJkCsZc6HVDPAVh3g0uoXANNANhj7+er6yP/iV2FScZ
-ruuSerhCkAaPNq+yOcid+sHE7Z+UtCumlXJoAlYUJNan1Kl0ZV4ILoRo09YSvS0V
-V69HnJah
-=3R6r
------END PGP SIGNATURE-----
-
---xGZsb+7qUKzNJ8Pc--
