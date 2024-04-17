@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3494C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 07:45:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8264BC4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 07:51:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DCA08841D;
-	Wed, 17 Apr 2024 09:45:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id E61EA8844E;
+	Wed, 17 Apr 2024 09:51:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="UwS08BEs";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="rY92E6SN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81E1D8842B; Wed, 17 Apr 2024 09:45:15 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 622BD8844E; Wed, 17 Apr 2024 09:51:13 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 863E4882C4
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 09:45:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3265488459
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 09:51:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1713339909; x=1713944709; i=xypron.glpk@gmx.de;
- bh=gEyRWWixr+SHgKPsBYP6F3HIVvpo2AX8oSaqrvYoigk=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=UwS08BEsEScx6oU/13mLzSaZwVTzWM1qLvSjJ9OeZWrO9S5iFmrX3EB7vTS+635s
- PnDSahuPE4sgMHuYrecYqCcVUXpHNnQt2qARFMjuHwycjX7KbRS/y9NKLuSTi+jIh
- t9MoSpvffXN2JOgN5Vj945iwYuNc30qmmvdQQwhxBuwuFSCP3/F8yAjVwBpzAid0s
- roLOVQ4F7Flr6VaoLlYl+NJ3j3g6359XQgiFS0Ke6xtP7pDx35sGB6xiSj6s5CNXQ
- vThIxg6G7yF2Q5fpWkPzDEEGs3LoLl2wZgI7dUEejr38AxZluF20lSUG9yNElvBoW
- gIIRyiwuUCrphn4JtA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mq2nK-1sa8AB2ebi-00n696; Wed, 17
- Apr 2024 09:45:09 +0200
-Message-ID: <24c03e51-90f8-4918-8097-2a6ccd6ebf4e@gmx.de>
-Date: Wed, 17 Apr 2024 09:45:04 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43H7p08V023538;
+ Wed, 17 Apr 2024 02:51:00 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1713340260;
+ bh=Osuzt4NsCC99vWU/YMdtmYyS18AgB8sj5u4hopLk0jE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=rY92E6SNWfhCZVJcCTVI04y4NCiIUH+dX5nHpw+oH/IjGXGc76ASAfcydflrOac0I
+ MLEKv+c0EytGboiJZRaPXnPAlTewzEfw+xaRQYecLTr7O3FeCtKSxVoPwOySWMc3y8
+ CXomab2622QXAfbka771dBLziI3etc4M5ZLvWuzw=
+Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43H7p03t015010
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 17 Apr 2024 02:51:00 -0500
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 17
+ Apr 2024 02:50:59 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 17 Apr 2024 02:50:59 -0500
+Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
+ [172.24.227.220])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43H7otrl094262;
+ Wed, 17 Apr 2024 02:50:56 -0500
+Message-ID: <97f84067-ba36-47f6-befa-221be47a1d25@ti.com>
+Date: Wed, 17 Apr 2024 13:20:54 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] stm32mp: Reserve OPTEE area in EFI memory map
-To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Patrice Chotard
- <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
-References: <20240308101230.2595220-1-patrice.chotard@foss.st.com>
- <3512e31e-37db-4e03-b133-1914e29fa7ad@foss.st.com>
+Subject: Re: [PATCH 01/10] board: ti: am62x: Init DRAM size in R5/A53 SPL
 Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <3512e31e-37db-4e03-b133-1914e29fa7ad@foss.st.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:bhugLlrRkQeT3PjK8NIs5kzseL03riWHWLW/59BSfYixL67metj
- 5ZHL/T5HF1os3cH0tnBbA8LS7yfPH6BkTuekEdRHITyZNUyJkAJSduvy7dOD0tnafK7mjb8
- I4oJvzYq8mXHXFpnr3NevAe5weKrIkgzE7XDEiEsX9oJdtI+6nDYb8I/mZj6D/am/V4yfJM
- 7DZyQZr/QwEex18IFdlug==
-UI-OutboundReport: notjunk:1;M01:P0:YoEKvjLONCI=;vhmGq215kNaebWaqxAPFaxWn7TD
- 50lKcpoYrwNVP+HpqftU30SFYErKDMZ8kxyWh+3BepJDqF/84aNwSWo9nZoVMnAwqDYfIkKzP
- xjiPpg8r+zeALD0LeyEPwLnmveylRDr0BhRbPnXnoupN4Tgao3fS3l1GNn88TZfsXOq1QO87y
- cBwgWt5V/ue/YJthcK/4A7qpJO3Hc1tHHajn+CCnEhJuGZIb4ZL5N2JAlJNgtxdzMTp7SCdah
- A4B7ka1RObIhmQTu3Q8jXIqXt7GYF9mJTsnJ4N4uyEm2F+ngTX/Q2tLFp8om/VEAaubTxxyiU
- k9newgYMeQWOCSUCi+QWZkyB07GMSsal1Ec7vx04e97fuYZ8irAfqMcjv87DBmpvpqKTHiLU5
- KzlHCBBYm4gZbrchunKawC1TIJOInNO6mib+lrR/1L5IwCoDgoqUVKrSGH6gsMSf1f9ItiG6E
- 7qp65zWfDSEeMfy1QoktSJW8K7iEJd84pYq0UXKDXIeaThSiiWPE8m4IvWrCf/5f0l0V1XS0I
- fblw2StW3xLZJK5oolCMPRTWhV+/QNuotj8Y2QtXFi72wvz1St7nOKxEgwpnOG5/3dpZ3OTcj
- 8hGOYUAcDhP34fJ9k1+0lsoP+CChKLPeDATdOtqYhXK5VgwmsByigq6l91rc7QxxYXR3vUVhd
- v64QK1TSjWoCjj6kAXG80+xiD2UwfEd8X5p2FmvAL9iLJSB6tPt5pY+BZfjKP2CRDVRTeQrZ2
- t/JsjiL1TURJA3lCCzVmnU9RRrklo0yeQG8xFs8dB6nOvvT2ELejsEZ4jo/l1K9vhwcoEMyUi
- Bb1vauE8xlYXmNnBaPqc3RY0ZCcoABKr282K3HRzZJH0g=
+To: Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
+CC: <joe.hershberger@ni.com>, <simon.k.r.goldschmidt@gmail.com>, Siddharth
+ Vadapalli <s-vadapalli@ti.com>, <sjg@chromium.org>,
+ <marex@denx.de>, <nm@ti.com>, <afd@ti.com>, <vigneshr@ti.com>,
+ <u-boot@lists.denx.de>, <dannenberg@ti.com>, <srk@ti.com>
+References: <20240112064759.1801600-1-s-vadapalli@ti.com>
+ <20240112064759.1801600-2-s-vadapalli@ti.com>
+ <20240112132607.GO1610741@bill-the-cat>
+ <a1d7ca85-8723-4d73-8e1c-357c6aa6294f@ti.com>
+ <20240120164141.GA3652023@bill-the-cat>
+ <48c63fc4-9f06-4066-b206-a0a548936dcd@ti.com>
+ <892b473b-5b76-4e44-af27-52d50cb24877@ti.com>
+ <20240411220741.GJ2493117@bill-the-cat>
+ <2406c7be-114c-4082-9c14-1cd59917b9d8@ti.com>
+ <20240416170027.GQ1054907@bill-the-cat>
+From: Chintan Vankar <c-vankar@ti.com>
+In-Reply-To: <20240416170027.GQ1054907@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,88 +92,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 17.04.24 09:25, Patrick DELAUNAY wrote:
-> Hi,
->
-> On 3/8/24 11:12, Patrice Chotard wrote:
->> Since commit 7b78d6438a2b3 ("efi_loader: Reserve unaccessible memory")
->> memory region above ram_top is tagged in EFI memory map as
->> EFI_BOOT_SERVICES_DATA.
->> In case of STM32MP1 platform, above ram_top, there is one reserved-memo=
-ry
->> region tagged "no-map" dedicated to OP-TEE (addr=3Dde000000 size=3D2000=
-000).
->>
->> Before booting kernel, EFI memory map is first built, the OPTEE region =
-is
->> tagged as EFI_BOOT_SERVICES_DATA and when reserving LMB, the tag LMB_NO=
-NE
->> is used.
->>
->> Then after, the LMB are completed by boot_fdt_add_mem_rsv_regions()
->> which try to add again the same OPTEE region (addr=3Dde000000 size=3D20=
-00000)
->> but now with LMB_NOMAP tag which produces the following error message :
->>
->> "ERROR: reserving fdt memory region failed (addr=3Dde000000 size=3D2000=
-000
->> flags=3D4)"
->>
->> To avoid this, OPTEE area shouldn't be used by EFI, so we need to mark
->> it as reserved.
->>
->> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->> ---
->>
->> =C2=A0 arch/arm/mach-stm32mp/dram_init.c | 12 ++++++++++++
->> =C2=A0 1 file changed, 12 insertions(+)
->>
->> diff --git a/arch/arm/mach-stm32mp/dram_init.c
->> b/arch/arm/mach-stm32mp/dram_init.c
->> index fb1208fc5d5..f67f54f2ae0 100644
->> --- a/arch/arm/mach-stm32mp/dram_init.c
->> +++ b/arch/arm/mach-stm32mp/dram_init.c
->> @@ -7,6 +7,7 @@
->> =C2=A0 #include <common.h>
->> =C2=A0 #include <dm.h>
->> +#include <efi_loader.h>
->> =C2=A0 #include <image.h>
->> =C2=A0 #include <init.h>
->> =C2=A0 #include <lmb.h>
->> @@ -75,3 +76,14 @@ phys_addr_t board_get_usable_ram_top(phys_size_t
->> total_size)
->> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return reg + size;
->> =C2=A0 }
->> +
->> +void efi_add_known_memory(void)
->> +{
->> +=C2=A0=C2=A0=C2=A0 if (IS_ENABLED(CONFIG_EFI_LOADER))
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Memory over ram_top=
- is reserved to OPTEE.
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Declare to EFI only=
- memory area below ram_top
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 efi_add_memory_map(gd->ram_=
-base, gd->ram_top - gd->ram_base,
->> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 EFI_CONVENTIONAL_MEMORY);
 
-With this change the EFI memory map passed to the operating system will
-not contain any memory above gd->ram_top. Is this really your intent?
-Don't you have any memory above 0xe0000000?
 
-Best regards
-
-Heinrich
-
->> +}
->
->
->
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->
-> Thanks
-> Patrick
->
+On 16/04/24 22:30, Tom Rini wrote:
+> On Tue, Apr 16, 2024 at 05:52:58PM +0530, Chintan Vankar wrote:
+>>
+>>
+>> On 12/04/24 03:37, Tom Rini wrote:
+>>> On Wed, Apr 03, 2024 at 06:18:01PM +0530, Chintan Vankar wrote:
+>>>>
+>>>>
+>>>> On 22/01/24 10:11, Siddharth Vadapalli wrote:
+>>>>>
+>>>>>
+>>>>> On 20/01/24 22:11, Tom Rini wrote:
+>>>>>> On Mon, Jan 15, 2024 at 01:42:51PM +0530, Siddharth Vadapalli wrote:
+>>>>>>> Hello Tom,
+>>>>>>>
+>>>>>>> On 12/01/24 18:56, Tom Rini wrote:
+>>>>>
+>>>>> ...
+>>>>>
+>>>>>>>> The list of conditionals in common/spl/spl.c::board_init_r() should be
+>>>>>>>> updated and probably use SPL_NET as the option to check for.
+>>>>>>>
+>>>>>>> Thank you for reviewing the patch and pointing this out. I wasn't aware of it. I
+>>>>>>> assume that you are referring to the following change:
+>>>>>>>
+>>>>>>>            if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HANDOFF) ||
+>>>>>>> -           IS_ENABLED(CONFIG_SPL_ATF))
+>>>>>>> +           IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(CONFIG_SPL_NET))
+>>>>>>>                    dram_init_banksize();
+>>>>>>>
+>>>>>>> I shall replace the current patch with the above change in the v2 series. Since
+>>>>>>> this is in the common section, is there a generic reason I could provide in the
+>>>>>>> commit message rather than the existing commit message which seems to be board
+>>>>>>> specific? Also, I hope that the above change will not cause regressions for
+>>>>>>> other non-TI devices. Please let me know.
+>>>>>>
+>>>>>> Yes, that's the area, and just note that networking also requires the
+>>>>>> DDR to be initialized.
+>>>>>>
+>>>>>
+>>>>> Thank you for confirming and providing your suggestion for the contents of the
+>>>>> commit message.
+>>>>>
+>>>> Following Tom's Suggestion of adding CONFIG_SPL_NET in common/spl/spl.c
+>>>> "dram_init_banksize()", the issue of fetching a file at SPL stage seemed
+>>>> to be fixed. However the commit "ba20b2443c29", which sets gd->ram_top
+>>>> for the very first time in "spl_enable_cache()" results in
+>>>> "arch_lmb_reserve()" function reserving memory region from Stack pointer
+>>>> at "0x81FFB820" to gd->ram_top pointing to "0x100000000". Previously
+>>>> when gd->ram_top was zero "arch_lmb_reserve()" was noop. Now using TFTP
+>>>> to fetch U-Boot image at SPL stage results in "tftp_init_load_addr()"
+>>>> function call that invokes "arch_lmb_reserve()" function, which reserves
+>>>> entire memory starting from Stack Pointer to gd->ram_top leaving no
+>>>> space to load U-Boot image via TFTP since TFTP loads files at pre
+>>>> configured memory address at "0x82000000".
+>>>>
+>>>> As a workaround for this issue, one solution we can propose is to
+>>>> disable the checks "lmb_get_free_size()" at SPL and U-Boot stage. For
+>>>> that we can define a new config option for LMB reserve checks as
+>>>> "SPL_LMB". This config will be enable by default for the backword
+>>>> compatibility and disable for our use case at SPL and U-Boot stage.
+>>>
+>>> The problem here is that we need LMB for booting an OS, which is
+>>> something we'll want in SPL in non-cortex-R cases too, which means this
+>>> platform, so that's a no-go. I think you need to dig harder and see if
+>>> you can correct the logic somewhere so that we don't over reserve?
+>>>
+>> Since this issue is due to function call "lmb_init_and_reserve()"
+>> function invoked from "tftp_init_load_addr()" function. This function
+>> is defined by Simon in commit "a156c47e39ad", which fixes
+>> "CVE-2018-18439" to prevent overwriting reserved memory. Simon, can you
+>> explain why do we need to call "lmb_init_and_reserve()" function here ?
+> 
+> This is indeed a tricky area which is why Sughosh is looking in to
+> trying to re-work the LMB mechanic and we've had a few long threads
+> about it as well.
+> 
+> I've honestly forgotten the use case you have here, can you please
+> remind us?
+> 
+We are trying to boot AM62x using Ethernet for which we need to load
+binary files at SPL and U-Boot stage using TFTP. To store the file we
+need a free memory in RAM, specifically we are storing these files at
+0x82000000. But we are facing an issue while loading the file since
+the memory area having an address 0x82000000 is reserved due to
+"lmb_init_and_reserve()" function call. This function is called in
+"tftp_init_load_addr()" function which is getting called exactly before
+we are trying to get the free memory area by calling
+"lmb_get_free_size()".
 
