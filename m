@@ -4,87 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DAE0C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 12:18:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8146FC4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 12:22:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 331C288369;
-	Wed, 17 Apr 2024 14:18:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EC0648845C;
+	Wed, 17 Apr 2024 14:22:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LWtBgPiZ";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="LFEW60RX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74F428844A; Wed, 17 Apr 2024 14:18:45 +0200 (CEST)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E977E8845E; Wed, 17 Apr 2024 14:22:21 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D18288369
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 14:18:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C68E888453
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 14:22:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-516d1ecaf25so7068092e87.2
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 05:18:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713356322; x=1713961122; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IlEB52RoYdngmhMY3vUE9U8Z1ZUxjxRP9CCYrkvU/AM=;
- b=LWtBgPiZVODqWyhdhRyuD4L+CR6HiWjrh2Qizh1KRIZ8Txnfz2Z8EH/rvjo6Ewml9/
- ifUBRH/WtbbYf5Gzxofch0Xycno1tuPReyvhnrQUd0gU9TxkXkjvLKsiuDx50rfnuR8M
- xRccKTHfPo5/DgAIlEIG36KjFUUUQbmDq8+BWhcRZTtxv51igGqtFYcpubsHIi7zvC+i
- jxO4B8afAbjjoz1AgxF6ntOuCaqOuq9hAXTWxqvCSQpBq49eYdvPJ9189a4m+P8wgvoW
- yzOBKkm49UDrHpHOpGtUFAFORgXSTDefqwgpo9JM0qo+y7rOSjv78kzMtzTivh6QyOMG
- VyMw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713356322; x=1713961122;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=IlEB52RoYdngmhMY3vUE9U8Z1ZUxjxRP9CCYrkvU/AM=;
- b=n3oyFJSvtkRZujO8MG3dHBuMNrSdN1i1iWcA5VY1WPnJR3eYIMoitCIl0HoPoG+7c4
- 7jF2OLhWyV/vhufopAuVxzhlhhREDlNDb0zuVEpDgB9IDIZG6rsD5kZYzEBBw6opANFp
- Hfx9QbuHvkZTjKjUXNHGF5em6A4EQTDHnaRpLynK1BXrfubb5hE7WlMkVi5YBz2vhAx/
- DIuaAqTBPQ1buqt4hm536HqJiXZx3ZGPw7AobpdxN35QVEM6ZYGYlL2SSYzSvSrQdKKg
- 9mDJaIwFZCnvWYLhbnRkDjAnuPvDI7QSOqgNJV4CpgB4FiwFr+FKJZJZBLAa3WBpeO/d
- 1LNg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW6XYHW07xmOcajMhKUSX2e97IrOlmesP5eMpnZ9dbGrQRX1jY/DxERKr9yJMhNgL+fTZ6IgJoZYZbkMfUj53ri9n/r+g==
-X-Gm-Message-State: AOJu0YzaCTnMHrz3LTC/cpny0GKESbZBtOVYVYeyC8U8+xdYYfHlVQr8
- JZgYAc4wOO7oE2roChwXCxN0g7UvWSd+a7Ex3IiydiZKsdYCt3hkgySc/494VHrDnatNEJI7DSz
- fadCpCGCx7qaPlO15ntGIrUjxFAGzaFmfUgP4Xg==
-X-Google-Smtp-Source: AGHT+IH8ZKVwysycbSjORh3YqXQ8OH43dRXv+37pVFx2ndtiyWVXMbXhlto/Fl5lGEStGFi3W1oiPyNSQ3yT5r5TGBE=
-X-Received: by 2002:a05:6512:691:b0:518:f8a6:9f3c with SMTP id
- t17-20020a056512069100b00518f8a69f3cmr5610850lfe.58.1713356322340; Wed, 17
- Apr 2024 05:18:42 -0700 (PDT)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1713356522; x=1713961322; i=xypron.glpk@gmx.de;
+ bh=/3dhnpbao8GOmNfu5Dg+EUz3+EKlPG9JY9ZAnT9C7sY=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=LFEW60RXZh+RShZ7Odi2NLIDpp6rNFCnqZRD+EabuklBCKrWxcImfXUux59lna7f
+ WR6YQrXruqqpvARkvvs+GLQfr8PvTFT6tWOllGw/2QJ6CkrNtYLLuaPZqGvnU/8u1
+ 1LRX9QzB5fPHqybuL/7URHCIMvvgwoLRpVyv2wkf5wEE9V1vgwa0Ba/nCSaRRzr37
+ 6RYzKgavFCvElXInJ+fh7cd3cGgIl3Os8Bs94/j7i1ZAYParFw5FpsCTKEq7y1Dfs
+ uoTQ8x7zx3XARwpGWd2qaH7Lq3NeAvfUXP74CF3jdq4ISn8hSbS7c+Ai0li8uqvk3
+ rGo2Ds7PDR7x16+UzQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MrhUK-1sZN7e2Xsi-00ne0a; Wed, 17
+ Apr 2024 14:22:02 +0200
+Message-ID: <21bbc05c-bf07-406f-a16a-e7655f8958ea@gmx.de>
+Date: Wed, 17 Apr 2024 14:22:00 +0200
 MIME-Version: 1.0
-References: <20240112064759.1801600-1-s-vadapalli@ti.com>
- <20240112064759.1801600-2-s-vadapalli@ti.com>
- <20240112132607.GO1610741@bill-the-cat>
- <a1d7ca85-8723-4d73-8e1c-357c6aa6294f@ti.com>
- <20240120164141.GA3652023@bill-the-cat>
- <48c63fc4-9f06-4066-b206-a0a548936dcd@ti.com>
- <892b473b-5b76-4e44-af27-52d50cb24877@ti.com>
- <20240411220741.GJ2493117@bill-the-cat>
- <2406c7be-114c-4082-9c14-1cd59917b9d8@ti.com>
- <20240416170027.GQ1054907@bill-the-cat>
- <97f84067-ba36-47f6-befa-221be47a1d25@ti.com>
-In-Reply-To: <97f84067-ba36-47f6-befa-221be47a1d25@ti.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Wed, 17 Apr 2024 17:48:31 +0530
-Message-ID: <CADg8p97udLbFvbZ_FZf9Hfwg3R4=YJMNWrAtqvu97mL7vVYREQ@mail.gmail.com>
-Subject: Re: [PATCH 01/10] board: ti: am62x: Init DRAM size in R5/A53 SPL
-To: Chintan Vankar <c-vankar@ti.com>
-Cc: Tom Rini <trini@konsulko.com>, joe.hershberger@ni.com, 
- simon.k.r.goldschmidt@gmail.com, Siddharth Vadapalli <s-vadapalli@ti.com>,
- sjg@chromium.org, 
- marex@denx.de, nm@ti.com, afd@ti.com, vigneshr@ti.com, u-boot@lists.denx.de, 
- dannenberg@ti.com, srk@ti.com
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 4/4] efi_selftest: add tests for setvariableRT
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
+ quic_llindhol@quicinc.com, ardb@kernel.org, pbrobinson@gmail.com,
+ pjones@redhat.com, Tom Rini <trini@konsulko.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ AKASHI Takahiro <takahiro.akashi@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Janne Grunau <j@jannau.net>, Simon Glass <sjg@chromium.org>,
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sam Edwards <CFSworks@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de,
+ kettenis@openbsd.org
+References: <20240417101928.119115-1-ilias.apalodimas@linaro.org>
+ <20240417101928.119115-5-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20240417101928.119115-5-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:FFZUechPLDHATHisdquZS89MvuvgDh/MixZPfsaVpctRavYjupc
+ oaTvv0aUVbFC9xWAZW3chKEs5SymjcHaxhG4URS/EIsF1KQlzB/KUN8sptOkJ72KxbSUy70
+ tOBHbtGb+P2//PiW6L3kZ7RCi4gR0Luv9+cabG6R+vO07uWkapKKP7WctSeYZ8j21zXOm5l
+ iiMPv+1/i0njr5axNK+cA==
+UI-OutboundReport: notjunk:1;M01:P0:O6DTa/W6E4k=;Im5OlOrVddgQtsKJdJRFSpJtGvI
+ ot4wAE6Uj0WQZhbLjt9DKEsTN8Bi6tUasWuaahVlHwWcGJcA560DMSlpoGfQWQrsLZc34dEUI
+ KuPb1hZQI4PxHSKiVbymPgtoY/BxLonaDD1YucIO75+xVyuksrdUGDc5+6gZh1EifMqA9Caxf
+ 5uJ8yQaqfC0mN1B8Mjo7Ft5nAqxOcXJ3PbdiKlwi44Tj5qMxCF6q+VOTuYfpxi9vW9edG8s1l
+ dWYpbEBs6Y9R5davNFx2bYAdIl700sJK7AsJ1HwA4AcvrdcXCR9UOpy8BywlTUQIjx2Stg58l
+ HMmXnUhgEBxNfRwFjI4Q/wkcWwrTdNHnYAt0J1b5qFruUCl1NBkPqmIe5uhWcBbgxKnaYx7PY
+ kem3BmBwHyFliK+06ijf/oughMWyehJ23Xy888F6pHrJckFaiBbMY78la03vf5Op4Mz25/9yw
+ RuCuc7/aW6BfpCCN1/I70AVVaRacyO6kQMxZbgowi5zWbMXA4pfx3SbrugoKeT87YRxtN/u0/
+ +19PSGD+3TUvXe0o/QGse5fpTIjhm9LE3PPrJWp6y6MByQWVu1phFyNPGiTtu/aECJU9HCx8E
+ dZ6mnsRNjI22vbrPDshD0vyVoPW7NUrLudH5hZdtAQa982E2emIE2xcUVGX83CgxK1sCLruQH
+ govKMhLN31gPMaE/5HbI4iPSokNnd8QB90W0pwJJ4vZnW4M88wpcbvlvkK1ZGqj/+zTlsLaUV
+ F0bU5RlnnS9zuOMMA6aRXJ2dlLuQlbGLmpyrpdtM6kL1V97wj8hHhDA2iapviqb1NbqpZ0vd9
+ 9bIK2LJ/poaI7i05eyjjn87CtRkbQR2ZtR2S6DLVUuSgg=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,107 +103,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-hi Chintan,
-
-On Wed, 17 Apr 2024 at 13:21, Chintan Vankar <c-vankar@ti.com> wrote:
+On 17.04.24 12:19, Ilias Apalodimas wrote:
+> Since we support SetVariableRT now add the relevant tests
 >
+> - Search for the RTStorageVolatile and VarToFile variables after EBS
+> - Try to update with invalid variales (BS, RT only)
+> - Try to write a variable bigger than our backend storage
+> - Write a variable that fits and check VarToFile has been updated
+>    correclty
+> - Append to the variable and check VarToFile changes
+> - Try to delete VarToFile which is write protected
 >
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>   .../efi_selftest_variables_runtime.c          | 103 ++++++++++++++++++
+>   1 file changed, 103 insertions(+)
 >
-> On 16/04/24 22:30, Tom Rini wrote:
-> > On Tue, Apr 16, 2024 at 05:52:58PM +0530, Chintan Vankar wrote:
-> >>
-> >>
-> >> On 12/04/24 03:37, Tom Rini wrote:
-> >>> On Wed, Apr 03, 2024 at 06:18:01PM +0530, Chintan Vankar wrote:
-> >>>>
-> >>>>
-> >>>> On 22/01/24 10:11, Siddharth Vadapalli wrote:
-> >>>>>
-> >>>>>
-> >>>>> On 20/01/24 22:11, Tom Rini wrote:
-> >>>>>> On Mon, Jan 15, 2024 at 01:42:51PM +0530, Siddharth Vadapalli wrote:
-> >>>>>>> Hello Tom,
-> >>>>>>>
-> >>>>>>> On 12/01/24 18:56, Tom Rini wrote:
-> >>>>>
-> >>>>> ...
-> >>>>>
-> >>>>>>>> The list of conditionals in common/spl/spl.c::board_init_r() should be
-> >>>>>>>> updated and probably use SPL_NET as the option to check for.
-> >>>>>>>
-> >>>>>>> Thank you for reviewing the patch and pointing this out. I wasn't aware of it. I
-> >>>>>>> assume that you are referring to the following change:
-> >>>>>>>
-> >>>>>>>            if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HANDOFF) ||
-> >>>>>>> -           IS_ENABLED(CONFIG_SPL_ATF))
-> >>>>>>> +           IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(CONFIG_SPL_NET))
-> >>>>>>>                    dram_init_banksize();
-> >>>>>>>
-> >>>>>>> I shall replace the current patch with the above change in the v2 series. Since
-> >>>>>>> this is in the common section, is there a generic reason I could provide in the
-> >>>>>>> commit message rather than the existing commit message which seems to be board
-> >>>>>>> specific? Also, I hope that the above change will not cause regressions for
-> >>>>>>> other non-TI devices. Please let me know.
-> >>>>>>
-> >>>>>> Yes, that's the area, and just note that networking also requires the
-> >>>>>> DDR to be initialized.
-> >>>>>>
-> >>>>>
-> >>>>> Thank you for confirming and providing your suggestion for the contents of the
-> >>>>> commit message.
-> >>>>>
-> >>>> Following Tom's Suggestion of adding CONFIG_SPL_NET in common/spl/spl.c
-> >>>> "dram_init_banksize()", the issue of fetching a file at SPL stage seemed
-> >>>> to be fixed. However the commit "ba20b2443c29", which sets gd->ram_top
-> >>>> for the very first time in "spl_enable_cache()" results in
-> >>>> "arch_lmb_reserve()" function reserving memory region from Stack pointer
-> >>>> at "0x81FFB820" to gd->ram_top pointing to "0x100000000". Previously
-> >>>> when gd->ram_top was zero "arch_lmb_reserve()" was noop. Now using TFTP
-> >>>> to fetch U-Boot image at SPL stage results in "tftp_init_load_addr()"
-> >>>> function call that invokes "arch_lmb_reserve()" function, which reserves
-> >>>> entire memory starting from Stack Pointer to gd->ram_top leaving no
-> >>>> space to load U-Boot image via TFTP since TFTP loads files at pre
-> >>>> configured memory address at "0x82000000".
-> >>>>
-> >>>> As a workaround for this issue, one solution we can propose is to
-> >>>> disable the checks "lmb_get_free_size()" at SPL and U-Boot stage. For
-> >>>> that we can define a new config option for LMB reserve checks as
-> >>>> "SPL_LMB". This config will be enable by default for the backword
-> >>>> compatibility and disable for our use case at SPL and U-Boot stage.
-> >>>
-> >>> The problem here is that we need LMB for booting an OS, which is
-> >>> something we'll want in SPL in non-cortex-R cases too, which means this
-> >>> platform, so that's a no-go. I think you need to dig harder and see if
-> >>> you can correct the logic somewhere so that we don't over reserve?
-> >>>
-> >> Since this issue is due to function call "lmb_init_and_reserve()"
-> >> function invoked from "tftp_init_load_addr()" function. This function
-> >> is defined by Simon in commit "a156c47e39ad", which fixes
-> >> "CVE-2018-18439" to prevent overwriting reserved memory. Simon, can you
-> >> explain why do we need to call "lmb_init_and_reserve()" function here ?
-> >
-> > This is indeed a tricky area which is why Sughosh is looking in to
-> > trying to re-work the LMB mechanic and we've had a few long threads
-> > about it as well.
-> >
-> > I've honestly forgotten the use case you have here, can you please
-> > remind us?
-> >
-> We are trying to boot AM62x using Ethernet for which we need to load
-> binary files at SPL and U-Boot stage using TFTP. To store the file we
-> need a free memory in RAM, specifically we are storing these files at
-> 0x82000000. But we are facing an issue while loading the file since
-> the memory area having an address 0x82000000 is reserved due to
-> "lmb_init_and_reserve()" function call. This function is called in
-> "tftp_init_load_addr()" function which is getting called exactly before
-> we are trying to get the free memory area by calling
-> "lmb_get_free_size()".
+> diff --git a/lib/efi_selftest/efi_selftest_variables_runtime.c b/lib/efi=
+_selftest/efi_selftest_variables_runtime.c
+> index 4c9405c0a7c7..e492b50a43c2 100644
+> --- a/lib/efi_selftest/efi_selftest_variables_runtime.c
+> +++ b/lib/efi_selftest/efi_selftest_variables_runtime.c
+> @@ -10,6 +10,7 @@
+>    */
+>
+>   #include <efi_selftest.h>
+> +#include <efi_variable.h>
+>
+>   #define EFI_ST_MAX_DATA_SIZE 16
+>   #define EFI_ST_MAX_VARNAME_SIZE 40
+> @@ -17,6 +18,8 @@
+>   static struct efi_boot_services *boottime;
+>   static struct efi_runtime_services *runtime;
+>   static const efi_guid_t guid_vendor0 =3D EFI_GLOBAL_VARIABLE_GUID;
+> +static const efi_guid_t __efi_runtime_data efi_rt_var_guid =3D
+> +						U_BOOT_EFI_RT_VAR_FILE_GUID;
+>
+>   /*
+>    * Setup unit test.
+> @@ -45,11 +48,14 @@ static int execute(void)
+>   	u32 attr;
+>   	u8 v[16] =3D {0x5d, 0xd1, 0x5e, 0x51, 0x5a, 0x05, 0xc7, 0x0c,
+>   		    0x35, 0x4a, 0xae, 0x87, 0xa5, 0xdf, 0x0f, 0x65,};
+> +	u8 v2[CONFIG_EFI_VAR_BUF_SIZE];
+>   	u8 data[EFI_ST_MAX_DATA_SIZE];
+> +	u8 data2[CONFIG_EFI_VAR_BUF_SIZE];
+>   	u16 varname[EFI_ST_MAX_VARNAME_SIZE];
+>   	efi_guid_t guid;
+>   	u64 max_storage, rem_storage, max_size;
+>
+> +	memset(v2, 0x1, sizeof(v2));
+>   	ret =3D runtime->query_variable_info(EFI_VARIABLE_BOOTSERVICE_ACCESS,
+>   					   &max_storage, &rem_storage,
+>   					   &max_size);
+> @@ -63,10 +69,107 @@ static int execute(void)
+>   				    EFI_VARIABLE_RUNTIME_ACCESS,
+>   				    3, v + 4);
+>   	if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
+> +		efi_uintn_t prev_len, delta;
+> +
+>   		if (ret !=3D EFI_INVALID_PARAMETER) {
+>   			efi_st_error("SetVariable failed\n");
+>   			return EFI_ST_FAILURE;
+>   		}
+> +
+> +		len =3D sizeof(data);
+> +		ret =3D runtime->get_variable(u"RTStorageVolatile",
+> +					    &efi_rt_var_guid,
+> +					    &attr, &len, data);
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			efi_st_error("GetVariable failed\n");
+> +			return EFI_ST_FAILURE;
+> +		}
+> +
+> +		len =3D sizeof(data2);
+> +		ret =3D runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
+> +					    &attr, &len, data2);
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			efi_st_error("GetVariable failed\n");
+> +			return EFI_ST_FAILURE;
+> +		}
+> +		/*
+> +		 * VarToFile will size must change once a variable is inserted
+> +		 * Store it now, we'll use it later
+> +		 */
+> +		prev_len =3D len;
+> +		ret =3D runtime->set_variable(u"efi_st_var0", &guid_vendor0,
+> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> +					    EFI_VARIABLE_RUNTIME_ACCESS |
+> +					    EFI_VARIABLE_NON_VOLATILE,
+> +					    sizeof(v2),
+> +					    v2);
+> +		/*
+> +		 * This will try to update VarToFile as well and must fail,
+> +		 * without changing or deleting VarToFile
+> +		 */
+> +		if (ret !=3D EFI_OUT_OF_RESOURCES) {
+> +			efi_st_error("SetVariable failed\n");
+> +			return EFI_ST_FAILURE;
+> +		}
+> +		len =3D sizeof(data2);
+> +		ret =3D runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
+> +					    &attr, &len, data2);
+> +		if (ret !=3D EFI_SUCCESS || prev_len !=3D len) {
+> +			efi_st_error("Get/SetVariable failed\n");
+> +			return EFI_ST_FAILURE;
+> +		}
+> +
+> +		/* SetVariableRT updates VarToFile with efi_st_var0 */
+> +		ret =3D runtime->set_variable(u"efi_st_var0", &guid_vendor0,
+> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> +					    EFI_VARIABLE_RUNTIME_ACCESS |
+> +					    EFI_VARIABLE_NON_VOLATILE,
+> +					    sizeof(v), v);
 
-I have no idea about your platform but I was wondering if there is any
-particular importance of the load address of 0x82000000? It looks as
-though the current location of the SP when arch_lmb_reserve() gets
-called means that the load address is getting reserved for the U-Boot
-image. Do you not have the option of loading the image at a lower
-address instead?
+It is fine to test with variable name size (24) and variable value size
+(16) both being multiples of 8. But this does not cover the generic case.
 
--sughosh
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			efi_st_error("SetVariable failed\n");
+> +			return EFI_ST_FAILURE;
+> +		}
+> +		len =3D sizeof(data2);
+> +		delta =3D 2 * (u16_strlen(u"efi_st_var0") + 1) + sizeof(v) +
+> +			sizeof(struct efi_var_entry);
+
+In the file all variable are stored at 8 byte aligned positions.
+I am missing ALIGN(,8) here.
+
+> +		ret =3D runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
+> +					    &attr, &len, data2);
+> +		if (ret !=3D EFI_SUCCESS || prev_len + delta !=3D len) {
+> +			efi_st_error("Get/SetVariable failed\n");
+> +			return EFI_ST_FAILURE;
+> +		}
+
+We should check the header fields of VarToFile (reserved, magic, length,
+crc32), e.g.
+
+struct efi_var_file *hdr =3D (void *)data2;
+if (memcmp(hdr->magic, EFI_VAR_FILE_MAGIC, 8) ||
+     len !=3D ALIGN(hdr->length + sizeof(hdr), 8) ||
+     ... )
+
+> +
+> +		/* append on an existing variable will updateVarToFile */
+> +		ret =3D runtime->set_variable(u"efi_st_var0", &guid_vendor0,
+> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> +					    EFI_VARIABLE_RUNTIME_ACCESS |
+> +					    EFI_VARIABLE_APPEND_WRITE |
+> +					    EFI_VARIABLE_NON_VOLATILE,
+> +					    sizeof(v), v);
+
+How about just appending 1 byte when using EFI_VARIABLE_APPEND_WRITE and
+checking that the delta here too?
+
+Best regards
+
+Heinrich
+
+> +		if (ret !=3D EFI_SUCCESS) {
+> +			efi_st_error("SetVariable failed\n");
+> +			return EFI_ST_FAILURE;
+> +		}
+> +		prev_len =3D len;
+> +		delta =3D sizeof(v);
+> +		len =3D sizeof(data2);
+> +		ret =3D runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
+> +					    &attr, &len, data2);
+> +		if (ret !=3D EFI_SUCCESS || prev_len + delta !=3D len) {
+> +			efi_st_error("Get/SetVariable failed\n");
+> +			return EFI_ST_FAILURE;
+> +		}
+> +
+> +		/* Variables that are BS, RT and volatile are RO after EBS */
+> +		ret =3D runtime->set_variable(u"VarToFile", &efi_rt_var_guid,
+> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
+> +					    EFI_VARIABLE_RUNTIME_ACCESS |
+> +					    EFI_VARIABLE_NON_VOLATILE,
+> +					    sizeof(v), v);
+> +		if (ret !=3D EFI_WRITE_PROTECTED) {
+> +			efi_st_error("Get/SetVariable failed\n");
+> +			return EFI_ST_FAILURE;
+> +		}
+>   	} else {
+>   		if (ret !=3D EFI_UNSUPPORTED) {
+>   			efi_st_error("SetVariable failed\n");
+
