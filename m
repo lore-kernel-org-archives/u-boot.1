@@ -4,64 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E35EDC4345F
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 01:28:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60672C10F16
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 01:41:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88C098840D;
-	Wed, 17 Apr 2024 03:28:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9512988432;
+	Wed, 17 Apr 2024 03:41:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="o9fU+hDG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TTpFbhcb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7DB38841D; Wed, 17 Apr 2024 03:28:40 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8274188432; Wed, 17 Apr 2024 03:41:36 +0200 (CEST)
+Received: from mail-vs1-xe2b.google.com (mail-vs1-xe2b.google.com
+ [IPv6:2607:f8b0:4864:20::e2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 98A4388371
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 03:28:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id D044188449
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 03:41:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-vs1-xe2b.google.com with SMTP id
+ ada2fe7eead31-479e857876fso1629616137.0
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 18:41:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713318091; x=1713922891; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=1Q3998I6nhC9nnij4LfxKYy84NtJiqn2G1pOrqm9K/w=;
+ b=TTpFbhcbVzNjX01hzRKFoPW2KqZz5WIku8lIXdHS5ZU2cHao1EHj/4pR2wkNPp1qmT
+ fr7YgGZ8zOJAvlxRBiJTerkfoOowvEqd8y9LBvAoarNvlcOckJZt8IBhSH8pql3DuNww
+ Kq2y9oBS2XefE/WRCYxB0k+4eVbMMizzC6hdUQDNX+2sa52y8Mq3IhSwgrVuJn0L3DYt
+ oXq3pEZlJMOtnsJqHtA8/uz0A5mYsqmHpdnhG6Cy/OpSRAz5TFytrDFXHclqnI9PWzZJ
+ GMylWqWoHh7KAhu0hSPSWNmOrXuxlaKM/jrzAT4w9L2bXeUq0T0rt5mKQTP0olF0aA1g
+ t3LQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713318091; x=1713922891;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=1Q3998I6nhC9nnij4LfxKYy84NtJiqn2G1pOrqm9K/w=;
+ b=ut2bHeEcab6kM9u+LYwaNGlxGTGBkpkeByK0AoTOKIAXZkKpAfYOh0oEm656rno2NM
+ OFj6JzFhkROFyrRUW/df7qaljWRrZjHl5pLVuJAYIQG53LSb949ACJiuvxi3C17Prnsh
+ K/Fv67cMbDbTEBgEJpkP1CgDdr3abzukC5rcV+VQgJHJqGXZZ08iyG2A0RLO6Q8L2UyS
+ Ul6n/gVGL2ypGp/0ScFSSUHooPPiBKFbRfQ3m0fcMP7r8oIkjCokYpJBPyGwHEj5y3ic
+ V3S+LL1VX7GUX8plBk61Gp0sAydyPZzm4WQ6+H0TrLDl0BGVHDTaIf/HvKjIbyp+h7Sj
+ v2Tw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW13pkb2rlCpj236ICHoQtLvR555SnpmRQBEpNyHr3APFnNMafVf6dIXkReXGy/e2sYoC3AW0dtz0C3U1410r6O99wTpw==
+X-Gm-Message-State: AOJu0Yy0ECcU13BHNxnU5Qb7mAic1U8K1O3h3U9yzpbo3H8BXzIN0UHe
+ mIgtBDXPZdzFr25TRASdiBrxTISQh+X4BbKIiTWq/5ARYVGURj0Wmc7HOverLKbQL76A70bSXn+
+ DSxiIqgd925wKiohoIvb/mqO0Zns=
+X-Google-Smtp-Source: AGHT+IFKvew3D+l1XDvvMR1pK474twLdZrY3b74Dil/mTb3yAyc1fCppoBcv9KEP9KSw4MBT83agN1uFNUAAoFyytbQ=
+X-Received: by 2002:a05:6102:3052:b0:47a:3b48:7eea with SMTP id
+ w18-20020a056102305200b0047a3b487eeamr16977508vsa.27.1713318091610; Tue, 16
+ Apr 2024 18:41:31 -0700 (PDT)
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1713317318;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=Er4Oku7ZDMXUf/kwXHjXDKJQKggGcoVP4SI59kps2eQ=;
- b=o9fU+hDGVRuEFVJEMqFu14qy/7zMqLjM1L/tNnEoB+BNHk1CpE47xk+rdAKF09ROz3hx0V
- V5N9kWLdwwBPK9XIqHh+cItbM6p6HYb5+WPZOgkC3sIRMm3gNsdg2k/1ClyKQfu9JknEJ4
- pKjaUdlCo8Fvq0DjrwdkIocL0EYjZr/8gSGzPETujcHt2L1c3o8Ef8PPYnZ4AuYe05V9CS
- 9m6ZGzA0weYOVuTJwQS2KzdmzebrnH5o341z7jfOjqbMF8aCgnSHsGBuMo4winmiZc2eFx
- UQVYy5S1uDdqaC3AsKF1OZTzHmYjd/7HnVH/eZUflNewd8ctQkH6MB0SWQ0Hrg==
-Date: Wed, 17 Apr 2024 03:28:37 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Jaehoon Chung <jh80.chung@samsung.com>
-Cc: 'Quentin Schulz' <quentin.schulz@theobroma-systems.com>, 'Jonas Karlman'
- <jonas@kwiboo.se>, 'Peng Fan' <peng.fan@nxp.com>, 'Tom Rini'
- <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 1/2] mmc: Imply HS200 cap with mmc-hs400 prop to match
- linux
-In-Reply-To: <000901da9056$75785ae0$606910a0$@samsung.com>
-References: <20240408210619.3749231-1-jonas@kwiboo.se>
- <496013c1-7a57-4d12-bf31-c5257f35ee8c@theobroma-systems.com>
- <3b2643b4-dea7-43cd-9f9c-da63e6588281@kwiboo.se>
- <ac394528-ca53-41d5-8c4c-7c10943a7c92@theobroma-systems.com>
- <9b62bbedf2c6d52b76a8ce1ce57dd35d@manjaro.org>
- <CGME20240410085657epcas1p4c824b9243f8e2c6e8bc84e51d5cb1deb@epcas1p4.samsung.com>
- <8fec34b8-8d04-40ba-baca-5394762a4d27@theobroma-systems.com>
- <000901da9056$75785ae0$606910a0$@samsung.com>
-Message-ID: <3e14a54ad8627f40a3718970386c8f67@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+References: <20240415115035.46199-1-heinrich.schuchardt@canonical.com>
+ <20240415115035.46199-5-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240415115035.46199-5-heinrich.schuchardt@canonical.com>
+From: E Shattow <lucent@gmail.com>
+Date: Tue, 16 Apr 2024 18:41:20 -0700
+Message-ID: <CANV2PTNLVMQQYugK4HB3Yv6WXmrbXBLB0FswKPHqq47OkX-DFQ@mail.gmail.com>
+Subject: Re: [PATCH 4/4] configs: visionfive2: enable SPL_YMODEM_SUPPORT
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, 
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
+ Lukasz Tekieli <tekieli.lukasz@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, 
+ Shengyu Qu <wiagn233@outlook.com>, Shiji Yang <yangshiji66@outlook.com>, 
+ Seung-Woo Kim <sw0312.kim@samsung.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,98 +95,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Jaehoon,
+Successful in use w/ 'tio' serial tool and Adafruit CP2102N Friend
+adapter on Mars CM Lite board in DFRobot mini router carrier.
 
-On 2024-04-17 01:33, Jaehoon Chung wrote:
->> -----Original Message-----
->> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
->> Sent: Wednesday, April 10, 2024 5:57 PM
->> To: Dragan Simic <dsimic@manjaro.org>
->> Cc: Jonas Karlman <jonas@kwiboo.se>; Peng Fan <peng.fan@nxp.com>; 
->> Jaehoon Chung
->> <jh80.chung@samsung.com>; Tom Rini <trini@konsulko.com>; 
->> u-boot@lists.denx.de
->> Subject: Re: [PATCH 1/2] mmc: Imply HS200 cap with mmc-hs400 prop to 
->> match linux
->> 
->> On 4/9/24 21:28, Dragan Simic wrote:
->> 
->> [...]
->> 
->> > Let's keep in mind that the troublesome DT properties describe the
->> > capabilities of the MMC controller and the board, not the capabilities
->> > of the MMC storage device.  As we know, eMMC devices provide automatic
->> > detection capabilities, to allow the host to determine its supported
->> > modes, and match them with the ones the host is configured to support.
->> > It's all described in the JEDEC standards.
-> 
-> I didn't see the above mail in my mailbox. So I can miss something.
+While SPL and u-boot.itb payload are sourced via UART the environment
+variables are from the environment variable storage as-is. This makes
+sense in the use case for development but may have side-effects in the
+case of U-Boot as a JH7110 recovery tool. There is now 'env default -f
+-a' which does not purge non-default variables and retains the
+non-default variables when migrating from vendor firmware. Consider to
+also build for U-Boot the commands that can aid in cleaning the stored
+environment variable state CONFIG_CMD_ERASEENV=3Dy and in-memory state
+CONFIG_CMD_NVEDIT_LOAD=3Dy. With these it can be done easily with: 'env
+erase; env load; env save'.
 
-It seems that, for some reason, the mail server(s) for @samsung.com
-don't like the IP address of the @manjaro.org mail server, so my email
-messages to you get rejected.
+On Mon, Apr 15, 2024 at 4:51=E2=80=AFAM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> We can use U-Boot for recovering JH7110 based boards via UART
+> if CONFIG_SPL_YMODEM_SUPPORT=3Dy.
+>
+> * Send u-boot-spl.normal.out via XMODEM.
+> * Send u-boot.itb via YMODEM.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  configs/starfive_visionfive2_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_vi=
+sionfive2_defconfig
+> index fa80d489f5e..e2d83c62b28 100644
+> --- a/configs/starfive_visionfive2_defconfig
+> +++ b/configs/starfive_visionfive2_defconfig
+> @@ -62,6 +62,7 @@ CONFIG_SPL_I2C=3Dy
+>  CONFIG_SPL_DM_SPI_FLASH=3Dy
+>  CONFIG_SPL_DM_RESET=3Dy
+>  CONFIG_SPL_SPI_LOAD=3Dy
+> +CONFIG_SPL_YMODEM_SUPPORT=3Dy
+>  CONFIG_SYS_PROMPT=3D"StarFive # "
+>  CONFIG_CMD_EEPROM=3Dy
+>  CONFIG_SYS_EEPROM_SIZE=3D512
+> --
+> 2.43.0
+>
 
->> So why do we have those properties specified in board DTSes instead of
->> in the SoC DTSI? Logic would want us to have this defined in one place
->> only. I assume the issue is that even if the eMMC chip itself says it
->> supports HS400 but the HW routing or some other issue make it 
->> impossible
->> to use, we need a way to disable it from the DT for that board?
->> 
->> > Having that in mind, I find the approach in the Linux kernel rather
->> > reasonable, because I highly doubt that some MMC controllers support,
->> > for example, HS400 without supporting DDR52, or HS400 without supporting
->> > DDR52.  A reasonable approach for an MMC IP block is to make it capable
->> > of supporting all the speeds below its highest supported speed, to make
->> > itself capable of supporting more, if not all, MMC storage devices.
->> >
->> 
->> That's true for the IP block which is self-contained in the SoC, but
->> it's forgetting about the other part, the eMMC chip/card. It depends 
->> on
->> the HW routing, where mistakes/limitations can happen. And I don't 
->> think
->> we have a mechanism today to disable the modes set in the MMC 
->> controller
->> for a given MMC card from DT (aside from /delete-property/ in board 
->> files).
-> 
-> The both opinions make sense.
-> But, It doesn't set to all capabilities when nodes has mmc-hs400-* 
-> property.
-> 
-> That's why it's describing to each property is because they want to
-> clarify only which mode they use.
-> 
-> AFAIK, I can't remember exactly, there were some boards that even
-> though HS400 is working fine,
-> but HS200 was not working fine. (It's depends on which IP board is 
-> using.)
-
-That's really good to know, thanks.
-
-> There were too many cases not to work fine because of *HW* design.
-> eMMC and Host IP were supporting the HS400/200 and all modes, but
-> there was a problem of handling clock.
-> So it couldn't use HS200/400 and other dual modes.
-
-Yes, there are all kinds of eMMC signal integrity issues on different
-designs.  There are also similar issues with different microSD cards,
-causing some of them not to work in SDR104 mode on a particular board,
-for example.
-
-> And We needs to know if it's working fine.
-> If we want to use hs400 mode, but board can be working to other mode
-> without any error.
-> Of course, we can see a mode as log. But it's at least approach to 
-> limit.
-> 
->> > In fact, I'll probably go ahead and submit a Linux kernel patch that
->> > updates the descriptions in the binding, to hopefully eliminate any
->> > ambiguities like these.  I hope you agree.
->> 
->> I for sure do not have enough knowledge in MMC to argue more than I 
->> just
->> did, so having people with more experience/knowledge have a look at 
->> this
->> would make sense, let's see what they have to say :)
+Tested-by: E Shattow <lucent@gmail.com>
