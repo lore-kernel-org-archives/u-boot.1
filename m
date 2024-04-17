@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04BD2C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 16 Apr 2024 23:52:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A15B2C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 00:03:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 66E9A8831C;
-	Wed, 17 Apr 2024 01:52:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1051D87ED1;
+	Wed, 17 Apr 2024 02:03:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ex6TyNu1";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JusA1S3z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 172C08840D; Wed, 17 Apr 2024 01:52:27 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id CB22187572; Wed, 17 Apr 2024 02:03:49 +0200 (CEST)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com
+ [IPv6:2607:f8b0:4864:20::52d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 986B988224
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 01:52:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B5DB8842B
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 02:03:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1e65a1370b7so28707465ad.3
- for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 16:52:24 -0700 (PDT)
+Received: by mail-pg1-x52d.google.com with SMTP id
+ 41be03b00d2f7-5d42e7ab8a9so2640426a12.3
+ for <u-boot@lists.denx.de>; Tue, 16 Apr 2024 17:03:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713311543; x=1713916343; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1713312225; x=1713917025; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CZ9p783RxHjzlxiH0O7Nv6sHi8DjT7ZCWaOyMqnjazU=;
- b=Ex6TyNu17Rayn9A6kUdRERZiDARuQOs1SyVDjujbjosug8jNzfWktf1JgESvklJ6uq
- zSELblhys60mCG2FWAUcsrwCw8d47PdnNQOHCF0+80fJ+8CQKJd8tG1f1M9tMh+9A2cm
- 6SxKtvX4YhZNyYopeEsP0d39i+iWOGypltY0vKxmAtbi0Apf5HdgXRfQw8rBCvDBDxGq
- 4bROBvRycNyCC5BQ0hapJlYOtmy9NKx9spObULNes5imyhfL4gnuG8LCu4CiW8pBw9lT
- Lf4VsK8SSeKg2AlMOJHVa96KGvplXs3qLw9GC4kwn2/4tN76n3hFxLsssSs/n1SzA7FA
- lWGA==
+ bh=ozXtCMF/m0+kFuzsAp6FekB+/bTnVGP0t9ZpMVFnnU4=;
+ b=JusA1S3za1m0avKEO2YP9frrR4lH6qJl2reu3LKMtZG1myPeDXBki0GxvNVwdtfMX3
+ 0MZ8R3+yVmNNUHjwDtDgmuCWIk74znSna2GaWhPwN05fXpSu/KRepUwGFFB9c4z7NHES
+ 6+BUA+s8/8hSTxIzhDbz0AX7nMyOnz+9KNXnB2G0kiJYlcC7QiL2i6lRgv/G1fNqPwJP
+ dirDPmor5MFR8gOgJIWcqwQlJLEkvNM6h59laj0xErntLQSexL6frPVtniGeMDI+sbZV
+ 51Awd0zxRlPmM4UHeWibHgyPhoGno9wzaDMnsxnZLs+BbUXwIKr5m9qc3qS3JIdy5I8T
+ Upxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713311543; x=1713916343;
+ d=1e100.net; s=20230601; t=1713312225; x=1713917025;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=CZ9p783RxHjzlxiH0O7Nv6sHi8DjT7ZCWaOyMqnjazU=;
- b=dpqA3/52o9+1MGanXg+YiL7CmluYx67CJ74bUj/IltmS4UtlI+yr1wYxCy8m+RKN0j
- aVaAedMQSlssv3td5JnrjiGdlawKfy2vwgEDpUeyI2nir6KmrQez1UoAFwBhhKEXlzfG
- Aq6JPU2miXZEj5QnTxMIc5lOeJwY6Odw3s7nr8KVVQhYQOJO0oMjM73S/sdhUdrRMsTv
- GsxxpcQOL2rSgCXjxD6OQsJlrMY4fuzWpDBNq5PuyhSGm6NIUPuK9BNtlTXfelZgzcqL
- LSZnQU5njDYlCwx+I0kuMkN+I0X4Xb/tD/OCuP7j0Pdf/Vo5Lq4IaJ1PUOPjMdpft/wJ
- Vdow==
-X-Gm-Message-State: AOJu0YwxEhQmWlHnUvCkLQ2qIRAsTrryj+MaRoYBY4t5XDCj3xWbLZTl
- TZfccjoIN0R8ZKD3+IeP5Q66CDRCY1MabxCOhvdauyuPhA4lt2lOMrJC0frkVBjxNpWFIqk+NSl
- 2yD2p5wNO8Ae+s597cWMRk/StLd3DGBxMzJ4CUg==
-X-Google-Smtp-Source: AGHT+IGpHPph7WFVg8o/zcslgm+NbhlAMLfGYX0qktU+r2NtI/GaStPnBI/s8p3rDMyHZG1b4HcLKpN1U0ZMFP0HVe8=
-X-Received: by 2002:a17:902:d2c9:b0:1e2:8841:8d67 with SMTP id
- n9-20020a170902d2c900b001e288418d67mr20739385plc.32.1713311543096; Tue, 16
- Apr 2024 16:52:23 -0700 (PDT)
+ bh=ozXtCMF/m0+kFuzsAp6FekB+/bTnVGP0t9ZpMVFnnU4=;
+ b=h3ZdIIyoNVzg8iUA/B1JWKQ+5+qVTnGJUi3a311Pm1BdZ5jHiFCsZQBu/oJ8BwEaiX
+ QJDt5b/J7UUH0Rp3BH2Cvhf3iYZoLfMZQaP5t5GtT4dwpsRE3tSK3is69rs4fGqInhDK
+ 5zSH6ddMX5eXTCZGxP1iag/rC76h8f2yR8oyoY6WcsA9T068H+if1f050qdJcOigaV0c
+ ryRClY4K8462Ie9cCuIpHBpaNUh2VzeyI9i5ixZrGST7SCKhnPw7RFrwS0FJBr4mcwiv
+ oi++x+S4AA0RjPsyLrIzI1j32xOstVYGKxs6Y65DsE2Xe5PG0XQG4t6cvfIVEvi/6uEE
+ 6hJg==
+X-Gm-Message-State: AOJu0Yyw25XnjeD/ZLLysnSbeWtNq9cZ77GO57pQFMwxHBdsLIxt4RwP
+ UTPAVt30GchO5T0e8Q8ooXh7e/WtfofcvwzYLr8iBMDpzCHypXtxJ0W/gQeP8PdHoyMGf9n5Yx8
+ ZSitYyW02eLGGwuo+Z6BxgUJXKEAhPfSHe0re8w==
+X-Google-Smtp-Source: AGHT+IFCni6qSfKJ8zqyEM9cvYqlclJ9LKG5Qm/x++L++Rhk2S0sUETjQNYJrzap63L3c3zLxhcT17zaf6Hi8fJRofo=
+X-Received: by 2002:a17:90a:ec18:b0:2a4:ca45:ded1 with SMTP id
+ l24-20020a17090aec1800b002a4ca45ded1mr11591287pjy.28.1713312225536; Tue, 16
+ Apr 2024 17:03:45 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240416190019.81016-1-raymond.mao@linaro.org>
- <20240416190019.81016-6-raymond.mao@linaro.org>
- <20240416191902.GU1054907@bill-the-cat>
-In-Reply-To: <20240416191902.GU1054907@bill-the-cat>
+ <20240416230133.GZ1054907@bill-the-cat>
+ <CAEfUkUKFG4pVR3nHw-GM1Ub2SShnSDgA+zhwTNHY+pSkuaHvXg@mail.gmail.com>
+ <20240416235020.GB1054907@bill-the-cat>
+In-Reply-To: <20240416235020.GB1054907@bill-the-cat>
 From: Raymond Mao <raymond.mao@linaro.org>
-Date: Tue, 16 Apr 2024 19:52:12 -0400
-Message-ID: <CAEfUkULVEQxGK9R7MH1P9cxtng2R8khSuUhEJC95qnCEotWD9Q@mail.gmail.com>
-Subject: Re: [PATCH 05/23] test: py: add sudo for virt-make-fs
+Date: Tue, 16 Apr 2024 20:03:34 -0400
+Message-ID: <CAEfUkU+PJN6e1JEcnpkYZtBraw6KUxr9Dq2v08EDCk9O3STkdw@mail.gmail.com>
+Subject: Re: [PATCH 00/23] [RFC] Integrate MbedTLS v3.6 LTS with U-Boot
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, ilias.apalodimas@linaro.org, xypron.glpk@gmx.de
 Content-Type: text/plain; charset="UTF-8"
@@ -90,22 +91,68 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Tue, 16 Apr 2024 at 15:19, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 16 Apr 2024 at 19:50, Tom Rini <trini@konsulko.com> wrote:
 
-> On Tue, Apr 16, 2024 at 12:00:01PM -0700, Raymond Mao wrote:
->
-> > Fix a permission issue when running virt-make-fs
+> On Tue, Apr 16, 2024 at 07:47:44PM -0400, Raymond Mao wrote:
+> > Hi Tom,
 > >
-> > Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-> > ---
-> >  test/py/tests/test_efi_secboot/conftest.py | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
+> > On Tue, 16 Apr 2024 at 19:12, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > > On Tue, Apr 16, 2024 at 11:59:56AM -0700, Raymond Mao wrote:
+> > >
+> > > [snip]
+> > > > [1]: bloat-o-meter output between disabling/enabling MbedTLS
+> > > > ```
+> > > > add/remove: 231/69 grow/shrink: 12/5 up/down: 60196/-11166 (49030)
+> > >
+> > > I don't know if this is qemu_arm64 or sandbox.  With buildman's size
+> > > comparison functions we see:
+> > >             qemu_arm64     : all +75537 bss -88 data +24 rodata +6349
+> text
+> > > +69252
+> > >                u-boot: add: 274/-12, grow: 12/-4 bytes: 72002/-3800
+> (68202)
+> > > ...
+> > >             sandbox        : all +57008 bss +32 data +1632 rodata +352
+> > > text +54992
+> > >                u-boot: add: 143/-75, grow: 21/-18 bytes: 64058/-16523
+> > > (47535)
+> > >
+> > > So please look in to using buildman to get more details about what's
+> > > changing, size-wise. Also, my goodness, that's far too much growth, and
+> > > we aren't removing anything? This needs to be a whole switch, not just
+> > > an addition. And then look in to what we can tweak / remove. Are we
+> > > perhaps not getting our usual link time garbage collection done?
+> > >
+> > As stated in the cover letter, with this patch set, we still build the
+> > original libs
+> > (lib/rsa, lib/asn1_decoder.c, lib/crypto/rsa_helper.c, lib/md5.c,
+> > lib/sha1.c,
+> > lib/sha256.c, lib/sha512.c) for the components outside of EFI loader.
+> > Eventually all these will be completely switched and removed.
+> > But I think we should do this in a sparated patch set - It is too big for
+> > one
+> > patch set.
+> > So, as the first patch set, this one will introduce MbedTLS and enable it
+> > with
+> > EFI loader, after they are merged, the next patch set will switch other
+> > components
+> > to use MbedTLS and remove the original libs.
+> > What are your thoughts?
 >
-> Can you elaborate please? The point of virt-make-fs was, I could have
-> sworn, is that it doesn't require privileges.
+> My thoughts are that we need to implement this as the optional
+> replacement for the existing libraries. We already have abstractions for
+> most if not all of the algorithms I believe. And we need to be able to
+> see how much size growth we get from this change because long term we
+> don't really want to have two sets of libraries for this functionality
+> (as a SW rather than HW implementation).
 >
-> We can drop this patch from v2. The privileges issue is due to my Ubuntu
-host setup (missing the permissions to access /boot/vmlinuz-*).
+> I see. With this version most of the lib/crypto that are used by EFI loader
+(pkcs7, x509, public_key, mscode_parser, etc) are sharing the same
+abstractions except the ones for hash.
+I can replace them in v2, so that we can compare the final growth by
+switching
+on/off the MbedTLS build options.
 
 Thanks and regards,
 Raymond
