@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1ED83C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 07:26:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3494C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 17 Apr 2024 07:45:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 638528842B;
-	Wed, 17 Apr 2024 09:26:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 1DCA08841D;
+	Wed, 17 Apr 2024 09:45:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="aIbeWQBo";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="UwS08BEs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADB4288437; Wed, 17 Apr 2024 09:26:26 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 81E1D8842B; Wed, 17 Apr 2024 09:45:15 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF9C1882C4
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 09:26:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 863E4882C4
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 09:45:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=4837253909=patrick.delaunay@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43GJGONk021303; Wed, 17 Apr 2024 09:26:21 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=IQDznTMBE3s9mgOGUqjS4bbJXnzz5DDpHbeFBqdRilk=; b=aI
- beWQBooyIlHpgXgb7sSEp+aH57BMVInYn2UETUoWeeyqn/eFwmCLy71QeFlEBZ1X
- YzKcl3fNbCqMgOGmob3d327XvuvAiS/RcNkBQgJHDsA1i5RfwebPJda+w8MBPz3k
- p7LRaG/w/9AUS2FHeqa4qWQ9Mg9AIHFzK3rQCCT4P2Hvw5f4bpWkHgennSHr1qim
- RcX8bQlEdfLJkk7TEiv0SIayPOfeNbI1IDIGtampOdOOknP+X2zXgGxhCDqMeaPS
- dW+WsMvLkg3toRmLLC6P8tgdVRRsmVGrDuqn/uHzrVOf6eLKYOE3+49GueNvMuMK
- qkHJPR8ySJ47l2k5yxtA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff64g618-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 17 Apr 2024 09:26:21 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id F1E314002D;
- Wed, 17 Apr 2024 09:26:14 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node3.st.com [10.75.129.71])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 68AE820E03E;
- Wed, 17 Apr 2024 09:25:56 +0200 (CEST)
-Received: from [10.48.86.112] (10.48.86.112) by SHFDAG1NODE3.st.com
- (10.75.129.71) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 17 Apr
- 2024 09:25:55 +0200
-Message-ID: <3512e31e-37db-4e03-b133-1914e29fa7ad@foss.st.com>
-Date: Wed, 17 Apr 2024 09:25:54 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1713339909; x=1713944709; i=xypron.glpk@gmx.de;
+ bh=gEyRWWixr+SHgKPsBYP6F3HIVvpo2AX8oSaqrvYoigk=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=UwS08BEsEScx6oU/13mLzSaZwVTzWM1qLvSjJ9OeZWrO9S5iFmrX3EB7vTS+635s
+ PnDSahuPE4sgMHuYrecYqCcVUXpHNnQt2qARFMjuHwycjX7KbRS/y9NKLuSTi+jIh
+ t9MoSpvffXN2JOgN5Vj945iwYuNc30qmmvdQQwhxBuwuFSCP3/F8yAjVwBpzAid0s
+ roLOVQ4F7Flr6VaoLlYl+NJ3j3g6359XQgiFS0Ke6xtP7pDx35sGB6xiSj6s5CNXQ
+ vThIxg6G7yF2Q5fpWkPzDEEGs3LoLl2wZgI7dUEejr38AxZluF20lSUG9yNElvBoW
+ gIIRyiwuUCrphn4JtA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mq2nK-1sa8AB2ebi-00n696; Wed, 17
+ Apr 2024 09:45:09 +0200
+Message-ID: <24c03e51-90f8-4918-8097-2a6ccd6ebf4e@gmx.de>
+Date: Wed, 17 Apr 2024 09:45:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] stm32mp: Reserve OPTEE area in EFI memory map
-To: Patrice Chotard <patrice.chotard@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Heinrich
- Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Patrice Chotard
+ <patrice.chotard@foss.st.com>, u-boot@lists.denx.de
 References: <20240308101230.2595220-1-patrice.chotard@foss.st.com>
+ <3512e31e-37db-4e03-b133-1914e29fa7ad@foss.st.com>
 Content-Language: en-US
-From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-In-Reply-To: <20240308101230.2595220-1-patrice.chotard@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.86.112]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE3.st.com
- (10.75.129.71)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-04-17_06,2024-04-16_01,2023-05-22_02
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <3512e31e-37db-4e03-b133-1914e29fa7ad@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:bhugLlrRkQeT3PjK8NIs5kzseL03riWHWLW/59BSfYixL67metj
+ 5ZHL/T5HF1os3cH0tnBbA8LS7yfPH6BkTuekEdRHITyZNUyJkAJSduvy7dOD0tnafK7mjb8
+ I4oJvzYq8mXHXFpnr3NevAe5weKrIkgzE7XDEiEsX9oJdtI+6nDYb8I/mZj6D/am/V4yfJM
+ 7DZyQZr/QwEex18IFdlug==
+UI-OutboundReport: notjunk:1;M01:P0:YoEKvjLONCI=;vhmGq215kNaebWaqxAPFaxWn7TD
+ 50lKcpoYrwNVP+HpqftU30SFYErKDMZ8kxyWh+3BepJDqF/84aNwSWo9nZoVMnAwqDYfIkKzP
+ xjiPpg8r+zeALD0LeyEPwLnmveylRDr0BhRbPnXnoupN4Tgao3fS3l1GNn88TZfsXOq1QO87y
+ cBwgWt5V/ue/YJthcK/4A7qpJO3Hc1tHHajn+CCnEhJuGZIb4ZL5N2JAlJNgtxdzMTp7SCdah
+ A4B7ka1RObIhmQTu3Q8jXIqXt7GYF9mJTsnJ4N4uyEm2F+ngTX/Q2tLFp8om/VEAaubTxxyiU
+ k9newgYMeQWOCSUCi+QWZkyB07GMSsal1Ec7vx04e97fuYZ8irAfqMcjv87DBmpvpqKTHiLU5
+ KzlHCBBYm4gZbrchunKawC1TIJOInNO6mib+lrR/1L5IwCoDgoqUVKrSGH6gsMSf1f9ItiG6E
+ 7qp65zWfDSEeMfy1QoktSJW8K7iEJd84pYq0UXKDXIeaThSiiWPE8m4IvWrCf/5f0l0V1XS0I
+ fblw2StW3xLZJK5oolCMPRTWhV+/QNuotj8Y2QtXFi72wvz1St7nOKxEgwpnOG5/3dpZ3OTcj
+ 8hGOYUAcDhP34fJ9k1+0lsoP+CChKLPeDATdOtqYhXK5VgwmsByigq6l91rc7QxxYXR3vUVhd
+ v64QK1TSjWoCjj6kAXG80+xiD2UwfEd8X5p2FmvAL9iLJSB6tPt5pY+BZfjKP2CRDVRTeQrZ2
+ t/JsjiL1TURJA3lCCzVmnU9RRrklo0yeQG8xFs8dB6nOvvT2ELejsEZ4jo/l1K9vhwcoEMyUi
+ Bb1vauE8xlYXmNnBaPqc3RY0ZCcoABKr282K3HRzZJH0g=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,66 +93,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On 17.04.24 09:25, Patrick DELAUNAY wrote:
+> Hi,
+>
+> On 3/8/24 11:12, Patrice Chotard wrote:
+>> Since commit 7b78d6438a2b3 ("efi_loader: Reserve unaccessible memory")
+>> memory region above ram_top is tagged in EFI memory map as
+>> EFI_BOOT_SERVICES_DATA.
+>> In case of STM32MP1 platform, above ram_top, there is one reserved-memo=
+ry
+>> region tagged "no-map" dedicated to OP-TEE (addr=3Dde000000 size=3D2000=
+000).
+>>
+>> Before booting kernel, EFI memory map is first built, the OPTEE region =
+is
+>> tagged as EFI_BOOT_SERVICES_DATA and when reserving LMB, the tag LMB_NO=
+NE
+>> is used.
+>>
+>> Then after, the LMB are completed by boot_fdt_add_mem_rsv_regions()
+>> which try to add again the same OPTEE region (addr=3Dde000000 size=3D20=
+00000)
+>> but now with LMB_NOMAP tag which produces the following error message :
+>>
+>> "ERROR: reserving fdt memory region failed (addr=3Dde000000 size=3D2000=
+000
+>> flags=3D4)"
+>>
+>> To avoid this, OPTEE area shouldn't be used by EFI, so we need to mark
+>> it as reserved.
+>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
+>>
+>> =C2=A0 arch/arm/mach-stm32mp/dram_init.c | 12 ++++++++++++
+>> =C2=A0 1 file changed, 12 insertions(+)
+>>
+>> diff --git a/arch/arm/mach-stm32mp/dram_init.c
+>> b/arch/arm/mach-stm32mp/dram_init.c
+>> index fb1208fc5d5..f67f54f2ae0 100644
+>> --- a/arch/arm/mach-stm32mp/dram_init.c
+>> +++ b/arch/arm/mach-stm32mp/dram_init.c
+>> @@ -7,6 +7,7 @@
+>> =C2=A0 #include <common.h>
+>> =C2=A0 #include <dm.h>
+>> +#include <efi_loader.h>
+>> =C2=A0 #include <image.h>
+>> =C2=A0 #include <init.h>
+>> =C2=A0 #include <lmb.h>
+>> @@ -75,3 +76,14 @@ phys_addr_t board_get_usable_ram_top(phys_size_t
+>> total_size)
+>> =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 return reg + size;
+>> =C2=A0 }
+>> +
+>> +void efi_add_known_memory(void)
+>> +{
+>> +=C2=A0=C2=A0=C2=A0 if (IS_ENABLED(CONFIG_EFI_LOADER))
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 /*
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Memory over ram_top=
+ is reserved to OPTEE.
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 * Declare to EFI only=
+ memory area below ram_top
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 */
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 efi_add_memory_map(gd->ram_=
+base, gd->ram_top - gd->ram_base,
+>> +=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
+=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 EFI_CONVENTIONAL_MEMORY);
 
-On 3/8/24 11:12, Patrice Chotard wrote:
-> Since commit 7b78d6438a2b3 ("efi_loader: Reserve unaccessible memory")
-> memory region above ram_top is tagged in EFI memory map as
-> EFI_BOOT_SERVICES_DATA.
-> In case of STM32MP1 platform, above ram_top, there is one reserved-memory
-> region tagged "no-map" dedicated to OP-TEE (addr=de000000 size=2000000).
->
-> Before booting kernel, EFI memory map is first built, the OPTEE region is
-> tagged as EFI_BOOT_SERVICES_DATA and when reserving LMB, the tag LMB_NONE
-> is used.
->
-> Then after, the LMB are completed by boot_fdt_add_mem_rsv_regions()
-> which try to add again the same OPTEE region (addr=de000000 size=2000000)
-> but now with LMB_NOMAP tag which produces the following error message :
->
-> "ERROR: reserving fdt memory region failed (addr=de000000 size=2000000 flags=4)"
->
-> To avoid this, OPTEE area shouldn't be used by EFI, so we need to mark
-> it as reserved.
->
-> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
-> ---
->
->   arch/arm/mach-stm32mp/dram_init.c | 12 ++++++++++++
->   1 file changed, 12 insertions(+)
->
-> diff --git a/arch/arm/mach-stm32mp/dram_init.c b/arch/arm/mach-stm32mp/dram_init.c
-> index fb1208fc5d5..f67f54f2ae0 100644
-> --- a/arch/arm/mach-stm32mp/dram_init.c
-> +++ b/arch/arm/mach-stm32mp/dram_init.c
-> @@ -7,6 +7,7 @@
->   
->   #include <common.h>
->   #include <dm.h>
-> +#include <efi_loader.h>
->   #include <image.h>
->   #include <init.h>
->   #include <lmb.h>
-> @@ -75,3 +76,14 @@ phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
->   
->   	return reg + size;
->   }
-> +
-> +void efi_add_known_memory(void)
-> +{
-> +	if (IS_ENABLED(CONFIG_EFI_LOADER))
-> +		/*
-> +		 * Memory over ram_top is reserved to OPTEE.
-> +		 * Declare to EFI only memory area below ram_top
-> +		 */
-> +		efi_add_memory_map(gd->ram_base, gd->ram_top - gd->ram_base,
-> +				   EFI_CONVENTIONAL_MEMORY);
-> +}
+With this change the EFI memory map passed to the operating system will
+not contain any memory above gd->ram_top. Is this really your intent?
+Don't you have any memory above 0xe0000000?
 
+Best regards
 
+Heinrich
 
-Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-
-Thanks
-Patrick
+>> +}
+>
+>
+>
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>
+> Thanks
+> Patrick
+>
 
