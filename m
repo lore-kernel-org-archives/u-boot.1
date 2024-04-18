@@ -4,95 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAE49C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 22:48:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5134BC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 23:07:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A726688692;
-	Fri, 19 Apr 2024 00:48:09 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9508288648;
+	Fri, 19 Apr 2024 01:07:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MzsT4PRa";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC23488698; Fri, 19 Apr 2024 00:48:06 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C50188697
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 00:48:00 +0200 (CEST)
+ id 2230788662; Fri, 19 Apr 2024 01:07:12 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id DE2C68837D
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 01:07:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-418c0d83e61so15236745e9.3
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 15:48:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713480479; x=1714085279; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=5layRykKgdXVikCZs2hcIuHbtybfELpMT4BFSOTZRbY=;
- b=MzsT4PRaCWiFtdfUYgZ59jRVGF5AdaVcmcewKcWHSBeqkfAuMGc31jj7RrVCSVltWX
- iKI5ECo4aS+/9AilPUsEsTjmzkiBCuO93HnOa+vCE5dZ8O4bikYjznVaQsOzqEXJsY/w
- G7galBcicyW8i//Wnd88sSR2r6LhST7BOuS23vwIerWx7o0MUj7j96m25gSXoXg683Hr
- NRAzBBrUBdWwl1HzLVzatO0ZTDhNvJlP7NYxeAjUh3nx4gxDmOjcbCYSDwBoqUX42cmo
- 8WWj8IOWo2K6438h6spAtnPSpNcGTwNhHrwrSnMsxgnflD6KdK/4z1we6UPdf967wKRx
- i8JQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713480479; x=1714085279;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5layRykKgdXVikCZs2hcIuHbtybfELpMT4BFSOTZRbY=;
- b=O6nXW36bbsuP83HpDLSRwtnCHuU4dhtlH7fSOtrqKU++Cgrii8F7CugWv+1fTA/FNA
- bgXohKxNvgO9Pp4jT79f14Q6UqRZcgqlXevtCNVfoXhY+4BWVv9YYSqrxpO+3LrEWM/D
- q/VEMH7dDjYk1Ft48Susj3O7kqL8YJo9KCS5w2LJssSqPUMHzoE3e0Z4T931n43ieudR
- +M4rM2f4W49TVbPh72PmxgZrr8XLbrINM3ePg2KjmnFXFg5r+jYwQFKwE/YeqwGEj0ZZ
- OZx02F8vsw0OSfh151k9pixg13hsTLqWjghCnenPs151wtxZR0Lo77O5PdrpGJOt35Bw
- Lf6g==
-X-Gm-Message-State: AOJu0Yy28aij3a5gt6nbJJrA2TvdTmciZLBEiStwv14qcswuY13CaXfL
- zOy7em+gT0N9SYAZAad8E0W0YAAkqkx5L+oJ8gbLWqzB3aTKMTZXHoDkE0HsECo=
-X-Google-Smtp-Source: AGHT+IFGtZ1UvJOyFoZBeyczlrk3UV3nV7bBU7JeIAdTYyuCF815mOy9Gow5sL4PZtZpL7TCTDL8EQ==
-X-Received: by 2002:a05:600c:1da2:b0:417:e563:4aa4 with SMTP id
- p34-20020a05600c1da200b00417e5634aa4mr188686wms.5.1713480479407; 
- Thu, 18 Apr 2024 15:47:59 -0700 (PDT)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
- by smtp.gmail.com with ESMTPSA id
- hg12-20020a05600c538c00b00415dfa709dasm4155131wmb.15.2024.04.18.15.47.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Apr 2024 15:47:59 -0700 (PDT)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Fri, 19 Apr 2024 00:47:54 +0200
-Subject: [PATCH 2/2] configs: qcom_defconfig: enable GENI I2C Driver
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F30772F;
+ Thu, 18 Apr 2024 16:07:36 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 477733F738;
+ Thu, 18 Apr 2024 16:07:08 -0700 (PDT)
+Date: Fri, 19 Apr 2024 00:06:59 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: lhdjply@126.com
+Cc: jagan@amarulasolutions.com, trini@konsulko.com, u-boot@lists.denx.de
+Subject: Re: [PATCH] arm:suniv:complete the serial port configuration of Suniv
+Message-ID: <20240419000659.39aa4573@minigeek.lan>
+In-Reply-To: <20240313053323.282856-1-lhdjply@126.com>
+References: <20240313053323.282856-1-lhdjply@126.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240419-topic-sm8x50-i2c-v1-2-67651e27f23a@linaro.org>
-References: <20240419-topic-sm8x50-i2c-v1-0-67651e27f23a@linaro.org>
-In-Reply-To: <20240419-topic-sm8x50-i2c-v1-0-67651e27f23a@linaro.org>
-To: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=openpgp-sha256; l=568;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=2pJ0i9g8zUz/8GB20tjE6EI5K8UDNuHmUKOn26+AIns=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmIaMcPWqzAL/hgw33cvh/yKcJauNefOUiyHhQ0JjZ
- rhwgiRmJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZiGjHAAKCRB33NvayMhJ0eAAEA
- DQ2de4MDqzoh6T3ZsAZvyppeJoYU5N2UtDvupWATWmY9jQepW5rILU/jB6RCvDNE8Z3XQTovS4oSzi
- M/n5bMxg3xN5LJOnijhWO9bkr4eZB3Ra44nl4eO/yZ1LrKAnsWsZysZAvD0QxndRi7AUfVdq8VxUEv
- 0jaW/5RoYJLcif3DqZ1QAKbKETBjGoviQt/A/H5C680eld0/UNJOs2QR7oKgAPjNcf4pzr1GHc6bw4
- U4yzskLRvzDzvuz27oZq9G7zjrjnGEMWEnJjKnb4arCPRrCHEqu2eDxx0Jqc296yRFanG+wRDOJ414
- 1+GK/6KFewKJz02YC1oNo+wNi+AOJQeD9ktS4vbZjkptAk1yzKd5tJw+XhBUKgqRzjLkk9cE2Boq25
- qDlyWi0+LyDmb9lhoa9dVZzhJNKzcIldwO3bF2x0jNBlOKykW3Bq9zRsHL3oUt4f6mTWxY6gydb8O2
- nyRYGkhs305ZOQplM+t0pOX6ujStj8wLsjmPNLBE6oZzkSewwmEbwUNx6/pJFuGnyWWHtxE8AT5pyQ
- BcNMwOxELGKTSrZ7pXswauO0ZtCPE+kjwdbNNnx4RHM3q/DAd5hQSTqnpshCeGGGzFkn/2WXM2sML9
- aIDBj3FGzI4J2+MrUzpBW+GNTCRCJeLWZ8hbNYdDZHe/hZ/oVoBMN06zneUg==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -109,26 +55,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable the GENI I2C driver in the default Qualcomm defconfig.
+On Wed, 13 Mar 2024 13:33:23 +0800
+lhdjply@126.com wrote:
 
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
----
- configs/qcom_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Hi,
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 1abb57345ff..8d440b23625 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -41,6 +41,7 @@ CONFIG_MSM_GPIO=y
- CONFIG_QCOM_PMIC_GPIO=y
- CONFIG_DM_I2C=y
- CONFIG_SYS_I2C_QUP=y
-+CONFIG_SYS_I2C_GENI=y
- CONFIG_I2C_MUX=y
- CONFIG_DM_KEYBOARD=y
- CONFIG_BUTTON_KEYBOARD=y
+> From: lhdjply <lhdjply@126.com>
+> 
+> 111
 
--- 
-2.34.1
+There should be a proper commit message here, explaining *why* this
+patch is needed.
+So what does this patch or which problem does it solve?
+
+Please note that I consider those "SUNxx_GPy_UARTz" symbols nonsense,
+since they do not carry real information. I thought about replacing all
+those pinmux defines with something like SUNXI_PINMUX_x, defined to
+x, so say: "#define SUNXI_PINMUX_5 5".
+Does that sound better to you?
+
+Cheers,
+Andre
+
+> 
+> Signed-off-by: lhdjply <lhdjply@126.com>
+> ---
+>  arch/arm/mach-sunxi/board.c | 4 ++--
+>  include/sunxi_gpio.h        | 6 ++++++
+>  2 files changed, 8 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/mach-sunxi/board.c b/arch/arm/mach-sunxi/board.c
+> index f4dbb2a740..b91c9629e4 100644
+> --- a/arch/arm/mach-sunxi/board.c
+> +++ b/arch/arm/mach-sunxi/board.c
+> @@ -151,8 +151,8 @@ static int gpio_init(void)
+>  	sunxi_gpio_set_cfgpin(SUNXI_GPE(3), 6);
+>  	sunxi_gpio_set_pull(SUNXI_GPE(3), SUNXI_GPIO_PULL_UP);
+>  #elif CONFIG_CONS_INDEX == 2 && defined(CONFIG_MACH_SUNIV)
+> -	sunxi_gpio_set_cfgpin(SUNXI_GPA(2), SUNIV_GPE_UART0);
+> -	sunxi_gpio_set_cfgpin(SUNXI_GPA(3), SUNIV_GPE_UART0);
+> +	sunxi_gpio_set_cfgpin(SUNXI_GPA(2), SUNIV_GPA_UART1);
+> +	sunxi_gpio_set_cfgpin(SUNXI_GPA(3), SUNIV_GPA_UART1);
+>  	sunxi_gpio_set_pull(SUNXI_GPA(3), SUNXI_GPIO_PULL_UP);
+>  #elif CONFIG_CONS_INDEX == 2 && defined(CONFIG_MACH_SUN5I)
+>  	sunxi_gpio_set_cfgpin(SUNXI_GPG(3), SUN5I_GPG_UART1);
+> diff --git a/include/sunxi_gpio.h b/include/sunxi_gpio.h
+> index db3742c039..51258e3dd9 100644
+> --- a/include/sunxi_gpio.h
+> +++ b/include/sunxi_gpio.h
+> @@ -108,6 +108,8 @@ enum sunxi_gpio_number {
+>  #define SUN8I_H3_GPA_UART0	2
+>  #define SUN8I_H3_GPA_UART2	2
+>  
+> +#define SUNIV_GPA_UART1		5
+> +
+>  #define SUN4I_GPB_PWM		2
+>  #define SUN4I_GPB_TWI0		2
+>  #define SUN4I_GPB_TWI1		2
+> @@ -130,12 +132,16 @@ enum sunxi_gpio_number {
+>  
+>  #define SUNXI_GPD_LCD0		2
+>  #define SUNXI_GPD_LVDS0		3
+> +#define SUNIV_GPD_UART1		3
+> +#define SUNIV_GPD_UART2		3
+>  
+>  #define SUNIV_GPE_UART0		5
+> +#define SUNIV_GPE_UART2		3
+>  
+>  #define SUNXI_GPF_SDC0		2
+>  #define SUNXI_GPF_UART0		4
+>  #define SUN8I_GPF_UART0		3
+> +#define SUNIV_GPF_UART0		3
+>  
+>  #define SUN4I_GPG_SDC1		4
+>  #define SUN5I_GPG_SDC1		2
 
