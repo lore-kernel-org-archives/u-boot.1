@@ -4,65 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6315DC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 17:58:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B96FC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 18:02:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E93A58868F;
-	Thu, 18 Apr 2024 19:58:35 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9956388648;
+	Thu, 18 Apr 2024 20:02:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JFyzAegs";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="C6Rm6hXZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 72F8688693; Thu, 18 Apr 2024 19:58:34 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0651788648; Thu, 18 Apr 2024 20:02:27 +0200 (CEST)
+Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com
+ [IPv6:2607:f8b0:4864:20::52f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3664187842
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:58:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DFC3788524
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 20:02:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43IHwTtv119356;
- Thu, 18 Apr 2024 12:58:29 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1713463109;
- bh=ft8/kEO8eq/kaC8kUPIJBjSI935yngVe0BwW6DtwWiw=;
- h=From:To:CC:Subject:Date;
- b=JFyzAegsxrrmZBMKqW+eAvPtSk6UddWov3lcClxmlBVhzrPqtwp1OYOmNSryKC6lH
- HQWnGtdFXOjJJglCGikFHclT4/2Q9gHoBl1Op8NInlFCFvkafHy5jahX8+OyJYK5Yt
- VSd+t1agqL4OY/NyQgRNEFKKYwkVMRpJu/8cnP/o=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43IHwT9r061502
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 18 Apr 2024 12:58:29 -0500
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 18
- Apr 2024 12:58:29 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 18 Apr 2024 12:58:29 -0500
-Received: from fllvsmtp7.itg.ti.com ([10.249.42.149])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43IHwTQB052339;
- Thu, 18 Apr 2024 12:58:29 -0500
-From: Andrew Davis <afd@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-CC: Jon Humphreys <j-humphreys@ti.com>, <u-boot@lists.denx.de>, Andrew Davis
- <afd@ti.com>
-Subject: [PATCH] arm: mach-k3: am642: Fix reset for workaround errata ID i2331
-Date: Thu, 18 Apr 2024 12:58:28 -0500
-Message-ID: <20240418175828.84548-1-afd@ti.com>
-X-Mailer: git-send-email 2.39.2
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pg1-x52f.google.com with SMTP id
+ 41be03b00d2f7-58962bf3f89so280999a12.0
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 11:02:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713463343; x=1714068143; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AOxsS6j/qvXul5TPJwDt50iTMkvW5G7A3ASZtHoz6Ak=;
+ b=C6Rm6hXZLPJemVmW3snQJsCtnEj+hFhqtJZqrUkWnMlFx8UzYYAFuwAuTC3XxbJv3W
+ DceDLjLMOJZUWzqS8YGNiPGnv3D+m6nlwaxaRnPTEYoiKtNcJIoaPIWyfl1/mJEDJQDG
+ BmJ3whvJ1ux/E//15600tc1nJk3lSijnHlyHf/TDK5IinNZs+r3iZQtNQ3AqiAFdTcXD
+ O0zpy+oy79tC47DgepYbz2h3SmR2Q4xv6OfzDm0Rf3BQEAZufQEwbQl0gupmsjmlCrkN
+ GMui2f0WMkv1dkYtMUphMQdrICQW8tgwfRCTQP8fLvprTWXTliyUrVvsLFbhG0p8WltY
+ p/FA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713463343; x=1714068143;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AOxsS6j/qvXul5TPJwDt50iTMkvW5G7A3ASZtHoz6Ak=;
+ b=XDy/WGmAbgHsQR4yRRBn7xCT2IvvVJqY7S1mrQ9I+BVxuEXz2BzrQ+8gbnRGueGsKt
+ vsInr8HVAEKJyZoz4bcTvdMa/I7kdjv9QWdJvfaQEr5Yyz/zuKY1Q/rJ8yJ8AN8IAHB5
+ OCPmeLEwTlx5TfIo2JrhEnLfPOR77KpPyYb2bXcroQT4QjvgNpu1kHmsj+Tk9HZkRer4
+ fN5AADY+xqrRYJ+vpTkPIHHPEiFd1NfIKJd8ncn85zL6GgtwLbPB3wqI49I/QHy2+g+q
+ M1Rw2uiyeOvoQp7IbdVTbQ3BGZUk2BpZzbKNcpTj+CmjdCabSS9adMerfeVCFmAGx3b+
+ iCNg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUq4GTX1GlsO51T7BQPdI9kfUmpRPQCSpqtIN3xMwgw+yJx9i9CL8yx/Rur9S3Nu6l082kTaPpRxjJyFDeMy3hcB5r5eA==
+X-Gm-Message-State: AOJu0YwEFLRf3sCHB9MwLLwu+yoN9ElfUNNqS/meRbbDnU3oW7RbfS33
+ MKo0Ix69YrrDvdbgvbEOjByGU/jBcO6zInfDATskbKdifolYbWNrP04JHVvZ20xtxgBjeor5JDw
+ Kh++xMhxKmTqV+rpBHE/A24fzPD09PUYd
+X-Google-Smtp-Source: AGHT+IE3f2Ig1uj3k1Ny6ftxXDZjc2cKJ8BhCjcFzxAQPNLm0WN45hEfrFWxXNaZR3Qo3RaLzEzY9dMrPyYwubsAmDQ=
+X-Received: by 2002:a05:6a20:b227:b0:1a7:a3cb:7909 with SMTP id
+ eh39-20020a056a20b22700b001a7a3cb7909mr4193869pzb.3.1713463343297; Thu, 18
+ Apr 2024 11:02:23 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240120003610.124981-1-marex@denx.de>
+ <CAJ+vNU31BNnThbDDrvaThPy01roPTGXYWJbp4wbJeD-K0gjpzQ@mail.gmail.com>
+ <2e4997d2-1f10-46f8-b2f2-6ac641368f04@denx.de>
+ <CAJ+vNU0Og=g-xxjgWdu9g4U=DR6fuKoDWNUr9PB0VnL99bcu2Q@mail.gmail.com>
+In-Reply-To: <CAJ+vNU0Og=g-xxjgWdu9g4U=DR6fuKoDWNUr9PB0VnL99bcu2Q@mail.gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 18 Apr 2024 15:02:10 -0300
+Message-ID: <CAOMZO5DL683849BczPa9aJvMJxZm536vp-wE5P+jcCK1KLkGEg@mail.gmail.com>
+Subject: Re: [PATCH] ARM: imx: Enable kaslrseed command on DH i.MX8M Plus DHCOM
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@denx.de>,
+ u-boot@lists.denx.de, 
+ Stefano Babic <sbabic@denx.de>, u-boot@dh-electronics.com,
+ Claudius Heine <ch@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,32 +95,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To workaround an issue in AM642 we reset the SoC in early boot. For that
-we first probed the sysreset driver by calling uclass_get_device(). The
-ti-sci sysreset driver is now probed during the ti-sci firmware probe.
-Update this call to probe the firmware driver which will then probe
-the sysreset driver allowing do_reset() to again function as expected.
+Hi Tim,
 
-Reported-by: Jonathan Humphreys <j-humphreys@ti.com>
-Fixes: fc5d40283483 ("firmware: ti_sci: Bind sysreset driver when enabled")
-Signed-off-by: Andrew Davis <afd@ti.com>
----
- arch/arm/mach-k3/am642_init.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On Thu, Apr 18, 2024 at 2:54=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+wrote:
 
-diff --git a/arch/arm/mach-k3/am642_init.c b/arch/arm/mach-k3/am642_init.c
-index ddf47ef0a9b..80c3cb3479f 100644
---- a/arch/arm/mach-k3/am642_init.c
-+++ b/arch/arm/mach-k3/am642_init.c
-@@ -226,7 +226,7 @@ void board_init_f(ulong dummy)
- 	 * The warm reset realigns internal clocks and prevents the lockup from
- 	 * happening.
- 	 */
--	ret = uclass_first_device_err(UCLASS_SYSRESET, &dev);
-+	ret = uclass_get_device_by_driver(UCLASS_FIRMWARE, DM_DRIVER_GET(ti_sci), &dev);
- 	if (ret)
- 		printf("\n%s:uclass device error [%d]\n",__func__,ret);
- 
--- 
-2.39.2
+> Fabio, if you enable CONFIG_DM_RNG on an imx8m{m,p}_evk do you get the
+> following in the SPL?
+> Couldn't bind rng driver (-96)
+> SEC0:  RNG instantiated
+>
+> sec_init failed!
 
+Yes, if I add CONFIG_DM_RNG=3Dy to imx8mm_evk_defconfig I get:
+
+U-Boot SPL 2024.04-00793-g3434b88d2c2f-dirty (Apr 18 2024 - 14:58:57 -0300)
+No pmic
+Couldn't bind rng driver (-96)
+SEC0:  RNG instantiated
+
+sec_init failed!
