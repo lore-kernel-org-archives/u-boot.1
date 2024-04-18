@@ -4,82 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 661A5C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 19:06:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99043C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 22:43:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE324885E5;
-	Thu, 18 Apr 2024 21:06:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B94708869F;
+	Fri, 19 Apr 2024 00:43:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W79nEbcg";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 43B388837D; Thu, 18 Apr 2024 21:06:16 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22D2C886BA
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 21:06:14 +0200 (CEST)
+ id 9F1DC8869C; Fri, 19 Apr 2024 00:43:06 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 7C2A888695
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 00:43:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2aa0f3625aeso268765a91.1
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 12:06:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713467172; x=1714071972; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=KOUntGDUeWbxWjszAx9yfWVzgT65zLvkMZaSv/M1gc8=;
- b=W79nEbcge+dHO+oZS5VMqW757aQc07cCQkfhWddmg1jbnBtKIjbQ1DxF6nM+f+It9u
- ycbq0Qf9d6+Z1knUZiRbiyG/omUzjv5xj0RemOiBeGBGD4FoiaUc6dUwsWgNAEIGWivS
- T+pcg2gnpKfVpxqNRiK0GCgDcucxmtSp1cQMssYosQhZ8MkbsNUGgJ5MXK7zzeXMNAir
- H0qy7uHSEbStCuFR42niuERTX1LwJEUvg5+eRghPGF/92OHjZidi6qPrIeWxXxyBg9jj
- dbjJJJtlDJYQqHfCLsXHaIw5F8b3TUbkPee1Y6sxm6fNtUjYCCOhKfxQsPGFDWtXvCct
- yB0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713467172; x=1714071972;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=KOUntGDUeWbxWjszAx9yfWVzgT65zLvkMZaSv/M1gc8=;
- b=TyCycRZNjWxi5o/oKtGQJPK9OBiNsPSkYD63vPXZD94FLTbBIBSu/mTpmWfaBT6fJJ
- 2Cu+GVyXcJTN5ZZ69Kr7Pk5ujeQ/NG4A6chaouyozXRJS3RRr6EFrTki88IpVuQTUo0I
- yTZpa9suVFd/yAY040pqJynlOWWt67h2c/+u3F5FCxNFgfwippFYGIzzZd+6fd7KjFf9
- 3QnjvIyNiuxyVS6NRDDB/SNJrlslQoND/Yuajmn40YgGYfIdmUhiKnfrGpj6DBbew6eP
- fHUI1avXNKarjPTrpybst0zEL0hDFBFVKzs3HhLj4IhhjGxKFhjvGeCRoc3fdtJ9ziI3
- Qyvw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV4ELfwZIvZclp9ag6Zqo1Ndwy/B0Ubi21Bn4GJW07WZgIeDhFdm3cAHZF6u2PWxS1vEh6QbKmo3ub5BLr9I6dnw+mSmw==
-X-Gm-Message-State: AOJu0YwXfzSI0YLVvmi8Usw3BJUFXXGl3w43zTkB2Wfr79H8/rfAL6cd
- dlTwS5BFXbrDqa/Ehu0AtNCWm1PFhETutomirjN2NfeCtYxgdJuDtqOEtiH1fIWyFHwT2YPowZx
- fzkFPxDkH3xn9QRmCnAY3ltNzmt0=
-X-Google-Smtp-Source: AGHT+IEsL9P9sVfN/JB9XKXib7DnT92QjXqfsaJbY97WFVrDuJAe9dUJ95GfuTFektJxEnp56AeQzpqps2/ApghcNuo=
-X-Received: by 2002:a17:90a:b96:b0:2a6:8e66:d585 with SMTP id
- 22-20020a17090a0b9600b002a68e66d585mr43781pjr.4.1713467172558; Thu, 18 Apr
- 2024 12:06:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C86882F;
+ Thu, 18 Apr 2024 15:43:31 -0700 (PDT)
+Received: from minigeek.lan (usa-sjc-mx-foss1.foss.arm.com [172.31.20.19])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5A0763F738;
+ Thu, 18 Apr 2024 15:43:03 -0700 (PDT)
+Date: Thu, 18 Apr 2024 23:42:53 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: =?UTF-8?B?6Lev6L6J?= <luhux76@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH] drivers: pinctrl-sunxi: add suniv spi1 function
+Message-ID: <20240418234253.3cf07c9a@minigeek.lan>
+In-Reply-To: <CAGNyvehMbDenbnZdSbV9m5LkEkqE_dix0+XZQwJU_qDAcfJZXw@mail.gmail.com>
+References: <CAGNyvehMbDenbnZdSbV9m5LkEkqE_dix0+XZQwJU_qDAcfJZXw@mail.gmail.com>
+Organization: Arm Ltd.
+X-Mailer: Claws Mail 4.2.0 (GTK 3.24.31; x86_64-slackware-linux-gnu)
 MIME-Version: 1.0
-References: <20240120003610.124981-1-marex@denx.de>
- <CAJ+vNU31BNnThbDDrvaThPy01roPTGXYWJbp4wbJeD-K0gjpzQ@mail.gmail.com>
- <2e4997d2-1f10-46f8-b2f2-6ac641368f04@denx.de>
- <CAJ+vNU0Og=g-xxjgWdu9g4U=DR6fuKoDWNUr9PB0VnL99bcu2Q@mail.gmail.com>
- <CAOMZO5DL683849BczPa9aJvMJxZm536vp-wE5P+jcCK1KLkGEg@mail.gmail.com>
- <6783be1a-ade0-4cf2-89d6-b6ec29df5ce0@denx.de>
-In-Reply-To: <6783be1a-ade0-4cf2-89d6-b6ec29df5ce0@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 18 Apr 2024 16:05:59 -0300
-Message-ID: <CAOMZO5B36vz1w9ZZzJ+oZtypanTb7k6PvXNwG6KP8QBqcniGOg@mail.gmail.com>
-Subject: Re: [PATCH] ARM: imx: Enable kaslrseed command on DH i.MX8M Plus DHCOM
-To: Marek Vasut <marex@denx.de>
-Cc: Tim Harvey <tharvey@gateworks.com>, Fabio Estevam <festevam@denx.de>,
- u-boot@lists.denx.de, 
- Stefano Babic <sbabic@denx.de>, u-boot@dh-electronics.com,
- Claudius Heine <ch@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,17 +55,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Marek,
+On Fri, 9 Jun 2023 13:37:16 +0000
+=E8=B7=AF=E8=BE=89 <luhux76@gmail.com> wrote:
 
-On Thu, Apr 18, 2024 at 3:42=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+Hi,
 
-> Interesting. Which TFA blob version do you use ? I used the mainline
-> 2.10 for my tests.
+> From 570b40e19de75511d9ce066e1a28333ada04baf2 Mon Sep 17 00:00:00 2001
+> From: Lu Hui <luhux76@gmail.com>
+> Date: Mon, 29 May 2023 22:26:25 +0800
+> Subject: [PATCH] drivers: pinctrl-sunxi: add suniv spi1 function
 
-I tested with mainline TFA 2.10 and also with NXP 2.8. The error
-happens in both cases.
+There should be a commit message, explaining *why* this is needed.
+So which device on which board do you use in U-Boot that requires SPI1?
 
-> btw. 'no pmic' ? Is that expected ?
+Also you need a "Signed-off-by:" line with your real name and email
+address.
 
-Yes, this is a separate issue. It happens because there are two PMIC
-variants on the imx8mm evk.
+Cheers,
+Andre
+
+> ---
+>  drivers/pinctrl/sunxi/pinctrl-sunxi.c | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+> b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+> index e510218090..c448e40ab0 100644
+> --- a/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+> +++ b/drivers/pinctrl/sunxi/pinctrl-sunxi.c
+> @@ -240,6 +240,7 @@ static const struct sunxi_pinctrl_function
+> suniv_f1c100s_pinctrl_functions[] =3D {
+>      { "mmc0",    2 },    /* PF0-PF5 */
+>      { "mmc1",    3 },    /* PC0-PC2 */
+>      { "spi0",    2 },    /* PC0-PC3 */
+> +    { "spi1",    6 },    /* PA0-PA3 */
+>  #if IS_ENABLED(CONFIG_UART0_PORT_F)
+>      { "uart0",    3 },    /* PF2-PF4 */
+>  #else
+
