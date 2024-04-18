@@ -4,76 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C12E4C04FF8
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 17:53:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D053C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 17:56:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2457E87FF0;
-	Thu, 18 Apr 2024 19:53:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id BF09A88682;
+	Thu, 18 Apr 2024 19:56:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="OyKyx2Xn";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8798088688; Thu, 18 Apr 2024 19:53:48 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D4B4B88682; Thu, 18 Apr 2024 19:56:23 +0200 (CEST)
+Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF8008868B
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:53:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 28AA688691
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:56:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a555faf94fcso127957666b.0
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 10:53:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1713462823; x=1714067623; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=SQwTqOmPd/85/YMa+hCIIUmTGvVLqk2cuV4wA/JTqtk=;
- b=OyKyx2XnaajtYyRGHUANkKyjsVktXsIxM0x5QEx1wrPucVXd3x+5hq+gO78nOhZC0j
- /BcF+XhbM8n0b0aSvmVe5Rrk8kEUD/tSPVzQ8gCjXcNMxrj9lIRHcrab9zlSqkQOIhqj
- wh2hbmr36q3d10FZfA/nPqOF7GzszOadtMVHNzalC1uSFjtqWUShtojIsvlM9+L6SQns
- 0pMyiJgmYoqbtlgTxKR/9E+Kh3p23klNJz77k1Is1BaaKUSkCAp4z5BQ3szrn9RMYKV1
- Z0Lfprx+yTPkp8bbaOmQZvmzPNQ3hwNL5bLVMigxgtBVjiAygLZt2LiV2gQbQwcIbTcs
- 8rwA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713462823; x=1714067623;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=SQwTqOmPd/85/YMa+hCIIUmTGvVLqk2cuV4wA/JTqtk=;
- b=s5wZx0bJ7NzWA/FQNI7IT6l2XZBTUspFU5G3o7DUDUqrswuTxxaDF8hp8Sezcwtloz
- h7qBUaQMGPnfLCEUrTE+IWNVn08bGwTcDRcNPICKW8EYySSEqiflTCIk7oMJ0D7FL4WK
- ZESq/7RQvLf36veYjMVeuH2FHWfBZHhX5OVWeVww5YaolaJWokpm9zyk8v8XjukvuFg4
- xiuuISCIusDKkTtqXZZxH/rHuhEi9tQeZIq8oGDHjH+tMoJo9WMdXYlLsNKi01EjaY/+
- YA8A4+q9+YcW7vgBeenAKyYavSeEsId9YG3M9vzrNiaVbRrHzRwAna7+NROwv8pjP5fj
- 3Jfg==
-X-Gm-Message-State: AOJu0YwYSFIyXkxu/01++2Z/cRQFBz1YxyQllWeWIz/dChan4a2hESsZ
- ujDIgQVBgJntqkABaWyaRfyottdiTHUb6yVPDVFkUTJDOiiJLuhLjM5F771L6/ez2bLhM1h/tCO
- eQZrryj1U0NgrnwpHX/6S8+JmQ90jaKg97XTZaQ==
-X-Google-Smtp-Source: AGHT+IE+DkT6GE6aUXoQ8JvMwt1yA0VWObQmvlMvYi/KqP3cV++aDItGcblrbLYgwU9/7p87FKmGg6lDI9DyK/df3/k=
-X-Received: by 2002:a17:906:658:b0:a55:617d:4f37 with SMTP id
- t24-20020a170906065800b00a55617d4f37mr2186520ejb.0.1713462823263; Thu, 18 Apr
- 2024 10:53:43 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240120003610.124981-1-marex@denx.de>
- <CAJ+vNU31BNnThbDDrvaThPy01roPTGXYWJbp4wbJeD-K0gjpzQ@mail.gmail.com>
- <2e4997d2-1f10-46f8-b2f2-6ac641368f04@denx.de>
-In-Reply-To: <2e4997d2-1f10-46f8-b2f2-6ac641368f04@denx.de>
+Received: from [68.189.91.139] (helo=tharvey.pdc.gateworks.com)
+ by finn.localdomain with esmtp (Exim 4.95)
+ (envelope-from <tharvey@gateworks.com>) id 1rxVzc-00EXDl-Al;
+ Thu, 18 Apr 2024 17:56:16 +0000
 From: Tim Harvey <tharvey@gateworks.com>
-Date: Thu, 18 Apr 2024 10:53:31 -0700
-Message-ID: <CAJ+vNU0Og=g-xxjgWdu9g4U=DR6fuKoDWNUr9PB0VnL99bcu2Q@mail.gmail.com>
-Subject: Re: [PATCH] ARM: imx: Enable kaslrseed command on DH i.MX8M Plus DHCOM
-To: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@denx.de>
-Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>,
- u-boot@dh-electronics.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Fabio Estevam <festevam@gmail.com>,
+ Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH v2 1/3] clk: imx8mm: Add support for PCIe clocks
+Date: Thu, 18 Apr 2024 10:56:10 -0700
+Message-Id: <20240418175612.4068609-1-tharvey@gateworks.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,118 +55,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 18, 2024 at 10:33=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
->
-> On 4/18/24 6:21 PM, Tim Harvey wrote:
-> > On Fri, Jan 19, 2024 at 4:36=E2=80=AFPM Marek Vasut <marex@denx.de> wro=
-te:
-> >>
-> >> Linux 6.6.y with KASLR enabled would print the following message on bo=
-ot:
-> >> "
-> >> KASLR disabled due to lack of seed
-> >> "
-> >> Enable the 'kaslrseed' command so a random number seed can be pulled
-> >> from CAAM and inserted into the /chosen node 'kaslr-seed' property of
-> >> Linux kernel DT before boot, thus letting KASLR work properly.
-> >>
-> >> Signed-off-by: Marek Vasut <marex@denx.de>
-> >> ---
-> >> Cc: Fabio Estevam <festevam@denx.de>
-> >> Cc: Stefano Babic <sbabic@denx.de>
-> >> Cc: u-boot@dh-electronics.com
-> >> ---
-> >>   configs/imx8mp_dhcom_pdk2_defconfig | 2 ++
-> >>   configs/imx8mp_dhcom_pdk3_defconfig | 2 ++
-> >>   2 files changed, 4 insertions(+)
-> >>
-> >> diff --git a/configs/imx8mp_dhcom_pdk2_defconfig b/configs/imx8mp_dhco=
-m_pdk2_defconfig
-> >> index 4f907ce00d0..23fb6272ad5 100644
-> >> --- a/configs/imx8mp_dhcom_pdk2_defconfig
-> >> +++ b/configs/imx8mp_dhcom_pdk2_defconfig
-> >> @@ -117,6 +117,7 @@ CONFIG_CMD_BOOTCOUNT=3Dy
-> >>   CONFIG_CMD_CACHE=3Dy
-> >>   CONFIG_CMD_TIME=3Dy
-> >>   CONFIG_CMD_GETTIME=3Dy
-> >> +CONFIG_CMD_KASLRSEED=3Dy
-> >>   CONFIG_CMD_SYSBOOT=3Dy
-> >>   CONFIG_CMD_UUID=3Dy
-> >>   CONFIG_CMD_PMIC=3Dy
-> >> @@ -223,6 +224,7 @@ CONFIG_DM_REGULATOR_PCA9450=3Dy
-> >>   CONFIG_SPL_DM_REGULATOR_PCA9450=3Dy
-> >>   CONFIG_DM_REGULATOR_FIXED=3Dy
-> >>   CONFIG_DM_REGULATOR_GPIO=3Dy
-> >> +CONFIG_DM_RNG=3Dy
-> >>   CONFIG_DM_RTC=3Dy
-> >>   CONFIG_RTC_M41T62=3Dy
-> >>   CONFIG_CONS_INDEX=3D2
-> >> diff --git a/configs/imx8mp_dhcom_pdk3_defconfig b/configs/imx8mp_dhco=
-m_pdk3_defconfig
-> >> index 9972e2d96b6..0d47c12b1f9 100644
-> >> --- a/configs/imx8mp_dhcom_pdk3_defconfig
-> >> +++ b/configs/imx8mp_dhcom_pdk3_defconfig
-> >> @@ -119,6 +119,7 @@ CONFIG_CMD_BOOTCOUNT=3Dy
-> >>   CONFIG_CMD_CACHE=3Dy
-> >>   CONFIG_CMD_TIME=3Dy
-> >>   CONFIG_CMD_GETTIME=3Dy
-> >> +CONFIG_CMD_KASLRSEED=3Dy
-> >>   CONFIG_CMD_SYSBOOT=3Dy
-> >>   CONFIG_CMD_UUID=3Dy
-> >>   CONFIG_CMD_PMIC=3Dy
-> >> @@ -228,6 +229,7 @@ CONFIG_DM_REGULATOR_PCA9450=3Dy
-> >>   CONFIG_SPL_DM_REGULATOR_PCA9450=3Dy
-> >>   CONFIG_DM_REGULATOR_FIXED=3Dy
-> >>   CONFIG_DM_REGULATOR_GPIO=3Dy
-> >> +CONFIG_DM_RNG=3Dy
-> >>   CONFIG_DM_RTC=3Dy
-> >>   CONFIG_RTC_M41T62=3Dy
-> >>   CONFIG_CONS_INDEX=3D2
-> >> --
-> >> 2.43.0
-> >>
-> >
-> > Hi Marek,
-> >
-> > Sorry to respond to an old thread but I ran across this when enabling
-> > KALSR on my boards.
-> >
-> > I have noticed when you enable DM_RNG on IMX8M that SPL fails to bind
-> > the driver:
-> > Couldn't bind rng driver (-96)
-> > SEC0:  RNG instantiated
-> >
-> > sec_init failed!
->
-> Did you enable CAAM and ARCH_MISC_INIT on your machine, to initialize
-> CAAM in SPL ?
+Add support for PCIe clocks required to enable PCIe support on
+iMX8MM SoC.
 
-yes
+Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+---
+v2: no changes
+---
+ drivers/clk/imx/clk-imx8mm.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
 
->
-> > Didn't you encounter this as well? It seems to me that we may need to
-> > add the ability to disable DM_RNG in the SPL unless I'm missing
-> > something.
->
-> No, but see above, I suspect that might be it, see also
->
-> 1f908b1898bd ("ARM: imx8m: Deduplicate CAAM init with arch_misc_init()
-> call")
+diff --git a/drivers/clk/imx/clk-imx8mm.c b/drivers/clk/imx/clk-imx8mm.c
+index b5c253e49663..c2f01b385201 100644
+--- a/drivers/clk/imx/clk-imx8mm.c
++++ b/drivers/clk/imx/clk-imx8mm.c
+@@ -66,6 +66,15 @@ static const char *imx8mm_i2c3_sels[] = {"clock-osc-24m", "sys_pll1_160m", "sys_
+ static const char *imx8mm_i2c4_sels[] = {"clock-osc-24m", "sys_pll1_160m", "sys_pll2_50m", "sys_pll3_out", "audio_pll1_out",
+ 					 "video_pll1_out", "audio_pll2_out", "sys_pll1_133m", };
+ 
++static const char *imx8mm_pcie1_ctrl_sels[] = {"clock-osc-24m", "sys_pll2_250m", "sys_pll2_200m", "sys_pll1_266m",
++					       "sys_pll1_800m", "sys_pll2_500m", "sys_pll2_333m", "sys_pll3_out", };
++
++static const char *imx8mm_pcie1_phy_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll2_500m", "clk_ext1", "clk_ext2",
++					      "clk_ext3", "clk_ext4", "sys_pll1_400m", };
++
++static const char *imx8mm_pcie1_aux_sels[] = {"clock-osc-24m", "sys_pll2_200m", "sys_pll2_50m", "sys_pll3_out",
++					      "sys_pll2_100m", "sys_pll1_80m", "sys_pll1_160m", "sys_pll1_200m", };
++
+ #ifndef CONFIG_SPL_BUILD
+ static const char *imx8mm_pwm1_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll1_160m", "sys_pll1_40m",
+ 					 "sys_pll3_out", "clk_ext1", "sys_pll1_80m", "video_pll1_out", };
+@@ -256,6 +265,15 @@ static int imx8mm_clk_probe(struct udevice *dev)
+ 		imx8m_clk_composite("usb_bus", imx8mm_usb_bus_sels, base + 0x8b80));
+ 
+ 	/* IP */
++	clk_dm(IMX8MM_CLK_PCIE1_CTRL,
++	       imx8m_clk_composite("pcie1_ctrl", imx8mm_pcie1_ctrl_sels,
++				   base + 0xa300));
++	clk_dm(IMX8MM_CLK_PCIE1_PHY,
++	       imx8m_clk_composite("pcie1_phy", imx8mm_pcie1_phy_sels,
++				   base + 0xa380));
++	clk_dm(IMX8MM_CLK_PCIE1_AUX,
++	       imx8m_clk_composite("pcie1_aux", imx8mm_pcie1_aux_sels,
++				   base + 0xa400));
+ 	clk_dm(IMX8MM_CLK_USDHC1,
+ 	       imx8m_clk_composite("usdhc1", imx8mm_usdhc1_sels,
+ 				   base + 0xac00));
+@@ -339,6 +357,9 @@ static int imx8mm_clk_probe(struct udevice *dev)
+ 	       imx_clk_gate4("pwm4_root_clk", "pwm4", base + 0x42b0, 0));
+ #endif
+ 
++	clk_dm(IMX8MM_CLK_PCIE1_ROOT,
++	       imx_clk_gate4("pcie1_root_clk", "pcie1_ctrl", base + 0x4250, 0));
++
+ #if CONFIG_IS_ENABLED(DM_SPI)
+ 	clk_dm(IMX8MM_CLK_ECSPI1,
+ 	       imx8m_clk_composite("ecspi1", imx8mm_ecspi1_sels, base + 0xb280));
+-- 
+2.25.1
 
-yes, I have that same patch with
-c8645e74113c6 ("configs: imx8m: Prepare imx8m-venice boards for HAB support=
-")
-
-Do you have an IMX8M board on hand to check against to see if you see
-the same error in the SPL?
-
-Fabio, if you enable CONFIG_DM_RNG on an imx8m{m,p}_evk do you get the
-following in the SPL?
-Couldn't bind rng driver (-96)
-SEC0:  RNG instantiated
-
-sec_init failed!
-
-Best Regards,
-
-Tim
