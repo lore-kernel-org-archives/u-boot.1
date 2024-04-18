@@ -4,73 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C327BC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 05:24:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E2BC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 06:56:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEC9B88503;
-	Thu, 18 Apr 2024 07:24:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DB9A588524;
+	Thu, 18 Apr 2024 08:56:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="leYnbUxl";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="DNnrOW6L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F13D8855A; Thu, 18 Apr 2024 07:24:48 +0200 (CEST)
-Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
- [IPv6:2a00:1450:4864:20::12c])
+ id D61D088526; Thu, 18 Apr 2024 08:56:02 +0200 (CEST)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 163FA884EA
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 07:24:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x12c.google.com with SMTP id
- 2adb3069b0e04-518f8a69f82so508507e87.2
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 22:24:46 -0700 (PDT)
+ by phobos.denx.de (Postfix) with ESMTPS id 94B7F884F3
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 08:56:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-6184acc1ef3so4719797b3.0
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 23:56:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713417885; x=1714022685; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=wt4Zp9nM+Dh6YW486JBVRv+l1J5pN2iVSAThwAQKhqs=;
- b=leYnbUxltfeTULihTApmSmSdLkOPPKB229AyJ32d2OYCw60pSpnUbsNel6PedTrHV4
- okv+j3ah3fY9Pz3P1+O6AB4UBv5Cq6V3CE916aFlCX1ozThItgLltOxZEu2doH94VtaT
- F4Bxprk419I5NlxhYEsZxfh1tWr99uqSdB6X/3syhwblY3oYrZmsxyuRPqdyvNwsUzsx
- cgRlWTTAB58LysuH4S2aIju6+YxWAWfVMZlCBAGzhUTQYo63fFqHxoqgPW8N1PdfoPHW
- zsYZ++sJVAMc6iOuQm//6CGEIFBZYOEkk8apCF/zKEaYdEKbmW1+o1+xE0+3IuP1x7gx
- ORWw==
+ d=amarulasolutions.com; s=google; t=1713423359; x=1714028159;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gdfXDJlwXmZMcVSIhg3nnMmJ9i7zWwfCOCHFZcmR1Zw=;
+ b=DNnrOW6LSDF9xJywSTR+mMECMv5PU/66VzYwchNv4fh9a2cCAorWtTTgkZS/a834mK
+ XIKAbi2ojQR48Ky8jjfTwHDbFYiEJh8rFMvbNOK3eHnOEdv86jHeQgWTidycoV7e6AYz
+ MoABDg8twFqO3URRvSaEFx9wcrWVEx3uou4pc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713417885; x=1714022685;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wt4Zp9nM+Dh6YW486JBVRv+l1J5pN2iVSAThwAQKhqs=;
- b=BYFbg0M6LYWkQ2OZ0T+0uFK44MXLGJT8l7Yzu1V+6EKTpFE5zMkdw0EWs3ZTKmbVDb
- ax6mYdXD5VzcX6MLRtI2Wfqdk3vLsr9p1UqLV/EpsuCpqCXxQWa1RSMOaP6DeNe6Kjpt
- YpSYPIhmQtAjIfuVeB50yzG2tD4k/1+olXukME9tJPockg4URo+9RNlt41uWoJ2xick5
- TJqAc3u2Ki07tvD4KjOwNYlNaFoNfRuxJ3p8RMFvNu8HxJDMHGpEYsrTNO6K5zP3hT8E
- X/0YdINetESJah9bR2RdcsSGGrUVs19hDbEnA54BqxkQdF9JCFBBi3DIiVeEbVMNi3/x
- AazA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXu5Jf8DpxTRkXxeyy2WnVTS0sY4JJdK0HOVwuCqQeKTJSpMV3tOQ12Z1lZjqvo0umUsOtp3teuQxS+GZIbv6jpajecGw==
-X-Gm-Message-State: AOJu0YyqcEzb7o1JpArVYVVUD8U6eqASU+/Gs8k/DpZi9P+D6ImmJecw
- X3fPrX0Is40j0B6vqkNDcstW0rrP3KlRtS7tLVdz5XY5aBibsXRHOU8NXm2rybnye425ZMAVsCN
- 37tB9vrcojaIzaGP6jUBE6cYpZdLymcYVlMfONA==
-X-Google-Smtp-Source: AGHT+IH7a5Ume/7UTD7NhNbH4VYv69nlHAGWopjYWbD8tC70YVoNlUBnntUrlsjejfq5CYIuKM5zn3PbnYXl2GO4OLw=
-X-Received: by 2002:ac2:5386:0:b0:513:ca77:82cc with SMTP id
- g6-20020ac25386000000b00513ca7782ccmr984244lfh.8.1713417885230; Wed, 17 Apr
- 2024 22:24:45 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1713423359; x=1714028159;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gdfXDJlwXmZMcVSIhg3nnMmJ9i7zWwfCOCHFZcmR1Zw=;
+ b=WMX9TY89OOhAXbaAKiT9FjWuH6F66IcnJcrB5oirsb/G5dLyGepzaghxue4lbEJyFu
+ f5byt5/vbhL2yFmF++5bXssVWOJb7AA8DxfMXnSTlpFA1LCTM3lIBK/e7MhaIWuZGA/b
+ t5bhAvtPo61KVaqloHfLMstknXn1dIDpqXe/a97JFj1Px4nStTUwdKqJk9SB4+QNuUez
+ pwZEFzqmRRdllYnIkFKkc/B3vx6Cjm595o5tgpveJI92QKzMlie3cryvN8Z7os5WHd02
+ NE3hA0V7/3mcL3voy+eGetKxD+Em/2OcfrEBSJ8oqzkpXmP35RA4lJezipjfRiR8tUpT
+ EGgQ==
+X-Gm-Message-State: AOJu0Yw4KmLjD//whfEvdbiRlNOm26pKkbThDBWYGbN+7SORf2I9pq9m
+ rmnlj/Cv+VoBplGmvFRONg3GBDWUkjYBs42Q51wyl4bMfjVjRPX33+n9jt5ndul9i5yehZF5I4e
+ TRs7x8ubF3UWWYwHob46OAR1ZlrmIvwVtQX1kog==
+X-Google-Smtp-Source: AGHT+IHvyjAvHHJZwJQlhAxCyrl3S980BVT8lbmDWvk0IRlwmgJ8WSUTY6Wwuf7m6qtYzTr0mzHd/2Jt/suoeYo6ll4=
+X-Received: by 2002:a05:690c:6386:b0:618:9353:1023 with SMTP id
+ hp6-20020a05690c638600b0061893531023mr2276359ywb.17.1713423359466; Wed, 17
+ Apr 2024 23:55:59 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240418023202.11327-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240418023202.11327-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 18 Apr 2024 08:24:09 +0300
-Message-ID: <CAC_iWj+B2UVZiiqVfjNBLDvgexE=5ixtmJF-pj3p9DAdNf2S9Q@mail.gmail.com>
-Subject: Re: [PATCH v2 1/1] efi_loader: typo mstching
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: "Reported-by : E Shattow" <lucent@gmail.com>, u-boot@lists.denx.de
+References: <20231130112405.92196-1-avkrasnov@salutedevices.com>
+ <fa9fc4cc-892c-7c11-877b-330bf173f3bd@salutedevices.com>
+ <f79d88f4-0d2e-1d78-065a-5a1f2f2deacf@salutedevices.com>
+ <c150440e-191d-bce8-3b99-401186be507f@salutedevices.com>
+ <180478dc-23ec-952d-e1ae-6f16d98bd16c@salutedevices.com>
+ <969ce8dc-3726-cf66-3241-5eb06f9cb85f@salutedevices.com>
+ <CAOf5uw=2hicHHOP1caASJoqmOpZ9vvE3ZMnVQqXxQ0eqbm-CMg@mail.gmail.com>
+ <3142650d-4868-c6cf-2555-301e41fadbe4@salutedevices.com>
+ <CAOf5uwkmPq4pU0RY-fQtt7Qn5dzpHSf7rr_z5yrepmgP4wRADw@mail.gmail.com>
+In-Reply-To: <CAOf5uwkmPq4pU0RY-fQtt7Qn5dzpHSf7rr_z5yrepmgP4wRADw@mail.gmail.com>
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Date: Thu, 18 Apr 2024 08:55:48 +0200
+Message-ID: <CABGWkvqxBRhjRFC3szz_WGJmHyzx1ihRADr04f47k+8SRqjFBQ@mail.gmail.com>
+Subject: Re: [PATCH v1] mtd: rawnand: macronix: OTP access for MX30LFxG18AC
+To: Arseniy Krasnov <avkrasnov@salutedevices.com>
+Cc: u-boot@lists.denx.de, kernel@sberdevices.ru, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, oxffffaa@gmail.com,
+ Miquel Raynal <miquel.raynal@bootlin.com>, Jaime Liao <jaimeliao.tw@gmail.com>,
+ Jaime Liao <jaimeliao@mxic.com.tw>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,35 +96,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 18 Apr 2024 at 05:32, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> %s/mstching/matching/
->
-> Reported-by: E Shattow <lucent@gmail.com>
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
-> v2:
->         correct Reported-by line
-> ---
->  lib/efi_loader/efi_var_common.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
-> index aa8feffd3ec..ed53bcf3939 100644
-> --- a/lib/efi_loader/efi_var_common.c
-> +++ b/lib/efi_loader/efi_var_common.c
-> @@ -419,7 +419,7 @@ void *efi_get_var(const u16 *name, const efi_guid_t *vendor, efi_uintn_t *size)
->  }
->
->  /**
-> - * efi_var_collect() - Copy EFI variables mstching attributes mask
-> + * efi_var_collect() - Copy EFI variables matching attributes mask
->   *
->   * @bufp:      buffer containing variable collection
->   * @lenp:      buffer length
-> --
-> 2.43.0
->
+Arseniy, Michael, All
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+On Wed, Apr 17, 2024 at 8:44=E2=80=AFPM Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
+>
+> Hi
+>
+> Dario did you add those patches in CI and test them again?
+>
+> Michael
+>
+> On Wed, Apr 17, 2024 at 8:44=E2=80=AFPM Arseniy Krasnov
+> <avkrasnov@salutedevices.com> wrote:
+> >
+> > Hello,
+> >
+> > Sorry, pls ping
+> >
+> > Thanks, Arseniy
+> >
+> > On 13.03.2024 09:46, Michael Nazzareno Trimarchi wrote:
+> > > Hi  Dario
+> > >
+> > > Can apply this series and put in CI?
+
+Sorry, but I mistakenly tagged it as 'superseded'.
+I just pushed it to my nand-next branch and I'm running the CI now.
+
+Thanks and regards,
+Dario
+
+> > >
+> > > Michael
+> > >
+> > > On Wed, Mar 13, 2024 at 7:43=E2=80=AFAM Arseniy Krasnov
+> > > <avkrasnov@salutedevices.com> wrote:
+> > >>
+> > >> Sorry, please ping
+> > >>
+> > >> Thanks, Arseniy
+> > >>
+> > >> On 11.02.2024 02:16, Arseniy Krasnov wrote:
+> > >>> Sorry, pls ping
+> > >>>
+> > >>> Thanks, Arseniy
+> > >>>
+> > >>> On 08.01.2024 21:33, Arseniy Krasnov wrote:
+> > >>>> Sorry, pls ping
+> > >>>>
+> > >>>> Thanks, Arseniy
+> > >
+> > >
+> > >
+>
+>
+>
+> --
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com
+> __________________________________
+>
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com
+> www.amarulasolutions.com
+
+
+
+--=20
+
+Dario Binacchi
+
+Senior Embedded Linux Developer
+
+dario.binacchi@amarulasolutions.com
+
+__________________________________
+
+
+Amarula Solutions SRL
+
+Via Le Canevare 30, 31100 Treviso, Veneto, IT
+
+T. +39 042 243 5310
+info@amarulasolutions.com
+
+www.amarulasolutions.com
