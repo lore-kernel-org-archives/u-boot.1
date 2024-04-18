@@ -4,19 +4,19 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89346C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 17:56:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6798C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 17:56:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E58E88694;
-	Thu, 18 Apr 2024 19:56:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7411188699;
+	Thu, 18 Apr 2024 19:56:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DCAFD8868F; Thu, 18 Apr 2024 19:56:23 +0200 (CEST)
+ id 4341987842; Thu, 18 Apr 2024 19:56:25 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E9A788696
+ by phobos.denx.de (Postfix) with ESMTPS id 3449A88698
  for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:56:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
@@ -24,7 +24,7 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tharvey@gateworks.com
 Received: from [68.189.91.139] (helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1rxVzd-00EXDl-1v;
+ (envelope-from <tharvey@gateworks.com>) id 1rxVzd-00EXDl-Or;
  Thu, 18 Apr 2024 17:56:17 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
@@ -33,9 +33,9 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 Cc: Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH v2 2/3] pci: dw_imx: add support for IMX8MM
-Date: Thu, 18 Apr 2024 10:56:11 -0700
-Message-Id: <20240418175612.4068609-2-tharvey@gateworks.com>
+Subject: [PATCH v2 3/3] imx8mm_venice_defconfig: Enable PCIe/NVMe support
+Date: Thu, 18 Apr 2024 10:56:12 -0700
+Message-Id: <20240418175612.4068609-3-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20240418175612.4068609-1-tharvey@gateworks.com>
 References: <20240418175612.4068609-1-tharvey@gateworks.com>
@@ -57,66 +57,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for the IMX8MM SoC by adding driver data with the compatible
-string of the GPR controller.
+Enable PCIe/NVMe support. Also, enable the reset
+driver which is a prerequisite for PCIe support.
 
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
-v2: do not cache chip info in priv per Marek's suggestion
+v2: no changes
 ---
- drivers/pci/pcie_dw_imx.c | 18 ++++++++++++++++--
- 1 file changed, 16 insertions(+), 2 deletions(-)
+ configs/imx8mm_venice_defconfig | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/pci/pcie_dw_imx.c b/drivers/pci/pcie_dw_imx.c
-index a2ee228224b5..fdb463710ba1 100644
---- a/drivers/pci/pcie_dw_imx.c
-+++ b/drivers/pci/pcie_dw_imx.c
-@@ -56,6 +56,18 @@ struct pcie_dw_imx {
- 	struct udevice			*vpcie;
- };
- 
-+struct pcie_chip_info {
-+	const char *gpr;
-+};
-+
-+static const struct pcie_chip_info imx8mm_chip_info = {
-+	.gpr = "fsl,imx8mm-iomuxc-gpr",
-+};
-+
-+static const struct pcie_chip_info imx8mp_chip_info = {
-+	.gpr = "fsl,imx8mp-iomuxc-gpr",
-+};
-+
- static void pcie_dw_configure(struct pcie_dw_imx *priv, u32 cap_speed)
- {
- 	dw_pcie_dbi_write_enable(&priv->dw, true);
-@@ -242,6 +254,7 @@ static int pcie_dw_imx_remove(struct udevice *dev)
- 
- static int pcie_dw_imx_of_to_plat(struct udevice *dev)
- {
-+	struct pcie_chip_info *info = (void *)dev_get_driver_data(dev);
- 	struct pcie_dw_imx *priv = dev_get_priv(dev);
- 	ofnode gpr;
- 	int ret;
-@@ -287,7 +300,7 @@ static int pcie_dw_imx_of_to_plat(struct udevice *dev)
- 		goto err_phy;
- 	}
- 
--	gpr = ofnode_by_compatible(ofnode_null(), "fsl,imx8mp-iomuxc-gpr");
-+	gpr = ofnode_by_compatible(ofnode_null(), info->gpr);
- 	if (ofnode_equal(gpr, ofnode_null())) {
- 		dev_err(dev, "unable to find GPR node\n");
- 		ret = -ENODEV;
-@@ -322,7 +335,8 @@ static const struct dm_pci_ops pcie_dw_imx_ops = {
- };
- 
- static const struct udevice_id pcie_dw_imx_ids[] = {
--	{ .compatible = "fsl,imx8mp-pcie" },
-+	{ .compatible = "fsl,imx8mm-pcie", .data = (ulong)&imx8mm_chip_info, },
-+	{ .compatible = "fsl,imx8mp-pcie", .data = (ulong)&imx8mp_chip_info, },
- 	{ }
- };
- 
+diff --git a/configs/imx8mm_venice_defconfig b/configs/imx8mm_venice_defconfig
+index 517b70b69477..0f97b4b84243 100644
+--- a/configs/imx8mm_venice_defconfig
++++ b/configs/imx8mm_venice_defconfig
+@@ -12,6 +12,7 @@ CONFIG_DEFAULT_DEVICE_TREE="freescale/imx8mm-venice-gw71xx-0x"
+ CONFIG_SPL_TEXT_BASE=0x7E1000
+ CONFIG_TARGET_IMX8MM_VENICE=y
+ CONFIG_OF_LIBFDT_OVERLAY=y
++CONFIG_DM_RESET=y
+ CONFIG_SYS_MONITOR_LEN=524288
+ CONFIG_SPL_MMC=y
+ CONFIG_SPL_SERIAL=y
+@@ -20,6 +21,7 @@ CONFIG_SPL_STACK=0x920000
+ CONFIG_SPL=y
+ CONFIG_ENV_OFFSET_REDUND=0x3f8000
+ CONFIG_SYS_LOAD_ADDR=0x48200000
++CONFIG_PCI=y
+ CONFIG_SYS_MEMTEST_START=0x40000000
+ CONFIG_SYS_MEMTEST_END=0x80000000
+ CONFIG_FIT=y
+@@ -60,6 +62,7 @@ CONFIG_CMD_FUSE=y
+ CONFIG_CMD_GPIO=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
+ CONFIG_CMD_USB_MASS_STORAGE=y
+ CONFIG_CMD_DHCP6=y
+@@ -120,6 +123,9 @@ CONFIG_PHY_GIGE=y
+ CONFIG_FEC_MXC=y
+ CONFIG_KSZ9477=y
+ CONFIG_MII=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_IMX=y
++CONFIG_PHY_IMX8M_PCIE=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_IMX8M=y
 -- 
 2.25.1
 
