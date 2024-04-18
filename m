@@ -4,79 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0ECEC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 10:39:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8AE2C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 11:02:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BDF3885CD;
-	Thu, 18 Apr 2024 12:39:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3859F885D0;
+	Thu, 18 Apr 2024 13:02:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qgFFxxVf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xrEdgMgO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FC3E885CF; Thu, 18 Apr 2024 12:38:59 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D8D1D885D3; Thu, 18 Apr 2024 13:02:47 +0200 (CEST)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4CFD988524
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 12:38:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BF591884D0
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 13:02:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43IAcpgf094476;
- Thu, 18 Apr 2024 05:38:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1713436731;
- bh=8eebYcHupz3J24sPvVpA/pReAUw1vEbX4reqC86CXjA=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=qgFFxxVfa3eo6tIuw0x3N8uBy24l4TtQSc8Q/pEW4B5I8nImnhsno1NFjXTNjKf+l
- LC6VoSkQnifBcLa5XOQ9/FOZEsQy9HSKmvbve/qkMlivIFcRdPwZOIsczRZTsnP8VI
- wMd5mL7oeAs5Hb21emWmnqJOzdzorVfHJtg1uZgw=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43IAcp6Q011123
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 18 Apr 2024 05:38:51 -0500
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 18
- Apr 2024 05:38:50 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 18 Apr 2024 05:38:50 -0500
-Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
- [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43IAckNF024938;
- Thu, 18 Apr 2024 05:38:47 -0500
-Message-ID: <42fd6f28-bcf6-406c-8d43-7b4f3966ebb2@ti.com>
-Date: Thu, 18 Apr 2024 16:08:46 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-41551639550so5170665e9.2
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 04:02:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1713438163; x=1714042963; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=9iW12sXZOB5FRaWx+8lxH93YcyOID2RM5SQhO8ukvbo=;
+ b=xrEdgMgO2x4NmGmZQcMG9JPSxMWnTHZGr6U20ZzwnVgbK1zoZJn3qU2dFAf3XV8KVN
+ zYHgnaIyJUiYAVKi/++tYoo37jcRdbgBAkZJAw4TWhhGGF0Wv3B+SQQjOdlrUm5IuKmm
+ sw6WFUxcn07InW2UnomnCAXWpthnWM6hZuzBjZcPHHN+PJRR82LN740JPXaCfFBp3ZLg
+ vaz00lyytWjBLpr7Tn4eX1aTScFH/TzhSKpErpl55OCL5AxoZGLnTvnJYgY6EJENgIIF
+ mOeHk3haxzcdRP0ltVsZpObIJbWLKD/FXNTfdLtkrfye0wlzf3BQKQGJMXGoCwtsYj7+
+ E84g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713438163; x=1714042963;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=9iW12sXZOB5FRaWx+8lxH93YcyOID2RM5SQhO8ukvbo=;
+ b=ao73IYZsNRbUdi0hrCAD51yFmKjZVBcrgj/gyVwb97w0ivT36zKYC1MwLv7acBiJzk
+ QOZ5jQzGjDwBwYtNoD3kkbC5vdWWrg1PI9RaL9F96TmBDEfwcbVF3EheNXSPUEAYAY98
+ IYoXh65TQzCINshHqWRXjpAABQ8+NzBMLjP1jjVBqZdHGEM8Mf803tHxRR15YtYMOKAY
+ wySVknB1Dj+v5W5kiMcKuo9W/+tpU+rB0+iXGN64RJuGA6hTs4kFwq8Vv0r6A9g+ONFe
+ bFYq3qGvRn64IrHQ4cWLk0LsdRpXJY5hYqRAptd2sqK8KVcUgGwf21z41nxXOUZDtiRb
+ 8tcg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUMBxbXaK6vTSxM4u3h49tSS+9UDB1VrKINwlZohy7nngZIqomg5H4IFEFMXbnmeyJ+zBF7P1xDyH/4ihAQ0wiPL8JkFQ==
+X-Gm-Message-State: AOJu0YzYzDD0eZRqDkCVKVE4ANWXlqbGhGfcCZQUlCyPnRP2ekvIvkZJ
+ uCgbSV4LT/yXdYoXny0INu7T6g3Wlk1Jd2z/iiGEe5w2OEbfLGMllMaM67SZK/Q=
+X-Google-Smtp-Source: AGHT+IHF3M/1Btnd/c2ALk7T97OiP5uyy4sEfC2GACx/3Lvdedc1n1JKpg6DN3g5Zcim5sjUdYHmjQ==
+X-Received: by 2002:a05:600c:1d24:b0:418:f8c2:c3bc with SMTP id
+ l36-20020a05600c1d2400b00418f8c2c3bcmr5418wms.33.1713438163147; 
+ Thu, 18 Apr 2024 04:02:43 -0700 (PDT)
+Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
+ by smtp.gmail.com with ESMTPSA id
+ d4-20020a5d6dc4000000b00341ce80ea66sm1559080wrz.82.2024.04.18.04.02.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 18 Apr 2024 04:02:42 -0700 (PDT)
+Message-ID: <63fec346-81d4-4846-bddb-615887505fc9@linaro.org>
+Date: Thu, 18 Apr 2024 12:02:42 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/10] board: ti: am62x: Init DRAM size in R5/A53 SPL
+Subject: Re: [PATCH 2/3] mach-ipq40xx: import GPIO header from mach-snapgradon
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- <nm@ti.com>, <afd@ti.com>, <vigneshr@ti.com>, <dannenberg@ti.com>,
- <srk@ti.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
-CC: <joe.hershberger@ni.com>, <simon.k.r.goldschmidt@gmail.com>,
- <sjg@chromium.org>, <marex@denx.de>, <u-boot@lists.denx.de>
-References: <20240112132607.GO1610741@bill-the-cat>
- <a1d7ca85-8723-4d73-8e1c-357c6aa6294f@ti.com>
- <20240120164141.GA3652023@bill-the-cat>
- <48c63fc4-9f06-4066-b206-a0a548936dcd@ti.com>
- <892b473b-5b76-4e44-af27-52d50cb24877@ti.com>
- <20240411220741.GJ2493117@bill-the-cat>
- <2406c7be-114c-4082-9c14-1cd59917b9d8@ti.com>
- <20240416170027.GQ1054907@bill-the-cat>
- <97f84067-ba36-47f6-befa-221be47a1d25@ti.com>
- <CADg8p97udLbFvbZ_FZf9Hfwg3R4=YJMNWrAtqvu97mL7vVYREQ@mail.gmail.com>
- <20240417160446.GF1054907@bill-the-cat>
-From: Chintan Vankar <c-vankar@ti.com>
-In-Reply-To: <20240417160446.GF1054907@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+To: Robert Marko <robert.marko@sartura.hr>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@linaro.org, u-boot@lists.denx.de
+Cc: j.beck@linefinity.com
+References: <20240418091435.18232-1-robert.marko@sartura.hr>
+ <20240418091435.18232-2-robert.marko@sartura.hr>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240418091435.18232-2-robert.marko@sartura.hr>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,131 +97,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Robert,
 
+On 18/04/2024 10:14, Robert Marko wrote:
+> Pinctrl driver was refactored and moved, but the required header that
+> it depends on was not included.
 
-On 17/04/24 21:34, Tom Rini wrote:
-> On Wed, Apr 17, 2024 at 05:48:31PM +0530, Sughosh Ganu wrote:
->> hi Chintan,
->>
->> On Wed, 17 Apr 2024 at 13:21, Chintan Vankar <c-vankar@ti.com> wrote:
->>>
->>>
->>>
->>> On 16/04/24 22:30, Tom Rini wrote:
->>>> On Tue, Apr 16, 2024 at 05:52:58PM +0530, Chintan Vankar wrote:
->>>>>
->>>>>
->>>>> On 12/04/24 03:37, Tom Rini wrote:
->>>>>> On Wed, Apr 03, 2024 at 06:18:01PM +0530, Chintan Vankar wrote:
->>>>>>>
->>>>>>>
->>>>>>> On 22/01/24 10:11, Siddharth Vadapalli wrote:
->>>>>>>>
->>>>>>>>
->>>>>>>> On 20/01/24 22:11, Tom Rini wrote:
->>>>>>>>> On Mon, Jan 15, 2024 at 01:42:51PM +0530, Siddharth Vadapalli wrote:
->>>>>>>>>> Hello Tom,
->>>>>>>>>>
->>>>>>>>>> On 12/01/24 18:56, Tom Rini wrote:
->>>>>>>>
->>>>>>>> ...
->>>>>>>>
->>>>>>>>>>> The list of conditionals in common/spl/spl.c::board_init_r() should be
->>>>>>>>>>> updated and probably use SPL_NET as the option to check for.
->>>>>>>>>>
->>>>>>>>>> Thank you for reviewing the patch and pointing this out. I wasn't aware of it. I
->>>>>>>>>> assume that you are referring to the following change:
->>>>>>>>>>
->>>>>>>>>>             if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HANDOFF) ||
->>>>>>>>>> -           IS_ENABLED(CONFIG_SPL_ATF))
->>>>>>>>>> +           IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(CONFIG_SPL_NET))
->>>>>>>>>>                     dram_init_banksize();
->>>>>>>>>>
->>>>>>>>>> I shall replace the current patch with the above change in the v2 series. Since
->>>>>>>>>> this is in the common section, is there a generic reason I could provide in the
->>>>>>>>>> commit message rather than the existing commit message which seems to be board
->>>>>>>>>> specific? Also, I hope that the above change will not cause regressions for
->>>>>>>>>> other non-TI devices. Please let me know.
->>>>>>>>>
->>>>>>>>> Yes, that's the area, and just note that networking also requires the
->>>>>>>>> DDR to be initialized.
->>>>>>>>>
->>>>>>>>
->>>>>>>> Thank you for confirming and providing your suggestion for the contents of the
->>>>>>>> commit message.
->>>>>>>>
->>>>>>> Following Tom's Suggestion of adding CONFIG_SPL_NET in common/spl/spl.c
->>>>>>> "dram_init_banksize()", the issue of fetching a file at SPL stage seemed
->>>>>>> to be fixed. However the commit "ba20b2443c29", which sets gd->ram_top
->>>>>>> for the very first time in "spl_enable_cache()" results in
->>>>>>> "arch_lmb_reserve()" function reserving memory region from Stack pointer
->>>>>>> at "0x81FFB820" to gd->ram_top pointing to "0x100000000". Previously
->>>>>>> when gd->ram_top was zero "arch_lmb_reserve()" was noop. Now using TFTP
->>>>>>> to fetch U-Boot image at SPL stage results in "tftp_init_load_addr()"
->>>>>>> function call that invokes "arch_lmb_reserve()" function, which reserves
->>>>>>> entire memory starting from Stack Pointer to gd->ram_top leaving no
->>>>>>> space to load U-Boot image via TFTP since TFTP loads files at pre
->>>>>>> configured memory address at "0x82000000".
->>>>>>>
->>>>>>> As a workaround for this issue, one solution we can propose is to
->>>>>>> disable the checks "lmb_get_free_size()" at SPL and U-Boot stage. For
->>>>>>> that we can define a new config option for LMB reserve checks as
->>>>>>> "SPL_LMB". This config will be enable by default for the backword
->>>>>>> compatibility and disable for our use case at SPL and U-Boot stage.
->>>>>>
->>>>>> The problem here is that we need LMB for booting an OS, which is
->>>>>> something we'll want in SPL in non-cortex-R cases too, which means this
->>>>>> platform, so that's a no-go. I think you need to dig harder and see if
->>>>>> you can correct the logic somewhere so that we don't over reserve?
->>>>>>
->>>>> Since this issue is due to function call "lmb_init_and_reserve()"
->>>>> function invoked from "tftp_init_load_addr()" function. This function
->>>>> is defined by Simon in commit "a156c47e39ad", which fixes
->>>>> "CVE-2018-18439" to prevent overwriting reserved memory. Simon, can you
->>>>> explain why do we need to call "lmb_init_and_reserve()" function here ?
->>>>
->>>> This is indeed a tricky area which is why Sughosh is looking in to
->>>> trying to re-work the LMB mechanic and we've had a few long threads
->>>> about it as well.
->>>>
->>>> I've honestly forgotten the use case you have here, can you please
->>>> remind us?
->>>>
->>> We are trying to boot AM62x using Ethernet for which we need to load
->>> binary files at SPL and U-Boot stage using TFTP. To store the file we
->>> need a free memory in RAM, specifically we are storing these files at
->>> 0x82000000. But we are facing an issue while loading the file since
->>> the memory area having an address 0x82000000 is reserved due to
->>> "lmb_init_and_reserve()" function call. This function is called in
->>> "tftp_init_load_addr()" function which is getting called exactly before
->>> we are trying to get the free memory area by calling
->>> "lmb_get_free_size()".
->>
->> I have no idea about your platform but I was wondering if there is any
->> particular importance of the load address of 0x82000000? It looks as
->> though the current location of the SP when arch_lmb_reserve() gets
->> called means that the load address is getting reserved for the U-Boot
->> image. Do you not have the option of loading the image at a lower
->> address instead?
+Thanks for these patches!
+
+I'm a bit worried about duplicating this header file, we could probably
+move it to the main include directory instead?
+
+Alternatively, do you think it would be sensible to combine
+mach-snapdragon with mach-ipq40xx ?
+
+I received some patches a while ago from some Qualcomm engineers trying
+to introduce support for newer IPQ SoCs, where they also seem to want to
+build U-Boot as 32-bit (something I guess ipq40xx may also do?).
+
+I'm easy either way, just want to get a better understanding of this.
+
+Kind regards,
 > 
-
-Sughosh,
-
-I think my explanation was not clear at:
-"We are trying to boot AM62x using Ethernet for which we need to load
-binary files at SPL and U-Boot stage using TFTP."
-- In Ethernet Booting we are fetching U-Boot image at SPL stage via
-TFTP at specified address 0x82000000. While loading U-Boot image we are
-getting TFTP error, since address from stack pointer till gd->ram_top is
-reserved due to "lmb_init_and_reserve()" function call. I want to know
-for which purpose this address range is reserved.
-
-> Or using a higher address for SPL stack? You might be able to solve this
-> just by re-examining which addresses (and RAM size limitations) need to
-> be considered here.
+> Fixes: 24d2908e987a ("pinctrl: qcom: move ipq4019 driver from mach-ipq40xx")
+> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+> ---
+>  arch/arm/mach-ipq40xx/include/mach/gpio.h | 37 +++++++++++++++++++----
+>  1 file changed, 31 insertions(+), 6 deletions(-)
 > 
+> diff --git a/arch/arm/mach-ipq40xx/include/mach/gpio.h b/arch/arm/mach-ipq40xx/include/mach/gpio.h
+> index a45747c0fe..53c6ae0649 100644
+> --- a/arch/arm/mach-ipq40xx/include/mach/gpio.h
+> +++ b/arch/arm/mach-ipq40xx/include/mach/gpio.h
+> @@ -1,10 +1,35 @@
+>  /* SPDX-License-Identifier: GPL-2.0+ */
+>  /*
+> - * Empty gpio.h
+> + * Qualcomm common pin control data.
+>   *
+> - * This file must stay as arch/arm/include/asm/gpio.h requires it.
+> - *
+> - * Copyright (c) 2019 Sartura Ltd.
+> - *
+> - * Author: Robert Marko <robert.marko@sartura.hr>
+> + * Copyright (C) 2023 Linaro Ltd.
+>   */
+> +#ifndef _QCOM_GPIO_H_
+> +#define _QCOM_GPIO_H_
+> +
+> +#include <asm/types.h>
+> +#include <stdbool.h>
+> +
+> +struct msm_pin_data {
+> +	int pin_count;
+> +	const unsigned int *pin_offsets;
+> +	/* Index of first special pin, these are ignored for now */
+> +	unsigned int special_pins_start;
+> +};
+> +
+> +static inline u32 qcom_pin_offset(const unsigned int *offs, unsigned int selector)
+> +{
+> +	u32 out = (selector * 0x1000);
+> +
+> +	if (offs)
+> +		return out + offs[selector];
+> +
+> +	return out;
+> +}
+> +
+> +static inline bool qcom_is_special_pin(const struct msm_pin_data *pindata, unsigned int pin)
+> +{
+> +	return pindata->special_pins_start && pin >= pindata->special_pins_start;
+> +}
+> +
+> +#endif /* _QCOM_GPIO_H_ */
 
-Tom,
-
-We tried this approach of assigning a higher address for SPL stack, but
-it is not working as expected.
+-- 
+// Caleb (they/them)
