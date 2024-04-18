@@ -4,60 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DDA4C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 19:02:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1526CC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 19:02:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5116F886BD;
+	by phobos.denx.de (Postfix) with ESMTP id AE26C886C2;
 	Thu, 18 Apr 2024 21:01:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aVOCKJy+";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="zB17Jo7U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67E5D886AB; Thu, 18 Apr 2024 21:01:07 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id 9D16B886B9; Thu, 18 Apr 2024 21:01:07 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC31F886BA
+ by phobos.denx.de (Postfix) with ESMTPS id 267CC886A7
  for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 21:01:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43IJ102a129065;
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43IJ10qx088942;
  Thu, 18 Apr 2024 14:01:00 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1713466860;
- bh=yWTAowAuVH5wJ2HK+fTZK43Z2aj6r071yqINXkWfmFQ=;
+ bh=P9xb1TJkNy7VmvIIOpSKLj1lQA/U9kexcRMqVjpurH0=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=aVOCKJy+6IAIuqeUdJ4VngPExQ8TLUt5tkaVGDlndEwUVHk0gz8N94nMzArFxc64t
- Lu9SvNoWKe69EUxMHnfYikA4SAtGCjQYvAAXugKvkvok3D/wGOB6le2Tg5FSnIXq7+
- UFekAjBNeWrh9klR8Fq1/JE88xs2V5o6m/nrH1W0=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43IJ10Ut024812
+ b=zB17Jo7U4Z3ahgXE5NF8T7bdpBVwYEuUZ5Vd7x+nNAkH/FZPl7ZzZGhrZ58umPEoC
+ +7ioN0LapdDPmXh+dhK3v0ORdq0YN+za/u1IQ7ASWPV+30oQ+y48yILEnBzskw4ouj
+ RkOi/MwCM0GUY1UfOrULXC1S6xia2XxkrEEjADQo=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43IJ10uM111101
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Thu, 18 Apr 2024 14:01:00 -0500
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 18
  Apr 2024 14:01:00 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Thu, 18 Apr 2024 14:01:00 -0500
 Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43IJ10w1036318;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43IJ10vx036318;
  Thu, 18 Apr 2024 14:01:00 -0500
 From: Judith Mendez <jm@ti.com>
 To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom
  Rini <trini@konsulko.com>
 CC: Nitin Yadav <n-yadav@ti.com>, Simon Glass <sjg@chromium.org>,
  <u-boot@lists.denx.de>
-Subject: [PATCH v2 3/5] mmc: am654_sdhci: Add itap_del_ena[] to store
- itapdlyena bit
-Date: Thu, 18 Apr 2024 14:00:58 -0500
-Message-ID: <20240418190100.1289150-4-jm@ti.com>
+Subject: [PATCH v2 1/5] mmc: am654_sdhci: Add tuning algorithm for delay chain
+Date: Thu, 18 Apr 2024 14:00:56 -0500
+Message-ID: <20240418190100.1289150-2-jm@ti.com>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240418190100.1289150-1-jm@ti.com>
 References: <20240418190100.1289150-1-jm@ti.com>
@@ -81,129 +80,183 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set itap_del_ena if ITAPDLY is found in DT or if the tuning
-algorithm was executed and found the optimal ITAPDLY. Add the
-functionality to save ITAPDLYENA that can be referenced later
-by storing the bit in array itap_del_ena[].
+Currently the sdhci_am654 driver only supports one tuning
+algorithm which should be used only when DLL is enabled. The
+ITAPDLY is selected from the largest passing window and the
+buffer is viewed as a circular buffer.
 
+The new tuning algorithm should be used when the delay chain
+is enabled; the ITAPDLY is selected from the largest passing
+window and the buffer is not viewed as a circular buffer.
+
+This implementation is based off of the following paper: [1].
+
+Also add support for multiple failing windows.
+
+[1] https://www.ti.com/lit/an/spract9/spract9.pdf
+
+Fixes: a759abf569d4 ("mmc: am654_sdhci: Add support for software tuning")
 Signed-off-by: Judith Mendez <jm@ti.com>
 ---
 Changes since v1:
-- Use ENABLE macro instead of 0x1
+- Remove extra param from mmc_send_tunning() call
 ---
- drivers/mmc/am654_sdhci.c | 32 ++++++++++++++++++++++----------
- 1 file changed, 22 insertions(+), 10 deletions(-)
+ drivers/mmc/am654_sdhci.c | 107 +++++++++++++++++++++++++++++++-------
+ 1 file changed, 89 insertions(+), 18 deletions(-)
 
 diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
-index becb3550899..62007ebd0f4 100644
+index 2139fea04d5..7e41dd91f8e 100644
 --- a/drivers/mmc/am654_sdhci.c
 +++ b/drivers/mmc/am654_sdhci.c
-@@ -85,6 +85,8 @@
- #define AM654_SDHCI_MIN_FREQ	400000
- #define CLOCK_TOO_SLOW_HZ	50000000
- 
-+#define ENABLE	0x1
-+
- struct am654_sdhci_plat {
- 	struct mmc_config cfg;
- 	struct mmc mmc;
-@@ -92,6 +94,7 @@ struct am654_sdhci_plat {
- 	bool non_removable;
- 	u32 otap_del_sel[MMC_MODES_END];
- 	u32 itap_del_sel[MMC_MODES_END];
-+	u32 itap_del_ena[MMC_MODES_END];
- 	u32 trm_icp;
- 	u32 drv_strength;
+@@ -97,6 +97,7 @@ struct am654_sdhci_plat {
  	u32 strb_sel;
-@@ -223,8 +226,10 @@ static int am654_sdhci_setup_dll(struct am654_sdhci_plat *plat,
- }
+ 	u32 clkbuf_sel;
+ 	u32 flags;
++	bool dll_enable;
+ #define DLL_PRESENT	BIT(0)
+ #define IOMUX_PRESENT	BIT(1)
+ #define FREQSEL_2_BIT	BIT(2)
+@@ -110,6 +111,12 @@ struct timing_data {
+ 	u32 capability;
+ };
  
- static void am654_sdhci_write_itapdly(struct am654_sdhci_plat *plat,
--				      u32 itapdly)
-+				      u32 itapdly, u32 enable)
++struct window {
++	u8 start;
++	u8 end;
++	u8 length;
++};
++
+ static const struct timing_data td[] = {
+ 	[MMC_LEGACY]	= {"ti,otap-del-sel-legacy",
+ 			   "ti,itap-del-sel-legacy",
+@@ -280,8 +287,11 @@ static int am654_sdhci_set_ios_post(struct sdhci_host *host)
+ 		ret = am654_sdhci_setup_dll(plat, speed);
+ 		if (ret)
+ 			return ret;
++
++		plat->dll_enable = true;
+ 	} else {
+ 		am654_sdhci_setup_delay_chain(plat, mode);
++		plat->dll_enable = false;
+ 	}
+ 
+ 	regmap_update_bits(plat->base, PHY_CTRL5, CLKBUFSEL_MASK,
+@@ -375,38 +385,99 @@ static void am654_sdhci_write_b(struct sdhci_host *host, u8 val, int reg)
+ 	writeb(val, host->ioaddr + reg);
+ }
+ #ifdef MMC_SUPPORTS_TUNING
+-#define ITAP_MAX	32
++#define ITAPDLY_LENGTH 32
++#define ITAPDLY_LAST_INDEX (ITAPDLY_LENGTH - 1)
++
++static u32 am654_sdhci_calculate_itap(struct udevice *dev, struct window
++			  *fail_window, u8 num_fails, bool circular_buffer)
++{
++	u8 itap = 0, start_fail = 0, end_fail = 0, pass_length = 0;
++	u8 first_fail_start = 0, last_fail_end = 0;
++	struct window pass_window = {0, 0, 0};
++	int prev_fail_end = -1;
++	u8 i;
++
++	if (!num_fails)
++		return ITAPDLY_LAST_INDEX >> 1;
++
++	if (fail_window->length == ITAPDLY_LENGTH) {
++		dev_err(dev, "No passing ITAPDLY, return 0\n");
++		return 0;
++	}
++
++	first_fail_start = fail_window->start;
++	last_fail_end = fail_window[num_fails - 1].end;
++
++	for (i = 0; i < num_fails; i++) {
++		start_fail = fail_window[i].start;
++		end_fail = fail_window[i].end;
++		pass_length = start_fail - (prev_fail_end + 1);
++
++		if (pass_length > pass_window.length) {
++			pass_window.start = prev_fail_end + 1;
++			pass_window.length = pass_length;
++		}
++		prev_fail_end = end_fail;
++	}
++
++	if (!circular_buffer)
++		pass_length = ITAPDLY_LAST_INDEX - last_fail_end;
++	else
++		pass_length = ITAPDLY_LAST_INDEX - last_fail_end + first_fail_start;
++
++	if (pass_length > pass_window.length) {
++		pass_window.start = last_fail_end + 1;
++		pass_window.length = pass_length;
++	}
++
++	if (!circular_buffer)
++		itap = pass_window.start + (pass_window.length >> 1);
++	else
++		itap = (pass_window.start + (pass_window.length >> 1)) % ITAPDLY_LENGTH;
++
++	return (itap > ITAPDLY_LAST_INDEX) ? ITAPDLY_LAST_INDEX >> 1 : itap;
++}
++
+ static int am654_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
  {
-+	regmap_update_bits(plat->base, PHY_CTRL4, ITAPDLYENA_MASK,
-+			   enable << ITAPDLYENA_SHIFT);
- 	/* Set ITAPCHGWIN before writing to ITAPDLY */
- 	regmap_update_bits(plat->base, PHY_CTRL4, ITAPCHGWIN_MASK,
- 			   1 << ITAPCHGWIN_SHIFT);
-@@ -242,7 +247,8 @@ static void am654_sdhci_setup_delay_chain(struct am654_sdhci_plat *plat,
- 	mask = SELDLYTXCLK_MASK | SELDLYRXCLK_MASK;
- 	regmap_update_bits(plat->base, PHY_CTRL5, mask, val);
- 
--	am654_sdhci_write_itapdly(plat, plat->itap_del_sel[mode]);
-+	am654_sdhci_write_itapdly(plat, plat->itap_del_sel[mode],
-+				  plat->itap_del_ena[mode]);
- }
- 
- static int am654_sdhci_set_ios_post(struct sdhci_host *host)
-@@ -443,6 +449,7 @@ static int am654_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
  	struct udevice *dev = mmc->dev;
  	struct am654_sdhci_plat *plat = dev_get_plat(dev);
- 	struct window fail_window[ITAPDLY_LENGTH];
-+	int mode = mmc->selected_mode;
- 	u8 curr_pass, itap;
- 	u8 fail_index = 0;
- 	u8 prev_pass = 1;
-@@ -450,11 +457,10 @@ static int am654_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
- 	memset(fail_window, 0, sizeof(fail_window));
+-	int cur_val, prev_val = 1, fail_len = 0, pass_window = 0, pass_len;
+-	u32 itap;
++	struct window fail_window[ITAPDLY_LENGTH];
++	u8 curr_pass, itap;
++	u8 fail_index = 0;
++	u8 prev_pass = 1;
++
++	memset(fail_window, 0, sizeof(fail_window));
  
  	/* Enable ITAPDLY */
--	regmap_update_bits(plat->base, PHY_CTRL4, ITAPDLYENA_MASK,
--			   1 << ITAPDLYENA_SHIFT);
-+	plat->itap_del_ena[mode] = ENABLE;
+ 	regmap_update_bits(plat->base, PHY_CTRL4, ITAPDLYENA_MASK,
+ 			   1 << ITAPDLYENA_SHIFT);
  
- 	for (itap = 0; itap < ITAPDLY_LENGTH; itap++) {
--		am654_sdhci_write_itapdly(plat, itap);
-+		am654_sdhci_write_itapdly(plat, itap, plat->itap_del_ena[mode]);
+-	for (itap = 0; itap < ITAP_MAX; itap++) {
++	for (itap = 0; itap < ITAPDLY_LENGTH; itap++) {
+ 		am654_sdhci_write_itapdly(plat, itap);
  
- 		curr_pass = !mmc_send_tuning(mmc, opcode);
+-		cur_val = !mmc_send_tuning(mmc, opcode);
+-		if (cur_val && !prev_val)
+-			pass_window = itap;
++		curr_pass = !mmc_send_tuning(mmc, opcode);
  
-@@ -478,7 +484,7 @@ static int am654_sdhci_execute_tuning(struct mmc *mmc, u8 opcode)
- 	itap = am654_sdhci_calculate_itap(dev, fail_window, fail_index,
- 					  plat->dll_enable);
+-		if (!cur_val)
+-			fail_len++;
++		if (!curr_pass && prev_pass)
++			fail_window[fail_index].start = itap;
  
--	am654_sdhci_write_itapdly(plat, itap);
-+	am654_sdhci_write_itapdly(plat, itap, plat->itap_del_ena[mode]);
- 
- 	return 0;
- }
-@@ -515,6 +521,7 @@ static int j721e_4bit_sdhci_set_ios_post(struct sdhci_host *host)
- 	struct am654_sdhci_plat *plat = dev_get_plat(dev);
- 	int mode = host->mmc->selected_mode;
- 	u32 otap_del_sel;
-+	u32 itap_del_ena;
- 	u32 itap_del_sel;
- 	u32 mask, val;
- 
-@@ -524,10 +531,11 @@ static int j721e_4bit_sdhci_set_ios_post(struct sdhci_host *host)
- 	val = (1 << OTAPDLYENA_SHIFT) |
- 	      (otap_del_sel << OTAPDLYSEL_SHIFT);
- 
-+	itap_del_ena = plat->itap_del_ena[mode];
- 	itap_del_sel = plat->itap_del_sel[mode];
- 
- 	mask |= ITAPDLYENA_MASK | ITAPDLYSEL_MASK;
--	val |= (1 << ITAPDLYENA_SHIFT) |
-+	val |= (itap_del_ena << ITAPDLYENA_SHIFT) |
- 	       (itap_del_sel << ITAPDLYSEL_SHIFT);
- 
- 	regmap_update_bits(plat->base, PHY_CTRL4, ITAPCHGWIN_MASK,
-@@ -599,9 +607,13 @@ static int sdhci_am654_get_otap_delay(struct udevice *dev,
- 			cfg->host_caps &= ~td[i].capability;
- 		}
- 
--		if (td[i].itap_binding)
--			dev_read_u32(dev, td[i].itap_binding,
--				     &plat->itap_del_sel[i]);
-+		if (td[i].itap_binding) {
-+			ret = dev_read_u32(dev, td[i].itap_binding,
-+					   &plat->itap_del_sel[i]);
-+
-+			if (!ret)
-+				plat->itap_del_ena[i] = ENABLE;
+-		prev_val = cur_val;
++		if (!curr_pass) {
++			fail_window[fail_index].end = itap;
++			fail_window[fail_index].length++;
 +		}
++
++		if (curr_pass && !prev_pass)
++			fail_index++;
++
++		prev_pass = curr_pass;
  	}
+-	/*
+-	 * Having determined the length of the failing window and start of
+-	 * the passing window calculate the length of the passing window and
+-	 * set the final value halfway through it considering the range as a
+-	 * circular buffer
+-	 */
+-	pass_len = ITAP_MAX - fail_len;
+-	itap = (pass_window + (pass_len >> 1)) % ITAP_MAX;
++
++	if (fail_window[fail_index].length != 0)
++		fail_index++;
++
++	itap = am654_sdhci_calculate_itap(dev, fail_window, fail_index,
++					  plat->dll_enable);
++
+ 	am654_sdhci_write_itapdly(plat, itap);
  
  	return 0;
 -- 
