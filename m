@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D053C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 17:56:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89346C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 17:56:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF09A88682;
-	Thu, 18 Apr 2024 19:56:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1E58E88694;
+	Thu, 18 Apr 2024 19:56:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4B4B88682; Thu, 18 Apr 2024 19:56:23 +0200 (CEST)
+ id DCAFD8868F; Thu, 18 Apr 2024 19:56:23 +0200 (CEST)
 Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28AA688691
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:56:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1E9A788696
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:56:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tharvey@gateworks.com
 Received: from [68.189.91.139] (helo=tharvey.pdc.gateworks.com)
  by finn.localdomain with esmtp (Exim 4.95)
- (envelope-from <tharvey@gateworks.com>) id 1rxVzc-00EXDl-Al;
- Thu, 18 Apr 2024 17:56:16 +0000
+ (envelope-from <tharvey@gateworks.com>) id 1rxVzd-00EXDl-1v;
+ Thu, 18 Apr 2024 17:56:17 +0000
 From: Tim Harvey <tharvey@gateworks.com>
 To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
@@ -33,10 +33,12 @@ To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
  Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>,
  Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
 Cc: Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH v2 1/3] clk: imx8mm: Add support for PCIe clocks
-Date: Thu, 18 Apr 2024 10:56:10 -0700
-Message-Id: <20240418175612.4068609-1-tharvey@gateworks.com>
+Subject: [PATCH v2 2/3] pci: dw_imx: add support for IMX8MM
+Date: Thu, 18 Apr 2024 10:56:11 -0700
+Message-Id: <20240418175612.4068609-2-tharvey@gateworks.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240418175612.4068609-1-tharvey@gateworks.com>
+References: <20240418175612.4068609-1-tharvey@gateworks.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -55,62 +57,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for PCIe clocks required to enable PCIe support on
-iMX8MM SoC.
+Add support for the IMX8MM SoC by adding driver data with the compatible
+string of the GPR controller.
 
 Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 ---
-v2: no changes
+v2: do not cache chip info in priv per Marek's suggestion
 ---
- drivers/clk/imx/clk-imx8mm.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+ drivers/pci/pcie_dw_imx.c | 18 ++++++++++++++++--
+ 1 file changed, 16 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/clk/imx/clk-imx8mm.c b/drivers/clk/imx/clk-imx8mm.c
-index b5c253e49663..c2f01b385201 100644
---- a/drivers/clk/imx/clk-imx8mm.c
-+++ b/drivers/clk/imx/clk-imx8mm.c
-@@ -66,6 +66,15 @@ static const char *imx8mm_i2c3_sels[] = {"clock-osc-24m", "sys_pll1_160m", "sys_
- static const char *imx8mm_i2c4_sels[] = {"clock-osc-24m", "sys_pll1_160m", "sys_pll2_50m", "sys_pll3_out", "audio_pll1_out",
- 					 "video_pll1_out", "audio_pll2_out", "sys_pll1_133m", };
+diff --git a/drivers/pci/pcie_dw_imx.c b/drivers/pci/pcie_dw_imx.c
+index a2ee228224b5..fdb463710ba1 100644
+--- a/drivers/pci/pcie_dw_imx.c
++++ b/drivers/pci/pcie_dw_imx.c
+@@ -56,6 +56,18 @@ struct pcie_dw_imx {
+ 	struct udevice			*vpcie;
+ };
  
-+static const char *imx8mm_pcie1_ctrl_sels[] = {"clock-osc-24m", "sys_pll2_250m", "sys_pll2_200m", "sys_pll1_266m",
-+					       "sys_pll1_800m", "sys_pll2_500m", "sys_pll2_333m", "sys_pll3_out", };
++struct pcie_chip_info {
++	const char *gpr;
++};
 +
-+static const char *imx8mm_pcie1_phy_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll2_500m", "clk_ext1", "clk_ext2",
-+					      "clk_ext3", "clk_ext4", "sys_pll1_400m", };
++static const struct pcie_chip_info imx8mm_chip_info = {
++	.gpr = "fsl,imx8mm-iomuxc-gpr",
++};
 +
-+static const char *imx8mm_pcie1_aux_sels[] = {"clock-osc-24m", "sys_pll2_200m", "sys_pll2_50m", "sys_pll3_out",
-+					      "sys_pll2_100m", "sys_pll1_80m", "sys_pll1_160m", "sys_pll1_200m", };
++static const struct pcie_chip_info imx8mp_chip_info = {
++	.gpr = "fsl,imx8mp-iomuxc-gpr",
++};
 +
- #ifndef CONFIG_SPL_BUILD
- static const char *imx8mm_pwm1_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll1_160m", "sys_pll1_40m",
- 					 "sys_pll3_out", "clk_ext1", "sys_pll1_80m", "video_pll1_out", };
-@@ -256,6 +265,15 @@ static int imx8mm_clk_probe(struct udevice *dev)
- 		imx8m_clk_composite("usb_bus", imx8mm_usb_bus_sels, base + 0x8b80));
+ static void pcie_dw_configure(struct pcie_dw_imx *priv, u32 cap_speed)
+ {
+ 	dw_pcie_dbi_write_enable(&priv->dw, true);
+@@ -242,6 +254,7 @@ static int pcie_dw_imx_remove(struct udevice *dev)
  
- 	/* IP */
-+	clk_dm(IMX8MM_CLK_PCIE1_CTRL,
-+	       imx8m_clk_composite("pcie1_ctrl", imx8mm_pcie1_ctrl_sels,
-+				   base + 0xa300));
-+	clk_dm(IMX8MM_CLK_PCIE1_PHY,
-+	       imx8m_clk_composite("pcie1_phy", imx8mm_pcie1_phy_sels,
-+				   base + 0xa380));
-+	clk_dm(IMX8MM_CLK_PCIE1_AUX,
-+	       imx8m_clk_composite("pcie1_aux", imx8mm_pcie1_aux_sels,
-+				   base + 0xa400));
- 	clk_dm(IMX8MM_CLK_USDHC1,
- 	       imx8m_clk_composite("usdhc1", imx8mm_usdhc1_sels,
- 				   base + 0xac00));
-@@ -339,6 +357,9 @@ static int imx8mm_clk_probe(struct udevice *dev)
- 	       imx_clk_gate4("pwm4_root_clk", "pwm4", base + 0x42b0, 0));
- #endif
+ static int pcie_dw_imx_of_to_plat(struct udevice *dev)
+ {
++	struct pcie_chip_info *info = (void *)dev_get_driver_data(dev);
+ 	struct pcie_dw_imx *priv = dev_get_priv(dev);
+ 	ofnode gpr;
+ 	int ret;
+@@ -287,7 +300,7 @@ static int pcie_dw_imx_of_to_plat(struct udevice *dev)
+ 		goto err_phy;
+ 	}
  
-+	clk_dm(IMX8MM_CLK_PCIE1_ROOT,
-+	       imx_clk_gate4("pcie1_root_clk", "pcie1_ctrl", base + 0x4250, 0));
-+
- #if CONFIG_IS_ENABLED(DM_SPI)
- 	clk_dm(IMX8MM_CLK_ECSPI1,
- 	       imx8m_clk_composite("ecspi1", imx8mm_ecspi1_sels, base + 0xb280));
+-	gpr = ofnode_by_compatible(ofnode_null(), "fsl,imx8mp-iomuxc-gpr");
++	gpr = ofnode_by_compatible(ofnode_null(), info->gpr);
+ 	if (ofnode_equal(gpr, ofnode_null())) {
+ 		dev_err(dev, "unable to find GPR node\n");
+ 		ret = -ENODEV;
+@@ -322,7 +335,8 @@ static const struct dm_pci_ops pcie_dw_imx_ops = {
+ };
+ 
+ static const struct udevice_id pcie_dw_imx_ids[] = {
+-	{ .compatible = "fsl,imx8mp-pcie" },
++	{ .compatible = "fsl,imx8mm-pcie", .data = (ulong)&imx8mm_chip_info, },
++	{ .compatible = "fsl,imx8mp-pcie", .data = (ulong)&imx8mp_chip_info, },
+ 	{ }
+ };
+ 
 -- 
 2.25.1
 
