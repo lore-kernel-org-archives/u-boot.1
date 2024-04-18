@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E741C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 18:40:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 906B5C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 18:40:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3B678867D;
-	Thu, 18 Apr 2024 20:40:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0FD558869A;
+	Thu, 18 Apr 2024 20:40:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NopMQrwR";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vOAshwPz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A937D8869A; Thu, 18 Apr 2024 20:40:15 +0200 (CEST)
-Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
- [IPv6:2a00:1450:4864:20::433])
+ id E2CDA8866A; Thu, 18 Apr 2024 20:40:16 +0200 (CEST)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10D248866A
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 20:40:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 24634886A7
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 20:40:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x433.google.com with SMTP id
- ffacd0b85a97d-346f4266e59so797218f8f.3
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 11:40:11 -0700 (PDT)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-345b857d7adso862769f8f.1
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 11:40:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713465610; x=1714070410; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1713465612; x=1714070412; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=SB43OFyVU0FDBlZkgT04+T0wR7aHlJ5xA1rC3gsbkKo=;
- b=NopMQrwRSkXMo8LChJlJ5yg/Fgh1gdEzV23M3JQgk9eifwp951qxzYWtZgGA9u8xMM
- 1AKDxhD+QKl0qw1c8oAzr4271P+bw0esWYNlZlaQn1mbGqvdWemSZvq3WwH3kftmtFt4
- iSsSjBBzTrwtPBbYCNXARjU6EDXTbssDw0YUK1msSjjAdbUiNL5UtUlTivboVTeArg2h
- UBaMKwpoC1Br3+xNvsUsPhGpbhBKW99U32cAxqQDb/bQSIvU7gSaAFshOylMgkAuQNG1
- sYSQFm5iPC+Q3tLJIiOcyAkytI2O+Keh0uz7D5eUGQszCI31tkAZgk9ZCrjmUOBh1x9+
- BQNA==
+ :reply-to; bh=zKs4JT+m2KCkJOqgG6C5kt9r4QRZhsfdeXlX04Y/UsA=;
+ b=vOAshwPzm+WsN2fqsuKoLCX6eBIMjJWF13wdh/0P09BeddsIHZ6XbXeg5k8rxzhff2
+ LJG+p17hfUt8ZuH0KVgBmQDl1LaetaISNDGFdjQYgNLV9nsXwSJFawp6zZkKHQba1UBC
+ 0NqOjlCaSovS/Ucp6ODZ+7OHE9ZioTAbjzfgy9nOIcfW+9PSj1sw0OBIqUrEx+Cn5q0I
+ RrtTqv3jxC7QhupTTNl9INzYCKgx9kneL/xjp7aOxa6L6UAN0r8Ed+xXaCyMq1e8Hcs1
+ POjt7cBFfHKNATVBjnjoGSgdpqfbwdNzoOB41qoCo1Qgvg9d8kXvbzqPpWzZR9L5ec29
+ KDmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713465610; x=1714070410;
+ d=1e100.net; s=20230601; t=1713465612; x=1714070412;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SB43OFyVU0FDBlZkgT04+T0wR7aHlJ5xA1rC3gsbkKo=;
- b=MFu8zxsRCUQDEpttRnzJ+SQb/DyS9hpLL3TeWY381rWVwHdPryxQKlsUgXBw+du7Hc
- O58YGM4rjparPTS4Yn3Q1Y8JQRaMqLU6ZGvI5ryt4TEXKfRaMixATJ6K9BsllOBA35U/
- eLnk8+NQqJuSsrinXLPTVnx0AHGs2uIpNutEytgyEnrIWTH6gEafF2kSuM63qvTNIofD
- 2dm4QBJTcp+ZEwVPgHAaR2FpimJA6k0tNkL4Eom7yokMk8YlMmAJq+R98M0yYsVdlfZD
- x+sdlq0Ki/Q90E0PwRTfraCDJc7dIFHuWcbYefdGk/oHnjcSoa7YYQtz0ANxTk1lgu/i
- ERHg==
+ bh=zKs4JT+m2KCkJOqgG6C5kt9r4QRZhsfdeXlX04Y/UsA=;
+ b=BvVHFRRqMSM/scPj64tioq/p563GrjJhLaIh0eNzxu56YbqIwQXcL92JpWosBDksde
+ CAsJQrHLJFfl0eGMxUkCq8NbP65ZletmjBy0l27oafAS+ayZXcPKpWcJCS8my4DA8LXz
+ 1S9GuuM0BFk2Fm1NbTXRaQMofVH/sX6aYlOOwjSLE2snCyO4QuD+9AaK/d6Xm53fbsWs
+ E6PZSn2RI2NR+OFbM5MmsOK1UOqHtB7zmpuUkdtDeZvqxDAM7etfK1oJCWWVFJtRRHE6
+ J3Ir9sp2QPu3CZalfG5tIh6JxNW1Uqoj7L9kEGo6WFei0DlhgmZ3dmNp8qE0LiPQ0fYf
+ jybQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXBCNHhhJXva6dsy47uWpMRMidBcIogoXXi2WyceyWPg0i6m5ZN9dUentxzH+cMvFPGnjWdBU8SsR9+wJuTb5GYxbU2Ow==
-X-Gm-Message-State: AOJu0YyTAzw8VESUPmWIFmXBYyonD9ng1mJuzS8jICbTy2RzGfi8ow3k
- x1bI8CmtgIPyhM0LVkeEmTIrt3lvS3bGotSWsFPs7YYL/10mHVdxi2RFKbZbmGg=
-X-Google-Smtp-Source: AGHT+IEWaavQWUK6fRfC9vV3z7ojb714qi0RKM6GTFIdymB2F7MELBz2nRrv6Uu6dSzpivySmKQA2g==
-X-Received: by 2002:adf:f60f:0:b0:343:3a51:ad65 with SMTP id
- t15-20020adff60f000000b003433a51ad65mr2149122wrp.38.1713465610624; 
- Thu, 18 Apr 2024 11:40:10 -0700 (PDT)
+ AJvYcCU0bWjCcCJLpqs43i3YX6p+YKZVNnfpIeELWNxkREgRLDsjioIpmArWB2vQ9GqQ0hxINrkolrPmI2Na07D/R/OQRdfLag==
+X-Gm-Message-State: AOJu0YxSGR/qNK7hyi1mmSnrst/HnXn2e6KEoQSUab+/btzXMQ2g5KBH
+ KIKeWVWUjHjJy8dPDVWTQEebBBChIsOeXXDe/oC8DaINK817YAd21mgykggT7n0=
+X-Google-Smtp-Source: AGHT+IGKMtvmY64iqzg4mDnnYJA17+J99tXAx0c7OfQn4wNRfnZ5ssIDevkYpTFXp+KtPlpX6ZXAvA==
+X-Received: by 2002:adf:e0d1:0:b0:343:688d:2cbf with SMTP id
+ m17-20020adfe0d1000000b00343688d2cbfmr2207786wri.60.1713465612456; 
+ Thu, 18 Apr 2024 11:40:12 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- y5-20020adfe6c5000000b003436cb45f7esm2451408wrm.90.2024.04.18.11.40.09
+ y5-20020adfe6c5000000b003436cb45f7esm2451408wrm.90.2024.04.18.11.40.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Apr 2024 11:40:09 -0700 (PDT)
+ Thu, 18 Apr 2024 11:40:12 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 18 Apr 2024 19:39:56 +0100
-Subject: [PATCH v4 1/3] arm: dts: imx6dl-brppt2: fix gpio.h include
+Date: Thu, 18 Apr 2024 19:39:58 +0100
+Subject: [PATCH v4 3/3] dts: support building all dtb files for a specific
+ vendor
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240418-b4-of-upstream-build-vendor-v4-1-d404deff386e@linaro.org>
+Message-Id: <20240418-b4-of-upstream-build-vendor-v4-3-d404deff386e@linaro.org>
 References: <20240418-b4-of-upstream-build-vendor-v4-0-d404deff386e@linaro.org>
 In-Reply-To: <20240418-b4-of-upstream-build-vendor-v4-0-d404deff386e@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -84,13 +85,13 @@ Cc: Neil Armstrong <neil.armstrong@linaro.org>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de, 
  Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=694;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2528;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=a4N5FSU8ovaWKQBdcfnB3Oumi/PSHO6Hed2StXNvObk=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTFTA6eBeznoyeYiCf3Tl7Mvi6As69dVMy9bnGxSoDtj
- 039z2d2lLIwCHIwyIopsoifWGbZtPayvcb2BRdg5rAygQxh4OIUgIkUFTL8z5/u4NF57R3vlB0P
- j6xeU927NfTEh492655+jFmtepHbXpXhr2h7kvDagkzdfwbBiddWt3u7J1eES55cEdencyeMc7L
- PAgA=
+ bh=lFINIkt3mPUDg930k4h55ttVmUyWegfEw9o+thWATTw=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTFTI5/5yY8c/Utb9K5Gbjw3IE9kVF6S4OWJi2ybFGzX
+ VReU/Oto5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEyk8wMjw841L9Lq5ZM3+1+f
+ e2K1fvB8ycxY0Y+7p0ysMYs46LtRtoLhr6Svbp1O1qVvDVvY7gquzF/+4fB+kQXq/8z2XCs0XBc
+ R9AAA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -109,28 +110,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The "include" directory was included in the include path... Remove it.
+This adjusts OF_UPSTREAM to behave more like the kernel by allowing for
+all the devicetree files for a given vendor to be compiled. This is
+useful for Qualcomm in particular as most boards are supported by a
+single U-Boot build just provided with a different DT.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- arch/arm/dts/imx6dl-brppt2.dts | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ dts/Kconfig          | 24 ++++++++++++++++++++++++
+ scripts/Makefile.dts | 13 +++++++++++++
+ 2 files changed, 37 insertions(+)
 
-diff --git a/arch/arm/dts/imx6dl-brppt2.dts b/arch/arm/dts/imx6dl-brppt2.dts
-index 575bfac7bb73..05c843c3d0f3 100644
---- a/arch/arm/dts/imx6dl-brppt2.dts
-+++ b/arch/arm/dts/imx6dl-brppt2.dts
-@@ -16,9 +16,9 @@
+diff --git a/dts/Kconfig b/dts/Kconfig
+index b9b6367154ef..6883a000a052 100644
+--- a/dts/Kconfig
++++ b/dts/Kconfig
+@@ -100,8 +100,32 @@ config OF_UPSTREAM
+ 	  However, newer boards whose devicetree source files haven't landed in
+ 	  the dts/upstream subtree, they can override this option to have the
+ 	  DT build from existing U-Boot tree location instead.
  
- #include "imx6dl.dtsi"
- #include "imx6qdl-u-boot.dtsi"
- #include <dt-bindings/pwm/pwm.h>
--#include <include/dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/gpio/gpio.h>
++config OF_UPSTREAM_BUILD_VENDOR
++	bool "Build all devicetree files for a particular vendor"
++	depends on OF_UPSTREAM
++	help
++	  Enable building all devicetree files for a particular vendor. This
++	  is useful for generic U-Boot configurations where many boards can
++	  be supported with a single binary.
++
++	  This is only available for platforms using upstream devicetree.
++
++config OF_UPSTREAM_VENDOR
++	string "Vendor to build all upstream devicetree files for"
++	depends on OF_UPSTREAM_BUILD_VENDOR
++	default "qcom" if ARCH_SNAPDRAGON
++	default "rockchip" if ARCH_ROCKCHIP
++	default "amlogic" if ARCH_MESON
++	default "allwinner" if ARCH_SUNXI
++	default "mediatek" if ARCH_MEDIATEK
++	default "marvell" if ARCH_MVEBU || ARCH_KIRKWOOD
++	default "xilinx" if ARCH_VERSAL || ARCH_ZYNQ
++	default "nvidia" if ARCH_TEGRA
++	help
++	  Select the vendor to build all devicetree files for.
++
+ choice
+ 	prompt "Provider of DTB for DT control"
+ 	depends on OF_CONTROL
  
- / {
- 	model = "PPT50";
- 	compatible = "fsl,imx6dl";
+diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
+index 5e2429c6170c..790f3c508f19 100644
+--- a/scripts/Makefile.dts
++++ b/scripts/Makefile.dts
+@@ -1,3 +1,16 @@
+ # SPDX-License-Identifier: GPL-2.0+
+ 
+ dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
++
++ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
++ifeq ($(CONFIG_ARM64),y)
++dt_dir := $(srctree)/dts/upstream/src/arm64
++else
++dt_dir := $(srctree)/dts/upstream/src/$(ARCH)
++endif
++
++dtb-vendor_dts := $(patsubst %.dts,%.dtb,$(wildcard $(dt_dir)/$(subst ",,$(CONFIG_OF_UPSTREAM_VENDOR))/*.dts))
++
++dtb-y += $(subst $(dt_dir)/,,$(dtb-vendor_dts))
++
++endif
 
 -- 
 2.44.0
