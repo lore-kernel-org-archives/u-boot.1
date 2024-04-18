@@ -4,72 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9FD8C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 03:40:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCB98C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 03:40:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DE698856C;
-	Thu, 18 Apr 2024 05:40:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB6D48857A;
+	Thu, 18 Apr 2024 05:40:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MeKmNzJ2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B//8Gs1m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB36B8856C; Thu, 18 Apr 2024 05:40:15 +0200 (CEST)
+ id 344FA8856C; Thu, 18 Apr 2024 05:40:17 +0200 (CEST)
 Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
  [IPv6:2607:f8b0:4864:20::735])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3764788503
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 05:40:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4246B884F1
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 05:40:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-78f0593f45dso27836785a.2
- for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 20:40:12 -0700 (PDT)
+ af79cd13be357-78f02298dc6so39626385a.1
+ for <u-boot@lists.denx.de>; Wed, 17 Apr 2024 20:40:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713411611; x=1714016411; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1713411610; x=1714016410; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z3aKJ1/0PQ9pcRC2O8gdEw1DY0ceR1c91BtQjk3D7N0=;
- b=MeKmNzJ2pRtzUcz6S9Hukqt78kHMHqJU0vW/rDDlxjIvQHSW1BmJCf+wPuEls/q24R
- 0yqD2ELwNZTA2Aubbziwk3sTa5qTlBq0FqU6HbK1o8HKJ79PHKBHd8CFGUaaoXLesfwv
- hDfEm9YRJdYDEwtYel2c01MWsPAu7+o89KngY=
+ bh=2+NJTZF7YAz6jrCurXtglE/2h0Ovk80GRHTaHsqBFrw=;
+ b=B//8Gs1mIXS+oEwKS0u7JzhgYpByaMtcZ81eZi9zfaOpj5xOk876XPf+nZVlm9K7+M
+ 6dhL6+jpVakhwR/0CWeospJ6gEDZ4firYFvhn3PXUEfgh2YeVSeAV9apeWslB+hLT2T/
+ Qt3udseCrJGV5fnkA8h4aEN8/EEFMGkC4+NXo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713411611; x=1714016411;
+ d=1e100.net; s=20230601; t=1713411610; x=1714016410;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Z3aKJ1/0PQ9pcRC2O8gdEw1DY0ceR1c91BtQjk3D7N0=;
- b=QNtF+oPaaokYS4hsZOJY78BQc3/H0iS8xlVxUjiqYeeQQ7QBa+TMvPmA1ECF3LI90P
- fTUWCxTOszT00slvjU2+/kPlz57yKxlU2+T7Qru4ssdlpioeGj+OPGAOzOE5E96Suhco
- 81TVh/mER1pnkQx8WLapKyF2br+nxYHGD4q0cV7UHF30B0uzeG1HylhQsxSwYv49W75P
- 25VE6Zho5R3TuVcXHdM8Nygj2EkFNJZzcedBPuyaq0yS7nz3O5H/abg4XDh4jvsRKHVE
- NsyZfqEwV+EnmU8j5krXSWQButp/pQXNcbIe7IzNFk170srAEwGZvGh+rcdgeL5oJb2j
- h7TA==
-X-Gm-Message-State: AOJu0YwZ6v87Mf6NiNduSeQFJP4KFtY744WJ/EtW+t94/RqYXKe4lhRC
- X9kj6EFonUQOMrJy9x0AdJRFRnByM5NgGukpFxCFnncdm7epiTY9oOilcqmEW0BzCi+wdvcjZTA
- 1dGMjYg==
-X-Google-Smtp-Source: AGHT+IGd2PaaeNwB3vE8e9hrAHXhNIJqnB8PXY3F7Du99rIKFp7IE6gFGULgaHPefabTuMMxflMEkg==
-X-Received: by 2002:a05:620a:2904:b0:789:fb78:5419 with SMTP id
- m4-20020a05620a290400b00789fb785419mr1602961qkp.69.1713411611122; 
- Wed, 17 Apr 2024 20:40:11 -0700 (PDT)
+ bh=2+NJTZF7YAz6jrCurXtglE/2h0Ovk80GRHTaHsqBFrw=;
+ b=SKVL2NYS057hahLyMcOR0zNF7gmolp2s26jllXmQdBj/wuwlB5DW6DxnoByIKwksNZ
+ uDcN7tFhDpn/swBy8tEPrILtz0JygCsp76F3xLSwFryqL+I9zYrZTyrNEgQnZhRuyFDt
+ OJXQ60T1HupkWhECos/tgRxY3CYky1hPWUWNIiyoL/AaBn2gqJXM+lXvDG5NhbaglM5c
+ Q0Vhc5i5YCT3gsPkiz0MDbhqjHEcOPlErNXrRQxKxmVluLaOb4OUwxvjqdKCQCJDk9tc
+ FwXce0pkoQvpjSP5NmpAo8hx8J9725PSHKY8J+6W7/nSw3P5nuYGce6iZDQT2YNELkdr
+ GU7Q==
+X-Gm-Message-State: AOJu0YzfgN/hI1vHDmmIyCgBiPp3CJbUBjMTp9n9w0E21S3G7zkHS0YZ
+ qQa7MRNaiarVit3KNT4L3QFoyGcAMp7s2qskqtm4o6nm2a+fx7bSMFs+sGaZwYA=
+X-Google-Smtp-Source: AGHT+IGYMBtC7/AA6RSus4t42umB1gqkgSac/ZNveGa7QYz2qgOS0LGAnXdLn+egKRQiwLsqz/dvZw==
+X-Received: by 2002:a05:620a:24c8:b0:78e:f284:dcde with SMTP id
+ m8-20020a05620a24c800b0078ef284dcdemr1752653qkn.22.1713411609993; 
+ Wed, 17 Apr 2024 20:40:09 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.73.35]) by smtp.gmail.com with ESMTPSA id
- du33-20020a05620a47e100b0078d68b23254sm259041qkb.107.2024.04.17.20.40.10
+ du33-20020a05620a47e100b0078d68b23254sm259041qkb.107.2024.04.17.20.40.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 17 Apr 2024 20:40:10 -0700 (PDT)
+ Wed, 17 Apr 2024 20:40:09 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Jonathan Humphreys <j-humphreys@ti.com>
 Cc: u-boot@lists.denx.de
-In-Reply-To: <20240409075549.12514-1-heinrich.schuchardt@canonical.com>
-References: <20240409075549.12514-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 1/1] test: typo curren
-Message-Id: <171341161013.1250683.9103673981531002307.b4-ty@konsulko.com>
-Date: Wed, 17 Apr 2024 21:40:10 -0600
+In-Reply-To: <20240408212843.95871-1-j-humphreys@ti.com>
+References: <20240408212843.95871-1-j-humphreys@ti.com>
+Subject: Re: [PATCH] Makefile.lib: find capsule ESL dtsi file with
+ CONFIG_OF_UPSTREAM
+Message-Id: <171341160868.1250683.16300671487202978592.b4-ty@konsulko.com>
+Date: Wed, 17 Apr 2024 21:40:08 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -90,11 +92,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 09 Apr 2024 09:55:49 +0200, Heinrich Schuchardt wrote:
+On Mon, 08 Apr 2024 16:28:43 -0500, Jonathan Humphreys wrote:
 
-> Fix typos in test_eficonfig.py: %s/curren/current/
+> When CONFIG_OF_UPSTREAM is enabled, DTS files are in SOC subdirectories (vs the
+> top level dts directory), but when CONFIG_EFI_CAPSULE_AUTHENTICATE is enabled,
+> the dynamically created dtsi file containing the capsule ESL DT node is in the
+> parent directory. This results in a build failure because the #include inserted
+> in the DTS file is local to the current directory.  Update Makefile to have the
+> DT preprocessing of #includes search in the parent (dts top level) directory
+> too.
 > 
-> 
+> [...]
 
 Applied to u-boot/master, thanks!
 
