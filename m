@@ -4,71 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86B10C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 19:01:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01D8AC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 19:01:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0966E886AA;
-	Thu, 18 Apr 2024 21:00:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 88E4F886B4;
+	Thu, 18 Apr 2024 21:01:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="rsgb02T9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="sH3tUDen";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C370886A7; Thu, 18 Apr 2024 21:00:37 +0200 (CEST)
-Received: from sin.source.kernel.org (sin.source.kernel.org
- [IPv6:2604:1380:40e1:4800::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 373AB886B4; Thu, 18 Apr 2024 21:01:06 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C02D18869D
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 21:00:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F110886B9
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 21:01:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id D67EDCE1905;
- Thu, 18 Apr 2024 19:00:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 017F7C32783;
- Thu, 18 Apr 2024 19:00:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1713466830;
- bh=I/gWLJ/54Jrj+2I7OCqF3ATdRHZ5ajf3sCx+so4scNg=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=rsgb02T9TaB0FdCaCuEuY3UIUuLREHGB2yOJ23pCiIc9FXGcEoiNFvYXQjnCle8yS
- 6gmQL8bvMXIml5FS5mk7FH1VDnMADDo068AtNP2skZvr7nYiksLdLLv6o6PBUMQ8vn
- iZm3eyPY8veKKMQy3qBT8bCVt+9GVW1fJKOzxNMIylZfadd59c2GfismyzgbHPMBUj
- Ji5LX5wZTZvsf/N+UWESdMfF+QA6mMxQ9Q6MXvkoe6HTJadS6UyM56M8pVFelmQneU
- ahNHEV/04g4jb0AEDtmrNiX4sCAe2xfDLJxX4pjdPfooDoL7OhqMFn5ytgMk27PtkV
- pvAEDEJGrV0UA==
-Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
- (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id ED1C6C04FF8;
- Thu, 18 Apr 2024 19:00:29 +0000 (UTC)
-From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Thu, 18 Apr 2024 21:00:29 +0200
-Subject: [PATCH v2 5/5] arm: apple: Do not list bootflows on boot
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43IJ10QJ088938;
+ Thu, 18 Apr 2024 14:01:00 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1713466860;
+ bh=EPp3RjK6anYveYCqzYCxz9nUt1xebZOtk8OuFzgnwaU=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=sH3tUDenofWqJ8x6EHQmUtHdF8cIs6Rk6RRj93Ov+Cm26gHaeR118nBw/sO472Kpm
+ D6IHcdcGb4+70Pmzol0q3jaUAF1kLZbffh6VwViILESx4miUzeBQ+Q5pF4r+StarsN
+ BNQ8ZCZ0jlwThftjnyq9rGp63ckCTtJMPTWmpzIU=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43IJ100a086062
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 18 Apr 2024 14:01:00 -0500
+Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 18
+ Apr 2024 14:01:00 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 18 Apr 2024 14:01:00 -0500
+Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43IJ10w0036318;
+ Thu, 18 Apr 2024 14:01:00 -0500
+From: Judith Mendez <jm@ti.com>
+To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>, Tom
+ Rini <trini@konsulko.com>
+CC: Nitin Yadav <n-yadav@ti.com>, Simon Glass <sjg@chromium.org>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH v2 2/5] mmc: am654_sdhci: Fix OTAP/ITAP delay values
+Date: Thu, 18 Apr 2024 14:00:57 -0500
+Message-ID: <20240418190100.1289150-3-jm@ti.com>
+X-Mailer: git-send-email 2.43.2
+In-Reply-To: <20240418190100.1289150-1-jm@ti.com>
+References: <20240418190100.1289150-1-jm@ti.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20240418-apple_config-v2-5-7e5c6b9a9db3@jannau.net>
-References: <20240418-apple_config-v2-0-7e5c6b9a9db3@jannau.net>
-In-Reply-To: <20240418-apple_config-v2-0-7e5c6b9a9db3@jannau.net>
-To: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
- asahi@lists.linux.dev, Janne Grunau <j@jannau.net>
-X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=652; i=j@jannau.net;
- h=from:subject:message-id;
- bh=aKmGZalIZA4d3jN5L9yo43E4OSWpBFF1+lCA1zAzZAU=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhjTF3NNdt+0OSJ1iF1Cav3DTObVAQVcOQ7V5RSo55pWtH
- 2YVn3HtKGVhEONikBVTZEnSftnBsLpGMab2QRjMHFYmkCEMXJwCMBGeKYwMXTf227KazXKKWiRr
- k+ZnkFEc9u73dRMF1Xs7/Ey3rTsiyvA/eZYF75yw8xxmRg7uGVEN8yRniFR+U//0Y7dX//2C/i8
- cAA==
-X-Developer-Key: i=j@jannau.net; a=openpgp;
- fpr=8B336A6BE4E5695E89B8532B81E806F586338419
-X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
-X-Original-From: Janne Grunau <j@jannau.net>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,36 +75,71 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: j@jannau.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Janne Grunau <j@jannau.net>
+From: Nitin Yadav <n-yadav@ti.com>
 
-The bootflow list is only seen briefly and is probably more confusing
-than helpful.
+U-Boot is failing to boot class U1 UHS SD cards due to incorrect
+OTAP and ITAP delay select values. Update OTAP and ITAP delay select
+values from DT.
 
-Signed-off-by: Janne Grunau <j@jannau.net>
+Fixes: c7d106b4eb3 ("mmc: am654_sdhci: Update output tap delay writes")
+Signed-off-by: Nitin Yadav <n-yadav@ti.com>
+Signed-off-by: Judith Mendez <jm@ti.com>
 ---
- configs/apple_m1_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Changes since v1:
+- Fix assignment to val variable in j721e_4bit_sdhci_set_ios_post()
+---
+ drivers/mmc/am654_sdhci.c | 23 +++++++++++++++++++----
+ 1 file changed, 19 insertions(+), 4 deletions(-)
 
-diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
-index c30aec7c55..4eac1a9e2d 100644
---- a/configs/apple_m1_defconfig
-+++ b/configs/apple_m1_defconfig
-@@ -8,6 +8,7 @@ CONFIG_SYS_CBSIZE=256
- CONFIG_SYS_PBSIZE=276
- # CONFIG_DISPLAY_CPUINFO is not set
- CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_BOOTCOMMAND="bootflow scan -b"
- CONFIG_BOARD_LATE_INIT=y
- CONFIG_CMD_SELECT_FONT=y
- # CONFIG_NET is not set
-
+diff --git a/drivers/mmc/am654_sdhci.c b/drivers/mmc/am654_sdhci.c
+index 7e41dd91f8e..becb3550899 100644
+--- a/drivers/mmc/am654_sdhci.c
++++ b/drivers/mmc/am654_sdhci.c
+@@ -513,12 +513,27 @@ static int j721e_4bit_sdhci_set_ios_post(struct sdhci_host *host)
+ {
+ 	struct udevice *dev = host->mmc->dev;
+ 	struct am654_sdhci_plat *plat = dev_get_plat(dev);
+-	u32 otap_del_sel, mask, val;
++	int mode = host->mmc->selected_mode;
++	u32 otap_del_sel;
++	u32 itap_del_sel;
++	u32 mask, val;
++
++	otap_del_sel = plat->otap_del_sel[mode];
+ 
+-	otap_del_sel = plat->otap_del_sel[host->mmc->selected_mode];
+ 	mask = OTAPDLYENA_MASK | OTAPDLYSEL_MASK;
+-	val = (1 << OTAPDLYENA_SHIFT) | (otap_del_sel << OTAPDLYSEL_SHIFT);
++	val = (1 << OTAPDLYENA_SHIFT) |
++	      (otap_del_sel << OTAPDLYSEL_SHIFT);
++
++	itap_del_sel = plat->itap_del_sel[mode];
++
++	mask |= ITAPDLYENA_MASK | ITAPDLYSEL_MASK;
++	val |= (1 << ITAPDLYENA_SHIFT) |
++	       (itap_del_sel << ITAPDLYSEL_SHIFT);
++
++	regmap_update_bits(plat->base, PHY_CTRL4, ITAPCHGWIN_MASK,
++			   1 << ITAPCHGWIN_SHIFT);
+ 	regmap_update_bits(plat->base, PHY_CTRL4, mask, val);
++	regmap_update_bits(plat->base, PHY_CTRL4, ITAPCHGWIN_MASK, 0);
+ 
+ 	regmap_update_bits(plat->base, PHY_CTRL5, CLKBUFSEL_MASK,
+ 			   plat->clkbuf_sel);
+@@ -572,7 +587,7 @@ static int sdhci_am654_get_otap_delay(struct udevice *dev,
+ 	 * Remove the corresponding capability if an otap-del-sel
+ 	 * value is not found
+ 	 */
+-	for (i = MMC_HS; i <= MMC_HS_400; i++) {
++	for (i = MMC_LEGACY; i <= MMC_HS_400; i++) {
+ 		ret = dev_read_u32(dev, td[i].otap_binding,
+ 				   &plat->otap_del_sel[i]);
+ 		if (ret) {
 -- 
-2.44.0
-
+2.43.2
 
