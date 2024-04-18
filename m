@@ -4,80 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F4ECC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 18:13:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 841EBC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 18:13:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8694288691;
-	Thu, 18 Apr 2024 20:13:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EED7F886A3;
+	Thu, 18 Apr 2024 20:13:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Bc0bGwoe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g/wc1YNG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 327138868E; Thu, 18 Apr 2024 20:13:12 +0200 (CEST)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
+ id AAD0188697; Thu, 18 Apr 2024 20:13:22 +0200 (CEST)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E323F87D8F
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 20:13:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 641FC8868E
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 20:13:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-de47485532cso741461276.3
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 11:13:09 -0700 (PDT)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-78edc0f9636so83960785a.2
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 11:13:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713463989; x=1714068789; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1713463999; x=1714068799; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UGbhsnB4j/HhHkdmGEe7F2eMqCZUHqFXiyyPVBGSRZk=;
- b=Bc0bGwoe8lhHa3SPk/UXN+ULWBITgAHplCAhKkBzqvOJeePH7vQyRL5boffsAiCcMb
- D8n8cJLnbN+LIBICnnxjZVpTHhe+dYYSgVMgf8Gp9YyBwVqwxZSgXqjJf0k8Yk6scuZS
- CSVTan2nIs0izEW/e0G57H14OGONlwRxiF/mY=
+ bh=aAJF+R/PuBJvzgGiVzr1Vqod2qpS98bm3Jru9CQ5JDU=;
+ b=g/wc1YNGpJ/u8p5fhlD+E5+t0yEn5r79cuu0G9npb8styk8A3pO1ineH3bpoctgC/S
+ w/F6VzCgpQ0XAHuJmf+k3wXxtSgn9wHF3l+PQeDD5QNaU7IDMeyH9nMwm0C/p6Tlr1U3
+ uxtvJVOkPnLkPX5B9ECZj7HhSQzP1t2wlT2Ns=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713463989; x=1714068789;
+ d=1e100.net; s=20230601; t=1713463999; x=1714068799;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UGbhsnB4j/HhHkdmGEe7F2eMqCZUHqFXiyyPVBGSRZk=;
- b=AmhUPV5J3Cf9OVePZ762K9rIFNHNZ9mnUilpBCK6cHnwaCKxPoV284wsmw37Tgbe3K
- QutC3O73FigjAxL7QPqI63rnrg3zFeryAHvf70K0JktDFhtRZ78zVfvDrq9ApxrvcxQH
- M/FqLX6Ojtf48H7gExp2VS59oJ4oXnjGCoAoIHyPvHcm0Q4TRRT2rWn/Re6a7RW6WCMQ
- MRi9EkaGsA3PdezSR5xi3E9gu09AiCfVEu425xmlVRIIcc7WLyKuD4wQ0+QRdICp80mR
- F44fxr0vOT0s+c6XOnqLfHOyCAdmAwxDdGrSndAp94WQihZ2GP9EaMaISsuOqvvXGV8t
- BSjA==
+ bh=aAJF+R/PuBJvzgGiVzr1Vqod2qpS98bm3Jru9CQ5JDU=;
+ b=EPjFrsXWf2iOvgLv7O+/kNZDadLVG4YkFjESWR1NfTAPuJuARwGBjSxHCJpvKnXnYv
+ rRZzuehhzhzf9HspC2fSktkm3z/j/ezH8cjd8sAA/PUgN0ypoqj1Zt7wAOiPrviZQNom
+ p28DLouuMO3k931CqmAX90PQVxlZw9AaFR8r3bOWBYwegLmVGLHTnwLg7T29f1LfIvsL
+ kD47hgAkiCvpbmZLcBFAIsTCczDK/zhCnIP/v9arYYkJOvlLDyBoruo0Nreio3bgiwQ7
+ T87IuCXR2VnRjjEWScywGmSikoTkn9s9l36LqbTgw273Qk1mFzjb+XMfcBqXZuzp9EWa
+ 63WA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVTifgq9vlvnHT7+MPupQ+gzpuGol9TrsPdfo6PnkAaJroHJ9SJDiuK4l9glxoExBRxLne7oNTFlU8C/rdRGC2Gqxy6+Q==
-X-Gm-Message-State: AOJu0YyQSVnG/CEmnlPs/oEa+dS2zfzrZDWwWXlavaiqZPZVO02QDqqP
- 65xLk/6LN4WoKaCxB+Nthu3QA1ZdzH7nF0bxXt2nXV7/B9TnXsPcMOg/NJOhGh8vk49Ntpa+o27
- QWyMeUA==
-X-Google-Smtp-Source: AGHT+IEvsUJlbSNK5PNIM9gdVtfpFSvc8Pmy470ithltPNMINOWrn9A4AZYy3sFkZxVbmtTGRMtCXQ==
-X-Received: by 2002:a25:e90d:0:b0:de0:f753:ad25 with SMTP id
- n13-20020a25e90d000000b00de0f753ad25mr3762753ybd.1.1713463988589; 
- Thu, 18 Apr 2024 11:13:08 -0700 (PDT)
+ AJvYcCXOFwTrhKes3O2ksMyE1rV7xFKnoARhRqUuJmRHUhJCjOChFAVXHb/xuaVq7IaPD6qI5moeq1N5L1v77bOvYFA1IVg/QQ==
+X-Gm-Message-State: AOJu0YwZO1dUsg89jI2+Df1CrdkuaZKu+yeKF2rP/QwJxajnpiZDUHXr
+ a0mnCxF1W93C4nAggYIj7CLLG+K/T1hQMoun1b/tLfRVHG1KxBkpTuoOTdJOEb4=
+X-Google-Smtp-Source: AGHT+IG6PZu9nDwbI9x/rs2L0O+KnRJohF/pXdUVN/mdN591VzqCLYDIfEb1VRI7B66L15oYggTYmQ==
+X-Received: by 2002:a05:620a:5607:b0:78e:df50:9f4a with SMTP id
+ vu7-20020a05620a560700b0078edf509f4amr3735348qkn.56.1713463999182; 
+ Thu, 18 Apr 2024 11:13:19 -0700 (PDT)
 Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- a3-20020a0ce343000000b006a046fb192esm825449qvm.107.2024.04.18.11.13.07
+ pb6-20020a05620a838600b0078d6bf63710sm842828qkn.55.2024.04.18.11.13.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Apr 2024 11:13:08 -0700 (PDT)
-Date: Thu, 18 Apr 2024 12:13:05 -0600
+ Thu, 18 Apr 2024 11:13:18 -0700 (PDT)
+Date: Thu, 18 Apr 2024 12:13:15 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 00/16] pxe: Allow extlinux booting without CMDLINE
- enabled
-Message-ID: <20240418181305.GI1054907@bill-the-cat>
-References: <20231215041919.2197788-1-sjg@chromium.org>
- <171279991820.196936.155872099351797064.b4-ty@konsulko.com>
- <50dfa3d6-a1ca-4492-a3fc-8d8c56b40b43@kwiboo.se>
+To: Chintan Vankar <c-vankar@ti.com>
+Cc: Siddharth Vadapalli <s-vadapalli@ti.com>, nm@ti.com, afd@ti.com,
+ vigneshr@ti.com, dannenberg@ti.com, srk@ti.com,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, joe.hershberger@ni.com,
+ simon.k.r.goldschmidt@gmail.com, sjg@chromium.org, marex@denx.de,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH 01/10] board: ti: am62x: Init DRAM size in R5/A53 SPL
+Message-ID: <20240418181315.GJ1054907@bill-the-cat>
+References: <20240120164141.GA3652023@bill-the-cat>
+ <48c63fc4-9f06-4066-b206-a0a548936dcd@ti.com>
+ <892b473b-5b76-4e44-af27-52d50cb24877@ti.com>
+ <20240411220741.GJ2493117@bill-the-cat>
+ <2406c7be-114c-4082-9c14-1cd59917b9d8@ti.com>
+ <20240416170027.GQ1054907@bill-the-cat>
+ <97f84067-ba36-47f6-befa-221be47a1d25@ti.com>
+ <CADg8p97udLbFvbZ_FZf9Hfwg3R4=YJMNWrAtqvu97mL7vVYREQ@mail.gmail.com>
+ <20240417160446.GF1054907@bill-the-cat>
+ <42fd6f28-bcf6-406c-8d43-7b4f3966ebb2@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="oPr6HIH0awojahBO"
+ protocol="application/pgp-signature"; boundary="4CxR6aOBRp9jyPHe"
 Content-Disposition: inline
-In-Reply-To: <50dfa3d6-a1ca-4492-a3fc-8d8c56b40b43@kwiboo.se>
+In-Reply-To: <42fd6f28-bcf6-406c-8d43-7b4f3966ebb2@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,159 +105,207 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---oPr6HIH0awojahBO
+--4CxR6aOBRp9jyPHe
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Apr 14, 2024 at 06:58:03PM +0200, Jonas Karlman wrote:
-> Hi Tom and Simon,
+On Thu, Apr 18, 2024 at 04:08:46PM +0530, Chintan Vankar wrote:
 >=20
-> On 2024-04-11 03:45, Tom Rini wrote:
-> > On Thu, 14 Dec 2023 21:18:58 -0700, Simon Glass wrote:
+>=20
+> On 17/04/24 21:34, Tom Rini wrote:
+> > On Wed, Apr 17, 2024 at 05:48:31PM +0530, Sughosh Ganu wrote:
+> > > hi Chintan,
+> > >=20
+> > > On Wed, 17 Apr 2024 at 13:21, Chintan Vankar <c-vankar@ti.com> wrote:
+> > > >=20
+> > > >=20
+> > > >=20
+> > > > On 16/04/24 22:30, Tom Rini wrote:
+> > > > > On Tue, Apr 16, 2024 at 05:52:58PM +0530, Chintan Vankar wrote:
+> > > > > >=20
+> > > > > >=20
+> > > > > > On 12/04/24 03:37, Tom Rini wrote:
+> > > > > > > On Wed, Apr 03, 2024 at 06:18:01PM +0530, Chintan Vankar wrot=
+e:
+> > > > > > > >=20
+> > > > > > > >=20
+> > > > > > > > On 22/01/24 10:11, Siddharth Vadapalli wrote:
+> > > > > > > > >=20
+> > > > > > > > >=20
+> > > > > > > > > On 20/01/24 22:11, Tom Rini wrote:
+> > > > > > > > > > On Mon, Jan 15, 2024 at 01:42:51PM +0530, Siddharth Vad=
+apalli wrote:
+> > > > > > > > > > > Hello Tom,
+> > > > > > > > > > >=20
+> > > > > > > > > > > On 12/01/24 18:56, Tom Rini wrote:
+> > > > > > > > >=20
+> > > > > > > > > ...
+> > > > > > > > >=20
+> > > > > > > > > > > > The list of conditionals in common/spl/spl.c::board=
+_init_r() should be
+> > > > > > > > > > > > updated and probably use SPL_NET as the option to c=
+heck for.
+> > > > > > > > > > >=20
+> > > > > > > > > > > Thank you for reviewing the patch and pointing this o=
+ut. I wasn't aware of it. I
+> > > > > > > > > > > assume that you are referring to the following change:
+> > > > > > > > > > >=20
+> > > > > > > > > > >             if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CON=
+FIG_IS_ENABLED(HANDOFF) ||
+> > > > > > > > > > > -           IS_ENABLED(CONFIG_SPL_ATF))
+> > > > > > > > > > > +           IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(=
+CONFIG_SPL_NET))
+> > > > > > > > > > >                     dram_init_banksize();
+> > > > > > > > > > >=20
+> > > > > > > > > > > I shall replace the current patch with the above chan=
+ge in the v2 series. Since
+> > > > > > > > > > > this is in the common section, is there a generic rea=
+son I could provide in the
+> > > > > > > > > > > commit message rather than the existing commit messag=
+e which seems to be board
+> > > > > > > > > > > specific? Also, I hope that the above change will not=
+ cause regressions for
+> > > > > > > > > > > other non-TI devices. Please let me know.
+> > > > > > > > > >=20
+> > > > > > > > > > Yes, that's the area, and just note that networking als=
+o requires the
+> > > > > > > > > > DDR to be initialized.
+> > > > > > > > > >=20
+> > > > > > > > >=20
+> > > > > > > > > Thank you for confirming and providing your suggestion fo=
+r the contents of the
+> > > > > > > > > commit message.
+> > > > > > > > >=20
+> > > > > > > > Following Tom's Suggestion of adding CONFIG_SPL_NET in comm=
+on/spl/spl.c
+> > > > > > > > "dram_init_banksize()", the issue of fetching a file at SPL=
+ stage seemed
+> > > > > > > > to be fixed. However the commit "ba20b2443c29", which sets =
+gd->ram_top
+> > > > > > > > for the very first time in "spl_enable_cache()" results in
+> > > > > > > > "arch_lmb_reserve()" function reserving memory region from =
+Stack pointer
+> > > > > > > > at "0x81FFB820" to gd->ram_top pointing to "0x100000000". P=
+reviously
+> > > > > > > > when gd->ram_top was zero "arch_lmb_reserve()" was noop. No=
+w using TFTP
+> > > > > > > > to fetch U-Boot image at SPL stage results in "tftp_init_lo=
+ad_addr()"
+> > > > > > > > function call that invokes "arch_lmb_reserve()" function, w=
+hich reserves
+> > > > > > > > entire memory starting from Stack Pointer to gd->ram_top le=
+aving no
+> > > > > > > > space to load U-Boot image via TFTP since TFTP loads files =
+at pre
+> > > > > > > > configured memory address at "0x82000000".
+> > > > > > > >=20
+> > > > > > > > As a workaround for this issue, one solution we can propose=
+ is to
+> > > > > > > > disable the checks "lmb_get_free_size()" at SPL and U-Boot =
+stage. For
+> > > > > > > > that we can define a new config option for LMB reserve chec=
+ks as
+> > > > > > > > "SPL_LMB". This config will be enable by default for the ba=
+ckword
+> > > > > > > > compatibility and disable for our use case at SPL and U-Boo=
+t stage.
+> > > > > > >=20
+> > > > > > > The problem here is that we need LMB for booting an OS, which=
+ is
+> > > > > > > something we'll want in SPL in non-cortex-R cases too, which =
+means this
+> > > > > > > platform, so that's a no-go. I think you need to dig harder a=
+nd see if
+> > > > > > > you can correct the logic somewhere so that we don't over res=
+erve?
+> > > > > > >=20
+> > > > > > Since this issue is due to function call "lmb_init_and_reserve(=
+)"
+> > > > > > function invoked from "tftp_init_load_addr()" function. This fu=
+nction
+> > > > > > is defined by Simon in commit "a156c47e39ad", which fixes
+> > > > > > "CVE-2018-18439" to prevent overwriting reserved memory. Simon,=
+ can you
+> > > > > > explain why do we need to call "lmb_init_and_reserve()" functio=
+n here ?
+> > > > >=20
+> > > > > This is indeed a tricky area which is why Sughosh is looking in to
+> > > > > trying to re-work the LMB mechanic and we've had a few long threa=
+ds
+> > > > > about it as well.
+> > > > >=20
+> > > > > I've honestly forgotten the use case you have here, can you please
+> > > > > remind us?
+> > > > >=20
+> > > > We are trying to boot AM62x using Ethernet for which we need to load
+> > > > binary files at SPL and U-Boot stage using TFTP. To store the file =
+we
+> > > > need a free memory in RAM, specifically we are storing these files =
+at
+> > > > 0x82000000. But we are facing an issue while loading the file since
+> > > > the memory area having an address 0x82000000 is reserved due to
+> > > > "lmb_init_and_reserve()" function call. This function is called in
+> > > > "tftp_init_load_addr()" function which is getting called exactly be=
+fore
+> > > > we are trying to get the free memory area by calling
+> > > > "lmb_get_free_size()".
+> > >=20
+> > > I have no idea about your platform but I was wondering if there is any
+> > > particular importance of the load address of 0x82000000? It looks as
+> > > though the current location of the SP when arch_lmb_reserve() gets
+> > > called means that the load address is getting reserved for the U-Boot
+> > > image. Do you not have the option of loading the image at a lower
+> > > address instead?
 > >=20
-> >> This series is the culmanation of the current line of refactoring
-> >> series. It adjusts pxe to call the booting functionality directly
-> >> rather than going through the command-line interface.
-> >>
-> >> With this is is possible to boot using the extlinux bootmeth without
-> >> the command line enabled.
-> >>
-> >> [...]
+>=20
+> Sughosh,
+>=20
+> I think my explanation was not clear at:
+> "We are trying to boot AM62x using Ethernet for which we need to load
+> binary files at SPL and U-Boot stage using TFTP."
+> - In Ethernet Booting we are fetching U-Boot image at SPL stage via
+> TFTP at specified address 0x82000000. While loading U-Boot image we are
+> getting TFTP error, since address from stack pointer till gd->ram_top is
+> reserved due to "lmb_init_and_reserve()" function call. I want to know
+> for which purpose this address range is reserved.
+>=20
+> > Or using a higher address for SPL stack? You might be able to solve this
+> > just by re-examining which addresses (and RAM size limitations) need to
+> > be considered here.
 > >=20
-> > Applied to u-boot/master, thanks!
-> >=20
 >=20
-> This series is causing boot issues using extlinux in bootm_run_states():
+> Tom,
 >=20
->   ERROR: booting os 'Invalid OS' (0) is not supported
->=20
-> Following extlinux.conf was used:
->=20
->   label linux
->   	kernel /Image.gz
->   	initrd /initramfs.cpio.gz
->=20
-> Before this series booting works, bootm_run_states() is first called
-> with states=3D0x1 (BOOTM_STATE_START):
->=20
->   Scanning bootdev 'mmc@fe2b0000.bootdev':
->     1  extlinux     ready   mmc          1  mmc@fe2b0000.bootdev.part /ex=
-tlinux/extlinux.conf
->   ** Booting bootflow 'mmc@fe2b0000.bootdev.part_1' with extlinux
->   1:      linux
->   Retrieving file: /Image.gz
->   Retrieving file: /initramfs.cpio.gz
->   bootm_run_states(): images->state: 0, states: 1
->   bootm_run_states(): images->os.os: 0
->   bootm_run_states(): images->os.arch: 0
->   bootm_run_states(): boot_fn: 0000000000000000, need_boot_fn: 0
->      Uncompressing Kernel Image to 0
->   ## Flattened Device Tree blob at edef8410
->      Booting using the fdt blob at 0xedef8410
->   Working FDT set to edef8410
->   bootm_run_states(): images->state: 1, states: 1710
->      Loading Ramdisk to ecdfd000, end eceb274d ... OK
->   bootm_run_states(): images->os.os: 5
->   bootm_run_states(): images->os.arch: 16
->   boot_fn: 00000000eff2b83c, need_boot_fn: 0
->      Loading Device Tree to 00000000ecde8000, end 00000000ecdfc97f ... OK
->   Working FDT set to ecde8000
->=20
-> After this series booting fails, bootm_run_states() is first called
-> with states=3D0x1710.
->=20
->   Scanning bootdev 'mmc@fe2b0000.bootdev':
->     1  extlinux     ready   mmc          1  mmc@fe2b0000.bootdev.part /ex=
-tlinux/extlinux.conf
->   ** Booting bootflow 'mmc@fe2b0000.bootdev.part_1' with extlinux
->   1:      linux
->   Retrieving file: /Image.gz
->   Retrieving file: /initramfs.cpio.gz
->   bootm_run_states(): images->state: 0, states: 1710
->   bootm_run_states(): images->os.os: 0
->   bootm_run_states(): images->os.arch: 0
->   bootm_run_states(): boot_fn: 0000000000000000, need_boot_fn: 0
->   ERROR: booting os 'Invalid OS' (0) is not supported
->   Boot failed (err=3D-14)
->=20
-> Looks like booti_start() -> bootm_run_states(bmi, BOOTM_STATE_START) is
-> no longer called due to changes in this series.
+> We tried this approach of assigning a higher address for SPL stack, but
+> it is not working as expected.
 
-I think the problem is with:
-commit 6d803ec9cc757bda0c48f2fd419cb6878eab92c4
-Author: Simon Glass <sjg@chromium.org>
-Date:   Thu Dec 14 21:19:12 2023 -0700
-
-    pxe: Allow booting without CMDLINE for bootm methods
-   =20
-    Use bootm_run() and booti_run() to boot rather than the command line.
-    This allows extlinux to be used without CMDLINE being enabled.
-   =20
-    Collect any error but do not return it, to match the existing code.
-   =20
-    Signed-off-by: Simon Glass <sjg@chromium.org>
-
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-[snip]
-@@ -641,23 +644,18 @@ static int label_run_boot(struct pxe_context *ctx, st=
-ruct pxe_label *label,
- 	if (!fdt_addr && genimg_get_format(buf) !=3D IMAGE_FORMAT_FIT)
- 		fdt_addr =3D env_get("fdtcontroladdr");
-=20
--	if (fdt_addr) {
--		if (!bootm_argv[2])
--			bootm_argv[2] =3D "-";
--		bootm_argc =3D 4;
--	}
--	bootm_argv[3] =3D (char *)fdt_addr;
-+	bmi.conf_fdt =3D fdt_addr;
-=20
- 	/* Try bootm for legacy and FIT format image */
- 	if (genimg_get_format(buf) !=3D IMAGE_FORMAT_INVALID &&
--            IS_ENABLED(CONFIG_CMD_BOOTM))
--		do_bootm(ctx->cmdtp, 0, bootm_argc, bootm_argv);
-+	    IS_ENABLED(CONFIG_BOOTM))
-+		ret =3D bootm_run(&bmi);
- 	/* Try booting an AArch64 Linux kernel image */
--	else if (IS_ENABLED(CONFIG_CMD_BOOTI))
--		do_booti(ctx->cmdtp, 0, bootm_argc, bootm_argv);
-+	else if (IS_ENABLED(CONFIG_BOOTM))
-+		ret =3D booti_run(&bmi);
- 	/* Try booting a Image */
--	else if (IS_ENABLED(CONFIG_CMD_BOOTZ))
--		do_bootz(ctx->cmdtp, 0, bootm_argc, bootm_argv);
-+	else if (IS_ENABLED(CONFIG_BOOTM))
-+		ret =3D bootz_run(&bmi);
- 	/* Try booting an x86_64 Linux kernel image */
- 	else if (IS_ENABLED(CONFIG_CMD_ZBOOT))
- 		do_zboot_parent(ctx->cmdtp, 0, zboot_argc, zboot_argv, NULL);
-
-And this doesn't seem equivalent really. The logic used to be checking
-if we had bootm/booti/bootz and now it's always checking for
-CONFIG_BOOTM. Jonas, can you please share the defconfig you used here as
-well? But I think for now reverting the series is the best path forward,
-unfortunately.
+Looking at the context here again, I think you need to re-evaluate what
+addresses are used and for where / what. I'm not happy with the
+combination of "enable LMB in SPL and then also remove the functionality
+of LMB", which is what you're proposing in essence now. There's either a
+different set of memory locations that should work, or some underlying
+bugs elsewhere that this exposes that need to be fixed. Thanks.
 
 --=20
 Tom
 
---oPr6HIH0awojahBO
+--4CxR6aOBRp9jyPHe
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYhYqsACgkQFHw5/5Y0
-tyxtmAv+OjX+lrdFJIw4qrXmnUBH3rZYFQy6S+Ntwlzo15TxT1Sro4FDzB4fa2k0
-afT+2O3Rodro1+Z3DOUy0O1SBsiSghNq8gCGzKkHSojiLSlmrCbXA3Kqk+R35Csh
-Q0PS4e+r7xgnIgGQgluzM4QFiWuQy/bzqjYYkMyMoIAIlZapC9+5qpuztKdKVS0N
-8S+MSA3iCPUJsf3qdwgakDhiSMVGWjKo7Nb5zv1gmNvnXyY8x7i8ZvkbY6IhBvKu
-OmAhiRkEVQRnnqTCjeZD9md+fym6p0H76a+GFFG+B6fXiz0IXaBvoJ2AUiyXDixI
-du9/lF+ndgO45Y1iTzCI9DQ5kHmp8HgjAN5G3fvf4+mqrFi/2zXSFK/Ov+lRtS4i
-zW71F9U5eQM4n26ACDMp/lLSXsCIBOafCNhD3ug1pKkVmjwROU/F/NROO44r96Yf
-HtNT6NJ/4A7YPG/Gxmm4L0o9o+MCKpThb81k8nnCmIMi/+BK+Kj0ef+1+WlEBHUX
-n6Xb1ytp
-=stF1
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYhYrsACgkQFHw5/5Y0
+tyxr5Qv5ASlH9EO+EoOD+GsezE+LRmmoKPDY4kz78IEyhrNpgEyGU2oWn+r2Me1f
+1KIFduCN4IjrCkk4fj6Q1lCXOb6a3IddU7BQc5EBvEJAoAx7mC1b16B3GmxkTG4K
+R2S98/Egf15QVYycZ/9EwclVTvcS3i/EI7kV5pV6V1Q3PLh4Iy02KTltkgh+vd4f
+5kSWbIJbyUzLVQRZ5V+Af2WZeKsbo/ueAa7+swYldWq3YfHYttNaOuwwYfTaqRkn
+FkAsXa9gPid3hWsiyBvH1o4WB5bGlSaZ3tRmdeukIx/y1qgsLJwnN8hIFHbaJNtI
+XYIjwrIOAPFqc6fI3jJxKGrewjBfvBbiJd1BCbBeqW6Dpq8I7vNrliBI31QKeRew
+CW7xUMbVbGbm3g83U/s9az/sMWVbGOqqbxrGIG6unOXqaz/B/O6X2Y7GQEzAO/Qy
+p3Hw0iZXggaGPTjKQGRtTKzsj3Q3uV01xRcd8T+D21RJdvhTh62f16DXgvWSRTkT
+dTwWaiz+
+=/bTX
 -----END PGP SIGNATURE-----
 
---oPr6HIH0awojahBO--
+--4CxR6aOBRp9jyPHe--
