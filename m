@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED1E7C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 19:01:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C39DC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 19:01:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 144B5886A5;
-	Thu, 18 Apr 2024 21:00:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7E79F886AC;
+	Thu, 18 Apr 2024 21:00:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="stNIljnv";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="ZkuZpxmg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9CD268863A; Thu, 18 Apr 2024 21:00:35 +0200 (CEST)
+ id 14D37886A7; Thu, 18 Apr 2024 21:00:37 +0200 (CEST)
 Received: from sin.source.kernel.org (sin.source.kernel.org [145.40.73.55])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9341C8869C
+ by phobos.denx.de (Postfix) with ESMTPS id 8F5238869A
  for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 21:00:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=devnull+j.jannau.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by sin.source.kernel.org (Postfix) with ESMTP id B219BCE18FF;
+ by sin.source.kernel.org (Postfix) with ESMTP id 93B60CE17C1;
  Thu, 18 Apr 2024 19:00:30 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id E2207C32781;
+Received: by smtp.kernel.org (Postfix) with ESMTPS id CC038C3277B;
  Thu, 18 Apr 2024 19:00:29 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1713466829;
- bh=Gj0k0JywpqBVVyJNgyoLrUStEU15HpkIEpLz94Eallw=;
+ bh=FBJF8TwEarYMbU18f17+c423zfMKKM3xK1+QDqFe5Po=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=stNIljnvFgwnho9WPkvzvrZE6NwiB7XJw9b8SMN6q/7Z2T0bg5HsxVCfUOVeYk+cZ
- WZzju8YaukOKlHnSqSB7tq7obGIiITRG5DOIzzLbHh6UhLCkYrjvA2o2ysJ/YmOI2N
- H4CSD+fGlhxuCAiAg7L5mRmwdFwmqixVRdW96nu0XCsb7wbucWDwQkxwLjmZ1n1+tO
- hEXt2eVW92EqYsPY/muxthz9kwr2TTWOnzeWbtWPo8dPXpBWgrcM9toAld7h79Jfuv
- w13EsjuE3tgOEKPl0vMq/sQbhQO9iY3Usj55XS6c+eObzwqJDyI8y/NrO3D6ZHA+3n
- fgEsoHpUOQnoQ==
+ b=ZkuZpxmg9B05LAIJ3MxoYfk4QaeC6rGemy+jBgLfd+tOqTEvkHxYQfLI3Us4ZGLBj
+ 7srfLwlMYdtZpoU8+vRvoWiGAavXA4T6r1Sy3wU2nhDXR3v2EWQwn8V/RLrihcRwHh
+ Kjowpon51hSEanXY6g6E1M9+f20gaguKbIlUvK1IWYYHRCCHyaJL8rvLYktgiAdcGu
+ xfovTLEI+rcnCZqSI9UOdZiBV4883XxJ+Ps/QdW4noNn81JJhWTav8NiRdgkk6qQyX
+ 7JzQj8T6N4308/3grvV4REvnhtBut/M6+M2gslLQZrfFe/++WJv0rRom1r4s8vKJCH
+ YbdD7LYums4zw==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id D10E3C4345F;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id B4D96C04FFE;
  Thu, 18 Apr 2024 19:00:29 +0000 (UTC)
 From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-Date: Thu, 18 Apr 2024 21:00:27 +0200
-Subject: [PATCH v2 3/5] configs: apple: Enable CMD_SELECT_FONT and FONT_16X32
+Date: Thu, 18 Apr 2024 21:00:25 +0200
+Subject: [PATCH v2 1/5] apple_m1_defconfig: Turn on CONFIG_SYS_64BIT_LBA
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240418-apple_config-v2-3-7e5c6b9a9db3@jannau.net>
+Message-Id: <20240418-apple_config-v2-1-7e5c6b9a9db3@jannau.net>
 References: <20240418-apple_config-v2-0-7e5c6b9a9db3@jannau.net>
 In-Reply-To: <20240418-apple_config-v2-0-7e5c6b9a9db3@jannau.net>
 To: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, 
  asahi@lists.linux.dev, Janne Grunau <j@jannau.net>, 
- Neal Gompa <neal@gompa.dev>
+ Hector Martin <marcan@marcan.st>, Neal Gompa <neal@gompa.dev>
 X-Mailer: b4 0.13.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1093; i=j@jannau.net;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=911; i=j@jannau.net;
  h=from:subject:message-id;
- bh=awJWiiYi0FEsQZBJtjQjML0mQJ6lEXedBk0qLMAtjDs=;
- b=owGbwMvMwCW2UNrmdq9+ahrjabUkhjTF3NMrFm359vPJ7aVBhwSEe54zS5uduCxY9PPnnPuuc
- 2YpFrkpd5SyMIhxMciKKbIkab/sYFhdoxhT+yAMZg4rE8gQBi5OAZjI9G6G/7EyW5TPzDad39Z4
- /UrIDs/uqBmRGoJHjl74es6wTkAy+BrDf7fr0z4EHhL/9nPDTgth6TmCv6cXMyg6sjLk7d4QkpV
- +iA0A
+ bh=iW3npaSaVV3BNoLkHi1Fz7M4xWDJIwJ9UUkZXz6uLiw=;
+ b=owGbwMvMwCW2UNrmdq9+ahrjabUkhjTF3NNXd722eRf0L+uN9dHzE+wWdz+KZXmQutVUfNnEO
+ 7aGS4/Zd5SwMIhxMciKKbIkab/sYFhdoxhT+yAMZg4rE8gQBi5OAZhI2FNGhguXF709x/5k8b/Q
+ C+lrmLetrv/l5P60t+n24oo59jnv9rcx/JhhO7uyYq7ElGPc7sZ9KRW6r529Xh35OoUto/wvx4Z
+ YdgA=
 X-Developer-Key: i=j@jannau.net; a=openpgp;
  fpr=8B336A6BE4E5695E89B8532B81E806F586338419
 X-Endpoint-Received: by B4 Relay for j@jannau.net/default with auth_id=62
@@ -86,40 +86,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Janne Grunau <j@jannau.net>
+From: Hector Martin <marcan@marcan.st>
 
-Apple devices have high DPI displays so the larger fonts are preferable
-for improved readability. This does not yet change the used font based
-on the display's pixel density so the standard 8x16 font is still used
-by default.
+This makes USB HDDs >2TiB work. The only reason this hasn't bitten us
+for the internal NVMe yet is the 4K sector size, because the largest SSD
+Apple sells is 8TB and we can handle up to 16TiB with that sector size.
+Close call.
 
+Signed-off-by: Hector Martin <marcan@marcan.st>
 Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
 Reviewed-by: Neal Gompa <neal@gompa.dev>
 Signed-off-by: Janne Grunau <j@jannau.net>
 ---
- configs/apple_m1_defconfig | 2 ++
- 1 file changed, 2 insertions(+)
+ configs/apple_m1_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
-index 31d966f0ab..c30aec7c55 100644
+index e00d72e8be..31d966f0ab 100644
 --- a/configs/apple_m1_defconfig
 +++ b/configs/apple_m1_defconfig
-@@ -9,6 +9,7 @@ CONFIG_SYS_PBSIZE=276
- # CONFIG_DISPLAY_CPUINFO is not set
+@@ -10,6 +10,7 @@ CONFIG_SYS_PBSIZE=276
  CONFIG_DISPLAY_BOARDINFO_LATE=y
  CONFIG_BOARD_LATE_INIT=y
-+CONFIG_CMD_SELECT_FONT=y
  # CONFIG_NET is not set
- CONFIG_SYS_64BIT_LBA=y
++CONFIG_SYS_64BIT_LBA=y
  CONFIG_APPLE_SPI_KEYB=y
-@@ -19,6 +20,7 @@ CONFIG_USB_XHCI_DWC3=y
- CONFIG_USB_XHCI_PCI=y
- CONFIG_USB_DWC3=y
- CONFIG_USB_KEYBOARD=y
-+CONFIG_VIDEO_FONT_16X32=y
- CONFIG_SYS_WHITE_ON_BLACK=y
- CONFIG_NO_FB_CLEAR=y
- CONFIG_VIDEO_SIMPLE=y
+ # CONFIG_MMC is not set
+ CONFIG_NVME_APPLE=y
 
 -- 
 2.44.0
