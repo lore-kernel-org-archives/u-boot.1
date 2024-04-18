@@ -4,80 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E24ECC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 12:41:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95269C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 12:41:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EFF188606;
-	Thu, 18 Apr 2024 14:41:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 747C98862E;
+	Thu, 18 Apr 2024 14:41:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nMkGcNMZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QqfeHTKY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 447A888620; Thu, 18 Apr 2024 14:41:02 +0200 (CEST)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 9C7E7884C4; Thu, 18 Apr 2024 14:41:11 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3ED17884C4
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 14:41:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ABF328862B
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 14:41:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-418c2bf2f55so5887775e9.2
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 05:41:00 -0700 (PDT)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4187c47405aso5689565e9.3
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 05:41:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713444060; x=1714048860; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1713444069; x=1714048869; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=4CFR71PgSVdQa4puv58irIzYtpvzMyGpPNEhtXiTIPU=;
- b=nMkGcNMZMsG3QrGicmgsJdepmE0kRJvVbh5vbmv9X+LJva+OsVZP0KD65h9YufDlHj
- Wd84jioIdNGEJaE3g7fuLvkcBkG3NlbSPm6gyRzq5Bf7D46NRFacEe0V5SrF0ZattCCG
- xJlIZbto7JqRiC9xndQdm/HLYWHgY8PgrFShMG/HgWfWeBuCkzr18WTLkvjSlfiVhh+h
- RfxiOMZi8FuBKSJoGLGlfBN6i4jJ3fi6WRplzuRIMRYj7SlnRcC9XB14cKjaat1x91iz
- UsW4e0mqZ1Hl7a9HcUKvpL5rztdamk/wD76BH85OoGTXcOi5Xyy0e16ww45BvZvDGjuE
- DGWw==
+ bh=ndXgdv4mc2+T9HIspZBbI+543ywWqxCGNevQI19qGhQ=;
+ b=QqfeHTKYFiwPzWt04FPsBd3baSoNUlimLcb1VLi5VPSAk2R8MEGAbVYQ0aWEzE8AI6
+ 9bWB/0qKQxaSrXBMtMY18GI1WdsALsAkzdVfVqX7L4yelOWVo707ZnNu5L25uJNqwhgp
+ tkYgPVTlJnhoSp92mC4lXj8g5Khj6uOUVg+oPxCd/vjECNfMYV5Lur3UihvxJPaDwZAC
+ XxIysFX0Wvezhu4HsM5Fpw8UBKU+ywOcM3GSlcqoFKZGBVcb7GXd55nCFClHaDSEChEy
+ EZs3IjnRDOkYyxzHT3QlM4a9xAMpkcjuQwfEr54z2JzQ/mgflAd0K18MnUpE3FgLwELb
+ tGgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713444060; x=1714048860;
+ d=1e100.net; s=20230601; t=1713444069; x=1714048869;
  h=content-transfer-encoding:in-reply-to:from:references:cc:to
  :content-language:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4CFR71PgSVdQa4puv58irIzYtpvzMyGpPNEhtXiTIPU=;
- b=LDFibEZoXt2Nps9pcUV7ErfmgjXEkirZLhDptd0Uj2FaeUxEzRaJ1RoUUxiXLsbTXY
- qlfyBnzz2ftZ/IlIyhDumpwe9ToNU1AePqaH1GF9oSmU+zAhIOllc1HXubWWmvCY44SK
- jV/sY11f9U6qc9mqlsG9P5e8niRoUPPm8kdSUQf8RIpuOkLau744YG1O41PqRbjFLNM1
- AanK2WfZxSt/oswlm9V2v4pVNazwhsHLN3Mv1xp2q6YHAVxijwDN+ty9BBBV/wTKuZ0g
- pVNV6zMz1T+gieuRbvxbds+PZVdBNLv/xhXU24Xvvt2zgcuVevYsbmKm2B9DySDY4a26
- /dyg==
+ bh=ndXgdv4mc2+T9HIspZBbI+543ywWqxCGNevQI19qGhQ=;
+ b=DnLSBwAWwn9glOpiA4kDFR5mtqC2mVOPqGCHcTPHyB0G0pt7zCNWOcLscDJ8nKPHAY
+ xu3vs5qXDssEXBAQjpzFpB4aBbauRB/cRP3g5rTYuUdFZJIEs7hjn3Mbq+HUz368JJ1c
+ iLerugDBN5O9RptgnNrK2fLmIQFwtF+vwT8yfJjK/go8zC4djvjvN3+Jp2AkR6piy7e9
+ d+10ZSJ1WfECHDaP3u7C7UfN0ru3TaA28/6fYNAFNhM1JCZLJO/YquN8wuZvokk2GhDM
+ 0OM80AMbAgdZGgr9oFrGoBqDAOyhG865VZHCjB24CU8veJTY+XBEM3NYbSmmzwG/Qzlf
+ eiFA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUuu82yqLZ8fBmF93Kpzf6bo79PmYnDcJIWrVQbSGsJL52Hep3/+iT6xoQdDlATdM3emUsHjbmbxf/Jmu6MJnIZQqhQQA==
-X-Gm-Message-State: AOJu0Yz711hnRQwRdJ7/osq6MjsNfVSV2AqKuRzvSK2f1K0P8/oVSYSe
- 83HhhsuW19CPD8B0r2yBO/VA75MJgwkFO9/ONZm6Py8xE5OS2FMejHyMB9N6oik=
-X-Google-Smtp-Source: AGHT+IHVn/qPzXb0/e9sMvtpqki3CCcPi4rcxJgl6z+x3my2nVdKqpI0yT1ToMsJx6d2aUAP+Kag1A==
-X-Received: by 2002:adf:e407:0:b0:349:aab4:52a with SMTP id
- g7-20020adfe407000000b00349aab4052amr1454473wrm.71.1713444059640; 
- Thu, 18 Apr 2024 05:40:59 -0700 (PDT)
+ AJvYcCXHgjnQt8NdrVhciv9EULObTgaf9giihTqW0VeAfixmx4HglXOp2lJ082UFtCrhtbbyH3tedHvD2STMl+SSoG4OWlgp8A==
+X-Gm-Message-State: AOJu0Yyg2B5mdTZ/cqZ8ESOBugQqweORWu+72AVN24Zxy6aJoYPEMxHa
+ bO5OPvQfIBzPIUeCaXUZfp0101toyiwtHgOgZGPicyWBeVbDrTZ/1/HJRgRpQLs=
+X-Google-Smtp-Source: AGHT+IGxvDle7ROGute5+ZXvTKJe9UiN+qyBw+OdoBPsOcRrdMo+aRyKKY17ELxu7V+XKrJo2kQ0WA==
+X-Received: by 2002:a05:600c:4f4d:b0:416:9ba0:8f17 with SMTP id
+ m13-20020a05600c4f4d00b004169ba08f17mr1601023wmq.22.1713444069261; 
+ Thu, 18 Apr 2024 05:41:09 -0700 (PDT)
 Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- iv19-20020a05600c549300b004186c58a9b5sm2571480wmb.44.2024.04.18.05.40.59
+ z9-20020a05600c0a0900b00418916f5848sm2553220wmp.43.2024.04.18.05.41.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Apr 2024 05:40:59 -0700 (PDT)
-Message-ID: <4b0f4e3a-f113-4dd4-a278-513798f5f5b3@linaro.org>
-Date: Thu, 18 Apr 2024 13:40:58 +0100
+ Thu, 18 Apr 2024 05:41:08 -0700 (PDT)
+Message-ID: <c5a979f0-a25a-49d3-b2c3-5855a6129ad7@linaro.org>
+Date: Thu, 18 Apr 2024 13:41:08 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] pinctrl: qcom: allow selecting with ARCH_IPQ40XX
+Subject: Re: [PATCH 3/3] pinctrl: qcom: ipq4019: adapt pin name lookup to
+ upstream DTS
 Content-Language: en-US
 To: Robert Marko <robert.marko@sartura.hr>, trini@konsulko.com,
  neil.armstrong@linaro.org, sumit.garg@linaro.org, u-boot@lists.denx.de
 Cc: j.beck@linefinity.com
 References: <20240418091435.18232-1-robert.marko@sartura.hr>
+ <20240418091435.18232-3-robert.marko@sartura.hr>
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240418091435.18232-1-robert.marko@sartura.hr>
+In-Reply-To: <20240418091435.18232-3-robert.marko@sartura.hr>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,28 +101,29 @@ X-Virus-Status: Clean
 
 
 On 18/04/2024 10:14, Robert Marko wrote:
-> IPQ4019 pinctrl driver was moved to the dedicated Qualcomm pinctrl
-> directory, but the KConfig depends on ARCH_SNAPDRAGON only and thus
-> PINCTRL_QCOM_IPQ4019 cannot be selected when ARCH_IPQ40XX is used.
+> We want to use OF_UPSTREAM on IPQ40XX as its well supported upstream, so
+> as a preparation update pinctrl driver to look for the upstream pin format.
 > 
-> Fixes: 24d2908e987a ("pinctrl: qcom: move ipq4019 driver from mach-ipq40xx")
 > Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 
 Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->  drivers/pinctrl/qcom/Kconfig | 2 +-
+>  drivers/pinctrl/qcom/pinctrl-ipq4019.c | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-> index 2fe6398147..bd2019c866 100644
-> --- a/drivers/pinctrl/qcom/Kconfig
-> +++ b/drivers/pinctrl/qcom/Kconfig
-> @@ -1,4 +1,4 @@
-> -if ARCH_SNAPDRAGON
-> +if ARCH_SNAPDRAGON || ARCH_IPQ40XX
+> diff --git a/drivers/pinctrl/qcom/pinctrl-ipq4019.c b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
+> index 4479230313..4fcc4b1810 100644
+> --- a/drivers/pinctrl/qcom/pinctrl-ipq4019.c
+> +++ b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
+> @@ -36,7 +36,7 @@ static const char *ipq4019_get_function_name(struct udevice *dev,
+>  static const char *ipq4019_get_pin_name(struct udevice *dev,
+>  					unsigned int selector)
+>  {
+> -	snprintf(pin_name, MAX_PIN_NAME_LEN, "GPIO_%u", selector);
+> +	snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
+>  	return pin_name;
+>  }
 >  
->  config PINCTRL_QCOM
->  	depends on PINCTRL_GENERIC
 
 -- 
 // Caleb (they/them)
