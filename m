@@ -4,92 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EFB2C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 17:24:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70F54C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 17:26:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 283DC8869D;
-	Thu, 18 Apr 2024 19:24:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0445588662;
+	Thu, 18 Apr 2024 19:26:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YjF4Ke07";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="UWM8ovrT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5ACD8868D; Thu, 18 Apr 2024 19:24:33 +0200 (CEST)
-Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
- [IPv6:2a00:1450:4864:20::431])
+ id 4E4FC88695; Thu, 18 Apr 2024 19:26:26 +0200 (CEST)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1E3588690
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:24:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 58FA088648
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:26:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x431.google.com with SMTP id
- ffacd0b85a97d-344047ac7e4so1440499f8f.0
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 10:24:31 -0700 (PDT)
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-418c1920313so9635835e9.1
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 10:26:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713461071; x=1714065871; darn=lists.denx.de;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=AKk1HXynJELPsVsKzwXRRlp1cAx2xoVp94ao9pwKbDg=;
- b=YjF4Ke07v8DvkIA53rER2O5WoRJtYGNHuqJfgR5sNLObhrXZcWJxoYC3SSms0wgRgC
- 3P9uC4D7K7DroPXUrhXtxk7XE8CJlQJmTfDFHow9Xt8zImtnmdQluolb0VSxgw9Tt3FU
- 8nssqVigQmzGs8J+13n60QADK5Kyyr5nIzmvZO4N1hR7hXPttI5qpuyEA8PWUSrnmhhN
- Nie8xco7RVdSIJ0RzUtGCGwdsBxBC/eNuc6TQMIsteA1gvXBHs6rHL4dSsCiTBxdhftS
- wXu2HNJ/DUl04TegK4q9eXQhxRr67ZG70WV/yqvsA6q1Ad9yeDznA66IvjllnYMX9/g+
- KAIQ==
+ d=linaro.org; s=google; t=1713461184; x=1714065984; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=XbCbXQdS0fbAih8HtP8CpbO4/R7Ogx+6nPEHviD+IeE=;
+ b=UWM8ovrTt8tuuTv+urmLSCeFWMUL8SOCy1LJKbMN4uoHwULzcqBiNDFZ6MWYEN193Q
+ YghdSQPgHCAVm+2Pr5CNxtTVyy6XRq8UqSMngxIUkvih4lkuzEZDatqd1DVBQmAa81xA
+ owBWJa5ewOj71LsTFfs33SGXqeh1vgPZkIqIKByFnLkkxYAU1PjAejOgd9vr/wyxo9um
+ +PT4nB2GFFsfqtJTrcQFeXkUItoPsUhPxUzYcKUYWZ8L5PdmiTmA5VJ54yICFUgzp53t
+ qSXi4XcDzF6bb4nBfvn40OJ7N+6fwKW8vFNtASuaLxkQ+rhL4bxnIrmRYxahlXTgOArt
+ ripA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713461071; x=1714065871;
- h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
- :mime-version:subject:date:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AKk1HXynJELPsVsKzwXRRlp1cAx2xoVp94ao9pwKbDg=;
- b=Ww3+HwnbUq7QAVM6yVxUhbuQafSHHsqmYNITXUmjtUEVCeRIs7IvMkDrUnxksFzhpI
- ZWD9xo+2X+zAkHg4LlujMlEuABQiymcr5hlwA2OrQUsS8dVcQr4/FR2nwrJIAIlMnBNP
- loDXw6BfBfykT3Kn7y4Ndjzi7Oy7cPqj89PPHLthnjpyPvgzb9i4eFL65eywcJc9taBz
- ezWSborzB7GHRDcCk4YT+6OipVZOD3Rp3fxkZ9qnzqVAh/z/dO/RJ3iz9CWNerL2Vp7j
- lAEOTRRjTc8DZ06xSkDd3eMhvqQxuanL3w05fYucZWEAEy5vvBQFfP0c70uMJR4fDWvL
- lWHA==
+ d=1e100.net; s=20230601; t=1713461184; x=1714065984;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=XbCbXQdS0fbAih8HtP8CpbO4/R7Ogx+6nPEHviD+IeE=;
+ b=tlWXdeUdlD6U96KK8N5xaFsAOLfS25tpQhq0LwbF4JJAP+lyzYRK27HhwaU3LbZDHp
+ 6kDqISMllW46sdWFPapXZnSU/RKeJiO4J1ID5u/VzereK5KI++H/bWl5Ulb63SlfG0jC
+ HQHsiQY/js/5gATS4Klx+Uc+CCocdxOatJccAD2uSEpb/CWJDzQqENjOShgWQkBi/Ceo
+ vgYnMcBCdowMm6JF6c1rZUrazL/1IWCsqWq016vErauJfytCyP5LouoiX59ofKa80fyc
+ dOmQdnJydscGiK21AcSsT9vxJAK21kmHRIw2lw2hezks2fof6xfSvsMA+S/r8l6EdbIk
+ ql8A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVEQliyXggyAPrLYYMNpdgX+gTXXFFfTxy4QxRYYkH9IWUsw4LH1iMrRLZy4MLmyFVmmV4WVZdQH5GB2SurqcegePF+4Q==
-X-Gm-Message-State: AOJu0Yyu5PA/LysBdFj8iZKjZv2HOvtpQntfHl24wmbhyvETiktUtzVQ
- ZJmDoPh2e95aOownqBS8bPpHnnQ6izvfqdrfxQ4ORgsE6GM4ZzI3IbhtgS+xCC0=
-X-Google-Smtp-Source: AGHT+IEguAvC0r6sF04KTNhvKGiRewVjXgpZun1h1APmpwAMoZCA0gtk1dXG5/mA7kJiCH9MCSFb2A==
-X-Received: by 2002:a5d:598f:0:b0:34a:3e3a:ffaf with SMTP id
- n15-20020a5d598f000000b0034a3e3affafmr569437wri.0.1713461071325; 
- Thu, 18 Apr 2024 10:24:31 -0700 (PDT)
+ AJvYcCUjoom+lPfeFOcSMQNpfP6gzgHilNbipoYL+Ox5JvrRw3Wvqjskaqi1pq0J/QeZ5oiNfgv0nlSUmjb93ymHU0bIhz/tmQ==
+X-Gm-Message-State: AOJu0YysYdsbSdkpjesAtaB3WzFkW6I+uFTbJaA42WiGBBMaqTiHD5JQ
+ cqzl9OKOxF5RfROzfkPowXYzCNCTjmk3vLbYJ7oOztQi5DA1L76AsqgALz45DYY=
+X-Google-Smtp-Source: AGHT+IHwLkga7U+MJs4M9Q6sLiozULwCi4UpS+BkOGtGEE0XrvWgn3Gf7fHP+lli9uFK5MEJJ6vRBw==
+X-Received: by 2002:a05:600c:548e:b0:418:fc73:c0d3 with SMTP id
+ iv14-20020a05600c548e00b00418fc73c0d3mr519184wmb.24.1713461183769; 
+ Thu, 18 Apr 2024 10:26:23 -0700 (PDT)
 Received: from lion.localdomain (host-92-17-96-232.as13285.net. [92.17.96.232])
  by smtp.gmail.com with ESMTPSA id
- e32-20020a5d5960000000b0033ec9ddc638sm2301799wri.31.2024.04.18.10.24.30
+ u17-20020a05600c19d100b00416b163e52bsm7166057wmq.14.2024.04.18.10.26.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Apr 2024 10:24:30 -0700 (PDT)
+ Thu, 18 Apr 2024 10:26:23 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Thu, 18 Apr 2024 18:24:11 +0100
-Subject: [PATCH 3/3] qcom_defconfig: set SYS_INIT_SP_BSS_OFFSET
+Subject: [PATCH 0/9] qcom: RBx fixes and USB support
+Date: Thu, 18 Apr 2024 18:25:43 +0100
+Message-Id: <20240418-b4-qcom-rbx-fixes-v1-0-f5f19d52969e@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240418-b4-qcom-rbx-fixes-v1-3-e524eb29ae86@linaro.org>
-References: <20240418-b4-qcom-rbx-fixes-v1-0-e524eb29ae86@linaro.org>
-In-Reply-To: <20240418-b4-qcom-rbx-fixes-v1-0-e524eb29ae86@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marex@denx.de>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Caleb Connolly <caleb.connolly@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAJdXIWYC/yWMzQqDMBCEX0X23IU1xiT1VYqH/GzaHNSa2CKI7
+ 95QYS7fDN8cUDgnLjA0B2T+ppKWuUJ7a8C/7PxkTKEyCBKSZGvQSVz9MmF2O8a0c8FOKq2C1s5
+ 0Dqr3zvwfqvYYL868fur1dpXgbGGsJ1Pahib0UpEjI3xQNgZi0p64prdGhNZGEzzdo4bxPH/iI
+ RMxrwAAAA==
+To: Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=659;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1586;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=+DrL5OT8uZAQkNDq/x40/GExjdlVo4KiZn1LUniI+eA=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTFcK+N4WlrJlnYPfiZ87RcZG2a1eUJlrdDdUJ7EhxeX
- DzJt9Opo5SFQZCDQVZMkUX8xDLLprWX7TW2L7gAM4eVCWQIAxenAEykz5GRYZfZa+uUFbaPD2q6
- /DZIzpzSf9skwHTXnFvBkQZMxzuueTL809/6QOrAt3v3PL1uKfYf8NA3lfqduiXUK/e21Wu/sJS
- ZDwE=
+ bh=38TM/tmPYJYcbc2Pv1BLn8wG1YpYnE/zyJ/5KBsxEjA=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhjTF8H23okXWiDnXPZhjFuO9IPSk2sZbb7YkhNw7wqz+Z
+ Yl8o19YRykLgyAHg6yYIov4iWWWTWsv22tsX3ABZg4rE8gQBi5OAZjI/kuMDJtfT9/fLaHcZvLt
+ ddaXS7Y/+jI3CB/nnBXmtX3ZPpNXxw4x/OF1PqBkZPNO1GXj+XO72CLvPgxgMZt1QIMlwkGwxmC
+ dpAIA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -108,28 +106,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Give us lots of room for the appended FDT.
+This series is a few loosely connected patches to get the RB1 and 2
+boards booting from USB with upstream U-Boot, and a few preperatory
+patches for rb5.
 
-Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+Unfortunately the RB5 board requires a regulator on the RPMh peripheral
+to be turned on for the USB VBUS rail. Support for this will be added in
+future patches.
+
+* Add a few missing compatible strings for sm6115/sm8250
+* Fix the femto-v2 HS USB phy used on sm8250
+* Fix USB role selection on RB2 (without breaking Linux!)
+* Pick a value for CONFIG_SYS_LOAD_ADDR that won't cause a null pointer
+  on most boards
+* Fix EFI booting by generating SMBIOS tables
+
 ---
- configs/qcom_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Caleb Connolly (9):
+      gpio: qcom_pmic: add pm6125
+      gpio: qcom_pmic: add pm8150l
+      iommu: qcom-smmu: add qcom generic compatible
+      phy: qcom: snps-femto-v2: drop clocks
+      arm: dts: qrb4210-rb2-u-boot: add u-boot fixups
+      mach-snapdragon: implement ft_board_setup() for USB role selection
+      qcom_defconfig: enable OF_BOARD_SETUP
+      qcom_defconfig: define safe default SYS_LOAD_ADDR
+      qcom_defconfig: generate SMBIOS tables
 
-diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
-index 218a9a769682..7b589f0bf7a7 100644
---- a/configs/qcom_defconfig
-+++ b/configs/qcom_defconfig
-@@ -3,8 +3,9 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_POSITION_INDEPENDENT=y
- CONFIG_ARCH_SNAPDRAGON=y
- CONFIG_DEFAULT_DEVICE_TREE="qcom/sdm845-db845c"
- CONFIG_SYS_LOAD_ADDR=0x0
-+CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
- CONFIG_BUTTON_CMD=y
- CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_BOOTSTD_FULL=y
+ arch/arm/dts/qrb4210-rb2-u-boot.dtsi      |  6 ++++++
+ arch/arm/mach-snapdragon/of_fixup.c       | 20 ++++++++++++++++++++
+ configs/qcom_defconfig                    |  5 +++--
+ drivers/gpio/qcom_pmic_gpio.c             |  2 ++
+ drivers/iommu/qcom-hyp-smmu.c             |  1 +
+ drivers/phy/qcom/phy-qcom-snps-femto-v2.c | 14 --------------
+ 6 files changed, 32 insertions(+), 16 deletions(-)
+---
+base-commit: d5460b082cd6afd0e07c0ec0e5a82d1af8dc09f7
 
--- 
-2.44.0
+// Caleb (they/them)
 
