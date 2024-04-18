@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD539C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 09:17:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0ECEC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 10:39:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C34D885B4;
-	Thu, 18 Apr 2024 11:17:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+	by phobos.denx.de (Postfix) with ESMTP id 1BDF3885CD;
+	Thu, 18 Apr 2024 12:39:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="c8thPEgU";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qgFFxxVf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6B64885B9; Thu, 18 Apr 2024 11:17:32 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7FC3E885CF; Thu, 18 Apr 2024 12:38:59 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4C87885AD
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 11:17:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CFD988524
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 12:38:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sartura.hr
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a55323f2ef9so65605566b.1
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 02:17:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1713431850; x=1714036650; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=higpHFo2MmQ9aVbjiRHDLJx8c6sS+7pUn8UrdJc/Iqg=;
- b=c8thPEgURapE0zqB8oz3MnFJTKCd1iUN+1Pf/+60D+s9MnBz+LNxZ14ZiFn9raPwO2
- Co+FMXFOaicPrB1kGmGBpyiOjCa0tE1d7qOtqwzcBh8Mlt8MYCEjmzeKIE5lpSspYmVK
- Ssuzf4W1BZqVSW4AevqZPRzcgNiSQMxPC0w8T8+PM1gvtFZWI//muBctmL/xRzBQWKQI
- 9gNtYcUmmkFqsG20TbuBLge11V6bj8bQhYj48VsGmR4rgGQD44bnvYJ4L7K586c8i9kG
- kLij6hq4z48VM1jtoGfMVWmLBdDGKD6/RiYcDL3WpUHXNElka8JTCe1EL2vx/YUK8GFC
- Y3Gw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713431850; x=1714036650;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=higpHFo2MmQ9aVbjiRHDLJx8c6sS+7pUn8UrdJc/Iqg=;
- b=qzf66Dbw3oqJG/kDNjE1V0gccJRoeq298qTN3Yt6aXE0JNVLCETAvbX5PcWews/G8c
- DiFke7NXF7pyLNwCMzqHmw147vaO8nGf/HIJcthyrwDu85gaVsTu+m+OBV8yev90gp5p
- COQn7TWtRxcgEl7uEoo5kpXFVvR49Bn8VuOLWStbH0yMl9Zc3oeZRj9vg2y4OM2cOljv
- 8NkVfrhmlZYEdpa7LBayVKykuvpot5IQfpBRDQ9iQU8n2Aa8rLTs3iGkD86QuFa+JR3u
- WlWvHGCcd/fRyXjS9WGoeJs6GjtkbTAYPVDuaa2UJWFbRpI9wafEcPLB0tS/YIuznjxZ
- TV2A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUF2awfBh3Zl5I7iv8hEqLEcRH+N37VzRBbP8Seynqqicy8VZRl1g+tm6vNPg48/Aoe3rQNipcKIP9wSFYYDWmZrZne8A==
-X-Gm-Message-State: AOJu0YwRXRSN/rhJJ/SL2l4+vwLbBqmzQKOaOLZyKOOY5DKV4vGaUReH
- zVjEMyjdaXwDwAgoWgdDN/JL6kUQ4nGXq55xkC+cFE6rsrmN4obecIn0JYHNnvhia7CcVNkaVdl
- 6
-X-Google-Smtp-Source: AGHT+IEwz0XeoXdo/HJgdsDnnweg3LyAEvNWSHkCqD8YQ+LXudMn0IkvOz1VPl3PiVzTmzjR+wNtgQ==
-X-Received: by 2002:a17:906:1dc8:b0:a52:55f5:aba5 with SMTP id
- v8-20020a1709061dc800b00a5255f5aba5mr1297097ejh.2.1713431850328; 
- Thu, 18 Apr 2024 02:17:30 -0700 (PDT)
-Received: from fedora.. (cpe-188-129-45-161.dynamic.amis.hr. [188.129.45.161])
- by smtp.googlemail.com with ESMTPSA id
- bw19-20020a170906c1d300b00a5238156017sm634370ejb.88.2024.04.18.02.17.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Apr 2024 02:17:29 -0700 (PDT)
-From: Robert Marko <robert.marko@sartura.hr>
-To: trini@konsulko.com, caleb.connolly@linaro.org, sumit.garg@linaro.org,
- sjg@chromium.org, u-boot@lists.denx.de
-Cc: j.beck@linefinity.com,
-	Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH] arm: mach-ipq40xx: dont select SMEM by default
-Date: Thu, 18 Apr 2024 11:17:00 +0200
-Message-ID: <20240418091727.18551-1-robert.marko@sartura.hr>
-X-Mailer: git-send-email 2.44.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43IAcpgf094476;
+ Thu, 18 Apr 2024 05:38:51 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1713436731;
+ bh=8eebYcHupz3J24sPvVpA/pReAUw1vEbX4reqC86CXjA=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=qgFFxxVfa3eo6tIuw0x3N8uBy24l4TtQSc8Q/pEW4B5I8nImnhsno1NFjXTNjKf+l
+ LC6VoSkQnifBcLa5XOQ9/FOZEsQy9HSKmvbve/qkMlivIFcRdPwZOIsczRZTsnP8VI
+ wMd5mL7oeAs5Hb21emWmnqJOzdzorVfHJtg1uZgw=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43IAcp6Q011123
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 18 Apr 2024 05:38:51 -0500
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 18
+ Apr 2024 05:38:50 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 18 Apr 2024 05:38:50 -0500
+Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
+ [172.24.227.220])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43IAckNF024938;
+ Thu, 18 Apr 2024 05:38:47 -0500
+Message-ID: <42fd6f28-bcf6-406c-8d43-7b4f3966ebb2@ti.com>
+Date: Thu, 18 Apr 2024 16:08:46 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 01/10] board: ti: am62x: Init DRAM size in R5/A53 SPL
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ <nm@ti.com>, <afd@ti.com>, <vigneshr@ti.com>, <dannenberg@ti.com>,
+ <srk@ti.com>, Sughosh Ganu <sughosh.ganu@linaro.org>
+CC: <joe.hershberger@ni.com>, <simon.k.r.goldschmidt@gmail.com>,
+ <sjg@chromium.org>, <marex@denx.de>, <u-boot@lists.denx.de>
+References: <20240112132607.GO1610741@bill-the-cat>
+ <a1d7ca85-8723-4d73-8e1c-357c6aa6294f@ti.com>
+ <20240120164141.GA3652023@bill-the-cat>
+ <48c63fc4-9f06-4066-b206-a0a548936dcd@ti.com>
+ <892b473b-5b76-4e44-af27-52d50cb24877@ti.com>
+ <20240411220741.GJ2493117@bill-the-cat>
+ <2406c7be-114c-4082-9c14-1cd59917b9d8@ti.com>
+ <20240416170027.GQ1054907@bill-the-cat>
+ <97f84067-ba36-47f6-befa-221be47a1d25@ti.com>
+ <CADg8p97udLbFvbZ_FZf9Hfwg3R4=YJMNWrAtqvu97mL7vVYREQ@mail.gmail.com>
+ <20240417160446.GF1054907@bill-the-cat>
+From: Chintan Vankar <c-vankar@ti.com>
+In-Reply-To: <20240417160446.GF1054907@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,29 +93,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-IPQ40xx SoC-s dont have proper SMEM support like more modern Qualcomm
-SoC-s so there is no point in selecting the required drivers.
 
-Signed-off-by: Robert Marko <robert.marko@sartura.hr>
----
- arch/arm/Kconfig | 2 --
- 1 file changed, 2 deletions(-)
 
-diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-index 23ee25269a..922c28cca9 100644
---- a/arch/arm/Kconfig
-+++ b/arch/arm/Kconfig
-@@ -762,10 +762,8 @@ config ARCH_IPQ40XX
- 	select DM_SERIAL
- 	select DM_RESET
- 	select GPIO_EXTRA_HEADER
--	select MSM_SMEM
- 	select PINCTRL
- 	select CLK
--	select SMEM
- 	select OF_CONTROL
- 	select CLK_QCOM_IPQ4019
- 	select PINCTRL_QCOM_IPQ4019
--- 
-2.44.0
+On 17/04/24 21:34, Tom Rini wrote:
+> On Wed, Apr 17, 2024 at 05:48:31PM +0530, Sughosh Ganu wrote:
+>> hi Chintan,
+>>
+>> On Wed, 17 Apr 2024 at 13:21, Chintan Vankar <c-vankar@ti.com> wrote:
+>>>
+>>>
+>>>
+>>> On 16/04/24 22:30, Tom Rini wrote:
+>>>> On Tue, Apr 16, 2024 at 05:52:58PM +0530, Chintan Vankar wrote:
+>>>>>
+>>>>>
+>>>>> On 12/04/24 03:37, Tom Rini wrote:
+>>>>>> On Wed, Apr 03, 2024 at 06:18:01PM +0530, Chintan Vankar wrote:
+>>>>>>>
+>>>>>>>
+>>>>>>> On 22/01/24 10:11, Siddharth Vadapalli wrote:
+>>>>>>>>
+>>>>>>>>
+>>>>>>>> On 20/01/24 22:11, Tom Rini wrote:
+>>>>>>>>> On Mon, Jan 15, 2024 at 01:42:51PM +0530, Siddharth Vadapalli wrote:
+>>>>>>>>>> Hello Tom,
+>>>>>>>>>>
+>>>>>>>>>> On 12/01/24 18:56, Tom Rini wrote:
+>>>>>>>>
+>>>>>>>> ...
+>>>>>>>>
+>>>>>>>>>>> The list of conditionals in common/spl/spl.c::board_init_r() should be
+>>>>>>>>>>> updated and probably use SPL_NET as the option to check for.
+>>>>>>>>>>
+>>>>>>>>>> Thank you for reviewing the patch and pointing this out. I wasn't aware of it. I
+>>>>>>>>>> assume that you are referring to the following change:
+>>>>>>>>>>
+>>>>>>>>>>             if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HANDOFF) ||
+>>>>>>>>>> -           IS_ENABLED(CONFIG_SPL_ATF))
+>>>>>>>>>> +           IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(CONFIG_SPL_NET))
+>>>>>>>>>>                     dram_init_banksize();
+>>>>>>>>>>
+>>>>>>>>>> I shall replace the current patch with the above change in the v2 series. Since
+>>>>>>>>>> this is in the common section, is there a generic reason I could provide in the
+>>>>>>>>>> commit message rather than the existing commit message which seems to be board
+>>>>>>>>>> specific? Also, I hope that the above change will not cause regressions for
+>>>>>>>>>> other non-TI devices. Please let me know.
+>>>>>>>>>
+>>>>>>>>> Yes, that's the area, and just note that networking also requires the
+>>>>>>>>> DDR to be initialized.
+>>>>>>>>>
+>>>>>>>>
+>>>>>>>> Thank you for confirming and providing your suggestion for the contents of the
+>>>>>>>> commit message.
+>>>>>>>>
+>>>>>>> Following Tom's Suggestion of adding CONFIG_SPL_NET in common/spl/spl.c
+>>>>>>> "dram_init_banksize()", the issue of fetching a file at SPL stage seemed
+>>>>>>> to be fixed. However the commit "ba20b2443c29", which sets gd->ram_top
+>>>>>>> for the very first time in "spl_enable_cache()" results in
+>>>>>>> "arch_lmb_reserve()" function reserving memory region from Stack pointer
+>>>>>>> at "0x81FFB820" to gd->ram_top pointing to "0x100000000". Previously
+>>>>>>> when gd->ram_top was zero "arch_lmb_reserve()" was noop. Now using TFTP
+>>>>>>> to fetch U-Boot image at SPL stage results in "tftp_init_load_addr()"
+>>>>>>> function call that invokes "arch_lmb_reserve()" function, which reserves
+>>>>>>> entire memory starting from Stack Pointer to gd->ram_top leaving no
+>>>>>>> space to load U-Boot image via TFTP since TFTP loads files at pre
+>>>>>>> configured memory address at "0x82000000".
+>>>>>>>
+>>>>>>> As a workaround for this issue, one solution we can propose is to
+>>>>>>> disable the checks "lmb_get_free_size()" at SPL and U-Boot stage. For
+>>>>>>> that we can define a new config option for LMB reserve checks as
+>>>>>>> "SPL_LMB". This config will be enable by default for the backword
+>>>>>>> compatibility and disable for our use case at SPL and U-Boot stage.
+>>>>>>
+>>>>>> The problem here is that we need LMB for booting an OS, which is
+>>>>>> something we'll want in SPL in non-cortex-R cases too, which means this
+>>>>>> platform, so that's a no-go. I think you need to dig harder and see if
+>>>>>> you can correct the logic somewhere so that we don't over reserve?
+>>>>>>
+>>>>> Since this issue is due to function call "lmb_init_and_reserve()"
+>>>>> function invoked from "tftp_init_load_addr()" function. This function
+>>>>> is defined by Simon in commit "a156c47e39ad", which fixes
+>>>>> "CVE-2018-18439" to prevent overwriting reserved memory. Simon, can you
+>>>>> explain why do we need to call "lmb_init_and_reserve()" function here ?
+>>>>
+>>>> This is indeed a tricky area which is why Sughosh is looking in to
+>>>> trying to re-work the LMB mechanic and we've had a few long threads
+>>>> about it as well.
+>>>>
+>>>> I've honestly forgotten the use case you have here, can you please
+>>>> remind us?
+>>>>
+>>> We are trying to boot AM62x using Ethernet for which we need to load
+>>> binary files at SPL and U-Boot stage using TFTP. To store the file we
+>>> need a free memory in RAM, specifically we are storing these files at
+>>> 0x82000000. But we are facing an issue while loading the file since
+>>> the memory area having an address 0x82000000 is reserved due to
+>>> "lmb_init_and_reserve()" function call. This function is called in
+>>> "tftp_init_load_addr()" function which is getting called exactly before
+>>> we are trying to get the free memory area by calling
+>>> "lmb_get_free_size()".
+>>
+>> I have no idea about your platform but I was wondering if there is any
+>> particular importance of the load address of 0x82000000? It looks as
+>> though the current location of the SP when arch_lmb_reserve() gets
+>> called means that the load address is getting reserved for the U-Boot
+>> image. Do you not have the option of loading the image at a lower
+>> address instead?
+> 
 
+Sughosh,
+
+I think my explanation was not clear at:
+"We are trying to boot AM62x using Ethernet for which we need to load
+binary files at SPL and U-Boot stage using TFTP."
+- In Ethernet Booting we are fetching U-Boot image at SPL stage via
+TFTP at specified address 0x82000000. While loading U-Boot image we are
+getting TFTP error, since address from stack pointer till gd->ram_top is
+reserved due to "lmb_init_and_reserve()" function call. I want to know
+for which purpose this address range is reserved.
+
+> Or using a higher address for SPL stack? You might be able to solve this
+> just by re-examining which addresses (and RAM size limitations) need to
+> be considered here.
+> 
+
+Tom,
+
+We tried this approach of assigning a higher address for SPL stack, but
+it is not working as expected.
