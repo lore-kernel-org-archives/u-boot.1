@@ -4,58 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C90D0C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 03:04:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5BB1C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 03:11:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BF4088553;
-	Thu, 18 Apr 2024 05:04:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 517D588526;
+	Thu, 18 Apr 2024 05:11:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1713409498;
-	bh=8rhaBNavASX6RhwVkYCNzs7doKIATBSg8oGnAFmVPpQ=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=RzATxaIuUL7vcykmT2+shL6gaw7tfu5jn+SUTbeP/3JdL0ir1f7cfa3vMlAu6mhrR
-	 TZP3SuF/clJs6oDv9x1L3uzjrFqK3lkEMaVgc6DoWz+hr/acn29mPAv0MVndRoLqc4
-	 UevRxXfaTSxR8lOLKj2T3/FwvZRHVT/mg4+v1cFBsDaNTAe7Yl6BN/WgTPfYbGEjZo
-	 CrmBffjyPU7yyute4kgMB+lr83nzJy6LubFmVE83crQFbvrPYTK7Rk6siM8vPrE0mk
-	 npl9ccHN7l30qkP43sUfwwhXhF4at6wZ6d+SPDGiVE7s0NrceUsgNxLvNzd49OKjoI
-	 R+eoxHMtYHsuA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="OOaekKkA";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2136988560; Thu, 18 Apr 2024 05:11:26 +0200 (CEST)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 696DB884E9;
- Thu, 18 Apr 2024 05:04:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1713409496;
- bh=8rhaBNavASX6RhwVkYCNzs7doKIATBSg8oGnAFmVPpQ=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=OawqI3DuubpKAq5xfSH7PoUTC9HCF3QBQqzPXNC+yG2S8OaNGL6EWjrgGXIJ4/RGl
- j0aSrlHe2v3/mKbixWUBpVLJoDWP6zrhAMQnrgRdWikmXc4glpgO4/hVT2daBeOStc
- 5T31VGvUWv7dGoClAcP6PrBF/ZvxWRqgw65fRsOvTbaBiWyQlEJ7Av6HjWlwVKYdkz
- uMJ1A2rtD1KZxmQYvj4scIhprTbW1xnBYFGPAJm2PkBjvktMNdt1B6ZwF3ISpw32Ku
- GJ7kgUhn+PZdTiDbHBPl41DpYFkqVUTE1c8vp8Ps7Zv4UPGJztvi99j0XZT1LlqHqw
- lW8PFShzCXR4A==
-Message-ID: <121f8e1c-4ca1-4a7b-acff-364fa64f2a6a@denx.de>
-Date: Thu, 18 Apr 2024 03:17:36 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 100CD884E9
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 05:11:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-062-143-245-032.um16.pools.vodafone-ip.de
+ [62.143.245.32])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 319023F0FA; 
+ Thu, 18 Apr 2024 03:11:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1713409883;
+ bh=WgtPQ/yHX/YoxWcA345UIfLjUU2hbjcb0n0HEAd4/Nw=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=OOaekKkAZtL5SRa4Ufn263pkUFMBv9uAL70MlDkLmm55wZP2dMWo4M1f5+j8FIl3D
+ ylnpwBpHxA++jIyqF/vGmdzxZmv5+3oNnCLxoe9AePEJUfM+qshl+Tv0O4WBAaRZhN
+ W8zfVQqWcv9/MlMVNYdKTTTKjtdVzOcrgL7WYj1IWn91aszADdDdd+N4+7p+NgeGLJ
+ rY/m4aFV2IM/xeKPusqCMQ8xjZA+PF8YqpcQPxJViu5VTcC+QQ6s19I5vpBwisUQJY
+ 4YwejqS1l6qWtL+/+Pqi8Z5vr3aheAaUYSQuBmhVQ+4SlBD0w9Uv2y4Xqam4NdjA3P
+ 0co4X24Ft1RpQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] acpi: set creator_revision in acpi_fill_header
+Date: Thu, 18 Apr 2024 05:11:13 +0200
+Message-ID: <20240418031113.52277-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] pci: dw_imx: add support for IMX8MM
-To: Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Sumit Garg <sumit.garg@linaro.org>, Fabio Estevam <festevam@gmail.com>,
- Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-References: <20240417200922.3749671-1-tharvey@gateworks.com>
- <20240417200922.3749671-2-tharvey@gateworks.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240417200922.3749671-2-tharvey@gateworks.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,55 +72,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/17/24 10:09 PM, Tim Harvey wrote:
-> Add support for the IMX8MM SoC by adding driver data with the compatible
-> string of the GPR controller.
-> 
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> ---
->   drivers/pci/pcie_dw_imx.c | 20 ++++++++++++++++++--
->   1 file changed, 18 insertions(+), 2 deletions(-)
-> 
-> diff --git a/drivers/pci/pcie_dw_imx.c b/drivers/pci/pcie_dw_imx.c
-> index a2ee228224b5..10d926c30645 100644
-> --- a/drivers/pci/pcie_dw_imx.c
-> +++ b/drivers/pci/pcie_dw_imx.c
-> @@ -45,6 +45,10 @@
->   #define IMX8M_GPR_PCIE_CLK_REQ_OVERRIDE_EN	BIT(10)
->   #define IMX8M_GPR_PCIE_CLK_REQ_OVERRIDE		BIT(11)
->   
-> +struct pcie_chip_info {
-> +	const char *gpr;
-> +};
-> +
->   struct pcie_dw_imx {
->   	/* Must be first member of the struct */
->   	struct pcie_dw			dw;
-> @@ -54,6 +58,15 @@ struct pcie_dw_imx {
->   	struct reset_ctl		apps_reset;
->   	struct phy			phy;
->   	struct udevice			*vpcie;
-> +	struct pcie_chip_info		*info;
-> +};
-> +
-> +static const struct pcie_chip_info imx8mm_chip_info = {
-> +	.gpr = "fsl,imx8mm-iomuxc-gpr",
-> +};
-> +
-> +static const struct pcie_chip_info imx8mp_chip_info = {
-> +	.gpr = "fsl,imx8mp-iomuxc-gpr",
->   };
->   
->   static void pcie_dw_configure(struct pcie_dw_imx *priv, u32 cap_speed)
-> @@ -246,6 +259,8 @@ static int pcie_dw_imx_of_to_plat(struct udevice *dev)
->   	ofnode gpr;
->   	int ret;
->   
-> +	priv->info = (void *)dev_get_driver_data(dev);
-> +
+We should have a single place where we write the default value to the
+creator revision field. If we ever will have any table created by another
+tool, we can overwrite the value afterwards.
 
-Does this really have to be cached in priv ?
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ arch/x86/lib/acpi_table.c | 2 --
+ lib/acpi/acpi_table.c     | 2 +-
+ lib/acpi/ssdt.c           | 1 -
+ test/dm/acpi.c            | 3 +--
+ 4 files changed, 2 insertions(+), 6 deletions(-)
 
-The priv->info seems used only in this function.
+diff --git a/arch/x86/lib/acpi_table.c b/arch/x86/lib/acpi_table.c
+index a5683132b01..06997948880 100644
+--- a/arch/x86/lib/acpi_table.c
++++ b/arch/x86/lib/acpi_table.c
+@@ -479,7 +479,6 @@ static int acpi_create_hpet(struct acpi_hpet *hpet)
+ 	/* Fill out header fields. */
+ 	acpi_fill_header(header, "HPET");
+ 
+-	header->creator_revision = ASL_REVISION;
+ 	header->length = sizeof(struct acpi_hpet);
+ 	header->revision = acpi_get_table_revision(ACPITAB_HPET);
+ 
+@@ -570,7 +569,6 @@ void acpi_fadt_common(struct acpi_fadt *fadt, struct acpi_facs *facs,
+ 	memcpy(header->oem_id, OEM_ID, 6);
+ 	memcpy(header->oem_table_id, OEM_TABLE_ID, 8);
+ 	memcpy(header->creator_id, ASLC_ID, 4);
+-	header->creator_revision = 1;
+ 
+ 	fadt->x_firmware_ctrl = map_to_sysmem(facs);
+ 	fadt->x_dsdt = map_to_sysmem(dsdt);
+diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
+index c16ead6a6ec..6dbfdb22dec 100644
+--- a/lib/acpi/acpi_table.c
++++ b/lib/acpi/acpi_table.c
+@@ -117,6 +117,7 @@ void acpi_fill_header(struct acpi_table_header *header, char *signature)
+ 	memcpy(header->oem_table_id, OEM_TABLE_ID, 8);
+ 	header->oem_revision = OEM_REVISION;
+ 	memcpy(header->creator_id, ASLC_ID, 4);
++	header->creator_revision = ASL_REVISION;
+ }
+ 
+ void acpi_align(struct acpi_ctx *ctx)
+@@ -219,7 +220,6 @@ void acpi_create_dbg2(struct acpi_dbg2_header *dbg2,
+ 
+ 	header->revision = acpi_get_table_revision(ACPITAB_DBG2);
+ 	acpi_fill_header(header, "DBG2");
+-	header->creator_revision = ASL_REVISION;
+ 
+ 	/* One debug device defined */
+ 	dbg2->devices_offset = sizeof(struct acpi_dbg2_header);
+diff --git a/lib/acpi/ssdt.c b/lib/acpi/ssdt.c
+index e032e266b3c..df1d739d117 100644
+--- a/lib/acpi/ssdt.c
++++ b/lib/acpi/ssdt.c
+@@ -23,7 +23,6 @@ int acpi_write_ssdt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
+ 
+ 	acpi_fill_header(ssdt, "SSDT");
+ 	ssdt->revision = acpi_get_table_revision(ACPITAB_SSDT);
+-	ssdt->creator_revision = 1;
+ 	ssdt->length = sizeof(struct acpi_table_header);
+ 
+ 	acpi_inc(ctx, sizeof(struct acpi_table_header));
+diff --git a/test/dm/acpi.c b/test/dm/acpi.c
+index f14b3962f84..48cf3af1f8f 100644
+--- a/test/dm/acpi.c
++++ b/test/dm/acpi.c
+@@ -237,7 +237,6 @@ static int dm_test_acpi_fill_header(struct unit_test_state *uts)
+ 	hdr.length = 0x11;
+ 	hdr.revision = 0x22;
+ 	hdr.checksum = 0x33;
+-	hdr.creator_revision = 0x44;
+ 	acpi_fill_header(&hdr, "ABCD");
+ 
+ 	ut_asserteq_mem("ABCD", hdr.signature, sizeof(hdr.signature));
+@@ -249,7 +248,7 @@ static int dm_test_acpi_fill_header(struct unit_test_state *uts)
+ 			sizeof(hdr.oem_table_id));
+ 	ut_asserteq(OEM_REVISION, hdr.oem_revision);
+ 	ut_asserteq_mem(ASLC_ID, hdr.creator_id, sizeof(hdr.creator_id));
+-	ut_asserteq(0x44, hdr.creator_revision);
++	ut_asserteq(ASL_REVISION, hdr.creator_revision);
+ 
+ 	return 0;
+ }
+-- 
+2.43.0
 
-[...]
