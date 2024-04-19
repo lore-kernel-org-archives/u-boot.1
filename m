@@ -4,51 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73273C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 21:00:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED5A6C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 21:00:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10245886B2;
+	by phobos.denx.de (Postfix) with ESMTP id 84A52886CA;
 	Fri, 19 Apr 2024 22:58:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="laZW7KEL";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qgv+LcBx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E674A88553; Fri, 19 Apr 2024 22:58:02 +0200 (CEST)
+ id 2D9DC885E5; Fri, 19 Apr 2024 22:58:03 +0200 (CEST)
 Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9424388629
+ by phobos.denx.de (Postfix) with ESMTPS id 9711F88684
  for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 22:57:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43JKvjwN126628;
- Fri, 19 Apr 2024 15:57:45 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43JKvkS1126642;
+ Fri, 19 Apr 2024 15:57:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1713560265;
- bh=40BarT9xttsOnNs49f4ssB1ksFa0JWVNSX24rBm59dk=;
+ s=ti-com-17Q1; t=1713560266;
+ bh=b9D35JNAHyUcyHX9AlHu78dzTKf1Gp3JTHCsYMi8gTw=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=laZW7KEL5Az4IjwoD5P+5ZtkYjMNXQZO6qADXqUshxkNYRESfIi3HxHbr8VFfpfiA
- RRLCVwcw82k/cKbyMdpdtCPMSJmN50M4RH2iyfxDzMahJ4WcLMJLP/vPP+LTU8M6VT
- gm9xaw0ja6VSph32G8s65BHrc/sEeESSZc+UU1Is=
-Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43JKvjJL114381
+ b=qgv+LcBxCMkevNT5YPkG1cI53HGvCfsoo+/dAuH99uXMaRQagjMQqkTry6rd1PvbU
+ T6k9r1zv8N2Vu7aTo5VUhIrGN0Q3GXvlgOyHD7hxgRVbYs2w0UErUnUAVj2MN8GXXw
+ jXTdoDpr9Ovi/rCDwYlYtrIi6sjS/LNyB0PVBVK0=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43JKvkl5027895
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 19 Apr 2024 15:57:45 -0500
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ Fri, 19 Apr 2024 15:57:46 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
- Apr 2024 15:57:45 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 15:57:46 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 19 Apr 2024 15:57:45 -0500
+ Frontend Transport; Fri, 19 Apr 2024 15:57:46 -0500
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43JKvjCE090918;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43JKvjuE090924;
  Fri, 19 Apr 2024 15:57:45 -0500
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
@@ -67,9 +67,9 @@ To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
  Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>
 CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v3 07/19] doc: board: ti: j721e: document OSPI layout
-Date: Fri, 19 Apr 2024 15:56:49 -0500
-Message-ID: <20240419205701.163821-8-j-humphreys@ti.com>
+Subject: [PATCH v3 11/19] board: am62px: Define capsule update firmware info
+Date: Fri, 19 Apr 2024 15:56:53 -0500
+Message-ID: <20240419205701.163821-12-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240419205701.163821-1-j-humphreys@ti.com>
 References: <20240419205701.163821-1-j-humphreys@ti.com>
@@ -93,114 +93,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Define the firmware components updatable via EFI capsule update, including
+defining capsule GUIDs for the various firmware components for the AM62px SK.
+
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 ---
- doc/board/ti/j721e_evm.rst | 85 +++++++++++++++++++++++++-------------
- 1 file changed, 56 insertions(+), 29 deletions(-)
+ board/ti/am62px/evm.c        | 32 ++++++++++++++++++++++++++++++++
+ include/configs/am62px_evm.h | 24 ++++++++++++++++++++++++
+ 2 files changed, 56 insertions(+)
 
-diff --git a/doc/board/ti/j721e_evm.rst b/doc/board/ti/j721e_evm.rst
-index a422a9bf1a0..a0fc37ab6d7 100644
---- a/doc/board/ti/j721e_evm.rst
-+++ b/doc/board/ti/j721e_evm.rst
-@@ -150,6 +150,60 @@ Image formats:
- .. image:: img/sysfw.itb.svg
-   :alt: sysfw.itb image format
+diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
+index 97a95ce8cc2..4caf3d5b3ba 100644
+--- a/board/ti/am62px/evm.c
++++ b/board/ti/am62px/evm.c
+@@ -6,6 +6,7 @@
+  *
+  */
  
-+OSPI:
-+-----
-+ROM supports booting from OSPI from offset 0x0.
-+
-+Flashing images to OSPI:
-+
-+Below commands can be used to download tiboot3.bin, tispl.bin, u-boot.img,
-+and sysfw.itb over tftp and then flash those to OSPI at their respective
-+addresses.
-+
-+.. prompt:: bash =>
-+
-+  sf probe
-+  tftp ${loadaddr} tiboot3.bin
-+  sf update $loadaddr 0x0 $filesize
-+  tftp ${loadaddr} tispl.bin
-+  sf update $loadaddr 0x80000 $filesize
-+  tftp ${loadaddr} u-boot.img
-+  sf update $loadaddr 0x280000 $filesize
-+  tftp ${loadaddr} sysfw.itb
-+  sf update $loadaddr 0x6C0000 $filesize
-+
-+Flash layout for OSPI:
-+
-+    .. code-block:: console
-+
-+             0x0 +----------------------------+
-+                 |     ospi.tiboot3(512K)     |
-+                 |                            |
-+         0x80000 +----------------------------+
-+                 |     ospi.tispl(2M)         |
-+                 |                            |
-+        0x280000 +----------------------------+
-+                 |     ospi.u-boot(4M)        |
-+                 |                            |
-+        0x680000 +----------------------------+
-+                 |     ospi.env(128K)         |
-+                 |                            |
-+        0x6A0000 +----------------------------+
-+                 |   ospi.env.backup (128K)   |
-+                 |                            |
-+        0x6C0000 +----------------------------+
-+                 |      ospi.sysfw(1M)        |
-+                 |                            |
-+        0x7C0000 +----------------------------+
-+                 |      padding (256k)        |
-+        0x800000 +----------------------------+
-+                 |     ospi.rootfs(UBIFS)     |
-+                 |                            |
-+       0x3FE0000 +----------------------------+
-+                 |   ospi.phypattern (128k)   |
-+                 |                            |
-+                 +----------------------------+
-+
- R5 Memory Map:
- --------------
++#include <efi_loader.h>
+ #include <asm/arch/hardware.h>
+ #include <asm/io.h>
+ #include <dm/uclass.h>
+@@ -13,6 +14,37 @@
+ #include <fdt_support.h>
+ #include <spl.h>
  
-@@ -193,35 +247,8 @@ R5 Memory Map:
-      - 0x41cffbfc
-      - 0x41cfffff
++#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
++struct efi_fw_image fw_images[] = {
++	{
++		.image_type_id = AM62PX_SK_TIBOOT3_IMAGE_GUID,
++		.fw_name = u"AM62PX_SK_TIBOOT3",
++		.image_index = 1,
++	},
++	{
++		.image_type_id = AM62PX_SK_SPL_IMAGE_GUID,
++		.fw_name = u"AM62PX_SK_SPL",
++		.image_index = 2,
++	},
++	{
++		.image_type_id = AM62PX_SK_UBOOT_IMAGE_GUID,
++		.fw_name = u"AM62PX_SK_UBOOT",
++		.image_index = 3,
++	}
++};
++
++struct efi_capsule_update_info update_info = {
++	.dfu_string = "sf 0:0=tiboot3.bin raw 0 80000;tispl.bin raw 80000 200000;u-boot.img raw 280000 400000",
++	.num_images = ARRAY_SIZE(fw_images),
++	.images = fw_images,
++};
++
++void set_dfu_alt_info(char *interface, char *devstr)
++{
++	env_set("dfu_alt_info", update_info.dfu_string);
++}
++#endif /* EFI_HAVE_CAPSULE_SUPPORT */
++
+ int board_init(void)
+ {
+ 	return 0;
+diff --git a/include/configs/am62px_evm.h b/include/configs/am62px_evm.h
+index 06b12860e21..57a1ba9dc3c 100644
+--- a/include/configs/am62px_evm.h
++++ b/include/configs/am62px_evm.h
+@@ -8,6 +8,30 @@
+ #ifndef __CONFIG_AM62PX_EVM_H
+ #define __CONFIG_AM62PX_EVM_H
  
--OSPI:
-------
--ROM supports booting from OSPI from offset 0x0.
--
--Flashing images to OSPI:
--
--Below commands can be used to download tiboot3.bin, tispl.bin, u-boot.img,
--and sysfw.itb over tftp and then flash those to OSPI at their respective
--addresses.
--
--.. prompt:: bash =>
--
--  sf probe
--  tftp ${loadaddr} tiboot3.bin
--  sf update $loadaddr 0x0 $filesize
--  tftp ${loadaddr} tispl.bin
--  sf update $loadaddr 0x80000 $filesize
--  tftp ${loadaddr} u-boot.img
--  sf update $loadaddr 0x280000 $filesize
--  tftp ${loadaddr} sysfw.itb
--  sf update $loadaddr 0x6C0000 $filesize
--
--Flash layout for OSPI:
--
--.. image:: img/ospi_sysfw.svg
--  :alt: OSPI flash partition layout
--
--Firmwares:
------------
-+Firmware:
-+---------
++/**
++ * define AM62PX_SK_TIBOOT3_IMAGE_GUID - firmware GUID for AM62PX sk tiboot3.bin
++ * define AM62PX_SK_SPL_IMAGE_GUID     - firmware GUID for AM62PX sk SPL
++ * define AM62PX_SK_UBOOT_IMAGE_GUID   - firmware GUID for AM62PX sk UBOOT
++ *
++ * These GUIDs are used in capsules updates to identify the corresponding
++ * firmware object.
++ *
++ * Board developers using this as a starting reference should
++ * define their own GUIDs to ensure that firmware repositories (like
++ * LVFS) do not confuse them.
++ */
++#define AM62PX_SK_TIBOOT3_IMAGE_GUID \
++	EFI_GUID(0xb08471b7, 0xbe2d, 0x4489, 0x87, 0xa1, \
++		0xca, 0xb2, 0x8a, 0x0c, 0xf7, 0x43)
++
++#define AM62PX_SK_SPL_IMAGE_GUID \
++	EFI_GUID(0xd02ed781, 0x6d71, 0x4c1a, 0xa9, 0x99, \
++		0x3c, 0x6a, 0x41, 0xc3, 0x63, 0x24)
++
++#define AM62PX_SK_UBOOT_IMAGE_GUID \
++	EFI_GUID(0x7e6aea51, 0x965c, 0x44ab, 0xb3, 0x88, \
++		0xda, 0xeb, 0x03, 0xb5, 0x4f, 0x66)
++
+ /* Now for the remaining common defines */
+ #include <configs/ti_armv7_common.h>
  
- The J721e u-boot allows firmware to be loaded for the Cortex-R5 subsystem.
- The CPSW5G in J7200 and CPSW9G in J721E present in MAIN domain is configured
 -- 
 2.34.1
 
