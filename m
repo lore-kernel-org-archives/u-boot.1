@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2AFAC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 02:36:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35A05C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 02:37:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26029886A0;
-	Fri, 19 Apr 2024 04:36:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 85BDB885CD;
+	Fri, 19 Apr 2024 04:36:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aeciGdsl";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E95PvCh0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B13698866E; Fri, 19 Apr 2024 04:36:39 +0200 (CEST)
-Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
- [IPv6:2607:f8b0:4864:20::82f])
+ id 29E098869D; Fri, 19 Apr 2024 04:36:41 +0200 (CEST)
+Received: from mail-qk1-x72b.google.com (mail-qk1-x72b.google.com
+ [IPv6:2607:f8b0:4864:20::72b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FE32885BD
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 04:36:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0566588688
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 04:36:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qt1-x82f.google.com with SMTP id
- d75a77b69052e-4349bba0ba3so10486491cf.3
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:36:37 -0700 (PDT)
+Received: by mail-qk1-x72b.google.com with SMTP id
+ af79cd13be357-78f056f928eso95199185a.0
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:36:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713494195; x=1714098995; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1713494197; x=1714098997; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xqJv7fkbPBtOWGZVHdqZMoboqLGmhCm2bZE6jXhXCfw=;
- b=aeciGdslQ4+t3hQfxoMOp9lIn6mORK+7gu7AiOtDCwo7OmjRPzXrAAo/iS4Gu86rw+
- oPaQJMbEP4mD0QI1rzEYdAL5K+bGq3sBEvWZqD17DsSAK/TI+opDaZBtvgzLA5hfHivf
- L41X/5X4OIvDN4mL2bfpviDOoZeSW9RXo52Sde9n2DcjL5FrIGzs/qKjRdaDeXt/JvkN
- hieDxvNcJQ8ezpTR49aN6836vKMo8FhDPc/T7N1i5wX6ALGSeslC9VvFhYhUiy56G/gd
- rOaKnr+d6U99mClV6X0vqRtmRlURBAxBtctdLwJjp+2Nckswm0HgEySUFLNE+LZljS3R
- cnWA==
+ bh=bi6ppjiFpl3vcYL8s7MnGkQuFDSP/ugnJNMIGY71bxk=;
+ b=E95PvCh0VoPHrtUow5K7jKG2DUq4wF6GSOCARq9Ahq08C7zZiNUhC+mT7keg3hJ/z6
+ FW7jbrqSyEpVbp9CDiSQrjelJnBzeGoFCdv2xqmc1MCiu6kCjcQ8EgCKYNH6Q/xZMoDm
+ vxlVdcB0q5pZKGB76u2z+NGpW2y0fhl3t+o8LO40bnEhfmeLAdkIWeMjhgtgM4z8gucA
+ ZuDkFkdsZioi7xtUxZ8LIsBpc5+6QAnIxlDzO97wfCC0+gO37ZrD9Qb7bSr2hrIk3U6p
+ 9p2MlzUan1GYBG38RDrLaBAOk8eE9z2rA3lzi9xXj21oyCFfEb3YAxjpShFgUobdkBVD
+ sDuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713494195; x=1714098995;
+ d=1e100.net; s=20230601; t=1713494197; x=1714098997;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xqJv7fkbPBtOWGZVHdqZMoboqLGmhCm2bZE6jXhXCfw=;
- b=Q1LqwHRSn8z0osWvRz2EUgPhSTyEmU678fDuxUCQuAZ6xoYNQh5lupy4iMnz3Wiujv
- F+rwAA3FGTcSnqoEikzlPtkkWlim17PKnI2Gc+WKCKVWTRdlPzzfCrCFXwIUMcTCxNlX
- 9YYeYw1BR3RtfCv+fdchCSc9XLU6ACQTInI8XeJkxY/kTSjQQhDr/cJghBwVmK1xLuXo
- /xfZYD/ExyWxARfWMPxqUvVcY9GnecJrUSH2OMQFLGKz2892U0ooGb8wH5fcWeAh8Mef
- WP+kBgwrSHg1pchTVRscBZ/Ak8mySCacRWmku3uI406MZ4qBdMAcn/g4qTAKKZ2ju3pP
- zstA==
-X-Gm-Message-State: AOJu0YyuSMIDhhnurKzSEjsx3OYNiZ+GdjpSZJAxwjU/4+cxVb+Lxr5x
- BBoK86DdOXIUOF1a9jIbYTFSvXwKKEQqD/M8fYPQmCkkfOwJbGZ7YrppLg==
-X-Google-Smtp-Source: AGHT+IGDpPchgT6Sd0NVW01nBZid0VWDR8oF1MbM06hNMi0H0yxei8YD85tuIIZFh/aLInPPut36pQ==
-X-Received: by 2002:a0c:da0f:0:b0:6a0:5528:9594 with SMTP id
- x15-20020a0cda0f000000b006a055289594mr729007qvj.64.1713494195697; 
- Thu, 18 Apr 2024 19:36:35 -0700 (PDT)
+ bh=bi6ppjiFpl3vcYL8s7MnGkQuFDSP/ugnJNMIGY71bxk=;
+ b=qoZ1pK5wLF5Br1cgxkHzlpkaBEFZ9qJPDSNMQGAm7iywsJexxmJgCDqpcMAlHZNDtR
+ FJPCujKom3WEgD2F78k3yGCP4YsPSLdG2AkU69ED5bzJG74AUXmN/FQXDE9UUC0hcDrg
+ 9yixkmi+B0UJEYazCie/d6cEJSRBttcS2zoNGpYCzAvu6h9JB0EgaH+1B0nPQrA+md0h
+ gkIXVNQLO/hNrU6/WZyXcJSXp2vxXJHXOjY3iddrcqmDXptwZPSpYBoCdQMb49cJTkGr
+ 22K+Mfe2VqqU0UtMWsUkww2OOmA0AEkO0z/oKkRSe0q+LcBA5+MHE2RiLLQLt6HUGaYt
+ jrpA==
+X-Gm-Message-State: AOJu0Ywr35qtU8dAvZNjZaJ5DYchORSDyhHaL8YGb62DL6bgafWQnWlk
+ mge7BrW/TcLv438sP47zA3d5gMJ52d28QOG65had0eNi06hglFz2y51W9w==
+X-Google-Smtp-Source: AGHT+IHH4DtdP0GD9Z7nKLiK6leEOHHuHJq5Q2HzSO1S80aFVIWfTor7PcAz+GQ+lW+CCr8WOs3XfQ==
+X-Received: by 2002:a05:620a:268f:b0:78d:73f4:d100 with SMTP id
+ c15-20020a05620a268f00b0078d73f4d100mr1043606qkp.27.1713494196943; 
+ Thu, 18 Apr 2024 19:36:36 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- g2-20020a0cdf02000000b0069b447066bbsm1181155qvl.78.2024.04.18.19.36.34
+ yf20-20020a05620a3bd400b0078eeea25dd6sm1198478qkn.116.2024.04.18.19.36.36
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Apr 2024 19:36:35 -0700 (PDT)
+ Thu, 18 Apr 2024 19:36:36 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
 Cc: Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH 1/3] patman: Fix tests if add_maintainers is set to False
-Date: Thu, 18 Apr 2024 22:36:30 -0400
-Message-Id: <20240419023632.29078-2-seanga2@gmail.com>
+Subject: [PATCH 2/3] patman: Add Commit-cc as an alias for Patch-cc
+Date: Thu, 18 Apr 2024 22:36:31 -0400
+Message-Id: <20240419023632.29078-3-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
 In-Reply-To: <20240419023632.29078-1-seanga2@gmail.com>
 References: <20240419023632.29078-1-seanga2@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,32 +93,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If add_maintainers is set to False in the user's ~/.patman config, it will
-cause the custom_get_maintainer_script to fail since that test expects
-maintainers to be added. Set add_maintainer to True in the .patman config
-to prevent this.
+Most tags referring to commits (or patches) are named Commit-something. The
+exception is Patch-cc. Add a Commit-cc alias so we can use whichever one is
+convenient.
 
-Fixes: 8c042fb7f9f ("patman: add '--get-maintainer-script' argument")
 Signed-off-by: Sean Anderson <seanga2@gmail.com>
 ---
 
- tools/patman/func_test.py | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ tools/patman/func_test.py                                    | 5 ++++-
+ tools/patman/patchstream.py                                  | 2 ++
+ tools/patman/patman.rst                                      | 2 +-
+ ...dt-Correct-cast-for-sandbox-in-fdtdec_setup_mem_siz.patch | 1 +
+ tools/patman/test/test01.txt                                 | 1 +
+ 5 files changed, 9 insertions(+), 2 deletions(-)
 
 diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
-index e3918497cf4..9c016fb5e9a 100644
+index 9c016fb5e9a..3b4c9448882 100644
 --- a/tools/patman/func_test.py
 +++ b/tools/patman/func_test.py
-@@ -540,7 +540,8 @@ complicated as possible''')
-             with open('.patman', 'w', buffering=1) as f:
-                 f.write('[settings]\n'
-                         'get_maintainer_script: dummy-script.sh\n'
--                        'check_patch: False\n')
-+                        'check_patch: False\n'
-+                        'add_maintainers: True\n')
-             with open('dummy-script.sh', 'w', buffering=1) as f:
-                 f.write('#!/usr/bin/env python\n'
-                         'print("hello@there.com")\n')
+@@ -211,6 +211,7 @@ class TestFunctional(unittest.TestCase):
+             'u-boot': ['u-boot@lists.denx.de'],
+             'simon': [self.leb],
+             'fred': [self.fred],
++            'joe': [self.joe],
+         }
+ 
+         text = self._get_text('test01.txt')
+@@ -259,6 +260,7 @@ class TestFunctional(unittest.TestCase):
+         self.assertEqual('Postfix:\t  some-branch', next(lines))
+         self.assertEqual('Cover: 4 lines', next(lines))
+         self.assertEqual('      Cc:  %s' % self.fred, next(lines))
++        self.assertEqual('      Cc:  %s' % self.joe, next(lines))
+         self.assertEqual('      Cc:  %s' % self.leb,
+                          next(lines))
+         self.assertEqual('      Cc:  %s' % mel, next(lines))
+@@ -272,7 +274,8 @@ class TestFunctional(unittest.TestCase):
+ 
+         self.assertEqual(('%s %s\0%s' % (args[0], rick, stefan)), cc_lines[0])
+         self.assertEqual(
+-            '%s %s\0%s\0%s\0%s' % (args[1], self.fred, self.leb, rick, stefan),
++            '%s %s\0%s\0%s\0%s\0%s' % (args[1], self.fred, self.joe, self.leb,
++                                       rick, stefan),
+             cc_lines[1])
+ 
+         expected = '''
+diff --git a/tools/patman/patchstream.py b/tools/patman/patchstream.py
+index e2e2a83e677..ec1ca874fb2 100644
+--- a/tools/patman/patchstream.py
++++ b/tools/patman/patchstream.py
+@@ -475,6 +475,8 @@ class PatchStream:
+             elif name == 'changes':
+                 self.in_change = 'Commit'
+                 self.change_version = self._parse_version(value, line)
++            elif name == 'cc':
++                self.commit.add_cc(value.split(','))
+             else:
+                 self._add_warn('Line %d: Ignoring Commit-%s' %
+                                (self.linenum, name))
+diff --git a/tools/patman/patman.rst b/tools/patman/patman.rst
+index f4588c00fc1..9971fa8c0fd 100644
+--- a/tools/patman/patman.rst
++++ b/tools/patman/patman.rst
+@@ -350,7 +350,7 @@ Cover-changes: n
+         - This line will only appear in the cover letter
+         <blank line>
+ 
+-Patch-cc: Their Name <email>
++Patch-cc / Commit-cc: Their Name <email>
+     This copies a single patch to another email address. Note that the
+     Cc: used by git send-email is ignored by patman, but will be
+     interpreted by git send-email if you use it.
+diff --git a/tools/patman/test/0002-fdt-Correct-cast-for-sandbox-in-fdtdec_setup_mem_siz.patch b/tools/patman/test/0002-fdt-Correct-cast-for-sandbox-in-fdtdec_setup_mem_siz.patch
+index 56278a6ce9b..55a0d6756aa 100644
+--- a/tools/patman/test/0002-fdt-Correct-cast-for-sandbox-in-fdtdec_setup_mem_siz.patch
++++ b/tools/patman/test/0002-fdt-Correct-cast-for-sandbox-in-fdtdec_setup_mem_siz.patch
+@@ -21,6 +21,7 @@ Series-cc: Stefan Brüns <stefan.bruens@rwth-aachen.de>
+ Cover-letter-cc: Lord Mëlchett <clergy@palace.gov>
+ Series-version: 3
+ Patch-cc: fred
++Commit-cc: joe
+ Series-process-log: sort, uniq
+ Series-changes: 4
+ - Some changes
+diff --git a/tools/patman/test/test01.txt b/tools/patman/test/test01.txt
+index fc3066e50b4..271d9bf043f 100644
+--- a/tools/patman/test/test01.txt
++++ b/tools/patman/test/test01.txt
+@@ -49,6 +49,7 @@ Date:   Sat Apr 15 15:39:08 2017 -0600
+     Cover-letter-cc: Lord Mëlchett <clergy@palace.gov>
+     Series-version: 3
+     Patch-cc: fred
++    Commit-cc: joe
+     Series-process-log: sort, uniq
+     Series-changes: 4
+     - Some changes
 -- 
 2.37.1
 
