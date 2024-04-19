@@ -4,77 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8907C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 21:01:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F406C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 21:20:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A3E4D8876C;
-	Fri, 19 Apr 2024 22:58:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 79B99884E0;
+	Fri, 19 Apr 2024 23:20:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ggEhK0Da";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FrZcDFnk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A829C8873F; Fri, 19 Apr 2024 22:58:05 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DCEBF8804F; Fri, 19 Apr 2024 23:20:51 +0200 (CEST)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D96888125
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 22:58:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0046884E0
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 23:20:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43JKvj75126607;
- Fri, 19 Apr 2024 15:57:45 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1713560265;
- bh=39tOkxzWJThUpRAqUjyU6trYBvTeW+lpPIbl43Ze9SU=;
- h=From:To:CC:Subject:Date;
- b=ggEhK0Dat0afBlH/FUY/5oANQnhqqYZC2L7d4pWYg3ZPItqUre2cHMFdy/2KmBDu/
- U0xHvW8mYNagN7ukM/8LvYjiASZM/sy8e2/DaHlPWWZzcT6KbI4wA88ME/Vw+w4BXC
- MSUXak2PorYxXm9EBsLftKJYl9u2Mb3Pc79VRqMs=
-Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43JKvjnS114375
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 19 Apr 2024 15:57:45 -0500
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
- Apr 2024 15:57:45 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 19 Apr 2024 15:57:45 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43JKvjCq091765;
- Fri, 19 Apr 2024 15:57:45 -0500
-From: Jonathan Humphreys <j-humphreys@ti.com>
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Kamlesh Gurudasani
- <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>, Christian Gmeiner
- <christian.gmeiner@gmail.com>,
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-437b3f256easo10183481cf.0
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:20:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1713561648; x=1714166448; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=S/d3cUjS5yxsLD6Bs0Hf6VfDT7FRyZ2IThf2+l6UxeI=;
+ b=FrZcDFnk/sf+TQ3H7IP/9/nfDBM8TftZALtQ/6iK7ekVDmkyG5potLrzUo1+nne0v8
+ DuHZze4z19i749vfsj5dBpKldRSMVLYQzImRWll4q8p0JDWtGBT3yvFYL1RTPVhipPpv
+ TCz2LFCzqomIhnwBVIJ/MA+e17nxsL9+LDPRk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713561648; x=1714166448;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=S/d3cUjS5yxsLD6Bs0Hf6VfDT7FRyZ2IThf2+l6UxeI=;
+ b=oKNky+R0g32lHbNERgXmpIdo5f5y1qDRMaaNi/Hx4m3L/8UjqiQpRd8rJ08K7jPkU8
+ yIB9TSWVGlprbE9Icr6dNF93+PRgX9plTsUEuGQsfeoUG1k7sAo1Pi1amNdajdFjDyC2
+ p7vlA9rFMI6xLvp/6dOvFaWPETWcA1QHz2Yb5YOqVCH88euBhQYE/qcbYqPo5L4bzUU8
+ bfjVAWBY4lZStYo8gJniSIohCmpcyu4cmO/ZZ/UFkNWqyqnuhAcZXj5nDL+dkgM+XxqE
+ 6XJ5dqVODquTQ+itcZGcX/a+X+hYfHAxzq4TG5t/3aEI3MbUExbIae4RHXhnBn+DDtCN
+ jr4A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXx8pLto5bXQeVSoKF1yawCIgOHLFH4+/jqyB8UkDa9NvUlMZBP4aU/ls/4DuaLwrHaMxHC8hSJd6dWxzwgA+xKfaQTVw==
+X-Gm-Message-State: AOJu0Yz0diLCtbbu4ZOVyJEQnWm/2mft4g3IBxIpKqLbBK47jNku4JNN
+ nmmExLhJf9H4TdJNvuvqZrFrzLTnsVl/bCL2fj9qPEPjdUZRIhURYdblP4MZEaU=
+X-Google-Smtp-Source: AGHT+IFspRUxqCRnGkSe6yfSEFrIFQZbmIMlrLL8ciF/yg09oWSoXfsgKnHRTKzaGLcUFGT3TesJyQ==
+X-Received: by 2002:a05:622a:58d:b0:436:8356:bf5 with SMTP id
+ c13-20020a05622a058d00b0043683560bf5mr4038411qtb.60.1713561648589; 
+ Fri, 19 Apr 2024 14:20:48 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ kk3-20020a05622a2c0300b00436b2135b51sm1897838qtb.64.2024.04.19.14.20.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Apr 2024 14:20:47 -0700 (PDT)
+Date: Fri, 19 Apr 2024 15:20:42 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jonathan Humphreys <j-humphreys@ti.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Kamlesh Gurudasani <kamlesh@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Judith Mendez <jm@ti.com>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>,
  Devarsh Thakkar <devarsht@ti.com>, Simon Glass <sjg@chromium.org>,
- Nikhil M Jain <n-jain1@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>, Andrew Davis <afd@ti.com>, Maxime Ripard
- <mripard@kernel.org>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Nikhil M Jain <n-jain1@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Andrew Davis <afd@ti.com>,
+ Maxime Ripard <mripard@kernel.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
  Roger Quadros <rogerq@kernel.org>, Bryan Brattlof <bb@ti.com>,
  Vignesh Raghavendra <vigneshr@ti.com>,
  Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>
-CC: <u-boot@lists.denx.de>, Jonathan Humphreys <j-humphreys@ti.com>
-Subject: [PATCH v3 00/19] EFI: ti: Enable EFI capsule updates
-Date: Fri, 19 Apr 2024 15:56:42 -0500
-Message-ID: <20240419205701.163821-1-j-humphreys@ti.com>
-X-Mailer: git-send-email 2.34.1
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 04/19] doc: board: ti: am64x: document OSPI layout
+Message-ID: <20240419212042.GM1054907@bill-the-cat>
+References: <20240419205701.163821-1-j-humphreys@ti.com>
+ <20240419205701.163821-5-j-humphreys@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="SrNWZm1mOP5EQJmd"
+Content-Disposition: inline
+In-Reply-To: <20240419205701.163821-5-j-humphreys@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,75 +107,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable on disk capsule updates, which includes defining the firmware components
-(tiboot3, spl, u-boot) and enabling processing of raw capsule updates.
 
-This is enabled for several TI SoC based platforms: AM64, AM62, AM62p,
-BeaglePlay, J7, and BeagleboneAI.
+--SrNWZm1mOP5EQJmd
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-This series also includes enabling seral flash DFU for AM62 and MMC DFU for
-beagleplay.
+On Fri, Apr 19, 2024 at 03:56:46PM -0500, Jonathan Humphreys wrote:
 
-Changes from v1:
-- Added sysfw.itb capsule definition to beagleboneai64
-- removed extra commas in structure definitions
+> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+> ---
+>  doc/board/ti/am64x_evm.rst | 48 ++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 48 insertions(+)
+[snip]
+> +Flash layout for OSPI:
+> +
+> +    .. code-block:: console
+> +
+> +             0x0 +----------------------------+
+> +                 |     ospi.tiboot3(1m)       |
+> +                 |                            |
+> +        0x100000 +----------------------------+
+> +                 |     ospi.tispl(2m)         |
+> +                 |                            |
+> +        0x300000 +----------------------------+
+> +                 |     ospi.u-boot(4m)        |
+> +                 |                            |
+> +        0x700000 +----------------------------+
+> +                 |     ospi.env(128k)         |
+> +                 |                            |
+> +        0x720000 +----------------------------+
+> +                 |   ospi.env.backup(128k)    |
+> +                 |                            |
+> +        0x740000 +----------------------------+
+> +                 |      padding (768k)        |
+> +        0x800000 +----------------------------+
+> +                 |     ospi.rootfs(ubifs)     |
+> +                 |                            |
+> +       0x3fc0000 +----------------------------+
+> +                 |   ospi.phypattern (256k)   |
+> +                 |                            |
+> +                 +----------------------------+
 
-Changes from v2:
-- Added documentation on OSPI flash layouts
-- Improved comments for capsule GUIDs definitions
-- Defined board unique capsule GUIDs and put definitions in board specific files
-- Added a Capsule Update porting section to the documentation
+This should be in an SVG see doc/board/ti/j7200_evm.rst for example (and
+I'll set aside some non-SVG examples in doc/board/ti that should be
+converted). Thanks.
 
-Jonathan Humphreys (19):
-  doc: uefi: capsules: Start Capsule Update porting section
-  board: am64x: Define capsule update firmware info
-  configs: am64x: Enable EFI capsule update
-  doc: board: ti: am64x: document OSPI layout
-  board: j721e: Define capsule update firmware info
-  configs: j721e: Enable EFI capsule update
-  doc: board: ti: j721e: document OSPI layout
-  board: beagleplay: Define capsule update firmware info
-  configs: beagleplay: Enable DFU for MMC
-  configs: beagleplay: Enable EFI capsule update
-  board: am62px: Define capsule update firmware info
-  configs: am62px: Enable EFI capsule update
-  doc: board: ti: am62px: document OSPI layout
-  configs: am62x: Enable serial flash DFU
-  board: am62x: Define capsule update firmware info
-  configs: am62x: Enable EFI capsule update
-  doc: board: ti: am62x: document OSPI layout
-  board: beagleboneai64: Define capsule update firmware info
-  configs: beagleboneai64: Enable EFI capsule update
+--=20
+Tom
 
- board/beagle/beagleboneai64/Kconfig          |  4 +-
- board/beagle/beagleboneai64/beagleboneai64.c | 38 +++++++++
- board/beagle/beagleplay/Kconfig              |  4 +-
- board/beagle/beagleplay/beagleplay.c         | 33 ++++++++
- board/ti/am62px/evm.c                        | 32 ++++++++
- board/ti/am62x/evm.c                         | 32 ++++++++
- board/ti/am64x/evm.c                         | 33 ++++++++
- board/ti/j721e/evm.c                         | 38 +++++++++
- configs/am62px_evm_a53_defconfig             |  2 +
- configs/am62x_beagleplay_a53_defconfig       |  5 ++
- configs/am62x_evm_a53_defconfig              |  3 +
- configs/am64x_evm_a53_defconfig              |  2 +
- configs/j721e_beagleboneai64_a72_defconfig   |  2 +
- configs/j721e_evm_a72_defconfig              |  2 +
- doc/board/ti/am62px_sk.rst                   | 48 +++++++++++
- doc/board/ti/am62x_sk.rst                    | 48 +++++++++++
- doc/board/ti/am64x_evm.rst                   | 48 +++++++++++
- doc/board/ti/j721e_evm.rst                   | 85 +++++++++++++-------
- doc/develop/uefi/uefi.rst                    | 12 +++
- include/configs/am62px_evm.h                 | 24 ++++++
- include/configs/am62x_evm.h                  | 24 ++++++
- include/configs/am64x_evm.h                  | 24 ++++++
- include/configs/beagleboneai64.h             | 55 +++++++++++++
- include/configs/beagleplay.h                 | 41 ++++++++++
- include/configs/j721e_evm.h                  | 29 +++++++
- 25 files changed, 635 insertions(+), 33 deletions(-)
- create mode 100644 include/configs/beagleboneai64.h
- create mode 100644 include/configs/beagleplay.h
+--SrNWZm1mOP5EQJmd
+Content-Type: application/pgp-signature; name="signature.asc"
 
--- 
-2.34.1
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYi4CcACgkQFHw5/5Y0
+tyzlngwAsHOHA9CwLocnAGJ4QC3qHe+jnuOLxusZUKHVkES3lxTObRi7YLC6ykim
+qdHP3F6xA0Wm4n7NSQWAYBCNQDVZOAQbl81aodus/RbeKLXjuQpqj8QlhMFlidSU
+ObSKJZVvs7w/LSMzzZNl5ItdRiJPk92NssnnX5FEedzgU/CteQJQEDkJHaH66Mga
+v1//S8xZW4hRwrUTaHTUnxinnLrHxrwgPzplrdOdf3ZAgr3rtl3sldqwRm585StW
+VVJPQvefrz6nvOGtr00fTnwowWda9nNYOt8yatar5wJHZATX7jomsa5gdbCcWVzT
+30I75UzdRqQfwkfqJwKzMcad8Pf04GUCP8qrsh2PMiVMxF+EPklk7VmFx95OqUaO
+0USWGJiB1jCbrkoo/ZnH17mdNjcn6gW/0GzhDmoGV0CLYZpPTae3qshEfaeQTwdN
+s01Z7OX75QDwyTA8lgRemXTjpC7q9ipdawxsZH4rs6n8oORVF2XMf++7tIGlk5qr
+6qx7/Cu2
+=h5PF
+-----END PGP SIGNATURE-----
+
+--SrNWZm1mOP5EQJmd--
