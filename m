@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D653C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 16:33:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDE0BC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 16:34:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E9BDF884C4;
-	Fri, 19 Apr 2024 18:33:32 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 75C7788782;
+	Fri, 19 Apr 2024 18:34:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LerpGSFt";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MJ/0YgKe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1B6D08875D; Fri, 19 Apr 2024 18:33:32 +0200 (CEST)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 295E788790; Fri, 19 Apr 2024 18:34:43 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8495988305
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 18:33:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3223388774
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 18:34:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thierry.reding@gmail.com
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-a55911bff66so32594566b.0
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:33:29 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a53f131d9deso261166566b.3
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:34:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713544409; x=1714149209; darn=lists.denx.de;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
+ d=gmail.com; s=20230601; t=1713544480; x=1714149280; darn=lists.denx.de;
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=59aGDHzJzaQ7G6YYrBlR+aaChx8yEOOVDlPI+sjtxg0=;
- b=LerpGSFt1l8NXnsu7ipJ/xBQrwrIOmbOjoOfK/nbg/5DIbvOH9UOg1xv9Vi2imYYxA
- XmtfQHjcMfjDZF9ovaFbdi7a78FMeSLmGjGLBsKfcSm6+5w5Hik4ArbvTX83Xm2AVHZw
- v/Y/TGW6R9zdZG2XripX8+w58bXZ09/3pnvCUGw5Q/d/MXR+SOy7FQdWiGoJosGZTX3D
- 5AksrzAuO+1HrzJtKul/5Y+vsqV1ap0VRmmx1aGtwHvTlREAuJPmvERYPCBcwA1UUxcG
- WYClehNhvSQke4ugYCdC3wcPONMtR7ms7bw7wQPKCerPI3EtwgMzktvrV/B1cNUZE5Ap
- ws1g==
+ bh=0zt6MNyb9Zt6zSm8XSl83xkS7J4DhOvyrT4sndU93zY=;
+ b=MJ/0YgKe36oWytU4EQsk/mISGu1kGoL/csIpfD885wvAfzHQcPXz++WbDCE7Ia5Lm7
+ oRzmm6JWBlqwN0YE0ETCDO/VclhX3y3Gmz/9fXU3ubO9KCRM3AwBuQY6VdDJyOLGgH2Q
+ HZwswwEp8Ze/2iykdaDCVeNmz1sTEh9jMiAWH/TAvDU9i6Dg85eRwOWn74okeMOwgNg2
+ IfPqPKN1VVgyM+ZLsZBtYaNbMZ/O4xf+yii18d7ZqGhzcVs1uYq9WCWH9MeVZikhvS7Q
+ b4GhSBRjWPu/RfHwKQFAlkhjQzSz/EOyn9CzPwGADaEcSDrNyvQLEYCMbnZOAzsE4beV
+ aJtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713544409; x=1714149209;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
+ d=1e100.net; s=20230601; t=1713544480; x=1714149280;
+ h=in-reply-to:references:from:subject:cc:to:message-id:date
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=59aGDHzJzaQ7G6YYrBlR+aaChx8yEOOVDlPI+sjtxg0=;
- b=Qcg7qXAAAMZ9py8pW+NJuWoZ+oNO751ew3FByKfhbZibB1Yv6U/6bzejqxsKF+O6Hg
- qQXMIJ0BHIWqXD7yItc9YdzSGwKfOGHVgU55rBaD4k7nSRh4r/3alApbWDSgOCxrKGmJ
- qaFB1YN5irmT+HmDMKPTQ/tS/PvNncIvn5rCikqbiihKLm2os3HZSa1e+fc3MNq4Zz+Z
- fJNlK4nDGi/LSF35c+o8dzBu4yq7dKVg/bIHx7CjG5fmzWYaTmWDtaiw95nkOu4PJVYP
- qB+/aXs8Wt1AeiF2y1mouXK1a6Al+MCqVEgtrRRJEt/g6eiD02ZWf2qGroFNcndCwFUE
- TXNg==
-X-Gm-Message-State: AOJu0YzC9uuDh5LoVjPPV1m472rUO73XOyus3phBRgJkw+NQuiy6dT3w
- 02uidY+nShWSXzr2ZKXeNYWbStKtntXzGIJIWMDOhPrOBYNr91CR
-X-Google-Smtp-Source: AGHT+IGgdNU3evayJo7TvuwyAExYLOs7B3MkZiWHMaAr/rhZX5UsLOy1DLfCiA8b6eZJTUIHCNJwig==
-X-Received: by 2002:a17:907:7b86:b0:a52:5b71:d91f with SMTP id
- ne6-20020a1709077b8600b00a525b71d91fmr2590581ejc.19.1713544408856; 
- Fri, 19 Apr 2024 09:33:28 -0700 (PDT)
+ bh=0zt6MNyb9Zt6zSm8XSl83xkS7J4DhOvyrT4sndU93zY=;
+ b=iBkMYRcsnZ4NbZ9pc9fXrHqZYAFW0Ft1tLA5RpzmqAzHRR0Y5qCZnVC+VarrHYEr7b
+ uBp0CsPxNlmRvsBOOgyy7x/D5NwPC+YHMH2acu6/124gs/arEFDbqA4ciTiESCt8tsKR
+ jz3c2xhI9iUvWGox6DPJ+iEF/MavQq3D0NTm2IoihUibbT/y5iVkhL7W5nP7YHkxBnPw
+ /fx3mbLY1DmedUs+/kNJ6HEHrdN6xcqN9Q4FUSa8mxuvzQjc2t3+gf89EaY9U2gwwZg9
+ Hmxvvu5QYB50dLgevEiIDxoB42EotvHmG0e2afbLffzbokb84vOGeiMnDMAmBHX3sSp0
+ rkHA==
+X-Gm-Message-State: AOJu0YzOSDrHpu9/lhXA8tut4GZH3dDH3aR5TTuhC0OTLo9Dhy+ZkzYO
+ ia0yU0wf0yTgCPI0ZY40Evc8RffYd//r6oMrHz9FyRa0pRlIZJsK
+X-Google-Smtp-Source: AGHT+IFDiYnC3QjRQ/CdnaoH0j3pw4heclnK/LuFHysVYFjK4voRVJaHLVXlv5hiX5zmLesrSBj+kg==
+X-Received: by 2002:a17:907:78c6:b0:a52:64df:c898 with SMTP id
+ kv6-20020a17090778c600b00a5264dfc898mr1608689ejc.70.1713544480446; 
+ Fri, 19 Apr 2024 09:34:40 -0700 (PDT)
 Received: from localhost
  (p200300e41f162000f22f74fffe1f3a53.dip0.t-ipconnect.de.
  [2003:e4:1f16:2000:f22f:74ff:fe1f:3a53])
  by smtp.gmail.com with ESMTPSA id
- qs29-20020a170906459d00b00a5197fa2970sm2375989ejc.25.2024.04.19.09.33.28
+ rn17-20020a170906d93100b00a52431b57e4sm2379012ejb.121.2024.04.19.09.34.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 19 Apr 2024 09:33:28 -0700 (PDT)
+ Fri, 19 Apr 2024 09:34:40 -0700 (PDT)
 Content-Type: multipart/signed;
- boundary=f96d869ddce27e0bdf873f5fe9a909ed87d1472f1ce8809ee95618c8e0f6;
+ boundary=bab0e648c9bf6084be5a33452e6e11849b6a79de6ee8d902ee9cb3904918;
  micalg=pgp-sha256; protocol="application/pgp-signature"
 Mime-Version: 1.0
-Date: Fri, 19 Apr 2024 18:33:27 +0200
-Message-Id: <D0O8SPNX2ESE.2AL0KBG7N5R8H@gmail.com>
+Date: Fri, 19 Apr 2024 18:34:39 +0200
+Message-Id: <D0O8TMM66T1F.217MXFEZPAFPA@gmail.com>
+To: "Thierry Reding" <thierry.reding@gmail.com>, "Svyatoslav Ryhel"
+ <clamor95@gmail.com>, "Thierry Reding" <treding@nvidia.com>, "Anatolij
+ Gustschin" <agust@denx.de>, "Simon Glass" <sjg@chromium.org>
 Cc: <u-boot@lists.denx.de>
-Subject: Re: [PATCH v6 02/18] video: tegra20: dc: fix image shift on rotated
- panels
+Subject: Re: [PATCH v6 01/18] video: tegra20: dc: diverge DC per-SOC
 From: "Thierry Reding" <thierry.reding@gmail.com>
-To: "Svyatoslav Ryhel" <clamor95@gmail.com>, "Thierry Reding"
- <treding@nvidia.com>, "Anatolij Gustschin" <agust@denx.de>, "Simon Glass"
- <sjg@chromium.org>
 X-Mailer: aerc 0.16.0-1-0-g560d6168f0ed-dirty
 References: <20240123171633.246057-1-clamor95@gmail.com>
- <20240123171633.246057-3-clamor95@gmail.com>
-In-Reply-To: <20240123171633.246057-3-clamor95@gmail.com>
+ <20240123171633.246057-2-clamor95@gmail.com>
+ <D0O8N1XSTKTD.2J993U45EGU3@gmail.com>
+In-Reply-To: <D0O8N1XSTKTD.2J993U45EGU3@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,43 +98,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---f96d869ddce27e0bdf873f5fe9a909ed87d1472f1ce8809ee95618c8e0f6
+--bab0e648c9bf6084be5a33452e6e11849b6a79de6ee8d902ee9cb3904918
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
 
-On Tue Jan 23, 2024 at 6:16 PM CET, Svyatoslav Ryhel wrote:
-> Subtracting 1 from x and y fixes image shifting on rotated
-> panels.
+On Fri Apr 19, 2024 at 6:26 PM CEST, Thierry Reding wrote:
+> On Tue Jan 23, 2024 at 6:16 PM CET, Svyatoslav Ryhel wrote:
+> [...]
+> > diff --git a/arch/arm/include/asm/arch-tegra114/display.h b/arch/arm/in=
+clude/asm/arch-tegra114/display.h
+> > new file mode 100644
+> > index 0000000000..9411525799
+> > --- /dev/null
+> > +++ b/arch/arm/include/asm/arch-tegra114/display.h
+> > @@ -0,0 +1,28 @@
+> > +/* SPDX-License-Identifier: GPL-2.0+ */
+> > +/*
+> > + *  (C) Copyright 2010
+> > + *  NVIDIA Corporation <www.nvidia.com>
+> > + */
+> > +
+> > +#ifndef __ASM_ARCH_TEGRA_DISPLAY_H
+> > +#define __ASM_ARCH_TEGRA_DISPLAY_H
+> > +
+> > +#include <asm/arch-tegra/dc.h>
+> > +
+> > +/* This holds information about a window which can be displayed */
+> > +struct disp_ctl_win {
+> > +	enum win_color_depth_id fmt;	/* Color depth/format */
+> > +	unsigned int	bpp;		/* Bits per pixel */
+> > +	phys_addr_t	phys_addr;	/* Physical address in memory */
+> > +	unsigned int	x;		/* Horizontal address offset (bytes) */
+> > +	unsigned int	y;		/* Veritical address offset (bytes) */
+> > +	unsigned int	w;		/* Width of source window */
+> > +	unsigned int	h;		/* Height of source window */
+> > +	unsigned int	stride;		/* Number of bytes per line */
+> > +	unsigned int	out_x;		/* Left edge of output window (col) */
+> > +	unsigned int	out_y;		/* Top edge of output window (row) */
+> > +	unsigned int	out_w;		/* Width of output window in pixels */
+> > +	unsigned int	out_h;		/* Height of output window in pixels */
+> > +};
+> > +
+> > +#endif /*__ASM_ARCH_TEGRA_DISPLAY_H*/
 >
-> Tested-by: Robert Eckelmann <longnoserob@gmail.com> # ASUS Grouper E1565
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  drivers/video/tegra20/tegra-dc.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> One of the earlier patches in the series gets rid of this per-SoC header
+> file in favor of a common one. Did this end up here by mistake? It
+> doesn't seem to be used.
 
-Yeah, looks like we have that same fixup in Linux:
+Nevermind, my MUA sorted these patches weirdly, so it appeared as if
+this was later in the series than it actually was.
 
-Reviewed-by: Thierry Reding <treding@nvidia.com>
+Thierry
 
---f96d869ddce27e0bdf873f5fe9a909ed87d1472f1ce8809ee95618c8e0f6
+--bab0e648c9bf6084be5a33452e6e11849b6a79de6ee8d902ee9cb3904918
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmYinNgACgkQ3SOs138+
-s6E6eBAAkoWmCgvjyzn2/Of/HuPnN9IpAeH+31oeF0Wc/YGhD9wT53p6zST5SH3s
-V3fmBf4NRK2lfwKWHtlQQhvFG4brVBa1SrmiyVddXV9A9OgIbi9Ph9xjfuLeFSEI
-Zh9sxTD0+t4eIG086hoz5C20Itud43oeaZdY8a8OTle2/nLolxAgyU3DNvK8EdH7
-mbXJsL7ojnEf8aZv6y8SXQcTdXo3fZl2ngL4QixwzjHJRIb07mWqwV24d/2LtE1p
-Hr7FdB3iePuNavcYVqwJ14exppfEHd9zy/i23aLZ8ioWvOobpF0pU747lkvaa06o
-xeF23P1S09XeH0EN3s0KbFtHNIRwnKfUXpTDMBKuxTUP1/WIW2zL1LUpYNXMTCfl
-SfMmxC4ZLp5CfC+E3hbwCaQ30HnVFa2v1Gmb3RA6E7Qocr4vEtdmjTjgPT9cJqFY
-Zwg0Fe/hc/xfuQTY212NV/M7uORMa1fvhp7L/U1GxAhU13Q38C2DF3AIRGUwFc/T
-8UkuJNaTEHaWzdeaJv2WfI7lf6ozVQpxZ2Y7sHxcL2MQ67qd60fqOTxNhtMbSRR0
-yJcWJ5enSyU+4oU0gCpU/m64jRps4fyNq5x5HZa8E2aiodAXeJo10Cyu9XS/IyDF
-URi3l2E7dmU5H7ERyGrsoRLiswOJHeDRnwglCfsPjbn7t0hsx5U=
-=LNa0
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmYinR8ACgkQ3SOs138+
+s6EqQw/9E8bpZcUZ2woWhtOevuN/ZAQUBj2oTZkvsSr2r9/N1Y2qKPZzzS+LJSL0
+JxBmEMqa1yLwnT5wlkUjuLCsbJSZiuIK/wSfa19kDBJUFjOhCiiQpz8ZVG9Qs5Jc
+sETAQgz+4RmyFH5AEJ+Pu8KoBdzm3OLBEfYQQHht2ytbmwSThauH4UVGtGzUdqhB
++1SVfrqsZ8YSor9tNTaxHByhQo+WOY3nvJpvtjf9cBwnvOJZA7Qphz7/0uc3tRLX
+tRCwk9WSq0iAG3oHNy3qwO1rtQ5X5KxHMbqhSpN6+LfPxHGqNaoN/LKhEJ2jEOwE
+evWz2brScvGI/oXp+IxJxgUXeeCKPpwzPQ4Xh0v05R9iaJomBkn9qv2GDU4GthS2
+DVApsW3eWjlmva997XYFBfLn5BDNTa4ezOnJK+2wAB6CXciFNrs2k3Qdd2rjdlHC
+8RCow1jfc9A6c1gv5IrUvcmiZOm/XapXaS5BG3E5N/E7VN1CSNmFoSondy/bQby/
+WE4vNOfWkxiA5Ot3/mz5XjNrZGuDf3qIE3zrcYUjm/nT+FoU31yykLMqMqM9Edoe
+LCNBWd4xV+u+xrnlt8t2IQaY0mnKARAFGpa4JsB7YSGhX9lzfQnBM4w8lUuBEXKs
+M/k3qkE2TNCmhP9VDtu5upe6Vpor152apREqR8RWF7FESchYd3w=
+=k6AD
 -----END PGP SIGNATURE-----
 
---f96d869ddce27e0bdf873f5fe9a909ed87d1472f1ce8809ee95618c8e0f6--
+--bab0e648c9bf6084be5a33452e6e11849b6a79de6ee8d902ee9cb3904918--
