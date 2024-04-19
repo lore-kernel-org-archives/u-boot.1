@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03CBAC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 09:37:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C091DC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 09:45:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 020A98863C;
-	Fri, 19 Apr 2024 11:37:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C528886E7;
+	Fri, 19 Apr 2024 11:45:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="4xNWu9Fd";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="b+EtGyi6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D4668864D; Fri, 19 Apr 2024 11:37:30 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8D323886F3; Fri, 19 Apr 2024 11:45:52 +0200 (CEST)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9B2488634
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 11:37:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 83C3D886CC
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 11:45:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=4839221eac=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43J2ZOnH009597; Fri, 19 Apr 2024 11:37:15 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=YMnLz1riqbw8Xqlda9OzUZRcSgHhj6FChyFXRJ3qpjQ=; b=4x
- NWu9Fd+SvBae5e0FYaePsefplt6IGTjK58I7ehyURkVUlhFcKNP6YqyXjUB+yXRu
- roBdSyNyQIOfozD9H0VCYNDjoNzWsv/CXWk8zpB/mKa/oT2+MjWximrB0phUendi
- qnTatxmrMXoeWtJsyO7/e2q/HKIZoRpcORqj1lHSp1x2GtpbtMDH8qnrLiNKwpJB
- Q3UBYkQ5fozh0OCt2exVpfjAhqxsvZCgX26vPYtwXBKeI1up9zOVSDxqRPBMJNAJ
- /xfTf31gd0u/XvRZrVIpoisEbcEpICh9nMgvCx8YBwyOIbArX6pHE7TGXeqM4RmZ
- 8qEWbQPT6yTcY5GrBpAQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff64u0m4-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Apr 2024 11:37:14 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 45F4C4002D;
- Fri, 19 Apr 2024 11:37:10 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F1CA021230F;
- Fri, 19 Apr 2024 11:36:40 +0200 (CEST)
-Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
- 2024 11:36:40 +0200
-Message-ID: <7d23a960-a864-4fbe-966d-e0bb304394ac@foss.st.com>
-Date: Fri, 19 Apr 2024 11:36:39 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-571bddd74c1so1510858a12.0
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 02:45:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1713519950; x=1714124750; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=HVklAy+qSzBO559pr/KsbRMAwulsSpReQFNUPaUCM0g=;
+ b=b+EtGyi6p1hzFtWTdepGfeyIQS7uty35MqP4wxHrSCX0y3Nw6Q3veAgHFJ2/6W4ZXe
+ c1FdQDatWyu+3s85iJTapPDUu3bee4/W/tnqZBQYtdG7sVsqJJDUb+Szsc5Wn46SQRDZ
+ WELIov7L9bNmFUyLDeSyYY1JyGEpVdxDQ20pelTejD5xNBJnLptH7hwdHYvzvixKB3IF
+ Ei0pEFUOjZ+CtT+yVsZSMG2uq1rKUnBPjjD3eVm8K+iSi2ku44818DgIuO8NaTW9IpnP
+ ISJq77ggAeTCCQ7huymItq3rI/qgDVdxTFHQ3EEd5he0TrYLLtSUYl4xylzjypaA5XA8
+ 9SYg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713519950; x=1714124750;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HVklAy+qSzBO559pr/KsbRMAwulsSpReQFNUPaUCM0g=;
+ b=u5NggeAbQhYd7qMik3tj64dpbZAtqhJKHxM/1wIU4LWI0pdNhjH50/U3q53betxl0H
+ zn+u/umOJFCxpYQj4nEIPU0H9rwHl9yYLBgLgsbomgG4Vu9uiy+9q4B9VMOamEC+hnLC
+ 4JyUpkxFRsvgKI2IGDh/GL1kB0CpcQfp/UNtZ3yY0mqVsIwAULo8QBNwWHeXpFHljTA8
+ 00+7Ws6YhvbFZ9TPDEw78K+QKP3U/QJy7ZRJusf83VV5MwAhBCGXgG1fSF+TsfROe4Ae
+ Tz+EyV0H2QBJggheUpG+wHw1Rvge03JYxzTz1+PlKmwu2/dEgSHGzl+rymxg3/GjWJ9D
+ CVMw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXdafiPjp8aOTp44C4klenW4qmgNSElpv7LL3IfRFN0sW8xpbC32CyyVX0u2nJXbMXewuH9Z2quZOidsBTGG+llb8cbsQ==
+X-Gm-Message-State: AOJu0YxkoC/uuwLa8wGt/sXlKzPuLznMO7x8CNrvTLlladoKOMjFzr/P
+ UuJJLMaEqOH3qoi/pr/bpLx1Pjar0MPIpVY2zEt88IsyZYF3wDo5+llptzpqm0c=
+X-Google-Smtp-Source: AGHT+IFYAiG3ZTeQ+zlfpN29kwW5e1iWdu0UAFSLquJzsaByIBUBSCKyo1pkX52pnNHRscArjaOxmw==
+X-Received: by 2002:a17:907:11db:b0:a55:63de:9aa9 with SMTP id
+ va27-20020a17090711db00b00a5563de9aa9mr991747ejb.49.1713519950023; 
+ Fri, 19 Apr 2024 02:45:50 -0700 (PDT)
+Received: from localhost.localdomain (ppp176092141112.access.hol.gr.
+ [176.92.141.112]) by smtp.gmail.com with ESMTPSA id
+ v22-20020a1709064e9600b00a55865b2760sm587299eju.30.2024.04.19.02.45.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Apr 2024 02:45:49 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: heinrich.schuchardt@canonical.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Weizhao Ouyang <o451686892@gmail.com>,
+ u-boot@lists.denx.de
+Subject: [PATCH v2] efi_loader: change the error message when storing EFI
+ variables
+Date: Fri, 19 Apr 2024 12:45:45 +0300
+Message-ID: <20240419094546.12653-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] ARM: stm32: Initialize TAMP_SMCR BKP..PROT fields on
- STM32MP15xx
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Igor Opaniuk
- <igor.opaniuk@foundries.io>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240419035931.178840-1-marex@denx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240419035931.178840-1-marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.252.13.94]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-04-19_06,2024-04-17_01,2023-05-22_02
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,93 +94,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When we try to store EFI variables on a file, we need to use an ESP.
+if an ESP is not found, variables will change in memory, but U-Boot
+won't be able to restore them across reboots.
 
+Adjust the error message so users can understand what's going on
 
-On 4/19/24 05:59, Marek Vasut wrote:
-> In case of an OTP-CLOSED STM32MP15xx system, the CPU core 1 cannot be
-> released from endless loop in BootROM only by populating TAMP BKPxR 4
-> and 5 with magic and branch address and sending SGI0 interrupt from
-> core 0 to core 1 twice. TAMP_SMCR BKP..PROT fields must be initialized
-> as well to release the core 1 from endless loop during the second SGI0
-> handling on core 1. Initialize TAMP_SMCR to protect the first 32 backup
-> registers, the ones which contain the core 1 magic, branch address and
-> boot information.
-> 
-> This requirement seems to be undocumented, therefore it was necessary
-> to trace and analyze the STM32MP15xx BootROM using OpenOCD and objdump.
-> Ultimately, it turns out that a certain BootROM function reads out the
-> TAMP_SMCR register and tests whether the BKP..PROT fields are non-zero.
-> If they are zero, the BootROM code again waits for SGI0 using WFI, else
-> the execution moves forward until it reaches handoff to the TAMP BKPxR 5
-> branch address.
-> 
-> This fixes CPU core 1 release using U-Boot PSCI implementation on an
-> OTP-CLOSED system, i.e. system with fuse 0 bit 6 set.
-> 
-> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Simon Glass <sjg@chromium.org
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
-> V2: Fix up the BKPRWD/BKPWD mask typo
-> V3: - Update the allocation to 0x20/0x20
->     - Update commit message
->     - Add RB from Patrick
-> ---
->  arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 16 ++++++++++++++++
->  1 file changed, 16 insertions(+)
-> 
-> diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-> index dd99150fbc2..d75ec99d6a1 100644
-> --- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-> +++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
-> @@ -14,6 +14,7 @@
->  #include <asm/arch/sys_proto.h>
->  #include <dm/device.h>
->  #include <dm/uclass.h>
-> +#include <linux/bitfield.h>
->  
->  /* RCC register */
->  #define RCC_TZCR		(STM32_RCC_BASE + 0x00)
-> @@ -41,6 +42,9 @@
->  #define TZC_REGION_ID_ACCESS0	(STM32_TZC_BASE + 0x114)
->  
->  #define TAMP_CR1		(STM32_TAMP_BASE + 0x00)
-> +#define TAMP_SMCR		(STM32_TAMP_BASE + 0x20)
-> +#define TAMP_SMCR_BKPRWDPROT	GENMASK(7, 0)
-> +#define TAMP_SMCR_BKPWDPROT	GENMASK(23, 16)
->  
->  #define PWR_CR1			(STM32_PWR_BASE + 0x00)
->  #define PWR_MCUCR		(STM32_PWR_BASE + 0x14)
-> @@ -136,6 +140,18 @@ static void security_init(void)
->  	 */
->  	writel(0x0, TAMP_CR1);
->  
-> +	/*
-> +	 * TAMP: Configure non-zero secure protection settings. This is
-> +	 * checked by BootROM function 35ac on OTP-CLOSED device during
-> +	 * CPU core 1 release from endless loop. If secure protection
-> +	 * fields are zero, the core 1 is not released from endless
-> +	 * loop on second SGI0.
-> +	 */
-> +	clrsetbits_le32(TAMP_SMCR,
-> +			TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPWDPROT,
-> +			FIELD_PREP(TAMP_SMCR_BKPRWDPROT, 0x20) |
-> +			FIELD_PREP(TAMP_SMCR_BKPWDPROT, 0x20));
-> +
->  	/* GPIOZ: deactivate the security */
->  	writel(BIT(0), RCC_MP_AHB5ENSETR);
->  	writel(0x0, GPIOZ_SECCFGR);
-Hi Marek
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+Changes since v1:
+- print different messages if ESP is missing or write to file failed
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+ lib/efi_loader/efi_var_file.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-Thanks
-Patrice
+diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
+index 413e1794e88c..d5d347d50f8d 100644
+--- a/lib/efi_loader/efi_var_file.c
++++ b/lib/efi_loader/efi_var_file.c
+@@ -73,16 +73,20 @@ efi_status_t efi_var_to_file(void)
+ 		goto error;
+
+ 	ret = efi_set_blk_dev_to_system_partition();
+-	if (ret != EFI_SUCCESS)
++	if (ret != EFI_SUCCESS) {
++		log_err("ESP not found.");
+ 		goto error;
++	}
+
+ 	r = fs_write(EFI_VAR_FILE_NAME, map_to_sysmem(buf), 0, len, &actlen);
+-	if (r || len != actlen)
++	if (r || len != actlen) {
++		log_err("Failed to store variables.");
+ 		ret = EFI_DEVICE_ERROR;
++	}
+
+ error:
+ 	if (ret != EFI_SUCCESS)
+-		log_err("Failed to persist EFI variables\n");
++		log_err(" UEFI variables won't persist reboot\n");
+ 	free(buf);
+ 	return ret;
+ #else
+--
+2.43.0
+
