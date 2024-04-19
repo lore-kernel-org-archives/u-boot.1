@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29BAEC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 11:29:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA602C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 11:30:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9AD5D88738;
-	Fri, 19 Apr 2024 13:29:36 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4F9AD8873D;
+	Fri, 19 Apr 2024 13:30:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fTmRyp25";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Vge7DvGd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A8D088873B; Fri, 19 Apr 2024 13:29:34 +0200 (CEST)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id EA05B88741; Fri, 19 Apr 2024 13:30:47 +0200 (CEST)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0C9888735
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 13:29:32 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 01B6B8873E
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 13:30:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-418c0d83e61so20298665e9.3
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 04:29:32 -0700 (PDT)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-343c7fae6e4so1693379f8f.1
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 04:30:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713526172; x=1714130972; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1713526245; x=1714131045; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Z9ipMV/1g0JvuVaGIGCKH1RfILI7bAYuRCmB0cH0rcU=;
- b=fTmRyp25+W4DACvSfzVivt58DlvxP72bC/ldMLMj5cuIK5ZeJN4oBIYMu+hSEDcvR2
- n/RDniFYovVNpcAB3EUslD9vKufNA+yibPUtHIMMzBm1xIikH6geWjYsoFIxKwalyzyA
- teZcMK0/11YBRmRNr7KOuxlifJsXwjdXoypldt2DeA0hKSYSPkrrococz2D4ASbdwoV8
- O73BvIZ6KmR8L0gUXxg4JxYEsbMizQ1b6MbU8klX6P+GKrWxOpB2/GecKlAogyvfh6OC
- tAdv+NJdH1WDWJSpkorXNXI5/n1JUtkhPz7JZU+e4lAYy2jjR7sJWZpEnHyanMuGhOr2
- zWBw==
+ bh=dMA6pPXRpfCgMu14vLc2snTPCZ0ZeJX0/laGYAPeHqA=;
+ b=Vge7DvGdDj7AQ6+TprM1yD0UoX4PH7pYw5hwsUMMeouBgu35cmx5EsFQNB1JC/j8bw
+ Pofg6uN53ySlr7ppE7DwmEIrziQshLpaYTcneWCVRiRK3dFOPn1BvE+KADmhCqzg271X
+ SkvkTOTvWwWCcs27WeaY3xj0hrTWFmvsvapLQZ4wUFcy3dnER1pTbF1vXHDYRtZor+t6
+ 2na8F7ndbQ2WUk9Ox2jCBE58B0VIOlRgNAWciQTOwexIzLqDn9okOxeaqueUThXrZWHl
+ wYLqtCIRZT1PX9nvQRr39G82zax2mm8ouhzCsT7VttNTgefI6NodD/JZR0ZwpM6Si80v
+ 0Uug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713526172; x=1714130972;
+ d=1e100.net; s=20230601; t=1713526245; x=1714131045;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Z9ipMV/1g0JvuVaGIGCKH1RfILI7bAYuRCmB0cH0rcU=;
- b=e6a6JL77NPx5CwmzbdBncFFst/GmyFRslQ/I+5MZACZeVg10/61Ws2Ghf4wGqtc1ox
- r8TbViV2bj8ryXdQIHCxs+MwuRg2Ep0AfxcsFd/YwTkQqRxvv3f2MTmQiRnxI98tNwkB
- vg4cpaSQwd9oEy6ygUH1pJBT1+d7Vt5S0/DYSi0NJ4lmtrmcRnWS6VAqYjwUR/IXgEuc
- 6Yg5z5tlrBIPBoSOa5kdxKcvcUnmrMek0t/sW5J3iohDqa7LcvPt2bUwiJWzZgev9rkH
- vRECFNehfnIQG0w9CQzw3a60yqhCaTJi4GZifFTQYnUK3SqCJFcOdcM2vkQygQXAUAi1
- engg==
-X-Gm-Message-State: AOJu0YyrLxq1S6aprFvN2hAYOz9kn8FS3Y3NCkQjHMvyXQuXg+JKkjEQ
- r6aj1iwi3hqF4L04Mf+y4RxnED2yK7PqFbVRWSvoCHIGkWDhfUGQtNWkWbx9rxv1KkZD9XaJitW
- TIBDy/mgtta98J00Y+EEIFbcIwUQ=
-X-Google-Smtp-Source: AGHT+IEdZnkIAENnrteIvYWg3E8EHHWtNpCiRU3+C4g+YYJ7ON9nQSzrk5jJR40AiqwRYiLLfSS6PPbMijl545PcA24=
-X-Received: by 2002:a05:600c:19cc:b0:417:e60b:91f6 with SMTP id
- u12-20020a05600c19cc00b00417e60b91f6mr1668401wmq.4.1713526172004; Fri, 19 Apr
- 2024 04:29:32 -0700 (PDT)
+ bh=dMA6pPXRpfCgMu14vLc2snTPCZ0ZeJX0/laGYAPeHqA=;
+ b=M/75IetciMIedZOmf//OFepUes1QyYf29e33Sq8xcNQtvcgvi7YkRnmLIBqQo0KZJZ
+ D/GnQ7TqOVVvCsr8TSs+LKkgszG7W1c6CFUcE3aFaCVDdT4bCODZx5pDWrdodqy4xfxp
+ 10y7uyVtTw20M+UJGeMWZDFHfRCSe6x8vu6IgK3pf/GUi6OdZ9z8n7aOrF1/ApWTEnTK
+ yT8Ff4+HMogD/TgA/U/lSZPNycinRwU9bKcV82uAe2r1aJg7/5DGTEoBT4/ShAMLgCM3
+ cCrDcvDgpo7fnFwTLYdjjjYltMmPskzbCJQuQF2uSRk6wrAcq3PcMQeNlczDjyFY3O77
+ 3DYA==
+X-Gm-Message-State: AOJu0YwfJNpHJ2v50jdiYd038ZMu4QE6Tbgv6mHezHwVUpjVP8Bpy5mo
+ BplB4SIqgFb8keY5T5dLVSAOXTYSXVGJvh83nJHMG56p1cHsQDHzlgVQqlQy4UtfS9oxtAr2HhY
+ NB4noIJmEsxgJBgBYImcWJAU8LYU=
+X-Google-Smtp-Source: AGHT+IGLMZq89KCd0y4AXXR4oKcv9rpsd8o0bC6fDfcdIebTHLOloaG4IEFzHjb9Fxmk/tePI6cbHEyW7G1tnw4pNUk=
+X-Received: by 2002:adf:cd84:0:b0:33e:7f51:c2f8 with SMTP id
+ q4-20020adfcd84000000b0033e7f51c2f8mr1124720wrj.36.1713526245280; Fri, 19 Apr
+ 2024 04:30:45 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240131065721.4245-1-clamor95@gmail.com>
-In-Reply-To: <20240131065721.4245-1-clamor95@gmail.com>
+References: <20240123171633.246057-1-clamor95@gmail.com>
+In-Reply-To: <20240123171633.246057-1-clamor95@gmail.com>
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Fri, 19 Apr 2024 14:29:20 +0300
-Message-ID: <CAPVz0n10Fb4H-Haj+s-Jjt_UgpWXSSWOFdJVeJATwTr22Do5_g@mail.gmail.com>
-Subject: Re: [PATCH v2 0/7] Tegra panel improvements
-To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Simon Glass <sjg@chromium.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Anton Bambura <jenneron@protonmail.com>,
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
+Date: Fri, 19 Apr 2024 14:30:34 +0300
+Message-ID: <CAPVz0n16O0Qn2Lm0qqWmYOLmEw1jBgtcHHb4W4poedraqurVgw@mail.gmail.com>
+Subject: Re: [PATCH v6 00/18] Add T114 video support
+To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>, 
+ Anatolij Gustschin <agust@denx.de>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
@@ -97,53 +96,92 @@ pick it into master?
 Best regards,
 Svyatoslav R.
 
-=D1=81=D1=80, 31 =D1=81=D1=96=D1=87. 2024=E2=80=AF=D1=80. =D0=BE 08:57 Svya=
+=D0=B2=D1=82, 23 =D1=81=D1=96=D1=87. 2024=E2=80=AF=D1=80. =D0=BE 19:17 Svya=
 toslav Ryhel <clamor95@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
 >
-> The current patch set improves the logic of existing panels and
-> bridge used by Tegra 3 devices and brings support for additional
-> DSI panels used by Tegra 4 devices.
+> T114 is not that different from T30 and all T30 drivers will work
+> on T114 as well with some adjustments.
 >
-> New and existing drivers are fully reusable, contain no device
-> specific parts, and are written according to existing datasheets.
+> Patches propose general improvements for existing Tegra DC and DSI
+> drivers as well Tegra 114 video support (experimentl).
+>
+> Commits pass buildman for tegra.
 >
 > ---
+> Changes from v5:
+>  - backlight enable moved to the last step of setup for DSI
+>  - parameterized V- and H-sync polarities
+>  - added framebuffer clearing on probe to avoid glitches
+>  - backlight enable moved after DC is fully configured
+>  - fixed printing framebuffer pointer instead of address
+>  - moved scdiv calculation to tegra DSI if it is used
+>
+> Changes from v4:
+>  - fixed typo in max rate to be divided (400KHz > 400MHz)
+>
+> Changes from v3:
+>  - fixed the clock divider calculation if PLLD/D2 is used
+>  - removed unnecessary pre-configuration
+>  - set correct video FIFO depth for DSI
+>
+> Changes from v2:
+>  - fixed image distortion on devices with 180deg rotation
+>
 > Changes from v1:
-> - improved ssd2825 code style
-> - added TC358768 RGB to DSI bridge bringup commit (used by TF700T)
-> - added Parade DP501 transmitter bringup (used by Lenovo Ideapad Yoga 11)
+>  - reworked patchset entirely
+>  - diverged DC configuration per-SOC
+>  - consolidated dc headers from different SOC gen
+>  - initial support of DC detection (tegra has 2 DC)
+>  - added PLLD2 support, resets and powergating
+>  - added T114+ MIPI calibration
+>  - added DSI detection (tegra has 2 DSI) and resets
 > ---
 >
-> Anton Bambura (1):
->   video: panel: add Samsung LTL106HL02 MIPI DSI panel driver
+> Jonas Schw=C3=B6bel (6):
+>   video: tegra20: dc: fix printing of framebuffer address
+>   video: tegra20: dc: enable backlight after DC is configured
+>   video: tegra20: dc: clean framebuffer memory block
+>   video: tegra20: dsi: remove pre-configuration
+>   video: tegra20: dsi: set correct fifo depth
+>   video: tegra20: dsi: use set_backlight for backlight only
 >
-> Jonas Schw=C3=B6bel (1):
->   video: bridge: add basic support for the Parade DP501 transmitter
+> Svyatoslav Ryhel (12):
+>   video: tegra20: dc: diverge DC per-SOC
+>   video: tegra20: dc: fix image shift on rotated panels
+>   video: tegra20: consolidate DC header
+>   video: tegra20: dc: pass DC id to internal devices
+>   video: tegra20: dc: add PLLD2 parent support
+>   video: tegra20: dc: add reset support
+>   video: tegra20: dc: add powergate
+>   video: tegra20: dc: configure behavior if PLLD/D2 is used
+>   video: tegra20: dc: parameterize V- and H-sync polarities
+>   video: tegra20: add MIPI calibration driver
+>   video: tegra20: dsi: add T114 support
+>   video: tegra20: dsi: add reset support
 >
-> Svyatoslav Ryhel (5):
->   video: panel: add LG LG070WX3 MIPI DSI panel driver
->   video: bridge: add Toshiba TC358768 RGB to DSI bridge support
->   video: endeavoru-panel: shift the init sequence by one step earlier
->   video: bridge: ssd2825: shift the init sequence by one step earlier
->   video: renesas: shift the init sequence by one step earlier
->
->  drivers/video/Kconfig              |  17 +
->  drivers/video/Makefile             |   2 +
->  drivers/video/bridge/Kconfig       |  19 +
->  drivers/video/bridge/Makefile      |   2 +
->  drivers/video/bridge/dp501.c       | 579 +++++++++++++++++
->  drivers/video/bridge/ssd2825.c     |  86 +--
->  drivers/video/bridge/tc358768.c    | 985 +++++++++++++++++++++++++++++
->  drivers/video/endeavoru-panel.c    | 128 ++--
->  drivers/video/lg-ld070wx3.c        | 186 ++++++
->  drivers/video/renesas-r61307.c     |  93 +--
->  drivers/video/renesas-r69328.c     |  81 +--
->  drivers/video/samsung-ltl106hl02.c | 157 +++++
->  12 files changed, 2155 insertions(+), 180 deletions(-)
->  create mode 100644 drivers/video/bridge/dp501.c
->  create mode 100644 drivers/video/bridge/tc358768.c
->  create mode 100644 drivers/video/lg-ld070wx3.c
->  create mode 100644 drivers/video/samsung-ltl106hl02.c
+>  arch/arm/dts/tegra114-u-boot.dtsi             |  13 +
+>  arch/arm/dts/tegra114.dtsi                    |   4 +-
+>  arch/arm/dts/tegra30-u-boot.dtsi              |   4 +
+>  arch/arm/dts/tegra30.dtsi                     |   2 +-
+>  arch/arm/include/asm/arch-tegra/dc.h          |  13 +-
+>  arch/arm/include/asm/arch-tegra114/pwm.h      |  13 +
+>  arch/arm/include/asm/arch-tegra20/display.h   |  28 --
+>  arch/arm/include/asm/arch-tegra30/display.h   |  28 --
+>  drivers/video/tegra20/Makefile                |   2 +-
+>  drivers/video/tegra20/tegra-dc.c              | 239 +++++++++++++-----
+>  drivers/video/tegra20/tegra-dc.h              |  45 ++++
+>  drivers/video/tegra20/tegra-dsi.c             | 122 ++++++++-
+>  .../video/tegra20/tegra-dsi.h                 |  24 +-
+>  drivers/video/tegra20/tegra-mipi.c            | 188 ++++++++++++++
+>  drivers/video/tegra20/tegra-pwm-backlight.c   |   3 +-
+>  15 files changed, 583 insertions(+), 145 deletions(-)
+>  create mode 100644 arch/arm/include/asm/arch-tegra114/pwm.h
+>  delete mode 100644 arch/arm/include/asm/arch-tegra20/display.h
+>  delete mode 100644 arch/arm/include/asm/arch-tegra30/display.h
+>  create mode 100644 drivers/video/tegra20/tegra-dc.h
+>  rename arch/arm/include/asm/arch-tegra30/dsi.h =3D> drivers/video/tegra2=
+0/tegra-dsi.h (90%)
+>  create mode 100644 drivers/video/tegra20/tegra-mipi.c
 >
 > --
 > 2.40.1
