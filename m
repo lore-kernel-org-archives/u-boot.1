@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 382CFC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 07:42:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40C2AC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 07:45:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A434F885B9;
-	Fri, 19 Apr 2024 09:42:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8684F886D6;
+	Fri, 19 Apr 2024 09:45:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZBvmzrkE";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="5ye4uvSY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54A1B886B9; Fri, 19 Apr 2024 09:42:12 +0200 (CEST)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 96B94886D8; Fri, 19 Apr 2024 09:45:50 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1308688553
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:42:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A6613886D5
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:45:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-56e1baf0380so2166831a12.3
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 00:42:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713512529; x=1714117329; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jSfcrLSxRJx5o7rnqPpbPn7q41A6wOhVSMrQXuaOitE=;
- b=ZBvmzrkEwvlLZeeUGOMIPhB5rsDhzX0CtT5llFZoojRRwuholTqDbAwAxqB/DE23Va
- mJ1k/9sAbFT8fdtOY0e8jAOX3cCEsipZztgw6yCW7P2BmurqaylhJJiLodPKJGEs+f6y
- +K/dRVvy5Ih+o/yw7Q09HXqM0Hqbg2bcOaIO9AhXvLAoGQolD5d1jp0d+QA6pnCAFaoA
- KFho72N5nQ84zIjzhzu1LdJEm8FX11sDGAbcf4+G09wH+8V+eK2pGwSZW+MeT69bqiZf
- mEmrHvMWWWjbhNBPFNe11qS5r3KUbVBkLbU7tG9+BIuvrZ1ZzGGz5LNF5gdbDY2wn38g
- yVxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713512529; x=1714117329;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jSfcrLSxRJx5o7rnqPpbPn7q41A6wOhVSMrQXuaOitE=;
- b=ObrQUFoDyzgQc/ezADMWpzHdKEx//cq3R/KYbzfxqoJHkxBZxFgKkAKSWyvDXQ4nFE
- T1vN6UeFzw3RHBw1jCjO3FmR1s2dN9KSPNVSnRbmaCMW7QpUNvKsaVERcSOKm6iaFp59
- EzoqR0VKVuLSyzn51DeB6f0Y1anpZMjVY2WRO3RIG6JBHoLN5GY/dAzA/utQgPTWq9gc
- vCn/18SHot1ElSbiYP1FeHvMg57C0CbisxFcwETm0VatTzD+in6BqCkJ+7hYTkUtu6R7
- 4V3sQ5AyoRZ+Y7nZH8Wh/emyVulCUZuq2fgQw7SMKpSyHxd58LNYtUWFuwABcmyE33Cx
- BbYQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWVfVFTrT/X6UfUny+Vi8A0WzOKqwEeSHE8WY0/DtrZm6rJdm2Og0WQIWE22a0YQ/SqsEZxY9GFREuzhWwXuR0nIFqN7A==
-X-Gm-Message-State: AOJu0Ywoa7ZJq2MCHfH9GrhhVf6JtfzD9uqjRoAwYxyBNsJ9YChoSE0j
- ZPct4esk2xQneltAWWbfd5AheanAf17T1e3bCCsPYtF8N5x12xaI909yHslzHQf1kQXra97Y3rK
- dlzk=
-X-Google-Smtp-Source: AGHT+IFCLH85MTlnNz6m3aM8aXj2ce4f8Ze+I+fEKhHU+4T83bu+R1NIk1eHppZAjkMTuFOZy+TRdQ==
-X-Received: by 2002:a50:8ac9:0:b0:56d:c91c:dfc2 with SMTP id
- k9-20020a508ac9000000b0056dc91cdfc2mr942668edk.31.1713512529493; 
- Fri, 19 Apr 2024 00:42:09 -0700 (PDT)
-Received: from localhost.localdomain (ppp176092141112.access.hol.gr.
- [176.92.141.112]) by smtp.gmail.com with ESMTPSA id
- q10-20020a056402248a00b0056fe7c5475bsm1797858eda.10.2024.04.19.00.42.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Apr 2024 00:42:09 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: heinrich.schuchardt@canonical.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Weizhao Ouyang <o451686892@gmail.com>,
- u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: change the error message when storing EFI
- variables
-Date: Fri, 19 Apr 2024 10:42:00 +0300
-Message-ID: <20240419074201.9053-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=4839221eac=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 43J2A8oC007704; Fri, 19 Apr 2024 09:45:43 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=x383rEWWO3Qdx70/sb9IUgQ9iMTRbh6dWUugMFCn9pg=; b=5y
+ e4uvSY9DHYbmatXGGl1vvV/cdSbU1dQmZOzYbUrGirQ+hCuwjO6ZPxd1N1jLmXnH
+ FG7Y/EYOPzScouGW3pSdUxOyRO/IXL/Bj89Dw7s4lRHSNqEBBD2wySYI5LfonwWs
+ xVIm6ARV8URUV6C1u780tFUtSYzmkV1jcLz8EZqZ2Qcm0KZPFjkxr2Pv9CX6j9KJ
+ 0Bxd00KOEslvrvuSc6n10NsTg+8r3hoqzIhcAQRD8PU4lzTBzwtnDQmcasXQeZpu
+ FrHllZEymKBFegsL96biW7f5z3xP+m5F+5gUwVxQoWyv6eMZHh5BcTe94blF9Ayg
+ L0swEbCW2z3nw5+gizhA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff64tf52-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 19 Apr 2024 09:45:19 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C3A954002D;
+ Fri, 19 Apr 2024 09:45:13 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 82DA1210F8C;
+ Fri, 19 Apr 2024 09:44:51 +0200 (CEST)
+Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
+ 2024 09:44:51 +0200
+Message-ID: <c35863dd-65dc-4f85-ac62-d99c9c6addb1@foss.st.com>
+Date: Fri, 19 Apr 2024 09:44:50 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] stm32mp: Reserve OPTEE area in EFI memory map
+Content-Language: en-US
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Patrick DELAUNAY
+ <patrick.delaunay@foss.st.com>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
+ <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, <u-boot@lists.denx.de>
+References: <20240308101230.2595220-1-patrice.chotard@foss.st.com>
+ <3512e31e-37db-4e03-b133-1914e29fa7ad@foss.st.com>
+ <24c03e51-90f8-4918-8097-2a6ccd6ebf4e@gmx.de>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <24c03e51-90f8-4918-8097-2a6ccd6ebf4e@gmx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.252.13.94]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-04-19_05,2024-04-17_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,30 +93,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When we try to store EFI variables on a file, we need to use an ESP.
-if an ESP is not found, variables will change in memory, but U-Boot
-won't be able to restore them across reboots.
 
-Adjust the error message so users can understand what's going on
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- lib/efi_loader/efi_var_file.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 4/17/24 09:45, Heinrich Schuchardt wrote:
+> On 17.04.24 09:25, Patrick DELAUNAY wrote:
+>> Hi,
+>>
+>> On 3/8/24 11:12, Patrice Chotard wrote:
+>>> Since commit 7b78d6438a2b3 ("efi_loader: Reserve unaccessible memory")
+>>> memory region above ram_top is tagged in EFI memory map as
+>>> EFI_BOOT_SERVICES_DATA.
+>>> In case of STM32MP1 platform, above ram_top, there is one reserved-memory
+>>> region tagged "no-map" dedicated to OP-TEE (addr=de000000 size=2000000).
+>>>
+>>> Before booting kernel, EFI memory map is first built, the OPTEE region is
+>>> tagged as EFI_BOOT_SERVICES_DATA and when reserving LMB, the tag LMB_NONE
+>>> is used.
+>>>
+>>> Then after, the LMB are completed by boot_fdt_add_mem_rsv_regions()
+>>> which try to add again the same OPTEE region (addr=de000000 size=2000000)
+>>> but now with LMB_NOMAP tag which produces the following error message :
+>>>
+>>> "ERROR: reserving fdt memory region failed (addr=de000000 size=2000000
+>>> flags=4)"
+>>>
+>>> To avoid this, OPTEE area shouldn't be used by EFI, so we need to mark
+>>> it as reserved.
+>>>
+>>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>>> ---
+>>>
+>>>   arch/arm/mach-stm32mp/dram_init.c | 12 ++++++++++++
+>>>   1 file changed, 12 insertions(+)
+>>>
+>>> diff --git a/arch/arm/mach-stm32mp/dram_init.c
+>>> b/arch/arm/mach-stm32mp/dram_init.c
+>>> index fb1208fc5d5..f67f54f2ae0 100644
+>>> --- a/arch/arm/mach-stm32mp/dram_init.c
+>>> +++ b/arch/arm/mach-stm32mp/dram_init.c
+>>> @@ -7,6 +7,7 @@
+>>>   #include <common.h>
+>>>   #include <dm.h>
+>>> +#include <efi_loader.h>
+>>>   #include <image.h>
+>>>   #include <init.h>
+>>>   #include <lmb.h>
+>>> @@ -75,3 +76,14 @@ phys_addr_t board_get_usable_ram_top(phys_size_t
+>>> total_size)
+>>>       return reg + size;
+>>>   }
+>>> +
+>>> +void efi_add_known_memory(void)
+>>> +{
+>>> +    if (IS_ENABLED(CONFIG_EFI_LOADER))
+>>> +        /*
+>>> +         * Memory over ram_top is reserved to OPTEE.
+>>> +         * Declare to EFI only memory area below ram_top
+>>> +         */
+>>> +        efi_add_memory_map(gd->ram_base, gd->ram_top - gd->ram_base,
+>>> +                   EFI_CONVENTIONAL_MEMORY);
+> 
+> With this change the EFI memory map passed to the operating system will
+> not contain any memory above gd->ram_top. Is this really your intent?
+> Don't you have any memory above 0xe0000000?
 
-diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
-index 413e1794e88c..5276740ffe7a 100644
---- a/lib/efi_loader/efi_var_file.c
-+++ b/lib/efi_loader/efi_var_file.c
-@@ -82,7 +82,7 @@ efi_status_t efi_var_to_file(void)
- 
- error:
- 	if (ret != EFI_SUCCESS)
--		log_err("Failed to persist EFI variables\n");
-+		log_err("ESP not found. UEFI variables won't persist reboots\n");
- 	free(buf);
- 	return ret;
- #else
--- 
-2.43.0
+Hi Heinrich
 
+On stm32mp157x-dk and stm32mp135x-dk boards, there is no memory above 0xe0000000.
+But, on stm32mp157x-ed1 or stm32mp157x-ev1, you are right, we got memory above 0xe0000000.
+
+I will rework this patch to take into account memory that could be present above OPTEE area.
+
+Thanks for pointing this
+Patrice
+
+> 
+> Best regards
+> 
+> Heinrich
+> 
+>>> +}
+>>
+>>
+>>
+>> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>>
+>> Thanks
+>> Patrick
+>>
+> 
