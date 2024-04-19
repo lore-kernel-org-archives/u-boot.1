@@ -4,75 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1972C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 15:25:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BF8FC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 15:29:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7371388781;
-	Fri, 19 Apr 2024 17:25:01 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id BEBD18874B;
+	Fri, 19 Apr 2024 17:29:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FpkP6LB4";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2631188775; Fri, 19 Apr 2024 17:25:00 +0200 (CEST)
-Received: from mail-ua1-x936.google.com (mail-ua1-x936.google.com
- [IPv6:2607:f8b0:4864:20::936])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D0BC38876D; Fri, 19 Apr 2024 17:29:13 +0200 (CEST)
+Received: from finn.localdomain (finn.gateworks.com [108.161.129.64])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61ED288780
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 17:24:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EDB1E88790
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 17:29:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=fail (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x936.google.com with SMTP id
- a1e0cc1a2514c-7eb7f35b0c0so665100241.2
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 08:24:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713540295; x=1714145095; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VxDbpcPJ1UpFn9kvgi0jwqu4aRWic2C9lAlFzDtWuE4=;
- b=FpkP6LB45685uhjbd+hylkL6GlKzoi28cKwTMov243tuLKBB0Tlbt4x1dthn0gREfJ
- u201JeEAUB7tPiMYkAA6KVIoGdsvQjP9tl5MbIsbrSzXDzTGwEjeAQsWw0yXGz+07d6q
- Ultzk7fzZVaGUs3p9Vkhko8e/beVme/XSYgNiI0yHG1rmbLJGeGWmi7Z85xD7AdEaf0+
- Ss9RN8ZarWAZCxN5EUzQC9bujiUuTTa4rsz4w6gpX4QqwdvtVPZoxWCTbaou+wlKLh4Q
- C90GThq82hh3+GqT/3eZi2NlridIgIG35JrDp0A5qo8I286ZvRkh4hT/B6Nk0ACJCcv9
- rnWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713540295; x=1714145095;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VxDbpcPJ1UpFn9kvgi0jwqu4aRWic2C9lAlFzDtWuE4=;
- b=vn4IOWyCaMKzzSrnQRdejMwflZNm/X9lOF80CslqBN1Q4A6kUMVz3xaJ6iJ426Prle
- aHDspetXWhdgt02MYR4YmNY8bpKg+j0OTJB+/BWq2iuO0SKEfr7L3TradtnaqdVhief4
- cMwPOhaE5wJpkkOC3r9fSaVz6kcoXtCLe1uBE+U6CVfuhaRsP/Rb/oNNoI9Z6lJvfyKw
- 4Qfa05lf32pNmlziZvk4qrslC8PjJFoJs01RTSMxI+WM6HTTjSftI1q2GTi0JW+vS+W/
- HdMApHcZGUOb/U2DIDglud/BN7nrml092ruJ0njANblHXMY86LwfmNBACced7m2G85Aw
- ktuA==
-X-Gm-Message-State: AOJu0Yz7GPinA78ah/9Hw82EpLeE/VDDIkkXgP2WxMxdpPbSgnkKEENN
- JXm52fACreT9wWMfw80Q/0AdkcYTflDWbsRpClkDkaSnJuhJhjNYiogEJjZsa0+T1OU5o+uL4Tj
- lVKbDlAhZgYmkH1Jrnc0U6z0DMwq66Gwig90RpEPbtcSHreY+
-X-Google-Smtp-Source: AGHT+IH7OQ/aRvBZGo1ZrTFdNg2OTAaF71S0GO1vJ1kiktPhAXBCFF9f/x0zZ7TMtSHL1OjQBuC/og8cp9NJa9wNvt0=
-X-Received: by 2002:a67:f810:0:b0:47b:c52b:7cd1 with SMTP id
- l16-20020a67f810000000b0047bc52b7cd1mr2638261vso.2.1713540294977; Fri, 19 Apr
- 2024 08:24:54 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: from [68.189.91.139] (helo=tharvey.pdc.gateworks.com)
+ by finn.localdomain with esmtp (Exim 4.95)
+ (envelope-from <tharvey@gateworks.com>) id 1rxqAj-004BT7-OW;
+ Fri, 19 Apr 2024 15:29:05 +0000
+From: Tim Harvey <tharvey@gateworks.com>
+To: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Fabio Estevam <festevam@gmail.com>,
+ Martyn Welch <martyn.welch@collabora.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH v3 1/3] clk: imx8mm: Add support for PCIe clocks
+Date: Fri, 19 Apr 2024 08:29:00 -0700
+Message-Id: <20240419152902.4156600-1-tharvey@gateworks.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20240412095438.410570-1-sumit.garg@linaro.org>
-In-Reply-To: <20240412095438.410570-1-sumit.garg@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 19 Apr 2024 08:24:41 -0700
-Message-ID: <CAFA6WYNLLZUeM8GFtjyTvKhmCAk+6dmzef0ejAkYyTOm1nwBEw@mail.gmail.com>
-Subject: Re: [PATCH v4 0/7] Add SE HMBSC board support
-To: u-boot@lists.denx.de
-Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, trini@konsulko.com, 
- lukma@denx.de, seanga2@gmail.com, sjg@chromium.org, 
- laetitia.mariottini@se.com, pascal.eberhard@se.com, abdou.saker@se.com, 
- jimmy.lalande@se.com, benjamin.missey@non.se.com, daniel.thompson@linaro.org, 
- stephan@gerhold.net
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,96 +55,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Add support for PCIe clocks required to enable PCIe support on
+iMX8MM SoC.
 
-On Fri, 12 Apr 2024 at 02:54, Sumit Garg <sumit.garg@linaro.org> wrote:
->
-> SE HMIBSC board is based on Qcom APQ8016 SoC. One of the major
-> difference from db410c is serial port where HMIBSC board uses UART1 as
-> the debug console with an RS232 port, patch #2 - #5 adds corresponding
-> driver support.
->
-> Patch #6 adds main HMIBSC board specific bits, features:
-> - Qualcomm Snapdragon 410C SoC - APQ8016 (4xCortex A53, Adreno 306)
-> - 2GiB RAM
-> - 64GiB eMMC, SD slot
-> - WiFi and Bluetooth
-> - 2x Host, 1x Device USB port
-> - HDMI
-> - Discrete TPM2 chip over SPI
->
-> Features enabled in U-Boot:
-> - RAUC updates (refer [2] for more details)
-> - Environment protection
-> - USB based ethernet adaptors
->
-> Feedback is very much welcome.
->
-> Changes in v4:
-> - Rebased on top of qcom-main [4].
-> - Split out board DTS patch as #6.
-> - Convert to text based environment as hmibsc.env.
-> - MMC regression has been reported for qcom-main branch here [5].
-> - Collected further review tag.
+Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+---
+v3: wrap pcie clk config around IS_ENABLED to avoid SPL growth as
+    suggested by Marek
+---
+ drivers/clk/imx/clk-imx8mm.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-I haven't seen any further comments on this series. Can you help pick it up?
+diff --git a/drivers/clk/imx/clk-imx8mm.c b/drivers/clk/imx/clk-imx8mm.c
+index b5c253e49663..1a00dd1d287b 100644
+--- a/drivers/clk/imx/clk-imx8mm.c
++++ b/drivers/clk/imx/clk-imx8mm.c
+@@ -66,6 +66,17 @@ static const char *imx8mm_i2c3_sels[] = {"clock-osc-24m", "sys_pll1_160m", "sys_
+ static const char *imx8mm_i2c4_sels[] = {"clock-osc-24m", "sys_pll1_160m", "sys_pll2_50m", "sys_pll3_out", "audio_pll1_out",
+ 					 "video_pll1_out", "audio_pll2_out", "sys_pll1_133m", };
+ 
++#if CONFIG_IS_ENABLED(PCIE_DW_IMX)
++static const char *imx8mm_pcie1_ctrl_sels[] = {"clock-osc-24m", "sys_pll2_250m", "sys_pll2_200m", "sys_pll1_266m",
++					       "sys_pll1_800m", "sys_pll2_500m", "sys_pll2_333m", "sys_pll3_out", };
++
++static const char *imx8mm_pcie1_phy_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll2_500m", "clk_ext1", "clk_ext2",
++					      "clk_ext3", "clk_ext4", "sys_pll1_400m", };
++
++static const char *imx8mm_pcie1_aux_sels[] = {"clock-osc-24m", "sys_pll2_200m", "sys_pll2_50m", "sys_pll3_out",
++					      "sys_pll2_100m", "sys_pll1_80m", "sys_pll1_160m", "sys_pll1_200m", };
++#endif
++
+ #ifndef CONFIG_SPL_BUILD
+ static const char *imx8mm_pwm1_sels[] = {"clock-osc-24m", "sys_pll2_100m", "sys_pll1_160m", "sys_pll1_40m",
+ 					 "sys_pll3_out", "clk_ext1", "sys_pll1_80m", "video_pll1_out", };
+@@ -256,6 +267,17 @@ static int imx8mm_clk_probe(struct udevice *dev)
+ 		imx8m_clk_composite("usb_bus", imx8mm_usb_bus_sels, base + 0x8b80));
+ 
+ 	/* IP */
++#if CONFIG_IS_ENABLED(PCIE_DW_IMX)
++	clk_dm(IMX8MM_CLK_PCIE1_CTRL,
++	       imx8m_clk_composite("pcie1_ctrl", imx8mm_pcie1_ctrl_sels,
++				   base + 0xa300));
++	clk_dm(IMX8MM_CLK_PCIE1_PHY,
++	       imx8m_clk_composite("pcie1_phy", imx8mm_pcie1_phy_sels,
++				   base + 0xa380));
++	clk_dm(IMX8MM_CLK_PCIE1_AUX,
++	       imx8m_clk_composite("pcie1_aux", imx8mm_pcie1_aux_sels,
++				   base + 0xa400));
++#endif
+ 	clk_dm(IMX8MM_CLK_USDHC1,
+ 	       imx8m_clk_composite("usdhc1", imx8mm_usdhc1_sels,
+ 				   base + 0xac00));
+@@ -339,6 +361,11 @@ static int imx8mm_clk_probe(struct udevice *dev)
+ 	       imx_clk_gate4("pwm4_root_clk", "pwm4", base + 0x42b0, 0));
+ #endif
+ 
++#if CONFIG_IS_ENABLED(PCIE_DW_IMX)
++	clk_dm(IMX8MM_CLK_PCIE1_ROOT,
++	       imx_clk_gate4("pcie1_root_clk", "pcie1_ctrl", base + 0x4250, 0));
++#endif
++
+ #if CONFIG_IS_ENABLED(DM_SPI)
+ 	clk_dm(IMX8MM_CLK_ECSPI1,
+ 	       imx8m_clk_composite("ecspi1", imx8mm_ecspi1_sels, base + 0xb280));
+-- 
+2.25.1
 
--Sumit
-
->
-> Changes in v3:
-> - Rebased on top of qcom-next [1].
-> - Collected some review tags.
-> - Incorporated misc. comments from Caleb and Stephen.
-> - Split patch#4 as requested.
-> - Linux HMIBSC board DTS has already been reviewed here [3], I have
->   incorporated that for U-Boot too.
->
-> Changes in v2:
-> - Rebased on top on qcom-next [1].
-> - Added patch#1 as a fix for generic qcom board support.
-> - Added patch#4 to enable driving GPIO pins based on pinctrl
->   configuration. This replaces the custom GPIO configuration.
-> - Added proper DTS file for HMIBSC board based on Linux DT pattern.
-> - Merged board support patches into a single patch#5.
->
-> [1] https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commits/qcom-next?ref_type=heads
-> [2] https://rauc.readthedocs.io/en/latest/
-> [3] https://lore.kernel.org/linux-kernel/20240403043416.3800259-4-sumit.garg@linaro.org/
-> [4] https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commits/qcom-main/?ref_type=heads
-> [5] https://lore.kernel.org/all/CAFA6WYO+3VroUdFUVH390taViQX8pMQrOQDTSn0yU6BD5YY53A@mail.gmail.com/
->
-> Sumit Garg (7):
->   qcom: Don't enable LINUX_KERNEL_IMAGE_HEADER by default
->   apq8016: Add support for UART1 clocks and pinmux
->   serial_msm: Enable RS232 flow control
->   pinctrl: qcom: Add support for driving GPIO pins output
->   pinctrl: qcom: apq8016: Add GPIO pinctrl function
->   arm: dts: qcom: Add Schneider HMIBSC board dts
->   board: add support for Schneider HMIBSC board
->
->  arch/arm/Kconfig                          |   2 +-
->  arch/arm/dts/apq8016-schneider-hmibsc.dts | 491 ++++++++++++++++++++++
->  board/schneider/hmibsc/MAINTAINERS        |   6 +
->  board/schneider/hmibsc/hmibsc.env         |  40 ++
->  configs/hmibsc_defconfig                  |  87 ++++
->  doc/board/index.rst                       |   1 +
->  doc/board/schneider/hmibsc.rst            |  45 ++
->  doc/board/schneider/index.rst             |   9 +
->  drivers/clk/qcom/clock-apq8016.c          |  38 +-
->  drivers/pinctrl/qcom/pinctrl-apq8016.c    |   2 +
->  drivers/pinctrl/qcom/pinctrl-qcom.c       |  25 +-
->  drivers/serial/serial_msm.c               |  24 +-
->  include/configs/hmibsc.h                  |  16 +
->  13 files changed, 760 insertions(+), 26 deletions(-)
->  create mode 100644 arch/arm/dts/apq8016-schneider-hmibsc.dts
->  create mode 100644 board/schneider/hmibsc/MAINTAINERS
->  create mode 100644 board/schneider/hmibsc/hmibsc.env
->  create mode 100644 configs/hmibsc_defconfig
->  create mode 100644 doc/board/schneider/hmibsc.rst
->  create mode 100644 doc/board/schneider/index.rst
->  create mode 100644 include/configs/hmibsc.h
->
-> --
-> 2.34.1
->
