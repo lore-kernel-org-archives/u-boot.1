@@ -4,75 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53AE4C04FF6
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:33:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C425CC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:34:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE01D8883D;
-	Fri, 19 Apr 2024 14:33:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4FB148874F;
+	Fri, 19 Apr 2024 14:34:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ZeqUGoil";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="tFj3t/wF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B34E8883A; Fri, 19 Apr 2024 14:33:34 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id 9B22188746; Fri, 19 Apr 2024 14:34:06 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A3268883C
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:33:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B20E88879D
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:34:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=4839221eac=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43J9dcoN007704; Fri, 19 Apr 2024 14:33:26 +0200
+ 43JADtlN012295; Fri, 19 Apr 2024 14:34:03 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=NQxjS3m+nKuMEvukuuCDZNQGhjufh5bqF3FnA/KHVv8=; b=Ze
- qUGoilDVCv/85aznnh6LauQRwUhXofunfptsnCcVYvdi6Fp6uFsm9jkdvcRuTg1A
- +JkoXEEFtB/gj5gsPEdj/fZsAVCpe8KISYbwZrHPZIqg+t8ssjMDSXJ4XtMdFaww
- cGxD+Gc0pQHyzqKw2N+3QrjZUM3mGu0BSAM9AVAYqtfvPQ1L8KIHygzVRt58g3ux
- ECFRKQntIXPwX8Y2zT9wsHomJkqlIXZt+Xvo9CE/KmKMIDy5Yyx/dcHLZfM6tqnM
- 9gfPR9BIO1NyOfwDqwCmUPUcj8ySpNttb90YH46O/AcQynE4W58duAdPcwTqD+bU
- RCjGuRAYteCJWHUWJJ6g==
+ selector1; bh=11PuNuZdLG9PbE6r/I80d2PjLQ5J/AXHStoWSe/ZWRQ=; b=tF
+ j3t/wFdenuszYcEe0ztq1oJWr8p92dB6skG/LrLGesQ6P4/lkRCvbzQJwehZfP+w
+ J36L75bO8NFZoSVqNMc7YXhGVZ1LJRfxLxAgzt1qyFmkONFvto9BfU6HeqfpYkxU
+ q5+tJsIGjhA4jcBeonaX9guUupmJx6Kid667WxnrHAmTyqsvWxSSTpNZSbfo23Wd
+ yJufiC/fbWg78kf3RVMsoCYt98rI8knJn812PfAZWiOKDmaC3pL37X17Hf9+nTcW
+ bN/lLDwXQIiebVIyG+C3yqbkjrKsSFKnXCm2LNF0cV9vniI9QZx5GNz6aMEIotr9
+ im3SiMzHTjy2yV4o+Ncg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff64uvh1-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xffffvtef-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Apr 2024 14:33:25 +0200 (MEST)
+ Fri, 19 Apr 2024 14:34:02 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 360AC40045;
- Fri, 19 Apr 2024 14:33:22 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 686A84002D;
+ Fri, 19 Apr 2024 14:33:48 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 7C9AE21ADBC;
- Fri, 19 Apr 2024 14:32:54 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B28A821ADC0;
+ Fri, 19 Apr 2024 14:33:30 +0200 (CEST)
 Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
- 2024 14:32:53 +0200
-Message-ID: <513a7e71-1326-4aa8-84bd-37c26f82b7bd@foss.st.com>
-Date: Fri, 19 Apr 2024 14:32:53 +0200
+ 2024 14:33:30 +0200
+Message-ID: <07d22ece-9e8b-4b41-ab06-bb6d4cf71be7@foss.st.com>
+Date: Fri, 19 Apr 2024 14:33:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] mmc: stm32_sdmmc2: Add "st,stm32mp25-sdmmc2"
- compatible
+Subject: Re: [PATCH 2/3] ARM: dts: stm32: Fix partition node name for
+ stm32mp15xx-dhcor-u-boot
 Content-Language: en-US
-To: Jaehoon Chung <jh80.chung@samsung.com>, 'Patrick DELAUNAY'
- <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
-CC: 'U-Boot STM32' <uboot-stm32@st-md-mailman.stormreply.com>, 'Peng Fan'
- <peng.fan@nxp.com>, 'Sean Anderson' <seanga2@gmail.com>, 'Simon Glass'
- <sjg@chromium.org>, 'Tom Rini' <trini@konsulko.com>
-References: <20240308142614.2700185-1-patrice.chotard@foss.st.com>
- <CGME20240417090230epcas1p2688df3c6263283a23019c72b5553570a@epcas1p2.samsung.com>
- <79062d65-359c-4e1a-ae04-da5e9bea1ed6@foss.st.com>
- <01e001da90b7$ec103130$c4309390$@samsung.com>
+To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
+CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut
+ <marex@denx.de>, Tom Rini <trini@konsulko.com>
+References: <20240308135009.2621719-1-patrice.chotard@foss.st.com>
+ <20240308135009.2621719-2-patrice.chotard@foss.st.com>
+ <1e1b820c-f5fd-4fad-8692-53c92ec2e332@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <01e001da90b7$ec103130$c4309390$@samsung.com>
+In-Reply-To: <1e1b820c-f5fd-4fad-8692-53c92ec2e332@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.252.13.94]
 X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
  (10.75.129.69)
@@ -97,58 +94,51 @@ X-Virus-Status: Clean
 
 
 
-On 4/17/24 13:10, Jaehoon Chung wrote:
+On 4/17/24 11:00, Patrick DELAUNAY wrote:
 > Hi
 > 
->> -----Original Message-----
->> From: Patrick DELAUNAY <patrick.delaunay@foss.st.com>
->> Sent: Wednesday, April 17, 2024 6:02 PM
->> To: Patrice Chotard <patrice.chotard@foss.st.com>; u-boot@lists.denx.de
->> Cc: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>; Jaehoon Chung <jh80.chung@samsung.com>;
->> Peng Fan <peng.fan@nxp.com>; Sean Anderson <seanga2@gmail.com>; Simon Glass <sjg@chromium.org>; Tom
->> Rini <trini@konsulko.com>
->> Subject: Re: [PATCH 1/2] mmc: stm32_sdmmc2: Add "st,stm32mp25-sdmmc2" compatible
+> On 3/8/24 14:50, Patrice Chotard wrote:
+>> Fix flash@0 partition node name with correct offset.
 >>
->> Hi,
+>> Fixes: 90f992e6a58c ("arm: dts: stm32: Add partitions in flash0 and nand node for
+>> stm32mp15xx-dhcom/dhcor")
 >>
->> On 3/8/24 15:26, Patrice Chotard wrote:
->>> From: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>>
->>> Add compatible used for STM32MP25 family.
->>>
->>> Signed-off-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->>> ---
->>>
->>>   drivers/mmc/stm32_sdmmc2.c | 1 +
->>>   1 file changed, 1 insertion(+)
->>>
->>> diff --git a/drivers/mmc/stm32_sdmmc2.c b/drivers/mmc/stm32_sdmmc2.c
->>> index a2b111a8435..d4982a14281 100644
->>> --- a/drivers/mmc/stm32_sdmmc2.c
->>> +++ b/drivers/mmc/stm32_sdmmc2.c
->>> @@ -789,6 +789,7 @@ static int stm32_sdmmc2_bind(struct udevice *dev)
->>>
->>>   static const struct udevice_id stm32_sdmmc2_ids[] = {
->>>   	{ .compatible = "st,stm32-sdmmc2" },
->>> +	{ .compatible = "st,stm32mp25-sdmmc2" },
->>>   	{ }
->>>   };
->>>
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
+>> ---
 >>
+>>   arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi | 6 +++---
+>>   1 file changed, 3 insertions(+), 3 deletions(-)
 >>
->> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+>> diff --git a/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
+>> index 552b35db3c7..ba84db679e1 100644
+>> --- a/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
+>> +++ b/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
+>> @@ -42,15 +42,15 @@
+>>               label = "fsbl2";
+>>               reg = <0x00040000 0x00040000>;
+>>           };
+>> -        partition@500000 {
+>> +        partition@80000 {
+>>               label = "uboot";
+>>               reg = <0x00080000 0x00160000>;
+>>           };
+>> -        partition@900000 {
+>> +        partition@1e0000 {
+>>               label = "env1";
+>>               reg = <0x001E0000 0x00010000>;
+>>           };
+>> -        partition@980000 {
+>> +        partition@1f0000 {
+>>               label = "env2";
+>>               reg = <0x001F0000 0x00010000>;
+>>           };
 > 
-> Reviewed-by: Jaehoon Chung <jh80.chung@samsung.com>
 > 
-> Best Regards,
-> Jaehoon Chung
 > 
->>
->> Thanks
->> Patrick
->>
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > 
+> Thanks
+> Patrick
 > 
 
 Applied on u-boot-stm32/master 
