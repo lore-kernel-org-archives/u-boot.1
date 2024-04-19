@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C425CC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:34:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A7DBC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:34:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4FB148874F;
-	Fri, 19 Apr 2024 14:34:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 01D06887E1;
+	Fri, 19 Apr 2024 14:34:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="tFj3t/wF";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="FiG+PiR2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B22188746; Fri, 19 Apr 2024 14:34:06 +0200 (CEST)
+ id 2AC38887D7; Fri, 19 Apr 2024 14:34:15 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B20E88879D
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:34:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB98388811
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:34:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=4839221eac=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0288072.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43JADtlN012295; Fri, 19 Apr 2024 14:34:03 +0200
+ 43JAnTDb006062; Fri, 19 Apr 2024 14:34:10 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=11PuNuZdLG9PbE6r/I80d2PjLQ5J/AXHStoWSe/ZWRQ=; b=tF
- j3t/wFdenuszYcEe0ztq1oJWr8p92dB6skG/LrLGesQ6P4/lkRCvbzQJwehZfP+w
- J36L75bO8NFZoSVqNMc7YXhGVZ1LJRfxLxAgzt1qyFmkONFvto9BfU6HeqfpYkxU
- q5+tJsIGjhA4jcBeonaX9guUupmJx6Kid667WxnrHAmTyqsvWxSSTpNZSbfo23Wd
- yJufiC/fbWg78kf3RVMsoCYt98rI8knJn812PfAZWiOKDmaC3pL37X17Hf9+nTcW
- bN/lLDwXQIiebVIyG+C3yqbkjrKsSFKnXCm2LNF0cV9vniI9QZx5GNz6aMEIotr9
- im3SiMzHTjy2yV4o+Ncg==
+ selector1; bh=xVY2qhAycv0ruaeiWuv46IpyNvVnZbegJ5Uirru5/eI=; b=Fi
+ G+PiR2vGPzD8Nls9BxLdpzsXhMoPSJtxOIh1KqQf/vKI1gBF4XBiISVoTWGk8olU
+ m2YCGLE2W9JC1Ds41rpm7PQaurBu47kacdp39N4HWbip0F1Xvt8AbrdhSqfBE5LO
+ 5M2fBOcjx4Se+RTdVk/+DPnKIzEh3L6KkCm75PXtBGvecnJM7lChxAgecTxVGxP2
+ OLC50I+jOXHoiGlQbeb7t3iUG1cOTmhcZXrTTArnPNR2duGIbrjxfoVRQTsQW5oD
+ EWDtNN9kKojrO+GubL/oDIEGaSGrETYMbGuzzJ4Mec2JkmGYnS0JVdF1hILhssJI
+ 7dc16tCFryYQn1v/Genw==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xffffvtef-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xg3m12bgp-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Apr 2024 14:34:02 +0200 (MEST)
+ Fri, 19 Apr 2024 14:34:10 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 686A84002D;
- Fri, 19 Apr 2024 14:33:48 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 46FEB4002D;
+ Fri, 19 Apr 2024 14:34:05 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id B28A821ADC0;
- Fri, 19 Apr 2024 14:33:30 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 95C9921ADC6;
+ Fri, 19 Apr 2024 14:33:43 +0200 (CEST)
 Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
- 2024 14:33:30 +0200
-Message-ID: <07d22ece-9e8b-4b41-ab06-bb6d4cf71be7@foss.st.com>
-Date: Fri, 19 Apr 2024 14:33:30 +0200
+ 2024 14:33:43 +0200
+Message-ID: <9a17c368-191b-4b1c-ad02-92fd2dbda680@foss.st.com>
+Date: Fri, 19 Apr 2024 14:33:43 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] ARM: dts: stm32: Fix partition node name for
- stm32mp15xx-dhcor-u-boot
+Subject: Re: [PATCH 1/3] ARM: dts: stm32: Fix partition node name for
+ stm32mp157c-ev1-u-boot
 Content-Language: en-US
 To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut
- <marex@denx.de>, Tom Rini <trini@konsulko.com>
+ <marex@denx.de>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
 References: <20240308135009.2621719-1-patrice.chotard@foss.st.com>
- <20240308135009.2621719-2-patrice.chotard@foss.st.com>
- <1e1b820c-f5fd-4fad-8692-53c92ec2e332@foss.st.com>
+ <480ef8f6-2cc0-4014-8025-19b5c48a14fd@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <1e1b820c-f5fd-4fad-8692-53c92ec2e332@foss.st.com>
+In-Reply-To: <480ef8f6-2cc0-4014-8025-19b5c48a14fd@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.252.13.94]
@@ -75,7 +75,7 @@ X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-04-19_08,2024-04-19_01,2023-05-22_02
+ definitions=2024-04-19_09,2024-04-19_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,45 +94,57 @@ X-Virus-Status: Clean
 
 
 
-On 4/17/24 11:00, Patrick DELAUNAY wrote:
-> Hi
+On 4/17/24 10:59, Patrick DELAUNAY wrote:
+> Hi,
 > 
 > On 3/8/24 14:50, Patrice Chotard wrote:
->> Fix flash@0 partition node name with correct offset.
+>> Fix flash@0 and nand@0 partition node name with correct offset.
 >>
->> Fixes: 90f992e6a58c ("arm: dts: stm32: Add partitions in flash0 and nand node for
->> stm32mp15xx-dhcom/dhcor")
+>> Fixes: e91d3c61767b ("arm: dts: stm32: Add partitions in flash0 and nand
+>> node for stm32mp15xx-ev1")
 >>
 >> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 >> ---
 >>
->>   arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi | 6 +++---
->>   1 file changed, 3 insertions(+), 3 deletions(-)
+>>   arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi | 8 ++++----
+>>   1 file changed, 4 insertions(+), 4 deletions(-)
 >>
->> diff --git a/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
->> index 552b35db3c7..ba84db679e1 100644
->> --- a/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
->> +++ b/arch/arm/dts/stm32mp15xx-dhcor-u-boot.dtsi
->> @@ -42,15 +42,15 @@
+>> diff --git a/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi b/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+>> index 139940bd5d4..3515347e91d 100644
+>> --- a/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+>> +++ b/arch/arm/dts/stm32mp157c-ev1-u-boot.dtsi
+>> @@ -33,11 +33,11 @@
+>>               label = "fsbl1";
+>>               reg = <0x00000000 0x00040000>;
+>>           };
+>> -        partition@80000 {
+>> +        partition@40000 {
 >>               label = "fsbl2";
 >>               reg = <0x00040000 0x00040000>;
 >>           };
->> -        partition@500000 {
+>> -        partition@100000 {
 >> +        partition@80000 {
->>               label = "uboot";
->>               reg = <0x00080000 0x00160000>;
+>>               label = "ssbl";
+>>               reg = <0x00080000 0x00200000>;
 >>           };
->> -        partition@900000 {
->> +        partition@1e0000 {
->>               label = "env1";
->>               reg = <0x001E0000 0x00010000>;
+>> @@ -58,7 +58,7 @@
+>>               label = "fsbl2";
+>>               reg = <0x00040000 0x00040000>;
 >>           };
->> -        partition@980000 {
->> +        partition@1f0000 {
->>               label = "env2";
->>               reg = <0x001F0000 0x00010000>;
+>> -        partition@100000 {
+>> +        partition@80000 {
+>>               label = "fip";
+>>               reg = <0x00080000 0x00400000>;
 >>           };
-> 
+>> @@ -112,7 +112,7 @@
+>>                       label = "fip2";
+>>                       reg = <0x00600000 0x00400000>;
+>>                   };
+>> -                partition@1200000 {
+>> +                partition@a00000 {
+>>                       label = "UBI";
+>>                       reg = <0x00a00000 0x3f600000>;
+>>                   };
 > 
 > 
 > Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
@@ -140,5 +152,5 @@ On 4/17/24 11:00, Patrick DELAUNAY wrote:
 > Thanks
 > Patrick
 > 
-
+> 
 Applied on u-boot-stm32/master 
