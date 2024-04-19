@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55B9AC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:14:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B72E5C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:14:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD8EF88742;
-	Fri, 19 Apr 2024 14:14:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5D3F088765;
+	Fri, 19 Apr 2024 14:14:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="0jyCm5Ei";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="E3NFR0NT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6DDF8874F; Fri, 19 Apr 2024 14:14:04 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
+ id BDDBF88757; Fri, 19 Apr 2024 14:14:08 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A07E28873A
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:14:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B310788757
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:14:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=4839221eac=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43J8Eeqn031243; Fri, 19 Apr 2024 14:13:59 +0200
+ 43J9PksI030179; Fri, 19 Apr 2024 14:14:02 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=6hehqVnB/3Q3PTRPFQxs1lwsqIZJP0QveetDNB1Zrx8=; b=0j
- yCm5EiYTtMCdDmtXy7F2i3ZUQ/6t09IJ/qMEkvZ4mPRZVwFdpL5F3W98b34khmkE
- dcazECFyQb9LkkB9rYwjvyeZMJ6bx7Ow+LgLQdKn/uzIrqiM5O6OjS5MCzz+QcWg
- CxG3QM5A2QOxfIeshBXWRauM6LXMzOMzhPq5XOLl+o2LJbj3ZWdcOiivbeXQO3oL
- tWZfE0O6xsqstpGwZUva5ICgQDen/NRWGjqH54nqrvxQZxmxeJ1ZDxzBPvwNKDR9
- IYVVZVP0NCjJ+Df5Drj+x+Slt1LS9ibxKB0XTjjkLBPbGkMW6NHwS7cymmuI0edE
- QCqwIYownUfXsNCUGT/w==
+ selector1; bh=5sG4RSs6Fw298JX1eJ0t9nc0RqlPe6RLmPbduqAEHx8=; b=E3
+ NFR0NTUtU+TpJp+Pgqq3GZwB06HDCgLpVBZu3pygDgSM19s5pxgknL4ZVOSANGql
+ Oq2c8GGS7jB8FNlBk3AH+gvGDbKvu6SMvN9w4olbI0xCdLBr6yNl5xFQjTy3K/cC
+ ZpjDAiikIyDMhU+secthBQGn86kSsiQ6ifNfaQ2sdw8IJqS9ex4W6lKvTBQVJbSK
+ XdauvB+DUV5Y5HRl1neOLjM8MDYVJhwusFhyR0MmM5dr232d8CqqntwpIwgi/7DG
+ /3YtGoNpnrSYuP3fTDq2edQ+zJnlYIsYfzOQwOlym1BRqp9dSsltXBolwCVA9Dkr
+ nhRAVdnCIDYmJft69ZMg==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xfhcx43s5-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xgecyrb1b-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Apr 2024 14:13:58 +0200 (MEST)
+ Fri, 19 Apr 2024 14:14:01 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id BC9D64002D;
- Fri, 19 Apr 2024 14:13:50 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id D9C2840044;
+ Fri, 19 Apr 2024 14:13:57 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id CB7B12194EE;
- Fri, 19 Apr 2024 14:13:20 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 09BBC2194F0;
+ Fri, 19 Apr 2024 14:13:28 +0200 (CEST)
 Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
- 2024 14:13:20 +0200
-Message-ID: <38549bfd-80f7-4618-a28f-32b8f2f19cb9@foss.st.com>
-Date: Fri, 19 Apr 2024 14:13:20 +0200
+ 2024 14:13:27 +0200
+Message-ID: <2a7007f8-1fa4-4121-afc2-00dd5cca32fe@foss.st.com>
+Date: Fri, 19 Apr 2024 14:13:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/2] memory: stm32-fmc2-ebi: add MP25 support
+Subject: Re: [PATCH v1 2/2] memory: stm32-fmc2-ebi: add MP25 RIF support
 Content-Language: en-US
 To: Christophe Kerello <christophe.kerello@foss.st.com>, <u-boot@lists.denx.de>
 CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Patrick Delaunay
  <patrick.delaunay@foss.st.com>, Caleb Connolly <caleb.connolly@linaro.org>,
  Eugen Hristev <eugen.hristev@collabora.com>, Igor Prusov
- <ivprusov@salutedevices.com>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
+ <ivprusov@salutedevices.com>, Stefan Bosch <stefan_b@posteo.net>, Tom Rini
+ <trini@konsulko.com>
 References: <20240306095048.314546-1-christophe.kerello@foss.st.com>
- <20240306095048.314546-2-christophe.kerello@foss.st.com>
+ <20240306095048.314546-3-christophe.kerello@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240306095048.314546-2-christophe.kerello@foss.st.com>
+In-Reply-To: <20240306095048.314546-3-christophe.kerello@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.252.13.94]
@@ -96,479 +96,254 @@ X-Virus-Status: Clean
 
 
 On 3/6/24 10:50, Christophe Kerello wrote:
-> Add the support of the revision 2 of FMC2 IP.
->      - PCSCNTR register has been removed,
->      - CFGR register has been added,
->      - the bit used to enable the IP has moved from BCR1 to CFGR,
->      - the timeout for CEx deassertion has moved from PCSCNTR to BCRx,
->      - the continuous clock enable has moved from BCR1 to CFGR,
->      - the clk divide ratio has moved from BCR1 to CFGR.
-> 
-> The MP1 SoCs have only one signal to manage all the controllers (NWAIT).
-> The MP25 SOC has one RNB signal for the NAND controller and one NWAIT
-> signal for the memory controller.
-> 
-> Let's use a platform data structure for parameters that will differ
-> between MP1 and MP25.
+> The FMC2 revision 2 supports security and isolation compliant with
+> the Resource Isolation Framework (RIF). From RIF point of view,
+> the FMC2 is composed of several independent resources, listed below,
+> which can be assigned to different security and compartment domains:
+>  - 0: Common FMC_CFGR register.
+>  - 1: EBI controller for Chip Select 1.
+>  - 2: EBI controller for Chip Select 2.
+>  - 3: EBI controller for Chip Select 3.
+>  - 4: EBI controller for Chip Select 4.
+>  - 5: NAND controller.
 > 
 > Signed-off-by: Christophe Kerello <christophe.kerello@foss.st.com>
-> 
 > ---
 > 
->  drivers/memory/stm32-fmc2-ebi.c | 313 ++++++++++++++++++++++++++++++--
->  1 file changed, 301 insertions(+), 12 deletions(-)
+>  drivers/memory/stm32-fmc2-ebi.c | 140 +++++++++++++++++++++++++++++++-
+>  1 file changed, 138 insertions(+), 2 deletions(-)
 > 
 > diff --git a/drivers/memory/stm32-fmc2-ebi.c b/drivers/memory/stm32-fmc2-ebi.c
-> index a722a3836f7..c7db16463e8 100644
+> index c7db16463e8..1ce96077858 100644
 > --- a/drivers/memory/stm32-fmc2-ebi.c
 > +++ b/drivers/memory/stm32-fmc2-ebi.c
-> @@ -22,6 +22,7 @@
->  #define FMC2_BCR(x)			((x) * 0x8 + FMC2_BCR1)
+> @@ -23,8 +23,14 @@
 >  #define FMC2_BTR(x)			((x) * 0x8 + FMC2_BTR1)
 >  #define FMC2_PCSCNTR			0x20
-> +#define FMC2_CFGR			0x20
+>  #define FMC2_CFGR			0x20
+> +#define FMC2_SR				0x84
 >  #define FMC2_BWTR1			0x104
 >  #define FMC2_BWTR(x)			((x) * 0x8 + FMC2_BWTR1)
+> +#define FMC2_SECCFGR			0x300
+> +#define FMC2_CIDCFGR0			0x30c
+> +#define FMC2_CIDCFGR(x)			((x) * 0x8 + FMC2_CIDCFGR0)
+> +#define FMC2_SEMCR0			0x310
+> +#define FMC2_SEMCR(x)			((x) * 0x8 + FMC2_SEMCR0)
 >  
-> @@ -44,6 +45,7 @@
->  #define FMC2_BCR_ASYNCWAIT		BIT(15)
->  #define FMC2_BCR_CPSIZE			GENMASK(18, 16)
->  #define FMC2_BCR_CBURSTRW		BIT(19)
-> +#define FMC2_BCR_CSCOUNT		GENMASK(21, 20)
->  #define FMC2_BCR_NBLSET			GENMASK(23, 22)
+>  /* Register: FMC2_BCR1 */
+>  #define FMC2_BCR1_CCLKEN		BIT(20)
+> @@ -67,8 +73,23 @@
+>  #define FMC2_CFGR_CCLKEN		BIT(20)
+>  #define FMC2_CFGR_FMC2EN		BIT(31)
 >  
->  /* Register: FMC2_BTRx/FMC2_BWTRx */
-> @@ -60,6 +62,11 @@
->  #define FMC2_PCSCNTR_CSCOUNT		GENMASK(15, 0)
->  #define FMC2_PCSCNTR_CNTBEN(x)		BIT((x) + 16)
->  
-> +/* Register: FMC2_CFGR */
-> +#define FMC2_CFGR_CLKDIV		GENMASK(19, 16)
-> +#define FMC2_CFGR_CCLKEN		BIT(20)
-> +#define FMC2_CFGR_FMC2EN		BIT(31)
+> +/* Register: FMC2_SR */
+> +#define FMC2_SR_ISOST			GENMASK(1, 0)
+> +
+> +/* Register: FMC2_CIDCFGR */
+> +#define FMC2_CIDCFGR_CFEN		BIT(0)
+> +#define FMC2_CIDCFGR_SEMEN		BIT(1)
+> +#define FMC2_CIDCFGR_SCID		GENMASK(6, 4)
+> +#define FMC2_CIDCFGR_SEMWLC1		BIT(17)
+> +
+> +/* Register: FMC2_SEMCR */
+> +#define FMC2_SEMCR_SEM_MUTEX		BIT(0)
+> +#define FMC2_SEMCR_SEMCID		GENMASK(6, 4)
 > +
 >  #define FMC2_MAX_EBI_CE			4
 >  #define FMC2_MAX_BANKS			5
+> +#define FMC2_MAX_RESOURCES		6
+> +#define FMC2_CID1			1
 >  
-> @@ -76,6 +83,11 @@
->  #define FMC2_BCR_MTYP_PSRAM		0x1
->  #define FMC2_BCR_MTYP_NOR		0x2
->  
-> +#define FMC2_BCR_CSCOUNT_0		0x0
-> +#define FMC2_BCR_CSCOUNT_1		0x1
-> +#define FMC2_BCR_CSCOUNT_64		0x2
-> +#define FMC2_BCR_CSCOUNT_256		0x3
-> +
->  #define FMC2_BXTR_EXTMOD_A		0x0
->  #define FMC2_BXTR_EXTMOD_B		0x1
->  #define FMC2_BXTR_EXTMOD_C		0x2
-> @@ -90,6 +102,7 @@
->  #define FMC2_BTR_CLKDIV_MAX		0xf
->  #define FMC2_BTR_DATLAT_MAX		0xf
->  #define FMC2_PCSCNTR_CSCOUNT_MAX	0xff
-> +#define FMC2_CFGR_CLKDIV_MAX		0xf
->  
->  enum stm32_fmc2_ebi_bank {
->  	FMC2_EBI1 = 0,
-> @@ -103,7 +116,8 @@ enum stm32_fmc2_ebi_register_type {
->  	FMC2_REG_BCR = 1,
->  	FMC2_REG_BTR,
->  	FMC2_REG_BWTR,
-> -	FMC2_REG_PCSCNTR
-> +	FMC2_REG_PCSCNTR,
-> +	FMC2_REG_CFGR
+>  #define FMC2_BCR_CPSIZE_0		0x0
+>  #define FMC2_BCR_CPSIZE_128		0x1
+> @@ -163,6 +184,7 @@ struct stm32_fmc2_ebi_data {
+>  	u32 fmc2_enable_reg;
+>  	u32 fmc2_enable_bit;
+>  	int (*nwait_used_by_ctrls)(struct stm32_fmc2_ebi *ebi);
+> +	int (*check_rif)(struct stm32_fmc2_ebi *ebi, u32 resource);
 >  };
 >  
->  enum stm32_fmc2_ebi_transaction_type {
-> @@ -134,9 +148,27 @@ enum stm32_fmc2_ebi_cpsize {
->  	FMC2_CPSIZE_1024 = 1024
->  };
->  
-> +enum stm32_fmc2_ebi_cscount {
-> +	FMC2_CSCOUNT_0 = 0,
-> +	FMC2_CSCOUNT_1 = 1,
-> +	FMC2_CSCOUNT_64 = 64,
-> +	FMC2_CSCOUNT_256 = 256
-> +};
-> +
-> +struct stm32_fmc2_ebi;
-> +
-> +struct stm32_fmc2_ebi_data {
-> +	const struct stm32_fmc2_prop *child_props;
-> +	unsigned int nb_child_props;
-> +	u32 fmc2_enable_reg;
-> +	u32 fmc2_enable_bit;
-> +	int (*nwait_used_by_ctrls)(struct stm32_fmc2_ebi *ebi);
-> +};
-> +
 >  struct stm32_fmc2_ebi {
->  	struct clk clk;
+> @@ -170,6 +192,7 @@ struct stm32_fmc2_ebi {
 >  	fdt_addr_t io_base;
-> +	const struct stm32_fmc2_ebi_data *data;
+>  	const struct stm32_fmc2_ebi_data *data;
 >  	u8 bank_assigned;
+> +	bool access_granted;
 >  };
 >  
-> @@ -296,6 +328,24 @@ static u32 stm32_fmc2_ebi_ns_to_clk_period(struct stm32_fmc2_ebi *ebi,
->  	return DIV_ROUND_UP(nb_clk_cycles, clk_period);
+>  /*
+> @@ -241,6 +264,28 @@ static int stm32_fmc2_ebi_check_sync_trans(struct stm32_fmc2_ebi *ebi,
+>  	return -EINVAL;
 >  }
 >  
-> +static u32 stm32_fmc2_ebi_mp25_ns_to_clk_period(struct stm32_fmc2_ebi *ebi,
-> +						int cs, u32 setup)
+> +static int stm32_fmc2_ebi_mp25_check_cclk(struct stm32_fmc2_ebi *ebi,
+> +					  const struct stm32_fmc2_prop *prop,
+> +					  int cs)
 > +{
-> +	u32 nb_clk_cycles = stm32_fmc2_ebi_ns_to_clock_cycles(ebi, cs, setup);
-> +	u32 cfgr = readl(ebi->io_base + FMC2_CFGR);
-> +	u32 clk_period;
+> +	if (!ebi->access_granted)
+> +		return -EACCES;
 > +
-> +	if (cfgr & FMC2_CFGR_CCLKEN) {
-> +		clk_period = FIELD_GET(FMC2_CFGR_CLKDIV, cfgr) + 1;
-> +	} else {
-> +		u32 btr = readl(ebi->io_base + FMC2_BTR(cs));
-> +
-> +		clk_period = FIELD_GET(FMC2_BTR_CLKDIV, btr) + 1;
-> +	}
-> +
-> +	return DIV_ROUND_UP(nb_clk_cycles, clk_period);
+> +	return stm32_fmc2_ebi_check_sync_trans(ebi, prop, cs);
 > +}
 > +
->  static int stm32_fmc2_ebi_get_reg(int reg_type, int cs, u32 *reg)
->  {
->  	switch (reg_type) {
-> @@ -311,6 +361,9 @@ static int stm32_fmc2_ebi_get_reg(int reg_type, int cs, u32 *reg)
->  	case FMC2_REG_PCSCNTR:
->  		*reg = FMC2_PCSCNTR;
->  		break;
-> +	case FMC2_REG_CFGR:
-> +		*reg = FMC2_CFGR;
-> +		break;
->  	default:
->  		return -EINVAL;
->  	}
-> @@ -649,6 +702,26 @@ static int stm32_fmc2_ebi_set_clk_period(struct stm32_fmc2_ebi *ebi,
->  	return 0;
->  }
->  
-> +static int stm32_fmc2_ebi_mp25_set_clk_period(struct stm32_fmc2_ebi *ebi,
-> +					      const struct stm32_fmc2_prop *prop,
-> +					      int cs, u32 setup)
+> +static int stm32_fmc2_ebi_mp25_check_clk_period(struct stm32_fmc2_ebi *ebi,
+> +						const struct stm32_fmc2_prop *prop,
+> +						int cs)
 > +{
 > +	u32 cfgr = readl(ebi->io_base + FMC2_CFGR);
-> +	u32 val;
 > +
-> +	if (cfgr & FMC2_CFGR_CCLKEN) {
-> +		val = setup ? clamp_val(setup - 1, 1, FMC2_CFGR_CLKDIV_MAX) : 1;
-> +		val = FIELD_PREP(FMC2_CFGR_CLKDIV, val);
-> +		clrsetbits_le32(ebi->io_base + FMC2_CFGR, FMC2_CFGR_CLKDIV, val);
-> +	} else {
-> +		val = setup ? clamp_val(setup - 1, 1, FMC2_BTR_CLKDIV_MAX) : 1;
-> +		val = FIELD_PREP(FMC2_BTR_CLKDIV, val);
-> +		clrsetbits_le32(ebi->io_base + FMC2_BTR(cs), FMC2_BTR_CLKDIV, val);
-> +	}
+> +	if (cfgr & FMC2_CFGR_CCLKEN && !ebi->access_granted)
+> +		return -EACCES;
 > +
-> +	return 0;
+> +	return stm32_fmc2_ebi_check_sync_trans(ebi, prop, cs);
 > +}
 > +
->  static int stm32_fmc2_ebi_set_data_latency(struct stm32_fmc2_ebi *ebi,
->  					   const struct stm32_fmc2_prop *prop,
->  					   int cs, u32 setup)
-> @@ -689,6 +762,27 @@ static int stm32_fmc2_ebi_set_max_low_pulse(struct stm32_fmc2_ebi *ebi,
->  	return 0;
->  }
->  
-> +static int stm32_fmc2_ebi_mp25_set_max_low_pulse(struct stm32_fmc2_ebi *ebi,
-> +						 const struct stm32_fmc2_prop *prop,
-> +						 int cs, u32 setup)
-> +{
-> +	u32 val;
-> +
-> +	if (setup == FMC2_CSCOUNT_0)
-> +		val = FIELD_PREP(FMC2_BCR_CSCOUNT, FMC2_BCR_CSCOUNT_0);
-> +	else if (setup == FMC2_CSCOUNT_1)
-> +		val = FIELD_PREP(FMC2_BCR_CSCOUNT, FMC2_BCR_CSCOUNT_1);
-> +	else if (setup <= FMC2_CSCOUNT_64)
-> +		val = FIELD_PREP(FMC2_BCR_CSCOUNT, FMC2_BCR_CSCOUNT_64);
-> +	else
-> +		val = FIELD_PREP(FMC2_BCR_CSCOUNT, FMC2_BCR_CSCOUNT_256);
-> +
-> +	clrsetbits_le32(ebi->io_base + FMC2_BCR(cs),
-> +			FMC2_BCR_CSCOUNT, val);
-> +
-> +	return 0;
-> +}
-> +
->  static const struct stm32_fmc2_prop stm32_fmc2_child_props[] = {
->  	/* st,fmc2-ebi-cs-trans-type must be the first property */
+>  static int stm32_fmc2_ebi_check_async_trans(struct stm32_fmc2_ebi *ebi,
+>  					    const struct stm32_fmc2_prop *prop,
+>  					    int cs)
+> @@ -960,7 +1005,7 @@ static const struct stm32_fmc2_prop stm32_fmc2_mp25_child_props[] = {
+>  		.bprop = true,
+>  		.reg_type = FMC2_REG_CFGR,
+>  		.reg_mask = FMC2_CFGR_CCLKEN,
+> -		.check = stm32_fmc2_ebi_check_sync_trans,
+> +		.check = stm32_fmc2_ebi_mp25_check_cclk,
+>  		.set = stm32_fmc2_ebi_set_bit_field,
+>  	},
 >  	{
-> @@ -854,6 +948,171 @@ static const struct stm32_fmc2_prop stm32_fmc2_child_props[] = {
+> @@ -1058,7 +1103,7 @@ static const struct stm32_fmc2_prop stm32_fmc2_mp25_child_props[] = {
+>  	{
+>  		.name = "st,fmc2-ebi-cs-clk-period-ns",
+>  		.reset_val = FMC2_CFGR_CLKDIV_MAX + 1,
+> -		.check = stm32_fmc2_ebi_check_sync_trans,
+> +		.check = stm32_fmc2_ebi_mp25_check_clk_period,
+>  		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
+>  		.set = stm32_fmc2_ebi_mp25_set_clk_period,
+>  	},
+> @@ -1113,6 +1158,70 @@ static const struct stm32_fmc2_prop stm32_fmc2_mp25_child_props[] = {
 >  	},
 >  };
 >  
-> +static const struct stm32_fmc2_prop stm32_fmc2_mp25_child_props[] = {
-> +	/* st,fmc2-ebi-cs-trans-type must be the first property */
-> +	{
-> +		.name = "st,fmc2-ebi-cs-transaction-type",
-> +		.mprop = true,
-> +		.set = stm32_fmc2_ebi_set_trans_type,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-cclk-enable",
-> +		.bprop = true,
-> +		.reg_type = FMC2_REG_CFGR,
-> +		.reg_mask = FMC2_CFGR_CCLKEN,
-> +		.check = stm32_fmc2_ebi_check_sync_trans,
-> +		.set = stm32_fmc2_ebi_set_bit_field,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-mux-enable",
-> +		.bprop = true,
-> +		.reg_type = FMC2_REG_BCR,
-> +		.reg_mask = FMC2_BCR_MUXEN,
-> +		.check = stm32_fmc2_ebi_check_mux,
-> +		.set = stm32_fmc2_ebi_set_bit_field,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-buswidth",
-> +		.reset_val = FMC2_BUSWIDTH_16,
-> +		.set = stm32_fmc2_ebi_set_buswidth,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-waitpol-high",
-> +		.bprop = true,
-> +		.reg_type = FMC2_REG_BCR,
-> +		.reg_mask = FMC2_BCR_WAITPOL,
-> +		.set = stm32_fmc2_ebi_set_bit_field,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-waitcfg-enable",
-> +		.bprop = true,
-> +		.reg_type = FMC2_REG_BCR,
-> +		.reg_mask = FMC2_BCR_WAITCFG,
-> +		.check = stm32_fmc2_ebi_check_waitcfg,
-> +		.set = stm32_fmc2_ebi_set_bit_field,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-wait-enable",
-> +		.bprop = true,
-> +		.reg_type = FMC2_REG_BCR,
-> +		.reg_mask = FMC2_BCR_WAITEN,
-> +		.check = stm32_fmc2_ebi_check_sync_trans,
-> +		.set = stm32_fmc2_ebi_set_bit_field,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-asyncwait-enable",
-> +		.bprop = true,
-> +		.reg_type = FMC2_REG_BCR,
-> +		.reg_mask = FMC2_BCR_ASYNCWAIT,
-> +		.check = stm32_fmc2_ebi_check_async_trans,
-> +		.set = stm32_fmc2_ebi_set_bit_field,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-cpsize",
-> +		.check = stm32_fmc2_ebi_check_cpsize,
-> +		.set = stm32_fmc2_ebi_set_cpsize,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-byte-lane-setup-ns",
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_set_bl_setup,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-address-setup-ns",
-> +		.reg_type = FMC2_REG_BTR,
-> +		.reset_val = FMC2_BXTR_ADDSET_MAX,
-> +		.check = stm32_fmc2_ebi_check_async_trans,
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_set_address_setup,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-address-hold-ns",
-> +		.reg_type = FMC2_REG_BTR,
-> +		.reset_val = FMC2_BXTR_ADDHLD_MAX,
-> +		.check = stm32_fmc2_ebi_check_address_hold,
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_set_address_hold,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-data-setup-ns",
-> +		.reg_type = FMC2_REG_BTR,
-> +		.reset_val = FMC2_BXTR_DATAST_MAX,
-> +		.check = stm32_fmc2_ebi_check_async_trans,
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_set_data_setup,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-bus-turnaround-ns",
-> +		.reg_type = FMC2_REG_BTR,
-> +		.reset_val = FMC2_BXTR_BUSTURN_MAX + 1,
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_set_bus_turnaround,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-data-hold-ns",
-> +		.reg_type = FMC2_REG_BTR,
-> +		.check = stm32_fmc2_ebi_check_async_trans,
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_set_data_hold,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-clk-period-ns",
-> +		.reset_val = FMC2_CFGR_CLKDIV_MAX + 1,
-> +		.check = stm32_fmc2_ebi_check_sync_trans,
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_mp25_set_clk_period,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-data-latency-ns",
-> +		.check = stm32_fmc2_ebi_check_sync_trans,
-> +		.calculate = stm32_fmc2_ebi_mp25_ns_to_clk_period,
-> +		.set = stm32_fmc2_ebi_set_data_latency,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-write-address-setup-ns",
-> +		.reg_type = FMC2_REG_BWTR,
-> +		.reset_val = FMC2_BXTR_ADDSET_MAX,
-> +		.check = stm32_fmc2_ebi_check_async_trans,
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_set_address_setup,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-write-address-hold-ns",
-> +		.reg_type = FMC2_REG_BWTR,
-> +		.reset_val = FMC2_BXTR_ADDHLD_MAX,
-> +		.check = stm32_fmc2_ebi_check_address_hold,
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_set_address_hold,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-write-data-setup-ns",
-> +		.reg_type = FMC2_REG_BWTR,
-> +		.reset_val = FMC2_BXTR_DATAST_MAX,
-> +		.check = stm32_fmc2_ebi_check_async_trans,
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_set_data_setup,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-write-bus-turnaround-ns",
-> +		.reg_type = FMC2_REG_BWTR,
-> +		.reset_val = FMC2_BXTR_BUSTURN_MAX + 1,
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_set_bus_turnaround,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-write-data-hold-ns",
-> +		.reg_type = FMC2_REG_BWTR,
-> +		.check = stm32_fmc2_ebi_check_async_trans,
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_set_data_hold,
-> +	},
-> +	{
-> +		.name = "st,fmc2-ebi-cs-max-low-pulse-ns",
-> +		.calculate = stm32_fmc2_ebi_ns_to_clock_cycles,
-> +		.set = stm32_fmc2_ebi_mp25_set_max_low_pulse,
-> +	},
-> +};
+> +static int stm32_fmc2_ebi_mp25_check_rif(struct stm32_fmc2_ebi *ebi, u32 resource)
+> +{
+> +	u32 seccfgr, cidcfgr, semcr;
+> +	int cid;
+> +
+> +	if (resource >= FMC2_MAX_RESOURCES)
+> +		return -EINVAL;
+> +
+> +	seccfgr = readl(ebi->io_base + FMC2_SECCFGR);
+> +	if (seccfgr & BIT(resource)) {
+> +		if (resource)
+> +			log_err("resource %d is configured as secure\n",
+> +				resource);
+> +
+> +		return -EACCES;
+> +	}
+> +
+> +	cidcfgr = readl(ebi->io_base + FMC2_CIDCFGR(resource));
+> +	if (!(cidcfgr & FMC2_CIDCFGR_CFEN))
+> +		/* CID filtering is turned off: access granted */
+> +		return 0;
+> +
+> +	if (!(cidcfgr & FMC2_CIDCFGR_SEMEN)) {
+> +		/* Static CID mode */
+> +		cid = FIELD_GET(FMC2_CIDCFGR_SCID, cidcfgr);
+> +		if (cid != FMC2_CID1) {
+> +			if (resource)
+> +				log_err("static CID%d set for resource %d\n",
+> +					cid, resource);
+> +
+> +			return -EACCES;
+> +		}
+> +
+> +		return 0;
+> +	}
+> +
+> +	/* Pass-list with semaphore mode */
+> +	if (!(cidcfgr & FMC2_CIDCFGR_SEMWLC1)) {
+> +		if (resource)
+> +			log_err("CID1 is block-listed for resource %d\n",
+> +				resource);
+> +
+> +		return -EACCES;
+> +	}
+> +
+> +	semcr = readl(ebi->io_base + FMC2_SEMCR(resource));
+> +	if (!(semcr & FMC2_SEMCR_SEM_MUTEX)) {
+> +		setbits_le32(ebi->io_base + FMC2_SEMCR(resource),
+> +			     FMC2_SEMCR_SEM_MUTEX);
+> +		semcr = readl(ebi->io_base + FMC2_SEMCR(resource));
+> +	}
+> +
+> +	cid = FIELD_GET(FMC2_SEMCR_SEMCID, semcr);
+> +	if (cid != FMC2_CID1) {
+> +		if (resource)
+> +			log_err("resource %d is already used by CID%d\n",
+> +				resource, cid);
+> +
+> +		return -EACCES;
+> +	}
+> +
+> +	return 0;
+> +}
 > +
 >  static int stm32_fmc2_ebi_parse_prop(struct stm32_fmc2_ebi *ebi,
 >  				     ofnode node,
 >  				     const struct stm32_fmc2_prop *prop,
-> @@ -915,7 +1174,7 @@ static void stm32_fmc2_ebi_disable_bank(struct stm32_fmc2_ebi *ebi, int cs)
->  }
->  
->  /* NWAIT signal can not be connected to EBI controller and NAND controller */
-> -static bool stm32_fmc2_ebi_nwait_used_by_ctrls(struct stm32_fmc2_ebi *ebi)
-> +static int stm32_fmc2_ebi_nwait_used_by_ctrls(struct stm32_fmc2_ebi *ebi)
->  {
->  	unsigned int cs;
->  	u32 bcr;
-> @@ -926,16 +1185,19 @@ static bool stm32_fmc2_ebi_nwait_used_by_ctrls(struct stm32_fmc2_ebi *ebi)
->  
->  		bcr = readl(ebi->io_base + FMC2_BCR(cs));
->  		if ((bcr & FMC2_BCR_WAITEN || bcr & FMC2_BCR_ASYNCWAIT) &&
-> -		    ebi->bank_assigned & BIT(FMC2_NAND))
-> -			return true;
-> +		    ebi->bank_assigned & BIT(FMC2_NAND)) {
-> +			log_err("NWAIT signal connected to EBI and NAND controllers\n");
-> +			return -EINVAL;
-> +		}
->  	}
->  
-> -	return false;
-> +	return 0;
->  }
+> @@ -1196,6 +1305,9 @@ static int stm32_fmc2_ebi_nwait_used_by_ctrls(struct stm32_fmc2_ebi *ebi)
 >  
 >  static void stm32_fmc2_ebi_enable(struct stm32_fmc2_ebi *ebi)
 >  {
-> -	setbits_le32(ebi->io_base + FMC2_BCR1, FMC2_BCR1_FMC2EN);
-> +	setbits_le32(ebi->io_base + ebi->data->fmc2_enable_reg,
-> +		     ebi->data->fmc2_enable_bit);
->  }
->  
->  static int stm32_fmc2_ebi_setup_cs(struct stm32_fmc2_ebi *ebi,
-> @@ -946,8 +1208,8 @@ static int stm32_fmc2_ebi_setup_cs(struct stm32_fmc2_ebi *ebi,
->  
->  	stm32_fmc2_ebi_disable_bank(ebi, cs);
->  
-> -	for (i = 0; i < ARRAY_SIZE(stm32_fmc2_child_props); i++) {
-> -		const struct stm32_fmc2_prop *p = &stm32_fmc2_child_props[i];
-> +	for (i = 0; i < ebi->data->nb_child_props; i++) {
-> +		const struct stm32_fmc2_prop *p = &ebi->data->child_props[i];
->  
->  		ret = stm32_fmc2_ebi_parse_prop(ebi, node, p, cs);
->  		if (ret) {
-> @@ -1004,9 +1266,10 @@ static int stm32_fmc2_ebi_parse_dt(struct udevice *dev,
->  		return -ENODEV;
->  	}
->  
-> -	if (stm32_fmc2_ebi_nwait_used_by_ctrls(ebi)) {
-> -		dev_err(dev, "NWAIT signal connected to EBI and NAND controllers\n");
-> -		return -EINVAL;
-> +	if (ebi->data->nwait_used_by_ctrls) {
-> +		ret = ebi->data->nwait_used_by_ctrls(ebi);
-> +		if (ret)
-> +			return ret;
->  	}
->  
->  	stm32_fmc2_ebi_enable(ebi);
-> @@ -1020,6 +1283,10 @@ static int stm32_fmc2_ebi_probe(struct udevice *dev)
->  	struct reset_ctl reset;
->  	int ret;
->  
-> +	ebi->data = (void *)dev_get_driver_data(dev);
-> +	if (!ebi->data)
-> +		return -EINVAL;
+> +	if (!ebi->access_granted)
+> +		return;
 > +
->  	ebi->io_base = dev_read_addr(dev);
->  	if (ebi->io_base == FDT_ADDR_T_NONE)
->  		return -EINVAL;
-> @@ -1042,8 +1309,30 @@ static int stm32_fmc2_ebi_probe(struct udevice *dev)
+>  	setbits_le32(ebi->io_base + ebi->data->fmc2_enable_reg,
+>  		     ebi->data->fmc2_enable_bit);
+>  }
+> @@ -1249,6 +1361,14 @@ static int stm32_fmc2_ebi_parse_dt(struct udevice *dev,
+>  			return -EINVAL;
+>  		}
+>  
+> +		if (ebi->data->check_rif) {
+> +			ret = ebi->data->check_rif(ebi, bank + 1);
+> +			if (ret) {
+> +				dev_err(dev, "bank access failed: %d\n", bank);
+> +				return ret;
+> +			}
+> +		}
+> +
+>  		if (bank < FMC2_MAX_EBI_CE) {
+>  			ret = stm32_fmc2_ebi_setup_cs(ebi, child, bank);
+>  			if (ret) {
+> @@ -1306,6 +1426,21 @@ static int stm32_fmc2_ebi_probe(struct udevice *dev)
+>  		reset_deassert(&reset);
+>  	}
+>  
+> +	/* Check if CFGR register can be modified */
+> +	ebi->access_granted = true;
+> +	if (ebi->data->check_rif) {
+> +		ret = ebi->data->check_rif(ebi, 0);
+> +		if (ret) {
+> +			ebi->access_granted = false;
+> +
+> +			/* In case of CFGR is secure, just check that the FMC2 is enabled */
+> +			if (readl(ebi->io_base + FMC2_SR) & FMC2_SR_ISOST) {
+> +				dev_err(dev, "FMC2 is not ready to be used.\n");
+> +				return -EACCES;
+> +			}
+> +		}
+> +	}
+> +
 >  	return stm32_fmc2_ebi_parse_dt(dev, ebi);
 >  }
 >  
-> +static const struct stm32_fmc2_ebi_data stm32_fmc2_ebi_mp1_data = {
-> +	.child_props = stm32_fmc2_child_props,
-> +	.nb_child_props = ARRAY_SIZE(stm32_fmc2_child_props),
-> +	.fmc2_enable_reg = FMC2_BCR1,
-> +	.fmc2_enable_bit = FMC2_BCR1_FMC2EN,
-> +	.nwait_used_by_ctrls = stm32_fmc2_ebi_nwait_used_by_ctrls,
-> +};
-> +
-> +static const struct stm32_fmc2_ebi_data stm32_fmc2_ebi_mp25_data = {
-> +	.child_props = stm32_fmc2_mp25_child_props,
-> +	.nb_child_props = ARRAY_SIZE(stm32_fmc2_mp25_child_props),
-> +	.fmc2_enable_reg = FMC2_CFGR,
-> +	.fmc2_enable_bit = FMC2_CFGR_FMC2EN,
-> +};
-> +
->  static const struct udevice_id stm32_fmc2_ebi_match[] = {
-> -	{.compatible = "st,stm32mp1-fmc2-ebi"},
-> +	{
-> +		.compatible = "st,stm32mp1-fmc2-ebi",
-> +		.data = (ulong)&stm32_fmc2_ebi_mp1_data,
-> +	},
-> +	{
-> +		.compatible = "st,stm32mp25-fmc2-ebi",
-> +		.data = (ulong)&stm32_fmc2_ebi_mp25_data,
-> +	},
->  	{ /* Sentinel */ }
+> @@ -1322,6 +1457,7 @@ static const struct stm32_fmc2_ebi_data stm32_fmc2_ebi_mp25_data = {
+>  	.nb_child_props = ARRAY_SIZE(stm32_fmc2_mp25_child_props),
+>  	.fmc2_enable_reg = FMC2_CFGR,
+>  	.fmc2_enable_bit = FMC2_CFGR_FMC2EN,
+> +	.check_rif = stm32_fmc2_ebi_mp25_check_rif,
 >  };
 >  
+>  static const struct udevice_id stm32_fmc2_ebi_match[] = {
+
 Applied on u-boot-stm32/master 
