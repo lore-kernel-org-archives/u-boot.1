@@ -4,77 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D98EC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 11:13:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29BAEC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 11:29:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A45E88734;
-	Fri, 19 Apr 2024 13:13:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9AD5D88738;
+	Fri, 19 Apr 2024 13:29:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wsRr0oag";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fTmRyp25";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1BA7188735; Fri, 19 Apr 2024 13:13:51 +0200 (CEST)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id A8D088873B; Fri, 19 Apr 2024 13:29:34 +0200 (CEST)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00DBD886D1
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 13:13:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0C9888735
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 13:29:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-41550858cabso13951695e9.2
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 04:13:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-418c0d83e61so20298665e9.3
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 04:29:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713525228; x=1714130028; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DeXesVcHFWdfMqedJSzec2yJTgNJP3Q1UYzEtWWWoBk=;
- b=wsRr0oagcN5XHZMgYaNu4tnZF3JihgouOWXG2zK92qxq2gNJtl0/b23/OPJ5Vq7tkO
- myq6h321sfO3phou10YBMpgzASoshYoK2OT2cQ854VEe62T+VraoyfaSiA7MVM/yFRJH
- HT/THzt9X5FzLgNEYdjMKkUA+wE44bz16OTXHpNSCcDlOWgM2v3J8oi5qaUO+luEQWqf
- N2U8du8NP7Mr5o+qZWXe6jAC1lEoIx5qwiOVnM380A+/82a4RNSWobtre5mvp6/qhPED
- V4zyCm1wVktOTHWOI/TAPYvhrHsSH3Suine2g9sQjQOYaY6fXwfhQRLJUmmaxfYOk//Q
- 22Yw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713525228; x=1714130028;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1713526172; x=1714130972; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DeXesVcHFWdfMqedJSzec2yJTgNJP3Q1UYzEtWWWoBk=;
- b=WoRTvM5F8/EBYUeEwMKlhR6LTV3n5VBMVyHwQnd5mGecpWVXNQlnc4EfMRas2mQ7UB
- wjoH+niqsBBrqc/ieZAU/nvCunYlPhC1Wm2REQSsr4dfq3OiBPBwn9RhCcSE/hoJR8do
- B3AylVExzBQYtdjoGLS+OfBFF99q35VAmzdBh5E0HLTZ9/cUTraeHYVKngTJy/0A+hEv
- Wulv5JYTNjhS8RdvbCLaESA/y5vs4a4UMXwYKvdHqe56uV/J9fXYkzMyZ2qfXm3bm3fi
- ZqcQBGAoWlabeKcLokTDOBoLVtoKYQC1lXggOk4c/N10t8zI8BcZ20omvQCN8c59y7Je
- m4Fg==
-X-Gm-Message-State: AOJu0YzysHf4Wn9irJUHrqDEsii/uCQYh8M+zoDbuHQxpta5GELCQOk0
- j/C2FGHmpZ3Rc4AhSbQI0CV/9EjWMorkT+iAkEi2Ip2/0GddrM3ltFJF1RcsnFo=
-X-Google-Smtp-Source: AGHT+IEZbe3qAJZDlxjZOnAndBaglQrNBlzCxEFORLUCRBBRNGEM3k2PZ/FIShnrew0kxnkv8dltlw==
-X-Received: by 2002:adf:e4c7:0:b0:346:c5d8:38 with SMTP id
- v7-20020adfe4c7000000b00346c5d80038mr1075026wrm.10.1713525228332; 
- Fri, 19 Apr 2024 04:13:48 -0700 (PDT)
-Received: from hera (ppp176092141112.access.hol.gr. [176.92.141.112])
- by smtp.gmail.com with ESMTPSA id
- h1-20020a5d6881000000b0034615862c64sm4162512wru.110.2024.04.19.04.13.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Apr 2024 04:13:48 -0700 (PDT)
-Date: Fri, 19 Apr 2024 14:13:45 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: Masahisa Kojima <masahisa.kojima@linaro.org>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Re: [PATCH] efi_loader: use event callback for initrd deregistration
-Message-ID: <ZiJR6bqj4BFRjqES@hera>
-References: <20231204043014.122793-1-masahisa.kojima@linaro.org>
- <CAC_iWj+giW2Wyagi2eH9668G2HtU=BXuhjUvTpPWHFH5sA23rA@mail.gmail.com>
+ bh=Z9ipMV/1g0JvuVaGIGCKH1RfILI7bAYuRCmB0cH0rcU=;
+ b=fTmRyp25+W4DACvSfzVivt58DlvxP72bC/ldMLMj5cuIK5ZeJN4oBIYMu+hSEDcvR2
+ n/RDniFYovVNpcAB3EUslD9vKufNA+yibPUtHIMMzBm1xIikH6geWjYsoFIxKwalyzyA
+ teZcMK0/11YBRmRNr7KOuxlifJsXwjdXoypldt2DeA0hKSYSPkrrococz2D4ASbdwoV8
+ O73BvIZ6KmR8L0gUXxg4JxYEsbMizQ1b6MbU8klX6P+GKrWxOpB2/GecKlAogyvfh6OC
+ tAdv+NJdH1WDWJSpkorXNXI5/n1JUtkhPz7JZU+e4lAYy2jjR7sJWZpEnHyanMuGhOr2
+ zWBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713526172; x=1714130972;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Z9ipMV/1g0JvuVaGIGCKH1RfILI7bAYuRCmB0cH0rcU=;
+ b=e6a6JL77NPx5CwmzbdBncFFst/GmyFRslQ/I+5MZACZeVg10/61Ws2Ghf4wGqtc1ox
+ r8TbViV2bj8ryXdQIHCxs+MwuRg2Ep0AfxcsFd/YwTkQqRxvv3f2MTmQiRnxI98tNwkB
+ vg4cpaSQwd9oEy6ygUH1pJBT1+d7Vt5S0/DYSi0NJ4lmtrmcRnWS6VAqYjwUR/IXgEuc
+ 6Yg5z5tlrBIPBoSOa5kdxKcvcUnmrMek0t/sW5J3iohDqa7LcvPt2bUwiJWzZgev9rkH
+ vRECFNehfnIQG0w9CQzw3a60yqhCaTJi4GZifFTQYnUK3SqCJFcOdcM2vkQygQXAUAi1
+ engg==
+X-Gm-Message-State: AOJu0YyrLxq1S6aprFvN2hAYOz9kn8FS3Y3NCkQjHMvyXQuXg+JKkjEQ
+ r6aj1iwi3hqF4L04Mf+y4RxnED2yK7PqFbVRWSvoCHIGkWDhfUGQtNWkWbx9rxv1KkZD9XaJitW
+ TIBDy/mgtta98J00Y+EEIFbcIwUQ=
+X-Google-Smtp-Source: AGHT+IEdZnkIAENnrteIvYWg3E8EHHWtNpCiRU3+C4g+YYJ7ON9nQSzrk5jJR40AiqwRYiLLfSS6PPbMijl545PcA24=
+X-Received: by 2002:a05:600c:19cc:b0:417:e60b:91f6 with SMTP id
+ u12-20020a05600c19cc00b00417e60b91f6mr1668401wmq.4.1713526172004; Fri, 19 Apr
+ 2024 04:29:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAC_iWj+giW2Wyagi2eH9668G2HtU=BXuhjUvTpPWHFH5sA23rA@mail.gmail.com>
+References: <20240131065721.4245-1-clamor95@gmail.com>
+In-Reply-To: <20240131065721.4245-1-clamor95@gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Fri, 19 Apr 2024 14:29:20 +0300
+Message-ID: <CAPVz0n10Fb4H-Haj+s-Jjt_UgpWXSSWOFdJVeJATwTr22Do5_g@mail.gmail.com>
+Subject: Re: [PATCH v2 0/7] Tegra panel improvements
+To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
+ Simon Glass <sjg@chromium.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Anton Bambura <jenneron@protonmail.com>,
+ =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,165 +90,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Kojima-san
+Hello Tom! This patch set is hanging in patchwork for 3 month
+without any comments. If no one has anything to say, may you
+pick it into master?
 
-Apologies but for some reason we failed to pull this patch....
-In meantime some parts of the bootefi.c code -- specifically theinitrd
-cleanup, have been moved to efi_helper.c
+Best regards,
+Svyatoslav R.
 
-Any chance you can rebase this? If not I'll try to find some time to do it
-
-/Ilias
-On Mon, Dec 04, 2023 at 01:38:17PM +0200, Ilias Apalodimas wrote:
-> Thanks for cleaning this up!
+=D1=81=D1=80, 31 =D1=81=D1=96=D1=87. 2024=E2=80=AF=D1=80. =D0=BE 08:57 Svya=
+toslav Ryhel <clamor95@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
 >
-> On Mon, 4 Dec 2023 at 06:31, Masahisa Kojima <masahisa.kojima@linaro.org> wrote:
-> >
-> > Currently efi_initrd_deregister() is called in bootefi.c
-> > when the image started from bootefi command returns.
-> > Since efi_guid_event_group_return_to_efibootmgr event is
-> > implemented, so let's use this event for invoking
-> > initrd deregistration.
-> >
-> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
-> > ---
-> > Note that this patch can be applied to u-boot/next.
-> > This patch requires the patch e0d1a1ea68("efi_loader: add return to efibootmgr event group")
-> >
-> >  cmd/bootefi.c                    |  5 --
-> >  lib/efi_loader/efi_load_initrd.c | 82 +++++++++++++++++++++-----------
-> >  2 files changed, 55 insertions(+), 32 deletions(-)
+> The current patch set improves the logic of existing panels and
+> bridge used by Tegra 3 devices and brings support for additional
+> DSI panels used by Tegra 4 devices.
 >
-> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> New and existing drivers are fully reusable, contain no device
+> specific parts, and are written according to existing datasheets.
 >
-> >
-> > diff --git a/cmd/bootefi.c b/cmd/bootefi.c
-> > index 4d74969ad6..e52bd3f743 100644
-> > --- a/cmd/bootefi.c
-> > +++ b/cmd/bootefi.c
-> > @@ -390,11 +390,6 @@ static efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options)
-> >  out:
-> >         free(load_options);
-> >
-> > -       if (IS_ENABLED(CONFIG_EFI_LOAD_FILE2_INITRD)) {
-> > -               if (efi_initrd_deregister() != EFI_SUCCESS)
-> > -                       log_err("Failed to remove loadfile2 for initrd\n");
-> > -       }
-> > -
-> >         /* Notify EFI_EVENT_GROUP_RETURN_TO_EFIBOOTMGR event group. */
-> >         list_for_each_entry(evt, &efi_events, link) {
-> >                 if (evt->group &&
-> > diff --git a/lib/efi_loader/efi_load_initrd.c b/lib/efi_loader/efi_load_initrd.c
-> > index 193433782c..7ca7785c04 100644
-> > --- a/lib/efi_loader/efi_load_initrd.c
-> > +++ b/lib/efi_loader/efi_load_initrd.c
-> > @@ -184,6 +184,50 @@ out:
-> >         return ret;
-> >  }
-> >
-> > +/**
-> > + * efi_initrd_deregister() - delete the handle for loading initial RAM disk
-> > + *
-> > + * This will delete the handle containing the Linux specific vendor device
-> > + * path and EFI_LOAD_FILE2_PROTOCOL for loading an initrd
-> > + *
-> > + * Return:     status code
-> > + */
-> > +efi_status_t efi_initrd_deregister(void)
-> > +{
-> > +       efi_status_t ret;
-> > +
-> > +       if (!efi_initrd_handle)
-> > +               return EFI_SUCCESS;
-> > +
-> > +       ret = efi_uninstall_multiple_protocol_interfaces(efi_initrd_handle,
-> > +                                                        /* initramfs */
-> > +                                                        &efi_guid_device_path,
-> > +                                                        &dp_lf2_handle,
-> > +                                                        /* LOAD_FILE2 */
-> > +                                                        &efi_guid_load_file2_protocol,
-> > +                                                        &efi_lf2_protocol,
-> > +                                                        NULL);
-> > +       efi_initrd_handle = NULL;
-> > +
-> > +       return ret;
-> > +}
-> > +
-> > +/**
-> > + * efi_initrd_return_notify() - return to efibootmgr callback
-> > + *
-> > + * @event:     the event for which this notification function is registered
-> > + * @context:   event context
-> > + */
-> > +static void EFIAPI efi_initrd_return_notify(struct efi_event *event,
-> > +                                                 void *context)
-> > +{
-> > +       efi_status_t ret;
-> > +
-> > +       EFI_ENTRY("%p, %p", event, context);
-> > +       ret = efi_initrd_deregister();
-> > +       EFI_EXIT(ret);
-> > +}
-> > +
-> >  /**
-> >   * efi_initrd_register() - create handle for loading initial RAM disk
-> >   *
-> > @@ -197,6 +241,7 @@ out:
-> >  efi_status_t efi_initrd_register(void)
-> >  {
-> >         efi_status_t ret;
-> > +       struct efi_event *event;
-> >
-> >         /*
-> >          * Allow the user to continue if Boot#### file path is not set for
-> > @@ -215,34 +260,17 @@ efi_status_t efi_initrd_register(void)
-> >                                                        &efi_guid_load_file2_protocol,
-> >                                                        &efi_lf2_protocol,
-> >                                                        NULL);
-> > +       if (ret != EFI_SUCCESS) {
-> > +               log_err("installing EFI_LOAD_FILE2_PROTOCOL failed\n");
-> > +               return ret;
-> > +       }
-> >
-> > -       return ret;
-> > -}
-> > -
-> > -/**
-> > - * efi_initrd_deregister() - delete the handle for loading initial RAM disk
-> > - *
-> > - * This will delete the handle containing the Linux specific vendor device
-> > - * path and EFI_LOAD_FILE2_PROTOCOL for loading an initrd
-> > - *
-> > - * Return:     status code
-> > - */
-> > -efi_status_t efi_initrd_deregister(void)
-> > -{
-> > -       efi_status_t ret;
-> > -
-> > -       if (!efi_initrd_handle)
-> > -               return EFI_SUCCESS;
-> > -
-> > -       ret = efi_uninstall_multiple_protocol_interfaces(efi_initrd_handle,
-> > -                                                        /* initramfs */
-> > -                                                        &efi_guid_device_path,
-> > -                                                        &dp_lf2_handle,
-> > -                                                        /* LOAD_FILE2 */
-> > -                                                        &efi_guid_load_file2_protocol,
-> > -                                                        &efi_lf2_protocol,
-> > -                                                        NULL);
-> > -       efi_initrd_handle = NULL;
-> > +       ret = efi_create_event(EVT_NOTIFY_SIGNAL, TPL_CALLBACK,
-> > +                              efi_initrd_return_notify, NULL,
-> > +                              &efi_guid_event_group_return_to_efibootmgr,
-> > +                              &event);
-> > +       if (ret != EFI_SUCCESS)
-> > +               log_err("Creating event failed\n");
-> >
-> >         return ret;
-> >  }
-> >
-> > base-commit: 4a363dd516856344558034027e40d903868f67b4
-> > --
-> > 2.34.1
-> >
+> ---
+> Changes from v1:
+> - improved ssd2825 code style
+> - added TC358768 RGB to DSI bridge bringup commit (used by TF700T)
+> - added Parade DP501 transmitter bringup (used by Lenovo Ideapad Yoga 11)
+> ---
+>
+> Anton Bambura (1):
+>   video: panel: add Samsung LTL106HL02 MIPI DSI panel driver
+>
+> Jonas Schw=C3=B6bel (1):
+>   video: bridge: add basic support for the Parade DP501 transmitter
+>
+> Svyatoslav Ryhel (5):
+>   video: panel: add LG LG070WX3 MIPI DSI panel driver
+>   video: bridge: add Toshiba TC358768 RGB to DSI bridge support
+>   video: endeavoru-panel: shift the init sequence by one step earlier
+>   video: bridge: ssd2825: shift the init sequence by one step earlier
+>   video: renesas: shift the init sequence by one step earlier
+>
+>  drivers/video/Kconfig              |  17 +
+>  drivers/video/Makefile             |   2 +
+>  drivers/video/bridge/Kconfig       |  19 +
+>  drivers/video/bridge/Makefile      |   2 +
+>  drivers/video/bridge/dp501.c       | 579 +++++++++++++++++
+>  drivers/video/bridge/ssd2825.c     |  86 +--
+>  drivers/video/bridge/tc358768.c    | 985 +++++++++++++++++++++++++++++
+>  drivers/video/endeavoru-panel.c    | 128 ++--
+>  drivers/video/lg-ld070wx3.c        | 186 ++++++
+>  drivers/video/renesas-r61307.c     |  93 +--
+>  drivers/video/renesas-r69328.c     |  81 +--
+>  drivers/video/samsung-ltl106hl02.c | 157 +++++
+>  12 files changed, 2155 insertions(+), 180 deletions(-)
+>  create mode 100644 drivers/video/bridge/dp501.c
+>  create mode 100644 drivers/video/bridge/tc358768.c
+>  create mode 100644 drivers/video/lg-ld070wx3.c
+>  create mode 100644 drivers/video/samsung-ltl106hl02.c
+>
+> --
+> 2.40.1
+>
