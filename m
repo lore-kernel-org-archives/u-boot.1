@@ -4,65 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F5D2C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 06:00:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8496AC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 06:51:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 932A28860F;
-	Fri, 19 Apr 2024 08:00:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 85679885E0;
+	Fri, 19 Apr 2024 08:51:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hOly5nZc";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ZYrGr6V0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CC1288648; Fri, 19 Apr 2024 08:00:30 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id 1D12B88648; Fri, 19 Apr 2024 08:51:31 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 306F488526
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 08:00:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2F8EF885D7
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 08:51:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43J60P6u118133;
- Fri, 19 Apr 2024 01:00:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1713506425;
- bh=C2fhX2uVohudLb9V5aBaNUZObayhu6WbYCIbhqI92pA=;
- h=From:To:CC:Subject:Date;
- b=hOly5nZcTi6sbiDZBFp7UpL4uwT6fZZJ+7nG2kJkY7KjsCdY6qrW7od5vRLwmJY+1
- r0WMv/pSCIJUs0RCOTSSBRLik4CGq4zFRqoTT3k+nPNEIKpB2PBJCY/b1SYjSAVxEL
- D40P+exBqCd7Mj47TlW5rtEQ9ojievvp11DrIKq0=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43J60PXB030308
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 19 Apr 2024 01:00:25 -0500
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
- Apr 2024 01:00:25 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 19 Apr 2024 01:00:25 -0500
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.18])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43J60MB5033706;
- Fri, 19 Apr 2024 01:00:22 -0500
-From: Udit Kumar <u-kumar1@ti.com>
-To: <n-francis@ti.com>, <jh80.chung@samsung.com>, <j-keerthy@ti.com>
-CC: <nm@ti.com>, <trini@konsulko.com>, <sjg@chromium.org>,
- <u-boot@lists.denx.de>, Udit Kumar <u-kumar1@ti.com>
-Subject: [PATCH] power: pmic: tps65941: Update compatible to aling with kernel
- DT
-Date: Fri, 19 Apr 2024 11:30:16 +0530
-Message-ID: <20240419060016.493713-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1713509488; x=1716101488;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=t1u+DjtY8HoGmibKfANZlymgQKu3Rs5CeSroO+W/CpA=;
+ b=ZYrGr6V0tsW6S3RkGJCq9zIi0etyAf0WrVbapk+DrOlJAH6whQ15juiWadn5nscq
+ 2HslXvmjb/66VBS+EYWCG/7tePhf883xsXzuHTyzeg/utsQQGPXiKt59j1PP/5mI
+ /ufnOIY5KJugJpFftBMres/IWoqiXvIljVswXDNWa5c=;
+X-AuditID: ac14000a-fbefe7000000290d-75-66221470466f
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 2B.95.10509.07412266;
+ Fri, 19 Apr 2024 08:51:28 +0200 (CEST)
+Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Fri, 19 Apr
+ 2024 08:51:28 +0200
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <u-boot@lists.denx.de>
+CC: <upstream@lists.phytec.de>
+Subject: [PATCH 0/3] *** Migrate some PHYTEC boards to OF_UPSTREAM ***
+Date: Fri, 19 Apr 2024 08:51:14 +0200
+Message-ID: <20240419065117.2305346-1-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrALMWRmVeSWpSXmKPExsWyRpKBR7dARCnNYNtuPYu3ezvZLbrfqTsw
+ eZy9s4PRo7+7hTWAKYrLJiU1J7MstUjfLoEr49CFTWwF63gr1kw/z9bAuI+ri5GTQ0LAROLu
+ xk/sILaQwBImibnvaroYuYDsx4wS7xpes4Ak2ATUJe5s+MYKYosISEm87NzI3MXIwcEsICex
+ rL8IJCws4CYxc95eJpAwi4CqxKNtWiBhXgFLib6pt5ggVslLzLz0nR0iLihxcuYTsOnMQPHm
+ rbOZIWwJiYMvXjBDnCMv8eLSchaY3mnnXjND2KESW79sZ5rAKDALyahZSEbNQjJqASPzKkah
+ 3Mzk7NSizGy9gozKktRkvZTUTYygUBRh4NrB2DfH4xAjEwfjIUYJDmYlEV4zDsU0Id6UxMqq
+ 1KL8+KLSnNTiQ4zSHCxK4ryrO4JThQTSE0tSs1NTC1KLYLJMHJxSDYwzNjTU/rj5t6541YMs
+ I23Rn6LH3t5iTJnmUlXx+u7BSQJ/+Tok8hfJRme1P2BL6PSavGGq/419ellWb3YkPOe+eyxL
+ cafrjFMcz35d+PB2Q73agtfnlLnOKyrLqxkuee6+W0D67aSLV7mWchy7/OCz1NI9B9fnvLX2
+ brjccFf5Def8E9LXzOc9V2Ipzkg01GIuKk4EAA99aBQzAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,32 +84,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Linux kernel driver drivers/mfd/tps6594-i2c.c is using different
-name for compatible for tps6594 family PMIC.
-After sync of Linux kernel DT to u-boot for TI platforms
-J7200, J721S2 and J784S4 PMIC is no longer getting probed.
+Migrate the boards I maintain to OF_UPSTREAM.
 
-So updating compatible field to align with Linux driver and DT.
+Wadim Egorov (3):
+  phycore-am62x: Migrate to OF_UPSTREAM
+  phycore-am64x: Migrate to OF_UPSTREAM
+  phycore-rk3288: Migrate to OF_UPSTREAM
 
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
- drivers/power/pmic/tps65941.c | 3 +++
- 1 file changed, 3 insertions(+)
+ arch/arm/dts/Makefile                         |   3 -
+ arch/arm/dts/k3-am62-phycore-som.dtsi         | 324 -----------
+ arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts   | 266 ---------
+ arch/arm/dts/k3-am625-phycore-som-binman.dtsi |   2 +-
+ arch/arm/dts/k3-am64-phycore-som.dtsi         | 320 -----------
+ .../arm/dts/k3-am642-phyboard-electra-rdk.dts | 302 -----------
+ arch/arm/dts/k3-am642-phycore-som-binman.dtsi |   6 +-
+ arch/arm/dts/rk3288-phycore-rdk-u-boot.dtsi   |  19 +
+ arch/arm/dts/rk3288-phycore-rdk.dts           | 271 ----------
+ arch/arm/dts/rk3288-phycore-som.dtsi          | 506 ------------------
+ arch/arm/mach-k3/am62x/Kconfig                |   1 +
+ arch/arm/mach-k3/am64x/Kconfig                |   1 +
+ board/phytec/phycore_am62x/MAINTAINERS        |   2 -
+ board/phytec/phycore_am64x/MAINTAINERS        |   2 -
+ board/phytec/phycore_rk3288/MAINTAINERS       |   2 -
+ configs/phycore-rk3288_defconfig              |   7 +-
+ configs/phycore_am62x_a53_defconfig           |   2 +-
+ configs/phycore_am64x_a53_defconfig           |   2 +-
+ 18 files changed, 29 insertions(+), 2009 deletions(-)
+ delete mode 100644 arch/arm/dts/k3-am62-phycore-som.dtsi
+ delete mode 100644 arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts
+ delete mode 100644 arch/arm/dts/k3-am64-phycore-som.dtsi
+ delete mode 100644 arch/arm/dts/k3-am642-phyboard-electra-rdk.dts
+ delete mode 100644 arch/arm/dts/rk3288-phycore-rdk.dts
+ delete mode 100644 arch/arm/dts/rk3288-phycore-som.dtsi
 
-diff --git a/drivers/power/pmic/tps65941.c b/drivers/power/pmic/tps65941.c
-index 727b42747a..bf762deb29 100644
---- a/drivers/power/pmic/tps65941.c
-+++ b/drivers/power/pmic/tps65941.c
-@@ -75,6 +75,9 @@ static const struct udevice_id tps65941_ids[] = {
- 	{ .compatible = "ti,tps659412", .data = TPS659411 },
- 	{ .compatible = "ti,tps659413", .data = TPS659413 },
- 	{ .compatible = "ti,lp876441",  .data =  LP876441 },
-+	{ .compatible = "ti,tps6594-q1", .data =  TPS659411 },
-+	{ .compatible = "ti,tps6593-q1", .data =  TPS659413 },
-+	{ .compatible = "ti,lp8764-q1",  .data =  LP876441 },
- 	{ }
- };
- 
 -- 
-2.34.1
+2.25.1
 
