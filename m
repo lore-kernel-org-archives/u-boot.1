@@ -4,79 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40C2AC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 07:45:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FEF8C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 07:51:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8684F886D6;
-	Fri, 19 Apr 2024 09:45:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id E4BE9886CC;
+	Fri, 19 Apr 2024 09:51:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="5ye4uvSY";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="He1US8DL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96B94886D8; Fri, 19 Apr 2024 09:45:50 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id D8B49886D1; Fri, 19 Apr 2024 09:51:07 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6613886D5
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:45:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CE52688692
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:51:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
+ dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=4839221eac=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43J2A8oC007704; Fri, 19 Apr 2024 09:45:43 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=x383rEWWO3Qdx70/sb9IUgQ9iMTRbh6dWUugMFCn9pg=; b=5y
- e4uvSY9DHYbmatXGGl1vvV/cdSbU1dQmZOzYbUrGirQ+hCuwjO6ZPxd1N1jLmXnH
- FG7Y/EYOPzScouGW3pSdUxOyRO/IXL/Bj89Dw7s4lRHSNqEBBD2wySYI5LfonwWs
- xVIm6ARV8URUV6C1u780tFUtSYzmkV1jcLz8EZqZ2Qcm0KZPFjkxr2Pv9CX6j9KJ
- 0Bxd00KOEslvrvuSc6n10NsTg+8r3hoqzIhcAQRD8PU4lzTBzwtnDQmcasXQeZpu
- FrHllZEymKBFegsL96biW7f5z3xP+m5F+5gUwVxQoWyv6eMZHh5BcTe94blF9Ayg
- L0swEbCW2z3nw5+gizhA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff64tf52-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Apr 2024 09:45:19 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C3A954002D;
- Fri, 19 Apr 2024 09:45:13 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 82DA1210F8C;
- Fri, 19 Apr 2024 09:44:51 +0200 (CEST)
-Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
- 2024 09:44:51 +0200
-Message-ID: <c35863dd-65dc-4f85-ac62-d99c9c6addb1@foss.st.com>
-Date: Fri, 19 Apr 2024 09:44:50 +0200
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 64FDF3F366
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 07:51:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1713513065;
+ bh=Hri9oAV5oJsUaKx9hzF9oRMgzGotyb8FUgiTJIaFb/M=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=He1US8DLP+MoXtdOWH8oakBlTXmcmC4lTAIjja6Pd+sBdntOqM6O1V+yFGzq8D4F2
+ IM+Hpf07EZgvRoRxIT6JrvxmYrpsvXYZiQmiyXOCBwe0h7FDZOcWTCURG1qPYuZrWC
+ BU62fyRbERVY5t6/IkXelKlJ6u1rtD9c5u/qiQAi6J3y1xF+QC0FogeZnt+8/5fAAM
+ al9LUhM1Xc1VG28d0UySdqNXDVX9CTwQd64AU+CVJYJeBJtUJPOmSXm87h3111LIM3
+ wP4MNBfFAMYX05DvhgXObGqxuIhdGkCBxgdBZSr+C74G94TKp5nKddZKFm5s1nfp+n
+ DyGoOy6uEvPUA==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-4183909fec8so14515295e9.0
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 00:51:05 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713513063; x=1714117863;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=Hri9oAV5oJsUaKx9hzF9oRMgzGotyb8FUgiTJIaFb/M=;
+ b=HtvmWBvaBhQN5zKTiULQjeD41hsqDAt1uM4xnNT4DakbfejzNMpNdurmMXg9bpzOVg
+ Mfz5/GvkHBVATIZngct3nruLkMOBI13T39fL9RrKReKaWyfMo0HzGUXti6DBOH4jXqjD
+ 2r9BT8Jp9DHBVcw7ZAYFGNW65kpohL2tZvCct9Wr1bnpJhweOLjuMbYAdHD4O8CFze3y
+ dYaLRutQ5kC+Xo6BZ7GxK/J+lxMCFnY+/pUw/J7rzWBltFnUdRHvMPqrfrwfMtynJtHE
+ OtxvaU4MnBRT7ADEYk6C0Szv1/tBlpyvfz4yJ/X6ue4fYgDPUWB1QT81TmiGvC2+u+X6
+ 9gWw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUunft8mnmcQX4joytzhpX5Xz3xFkAZi6T/jOtZJiAo+6NjfHT94fms+mO6HlWeyAhDW34T1wFmFL4rn4pDq0ryz5GX/Q==
+X-Gm-Message-State: AOJu0YzMJ7Ctheyp5Hj9oB3YCoux9Ubuvs/BIfmCDvyRJNmLGM+MOBUt
+ 1jnafzbPMtsZW7IZ6XkvWnlYdKZPtYTNWbCO/ebr8hHK5lkyLX70arqbbj6FvIX6Y78nrj+OG1A
+ ogGDfxqmu4rpH7IbMwKy+PjNN/Hqrp1sA6keTyBHZlX6WI4znCYpR+I0l/Lk+EGCcwnU=
+X-Received: by 2002:a05:600c:4f44:b0:418:3577:32ad with SMTP id
+ m4-20020a05600c4f4400b00418357732admr1137616wmq.38.1713513063058; 
+ Fri, 19 Apr 2024 00:51:03 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGAEmwTvlKYg46RcoqC+uplg4SsHvecs6uKLLU2KqV5DpfkGhvjZblixdO/oVf3B3AZTX776A==
+X-Received: by 2002:a05:600c:4f44:b0:418:3577:32ad with SMTP id
+ m4-20020a05600c4f4400b00418357732admr1137590wmq.38.1713513062671; 
+ Fri, 19 Apr 2024 00:51:02 -0700 (PDT)
+Received: from [192.168.123.126]
+ (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ by smtp.gmail.com with ESMTPSA id
+ n17-20020a05600c501100b00418f1d77098sm3838438wmr.25.2024.04.19.00.51.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 19 Apr 2024 00:51:02 -0700 (PDT)
+Message-ID: <1499200d-1e1d-4223-b26e-6d70d45bdbfe@canonical.com>
+Date: Fri, 19 Apr 2024 09:51:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] stm32mp: Reserve OPTEE area in EFI memory map
+Subject: Re: [PATCH] efi_loader: change the error message when storing EFI
+ variables
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Weizhao Ouyang <o451686892@gmail.com>,
+ u-boot@lists.denx.de
+References: <20240419074201.9053-1-ilias.apalodimas@linaro.org>
 Content-Language: en-US
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Patrick DELAUNAY
- <patrick.delaunay@foss.st.com>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Tom Rini
- <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, <u-boot@lists.denx.de>
-References: <20240308101230.2595220-1-patrice.chotard@foss.st.com>
- <3512e31e-37db-4e03-b133-1914e29fa7ad@foss.st.com>
- <24c03e51-90f8-4918-8097-2a6ccd6ebf4e@gmx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <24c03e51-90f8-4918-8097-2a6ccd6ebf4e@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.252.13.94]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
- definitions=2024-04-19_05,2024-04-17_01,2023-05-22_02
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240419074201.9053-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,92 +109,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 4/17/24 09:45, Heinrich Schuchardt wrote:
-> On 17.04.24 09:25, Patrick DELAUNAY wrote:
->> Hi,
->>
->> On 3/8/24 11:12, Patrice Chotard wrote:
->>> Since commit 7b78d6438a2b3 ("efi_loader: Reserve unaccessible memory")
->>> memory region above ram_top is tagged in EFI memory map as
->>> EFI_BOOT_SERVICES_DATA.
->>> In case of STM32MP1 platform, above ram_top, there is one reserved-memory
->>> region tagged "no-map" dedicated to OP-TEE (addr=de000000 size=2000000).
->>>
->>> Before booting kernel, EFI memory map is first built, the OPTEE region is
->>> tagged as EFI_BOOT_SERVICES_DATA and when reserving LMB, the tag LMB_NONE
->>> is used.
->>>
->>> Then after, the LMB are completed by boot_fdt_add_mem_rsv_regions()
->>> which try to add again the same OPTEE region (addr=de000000 size=2000000)
->>> but now with LMB_NOMAP tag which produces the following error message :
->>>
->>> "ERROR: reserving fdt memory region failed (addr=de000000 size=2000000
->>> flags=4)"
->>>
->>> To avoid this, OPTEE area shouldn't be used by EFI, so we need to mark
->>> it as reserved.
->>>
->>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
->>> ---
->>>
->>>   arch/arm/mach-stm32mp/dram_init.c | 12 ++++++++++++
->>>   1 file changed, 12 insertions(+)
->>>
->>> diff --git a/arch/arm/mach-stm32mp/dram_init.c
->>> b/arch/arm/mach-stm32mp/dram_init.c
->>> index fb1208fc5d5..f67f54f2ae0 100644
->>> --- a/arch/arm/mach-stm32mp/dram_init.c
->>> +++ b/arch/arm/mach-stm32mp/dram_init.c
->>> @@ -7,6 +7,7 @@
->>>   #include <common.h>
->>>   #include <dm.h>
->>> +#include <efi_loader.h>
->>>   #include <image.h>
->>>   #include <init.h>
->>>   #include <lmb.h>
->>> @@ -75,3 +76,14 @@ phys_addr_t board_get_usable_ram_top(phys_size_t
->>> total_size)
->>>       return reg + size;
->>>   }
->>> +
->>> +void efi_add_known_memory(void)
->>> +{
->>> +    if (IS_ENABLED(CONFIG_EFI_LOADER))
->>> +        /*
->>> +         * Memory over ram_top is reserved to OPTEE.
->>> +         * Declare to EFI only memory area below ram_top
->>> +         */
->>> +        efi_add_memory_map(gd->ram_base, gd->ram_top - gd->ram_base,
->>> +                   EFI_CONVENTIONAL_MEMORY);
+On 19.04.24 09:42, Ilias Apalodimas wrote:
+> When we try to store EFI variables on a file, we need to use an ESP.
+> if an ESP is not found, variables will change in memory, but U-Boot
+> won't be able to restore them across reboots.
 > 
-> With this change the EFI memory map passed to the operating system will
-> not contain any memory above gd->ram_top. Is this really your intent?
-> Don't you have any memory above 0xe0000000?
-
-Hi Heinrich
-
-On stm32mp157x-dk and stm32mp135x-dk boards, there is no memory above 0xe0000000.
-But, on stm32mp157x-ed1 or stm32mp157x-ev1, you are right, we got memory above 0xe0000000.
-
-I will rework this patch to take into account memory that could be present above OPTEE area.
-
-Thanks for pointing this
-Patrice
-
+> Adjust the error message so users can understand what's going on
 > 
-> Best regards
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>   lib/efi_loader/efi_var_file.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> Heinrich
-> 
->>> +}
->>
->>
->>
->> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
->>
->> Thanks
->> Patrick
->>
-> 
+> diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
+> index 413e1794e88c..5276740ffe7a 100644
+> --- a/lib/efi_loader/efi_var_file.c
+> +++ b/lib/efi_loader/efi_var_file.c
+> @@ -82,7 +82,7 @@ efi_status_t efi_var_to_file(void)
+>   
+>   error:
+>   	if (ret != EFI_SUCCESS)
+> -		log_err("Failed to persist EFI variables\n");
+> +		log_err("ESP not found. UEFI variables won't persist reboots\n");
+
+%s/reboots/reboot/  We can't look further into the future.
+
+A missing ESP is not the only possible failure cause. How about
+
+* no space on disk
+* already 512 entries in FAT12 root directory
+
+Best regards
+
+Heinrich
+
+>   	free(buf);
+>   	return ret;
+>   #else
+
