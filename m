@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19063C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:11:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D67FC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:11:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F92E88749;
-	Fri, 19 Apr 2024 14:11:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2802288780;
+	Fri, 19 Apr 2024 14:11:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="ggfvg1ho";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="qXZ1kUYZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56BAE8874D; Fri, 19 Apr 2024 14:11:30 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ id C1A1E88781; Fri, 19 Apr 2024 14:11:35 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F5978873D
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:11:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D23738877D
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:11:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=4839221eac=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43J8F2Sr029437; Fri, 19 Apr 2024 14:11:19 +0200
+ 43J7svsX019688; Fri, 19 Apr 2024 14:11:23 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=G7RV6DgpgVpTfjzc7nHgkLril1adwAisD5qoBnwJFzU=; b=gg
- fvg1ho1zDMoxDmRsL7iGpQFOTCqXq1gQmmTyGHtRPpNzShw2JzqWrMKDrHR+H6UQ
- y2cNpTcKZpbqXnmNlf5CUZHMfhU2YpGG+fRMpDNY/sjBPqfig1yBHjvWtohPE92I
- v1JNDAbKfLytbxXi8R48J3KXfdrZidb6bU9NSIWNacRusOmKzw5hHkQBxoDuKN6p
- Q2b7ZvjBWLTXPfZ7KzqznEkNIlLOOnto4jzb1ZcHfWZ7WZXaliolpq0ONsEwQ00j
- DgKwCPjHMG9b23ARNbuAnlQGvhfZHUEJd/cB4uNe+06s2bzhEIgy57seDe9/Mw9B
- OFn4mvOjuN9hNLuog2Cw==
+ selector1; bh=WHoq/yCPV2U3quCX4Ks/U3DHEusF+D8OktwXtz0jgVI=; b=qX
+ Z1kUYZ8GU7zGoRrLsB0aVdg7WFrrL5FY9bq+d/hfBz/Y2haUTyNI5Zwc5py/J0UZ
+ lcqn7We1fcPdutv7lg6Obdi/6qupmljSJXzFJq1Q6rdebgq3t1LBRd53HH5bUAUH
+ ovXrvBy/BxzdfYKtKLlP5PPyHMllsoovjwLog5R+a/GSPMwAwhszvNPXowZxb04U
+ vWNnl89Xel9zp6tB4gdT3Fk+NUVFrSo4lEc9BQsCXPIYTxRoqkwAGQEGnlQeFv1s
+ UJTLZvCtGYsYnWDpS0ldT+39Z0MF8lhr0BU0DDb/0IPLyIVj/CR9g5TDSsgufjGr
+ J/bxsYHOYSJoNQGRVmAA==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xgecyraqc-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xg50j9da9-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Apr 2024 14:11:18 +0200 (MEST)
+ Fri, 19 Apr 2024 14:11:23 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 8F77540044;
- Fri, 19 Apr 2024 14:11:14 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 9681D40045;
+ Fri, 19 Apr 2024 14:11:19 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 49C512194D5;
- Fri, 19 Apr 2024 14:11:14 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D58FE21860C;
+ Fri, 19 Apr 2024 14:10:55 +0200 (CEST)
 Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
- 2024 14:11:13 +0200
-Message-ID: <9392f75a-4cf8-4af8-b2fd-3c997f9721e4@foss.st.com>
-Date: Fri, 19 Apr 2024 14:11:13 +0200
+ 2024 14:10:55 +0200
+Message-ID: <3ae7468e-4cd7-426c-b195-8bf4514f537e@foss.st.com>
+Date: Fri, 19 Apr 2024 14:10:54 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/11] net: dwc_eth_qos: Add support of STM32MP13xx
- platform
+Subject: Re: [PATCH v2 08/11] net: dwc_eth_qos: Constify st,eth-* values
+ parsed out of DT
 Content-Language: en-US
-To: Christophe ROULLIER <christophe.roullier@foss.st.com>, Marek Vasut
- <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Joe Hershberger <joe.hershberger@ni.com>, Patrick DELAUNAY - foss
- <patrick.delaunay@foss.st.com>,
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Christophe Roullier <christophe.roullier@st.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Ramon Fried <rfried.dev@gmail.com>, <u-boot@dh-electronics.com>,
  <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20240326120745.27581-1-marex@denx.de>
- <20240326120745.27581-11-marex@denx.de>
- <DU2PR10MB7787E5DD3C53330D616436E68F002@DU2PR10MB7787.EURPRD10.PROD.OUTLOOK.COM>
- <62fb769e-51fd-4c07-9af6-da751f6f0736@foss.st.com>
+ <20240326120745.27581-9-marex@denx.de>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <62fb769e-51fd-4c07-9af6-da751f6f0736@foss.st.com>
+In-Reply-To: <20240326120745.27581-9-marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Originating-IP: [10.252.13.94]
 X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
  (10.75.129.69)
 X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.272,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
  definitions=2024-04-19_08,2024-04-19_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,79 +95,79 @@ X-Virus-Status: Clean
 
 
 
-On 4/8/24 17:51, Christophe ROULLIER wrote:
->> -----Original Message-----
->> From: Marek Vasut<marex@denx.de>
->> Sent: Tuesday, March 26, 2024 1:08 PM
->> To:u-boot@lists.denx.de
->> Cc: Christophe ROULLIER<christophe.roullier@st.com>; Patrice CHOTARD - foss<patrice.chotard@foss.st.com>; Marek Vasut<marex@denx.de>; Joe Hershberger<joe.hershberger@ni.com>; Patrick DELAUNAY - foss<patrick.delaunay@foss.st.com>; Ramon Fried<rfried.dev@gmail.com>;u-boot@dh-electronics.com;uboot-stm32@st-md-mailman.stormreply.com
->> Subject: [PATCH v2 10/11] net: dwc_eth_qos: Add support of STM32MP13xx platform
->>
->> From: Christophe Roullier<christophe.roullier@st.com>
->>
->> Add compatible "st,stm32mp13-dwmac" to manage STM32MP13 boards.
->>
->> Reviewed-by: Patrice Chotard<patrice.chotard@foss.st.com>
->> Signed-off-by: Christophe Roullier<christophe.roullier@st.com>
->> Signed-off-by: Marek Vasut<marex@denx.de>  # Rebase, reshuffle, squash code
->> ---
->> Cc: Christophe Roullier<christophe.roullier@st.com>
->> Cc: Joe Hershberger<joe.hershberger@ni.com>
->> Cc: Patrice Chotard<patrice.chotard@foss.st.com>
->> Cc: Patrick Delaunay<patrick.delaunay@foss.st.com>
->> Cc: Ramon Fried<rfried.dev@gmail.com>
->> Cc:u-boot@dh-electronics.com
->> Cc:uboot-stm32@st-md-mailman.stormreply.com
->> ---
->> V2: Add RB from Patrice
->> ---
->>   drivers/net/dwc_eth_qos.c       |  4 ++++
->>   drivers/net/dwc_eth_qos.h       |  1 +
->>   drivers/net/dwc_eth_qos_stm32.c | 11 +++++++++++
->>   3 files changed, 16 insertions(+)
->>
->> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c index 203bfc0848c..e02317905e5 100644
->> --- a/drivers/net/dwc_eth_qos.c
->> +++ b/drivers/net/dwc_eth_qos.c
->> @@ -1505,6 +1505,10 @@ static const struct udevice_id eqos_ids[] = {
->>          },
->>   #endif
->>   #if IS_ENABLED(CONFIG_DWC_ETH_QOS_STM32)
->> +       {
->> +               .compatible = "st,stm32mp13-dwmac",
->> +               .data = (ulong)&eqos_stm32mp13_config
->> +       },
->>          {
->>                  .compatible = "st,stm32mp1-dwmac",
->>                  .data = (ulong)&eqos_stm32mp15_config diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h index bafd0d339fb..8b3d0d464d3 100644
->> --- a/drivers/net/dwc_eth_qos.h
->> +++ b/drivers/net/dwc_eth_qos.h
->> @@ -290,5 +290,6 @@ int eqos_null_ops(struct udevice *dev);  extern struct eqos_config eqos_imx_config;  extern struct eqos_config eqos_rockchip_config;  extern struct eqos_config eqos_qcom_config;
->> +extern struct eqos_config eqos_stm32mp13_config;
->>   extern struct eqos_config eqos_stm32mp15_config;  extern struct eqos_config eqos_jh7110_config; diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c index 5a20fe5bea2..435473f99a6 100644
->> --- a/drivers/net/dwc_eth_qos_stm32.c
->> +++ b/drivers/net/dwc_eth_qos_stm32.c
->> @@ -279,6 +279,17 @@ static struct eqos_ops eqos_stm32_ops = {
->>          .eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_stm32  };
->>
->> +struct eqos_config __maybe_unused eqos_stm32mp13_config = {
->> +       .reg_access_always_ok = false,
->> +       .mdio_wait = 10000,
->> +       .swr_wait = 50,
->> +       .config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_DCB,
->> +       .config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_250_300,
->> +       .axi_bus_width = EQOS_AXI_WIDTH_32,
->> +       .interface = dev_read_phy_mode,
->> +       .ops = &eqos_stm32_ops
->> +};
->> +
->>   struct eqos_config __maybe_unused eqos_stm32mp15_config = {
->>          .reg_access_always_ok = false,
->>          .mdio_wait = 10000,
->> -- 
->> 2.43.0
->>
-> Reviewed-by: Christophe ROULLIER <christophe.roullier@foss.st.com>
-
+On 3/26/24 13:07, Marek Vasut wrote:
+> Use const bool for the values parsed out of DT. Drop the duplicate
+> assignment of false into those bool variables, assign them directly
+> with the content parsed out of DT. Abbreviate the variable name too.
+> 
+> Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Christophe Roullier <christophe.roullier@st.com>
+> Cc: Joe Hershberger <joe.hershberger@ni.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Ramon Fried <rfried.dev@gmail.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+> V2: - Add RB from Patrice
+>     - Add trailing fullstop at the end of code comment
+> ---
+>  drivers/net/dwc_eth_qos_stm32.c | 18 +++++++-----------
+>  1 file changed, 7 insertions(+), 11 deletions(-)
+> 
+> diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c
+> index 72f65f80540..0b13d01346b 100644
+> --- a/drivers/net/dwc_eth_qos_stm32.c
+> +++ b/drivers/net/dwc_eth_qos_stm32.c
+> @@ -128,17 +128,13 @@ static int eqos_stop_clks_stm32(struct udevice *dev)
+>  static int eqos_probe_syscfg_stm32(struct udevice *dev,
+>  				   phy_interface_t interface_type)
+>  {
+> -	bool eth_ref_clk_sel_reg = false;
+> -	bool eth_clk_sel_reg = false;
+> +	/* Ethernet 50MHz RMII clock selection. */
+> +	const bool eth_ref_clk_sel = dev_read_bool(dev, "st,eth-ref-clk-sel");
+> +	/* Gigabit Ethernet 125MHz clock selection. */
+> +	const bool eth_clk_sel = dev_read_bool(dev, "st,eth-clk-sel");
+>  	u8 *syscfg;
+>  	u32 value;
+>  
+> -	/* Gigabit Ethernet 125MHz clock selection. */
+> -	eth_clk_sel_reg = dev_read_bool(dev, "st,eth-clk-sel");
+> -
+> -	/* Ethernet 50Mhz RMII clock selection */
+> -	eth_ref_clk_sel_reg = dev_read_bool(dev, "st,eth-ref-clk-sel");
+> -
+>  	syscfg = (u8 *)syscon_get_first_range(STM32MP_SYSCON_SYSCFG);
+>  	if (!syscfg)
+>  		return -ENODEV;
+> @@ -154,14 +150,14 @@ static int eqos_probe_syscfg_stm32(struct udevice *dev,
+>  		dev_dbg(dev, "PHY_INTERFACE_MODE_GMII\n");
+>  		value = FIELD_PREP(SYSCFG_PMCSETR_ETH_SEL_MASK,
+>  				   SYSCFG_PMCSETR_ETH_SEL_GMII_MII);
+> -		if (eth_clk_sel_reg)
+> +		if (eth_clk_sel)
+>  			value |= SYSCFG_PMCSETR_ETH_CLK_SEL;
+>  		break;
+>  	case PHY_INTERFACE_MODE_RMII:
+>  		dev_dbg(dev, "PHY_INTERFACE_MODE_RMII\n");
+>  		value = FIELD_PREP(SYSCFG_PMCSETR_ETH_SEL_MASK,
+>  				   SYSCFG_PMCSETR_ETH_SEL_RMII);
+> -		if (eth_ref_clk_sel_reg)
+> +		if (eth_ref_clk_sel)
+>  			value |= SYSCFG_PMCSETR_ETH_REF_CLK_SEL;
+>  		break;
+>  	case PHY_INTERFACE_MODE_RGMII:
+> @@ -171,7 +167,7 @@ static int eqos_probe_syscfg_stm32(struct udevice *dev,
+>  		dev_dbg(dev, "PHY_INTERFACE_MODE_RGMII\n");
+>  		value = FIELD_PREP(SYSCFG_PMCSETR_ETH_SEL_MASK,
+>  				   SYSCFG_PMCSETR_ETH_SEL_RGMII);
+> -		if (eth_clk_sel_reg)
+> +		if (eth_clk_sel)
+>  			value |= SYSCFG_PMCSETR_ETH_CLK_SEL;
+>  		break;
+>  	default:
 
 Applied on u-boot-stm32/master 
