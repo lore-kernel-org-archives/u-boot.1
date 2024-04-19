@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B644CC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 16:41:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26713C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 16:45:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C4CD88258;
-	Fri, 19 Apr 2024 18:41:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A353D88794;
+	Fri, 19 Apr 2024 18:45:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ivpsz0AS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lnivtrNd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5E4AC88244; Fri, 19 Apr 2024 18:41:14 +0200 (CEST)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id 3910388771; Fri, 19 Apr 2024 18:45:04 +0200 (CEST)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B247488258
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 18:41:11 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D4EB488794
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 18:45:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thierry.reding@gmail.com
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-2da08b07157so28736631fa.1
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:41:11 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-418c2bf2f15so18887815e9.3
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:45:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713544871; x=1714149671; darn=lists.denx.de;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=5qDD1Pmxpp98RwDGP5mwr7uVMCYlD9zn/TURBUf8leQ=;
- b=ivpsz0ASaWr2QlQ+9z98cRIq6GEadMZ46Zn46q7gJFbZUBpBmaewyj4Mu0CrQJ66WE
- VuQoiyPRa1uQNksnIA/60BDO/fidW13GEkN07u1L605aWuLVCw8UZKwvKPrnb8eVIMKI
- KPDiwDa73Tg/JMCNe4pkevhFuxvtozV2NWr5duXm7iFfSuqulju0HDbhruQUXqaHaeDo
- DGO6nwXGI6mMe5tF9MfhCa+/EGuW95x8FqMv3XL+rn+4gFwiKBRDKmhyiPv5Qh4+d9CE
- ULjcB3VKNkNchkT5uxPPbIK/Iu8/wDKSMhmsNY7ei4u+PrE45NvCZNm0UoA85MrcsVYl
- IVbw==
+ d=gmail.com; s=20230601; t=1713545100; x=1714149900; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mYY6WvKTzUG4XY9pMAJTiyH/p2HZqJAY2lYg/LRx3mU=;
+ b=lnivtrNdYCavtLE7O4AZr2VPweuaCH4vU7VMVcNHgCHYC15GZVdAPVoYpHRue7G/YZ
+ gCCuvT9gjfAHtVqLigGnfLrOknBeBXG9Bad8znY6A1uS4UdOzPdVY28ubL60E/YvWBFe
+ 7uTEZA7Y9Q6wSC7/s/MYRqIvgQNhQYrE1AX7dWe7aOyNwIaWsathWrfEyWpxUbovM0cO
+ 7Lxc9Fp2DBM0v4xJGQG0tBRTDyPAfuI+gnqVk0WzgObuk3Gi1xC8U0kXK4zcm/9fwGJb
+ z/NPACQIxnb+2Nb6FMClWUlKD7zEUoE670kPdXhFRVBPjj2zmwqsMcgthtFZPfGb3oLd
+ i+lw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713544871; x=1714149671;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=5qDD1Pmxpp98RwDGP5mwr7uVMCYlD9zn/TURBUf8leQ=;
- b=vgMVWwws8Mn33cRqlqJfpBD9GmX7t3vEmyo5JdF+7gWWR5+JaOd+vN+FYKdAjQI2yv
- WtIKjNbmksTaiy56bUWykOcuYAMOoPWB5j9uThu0HdrFOK8WSTKfDxHsAudeYcCiCifT
- eBzolv7hrJ9/0JDJ36KOeKv68wldZw4avfdLvUGym81R1hgZESPQyZWDWP6IuF0IguDV
- tgk6uBBEU3vWOmMFg5eh0zATh71He0DdG2I5EJaVjeklgG1nozq8PUoneCtNipQW/PTC
- Oa0odYWOm2/TXbbFUoqcD3Xkm2+J/QCUuqZwWJqvkdM4A9TJGlJ1WIhFoQEuIdoLfG2X
- alLg==
-X-Gm-Message-State: AOJu0YwlLoRnFVb1N1nEogs6q6vzrSkYdDJAHdN2nB9kshbztktOnhKQ
- F/U4WRMNEBxyb4awt/XopUb7kfZS6jArPB5Qvd1S2fNVFpfwkpORPcIxNA==
-X-Google-Smtp-Source: AGHT+IExmHlHBg+88NgYNqUu2tdWkAPirvMCHmsqZeHsXFbVUvdp+M6LmGCqNFSTox62n8gLLkOJtQ==
-X-Received: by 2002:a05:651c:1414:b0:2da:16fd:5c9b with SMTP id
- u20-20020a05651c141400b002da16fd5c9bmr2117342lje.9.1713544870619; 
- Fri, 19 Apr 2024 09:41:10 -0700 (PDT)
-Received: from localhost
- (p200300e41f162000f22f74fffe1f3a53.dip0.t-ipconnect.de.
- [2003:e4:1f16:2000:f22f:74ff:fe1f:3a53])
- by smtp.gmail.com with ESMTPSA id
- f24-20020a170906c09800b00a522f867697sm2375600ejz.132.2024.04.19.09.41.09
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 19 Apr 2024 09:41:10 -0700 (PDT)
-Content-Type: multipart/signed;
- boundary=540ad970af5b979a5cbf6a6ce14ac341270ed320ef96cb851a2d76f8d49d;
- micalg=pgp-sha256; protocol="application/pgp-signature"
-Mime-Version: 1.0
-Date: Fri, 19 Apr 2024 18:41:09 +0200
-Message-Id: <D0O8YLUHKZAZ.1DFGQ30RHORAD@gmail.com>
-Cc: <u-boot@lists.denx.de>
-Subject: Re: [PATCH v6 16/18] video: tegra20: dsi: remove pre-configuration
-From: "Thierry Reding" <thierry.reding@gmail.com>
-To: "Svyatoslav Ryhel" <clamor95@gmail.com>, "Thierry Reding"
- <treding@nvidia.com>, "Anatolij Gustschin" <agust@denx.de>, "Simon Glass"
- <sjg@chromium.org>
-X-Mailer: aerc 0.16.0-1-0-g560d6168f0ed-dirty
+ d=1e100.net; s=20230601; t=1713545100; x=1714149900;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=mYY6WvKTzUG4XY9pMAJTiyH/p2HZqJAY2lYg/LRx3mU=;
+ b=K+PJNp9s9TIK7QoFcjDwkTcHZkKc44KRsw7kki5Eo9BiGGrGlrBR4Egy2yGuRo6OLd
+ BhpERrwvDR3j1Pt0AxIvBT9IC7GZeNtU7+foojD20GN4OuJaA8gyROW0214Xc2pt+FWa
+ xdQhMtPabUQ1AIZwekMrkMyy4L4gkeehy8nP9/zc9kPkeh+klS3UN730kudRpVX6osc2
+ A+iC/D0MyTIcFAMTKBDttS4t/9BaaiYlRj4eHE94KIhu4qjAIFeFSxsdw3ksKvhYz0/K
+ tEkd4fMaD5UGA0mUY7ucrOT+3Io9T2z9k2/GIJ+d1dtTYjYQ0h41j/3m3OhZRtCPu3+Z
+ WTvg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWkCeFtG8OKUO6zKRysJ5mJgkQpmSPtTc6Lz3Iyfzou0YnAX9gH7RJqSBM7DPYcKSTxLvKyzxoIOoN0Whg4xHf9yQtNCw==
+X-Gm-Message-State: AOJu0Yx9dm0ocvpPQuJcc50dkkuwR07Ohn8OoxVLly06pXkNN+yv7ueD
+ aExujJMU3pspS3hp/gxMQDDxSuTSnfSjCrdT2L1DQQhQnW0q11LjCIoBI/Sdp2nhZY+uoNe3Ggx
+ Yktp639pUw1TUcUuhgqTL5r1gUCA=
+X-Google-Smtp-Source: AGHT+IEjFoZKGmZECVU9SuXqO3zXp/eWGbNwlYDBvKeCL6IbrS0dgF96ce5d3N83IGBp+qYjG8UmtH9jAETdNAjSM2k=
+X-Received: by 2002:a05:6000:b91:b0:33e:d448:e48c with SMTP id
+ dl17-20020a0560000b9100b0033ed448e48cmr1588686wrb.15.1713545100000; Fri, 19
+ Apr 2024 09:45:00 -0700 (PDT)
+MIME-Version: 1.0
 References: <20240123171633.246057-1-clamor95@gmail.com>
- <20240123171633.246057-17-clamor95@gmail.com>
-In-Reply-To: <20240123171633.246057-17-clamor95@gmail.com>
+ <20240123171633.246057-5-clamor95@gmail.com>
+ <D0O8WMHSVVCR.2AAWX7HDFZTDX@gmail.com>
+In-Reply-To: <D0O8WMHSVVCR.2AAWX7HDFZTDX@gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Fri, 19 Apr 2024 19:44:49 +0300
+Message-ID: <CAPVz0n14o8ApBCq=vQga6fSkXg36r11Zp05ZAZ6=AO_85W_38w@mail.gmail.com>
+Subject: Re: [PATCH v6 04/18] video: tegra20: dc: pass DC id to internal
+ devices
+To: Thierry Reding <thierry.reding@gmail.com>
+Cc: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,47 +93,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---540ad970af5b979a5cbf6a6ce14ac341270ed320ef96cb851a2d76f8d49d
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-
-On Tue Jan 23, 2024 at 6:16 PM CET, Svyatoslav Ryhel wrote:
-> From: Jonas Schw=C3=B6bel <jonasschwoebel@yahoo.de>
+=D0=BF=D1=82, 19 =D0=BA=D0=B2=D1=96=D1=82. 2024=E2=80=AF=D1=80. =D0=BE 19:3=
+8 Thierry Reding <thierry.reding@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
 >
-> Configuration for DC driver command mode is not required for
-> every panel. Removed.
+> On Tue Jan 23, 2024 at 6:16 PM CET, Svyatoslav Ryhel wrote:
+> > Tegra SoC has 2 independent display controllers called DC_A and
+> > DC_B, they are handled differently by internal video devices like
+> > DSI and HDMI controllers so it is important for last to know
+> > which display controller is used to properly set up registers.
+> > To achieve this, a pipe field was added to pdata to pass display
+> > controller id to internal Tegra SoC devices.
+> >
+> > Tested-by: Agneli <poczt@protonmail.ch> # Toshiba AC100 T20
+> > Tested-by: Robert Eckelmann <longnoserob@gmail.com> # ASUS TF101
+> > Tested-by: Andreas Westman Dorcsak <hedmoo@yahoo.com> # ASUS Grouper E1=
+565
+> > Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
+> > Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
+> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > ---
+> >  drivers/video/tegra20/tegra-dc.c | 6 ++++++
+> >  drivers/video/tegra20/tegra-dc.h | 3 +++
+> >  2 files changed, 9 insertions(+)
+> >
+> > diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra20/t=
+egra-dc.c
+> > index 5d8874f323..0e94e665ef 100644
+> > --- a/drivers/video/tegra20/tegra-dc.c
+> > +++ b/drivers/video/tegra20/tegra-dc.c
+> > @@ -45,6 +45,7 @@ struct tegra_lcd_priv {
+> >       unsigned pixel_clock;           /* Pixel clock in Hz */
+> >       int dc_clk[2];                  /* Contains clk and its parent */
+> >       bool rotation;                  /* 180 degree panel turn */
+> > +     bool pipe;                      /* DC controller: 0 for A, 1 for =
+B */
 >
-> Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
-> Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
-> Signed-off-by: Jonas Schw=C3=B6bel <jonasschwoebel@yahoo.de>
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  drivers/video/tegra20/tegra-dsi.c | 2 --
->  1 file changed, 2 deletions(-)
+> Bool is a poor choice, even if there's only two of them. This is a
+> proper index, so it should be some sort of integer.
+>
+> Also, the device tree bindings for the display controller specify a
+> "nvidia,head" property that can be used to identify these. If you add
+> that to the U-Boot DT you can avoid looking up by name to map this
+> value.
+>
 
-Yeah, this seems completely unnecessary.
+Thanks for pointing to this property. May we apply this patch set as is
+since it is well tested and confirmed to work and I will prepare a follow
+up patches to adjust device tree relations? Would what be ok?
 
-Reviewed-by: Thierry Reding <treding@nvidia.com>
-
---540ad970af5b979a5cbf6a6ce14ac341270ed320ef96cb851a2d76f8d49d
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmYinqYACgkQ3SOs138+
-s6FV8w//dUupj+9eN84tJQo4tpiG+/Ofo2QTtZ34Jjnjly+imdN06PcgIXqr54N6
-CJ2Yo6qvdHsmCnEV045x+r1/v1vw4YtLMQKgVDDKk475oiTuQ2gWlwVzVRetaLVx
-mAl7y+NK4IrP6GyOicyZDVwqF1BszUUJvttvCEvbx0l1uG7+iQJ6A/LVl/iTSUWX
-azJK29WQA25tyf3NtEh38I8uVDRx8jw10GCIBuB6+FdHsM2yYU9JT2YnDBPAHQ8O
-WOJ5UmBIqC6p4+QwfHbgNtrLtw/RL804f+d1u6kMg0goLW3TdDtC8MDyjScUhY5U
-0aUmDORo/aqR6H8AGbK/kpMBDqgjE06SqliKODLjMpFg0UjbemVnM/AKpD4WVbeL
-1IMr1i9h6ta6gkUAr4J4PySEHbFCtDSk6sB/tJTFpOUYZstYhd6zdXSwfRws6WCN
-+JKVg0hYLxMf8vByyX8tdqs/vxg4bkQQhxy64A6mo56MN6LEGr7/1PWeFcoEFC2i
-ANrX4NKDEp2xpYPD7LsV/nu0Z9gUhJHB0NypwkY3rFuqWzueTI7UtwwNOpULOkLA
-HEWtrRLR1ZIqU63rXaDhWdS4azQVxtUb4t4eeeFR3zPfdBHODD2ogwa0fPddHwlc
-zjVBnWWsir09nmBZNU3RsQA+MRIVrZjVBHTzLgeqAxmOeAE/H1o=
-=cBiq
------END PGP SIGNATURE-----
-
---540ad970af5b979a5cbf6a6ce14ac341270ed320ef96cb851a2d76f8d49d--
+> Thierry
