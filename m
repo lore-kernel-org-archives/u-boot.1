@@ -4,75 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E30F5C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 01:58:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21570C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 01:58:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E61948868D;
-	Fri, 19 Apr 2024 03:57:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F1D54886A7;
+	Fri, 19 Apr 2024 03:58:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KUxhnk06";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lH4CwVNr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA0EB88692; Fri, 19 Apr 2024 03:57:57 +0200 (CEST)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id EA52388692; Fri, 19 Apr 2024 03:57:58 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF95588208
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 03:57:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D837E8866E
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 03:57:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-4375ddb9eaeso8825391cf.3
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 18:57:55 -0700 (PDT)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-69b514d3cf4so12455116d6.0
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 18:57:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713491874; x=1714096674; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1713491876; x=1714096676; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fX8eUB7iuaNoFmPrre0iVweztd32ZgvgxpIpuRh690I=;
- b=KUxhnk06qpfhcRceODSxmYHh6BP0nKjWhiZvgXpmJiE3L5bQr2QBbAjmpvd+/+B/qe
- 1S9F7uA7kZuwiG7EbaXlWe6w5KMlIqvwRUpd8dhGx3NdrMP8Ir4uQebpQns5VLDB0uIX
- 8SCnI9lPBphDNDe7Qi/fXz/7um3p1IHXBgir4=
+ bh=ZKBwm6auo4sUKeeS1feIz6BdL0xV84J/maCIGWbpnts=;
+ b=lH4CwVNrio/OwfxTD/GoeIH08sscJvEmLkG3KmQX1ngEVCFAmvhAc57DwibFoxXjee
+ jOIEvA5aBYmuNMSJPneLpEj8hIyeIcAPv6uNIwxwskp8te28Jmjs5fyyFiZihkfpYIsD
+ HTB/FNKw/I05kD9ytAWVHQUJqwkpXSLqr9CII=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713491874; x=1714096674;
+ d=1e100.net; s=20230601; t=1713491876; x=1714096676;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fX8eUB7iuaNoFmPrre0iVweztd32ZgvgxpIpuRh690I=;
- b=tbcsU5J5nM3pUUVcIeP3ThliEv8BUHRxdlJKUWham9PAhY8n5HoWmcjbViwMd5MIe1
- fCiJi94xJRoqFU/Kf1kdwDwP6wgeDtOI2LwS3hBRhoJIgpVPPLBTYIP06mEkvt4FCZjE
- 1/kiggbdr35OiZjdv+kyumOxCI+Z41uVWwhMuINrq8r0QA4dvKlni8d6BVOsIDISTEqN
- 0QXgM8G3k8Ce7XK072uxtsIgiuELnDeCn6tCjn/KE/cqxvJzwamH3F+Ik3E7BrXFUVtm
- mnr7PPxy0Q7UOlHhKh0WpFvNulYcRbN7Q2Mmpw4mLCND/hJM0Sc1wWGXLTpEzsRaR44x
- Viiw==
+ bh=ZKBwm6auo4sUKeeS1feIz6BdL0xV84J/maCIGWbpnts=;
+ b=SwDl+StkWJ33DVQUOMWXGczty3rvKUHYft56FGexoCRstL6uH9X+jUlF3NEJ/h4YLU
+ hErTZi1teVtYtM8x4xlcesyiD0SbgtxfvRx7mIjUOC0e0VUeRa2ZpMi+lmiQWRZnhXrs
+ 7hdwcnYfuspZ5812F7bSDaJXXrU62MbOu08/K10rB7fjtgPh8AQn28kl+Txr227No2Ja
+ DMYkBeHsSkeBfsPUXR7XN5GfPqg6K5rtzLMtF5f9XBhsovfHnPueV5cAwvmPYYSWSi1P
+ x4hPoUlmsYoU3hCjASAZ70FcIe+u1M7/ejAgW6DLBakuDMrv2rDox9VEQ/4n7LJxFAst
+ k6jw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXISiDWZSF91mdFaekRAfqKeYiJbe778yO6cG9qrr4Bsl27F6+ancnnxXRm5ZdOR4GS4hPSRBzpH4Eais1Nb5Ksw0Y9zw==
-X-Gm-Message-State: AOJu0YxtJkr91Psk/mc2PYzMdvAkF5idj9nE0mOkFAlIkUWJgBWgDzfL
- qEDKcUbZQ2QC5LkJa9XXrtGkySiIjq7Ip9e7+TX3fo2tgLPkzKyjQvqtrQI9f+Y=
-X-Google-Smtp-Source: AGHT+IFbu3cjPgL13XUWen9ubqFRYllzUS3s45ExHOCEh2DYfYi+apF8GviotXOnI3Gw42Z7s0hWtg==
-X-Received: by 2002:a0c:e889:0:b0:69b:7f66:ea8d with SMTP id
- b9-20020a0ce889000000b0069b7f66ea8dmr790671qvo.5.1713491874567; 
- Thu, 18 Apr 2024 18:57:54 -0700 (PDT)
+ AJvYcCXGH3rnboUPN1a5HseW9+xoofUwPcccRdy8qdhi8PTrT97MAJ6+sQABEATIiqGo917K2SBUIezvhL3xUvBztPSflT64qw==
+X-Gm-Message-State: AOJu0Yyqax4lLOyeVWR4fdpuoMDM0DebgN4Yb1acX2OBFI+9T4oic5je
+ pFG6PCRlX6JdcMpRT8ZwTYUQyQ3Umtipy6GOzcmVj/8y5F5QoCJp8+zez/EUFlk=
+X-Google-Smtp-Source: AGHT+IEFZs8zjLjTy6bHd6FifloGS+64upFhOYQx15zoFtCjQNakF05isqQ1kJ8c2yhLxeFN/3FmSA==
+X-Received: by 2002:a0c:d84b:0:b0:698:f82b:a6e4 with SMTP id
+ i11-20020a0cd84b000000b00698f82ba6e4mr750592qvj.40.1713491875830; 
+ Thu, 18 Apr 2024 18:57:55 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
- b4-20020a0cf044000000b0069b1e2f3074sm1167777qvl.98.2024.04.18.18.57.53
+ b4-20020a0cf044000000b0069b1e2f3074sm1167777qvl.98.2024.04.18.18.57.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Apr 2024 18:57:54 -0700 (PDT)
+ Thu, 18 Apr 2024 18:57:55 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: sjoerd.simons@collabora.co.uk, Govindaraji.Sivanantham@in.bosch.com, 
- sjg@chromium.org, martyn.welch@collabora.com, u-boot@lists.denx.de, 
- Gireesh.Hiremath@in.bosch.com
-Cc: VinayKumar.Shettar@in.bosch.com, anaclaudia.dias@de.bosch.com
-In-Reply-To: <20240408060119.3675-1-Gireesh.Hiremath@in.bosch.com>
-References: <20240408060119.3675-1-Gireesh.Hiremath@in.bosch.com>
-Subject: Re: [PATCH] configs: am335x_guardian: store boot count in AM3352
- RTC block
-Message-Id: <171349187313.1524174.2945773589011180939.b4-ty@konsulko.com>
-Date: Thu, 18 Apr 2024 19:57:53 -0600
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, Nandor Han <nandor.han@vaisala.com>, 
+ u-boot@lists.denx.de
+In-Reply-To: <20240409184422.45023-1-heinrich.schuchardt@canonical.com>
+References: <20240409184422.45023-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH 1/1] reboot-mode: must depend on CONFIG_DM_RTC
+Message-Id: <171349187481.1524174.14997790802619215741.b4-ty@konsulko.com>
+Date: Thu, 18 Apr 2024 19:57:54 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,9 +91,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 08 Apr 2024 11:31:19 +0530, Gireesh.Hiremath@in.bosch.com wrote:
+On Tue, 09 Apr 2024 20:44:22 +0200, Heinrich Schuchardt wrote:
 
-> store bootcount in RTC block scratch register
+> Reading the boot mode from RTC memory requires a real time clock.
+> Add the missing Kconfig dependency.
 > 
 > 
 
