@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC36C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:28:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB05DC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:28:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F17FC8880F;
-	Fri, 19 Apr 2024 14:27:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 901D088810;
+	Fri, 19 Apr 2024 14:28:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="Uf0cX0Lb";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="MxP8tWzm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 715E588818; Fri, 19 Apr 2024 14:27:56 +0200 (CEST)
+ id A1AFE88814; Fri, 19 Apr 2024 14:28:05 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
  [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AA3D887E2
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:27:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BDC5E88811
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:28:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=4839221eac=patrice.chotard@foss.st.com
 Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43J9C7sJ003547; Fri, 19 Apr 2024 14:27:52 +0200
+ 43J9DrcT009768; Fri, 19 Apr 2024 14:28:01 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=VDn35E7ZCePYYI8uA50KUuHEvfVNEqjnz0voTYA6wEY=; b=Uf
- 0cX0LbJFIklNvMO7w6ovLOjNX8N2S6QMvZuUV7AosFphQVwdVunALEVewJe6RDCg
- NrLPsWX28z3dFpYsyx9M1B4xoai45ep95r46Wf1TVm1nhOaQ8nb7zdEVp1pqv1uy
- ORQBJShorbrrkA7Rk8NT0/7Zisoo8lisZkpMGdQ664v37lwfcFPOWEBpTFwLl6Xs
- 8vOXmW98uP57DUvMLzsvErJYMTxUrY41ltRrqeWDVKiFYg/+nHAEcfjCkjBOVfiF
- wYwPbj5oqDDKQN9n9yGFpFkdxJ8TVnzRVHPYDFEoYNh/RVA2Q0JE8bCgqNry1su6
- hbiLb75605iWzExXMCMA==
+ selector1; bh=2CYZMPp/TBDf9ahilJnAIRbVZHYwK0nPczghKixgqWE=; b=Mx
+ P8tWzmdS/nQvx9yYz9c7n+VscUj+TjtjersBp8ADsSc12v1VA+q4ClCEOQDe/wiK
+ l762GipNXj5uxPVXNCf8/wnFt0J29dKhm/5k8AqE6LTGRrgIGJ3+QgdNp10e8dur
+ ACJv0cG+CUACUU8X+E4Zp9hSgAlR3+xPdEozr9ca8UFlpvT8JZLbkn1sSTIXSxv2
+ PSYBYXFp9kXmhae8AE/WgHy+gM3wVvQZK3l1UTbUbEg2hb61tVo4D1khGK5Yy+uS
+ UGXoFVBEkILqIGlmmUdEcN+2uz4UNCJUxqpZw2+8Jka9J9tunQiwZ/N6F/SVl9Zl
+ xKMrjwEi3kWoz+D4HZ5Q==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff64uutp-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff64uuu6-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Apr 2024 14:27:52 +0200 (MEST)
+ Fri, 19 Apr 2024 14:28:01 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id AC2EC4002D;
- Fri, 19 Apr 2024 14:27:48 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 690444002D;
+ Fri, 19 Apr 2024 14:27:57 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0758A21A90E;
- Fri, 19 Apr 2024 14:27:31 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id C497721A90A;
+ Fri, 19 Apr 2024 14:27:39 +0200 (CEST)
 Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
- 2024 14:27:30 +0200
-Message-ID: <a63d9bd8-20c3-4688-afbc-9331d8226196@foss.st.com>
-Date: Fri, 19 Apr 2024 14:27:30 +0200
+ 2024 14:27:39 +0200
+Message-ID: <3800fc9b-e3a9-4a2b-825c-69eeb51127c1@foss.st.com>
+Date: Fri, 19 Apr 2024 14:27:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 18/25] ARM: dts: stm32: Add gpio-keys for
+Subject: Re: [PATCH v1 19/25] ARM: dts: stm32: Don't probe red led at boot for
  stm32mp157c-ed1-u-boot
 Content-Language: en-US
 To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Simon Glass
  <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 References: <20240409150215.2497778-1-patrice.chotard@foss.st.com>
- <20240409150215.2497778-19-patrice.chotard@foss.st.com>
- <31b95b0f-a368-4afe-957a-a75dd02417c9@foss.st.com>
+ <20240409150215.2497778-20-patrice.chotard@foss.st.com>
+ <f1651033-c5c6-4454-8fd7-0b68db908de1@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <31b95b0f-a368-4afe-957a-a75dd02417c9@foss.st.com>
+In-Reply-To: <f1651033-c5c6-4454-8fd7-0b68db908de1@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.252.13.94]
@@ -98,18 +98,22 @@ On 4/17/24 11:11, Patrick DELAUNAY wrote:
 > Hi,
 > 
 > On 4/9/24 17:02, Patrice Chotard wrote:
->> Add 2 gpio-keys :
->>    _ button-user-1 for stm32prog mode activation.
->>    _ button-user-2 for fastboot mode activation.
+>> red led and button dedicated to fastboot share the same gpio GPIOA13.
+>> Led driver is probed early so the corresponding gpio is taken and
+>> configured in output which forbid fastboot and stm32prog button usage.
 >>
->> Remove proprietary st,fastboot-gpios and st,stm32prog-gpios.
+>> To avoid this, remove the "default-state" property from red led node.
+>>
+>> This will avoid to trigger the led driver probe() to configure the led
+>> default state during startup.
 >>
 >> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 >> ---
 >>
->>   arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi | 19 +++++++++++++++++--
->>   1 file changed, 17 insertions(+), 2 deletions(-)
+>>   arch/arm/dts/stm32mp157c-ed1-u-boot.dtsi | 1 -
+>>   1 file changed, 1 deletion(-)
 >>
+> 
 > 
 > Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > 
