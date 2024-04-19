@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D410C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 00:34:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0377BC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 00:34:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B10188860F;
-	Fri, 19 Apr 2024 02:34:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 580EF88682;
+	Fri, 19 Apr 2024 02:34:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gompa.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CC6E885DE; Fri, 19 Apr 2024 02:34:00 +0200 (CEST)
-Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com
- [209.85.167.49])
+ id 6BA3588690; Fri, 19 Apr 2024 02:34:26 +0200 (CEST)
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
+ [209.85.167.46])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 646058862B
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 02:33:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7B9C1885DE
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 02:34:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=gompa.dev
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ngompa13@gmail.com
-Received: by mail-lf1-f49.google.com with SMTP id
- 2adb3069b0e04-516f2e0edb7so1932886e87.1
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 17:33:58 -0700 (PDT)
+Received: by mail-lf1-f46.google.com with SMTP id
+ 2adb3069b0e04-5196c755e82so1908427e87.0
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 17:34:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713486837; x=1714091637;
+ d=1e100.net; s=20230601; t=1713486863; x=1714091663;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=PhD14Fcqz09Aolmox4funyeAN+UtnsdTMtIVtk68AGk=;
- b=PeEU9SwJMbHFLMJJSBdom1514OQUE76l/uz4yzknTsZt2DVgwOujNdM5urdJE7JAj2
- H/TffAx/ffK3xqua+bGUEaVSMNhjkrBU8Ht0ZtpDb5sFLZU/JQPdNwOqY177LV7MP3Yv
- gIpxqvvcLvfoMzdV1uwbxPWbGninUWPoXq8VdifsIZKecdAK/TKKE6lQqVT7PVjzsnve
- D91Kx23OhRKNNwO5o2e90PLXSCMWZLWjsSxkIhsg2/u0oS6toEVa1t/fruRfmKVVS0x1
- e9rUl3CaJtY6O1xtik3ob869k80ClGCc5i1zITSnAyd4dt7tng+/p1yWDHw/GmgVHE8C
- 7EGg==
+ bh=NSYLD5SwzBaB5LC4mmFD62Vk9Hl4DW4hxIfMegLA96c=;
+ b=cfv+OkpcPdVwEHgwZRgFjIs1SPZp93Pelnu9caeRfKTSOnVe3bPtrGB79uuInB9VuV
+ SIF5oiVioyruCsobr5oJnGFuo3iG8JHoA0T2FJrA9Ivgg8N4nsuvT7LiwhrTxCsklG4N
+ jMQ5jZpDS79qp94LgHZu29vNSP2lBeAWE52nzXLml455BqCTQ9kEbTfd2LKIgNoRwlFK
+ QRxkHF4eeJu616b2ftwpd46DcSPeK/79lr/O9bZ1ZszLZ3fv5MzGaAL7cDFsaFxA2vQ5
+ Q3NANoZYqdMlX6+rcMql/H1J9MFZbeasZBvhal7BTnEX3R3GF+83Sy8FBe4NwbNBTn8K
+ cFRA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX3D08llU+b7zKX8XuT6WwleLDSyF4W9C3ljx+ISBOes13bpMjGk/tn3p+wrbYaqt4nwWqw8l1leEhrIQMeScDQwuRj5g==
-X-Gm-Message-State: AOJu0YwE34anxiDBV/wcEE0Eg5ITRWOwny9Wj+cnvSe8Sv9qm8T3bQl5
- eCYZXI1sQ0av87QJ4DJxJw6Xand8ndko1gwTT7L6AztApluWgRUwuTKWcvfkklEh1g==
-X-Google-Smtp-Source: AGHT+IFhNTSIJIUe4V9vWam4JZAgQ68shZt+Z3nl5HJSgFfEnxMqdqnxmuAD03Gmy24AapWqB956fQ==
-X-Received: by 2002:ac2:5196:0:b0:518:b069:3b7d with SMTP id
- u22-20020ac25196000000b00518b0693b7dmr314026lfi.6.1713486837102; 
- Thu, 18 Apr 2024 17:33:57 -0700 (PDT)
-Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com.
- [209.85.218.53]) by smtp.gmail.com with ESMTPSA id
- s3-20020a056402164300b00562d908daf4sm1457029edx.84.2024.04.18.17.33.56
+ AJvYcCXq6oRqX8H02QUQd/LiyQ+MmPLeq0v0o4P4bXgd5m/lEhs9Ju8OKmdMd3uZX9eZKYL2+fVsF/CNvS2vG1v04FTPw38xVg==
+X-Gm-Message-State: AOJu0Yxw2ynO7eC7SPeRCyizxTCe44j/gwyC/fXwo0hOsanwP6NEbmbT
+ y3wL0T5WsBthlmyECghugqjHWr07NsK9dbH+l5aGATStURnzkpM48JsF4rOdcoWOqw==
+X-Google-Smtp-Source: AGHT+IFf8fHM3K4XHSETztkynSmxfTG96XUfRbdLgOEc1BXEa6KipwZIsw6vqUq5LGsmVnQ0F4T4sQ==
+X-Received: by 2002:ac2:4a69:0:b0:513:b062:98c4 with SMTP id
+ q9-20020ac24a69000000b00513b06298c4mr279825lfp.11.1713486863207; 
+ Thu, 18 Apr 2024 17:34:23 -0700 (PDT)
+Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com.
+ [209.85.167.49]) by smtp.gmail.com with ESMTPSA id
+ g2-20020a19e042000000b0051884ea2a32sm465621lfj.31.2024.04.18.17.34.22
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Apr 2024 17:33:56 -0700 (PDT)
-Received: by mail-ej1-f53.google.com with SMTP id
- a640c23a62f3a-a524ecaf215so168482266b.2
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 17:33:56 -0700 (PDT)
+ Thu, 18 Apr 2024 17:34:22 -0700 (PDT)
+Received: by mail-lf1-f49.google.com with SMTP id
+ 2adb3069b0e04-51abf1a9332so84381e87.3
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 17:34:22 -0700 (PDT)
 X-Forwarded-Encrypted: i=1;
- AJvYcCUk3F5HmD+Zls7aQaIhnGCX6aKbDCeWvLiYDNPCUh13ojMOZXohQxNdosseSDnIH2uCw0pPSB0Joownajn6jKSPOYuAtA==
-X-Received: by 2002:a17:907:980e:b0:a52:2d35:5e28 with SMTP id
- ji14-20020a170907980e00b00a522d355e28mr410282ejc.57.1713486836344; Thu, 18
- Apr 2024 17:33:56 -0700 (PDT)
+ AJvYcCW/dea36XiThb8UMJ1H+OG4sYg2fD/G+srIF4fZOJMbQejQeeCDkJpAg4G8K1VBKd5PEJ6WT0lXb0coc+P30VYTKxwvdA==
+X-Received: by 2002:a05:6512:3714:b0:519:231:e4b9 with SMTP id
+ z20-20020a056512371400b005190231e4b9mr254768lfr.48.1713486862553; Thu, 18 Apr
+ 2024 17:34:22 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240418-apple_config-v2-0-7e5c6b9a9db3@jannau.net>
- <20240418-apple_config-v2-4-7e5c6b9a9db3@jannau.net>
-In-Reply-To: <20240418-apple_config-v2-4-7e5c6b9a9db3@jannau.net>
+ <20240418-apple_config-v2-5-7e5c6b9a9db3@jannau.net>
+In-Reply-To: <20240418-apple_config-v2-5-7e5c6b9a9db3@jannau.net>
 From: Neal Gompa <neal@gompa.dev>
-Date: Thu, 18 Apr 2024 20:33:20 -0400
-X-Gmail-Original-Message-ID: <CAEg-Je8q_nKO06X1uLLBmGzcHSRbiW6Th+KJdcv4QSQwVC_nNw@mail.gmail.com>
-Message-ID: <CAEg-Je8q_nKO06X1uLLBmGzcHSRbiW6Th+KJdcv4QSQwVC_nNw@mail.gmail.com>
-Subject: Re: [PATCH v2 4/5] arm: apple: Switch to standard boot
+Date: Thu, 18 Apr 2024 20:33:45 -0400
+X-Gmail-Original-Message-ID: <CAEg-Je98=-j4zOhfy4L3smy5PKqRyaNMJX5H_6jKr0o2pDJqFQ@mail.gmail.com>
+Message-ID: <CAEg-Je98=-j4zOhfy4L3smy5PKqRyaNMJX5H_6jKr0o2pDJqFQ@mail.gmail.com>
+Subject: Re: [PATCH v2 5/5] arm: apple: Do not list bootflows on boot
 To: j@jannau.net
 Cc: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>, 
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, asahi@lists.linux.dev
@@ -95,61 +95,26 @@ On Thu, Apr 18, 2024 at 3:00=E2=80=AFPM Janne Grunau via B4 Relay
 >
 > From: Janne Grunau <j@jannau.net>
 >
-> Use standard boot instead of the distro boot scripts. Use
-> BOOTSTD_FULL instead of BOOTSTD_DEFAULTS for easier interactive use.
+> The bootflow list is only seen briefly and is probably more confusing
+> than helpful.
 >
 > Signed-off-by: Janne Grunau <j@jannau.net>
 > ---
->  arch/arm/Kconfig        |  2 +-
->  include/configs/apple.h | 20 ++------------------
->  2 files changed, 3 insertions(+), 19 deletions(-)
+>  configs/apple_m1_defconfig | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> index 01d6556c42..9b83b2e6f8 100644
-> --- a/arch/arm/Kconfig
-> +++ b/arch/arm/Kconfig
-> @@ -1034,7 +1034,7 @@ config ARCH_APPLE
->         select USB
->         imply CMD_DM
->         imply CMD_GPT
-> -       imply DISTRO_DEFAULTS
-> +       imply BOOTSTD_FULL
->         imply OF_HAS_PRIOR_STAGE
->
->  config ARCH_OWL
-> diff --git a/include/configs/apple.h b/include/configs/apple.h
-> index a70440b3ad..1e08b11448 100644
-> --- a/include/configs/apple.h
-> +++ b/include/configs/apple.h
-> @@ -9,26 +9,10 @@
->         "stdout=3Dvidconsole,serial\0" \
->         "stderr=3Dvidconsole,serial\0"
->
-> -#if IS_ENABLED(CONFIG_CMD_NVME)
-> -       #define BOOT_TARGET_NVME(func) func(NVME, nvme, 0)
-> -#else
-> -       #define BOOT_TARGET_NVME(func)
-> -#endif
-> -
-> -#if IS_ENABLED(CONFIG_CMD_USB)
-> -       #define BOOT_TARGET_USB(func) func(USB, usb, 0)
-> -#else
-> -       #define BOOT_TARGET_USB(func)
-> -#endif
-> -
-> -#define BOOT_TARGET_DEVICES(func) \
-> -       BOOT_TARGET_NVME(func) \
-> -       BOOT_TARGET_USB(func)
-> -
-> -#include <config_distro_bootcmd.h>
-> +#define BOOT_TARGETS   "nvme usb"
->
->  #define CFG_EXTRA_ENV_SETTINGS \
->         ENV_DEVICE_SETTINGS \
-> -       BOOTENV
-> +       "boot_targets=3D" BOOT_TARGETS "\0"
->
->  #endif
+> diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
+> index c30aec7c55..4eac1a9e2d 100644
+> --- a/configs/apple_m1_defconfig
+> +++ b/configs/apple_m1_defconfig
+> @@ -8,6 +8,7 @@ CONFIG_SYS_CBSIZE=3D256
+>  CONFIG_SYS_PBSIZE=3D276
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
+> +CONFIG_BOOTCOMMAND=3D"bootflow scan -b"
+>  CONFIG_BOARD_LATE_INIT=3Dy
+>  CONFIG_CMD_SELECT_FONT=3Dy
+>  # CONFIG_NET is not set
 >
 > --
 > 2.44.0
