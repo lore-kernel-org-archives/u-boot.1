@@ -4,84 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD12C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 18 Apr 2024 23:19:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D410C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 00:34:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E45AF88668;
-	Fri, 19 Apr 2024 01:19:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B10188860F;
+	Fri, 19 Apr 2024 02:34:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=gompa.dev
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RGiUouAF";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B5AF88667; Fri, 19 Apr 2024 01:19:19 +0200 (CEST)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 5CC6E885DE; Fri, 19 Apr 2024 02:34:00 +0200 (CEST)
+Received: from mail-lf1-f49.google.com (mail-lf1-f49.google.com
+ [209.85.167.49])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 496E68868D
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 01:19:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 646058862B
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 02:33:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=gompa.dev
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-34665dd7610so731970f8f.3
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 16:19:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713482356; x=1714087156; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=FLoC0q6l9RmN2lK9IeLgwW4D6JAmWyu9OKKr+Xo2IhI=;
- b=RGiUouAFDiyzs9YZMukeD0+l3i9yNT+Eiwuyq0tHtnLAFTAydYD1NCNrrMlrqXryVZ
- 40P9Nf5o5LRbHmXKi5MwWeSkOKReZZbKgcejdJ2KvWYVcoXpjEonRM1BVoBl3gKbzyHT
- lezKdM1QhOs1XkpoTGAd69w8VUm6CJREI5HG22c6vyL2DQFADSJTQ/BDRe/gYJhCAFpn
- mZwOcDbA2hp4bSjfw1J39O41soXYfv/uH3kautrBz2scWTCQYQ6wdGJKlTVuZQmZsEsV
- 3GzugzjrGD+yR7DdaizmBXHsiIzo4dGt6QCibvpa+S6EqOjTD/s5VQuCBBNvysS+HCDn
- iV7Q==
+ spf=pass smtp.mailfrom=ngompa13@gmail.com
+Received: by mail-lf1-f49.google.com with SMTP id
+ 2adb3069b0e04-516f2e0edb7so1932886e87.1
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 17:33:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713482356; x=1714087156;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=FLoC0q6l9RmN2lK9IeLgwW4D6JAmWyu9OKKr+Xo2IhI=;
- b=YEwfRWm2Gww8ECyvhKys1cPMF2cbbIXmpIH3+CX3EnBqJQt2J5DKlkgb0IklyQhTOf
- QABCf//yyONd7ViP9vgMPkG8zg2h/Uuv0djDgXT18PbgyOokBmtnSGV/D+cZOgwv/QCV
- SzLZvMKE39Gz5/mWgeKkdN1LoKEI9vL5YCCpJOXVBKpgvENWnb7p+kh0IRUY1suXPDQv
- daze4cDwDVMHTPBfcK/yaz7Qy1IZolF2Kawh7eHlShxRC9iDBGqTdnZoJjrKm4uRJGXF
- oaBJ63lEP7K8iQUhLViEdzRpOI3FcnLz+96ttO7Nc/bf2jpY8fdvIVRuJ311bEe2MbDL
- hitw==
+ d=1e100.net; s=20230601; t=1713486837; x=1714091637;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=PhD14Fcqz09Aolmox4funyeAN+UtnsdTMtIVtk68AGk=;
+ b=PeEU9SwJMbHFLMJJSBdom1514OQUE76l/uz4yzknTsZt2DVgwOujNdM5urdJE7JAj2
+ H/TffAx/ffK3xqua+bGUEaVSMNhjkrBU8Ht0ZtpDb5sFLZU/JQPdNwOqY177LV7MP3Yv
+ gIpxqvvcLvfoMzdV1uwbxPWbGninUWPoXq8VdifsIZKecdAK/TKKE6lQqVT7PVjzsnve
+ D91Kx23OhRKNNwO5o2e90PLXSCMWZLWjsSxkIhsg2/u0oS6toEVa1t/fruRfmKVVS0x1
+ e9rUl3CaJtY6O1xtik3ob869k80ClGCc5i1zITSnAyd4dt7tng+/p1yWDHw/GmgVHE8C
+ 7EGg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVlJ7ggZ/FLSd9ffs7RXJurcCrFA9cMqh8q5BOa++52p4CvgwjLSL1AbyfyO622L0j6UZS3oqMTqM8/IUVpw1+lqgGqNQ==
-X-Gm-Message-State: AOJu0YwbE0Vi88CqBqYCpQy/ETq3Z/D6hpKRrU5NK/ZTckBg/ZyqVb+A
- jvS+bjdWu4PbozztN4QyfmVEh+nDReUMYKginnmFP48OUVNPlh1jadCI5ohl6rg=
-X-Google-Smtp-Source: AGHT+IGMZwZRZ6R1GvhW011zMBwQdPGbaauGFEqHP6Y9SLKHK+FrIMaxMZqMHZREwp8zlZOg5SEs1g==
-X-Received: by 2002:a5d:678e:0:b0:341:d912:1fec with SMTP id
- v14-20020a5d678e000000b00341d9121fecmr170416wru.49.1713482355628; 
- Thu, 18 Apr 2024 16:19:15 -0700 (PDT)
-Received: from [192.168.1.78] (host-92-17-96-232.as13285.net. [92.17.96.232])
- by smtp.gmail.com with ESMTPSA id
- k6-20020a5d6d46000000b003434f526cb5sm2891858wri.95.2024.04.18.16.19.14
+ AJvYcCX3D08llU+b7zKX8XuT6WwleLDSyF4W9C3ljx+ISBOes13bpMjGk/tn3p+wrbYaqt4nwWqw8l1leEhrIQMeScDQwuRj5g==
+X-Gm-Message-State: AOJu0YwE34anxiDBV/wcEE0Eg5ITRWOwny9Wj+cnvSe8Sv9qm8T3bQl5
+ eCYZXI1sQ0av87QJ4DJxJw6Xand8ndko1gwTT7L6AztApluWgRUwuTKWcvfkklEh1g==
+X-Google-Smtp-Source: AGHT+IFhNTSIJIUe4V9vWam4JZAgQ68shZt+Z3nl5HJSgFfEnxMqdqnxmuAD03Gmy24AapWqB956fQ==
+X-Received: by 2002:ac2:5196:0:b0:518:b069:3b7d with SMTP id
+ u22-20020ac25196000000b00518b0693b7dmr314026lfi.6.1713486837102; 
+ Thu, 18 Apr 2024 17:33:57 -0700 (PDT)
+Received: from mail-ej1-f53.google.com (mail-ej1-f53.google.com.
+ [209.85.218.53]) by smtp.gmail.com with ESMTPSA id
+ s3-20020a056402164300b00562d908daf4sm1457029edx.84.2024.04.18.17.33.56
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Apr 2024 16:19:15 -0700 (PDT)
-Message-ID: <d1d12577-d5a2-493e-b07a-b2fca2b6558c@linaro.org>
-Date: Fri, 19 Apr 2024 00:19:14 +0100
+ Thu, 18 Apr 2024 17:33:56 -0700 (PDT)
+Received: by mail-ej1-f53.google.com with SMTP id
+ a640c23a62f3a-a524ecaf215so168482266b.2
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 17:33:56 -0700 (PDT)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUk3F5HmD+Zls7aQaIhnGCX6aKbDCeWvLiYDNPCUh13ojMOZXohQxNdosseSDnIH2uCw0pPSB0Joownajn6jKSPOYuAtA==
+X-Received: by 2002:a17:907:980e:b0:a52:2d35:5e28 with SMTP id
+ ji14-20020a170907980e00b00a522d355e28mr410282ejc.57.1713486836344; Thu, 18
+ Apr 2024 17:33:56 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 6/9] mach-snapdragon: implement ft_board_setup() for USB
- role selection
-Content-Language: en-US
-To: Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-References: <20240418-b4-qcom-rbx-fixes-v1-0-f5f19d52969e@linaro.org>
- <20240418-b4-qcom-rbx-fixes-v1-6-f5f19d52969e@linaro.org>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240418-b4-qcom-rbx-fixes-v1-6-f5f19d52969e@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20240418-apple_config-v2-0-7e5c6b9a9db3@jannau.net>
+ <20240418-apple_config-v2-4-7e5c6b9a9db3@jannau.net>
+In-Reply-To: <20240418-apple_config-v2-4-7e5c6b9a9db3@jannau.net>
+From: Neal Gompa <neal@gompa.dev>
+Date: Thu, 18 Apr 2024 20:33:20 -0400
+X-Gmail-Original-Message-ID: <CAEg-Je8q_nKO06X1uLLBmGzcHSRbiW6Th+KJdcv4QSQwVC_nNw@mail.gmail.com>
+Message-ID: <CAEg-Je8q_nKO06X1uLLBmGzcHSRbiW6Th+KJdcv4QSQwVC_nNw@mail.gmail.com>
+Subject: Re: [PATCH v2 4/5] arm: apple: Switch to standard boot
+To: j@jannau.net
+Cc: Mark Kettenis <kettenis@openbsd.org>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de, asahi@lists.linux.dev
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,64 +90,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 18/04/2024 18:25, Caleb Connolly wrote:
-> Some Qualcomm boards have only one USB controller which is muxed between
-> the type-c port and an internal USB hub for type-A and ethernet. We
-> modify the DT for these to force them to host mode in U-Boot. However in
-> Linux DRD role switching is supported (required, even). Use
-> ft_board_setup() to adjust the dr_mode property for these boards.
-> 
-> While we're here, define pr_fmt for this file so we can more easily
-> identify log messages.
-> 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+On Thu, Apr 18, 2024 at 3:00=E2=80=AFPM Janne Grunau via B4 Relay
+<devnull+j.jannau.net@kernel.org> wrote:
+>
+> From: Janne Grunau <j@jannau.net>
+>
+> Use standard boot instead of the distro boot scripts. Use
+> BOOTSTD_FULL instead of BOOTSTD_DEFAULTS for easier interactive use.
+>
+> Signed-off-by: Janne Grunau <j@jannau.net>
 > ---
->  arch/arm/mach-snapdragon/of_fixup.c | 20 ++++++++++++++++++++
->  1 file changed, 20 insertions(+)
-> 
-> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index 3f7ac227bd09..55368dd43b66 100644
-> --- a/arch/arm/mach-snapdragon/of_fixup.c
-> +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -16,8 +16,10 @@
->   * Copyright (c) 2024 Linaro Ltd.
->   *   Author: Caleb Connolly <caleb.connolly@linaro.org>
->   */
->  
-> +#define pr_fmt(fmt) "of_fixup: " fmt
-> +
->  #include <dt-bindings/input/linux-event-codes.h>
->  #include <dm/of_access.h>
->  #include <dm/of.h>
->  #include <fdt_support.h>
-> @@ -152,4 +154,22 @@ void qcom_of_fixup_nodes(void)
->  {
->  	time_call(fixup_usb_nodes);
->  	time_call(fixup_power_domains);
->  }
-> +
-> +int ft_board_setup(void *blob, struct bd_info __maybe_unused *bd)
-> +{
-> +	struct fdt_header *fdt = blob;
-> +	int node;
-> +
-> +	/* We only want to do this fix-up for the RB1 board, quick return for all others */
-> +	if (!fdt_node_check_compatible(fdt, 0, "qcom,qrb4210-rb2"))
+>  arch/arm/Kconfig        |  2 +-
+>  include/configs/apple.h | 20 ++------------------
+>  2 files changed, 3 insertions(+), 19 deletions(-)
+>
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 01d6556c42..9b83b2e6f8 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -1034,7 +1034,7 @@ config ARCH_APPLE
+>         select USB
+>         imply CMD_DM
+>         imply CMD_GPT
+> -       imply DISTRO_DEFAULTS
+> +       imply BOOTSTD_FULL
+>         imply OF_HAS_PRIOR_STAGE
+>
+>  config ARCH_OWL
+> diff --git a/include/configs/apple.h b/include/configs/apple.h
+> index a70440b3ad..1e08b11448 100644
+> --- a/include/configs/apple.h
+> +++ b/include/configs/apple.h
+> @@ -9,26 +9,10 @@
+>         "stdout=3Dvidconsole,serial\0" \
+>         "stderr=3Dvidconsole,serial\0"
+>
+> -#if IS_ENABLED(CONFIG_CMD_NVME)
+> -       #define BOOT_TARGET_NVME(func) func(NVME, nvme, 0)
+> -#else
+> -       #define BOOT_TARGET_NVME(func)
+> -#endif
+> -
+> -#if IS_ENABLED(CONFIG_CMD_USB)
+> -       #define BOOT_TARGET_USB(func) func(USB, usb, 0)
+> -#else
+> -       #define BOOT_TARGET_USB(func)
+> -#endif
+> -
+> -#define BOOT_TARGET_DEVICES(func) \
+> -       BOOT_TARGET_NVME(func) \
+> -       BOOT_TARGET_USB(func)
+> -
+> -#include <config_distro_bootcmd.h>
+> +#define BOOT_TARGETS   "nvme usb"
+>
+>  #define CFG_EXTRA_ENV_SETTINGS \
+>         ENV_DEVICE_SETTINGS \
+> -       BOOTENV
+> +       "boot_targets=3D" BOOT_TARGETS "\0"
+>
+>  #endif
+>
+> --
+> 2.44.0
+>
 
-This if block is accidentally inverted...
-> +		return 0;
-> +
-> +	fdt_for_each_node_by_compatible(node, blob, 0, "snps,dwc3") {
-> +		log_debug("%s: Setting 'dr_mode' to OTG\n", fdt_get_name(blob, node, NULL));
-> +		fdt_setprop_string(fdt, node, "dr_mode", "otg");
-> +		break;
-> +	}
-> +
-> +	return 0;
-> +}
-> 
+Reviewed-by: Neal Gompa <neal@gompa.dev>
 
--- 
-// Caleb (they/them)
+
+--=20
+=E7=9C=9F=E5=AE=9F=E3=81=AF=E3=81=84=E3=81=A4=E3=82=82=E4=B8=80=E3=81=A4=EF=
+=BC=81/ Always, there's only one truth!
