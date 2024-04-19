@@ -4,86 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8881C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 02:44:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 919C5C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 03:59:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5587888698;
-	Fri, 19 Apr 2024 04:44:18 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BF5DB886A6;
+	Fri, 19 Apr 2024 05:59:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YejfC3lb";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D3E3885D7; Fri, 19 Apr 2024 04:44:15 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1713499191;
+	bh=AFQVp/crksix6jv0cPvhRnA0FzSOunsA2Y2Fhs1IAbo=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=YXdQbHJyMM5x7bGZeZVAWawJckZ5pBSfAt/7T8NcU8gsIZV39tNX5nvOIJlKhWTVs
+	 Mb8FWehowXUrGRfGAjKD39nqAycp0+G7zF9PmpuSTryrgNSv5+EtvY/kmD/bcDSi2N
+	 ParAPoRcriPcIEL8o9NRF3hBz+pC/Q4VAgB1JEb8h/ENLN4oGcqpvFolKQsJSd1BiE
+	 qGOJy19tX/ZLi4WI99+JVMbd1MjuDlek7OZwJUDsJvrkX7ntQlR//I+Gu1X/zvqYA+
+	 ryxPqesjkchdnczLsJr4ixXMmBDkPUeYb5wX2HmnAzgDJuKntZTF5fG/j1n94bkglj
+	 GXXEhVlwczpqw==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C613B88692
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 04:44:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-69629b4ae2bso13231766d6.3
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:44:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713494650; x=1714099450; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=977DOjy+/nmLnm/j8vgx0HWOevLZkl5hQczklKkRbfQ=;
- b=YejfC3lbejFZwhk+FVA3+fUPNZogFASMvcJlj5PnCDa/MXN42hwztB5xEz39FfIoCJ
- cAiLanylaggJ8gR526Txkac+DGYJ1RB1yAT8uxVO2jfXGk05rtuTNk69uJK8DzmtlUZF
- XfByGDIQaVEM00kSLkL5LKJezNfVFq/C88mX6f0xVTzCefY9K0L9s8AyHMaR7HSI8PxL
- QPr1wK7g4pniSDY5SWv/VgDikJebWEtjLX9qoDsj57d1tmrFAcOPgU9lDxs5crNZniJY
- adfjwnf/JkZAU7kDLCKg8ixDBnx1MD3kklPkk2zMMwf2xExySPRSYiyuG5gVKuSb3v/u
- 9UNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713494650; x=1714099450;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=977DOjy+/nmLnm/j8vgx0HWOevLZkl5hQczklKkRbfQ=;
- b=VbHYiiZIOSOD3uBzWKyalU+IFXd/dz3rygXhThYmwhaMfTQgaRNMdkoTmwjg9Ey9H7
- d9W44D/qQ67kzIrbjk20pB36bAbAE/Nx9K0jRVuTyqJfVzJJVByV0JCiKdeGdWV2d6uv
- pf+vZVJlrrrpq07bTOcF200R0hj+lu2HFW0I9O0fIqgloWmU0QbObd6jWnpx1iLn5jXw
- 09tYZTz302eokPQ85EV5iagTGSueCJhTxOsj2o+Efcqld9upelLMBOf3I7OoBgb9jSu0
- 2fOzzdI2hWsJmrLli2T+t4FqJlr8NvBI0l0tB21+CqqBj/nhW7+cr5X7+QeaBgFdyw5S
- GSnw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXZm069rrZ8ewi5uPILyyIxWDTwL3efMid0hh8vsNZCJIMKI8HCMOSgPKuGmh/o4Iv5K1XzMlcyrU5IhSJe7cK+CS76zQ==
-X-Gm-Message-State: AOJu0Yyc7m02ZmRpLDPoUdMFptLF4ks5eOO6fHK3LjjBnj9gEs6gynPw
- GMnvuo/K5kGDBYgyJM6/OqAvV892lwjC1e+E/CB3oXd9srcjGFdo
-X-Google-Smtp-Source: AGHT+IEPrjS2narXhDrXYk4p2Lgyy5e8D8VbDoKQzfxZBrU1lfzEw5+qA51aZ0l13c8q2IwO87QdXg==
-X-Received: by 2002:a0c:fde3:0:b0:6a0:6249:d99 with SMTP id
- m3-20020a0cfde3000000b006a062490d99mr447723qvu.31.1713494650641; 
- Thu, 18 Apr 2024 19:44:10 -0700 (PDT)
-Received: from [192.168.1.201] (pool-108-48-157-169.washdc.fios.verizon.net.
- [108.48.157.169]) by smtp.gmail.com with ESMTPSA id
- q2-20020a0c8cc2000000b006a04dacd0e5sm77335qvb.86.2024.04.18.19.44.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Apr 2024 19:44:10 -0700 (PDT)
-Message-ID: <93f82e78-1cf1-623b-56c0-353a84044584@gmail.com>
-Date: Thu, 18 Apr 2024 22:44:09 -0400
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id E5C888837D;
+ Fri, 19 Apr 2024 05:59:49 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1713499190;
+ bh=AFQVp/crksix6jv0cPvhRnA0FzSOunsA2Y2Fhs1IAbo=;
+ h=From:To:Cc:Subject:Date:From;
+ b=QbWf/6//6DoM1FXLLEh6kee2mqJs1BGBb9FTGYM3nKseun8Zzb65pKQ8NWv7VEVqO
+ iTUYIeuBHB6kaeBGTHMLnuNNfKTDj0tJJhwfrKIlcvJj9NrsxMgqpKQduzLRUEN208
+ cN+uuMWVwzybK2g07ChOEWIkb0Tdaiifr5CI40+5tUaQ/f++uVUXNRaRDFeusEybag
+ VAF3ncC30i9VrFUVHFVa1ElTrEJP6+mJc5rHegEvKKGDKtjfBfnupeWcS6VO9NsnM0
+ LI186NjbdsqarEpoyucDkszuDeIlOh77kV9ux8q+UtLNm4jji5guM3S5MOvGBTcaZD
+ lNBQNibkfQyPA==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v3] ARM: stm32: Initialize TAMP_SMCR BKP..PROT fields on
+ STM32MP15xx
+Date: Fri, 19 Apr 2024 05:59:05 +0200
+Message-ID: <20240419035931.178840-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [PATCH v2 01/23] clk: rockchip: rk356x: Add CLK_USB3OTGx_REF
- support
-Content-Language: en-US
-To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-References: <20240413181425.1384357-1-jonas@kwiboo.se>
- <20240413181425.1384357-2-jonas@kwiboo.se>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <20240413181425.1384357-2-jonas@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,40 +69,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/13/24 14:13, Jonas Karlman wrote:
-> The CLK_USB3OTGx_REF clocks is used as reference clock for USB3 block.
-> 
-> Add simple support to get rate of CLK_USB3OTGx_REF clocks to fix
-> reference clock period configuration.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
-> v2: No change
-> ---
->   drivers/clk/rockchip/clk_rk3568.c | 4 ++++
->   1 file changed, 4 insertions(+)
-> 
-> diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
-> index 57ef27dda893..999f48ea4b4e 100644
-> --- a/drivers/clk/rockchip/clk_rk3568.c
-> +++ b/drivers/clk/rockchip/clk_rk3568.c
-> @@ -2417,6 +2417,8 @@ static ulong rk3568_clk_get_rate(struct clk *clk)
->   	case BCLK_EMMC:
->   		rate = rk3568_emmc_get_bclk(priv);
->   		break;
-> +	case CLK_USB3OTG0_REF:
-> +	case CLK_USB3OTG1_REF:
->   	case TCLK_EMMC:
->   		rate = OSC_HZ;
->   		break;
-> @@ -2596,6 +2598,8 @@ static ulong rk3568_clk_set_rate(struct clk *clk, ulong rate)
->   	case BCLK_EMMC:
->   		ret = rk3568_emmc_set_bclk(priv, rate);
->   		break;
-> +	case CLK_USB3OTG0_REF:
-> +	case CLK_USB3OTG1_REF:
->   	case TCLK_EMMC:
->   		ret = OSC_HZ;
->   		break;
+In case of an OTP-CLOSED STM32MP15xx system, the CPU core 1 cannot be
+released from endless loop in BootROM only by populating TAMP BKPxR 4
+and 5 with magic and branch address and sending SGI0 interrupt from
+core 0 to core 1 twice. TAMP_SMCR BKP..PROT fields must be initialized
+as well to release the core 1 from endless loop during the second SGI0
+handling on core 1. Initialize TAMP_SMCR to protect the first 32 backup
+registers, the ones which contain the core 1 magic, branch address and
+boot information.
 
-Acked-by: Sean Anderson <seanga2@gmail.com>
+This requirement seems to be undocumented, therefore it was necessary
+to trace and analyze the STM32MP15xx BootROM using OpenOCD and objdump.
+Ultimately, it turns out that a certain BootROM function reads out the
+TAMP_SMCR register and tests whether the BKP..PROT fields are non-zero.
+If they are zero, the BootROM code again waits for SGI0 using WFI, else
+the execution moves forward until it reaches handoff to the TAMP BKPxR 5
+branch address.
+
+This fixes CPU core 1 release using U-Boot PSCI implementation on an
+OTP-CLOSED system, i.e. system with fuse 0 bit 6 set.
+
+Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Simon Glass <sjg@chromium.org
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+V2: Fix up the BKPRWD/BKPWD mask typo
+V3: - Update the allocation to 0x20/0x20
+    - Update commit message
+    - Add RB from Patrick
+---
+ arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+index dd99150fbc2..d75ec99d6a1 100644
+--- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
++++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+@@ -14,6 +14,7 @@
+ #include <asm/arch/sys_proto.h>
+ #include <dm/device.h>
+ #include <dm/uclass.h>
++#include <linux/bitfield.h>
+ 
+ /* RCC register */
+ #define RCC_TZCR		(STM32_RCC_BASE + 0x00)
+@@ -41,6 +42,9 @@
+ #define TZC_REGION_ID_ACCESS0	(STM32_TZC_BASE + 0x114)
+ 
+ #define TAMP_CR1		(STM32_TAMP_BASE + 0x00)
++#define TAMP_SMCR		(STM32_TAMP_BASE + 0x20)
++#define TAMP_SMCR_BKPRWDPROT	GENMASK(7, 0)
++#define TAMP_SMCR_BKPWDPROT	GENMASK(23, 16)
+ 
+ #define PWR_CR1			(STM32_PWR_BASE + 0x00)
+ #define PWR_MCUCR		(STM32_PWR_BASE + 0x14)
+@@ -136,6 +140,18 @@ static void security_init(void)
+ 	 */
+ 	writel(0x0, TAMP_CR1);
+ 
++	/*
++	 * TAMP: Configure non-zero secure protection settings. This is
++	 * checked by BootROM function 35ac on OTP-CLOSED device during
++	 * CPU core 1 release from endless loop. If secure protection
++	 * fields are zero, the core 1 is not released from endless
++	 * loop on second SGI0.
++	 */
++	clrsetbits_le32(TAMP_SMCR,
++			TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPWDPROT,
++			FIELD_PREP(TAMP_SMCR_BKPRWDPROT, 0x20) |
++			FIELD_PREP(TAMP_SMCR_BKPWDPROT, 0x20));
++
+ 	/* GPIOZ: deactivate the security */
+ 	writel(BIT(0), RCC_MP_AHB5ENSETR);
+ 	writel(0x0, GPIOZ_SECCFGR);
+-- 
+2.43.0
+
