@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 218C6C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:17:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2B2BC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:17:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A886E887E0;
-	Fri, 19 Apr 2024 14:17:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 11475887F2;
+	Fri, 19 Apr 2024 14:17:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="xXQyLr76";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="C5pXkIXi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA0BD887DF; Fri, 19 Apr 2024 14:17:06 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
+ id 4569C887ED; Fri, 19 Apr 2024 14:17:10 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9785887D9
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:17:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60CDE887D2
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:17:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=4839221eac=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43J9VfCb030184; Fri, 19 Apr 2024 14:17:02 +0200
+ 43JAnGLM026843; Fri, 19 Apr 2024 14:17:06 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=5xrVbsIQfDnasUkpmSCcvgBgO5h80twGS3DNuF5LRdU=; b=xX
- QyLr76EuCHt8o3IdIiLY3aPmDG+dZZUGxxWnhlCHHvndw0Kn4hNMSeZ4hboqTxN3
- XGa8wFwN3qejJoVAN+TjRTnU8xb8fltaNTEnrrgfaKdTzQVHSeAsBoM8js4usbvd
- cNQMkODRsWD4M5VJ2oauDNK8t9xDhsKmrppmY/ODV5PlHpy12/wQmP96UgbRoSpj
- 9LvCRIYR/jBVqwpbL6ICEvkgPmMkjSaEpW8sPzdiQ1oLg5w5uKE/Fm9rQOFrjFaQ
- xIuowTrCuvgNGVF37fUZEIvevDbRBHnSjJeDkw0QBk7AsRYYZi8B2qZSODwtCAyt
- yGboKiSimm+sy3MJ2MiQ==
+ selector1; bh=flzRXeFzBTyzHDBcpShRTKRYvht2i71vtAXYSFBRrpg=; b=C5
+ pXkIXiNvhQZ5ElH52wltozllImWBslrqMWrT2+IfDwpi5l4mXzNBt0SJhOiV4np8
+ pyPycd7IUmX3QeQbgqs6lbgdk+yymmtDRHfZ+EbhxeOkhC9X/I+s3xSeZRbH0ihv
+ 3db3U/t/7JEwbb+trNzQ1QFUikfyaJKgRTprY06MaE3+mqqIECGeN8oqNY/Vs+Gg
+ 1E/u90B0yQYEzlyfUS19J3KTUFv9q2v5EyMcaeXS2tW9ONi1h5AAbvj7xTsiO1be
+ /GsyvnXIDRX73w3kD7G8QFVshiWj5ySZXpBm5Vz2zBMIMeqQckPVrppy9umv6JAQ
+ IZqRdA5MdJUI4N08vAiw==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xgecyrbj1-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xfhcx44cd-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Apr 2024 14:17:02 +0200 (MEST)
+ Fri, 19 Apr 2024 14:17:06 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CB13540044;
- Fri, 19 Apr 2024 14:16:58 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id EA82840045;
+ Fri, 19 Apr 2024 14:17:01 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 9CDB021A200;
- Fri, 19 Apr 2024 14:16:38 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 274932194FF;
+ Fri, 19 Apr 2024 14:16:32 +0200 (CEST)
 Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
- 2024 14:16:38 +0200
-Message-ID: <de2a436b-8d98-49c8-9311-a896dc13cc16@foss.st.com>
-Date: Fri, 19 Apr 2024 14:16:38 +0200
+ 2024 14:16:31 +0200
+Message-ID: <6aff48e7-0b7e-4bae-a1fc-3a219350727a@foss.st.com>
+Date: Fri, 19 Apr 2024 14:16:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 04/25] configs: stm32mp1: Enable BUTTON_GPIO flag for
- stm32mp15_trusted_defconfig
+Subject: Re: [PATCH v1 03/25] configs: stm32mp1: Enable BUTTON_GPIO flag for
+ stm32mp15_basic_defconfig
 Content-Language: en-US
 To: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, <u-boot@lists.denx.de>
 CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Gatien Chevallier
  <gatien.chevallier@foss.st.com>, Grzegorz Szymaszek <gszymaszek@short.pl>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, Sean Anderson
+ <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>
 References: <20240409150215.2497778-1-patrice.chotard@foss.st.com>
- <20240409150215.2497778-5-patrice.chotard@foss.st.com>
- <af1c7071-3dc2-451b-aed6-61d6b2ea3e4a@foss.st.com>
+ <20240409150215.2497778-4-patrice.chotard@foss.st.com>
+ <3d9a3897-e454-43f9-a2af-202fd035a36a@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <af1c7071-3dc2-451b-aed6-61d6b2ea3e4a@foss.st.com>
+In-Reply-To: <3d9a3897-e454-43f9-a2af-202fd035a36a@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.252.13.94]
@@ -104,22 +106,24 @@ On 4/17/24 11:04, Patrick DELAUNAY wrote:
 >> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 >> ---
 >>
->>   configs/stm32mp15_trusted_defconfig | 2 ++
+>>   configs/stm32mp15_basic_defconfig | 2 ++
 >>   1 file changed, 2 insertions(+)
 >>
->> diff --git a/configs/stm32mp15_trusted_defconfig b/configs/stm32mp15_trusted_defconfig
->> index 84b0854b557..74deaaba2e4 100644
->> --- a/configs/stm32mp15_trusted_defconfig
->> +++ b/configs/stm32mp15_trusted_defconfig
->> @@ -70,6 +70,8 @@ CONFIG_TFTP_TSIZE=y
+>> diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
+>> index 005f1d55f80..2e22bf86000 100644
+>> --- a/configs/stm32mp15_basic_defconfig
+>> +++ b/configs/stm32mp15_basic_defconfig
+>> @@ -97,6 +97,8 @@ CONFIG_TFTP_TSIZE=y
 >>   CONFIG_USE_SERVERIP=y
 >>   CONFIG_SERVERIP="192.168.1.1"
 >>   CONFIG_STM32_ADC=y
 >> +CONFIG_BUTTON=y
 >> +CONFIG_BUTTON_GPIO=y
->>   CONFIG_CLK_SCMI=y
 >>   CONFIG_SET_DFU_ALT_INFO=y
 >>   CONFIG_USB_FUNCTION_FASTBOOT=y
+>>   CONFIG_FASTBOOT_BUF_ADDR=0xC0000000
+> 
+> 
 > 
 > Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
 > 
