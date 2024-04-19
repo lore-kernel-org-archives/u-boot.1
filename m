@@ -4,86 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5A48C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 16:46:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65C82C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 16:48:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25526887DB;
-	Fri, 19 Apr 2024 18:46:27 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C38EE887FB;
+	Fri, 19 Apr 2024 18:48:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MnlkvL7a";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FCEEXVAq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46F08887D8; Fri, 19 Apr 2024 18:46:26 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 0B40B887E0; Fri, 19 Apr 2024 18:48:49 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13519887DB
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 18:46:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 143AA887FB
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 18:48:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=thierry.reding@gmail.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a55911bff66so34148866b.0
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:46:24 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a5544fd07easo252577266b.0
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:48:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713545183; x=1714149983; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1713545326; x=1714150126; darn=lists.denx.de;
  h=in-reply-to:references:to:from:subject:cc:message-id:date
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=qy5UVpIqlMDL8W/IU8HFzu2nxaSzjXElmfNFI3zDnr0=;
- b=MnlkvL7al/+EsPlsYiyEVKi2i7iLjFm5Z7i8rI3gESxy2WgcvTy57XZ9TTy6nqxjVv
- B+AXS1Ue07AYG4jlCoDrTvuspEW2N9Kgeme0uVOZ5mpIPuC+o6vGvHZViAM2/0NbNP+a
- 01AphAsI98dIkUB+XjfcOeFphhhgAhxSC0pGnza7//9DizjOU+Ms5eYNbgU1g3pg+8aS
- 5RpldQQzAXIALGVfpnwOJgFpiWvI7v03clyuMdSD6Hcgt07FiG73T8qZ8OKVocl9DHwH
- MQPw2ZecUcWxFRxJZuH7bygcbynBd8JBll/R8ZvjcId+lxXuXHeURNvEvKcTHUIlhqam
- bt0Q==
+ bh=wWcMZvvi+/hkX5dug+b+Z6Zix6kWiw6C//SgHWl3f40=;
+ b=FCEEXVAqepEJl6CivtWyqFVekrFI1FzDq4WGx4ELuSLFwUqEG5WW3t+WapPy03WfJL
+ Rvhggc3tCXMZPi8ugWSwEpLxnOSfIT2YnOvPODOM2QH9crsOtJPDZ39BVvOjpWAZGIRF
+ gsSZ+anjDUYR/rMs7Pl486pBrt5rrUx6cIlBwTRrKfedzxbNKxesPIIFw1lJ0JPaitoY
+ vyEvwtq+Mg/j8M6b07+ps8qfw6iY+HOmlEvLWpDVx7iLn4vXBP9niAJSS7okS08EhvGg
+ +t1fWpRdk9+nZ8b0vtRAy7t+cEme69kDpHbivQlXq8NECVscGwCUJ7VkRKCLRCbM3fd8
+ QVxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713545183; x=1714149983;
+ d=1e100.net; s=20230601; t=1713545326; x=1714150126;
  h=in-reply-to:references:to:from:subject:cc:message-id:date
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=qy5UVpIqlMDL8W/IU8HFzu2nxaSzjXElmfNFI3zDnr0=;
- b=qNylqs5vbyMSNH4FP1dBoLy3ljZ1enPvIpXlx5y9lzCDX/xkkpN2Ci1DoRKCh4ms1W
- yah+O+NGa9BXyVHFuVqD9FcG2kyld1VsM/bOR4Zxbo4P++kzMFTj/roHLnLnxbSG9TI9
- lHIVhFU4McKEBAvSYwgodaRSrtiU9VFKrYmQV/PaqEoLgQzHXj3OYqbObh0E2We7TqUM
- Pahp3OMkhaWTEXPjp1qD5HAMkUlF1UzuYuVdEJw4stWTvB+JRUtAE6paiOEvNmR5gbpD
- hMuP0lkjOEebSOBK5D2cAOK75kHR6ied3BnTUpGCBgMf5dnjc+FFl2l/dS7vH2malJm/
- mI+A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUbYD2mxALZXnVwSN5qbLrMOAgmaxFAds++ceYyhq0wS70c63BSfSJlaD5nhfll/K1EJom/zpzQ4Dvs+nn/8NN2h6w6iQ==
-X-Gm-Message-State: AOJu0YxoIB4YiKcqPwLA93iK+KThH20aVqNCZCqDclpOhPgSH0gPoVrE
- TmSeAWDM3wgYjFaQubU3WtIePmuhBVB9RBPXM6+zqM/eU5Cd46lm
-X-Google-Smtp-Source: AGHT+IGYXL7SP8+3972ArezYf8sF4lCVCFxVZZx+TcBrQSqZCIEneFHOaNorBpayNYQlyeperkN9fw==
-X-Received: by 2002:a17:906:4ed8:b0:a51:af7d:4652 with SMTP id
- i24-20020a1709064ed800b00a51af7d4652mr2228748ejv.32.1713545183252; 
- Fri, 19 Apr 2024 09:46:23 -0700 (PDT)
+ bh=wWcMZvvi+/hkX5dug+b+Z6Zix6kWiw6C//SgHWl3f40=;
+ b=khGXwpWnajBZjUO4g2WuUkEA6SW1S6eBaruvA8sg7xw1H6R6amCYZnbALMhDqwh1Df
+ SOg0ze409EVS1jSxz8i2NmMJQjC6lYfXlJQ5o89h/XLss2mGBy06aCmxWGsrR6R9cKG5
+ NS8IwaLVNmY3GM85Ql4UoxzZqTH2cj4enpy/ejC3q3HpFZBHLTe4MgjTPAO2mh3fos++
+ eM1OBemgPqaCyzIWc6H4SbcAqTwYS193u83RFzbbvcIYFOnmK7MdkFGCrWz2GewdcWVO
+ JeCug/DbC4yDnVnJi7ZEILQyYY13Y+gCt/ztjehQz6x77W6hRZ2/Qu9mAyBGkhy4fHit
+ fQag==
+X-Gm-Message-State: AOJu0Yze7ao2WhgFVNO3J13zMtbgZjWcTwPJtBIw0eOvNefV1vCMeiry
+ p0jwOd5vh76Y9NEEE8DVFdA6D+egOIy5VYvJ9Pl20hfzzyOv8KFR
+X-Google-Smtp-Source: AGHT+IH78VCyfuSmD46dZ428Ln2V/I6KxaezTJQBhZpAmPAmxIaVPl7X4S41rjImyhpaswrDQNQcRA==
+X-Received: by 2002:a17:906:3bcb:b0:a52:6d20:7559 with SMTP id
+ v11-20020a1709063bcb00b00a526d207559mr1691135ejf.40.1713545326418; 
+ Fri, 19 Apr 2024 09:48:46 -0700 (PDT)
 Received: from localhost
  (p200300e41f162000f22f74fffe1f3a53.dip0.t-ipconnect.de.
  [2003:e4:1f16:2000:f22f:74ff:fe1f:3a53])
  by smtp.gmail.com with ESMTPSA id
- b20-20020a170906491400b00a5552c719bcsm2400777ejq.211.2024.04.19.09.46.22
+ m19-20020a1709062b9300b00a524476aac9sm2421661ejg.108.2024.04.19.09.48.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 19 Apr 2024 09:46:22 -0700 (PDT)
+ Fri, 19 Apr 2024 09:48:46 -0700 (PDT)
 Content-Type: multipart/signed;
- boundary=4c46b15aafad30579815bc7b3761ae16d84b5f2bde309b36aec44ce4ec9b;
+ boundary=3118598f6dbc0f52f6a918ba388a5dc1bfed081e65249721fa4e8b14733d;
  micalg=pgp-sha256; protocol="application/pgp-signature"
 Mime-Version: 1.0
-Date: Fri, 19 Apr 2024 18:46:22 +0200
-Message-Id: <D0O92LGLWMLP.34AR1F3WJZQCV@gmail.com>
-Cc: "Thierry Reding" <treding@nvidia.com>, "Anatolij Gustschin"
- <agust@denx.de>, "Simon Glass" <sjg@chromium.org>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v6 06/18] video: tegra20: dc: add reset support
+Date: Fri, 19 Apr 2024 18:48:45 +0200
+Message-Id: <D0O94F99JWEQ.1KY2XXP0S1TFZ@gmail.com>
+Cc: <u-boot@lists.denx.de>
+Subject: Re: [PATCH v6 08/18] video: tegra20: dc: configure behavior if
+ PLLD/D2 is used
 From: "Thierry Reding" <thierry.reding@gmail.com>
-To: "Svyatoslav Ryhel" <clamor95@gmail.com>
+To: "Svyatoslav Ryhel" <clamor95@gmail.com>, "Thierry Reding"
+ <treding@nvidia.com>, "Anatolij Gustschin" <agust@denx.de>, "Simon Glass"
+ <sjg@chromium.org>
 X-Mailer: aerc 0.16.0-1-0-g560d6168f0ed-dirty
 References: <20240123171633.246057-1-clamor95@gmail.com>
- <20240123171633.246057-7-clamor95@gmail.com>
- <D0O8720SNXUY.58M29AZIXYVC@gmail.com>
- <CAPVz0n0UX1JOxyGbBgd430oMGUb7vDb5td3oZ2beMTVRa3tktQ@mail.gmail.com>
-In-Reply-To: <CAPVz0n0UX1JOxyGbBgd430oMGUb7vDb5td3oZ2beMTVRa3tktQ@mail.gmail.com>
+ <20240123171633.246057-9-clamor95@gmail.com>
+In-Reply-To: <20240123171633.246057-9-clamor95@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,127 +98,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---4c46b15aafad30579815bc7b3761ae16d84b5f2bde309b36aec44ce4ec9b
+--3118598f6dbc0f52f6a918ba388a5dc1bfed081e65249721fa4e8b14733d
 Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
 
-On Fri Apr 19, 2024 at 6:37 PM CEST, Svyatoslav Ryhel wrote:
-> =D0=BF=D1=82, 19 =D0=BA=D0=B2=D1=96=D1=82. 2024=E2=80=AF=D1=80. =D0=BE 19=
-:05 Thierry Reding <thierry.reding@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
-> >
-> > On Tue Jan 23, 2024 at 6:16 PM CET, Svyatoslav Ryhel wrote:
-> > > Implement reset use to discard any changes which could have been
-> > > applied to DC before and can interfere with current configuration.
-> > >
-> > > Tested-by: Agneli <poczt@protonmail.ch> # Toshiba AC100 T20
-> > > Tested-by: Robert Eckelmann <longnoserob@gmail.com> # ASUS TF101
-> > > Tested-by: Andreas Westman Dorcsak <hedmoo@yahoo.com> # ASUS Grouper =
-E1565
-> > > Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
-> > > Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T1=
-14
-> > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > > ---
-> > >  drivers/video/tegra20/tegra-dc.c | 17 +++++++++++++++++
-> > >  1 file changed, 17 insertions(+)
-> > >
-> > > diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra20=
-/tegra-dc.c
-> > > index 56a23b3c97..35abb6fe46 100644
-> > > --- a/drivers/video/tegra20/tegra-dc.c
-> > > +++ b/drivers/video/tegra20/tegra-dc.c
-> > > @@ -10,7 +10,9 @@
-> > >  #include <panel.h>
-> > >  #include <part.h>
-> > >  #include <pwm.h>
-> > > +#include <reset.h>
-> > >  #include <video.h>
-> > > +#include <linux/delay.h>
-> > >  #include <asm/cache.h>
-> > >  #include <asm/global_data.h>
-> > >  #include <asm/system.h>
-> > > @@ -342,6 +344,7 @@ static int tegra_lcd_probe(struct udevice *dev)
-> > >       struct video_uc_plat *plat =3D dev_get_uclass_plat(dev);
-> > >       struct video_priv *uc_priv =3D dev_get_uclass_priv(dev);
-> > >       struct tegra_lcd_priv *priv =3D dev_get_priv(dev);
-> > > +     struct reset_ctl reset_ctl;
-> > >       int ret;
-> > >
-> > >       /* Initialize the Tegra display controller */
-> > > @@ -349,6 +352,20 @@ static int tegra_lcd_probe(struct udevice *dev)
-> > >       funcmux_select(PERIPH_ID_DISP1, FUNCMUX_DEFAULT);
-> > >  #endif
-> > >
-> > > +     ret =3D reset_get_by_name(dev, "dc", &reset_ctl);
-> > > +     if (ret) {
-> > > +             log_err("reset_get_by_name() failed: %d\n", ret);
-> > > +             return ret;
-> > > +     }
-> > > +
-> > > +     clock_disable(priv->dc_clk[0]);
-> > > +
-> > > +     /* Reset everything set before */
-> > > +     reset_assert(&reset_ctl);
-> > > +     mdelay(4);
-> > > +     reset_deassert(&reset_ctl);
-> > > +     mdelay(4);
-> >
-> > Are you sure this works as intended? It's been a long time since I
-> > worked on this, but I seem to recall that most of these resets are
-> > actually synchronous, so in order for them to do what they're supposed
-> > to the clock needs to be kept running.
-> >
-> > The Linux driver certainly does this differently.
+On Tue Jan 23, 2024 at 6:16 PM CET, Svyatoslav Ryhel wrote:
+> If DISP1 is a PLLD/D2 child, it cannot go over 370MHz. The cause
+> of this is not quite clear. This can be overcomed by further
+> halving the PLLD/D2 if the target parent rate is over 800MHz.
+> This way DISP1 and DSI clocks will have the same frequency. The
+> shift divider in this case has to be calculated from the
+> original PLLD/D2 frequency and is passed from the DSI driver.
 >
-> You have point, but I have tried to mostly adapt Linux tegra dc driver,
-> which has same logic in probe. Maybe I have not understood it properly.
-> Testing on T20, T30 and T114 passed without issues so far.
+> Tested-by: Andreas Westman Dorcsak <hedmoo@yahoo.com> # ASUS Grouper E156=
+5
+> Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
+> Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
+> Tested-by: Jonas Schw=C3=B6bel <jonasschwoebel@yahoo.de> # Microsoft Surf=
+ace 2
+> Signed-off-by: Jonas Schw=C3=B6bel <jonasschwoebel@yahoo.de>
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>  drivers/video/tegra20/tegra-dc.c  | 34 +++++++++++++++++++------------
+>  drivers/video/tegra20/tegra-dc.h  |  1 +
+>  drivers/video/tegra20/tegra-dsi.c | 14 +++++++++++++
+>  3 files changed, 36 insertions(+), 13 deletions(-)
 
-Maybe look again. What it does is (basically):
+I'm not very familiar with these clocks, but seeing that this was
+extensively tested, I guess this is okay, so:
 
-	clock_enable();
-	mdelay(4);
-	reset_assert();
-	mdelay(4);
-	clock_disable();
+Acked-by: Thierry Reding <treding@nvidia.com>
 
-That should ensure that it's completely reset at that point. Now before
-any subsequent register accesses happen it will do this:
-
-	clock_enable();
-	reset_deassert();
-
-to take it out of reset again. Perhaps that's something you want to keep
-doing in probe() in U-Boot. In that case maybe you want something like
-this instead:
-
-	clock_enable();
-	mdelay(4);
-	reset_assert();
-	mdelay(4);
-	reset_deassert();
-
-Thierry
-
---4c46b15aafad30579815bc7b3761ae16d84b5f2bde309b36aec44ce4ec9b
+--3118598f6dbc0f52f6a918ba388a5dc1bfed081e65249721fa4e8b14733d
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmYin94ACgkQ3SOs138+
-s6EvRA/9GbwLLYGv6tvydnrvCklxwEnrO3RoO3unwtVv7yu+5iHvIMcU0x2Vi51a
-RK2R+LB4noQPmfDxrPm81214zxGJy3amEd0JBN8cg10glKkcz4IVEL27qlL3J3yt
-Kg0aVlBavYnfeOtCaDW+mey0vWWeupLNQeygtXWCdsnOyDe4qHzKnDRyy+gaUNi/
-VlQSrD+SmD7YsPpnFaQT94a3A6lmCbtu7qgf/xJjLvao0Uyf+utzDl6rq7JtDV2e
-sNR9RT8u+MsnUevG7iF12QkjJeg56+IwpSCcNt82Ji4BCenk6vWmrAvz2hI8Sz+W
-vcQeNjZSr5RH2F2AYMUIzHsndhuNKtb3QwvFKV5F6DhDRpsv+6xjyCiYhRBkxp+E
-U5fBnYIE5GLcnkzxyukDSxD6iDooaFKXYSbbqgRSKmOTBIvXoXQWcr/yL8vuyTJv
-h7o5Kyk0P/pHLo6+Z28zXpnaByByGN6NaEddFBPi/MvchCHrtJjiJi2vzXM3OQQv
-earbhMniJuatFuv1GS+DmS1295B/b4YhN4235b5G2PXBBWa3SZ+Scq6KYZ48+YxS
-ZmWwdy+I7ufyMt1NoDNVo3qOGexTFJxNMWEaJPoOpsheseQ17vSd7NoPzp+APqAE
-4i29OphZYxJB3wElBaYXZa1MIchJD4a4roqWi8j2SnDwhju3AJY=
-=cHN/
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmYioG0ACgkQ3SOs138+
+s6E+tg/8DwhEwhF4ecf0rK6/xw/ugWzmO257puZ+U0p28zGwtpomvk5rd5YHh6VJ
+/sVU41/5oXptAOTo6wu+T5MepkItho6e7heECJkyy+pp+3sNhjK1HKFPxEp/gOKm
+fGvgnFR5U63W9MNdgvTo4ntykYFzJqKeBNhZCMWkjtasOkh3BJiwULSTaaDvofiF
+kd519X5nAAZ08TaXUmivnq01Mm0WTeC29l/xvkTmFhIiiRrbKQrzOq404dQBehv0
+IEkVXrKNSdeL9OhcFOOGLmjr6Yu3Gonvw/9L2cdsvn714LW93gf+DWfALVqh0nHj
+h+o8WbB9tUq3C6wDUfUUbkQdeI6Vo4NPxHHXcPznB5I3XWAluJCGDVQoYiGtBqhk
+CktgyGrs7rw6f+jKICGPiF0gIjPqaZvOeUo1Ur9Rd8IK2k2FNuEuGiinOG0VNCTi
+F/6/HTI7ijQwxHoz0Hrvqpg4b6pGWLphyA89XzrR7rQvqQKP0bOk7I2na2JbpQET
+bCUwPxj+mA72Bzm/NesGEPBMHiBmxnYiI2aFdV2PDS9ZPzKQFFFacNbG6ael7tpn
+YGKbsqEc4/4mLG84Tlsr9iprqm55YXXd9GqoPsPcdrZw1eqxkks3nH+RKKTQ2y3K
+choERsz9tgev8QNaLGdM6cWvSJ47V5CoH0ZfAR1Au6KWuJKIerk=
+=nlOO
 -----END PGP SIGNATURE-----
 
---4c46b15aafad30579815bc7b3761ae16d84b5f2bde309b36aec44ce4ec9b--
+--3118598f6dbc0f52f6a918ba388a5dc1bfed081e65249721fa4e8b14733d--
