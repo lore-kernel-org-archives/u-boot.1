@@ -4,80 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB5AFC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 16:53:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57680C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 16:54:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F22288816;
-	Fri, 19 Apr 2024 18:53:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D578088766;
+	Fri, 19 Apr 2024 18:54:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lm1d82AW";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WBafv/ZW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8947F8880E; Fri, 19 Apr 2024 18:53:20 +0200 (CEST)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 06A1788751; Fri, 19 Apr 2024 18:54:10 +0200 (CEST)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC0CB88816
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 18:53:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 261F188766
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 18:54:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-418c979ddd2so16239235e9.3
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:53:17 -0700 (PDT)
+ spf=pass smtp.mailfrom=thierry.reding@gmail.com
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-a558f2ea763so50615766b.1
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:54:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713545597; x=1714150397; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iHLXfrq4RFWt1N1ZA7MuKmCArmtD5w878hp85Pavtgk=;
- b=lm1d82AWb68Gz8r+5NKCBJ3eY0t/QZ9ocE1kncDTaMMtAN3cWetpYgVOLeLyLPYyur
- hWSOjqY91y3LEp7XqmZwu5f6H3CJn5gC7GTy4flXEX9mLmX+qjB/a7VBw4FQdYeaV/+a
- O4Z8xu7dO5oWzNmg/0aw1MFOITmo/jt9e/yO6IvXjsKI7P+q2bTms3/Q68gCu3ApETNJ
- qP3owlTuV3OpIVIsJ07pyfHvje6MB9PSnhyoJkQyNh0lQqxS4wp50Oy2/BJuCxFPGa52
- fVBHnb4KtUpcg0YoZoH60bRrNsg/3Jb7UNRKxQq8Nq8IHxwP9k+IOk/CuUIYPd3uWk9W
- LMwg==
+ d=gmail.com; s=20230601; t=1713545647; x=1714150447; darn=lists.denx.de;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=nBxLNpTa6465l/NP4KAl0YfmQiwJRu/pnep++quP5j8=;
+ b=WBafv/ZWFnoqbPD0P/FVV2/TOneIscyDr7xgWIC8zz0NTPr+VYuJuqiPooVhyVFNwS
+ QjYGEQgwDu+uWjCmmVDYffKc216NbErHZBuqVaVUekxoGbzBX6LyT6DjH/mELwik90+k
+ 5FIKIOekNKFScCkvqhpR83061E2/kl9pSZISChpRCQHu2eFUM2lX7zbDAjW7WAOHNb0/
+ jxgayRBcqmBdCCtLCirEIJmplo/6eXYQIzbiljCdrStIPbLSy7c9lYmncE7SSot4lD7x
+ q5MCxVhcRU+lIE5BfSWMtBsR7MfksTJQG0oOcMM67ABUA0WyrjgVhCj6/+s4vX6LYAVY
+ 0CNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713545597; x=1714150397;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iHLXfrq4RFWt1N1ZA7MuKmCArmtD5w878hp85Pavtgk=;
- b=UbWzVWvCi4BzYaD7GGhsWqfxxGYNVy+HzyCiT7hfQG1IVczS4cF2RJziaUifFur792
- vgzk9t3HNOAx1TFqdObDhfF69Ec2keqKBWIt7adjjL4SOM3nFD6c7Cds3DTUZx/Vm+iy
- cA7MO0vOtbxpwSj1rFr4WYLHww9kJIHomqNyrDmB72PkGJV+XHU/+IQ43p5TQrs2E8GR
- wLRfKLY6bDi3ztHN/Rs6U+RqValEDRV8sfAUQnRbOK41CtdAd2XTsimE2OnXd5y5MCRp
- 6bD5yXtZgd6PrgPB5OcWE6MP+197SComPzGRc7pl6yFzkcpZR4QEQblY6weFks2d9Ity
- akng==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUObxlFdXse/N7M912F+xkINIEoC8AIHA54AWGPaCn1SLOZjNYUXF/2qnYGm0FpX8KrGPYgfxu1zjLIGlOCCq8brTQxQw==
-X-Gm-Message-State: AOJu0YyL0Nbdm0W0nXHUWM7ZAuCZluGPWN/D5r+HlPzFOVBLWNYK6Hel
- rP3WFF4+ZIdKtfsl4jXvQ4EA5vX3Dl6iOVcl2cF2gKxZxq3mippvCoTMDoO1DUbTsJi70qPdi4z
- +6aMqCjZNM9kVmbgJXreeXVnVBSs=
-X-Google-Smtp-Source: AGHT+IGo4VHgSpSLBo4rYh6lxE2y99uJnSFyKu6pH+Immw587ySlIupcDdHFO0aeLNSDmC651wQRWyEuhi8zRA8b7eM=
-X-Received: by 2002:a05:600c:4e8b:b0:419:9332:b87a with SMTP id
- f11-20020a05600c4e8b00b004199332b87amr1575892wmq.16.1713545597269; Fri, 19
- Apr 2024 09:53:17 -0700 (PDT)
-MIME-Version: 1.0
+ d=1e100.net; s=20230601; t=1713545647; x=1714150447;
+ h=in-reply-to:references:to:from:subject:cc:message-id:date
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=nBxLNpTa6465l/NP4KAl0YfmQiwJRu/pnep++quP5j8=;
+ b=e7j7fA1kixAHJnbo3pq7BvhwoIrMOP4fIky5BHEjHfZS67QzXgajach9LFouJj6sTO
+ 4eSoliRVB7oMuT+JL/zmSWQHiciotMOhaBzxiw5bjkPwAMbNja8wG84VEjeDfLlKEvhA
+ 610kz4g6AFWQkxMUfBnG8x4AfqJoLhI36zcMHsBwy6rm6oxoYoq7RfsH7Sv1tzCOc0r5
+ RBXEm9j+tjKzMndueMOchXloubOKQe6z6ldLQqDJ1nkiiL4dQsVY226C2N0oUVLZd8xa
+ p7HbPFa+bK2KkdsNI9qCZ5pur2DCheENNmkrLoXARpq+SFfnyXs/mG8xU5IvbDFxiPEU
+ 2raA==
+X-Gm-Message-State: AOJu0YyR+uyfGprhQH0P+aERmv0x6nIFgXo/IJoWaB3tZlHKLJ/t5Rj8
+ bd2EJ8cuIZBPz2nwOGTrhmV4HbrQYkr3jagZzJUXPs6yQY/DfehF
+X-Google-Smtp-Source: AGHT+IEaU6hvwPhi1asFZc3i4vm+C60/tKudV4lCTPz+/FDha2v8m4BJZRhZj3MlUxw/6QoWwv6f+Q==
+X-Received: by 2002:a17:906:ca50:b0:a51:cdfd:8ef7 with SMTP id
+ jx16-20020a170906ca5000b00a51cdfd8ef7mr1813321ejb.39.1713545647442; 
+ Fri, 19 Apr 2024 09:54:07 -0700 (PDT)
+Received: from localhost
+ (p200300e41f162000f22f74fffe1f3a53.dip0.t-ipconnect.de.
+ [2003:e4:1f16:2000:f22f:74ff:fe1f:3a53])
+ by smtp.gmail.com with ESMTPSA id
+ d8-20020a170906344800b00a4e2dc1283asm2401251ejb.50.2024.04.19.09.54.06
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 19 Apr 2024 09:54:06 -0700 (PDT)
+Content-Type: multipart/signed;
+ boundary=b3eb29ae2260f5f84151080e61f2c556940696e412e5c4d679bf01e24d33;
+ micalg=pgp-sha256; protocol="application/pgp-signature"
+Mime-Version: 1.0
+Date: Fri, 19 Apr 2024 18:54:06 +0200
+Message-Id: <D0O98IL71YI5.QWG3ER9V1ZX6@gmail.com>
+Cc: <u-boot@lists.denx.de>
+Subject: Re: [PATCH v6 11/18] video: tegra20: dc: clean framebuffer memory
+ block
+From: "Thierry Reding" <thierry.reding@gmail.com>
+To: "Svyatoslav Ryhel" <clamor95@gmail.com>, "Thierry Reding"
+ <treding@nvidia.com>, "Anatolij Gustschin" <agust@denx.de>, "Simon Glass"
+ <sjg@chromium.org>
+X-Mailer: aerc 0.16.0-1-0-g560d6168f0ed-dirty
 References: <20240123171633.246057-1-clamor95@gmail.com>
- <20240123171633.246057-7-clamor95@gmail.com>
- <D0O8720SNXUY.58M29AZIXYVC@gmail.com>
- <CAPVz0n0UX1JOxyGbBgd430oMGUb7vDb5td3oZ2beMTVRa3tktQ@mail.gmail.com>
- <D0O92LGLWMLP.34AR1F3WJZQCV@gmail.com>
-In-Reply-To: <D0O92LGLWMLP.34AR1F3WJZQCV@gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Fri, 19 Apr 2024 19:53:06 +0300
-Message-ID: <CAPVz0n20jmaj9pOdCnVapZeu9cf-PLN=ViscLkM2WzVLzMNfVA@mail.gmail.com>
-Subject: Re: [PATCH v6 06/18] video: tegra20: dc: add reset support
-To: Thierry Reding <thierry.reding@gmail.com>
-Cc: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ <20240123171633.246057-12-clamor95@gmail.com>
+In-Reply-To: <20240123171633.246057-12-clamor95@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,108 +98,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=BF=D1=82, 19 =D0=BA=D0=B2=D1=96=D1=82. 2024=E2=80=AF=D1=80. =D0=BE 19:4=
-6 Thierry Reding <thierry.reding@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On Fri Apr 19, 2024 at 6:37 PM CEST, Svyatoslav Ryhel wrote:
-> > =D0=BF=D1=82, 19 =D0=BA=D0=B2=D1=96=D1=82. 2024=E2=80=AF=D1=80. =D0=BE =
-19:05 Thierry Reding <thierry.reding@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
-> > >
-> > > On Tue Jan 23, 2024 at 6:16 PM CET, Svyatoslav Ryhel wrote:
-> > > > Implement reset use to discard any changes which could have been
-> > > > applied to DC before and can interfere with current configuration.
-> > > >
-> > > > Tested-by: Agneli <poczt@protonmail.ch> # Toshiba AC100 T20
-> > > > Tested-by: Robert Eckelmann <longnoserob@gmail.com> # ASUS TF101
-> > > > Tested-by: Andreas Westman Dorcsak <hedmoo@yahoo.com> # ASUS Groupe=
-r E1565
-> > > > Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
-> > > > Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab =
-T114
-> > > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > > > ---
-> > > >  drivers/video/tegra20/tegra-dc.c | 17 +++++++++++++++++
-> > > >  1 file changed, 17 insertions(+)
-> > > >
-> > > > diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra=
-20/tegra-dc.c
-> > > > index 56a23b3c97..35abb6fe46 100644
-> > > > --- a/drivers/video/tegra20/tegra-dc.c
-> > > > +++ b/drivers/video/tegra20/tegra-dc.c
-> > > > @@ -10,7 +10,9 @@
-> > > >  #include <panel.h>
-> > > >  #include <part.h>
-> > > >  #include <pwm.h>
-> > > > +#include <reset.h>
-> > > >  #include <video.h>
-> > > > +#include <linux/delay.h>
-> > > >  #include <asm/cache.h>
-> > > >  #include <asm/global_data.h>
-> > > >  #include <asm/system.h>
-> > > > @@ -342,6 +344,7 @@ static int tegra_lcd_probe(struct udevice *dev)
-> > > >       struct video_uc_plat *plat =3D dev_get_uclass_plat(dev);
-> > > >       struct video_priv *uc_priv =3D dev_get_uclass_priv(dev);
-> > > >       struct tegra_lcd_priv *priv =3D dev_get_priv(dev);
-> > > > +     struct reset_ctl reset_ctl;
-> > > >       int ret;
-> > > >
-> > > >       /* Initialize the Tegra display controller */
-> > > > @@ -349,6 +352,20 @@ static int tegra_lcd_probe(struct udevice *dev=
-)
-> > > >       funcmux_select(PERIPH_ID_DISP1, FUNCMUX_DEFAULT);
-> > > >  #endif
-> > > >
-> > > > +     ret =3D reset_get_by_name(dev, "dc", &reset_ctl);
-> > > > +     if (ret) {
-> > > > +             log_err("reset_get_by_name() failed: %d\n", ret);
-> > > > +             return ret;
-> > > > +     }
-> > > > +
-> > > > +     clock_disable(priv->dc_clk[0]);
-> > > > +
-> > > > +     /* Reset everything set before */
-> > > > +     reset_assert(&reset_ctl);
-> > > > +     mdelay(4);
-> > > > +     reset_deassert(&reset_ctl);
-> > > > +     mdelay(4);
-> > >
-> > > Are you sure this works as intended? It's been a long time since I
-> > > worked on this, but I seem to recall that most of these resets are
-> > > actually synchronous, so in order for them to do what they're suppose=
-d
-> > > to the clock needs to be kept running.
-> > >
-> > > The Linux driver certainly does this differently.
-> >
-> > You have point, but I have tried to mostly adapt Linux tegra dc driver,
-> > which has same logic in probe. Maybe I have not understood it properly.
-> > Testing on T20, T30 and T114 passed without issues so far.
->
-> Maybe look again. What it does is (basically):
->
->         clock_enable();
->         mdelay(4);
->         reset_assert();
->         mdelay(4);
->         clock_disable();
->
-> That should ensure that it's completely reset at that point. Now before
-> any subsequent register accesses happen it will do this:
->
->         clock_enable();
->         reset_deassert();
->
-> to take it out of reset again. Perhaps that's something you want to keep
-> doing in probe() in U-Boot. In that case maybe you want something like
-> this instead:
->
->         clock_enable();
->         mdelay(4);
->         reset_assert();
->         mdelay(4);
->         reset_deassert();
->
+--b3eb29ae2260f5f84151080e61f2c556940696e412e5c4d679bf01e24d33
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
 
-You are correct. I assume This patch may be dropped entirely. Thanks.
+On Tue Jan 23, 2024 at 6:16 PM CET, Svyatoslav Ryhel wrote:
+> From: Jonas Schw=C3=B6bel <jonasschwoebel@yahoo.de>
+>
+> Fill the framebuffer memory with zeros to avoid visual glitches.
+>
+> Signed-off-by: Jonas Schw=C3=B6bel <jonasschwoebel@yahoo.de>
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>  drivers/video/tegra20/tegra-dc.c | 5 +++++
+>  1 file changed, 5 insertions(+)
 
-> Thierry
+Makes sense:
+
+Reviewed-by: Thierry Reding <treding@nvidia.com>
+
+--b3eb29ae2260f5f84151080e61f2c556940696e412e5c4d679bf01e24d33
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmYioa4ACgkQ3SOs138+
+s6HwFQ//QE2kie5fwalHLHfYQqblC7xi0pkJO2Z/06K/BVdsRjfr+EIoHfk8Jl6M
+DAb/kthCiPjhodxhg67bnPWTAz16bn6oOAfZaj8HqWWH7fO5bb+3QP1lf6VjHzsx
+gL/lF1Ue8CtqRZ2lu8dgGZncTjO/QbAtcDmL/aaIK/eNqHnyADirhRX37yhJPF4y
+wq0D+esx5IThgSg6j8PuWuZzEqKkEvoQfqzR9Qkd945/Lez6YcuG2kjGF3TaPY/x
+a2Kff+hGNGGRGvs5JIVa+7uMbIAaT/AlYdy8SRmeZ86p0Mp8n2EDp984bgkeInR7
+Ay7AmFbCMyeYpDZ3Lu1/4K2GQf1bp2tveJ6j9AWYY1Xq0JZIUkqJlNPqoNr4izUj
++ee6vlrv9pzxO8Nh46CGV+nxbNiFM53QfSc9phQxDsTEdg34Orq2H5avlgpyg0nV
+cMoaLeqpOO9oiRutQkXUrGVjKgT+yNZ+ZEn7mcNeV1utsqUdOS0C/NSrz3t1g+V2
+ejxtHA1TnRJG/+vzZbn3Bt8kP792XFqVS4CjHHT38MaqHm1znQQZfQynGUwVHW12
+r355Seq/tA/itEuYiPgVmhEzYqivVFWdxOAb2YTieg3KpNxmLJNIyby6x8x5VRka
+4/lGCH9u2boLImQdDwhYyTqCTelHu85oq5yOPNXeMCa7NsZl8y4=
+=FZIM
+-----END PGP SIGNATURE-----
+
+--b3eb29ae2260f5f84151080e61f2c556940696e412e5c4d679bf01e24d33--
