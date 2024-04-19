@@ -4,79 +4,115 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F914C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 17:52:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53F95C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 18:16:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07E7388797;
-	Fri, 19 Apr 2024 19:52:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 6E531881BB;
+	Fri, 19 Apr 2024 20:16:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="KYy72WM0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VLJtXrc1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4602188798; Fri, 19 Apr 2024 19:52:48 +0200 (CEST)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 4AD2D88763; Fri, 19 Apr 2024 20:16:15 +0200 (CEST)
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com
+ [IPv6:2607:f8b0:4864:20::42a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DE278878B
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 19:52:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E25D788134
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 20:16:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-a5590f3b60eso41774766b.1
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 10:52:45 -0700 (PDT)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-pf1-x42a.google.com with SMTP id
+ d2e1a72fcca58-6f103b541aeso183007b3a.3
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 11:16:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1713549165; x=1714153965; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cNQ+oLUHP1g1iiX7pfJtPu+ZGhVJBcjTTsUgpAul5kE=;
- b=KYy72WM0fYM2qM65wKOjR7u7jEhx4zK0pWPTraUugEWfmZqpJ/2Thfso75e/i5siJi
- 5XLl6Eh/kxuEpeZUHBfonmfNMP5txvH4g2qGlONcCEYI6UhPvA08klpV2jLKcmXTJZs4
- LNoBcTEh9YNHly40nST+AvxEfKo2xDUM5miKk8iOqgmSOMvRZ+0+wQsjn/P9AyNLUDXx
- ztQGpb+acFKemjI34uvV1a6pVdvVi+OgNX1efHwTQqgM8XAxPwaOj1z7mp8O3NVolUDl
- nUJ7OWDthoKBz4eHa83L7HDXblMPZIR4R4B9upZaz+fOj1bjDDaEFC7e5ruBso+PHxk2
- Lz3Q==
+ d=linaro.org; s=google; t=1713550571; x=1714155371; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=HT6nVK3iW4RZ54gfoUmMzi0B+Pzdi+U8j7S2Z/BB3FQ=;
+ b=VLJtXrc1872w1hoSl/R65/nNxes8IoM0e6KHZLFWWYRY03CyjXsgc9MtTpHx4JtlNI
+ pLgP4TWNJy/TLB8Wwjs+WrsV02R78noaQDXBnEPzHDV8d8ABtiUtkQcpG17eowillX0a
+ sybjcv/Mn3VQqSqGPl8NGcE2NvJPXHHgqn19Q5gl6+lEanAqwJ0SiK07pBWhtIjif6pg
+ Hu+NIeDgpjnkwaf5NRoOC1d3xRD/KSNubrPXEOdn81cL+wcmgY1FcmG79rnUWs9MkmGG
+ ol7TxsyeZLU/IfziI1z8VuYOW/OTdbo/gKI4jinRr+KXToYxxIXdIa/CDZxrjycNDa4v
+ EoBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713549165; x=1714153965;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cNQ+oLUHP1g1iiX7pfJtPu+ZGhVJBcjTTsUgpAul5kE=;
- b=q9NGfg54Efk4JTXbXYwQ+aO11azq6pG+Di2JvkRe8+W3fAk9uNuRXCrm/Ck4W/Z28V
- qqSFy6YWZ/0JOcVGL3Mn8jRU6XsM5tbkstvmuNnJ/y2RfsHV6HKLV3XWJO7ZbzVCp+/P
- wbrTV0JszXL+sV4e7qBjfUqz+lO/pc8Msl5Mx2dCZ08h9StOshhwf7luf0Z61+1umb15
- RAixP7NBHoXQPVfxAQhAxWA0yNkKz0XYM6QOO8Y9V8Ve4NOdsiqchu0tsxp7VZX1CYyV
- rcKR/eqy5jN1kGTIh6rN3I4LcebrV/D29bElqqyWW/9/3HzLlm4p+n0nxlM9sIidS1m/
- KjlQ==
-X-Gm-Message-State: AOJu0Yz8atf6vS4vkdwL5mZ9YZgNwDZ/jZ5DE8chsIRPr9cUbL17foRZ
- /n80KZcMI4l4vwW732LXaJB/Tghg7MDig87H81LTFVeVFxRtAWDqCdgHwa5TxTV40YkU1Gfjkg1
- BAlCPvGHyN0nmu5qz+/k8Exm0U9dBv6bvLS617w==
-X-Google-Smtp-Source: AGHT+IHpNgt1fkpvgx4g80y4pzdXUXpwachXQF50S5T/K+Dsyi+hEqOvSSvYwbOI/rc5SpFo4EgzTRcLgca3FkOgHe0=
-X-Received: by 2002:a17:906:1949:b0:a52:5925:1f76 with SMTP id
- b9-20020a170906194900b00a5259251f76mr2000245eje.47.1713549164483; Fri, 19 Apr
- 2024 10:52:44 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1713550571; x=1714155371;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=HT6nVK3iW4RZ54gfoUmMzi0B+Pzdi+U8j7S2Z/BB3FQ=;
+ b=UaKq7rneO5JMtKNdJzlVb7n5Rxm532zqvkG+aGXkDnSmMwKwUpDwqnpJPo6ORXZHXO
+ zvu0yxBcnzkle/xXbmqqI3GVi+Le2dHJnvBLjDfuG8Upw8k6v97XvmmWAzpbd8hF+d3Q
+ 4w5ntA7b4SGm/tNXpGhNI3VCScZVpDQzw0R8bfOQd2DQ61b3JabScJv4D8B0BTna9M5C
+ A2TsHPASdQlbiY+APxREVI43z+rVbtu2wJ4anxALTNrrIF5WcMLHRvAQJQ/KasPoF2jQ
+ Eu93N+lggJDdfZzOxo0IV/AWYjAnG+eIZsrjkDudpdhIh8ys10+5+Y9t3XdWkJPFXtnA
+ 9peg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX/v0stjQli3A+iR/Qxd8uAkn2BU5dEP5FoVn2iIHdb3+IVPHrYFRhuAlfKz+e2sOkJNrCw/9rHfo4jNpvg9vEApR6zFQ==
+X-Gm-Message-State: AOJu0YzUBioyeKYrXUjthcqx93WNAIPq6/H6k/jD77GpXWDhin/sgca6
+ f42QA/Rb6b5uliKRljaMd+okETdzPH6K35i1aUpPjpEy4VS3me6toOvV7R/s5Zk=
+X-Google-Smtp-Source: AGHT+IEjCiGPAo+1bfe6FwbdUsXiscxZ2ujMuqFBlwf5I6nUlWdE60abVukAHoYhIDfeWDWkIYwWgw==
+X-Received: by 2002:a05:6a20:3ca0:b0:1a9:7ad8:79f with SMTP id
+ b32-20020a056a203ca000b001a97ad8079fmr3903227pzj.13.1713550571213; 
+ Fri, 19 Apr 2024 11:16:11 -0700 (PDT)
+Received: from [172.20.19.49] ([209.37.221.130])
+ by smtp.gmail.com with ESMTPSA id
+ bx33-20020a056a02052100b005f7fed76e59sm1409750pgb.78.2024.04.19.11.16.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 19 Apr 2024 11:16:10 -0700 (PDT)
+Message-ID: <91b199be-3ed2-4ef2-bf74-189cd2b45f5e@linaro.org>
+Date: Fri, 19 Apr 2024 20:16:09 +0200
 MIME-Version: 1.0
-References: <20240405001722.2876240-1-tharvey@gateworks.com>
- <CAC_iWjL7nHxq7Yio6XqenxrMwfVBC-VK3UCDLX=4oNQWvcfTBQ@mail.gmail.com>
- <CAJ+vNU1H4GZ7Nq1MEcqWgSkZjPo9u-TDRVapLnn5Kq+3TyD-bA@mail.gmail.com>
- <CAC_iWjKA-bA=i6bzsnAvwn+JqtywbD8xWsQtECRjeswHBtT3fw@mail.gmail.com>
- <CAC_iWjJS+JhdDH8xPApna9ho8f4XxmTUGRZGZUEgt62xBcLRVQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjJS+JhdDH8xPApna9ho8f4XxmTUGRZGZUEgt62xBcLRVQ@mail.gmail.com>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Fri, 19 Apr 2024 10:52:32 -0700
-Message-ID: <CAJ+vNU0ncveyq8M7PfQQrMEUr0z-qE5G6CDki9ms_4Ves=8G9g@mail.gmail.com>
-Subject: Re: [PATCH v3] tpm-v2: allow algoirthm name to be configured for
- pcr_read and pcr_extend
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Eddie James <eajames@linux.ibm.com>,
- slee@gateworks.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH v4 3/3] dts: support building all dtb files for a specific
+ vendor
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Lukasz Majewski <lukma@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Sumit Garg <sumit.garg@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20240418-b4-of-upstream-build-vendor-v4-0-d404deff386e@linaro.org>
+ <20240418-b4-of-upstream-build-vendor-v4-3-d404deff386e@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20240418-b4-of-upstream-build-vendor-v4-3-d404deff386e@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,413 +124,89 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Apr 19, 2024 at 10:37=E2=80=AFAM Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Also quickly looking at this,  you need a new function for
-> tpm2_algorithm_to_mask() (look below)
->
-> On Fri, 19 Apr 2024 at 20:20, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Tim,
-> >
-> > On Fri, 19 Apr 2024 at 20:13, Tim Harvey <tharvey@gateworks.com> wrote:
-> > >
-> > > On Sat, Apr 6, 2024 at 9:33=E2=80=AFAM Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > > Hi Tim,
-> > > >
-> > > > Thanks for the patch
-> > > >
-> > > > I'll be away next week, I'll try to find time and take a closer loo=
-k.
-> > > > The pipeline [0] shows some TPM related failures
-> > > >
-> > > > [0] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/commit/9b=
-4be64e41454e17269a968397933eeff300c380
-> > > >
-> > >
-> > > Hi Ilias,
-> > >
-> > > I changed the output of 'tpm pcr_read' so that it shows the algo and
-> > > size causing the test in test/py/tests/test_tpm2.py to fail:
-> > > @@ -151,11 +171,12 @@ static int do_tpm_pcr_read(struct cmd_tbl
-> > > *cmdtp, int flag, int argc,
-> > >
-> > >         data =3D map_sysmem(simple_strtoul(argv[2], NULL, 0), 0);
-> > >
-> > > -       rc =3D tpm2_pcr_read(dev, index, priv->pcr_select_min, TPM2_A=
-LG_SHA256,
-> > > -                          data, TPM2_DIGEST_LEN, &updates);
-> > > +       rc =3D tpm2_pcr_read(dev, index, priv->pcr_select_min, algo,
-> > > +                          data, algo_len, &updates);
-> > >         if (!rc) {
-> > > -               printf("PCR #%u content (%u known updates):\n", index=
-, updates);
-> > > -               print_byte_string(data, TPM2_DIGEST_LEN);
-> > > +               printf("PCR #%u %s %d byte content (%u known
-> > > updates):\n", index,
-> > > +                      tpm2_algorithm_name(algo), algo_len, updates);
-> > > +               print_byte_string(data, algo_len);
-> > >         }
-> > >
-> > > failure:
-> > > E   AssertionError: assert 'PCR #10 content' in 'PCR #10 sha256 32
-> > > byte content (723 known updates):\r\r\n 00 00 00 00 00 00 00 00 00 00
-> > > 00 00 00 00 00 00\r\r\n 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-> > > 00'
-> > >
-> > > So I suppose I need to update test/py/tests/test_tpm2.py as well.
-> >
-> > Yes
-> >
-> > >
-> > > Would I update test/py/tests/test_tpm2.py in the same patch as the on=
-e
-> > > that causes the failure?
-> >
-> > Yes please, I'd like patches merged that won't break the CI
-> >
-> > >
-> > > How do I go about running the tests manually to make sure I've addres=
-sed it?
-> >
-> > You can send a PR against U-Boots repo (in github)
-> >
-> > Cheers
-> > /Ilias
-> > >
-> > > Best Regards,
-> > >
-> > > Tim
-> > >
-> > > > Cheers
-> > > > /Ilias
-> > > >
-> > > > On Fri, 5 Apr 2024 at 03:17, Tim Harvey <tharvey@gateworks.com> wro=
-te:
-> > > > >
-> > > > > For pcr_read and pcr_extend commands allow the digest algorithm t=
-o be
-> > > > > specified by an additional argument. If not specified it will def=
-ault to
-> > > > > SHA256 for backwards compatibility.
-> > > > >
-> > > > > A follow-on to this could be to extend all PCR banks with the det=
-ected
-> > > > > algo when the <digest_algo> argument is 'auto'.
-> > > > >
-> > > > > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> > > > > ---
-> > > > > v3:
-> > > > >  - replace tpm2_supported_algorithms with struct and use this to =
-relate hash algoirthm
-> > > > >    details
-> > > > > v2:
-> > > > >  - use tpm2_algorithm_to_len
-> > > > >  - use enum tpm2_algorithms
-> > > > >  - make function names and parameter names more consistent with e=
-xisting
-> > > > >    tpm-v2 functions
-> > > > >  - fix various spelling errors
-> > > > > ---
-> > > > >  cmd/tpm-v2.c              | 49 ++++++++++++++++++++--------
-> > > > >  include/tpm-v2.h          | 67 +++++++++++++++++++++++++++++++++=
-+++++-
-> > > > >  lib/efi_loader/efi_tcg2.c |  4 +--
-> > > > >  lib/tpm-v2.c              | 62 +++++++++++++++++++++++----------=
----
-> > > > >  4 files changed, 143 insertions(+), 39 deletions(-)
-> > > > >
-> > > > > diff --git a/cmd/tpm-v2.c b/cmd/tpm-v2.c
-> > > > > index 7e479b9dfe36..2343b4d9cb9e 100644
-> > > > > --- a/cmd/tpm-v2.c
-> > > > > +++ b/cmd/tpm-v2.c
-> > > > > @@ -99,11 +99,19 @@ static int do_tpm2_pcr_extend(struct cmd_tbl =
-*cmdtp, int flag, int argc,
-> > > > >         struct tpm_chip_priv *priv;
-> > > > >         u32 index =3D simple_strtoul(argv[1], NULL, 0);
-> > > > >         void *digest =3D map_sysmem(simple_strtoul(argv[2], NULL,=
- 0), 0);
-> > > > > +       int algo =3D TPM2_ALG_SHA256;
-> > > > > +       int algo_len;
-> > > > >         int ret;
-> > > > >         u32 rc;
-> > > > >
-> > > > > -       if (argc !=3D 3)
-> > > > > +       if (argc < 3 || argc > 4)
-> > > > >                 return CMD_RET_USAGE;
-> > > > > +       if (argc =3D=3D 4) {
-> > > > > +               algo =3D tpm2_name_to_algorithm(argv[3]);
-> > > > > +               if (algo < 0)
-> > > > > +                       return CMD_RET_FAILURE;
-> > > > > +       }
-> > > > > +       algo_len =3D tpm2_algorithm_to_len(algo);
-> > > > >
-> > > > >         ret =3D get_tpm(&dev);
-> > > > >         if (ret)
-> > > > > @@ -116,8 +124,12 @@ static int do_tpm2_pcr_extend(struct cmd_tbl=
- *cmdtp, int flag, int argc,
-> > > > >         if (index >=3D priv->pcr_count)
-> > > > >                 return -EINVAL;
-> > > > >
-> > > > > -       rc =3D tpm2_pcr_extend(dev, index, TPM2_ALG_SHA256, diges=
-t,
-> > > > > -                            TPM2_DIGEST_LEN);
-> > > > > +       rc =3D tpm2_pcr_extend(dev, index, algo, digest, algo_len=
-);
-> > > > > +       if (!rc) {
-> > > > > +               printf("PCR #%u extended with %d byte %s digest\n=
-", index,
-> > > > > +                      algo_len, tpm2_algorithm_name(algo));
-> > > > > +               print_byte_string(digest, algo_len);
-> > > > > +       }
-> > > > >
-> > > > >         unmap_sysmem(digest);
-> > > > >
-> > > > > @@ -127,15 +139,23 @@ static int do_tpm2_pcr_extend(struct cmd_tb=
-l *cmdtp, int flag, int argc,
-> > > > >  static int do_tpm_pcr_read(struct cmd_tbl *cmdtp, int flag, int =
-argc,
-> > > > >                            char *const argv[])
-> > > > >  {
-> > > > > +       enum tpm2_algorithms algo =3D TPM2_ALG_SHA256;
-> > > > >         struct udevice *dev;
-> > > > >         struct tpm_chip_priv *priv;
-> > > > >         u32 index, rc;
-> > > > > +       int algo_len;
-> > > > >         unsigned int updates;
-> > > > >         void *data;
-> > > > >         int ret;
-> > > > >
-> > > > > -       if (argc !=3D 3)
-> > > > > +       if (argc < 3 || argc > 4)
-> > > > >                 return CMD_RET_USAGE;
-> > > > > +       if (argc =3D=3D 4) {
-> > > > > +               algo =3D tpm2_name_to_algorithm(argv[3]);
-> > > > > +               if (algo < 0)
-> > > > > +                       return CMD_RET_FAILURE;
-> > > > > +       }
-> > > > > +       algo_len =3D tpm2_algorithm_to_len(algo);
-> > > > >
-> > > > >         ret =3D get_tpm(&dev);
-> > > > >         if (ret)
-> > > > > @@ -151,11 +171,12 @@ static int do_tpm_pcr_read(struct cmd_tbl *=
-cmdtp, int flag, int argc,
-> > > > >
-> > > > >         data =3D map_sysmem(simple_strtoul(argv[2], NULL, 0), 0);
-> > > > >
-> > > > > -       rc =3D tpm2_pcr_read(dev, index, priv->pcr_select_min, TP=
-M2_ALG_SHA256,
-> > > > > -                          data, TPM2_DIGEST_LEN, &updates);
-> > > > > +       rc =3D tpm2_pcr_read(dev, index, priv->pcr_select_min, al=
-go,
-> > > > > +                          data, algo_len, &updates);
-> > > > >         if (!rc) {
-> > > > > -               printf("PCR #%u content (%u known updates):\n", i=
-ndex, updates);
-> > > > > -               print_byte_string(data, TPM2_DIGEST_LEN);
-> > > > > +               printf("PCR #%u %s %d byte content (%u known upda=
-tes):\n", index,
-> > > > > +                      tpm2_algorithm_name(algo), algo_len, updat=
-es);
-> > > > > +               print_byte_string(data, algo_len);
-> > > > >         }
-> > > > >
-> > > > >         unmap_sysmem(data);
-> > > > > @@ -415,14 +436,14 @@ U_BOOT_CMD(tpm2, CONFIG_SYS_MAXARGS, 1, do_=
-tpm, "Issue a TPMv2.x command",
-> > > > >  "    <hierarchy> is one of:\n"
-> > > > >  "        * TPM2_RH_LOCKOUT\n"
-> > > > >  "        * TPM2_RH_PLATFORM\n"
-> > > > > -"pcr_extend <pcr> <digest_addr>\n"
-> > > > > -"    Extend PCR #<pcr> with digest at <digest_addr>.\n"
-> > > > > +"pcr_extend <pcr> <digest_addr> [<digest_algo>]\n"
-> > > > > +"    Extend PCR #<pcr> with digest at <digest_addr> with digest_=
-algo.\n"
-> > > > >  "    <pcr>: index of the PCR\n"
-> > > > > -"    <digest_addr>: address of a 32-byte SHA256 digest\n"
-> > > > > -"pcr_read <pcr> <digest_addr>\n"
-> > > > > -"    Read PCR #<pcr> to memory address <digest_addr>.\n"
-> > > > > +"    <digest_addr>: address of digest of digest_algo type (defau=
-lts to SHA256)\n"
-> > > > > +"pcr_read <pcr> <digest_addr> [<digest_algo>]\n"
-> > > > > +"    Read PCR #<pcr> to memory address <digest_addr> with <diges=
-t_algo>.\n"
-> > > > >  "    <pcr>: index of the PCR\n"
-> > > > > -"    <digest_addr>: address to store the a 32-byte SHA256 digest=
-\n"
-> > > > > +"    <digest_addr>: address of digest of digest_algo type (defau=
-lts to SHA256)\n"
-> > > > >  "get_capability <capability> <property> <addr> <count>\n"
-> > > > >  "    Read and display <count> entries indexed by <capability>/<p=
-roperty>.\n"
-> > > > >  "    Values are 4 bytes long and are written at <addr>.\n"
-> > > > > diff --git a/include/tpm-v2.h b/include/tpm-v2.h
-> > > > > index 33dd103767c4..263f9529e55d 100644
-> > > > > --- a/include/tpm-v2.h
-> > > > > +++ b/include/tpm-v2.h
-> > > > > @@ -386,7 +386,54 @@ enum tpm2_algorithms {
-> > > > >         TPM2_ALG_SM3_256        =3D 0x12,
-> > > > >  };
-> > > > >
-> > > > > -extern const enum tpm2_algorithms tpm2_supported_algorithms[4];
-> > > > > +/**
-> > > > > + * struct digest_info - details of supported digests
-> > > > > + *
-> > > > > + * @hash_name:                 hash name
-> > > > > + * @hash_alg:                  hash algorithm id
-> > > > > + * @hash_mask:                 hash registry mask
-> > > > > + * @hash_len:                  hash digest length
-> > > > > + */
-> > > > > +struct digest_info {
-> > > > > +       const char *hash_name;
-> > > > > +       u16 hash_alg;
-> > > > > +       u32 hash_mask;
-> > > > > +       u16 hash_len;
-> > > > > +};
-> > > > > +
-> > > > > +/* Algorithm Registry */
-> > > > > +#define TCG2_BOOT_HASH_ALG_SHA1    0x00000001
-> > > > > +#define TCG2_BOOT_HASH_ALG_SHA256  0x00000002
-> > > > > +#define TCG2_BOOT_HASH_ALG_SHA384  0x00000004
-> > > > > +#define TCG2_BOOT_HASH_ALG_SHA512  0x00000008
-> > > > > +#define TCG2_BOOT_HASH_ALG_SM3_256 0x00000010
-> > > > > +
-> > > > > +static const struct digest_info hash_algo_list[] =3D {
-> > > > > +       {
-> > > > > +               "sha1",
-> > > > > +               TPM2_ALG_SHA1,
-> > > > > +               TCG2_BOOT_HASH_ALG_SHA1,
-> > > > > +               TPM2_SHA1_DIGEST_SIZE,
-> > > > > +       },
-> > > > > +       {
-> > > > > +               "sha256",
-> > > > > +               TPM2_ALG_SHA256,
-> > > > > +               TCG2_BOOT_HASH_ALG_SHA256,
-> > > > > +               TPM2_SHA256_DIGEST_SIZE,
-> > > > > +       },
-> > > > > +       {
-> > > > > +               "sha384",
-> > > > > +               TPM2_ALG_SHA384,
-> > > > > +               TCG2_BOOT_HASH_ALG_SHA384,
-> > > > > +               TPM2_SHA384_DIGEST_SIZE,
-> > > > > +       },
-> > > > > +       {
-> > > > > +               "sha512",
-> > > > > +               TPM2_ALG_SHA512,
-> > > > > +               TCG2_BOOT_HASH_ALG_SHA512,
-> > > > > +               TPM2_SHA512_DIGEST_SIZE,
-> > > > > +       },
-> > > > > +};
-> > > > >
-> > > > >  static inline u16 tpm2_algorithm_to_len(enum tpm2_algorithms a)
-> > > > >  {
-> > > > > @@ -965,4 +1012,22 @@ u32 tpm2_enable_nvcommits(struct udevice *d=
-ev, uint vendor_cmd,
-> > > > >   */
-> > > > >  u32 tpm2_auto_start(struct udevice *dev);
-> > > > >
-> > > > > +/**
-> > > > > + * tpm2_name_to_algorithm() - Return an algorithm id given a sup=
-ported
-> > > > > + *                           algorithm name
-> > > > > + *
-> > > > > + * @name: algorithm name
-> > > > > + * Return: enum tpm2_algorithms or -EINVAL
-> > > > > + */
-> > > > > +enum tpm2_algorithms tpm2_name_to_algorithm(const char *name);
-> > > > > +
-> > > > > +/**
-> > > > > + * tpm2_algorithm_name() - Return an algorithm name string for a
-> > > > > + *                        supported algorithm id
-> > > > > + *
-> > > > > + * @algorithm_id: algorithm defined in enum tpm2_algorithms
-> > > > > + * Return: algorithm name string or ""
-> > > > > + */
-> > > > > +const char *tpm2_algorithm_name(enum tpm2_algorithms);
-> > > > > +
-> > > > >  #endif /* __TPM_V2_H */
-> > > > > diff --git a/lib/efi_loader/efi_tcg2.c b/lib/efi_loader/efi_tcg2.=
-c
-> > > > > index b07e0099c27e..cf5d8de018a7 100644
-> > > > > --- a/lib/efi_loader/efi_tcg2.c
-> > > > > +++ b/lib/efi_loader/efi_tcg2.c
-> > > > > @@ -414,8 +414,8 @@ static efi_status_t tcg2_hash_pe_image(void *=
-efi, u64 efi_size,
-> > > > >         }
-> > > > >
-> > > > >         digest_list->count =3D 0;
-> > > > > -       for (i =3D 0; i < ARRAY_SIZE(tpm2_supported_algorithms); =
-i++) {
-> > > > > -               u16 hash_alg =3D tpm2_supported_algorithms[i];
-> > > > > +       for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); i++) {
-> > > > > +               u16 hash_alg =3D hash_algo_list[i].hash_alg;
-> > > > >
-> > > > >                 if (!(active & tpm2_algorithm_to_mask(hash_alg)))
-> > > > >                         continue;
-> > > > > diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-> > > > > index 68eaaa639f89..83f490c82541 100644
-> > > > > --- a/lib/tpm-v2.c
-> > > > > +++ b/lib/tpm-v2.c
-> > > > > @@ -22,13 +22,6 @@
-> > > > >
-> > > > >  #include "tpm-utils.h"
-> > > > >
-> > > > > -const enum tpm2_algorithms tpm2_supported_algorithms[4] =3D {
-> > > > > -       TPM2_ALG_SHA1,
-> > > > > -       TPM2_ALG_SHA256,
-> > > > > -       TPM2_ALG_SHA384,
-> > > > > -       TPM2_ALG_SHA512,
-> > > > > -};
->
-> The current tpm2_algorithm_to_mask() operates on those values and bits
-> shifts based on the enum. Since you remove the enum above, you must
-> also change the function implementation and return
-> hash_algo_list.hash_mask
->
+On 18/04/2024 20:39, Caleb Connolly wrote:
+> This adjusts OF_UPSTREAM to behave more like the kernel by allowing for
+> all the devicetree files for a given vendor to be compiled. This is
+> useful for Qualcomm in particular as most boards are supported by a
+> single U-Boot build just provided with a different DT.
+> 
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   dts/Kconfig          | 24 ++++++++++++++++++++++++
+>   scripts/Makefile.dts | 13 +++++++++++++
+>   2 files changed, 37 insertions(+)
+> 
+> diff --git a/dts/Kconfig b/dts/Kconfig
+> index b9b6367154ef..6883a000a052 100644
+> --- a/dts/Kconfig
+> +++ b/dts/Kconfig
+> @@ -100,8 +100,32 @@ config OF_UPSTREAM
+>   	  However, newer boards whose devicetree source files haven't landed in
+>   	  the dts/upstream subtree, they can override this option to have the
+>   	  DT build from existing U-Boot tree location instead.
+>   
+> +config OF_UPSTREAM_BUILD_VENDOR
+> +	bool "Build all devicetree files for a particular vendor"
+> +	depends on OF_UPSTREAM
+> +	help
+> +	  Enable building all devicetree files for a particular vendor. This
+> +	  is useful for generic U-Boot configurations where many boards can
+> +	  be supported with a single binary.
+> +
+> +	  This is only available for platforms using upstream devicetree.
+> +
+> +config OF_UPSTREAM_VENDOR
+> +	string "Vendor to build all upstream devicetree files for"
+> +	depends on OF_UPSTREAM_BUILD_VENDOR
+> +	default "qcom" if ARCH_SNAPDRAGON
+> +	default "rockchip" if ARCH_ROCKCHIP
+> +	default "amlogic" if ARCH_MESON
+> +	default "allwinner" if ARCH_SUNXI
+> +	default "mediatek" if ARCH_MEDIATEK
+> +	default "marvell" if ARCH_MVEBU || ARCH_KIRKWOOD
+> +	default "xilinx" if ARCH_VERSAL || ARCH_ZYNQ
+> +	default "nvidia" if ARCH_TEGRA
+> +	help
+> +	  Select the vendor to build all devicetree files for.
+> +
+>   choice
+>   	prompt "Provider of DTB for DT control"
+>   	depends on OF_CONTROL
+>   
+> diff --git a/scripts/Makefile.dts b/scripts/Makefile.dts
+> index 5e2429c6170c..790f3c508f19 100644
+> --- a/scripts/Makefile.dts
+> +++ b/scripts/Makefile.dts
+> @@ -1,3 +1,16 @@
+>   # SPDX-License-Identifier: GPL-2.0+
+>   
+>   dtb-y += $(patsubst %,%.dtb,$(subst ",,$(CONFIG_DEFAULT_DEVICE_TREE) $(CONFIG_OF_LIST) $(CONFIG_SPL_OF_LIST)))
+> +
+> +ifeq ($(CONFIG_OF_UPSTREAM_BUILD_VENDOR),y)
+> +ifeq ($(CONFIG_ARM64),y)
+> +dt_dir := $(srctree)/dts/upstream/src/arm64
+> +else
+> +dt_dir := $(srctree)/dts/upstream/src/$(ARCH)
+> +endif
+> +
+> +dtb-vendor_dts := $(patsubst %.dts,%.dtb,$(wildcard $(dt_dir)/$(subst ",,$(CONFIG_OF_UPSTREAM_VENDOR))/*.dts))
+> +
+> +dtb-y += $(subst $(dt_dir)/,,$(dtb-vendor_dts))
+> +
+> +endif
+> 
 
-That's already taken care of as the calls to tpm2_algorithm_to_mask()
-in my patch were adjusted from:
-tpm2_algorithm_to_mask(tpm2_supported_algorithms[i])
-to
-tpm2_algorithm_to_mask(hash_algo_list[i].hash_alg)
 
-The hash_alg is the value from the previous enum.
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on Amlogic boards builds
 
-Best Regards,
+Reduced the whole Amlogic buildman build from 4.50 minutes to 2.30minutes!
 
-Tim
-
-> Cheers
-> /Ilias
->
->
->
-> > > > > -
-> > > > >  int tcg2_get_active_pcr_banks(struct udevice *dev, u32 *active_p=
-cr_banks)
-> > > > >  {
-> > > > >         u32 supported =3D 0;
-> > > > > @@ -82,14 +75,14 @@ int tcg2_create_digest(struct udevice *dev, c=
-onst u8 *input, u32 length,
-> > > > >                 return rc;
-> > > > >
-> > > > >         digest_list->count =3D 0;
-> > > > > -       for (i =3D 0; i < ARRAY_SIZE(tpm2_supported_algorithms); =
-++i) {
-> > > > > +       for (i =3D 0; i < ARRAY_SIZE(hash_algo_list); ++i) {
-> > > > >                 u32 mask =3D
-> > > > > -                       tpm2_algorithm_to_mask(tpm2_supported_alg=
-orithms[i]);
-> > > > > +                       tpm2_algorithm_to_mask(hash_algo_list[i].=
-hash_alg);
-> > > > >
-> > > > >                 if (!(active & mask))
+Thanks,
+Neil
