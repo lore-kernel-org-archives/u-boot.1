@@ -4,61 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE8E7C04FF6
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 08:28:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03CBAC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 09:37:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E69F9881A4;
-	Fri, 19 Apr 2024 10:28:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id 020A98863C;
+	Fri, 19 Apr 2024 11:37:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="KuaqutIj";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="4xNWu9Fd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E56DD881F1; Fri, 19 Apr 2024 10:28:14 +0200 (CEST)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9D4668864D; Fri, 19 Apr 2024 11:37:30 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E59C88191
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 10:28:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B9B2488634
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 11:37:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 8f06af55-fe26-11ee-b571-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.6])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 8f06af55-fe26-11ee-b571-005056992ed3;
- Fri, 19 Apr 2024 10:26:45 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=NHhqh3O/or1fjJv4v4yAfQQWEbO2lgFVF5MDLfpQ7X0=;
- b=KuaqutIj+vi34/Mca+53p+c/xNanAznyxU6kPqDPpOzP9HnXKx5iXt6yw23TvRrs+1z29eywvLcxk
- q4haPRa/xYTlGTK/E53O/whpACUeJIuch0+C56xknn5sNp3INCOoQ47+qun7rc0tLqGLsZIJu1la3T
- tnX1p7/jzvwlZHNKilE1yAaFEeGKuWlnYjFLwlqcIxT+sPW5FreXdviF1rWWgclBJgRmHx2mtkQhM6
- FlLMgQMNGTLkQNEt58UBplFrpAoZciyorQO0Bil2zKI4DzUk3NAlo8BFGbqN097R6BAcPdaOnSfl0x
- Al28mNh1ybYeGNvYj4PS7q89+MEGeCA==
-X-KPN-MID: 33|vYY4LZgbLjsOVaAnapRQ2MQfGnNQi82JIcH/UpJqJWlq6FI8hPeksl7Jm+77nay
- BnsmvIRs7XcmwQJIyBOe2vcJg7iyhINS7heZyoqsDG0I=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|PcUiV460QhCgLl0Fl1WsuISEkPLtR7finQx17+Klo7ql0PnC7J69q5Z82WAE2P2
- oSskfcBoK8/nA4O42VyBYyQ==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id c256d62a-fe26-11ee-9ed8-00505699772e;
- Fri, 19 Apr 2024 10:28:12 +0200 (CEST)
-Date: Fri, 19 Apr 2024 10:28:11 +0200
-Message-Id: <87plulg3j8.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: j@jannau.net
-Cc: kettenis@openbsd.org, trini@konsulko.com, sjg@chromium.org,
- u-boot@lists.denx.de, asahi@lists.linux.dev, j@jannau.net
-In-Reply-To: <20240418-apple_config-v2-5-7e5c6b9a9db3@jannau.net> (message
- from Janne Grunau via B4 Relay on Thu, 18 Apr 2024 21:00:29 +0200)
-Subject: Re: [PATCH v2 5/5] arm: apple: Do not list bootflows on boot
-References: <20240418-apple_config-v2-0-7e5c6b9a9db3@jannau.net>
- <20240418-apple_config-v2-5-7e5c6b9a9db3@jannau.net>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=4839221eac=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
+ 43J2ZOnH009597; Fri, 19 Apr 2024 11:37:15 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=YMnLz1riqbw8Xqlda9OzUZRcSgHhj6FChyFXRJ3qpjQ=; b=4x
+ NWu9Fd+SvBae5e0FYaePsefplt6IGTjK58I7ehyURkVUlhFcKNP6YqyXjUB+yXRu
+ roBdSyNyQIOfozD9H0VCYNDjoNzWsv/CXWk8zpB/mKa/oT2+MjWximrB0phUendi
+ qnTatxmrMXoeWtJsyO7/e2q/HKIZoRpcORqj1lHSp1x2GtpbtMDH8qnrLiNKwpJB
+ Q3UBYkQ5fozh0OCt2exVpfjAhqxsvZCgX26vPYtwXBKeI1up9zOVSDxqRPBMJNAJ
+ /xfTf31gd0u/XvRZrVIpoisEbcEpICh9nMgvCx8YBwyOIbArX6pHE7TGXeqM4RmZ
+ 8qEWbQPT6yTcY5GrBpAQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xff64u0m4-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 19 Apr 2024 11:37:14 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 45F4C4002D;
+ Fri, 19 Apr 2024 11:37:10 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id F1CA021230F;
+ Fri, 19 Apr 2024 11:36:40 +0200 (CEST)
+Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
+ 2024 11:36:40 +0200
+Message-ID: <7d23a960-a864-4fbe-966d-e0bb304394ac@foss.st.com>
+Date: Fri, 19 Apr 2024 11:36:39 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] ARM: stm32: Initialize TAMP_SMCR BKP..PROT fields on
+ STM32MP15xx
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Igor Opaniuk
+ <igor.opaniuk@foundries.io>, Simon Glass <sjg@chromium.org>, Tom Rini
+ <trini@konsulko.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240419035931.178840-1-marex@denx.de>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20240419035931.178840-1-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.252.13.94]
+X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.619,FMLib:17.11.176.26
+ definitions=2024-04-19_06,2024-04-17_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,42 +92,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Janne Grunau via B4 Relay <devnull+j.jannau.net@kernel.org>
-> Date: Thu, 18 Apr 2024 21:00:29 +0200
-> 
-> From: Janne Grunau <j@jannau.net>
-> 
-> The bootflow list is only seen briefly and is probably more confusing
-> than helpful.
 
-To be honest, I think that applies to all boards using BOOTSSTD_FILL.
-Which probably means the -l should be dropped from the default
-BOOTCOMMAND for BOOTSTD_FULL.  But until that happens:
 
-Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
-
+On 4/19/24 05:59, Marek Vasut wrote:
+> In case of an OTP-CLOSED STM32MP15xx system, the CPU core 1 cannot be
+> released from endless loop in BootROM only by populating TAMP BKPxR 4
+> and 5 with magic and branch address and sending SGI0 interrupt from
+> core 0 to core 1 twice. TAMP_SMCR BKP..PROT fields must be initialized
+> as well to release the core 1 from endless loop during the second SGI0
+> handling on core 1. Initialize TAMP_SMCR to protect the first 32 backup
+> registers, the ones which contain the core 1 magic, branch address and
+> boot information.
 > 
-> Signed-off-by: Janne Grunau <j@jannau.net>
+> This requirement seems to be undocumented, therefore it was necessary
+> to trace and analyze the STM32MP15xx BootROM using OpenOCD and objdump.
+> Ultimately, it turns out that a certain BootROM function reads out the
+> TAMP_SMCR register and tests whether the BKP..PROT fields are non-zero.
+> If they are zero, the BootROM code again waits for SGI0 using WFI, else
+> the execution moves forward until it reaches handoff to the TAMP BKPxR 5
+> branch address.
+> 
+> This fixes CPU core 1 release using U-Boot PSCI implementation on an
+> OTP-CLOSED system, i.e. system with fuse 0 bit 6 set.
+> 
+> Reviewed-by: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 > ---
->  configs/apple_m1_defconfig | 1 +
->  1 file changed, 1 insertion(+)
+> Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Simon Glass <sjg@chromium.org
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+> V2: Fix up the BKPRWD/BKPWD mask typo
+> V3: - Update the allocation to 0x20/0x20
+>     - Update commit message
+>     - Add RB from Patrick
+> ---
+>  arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
 > 
-> diff --git a/configs/apple_m1_defconfig b/configs/apple_m1_defconfig
-> index c30aec7c55..4eac1a9e2d 100644
-> --- a/configs/apple_m1_defconfig
-> +++ b/configs/apple_m1_defconfig
-> @@ -8,6 +8,7 @@ CONFIG_SYS_CBSIZE=256
->  CONFIG_SYS_PBSIZE=276
->  # CONFIG_DISPLAY_CPUINFO is not set
->  CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_BOOTCOMMAND="bootflow scan -b"
->  CONFIG_BOARD_LATE_INIT=y
->  CONFIG_CMD_SELECT_FONT=y
->  # CONFIG_NET is not set
-> 
-> -- 
-> 2.44.0
-> 
-> 
-> 
-> 
+> diff --git a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+> index dd99150fbc2..d75ec99d6a1 100644
+> --- a/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+> +++ b/arch/arm/mach-stm32mp/stm32mp1/stm32mp15x.c
+> @@ -14,6 +14,7 @@
+>  #include <asm/arch/sys_proto.h>
+>  #include <dm/device.h>
+>  #include <dm/uclass.h>
+> +#include <linux/bitfield.h>
+>  
+>  /* RCC register */
+>  #define RCC_TZCR		(STM32_RCC_BASE + 0x00)
+> @@ -41,6 +42,9 @@
+>  #define TZC_REGION_ID_ACCESS0	(STM32_TZC_BASE + 0x114)
+>  
+>  #define TAMP_CR1		(STM32_TAMP_BASE + 0x00)
+> +#define TAMP_SMCR		(STM32_TAMP_BASE + 0x20)
+> +#define TAMP_SMCR_BKPRWDPROT	GENMASK(7, 0)
+> +#define TAMP_SMCR_BKPWDPROT	GENMASK(23, 16)
+>  
+>  #define PWR_CR1			(STM32_PWR_BASE + 0x00)
+>  #define PWR_MCUCR		(STM32_PWR_BASE + 0x14)
+> @@ -136,6 +140,18 @@ static void security_init(void)
+>  	 */
+>  	writel(0x0, TAMP_CR1);
+>  
+> +	/*
+> +	 * TAMP: Configure non-zero secure protection settings. This is
+> +	 * checked by BootROM function 35ac on OTP-CLOSED device during
+> +	 * CPU core 1 release from endless loop. If secure protection
+> +	 * fields are zero, the core 1 is not released from endless
+> +	 * loop on second SGI0.
+> +	 */
+> +	clrsetbits_le32(TAMP_SMCR,
+> +			TAMP_SMCR_BKPRWDPROT | TAMP_SMCR_BKPWDPROT,
+> +			FIELD_PREP(TAMP_SMCR_BKPRWDPROT, 0x20) |
+> +			FIELD_PREP(TAMP_SMCR_BKPWDPROT, 0x20));
+> +
+>  	/* GPIOZ: deactivate the security */
+>  	writel(BIT(0), RCC_MP_AHB5ENSETR);
+>  	writel(0x0, GPIOZ_SECCFGR);
+Hi Marek
+
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
