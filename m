@@ -4,74 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C375CC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:05:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 264EFC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 12:06:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 205A988755;
-	Fri, 19 Apr 2024 14:05:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B02E38875B;
+	Fri, 19 Apr 2024 14:06:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="hlDhNGJI";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="QNAwuH4N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D145188756; Fri, 19 Apr 2024 14:05:51 +0200 (CEST)
+ id 7B8D38875A; Fri, 19 Apr 2024 14:06:06 +0200 (CEST)
 Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
  [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40BC088754
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:05:49 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E215488760
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 14:06:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=4839221eac=patrice.chotard@foss.st.com
 Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
  by mx07-00178001.pphosted.com (8.17.1.24/8.17.1.24) with ESMTP id
- 43JAuo9W023460; Fri, 19 Apr 2024 14:05:40 +0200
+ 43JAuZx7020533; Fri, 19 Apr 2024 14:05:54 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
  message-id:date:mime-version:subject:to:cc:references:from
  :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=5dt9imA5geoLqQQYo7hmipESSFFlZLkPAiIFhfvVNUQ=; b=hl
- DhNGJIb33N3v0JpGkMJhDKoWkh/B5fj18irRYHB5ebkYDuqvrAWsjON/bz7mhFg/
- rhbhDWPK3J2b5YLNkID1RLELRsQ7Yreh3XECqKlJYziJ3kMDYRO6NZQeM3hhxzaG
- GVhpuWpCh3gEDHUdIu0Z0Pn6fE/P7dn9fhDyyahoYWGz315hgXBjNwUhWaN/81Z9
- V0a+9SbyfSqRX4HArDQv9SqsKa/JxFWYGdp8qZnj8UScbsn5cOglu5wNjAFqEAnb
- Uy3xXO+SK2/R1TsMZ4W7J/tqKhLfzf1xbirkKhA2skZVDBychhOl6MPt2lfSVwFP
- rcUPPBpuQPmcTQWJ7pGw==
+ selector1; bh=z/Cj0+Naf5va9Pm/bvt/AoYZ6GVY/zMIMXplrjayKvQ=; b=QN
+ AwuH4NbO1Eq6Lhr5U7j9zbsUpxv2PUhSbbfZocWGd/Z2mrDxB801Felqtd3q1roX
+ 8kTTUNGvrGQte+HUydSjcPexb3RLmMKux+OpOclCCpjkSl3XropDa9G0Amy3i8Iv
+ 9tF1i5YEmtoiin43m+EkJfKKOcnA2mvOf/3u5SNdFK60RsgY4k1kvNjJBbkw1+O4
+ 5DfEMWeewaw6Vw5fwj8N3JUoMzht+VGrYCfRGQPxndRS7Eb0fuoEDHmnFYxf9ysc
+ dbqgo0dHZGSgq2nLMikwGzBrydXoyDXLSxtZYDj/3tIjiOf4TlCaMsnuSUvGUxpD
+ LcjwcdM/NCMfFczlqs0A==
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xg3m127my-1
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xg3m127p1-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 19 Apr 2024 14:05:40 +0200 (MEST)
+ Fri, 19 Apr 2024 14:05:54 +0200 (MEST)
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 71EDE40044;
- Fri, 19 Apr 2024 14:05:36 +0200 (CEST)
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1B60640045;
+ Fri, 19 Apr 2024 14:05:49 +0200 (CEST)
 Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id BCAB1218606;
- Fri, 19 Apr 2024 14:05:10 +0200 (CEST)
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 93009218618;
+ Fri, 19 Apr 2024 14:05:24 +0200 (CEST)
 Received: from [10.252.13.94] (10.252.13.94) by SHFDAG1NODE1.st.com
  (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.27; Fri, 19 Apr
- 2024 14:05:10 +0200
-Message-ID: <69368c59-8221-44c6-a04e-0663a6f01985@foss.st.com>
-Date: Fri, 19 Apr 2024 14:05:10 +0200
+ 2024 14:05:23 +0200
+Message-ID: <0894c3a7-bc0f-4e66-a1a0-13c6371e9d7f@foss.st.com>
+Date: Fri, 19 Apr 2024 14:05:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/11] net: dwc_eth_qos: Split STM32 glue into separate
- file
+Subject: Re: [PATCH v2 02/11] net: dwc_eth_qos: Rename eqos_stm32_config to
+ eqos_stm32mp15_config
 Content-Language: en-US
 To: Christophe ROULLIER <christophe.roullier@foss.st.com>, Marek Vasut
  <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Joe Hershberger <joe.hershberger@ni.com>, Patrick DELAUNAY - foss
+CC: Christophe ROULLIER <christophe.roullier@st.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Patrick DELAUNAY - foss
  <patrick.delaunay@foss.st.com>,
  Ramon Fried <rfried.dev@gmail.com>, <u-boot@dh-electronics.com>,
  <uboot-stm32@st-md-mailman.stormreply.com>
 References: <20240326120745.27581-1-marex@denx.de>
- <20240326120745.27581-2-marex@denx.de>
- <DU2PR10MB77878C017B43BB5074AD7CA38F002@DU2PR10MB7787.EURPRD10.PROD.OUTLOOK.COM>
- <1130a47f-e63d-47fe-929c-1c27a3fe617e@foss.st.com>
+ <20240326120745.27581-3-marex@denx.de>
+ <DU2PR10MB7787578063068AFCDA4543388F002@DU2PR10MB7787.EURPRD10.PROD.OUTLOOK.COM>
+ <36109f71-081a-4dca-b852-c14ac39a318f@foss.st.com>
 From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <1130a47f-e63d-47fe-929c-1c27a3fe617e@foss.st.com>
+In-Reply-To: <36109f71-081a-4dca-b852-c14ac39a318f@foss.st.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 X-Originating-IP: [10.252.13.94]
@@ -98,15 +99,15 @@ X-Virus-Status: Clean
 
 
 
-On 4/8/24 09:24, Christophe ROULLIER wrote:
+On 4/8/24 09:26, Christophe ROULLIER wrote:
 >> -----Original Message-----
 >> From: Marek Vasut<marex@denx.de>
 >> Sent: Tuesday, March 26, 2024 1:07 PM
 >> To:u-boot@lists.denx.de
 >> Cc: Marek Vasut<marex@denx.de>; Patrice CHOTARD - foss<patrice.chotard@foss.st.com>; Christophe ROULLIER<christophe.roullier@st.com>; Joe Hershberger<joe.hershberger@ni.com>; Patrick DELAUNAY - foss<patrick.delaunay@foss.st.com>; Ramon Fried<rfried.dev@gmail.com>;u-boot@dh-electronics.com;uboot-stm32@st-md-mailman.stormreply.com
->> Subject: [PATCH v2 01/11] net: dwc_eth_qos: Split STM32 glue into separate file
+>> Subject: [PATCH v2 02/11] net: dwc_eth_qos: Rename eqos_stm32_config to eqos_stm32mp15_config
 >>
->> Move STM32 glue code into separate file to contain the STM32 specific code outside of the DWMAC core code. No functional change.
+>> The current glue code is specific to STM32MP15xx, the upcoming STM32MP13xx will introduce another entry specific to the STM32MP13xx. Rename the current entry to eqos_stm32mp15_config in preparation for STM32MP13xx addition. No functional change.
 >>
 >> Reviewed-by: Patrice Chotard<patrice.chotard@foss.st.com>
 >> Signed-off-by: Marek Vasut<marex@denx.de>
@@ -121,414 +122,41 @@ On 4/8/24 09:24, Christophe ROULLIER wrote:
 >> ---
 >> V2: Add RB from Patrice
 >> ---
->>   drivers/net/Makefile            |   1 +
->>   drivers/net/dwc_eth_qos.c       | 165 ---------------------------
->>   drivers/net/dwc_eth_qos.h       |   1 +
->>   drivers/net/dwc_eth_qos_stm32.c | 196 ++++++++++++++++++++++++++++++++
->>   4 files changed, 198 insertions(+), 165 deletions(-)  create mode 100644 drivers/net/dwc_eth_qos_stm32.c
+>>   drivers/net/dwc_eth_qos.c       | 2 +-
+>>   drivers/net/dwc_eth_qos.h       | 2 +-
+>>   drivers/net/dwc_eth_qos_stm32.c | 2 +-
+>>   3 files changed, 3 insertions(+), 3 deletions(-)
 >>
->> diff --git a/drivers/net/Makefile b/drivers/net/Makefile index 6677366ebd6..dc3404519d6 100644
->> --- a/drivers/net/Makefile
->> +++ b/drivers/net/Makefile
->> @@ -23,6 +23,7 @@ obj-$(CONFIG_DWC_ETH_QOS_IMX) += dwc_eth_qos_imx.o
->>   obj-$(CONFIG_DWC_ETH_QOS_ROCKCHIP) += dwc_eth_qos_rockchip.o
->>   obj-$(CONFIG_DWC_ETH_QOS_QCOM) += dwc_eth_qos_qcom.o
->>   obj-$(CONFIG_DWC_ETH_QOS_STARFIVE) += dwc_eth_qos_starfive.o
->> +obj-$(CONFIG_DWC_ETH_QOS_STM32) += dwc_eth_qos_stm32.o
->>   obj-$(CONFIG_E1000) += e1000.o
->>   obj-$(CONFIG_E1000_SPI) += e1000_spi.o
->>   obj-$(CONFIG_EEPRO100) += eepro100.o
->> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c index 9b3bce1dc87..533c2bf070b 100644
+>> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c index 533c2bf070b..203bfc0848c 100644
 >> --- a/drivers/net/dwc_eth_qos.c
 >> +++ b/drivers/net/dwc_eth_qos.c
->> @@ -295,58 +295,6 @@ err:
->>   #endif
->>   }
->>
->> -static int eqos_start_clks_stm32(struct udevice *dev) -{ -#ifdef CONFIG_CLK
->> -       struct eqos_priv *eqos = dev_get_priv(dev);
->> -       int ret;
->> -
->> -       debug("%s(dev=%p):\n", __func__, dev);
->> -
->> -       ret = clk_enable(&eqos->clk_master_bus);
->> -       if (ret < 0) {
->> -               pr_err("clk_enable(clk_master_bus) failed: %d", ret);
->> -               goto err;
->> -       }
->> -
->> -       ret = clk_enable(&eqos->clk_rx);
->> -       if (ret < 0) {
->> -               pr_err("clk_enable(clk_rx) failed: %d", ret);
->> -               goto err_disable_clk_master_bus;
->> -       }
->> -
->> -       ret = clk_enable(&eqos->clk_tx);
->> -       if (ret < 0) {
->> -               pr_err("clk_enable(clk_tx) failed: %d", ret);
->> -               goto err_disable_clk_rx;
->> -       }
->> -
->> -       if (clk_valid(&eqos->clk_ck) && !eqos->clk_ck_enabled) {
->> -               ret = clk_enable(&eqos->clk_ck);
->> -               if (ret < 0) {
->> -                       pr_err("clk_enable(clk_ck) failed: %d", ret);
->> -                       goto err_disable_clk_tx;
->> -               }
->> -               eqos->clk_ck_enabled = true;
->> -       }
->> -#endif
->> -
->> -       debug("%s: OK\n", __func__);
->> -       return 0;
->> -
->> -#ifdef CONFIG_CLK
->> -err_disable_clk_tx:
->> -       clk_disable(&eqos->clk_tx);
->> -err_disable_clk_rx:
->> -       clk_disable(&eqos->clk_rx);
->> -err_disable_clk_master_bus:
->> -       clk_disable(&eqos->clk_master_bus);
->> -err:
->> -       debug("%s: FAILED: %d\n", __func__, ret);
->> -       return ret;
->> -#endif
->> -}
->> -
->>   static int eqos_stop_clks_tegra186(struct udevice *dev)  {  #ifdef CONFIG_CLK @@ -365,22 +313,6 @@ static int eqos_stop_clks_tegra186(struct udevice *dev)
->>          return 0;
->>   }
->>
->> -static int eqos_stop_clks_stm32(struct udevice *dev) -{ -#ifdef CONFIG_CLK
->> -       struct eqos_priv *eqos = dev_get_priv(dev);
->> -
->> -       debug("%s(dev=%p):\n", __func__, dev);
->> -
->> -       clk_disable(&eqos->clk_tx);
->> -       clk_disable(&eqos->clk_rx);
->> -       clk_disable(&eqos->clk_master_bus);
->> -#endif
->> -
->> -       debug("%s: OK\n", __func__);
->> -       return 0;
->> -}
->> -
->>   static int eqos_start_resets_tegra186(struct udevice *dev)  {
->>          struct eqos_priv *eqos = dev_get_priv(dev); @@ -493,17 +425,6 @@ static ulong eqos_get_tick_clk_rate_tegra186(struct udevice *dev)  #endif  }
->>
->> -static ulong eqos_get_tick_clk_rate_stm32(struct udevice *dev) -{ -#ifdef CONFIG_CLK
->> -       struct eqos_priv *eqos = dev_get_priv(dev);
->> -
->> -       return clk_get_rate(&eqos->clk_master_bus);
->> -#else
->> -       return 0;
->> -#endif
->> -}
->> -
->>   static int eqos_set_full_duplex(struct udevice *dev)  {
->>          struct eqos_priv *eqos = dev_get_priv(dev); @@ -1415,57 +1336,6 @@ err_free_reset_eqos:
->>          return ret;
->>   }
->>
->> -static int eqos_probe_resources_stm32(struct udevice *dev) -{
->> -       struct eqos_priv *eqos = dev_get_priv(dev);
->> -       int ret;
->> -       phy_interface_t interface;
->> -
->> -       debug("%s(dev=%p):\n", __func__, dev);
->> -
->> -       interface = eqos->config->interface(dev);
->> -
->> -       if (interface == PHY_INTERFACE_MODE_NA) {
->> -               pr_err("Invalid PHY interface\n");
->> -               return -EINVAL;
->> -       }
->> -
->> -       ret = board_interface_eth_init(dev, interface);
->> -       if (ret)
->> -               return -EINVAL;
->> -
->> -       ret = clk_get_by_name(dev, "stmmaceth", &eqos->clk_master_bus);
->> -       if (ret) {
->> -               pr_err("clk_get_by_name(master_bus) failed: %d", ret);
->> -               goto err_probe;
->> -       }
->> -
->> -       ret = clk_get_by_name(dev, "mac-clk-rx", &eqos->clk_rx);
->> -       if (ret) {
->> -               pr_err("clk_get_by_name(rx) failed: %d", ret);
->> -               goto err_probe;
->> -       }
->> -
->> -       ret = clk_get_by_name(dev, "mac-clk-tx", &eqos->clk_tx);
->> -       if (ret) {
->> -               pr_err("clk_get_by_name(tx) failed: %d", ret);
->> -               goto err_probe;
->> -       }
->> -
->> -       /*  Get ETH_CLK clocks (optional) */
->> -       ret = clk_get_by_name(dev, "eth-ck", &eqos->clk_ck);
->> -       if (ret)
->> -               pr_warn("No phy clock provided %d", ret);
->> -
->> -       debug("%s: OK\n", __func__);
->> -       return 0;
->> -
->> -err_probe:
->> -
->> -       debug("%s: returns %d\n", __func__, ret);
->> -       return ret;
->> -}
->> -
->>   static phy_interface_t eqos_get_interface_tegra186(const struct udevice *dev)  {
->>          return PHY_INTERFACE_MODE_MII;
->> @@ -1484,12 +1354,6 @@ static int eqos_remove_resources_tegra186(struct udevice *dev)
->>          return 0;
->>   }
->>
->> -static int eqos_remove_resources_stm32(struct udevice *dev) -{
->> -       debug("%s(dev=%p):\n", __func__, dev);
->> -       return 0;
->> -}
->> -
->>   static int eqos_probe(struct udevice *dev)  {
->>          struct eqos_priv *eqos = dev_get_priv(dev); @@ -1633,35 +1497,6 @@ static const struct eqos_config __maybe_unused eqos_tegra186_config = {
->>          .ops = &eqos_tegra186_ops
->>   };
->>
->> -static struct eqos_ops eqos_stm32_ops = {
->> -       .eqos_inval_desc = eqos_inval_desc_generic,
->> -       .eqos_flush_desc = eqos_flush_desc_generic,
->> -       .eqos_inval_buffer = eqos_inval_buffer_generic,
->> -       .eqos_flush_buffer = eqos_flush_buffer_generic,
->> -       .eqos_probe_resources = eqos_probe_resources_stm32,
->> -       .eqos_remove_resources = eqos_remove_resources_stm32,
->> -       .eqos_stop_resets = eqos_null_ops,
->> -       .eqos_start_resets = eqos_null_ops,
->> -       .eqos_stop_clks = eqos_stop_clks_stm32,
->> -       .eqos_start_clks = eqos_start_clks_stm32,
->> -       .eqos_calibrate_pads = eqos_null_ops,
->> -       .eqos_disable_calibration = eqos_null_ops,
->> -       .eqos_set_tx_clk_speed = eqos_null_ops,
->> -       .eqos_get_enetaddr = eqos_null_ops,
->> -       .eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_stm32
->> -};
->> -
->> -static const struct eqos_config __maybe_unused eqos_stm32_config = {
->> -       .reg_access_always_ok = false,
->> -       .mdio_wait = 10000,
->> -       .swr_wait = 50,
->> -       .config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_AV,
->> -       .config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_250_300,
->> -       .axi_bus_width = EQOS_AXI_WIDTH_64,
->> -       .interface = dev_read_phy_mode,
->> -       .ops = &eqos_stm32_ops
->> -};
->> -
->>   static const struct udevice_id eqos_ids[] = {  #if IS_ENABLED(CONFIG_DWC_ETH_QOS_TEGRA186)
+>> @@ -1507,7 +1507,7 @@ static const struct udevice_id eqos_ids[] = {  #if IS_ENABLED(CONFIG_DWC_ETH_QOS_STM32)
 >>          {
->> diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h index e3222e1e17e..a6087f191ab 100644
+>>                  .compatible = "st,stm32mp1-dwmac",
+>> -               .data = (ulong)&eqos_stm32_config
+>> +               .data = (ulong)&eqos_stm32mp15_config
+>>          },
+>>   #endif
+>>   #if IS_ENABLED(CONFIG_DWC_ETH_QOS_IMX)
+>> diff --git a/drivers/net/dwc_eth_qos.h b/drivers/net/dwc_eth_qos.h index a6087f191ab..bafd0d339fb 100644
 >> --- a/drivers/net/dwc_eth_qos.h
 >> +++ b/drivers/net/dwc_eth_qos.h
->> @@ -290,4 +290,5 @@ int eqos_null_ops(struct udevice *dev);  extern struct eqos_config eqos_imx_config;  extern struct eqos_config eqos_rockchip_config;  extern struct eqos_config eqos_qcom_config;
->> +extern struct eqos_config eqos_stm32_config;
->>   extern struct eqos_config eqos_jh7110_config; diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c new file mode 100644 index 00000000000..cfda757133e
->> --- /dev/null
+>> @@ -290,5 +290,5 @@ int eqos_null_ops(struct udevice *dev);  extern struct eqos_config eqos_imx_config;  extern struct eqos_config eqos_rockchip_config;  extern struct eqos_config eqos_qcom_config; -extern struct eqos_config eqos_stm32_config;
+>> +extern struct eqos_config eqos_stm32mp15_config;
+>>   extern struct eqos_config eqos_jh7110_config; diff --git a/drivers/net/dwc_eth_qos_stm32.c b/drivers/net/dwc_eth_qos_stm32.c index cfda757133e..fd29a604987 100644
+>> --- a/drivers/net/dwc_eth_qos_stm32.c
 >> +++ b/drivers/net/dwc_eth_qos_stm32.c
->> @@ -0,0 +1,196 @@
->> +// SPDX-License-Identifier: GPL-2.0
->> +/*
->> + * Copyright (C) 2024, Marek Vasut<marex@denx.de>
->> + *
->> + * This is code moved from drivers/net/dwc_eth_qos.c , which is:
->> + * Copyright (c) 2016, NVIDIA CORPORATION.
->> + */
->> +
->> +#include <common.h>
->> +#include <asm/cache.h>
->> +#include <asm/gpio.h>
->> +#include <asm/io.h>
->> +#include <clk.h>
->> +#include <cpu_func.h>
->> +#include <dm.h>
->> +#include <dm/device_compat.h>
->> +#include <errno.h>
->> +#include <eth_phy.h>
->> +#include <log.h>
->> +#include <malloc.h>
->> +#include <memalign.h>
->> +#include <miiphy.h>
->> +#include <net.h>
->> +#include <netdev.h>
->> +#include <phy.h>
->> +#include <reset.h>
->> +#include <wait_bit.h>
->> +#include <linux/delay.h>
->> +
->> +#include "dwc_eth_qos.h"
->> +
->> +static ulong eqos_get_tick_clk_rate_stm32(struct udevice *dev) { #ifdef
->> +CONFIG_CLK
->> +       struct eqos_priv *eqos = dev_get_priv(dev);
->> +
->> +       return clk_get_rate(&eqos->clk_master_bus);
->> +#else
->> +       return 0;
->> +#endif
->> +}
->> +
->> +static int eqos_start_clks_stm32(struct udevice *dev) { #ifdef
->> +CONFIG_CLK
->> +       struct eqos_priv *eqos = dev_get_priv(dev);
->> +       int ret;
->> +
->> +       debug("%s(dev=%p):\n", __func__, dev);
->> +
->> +       ret = clk_enable(&eqos->clk_master_bus);
->> +       if (ret < 0) {
->> +               pr_err("clk_enable(clk_master_bus) failed: %d", ret);
->> +               goto err;
->> +       }
->> +
->> +       ret = clk_enable(&eqos->clk_rx);
->> +       if (ret < 0) {
->> +               pr_err("clk_enable(clk_rx) failed: %d", ret);
->> +               goto err_disable_clk_master_bus;
->> +       }
->> +
->> +       ret = clk_enable(&eqos->clk_tx);
->> +       if (ret < 0) {
->> +               pr_err("clk_enable(clk_tx) failed: %d", ret);
->> +               goto err_disable_clk_rx;
->> +       }
->> +
->> +       if (clk_valid(&eqos->clk_ck) && !eqos->clk_ck_enabled) {
->> +               ret = clk_enable(&eqos->clk_ck);
->> +               if (ret < 0) {
->> +                       pr_err("clk_enable(clk_ck) failed: %d", ret);
->> +                       goto err_disable_clk_tx;
->> +               }
->> +               eqos->clk_ck_enabled = true;
->> +       }
->> +#endif
->> +
->> +       debug("%s: OK\n", __func__);
->> +       return 0;
->> +
->> +#ifdef CONFIG_CLK
->> +err_disable_clk_tx:
->> +       clk_disable(&eqos->clk_tx);
->> +err_disable_clk_rx:
->> +       clk_disable(&eqos->clk_rx);
->> +err_disable_clk_master_bus:
->> +       clk_disable(&eqos->clk_master_bus);
->> +err:
->> +       debug("%s: FAILED: %d\n", __func__, ret);
->> +       return ret;
->> +#endif
->> +}
->> +
->> +static int eqos_stop_clks_stm32(struct udevice *dev) { #ifdef
->> +CONFIG_CLK
->> +       struct eqos_priv *eqos = dev_get_priv(dev);
->> +
->> +       debug("%s(dev=%p):\n", __func__, dev);
->> +
->> +       clk_disable(&eqos->clk_tx);
->> +       clk_disable(&eqos->clk_rx);
->> +       clk_disable(&eqos->clk_master_bus);
->> +#endif
->> +
->> +       debug("%s: OK\n", __func__);
->> +       return 0;
->> +}
->> +
->> +static int eqos_probe_resources_stm32(struct udevice *dev) {
->> +       struct eqos_priv *eqos = dev_get_priv(dev);
->> +       int ret;
->> +       phy_interface_t interface;
->> +
->> +       debug("%s(dev=%p):\n", __func__, dev);
->> +
->> +       interface = eqos->config->interface(dev);
->> +
->> +       if (interface == PHY_INTERFACE_MODE_NA) {
->> +               pr_err("Invalid PHY interface\n");
->> +               return -EINVAL;
->> +       }
->> +
->> +       ret = board_interface_eth_init(dev, interface);
->> +       if (ret)
->> +               return -EINVAL;
->> +
->> +       ret = clk_get_by_name(dev, "stmmaceth", &eqos->clk_master_bus);
->> +       if (ret) {
->> +               pr_err("clk_get_by_name(master_bus) failed: %d", ret);
->> +               goto err_probe;
->> +       }
->> +
->> +       ret = clk_get_by_name(dev, "mac-clk-rx", &eqos->clk_rx);
->> +       if (ret) {
->> +               pr_err("clk_get_by_name(rx) failed: %d", ret);
->> +               goto err_probe;
->> +       }
->> +
->> +       ret = clk_get_by_name(dev, "mac-clk-tx", &eqos->clk_tx);
->> +       if (ret) {
->> +               pr_err("clk_get_by_name(tx) failed: %d", ret);
->> +               goto err_probe;
->> +       }
->> +
->> +       /*  Get ETH_CLK clocks (optional) */
->> +       ret = clk_get_by_name(dev, "eth-ck", &eqos->clk_ck);
->> +       if (ret)
->> +               pr_warn("No phy clock provided %d", ret);
->> +
->> +       debug("%s: OK\n", __func__);
->> +       return 0;
->> +
->> +err_probe:
->> +
->> +       debug("%s: returns %d\n", __func__, ret);
->> +       return ret;
->> +}
->> +
->> +static int eqos_remove_resources_stm32(struct udevice *dev) {
->> +       debug("%s(dev=%p):\n", __func__, dev);
->> +
->> +       return 0;
->> +}
->> +
->> +static struct eqos_ops eqos_stm32_ops = {
->> +       .eqos_inval_desc = eqos_inval_desc_generic,
->> +       .eqos_flush_desc = eqos_flush_desc_generic,
->> +       .eqos_inval_buffer = eqos_inval_buffer_generic,
->> +       .eqos_flush_buffer = eqos_flush_buffer_generic,
->> +       .eqos_probe_resources = eqos_probe_resources_stm32,
->> +       .eqos_remove_resources = eqos_remove_resources_stm32,
->> +       .eqos_stop_resets = eqos_null_ops,
->> +       .eqos_start_resets = eqos_null_ops,
->> +       .eqos_stop_clks = eqos_stop_clks_stm32,
->> +       .eqos_start_clks = eqos_start_clks_stm32,
->> +       .eqos_calibrate_pads = eqos_null_ops,
->> +       .eqos_disable_calibration = eqos_null_ops,
->> +       .eqos_set_tx_clk_speed = eqos_null_ops,
->> +       .eqos_get_enetaddr = eqos_null_ops,
->> +       .eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_stm32 };
->> +
->> +struct eqos_config __maybe_unused eqos_stm32_config = {
->> +       .reg_access_always_ok = false,
->> +       .mdio_wait = 10000,
->> +       .swr_wait = 50,
->> +       .config_mac = EQOS_MAC_RXQ_CTRL0_RXQ0EN_ENABLED_AV,
->> +       .config_mac_mdio = EQOS_MAC_MDIO_ADDRESS_CR_250_300,
->> +       .axi_bus_width = EQOS_AXI_WIDTH_64,
->> +       .interface = dev_read_phy_mode,
->> +       .ops = &eqos_stm32_ops
->> +};
+>> @@ -184,7 +184,7 @@ static struct eqos_ops eqos_stm32_ops = {
+>>          .eqos_get_tick_clk_rate = eqos_get_tick_clk_rate_stm32  };
+>>
+>> -struct eqos_config __maybe_unused eqos_stm32_config = {
+>> +struct eqos_config __maybe_unused eqos_stm32mp15_config = {
+>>          .reg_access_always_ok = false,
+>>          .mdio_wait = 10000,
+>>          .swr_wait = 50,
 >> -- 
 >> 2.43.0
 >>
-> Reviewed-by: Christophe ROULLIER<christophe.roullier@foss.st.com>
+> Reviewed-by: Christophe ROULLIER <christophe.roullier@foss.st.com>
 
 Applied on u-boot-stm32/master 
