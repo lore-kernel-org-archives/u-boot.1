@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A508C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 01:58:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED466C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 01:59:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1EC9886B5;
-	Fri, 19 Apr 2024 03:58:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 53211886BA;
+	Fri, 19 Apr 2024 03:58:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tY9+b81D";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YSgC+ns5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4168886B4; Fri, 19 Apr 2024 03:58:03 +0200 (CEST)
-Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
- [IPv6:2607:f8b0:4864:20::f2b])
+ id 1070A886B6; Fri, 19 Apr 2024 03:58:06 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D29D788698
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 03:58:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D804688692
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 03:58:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2b.google.com with SMTP id
- 6a1803df08f44-69b50b8239fso15733266d6.0
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 18:58:01 -0700 (PDT)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-de45e5c3c68so1777054276.0
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 18:58:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713491880; x=1714096680; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1713491882; x=1714096682; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=E2ALd1Ay3EYVrxJhOutoCPiXDcY6nJeSD0wzpam2zWg=;
- b=tY9+b81DMnc5x+VwYFi4N65QkXtyMljG+aqBzN3kmrccdKrCyvl2vl3zTNj2kxh7HP
- WBcVNSOTSdhaki0hd9QnU/DcTDMbih51hbTAaqzN76WZX+epdfg9YOUt7AlEX4SWh4Zi
- cQvnwTf3MZ6+Kw8HBN4N4KAoeVo72PZF8hcfw=
+ bh=2je+TodrdFBknw0XTxyGYknEUVHSLApJzM0SOVAF3xs=;
+ b=YSgC+ns5/9/vGxe3Jdx/bRDXtp3ROJ7rrLaTR0bKyOrbtw8ohp8yZoQKIL8Hu0W54D
+ THI+pZ4XJ8QxekVNib8Cr7zVAl6ycVOUR4u8B4/kX8K4nNcj0MZAO5BF8IWGM+g1Q0HU
+ jbFj0YkTqrPc9G6+0d1H+n9+X+Okbke3cLdvY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713491880; x=1714096680;
+ d=1e100.net; s=20230601; t=1713491882; x=1714096682;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=E2ALd1Ay3EYVrxJhOutoCPiXDcY6nJeSD0wzpam2zWg=;
- b=ayz3sUp4FM3AnD+pqlGKBKHydHbzLa+uA+MsEfNr1nKBMMCd6t2Vpgpaxv1crha4Ab
- K8tCyQtuByI954l/Qz9k3k9CD2DPxZU9txtpxIDMrvE7zcsGNYHY8ABzx0qUSXSLJJkD
- /ySWSDMmPiuZcnr7dOMIufQ2fc87vYxwnLAmDx0s4vUS9C2HdcO0krNKHVrCUHwDtqq8
- yfuA38IYW80Vhzsa2x/Zrle8WsO0PGpolWwTfUZrRQwuuZH3VK2mhCIna31kuZCVSQBv
- jGDVR+UJUfc8+KvSMSJxTdvYAmoTFTmtQBcKhzw1/GFlZkmwKfEVIbhdvZYfA/aUDmK/
- iSUg==
-X-Gm-Message-State: AOJu0YzfWVlv6SxyzNRDbAaOhKw4O6NVYw2x9JCB7OUhjXNFWd4L3FMo
- OjV1OYLC8YYkk6okBREbD721v1w3BNgfSNZEfTqyYi/8kQhLe+/FA9WYCnYesz4=
-X-Google-Smtp-Source: AGHT+IFUn+FVYq2cIVojdqZ2TDKcOsxvgFyrkAw8uZT5kFwdQTVTcqfpD3gqMFMY5cPe0dEHU786KQ==
-X-Received: by 2002:ad4:4e67:0:b0:6a0:4d4f:9428 with SMTP id
- ec7-20020ad44e67000000b006a04d4f9428mr1392383qvb.32.1713491880707; 
- Thu, 18 Apr 2024 18:58:00 -0700 (PDT)
+ bh=2je+TodrdFBknw0XTxyGYknEUVHSLApJzM0SOVAF3xs=;
+ b=Q30nSIHWQUf+7XKSEclyE64MEL7CfUQ29aXm5hgAthShO4FwuqKrurZzEvbWNr8Jmy
+ rgJ/42eBGL8lfGKxbxIh0/tBEJXAVECihiyHw/07MKH4PnebBPAd6wxZmz8RnToorRSt
+ j0rhpsCouUxCDalaN23JZLGw63FQshkSiW6rRWrDT9N5UtPSJEu4uWL/QyybKbDh9iwB
+ TW35sl5Xgv4PtvP6DyWPgMhofeJZYuiDZeAt6eRmNFoOO7EPLpzAZ4uCT0+FyM6j29tf
+ mFK3K6uZYJH1B+7c2gBGuYSGmHKACH5QMRMWRze/D0tP3jq5AmYScDcdLTEL5LwNyxXb
+ tbLQ==
+X-Gm-Message-State: AOJu0YwPG9zuI2dtWzNWxY3mcTmGhQmAg1hF3kNJ8beODOdPkn6jYH++
+ swiOkusDn07nUJahhPOPClaDfJt95UwYNc3H0DnbztIxGdwGo+ndwtikE42uDs4=
+X-Google-Smtp-Source: AGHT+IEdkIDmAmnw/lz4M9vFz2CUETG6GJ6cyWYxlCZtg6c2RY/4NaKKgiq8FhK6kP1BYltqYP9mGw==
+X-Received: by 2002:a25:3610:0:b0:dc7:4b43:db3f with SMTP id
+ d16-20020a253610000000b00dc74b43db3fmr638438yba.21.1713491882631; 
+ Thu, 18 Apr 2024 18:58:02 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
- b4-20020a0cf044000000b0069b1e2f3074sm1167777qvl.98.2024.04.18.18.57.59
+ b4-20020a0cf044000000b0069b1e2f3074sm1167777qvl.98.2024.04.18.18.58.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 18 Apr 2024 18:58:00 -0700 (PDT)
+ Thu, 18 Apr 2024 18:58:02 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marex@denx.de>
-Cc: Laurent Pinchart <laurent.pinchart@ideasonboard.com>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240414183759.146925-1-marex@denx.de>
-References: <20240414183759.146925-1-marex@denx.de>
-Subject: Re: [PATCH] boot: fdt: Turn all addresses and sizes into u64
-Message-Id: <171349187971.1524174.2423013401610355489.b4-ty@konsulko.com>
-Date: Thu, 18 Apr 2024 19:57:59 -0600
+To: u-boot@lists.denx.de, git@xilinx.com, Michal Simek <michal.simek@amd.com>
+Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>, 
+ Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
+ Bin Meng <bmeng.cn@gmail.com>, Eddie James <eajames@linux.ibm.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Sean Edmond <seanedmond@microsoft.com>, Simon Glass <sjg@chromium.org>
+In-Reply-To: <4ac3dca43448d6b6660c947cd7d50b1112cd235d.1713169203.git.michal.simek@amd.com>
+References: <4ac3dca43448d6b6660c947cd7d50b1112cd235d.1713169203.git.michal.simek@amd.com>
+Subject: Re: [PATCH] Kconfig: Remove all default n options
+Message-Id: <171349188090.1524174.9812328361446159024.b4-ty@konsulko.com>
+Date: Thu, 18 Apr 2024 19:58:00 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -90,16 +95,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 14 Apr 2024 20:37:20 +0200, Marek Vasut wrote:
+On Mon, 15 Apr 2024 10:20:05 +0200, Michal Simek wrote:
 
-> In case of systems where DRAM bank ends at the edge of 32bit boundary,
-> start + size calculations would overflow. This happens on STM32MP15xx
-> with 1 DRAM bank starting at 0xc0000000 and 1 GiB of DRAM. This is a
-> usual 32bit system DRAM size overflow, fix it by doing all DRAM size
-> and offset calculations using u64 types. This also covers a case where
-> a 32bit PAE system might be able to address up to 36bits of DRAM.
+> default n doesn't need to be specified. It is default option anyway.
+> Similar changes have been done by commit 18370f14975c ("Kconfig: Remove all
+> default n/no options").
 > 
-> [...]
+> 
 
 Applied to u-boot/master, thanks!
 
