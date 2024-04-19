@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37630C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 02:36:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2AFAC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 02:36:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6018788679;
-	Fri, 19 Apr 2024 04:36:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 26029886A0;
+	Fri, 19 Apr 2024 04:36:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dJzSM+od";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aeciGdsl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08EDD885D7; Fri, 19 Apr 2024 04:36:39 +0200 (CEST)
-Received: from mail-vk1-xa29.google.com (mail-vk1-xa29.google.com
- [IPv6:2607:f8b0:4864:20::a29])
+ id B13698866E; Fri, 19 Apr 2024 04:36:39 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54A1F8866E
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 04:36:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FE32885BD
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 04:36:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-vk1-xa29.google.com with SMTP id
- 71dfb90a1353d-4dabbf19e1eso455178e0c.0
- for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:36:36 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-4349bba0ba3so10486491cf.3
+ for <u-boot@lists.denx.de>; Thu, 18 Apr 2024 19:36:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713494194; x=1714098994; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=6FsYid/+PER9spMIEMLVUsCzS2tJS1Q3YlPlE0t+fMw=;
- b=dJzSM+od+UjM0oBkfnF4nAMRQoVNxxXJJO/cygk7o9Y+DakPzlAzFUHzkiv1F8szNc
- FV2dkxTT4N4tfvq4STuw57GP1SfopGFqRpiNfTY8kBazT8tRhQqV6/YTBpm/HUB7Sa4R
- kWyvGJ315Unyd0aul3ZFKW2ulilBgerbG1UE0L/+TxT6FpKNUhm1iAk4ctPWB7+or/4j
- RkaYvvSFuxW7/9TOgZ57d2z8xUJF3KRjgPOW40tasSlK/rdiRkx72LVcLgz3ecE0t7Cp
- xM+VbuEMWqY7Hg2SKd1xColBI7iKXCCaEzQV/FKwUsB2XwI36OWCF4poGx/GVFxBp2Bg
- BdEg==
+ d=gmail.com; s=20230601; t=1713494195; x=1714098995; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xqJv7fkbPBtOWGZVHdqZMoboqLGmhCm2bZE6jXhXCfw=;
+ b=aeciGdslQ4+t3hQfxoMOp9lIn6mORK+7gu7AiOtDCwo7OmjRPzXrAAo/iS4Gu86rw+
+ oPaQJMbEP4mD0QI1rzEYdAL5K+bGq3sBEvWZqD17DsSAK/TI+opDaZBtvgzLA5hfHivf
+ L41X/5X4OIvDN4mL2bfpviDOoZeSW9RXo52Sde9n2DcjL5FrIGzs/qKjRdaDeXt/JvkN
+ hieDxvNcJQ8ezpTR49aN6836vKMo8FhDPc/T7N1i5wX6ALGSeslC9VvFhYhUiy56G/gd
+ rOaKnr+d6U99mClV6X0vqRtmRlURBAxBtctdLwJjp+2Nckswm0HgEySUFLNE+LZljS3R
+ cnWA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713494194; x=1714098994;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=6FsYid/+PER9spMIEMLVUsCzS2tJS1Q3YlPlE0t+fMw=;
- b=LPX2Cm3c87iq7EdpVdP0o9xCZJVGWoSKRiBv80xxmeb4oFKTM5R866aHkYH6ahp8Iw
- HALSbMu1urJ6KUTCYwm6hWWYzSlvZj37LGzXh2olxyx1272UgqB6kdX2bNy4w55NKFeD
- gKWXBb8ySLx7sGidJcBz3oAiUfCpl9fKrgEkc+4y4HlWBtTCXlUvxN2/NnKTH2qPJjhY
- 9dbT/LCxfdqWfsbKR/BQNPiX6CRukuwA6ScG76VaLxe2nZzo9CpZnoLG9/e9iixHIkEu
- z1eu1mQSM1c37RV1oGzX739uh+vf6+ldBtYmI1Iq+H1QyU5BM3bMyHxVDaNfsexV8x1u
- T3OQ==
-X-Gm-Message-State: AOJu0YyRkco/87bKIn8zk470VgYrE33R8FoqoWKtGyktSHk/mg7XXpvC
- QTtmnNZpxYGG4fOCs4lP8cd74QBx0QE7oQEe9yG8/wnjT6QjgnnRY+tc+Q==
-X-Google-Smtp-Source: AGHT+IHyteKt6/uDuaFHRI8V8RQY29kW2savoRGlgdIMhVqtMecXJ+S1O1wd+dOHTMOF3Lquqb5FIw==
-X-Received: by 2002:a05:6122:903:b0:4ca:80c5:7544 with SMTP id
- j3-20020a056122090300b004ca80c57544mr773203vka.4.1713494194326; 
- Thu, 18 Apr 2024 19:36:34 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1713494195; x=1714098995;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xqJv7fkbPBtOWGZVHdqZMoboqLGmhCm2bZE6jXhXCfw=;
+ b=Q1LqwHRSn8z0osWvRz2EUgPhSTyEmU678fDuxUCQuAZ6xoYNQh5lupy4iMnz3Wiujv
+ F+rwAA3FGTcSnqoEikzlPtkkWlim17PKnI2Gc+WKCKVWTRdlPzzfCrCFXwIUMcTCxNlX
+ 9YYeYw1BR3RtfCv+fdchCSc9XLU6ACQTInI8XeJkxY/kTSjQQhDr/cJghBwVmK1xLuXo
+ /xfZYD/ExyWxARfWMPxqUvVcY9GnecJrUSH2OMQFLGKz2892U0ooGb8wH5fcWeAh8Mef
+ WP+kBgwrSHg1pchTVRscBZ/Ak8mySCacRWmku3uI406MZ4qBdMAcn/g4qTAKKZ2ju3pP
+ zstA==
+X-Gm-Message-State: AOJu0YyuSMIDhhnurKzSEjsx3OYNiZ+GdjpSZJAxwjU/4+cxVb+Lxr5x
+ BBoK86DdOXIUOF1a9jIbYTFSvXwKKEQqD/M8fYPQmCkkfOwJbGZ7YrppLg==
+X-Google-Smtp-Source: AGHT+IGDpPchgT6Sd0NVW01nBZid0VWDR8oF1MbM06hNMi0H0yxei8YD85tuIIZFh/aLInPPut36pQ==
+X-Received: by 2002:a0c:da0f:0:b0:6a0:5528:9594 with SMTP id
+ x15-20020a0cda0f000000b006a055289594mr729007qvj.64.1713494195697; 
+ Thu, 18 Apr 2024 19:36:35 -0700 (PDT)
 Received: from localhost (pool-108-48-157-169.washdc.fios.verizon.net.
  [108.48.157.169]) by smtp.gmail.com with UTF8SMTPSA id
- b3-20020a0cc983000000b0069b588747dbsm1181234qvk.132.2024.04.18.19.36.33
+ g2-20020a0cdf02000000b0069b447066bbsm1181155qvl.78.2024.04.18.19.36.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 18 Apr 2024 19:36:34 -0700 (PDT)
+ Thu, 18 Apr 2024 19:36:35 -0700 (PDT)
 From: Sean Anderson <seanga2@gmail.com>
 To: u-boot@lists.denx.de,
 	Simon Glass <sjg@chromium.org>
-Cc: Sean Anderson <seanga2@gmail.com>, Douglas Anderson <dianders@chromium.org>
-Subject: [PATCH 0/3] patman: A fix and some new tags
-Date: Thu, 18 Apr 2024 22:36:29 -0400
-Message-Id: <20240419023632.29078-1-seanga2@gmail.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+Subject: [PATCH 1/3] patman: Fix tests if add_maintainers is set to False
+Date: Thu, 18 Apr 2024 22:36:30 -0400
+Message-Id: <20240419023632.29078-2-seanga2@gmail.com>
 X-Mailer: git-send-email 2.37.1
+In-Reply-To: <20240419023632.29078-1-seanga2@gmail.com>
+References: <20240419023632.29078-1-seanga2@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -89,21 +92,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series has a fix along with a couple of convenient tags.
+If add_maintainers is set to False in the user's ~/.patman config, it will
+cause the custom_get_maintainer_script to fail since that test expects
+maintainers to be added. Set add_maintainer to True in the .patman config
+to prevent this.
 
+Fixes: 8c042fb7f9f ("patman: add '--get-maintainer-script' argument")
+Signed-off-by: Sean Anderson <seanga2@gmail.com>
+---
 
-Sean Anderson (3):
-  patman: Fix tests if add_maintainers is set to False
-  patman: Add Commit-cc as an alias for Patch-cc
-  patman: Add a tag for when a patch gets added to a series
+ tools/patman/func_test.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
- tools/patman/func_test.py                         | 10 ++++++++--
- tools/patman/patchstream.py                       |  7 +++++++
- tools/patman/patman.rst                           | 15 ++++++++++++++-
- ...cast-for-sandbox-in-fdtdec_setup_mem_siz.patch |  2 ++
- tools/patman/test/test01.txt                      |  2 ++
- 5 files changed, 33 insertions(+), 3 deletions(-)
-
+diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
+index e3918497cf4..9c016fb5e9a 100644
+--- a/tools/patman/func_test.py
++++ b/tools/patman/func_test.py
+@@ -540,7 +540,8 @@ complicated as possible''')
+             with open('.patman', 'w', buffering=1) as f:
+                 f.write('[settings]\n'
+                         'get_maintainer_script: dummy-script.sh\n'
+-                        'check_patch: False\n')
++                        'check_patch: False\n'
++                        'add_maintainers: True\n')
+             with open('dummy-script.sh', 'w', buffering=1) as f:
+                 f.write('#!/usr/bin/env python\n'
+                         'print("hello@there.com")\n')
 -- 
 2.37.1
 
