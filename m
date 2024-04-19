@@ -4,81 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4BD9C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 09:49:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0731C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 09:59:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65479886FB;
-	Fri, 19 Apr 2024 11:49:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5ED33886F7;
+	Fri, 19 Apr 2024 11:59:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dciJAQE5";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="UoU1niyx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A318388702; Fri, 19 Apr 2024 11:49:50 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 560B3886F8; Fri, 19 Apr 2024 11:59:16 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9EB888526
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 11:49:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 33EBE881BC
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 11:59:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a51beae2f13so207138166b.1
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 02:49:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713520188; x=1714124988; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RgUg3j3oZehtoHsKhtAQr1vJDKmrt+oJG5EumMd+nKc=;
- b=dciJAQE5ws39zaQ8+fojsn7GVd0NeRoHC1S0xciI+D+NCDHCKj+z9XwP5kKhXDTEpY
- JUzJPfvAsEQmWCEanID9MylQhpqiR3fS4fMNvu+hEAe3N3SitkzNPSTyFHLqQVKqNCoJ
- Y3dGrbrJNdiN7pkGA6h3o0ZtdvjGCFKw4iJAK/bkKvoDuoog3FMW92j4paBbjnShL2Wl
- p+r88jXTTb8Tf3vhULgMr52eSs6EfonZcMXaG8MWpz2H6Llnk860L5OXHB6Uu8nRikDK
- tQrpfg23/kCzH+4afjVOvA771xCRnPr/uPh4sh84DFpvk0bEh7Fzvu+x4yAJvKblXb2m
- V+1A==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-lj1-f197.google.com (mail-lj1-f197.google.com
+ [209.85.208.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id A44923F118
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:59:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1713520750;
+ bh=crSBQ0BS2UEK03tidGJn1bZriUPMJKfOA3NqRv497ko=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=UoU1niyx8zk2vPzhcvOy2y5drgrY889gET7Qr6FagYu3C0RqV5kydSyshZIdJ9MMT
+ 1uBdg1QwlTO+iSyAwMVJynfOkpB/IAtTbf2rWqcCp7dEv2Cm4OGj62ULC6t6U5z3ox
+ 1aTKhL9TGdJ4CsPBOF4oqHDwkNj+cYJCUCmuVwT6dnHlbQKthL+uTerrD4ve1tI77M
+ x/xyvVs7dASvkc0yhJFAVRSqjN/4Oou6dhvGeggfO++PiY5zWlSXIMDnvaXwO3UI5p
+ 1UEmp/fq8sFPAKFbgeU/QVvJs2Ih88BVBrcDct/FnAGISSDG0FWUwj6998NPIONbfX
+ yd5p+Y6OC7Ekg==
+Received: by mail-lj1-f197.google.com with SMTP id
+ 38308e7fff4ca-2d8a7bb09afso16489901fa.0
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 02:59:10 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713520188; x=1714124988;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RgUg3j3oZehtoHsKhtAQr1vJDKmrt+oJG5EumMd+nKc=;
- b=NTgGqRy4+ajHPPX6a9zgjA3sZtSZ7mT4QOV8mWz02JFtCLO8R5/XrCCzP0UkBp/uTO
- 4ILPP8qNqBVDDVNzNTTTvGyIZBlnI8YJ2s1BmFKPb3LYYtyXZ0uMiOSqitfgeloBTgft
- w61/S5cn7UGsJAokudwvgXIiYhnJSTEGETtfhNFxGHMucUmfVtTqReNeJa2yyufel59I
- wXC5fyd25OUhY6lSqu/uFHZtCVQ/lFDhCtivvYHpW3IYK1qd+yqs4ksr25qryrk6/Ifg
- 5z9scw6A2PklvfNtjNhfzZppEk48Wao4tWphBzJziKHQrLkvX7VFYcBnwXfar3c5Tcrl
- 0/yw==
+ d=1e100.net; s=20230601; t=1713520749; x=1714125549;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=crSBQ0BS2UEK03tidGJn1bZriUPMJKfOA3NqRv497ko=;
+ b=BPh88MxbU/dXYE0m/hV0vaM8v1om82SdTEwpYcDZkk//ICtpNZdBSnEqVItSJ91rIZ
+ R26cxNuTdQDmWCx1M4aT/fNzO4hRHgGwAQcBxDYFAVCN0UCjOW/QrwmPqoyAhA5HVeuz
+ WtIvUydPq2tUUIFCfL7MopBRy1rzJDtAjfcUL/LQW6PtQGKkAzc13NPnAZ6f1jcUhLRc
+ hlJ2rlnt28jKFVTcfJ8Tx4tQErJpwtVuOHllw1tHBtMYpScM6aAgc2ZSQNXp96Sz3c5M
+ XUOocYB5IJh5Ug/AJh2R/9uv0MrBxpixfiyokgWxVRj5lyKUd/yaSYJSu1g+O1S0y4TL
+ Ybww==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXioF2C9iWdq7Q9GdDVLDC4Lp5jV0l8Axu86NxXpjvfCzkkqG8e6hVpDpt1fGKZyfb3GvB4WfnWh6fgrUADV3gsZoiKeg==
-X-Gm-Message-State: AOJu0Yy78WDcVPizu/O5uOw3+0cH0F8LfPUWEnFzSi6tvnbFWzN8UPNr
- 6eF6TB0KTGkn7nELwvxdQJI+EXdwOtLhva+b4C7k8Q5IiIz+yj4wfl2xjHr5QQM=
-X-Google-Smtp-Source: AGHT+IGoZz64asvMjiji7R20voYS12+RsS5Qagl4DTZIhvtOCjILL7HHFXB9BT1NbIbTl5yORtFI+A==
-X-Received: by 2002:a17:906:2b47:b0:a52:26fc:3203 with SMTP id
- b7-20020a1709062b4700b00a5226fc3203mr1074401ejg.27.1713520188076; 
- Fri, 19 Apr 2024 02:49:48 -0700 (PDT)
-Received: from hera (ppp176092141112.access.hol.gr. [176.92.141.112])
+ AJvYcCXe5bUB20wBfoGv/cU9snJhnFDJ23qZSaUvdh+PVFg+E6GiubUWYqMDmAb01B7lwf9RxrRSYK8V0TeiK7PYxRuJ1yTrQA==
+X-Gm-Message-State: AOJu0YxrB0JjKbI77RmIJ3DSNNGwzWH7AWKERI/2wqHcwQcTmsOKTrS7
+ HlITX/kviAJNm7PF7nDKcGH/2K6sxG4nHNND3QFVperFzjvTxNciE6yPxYTTi2UP+Wp27/H12M5
+ nbTqvZnby9VntMpD2BBfNdCVqe9KkvKOxqTXEEEAPtJyTuAIPctmYFRYcg49G82rf6qE=
+X-Received: by 2002:a2e:9dd3:0:b0:2d8:36ee:350d with SMTP id
+ x19-20020a2e9dd3000000b002d836ee350dmr990974ljj.16.1713520749129; 
+ Fri, 19 Apr 2024 02:59:09 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHxzTIuxXst59XbRSKQban3cx6yoNX3HV8HoI5BbDt2pUupGYeKMtVLKEN0vqsoxB2+EGZmsw==
+X-Received: by 2002:a2e:9dd3:0:b0:2d8:36ee:350d with SMTP id
+ x19-20020a2e9dd3000000b002d836ee350dmr990959ljj.16.1713520748670; 
+ Fri, 19 Apr 2024 02:59:08 -0700 (PDT)
+Received: from workstation5.fritz.box
+ (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
  by smtp.gmail.com with ESMTPSA id
- oz20-20020a170906cd1400b00a522f6fea95sm1982711ejb.223.2024.04.19.02.49.47
+ j10-20020a05600c190a00b00418a9961c47sm5865615wmq.47.2024.04.19.02.59.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 19 Apr 2024 02:49:47 -0700 (PDT)
-Date: Fri, 19 Apr 2024 12:49:45 +0300
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: heinrich.schuchardt@canonical.com
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] efi_loader: change the error message when storing EFI
- variables
-Message-ID: <ZiI-ObOgxMWreq_V@hera>
-References: <20240419094546.12653-1-ilias.apalodimas@linaro.org>
+ Fri, 19 Apr 2024 02:59:08 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] efi_loader: superfluous efi_restore_gd after EFI_CALL
+Date: Fri, 19 Apr 2024 11:59:01 +0200
+Message-ID: <20240419095901.47201-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20240419094546.12653-1-ilias.apalodimas@linaro.org>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,56 +102,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Heinrich
+EFI_CALL() invokes __efi_entry_check() which executes set_gd(efi_gd).
+There is no need to execute set_gd(efi_gd) again via efi_restore_gd().
 
-Please ignore this, I missed that we already report that in
-efi_set_blk_dev_to_system_partition()
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ cmd/bootefi.c               | 1 -
+ cmd/efidebug.c              | 2 --
+ lib/efi_loader/efi_helper.c | 2 --
+ 3 files changed, 5 deletions(-)
 
-Apologies for the noise
-/Ilias
-On Fri, Apr 19, 2024 at 12:45:45PM +0300, Ilias Apalodimas wrote:
-> When we try to store EFI variables on a file, we need to use an ESP.
-> if an ESP is not found, variables will change in memory, but U-Boot
-> won't be able to restore them across reboots.
->
-> Adjust the error message so users can understand what's going on
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
-> Changes since v1:
-> - print different messages if ESP is missing or write to file failed
->
->  lib/efi_loader/efi_var_file.c | 10 +++++++---
->  1 file changed, 7 insertions(+), 3 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_var_file.c b/lib/efi_loader/efi_var_file.c
-> index 413e1794e88c..d5d347d50f8d 100644
-> --- a/lib/efi_loader/efi_var_file.c
-> +++ b/lib/efi_loader/efi_var_file.c
-> @@ -73,16 +73,20 @@ efi_status_t efi_var_to_file(void)
->  		goto error;
->
->  	ret = efi_set_blk_dev_to_system_partition();
-> -	if (ret != EFI_SUCCESS)
-> +	if (ret != EFI_SUCCESS) {
-> +		log_err("ESP not found.");
->  		goto error;
-> +	}
->
->  	r = fs_write(EFI_VAR_FILE_NAME, map_to_sysmem(buf), 0, len, &actlen);
-> -	if (r || len != actlen)
-> +	if (r || len != actlen) {
-> +		log_err("Failed to store variables.");
->  		ret = EFI_DEVICE_ERROR;
-> +	}
->
->  error:
->  	if (ret != EFI_SUCCESS)
-> -		log_err("Failed to persist EFI variables\n");
-> +		log_err(" UEFI variables won't persist reboot\n");
->  	free(buf);
->  	return ret;
->  #else
-> --
-> 2.43.0
->
+diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+index 578dbb19a7e..c1454ffb948 100644
+--- a/cmd/bootefi.c
++++ b/cmd/bootefi.c
+@@ -107,7 +107,6 @@ static int do_efi_selftest(void)
+ 
+ 	/* Execute the test */
+ 	ret = EFI_CALL(efi_selftest(&image_obj->header, &systab));
+-	efi_restore_gd();
+ 	free(loaded_image_info->load_options);
+ 	efi_free_pool(test_device_path);
+ 	efi_free_pool(test_image_path);
+diff --git a/cmd/efidebug.c b/cmd/efidebug.c
+index 32c64711b6c..30def6b6831 100644
+--- a/cmd/efidebug.c
++++ b/cmd/efidebug.c
+@@ -1466,8 +1466,6 @@ static __maybe_unused int do_efi_test_bootmgr(struct cmd_tbl *cmdtp, int flag,
+ 	if (ret && exit_data)
+ 		efi_free_pool(exit_data);
+ 
+-	efi_restore_gd();
+-
+ 	free(load_options);
+ 	return CMD_RET_SUCCESS;
+ }
+diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+index 58761fae784..88c3586787e 100644
+--- a/lib/efi_loader/efi_helper.c
++++ b/lib/efi_loader/efi_helper.c
+@@ -544,8 +544,6 @@ efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options)
+ 		}
+ 	}
+ 
+-	efi_restore_gd();
+-
+ out:
+ 	free(load_options);
+ 
+-- 
+2.43.0
+
