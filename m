@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E158C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 16:53:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB5AFC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 16:53:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DF32B88805;
-	Fri, 19 Apr 2024 18:52:58 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5F22288816;
+	Fri, 19 Apr 2024 18:53:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J4bq6/Ob";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lm1d82AW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 320D78880B; Fri, 19 Apr 2024 18:52:57 +0200 (CEST)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 8947F8880E; Fri, 19 Apr 2024 18:53:20 +0200 (CEST)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FE0A887F9
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 18:52:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC0CB88816
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 18:53:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=thierry.reding@gmail.com
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-a51a7d4466bso242195166b.2
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:52:55 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-418c979ddd2so16239235e9.3
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 09:53:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713545575; x=1714150375; darn=lists.denx.de;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sF2rGu9+qKRDLTHys0Eddm0/2EF7BHhnIydlngGqBoM=;
- b=J4bq6/ObONumQ4uP0gRRo8tPFMrF8/iqpMN192ypO2C7cHzOIKc8pi3oJcRYXGbKBF
- BUDtCA0iSwFtpghrND0H6uzyn3E1JWx6jaC68NX65jZTD7OYxF6osZp4OaK0tF/n8xPs
- 9YZ0pEugqLZMqMM+FBvd4+fI8B2PKOjw1oe/CV6sj9YTZ7WZn7GPyh+q//q/Z9dDS2Io
- 2rOG0nN9xQwARSgbcb3mNpAZsFDYJCgZz6nIZu24Jed1ofE8LcjH+svu2PPFSjEPre9k
- U8g+WrdO8XqLAOiwQXeFKNY/aZroLDPH/25Bsmin0O8SOlRCKiNA1gQyDHlVk0swNzgH
- ifhw==
+ d=gmail.com; s=20230601; t=1713545597; x=1714150397; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=iHLXfrq4RFWt1N1ZA7MuKmCArmtD5w878hp85Pavtgk=;
+ b=lm1d82AWb68Gz8r+5NKCBJ3eY0t/QZ9ocE1kncDTaMMtAN3cWetpYgVOLeLyLPYyur
+ hWSOjqY91y3LEp7XqmZwu5f6H3CJn5gC7GTy4flXEX9mLmX+qjB/a7VBw4FQdYeaV/+a
+ O4Z8xu7dO5oWzNmg/0aw1MFOITmo/jt9e/yO6IvXjsKI7P+q2bTms3/Q68gCu3ApETNJ
+ qP3owlTuV3OpIVIsJ07pyfHvje6MB9PSnhyoJkQyNh0lQqxS4wp50Oy2/BJuCxFPGa52
+ fVBHnb4KtUpcg0YoZoH60bRrNsg/3Jb7UNRKxQq8Nq8IHxwP9k+IOk/CuUIYPd3uWk9W
+ LMwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713545575; x=1714150375;
- h=in-reply-to:references:to:from:subject:cc:message-id:date
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=sF2rGu9+qKRDLTHys0Eddm0/2EF7BHhnIydlngGqBoM=;
- b=nRDOBWwi7D+/nYBrF7RWLQCitq03wqP7ZBq059FHsCYhQGW4WklVoqQ19keICynyPE
- dCtBE810xZ3Gr58U4jsLYKM/9KqpJN/yeDHImnegoppmHr4oWWlXHrsU59frF/oMoIEV
- WNX4S/KAQLiB/xRXIL1BkDTLDFC3V3/lqHt0jqfR3FUXhIFta8aqZYRuBpZ4vWjuqDwx
- vawN0BSy+DCL07FYELj4IupQLQyK/DE/9jgcRj1PWDvcsxpXvpAhjG4Qy1KeHXYVEIaH
- MXkRrQ8L3iMi6F3pSCsv+GuwJagQq/hZMzP+8js5lAQiMdgzRTs8jmem1OiIK67c6cte
- 6Fjg==
-X-Gm-Message-State: AOJu0YxtJu1gxhfBGwmpoyxLVTK/m7tnHKTYocPzo7wg35n6k+D3JFcT
- KWt3ym9NbWk+VBsO8gTV3/kWipD8N5C5kCR1zf6Vtq2DmVpjIMuH
-X-Google-Smtp-Source: AGHT+IGA6wmA8mJ8YB3OHxWAb19G2TWkH+L0ZbMpWORi2fXcb5YEv1GMhurYIO4+Z8XD4Ey/rVuAdg==
-X-Received: by 2002:a17:907:724f:b0:a51:d7c8:300c with SMTP id
- ds15-20020a170907724f00b00a51d7c8300cmr2340442ejc.17.1713545574586; 
- Fri, 19 Apr 2024 09:52:54 -0700 (PDT)
-Received: from localhost
- (p200300e41f162000f22f74fffe1f3a53.dip0.t-ipconnect.de.
- [2003:e4:1f16:2000:f22f:74ff:fe1f:3a53])
- by smtp.gmail.com with ESMTPSA id
- z13-20020a17090655cd00b00a4739efd7cesm2426292ejp.60.2024.04.19.09.52.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 19 Apr 2024 09:52:54 -0700 (PDT)
-Content-Type: multipart/signed;
- boundary=2e0dfb19a258c18552198a14cf4b0e6ac5335d94fdd4c19bf9aeb9e89b29;
- micalg=pgp-sha256; protocol="application/pgp-signature"
-Mime-Version: 1.0
-Date: Fri, 19 Apr 2024 18:52:53 +0200
-Message-Id: <D0O97L7HTV7Q.3G6J51KNSL29D@gmail.com>
-Cc: <u-boot@lists.denx.de>
-Subject: Re: [PATCH v6 15/18] video: tegra20: dsi: add reset support
-From: "Thierry Reding" <thierry.reding@gmail.com>
-To: "Svyatoslav Ryhel" <clamor95@gmail.com>, "Thierry Reding"
- <treding@nvidia.com>, "Anatolij Gustschin" <agust@denx.de>, "Simon Glass"
- <sjg@chromium.org>
-X-Mailer: aerc 0.16.0-1-0-g560d6168f0ed-dirty
+ d=1e100.net; s=20230601; t=1713545597; x=1714150397;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=iHLXfrq4RFWt1N1ZA7MuKmCArmtD5w878hp85Pavtgk=;
+ b=UbWzVWvCi4BzYaD7GGhsWqfxxGYNVy+HzyCiT7hfQG1IVczS4cF2RJziaUifFur792
+ vgzk9t3HNOAx1TFqdObDhfF69Ec2keqKBWIt7adjjL4SOM3nFD6c7Cds3DTUZx/Vm+iy
+ cA7MO0vOtbxpwSj1rFr4WYLHww9kJIHomqNyrDmB72PkGJV+XHU/+IQ43p5TQrs2E8GR
+ wLRfKLY6bDi3ztHN/Rs6U+RqValEDRV8sfAUQnRbOK41CtdAd2XTsimE2OnXd5y5MCRp
+ 6bD5yXtZgd6PrgPB5OcWE6MP+197SComPzGRc7pl6yFzkcpZR4QEQblY6weFks2d9Ity
+ akng==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUObxlFdXse/N7M912F+xkINIEoC8AIHA54AWGPaCn1SLOZjNYUXF/2qnYGm0FpX8KrGPYgfxu1zjLIGlOCCq8brTQxQw==
+X-Gm-Message-State: AOJu0YyL0Nbdm0W0nXHUWM7ZAuCZluGPWN/D5r+HlPzFOVBLWNYK6Hel
+ rP3WFF4+ZIdKtfsl4jXvQ4EA5vX3Dl6iOVcl2cF2gKxZxq3mippvCoTMDoO1DUbTsJi70qPdi4z
+ +6aMqCjZNM9kVmbgJXreeXVnVBSs=
+X-Google-Smtp-Source: AGHT+IGo4VHgSpSLBo4rYh6lxE2y99uJnSFyKu6pH+Immw587ySlIupcDdHFO0aeLNSDmC651wQRWyEuhi8zRA8b7eM=
+X-Received: by 2002:a05:600c:4e8b:b0:419:9332:b87a with SMTP id
+ f11-20020a05600c4e8b00b004199332b87amr1575892wmq.16.1713545597269; Fri, 19
+ Apr 2024 09:53:17 -0700 (PDT)
+MIME-Version: 1.0
 References: <20240123171633.246057-1-clamor95@gmail.com>
- <20240123171633.246057-16-clamor95@gmail.com>
-In-Reply-To: <20240123171633.246057-16-clamor95@gmail.com>
+ <20240123171633.246057-7-clamor95@gmail.com>
+ <D0O8720SNXUY.58M29AZIXYVC@gmail.com>
+ <CAPVz0n0UX1JOxyGbBgd430oMGUb7vDb5td3oZ2beMTVRa3tktQ@mail.gmail.com>
+ <D0O92LGLWMLP.34AR1F3WJZQCV@gmail.com>
+In-Reply-To: <D0O92LGLWMLP.34AR1F3WJZQCV@gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Fri, 19 Apr 2024 19:53:06 +0300
+Message-ID: <CAPVz0n20jmaj9pOdCnVapZeu9cf-PLN=ViscLkM2WzVLzMNfVA@mail.gmail.com>
+Subject: Re: [PATCH v6 06/18] video: tegra20: dc: add reset support
+To: Thierry Reding <thierry.reding@gmail.com>
+Cc: Thierry Reding <treding@nvidia.com>, Anatolij Gustschin <agust@denx.de>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,102 +94,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---2e0dfb19a258c18552198a14cf4b0e6ac5335d94fdd4c19bf9aeb9e89b29
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-
-On Tue Jan 23, 2024 at 6:16 PM CET, Svyatoslav Ryhel wrote:
-> Implement reset use to discard any changes which could have been
-> applied to DSI before and can interfere with current configuration.
+=D0=BF=D1=82, 19 =D0=BA=D0=B2=D1=96=D1=82. 2024=E2=80=AF=D1=80. =D0=BE 19:4=
+6 Thierry Reding <thierry.reding@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
 >
-> Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
-> Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab T114
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  drivers/video/tegra20/tegra-dsi.c | 14 ++++++++++++++
->  1 file changed, 14 insertions(+)
->
-> diff --git a/drivers/video/tegra20/tegra-dsi.c b/drivers/video/tegra20/te=
-gra-dsi.c
-> index 25a629535e..fc9ca1310a 100644
-> --- a/drivers/video/tegra20/tegra-dsi.c
-> +++ b/drivers/video/tegra20/tegra-dsi.c
-> @@ -12,6 +12,7 @@
->  #include <mipi_dsi.h>
->  #include <backlight.h>
->  #include <panel.h>
-> +#include <reset.h>
->  #include <linux/delay.h>
->  #include <linux/err.h>
->  #include <linux/time.h>
-> @@ -863,6 +864,7 @@ static int tegra_dsi_bridge_probe(struct udevice *dev=
+> On Fri Apr 19, 2024 at 6:37 PM CEST, Svyatoslav Ryhel wrote:
+> > =D0=BF=D1=82, 19 =D0=BA=D0=B2=D1=96=D1=82. 2024=E2=80=AF=D1=80. =D0=BE =
+19:05 Thierry Reding <thierry.reding@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
+> > >
+> > > On Tue Jan 23, 2024 at 6:16 PM CET, Svyatoslav Ryhel wrote:
+> > > > Implement reset use to discard any changes which could have been
+> > > > applied to DC before and can interfere with current configuration.
+> > > >
+> > > > Tested-by: Agneli <poczt@protonmail.ch> # Toshiba AC100 T20
+> > > > Tested-by: Robert Eckelmann <longnoserob@gmail.com> # ASUS TF101
+> > > > Tested-by: Andreas Westman Dorcsak <hedmoo@yahoo.com> # ASUS Groupe=
+r E1565
+> > > > Tested-by: Ion Agorria <ion@agorria.com> # HTC One X
+> > > > Tested-by: Svyatoslav Ryhel <clamor95@gmail.com> # Nvidia Tegratab =
+T114
+> > > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > > > ---
+> > > >  drivers/video/tegra20/tegra-dc.c | 17 +++++++++++++++++
+> > > >  1 file changed, 17 insertions(+)
+> > > >
+> > > > diff --git a/drivers/video/tegra20/tegra-dc.c b/drivers/video/tegra=
+20/tegra-dc.c
+> > > > index 56a23b3c97..35abb6fe46 100644
+> > > > --- a/drivers/video/tegra20/tegra-dc.c
+> > > > +++ b/drivers/video/tegra20/tegra-dc.c
+> > > > @@ -10,7 +10,9 @@
+> > > >  #include <panel.h>
+> > > >  #include <part.h>
+> > > >  #include <pwm.h>
+> > > > +#include <reset.h>
+> > > >  #include <video.h>
+> > > > +#include <linux/delay.h>
+> > > >  #include <asm/cache.h>
+> > > >  #include <asm/global_data.h>
+> > > >  #include <asm/system.h>
+> > > > @@ -342,6 +344,7 @@ static int tegra_lcd_probe(struct udevice *dev)
+> > > >       struct video_uc_plat *plat =3D dev_get_uclass_plat(dev);
+> > > >       struct video_priv *uc_priv =3D dev_get_uclass_priv(dev);
+> > > >       struct tegra_lcd_priv *priv =3D dev_get_priv(dev);
+> > > > +     struct reset_ctl reset_ctl;
+> > > >       int ret;
+> > > >
+> > > >       /* Initialize the Tegra display controller */
+> > > > @@ -349,6 +352,20 @@ static int tegra_lcd_probe(struct udevice *dev=
 )
->  	struct tegra_dsi_priv *priv =3D dev_get_priv(dev);
->  	struct mipi_dsi_device *device =3D &priv->device;
->  	struct mipi_dsi_panel_plat *mipi_plat;
-> +	struct reset_ctl reset_ctl;
->  	int ret;
-> =20
->  	priv->version =3D dev_get_driver_data(dev);
-> @@ -876,6 +878,13 @@ static int tegra_dsi_bridge_probe(struct udevice *de=
-v)
->  	priv->video_fifo_depth =3D 480;
->  	priv->host_fifo_depth =3D 64;
-> =20
-> +	ret =3D reset_get_by_name(dev, "dsi", &reset_ctl);
-> +	if (ret) {
-> +		log_debug("%s: reset_get_by_name() failed: %d\n",
-> +			  __func__, ret);
-> +		return ret;
-> +	}
-> +
->  	ret =3D uclass_get_device_by_phandle(UCLASS_REGULATOR, dev,
->  					   "avdd-dsi-csi-supply", &priv->avdd);
->  	if (ret)
-> @@ -914,12 +923,17 @@ static int tegra_dsi_bridge_probe(struct udevice *d=
-ev)
-> =20
->  	tegra_dsi_get_format(device->format, &priv->format);
-> =20
-> +	reset_assert(&reset_ctl);
-> +
->  	ret =3D regulator_set_enable_if_allowed(priv->avdd, true);
->  	if (ret && ret !=3D -ENOSYS)
->  		return ret;
-> =20
->  	tegra_dsi_init_clocks(dev);
-> =20
-> +	mdelay(2);
-> +	reset_deassert(&reset_ctl);
-> +
->  	return 0;
->  }
+> > > >       funcmux_select(PERIPH_ID_DISP1, FUNCMUX_DEFAULT);
+> > > >  #endif
+> > > >
+> > > > +     ret =3D reset_get_by_name(dev, "dc", &reset_ctl);
+> > > > +     if (ret) {
+> > > > +             log_err("reset_get_by_name() failed: %d\n", ret);
+> > > > +             return ret;
+> > > > +     }
+> > > > +
+> > > > +     clock_disable(priv->dc_clk[0]);
+> > > > +
+> > > > +     /* Reset everything set before */
+> > > > +     reset_assert(&reset_ctl);
+> > > > +     mdelay(4);
+> > > > +     reset_deassert(&reset_ctl);
+> > > > +     mdelay(4);
+> > >
+> > > Are you sure this works as intended? It's been a long time since I
+> > > worked on this, but I seem to recall that most of these resets are
+> > > actually synchronous, so in order for them to do what they're suppose=
+d
+> > > to the clock needs to be kept running.
+> > >
+> > > The Linux driver certainly does this differently.
+> >
+> > You have point, but I have tried to mostly adapt Linux tegra dc driver,
+> > which has same logic in probe. Maybe I have not understood it properly.
+> > Testing on T20, T30 and T114 passed without issues so far.
+>
+> Maybe look again. What it does is (basically):
+>
+>         clock_enable();
+>         mdelay(4);
+>         reset_assert();
+>         mdelay(4);
+>         clock_disable();
+>
+> That should ensure that it's completely reset at that point. Now before
+> any subsequent register accesses happen it will do this:
+>
+>         clock_enable();
+>         reset_deassert();
+>
+> to take it out of reset again. Perhaps that's something you want to keep
+> doing in probe() in U-Boot. In that case maybe you want something like
+> this instead:
+>
+>         clock_enable();
+>         mdelay(4);
+>         reset_assert();
+>         mdelay(4);
+>         reset_deassert();
+>
 
-Looks like tegra_dsi_init_clocks() already does the mdelay() and
-reset_deassert()? Or perhaps I'm again looking at things in the wrong
-order?
+You are correct. I assume This patch may be dropped entirely. Thanks.
 
-Thierry
-
---2e0dfb19a258c18552198a14cf4b0e6ac5335d94fdd4c19bf9aeb9e89b29
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmYioWYACgkQ3SOs138+
-s6E8URAAv2W8F5kMiuAbfy4Eu8dC5Wmn13mH7md8WD1R5U8eZj60Oq1qSIwfRW/a
-edAxVYLUQzTPDQPHZVojUurDZZlmeWc3eiualBYjRjKpNbJKXAcKOvaiI0pXEFrc
-tgWQRTj9kAWi8n7ITC63V0oC29Z0XNzMo3H4srMdfZPfUUzRjC/t1DFfkjg20rhl
-rgL31nPOmRrUIko2VAh+8hgXPUyXR4o3zRHi1U0etR/OTN1+SdoFNRO+EyK7IC4E
-Ruin/DabE4rQmrzozNig/VRCDwvOR+62tLOod8R3aLVG7hD06A+wxV62mKoA9X2/
-f32fow10/p0w0J6hyZudTe/50TiC8eRkHGQdZP65z9bKwu5asvr5h/f42ZU2gzDb
-QCwVMSkeE1JD/NmWnQUVODN/QYfbpQ86M4JjoleTgv1P1x6PPCAIHGyUeEt43N9p
-IaH396+itfLGFusOOrtdhf+YmzCvv/nG0wNBcsnJafqx1/xATjNKn5XlGPKrb1Ih
-janWd0IfxZ+nB1je2ouqLb91QUz7vBgNPnnahr1qB6x/miUPYHYnA2Gy4RBxyYr1
-DCJxtoBCZcKJ9QxSKPoaoxHKWHU7LHrcegRBzsJ9tdVoVt9ngJvjoJcHaP/vaEgh
-43UWzfMySVMfwtmbMopYBNsHlfQgvS7DgGfa/KX8JgHkJdBwbP4=
-=2Quj
------END PGP SIGNATURE-----
-
---2e0dfb19a258c18552198a14cf4b0e6ac5335d94fdd4c19bf9aeb9e89b29--
+> Thierry
