@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 079BCC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 10:34:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D98EC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 11:13:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3392F880A8;
-	Fri, 19 Apr 2024 12:34:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6A45E88734;
+	Fri, 19 Apr 2024 13:13:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="M+KW9oiF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wsRr0oag";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABC66880A3; Fri, 19 Apr 2024 12:34:42 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1BA7188735; Fri, 19 Apr 2024 13:13:51 +0200 (CEST)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74EBA880AD
- for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 12:34:40 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 00DBD886D1
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 13:13:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43JAYYoJ077725;
- Fri, 19 Apr 2024 05:34:35 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1713522875;
- bh=uZY7wR3OXJS/LJkoyndviobHAxzn8c7gSzK6CAAafD8=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=M+KW9oiFNuOp0d+O9516KT1EMUtibuCuYZwE2TrLyE6NToMMTDBuiAItuIUPImDVR
- vhsqE1mpq0SDGDJsHFBAtWYlRS2JoangAbn76Pr5pbN4RxBvQANHe6ETXqWb8U1WS4
- YmlVm0c0G5kdSPF74IWyA6bcTcwCwfJmNfmkJGzs=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43JAYY88109864
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 19 Apr 2024 05:34:34 -0500
-Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 19
- Apr 2024 05:34:34 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 19 Apr 2024 05:34:34 -0500
-Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
- [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43JAYU83029601;
- Fri, 19 Apr 2024 05:34:31 -0500
-Message-ID: <7c0637a5-97c7-4eed-a0d2-52b14d03dda2@ti.com>
-Date: Fri, 19 Apr 2024 16:04:29 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-41550858cabso13951695e9.2
+ for <u-boot@lists.denx.de>; Fri, 19 Apr 2024 04:13:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1713525228; x=1714130028; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=DeXesVcHFWdfMqedJSzec2yJTgNJP3Q1UYzEtWWWoBk=;
+ b=wsRr0oagcN5XHZMgYaNu4tnZF3JihgouOWXG2zK92qxq2gNJtl0/b23/OPJ5Vq7tkO
+ myq6h321sfO3phou10YBMpgzASoshYoK2OT2cQ854VEe62T+VraoyfaSiA7MVM/yFRJH
+ HT/THzt9X5FzLgNEYdjMKkUA+wE44bz16OTXHpNSCcDlOWgM2v3J8oi5qaUO+luEQWqf
+ N2U8du8NP7Mr5o+qZWXe6jAC1lEoIx5qwiOVnM380A+/82a4RNSWobtre5mvp6/qhPED
+ V4zyCm1wVktOTHWOI/TAPYvhrHsSH3Suine2g9sQjQOYaY6fXwfhQRLJUmmaxfYOk//Q
+ 22Yw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713525228; x=1714130028;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=DeXesVcHFWdfMqedJSzec2yJTgNJP3Q1UYzEtWWWoBk=;
+ b=WoRTvM5F8/EBYUeEwMKlhR6LTV3n5VBMVyHwQnd5mGecpWVXNQlnc4EfMRas2mQ7UB
+ wjoH+niqsBBrqc/ieZAU/nvCunYlPhC1Wm2REQSsr4dfq3OiBPBwn9RhCcSE/hoJR8do
+ B3AylVExzBQYtdjoGLS+OfBFF99q35VAmzdBh5E0HLTZ9/cUTraeHYVKngTJy/0A+hEv
+ Wulv5JYTNjhS8RdvbCLaESA/y5vs4a4UMXwYKvdHqe56uV/J9fXYkzMyZ2qfXm3bm3fi
+ ZqcQBGAoWlabeKcLokTDOBoLVtoKYQC1lXggOk4c/N10t8zI8BcZ20omvQCN8c59y7Je
+ m4Fg==
+X-Gm-Message-State: AOJu0YzysHf4Wn9irJUHrqDEsii/uCQYh8M+zoDbuHQxpta5GELCQOk0
+ j/C2FGHmpZ3Rc4AhSbQI0CV/9EjWMorkT+iAkEi2Ip2/0GddrM3ltFJF1RcsnFo=
+X-Google-Smtp-Source: AGHT+IEZbe3qAJZDlxjZOnAndBaglQrNBlzCxEFORLUCRBBRNGEM3k2PZ/FIShnrew0kxnkv8dltlw==
+X-Received: by 2002:adf:e4c7:0:b0:346:c5d8:38 with SMTP id
+ v7-20020adfe4c7000000b00346c5d80038mr1075026wrm.10.1713525228332; 
+ Fri, 19 Apr 2024 04:13:48 -0700 (PDT)
+Received: from hera (ppp176092141112.access.hol.gr. [176.92.141.112])
+ by smtp.gmail.com with ESMTPSA id
+ h1-20020a5d6881000000b0034615862c64sm4162512wru.110.2024.04.19.04.13.47
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 19 Apr 2024 04:13:48 -0700 (PDT)
+Date: Fri, 19 Apr 2024 14:13:45 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Masahisa Kojima <masahisa.kojima@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Re: [PATCH] efi_loader: use event callback for initrd deregistration
+Message-ID: <ZiJR6bqj4BFRjqES@hera>
+References: <20231204043014.122793-1-masahisa.kojima@linaro.org>
+ <CAC_iWj+giW2Wyagi2eH9668G2HtU=BXuhjUvTpPWHFH5sA23rA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 01/10] board: ti: am62x: Init DRAM size in R5/A53 SPL
-Content-Language: en-US
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-CC: Tom Rini <trini@konsulko.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- <nm@ti.com>, <afd@ti.com>, <vigneshr@ti.com>, <dannenberg@ti.com>,
- <srk@ti.com>, <joe.hershberger@ni.com>,
- <simon.k.r.goldschmidt@gmail.com>, <sjg@chromium.org>, <marex@denx.de>,
- <u-boot@lists.denx.de>
-References: <20240112132607.GO1610741@bill-the-cat>
- <a1d7ca85-8723-4d73-8e1c-357c6aa6294f@ti.com>
- <20240120164141.GA3652023@bill-the-cat>
- <48c63fc4-9f06-4066-b206-a0a548936dcd@ti.com>
- <892b473b-5b76-4e44-af27-52d50cb24877@ti.com>
- <20240411220741.GJ2493117@bill-the-cat>
- <2406c7be-114c-4082-9c14-1cd59917b9d8@ti.com>
- <20240416170027.GQ1054907@bill-the-cat>
- <97f84067-ba36-47f6-befa-221be47a1d25@ti.com>
- <CADg8p97udLbFvbZ_FZf9Hfwg3R4=YJMNWrAtqvu97mL7vVYREQ@mail.gmail.com>
- <20240417160446.GF1054907@bill-the-cat>
- <42fd6f28-bcf6-406c-8d43-7b4f3966ebb2@ti.com>
- <CADg8p94KVFS+UUzb1K+QY8LUcZjE-DT=RSCpUbD=WyhGKZbJ0g@mail.gmail.com>
-From: Chintan Vankar <c-vankar@ti.com>
-In-Reply-To: <CADg8p94KVFS+UUzb1K+QY8LUcZjE-DT=RSCpUbD=WyhGKZbJ0g@mail.gmail.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAC_iWj+giW2Wyagi2eH9668G2HtU=BXuhjUvTpPWHFH5sA23rA@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,172 +91,165 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Kojima-san
 
+Apologies but for some reason we failed to pull this patch....
+In meantime some parts of the bootefi.c code -- specifically theinitrd
+cleanup, have been moved to efi_helper.c
 
-On 18/04/24 17:30, Sughosh Ganu wrote:
-> On Thu, 18 Apr 2024 at 16:08, Chintan Vankar <c-vankar@ti.com> wrote:
->>
->>
->>
->> On 17/04/24 21:34, Tom Rini wrote:
->>> On Wed, Apr 17, 2024 at 05:48:31PM +0530, Sughosh Ganu wrote:
->>>> hi Chintan,
->>>>
->>>> On Wed, 17 Apr 2024 at 13:21, Chintan Vankar <c-vankar@ti.com> wrote:
->>>>>
->>>>>
->>>>>
->>>>> On 16/04/24 22:30, Tom Rini wrote:
->>>>>> On Tue, Apr 16, 2024 at 05:52:58PM +0530, Chintan Vankar wrote:
->>>>>>>
->>>>>>>
->>>>>>> On 12/04/24 03:37, Tom Rini wrote:
->>>>>>>> On Wed, Apr 03, 2024 at 06:18:01PM +0530, Chintan Vankar wrote:
->>>>>>>>>
->>>>>>>>>
->>>>>>>>> On 22/01/24 10:11, Siddharth Vadapalli wrote:
->>>>>>>>>>
->>>>>>>>>>
->>>>>>>>>> On 20/01/24 22:11, Tom Rini wrote:
->>>>>>>>>>> On Mon, Jan 15, 2024 at 01:42:51PM +0530, Siddharth Vadapalli wrote:
->>>>>>>>>>>> Hello Tom,
->>>>>>>>>>>>
->>>>>>>>>>>> On 12/01/24 18:56, Tom Rini wrote:
->>>>>>>>>>
->>>>>>>>>> ...
->>>>>>>>>>
->>>>>>>>>>>>> The list of conditionals in common/spl/spl.c::board_init_r() should be
->>>>>>>>>>>>> updated and probably use SPL_NET as the option to check for.
->>>>>>>>>>>>
->>>>>>>>>>>> Thank you for reviewing the patch and pointing this out. I wasn't aware of it. I
->>>>>>>>>>>> assume that you are referring to the following change:
->>>>>>>>>>>>
->>>>>>>>>>>>              if (IS_ENABLED(CONFIG_SPL_OS_BOOT) || CONFIG_IS_ENABLED(HANDOFF) ||
->>>>>>>>>>>> -           IS_ENABLED(CONFIG_SPL_ATF))
->>>>>>>>>>>> +           IS_ENABLED(CONFIG_SPL_ATF) || IS_ENABLED(CONFIG_SPL_NET))
->>>>>>>>>>>>                      dram_init_banksize();
->>>>>>>>>>>>
->>>>>>>>>>>> I shall replace the current patch with the above change in the v2 series. Since
->>>>>>>>>>>> this is in the common section, is there a generic reason I could provide in the
->>>>>>>>>>>> commit message rather than the existing commit message which seems to be board
->>>>>>>>>>>> specific? Also, I hope that the above change will not cause regressions for
->>>>>>>>>>>> other non-TI devices. Please let me know.
->>>>>>>>>>>
->>>>>>>>>>> Yes, that's the area, and just note that networking also requires the
->>>>>>>>>>> DDR to be initialized.
->>>>>>>>>>>
->>>>>>>>>>
->>>>>>>>>> Thank you for confirming and providing your suggestion for the contents of the
->>>>>>>>>> commit message.
->>>>>>>>>>
->>>>>>>>> Following Tom's Suggestion of adding CONFIG_SPL_NET in common/spl/spl.c
->>>>>>>>> "dram_init_banksize()", the issue of fetching a file at SPL stage seemed
->>>>>>>>> to be fixed. However the commit "ba20b2443c29", which sets gd->ram_top
->>>>>>>>> for the very first time in "spl_enable_cache()" results in
->>>>>>>>> "arch_lmb_reserve()" function reserving memory region from Stack pointer
->>>>>>>>> at "0x81FFB820" to gd->ram_top pointing to "0x100000000". Previously
->>>>>>>>> when gd->ram_top was zero "arch_lmb_reserve()" was noop. Now using TFTP
->>>>>>>>> to fetch U-Boot image at SPL stage results in "tftp_init_load_addr()"
->>>>>>>>> function call that invokes "arch_lmb_reserve()" function, which reserves
->>>>>>>>> entire memory starting from Stack Pointer to gd->ram_top leaving no
->>>>>>>>> space to load U-Boot image via TFTP since TFTP loads files at pre
->>>>>>>>> configured memory address at "0x82000000".
->>>>>>>>>
->>>>>>>>> As a workaround for this issue, one solution we can propose is to
->>>>>>>>> disable the checks "lmb_get_free_size()" at SPL and U-Boot stage. For
->>>>>>>>> that we can define a new config option for LMB reserve checks as
->>>>>>>>> "SPL_LMB". This config will be enable by default for the backword
->>>>>>>>> compatibility and disable for our use case at SPL and U-Boot stage.
->>>>>>>>
->>>>>>>> The problem here is that we need LMB for booting an OS, which is
->>>>>>>> something we'll want in SPL in non-cortex-R cases too, which means this
->>>>>>>> platform, so that's a no-go. I think you need to dig harder and see if
->>>>>>>> you can correct the logic somewhere so that we don't over reserve?
->>>>>>>>
->>>>>>> Since this issue is due to function call "lmb_init_and_reserve()"
->>>>>>> function invoked from "tftp_init_load_addr()" function. This function
->>>>>>> is defined by Simon in commit "a156c47e39ad", which fixes
->>>>>>> "CVE-2018-18439" to prevent overwriting reserved memory. Simon, can you
->>>>>>> explain why do we need to call "lmb_init_and_reserve()" function here ?
->>>>>>
->>>>>> This is indeed a tricky area which is why Sughosh is looking in to
->>>>>> trying to re-work the LMB mechanic and we've had a few long threads
->>>>>> about it as well.
->>>>>>
->>>>>> I've honestly forgotten the use case you have here, can you please
->>>>>> remind us?
->>>>>>
->>>>> We are trying to boot AM62x using Ethernet for which we need to load
->>>>> binary files at SPL and U-Boot stage using TFTP. To store the file we
->>>>> need a free memory in RAM, specifically we are storing these files at
->>>>> 0x82000000. But we are facing an issue while loading the file since
->>>>> the memory area having an address 0x82000000 is reserved due to
->>>>> "lmb_init_and_reserve()" function call. This function is called in
->>>>> "tftp_init_load_addr()" function which is getting called exactly before
->>>>> we are trying to get the free memory area by calling
->>>>> "lmb_get_free_size()".
->>>>
->>>> I have no idea about your platform but I was wondering if there is any
->>>> particular importance of the load address of 0x82000000? It looks as
->>>> though the current location of the SP when arch_lmb_reserve() gets
->>>> called means that the load address is getting reserved for the U-Boot
->>>> image. Do you not have the option of loading the image at a lower
->>>> address instead?
->>>
->>
->> Sughosh,
->>
->> I think my explanation was not clear at:
->> "We are trying to boot AM62x using Ethernet for which we need to load
->> binary files at SPL and U-Boot stage using TFTP."
->> - In Ethernet Booting we are fetching U-Boot image at SPL stage via
->> TFTP at specified address 0x82000000. While loading U-Boot image we are
->> getting TFTP error, since address from stack pointer till gd->ram_top is
->> reserved due to "lmb_init_and_reserve()" function call. I want to know
->> for which purpose this address range is reserved.
-> 
-> On relocation, the U-Boot image is located typically at the top of the
-> DRAM memory used by U-Boot(ram_top). That region of memory is reserved
-> to ensure that the memory occupied by the U-Boot image does not get
-> overwritten by a LMB reservation.
+Any chance you can rebase this? If not I'll try to find some time to do it
+
+/Ilias
+On Mon, Dec 04, 2023 at 01:38:17PM +0200, Ilias Apalodimas wrote:
+> Thanks for cleaning this up!
 >
-
-Yes, you are correct about U-Boot relocation but we are facing an issue
-at the time of fetching U-Boot proper at SPL stage.
-
-> Btw, are you facing this issue in SPL, or U-Boot proper? I built the
-> images for the am62x_evm_a53 config, and I don't see the
-
-We are getting "TFTP error" at runtime while fetching U-Boot proper at
-SPL stage while booting via "Ethernet", and we are using
-"am62x_evm_a53_ethboot_defconfig" instead of "am62x_evm_a53_defconfig".
-
-These are the extra configs we are using on top of
-"am62x_evm_a53_defconfig":
-
-CONFIG_SPL_DRIVERS_MISC=y
-CONFIG_SPL_BOARD_INIT=y
-CONFIG_SPL_DMA=y
-CONFIG_SPL_ENV_SUPPORT=y
-CONFIG_SPL_ETH=y
-CONFIG_SPL_NET=y
-CONFIG_SPL_NET_VCI_STRING="AM62X U-Boot A53 SPL"
-CONFIG_SPL_SYSCON=y
-
-> arch_lmb_reserve() function getting included in the SPL image -- both
-> the .text.arch_lmb_reserve and .text.arch_lmb_reserve_generic are part
-> of discarded sections. So I am wondering how you are observing this
-> behaviour in SPL.
-> 
-> -sughosh
-> 
->>
->>> Or using a higher address for SPL stack? You might be able to solve this
->>> just by re-examining which addresses (and RAM size limitations) need to
->>> be considered here.
->>>
->>
->> Tom,
->>
->> We tried this approach of assigning a higher address for SPL stack, but
->> it is not working as expected.
+> On Mon, 4 Dec 2023 at 06:31, Masahisa Kojima <masahisa.kojima@linaro.org> wrote:
+> >
+> > Currently efi_initrd_deregister() is called in bootefi.c
+> > when the image started from bootefi command returns.
+> > Since efi_guid_event_group_return_to_efibootmgr event is
+> > implemented, so let's use this event for invoking
+> > initrd deregistration.
+> >
+> > Signed-off-by: Masahisa Kojima <masahisa.kojima@linaro.org>
+> > ---
+> > Note that this patch can be applied to u-boot/next.
+> > This patch requires the patch e0d1a1ea68("efi_loader: add return to efibootmgr event group")
+> >
+> >  cmd/bootefi.c                    |  5 --
+> >  lib/efi_loader/efi_load_initrd.c | 82 +++++++++++++++++++++-----------
+> >  2 files changed, 55 insertions(+), 32 deletions(-)
+>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Tested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>
+> >
+> > diff --git a/cmd/bootefi.c b/cmd/bootefi.c
+> > index 4d74969ad6..e52bd3f743 100644
+> > --- a/cmd/bootefi.c
+> > +++ b/cmd/bootefi.c
+> > @@ -390,11 +390,6 @@ static efi_status_t do_bootefi_exec(efi_handle_t handle, void *load_options)
+> >  out:
+> >         free(load_options);
+> >
+> > -       if (IS_ENABLED(CONFIG_EFI_LOAD_FILE2_INITRD)) {
+> > -               if (efi_initrd_deregister() != EFI_SUCCESS)
+> > -                       log_err("Failed to remove loadfile2 for initrd\n");
+> > -       }
+> > -
+> >         /* Notify EFI_EVENT_GROUP_RETURN_TO_EFIBOOTMGR event group. */
+> >         list_for_each_entry(evt, &efi_events, link) {
+> >                 if (evt->group &&
+> > diff --git a/lib/efi_loader/efi_load_initrd.c b/lib/efi_loader/efi_load_initrd.c
+> > index 193433782c..7ca7785c04 100644
+> > --- a/lib/efi_loader/efi_load_initrd.c
+> > +++ b/lib/efi_loader/efi_load_initrd.c
+> > @@ -184,6 +184,50 @@ out:
+> >         return ret;
+> >  }
+> >
+> > +/**
+> > + * efi_initrd_deregister() - delete the handle for loading initial RAM disk
+> > + *
+> > + * This will delete the handle containing the Linux specific vendor device
+> > + * path and EFI_LOAD_FILE2_PROTOCOL for loading an initrd
+> > + *
+> > + * Return:     status code
+> > + */
+> > +efi_status_t efi_initrd_deregister(void)
+> > +{
+> > +       efi_status_t ret;
+> > +
+> > +       if (!efi_initrd_handle)
+> > +               return EFI_SUCCESS;
+> > +
+> > +       ret = efi_uninstall_multiple_protocol_interfaces(efi_initrd_handle,
+> > +                                                        /* initramfs */
+> > +                                                        &efi_guid_device_path,
+> > +                                                        &dp_lf2_handle,
+> > +                                                        /* LOAD_FILE2 */
+> > +                                                        &efi_guid_load_file2_protocol,
+> > +                                                        &efi_lf2_protocol,
+> > +                                                        NULL);
+> > +       efi_initrd_handle = NULL;
+> > +
+> > +       return ret;
+> > +}
+> > +
+> > +/**
+> > + * efi_initrd_return_notify() - return to efibootmgr callback
+> > + *
+> > + * @event:     the event for which this notification function is registered
+> > + * @context:   event context
+> > + */
+> > +static void EFIAPI efi_initrd_return_notify(struct efi_event *event,
+> > +                                                 void *context)
+> > +{
+> > +       efi_status_t ret;
+> > +
+> > +       EFI_ENTRY("%p, %p", event, context);
+> > +       ret = efi_initrd_deregister();
+> > +       EFI_EXIT(ret);
+> > +}
+> > +
+> >  /**
+> >   * efi_initrd_register() - create handle for loading initial RAM disk
+> >   *
+> > @@ -197,6 +241,7 @@ out:
+> >  efi_status_t efi_initrd_register(void)
+> >  {
+> >         efi_status_t ret;
+> > +       struct efi_event *event;
+> >
+> >         /*
+> >          * Allow the user to continue if Boot#### file path is not set for
+> > @@ -215,34 +260,17 @@ efi_status_t efi_initrd_register(void)
+> >                                                        &efi_guid_load_file2_protocol,
+> >                                                        &efi_lf2_protocol,
+> >                                                        NULL);
+> > +       if (ret != EFI_SUCCESS) {
+> > +               log_err("installing EFI_LOAD_FILE2_PROTOCOL failed\n");
+> > +               return ret;
+> > +       }
+> >
+> > -       return ret;
+> > -}
+> > -
+> > -/**
+> > - * efi_initrd_deregister() - delete the handle for loading initial RAM disk
+> > - *
+> > - * This will delete the handle containing the Linux specific vendor device
+> > - * path and EFI_LOAD_FILE2_PROTOCOL for loading an initrd
+> > - *
+> > - * Return:     status code
+> > - */
+> > -efi_status_t efi_initrd_deregister(void)
+> > -{
+> > -       efi_status_t ret;
+> > -
+> > -       if (!efi_initrd_handle)
+> > -               return EFI_SUCCESS;
+> > -
+> > -       ret = efi_uninstall_multiple_protocol_interfaces(efi_initrd_handle,
+> > -                                                        /* initramfs */
+> > -                                                        &efi_guid_device_path,
+> > -                                                        &dp_lf2_handle,
+> > -                                                        /* LOAD_FILE2 */
+> > -                                                        &efi_guid_load_file2_protocol,
+> > -                                                        &efi_lf2_protocol,
+> > -                                                        NULL);
+> > -       efi_initrd_handle = NULL;
+> > +       ret = efi_create_event(EVT_NOTIFY_SIGNAL, TPL_CALLBACK,
+> > +                              efi_initrd_return_notify, NULL,
+> > +                              &efi_guid_event_group_return_to_efibootmgr,
+> > +                              &event);
+> > +       if (ret != EFI_SUCCESS)
+> > +               log_err("Creating event failed\n");
+> >
+> >         return ret;
+> >  }
+> >
+> > base-commit: 4a363dd516856344558034027e40d903868f67b4
+> > --
+> > 2.34.1
+> >
