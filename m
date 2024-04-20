@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3747C4345F
-	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 18:33:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C943AC4345F
+	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 18:34:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B284C8878B;
-	Sat, 20 Apr 2024 20:33:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4635788792;
+	Sat, 20 Apr 2024 20:34:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LWdbEKC0";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OuB3ulVJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8DD2A88790; Sat, 20 Apr 2024 20:33:30 +0200 (CEST)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id B5BFA88794; Sat, 20 Apr 2024 20:34:41 +0200 (CEST)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 12E058878B
- for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 20:33:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6973388785
+ for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 20:34:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1e825c6c110so5554045ad.2
- for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 11:33:27 -0700 (PDT)
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-1e84787b0a8so4327975ad.1
+ for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 11:34:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713638006; x=1714242806; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Rh0IqvVh2VbTl/g+mSi3tP3ukN9QfcnC/gUdnl39Iak=;
- b=LWdbEKC0FUwzmws2Nv1ts2NT1Gj4NvKey0lNrexya2HnFvP6Nomh2cmVlALsYrxetb
- NY6YsdqhRy59WWEogWdE+zda+gUYuRQhOCxIi2aTPsHOG0QHCcLxz6yC4EGpz4SvH3CJ
- EAsyZI8EIXfwZL5HF4uAoMrEseS1Y4+lKkJByRvreN7BWjvRUL2i0jMEfFSd7txGqh8q
- 5OgEyORs0Zix5xMYKuNb0bQY8cAFF/2NJxxnjA22dAWhEgVaIHS7vS+3XXLGf9Z0BUOH
- 2OtOF2YX/6k+JpmDoeLlTnFDGXDXARcq9Pohi/F7qTtczyon1osXobMZz9xHGKlX5V8J
- x3RA==
+ d=gmail.com; s=20230601; t=1713638078; x=1714242878; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xgHyhtL7JNTBBwLC9N3i2ppo27sHtw/urG7uOHkCz2s=;
+ b=OuB3ulVJ8ylFNdL8lVm6Un74qByIPmhQmZF9XDZBIMRx+daF28Uh49axqk63wvXWYs
+ nUMa/CsOICXYGnlhhFppNyUMHzPPAPhbWqpHGCskjn5M47Hf6FOoHQosMcO6vb+G0Xvx
+ F5yN2mJg2dNw4ymfHEteFEeaFnyXX5hBF9fCn7+8CkcU9SJL3SwGuvh4uhmEg3Q254n0
+ fV7MHrNW84oLJV5SMzJp9u3ZeMt4Co6tbyyvGsAHt0bRef0wm+LdnKxeJEEIZiven2M2
+ 2pJQGLgIcUq5LGZYhPZtlW/QmdIqIbFxn+ppI68XHrXmkAbSQt7Ki+FvkBTFJIcDgm6e
+ oWTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713638006; x=1714242806;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Rh0IqvVh2VbTl/g+mSi3tP3ukN9QfcnC/gUdnl39Iak=;
- b=ap+fdQdlxdcTw/zmo9qPhGNvX8uZ+iUWkamm0v50Ay8rYHE/wwxZ2A6h+td1OA+wVQ
- vHi6TfQxbVRqelznFtD41IbqqUTiZXGpkejTffeWwjGBWw+NN6b2Hi/vdTBL88YVX3Dy
- RRfFSSRuWVzlQGdYGM1/ykOg3EFoJU/VsrGQy1MQEwOmTKqcQ5m9uysmd08lg14jpbLD
- 8zUN04t6X+XHrv097apI7IHtWowMZpCx2PHHW+B1IPQry5vomPgARh65nq2ua+BL+rUV
- Uir9RGvbL7vyNsWssQLJ0eLnCVArROBLKYlbTUtMNBtBEfgHzPnif71T0KPftK0mM+/r
- fZ/g==
-X-Gm-Message-State: AOJu0Yz6KO4ncqEqAdfbhmjSNFYBsE7OsKqTCON8xe6IaFuNRFeT9kBZ
- wW7vfVGsGXgQApo4NxfFU0kXPkx5RykxHwt5LZy/Klr0jp7S0YJdMvC/Zg==
-X-Google-Smtp-Source: AGHT+IGUgo77o0jS773pffWYI7GaRI7oYBMWA54mE5yUPTvYrmZH90N1ka1DEfUQ4QV2CtM4n72+EA==
-X-Received: by 2002:a17:90b:286:b0:2a6:d054:3214 with SMTP id
- az6-20020a17090b028600b002a6d0543214mr5555190pjb.0.1713638006403; 
- Sat, 20 Apr 2024 11:33:26 -0700 (PDT)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:6998:dfc1:c27d:ad17])
- by smtp.gmail.com with ESMTPSA id
- gf13-20020a17090ac7cd00b0029fbfb620cdsm4997350pjb.28.2024.04.20.11.33.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 20 Apr 2024 11:33:25 -0700 (PDT)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-master-20240420
-Date: Sat, 20 Apr 2024 15:33:22 -0300
-Message-Id: <20240420183322.1041895-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1713638078; x=1714242878;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xgHyhtL7JNTBBwLC9N3i2ppo27sHtw/urG7uOHkCz2s=;
+ b=nqi+XWXMb8SOR8cUOHRIqImkgX5XT5n6/Ini+PyCezg9N5gesnO3uJtGWUCh7oMySR
+ 8ngBpdStxRUpevKP1lmjV+4+8OYQAyXrfG40GrZy0gFD30/g+VwuUZQ54fteaVtzCuip
+ A1MNGbB2CwcnsZPfMFSwHwSPbAymw/7vuVBmsQXmDstJTLRLJGYDZUNmvBov38T1PCLU
+ RcZFQVyQX0qHFjC/C579X4IGGipPZfzVmucQLt2SezpnbwF+5zTuVproJDOAVpP2ZHSJ
+ VGHGlWTM14IY/P1h6WqCwsC/CYLlMdMryNh0lTas6T1Po1uvI+U+bkgGjqTozPJmNy71
+ CJKQ==
+X-Gm-Message-State: AOJu0YzEvIj3rcdA/ZhDbMt1oEES52FfOcWlAyHOapQcY1l7ZPcMHc57
+ neWKq108KgRwCoEN0NPfAWehHOY4wmfLXd/QxHZuCrdfBNAPTKYI5RVRZcTnIuFjcyiIQpN1b+J
+ 4Xhln0fIHmR9nhURTDxELo3n5NZ0=
+X-Google-Smtp-Source: AGHT+IFwZ3QLfKQeewUUtTex/ywR78b+RW6end3ZthMbfeikNaN3vGmYAe2jek+ZgMVBOsEKNx1OJUEyVm2mrs4wfg4=
+X-Received: by 2002:a05:6a20:afa8:b0:1ab:7107:d968 with SMTP id
+ ds40-20020a056a20afa800b001ab7107d968mr6576601pzb.2.1713638077875; Sat, 20
+ Apr 2024 11:34:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240325162739.1350665-1-tharvey@gateworks.com>
+In-Reply-To: <20240325162739.1350665-1-tharvey@gateworks.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sat, 20 Apr 2024 15:34:26 -0300
+Message-ID: <CAOMZO5AtYqPEvR0zNDMYSouzwGDQ0JNqPRbubaQ3X8=nWProAw@mail.gmail.com>
+Subject: Re: [PATCH] imx8m*-venice: enable TPM support
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, Stefano Babic <sbabic@denx.de>, 
+ "NXP i . MX U-Boot Team" <uboot-imx@nxp.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,67 +88,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Mon, Mar 25, 2024 at 1:27=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
+wrote:
+>
+> Enable support for TPM2 devices. As the ATTPM20P TPM2 used on the
+> Gateworks Venice boards hangs off the SPI bus we enable SPI support
+> as well.
+>
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
 
-Please pull from u-boot-imx/master, thanks.
-
-The following changes since commit af04f37a78c7e61597fb9ed6db2c8f8d7f8b0f92:
-
-  Merge tag 'u-boot-stm32-20240419' of https://source.denx.de/u-boot/custodians/u-boot-stm (2024-04-19 14:25:04 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240420
-
-for you to fetch changes up to 8b8c699d88171b0d40f072e114f32cce93cb2987:
-
-  imx8mm_venice_defconfig: Enable PCIe/NVMe support (2024-04-20 00:37:51 -0300)
-
-u-boot-imx-master-20240420
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/20444
-
-- Make i.MX93 boot less verbose.
-- Remove unneedd environment variables from Toradex i.MX boards.
-- Use gpio-hog on verdin-imx8mm/imx8mp.
-- Add PCIe support for i.MX8MM.
-- Add TPM support for imx8m*-venice.
-----------------------------------------------------------------
-Fabio Estevam (1):
-      imx93: Move SoC and lifeclycle information to debug level
-
-Francesco Dolcini (1):
-      board: toradex: imx: Remove not needed env variables
-
-Stefan Eichenberger (1):
-      arm: dts: verdin-imx8mm/imx8mp: use gpio-hog for sleep moci
-
-Tim Harvey (6):
-      imx8m*-venice: enable TPM support
-      board: gateworks: venice: fix dt adjustment for gw73xx baseboard for imx8mp
-      imx8m*_venice_defconfig: enable ipv6, wget and tftpput
-      clk: imx8mm: Add support for PCIe clocks
-      pci: dw_imx: add support for IMX8MM
-      imx8mm_venice_defconfig: Enable PCIe/NVMe support
-
- arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi |  5 +++++
- arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi |  4 ++++
- board/freescale/imx93_evk/spl.c                 |  4 ++--
- board/gateworks/venice/venice.c                 |  7 ++++---
- board/phytec/phycore_imx93/spl.c                |  4 ++--
- board/variscite/imx93_var_som/spl.c             |  4 ++--
- configs/imx8mm_venice_defconfig                 | 21 +++++++++++++++++++
- configs/imx8mn_venice_defconfig                 | 15 ++++++++++++++
- configs/imx8mp_venice_defconfig                 | 15 ++++++++++++++
- drivers/clk/imx/clk-imx8mm.c                    | 27 +++++++++++++++++++++++++
- drivers/pci/pcie_dw_imx.c                       | 18 +++++++++++++++--
- include/configs/apalis-imx8.h                   |  2 --
- include/configs/apalis_imx6.h                   |  9 +--------
- include/configs/colibri-imx6ull.h               | 10 +++------
- include/configs/colibri-imx8x.h                 |  2 --
- include/configs/colibri_imx6.h                  |  9 +--------
- include/configs/colibri_imx7.h                  | 11 +++-------
- include/configs/verdin-imx8mm.h                 |  3 ---
- include/configs/verdin-imx8mp.h                 |  5 -----
- 19 files changed, 121 insertions(+), 54 deletions(-)
+Applied, thanks.
