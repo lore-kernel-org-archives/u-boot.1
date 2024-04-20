@@ -4,76 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B6AAC4345F
-	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 15:29:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3747C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 18:33:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31B5A880A5;
-	Sat, 20 Apr 2024 17:29:17 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B284C8878B;
+	Sat, 20 Apr 2024 20:33:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sGJUVQET";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="LWdbEKC0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6601880A8; Sat, 20 Apr 2024 17:29:15 +0200 (CEST)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id 8DD2A88790; Sat, 20 Apr 2024 20:33:30 +0200 (CEST)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADB1E88074
- for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 17:29:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 12E058878B
+ for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 20:33:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-518b9527c60so3423778e87.0
- for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 08:29:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-1e825c6c110so5554045ad.2
+ for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 11:33:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713626952; x=1714231752; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=DL2uYwKd5SsBCpHgjavcbBJakbgxZXtdbD+4YME16i0=;
- b=sGJUVQETAidK4Z3ehLw2Se6VK+CbhR+9b5mwV/+5r8KxA0df1k55AkWzE1cwW2Oz2N
- NSszDL1FwQxY9ZlQ8DUoDXhJ82dBUGCnmo8+ZkAFWiK72A3tZmrDXIa/pR3apjX0dFY6
- ZTYWOGjPSiqI1irVG3OZirGWQcYXlnVk0CdQBzA9kC544nzsn0pA9Yq+Grp7kquthReN
- 83f5w4tJBUadqfdt+lhEaPv9vtXblnkBq8El6+c0gp7TXobp46qHTGv8G3EVhn/lb27V
- 1l/BSqAEBDeiQgGt3hTk9Ecg0lRmncSoUKypsRmTp0rx9JCW8t0Q2P8++B1N20ClEduh
- /Q4g==
+ d=gmail.com; s=20230601; t=1713638006; x=1714242806; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Rh0IqvVh2VbTl/g+mSi3tP3ukN9QfcnC/gUdnl39Iak=;
+ b=LWdbEKC0FUwzmws2Nv1ts2NT1Gj4NvKey0lNrexya2HnFvP6Nomh2cmVlALsYrxetb
+ NY6YsdqhRy59WWEogWdE+zda+gUYuRQhOCxIi2aTPsHOG0QHCcLxz6yC4EGpz4SvH3CJ
+ EAsyZI8EIXfwZL5HF4uAoMrEseS1Y4+lKkJByRvreN7BWjvRUL2i0jMEfFSd7txGqh8q
+ 5OgEyORs0Zix5xMYKuNb0bQY8cAFF/2NJxxnjA22dAWhEgVaIHS7vS+3XXLGf9Z0BUOH
+ 2OtOF2YX/6k+JpmDoeLlTnFDGXDXARcq9Pohi/F7qTtczyon1osXobMZz9xHGKlX5V8J
+ x3RA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713626952; x=1714231752;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1713638006; x=1714242806;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=DL2uYwKd5SsBCpHgjavcbBJakbgxZXtdbD+4YME16i0=;
- b=UFbKhdbyJaTYcGmyQEtY7ij9ixjw23T6Nk8jZOgsxM9sOGon3gC1hJZcwoIv+S8KdQ
- XLF7URCAUMdiDS6Nuv9U3eZY+UAd8DicpWMelSX89rCLxTg5ZF2utRId2Ajtb6Yo+Kt1
- N/7+AI2S8B8jF6SjdI4h1iAa/19I39WVVPvHuI3TVjuptMUBoPl0czkxOpuktU0BXfhA
- 2/aVHXXxsrRkDOtlxHPWNE4u9IIQmGKl1MLg9gByhr94Afgk/LI9iWAZC4pX2mrV30h2
- zEnAfI0DBAq77KTQ0gU4Yi6IFaTv1S5D/i6gdR1ucIcAWbWaKC4ryQVsrxQ+BKGqC4pT
- kUJw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXYqYn9tmSvcy0WWmjD3pQZ+YX4ACH66ZOx0Jj1+6+cfTVGSFnDUP1tOhKC9VinoDqYQncwCDBwH5/VnHJNwNT0ukrJ3w==
-X-Gm-Message-State: AOJu0YwxLeU2GNUWCLE0XRq3vsfc91U4zMrkqs/1ouUju0sXgNB/6ewq
- hmXs86Nf6XEJ9xRgIJ6csQiw8ZlERi3jmBZHJKb1RIwlbi/EHzqp/OjsFszZMXSS9Cf5U8xNNqX
- 2i025uAoBY8qWzFXntp9HHSrnfeTExV5M35yZiA==
-X-Google-Smtp-Source: AGHT+IEoODjETvR1B7AWRNl5LiMkLy4C6hJzux29Ch/N50EBWuWY0W59srZDkUR0GBclaj6sj27aB/62mu6b6u2wntY=
-X-Received: by 2002:a05:6512:159:b0:518:b283:1078 with SMTP id
- m25-20020a056512015900b00518b2831078mr4345890lfo.26.1713626951750; Sat, 20
- Apr 2024 08:29:11 -0700 (PDT)
+ bh=Rh0IqvVh2VbTl/g+mSi3tP3ukN9QfcnC/gUdnl39Iak=;
+ b=ap+fdQdlxdcTw/zmo9qPhGNvX8uZ+iUWkamm0v50Ay8rYHE/wwxZ2A6h+td1OA+wVQ
+ vHi6TfQxbVRqelznFtD41IbqqUTiZXGpkejTffeWwjGBWw+NN6b2Hi/vdTBL88YVX3Dy
+ RRfFSSRuWVzlQGdYGM1/ykOg3EFoJU/VsrGQy1MQEwOmTKqcQ5m9uysmd08lg14jpbLD
+ 8zUN04t6X+XHrv097apI7IHtWowMZpCx2PHHW+B1IPQry5vomPgARh65nq2ua+BL+rUV
+ Uir9RGvbL7vyNsWssQLJ0eLnCVArROBLKYlbTUtMNBtBEfgHzPnif71T0KPftK0mM+/r
+ fZ/g==
+X-Gm-Message-State: AOJu0Yz6KO4ncqEqAdfbhmjSNFYBsE7OsKqTCON8xe6IaFuNRFeT9kBZ
+ wW7vfVGsGXgQApo4NxfFU0kXPkx5RykxHwt5LZy/Klr0jp7S0YJdMvC/Zg==
+X-Google-Smtp-Source: AGHT+IGUgo77o0jS773pffWYI7GaRI7oYBMWA54mE5yUPTvYrmZH90N1ka1DEfUQ4QV2CtM4n72+EA==
+X-Received: by 2002:a17:90b:286:b0:2a6:d054:3214 with SMTP id
+ az6-20020a17090b028600b002a6d0543214mr5555190pjb.0.1713638006403; 
+ Sat, 20 Apr 2024 11:33:26 -0700 (PDT)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:6998:dfc1:c27d:ad17])
+ by smtp.gmail.com with ESMTPSA id
+ gf13-20020a17090ac7cd00b0029fbfb620cdsm4997350pjb.28.2024.04.20.11.33.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 20 Apr 2024 11:33:25 -0700 (PDT)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-master-20240420
+Date: Sat, 20 Apr 2024 15:33:22 -0300
+Message-Id: <20240420183322.1041895-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240420140058.120695-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240420140058.120695-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 20 Apr 2024 18:28:34 +0300
-Message-ID: <CAC_iWj+AKJ2QX5aGBmRjnBQ5LWpKszXZY5HdPvAbkYbgTPKHYA@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_loader: improve error handling in try_load_entry()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Masahisa Kojima <kojima.masahisa@socionext.com>,
- Raymond Mao <raymond.mao@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Joao Marcos Costa <jmcosta944@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,386 +88,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Sat, 20 Apr 2024 at 17:01, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> The image is not unloaded if a security violation occurs.
->
-> If efi_set_load_options() fails, we do not free the memory allocated for
-> the optional data. We do not unload the image.
->
-> If a load option is not active, we use a random value from the stack to
-> allocate memory for the optional data of the load option.
->
-> * Unload the image if a security violation occurs.
-> * Free load_options if efi_set_load_options() fails.
-> * Unload the image if efi_set_load_options() fails.
-> * Do not allocate load_options with a random size from the stack
->   if the boot entry is not active.
+Please pull from u-boot-imx/master, thanks.
 
-Where is that happening?
-Don't we always init the size in efi_get_var() &
-efi_deserialize_load_option()_ which are called early?
-efi_get_var() especially sets size = 0 even on failures
+The following changes since commit af04f37a78c7e61597fb9ed6db2c8f8d7f8b0f92:
 
->
-> Fixes: 53f6a5aa8626 ("efi_loader: Replace config option for initrd loading")
+  Merge tag 'u-boot-stm32-20240419' of https://source.denx.de/u-boot/custodians/u-boot-stm (2024-04-19 14:25:04 -0600)
 
-I think we also need a fix tag for 0ad64007feb93 as well?
+are available in the Git repository at:
 
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_bootmgr.c                  | 97 +++++++++----------
->  test/py/tests/test_efi_secboot/test_signed.py | 28 +++---
->  .../test_efi_secboot/test_signed_intca.py     | 10 +-
->  .../tests/test_efi_secboot/test_unsigned.py   |  6 +-
->  4 files changed, 70 insertions(+), 71 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index 4ac519228a6..ca2ebdaa32f 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -613,9 +613,12 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
->         void *load_option;
->         efi_uintn_t size;
->         efi_status_t ret;
-> +       u32 attributes;
->
-> -       efi_create_indexed_name(varname, sizeof(varname), "Boot", n);
-> +       *handle = NULL;
-> +       *load_options = NULL;
->
-> +       efi_create_indexed_name(varname, sizeof(varname), "Boot", n);
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20240420
 
->         load_option = efi_get_var(varname, &efi_global_variable_guid, &size);
->         if (!load_option)
->                 return EFI_LOAD_ERROR;
-> @@ -626,55 +629,54 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
->                 goto error;
->         }
->
-> -       if (lo.attributes & LOAD_OPTION_ACTIVE) {
-> -               u32 attributes;
-> -
-> -               log_debug("trying to load \"%ls\" from %pD\n", lo.label,
-> -                         lo.file_path);
-> -
-> -               if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
-> -                       /* file_path doesn't contain a device path */
-> -                       ret = try_load_from_short_path(lo.file_path, handle);
-> -               } else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
-> -                       if (IS_ENABLED(CONFIG_EFI_HTTP_BOOT))
-> -                               ret = try_load_from_uri_path(
-> -                                       (struct efi_device_path_uri *)lo.file_path,
-> -                                       lo.label, handle);
-> -                       else
-> -                               ret = EFI_LOAD_ERROR;
-> -               } else {
-> -                       ret = try_load_from_media(lo.file_path, handle);
-> -               }
-> -               if (ret != EFI_SUCCESS) {
-> -                       log_warning("Loading %ls '%ls' failed\n",
-> -                                   varname, lo.label);
-> -                       goto error;
-> -               }
-> +       if (!(lo.attributes & LOAD_OPTION_ACTIVE)) {
-> +               ret = EFI_LOAD_ERROR;
-> +               goto error;
-> +       }
->
-> -               attributes = EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> -                            EFI_VARIABLE_RUNTIME_ACCESS;
-> -               ret = efi_set_variable_int(u"BootCurrent",
-> -                                          &efi_global_variable_guid,
-> -                                          attributes, sizeof(n), &n, false);
-> -               if (ret != EFI_SUCCESS)
-> -                       goto unload;
-> -               /* try to register load file2 for initrd's */
-> -               if (IS_ENABLED(CONFIG_EFI_LOAD_FILE2_INITRD)) {
-> -                       ret = efi_initrd_register();
-> -                       if (ret != EFI_SUCCESS)
-> -                               goto unload;
-> -               }
-> +       log_debug("trying to load \"%ls\" from %pD\n", lo.label, lo.file_path);
->
-> -               log_info("Booting: %ls\n", lo.label);
-> +       if (EFI_DP_TYPE(lo.file_path, MEDIA_DEVICE, FILE_PATH)) {
-> +               /* file_path doesn't contain a device path */
-> +               ret = try_load_from_short_path(lo.file_path, handle);
-> +       } else if (EFI_DP_TYPE(lo.file_path, MESSAGING_DEVICE, MSG_URI)) {
-> +               if (IS_ENABLED(CONFIG_EFI_HTTP_BOOT))
-> +                       ret = try_load_from_uri_path(
-> +                               (struct efi_device_path_uri *)lo.file_path,
-> +                               lo.label, handle);
-> +               else
-> +                       ret = EFI_LOAD_ERROR;
->         } else {
-> -               ret = EFI_LOAD_ERROR;
-> +               ret = try_load_from_media(lo.file_path, handle);
-> +       }
-> +       if (ret != EFI_SUCCESS) {
-> +               log_warning("Loading %ls '%ls' failed\n",
-> +                           varname, lo.label);
-> +               goto error;
-> +       }
-> +
-> +       attributes = EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +                    EFI_VARIABLE_RUNTIME_ACCESS;
-> +       ret = efi_set_variable_int(u"BootCurrent", &efi_global_variable_guid,
-> +                                  attributes, sizeof(n), &n, false);
-> +       if (ret != EFI_SUCCESS)
-> +               goto error;
-> +
-> +       /* try to register load file2 for initrd's */
-> +       if (IS_ENABLED(CONFIG_EFI_LOAD_FILE2_INITRD)) {
-> +               ret = efi_initrd_register();
-> +               if (ret != EFI_SUCCESS)
-> +                       goto error;
->         }
->
-> -       /* Set load options */
-> +       log_info("Booting: %ls\n", lo.label);
-> +
-> +       /* Ignore the optional data in auto-generated boot options */
->         if (size >= sizeof(efi_guid_t) &&
->             !guidcmp(lo.optional_data, &efi_guid_bootmenu_auto_generated))
->                 size = 0;
->
-> +       /* Set optional data in loaded file protocol */
->         if (size) {
->                 *load_options = malloc(size);
->                 if (!*load_options) {
-> @@ -683,18 +685,15 @@ static efi_status_t try_load_entry(u16 n, efi_handle_t *handle,
->                 }
->                 memcpy(*load_options, lo.optional_data, size);
->                 ret = efi_set_load_options(*handle, size, *load_options);
-> -       } else {
-> -               *load_options = NULL;
-> +               if (ret != EFI_SUCCESS)
-> +                       free(load_options);
->         }
->
->  error:
-> -       free(load_option);
-> -
-> -       return ret;
-> -
-> -unload:
-> -       if (EFI_CALL(efi_unload_image(*handle)) != EFI_SUCCESS)
-> +       if (ret != EFI_SUCCESS && *handle &&
-> +           EFI_CALL(efi_unload_image(*handle)) != EFI_SUCCESS)
->                 log_err("Unloading image failed\n");
-> +
->         free(load_option);
->
->         return ret;
-> diff --git a/test/py/tests/test_efi_secboot/test_signed.py b/test/py/tests/test_efi_secboot/test_signed.py
-> index 2f862a259ad..5000a4ab7b6 100644
-> --- a/test/py/tests/test_efi_secboot/test_signed.py
-> +++ b/test/py/tests/test_efi_secboot/test_signed.py
-> @@ -62,13 +62,13 @@ class TestEfiSignedImage(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert('\'HELLO1\' failed' in ''.join(output))
-> -            assert('efi_start_image() returned: 26' in ''.join(output))
-> +            assert('efi_bootmgr_load() returned: 26' in ''.join(output))
->              output = u_boot_console.run_command_list([
->                  'efidebug boot add -b 2 HELLO2 host 0:1 /helloworld.efi -s ""',
->                  'efidebug boot order 2',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO2\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->          with u_boot_console.log.section('Test Case 2b'):
->              # Test Case 2b, authenticated by db
-> @@ -80,7 +80,7 @@ class TestEfiSignedImage(object):
->                  'efidebug boot order 2',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO2\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->              output = u_boot_console.run_command_list([
->                  'efidebug boot order 1',
->                  'bootefi bootmgr'])
-> @@ -108,7 +108,7 @@ class TestEfiSignedImage(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->          with u_boot_console.log.section('Test Case 3b'):
->              # Test Case 3b, rejected by dbx even if db allows
-> @@ -120,7 +120,7 @@ class TestEfiSignedImage(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->      def test_efi_signed_image_auth4(self, u_boot_console, efi_boot_env):
->          """
-> @@ -146,7 +146,7 @@ class TestEfiSignedImage(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->      def test_efi_signed_image_auth5(self, u_boot_console, efi_boot_env):
->          """
-> @@ -196,7 +196,7 @@ class TestEfiSignedImage(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->          with u_boot_console.log.section('Test Case 5d'):
->              # Test Case 5d, rejected if both of signatures are revoked
-> @@ -208,7 +208,7 @@ class TestEfiSignedImage(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->          # Try rejection in reverse order.
->          u_boot_console.restart_uboot()
-> @@ -233,7 +233,7 @@ class TestEfiSignedImage(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->      def test_efi_signed_image_auth6(self, u_boot_console, efi_boot_env):
->          """
-> @@ -268,7 +268,7 @@ class TestEfiSignedImage(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->          with u_boot_console.log.section('Test Case 6c'):
->              # Test Case 6c, rejected by image's digest in dbx
-> @@ -282,7 +282,7 @@ class TestEfiSignedImage(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->      def test_efi_signed_image_auth7(self, u_boot_console, efi_boot_env):
->          """
-> @@ -310,7 +310,7 @@ class TestEfiSignedImage(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->          # sha512 of an x509 cert in dbx
->          u_boot_console.restart_uboot()
-> @@ -333,7 +333,7 @@ class TestEfiSignedImage(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->      def test_efi_signed_image_auth8(self, u_boot_console, efi_boot_env):
->          """
-> @@ -368,4 +368,4 @@ class TestEfiSignedImage(object):
->                  'efidebug test bootmgr'])
->              assert(not 'hELLO, world!' in ''.join(output))
->              assert('\'HELLO1\' failed' in ''.join(output))
-> -            assert('efi_start_image() returned: 26' in ''.join(output))
-> +            assert('efi_bootmgr_load() returned: 26' in ''.join(output))
-> diff --git a/test/py/tests/test_efi_secboot/test_signed_intca.py b/test/py/tests/test_efi_secboot/test_signed_intca.py
-> index 8d9a5f3e7fe..cf906205bc2 100644
-> --- a/test/py/tests/test_efi_secboot/test_signed_intca.py
-> +++ b/test/py/tests/test_efi_secboot/test_signed_intca.py
-> @@ -43,7 +43,7 @@ class TestEfiSignedImageIntca(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO_a\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->          with u_boot_console.log.section('Test Case 1b'):
->              # Test Case 1b, signed and authenticated by root CA
-> @@ -74,7 +74,7 @@ class TestEfiSignedImageIntca(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO_abc\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->          with u_boot_console.log.section('Test Case 2b'):
->              # Test Case 2b, signed and authenticated by root CA
-> @@ -84,7 +84,7 @@ class TestEfiSignedImageIntca(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO_abc\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->          with u_boot_console.log.section('Test Case 2c'):
->              # Test Case 2c, signed and authenticated by root CA
-> @@ -122,7 +122,7 @@ class TestEfiSignedImageIntca(object):
->              assert 'Hello, world!' in ''.join(output)
->              # Or,
->              # assert '\'HELLO_abc\' failed' in ''.join(output)
-> -            # assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            # assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->
->          with u_boot_console.log.section('Test Case 3b'):
->              # Test Case 3b, revoked by root CA in dbx
-> @@ -132,4 +132,4 @@ class TestEfiSignedImageIntca(object):
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
->              assert '\'HELLO_abc\' failed' in ''.join(output)
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
-> diff --git a/test/py/tests/test_efi_secboot/test_unsigned.py b/test/py/tests/test_efi_secboot/test_unsigned.py
-> index 7c078f220d0..b4320ae4054 100644
-> --- a/test/py/tests/test_efi_secboot/test_unsigned.py
-> +++ b/test/py/tests/test_efi_secboot/test_unsigned.py
-> @@ -42,7 +42,7 @@ class TestEfiUnsignedImage(object):
->              output = u_boot_console.run_command_list([
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->              assert 'Hello, world!' not in ''.join(output)
->
->      def test_efi_unsigned_image_auth2(self, u_boot_console, efi_boot_env):
-> @@ -95,7 +95,7 @@ class TestEfiUnsignedImage(object):
->              output = u_boot_console.run_command_list([
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->              assert 'Hello, world!' not in ''.join(output)
->
->          with u_boot_console.log.section('Test Case 3b'):
-> @@ -113,5 +113,5 @@ class TestEfiUnsignedImage(object):
->              output = u_boot_console.run_command_list([
->                  'efidebug boot order 1',
->                  'efidebug test bootmgr'])
-> -            assert 'efi_start_image() returned: 26' in ''.join(output)
-> +            assert 'efi_bootmgr_load() returned: 26' in ''.join(output)
->              assert 'Hello, world!' not in ''.join(output)
-> --
-> 2.43.0
->
+for you to fetch changes up to 8b8c699d88171b0d40f072e114f32cce93cb2987:
 
-Please adjust the commit message either in a v2 or while merging.
-Other than that
+  imx8mm_venice_defconfig: Enable PCIe/NVMe support (2024-04-20 00:37:51 -0300)
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+u-boot-imx-master-20240420
+--------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/20444
+
+- Make i.MX93 boot less verbose.
+- Remove unneedd environment variables from Toradex i.MX boards.
+- Use gpio-hog on verdin-imx8mm/imx8mp.
+- Add PCIe support for i.MX8MM.
+- Add TPM support for imx8m*-venice.
+----------------------------------------------------------------
+Fabio Estevam (1):
+      imx93: Move SoC and lifeclycle information to debug level
+
+Francesco Dolcini (1):
+      board: toradex: imx: Remove not needed env variables
+
+Stefan Eichenberger (1):
+      arm: dts: verdin-imx8mm/imx8mp: use gpio-hog for sleep moci
+
+Tim Harvey (6):
+      imx8m*-venice: enable TPM support
+      board: gateworks: venice: fix dt adjustment for gw73xx baseboard for imx8mp
+      imx8m*_venice_defconfig: enable ipv6, wget and tftpput
+      clk: imx8mm: Add support for PCIe clocks
+      pci: dw_imx: add support for IMX8MM
+      imx8mm_venice_defconfig: Enable PCIe/NVMe support
+
+ arch/arm/dts/imx8mm-verdin-wifi-dev-u-boot.dtsi |  5 +++++
+ arch/arm/dts/imx8mp-verdin-wifi-dev-u-boot.dtsi |  4 ++++
+ board/freescale/imx93_evk/spl.c                 |  4 ++--
+ board/gateworks/venice/venice.c                 |  7 ++++---
+ board/phytec/phycore_imx93/spl.c                |  4 ++--
+ board/variscite/imx93_var_som/spl.c             |  4 ++--
+ configs/imx8mm_venice_defconfig                 | 21 +++++++++++++++++++
+ configs/imx8mn_venice_defconfig                 | 15 ++++++++++++++
+ configs/imx8mp_venice_defconfig                 | 15 ++++++++++++++
+ drivers/clk/imx/clk-imx8mm.c                    | 27 +++++++++++++++++++++++++
+ drivers/pci/pcie_dw_imx.c                       | 18 +++++++++++++++--
+ include/configs/apalis-imx8.h                   |  2 --
+ include/configs/apalis_imx6.h                   |  9 +--------
+ include/configs/colibri-imx6ull.h               | 10 +++------
+ include/configs/colibri-imx8x.h                 |  2 --
+ include/configs/colibri_imx6.h                  |  9 +--------
+ include/configs/colibri_imx7.h                  | 11 +++-------
+ include/configs/verdin-imx8mm.h                 |  3 ---
+ include/configs/verdin-imx8mp.h                 |  5 -----
+ 19 files changed, 121 insertions(+), 54 deletions(-)
