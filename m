@@ -4,49 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EED8C4345F
-	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 23:16:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8AD0C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 23:19:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B60B88263;
-	Sun, 21 Apr 2024 01:16:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2D8C18824B;
+	Sun, 21 Apr 2024 01:19:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1713655012;
-	bh=frQNQJrpWtqC7KmSr1GPgG76g23vghaB9Y3IAAC0qj0=;
+	s=phobos-20191101; t=1713655197;
+	bh=5IbYlCURX6GOp7Zg726oiOCDfphpXADAwnL28w7ndpU=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=l7LimLCNmvT4zjLLpiNWrBOLEwQ/wlQfUicMfAw7ZxDOvWgP5I1uSN+h6pVBuAMNr
-	 1doyT645gxa7Ef4F9WdZUWL3cUGy3ui0R/sTXzPYeVdEQUmEDyUWxehGLGVGl3f8+U
-	 bpuGJ+ruA7GKgtmhdvtWoejIa+TN6o6zRDaSneblbpS0gz8QDClQ5t3tR6uiTwszzS
-	 gl/GJdgpjQKu2N5RtsqvcGbiCNeDyjnls/YfWdtN2muohOxhOS0SU3wzsY5LioGTZU
-	 43yA9C8wIuE9mtlgz/f+fxh8/AIZrek05aVG1E/G8gI4M5vlsRanP3O38bsp8qy/UB
-	 3TeEsVbfA5pYQ==
+	b=JU8QTjeVU18CdWjaQclsSbAMitRU/DzhVWCAZcp/y3k0f/gdfotCbiwrJxQvDbEWT
+	 1Th4aj1tdwwqqS37xNKkbbiS7WptAll1BaHCDZSDkl2JiRHGPJwVqQCwZ3WTMt1GvN
+	 KzV67pAk51XgDcJfGMjDwAQaz6GZdK9CxuZcX55o6t91ZIG2dz7e/WWvJLqckAfXZx
+	 5CadsqtF6fcOzURwzly/2xvDGiGmHCewO3SwfVkmQd4k8AQJPJIN1J+1G/bmCNPveY
+	 jXpcFnxQoMTalhhCUBY5TKeMU9iuto/ndfI5Q3kPSldNTrVdyJsfeQ3LVatB1LerIi
+	 PKB0RedrR/Ojw==
 Received: from crub (p508b6ab0.dip0.t-ipconnect.de [80.139.106.176])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 6755A881FB;
- Sun, 21 Apr 2024 01:16:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 7680587F4E;
+ Sun, 21 Apr 2024 01:19:55 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1713655011;
- bh=frQNQJrpWtqC7KmSr1GPgG76g23vghaB9Y3IAAC0qj0=;
+ s=phobos-20191101; t=1713655195;
+ bh=5IbYlCURX6GOp7Zg726oiOCDfphpXADAwnL28w7ndpU=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=i+uSr6wHaB6MCTotd95aCq+OXx2hSQH7MOmhSr6R/sOT+DpRejVDRFG4xvLJame7n
- gn9IuGbTf4JCNbJvZg0kiMr409eeAZlSrYXdgAPhBW+EV7I0mWU5Kfm7u+yHzLKnLC
- V5KFyL1XKPtoGFC9v9Te7pueS3/KlwZfcVpy8n0V3Kl5hwxgqeKpoB9ChPMjT3iyh5
- iP56PJsvU0bhg24YZr9bVxYKMrJvX0p9GELEkHZXMKFQTb74pR3M6qMWtr5dvQgJNp
- lioQB48sXBzLlds97oTU4qM5GYrtF3umreIyY83MsB4b2YY+tl4XBueuLX1PZp+WOW
- TS7RM+ixBeE6w==
-Date: Sun, 21 Apr 2024 01:16:30 +0200
+ b=UhMgkS9Op1tndeGKO5+nv5iHMAxMGjsmbzdTiZTK8QGFqSK4+s65MccOVwZv0XEOO
+ v4l57BwigqonpTsbUaJ6lCMiU1vcrOvrgEON6trWhgl9Fqp99gxfpNXVhh1iLJ05lD
+ 7Z82JWmOHdNK9NuViYrUMhH9PWgl9xldCwunAK05wtakZKcJaTifKXWHyZCh86i566
+ a5Sm8ahHRx43r6G6tF57nZwBE6RmbjtPYPexBTzwIbp+ringU2S2Rw0l6GnxRnlQq/
+ F889d44zNjpbmEw2D24EJe7yPlyVzIKuQ7kieMSbcThFhRNoPtL6SOWwsnWzdLuEgM
+ dD3/kugn6lY2A==
+Date: Sun, 21 Apr 2024 01:19:34 +0200
 From: Anatolij Gustschin <agust@denx.de>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH] video: dw_hdmi: Fix compiler warnings with gcc-14
-Message-ID: <20240421011630.0516e371@crub>
-In-Reply-To: <20240127225459.3064283-1-raj.khem@gmail.com>
-References: <20240127225459.3064283-1-raj.khem@gmail.com>
+To: Jagan Teki <jagan@amarulasolutions.com>, Jagan Teki <jagan@edgeble.ai>
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Andre Przywara
+ <andre.przywara@arm.com>, Kever Yang <kever.yang@rock-chips.com>, Simon
+ Glass <sjg@chromium.org>, Heiko Stuebner <heiko@sntech.de>, Andy Yan
+ <andyshrk@163.com>, Robin Murphy <robin.murphy@arm.com>, Da Xue
+ <da.xue@libretech.co>, u-boot@lists.denx.de
+Subject: Re: [PATCH v3 00/17] video: dw_hdmi: Support Vendor PHY
+Message-ID: <20240421011934.2d62b8d5@crub>
+In-Reply-To: <CAMty3ZACYxo0s9=J3qu9Md1FrskcQTJjY6=2TiUpvYPHE2_Rcg@mail.gmail.com>
+References: <20240117075154.58747-1-jagan@amarulasolutions.com>
+ <CAMty3ZACUq6_hf_y7uM30EVmaVGtnqRH01sDWwZgKMNoLXw=CA@mail.gmail.com>
+ <CAMty3ZACYxo0s9=J3qu9Md1FrskcQTJjY6=2TiUpvYPHE2_Rcg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
@@ -66,21 +72,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 27 Jan 2024 14:54:59 -0800
-Khem Raj raj.khem@gmail.com wrote:
-
-> GCC-14 find more warnings like
-> "make pointer from integer without a cast"
-> fix them by adding a type cast.
+On Thu, 14 Mar 2024 14:55:32 +0530
+Jagan Teki jagan@amarulasolutions.com wrote:
+...
+> > > Jagan Teki (17):
+> > >   video: rockchip: hdmi: Detect hpd after controller init
+> > >   video: dw_hdmi: Add Vendor PHY handling
+> > >   video: dw_hdmi: Extend the HPD detection
+> > >   video: dw_hdmi: Add read_hpd hook
+> > >   video: dw_hdmi: Add setup_hpd hook
+> > >   video: rockchip: vop: Simplify rkvop_enable
+> > >   video: rockchip: vop: Add win offset support
+> > >   video: rockchip: vop: Add dsp offset support
+> > >   clk: rockchip: rk3328: Add VOP clk support
+> > >   clk: rk3328: Add get hdmiphy clock
+> > >   phy: rockchip: Add Rockchip INNO HDMI PHY driver
+> > >   video: rockchip: Add rk3328 hdmi support
+> > >   video: rockchip: Add rk3328 vop support
+> > >   ARM: dts: rk3328: Enable VOP for bootph-all
+> > >   rockchip: Enable preconsole for rk3328
+> > >   configs: evb-rk3328: Enable vidconsole for rk3328
+> > >   configs: Enable HDMI Out for ROC-RK3328-CC  
+> >
+> > Any comments on this? Or is it okay if I send a PR for this?  
 > 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> Cc: Anatolij Gustschin <agust@denx.de>
-> Cc: Tom Rini <trini@konsulko.com>
-> ---
->  drivers/video/dw_hdmi.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+> Any update?
 
-applied to u-boot-video.
+Series applied to u-boot-video.
 
 --
 Anatolij
