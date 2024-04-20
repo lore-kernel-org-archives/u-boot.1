@@ -4,53 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66175C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 19 Apr 2024 22:03:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC2A5C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 00:03:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 563BF8861B;
-	Sat, 20 Apr 2024 00:03:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A114D88249;
+	Sat, 20 Apr 2024 02:03:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=jookia.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1713564230;
-	bh=bwL/s5ptFcdr3ehhR4P+83rS3mT4uufOnY6YGs8tudI=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=NO54Y9nja6frKmQpz7zpypwwc4NV08TZHdRJEXTToCZhCJ+JOw99kEfvE1PBiGQcU
-	 aaoy49hjcfItvYh8tLUIMle/PHS2sHNyLn0MWtmlJY2NTIY1eqtVvwXqD2vyyJrPXi
-	 ZZvvHQzdVPUGoAEHpQfLy9XKfhOk9IEwsZfqthELM7lc88wIcaBDZTW+/Advs/qJmx
-	 1D/WjQme5aduOSDLDxJWOMtdXYUYv1bQ9er3nOUfgia4RIMvBdJCMcMMwezxbWJGXI
-	 2iwt/ZvJDTWHKSgQBD0U5B6rKKCf3ANdnENpEUWIBsm1o8fY41LAxckRxA1O/Zm1n+
-	 lAPdRclOLFtKg==
-Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=jookia.org header.i=@jookia.org header.b="PAqoG06C";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BF93488249; Sat, 20 Apr 2024 02:03:38 +0200 (CEST)
+Received: from out-179.mta1.migadu.com (out-179.mta1.migadu.com
+ [95.215.58.179])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 096B8884EB;
- Sat, 20 Apr 2024 00:03:49 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1713564229;
- bh=bwL/s5ptFcdr3ehhR4P+83rS3mT4uufOnY6YGs8tudI=;
- h=From:To:Cc:Subject:Date:From;
- b=T1rUKJE9pztiuPJHEX/daeq3i6ql0MqX3QukXYkf+tk5rO1zEJuUwAoqs73w0BAbZ
- +OqbGH2w0dwwF/tNfTkPw70U8XffGDQeCRyNTUXfSLs34tmt2CIfPkUIMKbZp4unhY
- 6tfTi09HSaaIGaVc8/+BiXfg0CQCp9eDdxnpXxmuo/oB8DpamSD1KZr0/TjuJZfSa0
- veVtINwydqblxO8iLlJK4//XQteOok7QYodDC/Tv5c7BirwWc3+u+fgUvqsphxJS5Q
- N+xIZh8Rbrv02VXNmxLu+wDYQcL6yYtZxFmMd9q1wRiIKAgMoo0K7hh8JVcZlGyUaU
- 3RX7eqwhBZVlA==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Igor Opaniuk <igor.opaniuk@foundries.io>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] ARM: stm32: Ping IWDG on exit from PSCI suspend code
-Date: Sat, 20 Apr 2024 00:03:09 +0200
-Message-ID: <20240419220331.277574-1-marex@denx.de>
-X-Mailer: git-send-email 2.43.0
+ by phobos.denx.de (Postfix) with ESMTPS id E479188249
+ for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 02:03:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=jookia.org
+Authentication-Results: phobos.denx.de;
+ spf=none smtp.mailfrom=contact@jookia.org
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=jookia.org; s=key1;
+ t=1713571415;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=ifCV94iRVQ0QjObS5H6CdCBsKDC5BETqJsXgh1EZeTE=;
+ b=PAqoG06C0H2RKTu9Tqn8lStsAiqUzVp7tQNN2NXyarjFxmEso7piaNS+IscgnY5AEO4MCA
+ lZJEvQ2vGpNE1usO9MiG5SsaxFODXmXCuBw8dP4JDFVN9yY2ez+ydTMXegHlLJncvczHm8
+ 2SV3E5hbnx1WSKc1wy0ieEv3eS+sBve/YG5W3HxrLUah8Q+yjutPUOgndqrfsw8BaisUhF
+ N9BvS/fzzv5w+4W2JWDbbXanOXOsuCa0wXEkaGeRF50gdXfCwdOuDhEDLCjX0vzd7liUwY
+ 0+8X6P0bT/peadnIWKpacf39wLWz2ZimopVpKlzJHAd6OdfCEhqvv6QG9KYq6w==
+From: John Watts <contact@jookia.org>
+Subject: [PATCH RFC 0/9] sunxi: video: Support LCD and HDMI output on H6/D1
+Date: Sat, 20 Apr 2024 10:02:33 +1000
+Message-Id: <20240420-d1_de2-v1-0-297efca674ba@jookia.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIABoGI2YC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDEyMD3RTD+JRUI13LpFQLwxRTs6QUC1MloOKCotS0zAqwQdFKQW7OSrG
+ 1tQA9Rrk/XQAAAA==
+To: Jagan Teki <jagan@amarulasolutions.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Tom Rini <trini@konsulko.com>, 
+ Anatolij Gustschin <agust@denx.de>
+Cc: u-boot@lists.denx.de, John Watts <contact@jookia.org>
+X-Developer-Signature: v=1; a=openssh-sha256; t=1713571359; l=1751;
+ i=contact@jookia.org; h=from:subject:message-id;
+ bh=hGtiB0fr+Lghf9puJiVsbIcm4PbNKzzptfs9wiXnxuc=;
+ b=U1NIU0lHAAAAAQAAAEoAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAAAgpGuA3uho2
+ 8zVxm554DVLHyl4gq5/nBHglU5WIWN8/zYAAAAEc3NoOgAAAAZwYXRhdHQAAAAAAAAABnNoYTUx
+ MgAAAGcAAAAac2stc3NoLWVkMjU1MTlAb3BlbnNzaC5jb20AAABAXuI3QTnJVvwpZCzKEENRhmL
+ TjRQIoKQmugUdJdcb+qU0oOy+CnuaAigMRIU4/1zAm58WgkMJI8f1StlD5FvEAgUAAOoR
+X-Developer-Key: i=contact@jookia.org; a=openssh;
+ fpr=SHA256:6LBQmZH5u7i/edmEZXzCTwCrpSevs/ZshZxNmlD1thY
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,58 +79,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make sure the OS would not get any spurious IWDG pretimeout IRQ
-right after the system wakes up. This may happen in case the SoC
-got woken up by another source than the IWDG pretimeout and the
-pretimeout IRQ arrived immediately afterward, but too late to be
-handled by the suspend main loop. In case either of the IWDG is
-enabled, ping it first and then return to the OS.
+This patch series is my first attempt at supporting an LCD panel on the
+T113. I can confirm this specific use case works, but I've added code
+for the H6/H616 too in the process as a lot of the logic is the same.
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
- arch/arm/mach-stm32mp/stm32mp1/psci.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+I've also included an untested patch for HDMI support at the end in case
+anyone wants to work on it. It compiles and looks like it should work,
+but I haven't ungated/reset the slow HDMI clock, or HDMI sub.
 
-diff --git a/arch/arm/mach-stm32mp/stm32mp1/psci.c b/arch/arm/mach-stm32mp/stm32mp1/psci.c
-index 4f2379df45f..e99103910d9 100644
---- a/arch/arm/mach-stm32mp/stm32mp1/psci.c
-+++ b/arch/arm/mach-stm32mp/stm32mp1/psci.c
-@@ -808,6 +808,27 @@ void __secure psci_system_suspend(u32 __always_unused function_id,
- 	writel(SYSCFG_CMPENR_MPUEN, STM32_SYSCFG_BASE + SYSCFG_CMPENSETR);
- 	clrbits_le32(STM32_SYSCFG_BASE + SYSCFG_CMPCR, SYSCFG_CMPCR_SW_CTRL);
- 
-+	/*
-+	 * Make sure the OS would not get any spurious IWDG pretimeout IRQ
-+	 * right after the system wakes up. This may happen in case the SoC
-+	 * got woken up by another source than the IWDG pretimeout and the
-+	 * pretimeout IRQ arrived immediately afterward, but too late to be
-+	 * handled by the main loop above. In case either of the IWDG is
-+	 * enabled, ping it first and then return to the OS.
-+	 */
-+
-+	/* Ping IWDG1 and ACK pretimer IRQ */
-+	if (gic_enabled[4] & BIT(22)) {
-+		writel(IWDG_KR_RELOAD_KEY, STM32_IWDG1_BASE + IWDG_KR);
-+		writel(IWDG_EWCR_EWIC, STM32_IWDG1_BASE + IWDG_EWCR);
-+	}
-+
-+	/* Ping IWDG2 and ACK pretimer IRQ */
-+	if (gic_enabled[4] & BIT(23)) {
-+		writel(IWDG_KR_RELOAD_KEY, STM32_IWDG2_BASE + IWDG_KR);
-+		writel(IWDG_EWCR_EWIC, STM32_IWDG2_BASE + IWDG_EWCR);
-+	}
-+
- 	/*
- 	 * The system has resumed successfully. Rewrite LR register stored
- 	 * on stack with 'ep' value, so that on return from this PSCI call,
+Signed-off-by: John Watts <contact@jookia.org>
+---
+John Watts (9):
+      sunxi: clock: support H6/D1 video clocks
+      sunxi: ncat2: Specify DE2 and LCD0 base addresses
+      sunxi: sun50i-h6: Specify DE2 and LCD0 base addresses
+      sunxi: video: support LCD on H6/D1
+      sunxi: video: enable DE2 on H6/D1
+      sunxi: video: silence unused use_mipi_pll warning
+      sunxi: video: dummy out HDMI on H6/D1
+      sunxi: Enable display engine on H6/D1
+      sunxi: video: support HDMI on H6/H616
+
+ arch/arm/include/asm/arch-sunxi/clock_sun50i_h6.h | 65 ++++++++++++++++++
+ arch/arm/include/asm/arch-sunxi/cpu_sun50i_h6.h   |  3 +
+ arch/arm/include/asm/arch-sunxi/cpu_sunxi_ncat2.h |  3 +
+ arch/arm/mach-sunxi/Kconfig                       |  2 +
+ arch/arm/mach-sunxi/clock_sun50i_h6.c             | 81 +++++++++++++++++++++++
+ drivers/video/sunxi/lcdc.c                        | 23 +++++++
+ drivers/video/sunxi/sunxi_de2.c                   | 18 +++++
+ drivers/video/sunxi/sunxi_dw_hdmi.c               | 77 +++++++++++++++++++--
+ drivers/video/sunxi/sunxi_lcd.c                   |  6 +-
+ 9 files changed, 270 insertions(+), 8 deletions(-)
+---
+base-commit: 1f1bbbdf85b67316770a6964a4a02b73a720a167
+change-id: 20240420-d1_de2-9be81d56bd85
+
+Best regards,
 -- 
-2.43.0
+John Watts <contact@jookia.org>
 
