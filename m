@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF960C4345F
-	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 07:17:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE7B5C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 07:20:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 874998811C;
-	Sat, 20 Apr 2024 09:17:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 355DD8811C;
+	Sat, 20 Apr 2024 09:20:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="KXrrCKkA";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="dembg5R5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1EA0688124; Sat, 20 Apr 2024 09:17:51 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ id 44BD088125; Sat, 20 Apr 2024 09:20:57 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4B6B88113
- for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 09:17:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEF4E88113
+ for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 09:20:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1713597452; x=1714202252; i=xypron.glpk@gmx.de;
- bh=GVGeyRrURbAhEjQ2+pfdfqt2a3HOU9UQZw0/3bzutyo=;
+ s=s31663417; t=1713597637; x=1714202437; i=xypron.glpk@gmx.de;
+ bh=+TRrqiNvG/HPUnRx65GhosPNPdSTFabLjJtpZaR+q20=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=KXrrCKkA/iHJo4Eh15JWeIILgAwAL8QMUUKMJV/xPt95oHPl7/P756+iwMAFF0+B
- uM/4HGrsIxFlqwJrJqSuxZ6k82Z2+m7aT/Hprs21iktTtfYYb6tT6YqoP7TKu2WnK
- P5jJH7Y/WsOYfEkTRo5VjX9rq+sqn8W5WhOBq9xo8++eAqr8/54p6LJGJ31hVTCr7
- t5ofbfqdbLUy7WcVxUdKI0QAzSNqu+no7U/jtVomrqiQf/M7bfKl1CmENs5HIRltu
- RjkOd4R+2olArOkehptB/ukOqkOr5aYn9axQTsZXEHXRak48OUgKXUcxjMyTSLaF8
- IlHDiDEijfJJ/CtX5A==
+ b=dembg5R50Lzg6Y5nTsnUEfPSgn6ctiSgwCgVDdVld9SrCJqyVLPckOz5gPaGKhXM
+ HeKZ59/p/FE1DIcic9i0wMk+5DCiRC7fdCGIRASsAortbD5FICqUiIpd5+dLtWVIV
+ PkXSdmOx1ZRbemVBs03IHblNnpCoKztjoTlgNQNVFnxB8+otHuRGqsJq3M+gc39CQ
+ IFOxdVL+1fBFFVZYDAGiqO43stsaYk3fSt7xw6EywBhPs0pC0Ko63saL+Va/pWXRa
+ GqSXX06OAB+tBq3rakkAuSBPrn/YuI+tUiuQg+YPKvAXyru1WDZGH/VWYM9gFzE5f
+ bcqu3y+bwHwRQVjtvg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M26r3-1rzzqn04GP-002YLp; Sat, 20
- Apr 2024 09:17:32 +0200
-Message-ID: <3240a9af-9973-42bf-b09c-dd227dfcec54@gmx.de>
-Date: Sat, 20 Apr 2024 09:17:23 +0200
+Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MCKBm-1rohN92fMw-009T9u; Sat, 20
+ Apr 2024 09:20:37 +0200
+Message-ID: <3fd5c650-293b-482a-8f23-7ecdb28bc4c3@gmx.de>
+Date: Sat, 20 Apr 2024 09:20:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/4] efi_selftest: add tests for setvariableRT
+Subject: Re: [PATCH v3 0/4]
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: caleb.connolly@linaro.org, sumit.garg@linaro.org,
  quic_llindhol@quicinc.com, ardb@kernel.org, pbrobinson@gmail.com,
  pjones@redhat.com, Tom Rini <trini@konsulko.com>,
  Masahisa Kojima <kojima.masahisa@socionext.com>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Janne Grunau <j@jannau.net>,
+ Raymond Mao <raymond.mao@linaro.org>,
  Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Simon Glass <sjg@chromium.org>, Janne Grunau <j@jannau.net>,
  Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Sam Edwards <CFSworks@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
- Weizhao Ouyang <o451686892@gmail.com>, u-boot@lists.denx.de,
- kettenis@openbsd.org, AKASHI Takahiro <akashi.tkhro@gmail.com>
+ Sam Edwards <CFSworks@gmail.com>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>, Weizhao Ouyang <o451686892@gmail.com>,
+ u-boot@lists.denx.de, AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ kettenis@openbsd.org
 References: <20240418125456.50944-1-ilias.apalodimas@linaro.org>
- <20240418125456.50944-5-ilias.apalodimas@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240418125456.50944-5-ilias.apalodimas@linaro.org>
+In-Reply-To: <20240418125456.50944-1-ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:/6JtU9GVxwxIheRtQMURx3Q2bb/sXLMQlgTmz2OPMYs3/caD25B
- LqvnqpH853Czg1T1adY/oKxBHBqkUbG3DkGflPlhRsWPikVmpZ9xv6PM4OULyFX7W6lrUz1
- WVC5I0jPB5hCTNN0jY3rAvrVVBuPTwZz08DDPVRAP6Kw9YNqWLAECd3Z1MgqOS1kRqW9uFR
- JERkvI/fBPLpbrL29de4A==
-UI-OutboundReport: notjunk:1;M01:P0:j96xrkBuMRs=;BN7q66Uaqp29leXCr1B5eZEWlKG
- ScWisA3gjYSOYZURShduv11480PMkN3SD0qx5L1D4tPydZ+FoIAT6dFjosn1wSGDVeXApPjyF
- UX+ZT1v8Nui4ujXZbPRhAeq8nDaYnRO48pyMo7cL2jCyi7oXT/vGJuE5mkF9xzH6Sv03+9tOv
- hfsxVHloXruzXb7YKVvLsEVzN98HNN12fH7dodI9uICY9/K7X9St2nb2q63D66IRsTEhNYQRG
- K7iBRLS4pHCFLc3p87B/t/P8b6ewLa6g73LGOR/HNFd2jL+yZ0SaHjojy6eigpboYilDhMXX5
- bC2KAM3vHhSr4TK6d2XjZr0Eyiza8BBL+xOxqU2edkO1WkEwmptJozP1uiprSFhT6d+dcM3Dn
- 1Ya41dICrsKG9/8g6AXiFUcS5Pj8278os2TZXKrgwPxeHkHbFOXxXzbjKL0WsTH5e3LfIPNWJ
- vEr2eHfu72rjJlGlehiqF0BmMTiA7khsF4gWPz6HdXc1cv/xHotvxRmdWJdi8L/9R7Lav3MCE
- 8uUiKP3Norxpywl21cZm8rbik+P9PDHixtyJQju5oTrtG518qk9E48omYGRqY1wfnIRqNijyc
- MFcytC0XIg4D3WxkKsOfgJh+9PZ+AD8S10HGUSr7dw67Q2ZooZLFD0Rk53NiMmZ5nARwwlC1b
- dhZ9C/IBZqoL4tnEYxVxesJ/17YTh65VsL81c0aMrMpZ66rvEUXuO9bh3H73v/SeJhmFSv72Y
- aX1foO5nS+HkEywMdkP58huB2i/C2gmbHZ5OQ6AJo5EJe4Xl6DMWjzFFjAs+IKnHUfVW0efJ4
- 5qnj91sE1E3Yg4ULkNrzzSUsuj3PDWdAmPig0syLDN6wg=
+X-Provags-ID: V03:K1:Wv4fXlyUbSguphUqNU2I9idLTDb5NsjZX1KXJth4qNwCcjECvc8
+ qdG+oRbtu5HwJgMasJCtLhAMvSWprIbP6H6jPoAomSTMZjhgpKmBYrM0fYzvDBZwqF40DOb
+ STPWp5DfH56t0VLJnNwAkr00qXwAYa4nTtmIGU4UwO1+7i8HR6pT4C6QFe3CE49ZqroM/Vy
+ a72UUa+IacLba0YoVGg3g==
+UI-OutboundReport: notjunk:1;M01:P0:QsxoI9bdNsM=;4LSV01PJnH20sTl10QqHt0UyRjA
+ BHYM0c9urhKjCaO01Xv3YJexKbsvdwj5cPHNgll6X+5vREhkPTcWp81x8NFzOKOLuU8+nKJI3
+ CDJx5FBTeanABzDXM1MwGwIlQjrx5aWBTrhHv8DblKscJ/tcgqnTlCrhqBsjq5qXEpoHK+NpX
+ rpJYv1lG7Cpn6rIzqSvrgiEW9cNz+Y5shY42eDGRfrLrCb5TzdyI8QgW1VupDa6A0T56ew5dw
+ c93NRzuBtA4xJ/zb197yn3aI2pZgbHdzWKcLQ4O4jKQx+I+heX8ZdxqPLd9rJe03+n6VDy5Ai
+ I5qK0QNz4PIp1QWZOdHoRY03E+cLFa1VYCR0p7sOekUUawn2/GHtv0Np744mG2Jv0REQ0bxnO
+ ThxhUJKeoFTXF7fDPUbmxQ7NEna8K5qfNoUYu6fE+CQ6RTpYhL+aZ6PxJBoy6SRqjwwTHClMT
+ j7K5mcApFEUrqu/O8t0k4uygspgS+yeTghuHAvQ/5o19HoV/8uzXA83D/URGn7euRc/O5LkKP
+ eX7H99bgWfO9fFcPDvd+qpjedGPhF5RT1R4wzwzop6qWUcIuFjvv5Uoafnnzl0sygKj8zRTBq
+ HWFcFWLCOYYJnK7a9A1eOCDCO+UkHgjYbNgsJ/WrQ8ZiPKsFDRdpMVRNiiPmMs0rvtA9D8o4n
+ t9CevTlCCSTRd4YPVf3kNgGLre5yiQNKWS4JSJXqFSg87ufp1h43nZe6lIVWQF6gVVK6Utpq6
+ Df9bI7EzMYt/nGWVU1ygdSELVb4lfoFnkrNofQrJog3AN/pZTBFsFTMuCL4H2NlL9BJbdWzW1
+ I0P6evO6dYEvd2pwOxglkQYcKYIqV75X4AMJpU4UHdnEA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,299 +103,81 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 4/18/24 14:54, Ilias Apalodimas wrote:
-> Since we support SetVariableRT now add the relevant tests
+> Hi!
+> This is v3 of SetVariable at runtime [0]
 >
-> - Search for the RTStorageVolatile and VarToFile variables after EBS
-> - Try to update with invalid variales (BS, RT only)
-> - Try to write a variable bigger than our backend storage
-> - Write a variable that fits and check VarToFile has been updated
->    correclty
-> - Append to the variable and check VarToFile changes
-> - Try to delete VarToFile which is write protected
-> - Try to add/delete runtime variables
-> - Verify VarToFile contains a valid file format
+> Nothing changed drastically from v2.
+> A few more test cases have been added, comments/suggestions have been
+> addressed and a bug where deleting a variable by setting 'attributes' to
+> 0 has been fixed.
 >
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->   .../efi_selftest_variables_runtime.c          | 197 +++++++++++++++++-
->   1 file changed, 196 insertions(+), 1 deletion(-)
+> Changes since v2:
+> - Add more selftests checking for variable deletion as well as the
+>    VarToFile header format
+> - Use unaligned sized variables on tests
+> - Add a new function to get the variable entry length instead of
+>    repurposing efi_var_mem_compare()
+> - Converted VarToFile to RO
+> - Added a few comments requested by Heinrich
+> - Fixed a bug where SetVariable with attributes set to 0 did not delete
+>    the variable but returned EFI_INVALID_PARAMETER instead
+> - Run FWTS 'uefitests' and attach the log in patch #1
+> - Added r-b tags from Heinrich
 >
-> diff --git a/lib/efi_selftest/efi_selftest_variables_runtime.c b/lib/efi=
-_selftest/efi_selftest_variables_runtime.c
-> index 986924b881dd..28b4e9e7afa5 100644
-> --- a/lib/efi_selftest/efi_selftest_variables_runtime.c
-> +++ b/lib/efi_selftest/efi_selftest_variables_runtime.c
-> @@ -10,6 +10,8 @@
->    */
+> Changes since v1:
+> - Instead of Creating VarToFile at SetVariable, create it on GetVariable=
+.
+>    This allows us to get rid of the preallocated RT buffer, since the
+>    address is user provided
+> - convert Set/GetVariableRT -> Set/GetVariable at runtime
+> - return EFI_INVALID_PARAM is NV is not set at runtime
+> - Heinrich sent me the efi_var_collect_mem() variant
 >
->   #include <efi_selftest.h>
-> +#include <efi_variable.h>
-> +#include <u-boot/crc.h>
+> Changes since the RFC:
+> - Return EFI_INVALID_PARAM if attributes are not volatile
+> - Add EFI_WRITE_PROTECTED checks for BS, RT *only* variables
+> - Add 2 EFI variables and allow userspace to write the file
+> - Add selftests
 >
->   #define EFI_ST_MAX_DATA_SIZE 16
->   #define EFI_ST_MAX_VARNAME_SIZE 40
-> @@ -17,6 +19,8 @@
->   static struct efi_boot_services *boottime;
->   static struct efi_runtime_services *runtime;
->   static const efi_guid_t guid_vendor0 =3D EFI_GLOBAL_VARIABLE_GUID;
-> +static const efi_guid_t __efi_runtime_data efi_rt_var_guid =3D
-> +						U_BOOT_EFI_RT_VAR_FILE_GUID;
+> I also have a patch enable QueryVariableInfo [1], but I don't want to
+> introduce new patches now. This also needs a few more testcases of its
+> own so I'll send it once we finalize this one.
 >
->   /*
->    * Setup unit test.
-> @@ -41,15 +45,18 @@ static int setup(const efi_handle_t img_handle,
->   static int execute(void)
->   {
->   	efi_status_t ret;
-> -	efi_uintn_t len;
-> +	efi_uintn_t len, avail, append_len =3D 17;
->   	u32 attr;
->   	u8 v[16] =3D {0x5d, 0xd1, 0x5e, 0x51, 0x5a, 0x05, 0xc7, 0x0c,
->   		    0x35, 0x4a, 0xae, 0x87, 0xa5, 0xdf, 0x0f, 0x65,};
-> +	u8 v2[CONFIG_EFI_VAR_BUF_SIZE];
->   	u8 data[EFI_ST_MAX_DATA_SIZE];
-> +	u8 data2[CONFIG_EFI_VAR_BUF_SIZE];
->   	u16 varname[EFI_ST_MAX_VARNAME_SIZE];
->   	efi_guid_t guid;
->   	u64 max_storage, rem_storage, max_size;
+> [0] https://lore.kernel.org/u-boot/20240417101928.119115-1-ilias.apalodi=
+mas@linaro.org/T/
+> [1] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/commit/ce35270=
+aaeb93686d7e013f3b028808e8af88cc0
 >
-> +	memset(v2, 0x1, sizeof(v2));
->   	ret =3D runtime->query_variable_info(EFI_VARIABLE_BOOTSERVICE_ACCESS,
->   					   &max_storage, &rem_storage,
->   					   &max_size);
-> @@ -63,11 +70,199 @@ static int execute(void)
->   				    EFI_VARIABLE_RUNTIME_ACCESS,
->   				    3, v + 4);
->   	if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
-> +		efi_uintn_t prev_len, delta;
-> +		struct efi_var_entry *var;
-> +		struct efi_var_file *hdr;
-> +
->   		/* At runtime only non-volatile variables may be set. */
->   		if (ret !=3D EFI_INVALID_PARAMETER) {
->   			efi_st_error("SetVariable failed\n");
->   			return EFI_ST_FAILURE;
->   		}
-> +
-> +		/* runtime atttribute must be set */
-> +		ret =3D runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +					    EFI_VARIABLE_NON_VOLATILE,
-> +					    3, v + 4);
-> +		if (ret !=3D EFI_INVALID_PARAMETER) {
-> +			efi_st_error("SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +
-> +		len =3D sizeof(data);
-> +		ret =3D runtime->get_variable(u"RTStorageVolatile",
-> +					    &efi_rt_var_guid,
-> +					    &attr, &len, data);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			efi_st_error("GetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
+> Regards
+> /Ilias
+>
+> Ilias Apalodimas (4):
+>    efi_loader: conditionally enable SetvariableRT
+>    efi_loader: Add OS notifications for SetVariable at runtime
+>    efi_loader: add an EFI variable with the file contents
+>    efi_selftest: add tests for setvariableRT
 
-We should check data against EFI_VAR_FILE_NAME.
-
-+               if (len !=3D sizeof(EFI_VAR_FILE_NAME) ||
-+                   memcmp(data, EFI_VAR_FILE_NAME,
-+                          sizeof(EFI_VAR_FILE_NAME))) {
-+                       data[len - 1] =3D 0;
-+                       efi_st_error("RTStorageVolatile =3D %s\n", data);
-+                       return EFI_ST_FAILURE;
-+               }
-+
-
-(memcmp() because we want to be able to carve out efi_selftest as a
-standalone binary in future).
-
-> +
-> +		len =3D sizeof(data2);
-> +		ret =3D runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
-> +					    &attr, &len, data2);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			efi_st_error("GetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +		/*
-> +		 * VarToFile size must change once a variable is inserted
-> +		 * Store it now, we'll use it later
-> +		 */
-> +		prev_len =3D len;
-> +		ret =3D runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +					    EFI_VARIABLE_RUNTIME_ACCESS |
-> +					    EFI_VARIABLE_NON_VOLATILE,
-> +					    sizeof(v2),
-> +					    v2);
-> +		/*
-> +		 * This will try to update VarToFile as well and must fail,
-> +		 * without changing or deleting VarToFile
-> +		 */
-> +		if (ret !=3D EFI_OUT_OF_RESOURCES) {
-> +			efi_st_error("SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +		len =3D sizeof(data2);
-> +		ret =3D runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
-> +					    &attr, &len, data2);
-> +		if (ret !=3D EFI_SUCCESS || prev_len !=3D len) {
-> +			efi_st_error("Get/SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +
-> +		/* Add an 8byte aligned variable */
-> +		ret =3D runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +					    EFI_VARIABLE_RUNTIME_ACCESS |
-> +					    EFI_VARIABLE_NON_VOLATILE,
-> +					    sizeof(v), v);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			efi_st_error("SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +
-> +		/* Delete it by setting the attrs to 0 */
-> +		ret =3D runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-> +					    0, sizeof(v), v);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			efi_st_error("SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +
-> +		/* Add it back */
-> +		ret =3D runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +					    EFI_VARIABLE_RUNTIME_ACCESS |
-> +					    EFI_VARIABLE_NON_VOLATILE,
-> +					    sizeof(v), v);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			efi_st_error("SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +
-> +		/* Delete it again by setting the size to 0 */
-> +		ret =3D runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +					    EFI_VARIABLE_RUNTIME_ACCESS |
-> +					    EFI_VARIABLE_NON_VOLATILE,
-> +					    0, NULL);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			efi_st_error("SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +
-> +		/* Delete it again and make sure it's not there */
-> +		ret =3D runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +					    EFI_VARIABLE_RUNTIME_ACCESS |
-> +					    EFI_VARIABLE_NON_VOLATILE,
-> +					    0, NULL);
-> +		if (ret !=3D EFI_NOT_FOUND) {
-> +			efi_st_error("SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +
-> +		/*
-> +		 * Add a non-aligned variable
-> +		 * VarToFile updates must include efi_st_var0
-> +		 */
-> +		ret =3D runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +					    EFI_VARIABLE_RUNTIME_ACCESS |
-> +					    EFI_VARIABLE_NON_VOLATILE,
-> +					    9, v + 4);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			efi_st_error("SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +		var =3D efi_var_mem_find(&guid_vendor0, u"efi_st_var0", NULL);
-> +		if (!var) {
-> +			efi_st_error("GetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +		delta =3D efi_var_entry_len(var);
-> +		len =3D sizeof(data2);
-> +		ret =3D runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
-> +					    &attr, &len, data2);
-> +		if (ret !=3D EFI_SUCCESS || prev_len + delta !=3D len) {
-
-Please, provide separate messages for length and GetVariable.
-
-                 ret =3D runtime->get_variable(u"VarToFile", &efi_rt_var_g=
-uid,
-                                             &attr, &len, data2);
-                 if (ret !=3D EFI_SUCCESS) {
-                         efi_st_error("GetVariable failed\n");
-                         return EFI_ST_FAILURE;
-                 }
-                 if (prev_len + delta !=3D len) {
-                         efi_st_error("Unexpected VarToFile size"),
-                         return EFI_ST_FAILURE;
-                 }
+I am missing a defconfig change which is needed to run the unit test in
+Gitlab CI. I would prefer testing this on the sandbox.
 
 Best regards
 
 Heinrich
 
-> +			efi_st_error("Get/SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +
-> +		/*
-> +		 * Append on an existing variable must update VarToFile
-> +		 * Our variable entries are 8-byte aligned.
-> +		 * Adding a single byte will fit on the existing space
-> +		 */
-> +		prev_len =3D len;
-> +		avail =3D efi_var_entry_len(var) -
-> +			(sizeof(u16) * (u16_strlen(var->name) + 1) + sizeof(*var)) -
-> +			var->length;
-> +		if (avail >=3D append_len)
-> +			delta =3D 0;
-> +		else
-> +			delta =3D ALIGN(append_len - avail, 8);
-> +		ret =3D runtime->set_variable(u"efi_st_var0", &guid_vendor0,
-> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +					    EFI_VARIABLE_RUNTIME_ACCESS |
-> +					    EFI_VARIABLE_APPEND_WRITE |
-> +					    EFI_VARIABLE_NON_VOLATILE,
-> +					    append_len, v2);
-> +		if (ret !=3D EFI_SUCCESS) {
-> +			efi_st_error("SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +		len =3D sizeof(data2);
-> +		ret =3D runtime->get_variable(u"VarToFile", &efi_rt_var_guid,
-> +					    &attr, &len, data2);
-> +		if (ret !=3D EFI_SUCCESS || prev_len + delta !=3D len) {
-> +			efi_st_error("Get/SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +
-> +		/* Make sure that variable contains a valid file */
-> +		hdr =3D (struct efi_var_file *)data2;
-> +		if (hdr->magic !=3D EFI_VAR_FILE_MAGIC ||
-> +		    len !=3D hdr->length ||
-> +		    hdr->crc32 !=3D crc32(0, (u8 *)((uintptr_t)data2 + sizeof(struct =
-efi_var_file)),
-> +					len - sizeof(struct efi_var_file))) {
-> +			efi_st_error("VarToFile invalid header\n");
-> +			return EFI_ST_FAILURE;
-> +		}
-> +
-> +		/* Variables that are BS, RT and volatile are RO after EBS */
-> +		ret =3D runtime->set_variable(u"VarToFile", &efi_rt_var_guid,
-> +					    EFI_VARIABLE_BOOTSERVICE_ACCESS |
-> +					    EFI_VARIABLE_RUNTIME_ACCESS |
-> +					    EFI_VARIABLE_NON_VOLATILE,
-> +					    sizeof(v), v);
-> +		if (ret !=3D EFI_WRITE_PROTECTED) {
-> +			efi_st_error("Get/SetVariable failed\n");
-> +			return EFI_ST_FAILURE;
-> +		}
->   	} else {
->   		if (ret !=3D EFI_UNSUPPORTED) {
->   			efi_st_error("SetVariable failed\n");
+>
+>   include/efi_loader.h                          |   4 +
+>   include/efi_variable.h                        |  16 +-
+>   lib/charset.c                                 |   2 +-
+>   lib/efi_loader/Kconfig                        |  16 ++
+>   lib/efi_loader/efi_runtime.c                  |  42 ++++
+>   lib/efi_loader/efi_var_common.c               |   6 +-
+>   lib/efi_loader/efi_var_mem.c                  | 151 ++++++++-----
+>   lib/efi_loader/efi_variable.c                 | 122 ++++++++--
+>   lib/efi_loader/efi_variable_tee.c             |   5 -
+>   .../efi_selftest_variables_runtime.c          | 211 +++++++++++++++++-
+>   10 files changed, 495 insertions(+), 80 deletions(-)
+>
+> --
+> 2.40.1
+>
 
