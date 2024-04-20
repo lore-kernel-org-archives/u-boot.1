@@ -4,79 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7446FC4345F
-	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 18:38:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65CC0C04FFE
+	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 23:02:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F236D887D7;
-	Sat, 20 Apr 2024 20:38:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5A98088210;
+	Sun, 21 Apr 2024 01:02:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KhAB7Fzx";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id AE4C4887D8; Sat, 20 Apr 2024 20:38:13 +0200 (CEST)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1713654154;
+	bh=TR3KwQcDGTd0Q49khG1erjmAIEPnGJzuOj1g5x0nZxM=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=EE02BHSDVUzjyVdha0ENmET6+nf1Wx0zvCJGTW5oR5Zfwqn5ME10l78pmGzA+ipb2
+	 cEMzoRE8zVzlRiHbnz9Xq1Tzxb0RL9Wpsf2jhSWBScvxW8jaWTEjvBVzX+qzA3WxFN
+	 Ro7uKSIwrkb4oOyjjSaGBMd2nlnPXgP+EKimwYOcoRHQ9KWf3n58bNLXMLfMT/qHZf
+	 s4pbUqcNT+4wyb1JhFMlV5PGXxQz+gmi8ceRXMG5t38Cqxl8wwpzPdHtv7X3y1ZAe0
+	 wzDnvJjzwjaXb4zgJUvMnc9EU4mZ51EhCje2Bqc/i2k+igd4D+ZFuXvqKe45obFUY5
+	 ddpTmy7n/QYyQ==
+Received: from crub (p508b6ab0.dip0.t-ipconnect.de [80.139.106.176])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90C3988791
- for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 20:38:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-1e84787b0a8so4332905ad.1
- for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 11:38:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713638290; x=1714243090; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=H5PVRI9WYI5WmGt/rEStKo+Hg85iUgMrG+1cY4GO6GI=;
- b=KhAB7FzxuHNDWf6ZUVaIvABLhUcXobXYbIvTDpVbHjnzzbYFUZhhmrIX0Y+1pG+B5T
- OEzNk0S00WOQUDOVyO4vW8EzuQru02JuHsERUjDC+9zoCb1nB7x1b1TM9LZA6iM/DzLv
- p6c6b7YrGf/38sg2r1a33JqMafX0OPM77o/YL6zBBrMq8oGL9UG6gWTVGuDOhCj5oI3/
- 6HbxA5c338vPpEMKFku2ej8OsYxP2DhutlTBuvHsccRqLjf6sTBQboCWsq4zyKo6zNUx
- mIuBs1C2tzHjJ2nLKA5Gkb+sur/Yrzi2NyICV9+VLR0EAjMuP1XkINcP/fqTePLVSXvj
- OMig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713638290; x=1714243090;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=H5PVRI9WYI5WmGt/rEStKo+Hg85iUgMrG+1cY4GO6GI=;
- b=fjJUAAS9sI0kRc3z1NP3SOB9rOoHUV27Du1UhpeGiLNgVuqf2bQI6DeyH5yki/jQh9
- HgmNZUZrpypR6ZgpHmLaR0zDRZf0r3Q3+pRhaf9An6D6/gk/g7v+1FBt+9UJ2VLkO9LR
- UwOlva0H9ZDcLs5OYg31WNKGuSP5mAtj9A8j9kvf/AiW8nlQnwbs6iEsXSjDwmCu2xvN
- hKN+V6QVlmPz7nlhQ5SJPXpLlMIPb9idYakqEHw4lR5ssBHUaCfe+RphDcv9wfoPDvDq
- g9uE8kYGKx2YsGmX9/rbIwWT4PiEOkigOqYtRfd7zppVvq2K0pkqWtp0TPr06N5TVkkz
- N2Fw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWh1R8Lj4hL8cCNhRNSKCZZsY6qdL5LofZ/K2LFRUz10JlSlTJjhD5rmhD5lHAKo+Ulb51lVUQ6tg/FL2b/Iff0LWjHGA==
-X-Gm-Message-State: AOJu0YysBM3MisM1x527pEhky9pb42LoM0mDSoRMbJbjC/vyHSenAUMl
- MNs2NMdZkipG9xXMtsx9PVgM9ts3l21lWkfuLuNj3J2/vu+trgQihYzhkksBuyWfiHvf+Kd4DnP
- ZB+ziyDKnZepTXHnegGGd2UQqGboisQ==
-X-Google-Smtp-Source: AGHT+IH7/7yrDSKaSKYvW0qcRM3bLhPnOM6UqMTfrBnxZmnoSRpHo+lmqqiEdEOhWOG+7tPM3FaNuJejc3F+E2Gn4Pk=
-X-Received: by 2002:a17:90a:530d:b0:2ac:26d8:746d with SMTP id
- x13-20020a17090a530d00b002ac26d8746dmr5633438pjh.2.1713638290096; Sat, 20 Apr
- 2024 11:38:10 -0700 (PDT)
-MIME-Version: 1.0
-References: <20240419152902.4156600-1-tharvey@gateworks.com>
-In-Reply-To: <20240419152902.4156600-1-tharvey@gateworks.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 20 Apr 2024 15:37:59 -0300
-Message-ID: <CAOMZO5A57OTzTWWSs9BB0iLjfM-GaW-6exmMRtWXHjkcQ2GDAQ@mail.gmail.com>
-Subject: Re: [PATCH v3 1/3] clk: imx8mm: Add support for PCIe clocks
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Sumit Garg <sumit.garg@linaro.org>, Martyn Welch <martyn.welch@collabora.com>, 
- Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ (Authenticated sender: agust@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3FDF3881FB;
+ Sun, 21 Apr 2024 01:02:33 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1713654153;
+ bh=TR3KwQcDGTd0Q49khG1erjmAIEPnGJzuOj1g5x0nZxM=;
+ h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+ b=dkAjYgiwfQFquqJKdI11QiSF8H5X/AOAq1Pld8M8AepvviANSun7P6KHL/L5/mzAj
+ aW7fMpwYMI3hBcfGm7P2m/ftKJ50ehQLqClraQFMTzN9xJQO34VjywU2Ao4hv6uhlE
+ RER5EH0A9rqmMm+iW4//G6UivS27N7D2vN/F9247Nf/UFlY1FdWtnV+oBjBqYrYO/J
+ hwXvb5yeZYdkcWlMXgr3Pte0YeP4lg7Tvo/HAPdBZJscqkmcFmps57yDoV7plPXIH6
+ I0VV5gOFrXm16hg+d4S6OgSyr3yyt3IfNxTRxeFp92znxV7mFrISEGqi+fGQxgZ9+B
+ pL+pnuBTh94Rg==
+Date: Sun, 21 Apr 2024 01:02:12 +0200
+From: Anatolij Gustschin <agust@denx.de>
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Thierry Reding <treding@nvidia.com>, Simon Glass <sjg@chromium.org>,
  u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Subject: Re: [PATCH v6 00/18] Add T114 video support
+Message-ID: <20240421010212.1c68d9ea@crub>
+In-Reply-To: <20240123171633.246057-1-clamor95@gmail.com>
+References: <20240123171633.246057-1-clamor95@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,15 +67,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Apr 19, 2024 at 12:29=E2=80=AFPM Tim Harvey <tharvey@gateworks.com>=
- wrote:
->
-> Add support for PCIe clocks required to enable PCIe support on
-> iMX8MM SoC.
->
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
-> ---
-> v3: wrap pcie clk config around IS_ENABLED to avoid SPL growth as
->     suggested by Marek
+On Tue, 23 Jan 2024 19:16:15 +0200
+Svyatoslav Ryhel clamor95@gmail.com wrote:
 
-Applied all, thanks.
+> T114 is not that different from T30 and all T30 drivers will work
+> on T114 as well with some adjustments.
+> 
+> Patches propose general improvements for existing Tegra DC and DSI
+> drivers as well Tegra 114 video support (experimentl).
+> 
+> Commits pass buildman for tegra.
+
+Series applied to u-boot-video, except patch 06/18.
+
+--
+Anatolij
