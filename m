@@ -4,56 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 986BAC4345F
-	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 23:10:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C125C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 23:13:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CCA6A88210;
-	Sun, 21 Apr 2024 01:10:15 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AD84B8818C;
+	Sun, 21 Apr 2024 01:13:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1713654615;
-	bh=p2P881eGySLYh/tHfheAipkjQyn0N7NbSSy0nh2JAMk=;
+	s=phobos-20191101; t=1713654785;
+	bh=460p05lnPOCUvqT1K1coWnn5jQ+Tx+rzWiwIB4Ns3/g=;
 	h=Date:From:To:Cc:Subject:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=jLZsPyW1bOe7TGmhIa3A+xsaMQlVRImBrCdchaiXe0wXHeIRQkFnCROYdtwFNUS2j
-	 XX0+2FLYQRnsXeBHcKjhrVtlu+vXPUdWiN9EZHJGDNE+DDe1FyfGxvexd9OGD+CBGF
-	 avTYvJtbGkriy36nwMUzMpJgCbf+zGEpeGTO/xEgI084BkcZhxKPfrOKs/04fy00Y7
-	 RQwFzNXIukDPzyIx9KALHuf4eULUudeizq3LighnK8INHbBEwevNfvIdSy6jr4A+qz
-	 ZLW55OOIwLnpHhy1eU4/Vkj/lH7nYGkssO+AZrgAMRePlWwLJDMCIb4eXrJ9AdO9mw
-	 /yhobRmU1o3yw==
+	b=gkMXsGh8U5ueVVQzGvVec/iZMK4Tg9K0gysW/8xiJP+xNYJcDD6UiXJmIxXgM9Q76
+	 VY9abuKlfCcBygJ9fZkvOIvLsDomw1WaARpAzGzSCnL/lCcxC2p7/flXlrFXJzjPeX
+	 tEilpY05DGonXa2V24XFcFQUIz8h6WoAeTN4ZoRr6V7RFWhdx/sG8EVlSnfyT8aifY
+	 y2aNjrwlSZv8trrwXZBAvDZhmKH5NUbA5e5d3AHwBL65McfXgj4ulltRwnbr05MJP6
+	 jJ2Rib0Dkbij+5T0E8rNEjCatn+67jSO5S8DwXzvfbgZj3enq13wkg9NelkrnnqR4I
+	 GBhcNN9/hzQdA==
 Received: from crub (p508b6ab0.dip0.t-ipconnect.de [80.139.106.176])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: agust@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 2DBD688003;
- Sun, 21 Apr 2024 01:10:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id E629B88003;
+ Sun, 21 Apr 2024 01:13:03 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1713654614;
- bh=p2P881eGySLYh/tHfheAipkjQyn0N7NbSSy0nh2JAMk=;
+ s=phobos-20191101; t=1713654784;
+ bh=460p05lnPOCUvqT1K1coWnn5jQ+Tx+rzWiwIB4Ns3/g=;
  h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
- b=fky3d+MAkZxurJ+uZsewiAcQtwN+x18TtaH7NBPSyKh8HWLitohvCxYURXTMnVc0U
- /0UT62rxQ5yrtcpVvlX55qUb5FhYBAWdzfqwUNqhz8AZoFZEB0HNfHebp3cSZsBUtj
- UdkaV14SEZtO0jZmay5TxmzXM81MWQvtpDMf51ey8tpnioMZ50GLECJqKUA2m6r0Gx
- urqnNxTtOm7cdFroz3HUEuWGNpFyKcIAcZUR25yyxq32Pr/6RAH8HQJsn4uAsWsjCl
- Wims/+ySoJKtXGz0VLNOQLNrSDlyxJifP8uq76SOse+lrEQOs4FkY1vdQJIi9dGlzH
- noYPCDc82bkbw==
-Date: Sun, 21 Apr 2024 01:09:53 +0200
+ b=fT2qsrhQ6Z3s9fsxF1tLFhiP6XKv//iBcdV9tWZwbzOEyDDePhzMvYHaC+QHMwOG2
+ BlzRE7CEztyyKAL6oDWrKPnZtGwaJCm1FDN0JT7bwALkk516PND9rQ8BsuMyuGiRBG
+ YyHOVwDW8689r3ysLTsoU4QHq8HDsMl8X9RZteJ6vMEKmYnGqt8qF9UOlKl6EOxa84
+ qsokEb5Ay2mIebq8xT5caeIzH4FnI98uL/kxu6vzY/6jifCdyBGjBefKqyPYUatJTN
+ RqeuiUIAdbpFWoG0eV8SmUIuePjXlXR9uuMTmMpQSSUI7Yb2yryys67LqisRi4r2Na
+ iGIuMup2FIOYw==
+Date: Sun, 21 Apr 2024 01:12:43 +0200
 From: Anatolij Gustschin <agust@denx.de>
-To: Devarsh Thakkar <devarsht@ti.com>
-Cc: <u-boot@lists.denx.de>, <sjg@chromium.org>, <trini@konsulko.com>,
- <bmeng@tinylab.org>, <xypron.glpk@gmx.de>, <patrick.delaunay@foss.st.com>,
- <patrice.chotard@foss.st.com>, <hvilleneuve@dimonoff.com>,
- <michal.simek@amd.com>, <troykiskyboundary@gmail.com>,
- <j-humphreys@ti.com>, <afd@ti.com>, <praneeth@ti.com>, <nm@ti.com>,
- <vigneshr@ti.com>, <a-bhatia1@ti.com>, <j-luthra@ti.com>, <nsekhar@ti.com>,
- <n-jain1@ti.com>
-Subject: Re: [PATCH 0/4] Simplefb and fb reservation related updates
-Message-ID: <20240421010953.37384c64@crub>
-In-Reply-To: <83db0246-18a6-05ab-3e76-472ad0cc688b@ti.com>
-References: <20240222130811.3878567-1-devarsht@ti.com>
- <83db0246-18a6-05ab-3e76-472ad0cc688b@ti.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Rob Clark <robdclark@gmail.com>,
+ u-boot@lists.denx.de
+Subject: Re: [PATCH] video: simplefb: modernise DT parsing
+Message-ID: <20240421011243.4ea466fd@crub>
+In-Reply-To: <20240216183840.879482-1-caleb.connolly@linaro.org>
+References: <20240216183840.879482-1-caleb.connolly@linaro.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
@@ -73,27 +67,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 8 Mar 2024 16:38:28 +0530
-Devarsh Thakkar devarsht@ti.com wrote:
+On Fri, 16 Feb 2024 18:38:06 +0000
+Caleb Connolly caleb.connolly@linaro.org wrote:
 
-> Hi Tom, Anatolij, Simon,
+> simplefb was using old style FDT parsing which doesn't behave well in
+> combination with livetree. Update it to use ofnode instead and add a
+> missing null check for the "format" property.
 > 
-> On 22/02/24 18:38, Devarsh Thakkar wrote:
-> > This adds support for simple-framebuffer reservation using video handoff
-> > when splash is enabled at SPL stage.
-> > 
-> > Also adds helper function to only enable framebuffer reservation without
-> > enabling simple-framebuffer in case user want to continue display
-> > bootloader splash without displaying anything else in between until
-> > kernel boots up.
-> > 
-> > Lastly, it enables above support on AM62x.
-> >   
+> Standardise the error logging while we're here.
 > 
-> I saw a RB on first 3 patches so just wanted to check if it looks good to you
-> too then is it possible to pull in the first 3 patches if no further comments ?
+> Fixes: 971d7e64245d ("video: simplefb")
+> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>  drivers/video/simplefb.c | 32 ++++++++++++++++++++------------
+>  1 file changed, 20 insertions(+), 12 deletions(-)
 
-patches 1 to 3 applied to u-boot-video. Fixed build errors with patch 3.
+applied to u-boot-video.
 
 --
 Anatolij
