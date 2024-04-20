@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC327C4345F
-	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 18:35:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6C46C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 18:35:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE4BA88793;
-	Sat, 20 Apr 2024 20:35:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 16CFA8879C;
+	Sat, 20 Apr 2024 20:35:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RPPL3vlf";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="iDrelgMY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B5468879B; Sat, 20 Apr 2024 20:35:12 +0200 (CEST)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 9AD2A887BD; Sat, 20 Apr 2024 20:35:42 +0200 (CEST)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F58F88791
- for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 20:35:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2506588785
+ for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 20:35:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-1e825c89538so4219295ad.3
- for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 11:35:09 -0700 (PDT)
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2ab48c1c007so765374a91.2
+ for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 11:35:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713638108; x=1714242908; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1713638138; x=1714242938; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=cIV7Pd3yymQ5bjiu4+H5kiOGfkl9ztSWbffB1b/TZ9g=;
- b=RPPL3vlfmROhxCEhuECZuPeoKKxS4201WsNwFsuridRABxPA+CnSNMdHFdec424X6A
- lW6mDGJ/O776BHbBdHpOx5YCS6rC2+n0YPBs99yvZRon84fsOm2C0G/ZJifWnp/9vLTI
- c3tQdHdSNCsJQGaBQOVPH5VDzcFr7yk04OVrLuWmMRgHgtqr7vhhjrlHEJ4USXOLijRb
- oipcQkzxhztp2WdOWdy73Wc6+pf//hQ0XUDYVmPq0zszUvCFrhhScYgs97spgOYmMYYX
- cc9JHKsXh4+j8xdUjj9wNvOmz21SyMnfiu3QwpTCB0rtLRVrEfWb7weWDrNcBw7Xy5Yz
- dBnA==
+ bh=BcdOCt1JR0sX16nFHCOaenkQd3jZWopg0njmZkkCVa0=;
+ b=iDrelgMY6Iep4mI7MTTeuoiH5Ep1LvEjWMuz7orfpZX3iITMahhrOsYYY/ynh4F7ia
+ R/Z68hcbvWAs+kYPBAk1mDpOCRaww5RWXnNp+kedar08W9avWuorbeEkrHlG2X8xolOx
+ GiHTKyySct0R7OlCH7TnJM4r3JIEWwpBSVfKlxUM9m0g8nkZiEt4Umuv+RBoAqW9d7GR
+ 9PEb9CML5XVBCLYakYfA0+CTA8uNZCPTcvM4NyfV12AasghpC6bqdhqW26BnFb/h82t5
+ 2RysX7ee2sxyJ5rkEHcaI0t0xG0UaHOZGirGt2TigmCUofziCFMXGk/edKwQbhS4rJov
+ yBdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713638108; x=1714242908;
+ d=1e100.net; s=20230601; t=1713638138; x=1714242938;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cIV7Pd3yymQ5bjiu4+H5kiOGfkl9ztSWbffB1b/TZ9g=;
- b=xRUGc2c+A2A3wiedfmZDqWQS5l1jyUXUk7DVjSjPnfaef5yvJcgENxBC77xM0KThPx
- jrKiaPkHPeo8YCHlYQGDgwjRP6PYleDKukJ4MWXkNpAbGYOVcA5LEucK0Qy3FKzbjk69
- UmOX6o3EQC0Dlc7A2gwI5ex7es7eqSf5x3yl7TvV4MxY2kNBy8rJxTNaIotrI0ix8INW
- YYI2MQfHHrsuTVHfJyWjDEu/WxhqBniK/VN5h7ydvGOrFhoXnXzR8OLrH5VRzIhSr91L
- wSMGRKE6fVG9pgfsa9PIFVPpHYWAzB+IafBpDtfA0bOnjWbbMN4SmwtZIQlJFdmKDYJX
- OrUQ==
+ bh=BcdOCt1JR0sX16nFHCOaenkQd3jZWopg0njmZkkCVa0=;
+ b=gSUWRM41wVhW49OfcMgIxo9cTEI0p4XZh3VJwge/2aAw3Dwl4Mawetiqe5rMSau36O
+ 9SB6b/DH59hGDkKxhPleQuwwTFdlQ/Di+c+R7WUKgGH1uNqznqHEqhj/Pvwey8aBsyA/
+ eg/VjUOdW/rJvYfduie50/ifVLyMF4iTJcK00RzeydhkSxHmPpESejmJ/ywN0E2I46VJ
+ 5Rf8nUueca3Dkg7skImV7AYNdk06eaHNKxGocBTjAbLNbz9ibxjINGo1kY46fTrSB4su
+ rPQT9/CyUdqZ0TTUdOWRDgapXoMCQGswmj2HaUB5itP/oMvWiftBqvn0IVGBTcvwUXB0
+ omsg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUcHoCen1wNp6noJHeWuXoDxLi2+t+QLs71MJ8mb8SQ2Pdgyw2U3iJNQDBjzb5AJ27U5WscYJ3gsOD50mRHVm4bYju1dQ==
-X-Gm-Message-State: AOJu0Yz28lJtt91bvVteuvvd9Qv0f9AuKVVk89/sJNq/EXJ81nL6+FTC
- gzQFaWqF/fiKEji5LCOccfFNj7X0R2S7xp+CF1ddOQPtHilM1LaVhJ58MOMLpMZMRCrKW/sCIHU
- mv1bbOQlZ7nt48M7+tWBIopWpTAQ=
-X-Google-Smtp-Source: AGHT+IEseXdSHXHJEu9VTqZpbdvnP3lyTkCc+WwvarXrKRN7oGHyixL+F2HJXrpSae7j0JtxmN6ftwJUeQd2Qj84fck=
-X-Received: by 2002:a05:6a20:3202:b0:1ac:3efb:2889 with SMTP id
- hl2-20020a056a20320200b001ac3efb2889mr6036144pzc.0.1713638108586; Sat, 20 Apr
- 2024 11:35:08 -0700 (PDT)
+ AJvYcCUd714Q3X15mVnfDiJV7tgxMFj2JL26DDxeB1iDOKAB2o20JNKJ+HLG+l8NYdU0JvrrcB6dqs2JUZQkJ6JEpmKPPiXc9A==
+X-Gm-Message-State: AOJu0YzkL8aydFIa8TE79+6M/oJxGBODtyVkBm5tM6q2lxyQwCAn7kBO
+ bRdrOavKVSmI4getAd6j+vEXHc/zBFFj+qPfGU+UqREM+kP3gnDFPF2wNeIINaH1TtO96jkyBGI
+ Ql6sFCB9FcZCRw1OZwtJ5lifDEkM=
+X-Google-Smtp-Source: AGHT+IHZZfaC2WwteibkIKXmlQSHhGsX/IjZkMO4jIshlCV63UM4kCurxddY3BnhUc42uU2W4Xoa9RG2mX9GE9/uIvI=
+X-Received: by 2002:a17:90a:b292:b0:29c:7487:43b8 with SMTP id
+ c18-20020a17090ab29200b0029c748743b8mr5649540pjr.1.1713638138618; Sat, 20 Apr
+ 2024 11:35:38 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240415215717.3732484-1-festevam@gmail.com>
-In-Reply-To: <20240415215717.3732484-1-festevam@gmail.com>
+References: <20240417084902.13904-1-eichest@gmail.com>
+In-Reply-To: <20240417084902.13904-1-eichest@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 20 Apr 2024 15:34:58 -0300
-Message-ID: <CAOMZO5D6q9yOAQxCptVM1hBr6e=h3gBc-Td2GVDVvun1Gg9W_Q@mail.gmail.com>
-Subject: Re: [PATCH] imx93: Move SoC and lifeclycle information to debug level
-To: festevam@gmail.com
-Cc: ye.li@nxp.com, m.othacehe@gmail.com, u-boot@lists.denx.de, 
- Fabio Estevam <festevam@denx.de>
+Date: Sat, 20 Apr 2024 15:35:28 -0300
+Message-ID: <CAOMZO5DJ-xOBA9z-AFpvKP6eEonMrwruKQb394ixmbT3Nmvy=g@mail.gmail.com>
+Subject: Re: [PATCH v1] arm: dts: verdin-imx8mm/imx8mp: use gpio-hog for sleep
+ moci
+To: Stefan Eichenberger <eichest@gmail.com>
+Cc: marcel.ziswiler@toradex.com, sbabic@denx.de, uboot-imx@nxp.com, 
+ trini@konsulko.com, francesco.dolcini@toradex.com, 
+ emanuele.ghidoli@toradex.com, tharvey@gateworks.com, 
+ andrejs.cainikovs@toradex.com, stefan.eichenberger@toradex.com, 
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,19 +94,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 15, 2024 at 6:57=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
-wrote:
+On Wed, Apr 17, 2024 at 5:49=E2=80=AFAM Stefan Eichenberger <eichest@gmail.=
+com> wrote:
 >
-> From: Fabio Estevam <festevam@denx.de>
+> From: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 >
-> The following information printed on every boot is not very
-> helpful for the users:
+> In Linux, we allow sleep moci to be turned off when the carrier board
+> supports it and the system is in suspend. In U-Boot, however, we want
+> the sleep moci to be always on. So we use a gpio hog and disable the
+> regulator. This change is necessary because we switched to upstream
+> device tree files with commit 23fe2def1edf
+> ("verdin-imx8mm/verdin-imx8mp: move imx verdins to OF_UPSTREAM"). A
+> recent upstream patch removes the gpio hog from the Linux device tree,
+> so we need to add it to the u-boot dtsi. The following patch will remove
+> the gpio hog from the Linux device tree:
+> https://lore.kernel.org/linux-devicetree/20240405160720.5977-1-eichest@gm=
+ail.com/
+> The U-Boot patch can be applied without it and will not break the build.
 >
-> SOC: 0xa0009300
-> LC: 0x40040
->
-> Move them to debug() level.
->
-> Signed-off-by: Fabio Estevam <festevam@denx.de>
+> Signed-off-by: Stefan Eichenberger <stefan.eichenberger@toradex.com>
 
 Applied, thanks.
