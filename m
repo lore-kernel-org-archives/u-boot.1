@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3158C4345F
-	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 18:37:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7446FC4345F
+	for <u-boot@archiver.kernel.org>; Sat, 20 Apr 2024 18:38:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85999887C6;
-	Sat, 20 Apr 2024 20:37:23 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F236D887D7;
+	Sat, 20 Apr 2024 20:38:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P64ANeMV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KhAB7Fzx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FF76887D0; Sat, 20 Apr 2024 20:37:21 +0200 (CEST)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id AE4C4887D8; Sat, 20 Apr 2024 20:38:13 +0200 (CEST)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6B30E88791
- for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 20:37:19 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 90C3988791
+ for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 20:38:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-1e4edcde7a1so5522005ad.0
- for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 11:37:19 -0700 (PDT)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-1e84787b0a8so4332905ad.1
+ for <u-boot@lists.denx.de>; Sat, 20 Apr 2024 11:38:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713638238; x=1714243038; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1713638290; x=1714243090; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Kr0iEBzBnThGsFtbI+R+dzCxocAtqeaa3OBdg75piPM=;
- b=P64ANeMVV6z3+V8NidLsiDBQ+KGxWoWObygBnajgf74koccWy0UU+Hk28TI6cWXaM3
- YtKt7MpzqvilazUsYdeoCHqNxEw3Zh0/HAE0U30Vk6Sg794JezA6CydjGNtnJaZQ72BU
- nK/52B3wJ6Ix919LuQC/km8pu3JOl/YuvpnFDFlPtXZ8QpfM+sJzMXa98iiayzstmgNb
- HnSORkk8M51vu89P4wGgykP+HS4Kiar0ZqFslbHhQZIX72hMzJxWv2kSaJGkCWzSt1t1
- LaDApoCdgn60xMbWWIDOOQi3G8RtH7Fa4dtSatBEuhDtbJ8HNmbL58VbrbK7J5mUSKmB
- +Ppw==
+ bh=H5PVRI9WYI5WmGt/rEStKo+Hg85iUgMrG+1cY4GO6GI=;
+ b=KhAB7FzxuHNDWf6ZUVaIvABLhUcXobXYbIvTDpVbHjnzzbYFUZhhmrIX0Y+1pG+B5T
+ OEzNk0S00WOQUDOVyO4vW8EzuQru02JuHsERUjDC+9zoCb1nB7x1b1TM9LZA6iM/DzLv
+ p6c6b7YrGf/38sg2r1a33JqMafX0OPM77o/YL6zBBrMq8oGL9UG6gWTVGuDOhCj5oI3/
+ 6HbxA5c338vPpEMKFku2ej8OsYxP2DhutlTBuvHsccRqLjf6sTBQboCWsq4zyKo6zNUx
+ mIuBs1C2tzHjJ2nLKA5Gkb+sur/Yrzi2NyICV9+VLR0EAjMuP1XkINcP/fqTePLVSXvj
+ OMig==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713638238; x=1714243038;
+ d=1e100.net; s=20230601; t=1713638290; x=1714243090;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Kr0iEBzBnThGsFtbI+R+dzCxocAtqeaa3OBdg75piPM=;
- b=UdC4629jrAjHDtXnx57ntiPea98rh6Lmvitr8Y6+pMQYQ6fA/kITzEJe6ccKnBTfux
- Gg4w/PW/1OI6gkrp7WOFgQM8XfW0CDamoxZabccMBwqf0J2TSCDVYjtok9sBrXvO1pVL
- WvLknux2FJT9heBrwnfUJt8O23+EJCi5aBMJSLwXVVS2ANhsAOnZTH8uDRIq7RGrJEbJ
- y3PG9zeCiMPIyCBhJehC+jfa06rjVXLCWByPNjZ2e6liMKqc3kzEjCVpS0K5PmKRbKb4
- XNqgfsSv9HIBBnyvetU/r+Il1iUeltI3gsnYaHW+C/lpjOAGlujS1e4g4nBsrtOuLaak
- YQng==
+ bh=H5PVRI9WYI5WmGt/rEStKo+Hg85iUgMrG+1cY4GO6GI=;
+ b=fjJUAAS9sI0kRc3z1NP3SOB9rOoHUV27Du1UhpeGiLNgVuqf2bQI6DeyH5yki/jQh9
+ HgmNZUZrpypR6ZgpHmLaR0zDRZf0r3Q3+pRhaf9An6D6/gk/g7v+1FBt+9UJ2VLkO9LR
+ UwOlva0H9ZDcLs5OYg31WNKGuSP5mAtj9A8j9kvf/AiW8nlQnwbs6iEsXSjDwmCu2xvN
+ hKN+V6QVlmPz7nlhQ5SJPXpLlMIPb9idYakqEHw4lR5ssBHUaCfe+RphDcv9wfoPDvDq
+ g9uE8kYGKx2YsGmX9/rbIwWT4PiEOkigOqYtRfd7zppVvq2K0pkqWtp0TPr06N5TVkkz
+ N2Fw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW802UiAy3EY/eyaC2Ek0QyRLUSWb0XV8jZkTyRPfZzVLzITkMzlRY/se/vQKH0csaMTIvqf3zQO++R/KwuQSfxqM6zmQ==
-X-Gm-Message-State: AOJu0Ywhr3UVjOyHX5WhuiFDhWhvSDl9rMZ3ANyT7Pqkbmg3YevTYaMB
- ZqeB2UVKj61DQqbZX9sTuXnLC9NwIYB/bNqHcu4GVd7WtuSNaOU2TYfIwoQv7oNr8hds+XV+bBk
- 6UIZEeDiP1jHr4vgMip9iqZn234Q=
-X-Google-Smtp-Source: AGHT+IE1dbmVHxmpewzenqFy0Bh7ciodXXLt4pCRBW5OtMsnDZsbhs0xEfzYbqnLtxiEqcwBUyfh0ghWuopSH1B7g+M=
-X-Received: by 2002:a17:90a:6982:b0:2a5:3249:d230 with SMTP id
- s2-20020a17090a698200b002a53249d230mr5509853pjj.3.1713638237933; Sat, 20 Apr
- 2024 11:37:17 -0700 (PDT)
+ AJvYcCWh1R8Lj4hL8cCNhRNSKCZZsY6qdL5LofZ/K2LFRUz10JlSlTJjhD5rmhD5lHAKo+Ulb51lVUQ6tg/FL2b/Iff0LWjHGA==
+X-Gm-Message-State: AOJu0YysBM3MisM1x527pEhky9pb42LoM0mDSoRMbJbjC/vyHSenAUMl
+ MNs2NMdZkipG9xXMtsx9PVgM9ts3l21lWkfuLuNj3J2/vu+trgQihYzhkksBuyWfiHvf+Kd4DnP
+ ZB+ziyDKnZepTXHnegGGd2UQqGboisQ==
+X-Google-Smtp-Source: AGHT+IH7/7yrDSKaSKYvW0qcRM3bLhPnOM6UqMTfrBnxZmnoSRpHo+lmqqiEdEOhWOG+7tPM3FaNuJejc3F+E2Gn4Pk=
+X-Received: by 2002:a17:90a:530d:b0:2ac:26d8:746d with SMTP id
+ x13-20020a17090a530d00b002ac26d8746dmr5633438pjh.2.1713638290096; Sat, 20 Apr
+ 2024 11:38:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240418131247.19646-1-francesco@dolcini.it>
-In-Reply-To: <20240418131247.19646-1-francesco@dolcini.it>
+References: <20240419152902.4156600-1-tharvey@gateworks.com>
+In-Reply-To: <20240419152902.4156600-1-tharvey@gateworks.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Sat, 20 Apr 2024 15:37:07 -0300
-Message-ID: <CAOMZO5CoRpAmhqxdOqz+xZBfqeuHLtzhyd-npuSsi9HbGS9QdA@mail.gmail.com>
-Subject: Re: [PATCH v1] board: toradex: imx: Remove not needed env variables
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de
+Date: Sat, 20 Apr 2024 15:37:59 -0300
+Message-ID: <CAOMZO5A57OTzTWWSs9BB0iLjfM-GaW-6exmMRtWXHjkcQ2GDAQ@mail.gmail.com>
+Subject: Re: [PATCH v3 1/3] clk: imx8mm: Add support for PCIe clocks
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Sumit Garg <sumit.garg@linaro.org>, Martyn Welch <martyn.welch@collabora.com>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -90,30 +93,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 18, 2024 at 10:12=E2=80=AFAM Francesco Dolcini <francesco@dolci=
-ni.it> wrote:
+On Fri, Apr 19, 2024 at 12:29=E2=80=AFPM Tim Harvey <tharvey@gateworks.com>=
+ wrote:
 >
-> From: Francesco Dolcini <francesco.dolcini@toradex.com>
+> Add support for PCIe clocks required to enable PCIe support on
+> iMX8MM SoC.
 >
-> Remove not needed variables from environment and include config files.
->
->  - setup variable used to be executed from some bootscript, however
->    it's not required and there is no point on having this small helper
->    here
->  - boot_file, kernel_file, ip_dyn variables are not used anywhere
->  - fdt_fixup variable is just set empty
->  - defargs, vidargs variables used to be used from some bootscript,
->    however there is no point on having it here and even old legacy
->    bootscript can work without them
->  - removed CONFIG_ENABLE_DDR_TRAINING_DEBUG, this is a leftover from
->    some copy/paste
->
-> On colibri imx6ull/imx7 NAND module, remove consoleblank=3D0, this is
-> already the Linux kernel default therefore useless.
->
-> Various Linux Kernel command line options removed are not-existing
-> left-over that applied to some old NXP i.MX downstream branch
->
-> Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> ---
+> v3: wrap pcie clk config around IS_ENABLED to avoid SPL growth as
+>     suggested by Marek
 
-Applied, thanks.
+Applied all, thanks.
