@@ -4,57 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CADFC4345F
-	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 20:45:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6B08C4345F
+	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 20:48:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 641D488310;
-	Sun, 21 Apr 2024 22:45:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 50287881EA;
+	Sun, 21 Apr 2024 22:48:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1713732338;
-	bh=ZCcx2GMx3fgMQUnXqMFpP3uV9EAIapNG2KNDcpl2SKI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Kb1z+IkhLSo7EkFQo0AAfViYuWi1IPfsjhXa5B0ZN4eSw7pQpAGGPEOP8Rk/+abuJ
-	 Dy2PxzKJ5hmVAvUMT2MY1N30BbX1Opm3TVq8Rr/KzKitrxiOI8Jnh3IOqmjgFd5Wuv
-	 5ZIsyUBxU8XP1hO7FzLqhan2S70+59EG9pTtfYGx+/Jr715DsWV8SmaL38cH2w+MHY
-	 AI9a13r/HAVubv4qdXEBpOGIJGyxGk1Nenn9eE26vcWNI+HGQxDCqxFi79eLkYpNdn
-	 hcd1rSOAiJYlvn27m9qjiVAFJXj+DlKJKjDhSyfSkRs0LysjaM2a0sHhijruHoB2PA
-	 p4E4uMyu0hkjg==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Qe2IjWm+";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id C8744880A1; Sun, 21 Apr 2024 22:48:46 +0200 (CEST)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 38E49880A1;
- Sun, 21 Apr 2024 22:45:32 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1713732333;
- bh=ZCcx2GMx3fgMQUnXqMFpP3uV9EAIapNG2KNDcpl2SKI=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=qGw0wB8uOxwxI3Bdys8KFAKU/gehQEkUNvC1dJFucA0S8y4OE7/nTztIwesW4CxdC
- stavbith0PjihNtS/x89ziLL4Gcp7hT8mQvfGQF0+LnYlJtKkuitKdW8Hlk3VwJAsr
- dUQBvLeB+86YSfK6NMJ0M9EFUsjgzsDkgGfqP54phfB9z0vysy9uZz8T5eTkYB06wM
- LsbCT+ZAOhuWiAiio5CCS7z0vR0XmUeiMqpv84ga7Fvs0Dtc45gE8gtYBS1zWGsxLU
- QdUCTrnHC2LpILkKoHnDGOuLL5Mtl6WhJ7H7u+UVtGID5EGQE64myB/EeMd8YPDqDY
- Fgih6xnpSfQ6A==
-Message-ID: <7e3063b5-cb03-436d-b780-c05edbd95010@denx.de>
-Date: Sun, 21 Apr 2024 22:42:40 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] usb: dwc2: update reset method for host and device mode
-To: Kongyang Liu <seashell11234455@gmail.com>, u-boot@lists.denx.de
-Cc: Jonas Karlman <jonas@kwiboo.se>, Lukasz Majewski <lukma@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Simon Glass <sjg@chromium.org>, Teik Heng Chong <teik.heng.chong@intel.com>,
+ by phobos.denx.de (Postfix) with ESMTPS id E4F4788306
+ for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 22:48:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-34801b1bc4aso625880f8f.0
+ for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 13:48:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713732524; x=1714337324; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=pBVP5Przalv5yDifebRQMPqx2ky2ObH1wFnKyIU+1QI=;
+ b=Qe2IjWm+cwkJDzIMUc7E79gCOcnR4nHJzwDm0bqhJYGIEW+j8JLSAljzlgI/RnHNNP
+ aKMEPBe4ebZZFkinjUhAnJAU5bIynGyt9mpwSz00iWOYyUGgX46o9+dr94bRtGHVwYxb
+ IGkuOdm0JnjTAEEVEjVex/UsP13b5T15Yr7CWSoX1NcWnerEc0xXxBUmCVUgZ5TZ01Qe
+ hk6o/8eUH3Ey7pvOn7c0ecA07z0ZUG8v1EUpRbUnSshB47md/KAsDi8oviap3HZE9wWk
+ j70fTRYoprVAOz+DXOx13LAuaQ/CQUj6rqPeoEHgITwC6fReff0HfO8IhAAqdaMgNn70
+ BTLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713732524; x=1714337324;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=pBVP5Przalv5yDifebRQMPqx2ky2ObH1wFnKyIU+1QI=;
+ b=E2ouHr5M9f9URpQ+Dmp3z1ZZrWW51n5ANYoCJZknuESjc3mKL5EfXiNsTKLTLIFIrS
+ 0HQjkwnGObvLqmdivLFfnMKeIN/73UchsgUy1Q+ThP4QkIZooDJQ7pP/Wa6FXejpk40C
+ AnzGhQRZa/gEjv/ToPxhv/MBdIddqmQqlnlQfuUbV7Efykb+c61SfznK77bu0JgjbX8U
+ B89VKKrIJYdTYDiVePSuvRmcRRKtDCGndrDCjdWns6fo/7Yao+b1ll144D8fb+UBBujJ
+ TKUYAK1UNX5K/RvqRrfplu2qH5W/sZY2esxt375Tz1PGD2+49Ivi9seYBsiyS9KHpZM8
+ OPWQ==
+X-Gm-Message-State: AOJu0YzQ37wuGwwp6XQi5G4OCqeWRkthkyn60ndotETP7TSzL2D1kaDm
+ BZ6TvSZGvTwa0zGGl1XBcz79oMyY5r2AlQI7jSgKdKzj6Qrc7V34sTA5mu99sks=
+X-Google-Smtp-Source: AGHT+IFCVszhrEAcAeumM5ZwtY5C1i0LwroeKm9itB5NWBhU8StQRgDh4a0NYsd1VAgo+zSnU7uvgQ==
+X-Received: by 2002:a5d:67cc:0:b0:347:c3c7:9636 with SMTP id
+ n12-20020a5d67cc000000b00347c3c79636mr4934571wrw.0.1713732523854; 
+ Sun, 21 Apr 2024 13:48:43 -0700 (PDT)
+Received: from localhost ([109.108.76.111]) by smtp.gmail.com with ESMTPSA id
+ gc24-20020a170906c8d800b00a55ac217235sm1139045ejb.90.2024.04.21.13.48.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 21 Apr 2024 13:48:43 -0700 (PDT)
+From: Igor Opaniuk <igor.opaniuk@gmail.com>
+To: u-boot@lists.denx.de
+Cc: jens.wiklander@linaro.org, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jorge Ramirez-Ortiz <jorge@foundries.io>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-References: <20240328131811.94559-1-seashell11234455@gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240328131811.94559-1-seashell11234455@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: [PATCH v1] tee: sandbox: check for buffer size
+Date: Sun, 21 Apr 2024 22:48:39 +0200
+Message-Id: <20240421204839.2129998-1-igor.opaniuk@gmail.com>
+X-Mailer: git-send-email 2.34.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,90 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/28/24 2:14 PM, Kongyang Liu wrote:
+Add additional check for buffer size when reading out persistent
+storage value and provide back actual value size.
 
-[...]
+Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
+---
 
-> @@ -464,12 +464,26 @@ static void reconfig_usbd(struct dwc2_udc *dev)
->   {
->   	/* 2. Soft-reset OTG Core and then unreset again. */
->   	int i;
-> -	unsigned int uTemp = writel(CORE_SOFT_RESET, &reg->grstctl);
-> +	unsigned int uTemp;
->   	uint32_t dflt_gusbcfg;
->   	uint32_t rx_fifo_sz, tx_fifo_sz, np_tx_fifo_sz;
->   	u32 max_hw_ep;
->   	int pdata_hw_ep;
->   
+ drivers/tee/sandbox.c | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
 
-Drop this newline
+diff --git a/drivers/tee/sandbox.c b/drivers/tee/sandbox.c
+index 8ad7c09efdd..86b16a3bb8d 100644
+--- a/drivers/tee/sandbox.c
++++ b/drivers/tee/sandbox.c
+@@ -174,7 +174,7 @@ static u32 ta_avb_invoke_func(struct udevice *dev, u32 func, uint num_params,
+ 	uint slot;
+ 	u64 val;
+ 	char *value;
+-	u32 value_sz;
++	u32 value_sz, tmp_sz;
+ 
+ 	switch (func) {
+ 	case TA_AVB_CMD_READ_ROLLBACK_INDEX:
+@@ -267,8 +267,12 @@ static u32 ta_avb_invoke_func(struct udevice *dev, u32 func, uint num_params,
+ 		if (!ep)
+ 			return TEE_ERROR_ITEM_NOT_FOUND;
+ 
+-		value_sz = strlen(ep->data) + 1;
+-		memcpy(value, ep->data, value_sz);
++		tmp_sz = strlen(ep->data) + 1;
++		if (value_sz < tmp_sz)
++			return TEE_ERROR_SHORT_BUFFER;
++
++		memcpy(value, ep->data, tmp_sz);
++		params[1].u.memref.size = tmp_sz;
+ 
+ 		return TEE_SUCCESS;
+ 	case TA_AVB_CMD_WRITE_PERSIST_VALUE:
+-- 
+2.34.1
 
-> +	u32 snpsid, greset;
-> +
-> +	snpsid = readl(&reg->gsnpsid);
-> +	writel(CORE_SOFT_RESET, &reg->grstctl);
-> +	if ((snpsid & SNPSID_VER_MASK) < (SNPSID_VER_420a & SNPSID_VER_MASK)) {
-
-Can you use FIELD_GET()/FIELD_PREP() for this ?
-
-> +		wait_for_bit_le32(&reg->grstctl, CORE_SOFT_RESET, false, 1000, false);
-> +	} else {
-> +		wait_for_bit_le32(&reg->grstctl, CORE_SOFT_RESET_DONE, true, 1000, false);
-> +		greset = readl(&reg->grstctl);
-> +		greset &= ~CORE_SOFT_RESET;
-> +		greset |= CORE_SOFT_RESET_DONE;
-> +		writel(greset, &reg->grstctl);
-
-clrsetbits_le32()
-
-[...]
-
-> diff --git a/drivers/usb/host/dwc2.c b/drivers/usb/host/dwc2.c
-> index 637eb2dd06..1baeff96ee 100644
-> --- a/drivers/usb/host/dwc2.c
-> +++ b/drivers/usb/host/dwc2.c
-> @@ -159,6 +159,7 @@ static void dwc_otg_core_reset(struct udevice *dev,
->   			       struct dwc2_core_regs *regs)
->   {
->   	int ret;
-> +	u32 snpsid, greset;
->   
->   	/* Wait for AHB master IDLE state. */
->   	ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_AHBIDLE,
-> @@ -167,9 +168,20 @@ static void dwc_otg_core_reset(struct udevice *dev,
->   		dev_info(dev, "%s: Timeout!\n", __func__);
->   
->   	/* Core Soft Reset */
-> +	snpsid = readl(&regs->gsnpsid);
->   	writel(DWC2_GRSTCTL_CSFTRST, &regs->grstctl);
-> -	ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_CSFTRST,
-> -				false, 1000, false);
-> +	if ((snpsid & DWC2_SNPSID_VER_MASK) < (DWC2_SNPSID_DEVID_VER_420a & DWC2_SNPSID_VER_MASK)) {
-> +		ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_CSFTRST,
-> +					false, 1000, false);
-> +	} else {
-> +		ret = wait_for_bit_le32(&regs->grstctl, DWC2_GRSTCTL_GSFTRST_DONE,
-> +					true, 1000, false);
-> +		greset = readl(&regs->grstctl);
-> +		greset &= ~DWC2_GRSTCTL_CSFTRST;
-> +		greset |= DWC2_GRSTCTL_GSFTRST_DONE;
-> +		writel(greset, &regs->grstctl);
-
-Same comments as above.
-
-Maybe this should be pulled into dedicated function to avoid duplication?
-
-> +	}
-> +
->   	if (ret)
->   		dev_info(dev, "%s: Timeout!\n", __func__);
->   
-> @@ -1180,7 +1192,8 @@ static int dwc2_init_common(struct udevice *dev, struct dwc2_priv *priv)
->   		 snpsid >> 12 & 0xf, snpsid & 0xfff);
->   
->   	if ((snpsid & DWC2_SNPSID_DEVID_MASK) != DWC2_SNPSID_DEVID_VER_2xx &&
-> -	    (snpsid & DWC2_SNPSID_DEVID_MASK) != DWC2_SNPSID_DEVID_VER_3xx) {
-> +		(snpsid & DWC2_SNPSID_DEVID_MASK) != DWC2_SNPSID_DEVID_VER_3xx &&
-> +	    (snpsid & DWC2_SNPSID_DEVID_MASK) != DWC2_SNPSID_DEVID_VER_4xx) {
-
-Try FIELD_GET/FIELD_PREP
