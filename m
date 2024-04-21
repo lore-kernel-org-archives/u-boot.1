@@ -4,78 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28CF7C4345F
-	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 20:24:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47065C4345F
+	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 20:29:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 538948830F;
-	Sun, 21 Apr 2024 22:24:22 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id BCB51882FD;
+	Sun, 21 Apr 2024 22:29:15 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HH6lKIEJ";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 80C1788313; Sun, 21 Apr 2024 22:24:20 +0200 (CEST)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1713731355;
+	bh=6iGttA6Lga+D0XYY7Ppgso9ZLkb+fFt+eIYTQJrxp8s=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=wUxLxeJFwYu8zfjV0gYB83ZOW+9UsMKoVqSeRo+GGSjwSOsxOJorP9rq9e5Bowybm
+	 qwpA7SJenqE5Ukmq/YcX1o7+T1/5TDEkdpapb4LAh8NyJAwHmB/soV88KunJk9xHCA
+	 nYKzm5ZWhmRC7fRHw2hfhhryxN2jc/IpTnl9JKpBja5ymqQFbTCWEHhxyZWs2wJho7
+	 9rUUzu/TfFIKXgQ8+Ao+KelmMOIbUFu91VxCwu0qBTLpPBtIcCKaqrIg3jgbdjljHn
+	 3f9Z/KiKz+Zkd2TSiLw1nOMhcwgM4sk/p4X8fKqtqOE8g1zeMvRHNujJcN2czTxvGa
+	 DwxwAJ0L2+Dvw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9AAAB882DA
- for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 22:24:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2a2cced7482so504624a91.0
- for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 13:24:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713731054; x=1714335854; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CZ2rCfYmhsON6R183mD4MggUhh+yg2etiMnidjibyhw=;
- b=HH6lKIEJzkbPTcbAsEF2RU1xeXSkcnYmr5j7nXR+gcCpPFnhn3qvLWHHw/TA4GzmZX
- cHL2QK3OsGeqdM+abhf+IIofUoEfo+HqBJ4y2X1UtEU47zLx8iWw7n13AT6h7UZYNkM2
- uIKhD3VsOt1PxNVEZ+AQW61akutZRsOaOwplYEdOr2d7GFot9Q5EfVxVALOyxAcMpZr1
- o8TsHdDiyg6sYTI9wzFx8JEFWnPwZy93gDPT/Lter47gnsx1U4RyDWq6AYa0w5kaX2E9
- 7+lUPBf/KM/lWry5HUMfivlcyc64TR0NrNuQqg78OkxgM2kpUnTr+G2k7br8Wb5cfTFC
- qNfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713731054; x=1714335854;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CZ2rCfYmhsON6R183mD4MggUhh+yg2etiMnidjibyhw=;
- b=tf3QZ7tZb9LjZn6bkZVNw6HhcAij2/K3xHORY6owaHN9Jmg+pKu9CZCEsE/Dga+Xq6
- d/FaKQZjfu5E92M7WG0zgC0kTT5YjhIJ/tizsdKcQzvS7JBz+gPFyixFu3geB5WEGTxh
- vnJdJ4xMhg+vXYCqz8Rgyjy2t8qE2sSuwnMgyvHM2LLhMdvXmlYBSTTQ7czh6gXpTYGC
- eWthIJHztovej2a7m9Bejb/brUJl39FwgWtByY1n+Ow8/vGJt4gFUqu6H6zWjLgnTz+n
- tvbpFJtYWa7ZCf744zS4+9tnsUeX0uPCC2FYbv9aqDDqqbXsPX3ob/wvyDiBqWqIXIq6
- wygQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUshahLjr7r5GfT5qgTZ02GzLHR1WLlkb1LYMvLWBthSzUwd81O+g/9/NyY/KP0Szhh8izDE4lOxVopcjGTagb7pgKaeA==
-X-Gm-Message-State: AOJu0YziJonc5DcWUyKVDwUSacuqAIlig8oW2on4tlgtoFD4qgb7Yr5a
- 2/QrU8VCjCz9CDPjW/N6nttvp4F3EepzDEkVgNNoitZs4zBcgSeVUTI6m1/5kdgzLL0vMli4A1o
- 5994TZv8Y6Wkfbj6LYEueE8jN6uhz6E15
-X-Google-Smtp-Source: AGHT+IElgjUrezzR+YhGxU99Q7haCaRRl1IWsONVUkJG/F3ZkG52IO9nrNleqxiz1ObdgFqnwNFxWbsiEMyRjs4tYZw=
-X-Received: by 2002:a17:90a:70c7:b0:2a7:aa52:5568 with SMTP id
- a7-20020a17090a70c700b002a7aa525568mr7837921pjm.0.1713731054153; Sun, 21 Apr
- 2024 13:24:14 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 4F06C87ED0;
+ Sun, 21 Apr 2024 22:29:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1713731354;
+ bh=6iGttA6Lga+D0XYY7Ppgso9ZLkb+fFt+eIYTQJrxp8s=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=vbfZYIR/Dmdq2VwF4DdOJO3g7uj0mferVEHNVYu++Rtu0Ea0/sxKTl0eLqwpdFvRX
+ LIufDxIe48/W5JS9sxDBWsXZ+O7qTU4Mt8RBqR4mcXIZTtY4lgPJcb0VNSbqrvER/1
+ wiMp0iG/3MAF3SI/MaDaC7vWKkb+aJtoVJ+dkyi/9vR8d/yZKpKALQMGwAE/TcdZi3
+ sE4g7IRWWi6JzTSUa7bhOViyYCbtbtVcp21B/JGWy1sNSdMALwyU9kKQCgszhzAZY8
+ ZjmGOjp6YRVdMrFcrqx8nbmA5EYftzzzRVmJOSuy984jdnRiryQ1YvFIaHZBVDf9m/
+ rthcaesQiCJTg==
+Message-ID: <b8089d71-42f1-4cb7-9b5e-e3cd99e9ffa5@denx.de>
+Date: Sun, 21 Apr 2024 22:27:43 +0200
 MIME-Version: 1.0
-References: <20240421140745.25870-1-michael@amarulasolutions.com>
-In-Reply-To: <20240421140745.25870-1-michael@amarulasolutions.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Sun, 21 Apr 2024 17:24:03 -0300
-Message-ID: <CAOMZO5DbWbsT==bTczp9b4uHuBR6dPsbsHEfoJTugTp4zwTJjg@mail.gmail.com>
-Subject: Re: [PATCH] clk: imx8mn: add video clocks support
-To: Michael Trimarchi <michael@amarulasolutions.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] ARM: dts: stm32: add PWR regulators support on
+ stm32mp131
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+References: <20240319024534.103299-1-marex@denx.de>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20240319024534.103299-1-marex@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,22 +71,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michael,
+On 3/19/24 3:45 AM, Marek Vasut wrote:
+> This patch adds STM32 PWR regulators DT support on stm32mp131.
+> This requires TFA to clear RCC_SECCFGR, is disabled by default
+> and can only be enabled on board DT level.
+> 
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
-On Sun, Apr 21, 2024 at 11:07=E2=80=AFAM Michael Trimarchi
-<michael@amarulasolutions.com> wrote:
->
-> Add clocks support for the video subsystem.
->
-> Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+It seems these patches have been missed from the recent PR ?
 
-Which target will make use of these clocks?
-
-As-is this patch adds only dead code.
-
-Adding a defconfig that uses these newly introduced clocks would be nice.
-
-Also, to avoid size increase, please protect this code against
-CONFIG_VIDEO or something, like done here:
-https://source.denx.de/u-boot/custodians/u-boot-imx/-/commit/2b3310ef13998d=
-fd03196a0806e03035212b102c
+Is there any feedback on those patches ?
