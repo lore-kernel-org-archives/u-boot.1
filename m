@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6B08C4345F
-	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 20:48:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7192C4345F
+	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 20:54:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50287881EA;
-	Sun, 21 Apr 2024 22:48:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5306F882DA;
+	Sun, 21 Apr 2024 22:54:23 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Qe2IjWm+";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="rrv4mY+T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8744880A1; Sun, 21 Apr 2024 22:48:46 +0200 (CEST)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
+ id A731A882D7; Sun, 21 Apr 2024 22:54:21 +0200 (CEST)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4F4788306
- for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 22:48:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E644882FD
+ for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 22:54:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=igor.opaniuk@gmail.com
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-34801b1bc4aso625880f8f.0
- for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 13:48:44 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-56e6a1edecfso5698410a12.1
+ for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 13:54:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713732524; x=1714337324; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pBVP5Przalv5yDifebRQMPqx2ky2ObH1wFnKyIU+1QI=;
- b=Qe2IjWm+cwkJDzIMUc7E79gCOcnR4nHJzwDm0bqhJYGIEW+j8JLSAljzlgI/RnHNNP
- aKMEPBe4ebZZFkinjUhAnJAU5bIynGyt9mpwSz00iWOYyUGgX46o9+dr94bRtGHVwYxb
- IGkuOdm0JnjTAEEVEjVex/UsP13b5T15Yr7CWSoX1NcWnerEc0xXxBUmCVUgZ5TZ01Qe
- hk6o/8eUH3Ey7pvOn7c0ecA07z0ZUG8v1EUpRbUnSshB47md/KAsDi8oviap3HZE9wWk
- j70fTRYoprVAOz+DXOx13LAuaQ/CQUj6rqPeoEHgITwC6fReff0HfO8IhAAqdaMgNn70
- BTLA==
+ d=amarulasolutions.com; s=google; t=1713732859; x=1714337659;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=+wuW4MLHy4LtuA3cPMAkg8YooC1iIFT5v0hRyNaAvqY=;
+ b=rrv4mY+TOuwuZ/HAcx6SVwj2q33go3/xLJ74Q9BR9FLJeQ1UGF5uasmomSWGeeiOFG
+ g2Hu5g+3BjQt0ZcZ3YdGVC3HdtQ+F9/XIz8OCnCsK3s/RN0A2yodsLyDtIkAw+jEotE8
+ CJ0TYMY3c+JWU96vJn+2CqxBdAzXTyxc+BxTQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713732524; x=1714337324;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pBVP5Przalv5yDifebRQMPqx2ky2ObH1wFnKyIU+1QI=;
- b=E2ouHr5M9f9URpQ+Dmp3z1ZZrWW51n5ANYoCJZknuESjc3mKL5EfXiNsTKLTLIFIrS
- 0HQjkwnGObvLqmdivLFfnMKeIN/73UchsgUy1Q+ThP4QkIZooDJQ7pP/Wa6FXejpk40C
- AnzGhQRZa/gEjv/ToPxhv/MBdIddqmQqlnlQfuUbV7Efykb+c61SfznK77bu0JgjbX8U
- B89VKKrIJYdTYDiVePSuvRmcRRKtDCGndrDCjdWns6fo/7Yao+b1ll144D8fb+UBBujJ
- TKUYAK1UNX5K/RvqRrfplu2qH5W/sZY2esxt375Tz1PGD2+49Ivi9seYBsiyS9KHpZM8
- OPWQ==
-X-Gm-Message-State: AOJu0YzQ37wuGwwp6XQi5G4OCqeWRkthkyn60ndotETP7TSzL2D1kaDm
- BZ6TvSZGvTwa0zGGl1XBcz79oMyY5r2AlQI7jSgKdKzj6Qrc7V34sTA5mu99sks=
-X-Google-Smtp-Source: AGHT+IFCVszhrEAcAeumM5ZwtY5C1i0LwroeKm9itB5NWBhU8StQRgDh4a0NYsd1VAgo+zSnU7uvgQ==
-X-Received: by 2002:a5d:67cc:0:b0:347:c3c7:9636 with SMTP id
- n12-20020a5d67cc000000b00347c3c79636mr4934571wrw.0.1713732523854; 
- Sun, 21 Apr 2024 13:48:43 -0700 (PDT)
-Received: from localhost ([109.108.76.111]) by smtp.gmail.com with ESMTPSA id
- gc24-20020a170906c8d800b00a55ac217235sm1139045ejb.90.2024.04.21.13.48.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Apr 2024 13:48:43 -0700 (PDT)
-From: Igor Opaniuk <igor.opaniuk@gmail.com>
-To: u-boot@lists.denx.de
-Cc: jens.wiklander@linaro.org, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jorge Ramirez-Ortiz <jorge@foundries.io>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1] tee: sandbox: check for buffer size
-Date: Sun, 21 Apr 2024 22:48:39 +0200
-Message-Id: <20240421204839.2129998-1-igor.opaniuk@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1713732859; x=1714337659;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=+wuW4MLHy4LtuA3cPMAkg8YooC1iIFT5v0hRyNaAvqY=;
+ b=cCjVYzxn82tccszPOmNpEq5HI3lYFghb5xSwxV3tCtd1G+oZymPxtFYmwlplhmDSe3
+ D4+Z+2PNC7+NfbNSGmUZlq2VrJ9fC2Qnfe536zieV+9gfDmtoX/virO6RgMZG4TjISuR
+ rwf8CUIx8arpLr6AcGAHUJ4uLxuOR4w330yV+rJBHdcEWw89AGJCypQ15emyyEAqFKBC
+ SRWHUm1FF8VUna5j+R/PWaUaULnsvBn2gJuP7LXuWrckv3UsgnYfPl7F5R2dRMc+PI8W
+ VLv9zeJewlSKc9DAy+GSEJ7/wCxwd5SmMILPpsemUkhx9t2D3X/47rOMJuvJUZ+C+RVg
+ +i7Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXW8NcosQvGMQaS7B67rWI5tTiworBE+Zcab2DDI6HdHi2AbJNEHRSqJB2cDMXKg320rUurpSp7lE1FAPB5P/XmzM/idQ==
+X-Gm-Message-State: AOJu0Yzgc0XF+DNLpu6X71CefhmItITQttasPAbNz2lkkL1047cD84Og
+ C9/1WNLn0pzyUA+i1iTkWzhZUSvlahUihkcVL3zE2a0oU7ZCOaEmh9AnkoPfyP5gLGCVfcABfzf
+ vJafvB7UMfbYFAw60CxKymvqsGNSHC5ndGANkMQ==
+X-Google-Smtp-Source: AGHT+IFMffmVZQI5did7b5ERzj3pXda886gSbgBfkwck70XkZtrukP+TzcFjj08+SmIoxH5iuQgY/XNkFFKB8sh69fo=
+X-Received: by 2002:a17:906:60d4:b0:a47:31db:d8ff with SMTP id
+ f20-20020a17090660d400b00a4731dbd8ffmr6137976ejk.40.1713732858618; Sun, 21
+ Apr 2024 13:54:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240421140745.25870-1-michael@amarulasolutions.com>
+ <CAOMZO5DbWbsT==bTczp9b4uHuBR6dPsbsHEfoJTugTp4zwTJjg@mail.gmail.com>
+In-Reply-To: <CAOMZO5DbWbsT==bTczp9b4uHuBR6dPsbsHEfoJTugTp4zwTJjg@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Sun, 21 Apr 2024 22:54:06 +0200
+Message-ID: <CAOf5uwnruzdTfsbMqvU9UEnsL0Y5_xWs8tCsGHCTPAbHbxb=rg@mail.gmail.com>
+Subject: Re: [PATCH] clk: imx8mn: add video clocks support
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>, 
+ u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,43 +91,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add additional check for buffer size when reading out persistent
-storage value and provide back actual value size.
+Hi Fabio
 
-Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
----
+On Sun, Apr 21, 2024 at 10:24=E2=80=AFPM Fabio Estevam <festevam@gmail.com>=
+ wrote:
+>
+> Hi Michael,
+>
+> On Sun, Apr 21, 2024 at 11:07=E2=80=AFAM Michael Trimarchi
+> <michael@amarulasolutions.com> wrote:
+> >
+> > Add clocks support for the video subsystem.
+> >
+> > Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+>
+> Which target will make use of these clocks?
+>
+> As-is this patch adds only dead code.
+>
+> Adding a defconfig that uses these newly introduced clocks would be nice.
+>
 
- drivers/tee/sandbox.c | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+You are right, I will wrap it and enable only on CONFIG_VIDEO
 
-diff --git a/drivers/tee/sandbox.c b/drivers/tee/sandbox.c
-index 8ad7c09efdd..86b16a3bb8d 100644
---- a/drivers/tee/sandbox.c
-+++ b/drivers/tee/sandbox.c
-@@ -174,7 +174,7 @@ static u32 ta_avb_invoke_func(struct udevice *dev, u32 func, uint num_params,
- 	uint slot;
- 	u64 val;
- 	char *value;
--	u32 value_sz;
-+	u32 value_sz, tmp_sz;
- 
- 	switch (func) {
- 	case TA_AVB_CMD_READ_ROLLBACK_INDEX:
-@@ -267,8 +267,12 @@ static u32 ta_avb_invoke_func(struct udevice *dev, u32 func, uint num_params,
- 		if (!ep)
- 			return TEE_ERROR_ITEM_NOT_FOUND;
- 
--		value_sz = strlen(ep->data) + 1;
--		memcpy(value, ep->data, value_sz);
-+		tmp_sz = strlen(ep->data) + 1;
-+		if (value_sz < tmp_sz)
-+			return TEE_ERROR_SHORT_BUFFER;
-+
-+		memcpy(value, ep->data, tmp_sz);
-+		params[1].u.memref.size = tmp_sz;
- 
- 		return TEE_SUCCESS;
- 	case TA_AVB_CMD_WRITE_PERSIST_VALUE:
--- 
-2.34.1
+> Also, to avoid size increase, please protect this code against
+> CONFIG_VIDEO or something, like done here:
+> https://source.denx.de/u-boot/custodians/u-boot-imx/-/commit/2b3310ef1399=
+8dfd03196a0806e03035212b102c
 
+Working on display panel integration on imx8m, trying to progress
+merging things up.
+
+Michael
+
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
