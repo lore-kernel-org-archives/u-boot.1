@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75CFCC4345F
-	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 14:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52101C4345F
+	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 18:22:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA9F4881C4;
-	Sun, 21 Apr 2024 16:07:54 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 681AC882E0;
+	Sun, 21 Apr 2024 20:22:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="qJcgy2hB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CNoUm4C5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B13A88195; Sun, 21 Apr 2024 16:07:53 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id D338E8826D; Sun, 21 Apr 2024 20:22:02 +0200 (CEST)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D67E87FA7
- for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 16:07:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id E90D8881B7
+ for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 20:21:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-41a4d9102dcso842495e9.1
- for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 07:07:50 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-78efd533a00so256598485a.0
+ for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 11:21:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1713708469; x=1714313269;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=pRn4ZyunEviE0YbPOFSQffFYSR8jGupbyCCDFq4etgg=;
- b=qJcgy2hBZDvGr6XDnYMfYRrRc5rXkToX1jJcpao+RKqp4P0kpFZ2Uhq30LE9n1IAUO
- tY8wuA0G177RvgRqV4a6XJpHQWm/91x8udDwS8lvbQ7jp3E/VMDIOUn+AMyaWieZ81a5
- P5wSPP+ynF8gjBhc9b+qRnr2F+denWCEdPWVI=
+ d=konsulko.com; s=google; t=1713723719; x=1714328519; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=0qL+XZoDdpoaxLHGvzPLtdDTMvZZabLhLQkrHUlnojs=;
+ b=CNoUm4C5ps7YlYjCXnNS4hiOWzu69rgEqQZ5FLddpmM02YH3AUDdq5VNWBYknblMHd
+ mSjvSOiKdVpj3FBnJCid3diA1IfSpMen6EdxU7OcX3QScHbiTAcXk/luovrFfqJyh8x6
+ tW9twVyNp6tHpxGQNl/1lkAjWtEXwUDsXzRqk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713708469; x=1714313269;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=pRn4ZyunEviE0YbPOFSQffFYSR8jGupbyCCDFq4etgg=;
- b=K+rtKFlbc175kgUxLs2iGe5/zDk4+w85tjCsLExBAF7+vRg4rMTI4/VdaZwvzuffic
- XnuGFQKoEe8ZrsAy/tzVMKuKqxVZ25ejrwJrMZPMkhaEivCjtxn0xCV2BlPdJuoZlTmT
- hrpl0bzdfCZchMLJ/CpDI5BZoJLR/tQCIFnd22QUtkkmbx6fZyP0mKc8MUD6kr9ZjYk2
- 3PF8FBAMeR9ZBWxhva6j6tU5uV9mRUnLqCX386DYUSDxLWIf45f7lhFiOUzJTSEnAype
- sOevrJXqDe6iakpH4y+oJZzY8cXHShBX8eP6scvwPPy0r/hfoNWhImesCao7gjPxtrdj
- IW9Q==
-X-Gm-Message-State: AOJu0YxPfRGhWXm+csp/jdqsnmU6MDYz0U91JWP4T3w8NGN+XVj6IU6q
- L6ad4RlB0JDSTuCWH8DYcDnOHIFgHO2cJuxUC11OJuqUQwTqeldZsBwi0GzgCsU=
-X-Google-Smtp-Source: AGHT+IHoe2IhmY+LwkY/X4v8bXRu0AX2r75ZndB5Rfee68WZB2xff+ohd1gpSRgvMRny6q9KqdK6Dw==
-X-Received: by 2002:a05:600c:310a:b0:41a:5d49:8cab with SMTP id
- g10-20020a05600c310a00b0041a5d498cabmr20752wmo.11.1713708469403; 
- Sun, 21 Apr 2024 07:07:49 -0700 (PDT)
-Received: from panicking.amarulasolutions.com ([62.18.232.149])
+ d=1e100.net; s=20230601; t=1713723719; x=1714328519;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0qL+XZoDdpoaxLHGvzPLtdDTMvZZabLhLQkrHUlnojs=;
+ b=u0mvoIAftL2PPq3I+ZlT+HFm9E3+FG8ON7LC+S9Z2z3spzmr9rts0kh1l9hW94LEsM
+ VEGucpQ5azcnB5ZWFQbV13zjmujCGUmQvnwejMgg+3t3nsjrR3gjMAzJtzR63rYf+vGp
+ botAiBrwDpx6pVK+lv7ArGlj5n6dvYe1Uix9KP0WJjEKjJpF3aKK9jQ+pgviLnRBk/dl
+ Rjum3PMUbZScKdxt44Z9sC0tYd6apbOGTzKp+6gcpzbChxG1VqdOWxdSaXN7tt3K7SsT
+ Y3Z9io5sHEqRQMiGAj0fWfgXnRi3D+6x/lT8yndv6JG6BVqfiXZs1Vf2Lzdqn3YeaQCr
+ PONQ==
+X-Gm-Message-State: AOJu0YxpbXcZ68g/nBWmaCJQ84dWdC+5uTcvzzRRar8dCFtNJiWIEi3W
+ J4tee9GJprSU3hMYulD9scKWCbWnhl++lNWxfF9OEGq2n8vSvLo6UnvVzGbVS96jjbBNQqGvGxU
+ kEKuXiA==
+X-Google-Smtp-Source: AGHT+IHvcXXikoAQ4HB1ERMcrzwDglDb16vcWvyVs7hV22qlMKnsQVUpDOF5IQPP6S3IM3A9xy0REw==
+X-Received: by 2002:ad4:480f:0:b0:699:4bcf:7d5b with SMTP id
+ qd15-20020ad4480f000000b006994bcf7d5bmr9962312qvb.56.1713723718768; 
+ Sun, 21 Apr 2024 11:21:58 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- r13-20020a05600c458d00b00417f65f148esm17314734wmo.31.2024.04.21.07.07.48
+ w5-20020a0c9c45000000b0069b27dad8c7sm3538303qve.101.2024.04.21.11.21.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 21 Apr 2024 07:07:49 -0700 (PDT)
-From: Michael Trimarchi <michael@amarulasolutions.com>
-To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>,
- linux-amarula@amarulasolutions.com,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>
-Subject: [PATCH] clk: imx8mn: add video clocks support
-Date: Sun, 21 Apr 2024 16:07:45 +0200
-Message-Id: <20240421140745.25870-1-michael@amarulasolutions.com>
-X-Mailer: git-send-email 2.40.1
+ Sun, 21 Apr 2024 11:21:57 -0700 (PDT)
+Date: Sun, 21 Apr 2024 12:21:53 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anatolij Gustschin <agust@denx.de>
+Cc: u-boot@lists.denx.de
+Subject: Re: [GIT PULL] u-boot-video/video-20240421
+Message-ID: <20240421182153.GS1054907@bill-the-cat>
+References: <20240421155213.7b8625af@crub>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="uj6ENOQC6dQ1qE9Q"
+Content-Disposition: inline
+In-Reply-To: <20240421155213.7b8625af@crub>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,89 +90,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add clocks support for the video subsystem.
 
-Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
----
- drivers/clk/imx/clk-imx8mn.c | 23 +++++++++++++++++++++++
- 1 file changed, 23 insertions(+)
+--uj6ENOQC6dQ1qE9Q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/drivers/clk/imx/clk-imx8mn.c b/drivers/clk/imx/clk-imx8mn.c
-index 457acb8a40..baac79dd29 100644
---- a/drivers/clk/imx/clk-imx8mn.c
-+++ b/drivers/clk/imx/clk-imx8mn.c
-@@ -23,6 +23,7 @@ static const char *arm_pll_bypass_sels[] = {"arm_pll", "arm_pll_ref_sel", };
- static const char *sys_pll1_bypass_sels[] = {"sys_pll1", "sys_pll1_ref_sel", };
- static const char *sys_pll2_bypass_sels[] = {"sys_pll2", "sys_pll2_ref_sel", };
- static const char *sys_pll3_bypass_sels[] = {"sys_pll3", "sys_pll3_ref_sel", };
-+static const char *video_pll_bypass_sels[] = {"video_pll", "video_pll_ref_sel", };
- 
- static const char *imx8mn_a53_sels[] = {"clock-osc-24m", "arm_pll_out", "sys_pll2_500m", "sys_pll2_1000m",
- 					"sys_pll1_800m", "sys_pll1_400m", "audio_pll1_out", "sys_pll3_out", };
-@@ -30,6 +31,10 @@ static const char *imx8mn_a53_sels[] = {"clock-osc-24m", "arm_pll_out", "sys_pll
- static const char *imx8mn_ahb_sels[] = {"clock-osc-24m", "sys_pll1_133m", "sys_pll1_800m", "sys_pll1_400m",
- 					"sys_pll2_125m", "sys_pll3_out", "audio_pll1_out", "video_pll_out", };
- 
-+static const char *imx8mn_disp_pixel_sels[] = {"osc_24m", "video_pll_out", "audio_pll2_out",
-+					       "audio_pll1_out", "sys_pll1_800m", "sys_pll2_1000m",
-+					       "sys_pll3_out", "clk_ext4", };
-+
- static const char *imx8mn_enet_axi_sels[] = {"clock-osc-24m", "sys_pll1_266m", "sys_pll1_800m", "sys_pll2_250m",
- 					     "sys_pll2_200m", "audio_pll1_out", "video_pll_out", "sys_pll3_out", };
- 
-@@ -139,6 +144,9 @@ static int imx8mn_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MN_SYS_PLL3_REF_SEL,
- 	       imx_clk_mux("sys_pll3_ref_sel", base + 0x114, 0, 2,
- 			   pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
-+	clk_dm(IMX8MN_VIDEO_PLL1_REF_SEL,
-+	       imx_clk_mux("video_pll_ref_sel", base + 0x28, 0, 2,
-+			   pll_ref_sels, ARRAY_SIZE(pll_ref_sels)));
- 
- 	clk_dm(IMX8MN_DRAM_PLL,
- 	       imx_clk_pll14xx("dram_pll", "dram_pll_ref_sel",
-@@ -155,6 +163,9 @@ static int imx8mn_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MN_SYS_PLL3,
- 	       imx_clk_pll14xx("sys_pll3", "sys_pll3_ref_sel",
- 			       base + 0x114, &imx_1416x_pll));
-+	clk_dm(IMX8MN_VIDEO_PLL1,
-+	       imx_clk_pll14xx("video_pll", "video_pll_ref_sel",
-+			       base + 0x28, &imx_1443x_pll));
- 
- 	/* PLL bypass out */
- 	clk_dm(IMX8MN_DRAM_PLL_BYPASS,
-@@ -183,6 +194,12 @@ static int imx8mn_clk_probe(struct udevice *dev)
- 				 ARRAY_SIZE(sys_pll3_bypass_sels),
- 				 CLK_SET_RATE_PARENT));
- 
-+	clk_dm(IMX8MN_VIDEO_PLL1_BYPASS,
-+	       imx_clk_mux_flags("video_pll_bypass", base + 0x28, 16, 1,
-+				 video_pll_bypass_sels,
-+				 ARRAY_SIZE(video_pll_bypass_sels),
-+				 CLK_SET_RATE_PARENT));
-+
- 	/* PLL out gate */
- 	clk_dm(IMX8MN_DRAM_PLL_OUT,
- 	       imx_clk_gate("dram_pll_out", "dram_pll_bypass",
-@@ -199,6 +216,9 @@ static int imx8mn_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MN_SYS_PLL3_OUT,
- 	       imx_clk_gate("sys_pll3_out", "sys_pll3_bypass",
- 			    base + 0x114, 11));
-+	clk_dm(IMX8MN_VIDEO_PLL1_OUT,
-+	       imx_clk_gate("video_pll_out", "video_pll_bypass",
-+			    base + 0x28, 13));
- 
- 	/* SYS PLL fixed output */
- 	clk_dm(IMX8MN_SYS_PLL1_40M,
-@@ -275,6 +295,9 @@ static int imx8mn_clk_probe(struct udevice *dev)
- 	clk_dm(IMX8MN_CLK_USDHC2,
- 	       imx8m_clk_composite("usdhc2", imx8mn_usdhc2_sels,
- 				   base + 0xac80));
-+
-+	clk_dm(IMX8MN_CLK_DISP_PIXEL,
-+	       imx8m_clk_composite("disp_pixel", imx8mn_disp_pixel_sels, base + 0xa500));
- 	clk_dm(IMX8MN_CLK_I2C1,
- 	       imx8m_clk_composite("i2c1", imx8mn_i2c1_sels, base + 0xad00));
- 	clk_dm(IMX8MN_CLK_I2C2,
--- 
-2.40.1
+On Sun, Apr 21, 2024 at 03:52:13PM +0200, Anatolij Gustschin wrote:
 
+> Hi Tom,
+>=20
+> please pull video driver updates for v2024.07-rc1.
+>=20
+> CI: https://source.denx.de/u-boot/custodians/u-boot-video/-/pipelines/204=
+66
+>=20
+> Thanks,
+> Anatolij
+>=20
+> The following changes since commit af04f37a78c7e61597fb9ed6db2c8f8d7f8b0f=
+92:
+>=20
+>   Merge tag 'u-boot-stm32-20240419' of https://source.denx.de/u-boot/cust=
+odians/u-boot-stm (2024-04-19 14:25:04 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-video.git tags/video-20=
+240421
+>=20
+> for you to fetch changes up to efe1ceec7ef0c2ce2344dbe066fca0d389a0b4f3:
+>=20
+>   boot: Move framebuffer reservation to separate helper (2024-04-21 09:07=
+:02 +0200)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--uj6ENOQC6dQ1qE9Q
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYlWT4ACgkQFHw5/5Y0
+tywsIwv8C73tWzY44R359GYCqxC5UcK1d6x+9hcudvRTA1jfFmWGN/zDNX10NN3R
+VewraN6udqk6ajJEFTZlFKKltyaFPASE4msbIszdyWhvEgOGGP9Pq/Qou8ssYC/m
+f0RBA2zULwZ5Z0Ny9o/Cjrvf4K2XLLb6L5chK4aV4iLagda9WU5h88QlXh4B175G
+NBDE4bXvfAwlX5hotpGufcselSEr8aVXLV9E5E79Jx1hL1fEDOzEx4WPu0OTLqpN
+AQngXRJI2UDcj7exBigir+72SfPpoM0FRQFQ7i9lGU0KGJdLiUzDXh4SkCU7dxnY
+AhEq0av756hHtEVKRJLIfBDgUqq0l9xa+c+UrQi/9MIVTCTm1FKVboirbtGUo9zp
+jek9iWnBUypU/ID6Y4SEhCZoqxcKEovb914CXxp9gGWRu5zpQ8y50PIr9AySScyI
+yGUYqDOy9DWFaRJIzexDf+YcX9f8K7YBIsBUd8Cy998u1A0P+P+a+FbTA/2OYQml
+UZ6vh5Eo
+=6l8e
+-----END PGP SIGNATURE-----
+
+--uj6ENOQC6dQ1qE9Q--
