@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D64A6C4345F
-	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 23:20:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA578C4345F
+	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 23:20:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CFDA8834E;
+	by phobos.denx.de (Postfix) with ESMTP id 735BD88354;
 	Mon, 22 Apr 2024 01:19:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1713741554;
-	bh=WdAbyvBmmEtSOWF+JIoSimAr4G3Li8qVJuTl2fYUbnc=;
+	bh=0ty7NCmqc2BPJFeBGg6+tuBDdKGKmnR9Cv2jaqhym/E=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=Xah7QFUgA4rMqvOuBqE0/pFxYb1Y8yRJZ3Lif9lm587n5KZgmS7Gl6vqTCkZAUrZp
-	 05zIoMQ2YH5c8t8qwSvDoBtHRPHRcMJp0K9pWrn1EzZ0k+WKvxxgqhFtmL5D0w5VAt
-	 VEvMVrJFmCqEdTdh7fzvOSRmsG4RhhI415k3QQgHslObGT1vefA1GOsPTg5wvHxVUq
-	 4WJjjm/OLriCPXSrWvQro4z4h9rUmTr6xKIY4ZcCRoHaIqdXnmKmcynlA+UGZqLwJM
-	 tZWL7E0eCNhVggOGAx17YBWK5PB27tevQ/aLXXUbMu446B20gh8HNS+TJzzjbMHaho
-	 PKm51TR071E5A==
+	b=y5d4fu9o9nTHaz7VpC4R0JkscXEYDZ5lNOqqZXa4czoviWEHTyt4TqvROXUakU7vY
+	 3f9vS0HSbUqTZRy2A0mZh048S1MmrESa/TUvOQYNDReXwNxXd4abBM67dFtxuaYjoz
+	 yJUvs+O+8sMG6WEYloXXbAFp0MHrKRrwn527YIE6yFT9ZTt4RyJwB/b+bN6cxI5nTD
+	 UhLC/T702c7pf6Y6aDpl7n8DKv91acZ4UJMyTO6PzKtBYZfHpU69zVyCZnBnTyhWMF
+	 MQKweIOGrd5FW4vDFSru/Vqn58rdULv8E6GvkAT9/rcNF9uSWXsEwRi1VkXx19RrGy
+	 mcUFveFq6z1TQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id DCFA888311;
- Mon, 22 Apr 2024 01:19:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3A48388317;
+ Mon, 22 Apr 2024 01:19:09 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1713741549;
- bh=WdAbyvBmmEtSOWF+JIoSimAr4G3Li8qVJuTl2fYUbnc=;
+ bh=0ty7NCmqc2BPJFeBGg6+tuBDdKGKmnR9Cv2jaqhym/E=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=LVgeeLlKLQ1CyofLTa4AUA5VmqiVavKPiAYo/oIk2VVGmHIVIaoz/7j/qk95Rm02d
- +Hpt55WB7HWhy3N2JDiQznEVl4XH62bmB5HJ+jqs7yDHPaZlJKHl2H3OT0DDj/DeVk
- jN52iAF8jb0j40nZ01qt9H8PQfOw/3cnDCNXZrctE418IM1iMXJyWzFAjMDgw/JMJT
- y07zbAbUHnm7SzIT86PvV9xNoUI4klmcPm6XizvFD5PRgV8O2FejOJ5xF+bhj62lTh
- qZ1OdenwhvxyolWb7vQGFsZxNHXkqYD37kk2cSWzRfTLSSkuqkUFWPTcZrqQTaT6RW
- VcaCN1/Vz0DIQ==
+ b=VeF9x8b5AMCvpGdkKJYKRF9HeSwtIagp/fZ0TiWMP2jn0rSgb69TL5196XPesyuFa
+ aybPkwGw529ifmo5v0caAXthElGgPFoSHs1noQzbGVFq8pqGZMeqAds2FS5NbguL/7
+ FEzi5tsi13sW2CxSVwL5e/GSj8gqtZ+fXnDlvcZrOqRozSE4u7JA04OkZRk8JmOg5Y
+ lSRCg08q+fEl9Gh8mKQtx2oh18bfb1swTW14QJdh+BGlVDD5B9avEoelSu+bjDzpQi
+ LUmlrPyGVQioBW4i6nFXUESbKCp9dyL0DypWDlFPZbkMWMaawe+BJByV8noiOA5yXj
+ l2b5zU86MbL1g==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>, u-boot@dh-electronics.com,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH 06/19] ARM: dts: stm32: Add alternate pinmux for MP13 MCAN1
+Subject: [PATCH 07/19] ARM: dts: stm32: Add alternate pinmux for MP13 MCAN2
  pins
-Date: Mon, 22 Apr 2024 01:16:52 +0200
-Message-ID: <20240421231849.194648-6-marex@denx.de>
+Date: Mon, 22 Apr 2024 01:16:53 +0200
+Message-ID: <20240421231849.194648-7-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240421231849.194648-1-marex@denx.de>
 References: <20240421231849.194648-1-marex@denx.de>
@@ -69,7 +69,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add another mux option for MCAN1 pins, this is used on
+Add another mux option for MCAN2 pins, this is used on
 DH electronics STM32MP13xx DHCOR DHSBC board.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
@@ -83,30 +83,30 @@ Cc: uboot-stm32@st-md-mailman.stormreply.com
  1 file changed, 20 insertions(+)
 
 diff --git a/arch/arm/dts/stm32mp13-pinctrl.dtsi b/arch/arm/dts/stm32mp13-pinctrl.dtsi
-index cfbae71efc7..b38174504ff 100644
+index b38174504ff..b58bf6c0024 100644
 --- a/arch/arm/dts/stm32mp13-pinctrl.dtsi
 +++ b/arch/arm/dts/stm32mp13-pinctrl.dtsi
-@@ -168,6 +168,26 @@
+@@ -188,6 +188,26 @@
  		};
  	};
  
-+	m_can1_pins_a: m-can1-0 {
++	m_can2_pins_a: m-can2-0 {
 +		pins1 {
-+			pinmux = <STM32_PINMUX('G', 10, AF9)>; /* CAN1_TX */
++			pinmux = <STM32_PINMUX('G', 0, AF9)>; /* CAN2_TX */
 +			slew-rate = <1>;
 +			drive-push-pull;
 +			bias-disable;
 +		};
 +		pins2 {
-+			pinmux = <STM32_PINMUX('D', 0, AF9)>; /* CAN1_RX */
++			pinmux = <STM32_PINMUX('E', 0, AF9)>; /* CAN2_RX */
 +			bias-disable;
 +		};
 +	};
 +
-+	m_can1_sleep_pins_a: m_can1-sleep-0 {
++	m_can2_sleep_pins_a: m_can2-sleep-0 {
 +		pins {
-+			pinmux = <STM32_PINMUX('G', 10, ANALOG)>, /* CAN1_TX */
-+				 <STM32_PINMUX('D', 0, ANALOG)>; /* CAN1_RX */
++			pinmux = <STM32_PINMUX('G', 0, ANALOG)>, /* CAN2_TX */
++				 <STM32_PINMUX('E', 0, ANALOG)>; /* CAN2_RX */
 +		};
 +	};
 +
