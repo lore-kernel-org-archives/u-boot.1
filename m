@@ -4,77 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7192C4345F
-	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 20:54:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F3AFC4345F
+	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 23:10:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5306F882DA;
-	Sun, 21 Apr 2024 22:54:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id 8478888308;
+	Mon, 22 Apr 2024 01:10:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="rrv4mY+T";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A731A882D7; Sun, 21 Apr 2024 22:54:21 +0200 (CEST)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1713741016;
+	bh=C10VULq8FO1HmFruzxcEdUjsbxnwdh+DizpYP/hxkCc=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=q8cCu/WyyzaCrZBqycuZ6Yu4gj1hpfKJ2WOBRkVfpSDjHU88iCYxb7Q/vhs7PtnTU
+	 8XAEPEl/ljd+Ml+YW3VsSaS/Ef/WReHK4NZMf8Rm1sQSConqWwNQyUlU2f7MBy3vo8
+	 tV/ObjxAW1bWjJFGArISa+ic4uPJ7zN4ReqMQPaT9tD/zFKDpFbpntsDNp85rm1sZd
+	 02w7cmT5SNmj75A3Ce7bFt9t4yMQicUibe7lQJls/4Co69JgtSU0wa+6/dtav4u9qK
+	 XgvibY929u1C3pA59w3tpeWkJzyb/4hIOI591/1BW4ioLRAtSJWT8Jk/EDceCl9dII
+	 XKfihCkEr5lMQ==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E644882FD
- for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 22:54:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-56e6a1edecfso5698410a12.1
- for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 13:54:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1713732859; x=1714337659;
- darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+wuW4MLHy4LtuA3cPMAkg8YooC1iIFT5v0hRyNaAvqY=;
- b=rrv4mY+TOuwuZ/HAcx6SVwj2q33go3/xLJ74Q9BR9FLJeQ1UGF5uasmomSWGeeiOFG
- g2Hu5g+3BjQt0ZcZ3YdGVC3HdtQ+F9/XIz8OCnCsK3s/RN0A2yodsLyDtIkAw+jEotE8
- CJ0TYMY3c+JWU96vJn+2CqxBdAzXTyxc+BxTQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713732859; x=1714337659;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+wuW4MLHy4LtuA3cPMAkg8YooC1iIFT5v0hRyNaAvqY=;
- b=cCjVYzxn82tccszPOmNpEq5HI3lYFghb5xSwxV3tCtd1G+oZymPxtFYmwlplhmDSe3
- D4+Z+2PNC7+NfbNSGmUZlq2VrJ9fC2Qnfe536zieV+9gfDmtoX/virO6RgMZG4TjISuR
- rwf8CUIx8arpLr6AcGAHUJ4uLxuOR4w330yV+rJBHdcEWw89AGJCypQ15emyyEAqFKBC
- SRWHUm1FF8VUna5j+R/PWaUaULnsvBn2gJuP7LXuWrckv3UsgnYfPl7F5R2dRMc+PI8W
- VLv9zeJewlSKc9DAy+GSEJ7/wCxwd5SmMILPpsemUkhx9t2D3X/47rOMJuvJUZ+C+RVg
- +i7Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXW8NcosQvGMQaS7B67rWI5tTiworBE+Zcab2DDI6HdHi2AbJNEHRSqJB2cDMXKg320rUurpSp7lE1FAPB5P/XmzM/idQ==
-X-Gm-Message-State: AOJu0Yzgc0XF+DNLpu6X71CefhmItITQttasPAbNz2lkkL1047cD84Og
- C9/1WNLn0pzyUA+i1iTkWzhZUSvlahUihkcVL3zE2a0oU7ZCOaEmh9AnkoPfyP5gLGCVfcABfzf
- vJafvB7UMfbYFAw60CxKymvqsGNSHC5ndGANkMQ==
-X-Google-Smtp-Source: AGHT+IFMffmVZQI5did7b5ERzj3pXda886gSbgBfkwck70XkZtrukP+TzcFjj08+SmIoxH5iuQgY/XNkFFKB8sh69fo=
-X-Received: by 2002:a17:906:60d4:b0:a47:31db:d8ff with SMTP id
- f20-20020a17090660d400b00a4731dbd8ffmr6137976ejk.40.1713732858618; Sun, 21
- Apr 2024 13:54:18 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 56FF3882F3;
+ Mon, 22 Apr 2024 01:10:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1713741014;
+ bh=C10VULq8FO1HmFruzxcEdUjsbxnwdh+DizpYP/hxkCc=;
+ h=From:To:Cc:Subject:Date:From;
+ b=E7eZ2oxN7ssJxCZ+pRLO2ubC7DPkVuQKjT6KawON+zSvwJp3JAM8jR6d5qD0jvI0Y
+ 9fkv+yibVGPqPcLfH8ftmKzcbXstfm74xB+Q4kbce2ZGTZVNHDhuJ60O/3V7Ewnole
+ a54BoCor/kmT11ZYHdvq8tuZe1UKZCzpLxio2jM/FKM44ZNPT0caA8+O3rH3d7LNRR
+ oGrGbDVi0CRCQqc0djt6OzklRBvGpmkXkkfZoPWBZfdSYVCFtY7AVpOiPFr8WITn6L
+ iAMR9JD/8s3adcWL4sBbgkPCtryGN/3meP+NJTvpzRWSP7kjoYiaq7sCdGPYY0VN3l
+ blB9I4l9f7CPg==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Christophe Roullier <christophe.roullier@st.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Ramon Fried <rfried.dev@gmail.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] ARM: dts: stm32: add eth1 and eth2 support on stm32mp13
+Date: Mon, 22 Apr 2024 01:09:47 +0200
+Message-ID: <20240421230954.193773-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240421140745.25870-1-michael@amarulasolutions.com>
- <CAOMZO5DbWbsT==bTczp9b4uHuBR6dPsbsHEfoJTugTp4zwTJjg@mail.gmail.com>
-In-Reply-To: <CAOMZO5DbWbsT==bTczp9b4uHuBR6dPsbsHEfoJTugTp4zwTJjg@mail.gmail.com>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Sun, 21 Apr 2024 22:54:06 +0200
-Message-ID: <CAOf5uwnruzdTfsbMqvU9UEnsL0Y5_xWs8tCsGHCTPAbHbxb=rg@mail.gmail.com>
-Subject: Re: [PATCH] clk: imx8mn: add video clocks support
-To: Fabio Estevam <festevam@gmail.com>
-Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, 
- u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,50 +68,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Fabio
+From: Christophe Roullier <christophe.roullier@st.com>
 
-On Sun, Apr 21, 2024 at 10:24=E2=80=AFPM Fabio Estevam <festevam@gmail.com>=
- wrote:
->
-> Hi Michael,
->
-> On Sun, Apr 21, 2024 at 11:07=E2=80=AFAM Michael Trimarchi
-> <michael@amarulasolutions.com> wrote:
-> >
-> > Add clocks support for the video subsystem.
-> >
-> > Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
->
-> Which target will make use of these clocks?
->
-> As-is this patch adds only dead code.
->
-> Adding a defconfig that uses these newly introduced clocks would be nice.
->
+Add both ethernet MACs based on GMAC SNPS IP on stm32mp13.
 
-You are right, I will wrap it and enable only on CONFIG_VIDEO
+Signed-off-by: Christophe Roullier <christophe.roullier@st.com>
+---
+Cc: Christophe Roullier <christophe.roullier@st.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: u-boot@dh-electronics.com
+Cc: uboot-stm32@st-md-mailman.stormreply.com
+---
+ arch/arm/dts/stm32mp131.dtsi | 37 ++++++++++++++++++++++++++++++++++++
+ arch/arm/dts/stm32mp133.dtsi | 30 +++++++++++++++++++++++++++++
+ 2 files changed, 67 insertions(+)
 
-> Also, to avoid size increase, please protect this code against
-> CONFIG_VIDEO or something, like done here:
-> https://source.denx.de/u-boot/custodians/u-boot-imx/-/commit/2b3310ef1399=
-8dfd03196a0806e03035212b102c
+diff --git a/arch/arm/dts/stm32mp131.dtsi b/arch/arm/dts/stm32mp131.dtsi
+index 159ba8f8c9c..ad331b73d18 100644
+--- a/arch/arm/dts/stm32mp131.dtsi
++++ b/arch/arm/dts/stm32mp131.dtsi
+@@ -1328,6 +1328,37 @@
+ 			status = "disabled";
+ 		};
+ 
++		eth1: eth1@5800a000 {
++			compatible = "snps,dwmac-4.20a", "st,stm32mp13-dwmac";
++			reg = <0x5800a000 0x2000>;
++			reg-names = "stmmaceth";
++			interrupts-extended = <&intc GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>,
++					      <&exti 68 1>;
++			interrupt-names = "macirq", "eth_wake_irq";
++			clock-names = "stmmaceth",
++				      "mac-clk-tx",
++				      "mac-clk-rx",
++				      "ethstp",
++				      "eth-ck";
++			clocks = <&rcc ETH1MAC>,
++				 <&rcc ETH1TX>,
++				 <&rcc ETH1RX>,
++				 <&rcc ETH1STP>,
++				 <&rcc ETH1CK_K>;
++			st,syscon = <&syscfg 0x4 0xff0000>;
++			snps,mixed-burst;
++			snps,pbl = <2>;
++			snps,axi-config = <&stmmac_axi_config_1>;
++			snps,tso;
++			status = "disabled";
++
++			stmmac_axi_config_1: stmmac-axi-config {
++				snps,wr_osr_lmt = <0x7>;
++				snps,rd_osr_lmt = <0x7>;
++				snps,blen = <0 0 0 0 16 8 4>;
++			};
++		};
++
+ 		usbh_ohci: usb@5800c000 {
+ 			compatible = "generic-ohci";
+ 			reg = <0x5800c000 0x1000>;
+@@ -1404,6 +1435,12 @@
+ 			ts_cal2: calib@5e {
+ 				reg = <0x5e 0x2>;
+ 			};
++			ethernet_mac1_address: mac1@e4 {
++				reg = <0xe4 0x6>;
++			};
++			ethernet_mac2_address: mac2@ea {
++				reg = <0xea 0x6>;
++			};
+ 		};
+ 
+ 		/*
+diff --git a/arch/arm/dts/stm32mp133.dtsi b/arch/arm/dts/stm32mp133.dtsi
+index df451c3c2a2..5cd5bde9535 100644
+--- a/arch/arm/dts/stm32mp133.dtsi
++++ b/arch/arm/dts/stm32mp133.dtsi
+@@ -64,5 +64,35 @@
+ 				};
+ 			};
+ 		};
++
++		eth2: eth2@5800e000 {
++			compatible = "snps,dwmac-4.20a", "st,stm32mp13-dwmac";
++			reg = <0x5800e000 0x2000>;
++			reg-names = "stmmaceth";
++			interrupts-extended = <&intc GIC_SPI 97 IRQ_TYPE_LEVEL_HIGH>;
++			interrupt-names = "macirq";
++			clock-names = "stmmaceth",
++				      "mac-clk-tx",
++				      "mac-clk-rx",
++				      "ethstp",
++				      "eth-ck";
++			clocks = <&rcc ETH2MAC>,
++				 <&rcc ETH2TX>,
++				 <&rcc ETH2RX>,
++				 <&rcc ETH2STP>,
++				 <&rcc ETH2CK_K>;
++			st,syscon = <&syscfg 0x4 0xff000000>;
++			snps,mixed-burst;
++			snps,pbl = <2>;
++			snps,axi-config = <&stmmac_axi_config_2>;
++			snps,tso;
++			status = "disabled";
++
++			stmmac_axi_config_2: stmmac-axi-config {
++				snps,wr_osr_lmt = <0x7>;
++				snps,rd_osr_lmt = <0x7>;
++				snps,blen = <0 0 0 0 16 8 4>;
++			};
++		};
+ 	};
+ };
+-- 
+2.43.0
 
-Working on display panel integration on imx8m, trying to progress
-merging things up.
-
-Michael
-
-
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
