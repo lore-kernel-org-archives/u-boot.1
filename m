@@ -4,54 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 042BAC4345F
-	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 20:12:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28CF7C4345F
+	for <u-boot@archiver.kernel.org>; Sun, 21 Apr 2024 20:24:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C6328830B;
-	Sun, 21 Apr 2024 22:12:49 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 538948830F;
+	Sun, 21 Apr 2024 22:24:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="OU0FFixZ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HH6lKIEJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 987D487EDC; Sun, 21 Apr 2024 22:12:47 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 80C1788313; Sun, 21 Apr 2024 22:24:20 +0200 (CEST)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4711B8830B
- for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 22:12:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9AAAB882DA
+ for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 22:24:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8fac=L3=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
- To: From; q=dns/txt; s=fe-e1b5cab7be; t=1713730357;
- bh=hp94nca7BOgm08UyUik8usty2ligzUN6i2S7+3TBhDw=;
- b=OU0FFixZVPrbhv/U1mVfJYshaDqhe0r4EWMIVTq4Ec5LlFBilSTUUikV5lGQMHx/0qtTQ4rA6
- OjPrSfWBfQQppYww8Dcpo/ABik+/5zHBwU7PpqINIFyhIKiM4N5dtRMia6Mf9XFFXOaRTSSCYjI
- R1do2r60+JtO+CY6sKq2a6kH2rkNYYSlBq9j+qKQrEEnVm5MHQCLzyzu1Ho4/sJDkVDGv/O7rgz
- 7LO93YFlhe7fLzafUS+MZrM55OYF4n45SM4UQp5YAb85CtUw3Lga7CH4cDP3sHfOlaVTsP9yGyH
- oVd7IgXBMqYCkCR0OAJNP4vMcfYVNRElMOsReGAh/96Q==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jagan Teki <jagan@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH] rockchip: rk3328: Fix bootph prop for vop node
-Date: Sun, 21 Apr 2024 20:12:29 +0000
-Message-ID: <20240421201231.520328-1-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.2
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2a2cced7482so504624a91.0
+ for <u-boot@lists.denx.de>; Sun, 21 Apr 2024 13:24:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713731054; x=1714335854; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CZ2rCfYmhsON6R183mD4MggUhh+yg2etiMnidjibyhw=;
+ b=HH6lKIEJzkbPTcbAsEF2RU1xeXSkcnYmr5j7nXR+gcCpPFnhn3qvLWHHw/TA4GzmZX
+ cHL2QK3OsGeqdM+abhf+IIofUoEfo+HqBJ4y2X1UtEU47zLx8iWw7n13AT6h7UZYNkM2
+ uIKhD3VsOt1PxNVEZ+AQW61akutZRsOaOwplYEdOr2d7GFot9Q5EfVxVALOyxAcMpZr1
+ o8TsHdDiyg6sYTI9wzFx8JEFWnPwZy93gDPT/Lter47gnsx1U4RyDWq6AYa0w5kaX2E9
+ 7+lUPBf/KM/lWry5HUMfivlcyc64TR0NrNuQqg78OkxgM2kpUnTr+G2k7br8Wb5cfTFC
+ qNfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713731054; x=1714335854;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CZ2rCfYmhsON6R183mD4MggUhh+yg2etiMnidjibyhw=;
+ b=tf3QZ7tZb9LjZn6bkZVNw6HhcAij2/K3xHORY6owaHN9Jmg+pKu9CZCEsE/Dga+Xq6
+ d/FaKQZjfu5E92M7WG0zgC0kTT5YjhIJ/tizsdKcQzvS7JBz+gPFyixFu3geB5WEGTxh
+ vnJdJ4xMhg+vXYCqz8Rgyjy2t8qE2sSuwnMgyvHM2LLhMdvXmlYBSTTQ7czh6gXpTYGC
+ eWthIJHztovej2a7m9Bejb/brUJl39FwgWtByY1n+Ow8/vGJt4gFUqu6H6zWjLgnTz+n
+ tvbpFJtYWa7ZCf744zS4+9tnsUeX0uPCC2FYbv9aqDDqqbXsPX3ob/wvyDiBqWqIXIq6
+ wygQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUshahLjr7r5GfT5qgTZ02GzLHR1WLlkb1LYMvLWBthSzUwd81O+g/9/NyY/KP0Szhh8izDE4lOxVopcjGTagb7pgKaeA==
+X-Gm-Message-State: AOJu0YziJonc5DcWUyKVDwUSacuqAIlig8oW2on4tlgtoFD4qgb7Yr5a
+ 2/QrU8VCjCz9CDPjW/N6nttvp4F3EepzDEkVgNNoitZs4zBcgSeVUTI6m1/5kdgzLL0vMli4A1o
+ 5994TZv8Y6Wkfbj6LYEueE8jN6uhz6E15
+X-Google-Smtp-Source: AGHT+IElgjUrezzR+YhGxU99Q7haCaRRl1IWsONVUkJG/F3ZkG52IO9nrNleqxiz1ObdgFqnwNFxWbsiEMyRjs4tYZw=
+X-Received: by 2002:a17:90a:70c7:b0:2a7:aa52:5568 with SMTP id
+ a7-20020a17090a70c700b002a7aa525568mr7837921pjm.0.1713731054153; Sun, 21 Apr
+ 2024 13:24:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66257334d283e311fc8ea963
+References: <20240421140745.25870-1-michael@amarulasolutions.com>
+In-Reply-To: <20240421140745.25870-1-michael@amarulasolutions.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Sun, 21 Apr 2024 17:24:03 -0300
+Message-ID: <CAOMZO5DbWbsT==bTczp9b4uHuBR6dPsbsHEfoJTugTp4zwTJjg@mail.gmail.com>
+Subject: Re: [PATCH] clk: imx8mn: add video clocks support
+To: Michael Trimarchi <michael@amarulasolutions.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>, 
+ u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,30 +92,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The vop node should not be included in TPL/SPL control FDT, it should
-only be included at U-Boot proper pre-reloc phase.
+Hi Michael,
 
-Change to use bootph-some-ram prop to fix this.
+On Sun, Apr 21, 2024 at 11:07=E2=80=AFAM Michael Trimarchi
+<michael@amarulasolutions.com> wrote:
+>
+> Add clocks support for the video subsystem.
+>
+> Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
 
-Fixes: 6794063d5065 ("ARM: dts: rk3328: Enable VOP for bootph-all")
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/dts/rk3328-u-boot.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Which target will make use of these clocks?
 
-diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
-index 7c5067cf002e..d3608bd0e2b2 100644
---- a/arch/arm/dts/rk3328-u-boot.dtsi
-+++ b/arch/arm/dts/rk3328-u-boot.dtsi
-@@ -131,7 +131,7 @@
- };
- 
- &vop {
--	bootph-all;
-+	bootph-some-ram;
- };
- 
- #ifdef CONFIG_ROCKCHIP_SPI_IMAGE
--- 
-2.43.2
+As-is this patch adds only dead code.
 
+Adding a defconfig that uses these newly introduced clocks would be nice.
+
+Also, to avoid size increase, please protect this code against
+CONFIG_VIDEO or something, like done here:
+https://source.denx.de/u-boot/custodians/u-boot-imx/-/commit/2b3310ef13998d=
+fd03196a0806e03035212b102c
