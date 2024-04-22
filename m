@@ -4,61 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 516BDC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:10:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96AC6C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:11:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D524D88396;
-	Mon, 22 Apr 2024 10:10:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2C79A883A1;
+	Mon, 22 Apr 2024 10:11:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="NqfBeI8D";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="VeY2icRf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7C5D8839D; Mon, 22 Apr 2024 10:10:56 +0200 (CEST)
-Received: from mail-m12773.qiye.163.com (mail-m12773.qiye.163.com
- [115.236.127.73])
+ id 6DF4F88398; Mon, 22 Apr 2024 10:11:25 +0200 (CEST)
+Received: from mail-m25487.xmail.ntesmail.com (mail-m25487.xmail.ntesmail.com
+ [103.129.254.87])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5869088353
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:10:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C26A1883A5
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:11:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=NqfBeI8Degwej9b/aXr344tmL/9OhKBEuX/Ap3aXNrqS6TuLsrJRc7oQ0nY4VNdKGs+HZExffOyWd7AEPxfWy9rYmXQatj5Z8ELjvSYcnULfnKNqeLlrmOnIm0c7A9hDOgdKzMFMcP01q6I4MOtXPzIzdbDsMRvKwbiwqYqAGH8=;
+ b=VeY2icRfJjRTumAMFBTH2yNDWJCvpvkZ8SGIrYqQRgIjhCzpk0czZhhUbcl39AWy8ux+/fAxpx0I6evTBbPC87WrWb7MkY0v/1ViUExb8oEszwT1U39Ba66Lz6+ZI22I2kg1iBVtlq1YdVOJgv39uthcJSXHOA6ZhdCdrJpwKfk=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=uYpkcYGbBzPC6T7IVDBCGzbCE3qe8qFc7VMfNM1mthA=;
+ bh=fJ+YAx8d7XEAaD4NubEuXmYABfVF/ERx6Ac5xNUNp00=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.33.226] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 2C1C29002B1;
- Mon, 22 Apr 2024 16:10:48 +0800 (CST)
-Message-ID: <90d34d9d-0f35-4d7d-9dd6-263d25de7852@rock-chips.com>
-Date: Mon, 22 Apr 2024 16:10:47 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id D4A899002F7;
+ Mon, 22 Apr 2024 16:11:15 +0800 (CST)
+Message-ID: <bd1edf89-7b0e-4b60-af03-b56429b05944@rock-chips.com>
+Date: Mon, 22 Apr 2024 16:11:15 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 25/28] rockchip: rk356x-generic: Add support for USB OTG
+Subject: Re: [PATCH v3 26/28] rockchip: rk3588-generic: Use M0 iomux for UART2
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
  Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
 References: <20240422062936.681359-1-jonas@kwiboo.se>
- <20240422062936.681359-26-jonas@kwiboo.se>
+ <20240422062936.681359-27-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240422062936.681359-26-jonas@kwiboo.se>
+In-Reply-To: <20240422062936.681359-27-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkJPT1ZMT0JMHUpPHU4ZTE1VEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkgYS1YdTU5NHUJOS05JTkNVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8f04db8e4103a9kunm2c1c29002b1
+X-HM-Tid: 0a8f04dbfa5f03a9kunmd4a899002f7
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PQw6NBw*CDNRMjoCGBgSDkkP
- DEoKCh9VSlVKTEpITExIT09CSEhCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPSkpMNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PTI6KDo5LTNNUToWGB8oDT83
+ Py0KChFVSlVKTEpITExIT0xNQklLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJSENMNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,92 +77,31 @@ X-Virus-Status: Clean
 
 
 On 2024/4/22 14:29, Jonas Karlman wrote:
-> Add support for USB OTG, RockUSB and UMS to the generic RK3566/RK3568
-> target.
+> The default pinctrl for UART2 is using M1 iomux, however, all other
+> supported RK3588 boards in U-Boot use M0 iomux for UART2.
 >
+> Change to use the M0 pinctrl for UART2 to match other supported boards.
+>
+> Fixes: b54c3d0dd69b ("rockchip: board: Add minimal generic RK3588S/RK3588 board")
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
-> v3: No change
-> v2: Split patch
+> v3: New patch split from rk3588 bootph patch
 > ---
->   arch/arm/dts/rk3568-generic.dts  | 19 ++++++++++++++++++-
->   configs/generic-rk3568_defconfig | 10 ++++++++++
->   2 files changed, 28 insertions(+), 1 deletion(-)
+>   arch/arm/dts/rk3588-generic.dts | 1 +
+>   1 file changed, 1 insertion(+)
 >
-> diff --git a/arch/arm/dts/rk3568-generic.dts b/arch/arm/dts/rk3568-generic.dts
-> index 87c3aff26589..085a09268e8a 100644
-> --- a/arch/arm/dts/rk3568-generic.dts
-> +++ b/arch/arm/dts/rk3568-generic.dts
-> @@ -1,6 +1,6 @@
->   // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
->   /*
-> - * Minimal generic DT for RK3566/RK3568 with eMMC, SD-card and SPI flash enabled
-> + * Minimal generic DT for RK3566/RK3568 with eMMC, SD-card, SPI flash and USB OTG enabled
->    */
+> diff --git a/arch/arm/dts/rk3588-generic.dts b/arch/arm/dts/rk3588-generic.dts
+> index e4721d97a87d..baafe7463f1b 100644
+> --- a/arch/arm/dts/rk3588-generic.dts
+> +++ b/arch/arm/dts/rk3588-generic.dts
+> @@ -40,5 +40,6 @@
+>   };
 >   
->   /dts-v1/;
-> @@ -58,3 +58,20 @@
 >   &uart2 {
+> +	pinctrl-0 = <&uart2m0_xfer>;
 >   	status = "okay";
 >   };
-> +
-> +&usb_host0_xhci {
-> +	dr_mode = "peripheral";
-> +	extcon = <&usb2phy0>;
-> +	maximum-speed = "high-speed";
-> +	phys = <&usb2phy0_otg>;
-> +	phy-names = "usb2-phy";
-> +	status = "okay";
-> +};
-> +
-> +&usb2phy0 {
-> +	status = "okay";
-> +};
-> +
-> +&usb2phy0_otg {
-> +	status = "okay";
-> +};
-> diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
-> index 9276eae63ee3..26114f9cb2a5 100644
-> --- a/configs/generic-rk3568_defconfig
-> +++ b/configs/generic-rk3568_defconfig
-> @@ -31,6 +31,8 @@ CONFIG_SPL_ATF=y
->   CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_MMC=y
-> +CONFIG_CMD_ROCKUSB=y
-> +CONFIG_CMD_USB_MASS_STORAGE=y
->   # CONFIG_CMD_SETEXPR is not set
->   # CONFIG_SPL_DOS_PARTITION is not set
->   CONFIG_SPL_OF_CONTROL=y
-> @@ -40,6 +42,7 @@ CONFIG_SPL_DM_SEQ_ALIAS=y
->   CONFIG_SPL_REGMAP=y
->   CONFIG_SPL_SYSCON=y
->   CONFIG_SPL_CLK=y
-> +# CONFIG_USB_FUNCTION_FASTBOOT is not set
->   CONFIG_ROCKCHIP_GPIO=y
->   CONFIG_MISC=y
->   # CONFIG_ROCKCHIP_IODOMAIN is not set
-> @@ -57,6 +60,7 @@ CONFIG_SPI_FLASH_SILICONKAISER=y
->   CONFIG_SPI_FLASH_WINBOND=y
->   CONFIG_SPI_FLASH_XMC=y
->   CONFIG_SPI_FLASH_XTX=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
->   CONFIG_SPL_PINCTRL=y
->   CONFIG_SPL_RAM=y
->   CONFIG_BAUDRATE=1500000
-> @@ -64,4 +68,10 @@ CONFIG_DEBUG_UART_SHIFT=2
->   CONFIG_SYS_NS16550_MEM32=y
->   CONFIG_ROCKCHIP_SFC=y
->   CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_USB_DWC3_GENERIC=y
-> +CONFIG_USB_GADGET=y
-> +CONFIG_USB_GADGET_DOWNLOAD=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
->   CONFIG_ERRNO_STR=y
