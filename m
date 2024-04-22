@@ -4,75 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8C48C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 16:24:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13DA1C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 16:42:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DA4388883;
-	Mon, 22 Apr 2024 18:24:26 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4A9BE884A1;
+	Mon, 22 Apr 2024 18:42:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Qoe1CPGr";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E9E4188886; Mon, 22 Apr 2024 18:24:24 +0200 (CEST)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8E6C3888A5; Mon, 22 Apr 2024 18:41:59 +0200 (CEST)
+Received: from smtp-42ad.mail.infomaniak.ch (smtp-42ad.mail.infomaniak.ch
+ [84.16.66.173])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 863D28880F
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 18:24:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DD4A88493
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 18:41:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-78edc3e80e6so330287285a.2
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 09:24:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713803061; x=1714407861; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=frW1UdW4LqYTZ8sjDN9GMyr94hTkJrvYr3oe7i3mUT0=;
- b=Qoe1CPGrT7BZ4g6m+Wt1CCbq8ssSOxC+YpSwJzALOh5wnV5cHSajZXCy7AEyab8oOA
- VH+LS9FSNWj1LbHrcRZQiJcB9J8FxVcfNFYsaxOf6VkipfGGE2RwpV2UR2fL1tyaDSC/
- hD4meKZZKEOBavDQSZTNRiI7iu4m+tKrojSj0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713803061; x=1714407861;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=frW1UdW4LqYTZ8sjDN9GMyr94hTkJrvYr3oe7i3mUT0=;
- b=Hi2elpJXJ/SucDhGHcLSC6GTn8A6zVgMgVowA2MFS4Ws+ZXMxucB69VWy9x8TzrmX0
- Lah4pXHdKqGXIW8ZHvf9Rv1p0PebBoDr6j67hpVyOlA8wMC3oh5SerFCQWYZkEd3t5sg
- ErRTpb4yXoM0vAcwAsZqHiIe2jXZJE2s3AT3cxPd2vJWZqqWpKrHeaSsw+vQyM9mr1BM
- atNdyJ6+gHKaHjcy1V8OwCq2e2hhU/lGLa5MCIR6glV02frWC52VwusZ3rogoP7B6C2Y
- OX0q5GLidizBG3KMRNPvcb+EeOZ4xjTdongoijP41wsY7yN+ARsa+ekes/hpABXogAQu
- OaRg==
-X-Gm-Message-State: AOJu0YwfKab+4cgn2rF5z3/mruCUKpQ6BuCdOWnVGpETFcbv2PrwdWUb
- mHBN+lINtYa9uFuWsa6zMwbKhz+VUb+swnY5S4odtabGF+Eoyk8BgXoTzUDVeAQ=
-X-Google-Smtp-Source: AGHT+IGdYm1H/vD2u7JVUZyUrkLLvWDMxWTOnNOw8f1I0i9CF3wn9mMlgvXIOHz6MZ6oefR7kACjcw==
-X-Received: by 2002:a05:620a:28d5:b0:790:7da0:4b7f with SMTP id
- l21-20020a05620a28d500b007907da04b7fmr1538640qkp.32.1713803061334; 
- Mon, 22 Apr 2024 09:24:21 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- o8-20020a05620a110800b0078d76c1178esm4440323qkk.119.2024.04.22.09.24.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 09:24:20 -0700 (PDT)
-Date: Mon, 22 Apr 2024 10:24:18 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: Please pull u-boot-tegra staging
-Message-ID: <20240422162418.GU1054907@bill-the-cat>
-References: <20240422121502.213680-1-clamor95@gmail.com>
+ spf=pass smtp.mailfrom=foss+uboot@0leil.net
+Received: from smtp-3-0000.mail.infomaniak.ch (smtp-3-0000.mail.infomaniak.ch
+ [10.4.36.107])
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VNWHS1YSQzb1V;
+ Mon, 22 Apr 2024 18:41:56 +0200 (CEST)
+Received: from unknown by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA
+ id 4VNWHR1dQBzlry; Mon, 22 Apr 2024 18:41:55 +0200 (CEST)
+From: Quentin Schulz <foss+uboot@0leil.net>
+Subject: [PATCH 0/2] rockchip: add support for Theobroma Systems
+ SOM-RK3588-Q7 Tiger module
+Date: Mon, 22 Apr 2024 18:41:40 +0200
+Message-Id: <20240422-tiger-v1-0-8816b070d748@theobroma-systems.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="PFjK5IZPHqiXnWjs"
-Content-Disposition: inline
-In-Reply-To: <20240422121502.213680-1-clamor95@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAESTJmYC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDE0ML3ZLM9NQi3RRDU2NDYwOLZMtEAyWg2oKi1LTMCrA50bG1tQCS8q1
+ gVwAAAA==
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Klaus Goger <klaus.goger@theobroma-systems.com>, 
+ Heiko Stuebner <heiko.stuebner@cherry.de>
+Cc: Quentin Schulz <foss+uboot@0leil.net>, u-boot@lists.denx.de, 
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
+X-Mailer: b4 0.13.0
+X-Infomaniak-Routing: alpha
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,52 +65,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The RK3588-Q7 SoM is a Qseven-compatible (70mm x 70mm, MXM-230
+connector) system-on-module from Theobroma Systems, featuring the
+Rockchip RK3588.
 
---PFjK5IZPHqiXnWjs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+It provides the following feature set:
+ * up to 16GB LPDDR4x
+ * on-module eMMC
+ * SD card (on a baseboard) via edge connector
+ * Gigabit Ethernet with on-module GbE PHY
+ * HDMI/eDP
+ * MIPI-DSI
+ * 4x MIPI-CSI (3x on FPC connectors, 1x over Q7)
+ * HDMI input over FPC connector
+ * CAN
+ * USB
+   - 1x USB 3.0 dual-role (direct connection)
+   - 2x USB 3.0 host + 1x USB 2.0 host
+ * PCIe
+   - 1x PCIe 2.1 Gen3, 4 lanes
+   - 2xSATA / 2x PCIe 2.1 Gen1, 2 lanes
+ * on-module ATtiny816 companion controller, implementing:
+   - low-power RTC functionality (ISL1208 emulation)
+   - fan controller (AMC6821 emulation)
+  * on-module Secure Element with Global Platform 2.2.1 compliant
+    JavaCard environment
 
-On Mon, Apr 22, 2024 at 03:15:02PM +0300, Svyatoslav Ryhel wrote:
+The support is added for Tiger on Haikou devkit, similarly to RK3399
+Puma and PX30 Ringneck.
 
-> Dear Tom,
->=20
-> The following changes since commit 1dd659fd626204bb6a6b4f330c27b11a7823bb=
-b0:
->=20
->   Merge tag 'video-20240421' of https://source.denx.de/u-boot/custodians/=
-u-boot-video (2024-04-21 08:54:20 -0600)
->=20
-> are available in the Git repository at:
->=20
->   https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
->=20
-> for you to fetch changes up to 6898cc823413ff01661e7db74ad764da58b682d9:
->=20
->   board: tegra30: switch to button cmd (2024-04-22 12:17:21 +0300)
->=20
+The DTS and DTSI are taken from upstream Linux kernel v6.9-rc4.
 
-Applied to u-boot/master, thanks!
+Because Tiger doesn't use the same mux for the debug console as all
+other RK3588 devices currently supported in U-Boot, an additional patch
+is required to be able to interact with the device properly.
 
---=20
-Tom
+This has a light dependency on
+https://lore.kernel.org/u-boot/20240415-rk35xx-dram-atags-v3-0-5bc5475b3c0d@theobroma-systems.com/
+(the Tiger defconfig can be updated to remove the dependency if required)
 
---PFjK5IZPHqiXnWjs
-Content-Type: application/pgp-signature; name="signature.asc"
+Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+---
+Quentin Schulz (2):
+      rockchip: rk3588: add support for UART2 M1 and M2 in SPL
+      rockchip: add support for Theobroma Systems SOM-RK3588-Q7 Tiger module
 
------BEGIN PGP SIGNATURE-----
+ arch/arm/dts/Makefile                              |   1 +
+ arch/arm/dts/rk3588-tiger-haikou-u-boot.dtsi       |  54 ++
+ arch/arm/dts/rk3588-tiger-haikou.dts               | 266 ++++++++
+ arch/arm/dts/rk3588-tiger.dtsi                     | 690 +++++++++++++++++++++
+ arch/arm/mach-rockchip/rk3588/Kconfig              |  41 ++
+ arch/arm/mach-rockchip/rk3588/rk3588.c             |  36 ++
+ board/theobroma-systems/tiger_rk3588/Kconfig       |  16 +
+ board/theobroma-systems/tiger_rk3588/MAINTAINERS   |  13 +
+ board/theobroma-systems/tiger_rk3588/Makefile      |  10 +
+ .../theobroma-systems/tiger_rk3588/tiger_rk3588.c  |  53 ++
+ configs/tiger-rk3588_defconfig                     | 114 ++++
+ doc/board/rockchip/rockchip.rst                    |   1 +
+ doc/board/theobroma-systems/index.rst              |   1 +
+ doc/board/theobroma-systems/tiger_rk3588.rst       | 102 +++
+ include/configs/tiger_rk3588.h                     |  15 +
+ 15 files changed, 1413 insertions(+)
+---
+base-commit: 5fb840ed8339cae3915ea1528a4bfa3e587540e6
+change-id: 20240418-tiger-d1531308c9a0
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYmjysACgkQFHw5/5Y0
-tyxtXQv7BcUPq205uYnq059DTO2EtRgnidDqJ3z3k/b7Ho/7YN3Ii93i9e36+NCx
-sttiDyzWEv9tsBAMJFb2/DdSXdKsOXD5OzoBqbns6jToJgkbmYpdn+lGa4MFr2yw
-CdDMFryXkRCX5nU5I0cmqSd4pYAtJXLMg+575wfLuBL6HmnoB+YffeHkIzpvhez/
-PltKQ7g16xhM8wHXCgW6yzFQuclFiMLzm9JADFnboZGUY54KytthCfmmB8EDufTz
-3vtYil9QghQDETSargszCmQtLhWA3HiwqGzVJ5kHPDnQxzm5T7HsNMOjSta1vTmq
-HJYr7kSzNRjhbmJDqyMKvDuEwwBoPFRTOd8/LUWfikvSEop4v6AXlP/289l+9Hbe
-PgjmwZ32S9WOVJsFcrBYJkBd9IU7Khk+mM52y14pIK5pucPeOze0OhP2aWExa2/5
-QMeiz1nKc/JMzA0LYv4XxAsRoAyo886A5Isl3D7avlHExxO5e395O6Zy+fI/s8kg
-gi6LrLyd
-=QOoc
------END PGP SIGNATURE-----
+Best regards,
+-- 
+Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
---PFjK5IZPHqiXnWjs--
