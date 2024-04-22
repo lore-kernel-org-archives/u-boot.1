@@ -4,141 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09BF8C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 19:38:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9519BC07C79
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 19:48:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 763B9889C3;
-	Mon, 22 Apr 2024 21:38:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 219F8889D3;
+	Mon, 22 Apr 2024 21:48:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="htk7vWt/";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="rOZ9czzX";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="n/VmhEMh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6869889C1; Mon, 22 Apr 2024 21:36:12 +0200 (CEST)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E3793889D3; Mon, 22 Apr 2024 21:48:39 +0200 (CEST)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
+ [IPv6:2001:67c:2050:0:465::103])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBC9B889C3
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 21:36:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EC5A7889B5
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 21:48:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-4375ddb9eaeso28731251cf.3
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 12:36:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713814569; x=1714419369; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=L21Ma6lwh0kQWeK64WUAdv5y8b5n+0KVnewRokhfak8=;
- b=htk7vWt/kMAzgt8kxCDtwSGBAVYADUerL7zbwmE5KIJJ+tmjk7yS1YpNv1WWb+6NkL
- Nf4/mSe6yrx7G8MaL2QRWdiryg9ULZ1o0FUPiFkCcDsnhzRob4vLrcoEIs1X7TXG/HKn
- IBr8w3zhTRBifiPisLYpb++ta2YKu8eAflM3A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713814569; x=1714419369;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=L21Ma6lwh0kQWeK64WUAdv5y8b5n+0KVnewRokhfak8=;
- b=Mijk4gMrUYt6LRia+VhYlE8tkQEDmCH96qZ66XyAgT1dxUjv4bksn3aCPi3ZklbKg9
- TbKRZXDGP3h/TysPjbqhKr3SUiTgBCfVEs0kD0//I6Nm0TYMK2m+Q8LS61Lje31TVKsg
- Vd3vitKJHlJ+lCKXXY77k/z/BI+rhY86unbY91vUvV+vYXZNVng2Yno4ZoL7dB+xsUyU
- 58Bls5p2FIzO079kN1K+Ag743lVlyHwBwUYkipCO7xHmVn/9vDed9hueuDM0BqLzQGa0
- cE5b8vL4HrfJ/QVba0wWLk7zrS4WRyscuXlXUL/o0fOEc30Ih0iM5Nk1swDYXgpBgHUr
- QX+Q==
-X-Gm-Message-State: AOJu0Yx+ib+b+puUWSgBChNe9PI5nNxiGCBcaoG3jKflgFxUAx6uG1Z6
- Y5S8PqnvIJkLGGkyQ2M5J3zRrTMsXAglLATjHxHH4lY2tQnONYhmTQnJwd00Zro=
-X-Google-Smtp-Source: AGHT+IGjga4KZKogIyZM1p0irH2LmXlKumpkIhr3LkiiUBMFN9CN5JkF/ZXsUs9LfKSlBuFF6LNkCQ==
-X-Received: by 2002:ac8:7d05:0:b0:435:2351:75c6 with SMTP id
- g5-20020ac87d05000000b00435235175c6mr14232949qtb.46.1713814568681; 
- Mon, 22 Apr 2024 12:36:08 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
- kk3-20020a05622a2c0300b00436b2135b51sm4492448qtb.64.2024.04.22.12.36.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 12:36:08 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, git@xilinx.com, Michal Simek <michal.simek@amd.com>
-Cc: AKASHI Takahiro <takahiro.akashi@linaro.org>, 
- Aaron Williams <awilliams@marvell.com>, 
- Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>, 
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
- Anastasiia Lukianenko <vicooodin@gmail.com>, 
- Anatolij Gustschin <agust@denx.de>, Andre Przywara <andre.przywara@arm.com>, 
- Biju Das <biju.das.jz@bp.renesas.com>, Bin Meng <bmeng@tinylab.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>, 
- Doug Zobel <douglas.zobel@climate.com>, Dragan Simic <dsimic@manjaro.org>, 
- Eddie James <eajames@linux.ibm.com>, Elon Zhang <zhangzj@rock-chips.com>, 
- Enrico Leto <enrico.leto@siemens.com>, 
- Eugen Hristev <eugen.hristev@collabora.com>, 
- Fabio Estevam <festevam@gmail.com>, 
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Gatien Chevallier <gatien.chevallier@foss.st.com>, 
- Gregory CLEMENT <gregory.clement@bootlin.com>, 
- Grzegorz Szymaszek <gszymaszek@short.pl>, Heiko Schocher <hs@denx.de>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Horatiu Vultur <horatiu.vultur@microchip.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jagan Teki <jagan@amarulasolutions.com>, Jagan Teki <jagan@edgeble.ai>, 
- Johan Jonker <jbx6244@gmail.com>, John Clark <inindev@gmail.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Joshua Riek <jjriek@verizon.net>, 
- Kever Yang <kever.yang@rock-chips.com>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>, 
- Lars Povlsen <lars.povlsen@microchip.com>, 
- Leo Yu-Chi Liang <ycliang@andestech.com>, Lukasz Majewski <lukma@denx.de>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, 
- =?utf-8?q?Marek_Beh=C3=BAn?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, 
- Matthias Winker <matthias.winker@de.bosch.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>, 
- Minda Chen <minda.chen@starfivetech.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Nishanth Menon <nm@ti.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, 
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, 
- Oleksandr Suvorov <oleksandr.suvorov@foundries.io>, 
- Oliver Graute <oliver.graute@kococonnector.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>, 
- Patrick Delaunay <patrick.delaunay@foss.st.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, 
- =?utf-8?q?Pawe=C5=82_Jarosz?= <paweljarosz3691@gmail.com>, 
- Peng Fan <peng.fan@nxp.com>, Peter Robinson <pbrobinson@gmail.com>, 
- Philip Oberfichtner <pro@denx.de>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Sean Anderson <sean.anderson@seco.com>, Sean Anderson <seanga2@gmail.com>, 
- Sean Edmond <seanedmond@microsoft.com>, 
- Seung-Woo Kim <sw0312.kim@samsung.com>, 
- Shiji Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>, 
- Stefan Roese <sr@denx.de>, Stefano Babic <sbabic@denx.de>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, Tim Lunn <tim@feathertop.org>, 
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, 
- Viacheslav Bocharov <adeep@lexina.in>, Vignesh R <vigneshr@ti.com>, 
- Yanhong Wang <yanhong.wang@starfivetech.com>, 
- "open list:VIM3" <u-boot-amlogic@groups.io>, 
- "moderated list:ST BOARDS" <uboot-stm32@st-md-mailman.stormreply.com>
-In-Reply-To: <cover.1713250508.git.michal.simek@amd.com>
-References: <cover.1713250508.git.michal.simek@amd.com>
-Subject: Re: [PATCH v2 0/5] Kconfig: some cleanups
-Message-Id: <171381456119.1909236.8049238331801273262.b4-ty@konsulko.com>
-Date: Mon, 22 Apr 2024 13:36:01 -0600
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4VNbQs5y57z9sTs;
+ Mon, 22 Apr 2024 21:48:37 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1713815317;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kWPrint0AIaVajBtI5CJ6uo1SmO6M5ipcSYv4q0NTVU=;
+ b=rOZ9czzXErU+q9Dsyx1MQKksFM5MYIFw7GrR8wTXJ7Qo4TtQqZgub8fE05QpdfpZAA+Ct9
+ FzQtejzuDEcb+WZ8kBgOpJ92UTECQxIuCLYFY4CckzNz2tQPHl9YC0y6vClbEMcH0E5VAv
+ uH+8G07eq1dhA7cU5rB7B7LVHpsfiPfoXoJnFgG2VUpULvK54otSU/S8msfxzEhtGMP9/M
+ n+sLZpnDFimKY6KxgMnSpHKE+nC+ly17FsmMxazOpiSs7UndCGG8pbUx5l8WdzcydKM+0/
+ VfQ8ku8Or7Pba/POYRbQ0v+yKDevsB4Eji69seAfRU+xTY80mUHjr9vMM4hbuA==
+Message-ID: <38f2306f-4c82-4bc4-b2ee-6051dc55a4c2@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1713815315;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kWPrint0AIaVajBtI5CJ6uo1SmO6M5ipcSYv4q0NTVU=;
+ b=n/VmhEMhhkdkpiJ1Vm5cQatEaCxkm7ulph7XriYYecblVfc+rhSu2hpIPx3e3t4cURpEiT
+ tm7XmEMnLNQgi1ECilFuVk1wrSV1SbWGPBpH5DlEk5eKHom755gobJp7PCcDDYTIBguzNy
+ djGlwr+2AN/6NjaS2RywRgkHMvjBXUetg+C2oZZcUw1gDZmisUM5gQsoTYM7ezE4MrWtsH
+ zST1AXaF7hnFBQ1DRHnmmIzUDs9EjeogV6kuG/0TYhDLjSTwiwmKa1879hPeaBtCxBb73i
+ iIzDmgVpLsiNEuiSCKEvpdKSpVsnNOXORGBgEH3QCbeemqmLFqi6OsEIQDdLnA==
+Date: Mon, 22 Apr 2024 21:47:21 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH v2 1/3] net: eth-uclass: Introduce NET_PREFER_ROM_MAC_ADDR
+To: Detlev Casanova <detlev.casanova@collabora.com>, u-boot@lists.denx.de
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Fabio Estevam <festevam@denx.de>
+References: <20240422135927.23582-1-detlev.casanova@collabora.com>
+ <20240422135927.23582-2-detlev.casanova@collabora.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <20240422135927.23582-2-detlev.casanova@collabora.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
-X-Mailman-Approved-At: Mon, 22 Apr 2024 21:38:45 +0200
+X-MBO-RS-META: yacnicycx5odtrrcw1nigchi86wnwncn
+X-MBO-RS-ID: 00742c81146706433f5
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,24 +94,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 16 Apr 2024 08:55:14 +0200, Michal Simek wrote:
-
-> I looked as cleaning up some dependencies and I found that qconfig is
-> reporting some issues. This series is fixing some of them. But there are
-> still some other pending. That's why please go and fix them if they are
-> related to your board.
+On 4/22/24 3:56 PM, Detlev Casanova wrote:
+> On some boards, a MAC address is set based on the CPU ID or other
+> information. This is usually done in the misc_init_r() function.
 > 
-> UTF-8: I am using uni2ascii -B < file to do conversion. When you run it in
-> a loop you will find some other issue with copyright chars or some issues
-> in files taken from the Linux kernel like DTs. They should be likely fixed
-> in the kernel first.
-> Based on discussion I am ignoring names too.
+> This becomes a problem for net devices that are probed after the call to
+> misc_init_r(), for example, when the ethernet is on a PCI port, which
+> needs to be enumerated.
 > 
-> [...]
+> In this case, misc_init_r() will set the ethaddr variable, then, when
+> the ethernet device is probed, if it has a ROM address, u-boot will warn
+> about a MAC address mismatch and use the misc_init_r() address instead
+> of the one in ROM.
+> 
+> The operating system later will most likely use the ROM MAC address,
+> which can be confusing.
+> 
+> To avoid that, this commit introduces NET_PREFER_ROM_MAC_ADDR that can
+> be set for boards that have such an interface.
+> 
+> Signed-off-by: Detlev Casanova <detlev.casanova@collabora.com>
 
-Applied to u-boot/master, thanks!
-
--- 
-Tom
-
-
+Won't the system pick ROM MAC if $ethaddr is not set ?
