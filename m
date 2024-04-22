@@ -4,64 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A3D7C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:53:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B45DC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:56:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B9E6883D4;
-	Mon, 22 Apr 2024 10:53:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 78328882D5;
+	Mon, 22 Apr 2024 10:56:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="FxRAzOgc";
+	dkim=pass (2048-bit key; secure) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com header.b="J5y3fT1k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53D71883DA; Mon, 22 Apr 2024 10:53:49 +0200 (CEST)
-Received: from mail-m19731116.qiye.163.com (mail-m19731116.qiye.163.com
- [220.197.31.116])
+ id C04AC88324; Mon, 22 Apr 2024 10:56:10 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B50D88374
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:53:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id DDC3187FC2
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:56:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=FxRAzOgcwAZ1rCti03hjs2AnJOaB4JnnOGt6EO7R47aCbP7SvulbNQqXcingdTgbBzK85OiEMlFx3wtmb+jqdUaqWuZMyp6G3Kt/9n6Da1Lpq4AQo5mEX9GK0m4W37nIl5Rx+8jEfan/MFkmRq13U1yq+MI5n/eZNZoKIsgCNyw=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=GsJJ2r2LVL/M28mXnyw7rlwGROBU5G953Aag2hbBLZY=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 3C6D99002F4;
- Mon, 22 Apr 2024 16:53:13 +0800 (CST)
-Message-ID: <90bda00d-4a3a-4bc5-943d-b9475994be4c@rock-chips.com>
-Date: Mon, 22 Apr 2024 16:53:12 +0800
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quwenruo.btrfs@gmx.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.com;
+ s=s31663417; t=1713776165; x=1714380965; i=quwenruo.btrfs@gmx.com;
+ bh=KlDA+mzuQHgY2llGnkjpjscUQsm5ccOzUaUyBoW1ABE=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=J5y3fT1kQVuM1oG7bex9/R6rZnopP4xUUmRdd0ELsWcmHFvZRHJuaNuyNQ8Xfatb
+ 50x0zaHPS5NHYP6REFbTxQpwFTmHV2MXweGRlKgAzCAgC+EWbPOfXBc1AQMMMQMKX
+ xm56/sS3Aor46o5L/8EzbfEzXQSKm9v05LYMqsmOKQCWHlVoHM8k0V9pUdXeZyUXw
+ PG1QK+pnvs/42dEAMRjhOl3Uz+N8o+fKFSKItlyBx1kzRewciGUPAFk5x1Xi/OEIs
+ p3bwfY0Cd41n94NyQJWYsqxnVxGsGJ5XcS7628XJiOIel9ko2y7u+d0UEsj3ZWZu3
+ MFvXyjYAn6F0ZWqU4w==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [172.16.0.219] ([159.196.52.54]) by mail.gmx.net (mrgmx104
+ [212.227.17.174]) with ESMTPSA (Nemesis) id 1N6bfq-1sly4g14GM-0182Jq; Mon, 22
+ Apr 2024 10:56:05 +0200
+Message-ID: <9086a324-b17a-4e00-906b-816fb2b05880@gmx.com>
+Date: Mon, 22 Apr 2024 18:25:58 +0930
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 14/14] rockchip: rk3308: Move cru and grf include files
- to arch-rockchip
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Andy Yan <andy.yan@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Cc: Akash Gajjar <gajjar04akash@gmail.com>, u-boot@lists.denx.de
-References: <20240408181429.3676856-1-jonas@kwiboo.se>
- <20240408181429.3676856-15-jonas@kwiboo.se>
+Subject: Re: BTRFS use-after-free bug at free_extent_buffer_internal
+To: Sachi King <nakato@nakato.io>, u-boot@lists.denx.de
+Cc: kabel@kernel.org, wqu@suse.com, linux-btrfs@vger.kernel.org
+References: <3281192.oiGErgHkdL@youmu>
+ <995dd168-8e1e-4b99-896c-ece4dc88d6e9@gmx.com>
 Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240408181429.3676856-15-jonas@kwiboo.se>
+From: Qu Wenruo <quwenruo.btrfs@gmx.com>
+Autocrypt: addr=quwenruo.btrfs@gmx.com; keydata=
+ xsBNBFnVga8BCACyhFP3ExcTIuB73jDIBA/vSoYcTyysFQzPvez64TUSCv1SgXEByR7fju3o
+ 8RfaWuHCnkkea5luuTZMqfgTXrun2dqNVYDNOV6RIVrc4YuG20yhC1epnV55fJCThqij0MRL
+ 1NxPKXIlEdHvN0Kov3CtWA+R1iNN0RCeVun7rmOrrjBK573aWC5sgP7YsBOLK79H3tmUtz6b
+ 9Imuj0ZyEsa76Xg9PX9Hn2myKj1hfWGS+5og9Va4hrwQC8ipjXik6NKR5GDV+hOZkktU81G5
+ gkQtGB9jOAYRs86QG/b7PtIlbd3+pppT0gaS+wvwMs8cuNG+Pu6KO1oC4jgdseFLu7NpABEB
+ AAHNIlF1IFdlbnJ1byA8cXV3ZW5ydW8uYnRyZnNAZ214LmNvbT7CwJQEEwEIAD4CGwMFCwkI
+ BwIGFQgJCgsCBBYCAwECHgECF4AWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00iVQUJDToH
+ pgAKCRDCPZHzoSX+qNKACACkjDLzCvcFuDlgqCiS4ajHAo6twGra3uGgY2klo3S4JespWifr
+ BLPPak74oOShqNZ8yWzB1Bkz1u93Ifx3c3H0r2vLWrImoP5eQdymVqMWmDAq+sV1Koyt8gXQ
+ XPD2jQCrfR9nUuV1F3Z4Lgo+6I5LjuXBVEayFdz/VYK63+YLEAlSowCF72Lkz06TmaI0XMyj
+ jgRNGM2MRgfxbprCcsgUypaDfmhY2nrhIzPUICURfp9t/65+/PLlV4nYs+DtSwPyNjkPX72+
+ LdyIdY+BqS8cZbPG5spCyJIlZonADojLDYQq4QnufARU51zyVjzTXMg5gAttDZwTH+8LbNI4
+ mm2YzsBNBFnVga8BCACqU+th4Esy/c8BnvliFAjAfpzhI1wH76FD1MJPmAhA3DnX5JDORcga
+ CbPEwhLj1xlwTgpeT+QfDmGJ5B5BlrrQFZVE1fChEjiJvyiSAO4yQPkrPVYTI7Xj34FnscPj
+ /IrRUUka68MlHxPtFnAHr25VIuOS41lmYKYNwPNLRz9Ik6DmeTG3WJO2BQRNvXA0pXrJH1fN
+ GSsRb+pKEKHKtL1803x71zQxCwLh+zLP1iXHVM5j8gX9zqupigQR/Cel2XPS44zWcDW8r7B0
+ q1eW4Jrv0x19p4P923voqn+joIAostyNTUjCeSrUdKth9jcdlam9X2DziA/DHDFfS5eq4fEv
+ ABEBAAHCwHwEGAEIACYCGwwWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00ibgUJDToHvwAK
+ CRDCPZHzoSX+qK6vB/9yyZlsS+ijtsvwYDjGA2WhVhN07Xa5SBBvGCAycyGGzSMkOJcOtUUf
+ tD+ADyrLbLuVSfRN1ke738UojphwkSFj4t9scG5A+U8GgOZtrlYOsY2+cG3R5vjoXUgXMP37
+ INfWh0KbJodf0G48xouesn08cbfUdlphSMXujCA8y5TcNyRuNv2q5Nizl8sKhUZzh4BascoK
+ DChBuznBsucCTAGrwPgG4/ul6HnWE8DipMKvkV9ob1xJS2W4WJRPp6QdVrBWJ9cCdtpR6GbL
+ iQi22uZXoSPv/0oUrGU+U5X4IvdnvT+8viPzszL5wXswJZfqfy8tmHM85yjObVdIG6AlnrrD
+In-Reply-To: <995dd168-8e1e-4b99-896c-ece4dc88d6e9@gmx.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhlNSFZJSRlLGENPTEtPQkpVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8f050263c403a9kunm3c6d99002f4
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MUk6Gjo4GDNLMjlDKjw*Fis#
- KB4wCwFVSlVKTEpITExOQkJPSEtDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFNTUhNNwY+
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:OnLqQhTQy1xBmQX62aNyvc009v9RCRKNn/azxXAOn0Of5FhnVkh
+ LntlbX04fKVHdqacrmzVeUa9Iav9jVOxj8Mul8R4j73HQTPJV7YQQ4xPFowOXsi2axO2wya
+ 4cGN0UR94FeT/44NTO16pPP4aFYD10RBmday/x2XcVdKiUAkue2/cNhj/fXdqeUsyiJ3GQW
+ B6OLHjRk11X4UoOcOiX+Q==
+UI-OutboundReport: notjunk:1;M01:P0:47B513+HHHA=;1AFOLtfDMpHGAdII9mwMGqMvgNt
+ AD/TPjHIZWnZu3Pw4kkxVpnExW7MSwqoyMiu7PyoyWnaso6tlWRkT6gcXF1U0umhls+EtTtDR
+ W9NgCTI34I7VSEUBOxIa9riMdC3CGNhsNnzyKsQAoszsHszetnWcykszitdBdpikZX9KoTCBS
+ hM1Ft4USTZjNPZlitd6PZl/Oo+eLQMq1CH2C4M+NH4H+EBATsxteULBMZPe4zY7WpTRrz8jQa
+ KlDUEXf4YG1IAQj7Vl9sCfjAr0sYniFRnR7FzRreaAgR7lYH8yJZ5jfMgYmUmT6VEQz1YRocp
+ 80S5t8g2ci/oehPVJdTPxY/qP51xLxY605v6BGEUoyFJ2nqM9qF7Z6KDDFmW3OIiwcmM1x4Vk
+ vxljcdL7HdDj3E8pz7fwm6rsezLg87dQI1N+Xs78wr7cKznWWb24ByAoDrSCb9oCl9FUZpyEY
+ vf0+J6A0g5/Y7xhYORtU7PcL+21tSh+2TOYrqYdsXa5KCywYRqiZmo8UgZ+6lowZJ2Z3hJIl/
+ azjWAUeFbFixUknOcdBjFEmm3icKLbWuJD/dBgqSyzmrad8GFVoD3F7dvI/2wg/4nYuJEkMz+
+ KJvBEOZNQSBDBBHM07kGNU6yPr2swAHzNtz/oEd9WrtAfBJ1/B7PCkawBBRBt1uNsuQVvvOPU
+ ln6shh/2jgmiZGBmkOw5TDwGCLDjmWGozPDBMp9UMgdQmmWmMO03VkWi+it7qocLNZ8g/c5uc
+ R4fxjknYzjll7+/MOHgK+k9iTuGpltCM3V2V6IA7h2HReqpvaBGYOQsr3sBhUeiddklqgGMfJ
+ btKWwlJCizuEN8cuW5V1hkV3VfeTv/iJ403DPJI3Eykos=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,116 +115,24 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/4/9 02:14, Jonas Karlman wrote:
-> Move cru_rk3308.h and grf_rk3308.h to arch-rockchip to match path used
-> for all other Rockchip SoCs.
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+
+=E5=9C=A8 2024/4/22 16:45, Qu Wenruo =E5=86=99=E9=81=93:
+[...]
+>>
+>> I added a print statement to free_extent_buffer_internal that prints th=
+e
+>> start address of the extent_buffer as I'm not sure what to be looking f=
+or
+>> here.=C2=A0 This print statement is before the decrement.
+>>> printf("free_extent_buffer_internal: eb->start[%llx] eb->refs[%i]\n",
+>>> eb->start, eb->refs);
+>>
+
+Just a small advice, in fact you can go with sandbox mode, running
+U-boot in userspace, and bind a host file as a device to test the
+filesystem code.
+
+At least that's what I did for most U-boot bugs.
 
 Thanks,
-- Kever
-> ---
-> v2: New patch
-> ---
->   .../arm/include/asm/{arch-rk3308 => arch-rockchip}/cru_rk3308.h | 0
->   .../arm/include/asm/{arch-rk3308 => arch-rockchip}/grf_rk3308.h | 0
->   arch/arm/mach-rockchip/rk3308/clk_rk3308.c                      | 2 +-
->   arch/arm/mach-rockchip/rk3308/rk3308.c                          | 2 +-
->   board/firefly/firefly-rk3308/roc_cc_rk3308.c                    | 2 +-
->   drivers/clk/rockchip/clk_rk3308.c                               | 2 +-
->   drivers/net/gmac_rockchip.c                                     | 2 +-
->   drivers/ram/rockchip/sdram_rk3308.c                             | 2 +-
->   8 files changed, 6 insertions(+), 6 deletions(-)
->   rename arch/arm/include/asm/{arch-rk3308 => arch-rockchip}/cru_rk3308.h (100%)
->   rename arch/arm/include/asm/{arch-rk3308 => arch-rockchip}/grf_rk3308.h (100%)
->
-> diff --git a/arch/arm/include/asm/arch-rk3308/cru_rk3308.h b/arch/arm/include/asm/arch-rockchip/cru_rk3308.h
-> similarity index 100%
-> rename from arch/arm/include/asm/arch-rk3308/cru_rk3308.h
-> rename to arch/arm/include/asm/arch-rockchip/cru_rk3308.h
-> diff --git a/arch/arm/include/asm/arch-rk3308/grf_rk3308.h b/arch/arm/include/asm/arch-rockchip/grf_rk3308.h
-> similarity index 100%
-> rename from arch/arm/include/asm/arch-rk3308/grf_rk3308.h
-> rename to arch/arm/include/asm/arch-rockchip/grf_rk3308.h
-> diff --git a/arch/arm/mach-rockchip/rk3308/clk_rk3308.c b/arch/arm/mach-rockchip/rk3308/clk_rk3308.c
-> index ccda53380c6f..201bf661f9bb 100644
-> --- a/arch/arm/mach-rockchip/rk3308/clk_rk3308.c
-> +++ b/arch/arm/mach-rockchip/rk3308/clk_rk3308.c
-> @@ -7,7 +7,7 @@
->   #include <dm.h>
->   #include <syscon.h>
->   #include <asm/arch-rockchip/clock.h>
-> -#include <asm/arch/cru_rk3308.h>
-> +#include <asm/arch-rockchip/cru_rk3308.h>
->   #include <linux/err.h>
->   
->   int rockchip_get_clk(struct udevice **devp)
-> diff --git a/arch/arm/mach-rockchip/rk3308/rk3308.c b/arch/arm/mach-rockchip/rk3308/rk3308.c
-> index b3ffabc5449a..a0915c72bfa0 100644
-> --- a/arch/arm/mach-rockchip/rk3308/rk3308.c
-> +++ b/arch/arm/mach-rockchip/rk3308/rk3308.c
-> @@ -5,8 +5,8 @@
->   #include <common.h>
->   #include <init.h>
->   #include <malloc.h>
-> -#include <asm/arch/grf_rk3308.h>
->   #include <asm/arch-rockchip/bootrom.h>
-> +#include <asm/arch-rockchip/grf_rk3308.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <asm/gpio.h>
->   #include <debug_uart.h>
-> diff --git a/board/firefly/firefly-rk3308/roc_cc_rk3308.c b/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-> index 99a52a77116a..af00250e118d 100644
-> --- a/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-> +++ b/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-> @@ -5,7 +5,7 @@
->   
->   #include <common.h>
->   #include <adc.h>
-> -#include <asm/arch/grf_rk3308.h>
-> +#include <asm/arch-rockchip/grf_rk3308.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <linux/bitops.h>
->   
-> diff --git a/drivers/clk/rockchip/clk_rk3308.c b/drivers/clk/rockchip/clk_rk3308.c
-> index c46b58e31626..861648321d40 100644
-> --- a/drivers/clk/rockchip/clk_rk3308.c
-> +++ b/drivers/clk/rockchip/clk_rk3308.c
-> @@ -12,8 +12,8 @@
->   #include <malloc.h>
->   #include <syscon.h>
->   #include <asm/global_data.h>
-> -#include <asm/arch/cru_rk3308.h>
->   #include <asm/arch-rockchip/clock.h>
-> +#include <asm/arch-rockchip/cru_rk3308.h>
->   #include <asm/arch-rockchip/hardware.h>
->   #include <dm/device-internal.h>
->   #include <dm/lists.h>
-> diff --git a/drivers/net/gmac_rockchip.c b/drivers/net/gmac_rockchip.c
-> index 33fc36da5077..51f835adabc3 100644
-> --- a/drivers/net/gmac_rockchip.c
-> +++ b/drivers/net/gmac_rockchip.c
-> @@ -19,7 +19,7 @@
->   #include <asm/arch-rockchip/grf_px30.h>
->   #include <asm/arch-rockchip/grf_rk322x.h>
->   #include <asm/arch-rockchip/grf_rk3288.h>
-> -#include <asm/arch-rk3308/grf_rk3308.h>
-> +#include <asm/arch-rockchip/grf_rk3308.h>
->   #include <asm/arch-rockchip/grf_rk3328.h>
->   #include <asm/arch-rockchip/grf_rk3368.h>
->   #include <asm/arch-rockchip/grf_rk3399.h>
-> diff --git a/drivers/ram/rockchip/sdram_rk3308.c b/drivers/ram/rockchip/sdram_rk3308.c
-> index 10828e80822a..264366291cf8 100644
-> --- a/drivers/ram/rockchip/sdram_rk3308.c
-> +++ b/drivers/ram/rockchip/sdram_rk3308.c
-> @@ -7,8 +7,8 @@
->   #include <dm.h>
->   #include <ram.h>
->   #include <syscon.h>
-> -#include <asm/arch/grf_rk3308.h>
->   #include <asm/arch-rockchip/clock.h>
-> +#include <asm/arch-rockchip/grf_rk3308.h>
->   #include <asm/arch-rockchip/sdram.h>
->   
->   struct dram_info {
+Qu
