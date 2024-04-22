@@ -4,85 +4,156 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E6D3C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 12:34:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 077E3C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 13:16:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39A85887EA;
-	Mon, 22 Apr 2024 14:34:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nakato.io
+	by phobos.denx.de (Postfix) with ESMTP id 8F520883D8;
+	Mon, 22 Apr 2024 15:16:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nakato.io header.i=@nakato.io header.b="KNh58GPP";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="NEyDMk7h";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="RlNjr2VT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BB24F883DC; Mon, 22 Apr 2024 08:37:46 +0200 (CEST)
-Received: from fout7-smtp.messagingengine.com (fout7-smtp.messagingengine.com
- [103.168.172.150])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 88DE18834C; Mon, 22 Apr 2024 15:16:27 +0200 (CEST)
+Received: from EUR01-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur01on0701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe1e::701])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79BC5883C0
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 08:37:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 823F6883A7
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 15:16:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
+ header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=nakato.io
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nakato@nakato.io
-Received: from compute6.internal (compute6.nyi.internal [10.202.2.47])
- by mailfout.nyi.internal (Postfix) with ESMTP id 615BC1380147;
- Mon, 22 Apr 2024 02:37:42 -0400 (EDT)
-Received: from mailfrontend2 ([10.202.2.163])
- by compute6.internal (MEProxy); Mon, 22 Apr 2024 02:37:42 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nakato.io; h=cc
- :cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:message-id:mime-version:reply-to
- :subject:subject:to:to; s=fm3; t=1713767862; x=1713854262; bh=pw
- OWE9gReTnppCZLPM3jYDGSvTZsxc0MEp1vcFyaBqI=; b=KNh58GPP4CoB2xAV0T
- k7aTTlD4m4/59a/YkDWu3UcFUgTA4B7msaFnU2ef8Dn18IyNgHpONOycUt2PQsbU
- nZ5eDw+1fBcYe6JGn2YsPA3fw4ua82FUnUap8WVaObV59L6mf60LY2zpUoGLpHG4
- Ejuf7OI5mnxbH6F5piaUI+KkbAXQkpwjKMAWAn6gLiC4HnrrLkdzgEST+ztorbE5
- u5kViMQuLow7OwarsQwlPo4csrUWK0y+un0O32fYgF6QSKQIO8Du3WB2Puy3JSlU
- ZyqowFwIwymDwAz+F1hpjU9yu4ZMvofZemV+WeWsJPCobDSYqnImRyfFbmaMgm4n
- K1Kg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:message-id:mime-version:reply-to:subject
- :subject:to:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
- :x-sasl-enc; s=fm3; t=1713767862; x=1713854262; bh=pwOWE9gReTnpp
- CZLPM3jYDGSvTZsxc0MEp1vcFyaBqI=; b=NEyDMk7h04A/4Qfkbb7GEKq1c4qjt
- NeKjla5ZqSHcKp4gRA7LXS478P431njibOeET9zC3A3Ofv+SCv3gbsHeezr4jHi4
- moPZohr6ad4R524hnBTyPYdAiijy1LU4j+N2Ec1UhAK1DYIE2eCFmKs97CCxUz6p
- U/0C+yD1XS2K8ThyX/LC56RXUNiWWW+31kXGtp4J3S9FCBN2hZoNI4I290zPLXbt
- 1zUhwZhdJthkn6HgEHntoGiU6FJI1WRwHqMg1OTT2siFO2Yo1R9sY4kPRMsRd3js
- ovY32kKTrIdjEXqsQr/jAeWRl6aJYC3UGHygf8+h8Rn+ptmPy+oRl7pQg==
-X-ME-Sender: <xms:tgUmZq8HjJH6xh3MexJiitYySlckx2ujcU-Kqwg8-JOA-CGMH78lrQ>
- <xme:tgUmZqub0OZ5r4Z17OmmSLHy_nj2rTYt6ZG_4g84-o9ELoeHFbjYX9KFta-zZ2Zs-
- 9VJxiCHR1kHA3NM1A>
-X-ME-Received: <xmr:tgUmZgBCsnWTHrwLVdblZSqzmUKuGcMQZUKkFuaYjnMK-QoxItt052W8S3vMVnwUQ44aEV8sEvgf1EndoPtn4zGW-78_nlJPLMyvq2Qom-0NtDw>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrudekkedguddtlecutefuodetggdotefrod
- ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
- necuuegrihhlohhuthemuceftddtnecunecujfgurhephffvvefufffkggfgtgesthfure
- dttddtjeenucfhrhhomhepufgrtghhihcumfhinhhguceonhgrkhgrthhosehnrghkrght
- ohdrihhoqeenucggtffrrghtthgvrhhnpeektedtgfeuvdelleejueduvedvkeejffetvd
- ejtdetledvhffghefhgfetkeetgfenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgr
- mhepmhgrihhlfhhrohhmpehnrghkrghtohesnhgrkhgrthhordhioh
-X-ME-Proxy: <xmx:tgUmZieGFWG8EP02nLFMf4mGS7PnV2LjgEYrD5tUDrCMRLLjyTOb5w>
- <xmx:tgUmZvPs6GZi20Of-Xz8wZ0Hhnx09JtfWcJOIh3dTdTaMw7lMRwNkA>
- <xmx:tgUmZsnR-cBUzYe9inYWm_k1auHPt6hFv695Aloe8z-fGVUgecUstQ>
- <xmx:tgUmZht6wsJNEvNXaqqxInEHFOX0rEe8VzYH1WozC6AXJ4LPs5zmOA>
- <xmx:tgUmZkoRwaTNUeV2SmZ6iClXLL2I8KAPcXTz_wHInUxydxXxSVJyAo6t>
-Feedback-ID: ic8e14276:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 22 Apr 2024 02:37:40 -0400 (EDT)
-From: Sachi King <nakato@nakato.io>
+ spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=E0gl/zrEeA1TVb2SqHUFscHyaojKuhvC81tLU5oUS0kMSGLnRkWqENi2vkGr81wOm9uSw34TwE/PkWQXHppTRjCJLdkcoy7qONRbyd+8xsDv05Dv4d5RO3g+qO6rCNsExltVtmWw8RvQgnQDOICKAkKKmh70f4VKM03ePKANCbFFFoWT7RX6LiUcgyGNAhUzZOB9mnN0lo7qHHW8MuEHabGyvKLnaeIc38HtCioa/CtZZDcWibh+THVUwUGGwMynxDSHl7KM2DXvW2mslmuA6OPjMaDBQnoc1BJDVIV2X2KJ2/cQHr+MhKgdaAa9KEJ3NMJPjE00keasYb521cPz0A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=yy9A1Kimt70Cnht0g1nRIII8S6PKJEY6sap9zA0UFao=;
+ b=mb3Zx3yylpAIY2+OrhGRKTUK9LE/652AepLgippkO92SCcU3eo45/Wr5tUwe0+RRp5cN7uRwavuzGdBRASVtJADko6Swnpc/VO3ma26Kq57n7oBtNVQCEwZ9ZySvkjmvo5gmrUsbXeuiqqYbgTfYsSJjp9AbCLqsOy3swPkK0J9UXrkGSGwWofznhgU2LKn51+jR+1fy08jXQcsPy657Wk9r3Tti8xPJiNFFrwQhAFNMzqnWokuN5H8lWOPgNjJ9uCGPKv/4vxr94He8YKe/FaEWedq4RHny9TJxVOw+67A7YzXF/kM93Tcg3ebu7G8AgpOPo56bJJxRsA4LlideNQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=weidmueller.com; dmarc=pass action=none
+ header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=yy9A1Kimt70Cnht0g1nRIII8S6PKJEY6sap9zA0UFao=;
+ b=RlNjr2VT9VKOhL2XoBG2BNV8HQ4YSN0PUCFmPLo+/9KsgIPbgQyZ1Gs8IIHplShqec9SNaxNAOgDKQKXTrY07Z/+p9iVxHVeMAkQmOxdJjneCRuRjkWLoVpQ5NhRCisjid8MEMpLrv5q/nptv2/q9xTUPdHzOfO2ORlb8uRD1jA=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=weidmueller.com;
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
+ by AM8PR08MB5620.eurprd08.prod.outlook.com (2603:10a6:20b:1c6::23)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.44; Mon, 22 Apr
+ 2024 13:16:23 +0000
+Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::7f1e:4f98:9784:5e11]) by AS2PR08MB8431.eurprd08.prod.outlook.com
+ ([fe80::7f1e:4f98:9784:5e11%7]) with mapi id 15.20.7472.044; Mon, 22 Apr 2024
+ 13:16:23 +0000
+From: lukas.funke-oss@weidmueller.com
 To: u-boot@lists.denx.de
-Cc: kabel@kernel.org, wqu@suse.com, linux-btrfs@vger.kernel.org
-Subject: BTRFS use-after-free bug at free_extent_buffer_internal
-Date: Mon, 22 Apr 2024 16:37:36 +1000
-Message-ID: <3281192.oiGErgHkdL@youmu>
+Cc: Lukas Funke <lukas.funke@weidmueller.com>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Alison Wang <alison.wang@nxp.com>, Andy Fleming <afleming@gmail.com>,
+ Angelo Dureghello <angelo@sysam.it>, Bin Meng <bmeng.cn@gmail.com>,
+ Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
+ Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
+ Mario Six <mario.six@gdsys.cc>, Michal Simek <monstr@monstr.eu>,
+ Minda Chen <minda.chen@starfivetech.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Priyanka Jain <priyanka.jain@nxp.com>, Rick Chen <rick@andestech.com>,
+ Scott McNutt <smcnutt@psyent.com>, Shengyu Qu <wiagn233@outlook.com>,
+ Shiji Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Thomas Chou <thomas@wytron.com.tw>,
+ Tom Rini <trini@konsulko.com>, Wolfgang Denk <wd@denx.de>,
+ Yanhong Wang <yanhong.wang@starfivetech.com>
+Subject: [PATCH v1 1/3] arch: riscv: Rename spl_soc_init() to spl_dram_init()
+Date: Mon, 22 Apr 2024 15:16:11 +0200
+Message-Id: <20240422131613.84304-2-lukas.funke-oss@weidmueller.com>
+X-Mailer: git-send-email 2.30.2
+In-Reply-To: <20240422131613.84304-1-lukas.funke-oss@weidmueller.com>
+References: <20240422131613.84304-1-lukas.funke-oss@weidmueller.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: FR4P281CA0087.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:cd::11) To AS2PR08MB8431.eurprd08.prod.outlook.com
+ (2603:10a6:20b:55a::18)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="utf-8"
-X-Mailman-Approved-At: Mon, 22 Apr 2024 14:34:13 +0200
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|AM8PR08MB5620:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1f1b3df6-bdfa-4d38-b45c-08dc62ce682c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?j2W1iNeV5xwrddakrhUSJcVRX0BQWK+QXykoVweEhSUY8NkUz54/tHGmLRuU?=
+ =?us-ascii?Q?Xks7V+Xf3QMvWI1KmPzsaYYI1h9B+dU2KXS3gIPJqrWH9Wqk+kAEMoT0nolg?=
+ =?us-ascii?Q?FPHGvI+alAKj+H1Skovc7wTXqVhg0cl68gdvFkTFSF5RuPnoEbvSKpGKTB5h?=
+ =?us-ascii?Q?SYrrqfSvxU/Tt2lDz7eEGjDOoSj8R9HBA82WAEfD5ih53U/0dyFxMOibcvU7?=
+ =?us-ascii?Q?yiA8W01dqHhWiuSCUmrLjQH1ynLQrfSHPhwBMVlYyW1BVbentocbZAsICQKY?=
+ =?us-ascii?Q?3t5R8OY3O1zecYLNQJd6rBaSg0TtViVLzDN6GBVASsVY+OKetaP+frv5kK9E?=
+ =?us-ascii?Q?zBogwlzl/UwioGnVYB/bfS7TIXYDlSFBbFd6JzClikUNVdXGYcIK+bLTEvMF?=
+ =?us-ascii?Q?pcuAvgqrwKHYU5XEV0NArvEx/mCVTz3ZeVtqkbJAoT352PjPp8LeMI6lrqJi?=
+ =?us-ascii?Q?1XnyC5PmbfPrTHhV+WrEvQ3BBrbhDD7aHidnbfG3UP9RwKPSSbQG+7QmXx61?=
+ =?us-ascii?Q?jSDNGqMjCCEUgbifYBDssemNxtPoxArXU8TyBB6vb3r/5CFwO3DrM0I09out?=
+ =?us-ascii?Q?h0ux80QIMObi6M+u826xTNVaAByTXSrd8k9IevQToAI3SzT0SopIGX2xVjzf?=
+ =?us-ascii?Q?EUJH4T/oGW1ySteXMbMsBERY1iRgWciO4TsPHT4QHS6F4brOgCmLtDU06GHT?=
+ =?us-ascii?Q?B/ogdDbnGvkSFt5yg1ye4lORvO6lKbpSLFbAj2GiQdR1gfnXcQh+iKm/5tMZ?=
+ =?us-ascii?Q?fEvuACjeJ75t76yxgUOeVC0ZDvrOqG3JYLZoddUUwrYME3RfHTPpS36mPJhd?=
+ =?us-ascii?Q?nrjSeQZnEKfQd6Es+cK8O9AlfTfmHxDiEi64MTqTiFKoAEOgwSjwoRnH2xf9?=
+ =?us-ascii?Q?8NBOGq/PBZt9DiN3yeaCiDmixNUZXwNfSTSrXtdxNbUOHfz9E0cAKZeywBK2?=
+ =?us-ascii?Q?HKduuz8ChqQ6MVxH3gwg8ulWje0o1QSsQ7I3nycGCSWZeHO0j675pZ4R4Dak?=
+ =?us-ascii?Q?v1ARM9hIPtVqtp0yLsBZvMoHTkJhBHGTx8gO4xXudPlQ6fk3scMa8Rq5wQNa?=
+ =?us-ascii?Q?onND64XP7UhlJrBP9JUA4k6OMu1dQRIaxMzbt3r+IkFhvGFNuWluvc2hE3O0?=
+ =?us-ascii?Q?tX9Auhmka/A6LpDfysOpPRRKMLSPnWfEQ2VNs33jgnnd+otm5zObKnwGVkuj?=
+ =?us-ascii?Q?vL9/nNCPONqoqwBlnkplKH+P2UlYmjL3CmD+6IbrI4RNZBsQzahEzYmlVWMO?=
+ =?us-ascii?Q?M4TRo/9eHQnRnh67EayuDcQLlUnvKg0E3hROzbKV/tmP2n2IPsYj3R8Ph63Z?=
+ =?us-ascii?Q?y/t5ZUAQVaOCvYbDGDvNLM7TEikvM2/7w+cSyO9Mo9YQdA=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(52116005)(376005)(7416005)(1800799015)(38350700005);
+ DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kSHY3jj26VjTsT/ji/zTiU/VkL0Ju2I3PLjWMrI1TVuYYMFLEjaMwNN1ZePU?=
+ =?us-ascii?Q?384ai5dOOeWEXW9MKU0PJwDmO4ELUlEdyFLJ7uhT70AtYCLMD0KL+Cxv3bHl?=
+ =?us-ascii?Q?1CUUhA7PGAmkxYkOefd3KADaDY5XifyvU6uHvlqJ7ei2OvL2SxIPgonb+qqB?=
+ =?us-ascii?Q?b1tkJOhQyCAieN2WC+Hr7K+QyMdn5Cr4Zle0umxLsH6zP1QhaoYh7AzO7vCv?=
+ =?us-ascii?Q?25JKeCIpSQgqxVnYy2IGB6ObWJLlFh5D7hWjHTM4rrumY/WMC+Hayb2wyWtQ?=
+ =?us-ascii?Q?qWfU788fWbSExAew0kxGnN5Da9oERrTAGpv1Xx8A5mpfveo411Oo8KK4rq2J?=
+ =?us-ascii?Q?quD1z+GynpKsGogh7DoIsN7I/ECudCBGyTBbwIhLYGJ4Q/79fF8m7U9o37lu?=
+ =?us-ascii?Q?LipXEk+rNaqFCQX7vL6APF17Tt0idNiftnjQVnCkqbIo0cbEQBAyvxgikALR?=
+ =?us-ascii?Q?Inr119vdY97zJOyJSRl3N4o3g3DHxgdD7dnRo/j55ACxPMafX2y0+JMRsEl4?=
+ =?us-ascii?Q?jL40WNgNnGT3wfhb2HredPRFxwQh+pxXmIKa1nT7b0ci486flys7jCccGYyM?=
+ =?us-ascii?Q?iX8PpfPI2hyufLn9YXUEFlCCwGkBTxjBaL//TBPdTZjf/6dfnFtqbrjPVXl4?=
+ =?us-ascii?Q?pzDzzRpL/GLdC0r8cbaITRVMbtajPVYpXpgs3aDCgLtFVjswA1pGVUH3/BPF?=
+ =?us-ascii?Q?T+9Zblg1cZfiEwUmDr5h19XiBlWGkK5ksYcIVEZ51ac8RG3r0tISgYdFszJr?=
+ =?us-ascii?Q?8iVphzXc7y+gk1V8SD8y4I0KDexh6uJ7aytfkr29Z2Yfl3fuNLBG0nmmQYRD?=
+ =?us-ascii?Q?YzB3Nghk0oBkbrFrT4PSNgOsp3pJRUyhMKYPh6Ubv8O43akp62eANkUOuiD1?=
+ =?us-ascii?Q?xNB70YIT2lQZYWyzP3jKOiQU116nmoQcd9hDZN4V08/tuGC90QEz+zcCyhOw?=
+ =?us-ascii?Q?rm9UhNGuuelhw/a5Am0kasas4UICVb8CYBpaQF0rCwGlT9Ko0GDzXikruB2l?=
+ =?us-ascii?Q?3Kk9196NBmAW8bR60cjQKxUsv3GFrvTgA4gJdUmWYyPK2CVUoTd/1Ww2tMcs?=
+ =?us-ascii?Q?Y/G89HxwvtDcItI4+6/g3iFzsn7CJdh2kejVBU5OskSNuxiMjdkKBHgzRikD?=
+ =?us-ascii?Q?/s32mRnl2eM/oSG314ioISEJddfgjjlAQbKg3AUMQh1sMy9tSUMNBeOukf/J?=
+ =?us-ascii?Q?PIpwCGXT57CEq07sE1hcZeWviU4pMr1pReC6CZAsouxLgAOmTGWfKyN6E7Jj?=
+ =?us-ascii?Q?ov3V7vTMrgYYAjxULBrdNwNvl/uJOfIySyhKaA0cYxmHfWT+2IKruN/8dvyb?=
+ =?us-ascii?Q?UJRV2UoMGcmsb6SoJ25WcuaHWo0xZ+eqB3yXFKsUD14cNniTHKIaic4DvjBG?=
+ =?us-ascii?Q?vAOTAC7BWq7vL1hs95nJC0Dl4B6mh9BfO2VKiYjVf3TKANM3ziMdFaUrBenn?=
+ =?us-ascii?Q?CHOccXu9JNW4aNnJi739x4ADMjuFYb+xIYIHyldgUQa/aIjhjG2ZQXMNYrgf?=
+ =?us-ascii?Q?s08xZRdsPD2bqR2NiHr7DeVQ3pKCALGw0GExoq1ZBjBqM15DHSIwKeRuJfdt?=
+ =?us-ascii?Q?YfSWujukEX1pO2EEn97pBgx3Ao9Ejw5IlfodptNr/qwBY5Q+r5cDcNsKZLWI?=
+ =?us-ascii?Q?JA=3D=3D?=
+X-OriginatorOrg: weidmueller.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1f1b3df6-bdfa-4d38-b45c-08dc62ce682c
+X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2024 13:16:23.1870 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 7IKsQM0LqS3QNd5wEwffnZqmYrbYcB1cX0xGl42XnadJ1wG+8ZGAfG5jq9wyKK1QP6aFqzA7alcjYnub2Dzimg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB5620
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,326 +170,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Lukas Funke <lukas.funke@weidmueller.com>
 
-I've hit a bug with u-boot on my BTRFS filesystem, and I'm fairly certain
-it's a bug and not a corruption issue.
+Rename spl_soc_init() to spl_dram_init() because the generic function
+name does not reflect what the function is actually doing. In addition
+spl_dram_init() is commonly used for dram initialization and should
+be called from board_init_f().
 
-A bit of history on the filesystem.  It is a fairly new filesystem as it was
-being used to give me access to test a wayland application on a
-Raspberry Pi.  The filesystem was about 3 days old when I hit the bug, and
-I'm fairly certain it never had an unclean shutdown.  I have checked the
-filesystem with "btrfs check" which has found no errors.  The filesystem
-mounts on Linux and is functional.
+Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+---
 
-> # btrfs check --check-data-csum /dev/sda2                
-> Opening filesystem to check...
-> Checking filesystem on /dev/sda2
-> UUID: 18db6211-ac36-42c1-a22f-5e15e1486e0d
-> [1/7] checking root items
-> [2/7] checking extents
-> [3/7] checking free space tree
-> [4/7] checking fs roots
-> [5/7] checking csums against data
-> [6/7] checking root refs
-> [7/7] checking quota groups skipped (not enabled on this FS)
-> found 5070573568 bytes used, no error found
-> total csum bytes: 4451620
-> total tree bytes: 370458624
-> total fs tree bytes: 353124352
-> total extent tree bytes: 10010624
-> btree space waste bytes: 62303284
-> file data blocks allocated: 6786519040
->  referenced 6328619008
+ arch/riscv/cpu/fu540/spl.c               | 2 +-
+ arch/riscv/cpu/fu740/spl.c               | 2 +-
+ arch/riscv/cpu/jh7110/spl.c              | 2 +-
+ arch/riscv/include/asm/arch-fu540/spl.h  | 2 +-
+ arch/riscv/include/asm/arch-fu740/spl.h  | 2 +-
+ arch/riscv/include/asm/arch-jh7110/spl.h | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
 
-
-I've made an image of the filesystem so I could reproduce the bug in an
-environment that doesn't require the physical SBC, and have reproduced
-the issue using the head of the master branch with "qemu-x86_64_defconfig".
-
-My testing qemu was produced with the following:
-> # make qemu-x86_64_defconfig
-> # cat << EOF >> .config
-> CONFIG_AUTOBOOT=y
-> CONFIG_BOOTDELAY=1
-> CONFIG_USE_BOOTCOMMAND=y
-> CONFIG_BOOTSTD_DEFAULTS=y
-> CONFIG_BOOTSTD_FULL=y
-> CONFIG_CMD_BOOTFLOW_FULL=y
-> CONFIG_BOOTCOMMAND="bootflow scan -lb"
-> CONFIG_ENV_IS_NOWHERE=y
-> CONFIG_LZ4=y
-> CONFIG_BZIP2=y
-> CONFIG_ZSTD=y
-> CONFIG_FS_BTRFS=y
-> CONFIG_CMD_BTRFS=y
-> CONFIG_GZIP=y
-> CONFIG_DEVICE_TREE_INCLUDES="bootstd.dtsi"
-> EOF
-> # make -j24
-
-bootstd.dtsi is placed at "arch/x86/dts/bootstd.dtsi" and contains:
-> / {
->         bootstd {
->                 compatible = "u-boot,boot-std";
->                 filename-prefixes = "/@boot/", "/boot/", "/";
->                 bootdev-order = "scsi";
->                 extlinux {
->                         compatible = "u-boot,extlinux";
->                 };
->         };
-> };
-
-
-The VM was run with
-> qemu-system-x86_64 -bios u-boot.rom -nographic -M q35 -action reboot=shutdown -drive file=/mnt/dbg/u-boot-debug.img
-
-The error message I recive on boot is
-> BUG at fs/btrfs/extent-io.c:629/free_extent_buffer_internal()!
-> BUG!
-> resetting ...
-
-
-I added a print statement to free_extent_buffer_internal that prints the
-start address of the extent_buffer as I'm not sure what to be looking for
-here.  This print statement is before the decrement.
-> printf("free_extent_buffer_internal: eb->start[%llx] eb->refs[%i]\n", eb->start, eb->refs);
-
-The last message before the crash reported eb->start to be "0", with 0 refs.
-> free_extent_buffer_internal: eb->start[0] eb->refs[0]
-
-The extent at 0 struck me as odd, so I tried commenting out the freeing, by
-removing the call to free_extent_buffer_final, and this resulted in bootflow
-succeeding and showing me the boot menu, which suprised me.
-I expected to see the bug reproduce itself, with refs being zero, but eb->start
-pointing somewhere valid, but I instead got a valid address with refs at 2.
-
-I'm assuming that the order free_extent_buffer_internal is called is
-deterministic, so by counting the print outputs the line that prior held
-the extent_buffer with a 0 start was replaced with:
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-
-Interestingly, as can be seen in the full logs with my included print
-messages, 249c000 is being used just before this, with a ref count of
-2.  249c000 does appear to reach a point where it should have been freed
-in the past, before it gets used again as seen in both logs.
-
-The failing boot log:
-> U-Boot SPL 2024.04-00949-g1dd659fd62-dirty (Apr 22 2024 - 11:32:37 +1000)
-> Trying to boot from SPI
-> Jumping to 64-bit U-Boot: Note many features are missing
-> 
-> 
-> U-Boot 2024.04-00949-g1dd659fd62-dirty (Apr 22 2024 - 11:32:37 +1000)
-> 
-> CPU:   QEMU Virtual CPU version 2.5+
-> DRAM:  128 MiB
-> Core:  13 devices, 13 uclasses, devicetree: separate
-> Loading Environment from nowhere... OK
-> Model: QEMU x86 (I440FX)
-> Net:   e1000: 00:00:00:00:00:00
->        
-> Error: e1000#0 No valid MAC address found.
->       eth_initialize() No ethernet found.
-> 
-> 
-> Hit any key to stop autoboot:  0 
-> Scanning for bootflows in all bootdevs
-> Seq  Method       State   Uclass    Part  Name                      Filename
-> ---  -----------  ------  --------  ----  ------------------------  ----------------
-> scanning bus for devices...
-> Target spinup took 0 ms.
-> SATA link 1 timeout.
-> Target spinup took 0 ms.
-> SATA link 3 timeout.
-> SATA link 4 timeout.
-> SATA link 5 timeout.
-> AHCI 0001.0000 32 slots 6 ports 1.5 Gbps 0x3f impl SATA mode
-> flags: 64bit ncq only 
-> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
->   Device 0: (0:0) Vendor: ATA Prod.: QEMU HARDDISK Rev: 2.5+
->             Type: Hard Disk
->             Capacity: 58680.0 MB = 57.3 GB (120176640 x 512)
-> timeout exit!
-> Scanning bootdev 'ahci_scsi.id0lun0.bootdev':
-> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[0] eb->refs[0]
-> BUG at fs/btrfs/extent-io.c:626/free_extent_buffer_internal()!
-> BUG!
-> resetting ...
-
-The succeeding log with the removed freeing:
-> U-Boot SPL 2024.04-00949-g1dd659fd62-dirty (Apr 22 2024 - 11:38:25 +1000)
-> Trying to boot from SPI
-> Jumping to 64-bit U-Boot: Note many features are missing
-> 
-> 
-> U-Boot 2024.04-00949-g1dd659fd62-dirty (Apr 22 2024 - 11:38:25 +1000)
-> 
-> CPU:   QEMU Virtual CPU version 2.5+
-> DRAM:  128 MiB
-> Core:  13 devices, 13 uclasses, devicetree: separate
-> Loading Environment from nowhere... OK
-> Model: QEMU x86 (I440FX)
-> Net:   e1000: 00:00:00:00:00:00
->        
-> Error: e1000#0 No valid MAC address found.
->       eth_initialize() No ethernet found.
-> 
-> 
-> Hit any key to stop autoboot:  0 
-> Scanning for bootflows in all bootdevs
-> Seq  Method       State   Uclass    Part  Name                      Filename
-> ---  -----------  ------  --------  ----  ------------------------  ----------------
-> scanning bus for devices...
-> Target spinup took 0 ms.
-> SATA link 1 timeout.
-> Target spinup took 0 ms.
-> SATA link 3 timeout.
-> SATA link 4 timeout.
-> SATA link 5 timeout.
-> AHCI 0001.0000 32 slots 6 ports 1.5 Gbps 0x3f impl SATA mode
-> flags: 64bit ncq only 
-> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
->   Device 0: (0:0) Vendor: ATA Prod.: QEMU HARDDISK Rev: 2.5+
->             Type: Hard Disk
->             Capacity: 58680.0 MB = 57.3 GB (120176640 x 512)
-> timeout exit!
-> Scanning bootdev 'ahci_scsi.id0lun0.bootdev':
-> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
-> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
->   0  extlinux     ready   scsi         2  ahci_scsi.id0lun0.bootdev /@boot/extlinux/extlinux.conf
-> ** Booting bootflow 'ahci_scsi.id0lun0.bootdev.part_2' with extlinux
-> ------------------------------------------------------------
-> 1:      NixOS - Default
-> 2:      NixOS - Configuration 5 (2024-03-04 11:00 - 24.05.20240205.faf912b)
-> 3:      NixOS - Configuration 4 (2024-03-02 15:05 - 24.05.20240205.faf912b)
-> 4:      NixOS - Configuration 3 (2024-03-02 14:26 - 24.05.20240205.faf912b)
-> 5:      NixOS - Configuration 2 (2024-03-02 14:06 - 24.05.20240205.faf912b)
-> 6:      NixOS - Configuration 1 (1970-01-01 10:00 - 24.05.20240205.faf912b)
-> Enter choice: 1:        NixOS - Default
-> Retrieving file: /@boot/extlinux/../nixos/gq8jsgxnhq2wvsjrni3cjw1wb5540wjw-linux-6.1.63-stable_20231123-Image
-> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-
-
-I'm not sure where to go from here with the bug, so I'm hoping for some
-help in tracking it down so it can be fixed.
-
-Thanks,
-Sachi
-
+diff --git a/arch/riscv/cpu/fu540/spl.c b/arch/riscv/cpu/fu540/spl.c
+index 45657b7909..cedb70b66a 100644
+--- a/arch/riscv/cpu/fu540/spl.c
++++ b/arch/riscv/cpu/fu540/spl.c
+@@ -7,7 +7,7 @@
+ #include <dm.h>
+ #include <log.h>
+ 
+-int spl_soc_init(void)
++int spl_dram_init(void)
+ {
+ 	int ret;
+ 	struct udevice *dev;
+diff --git a/arch/riscv/cpu/fu740/spl.c b/arch/riscv/cpu/fu740/spl.c
+index c6816e9ed4..16b307f036 100644
+--- a/arch/riscv/cpu/fu740/spl.c
++++ b/arch/riscv/cpu/fu740/spl.c
+@@ -10,7 +10,7 @@
+ 
+ #define CSR_U74_FEATURE_DISABLE	0x7c1
+ 
+-int spl_soc_init(void)
++int spl_dram_init(void)
+ {
+ 	int ret;
+ 	struct udevice *dev;
+diff --git a/arch/riscv/cpu/jh7110/spl.c b/arch/riscv/cpu/jh7110/spl.c
+index 6bdf8b9c72..87aaf86524 100644
+--- a/arch/riscv/cpu/jh7110/spl.c
++++ b/arch/riscv/cpu/jh7110/spl.c
+@@ -28,7 +28,7 @@ static bool check_ddr_size(phys_size_t size)
+ 	}
+ }
+ 
+-int spl_soc_init(void)
++int spl_dram_init(void)
+ {
+ 	int ret;
+ 	struct udevice *dev;
+diff --git a/arch/riscv/include/asm/arch-fu540/spl.h b/arch/riscv/include/asm/arch-fu540/spl.h
+index 4697279f43..519e7eb210 100644
+--- a/arch/riscv/include/asm/arch-fu540/spl.h
++++ b/arch/riscv/include/asm/arch-fu540/spl.h
+@@ -9,6 +9,6 @@
+ #ifndef _SPL_SIFIVE_H
+ #define _SPL_SIFIVE_H
+ 
+-int spl_soc_init(void);
++int spl_dram_init(void);
+ 
+ #endif /* _SPL_SIFIVE_H */
+diff --git a/arch/riscv/include/asm/arch-fu740/spl.h b/arch/riscv/include/asm/arch-fu740/spl.h
+index 15ad9e7c8b..b327ac5036 100644
+--- a/arch/riscv/include/asm/arch-fu740/spl.h
++++ b/arch/riscv/include/asm/arch-fu740/spl.h
+@@ -9,6 +9,6 @@
+ #ifndef _SPL_SIFIVE_H
+ #define _SPL_SIFIVE_H
+ 
+-int spl_soc_init(void);
++int spl_dram_init(void);
+ 
+ #endif /* _SPL_SIFIVE_H */
+diff --git a/arch/riscv/include/asm/arch-jh7110/spl.h b/arch/riscv/include/asm/arch-jh7110/spl.h
+index 23ce8871b3..d73355bf35 100644
+--- a/arch/riscv/include/asm/arch-jh7110/spl.h
++++ b/arch/riscv/include/asm/arch-jh7110/spl.h
+@@ -7,6 +7,6 @@
+ #ifndef _SPL_STARFIVE_H
+ #define _SPL_STARFIVE_H
+ 
+-int spl_soc_init(void);
++int spl_dram_init(void);
+ 
+ #endif /* _SPL_STARFIVE_H */
+-- 
+2.30.2
 
