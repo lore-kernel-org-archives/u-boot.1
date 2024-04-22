@@ -4,80 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88989C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 19:48:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD20CC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 20:01:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E77D889D4;
-	Mon, 22 Apr 2024 21:48:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 44966889DB;
+	Mon, 22 Apr 2024 22:01:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="OyLIYw4P";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="EfIiSJpF";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="tPaSWLWI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEED1889B5; Mon, 22 Apr 2024 21:48:42 +0200 (CEST)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 886D5889E5; Mon, 22 Apr 2024 22:01:30 +0200 (CEST)
+Received: from smtp-relay-canonical-0.canonical.com
+ (smtp-relay-canonical-0.canonical.com [185.125.188.120])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1640889D4
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 21:48:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92362889D8
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 22:01:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-062-143-245-032.um16.pools.vodafone-ip.de
+ [62.143.245.32])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4VNbQv4tjfz9sly;
- Mon, 22 Apr 2024 21:48:39 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1713815319;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5InrFehZqt7jeVhbxGe5Lj5QJ5U2JF3LlQXHY3E0EFo=;
- b=OyLIYw4P+Kp+Ij6atC2midDEFx3ya4YT34FwoiG0hiy1wH0NiKSRmUBLxt7EXfAlnlGWQJ
- PjHTGBBHS9XRJSvG7MLFUcSkrhwVc0pgDLZKkj5/cqsWlnP1mdtHWk1nBDBfFIMqdGrvgy
- RLxTYeXisnEJfp78Cbr7nsXNUi4r7VI4I+q0TejmWYxxwUJJnakF+CMece36Q7+OrqfC+B
- MJWRVONSoclx0Jc5S+o3bamWJt03z4PpZpT2Q364k7c2Xt4IRSocDwgEwg5/6wq9PqoD+/
- 94vtBOl7IjnXYbaCHiBIPrNB2QSuv4vO14G0H+R4VFSUKC9L5xww27zbkSfmwA==
-Message-ID: <8f024225-e616-4a09-a1ec-d19f64794aa9@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1713815317;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5InrFehZqt7jeVhbxGe5Lj5QJ5U2JF3LlQXHY3E0EFo=;
- b=EfIiSJpFCfJhitjNqlnPgbk4pWeS+oB4AiU8nHfdSfkAV7Jq4JWmsP2TeQTKl26Scgbt4S
- /ygktM+WfVUb+F0oaM7pjfRf9zO7GmsTI+I9+fgdroALikhLhPKuvTCnnMlhRMHDtAnJOQ
- a6GheCV8G6Vd2j3vkgZq4YB8ya0eknLcS5YwdnQe4DTvKjVjulF9gdoK3yow03CpF9bvsf
- tbkjrGlkcwOX6UirMv8it8MIEl9ypwlr0MXNhDT6AWKTtGbdYn46mLK7oSxVSIpV7fy5LH
- aczSdrN/pSbZTccMDQh1HSUI0f45QdGyRD6CGPaIOr5038DUNvBw/2jjr9Qcug==
-Date: Mon, 22 Apr 2024 21:47:41 +0200
+ by smtp-relay-canonical-0.canonical.com (Postfix) with ESMTPSA id 6360B3FADB; 
+ Mon, 22 Apr 2024 20:01:26 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1713816086;
+ bh=JV7R7w9JyqfIdqL8WKAbfdPq5mKXzvWrXxoj9CmPOkw=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=tPaSWLWI/hoGGXtZl/a1aOxp1Iyci9JMxvzbE74QYV9zFHF58UQyLbLRD+GASSDPZ
+ 1FlHpv5Hj3i9bG4zHbqoQvAERZfx1GZOFVPGru8X78zzTfCIgZnm1g2OeKt+n9go7l
+ DbTYSH+AmHNdbMJLny9uWThXWFmOHKRDOjcm54FS+fV065CbibkwAODqBkoJX2aOQM
+ UklBK8E5MIqOMinfPUQt7TCrwMq+91Wgfk9BJVivhFh9Nu78iymXsLdK05eM11laoP
+ n8DX/L/BD746W1dNShkKy2QfQkBgeHbHLQ61ITa41GtsCmKJdvTsWHRGiiHoWyVMUk
+ BpR0xoU8lgNGg==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: =?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas@t-8ch.de>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] doc: correct description of 'env print -e'
+Date: Mon, 22 Apr 2024 22:00:56 +0200
+Message-ID: <20240422200057.27488-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 2/3] configs/rock5b: Set NET_PREFER_ROM_MAC_ADDR to y
-To: Detlev Casanova <detlev.casanova@collabora.com>, u-boot@lists.denx.de
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Fabio Estevam <festevam@denx.de>
-References: <20240422135927.23582-1-detlev.casanova@collabora.com>
- <20240422135927.23582-3-detlev.casanova@collabora.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20240422135927.23582-3-detlev.casanova@collabora.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: hohs5wk9jio16y73eftcrzpt51a8f9po
-X-MBO-RS-ID: 8063b92f22b3bd5fff5
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,9 +70,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/22/24 3:56 PM, Detlev Casanova wrote:
-> ---
->   configs/rock5b-rk3588_defconfig | 1 +
->   1 file changed, 1 insertion(+)
+If 'env print -e' is invoked without variable name, all UEFI variables are
+listed.
 
-This patch seems to be missing commit message and SoB line
+Describe that 'env print -e' requires CONFIG_HEXDUMP=y to print content of
+UEFI variables.
+
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ doc/usage/cmd/env.rst | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/doc/usage/cmd/env.rst b/doc/usage/cmd/env.rst
+index 040076bcc03..5478c541776 100644
+--- a/doc/usage/cmd/env.rst
++++ b/doc/usage/cmd/env.rst
+@@ -226,7 +226,7 @@ in UEFI variables.
+     \-a
+         all U-Boot environment, when 'name' is absent.
+     \-e
+-        print UEFI variables, all by default when 'name'.
++        print UEFI variables, all by default if 'name' is not provided.
+     \-guid guid
+         print only the UEFI variables matching this GUID (any by default)
+         with guid format = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx".
+@@ -372,6 +372,10 @@ info
+ load
+     CONFIG_CMD_NVEDIT_LOAD
+ 
++print
++    CONFIG_CMD_NVEDIT_EFI for UEFI variables support ('-e' option),
++    additionally CONFIG_HEXDUMP to display content of UEFI variables
++
+ run
+     CONFIG_CMD_RUN
+ 
+@@ -381,5 +385,5 @@ save
+ select
+     CONFIG_CMD_NVEDIT_SELECT
+ 
+-set, print
+-    CONFIG_CMD_NVEDIT_EFI for '-e' option
++set
++    CONFIG_CMD_NVEDIT_EFI for UEFI variables support ('-e' option)
+-- 
+2.43.0
+
