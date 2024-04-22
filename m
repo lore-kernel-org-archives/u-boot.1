@@ -4,76 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F4D5C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 17:44:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A42D7C10F16
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 17:52:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FDD4884B9;
-	Mon, 22 Apr 2024 19:44:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 14E35888F2;
+	Mon, 22 Apr 2024 19:52:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aEUwRgmt";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="IGtjm4H5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 582F3884BA; Mon, 22 Apr 2024 19:44:44 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A2A9F888F8; Mon, 22 Apr 2024 19:52:11 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E9A6884A4
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 19:44:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A62D0884A4
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 19:52:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-69b4e94ecd2so17805656d6.3
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:44:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713807881; x=1714412681; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3+BMuwS5XUzMcszqSI7A7F5l1/5MjawhlgvMDmgbJx4=;
- b=aEUwRgmt7zBS9YEgL2gAc0Ky8Upj7S/fhGQFhlUUo2crf9y3F+yzEAQTX29QHKXW1u
- ruh4cn0xrjlebjXJq0BMBfIEbAv5YG9+fG2EnJz4mpAiOQ8fu6je3M/L6ZHzIVND8ZHz
- fMcsXIPW6bq9PUUTv5olrm8FgaoXj5/Zw11uo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713807881; x=1714412681;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=3+BMuwS5XUzMcszqSI7A7F5l1/5MjawhlgvMDmgbJx4=;
- b=oHejwvHfa6ujEWSCKdouyLKUjg7/QUxEZoLtJWkikrJuQBOSuyfgmWPKFMTxGXkBMi
- Qq8aL4dZGz0TtqyYuuVqyKeXIoRDpbtOSs6d7NJJGI9dbJmh7bWpyEnnuhhMrtYZXzgE
- BguLS1GSeqvovbmWaZRtEW+An0yjVFJ+hUNGDV5KiV6wUgBDb6926waHBmdjHsADTQy6
- PPiNyTS1Jkg9dLPxPOHlPjsNYvXeadFv9TS4239omtg+sbLmaol/SYSYYk8MmOsRTz3R
- FHcCkunAEGIY4gKP/uuq3iA7cFC5pY0hbzYUKIDg+oSRAgCOrQKrQNRsU8M1VHPBmWHU
- kiRQ==
-X-Gm-Message-State: AOJu0YyfD+AaWbgqiE/JC4yAdEelWQ143ncu6fJuTK2bMSsF0TlF2H1g
- uOgrCI2wnbk75r3098J/vX7TDnQLZs7pQXkSRwIxzXfTExPH4jvvoZUETKCr1+gsnTMcQ2dJ9g7
- z+hc=
-X-Google-Smtp-Source: AGHT+IHgjPAONftoK8zFBRBaSLFs1qAlbjMVn9d6Nn1NUxmIelnmYAhrNSD/g5w8OmK0xtcViurz1g==
-X-Received: by 2002:ad4:4201:0:b0:69b:1ea9:c715 with SMTP id
- k1-20020ad44201000000b0069b1ea9c715mr11065378qvp.26.1713807881077; 
- Mon, 22 Apr 2024 10:44:41 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- n11-20020a0ce48b000000b0069b6c831e86sm4432374qvl.97.2024.04.22.10.44.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 10:44:40 -0700 (PDT)
-Date: Mon, 22 Apr 2024 11:44:37 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] cmd: gpt: initialize partition table
-Message-ID: <20240422174437.GV1054907@bill-the-cat>
-References: <20240422172335.166727-1-kishan.dudhatra@siliconsignals.io>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=8c7e=L4=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1713808306;
+ bh=58fbxcnPWj2J1iiOdUTuXlbGNSLUXfqxucJR4Ov0BWk=;
+ b=IGtjm4H5J16EPf17VfAFtcaXsMhSuUgWMV/BF1sIqQxzYhNh+6Vz0IcrQPOzhcx5g/mxOCvgp
+ g6gwnjl5ER2NeLOU5CI17pEKhI0J2ts1t9SPOcsU0G9kc+Qyl1z/Fb3p9VOw9ekZtFQC1eoab2+
+ bORrtVvakiV3t3kLuyWK5bU1KT9H4G1XJPFazWM2m7re58n+0Hecq24wc662P0KsGCsPRnvUafN
+ HwrGJhJbDnvHtkj3tK9fJ1hQXQlm7QqLCVtBtdzcO3VUaGjSsXa5clS6njfTR4+o5b6LBamCoEP
+ R9FHPzzeUw1T4rarxfEWxyYVQ3JLGloyN277pQa6b/zg==
+Message-ID: <99683d6a-2527-4aed-b168-28f0954b6ba4@kwiboo.se>
+Date: Mon, 22 Apr 2024 19:41:11 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="0KqDBQzlqKw7Pff7"
-Content-Disposition: inline
-In-Reply-To: <20240422172335.166727-1-kishan.dudhatra@siliconsignals.io>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] rockchip: rk3588: add support for UART2 M1 and M2 in
+ SPL
+To: Quentin Schulz <foss+uboot@0leil.net>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Philipp
+ Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
+ <kever.yang@rock-chips.com>, Klaus Goger
+ <klaus.goger@theobroma-systems.com>, Heiko Stuebner
+ <heiko.stuebner@cherry.de>, u-boot@lists.denx.de
+References: <20240422-tiger-v1-0-8816b070d748@theobroma-systems.com>
+ <20240422-tiger-v1-1-8816b070d748@theobroma-systems.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240422-tiger-v1-1-8816b070d748@theobroma-systems.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 6626a13beab47a2e03699207
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,56 +78,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
---0KqDBQzlqKw7Pff7
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2024-04-22 18:41, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> 
+> UART2 controller is the controller in the reference design for debug
+> console. The default mux is M0 in that reference design. Until now, all
+> boards seemed to be using UART2M0 but RK3588 Tiger for example will be
+> using UART2M2 instead.
+> 
+> Therefore, let's add support for UART2M1 and M2 as possible muxes for
+> the UART2 controller used as debug console. UART2M1 support was not
+> tested.
+> 
+> The default value is M0 to match the one used currently by all devices
+> and the reference design.
 
-On Mon, Apr 22, 2024 at 10:53:35PM +0530, Kishan Dudhatra wrote:
-> If partition init is not completed within the gpt write,
-> the gpt partition list will not be updated.
->=20
-> Signed-off-by: Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>
->=20
-> diff --git a/cmd/gpt.c b/cmd/gpt.c
-> index d7e96529a6..2d652f480a 100644
-> --- a/cmd/gpt.c
-> +++ b/cmd/gpt.c
-> @@ -643,6 +643,10 @@ static int gpt_default(struct blk_desc *blk_dev_desc=
-, const char *str_part)
->  	free(str_disk_guid);
->  	free(partitions);
-> =20
-> +	/* initialize partition table */
-> +	if ((blk_dev_desc)->uclass_id =3D=3D UCLASS_MMC)
-> +		part_init(blk_dev_desc);
+Is this really necessary?
+
+Use of board_debug_uart_init() should typically only be needed in TPL on
+Rockchip platform, and with ROCKCHIP_TPL being used it should be enough
+to use rkbin/ddrbin_tool to change uart config and just ensure correct
+pinctrl is used for uart node, and that the uart node is included in SPL
+for correct serial console use.
+
+May I suggest you try adding following to defconfig and drop this patch?
+
+  # CONFIG_DEBUG_UART_BOARD_INIT is not set
+
+I would expect that should result in same/working behavior without
+having to add any new code.
+
+Regards,
+Jonas
+
+> 
+> Cc: Quentin Schulz <foss+uboot@0leil.net>
+> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> ---
+>  arch/arm/mach-rockchip/rk3588/Kconfig  | 10 ++++++++++
+>  arch/arm/mach-rockchip/rk3588/rk3588.c | 36 ++++++++++++++++++++++++++++++++++
+>  2 files changed, 46 insertions(+)
+> 
+> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+> index d7e4af31f24..cacdb0459c9 100644
+> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+> @@ -221,6 +221,16 @@ config ROCKCHIP_COMMON_STACK_ADDR
+>  config TEXT_BASE
+>  	default 0x00a00000
+>  
+> +config DEBUG_UART_CHANNEL
+> +	int "Mux channel to use for debug UART2"
+> +	depends on DEBUG_UART_BOARD_INIT
+> +	default 0
+> +	range 0 2
+> +	help
+> +	  UART2 can use three different set of pins to route the output.
+> +	  For using the UART for early debugging the route to use needs
+> +	  to be declared (0, 1 or 2).
 > +
->  	return ret;
+>  source board/edgeble/neural-compute-module-6/Kconfig
+>  source board/friendlyelec/nanopc-t6-rk3588/Kconfig
+>  source board/pine64/quartzpro64-rk3588/Kconfig
+> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+> index eb65dafe3a2..e330ad6a697 100644
+> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
+> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+> @@ -94,9 +94,32 @@ enum {
+>  	GPIO0B6_UART2_RX_M0	= 10,
+>  };
+>  
+> +/* GPIO3B_IOMUX_SEL_L */
+> +enum {
+> +	GPIO3B1_SHIFT		= 4,
+> +	GPIO3B1_MASK		= GENMASK(7, 4),
+> +	GPIO3B1_UART2_TX_M2	= 10,
+> +
+> +	GPIO3B2_SHIFT		= 8,
+> +	GPIO3B2_MASK		= GENMASK(11, 8),
+> +	GPIO3B2_UART2_RX_M2	= 10,
+> +};
+> +
+> +/* GPIO4D_IOMUX_SEL_L */
+> +enum {
+> +	GPIO4D0_SHIFT		= 0,
+> +	GPIO4D0_MASK		= GENMASK(3, 0),
+> +	GPIO4D0_UART2_TX_M1	= 10,
+> +
+> +	GPIO4D1_SHIFT		= 4,
+> +	GPIO4D1_MASK		= GENMASK(7, 4),
+> +	GPIO4D1_UART2_RX_M1	= 10,
+> +};
+> +
+>  void board_debug_uart_init(void)
+>  {
+>  	__maybe_unused static struct rk3588_bus_ioc * const bus_ioc = (void *)BUS_IOC_BASE;
+> +#if (CONFIG_DEBUG_UART_CHANNEL == 0)
+>  	static struct rk3588_pmu2_ioc * const pmu2_ioc = (void *)PMU2_IOC_BASE;
+>  
+>  	/* Refer to BUS_IOC */
+> @@ -110,6 +133,19 @@ void board_debug_uart_init(void)
+>  		     GPIO0B6_MASK | GPIO0B5_MASK,
+>  		     GPIO0B6_UART2_RX_M0 << GPIO0B6_SHIFT |
+>  		     GPIO0B5_UART2_TX_M0 << GPIO0B5_SHIFT);
+> +#elif (CONFIG_DEBUG_UART_CHANNEL == 1)
+> +	/* UART2_M1 Switch iomux */
+> +	rk_clrsetreg(&bus_ioc->gpio4d_iomux_sel_l,
+> +		     GPIO4D0_MASK | GPIO4D1_MASK,
+> +		     GPIO4D0_UART2_TX_M1 << GPIO4D0_UART2_TX_M1 |
+> +		     GPIO4D1_UART2_RX_M1 << GPIO4D1_SHIFT);
+> +#else
+> +	/* UART2_M2 Switch iomux */
+> +	rk_clrsetreg(&bus_ioc->gpio3b_iomux_sel_l,
+> +		     GPIO3B1_MASK | GPIO3B2_MASK,
+> +		     GPIO3B1_UART2_TX_M2 << GPIO3B1_SHIFT |
+> +		     GPIO3B2_UART2_RX_M2 << GPIO3B2_SHIFT);
+> +#endif /* CONFIG_DEBUG_UART_CHANNEL */
 >  }
+>  
+>  #ifdef CONFIG_SPL_BUILD
+> 
 
-Is there something more generic we can check for here? This sounds like
-a problem for any block device, not just MMC. Thanks.
-
---=20
-Tom
-
---0KqDBQzlqKw7Pff7
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYmogIACgkQFHw5/5Y0
-tyzCUQwAnU4u+2g23xwuwwYIgN8FdHXOs3S2UqHLsodX2K/4M6LPBjMKjLVL/46i
-SQU0AUfPyMgQiw0pJLqXEFvUknF0wnUh+J/dh6N7oSs4lv09OZHF7IqWjxuyYxCJ
-iqBEk5SyEGrCHGgelTN4auug7aNaHux9Oi21YwpEF4CohUC+4YQTdVz4tnzMWpKa
-UFw2imFUWlCqLRUGsMocInu3xmj8kNbNqQozSgd5smGIaMSeWyC9vpi/ePBbjb0R
-QtQ3Tnoyp/BupWM7gUmFUPtfiil1ZNPJG3sNmU9ULE5oml6BuswQXLR7y5DQ69Ik
-5hm49OVc5aDse33nx5zDB6YY9J3VNn7PxISKptPK+3qBxu5iv0HForgQrT4xtS+J
-odGd+fMhDZNI4SQLSIUTP1hRa4aKT/djPmjpSnH6/QuJh3OFI4fO9FBDXcjFPzN4
-K0ksAFVQhRUHh3DAyZ/WL509sx6QCUZfJx3vk/uC4rCs88aD2Rl/mskr/0yb3wAB
-sP9vw0iT
-=Pa+P
------END PGP SIGNATURE-----
-
---0KqDBQzlqKw7Pff7--
