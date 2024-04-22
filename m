@@ -4,134 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5332EC07C79
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 18:20:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4AE7C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 19:01:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA2218893D;
-	Mon, 22 Apr 2024 20:20:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=siliconsignals.io
+	by phobos.denx.de (Postfix) with ESMTP id 0D09E88963;
+	Mon, 22 Apr 2024 21:01:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="qKlh1dRq";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD63B8893F; Mon, 22 Apr 2024 20:18:18 +0200 (CEST)
-Received: from PNZPR01CU001.outbound.protection.outlook.com
- (mail-centralindiaazlp170110003.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c408::3])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9F34888964; Mon, 22 Apr 2024 21:01:07 +0200 (CEST)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C668488914
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 20:18:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=siliconsignals.io
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=kishan.dudhatra@siliconsignals.io
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=jS2qvKWa664WEUh1YluGBN8VDvpaLDLMVMk283h9DUnsMNAO6nSvgB1mhgZj8SmyjwcgcvgaqHh9oRTJmZb584jEPoJU7SvROcRGvz2Aw9MQfQhRlIsT7nPlb3NgHwAiRLBqapFdNhu9x3BB2n8YATGM1UyX4HV3UpWv0k9BWTBmjkksZM/WD7Lf+AFzdtvjOwdSuTCpUAjZyv7sIisLVTqKjLX4uTI+xWZd7T34vQrNFYZ5+2+ROJReDxznnl0TCBbWCjJkPG/QJsTRadW/CvEUC815+LYYwwWENPFn3fQWF/wQFmyP8toIU8PtS7YvYnODH56eofGqwTnlLT2qiA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=c8UbFhk3ShPwNk61ADgCpBDKXkUWuyjmzXTxZ5oGCu0=;
- b=IHu5YnrlRP0Tjj0+V7fl+PEl/2Mk6G0Xof8dEK7kCoNZvm/S1z3VdBDFeHPKZmXFS9GvxTLGuY8AzkqZtcepcA0r6kmsUadYsXRbzd1FLUbi0zv/ibUbY75NZCicBmbAHZAiMUkMbPAtaOQgvDQ5lyrbG0rwsoztBA/eLHZf6ySZ4lPxJXbPEnMEeyzu8vZ8KyoPUjj2E9SDVSxz2ZxRzKWTLZ+XIl9HktGjuafPH3nDfiankdlP3lfnsPxdiZ0jAjOxwG1Vca8jWV8/KDvPp9egeGz85kd+dyEveDsG2huwQsUfy7zIU8Gbj5Mgw8XJzzQWb8xfaCIeuWv2SPS4Ig==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siliconsignals.io; dmarc=pass action=none
- header.from=siliconsignals.io; dkim=pass header.d=siliconsignals.io; arc=none
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siliconsignals.io;
-Received: from MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a01:a3::10)
- by MA0PR01MB9530.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a01:c6::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.44; Mon, 22 Apr
- 2024 18:18:13 +0000
-Received: from MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::da4e:be76:93b8:e469]) by MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::da4e:be76:93b8:e469%3]) with mapi id 15.20.7472.044; Mon, 22 Apr 2024
- 18:18:13 +0000
-From: Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com,
-	Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>
-Subject: [PATCH v2] cmd: gpt: initialize partition table
-Date: Mon, 22 Apr 2024 23:47:33 +0530
-Message-Id: <20240422181733.179881-1-kishan.dudhatra@siliconsignals.io>
-X-Mailer: git-send-email 2.25.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: PN3PR01CA0143.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:c01:bf::7) To MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a01:a3::10)
+ by phobos.denx.de (Postfix) with ESMTPS id D125787073
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 21:01:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=timesys.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=greg.malysa@timesys.com
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-6181d032bf9so45241447b3.3
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 12:01:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1713812463; x=1714417263;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=R7t71w2zr7ayhgzFu6QEhvgqLmiJlyzQ2OGTtRym/rg=;
+ b=qKlh1dRqQjHqmSvcMDEeOwgMev4/bUd1T8CW5B9hvmORAdPZCzS+8B0iR63P00r/hF
+ S5nR2O44n7ML22Tu3aIyKTvZ5eQJjQurGjat6TCgXMP3wlqYUotnN3ZktBGWgWVKmuDH
+ gGGIKRBO/6Guey0DSFPmSeugu2cM15aQWbbWEm+5biWJdphNW+KWzKqsAtj44QLf9SqR
+ D+qgy8pU0FrbOrfP80C/tdUwWnM6W4FlHx+7DNNomyO0ydGUAGn9OJIAmd93LVIDzgBs
+ hG6H3PS86PkUbz+rGzU7+km/xo37qpm7Ikx7Yv8gpbSRXcVDGo0M0rLxAsG+p0xCXDFU
+ LcWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713812463; x=1714417263;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=R7t71w2zr7ayhgzFu6QEhvgqLmiJlyzQ2OGTtRym/rg=;
+ b=cRaUlpum6gyeutEWJ3JnEqj+pIAz8VT7l25swdhyhvcBHoyyDtzhLjHVtwRfqvo0bW
+ 42cg49ENRKZUaoMGN/PlJvZsJ03QEiNb2np0vOiRo3TF3KXXGaJcZoyXYk62nYxwI6ZJ
+ OZ0uGlPE/A6Cq5JbuaUiw8Qu/pVxuay+9BXfF1e6UXJLsT1m0lO20Tnji1M5CRNIrVNr
+ yh1eM45BL4oErPkAb2BTufqpLog+WSCUUNkAabEaeR4wOZZLvhj+40sHE3I5N3JA33hG
+ bo1AcFACnCKkrtVHlK4KdBnE9GXe4kWT2MW0GsBANNkzGI3Y0KgRvlnBHCcuySWhMHhQ
+ DjOw==
+X-Gm-Message-State: AOJu0Yx7NsD+FXBW2caazs+3gqysW1qN8T6IGYymoCknF3eCX1RPCDa6
+ UJaKFEbZarXDPLVg/Vl3e8gWrA63BMdqvGSI+GqDTLYAGZXdwEV/0o5F8TdLua2nk2pnofCDcao
+ =
+X-Google-Smtp-Source: AGHT+IEuTgfvKDGkYlLnz5KkzfrA3UQBbBZJaVUb5Pjo/RYg+i68aaTFGAKsDqgx+UAsyu/dzUtC/g==
+X-Received: by 2002:a05:690c:360f:b0:61b:1d8d:8c11 with SMTP id
+ ft15-20020a05690c360f00b0061b1d8d8c11mr12769370ywb.4.1713812463319; 
+ Mon, 22 Apr 2024 12:01:03 -0700 (PDT)
+Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
+ by smtp.gmail.com with ESMTPSA id
+ n3-20020a81bd43000000b0061b221afbe1sm1920190ywk.105.2024.04.22.12.01.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Apr 2024 12:01:02 -0700 (PDT)
+From: Greg Malysa <greg.malysa@timesys.com>
+To: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: Ian Roberts <ian.roberts@timesys.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Greg Malysa <greg.malysa@timesys.com>,
+ Sean Anderson <sean.anderson@seco.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2] mmc: sdhci: introduce adma_write_desc() hook to struct
+ sdhci_ops
+Date: Mon, 22 Apr 2024 15:00:02 -0400
+Message-ID: <20240422190035.25852-1-greg.malysa@timesys.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MAZPR01MB7912:EE_|MA0PR01MB9530:EE_
-X-MS-Office365-Filtering-Correlation-Id: 11b236c1-1556-4929-949d-08dc62f89272
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?0FMTmW7YQfwMgu8DzL3s8gbIzQHM3M2FOUyyaje/n6kxsHve5s0+vxkhHVPQ?=
- =?us-ascii?Q?B6an/mP7UtLBtsgvQe4OjYE8UBat4eDBgXuAeRq9FH0lMLCwAyhll6GifNrp?=
- =?us-ascii?Q?Q/IyR3v7eY708juaAht5qaNXwibA29imfxWSfKEP+yDWWfOiRGNRllX0qMCG?=
- =?us-ascii?Q?2L4nncqMi4du1G6erutMu414gBQTOWxV70GRV3avsbiT9h5dkRHj0VtpE3Wt?=
- =?us-ascii?Q?dXnR8limJdAuYStOxtCyCRwaSJzS51kKW6x1Dz61JNRfvYhNISpoAaS9Gcan?=
- =?us-ascii?Q?37X2ltu4gBNz9ejbWonvV3kj6n1zs3Kv038zXSjY2O96mV64snyNsktB6/P5?=
- =?us-ascii?Q?qNd2nozfNIAhQopovDuygJGormrRPGGrpd1BMYVMy5zsOsLw8NQqeNbLMNYv?=
- =?us-ascii?Q?Ai9zMTPUFpUyQRv2J7KZZwtDgCA+zLMCndELkWQmpB/knQ/q3zdnkJRxpNtP?=
- =?us-ascii?Q?rjYneJ6ocRLeQf8o9p+2p3jKy0zaNPUqNUaMGUeGSQpo9Mc0VVas9g0q6U5z?=
- =?us-ascii?Q?5fW8K475C9XSiFX2yyyNchyt+ht+KTGSjllw80WsP6Fr1U+6ZEU40UrSMaWc?=
- =?us-ascii?Q?faCIGvcL7V3clgSwvM9FmAzC/5S3p0JbDPOjCXgmh+R8M0dLfiMSdiacnEST?=
- =?us-ascii?Q?jtj8hlOMbIeVEtHDl0OdgbmAnpqzCANeNI+EtEy9KPC6ecbu5b1WuUYqS6bi?=
- =?us-ascii?Q?+d81s44MCYPm/ANZybAIArDDuSSvUubUGK1AQuP1ifeSlqoUX24Y7+u58PV5?=
- =?us-ascii?Q?x0OeY5+9dpuETe6g+IvAKipbI9a2NxUdd97RmbDsFdDxTqz769P10z81x5bb?=
- =?us-ascii?Q?3iMcTzA5Lj3MBnuRRghK3Eo6Uyk1IlyO64NPrum5yoKOtMR9p6JCvYJkn6mg?=
- =?us-ascii?Q?++cooCCHEHZlK5RVl3myjrqtPysiEAr9HMKpWcqzBI7ihB4Fa8JWTH1Hy03E?=
- =?us-ascii?Q?xlJBYnWIh3vEF0i14lBEhePjXhNkuV/AFEMa/yQ+rOoSl6B8oonGCEy5Ow3R?=
- =?us-ascii?Q?IXyMpyl0F2CyJ64EZzDvEO4SALW8F6RG7Uiaqpq57HvIbMXZf1PUqm8lYEVT?=
- =?us-ascii?Q?146AIIn/SX71WK5/tnHuJt2mLM6Ym3NdaKqkioqUYIKEmzzycBheb3IyaqcN?=
- =?us-ascii?Q?/eQUV3uJTGP4KLaWKTIke3ZIBfjlQk2c8VYbtJCOh6MtRaFs+2UcymCiznhz?=
- =?us-ascii?Q?CDG7UzNBBtp07/maJxWeW0w/gsy17c9qpGTyK1qFqMoAETGwEUToSLcQc+6G?=
- =?us-ascii?Q?OCph1Ao0MmYOSWVWzM7CDdzxVliYrkv33jpXxTT4JJ6xaaoP67BLr9uT5IXX?=
- =?us-ascii?Q?WV2WxUj69ylmiNVkLDFj3r0o1o89pDaHk4FPGUjAK+zW9w=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230031)(52116005)(366007)(376005)(1800799015)(38350700005); DIR:OUT;
- SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?VcTz+gaU7Sic75QmRLsJsJm/7m/35uovjNPYE4OVytFoWivgpNbWdlKNZ8KP?=
- =?us-ascii?Q?UgZqFyfa7gycW9+LNidNFkYrAhTDoxsbqiqpwRhqmeOUFTZrOeKm5sh/GYWB?=
- =?us-ascii?Q?u/xaJRlBQLwNZVic8Q7PV3G7rDk4SEukzS834pNlqasjNKa3UbWMyKvbdYY5?=
- =?us-ascii?Q?b9aukdrIZjsJCXYwWTnSZ307mgpiFyHBffoiB9aFAtL42h7IQubEjivqYTid?=
- =?us-ascii?Q?dYvU9l9Ms8NLK2AqUcs1G/lDz5VAL8nuymmXaBL/V6i/QgOZztSOmjPbwbzL?=
- =?us-ascii?Q?zTFAEdS3rIdebrDPmRII3XjkwC2Lhrl1DHqD4uCKdCyqpmbX5Z5FHZMIo5rA?=
- =?us-ascii?Q?2bZZCMjRbeU5Y8DlWs5RKGYuFaTEypDRtUM5vHJQUXTeZqaYGvGh4NxjVr91?=
- =?us-ascii?Q?zqqqJq/iZqi+T9gLYhln3Ak4mL11FOUgedcMapnA5/MqbZOkkYnuWNH65X+X?=
- =?us-ascii?Q?uDevLFm5vuckj7tLTv4zjgrl2kqugqo+qCV0Z4MTAaTVxwc4dwzGh8rxWR0x?=
- =?us-ascii?Q?UZStSxR4m2wFDZ+EgIop9YACJvxurgY7/428hq9H149bPkMZU5nCD2HWvxSk?=
- =?us-ascii?Q?cPCDYy5+zfsCvo1lbogAfzsA70+b666nulFGIJfpz1xmi1220Vz237jKLbE0?=
- =?us-ascii?Q?v0RwBQgnlZwsPNWXGUbll2J0Q1u+6HlPlLiKr2bBoj5oAmT4xqyn/Dt0r7DW?=
- =?us-ascii?Q?8WeyZzBYFQofGFRHIJXqll9npPt/azKIduNZEtissekRmzrSX2oHpJ9QRM0F?=
- =?us-ascii?Q?MyHojjeXJmCsTFazhwgqlja0BvnY6HC7ibizDgIi9e68jPJLEkLycJaD4DRU?=
- =?us-ascii?Q?bFRlp9kzsyxee90fRrUbd+9+fQSZ/J4AdA5H9oVjTWPsUIWePNqCqZLVsyaG?=
- =?us-ascii?Q?MGcJ+J72cpTP1Z+nNiL1ylKULfXG6baNjxOut9JgtiC7Wi77HF7LZa2VUw8E?=
- =?us-ascii?Q?V/zlNhvFP+TTp4vFNLJe9nLvxUBiAxBMjM2TJe0gHDLSOMW0ssE6sP8wtJ4f?=
- =?us-ascii?Q?hB2IaODJMrAX+gKTZ/Z9gp+KnkMn8CLkkFqQfG7BPeMaqIW6eJzkPeLax2Rd?=
- =?us-ascii?Q?dOArkKzvN8lTaO0IYoCaOQJyIz4wCbtmjstY3Ru67S7nbLJM/J2A3lft+JtS?=
- =?us-ascii?Q?CmzsLx8XqDoO26uS8jJ4uNR3h7wINKazlV1TLLCXv3YPRwLQlHiHu+Prxl+N?=
- =?us-ascii?Q?rz+6ihIEshaPlEviE11X9/+ftauZa/4Fy7nxmfyWgMcHgbI0fEu932eoY8tM?=
- =?us-ascii?Q?grM8xl9dBbU4GkI3PD+i5AJ+/RW78rL/B/EFpJ7iIaKWoJIEriMTvMEXOdiX?=
- =?us-ascii?Q?YfYfVQoobvTzn9CUungKi++WBIkXn422MfDVb6h5nx/3N4Gz3gCFxKUAoK7P?=
- =?us-ascii?Q?tYgTigdjwfw8woQYOaotXiftimvoBavpcy2O/ny26jcauVDiAgq/YbJk7MjE?=
- =?us-ascii?Q?mFcY8BUgqS3N42sdwWhH5olxL3DFqGe8O+34bNiUU5Nz/xfIeSeeJShANSV4?=
- =?us-ascii?Q?qld+fTEgCbY6hSot4xCQkLxZIvXgzL+38EkEFa0l7+SjttxTDIHGumwqLMSU?=
- =?us-ascii?Q?JGOAq5KuprreY5ido65B0SUS2xBvTG2B3o4rLIGOzbZD09TwvqdZV1Kidl22?=
- =?us-ascii?Q?8BWwULbJtXmhCJXuT0ZLxN8=3D?=
-X-OriginatorOrg: siliconsignals.io
-X-MS-Exchange-CrossTenant-Network-Message-Id: 11b236c1-1556-4929-949d-08dc62f89272
-X-MS-Exchange-CrossTenant-AuthSource: MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2024 18:18:13.0437 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 7ec5089e-a433-4bd1-a638-82ee62e21d37
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hyY0ReGwFkojbrR0BA/o9ZucoPbd6mzVtctKZlxAn4NpXr/dr7DEWJ5mz65/7LEmolpIAzgcqyT3X9neNnR36HaibHH2Yam052MEMjGbcoBXWafvIS6YaQWAytUOG97e
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA0PR01MB9530
-X-Mailman-Approved-At: Mon, 22 Apr 2024 20:20:24 +0200
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,29 +96,198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Change in v2:
-	- Fix applies to all block devices, not just MMC.
+From: Ian Roberts <ian.roberts@timesys.com>
 
-If partition init is not completed within the gpt write,
-the gpt partition list will not be updated.
+Add this hook so that it can be overridden with driver specific
+implementations. We also let the original sdhci_adma_write_desc()
+accept &desc so that the function can set its new value. Then export
+the function so that it could be reused by driver's specific
+implementations.
 
-Signed-off-by: Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>
+The above is a port of Linux kernel commit 54552e4948cbf
 
-diff --git a/cmd/gpt.c b/cmd/gpt.c
-index d7e96529a6..7aaf1889a5 100644
---- a/cmd/gpt.c
-+++ b/cmd/gpt.c
-@@ -643,6 +643,10 @@ static int gpt_default(struct blk_desc *blk_dev_desc, const char *str_part)
- 	free(str_disk_guid);
- 	free(partitions);
+In addition, allow drivers to allocate their own ADMA descriptor
+tables if additional space is required.
+
+Finally, fix the assignment of adma_addr to fix compiler warning
+on 64-bit platforms that still use 32-bit DMA addressing.
+
+Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Co-developed-by: Greg Malysa <greg.malysa@timesys.com>
+Signed-off-by: Greg Malysa <greg.malysa@timesys.com>
+Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
+
+---
+
+Changes in v2:
+- Switch from #if CONFIG_IS_ENABLED(MMC_SDHCI_ADMA) to #ifdef
+  CONFIG_MMC_SDHCI_ADMA_HELPERS, as CONFIG_IS_ENABLED() causes a build
+  failure during SPL builds when CONFIG_SPL_MMC is set.
+- Passed CI before submitting this time
+
+---
+ drivers/mmc/fsl_esdhc.c  |  2 +-
+ drivers/mmc/sdhci-adma.c | 41 +++++++++++++++++++++++++++-------------
+ drivers/mmc/sdhci.c      |  8 +++++---
+ include/sdhci.h          | 12 ++++++++++--
+ 4 files changed, 44 insertions(+), 19 deletions(-)
+
+diff --git a/drivers/mmc/fsl_esdhc.c b/drivers/mmc/fsl_esdhc.c
+index d506666669..bd0671cc52 100644
+--- a/drivers/mmc/fsl_esdhc.c
++++ b/drivers/mmc/fsl_esdhc.c
+@@ -252,7 +252,7 @@ static void esdhc_setup_dma(struct fsl_esdhc_priv *priv, struct mmc_data *data)
+ 	    priv->adma_desc_table) {
+ 		debug("Using ADMA2\n");
+ 		/* prefer ADMA2 if it is available */
+-		sdhci_prepare_adma_table(priv->adma_desc_table, data,
++		sdhci_prepare_adma_table(NULL, priv->adma_desc_table, data,
+ 					 priv->dma_addr);
  
-+	/* initialize partition table */
-+	if (blk_enabled())
-+		part_init(blk_dev_desc);
+ 		adma_addr = virt_to_phys(priv->adma_desc_table);
+diff --git a/drivers/mmc/sdhci-adma.c b/drivers/mmc/sdhci-adma.c
+index 8213223d3f..8c38448b6a 100644
+--- a/drivers/mmc/sdhci-adma.c
++++ b/drivers/mmc/sdhci-adma.c
+@@ -9,9 +9,10 @@
+ #include <malloc.h>
+ #include <asm/cache.h>
+ 
+-static void sdhci_adma_desc(struct sdhci_adma_desc *desc,
+-			    dma_addr_t addr, u16 len, bool end)
++void sdhci_adma_write_desc(struct sdhci_host *host, void **next_desc,
++			   dma_addr_t addr, int len, bool end)
+ {
++	struct sdhci_adma_desc *desc = *next_desc;
+ 	u8 attr;
+ 
+ 	attr = ADMA_DESC_ATTR_VALID | ADMA_DESC_TRANSFER_DATA;
+@@ -19,17 +20,30 @@ static void sdhci_adma_desc(struct sdhci_adma_desc *desc,
+ 		attr |= ADMA_DESC_ATTR_END;
+ 
+ 	desc->attr = attr;
+-	desc->len = len;
++	desc->len = len & 0xffff;
+ 	desc->reserved = 0;
+ 	desc->addr_lo = lower_32_bits(addr);
+ #ifdef CONFIG_DMA_ADDR_T_64BIT
+ 	desc->addr_hi = upper_32_bits(addr);
+ #endif
 +
- 	return ret;
++	*next_desc += ADMA_DESC_LEN;
++}
++
++static inline void __sdhci_adma_write_desc(struct sdhci_host *host,
++					   void **desc, dma_addr_t addr,
++					   int len, bool end)
++{
++	if (host && host->ops && host->ops->adma_write_desc)
++		host->ops->adma_write_desc(host, desc, addr, len, end);
++	else
++		sdhci_adma_write_desc(host, desc, addr, len, end);
  }
  
+ /**
+  * sdhci_prepare_adma_table() - Populate the ADMA table
+  *
++ * @host:	Pointer to the sdhci_host
+  * @table:	Pointer to the ADMA table
+  * @data:	Pointer to MMC data
+  * @addr:	DMA address to write to or read from
+@@ -39,25 +53,26 @@ static void sdhci_adma_desc(struct sdhci_adma_desc *desc,
+  * Please note, that the table size depends on CONFIG_SYS_MMC_MAX_BLK_COUNT and
+  * we don't have to check for overflow.
+  */
+-void sdhci_prepare_adma_table(struct sdhci_adma_desc *table,
+-			      struct mmc_data *data, dma_addr_t addr)
++void sdhci_prepare_adma_table(struct sdhci_host *host,
++			      struct sdhci_adma_desc *table,
++			      struct mmc_data *data, dma_addr_t start_addr)
+ {
++	dma_addr_t addr = start_addr;
+ 	uint trans_bytes = data->blocksize * data->blocks;
+-	uint desc_count = DIV_ROUND_UP(trans_bytes, ADMA_MAX_LEN);
+-	struct sdhci_adma_desc *desc = table;
+-	int i = desc_count;
++	void *next_desc = table;
++	int i = DIV_ROUND_UP(trans_bytes, ADMA_MAX_LEN);
+ 
+ 	while (--i) {
+-		sdhci_adma_desc(desc, addr, ADMA_MAX_LEN, false);
++		__sdhci_adma_write_desc(host, &next_desc, addr,
++					ADMA_MAX_LEN, false);
+ 		addr += ADMA_MAX_LEN;
+ 		trans_bytes -= ADMA_MAX_LEN;
+-		desc++;
+ 	}
+ 
+-	sdhci_adma_desc(desc, addr, trans_bytes, true);
++	__sdhci_adma_write_desc(host, &next_desc, addr, trans_bytes, true);
+ 
+-	flush_cache((dma_addr_t)table,
+-		    ROUND(desc_count * sizeof(struct sdhci_adma_desc),
++	flush_cache((phys_addr_t)table,
++		    ROUND(next_desc - (void *)table,
+ 			  ARCH_DMA_MINALIGN));
+ }
+ 
+diff --git a/drivers/mmc/sdhci.c b/drivers/mmc/sdhci.c
+index 0178ed8a11..65090348ae 100644
+--- a/drivers/mmc/sdhci.c
++++ b/drivers/mmc/sdhci.c
+@@ -111,7 +111,7 @@ static void sdhci_prepare_dma(struct sdhci_host *host, struct mmc_data *data,
+ 	}
+ #if CONFIG_IS_ENABLED(MMC_SDHCI_ADMA)
+ 	else if (host->flags & (USE_ADMA | USE_ADMA64)) {
+-		sdhci_prepare_adma_table(host->adma_desc_table, data,
++		sdhci_prepare_adma_table(host, host->adma_desc_table, data,
+ 					 host->start_addr);
+ 
+ 		sdhci_writel(host, lower_32_bits(host->adma_addr),
+@@ -897,8 +897,10 @@ int sdhci_setup_cfg(struct mmc_config *cfg, struct sdhci_host *host,
+ 		       __func__);
+ 		return -EINVAL;
+ 	}
+-	host->adma_desc_table = sdhci_adma_init();
+-	host->adma_addr = (dma_addr_t)host->adma_desc_table;
++	if (!host->adma_desc_table) {
++		host->adma_desc_table = sdhci_adma_init();
++		host->adma_addr = virt_to_phys(host->adma_desc_table);
++	}
+ 
+ #ifdef CONFIG_DMA_ADDR_T_64BIT
+ 	host->flags |= USE_ADMA64;
+diff --git a/include/sdhci.h b/include/sdhci.h
+index a1b74e3bd7..d73a725609 100644
+--- a/include/sdhci.h
++++ b/include/sdhci.h
+@@ -291,6 +291,11 @@ struct sdhci_ops {
+ 	 * Return: 0 if successful, -ve on error
+ 	 */
+ 	int	(*set_enhanced_strobe)(struct sdhci_host *host);
++
++#ifdef CONFIG_MMC_SDHCI_ADMA_HELPERS
++	void	(*adma_write_desc)(struct sdhci_host *host, void **desc,
++				   dma_addr_t addr, int len, bool end);
++#endif
+ };
+ 
+ #define ADMA_MAX_LEN	65532
+@@ -526,8 +531,11 @@ extern const struct dm_mmc_ops sdhci_ops;
+ #else
+ #endif
+ 
++void sdhci_adma_write_desc(struct sdhci_host *host, void **next_desc,
++			   dma_addr_t addr, int len, bool end);
+ struct sdhci_adma_desc *sdhci_adma_init(void);
+-void sdhci_prepare_adma_table(struct sdhci_adma_desc *table,
+-			      struct mmc_data *data, dma_addr_t addr);
++void sdhci_prepare_adma_table(struct sdhci_host *host,
++			      struct sdhci_adma_desc *table,
++			      struct mmc_data *data, dma_addr_t start_addr);
+ 
+ #endif /* __SDHCI_HW_H */
 -- 
-2.34.1
+2.43.2
 
