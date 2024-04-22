@@ -4,75 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 077E3C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 13:16:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA6F0C07C79
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 13:16:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F520883D8;
-	Mon, 22 Apr 2024 15:16:28 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 250298834C;
+	Mon, 22 Apr 2024 15:16:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="RlNjr2VT";
+	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="gaG/eaSc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88DE18834C; Mon, 22 Apr 2024 15:16:27 +0200 (CEST)
+ id C5BF08879C; Mon, 22 Apr 2024 15:16:28 +0200 (CEST)
 Received: from EUR01-HE1-obe.outbound.protection.outlook.com
- (mail-he1eur01on0701.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe1e::701])
+ (mail-he1eur01on070d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:fe1e::70d])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 823F6883A7
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 15:16:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 927C188415
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 15:16:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
  header.from=weidmueller.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=E0gl/zrEeA1TVb2SqHUFscHyaojKuhvC81tLU5oUS0kMSGLnRkWqENi2vkGr81wOm9uSw34TwE/PkWQXHppTRjCJLdkcoy7qONRbyd+8xsDv05Dv4d5RO3g+qO6rCNsExltVtmWw8RvQgnQDOICKAkKKmh70f4VKM03ePKANCbFFFoWT7RX6LiUcgyGNAhUzZOB9mnN0lo7qHHW8MuEHabGyvKLnaeIc38HtCioa/CtZZDcWibh+THVUwUGGwMynxDSHl7KM2DXvW2mslmuA6OPjMaDBQnoc1BJDVIV2X2KJ2/cQHr+MhKgdaAa9KEJ3NMJPjE00keasYb521cPz0A==
+ b=fY33PU0y0ZsfSWQGrbQKr/P6JF3JTzY/NNlouLDaChNki8q5vlgh7DUK02eMbXhUBd00N7pw5ZQAtdYmXMJpuIQc2vRWjmUW7yPB7kLbOVhJUgOznjXT0DGTClhB78+x1KWFWBp04nKpFsobmXWwk75mSCOab8EoZ/Z3y5bA1Xc7++dQiGRjC8thsnt5Aa5jRBtfaW/ca28fsALKK7uWe6/BX7Kb3PuwD0QsxYO6No2RtzarI69cKkZkZSXCS961/WJ42AgG4LvEbop5OD3mSKYyUTBJNDewem7Vahw2KLN12StgLXoMNUpdZt84Ea5qm1WvQT35W2dy3+6wanBliQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yy9A1Kimt70Cnht0g1nRIII8S6PKJEY6sap9zA0UFao=;
- b=mb3Zx3yylpAIY2+OrhGRKTUK9LE/652AepLgippkO92SCcU3eo45/Wr5tUwe0+RRp5cN7uRwavuzGdBRASVtJADko6Swnpc/VO3ma26Kq57n7oBtNVQCEwZ9ZySvkjmvo5gmrUsbXeuiqqYbgTfYsSJjp9AbCLqsOy3swPkK0J9UXrkGSGwWofznhgU2LKn51+jR+1fy08jXQcsPy657Wk9r3Tti8xPJiNFFrwQhAFNMzqnWokuN5H8lWOPgNjJ9uCGPKv/4vxr94He8YKe/FaEWedq4RHny9TJxVOw+67A7YzXF/kM93Tcg3ebu7G8AgpOPo56bJJxRsA4LlideNQ==
+ bh=ZJ+UO3DRV+vVzMleCHgOnoq5JeQ+2vh1VbgeUoTRb3w=;
+ b=lWc5mkJwheW54YR/zizHnbcRoRKPmC0+COETJ9mVDHPLIwR7blQqpWIwdKXJaoK/mI3FsV/3S9D12frpHv8brdeVAkVc4kYB4xqYXASy1ymac3TovbZibi1RSsP8fKAWmycNfnS3q4cp6KyWc/JRWmJZJwiUIR75q8R4uWqoPY6wFTp2HkjfCR3Qk4fRTpJ+9KDAmj1McAxg0Wdk4hdXpo/pmoDMjk6kj5JygrjdMkubjYPDRRj1N5otYfG2GQWL2WpJ9LV3QrF1VEaVB5wKP7u///Mf4DKBBby5PcygglW7J6thBR6g2GJVUknlugENbT15wep0nN10pLmLqFzOCg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=weidmueller.com; dmarc=pass action=none
  header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yy9A1Kimt70Cnht0g1nRIII8S6PKJEY6sap9zA0UFao=;
- b=RlNjr2VT9VKOhL2XoBG2BNV8HQ4YSN0PUCFmPLo+/9KsgIPbgQyZ1Gs8IIHplShqec9SNaxNAOgDKQKXTrY07Z/+p9iVxHVeMAkQmOxdJjneCRuRjkWLoVpQ5NhRCisjid8MEMpLrv5q/nptv2/q9xTUPdHzOfO2ORlb8uRD1jA=
+ bh=ZJ+UO3DRV+vVzMleCHgOnoq5JeQ+2vh1VbgeUoTRb3w=;
+ b=gaG/eaScWD4ALL5iXyh+7dgZNp/iorNWVpDCixNwBhBJ/pP1A+/4dT7RTPGiurAkYMEGG/oW4YnvpTey50tPK12ppZQeRnzw8FyKgSzhsqrIlWbkloEUu49B/8gAFC8vQSxCCePj2LC5ssei4rIQaSeIAWtIgZ3aVV404NaDhBw=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=weidmueller.com;
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
  by AM8PR08MB5620.eurprd08.prod.outlook.com (2603:10a6:20b:1c6::23)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.44; Mon, 22 Apr
- 2024 13:16:23 +0000
+ 2024 13:16:24 +0000
 Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
  ([fe80::7f1e:4f98:9784:5e11]) by AS2PR08MB8431.eurprd08.prod.outlook.com
  ([fe80::7f1e:4f98:9784:5e11%7]) with mapi id 15.20.7472.044; Mon, 22 Apr 2024
- 13:16:23 +0000
+ 13:16:24 +0000
 From: lukas.funke-oss@weidmueller.com
 To: u-boot@lists.denx.de
 Cc: Lukas Funke <lukas.funke@weidmueller.com>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>,
- Alison Wang <alison.wang@nxp.com>, Andy Fleming <afleming@gmail.com>,
- Angelo Dureghello <angelo@sysam.it>, Bin Meng <bmeng.cn@gmail.com>,
- Daniel Schwierzeck <daniel.schwierzeck@gmail.com>,
- Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
- Mario Six <mario.six@gdsys.cc>, Michal Simek <monstr@monstr.eu>,
- Minda Chen <minda.chen@starfivetech.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Priyanka Jain <priyanka.jain@nxp.com>, Rick Chen <rick@andestech.com>,
- Scott McNutt <smcnutt@psyent.com>, Shengyu Qu <wiagn233@outlook.com>,
- Shiji Yang <yangshiji66@outlook.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Thomas Chou <thomas@wytron.com.tw>,
- Tom Rini <trini@konsulko.com>, Wolfgang Denk <wd@denx.de>,
- Yanhong Wang <yanhong.wang@starfivetech.com>
-Subject: [PATCH v1 1/3] arch: riscv: Rename spl_soc_init() to spl_dram_init()
-Date: Mon, 22 Apr 2024 15:16:11 +0200
-Message-Id: <20240422131613.84304-2-lukas.funke-oss@weidmueller.com>
+ Chanho Park <chanho61.park@samsung.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Lukasz Tekieli <tekieli.lukasz@gmail.com>,
+ Minda Chen <minda.chen@starfivetech.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Yanhong Wang <yanhong.wang@starfivetech.com>
+Subject: [PATCH v1 3/3] board: starfive: Call spl_dram_init() for DRAM
+ initialization
+Date: Mon, 22 Apr 2024 15:16:13 +0200
+Message-Id: <20240422131613.84304-4-lukas.funke-oss@weidmueller.com>
 X-Mailer: git-send-email 2.30.2
 In-Reply-To: <20240422131613.84304-1-lukas.funke-oss@weidmueller.com>
 References: <20240422131613.84304-1-lukas.funke-oss@weidmueller.com>
@@ -84,75 +77,75 @@ X-ClientProxiedBy: FR4P281CA0087.DEUP281.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|AM8PR08MB5620:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1f1b3df6-bdfa-4d38-b45c-08dc62ce682c
+X-MS-Office365-Filtering-Correlation-Id: 16716ab0-c349-4d93-3fcb-08dc62ce6911
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?j2W1iNeV5xwrddakrhUSJcVRX0BQWK+QXykoVweEhSUY8NkUz54/tHGmLRuU?=
- =?us-ascii?Q?Xks7V+Xf3QMvWI1KmPzsaYYI1h9B+dU2KXS3gIPJqrWH9Wqk+kAEMoT0nolg?=
- =?us-ascii?Q?FPHGvI+alAKj+H1Skovc7wTXqVhg0cl68gdvFkTFSF5RuPnoEbvSKpGKTB5h?=
- =?us-ascii?Q?SYrrqfSvxU/Tt2lDz7eEGjDOoSj8R9HBA82WAEfD5ih53U/0dyFxMOibcvU7?=
- =?us-ascii?Q?yiA8W01dqHhWiuSCUmrLjQH1ynLQrfSHPhwBMVlYyW1BVbentocbZAsICQKY?=
- =?us-ascii?Q?3t5R8OY3O1zecYLNQJd6rBaSg0TtViVLzDN6GBVASsVY+OKetaP+frv5kK9E?=
- =?us-ascii?Q?zBogwlzl/UwioGnVYB/bfS7TIXYDlSFBbFd6JzClikUNVdXGYcIK+bLTEvMF?=
- =?us-ascii?Q?pcuAvgqrwKHYU5XEV0NArvEx/mCVTz3ZeVtqkbJAoT352PjPp8LeMI6lrqJi?=
- =?us-ascii?Q?1XnyC5PmbfPrTHhV+WrEvQ3BBrbhDD7aHidnbfG3UP9RwKPSSbQG+7QmXx61?=
- =?us-ascii?Q?jSDNGqMjCCEUgbifYBDssemNxtPoxArXU8TyBB6vb3r/5CFwO3DrM0I09out?=
- =?us-ascii?Q?h0ux80QIMObi6M+u826xTNVaAByTXSrd8k9IevQToAI3SzT0SopIGX2xVjzf?=
- =?us-ascii?Q?EUJH4T/oGW1ySteXMbMsBERY1iRgWciO4TsPHT4QHS6F4brOgCmLtDU06GHT?=
- =?us-ascii?Q?B/ogdDbnGvkSFt5yg1ye4lORvO6lKbpSLFbAj2GiQdR1gfnXcQh+iKm/5tMZ?=
- =?us-ascii?Q?fEvuACjeJ75t76yxgUOeVC0ZDvrOqG3JYLZoddUUwrYME3RfHTPpS36mPJhd?=
- =?us-ascii?Q?nrjSeQZnEKfQd6Es+cK8O9AlfTfmHxDiEi64MTqTiFKoAEOgwSjwoRnH2xf9?=
- =?us-ascii?Q?8NBOGq/PBZt9DiN3yeaCiDmixNUZXwNfSTSrXtdxNbUOHfz9E0cAKZeywBK2?=
- =?us-ascii?Q?HKduuz8ChqQ6MVxH3gwg8ulWje0o1QSsQ7I3nycGCSWZeHO0j675pZ4R4Dak?=
- =?us-ascii?Q?v1ARM9hIPtVqtp0yLsBZvMoHTkJhBHGTx8gO4xXudPlQ6fk3scMa8Rq5wQNa?=
- =?us-ascii?Q?onND64XP7UhlJrBP9JUA4k6OMu1dQRIaxMzbt3r+IkFhvGFNuWluvc2hE3O0?=
- =?us-ascii?Q?tX9Auhmka/A6LpDfysOpPRRKMLSPnWfEQ2VNs33jgnnd+otm5zObKnwGVkuj?=
- =?us-ascii?Q?vL9/nNCPONqoqwBlnkplKH+P2UlYmjL3CmD+6IbrI4RNZBsQzahEzYmlVWMO?=
- =?us-ascii?Q?M4TRo/9eHQnRnh67EayuDcQLlUnvKg0E3hROzbKV/tmP2n2IPsYj3R8Ph63Z?=
- =?us-ascii?Q?y/t5ZUAQVaOCvYbDGDvNLM7TEikvM2/7w+cSyO9Mo9YQdA=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?/cydhldcl0deacJWJqsSJVgaqq76ugiDGgjPiiY7dpH+rRRbxqWeW6t2+k13?=
+ =?us-ascii?Q?ogtD+7YxBAYAE1AX9dd9u2S6xEonoGBRZApHtLG190dxJ3I3a2ClKISSlWWP?=
+ =?us-ascii?Q?r6OmhmoJPe8ovTePp3ufPKfVHZknex2c/nYA/pxe3+J7VGsXTM1XnokVP5dg?=
+ =?us-ascii?Q?ie7iCGV/E2mgqYNxDyNINgccw0R5WWe8SdWP2+XASg1nu0cmpa+PCOZhb503?=
+ =?us-ascii?Q?P8tTI4ALMs5CCoO60Q+a35r8Bazajgse8OVmeRb149AESMma+yYBlX4Qlj6P?=
+ =?us-ascii?Q?EcMRjioQBrHRHMSCrBLujk7kFLGcLrP1/RQCy2Pd5XesC2GPrlD5cOCM7oxB?=
+ =?us-ascii?Q?fIKQw1b1uKfH34s2fftNwtUkFEkXtw4gskkwdJg8Sf3kQAKWxQqTFG9FrU9k?=
+ =?us-ascii?Q?dZKENkagKMSiV44PNn2D7S/6gM3gg7iT52FVoMiR4w9dHC3wJyxuaIHNy4Np?=
+ =?us-ascii?Q?OQV/LdnjS2BpTf7RZcbkkJoHBJncYn1N/7SGvZlrWIqxPDH8iSAtUN9A9k8g?=
+ =?us-ascii?Q?6fe7tiyEPm7I7wCL/1LBQ5J4ko12MYEaNs/YtFkS1UYJLZU7Thdz1AdxGFmJ?=
+ =?us-ascii?Q?6EN/raP4fZFIOauH9qzZPI6UmNvagEYiUDriiPcDDOaIkonB4XvGWMvXCwCD?=
+ =?us-ascii?Q?ZYUsaSdEIsLbSu7LxLtaZjhsbAstHv/cVQS6Jh7mUH3U8KRPevGTkVkOb96p?=
+ =?us-ascii?Q?9bEiBEu/wxLs0qwD5u3G3XkDVxr5pRiirp8YG2dO1aNIkRY5JjlWchD71gLg?=
+ =?us-ascii?Q?Sadug41ZwMsEBJwM66K6Ulg3wKjjaz1SEYqeun74TENK8zJEYh6OhT0Huvnx?=
+ =?us-ascii?Q?ZFhirYI9prKmnlPcZNTEX6ohcxnqebi5n8CgQsKIylZmPgslrXu+kTpkDXgR?=
+ =?us-ascii?Q?KTHSx3hV3m9lqmNHudJyDtZUXnZMi1C04JxWHJPO5Hmfg80GBSkTa0U5d5Fl?=
+ =?us-ascii?Q?tTqhoAlJvX6vPTJK68Jmadc1P8kEPQS9FcIBt9fLs9HJTqGCVWQkMLVEuh0k?=
+ =?us-ascii?Q?N4EVoaTjfWfN4NQOql9MeYgX56Q52Ye5nmDSlUO+qGWahSHa5mAIU6n8OOmF?=
+ =?us-ascii?Q?Q33sNhq7j+mML1ZAdmNqm7lMZgX3/CtteuUnbJiUYnJ9adDDetp5/EZ9Y9xe?=
+ =?us-ascii?Q?7zuDsFifw4mwwOo0f4t0AYe/bBlKo5L9V71xqf3jNN2Raz5Y+0L2rVfXVo9H?=
+ =?us-ascii?Q?leeYQZE8aZqFGPgA8pTDNBtdNGBgFcKer6/tyZlmIXUTVzLHkxGfa43bpXMi?=
+ =?us-ascii?Q?AtVJ6KW7ObZdPjAhCu9/ZsYnkUxr773PKMYJK+zAsGPLd1uU4ZrE7PVJALle?=
+ =?us-ascii?Q?I3X2Y85ks/gru7TUTEZmFj8mOkTs2icIAFD/KJh2nc75Zw=3D=3D?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366007)(52116005)(376005)(7416005)(1800799015)(38350700005);
- DIR:OUT; SFP:1102; 
+ SFS:(13230031)(366007)(52116005)(376005)(1800799015)(38350700005); DIR:OUT;
+ SFP:1102; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?kSHY3jj26VjTsT/ji/zTiU/VkL0Ju2I3PLjWMrI1TVuYYMFLEjaMwNN1ZePU?=
- =?us-ascii?Q?384ai5dOOeWEXW9MKU0PJwDmO4ELUlEdyFLJ7uhT70AtYCLMD0KL+Cxv3bHl?=
- =?us-ascii?Q?1CUUhA7PGAmkxYkOefd3KADaDY5XifyvU6uHvlqJ7ei2OvL2SxIPgonb+qqB?=
- =?us-ascii?Q?b1tkJOhQyCAieN2WC+Hr7K+QyMdn5Cr4Zle0umxLsH6zP1QhaoYh7AzO7vCv?=
- =?us-ascii?Q?25JKeCIpSQgqxVnYy2IGB6ObWJLlFh5D7hWjHTM4rrumY/WMC+Hayb2wyWtQ?=
- =?us-ascii?Q?qWfU788fWbSExAew0kxGnN5Da9oERrTAGpv1Xx8A5mpfveo411Oo8KK4rq2J?=
- =?us-ascii?Q?quD1z+GynpKsGogh7DoIsN7I/ECudCBGyTBbwIhLYGJ4Q/79fF8m7U9o37lu?=
- =?us-ascii?Q?LipXEk+rNaqFCQX7vL6APF17Tt0idNiftnjQVnCkqbIo0cbEQBAyvxgikALR?=
- =?us-ascii?Q?Inr119vdY97zJOyJSRl3N4o3g3DHxgdD7dnRo/j55ACxPMafX2y0+JMRsEl4?=
- =?us-ascii?Q?jL40WNgNnGT3wfhb2HredPRFxwQh+pxXmIKa1nT7b0ci486flys7jCccGYyM?=
- =?us-ascii?Q?iX8PpfPI2hyufLn9YXUEFlCCwGkBTxjBaL//TBPdTZjf/6dfnFtqbrjPVXl4?=
- =?us-ascii?Q?pzDzzRpL/GLdC0r8cbaITRVMbtajPVYpXpgs3aDCgLtFVjswA1pGVUH3/BPF?=
- =?us-ascii?Q?T+9Zblg1cZfiEwUmDr5h19XiBlWGkK5ksYcIVEZ51ac8RG3r0tISgYdFszJr?=
- =?us-ascii?Q?8iVphzXc7y+gk1V8SD8y4I0KDexh6uJ7aytfkr29Z2Yfl3fuNLBG0nmmQYRD?=
- =?us-ascii?Q?YzB3Nghk0oBkbrFrT4PSNgOsp3pJRUyhMKYPh6Ubv8O43akp62eANkUOuiD1?=
- =?us-ascii?Q?xNB70YIT2lQZYWyzP3jKOiQU116nmoQcd9hDZN4V08/tuGC90QEz+zcCyhOw?=
- =?us-ascii?Q?rm9UhNGuuelhw/a5Am0kasas4UICVb8CYBpaQF0rCwGlT9Ko0GDzXikruB2l?=
- =?us-ascii?Q?3Kk9196NBmAW8bR60cjQKxUsv3GFrvTgA4gJdUmWYyPK2CVUoTd/1Ww2tMcs?=
- =?us-ascii?Q?Y/G89HxwvtDcItI4+6/g3iFzsn7CJdh2kejVBU5OskSNuxiMjdkKBHgzRikD?=
- =?us-ascii?Q?/s32mRnl2eM/oSG314ioISEJddfgjjlAQbKg3AUMQh1sMy9tSUMNBeOukf/J?=
- =?us-ascii?Q?PIpwCGXT57CEq07sE1hcZeWviU4pMr1pReC6CZAsouxLgAOmTGWfKyN6E7Jj?=
- =?us-ascii?Q?ov3V7vTMrgYYAjxULBrdNwNvl/uJOfIySyhKaA0cYxmHfWT+2IKruN/8dvyb?=
- =?us-ascii?Q?UJRV2UoMGcmsb6SoJ25WcuaHWo0xZ+eqB3yXFKsUD14cNniTHKIaic4DvjBG?=
- =?us-ascii?Q?vAOTAC7BWq7vL1hs95nJC0Dl4B6mh9BfO2VKiYjVf3TKANM3ziMdFaUrBenn?=
- =?us-ascii?Q?CHOccXu9JNW4aNnJi739x4ADMjuFYb+xIYIHyldgUQa/aIjhjG2ZQXMNYrgf?=
- =?us-ascii?Q?s08xZRdsPD2bqR2NiHr7DeVQ3pKCALGw0GExoq1ZBjBqM15DHSIwKeRuJfdt?=
- =?us-ascii?Q?YfSWujukEX1pO2EEn97pBgx3Ao9Ejw5IlfodptNr/qwBY5Q+r5cDcNsKZLWI?=
- =?us-ascii?Q?JA=3D=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?5D+luX7q1pOw042UHbzr7qqAo32AviAUV1mpfEiX3+xh03w8C6WDPop0hJOv?=
+ =?us-ascii?Q?0ztPomIc9EQ3hMJpRi8HDcPG/e53rN7/qP5mvtR/vD1xP1wElvPWSSWkpVPd?=
+ =?us-ascii?Q?H/pvAXGIB2CvAma6TC8VGdVezrqukc5lvMAp0u2mnMr+v64/GT5RgRTpdIZh?=
+ =?us-ascii?Q?gVPlIKMBL8EGAmyb2pIdGOAKhhB/5nHb/gyhVPUK/OPvqtWiO0HslHvbEyPD?=
+ =?us-ascii?Q?r1rLVQ7AH2Nn/NSEeU3dB0iynE/DC00oUf0GvVNj3CSSrgss0H3uQ+qtxkcq?=
+ =?us-ascii?Q?3eAQpwSqQEk0htKFre5huf1icdzcOEz6iBwVUTalzuv3JFxohp/QPdh8QGYr?=
+ =?us-ascii?Q?W1dbH+luk+qiwHH7MqCle02JBQSs/mn+nPodHj+Wn4JPwCRwzj1rzFoaePt9?=
+ =?us-ascii?Q?/o0zJDvUHoCHrCQgWVX6yfKWJDdJq9h8cHZDIah8XvqvLiO0NXcpR/9k8lOu?=
+ =?us-ascii?Q?CesSUI9/r9jwrQOd4OChtWA9LAoR9lkEiTdeG6QbMYapFt+pCmCOSssYC8TL?=
+ =?us-ascii?Q?MXyJ8qaZvsiHz/m248oCLHWSM/3jdAJocVI2Y2X/3UCj289fO+ZbMiFw2QtE?=
+ =?us-ascii?Q?4uxxYZCM8HDwJM9dkvAUPVMCBvw6zy6Pw7YQc4rkOgc20Ig2eMkC9iYLcP4J?=
+ =?us-ascii?Q?HHTPpl78yG0d6uYQOPP9NlsavQz7pi5mUW6UMBL/EzXzPOq0cpl3vdqZHM2h?=
+ =?us-ascii?Q?QIz3XAg+2DY0fKekM7e7znZBi5ymiznrIeeffr3dmCW3azWyFRD3XikaMqVB?=
+ =?us-ascii?Q?6c4kSHDzJ9hPoxSB7w+pMVfTLGfC7nAzXjpPpI1gx3R9SZPOJfAjLe19ETGV?=
+ =?us-ascii?Q?/30M5JJameADD3jBF/TUyWKk7w7Gt4AsvYRfd9V79SuaKejfjeoTYMj/R8en?=
+ =?us-ascii?Q?wOvlk6x+vNGRrMqp4eQ2/cUOtpIdHTD5sTzfO88Z3qUL65AKNV5302e4opzY?=
+ =?us-ascii?Q?FIdG0skOJcunzne9M0cEoRmdFkDxm+o8Y49vh9Mz2ozNp5paAYvjvpOk3smK?=
+ =?us-ascii?Q?IHAia4j0mWY9LvPIxRznZOnt0tUPcdTdrKphvr1j8daW8f630047M3Wj84tx?=
+ =?us-ascii?Q?uLwom1uYoUSkqTDdr/LYvmuE6XsbXfxRxnNzODNr0id0apR6aHi5vosjrZ34?=
+ =?us-ascii?Q?HyzXeisCQWFCBLunxqZLZNsmdzo4pO0sNoZs+KPeV/JnIjMiZgVZVN5efFVZ?=
+ =?us-ascii?Q?J5TOemx7j2mRZLFa2rche5ZmiarFrzR0nJmxGsM5hWaAHchI4aHvGMyhh51+?=
+ =?us-ascii?Q?BXzFvCm48fwWDzJoeiaL6TfeaRgtpVWhCf+8tfDvRsM6Wmz9AUEepqiEdZm2?=
+ =?us-ascii?Q?WyhI9Vbxn64K4HYJ6BbodwErf9BTjwa6FlVAdVebgnj0i0D1SJqhvOfhZhvB?=
+ =?us-ascii?Q?JCQKqbIdoJuBNCjW/hGkNaNGe0vJe1jdSREed6AVoeFVGarW0gVrEYPaeP++?=
+ =?us-ascii?Q?sfYTjAQpI934sISzNj78pHjhFewjyumpk0Ya0mhrqOJOFjMCWFu1HneDyJlE?=
+ =?us-ascii?Q?NIxDCBJxiF1V1YhZH8L0HtJGTyvDGsHqpDzxzNa+yMIgjVHIZmGuCEpssmag?=
+ =?us-ascii?Q?Ihf/AcRflBjEmxQW8flTi6wJN7VmdVLnGi5BTm7en59q+iK1M3d2W8dpgIX5?=
+ =?us-ascii?Q?uA=3D=3D?=
 X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1f1b3df6-bdfa-4d38-b45c-08dc62ce682c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 16716ab0-c349-4d93-3fcb-08dc62ce6911
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2024 13:16:23.1870 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2024 13:16:24.6466 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 7IKsQM0LqS3QNd5wEwffnZqmYrbYcB1cX0xGl42XnadJ1wG+8ZGAfG5jq9wyKK1QP6aFqzA7alcjYnub2Dzimg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: VPWyAdCbx2pJmtVDakTkoOELnpYK+/7aL4M63OnHG92mhWdYHHhYfORK/jB7P2f+UCzqNiXH206xBG5mbdiT/w==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR08MB5620
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -172,97 +165,31 @@ X-Virus-Status: Clean
 
 From: Lukas Funke <lukas.funke@weidmueller.com>
 
-Rename spl_soc_init() to spl_dram_init() because the generic function
-name does not reflect what the function is actually doing. In addition
-spl_dram_init() is commonly used for dram initialization and should
-be called from board_init_f().
+Call spl_dram_init() since this is commonly used for dram initialization
+in u-boot.
 
 Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
 ---
 
- arch/riscv/cpu/fu540/spl.c               | 2 +-
- arch/riscv/cpu/fu740/spl.c               | 2 +-
- arch/riscv/cpu/jh7110/spl.c              | 2 +-
- arch/riscv/include/asm/arch-fu540/spl.h  | 2 +-
- arch/riscv/include/asm/arch-fu740/spl.h  | 2 +-
- arch/riscv/include/asm/arch-jh7110/spl.h | 2 +-
- 6 files changed, 6 insertions(+), 6 deletions(-)
+ board/starfive/visionfive2/spl.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/riscv/cpu/fu540/spl.c b/arch/riscv/cpu/fu540/spl.c
-index 45657b7909..cedb70b66a 100644
---- a/arch/riscv/cpu/fu540/spl.c
-+++ b/arch/riscv/cpu/fu540/spl.c
-@@ -7,7 +7,7 @@
- #include <dm.h>
- #include <log.h>
+diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
+index 45848db6d8..d1db7ee87b 100644
+--- a/board/starfive/visionfive2/spl.c
++++ b/board/starfive/visionfive2/spl.c
+@@ -285,9 +285,9 @@ int spl_board_init_f(void)
  
--int spl_soc_init(void)
-+int spl_dram_init(void)
- {
- 	int ret;
- 	struct udevice *dev;
-diff --git a/arch/riscv/cpu/fu740/spl.c b/arch/riscv/cpu/fu740/spl.c
-index c6816e9ed4..16b307f036 100644
---- a/arch/riscv/cpu/fu740/spl.c
-+++ b/arch/riscv/cpu/fu740/spl.c
-@@ -10,7 +10,7 @@
+ 	jh7110_jtag_init();
  
- #define CSR_U74_FEATURE_DISABLE	0x7c1
- 
--int spl_soc_init(void)
-+int spl_dram_init(void)
- {
- 	int ret;
- 	struct udevice *dev;
-diff --git a/arch/riscv/cpu/jh7110/spl.c b/arch/riscv/cpu/jh7110/spl.c
-index 6bdf8b9c72..87aaf86524 100644
---- a/arch/riscv/cpu/jh7110/spl.c
-+++ b/arch/riscv/cpu/jh7110/spl.c
-@@ -28,7 +28,7 @@ static bool check_ddr_size(phys_size_t size)
+-	ret = spl_soc_init();
++	ret = spl_dram_init();
+ 	if (ret) {
+-		debug("JH7110 SPL init failed: %d\n", ret);
++		debug("JH7110 dram init failed: %d\n", ret);
+ 		return ret;
  	}
- }
  
--int spl_soc_init(void)
-+int spl_dram_init(void)
- {
- 	int ret;
- 	struct udevice *dev;
-diff --git a/arch/riscv/include/asm/arch-fu540/spl.h b/arch/riscv/include/asm/arch-fu540/spl.h
-index 4697279f43..519e7eb210 100644
---- a/arch/riscv/include/asm/arch-fu540/spl.h
-+++ b/arch/riscv/include/asm/arch-fu540/spl.h
-@@ -9,6 +9,6 @@
- #ifndef _SPL_SIFIVE_H
- #define _SPL_SIFIVE_H
- 
--int spl_soc_init(void);
-+int spl_dram_init(void);
- 
- #endif /* _SPL_SIFIVE_H */
-diff --git a/arch/riscv/include/asm/arch-fu740/spl.h b/arch/riscv/include/asm/arch-fu740/spl.h
-index 15ad9e7c8b..b327ac5036 100644
---- a/arch/riscv/include/asm/arch-fu740/spl.h
-+++ b/arch/riscv/include/asm/arch-fu740/spl.h
-@@ -9,6 +9,6 @@
- #ifndef _SPL_SIFIVE_H
- #define _SPL_SIFIVE_H
- 
--int spl_soc_init(void);
-+int spl_dram_init(void);
- 
- #endif /* _SPL_SIFIVE_H */
-diff --git a/arch/riscv/include/asm/arch-jh7110/spl.h b/arch/riscv/include/asm/arch-jh7110/spl.h
-index 23ce8871b3..d73355bf35 100644
---- a/arch/riscv/include/asm/arch-jh7110/spl.h
-+++ b/arch/riscv/include/asm/arch-jh7110/spl.h
-@@ -7,6 +7,6 @@
- #ifndef _SPL_STARFIVE_H
- #define _SPL_STARFIVE_H
- 
--int spl_soc_init(void);
-+int spl_dram_init(void);
- 
- #endif /* _SPL_STARFIVE_H */
 -- 
 2.30.2
 
