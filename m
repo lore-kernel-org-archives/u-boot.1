@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3E07C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 07:55:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E662CC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 07:57:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35BDB88345;
-	Mon, 22 Apr 2024 09:55:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 741858833F;
+	Mon, 22 Apr 2024 09:57:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="BhbxXefz";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Vb75DDiQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 451CA88348; Mon, 22 Apr 2024 09:55:54 +0200 (CEST)
-Received: from mail-m49228.qiye.163.com (mail-m49228.qiye.163.com
- [45.254.49.228])
+ id 6399188347; Mon, 22 Apr 2024 09:57:33 +0200 (CEST)
+Received: from mail-m11874.qiye.163.com (mail-m11874.qiye.163.com
+ [115.236.118.74])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CC28F8831D
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 09:55:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 73DBA88350
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 09:57:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=BhbxXefz2lCQpSD2zo9gXpHS/B5lfz51Fc70DoBdsmojsROeLGZtgcT0ATvzgOXVZnTYmprNizZZ1fgsl14mlB3dSIDjBUt5bo/zlsvTNAyW8WGy8PT/TyaWZmdLEaJ3NYIewNjxaQ0/R/XZNJO39RlmZr7uHXML9jnc/ZjTzn8=;
+ b=Vb75DDiQ2g20rNNh5WX1Ulfuq0WSZPIfO/JKuKYu3a3uJ8vXw6wabOEzTpuDOoSVKa/ddA6wim7q7DQj0CbirEYpnFjPzn6dd+3qXYIne8F+mvgL7UE5fCd69/S93gxAHcaiK4ycx3GR7/ojr7SRbXY2nsZDAFu+8c0HXnDAlI0=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=8gR1SeauD5D00W3EbvheAXXC2Sk0UItVofW15VYwdIE=;
+ bh=NKyPpfXNM852KtVSzHQMrq37Gwz6eABjDOu+m4lTWT8=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 4F4B29002A5;
- Mon, 22 Apr 2024 15:55:45 +0800 (CST)
-Message-ID: <d32a9bf1-aa60-409f-ab27-9daf3a8db6b2@rock-chips.com>
-Date: Mon, 22 Apr 2024 15:55:44 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 456E49002E5;
+ Mon, 22 Apr 2024 15:57:22 +0800 (CST)
+Message-ID: <38b3e3ac-a5ed-494c-9938-96db733fce3e@rock-chips.com>
+Date: Mon, 22 Apr 2024 15:57:21 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 02/28] clk: rockchip: rk3588: Add REF_CLK_USB3OTGx
- support
+Subject: Re: [PATCH v3 03/28] clk: rockchip: rk356x: Fix set rate of SCLK_SFC
+ clock
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
  Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
 References: <20240422062936.681359-1-jonas@kwiboo.se>
- <20240422062936.681359-3-jonas@kwiboo.se>
+ <20240422062936.681359-4-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240422062936.681359-3-jonas@kwiboo.se>
+In-Reply-To: <20240422062936.681359-4-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0pCHVZLGk1DTRpPHR0dGR9VEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQh9KQlZCSUxCTk8YHUpPSBpVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8f04cdc76503a9kunm4f4b29002a5
+X-HM-Tid: 0a8f04cf41ae03a9kunm456e49002e5
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6KyI6SCo4TTNWMjoJGTYcAgFI
- Sk4KFC5VSlVKTEpITExJTk9NT0xNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFIS0xMNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NDI6FRw5LzNKEDpNNxkNAhEz
+ LEMaCitVSlVKTEpITExJTU9IS0NOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFITU5NNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,46 +79,69 @@ X-Virus-Status: Clean
 
 
 On 2024/4/22 14:28, Jonas Karlman wrote:
-> The REF_CLK_USB3OTGx clocks is used as reference clock for USB3 block.
+> The SCLK_SFC can be set to a rate of 24, 50, 75, 100, 125 or 150 MHz.
 >
-> Add simple support to get rate of REF_CLK_USB3OTGx clocks to fix
-> reference clock period configuration.
+> However, clk_set_rate() will fail unless one of those exact rates are
+> used, and with newer and updated device tree files that contain
+> spi-max-frequency values that does not exactly match these rates use of
+> SPI flash may fail.
+>
+> Fix this by using the highest possible rate that exceeds or is equal to
+> the requested rate.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-> Acked-by: Sean Anderson <seanga2@gmail.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
-> v3: Collect a-b tag
-> v2: Collect r-b tag
+> v3: New patch
 > ---
->   drivers/clk/rockchip/clk_rk3588.c | 6 ++++++
->   1 file changed, 6 insertions(+)
+>   drivers/clk/rockchip/clk_rk3568.c | 32 ++++++++++++-------------------
+>   1 file changed, 12 insertions(+), 20 deletions(-)
 >
-> diff --git a/drivers/clk/rockchip/clk_rk3588.c b/drivers/clk/rockchip/clk_rk3588.c
-> index 8f33843179b0..4c611a390499 100644
-> --- a/drivers/clk/rockchip/clk_rk3588.c
-> +++ b/drivers/clk/rockchip/clk_rk3588.c
-> @@ -1569,6 +1569,9 @@ static ulong rk3588_clk_get_rate(struct clk *clk)
->   	case DCLK_DECOM:
->   		rate = rk3588_mmc_get_clk(priv, clk->id);
->   		break;
-> +	case REF_CLK_USB3OTG0:
-> +	case REF_CLK_USB3OTG1:
-> +	case REF_CLK_USB3OTG2:
->   	case TMCLK_EMMC:
->   	case TCLK_WDT0:
->   		rate = OSC_HZ;
-> @@ -1734,6 +1737,9 @@ static ulong rk3588_clk_set_rate(struct clk *clk, ulong rate)
->   	case DCLK_DECOM:
->   		ret = rk3588_mmc_set_clk(priv, clk->id, rate);
->   		break;
-> +	case REF_CLK_USB3OTG0:
-> +	case REF_CLK_USB3OTG1:
-> +	case REF_CLK_USB3OTG2:
->   	case TMCLK_EMMC:
->   	case TCLK_WDT0:
->   		ret = OSC_HZ;
+> diff --git a/drivers/clk/rockchip/clk_rk3568.c b/drivers/clk/rockchip/clk_rk3568.c
+> index 999f48ea4b4e..24eeca8bf265 100644
+> --- a/drivers/clk/rockchip/clk_rk3568.c
+> +++ b/drivers/clk/rockchip/clk_rk3568.c
+> @@ -1527,28 +1527,20 @@ static ulong rk3568_sfc_set_clk(struct rk3568_clk_priv *priv, ulong rate)
+>   	struct rk3568_cru *cru = priv->cru;
+>   	int src_clk;
+>   
+> -	switch (rate) {
+> -	case OSC_HZ:
+> -		src_clk = SCLK_SFC_SEL_24M;
+> -		break;
+> -	case 50 * MHz:
+> -		src_clk = SCLK_SFC_SEL_50M;
+> -		break;
+> -	case 75 * MHz:
+> -		src_clk = SCLK_SFC_SEL_75M;
+> -		break;
+> -	case 100 * MHz:
+> -		src_clk = SCLK_SFC_SEL_100M;
+> -		break;
+> -	case 125 * MHz:
+> -		src_clk = SCLK_SFC_SEL_125M;
+> -		break;
+> -	case 150 * MHz:
+> +	if (rate >= 150 * MHz)
+>   		src_clk = SCLK_SFC_SEL_150M;
+> -		break;
+> -	default:
+> +	else if (rate >= 125 * MHz)
+> +		src_clk = SCLK_SFC_SEL_125M;
+> +	else if (rate >= 100 * MHz)
+> +		src_clk = SCLK_SFC_SEL_100M;
+> +	else if (rate >= 75 * MHz)
+> +		src_clk = SCLK_SFC_SEL_75M;
+> +	else if (rate >= 50 * MHz)
+> +		src_clk = SCLK_SFC_SEL_50M;
+> +	else if (rate >= OSC_HZ)
+> +		src_clk = SCLK_SFC_SEL_24M;
+> +	else
+>   		return -ENOENT;
+> -	}
+>   
+>   	rk_clrsetreg(&cru->clksel_con[28],
+>   		     SCLK_SFC_SEL_MASK,
