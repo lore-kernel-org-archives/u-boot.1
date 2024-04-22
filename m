@@ -4,90 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACC2FC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 09:16:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AE8AC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 09:17:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C66E38806A;
-	Mon, 22 Apr 2024 11:16:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 424A8882E0;
+	Mon, 22 Apr 2024 11:17:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nniJClbp";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PbaiLCd6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 649A088289; Mon, 22 Apr 2024 11:16:49 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 8B3B3882E0; Mon, 22 Apr 2024 11:17:06 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E31087EF7
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 11:16:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8233888301
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 11:17:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id AF52A3F16A
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 09:16:46 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1713777406;
- bh=dJ/ZW6j4Q/X6epNGCsIEFWquYBQvlv/esz7R0Y/VlIg=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=nniJClbpizWq+lYJKoWZlOAk47RzH7jLCPYiVN+W35d3y9jreyuSyVaf0vwH5rY8u
- 5gGdLgKY616SFDxvCyau1YGXsZtpEC9V19eQdkSnwvsEwOyoS+tP64cq9BkdBkHOzy
- rjJCkj6T1QgLEuUeXQcuMqyczwfO64LzrrnSYg7j61gmsWTJ0AUXcCJFPcFbrhci4p
- s/sEHNshfCi14+ISoDioBfHxI4lRbO6/XvXzAvz8FUfY8hWNoyEGMUTNXPaeOUOzgh
- dVxNcDzaflVLMWllbI1LrH3SiE+SEOZdxtUnDSND/XtyWc4ft3CchWx+aqe8WPdA0p
- aFVTocBWIPF3A==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-418f8271081so14405675e9.3
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 02:16:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713777406; x=1714382206;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dJ/ZW6j4Q/X6epNGCsIEFWquYBQvlv/esz7R0Y/VlIg=;
- b=hnK+ElyKv0JZ8OYPURKZbbgNt4q65mjXtCUBD3zzVWl955DRmKk6W4LqH7UyGq/jwv
- e/I6SjOnRnOgVoC9HfeJB+nHdok/aA/RgdK2rB/q68/d8clsX/3rUHEQCqm1K3gu2yrK
- qufY5syH7SKz8vazLPNM5wyTnWCFmoCYqtPO8oWO5C6V0AcHGipPyWlL3uI8UMp68VqM
- wK8kJk8HLXXxpUZGKFkyG80+E9eHT4n7+pQ2rVgciIDDx1zICh+R2K0+f7BLKMEg41gM
- UeNmDIqgoBIzos83BOjXZqHMR+M0g5alnj4oaAkSa8cnXjD2ECTKZEC8YX4uKHaeGGR9
- 6CXQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVkRhjAO86u/SoEhx/1wfaVT+mLgaa7Y5Dx2VSzxktPAEsNqal6p201TzaziaoQ61AddQh5bzuro9DSW/sSN9MljZojQg==
-X-Gm-Message-State: AOJu0YzFjMAsWhuE4aGZqk1xYXUrkIQ0l2kCOhg1NyKuPCc4VkwDIY23
- 0k/jnaNzpkV13FnXn1HXxEu31EnKEkbh+/13t1om607V53bU+gO4UsnWgRiKp02nAgJALfyEQ/Q
- enc5hoXnpWM6Y4UH/9nfHyIDzyopyt2BVKfyLqTyMRu5GE6sfBqADnyQZyjz7AMs8Qaw=
-X-Received: by 2002:a05:600c:1389:b0:41a:8b39:8040 with SMTP id
- u9-20020a05600c138900b0041a8b398040mr499899wmf.20.1713777406299; 
- Mon, 22 Apr 2024 02:16:46 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGSSRr6T/XY5lwQzUkgbkX4x8PisZrC8akcBzea5ICM7y0W1ByfpiUoQ6my7lr+CBVgxIpeeg==
-X-Received: by 2002:a05:600c:1389:b0:41a:8b39:8040 with SMTP id
- u9-20020a05600c138900b0041a8b398040mr499880wmf.20.1713777405951; 
- Mon, 22 Apr 2024 02:16:45 -0700 (PDT)
-Received: from workstation5.fritz.box
- (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
- by smtp.gmail.com with ESMTPSA id
- t13-20020a05600c198d00b00417da22df18sm19638529wmq.9.2024.04.22.02.16.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 02:16:45 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Masahisa Kojima <kojima.masahisa@socionext.com>,
- Raymond Mao <raymond.mao@linaro.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH] efi_loader: do not install dtb if bootmgr fails
-Date: Mon, 22 Apr 2024 11:16:34 +0200
-Message-ID: <20240422091634.83909-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ smtp.mailfrom=SRS0=8fac=L3=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1713777414;
+ bh=CNlBM2oqK15g8OwCAYKUj61uSZjFG6z1zEEtIEoUagY=;
+ b=PbaiLCd60o6b46BWSOOvRAkjm4JTnJx9QyvlH8apLK+XgWTH8ZE3Au2jUDq4BtBCDRrD8+yh5
+ IRxVlBG2HUXIsmsgy0DZrzlymhvWgsBc/rK9tgKLXRXza0gnB/FwOY0QVOV4PO+huJB7FBBvTGQ
+ nXfpZ+OE7NtGeZC3e3rOVTEvdDgdMWX160vJkHsIm/wrL0y/GqNHZz/TJKNRu8pNrFX0pYWPfb3
+ NPUjcHURJT83e+wJVd6581CVBb2pX0UMPj4rTaSAH3EzWlqRfproWDPq38L9cE1+n3pxVDO4paU
+ /XsVfDQfVH+pMIa6CtSis0NiI1RBneAAsE+uUKk1owWA==
+Message-ID: <2e7b6321-982a-4a87-8ca4-4a2d094c49c9@kwiboo.se>
+Date: Mon, 22 Apr 2024 11:16:50 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 11/14] rockchip: rk3308-evb: Update defconfig
+To: Kever Yang <kever.yang@rock-chips.com>, Andy Yan <andy.yan@rock-chips.com>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, Akash Gajjar
+ <gajjar04akash@gmail.com>, u-boot@lists.denx.de
+References: <20240408181429.3676856-1-jonas@kwiboo.se>
+ <20240408181429.3676856-12-jonas@kwiboo.se>
+ <e81a920d-e8db-4e98-a221-ea13e00c8937@rock-chips.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <e81a920d-e8db-4e98-a221-ea13e00c8937@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 66262b06185b8d2ef1885b0a
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,38 +75,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If the UEFI boot manager fails, there is no point in installing the
-device-tree as a configuration table.
+Hi Kever,
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_loader/efi_bootmgr.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
+On 2024-04-22 10:50, Kever Yang wrote:
+> Hi Jonas,
+> 
+> On 2024/4/9 02:14, Jonas Karlman wrote:
+>> Update defconfig for rk3308-evb with new defaults.
+>>
+>> Add OF_LIBFDT_OVERLAY=y to support device tree overlays.
+>>
+>> Remove the SPL_DRIVERS_MISC=y option, no misc driver is used in SPL.
+>>
+>> Use DEBUG_UART_BASE=0xFF0E0000 and disable DEBUG_UART_BOARD_INIT to
+>> make debug uart use uart4, same as stdout-path prop.
+> 
+> Why this change happen? I think rk3308-evb is using UART2 on 0xFF0C0000.
+> 
 
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index c64cbe82402..2b0d3137338 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -1209,15 +1209,15 @@ efi_status_t efi_bootmgr_run(void *fdt)
- 		return CMD_RET_FAILURE;
- 	}
- 
--	ret = efi_install_fdt(fdt);
--	if (ret != EFI_SUCCESS)
--		return ret;
--
- 	ret = efi_bootmgr_load(&handle, &load_options);
- 	if (ret != EFI_SUCCESS) {
- 		log_notice("EFI boot manager: Cannot load any image\n");
- 		return ret;
- 	}
- 
-+	ret = efi_install_fdt(fdt);
-+	if (ret != EFI_SUCCESS)
-+		return ret;
-+
- 	return do_bootefi_exec(handle, load_options);
- }
--- 
-2.43.0
+The device tree both used in U-Boot [1] and Linux [2] both use:
+
+  stdout-path = "serial4:1500000n8"
+
+and only enable the uart4 node. Yet the defconfig in U-Boot use a
+DEBUG_UART_BASE for uart2 instead of uart4.
+
+Having U-Boot defconfig matching the upstream device tree seem like a
+good thing, but maybe the device tree is wrong?
+
+[1] https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3308-evb.dts
+[2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/rockchip/rk3308-evb.dts
+
+Regards,
+Jonas
+
+> 
+> Thanks,
+> 
+> - Kever
+> 
+>>
+>> Remove BOOTDELAY=0, SYS_CONSOLE_INFO_QUIET=y and enable more CMD to
+>> allow use of U-Boot cmdline.
+>>
+>> Add DM_ETH_PHY=y and PHY_REALTEK=y to support onboard ethernet PHY.
+>>
+>> Add PHY_ROCKCHIP_INNO_USB2=y, DM_USB_GADGET=y and remove USB_DWC2=y to
+>> allow full use of USB 2.0 host and otg ports.
+>>
+>> Enable EFI_LOADER to allow EFI boot.
+>>
+>> Signed-off-by: Jonas Karlman<jonas@kwiboo.se>
+>> ---
+>> v2: Fix DEBUG_UART_BASE and disable DEBUG_UART_BOARD_INIT
+>> ---
+>>   configs/evb-rk3308_defconfig | 37 +++++++++++++++---------------------
+>>   1 file changed, 15 insertions(+), 22 deletions(-)
+>>
+>> diff --git a/configs/evb-rk3308_defconfig b/configs/evb-rk3308_defconfig
+>> index 9dc7d9c0caea..04a94e13a68a 100644
+>> --- a/configs/evb-rk3308_defconfig
+>> +++ b/configs/evb-rk3308_defconfig
+>> @@ -3,41 +3,32 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+>>   CONFIG_COUNTER_FREQUENCY=24000000
+>>   CONFIG_ARCH_ROCKCHIP=y
+>>   CONFIG_DEFAULT_DEVICE_TREE="rk3308-evb"
+>> +CONFIG_OF_LIBFDT_OVERLAY=y
+>>   CONFIG_DM_RESET=y
+>>   CONFIG_ROCKCHIP_RK3308=y
+>> -CONFIG_SPL_DRIVERS_MISC=y
+>>   CONFIG_TARGET_EVB_RK3308=y
+>> -CONFIG_DEBUG_UART_BASE=0xFF0C0000
+>> +CONFIG_DEBUG_UART_BASE=0xFF0E0000
+>>   CONFIG_DEBUG_UART_CLOCK=24000000
+>> +# CONFIG_DEBUG_UART_BOARD_INIT is not set
+>>   CONFIG_SYS_LOAD_ADDR=0xc00800
+>>   CONFIG_DEBUG_UART=y
+>>   CONFIG_ANDROID_BOOT_IMAGE=y
+>>   CONFIG_FIT=y
+>>   CONFIG_FIT_VERBOSE=y
+>> -CONFIG_BOOTDELAY=0
+>>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3308-evb.dtb"
+>> -CONFIG_SYS_CONSOLE_INFO_QUIET=y
+>>   # CONFIG_DISPLAY_CPUINFO is not set
+>> -CONFIG_SPL_MAX_SIZE=0x20000
+>> +CONFIG_SPL_MAX_SIZE=0x40000
+>>   CONFIG_SPL_PAD_TO=0x7f8000
+>>   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>> -# CONFIG_CMD_BDI is not set
+>> -# CONFIG_CMD_CONSOLE is not set
+>> -# CONFIG_CMD_ELF is not set
+>> -# CONFIG_CMD_IMI is not set
+>> -# CONFIG_CMD_XIMG is not set
+>> +CONFIG_CMD_GPIO=y
+>>   CONFIG_CMD_GPT=y
+>> -# CONFIG_CMD_LOADB is not set
+>> -# CONFIG_CMD_LOADS is not set
+>>   CONFIG_CMD_MMC=y
+>>   CONFIG_CMD_USB=y
+>> +CONFIG_CMD_ROCKUSB=y
+>>   CONFIG_CMD_USB_MASS_STORAGE=y
+>> -# CONFIG_CMD_ITEST is not set
+>> -# CONFIG_CMD_SETEXPR is not set
+>> -# CONFIG_CMD_SLEEP is not set
+>> -# CONFIG_SPL_DOS_PARTITION is not set
+>> -# CONFIG_ISO_PARTITION is not set
+>> -CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
+>> +CONFIG_CMD_RNG=y
+>> +CONFIG_CMD_KASLRSEED=y
+>> +CONFIG_CMD_REGULATOR=y
+>>   CONFIG_SPL_OF_CONTROL=y
+>>   CONFIG_OF_LIVE=y
+>>   CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>> @@ -51,9 +42,11 @@ CONFIG_SYS_I2C_ROCKCHIP=y
+>>   CONFIG_SUPPORT_EMMC_RPMB=y
+>>   CONFIG_MMC_DW=y
+>>   CONFIG_MMC_DW_ROCKCHIP=y
+>> +CONFIG_PHY_REALTEK=y
+>> +CONFIG_DM_ETH_PHY=y
+>>   CONFIG_ETH_DESIGNWARE=y
+>>   CONFIG_GMAC_ROCKCHIP=y
+>> -CONFIG_PHY=y
+>> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>>   CONFIG_PINCTRL=y
+>>   CONFIG_REGULATOR_PWM=y
+>>   CONFIG_DM_REGULATOR_FIXED=y
+>> @@ -62,15 +55,15 @@ CONFIG_RAM=y
+>>   CONFIG_BAUDRATE=1500000
+>>   CONFIG_DEBUG_UART_SHIFT=2
+>>   CONFIG_SYS_NS16550_MEM32=y
+>> +CONFIG_SYSINFO=y
+>>   CONFIG_SYSRESET=y
+>>   CONFIG_USB=y
+>> +CONFIG_DM_USB_GADGET=y
+>>   CONFIG_USB_EHCI_HCD=y
+>>   CONFIG_USB_EHCI_GENERIC=y
+>> -CONFIG_USB_DWC2=y
+>>   CONFIG_USB_GADGET=y
+>>   CONFIG_USB_GADGET_DWC2_OTG=y
+>>   CONFIG_USB_GADGET_DOWNLOAD=y
+>> -CONFIG_SPL_TINY_MEMSET=y
+>> +CONFIG_USB_FUNCTION_ROCKUSB=y
+>>   CONFIG_LZO=y
+>>   CONFIG_ERRNO_STR=y
+>> -# CONFIG_EFI_LOADER is not set
 
