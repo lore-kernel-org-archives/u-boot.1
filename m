@@ -4,71 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DC75C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 16:45:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C9DAC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 17:37:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32E168888B;
-	Mon, 22 Apr 2024 18:45:02 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 29C23888EF;
+	Mon, 22 Apr 2024 19:37:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=siliconsignals.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PXGX7E+4";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5851D8888B; Mon, 22 Apr 2024 18:45:00 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 235B7888DD; Mon, 22 Apr 2024 19:23:57 +0200 (CEST)
+Received: from PNYPR01CU001.outbound.protection.outlook.com
+ (mail-centralindiaazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c408::5])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 27F1088205
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 18:44:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-6eb86aeeb2cso2926937a34.3
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 09:44:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713804297; x=1714409097; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=+E2Z3pg9DLj2I72hsc1bGK1ymd2t6Wq2FILYuU3KVuQ=;
- b=PXGX7E+4ohBwCe+N6ntNH/Gz65Z69S6OnjtAe4b8poxUxRgwGy9aV3cePkq+Nk0OzB
- qBFVXeSzV2tu9CTc9b1CrUlrGcRcbr9qvmKtc2vt79PIDxyQdnTiLw9ll4GPbwMtXHjy
- 9HO3ZmJ+6eG8kij8bTF5aov0SpfbU2B6mnha4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713804297; x=1714409097;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+E2Z3pg9DLj2I72hsc1bGK1ymd2t6Wq2FILYuU3KVuQ=;
- b=i66zkdN+9fSFVbANdbACdwm+/JZeOgJloelvOboS5/ygVlaUO8Wz0Ngxhgu22BXejJ
- fDX/t5RTXB/l3MeXgIn8UFtKS2OkA0CPsY2Q6nOi3K3EqvmE/r0g/PHHLSETk05oascH
- wDysOPCaXJNEbY1dUvMwbtmsLFtGwxz3Sx51Ux2CKQrfvaRgo995jajvTSi4bUnzH21h
- pxJcx+MtFHiWlVDOWg7Oa7f36i7Nat93eSD0t4zln20dXfml1IXFvjW2kKbZS9pr5+JR
- 91ObqO/76/hBNroleFP2ye5iX1ozhUDS6jh1Lx4nYS38RN9XJhzlaF4OI6YtlNWdbeu3
- 7QYg==
-X-Gm-Message-State: AOJu0YxuY8dDTBguaIh9pr4ReodCc5k+Uf6kWKPeQhbtyaIp/CoW3gyE
- Q1phoDNpKqSlKPdLNEu7TzIEaJ/y7xP3X1zQsV8dmIBezJERXaDKeuJPhXGZs/E+mYi7rrehE+C
- E4A05eg==
-X-Google-Smtp-Source: AGHT+IE5IgVEQqqDDCKxKyfSckh94ZWyGIW2JL6boOC6LYPypXlRHbqo6DXZ+pGIPI7R3TcQ/V9rmQ==
-X-Received: by 2002:a05:6830:4413:b0:6eb:7e60:6028 with SMTP id
- q19-20020a056830441300b006eb7e606028mr15158943otv.30.1713804296726; 
- Mon, 22 Apr 2024 09:44:56 -0700 (PDT)
-Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- vv4-20020a05620a562400b0078d66c78d43sm4462708qkn.44.2024.04.22.09.44.55
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 09:44:56 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
+ by phobos.denx.de (Postfix) with ESMTPS id F356A888CD
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 19:23:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=siliconsignals.io
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=kishan.dudhatra@siliconsignals.io
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=bZL534Lxwf6qI2Um4sLrMe3Bp9WbECfTAlnA2Dlce9uoRq0yHdpRpneiYbYqN9MjdJE0nV2x+U7r+QfuPNLlC4+beLxArvRsnxsD3z8oic/OL6yC/DrDs2crpOawf2sC+ZIa1+0/WrdmPzdRpuUTdlmsqxpPTmd4NCa7q6UPGML4gdA6fHjIPyeixPjlrM0qmehcUA+aN0KhoAfQExx9pz59CJb7z1hpM0viSnJPMld7rwwxPO2Eitr4B7wHKShecfrdXQ+2x3JigKQSwDDPLab/mLslxh6m0GZhAe9avr2FxoiSD5yIdssRbWLnBIm41lRWgbKoqP8y6dusuZvnjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=5Y+L/Io5DuINHVByWaIFOy9NIq+iJ8TgWOspFLfWBoE=;
+ b=KliNjDMhwUFqkHPJMWNaOQS/NM+GUCnzOk1ZlpNdyI8yirLGiHv4D3QqQaBmlme27QYcrXiKOukuIUd/pN+M7q6iMDdpsLFY5vM39thyUp8kJqetIvUBtyJjI9pCpGh6w9WTUUXGTedWotCyQvZMumup1aS4C0S131YU8HjdDL/AAjC1uhZe2CDcSHULb1SW9tU1Mdw7l09ZE/kILXDWB7YpEk9eJBPCXvQueEV06xveOmD6Ksv0pF7z1RVaRh5W51TRu5v69HEA0YypjnjqQl23V6wBuj0iG5EomcpEKBhOC/+kCm0ii74aEdDcSOYKuD5azKUUZWCF6NnzYY9/Uw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siliconsignals.io; dmarc=pass action=none
+ header.from=siliconsignals.io; dkim=pass header.d=siliconsignals.io; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siliconsignals.io;
+Received: from MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a01:a3::10)
+ by PN0PR01MB6405.INDPRD01.PROD.OUTLOOK.COM (2603:1096:c01:72::5) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.44; Mon, 22 Apr
+ 2024 17:23:52 +0000
+Received: from MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::da4e:be76:93b8:e469]) by MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::da4e:be76:93b8:e469%3]) with mapi id 15.20.7472.044; Mon, 22 Apr 2024
+ 17:23:52 +0000
+From: Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>
 To: u-boot@lists.denx.de
-Subject: [PATCH] doc: release_cycle: Note when next branch opens
-Date: Mon, 22 Apr 2024 10:44:54 -0600
-Message-Id: <20240422164454.1900211-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.34.1
-MIME-Version: 1.0
+Cc: trini@konsulko.com,
+	Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>
+Subject: [PATCH] cmd: gpt: initialize partition table
+Date: Mon, 22 Apr 2024 22:53:35 +0530
+Message-Id: <20240422172335.166727-1-kishan.dudhatra@siliconsignals.io>
+X-Mailer: git-send-email 2.25.1
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: BMXPR01CA0073.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:b00:54::13) To MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:a3::10)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MAZPR01MB7912:EE_|PN0PR01MB6405:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1859c574-fab3-4a31-333c-08dc62f0fb1e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?7+15dEArjK6+yIEcC4OPwQOchi8XuF3Cwjh34vBgCkuiw0p3Uiwf50I9gByB?=
+ =?us-ascii?Q?s5FR/5rbeECwqQxNm1GZKEmfX+odW3YL/IwYxFeEAtsdheh8zE3FgqhlMUQm?=
+ =?us-ascii?Q?9UrW+3PbjUvq9kkL/L0VDmj2QDwPQB03hkeZF50jcyuk2h3aAqQA7r9c08qN?=
+ =?us-ascii?Q?q0CK7tyUYorovNl3p4ViD6TEs3G9XzutC//QUzX3Lki8AIJc4VTyT8fAs4or?=
+ =?us-ascii?Q?oTHgHXke39GOGTBtGnkOeKFWqlakwPuX7q4aPjG/DW08Ks1wL5xDuGysOHnW?=
+ =?us-ascii?Q?zPUXXX1pE3pjSNAEhXUOa3XjH53d72lYq/26JocNzJPmyx/legBRZedIeHNU?=
+ =?us-ascii?Q?C0KI588YfEJoWozqFQNvz2JYGeS+/3NcOT1DpUH5eU/PL/cWpJgj7b+1Cgl2?=
+ =?us-ascii?Q?1kHR9aXn3MM1lcnzUDZ+dDLhKbTtsszq194nNXb2hc97NU0FsHzYOpVHI9CO?=
+ =?us-ascii?Q?r3egVFeg2umiZHHk0YJIaUYdB8UYWgLMD05tBfjdFhiaU77sOA7vimyjnnuz?=
+ =?us-ascii?Q?w3NOMk/7O5Tnlvlq++o6Ga+VfYvMtb3nDIQRHGB7S6QKOv7QC6Y+WPKUy7DH?=
+ =?us-ascii?Q?C9hXE3ESBYTN259qB3uwMzY3KrJ0x33i1S2CRpViGEapZZg7vgU6P+JoMWgp?=
+ =?us-ascii?Q?+mGpK5XC88JXVUcIKxeJTOdWgNDL/uLubN7fGh5d35GKMXxPjsuZZ9wflqLH?=
+ =?us-ascii?Q?yWwOwrnjhnJzD7MBOc0SqWvKY9BeuLpnuLxETqaqMVvSNkHdoqbcKl056Dho?=
+ =?us-ascii?Q?ETwXakIjUuCOWIamgL1j5vUVt0Vlg1owcSxs/w5ZlV287adt4B7TzZ5Dc0AC?=
+ =?us-ascii?Q?otV3/2oCOsx6Ysfe9X8lCDzHySXTt0+IHCr/Q1k6ls2QojlMr2w7ovIiprku?=
+ =?us-ascii?Q?GJh1UI2i/kttdf8+MJmJgu8WjX1BRYoG2pCpy0kWczKVtH59icXtoKiAf3tU?=
+ =?us-ascii?Q?ZVesrcRfGIt7N5Et2bRSbZUTuoQ3IoetSGKfohRoCvKr4Qu1E2SXKmtlcmda?=
+ =?us-ascii?Q?3kjViflbd52+sntB08t+QFkL6N+XTRFLNeeHL+t5bBR9GM+9GSPZ6D9SVonT?=
+ =?us-ascii?Q?Kx5mKiH7BzmrEaftz+Z6Qjj2q5JLxfuoLpx22on0EXr4iUbRlleoGPvO0wsZ?=
+ =?us-ascii?Q?tikSFPT2C36eQAgAP9BvLZKsjD+U7V8D2AG29N6djKkLabCOszd63hKLLFVm?=
+ =?us-ascii?Q?HlJIbichqX+6likQYNk7eWNNUvbdp4moLe78I9NGjcSIVGfjLikAGZYFefj0?=
+ =?us-ascii?Q?fKTxITCw0t0HVcDAPjqr5mceV04Z1nJskTQCEZjVLRMD/b6zT28vCxigr5OO?=
+ =?us-ascii?Q?DQphI4yp8ZvvKPcHzeZRYVc4Q/YJZlh3qWpgx3krxysOBQ=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(376005)(52116005)(1800799015)(366007)(38350700005); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?8wPXf3aKynwMEYUTt722qbj7K3zjMvBMm5gx1VmZXZK9GpTVa+c2qoQOdzsN?=
+ =?us-ascii?Q?N93pozdB/3sPxH9MvAIYMbl5dfCm2rSQ/WfxJ+jRhd5D3Zv8D8upPuKRy4xP?=
+ =?us-ascii?Q?PH0FzJNj8olm/nUdWjYe5dvdxV8bWwFg5/JcFWfHZSRdhQoXZB6IWVJisaN/?=
+ =?us-ascii?Q?2d5q20AdpfVENQFwh6PW7NtO5Bn3KRGilbp8nNp8YaVjkokIpoIkeMkBGIs0?=
+ =?us-ascii?Q?OXXEXjSIWXWdfMfyqJdmAHdHMe5gcTMjBjAJq7tyOiyIhy434hhfSuYDL9bv?=
+ =?us-ascii?Q?DAw3/NHsMIBL2v+q/DNjiqXJkYZkQB0eUrBrYZovPhz2FbRQlFFA/zPl1nPp?=
+ =?us-ascii?Q?HEM+p2i1od/c5NyzoC/B++a0tOtUEZc3EbeCjW6ZcfnnoJycaGEYzWti+xMD?=
+ =?us-ascii?Q?dpyaq1MMwmNmG62aXAMx/Fjna5FoH2lR4WXKQWj3oXl4eoaIxK079PMRTw9D?=
+ =?us-ascii?Q?NXIpKWyH/sobbs1vCfDlT4n7xuNP2mS7/Ai+i2+SlUi/kiuz7/e4oZ7pRuAL?=
+ =?us-ascii?Q?XkdMcdDDNGyb4+POgdifvhN+0CcdIOtdNbr6CCJKDLbbVqx7bR0aQxRFDfGg?=
+ =?us-ascii?Q?chXlyFXIMu5c0sVCHjLOLJ4pwFE/b8Jzsw0pCXTQZkwnL54p7y+ZQIjUPfSA?=
+ =?us-ascii?Q?UJDEZnu1B7+CYydVXbEYenX+iwSbjcm83sxY54bYKEcNlAuZGvvgczWhO4Dv?=
+ =?us-ascii?Q?G6iFkiENY17zNd/oCkW0OsS0WdRhM3HgO7xXVR/UKEk9LMbZe1PGc24hIF0H?=
+ =?us-ascii?Q?CWLxkSs0mQ7D1rJkVKHId+17tKk7uUuHOe7D4ADlkWWOmTHe7fQ7+4th11Wx?=
+ =?us-ascii?Q?R7plVKUdJT57kEBpCAuqe50/vgo4yfS/jCtl1+P8dS8QM5rAQNlQmcJZ3vdL?=
+ =?us-ascii?Q?VqDYNbL6vYXDksqqRuFFue8SUfltfIQ5+m0UNpwK3QjvWuDTQ8/OkTkFKFOP?=
+ =?us-ascii?Q?bpJeDViM2DxGwCVvHH3qh1BJDbDbWl0JHrNVG0o2nrtivy4Lo0YE8aBrm8L3?=
+ =?us-ascii?Q?cvNX7NF1i6PnGBSDkVslxn6SN0mnlTYFs7xH0qdhksi/H0VCzkT8LsyzMJ6o?=
+ =?us-ascii?Q?uO+XllFQRch0Nf07Ep3dAiSk9JKPb/qo92SdRiR6l3zoPCovd1Xf+Y+GmP0L?=
+ =?us-ascii?Q?xfoJiSu0JsuNDO4GB0Yi1LBiregci+Y0T4IeJ2WQ0zvbNwYYxtNBRbB4EOxq?=
+ =?us-ascii?Q?DS1M9gKvl4o0Gb3cx5EBrJQr+T7CbV84RidtzH/likzSvBuAq28Ws3/jeOU/?=
+ =?us-ascii?Q?1yA56UoNsylaPpOZ+Pj684SSS2c22VcFTS4vOhMnOgIEN3cYiDopo/xO1mwH?=
+ =?us-ascii?Q?fEiLEH0v2l8h1neDhCW+4nUHGIXIFWr+Tce2h5vwjHJsyXKxMsyYYaXAkvC1?=
+ =?us-ascii?Q?66GVYiZVPwli930R2HbutPImCWqg/BKUXQVVKGI3bPkBKV5BOu//fsXLvIyH?=
+ =?us-ascii?Q?w7zn9bpU7F2139DO8VWgmWMTEW2FlABuadQdAtMmIuZvOfehKe7CxrL0T0Hs?=
+ =?us-ascii?Q?u9bTuoQCBHMbJGEEE0wRDqYPv7DrG5d9xWG8PlZEXzT7gCEnu9H0sT4aZdMB?=
+ =?us-ascii?Q?Ht2HANBJp+9f9FNTjIus+lQpszC0elMij7CjDAy7AcXjWi2yjUIf/JlUSKEC?=
+ =?us-ascii?Q?wnEa1V564igIfLKsgOnYIZg=3D?=
+X-OriginatorOrg: siliconsignals.io
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1859c574-fab3-4a31-333c-08dc62f0fb1e
+X-MS-Exchange-CrossTenant-AuthSource: MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2024 17:23:52.5985 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 7ec5089e-a433-4bd1-a638-82ee62e21d37
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: blwOxTS2dl/xAwzkJShO1/y3BEISaujTIi0nr0yExcMzzSCJadRknL8MhG8cSGPBQPYlRhLgdiAiw0zvBC8DX4ps3LJHST3Y1Y+hJ8Mm8rsJlT4Pf2ibAG5fAMsfIZVv
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PN0PR01MB6405
+X-Mailman-Approved-At: Mon, 22 Apr 2024 19:37:07 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,29 +148,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-While I have said this in various release emails, it should be
-documented here as well that the next branch opens with the second
-release candidate.
+If partition init is not completed within the gpt write,
+the gpt partition list will not be updated.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
- doc/develop/release_cycle.rst | 3 +++
- 1 file changed, 3 insertions(+)
+Signed-off-by: Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>
 
-diff --git a/doc/develop/release_cycle.rst b/doc/develop/release_cycle.rst
-index 8d4c112f1493..7931521ad9bb 100644
---- a/doc/develop/release_cycle.rst
-+++ b/doc/develop/release_cycle.rst
-@@ -19,6 +19,9 @@ Cycle as follows:
- * After the merge window closes, no new features may be added to allow for a
-   release candidate phase which is intended to fix bugs and regressions.
+diff --git a/cmd/gpt.c b/cmd/gpt.c
+index d7e96529a6..2d652f480a 100644
+--- a/cmd/gpt.c
++++ b/cmd/gpt.c
+@@ -643,6 +643,10 @@ static int gpt_default(struct blk_desc *blk_dev_desc, const char *str_part)
+ 	free(str_disk_guid);
+ 	free(partitions);
  
-+* To help with late pull requests, the **next** branch will open when the
-+  second release candidate is published.
++	/* initialize partition table */
++	if ((blk_dev_desc)->uclass_id == UCLASS_MMC)
++		part_init(blk_dev_desc);
 +
- *Note:* While we try to adhere to the release schedule, we will
- not hesitate and take the liberty to delay a release if there are
- good reasons, for example if there are known bugs or other technical
+ 	return ret;
+ }
+ 
 -- 
 2.34.1
 
