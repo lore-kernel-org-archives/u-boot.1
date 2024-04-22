@@ -4,75 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA571C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 09:55:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C93DC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 10:36:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1102088379;
-	Mon, 22 Apr 2024 11:55:15 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 92E4C8835B;
+	Mon, 22 Apr 2024 12:36:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tkBuLIYN";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ajjifd6h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06D1D883E5; Mon, 22 Apr 2024 11:55:14 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 2B01588406; Mon, 22 Apr 2024 12:36:34 +0200 (CEST)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14D128833C
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 11:55:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCCC88835B
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 12:36:31 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-34b029296f5so917124f8f.2
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 02:55:12 -0700 (PDT)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-a5557e3ebcaso696006066b.1
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 03:36:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713779711; x=1714384511; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=XFpTGodeS7vCoh9+5Eewshpku+2yy1bE7yUKMPONsZM=;
- b=tkBuLIYNU8mvpGH1OW7H7xxYhwhi9eDo6oWgdTGLnTmzLkJS8+rvelvWAwypdDpDPR
- IIEMGbosMcBrNCgS7sEv8GsuTcsmJlOEsZ7aNvcB3kbMlZmaIt6CQaFsA5xvTXQZGsaX
- CKWFhQuxHzQJVrZMwtimjeh+7YKX/YIbhh4iDGwZt99L2utOdP0X2VCbPPIpLmCL6EiZ
- m+mxrtfMDTdlyFnhd+ZlPuE+p2+ojDpOWSo5WQn4npN7qcBjb9IrQhM0oR5YdqucJ5HK
- 8KwHzNNP1GgPueiAMwB2C5IYWIvRn23ENTLgjUbInecO3Zhh7IquiQdMiXlXfy24sTOu
- aT+Q==
+ d=amarulasolutions.com; s=google; t=1713782191; x=1714386991;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=eiygu8AKnywVY7B+ZAvM6AHVosofb213BcOhYgH5ZSU=;
+ b=ajjifd6hgbSeDC45V29Bgs8RRl8FTWWDnYtIiTJ87YbpOv7aK1Hnocv0PG3GNG0n74
+ oslFlpnliSpG+jyl7HPaNBf7Klw+X01/h2NTUFU6Tdgrum7MQu+sB7WYFfgaTU1iveqm
+ XvOFwDPDkeSOgqypfqQ4pLkRMFG373cEtkM9M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713779711; x=1714384511;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=XFpTGodeS7vCoh9+5Eewshpku+2yy1bE7yUKMPONsZM=;
- b=Yl9nPk2FyT807M3qXIp8zh5Ye85kLRaEy97HOxvCh2Bjljm8Qy1HkJ+XPOi6EX837q
- Z0ZwQb1T83RgLiSMnFsuScpMRQcXuS+kvy4gf6MzPbYBJvrfm0AenCZzgOXhwOmRfXKh
- h2AtatjQrE46UhL2OuOSKztKIZ+kSZsBa1J+/esyQ6a1ABk4PsSIVyTWq84DjN8CVPYB
- vzhw8hCrvx/AjikgrGwaQjYEElUXx1HcY7N8F146w72lo4roZ0IHDU2Vez5D2kf9sZl+
- 6G7W7cCoJTrlQ876YXYk5NIp/JYDm7whLAoAVafcCRfWgU8jr5DBqt9H1eq9Yk0x0Z7A
- sUng==
+ d=1e100.net; s=20230601; t=1713782191; x=1714386991;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=eiygu8AKnywVY7B+ZAvM6AHVosofb213BcOhYgH5ZSU=;
+ b=XJvGilGM/Y9IDTo66B6VmFA3mDEHtSiKTijeUomIt7+HBOFE33kazbcJSDim/lodmu
+ T6HnSoDHRgktSHThC48kplmeheZc0SKiwNh/4DwosQd3oCfbZjP2qN9hsZ6rX12oNR0s
+ 58gbpccCh0iunr8mOc8HiDIjpHnB1Yq7eTNAWawuNFxJt+6fwjCtDSP7yeoDYiVmnWF7
+ xxs0VkvLft42zuLFM5CyQq5le4S+kokPMlzYxfK03ABGtXd33lfmRhoZOvtcNBZL0JRB
+ E27CWUM6T5jaldl+ge5p0S9lWOBJ7zMJ2I8eKr6T6VHwvSneP1OX97j3qcIsYAuj03E2
+ qOiA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWoN4LzTwS29s3zqwbJ5DtuCVzYLYeYL/epcSW84yR7J4xxF/KTNvYggAMmh18SYEPcb+AlsXltIPZXLn2wgL2Ybr12mg==
-X-Gm-Message-State: AOJu0YwiTYcq860ncAijI0xiFGN7c4QNionGx4reJyZh9DOUbJOJTCbs
- O8gYE4ezLB5sk21CpSiib67Ldlfikp71mDLg/Fgqa9jCcqRHOsOlNWr2ewisCIsT9cNtga8C8Y4
- BAooWcaj8hCmbmxbDFe32a/H5nc6NJ4XljHS9Uw==
-X-Google-Smtp-Source: AGHT+IFaWyfsACR4K8WX1bWRQZrZlyVWf3mD5TLC4NPXLXr/lJS+x5vtnIZRWnmTyymEJCY9M81VRhoQKlZEVhHqV94=
-X-Received: by 2002:adf:db42:0:b0:34a:4227:e9e8 with SMTP id
- f2-20020adfdb42000000b0034a4227e9e8mr7525119wrj.47.1713779711516; Mon, 22 Apr
- 2024 02:55:11 -0700 (PDT)
+ AJvYcCWSnicF+amdJcjfuIRzNKvEqwOkj3TSYoNjf/BJ8p+r3UhEDMJhpjJ+E3dlBwVvKRg2McZGJjR8nQZQeXUBj6ipXAxo3Q==
+X-Gm-Message-State: AOJu0Yz8aytpWmhtu4I4TS2gHTZkSMrm2QblAbEtgl6C7KQWjrq43qbe
+ Yp5MfQng76lLmn2/BZZLxmKfI9mD+fnJnhv2FKYG2/cGvg7PXHmMtU5FR+HJ9BTsrVq4Eqn3xbM
+ V9YtmiuSA4kPPhF4qcpsTBMqGlvsTYWC6hwBodw==
+X-Google-Smtp-Source: AGHT+IGGETZFRd2z+zCgTg9DoeTXaKdmTS0Q5ad6grFi9AP/ikTrAjm58QofQAl7JIy2pvRcbG4wpHH7F17AS/nLLgs=
+X-Received: by 2002:a17:906:36c5:b0:a52:6e87:77ef with SMTP id
+ b5-20020a17090636c500b00a526e8777efmr11283865ejc.6.1713782191263; Mon, 22 Apr
+ 2024 03:36:31 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240422091634.83909-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240422091634.83909-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 22 Apr 2024 12:54:35 +0300
-Message-ID: <CAC_iWjK4hZ_2DawqUbXH5A5qaBC7DbJKGYMPzJoS-N5N8fBDPA@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: do not install dtb if bootmgr fails
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Masahisa Kojima <kojima.masahisa@socionext.com>,
- Raymond Mao <raymond.mao@linaro.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de
+References: <20240421140745.25870-1-michael@amarulasolutions.com>
+ <CAOMZO5DbWbsT==bTczp9b4uHuBR6dPsbsHEfoJTugTp4zwTJjg@mail.gmail.com>
+ <CAOf5uwnruzdTfsbMqvU9UEnsL0Y5_xWs8tCsGHCTPAbHbxb=rg@mail.gmail.com>
+In-Reply-To: <CAOf5uwnruzdTfsbMqvU9UEnsL0Y5_xWs8tCsGHCTPAbHbxb=rg@mail.gmail.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Mon, 22 Apr 2024 12:36:18 +0200
+Message-ID: <CAOf5uwmGtY--s9CNUPVeLYghw=O6+DCpaPUJoBrJnWKkXR7CoA@mail.gmail.com>
+Subject: Re: [PATCH] clk: imx8mn: add video clocks support
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>, 
+ u-boot@lists.denx.de, linux-amarula@amarulasolutions.com, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,43 +92,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 22 Apr 2024 at 12:16, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+Hi Fabio
+
+On Sun, Apr 21, 2024 at 10:54=E2=80=AFPM Michael Nazzareno Trimarchi
+<michael@amarulasolutions.com> wrote:
 >
-> If the UEFI boot manager fails, there is no point in installing the
-> device-tree as a configuration table.
+> Hi Fabio
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_loader/efi_bootmgr.c | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+> On Sun, Apr 21, 2024 at 10:24=E2=80=AFPM Fabio Estevam <festevam@gmail.co=
+m> wrote:
+> >
+> > Hi Michael,
+> >
+> > On Sun, Apr 21, 2024 at 11:07=E2=80=AFAM Michael Trimarchi
+> > <michael@amarulasolutions.com> wrote:
+> > >
+> > > Add clocks support for the video subsystem.
+> > >
+> > > Signed-off-by: Michael Trimarchi <michael@amarulasolutions.com>
+> >
+> > Which target will make use of these clocks?
+> >
+> > As-is this patch adds only dead code.
+> >
+> > Adding a defconfig that uses these newly introduced clocks would be nic=
+e.
+> >
 >
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index c64cbe82402..2b0d3137338 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -1209,15 +1209,15 @@ efi_status_t efi_bootmgr_run(void *fdt)
->                 return CMD_RET_FAILURE;
->         }
+> You are right, I will wrap it and enable only on CONFIG_VIDEO
 >
-> -       ret = efi_install_fdt(fdt);
-> -       if (ret != EFI_SUCCESS)
-> -               return ret;
-> -
->         ret = efi_bootmgr_load(&handle, &load_options);
->         if (ret != EFI_SUCCESS) {
->                 log_notice("EFI boot manager: Cannot load any image\n");
->                 return ret;
->         }
+> > Also, to avoid size increase, please protect this code against
+> > CONFIG_VIDEO or something, like done here:
+> > https://source.denx.de/u-boot/custodians/u-boot-imx/-/commit/2b3310ef13=
+998dfd03196a0806e03035212b102c
 >
-> +       ret = efi_install_fdt(fdt);
-> +       if (ret != EFI_SUCCESS)
-> +               return ret;
-> +
->         return do_bootefi_exec(handle, load_options);
->  }
-> --
-> 2.43.0
+> Working on display panel integration on imx8m, trying to progress
+> merging things up.
 >
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Are you considering if I wrap properly with VIDEO IS_ENABLED?
+
+Michael
+
+> Michael
+>
+>
+>
+> --
+> Michael Nazzareno Trimarchi
+> Co-Founder & Chief Executive Officer
+> M. +39 347 913 2170
+> michael@amarulasolutions.com
+> __________________________________
+>
+> Amarula Solutions BV
+> Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+> T. +31 (0)85 111 9172
+> info@amarulasolutions.com
+> www.amarulasolutions.com
+
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
