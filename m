@@ -4,100 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B45DC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:56:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACC2FC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 09:16:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78328882D5;
-	Mon, 22 Apr 2024 10:56:11 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.com
+	by phobos.denx.de (Postfix) with ESMTP id C66E38806A;
+	Mon, 22 Apr 2024 11:16:50 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com header.b="J5y3fT1k";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nniJClbp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C04AC88324; Mon, 22 Apr 2024 10:56:10 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id 649A088289; Mon, 22 Apr 2024 11:16:49 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDC3187FC2
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:56:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5E31087EF7
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 11:16:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quwenruo.btrfs@gmx.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.com;
- s=s31663417; t=1713776165; x=1714380965; i=quwenruo.btrfs@gmx.com;
- bh=KlDA+mzuQHgY2llGnkjpjscUQsm5ccOzUaUyBoW1ABE=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=J5y3fT1kQVuM1oG7bex9/R6rZnopP4xUUmRdd0ELsWcmHFvZRHJuaNuyNQ8Xfatb
- 50x0zaHPS5NHYP6REFbTxQpwFTmHV2MXweGRlKgAzCAgC+EWbPOfXBc1AQMMMQMKX
- xm56/sS3Aor46o5L/8EzbfEzXQSKm9v05LYMqsmOKQCWHlVoHM8k0V9pUdXeZyUXw
- PG1QK+pnvs/42dEAMRjhOl3Uz+N8o+fKFSKItlyBx1kzRewciGUPAFk5x1Xi/OEIs
- p3bwfY0Cd41n94NyQJWYsqxnVxGsGJ5XcS7628XJiOIel9ko2y7u+d0UEsj3ZWZu3
- MFvXyjYAn6F0ZWqU4w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [172.16.0.219] ([159.196.52.54]) by mail.gmx.net (mrgmx104
- [212.227.17.174]) with ESMTPSA (Nemesis) id 1N6bfq-1sly4g14GM-0182Jq; Mon, 22
- Apr 2024 10:56:05 +0200
-Message-ID: <9086a324-b17a-4e00-906b-816fb2b05880@gmx.com>
-Date: Mon, 22 Apr 2024 18:25:58 +0930
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id AF52A3F16A
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 09:16:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1713777406;
+ bh=dJ/ZW6j4Q/X6epNGCsIEFWquYBQvlv/esz7R0Y/VlIg=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=nniJClbpizWq+lYJKoWZlOAk47RzH7jLCPYiVN+W35d3y9jreyuSyVaf0vwH5rY8u
+ 5gGdLgKY616SFDxvCyau1YGXsZtpEC9V19eQdkSnwvsEwOyoS+tP64cq9BkdBkHOzy
+ rjJCkj6T1QgLEuUeXQcuMqyczwfO64LzrrnSYg7j61gmsWTJ0AUXcCJFPcFbrhci4p
+ s/sEHNshfCi14+ISoDioBfHxI4lRbO6/XvXzAvz8FUfY8hWNoyEGMUTNXPaeOUOzgh
+ dVxNcDzaflVLMWllbI1LrH3SiE+SEOZdxtUnDSND/XtyWc4ft3CchWx+aqe8WPdA0p
+ aFVTocBWIPF3A==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-418f8271081so14405675e9.3
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 02:16:46 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713777406; x=1714382206;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=dJ/ZW6j4Q/X6epNGCsIEFWquYBQvlv/esz7R0Y/VlIg=;
+ b=hnK+ElyKv0JZ8OYPURKZbbgNt4q65mjXtCUBD3zzVWl955DRmKk6W4LqH7UyGq/jwv
+ e/I6SjOnRnOgVoC9HfeJB+nHdok/aA/RgdK2rB/q68/d8clsX/3rUHEQCqm1K3gu2yrK
+ qufY5syH7SKz8vazLPNM5wyTnWCFmoCYqtPO8oWO5C6V0AcHGipPyWlL3uI8UMp68VqM
+ wK8kJk8HLXXxpUZGKFkyG80+E9eHT4n7+pQ2rVgciIDDx1zICh+R2K0+f7BLKMEg41gM
+ UeNmDIqgoBIzos83BOjXZqHMR+M0g5alnj4oaAkSa8cnXjD2ECTKZEC8YX4uKHaeGGR9
+ 6CXQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVkRhjAO86u/SoEhx/1wfaVT+mLgaa7Y5Dx2VSzxktPAEsNqal6p201TzaziaoQ61AddQh5bzuro9DSW/sSN9MljZojQg==
+X-Gm-Message-State: AOJu0YzFjMAsWhuE4aGZqk1xYXUrkIQ0l2kCOhg1NyKuPCc4VkwDIY23
+ 0k/jnaNzpkV13FnXn1HXxEu31EnKEkbh+/13t1om607V53bU+gO4UsnWgRiKp02nAgJALfyEQ/Q
+ enc5hoXnpWM6Y4UH/9nfHyIDzyopyt2BVKfyLqTyMRu5GE6sfBqADnyQZyjz7AMs8Qaw=
+X-Received: by 2002:a05:600c:1389:b0:41a:8b39:8040 with SMTP id
+ u9-20020a05600c138900b0041a8b398040mr499899wmf.20.1713777406299; 
+ Mon, 22 Apr 2024 02:16:46 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IGSSRr6T/XY5lwQzUkgbkX4x8PisZrC8akcBzea5ICM7y0W1ByfpiUoQ6my7lr+CBVgxIpeeg==
+X-Received: by 2002:a05:600c:1389:b0:41a:8b39:8040 with SMTP id
+ u9-20020a05600c138900b0041a8b398040mr499880wmf.20.1713777405951; 
+ Mon, 22 Apr 2024 02:16:45 -0700 (PDT)
+Received: from workstation5.fritz.box
+ (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ by smtp.gmail.com with ESMTPSA id
+ t13-20020a05600c198d00b00417da22df18sm19638529wmq.9.2024.04.22.02.16.45
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Apr 2024 02:16:45 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH] efi_loader: do not install dtb if bootmgr fails
+Date: Mon, 22 Apr 2024 11:16:34 +0200
+Message-ID: <20240422091634.83909-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: BTRFS use-after-free bug at free_extent_buffer_internal
-To: Sachi King <nakato@nakato.io>, u-boot@lists.denx.de
-Cc: kabel@kernel.org, wqu@suse.com, linux-btrfs@vger.kernel.org
-References: <3281192.oiGErgHkdL@youmu>
- <995dd168-8e1e-4b99-896c-ece4dc88d6e9@gmx.com>
-Content-Language: en-US
-From: Qu Wenruo <quwenruo.btrfs@gmx.com>
-Autocrypt: addr=quwenruo.btrfs@gmx.com; keydata=
- xsBNBFnVga8BCACyhFP3ExcTIuB73jDIBA/vSoYcTyysFQzPvez64TUSCv1SgXEByR7fju3o
- 8RfaWuHCnkkea5luuTZMqfgTXrun2dqNVYDNOV6RIVrc4YuG20yhC1epnV55fJCThqij0MRL
- 1NxPKXIlEdHvN0Kov3CtWA+R1iNN0RCeVun7rmOrrjBK573aWC5sgP7YsBOLK79H3tmUtz6b
- 9Imuj0ZyEsa76Xg9PX9Hn2myKj1hfWGS+5og9Va4hrwQC8ipjXik6NKR5GDV+hOZkktU81G5
- gkQtGB9jOAYRs86QG/b7PtIlbd3+pppT0gaS+wvwMs8cuNG+Pu6KO1oC4jgdseFLu7NpABEB
- AAHNIlF1IFdlbnJ1byA8cXV3ZW5ydW8uYnRyZnNAZ214LmNvbT7CwJQEEwEIAD4CGwMFCwkI
- BwIGFQgJCgsCBBYCAwECHgECF4AWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00iVQUJDToH
- pgAKCRDCPZHzoSX+qNKACACkjDLzCvcFuDlgqCiS4ajHAo6twGra3uGgY2klo3S4JespWifr
- BLPPak74oOShqNZ8yWzB1Bkz1u93Ifx3c3H0r2vLWrImoP5eQdymVqMWmDAq+sV1Koyt8gXQ
- XPD2jQCrfR9nUuV1F3Z4Lgo+6I5LjuXBVEayFdz/VYK63+YLEAlSowCF72Lkz06TmaI0XMyj
- jgRNGM2MRgfxbprCcsgUypaDfmhY2nrhIzPUICURfp9t/65+/PLlV4nYs+DtSwPyNjkPX72+
- LdyIdY+BqS8cZbPG5spCyJIlZonADojLDYQq4QnufARU51zyVjzTXMg5gAttDZwTH+8LbNI4
- mm2YzsBNBFnVga8BCACqU+th4Esy/c8BnvliFAjAfpzhI1wH76FD1MJPmAhA3DnX5JDORcga
- CbPEwhLj1xlwTgpeT+QfDmGJ5B5BlrrQFZVE1fChEjiJvyiSAO4yQPkrPVYTI7Xj34FnscPj
- /IrRUUka68MlHxPtFnAHr25VIuOS41lmYKYNwPNLRz9Ik6DmeTG3WJO2BQRNvXA0pXrJH1fN
- GSsRb+pKEKHKtL1803x71zQxCwLh+zLP1iXHVM5j8gX9zqupigQR/Cel2XPS44zWcDW8r7B0
- q1eW4Jrv0x19p4P923voqn+joIAostyNTUjCeSrUdKth9jcdlam9X2DziA/DHDFfS5eq4fEv
- ABEBAAHCwHwEGAEIACYCGwwWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00ibgUJDToHvwAK
- CRDCPZHzoSX+qK6vB/9yyZlsS+ijtsvwYDjGA2WhVhN07Xa5SBBvGCAycyGGzSMkOJcOtUUf
- tD+ADyrLbLuVSfRN1ke738UojphwkSFj4t9scG5A+U8GgOZtrlYOsY2+cG3R5vjoXUgXMP37
- INfWh0KbJodf0G48xouesn08cbfUdlphSMXujCA8y5TcNyRuNv2q5Nizl8sKhUZzh4BascoK
- DChBuznBsucCTAGrwPgG4/ul6HnWE8DipMKvkV9ob1xJS2W4WJRPp6QdVrBWJ9cCdtpR6GbL
- iQi22uZXoSPv/0oUrGU+U5X4IvdnvT+8viPzszL5wXswJZfqfy8tmHM85yjObVdIG6AlnrrD
-In-Reply-To: <995dd168-8e1e-4b99-896c-ece4dc88d6e9@gmx.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:OnLqQhTQy1xBmQX62aNyvc009v9RCRKNn/azxXAOn0Of5FhnVkh
- LntlbX04fKVHdqacrmzVeUa9Iav9jVOxj8Mul8R4j73HQTPJV7YQQ4xPFowOXsi2axO2wya
- 4cGN0UR94FeT/44NTO16pPP4aFYD10RBmday/x2XcVdKiUAkue2/cNhj/fXdqeUsyiJ3GQW
- B6OLHjRk11X4UoOcOiX+Q==
-UI-OutboundReport: notjunk:1;M01:P0:47B513+HHHA=;1AFOLtfDMpHGAdII9mwMGqMvgNt
- AD/TPjHIZWnZu3Pw4kkxVpnExW7MSwqoyMiu7PyoyWnaso6tlWRkT6gcXF1U0umhls+EtTtDR
- W9NgCTI34I7VSEUBOxIa9riMdC3CGNhsNnzyKsQAoszsHszetnWcykszitdBdpikZX9KoTCBS
- hM1Ft4USTZjNPZlitd6PZl/Oo+eLQMq1CH2C4M+NH4H+EBATsxteULBMZPe4zY7WpTRrz8jQa
- KlDUEXf4YG1IAQj7Vl9sCfjAr0sYniFRnR7FzRreaAgR7lYH8yJZ5jfMgYmUmT6VEQz1YRocp
- 80S5t8g2ci/oehPVJdTPxY/qP51xLxY605v6BGEUoyFJ2nqM9qF7Z6KDDFmW3OIiwcmM1x4Vk
- vxljcdL7HdDj3E8pz7fwm6rsezLg87dQI1N+Xs78wr7cKznWWb24ByAoDrSCb9oCl9FUZpyEY
- vf0+J6A0g5/Y7xhYORtU7PcL+21tSh+2TOYrqYdsXa5KCywYRqiZmo8UgZ+6lowZJ2Z3hJIl/
- azjWAUeFbFixUknOcdBjFEmm3icKLbWuJD/dBgqSyzmrad8GFVoD3F7dvI/2wg/4nYuJEkMz+
- KJvBEOZNQSBDBBHM07kGNU6yPr2swAHzNtz/oEd9WrtAfBJ1/B7PCkawBBRBt1uNsuQVvvOPU
- ln6shh/2jgmiZGBmkOw5TDwGCLDjmWGozPDBMp9UMgdQmmWmMO03VkWi+it7qocLNZ8g/c5uc
- R4fxjknYzjll7+/MOHgK+k9iTuGpltCM3V2V6IA7h2HReqpvaBGYOQsr3sBhUeiddklqgGMfJ
- btKWwlJCizuEN8cuW5V1hkV3VfeTv/iJ403DPJI3Eykos=
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -114,25 +104,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+If the UEFI boot manager fails, there is no point in installing the
+device-tree as a configuration table.
 
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ lib/efi_loader/efi_bootmgr.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-=E5=9C=A8 2024/4/22 16:45, Qu Wenruo =E5=86=99=E9=81=93:
-[...]
->>
->> I added a print statement to free_extent_buffer_internal that prints th=
-e
->> start address of the extent_buffer as I'm not sure what to be looking f=
-or
->> here.=C2=A0 This print statement is before the decrement.
->>> printf("free_extent_buffer_internal: eb->start[%llx] eb->refs[%i]\n",
->>> eb->start, eb->refs);
->>
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index c64cbe82402..2b0d3137338 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -1209,15 +1209,15 @@ efi_status_t efi_bootmgr_run(void *fdt)
+ 		return CMD_RET_FAILURE;
+ 	}
+ 
+-	ret = efi_install_fdt(fdt);
+-	if (ret != EFI_SUCCESS)
+-		return ret;
+-
+ 	ret = efi_bootmgr_load(&handle, &load_options);
+ 	if (ret != EFI_SUCCESS) {
+ 		log_notice("EFI boot manager: Cannot load any image\n");
+ 		return ret;
+ 	}
+ 
++	ret = efi_install_fdt(fdt);
++	if (ret != EFI_SUCCESS)
++		return ret;
++
+ 	return do_bootefi_exec(handle, load_options);
+ }
+-- 
+2.43.0
 
-Just a small advice, in fact you can go with sandbox mode, running
-U-boot in userspace, and bind a host file as a device to test the
-filesystem code.
-
-At least that's what I did for most U-boot bugs.
-
-Thanks,
-Qu
