@@ -4,61 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AE8AC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 09:17:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BD5DC07E8F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 09:22:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 424A8882E0;
-	Mon, 22 Apr 2024 11:17:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id C2946883A9;
+	Mon, 22 Apr 2024 11:22:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="PbaiLCd6";
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="Zk/ncvzP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B3B3882E0; Mon, 22 Apr 2024 11:17:06 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id D08DD883A9; Mon, 22 Apr 2024 11:22:27 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [IPv6:2a01:4f8:c0c:51f3::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8233888301
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 11:17:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FAA9883D4
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 11:22:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8fac=L3=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1713777414;
- bh=CNlBM2oqK15g8OwCAYKUj61uSZjFG6z1zEEtIEoUagY=;
- b=PbaiLCd60o6b46BWSOOvRAkjm4JTnJx9QyvlH8apLK+XgWTH8ZE3Au2jUDq4BtBCDRrD8+yh5
- IRxVlBG2HUXIsmsgy0DZrzlymhvWgsBc/rK9tgKLXRXza0gnB/FwOY0QVOV4PO+huJB7FBBvTGQ
- nXfpZ+OE7NtGeZC3e3rOVTEvdDgdMWX160vJkHsIm/wrL0y/GqNHZz/TJKNRu8pNrFX0pYWPfb3
- NPUjcHURJT83e+wJVd6581CVBb2pX0UMPj4rTaSAH3EzWlqRfproWDPq38L9cE1+n3pxVDO4paU
- /XsVfDQfVH+pMIa6CtSis0NiI1RBneAAsE+uUKk1owWA==
-Message-ID: <2e7b6321-982a-4a87-8ca4-4a2d094c49c9@kwiboo.se>
-Date: Mon, 22 Apr 2024 11:16:50 +0200
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 11/14] rockchip: rk3308-evb: Update defconfig
-To: Kever Yang <kever.yang@rock-chips.com>, Andy Yan <andy.yan@rock-chips.com>
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
- <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, Akash Gajjar
- <gajjar04akash@gmail.com>, u-boot@lists.denx.de
-References: <20240408181429.3676856-1-jonas@kwiboo.se>
- <20240408181429.3676856-12-jonas@kwiboo.se>
- <e81a920d-e8db-4e98-a221-ea13e00c8937@rock-chips.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <e81a920d-e8db-4e98-a221-ea13e00c8937@rock-chips.com>
-Content-Type: text/plain; charset=UTF-8
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1713777744;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=s0K6P2MBTI+81gRRzRo5eVZfuUWWsnuemMpCpwleUc8=;
+ b=Zk/ncvzPgcL6J9dMQFB5wBHwUOQP0tJvW2qnbSPqhrZlBSVP3pD156JtB36dydGIbB4so2
+ ejXy4Xtz5FhfFoLBgroWi+BUy1/qIo+kUOIgp4aT854e3lqkKlG6T9TPcltwC8ySYzu+5a
+ zSaobOixcpMxdhE3zbAA4phalP139rKkjQLGrdl5N/zaviPRjMb6V9gGQgmuUXMhdFUCXk
+ 4HKaGP188uo9kMMstR7LwXymSmfHm+yorbiEyv+QcYybffNkOOd5M+Sgcn1UagVyjQQcU3
+ IJ579xsiINI8n7mEuGHKKDiXaf8083jKPtWo5yu8d5VHaIfSGuWWe3LkKXdxww==
+Date: Mon, 22 Apr 2024 11:22:23 +0200
+From: Dragan Simic <dsimic@manjaro.org>
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu
+Subject: Re: [PATCH] board: rk3288: simplify the DT file list in MAINTAINERS
+In-Reply-To: <99f377ea-5363-42fb-81b2-9fe1ea984a14@rock-chips.com>
+References: <369151a2b8d73d733ca79eca98d4d5958f90d491.1713423687.git.dsimic@manjaro.org>
+ <99f377ea-5363-42fb-81b2-9fe1ea984a14@rock-chips.com>
+Message-ID: <fff76347ef11dea86b671be95a8ec56a@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66262b06185b8d2ef1885b0a
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,148 +69,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
+On 2024-04-22 10:24, Kever Yang wrote:
+> On 2024/4/18 15:06, Dragan Simic wrote:
+>> Use a wildcard to simplify the list of board DT files in the 
+>> MAINTAINERS
+>> file for the Radxa Rock 2 Square board.
+>> 
+>> Signed-off-by: Dragan Simic <dsimic@manjaro.org>
+> Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-On 2024-04-22 10:50, Kever Yang wrote:
-> Hi Jonas,
-> 
-> On 2024/4/9 02:14, Jonas Karlman wrote:
->> Update defconfig for rk3308-evb with new defaults.
->>
->> Add OF_LIBFDT_OVERLAY=y to support device tree overlays.
->>
->> Remove the SPL_DRIVERS_MISC=y option, no misc driver is used in SPL.
->>
->> Use DEBUG_UART_BASE=0xFF0E0000 and disable DEBUG_UART_BOARD_INIT to
->> make debug uart use uart4, same as stdout-path prop.
-> 
-> Why this change happen? I think rk3308-evb is using UART2 on 0xFF0C0000.
-> 
+Thanks!
 
-The device tree both used in U-Boot [1] and Linux [2] both use:
-
-  stdout-path = "serial4:1500000n8"
-
-and only enable the uart4 node. Yet the defconfig in U-Boot use a
-DEBUG_UART_BASE for uart2 instead of uart4.
-
-Having U-Boot defconfig matching the upstream device tree seem like a
-good thing, but maybe the device tree is wrong?
-
-[1] https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3308-evb.dts
-[2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/rockchip/rk3308-evb.dts
-
-Regards,
-Jonas
-
-> 
-> Thanks,
-> 
-> - Kever
-> 
->>
->> Remove BOOTDELAY=0, SYS_CONSOLE_INFO_QUIET=y and enable more CMD to
->> allow use of U-Boot cmdline.
->>
->> Add DM_ETH_PHY=y and PHY_REALTEK=y to support onboard ethernet PHY.
->>
->> Add PHY_ROCKCHIP_INNO_USB2=y, DM_USB_GADGET=y and remove USB_DWC2=y to
->> allow full use of USB 2.0 host and otg ports.
->>
->> Enable EFI_LOADER to allow EFI boot.
->>
->> Signed-off-by: Jonas Karlman<jonas@kwiboo.se>
 >> ---
->> v2: Fix DEBUG_UART_BASE and disable DEBUG_UART_BOARD_INIT
->> ---
->>   configs/evb-rk3308_defconfig | 37 +++++++++++++++---------------------
->>   1 file changed, 15 insertions(+), 22 deletions(-)
->>
->> diff --git a/configs/evb-rk3308_defconfig b/configs/evb-rk3308_defconfig
->> index 9dc7d9c0caea..04a94e13a68a 100644
->> --- a/configs/evb-rk3308_defconfig
->> +++ b/configs/evb-rk3308_defconfig
->> @@ -3,41 +3,32 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->>   CONFIG_COUNTER_FREQUENCY=24000000
->>   CONFIG_ARCH_ROCKCHIP=y
->>   CONFIG_DEFAULT_DEVICE_TREE="rk3308-evb"
->> +CONFIG_OF_LIBFDT_OVERLAY=y
->>   CONFIG_DM_RESET=y
->>   CONFIG_ROCKCHIP_RK3308=y
->> -CONFIG_SPL_DRIVERS_MISC=y
->>   CONFIG_TARGET_EVB_RK3308=y
->> -CONFIG_DEBUG_UART_BASE=0xFF0C0000
->> +CONFIG_DEBUG_UART_BASE=0xFF0E0000
->>   CONFIG_DEBUG_UART_CLOCK=24000000
->> +# CONFIG_DEBUG_UART_BOARD_INIT is not set
->>   CONFIG_SYS_LOAD_ADDR=0xc00800
->>   CONFIG_DEBUG_UART=y
->>   CONFIG_ANDROID_BOOT_IMAGE=y
->>   CONFIG_FIT=y
->>   CONFIG_FIT_VERBOSE=y
->> -CONFIG_BOOTDELAY=0
->>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3308-evb.dtb"
->> -CONFIG_SYS_CONSOLE_INFO_QUIET=y
->>   # CONFIG_DISPLAY_CPUINFO is not set
->> -CONFIG_SPL_MAX_SIZE=0x20000
->> +CONFIG_SPL_MAX_SIZE=0x40000
->>   CONFIG_SPL_PAD_TO=0x7f8000
->>   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
->> -# CONFIG_CMD_BDI is not set
->> -# CONFIG_CMD_CONSOLE is not set
->> -# CONFIG_CMD_ELF is not set
->> -# CONFIG_CMD_IMI is not set
->> -# CONFIG_CMD_XIMG is not set
->> +CONFIG_CMD_GPIO=y
->>   CONFIG_CMD_GPT=y
->> -# CONFIG_CMD_LOADB is not set
->> -# CONFIG_CMD_LOADS is not set
->>   CONFIG_CMD_MMC=y
->>   CONFIG_CMD_USB=y
->> +CONFIG_CMD_ROCKUSB=y
->>   CONFIG_CMD_USB_MASS_STORAGE=y
->> -# CONFIG_CMD_ITEST is not set
->> -# CONFIG_CMD_SETEXPR is not set
->> -# CONFIG_CMD_SLEEP is not set
->> -# CONFIG_SPL_DOS_PARTITION is not set
->> -# CONFIG_ISO_PARTITION is not set
->> -CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
->> +CONFIG_CMD_RNG=y
->> +CONFIG_CMD_KASLRSEED=y
->> +CONFIG_CMD_REGULATOR=y
->>   CONFIG_SPL_OF_CONTROL=y
->>   CONFIG_OF_LIVE=y
->>   CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
->> @@ -51,9 +42,11 @@ CONFIG_SYS_I2C_ROCKCHIP=y
->>   CONFIG_SUPPORT_EMMC_RPMB=y
->>   CONFIG_MMC_DW=y
->>   CONFIG_MMC_DW_ROCKCHIP=y
->> +CONFIG_PHY_REALTEK=y
->> +CONFIG_DM_ETH_PHY=y
->>   CONFIG_ETH_DESIGNWARE=y
->>   CONFIG_GMAC_ROCKCHIP=y
->> -CONFIG_PHY=y
->> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
->>   CONFIG_PINCTRL=y
->>   CONFIG_REGULATOR_PWM=y
->>   CONFIG_DM_REGULATOR_FIXED=y
->> @@ -62,15 +55,15 @@ CONFIG_RAM=y
->>   CONFIG_BAUDRATE=1500000
->>   CONFIG_DEBUG_UART_SHIFT=2
->>   CONFIG_SYS_NS16550_MEM32=y
->> +CONFIG_SYSINFO=y
->>   CONFIG_SYSRESET=y
->>   CONFIG_USB=y
->> +CONFIG_DM_USB_GADGET=y
->>   CONFIG_USB_EHCI_HCD=y
->>   CONFIG_USB_EHCI_GENERIC=y
->> -CONFIG_USB_DWC2=y
->>   CONFIG_USB_GADGET=y
->>   CONFIG_USB_GADGET_DWC2_OTG=y
->>   CONFIG_USB_GADGET_DOWNLOAD=y
->> -CONFIG_SPL_TINY_MEMSET=y
->> +CONFIG_USB_FUNCTION_ROCKUSB=y
->>   CONFIG_LZO=y
->>   CONFIG_ERRNO_STR=y
->> -# CONFIG_EFI_LOADER is not set
-
+>>   board/radxa/rock2/MAINTAINERS | 4 +---
+>>   1 file changed, 1 insertion(+), 3 deletions(-)
+>> 
+>> diff --git a/board/radxa/rock2/MAINTAINERS 
+>> b/board/radxa/rock2/MAINTAINERS
+>> index 5328fd76014a..af974c983047 100644
+>> --- a/board/radxa/rock2/MAINTAINERS
+>> +++ b/board/radxa/rock2/MAINTAINERS
+>> @@ -1,9 +1,7 @@
+>>   FIREFLY
+>>   M:	Simon Glass <sjg@chromium.org>
+>>   S:	Maintained
+>> -F:	arch/arm/dts/rk3288-rock2-som.dtsi
+>> -F:	arch/arm/dts/rk3288-rock2-square.dts
+>> -F:	arch/arm/dts/rk3288-rock2-square-u-boot.dtsi
+>> +F:	arch/arm/dts/rk3288-rock2*
+>>   F:	board/radxa/rock2
+>>   F:	include/configs/rock2.h
+>>   F:	configs/rock2_defconfig
