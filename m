@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14E6AC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 11:44:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1F32C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 11:44:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55C1688421;
-	Mon, 22 Apr 2024 13:44:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 837B788412;
+	Mon, 22 Apr 2024 13:44:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="u46laKLE";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="guULuNBe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1361C88425; Mon, 22 Apr 2024 13:44:05 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 8DD9688379; Mon, 22 Apr 2024 13:44:05 +0200 (CEST)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A6F388379
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 13:44:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9748C883A2
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 13:44:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-349545c3eb8so3210369f8f.2
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 04:44:02 -0700 (PDT)
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-343d1003106so3586510f8f.1
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 04:44:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1713786242; x=1714391042; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=ua3HZjCvGgqW+TLHcRKVX1mFtSngd+vLkTiEqibrhwo=;
- b=u46laKLE0qCUpyFqTtUpEkUnsScNjIkzpQbDo5YMH8FgrBrUnT6i586ROGVV0LaeiD
- 3QvbQo/3QsiXzDf3wAbGHldNPqqBzCAhnA+lFQHgozz07SAkVAw2+J4v4T4OlXdpm2JE
- FrVH8q/ZpzsfGnUMW3t6LL1brxJ2bxd/yYE0ROgjhXxmoTBHOMQQCDpZfuTYPBebkZ3V
- KxknydxEuAhUfvvq6oy6+IO0HnyWG1blmnkakxY7/oqW1NL3q1vYlydll/N5xVKpzkNA
- nv7Eao49QcZAp9SvjcQ/oaW1N9QciFdTY4+ZnJuGe9DbOB80G+Nhp9SGzSOYIzLrgWH+
- HQqQ==
+ d=sartura.hr; s=sartura; t=1713786243; x=1714391043; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Rd1Q6gJh84Bl9N5fQ0Bn0TP1W4PJtTj7HUVuOEfuqD4=;
+ b=guULuNBewllldcAnoNPfD+gxnkeHcQYUctI1U42zKQhI/XCz1tkkzm/3xndMA3i+bK
+ pSOaVCublJcif4vw+Nvc96lWoWO7wmNeBE5XhdT2fIzhux6oCDPRlsAntmdRIdu6SHT6
+ rOuPeX5K+af/JxlztrJeaNDzahFb0vNykbiAOGlqYXrv0rht82rC4Xhg84GR09uAL2Pg
+ WVt2rKlI0GNRhAqhjeWDuT5g69BWVlGp4scq2WFD/2pasxDSUmv6J+RvTROb0VQ9+Yws
+ WrAWxiXrrfBPM1yYGXtjqBJXJaAcesNNdLe+jlH9h+Cw07S4OouUtBLEdTxTq3k3m8BB
+ 0Ciw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713786242; x=1714391042;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ua3HZjCvGgqW+TLHcRKVX1mFtSngd+vLkTiEqibrhwo=;
- b=WR/qqzoI2A8l2OeqNppuN2gYSJPSFDHDvBv2daztQY6Xd5L8dXZUw0TgNLjIkbPC0m
- AINilxCpgE1mrM1Nu+Fb5EgQzndi/mg+REko3CjvtpuMKuGfCh1WdNqGaQkQPnF8143E
- JbbHymFpUbNdmfYbMiSjYIMVJPGV2yH7mDI5hqtDeiViKoPOZp5Lq2la7Fn0UXamFc79
- NOLd/VXV1uq1F51zVHu05XeOdCfL2R2NHLX5fk61iFozZVmIIjs10oQKaG9cPXnmpoLk
- sy/yu6WndzelAMzXcyKQ0wGjnHu/FgweJTjVJWkTtDv0eSRd4Xo8TDtG4xAmxYCmGycw
- L9Sw==
+ d=1e100.net; s=20230601; t=1713786243; x=1714391043;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Rd1Q6gJh84Bl9N5fQ0Bn0TP1W4PJtTj7HUVuOEfuqD4=;
+ b=iD0yCEpRGO66jgkC2lhNbCRXeMawXtWQ6oyXTp5U675yeIIvEkxDvhNNYr4OYYkH4f
+ doA409bAc1vFYW31Y6X9Odqhg9hDqIYQuvD6iv4dJ+LnjOnJdq6VXJ8mmEjMffHzqHAi
+ v+qruYk1rAlhmYC4mC626rdonz7mb4NqgYRRsu9DA+os519PWxpeIz//302jh+Y4y8oD
+ LqneKUjYo/nHe7DDN4wVQvYGqOrqBUnocoCQwy1v4DRk1kMgB0fMQgScBRHZg9rzHDox
+ FGoosbfRw2B4sVkG1wasgDbRx/heUJNDRcZ+/Zq6cb2upWTpPpzrrJRSroh1DyhjkI1u
+ zMzA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVzmf0ZP7q2wPwrRqLS3fkeoOj1ZR0A2orK+IfGsiFhnS9pY7ggYQWAljbGZDMrrOsWjQqcpWdIZwBwwOwtjjIUTXOV5w==
-X-Gm-Message-State: AOJu0YxaQnw7j/wSc32FKhgMhI3JbH+0VAWSFyOmZtpPuptfVSM1BH31
- 8JPXTnkmCezbVuOwjfj1Id/x3EMaSpczC5k0Gkw0nxokYklFxR0y+NbPoSXHvDw=
-X-Google-Smtp-Source: AGHT+IHJVwv0LiANG7krI0W6xcPGjeFHF4wrtpXwDNJCxCy7Hq3R/9hy+iavelms6ZF/edIz5FrWsg==
-X-Received: by 2002:adf:e842:0:b0:343:facf:228a with SMTP id
- d2-20020adfe842000000b00343facf228amr5979947wrn.19.1713786242135; 
- Mon, 22 Apr 2024 04:44:02 -0700 (PDT)
+ AJvYcCX3PmRv4pt+lzqi2YkrlxG5zLJ5u0Jn60tmpvFWmnWcR44srmEPp9SMKENhVUKbxr24R2XYfRGnoSSMKBtkK+ufjeV38w==
+X-Gm-Message-State: AOJu0YxUO0jiimOujMs9eRvKaPqlT3iAn+iQ2BTOooEg6P2QibTcHHzG
+ vrnUt1MApSCAge7Eh1ZfN2CnOcd68GyhvUe4uEKgUNUty/zqv/8Mq/1J2WK4hdA=
+X-Google-Smtp-Source: AGHT+IEr0hfaXQBnPamevj88NTwgCY47NUFrvMAJQbTo3/gweTtRYla9In9mzcCfNnfKkkPDj7+Qww==
+X-Received: by 2002:a5d:5985:0:b0:34a:eef8:b162 with SMTP id
+ n5-20020a5d5985000000b0034aeef8b162mr4546283wri.5.1713786243175; 
+ Mon, 22 Apr 2024 04:44:03 -0700 (PDT)
 Received: from fedora.. (dh207-14-170.xnet.hr. [88.207.14.170])
  by smtp.googlemail.com with ESMTPSA id
- e5-20020adfe385000000b003455e5d2569sm12022977wrm.0.2024.04.22.04.44.01
+ e5-20020adfe385000000b003455e5d2569sm12022977wrm.0.2024.04.22.04.44.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 04:44:01 -0700 (PDT)
+ Mon, 22 Apr 2024 04:44:02 -0700 (PDT)
 From: Robert Marko <robert.marko@sartura.hr>
 To: trini@konsulko.com, caleb.connolly@linaro.org, neil.armstrong@linaro.org,
  sumit.garg@linaro.org, u-boot@lists.denx.de
 Cc: j.beck@linefinity.com,
 	Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH v2 1/5] pinctrl: qcom: allow selecting with ARCH_IPQ40XX
-Date: Mon, 22 Apr 2024 13:43:24 +0200
-Message-ID: <20240422114359.219762-1-robert.marko@sartura.hr>
+Subject: [PATCH v2 2/5] mach-ipq40xx: import GPIO header from mach-snapgradon
+Date: Mon, 22 Apr 2024 13:43:25 +0200
+Message-ID: <20240422114359.219762-2-robert.marko@sartura.hr>
 X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240422114359.219762-1-robert.marko@sartura.hr>
+References: <20240422114359.219762-1-robert.marko@sartura.hr>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,27 +95,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-IPQ4019 pinctrl driver was moved to the dedicated Qualcomm pinctrl
-directory, but the KConfig depends on ARCH_SNAPDRAGON only and thus
-PINCTRL_QCOM_IPQ4019 cannot be selected when ARCH_IPQ40XX is used.
+Pinctrl driver was refactored and moved, but the required header that
+it depends on was not included.
 
 Fixes: 24d2908e987a ("pinctrl: qcom: move ipq4019 driver from mach-ipq40xx")
 Signed-off-by: Robert Marko <robert.marko@sartura.hr>
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/pinctrl/qcom/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/mach-ipq40xx/include/mach/gpio.h | 37 +++++++++++++++++++----
+ 1 file changed, 31 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-index 2fe6398147..bd2019c866 100644
---- a/drivers/pinctrl/qcom/Kconfig
-+++ b/drivers/pinctrl/qcom/Kconfig
-@@ -1,4 +1,4 @@
--if ARCH_SNAPDRAGON
-+if ARCH_SNAPDRAGON || ARCH_IPQ40XX
- 
- config PINCTRL_QCOM
- 	depends on PINCTRL_GENERIC
+diff --git a/arch/arm/mach-ipq40xx/include/mach/gpio.h b/arch/arm/mach-ipq40xx/include/mach/gpio.h
+index a45747c0fe..53c6ae0649 100644
+--- a/arch/arm/mach-ipq40xx/include/mach/gpio.h
++++ b/arch/arm/mach-ipq40xx/include/mach/gpio.h
+@@ -1,10 +1,35 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
+ /*
+- * Empty gpio.h
++ * Qualcomm common pin control data.
+  *
+- * This file must stay as arch/arm/include/asm/gpio.h requires it.
+- *
+- * Copyright (c) 2019 Sartura Ltd.
+- *
+- * Author: Robert Marko <robert.marko@sartura.hr>
++ * Copyright (C) 2023 Linaro Ltd.
+  */
++#ifndef _QCOM_GPIO_H_
++#define _QCOM_GPIO_H_
++
++#include <asm/types.h>
++#include <stdbool.h>
++
++struct msm_pin_data {
++	int pin_count;
++	const unsigned int *pin_offsets;
++	/* Index of first special pin, these are ignored for now */
++	unsigned int special_pins_start;
++};
++
++static inline u32 qcom_pin_offset(const unsigned int *offs, unsigned int selector)
++{
++	u32 out = (selector * 0x1000);
++
++	if (offs)
++		return out + offs[selector];
++
++	return out;
++}
++
++static inline bool qcom_is_special_pin(const struct msm_pin_data *pindata, unsigned int pin)
++{
++	return pindata->special_pins_start && pin >= pindata->special_pins_start;
++}
++
++#endif /* _QCOM_GPIO_H_ */
 -- 
 2.44.0
 
