@@ -4,99 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15B87C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 07:16:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC085C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 07:34:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0BAD5881F3;
-	Mon, 22 Apr 2024 09:16:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.com
+	by phobos.denx.de (Postfix) with ESMTP id 2803B88322;
+	Mon, 22 Apr 2024 09:34:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ltts.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.com header.i=quwenruo.btrfs@gmx.com header.b="Fas+PG21";
+	dkim=pass (2048-bit key; unprotected) header.d=ltts.com header.i=@ltts.com header.b="rV5ah9o3";
+	dkim=pass (1024-bit key; unprotected) header.d=amazonses.com header.i=@amazonses.com header.b="pbZb0EC1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E177F87F33; Mon, 22 Apr 2024 09:16:02 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4B96D88324; Mon, 22 Apr 2024 09:34:57 +0200 (CEST)
+Received: from c180-42.smtp-out.ap-south-1.amazonses.com
+ (c180-42.smtp-out.ap-south-1.amazonses.com [76.223.180.42])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F3E3881F3
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 09:16:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quwenruo.btrfs@gmx.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.com;
- s=s31663417; t=1713770156; x=1714374956; i=quwenruo.btrfs@gmx.com;
- bh=uoE5L2twvooST21nx5EdbMerKIDYDBL5aPVi9PhcJ9o=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=Fas+PG21+wR6K2nV2AAII/IDQx2/MlYFVAa6AcIZMSISVHh12x08/frAccTWhktK
- Tu0TxxGXGNOhKNTOYX41SoJJLjgF8n65oY80PVraDNCaMCyz9Dpe+XpqhfbZ3dmPM
- LSZuQqWrEoYdWCkGbV0TxwsoywGcIXi39JLhvRws0qmBcSduEDNz1rS1C42bfI1Va
- K19ausJKSQ8qS0kpExZ9GWyaj2PnWfJJ+j7NTbhlm9mp4Iq9sy4hfFnYPq6Pw/BrZ
- bREURaoLNs3IhfPfhfv1cAYfBIAkuOemOAQ3LzvEPmbPXfiftdo7y6SJAxeDVLlRh
- P/3GoBb6524t/IIwIg==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [172.16.0.219] ([159.196.52.54]) by mail.gmx.net (mrgmx104
- [212.227.17.174]) with ESMTPSA (Nemesis) id 1MIMbU-1rtLqx1Gzs-00EPJs; Mon, 22
- Apr 2024 09:15:56 +0200
-Message-ID: <995dd168-8e1e-4b99-896c-ece4dc88d6e9@gmx.com>
-Date: Mon, 22 Apr 2024 16:45:50 +0930
+ by phobos.denx.de (Postfix) with ESMTPS id 4FFA48831D
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 09:34:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=ltts.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=0109018f04baa618-eec2ea60-dbbf-48e3-bcd6-d12b07a4fc7a-000000@ap-south-1.amazonses.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=i3fe3efcd4pbz7ipgssfqjhzqx347xbc; d=ltts.com; t=1713771292;
+ h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding;
+ bh=Ps1EXWMQrPLk2Na72OxweR4uve3oHvBh/PhO6bbR4XU=;
+ b=rV5ah9o3Vw5kaJ3VkTwDaKKpWdkBRZKCOgITzSKI/hFVnoONQ6qA+W9k0Ij3GpfC
+ sDktnsaX3g8GV6ghI33Thv9wKkjpTXeIsUPdlnQR22tCG2rZJyO3Epwewjw+lkOFWKI
+ 0gW3VvuXZjBGK2s6jzEkhRfMTc6Hu4ZYUfXpuemn/S08GGZRch0hNK59AUnv7llE7lH
+ t8LFhTm5jZByX4+RnRmtqq23FSTl7WcK6owbkGKplQktYHJg1Y2ahkwgh3ufcRUEHLJ
+ j7EuebEvEDdC6ZhksyerLapfkabqqIdjicKPIjVaFKpIFOC8BSRfbcCWyiN828PMUuq
+ vsA2YOkwbQ==
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=zpkik46mrueu52d3326ufxxchortqmoc; d=amazonses.com; t=1713771292;
+ h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:MIME-Version:Content-Transfer-Encoding:Feedback-ID;
+ bh=Ps1EXWMQrPLk2Na72OxweR4uve3oHvBh/PhO6bbR4XU=;
+ b=pbZb0EC1dberZJgrumXljJgRts0JfKIgNUJmoCWgU1z8kZKUrv0kWcv4cQCvBwd3
+ TqwAKsOn1vXe197PyjBU/MtTe+oLP1QWiTBLuyKd8D4O3iQzLS8Sx7BTxUd8H1KIJgf
+ wjYvdQQgPEwSKJp7qmoS3C1lHPJb5IiP+WyBWWSM=
+From: Bhargav Raviprakash <bhargav.r@ltts.com>
+To: jh80.chung@samsung.com
+Cc: bhargav.r@ltts.com, d-gole@ti.com, dan.carpenter@linaro.org, 
+ m.nirmaladevi@ltts.com, sjg@chromium.org, trini@konsulko.com, 
+ u-boot@lists.denx.de
+Subject: Re: [RESEND PATCH v3 5/5] power: regulator: tps65941: Add TPS65224
+ PMIC regulator support
+Date: Mon, 22 Apr 2024 07:34:52 +0000
+Message-ID: <0109018f04baa618-eec2ea60-dbbf-48e3-bcd6-d12b07a4fc7a-000000@ap-south-1.amazonses.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <1ce0fb3e-1b8f-4495-a281-30182e258ae8@samsung.com>
+References: <1ce0fb3e-1b8f-4495-a281-30182e258ae8@samsung.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: BTRFS use-after-free bug at free_extent_buffer_internal
-To: Sachi King <nakato@nakato.io>, u-boot@lists.denx.de
-Cc: kabel@kernel.org, wqu@suse.com, linux-btrfs@vger.kernel.org
-References: <3281192.oiGErgHkdL@youmu>
-Content-Language: en-US
-From: Qu Wenruo <quwenruo.btrfs@gmx.com>
-Autocrypt: addr=quwenruo.btrfs@gmx.com; keydata=
- xsBNBFnVga8BCACyhFP3ExcTIuB73jDIBA/vSoYcTyysFQzPvez64TUSCv1SgXEByR7fju3o
- 8RfaWuHCnkkea5luuTZMqfgTXrun2dqNVYDNOV6RIVrc4YuG20yhC1epnV55fJCThqij0MRL
- 1NxPKXIlEdHvN0Kov3CtWA+R1iNN0RCeVun7rmOrrjBK573aWC5sgP7YsBOLK79H3tmUtz6b
- 9Imuj0ZyEsa76Xg9PX9Hn2myKj1hfWGS+5og9Va4hrwQC8ipjXik6NKR5GDV+hOZkktU81G5
- gkQtGB9jOAYRs86QG/b7PtIlbd3+pppT0gaS+wvwMs8cuNG+Pu6KO1oC4jgdseFLu7NpABEB
- AAHNIlF1IFdlbnJ1byA8cXV3ZW5ydW8uYnRyZnNAZ214LmNvbT7CwJQEEwEIAD4CGwMFCwkI
- BwIGFQgJCgsCBBYCAwECHgECF4AWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00iVQUJDToH
- pgAKCRDCPZHzoSX+qNKACACkjDLzCvcFuDlgqCiS4ajHAo6twGra3uGgY2klo3S4JespWifr
- BLPPak74oOShqNZ8yWzB1Bkz1u93Ifx3c3H0r2vLWrImoP5eQdymVqMWmDAq+sV1Koyt8gXQ
- XPD2jQCrfR9nUuV1F3Z4Lgo+6I5LjuXBVEayFdz/VYK63+YLEAlSowCF72Lkz06TmaI0XMyj
- jgRNGM2MRgfxbprCcsgUypaDfmhY2nrhIzPUICURfp9t/65+/PLlV4nYs+DtSwPyNjkPX72+
- LdyIdY+BqS8cZbPG5spCyJIlZonADojLDYQq4QnufARU51zyVjzTXMg5gAttDZwTH+8LbNI4
- mm2YzsBNBFnVga8BCACqU+th4Esy/c8BnvliFAjAfpzhI1wH76FD1MJPmAhA3DnX5JDORcga
- CbPEwhLj1xlwTgpeT+QfDmGJ5B5BlrrQFZVE1fChEjiJvyiSAO4yQPkrPVYTI7Xj34FnscPj
- /IrRUUka68MlHxPtFnAHr25VIuOS41lmYKYNwPNLRz9Ik6DmeTG3WJO2BQRNvXA0pXrJH1fN
- GSsRb+pKEKHKtL1803x71zQxCwLh+zLP1iXHVM5j8gX9zqupigQR/Cel2XPS44zWcDW8r7B0
- q1eW4Jrv0x19p4P923voqn+joIAostyNTUjCeSrUdKth9jcdlam9X2DziA/DHDFfS5eq4fEv
- ABEBAAHCwHwEGAEIACYCGwwWIQQt33LlpaVbqJ2qQuHCPZHzoSX+qAUCY00ibgUJDToHvwAK
- CRDCPZHzoSX+qK6vB/9yyZlsS+ijtsvwYDjGA2WhVhN07Xa5SBBvGCAycyGGzSMkOJcOtUUf
- tD+ADyrLbLuVSfRN1ke738UojphwkSFj4t9scG5A+U8GgOZtrlYOsY2+cG3R5vjoXUgXMP37
- INfWh0KbJodf0G48xouesn08cbfUdlphSMXujCA8y5TcNyRuNv2q5Nizl8sKhUZzh4BascoK
- DChBuznBsucCTAGrwPgG4/ul6HnWE8DipMKvkV9ob1xJS2W4WJRPp6QdVrBWJ9cCdtpR6GbL
- iQi22uZXoSPv/0oUrGU+U5X4IvdnvT+8viPzszL5wXswJZfqfy8tmHM85yjObVdIG6AlnrrD
-In-Reply-To: <3281192.oiGErgHkdL@youmu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:nb2no6jzXdD1t4WOrACtoyqvjuXQmlgmRi0WQUn44IqZTwd/7n0
- GmGwtECFOTcrXdvQdoO+dw/sQ5zXKm15I/QBjNryXID1sEO0qIV9YFcyA30ZiMmAp71e+R4
- Rd+0slrPRZ7hLzuvwKj6YEpUXC/5qX/atwtfBTfldA5s3vbJPjMHyI9doCYDdFigE1n/1Km
- R+1uyjx7g/xSYuEAQidWg==
-UI-OutboundReport: notjunk:1;M01:P0:p2to0LcfYCI=;DMzPj2j+ACq5nbAPCXZlIi2ePCm
- irxd5sLAwjYARnBNXv4tt9wCH97pxJiqaEVs0uMfCCUKdFHjmcyk6/nMsFjWixEpchnEQsCCH
- zxmJ1UhqnwPVrOhckR4d61PTP3gREbpBx1CkVD4xTcNIBWIWZLnVwCceyXIwMZ3ncsNBA1syP
- pGqLrNj2sLVMbz3j7VPwwnDNGuTYjx8oN7/hShMcBqfzVjgK1ppXpwJiDdzBsNPSPRmKDsXul
- MdMVuGnQ6Vy5ONqw5f2cc2E54QvA1+dm3BduLjt7/Ouir2c5v9YUxaa1qcZLrBU9CCFl0bRvZ
- ha9HH+8q/Pd2XPaWCJ3bDD8XShJjCMSqaSUHFRVgwbFc9PUknmQxj06GBS2M1b2BOYggxvm9Q
- nxssDAymtTKf/vqf4E1PHXa2VMEF15lobDmk1MjOJLVzSC6O/Ex1ofBuKGfo3W1m84RLAEDfm
- iCXd1sokm/QQ8y04SxKmbjiW9m+f4HzpM9jyIy8/kPV1hyczvvbO/FDubYWk7JOygep8zZCET
- zApIyhSOxKg19YDpRRem9C3sdc4aZF51AbGu4GTB4V96Hng86a+LDUxSLkEbiVaHinzWBD2Ca
- YdtrBXKN0zm3qCqkH+arQgVpq1h/xd22kh3Y8n4gvD+EcywOakQ6tfDdiI+BLt+ujN1cbz2z8
- WAoYQVTsKUAcW8uahFm2AabNiuXZt6P5jobYpJYpOTzXyHypaJIZDhuxLmfN9gWjCdyZI/QBZ
- xv9z+CltOGIkdnTU4rmpUowZ+JfgEt64tIJldH6wW3abN898Yo63Q3wi6TsHtIQg2+8mczySt
- UOHvJvDxs1+PuxOpLpsWJf9juvmBjRM8k+IU0iPK7WZ04=
+Content-Transfer-Encoding: 8bit
+Feedback-ID: 1.ap-south-1./RC/PI2M8xOxQmTMPi0M1Q8h2FX69egpT62QKSaMPIA=:AmazonSES
+X-SES-Outgoing: 2024.04.22-76.223.180.42
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,375 +76,433 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 18 Apr 2024 09:33:30 +0900, Jaehoon Chung wrote:
+> On 3/18/24 18:49, Bhargav Raviprakash wrote:
+> > Reuse TPS65941 regulator driver to adds support for
+> > TPS65224 PMIC's regulators. 4 BUCKs and 3 LDOs, where
+> > BUCK1 and BUCK2 can be configured in dual phase mode.
+> > 
+> > Signed-off-by: Bhargav Raviprakash <bhargav.r@ltts.com>
+> > ---
+> >  drivers/power/regulator/tps65941_regulator.c | 283 ++++++++++++++++++-
+> >  1 file changed, 270 insertions(+), 13 deletions(-)
+> > 
+> > diff --git a/drivers/power/regulator/tps65941_regulator.c b/drivers/power/regulator/tps65941_regulator.c
+> > index d879c2301b..b1b9462fd3 100644
+> > --- a/drivers/power/regulator/tps65941_regulator.c
+> > +++ b/drivers/power/regulator/tps65941_regulator.c
+> > @@ -37,6 +37,8 @@
+> >  
+> >  #define TPS65941_BUCK_CONV_OPS_IDX  0
+> >  #define TPS65941_LDO_CONV_OPS_IDX   0
+> > +#define TPS65224_LDO_CONV_OPS_IDX   1
+> > +#define TPS65224_BUCK_CONV_OPS_IDX  1
+> >  
+> >  struct tps65941_reg_conv_ops {
+> >  	int volt_mask;
+> > @@ -55,6 +57,11 @@ static const char tps65941_ldo_ctrl[TPS65941_BUCK_NUM] = {0x1D, 0x1E, 0x1F,
+> >  static const char tps65941_ldo_vout[TPS65941_BUCK_NUM] = {0x23, 0x24, 0x25,
+> >  								0x26};
+> >  
+> > +static inline int tps65941_get_chip_id(struct udevice *dev)
+> > +{
+> > +	return dev->parent->driver_data;
+> > +}
+> > +
+> >  static int tps65941_buck_enable(struct udevice *dev, int op, bool *enable)
+> >  {
+> >  	int ret;
+> > @@ -146,6 +153,112 @@ int tps65941_lookup_slew(int id)
+> >  	}
+> >  }
+> >  
+> > +static int tps65224_buck_volt2val(int idx, int uV)
+> > +{
+> > +	/* This functions maps a value which is in micro Volts to the VSET value.
+> > +	 * The mapping is as per the datasheet of TPS65224.
+> > +	 */
+> > +
+> > +	if (uV > TPS65224_BUCK_VOLT_MAX)
+> > +		return -EINVAL;
+> > +
+> > +	if (idx > 0) {
+> > +		/* Buck2, Buck3 and Buck4 of TPS65224 has a different schema in
+> > +		 * converting b/w micro_volt and VSET hex values
+> > +		 *
+> > +		 * VSET value starts from 0x00 for 0.5V, and for every increment
+> > +		 * in VSET value the output voltage increases by 25mV. This is upto
+> > +		 * 1.15V where VSET is 0x1A.
+> > +		 *
+> > +		 * For 0x1B the output voltage is 1.2V, and for every increment of
+> > +		 * VSET the output voltage increases by 50mV upto the max voltage of
+> > +		 * 3.3V
+> > +		 *
+> > +		 * | Voltage Ranges  | VSET Ranges  | Voltage Step |
+> > +		 * +-----------------+--------------+--------------+
+> > +		 * | 0.5V to 1.50V   | 0x00 to 0x1A |  25mV        |
+> > +		 * | 1.2V to 3.3V    | 0x1B to 0x45 |  50mV        |
+> > +		 */
+> > +		if (uV >= 1200000)
+> > +			return (uV - 1200000) / 50000 + 0x1B;
+> > +		else if (uV >= 500000)
+> > +			return (uV - 500000) / 25000;
+> > +		else
+> > +			return -EINVAL;
+> > +	}
+> > +
+> > +	/* Buck1 and Buck12(dual phase) has a different mapping b/w output
+> > +	 * voltage and VSET value.
+> > +	 *
+> > +	 * | Voltage Ranges  | VSET Ranges  | Voltage Step |
+> > +	 * +-----------------+--------------+--------------+
+> > +	 * | 0.5V to 0.58V   | 0xA to 0xE   |  20mV        |
+> > +	 * | 0.6V to 1.095V  | 0xF to 0x72  |  5mV         |
+> > +	 * | 1.1V to 1.65V   | 0x73 to 0xAA |  10mV        |
+> > +	 * | 1.6V to 3.3V    | 0xAB to 0xFD |  20mV        |
+> > +	 *
+> > +	 */
+> > +	if (uV >= 1660000)
+> > +		return (uV - 1660000) / 20000 + 0xAB;
+> > +	else if (uV >= 1100000)
+> > +		return (uV - 1100000) / 10000 + 0x73;
+> > +	else if (uV >= 600000)
+> > +		return (uV - 600000) / 5000 + 0x0F;
+> > +	else if (uV >= 500000)
+> > +		return (uV - 500000) / 20000 + 0x0A;
+> > +	else
+> > +		return -EINVAL;
+> > +}
+> > +
+> > +static int tps65224_buck_val2volt(int idx, int val)
+> > +{
+> > +	/* This function does the opposite to the tps65224_buck_volt2val function
+> > +	 * described above.
+> > +	 * This maps the VSET value to micro volts. Please refer to the ranges
+> > +	 * mentioned the comments of tps65224_buck_volt2val.
+> > +	 */
+> > +
+> > +	if (idx > 0) {
+> > +		if (val > TPS65224_BUCK234_VOLT_MAX_HEX)
+> > +			return -EINVAL;
+> > +		else if (val >= 0x1B)
+> > +			return 1200000 + (val - 0x1B) * 50000;
+> > +		else if (val >= 0x00)
+> > +			return 500000 + (val - 0x00) * 25000;
+> > +		else
+> > +			return -EINVAL;
+> > +	}
+> > +
+> > +	if (val > TPS65224_BUCK1_VOLT_MAX_HEX)
+> > +		return -EINVAL;
+> > +	else if (val >= 0xAB)
+> > +		return 1660000 + (val - 0xAB) * 20000;
+> > +	else if (val >= 0x73)
+> > +		return 1100000 + (val - 0x73) * 10000;
+> > +	else if (val >= 0xF)
+> > +		return 600000 + (val - 0xF) * 5000;
+> > +	else if (val >= 0xA)
+> > +		return 500000 + (val - 0xA) * 20000;
+> > +	else
+> > +		return -EINVAL;
+> > +}
+> > +
+> > +int tps65224_lookup_slew(int id)
+> > +{
+> > +	switch (id) {
+> > +	case 0:
+> > +		return 10000;
+> > +	case 1:
+> > +		return 5000;
+> > +	case 2:
+> > +		return 2500;
+> > +	case 3:
+> > +		return 1250;
+> > +	default:
+> > +		return -1;
+> > +	}
+> > +}
+> > +
+> >  static const struct tps65941_reg_conv_ops buck_conv_ops[] = {
+> >  	[TPS65941_BUCK_CONV_OPS_IDX] = {
+> >  		.volt_mask = TPS65941_BUCK_VOLT_MASK,
+> > @@ -154,6 +267,13 @@ static const struct tps65941_reg_conv_ops buck_conv_ops[] = {
+> >  		.slew_mask = TP65941_BUCK_CONF_SLEW_MASK,
+> >  		.lookup_slew = tps65941_lookup_slew,
+> >  	},
+> > +	[TPS65224_BUCK_CONV_OPS_IDX] = {
+> > +		.volt_mask = TPS65941_BUCK_VOLT_MASK,
+> > +		.volt2val = tps65224_buck_volt2val,
+> > +		.val2volt = tps65224_buck_val2volt,
+> > +		.slew_mask = TPS65224_BUCK_CONF_SLEW_MASK,
+> > +		.lookup_slew = tps65224_lookup_slew,
+> > +	},
+> >  };
+> >  
+> >  static int tps65941_buck_val(struct udevice *dev, int op, int *uV)
+> > @@ -162,9 +282,23 @@ static int tps65941_buck_val(struct udevice *dev, int op, int *uV)
+> >  	int ret, delta, uwait, slew, idx;
+> >  	struct dm_regulator_uclass_plat *uc_pdata;
+> >  	const struct tps65941_reg_conv_ops *conv_ops;
+> > +	ulong chip_id;
+> >  
+> >  	idx = dev->driver_data;
+> > -	conv_ops = &buck_conv_ops[TPS65941_BUCK_CONV_OPS_IDX];
+> > +	chip_id = tps65941_get_chip_id(dev);
+> > +	if (chip_id == TPS65224) {
+> > +		/* idx is the buck id number as per devicetree node which will be same
+> > +		 * as the regulator name in the datasheet.
+> > +		 * The idx for buck1. buck2, buck3, buck4, buck12 will be 1, 2, 3, 4
+> > +		 * and 12 respectively.
+> > +		 * In the driver the numbering is from 0. Hence the -1.
+> > +		 */
+> > +		idx = (idx == TPS65941_BUCK_ID_12) ? 0 : (idx - 1);
+> > +		conv_ops = &buck_conv_ops[TPS65224_BUCK_CONV_OPS_IDX];
+> > +	} else {
+> > +		conv_ops = &buck_conv_ops[TPS65941_BUCK_CONV_OPS_IDX];
+> > +	}
+> > +
+> >  	uc_pdata = dev_get_uclass_plat(dev);
+> >  
+> >  	if (op == PMIC_OP_GET)
+> > @@ -265,23 +399,99 @@ static int tps65941_ldo_val2volt(__maybe_unused int idx, int val)
+> >  		return -EINVAL;
+> >  }
+> >  
+> > +static int tps65224_ldo_volt2val(int idx, int uV)
+> > +{
+> > +	int base = TPS65224_LDO1_VOLT_MIN;
+> > +	int max = TPS65224_LDO1_VOLT_MAX;
+> > +	int offset = TPS65224_LDO1_VOLT_MIN_HEX;
+> > +	int step = TPS65224_LDO_STEP;
+> > +
+> > +	if (idx > 0) {
+> > +		base = TPS65224_LDO23_VOLT_MIN;
+> > +		max = TPS65224_LDO23_VOLT_MAX;
+> > +		offset = TPS65224_LDO23_VOLT_MIN_HEX;
+> > +	}
+> > +
+> > +	if (uV > max)
+> > +		return -EINVAL;
+> > +	else if (uV >= base)
+> > +		return (uV - base) / step + offset;
+> > +	else
+> > +		return -EINVAL;
+> > +}
+> > +
+> > +static int tps65224_ldo_val2volt(int idx, int val)
+> > +{
+> > +	int reg_base = TPS65224_LDO1_VOLT_MIN_HEX;
+> > +	int reg_max = TPS65224_LDO1_VOLT_MAX_HEX;
+> > +	int base = TPS65224_LDO1_VOLT_MIN;
+> > +	int max = TPS65224_LDO1_VOLT_MAX;
+> > +	int step = TPS65224_LDO_STEP;
+> > +	/* In LDOx_VOUT reg the BIT0 is reserved and the
+> > +	 * vout value is stored from BIT1 to BIT7.
+> > +	 * Hence the below bit shit is done.
+> > +	 */
+> > +	int mask = TPS65224_LDO_VOLT_MASK >> 1;
+> > +
+> > +	if (idx > 0) {
+> > +		base = TPS65224_LDO23_VOLT_MIN;
+> > +		max = TPS65224_LDO23_VOLT_MAX;
+> > +		reg_base = TPS65224_LDO23_VOLT_MIN_HEX;
+> > +		reg_max = TPS65224_LDO23_VOLT_MAX_HEX;
+> > +	}
+> > +
+> > +	/* The VSET register of LDO has its 0th bit as reserved
+> > +	 * hence shifting the value to right by 1 bit.
+> > +	 */
+> > +	val = val >> 1;
+> > +
+> > +	if (val < 0 || val > mask)
+> > +		return -EINVAL;
+> > +
+> > +	if (val <= reg_base)
+> > +		return base;
+> > +
+> > +	if (val >= reg_max)
+> > +		return max;
+> > +
+> > +	return base + (step * (val - reg_base));
+> > +}
+> > +
+> >  static const struct tps65941_reg_conv_ops ldo_conv_ops[] = {
+> >  	[TPS65941_LDO_CONV_OPS_IDX] = {
+> >  		.volt_mask = TPS65941_LDO_VOLT_MASK,
+> >  		.volt2val = tps65941_buck_volt2val,
+> >  		.val2volt = tps65941_ldo_val2volt,
+> >  	},
+> > +	[TPS65224_LDO_CONV_OPS_IDX] = {
+> > +		.volt_mask = TPS65224_LDO_VOLT_MASK,
+> > +		.volt2val = tps65224_ldo_volt2val,
+> > +		.val2volt = tps65224_ldo_val2volt,
+> > +	},
+> >  };
+> >  
+> >  static int tps65941_ldo_val(struct udevice *dev, int op, int *uV)
+> >  {
+> >  	unsigned int hex, adr;
+> > -	int ret, idx;
+> > +	int ret, ret_volt, idx;
+> >  	struct dm_regulator_uclass_plat *uc_pdata;
+> >  	const struct tps65941_reg_conv_ops *conv_ops;
+> > +	ulong chip_id;
+> >  
+> > +	chip_id = tps65941_get_chip_id(dev);
+> >  	idx = dev->driver_data;
+> > -	conv_ops = &ldo_conv_ops[TPS65941_LDO_CONV_OPS_IDX];
+> > +	if (chip_id == TPS65224) {
+> > +		/* idx is the ldo id number as per devicetree node which will be same
+> > +		 * as the regulator name in the datasheet.
+> > +		 * The idx for ldo1, ldo2, ldo3 will be 1, 2 & 3 respectively.
+> > +		 * In the driver the numbering is from 0. Hence the -1.
+> > +		 */
+> > +		idx = idx - 1;
+> > +		conv_ops = &ldo_conv_ops[TPS65224_LDO_CONV_OPS_IDX];
+> > +	} else {
+> > +		conv_ops = &ldo_conv_ops[TPS65941_LDO_CONV_OPS_IDX];
+> > +	}
+> > +
+> >  	uc_pdata = dev_get_uclass_plat(dev);
+> >  
+> >  	if (op == PMIC_OP_GET)
+> > @@ -294,21 +504,36 @@ static int tps65941_ldo_val(struct udevice *dev, int op, int *uV)
+> >  		return ret;
+> >  
+> >  	ret &= conv_ops->volt_mask;
+> > -	ret = conv_ops->val2volt(idx, ret);
+> > -	if (ret < 0)
+> > -		return ret;
+> > +	ret_volt = conv_ops->val2volt(idx, ret);
+> > +	if (ret_volt < 0)
+> > +		return ret_volt;
+> >  
+> >  	if (op == PMIC_OP_GET) {
+> > -		*uV = ret;
+> > +		*uV = ret_volt;
+> >  		return 0;
+> >  	}
+> >  
+> > +	/* TPS65224 LDO1 in BYPASS mode only supports 2.2V min to 3.6V max */
+> > +	if (chip_id == TPS65224 && idx == 0 && (ret & BIT(TPS65224_LDO_BYP_CONFIG)) &&
+> > +	    *uV < TPS65224_LDO1_VOLT_BYP_MIN)
+> > +		return -EINVAL;
+> > +
+> > +	/* TPS65224 LDO2 & LDO3 in BYPASS mode supports 1.5V min to 5.5V max */
+> > +	if (chip_id == TPS65224 && idx > 0 && (ret & BIT(TPS65224_LDO_BYP_CONFIG)) &&
+> > +	    *uV < TPS65224_LDO23_VOLT_BYP_MIN)
+> > +		return -EINVAL;
+> > +
+> >  	hex = conv_ops->volt2val(idx, *uV);
+> >  	if (hex < 0)
+> >  		return hex;
+> >  
+> > -	ret &= 0x0;
+> > -	ret = hex;
+> > +	if (chip_id == TPS65224) {
+> > +		hex = hex << TPS65941_LDO_MODE_MASK;
+> > +		ret &= ~TPS65224_LDO_VOLT_MASK;
+> > +		ret |= hex;
+> > +	} else {
+> > +		ret = hex;
+> > +	}
+> >  
+> >  	ret = pmic_reg_write(dev->parent, adr, ret);
+> >  
+> > @@ -319,6 +544,9 @@ static int tps65941_ldo_probe(struct udevice *dev)
+> >  {
+> >  	struct dm_regulator_uclass_plat *uc_pdata;
+> >  	int idx;
+> > +	ulong chip_id;
+> > +
+> > +	chip_id = tps65941_get_chip_id(dev);
+> >  
+> >  	uc_pdata = dev_get_uclass_plat(dev);
+> >  	uc_pdata->type = REGULATOR_TYPE_LDO;
+> > @@ -328,9 +556,16 @@ static int tps65941_ldo_probe(struct udevice *dev)
+> >  	case TPS65941_LDO_ID_1:
+> >  	case TPS65941_LDO_ID_2:
+> >  	case TPS65941_LDO_ID_3:
+> > -	case TPS65941_LDO_ID_4:
+> >  		debug("Single phase regulator\n");
+> >  		break;
+> > +	case TPS65941_LDO_ID_4:
+> > +		if (chip_id != TPS65224) {
+> > +			debug("Single phase regulator\n");
+> > +		} else {
+> > +			pr_err("Wrong ID for regulator\n");
+> > +			return -EINVAL;
+> > +		}
+> > +		break;
+> 
+> Is it possible to use the below?
+> 
+> if (chip_id != TPS65224) {
+> 	debug("Single phase regulator\n");
+> 	break;
+> }
+> 
+> /* fallthrough */
+> 
+> Best Regards,
+> Jaehoon Chung
+> 
 
+Got it, thanks for suggesting it!
+Will do the change and send it in next version.
 
-=E5=9C=A8 2024/4/22 16:07, Sachi King =E5=86=99=E9=81=93:
-> Hi,
->
-> I've hit a bug with u-boot on my BTRFS filesystem, and I'm fairly certai=
-n
-> it's a bug and not a corruption issue.
->
-> A bit of history on the filesystem.  It is a fairly new filesystem as it=
- was
-> being used to give me access to test a wayland application on a
-> Raspberry Pi.  The filesystem was about 3 days old when I hit the bug, a=
-nd
-> I'm fairly certain it never had an unclean shutdown.  I have checked the
-> filesystem with "btrfs check" which has found no errors.  The filesystem
-> mounts on Linux and is functional.
->
->> # btrfs check --check-data-csum /dev/sda2
->> Opening filesystem to check...
->> Checking filesystem on /dev/sda2
->> UUID: 18db6211-ac36-42c1-a22f-5e15e1486e0d
->> [1/7] checking root items
->> [2/7] checking extents
->> [3/7] checking free space tree
->> [4/7] checking fs roots
->> [5/7] checking csums against data
->> [6/7] checking root refs
->> [7/7] checking quota groups skipped (not enabled on this FS)
->> found 5070573568 bytes used, no error found
->> total csum bytes: 4451620
->> total tree bytes: 370458624
->> total fs tree bytes: 353124352
->> total extent tree bytes: 10010624
->> btree space waste bytes: 62303284
->> file data blocks allocated: 6786519040
->>   referenced 6328619008
+> >  	default:
+> >  		pr_err("Wrong ID for regulator\n");
+> >  		return -EINVAL;
+> > @@ -346,6 +581,9 @@ static int tps65941_buck_probe(struct udevice *dev)
+> >  {
+> >  	struct dm_regulator_uclass_plat *uc_pdata;
+> >  	int idx;
+> > +	ulong chip_id;
+> > +
+> > +	chip_id = tps65941_get_chip_id(dev);
+> >  
+> >  	uc_pdata = dev_get_uclass_plat(dev);
+> >  	uc_pdata->type = REGULATOR_TYPE_BUCK;
+> > @@ -356,16 +594,35 @@ static int tps65941_buck_probe(struct udevice *dev)
+> >  	case TPS65941_BUCK_ID_2:
+> >  	case TPS65941_BUCK_ID_3:
+> >  	case TPS65941_BUCK_ID_4:
+> > -	case TPS65941_BUCK_ID_5:
+> >  		debug("Single phase regulator\n");
+> >  		break;
+> > +	case TPS65941_BUCK_ID_5:
+> > +		if (chip_id != TPS65224) {
+> > +			debug("Single phase regulator\n");
+> > +		} else {
+> > +			pr_err("Wrong ID for regulator\n");
+> > +			return -EINVAL;
+> > +		}
+> > +		break;
+> >  	case TPS65941_BUCK_ID_12:
+> > +		idx = 1;
+> > +		break;
+> >  	case TPS65941_BUCK_ID_123:
+> >  	case TPS65941_BUCK_ID_1234:
+> > -		idx = 1;
+> > +		if (chip_id != TPS65224) {
+> > +			idx = 1;
+> > +		} else {
+> > +			pr_err("Wrong ID for regulator\n");
+> > +			return -EINVAL;
+> > +		}
+> >  		break;
+> >  	case TPS65941_BUCK_ID_34:
+> > -		idx = 3;
+> > +		if (chip_id != TPS65224) {
+> > +			idx = 3;
+> > +		} else {
+> > +			pr_err("Wrong ID for regulator\n");
+> > +			return -EINVAL;
+> > +		}
+> >  		break;
+> >  	default:
+> >  		pr_err("Wrong ID for regulator\n");
 
-Since btrfs check reports no error, the fs must be valid.
-
-But considering how new it is, it may be related to some new features
-not properly implemented in Uboot.
-
-Is it possible to provide the whole binary dump of the fs?
-
->
->
-> I've made an image of the filesystem so I could reproduce the bug in an
-> environment that doesn't require the physical SBC, and have reproduced
-> the issue using the head of the master branch with "qemu-x86_64_defconfi=
-g".
->
-> My testing qemu was produced with the following:
->> # make qemu-x86_64_defconfig
->> # cat << EOF >> .config
->> CONFIG_AUTOBOOT=3Dy
->> CONFIG_BOOTDELAY=3D1
->> CONFIG_USE_BOOTCOMMAND=3Dy
->> CONFIG_BOOTSTD_DEFAULTS=3Dy
->> CONFIG_BOOTSTD_FULL=3Dy
->> CONFIG_CMD_BOOTFLOW_FULL=3Dy
->> CONFIG_BOOTCOMMAND=3D"bootflow scan -lb"
->> CONFIG_ENV_IS_NOWHERE=3Dy
->> CONFIG_LZ4=3Dy
->> CONFIG_BZIP2=3Dy
->> CONFIG_ZSTD=3Dy
->> CONFIG_FS_BTRFS=3Dy
->> CONFIG_CMD_BTRFS=3Dy
->> CONFIG_GZIP=3Dy
->> CONFIG_DEVICE_TREE_INCLUDES=3D"bootstd.dtsi"
->> EOF
->> # make -j24
->
-> bootstd.dtsi is placed at "arch/x86/dts/bootstd.dtsi" and contains:
->> / {
->>          bootstd {
->>                  compatible =3D "u-boot,boot-std";
->>                  filename-prefixes =3D "/@boot/", "/boot/", "/";
->>                  bootdev-order =3D "scsi";
->>                  extlinux {
->>                          compatible =3D "u-boot,extlinux";
->>                  };
->>          };
->> };
->
->
-> The VM was run with
->> qemu-system-x86_64 -bios u-boot.rom -nographic -M q35 -action reboot=3D=
-shutdown -drive file=3D/mnt/dbg/u-boot-debug.img
->
-> The error message I recive on boot is
->> BUG at fs/btrfs/extent-io.c:629/free_extent_buffer_internal()!
->> BUG!
->> resetting ...
->
->
-> I added a print statement to free_extent_buffer_internal that prints the
-> start address of the extent_buffer as I'm not sure what to be looking fo=
-r
-> here.  This print statement is before the decrement.
->> printf("free_extent_buffer_internal: eb->start[%llx] eb->refs[%i]\n", e=
-b->start, eb->refs);
->
-> The last message before the crash reported eb->start to be "0", with 0 r=
-efs.
->> free_extent_buffer_internal: eb->start[0] eb->refs[0]
->
-> The extent at 0 struck me as odd, so I tried commenting out the freeing,=
- by
-> removing the call to free_extent_buffer_final, and this resulted in boot=
-flow
-> succeeding and showing me the boot menu, which suprised me.
-> I expected to see the bug reproduce itself, with refs being zero, but eb=
-->start
-> pointing somewhere valid, but I instead got a valid address with refs at=
- 2.
->
-> I'm assuming that the order free_extent_buffer_internal is called is
-> deterministic, so by counting the print outputs the line that prior held
-> the extent_buffer with a 0 start was replaced with:
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->
-> Interestingly, as can be seen in the full logs with my included print
-> messages, 249c000 is being used just before this, with a ref count of
-> 2.  249c000 does appear to reach a point where it should have been freed
-> in the past, before it gets used again as seen in both logs.
->
-> The failing boot log:
->> U-Boot SPL 2024.04-00949-g1dd659fd62-dirty (Apr 22 2024 - 11:32:37 +100=
-0)
->> Trying to boot from SPI
->> Jumping to 64-bit U-Boot: Note many features are missing
->>
->>
->> U-Boot 2024.04-00949-g1dd659fd62-dirty (Apr 22 2024 - 11:32:37 +1000)
->>
->> CPU:   QEMU Virtual CPU version 2.5+
->> DRAM:  128 MiB
->> Core:  13 devices, 13 uclasses, devicetree: separate
->> Loading Environment from nowhere... OK
->> Model: QEMU x86 (I440FX)
->> Net:   e1000: 00:00:00:00:00:00
->>
->> Error: e1000#0 No valid MAC address found.
->>        eth_initialize() No ethernet found.
->>
->>
->> Hit any key to stop autoboot:  0
->> Scanning for bootflows in all bootdevs
->> Seq  Method       State   Uclass    Part  Name                      Fil=
-ename
->> ---  -----------  ------  --------  ----  ------------------------  ---=
--------------
->> scanning bus for devices...
->> Target spinup took 0 ms.
->> SATA link 1 timeout.
->> Target spinup took 0 ms.
->> SATA link 3 timeout.
->> SATA link 4 timeout.
->> SATA link 5 timeout.
->> AHCI 0001.0000 32 slots 6 ports 1.5 Gbps 0x3f impl SATA mode
->> flags: 64bit ncq only
->> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
->>    Device 0: (0:0) Vendor: ATA Prod.: QEMU HARDDISK Rev: 2.5+
->>              Type: Hard Disk
->>              Capacity: 58680.0 MB =3D 57.3 GB (120176640 x 512)
->> timeout exit!
->> Scanning bootdev 'ahci_scsi.id0lun0.bootdev':
->> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[0] eb->refs[0]
->> BUG at fs/btrfs/extent-io.c:626/free_extent_buffer_internal()!
-
-The eb[0] seems very weird.
-Even for superblock reading, we got eb at 64K, and every eb should have
-at least one ref at creation time.
-
-So this indeed looks like the direct cause.
-But without a full call trace (is it possible inside U-boot runtime?), I
-do not have an immediate clue.
-
-Thanks,
-Qu
-
->> BUG!
->> resetting ...
->
-> The succeeding log with the removed freeing:
->> U-Boot SPL 2024.04-00949-g1dd659fd62-dirty (Apr 22 2024 - 11:38:25 +100=
-0)
->> Trying to boot from SPI
->> Jumping to 64-bit U-Boot: Note many features are missing
->>
->>
->> U-Boot 2024.04-00949-g1dd659fd62-dirty (Apr 22 2024 - 11:38:25 +1000)
->>
->> CPU:   QEMU Virtual CPU version 2.5+
->> DRAM:  128 MiB
->> Core:  13 devices, 13 uclasses, devicetree: separate
->> Loading Environment from nowhere... OK
->> Model: QEMU x86 (I440FX)
->> Net:   e1000: 00:00:00:00:00:00
->>
->> Error: e1000#0 No valid MAC address found.
->>        eth_initialize() No ethernet found.
->>
->>
->> Hit any key to stop autoboot:  0
->> Scanning for bootflows in all bootdevs
->> Seq  Method       State   Uclass    Part  Name                      Fil=
-ename
->> ---  -----------  ------  --------  ----  ------------------------  ---=
--------------
->> scanning bus for devices...
->> Target spinup took 0 ms.
->> SATA link 1 timeout.
->> Target spinup took 0 ms.
->> SATA link 3 timeout.
->> SATA link 4 timeout.
->> SATA link 5 timeout.
->> AHCI 0001.0000 32 slots 6 ports 1.5 Gbps 0x3f impl SATA mode
->> flags: 64bit ncq only
->> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
->>    Device 0: (0:0) Vendor: ATA Prod.: QEMU HARDDISK Rev: 2.5+
->>              Type: Hard Disk
->>              Capacity: 58680.0 MB =3D 57.3 GB (120176640 x 512)
->> timeout exit!
->> Scanning bootdev 'ahci_scsi.id0lun0.bootdev':
->> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
->> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
->> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
->>    0  extlinux     ready   scsi         2  ahci_scsi.id0lun0.bootdev /@=
-boot/extlinux/extlinux.conf
->> ** Booting bootflow 'ahci_scsi.id0lun0.bootdev.part_2' with extlinux
->> ------------------------------------------------------------
->> 1:      NixOS - Default
->> 2:      NixOS - Configuration 5 (2024-03-04 11:00 - 24.05.20240205.faf9=
-12b)
->> 3:      NixOS - Configuration 4 (2024-03-02 15:05 - 24.05.20240205.faf9=
-12b)
->> 4:      NixOS - Configuration 3 (2024-03-02 14:26 - 24.05.20240205.faf9=
-12b)
->> 5:      NixOS - Configuration 2 (2024-03-02 14:06 - 24.05.20240205.faf9=
-12b)
->> 6:      NixOS - Configuration 1 (1970-01-01 10:00 - 24.05.20240205.faf9=
-12b)
->> Enter choice: 1:        NixOS - Default
->> Retrieving file: /@boot/extlinux/../nixos/gq8jsgxnhq2wvsjrni3cjw1wb5540=
-wjw-linux-6.1.63-stable_20231123-Image
->> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
->
->
-> I'm not sure where to go from here with the bug, so I'm hoping for some
-> help in tracking it down so it can be fixed.
->
-> Thanks,
-> Sachi
->
->
->
+Regards,
+Bhargav
