@@ -4,64 +4,134 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26ECDC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 17:54:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5332EC07C79
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 18:20:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D937884BC;
-	Mon, 22 Apr 2024 19:54:29 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id BA2218893D;
+	Mon, 22 Apr 2024 20:20:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=siliconsignals.io
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="Pyaf0cey";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76495888FB; Mon, 22 Apr 2024 19:54:27 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CD63B8893F; Mon, 22 Apr 2024 20:18:18 +0200 (CEST)
+Received: from PNZPR01CU001.outbound.protection.outlook.com
+ (mail-centralindiaazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c408::3])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A607884A4
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 19:54:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
+ by phobos.denx.de (Postfix) with ESMTPS id C668488914
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 20:18:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=siliconsignals.io
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=8c7e=L4=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1713808449;
- bh=l2JOD4+7FpHGC8OQONo6/njFvYmqoKRutrRaq7knIBs=;
- b=Pyaf0ceyF6SEQ+H0VQJ8f99Z1yW3OOp7zf29bWZN/9tE2AyjktXJOxu+ywbSkVOmH8VwSUeNR
- 18j6UbIYXmEL6toFFOWDUqzN+R0En2gbsMGv2Ol7O8XUjacFdtkP1EX2MGo4gL9wLT3zkKfefsd
- cFURnVS5hFPk+E9cn/il9ue4XeKV7VOUgZQCP5p/eljJZzghbrM86enX315vMxplgu7lEcNVK+Z
- ubY2aAtg6IyFycvGEmJDJA8/sgHCLjvTmfwDLtig9wlWCfziWnGuCmkmVzgh/rnzn0Dr/oB2Nhq
- hoxqgrlzy3xzCbBoTam4dO8ccTM0+shvHeHs5Mh+M8UQ==
-Message-ID: <550c0a29-c8ce-49ab-a7eb-f1127c37c786@kwiboo.se>
-Date: Mon, 22 Apr 2024 19:54:04 +0200
+ smtp.mailfrom=kishan.dudhatra@siliconsignals.io
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jS2qvKWa664WEUh1YluGBN8VDvpaLDLMVMk283h9DUnsMNAO6nSvgB1mhgZj8SmyjwcgcvgaqHh9oRTJmZb584jEPoJU7SvROcRGvz2Aw9MQfQhRlIsT7nPlb3NgHwAiRLBqapFdNhu9x3BB2n8YATGM1UyX4HV3UpWv0k9BWTBmjkksZM/WD7Lf+AFzdtvjOwdSuTCpUAjZyv7sIisLVTqKjLX4uTI+xWZd7T34vQrNFYZ5+2+ROJReDxznnl0TCBbWCjJkPG/QJsTRadW/CvEUC815+LYYwwWENPFn3fQWF/wQFmyP8toIU8PtS7YvYnODH56eofGqwTnlLT2qiA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=c8UbFhk3ShPwNk61ADgCpBDKXkUWuyjmzXTxZ5oGCu0=;
+ b=IHu5YnrlRP0Tjj0+V7fl+PEl/2Mk6G0Xof8dEK7kCoNZvm/S1z3VdBDFeHPKZmXFS9GvxTLGuY8AzkqZtcepcA0r6kmsUadYsXRbzd1FLUbi0zv/ibUbY75NZCicBmbAHZAiMUkMbPAtaOQgvDQ5lyrbG0rwsoztBA/eLHZf6ySZ4lPxJXbPEnMEeyzu8vZ8KyoPUjj2E9SDVSxz2ZxRzKWTLZ+XIl9HktGjuafPH3nDfiankdlP3lfnsPxdiZ0jAjOxwG1Vca8jWV8/KDvPp9egeGz85kd+dyEveDsG2huwQsUfy7zIU8Gbj5Mgw8XJzzQWb8xfaCIeuWv2SPS4Ig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siliconsignals.io; dmarc=pass action=none
+ header.from=siliconsignals.io; dkim=pass header.d=siliconsignals.io; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siliconsignals.io;
+Received: from MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a01:a3::10)
+ by MA0PR01MB9530.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a01:c6::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.44; Mon, 22 Apr
+ 2024 18:18:13 +0000
+Received: from MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::da4e:be76:93b8:e469]) by MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM
+ ([fe80::da4e:be76:93b8:e469%3]) with mapi id 15.20.7472.044; Mon, 22 Apr 2024
+ 18:18:13 +0000
+From: Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>
+To: u-boot@lists.denx.de
+Cc: trini@konsulko.com,
+	Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>
+Subject: [PATCH v2] cmd: gpt: initialize partition table
+Date: Mon, 22 Apr 2024 23:47:33 +0530
+Message-Id: <20240422181733.179881-1-kishan.dudhatra@siliconsignals.io>
+X-Mailer: git-send-email 2.25.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: PN3PR01CA0143.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:bf::7) To MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:a01:a3::10)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] rockchip: add support for Theobroma Systems
- SOM-RK3588-Q7 Tiger module
-To: Quentin Schulz <foss+uboot@0leil.net>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Philipp
- Tomsich <philipp.tomsich@vrull.eu>, Kever Yang
- <kever.yang@rock-chips.com>, Klaus Goger
- <klaus.goger@theobroma-systems.com>, Heiko Stuebner
- <heiko.stuebner@cherry.de>, u-boot@lists.denx.de
-References: <20240422-tiger-v1-0-8816b070d748@theobroma-systems.com>
- <20240422-tiger-v1-2-8816b070d748@theobroma-systems.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240422-tiger-v1-2-8816b070d748@theobroma-systems.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 6626a440eab47a2e036995c1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MAZPR01MB7912:EE_|MA0PR01MB9530:EE_
+X-MS-Office365-Filtering-Correlation-Id: 11b236c1-1556-4929-949d-08dc62f89272
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?0FMTmW7YQfwMgu8DzL3s8gbIzQHM3M2FOUyyaje/n6kxsHve5s0+vxkhHVPQ?=
+ =?us-ascii?Q?B6an/mP7UtLBtsgvQe4OjYE8UBat4eDBgXuAeRq9FH0lMLCwAyhll6GifNrp?=
+ =?us-ascii?Q?Q/IyR3v7eY708juaAht5qaNXwibA29imfxWSfKEP+yDWWfOiRGNRllX0qMCG?=
+ =?us-ascii?Q?2L4nncqMi4du1G6erutMu414gBQTOWxV70GRV3avsbiT9h5dkRHj0VtpE3Wt?=
+ =?us-ascii?Q?dXnR8limJdAuYStOxtCyCRwaSJzS51kKW6x1Dz61JNRfvYhNISpoAaS9Gcan?=
+ =?us-ascii?Q?37X2ltu4gBNz9ejbWonvV3kj6n1zs3Kv038zXSjY2O96mV64snyNsktB6/P5?=
+ =?us-ascii?Q?qNd2nozfNIAhQopovDuygJGormrRPGGrpd1BMYVMy5zsOsLw8NQqeNbLMNYv?=
+ =?us-ascii?Q?Ai9zMTPUFpUyQRv2J7KZZwtDgCA+zLMCndELkWQmpB/knQ/q3zdnkJRxpNtP?=
+ =?us-ascii?Q?rjYneJ6ocRLeQf8o9p+2p3jKy0zaNPUqNUaMGUeGSQpo9Mc0VVas9g0q6U5z?=
+ =?us-ascii?Q?5fW8K475C9XSiFX2yyyNchyt+ht+KTGSjllw80WsP6Fr1U+6ZEU40UrSMaWc?=
+ =?us-ascii?Q?faCIGvcL7V3clgSwvM9FmAzC/5S3p0JbDPOjCXgmh+R8M0dLfiMSdiacnEST?=
+ =?us-ascii?Q?jtj8hlOMbIeVEtHDl0OdgbmAnpqzCANeNI+EtEy9KPC6ecbu5b1WuUYqS6bi?=
+ =?us-ascii?Q?+d81s44MCYPm/ANZybAIArDDuSSvUubUGK1AQuP1ifeSlqoUX24Y7+u58PV5?=
+ =?us-ascii?Q?x0OeY5+9dpuETe6g+IvAKipbI9a2NxUdd97RmbDsFdDxTqz769P10z81x5bb?=
+ =?us-ascii?Q?3iMcTzA5Lj3MBnuRRghK3Eo6Uyk1IlyO64NPrum5yoKOtMR9p6JCvYJkn6mg?=
+ =?us-ascii?Q?++cooCCHEHZlK5RVl3myjrqtPysiEAr9HMKpWcqzBI7ihB4Fa8JWTH1Hy03E?=
+ =?us-ascii?Q?xlJBYnWIh3vEF0i14lBEhePjXhNkuV/AFEMa/yQ+rOoSl6B8oonGCEy5Ow3R?=
+ =?us-ascii?Q?IXyMpyl0F2CyJ64EZzDvEO4SALW8F6RG7Uiaqpq57HvIbMXZf1PUqm8lYEVT?=
+ =?us-ascii?Q?146AIIn/SX71WK5/tnHuJt2mLM6Ym3NdaKqkioqUYIKEmzzycBheb3IyaqcN?=
+ =?us-ascii?Q?/eQUV3uJTGP4KLaWKTIke3ZIBfjlQk2c8VYbtJCOh6MtRaFs+2UcymCiznhz?=
+ =?us-ascii?Q?CDG7UzNBBtp07/maJxWeW0w/gsy17c9qpGTyK1qFqMoAETGwEUToSLcQc+6G?=
+ =?us-ascii?Q?OCph1Ao0MmYOSWVWzM7CDdzxVliYrkv33jpXxTT4JJ6xaaoP67BLr9uT5IXX?=
+ =?us-ascii?Q?WV2WxUj69ylmiNVkLDFj3r0o1o89pDaHk4FPGUjAK+zW9w=3D=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(52116005)(366007)(376005)(1800799015)(38350700005); DIR:OUT;
+ SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?VcTz+gaU7Sic75QmRLsJsJm/7m/35uovjNPYE4OVytFoWivgpNbWdlKNZ8KP?=
+ =?us-ascii?Q?UgZqFyfa7gycW9+LNidNFkYrAhTDoxsbqiqpwRhqmeOUFTZrOeKm5sh/GYWB?=
+ =?us-ascii?Q?u/xaJRlBQLwNZVic8Q7PV3G7rDk4SEukzS834pNlqasjNKa3UbWMyKvbdYY5?=
+ =?us-ascii?Q?b9aukdrIZjsJCXYwWTnSZ307mgpiFyHBffoiB9aFAtL42h7IQubEjivqYTid?=
+ =?us-ascii?Q?dYvU9l9Ms8NLK2AqUcs1G/lDz5VAL8nuymmXaBL/V6i/QgOZztSOmjPbwbzL?=
+ =?us-ascii?Q?zTFAEdS3rIdebrDPmRII3XjkwC2Lhrl1DHqD4uCKdCyqpmbX5Z5FHZMIo5rA?=
+ =?us-ascii?Q?2bZZCMjRbeU5Y8DlWs5RKGYuFaTEypDRtUM5vHJQUXTeZqaYGvGh4NxjVr91?=
+ =?us-ascii?Q?zqqqJq/iZqi+T9gLYhln3Ak4mL11FOUgedcMapnA5/MqbZOkkYnuWNH65X+X?=
+ =?us-ascii?Q?uDevLFm5vuckj7tLTv4zjgrl2kqugqo+qCV0Z4MTAaTVxwc4dwzGh8rxWR0x?=
+ =?us-ascii?Q?UZStSxR4m2wFDZ+EgIop9YACJvxurgY7/428hq9H149bPkMZU5nCD2HWvxSk?=
+ =?us-ascii?Q?cPCDYy5+zfsCvo1lbogAfzsA70+b666nulFGIJfpz1xmi1220Vz237jKLbE0?=
+ =?us-ascii?Q?v0RwBQgnlZwsPNWXGUbll2J0Q1u+6HlPlLiKr2bBoj5oAmT4xqyn/Dt0r7DW?=
+ =?us-ascii?Q?8WeyZzBYFQofGFRHIJXqll9npPt/azKIduNZEtissekRmzrSX2oHpJ9QRM0F?=
+ =?us-ascii?Q?MyHojjeXJmCsTFazhwgqlja0BvnY6HC7ibizDgIi9e68jPJLEkLycJaD4DRU?=
+ =?us-ascii?Q?bFRlp9kzsyxee90fRrUbd+9+fQSZ/J4AdA5H9oVjTWPsUIWePNqCqZLVsyaG?=
+ =?us-ascii?Q?MGcJ+J72cpTP1Z+nNiL1ylKULfXG6baNjxOut9JgtiC7Wi77HF7LZa2VUw8E?=
+ =?us-ascii?Q?V/zlNhvFP+TTp4vFNLJe9nLvxUBiAxBMjM2TJe0gHDLSOMW0ssE6sP8wtJ4f?=
+ =?us-ascii?Q?hB2IaODJMrAX+gKTZ/Z9gp+KnkMn8CLkkFqQfG7BPeMaqIW6eJzkPeLax2Rd?=
+ =?us-ascii?Q?dOArkKzvN8lTaO0IYoCaOQJyIz4wCbtmjstY3Ru67S7nbLJM/J2A3lft+JtS?=
+ =?us-ascii?Q?CmzsLx8XqDoO26uS8jJ4uNR3h7wINKazlV1TLLCXv3YPRwLQlHiHu+Prxl+N?=
+ =?us-ascii?Q?rz+6ihIEshaPlEviE11X9/+ftauZa/4Fy7nxmfyWgMcHgbI0fEu932eoY8tM?=
+ =?us-ascii?Q?grM8xl9dBbU4GkI3PD+i5AJ+/RW78rL/B/EFpJ7iIaKWoJIEriMTvMEXOdiX?=
+ =?us-ascii?Q?YfYfVQoobvTzn9CUungKi++WBIkXn422MfDVb6h5nx/3N4Gz3gCFxKUAoK7P?=
+ =?us-ascii?Q?tYgTigdjwfw8woQYOaotXiftimvoBavpcy2O/ny26jcauVDiAgq/YbJk7MjE?=
+ =?us-ascii?Q?mFcY8BUgqS3N42sdwWhH5olxL3DFqGe8O+34bNiUU5Nz/xfIeSeeJShANSV4?=
+ =?us-ascii?Q?qld+fTEgCbY6hSot4xCQkLxZIvXgzL+38EkEFa0l7+SjttxTDIHGumwqLMSU?=
+ =?us-ascii?Q?JGOAq5KuprreY5ido65B0SUS2xBvTG2B3o4rLIGOzbZD09TwvqdZV1Kidl22?=
+ =?us-ascii?Q?8BWwULbJtXmhCJXuT0ZLxN8=3D?=
+X-OriginatorOrg: siliconsignals.io
+X-MS-Exchange-CrossTenant-Network-Message-Id: 11b236c1-1556-4929-949d-08dc62f89272
+X-MS-Exchange-CrossTenant-AuthSource: MAZPR01MB7912.INDPRD01.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Apr 2024 18:18:13.0437 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 7ec5089e-a433-4bd1-a638-82ee62e21d37
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: hyY0ReGwFkojbrR0BA/o9ZucoPbd6mzVtctKZlxAn4NpXr/dr7DEWJ5mz65/7LEmolpIAzgcqyT3X9neNnR36HaibHH2Yam052MEMjGbcoBXWafvIS6YaQWAytUOG97e
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA0PR01MB9530
+X-Mailman-Approved-At: Mon, 22 Apr 2024 20:20:24 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,267 +148,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Change in v2:
+	- Fix applies to all block devices, not just MMC.
 
-On 2024-04-22 18:41, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-> 
-> The RK3588-Q7 SoM is a Qseven-compatible (70mm x 70mm, MXM-230
-> connector) system-on-module from Theobroma Systems, featuring the
-> Rockchip RK3588.
-> 
-> It provides the following feature set:
->  * up to 16GB LPDDR4x
->  * on-module eMMC
->  * SD card (on a baseboard) via edge connector
->  * Gigabit Ethernet with on-module GbE PHY
->  * HDMI/eDP
->  * MIPI-DSI
->  * 4x MIPI-CSI (3x on FPC connectors, 1x over Q7)
->  * HDMI input over FPC connector
->  * CAN
->  * USB
->    - 1x USB 3.0 dual-role (direct connection)
->    - 2x USB 3.0 host + 1x USB 2.0 host
->  * PCIe
->    - 1x PCIe 2.1 Gen3, 4 lanes
->    - 2xSATA / 2x PCIe 2.1 Gen1, 2 lanes
->  * on-module ATtiny816 companion controller, implementing:
->    - low-power RTC functionality (ISL1208 emulation)
->    - fan controller (AMC6821 emulation)
->   * on-module Secure Element with Global Platform 2.2.1 compliant
->     JavaCard environment
-> 
-> The support is added for Tiger on Haikou devkit, similarly to RK3399
-> Puma and PX30 Ringneck.
-> 
-> The DTS and DTSI are taken from upstream Linux kernel v6.9-rc4.
-> 
-> Cc: Quentin Schulz <foss+uboot@0leil.net>
-> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-> ---
->  arch/arm/dts/Makefile                              |   1 +
->  arch/arm/dts/rk3588-tiger-haikou-u-boot.dtsi       |  54 ++
->  arch/arm/dts/rk3588-tiger-haikou.dts               | 266 ++++++++
->  arch/arm/dts/rk3588-tiger.dtsi                     | 690 +++++++++++++++++++++
->  arch/arm/mach-rockchip/rk3588/Kconfig              |  31 +
->  board/theobroma-systems/tiger_rk3588/Kconfig       |  16 +
->  board/theobroma-systems/tiger_rk3588/MAINTAINERS   |  13 +
->  board/theobroma-systems/tiger_rk3588/Makefile      |  10 +
->  .../theobroma-systems/tiger_rk3588/tiger_rk3588.c  |  53 ++
->  configs/tiger-rk3588_defconfig                     | 114 ++++
->  doc/board/rockchip/rockchip.rst                    |   1 +
->  doc/board/theobroma-systems/index.rst              |   1 +
->  doc/board/theobroma-systems/tiger_rk3588.rst       | 102 +++
->  include/configs/tiger_rk3588.h                     |  15 +
->  14 files changed, 1367 insertions(+)
-> 
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index b1c9c6222e5..ef901642a0a 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -180,6 +180,7 @@ dtb-$(CONFIG_ROCKCHIP_RK3588) += \
->  	rk3588-quartzpro64.dtb \
->  	rk3588s-rock-5a.dtb \
->  	rk3588-rock-5b.dtb \
-> +	rk3588-tiger-haikou.dtb \
->  	rk3588-turing-rk1.dtb
->  
->  dtb-$(CONFIG_ROCKCHIP_RV1108) += \
-> diff --git a/arch/arm/dts/rk3588-tiger-haikou-u-boot.dtsi b/arch/arm/dts/rk3588-tiger-haikou-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..4259399193a
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3588-tiger-haikou-u-boot.dtsi
-> @@ -0,0 +1,54 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * Copyright (c) 2024 Theobroma Systems Design und Consulting GmbH
-> + */
-> +
-> +#include "rk3588-u-boot.dtsi"
-> +
-> +/ {
-> +	chosen {
-> +		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> +	};
-> +};
-> +
-> +&emmc_pwrseq {
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
-> +};
-> +
-> +&emmc_reset {
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
-> +};
-> +
-> +&gpio2 {
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
-> +};
-> +
-> +&sdhci {
-> +	/* U-Boot currently cannot handle anything below HS200 for eMMC on RK3588 */
-> +	/delete-property/ mmc-ddr-1_8v;
-> +	/delete-property/ cap-mmc-highspeed;
-> +};
-> +
-> +/* Q7 USB P0 */
-> +&u2phy1 {
-> +	status = "okay";
-> +};
-> +
-> +&u2phy1_otg {
-> +	status = "okay";
-> +};
-> +
-> +&usbdp_phy1 {
-> +	status = "okay";
-> +};
-> +
-> +&usbdp_phy1_u3 {
-> +	status = "okay";
-> +};
-> +
-> +&usb_host1_xhci {
-> +	status = "okay";
-> +};
+If partition init is not completed within the gpt write,
+the gpt partition list will not be updated.
 
-Following should be added to possible fix uart2 pinctrl in SPL:
+Signed-off-by: Kishan Dudhatra <kishan.dudhatra@siliconsignals.io>
 
-  &uart2m2_xfer {
-	bootph-all;
-  };
+diff --git a/cmd/gpt.c b/cmd/gpt.c
+index d7e96529a6..7aaf1889a5 100644
+--- a/cmd/gpt.c
++++ b/cmd/gpt.c
+@@ -643,6 +643,10 @@ static int gpt_default(struct blk_desc *blk_dev_desc, const char *str_part)
+ 	free(str_disk_guid);
+ 	free(partitions);
+ 
++	/* initialize partition table */
++	if (blk_enabled())
++		part_init(blk_dev_desc);
++
+ 	return ret;
+ }
+ 
+-- 
+2.34.1
 
-[snip]
-
-> diff --git a/configs/tiger-rk3588_defconfig b/configs/tiger-rk3588_defconfig
-> new file mode 100644
-> index 00000000000..6545445bba1
-> --- /dev/null
-> +++ b/configs/tiger-rk3588_defconfig
-> @@ -0,0 +1,114 @@
-> +CONFIG_ARM=y
-> +CONFIG_SKIP_LOWLEVEL_INIT=y
-> +CONFIG_COUNTER_FREQUENCY=24000000
-> +CONFIG_ARCH_ROCKCHIP=y
-> +CONFIG_SPL_GPIO=y
-> +CONFIG_SF_DEFAULT_SPEED=24000000
-> +CONFIG_SF_DEFAULT_MODE=0x2000
-> +CONFIG_ENV_SIZE=0x1f000
-> +CONFIG_DEFAULT_DEVICE_TREE="rk3588-tiger-haikou"
-> +CONFIG_ROCKCHIP_RK3588=y
-> +CONFIG_ROCKCHIP_BOOT_MODE_REG=0x0
-> +CONFIG_SPL_SERIAL=y
-> +CONFIG_DEBUG_UART_CHANNEL=2
-> +CONFIG_TARGET_TIGER_RK3588=y
-> +CONFIG_DEBUG_UART_BASE=0xfeb50000
-> +CONFIG_DEBUG_UART_CLOCK=24000000
-> +CONFIG_SYS_LOAD_ADDR=0xc00800
-> +CONFIG_DEBUG_UART=y
-> +CONFIG_FIT=y
-> +CONFIG_FIT_VERBOSE=y
-> +CONFIG_SPL_FIT_SIGNATURE=y
-> +CONFIG_SPL_LOAD_FIT=y
-> +# CONFIG_BOOTMETH_VBE is not set
-> +CONFIG_LEGACY_IMAGE_FORMAT=y
-> +CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-tiger-haikou.dtb"
-> +# CONFIG_DISPLAY_CPUINFO is not set
-> +CONFIG_DISPLAY_BOARDINFO_LATE=y
-> +CONFIG_CYCLIC=y
-> +CONFIG_SPL_MAX_SIZE=0x40000
-> +CONFIG_SPL_PAD_TO=0x7f8000
-> +# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> +CONFIG_SPL_ATF=y
-> +# CONFIG_BOOTM_NETBSD is not set
-> +# CONFIG_BOOTM_PLAN9 is not set
-> +# CONFIG_BOOTM_RTEMS is not set
-> +# CONFIG_BOOTM_VXWORKS is not set
-> +# CONFIG_CMD_ELF is not set
-> +CONFIG_CMD_ADC=y
-> +CONFIG_CMD_GPIO=y
-> +CONFIG_CMD_GPT=y
-> +CONFIG_CMD_I2C=y
-> +# CONFIG_CMD_LOADB is not set
-> +# CONFIG_CMD_LOADS is not set
-> +CONFIG_CMD_MMC=y
-> +# CONFIG_CMD_SF is not set
-> +CONFIG_CMD_USB=y
-> +# CONFIG_CMD_SETEXPR is not set
-> +# CONFIG_CMD_MII is not set
-> +# CONFIG_CMD_BLOCK_CACHE is not set
-> +# CONFIG_CMD_EFICONFIG is not set
-> +CONFIG_CMD_PMIC=y
-> +CONFIG_CMD_REGULATOR=y
-> +CONFIG_CMD_EROFS=y
-> +CONFIG_CMD_SQUASHFS=y
-> +# CONFIG_SPL_DOS_PARTITION is not set
-> +CONFIG_SPL_OF_CONTROL=y
-> +CONFIG_OF_LIVE=y
-> +# CONFIG_OF_TAG_MIGRATE is not set
-> +CONFIG_OF_SPL_REMOVE_PROPS="interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> +CONFIG_ENV_OVERWRITE=y
-> +CONFIG_ENV_IS_IN_MMC=y
-> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-> +CONFIG_SPL_DM_SEQ_ALIAS=y
-> +CONFIG_SPL_REGMAP=y
-> +CONFIG_SPL_SYSCON=y
-> +CONFIG_BUTTON=y
-> +CONFIG_BUTTON_GPIO=y
-> +CONFIG_SPL_CLK=y
-> +CONFIG_CLK_GPIO=y
-> +CONFIG_ROCKCHIP_GPIO=y
-> +CONFIG_SYS_I2C_ROCKCHIP=y
-> +CONFIG_MISC=y
-> +CONFIG_SUPPORT_EMMC_RPMB=y
-> +CONFIG_MMC_IO_VOLTAGE=y
-> +CONFIG_SPL_MMC_IO_VOLTAGE=y
-> +CONFIG_MMC_UHS_SUPPORT=y
-> +CONFIG_SPL_MMC_UHS_SUPPORT=y
-> +CONFIG_MMC_HS400_ES_SUPPORT=y
-> +CONFIG_SPL_MMC_HS400_ES_SUPPORT=y
-> +CONFIG_MMC_HS400_SUPPORT=y
-> +CONFIG_SPL_MMC_HS400_SUPPORT=y
-> +CONFIG_MMC_DW=y
-> +CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_MMC_SDHCI=y
-> +CONFIG_MMC_SDHCI_SDMA=y
-> +CONFIG_MMC_SDHCI_ROCKCHIP=y
-> +# CONFIG_SPI_FLASH is not set
-> +CONFIG_SF_DEFAULT_BUS=5
-> +CONFIG_PHY_MICREL=y
-> +CONFIG_PHY_MICREL_KSZ90X1=y
-> +CONFIG_DWC_ETH_QOS=y
-> +CONFIG_DWC_ETH_QOS_ROCKCHIP=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
-> +CONFIG_PHY_ROCKCHIP_NANENG_COMBOPHY=y
-> +CONFIG_PHY_ROCKCHIP_USBDP=y
-> +CONFIG_SPL_PINCTRL=y
-> +CONFIG_DM_PMIC=y
-> +CONFIG_PMIC_RK8XX=y
-> +CONFIG_REGULATOR_RK8XX=y
-> +CONFIG_SPL_RAM=y
-> +CONFIG_SCSI=y
-> +CONFIG_DEBUG_UART_SHIFT=2
-> +CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_ROCKCHIP_SPI=y
-> +CONFIG_SYSRESET=y
-> +CONFIG_USB=y
-> +CONFIG_USB_XHCI_HCD=y
-> +CONFIG_USB_XHCI_DWC3=y
-
-Please use USB_DWC3_GENERIC instead of USB_XHCI_DWC3.
-
-Regards,
-Jonas
-
-> +CONFIG_USB_EHCI_HCD=y
-> +CONFIG_USB_EHCI_GENERIC=y
-> +CONFIG_USB_OHCI_HCD=y
-> +CONFIG_USB_OHCI_GENERIC=y
-> +CONFIG_USB_DWC3=y
-> +CONFIG_ERRNO_STR=y
-
-[snip]
