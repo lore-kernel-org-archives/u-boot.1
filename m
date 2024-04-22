@@ -4,61 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D85C8C10F15
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:53:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A3D7C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:53:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA67F883A5;
-	Mon, 22 Apr 2024 10:53:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8B9E6883D4;
+	Mon, 22 Apr 2024 10:53:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="isMKgSuT";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="FxRAzOgc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2787B88374; Mon, 22 Apr 2024 10:53:17 +0200 (CEST)
-Received: from mail-m12783.qiye.163.com (mail-m12783.qiye.163.com
- [115.236.127.83])
+ id 53D71883DA; Mon, 22 Apr 2024 10:53:49 +0200 (CEST)
+Received: from mail-m19731116.qiye.163.com (mail-m19731116.qiye.163.com
+ [220.197.31.116])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92FC2883CF
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:53:14 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B50D88374
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:53:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=isMKgSuTq0FkKgAz+v2XTTOJLzN/kq/hos6kjzXs0lS6vATKOi4mX/cq56diqw/OOFWjyMP55TuUGU0UMfFFWqDmz3SHvq06FU34I/CTd5huu015H4njWeaNP0u/L/Jy7sL6wirxN75MvPaBUylaxcgcOl65ONG0v8O4DiLqfWE=;
+ b=FxRAzOgcwAZ1rCti03hjs2AnJOaB4JnnOGt6EO7R47aCbP7SvulbNQqXcingdTgbBzK85OiEMlFx3wtmb+jqdUaqWuZMyp6G3Kt/9n6Da1Lpq4AQo5mEX9GK0m4W37nIl5Rx+8jEfan/MFkmRq13U1yq+MI5n/eZNZoKIsgCNyw=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=/mx6clAOhGtd6z4gH5O8zDpHV+NWDO/U7NiTyIrt3uk=;
+ bh=GsJJ2r2LVL/M28mXnyw7rlwGROBU5G953Aag2hbBLZY=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 39362900326;
- Mon, 22 Apr 2024 16:52:23 +0800 (CST)
-Message-ID: <deda52f5-1946-44b3-a18c-428868299ff3@rock-chips.com>
-Date: Mon, 22 Apr 2024 16:52:22 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 3C6D99002F4;
+ Mon, 22 Apr 2024 16:53:13 +0800 (CST)
+Message-ID: <90bda00d-4a3a-4bc5-943d-b9475994be4c@rock-chips.com>
+Date: Mon, 22 Apr 2024 16:53:12 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/14] rockchip: rk3308-roc-cc: Update defconfig
+Subject: Re: [PATCH v2 14/14] rockchip: rk3308: Move cru and grf include files
+ to arch-rockchip
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Andy Yan <andy.yan@rock-chips.com>
+ Andy Yan <andy.yan@rock-chips.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
 Cc: Akash Gajjar <gajjar04akash@gmail.com>, u-boot@lists.denx.de
 References: <20240408181429.3676856-1-jonas@kwiboo.se>
- <20240408181429.3676856-13-jonas@kwiboo.se>
+ <20240408181429.3676856-15-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240408181429.3676856-13-jonas@kwiboo.se>
+In-Reply-To: <20240408181429.3676856-15-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRkfGVYdGkofS0keGU9PHklVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhlNSFZJSRlLGENPTEtPQkpVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8f05019f9803a9kunm39362900326
+X-HM-Tid: 0a8f050263c403a9kunm3c6d99002f4
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OBQ6Iyo*CDNMFDkyHD8zPhMB
- NBoaFDRVSlVKTEpITExOQk9PS0lIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOSk9PNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MUk6Gjo4GDNLMjlDKjw*Fis#
+ KB4wCwFVSlVKTEpITExOQkJPSEtDVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFNTUhNNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,21 +80,8 @@ X-Virus-Status: Clean
 
 
 On 2024/4/9 02:14, Jonas Karlman wrote:
-> Update defconfig for rk3308-roc-cc with new defaults.
->
-> Add OF_LIBFDT_OVERLAY=y to support device tree overlays.
->
-> Remove the SPL_DRIVERS_MISC=y option, no misc driver is used in SPL.
->
-> Remove BOOTDELAY=0, SYS_CONSOLE_INFO_QUIET=y and enable more CMD to
-> allow use of U-Boot cmdline.
->
-> Add DM_ETH_PHY=y and PHY_REALTEK=y to support onboard ethernet PHY.
->
-> Add PHY_ROCKCHIP_INNO_USB2=y, DM_USB_GADGET=y and remove USB_DWC2=y to
-> allow full use of USB 2.0 host and otg ports.
->
-> Enable EFI_LOADER to allow EFI boot.
+> Move cru_rk3308.h and grf_rk3308.h to arch-rockchip to match path used
+> for all other Rockchip SoCs.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -99,95 +89,106 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
-> v2: No change
+> v2: New patch
 > ---
->   configs/roc-cc-rk3308_defconfig | 35 +++++++++++++--------------------
->   1 file changed, 14 insertions(+), 21 deletions(-)
+>   .../arm/include/asm/{arch-rk3308 => arch-rockchip}/cru_rk3308.h | 0
+>   .../arm/include/asm/{arch-rk3308 => arch-rockchip}/grf_rk3308.h | 0
+>   arch/arm/mach-rockchip/rk3308/clk_rk3308.c                      | 2 +-
+>   arch/arm/mach-rockchip/rk3308/rk3308.c                          | 2 +-
+>   board/firefly/firefly-rk3308/roc_cc_rk3308.c                    | 2 +-
+>   drivers/clk/rockchip/clk_rk3308.c                               | 2 +-
+>   drivers/net/gmac_rockchip.c                                     | 2 +-
+>   drivers/ram/rockchip/sdram_rk3308.c                             | 2 +-
+>   8 files changed, 6 insertions(+), 6 deletions(-)
+>   rename arch/arm/include/asm/{arch-rk3308 => arch-rockchip}/cru_rk3308.h (100%)
+>   rename arch/arm/include/asm/{arch-rk3308 => arch-rockchip}/grf_rk3308.h (100%)
 >
-> diff --git a/configs/roc-cc-rk3308_defconfig b/configs/roc-cc-rk3308_defconfig
-> index 041fa75b9659..ef58bd657532 100644
-> --- a/configs/roc-cc-rk3308_defconfig
-> +++ b/configs/roc-cc-rk3308_defconfig
-> @@ -4,9 +4,9 @@ CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
->   CONFIG_SPL_GPIO=y
->   CONFIG_DEFAULT_DEVICE_TREE="rk3308-roc-cc"
-> +CONFIG_OF_LIBFDT_OVERLAY=y
->   CONFIG_DM_RESET=y
->   CONFIG_ROCKCHIP_RK3308=y
-> -CONFIG_SPL_DRIVERS_MISC=y
->   CONFIG_TARGET_ROC_RK3308_CC=y
->   CONFIG_DEBUG_UART_BASE=0xFF0C0000
->   CONFIG_DEBUG_UART_CLOCK=24000000
-> @@ -15,30 +15,20 @@ CONFIG_DEBUG_UART=y
->   CONFIG_ANDROID_BOOT_IMAGE=y
->   CONFIG_FIT=y
->   CONFIG_FIT_VERBOSE=y
-> -CONFIG_BOOTDELAY=0
->   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3308-roc-cc.dtb"
-> -CONFIG_SYS_CONSOLE_INFO_QUIET=y
->   # CONFIG_DISPLAY_CPUINFO is not set
-> -CONFIG_SPL_MAX_SIZE=0x20000
-> +CONFIG_SPL_MAX_SIZE=0x40000
->   CONFIG_SPL_PAD_TO=0x7f8000
->   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> -# CONFIG_CMD_BDI is not set
-> -# CONFIG_CMD_CONSOLE is not set
-> -# CONFIG_CMD_ELF is not set
-> -# CONFIG_CMD_IMI is not set
-> -# CONFIG_CMD_XIMG is not set
-> +CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
-> -# CONFIG_CMD_LOADB is not set
-> -# CONFIG_CMD_LOADS is not set
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
->   CONFIG_CMD_USB_MASS_STORAGE=y
-> -# CONFIG_CMD_ITEST is not set
-> -# CONFIG_CMD_SETEXPR is not set
-> -# CONFIG_CMD_SLEEP is not set
-> -# CONFIG_SPL_DOS_PARTITION is not set
-> -# CONFIG_ISO_PARTITION is not set
-> -CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
-> +CONFIG_CMD_RNG=y
-> +CONFIG_CMD_KASLRSEED=y
-> +CONFIG_CMD_REGULATOR=y
->   CONFIG_SPL_OF_CONTROL=y
->   CONFIG_OF_LIVE=y
->   CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> @@ -52,27 +42,30 @@ CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_SUPPORT_EMMC_RPMB=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DM_ETH_PHY=y
->   CONFIG_ETH_DESIGNWARE=y
->   CONFIG_GMAC_ROCKCHIP=y
-> -CONFIG_PHY=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
->   CONFIG_PINCTRL=y
->   CONFIG_REGULATOR_PWM=y
->   CONFIG_DM_REGULATOR_FIXED=y
->   CONFIG_SPL_DM_REGULATOR_FIXED=y
-> +CONFIG_DM_REGULATOR_GPIO=y
->   CONFIG_PWM_ROCKCHIP=y
->   CONFIG_RAM=y
->   CONFIG_BAUDRATE=1500000
->   CONFIG_DEBUG_UART_SHIFT=2
->   CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSINFO=y
->   CONFIG_SYSRESET=y
->   CONFIG_USB=y
-> +CONFIG_DM_USB_GADGET=y
->   CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
-> -CONFIG_USB_DWC2=y
->   CONFIG_USB_GADGET=y
->   CONFIG_USB_GADGET_DWC2_OTG=y
->   CONFIG_USB_GADGET_DOWNLOAD=y
-> -CONFIG_SPL_TINY_MEMSET=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
->   CONFIG_LZO=y
->   CONFIG_ERRNO_STR=y
-> -# CONFIG_EFI_LOADER is not set
+> diff --git a/arch/arm/include/asm/arch-rk3308/cru_rk3308.h b/arch/arm/include/asm/arch-rockchip/cru_rk3308.h
+> similarity index 100%
+> rename from arch/arm/include/asm/arch-rk3308/cru_rk3308.h
+> rename to arch/arm/include/asm/arch-rockchip/cru_rk3308.h
+> diff --git a/arch/arm/include/asm/arch-rk3308/grf_rk3308.h b/arch/arm/include/asm/arch-rockchip/grf_rk3308.h
+> similarity index 100%
+> rename from arch/arm/include/asm/arch-rk3308/grf_rk3308.h
+> rename to arch/arm/include/asm/arch-rockchip/grf_rk3308.h
+> diff --git a/arch/arm/mach-rockchip/rk3308/clk_rk3308.c b/arch/arm/mach-rockchip/rk3308/clk_rk3308.c
+> index ccda53380c6f..201bf661f9bb 100644
+> --- a/arch/arm/mach-rockchip/rk3308/clk_rk3308.c
+> +++ b/arch/arm/mach-rockchip/rk3308/clk_rk3308.c
+> @@ -7,7 +7,7 @@
+>   #include <dm.h>
+>   #include <syscon.h>
+>   #include <asm/arch-rockchip/clock.h>
+> -#include <asm/arch/cru_rk3308.h>
+> +#include <asm/arch-rockchip/cru_rk3308.h>
+>   #include <linux/err.h>
+>   
+>   int rockchip_get_clk(struct udevice **devp)
+> diff --git a/arch/arm/mach-rockchip/rk3308/rk3308.c b/arch/arm/mach-rockchip/rk3308/rk3308.c
+> index b3ffabc5449a..a0915c72bfa0 100644
+> --- a/arch/arm/mach-rockchip/rk3308/rk3308.c
+> +++ b/arch/arm/mach-rockchip/rk3308/rk3308.c
+> @@ -5,8 +5,8 @@
+>   #include <common.h>
+>   #include <init.h>
+>   #include <malloc.h>
+> -#include <asm/arch/grf_rk3308.h>
+>   #include <asm/arch-rockchip/bootrom.h>
+> +#include <asm/arch-rockchip/grf_rk3308.h>
+>   #include <asm/arch-rockchip/hardware.h>
+>   #include <asm/gpio.h>
+>   #include <debug_uart.h>
+> diff --git a/board/firefly/firefly-rk3308/roc_cc_rk3308.c b/board/firefly/firefly-rk3308/roc_cc_rk3308.c
+> index 99a52a77116a..af00250e118d 100644
+> --- a/board/firefly/firefly-rk3308/roc_cc_rk3308.c
+> +++ b/board/firefly/firefly-rk3308/roc_cc_rk3308.c
+> @@ -5,7 +5,7 @@
+>   
+>   #include <common.h>
+>   #include <adc.h>
+> -#include <asm/arch/grf_rk3308.h>
+> +#include <asm/arch-rockchip/grf_rk3308.h>
+>   #include <asm/arch-rockchip/hardware.h>
+>   #include <linux/bitops.h>
+>   
+> diff --git a/drivers/clk/rockchip/clk_rk3308.c b/drivers/clk/rockchip/clk_rk3308.c
+> index c46b58e31626..861648321d40 100644
+> --- a/drivers/clk/rockchip/clk_rk3308.c
+> +++ b/drivers/clk/rockchip/clk_rk3308.c
+> @@ -12,8 +12,8 @@
+>   #include <malloc.h>
+>   #include <syscon.h>
+>   #include <asm/global_data.h>
+> -#include <asm/arch/cru_rk3308.h>
+>   #include <asm/arch-rockchip/clock.h>
+> +#include <asm/arch-rockchip/cru_rk3308.h>
+>   #include <asm/arch-rockchip/hardware.h>
+>   #include <dm/device-internal.h>
+>   #include <dm/lists.h>
+> diff --git a/drivers/net/gmac_rockchip.c b/drivers/net/gmac_rockchip.c
+> index 33fc36da5077..51f835adabc3 100644
+> --- a/drivers/net/gmac_rockchip.c
+> +++ b/drivers/net/gmac_rockchip.c
+> @@ -19,7 +19,7 @@
+>   #include <asm/arch-rockchip/grf_px30.h>
+>   #include <asm/arch-rockchip/grf_rk322x.h>
+>   #include <asm/arch-rockchip/grf_rk3288.h>
+> -#include <asm/arch-rk3308/grf_rk3308.h>
+> +#include <asm/arch-rockchip/grf_rk3308.h>
+>   #include <asm/arch-rockchip/grf_rk3328.h>
+>   #include <asm/arch-rockchip/grf_rk3368.h>
+>   #include <asm/arch-rockchip/grf_rk3399.h>
+> diff --git a/drivers/ram/rockchip/sdram_rk3308.c b/drivers/ram/rockchip/sdram_rk3308.c
+> index 10828e80822a..264366291cf8 100644
+> --- a/drivers/ram/rockchip/sdram_rk3308.c
+> +++ b/drivers/ram/rockchip/sdram_rk3308.c
+> @@ -7,8 +7,8 @@
+>   #include <dm.h>
+>   #include <ram.h>
+>   #include <syscon.h>
+> -#include <asm/arch/grf_rk3308.h>
+>   #include <asm/arch-rockchip/clock.h>
+> +#include <asm/arch-rockchip/grf_rk3308.h>
+>   #include <asm/arch-rockchip/sdram.h>
+>   
+>   struct dram_info {
