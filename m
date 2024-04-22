@@ -4,86 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F799C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 13:50:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1C73C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 14:00:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 967A8883A4;
-	Mon, 22 Apr 2024 15:50:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 38581883F5;
+	Mon, 22 Apr 2024 16:00:52 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ixDs+I0/";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="C6pK2JNw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B750A883EA; Mon, 22 Apr 2024 15:50:26 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id CE557887E0; Mon, 22 Apr 2024 16:00:50 +0200 (CEST)
+Received: from madrid.collaboradmins.com (madrid.collaboradmins.com
+ [IPv6:2a00:1098:ed:100::25])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C00D3883A3
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 15:50:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E2D40883EC
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 16:00:46 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=collabora.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
+ spf=pass smtp.mailfrom=detlev.casanova@collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
+ s=mail; t=1713794446;
+ bh=FykyuRCPPRvi7iqxSVB+deHkHqV4IE/aecQAJKM1uTI=;
+ h=From:To:Cc:Subject:Date:From;
+ b=C6pK2JNwcQ7eafmNRlYe5QNnKY0IapAdfhzwjzTv56CE3S+ti0tw/vUMSOWW/8O8S
+ fgvjfqPq4V2dXTfwfB8ZM32FXvIR/JIUoRw0G+KmrK/Xf6NchLbVp/hV0pv3wEvQ3H
+ pge59rO3FYwmtd0bSpBNEEwBXVKAYXH3mTMU9jDrwMx1ljaskjyMIGcKNTaILmZOQN
+ YEpFJu9F+vFqNIVeH9yHI8k/Gp5aEvlhwGH6KSMGpetp0O0JBkl3Ng77dQbeIUF4Vz
+ oc8w6WgSsQ6FPGQbKtI68UiqAX2je3eAZ4VRqIQOPRML0ozWS8L1jbjlpqAwEOS6bv
+ pVL9EjhQSRCyQ==
+Received: from arisu.hitronhub.home (cola.collaboradmins.com [195.201.22.229])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 56F0A3F188
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 13:50:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1713793823;
- bh=O8qNYPS/WJadczqPrdiOXAMfPG+UVYmAveH7ijcE1vA=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=ixDs+I0/HtRzInL+V1T8TqMfF2HwwOqlHrVdZ+wLfQFYE+NfX4L9J6kSdBi1T+ZhM
- /4NhUEqLkrCqcio+9/tV8x8GhGkY+EtYx1jcaJOV52wvcgD/UbL0on2IlL8F/Rcla/
- eqG6TG58VKvy6lPTnWt1UGkmfV9Ltu1C0NZy6aAw1vQ3wDL/nUCHrTJMitBk1iiQjK
- oAB50YqSSlSy2m14y48xQgqv0zyi4FEjWBSZjSE6JC836PowTPmG/YIN93IlPOMQku
- Acpv7wp48F4SVKQQvMq2PHjP2WlI8aZeFR+uf6T9Z1Ft4s2lbZtPbtN0iyjXgV8wew
- BRW3h2Tiglgrw==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-419e3f83aeeso11992665e9.1
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 06:50:23 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713793822; x=1714398622;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=O8qNYPS/WJadczqPrdiOXAMfPG+UVYmAveH7ijcE1vA=;
- b=pys4QcOlXPXuPNdPzdSwWuOar+HgvOrYSexvVYN9RvXWebC++MJTnEzj691qR0IozB
- xzR/6766I2Q9551oENVes5qset6hxdEiTyQ54TyNf8AHfxFbqEcB/HnMdyzIZkNW2Y/Z
- eswUKiTTyUh33yrKaQDtwxZoRha9uOXQTkpkyfkGCMoWg/cERlDYY4aiy6Ujncx1dM4O
- NU8BPrrneKeRrL5JzkpShZQZnKYNf4iYZDE0JYH1eSTjs3/Ne8UoUcOsv7UPjYLhTzLT
- cmyAnQkKv2DymSsr6ugfWI7F9d51FhdJT4FIr5P8YoLonsv2gI68Zq0AGWCHJ+RlCKHY
- uixw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVA1RwujLKxPV9cj2B6divELFb9pNA+0zDtsok1dN+kqJo3fhXG65cHCQvR13nJ3nVrvIyJ+QDlL/1z2/ytNta+j6YDxA==
-X-Gm-Message-State: AOJu0YzbzbR2sHA/7vB+3uDdb58H06vCJiglxlHF88GjZmfzorIFZ4vN
- MeK2tuyiWHLPB4k8ZYji+zuFWxiQr/ea1i5hRG3BZj0jjOWj3pz4YKuc68aOmqBvL/MITT0Xt79
- 15CSy0SFaPRsnezFgULJzLoRO6boSoF6P7wIApJPFJztvom7veeWNk/QfvSfcNafOiek=
-X-Received: by 2002:a05:600c:138c:b0:41a:821b:37f7 with SMTP id
- u12-20020a05600c138c00b0041a821b37f7mr1349478wmf.27.1713793821986; 
- Mon, 22 Apr 2024 06:50:21 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IGMkyFZV/Ckh+qOcFgJ+sgnrGP+H7dMxjTdTlxh/JrxJMryJPmfH3qkXSAkHuPQWl/uuqZFSA==
-X-Received: by 2002:a05:600c:138c:b0:41a:821b:37f7 with SMTP id
- u12-20020a05600c138c00b0041a821b37f7mr1349465wmf.27.1713793821584; 
- Mon, 22 Apr 2024 06:50:21 -0700 (PDT)
-Received: from workstation5.fritz.box
- (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
- by smtp.gmail.com with ESMTPSA id
- a9-20020a05600c348900b0041a7cb8e96esm1985691wmq.30.2024.04.22.06.50.20
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 06:50:21 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd: CONFIG_CMD_BLOBLIST must depend on CONFIG_BLOBLIST
-Date: Mon, 22 Apr 2024 15:50:10 +0200
-Message-ID: <20240422135010.176205-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested) (Authenticated sender: detlev)
+ by madrid.collaboradmins.com (Postfix) with ESMTPSA id 9826E378001E;
+ Mon, 22 Apr 2024 14:00:44 +0000 (UTC)
+From: Detlev Casanova <detlev.casanova@collabora.com>
+To: u-boot@lists.denx.de
+Cc: Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Fabio Estevam <festevam@denx.de>,
+ Detlev Casanova <detlev.casanova@collabora.com>
+Subject: [PATCH v2 0/3] Introduce NET_PREFER_ROM_MAC_ADDR config
+Date: Mon, 22 Apr 2024 09:56:17 -0400
+Message-ID: <20240422135927.23582-1-detlev.casanova@collabora.com>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -102,36 +74,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With CONFIG_CMD_BLOBLIST=y, CONFIG_BLOBLIST=n linker errors occur:
+When there is a MAC address mismatch between ROM and environment, u-boot
+chooses the one from the environment. This config allows to prefer the
+MAC address from the ROM instead of the environment.
 
-    usr/bin/ld: cmd/bloblist.o: in function `do_bloblist_list':
-    cmd/bloblist.c:27:(.text.do_bloblist_list+0x6):
-    undefined reference to `bloblist_show_list'
+See the first commit message for details.
 
-    /usr/bin/ld: cmd/bloblist.o: in function `do_bloblist_info':
-    cmd/bloblist.c:19:(.text.do_bloblist_info+0x6):
-    undefined reference to `bloblist_show_stats'
+Changes since v1:
+ - Simplify implementation with a NET_PREFER_ROM_MAC_ADDR config
 
-Fixes: 4aed22762303 ("bloblist: Add a command")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- cmd/Kconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Detlev Casanova (3):
+  net: eth-uclass: Introduce NET_PREFER_ROM_MAC_ADDR
+  configs/rock5b: Set NET_PREFER_ROM_MAC_ADDR to y
+  net: eth-uclass: Add driver source possibility
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 42757e0cdf1..2386391daf1 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -741,7 +741,8 @@ config CMD_BINOP
- 
- config CMD_BLOBLIST
- 	bool "bloblist"
--	default y if BLOBLIST
-+	depends on BLOBLIST
-+	default y
- 	help
- 	  Show information about the bloblist, a collection of binary blobs
- 	  held in memory that persist between SPL and U-Boot. In the case of
+ configs/rock5b-rk3588_defconfig |  1 +
+ net/Kconfig                     |  7 +++++++
+ net/eth-uclass.c                | 17 +++++++++++++----
+ 3 files changed, 21 insertions(+), 4 deletions(-)
+
 -- 
-2.43.0
+2.43.2
 
