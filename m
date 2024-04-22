@@ -4,72 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59480C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:38:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7051DC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:40:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E51BC883BB;
-	Mon, 22 Apr 2024 10:38:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F259D88352;
+	Mon, 22 Apr 2024 10:39:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="IzxpWMWl";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="NMDmp4Hj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7AAF88346; Mon, 22 Apr 2024 10:38:09 +0200 (CEST)
-Received: from mail-m24106.xmail.ntesmail.com (mail-m24106.xmail.ntesmail.com
- [45.195.24.106])
+ id 37C9A88379; Mon, 22 Apr 2024 10:39:58 +0200 (CEST)
+Received: from mail-m25475.xmail.ntesmail.com (mail-m25475.xmail.ntesmail.com
+ [103.129.254.75])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A6FE883D4
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:38:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7759388346
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:39:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=IzxpWMWlJOPD48V19ZP2wt8a1OtyMV2xfGxRYU4UFbePadOUhlL+A1b+CTHwMkF3VQykiZkbYx6Q2itLLQPIvRd69tBXFDM1pDvqbhcJzHShRUF2ApArcl4iW9B0LDXfEGkpgDO5kemdr3jgBsf4loQGMGEmkaztghWw36lpnQU=;
+ b=NMDmp4HjtIDaw2Au3XMa6Z+CtFhhh/mNfdw44yHPrmI9nxFiRXLODFkBAzsAq8dyVHqB/VcJvVgL0U83dpiFFeewuFGeSIt7ConhPbRJwIB2dX4j11EV9GC6zQ8ENbfIFszpn5wdfFs/DB6OTgRjrYHjmf8jVFs64xnh+23GE8M=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=5WjfQjxe9Afv6NxtYZuKi3CRvStprbqzK8pHFIiOEQE=;
+ bh=NSPdBYXAK0Wjvp4HTZ/H7AoC0pyvoyB7Kfa/vOP3m0M=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 11C5E900315;
- Mon, 22 Apr 2024 16:37:48 +0800 (CST)
-Message-ID: <0bcf90bc-9e20-4bdb-86b0-71a16636b518@rock-chips.com>
-Date: Mon, 22 Apr 2024 16:37:47 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 0439C9002FD;
+ Mon, 22 Apr 2024 16:39:47 +0800 (CST)
+Message-ID: <314785e2-82ad-4f07-91cd-12a38eb519b0@rock-chips.com>
+Date: Mon, 22 Apr 2024 16:39:47 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 11/11] rockchip: rk356x: use DRAM banks from ATAGS
-To: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>,
- Eugen Hristev <eugen.hristev@collabora.com>, Andy Yan <andyshrk@163.com>,
- Elon Zhang <zhangzj@rock-chips.com>, Joshua Riek <jjriek@verizon.net>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Heiko Stuebner <heiko.stuebner@cherry.de>, Jagan Teki <jagan@edgeble.ai>,
- Frank Wunderlich <frank-w@public-files.de>,
- Joseph Chen <chenjh@rock-chips.com>, Tianling Shen <cnsztl@gmail.com>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Akash Gajjar <gajjar04akash@gmail.com>
-Cc: u-boot@lists.denx.de, Chris Morgan <macromorgan@hotmail.com>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
-References: <20240415-rk35xx-dram-atags-v3-0-5bc5475b3c0d@theobroma-systems.com>
- <20240415-rk35xx-dram-atags-v3-11-5bc5475b3c0d@theobroma-systems.com>
+Subject: Re: [PATCH v2] mmc: rockchip_sdhci: Fix 4 blocks PIO mode read limit
+ for RK35xx
+To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
+ Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
+ Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
+References: <20240410143052.227908-1-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240415-rk35xx-dram-atags-v3-11-5bc5475b3c0d@theobroma-systems.com>
+In-Reply-To: <20240410143052.227908-1-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR0eTFYZQh9PSx9JHk1JTExVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQh9PHlYYHUtJHUwZTU5KGk9VEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8f04f44a7a03a9kunm11c5e900315
+X-HM-Tid: 0a8f04f619ed03a9kunm0439c9002fd
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PVE6SRw*KzMDMjocNA0XFSg8
- LRAaCQFVSlVKTEpITExOS0xLT0hNVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSUJCSjcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NUk6Hzo*FzNMGDoCDkg*Szc9
+ EhAaCU1VSlVKTEpITExOSkNDQk1JVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPQ0pONwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,245 +77,85 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/4/15 22:17, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+On 2024/4/10 22:30, Jonas Karlman wrote:
+> The commit 2cc6cde647e2 ("mmc: rockchip_sdhci: Limit number of blocks
+> read in a single command") introduced a limit of number of blocks to
+> read to fix a Data End Bit Error on RK3568 and RK3588. This had a side
+> affect of significant slowing down reading FIT from eMMC.
 >
-> RK356x-based devices now support creating DRAM banks with proper holes
-> by reading the ATAGS from Rockchip TPL blob, so let's use that mechanism
-> instead.
+> After the commit 6de9d7b2f13c ("rockchip: rk35xx: Enable eMMC HS200 mode
+> by default") the limit of number of blocks to read workaround is no
+> longer necessary and at HS200+ a Data End Bit Error is no longer
+> happening using PIO mode.
 >
-> The CONFIG_NR_DRAM_BANK now defaults to 10 which is a safe bet for
-> reading banks from ATAGS, so let's use the default value instead.
+> Change this limitation to allow reading more than 4 blocks with a single
+> CMD18 command in PIO mode at HS200+ speed, keep using the 4 blocks
+> limitation when loadig FIT from eMMC at lower speed than HS200.
 >
-> Co-developed-by: Chris Morgan <macromorgan@hotmail.com>
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> Fixes: 2cc6cde647e2 ("mmc: rockchip_sdhci: Limit number of blocks read in a single command")
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
->   configs/anbernic-rgxx3-rk3566_defconfig   | 1 -
->   configs/bpi-r2-pro-rk3568_defconfig       | 1 -
->   configs/evb-rk3568_defconfig              | 1 -
->   configs/generic-rk3568_defconfig          | 1 -
->   configs/lubancat-2-rk3568_defconfig       | 1 -
->   configs/nanopi-r5c-rk3568_defconfig       | 1 -
->   configs/nanopi-r5s-rk3568_defconfig       | 1 -
->   configs/odroid-m1-rk3568_defconfig        | 1 -
->   configs/pinetab2-rk3566_defconfig         | 1 -
->   configs/quartz64-a-rk3566_defconfig       | 1 -
->   configs/quartz64-b-rk3566_defconfig       | 1 -
->   configs/radxa-cm3-io-rk3566_defconfig     | 1 -
->   configs/radxa-e25-rk3568_defconfig        | 1 -
->   configs/rock-3a-rk3568_defconfig          | 1 -
->   configs/soquartz-blade-rk3566_defconfig   | 1 -
->   configs/soquartz-cm4-rk3566_defconfig     | 1 -
->   configs/soquartz-model-a-rk3566_defconfig | 1 -
->   17 files changed, 17 deletions(-)
+> v2: Move cfg->b_max configuration to set_ios_post() ops
 >
-> diff --git a/configs/anbernic-rgxx3-rk3566_defconfig b/configs/anbernic-rgxx3-rk3566_defconfig
-> index c8c9238f96f..aa3809e00c1 100644
-> --- a/configs/anbernic-rgxx3-rk3566_defconfig
-> +++ b/configs/anbernic-rgxx3-rk3566_defconfig
-> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
->   CONFIG_SPL_GPIO=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-anbernic-rgxx3"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_ROCKCHIP_BACK_TO_BROM=y
-> diff --git a/configs/bpi-r2-pro-rk3568_defconfig b/configs/bpi-r2-pro-rk3568_defconfig
-> index 5cc95241ba4..0f85dc63c55 100644
-> --- a/configs/bpi-r2-pro-rk3568_defconfig
-> +++ b/configs/bpi-r2-pro-rk3568_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-bpi-r2-pro"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/evb-rk3568_defconfig b/configs/evb-rk3568_defconfig
-> index 6e8061f5f48..f2f429d33c4 100644
-> --- a/configs/evb-rk3568_defconfig
-> +++ b/configs/evb-rk3568_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-evb"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
-> index e7d5e55bbfd..8f4a6259a27 100644
-> --- a/configs/generic-rk3568_defconfig
-> +++ b/configs/generic-rk3568_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-generic"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/lubancat-2-rk3568_defconfig b/configs/lubancat-2-rk3568_defconfig
-> index 1c50a0ccbe6..ea67b6a7286 100644
-> --- a/configs/lubancat-2-rk3568_defconfig
-> +++ b/configs/lubancat-2-rk3568_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-lubancat-2"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/nanopi-r5c-rk3568_defconfig b/configs/nanopi-r5c-rk3568_defconfig
-> index 0f1a9461a0c..00743b7f926 100644
-> --- a/configs/nanopi-r5c-rk3568_defconfig
-> +++ b/configs/nanopi-r5c-rk3568_defconfig
-> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_SYS_HAS_NONCACHED_MEMORY=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-nanopi-r5c"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/nanopi-r5s-rk3568_defconfig b/configs/nanopi-r5s-rk3568_defconfig
-> index 4ebf0cc9ee8..91e3a19dea6 100644
-> --- a/configs/nanopi-r5s-rk3568_defconfig
-> +++ b/configs/nanopi-r5s-rk3568_defconfig
-> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_SYS_HAS_NONCACHED_MEMORY=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-nanopi-r5s"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/odroid-m1-rk3568_defconfig b/configs/odroid-m1-rk3568_defconfig
-> index b5ed9e4bc98..e749f9af9d2 100644
-> --- a/configs/odroid-m1-rk3568_defconfig
-> +++ b/configs/odroid-m1-rk3568_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SF_DEFAULT_SPEED=24000000
->   CONFIG_SF_DEFAULT_MODE=0x1000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-odroid-m1"
-> diff --git a/configs/pinetab2-rk3566_defconfig b/configs/pinetab2-rk3566_defconfig
-> index bc7a77aa52f..940aa16a465 100644
-> --- a/configs/pinetab2-rk3566_defconfig
-> +++ b/configs/pinetab2-rk3566_defconfig
-> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
->   CONFIG_SPL_GPIO=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SF_DEFAULT_MODE=0x1000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-pinetab2-v2.0"
->   CONFIG_ROCKCHIP_RK3568=y
-> diff --git a/configs/quartz64-a-rk3566_defconfig b/configs/quartz64-a-rk3566_defconfig
-> index fef80439d89..535e34fb990 100644
-> --- a/configs/quartz64-a-rk3566_defconfig
-> +++ b/configs/quartz64-a-rk3566_defconfig
-> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
->   CONFIG_SPL_GPIO=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SF_DEFAULT_SPEED=24000000
->   CONFIG_SF_DEFAULT_MODE=0x2000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-quartz64-a"
-> diff --git a/configs/quartz64-b-rk3566_defconfig b/configs/quartz64-b-rk3566_defconfig
-> index bb541ed1af6..e197defd3af 100644
-> --- a/configs/quartz64-b-rk3566_defconfig
-> +++ b/configs/quartz64-b-rk3566_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SF_DEFAULT_SPEED=24000000
->   CONFIG_SF_DEFAULT_MODE=0x2000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-quartz64-b"
-> diff --git a/configs/radxa-cm3-io-rk3566_defconfig b/configs/radxa-cm3-io-rk3566_defconfig
-> index bf61db44d3a..d23ab57ada5 100644
-> --- a/configs/radxa-cm3-io-rk3566_defconfig
-> +++ b/configs/radxa-cm3-io-rk3566_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-radxa-cm3-io"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/radxa-e25-rk3568_defconfig b/configs/radxa-e25-rk3568_defconfig
-> index 43aa8ec20e4..dbb77b85f5d 100644
-> --- a/configs/radxa-e25-rk3568_defconfig
-> +++ b/configs/radxa-e25-rk3568_defconfig
-> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_SYS_HAS_NONCACHED_MEMORY=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-radxa-e25"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/rock-3a-rk3568_defconfig b/configs/rock-3a-rk3568_defconfig
-> index c161bc974fb..b06b57fe0bf 100644
-> --- a/configs/rock-3a-rk3568_defconfig
-> +++ b/configs/rock-3a-rk3568_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SF_DEFAULT_SPEED=24000000
->   CONFIG_SF_DEFAULT_MODE=0x2000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-rock-3a"
-> diff --git a/configs/soquartz-blade-rk3566_defconfig b/configs/soquartz-blade-rk3566_defconfig
-> index b9ac6b9f33d..9d565c162ef 100644
-> --- a/configs/soquartz-blade-rk3566_defconfig
-> +++ b/configs/soquartz-blade-rk3566_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-soquartz-blade"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/soquartz-cm4-rk3566_defconfig b/configs/soquartz-cm4-rk3566_defconfig
-> index e87a6392c52..fe2c771db71 100644
-> --- a/configs/soquartz-cm4-rk3566_defconfig
-> +++ b/configs/soquartz-cm4-rk3566_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-soquartz-cm4"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/soquartz-model-a-rk3566_defconfig b/configs/soquartz-model-a-rk3566_defconfig
-> index b2c1684515e..db9eee21751 100644
-> --- a/configs/soquartz-model-a-rk3566_defconfig
-> +++ b/configs/soquartz-model-a-rk3566_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-soquartz-model-a"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
+> This significantly speed up FIT loading from eMMC on RK3588 boards with
+> a mmc-hs200 prop in the sdhci node, and boards without a mmc-hs200 prop
+> continue to work.
+> ---
+>   drivers/mmc/rockchip_sdhci.c | 26 ++++++++++++++++----------
+>   1 file changed, 16 insertions(+), 10 deletions(-)
 >
+> diff --git a/drivers/mmc/rockchip_sdhci.c b/drivers/mmc/rockchip_sdhci.c
+> index 706fb1235796..c889c7bc9855 100644
+> --- a/drivers/mmc/rockchip_sdhci.c
+> +++ b/drivers/mmc/rockchip_sdhci.c
+> @@ -391,6 +391,8 @@ static int rk3568_sdhci_config_dll(struct sdhci_host *host, u32 clock, bool enab
+>   static int rk3568_sdhci_set_ios_post(struct sdhci_host *host)
+>   {
+>   	struct mmc *mmc = host->mmc;
+> +	struct rockchip_sdhc_plat *plat = dev_get_plat(mmc->dev);
+> +	struct mmc_config *cfg = &plat->cfg;
+>   	u32 reg;
+>   
+>   	reg = sdhci_readw(host, SDHCI_HOST_CONTROL2);
+> @@ -437,6 +439,20 @@ static int rk3568_sdhci_set_ios_post(struct sdhci_host *host)
+>   
+>   	sdhci_writew(host, reg, DWCMSHC_EMMC_EMMC_CTRL);
+>   
+> +	/*
+> +	 * Reading more than 4 blocks with a single CMD18 command in PIO mode
+> +	 * triggers Data End Bit Error using a slower mode than HS200. Limit to
+> +	 * reading max 4 blocks in one command when using PIO mode.
+> +	 */
+> +	if (!(host->flags & USE_DMA)) {
+> +		if (mmc->selected_mode == MMC_HS_200 ||
+> +		    mmc->selected_mode == MMC_HS_400 ||
+> +		    mmc->selected_mode == MMC_HS_400_ES)
+> +			cfg->b_max = CONFIG_SYS_MMC_MAX_BLK_COUNT;
+> +		else
+> +			cfg->b_max = 4;
+> +	}
+> +
+>   	return 0;
+>   }
+>   
+> @@ -598,16 +614,6 @@ static int rockchip_sdhci_probe(struct udevice *dev)
+>   	    dev_read_bool(dev, "u-boot,spl-fifo-mode"))
+>   		host->flags &= ~USE_DMA;
+>   
+> -	/*
+> -	 * Reading more than 4 blocks with a single CMD18 command in PIO mode
+> -	 * triggers Data End Bit Error on RK3568 and RK3588. Limit to reading
+> -	 * max 4 blocks in one command when using PIO mode.
+> -	 */
+> -	if (!(host->flags & USE_DMA) &&
+> -	    (device_is_compatible(dev, "rockchip,rk3568-dwcmshc") ||
+> -	     device_is_compatible(dev, "rockchip,rk3588-dwcmshc")))
+> -		cfg->b_max = 4;
+> -
+>   	return sdhci_probe(dev);
+>   }
+>   
