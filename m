@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 378D6C10F15
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:45:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F382C07E8F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:46:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B907987E53;
-	Mon, 22 Apr 2024 10:45:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 273B688376;
+	Mon, 22 Apr 2024 10:46:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="XLdvS/hc";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="CkQDcIe/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADE498717A; Mon, 22 Apr 2024 10:45:51 +0200 (CEST)
-Received: from mail-m32109.qiye.163.com (mail-m32109.qiye.163.com
- [220.197.32.109])
+ id D3A1288374; Mon, 22 Apr 2024 10:46:02 +0200 (CEST)
+Received: from mail-m155100.qiye.163.com (mail-m155100.qiye.163.com
+ [101.71.155.100])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA4BA88290
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:45:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 604918717A
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:46:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=XLdvS/hcws7phHhp5RtOEPSxLi99pb4qdKzEAoYwOeM3w5Pplco7t394fhvv/QBK0nNFuYIhPquj0nky3+0OGpOXatvQEooczjnVnzrlsDNMIthZbxHnz5dGWsB0mKQw+DZA6Cx+Gm9ilU9H0sRN8OPuh4n3w7cOhJRtdJua0C4=;
+ b=CkQDcIe/6E7jvGb9pe1m7T7w2ZDiOV+bm2uT6EIuccNMUk7X3oBRfB0+YNmhg0bOmqMImssJxJHuJ4K9+RDzUTt1hFyf8jHb2POTrY5szUNTGNlinJuoPoKaJUJzb6PKZmePrmFRIDCgtfkvAC9+S6vTkUY+DIyCZDI37UR/QUg=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=Ghc0kxGdqwcDzN9H2bN87MKYchMxtkVotcPnsutakk8=;
+ bh=J0677vjdnBh8tQXnj5z/0HHrLNL/9YfLyfVq2mj7fu4=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 9CBE5900314;
- Mon, 22 Apr 2024 16:45:38 +0800 (CST)
-Message-ID: <e4c3adfa-8cfd-4f38-8164-db3eadecd7d4@rock-chips.com>
-Date: Mon, 22 Apr 2024 16:45:38 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 86B239002A1;
+ Mon, 22 Apr 2024 16:45:53 +0800 (CST)
+Message-ID: <63464021-44d6-4c13-8234-dd5627eecb6e@rock-chips.com>
+Date: Mon, 22 Apr 2024 16:45:53 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 07/14] clk: rockchip: rk3308: Add support for
- SCLK_RTC32K clock
+Subject: Re: [PATCH v2 08/14] clk: rockchip: rk3308: Add dummy support for
+ USB480M clock
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: Andy Yan <andy.yan@rock-chips.com>, Akash Gajjar
- <gajjar04akash@gmail.com>, u-boot@lists.denx.de,
- Finley Xiao <finley.xiao@rock-chips.com>
+ <gajjar04akash@gmail.com>, u-boot@lists.denx.de
 References: <20240408181429.3676856-1-jonas@kwiboo.se>
- <20240408181429.3676856-8-jonas@kwiboo.se>
+ <20240408181429.3676856-9-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240408181429.3676856-8-jonas@kwiboo.se>
+In-Reply-To: <20240408181429.3676856-9-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ01NSVZOQxoeHR1DSEkdThhVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUlLT1ZDTE1DT0pDHR5JSEtVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8f04fb740f03a9kunm9cbe5900314
+X-HM-Tid: 0a8f04fbade103a9kunm86b239002a1
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PRA6Thw5AjMBNjopQiErEhwf
- UUwwFC1VSlVKTEpITExOTk9LTUJIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFMS0lJNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Kwg6Qyo6MzNLPjodKxIpNh46
+ PjdPCy9VSlVKTEpITExOTk5PT01OVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTUNCNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,12 +79,8 @@ X-Virus-Status: Clean
 
 
 On 2024/4/9 02:14, Jonas Karlman wrote:
-> From: Finley Xiao <finley.xiao@rock-chips.com>
+> Add dummy support for setting parent of USB480M clock.
 >
-> Add support to get and set the SCLK_RTC32K clock rate.
->
-> Signed-off-by: Finley Xiao <finley.xiao@rock-chips.com>
-> [jonas@kwiboo.se: Update commit message]
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
@@ -94,159 +89,28 @@ Thanks,
 > ---
 > v2: No change
 > ---
->   arch/arm/include/asm/arch-rk3308/cru_rk3308.h | 14 +++
->   drivers/clk/rockchip/clk_rk3308.c             | 95 +++++++++++++++++++
->   2 files changed, 109 insertions(+)
+>   drivers/clk/rockchip/clk_rk3308.c | 4 ++++
+>   1 file changed, 4 insertions(+)
 >
-> diff --git a/arch/arm/include/asm/arch-rk3308/cru_rk3308.h b/arch/arm/include/asm/arch-rk3308/cru_rk3308.h
-> index 84b63e4d5682..091ae82d7cc1 100644
-> --- a/arch/arm/include/asm/arch-rk3308/cru_rk3308.h
-> +++ b/arch/arm/include/asm/arch-rk3308/cru_rk3308.h
-> @@ -147,6 +147,20 @@ enum {
->   	CORE_DIV_CON_SHIFT	= 0,
->   	CORE_DIV_CON_MASK	= 0x0f << CORE_DIV_CON_SHIFT,
->   
-> +	/* CRU_CLK_SEL2_CON */
-> +	CLK_RTC32K_SEL_SHIFT	= 8,
-> +	CLK_RTC32K_SEL_MASK	= 3 << CLK_RTC32K_SEL_SHIFT,
-> +	CLK_RTC32K_IO		= 0,
-> +	CLK_RTC32K_PVTM,
-> +	CLK_RTC32K_FRAC_DIV,
-> +	CLK_RTC32K_DIV,
-> +
-> +	/* CRU_CLK_SEL3_CON */
-> +	CLK_RTC32K_FRAC_NUMERATOR_SHIFT		= 16,
-> +	CLK_RTC32K_FRAC_NUMERATOR_MASK		= 0xffff << 16,
-> +	CLK_RTC32K_FRAC_DENOMINATOR_SHIFT	= 0,
-> +	CLK_RTC32K_FRAC_DENOMINATOR_MASK	= 0xffff,
-> +
->   	/* CRU_CLK_SEL5_CON */
->   	BUS_PLL_SEL_SHIFT	= 6,
->   	BUS_PLL_SEL_MASK	= 0x3 << BUS_PLL_SEL_SHIFT,
 > diff --git a/drivers/clk/rockchip/clk_rk3308.c b/drivers/clk/rockchip/clk_rk3308.c
-> index 7755b0161118..7515fc8bb244 100644
+> index 7515fc8bb244..c46b58e31626 100644
 > --- a/drivers/clk/rockchip/clk_rk3308.c
 > +++ b/drivers/clk/rockchip/clk_rk3308.c
-> @@ -65,6 +65,57 @@ static struct rockchip_pll_clock rk3308_pll_clks[] = {
->   		      RK3308_MODE_CON, 6, 10, 0, NULL),
->   };
->   
-> +/*
-> + *
-> + * rational_best_approximation(31415, 10000,
-> + *		(1 << 8) - 1, (1 << 5) - 1, &n, &d);
-> + *
-> + * you may look at given_numerator as a fixed point number,
-> + * with the fractional part size described in given_denominator.
-> + *
-> + * for theoretical background, see:
-> + * http://en.wikipedia.org/wiki/Continued_fraction
-> + */
-> +static void rational_best_approximation(unsigned long given_numerator,
-> +					unsigned long given_denominator,
-> +					unsigned long max_numerator,
-> +					unsigned long max_denominator,
-> +					unsigned long *best_numerator,
-> +					unsigned long *best_denominator)
-> +{
-> +	unsigned long n, d, n0, d0, n1, d1;
-> +
-> +	n = given_numerator;
-> +	d = given_denominator;
-> +	n0 = 0;
-> +	d1 = 0;
-> +	n1 = 1;
-> +	d0 = 1;
-> +	for (;;) {
-> +		unsigned long t, a;
-> +
-> +		if (n1 > max_numerator || d1 > max_denominator) {
-> +			n1 = n0;
-> +			d1 = d0;
-> +			break;
-> +		}
-> +		if (d == 0)
-> +			break;
-> +		t = d;
-> +		a = n / d;
-> +		d = n % d;
-> +		n = t;
-> +		t = n0 + a * n1;
-> +		n0 = n1;
-> +		n1 = t;
-> +		t = d0 + a * d1;
-> +		d0 = d1;
-> +		d1 = t;
-> +	}
-> +	*best_numerator = n1;
-> +	*best_denominator = d1;
-> +}
-> +
->   static ulong rk3308_armclk_set_clk(struct rk3308_clk_priv *priv, ulong hz)
->   {
->   	struct rk3308_cru *cru = priv->cru;
-> @@ -832,6 +883,44 @@ static ulong rk3308_crypto_set_clk(struct rk3308_clk_priv *priv, ulong clk_id,
->   	return rk3308_crypto_get_clk(priv, clk_id);
->   }
->   
-> +static ulong rk3308_rtc32k_get_clk(struct rk3308_clk_priv *priv, ulong clk_id)
-> +{
-> +	struct rk3308_cru *cru = priv->cru;
-> +	unsigned long m, n;
-> +	u32 con, fracdiv;
-> +
-> +	con = readl(&cru->clksel_con[2]);
-> +	if ((con & CLK_RTC32K_SEL_MASK) >> CLK_RTC32K_SEL_SHIFT !=
-> +	    CLK_RTC32K_FRAC_DIV)
-> +		return -EINVAL;
-> +
-> +	fracdiv = readl(&cru->clksel_con[3]);
-> +	m = fracdiv & CLK_RTC32K_FRAC_NUMERATOR_MASK;
-> +	m >>= CLK_RTC32K_FRAC_NUMERATOR_SHIFT;
-> +	n = fracdiv & CLK_RTC32K_FRAC_DENOMINATOR_MASK;
-> +	n >>= CLK_RTC32K_FRAC_DENOMINATOR_SHIFT;
-> +
-> +	return OSC_HZ * m / n;
-> +}
-> +
-> +static ulong rk3308_rtc32k_set_clk(struct rk3308_clk_priv *priv, ulong clk_id,
-> +				   ulong hz)
-> +{
-> +	struct rk3308_cru *cru = priv->cru;
-> +	unsigned long m, n, val;
-> +
-> +	rational_best_approximation(hz, OSC_HZ,
-> +				    GENMASK(16 - 1, 0),
-> +				    GENMASK(16 - 1, 0),
-> +				    &m, &n);
-> +	val = m << CLK_RTC32K_FRAC_NUMERATOR_SHIFT | n;
-> +	writel(val, &cru->clksel_con[3]);
-> +	rk_clrsetreg(&cru->clksel_con[2], CLK_RTC32K_SEL_MASK,
-> +		     CLK_RTC32K_FRAC_DIV << CLK_RTC32K_SEL_SHIFT);
-> +
-> +	return rk3308_rtc32k_get_clk(priv, clk_id);
-> +}
-> +
->   static ulong rk3308_clk_get_rate(struct clk *clk)
->   {
->   	struct rk3308_clk_priv *priv = dev_get_priv(clk->dev);
-> @@ -912,6 +1001,9 @@ static ulong rk3308_clk_get_rate(struct clk *clk)
->   	case SCLK_CRYPTO_APK:
->   		rate = rk3308_crypto_get_clk(priv, clk->id);
+> @@ -1085,6 +1085,8 @@ static ulong rk3308_clk_set_rate(struct clk *clk, ulong rate)
+>   	case SCLK_RTC32K:
+>   		ret = rk3308_rtc32k_set_clk(priv, clk->id, rate);
 >   		break;
-> +	case SCLK_RTC32K:
-> +		rate = rk3308_rtc32k_get_clk(priv, clk->id);
-> +		break;
+> +	case USB480M:
+> +		return 0;
 >   	default:
 >   		return -ENOENT;
 >   	}
-> @@ -990,6 +1082,9 @@ static ulong rk3308_clk_set_rate(struct clk *clk, ulong rate)
->   	case SCLK_CRYPTO_APK:
->   		ret = rk3308_crypto_set_clk(priv, clk->id, rate);
->   		break;
-> +	case SCLK_RTC32K:
-> +		ret = rk3308_rtc32k_set_clk(priv, clk->id, rate);
-> +		break;
+> @@ -1117,6 +1119,8 @@ static int __maybe_unused rk3308_clk_set_parent(struct clk *clk, struct clk *par
+>   	switch (clk->id) {
+>   	case SCLK_MAC:
+>   		return rk3308_mac_set_parent(clk, parent);
+> +	case USB480M:
+> +		return 0;
 >   	default:
->   		return -ENOENT;
+>   		break;
 >   	}
