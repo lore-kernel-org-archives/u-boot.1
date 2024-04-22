@@ -4,80 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0701C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 11:44:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11A74C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 12:15:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 55D67883F7;
-	Mon, 22 Apr 2024 13:44:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+	by phobos.denx.de (Postfix) with ESMTP id 772CE887DF;
+	Mon, 22 Apr 2024 14:15:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="AnVbkAox";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BQoxxd5z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D4937887C2; Mon, 22 Apr 2024 13:44:10 +0200 (CEST)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 2BC39887E0; Mon, 22 Apr 2024 14:15:46 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4503988397
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 13:44:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D7A2C883EA
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 14:15:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sartura.hr
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-41a70466b77so4117075e9.0
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 04:44:08 -0700 (PDT)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-51ac9c6599bso3515320e87.1
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 05:15:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1713786248; x=1714391048; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=y1CEd5qM/jQNwMESkxyNwi9BJ46V2YfjuepSB65Qh5Q=;
- b=AnVbkAoxH2vg5Kg82Tg3bbMw4EFRklrZYsQ0zPH5ieRqI4JNYzY6cjHcPLpXbTIejj
- meNssDF3LJzgmlJlF2k/Iy58A4Gdb7NoDCBijQSF2E764fOSG7G8p0YcsoNSBsRREMse
- lHEJD1sqEGV0QX/jQpoEbVOZdBG3iDN4j78lcXYyVNd719aPTUyiVQNgyqDzROK7cFEN
- VaphVW1UJXwRBVWDzvFixfXKpiRCHHec9Ap9bNygaZNFb5GU5giRImRfEFJlgv2imDpF
- zh9a9NFlh/D9fJYd7mgFRm7MpeBSODVX3ewkygADaxAs7AeXzWfs+61F4YFYyuqCUvlh
- s6bQ==
+ d=gmail.com; s=20230601; t=1713788143; x=1714392943; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7cibGMukZSAXBxNWFTN/z+LKRMOFje+rLcwqNJxGwI4=;
+ b=BQoxxd5zUYI3o+0/SH6OudCmTnOB4Nb2VscT3I1xxtzm0Q+6lbbscWE9HuBFdMXOgu
+ 259Si7VHJATySIra5NqREbYRuKpaUDSol1hlZTjfwhCtU7uOthDEYDIGAZREEVFbZJgF
+ 0CYPydFZA9Uov3n2wkkxjfbQ4RgYCxrMDqTjp8yYLMbi3F+gmhdYmCaAFGTD5e1K8ZxF
+ nuS9Te4i1b15s5W8TZmyvrKgxNRVTnSmBfi6s3m8HLaycGtysuMTT8y8RYWri1Ylca5b
+ bfpTpNn+6fR+zVvFBj5uPLrmvoWriJGllwQ+7L28CDYosDDUvKL76q6H4zm/FL8O8TQV
+ UJ5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713786248; x=1714391048;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=y1CEd5qM/jQNwMESkxyNwi9BJ46V2YfjuepSB65Qh5Q=;
- b=crgv0gv0l41nnlk61C5LpP0Q2U3AH6WHXupGx9woaRvqS1EKGYn58BsvPS+VVb1fqC
- Y6sYqUMNBJbD+EuFWkm699cSw1KZQqKci9sQM7Q7xd3yBOsKDeX9JTbKkjxlwiXPPeoA
- xSCCg9CTqjRcOR+BWbk2k2CNUUkG1DC9p95XdcCnfQQQh4GeLdWx71xcb8pYKaFGiai5
- BnFpkd4xrGGMcbnwTKkxcDMKbmkGUWJXcRUUcxJ4EHUCVWiurAcODBc4fkv/w+dbNMQu
- GkC9vz8F6D9oXK6yVlqFDe0iCUePemz6dYHpBXWBRFZgK5G+5wrv3vZmWzli9MedTThy
- Kqdg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcd6azlF2RguJJTX3ZharvaFIKvmdObQI/u5UR0LHMuxpIOFH3XtIbwS21msSQ2IB0MDM5ylm44XaURWLleS/BOeiXdQ==
-X-Gm-Message-State: AOJu0YxjZKA7liyYNE7BMdIqoxziB9Xb7KrgBt4CDCZKl2cZudBmvG2/
- No9a2k6iI2VXtZf/efaJaQCUtj3jxiAFDRA6G68GKEnlbQa1ZlMu80jXIS4zkqs=
-X-Google-Smtp-Source: AGHT+IEf7nQ9tPiV52BB9oEaQHTQ/JaK/9+DDk2ZMwYM5T2yMYZZyHOB3MuEVy4154k+mgG7m0bROQ==
-X-Received: by 2002:a05:600c:45ca:b0:41a:6edd:6c2a with SMTP id
- s10-20020a05600c45ca00b0041a6edd6c2amr1176981wmo.40.1713786247694; 
- Mon, 22 Apr 2024 04:44:07 -0700 (PDT)
-Received: from fedora.. (dh207-14-170.xnet.hr. [88.207.14.170])
- by smtp.googlemail.com with ESMTPSA id
- e5-20020adfe385000000b003455e5d2569sm12022977wrm.0.2024.04.22.04.44.05
+ d=1e100.net; s=20230601; t=1713788143; x=1714392943;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7cibGMukZSAXBxNWFTN/z+LKRMOFje+rLcwqNJxGwI4=;
+ b=TrpBoucDwPvvxXNi9xHS1tHB0D9g3Py0uNrc1pw7Z8fzDz0cjaLI2VNU8p+CcMUX2y
+ uPLjjr9Va1bo6JQZKq6wR6DQK2GVVsvvV7cCCq0hiekaogDf0HJ0IfQPAdyLDGIH3lLn
+ HmCKZIb46UxptnQIX11D6XDFUor3nfrzrQZknwYeuzWj/kCqILd4blVMbn2CNNRz8TmW
+ 5cYWSENdl6bX1nYLCv943vie10adwiZoIy8XjYZ56m7QnjsH/JzAGF2Dkh8G9zMVfUTf
+ nRPdiS/frJJIzFAj8upKjtxP3iSONMS01ZCHFgEHXSsKJTGrfNOzYRyJM4fbSHdOnjvF
+ Dj8A==
+X-Gm-Message-State: AOJu0YyahAiPHqgQOT41x7KAM/YHWMhqNIr/smJNkcbquKQocp4frWr7
+ KQN+7bfz55+5e6gb4CMXODViOcezGNG7nLibxpdjbWgFPmP89GbG
+X-Google-Smtp-Source: AGHT+IEdAfpSEHE0ru4tu0n0wwlHEbcnTKaH+2nWE+6p8KHQ/luPwAaLLnM9vMa+J3L0m29LdmLEbw==
+X-Received: by 2002:ac2:4848:0:b0:519:264b:695a with SMTP id
+ 8-20020ac24848000000b00519264b695amr6452623lfy.22.1713788142614; 
+ Mon, 22 Apr 2024 05:15:42 -0700 (PDT)
+Received: from xeon.. ([188.163.112.65]) by smtp.gmail.com with ESMTPSA id
+ e9-20020a17090681c900b00a4a33cfe593sm5684758ejx.39.2024.04.22.05.15.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 04:44:05 -0700 (PDT)
-From: Robert Marko <robert.marko@sartura.hr>
-To: trini@konsulko.com, caleb.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@linaro.org, u-boot@lists.denx.de
-Cc: j.beck@linefinity.com,
-	Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH v2 5/5] pinctrl: qcom: ipq4019: support all pin functions
-Date: Mon, 22 Apr 2024 13:43:28 +0200
-Message-ID: <20240422114359.219762-5-robert.marko@sartura.hr>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <20240422114359.219762-1-robert.marko@sartura.hr>
-References: <20240422114359.219762-1-robert.marko@sartura.hr>
+ Mon, 22 Apr 2024 05:15:42 -0700 (PDT)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: Please pull u-boot-tegra staging
+Date: Mon, 22 Apr 2024 15:15:02 +0300
+Message-Id: <20240422121502.213680-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,352 +88,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, IPQ4019 pinctrl driver supports only a very limited number of
-pin functions and is not fully DT compatible with Linux pinctrl nodes.
+Dear Tom,
 
-IPQ40xx SoC-s sometimes use different pin function numbers for the same
-function depending on the pin number, so for example I2C0 on GPIO58 uses
-function number 3 while on GPIO59 it uses function number 2.
+The following changes since commit 1dd659fd626204bb6a6b4f330c27b11a7823bbb0:
 
-So, in order to make the driver compatible with upstream DTS to avoid the
-need to patch the pinctrl nodes in U-Boot and support all of the missing
-pin functions lets rework the driver based on upstream Linux IPQ4019
-pinctrl driver and the pending SM8150 U-Boot pinctrl driver which also uses
-different function numbers pased on the exact pin number.
+  Merge tag 'video-20240421' of https://source.denx.de/u-boot/custodians/u-boot-video (2024-04-21 08:54:20 -0600)
 
-Signed-off-by: Robert Marko <robert.marko@sartura.hr>
----
- drivers/pinctrl/qcom/pinctrl-ipq4019.c | 306 +++++++++++++++++++++++--
- 1 file changed, 293 insertions(+), 13 deletions(-)
+are available in the Git repository at:
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-ipq4019.c b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-index 48644a51ae..26ab487857 100644
---- a/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-+++ b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-@@ -14,19 +14,291 @@
- 
- #define MAX_PIN_NAME_LEN 32
- static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
-+
-+enum ipq4019_functions {
-+	qca_mux_gpio,
-+	qca_mux_aud_pin,
-+	qca_mux_audio_pwm,
-+	qca_mux_blsp_i2c0,
-+	qca_mux_blsp_i2c1,
-+	qca_mux_blsp_spi0,
-+	qca_mux_blsp_spi1,
-+	qca_mux_blsp_uart0,
-+	qca_mux_blsp_uart1,
-+	qca_mux_chip_rst,
-+	qca_mux_i2s_rx,
-+	qca_mux_i2s_spdif_in,
-+	qca_mux_i2s_spdif_out,
-+	qca_mux_i2s_td,
-+	qca_mux_i2s_tx,
-+	qca_mux_jtag,
-+	qca_mux_led0,
-+	qca_mux_led1,
-+	qca_mux_led2,
-+	qca_mux_led3,
-+	qca_mux_led4,
-+	qca_mux_led5,
-+	qca_mux_led6,
-+	qca_mux_led7,
-+	qca_mux_led8,
-+	qca_mux_led9,
-+	qca_mux_led10,
-+	qca_mux_led11,
-+	qca_mux_mdc,
-+	qca_mux_mdio,
-+	qca_mux_pcie,
-+	qca_mux_pmu,
-+	qca_mux_prng_rosc,
-+	qca_mux_qpic,
-+	qca_mux_rgmii,
-+	qca_mux_rmii,
-+	qca_mux_sdio,
-+	qca_mux_smart0,
-+	qca_mux_smart1,
-+	qca_mux_smart2,
-+	qca_mux_smart3,
-+	qca_mux_tm,
-+	qca_mux_wifi0,
-+	qca_mux_wifi1,
-+	qca_mux_NA,
-+};
-+
-+#define QCA_PIN_FUNCTION(fname)				\
-+	[qca_mux_##fname] = {#fname, qca_mux_##fname}
-+
- static const struct pinctrl_function msm_pinctrl_functions[] = {
--	{"gpio", 0},
--	{"blsp_uart0_0", 1}, /* Only for GPIO:16,17 */
--	{"blsp_uart0_1", 2}, /* Only for GPIO:60,61 */
--	{"blsp_uart1", 1},
--	{"blsp_spi0_0", 1}, /* Only for GPIO:12,13,14,15 */
--	{"blsp_spi0_1", 2}, /* Only for GPIO:54,55,56,57 */
--	{"blsp_spi1", 2},
--	{"mdio_0", 1}, /* Only for GPIO6 */
--	{"mdio_1", 2}, /* Only for GPIO53 */
--	{"mdc_0", 1}, /* Only for GPIO7 */
--	{"mdc_1", 2}, /* Only for GPIO52 */
-+	QCA_PIN_FUNCTION(aud_pin),
-+	QCA_PIN_FUNCTION(audio_pwm),
-+	QCA_PIN_FUNCTION(blsp_i2c0),
-+	QCA_PIN_FUNCTION(blsp_i2c1),
-+	QCA_PIN_FUNCTION(blsp_spi0),
-+	QCA_PIN_FUNCTION(blsp_spi1),
-+	QCA_PIN_FUNCTION(blsp_uart0),
-+	QCA_PIN_FUNCTION(blsp_uart1),
-+	QCA_PIN_FUNCTION(chip_rst),
-+	QCA_PIN_FUNCTION(gpio),
-+	QCA_PIN_FUNCTION(i2s_rx),
-+	QCA_PIN_FUNCTION(i2s_spdif_in),
-+	QCA_PIN_FUNCTION(i2s_spdif_out),
-+	QCA_PIN_FUNCTION(i2s_td),
-+	QCA_PIN_FUNCTION(i2s_tx),
-+	QCA_PIN_FUNCTION(jtag),
-+	QCA_PIN_FUNCTION(led0),
-+	QCA_PIN_FUNCTION(led1),
-+	QCA_PIN_FUNCTION(led2),
-+	QCA_PIN_FUNCTION(led3),
-+	QCA_PIN_FUNCTION(led4),
-+	QCA_PIN_FUNCTION(led5),
-+	QCA_PIN_FUNCTION(led6),
-+	QCA_PIN_FUNCTION(led7),
-+	QCA_PIN_FUNCTION(led8),
-+	QCA_PIN_FUNCTION(led9),
-+	QCA_PIN_FUNCTION(led10),
-+	QCA_PIN_FUNCTION(led11),
-+	QCA_PIN_FUNCTION(mdc),
-+	QCA_PIN_FUNCTION(mdio),
-+	QCA_PIN_FUNCTION(pcie),
-+	QCA_PIN_FUNCTION(pmu),
-+	QCA_PIN_FUNCTION(prng_rosc),
-+	QCA_PIN_FUNCTION(qpic),
-+	QCA_PIN_FUNCTION(rgmii),
-+	QCA_PIN_FUNCTION(rmii),
-+	QCA_PIN_FUNCTION(sdio),
-+	QCA_PIN_FUNCTION(smart0),
-+	QCA_PIN_FUNCTION(smart1),
-+	QCA_PIN_FUNCTION(smart2),
-+	QCA_PIN_FUNCTION(smart3),
-+	QCA_PIN_FUNCTION(tm),
-+	QCA_PIN_FUNCTION(wifi0),
-+	QCA_PIN_FUNCTION(wifi1),
- };
-+
-+typedef unsigned int msm_pin_function[15];
-+
-+#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14) \
-+	[id] = {        qca_mux_gpio, /* gpio mode */	\
-+			qca_mux_##f1,			\
-+			qca_mux_##f2,			\
-+			qca_mux_##f3,			\
-+			qca_mux_##f4,			\
-+			qca_mux_##f5,			\
-+			qca_mux_##f6,			\
-+			qca_mux_##f7,			\
-+			qca_mux_##f8,			\
-+			qca_mux_##f9,			\
-+			qca_mux_##f10,			\
-+			qca_mux_##f11,			\
-+			qca_mux_##f12,			\
-+			qca_mux_##f13,			\
-+			qca_mux_##f14			\
-+	}
-+
-+static const msm_pin_function ipq4019_pin_functions[] = {
-+	PINGROUP(0, jtag, smart0, i2s_rx, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(1, jtag, smart0, i2s_rx, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(2, jtag, smart0, i2s_rx, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(3, jtag, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(4, jtag, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(5, jtag, smart0, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA),
-+	PINGROUP(6, mdio, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(7, mdc, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(8, blsp_uart1, NA, NA, smart1, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(9, blsp_uart1, NA, NA, smart1, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(10, blsp_uart1, NA, NA, blsp_i2c0, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(11, blsp_uart1, NA, NA, blsp_i2c0, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(12, blsp_spi0, blsp_i2c1, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(13, blsp_spi0, blsp_i2c1, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(14, blsp_spi0, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA),
-+	PINGROUP(15, blsp_spi0, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA),
-+	PINGROUP(16, blsp_uart0, led0, smart1, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(17, blsp_uart0, led1, smart1, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(18, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(19, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(20, blsp_i2c0, i2s_rx, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(21, blsp_i2c0, i2s_rx, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(22, rgmii, i2s_rx, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA),
-+	PINGROUP(23, sdio, rgmii, i2s_rx, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(24, sdio, rgmii, i2s_tx, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(25, sdio, rgmii, i2s_tx, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(26, sdio, rgmii, i2s_tx, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(27, sdio, rgmii, i2s_td, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(28, sdio, rgmii, i2s_td, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(29, sdio, rgmii, i2s_td, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(30, sdio, rgmii, audio_pwm, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(31, sdio, rgmii, audio_pwm, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(32, sdio, rgmii, audio_pwm, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(33, rgmii, audio_pwm, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(34, blsp_i2c1, i2s_spdif_in, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA, NA),
-+	PINGROUP(35, blsp_i2c1, i2s_spdif_out, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA, NA),
-+	PINGROUP(36, rmii, led2, led0, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA),
-+	PINGROUP(37, rmii, wifi0, wifi1, led1, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(38, rmii, led2, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA),
-+	PINGROUP(39, rmii, pcie, led3, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA),
-+	PINGROUP(40, rmii, wifi0, wifi1, smart2, led4, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(41, rmii, wifi0, wifi1, smart2, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(42, rmii, wifi0, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA),
-+	PINGROUP(43, rmii, wifi1, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA),
-+	PINGROUP(44, rmii, blsp_spi1, smart0, led5, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(45, rmii, blsp_spi1, blsp_spi0, smart0, led6, NA, NA, NA, NA,
-+		 NA, NA, NA, NA, NA),
-+	PINGROUP(46, rmii, blsp_spi1, smart0, led7, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(47, rmii, blsp_spi1, smart0, led8, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(48, rmii, aud_pin, smart2, led9, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(49, rmii, aud_pin, smart2, led10, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(50, rmii, aud_pin, wifi0, wifi1, led11, NA, NA, NA, NA, NA,
-+		 NA, NA, NA, NA),
-+	PINGROUP(51, rmii, aud_pin, wifi0, wifi1, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(52, qpic, mdc, pcie, i2s_tx, NA, NA, NA, tm, wifi0, wifi1, NA,
-+		 NA, NA, NA),
-+	PINGROUP(53, qpic, mdio, i2s_tx, prng_rosc, NA, tm, wifi0, wifi1, NA,
-+		 NA, NA, NA, NA, NA),
-+	PINGROUP(54, qpic, blsp_spi0, i2s_td, NA, pmu, NA, NA, NA, tm, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(55, qpic, blsp_spi0, i2s_td, NA, pmu, NA, NA, NA, tm, NA, NA,
-+		 NA, NA, NA),
-+	PINGROUP(56, qpic, blsp_spi0, i2s_td, NA, NA, tm, wifi0, wifi1, NA, NA,
-+		 NA, NA, NA, NA),
-+	PINGROUP(57, qpic, blsp_spi0, i2s_tx, NA, NA, tm, wifi0, wifi1, NA, NA,
-+		 NA, NA, NA, NA),
-+	PINGROUP(58, qpic, led2, blsp_i2c0, smart3, smart1, i2s_rx, NA, NA, tm,
-+		 wifi0, wifi1, NA, NA, NA),
-+	PINGROUP(59, qpic, blsp_i2c0, smart3, smart1, i2s_spdif_in, NA, NA, NA,
-+		 NA, NA, tm, NA, NA, NA),
-+	PINGROUP(60, qpic, blsp_uart0, smart1, smart3, led0, i2s_tx, i2s_rx,
-+		 NA, NA, NA, NA, NA, tm, NA),
-+	PINGROUP(61, qpic, blsp_uart0, smart1, smart3, led1, i2s_tx, i2s_rx,
-+		 NA, NA, NA, NA, NA, tm, NA),
-+	PINGROUP(62, qpic, chip_rst, NA, NA, i2s_spdif_out, NA, NA, NA, NA, NA,
-+		 tm, NA, NA, NA),
-+	PINGROUP(63, qpic, NA, NA, NA, i2s_td, i2s_rx, i2s_spdif_out,
-+		 i2s_spdif_in, NA, NA, NA, NA, tm, NA),
-+	PINGROUP(64, qpic, audio_pwm, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(65, qpic, audio_pwm, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(66, qpic, audio_pwm, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(67, qpic, audio_pwm, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA, NA),
-+	PINGROUP(68, qpic, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(69, qpic, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(70, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(71, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(72, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(73, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(74, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(75, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(76, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(77, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(78, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(79, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(80, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(81, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(82, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(83, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(84, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(85, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(86, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(87, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(88, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(89, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(90, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(91, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(92, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(93, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(94, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(95, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(96, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(97, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+	PINGROUP(98, wifi0, wifi1, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-+		 NA),
-+	PINGROUP(99, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-+};
-+
- static const char *ipq4019_get_function_name(struct udevice *dev,
- 					     unsigned int selector)
- {
-@@ -40,10 +312,18 @@ static const char *ipq4019_get_pin_name(struct udevice *dev,
- 	return pin_name;
- }
- 
--static unsigned int ipq4019_get_function_mux(__maybe_unused unsigned int pin,
-+static unsigned int ipq4019_get_function_mux(unsigned int pin,
- 					     unsigned int selector)
- {
--	return msm_pinctrl_functions[selector].val;
-+	unsigned int i;
-+	const msm_pin_function *func = ipq4019_pin_functions + pin;
-+
-+	for (i = 0; i < 15; i++)
-+		if ((*func)[i] == selector)
-+			return i;
-+
-+	pr_err("Can't find requested function for pin %u pin\n", pin);
-+	return -EINVAL;
- }
- 
- static const struct msm_pinctrl_data ipq4019_data = {
--- 
-2.44.0
+  https://source.denx.de/u-boot/custodians/u-boot-tegra.git staging
 
+for you to fetch changes up to 6898cc823413ff01661e7db74ad764da58b682d9:
+
+  board: tegra30: switch to button cmd (2024-04-22 12:17:21 +0300)
+
+----------------------------------------------------------------
+Jonas Schwöbel (2):
+      board: asus: lg_x3: endeavoru: remove CONFIG_SYS_L2CACHE_OFF
+      ARM: tegra: Enable UART-E for T20 and T30
+
+Svyatoslav Ryhel (12):
+      ARM: dts: paz00: remove display-timings node
+      ARM: tegra: move to standard boot
+      board: tegra30: switch to standard boot
+      board: asus: tf600t: configure SPI pinmux
+      board: asus: tf600t: adjust LV pinmux
+      board: asus: transformer-t30: set the correct pinmux lock and io-reset
+      board: asus: tf600t: enable TEGRA20_SLINK only for TF600T
+      board: asus: transformer-t30: enable I2C_MUX only for TF700T
+      board: asus: tf700t: bind tc358768 bridge and panel
+      ARM: tegra: grouper: bind Hall sensor
+      ARM: tegra: transformer-t30: bind Hall sensor
+      board: tegra30: switch to button cmd
+
+ arch/arm/Kconfig                                  |   2 +-
+ arch/arm/dts/tegra20-paz00.dts                    |  16 ----
+ arch/arm/dts/tegra30-asus-grouper-common.dtsi     |   6 ++
+ arch/arm/dts/tegra30-asus-p1801-t.dts             |  28 +++---
+ arch/arm/dts/tegra30-asus-tf600t.dts              | 101 +++++++++++++++------
+ arch/arm/dts/tegra30-asus-tf700t.dts              | 102 +++++++++++++++++++++-
+ arch/arm/dts/tegra30-asus-transformer.dtsi        |  36 +++++---
+ arch/arm/mach-tegra/Kconfig                       |   4 +
+ board/asus/transformer-t30/configs/p1801-t.config |   1 +
+ board/asus/transformer-t30/configs/tf201.config   |   1 +
+ board/asus/transformer-t30/configs/tf300t.config  |   1 +
+ board/asus/transformer-t30/configs/tf300tg.config |   1 +
+ board/asus/transformer-t30/configs/tf300tl.config |   1 +
+ board/asus/transformer-t30/configs/tf600t.config  |   2 +
+ board/asus/transformer-t30/configs/tf700t.config  |   2 +
+ configs/endeavoru_defconfig                       |   4 +-
+ configs/grouper_common_defconfig                  |   4 +-
+ configs/paz00_defconfig                           |   1 +
+ configs/transformer_t30_defconfig                 |   5 +-
+ configs/x3_t30_defconfig                          |   4 +-
+ include/configs/endeavoru.h                       |   3 +-
+ include/configs/grouper.h                         |   5 +-
+ include/configs/tegra-common-post.h               |  30 +------
+ include/configs/transformer-common.h              |  12 +--
+ include/configs/x3-t30.h                          |   3 +-
+ 25 files changed, 255 insertions(+), 120 deletions(-)
+
+Branch contains minor internal improvemets for endeavoru, lg_x3, grouper,
+transformers and paz00 as well as migration to standard boot.
+
+All commits passed U-Boot checks and buildman for tegra.
+
+Thanks,
+Svyatoslav Ryhel.
