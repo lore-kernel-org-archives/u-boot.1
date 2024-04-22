@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B1BFC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:02:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D289AC07E8F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:02:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A429D8831B;
-	Mon, 22 Apr 2024 10:02:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 251818839C;
+	Mon, 22 Apr 2024 10:02:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="F7QDOA3a";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="e1//ENLz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 111E188124; Mon, 22 Apr 2024 10:02:34 +0200 (CEST)
-Received: from mail-m12778.qiye.163.com (mail-m12778.qiye.163.com
- [115.236.127.78])
+ id E48BF8839C; Mon, 22 Apr 2024 10:02:46 +0200 (CEST)
+Received: from mail-m21468.qiye.163.com (mail-m21468.qiye.163.com
+ [117.135.214.68])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 24AD78831B
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:02:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 830FC883A9
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:02:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=F7QDOA3agxnwD0sMnqWJ+st1+j6DI5qNlL5GKr/INT6xOuWwaBsAHHhHvprzyOa031/mLqCUgFXmXF+dLF6HnvjDv6Xq5T/zisePNtGZmcNlwqhubcNZzUASJiQ1P01qsICA4Uwe2kDGzmGsa/UJ2oZCDHckJqml726RB5AhWUg=;
+ b=e1//ENLzjH6CvMVAgNob2DDFhaHBS7cid3K3y50etJKNjgHdsRTh+sDdKO22e0JCHdm7u4Hed7n1+gs5edEOjCsRK+rOEqTgRAOUIRIhg/Vzc6+XRnb1lGxspX9EskAxau4qA7Sp6qUeByqMmSjPbPxaFBZNl1o4kGM3aW24Jic=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=/604L+XCTgyUiV0vMktqbTwyARV7TXgLN5X9P3cSREc=;
+ bh=mifMEfxDX6csIJGAKmvxdULkvs9LWBWm47fE0AT4qvo=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 920C69002CE;
- Mon, 22 Apr 2024 16:02:17 +0800 (CST)
-Message-ID: <cc6a6e09-6f97-4000-a897-fff9e616f2cf@rock-chips.com>
-Date: Mon, 22 Apr 2024 16:02:17 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 86E089002E3;
+ Mon, 22 Apr 2024 16:02:28 +0800 (CST)
+Message-ID: <a82e00a2-c108-402a-8671-1ec865102c6f@rock-chips.com>
+Date: Mon, 22 Apr 2024 16:02:28 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 12/28] rockchip: rk356x: Update bootph props
+Subject: Re: [PATCH v3 13/28] rockchip: rk3588: Update bootph props
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Akash Gajjar <gajjar04akash@gmail.com>
+ Andy Yan <andyshrk@163.com>, John Clark <inindev@gmail.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>, Joshua Riek <jjriek@verizon.net>
 Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>,
  Dragan Simic <dsimic@manjaro.org>, u-boot@lists.denx.de
 References: <20240422062936.681359-1-jonas@kwiboo.se>
- <20240422062936.681359-13-jonas@kwiboo.se>
+ <20240422062936.681359-14-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240422062936.681359-13-jonas@kwiboo.se>
+In-Reply-To: <20240422062936.681359-14-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGRoeQ1ZDGk1IQ0hNH0xNGEpVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUpMSFZLTBpISRhDS08eGRhVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8f04d3c36803a9kunm920c69002ce
+X-HM-Tid: 0a8f04d3ef2703a9kunm86e089002e3
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OjY6Cyo4ATMDOjoMNwMRIQhN
- N0MwFAtVSlVKTEpITExJQkhDQ0JPVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFDTUxJNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PAw6OSo*MDNJLjoMNwMfIQgN
+ IhhPCTZVSlVKTEpITExJQk9CQ09JVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS09PTDcG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,12 +90,15 @@ On 2024/4/22 14:28, Jonas Karlman wrote:
 > are needed and add any missing pinctrl node needed in SPL.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
 - Kever
 > ---
-> v3: Split evb-rk3568_defconfig change into a separate patch
+> v3: Split rk3588-generic.dts and evb-rk3588_defconfig changes into
+>      separate patches
+> v3: Collect r-b tag
 > v2: Add bootph-some-ram props and follow kernel sort order
 >
 > Following bootph props have been applied:
@@ -111,160 +114,38 @@ Thanks,
 > - bootph-pre-ram (SPL)
 > - bootph-some-ram (U-Boot proper pre-reloc)
 > ---
->   arch/arm/dts/rk3566-pinetab2-u-boot.dtsi   | 25 +++++++----
->   arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi |  8 ++--
->   arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi |  4 +-
->   arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi  |  7 ++-
->   arch/arm/dts/rk3568-rock-3a-u-boot.dtsi    |  5 +--
->   arch/arm/dts/rk356x-u-boot.dtsi            | 51 ++++++++++++++--------
->   6 files changed, 59 insertions(+), 41 deletions(-)
+>   .../arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi |  8 +--
+>   arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi     | 12 ++---
+>   .../dts/rk3588-orangepi-5-plus-u-boot.dtsi    |  7 ++-
+>   arch/arm/dts/rk3588-rock-5b-u-boot.dtsi       |  8 +--
+>   arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi    |  6 ++-
+>   arch/arm/dts/rk3588s-coolpi-4b-u-boot.dtsi    |  8 +--
+>   arch/arm/dts/rk3588s-orangepi-5-u-boot.dtsi   |  9 ++--
+>   arch/arm/dts/rk3588s-u-boot.dtsi              | 50 ++++++++++++++-----
+>   8 files changed, 67 insertions(+), 41 deletions(-)
 >
-> diff --git a/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi b/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi
-> index 4aa6ab1c848c..eb18008f2fe3 100644
-> --- a/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3566-pinetab2-u-boot.dtsi
-> @@ -3,20 +3,31 @@
->   #include "rk356x-u-boot.dtsi"
->   
->   &fspi_dual_io_pins {
-> -	bootph-all;
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
->   };
->   
->   &gpio0 {
-> -	bootph-all;
-> +	bootph-pre-ram;
->   };
->   
->   &i2c0 {
->   	bootph-pre-ram;
->   };
->   
-> +&i2c0_xfer {
-> +	bootph-pre-ram;
-> +};
-> +
-> +&i2s1m0_mclk {
-> +	bootph-pre-ram;
-> +};
-> +
-> +&pmic_int_l {
-> +	bootph-pre-ram;
-> +};
-> +
->   &rk817 {
-> -	bootph-pre-ram;
-> -
->   	regulators {
->   		bootph-pre-ram;
->   	};
-> @@ -27,15 +38,13 @@
->   };
->   
->   &sdmmc_pwren_l {
-> -	bootph-all;
-> +	bootph-pre-ram;
->   };
->   
->   &sfc {
-> -	bootph-pre-ram;
-> -	u-boot,spl-sfc-no-dma;
-> -
->   	flash@0 {
->   		bootph-pre-ram;
-> +		bootph-some-ram;
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi b/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
-> index 930d660868bb..0e25b7e108fc 100644
-> --- a/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi
-> @@ -3,7 +3,7 @@
->   #include "rk356x-u-boot.dtsi"
->   
->   &gpio0 {
-> -	bootph-all;
-> +	bootph-pre-ram;
->   };
->   
->   &sdhci {
-> @@ -13,11 +13,9 @@
->   };
->   
->   &sfc {
-> -	bootph-pre-ram;
-> -	u-boot,spl-sfc-no-dma;
-> -
->   	flash@0 {
->   		bootph-pre-ram;
-> +		bootph-some-ram;
->   	};
->   };
->   
-> @@ -34,5 +32,5 @@
->   };
->   
->   &vcc_sd_h {
-> -	bootph-all;
-> +	bootph-pre-ram;
->   };
-> diff --git a/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi b/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
-> index c235b4357f7d..f2c9d8e167d5 100644
-> --- a/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi
-> @@ -9,11 +9,9 @@
->   };
->   
->   &sfc {
-> -	bootph-pre-ram;
-> -	u-boot,spl-sfc-no-dma;
-> -
->   	flash@0 {
->   		bootph-pre-ram;
-> +		bootph-some-ram;
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi b/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
-> index 1fc71faa9e07..d8a6dd87510f 100644
-> --- a/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi
+> diff --git a/arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi b/arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi
+> index ed15b14ea0ee..f0ef0164664e 100644
+> --- a/arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi
 > @@ -3,7 +3,8 @@
->   #include "rk356x-u-boot.dtsi"
+>   #include "rk3588-u-boot.dtsi"
 >   
->   &fspi_dual_io_pins {
+>   &fspim2_pins {
 > -	bootph-all;
 > +	bootph-pre-ram;
 > +	bootph-some-ram;
 >   };
 >   
 >   &sdhci {
-> @@ -15,10 +16,8 @@
+> @@ -12,16 +13,15 @@
 >   };
 >   
 >   &sfc {
 > -	bootph-pre-ram;
 > -	u-boot,spl-sfc-no-dma;
-> -
->   	flash@0 {
->   		bootph-pre-ram;
-> +		bootph-some-ram;
->   	};
->   };
-> diff --git a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> index 5b823fcca5fb..9d18f5d0b364 100644
-> --- a/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3568-rock-3a-u-boot.dtsi
-> @@ -26,16 +26,15 @@
->   };
->   
->   &sfc {
-> -	bootph-pre-ram;
-> -	u-boot,spl-sfc-no-dma;
->   	#address-cells = <1>;
->   	#size-cells = <0>;
+>   	pinctrl-names = "default";
+>   	pinctrl-0 = <&fspim2_pins>;
 >   	status = "okay";
 >   
 >   	flash@0 {
@@ -276,11 +157,180 @@ Thanks,
 >   		spi-max-frequency = <24000000>;
 >   		spi-rx-bus-width = <4>;
 >   		spi-tx-bus-width = <1>;
-> diff --git a/arch/arm/dts/rk356x-u-boot.dtsi b/arch/arm/dts/rk356x-u-boot.dtsi
-> index 8ac10f1698f6..0a0943b462a9 100644
-> --- a/arch/arm/dts/rk356x-u-boot.dtsi
-> +++ b/arch/arm/dts/rk356x-u-boot.dtsi
-> @@ -54,43 +54,46 @@
+> diff --git a/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi b/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
+> index 60494bb8485f..968385622fa5 100644
+> --- a/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi
+> @@ -7,12 +7,11 @@
+>   #include "rk3588-u-boot.dtsi"
+>   
+>   &fspim1_pins {
+> -	bootph-all;
+> -};
+> -
+> -&sfc {
+>   	bootph-pre-ram;
+> -	u-boot,spl-sfc-no-dma;
+> +	bootph-some-ram;
+> +};
+> +
+> +&sfc {
+>   	pinctrl-names = "default";
+>   	pinctrl-0 = <&fspim1_pins>;
+>   	#address-cells = <1>;
+> @@ -20,9 +19,10 @@
+>   	status = "okay";
+>   
+>   	flash@0 {
+> -		bootph-pre-ram;
+>   		compatible = "jedec,spi-nor";
+>   		reg = <0>;
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+>   		spi-max-frequency = <24000000>;
+>   		spi-rx-bus-width = <4>;
+>   		spi-tx-bus-width = <1>;
+> diff --git a/arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi b/arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
+> index 5d5fa6ffb214..1ab31a4ec5ab 100644
+> --- a/arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi
+> @@ -3,7 +3,8 @@
+>   #include "rk3588-u-boot.dtsi"
+>   
+>   &fspim1_pins {
+> -	bootph-all;
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+>   };
+>   
+>   &sdhci {
+> @@ -12,10 +13,8 @@
+>   };
+>   
+>   &sfc {
+> -	bootph-pre-ram;
+> -	u-boot,spl-sfc-no-dma;
+> -
+>   	flash@0 {
+>   		bootph-pre-ram;
+> +		bootph-some-ram;
+>   	};
+>   };
+> diff --git a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> index 9ee9dd051e32..d6020ca790f6 100644
+> --- a/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi
+> @@ -18,7 +18,8 @@
+>   };
+>   
+>   &fspim2_pins {
+> -	bootph-all;
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+>   };
+>   
+>   &pinctrl {
+> @@ -35,16 +36,15 @@
+>   };
+>   
+>   &sfc {
+> -	bootph-pre-ram;
+> -	u-boot,spl-sfc-no-dma;
+>   	pinctrl-names = "default";
+>   	pinctrl-0 = <&fspim2_pins>;
+>   	status = "okay";
+>   
+>   	flash@0 {
+> -		bootph-pre-ram;
+>   		compatible = "jedec,spi-nor";
+>   		reg = <0>;
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+>   		spi-max-frequency = <24000000>;
+>   		spi-rx-bus-width = <4>;
+>   		spi-tx-bus-width = <1>;
+> diff --git a/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi b/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
+> index ca2a684f3541..a50bcc45f216 100644
+> --- a/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi
+> @@ -12,6 +12,10 @@
+>   };
+>   
+>   &uart9 {
+> -	bootph-pre-ram;
+> +	bootph-all;
+>   	clock-frequency = <24000000>;
+>   };
+> +
+> +&uart9m0_xfer {
+> +	bootph-all;
+> +};
+> diff --git a/arch/arm/dts/rk3588s-coolpi-4b-u-boot.dtsi b/arch/arm/dts/rk3588s-coolpi-4b-u-boot.dtsi
+> index 6e4b97028d7c..f51d7f30d787 100644
+> --- a/arch/arm/dts/rk3588s-coolpi-4b-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588s-coolpi-4b-u-boot.dtsi
+> @@ -3,7 +3,8 @@
+>   #include "rk3588s-u-boot.dtsi"
+>   
+>   &fspim2_pins {
+> -	bootph-all;
+> +	bootph-pre-ram;
+> +	bootph-some-ram;
+>   };
+>   
+>   &sdhci {
+> @@ -12,16 +13,15 @@
+>   };
+>   
+>   &sfc {
+> -	bootph-pre-ram;
+> -	u-boot,spl-sfc-no-dma;
+>   	pinctrl-names = "default";
+>   	pinctrl-0 = <&fspim2_pins>;
+>   	status = "okay";
+>   
+>   	flash@0 {
+> -		bootph-pre-ram;
+>   		compatible = "jedec,spi-nor";
+>   		reg = <0>;
+> +		bootph-pre-ram;
+> +		bootph-some-ram;
+>   		spi-max-frequency = <24000000>;
+>   		spi-rx-bus-width = <4>;
+>   		spi-tx-bus-width = <1>;
+> diff --git a/arch/arm/dts/rk3588s-orangepi-5-u-boot.dtsi b/arch/arm/dts/rk3588s-orangepi-5-u-boot.dtsi
+> index 888d1b9c12d7..12a92c0cba10 100644
+> --- a/arch/arm/dts/rk3588s-orangepi-5-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588s-orangepi-5-u-boot.dtsi
+> @@ -9,14 +9,13 @@
+>   };
+>   
+>   &fspim0_pins {
+> -	bootph-all;
+> -};
+> -
+> -&sfc {
+>   	bootph-pre-ram;
+> -	u-boot,spl-sfc-no-dma;
+> +	bootph-some-ram;
+> +};
+>   
+> +&sfc {
+>   	flash@0 {
+>   		bootph-pre-ram;
+> +		bootph-some-ram;
+>   	};
+>   };
+> diff --git a/arch/arm/dts/rk3588s-u-boot.dtsi b/arch/arm/dts/rk3588s-u-boot.dtsi
+> index 7fcbdb969240..d3c257983ecb 100644
+> --- a/arch/arm/dts/rk3588s-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3588s-u-boot.dtsi
+> @@ -132,31 +132,40 @@
+>   #endif
+>   
+>   &cru {
+> -	bootph-pre-ram;
+> +	bootph-all;
 >   };
 >   
 >   &emmc_bus8 {
@@ -301,7 +351,7 @@ Thanks,
 > +	bootph-some-ram;
 >   };
 >   
->   &emmc_datastrobe {
+>   &emmc_data_strobe {
 > -	bootph-all;
 > +	bootph-pre-ram;
 > +	bootph-some-ram;
@@ -313,79 +363,63 @@ Thanks,
 > +	bootph-some-ram;
 >   };
 >   
->   &fspi_pins {
-> -	bootph-all;
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
+>   &ioc {
+> -	bootph-pre-ram;
+> +	bootph-all;
+> +};
+> +
+> +&pcfg_pull_down {
+> +	bootph-all;
 >   };
 >   
->   &grf {
->   	bootph-all;
->   };
->   
-> -&i2c0_xfer {
-> -	bootph-all;
-> -};
-> -
 >   &pcfg_pull_none {
->   	bootph-all;
->   };
->   
->   &pcfg_pull_none_smt {
-> -	bootph-all;
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
->   };
->   
->   &pcfg_pull_up {
-> @@ -98,7 +101,8 @@
+> @@ -168,6 +177,11 @@
 >   };
 >   
 >   &pcfg_pull_up_drv_level_2 {
-> -	bootph-all;
 > +	bootph-pre-ram;
+> +	bootph-some-ram;
+> +};
+> +
+> +&php_grf {
+>   	bootph-all;
+>   };
+>   
+> @@ -181,10 +195,12 @@
+>   
+>   &scmi {
+>   	bootph-pre-ram;
 > +	bootph-some-ram;
 >   };
 >   
->   &pinctrl {
-> @@ -115,35 +119,46 @@
+>   &scmi_clk {
+>   	bootph-pre-ram;
+> +	bootph-some-ram;
+>   };
 >   
 >   &sdhci {
->   	bootph-pre-ram;
-> +	bootph-some-ram;
->   	max-frequency = <200000000>;
+> @@ -200,27 +216,35 @@
 >   };
 >   
->   &sdmmc0 {
->   	bootph-pre-ram;
-> +	bootph-some-ram;
->   };
->   
->   &sdmmc0_bus4 {
+>   &sdmmc_bus4 {
 > -	bootph-all;
 > +	bootph-pre-ram;
 > +	bootph-some-ram;
 >   };
 >   
->   &sdmmc0_clk {
+>   &sdmmc_clk {
 > -	bootph-all;
 > +	bootph-pre-ram;
 > +	bootph-some-ram;
 >   };
 >   
->   &sdmmc0_cmd {
+>   &sdmmc_cmd {
 > -	bootph-all;
 > +	bootph-pre-ram;
 > +	bootph-some-ram;
 >   };
 >   
->   &sdmmc0_det {
-> -	bootph-all;
-> +	bootph-pre-ram;
-> +	bootph-some-ram;
->   };
->   
->   &sdmmc0_pwren {
+>   &sdmmc_det {
 > -	bootph-all;
 > +	bootph-pre-ram;
 > +	bootph-some-ram;
@@ -393,6 +427,11 @@ Thanks,
 > +
 > +&sfc {
 > +	u-boot,spl-sfc-no-dma;
+>   };
+>   
+>   &sys_grf {
+> -	bootph-pre-ram;
+> +	bootph-all;
 >   };
 >   
 >   &uart2 {
