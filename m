@@ -4,95 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62E4EC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 09:34:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B030C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 09:34:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC71788359;
-	Mon, 22 Apr 2024 11:34:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4AE93883CA;
+	Mon, 22 Apr 2024 11:34:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O8UVEUeK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iQE8eBfc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 852A988349; Mon, 22 Apr 2024 11:34:00 +0200 (CEST)
-Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com
- [IPv6:2a00:1450:4864:20::332])
+ id 1335188349; Mon, 22 Apr 2024 11:34:01 +0200 (CEST)
+Received: from mail-wm1-x334.google.com (mail-wm1-x334.google.com
+ [IPv6:2a00:1450:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 633EB883A5
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 11:33:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B3CF6883E3
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 11:33:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x332.google.com with SMTP id
- 5b1f17b1804b1-41a7ae25d53so2549355e9.1
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 02:33:56 -0700 (PDT)
+Received: by mail-wm1-x334.google.com with SMTP id
+ 5b1f17b1804b1-41a74e60753so3120385e9.1
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 02:33:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713778436; x=1714383236; darn=lists.denx.de;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:from:to:cc:subject:date:message-id:reply-to;
- bh=/RIv16n8XfyNbNmjQaRndPKdMOoD4BNUgCQBpXTPCCg=;
- b=O8UVEUeKElozwDFbqJ0pRsxvxJXNNpccMywRGwYesiVQO/kok7dE6FC1JMum5ENWDd
- 1OU/erl8acZP184nTrW4YhwXbzDUEgcAUysqlZe3dbV3Ej+Fesvzmneg8w+fqeyTMsMi
- b4WFhINuKmm/mbGCHpo4p3/r/Rb19hzGG5oqigIHCnZCnk47CJKqA2WJrDbUQjabjFvv
- W2oXKALZG3XexQbEYCIamYMIR2qLfYSIoROfFcWPYo1Mk/f1R8MaYNxkdJ/x98/Q8pSo
- grTV89/sV0QJDcpv96XOZIEMWDq8YD5eucXzuSb5FhFkGkuhtYl5QW12APJhtMZNq53p
- pegg==
+ d=linaro.org; s=google; t=1713778437; x=1714383237; darn=lists.denx.de;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=ghnYoEUk40/o3zk4NjX6BQxvc1KAJCGlPQfAooJ36vY=;
+ b=iQE8eBfcchy17//FtXn40cXk1rr/klSc4/h8WNiHpto9SI9JfHJgNoIrcfWaAXSXf6
+ RU2msXysJ7fDjBXYC765YJcK3TbDLU92tkiCcn51gBejAv0wvKLre0Q+E+Ibh14PJvoZ
+ JNiSLJudPpZQ4Pnhd/JioS2SlH5hWQaAKqMGW7ptESsTUqYCi67oMXwyX1wFjRX2Wzd+
+ bKAdvHZlFSW1hiIzOaai5IHaWLr1c8+vh72ZFLlFKto8nJfPCHoUiYzxhY4yrbwYw1lw
+ +7MEsxRiAQCdV1ZQxV4lAgjsA6KhjXuvUhcIqN78oHk/mZOYt/UYWvnyuF8/8/lAmZbX
+ sA7w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713778436; x=1714383236;
- h=cc:to:content-transfer-encoding:mime-version:message-id:date
- :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/RIv16n8XfyNbNmjQaRndPKdMOoD4BNUgCQBpXTPCCg=;
- b=OZsExR3B1pIKqXQzHyLFelZDAzc25KGMF2jqs9b9JeSZLHyJ7LkwSEgat230jjbvRQ
- ZRgjpGdugeewm/YRE0c+jPTwOCexv8YkvpH52gxSlqzgLNK3mGA+ERzRmD0mCGVsaQ+h
- +5SV35cwPgVZK3lJ9UUt2K04w5FzwPL39d9xNWiqYNxG7usN9Q6zFnE7svhzVW7N0hwQ
- 50qVtN3rr8zriEvO+p3IvM+hQQRT0OUce9+XYtUtakYk1e+A1ccyK9E1mBh7fnQg/eyQ
- Uakl4Lh6R3I8IsHfyEMTaq2I6U3YuXI1KscY71qL6/IKRpQZGIkU5bsnRqoJr+mGNHJZ
- PGTA==
-X-Gm-Message-State: AOJu0YxWjN/y8co+IhWIzSd1TpkgB9vdUGRPhA0ja8fwCD5h04HSVj+u
- S/eWEpDia6xXXPbsvHKFUknUPPKWhOmG05u5LexfjUwx2hBgEDGLpR0NgSf6gY8=
-X-Google-Smtp-Source: AGHT+IGr8PXXmHWMhbnNuHksvkgyBi4KzXU5WrmC70LjXB/OOyKnJrngcETG69F4WWx2bA+2TlqLOw==
-X-Received: by 2002:a05:600c:1c27:b0:419:f9ae:e50 with SMTP id
- j39-20020a05600c1c2700b00419f9ae0e50mr3746960wms.37.1713778435386; 
- Mon, 22 Apr 2024 02:33:55 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1713778437; x=1714383237;
+ h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+ :mime-version:subject:date:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ghnYoEUk40/o3zk4NjX6BQxvc1KAJCGlPQfAooJ36vY=;
+ b=LYukQ6frnClgiGFzkyiE8Ap8up5/FKeTnbMH2RDOW2ZxQ/JlBxXtWU+5A7eM1zbwTs
+ NyoubSbfvLQrp0tQ93A4SRf1xKwi90IAAlEubSS7FVcGNk5KXir588BGznnisBzvJVfp
+ IcGoRFFEIKbH3B2LjB0COqY7sKO6cSXPLGsk80HBLADjoSSGa83my9cmzPkLLtYnv16t
+ wRZQMgUxIvAb1dDJV4LBNm2/alklImCCfjw/XVWf7WATmhP8XAHMXjkFBJlfnsf0YTvh
+ sjB/uLYbidIf8BQCmdFGjf1H7LYPhraO/vKFmUG1sdN5zv35KTM1vj0S2xnfIpOPCzh1
+ mwvw==
+X-Gm-Message-State: AOJu0YwpUGtb6JgbvN/MWRz0BS+SJ4XTrU0k0XOARcKpxcXd/xpznGTc
+ chf7QDIznkqFx/sv0Xu/gVwAyV2Rr7Ns8gEMzsXvzpqCZ/Pwg+jOISJiiKZXB40=
+X-Google-Smtp-Source: AGHT+IHInUpISXLYJRQa9w97cbUAIS4nG9KU7DBVBbYYup/FfWMaARGfmQrOh8oWB+9Zo48Vh+f7NA==
+X-Received: by 2002:a05:600c:c19:b0:41a:741b:300d with SMTP id
+ fm25-20020a05600c0c1900b0041a741b300dmr809100wmb.2.1713778436934; 
+ Mon, 22 Apr 2024 02:33:56 -0700 (PDT)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- o12-20020a05600c4fcc00b00418a6d62ad0sm19755138wmq.34.2024.04.22.02.33.54
+ o12-20020a05600c4fcc00b00418a6d62ad0sm19755138wmq.34.2024.04.22.02.33.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 02:33:55 -0700 (PDT)
+ Mon, 22 Apr 2024 02:33:56 -0700 (PDT)
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: [PATCH v2 0/2] i2c: Add support for Qualcomm Generic Interface
- (GENI) I2C controller
-Date: Mon, 22 Apr 2024 11:33:51 +0200
-Message-Id: <20240422-topic-sm8x50-i2c-v2-0-f9ad61c33b07@linaro.org>
+Date: Mon, 22 Apr 2024 11:33:53 +0200
+Subject: [PATCH v2 2/2] configs: qcom_defconfig: enable GENI I2C Driver
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAP8uJmYC/32NQQ7CIBBFr9LM2jGABbQr72G6QArtJFoaaEhNw
- 93FHsDle8l/f4fkIrkEXbNDdJkShbmCODVgJzOPDmmoDIKJlrX8hmtYyGJ6XzfJkITFp+ROajV
- ILzXU2RKdp+1IPvrKE6U1xM/xkPnP/olljgyVVrUptBcXc3/RbGI4hzhCX0r5Ard4pBaxAAAA
+Message-Id: <20240422-topic-sm8x50-i2c-v2-2-f9ad61c33b07@linaro.org>
+References: <20240422-topic-sm8x50-i2c-v2-0-f9ad61c33b07@linaro.org>
+In-Reply-To: <20240422-topic-sm8x50-i2c-v2-0-f9ad61c33b07@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>, 
  Caleb Connolly <caleb.connolly@linaro.org>, 
  Sumit Garg <sumit.garg@linaro.org>
 Cc: u-boot@lists.denx.de, Neil Armstrong <neil.armstrong@linaro.org>
 X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1699;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=625;
  i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=Tp8EcxkIciy0JJBvekvw8T2WDSkAoHVyQPqDGu0GkRI=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmJi8Bidx09NpGo2PT3PFAFMc8ILiV65Ltgh+1Y1rN
- kCF+osiJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZiYvAQAKCRB33NvayMhJ0Vc+D/
- 97wJRvRRZcRuMgdoGEPtW5UM047L8U7dAfWIca5j1sK4Xq5/ghOYDVfloC60YhWChq0UgUxLO+XZwa
- s0hlMmvX068zxTRPnnsIGUmLbMY8lcuXUry3ImHv6HgE1bndxnVZ4kvPsYqkwEqB/Oc7M+20QrnUdA
- lSLZrZjUJS3HBYp0lZKbztiVyY9XlfFKHqppaGie18In/ehALLJtx0I1x0Tbx3fhi9gfIQ60hTpcn9
- FI2ddspdHRiliqfnvTsTXF9fqRI869IYgPNsprZEyDpSGOT2IK7uCLWWwUb/ZvjQ79FIVM26N4s7/O
- vXBC0voYD1q+Tn2hSDKw8cllJ4nxY33XJ+cLrkcF41/bZC0MIzrUMBNWU05t6vhbM4eUMoFmEDNGIu
- /l7zqO9lUsuM4NYOanL5vUE2+JidJYUs3mO/F5BSWI8z5n45XLpewqZH4hFoeE8k9/cuwPTZCCNqbB
- AF5ir+xptcK1P1ywuRN5zyfkskftZwPtoabELI0Uir3M+KwjwFnZrKW7l1eJxysB8fLcVElXHQBTKJ
- XtwIE2A8bS1CxANg6Bpepo9cBtRzujGGc6FmLvrgTH0a0LAt9UoPrMr2RV2zZjgUSYWFcUGRoOQNfb
- ulow0fsenJFdwRU7mTFUlt+LQG6rlGDP8GOrq0Y4rShSbM+sNlRA1Eo/3kEQ==
+ bh=0l4s3Af6IDIwKQhBsTS5QWo6ORXMbRIIuHK4qrkcyh4=;
+ b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBmJi8CzZMF4MjtBn4vGIm8/bisyroWhKB28R/J/3Qu
+ p4xlPyeJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZiYvAgAKCRB33NvayMhJ0VMHD/
+ 9XClS74prezIy7Ffg5hF0tyJBuTAyLqSJrWvv4oUcYixt50SOsp91fKFKzqkDCXmeYx8DoH6Xy/pGW
+ Uo/E9lXTnNUijlGMNt8dA0ZNjfazvUwwig0Hsh+bz+jAcXiLm+TlJ4tN/eiZGHrzhVF8vuUyucpNED
+ uwFZAdHCVgC8ngkYefis10Zty5/bBmZmAi86g1S3qaBqCzSC66VPc4DfzMUV2XWltsx7vdZLUz5G1+
+ tUDnNq/VfrbJwg0VJM/yMmF2bjQJZjx8MMZ9x+84wfb0GLQ1+86Q8mR4ys87H9eaHGbb4Ygvc2PzQ/
+ nG9aEwappIIyITOLK8qK2MIy0VsoTm79zIYg10DyuZh/TbB/rAfZtVLyazZerQHtPP8crrtbN6Tf+e
+ 5podlGO0I/UcNkHb8cuOoTNSCyMZJuY99w5I0ofpsZpwXHkF8qZ++9lr6MTxYPqI3NUyyr3aSM+lpK
+ q6kct7p5Hs8zFDfUHWUqHCMfXpNjGj6JQtLHttj5RaAi0gpuQSrv2zGSARrsGQdkTMgPysRxw0skUB
+ MqMsNPd01M2Fw0m+ssUgZqYAPMx46v+nNkGPwUKWpvgeCn6UnraS3zNMLxiBwJ8N30xoWEIfTvnwjq
+ YZr4UY1vUt6HVMEBk4TN5NRDUrk3SImIVCJY/no9KQ55eXOntaLTjprlRMAg==
 X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
  fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
 X-BeenThere: u-boot@lists.denx.de
@@ -111,49 +109,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add Support for the Qualcomm Generic Interface (GENI) I2C interface
-found on newer Qualcomm SoCs.
+Enable the GENI I2C driver in the default Qualcomm defconfig.
 
-The Generic Interface (GENI) is a firmware based Qualcomm Universal
-Peripherals (QUP) Serial Engine (SE) Wrapper which can support multiple
-bus protocols depending on the firmware type loaded at early boot time
-based on system configuration.
-
-It also supports the "I2C Master Hub" which is a single function Wrapper
-that only FIFO mode I2C.
-
-It replaces the fixed-function QUP Wrapper found on older SoCs.
-
-The geni-se.h containing the generic GENI Serial Engine registers defines
-is imported from Linux.
-
-Only FIFO mode is implemented, neither SE DMA nor GPI DMA are implemented.
-
-Finally enable the driver in the default Qualcomm defconfig.
-
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
 ---
-Changes in v2:
-- Fixed commit msg, removed useless debug, switched to dev_err() in probe
-- Fixed some possible issues & typos and W=1 build warning
-- Link to v1: https://lore.kernel.org/r/20240419-topic-sm8x50-i2c-v1-0-67651e27f23a@linaro.org
+ configs/qcom_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
----
-Neil Armstrong (2):
-      i2c: Add support for Qualcomm Generic Interface (GENI) I2C controller
-      configs: qcom_defconfig: enable GENI I2C Driver
+diff --git a/configs/qcom_defconfig b/configs/qcom_defconfig
+index 1abb57345ff..8d440b23625 100644
+--- a/configs/qcom_defconfig
++++ b/configs/qcom_defconfig
+@@ -41,6 +41,7 @@ CONFIG_MSM_GPIO=y
+ CONFIG_QCOM_PMIC_GPIO=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_QUP=y
++CONFIG_SYS_I2C_GENI=y
+ CONFIG_I2C_MUX=y
+ CONFIG_DM_KEYBOARD=y
+ CONFIG_BUTTON_KEYBOARD=y
 
- configs/qcom_defconfig     |   1 +
- drivers/i2c/Kconfig        |  10 +
- drivers/i2c/Makefile       |   1 +
- drivers/i2c/geni_i2c.c     | 575 +++++++++++++++++++++++++++++++++++++++++++++
- include/soc/qcom/geni-se.h | 265 +++++++++++++++++++++
- 5 files changed, 852 insertions(+)
----
-base-commit: b2511143fba4c0631446c968fb4c0d962b01d850
-change-id: 20240419-topic-sm8x50-i2c-b51e576d5f57
-
-Best regards,
 -- 
-Neil Armstrong <neil.armstrong@linaro.org>
+2.34.1
 
