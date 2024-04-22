@@ -4,72 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F109C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 21:11:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8765CC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 21:41:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D44088A4E;
-	Mon, 22 Apr 2024 23:11:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F14AF88A79;
+	Mon, 22 Apr 2024 23:41:02 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tHiK6vlS";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RTJHuV/6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 08E5988A46; Mon, 22 Apr 2024 23:11:42 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6B9E388A77; Mon, 22 Apr 2024 23:41:01 +0200 (CEST)
+Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E6E188A4E
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 23:11:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C24AD88A6C
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 23:40:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-69b59c10720so21112906d6.3
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 14:11:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713820297; x=1714425097; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=kfbXGzd4uha5dzyZHM4RU134vy3j/ktITPtjbjvP2DM=;
- b=tHiK6vlSa35k/kh+lTWNCKTY3Em2phz62nRbTOhCjksXPCibz6j9DpwVUr2KnKE5U6
- j4wr6ySSPh4T/mW2gfHFXg2ZcscJmhzKBKKM95/sHAI4S36D0N1dV+j1RvSpXz7zHTO8
- 0MEvSni6XbegE8BMVz+pL0y52D3y4BfwmqoGM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713820297; x=1714425097;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=kfbXGzd4uha5dzyZHM4RU134vy3j/ktITPtjbjvP2DM=;
- b=lL1tcKJviLHCoN497B+dGJy34Q7Eq+ucvTlHVQi/Z9iYasjxwvsQ8Y+phOlodgxvrZ
- PigkQUWww87hDU3NvQRKoIgKxC/Y7aVPluQw7fgKhLQSQhBw89OJfnMogNzdLiId+SFS
- K48/YQxrBLlZiaDuWsUEtr516XfgHKU7ycphcSDgOADgvFVMt0C79B2jk7Rz1lyf0BZ3
- 9mK+THrn/YOARagnMOxlITTRC0eLUTwq/77OFIx/did5oobJnM1MkOREW39q01pzELB8
- jN/mQdnkarzMTmXc8Kak5Bhx3O1VZaJchEIVd0ST+2Wol5sd9ifj1VwGsA/zGuksYEFg
- 5zJw==
-X-Gm-Message-State: AOJu0Yysi0yF6YSeQ1XeLwQoCaI9jQsjBKKSLCGKaB592gdqO129Kl+N
- cKbcLfjMTccGaqvtQIUNnvhNjPfY3mj+5beYLHt3062OrLsgoG2vGMXCZIopjIJ7oQvKN13Q0Tn
- aEh55WA==
-X-Google-Smtp-Source: AGHT+IGJz9vFy5F+r6R2kUwVg9jIdtkjB2lH9e/Um+WvXAQJhzPzNbKqOPI+BdB+84p7lMlJle3YzQ==
-X-Received: by 2002:a05:6214:e4c:b0:6a0:7a38:6e83 with SMTP id
- o12-20020a0562140e4c00b006a07a386e83mr7911915qvc.37.1713820296808; 
- Mon, 22 Apr 2024 14:11:36 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- t10-20020a0ca68a000000b0069b432df140sm2117670qva.121.2024.04.22.14.11.35
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 14:11:36 -0700 (PDT)
-Date: Mon, 22 Apr 2024 15:11:33 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2024.07-rc1 released
-Message-ID: <20240422211133.GX1054907@bill-the-cat>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43MLeunP038939;
+ Mon, 22 Apr 2024 16:40:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1713822056;
+ bh=fQ1fiEgknnshP4TqbrXX0HNB98/rR3smply9He16CUk=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=RTJHuV/6oGmrPw52PPKeohUBPUfD89HrVLTQ7Z9fajP7PA8OeCS90Fn97fJEtZYpr
+ /tRMjhYDVcl4UmzwNeDGn+ZL92bSSqtmsZS/bEW/ijKCnkwKtoaBwVz72JC3v8Cdnj
+ UQMmLD/r9AV5F/LCYz9PEcXOln7fb50NV6vp5MD0=
+Received: from DFLE108.ent.ti.com (dfle108.ent.ti.com [10.64.6.29])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43MLeuWq049930
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 22 Apr 2024 16:40:56 -0500
+Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 22
+ Apr 2024 16:40:56 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 22 Apr 2024 16:40:56 -0500
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [172.24.227.36])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43MLenlC051404;
+ Mon, 22 Apr 2024 16:40:53 -0500
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <u-boot@lists.denx.de>, <trini@konsulko.com>, <sjg@chromium.org>
+CC: <afd@ti.com>, <kamlesh@ti.com>, <m-chawdhry@ti.com>, <u-kumar1@ti.com>,
+ <n-francis@ti.com>, <bsheraw@ti.com>, <s-anna@ti.com>, <a-limaye@ti.com>
+Subject: [PATCH 1/2] arm: dts: k3-j721e-binman: Add support for HSSE2.0 and
+ HSFS1.1
+Date: Tue, 23 Apr 2024 03:10:47 +0530
+Message-ID: <20240422214048.1292713-2-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240422214048.1292713-1-n-francis@ti.com>
+References: <20240422214048.1292713-1-n-francis@ti.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="IoXg7I5f59bjRXDk"
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,47 +81,234 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+J721E has SR1.1 and SR2.0 having three variants of each GP, HS-FS and
+HS-SE. Current build does not generate HS-SE SR2.0 and HS-FS SR1.1 so
+add support for them.
 
---IoXg7I5f59bjRXDk
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Reported-by: Suman Anna <s-anna@ti.com>
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+---
+ arch/arm/dts/k3-j721e-binman.dtsi | 201 +++++++++++++++++++++++++++++-
+ 1 file changed, 200 insertions(+), 1 deletion(-)
 
-Hey all,
+diff --git a/arch/arm/dts/k3-j721e-binman.dtsi b/arch/arm/dts/k3-j721e-binman.dtsi
+index 75a6e9599b9..90e4a31329e 100644
+--- a/arch/arm/dts/k3-j721e-binman.dtsi
++++ b/arch/arm/dts/k3-j721e-binman.dtsi
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /*
+- * Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2022-2024 Texas Instruments Incorporated - https://www.ti.com/
+  */
+ 
+ #include "k3-binman.dtsi"
+@@ -129,6 +129,205 @@
+ 	};
+ };
+ 
++&binman {
++	tiboot3-j721e_sr2-hs-evm.bin {
++		filename = "tiboot3-j721e_sr2-hs-evm.bin";
++		ti-secure-rom {
++			content = <&u_boot_spl_sr2>;
++			core = "public";
++			core-opts = <2>;
++			load = <CONFIG_SPL_TEXT_BASE>;
++			keyfile = "custMpk.pem";
++		};
++		u_boot_spl_sr2: u-boot-spl {
++			no-expanded;
++		};
++	};
++	sysfw_sr2 {
++		filename = "sysfw.bin_sr2";
++		ti-secure-rom {
++			content = <&ti_fs_cert_sr2>;
++			core = "secure";
++			load = <0x40000>;
++			keyfile = "custMpk.pem";
++			countersign;
++		};
++		ti_fs_cert_sr2: ti-fs-cert.bin {
++			filename = "ti-sysfw/ti-fs-firmware-j721e_sr2-hs-cert.bin";
++			type = "blob-ext";
++			optional;
++		};
++		ti-fs-firmware-j721e_sr2-hs-enc.bin {
++			filename = "ti-sysfw/ti-fs-firmware-j721e_sr2-hs-enc.bin";
++			type = "blob-ext";
++			optional;
++		};
++	};
++	itb_sr2 {
++		filename = "sysfw-j721e_sr2-hs-evm.itb";
++		fit {
++			description = "SYSFW and Config fragments";
++			#address-cells = <1>;
++			images {
++				sysfw.bin {
++					description = "sysfw";
++					type = "firmware";
++					arch = "arm";
++					compression = "none";
++					blob-ext {
++					    filename = "sysfw.bin_sr2";
++					};
++				};
++				board-cfg.bin {
++					description = "board-cfg";
++					type = "firmware";
++					arch = "arm";
++					compression = "none";
++					ti-secure {
++						content = <&board_cfg_sr2>;
++						keyfile = "custMpk.pem";
++					};
++					board_cfg_sr2: board-cfg {
++						filename = "board-cfg.bin";
++						type = "blob-ext";
++					};
++
++				};
++				pm-cfg.bin {
++					description = "pm-cfg";
++					type = "firmware";
++					arch = "arm";
++					compression = "none";
++					ti-secure {
++						content = <&pm_cfg_sr2>;
++						keyfile = "custMpk.pem";
++					};
++					pm_cfg_sr2: pm-cfg {
++						filename = "pm-cfg.bin";
++						type = "blob-ext";
++					};
++				};
++				rm-cfg.bin {
++					description = "rm-cfg";
++					type = "firmware";
++					arch = "arm";
++					compression = "none";
++					ti-secure {
++						content = <&rm_cfg_sr2>;
++						keyfile = "custMpk.pem";
++					};
++					rm_cfg_sr2: rm-cfg {
++						filename = "rm-cfg.bin";
++						type = "blob-ext";
++					};
++				};
++				sec-cfg.bin {
++					description = "sec-cfg";
++					type = "firmware";
++					arch = "arm";
++					compression = "none";
++					ti-secure {
++						content = <&sec_cfg_sr2>;
++						keyfile = "custMpk.pem";
++					};
++					sec_cfg_sr2: sec-cfg {
++						filename = "sec-cfg.bin";
++						type = "blob-ext";
++					};
++				};
++			};
++		};
++	};
++};
++
++&binman {
++	tiboot3-j721e_sr1_1-hs-fs-evm.bin {
++		filename = "tiboot3-j721e_sr1_1-hs-fs-evm.bin";
++		ti-secure-rom {
++			content = <&u_boot_spl_fs_sr1_1>;
++			core = "public";
++			core-opts = <2>;
++			load = <CONFIG_SPL_TEXT_BASE>;
++			keyfile = "custMpk.pem";
++		};
++		u_boot_spl_fs_sr1_1: u-boot-spl {
++			no-expanded;
++		};
++	};
++	sysfw_fs_sr1_1 {
++		filename = "sysfw.bin_fs_sr1_1";
++		ti-fs-cert-fs.bin {
++			filename = "ti-sysfw/ti-fs-firmware-j721e_sr1_1-hs-fs-cert.bin";
++			type = "blob-ext";
++			optional;
++		};
++		ti-fs-firmware-j721e-hs-fs-enc.bin {
++			filename = "ti-sysfw/ti-fs-firmware-j721e_sr1_1-hs-fs-enc.bin";
++			type = "blob-ext";
++			optional;
++		};
++	};
++	itb_fs_sr1_1 {
++		filename = "sysfw-j721e_sr1_1-hs-fs-evm.itb";
++		fit {
++			description = "SYSFW and Config fragments";
++			#address-cells = <1>;
++			images {
++				sysfw.bin {
++					description = "sysfw";
++					type = "firmware";
++					arch = "arm";
++					compression = "none";
++					blob-ext {
++					    filename = "sysfw.bin_fs_sr1_1";
++					};
++				};
++				board-cfg.bin {
++					description = "board-cfg";
++					type = "firmware";
++					arch = "arm";
++					compression = "none";
++					board-cfg {
++						filename = "board-cfg.bin";
++						type = "blob-ext";
++					};
++
++				};
++				pm-cfg.bin {
++					description = "pm-cfg";
++					type = "firmware";
++					arch = "arm";
++					compression = "none";
++					pm-cfg {
++						filename = "pm-cfg.bin";
++						type = "blob-ext";
++					};
++				};
++				rm-cfg.bin {
++					description = "rm-cfg";
++					type = "firmware";
++					arch = "arm";
++					compression = "none";
++					rm-cfg {
++						filename = "rm-cfg.bin";
++						type = "blob-ext";
++					};
++				};
++				sec-cfg.bin {
++					description = "sec-cfg";
++					type = "firmware";
++					arch = "arm";
++					compression = "none";
++					sec-cfg {
++						filename = "sec-cfg.bin";
++						type = "blob-ext";
++					};
++				};
++			};
++		};
++	};
++};
++
+ &binman {
+ 	tiboot3-j721e_sr2-hs-fs-evm.bin {
+ 		filename = "tiboot3-j721e_sr2-hs-fs-evm.bin";
+-- 
+2.34.1
 
-It's release day and here is -rc1. Looking at my own queue, I think
-things are overall good. There's a few changes I want to pull in still
-(mainly moving more things to OF_UPSTREAM) but since they were recently
-posted I'll wait a little bit.
-
-In terms of a changelog,=20
-git log --merges v2024.04..v2024.07-rc1
-contains what I've pulled but as always, better PR messages and tags
-will provide better results here.
-
-I hope to remain on schedule and that means the rest of the rcs every
-other Monday, and with final release on Monday, July 1st, 2024. Thanks
-all!
-
---=20
-Tom
-
---IoXg7I5f59bjRXDk
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYm0oUACgkQFHw5/5Y0
-tyznKAv+JFyxCFn9QdcAG+Gu3FADgRTEdQlMwa5chWD1zmnhDw8Cgm+Hwq1i8bP8
-ivSKv0G0mGx61Jx93ywIuBByL5jMazPFf5f9/thEpFJhXZNdImgziQ9CL9F5EHUQ
-tTaQ3J7xFBmoF3O1FiVY3oCEglBARToBgBTy58kMVlzzfECHrJO4WqCaKz2rHkev
-zSvVO83UfvYYg6akm99xx/7f5XjAmF6Js3S0D5rjxTYXs3urMETs90G0roZm7jEG
-OLjFpP7fn/iZPw5VstK8k8ax1IRmoFYsRCxjhHElsQ+rsHtMrMU+qshLYpufCJzj
-WbhTP3hZh4h/ONGAhCB95N3/a1EshGGHzifzlg3plzWenHZYvV1Mjs1f9FEaXuxt
-dd+FFGs4SvtOFsXm86c/6VxMbDoO7mVPTfTreo+R19kjNH7eK4nyBKVmnf33cAX+
-tMUvHf3jmGo+GNftdT64ojaKDcnJgYQOveUABMblkVyGCV9pH1zQobJzVdBNN/UA
-PVvfFGtV
-=7BJ8
------END PGP SIGNATURE-----
-
---IoXg7I5f59bjRXDk--
