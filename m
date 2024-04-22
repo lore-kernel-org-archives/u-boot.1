@@ -4,62 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49AFFC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:50:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7269C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 08:50:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF9AB8838B;
-	Mon, 22 Apr 2024 10:50:23 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B2CE883A6;
+	Mon, 22 Apr 2024 10:50:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="jQPqYRfC";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="idukvbu6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5B84F88374; Mon, 22 Apr 2024 10:50:23 +0200 (CEST)
-Received: from mail-m127158.xmail.ntesmail.com
- (mail-m127158.xmail.ntesmail.com [115.236.127.158])
+ id EB8A4883C8; Mon, 22 Apr 2024 10:50:43 +0200 (CEST)
+Received: from mail-m127106.qiye.163.com (mail-m127106.qiye.163.com
+ [115.236.127.106])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EA788838E
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:50:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F961883A5
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 10:50:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=jQPqYRfCZAJrXKI5EtGV1ry/ILVuKK/TRwmMpH6dFiYSSwgM9m0SHG0BJhKUEzbJxxABzSUG8nU7Frjak6JP2CUYcttj84bE/QYptKPU8kSCysyNDRR4FhxeD+b0oEuvuoqpzo+plxXwSUhEFdavgaihHHdPza8YPw5opPelG9k=;
+ b=idukvbu6mHK5/ekxtEIB0NvqiHR0tQJye0RpTzp352U8lPe5MN3WKf81obvKKLJLk8OeEdW6G4flM+y7RKjwcrdLRkij1dx2a7tNh/QsDi68KIsHSJCvXhvQky+NmRyGE/jp7JE8hTEHM0F04yEsyKfcVxMHFmEY2BQR/CugGb4=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=GXfDFeK76CCZ8xoKeQp0ZTpG8QX3cvDA77ONoGSZEUc=;
+ bh=LnPCf9XP+MBv0ZR3SL/5mXZWR0Wkx6hs4xqGtbcYyco=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 437FB90031D;
- Mon, 22 Apr 2024 16:50:08 +0800 (CST)
-Message-ID: <e81a920d-e8db-4e98-a221-ea13e00c8937@rock-chips.com>
-Date: Mon, 22 Apr 2024 16:50:07 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id C09A09002E2;
+ Mon, 22 Apr 2024 16:50:23 +0800 (CST)
+Message-ID: <64f3275d-fea4-4741-b621-31bbdb166685@rock-chips.com>
+Date: Mon, 22 Apr 2024 16:50:23 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 11/14] rockchip: rk3308-evb: Update defconfig
-To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Andy Yan <andy.yan@rock-chips.com>
-Cc: Akash Gajjar <gajjar04akash@gmail.com>, u-boot@lists.denx.de
-References: <20240408181429.3676856-1-jonas@kwiboo.se>
- <20240408181429.3676856-12-jonas@kwiboo.se>
+Subject: Re: [PATCH v3 07/11] rockchip: evb_rk3588 et al.: use DRAM banks from
+ ATAGS
+To: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>,
+ Eugen Hristev <eugen.hristev@collabora.com>, Andy Yan <andyshrk@163.com>,
+ Elon Zhang <zhangzj@rock-chips.com>, Joshua Riek <jjriek@verizon.net>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Jagan Teki <jagan@edgeble.ai>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ Joseph Chen <chenjh@rock-chips.com>, Tianling Shen <cnsztl@gmail.com>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Akash Gajjar <gajjar04akash@gmail.com>
+Cc: u-boot@lists.denx.de, Chris Morgan <macromorgan@hotmail.com>,
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>
+References: <20240415-rk35xx-dram-atags-v3-0-5bc5475b3c0d@theobroma-systems.com>
+ <20240415-rk35xx-dram-atags-v3-7-5bc5475b3c0d@theobroma-systems.com>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240408181429.3676856-12-jonas@kwiboo.se>
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQx8fTVYeQk1PS0gYGEJLSEpVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8f04ff907103a9kunm437fb90031d
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PD46CBw4GDMCCDouK0sWCTkU
- GDIaFEpVSlVKTEpITExOQ0tCSElOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS0pKQjcG
+In-Reply-To: <20240415-rk35xx-dram-atags-v3-7-5bc5475b3c0d@theobroma-systems.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGR1MTVZITh9KGEkaSk0YGh5VEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8f04ffd02203a9kunmc09a09002e2
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MDo6HCo*CzNWOjpKK0oJCRgi
+ TBMaFCxVSlVKTEpITExOQ0lOTk5PVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS0JJTDcG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,127 +87,219 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
 
-On 2024/4/9 02:14, Jonas Karlman wrote:
-> Update defconfig for rk3308-evb with new defaults.
+On 2024/4/15 22:17, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 >
-> Add OF_LIBFDT_OVERLAY=y to support device tree overlays.
+> RK3588-based devices now support creating DRAM banks with proper holes
+> by reading the ATAGS from Rockchip TPL blob, so let's use that mechanism
+> instead.
 >
-> Remove the SPL_DRIVERS_MISC=y option, no misc driver is used in SPL.
+> Since ft_board_setup isn't defined anymore, there's no need for
+> selecting CONFIG_OF_BOARD_SETUP.
 >
-> Use DEBUG_UART_BASE=0xFF0E0000 and disable DEBUG_UART_BOARD_INIT to
-> make debug uart use uart4, same as stdout-path prop.
-
-Why this change happen? I think rk3308-evb is using UART2 on 0xFF0C0000.
-
+> Similarly, because the evb_rk3588.c would be empty, it is simply
+> removed, with the (would-be-empty) Makefile as well.
+>
+> The CONFIG_NR_DRAM_BANK now defaults to 10 which is a safe bet for
+> reading banks from ATAGS, so let's use the default value instead.
+>
+> All defconfigs using the CONFIG_TARGET_EVB_RK3588 are updated at once
+> since they are impacted by this change.
+>
+> Co-developed-by: Chris Morgan <macromorgan@hotmail.com>
+> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
 Thanks,
-
 - Kever
-
->
-> Remove BOOTDELAY=0, SYS_CONSOLE_INFO_QUIET=y and enable more CMD to
-> allow use of U-Boot cmdline.
->
-> Add DM_ETH_PHY=y and PHY_REALTEK=y to support onboard ethernet PHY.
->
-> Add PHY_ROCKCHIP_INNO_USB2=y, DM_USB_GADGET=y and remove USB_DWC2=y to
-> allow full use of USB 2.0 host and otg ports.
->
-> Enable EFI_LOADER to allow EFI boot.
->
-> Signed-off-by: Jonas Karlman<jonas@kwiboo.se>
 > ---
-> v2: Fix DEBUG_UART_BASE and disable DEBUG_UART_BOARD_INIT
-> ---
->   configs/evb-rk3308_defconfig | 37 +++++++++++++++---------------------
->   1 file changed, 15 insertions(+), 22 deletions(-)
+>   board/rockchip/evb_rk3588/Makefile       |  6 -----
+>   board/rockchip/evb_rk3588/evb-rk3588.c   | 39 --------------------------------
+>   configs/coolpi-4b-rk3588s_defconfig      |  2 --
+>   configs/coolpi-cm5-evb-rk3588_defconfig  |  2 --
+>   configs/evb-rk3588_defconfig             |  2 --
+>   configs/generic-rk3588_defconfig         |  2 --
+>   configs/orangepi-5-plus-rk3588_defconfig |  2 --
+>   configs/orangepi-5-rk3588s_defconfig     |  2 --
+>   8 files changed, 57 deletions(-)
 >
-> diff --git a/configs/evb-rk3308_defconfig b/configs/evb-rk3308_defconfig
-> index 9dc7d9c0caea..04a94e13a68a 100644
-> --- a/configs/evb-rk3308_defconfig
-> +++ b/configs/evb-rk3308_defconfig
-> @@ -3,41 +3,32 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+> diff --git a/board/rockchip/evb_rk3588/Makefile b/board/rockchip/evb_rk3588/Makefile
+> deleted file mode 100644
+> index 240d2ec597e..00000000000
+> --- a/board/rockchip/evb_rk3588/Makefile
+> +++ /dev/null
+> @@ -1,6 +0,0 @@
+> -# SPDX-License-Identifier:     GPL-2.0+
+> -#
+> -# Copyright (c) 2023 Rockchip Electronics Co,. Ltd.
+> -#
+> -
+> -obj-y += evb-rk3588.o
+> diff --git a/board/rockchip/evb_rk3588/evb-rk3588.c b/board/rockchip/evb_rk3588/evb-rk3588.c
+> deleted file mode 100644
+> index caf94d8d29c..00000000000
+> --- a/board/rockchip/evb_rk3588/evb-rk3588.c
+> +++ /dev/null
+> @@ -1,39 +0,0 @@
+> -// SPDX-License-Identifier: GPL-2.0+
+> -/*
+> - * Copyright (c) 2023 Rockchip Electronics Co,. Ltd.
+> - */
+> -
+> -#include <fdtdec.h>
+> -#include <fdt_support.h>
+> -
+> -#ifdef CONFIG_OF_BOARD_SETUP
+> -static int rk3588_add_reserved_memory_fdt_nodes(void *new_blob)
+> -{
+> -	struct fdt_memory gap1 = {
+> -		.start = 0x3fc000000,
+> -		.end = 0x3fc4fffff,
+> -	};
+> -	struct fdt_memory gap2 = {
+> -		.start = 0x3fff00000,
+> -		.end = 0x3ffffffff,
+> -	};
+> -	unsigned long flags = FDTDEC_RESERVED_MEMORY_NO_MAP;
+> -	unsigned int ret;
+> -
+> -	/*
+> -	 * Inject the reserved-memory nodes into the DTS
+> -	 */
+> -	ret = fdtdec_add_reserved_memory(new_blob, "gap1", &gap1,  NULL, 0,
+> -					 NULL, flags);
+> -	if (ret)
+> -		return ret;
+> -
+> -	return fdtdec_add_reserved_memory(new_blob, "gap2", &gap2,  NULL, 0,
+> -					  NULL, flags);
+> -}
+> -
+> -int ft_board_setup(void *blob, struct bd_info *bd)
+> -{
+> -	return rk3588_add_reserved_memory_fdt_nodes(blob);
+> -}
+> -#endif
+> diff --git a/configs/coolpi-4b-rk3588s_defconfig b/configs/coolpi-4b-rk3588s_defconfig
+> index a0fe3708344..2608bb67679 100644
+> --- a/configs/coolpi-4b-rk3588s_defconfig
+> +++ b/configs/coolpi-4b-rk3588s_defconfig
+> @@ -2,7 +2,6 @@ CONFIG_ARM=y
+>   CONFIG_SKIP_LOWLEVEL_INIT=y
 >   CONFIG_COUNTER_FREQUENCY=24000000
 >   CONFIG_ARCH_ROCKCHIP=y
->   CONFIG_DEFAULT_DEVICE_TREE="rk3308-evb"
-> +CONFIG_OF_LIBFDT_OVERLAY=y
->   CONFIG_DM_RESET=y
->   CONFIG_ROCKCHIP_RK3308=y
-> -CONFIG_SPL_DRIVERS_MISC=y
->   CONFIG_TARGET_EVB_RK3308=y
-> -CONFIG_DEBUG_UART_BASE=0xFF0C0000
-> +CONFIG_DEBUG_UART_BASE=0xFF0E0000
->   CONFIG_DEBUG_UART_CLOCK=24000000
-> +# CONFIG_DEBUG_UART_BOARD_INIT is not set
->   CONFIG_SYS_LOAD_ADDR=0xc00800
->   CONFIG_DEBUG_UART=y
->   CONFIG_ANDROID_BOOT_IMAGE=y
->   CONFIG_FIT=y
->   CONFIG_FIT_VERBOSE=y
-> -CONFIG_BOOTDELAY=0
->   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3308-evb.dtb"
-> -CONFIG_SYS_CONSOLE_INFO_QUIET=y
+> -CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_SF_DEFAULT_SPEED=24000000
+>   CONFIG_SF_DEFAULT_MODE=0x2000
+>   CONFIG_DEFAULT_DEVICE_TREE="rk3588s-coolpi-4b"
+> @@ -23,7 +22,6 @@ CONFIG_FIT_VERBOSE=y
+>   CONFIG_SPL_FIT_SIGNATURE=y
+>   CONFIG_SPL_LOAD_FIT=y
+>   CONFIG_LEGACY_IMAGE_FORMAT=y
+> -CONFIG_OF_BOARD_SETUP=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-coolpi-4b.dtb"
 >   # CONFIG_DISPLAY_CPUINFO is not set
-> -CONFIG_SPL_MAX_SIZE=0x20000
-> +CONFIG_SPL_MAX_SIZE=0x40000
->   CONFIG_SPL_PAD_TO=0x7f8000
->   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-> -# CONFIG_CMD_BDI is not set
-> -# CONFIG_CMD_CONSOLE is not set
-> -# CONFIG_CMD_ELF is not set
-> -# CONFIG_CMD_IMI is not set
-> -# CONFIG_CMD_XIMG is not set
-> +CONFIG_CMD_GPIO=y
->   CONFIG_CMD_GPT=y
-> -# CONFIG_CMD_LOADB is not set
-> -# CONFIG_CMD_LOADS is not set
->   CONFIG_CMD_MMC=y
->   CONFIG_CMD_USB=y
-> +CONFIG_CMD_ROCKUSB=y
->   CONFIG_CMD_USB_MASS_STORAGE=y
-> -# CONFIG_CMD_ITEST is not set
-> -# CONFIG_CMD_SETEXPR is not set
-> -# CONFIG_CMD_SLEEP is not set
-> -# CONFIG_SPL_DOS_PARTITION is not set
-> -# CONFIG_ISO_PARTITION is not set
-> -CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
-> +CONFIG_CMD_RNG=y
-> +CONFIG_CMD_KASLRSEED=y
-> +CONFIG_CMD_REGULATOR=y
->   CONFIG_SPL_OF_CONTROL=y
->   CONFIG_OF_LIVE=y
->   CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
-> @@ -51,9 +42,11 @@ CONFIG_SYS_I2C_ROCKCHIP=y
->   CONFIG_SUPPORT_EMMC_RPMB=y
->   CONFIG_MMC_DW=y
->   CONFIG_MMC_DW_ROCKCHIP=y
-> +CONFIG_PHY_REALTEK=y
-> +CONFIG_DM_ETH_PHY=y
->   CONFIG_ETH_DESIGNWARE=y
->   CONFIG_GMAC_ROCKCHIP=y
-> -CONFIG_PHY=y
-> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
->   CONFIG_PINCTRL=y
->   CONFIG_REGULATOR_PWM=y
->   CONFIG_DM_REGULATOR_FIXED=y
-> @@ -62,15 +55,15 @@ CONFIG_RAM=y
->   CONFIG_BAUDRATE=1500000
->   CONFIG_DEBUG_UART_SHIFT=2
->   CONFIG_SYS_NS16550_MEM32=y
-> +CONFIG_SYSINFO=y
->   CONFIG_SYSRESET=y
->   CONFIG_USB=y
-> +CONFIG_DM_USB_GADGET=y
->   CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
-> -CONFIG_USB_DWC2=y
->   CONFIG_USB_GADGET=y
->   CONFIG_USB_GADGET_DWC2_OTG=y
->   CONFIG_USB_GADGET_DOWNLOAD=y
-> -CONFIG_SPL_TINY_MEMSET=y
-> +CONFIG_USB_FUNCTION_ROCKUSB=y
->   CONFIG_LZO=y
->   CONFIG_ERRNO_STR=y
-> -# CONFIG_EFI_LOADER is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> diff --git a/configs/coolpi-cm5-evb-rk3588_defconfig b/configs/coolpi-cm5-evb-rk3588_defconfig
+> index fc17660da2a..c5bb7a42957 100644
+> --- a/configs/coolpi-cm5-evb-rk3588_defconfig
+> +++ b/configs/coolpi-cm5-evb-rk3588_defconfig
+> @@ -2,7 +2,6 @@ CONFIG_ARM=y
+>   CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+> -CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_SF_DEFAULT_SPEED=24000000
+>   CONFIG_SF_DEFAULT_MODE=0x2000
+>   CONFIG_DEFAULT_DEVICE_TREE="rk3588-coolpi-cm5-evb"
+> @@ -23,7 +22,6 @@ CONFIG_FIT_VERBOSE=y
+>   CONFIG_SPL_FIT_SIGNATURE=y
+>   CONFIG_SPL_LOAD_FIT=y
+>   CONFIG_LEGACY_IMAGE_FORMAT=y
+> -CONFIG_OF_BOARD_SETUP=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-coolpi-cm5-evb.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> diff --git a/configs/evb-rk3588_defconfig b/configs/evb-rk3588_defconfig
+> index c8db04c076e..187cf26a5c9 100644
+> --- a/configs/evb-rk3588_defconfig
+> +++ b/configs/evb-rk3588_defconfig
+> @@ -2,7 +2,6 @@ CONFIG_ARM=y
+>   CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+> -CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_DEFAULT_DEVICE_TREE="rk3588-evb1-v10"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_SPL_SERIAL=y
+> @@ -16,7 +15,6 @@ CONFIG_FIT_VERBOSE=y
+>   CONFIG_SPL_FIT_SIGNATURE=y
+>   CONFIG_SPL_LOAD_FIT=y
+>   CONFIG_LEGACY_IMAGE_FORMAT=y
+> -CONFIG_OF_BOARD_SETUP=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-evb1-v10.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> diff --git a/configs/generic-rk3588_defconfig b/configs/generic-rk3588_defconfig
+> index b50f4f8b800..e7a372a828c 100644
+> --- a/configs/generic-rk3588_defconfig
+> +++ b/configs/generic-rk3588_defconfig
+> @@ -2,7 +2,6 @@ CONFIG_ARM=y
+>   CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+> -CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_DEFAULT_DEVICE_TREE="rk3588-generic"
+>   CONFIG_ROCKCHIP_RK3588=y
+>   CONFIG_SPL_SERIAL=y
+> @@ -16,7 +15,6 @@ CONFIG_FIT_VERBOSE=y
+>   CONFIG_SPL_FIT_SIGNATURE=y
+>   CONFIG_SPL_LOAD_FIT=y
+>   CONFIG_LEGACY_IMAGE_FORMAT=y
+> -CONFIG_OF_BOARD_SETUP=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-generic.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> diff --git a/configs/orangepi-5-plus-rk3588_defconfig b/configs/orangepi-5-plus-rk3588_defconfig
+> index d6e23c154f1..ba8005363ad 100644
+> --- a/configs/orangepi-5-plus-rk3588_defconfig
+> +++ b/configs/orangepi-5-plus-rk3588_defconfig
+> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+> -CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_SF_DEFAULT_SPEED=24000000
+>   CONFIG_SF_DEFAULT_MODE=0x2000
+>   CONFIG_DEFAULT_DEVICE_TREE="rk3588-orangepi-5-plus"
+> @@ -24,7 +23,6 @@ CONFIG_FIT_VERBOSE=y
+>   CONFIG_SPL_FIT_SIGNATURE=y
+>   CONFIG_SPL_LOAD_FIT=y
+>   CONFIG_LEGACY_IMAGE_FORMAT=y
+> -CONFIG_OF_BOARD_SETUP=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-orangepi-5-plus.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+> diff --git a/configs/orangepi-5-rk3588s_defconfig b/configs/orangepi-5-rk3588s_defconfig
+> index e6b3da1dc59..d61f85aaa8c 100644
+> --- a/configs/orangepi-5-rk3588s_defconfig
+> +++ b/configs/orangepi-5-rk3588s_defconfig
+> @@ -2,7 +2,6 @@ CONFIG_ARM=y
+>   CONFIG_SKIP_LOWLEVEL_INIT=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+> -CONFIG_NR_DRAM_BANKS=2
+>   CONFIG_SF_DEFAULT_SPEED=24000000
+>   CONFIG_SF_DEFAULT_MODE=0x2000
+>   CONFIG_DEFAULT_DEVICE_TREE="rk3588s-orangepi-5"
+> @@ -23,7 +22,6 @@ CONFIG_FIT_VERBOSE=y
+>   CONFIG_SPL_FIT_SIGNATURE=y
+>   CONFIG_SPL_LOAD_FIT=y
+>   CONFIG_LEGACY_IMAGE_FORMAT=y
+> -CONFIG_OF_BOARD_SETUP=y
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-orangepi-5.dtb"
+>   # CONFIG_DISPLAY_CPUINFO is not set
+>   CONFIG_DISPLAY_BOARDINFO_LATE=y
+>
