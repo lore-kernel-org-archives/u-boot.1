@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48004C07C79
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 20:02:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F109C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 21:11:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC749889E9;
-	Mon, 22 Apr 2024 22:02:30 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
+	by phobos.denx.de (Postfix) with ESMTP id 6D44088A4E;
+	Mon, 22 Apr 2024 23:11:43 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="b4lk4QDe";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tHiK6vlS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9A31889C9; Mon, 22 Apr 2024 21:44:05 +0200 (CEST)
-Received: from mail-pf1-x436.google.com (mail-pf1-x436.google.com
- [IPv6:2607:f8b0:4864:20::436])
+ id 08E5988A46; Mon, 22 Apr 2024 23:11:42 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F04A889B5
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 21:44:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ventanamicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4E6E188A4E
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 23:11:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dbarboza@ventanamicro.com
-Received: by mail-pf1-x436.google.com with SMTP id
- d2e1a72fcca58-6f26588dd5eso1887194b3a.0
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 12:44:03 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-69b59c10720so21112906d6.3
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 14:11:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1713815042; x=1714419842; darn=lists.denx.de; 
- h=content-transfer-encoding:subject:from:cc:content-language:to
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
- :message-id:reply-to;
- bh=f5kOw1Jx+Ez1acgV90ifnmZkZPPUCcADTMhG8thU4QM=;
- b=b4lk4QDeY3A7mOYnV+FaXN60xIQ1ob5KqvJg4u43n4VRMhYCDqA/uKnG2Ay0IZ94vT
- vhJNVvbW4Dnow53ZXMjAwz3BxoIYrq4DHDa7zt9XykL49DeRSYS07F915yPQrh7ZaCu9
- MUxtprQOrQYvcItZM7iGCPUiqbbM2Qv5opQ78eq4YlpC7cST/Ip+Ti2p0YZ8k4poztCH
- 06ZKsVW+PTseaoJqoWA2Q3w2J/N77vpIXPR3ZPDtinGssZBtJe4nDLLBtBP22tMT8Of5
- 9GLoHND8TSEk1Y/pbk4fYjwN7iDmEDM58gqPMJB9OXBQL3RbB7r/gcZqDRx2QhygKgpR
- cKUQ==
+ d=konsulko.com; s=google; t=1713820297; x=1714425097; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=kfbXGzd4uha5dzyZHM4RU134vy3j/ktITPtjbjvP2DM=;
+ b=tHiK6vlSa35k/kh+lTWNCKTY3Em2phz62nRbTOhCjksXPCibz6j9DpwVUr2KnKE5U6
+ j4wr6ySSPh4T/mW2gfHFXg2ZcscJmhzKBKKM95/sHAI4S36D0N1dV+j1RvSpXz7zHTO8
+ 0MEvSni6XbegE8BMVz+pL0y52D3y4BfwmqoGM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713815042; x=1714419842;
- h=content-transfer-encoding:subject:from:cc:content-language:to
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=f5kOw1Jx+Ez1acgV90ifnmZkZPPUCcADTMhG8thU4QM=;
- b=e/7bWwjsrcsBd81ev+TZ5oYqZs751jP/p1Wsx54OiwuluTGNamx+JZ1P4gKni0ZLSE
- rnJJ03ZZqX5Y0UDv8x8oKPKRovpbmE305dtNfCKSGqIaUWcteFSCuvuUhrgMVl1gKzQR
- UxgDb9WYjL3juN7JWGPrWzPaiWf5XFoeS/fCic84CbOWOXr/ymewW1fNu8xZixhetmVh
- N0v+xNLVyGlVfoP7+Xrv6ERucuf31+S9oBz5I6FWYbpBX4BzNFIe/MDIu6GqBvsBsYUB
- IQ43eRe+U12fvGNGnsh0oOEJ01D0AD0rN9rFL15llnhDlkvTxedHT6dzC29E7TiUm9mB
- 8DiA==
-X-Gm-Message-State: AOJu0YzfC0+4mg5IM0pDXmvUlvkywxPwm2Y9q5wLWoe8gZu6luKzKzd3
- /mF6QaoRmCs4U2cv5xEF3wRiqfJQfII//yMDNxTAeg6HL959Q+ZvsC1ccqJxVEmP+X+bqdH+0kU
- I
-X-Google-Smtp-Source: AGHT+IFHkJ9uXe15XsIqvnERnVs1AsMhRNQhRjydGquoAJd4kZ7Rmv2IdgL4h/+lGQwh3TyShE7b7Q==
-X-Received: by 2002:a05:6a20:9c9a:b0:1ad:6e4:db70 with SMTP id
- mj26-20020a056a209c9a00b001ad06e4db70mr6471366pzb.29.1713815041626; 
- Mon, 22 Apr 2024 12:44:01 -0700 (PDT)
-Received: from ?IPV6:2804:7f0:bcc0:4196:f8dc:1a46:f594:fa63?
- ([2804:7f0:bcc0:4196:f8dc:1a46:f594:fa63])
+ d=1e100.net; s=20230601; t=1713820297; x=1714425097;
+ h=content-disposition:mime-version:message-id:subject:cc:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kfbXGzd4uha5dzyZHM4RU134vy3j/ktITPtjbjvP2DM=;
+ b=lL1tcKJviLHCoN497B+dGJy34Q7Eq+ucvTlHVQi/Z9iYasjxwvsQ8Y+phOlodgxvrZ
+ PigkQUWww87hDU3NvQRKoIgKxC/Y7aVPluQw7fgKhLQSQhBw89OJfnMogNzdLiId+SFS
+ K48/YQxrBLlZiaDuWsUEtr516XfgHKU7ycphcSDgOADgvFVMt0C79B2jk7Rz1lyf0BZ3
+ 9mK+THrn/YOARagnMOxlITTRC0eLUTwq/77OFIx/did5oobJnM1MkOREW39q01pzELB8
+ jN/mQdnkarzMTmXc8Kak5Bhx3O1VZaJchEIVd0ST+2Wol5sd9ifj1VwGsA/zGuksYEFg
+ 5zJw==
+X-Gm-Message-State: AOJu0Yysi0yF6YSeQ1XeLwQoCaI9jQsjBKKSLCGKaB592gdqO129Kl+N
+ cKbcLfjMTccGaqvtQIUNnvhNjPfY3mj+5beYLHt3062OrLsgoG2vGMXCZIopjIJ7oQvKN13Q0Tn
+ aEh55WA==
+X-Google-Smtp-Source: AGHT+IGJz9vFy5F+r6R2kUwVg9jIdtkjB2lH9e/Um+WvXAQJhzPzNbKqOPI+BdB+84p7lMlJle3YzQ==
+X-Received: by 2002:a05:6214:e4c:b0:6a0:7a38:6e83 with SMTP id
+ o12-20020a0562140e4c00b006a07a386e83mr7911915qvc.37.1713820296808; 
+ Mon, 22 Apr 2024 14:11:36 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- h3-20020a056a00218300b006ed4aa9d48esm8161306pfi.212.2024.04.22.12.44.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 22 Apr 2024 12:44:01 -0700 (PDT)
-Message-ID: <bed7e137-4613-4153-babc-3b8b7c911151@ventanamicro.com>
-Date: Mon, 22 Apr 2024 16:43:59 -0300
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+ t10-20020a0ca68a000000b0069b432df140sm2117670qva.121.2024.04.22.14.11.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Apr 2024 14:11:36 -0700 (PDT)
+Date: Mon, 22 Apr 2024 15:11:33 -0600
+From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Content-Language: en-US
-Cc: Andrew Jones <ajones@ventanamicro.com>
-From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Subject: RISC-V u-boot unable to boot QEMU using '-cpu max'
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Mon, 22 Apr 2024 22:02:30 +0200
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+Subject: [ANN] U-Boot v2024.07-rc1 released
+Message-ID: <20240422211133.GX1054907@bill-the-cat>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="IoXg7I5f59bjRXDk"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,36 +86,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-In QEMU we have a 'max' type CPU that implements (almost) all extensions that QEMU
-is able to emulate. Recently, in QEMU commit 249e0905d05, we bumped the extensions
-for this CPU.
+--IoXg7I5f59bjRXDk
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-And after this commit this CPU is now unable to boot a guest using upstream
-u-boot. Here's the error being thrown:
+Hey all,
 
-qemu-system-riscv64 \
-         -machine virt -nographic -m 8G -smp 8 \
-         -cpu max -kernel uboot.elf (...)
-(...)
+It's release day and here is -rc1. Looking at my own queue, I think
+things are overall good. There's a few changes I want to pull in still
+(mainly moving more things to OF_UPSTREAM) but since they were recently
+posted I'll wait a little bit.
 
-initcall sequence 000000008027c3e8 failed at call 000000008021259e (err=-28)
-### ERROR ### Please RESET the board ###
+In terms of a changelog,=20
+git log --merges v2024.04..v2024.07-rc1
+contains what I've pulled but as always, better PR messages and tags
+will provide better results here.
 
+I hope to remain on schedule and that means the rest of the rcs every
+other Monday, and with final release on Monday, July 1st, 2024. Thanks
+all!
 
-I can get the guest to boot if I disable the following extensions from the 'max' CPU:
+--=20
+Tom
 
-  -cpu max,zfbfmin=false,zvfbfmin=false,zvfbfwma=false
+--IoXg7I5f59bjRXDk
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Due to QEMU extension dependencies I'm not able to disable these individually. What I can
-say is that u-boot isn't playing ball to at least one of them.
+-----BEGIN PGP SIGNATURE-----
 
-Is this an u-boot bug? Up to this point I was assuming that u-boot would silently ignore
-hart extensions that it doesn't support.
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYm0oUACgkQFHw5/5Y0
+tyznKAv+JFyxCFn9QdcAG+Gu3FADgRTEdQlMwa5chWD1zmnhDw8Cgm+Hwq1i8bP8
+ivSKv0G0mGx61Jx93ywIuBByL5jMazPFf5f9/thEpFJhXZNdImgziQ9CL9F5EHUQ
+tTaQ3J7xFBmoF3O1FiVY3oCEglBARToBgBTy58kMVlzzfECHrJO4WqCaKz2rHkev
+zSvVO83UfvYYg6akm99xx/7f5XjAmF6Js3S0D5rjxTYXs3urMETs90G0roZm7jEG
+OLjFpP7fn/iZPw5VstK8k8ax1IRmoFYsRCxjhHElsQ+rsHtMrMU+qshLYpufCJzj
+WbhTP3hZh4h/ONGAhCB95N3/a1EshGGHzifzlg3plzWenHZYvV1Mjs1f9FEaXuxt
+dd+FFGs4SvtOFsXm86c/6VxMbDoO7mVPTfTreo+R19kjNH7eK4nyBKVmnf33cAX+
+tMUvHf3jmGo+GNftdT64ojaKDcnJgYQOveUABMblkVyGCV9pH1zQobJzVdBNN/UA
+PVvfFGtV
+=7BJ8
+-----END PGP SIGNATURE-----
 
-
-Thanks,
-
-
-Daniel
+--IoXg7I5f59bjRXDk--
