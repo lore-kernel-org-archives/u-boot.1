@@ -4,71 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5C58C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 12:42:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF1AEC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 12:52:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08203885A5;
-	Tue, 23 Apr 2024 14:42:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B15288371;
+	Tue, 23 Apr 2024 14:52:16 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="aoNyI6rQ";
+	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="J/eJWRnJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A40FA885A6; Tue, 23 Apr 2024 14:42:46 +0200 (CEST)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B5E058828C; Tue, 23 Apr 2024 14:52:14 +0200 (CEST)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 467D9884EC
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 14:42:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=836a311f1=Conor.Dooley@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1713876164; x=1745412164;
- h=date:from:to:cc:subject:message-id:references:
- mime-version:in-reply-to;
- bh=pETn2Ts3UkurndoAPghTE2CvU5dAax009FR1PCqoY7k=;
- b=aoNyI6rQJ7aIHVkij6kq96C1lPnwIScetOYTEURMyiK2hOdS1AChX3q9
- bZBWXxbwS9Eq7sC3s0AtEPf9U+5aKKGmlU+ZplwZwIyaKiw4njJCdM+Z5
- rVt720Q+6rt5+FergBBHvg0umqWDA27aQasicgFtU/wAbn2RUyoPr8YCq
- Jl1DrtR+rJorcZS47mr8JdRsUwumYieEnFinfJbKRrJwxkNSvxoo/uFuL
- M0fRyH8nxwTv9jf1IQGRMgBliRabRImmmoLSyzmcl5/a+VQgJU3hKwm6P
- Sie8iGtqCpvql4yxsRrOgCkQfV+/1l7qqJjQrFlNBpzwj/cWftmcbAQPr A==;
-X-CSE-ConnectionGUID: FgCcA/FuTIquASkmbZMKMA==
-X-CSE-MsgGUID: T4WDgxkQQjmKzziBDh/tfw==
-X-IronPort-AV: E=Sophos;i="6.07,222,1708412400"; 
- d="asc'?scan'208";a="22251673"
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 23 Apr 2024 05:42:42 -0700
-Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
- chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Tue, 23 Apr 2024 05:42:13 -0700
-Received: from wendy (10.10.85.11) by chn-vm-ex03.mchp-main.com (10.10.85.151)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
- Transport; Tue, 23 Apr 2024 05:42:12 -0700
-Date: Tue, 23 Apr 2024 13:41:56 +0100
-From: Conor Dooley <conor.dooley@microchip.com>
-To: Leo Liang <ycliang@andestech.com>
-CC: Daniel Henrique Barboza <dbarboza@ventanamicro.com>,
- <u-boot@lists.denx.de>, Andrew Jones <ajones@ventanamicro.com>
-Subject: Re: RISC-V u-boot unable to boot QEMU using '-cpu max'
-Message-ID: <20240423-enzyme-book-1907217f891b@wendy>
-References: <bed7e137-4613-4153-babc-3b8b7c911151@ventanamicro.com>
- <ZidIcgEPSb_vDQw7@swlinux02>
+ by phobos.denx.de (Postfix) with ESMTPS id 5D4C5884EC
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 14:52:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ventanamicro.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dbarboza@ventanamicro.com
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-1e4c4fb6af3so37766805ad.0
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 05:52:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1713876731; x=1714481531; darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=DHeRXJOB8SJKXJCftDcl2LHPZytrbfLyUr+GJK3UfAQ=;
+ b=J/eJWRnJ9fHbbXu8WtKyACKff/taTGRPpp7e7tBMkrEK1mxTEZ68r63vtsY4ET3bh/
+ gEeG9VKI4oCSnlkN19YRt4Wodo+Z3e91b9wB6yvKmCNntx4x+gBNXpZW7SaquNFr8O9N
+ mkiMq50X6c0PY+iq8MHOfobEgHXwm3LQzuGesLJhcSb+SOeeThYR1MJtaMKcRz2DoCFD
+ /76KuehsUDObD5H6cuSl043feyqwuXn1KNb+7yvpsebJiMnxWe5vfQg4KoGtl0Xca2lw
+ T0mhIIgVFFOiK9Kj5ywjJFVRvoum+s0+A/aleOyvPQtKrrH19me3woISqaoeXpSBVDQD
+ UQFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713876731; x=1714481531;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=DHeRXJOB8SJKXJCftDcl2LHPZytrbfLyUr+GJK3UfAQ=;
+ b=wO1E8Za/KEvHQuCDnCzP1mDIvkP05UF/ZGCeorBABcom6vIvyCRuCgxrxFzc7K/DoZ
+ vjMDPIpdOLMYBrA2OqQeSPwA0ouKhxSYWjLlqRDtPUF2OJ2Fyc1SXMOMbe6pYpK+CMSQ
+ pxQK3g6Qs+Ms6jqbfF3FomhRZr03lMooaVVbXI35ez9ssslHh8s+/ZPWy5IejieRoHRu
+ MMbJddIdUcJ3RrMpxoS+044ixLBnPVYoQDQlozzTMOEkMj/RJtkFd2F9TfhW18NlZRbl
+ FfIJZs0DshL6fzAke22wpw5LGMn8pGEmw6zhYLqwfFDtJc8445ZUO43bHk31LRakH0Ap
+ QMWg==
+X-Gm-Message-State: AOJu0YwQYfXd65vrqwlZjlJBKixibrrO/E68yGGTCIL8jPw16ZpMa6gV
+ bTCbu9sHw/20Qc1qk6KGunrbORi130lEk9fAfhZFxgqQ3XCQwHqdObUaXITzKxTy+wvCS7wuklx
+ L
+X-Google-Smtp-Source: AGHT+IHa6QqdjrDJyix29osgn14kylW1HGcrRHrGRENXj64gVP4GkP9zzNny1+kT6G+k47AzvqJ+JA==
+X-Received: by 2002:a17:903:42c5:b0:1e5:1041:7ed4 with SMTP id
+ jy5-20020a17090342c500b001e510417ed4mr2653406plb.14.1713876730704; 
+ Tue, 23 Apr 2024 05:52:10 -0700 (PDT)
+Received: from [192.168.68.110] ([191.255.35.121])
+ by smtp.gmail.com with ESMTPSA id
+ e10-20020a170902b78a00b001dc3916853csm9904314pls.73.2024.04.23.05.52.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 23 Apr 2024 05:52:10 -0700 (PDT)
+Message-ID: <0d320487-04d4-4be9-a885-854dadf04be7@ventanamicro.com>
+Date: Tue, 23 Apr 2024 09:52:06 -0300
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="ioS+6aHcFVjLs5FU"
-Content-Disposition: inline
-In-Reply-To: <ZidIcgEPSb_vDQw7@swlinux02>
+User-Agent: Mozilla Thunderbird
+Subject: Re: RISC-V u-boot unable to boot QEMU using '-cpu max'
+Content-Language: en-US
+To: Conor Dooley <conor.dooley@microchip.com>,
+ Leo Liang <ycliang@andestech.com>
+Cc: u-boot@lists.denx.de, Andrew Jones <ajones@ventanamicro.com>
+References: <bed7e137-4613-4153-babc-3b8b7c911151@ventanamicro.com>
+ <ZidIcgEPSb_vDQw7@swlinux02> <20240423-enzyme-book-1907217f891b@wendy>
+From: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
+In-Reply-To: <20240423-enzyme-book-1907217f891b@wendy>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,86 +96,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---ioS+6aHcFVjLs5FU
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 23, 2024 at 01:34:42PM +0800, Leo Liang wrote:
-> On Mon, Apr 22, 2024 at 04:43:59PM -0300, Daniel Henrique Barboza wrote:
-> > [EXTERNAL MAIL]
-> >=20
-> > Hi,
-> >=20
-> > In QEMU we have a 'max' type CPU that implements (almost) all extension=
-s that QEMU
-> > is able to emulate. Recently, in QEMU commit 249e0905d05, we bumped the=
- extensions
-> > for this CPU.
-> >=20
-> > And after this commit this CPU is now unable to boot a guest using upst=
-ream
-> > u-boot. Here's the error being thrown:
-> >=20
-> > qemu-system-riscv64 \
-> >         -machine virt -nographic -m 8G -smp 8 \
-> >         -cpu max -kernel uboot.elf (...)
-> > (...)
-> >=20
-> > initcall sequence 000000008027c3e8 failed at call 000000008021259e (err=
-=3D-28)
-> > ### ERROR ### Please RESET the board ###
-> >=20
-> >=20
-> > I can get the guest to boot if I disable the following extensions from =
-the 'max' CPU:
-> >=20
-> >  -cpu max,zfbfmin=3Dfalse,zvfbfmin=3Dfalse,zvfbfwma=3Dfalse
-> >=20
-> > Due to QEMU extension dependencies I'm not able to disable these indivi=
-dually. What I can
-> > say is that u-boot isn't playing ball to at least one of them.
-> >=20
-> > Is this an u-boot bug? Up to this point I was assuming that u-boot woul=
-d silently ignore
-> > hart extensions that it doesn't support.
->=20
-> Hi Daniel,
->=20
-> Which u-boot version are you using?
->=20
-> I think this issue is fixed by the following patch set sent by Conor.
->=20
-> 	f39b1b77d8 riscv: support extension probing using riscv, isa-extensions
-> 	b90edde701 riscv: don't read riscv, isa in the riscv cpu's get_desc()
->=20
-> I've tested and can reproduce the issue you mentioned if these two patche=
-s are reverted.
->=20
-> Could you try with the lastest u-boot master branch again?
->=20
->=20
-> For reference, my testing commands are as follows:
-> 1. cd ${u-boot} && make qemu-riscv64_defconfig && make -j`nproc`
-> 2. ./${qemu}/build/qemu-system-riscv64 -nographic -machine virt -cpu max =
--bios u-boot.bin -m 8G -smp 8
->=20
-> - u-boot branch (commit): master (38ea74d6d5c0 "Prepare v2024.07-rc1")
-> - qemu branch (commit): master (62dbe54c24db "Update version for v9.0.0-r=
-c4 release")
 
-I'll go take a look at this, it's possible that my patches only hide the
-problem due to the new property being prioritised.
+On 4/23/24 09:41, Conor Dooley wrote:
+> On Tue, Apr 23, 2024 at 01:34:42PM +0800, Leo Liang wrote:
+>> On Mon, Apr 22, 2024 at 04:43:59PM -0300, Daniel Henrique Barboza wrote:
+>>> [EXTERNAL MAIL]
+>>>
+>>> Hi,
+>>>
+>>> In QEMU we have a 'max' type CPU that implements (almost) all extensions that QEMU
+>>> is able to emulate. Recently, in QEMU commit 249e0905d05, we bumped the extensions
+>>> for this CPU.
+>>>
+>>> And after this commit this CPU is now unable to boot a guest using upstream
+>>> u-boot. Here's the error being thrown:
+>>>
+>>> qemu-system-riscv64 \
+>>>          -machine virt -nographic -m 8G -smp 8 \
+>>>          -cpu max -kernel uboot.elf (...)
+>>> (...)
+>>>
+>>> initcall sequence 000000008027c3e8 failed at call 000000008021259e (err=-28)
+>>> ### ERROR ### Please RESET the board ###
+>>>
+>>>
+>>> I can get the guest to boot if I disable the following extensions from the 'max' CPU:
+>>>
+>>>   -cpu max,zfbfmin=false,zvfbfmin=false,zvfbfwma=false
+>>>
+>>> Due to QEMU extension dependencies I'm not able to disable these individually. What I can
+>>> say is that u-boot isn't playing ball to at least one of them.
+>>>
+>>> Is this an u-boot bug? Up to this point I was assuming that u-boot would silently ignore
+>>> hart extensions that it doesn't support.
+>>
+>> Hi Daniel,
+>>
+>> Which u-boot version are you using?
+>>
+>> I think this issue is fixed by the following patch set sent by Conor.
+>>
+>> 	f39b1b77d8 riscv: support extension probing using riscv, isa-extensions
+>> 	b90edde701 riscv: don't read riscv, isa in the riscv cpu's get_desc()
+>>
+>> I've tested and can reproduce the issue you mentioned if these two patches are reverted.
+>>
+>> Could you try with the lastest u-boot master branch again?
+>>
+>>
+>> For reference, my testing commands are as follows:
+>> 1. cd ${u-boot} && make qemu-riscv64_defconfig && make -j`nproc`
+>> 2. ./${qemu}/build/qemu-system-riscv64 -nographic -machine virt -cpu max -bios u-boot.bin -m 8G -smp 8
+>>
+>> - u-boot branch (commit): master (38ea74d6d5c0 "Prepare v2024.07-rc1")
+>> - qemu branch (commit): master (62dbe54c24db "Update version for v9.0.0-rc4 release")
+> 
+> I'll go take a look at this, it's possible that my patches only hide the
+> problem due to the new property being prioritised.
 
---ioS+6aHcFVjLs5FU
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+Don't bother. I just checked with most recent u-boot master and I can't reproduce the
+problem, as Leo said.
 
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZiesjAAKCRB4tDGHoIJi
-0rLjAQCR2f1DNaEx3N0ilEHZu44OTF1CBdGCGW/QiT/SBiFDlwEA5C3o9a9InuU0
-buJenevkgrXbml5lDfh71pugXQPUSAo=
-=wd5i
------END PGP SIGNATURE-----
+I apologize for the noise. I failed to fetch the latest upstream and do a last
+test before posting it here.
 
---ioS+6aHcFVjLs5FU--
+We were discussing here and there about disabling these extensions in the 'max'
+CPU in QEMU if u-boot wasn't able to handle them. I'm happy to see that u-boot
+is now able to do so and we can keep the 'max' CPU as is.
+
+
+Thanks for the help,
+
+Daniel
+
