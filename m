@@ -4,58 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 278CCC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 14:24:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66281C04FFE
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 15:57:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AC1B88365;
-	Tue, 23 Apr 2024 16:24:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id 75DB68863F;
+	Tue, 23 Apr 2024 17:57:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="X8HWCa0s";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="ldb/CO3P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24FFE88399; Tue, 23 Apr 2024 16:23:59 +0200 (CEST)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ id D94A888640; Tue, 23 Apr 2024 17:57:17 +0200 (CEST)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E189888360
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 16:23:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BACBD8863B
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 17:57:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kernel.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=conor@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 9C0A2614C8;
- Tue, 23 Apr 2024 14:23:55 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 1F344C116B1;
- Tue, 23 Apr 2024 14:23:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1713882235;
- bh=b3BvabnVga0RJdXaDagkDnNpXHg6hUln2gdx0/anPvk=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
- b=X8HWCa0sRcr3OdGgW6FeZf9tQv0w707nYqJ/kopQ7Sle7ZncclmzygvaQN+bZK8fh
- YL+zSFHWItMTa2Or72bhk4M64YPfITDNpRczA+NDqnKlVBdRboKP/Xeyp74Cg9GUzP
- nU0vC5Yr5ozYBz7r3h5mWoXptgCxM1B3zpKTPM20krg4QmU6U3eG9+hzXf8EHH+Eov
- duRQYEwWVnl1MtKxQe0FQNrN0YAobFgIPS/zP7C+hoKw50ahCnr2JyBGjZqqQSBIu4
- TRKDkBYssP+JdngBECF3Ud9Jh/6du/mEDxJ7V9n9jY1bOD32fVKCA6uEj6wKlUIfU3
- AFxc11ZXA2hRQ==
-Date: Tue, 23 Apr 2024 15:23:50 +0100
-From: Conor Dooley <conor@kernel.org>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-Cc: Conor Dooley <conor.dooley@microchip.com>,
- Leo Liang <ycliang@andestech.com>, u-boot@lists.denx.de,
- Andrew Jones <ajones@ventanamicro.com>
-Subject: Re: RISC-V u-boot unable to boot QEMU using '-cpu max'
-Message-ID: <20240423-unawake-trinity-cededc821014@spud>
-References: <bed7e137-4613-4153-babc-3b8b7c911151@ventanamicro.com>
- <ZidIcgEPSb_vDQw7@swlinux02>
- <20240423-enzyme-book-1907217f891b@wendy>
- <0d320487-04d4-4be9-a885-854dadf04be7@ventanamicro.com>
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb.corp.toradex.com (31-10-206-125.static.upc.ch
+ [31.10.206.125])
+ by mail11.truemail.it (Postfix) with ESMTPA id D2F251F91A;
+ Tue, 23 Apr 2024 17:57:14 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1713887835;
+ bh=X78aeR7zf7Mec/y0ztV4Ik1zswbfYq3w0ozp4au1at0=; h=From:To:Subject;
+ b=ldb/CO3Pxhuk30DJqq6EkcHz1jw4A36sqqO1oLOZKK+yx/grSUeN+jVLcb/NMzEzv
+ foKDsI7rd7hNYsPZnNHwoAVoPSk2mnBg5gpqP7KyWwrLFVIwV8gf3MpmJ+w0IunZCq
+ GgdSF2ipe7ZKh3+kCLBNK5NtQxYqsCi7hJOkeHfDC845S/1xCZdqXz9vS1eIfvQIV0
+ kiR6JMApWsFeREV9XpF8IcnOo5XNHeGIkc6/GEvVHV9tdOxQwqBD5P4reeC7V2A/xd
+ y6zIP3h00jePKmOg1R8qbOFL5LOs5xkRBkdIWhw5GubS+DdoDEgVDjbVubX2HO4ByT
+ y/2BtcW/8tU7Q==
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v1] board: toradex: colibri-imx(6ull|imx7): Fix missing
+ fdt_fixup boot error
+Date: Tue, 23 Apr 2024 17:57:01 +0200
+Message-Id: <20240423155701.33657-1-francesco@dolcini.it>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="R7BDuaBOGbAe9IDB"
-Content-Disposition: inline
-In-Reply-To: <0d320487-04d4-4be9-a885-854dadf04be7@ventanamicro.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,125 +66,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Francesco Dolcini <francesco.dolcini@toradex.com>
 
---R7BDuaBOGbAe9IDB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+In commit 51aaaf5e7975 ("board: toradex: imx: Remove not needed env variables")
+the empty definition of fdt_fixup variable was removed, however this was
+still referenced from the boot command leading to boot failures:
+ ## Error: \"fdt_fixup\" not defined`
 
-On Tue, Apr 23, 2024 at 09:52:06AM -0300, Daniel Henrique Barboza wrote:
->=20
->=20
-> On 4/23/24 09:41, Conor Dooley wrote:
-> > On Tue, Apr 23, 2024 at 01:34:42PM +0800, Leo Liang wrote:
-> > > On Mon, Apr 22, 2024 at 04:43:59PM -0300, Daniel Henrique Barboza wro=
-te:
-> > > > [EXTERNAL MAIL]
-> > > >=20
-> > > > Hi,
-> > > >=20
-> > > > In QEMU we have a 'max' type CPU that implements (almost) all exten=
-sions that QEMU
-> > > > is able to emulate. Recently, in QEMU commit 249e0905d05, we bumped=
- the extensions
-> > > > for this CPU.
-> > > >=20
-> > > > And after this commit this CPU is now unable to boot a guest using =
-upstream
-> > > > u-boot. Here's the error being thrown:
-> > > >=20
-> > > > qemu-system-riscv64 \
-> > > >          -machine virt -nographic -m 8G -smp 8 \
-> > > >          -cpu max -kernel uboot.elf (...)
-> > > > (...)
-> > > >=20
-> > > > initcall sequence 000000008027c3e8 failed at call 000000008021259e =
-(err=3D-28)
-> > > > ### ERROR ### Please RESET the board ###
-> > > >=20
-> > > >=20
-> > > > I can get the guest to boot if I disable the following extensions f=
-rom the 'max' CPU:
-> > > >=20
-> > > >   -cpu max,zfbfmin=3Dfalse,zvfbfmin=3Dfalse,zvfbfwma=3Dfalse
-> > > >=20
-> > > > Due to QEMU extension dependencies I'm not able to disable these in=
-dividually. What I can
-> > > > say is that u-boot isn't playing ball to at least one of them.
-> > > >=20
-> > > > Is this an u-boot bug? Up to this point I was assuming that u-boot =
-would silently ignore
-> > > > hart extensions that it doesn't support.
-> > >=20
-> > > Hi Daniel,
-> > >=20
-> > > Which u-boot version are you using?
-> > >=20
-> > > I think this issue is fixed by the following patch set sent by Conor.
-> > >=20
-> > > 	f39b1b77d8 riscv: support extension probing using riscv, isa-extensi=
-ons
-> > > 	b90edde701 riscv: don't read riscv, isa in the riscv cpu's get_desc()
-> > >=20
-> > > I've tested and can reproduce the issue you mentioned if these two pa=
-tches are reverted.
-> > >=20
-> > > Could you try with the lastest u-boot master branch again?
-> > >=20
-> > >=20
-> > > For reference, my testing commands are as follows:
-> > > 1. cd ${u-boot} && make qemu-riscv64_defconfig && make -j`nproc`
-> > > 2. ./${qemu}/build/qemu-system-riscv64 -nographic -machine virt -cpu =
-max -bios u-boot.bin -m 8G -smp 8
-> > >=20
-> > > - u-boot branch (commit): master (38ea74d6d5c0 "Prepare v2024.07-rc1")
-> > > - qemu branch (commit): master (62dbe54c24db "Update version for v9.0=
-=2E0-rc4 release")
-> >=20
-> > I'll go take a look at this, it's possible that my patches only hide the
-> > problem due to the new property being prioritised.
->=20
->=20
-> Don't bother. I just checked with most recent u-boot master and I can't r=
-eproduce the
-> problem, as Leo said.
+Fix this by removing "run fdt_fixup" from the boot command and instead
+enable CONFIG_OF_ENV_SETUP in the defconfig that would achieve the same
+but in a more robust way (it works fine even if the variable is not
+defined).
 
-My "fear" was that new QEMU + new U-Boot meant that the
-riscv,isa-extensions codepath was in use and there was something lurking in
-the riscv,isa parsing which had a problem. Fortunately, I think that's
-not the case, as the fix seems to be b90edde701 "riscv: don't read riscv,isa
-in the riscv cpu's get_desc()" rather than f39b1b77d8 "riscv: support
-extension probing using riscv, isa-extensions".
+Fixes: 51aaaf5e7975 ("board: toradex: imx: Remove not needed env variables")
+Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+---
+ configs/colibri-imx6ull_defconfig | 1 +
+ configs/colibri_imx7_defconfig    | 1 +
+ include/configs/colibri-imx6ull.h | 2 +-
+ include/configs/colibri_imx7.h    | 2 +-
+ 4 files changed, 4 insertions(+), 2 deletions(-)
 
-I am, however, not going to look into why exactly it was failing before,
-I'm satisfied once the riscv,isa parsing isn't broken in master.
+diff --git a/configs/colibri-imx6ull_defconfig b/configs/colibri-imx6ull_defconfig
+index fc10d7f66a60..4a0ff029ac75 100644
+--- a/configs/colibri-imx6ull_defconfig
++++ b/configs/colibri-imx6ull_defconfig
+@@ -18,6 +18,7 @@ CONFIG_FIT=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
++CONFIG_OF_ENV_SETUP=y
+ CONFIG_BOOTCOMMAND="run ubiboot || run distro_bootcmd;"
+ CONFIG_USE_PREBOOT=y
+ CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6ull-colibri${variant}-${fdt_board}.dtb"
+diff --git a/configs/colibri_imx7_defconfig b/configs/colibri_imx7_defconfig
+index 16f923b07c22..f2802b10fa8a 100644
+--- a/configs/colibri_imx7_defconfig
++++ b/configs/colibri_imx7_defconfig
+@@ -19,6 +19,7 @@ CONFIG_FIT=y
+ CONFIG_FIT_VERBOSE=y
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=1
++CONFIG_OF_ENV_SETUP=y
+ CONFIG_BOOTCOMMAND="run ubiboot ; echo ; echo ubiboot failed ; run distro_bootcmd;"
+ CONFIG_USE_PREBOOT=y
+ CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri-${fdt_board}.dtb "
+diff --git a/include/configs/colibri-imx6ull.h b/include/configs/colibri-imx6ull.h
+index 7c9d633b68d9..8860ceec1a0a 100644
+--- a/include/configs/colibri-imx6ull.h
++++ b/include/configs/colibri-imx6ull.h
+@@ -53,7 +53,7 @@
+ 		"ubi part ubi &&" \
+ 		"ubi read ${kernel_addr_r} kernel && " \
+ 		"ubi read ${fdt_addr_r} dtb && " \
+-		"run fdt_fixup && bootz ${kernel_addr_r} - ${fdt_addr_r}\0" \
++		"bootz ${kernel_addr_r} - ${fdt_addr_r}\0" \
+ 
+ #if defined(CONFIG_TARGET_COLIBRI_IMX6ULL_NAND)
+ /* Run Distro Boot script if ubiboot fails */
+diff --git a/include/configs/colibri_imx7.h b/include/configs/colibri_imx7.h
+index c34f1f903df6..33133a0b96e1 100644
+--- a/include/configs/colibri_imx7.h
++++ b/include/configs/colibri_imx7.h
+@@ -94,7 +94,7 @@
+ 		"ubi part ubi && run m4boot && " \
+ 		"ubi read ${kernel_addr_r} kernel && " \
+ 		"ubi read ${fdt_addr_r} dtb && " \
+-		"run fdt_fixup && bootz ${kernel_addr_r} - ${fdt_addr_r}\0" \
++		"bootz ${kernel_addr_r} - ${fdt_addr_r}\0" \
+ 
+ #if defined(CONFIG_TARGET_COLIBRI_IMX7_NAND)
+ #define MODULE_EXTRA_ENV_SETTINGS \
+-- 
+2.39.2
 
->=20
-> I apologize for the noise. I failed to fetch the latest upstream and do a=
- last
-> test before posting it here.
->=20
-> We were discussing here and there about disabling these extensions in the=
- 'max'
-> CPU in QEMU if u-boot wasn't able to handle them. I'm happy to see that u=
--boot
-> is now able to do so and we can keep the 'max' CPU as is.
->=20
->=20
-> Thanks for the help,
->=20
-> Daniel
->=20
-
---R7BDuaBOGbAe9IDB
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRh246EGq/8RLhDjO14tDGHoIJi0gUCZifEdgAKCRB4tDGHoIJi
-0m9tAP4ij/hv6rtmlGjDPRom+24wyrJrgorKUb9sWl3mUmUIrwD+MHiN3JdRUgrM
-4K/5vMovazisCDekmWEjiBJOCav9QAw=
-=cZpW
------END PGP SIGNATURE-----
-
---R7BDuaBOGbAe9IDB--
