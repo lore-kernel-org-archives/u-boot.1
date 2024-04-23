@@ -4,149 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31F70C04FF8
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 09:15:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BF62C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 09:15:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB1D88855E;
-	Tue, 23 Apr 2024 11:14:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=weidmueller.com
+	by phobos.denx.de (Postfix) with ESMTP id 412028857C;
+	Tue, 23 Apr 2024 11:14:56 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=weidmueller.onmicrosoft.com header.i=@weidmueller.onmicrosoft.com header.b="oKpnCVSF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ktZo2iz/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD6F288503; Tue, 23 Apr 2024 11:14:45 +0200 (CEST)
-Received: from EUR01-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur01on0709.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe02::709])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DF19D8856A; Tue, 23 Apr 2024 11:14:54 +0200 (CEST)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95BDE88503
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 11:14:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none)
- header.from=weidmueller.com
+ by phobos.denx.de (Postfix) with ESMTPS id B4F0B8850E
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 11:14:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Lukas.Funke-oss@weidmueller.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mhSuEzTSjpyhO9sF2BzjWKg6jLsh+4rdY5R04i8UTp2Crkk6xJbsKJ+9sV0Tq7u+Nq63X7HL8yWfqDCUULT3D1uthtVq4Gzw+INtaF4TKK7p5mPrWTn3lQDZpHnDRoZqXxnezmG4E28vFKzdA12HIAImPXZkhHu+zNAtOiAYxsbdTK46SjYKar8XyQZAH8cLVOe2Mlx1rMoDAXkR3l90aHaTuwNjZAMuqcLRjzueb8oN5k12iLTeS8+Nwmh+ioYK4eyMZ4tU1E5cgPKAvpswpjbTVRHr52mtNymFBoczhzIqh3k4nsLxuDpHtmiCfJ+WVMHfMLZu5xQ1wdFZ1x6CIA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IOpy2spmjo7ma8K23+m4PzOocFjWSNFTbgnygWDK1fM=;
- b=el6B2v4gxxaUyE9vls0/aPjBaCAKmZHgFrZK4mMvTT//rga/KbBTsH8scmz91UszFZXyYIvd5sGo3hY8ww00g3fmX86iAbQv85MXqpocFJr09TC8CtX8mQNjQJoIRdBvBMzeCfQTxSsiyUpsJMpdbEB1u7aP5Oa8UhGBnW2DH20+m7wzxiARMRFXdzCVlfk76DeTCwsh+SQ25fH3RYBkLaHTfKabtEo3xMrLaFRKmqtV7rZ2BoKMskAT7hH9AL4jdTdxjcSbNtK3P1MvzsSHwUI3JDhwQ4cDlIoNcLrTDAjkXJ4zvK7ZRRzYtdlFSk7OURjoQL9oI1tbGyLAI1IuXg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=weidmueller.com; dmarc=pass action=none
- header.from=weidmueller.com; dkim=pass header.d=weidmueller.com; arc=none
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-2d895e2c6efso81641451fa.0
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 02:14:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=weidmueller.onmicrosoft.com; s=selector1-weidmueller-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IOpy2spmjo7ma8K23+m4PzOocFjWSNFTbgnygWDK1fM=;
- b=oKpnCVSFp4trWtolepsUxgE3VC++CY0xULpDfgOstw60Rhe51jIPzFBGCJGiBMVgg0Lcq8m1KBIobEuSP2vk7mxqbTQlYoFzIg+mc9u1t6l13vwud2mXaGnkpM/P1bhWrkp7ZTO6+w1RHxw/RfGuXm0MTzVot2X6WYbgEAphDuA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=weidmueller.com;
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com (2603:10a6:20b:55a::18)
- by DB4PR08MB8174.eurprd08.prod.outlook.com (2603:10a6:10:382::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.44; Tue, 23 Apr
- 2024 09:14:39 +0000
-Received: from AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::7f1e:4f98:9784:5e11]) by AS2PR08MB8431.eurprd08.prod.outlook.com
- ([fe80::7f1e:4f98:9784:5e11%7]) with mapi id 15.20.7472.044; Tue, 23 Apr 2024
- 09:14:39 +0000
-From: lukas.funke-oss@weidmueller.com
-To: u-boot@lists.denx.de
-Cc: E Shattow <lucent@gmail.com>, Lukas Funke <lukas.funke@weidmueller.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Chanho Park <chanho61.park@samsung.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Minda Chen <minda.chen@starfivetech.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Yanhong Wang <yanhong.wang@starfivetech.com>
-Subject: [PATCH v2 3/3] board: starfive: Call spl_dram_init() for DRAM
- initialization
-Date: Tue, 23 Apr 2024 11:14:29 +0200
-Message-Id: <20240423091429.178653-4-lukas.funke-oss@weidmueller.com>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20240423091429.178653-1-lukas.funke-oss@weidmueller.com>
-References: <20240423091429.178653-1-lukas.funke-oss@weidmueller.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: FR4P281CA0089.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:cd::18) To AS2PR08MB8431.eurprd08.prod.outlook.com
- (2603:10a6:20b:55a::18)
+ d=linaro.org; s=google; t=1713863692; x=1714468492; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ma7fdDmeQVtaHMmRRjmc4GRgfEM4iHODxoVvP0xiiu0=;
+ b=ktZo2iz/AglTysw2PhfLXgpy5YWcdN5RFr3nE7oqfJdJprIBfmaSCj6OSQq/zxnZ30
+ yhSzeRcLnoc9ucEjZsTnv09gAWpBiljggYcmWzlz1S3Z/52dBNF4gtb/NOvmrJqyc5CY
+ rkdCF2eCU1GlSShqpaE1ApBsPVYeuSIW+hIaepsm8qHfGATPwUu+kKCUxfc96ruQvVV/
+ lazDn+kUh4V9nHtoVhnzMv1gistmW++09lgiKxy2a8tKQxSmPScCQtOI1/qYYpbeQlBm
+ +TXTxLV/GXwh+fX4Ep8F02qFrryEo9yHN9EdCQskAoCoTZCo4qonr/z/Eg9kqZ7sVs25
+ Efrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713863692; x=1714468492;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ma7fdDmeQVtaHMmRRjmc4GRgfEM4iHODxoVvP0xiiu0=;
+ b=xL9SX6YXA9Yip+NyzjftmFv4yKq/1GRrX0rceSl61CurAEYjz8Z5c7867UGChCBRzu
+ 668BH/yz7uJBc+y5iiRJquSYQJ1II/lLt/tBdQwlC8T1Sa+oXNLgO2NMaen9NpBQ4OZK
+ 6In3hgbKi4amSl+zzE66As8jR8qqkSSndDvp3v5jwGMGRV8R1Wr6Zrwjp8q4YRYWDWlC
+ LSMW4Cih8q4C8qJy/6f/iQ+kXjn8nE6NWzteafzW+Cu1HeBB6iavxPRVZUsIhJlrhOIq
+ yHoiQhWqb3QCv+wzf6k3PK7W/Ou0n3z3OEgAxKwXpmfzUGhToGlJQbvvlpmrhZ2s83kL
+ SzKg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCViQqVOIbRdUITRy0bvqzsmAQoOPz8Kq9pKGTjsVWPKDvJa+mJ/lhPffK36JjyVaXIVhZqtpj36U2dsE4Os8QyA2FOoJg==
+X-Gm-Message-State: AOJu0YxI5pLX8uwayfPS96pkh8sREMy+qzG0VZtsR9kBzA1Ez2Rolr5F
+ 8xvfl715Yk53t2Yp3CpoInEkTj4ke5GDNOkWgJBAkv8shkQEuv6MMk8WoH9dgustZUGSPICti2i
+ uXuQyZs8OIc19uEKt+GViD6ICAO48W463IJea0w==
+X-Google-Smtp-Source: AGHT+IG1fDBbCwpKX3l/1YyHsr0rrqqS/gs5RzQntD3BJQZf3yNGqc1cHm4CMoUxLd5/WFDtx3q8s1pqN5ZeMktjEcc=
+X-Received: by 2002:a05:651c:2c3:b0:2da:78e:f766 with SMTP id
+ f3-20020a05651c02c300b002da078ef766mr6688388ljo.38.1713863691889; Tue, 23 Apr
+ 2024 02:14:51 -0700 (PDT)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR08MB8431:EE_|DB4PR08MB8174:EE_
-X-MS-Office365-Filtering-Correlation-Id: 356ffb5b-38b7-4fb0-c47a-08dc6375cd26
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?BU2Jj7GiZjLQwaWX8QVwikMNPagGo2BjBGd2SUq0V14v0iXXnJQFYI57qeXY?=
- =?us-ascii?Q?KnHs20RqJQMJow2/Ra8nOdfPggtnvIX9B/lAJwxinp78X/Pxj82kYmuG05BA?=
- =?us-ascii?Q?mKLRD0RiOeJDQnnGWoexxFs6DcU8aYy6yletptEBGy0uNGPRfKdI15cprfbd?=
- =?us-ascii?Q?+Mb7MuD6CfTlcYBPU+weDQQMQHVMEbfbJdRNNZoZ8gNnNPGKaXW18nvqv2Bi?=
- =?us-ascii?Q?ihwMC2/Uu3G05e6YWHROA8wxRhS/TSSyqvgV0Bfs4AfKTHxkGgvGErEEzteo?=
- =?us-ascii?Q?35I163RX0CsIvdhSb7tC6WMqr0LFLKwsnUacYHFk+vXKdUCY+1d3KHS05QEQ?=
- =?us-ascii?Q?dR9MO6V5WnsSS9TAiGM8rDoanJ98O9X/eWjurwyCfdgBQuncoQ8bGTVx0HmQ?=
- =?us-ascii?Q?aZWTGSDsvatroOIGA9XIsYgv9wsyVsmVTpzWGgx6MepI7M1Gv+QwUsrrVo9a?=
- =?us-ascii?Q?sb6ogGANaEVCcmemRLSllQ4ge9a0tS4nF/kQNyjdlOoMFcpKHYCPJVSuX8cU?=
- =?us-ascii?Q?WuI7oniFeUdAd3PXBtJdP2K8ZfbX/eBlddC0q/VvGhHFCSGFU9kWTLTp1xPY?=
- =?us-ascii?Q?Nuzy7tXxCXnrROL5Y5FykcKgJthGTa/if3HhIHDhxTDYHQuhHU/5B3kahsBV?=
- =?us-ascii?Q?nXrv+hJbwOBPalPTDJG6GCAYM5hBkZPS3EQOtJzNFpJVX0OeZzcuRt3UYWXk?=
- =?us-ascii?Q?voqSHszcMa1NQUgALJg2onVADvSm7c9GR4qCk8MhBOZsxj9H67mIyzBTRIdh?=
- =?us-ascii?Q?jPyo1SnIp2LggSiRgDP+89rtS0Mr3O3ynd1KvX7c9Y1IFMNAcXlNo5ednpxe?=
- =?us-ascii?Q?cBz3FaVXU10YHQYinsvAh2g88y/sWCNeobjFmBU3dVd0VBRW86B0Y3ASN/of?=
- =?us-ascii?Q?E2YVPz5LslzCy3scx/P/Q1a4n0FNQk/JgJuFgBzNebhLdOt0GSQ0/fkG+ql6?=
- =?us-ascii?Q?TALRBaUyzhQggI2tPaTrOUPB71l4tzHUk8/Huqrm4G0j+6zaJiP/kraY/Rd6?=
- =?us-ascii?Q?L+Ulqco/Aqzlwmwd8vm/wRX8ty22UILynGYT2UT2EY14AudtK4AXVW4i+t+I?=
- =?us-ascii?Q?OkxYiFVPrBKOjxTgGoJRUlsgvpVvy6N6yJznE6L/tz4XABpwmHtXgEUa/+9r?=
- =?us-ascii?Q?++Ji/GB/6p1yW8nqiGr75YUyg5Iz0wf9WrR/Ig55Uu+XITgSJq+x95DGvK7X?=
- =?us-ascii?Q?zFC1uKau2F0s1loRZunBjdzhnFQ/q/dVEZt7eNpLKMiGrkB5vcvNsxoJmF/s?=
- =?us-ascii?Q?V9257UHDX8xHPSNxbrE/HmZPps9D31XWwqPl6tlXIXFFvaVg9gFybxP2cFog?=
- =?us-ascii?Q?QMybk6shU9+hx7LZQvjvoJ8Wtc8w0c0ClW+vPEvAYuUBVQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS2PR08MB8431.eurprd08.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(366007)(376005)(7416005)(52116005)(1800799015)(38350700005);
- DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?3AhffOLoltjfGd+JMkmqtrd+8zGi5bZ7HMBCn3eOyZhjRWgakwiSTAJi35dW?=
- =?us-ascii?Q?5GD/8YGk1vyyYbpZdx17xLlcson6NSuODxGtvlntgT96cUnf7BgaJmNexJ1A?=
- =?us-ascii?Q?9L0D9YwPkBPNXD5yzZNX+gkzMC8z4AKgX9WcCr2IxjWTbWxcf5VTLOFs9fZT?=
- =?us-ascii?Q?ajwufIqcOZ3883R6Bc5rp0HmhSpAt1NYE6MfelIsv8WdiXxA1Mal8oCvih0d?=
- =?us-ascii?Q?IFJyW8BVfg34m62vaVFqYnNbeNwHSjpS9qhpKfwfNILu7YONY5vomT+hmldc?=
- =?us-ascii?Q?N90J6JBwu4Y4nlxAEuR8t6sxzP9I5rkzVkPYwGt+E4yXnDQVafFpUglAmebQ?=
- =?us-ascii?Q?268bjmR2+Pg3lFT1BQmXe4gFnYORhOd1k6QB7dYnhIxYcYsczUldMUTnmUUM?=
- =?us-ascii?Q?NOw9xNS8kS1Ixcgl+Xxa31UUAYuyslkucv3S9gGxrjj+XEIWHRinp0e/sU84?=
- =?us-ascii?Q?A/HiGyGNU/7Zizej3I/Bl7pRr0c6nqTcuWmV+MKi1D7eUw8QHIPyX5y9BPyr?=
- =?us-ascii?Q?gihJ3G5j84ONMO/gdA7ylNMguDSUN5bEaDcFuvP+ZiTo3aPKdIMEOnbsPeef?=
- =?us-ascii?Q?KqGvYHihJ9YsXapgdl7S3m051RqhDI7ASQNbw14+SnauQ3dQVRU73Xh4FhFY?=
- =?us-ascii?Q?+kKj9rXVpv2fUuXGOAFL6RVN8KxYByQV1cLOeNEXUFG3WHvHeSQUSLUeMYvn?=
- =?us-ascii?Q?l3v0LZqipVf70uJ+MnNCf48+9mpWg2Gdvd1EwanKZcbnVWHDuVZ7yNn0lweU?=
- =?us-ascii?Q?dmTiJmnLuSkb2JaWEagfNJD450w28DDr44jkjtx0LIJ36A00c3ymWHMTFfOP?=
- =?us-ascii?Q?xmmWzpt/gFrrlTXTJhpajX/clBTvpzrUaoFffNBk5e2eeA7HtYBQh6EFA2vR?=
- =?us-ascii?Q?TXN7DmYZ9MsQGJJGvIGkVvutf4h7zNVFt3vpr9h/5HckRGQQvNesisWXbqFV?=
- =?us-ascii?Q?ffadmW/BsJUnkdCo98ukPssVxVty0vLwbHaTWpHzWhDgoMY7MixVOWMB9gK7?=
- =?us-ascii?Q?2zJMcAq/m05kg7iW6V8INlGRtW7dOd/QuIFOMDe7YHK1RBkUe8ueKuEyZHpI?=
- =?us-ascii?Q?Rj0tFwKLL37OtWqaGb+VOeJYr5YlQtVHRhJr3p2WhkESwFuJx8dV6/HeZk17?=
- =?us-ascii?Q?ZYTFptRNIjzSF11wA6mT4W2TBMQAVxpXMM9xExdGacidil/eHZiHCkx9eCnJ?=
- =?us-ascii?Q?RXG8GGbU9h7IzJKpqbH3qJafFHGA/w7MkZggnXL0avidEok3jcvCGLxjsdLN?=
- =?us-ascii?Q?uLchSFIN1h7aoWy61q0sYrk4IZpnVIzRR9+2l0rx8bClKjQa2lhpxn9ThMst?=
- =?us-ascii?Q?F/dGm+MMC3tO/kRamn/pi5FeUh5OcCsZhW6ux9tGe1xPGhHQ7PjUlaiOx/k6?=
- =?us-ascii?Q?OER8t7nwz4U4CXNL9gdFeT3W4uJ0fsj7P2wjW9eieOI3suCl5nMQlP4JOCgv?=
- =?us-ascii?Q?YxcrP/OMlPgIFDzRkx1buaZ0ezzuIUpsjXU1aLfzfiUmZpO3L0LEJo8izhVu?=
- =?us-ascii?Q?GssbZglW/wYsIWa3Ld27Yft0GMmfNjJxJeV/jtzTZgd8RwnrBekTfS7Jwwa3?=
- =?us-ascii?Q?i8cu4JmJB1k5Ly7dMfFmkS380JJVXtgj7piEhsAH9XmW3EDvO1OoqYGfwDbO?=
- =?us-ascii?Q?nw=3D=3D?=
-X-OriginatorOrg: weidmueller.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 356ffb5b-38b7-4fb0-c47a-08dc6375cd26
-X-MS-Exchange-CrossTenant-AuthSource: AS2PR08MB8431.eurprd08.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2024 09:14:38.4920 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e4289438-1c5f-4c95-a51a-ee553b8b18ec
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ss59lrOVwoCN+LR1knQUacY79xZkuhZ6yb8hn9ha6H56xVQEU6mtRAzA7LMGvEI4IveyhTcZ6JKviOSbNQocbg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR08MB8174
+References: <20240419065542.1160527-1-sughosh.ganu@linaro.org>
+ <20240419065542.1160527-3-sughosh.ganu@linaro.org>
+ <7361ddbc-6ef5-47cf-9369-53b72ec5bab7@gmx.de>
+In-Reply-To: <7361ddbc-6ef5-47cf-9369-53b72ec5bab7@gmx.de>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Tue, 23 Apr 2024 14:44:40 +0530
+Message-ID: <CADg8p95BMCc6naxvgy+Wrv6v8rNZ4MKGLuV8RorewbaC-9LqvA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/4] doc: Document capsule generation through a config
+ file
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -163,36 +92,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Lukas Funke <lukas.funke@weidmueller.com>
+hi Heinrich,
 
-Call spl_dram_init() since this is commonly used for dram initialization
-in u-boot.
+On Fri, 19 Apr 2024 at 13:01, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 19.04.24 08:55, Sughosh Ganu wrote:
+> > The UEFI capsule can now be generated by specifying the capsule
+> > parameters through a config file. Highlight these changes in the
+> > documentation.
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> >   doc/develop/uefi/uefi.rst | 70 +++++++++++++++++++++++++++++++++++++++
+> >   1 file changed, 70 insertions(+)
+> >
+> > diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
+> > index 0389b269c0..8586127a83 100644
+> > --- a/doc/develop/uefi/uefi.rst
+> > +++ b/doc/develop/uefi/uefi.rst
+> > @@ -318,6 +318,76 @@ Run the following command
+> >         --guid <image GUID> \
+> >         <capsule_file_name>
+>
+> The users deserve a man-page mkeficapsule.1 that can be installed by
+> distros as /usr/share/doc/man/man1/mkeficapsule.1.
+>
+> Do not expect the user to look up the information online.
 
-Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
----
+Will add a man-page.
 
-Changes in v2:
- - capitalized acronym DRAM
+>
+> >
+> > +Alternatively, the capsules can be generated through a config
+> > +file. When generating the capsules through a config file, the Kconfig
+> > +symbol CONFIG_EFI_CAPSULE_CFG_FILE is to be used for specifying the
+> > +path to the config file.
+>
+> Why do we need CONFIG_EFI_CAPSULE_CFG_FILE? You could use a fixed path
+> or an environment parameter.
 
- board/starfive/visionfive2/spl.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Will remove the config flags.
 
-diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
-index 45848db6d8..ca61b5be22 100644
---- a/board/starfive/visionfive2/spl.c
-+++ b/board/starfive/visionfive2/spl.c
-@@ -285,9 +285,9 @@ int spl_board_init_f(void)
- 
- 	jh7110_jtag_init();
- 
--	ret = spl_soc_init();
-+	ret = spl_dram_init();
- 	if (ret) {
--		debug("JH7110 SPL init failed: %d\n", ret);
-+		debug("JH7110 DRAM init failed: %d\n", ret);
- 		return ret;
- 	}
- 
--- 
-2.30.2
+>
+> > +
+> > +The config file describes the parameters that are used for generating
+> > +one or more capsules. The parameters for a given capsule file are
+> > +specified within curly braces, in the form of "key:value" pairs. All
+> > +the parameters that are currently supported by the mkeficapsule tool
+> > +can be specified through the config file.
+> > +
+> > +The following are some example payload parameters specified through
+> > +the config file.
+> > +
+> > +.. code-block:: none
+> > +
+> > +     {
+> > +         image-guid: 02f4d760-cfd5-43bd-8e2d-a42acb33c660
+> > +         hardware-instance: 0
+> > +         monotonic-count: 1
+> > +         payload: u-boot.bin
+> > +         image-index: 1
+> > +         fw-version: 2
+> > +         private-key: /path/to/priv/key
+> > +         pub-key-cert: /path/to/pub/key
+> > +         capsule: u-boot.capsule
+> > +     }
+> > +     {
+> > +         image-guid: 4ce292da-1dd8-428d-a1c2-77743ef8b96e
+> > +         hardware-instance: 0
+> > +         payload: u-boot.itb
+> > +         image-index: 2
+> > +         fw-version: 7
+> > +         oemflags: 0x8000
+> > +         capsule: fit.capsule
+> > +     }
+> > +     {
+> > +         capsule-type: accept
+> > +         image-guid: 4ce292da-1dd8-428d-a1c2-77743ef8b96e
+> > +         capsule: accept.capsule
+> > +     }
+> > +     {
+> > +         capsule-type: revert
+> > +         capsule: revert.capsule
+> > +     }
+>
+> Is this one file? Are these multiple files? If these are multiple files,
+> please, put them in different code blocks.
 
+These are multiple files. But eventually, we will be using this
+feature to generate a multi-payload capsule. Again, this is on similar
+lines to how this is done with the EDKII script.
+
+>
+> What are the curly braces good for? Please, use an established file
+> format like YAML or JSON.
+
+As discussed over IRC, I will check if I can use the YAML format and
+keep the format similar to the one used above -- in key:value pairs. I
+would prefer keeping the format similar to what is used in the EDKII
+capsule generation tool. But if I can use the mapping node type in
+YAML for providing this information, I will explore using YAML with
+the libcyaml library for parsing the configs.
+>
+> > +
+> > +The following are the keys that specify the capsule parameters
+> > +
+> > +..code-block:: none
+> > +
+> > +    image-guid: Image GUID
+>
+> Please use the following formatting:
+>
+> image-guid
+>      Image GUID
+>
+> fw-version
+>      Image version
+
+I have kept the format similar to what is used in EDKII.
+
+>
+> > +    image-index: Image index value
+> > +    fw-version: Image version
+> > +    private-key: Path to the private key file used for capsule signing
+> > +    pub-key-cert: Path to the public key crt file used for capsule signing
+> > +    payload: Path to the capsule payload file
+> > +    capsule: Path to the output capsule file that is generated
+> > +    hardware-instance: Hardware Instance value
+>
+> Please, explain what a hardware instance is.
+
+Okay
+
+>
+> > +    monotonic-count: Monotonic count value
+>
+> Please, explain what it is used for.
+
+Okay
+
+>
+> > +    capsule-type: Specifies capsule type. normal(default), accept or revert
+>
+> ditto
+>
+> > +    oemflags: 16bit Oemflags value to be used(populated in capsule header)
+>
+> ditto
+>
+> > +
+> > +When generating capsules through a config file, the command would look
+> > +like
+> > +
+> > +.. code-block:: console
+> > +
+> > +    $ mkeficapsule --cfg-file </path/to/the/config/file>
+>
+> All available command line parameters of mkeficapsule should be
+> described in one place.
+
+Will fix
+
+-sughosh
+
+>
+> Best regards
+>
+> Heinrich
+>
+> > +
+> > +
+> >   Capsule with firmware version
+> >   *****************************
+> >
+>
