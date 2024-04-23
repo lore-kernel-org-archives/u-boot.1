@@ -4,90 +4,130 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4BBDC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 05:25:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93366C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 05:31:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A497A8858A;
-	Tue, 23 Apr 2024 07:25:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=nakato.io
+	by phobos.denx.de (Postfix) with ESMTP id D283888592;
+	Tue, 23 Apr 2024 07:31:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=nakato.io header.i=@nakato.io header.b="tcv1vuXn";
-	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="AnnZerz+";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="NdrqFtas";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 108D188591; Tue, 23 Apr 2024 06:53:55 +0200 (CEST)
-Received: from fout5-smtp.messagingengine.com (fout5-smtp.messagingengine.com
- [103.168.172.148])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3FA768858B; Tue, 23 Apr 2024 07:31:13 +0200 (CEST)
+Received: from NAM12-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam12on20600.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2418::600])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E93BA88582
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 06:53:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D8F2288588
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 07:31:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=nakato.io
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=nakato@nakato.io
-Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
- by mailfout.nyi.internal (Postfix) with ESMTP id 9E727138010D;
- Tue, 23 Apr 2024 00:53:49 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
- by compute4.internal (MEProxy); Tue, 23 Apr 2024 00:53:49 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nakato.io; h=cc
- :cc:content-transfer-encoding:content-type:content-type:date
- :date:from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to; s=fm3; t=1713848029;
- x=1713934429; bh=gbcAla7RI9jnUxMmJKJWuHf2BhAbtD0b40C1zYpmrvE=; b=
- tcv1vuXnaoN8Ue4Dd3jZm0aUeKqTHr1mQiBmRrrEfE0GRS2Uf2k+GnMdPALYeF/s
- KdaEz0yfNPydKCYoOMvCWuTx+xWq30ETzA6FnbL+twrJ8hwyyo3wuCfGGigjWhmx
- HnC4eU9IRwEq63Liudiyggw8SVScGZ6pFYvXqMUVQ+UancugGznkbPGYt2XbkS0K
- gEaE/rQoua2HNE9l1c9+dvCIPEYJT+1hF0Zn0A9tuQMbf0+dr2G9Ubi+ItpcRHvm
- qe28cQRk5b3pOKhe5FAJquYKjP14NTAZ0F2QbBgG87uqw8gKWiXYei+lWRi4hXRk
- YF/dOW6aaW6NaeHRFdbEJw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
- messagingengine.com; h=cc:cc:content-transfer-encoding
- :content-type:content-type:date:date:feedback-id:feedback-id
- :from:from:in-reply-to:in-reply-to:message-id:mime-version
- :references:reply-to:subject:subject:to:to:x-me-proxy:x-me-proxy
- :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1713848029; x=
- 1713934429; bh=gbcAla7RI9jnUxMmJKJWuHf2BhAbtD0b40C1zYpmrvE=; b=A
- nnZerz+A9HAxFqgCCkTMctYLK4FN1VQZOfWU/S8KEDCEso8ClvlS/rjyTISXp13E
- +Pv8QziqQ5CH6oEcx0jp2OYI7Cp6VwDAvNrtL+a6y58KGbRdkABbivZwpS9q0NQ2
- pxC6/68Xd1JrZah0MVAjfJ36fwHVSqtbN11HGF/b15BqMLiV9sXGOK2a5Oz++kyD
- mHh7EqXMwuy0n4Gasxr4HIg6moihVQ5Z2LU2BkqjX6zlleIO5nUHrjrB8thkbn+2
- rzZOadPlg2wL1OY9seUhmnulOen0D8NS+U6BRHWc7lJvckwO87bYhcWvvD7twlMG
- bYOC7Mj3OdGsLioWZ/K2Q==
-X-ME-Sender: <xms:3T4nZrig2_xMA_yz0KeTTsQokA0HKM0kTt_baaY7QN_XHWPWLIgF6g>
- <xme:3T4nZoDafv0h_5JiB3ue0mWvSaUpKdV4omyTbgH5_ytZijwjncQZSLIrURkZMGjLo
- RTPn7w2KpHfrX9NtA>
-X-ME-Received: <xmr:3T4nZrFgskwd82cEYLd7AThbpOgAskyod30AEloU1qFm3CW_aqi03FQu35X6R1tVERL_7LPL2FNBEt4oMqYD5S3-OE51GhuqSVDQghVnLmj1W3g>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedvledrudeltddgledvucetufdoteggodetrfdotf
- fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
- uceurghilhhouhhtmecufedttdenucenucfjughrpefhvfevufffkfgjfhgggfgtsehtqh
- ertddttdejnecuhfhrohhmpefurggthhhiucfmihhnghcuoehnrghkrghtohesnhgrkhgr
- thhordhioheqnecuggftrfgrthhtvghrnhepfeevffdvieduvdffkeduffefledukeevff
- dtfeeigeeuvdeiudelledvudeuleefnecuffhomhgrihhnpehnrghkrghtohdrihhonecu
- vehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepnhgrkhgrth
- hosehnrghkrghtohdrihho
-X-ME-Proxy: <xmx:3T4nZoSd4dAQfCmWehawCsBAxFyijvir1qRXWpgQCBXiQbUSt0fDLA>
- <xmx:3T4nZoxtiI17Iu0tHt2c9iaCAnflEQqiNsVL8Xgs-9QujnP0LLzlrQ>
- <xmx:3T4nZu4IebtzbzRVk258msVcjm0txRNCOS1E6uhRfeImoyaZZOU48A>
- <xmx:3T4nZtwylKJz6604pPW8pMiZXSNqseITGILUB8yE0yd_3GcTpINfYw>
- <xmx:3T4nZnrXoZkaIBfBSfSLHOh6l3urUpdSn5Y82zN0j302rQizN4G3_vB->
-Feedback-ID: ic8e14276:Fastmail
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 23 Apr 2024 00:53:46 -0400 (EDT)
-From: Sachi King <nakato@nakato.io>
-To: u-boot@lists.denx.de, Qu Wenruo <quwenruo.btrfs@gmx.com>
-Cc: kabel@kernel.org, wqu@suse.com, linux-btrfs@vger.kernel.org
-Subject: Re: BTRFS use-after-free bug at free_extent_buffer_internal
-Date: Tue, 23 Apr 2024 14:53:45 +1000
-Message-ID: <4299748.mogB4TqSGs@youmu>
-In-Reply-To: <995dd168-8e1e-4b99-896c-ece4dc88d6e9@gmx.com>
-References: <3281192.oiGErgHkdL@youmu>
- <995dd168-8e1e-4b99-896c-ece4dc88d6e9@gmx.com>
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=CHbPYWyNj2MinQjtMNqEU8l7eMYjeAJzaiGX4vLpBa73P19eEKG+et+WEqGtaPKBKz+fH7tBf6gmyta+e/yLApwJoR9Beja12FunDD7eqIzl/9UOkT3T+Oa0IE4wCPHN+gcGeAY/SYOpf+gbDFxPi7twZdYq7qYGAeRGyXv/K5rLH5y/KK6F85iaDmLYZT2GWtLY1VQeU8GNgW12RuUPb84w2x7sAyJuN8YR0gXYBYoVI1LutL8LY85QMo+tDCRLg4JcCq97MS01YGubgDDeccn4NXNS5zD+kjAcghWG2a6h0JyBzTeAMg0DfMxwBlV28QXvDzed1QkZFSAB6xZbbg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ysr0dYjPUPIPHIDloClFExerkDISXnVGesDZsVKvVrg=;
+ b=C24oW/Ynb0uoJWpJZ0HAkS1i8Z4Z5RL56Cj5cQiFaE5pkxAk/T1VnYYiO7QD5uqAdLx7fRjBW1Uz3gXALJduN9PiYqIZSI6VfdYmOJ6KRVUrHbcSERun+IbMDERC/56ehkndaorexKsERsrvYER0pJn5aGmC8eJhi9QU4UMM5B/OmpTkpq3WDTWcuyNYlRwRRyZmNIus+ikGu1qyDoi09cDYQIYqme6S8jx7r3Ou5DDIhbrU8uHxQvsL+SUS/ZDTwUXjzUOXlGt8cS1YnO7kYXX8nH4NEUZ+UdrdpQxqv7ylyTU64MpIMGwY+Krfmlq5eFNEFyMCywWhQldl88AXQQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ysr0dYjPUPIPHIDloClFExerkDISXnVGesDZsVKvVrg=;
+ b=NdrqFtashjZqJJ+om7lRnyzn0A01v4ray4Y5Jpv1HFFwPwmpcegW00PNvLFxv8rbxToe0/Ry3XhesDKv9H9gxngQBVrQX3XQzKtbOxzw+H1sHwwTwLIfovmVl+zZBaAmYCXHwF+N1yt0CZSHFs9RDbnDekLBbJLelcIvkGHS2Cg=
+Received: from CH0PR03CA0263.namprd03.prod.outlook.com (2603:10b6:610:e5::28)
+ by CH3PR12MB8581.namprd12.prod.outlook.com (2603:10b6:610:15d::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.44; Tue, 23 Apr
+ 2024 05:31:07 +0000
+Received: from DS3PEPF000099DB.namprd04.prod.outlook.com
+ (2603:10b6:610:e5:cafe::d7) by CH0PR03CA0263.outlook.office365.com
+ (2603:10b6:610:e5::28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7495.34 via Frontend
+ Transport; Tue, 23 Apr 2024 05:31:07 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ DS3PEPF000099DB.mail.protection.outlook.com (10.167.17.197) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.7519.19 via Frontend Transport; Tue, 23 Apr 2024 05:31:07 +0000
+Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 23 Apr
+ 2024 00:31:06 -0500
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB06.amd.com
+ (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 23 Apr
+ 2024 00:31:06 -0500
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35 via Frontend
+ Transport; Tue, 23 Apr 2024 00:31:04 -0500
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <peng.fan@nxp.com>, <jh80.chung@samsung.com>, <git@amd.com>
+Subject: [PATCH] mmc: Change the frequency to MMC_HS_52 when selecting hs400
+Date: Tue, 23 Apr 2024 11:00:57 +0530
+Message-ID: <20240423053057.15863-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
-X-Mailman-Approved-At: Tue, 23 Apr 2024 07:25:05 +0200
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF000099DB:EE_|CH3PR12MB8581:EE_
+X-MS-Office365-Filtering-Correlation-Id: 833a2ae6-9e3e-47d7-4ddc-08dc63569377
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?UKLm6xbDVlMgq89S9mp1GgNRXTpiF9FBpNvI55NoUCeHDuZUEsRPZ2p/UCqK?=
+ =?us-ascii?Q?t+NBmPo510Y06Qxc33NX+EYuusPVK5zpTTYn1gbktz9IiJxDX2ijmOsmLgcK?=
+ =?us-ascii?Q?9Kj0mp7V+NIBx6BJ3eHEMD+T7AdAWwWzrI7u3JyFqnHjEVj8MG3gp5GQ7wZn?=
+ =?us-ascii?Q?w4b4IbcF4GqVC0PqzGQ/bQ64aHZ0d3J0ed41+nm17zN09tV8XunLYvALK89x?=
+ =?us-ascii?Q?KEp/9pYaWR5ZS4q3qXMy+g6x5wrrHU26Jnz0pEonr3qL477Xr3g1J6Q31hoS?=
+ =?us-ascii?Q?WZ5GFU1UG02mh2tsW4AKa3wZA+oQH2djmvo//pY41hJOEPZSvtw0JAq/lOgF?=
+ =?us-ascii?Q?Ex/L8Zw0Mx3N7Vc+lG8btoQ8nRCi/nrmTrh+TCf8RurIVBYQmyvARDjW/8yC?=
+ =?us-ascii?Q?MFHN6CbVjBllHJ6FmQywr6OqUvAHgQmIxT8TXgW2qBC2S7Z4vorlugR4Jlpf?=
+ =?us-ascii?Q?SZrb/IrxLE+l+PR1Y0ygHtOY8Gw+1+w+1CCQnI4f62fNrbLpVKkyxW7v+KlS?=
+ =?us-ascii?Q?sgvTfEmq7IOkaZCEL9qo3qQUe6XqTkpza+6E+FBh4GwiMe+0ckvvO8NEJXWC?=
+ =?us-ascii?Q?8LIBASeJUvn8iPcyUVJJpwbSWDYOd3B9AP3C42F3trP6m5S5OTHTfi7g4SSc?=
+ =?us-ascii?Q?cbZT3X6C2yTB2ttICsd+k+0XDgM5TNQ6u8LU/ZRcv5At1r5nBuYZLbtuKXLw?=
+ =?us-ascii?Q?mh3VZXHjsKwm7XHNMk9+0t0Hx2/RklHrxukild+vi+kjVw3P9LvOpWZNhWsV?=
+ =?us-ascii?Q?d5ik85/Np8ocVocEuRIgqY7GRuYi81sZgizUnjmkw5l4OjR5+0FRXNcolhIZ?=
+ =?us-ascii?Q?WgPWdmKCoN+nUFbSOh97haXEukdf20wZ4NmvawzbGICdMAWbmX7L5+/Xr8LF?=
+ =?us-ascii?Q?uOC2c1dZulSAueTvjdFO75fosqIoMJwIhZm4SJA9/4HiVVmdZwXcp8yCBG/Y?=
+ =?us-ascii?Q?ZVTo8ajx0I7jTltgmijfA8V/j2FIVBkA0uahthZEFeIDhpFR/x0tmUVSZSuf?=
+ =?us-ascii?Q?uGBVc+Xp8HXWjDv+FwcLaY2toYh9KbWzOK7fLmaF0KWJU4MkYtEwIDT9d8oy?=
+ =?us-ascii?Q?5D8U11Yi5l96dBx95V5Z4JbYcslRC0qQEiWL1CAISDQH+2OrxB1i3HLCPW6d?=
+ =?us-ascii?Q?CnxmLnCzVOCo7N21VVkzWpsmbjsl9EcSendhz004URD/EWeZTZC8TpngYe8Y?=
+ =?us-ascii?Q?wVDnew9z1/UBxQNjwQpjdYwnPLkA59xhgBq4QEx7B638zvI27clPhzBSZHQX?=
+ =?us-ascii?Q?A9LAWF3DLP/18K+XwoKJJ9+D1eCjTgRL1JZLJ6DgTh4FlGA1PInCqbmVTQLs?=
+ =?us-ascii?Q?YW+4tS1ZrLmPTxYukJQs+ZZdP0WpOMDltIMqUf4/3XXZvWDbtK6WTmNg31al?=
+ =?us-ascii?Q?BC/5mG+PHcPkBNmsWvr7El9Kpxel?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230031)(376005)(82310400014)(1800799015)(36860700004); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Apr 2024 05:31:07.1393 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 833a2ae6-9e3e-47d7-4ddc-08dc63569377
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099DB.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB8581
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,382 +144,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Monday 22 April 2024 5:15:50=E2=80=AFPM AEST Qu Wenruo wrote:
->=20
-> =E5=9C=A8 2024/4/22 16:07, Sachi King =E5=86=99=E9=81=93:
-> > Hi,
-> >
-> > I've hit a bug with u-boot on my BTRFS filesystem, and I'm fairly certa=
-in
-> > it's a bug and not a corruption issue.
-> >
-> > A bit of history on the filesystem.  It is a fairly new filesystem as i=
-t was
-> > being used to give me access to test a wayland application on a
-> > Raspberry Pi.  The filesystem was about 3 days old when I hit the bug, =
-and
-> > I'm fairly certain it never had an unclean shutdown.  I have checked the
-> > filesystem with "btrfs check" which has found no errors.  The filesystem
-> > mounts on Linux and is functional.
-> >
-> >> # btrfs check --check-data-csum /dev/sda2
-> >> Opening filesystem to check...
-> >> Checking filesystem on /dev/sda2
-> >> UUID: 18db6211-ac36-42c1-a22f-5e15e1486e0d
-> >> [1/7] checking root items
-> >> [2/7] checking extents
-> >> [3/7] checking free space tree
-> >> [4/7] checking fs roots
-> >> [5/7] checking csums against data
-> >> [6/7] checking root refs
-> >> [7/7] checking quota groups skipped (not enabled on this FS)
-> >> found 5070573568 bytes used, no error found
-> >> total csum bytes: 4451620
-> >> total tree bytes: 370458624
-> >> total fs tree bytes: 353124352
-> >> total extent tree bytes: 10010624
-> >> btree space waste bytes: 62303284
-> >> file data blocks allocated: 6786519040
-> >>   referenced 6328619008
->=20
-> Since btrfs check reports no error, the fs must be valid.
->=20
-> But considering how new it is, it may be related to some new features
-> not properly implemented in Uboot.
->=20
-> Is it possible to provide the whole binary dump of the fs?
+Per JESD84-B51 P47, host need to change frequency to <=52MHz
+after setting HS_TIMING to 0x1, and host need to set the
+8-bit DDR buswidth. Currently setting the frequency to 26MHz
+and trying to switch 8-bit DDR buswidth resulting timeouts.
 
-Sure, here's a copy of the disk image.  The BTRFS is at partition 2.
-http://maribel.nakato.io/u-boot-newtest.img.zstd
+mmc dev 1 0
+Select HS400 failed -110
+switch to partitions #0, OK
+mmc1(part 0) is current device
 
-> >
-> >
-> > I've made an image of the filesystem so I could reproduce the bug in an
-> > environment that doesn't require the physical SBC, and have reproduced
-> > the issue using the head of the master branch with "qemu-x86_64_defconf=
-ig".
-> >
-> > My testing qemu was produced with the following:
-> >> # make qemu-x86_64_defconfig
-> >> # cat << EOF >> .config
-> >> CONFIG_AUTOBOOT=3Dy
-> >> CONFIG_BOOTDELAY=3D1
-> >> CONFIG_USE_BOOTCOMMAND=3Dy
-> >> CONFIG_BOOTSTD_DEFAULTS=3Dy
-> >> CONFIG_BOOTSTD_FULL=3Dy
-> >> CONFIG_CMD_BOOTFLOW_FULL=3Dy
-> >> CONFIG_BOOTCOMMAND=3D"bootflow scan -lb"
-> >> CONFIG_ENV_IS_NOWHERE=3Dy
-> >> CONFIG_LZ4=3Dy
-> >> CONFIG_BZIP2=3Dy
-> >> CONFIG_ZSTD=3Dy
-> >> CONFIG_FS_BTRFS=3Dy
-> >> CONFIG_CMD_BTRFS=3Dy
-> >> CONFIG_GZIP=3Dy
-> >> CONFIG_DEVICE_TREE_INCLUDES=3D"bootstd.dtsi"
-> >> EOF
-> >> # make -j24
-> >
-> > bootstd.dtsi is placed at "arch/x86/dts/bootstd.dtsi" and contains:
-> >> / {
-> >>          bootstd {
-> >>                  compatible =3D "u-boot,boot-std";
-> >>                  filename-prefixes =3D "/@boot/", "/boot/", "/";
-> >>                  bootdev-order =3D "scsi";
-> >>                  extlinux {
-> >>                          compatible =3D "u-boot,extlinux";
-> >>                  };
-> >>          };
-> >> };
-> >
-> >
-> > The VM was run with
-> >> qemu-system-x86_64 -bios u-boot.rom -nographic -M q35 -action reboot=
-=3Dshutdown -drive file=3D/mnt/dbg/u-boot-debug.img
-> >
-> > The error message I recive on boot is
-> >> BUG at fs/btrfs/extent-io.c:629/free_extent_buffer_internal()!
-> >> BUG!
-> >> resetting ...
-> >
-> >
-> > I added a print statement to free_extent_buffer_internal that prints the
-> > start address of the extent_buffer as I'm not sure what to be looking f=
-or
-> > here.  This print statement is before the decrement.
-> >> printf("free_extent_buffer_internal: eb->start[%llx] eb->refs[%i]\n", =
-eb->start, eb->refs);
-> >
-> > The last message before the crash reported eb->start to be "0", with 0 =
-refs.
-> >> free_extent_buffer_internal: eb->start[0] eb->refs[0]
-> >
-> > The extent at 0 struck me as odd, so I tried commenting out the freeing=
-, by
-> > removing the call to free_extent_buffer_final, and this resulted in boo=
-tflow
-> > succeeding and showing me the boot menu, which suprised me.
-> > I expected to see the bug reproduce itself, with refs being zero, but e=
-b->start
-> > pointing somewhere valid, but I instead got a valid address with refs a=
-t 2.
-> >
-> > I'm assuming that the order free_extent_buffer_internal is called is
-> > deterministic, so by counting the print outputs the line that prior held
-> > the extent_buffer with a 0 start was replaced with:
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >
-> > Interestingly, as can be seen in the full logs with my included print
-> > messages, 249c000 is being used just before this, with a ref count of
-> > 2.  249c000 does appear to reach a point where it should have been freed
-> > in the past, before it gets used again as seen in both logs.
-> >
-> > The failing boot log:
-> >> U-Boot SPL 2024.04-00949-g1dd659fd62-dirty (Apr 22 2024 - 11:32:37 +10=
-00)
-> >> Trying to boot from SPI
-> >> Jumping to 64-bit U-Boot: Note many features are missing
-> >>
-> >>
-> >> U-Boot 2024.04-00949-g1dd659fd62-dirty (Apr 22 2024 - 11:32:37 +1000)
-> >>
-> >> CPU:   QEMU Virtual CPU version 2.5+
-> >> DRAM:  128 MiB
-> >> Core:  13 devices, 13 uclasses, devicetree: separate
-> >> Loading Environment from nowhere... OK
-> >> Model: QEMU x86 (I440FX)
-> >> Net:   e1000: 00:00:00:00:00:00
-> >>
-> >> Error: e1000#0 No valid MAC address found.
-> >>        eth_initialize() No ethernet found.
-> >>
-> >>
-> >> Hit any key to stop autoboot:  0
-> >> Scanning for bootflows in all bootdevs
-> >> Seq  Method       State   Uclass    Part  Name                      Fi=
-lename
-> >> ---  -----------  ------  --------  ----  ------------------------  --=
-=2D-------------
-> >> scanning bus for devices...
-> >> Target spinup took 0 ms.
-> >> SATA link 1 timeout.
-> >> Target spinup took 0 ms.
-> >> SATA link 3 timeout.
-> >> SATA link 4 timeout.
-> >> SATA link 5 timeout.
-> >> AHCI 0001.0000 32 slots 6 ports 1.5 Gbps 0x3f impl SATA mode
-> >> flags: 64bit ncq only
-> >> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
-> >>    Device 0: (0:0) Vendor: ATA Prod.: QEMU HARDDISK Rev: 2.5+
-> >>              Type: Hard Disk
-> >>              Capacity: 58680.0 MB =3D 57.3 GB (120176640 x 512)
-> >> timeout exit!
-> >> Scanning bootdev 'ahci_scsi.id0lun0.bootdev':
-> >> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[0] eb->refs[0]
-> >> BUG at fs/btrfs/extent-io.c:626/free_extent_buffer_internal()!
->=20
-> The eb[0] seems very weird.
-> Even for superblock reading, we got eb at 64K, and every eb should have
-> at least one ref at creation time.
->=20
-> So this indeed looks like the direct cause.
-> But without a full call trace (is it possible inside U-boot runtime?), I
-> do not have an immediate clue.
->=20
-> Thanks,
-> Qu
->=20
-> >> BUG!
-> >> resetting ...
-> >
-> > The succeeding log with the removed freeing:
-> >> U-Boot SPL 2024.04-00949-g1dd659fd62-dirty (Apr 22 2024 - 11:38:25 +10=
-00)
-> >> Trying to boot from SPI
-> >> Jumping to 64-bit U-Boot: Note many features are missing
-> >>
-> >>
-> >> U-Boot 2024.04-00949-g1dd659fd62-dirty (Apr 22 2024 - 11:38:25 +1000)
-> >>
-> >> CPU:   QEMU Virtual CPU version 2.5+
-> >> DRAM:  128 MiB
-> >> Core:  13 devices, 13 uclasses, devicetree: separate
-> >> Loading Environment from nowhere... OK
-> >> Model: QEMU x86 (I440FX)
-> >> Net:   e1000: 00:00:00:00:00:00
-> >>
-> >> Error: e1000#0 No valid MAC address found.
-> >>        eth_initialize() No ethernet found.
-> >>
-> >>
-> >> Hit any key to stop autoboot:  0
-> >> Scanning for bootflows in all bootdevs
-> >> Seq  Method       State   Uclass    Part  Name                      Fi=
-lename
-> >> ---  -----------  ------  --------  ----  ------------------------  --=
-=2D-------------
-> >> scanning bus for devices...
-> >> Target spinup took 0 ms.
-> >> SATA link 1 timeout.
-> >> Target spinup took 0 ms.
-> >> SATA link 3 timeout.
-> >> SATA link 4 timeout.
-> >> SATA link 5 timeout.
-> >> AHCI 0001.0000 32 slots 6 ports 1.5 Gbps 0x3f impl SATA mode
-> >> flags: 64bit ncq only
-> >> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
-> >>    Device 0: (0:0) Vendor: ATA Prod.: QEMU HARDDISK Rev: 2.5+
-> >>              Type: Hard Disk
-> >>              Capacity: 58680.0 MB =3D 57.3 GB (120176640 x 512)
-> >> timeout exit!
-> >> Scanning bootdev 'ahci_scsi.id0lun0.bootdev':
-> >> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1548000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[150c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[154c000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1544000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[2490000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[24a4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[249c000] eb->refs[2]
-> >> free_extent_buffer_internal: eb->start[2490000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[6de0000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[28f4000] eb->refs[1]
-> >> free_extent_buffer_internal: eb->start[1544000] eb->refs[1]
-> >>    0  extlinux     ready   scsi         2  ahci_scsi.id0lun0.bootdev /=
-@boot/extlinux/extlinux.conf
-> >> ** Booting bootflow 'ahci_scsi.id0lun0.bootdev.part_2' with extlinux
-> >> ------------------------------------------------------------
-> >> 1:      NixOS - Default
-> >> 2:      NixOS - Configuration 5 (2024-03-04 11:00 - 24.05.20240205.faf=
-912b)
-> >> 3:      NixOS - Configuration 4 (2024-03-02 15:05 - 24.05.20240205.faf=
-912b)
-> >> 4:      NixOS - Configuration 3 (2024-03-02 14:26 - 24.05.20240205.faf=
-912b)
-> >> 5:      NixOS - Configuration 2 (2024-03-02 14:06 - 24.05.20240205.faf=
-912b)
-> >> 6:      NixOS - Configuration 1 (1970-01-01 10:00 - 24.05.20240205.faf=
-912b)
-> >> Enter choice: 1:        NixOS - Default
-> >> Retrieving file: /@boot/extlinux/../nixos/gq8jsgxnhq2wvsjrni3cjw1wb554=
-0wjw-linux-6.1.63-stable_20231123-Image
-> >> free_extent_buffer_internal: eb->start[10000] eb->refs[1]
-> >
-> >
-> > I'm not sure where to go from here with the bug, so I'm hoping for some
-> > help in tracking it down so it can be fixed.
-> >
-> > Thanks,
-> > Sachi
-> >
-> >
-> >
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ drivers/mmc/mmc.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-
-
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index 7b068c71ff..a2ed99aefe 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -962,8 +962,8 @@ static int mmc_set_card_speed(struct mmc *mmc, enum bus_mode mode,
+ 	 * Extended CSD. Reconfigure the controller to run at HS mode.
+ 	 */
+ 	if (hsdowngrade) {
+-		mmc_select_mode(mmc, MMC_HS);
+-		mmc_set_clock(mmc, mmc_mode2freq(mmc, MMC_HS), false);
++		mmc_select_mode(mmc, MMC_HS_52);
++		mmc_set_clock(mmc, mmc_mode2freq(mmc, MMC_HS_52), false);
+ 	}
+ #endif
+ 
+@@ -2043,7 +2043,7 @@ static int mmc_select_hs400(struct mmc *mmc)
+ 	}
+ 
+ 	/* Set back to HS */
+-	mmc_set_card_speed(mmc, MMC_HS, true);
++	mmc_set_card_speed(mmc, MMC_HS_52, true);
+ 
+ 	err = mmc_hs400_prepare_ddr(mmc);
+ 	if (err)
+-- 
+2.17.1
 
