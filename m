@@ -4,76 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD57EC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 06:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10BC9C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 06:57:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35E9E88536;
-	Tue, 23 Apr 2024 08:39:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4511388502;
+	Tue, 23 Apr 2024 08:57:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ewzfhwWn";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="VBHQynaG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 753EB88573; Tue, 23 Apr 2024 08:39:11 +0200 (CEST)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 46BF488561; Tue, 23 Apr 2024 08:57:08 +0200 (CEST)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F41FF88514
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 08:39:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2BE5884F2
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 08:57:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jim.t90615@gmail.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-1e3f17c64daso34300295ad.3
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 23:39:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713854347; x=1714459147; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=dVgbGoRHBuy/69uPPDQ1zRpfdZTmrCTvuFWkaCiG/LM=;
- b=ewzfhwWn5LYoqnnD6TrGu0EJXbhntEYlcNnOnivFC7rEymITXxE76We/nN3B6cvVK3
- rlbOKXmiIUnekLyEaPmZxJWrOnBz4JAFV/2Od2a4LKYx++zpsbq938IwT28fBF6p0qYN
- K4jS/B04TL+kTX0fS5zY3w5ykQWcXBYRCU7VJl5vNljkwxTvknjiYhsMfV5Oj7pAxNQD
- NAOfe9XaWxjZ2sWQsCLaaRStGhaDWwyUsvBkmksPNKQAH2zSECP9TAHjUxDOTp6LsNQH
- zNKcnrua/j3v2UlWX3sDhs6rpUTat5bb4+tn/rkmAwWb+Zcvvcy36llLdpkikPIIaWR6
- m0iw==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 3A45F3F15B
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 06:57:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1713855425;
+ bh=egJ/wCBpwu+ZMNbyByUfoY4dBvgo0ld8htKBglsvpdc=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=VBHQynaGhTXPmo+3g18wC20MGJWR2ZnYaBJ888JuINcJJtOAyzp/kmG/sl2na49b5
+ HZ2sxWJ/x84ZzNaCNVjSDw1Hd7Je9QUfAd81OavdKbCD5YP4z1G+3nMG5g1nI3otXc
+ JbMDghIFCNn0uBkJf5lwLmUaaNISEohloc72qELNTVV/rjFqkavbUsOFQ2gB7hhzJ3
+ bx40hTtd5DonQvLl+booolFWjW3p9PHVzC/NG5T4rOuDa4311c4kEMmv2zCIcp0u3o
+ Rv1JTo2hTXjaPPB5zfzeDmmcXxvKNn1j8xva27wE1ZqBNWtn00YCSfgsM1xFl0tOhS
+ 2FMSa1E8ahmXw==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-41a1eb33994so8128905e9.1
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 23:57:05 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713854347; x=1714459147;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=dVgbGoRHBuy/69uPPDQ1zRpfdZTmrCTvuFWkaCiG/LM=;
- b=OxYEGbhbRRdLpqq7F+AHBfdfK+ZQQoT91qRfCR2N6Sm673nHoTYAe6zQoAli4FZvHj
- uolISHbkyrVsUahEoJmYo4Gkir736qRY+M2MFhxdxOahkBEdpyG/fvqWox5pCK662mQw
- 4rZP5KQSFkRky5TP85GOFoULPeYc2Fje6uTVBY4fxXVJje7tIMgzg1XjyO3oXaKeZ+em
- iZiofEmYh/MP+xfUIRt0OyWxxpaXZICzR5fM/POMRG9KMbCg+yzgFq1Zg1ehCcYfwcgd
- rs5oX6UYc2+z4SCwAFdotuW/2w+HNU4ovWlpPItW7nkbgmufCxwfdikvB2x5AqDA3vlS
- JcjQ==
-X-Gm-Message-State: AOJu0YwSH3JwBXJ7TMcbVt0brxOs+ZIGhX9nRLYlAsv/L8ZNvLGD3xxk
- zYY1p2KdnVhAUpeKkE5yGvw+/KGXgCwZHnTTVTC6Lj8xrzwGQnQo
-X-Google-Smtp-Source: AGHT+IHI1t8QKCF6vGVAZ3BVwohqdtulSmhSNYJ7UnmrFpQZ3Nzumr3Ix7EWg2DkQ/tNmcHCAOZFLw==
-X-Received: by 2002:a17:902:7890:b0:1e1:3300:702b with SMTP id
- q16-20020a170902789000b001e13300702bmr10074655pll.15.1713854347393; 
- Mon, 22 Apr 2024 23:39:07 -0700 (PDT)
-Received: from localhost.localdomain ([180.217.143.235])
+ d=1e100.net; s=20230601; t=1713855425; x=1714460225;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=egJ/wCBpwu+ZMNbyByUfoY4dBvgo0ld8htKBglsvpdc=;
+ b=f+bML80R7QQMzFMkEIFfjdORiABOdHuB6zhfvHdDd7c24jTpl4XKbg1mIbVXq6X0WW
+ 4J6n4HcjZSqXunPPmy0xc8D/cWB2Wsn0k0AOO9pbJxhnBtuibP7Kez0tCw1QCETZNwqD
+ besiC5NBtizuSdyHiEMEo6sZNRBUp+nQUZozSFj++P9WtVFxGOfHYMy3s2EJf4AMScLL
+ xAa/d9ToEvuiIEoG9LyYel+/UWsIKb8PFPz8tpGCSY9h9fRGcnqUNYTHLKv/HIvjQG1s
+ ahx6pYY61UTemy/7zvYcQUZAVyKhBFgsQymL5zrpaLlUEw46a7GKpHm2qiJNsQ2C+RDH
+ wmXQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZ2Y66o2u3Sn/dEM+Vtfpn/jysa9RP10HJtHIQFQniKmrQ+eVqegvqRA4fgLx0/pEt5PL/np4yEWj6YjnEu0VaJXbMmw==
+X-Gm-Message-State: AOJu0Ywkid2mUKNvuabnc5n8Mwu4zD7Ebe1f777A0EGPZK6fXtjrb44i
+ rXwH0jtiVgPDsJZNJFRQPGc64LdUx5KdmHqw1lKOKmJ4STtF0cpRNFzhZYijfz3G0K5FHIdB79O
+ DpnNbdjHwrxghrqkozxNUMaHMLPRVOWwv8rL3ts7aMjJHhzWr/ucTP5VF5GAbmTFrCPg=
+X-Received: by 2002:a05:600c:1907:b0:414:3713:e9a2 with SMTP id
+ j7-20020a05600c190700b004143713e9a2mr11093663wmq.3.1713855424895; 
+ Mon, 22 Apr 2024 23:57:04 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFls7bdRisXisobghFNOCc68+t+z9Vw43EytEcpGpXt2ydquh2fzju7KQqZ4zf3hXEM8jvHxg==
+X-Received: by 2002:a05:600c:1907:b0:414:3713:e9a2 with SMTP id
+ j7-20020a05600c190700b004143713e9a2mr11093633wmq.3.1713855424370; 
+ Mon, 22 Apr 2024 23:57:04 -0700 (PDT)
+Received: from [192.168.123.126]
+ (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
  by smtp.gmail.com with ESMTPSA id
- p10-20020a170902e34a00b001e49bce99d9sm9243966plc.95.2024.04.22.23.39.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 23:39:06 -0700 (PDT)
-From: Jim Liu <jim.t90615@gmail.com>
-X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
-To: KWLIU@nuvoton.com, jim.t90615@gmail.com, trini@konsulko.com,
- YSCHU@nuvoton.com, jagan@amarulasolutions.com, JJLIU0@nuvoton.com
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1] spi: npcm_pspi: Reset HW in driver probe
-Date: Tue, 23 Apr 2024 14:38:42 +0800
-Message-Id: <20240423063842.1919456-1-JJLIU0@nuvoton.com>
-X-Mailer: git-send-email 2.25.1
+ u11-20020a05600c138b00b004187450e4cesm22817429wmf.29.2024.04.22.23.57.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 22 Apr 2024 23:57:03 -0700 (PDT)
+Message-ID: <d7f544c9-c779-4498-a012-12535bdc1d3e@canonical.com>
+Date: Tue, 23 Apr 2024 08:57:02 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: address coverity report 492766 for dead code
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+References: <20240423053806.4962-1-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240423053806.4962-1-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,48 +108,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Reset HW to clear old status and use default data mode(8-bit).
+On 23.04.24 07:38, Ilias Apalodimas wrote:
+> The check of the return code is already done a few lines above.
+> Although it doesn't cause any functional issues, remove the superfluous
+> checks
+> 
+> Addresses-Coverity-ID: 492766 Control flow issues  (DEADCODE)
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
----
- drivers/spi/npcm_pspi.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 
-diff --git a/drivers/spi/npcm_pspi.c b/drivers/spi/npcm_pspi.c
-index eb14185273..c9441304f5 100644
---- a/drivers/spi/npcm_pspi.c
-+++ b/drivers/spi/npcm_pspi.c
-@@ -7,6 +7,7 @@
- #include <dm.h>
- #include <spi.h>
- #include <clk.h>
-+#include <reset.h>
- #include <asm/gpio.h>
- #include <linux/iopoll.h>
- 
-@@ -194,6 +195,7 @@ static int npcm_pspi_probe(struct udevice *bus)
- {
- 	struct npcm_pspi_priv *priv = dev_get_priv(bus);
- 	int node = dev_of_offset(bus);
-+	struct reset_ctl reset;
- 	int ret;
- 
- 	ret = clk_get_by_index(bus, 0, &priv->clk);
-@@ -205,6 +207,14 @@ static int npcm_pspi_probe(struct udevice *bus)
- 	gpio_request_by_name_nodev(offset_to_ofnode(node), "cs-gpios", 0,
- 				   &priv->cs_gpio, GPIOD_IS_OUT| GPIOD_ACTIVE_LOW);
- 
-+	/* Reset HW */
-+	ret = reset_get_by_index(bus, 0, &reset);
-+	if (!ret) {
-+		reset_assert(&reset);
-+		udelay(5);
-+		reset_deassert(&reset);
-+	}
-+
- 	return 0;
- }
- 
--- 
-2.25.1
+> ---
+>   lib/efi_loader/efi_var_mem.c | 2 --
+>   1 file changed, 2 deletions(-)
+> 
+> diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
+> index 940ab6638823..139e16aad7c6 100644
+> --- a/lib/efi_loader/efi_var_mem.c
+> +++ b/lib/efi_loader/efi_var_mem.c
+> @@ -232,8 +232,6 @@ efi_status_t efi_var_mem_init(void)
+>   	efi_var_buf->length = (uintptr_t)efi_var_buf->var -
+>   			      (uintptr_t)efi_var_buf;
+>   
+> -	if (ret != EFI_SUCCESS)
+> -		return ret;
+>   	ret = efi_create_event(EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE, TPL_CALLBACK,
+>   			       efi_var_mem_notify_virtual_address_map, NULL,
+>   			       NULL, &event);
 
