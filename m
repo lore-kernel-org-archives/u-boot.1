@@ -4,89 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFB41C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 07:10:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57E96C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 07:22:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26C2B889D4;
-	Tue, 23 Apr 2024 09:09:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id A30CA8889D;
+	Tue, 23 Apr 2024 09:22:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="oCDgmlYu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CvS/4swz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62041889D7; Tue, 23 Apr 2024 09:09:58 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BFF6F889D7; Tue, 23 Apr 2024 09:22:27 +0200 (CEST)
+Received: from mail-oa1-x29.google.com (mail-oa1-x29.google.com
+ [IPv6:2001:4860:4864:20::29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 681C7889D3
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 09:09:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A96EF88573
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 09:22:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 08C6C3FE51
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 07:09:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1713856196;
- bh=cmpBTizH+SaB6NI2Q8QdFr+8CCsA3d9XQe7HZa+MrFA=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=oCDgmlYuNxaockWbiLcoZHcW6UvKqKiCdF/NBf9JpabZz22wCT7OZ2KhkoB4a0Hjk
- L5H7oze76nSUJE+yUwsz8M1mTZ6L8itiiI2fxnEDy1tACFG8GwNgBMzrzmaPomLZKx
- mIb5o9I2r5s9KLvPv+6IzChDzHgCcT1KnEuJzUlseqh+ckAlBNxA6ck+wEEG34WMws
- clZPM1BcHEJs2OYCX6vcDfN9vH7TizjRve30l/blCUDX5w2IuveSiktJrXpUXaA1Te
- DJxHzFBjGk5Yb1DkLkViXhXqH8haD1UB6iW/tYtTk65Mtod3pMmRoFVDd4AelG3LGi
- qMsjHQLDoT1ug==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-34b5bece899so503795f8f.3
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 00:09:56 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jim.t90615@gmail.com
+Received: by mail-oa1-x29.google.com with SMTP id
+ 586e51a60fabf-22e6b61d652so1758888fac.0
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 00:22:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713856944; x=1714461744; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+mpNebzz0T0Lu8JkzjNFKJnyHVQ1QBLmrdgV4rebYM8=;
+ b=CvS/4swza2hwqiIVxMqh/An56u6b1pBhPT3EVRsVrO+4lJwNUYfhYUWJqLHVgz/vwv
+ 7n8kV8kHLbMb5foW1bDjrQezhCRdKg9MoRFzyGXhKZCkWOa2rY2Eo8d0vXwa9kW1I7CG
+ dp2glM+Cci9lmEcm+i7rfjxptHKo/93Y7r9xcc5lpl0fLRS4xasguOBLFRG3TOtfaCnY
+ kMc/IHbst6Ev6QX4xA5ABOTziyLTBKACL3tB4c8+vXFGyy7135PuDAT6rbIrPf80rZQ6
+ I0vBfm5zjMvx5Q/r97UHJBCRTuSJiUnfTv45FERff2R5jN154GWxQLe7JqOdtVnRAy/d
+ rW9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713856194; x=1714460994;
+ d=1e100.net; s=20230601; t=1713856944; x=1714461744;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=cmpBTizH+SaB6NI2Q8QdFr+8CCsA3d9XQe7HZa+MrFA=;
- b=FhB+3v4dAuBtCSbWOIp5+Ae22sP3siKzu1iaUvmbKKcTfTXXDXTPertcIRX4prQPll
- +dm4uHAn17wG8IOBFE0HMQhWng8EfDPhRd041nF49ZuQoXluvM2ud+Xw1IwVSFIv5EKp
- JchdWsso2O4ckJwo/eG5r8zDf6C3M3kmn3SFPDMODHhBire8e4Cko2vXRbMkNAnH9b/v
- WsqPa9PDuVYjUboMsngiJx01GCQUfnVrnS4pBH3cqzaAuVrz+6+xy/60ogdFX44l10fv
- qMTioRCwZNE++p9HpMFV/V4zzLf+WHXYgl4g2HawYxktZD/p27iEQXnPKJxHkkyMXR3p
- RRiA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWBIwkLN462YY4w/hM5CjJHYIp/scFrSgBxk8siI++kGQIg0qsBRDnZSIgdE9/dfjacRIxy+JikmpRwOY07wxnH8Ydr8g==
-X-Gm-Message-State: AOJu0YydazgIyyelZt2rXIHl05e+ICCLQbCdenIgEiVDvVrWzH/MLWdF
- DIX0UfrgKDVHdPhXjUY4kPsgCf36dqrp/7pyhTRjBkrcBMjoTVUjUZ+iEFMhEsuBGzy+r88npP5
- JCqZeK82CLg67Ru1X+kHkgJcc7nsHgej5N0vozPkv2gBi2+uUuspMfujgV2iVz9Kh9vo=
-X-Received: by 2002:adf:cc8e:0:b0:345:bbf8:5587 with SMTP id
- p14-20020adfcc8e000000b00345bbf85587mr9517010wrj.8.1713856193743; 
- Tue, 23 Apr 2024 00:09:53 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IE8g07x0ZxBT++V9JTFb1NXG6AfFH26y6it6HoP8UZ5o7TotvUaeYEG5UvePj/CL8KK6EaeKQ==
-X-Received: by 2002:adf:cc8e:0:b0:345:bbf8:5587 with SMTP id
- p14-20020adfcc8e000000b00345bbf85587mr9516986wrj.8.1713856193335; 
- Tue, 23 Apr 2024 00:09:53 -0700 (PDT)
-Received: from workstation5.fritz.box
- (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ bh=+mpNebzz0T0Lu8JkzjNFKJnyHVQ1QBLmrdgV4rebYM8=;
+ b=Bb/y1qIxXpaD5YtpC8CtqVJwvnuQx2Nn4PtLbjGr3EjvQcn6LHYvFxu7Ze10p0tVwi
+ ZuCQ9Xmo00wnUGLbDCFYDQtJBQdwDH6W48xR/AulBgXWzsQ2Becm/phQhqip5/Pl5yZx
+ pHx7/OnsRUwHnuNDcBW9rBwCOa5GAGMxKfLn2xqg1fw0WDSCMT7W9uC50d9aZDv9ozVU
+ q39tE5yjBBv20Ln5/Fcxu5CHZ2dS4aghiMUJ9L+DzP5mbLKSm71DgQ3V7Hrl5+dr4qSG
+ /Ux+SKTwJm5Nf6gtMeYHFh+r0efYUIz0YcwpUF0QGL1ghmiHBHBh3sxrTFtQoFuazcwf
+ Ts2A==
+X-Gm-Message-State: AOJu0Yz1hw0MWPYDpYfM78e0G52+TITQDiTvFtKe2ztzs150qBtMNf8G
+ rIYeVNCkwSA1X7ejEmNeSKnoOYjS7ixGAlzBhj+WuXZ5fiFZUMj7
+X-Google-Smtp-Source: AGHT+IERSci6Y2fHrqh7PGq8IyBPDaVCqTP0h6zcNNYcNS6K1BVhsUnfL9qwhb08KyCFlg412uLt+A==
+X-Received: by 2002:a05:6870:d0d1:b0:229:7d01:7e03 with SMTP id
+ k17-20020a056870d0d100b002297d017e03mr13637176oaa.43.1713856944307; 
+ Tue, 23 Apr 2024 00:22:24 -0700 (PDT)
+Received: from localhost.localdomain ([180.217.143.235])
  by smtp.gmail.com with ESMTPSA id
- d9-20020adfe2c9000000b00349a5b8eba6sm13823348wrj.34.2024.04.23.00.09.52
+ z17-20020a634c11000000b005f0793db2ebsm8746695pga.74.2024.04.23.00.22.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Apr 2024 00:09:52 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>, Sean Anderson <seanga2@gmail.com>,
- Sean Edmond <seanedmond@microsoft.com>,
- Charles Hardin <ckhardin@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] net: consider option-length when parsing NIS domain
-Date: Tue, 23 Apr 2024 09:09:44 +0200
-Message-ID: <20240423070944.36526-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
+ Tue, 23 Apr 2024 00:22:23 -0700 (PDT)
+From: Jim Liu <jim.t90615@gmail.com>
+X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
+To: YSCHU@nuvoton.com, jim.t90615@gmail.com, trini@konsulko.com,
+ KWLIU@nuvoton.com, JJLIU0@nuvoton.com
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v1 0/3] Arm: npcm: modify npcm mem and boot issue
+Date: Tue, 23 Apr 2024 15:22:07 +0800
+Message-Id: <20240423072210.1926141-1-JJLIU0@nuvoton.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -105,29 +90,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When parsing option 40 (network information service domain) the
-option length is in variable 'oplen' and not in 'size'.
+1. Modify npcm memory setting
+2. Fix boot error
 
-Addresses-Coverity-ID: 492765 Uninitialized variables (UNINIT)
-Fixes: 8ab388bfdbcf ("net: add support to parse the NIS domain for the dhcp options")
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- net/bootp.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Jim Liu (3):
+  Arm: npcm: fix npcm7xx boot to kernel error
+  configs: arbel: increase u-boot mapping size
+  board: arbel: Limit the dram effective size to bank0 maximal size
 
-diff --git a/net/bootp.c b/net/bootp.c
-index c15472f5d37..86c56803c76 100644
---- a/net/bootp.c
-+++ b/net/bootp.c
-@@ -886,7 +886,7 @@ static void dhcp_process_options(uchar *popt, uchar *end)
- 		case 40:	/* NIS Domain name */
- 			if (net_nis_domain[0] == 0) {
- 				size = truncate_sz("NIS Domain Name",
--					sizeof(net_nis_domain), size);
-+					sizeof(net_nis_domain), oplen);
- 				memcpy(&net_nis_domain, popt + 2, size);
- 				net_nis_domain[size] = 0;
- 			}
+ board/nuvoton/arbel_evb/arbel_evb.c | 14 +++++++++-----
+ board/nuvoton/poleg_evb/poleg_evb.c | 27 ++++++++++++++++++++-------
+ include/configs/arbel.h             |  2 +-
+ include/configs/poleg.h             |  4 ++--
+ 4 files changed, 32 insertions(+), 15 deletions(-)
+
 -- 
-2.43.0
+2.25.1
 
