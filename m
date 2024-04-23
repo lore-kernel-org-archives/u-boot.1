@@ -4,59 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74766C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:36:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A1CC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:43:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DABBE88582;
-	Tue, 23 Apr 2024 13:36:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id CBFDF88597;
+	Tue, 23 Apr 2024 13:43:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="GKZYytt8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wL+ktWv8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0994787D8D; Tue, 23 Apr 2024 13:36:19 +0200 (CEST)
-Received: from mail-m127102.qiye.163.com (mail-m127102.qiye.163.com
- [115.236.127.102])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1175A883B5; Tue, 23 Apr 2024 13:43:22 +0200 (CEST)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6241188585
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:36:16 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id C2425883B5
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:43:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=GKZYytt8hx5PMyIKmk1TOlszM646onbgabBbYpRMKB/ZPOI2+X/BBsz/hUPTRe9RaiMpm+75EjdBCEz5sYhnJsqj/+pI9l7V2JiL3ciaeZDeAPAz1J9eCgkdG9EwR6C3t+vyUe2yHXhyxslSQ/SKK8ca62Wu1EbafjoTocI2JTY=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=1k8qcEq5Qb/1Wq87cuJW6mhHou+JKrM47p469H4YKT8=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.33.226] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 59BC6900120;
- Tue, 23 Apr 2024 19:36:06 +0800 (CST)
-Message-ID: <73cda6d5-4ace-4760-bf89-ff17e5f06b79@rock-chips.com>
-Date: Tue, 23 Apr 2024 19:36:05 +0800
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-a5883518135so45333466b.3
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 04:43:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1713872598; x=1714477398; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=m21+fSqUvS0ctXBJxcpvoOJsevXESTKoLJy9UISknSU=;
+ b=wL+ktWv8AiBeqezQFcyU3HrZtvn2mie6OZvneraoWYE8wRSJM+VDd0okewpOiFHetu
+ ZpRRT5wz/tc45xvQsS0kohl7hiaqIFDUlo/I6zeSzixf6xhfcq8PcO74CK7ZnQS70RRk
+ +o2/h+Un0r2Ooms63N1SttZ497kOCeDQawwEj7EIaWLO6dBc/Ylgi47j3/c1jzQ+QY2H
+ 3reNeq69TPWdACirez2i0sdvHqkGVx5+B39BzCqvPVIGv9xK2/8BaloSZgi6/s4gVu/+
+ +ENiFWgnvBTe0lsSqMHRJYqKFd4Q1eaJxmisFkCeAqa+dLw2MtwQjrUpZhAoQMgi2l3Y
+ Pntg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713872598; x=1714477398;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=m21+fSqUvS0ctXBJxcpvoOJsevXESTKoLJy9UISknSU=;
+ b=IXMMZCmzyuNcXnJWiwPPWIuY6UQO5nS4UejFeUZMS5S5ScrxwztV/6tRIMskbd9+4d
+ DIgUwiMCx1Zuu0jvA5NoqNCoktA50qHWk7b1vRz78uLXV+f+VYfxRexruyd3SObrxaPN
+ xkb9iRrZU0sGuZ+hvs5rF/Dm//cR4ImK1+qriHs0UhjYHZFk/qejabfIrqJuR1FlMoDV
+ xta+P1d4kX3eLK2Qtk95Mandv26TJez0FinkgsWez0J6W54U3sxxlb58CIRBdm0bWQj4
+ pjdICLX+XJtt1YRsbAjdlIVBz/zKT2g7m4t0tlvjRKrHKi67WPmuhJ3tv+V6b7x5BHkk
+ amwg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUI8Z2WMy5puvSYj6swVSu7CnShKOsdi6xhOLfswbvUFe1tFgFGuvfGuYAqhJznhpM/YK2jE6eHeUtuqxgHlrieyc4BkA==
+X-Gm-Message-State: AOJu0YyNAhwQ8LcbpFXscNfbn+U3MkVyB1RIcwEpLQImMa/7PmxxLwo6
+ V7RmwFQAw3OQ2L5boCq154TQwk3U4T17nUEtJQZ+NoTx15k6/A45xUGwxaKu9Zs=
+X-Google-Smtp-Source: AGHT+IGBJ/Pr+s/7j/U4B/6kX+HfcsooQtrvG3Otwd/lq/qgzoYLZDTClo8zCI02NYHuS+z2t88pRQ==
+X-Received: by 2002:a17:906:c784:b0:a55:41fd:a013 with SMTP id
+ cw4-20020a170906c78400b00a5541fda013mr9170476ejb.23.1713872598175; 
+ Tue, 23 Apr 2024 04:43:18 -0700 (PDT)
+Received: from [192.168.0.114] ([2a02:8109:aa0d:be00::1795])
+ by smtp.gmail.com with ESMTPSA id
+ n4-20020a170906164400b00a55967a9038sm4507528ejd.95.2024.04.23.04.43.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Apr 2024 04:43:17 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
+ Marek Vasut <marex@denx.de>, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
+In-Reply-To: <20240418-b4-qcom-rbx-fixes-v1-0-e524eb29ae86@linaro.org>
+References: <20240418-b4-qcom-rbx-fixes-v1-0-e524eb29ae86@linaro.org>
+Subject: Re: [PATCH 0/3] qcom: switch to OF_UPSTREAM
+Message-Id: <171387259723.2280908.1259739811979011552.b4-ty@linaro.org>
+Date: Tue, 23 Apr 2024 13:43:17 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] rockchip: px30-board-tpl: Sync ifdef guards with full
- TPL
-To: lukasz.czechowski@thaumatec.com, u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, trini@konsulko.com
-References: <20240417112128.288531-1-lukasz.czechowski@thaumatec.com>
-Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240417112128.288531-1-lukasz.czechowski@thaumatec.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQh5MTlYZQ0hDTU5OGUoeQhhVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8f0abddf3403a9kunm59bc6900120
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OhA6KTo*EDNLLj0zETkCTxQa
- Pg4wFDNVSlVKTEpIQ0xJSk1MS0JIVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTElLNwY+
+X-Mailer: b4 0.14-dev
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,51 +101,28 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/4/17 19:21, lukasz.czechowski@thaumatec.com wrote:
-> From: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
->
-> Display TPL init information message only when TPL_BANNER_PRINT
-> configuration entry is set. This allows to disable information
-> message in case logs on UART are unwanted.
-> Update parent ifdef condition to check also CONFIG_TPL_SERIAL
-> to match logic of the non-PX30 TPL implementation.
->
-> Signed-off-by: Lukasz Czechowski <lukasz.czechowski@thaumatec.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+On Thu, 18 Apr 2024 18:24:08 +0100, Caleb Connolly wrote:
+> This series does the initial switch to OF_UPSTREAM for Qualcomm
+> platforms. The DT files we have in U-Boot are outdated by now, so drop
+> them and move to upstream.
+> 
+> Patch 2 drops all the Qualcomm dts files that are now provided in
+> dts/upstream. As some of the files exceed the 100k size limit by
+> themselves I thought it would be easier to just lump them together
+> rather than trying to split them up.
+> 
+> [...]
 
-Thanks,
-- Kever
->
-> ---
-> Changes for v2:
-> - Updated parent ifdef condition
->
-> Changes for v3:
-> - Updated commit title
-> ---
->   arch/arm/mach-rockchip/px30-board-tpl.c | 4 +++-
->   1 file changed, 3 insertions(+), 1 deletion(-)
->
-> diff --git a/arch/arm/mach-rockchip/px30-board-tpl.c b/arch/arm/mach-rockchip/px30-board-tpl.c
-> index 637a5e1b18..db368a7b8c 100644
-> --- a/arch/arm/mach-rockchip/px30-board-tpl.c
-> +++ b/arch/arm/mach-rockchip/px30-board-tpl.c
-> @@ -36,7 +36,7 @@ void board_init_f(ulong dummy)
->   {
->   	int ret;
->   
-> -#ifdef CONFIG_DEBUG_UART
-> +#if defined(CONFIG_DEBUG_UART) && defined(CONFIG_TPL_SERIAL)
->   	debug_uart_init();
->   	/*
->   	 * Debug UART can be used from here if required:
-> @@ -46,7 +46,9 @@ void board_init_f(ulong dummy)
->   	 * printhex8(0x1234);
->   	 * printascii("string");
->   	 */
-> +#if CONFIG_TPL_BANNER_PRINT
->   	printascii("U-Boot TPL board init\n");
-> +#endif
->   #endif
->   
->   	secure_timer_init();
+Applied, thanks!
+
+[1/3] mach-snapdragon: use OF_UPSTREAM
+      commit: a149974d3cf81dfc11254e3093f645bec3d5d88e
+[2/3] arm: dts: drop qcom dts files
+      commit: 4a30052dee8726cfa9b1f6873496389ae1732ba4
+[3/3] qcom_defconfig: set SYS_INIT_SP_BSS_OFFSET
+      commit: 813bc424871caf3decffb50119906bcdbf33d973
+
+Best regards,
+-- 
+Caleb Connolly <caleb.connolly@linaro.org>
+
