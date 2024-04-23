@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70C5CC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:44:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7D3CC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:44:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D2243885CA;
-	Tue, 23 Apr 2024 13:43:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3E17E885B7;
+	Tue, 23 Apr 2024 13:43:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X/4M0XdG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tKgmWKdK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D26CD885AB; Tue, 23 Apr 2024 13:43:24 +0200 (CEST)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 05BBD885B3; Tue, 23 Apr 2024 13:43:27 +0200 (CEST)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E47208859A
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:43:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 09C938859C
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:43:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-a44f2d894b7so535198966b.1
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 04:43:22 -0700 (PDT)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-516ef30b16eso6888557e87.3
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 04:43:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713872602; x=1714477402; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1713872603; x=1714477403; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TVZbiZXwW1lJA0ABqkZ7Oro6rzMOm/4ns4cIoN4R4ig=;
- b=X/4M0XdGYOmgYrvEowCMIo0SII97jEFZK55k2mAZJc0dvT5k1v+HxbJ4lrU5YEpm6Q
- Z4ZpLn3/HeSdpfOQTESALKlbwW4JfDl9fuDU8oFlxmklKydAjuq1/BrnYSWypyUnSyeG
- pqADIugxTlIOheBYSW9JehZiTURrabliN5AV4Mn1McX5DUAYkw1LyIJjzT+/hCPXF6xj
- YfkngxuX9f6KLJSqRRxYahpyGmUhVfUtey1ca539gmCPxkimNQHE2xqHCXRV+MfyoG8d
- LRNVFNg1wCR6YdiuI5A22q+cXdm+a/grrwnrGoo3Lfd3c1UBkgD5D1lA+q1dwDtu356D
- 5F0w==
+ bh=MKl3+6qXx8hrF1FjZqOOqk56Oh7+QJiVs9ShEjnC91U=;
+ b=tKgmWKdKmG5cBOutnE5fgpmjHjYK1XQLWWoR3mrTX7Zn2s+mvK6XQBB+5vJ5ru2jO+
+ 1reYwQYOK4sHqJeRHg78VnZpY6CwIuHmDSYWiZb+IYTuCiRkVszc4nGla05J9lAzo+kc
+ +p1hXvQ7E8QNv5UgpOZSRi2qT7UJQEDw50k4gFPel8zXcCtPHYslG7JIP8tmdrkTmN9d
+ OSLFBRIYluoGfoQeAl28cXbyhSvIcKRb8izlQ/IeXpMBoZNFHXvruTpT6Mqmf0TuD5mY
+ r18g/8Gb980i5aZCGgeWlfZHi21Rvr88P5JJ64cJluZ+JAAsnVR6w3IAXiypRhQxu0T9
+ U/jg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713872602; x=1714477402;
+ d=1e100.net; s=20230601; t=1713872603; x=1714477403;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TVZbiZXwW1lJA0ABqkZ7Oro6rzMOm/4ns4cIoN4R4ig=;
- b=MMVxdvU1A4mDISdzTbnXWohtnQJADqMaMURtAymVzHMK0Txcauiq3PxHFwgKwrpLOW
- mLk6TNf07oOhztUd09dSCB5YxCQkKdCwHIat9/NBOElKxCk4Lx84ujzy/OzSuDV4hlYH
- FcPu1eJN5foP9hf5smmuo5rmVQ/P7mm+q4f67mybc6uOqJlpyxrmxUMtDs6XLS/y+Zb/
- P5OKHhsxBb/9+h08P1+WNCpzaBaVfh8Yj20IAb95WtPp95IjM62Nr3FCZp+cjYeQnCeX
- +06XQyA+xDzuVCD/jjiHMkUl6jAlxaYbVPoV5TtNXUvRBl1J8QFFLChctPKmbn7PKV4i
- t+Gg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVcxoO3mMGikTs/vm+GvAVZcKdwSw7qI7EZtzkXXIPbbZmqvXZrZc2qJp319DK24n3KeUIDi21y+b40VdZhaxE1mc4QAQ==
-X-Gm-Message-State: AOJu0YzIs+cRYJ79LysNiGiPHnu1lUEknI9hcXhQ8E11HFTOZ3Y52rOf
- 7HV7RRmvg6S1CtV1zZxVXqSIq2s0JCX3NbeYX+mgK7ulfcjFgrO9Q+vLHCFaL3Q=
-X-Google-Smtp-Source: AGHT+IE3gp7ZyD1Ypi6PI12A5K3fRg0cp0mgMEy1pvv/hZzxsrhxTNUtvmeLDQdaNV97WeP5Z9snAw==
-X-Received: by 2002:a17:906:a206:b0:a52:2c00:9850 with SMTP id
- r6-20020a170906a20600b00a522c009850mr9020300ejy.59.1713872602468; 
- Tue, 23 Apr 2024 04:43:22 -0700 (PDT)
+ bh=MKl3+6qXx8hrF1FjZqOOqk56Oh7+QJiVs9ShEjnC91U=;
+ b=E/UmRLL+ezH6wrJA69JwDOw1srE31LSwCLBJR2vAyrsvwBETXZT2oxVYtqn/bN+Bn9
+ j1TJDnErDmVcenU4qt/Yh5+9OyjnHg7hdLdvTc97DXSq8+zRi+PfXEkFQsPrXu1nDxAH
+ Q8DAbMgvgqqikOh2EyOeE2M0nsrINAXyn1Rf/lfO1p8zcfHIyP/zjsYjzqGSEuJC0bs2
+ RRrMwkGF77IGbe9Fs4yESu05RC5P/gpKbIvyqaW89mpgHI3r5kFBeNf8/ZmXiv1XGhpg
+ l5ycdh7TZChRT71TEkPmRCmFAUW3MnprVAbMCDBIDE7ttDX8aoAPASk7GXosRmU6wgzH
+ Wu4w==
+X-Gm-Message-State: AOJu0YxrCrqwkCIOFZTcMvx790PF1bsOFgQNMj6K4NedV8yQW+FqmYNy
+ U/g5myPQQ26l0Ky775rnMdZkPNtBv89KJf7ve0CjY+Vah0tfKG2xNsGnlc8I3e8=
+X-Google-Smtp-Source: AGHT+IFQx7zR49aeeUe7d8O75wjhk5TwudF5qhU+5yB69buKhUeXEa72DjehAoKqPMlONx9Q6gsajQ==
+X-Received: by 2002:a05:6512:3e9:b0:518:ef66:b797 with SMTP id
+ n9-20020a05651203e900b00518ef66b797mr6360342lfq.1.1713872603265; 
+ Tue, 23 Apr 2024 04:43:23 -0700 (PDT)
 Received: from [192.168.0.114] ([2a02:8109:aa0d:be00::1795])
  by smtp.gmail.com with ESMTPSA id
- n4-20020a170906164400b00a55967a9038sm4507528ejd.95.2024.04.23.04.43.21
+ n4-20020a170906164400b00a55967a9038sm4507528ejd.95.2024.04.23.04.43.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Apr 2024 04:43:21 -0700 (PDT)
+ Tue, 23 Apr 2024 04:43:22 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-In-Reply-To: <20240418-b4-qcom-rbx-fixes-v1-0-f5f19d52969e@linaro.org>
-References: <20240418-b4-qcom-rbx-fixes-v1-0-f5f19d52969e@linaro.org>
-Subject: Re: [PATCH 0/9] qcom: RBx fixes and USB support
-Message-Id: <171387260164.2280908.4172759252961758741.b4-ty@linaro.org>
-Date: Tue, 23 Apr 2024 13:43:21 +0200
+To: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>, 
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20240422-topic-sm8x50-i2c-v2-0-f9ad61c33b07@linaro.org>
+References: <20240422-topic-sm8x50-i2c-v2-0-f9ad61c33b07@linaro.org>
+Subject: Re: [PATCH v2 0/2] i2c: Add support for Qualcomm Generic Interface
+ (GENI) I2C controller
+Message-Id: <171387260254.2280908.3755821257633373339.b4-ty@linaro.org>
+Date: Tue, 23 Apr 2024 13:43:22 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -97,37 +96,23 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Thu, 18 Apr 2024 18:25:43 +0100, Caleb Connolly wrote:
-> This series is a few loosely connected patches to get the RB1 and 2
-> boards booting from USB with upstream U-Boot, and a few preperatory
-> patches for rb5.
+On Mon, 22 Apr 2024 11:33:51 +0200, Neil Armstrong wrote:
+> Add Support for the Qualcomm Generic Interface (GENI) I2C interface
+> found on newer Qualcomm SoCs.
 > 
-> Unfortunately the RB5 board requires a regulator on the RPMh peripheral
-> to be turned on for the USB VBUS rail. Support for this will be added in
-> future patches.
+> The Generic Interface (GENI) is a firmware based Qualcomm Universal
+> Peripherals (QUP) Serial Engine (SE) Wrapper which can support multiple
+> bus protocols depending on the firmware type loaded at early boot time
+> based on system configuration.
 > 
 > [...]
 
 Applied, thanks!
 
-[1/9] gpio: qcom_pmic: add pm6125
-      commit: 733f6d982099c639c0872ed535be9eede2765a2d
-[2/9] gpio: qcom_pmic: add pm8150l
-      commit: 8bf1eb9a2e1e68ee18db084f24e8961e655926c4
-[3/9] iommu: qcom-smmu: add qcom generic compatible
-      commit: 2bd5bcaf7d23fc6ad9b2caf351fdb0b1bf712999
-[4/9] phy: qcom: snps-femto-v2: drop clocks
-      commit: 82a99b3ab8f022656a13e6dffdac93f5b1bc1d54
-[5/9] arm: dts: qrb4210-rb2-u-boot: add u-boot fixups
-      commit: 956f6e4de48f5f6c549d403a9f6db78a8deef689
-[6/9] mach-snapdragon: implement ft_board_setup() for USB role selection
-      commit: e64503f1fcdfa4e836c192ab7d16075fda864d19
-[7/9] qcom_defconfig: enable OF_BOARD_SETUP
-      commit: 9050686c1b9d9d9ac03a3f685458ab5eb2969e15
-[8/9] qcom_defconfig: define safe default SYS_LOAD_ADDR
-      commit: 9861ebac77d46674243886136275aac1deb7f982
-[9/9] qcom_defconfig: generate SMBIOS tables
-      commit: d286220078505727c8c0baf9cd9c832a1fcad805
+[1/2] i2c: Add support for Qualcomm Generic Interface (GENI) I2C controller
+      commit: 75db9ede12d06693a3ced8c901b74065a1922a23
+[2/2] configs: qcom_defconfig: enable GENI I2C Driver
+      commit: ad12acd7a8f5aeea5816d5c2fc37c205c403eee0
 
 Best regards,
 -- 
