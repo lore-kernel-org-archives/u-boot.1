@@ -4,72 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA772C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 22:41:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EDEFC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 23:15:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B1A188C8F;
-	Wed, 24 Apr 2024 00:41:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 470D388BC1;
+	Wed, 24 Apr 2024 01:15:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hkf1sgPq";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 54F6D88C90; Wed, 24 Apr 2024 00:41:02 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1713914138;
+	bh=lOKiL0/22evEKYRhSUuqDmCZKJVFvGXPtOx/wRpV/1g=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=N7oStP2RL6D7Cb3IPAnaiRg0a5PLCUHaLVlf87lhNGEd3oYC6auak7dXuvk6NBO75
+	 h1aol6Qu5kYzw64s5tKwvswFOv+wk/akHkicWKHtJUWMLMP8YoBq79B1xruiUI1Rhi
+	 OLyLzvm+8KmYH/N2Hx7TftuethCDej66O2Vei52ojn0gXQ/GC3eLjQ1hVQW5KPfVSD
+	 m4a5hA8fLOPvcONoXdix3S6gsRizJTBZe2owe2PdOGp/pFGm4TtJaEHdU1AaSnxlKM
+	 pq3U38iSAv8NW2XlMWjIQjq3NkmYDt70R9wITXJnfRzyzqF5vskWubIYGgK5LHj9vu
+	 hWw1MNuoqhhqQ==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB4DC88C8C
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 00:40:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=2dea=L5=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1713912014;
- bh=21aiw3EdBqnAnUDUL1u0PhHFL+S5PthO3JB0UKQHJTQ=;
- b=hkf1sgPqzzMGNlx7teJqI7T6BgVC3bYsbhhmRhlZz+Ivc58tqFN3KWhAUuL46cLREbw7ZHfza
- 2LFOINpI9K+9m4Se7ZV6Yqyv5auU/mjiesbZbIkfhvwa1uabwoan2iT0Lj/D9DFYVW3zVlxSE1b
- +XXbT0++KCtEgTBqEUS52OSqB3rJmMCRCH8y5GSb+T1LYsWkSWPu/UslYFhsLa3Z3V/mZ8ei1U7
- FF/aXplaDJKqODfs09wfqCkOQwqvjxUC2TSqBwzZUfSuR+iGpLAIxE43h0sJaKoHbRxYyTpnx+O
- hjYnmXE5x3sjkww+LFq2zHTvhfV7QjVZmbz9IWZ2retg==
-Message-ID: <2dc654c5-2f03-4f69-9e5f-e4ad5091b844@kwiboo.se>
-Date: Wed, 24 Apr 2024 00:40:05 +0200
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 2D10688359;
+ Wed, 24 Apr 2024 01:15:37 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1713914137;
+ bh=lOKiL0/22evEKYRhSUuqDmCZKJVFvGXPtOx/wRpV/1g=;
+ h=From:To:Cc:Subject:Date:From;
+ b=odMnFQp+JusdPQ4evJGHKqd38R4uEma9vwXZ9QiubqZauYa62SBu+wMr6z/+tlXFd
+ zqalXm/yACLJXCJEdL8IQWQULe4N2/Kj07HTY9M6yPhWetLbX0FdndDvZ2ZG7PaffT
+ 3AKi/5gT1qinItNCajI0/yQjOnh4TyQBY6oXrF49VRtIQ9fnpLB1yhImkGLhjs4Vmv
+ 8xdPKfe271lj4KWEi1OisXSmNu0VmgTLDWP//GZvyTv1r1tqzX0MTH9br18h8DPKSt
+ C9t46Zwitzx+y18ldTSTkPHN+xR97d3Tl9HK95exfol+CvjN7fNK318fPv5crjiaw7
+ jnSopV3jVxFKg==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
+Subject: [PATCH] ARM: dts: imx: Enable PCIe and NVMe on DH i.MX8M Plus DHCOM
+ PDK3
+Date: Wed, 24 Apr 2024 01:15:18 +0200
+Message-ID: <20240423231526.536883-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/11] rockchip: sdram: Support getting banks from TPL
- for rk3568 and rk3588
-To: Quentin Schulz <foss+uboot@0leil.net>, Quentin Schulz
- <quentin.schulz@theobroma-systems.com>, Kever Yang
- <kever.yang@rock-chips.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Philipp
- Tomsich <philipp.tomsich@vrull.eu>, John Clark <inindev@gmail.com>, Tom
- Fitzhenry <tom@tom-fitzhenry.me.uk>, Eugen Hristev
- <eugen.hristev@collabora.com>, Andy Yan <andyshrk@163.com>, Elon Zhang
- <zhangzj@rock-chips.com>, Joshua Riek <jjriek@verizon.net>, Klaus Goger
- <klaus.goger@theobroma-systems.com>, Heiko Stuebner
- <heiko.stuebner@cherry.de>, Jagan Teki <jagan@edgeble.ai>, Frank
- Wunderlich <frank-w@public-files.de>, Joseph Chen <chenjh@rock-chips.com>,
- Tianling Shen <cnsztl@gmail.com>, Nicolas Frattaroli
- <frattaroli.nicolas@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Akash Gajjar <gajjar04akash@gmail.com>, u-boot@lists.denx.de, Chris Morgan
- <macromorgan@hotmail.com>
-References: <20240415-rk35xx-dram-atags-v3-0-5bc5475b3c0d@theobroma-systems.com>
- <20240415-rk35xx-dram-atags-v3-1-5bc5475b3c0d@theobroma-systems.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20240415-rk35xx-dram-atags-v3-1-5bc5475b3c0d@theobroma-systems.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 662838cc710b49bd7335cc21
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,322 +67,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Enable PCIe/NVMe support on DH i.MX8M Plus DHCOM PDK3. Except for
+the configuration options which are enabled, add slight adjustment
+to board u-boot.dtsi, which is necessary as there is currently no
+driver for the I2C PCIe clock generator. Since the generator is
+strapped to be always on, it is possible to supplant the generator
+functionality by fixed-clock.
 
-On 2024-04-15 16:16, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-> 
-> Allow RK3568 and RK3588 based boards to get the RAM bank configuration
-> from the ROCKCHIP_TPL stage instead of the current logic. This fixes
-> both an issue where 256MB of RAM is blocked for devices with >= 4GB
-> of RAM and where memory holes need to be defined for devices with
-> more than 16GB of RAM. In the event that neither SoC is used or the
-> ROCKCHIP_TPL stage is not used, fall back to existing logic.
-> 
-> The logic handles creating memory holes from reserved memory areas
-> defined in mem_map data struct in SoC C files, but only if the DRAM area
-> overlaps with one reserved memory area.
-> 
-> Since mem_map data struct is used, it should be rather straightforward
-> to add support for other SoCs if needed.
-> 
-> The logic is taken from Rockchip's U-Boot tag linux-5.10-gen-rkr4.1
-> (e08e32143dd).
-> 
-> Note that Rockchip's U-Boot/TF-A/OP-TEE modify the ATAGS at runtime as
-> well, but the DDR_MEM tag seems to be pretty much stable (though BL31
-> seems to be reserving only 1MB for itself at the moment).
-> 
-> u32 for ATAGS is used because it simplifies the pointer arithmetic and
-> it's expected that ATAGS are always below the 4GB limit allowed by u32.
-> 
-> Co-developed-by: Chris Morgan <macromorgan@hotmail.com>
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-> ---
->  arch/arm/mach-rockchip/sdram.c | 240 +++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 240 insertions(+)
-> 
-> diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
-> index 0d9a0aef6f5..5b1ff1e5495 100644
-> --- a/arch/arm/mach-rockchip/sdram.c
-> +++ b/arch/arm/mach-rockchip/sdram.c
-> @@ -8,6 +8,7 @@
->  #include <init.h>
->  #include <log.h>
->  #include <ram.h>
-> +#include <asm/armv8/mmu.h>
->  #include <asm/global_data.h>
->  #include <asm/io.h>
->  #include <asm/arch-rockchip/sdram.h>
-> @@ -35,12 +36,251 @@ struct tos_parameter_t {
->  	s64 reserve[8];
->  };
->  
-> +/* Tag size and offset */
-> +#define ATAGS_SIZE		SZ_8K
-> +#define ATAGS_OFFSET		(SZ_2M - ATAGS_SIZE)
-> +#define ATAGS_PHYS_BASE		(CFG_SYS_SDRAM_BASE + ATAGS_OFFSET)
-> +#define ATAGS_PHYS_END		(ATAGS_PHYS_BASE + ATAGS_SIZE)
-> +
-> +/* ATAGS memory structures */
-> +
-> +enum tag_magic {
-> +	ATAG_NONE,
-> +	ATAG_CORE = 0x54410001,
-> +	ATAG_SERIAL = 0x54410050,
-> +	ATAG_DDR_MEM = 0x54410052,
-> +	ATAG_MAX = 0x544100ff,
-> +};
-> +
-> +/*
-> + * An ATAG contains the following data:
-> + *  - header
-> + *    u32 size // sizeof(header + tag data) / sizeof(u32)
-> + *    u32 magic
-> + *  - tag data
-> + */
-> +
-> +struct tag_header {
-> +	u32 size;
-> +	u32 magic;
-> +} __packed;
-> +
-> +/*
-> + * DDR_MEM tag bank is storing data this way:
-> + *  - address0
-> + *  - address1
-> + *  - [...]
-> + *  - addressX
-> + *  - size0
-> + *  - size1
-> + *  - [...]
-> + *  - sizeX
-> + *
-> + *  with X being tag_ddr_mem.count - 1.
-> + */
-> +struct tag_ddr_mem {
-> +	u32 count;
-> +	u32 version;
-> +	u64 bank[20];
-> +	u32 flags;
-> +	u32 data[2];
-> +	u32 hash;
-> +} __packed;
-> +
-> +static u32 js_hash(const void *buf, u32 len)
-> +{
-> +	u32 i, hash = 0x47C6A7E6;
-> +
-> +	if (!buf || !len)
-> +		return hash;
-> +
-> +	for (i = 0; i < len; i++)
-> +		hash ^= ((hash << 5) + ((const char *)buf)[i] + (hash >> 2));
-> +
-> +	return hash;
-> +}
-> +
-> +static int rockchip_dram_init_banksize(void)
-> +{
-> +	const struct tag_header *tag_h = NULL;
-> +	u32 *addr = (void *)ATAGS_PHYS_BASE;
-> +	struct tag_ddr_mem *ddr_info;
-> +	u32 calc_hash;
-> +	u8 i, j;
-> +
-> +	if (!IS_ENABLED(CONFIG_ROCKCHIP_RK3588) &&
-> +	    !IS_ENABLED(CONFIG_ROCKCHIP_RK3568))
-> +		return -ENOTSUPP;
-> +
-> +	if (!IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL))
-> +		return -ENOTSUPP;
-> +
-> +	/* Find DDR_MEM tag */
-> +	while (addr < (u32 *)ATAGS_PHYS_END) {
-> +		tag_h = (const struct tag_header *)addr;
-> +
-> +		if (!tag_h->size) {
-> +			debug("End of ATAGS (0-size tag), no DDR_MEM found\n");
-> +			return -ENODATA;
-> +		}
-> +
-> +		if (tag_h->magic == ATAG_DDR_MEM)
-> +			break;
-> +
-> +		switch (tag_h->magic) {
-> +		case ATAG_NONE:
-> +		case ATAG_CORE:
-> +		case ATAG_SERIAL ... ATAG_MAX:
-> +			addr += tag_h->size;
-> +			continue;
-> +		default:
-> +			debug("Invalid magic (0x%08x) for ATAG at 0x%p\n",
-> +			      tag_h->magic, addr);
-> +			return -EINVAL;
-> +		}
-> +	}
-> +
-> +	if (addr >= (u32 *)ATAGS_PHYS_END ||
-> +	    (tag_h && (addr + tag_h->size > (u32 *)ATAGS_PHYS_END))) {
-> +		debug("End of ATAGS, no DDR_MEM found\n");
-> +		return -ENODATA;
-> +	}
-> +
-> +	/* Data is right after the magic member of the tag_header struct */
-> +	ddr_info = (struct tag_ddr_mem *)(&tag_h->magic + 1);
-> +	if (!ddr_info->count || ddr_info->count > CONFIG_NR_DRAM_BANKS) {
-> +		debug("Too many ATAG banks, got (%d) but max allowed (%d)\n",
-> +		      ddr_info->count, CONFIG_NR_DRAM_BANKS);
-> +		return -ENOMEM;
-> +	}
-> +
-> +	if (!ddr_info->hash) {
-> +		debug("No hash for tag (0x%08x)\n", tag_h->magic);
-> +	} else {
-> +		calc_hash = js_hash(addr, sizeof(u32) * (tag_h->size - 1));
-> +
-> +		if (calc_hash != ddr_info->hash) {
-> +			debug("Incorrect hash for tag (0x%08x), got (0x%08x) expected (0x%08x)\n",
-> +			      tag_h->magic, ddr_info->hash, calc_hash);
-> +			return -EINVAL;
-> +		}
-> +	}
-> +
-> +	/*
-> +	 * Rockchip guaranteed DDR_MEM is ordered so no need to worry about
-> +	 * bi_dram order.
-> +	 */
-> +	for (i = 0, j = 0; i < ddr_info->count; i++, j++) {
-> +		phys_size_t size = ddr_info->bank[(i + ddr_info->count)];
-> +		phys_addr_t start_addr = ddr_info->bank[i];
-> +		struct mm_region *tmp_mem_map = mem_map;
-> +		phys_addr_t end_addr;
-> +
-> +		/*
-> +		 * BL31 (TF-A) reserves the first 2MB but DDR_MEM tag may not
-> +		 * have it, so force this space as reserved.
-> +		 */
-> +		if (start_addr < SZ_2M) {
-> +			size -= SZ_2M - start_addr;
-> +			start_addr = SZ_2M;
-> +		}
-> +
-> +		/*
-> +		 * Put holes for reserved memory areas from mem_map.
-> +		 *
-> +		 * Only check for at most one overlap with one reserved memory
-> +		 * area.
-> +		 */
-> +		while (tmp_mem_map->size) {
-> +			const phys_addr_t rsrv_start = tmp_mem_map->phys;
-> +			const phys_size_t rsrv_size = tmp_mem_map->size;
-> +			const phys_addr_t rsrv_end = rsrv_start + rsrv_size;
-> +
-> +			if (!(tmp_mem_map->attrs & PTE_BLOCK_NON_SHARE)) {
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+ arch/arm/dts/imx8mp-dhcom-pdk3-u-boot.dtsi | 12 ++++++++++++
+ configs/imx8mp_dhcom_pdk3_defconfig        |  5 +++++
+ 2 files changed, 17 insertions(+)
 
-This check does not seem to work because PTE_BLOCK_NON_SHARE evaluates
-to 0. Because of this the logic to split the 0-8 GiB bank reported on
-rk3568 is never split in two.
-
-Changing this to e.g.
-
-  if (tmp_mem_map->attrs & PTE_BLOCK_INNER_SHARE) {
-
-seem to split the range in two, and Linux kernel can be booted.
-
-Not sure that is a good check or if that has any other unintended
-consequence.
-
-Regards,
-Jonas
-
-> +				tmp_mem_map++;
-> +				continue;
-> +			}
-> +
-> +			/*
-> +			 * If the start of the DDR_MEM tag is in a reserved
-> +			 * memory area, move start address and resize.
-> +			 */
-> +			if (start_addr >= rsrv_start && start_addr < rsrv_end) {
-> +				if (rsrv_end - start_addr > size) {
-> +					debug("Would be negative memory size\n");
-> +					return -EINVAL;
-> +				}
-> +
-> +				size -= rsrv_end - start_addr;
-> +				start_addr = rsrv_end;
-> +				break;
-> +			}
-> +
-> +			if (start_addr < rsrv_start) {
-> +				end_addr = start_addr + size;
-> +
-> +				if (end_addr <= rsrv_start) {
-> +					tmp_mem_map++;
-> +					continue;
-> +				}
-> +
-> +				/*
-> +				 * If the memory area overlaps a reserved memory
-> +				 * area with start address outside of reserved
-> +				 * memory area and...
-> +				 *
-> +				 * ... ends in the middle of reserved memory
-> +				 * area, resize.
-> +				 */
-> +				if (end_addr <= rsrv_end) {
-> +					size = rsrv_start - start_addr;
-> +					break;
-> +				}
-> +
-> +				/*
-> +				 * ... ends after the reserved memory area,
-> +				 * split the region in two, one for before the
-> +				 * reserved memory area and one for after.
-> +				 */
-> +				gd->bd->bi_dram[j].start = start_addr;
-> +				gd->bd->bi_dram[j].size = rsrv_start - start_addr;
-> +
-> +				j++;
-> +
-> +				size = end_addr - rsrv_end;
-> +				start_addr = rsrv_end;
-> +
-> +				break;
-> +			}
-> +		}
-> +
-> +		if (j > CONFIG_NR_DRAM_BANKS) {
-> +			debug("Too many banks, max allowed (%d)\n",
-> +			      CONFIG_NR_DRAM_BANKS);
-> +			return -ENOMEM;
-> +		}
-> +
-> +		gd->bd->bi_dram[j].start = start_addr;
-> +		gd->bd->bi_dram[j].size = size;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
->  int dram_init_banksize(void)
->  {
->  	size_t ram_top = (unsigned long)(gd->ram_size + CFG_SYS_SDRAM_BASE);
->  	size_t top = min((unsigned long)ram_top, (unsigned long)(gd->ram_top));
->  
->  #ifdef CONFIG_ARM64
-> +	int ret = rockchip_dram_init_banksize();
-> +
-> +	if (!ret)
-> +		return ret;
-> +
-> +	debug("Couldn't use ATAG (%d) to detect DDR layout, falling back...\n",
-> +	      ret);
-> +
->  	/* Reserve 0x200000 for ATF bl31 */
->  	gd->bd->bi_dram[0].start = 0x200000;
->  	gd->bd->bi_dram[0].size = top - gd->bd->bi_dram[0].start;
-> 
+diff --git a/arch/arm/dts/imx8mp-dhcom-pdk3-u-boot.dtsi b/arch/arm/dts/imx8mp-dhcom-pdk3-u-boot.dtsi
+index 040f333c52d..b0b99d51856 100644
+--- a/arch/arm/dts/imx8mp-dhcom-pdk3-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-dhcom-pdk3-u-boot.dtsi
+@@ -4,3 +4,15 @@
+  */
+ 
+ #include "imx8mp-dhcom-u-boot.dtsi"
++
++/ {
++	clk_pcie100: clk-pcie100 {
++		compatible = "fixed-clock";
++		#clock-cells = <0>;
++		clock-frequency = <100000000>;
++	};
++};
++
++&pcie_phy {
++	clocks = <&clk_pcie100>;
++};
+diff --git a/configs/imx8mp_dhcom_pdk3_defconfig b/configs/imx8mp_dhcom_pdk3_defconfig
+index a42dc27aff8..019595edda8 100644
+--- a/configs/imx8mp_dhcom_pdk3_defconfig
++++ b/configs/imx8mp_dhcom_pdk3_defconfig
+@@ -31,6 +31,7 @@ CONFIG_ENV_OFFSET_REDUND=0xFF0000
+ CONFIG_IMX_BOOTAUX=y
+ CONFIG_SPL_IMX_ROMAPI_LOADADDR=0x48000000
+ CONFIG_SYS_LOAD_ADDR=0x50000000
++CONFIG_PCI=y
+ CONFIG_DEBUG_UART=y
+ CONFIG_ENV_VARS_UBOOT_CONFIG=y
+ CONFIG_FIT=y
+@@ -104,6 +105,7 @@ CONFIG_CMD_MMC=y
+ CONFIG_CMD_BKOPS_ENABLE=y
+ CONFIG_CMD_MTD=y
+ CONFIG_CMD_PART=y
++CONFIG_CMD_PCI=y
+ CONFIG_CMD_READ=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_USB=y
+@@ -218,7 +220,10 @@ CONFIG_DWC_ETH_QOS_IMX=y
+ CONFIG_FEC_MXC=y
+ CONFIG_RGMII=y
+ CONFIG_MII=y
++CONFIG_NVME_PCI=y
++CONFIG_PCIE_DW_IMX=y
+ CONFIG_PHY_IMX8MQ_USB=y
++CONFIG_PHY_IMX8M_PCIE=y
+ CONFIG_PINCTRL=y
+ CONFIG_SPL_PINCTRL=y
+ CONFIG_PINCTRL_IMX8M=y
+-- 
+2.43.0
 
