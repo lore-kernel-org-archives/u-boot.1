@@ -4,52 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66281C04FFE
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 15:57:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A722CC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 17:05:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75DB68863F;
-	Tue, 23 Apr 2024 17:57:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 944E488A9E;
+	Tue, 23 Apr 2024 19:05:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="ldb/CO3P";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BSwUYgSM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D94A888640; Tue, 23 Apr 2024 17:57:17 +0200 (CEST)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 669FC88A9E; Tue, 23 Apr 2024 19:05:47 +0200 (CEST)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BACBD8863B
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 17:57:15 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4EDAD88AAA
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 19:05:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from francesco-nb.corp.toradex.com (31-10-206-125.static.upc.ch
- [31.10.206.125])
- by mail11.truemail.it (Postfix) with ESMTPA id D2F251F91A;
- Tue, 23 Apr 2024 17:57:14 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1713887835;
- bh=X78aeR7zf7Mec/y0ztV4Ik1zswbfYq3w0ozp4au1at0=; h=From:To:Subject;
- b=ldb/CO3Pxhuk30DJqq6EkcHz1jw4A36sqqO1oLOZKK+yx/grSUeN+jVLcb/NMzEzv
- foKDsI7rd7hNYsPZnNHwoAVoPSk2mnBg5gpqP7KyWwrLFVIwV8gf3MpmJ+w0IunZCq
- GgdSF2ipe7ZKh3+kCLBNK5NtQxYqsCi7hJOkeHfDC845S/1xCZdqXz9vS1eIfvQIV0
- kiR6JMApWsFeREV9XpF8IcnOo5XNHeGIkc6/GEvVHV9tdOxQwqBD5P4reeC7V2A/xd
- y6zIP3h00jePKmOg1R8qbOFL5LOs5xkRBkdIWhw5GubS+DdoDEgVDjbVubX2HO4ByT
- y/2BtcW/8tU7Q==
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH v1] board: toradex: colibri-imx(6ull|imx7): Fix missing
- fdt_fixup boot error
-Date: Tue, 23 Apr 2024 17:57:01 +0200
-Message-Id: <20240423155701.33657-1-francesco@dolcini.it>
-X-Mailer: git-send-email 2.39.2
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2ab48c14334so987185a91.3
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 10:05:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1713891944; x=1714496744; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=V0S4O/9g/mnOk90+vhY9kYh/5kndLpaUaaXXxgmUZzY=;
+ b=BSwUYgSMAa0VOxiyd0DhNW9C/xFqo1NoCVDi4g9FXNTw/UVtT7DkZ5iYqysTkkctVy
+ HqF5F7nuO//+aWyqhQ6xl02adWO52CPcpvicbf7LZyNQUbXAtAvZdCHHrmL6XS0kf6Yw
+ FWk6b5cmS1ry/aFfp83CU7ifcw9qDkTq8jN6AtuBlFROXEqxVAlslx4vTMluW8R6KN1U
+ 0Rfb/UKRL4ihCTI2HwQsbnNuqTpHS69TCcRRX803eZ2pDUFRDC1o6j+SHpsoNOt+bEAp
+ A/r9y9ZPmb22Jql+Vgsz88p56MJ1A1s8SueK5rqZEp5aDISdEcuPOrcMg/sxkbxhw9oZ
+ O0Ww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713891944; x=1714496744;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=V0S4O/9g/mnOk90+vhY9kYh/5kndLpaUaaXXxgmUZzY=;
+ b=P9K98fMMOSRMLQdDam5xVRuioCufBYvud1njZH8UqkefGX1exkrnCFcyrFLWYGbwTh
+ 4e+fIJyRphuyhKGYSRY7c1VDUDMGDv/4Yp2plBN/kRvKu7RqVJcbVOnCUQVIPYJNBknS
+ +CI9yU3Cl7QDWdAS3bAQAg3D9AeoWlXyaBvDt7o7hoOKNQiV9Mk5BD4Kuulb1OWNgXIi
+ +up7kyAV46WmC2elHIu+9E8wGiAuvcKG/c1V+8ZtvKk6qPl4KZjM6fUTI8Mcn7ILfI9T
+ XjkGg3htYq+4ANa9jL0bz2qFlo6P7rN+0VFyx9n9Qy8q39//r9bkow/BcaJ5NNDt1hFn
+ aImg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVTaWF2ws3htM6qVuyTXR2wiYXgBeCshrpKiCDw6LyXUGb8DkvExy4BuAmNcVsTYxggPyvgUfTtbIluIYUKutg0/0mBPw==
+X-Gm-Message-State: AOJu0YxsT67NCQ+i5aOgCaRNR2lxx9E2GhnOJu7aw7xDzuieHOa+V8oj
+ Np7lDCMitiYanZ+E0qpS34P1XpYNbjnmEM1qIxGLG+BT9F/YeBjRzQwDRNx+De/h0j3MZoZ5q/t
+ 0U6kmjNHalit5cE0XNY8gTNilAcb08A==
+X-Google-Smtp-Source: AGHT+IEp8iZVmDRc+HeEguZ/ShFfZFTxzEow5vWTSV0Sj+IlhG7EEBvk8ktNrzCKaoL8R2iG1sahcUtqG+HR5hNHDho=
+X-Received: by 2002:a17:90a:408e:b0:2a5:3f1f:a1d1 with SMTP id
+ l14-20020a17090a408e00b002a53f1fa1d1mr35572pjg.0.1713891943740; Tue, 23 Apr
+ 2024 10:05:43 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240419113746.73110-1-heinrich.schuchardt@canonical.com>
+ <20240419113746.73110-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240419113746.73110-2-heinrich.schuchardt@canonical.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Tue, 23 Apr 2024 14:05:31 -0300
+Message-ID: <CAOMZO5A1JfdqQvXnZhj8_WA4u63h2Zz5zvODMgGaqXgQrBaBdQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] tools: type arguemnts
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,77 +91,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Francesco Dolcini <francesco.dolcini@toradex.com>
+On Fri, Apr 19, 2024 at 9:13=E2=80=AFAM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> %s/arguemnts/arguemnts/
 
-In commit 51aaaf5e7975 ("board: toradex: imx: Remove not needed env variables")
-the empty definition of fdt_fixup variable was removed, however this was
-still referenced from the boot command leading to boot failures:
- ## Error: \"fdt_fixup\" not defined`
-
-Fix this by removing "run fdt_fixup" from the boot command and instead
-enable CONFIG_OF_ENV_SETUP in the defconfig that would achieve the same
-but in a more robust way (it works fine even if the variable is not
-defined).
-
-Fixes: 51aaaf5e7975 ("board: toradex: imx: Remove not needed env variables")
-Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
----
- configs/colibri-imx6ull_defconfig | 1 +
- configs/colibri_imx7_defconfig    | 1 +
- include/configs/colibri-imx6ull.h | 2 +-
- include/configs/colibri_imx7.h    | 2 +-
- 4 files changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/configs/colibri-imx6ull_defconfig b/configs/colibri-imx6ull_defconfig
-index fc10d7f66a60..4a0ff029ac75 100644
---- a/configs/colibri-imx6ull_defconfig
-+++ b/configs/colibri-imx6ull_defconfig
-@@ -18,6 +18,7 @@ CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTDELAY=1
-+CONFIG_OF_ENV_SETUP=y
- CONFIG_BOOTCOMMAND="run ubiboot || run distro_bootcmd;"
- CONFIG_USE_PREBOOT=y
- CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile imx6ull-colibri${variant}-${fdt_board}.dtb"
-diff --git a/configs/colibri_imx7_defconfig b/configs/colibri_imx7_defconfig
-index 16f923b07c22..f2802b10fa8a 100644
---- a/configs/colibri_imx7_defconfig
-+++ b/configs/colibri_imx7_defconfig
-@@ -19,6 +19,7 @@ CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_DISTRO_DEFAULTS=y
- CONFIG_BOOTDELAY=1
-+CONFIG_OF_ENV_SETUP=y
- CONFIG_BOOTCOMMAND="run ubiboot ; echo ; echo ubiboot failed ; run distro_bootcmd;"
- CONFIG_USE_PREBOOT=y
- CONFIG_PREBOOT="test -n ${fdtfile} || setenv fdtfile ${soc}-colibri-${fdt_board}.dtb "
-diff --git a/include/configs/colibri-imx6ull.h b/include/configs/colibri-imx6ull.h
-index 7c9d633b68d9..8860ceec1a0a 100644
---- a/include/configs/colibri-imx6ull.h
-+++ b/include/configs/colibri-imx6ull.h
-@@ -53,7 +53,7 @@
- 		"ubi part ubi &&" \
- 		"ubi read ${kernel_addr_r} kernel && " \
- 		"ubi read ${fdt_addr_r} dtb && " \
--		"run fdt_fixup && bootz ${kernel_addr_r} - ${fdt_addr_r}\0" \
-+		"bootz ${kernel_addr_r} - ${fdt_addr_r}\0" \
- 
- #if defined(CONFIG_TARGET_COLIBRI_IMX6ULL_NAND)
- /* Run Distro Boot script if ubiboot fails */
-diff --git a/include/configs/colibri_imx7.h b/include/configs/colibri_imx7.h
-index c34f1f903df6..33133a0b96e1 100644
---- a/include/configs/colibri_imx7.h
-+++ b/include/configs/colibri_imx7.h
-@@ -94,7 +94,7 @@
- 		"ubi part ubi && run m4boot && " \
- 		"ubi read ${kernel_addr_r} kernel && " \
- 		"ubi read ${fdt_addr_r} dtb && " \
--		"run fdt_fixup && bootz ${kernel_addr_r} - ${fdt_addr_r}\0" \
-+		"bootz ${kernel_addr_r} - ${fdt_addr_r}\0" \
- 
- #if defined(CONFIG_TARGET_COLIBRI_IMX7_NAND)
- #define MODULE_EXTRA_ENV_SETTINGS \
--- 
-2.39.2
-
+There is a typo in the Subject: %s/type/typo/
