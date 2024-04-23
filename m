@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD663C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 12:23:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1731C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 12:23:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FE2888530;
-	Tue, 23 Apr 2024 14:23:00 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 32DA3885A3;
+	Tue, 23 Apr 2024 14:23:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="feGVTgww";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DpGpbhvZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FBB188585; Tue, 23 Apr 2024 14:22:59 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 52EA7884FD; Tue, 23 Apr 2024 14:23:31 +0200 (CEST)
+Received: from mail-vs1-xe35.google.com (mail-vs1-xe35.google.com
+ [IPv6:2607:f8b0:4864:20::e35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D2B2884FD
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 14:22:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D199F885A3
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 14:23:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1713874961; x=1714479761; i=xypron.glpk@gmx.de;
- bh=Oq4MvAZ8ptaGP1DvC0Fnka9HGsK3NNG3NZhCwfGFJxU=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=feGVTgww8K2tnOJkBpSjF+/NM2Lipl0B1It032OXNIj2FnAgBST0kD0GLsnHw1lx
- u4o+jAf5ycMpYvzfpBKDlIxw67g6srnL0NCPJ1yzU3JjhXV4285R6G61GkEiYiybz
- K8Npg0SxUA4KtGZcHbe5lyXAzWbmHik1s5wbb4w52fJZ+A3b9jXfDyeZbhJoPdRng
- 6rYy6AasaaqWEjAtAiLw8BpxEhd3t1FrqUDmtzhWN1WJtWvC54DLXYii3Sw8LaWf6
- ZW9dKlhUx+PcLZeHysk5NyEPflhFDZg9eGitKUmnIHgjrac49/AI0+fOCSXQpRc/M
- HiBJL6fjHeZ0m8Cs7A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.126] ([62.143.245.32]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N8ofE-1sjubu3tHK-015s9m; Tue, 23
- Apr 2024 14:22:41 +0200
-Message-ID: <3e5b4720-78b8-40ad-a783-de1e7792e7eb@gmx.de>
-Date: Tue, 23 Apr 2024 14:22:30 +0200
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vs1-xe35.google.com with SMTP id
+ ada2fe7eead31-479dd0261c8so2941487137.0
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 05:23:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1713875007; x=1714479807; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZvEfAYTracAn0sv7e00wEJ4lgGDkMJrdaaUOE5wLCsM=;
+ b=DpGpbhvZfj/2jfo8f8jTG5NHAPCax5W+aA5dCoSYkDmrBFB+QoX6E52lxuN7QPz2ul
+ NLsfMu6atkgyOQBqHl1pQ2A6+lYjXfO8keAtHi6YPqTgg3EGxgKX8j4QxLfkxMyrRsBY
+ 4zZ8qXDvOQ62AAM/X7Tead1L7EglL2zvT6ETpt8vL/Q4yr75htfzIDWU3bJy0KYdcU68
+ /kAxXrrkCv+E8SnsiRj1DhchDvLyUSk5K4sycfQzMclTnu+VkeYT53WjyP5rDu7oyRDZ
+ gf0fc3MkXJZrgdwEt43jNs4zYugYHhaQmVSLNErbw1tLkLq/5HmPssBWU+9DH7SBcRqJ
+ nc3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713875007; x=1714479807;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZvEfAYTracAn0sv7e00wEJ4lgGDkMJrdaaUOE5wLCsM=;
+ b=t8g23+HjL9+8Q79yf9Oy6U8+V068i3G/Kbtz0Tl0/6ofvIMmHw4UGL6zg0vRUnSmy4
+ cQwwVFwA/d6t1kxFWpT3XU7ZP5uq5r7kb99zYnwFcg9WAcfoW25UVV4z/3BTDdxJ1Tzw
+ 1MyIcnEzR0+jc+DFeeISJwiVFU/M1l/5HzweA676ah4DdPHIwKrBvv2OkB3Wa3SOmh86
+ YLt4tlstT18Faj5XJcsGCo5rGOSnZHyKvff+cXuVhMmjxZ8r4ffNu2zlMTFfMPXFam+P
+ AkhdNi3wEC4724EKDNEJAuZ+bXPW26B026BoOIGW7GYv3TY3baJ4TXNnvNYB+jR2H0DA
+ HR3Q==
+X-Gm-Message-State: AOJu0YyQhZK/bYZxwCqq0S4rrxemfjebW+0XklX4U803aWNNq+is2ggn
+ ayQxqCIRSllePKl5q0QpCaK32QrMiOW0gvNt0dE1AVB7U3nb64G/XucZUvYLgi+o1Znug7YeYMt
+ hKX1RUn+aaKVs+iS8MvR3ePqe6HFtgU3ixzFkPQ==
+X-Google-Smtp-Source: AGHT+IFJy/dr8lLWGudRbYvvdz1ujBC+HjuIgTvWSiJSk/BVOYyOS67Xm7zYP9Kt4eXuQhV6mX7brcuI2Ge+cbNNexw=
+X-Received: by 2002:a67:f447:0:b0:47b:af16:39bc with SMTP id
+ r7-20020a67f447000000b0047baf1639bcmr3798498vsn.17.1713875007623; Tue, 23 Apr
+ 2024 05:23:27 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 3/3] board: starfive: Call spl_dram_init() for DRAM
- initialization
-To: lukas.funke-oss@weidmueller.com
-Cc: E Shattow <lucent@gmail.com>, Lukas Funke <lukas.funke@weidmueller.com>,
- Aurelien Jarno <aurelien@aurel32.net>,
- Chanho Park <chanho61.park@samsung.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Minda Chen <minda.chen@starfivetech.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Yanhong Wang <yanhong.wang@starfivetech.com>,
- u-boot@lists.denx.de
-References: <20240423091429.178653-1-lukas.funke-oss@weidmueller.com>
- <20240423091429.178653-4-lukas.funke-oss@weidmueller.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20240423091429.178653-4-lukas.funke-oss@weidmueller.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:FoSAiayAyM/KNG+45Ut523NAxsKHCXoDPxxqOFIEagVKSocNmw4
- HEVFiS6LCfSsGtr7KGMlV04yNXLoynEeisNDZg40UwUE1dREETZpsN/mUl86diGUqXAVq5E
- eMga2jWilSHXYPBMYyGTMHt0kYz2+uTK8MiSAmd89nCZjzA8tdtqNMBM31DlR9qG6+eCLVA
- Z+caoyWq6d2yes8htDNKw==
-UI-OutboundReport: notjunk:1;M01:P0:k0CnfORHtRM=;deYC9NZBsdWfjsJKw8Jb68gZz3o
- io9faBxxExuJdulBDz7NPmRv9ruoehf1ngscZxUeRxCVqOqI4cNtOndTG08n5wGEXewNlzTDV
- jAzizCYslm3i/bZIgtUGn6ZS76IMvaP5Atmt4uq1Kc9wFBSTVnCoA69XwuMOrZSSD3Nz/Obk3
- gzkeFWcYY2qR9fGOZc2AvIfUV1z/vzCDGXj9U3A29/p/VwF1mmFL7fDIzZk/nX1JofxZZ15Jr
- gDmQD11P7WTxQ4weYk8lJonj+rn3ZvtF60XrRgbAt5ZsRVnZAumpph/vB7q+xsTidqSBoXFll
- W0owE1QB+CBXl56tTQCJyuAIy/t5wOpSfaBoWIbuIZVfHUAXK6Jye4wXZ0gdX++zeje7lcqYI
- RbivXW+rX7/gbb+8MAp22uozuzC2wMrJkRocSUxt9/OKlDzKbUVY/KeXu8M4+NJH0IfIJRJ2b
- IGsAF/R7xhgVnCRDNVmAbCsFLfHqo9J16wIcOfxe9VW2Vi+T9ttAFGaSjoxo7z4PB7L2YKS6n
- kFimkWCJ5koE51CbVlr+z5gfpw9Xkar2sBFOxR9Cf2C7m3ZS8B7Dg+BCWDvxOyEKcvhmF8Enu
- tULfJlflatsT3phf9zUKP15NWzXjcqD9QT1uXnZfrKTXGZsjVjB4Uh/Rz6nNqm3xn/LG80mUH
- V9Ic7fxmVlhmsNzO/ezZcyo8gdfKflOqEaoxfTYwS4N0dlJBqZ6MEb+FpLqdPx7K+rA2/he0t
- GzTcKFj4bvE5YQ0mH1WLAt4l/kUWVDLRXy+yDx0TmjBHJavm9i2vJWWNi9lF2kktIoISu34e5
- mgUTyhY8Q+AvSR44tWS8kblwBtYiua6Eepiw9Ov3mf/eE=
+References: <20240412095438.410570-1-sumit.garg@linaro.org>
+ <99a5b32b-7be8-4a8b-a522-cc75dd92055d@linaro.org>
+In-Reply-To: <99a5b32b-7be8-4a8b-a522-cc75dd92055d@linaro.org>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Tue, 23 Apr 2024 17:53:16 +0530
+Message-ID: <CAFA6WYMk7Hor0c2jiX3T0yEbk1brNE+zOUgPE_XwKP49AoAY+Q@mail.gmail.com>
+Subject: Re: [PATCH v4 0/7] Add SE HMBSC board support
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: u-boot@lists.denx.de, neil.armstrong@linaro.org, trini@konsulko.com, 
+ lukma@denx.de, seanga2@gmail.com, sjg@chromium.org, 
+ laetitia.mariottini@se.com, pascal.eberhard@se.com, abdou.saker@se.com, 
+ jimmy.lalande@se.com, benjamin.missey@non.se.com, daniel.thompson@linaro.org, 
+ stephan@gerhold.net
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,50 +90,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 23.04.24 11:14, lukas.funke-oss@weidmueller.com wrote:
-> From: Lukas Funke <lukas.funke@weidmueller.com>
+On Tue, 23 Apr 2024 at 17:29, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Call spl_dram_init() since this is commonly used for dram initialization
-> in u-boot.
->
-> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
-> ---
->
-> Changes in v2:
->   - capitalized acronym DRAM
->
->   board/starfive/visionfive2/spl.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfiv=
-e2/spl.c
-> index 45848db6d8..ca61b5be22 100644
-> --- a/board/starfive/visionfive2/spl.c
-> +++ b/board/starfive/visionfive2/spl.c
-> @@ -285,9 +285,9 @@ int spl_board_init_f(void)
->
->   	jh7110_jtag_init();
->
-> -	ret =3D spl_soc_init();
-> +	ret =3D spl_dram_init();
+> Applied, thanks.
 
-We want to be able to use git bisect. This requires that the source
-builds after each individual patch.
+Thanks.
 
-This change must be in the same patch in which you rename the function
-for the VisionFive 2.
-
-Please, resubmit your series with two patches: one for SiFive, one for
-StarFive.
-
-Best regards
-
-Heinrich
-
->   	if (ret) {
-> -		debug("JH7110 SPL init failed: %d\n", ret);
-> +		debug("JH7110 DRAM init failed: %d\n", ret);
->   		return ret;
->   	}
+>
+> (b4 didn't seem to detect this series properly, hence the manual mail).
 >
 
+Switching my workflow to b4 is on my ToDo list. I hope to do it sooner
+rather than later.
+
+-Sumit
+
+> On 12/04/2024 11:54, Sumit Garg wrote:
+> > SE HMIBSC board is based on Qcom APQ8016 SoC. One of the major
+> > difference from db410c is serial port where HMIBSC board uses UART1 as
+> > the debug console with an RS232 port, patch #2 - #5 adds corresponding
+> > driver support.
+> >
+> > Patch #6 adds main HMIBSC board specific bits, features:
+> > - Qualcomm Snapdragon 410C SoC - APQ8016 (4xCortex A53, Adreno 306)
+> > - 2GiB RAM
+> > - 64GiB eMMC, SD slot
+> > - WiFi and Bluetooth
+> > - 2x Host, 1x Device USB port
+> > - HDMI
+> > - Discrete TPM2 chip over SPI
+> >
+> > Features enabled in U-Boot:
+> > - RAUC updates (refer [2] for more details)
+> > - Environment protection
+> > - USB based ethernet adaptors
+> >
+> > Feedback is very much welcome.
+> >
+> > Changes in v4:
+> > - Rebased on top of qcom-main [4].
+> > - Split out board DTS patch as #6.
+> > - Convert to text based environment as hmibsc.env.
+> > - MMC regression has been reported for qcom-main branch here [5].
+> > - Collected further review tag.
+> >
+> > Changes in v3:
+> > - Rebased on top of qcom-next [1].
+> > - Collected some review tags.
+> > - Incorporated misc. comments from Caleb and Stephen.
+> > - Split patch#4 as requested.
+> > - Linux HMIBSC board DTS has already been reviewed here [3], I have
+> >    incorporated that for U-Boot too.
+> >
+> > Changes in v2:
+> > - Rebased on top on qcom-next [1].
+> > - Added patch#1 as a fix for generic qcom board support.
+> > - Added patch#4 to enable driving GPIO pins based on pinctrl
+> >    configuration. This replaces the custom GPIO configuration.
+> > - Added proper DTS file for HMIBSC board based on Linux DT pattern.
+> > - Merged board support patches into a single patch#5.
+> >
+> > [1] https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commits/qcom-next?ref_type=heads
+> > [2] https://rauc.readthedocs.io/en/latest/
+> > [3] https://lore.kernel.org/linux-kernel/20240403043416.3800259-4-sumit.garg@linaro.org/
+> > [4] https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commits/qcom-main/?ref_type=heads
+> > [5] https://lore.kernel.org/all/CAFA6WYO+3VroUdFUVH390taViQX8pMQrOQDTSn0yU6BD5YY53A@mail.gmail.com/
+> >
+> > Sumit Garg (7):
+> >    qcom: Don't enable LINUX_KERNEL_IMAGE_HEADER by default
+> >    apq8016: Add support for UART1 clocks and pinmux
+> >    serial_msm: Enable RS232 flow control
+> >    pinctrl: qcom: Add support for driving GPIO pins output
+> >    pinctrl: qcom: apq8016: Add GPIO pinctrl function
+> >    arm: dts: qcom: Add Schneider HMIBSC board dts
+> >    board: add support for Schneider HMIBSC board
+> >
+> >   arch/arm/Kconfig                          |   2 +-
+> >   arch/arm/dts/apq8016-schneider-hmibsc.dts | 491 ++++++++++++++++++++++
+> >   board/schneider/hmibsc/MAINTAINERS        |   6 +
+> >   board/schneider/hmibsc/hmibsc.env         |  40 ++
+> >   configs/hmibsc_defconfig                  |  87 ++++
+> >   doc/board/index.rst                       |   1 +
+> >   doc/board/schneider/hmibsc.rst            |  45 ++
+> >   doc/board/schneider/index.rst             |   9 +
+> >   drivers/clk/qcom/clock-apq8016.c          |  38 +-
+> >   drivers/pinctrl/qcom/pinctrl-apq8016.c    |   2 +
+> >   drivers/pinctrl/qcom/pinctrl-qcom.c       |  25 +-
+> >   drivers/serial/serial_msm.c               |  24 +-
+> >   include/configs/hmibsc.h                  |  16 +
+> >   13 files changed, 760 insertions(+), 26 deletions(-)
+> >   create mode 100644 arch/arm/dts/apq8016-schneider-hmibsc.dts
+> >   create mode 100644 board/schneider/hmibsc/MAINTAINERS
+> >   create mode 100644 board/schneider/hmibsc/hmibsc.env
+> >   create mode 100644 configs/hmibsc_defconfig
+> >   create mode 100644 doc/board/schneider/hmibsc.rst
+> >   create mode 100644 doc/board/schneider/index.rst
+> >   create mode 100644 include/configs/hmibsc.h
+> >
+>
+> --
+> // Caleb (they/them)
