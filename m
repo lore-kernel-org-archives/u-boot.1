@@ -4,65 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C559EC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:02:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3B74C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:03:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5B847885A4;
-	Tue, 23 Apr 2024 13:02:47 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D9993885BC;
+	Tue, 23 Apr 2024 13:03:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="NvIFjlgI";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="kbuOl37V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E43DC8854A; Tue, 23 Apr 2024 13:02:46 +0200 (CEST)
-Received: from mail-m32109.qiye.163.com (mail-m32109.qiye.163.com
- [220.197.32.109])
+ id A7B8C885B5; Tue, 23 Apr 2024 13:03:22 +0200 (CEST)
+Received: from mail-m15586.qiye.163.com (mail-m15586.qiye.163.com
+ [101.71.155.86])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6CFC885A2
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:02:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BA16E885A2
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:03:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=NvIFjlgIBIhJgMcfWkNZfPir2kdAFWNMwkFDNCxzpqtEkkbj9WSaDBLCxaw8Ht7cmZynM7iP2bTgSp6yzB6LRJ2j4aT+QaK7bfw9QguoaT8BUben5EfDoYF+C2Vy1YXeg27wdQYNQq2u8D7fQj7vDAKY5Sj/xMYrUXXsoMg/8eU=;
+ b=kbuOl37VPFHACJexj0GGizC/466y/SU5FCuOEOFhaKPE5GMWUNKSgLEHY9Xo15q4NcLZMf/jfLVfe0aYz2yMPk90IO14c9kqoH/UIDs9dPVFyixXZSAtpCTK8X0fNP6SF+mOryszWxxgjeUqu9TgyZdf+LHrPflKWO2mHd2PujU=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=xp01f+ZmfaI/H4KV51PodVNDLsM/60I1dE/5Xalx8JE=;
+ bh=F2UDdBHPTP9qqFraPCeuhuFEh6FteZPUYUvfpNGPxeQ=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id DAA6F90034E;
- Tue, 23 Apr 2024 19:02:27 +0800 (CST)
-Message-ID: <45d5b004-de1d-4cfa-a412-3b796255a10e@rock-chips.com>
-Date: Tue, 23 Apr 2024 19:02:27 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id ECAC8900317;
+ Tue, 23 Apr 2024 19:03:09 +0800 (CST)
+Message-ID: <a0859f14-9c75-47bd-9206-e8f740aa03af@rock-chips.com>
+Date: Tue, 23 Apr 2024 19:03:09 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/31] rockchip: rk3399: Add a default spl-boot-order prop
+Subject: Re: [PATCH 11/31] clk: rockchip: rk3399: Rename SCLK_DDRCLK to
+ SCLK_DDRC
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Andy Yan <andy.yan@rock-chips.com>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- Nick Xie <nick@khadas.com>, Peter Robinson <pbrobinson@gmail.com>,
- Levin Du <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>,
- Jagan Teki <jagan@amarulasolutions.com>
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
 Cc: u-boot@lists.denx.de
 References: <20240331202921.262323-1-jonas@kwiboo.se>
- <20240331202921.262323-10-jonas@kwiboo.se>
+ <20240331202921.262323-12-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240331202921.262323-10-jonas@kwiboo.se>
+In-Reply-To: <20240331202921.262323-12-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGh4YSVYYTEtCGkkfTR9JTR9VEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8f0a9f148403a9kunmdaa6f90034e
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0xMSlZNTkpNSxgeTh4YGk5VEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8f0a9fb7e303a9kunmecac8900317
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mxg6Gio4PTNMNj02OUgTGTwC
- OAswCzhVSlVKTEpIQ0xLSk9CSkxLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKS0JJTjcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MBA6ETo6CzNNIj0TA0gwGR8q
+ HilPCS1VSlVKTEpIQ0xLSkJLQkxKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOTUlDNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,15 +78,8 @@ X-Virus-Status: Clean
 
 
 On 2024/4/1 04:28, Jonas Karlman wrote:
-> A lot of RK3399 boards use a u-boot,spl-boot-order of "same-as-spl",
-> &sdhci and &sdmmc.
->
-> Move this to rk3399-u-boot.dtsi and make this default for boards
-> currently missing a u-boot,spl-boot-order prop.
->
-> The &spi_flash reference has been dropped from spl-boot-order now that
-> boot source id is cached and "same-as-spl" can be resolved into the SPI
-> flash node.
+> Sync rk3399-cru.h with one from linux v6.2+ and fix use of the
+> SCLK_DDRCLK name that was only used by U-Boot.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -97,259 +87,118 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi      | 1 -
->   arch/arm/dts/rk3399-evb-u-boot.dtsi            | 1 -
->   arch/arm/dts/rk3399-ficus-u-boot.dtsi          | 6 ------
->   arch/arm/dts/rk3399-firefly-u-boot.dtsi        | 6 ------
->   arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi    | 6 ------
->   arch/arm/dts/rk3399-leez-p710-u-boot.dtsi      | 6 ------
->   arch/arm/dts/rk3399-nanopi4-u-boot.dtsi        | 6 ------
->   arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi   | 6 ------
->   arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi  | 6 ------
->   arch/arm/dts/rk3399-roc-pc-u-boot.dtsi         | 4 ----
->   arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi      | 6 ------
->   arch/arm/dts/rk3399-rock960-u-boot.dtsi        | 5 -----
->   arch/arm/dts/rk3399-rockpro64-u-boot.dtsi      | 5 +----
->   arch/arm/dts/rk3399-u-boot.dtsi                | 4 ++++
->   arch/arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi | 6 ------
->   15 files changed, 5 insertions(+), 69 deletions(-)
+>   arch/arm/dts/rk3399-u-boot.dtsi        |  2 +-
+>   drivers/clk/rockchip/clk_rk3399.c      |  2 +-
+>   include/dt-bindings/clock/rk3399-cru.h | 30 ++++++++++++++------------
+>   3 files changed, 18 insertions(+), 16 deletions(-)
 >
-> diff --git a/arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi b/arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi
-> index a3f27566e438..6c07de98fa01 100644
-> --- a/arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi
-> @@ -9,7 +9,6 @@
->   / {
->   	chosen {
->   		stdout-path = "serial2:1500000n8";
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/rk3399-evb-u-boot.dtsi b/arch/arm/dts/rk3399-evb-u-boot.dtsi
-> index dfce63e4d428..796ac9642399 100644
-> --- a/arch/arm/dts/rk3399-evb-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-evb-u-boot.dtsi
-> @@ -9,7 +9,6 @@
->   / {
->   	chosen {
->   		stdout-path = "serial2:1500000n8";
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
->   	};
->   };
->   
-> diff --git a/arch/arm/dts/rk3399-ficus-u-boot.dtsi b/arch/arm/dts/rk3399-ficus-u-boot.dtsi
-> index 38e0897db91d..67b63a835238 100644
-> --- a/arch/arm/dts/rk3399-ficus-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-ficus-u-boot.dtsi
-> @@ -5,9 +5,3 @@
->   
->   #include "rk3399-u-boot.dtsi"
->   #include "rk3399-sdram-ddr3-1600.dtsi"
-> -
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> diff --git a/arch/arm/dts/rk3399-firefly-u-boot.dtsi b/arch/arm/dts/rk3399-firefly-u-boot.dtsi
-> index c58ad95d120a..1f5fda1d0f1d 100644
-> --- a/arch/arm/dts/rk3399-firefly-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-firefly-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->   #include "rk3399-u-boot.dtsi"
->   #include "rk3399-sdram-ddr3-1600.dtsi"
->   
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> -
->   &vdd_log {
->   	regulator-init-microvolt = <950000>;
->   };
-> diff --git a/arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi b/arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi
-> index a7039d74a016..4a3b23e48313 100644
-> --- a/arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->   #include "rk3399-u-boot.dtsi"
->   #include "rk3399-sdram-lpddr4-100.dtsi"
->   
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> -
->   &vdd_log {
->   	regulator-init-microvolt = <950000>;
->   };
-> diff --git a/arch/arm/dts/rk3399-leez-p710-u-boot.dtsi b/arch/arm/dts/rk3399-leez-p710-u-boot.dtsi
-> index c638ce259731..03b596850635 100644
-> --- a/arch/arm/dts/rk3399-leez-p710-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-leez-p710-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->   #include "rk3399-u-boot.dtsi"
->   #include "rk3399-sdram-lpddr4-100.dtsi"
->   
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> -
->   &vdd_log {
->   	regulator-init-microvolt = <950000>;
->   };
-> diff --git a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-> index a9d10592d573..a126bbaf086f 100644
-> --- a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-> @@ -5,12 +5,6 @@
->   
->   #include "rk3399-u-boot.dtsi"
->   
-> -/{
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> -
->   &sdmmc {
->   	pinctrl-0 = <&sdmmc_bus4 &sdmmc_clk &sdmmc_cmd &sdmmc_cd>;
->   };
-> diff --git a/arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi b/arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi
-> index 88a77cad8d43..83b0c44e9ec5 100644
-> --- a/arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->   #include "rk3399-u-boot.dtsi"
->   #include "rk3399-sdram-lpddr4-100.dtsi"
->   
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &spiflash, &sdmmc;
-> -	};
-> -};
-> -
->   &edp {
->   	rockchip,panel = <&edp_panel>;
->   };
-> diff --git a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> index cabf0a9dae89..e29757590611 100644
-> --- a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->   #include "rk3399-u-boot.dtsi"
->   #include "rk3399-sdram-lpddr4-100.dtsi"
->   
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> -
->   &rng {
->   	status = "okay";
->   };
-> diff --git a/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi b/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-> index c8f4418a7389..e390cf3abab5 100644
-> --- a/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-> @@ -7,10 +7,6 @@
->   #include "rk3399-sdram-lpddr4-100.dtsi"
->   
->   / {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &spi_flash, &sdhci, &sdmmc;
-> -	};
-> -
->   	vcc_hub_en: vcc_hub_en-regulator {
->   		compatible = "regulator-fixed";
->   		enable-active-high;
-> diff --git a/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi b/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> index 60122f3bcd6c..b3bfc77f7569 100644
-> --- a/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->   #include "rk3399-u-boot.dtsi"
->   #include "rk3399-sdram-lpddr4-100.dtsi"
->   
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> -
->   &sdhci {
->   	cap-mmc-highspeed;
->   	mmc-ddr-1_8v;
-> diff --git a/arch/arm/dts/rk3399-rock960-u-boot.dtsi b/arch/arm/dts/rk3399-rock960-u-boot.dtsi
-> index c190089e2643..55716ba4df73 100644
-> --- a/arch/arm/dts/rk3399-rock960-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rock960-u-boot.dtsi
-> @@ -7,10 +7,6 @@
->   #include "rk3399-sdram-lpddr3-2GB-1600.dtsi"
->   
->   / {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -
->   	vdd_log: vdd-log {
->   		compatible = "pwm-regulator";
->   		pwms = <&pwm2 0 25000 1>;
-> @@ -22,5 +18,4 @@
->   		regulator-init-microvolt = <950000>;
->   		vin-supply = <&vcc5v0_sys>;
->   	};
-> -
->   };
-> diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> index 089732524a76..b15e5392c3cf 100644
-> --- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> @@ -5,11 +5,8 @@
->   
->   #include "rk3399-u-boot.dtsi"
->   #include "rk3399-sdram-lpddr4-100.dtsi"
-> +
->   / {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &spi_flash, &sdmmc, &sdhci;
-> -	};
-> -
->           smbios {
->                   compatible = "u-boot,sysinfo-smbios";
->                   smbios {
 > diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
-> index 87b173e59579..fe045ca81749 100644
+> index 69e6b808a69b..adb64d17e040 100644
 > --- a/arch/arm/dts/rk3399-u-boot.dtsi
 > +++ b/arch/arm/dts/rk3399-u-boot.dtsi
-> @@ -14,6 +14,10 @@
->   		spi1 = &spi1;
->   	};
+> @@ -44,7 +44,7 @@
+>   		compatible = "rockchip,rk3399-dmc";
+>   		devfreq-events = <&dfi>;
+>   		interrupts = <GIC_SPI 1 IRQ_TYPE_LEVEL_HIGH 0>;
+> -		clocks = <&cru SCLK_DDRCLK>;
+> +		clocks = <&cru SCLK_DDRC>;
+>   		clock-names = "dmc_clk";
+>   		reg = <0x0 0xffa80000 0x0 0x0800
+>   		       0x0 0xffa80800 0x0 0x1800
+> diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
+> index 80f65a237e8e..f0ce54067f8c 100644
+> --- a/drivers/clk/rockchip/clk_rk3399.c
+> +++ b/drivers/clk/rockchip/clk_rk3399.c
+> @@ -1049,7 +1049,7 @@ static ulong rk3399_clk_set_rate(struct clk *clk, ulong rate)
+>   		 * return 0 to satisfy clk_set_defaults during device probe.
+>   		 */
+>   		return 0;
+> -	case SCLK_DDRCLK:
+> +	case SCLK_DDRC:
+>   		ret = rk3399_ddr_set_clk(priv->cru, rate);
+>   		break;
+>   	case PCLK_EFUSE1024NS:
+> diff --git a/include/dt-bindings/clock/rk3399-cru.h b/include/dt-bindings/clock/rk3399-cru.h
+> index 211faf8fa891..39169d94a44e 100644
+> --- a/include/dt-bindings/clock/rk3399-cru.h
+> +++ b/include/dt-bindings/clock/rk3399-cru.h
+> @@ -1,6 +1,7 @@
+> -/* SPDX-License-Identifier: GPL-2.0+ */
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+>   /*
+>    * Copyright (c) 2016 Rockchip Electronics Co. Ltd.
+> + * Author: Xing Zheng <zhengxing@rock-chips.com>
+>    */
 >   
-> +	chosen {
-> +		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> +	};
-> +
->   	cic: syscon@ff620000 {
->   		bootph-all;
->   		compatible = "rockchip,rk3399-cic", "syscon";
-> diff --git a/arch/arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi b/arch/arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi
-> index 7c66e1145a50..946a0230dbb4 100644
-> --- a/arch/arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi
-> @@ -5,9 +5,3 @@
+>   #ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3399_H
+> @@ -121,16 +122,17 @@
+>   #define SCLK_DPHY_RX0_CFG		165
+>   #define SCLK_RMII_SRC			166
+>   #define SCLK_PCIEPHY_REF100M		167
+> -#define SCLK_USBPHY0_480M_SRC		168
+> -#define SCLK_USBPHY1_480M_SRC		169
+> -#define SCLK_DDRCLK			170
+> -#define SCLK_TESTOUT2			171
+> +#define SCLK_DDRC			168
+> +#define SCLK_TESTCLKOUT1		169
+> +#define SCLK_TESTCLKOUT2		170
 >   
->   #include "rk3399pro-u-boot.dtsi"
->   #include "rk3399-sdram-lpddr3-4GB-1600.dtsi"
-> -
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
+>   #define DCLK_VOP0			180
+>   #define DCLK_VOP1			181
+>   #define DCLK_VOP0_DIV			182
+>   #define DCLK_VOP1_DIV			183
+>   #define DCLK_M0_PERILP			184
+> +#define DCLK_VOP0_FRAC			185
+> +#define DCLK_VOP1_FRAC			186
+>   
+>   #define FCLK_CM0S			190
+>   
+> @@ -545,8 +547,8 @@
+>   #define SRST_H_PERILP0			171
+>   #define SRST_H_PERILP0_NOC		172
+>   #define SRST_ROM			173
+> -#define SRST_CRYPTO_S			174
+> -#define SRST_CRYPTO_M			175
+> +#define SRST_CRYPTO0_S			174
+> +#define SRST_CRYPTO0_M			175
+>   
+>   /* cru_softrst_con11 */
+>   #define SRST_P_DCF			176
+> @@ -554,7 +556,7 @@
+>   #define SRST_CM0S			178
+>   #define SRST_CM0S_DBG			179
+>   #define SRST_CM0S_PO			180
+> -#define SRST_CRYPTO			181
+> +#define SRST_CRYPTO0			181
+>   #define SRST_P_PERILP1_SGRF		182
+>   #define SRST_P_PERILP1_GRF		183
+>   #define SRST_CRYPTO1_S			184
+> @@ -592,13 +594,13 @@
+>   #define SRST_P_SPI0			214
+>   #define SRST_P_SPI1			215
+>   #define SRST_P_SPI2			216
+> -#define SRST_P_SPI4			217
+> -#define SRST_P_SPI5			218
+> +#define SRST_P_SPI3			217
+> +#define SRST_P_SPI4			218
+>   #define SRST_SPI0			219
+>   #define SRST_SPI1			220
+>   #define SRST_SPI2			221
+> -#define SRST_SPI4			222
+> -#define SRST_SPI5			223
+> +#define SRST_SPI3			222
+> +#define SRST_SPI4			223
+>   
+>   /* cru_softrst_con14 */
+>   #define SRST_I2S0_8CH			224
+> @@ -720,8 +722,8 @@
+>   #define SRST_H_CM0S_NOC			3
+>   #define SRST_DBG_CM0S			4
+>   #define SRST_PO_CM0S			5
+> -#define SRST_P_SPI3			6
+> -#define SRST_SPI3			7
+> +#define SRST_P_SPI6			6
+> +#define SRST_SPI6			7
+>   #define SRST_P_TIMER_0_1		8
+>   #define SRST_P_TIMER_0			9
+>   #define SRST_P_TIMER_1			10
