@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81265C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 21:22:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA772C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 22:41:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8491A88C29;
-	Tue, 23 Apr 2024 23:22:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1B1A188C8F;
+	Wed, 24 Apr 2024 00:41:03 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DN9feu8I";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="hkf1sgPq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8DBD88C28; Tue, 23 Apr 2024 23:22:35 +0200 (CEST)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 54F6D88C90; Wed, 24 Apr 2024 00:41:02 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBD9788C2C
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 23:22:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB4DC88C8C
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 00:40:59 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-78edc49861aso434064385a.3
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 14:22:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713907352; x=1714512152; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=b8owBueeXa40sNRj4+rHYmffdL7abNllXkoXd/SNmrw=;
- b=DN9feu8IDtlHF1svy1GVX6/D1JEaMagqzwrGouA3Wsn6GseybvVW5x0lQjbmimK7Va
- 6Fazq0GRVyt+4lLeHHI/G6xgUjy6DTV0oNizB9G1zLd8EY4y+MVZgj6vCg8gmQiUYeX0
- hqSuz4Eh2zzvH2X9ngfLocaSnLawu9WpWNd4g=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713907352; x=1714512152;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=b8owBueeXa40sNRj4+rHYmffdL7abNllXkoXd/SNmrw=;
- b=P3lHoW3rMBEnaGBIEn7Gnb2X0elcIkq+rkS4JjP0ztEPYUEHSnsZYJV/Lqa92ryUZj
- FMqSJG9DAO+ADlZDHNoQPciWla+FhIZPRrq1oRP7tTbZslGi/U5rK+uOQEFPDyzwdhDv
- 9idtBl7a5AfNJP9gOv4gjL6bYDOAkkXFPUSXKfHi48M1NQk0rvPLSLwo8nYtUKD1vAEU
- +gdiMRHeFH4oyP04QoayN6+bn1d4g5F+b7CNCPfCFLeIyHGxR0nd+mwAW7Rts9t8TKp6
- sic/Mr7Bz/WNpkBpbn4bZ19LvJLjtsXyiAqbOzRjWHiW9fQdyL8foLwrUujCSNr7AEUn
- odPA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXOf0n8/9pf+EM9FPdSTdw5rKNYkownMcFos5Sq+waEU9AY1LwjGRqQh5S79f73LEYPc0Rp0579WgajxJRtYxgsp6h/Sw==
-X-Gm-Message-State: AOJu0Yx+VLio3QGMObO35d1tmvUrodX2AuOyMPEHIN6aErLAstvoFTwB
- 1l4eujhUkYftdgeSpTD851g8aUgeEeBPO0KNlWKcAQ68wpfeHvhVL90+GQ/DGeo=
-X-Google-Smtp-Source: AGHT+IGMt0z7PJML0tl2isCC3WudwKCJ+cOBVQNWzkDHECSjIbAkRidnk1w1Mr7B/eYOK3xgBuqCCw==
-X-Received: by 2002:a05:620a:7f5:b0:78f:1aa0:2ca8 with SMTP id
- k21-20020a05620a07f500b0078f1aa02ca8mr780167qkk.16.1713907352562; 
- Tue, 23 Apr 2024 14:22:32 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- t4-20020a05620a004400b0078d5af15c4csm5594446qkt.38.2024.04.23.14.22.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Apr 2024 14:22:31 -0700 (PDT)
-Date: Tue, 23 Apr 2024 15:22:29 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Robert Marko <robert.marko@sartura.hr>,
- Sumit Garg <sumit.garg@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-Subject: Re: [PULL] Please pull qcom/qcom-main
-Message-ID: <20240423212229.GZ1054907@bill-the-cat>
-References: <20240423134951.2380045-1-caleb.connolly@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=2dea=L5=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1713912014;
+ bh=21aiw3EdBqnAnUDUL1u0PhHFL+S5PthO3JB0UKQHJTQ=;
+ b=hkf1sgPqzzMGNlx7teJqI7T6BgVC3bYsbhhmRhlZz+Ivc58tqFN3KWhAUuL46cLREbw7ZHfza
+ 2LFOINpI9K+9m4Se7ZV6Yqyv5auU/mjiesbZbIkfhvwa1uabwoan2iT0Lj/D9DFYVW3zVlxSE1b
+ +XXbT0++KCtEgTBqEUS52OSqB3rJmMCRCH8y5GSb+T1LYsWkSWPu/UslYFhsLa3Z3V/mZ8ei1U7
+ FF/aXplaDJKqODfs09wfqCkOQwqvjxUC2TSqBwzZUfSuR+iGpLAIxE43h0sJaKoHbRxYyTpnx+O
+ hjYnmXE5x3sjkww+LFq2zHTvhfV7QjVZmbz9IWZ2retg==
+Message-ID: <2dc654c5-2f03-4f69-9e5f-e4ad5091b844@kwiboo.se>
+Date: Wed, 24 Apr 2024 00:40:05 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="si43HQQc/oGc5w39"
-Content-Disposition: inline
-In-Reply-To: <20240423134951.2380045-1-caleb.connolly@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 01/11] rockchip: sdram: Support getting banks from TPL
+ for rk3568 and rk3588
+To: Quentin Schulz <foss+uboot@0leil.net>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>, Kever Yang
+ <kever.yang@rock-chips.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Philipp
+ Tomsich <philipp.tomsich@vrull.eu>, John Clark <inindev@gmail.com>, Tom
+ Fitzhenry <tom@tom-fitzhenry.me.uk>, Eugen Hristev
+ <eugen.hristev@collabora.com>, Andy Yan <andyshrk@163.com>, Elon Zhang
+ <zhangzj@rock-chips.com>, Joshua Riek <jjriek@verizon.net>, Klaus Goger
+ <klaus.goger@theobroma-systems.com>, Heiko Stuebner
+ <heiko.stuebner@cherry.de>, Jagan Teki <jagan@edgeble.ai>, Frank
+ Wunderlich <frank-w@public-files.de>, Joseph Chen <chenjh@rock-chips.com>,
+ Tianling Shen <cnsztl@gmail.com>, Nicolas Frattaroli
+ <frattaroli.nicolas@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Akash Gajjar <gajjar04akash@gmail.com>, u-boot@lists.denx.de, Chris Morgan
+ <macromorgan@hotmail.com>
+References: <20240415-rk35xx-dram-atags-v3-0-5bc5475b3c0d@theobroma-systems.com>
+ <20240415-rk35xx-dram-atags-v3-1-5bc5475b3c0d@theobroma-systems.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20240415-rk35xx-dram-atags-v3-1-5bc5475b3c0d@theobroma-systems.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 662838cc710b49bd7335cc21
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,72 +86,322 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Quentin,
 
---si43HQQc/oGc5w39
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2024-04-15 16:16, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> 
+> Allow RK3568 and RK3588 based boards to get the RAM bank configuration
+> from the ROCKCHIP_TPL stage instead of the current logic. This fixes
+> both an issue where 256MB of RAM is blocked for devices with >= 4GB
+> of RAM and where memory holes need to be defined for devices with
+> more than 16GB of RAM. In the event that neither SoC is used or the
+> ROCKCHIP_TPL stage is not used, fall back to existing logic.
+> 
+> The logic handles creating memory holes from reserved memory areas
+> defined in mem_map data struct in SoC C files, but only if the DRAM area
+> overlaps with one reserved memory area.
+> 
+> Since mem_map data struct is used, it should be rather straightforward
+> to add support for other SoCs if needed.
+> 
+> The logic is taken from Rockchip's U-Boot tag linux-5.10-gen-rkr4.1
+> (e08e32143dd).
+> 
+> Note that Rockchip's U-Boot/TF-A/OP-TEE modify the ATAGS at runtime as
+> well, but the DDR_MEM tag seems to be pretty much stable (though BL31
+> seems to be reserving only 1MB for itself at the moment).
+> 
+> u32 for ATAGS is used because it simplifies the pointer arithmetic and
+> it's expected that ATAGS are always below the 4GB limit allowed by u32.
+> 
+> Co-developed-by: Chris Morgan <macromorgan@hotmail.com>
+> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> ---
+>  arch/arm/mach-rockchip/sdram.c | 240 +++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 240 insertions(+)
+> 
+> diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
+> index 0d9a0aef6f5..5b1ff1e5495 100644
+> --- a/arch/arm/mach-rockchip/sdram.c
+> +++ b/arch/arm/mach-rockchip/sdram.c
+> @@ -8,6 +8,7 @@
+>  #include <init.h>
+>  #include <log.h>
+>  #include <ram.h>
+> +#include <asm/armv8/mmu.h>
+>  #include <asm/global_data.h>
+>  #include <asm/io.h>
+>  #include <asm/arch-rockchip/sdram.h>
+> @@ -35,12 +36,251 @@ struct tos_parameter_t {
+>  	s64 reserve[8];
+>  };
+>  
+> +/* Tag size and offset */
+> +#define ATAGS_SIZE		SZ_8K
+> +#define ATAGS_OFFSET		(SZ_2M - ATAGS_SIZE)
+> +#define ATAGS_PHYS_BASE		(CFG_SYS_SDRAM_BASE + ATAGS_OFFSET)
+> +#define ATAGS_PHYS_END		(ATAGS_PHYS_BASE + ATAGS_SIZE)
+> +
+> +/* ATAGS memory structures */
+> +
+> +enum tag_magic {
+> +	ATAG_NONE,
+> +	ATAG_CORE = 0x54410001,
+> +	ATAG_SERIAL = 0x54410050,
+> +	ATAG_DDR_MEM = 0x54410052,
+> +	ATAG_MAX = 0x544100ff,
+> +};
+> +
+> +/*
+> + * An ATAG contains the following data:
+> + *  - header
+> + *    u32 size // sizeof(header + tag data) / sizeof(u32)
+> + *    u32 magic
+> + *  - tag data
+> + */
+> +
+> +struct tag_header {
+> +	u32 size;
+> +	u32 magic;
+> +} __packed;
+> +
+> +/*
+> + * DDR_MEM tag bank is storing data this way:
+> + *  - address0
+> + *  - address1
+> + *  - [...]
+> + *  - addressX
+> + *  - size0
+> + *  - size1
+> + *  - [...]
+> + *  - sizeX
+> + *
+> + *  with X being tag_ddr_mem.count - 1.
+> + */
+> +struct tag_ddr_mem {
+> +	u32 count;
+> +	u32 version;
+> +	u64 bank[20];
+> +	u32 flags;
+> +	u32 data[2];
+> +	u32 hash;
+> +} __packed;
+> +
+> +static u32 js_hash(const void *buf, u32 len)
+> +{
+> +	u32 i, hash = 0x47C6A7E6;
+> +
+> +	if (!buf || !len)
+> +		return hash;
+> +
+> +	for (i = 0; i < len; i++)
+> +		hash ^= ((hash << 5) + ((const char *)buf)[i] + (hash >> 2));
+> +
+> +	return hash;
+> +}
+> +
+> +static int rockchip_dram_init_banksize(void)
+> +{
+> +	const struct tag_header *tag_h = NULL;
+> +	u32 *addr = (void *)ATAGS_PHYS_BASE;
+> +	struct tag_ddr_mem *ddr_info;
+> +	u32 calc_hash;
+> +	u8 i, j;
+> +
+> +	if (!IS_ENABLED(CONFIG_ROCKCHIP_RK3588) &&
+> +	    !IS_ENABLED(CONFIG_ROCKCHIP_RK3568))
+> +		return -ENOTSUPP;
+> +
+> +	if (!IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL))
+> +		return -ENOTSUPP;
+> +
+> +	/* Find DDR_MEM tag */
+> +	while (addr < (u32 *)ATAGS_PHYS_END) {
+> +		tag_h = (const struct tag_header *)addr;
+> +
+> +		if (!tag_h->size) {
+> +			debug("End of ATAGS (0-size tag), no DDR_MEM found\n");
+> +			return -ENODATA;
+> +		}
+> +
+> +		if (tag_h->magic == ATAG_DDR_MEM)
+> +			break;
+> +
+> +		switch (tag_h->magic) {
+> +		case ATAG_NONE:
+> +		case ATAG_CORE:
+> +		case ATAG_SERIAL ... ATAG_MAX:
+> +			addr += tag_h->size;
+> +			continue;
+> +		default:
+> +			debug("Invalid magic (0x%08x) for ATAG at 0x%p\n",
+> +			      tag_h->magic, addr);
+> +			return -EINVAL;
+> +		}
+> +	}
+> +
+> +	if (addr >= (u32 *)ATAGS_PHYS_END ||
+> +	    (tag_h && (addr + tag_h->size > (u32 *)ATAGS_PHYS_END))) {
+> +		debug("End of ATAGS, no DDR_MEM found\n");
+> +		return -ENODATA;
+> +	}
+> +
+> +	/* Data is right after the magic member of the tag_header struct */
+> +	ddr_info = (struct tag_ddr_mem *)(&tag_h->magic + 1);
+> +	if (!ddr_info->count || ddr_info->count > CONFIG_NR_DRAM_BANKS) {
+> +		debug("Too many ATAG banks, got (%d) but max allowed (%d)\n",
+> +		      ddr_info->count, CONFIG_NR_DRAM_BANKS);
+> +		return -ENOMEM;
+> +	}
+> +
+> +	if (!ddr_info->hash) {
+> +		debug("No hash for tag (0x%08x)\n", tag_h->magic);
+> +	} else {
+> +		calc_hash = js_hash(addr, sizeof(u32) * (tag_h->size - 1));
+> +
+> +		if (calc_hash != ddr_info->hash) {
+> +			debug("Incorrect hash for tag (0x%08x), got (0x%08x) expected (0x%08x)\n",
+> +			      tag_h->magic, ddr_info->hash, calc_hash);
+> +			return -EINVAL;
+> +		}
+> +	}
+> +
+> +	/*
+> +	 * Rockchip guaranteed DDR_MEM is ordered so no need to worry about
+> +	 * bi_dram order.
+> +	 */
+> +	for (i = 0, j = 0; i < ddr_info->count; i++, j++) {
+> +		phys_size_t size = ddr_info->bank[(i + ddr_info->count)];
+> +		phys_addr_t start_addr = ddr_info->bank[i];
+> +		struct mm_region *tmp_mem_map = mem_map;
+> +		phys_addr_t end_addr;
+> +
+> +		/*
+> +		 * BL31 (TF-A) reserves the first 2MB but DDR_MEM tag may not
+> +		 * have it, so force this space as reserved.
+> +		 */
+> +		if (start_addr < SZ_2M) {
+> +			size -= SZ_2M - start_addr;
+> +			start_addr = SZ_2M;
+> +		}
+> +
+> +		/*
+> +		 * Put holes for reserved memory areas from mem_map.
+> +		 *
+> +		 * Only check for at most one overlap with one reserved memory
+> +		 * area.
+> +		 */
+> +		while (tmp_mem_map->size) {
+> +			const phys_addr_t rsrv_start = tmp_mem_map->phys;
+> +			const phys_size_t rsrv_size = tmp_mem_map->size;
+> +			const phys_addr_t rsrv_end = rsrv_start + rsrv_size;
+> +
+> +			if (!(tmp_mem_map->attrs & PTE_BLOCK_NON_SHARE)) {
 
-On Tue, Apr 23, 2024 at 03:46:19PM +0200, Caleb Connolly wrote:
+This check does not seem to work because PTE_BLOCK_NON_SHARE evaluates
+to 0. Because of this the logic to split the 0-8 GiB bank reported on
+rk3568 is never split in two.
 
-> Overshot the -rc1 deadline, but I hope these can still make in for 2024.0=
-7.
->=20
-> Support is added for 5 new Qualcomm SoCs:
->=20
-> * QCM2290 and SM6115 are low and mid range SoCs used on the RB1 and RB2
->   respectively. SM6115 is also used in some mid-range smartphones/tablets.
->   Initial support includes buttons and USB (host and gadget).
-> * SM8250 is a flagship SoC from 2020 used on the RB5, as well as many fla=
-gship
->   smartphones. The board can boot to a U-Boot prompt, but is missing regu=
-lators
->   necessary for USB support.
-> * SM8550, and SM8650 are flagship mobile SoCs from 2023 and 2024
->   respectively. Found on many high end smartphones.
->=20
-> In addition:
->=20
-> * Support is added for the Schneider HMIBSC board.
-> * mach-snapdragon switches to OF_UPSTREAM
-> * IPQ40xx gets several regressions fixed and some overall cleanup.
-> * The MSM serial driver gains the ability to generate the bit-clock
->   automatically, no longer relying on a custom DT property.
-> * The Qualcomm SMMU driver gets a generic compatible (so per-SoC compatib=
-les
->   don't need to be added).
-> * Support for the GENI I2C controller is added.
-> * The qcom SPMI driver has SPMI v5 support fixed, and v7 support added.
-> * The qcom sdhci driver gets some fixes for SDCC v5 support.
-> * SDM845 gains sdcard support
-> * Support is added for the Synopsys eUSB2 PHY driver (used on SM8550 and =
-SM8650)
-> * SYS_INIT_SP_BSS_OFFSET is set to 1.5M to give us more space for FDTs.
-> * RB2 gets a work-around to fix the USB dr_mode property before booting L=
-inux.
->=20
+Changing this to e.g.
 
-Applied to u-boot/master, thanks!
+  if (tmp_mem_map->attrs & PTE_BLOCK_INNER_SHARE) {
 
---=20
-Tom
+seem to split the range in two, and Linux kernel can be booted.
 
---si43HQQc/oGc5w39
-Content-Type: application/pgp-signature; name="signature.asc"
+Not sure that is a good check or if that has any other unintended
+consequence.
 
------BEGIN PGP SIGNATURE-----
+Regards,
+Jonas
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYoJpEACgkQFHw5/5Y0
-tyy4WQv/TRvtgOC5hmTOxaIeCrBRtd0blFBRxzBZFCbcB0VOxEW3SM6SNuOwaQ6m
-pQr+TE07ud4itAQc7CFd8MTwn+gMhGXgASG6I0fEetMTTkrr3xcntktfKt079Qrn
-WHrjhxrHApGMxoyuPS1TyoCwphSXhCJ+APHrmkaKUMO4jqWa0+pfqTLn+PZGgGBH
-7VacLzmi6JBRy6Xh9g1gOB8m0eqYsLn518mnuG/96PdbH9lwygEE7C94Dv1XUyDk
-iTzk1xwtB8OvFP0KOTucAr5BMRZOmh3SXE03vF2pufFjXEghEgPsPFMAE2/ycvto
-hacp8Uz6Wro2fQY3E2MT1Vt29yaGfUtDqDLwvIFkFsZjE7liCwcr/br6S0Bl/M3K
-SQd2KhNKsKuLxOAAMQvKTNzPvn2bXFdjIYBwuQavMmPkNr+RuZLKYUGKxfN4fsqI
-FEfq+D3+0loM2gqitggKOe3rUuQwa+gJ+a56gJCyhs4GvsNGHfFExJCGgZnYo/w/
-KF2gbBTo
-=S/vL
------END PGP SIGNATURE-----
+> +				tmp_mem_map++;
+> +				continue;
+> +			}
+> +
+> +			/*
+> +			 * If the start of the DDR_MEM tag is in a reserved
+> +			 * memory area, move start address and resize.
+> +			 */
+> +			if (start_addr >= rsrv_start && start_addr < rsrv_end) {
+> +				if (rsrv_end - start_addr > size) {
+> +					debug("Would be negative memory size\n");
+> +					return -EINVAL;
+> +				}
+> +
+> +				size -= rsrv_end - start_addr;
+> +				start_addr = rsrv_end;
+> +				break;
+> +			}
+> +
+> +			if (start_addr < rsrv_start) {
+> +				end_addr = start_addr + size;
+> +
+> +				if (end_addr <= rsrv_start) {
+> +					tmp_mem_map++;
+> +					continue;
+> +				}
+> +
+> +				/*
+> +				 * If the memory area overlaps a reserved memory
+> +				 * area with start address outside of reserved
+> +				 * memory area and...
+> +				 *
+> +				 * ... ends in the middle of reserved memory
+> +				 * area, resize.
+> +				 */
+> +				if (end_addr <= rsrv_end) {
+> +					size = rsrv_start - start_addr;
+> +					break;
+> +				}
+> +
+> +				/*
+> +				 * ... ends after the reserved memory area,
+> +				 * split the region in two, one for before the
+> +				 * reserved memory area and one for after.
+> +				 */
+> +				gd->bd->bi_dram[j].start = start_addr;
+> +				gd->bd->bi_dram[j].size = rsrv_start - start_addr;
+> +
+> +				j++;
+> +
+> +				size = end_addr - rsrv_end;
+> +				start_addr = rsrv_end;
+> +
+> +				break;
+> +			}
+> +		}
+> +
+> +		if (j > CONFIG_NR_DRAM_BANKS) {
+> +			debug("Too many banks, max allowed (%d)\n",
+> +			      CONFIG_NR_DRAM_BANKS);
+> +			return -ENOMEM;
+> +		}
+> +
+> +		gd->bd->bi_dram[j].start = start_addr;
+> +		gd->bd->bi_dram[j].size = size;
+> +	}
+> +
+> +	return 0;
+> +}
+> +
+>  int dram_init_banksize(void)
+>  {
+>  	size_t ram_top = (unsigned long)(gd->ram_size + CFG_SYS_SDRAM_BASE);
+>  	size_t top = min((unsigned long)ram_top, (unsigned long)(gd->ram_top));
+>  
+>  #ifdef CONFIG_ARM64
+> +	int ret = rockchip_dram_init_banksize();
+> +
+> +	if (!ret)
+> +		return ret;
+> +
+> +	debug("Couldn't use ATAG (%d) to detect DDR layout, falling back...\n",
+> +	      ret);
+> +
+>  	/* Reserve 0x200000 for ATF bl31 */
+>  	gd->bd->bi_dram[0].start = 0x200000;
+>  	gd->bd->bi_dram[0].size = top - gd->bd->bi_dram[0].start;
+> 
 
---si43HQQc/oGc5w39--
