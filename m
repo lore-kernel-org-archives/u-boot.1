@@ -4,78 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BF62C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 09:15:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 348B6C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 09:15:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 412028857C;
-	Tue, 23 Apr 2024 11:14:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B78348850E;
+	Tue, 23 Apr 2024 11:15:53 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ktZo2iz/";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="hc0PBYmx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF19D8856A; Tue, 23 Apr 2024 11:14:54 +0200 (CEST)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 84AB288562; Tue, 23 Apr 2024 11:15:53 +0200 (CEST)
+Received: from mail-m19731112.qiye.163.com (mail-m19731112.qiye.163.com
+ [220.197.31.112])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4F0B8850E
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 11:14:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BCA0188497
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 11:15:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-2d895e2c6efso81641451fa.0
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 02:14:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713863692; x=1714468492; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ma7fdDmeQVtaHMmRRjmc4GRgfEM4iHODxoVvP0xiiu0=;
- b=ktZo2iz/AglTysw2PhfLXgpy5YWcdN5RFr3nE7oqfJdJprIBfmaSCj6OSQq/zxnZ30
- yhSzeRcLnoc9ucEjZsTnv09gAWpBiljggYcmWzlz1S3Z/52dBNF4gtb/NOvmrJqyc5CY
- rkdCF2eCU1GlSShqpaE1ApBsPVYeuSIW+hIaepsm8qHfGATPwUu+kKCUxfc96ruQvVV/
- lazDn+kUh4V9nHtoVhnzMv1gistmW++09lgiKxy2a8tKQxSmPScCQtOI1/qYYpbeQlBm
- +TXTxLV/GXwh+fX4Ep8F02qFrryEo9yHN9EdCQskAoCoTZCo4qonr/z/Eg9kqZ7sVs25
- Efrw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713863692; x=1714468492;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Ma7fdDmeQVtaHMmRRjmc4GRgfEM4iHODxoVvP0xiiu0=;
- b=xL9SX6YXA9Yip+NyzjftmFv4yKq/1GRrX0rceSl61CurAEYjz8Z5c7867UGChCBRzu
- 668BH/yz7uJBc+y5iiRJquSYQJ1II/lLt/tBdQwlC8T1Sa+oXNLgO2NMaen9NpBQ4OZK
- 6In3hgbKi4amSl+zzE66As8jR8qqkSSndDvp3v5jwGMGRV8R1Wr6Zrwjp8q4YRYWDWlC
- LSMW4Cih8q4C8qJy/6f/iQ+kXjn8nE6NWzteafzW+Cu1HeBB6iavxPRVZUsIhJlrhOIq
- yHoiQhWqb3QCv+wzf6k3PK7W/Ou0n3z3OEgAxKwXpmfzUGhToGlJQbvvlpmrhZ2s83kL
- SzKg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCViQqVOIbRdUITRy0bvqzsmAQoOPz8Kq9pKGTjsVWPKDvJa+mJ/lhPffK36JjyVaXIVhZqtpj36U2dsE4Os8QyA2FOoJg==
-X-Gm-Message-State: AOJu0YxI5pLX8uwayfPS96pkh8sREMy+qzG0VZtsR9kBzA1Ez2Rolr5F
- 8xvfl715Yk53t2Yp3CpoInEkTj4ke5GDNOkWgJBAkv8shkQEuv6MMk8WoH9dgustZUGSPICti2i
- uXuQyZs8OIc19uEKt+GViD6ICAO48W463IJea0w==
-X-Google-Smtp-Source: AGHT+IG1fDBbCwpKX3l/1YyHsr0rrqqS/gs5RzQntD3BJQZf3yNGqc1cHm4CMoUxLd5/WFDtx3q8s1pqN5ZeMktjEcc=
-X-Received: by 2002:a05:651c:2c3:b0:2da:78e:f766 with SMTP id
- f3-20020a05651c02c300b002da078ef766mr6688388ljo.38.1713863691889; Tue, 23 Apr
- 2024 02:14:51 -0700 (PDT)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=hc0PBYmxcJkhnmXNMOPA4AhC/7pm17247cQeXqcWPaObxPCrVjhAVlmpg7rF7KIqzAYsyjAHekZZQzQ5toP07X5W8aldS8ecoWtEewRQsdMmf8RdasbAYQ4UOiiqsFgAnrnIEJlgGyGtPgPCOHoBe+TWpGEuinFnZLDg4pOKckg=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+ bh=eMQUEPA3auC24wcLa+yuEIzXk1RMU9uXaZFjdIMwm+Y=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.33.226] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id C5E6B90030E;
+ Tue, 23 Apr 2024 17:15:30 +0800 (CST)
+Message-ID: <56e51c60-d8d3-482a-927b-f8d69eed8030@rock-chips.com>
+Date: Tue, 23 Apr 2024 17:15:30 +0800
 MIME-Version: 1.0
-References: <20240419065542.1160527-1-sughosh.ganu@linaro.org>
- <20240419065542.1160527-3-sughosh.ganu@linaro.org>
- <7361ddbc-6ef5-47cf-9369-53b72ec5bab7@gmx.de>
-In-Reply-To: <7361ddbc-6ef5-47cf-9369-53b72ec5bab7@gmx.de>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Tue, 23 Apr 2024 14:44:40 +0530
-Message-ID: <CADg8p95BMCc6naxvgy+Wrv6v8rNZ4MKGLuV8RorewbaC-9LqvA@mail.gmail.com>
-Subject: Re: [PATCH v2 2/4] doc: Document capsule generation through a config
- file
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 11/14] rockchip: rk3308-evb: Update defconfig
+To: Jonas Karlman <jonas@kwiboo.se>, Andy Yan <andy.yan@rock-chips.com>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Akash Gajjar <gajjar04akash@gmail.com>, u-boot@lists.denx.de
+References: <20240408181429.3676856-1-jonas@kwiboo.se>
+ <20240408181429.3676856-12-jonas@kwiboo.se>
+ <e81a920d-e8db-4e98-a221-ea13e00c8937@rock-chips.com>
+ <2e7b6321-982a-4a87-8ca4-4a2d094c49c9@kwiboo.se>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <2e7b6321-982a-4a87-8ca4-4a2d094c49c9@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGklJS1ZCHktPT0oeTU5LQh5VEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8f0a3d27f803a9kunmc5e6b90030e
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PVE6MQw5QjNJHD4*NjUjL08h
+ K09PCUNVSlVKTEpIQ01ITEhKTEhMVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFNTE9MNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,177 +77,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-hi Heinrich,
+Hi Jonas,
 
-On Fri, 19 Apr 2024 at 13:01, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On 2024/4/22 17:16, Jonas Karlman wrote:
+> Hi Kever,
 >
-> On 19.04.24 08:55, Sughosh Ganu wrote:
-> > The UEFI capsule can now be generated by specifying the capsule
-> > parameters through a config file. Highlight these changes in the
-> > documentation.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> >   doc/develop/uefi/uefi.rst | 70 +++++++++++++++++++++++++++++++++++++++
-> >   1 file changed, 70 insertions(+)
-> >
-> > diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-> > index 0389b269c0..8586127a83 100644
-> > --- a/doc/develop/uefi/uefi.rst
-> > +++ b/doc/develop/uefi/uefi.rst
-> > @@ -318,6 +318,76 @@ Run the following command
-> >         --guid <image GUID> \
-> >         <capsule_file_name>
+> On 2024-04-22 10:50, Kever Yang wrote:
+>> Hi Jonas,
+>>
+>> On 2024/4/9 02:14, Jonas Karlman wrote:
+>>> Update defconfig for rk3308-evb with new defaults.
+>>>
+>>> Add OF_LIBFDT_OVERLAY=y to support device tree overlays.
+>>>
+>>> Remove the SPL_DRIVERS_MISC=y option, no misc driver is used in SPL.
+>>>
+>>> Use DEBUG_UART_BASE=0xFF0E0000 and disable DEBUG_UART_BOARD_INIT to
+>>> make debug uart use uart4, same as stdout-path prop.
+>> Why this change happen? I think rk3308-evb is using UART2 on 0xFF0C0000.
+>>
+> The device tree both used in U-Boot [1] and Linux [2] both use:
 >
-> The users deserve a man-page mkeficapsule.1 that can be installed by
-> distros as /usr/share/doc/man/man1/mkeficapsule.1.
+>    stdout-path = "serial4:1500000n8"
 >
-> Do not expect the user to look up the information online.
+> and only enable the uart4 node. Yet the defconfig in U-Boot use a
+> DEBUG_UART_BASE for uart2 instead of uart4.
 
-Will add a man-page.
+Thanks for this info, rk3308b evb which is for customer do use the uart4 
+instead of uart2.
 
->
-> >
-> > +Alternatively, the capsules can be generated through a config
-> > +file. When generating the capsules through a config file, the Kconfig
-> > +symbol CONFIG_EFI_CAPSULE_CFG_FILE is to be used for specifying the
-> > +path to the config file.
->
-> Why do we need CONFIG_EFI_CAPSULE_CFG_FILE? You could use a fixed path
-> or an environment parameter.
+Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-Will remove the config flags.
+Thanks,
+- Kever
 
 >
-> > +
-> > +The config file describes the parameters that are used for generating
-> > +one or more capsules. The parameters for a given capsule file are
-> > +specified within curly braces, in the form of "key:value" pairs. All
-> > +the parameters that are currently supported by the mkeficapsule tool
-> > +can be specified through the config file.
-> > +
-> > +The following are some example payload parameters specified through
-> > +the config file.
-> > +
-> > +.. code-block:: none
-> > +
-> > +     {
-> > +         image-guid: 02f4d760-cfd5-43bd-8e2d-a42acb33c660
-> > +         hardware-instance: 0
-> > +         monotonic-count: 1
-> > +         payload: u-boot.bin
-> > +         image-index: 1
-> > +         fw-version: 2
-> > +         private-key: /path/to/priv/key
-> > +         pub-key-cert: /path/to/pub/key
-> > +         capsule: u-boot.capsule
-> > +     }
-> > +     {
-> > +         image-guid: 4ce292da-1dd8-428d-a1c2-77743ef8b96e
-> > +         hardware-instance: 0
-> > +         payload: u-boot.itb
-> > +         image-index: 2
-> > +         fw-version: 7
-> > +         oemflags: 0x8000
-> > +         capsule: fit.capsule
-> > +     }
-> > +     {
-> > +         capsule-type: accept
-> > +         image-guid: 4ce292da-1dd8-428d-a1c2-77743ef8b96e
-> > +         capsule: accept.capsule
-> > +     }
-> > +     {
-> > +         capsule-type: revert
-> > +         capsule: revert.capsule
-> > +     }
+> Having U-Boot defconfig matching the upstream device tree seem like a
+> good thing, but maybe the device tree is wrong?
 >
-> Is this one file? Are these multiple files? If these are multiple files,
-> please, put them in different code blocks.
-
-These are multiple files. But eventually, we will be using this
-feature to generate a multi-payload capsule. Again, this is on similar
-lines to how this is done with the EDKII script.
-
+> [1] https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/rk3308-evb.dts
+> [2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/boot/dts/rockchip/rk3308-evb.dts
 >
-> What are the curly braces good for? Please, use an established file
-> format like YAML or JSON.
-
-As discussed over IRC, I will check if I can use the YAML format and
-keep the format similar to the one used above -- in key:value pairs. I
-would prefer keeping the format similar to what is used in the EDKII
-capsule generation tool. But if I can use the mapping node type in
-YAML for providing this information, I will explore using YAML with
-the libcyaml library for parsing the configs.
+> Regards,
+> Jonas
 >
-> > +
-> > +The following are the keys that specify the capsule parameters
-> > +
-> > +..code-block:: none
-> > +
-> > +    image-guid: Image GUID
->
-> Please use the following formatting:
->
-> image-guid
->      Image GUID
->
-> fw-version
->      Image version
-
-I have kept the format similar to what is used in EDKII.
-
->
-> > +    image-index: Image index value
-> > +    fw-version: Image version
-> > +    private-key: Path to the private key file used for capsule signing
-> > +    pub-key-cert: Path to the public key crt file used for capsule signing
-> > +    payload: Path to the capsule payload file
-> > +    capsule: Path to the output capsule file that is generated
-> > +    hardware-instance: Hardware Instance value
->
-> Please, explain what a hardware instance is.
-
-Okay
-
->
-> > +    monotonic-count: Monotonic count value
->
-> Please, explain what it is used for.
-
-Okay
-
->
-> > +    capsule-type: Specifies capsule type. normal(default), accept or revert
->
-> ditto
->
-> > +    oemflags: 16bit Oemflags value to be used(populated in capsule header)
->
-> ditto
->
-> > +
-> > +When generating capsules through a config file, the command would look
-> > +like
-> > +
-> > +.. code-block:: console
-> > +
-> > +    $ mkeficapsule --cfg-file </path/to/the/config/file>
->
-> All available command line parameters of mkeficapsule should be
-> described in one place.
-
-Will fix
-
--sughosh
-
->
-> Best regards
->
-> Heinrich
->
-> > +
-> > +
-> >   Capsule with firmware version
-> >   *****************************
-> >
->
+>> Thanks,
+>>
+>> - Kever
+>>
+>>> Remove BOOTDELAY=0, SYS_CONSOLE_INFO_QUIET=y and enable more CMD to
+>>> allow use of U-Boot cmdline.
+>>>
+>>> Add DM_ETH_PHY=y and PHY_REALTEK=y to support onboard ethernet PHY.
+>>>
+>>> Add PHY_ROCKCHIP_INNO_USB2=y, DM_USB_GADGET=y and remove USB_DWC2=y to
+>>> allow full use of USB 2.0 host and otg ports.
+>>>
+>>> Enable EFI_LOADER to allow EFI boot.
+>>>
+>>> Signed-off-by: Jonas Karlman<jonas@kwiboo.se>
+>>> ---
+>>> v2: Fix DEBUG_UART_BASE and disable DEBUG_UART_BOARD_INIT
+>>> ---
+>>>    configs/evb-rk3308_defconfig | 37 +++++++++++++++---------------------
+>>>    1 file changed, 15 insertions(+), 22 deletions(-)
+>>>
+>>> diff --git a/configs/evb-rk3308_defconfig b/configs/evb-rk3308_defconfig
+>>> index 9dc7d9c0caea..04a94e13a68a 100644
+>>> --- a/configs/evb-rk3308_defconfig
+>>> +++ b/configs/evb-rk3308_defconfig
+>>> @@ -3,41 +3,32 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+>>>    CONFIG_COUNTER_FREQUENCY=24000000
+>>>    CONFIG_ARCH_ROCKCHIP=y
+>>>    CONFIG_DEFAULT_DEVICE_TREE="rk3308-evb"
+>>> +CONFIG_OF_LIBFDT_OVERLAY=y
+>>>    CONFIG_DM_RESET=y
+>>>    CONFIG_ROCKCHIP_RK3308=y
+>>> -CONFIG_SPL_DRIVERS_MISC=y
+>>>    CONFIG_TARGET_EVB_RK3308=y
+>>> -CONFIG_DEBUG_UART_BASE=0xFF0C0000
+>>> +CONFIG_DEBUG_UART_BASE=0xFF0E0000
+>>>    CONFIG_DEBUG_UART_CLOCK=24000000
+>>> +# CONFIG_DEBUG_UART_BOARD_INIT is not set
+>>>    CONFIG_SYS_LOAD_ADDR=0xc00800
+>>>    CONFIG_DEBUG_UART=y
+>>>    CONFIG_ANDROID_BOOT_IMAGE=y
+>>>    CONFIG_FIT=y
+>>>    CONFIG_FIT_VERBOSE=y
+>>> -CONFIG_BOOTDELAY=0
+>>>    CONFIG_DEFAULT_FDT_FILE="rockchip/rk3308-evb.dtb"
+>>> -CONFIG_SYS_CONSOLE_INFO_QUIET=y
+>>>    # CONFIG_DISPLAY_CPUINFO is not set
+>>> -CONFIG_SPL_MAX_SIZE=0x20000
+>>> +CONFIG_SPL_MAX_SIZE=0x40000
+>>>    CONFIG_SPL_PAD_TO=0x7f8000
+>>>    # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+>>> -# CONFIG_CMD_BDI is not set
+>>> -# CONFIG_CMD_CONSOLE is not set
+>>> -# CONFIG_CMD_ELF is not set
+>>> -# CONFIG_CMD_IMI is not set
+>>> -# CONFIG_CMD_XIMG is not set
+>>> +CONFIG_CMD_GPIO=y
+>>>    CONFIG_CMD_GPT=y
+>>> -# CONFIG_CMD_LOADB is not set
+>>> -# CONFIG_CMD_LOADS is not set
+>>>    CONFIG_CMD_MMC=y
+>>>    CONFIG_CMD_USB=y
+>>> +CONFIG_CMD_ROCKUSB=y
+>>>    CONFIG_CMD_USB_MASS_STORAGE=y
+>>> -# CONFIG_CMD_ITEST is not set
+>>> -# CONFIG_CMD_SETEXPR is not set
+>>> -# CONFIG_CMD_SLEEP is not set
+>>> -# CONFIG_SPL_DOS_PARTITION is not set
+>>> -# CONFIG_ISO_PARTITION is not set
+>>> -CONFIG_EFI_PARTITION_ENTRIES_NUMBERS=64
+>>> +CONFIG_CMD_RNG=y
+>>> +CONFIG_CMD_KASLRSEED=y
+>>> +CONFIG_CMD_REGULATOR=y
+>>>    CONFIG_SPL_OF_CONTROL=y
+>>>    CONFIG_OF_LIVE=y
+>>>    CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+>>> @@ -51,9 +42,11 @@ CONFIG_SYS_I2C_ROCKCHIP=y
+>>>    CONFIG_SUPPORT_EMMC_RPMB=y
+>>>    CONFIG_MMC_DW=y
+>>>    CONFIG_MMC_DW_ROCKCHIP=y
+>>> +CONFIG_PHY_REALTEK=y
+>>> +CONFIG_DM_ETH_PHY=y
+>>>    CONFIG_ETH_DESIGNWARE=y
+>>>    CONFIG_GMAC_ROCKCHIP=y
+>>> -CONFIG_PHY=y
+>>> +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
+>>>    CONFIG_PINCTRL=y
+>>>    CONFIG_REGULATOR_PWM=y
+>>>    CONFIG_DM_REGULATOR_FIXED=y
+>>> @@ -62,15 +55,15 @@ CONFIG_RAM=y
+>>>    CONFIG_BAUDRATE=1500000
+>>>    CONFIG_DEBUG_UART_SHIFT=2
+>>>    CONFIG_SYS_NS16550_MEM32=y
+>>> +CONFIG_SYSINFO=y
+>>>    CONFIG_SYSRESET=y
+>>>    CONFIG_USB=y
+>>> +CONFIG_DM_USB_GADGET=y
+>>>    CONFIG_USB_EHCI_HCD=y
+>>>    CONFIG_USB_EHCI_GENERIC=y
+>>> -CONFIG_USB_DWC2=y
+>>>    CONFIG_USB_GADGET=y
+>>>    CONFIG_USB_GADGET_DWC2_OTG=y
+>>>    CONFIG_USB_GADGET_DOWNLOAD=y
+>>> -CONFIG_SPL_TINY_MEMSET=y
+>>> +CONFIG_USB_FUNCTION_ROCKUSB=y
+>>>    CONFIG_LZO=y
+>>>    CONFIG_ERRNO_STR=y
+>>> -# CONFIG_EFI_LOADER is not set
