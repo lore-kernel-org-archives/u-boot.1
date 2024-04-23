@@ -4,62 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AA53C16B13
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:09:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38518C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:09:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 259198857A;
-	Tue, 23 Apr 2024 13:09:26 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 89DBB8856A;
+	Tue, 23 Apr 2024 13:09:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Gwg/BEzw";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="AX2udNYX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5B12884F0; Tue, 23 Apr 2024 13:09:24 +0200 (CEST)
-Received: from mail-m127171.xmail.ntesmail.com
- (mail-m127171.xmail.ntesmail.com [115.236.127.171])
+ id ED5428859A; Tue, 23 Apr 2024 13:09:31 +0200 (CEST)
+Received: from mail-m121147.qiye.163.com (mail-m121147.qiye.163.com
+ [115.236.121.147])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 202D78855D
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:09:21 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 19CA98856A
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:09:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=Gwg/BEzwGoLqFlIVZLHpEs7Sbvq+H45atMZ38mDRROSC459LWXnFN7MyLdSiEtWbWEzJrYSeSQghxehLJFubsqzYhf5Gkk3UTNXD2sHmP/b6uu/xwmtw1govuUOnSzvTy7ec52mhFrpJ+JnM63fvhqo89zXBRzeo0gYvwh6OX5w=;
+ b=AX2udNYX3VJkvDcq0sb9QM5kD5QeUBLqdHsfy8TF0sBDI0nz8sKb85+t1x/kQz8P997/xDaI3SmR+lV+k4jky9xcciN4VhykTCAn/cFab6k1DUHNKxvASpAULzpQw//hExL+If/NEs6LybaKKX/+gT3uAnYiS2nDRbAkCSohf44=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=N1R0pzMG1Zih1qxa1P8YCBtKe4vAliSHwISOgSI4zH4=;
+ bh=PYkklt83xfs8BaQ+OOcTtBs39m1jIo1/k5H5IdVjWL0=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.33.226] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 08E14900341;
- Tue, 23 Apr 2024 19:09:10 +0800 (CST)
-Message-ID: <13f5dea4-d85e-459f-93c8-61f5a2ff1fc2@rock-chips.com>
-Date: Tue, 23 Apr 2024 19:09:10 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 356DD900266;
+ Tue, 23 Apr 2024 19:09:17 +0800 (CST)
+Message-ID: <3849d0c3-47df-412c-83ea-bc7338348244@rock-chips.com>
+Date: Tue, 23 Apr 2024 19:09:17 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 19/31] rockchip: rk3399-eaidk-610: Sync device tree from
- linux v6.8
+Subject: Re: [PATCH 20/31] rockchip: rk3399-leez: Sync device tree from linux
+ v6.8
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  Andy Yan <andy.yan@rock-chips.com>
 Cc: u-boot@lists.denx.de
 References: <20240331202921.262323-1-jonas@kwiboo.se>
- <20240331202921.262323-20-jonas@kwiboo.se>
+ <20240331202921.262323-21-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240331202921.262323-20-jonas@kwiboo.se>
+In-Reply-To: <20240331202921.262323-21-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQxgaHlZPSU9JS09JT00fHklVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQh8fHVZLTUlDSUlLHUxJSxpVEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8f0aa539cd03a9kunm08e14900341
+X-HM-Tid: 0a8f0aa555e103a9kunm356dd900266
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6M1E6Lzo6GjNJKj0IEjdWHxFD
- Tw8KCz1VSlVKTEpIQ0xLTk5KQkhKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPTU1LNwY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBA6Chw4OTNOGD0jKDEWHxIr
+ HS8aCVZVSlVKTEpIQ0xLTk5CS0xKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOSEJINwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,7 +78,7 @@ X-Virus-Status: Clean
 
 
 On 2024/4/1 04:28, Jonas Karlman wrote:
-> Sync rk3399-eaidk-610 device tree from linux v6.8.
+> Sync rk3399-leez-p710 device tree from linux v6.8.
 >
 > Add DM_RESET=y to support reset signals.
 >
@@ -92,8 +92,6 @@ On 2024/4/1 04:28, Jonas Karlman wrote:
 >
 > Add PHY_ROCKCHIP_INNO_USB2=y and PHY_ROCKCHIP_TYPEC=y to support USB PHY.
 >
-> Remove REGULATOR_PWM=y, board does not use pwm-regulator compatible.
->
 > Remove SPL_TINY_MEMSET=y to use full memset in SPL.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
@@ -102,23 +100,54 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   arch/arm/dts/rk3399-eaidk-610.dts  |  3 ++-
->   configs/eaidk-610-rk3399_defconfig | 11 ++++++++---
->   2 files changed, 10 insertions(+), 4 deletions(-)
+>   arch/arm/dts/rk3399-leez-p710.dts |  8 +++++---
+>   configs/leez-rk3399_defconfig     | 10 ++++++++--
+>   2 files changed, 13 insertions(+), 5 deletions(-)
 >
-> diff --git a/arch/arm/dts/rk3399-eaidk-610.dts b/arch/arm/dts/rk3399-eaidk-610.dts
-> index d1f343345f67..173da81fc231 100644
-> --- a/arch/arm/dts/rk3399-eaidk-610.dts
-> +++ b/arch/arm/dts/rk3399-eaidk-610.dts
-> @@ -15,6 +15,7 @@
->   	compatible = "openailab,eaidk-610", "rockchip,rk3399";
+> diff --git a/arch/arm/dts/rk3399-leez-p710.dts b/arch/arm/dts/rk3399-leez-p710.dts
+> index 7c93f840bc64..cb69e2145fa9 100644
+> --- a/arch/arm/dts/rk3399-leez-p710.dts
+> +++ b/arch/arm/dts/rk3399-leez-p710.dts
+> @@ -5,6 +5,7 @@
+>   
+>   /dts-v1/;
+>   #include <dt-bindings/input/linux-event-codes.h>
+> +#include <dt-bindings/interrupt-controller/irq.h>
+>   #include <dt-bindings/pwm/pwm.h>
+>   #include "rk3399.dtsi"
+>   #include "rk3399-opp.dtsi"
+> @@ -14,6 +15,7 @@
+>   	compatible = "leez,p710", "rockchip,rk3399";
 >   
 >   	aliases {
 > +		ethernet0 = &gmac;
 >   		mmc0 = &sdio0;
 >   		mmc1 = &sdmmc;
 >   		mmc2 = &sdhci;
-> @@ -773,7 +774,7 @@
+> @@ -55,7 +57,7 @@
+>   		regulator-boot-on;
+>   		regulator-min-microvolt = <3300000>;
+>   		regulator-max-microvolt = <3300000>;
+> -		vim-supply = <&vcc3v3_sys>;
+> +		vin-supply = <&vcc3v3_sys>;
+>   	};
+>   
+>   	vcc3v3_sys: vcc3v3-sys {
+> @@ -102,12 +104,12 @@
+>   	vdd_log: vdd-log {
+>   		compatible = "pwm-regulator";
+>   		pwms = <&pwm2 0 25000 1>;
+> +		pwm-supply = <&vcc5v0_sys>;
+>   		regulator-name = "vdd_log";
+>   		regulator-always-on;
+>   		regulator-boot-on;
+>   		regulator-min-microvolt = <800000>;
+>   		regulator-max-microvolt = <1400000>;
+> -		vin-supply = <&vcc5v0_sys>;
+>   	};
+>   };
+>   
+> @@ -509,7 +511,7 @@
 >   		compatible = "brcm,bcm4329-fmac";
 >   		reg = <1>;
 >   		interrupt-parent = <&gpio0>;
@@ -127,28 +156,28 @@ Thanks,
 >   		interrupt-names = "host-wake";
 >   		pinctrl-names = "default";
 >   		pinctrl-0 = <&wifi_host_wake_l>;
-> diff --git a/configs/eaidk-610-rk3399_defconfig b/configs/eaidk-610-rk3399_defconfig
-> index eba6f90c605b..d9cde9ecced5 100644
-> --- a/configs/eaidk-610-rk3399_defconfig
-> +++ b/configs/eaidk-610-rk3399_defconfig
+> diff --git a/configs/leez-rk3399_defconfig b/configs/leez-rk3399_defconfig
+> index 13453e523444..903125aa5c1d 100644
+> --- a/configs/leez-rk3399_defconfig
+> +++ b/configs/leez-rk3399_defconfig
 > @@ -5,6 +5,7 @@ CONFIG_ARCH_ROCKCHIP=y
 >   CONFIG_NR_DRAM_BANKS=1
 >   CONFIG_ENV_OFFSET=0x3F8000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3399-eaidk-610"
+>   CONFIG_DEFAULT_DEVICE_TREE="rk3399-leez-p710"
 > +CONFIG_DM_RESET=y
 >   CONFIG_ROCKCHIP_RK3399=y
 >   CONFIG_TARGET_EVB_RK3399=y
 >   CONFIG_DEBUG_UART_BASE=0xFF1A0000
 > @@ -13,7 +14,7 @@ CONFIG_SYS_LOAD_ADDR=0x800800
 >   CONFIG_DEBUG_UART=y
->   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-eaidk-610.dtb"
+>   CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-leez-p710.dtb"
 >   CONFIG_DISPLAY_BOARDINFO_LATE=y
 > -CONFIG_SPL_MAX_SIZE=0x2e000
 > +CONFIG_SPL_MAX_SIZE=0x40000
 >   CONFIG_SPL_PAD_TO=0x7f8000
 >   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
 >   CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
-> @@ -30,14 +31,19 @@ CONFIG_ENV_IS_IN_MMC=y
+> @@ -30,12 +31,18 @@ CONFIG_ENV_IS_IN_MMC=y
 >   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
 >   CONFIG_ROCKCHIP_GPIO=y
 >   CONFIG_SYS_I2C_ROCKCHIP=y
@@ -165,13 +194,11 @@ Thanks,
 > +CONFIG_PHY_ROCKCHIP_INNO_USB2=y
 > +CONFIG_PHY_ROCKCHIP_TYPEC=y
 >   CONFIG_PMIC_RK8XX=y
-> -CONFIG_REGULATOR_PWM=y
+>   CONFIG_REGULATOR_PWM=y
 >   CONFIG_REGULATOR_RK8XX=y
->   CONFIG_PWM_ROCKCHIP=y
->   CONFIG_BAUDRATE=1500000
-> @@ -50,5 +56,4 @@ CONFIG_USB_EHCI_HCD=y
->   CONFIG_USB_EHCI_GENERIC=y
->   CONFIG_USB_DWC3=y
->   CONFIG_USB_DWC3_GENERIC=y
+> @@ -57,5 +64,4 @@ CONFIG_USB_ETHER_ASIX88179=y
+>   CONFIG_USB_ETHER_MCS7830=y
+>   CONFIG_USB_ETHER_RTL8152=y
+>   CONFIG_USB_ETHER_SMSC95XX=y
 > -CONFIG_SPL_TINY_MEMSET=y
 >   CONFIG_ERRNO_STR=y
