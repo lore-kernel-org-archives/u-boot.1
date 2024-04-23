@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EA86C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 12:41:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 167A2C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 12:42:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C481C88504;
-	Tue, 23 Apr 2024 14:41:19 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8E8888859B;
+	Tue, 23 Apr 2024 14:42:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="I3LofmKL";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Rxg4JaX3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1513E8851D; Tue, 23 Apr 2024 14:41:19 +0200 (CEST)
-Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com
- [IPv6:2607:f8b0:4864:20::536])
+ id 2DDC88859C; Tue, 23 Apr 2024 14:42:23 +0200 (CEST)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4B3C9884EC
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 14:41:16 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F964884EC
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 14:42:20 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pg1-x536.google.com with SMTP id
- 41be03b00d2f7-5f803c625c2so257711a12.3
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 05:41:16 -0700 (PDT)
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2ab48c11534so978507a91.2
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 05:42:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713876075; x=1714480875; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1713876139; x=1714480939; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=jcKh2JMzC99lmuckLnTwORfhhZQ8qkZ17PR+cPErnbE=;
- b=I3LofmKLnjE9GpkBEOSZIHao5W8mqw5QwYu8WPaRE1Q9hXAcxZJnNu4hNLCEr71rjL
- EJBAyNVO4RadkLbzqWwWyTYguYb+/0z1uSr2J2REwQrU3g2DOMxK6+6DFRfItuYL+0Kz
- bwiFdPoAqnXmBEnqhQMwdnuiZtNc4mOOohEKSP5v6Vswcp+xOXc1fwZQLlnbqljopnWV
- sSAFPUnmJPH7yXlAZuPaVdwhxyja7Cpo+7kEGNQha259Lq7vaH2FUsguAiXSkcTD3Fyn
- /4T5q5IvBjhT88IUDrdtbPY/0AmO6JWqebS8gq6OqqhlRKU62Ga++PvP3eeJhjJg4QoA
- 7mHA==
+ bh=gpnK8xOnxGvR3NiXeB5eGmGcvS8wrQ/kzK1gnzjOHno=;
+ b=Rxg4JaX3u+eDns3KVixJs2WTABmCDdL4iONNaZl5siFwOrzFvUYvJKG7cJzkk2YXOu
+ IuHMGH0onTj3BY8vvsyiaKWLjqUcZ9Ub+E1ooivRELtnKilbSxQa7rZRURmObGY9/mzg
+ ITwDmpoCs//0TMFlKWJx5nVslnUEyji76KGSfQidv8ZwH5NpWC/amrhbDRKRBhOVEBRm
+ +tZrF/J4Zoq7JuITYE3ADE1mANWE/C0iyAG6IKIWqc5jvBWKStTnEStprOgHTHIe7u/D
+ W5TPxsLf9OJnu0Q3Sl81ZMewz75djwqYbaXlbIBwJ/P4UGixDolkUxOq3odBQcnWGDxS
+ 0Bzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713876075; x=1714480875;
+ d=1e100.net; s=20230601; t=1713876139; x=1714480939;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=jcKh2JMzC99lmuckLnTwORfhhZQ8qkZ17PR+cPErnbE=;
- b=jDUiPbRGbcGlnwjRntNib7x0Sney++p2GKYhrr1Zm9hArUQP+IJ2lmFxyqTOEx+tSo
- w2enmglbN1dNr7hqzEOYYS1ln37UpsbEzLOTik2QyZf8ICd0dUatLKYQFvBNDUPI2mp1
- 7YKbAEDFs/XT5GxfUgOtaC4qwsy831UlIuGYS07m2r+9eZnfnSbnKOpfDq0tNw04/en9
- ubWJQE6izTkyayRJrdtf8qUt+cU2PF3qMeisJZRXws1in9dxKFW+1gkhOarOqp/dHpMh
- 4py7J3esXI2908MIovNZG1gYEridxLpXyw6ZqB0AmeboS9HaIIIQlGz9vXd5ziax0HGF
- 9JvQ==
+ bh=gpnK8xOnxGvR3NiXeB5eGmGcvS8wrQ/kzK1gnzjOHno=;
+ b=vM/dS9HL0p/5F2fLVcacrRwyNwDWDHSrNsQLA1XegfWnVh/+1VMghrLPdgAJB4M8D8
+ 7h3mQauT+JQ8OUji/AbMxdVrd0sbypgvMOaNtT+akscQHiq3L2jGB+B9lzQNYOejXVuj
+ qyLauMRFf/mBQAE0zyasCQW/V7BnfSg5ZpAwWZQP2es3doGfAW17Wb5eGCfBgJNkeGCu
+ iUe84+KziYLNXoutNX/JvCuZMrcPFAYsrr+R/O+iriaw+JMkZ0ATjz4+rwoKxy9ftvJ+
+ VaVeF8WThL5xsdn6CJAao0I388/5J9luQcX2iYgRJ0BpyYtOubWqLZET0+dE2EN4wd5E
+ dyvw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXrrxG6PkuxfrVpLsDDGiHYfilA9TDD/O5IFxIWw454tvE+1sea1hlrI0gmXalWXGDz77eYwUSwRmI8ZcEfoRRNLaPGKQ==
-X-Gm-Message-State: AOJu0YzR+nA17PBpcN0Op4RzyjRcmxFKNsS8Ce0pBraHFB3w86w6W+4j
- YPYTN4IeqtGKP2HAcSBdw50iO5iMarzk9V8vTrq9GEOBYth3rmJhB67feQ==
-X-Google-Smtp-Source: AGHT+IFccajnaDJOVcJRfaSrTBjGo77YLlUkeL9koUn39bRFtPojojIYtKpkphSVc8+lPVfm6MPrSA==
-X-Received: by 2002:a05:6a20:1584:b0:1ad:34f9:4c2b with SMTP id
- h4-20020a056a20158400b001ad34f94c2bmr6965571pzj.6.1713876074589; 
- Tue, 23 Apr 2024 05:41:14 -0700 (PDT)
+ AJvYcCXRdSSeM5ZHTvurmBmoFt2/WJDjkKwUbA6UaAzYppI+gCiG1QNzSEZhdWv5RTRfdezTBcheQndV05nFI7AstIGCV/T1/A==
+X-Gm-Message-State: AOJu0YxC0sRM7pUptCay2KtyMPC5wlbrePSTFd3PN1aA0pVqtab6Xcl0
+ qnW27+u4LhZwyH8zmPZvJOe+URGMQskAqITJIZBcyvJK4QZKwC0M
+X-Google-Smtp-Source: AGHT+IGQOFlRSa26Rr0e28hlY67ZpDsZbu4KCJDoxPV7NVOZKeWSCmYqiz9qSdMWYAHbP8kD6tar5A==
+X-Received: by 2002:a05:6a20:8403:b0:1ac:fd52:c12d with SMTP id
+ c3-20020a056a20840300b001acfd52c12dmr11823371pzd.4.1713876138707; 
+ Tue, 23 Apr 2024 05:42:18 -0700 (PDT)
 Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:2423:8028:e153:69b8])
  by smtp.gmail.com with ESMTPSA id
- u9-20020a637909000000b006047eb9c7fcsm336508pgc.34.2024.04.23.05.41.12
+ z21-20020a1709028f9500b001dda32430b3sm9929901plo.89.2024.04.23.05.42.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Apr 2024 05:41:14 -0700 (PDT)
+ Tue, 23 Apr 2024 05:42:18 -0700 (PDT)
 From: Fabio Estevam <festevam@gmail.com>
 To: kever.yang@rock-chips.com
 Cc: otavio@ossystems.com.br, andy.yan@rock-chips.com, trini@konsulko.com,
  u-boot@lists.denx.de, Fabio Estevam <festevam@gmail.com>
-Subject: [PATCH] rockchip: rv1108: Convert to OF_UPSTREAM
-Date: Tue, 23 Apr 2024 09:41:01 -0300
-Message-Id: <20240423124101.95370-1-festevam@gmail.com>
+Subject: [PATCH v2] rockchip: rv1108: Convert to OF_UPSTREAM
+Date: Tue, 23 Apr 2024 09:42:10 -0300
+Message-Id: <20240423124210.95503-1-festevam@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -92,13 +92,16 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 Instead of using the local rv1108 devicetree copies from U-Boot,
-let's convert the rv11008 board to OF_UPSTREAM so that the upstream kernel
+let's convert the rv1108 boards to OF_UPSTREAM so that the upstream kernel
 devicetrees can be used instead.
 
 Tested on a rv1108-elgin-r1 board.
 
 Signed-off-by: Fabio Estevam <festevam@gmail.com>
 ---
+Changes since v1:
+- Fixed typo in commit log.
+
  arch/arm/dts/rv1108-elgin-r1.dts |  59 ----
  arch/arm/dts/rv1108-evb.dts      |  79 -----
  arch/arm/dts/rv1108.dtsi         | 581 -------------------------------
