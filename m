@@ -4,80 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE423C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 05:45:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B8F1C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 06:20:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 54E0988594;
-	Tue, 23 Apr 2024 07:45:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8FB23889B5;
+	Tue, 23 Apr 2024 08:20:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uIw8fTpl";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O1/LzwKD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 551BA88599; Tue, 23 Apr 2024 07:45:32 +0200 (CEST)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
+ id 7FDF388599; Tue, 23 Apr 2024 08:20:38 +0200 (CEST)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 138778858B
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 07:45:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DC9B88511
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 08:20:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-2dae975d0dcso62751291fa.1
- for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 22:45:30 -0700 (PDT)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-a55b93f5540so207872366b.1
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 23:20:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713851129; x=1714455929; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=rIeB/7QFIWfUQxg22uoQKSDBKf+OQquWJF3Ka+5LAOM=;
- b=uIw8fTplbq/KCWP6YP5abUHc4zYQLNqxJMeB0ro5nvb7ZTVAGZg4MyrOp/qekHdrcW
- 5tUABK/bDfHO6HSl7Lnd+fgsRhE7Lsh59QBSZoXKVwuDUqTnE6AMO+eCTK6lcHvRod8g
- 26Fhe6iL6mJkJWbeuDxWhw1atHpBp+tZ/x+Z6R6c2TXnNhVbY33vnaEb6I86Nd6H2Iz2
- EToXX+t00dVmdxPzD3GsEEzL5beWueAqEbiHp0wyxCJo5oK7DsFSXIewpsdJ3gAAGKkn
- sB3Mffbh/SMGjDpQKP84YVnwDUZsZ/9QSsh+LE7NtmHDLt7X/VeqxVWO7Eopu9AJW8XY
- 5qMw==
+ d=linaro.org; s=google; t=1713853236; x=1714458036; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3HY88JnWeHVtk9KHKXkOPCOA5aKsEUrjVHftZPVc61A=;
+ b=O1/LzwKDMuTfNmkW7MJWR6dcJmJmX6op6ZNSp+k9GUYqWaVJ245A367vuIEOzEOiGn
+ 08ew+auzFNeHwaZ96mJpuv+dsshd5TUWjhdhzwiUWb2Pe0xtJ5hxnJJ97yPlpZXpjgBT
+ /+pSqjcah9nWvrfgWoyeYssoN8vffdJ1WV0DPNcVusiJ7ZRUQISrOJoJYFXrsMfHcCJu
+ KWZy4phfJaro35o3yIYaurQlAGipSwgjPka1FVsPjDPOVCA30pAa7qaudi8pw6NWknjJ
+ PzkyI4JQ6iN+bWRCbo5U8yyLAAEV3/i7OIiyVfv1xhTCi4hFwhHMN+A3hO0JgagBDmnI
+ Aifw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713851129; x=1714455929;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=rIeB/7QFIWfUQxg22uoQKSDBKf+OQquWJF3Ka+5LAOM=;
- b=HU+y8+1DTH0NOd/SFqdlkPPeCE9+Ap4ICD8auYdo9nx5Z4m6CpL6AvcnSW/ynDvjis
- LxrTuaOdYCBSLbm5lq3Y1rhkfyIJArXLwjgBuEqDc3dw5NifyxsOAt/+dIDGpu3ZcnVN
- TDGg6EiEk3MHSulROnr7VKuf7DnVIEO/+XJVVzsmHVTlKsHM+8gTHgPJa2HyFdiLBmPw
- a5gCmw6d0E7pZSfXBm65O49IC2grmhIUAmv1q/LEmDdFl0INmJ/8xTkyvMO8M+ALZgCN
- H/b/CdlKsfVqXmgoFQ+1uUqfDQvwxnjIIXjrwuG+XpgsiDi2VVXOO7OINt46oZf3CoOv
- v5Sg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU+CRSIWuA9Txs0jFK4QyTue5VuWDnTkJOn7vQCyKc1denB5YUXe7jHtYYsdn3z9hqvwNjKqT88Kj26x3Qf7fEGY4i5Ow==
-X-Gm-Message-State: AOJu0Yxv1/htXPqaP93NNGzModhWb9II8wilAniwcEq7qitZb7pOdqoO
- 3u2gmZYovb8rGkLOxtsaYebNiWFX804Eww4xMGyuDwzm/LnihT9Wfx3Lq7yk5rVh9Das4938sqG
- kYBc=
-X-Google-Smtp-Source: AGHT+IFbbkvcVk1w5qcMyedAJ4El2t+s73UXCulads59QFIRh2PozuLCgsl6abCMT//2XvJGC6OYCw==
-X-Received: by 2002:a05:6402:3494:b0:572:145a:77d1 with SMTP id
- v20-20020a056402349400b00572145a77d1mr2029494edc.14.1713850697000; 
- Mon, 22 Apr 2024 22:38:17 -0700 (PDT)
-Received: from localhost.localdomain (ppp089210108048.access.hol.gr.
- [89.210.108.48]) by smtp.gmail.com with ESMTPSA id
- i19-20020a50fc13000000b0056fed8e7817sm6138188edr.20.2024.04.22.22.38.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 22 Apr 2024 22:38:11 -0700 (PDT)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: heinrich.schuchardt@canonical.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: address coverity report 492766 for dead code
-Date: Tue, 23 Apr 2024 08:38:06 +0300
-Message-ID: <20240423053806.4962-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1713853236; x=1714458036;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3HY88JnWeHVtk9KHKXkOPCOA5aKsEUrjVHftZPVc61A=;
+ b=iBOX05R2BSLWGjDloL60LRNZzTQhRoCYDI+UAbRUe/3/B30pILpb1n/ln7i02Lnz9V
+ PamoHwzdzUviY2BJd05mmyARrkfF1ntSwRLt9C9OMpmMlZcC0uPOlumTxdW0hKrFhsvQ
+ 2yLoKMWxAhIgzLMXn+uRIJU5LU5r/dsAzfrEVjA2V2pa0hnAjaRAsk/7a9nf5X2O3geR
+ UNxX9tNmNRISLCZbBnmJjJkyVfKzp72n1K/DJiQZc8tfrDrFn/9Z0jaas+u3RhEaPP3s
+ hYL+DnCSqnyCd0kusB1Bw89Mi2O+21jblaLKs7onExM0LDWip6ME2X0TceAUQMmQiFOb
+ Z9wQ==
+X-Gm-Message-State: AOJu0Yz8tx+6MikbuGSaitlMSuFyD2EhZ0D6zCTouCsAObnWprWaeKOn
+ xyUl+BYGwbyLzHzx6U8OLZr3nQGhb9BbHsAhe6smUVuFztx9eM9sUopL2ARKlqBJNZOfElR3NjD
+ Gvr81bC/3hCZwAXZRK0PkZ47H9KoM4PvRucp3bg==
+X-Google-Smtp-Source: AGHT+IEYrN0AdbPhZeLNPZOnV3MjvetA6IfJkriXVz3jLfrS1pGkaXWczqEiWwQ81aTsfzxByZpSSpKJko8S8at4mQc=
+X-Received: by 2002:a17:907:971e:b0:a58:838f:e2a4 with SMTP id
+ jg30-20020a170907971e00b00a58838fe2a4mr77016ejc.22.1713853235874; Mon, 22 Apr
+ 2024 23:20:35 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20240422214837.GY1054907@bill-the-cat>
+In-Reply-To: <20240422214837.GY1054907@bill-the-cat>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 23 Apr 2024 09:19:59 +0300
+Message-ID: <CAC_iWjK-P66DYd_yLQMtHa=eKQ=jf66HySraahG3uduaitRGrQ@mail.gmail.com>
+Subject: Re: New Defects reported by Coverity Scan for Das U-Boot
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Charles Hardin <ckhardin@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,29 +87,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The check of the return code is already done a few lines above.
-Although it doesn't cause any functional issues, remove the superfluous
-checks
+Hi Tom,
 
-Addresses-Coverity-ID: 492766 Control flow issues  (DEADCODE)
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- lib/efi_loader/efi_var_mem.c | 2 --
- 1 file changed, 2 deletions(-)
+Thanks! Already sent a fix for UEFI
 
-diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
-index 940ab6638823..139e16aad7c6 100644
---- a/lib/efi_loader/efi_var_mem.c
-+++ b/lib/efi_loader/efi_var_mem.c
-@@ -232,8 +232,6 @@ efi_status_t efi_var_mem_init(void)
- 	efi_var_buf->length = (uintptr_t)efi_var_buf->var -
- 			      (uintptr_t)efi_var_buf;
- 
--	if (ret != EFI_SUCCESS)
--		return ret;
- 	ret = efi_create_event(EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE, TPL_CALLBACK,
- 			       efi_var_mem_notify_virtual_address_map, NULL,
- 			       NULL, &event);
--- 
-2.43.0
-
+On Tue, 23 Apr 2024 at 00:48, Tom Rini <trini@konsulko.com> wrote:
+>
+> Here's the latest report.
+>
+> ---------- Forwarded message ---------
+> From: <scan-admin@coverity.com>
+> Date: Mon, Apr 22, 2024 at 3:23=E2=80=AFPM
+> Subject: New Defects reported by Coverity Scan for Das U-Boot
+> To: <tom.rini@gmail.com>
+>
+>
+> Hi,
+>
+> Please find the latest report on new defect(s) introduced to Das
+> U-Boot found with Coverity Scan.
+>
+> 2 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+> 7 defect(s), reported by Coverity Scan earlier, were marked fixed in
+> the recent build analyzed by Coverity Scan.
+>
+> New defect(s) Reported-by: Coverity Scan
+> Showing 2 of 2 defect(s)
+>
+>
+> ** CID 492766:  Control flow issues  (DEADCODE)
+> /lib/efi_loader/efi_var_mem.c: 236 in efi_var_mem_init()
+>
+>
+> _________________________________________________________________________=
+_______________________________
+> *** CID 492766:  Control flow issues  (DEADCODE)
+> /lib/efi_loader/efi_var_mem.c: 236 in efi_var_mem_init()
+> 230             memset(efi_var_buf, 0, EFI_VAR_BUF_SIZE);
+> 231             efi_var_buf->magic =3D EFI_VAR_FILE_MAGIC;
+> 232             efi_var_buf->length =3D (uintptr_t)efi_var_buf->var -
+> 233                                   (uintptr_t)efi_var_buf;
+> 234
+> 235             if (ret !=3D EFI_SUCCESS)
+> >>>     CID 492766:  Control flow issues  (DEADCODE)
+> >>>     Execution cannot reach this statement: "return ret;".
+> 236                     return ret;
+> 237             ret =3D
+> efi_create_event(EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE, TPL_CALLBACK,
+> 238
+> efi_var_mem_notify_virtual_address_map, NULL,
+> 239                                    NULL, &event);
+> 240             if (ret !=3D EFI_SUCCESS)
+> 241                     return ret;
+>
+> ** CID 492765:  Uninitialized variables  (UNINIT)
+>
+>
+> _________________________________________________________________________=
+_______________________________
+> *** CID 492765:  Uninitialized variables  (UNINIT)
+> /net/bootp.c: 888 in dhcp_process_options()
+> 882                             net_root_path[size] =3D 0;
+> 883                             break;
+> 884                     case 28:        /* Ignore Broadcast Address Optio=
+n */
+> 885                             break;
+> 886                     case 40:        /* NIS Domain name */
+> 887                             if (net_nis_domain[0] =3D=3D 0) {
+> >>>     CID 492765:  Uninitialized variables  (UNINIT)
+> >>>     Using uninitialized value "size" when calling "truncate_sz".
+> 888                                     size =3D truncate_sz("NIS Domain =
+Name",
+> 889                                             sizeof(net_nis_domain), s=
+ize);
+> 890                                     memcpy(&net_nis_domain, popt + 2,=
+ size);
+> 891                                     net_nis_domain[size] =3D 0;
+> 892                             }
+> 893                             break;
+>
+>
+> --
+> Tom
