@@ -4,77 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A722CC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 17:05:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A067DC18E72
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 18:33:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 944E488A9E;
-	Tue, 23 Apr 2024 19:05:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 90EB888B25;
+	Tue, 23 Apr 2024 20:33:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BSwUYgSM";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 669FC88A9E; Tue, 23 Apr 2024 19:05:47 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1713897189;
+	bh=IyrZ6wDluL1JmHRLh+wciFx7wQNyE/G6XZUYciwnL2I=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=g+6YSS7qg6xNPEyESjvKY32LJxX05dObrS1oNzJj/BSEvK3l/dbw2msBTJ4gdjDFT
+	 ogAsHJa3X8dP4xftcJV/RKKktHoV1yRzt8e+/c7VfIu0O0IGLjDvHbN8JfKR4EaXJR
+	 AUIT2RS7B1VTuTGT+aJNlXc6qvOxBheo+7YVZ9KUeREN73LH5S0pW6ILVA3QLPlhcp
+	 ph+rUlxHxaPKTJaH0lmhAAc/S9/2sGFSMvstXKySIKZ6jifylYSUnpTHSMI9PGhfU1
+	 DZqSkUd0HL+Hma6agtY39tdY0T1BCUvIDiYfFzTFHigJhpKPcz2co5X5WDxOMhiOME
+	 uG5Lk+yodrZKw==
+Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4EDAD88AAA
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 19:05:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2ab48c14334so987185a91.3
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 10:05:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713891944; x=1714496744; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=V0S4O/9g/mnOk90+vhY9kYh/5kndLpaUaaXXxgmUZzY=;
- b=BSwUYgSMAa0VOxiyd0DhNW9C/xFqo1NoCVDi4g9FXNTw/UVtT7DkZ5iYqysTkkctVy
- HqF5F7nuO//+aWyqhQ6xl02adWO52CPcpvicbf7LZyNQUbXAtAvZdCHHrmL6XS0kf6Yw
- FWk6b5cmS1ry/aFfp83CU7ifcw9qDkTq8jN6AtuBlFROXEqxVAlslx4vTMluW8R6KN1U
- 0Rfb/UKRL4ihCTI2HwQsbnNuqTpHS69TCcRRX803eZ2pDUFRDC1o6j+SHpsoNOt+bEAp
- A/r9y9ZPmb22Jql+Vgsz88p56MJ1A1s8SueK5rqZEp5aDISdEcuPOrcMg/sxkbxhw9oZ
- O0Ww==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713891944; x=1714496744;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=V0S4O/9g/mnOk90+vhY9kYh/5kndLpaUaaXXxgmUZzY=;
- b=P9K98fMMOSRMLQdDam5xVRuioCufBYvud1njZH8UqkefGX1exkrnCFcyrFLWYGbwTh
- 4e+fIJyRphuyhKGYSRY7c1VDUDMGDv/4Yp2plBN/kRvKu7RqVJcbVOnCUQVIPYJNBknS
- +CI9yU3Cl7QDWdAS3bAQAg3D9AeoWlXyaBvDt7o7hoOKNQiV9Mk5BD4Kuulb1OWNgXIi
- +up7kyAV46WmC2elHIu+9E8wGiAuvcKG/c1V+8ZtvKk6qPl4KZjM6fUTI8Mcn7ILfI9T
- XjkGg3htYq+4ANa9jL0bz2qFlo6P7rN+0VFyx9n9Qy8q39//r9bkow/BcaJ5NNDt1hFn
- aImg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVTaWF2ws3htM6qVuyTXR2wiYXgBeCshrpKiCDw6LyXUGb8DkvExy4BuAmNcVsTYxggPyvgUfTtbIluIYUKutg0/0mBPw==
-X-Gm-Message-State: AOJu0YxsT67NCQ+i5aOgCaRNR2lxx9E2GhnOJu7aw7xDzuieHOa+V8oj
- Np7lDCMitiYanZ+E0qpS34P1XpYNbjnmEM1qIxGLG+BT9F/YeBjRzQwDRNx+De/h0j3MZoZ5q/t
- 0U6kmjNHalit5cE0XNY8gTNilAcb08A==
-X-Google-Smtp-Source: AGHT+IEp8iZVmDRc+HeEguZ/ShFfZFTxzEow5vWTSV0Sj+IlhG7EEBvk8ktNrzCKaoL8R2iG1sahcUtqG+HR5hNHDho=
-X-Received: by 2002:a17:90a:408e:b0:2a5:3f1f:a1d1 with SMTP id
- l14-20020a17090a408e00b002a53f1fa1d1mr35572pjg.0.1713891943740; Tue, 23 Apr
- 2024 10:05:43 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id A8C4E8865B;
+ Tue, 23 Apr 2024 20:33:07 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1713897188;
+ bh=IyrZ6wDluL1JmHRLh+wciFx7wQNyE/G6XZUYciwnL2I=;
+ h=From:To:Cc:Subject:Date:From;
+ b=JmHOvE+h4RKsr1+6uJ2cwcoOBxMLHG0pJRfpxyDRhpX9PFvKOKsE6DvH2A88KPmBY
+ usX54Xv+8R871YOXSeGv+9z8hsc2WmlvxSLIyR8wjSEZmUB8fhqR2fwxWjG346bqIh
+ nts19LDmvmUpE7jPa1xQ+1tAj7i4+qilpMWG3ulb1YNiUA1ndx5o2St9rSuuFhKT8E
+ U4EaXvhztxjfaSHtUGBaDiKL1tqKBV8G29ULymVqv193NRzXy3yETlXFhY8BmBkckc
+ ilAi5gwWqIbIJLxqDNa+ytoJpzLumpyYgwPr4elwNcQoFV9sqdOUeMX/80g78FZUmW
+ 1TjLNiaxQOS3g==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Adam Ford <aford173@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Angus Ainslie <angus@akkea.ca>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Simon Glass <sjg@chromium.org>,
+ Stefan Eichenberger <stefan.eichenberger@toradex.com>,
+ Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
+Subject: [PATCH 1/3] binman: Add nxp_imx8mimage etype
+Date: Tue, 23 Apr 2024 20:31:21 +0200
+Message-ID: <20240423183247.335791-1-marex@denx.de>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20240419113746.73110-1-heinrich.schuchardt@canonical.com>
- <20240419113746.73110-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240419113746.73110-2-heinrich.schuchardt@canonical.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Tue, 23 Apr 2024 14:05:31 -0300
-Message-ID: <CAOMZO5A1JfdqQvXnZhj8_WA4u63h2Zz5zvODMgGaqXgQrBaBdQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] tools: type arguemnts
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,9 +76,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Apr 19, 2024 at 9:13=E2=80=AFAM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> %s/arguemnts/arguemnts/
+Add new binman etype derived from mkimage etype which generates configuration
+input file for mkimage -T imx8mimage, and runs the mkimage on input data. The
+mkimage -T imx8mimage is used to generate combined image with SPL and DDR PHY
+blobs which is bootable on i.MX8M.
 
-There is a typo in the Subject: %s/type/typo/
+The configuration file generated here is equivalent of imx8mimage.cfg, which
+is the file passed to '$ mkimage -T imx8mimage -n imx8mimage.cfg ...' . The
+settings generated into the imx8mimage.cfg file are configured via supported
+binman DT properties, nxp,boot-from, nxp,loader-address, nxp,rom-version.
+
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Adam Ford <aford173@gmail.com>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+Cc: Angus Ainslie <angus@akkea.ca>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Tim Harvey <tharvey@gateworks.com>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: kernel@puri.sm
+Cc: u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de
+---
+ tools/binman/etype/nxp_imx8mimage.py | 73 ++++++++++++++++++++++++++++
+ 1 file changed, 73 insertions(+)
+ create mode 100644 tools/binman/etype/nxp_imx8mimage.py
+
+diff --git a/tools/binman/etype/nxp_imx8mimage.py b/tools/binman/etype/nxp_imx8mimage.py
+new file mode 100644
+index 00000000000..5a106e0a76e
+--- /dev/null
++++ b/tools/binman/etype/nxp_imx8mimage.py
+@@ -0,0 +1,73 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright 2023-2024 Marek Vasut <marex@denx.de>
++# Written with much help from Simon Glass <sjg@chromium.org>
++#
++# Entry-type module for generating the i.MX8M mkimage -T imx8mimage
++# configuration file and invocation of mkimage -T imx8mimage on the
++# configuration file and input data.
++#
++
++from collections import OrderedDict
++
++from binman.entry import Entry
++from binman.etype.mkimage import Entry_mkimage
++from binman import elf
++from dtoc import fdt_util
++from u_boot_pylib import tools
++
++class Entry_nxp_imx8mimage(Entry_mkimage):
++    """NXP i.MX8M imx8mimage .cfg file generator and mkimage invoker
++
++    Properties / Entry arguments:
++        - nxp,boot-from - device to boot from (e.g. 'sd')
++        - nxp,loader-address - loader address (SPL text base)
++        - nxp,rom-version - BootROM version ('2' for i.MX8M Nano and Plus)
++    """
++
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node)
++        self.required_props = ['nxp,boot-from', 'nxp,rom-version', 'nxp,loader-address']
++
++    def ReadNode(self):
++        super().ReadNode()
++        self.boot_from = fdt_util.GetString(self._node, 'nxp,boot-from')
++        self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
++        self.rom_version = fdt_util.GetInt(self._node, 'nxp,rom-version')
++        self.ReadEntries()
++
++    def BuildSectionData(self, required):
++        _, input_fname, uniq = self.collect_contents_to_file(
++            self._entries.values(), 'input')
++        # Generate mkimage configuration file similar to imx8mimage.cfg
++        # and pass it to mkimage to generate SPL image for us here.
++        cfg_fname = tools.get_output_filename('nxp.imx8mimage.cfg.%s' % uniq)
++        with open(cfg_fname, 'w') as outf:
++            print('ROM_VERSION v%d' % self.rom_version, file=outf)
++            print('BOOT_FROM %s' % self.boot_from, file=outf)
++            print('LOADER %s %#x' % (input_fname, self.loader_address), file=outf)
++
++        output_fname = tools.get_output_filename(f'cfg-out.{uniq}')
++        args = ['-d', input_fname, '-n', cfg_fname, '-T', 'imx8mimage',
++                output_fname]
++        if self.mkimage.run_cmd(*args) is not None:
++            return tools.read_file(output_fname)
++        else:
++            # Bintool is missing; just use the input data as the output
++            self.record_missing_bintool(self.mkimage)
++            return data
++
++    def SetImagePos(self, image_pos):
++        # Customized SoC specific SetImagePos which skips the mkimage etype
++        # implementation and removes the 0x48 offset introduced there. That
++        # offset is only used for uImage/fitImage, which is not the case in
++        # here.
++        upto = 0x00
++        for entry in super().GetEntries().values():
++            entry.SetOffsetSize(upto, None)
++
++            # Give up if any entries lack a size
++            if entry.size is None:
++                return
++            upto += entry.size
++
++        super(Entry_mkimage, self).SetImagePos(image_pos)
+-- 
+2.43.0
+
