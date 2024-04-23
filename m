@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D517C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:04:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 906DDC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:04:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB93D885CB;
-	Tue, 23 Apr 2024 13:04:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4856B889D3;
+	Tue, 23 Apr 2024 13:04:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="T52bmlLX";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="fCvLxcd5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 704D2885B8; Tue, 23 Apr 2024 13:04:01 +0200 (CEST)
-Received: from mail-m11877.qiye.163.com (mail-m11877.qiye.163.com
- [115.236.118.77])
+ id 1D54C88334; Tue, 23 Apr 2024 13:04:02 +0200 (CEST)
+Received: from mail-m127106.qiye.163.com (mail-m127106.qiye.163.com
+ [115.236.127.106])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D69F587D6A
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:03:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C1178833F
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:03:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 DKIM-Signature: a=rsa-sha256;
- b=T52bmlLX0CGdx1pLGKcOm2OBv39WdxChjZns+yGBi36et30ueLF/fw5vxNWYFJ9vssI3WDNmr8DEy79p1IQ5p2mpyok8ymU9zvcnTH2cVgTwPstsQngrlFJE/gFn48CauZ/q1ewM680mw5aoBO+k3Bjt9p82zUsZgtB65vMS8ug=;
+ b=fCvLxcd5RpYOFYgo/7BH6H6tv4hI/0wCqrx9GBus3qrverd1XBqep6KaLARcPWVDZ1Lp2IQrpesfUf8l9E0fDAV97TLHVrtsojAcgnw1d5D9H2IGiP44Y/uNfHbhVMtYpimDcyaCpT48qnwHOaxqs27UZoHYpOHHS99KQoFbrHU=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=YaLR40QpeNxgReNfbeBsa98TgmxfXF5bOrQFZ8g5fzU=;
+ bh=65D+U/vl3CHZv7D4m/oQeDrKST7eWXmoY5dlzfjTKJs=;
  h=date:mime-version:subject:message-id:from;
 Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id A7F3E900317;
- Tue, 23 Apr 2024 19:03:47 +0800 (CST)
-Message-ID: <1c5fb26e-3c9d-41ac-ac9d-22a2bccab335@rock-chips.com>
-Date: Tue, 23 Apr 2024 19:03:47 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 3DBA7900347;
+ Tue, 23 Apr 2024 19:03:40 +0800 (CST)
+Message-ID: <623161d5-eb6b-429b-aa64-c9a1c80b8d46@rock-chips.com>
+Date: Tue, 23 Apr 2024 19:03:39 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 16/31] rockchip: rk3399-gru: Sync device tree from linux
+Subject: Re: [PATCH 15/31] rockchip: rk3399: Sync soc device tree from linux
  v6.8
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de
 References: <20240331202921.262323-1-jonas@kwiboo.se>
- <20240331202921.262323-17-jonas@kwiboo.se>
+ <20240331202921.262323-16-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240331202921.262323-17-jonas@kwiboo.se>
+In-Reply-To: <20240331202921.262323-16-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGhhJGVZJGUseHktKSB0ZSEJVEwETFh
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGUoeSFZKT09PTh1MSE4dTE9VEwETFh
  oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
  tLWQY+
-X-HM-Tid: 0a8f0aa049dd03a9kunma7f3e900317
+X-HM-Tid: 0a8f0aa02f1f03a9kunm3dba7900347
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MBg6HSo*NzNNOj0XE0gsGSM8
- FitPCw1VSlVKTEpIQ0xLSUlDT05LVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSU1KQzcG
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NzI6HAw6KTNJED02E0gdGR8S
+ IhkaChVVSlVKTEpIQ0xLSUlKTUNKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFJTUlOTjcG
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,10 +78,11 @@ X-Virus-Status: Clean
 
 
 On 2024/4/1 04:28, Jonas Karlman wrote:
-> Sync rk3399-gru related device tree from linux v6.8.
+> Sync RK3399 SoC common .dtsi-files from linux v6.8.
 >
-> The spi_flash symbol is no longer part of upstream DT, it is re-defined
-> to allow exising use in related u-boot.dtsi-files.
+> The ethernet0 alias is removed from rk3399.dtsi in this patch, it will
+> be restored in board specific .dts-files. There is no other intended
+> change with this patch.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -88,447 +90,838 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   arch/arm/dts/rk3399-gru-bob.dts         |   8 +-
->   arch/arm/dts/rk3399-gru-chromebook.dtsi | 200 +++++++++++++++++++++++-
->   arch/arm/dts/rk3399-gru-kevin.dts       |   3 +-
->   arch/arm/dts/rk3399-gru-u-boot.dtsi     |  10 +-
->   arch/arm/dts/rk3399-gru.dtsi            |  52 +++++-
->   5 files changed, 254 insertions(+), 19 deletions(-)
+>   arch/arm/dts/rk3399-op1-opp.dtsi              |  31 +-
+>   arch/arm/dts/rk3399-opp.dtsi                  |   6 +-
+>   arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi |   4 -
+>   arch/arm/dts/rk3399-u-boot.dtsi               |  52 ++--
+>   arch/arm/dts/rk3399.dtsi                      | 289 ++++++++++++++++--
+>   5 files changed, 308 insertions(+), 74 deletions(-)
 >
-> diff --git a/arch/arm/dts/rk3399-gru-bob.dts b/arch/arm/dts/rk3399-gru-bob.dts
-> index e6c1c94c8d69..1cba1d857c96 100644
-> --- a/arch/arm/dts/rk3399-gru-bob.dts
-> +++ b/arch/arm/dts/rk3399-gru-bob.dts
-> @@ -16,6 +16,7 @@
->   		     "google,bob-rev7", "google,bob-rev6",
->   		     "google,bob-rev5", "google,bob-rev4",
->   		     "google,bob", "google,gru", "rockchip,rk3399";
-> +	chassis-type = "convertible";
+> diff --git a/arch/arm/dts/rk3399-op1-opp.dtsi b/arch/arm/dts/rk3399-op1-opp.dtsi
+> index 69cc9b05baa5..783120e9cebe 100644
+> --- a/arch/arm/dts/rk3399-op1-opp.dtsi
+> +++ b/arch/arm/dts/rk3399-op1-opp.dtsi
+> @@ -4,7 +4,7 @@
+>    */
 >   
->   	edp_panel: edp-panel {
->   		compatible = "boe,nv101wxmn51";
-> @@ -69,7 +70,7 @@
->   &spi0 {
->   	status = "okay";
+>   / {
+> -	cluster0_opp: opp-table0 {
+> +	cluster0_opp: opp-table-0 {
+>   		compatible = "operating-points-v2";
+>   		opp-shared;
 >   
-> -	cr50@0 {
-> +	tpm@0 {
->   		compatible = "google,cr50";
->   		reg = <0>;
->   		interrupt-parent = <&gpio0>;
-> @@ -87,3 +88,8 @@
+> @@ -39,7 +39,7 @@
 >   		};
 >   	};
->   };
-> +
-> +&wlan_host_wake_l {
-> +	/* Kevin has an external pull up, but Bob does not. */
-> +	rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_up>;
-> +};
-> diff --git a/arch/arm/dts/rk3399-gru-chromebook.dtsi b/arch/arm/dts/rk3399-gru-chromebook.dtsi
-> index 1384dabbdf40..cacbad35cfc8 100644
-> --- a/arch/arm/dts/rk3399-gru-chromebook.dtsi
-> +++ b/arch/arm/dts/rk3399-gru-chromebook.dtsi
-> @@ -198,7 +198,6 @@
->   		power-supply = <&pp3300_disp>;
->   		pinctrl-names = "default";
->   		pinctrl-0 = <&bl_en>;
-> -		pwm-delay-us = <10000>;
+>   
+> -	cluster1_opp: opp-table1 {
+> +	cluster1_opp: opp-table-1 {
+>   		compatible = "operating-points-v2";
+>   		opp-shared;
+>   
+> @@ -82,7 +82,7 @@
+>   		};
 >   	};
 >   
->   	gpio_keys: gpio-keys {
-> @@ -206,7 +205,7 @@
->   		pinctrl-names = "default";
->   		pinctrl-0 = <&bt_host_wake_l>;
+> -	gpu_opp_table: opp-table2 {
+> +	gpu_opp_table: opp-table-2 {
+>   		compatible = "operating-points-v2";
 >   
-> -		wake_on_bt: wake-on-bt {
-> +		wake_on_bt: key-wake-on-bt {
->   			label = "Wake-on-Bluetooth";
->   			gpios = <&gpio0 3 GPIO_ACTIVE_LOW>;
->   			linux,code = <KEY_WAKEUP>;
-> @@ -234,9 +233,24 @@
->   	extcon = <&usbc_extcon0>, <&usbc_extcon1>;
+>   		opp00 {
+> @@ -110,6 +110,27 @@
+>   			opp-microvolt = <1075000>;
+>   		};
+>   	};
+> +
+> +	dmc_opp_table: opp-table-3 {
+> +		compatible = "operating-points-v2";
+> +
+> +		opp00 {
+> +			opp-hz = /bits/ 64 <400000000>;
+> +			opp-microvolt = <900000>;
+> +		};
+> +		opp01 {
+> +			opp-hz = /bits/ 64 <666000000>;
+> +			opp-microvolt = <900000>;
+> +		};
+> +		opp02 {
+> +			opp-hz = /bits/ 64 <800000000>;
+> +			opp-microvolt = <900000>;
+> +		};
+> +		opp03 {
+> +			opp-hz = /bits/ 64 <928000000>;
+> +			opp-microvolt = <925000>;
+> +		};
+> +	};
+>   };
+>   
+>   &cpu_l0 {
+> @@ -136,6 +157,10 @@
+>   	operating-points-v2 = <&cluster1_opp>;
 >   };
 >   
 > +&dmc {
-> +	center-supply = <&ppvar_centerlogic>;
-> +	rockchip,pd-idle-dis-freq-hz = <800000000>;
-> +	rockchip,sr-idle-dis-freq-hz = <800000000>;
-> +	rockchip,sr-mc-gate-idle-dis-freq-hz = <800000000>;
+> +	operating-points-v2 = <&dmc_opp_table>;
 > +};
 > +
->   &edp {
->   	status = "okay";
->   
-> +	/*
-> +	 * eDP PHY/clk don't sync reliably at anything other than 24 MHz. Only
-> +	 * set this here, because rk3399-gru.dtsi ensures we can generate this
-> +	 * off GPLL=600MHz, whereas some other RK3399 boards may not.
-> +	 */
-> +	assigned-clocks = <&cru PCLK_EDP>;
-> +	assigned-clock-rates = <24000000>;
-> +
->   	ports {
->   		edp_out: port@1 {
->   			reg = <1>;
-> @@ -251,6 +265,182 @@
->   	};
+>   &gpu {
+>   	operating-points-v2 = <&gpu_opp_table>;
 >   };
+> diff --git a/arch/arm/dts/rk3399-opp.dtsi b/arch/arm/dts/rk3399-opp.dtsi
+> index da41cd81ebb7..fee5e7111279 100644
+> --- a/arch/arm/dts/rk3399-opp.dtsi
+> +++ b/arch/arm/dts/rk3399-opp.dtsi
+> @@ -4,7 +4,7 @@
+>    */
 >   
-> +&gpio0 {
-> +	gpio-line-names = /* GPIO0 A 0-7 */
-> +			  "AP_RTC_CLK_IN",
-> +			  "EC_AP_INT_L",
-> +			  "PP1800_AUDIO_EN",
-> +			  "BT_HOST_WAKE_L",
-> +			  "WLAN_MODULE_PD_L",
-> +			  "H1_INT_OD_L",
-> +			  "CENTERLOGIC_DVS_PWM",
-> +			  "",
-> +
-> +			  /* GPIO0 B 0-4 */
-> +			  "WIFI_HOST_WAKE_L",
-> +			  "PMUIO2_33_18_L",
-> +			  "PP1500_EN",
-> +			  "AP_EC_WARM_RESET_REQ",
-> +			  "PP3000_EN";
-> +};
-> +
-> +&gpio1 {
-> +	gpio-line-names = /* GPIO1 A 0-7 */
-> +			  "",
-> +			  "",
-> +			  "SPK_PA_EN",
-> +			  "",
-> +			  "TRACKPAD_INT_L",
-> +			  "AP_EC_S3_S0_L",
-> +			  "AP_EC_OVERTEMP",
-> +			  "AP_SPI_FLASH_MISO",
-> +
-> +			  /* GPIO1 B 0-7 */
-> +			  "AP_SPI_FLASH_MOSI_R",
-> +			  "AP_SPI_FLASH_CLK_R",
-> +			  "AP_SPI_FLASH_CS_L_R",
-> +			  "WLAN_MODULE_RESET_L",
-> +			  "WIFI_DISABLE_L",
-> +			  "MIC_INT",
-> +			  "",
-> +			  "AP_I2C_DVS_SDA",
-> +
-> +			  /* GPIO1 C 0-7 */
-> +			  "AP_I2C_DVS_SCL",
-> +			  "AP_BL_EN",
-> +			  /*
-> +			   * AP_FLASH_WP is crossystem ABI. Schematics call it
-> +			   * AP_FW_WP or CPU1_FW_WP, depending on the variant.
-> +			   */
-> +			  "AP_FLASH_WP",
-> +			  "LITCPU_DVS_PWM",
-> +			  "AP_I2C_AUDIO_SDA",
-> +			  "AP_I2C_AUDIO_SCL",
-> +			  "",
-> +			  "HEADSET_INT_L";
-> +};
-> +
-> +&gpio2 {
-> +	gpio-line-names = /* GPIO2 A 0-7 */
-> +			  "",
-> +			  "",
-> +			  "SD_IO_PWR_EN",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +
-> +			  /* GPIO2 B 0-7 */
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +
-> +			  /* GPIO2 C 0-7 */
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "AP_SPI_EC_MISO",
-> +			  "AP_SPI_EC_MOSI",
-> +			  "AP_SPI_EC_CLK",
-> +			  "AP_SPI_EC_CS_L",
-> +
-> +			  /* GPIO2 D 0-4 */
-> +			  "BT_DEV_WAKE_L",
-> +			  "",
-> +			  "WIFI_PCIE_CLKREQ_L",
-> +			  "WIFI_PERST_L",
-> +			  "SD_PWR_3000_1800_L";
-> +};
-> +
-> +&gpio3 {
-> +	gpio-line-names = /* GPIO3 A 0-7 */
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "AP_SPI_TPM_MISO",
-> +			  "AP_SPI_TPM_MOSI_R",
-> +			  "AP_SPI_TPM_CLK_R",
-> +			  "AP_SPI_TPM_CS_L_R",
-> +
-> +			  /* GPIO3 B 0-7 */
-> +			  "EC_IN_RW",
-> +			  "",
-> +			  "AP_I2C_TP_SDA",
-> +			  "AP_I2C_TP_SCL",
-> +			  "AP_I2C_TP_PU_EN",
-> +			  "TOUCH_INT_L",
-> +			  "",
-> +			  "",
-> +
-> +			  /* GPIO3 C 0-7 */
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +
-> +			  /* GPIO3 D 0-7 */
-> +			  "I2S0_SCLK",
-> +			  "I2S0_LRCK_RX",
-> +			  "I2S0_LRCK_TX",
-> +			  "I2S0_SDI_0",
-> +			  "I2S0_SDI_1",
-> +			  "",
-> +			  "I2S0_SDO_1",
-> +			  "I2S0_SDO_0";
-> +};
-> +
-> +&gpio4 {
-> +	gpio-line-names = /* GPIO4 A 0-7 */
-> +			  "I2S_MCLK",
-> +			  "AP_I2C_MIC_SDA",
-> +			  "AP_I2C_MIC_SCL",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +
-> +			  /* GPIO4 B 0-7 */
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +			  "",
-> +
-> +			  /* GPIO4 C 0-7 */
-> +			  "AP_I2C_TS_SDA",
-> +			  "AP_I2C_TS_SCL",
-> +			  "GPU_DVS_PWM",
-> +			  "UART_DBG_TX_AP_RX",
-> +			  "UART_AP_TX_DBG_RX",
-> +			  "",
-> +			  "BIGCPU_DVS_PWM",
-> +			  "EDP_HPD_3V0",
-> +
-> +			  /* GPIO4 D 0-5 */
-> +			  "SD_CARD_DET_L",
-> +			  "USB_DP_HPD",
-> +			  "TOUCH_RESET_L",
-> +			  "PP3300_DISP_EN",
-> +			  "",
-> +			  "SD_SLOT_PWR_EN";
-> +};
-> +
->   ap_i2c_mic: &i2c1 {
->   	status = "okay";
+>   / {
+> -	cluster0_opp: opp-table0 {
+> +	cluster0_opp: opp-table-0 {
+>   		compatible = "operating-points-v2";
+>   		opp-shared;
 >   
-> @@ -286,7 +476,7 @@ ap_i2c_tp: &i2c5 {
->   };
->   
->   &cros_ec {
-> -	cros_ec_pwm: ec-pwm {
-> +	cros_ec_pwm: pwm {
->   		compatible = "google,cros-ec-pwm";
->   		#pwm-cells = <1>;
->   	};
-> @@ -319,8 +509,7 @@ ap_i2c_tp: &i2c5 {
->   &pci_rootport {
->   	mvl_wifi: wifi@0,0 {
->   		compatible = "pci1b4b,2b42";
-> -		reg = <0x83010000 0x0 0x00000000 0x0 0x00100000
-> -		       0x83010000 0x0 0x00100000 0x0 0x00100000>;
-> +		reg = <0x0000 0x0 0x0 0x0 0x0>;
->   		interrupt-parent = <&gpio0>;
->   		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
->   		pinctrl-names = "default";
-> @@ -395,6 +584,7 @@ ap_i2c_tp: &i2c5 {
+> @@ -35,7 +35,7 @@
+>   		};
 >   	};
 >   
->   	wlan_host_wake_l: wlan-host-wake-l {
-> +		/* Kevin has an external pull up, but Bob does not */
->   		rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+> -	cluster1_opp: opp-table1 {
+> +	cluster1_opp: opp-table-1 {
+>   		compatible = "operating-points-v2";
+>   		opp-shared;
+>   
+> @@ -74,7 +74,7 @@
+>   		};
 >   	};
->   };
-> diff --git a/arch/arm/dts/rk3399-gru-kevin.dts b/arch/arm/dts/rk3399-gru-kevin.dts
-> index 2bbef9fcbe27..2cc9b3386c16 100644
-> --- a/arch/arm/dts/rk3399-gru-kevin.dts
-> +++ b/arch/arm/dts/rk3399-gru-kevin.dts
-> @@ -24,6 +24,7 @@
->   		     "google,kevin-rev9", "google,kevin-rev8",
->   		     "google,kevin-rev7", "google,kevin-rev6",
->   		     "google,kevin", "google,gru", "rockchip,rk3399";
-> +	chassis-type = "convertible";
 >   
->   	/* Power tree */
+> -	gpu_opp_table: opp-table2 {
+> +	gpu_opp_table: opp-table-2 {
+>   		compatible = "operating-points-v2";
 >   
-> @@ -91,7 +92,7 @@
->   	pinctrl-names = "default";
->   	pinctrl-0 = <&bt_host_wake_l>, <&cpu1_pen_eject>;
+>   		opp00 {
+> diff --git a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
+> index b8f95b86d86b..dcfcec4f3072 100644
+> --- a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
+> @@ -6,10 +6,6 @@
+>   #include "rk3399-u-boot.dtsi"
+>   #include "rk3399-sdram-lpddr4-100.dtsi"
 >   
-> -	pen-insert {
-> +	switch-pen-insert {
->   		label = "Pen Insert";
->   		/* Insert = low, eject = high */
->   		gpios = <&gpio0 13 GPIO_ACTIVE_LOW>;
-> diff --git a/arch/arm/dts/rk3399-gru-u-boot.dtsi b/arch/arm/dts/rk3399-gru-u-boot.dtsi
-> index 0cc40eb6d6f6..6bdc892bd913 100644
-> --- a/arch/arm/dts/rk3399-gru-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-gru-u-boot.dtsi
-> @@ -78,12 +78,14 @@
->   	/delete-property/ bootph-pre-ram;
->   };
->   
-> +&spi1 {
-> +	spi_flash: flash@0 {
-> +		bootph-all;
-> +	};
-> +};
-> +
->   &spi5 {
->   	spi-activate-delay = <100>;
->   	spi-max-frequency = <3000000>;
->   	spi-deactivate-delay = <200>;
->   };
-> -
-> -&spi_flash {
-> -	bootph-all;
-> -};
-> diff --git a/arch/arm/dts/rk3399-gru.dtsi b/arch/arm/dts/rk3399-gru.dtsi
-> index b80f19066b57..d90fe4d40d48 100644
-> --- a/arch/arm/dts/rk3399-gru.dtsi
-> +++ b/arch/arm/dts/rk3399-gru.dtsi
-> @@ -250,7 +250,7 @@
->   		pinctrl-0 = <&sd_io_pwr_en &sd_pwr_1800_sel>;
->   
->   		enable-active-high;
-> -		enable-gpio = <&gpio2 2 GPIO_ACTIVE_HIGH>;
-> +		enable-gpios = <&gpio2 2 GPIO_ACTIVE_HIGH>;
->   		gpios = <&gpio2 28 GPIO_ACTIVE_HIGH>;
->   		states = <1800000 0x1>,
->   			 <3000000 0x0>;
-> @@ -286,7 +286,7 @@
->   
->   	sound: sound {
->   		compatible = "rockchip,rk3399-gru-sound";
-> -		rockchip,cpu = <&i2s0 &i2s2>;
-> +		rockchip,cpu = <&i2s0 &spdif>;
->   	};
->   };
->   
-> @@ -373,6 +373,34 @@
->   		<200000000>;
->   };
->   
-> +&dfi {
-> +	status = "okay";
-> +};
-> +
-> +&dmc {
-> +	status = "okay";
-> +
-> +	rockchip,pd-idle-ns = <160>;
-> +	rockchip,sr-idle-ns = <10240>;
-> +	rockchip,sr-mc-gate-idle-ns = <40960>;
-> +	rockchip,srpd-lite-idle-ns = <61440>;
-> +	rockchip,standby-idle-ns = <81920>;
-> +
-> +	rockchip,ddr3_odt_dis_freq = <666000000>;
-> +	rockchip,lpddr3_odt_dis_freq = <666000000>;
-> +	rockchip,lpddr4_odt_dis_freq = <666000000>;
-> +
-> +	rockchip,sr-mc-gate-idle-dis-freq-hz = <1000000000>;
-> +	rockchip,srpd-lite-idle-dis-freq-hz = <0>;
-> +	rockchip,standby-idle-dis-freq-hz = <928000000>;
-> +};
-> +
-> +&dmc_opp_table {
-> +	opp03 {
-> +		opp-suspend;
-> +	};
-> +};
-> +
->   &emmc_phy {
->   	status = "okay";
->   };
-> @@ -437,10 +465,6 @@ ap_i2c_audio: &i2c8 {
->   	status = "okay";
->   };
->   
-> -&i2s2 {
+> -&rng {
 > -	status = "okay";
 > -};
 > -
->   &io_domains {
->   	status = "okay";
+>   &sdhci {
+>   	max-frequency = <25000000>;
+>   };
+> diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
+> index adb64d17e040..d2648abd0a44 100644
+> --- a/arch/arm/dts/rk3399-u-boot.dtsi
+> +++ b/arch/arm/dts/rk3399-u-boot.dtsi
+> @@ -2,8 +2,6 @@
+>   /*
+>    * Copyright (C) 2019 Jagan Teki <jagan@amarulasolutions.com>
+>    */
+> -#define USB_CLASS_HUB			9
+> -
+>   #include "rockchip-u-boot.dtsi"
 >   
-> @@ -461,10 +485,11 @@ ap_i2c_audio: &i2c8 {
->   	vpcie0v9-supply = <&pp900_pcie>;
->   
->   	pci_rootport: pcie@0,0 {
-> -		reg = <0x83000000 0x0 0x00000000 0x0 0x00000000>;
-> +		reg = <0x0000 0 0 0 0>;
->   		#address-cells = <3>;
->   		#size-cells = <2>;
->   		ranges;
-> +		device_type = "pci";
+>   / {
+> @@ -24,44 +22,11 @@
+>   		reg = <0x0 0xff620000 0x0 0x100>;
 >   	};
+>   
+> -	dfi: dfi@ff630000 {
+> -		bootph-all;
+> -		reg = <0x00 0xff630000 0x00 0x4000>;
+> -		compatible = "rockchip,rk3399-dfi";
+> -		rockchip,pmu = <&pmugrf>;
+> -		clocks = <&cru PCLK_DDR_MON>;
+> -		clock-names = "pclk_ddr_mon";
+> -	};
+> -
+> -	rng: rng@ff8b8000 {
+> -		compatible = "rockchip,rk3399-crypto";
+> -		reg = <0x0 0xff8b8000 0x0 0x1000>;
+> -		status = "okay";
+> -	};
+> -
+> -	dmc: dmc {
+> -		bootph-all;
+> -		compatible = "rockchip,rk3399-dmc";
+> -		devfreq-events = <&dfi>;
+> -		interrupts = <GIC_SPI 1 IRQ_TYPE_LEVEL_HIGH 0>;
+> -		clocks = <&cru SCLK_DDRC>;
+> -		clock-names = "dmc_clk";
+> -		reg = <0x0 0xffa80000 0x0 0x0800
+> -		       0x0 0xffa80800 0x0 0x1800
+> -		       0x0 0xffa82000 0x0 0x2000
+> -		       0x0 0xffa84000 0x0 0x1000
+> -		       0x0 0xffa88000 0x0 0x0800
+> -		       0x0 0xffa88800 0x0 0x1800
+> -		       0x0 0xffa8a000 0x0 0x2000
+> -		       0x0 0xffa8c000 0x0 0x1000>;
+> -	};
+> -
+>   	pmusgrf: syscon@ff330000 {
+>   		bootph-all;
+>   		compatible = "rockchip,rk3399-pmusgrf", "syscon";
+>   		reg = <0x0 0xff330000 0x0 0xe3d4>;
+>   	};
+> -
 >   };
 >   
-> @@ -537,13 +562,24 @@ ap_i2c_audio: &i2c8 {
->   	vqmmc-supply = <&ppvar_sd_card_io>;
+>   #if defined(CONFIG_ROCKCHIP_SPI_IMAGE) && defined(CONFIG_HAS_ROM)
+> @@ -93,6 +58,19 @@
+>   	bootph-all;
 >   };
 >   
-> +&spdif {
+> +&dmc {
+> +	bootph-all;
+> +	reg = <0x0 0xffa80000 0x0 0x0800
+> +	       0x0 0xffa80800 0x0 0x1800
+> +	       0x0 0xffa82000 0x0 0x2000
+> +	       0x0 0xffa84000 0x0 0x1000
+> +	       0x0 0xffa88000 0x0 0x0800
+> +	       0x0 0xffa88800 0x0 0x1800
+> +	       0x0 0xffa8a000 0x0 0x2000
+> +	       0x0 0xffa8c000 0x0 0x1000>;
 > +	status = "okay";
-> +
-> +	/*
-> +	 * SPDIF is routed internally to DP; we either don't use these pins, or
-> +	 * mux them to something else.
-> +	 */
-> +	/delete-property/ pinctrl-0;
-> +	/delete-property/ pinctrl-names;
 > +};
 > +
->   &spi1 {
->   	status = "okay";
+>   &emmc_phy {
+>   	bootph-pre-ram;
+>   	bootph-some-ram;
+> @@ -196,3 +174,7 @@
+>   &vopl {
+>   	bootph-some-ram;
+>   };
+> +
+> +&xin24m {
+> +	bootph-all;
+> +};
+> diff --git a/arch/arm/dts/rk3399.dtsi b/arch/arm/dts/rk3399.dtsi
+> index 3871c7fd83b0..6e12c5a920ca 100644
+> --- a/arch/arm/dts/rk3399.dtsi
+> +++ b/arch/arm/dts/rk3399.dtsi
+> @@ -19,7 +19,11 @@
+>   	#size-cells = <2>;
 >   
->   	pinctrl-names = "default", "sleep";
->   	pinctrl-1 = <&spi1_sleep>;
+>   	aliases {
+> -		ethernet0 = &gmac;
+> +		gpio0 = &gpio0;
+> +		gpio1 = &gpio1;
+> +		gpio2 = &gpio2;
+> +		gpio3 = &gpio3;
+> +		gpio4 = &gpio4;
+>   		i2c0 = &i2c0;
+>   		i2c1 = &i2c1;
+>   		i2c2 = &i2c2;
+> @@ -124,6 +128,12 @@
+>   			#cooling-cells = <2>; /* min followed by max */
+>   			dynamic-power-coefficient = <436>;
+>   			cpu-idle-states = <&CPU_SLEEP &CLUSTER_SLEEP>;
+> +
+> +			thermal-idle {
+> +				#cooling-cells = <2>;
+> +				duration-us = <10000>;
+> +				exit-latency-us = <500>;
+> +			};
+>   		};
 >   
-> -	spi_flash: spiflash@0 {
-> +	flash@0 {
->   		compatible = "jedec,spi-nor";
->   		reg = <0>;
+>   		cpu_b1: cpu@101 {
+> @@ -136,6 +146,12 @@
+>   			#cooling-cells = <2>; /* min followed by max */
+>   			dynamic-power-coefficient = <436>;
+>   			cpu-idle-states = <&CPU_SLEEP &CLUSTER_SLEEP>;
+> +
+> +			thermal-idle {
+> +				#cooling-cells = <2>;
+> +				duration-us = <10000>;
+> +				exit-latency-us = <500>;
+> +			};
+>   		};
 >   
+>   		idle-states {
+> @@ -166,6 +182,15 @@
+>   		ports = <&vopl_out>, <&vopb_out>;
+>   	};
+>   
+> +	dmc: memory-controller {
+> +		compatible = "rockchip,rk3399-dmc";
+> +		rockchip,pmu = <&pmugrf>;
+> +		devfreq-events = <&dfi>;
+> +		clocks = <&cru SCLK_DDRC>;
+> +		clock-names = "dmc_clk";
+> +		status = "disabled";
+> +	};
+> +
+>   	pmu_a53 {
+>   		compatible = "arm,cortex-a53-pmu";
+>   		interrupts = <GIC_PPI 7 IRQ_TYPE_LEVEL_LOW &ppi_cluster0>;
+> @@ -244,6 +269,33 @@
+>   		};
+>   	};
+>   
+> +	pcie0_ep: pcie-ep@f8000000 {
+> +		compatible = "rockchip,rk3399-pcie-ep";
+> +		reg = <0x0 0xfd000000 0x0 0x1000000>,
+> +		      <0x0 0xfa000000 0x0 0x2000000>;
+> +		reg-names = "apb-base", "mem-base";
+> +		clocks = <&cru ACLK_PCIE>, <&cru ACLK_PERF_PCIE>,
+> +			 <&cru PCLK_PCIE>, <&cru SCLK_PCIE_PM>;
+> +		clock-names = "aclk", "aclk-perf",
+> +			      "hclk", "pm";
+> +		max-functions = /bits/ 8 <8>;
+> +		num-lanes = <4>;
+> +		resets = <&cru SRST_PCIE_CORE>, <&cru SRST_PCIE_MGMT>,
+> +			 <&cru SRST_PCIE_MGMT_STICKY>, <&cru SRST_PCIE_PIPE>,
+> +			 <&cru SRST_PCIE_PM>, <&cru SRST_P_PCIE>,
+> +			 <&cru SRST_A_PCIE>;
+> +		reset-names = "core", "mgmt", "mgmt-sticky", "pipe",
+> +			      "pm", "pclk", "aclk";
+> +		phys = <&pcie_phy 0>, <&pcie_phy 1>,
+> +		       <&pcie_phy 2>, <&pcie_phy 3>;
+> +		phy-names = "pcie-phy-0", "pcie-phy-1",
+> +			    "pcie-phy-2", "pcie-phy-3";
+> +		rockchip,max-outbound-regions = <32>;
+> +		pinctrl-names = "default";
+> +		pinctrl-0 = <&pcie_clkreqnb_cpm>;
+> +		status = "disabled";
+> +	};
+> +
+>   	gmac: ethernet@fe300000 {
+>   		compatible = "rockchip,rk3399-gmac";
+>   		reg = <0x0 0xfe300000 0x0 0x10000>;
+> @@ -361,6 +413,54 @@
+>   		status = "disabled";
+>   	};
+>   
+> +	debug@fe430000 {
+> +		compatible = "arm,coresight-cpu-debug", "arm,primecell";
+> +		reg = <0 0xfe430000 0 0x1000>;
+> +		clocks = <&cru PCLK_COREDBG_L>;
+> +		clock-names = "apb_pclk";
+> +		cpu = <&cpu_l0>;
+> +	};
+> +
+> +	debug@fe432000 {
+> +		compatible = "arm,coresight-cpu-debug", "arm,primecell";
+> +		reg = <0 0xfe432000 0 0x1000>;
+> +		clocks = <&cru PCLK_COREDBG_L>;
+> +		clock-names = "apb_pclk";
+> +		cpu = <&cpu_l1>;
+> +	};
+> +
+> +	debug@fe434000 {
+> +		compatible = "arm,coresight-cpu-debug", "arm,primecell";
+> +		reg = <0 0xfe434000 0 0x1000>;
+> +		clocks = <&cru PCLK_COREDBG_L>;
+> +		clock-names = "apb_pclk";
+> +		cpu = <&cpu_l2>;
+> +	};
+> +
+> +	debug@fe436000 {
+> +		compatible = "arm,coresight-cpu-debug", "arm,primecell";
+> +		reg = <0 0xfe436000 0 0x1000>;
+> +		clocks = <&cru PCLK_COREDBG_L>;
+> +		clock-names = "apb_pclk";
+> +		cpu = <&cpu_l3>;
+> +	};
+> +
+> +	debug@fe610000 {
+> +		compatible = "arm,coresight-cpu-debug", "arm,primecell";
+> +		reg = <0 0xfe610000 0 0x1000>;
+> +		clocks = <&cru PCLK_COREDBG_B>;
+> +		clock-names = "apb_pclk";
+> +		cpu = <&cpu_b0>;
+> +	};
+> +
+> +	debug@fe710000 {
+> +		compatible = "arm,coresight-cpu-debug", "arm,primecell";
+> +		reg = <0 0xfe710000 0 0x1000>;
+> +		clocks = <&cru PCLK_COREDBG_B>;
+> +		clock-names = "apb_pclk";
+> +		cpu = <&cpu_b1>;
+> +	};
+> +
+>   	usbdrd3_0: usb@fe800000 {
+>   		compatible = "rockchip,rk3399-dwc3";
+>   		#address-cells = <2>;
+> @@ -483,7 +583,7 @@
+>   		      <0x0 0xfff10000 0 0x10000>, /* GICH */
+>   		      <0x0 0xfff20000 0 0x10000>; /* GICV */
+>   		interrupts = <GIC_PPI 9 IRQ_TYPE_LEVEL_HIGH 0>;
+> -		its: interrupt-controller@fee20000 {
+> +		its: msi-controller@fee20000 {
+>   			compatible = "arm,gic-v3-its";
+>   			msi-controller;
+>   			#msi-cells = <1>;
+> @@ -513,6 +613,26 @@
+>   		status = "disabled";
+>   	};
+>   
+> +	crypto0: crypto@ff8b0000 {
+> +		compatible = "rockchip,rk3399-crypto";
+> +		reg = <0x0 0xff8b0000 0x0 0x4000>;
+> +		interrupts = <GIC_SPI 0 IRQ_TYPE_LEVEL_HIGH 0>;
+> +		clocks = <&cru HCLK_M_CRYPTO0>, <&cru HCLK_S_CRYPTO0>, <&cru SCLK_CRYPTO0>;
+> +		clock-names = "hclk_master", "hclk_slave", "sclk";
+> +		resets = <&cru SRST_CRYPTO0>, <&cru SRST_CRYPTO0_S>, <&cru SRST_CRYPTO0_M>;
+> +		reset-names = "master", "slave", "crypto-rst";
+> +	};
+> +
+> +	crypto1: crypto@ff8b8000 {
+> +		compatible = "rockchip,rk3399-crypto";
+> +		reg = <0x0 0xff8b8000 0x0 0x4000>;
+> +		interrupts = <GIC_SPI 135 IRQ_TYPE_LEVEL_HIGH 0>;
+> +		clocks = <&cru HCLK_M_CRYPTO1>, <&cru HCLK_S_CRYPTO1>, <&cru SCLK_CRYPTO1>;
+> +		clock-names = "hclk_master", "hclk_slave", "sclk";
+> +		resets = <&cru SRST_CRYPTO1>, <&cru SRST_CRYPTO1_S>, <&cru SRST_CRYPTO1_M>;
+> +		reset-names = "master", "slave", "crypto-rst";
+> +	};
+> +
+>   	i2c1: i2c@ff110000 {
+>   		compatible = "rockchip,rk3399-i2c";
+>   		reg = <0x0 0xff110000 0x0 0x1000>;
+> @@ -993,7 +1113,9 @@
+>   			power-domain@RK3399_PD_VDU {
+>   				reg = <RK3399_PD_VDU>;
+>   				clocks = <&cru ACLK_VDU>,
+> -					 <&cru HCLK_VDU>;
+> +					 <&cru HCLK_VDU>,
+> +					 <&cru SCLK_VDU_CA>,
+> +					 <&cru SCLK_VDU_CORE>;
+>   				pm_qos = <&qos_video_m1_r>,
+>   					 <&qos_video_m1_w>;
+>   				#power-domain-cells = <0>;
+> @@ -1235,6 +1357,15 @@
+>   		status = "disabled";
+>   	};
+>   
+> +	dfi: dfi@ff630000 {
+> +		reg = <0x00 0xff630000 0x00 0x4000>;
+> +		compatible = "rockchip,rk3399-dfi";
+> +		rockchip,pmu = <&pmugrf>;
+> +		interrupts = <GIC_SPI 131 IRQ_TYPE_LEVEL_HIGH 0>;
+> +		clocks = <&cru PCLK_DDR_MON>;
+> +		clock-names = "pclk_ddr_mon";
+> +	};
+> +
+>   	vpu: video-codec@ff650000 {
+>   		compatible = "rockchip,rk3399-vpu";
+>   		reg = <0x0 0xff650000 0x0 0x800>;
+> @@ -1251,7 +1382,6 @@
+>   		compatible = "rockchip,iommu";
+>   		reg = <0x0 0xff650800 0x0 0x40>;
+>   		interrupts = <GIC_SPI 115 IRQ_TYPE_LEVEL_HIGH 0>;
+> -		interrupt-names = "vpu_mmu";
+>   		clocks = <&cru ACLK_VCODEC>, <&cru HCLK_VCODEC>;
+>   		clock-names = "aclk", "iface";
+>   		#iommu-cells = <0>;
+> @@ -1260,7 +1390,7 @@
+>   
+>   	vdec: video-codec@ff660000 {
+>   		compatible = "rockchip,rk3399-vdec";
+> -		reg = <0x0 0xff660000 0x0 0x400>;
+> +		reg = <0x0 0xff660000 0x0 0x480>;
+>   		interrupts = <GIC_SPI 116 IRQ_TYPE_LEVEL_HIGH 0>;
+>   		clocks = <&cru ACLK_VDU>, <&cru HCLK_VDU>,
+>   			 <&cru SCLK_VDU_CA>, <&cru SCLK_VDU_CORE>;
+> @@ -1273,7 +1403,6 @@
+>   		compatible = "rockchip,iommu";
+>   		reg = <0x0 0xff660480 0x0 0x40>, <0x0 0xff6604c0 0x0 0x40>;
+>   		interrupts = <GIC_SPI 117 IRQ_TYPE_LEVEL_HIGH 0>;
+> -		interrupt-names = "vdec_mmu";
+>   		clocks = <&cru ACLK_VDU>, <&cru HCLK_VDU>;
+>   		clock-names = "aclk", "iface";
+>   		power-domains = <&power RK3399_PD_VDU>;
+> @@ -1284,7 +1413,6 @@
+>   		compatible = "rockchip,iommu";
+>   		reg = <0x0 0xff670800 0x0 0x40>;
+>   		interrupts = <GIC_SPI 42 IRQ_TYPE_LEVEL_HIGH 0>;
+> -		interrupt-names = "iep_mmu";
+>   		clocks = <&cru ACLK_IEP>, <&cru HCLK_IEP>;
+>   		clock-names = "aclk", "iface";
+>   		#iommu-cells = <0>;
+> @@ -1356,9 +1484,11 @@
+>   		clock-names = "apb_pclk";
+>   	};
+>   
+> -	pmucru: pmu-clock-controller@ff750000 {
+> +	pmucru: clock-controller@ff750000 {
+>   		compatible = "rockchip,rk3399-pmucru";
+>   		reg = <0x0 0xff750000 0x0 0x1000>;
+> +		clocks = <&xin24m>;
+> +		clock-names = "xin24m";
+>   		rockchip,grf = <&pmugrf>;
+>   		#clock-cells = <1>;
+>   		#reset-cells = <1>;
+> @@ -1369,6 +1499,8 @@
+>   	cru: clock-controller@ff760000 {
+>   		compatible = "rockchip,rk3399-cru";
+>   		reg = <0x0 0xff760000 0x0 0x1000>;
+> +		clocks = <&xin24m>;
+> +		clock-names = "xin24m";
+>   		rockchip,grf = <&grf>;
+>   		#clock-cells = <1>;
+>   		#reset-cells = <1>;
+> @@ -1382,7 +1514,8 @@
+>   			<&cru HCLK_PERILP1>, <&cru PCLK_PERILP1>,
+>   			<&cru ACLK_VIO>, <&cru ACLK_HDCP>,
+>   			<&cru ACLK_GIC_PRE>,
+> -			<&cru PCLK_DDR>;
+> +			<&cru PCLK_DDR>,
+> +			<&cru ACLK_VDU>;
+>   		assigned-clock-rates =
+>   			 <594000000>,  <800000000>,
+>   			<1000000000>,
+> @@ -1393,7 +1526,8 @@
+>   			 <100000000>,   <50000000>,
+>   			 <400000000>, <400000000>,
+>   			 <200000000>,
+> -			 <200000000>;
+> +			 <200000000>,
+> +			 <400000000>;
+>   	};
+>   
+>   	grf: syscon@ff770000 {
+> @@ -1477,6 +1611,7 @@
+>   			reg = <0xf780 0x24>;
+>   			clocks = <&sdhci>;
+>   			clock-names = "emmcclk";
+> +			drive-impedance-ohm = <50>;
+>   			#phy-cells = <0>;
+>   			status = "disabled";
+>   		};
+> @@ -1487,7 +1622,6 @@
+>   			clock-names = "refclk";
+>   			#phy-cells = <1>;
+>   			resets = <&cru SRST_PCIEPHY>;
+> -			drive-impedance-ohm = <50>;
+>   			reset-names = "phy";
+>   			status = "disabled";
+>   		};
+> @@ -1582,8 +1716,9 @@
+>   		dma-names = "tx", "rx";
+>   		clock-names = "i2s_clk", "i2s_hclk";
+>   		clocks = <&cru SCLK_I2S0_8CH>, <&cru HCLK_I2S0_8CH>;
+> -		pinctrl-names = "default";
+> +		pinctrl-names = "bclk_on", "bclk_off";
+>   		pinctrl-0 = <&i2s0_8ch_bus>;
+> +		pinctrl-1 = <&i2s0_8ch_bus_bclk_off>;
+>   		power-domains = <&power RK3399_PD_SDIOAUDIO>;
+>   		#sound-dai-cells = <0>;
+>   		status = "disabled";
+> @@ -1619,7 +1754,7 @@
+>   
+>   	vopl: vop@ff8f0000 {
+>   		compatible = "rockchip,rk3399-vop-lit";
+> -		reg = <0x0 0xff8f0000 0x0 0x3efc>;
+> +		reg = <0x0 0xff8f0000 0x0 0x2000>, <0x0 0xff8f2000 0x0 0x400>;
+>   		interrupts = <GIC_SPI 119 IRQ_TYPE_LEVEL_HIGH 0>;
+>   		assigned-clocks = <&cru ACLK_VOP1>, <&cru HCLK_VOP1>;
+>   		assigned-clock-rates = <400000000>, <100000000>;
+> @@ -1666,7 +1801,6 @@
+>   		compatible = "rockchip,iommu";
+>   		reg = <0x0 0xff8f3f00 0x0 0x100>;
+>   		interrupts = <GIC_SPI 119 IRQ_TYPE_LEVEL_HIGH 0>;
+> -		interrupt-names = "vopl_mmu";
+>   		clocks = <&cru ACLK_VOP1>, <&cru HCLK_VOP1>;
+>   		clock-names = "aclk", "iface";
+>   		power-domains = <&power RK3399_PD_VOPL>;
+> @@ -1676,7 +1810,7 @@
+>   
+>   	vopb: vop@ff900000 {
+>   		compatible = "rockchip,rk3399-vop-big";
+> -		reg = <0x0 0xff900000 0x0 0x3efc>;
+> +		reg = <0x0 0xff900000 0x0 0x2000>, <0x0 0xff902000 0x0 0x1000>;
+>   		interrupts = <GIC_SPI 118 IRQ_TYPE_LEVEL_HIGH 0>;
+>   		assigned-clocks = <&cru ACLK_VOP0>, <&cru HCLK_VOP0>;
+>   		assigned-clock-rates = <400000000>, <100000000>;
+> @@ -1723,7 +1857,6 @@
+>   		compatible = "rockchip,iommu";
+>   		reg = <0x0 0xff903f00 0x0 0x100>;
+>   		interrupts = <GIC_SPI 118 IRQ_TYPE_LEVEL_HIGH 0>;
+> -		interrupt-names = "vopb_mmu";
+>   		clocks = <&cru ACLK_VOP0>, <&cru HCLK_VOP0>;
+>   		clock-names = "aclk", "iface";
+>   		power-domains = <&power RK3399_PD_VOPB>;
+> @@ -1761,7 +1894,6 @@
+>   		compatible = "rockchip,iommu";
+>   		reg = <0x0 0xff914000 0x0 0x100>, <0x0 0xff915000 0x0 0x100>;
+>   		interrupts = <GIC_SPI 43 IRQ_TYPE_LEVEL_HIGH 0>;
+> -		interrupt-names = "isp0_mmu";
+>   		clocks = <&cru ACLK_ISP0_WRAPPER>, <&cru HCLK_ISP0_WRAPPER>;
+>   		clock-names = "aclk", "iface";
+>   		#iommu-cells = <0>;
+> @@ -1769,11 +1901,36 @@
+>   		rockchip,disable-mmu-reset;
+>   	};
+>   
+> +	isp1: isp1@ff920000 {
+> +		compatible = "rockchip,rk3399-cif-isp";
+> +		reg = <0x0 0xff920000 0x0 0x4000>;
+> +		interrupts = <GIC_SPI 44 IRQ_TYPE_LEVEL_HIGH 0>;
+> +		clocks = <&cru SCLK_ISP1>,
+> +			 <&cru ACLK_ISP1_WRAPPER>,
+> +			 <&cru HCLK_ISP1_WRAPPER>;
+> +		clock-names = "isp", "aclk", "hclk";
+> +		iommus = <&isp1_mmu>;
+> +		phys = <&mipi_dsi1>;
+> +		phy-names = "dphy";
+> +		power-domains = <&power RK3399_PD_ISP1>;
+> +		status = "disabled";
+> +
+> +		ports {
+> +			#address-cells = <1>;
+> +			#size-cells = <0>;
+> +
+> +			port@0 {
+> +				reg = <0>;
+> +				#address-cells = <1>;
+> +				#size-cells = <0>;
+> +			};
+> +		};
+> +	};
+> +
+>   	isp1_mmu: iommu@ff924000 {
+>   		compatible = "rockchip,iommu";
+>   		reg = <0x0 0xff924000 0x0 0x100>, <0x0 0xff925000 0x0 0x100>;
+>   		interrupts = <GIC_SPI 44 IRQ_TYPE_LEVEL_HIGH 0>;
+> -		interrupt-names = "isp1_mmu";
+>   		clocks = <&cru ACLK_ISP1_WRAPPER>, <&cru HCLK_ISP1_WRAPPER>;
+>   		clock-names = "aclk", "iface";
+>   		#iommu-cells = <0>;
+> @@ -1802,10 +1959,10 @@
+>   		interrupts = <GIC_SPI 23 IRQ_TYPE_LEVEL_HIGH 0>;
+>   		clocks = <&cru PCLK_HDMI_CTRL>,
+>   			 <&cru SCLK_HDMI_SFR>,
+> -			 <&cru PLL_VPLL>,
+> +			 <&cru SCLK_HDMI_CEC>,
+>   			 <&cru PCLK_VIO_GRF>,
+> -			 <&cru SCLK_HDMI_CEC>;
+> -		clock-names = "iahb", "isfr", "vpll", "grf", "cec";
+> +			 <&cru PLL_VPLL>;
+> +		clock-names = "iahb", "isfr", "cec", "grf", "ref";
+>   		power-domains = <&power RK3399_PD_HDCP>;
+>   		reg-io-width = <4>;
+>   		rockchip,grf = <&grf>;
+> @@ -1829,7 +1986,7 @@
+>   		};
+>   	};
+>   
+> -	mipi_dsi: mipi@ff960000 {
+> +	mipi_dsi: dsi@ff960000 {
+>   		compatible = "rockchip,rk3399-mipi-dsi", "snps,dw-mipi-dsi";
+>   		reg = <0x0 0xff960000 0x0 0x8000>;
+>   		interrupts = <GIC_SPI 45 IRQ_TYPE_LEVEL_HIGH 0>;
+> @@ -1857,15 +2014,20 @@
+>   					reg = <0>;
+>   					remote-endpoint = <&vopb_out_mipi>;
+>   				};
+> +
+>   				mipi_in_vopl: endpoint@1 {
+>   					reg = <1>;
+>   					remote-endpoint = <&vopl_out_mipi>;
+>   				};
+>   			};
+> +
+> +			mipi_out: port@1 {
+> +				reg = <1>;
+> +			};
+>   		};
+>   	};
+>   
+> -	mipi_dsi1: mipi@ff968000 {
+> +	mipi_dsi1: dsi@ff968000 {
+>   		compatible = "rockchip,rk3399-mipi-dsi", "snps,dw-mipi-dsi";
+>   		reg = <0x0 0xff968000 0x0 0x8000>;
+>   		interrupts = <GIC_SPI 46 IRQ_TYPE_LEVEL_HIGH 0>;
+> @@ -1878,6 +2040,7 @@
+>   		rockchip,grf = <&grf>;
+>   		#address-cells = <1>;
+>   		#size-cells = <0>;
+> +		#phy-cells = <0>;
+>   		status = "disabled";
+>   
+>   		ports {
+> @@ -1899,10 +2062,14 @@
+>   					remote-endpoint = <&vopl_out_mipi1>;
+>   				};
+>   			};
+> +
+> +			mipi1_out: port@1 {
+> +				reg = <1>;
+> +			};
+>   		};
+>   	};
+>   
+> -	edp: edp@ff970000 {
+> +	edp: dp@ff970000 {
+>   		compatible = "rockchip,rk3399-edp";
+>   		reg = <0x0 0xff970000 0x0 0x8000>;
+>   		interrupts = <GIC_SPI 10 IRQ_TYPE_LEVEL_HIGH 0>;
+> @@ -1919,6 +2086,7 @@
+>   		ports {
+>   			#address-cells = <1>;
+>   			#size-cells = <0>;
+> +
+>   			edp_in: port@0 {
+>   				reg = <0>;
+>   				#address-cells = <1>;
+> @@ -1934,6 +2102,10 @@
+>   					remote-endpoint = <&vopl_out_edp>;
+>   				};
+>   			};
+> +
+> +			edp_out: port@1 {
+> +				reg = <1>;
+> +			};
+>   		};
+>   	};
+>   
+> @@ -1946,6 +2118,7 @@
+>   		interrupt-names = "job", "mmu", "gpu";
+>   		clocks = <&cru ACLK_GPU>;
+>   		#cooling-cells = <2>;
+> +		dynamic-power-coefficient = <2640>;
+>   		power-domains = <&power RK3399_PD_GPU>;
+>   		status = "disabled";
+>   	};
+> @@ -1958,7 +2131,7 @@
+>   		#size-cells = <2>;
+>   		ranges;
+>   
+> -		gpio0: gpio0@ff720000 {
+> +		gpio0: gpio@ff720000 {
+>   			compatible = "rockchip,gpio-bank";
+>   			reg = <0x0 0xff720000 0x0 0x100>;
+>   			clocks = <&pmucru PCLK_GPIO0_PMU>;
+> @@ -1971,7 +2144,7 @@
+>   			#interrupt-cells = <0x2>;
+>   		};
+>   
+> -		gpio1: gpio1@ff730000 {
+> +		gpio1: gpio@ff730000 {
+>   			compatible = "rockchip,gpio-bank";
+>   			reg = <0x0 0xff730000 0x0 0x100>;
+>   			clocks = <&pmucru PCLK_GPIO1_PMU>;
+> @@ -1984,7 +2157,7 @@
+>   			#interrupt-cells = <0x2>;
+>   		};
+>   
+> -		gpio2: gpio2@ff780000 {
+> +		gpio2: gpio@ff780000 {
+>   			compatible = "rockchip,gpio-bank";
+>   			reg = <0x0 0xff780000 0x0 0x100>;
+>   			clocks = <&cru PCLK_GPIO2>;
+> @@ -1997,7 +2170,7 @@
+>   			#interrupt-cells = <0x2>;
+>   		};
+>   
+> -		gpio3: gpio3@ff788000 {
+> +		gpio3: gpio@ff788000 {
+>   			compatible = "rockchip,gpio-bank";
+>   			reg = <0x0 0xff788000 0x0 0x100>;
+>   			clocks = <&cru PCLK_GPIO3>;
+> @@ -2010,7 +2183,7 @@
+>   			#interrupt-cells = <0x2>;
+>   		};
+>   
+> -		gpio4: gpio4@ff790000 {
+> +		gpio4: gpio@ff790000 {
+>   			compatible = "rockchip,gpio-bank";
+>   			reg = <0x0 0xff790000 0x0 0x100>;
+>   			clocks = <&cru PCLK_GPIO4>;
+> @@ -2108,12 +2281,38 @@
+>   			output-low;
+>   		};
+>   
+> +		pcfg_input_enable: pcfg-input-enable {
+> +			input-enable;
+> +		};
+> +
+> +		pcfg_input_pull_up: pcfg-input-pull-up {
+> +			input-enable;
+> +			bias-pull-up;
+> +		};
+> +
+> +		pcfg_input_pull_down: pcfg-input-pull-down {
+> +			input-enable;
+> +			bias-pull-down;
+> +		};
+> +
+>   		clock {
+>   			clk_32k: clk-32k {
+>   				rockchip,pins = <0 RK_PA0 2 &pcfg_pull_none>;
+>   			};
+>   		};
+>   
+> +		cif {
+> +			cif_clkin: cif-clkin {
+> +				rockchip,pins =
+> +					<2 RK_PB2 3 &pcfg_pull_none>;
+> +			};
+> +
+> +			cif_clkouta: cif-clkouta {
+> +				rockchip,pins =
+> +					<2 RK_PB3 3 &pcfg_pull_none>;
+> +			};
+> +		};
+> +
+>   		edp {
+>   			edp_hpd: edp-hpd {
+>   				rockchip,pins =
+> @@ -2264,6 +2463,16 @@
+>   					<4 RK_PA0 1 &pcfg_pull_none>;
+>   			};
+>   
+> +			i2s0_2ch_bus_bclk_off: i2s0-2ch-bus-bclk-off {
+> +				rockchip,pins =
+> +					<3 RK_PD0 RK_FUNC_GPIO &pcfg_pull_none>,
+> +					<3 RK_PD1 1 &pcfg_pull_none>,
+> +					<3 RK_PD2 1 &pcfg_pull_none>,
+> +					<3 RK_PD3 1 &pcfg_pull_none>,
+> +					<3 RK_PD7 1 &pcfg_pull_none>,
+> +					<4 RK_PA0 1 &pcfg_pull_none>;
+> +			};
+> +
+>   			i2s0_8ch_bus: i2s0-8ch-bus {
+>   				rockchip,pins =
+>   					<3 RK_PD0 1 &pcfg_pull_none>,
+> @@ -2276,6 +2485,19 @@
+>   					<3 RK_PD7 1 &pcfg_pull_none>,
+>   					<4 RK_PA0 1 &pcfg_pull_none>;
+>   			};
+> +
+> +			i2s0_8ch_bus_bclk_off: i2s0-8ch-bus-bclk-off {
+> +				rockchip,pins =
+> +					<3 RK_PD0 RK_FUNC_GPIO &pcfg_pull_none>,
+> +					<3 RK_PD1 1 &pcfg_pull_none>,
+> +					<3 RK_PD2 1 &pcfg_pull_none>,
+> +					<3 RK_PD3 1 &pcfg_pull_none>,
+> +					<3 RK_PD4 1 &pcfg_pull_none>,
+> +					<3 RK_PD5 1 &pcfg_pull_none>,
+> +					<3 RK_PD6 1 &pcfg_pull_none>,
+> +					<3 RK_PD7 1 &pcfg_pull_none>,
+> +					<4 RK_PA0 1 &pcfg_pull_none>;
+> +			};
+>   		};
+>   
+>   		i2s1 {
+> @@ -2287,6 +2509,15 @@
+>   					<4 RK_PA6 1 &pcfg_pull_none>,
+>   					<4 RK_PA7 1 &pcfg_pull_none>;
+>   			};
+> +
+> +			i2s1_2ch_bus_bclk_off: i2s1-2ch-bus-bclk-off {
+> +				rockchip,pins =
+> +					<4 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>,
+> +					<4 RK_PA4 1 &pcfg_pull_none>,
+> +					<4 RK_PA5 1 &pcfg_pull_none>,
+> +					<4 RK_PA6 1 &pcfg_pull_none>,
+> +					<4 RK_PA7 1 &pcfg_pull_none>;
+> +			};
+>   		};
+>   
+>   		sdio0 {
