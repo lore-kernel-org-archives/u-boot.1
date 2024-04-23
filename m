@@ -4,59 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7845CC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 23:17:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3DB3C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 23:18:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DFC8888CAB;
-	Wed, 24 Apr 2024 01:17:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id 707A388CB0;
+	Wed, 24 Apr 2024 01:18:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="RKb9mpXz";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id F3D2688CA9; Wed, 24 Apr 2024 01:17:55 +0200 (CEST)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1713914317;
+	bh=6pQ6+yc09R2WIUxP1MdXg0el5nqBkd3ks32KuBBnOOM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=w0dQZq89XCARcCqeET36joGKiH0P+MYJ57e5zGouRAq5GANj3nslLuUZP8VpOg6BI
+	 v4bcdvVtRurbmzGqO37jv2JSpX8HB8UagqSwaIA0CAuHRn8obW1u6d4GonjE/AaBA6
+	 nQLK8f6+uoQ4ab7cvsCk3gziTGXh0v5boaKyH2Pvwl5ZA4Uvwbs5KahQLGjhhZt5j4
+	 P1qYMO5amkfgtKmPMjyne7H90jAyxLsfTYOFUHtRk5zz6/Q5Hrr53fIXWu9VxHP9QC
+	 h0BsY1TLphRQQ8aNBV6hwLqO6rNvzfp7vfndhyQd7TdeZ4qE+b0ve6zIs3h80uXLfP
+	 BWzf9ctEyFKtg==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED87188359
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 01:17:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4VPJ1r03ZTz9sb2;
- Wed, 24 Apr 2024 01:17:52 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1713914272;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=s9JUyBhdLPahj/T5EH/6HkEkwJxBNjBt1i+HCyPtFog=;
- b=RKb9mpXzlM+AwNTMwNuC/7uOiyg/q1VcnN7JCQzqoKCNcrf3ELnp+EA32ljKvNtHNK3htE
- iW9UErkwLQ1lE5K8ES8JHZe/kxnGbDU+IgUDEbslkXg29+irn8OD1F0WgchtOL91qmE+fJ
- /XnRqGo2hlOOLl6fKIAamoYx0EZukp5nGfdThyw35PonfrzSZyumqjzt734y4SvBfYfo9K
- R4Kuo/YUEIype2qELbLqYdsdc1no8zFhbbNxras6/2ZSNah8XgCZIaM3HPs/dmc9WlxatL
- d6IuQvXuN8ir8un1nJ2GFuofwdoz9ZaqnWexeKRiGjLe92PX/alG5WHi4K7XOA==
-Message-ID: <fab40e09-1ac4-45c3-8dda-f0a1544d2d39@mailbox.org>
-Date: Wed, 24 Apr 2024 01:17:49 +0200
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 5817B88359;
+ Wed, 24 Apr 2024 01:18:35 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1713914316;
+ bh=6pQ6+yc09R2WIUxP1MdXg0el5nqBkd3ks32KuBBnOOM=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=zTb5RBlVz6Zb+9l66wOiI8x3qz2l2c87ltvM4FmcvVPAp9dogl3Q4+2bDeT/2o/tn
+ g8r2qCMPgJo8uKwId3hStqdDuanHrrceVroPPudAZ8Q8MJTtn66eJ+pjbRmHdEp/HA
+ mSuFZm/8hVUtXoXLs/5+nZ4x5qTbl248QgNfNbCOhdIDgAFXnmfbaFWPFgiU8z2nAv
+ G0eFpK3ddFJh7DfWYKXGLvyfuMG9xacMLr2fGvZXKpUU5ew/ayTcsPz4KAG6gxWFgL
+ yb1N9RYdIH7v595OLbmRiyTVbjEZBxWZW/50rEcSDyXAI7Ghb1C5mfblYGoJPQ7oYh
+ d+T1+PbeqCu9A==
+Message-ID: <c481eb6b-2e1a-4a98-a590-e51081e183ce@denx.de>
+Date: Wed, 24 Apr 2024 00:31:37 +0200
 MIME-Version: 1.0
-Subject: Re: [PATCH v4] mmc: Poll CD in case cyclic framework is enabled
-To: u-boot@lists.denx.de, Jaehoon Chung <jh80.chung@samsung.com>
-Cc: Peng Fan <peng.fan@nxp.com>, Simon Glass <sjg@chromium.org>
-References: <20240316201416.211480-1-marek.vasut+renesas@mailbox.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] usb: dwc2: Add in version 4xx compatibility
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Greg Malysa <greg.malysa@timesys.com>,
+ Kongyang Liu <seashell11234455@gmail.com>
+Cc: u-boot@lists.denx.de,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Ian Roberts <ian.roberts@timesys.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Simon Glass <sjg@chromium.org>, Teik Heng Chong <teik.heng.chong@intel.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20240326023208.3525-1-greg.malysa@timesys.com>
+ <8e4d6360-8722-4358-b981-2b3405373861@denx.de>
+ <CAAjXUap1DDPOSKQRc3-h0m5ybv_AHZePwW-vxRSeKW1STZp-0g@mail.gmail.com>
+ <87r0f54qxo.fsf@baylibre.com>
+ <CAAjXUaqYv1zTATXhU5GeOMpSCK-HMxvMW5_edbotZ8TUczcVMA@mail.gmail.com>
+ <874jbs7dyn.fsf@baylibre.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20240316201416.211480-1-marek.vasut+renesas@mailbox.org>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <874jbs7dyn.fsf@baylibre.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: ze5khdqd8uxez8ouiy3o3csihr7sg8tj
-X-MBO-RS-ID: ca160d6e5227a8dd559
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,11 +79,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/16/24 9:13 PM, Marek Vasut wrote:
-> In case the cyclic framework is enabled, poll the card detect of already
-> initialized cards and deinitialize them in case they are removed. Since
-> the card initialization is a longer process and card initialization is
-> done on first access to an uninitialized card anyway, avoid initializing
-> newly detected uninitialized cards in the cyclic callback.
+On 4/23/24 9:09 AM, Mattijs Korpershoek wrote:
+> Hi Greg,
+> 
+> On ven., avril 19, 2024 at 15:21, Greg Malysa <greg.malysa@timesys.com> wrote:
+> 
+>> Hi Mattijs,
+>>
+>>> Please avoid top-posting when replying, it makes following the
+>>> discussion more difficult:
+>>> https://www.kernel.org/doc/html/latest/process/submitting-patches.html#use-trimmed-interleaved-replies-in-email-discussions
+>>
+>> Will do. Sorry about that; I'm still learning about this approach to email.
+> 
+> No worries. There are quite some things to learn and we probably all did
+> this wrong when starting. Thank you for taking the time to learn and to contribute!
+> 
+>>
+>>> Looking at
+>>> https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=65dc2e725286106f99c6f6b78e3d9c52c15f3a9c
+>>>
+>>> we can see that the following is added:
+>>> #define DWC2_CORE_REV_MASK      0x0000ffff
+>>>
+>>> This makes me believe that the versioning follows a well known pattern.
+>>
+>> I can submit a v2 next week to bring it in line with the kernel's approach.
+> 
+> To me, it's fine as is.
+> 
+>>
+>>> Note that this change is also part of:
+>>> https://lore.kernel.org/all/20240328131811.94559-1-seashell11234455@gmail.com/
+>>
+>> Or if you prefer I can also drop our patch and we can pursue this
+>> linked patch with both 4xx compatibility and the 420a reset handling.
+> 
+> I think the patch you submitted is fine by itself, but I'd let Marek
+> decide since he is the maintainer for this part.
+> 
+> If you have access to the hardware that has a 4.20a dwc2 controller,
+> maybe you can help testing the patch above patch as well?
 
-Any input on this ?
++CC Liu on this thread, maybe it is best if the two of you figure out 
+the best common approach that works for you both ?
