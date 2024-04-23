@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A067DC18E72
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 18:33:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA8EEC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 18:33:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90EB888B25;
-	Tue, 23 Apr 2024 20:33:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E8E6688B2C;
+	Tue, 23 Apr 2024 20:33:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1713897189;
-	bh=IyrZ6wDluL1JmHRLh+wciFx7wQNyE/G6XZUYciwnL2I=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=g+6YSS7qg6xNPEyESjvKY32LJxX05dObrS1oNzJj/BSEvK3l/dbw2msBTJ4gdjDFT
-	 ogAsHJa3X8dP4xftcJV/RKKktHoV1yRzt8e+/c7VfIu0O0IGLjDvHbN8JfKR4EaXJR
-	 AUIT2RS7B1VTuTGT+aJNlXc6qvOxBheo+7YVZ9KUeREN73LH5S0pW6ILVA3QLPlhcp
-	 ph+rUlxHxaPKTJaH0lmhAAc/S9/2sGFSMvstXKySIKZ6jifylYSUnpTHSMI9PGhfU1
-	 DZqSkUd0HL+Hma6agtY39tdY0T1BCUvIDiYfFzTFHigJhpKPcz2co5X5WDxOMhiOME
-	 uG5Lk+yodrZKw==
+	s=phobos-20191101; t=1713897190;
+	bh=gprX3Tgq40L6AkujI2HD779dimuFEUG7Otc0fSimuUk=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=qqRgsyJIEUsuMTkMRe9c7N9T0xqBlnKxSDFytq5m/E2M5NKge0Dk4jp5NieMq12gw
+	 v2S32Ek0edCXdGHveEFpllK840Dk8dQ2t92bt0rajRUFy5kSMNIHXAEgPjoYk95eiy
+	 evRToEUXoRQx5QPC7DwtW/FCMMSetTEAtVLc8Nrp7vVI4p7bUu3nRFmfEccXf5u+so
+	 N1dC1mZnm25ZQoF05sQaHXQ8B5tM+C0FiqcfAk9ufprQyPy3lT7lBwQLgoGfJesRv+
+	 aIIu0HkzicAWpYQ+rFvJq0dsHJHcuT6qqtx+s4IlRIKm8AguJK4ggh/2SUGz0Rpqz+
+	 GRZ6pk6IwZYaQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id A8C4E8865B;
- Tue, 23 Apr 2024 20:33:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id E541A88B23;
+ Tue, 23 Apr 2024 20:33:08 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1713897188;
- bh=IyrZ6wDluL1JmHRLh+wciFx7wQNyE/G6XZUYciwnL2I=;
- h=From:To:Cc:Subject:Date:From;
- b=JmHOvE+h4RKsr1+6uJ2cwcoOBxMLHG0pJRfpxyDRhpX9PFvKOKsE6DvH2A88KPmBY
- usX54Xv+8R871YOXSeGv+9z8hsc2WmlvxSLIyR8wjSEZmUB8fhqR2fwxWjG346bqIh
- nts19LDmvmUpE7jPa1xQ+1tAj7i4+qilpMWG3ulb1YNiUA1ndx5o2St9rSuuFhKT8E
- U4EaXvhztxjfaSHtUGBaDiKL1tqKBV8G29ULymVqv193NRzXy3yETlXFhY8BmBkckc
- ilAi5gwWqIbIJLxqDNa+ytoJpzLumpyYgwPr4elwNcQoFV9sqdOUeMX/80g78FZUmW
- 1TjLNiaxQOS3g==
+ s=phobos-20191101; t=1713897189;
+ bh=gprX3Tgq40L6AkujI2HD779dimuFEUG7Otc0fSimuUk=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=Mv+dkaI6ubVzPilWmzL20w6uuD3Rr+21LQeY4Hfh55w3SwQ4urleNYZwxLDI25CWu
+ 7A12WIg7Bz8lxXaddHkcZANCsx5iW2RsxXoZFv7Ft+dU/5+KLB32V2dKoCNMVnfUGw
+ 0c64WNpEtEN6INFiPNsED4GZTatv/snCRSu4HBxbBNNrkCVP+xHGBao5c41mbzyTHq
+ iGKqfA7LlYT8UswiDm/xU3vxa3x+RT4S4X3cc5zNu8ktHGpxyN+Yt36GqUUvgLMIjs
+ byNW8hQKGcSiqqyLNzj1H2tLwgtVThppQhfBjiHhW5elhFZyw4mf+kiBRqbjbnVv4t
+ Oqg6qRLs3Y7uA==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
@@ -54,10 +55,13 @@ Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Stefan Eichenberger <stefan.eichenberger@toradex.com>,
  Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
-Subject: [PATCH 1/3] binman: Add nxp_imx8mimage etype
-Date: Tue, 23 Apr 2024 20:31:21 +0200
-Message-ID: <20240423183247.335791-1-marex@denx.de>
+Subject: [PATCH 2/3] ARM: dts: imx: Switch Ronetix iMX8MQ-CM to
+ imx8mq-u-boot.dtsi
+Date: Tue, 23 Apr 2024 20:31:22 +0200
+Message-ID: <20240423183247.335791-2-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240423183247.335791-1-marex@denx.de>
+References: <20240423183247.335791-1-marex@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,15 +80,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add new binman etype derived from mkimage etype which generates configuration
-input file for mkimage -T imx8mimage, and runs the mkimage on input data. The
-mkimage -T imx8mimage is used to generate combined image with SPL and DDR PHY
-blobs which is bootable on i.MX8M.
-
-The configuration file generated here is equivalent of imx8mimage.cfg, which
-is the file passed to '$ mkimage -T imx8mimage -n imx8mimage.cfg ...' . The
-settings generated into the imx8mimage.cfg file are configured via supported
-binman DT properties, nxp,boot-from, nxp,loader-address, nxp,rom-version.
+Include imx8mq-u-boot.dtsi in the board -u-boot.dtsi to pull in binman
+configuration instead of duplicating it in the board -u-boot.dtsi again.
+Drop the duplicate binman configuration.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -107,89 +105,135 @@ Cc: kernel@puri.sm
 Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 ---
- tools/binman/etype/nxp_imx8mimage.py | 73 ++++++++++++++++++++++++++++
- 1 file changed, 73 insertions(+)
- create mode 100644 tools/binman/etype/nxp_imx8mimage.py
+ arch/arm/dts/imx8mq-cm-u-boot.dtsi | 111 +----------------------------
+ 1 file changed, 1 insertion(+), 110 deletions(-)
 
-diff --git a/tools/binman/etype/nxp_imx8mimage.py b/tools/binman/etype/nxp_imx8mimage.py
-new file mode 100644
-index 00000000000..5a106e0a76e
---- /dev/null
-+++ b/tools/binman/etype/nxp_imx8mimage.py
-@@ -0,0 +1,73 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2023-2024 Marek Vasut <marex@denx.de>
-+# Written with much help from Simon Glass <sjg@chromium.org>
-+#
-+# Entry-type module for generating the i.MX8M mkimage -T imx8mimage
-+# configuration file and invocation of mkimage -T imx8mimage on the
-+# configuration file and input data.
-+#
-+
-+from collections import OrderedDict
-+
-+from binman.entry import Entry
-+from binman.etype.mkimage import Entry_mkimage
-+from binman import elf
-+from dtoc import fdt_util
-+from u_boot_pylib import tools
-+
-+class Entry_nxp_imx8mimage(Entry_mkimage):
-+    """NXP i.MX8M imx8mimage .cfg file generator and mkimage invoker
-+
-+    Properties / Entry arguments:
-+        - nxp,boot-from - device to boot from (e.g. 'sd')
-+        - nxp,loader-address - loader address (SPL text base)
-+        - nxp,rom-version - BootROM version ('2' for i.MX8M Nano and Plus)
-+    """
-+
-+    def __init__(self, section, etype, node):
-+        super().__init__(section, etype, node)
-+        self.required_props = ['nxp,boot-from', 'nxp,rom-version', 'nxp,loader-address']
-+
-+    def ReadNode(self):
-+        super().ReadNode()
-+        self.boot_from = fdt_util.GetString(self._node, 'nxp,boot-from')
-+        self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
-+        self.rom_version = fdt_util.GetInt(self._node, 'nxp,rom-version')
-+        self.ReadEntries()
-+
-+    def BuildSectionData(self, required):
-+        _, input_fname, uniq = self.collect_contents_to_file(
-+            self._entries.values(), 'input')
-+        # Generate mkimage configuration file similar to imx8mimage.cfg
-+        # and pass it to mkimage to generate SPL image for us here.
-+        cfg_fname = tools.get_output_filename('nxp.imx8mimage.cfg.%s' % uniq)
-+        with open(cfg_fname, 'w') as outf:
-+            print('ROM_VERSION v%d' % self.rom_version, file=outf)
-+            print('BOOT_FROM %s' % self.boot_from, file=outf)
-+            print('LOADER %s %#x' % (input_fname, self.loader_address), file=outf)
-+
-+        output_fname = tools.get_output_filename(f'cfg-out.{uniq}')
-+        args = ['-d', input_fname, '-n', cfg_fname, '-T', 'imx8mimage',
-+                output_fname]
-+        if self.mkimage.run_cmd(*args) is not None:
-+            return tools.read_file(output_fname)
-+        else:
-+            # Bintool is missing; just use the input data as the output
-+            self.record_missing_bintool(self.mkimage)
-+            return data
-+
-+    def SetImagePos(self, image_pos):
-+        # Customized SoC specific SetImagePos which skips the mkimage etype
-+        # implementation and removes the 0x48 offset introduced there. That
-+        # offset is only used for uImage/fitImage, which is not the case in
-+        # here.
-+        upto = 0x00
-+        for entry in super().GetEntries().values():
-+            entry.SetOffsetSize(upto, None)
-+
-+            # Give up if any entries lack a size
-+            if entry.size is None:
-+                return
-+            upto += entry.size
-+
-+        super(Entry_mkimage, self).SetImagePos(image_pos)
+diff --git a/arch/arm/dts/imx8mq-cm-u-boot.dtsi b/arch/arm/dts/imx8mq-cm-u-boot.dtsi
+index e23998f5aba..819501337e9 100644
+--- a/arch/arm/dts/imx8mq-cm-u-boot.dtsi
++++ b/arch/arm/dts/imx8mq-cm-u-boot.dtsi
+@@ -3,11 +3,7 @@
+  * Copyright 2019 NXP
+  */
+ 
+-/ {
+-	binman: binman {
+-		multiple-images;
+-	};
+-};
++#include "imx8mq-u-boot.dtsi"
+ 
+ &pinctrl_uart1 {
+ 	bootph-pre-ram;
+@@ -16,108 +12,3 @@
+ &uart1 {
+ 	bootph-pre-ram;
+ };
+-
+-&binman {
+-	 u-boot-spl-ddr {
+-		filename = "u-boot-spl-ddr.bin";
+-		pad-byte = <0xff>;
+-		align-size = <4>;
+-		align = <4>;
+-
+-		u-boot-spl {
+-			align-end = <4>;
+-		};
+-
+-		ddr-1d-imem-fw {
+-			filename = "lpddr4_pmu_train_1d_imem.bin";
+-			type = "blob-ext";
+-			align-end = <4>;
+-		};
+-
+-		ddr-1d-dmem-fw {
+-			filename = "lpddr4_pmu_train_1d_dmem.bin";
+-			type = "blob-ext";
+-			align-end = <4>;
+-		};
+-
+-		ddr-2d-imem-fw {
+-			filename = "lpddr4_pmu_train_2d_imem.bin";
+-			type = "blob-ext";
+-			align-end = <4>;
+-		};
+-
+-		ddr-2d-dmem-fw {
+-			filename = "lpddr4_pmu_train_2d_dmem.bin";
+-			type = "blob-ext";
+-			align-end = <4>;
+-		};
+-	};
+-
+-	flash {
+-		mkimage {
+-			args = "-n spl/u-boot-spl.cfgout -T imx8mimage -e 0x7e1000";
+-
+-			blob {
+-				filename = "u-boot-spl-ddr.bin";
+-			};
+-		};
+-	};
+-
+-	itb {
+-		filename = "u-boot.itb";
+-
+-		fit {
+-			description = "Configuration to load ATF before U-Boot";
+-			#address-cells = <1>;
+-			fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
+-
+-			images {
+-				uboot {
+-					description = "U-Boot (64-bit)";
+-					type = "standalone";
+-					arch = "arm64";
+-					compression = "none";
+-					load = <CONFIG_TEXT_BASE>;
+-
+-					uboot_blob: blob-ext {
+-						filename = "u-boot-nodtb.bin";
+-					};
+-				};
+-
+-				atf {
+-					description = "ARM Trusted Firmware";
+-					type = "firmware";
+-					arch = "arm64";
+-					compression = "none";
+-					load = <0x910000>;
+-					entry = <0x910000>;
+-
+-					atf_blob: blob-ext {
+-						filename = "bl31.bin";
+-					};
+-				};
+-
+-				fdt {
+-					description = "NAME";
+-					type = "flat_dt";
+-					compression = "none";
+-
+-					uboot_fdt_blob: blob-ext {
+-						filename = "u-boot.dtb";
+-					};
+-				};
+-			};
+-
+-			configurations {
+-				default = "conf";
+-
+-				conf {
+-					description = "NAME";
+-					firmware = "uboot";
+-					loadables = "atf";
+-					fdt = "fdt";
+-				};
+-			};
+-		};
+-	};
+-};
 -- 
 2.43.0
 
