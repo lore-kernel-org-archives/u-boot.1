@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58A1CC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:43:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9363AC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:43:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBFDF88597;
-	Tue, 23 Apr 2024 13:43:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 39A05885A1;
+	Tue, 23 Apr 2024 13:43:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wL+ktWv8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rRdFJ4nQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1175A883B5; Tue, 23 Apr 2024 13:43:22 +0200 (CEST)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 8E6A7883B5; Tue, 23 Apr 2024 13:43:22 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2425883B5
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:43:18 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8912588597
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:43:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-a5883518135so45333466b.3
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 04:43:18 -0700 (PDT)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a55bf737cecso193087166b.0
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 04:43:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713872598; x=1714477398; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1713872599; x=1714477399; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m21+fSqUvS0ctXBJxcpvoOJsevXESTKoLJy9UISknSU=;
- b=wL+ktWv8AiBeqezQFcyU3HrZtvn2mie6OZvneraoWYE8wRSJM+VDd0okewpOiFHetu
- ZpRRT5wz/tc45xvQsS0kohl7hiaqIFDUlo/I6zeSzixf6xhfcq8PcO74CK7ZnQS70RRk
- +o2/h+Un0r2Ooms63N1SttZ497kOCeDQawwEj7EIaWLO6dBc/Ylgi47j3/c1jzQ+QY2H
- 3reNeq69TPWdACirez2i0sdvHqkGVx5+B39BzCqvPVIGv9xK2/8BaloSZgi6/s4gVu/+
- +ENiFWgnvBTe0lsSqMHRJYqKFd4Q1eaJxmisFkCeAqa+dLw2MtwQjrUpZhAoQMgi2l3Y
- Pntg==
+ bh=1Nl0aCQ9gHnvYQHjY+/mK6P8qUkVKldvGn7/aLJ96Tk=;
+ b=rRdFJ4nQyp02XFtF6NGa3aCL5TYonASzadRVWRCEDuXDqdAdWyHlo48GUm5Jo2c9+J
+ k3jaEKWvnTZl41VgnpXi8ggCZwk4wa2JOnkGw75A1R+rOl06CY/fYO/qmABnfW5TKEuq
+ ugIQ6YDo5FJUGV+ioalx0PMpEwahwJ7HFWyOCbKW9zXNuTX02rB9OJbgYOyX8n2UP+23
+ SmHf5ceqh7Bwm7962q75YbbFH2UmlFQFqYvrQd08sOAarEDEj1T2lH4cbLc3jy/9izpo
+ Q/ZFzWdVm5/M+8PF8PmhrOaXa5crGQ3PdD7TqE9tKjZHHqU+U2O9poQEFXaFq0Q+2AgY
+ jgiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713872598; x=1714477398;
+ d=1e100.net; s=20230601; t=1713872599; x=1714477399;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=m21+fSqUvS0ctXBJxcpvoOJsevXESTKoLJy9UISknSU=;
- b=IXMMZCmzyuNcXnJWiwPPWIuY6UQO5nS4UejFeUZMS5S5ScrxwztV/6tRIMskbd9+4d
- DIgUwiMCx1Zuu0jvA5NoqNCoktA50qHWk7b1vRz78uLXV+f+VYfxRexruyd3SObrxaPN
- xkb9iRrZU0sGuZ+hvs5rF/Dm//cR4ImK1+qriHs0UhjYHZFk/qejabfIrqJuR1FlMoDV
- xta+P1d4kX3eLK2Qtk95Mandv26TJez0FinkgsWez0J6W54U3sxxlb58CIRBdm0bWQj4
- pjdICLX+XJtt1YRsbAjdlIVBz/zKT2g7m4t0tlvjRKrHKi67WPmuhJ3tv+V6b7x5BHkk
- amwg==
+ bh=1Nl0aCQ9gHnvYQHjY+/mK6P8qUkVKldvGn7/aLJ96Tk=;
+ b=uqV/0ufAQFDWy6/HmqBNsnu1Xr1OYLyx/kt10rZANJjYlqBmh0oFSdHH45NON3CPBJ
+ de0hmbxZyHdlFQw9I2U8ToSUDAop/xihJsbQJ7LnMRXR7KoDex4OPlsEJvyy4BPwBARH
+ +xMjhwXfJ4EP4zaE3zLPctxEAx7WqH/dNCQklAw++iXgrRvfWt07QOm/OZty8kvRgy2t
+ OOjlUh1lzLOhDyHN4p73nUtzBCd10m34tMGJ3sd6dliJSfYNHpYri3sgHxf/I4SG1cZV
+ mko058aaAsky3z3aifCxuJkgqZmXsYV1COxJj8gTcJtfjurVnwSs/eB1bpheFXDongz2
+ TKOA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUI8Z2WMy5puvSYj6swVSu7CnShKOsdi6xhOLfswbvUFe1tFgFGuvfGuYAqhJznhpM/YK2jE6eHeUtuqxgHlrieyc4BkA==
-X-Gm-Message-State: AOJu0YyNAhwQ8LcbpFXscNfbn+U3MkVyB1RIcwEpLQImMa/7PmxxLwo6
- V7RmwFQAw3OQ2L5boCq154TQwk3U4T17nUEtJQZ+NoTx15k6/A45xUGwxaKu9Zs=
-X-Google-Smtp-Source: AGHT+IGBJ/Pr+s/7j/U4B/6kX+HfcsooQtrvG3Otwd/lq/qgzoYLZDTClo8zCI02NYHuS+z2t88pRQ==
-X-Received: by 2002:a17:906:c784:b0:a55:41fd:a013 with SMTP id
- cw4-20020a170906c78400b00a5541fda013mr9170476ejb.23.1713872598175; 
+ AJvYcCVAwvii1ymuq2sH4aBg/0XGl0Ed2HNo103C4vGNiRAoIgU8Hrx5qe5wwbFe2fB376iJFPd+wtfHIXgbylk9E7f4f3u7+A==
+X-Gm-Message-State: AOJu0YzplVJkmu/IyudeGX/1w7yVRpjpGcfNLz+TKVYV2Is1kHsdsqpW
+ jalA3l4NbB7p4soFr7gBHtsD+pd9TSkp+SEA1xv0QvzRTPFqrdbZbKxkHgUpF/U=
+X-Google-Smtp-Source: AGHT+IFD2pVb9RIwUqB7hFi4/9v8KOahfi4RF3tqa2uqF0C7VjhoAkCUIaBzOmeQP52gxW/qHU0djQ==
+X-Received: by 2002:a17:906:d9cb:b0:a4d:f5e6:2e34 with SMTP id
+ qk11-20020a170906d9cb00b00a4df5e62e34mr7384862ejb.19.1713872598994; 
  Tue, 23 Apr 2024 04:43:18 -0700 (PDT)
 Received: from [192.168.0.114] ([2a02:8109:aa0d:be00::1795])
  by smtp.gmail.com with ESMTPSA id
- n4-20020a170906164400b00a55967a9038sm4507528ejd.95.2024.04.23.04.43.17
+ n4-20020a170906164400b00a55967a9038sm4507528ejd.95.2024.04.23.04.43.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Apr 2024 04:43:17 -0700 (PDT)
+ Tue, 23 Apr 2024 04:43:18 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>, 
- Marek Vasut <marex@denx.de>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Ramon Fried <rfried.dev@gmail.com>, 
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de
-In-Reply-To: <20240418-b4-qcom-rbx-fixes-v1-0-e524eb29ae86@linaro.org>
-References: <20240418-b4-qcom-rbx-fixes-v1-0-e524eb29ae86@linaro.org>
-Subject: Re: [PATCH 0/3] qcom: switch to OF_UPSTREAM
-Message-Id: <171387259723.2280908.1259739811979011552.b4-ty@linaro.org>
-Date: Tue, 23 Apr 2024 13:43:17 +0200
+To: trini@konsulko.com, sumit.garg@linaro.org, sjg@chromium.org, 
+ u-boot@lists.denx.de, Robert Marko <robert.marko@sartura.hr>
+Cc: j.beck@linefinity.com
+In-Reply-To: <20240418091727.18551-1-robert.marko@sartura.hr>
+References: <20240418091727.18551-1-robert.marko@sartura.hr>
+Subject: Re: [PATCH] arm: mach-ipq40xx: dont select SMEM by default
+Message-Id: <171387259832.2280908.9543124319858231884.b4-ty@linaro.org>
+Date: Tue, 23 Apr 2024 13:43:18 +0200
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -101,26 +96,16 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On Thu, 18 Apr 2024 18:24:08 +0100, Caleb Connolly wrote:
-> This series does the initial switch to OF_UPSTREAM for Qualcomm
-> platforms. The DT files we have in U-Boot are outdated by now, so drop
-> them and move to upstream.
+On Thu, 18 Apr 2024 11:17:00 +0200, Robert Marko wrote:
+> IPQ40xx SoC-s dont have proper SMEM support like more modern Qualcomm
+> SoC-s so there is no point in selecting the required drivers.
 > 
-> Patch 2 drops all the Qualcomm dts files that are now provided in
-> dts/upstream. As some of the files exceed the 100k size limit by
-> themselves I thought it would be easier to just lump them together
-> rather than trying to split them up.
 > 
-> [...]
 
 Applied, thanks!
 
-[1/3] mach-snapdragon: use OF_UPSTREAM
-      commit: a149974d3cf81dfc11254e3093f645bec3d5d88e
-[2/3] arm: dts: drop qcom dts files
-      commit: 4a30052dee8726cfa9b1f6873496389ae1732ba4
-[3/3] qcom_defconfig: set SYS_INIT_SP_BSS_OFFSET
-      commit: 813bc424871caf3decffb50119906bcdbf33d973
+[1/1] arm: mach-ipq40xx: dont select SMEM by default
+      commit: c38dcb217c8be0aae7e8e1bb1fb3c31850fa89c3
 
 Best regards,
 -- 
