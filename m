@@ -4,47 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0418C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 05:35:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DE423C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 05:45:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0FA0588596;
-	Tue, 23 Apr 2024 07:35:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
+	by phobos.denx.de (Postfix) with ESMTP id 54E0988594;
+	Tue, 23 Apr 2024 07:45:33 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id D2FD388598; Tue, 23 Apr 2024 07:35:01 +0200 (CEST)
-Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
- [60.248.80.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E142C8858B
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 07:34:57 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
- header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ycliang@andestech.com
-Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 43N5Yn6n068001;
- Tue, 23 Apr 2024 13:34:49 +0800 (+08)
- (envelope-from ycliang@andestech.com)
-Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
- with Microsoft SMTP Server id 14.3.498.0;
- Tue, 23 Apr 2024 13:34:45 +0800
-Date: Tue, 23 Apr 2024 13:34:42 +0800
-From: Leo Liang <ycliang@andestech.com>
-To: Daniel Henrique Barboza <dbarboza@ventanamicro.com>
-CC: <u-boot@lists.denx.de>, Andrew Jones <ajones@ventanamicro.com>
-Subject: Re: RISC-V u-boot unable to boot QEMU using '-cpu max'
-Message-ID: <ZidIcgEPSb_vDQw7@swlinux02>
-References: <bed7e137-4613-4153-babc-3b8b7c911151@ventanamicro.com>
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uIw8fTpl";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 551BA88599; Tue, 23 Apr 2024 07:45:32 +0200 (CEST)
+Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
+ [IPv6:2a00:1450:4864:20::22e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 138778858B
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 07:45:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lj1-x22e.google.com with SMTP id
+ 38308e7fff4ca-2dae975d0dcso62751291fa.1
+ for <u-boot@lists.denx.de>; Mon, 22 Apr 2024 22:45:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1713851129; x=1714455929; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=rIeB/7QFIWfUQxg22uoQKSDBKf+OQquWJF3Ka+5LAOM=;
+ b=uIw8fTplbq/KCWP6YP5abUHc4zYQLNqxJMeB0ro5nvb7ZTVAGZg4MyrOp/qekHdrcW
+ 5tUABK/bDfHO6HSl7Lnd+fgsRhE7Lsh59QBSZoXKVwuDUqTnE6AMO+eCTK6lcHvRod8g
+ 26Fhe6iL6mJkJWbeuDxWhw1atHpBp+tZ/x+Z6R6c2TXnNhVbY33vnaEb6I86Nd6H2Iz2
+ EToXX+t00dVmdxPzD3GsEEzL5beWueAqEbiHp0wyxCJo5oK7DsFSXIewpsdJ3gAAGKkn
+ sB3Mffbh/SMGjDpQKP84YVnwDUZsZ/9QSsh+LE7NtmHDLt7X/VeqxVWO7Eopu9AJW8XY
+ 5qMw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713851129; x=1714455929;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=rIeB/7QFIWfUQxg22uoQKSDBKf+OQquWJF3Ka+5LAOM=;
+ b=HU+y8+1DTH0NOd/SFqdlkPPeCE9+Ap4ICD8auYdo9nx5Z4m6CpL6AvcnSW/ynDvjis
+ LxrTuaOdYCBSLbm5lq3Y1rhkfyIJArXLwjgBuEqDc3dw5NifyxsOAt/+dIDGpu3ZcnVN
+ TDGg6EiEk3MHSulROnr7VKuf7DnVIEO/+XJVVzsmHVTlKsHM+8gTHgPJa2HyFdiLBmPw
+ a5gCmw6d0E7pZSfXBm65O49IC2grmhIUAmv1q/LEmDdFl0INmJ/8xTkyvMO8M+ALZgCN
+ H/b/CdlKsfVqXmgoFQ+1uUqfDQvwxnjIIXjrwuG+XpgsiDi2VVXOO7OINt46oZf3CoOv
+ v5Sg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU+CRSIWuA9Txs0jFK4QyTue5VuWDnTkJOn7vQCyKc1denB5YUXe7jHtYYsdn3z9hqvwNjKqT88Kj26x3Qf7fEGY4i5Ow==
+X-Gm-Message-State: AOJu0Yxv1/htXPqaP93NNGzModhWb9II8wilAniwcEq7qitZb7pOdqoO
+ 3u2gmZYovb8rGkLOxtsaYebNiWFX804Eww4xMGyuDwzm/LnihT9Wfx3Lq7yk5rVh9Das4938sqG
+ kYBc=
+X-Google-Smtp-Source: AGHT+IFbbkvcVk1w5qcMyedAJ4El2t+s73UXCulads59QFIRh2PozuLCgsl6abCMT//2XvJGC6OYCw==
+X-Received: by 2002:a05:6402:3494:b0:572:145a:77d1 with SMTP id
+ v20-20020a056402349400b00572145a77d1mr2029494edc.14.1713850697000; 
+ Mon, 22 Apr 2024 22:38:17 -0700 (PDT)
+Received: from localhost.localdomain (ppp089210108048.access.hol.gr.
+ [89.210.108.48]) by smtp.gmail.com with ESMTPSA id
+ i19-20020a50fc13000000b0056fed8e7817sm6138188edr.20.2024.04.22.22.38.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 22 Apr 2024 22:38:11 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: heinrich.schuchardt@canonical.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: address coverity report 492766 for dead code
+Date: Tue, 23 Apr 2024 08:38:06 +0300
+Message-ID: <20240423053806.4962-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <bed7e137-4613-4153-babc-3b8b7c911151@ventanamicro.com>
-User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
-X-Originating-IP: [10.0.15.183]
-X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 43N5Yn6n068001
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,65 +94,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Apr 22, 2024 at 04:43:59PM -0300, Daniel Henrique Barboza wrote:
-> [EXTERNAL MAIL]
-> 
-> Hi,
-> 
-> In QEMU we have a 'max' type CPU that implements (almost) all extensions that QEMU
-> is able to emulate. Recently, in QEMU commit 249e0905d05, we bumped the extensions
-> for this CPU.
-> 
-> And after this commit this CPU is now unable to boot a guest using upstream
-> u-boot. Here's the error being thrown:
-> 
-> qemu-system-riscv64 \
->         -machine virt -nographic -m 8G -smp 8 \
->         -cpu max -kernel uboot.elf (...)
-> (...)
-> 
-> initcall sequence 000000008027c3e8 failed at call 000000008021259e (err=-28)
-> ### ERROR ### Please RESET the board ###
-> 
-> 
-> I can get the guest to boot if I disable the following extensions from the 'max' CPU:
-> 
->  -cpu max,zfbfmin=false,zvfbfmin=false,zvfbfwma=false
-> 
-> Due to QEMU extension dependencies I'm not able to disable these individually. What I can
-> say is that u-boot isn't playing ball to at least one of them.
-> 
-> Is this an u-boot bug? Up to this point I was assuming that u-boot would silently ignore
-> hart extensions that it doesn't support.
+The check of the return code is already done a few lines above.
+Although it doesn't cause any functional issues, remove the superfluous
+checks
 
-Hi Daniel,
+Addresses-Coverity-ID: 492766 Control flow issues  (DEADCODE)
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/efi_loader/efi_var_mem.c | 2 --
+ 1 file changed, 2 deletions(-)
 
-Which u-boot version are you using?
+diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
+index 940ab6638823..139e16aad7c6 100644
+--- a/lib/efi_loader/efi_var_mem.c
++++ b/lib/efi_loader/efi_var_mem.c
+@@ -232,8 +232,6 @@ efi_status_t efi_var_mem_init(void)
+ 	efi_var_buf->length = (uintptr_t)efi_var_buf->var -
+ 			      (uintptr_t)efi_var_buf;
+ 
+-	if (ret != EFI_SUCCESS)
+-		return ret;
+ 	ret = efi_create_event(EVT_SIGNAL_VIRTUAL_ADDRESS_CHANGE, TPL_CALLBACK,
+ 			       efi_var_mem_notify_virtual_address_map, NULL,
+ 			       NULL, &event);
+-- 
+2.43.0
 
-I think this issue is fixed by the following patch set sent by Conor.
-
-	f39b1b77d8 riscv: support extension probing using riscv, isa-extensions
-	b90edde701 riscv: don't read riscv, isa in the riscv cpu's get_desc()
-
-I've tested and can reproduce the issue you mentioned if these two patches are reverted.
-
-Could you try with the lastest u-boot master branch again?
-
-
-For reference, my testing commands are as follows:
-1. cd ${u-boot} && make qemu-riscv64_defconfig && make -j`nproc`
-2. ./${qemu}/build/qemu-system-riscv64 -nographic -machine virt -cpu max -bios u-boot.bin -m 8G -smp 8
-
-- u-boot branch (commit): master (38ea74d6d5c0 "Prepare v2024.07-rc1")
-- qemu branch (commit): master (62dbe54c24db "Update version for v9.0.0-rc4 release")
-
-
-Best regards,
-Leo
-
-> 
-> 
-> Thanks,
-> 
-> 
-> Daniel
