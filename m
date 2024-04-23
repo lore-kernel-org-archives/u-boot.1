@@ -4,59 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CAC9C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 13:29:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83B60C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 13:29:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99A5F885A0;
-	Tue, 23 Apr 2024 15:29:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1170E885BA;
+	Tue, 23 Apr 2024 15:29:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1713878953;
-	bh=VzdS1xsfXtaKWMHOKnCsbK1CaOVpxkwdXfx+Ga9HK+o=;
+	s=phobos-20191101; t=1713878955;
+	bh=rhQ15saQZ2KvdBGeuJv0e9SU/UnJ3onWAVeGUOWPxrE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=UuESq5Yrslu5qiCUnYf6aI6jwWEOgKGd7TyrxSHWjXfHSjOa2Mqp41eHuRHGzjYl5
-	 cT2qAgHC2XkbmSWBvvO7WEQSI7/Tfz17C/Bp5VTVjj1dMlD8KK+7mAIZ1HDHXv3u+c
-	 0Uy+yNNo0wd2xpyCRMn1ZUVKsygjaX+xZiThXBL0RS93Sbsc0Q8G3i2RXNhVRozWky
-	 t9ZKDW1W8uWMsPOBSXpTzmO6nIpS+qf8ogk8e8rEk5QHx4vj3MVAWjOXrZ+hFUO26K
-	 M6i+zR0RzvOPHYbO3jspVY4LZS/ZNFxx/pwBjQYRMMRONfmi5MB7uY9f+8wCLoGyuY
-	 R5fdmWJrByNxw==
+	b=MAPfS1lBUv+B03LX93HCxOhdr8kMnG7DeElV7nZ1yKAsteAouFGs4wBZ26f5BvgIU
+	 /f5nzq9jWIjLJx4lsi5ZolCimIU0wRm9aPNDUfQ9dZxxOmPnt3LiptpMCeSxHH0FXM
+	 oMAqdKAhnQr2OKmlgfn1IRAT111cmMFCk5bKX+d1PNp+RFPCDgpYtV1XSTRsJPdy2p
+	 lnq91BemBrSX+Gj7C2Chef1f/h57/Whgm2Y+3Lx8xgtBcDM0GycjL8lW39WcGCDymR
+	 v6JCc5VE71oHfKwKwOU5jGjqHYelEyycEob8Dc0lzbLvxFZAkRquJZr+2bv+JVQK8/
+	 cbVhT/GRkXrzQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id AFEC48851E;
- Tue, 23 Apr 2024 15:29:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id E23448854A;
+ Tue, 23 Apr 2024 15:29:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1713878952;
- bh=VzdS1xsfXtaKWMHOKnCsbK1CaOVpxkwdXfx+Ga9HK+o=;
+ s=phobos-20191101; t=1713878953;
+ bh=rhQ15saQZ2KvdBGeuJv0e9SU/UnJ3onWAVeGUOWPxrE=;
  h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=xK48aa8q+Jk3mZaj4RyvH5HZN3IeVOcGTVPGhwoFpd8yNK8yeXiV4lL6wZtPT1kb1
- A1GN9lSntOsQo+pbcm6k73YP2JDU6KGAGYs4vUfHc4AkrWmG8fbYe2s381Jrm1Vy3X
- idLvlXyEqyFJCYK1HLHBbh9DbymavuYLFpqPwCqBw1jEl3Cygolk3j3DKVRBN+SycI
- JWnNJC1ryxFJjLTomrrqB5YLZHTol2t37a3uJ09jnAjpmoXYY0LCwSyC9GWCXtWae5
- Um+4K15PU1vKo+7gatq2ashTm0X0CVi0sVHmFrRnUSeVo434snDkiUOE/MK1RQ1Vjd
- 5rOH+9PBnU8Mg==
-Message-ID: <1bc044d6-01ef-4a7a-87e6-e212f10c032e@denx.de>
-Date: Tue, 23 Apr 2024 14:52:46 +0200
+ b=Zivw3+j1JyIi3qpHn74MU+UhqlFDQic4Ea7qvb8pCSeSE6rL4xu+Bk5y6IQsYp/3T
+ woBpzl3ghakCMhQtxW8OT3rOJNgj0UezPgAVe/TQi01/FFcWW55x72tXCLqX7LDDAD
+ Wpx/J1zu+DO3RjSLfbQLJEjJyVf7HBRkmSbqCXFHHe4fTrJokfOlPiiHFzyQxgn2fx
+ 7mYiuzH42bjiGmnVVhx4BRDGVYJG/ueA+C9AdM/WQG6hyJkFYtJGYv2g9s5+hAVpWn
+ uJvZREgQi1Snq6ZEomdqM1k2w7wL7RDaL446pgfkaqrlfkEgWJ9YNrOxgVJZ6af1tD
+ YECDR2iorfm9A==
+Message-ID: <8ba2dfe6-ea6c-4474-a574-3b29b9e377af@denx.de>
+Date: Tue, 23 Apr 2024 14:53:49 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 1/1] net: dwc_eth_qos: mdio: Implement clause 45
-To: Philip Oberfichtner <pro@denx.de>, u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, trini@konsulko.com,
- caleb.connolly@linaro.org, neil.armstrong@linaro.org, sumit.garg@linaro.org,
- sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- patrick.delaunay@foss.st.com, patrice.chotard@foss.st.com, jonas@kwiboo.se,
- leyfoon.tan@starfivetech.com, epsi@gmx.de, xypron.glpk@gmx.de,
- seanga2@gmail.com, sebastien.szymanski@armadeus.com, festevam@gmail.com,
- sebastian.reichel@collabora.com, yanhong.wang@starfivetech.com,
- christophe.roullier@st.com
-References: <20240423085158.29246-1-pro@denx.de>
+Subject: Re: [PATCH v2] usb: cdns3: gadget.c: Set fast access bit
+To: Ravi Gunasekaran <r-gunasekaran@ti.com>, trini@konsulko.com
+Cc: rogerq@kernel.org, u-boot@lists.denx.de, pawell@cadence.com,
+ peter.chen@kernel.org, srk@ti.com
+References: <20240423082420.32336-1-r-gunasekaran@ti.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240423085158.29246-1-pro@denx.de>
+In-Reply-To: <20240423082420.32336-1-r-gunasekaran@ti.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -75,44 +69,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/23/24 10:51 AM, Philip Oberfichtner wrote:
-> Bevor this commit, only clause 22 access was possible. After this commit,
-> clause 45 direct access will available as well.
+On 4/23/24 10:24 AM, Ravi Gunasekaran wrote:
+> From: Aswath Govindraju <a-govindraju@ti.com>
 > 
-> Note that there is a slight change of behavior: Before this commit, the
-> C45E bit was set to whatever value was left in the register from the
-> previous access. After this commit, we adopt the common practice of
-> discerning C45 from C22 using the devad argument.
+> When the device port is in a low power state [U3/L2/Not Connected],
+> accesses to usb device registers may take a long time. This could lead to
+> potential core hang when the controller registers are accessed after the
+> port is disabled by setting DEVDS field. Setting the fast register access
+> bit ensures that the PHY clock is keeping up in active state.
 > 
-> Signed-off-by: Philip Oberfichtner <pro@denx.de>
+> Therefore, set fast access bit to ensure the accesses to device registers
+> are quick even in low power states.
+> 
+> Signed-off-by: Aswath Govindraju <a-govindraju@ti.com>
+> Signed-off-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
+> Reviewed-by: Roger Quadros <rogerq@kernel.org>
 > ---
-> 
-> Notes:
->      This patch is labeled RFC as there is a slight change of behavior (see
->      commit message). I'm not sure in fact if this solution works for
->      everybody - this is up for discussion!
->      
->      My implementation is tested on an Intel Elkhart lake SOC. Driver code
->      for dwc_eth_qos_intel coming soon in a separate patch series.
-> 
->   drivers/net/dwc_eth_qos.c | 66 ++++++++++++++++++++++++++-------------
->   drivers/net/dwc_eth_qos.h |  1 +
->   2 files changed, 45 insertions(+), 22 deletions(-)
-> 
-> diff --git a/drivers/net/dwc_eth_qos.c b/drivers/net/dwc_eth_qos.c
-> index 86d989e244..64a9bff6bb 100644
-> --- a/drivers/net/dwc_eth_qos.c
-> +++ b/drivers/net/dwc_eth_qos.c
-> @@ -162,6 +162,25 @@ static int eqos_mdio_wait_idle(struct eqos_priv *eqos)
->   				 1000000, true);
->   }
->   
-> +/* Bitmask common for mdio_read and mdio_write */
-> +#define EQOS_MDIO_BITFIELD(pa, rda, cr) \
-> +	(pa  << EQOS_MAC_MDIO_ADDRESS_PA_SHIFT)  | \
+> v1 was posted and was reviewed as well. But it did not get merged.
+> This change is present in upstream linux kernel as well.
+> Upstream Linux kernel commit: b5148d946f45 ("usb: cdns3: gadget: set fast access bit")
 
-Parenthesis around (pa) are missing, DTTO for the rest of this.
+This commit ^ should be mentioned in the commit message.
 
-However, better use FIELD_GET/FIELD_PREP macros instead.
+With that fixed:
 
-[...]
+Reviewed-by: Marek Vasut <marex@denx.de>
+
+Thanks !
