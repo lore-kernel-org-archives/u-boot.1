@@ -4,70 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8323DC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 22 Apr 2024 22:37:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8711C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 01:10:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB020884DC;
-	Tue, 23 Apr 2024 00:37:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BBB1488517;
+	Tue, 23 Apr 2024 03:10:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GILjb/9T";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="LoHLLauO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25F3C884E1; Tue, 23 Apr 2024 00:37:47 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 4E8B388513; Tue, 23 Apr 2024 03:10:07 +0200 (CEST)
+Received: from mail-m127224.xmail.ntesmail.com
+ (mail-m127224.xmail.ntesmail.com [115.236.127.224])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 10D03884C8
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 00:37:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A52F788523
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 03:10:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43MMbfrS053629;
- Mon, 22 Apr 2024 17:37:41 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1713825461;
- bh=N9Figga1gt6eeKitYUknlW0t404yefBMpoGKLg9Lrqc=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=GILjb/9ThvsC3+drV6GT9IBVCO7rTqDHptjB0NTmWj0dsg9tPqEfa8g7B7cUqISrU
- xNfHjt4JOxC69349maKOSnSzJVjqpWiJo8+AQP8Ys3YARQrZDK5YYQHl9YomJfPTdY
- /3a9gjt2Qoq1VtA3psqaiCUvPZ2ZpxDdHn/FqfWI=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43MMbfCx092561
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 22 Apr 2024 17:37:41 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 22
- Apr 2024 17:37:40 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 22 Apr 2024 17:37:40 -0500
-Received: from [10.247.17.53] (ltgzp9043.dhcp.ti.com [10.247.17.53])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43MMbeQ2032864;
- Mon, 22 Apr 2024 17:37:40 -0500
-Message-ID: <6e7bbe73-40aa-4bb0-b687-c416f9d4d35c@ti.com>
-Date: Mon, 22 Apr 2024 18:37:40 -0400
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=LoHLLauO8YFdQX7/X5dcdVUZLyuvR0XGdxygP7TBUeqMwvN9fdMGkv9s/9JOds2ZZ0qyg21uuCc9yiHy6L9hBc2qs2jnZvtPex6BF4aKa2LLt13k6OH1zGd8JbEQUCvt0oVvnogR2H1YA1SYDCnBTKwAFnK0+3MFIQxRe7aPlR0=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+ bh=PLzoIqXuotATSLZm7w1CcIkYNBcgg/JgalYNjWMRgZ8=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.12.77] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id DC7FD900182;
+ Tue, 23 Apr 2024 09:09:46 +0800 (CST)
+Message-ID: <e8a60f99-4012-4ef6-a210-436ac41bd1ae@rock-chips.com>
+Date: Tue, 23 Apr 2024 09:09:46 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] arm: dts: k3-j721e-binman: Add support for HSSE2.0
- and HSFS1.1
-To: Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>, <trini@konsulko.com>,
- <sjg@chromium.org>
-CC: <kamlesh@ti.com>, <m-chawdhry@ti.com>, <u-kumar1@ti.com>, <bsheraw@ti.com>,
- <s-anna@ti.com>, <a-limaye@ti.com>
-References: <20240422214048.1292713-1-n-francis@ti.com>
- <20240422214048.1292713-2-n-francis@ti.com>
- <9524aab2-cf37-4a64-85ca-46d032f91881@ti.com>
+Subject: Re: [PATCH 1/2] rockchip: rk3588: add support for UART2 M1 and M2 in
+ SPL
+To: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>
+Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@theobroma-systems.com>
+References: <20240422-tiger-v1-0-8816b070d748@theobroma-systems.com>
+ <20240422-tiger-v1-1-8816b070d748@theobroma-systems.com>
 Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <9524aab2-cf37-4a64-85ca-46d032f91881@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240422-tiger-v1-1-8816b070d748@theobroma-systems.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0wdGlZCHh0dSR8ZHhoZGkNVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
+ tLWQY+
+X-HM-Tid: 0a8f088074a003a9kunmdc7fd900182
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OAg6Ljo6GDNRGDg#NzdWQkgR
+ CiswFDdVSlVKTEpIQ0hPTkNMTU1NVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFOT0JNNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,251 +77,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
+Hi Quentin,
 
-On 22-Apr-24 3:37 AM, Andrew Davis wrote:
-> On 4/22/24 4:40 PM, Neha Malcom Francis wrote:
->> J721E has SR1.1 and SR2.0 having three variants of each GP, HS-FS and
->> HS-SE. Current build does not generate HS-SE SR2.0 and HS-FS SR1.1 so
->> add support for them.
->>
->> Reported-by: Suman Anna <s-anna@ti.com>
->> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->> ---
->>   arch/arm/dts/k3-j721e-binman.dtsi | 201 +++++++++++++++++++++++++++++-
->>   1 file changed, 200 insertions(+), 1 deletion(-)
->>
->> diff --git a/arch/arm/dts/k3-j721e-binman.dtsi 
->> b/arch/arm/dts/k3-j721e-binman.dtsi
->> index 75a6e9599b9..90e4a31329e 100644
->> --- a/arch/arm/dts/k3-j721e-binman.dtsi
->> +++ b/arch/arm/dts/k3-j721e-binman.dtsi
->> @@ -1,6 +1,6 @@
->>   // SPDX-License-Identifier: GPL-2.0
->>   /*
->> - * Copyright (C) 2022-2023 Texas Instruments Incorporated - 
->> https://www.ti.com/
->> + * Copyright (C) 2022-2024 Texas Instruments Incorporated - 
->> https://www.ti.com/
->>    */
->>   #include "k3-binman.dtsi"
->> @@ -129,6 +129,205 @@
->>       };
->>   };
->> +&binman {
->> +    tiboot3-j721e_sr2-hs-evm.bin {
-> 
-> This already seems to exist in this file, it is hidden up in the
-> first binman{} GP node at the top. Might just need split out from that.
-> 
-> Andrew
+On 2024/4/23 00:41, Quentin Schulz wrote:
+> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+>
+> UART2 controller is the controller in the reference design for debug
+> console. The default mux is M0 in that reference design. Until now, all
+> boards seemed to be using UART2M0 but RK3588 Tiger for example will be
+> using UART2M2 instead.
+This feature already been supported, please use CONFIG_DEBUG_UART_BASE and
+CONFIG_ROCKCHIP_UART_MUX_SEL_M to select your output channel.
 
-Oh thanks for catching that!
-
-> 
->> +        filename = "tiboot3-j721e_sr2-hs-evm.bin";
->> +        ti-secure-rom {
->> +            content = <&u_boot_spl_sr2>;
->> +            core = "public";
->> +            core-opts = <2>;
->> +            load = <CONFIG_SPL_TEXT_BASE>;
->> +            keyfile = "custMpk.pem";
->> +        };
->> +        u_boot_spl_sr2: u-boot-spl {
->> +            no-expanded;
->> +        };
->> +    };
->> +    sysfw_sr2 {
->> +        filename = "sysfw.bin_sr2";
->> +        ti-secure-rom {
->> +            content = <&ti_fs_cert_sr2>;
->> +            core = "secure";
->> +            load = <0x40000>;
->> +            keyfile = "custMpk.pem";
->> +            countersign;
->> +        };
->> +        ti_fs_cert_sr2: ti-fs-cert.bin {
->> +            filename = "ti-sysfw/ti-fs-firmware-j721e_sr2-hs-cert.bin";
->> +            type = "blob-ext";
->> +            optional;
->> +        };
->> +        ti-fs-firmware-j721e_sr2-hs-enc.bin {
->> +            filename = "ti-sysfw/ti-fs-firmware-j721e_sr2-hs-enc.bin";
->> +            type = "blob-ext";
->> +            optional;
->> +        };
->> +    };
->> +    itb_sr2 {
->> +        filename = "sysfw-j721e_sr2-hs-evm.itb";
->> +        fit {
->> +            description = "SYSFW and Config fragments";
->> +            #address-cells = <1>;
->> +            images {
->> +                sysfw.bin {
->> +                    description = "sysfw";
->> +                    type = "firmware";
->> +                    arch = "arm";
->> +                    compression = "none";
->> +                    blob-ext {
->> +                        filename = "sysfw.bin_sr2";
->> +                    };
->> +                };
->> +                board-cfg.bin {
->> +                    description = "board-cfg";
->> +                    type = "firmware";
->> +                    arch = "arm";
->> +                    compression = "none";
->> +                    ti-secure {
->> +                        content = <&board_cfg_sr2>;
->> +                        keyfile = "custMpk.pem";
->> +                    };
->> +                    board_cfg_sr2: board-cfg {
->> +                        filename = "board-cfg.bin";
->> +                        type = "blob-ext";
->> +                    };
->> +
->> +                };
->> +                pm-cfg.bin {
->> +                    description = "pm-cfg";
->> +                    type = "firmware";
->> +                    arch = "arm";
->> +                    compression = "none";
->> +                    ti-secure {
->> +                        content = <&pm_cfg_sr2>;
->> +                        keyfile = "custMpk.pem";
->> +                    };
->> +                    pm_cfg_sr2: pm-cfg {
->> +                        filename = "pm-cfg.bin";
->> +                        type = "blob-ext";
->> +                    };
->> +                };
->> +                rm-cfg.bin {
->> +                    description = "rm-cfg";
->> +                    type = "firmware";
->> +                    arch = "arm";
->> +                    compression = "none";
->> +                    ti-secure {
->> +                        content = <&rm_cfg_sr2>;
->> +                        keyfile = "custMpk.pem";
->> +                    };
->> +                    rm_cfg_sr2: rm-cfg {
->> +                        filename = "rm-cfg.bin";
->> +                        type = "blob-ext";
->> +                    };
->> +                };
->> +                sec-cfg.bin {
->> +                    description = "sec-cfg";
->> +                    type = "firmware";
->> +                    arch = "arm";
->> +                    compression = "none";
->> +                    ti-secure {
->> +                        content = <&sec_cfg_sr2>;
->> +                        keyfile = "custMpk.pem";
->> +                    };
->> +                    sec_cfg_sr2: sec-cfg {
->> +                        filename = "sec-cfg.bin";
->> +                        type = "blob-ext";
->> +                    };
->> +                };
->> +            };
->> +        };
->> +    };
->> +};
->> +
->> +&binman {
->> +    tiboot3-j721e_sr1_1-hs-fs-evm.bin {
->> +        filename = "tiboot3-j721e_sr1_1-hs-fs-evm.bin";
->> +        ti-secure-rom {
->> +            content = <&u_boot_spl_fs_sr1_1>;
->> +            core = "public";
->> +            core-opts = <2>;
->> +            load = <CONFIG_SPL_TEXT_BASE>;
->> +            keyfile = "custMpk.pem";
->> +        };
->> +        u_boot_spl_fs_sr1_1: u-boot-spl {
->> +            no-expanded;
->> +        };
->> +    };
->> +    sysfw_fs_sr1_1 {
->> +        filename = "sysfw.bin_fs_sr1_1";
->> +        ti-fs-cert-fs.bin {
->> +            filename = 
->> "ti-sysfw/ti-fs-firmware-j721e_sr1_1-hs-fs-cert.bin";
->> +            type = "blob-ext";
->> +            optional;
->> +        };
->> +        ti-fs-firmware-j721e-hs-fs-enc.bin {
->> +            filename = 
->> "ti-sysfw/ti-fs-firmware-j721e_sr1_1-hs-fs-enc.bin";
->> +            type = "blob-ext";
->> +            optional;
->> +        };
->> +    };
->> +    itb_fs_sr1_1 {
->> +        filename = "sysfw-j721e_sr1_1-hs-fs-evm.itb";
->> +        fit {
->> +            description = "SYSFW and Config fragments";
->> +            #address-cells = <1>;
->> +            images {
->> +                sysfw.bin {
->> +                    description = "sysfw";
->> +                    type = "firmware";
->> +                    arch = "arm";
->> +                    compression = "none";
->> +                    blob-ext {
->> +                        filename = "sysfw.bin_fs_sr1_1";
->> +                    };
->> +                };
->> +                board-cfg.bin {
->> +                    description = "board-cfg";
->> +                    type = "firmware";
->> +                    arch = "arm";
->> +                    compression = "none";
->> +                    board-cfg {
->> +                        filename = "board-cfg.bin";
->> +                        type = "blob-ext";
->> +                    };
->> +
->> +                };
->> +                pm-cfg.bin {
->> +                    description = "pm-cfg";
->> +                    type = "firmware";
->> +                    arch = "arm";
->> +                    compression = "none";
->> +                    pm-cfg {
->> +                        filename = "pm-cfg.bin";
->> +                        type = "blob-ext";
->> +                    };
->> +                };
->> +                rm-cfg.bin {
->> +                    description = "rm-cfg";
->> +                    type = "firmware";
->> +                    arch = "arm";
->> +                    compression = "none";
->> +                    rm-cfg {
->> +                        filename = "rm-cfg.bin";
->> +                        type = "blob-ext";
->> +                    };
->> +                };
->> +                sec-cfg.bin {
->> +                    description = "sec-cfg";
->> +                    type = "firmware";
->> +                    arch = "arm";
->> +                    compression = "none";
->> +                    sec-cfg {
->> +                        filename = "sec-cfg.bin";
->> +                        type = "blob-ext";
->> +                    };
->> +                };
->> +            };
->> +        };
->> +    };
->> +};
->> +
->>   &binman {
->>       tiboot3-j721e_sr2-hs-fs-evm.bin {
->>           filename = "tiboot3-j721e_sr2-hs-fs-evm.bin";
-
--- 
-Thanking You
-Neha Malcom Francis
+Thanks,
+- Kever
+>
+> Therefore, let's add support for UART2M1 and M2 as possible muxes for
+> the UART2 controller used as debug console. UART2M1 support was not
+> tested.
+>
+> The default value is M0 to match the one used currently by all devices
+> and the reference design.
+>
+> Cc: Quentin Schulz <foss+uboot@0leil.net>
+> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> ---
+>   arch/arm/mach-rockchip/rk3588/Kconfig  | 10 ++++++++++
+>   arch/arm/mach-rockchip/rk3588/rk3588.c | 36 ++++++++++++++++++++++++++++++++++
+>   2 files changed, 46 insertions(+)
+>
+> diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
+> index d7e4af31f24..cacdb0459c9 100644
+> --- a/arch/arm/mach-rockchip/rk3588/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3588/Kconfig
+> @@ -221,6 +221,16 @@ config ROCKCHIP_COMMON_STACK_ADDR
+>   config TEXT_BASE
+>   	default 0x00a00000
+>   
+> +config DEBUG_UART_CHANNEL
+> +	int "Mux channel to use for debug UART2"
+> +	depends on DEBUG_UART_BOARD_INIT
+> +	default 0
+> +	range 0 2
+> +	help
+> +	  UART2 can use three different set of pins to route the output.
+> +	  For using the UART for early debugging the route to use needs
+> +	  to be declared (0, 1 or 2).
+> +
+>   source board/edgeble/neural-compute-module-6/Kconfig
+>   source board/friendlyelec/nanopc-t6-rk3588/Kconfig
+>   source board/pine64/quartzpro64-rk3588/Kconfig
+> diff --git a/arch/arm/mach-rockchip/rk3588/rk3588.c b/arch/arm/mach-rockchip/rk3588/rk3588.c
+> index eb65dafe3a2..e330ad6a697 100644
+> --- a/arch/arm/mach-rockchip/rk3588/rk3588.c
+> +++ b/arch/arm/mach-rockchip/rk3588/rk3588.c
+> @@ -94,9 +94,32 @@ enum {
+>   	GPIO0B6_UART2_RX_M0	= 10,
+>   };
+>   
+> +/* GPIO3B_IOMUX_SEL_L */
+> +enum {
+> +	GPIO3B1_SHIFT		= 4,
+> +	GPIO3B1_MASK		= GENMASK(7, 4),
+> +	GPIO3B1_UART2_TX_M2	= 10,
+> +
+> +	GPIO3B2_SHIFT		= 8,
+> +	GPIO3B2_MASK		= GENMASK(11, 8),
+> +	GPIO3B2_UART2_RX_M2	= 10,
+> +};
+> +
+> +/* GPIO4D_IOMUX_SEL_L */
+> +enum {
+> +	GPIO4D0_SHIFT		= 0,
+> +	GPIO4D0_MASK		= GENMASK(3, 0),
+> +	GPIO4D0_UART2_TX_M1	= 10,
+> +
+> +	GPIO4D1_SHIFT		= 4,
+> +	GPIO4D1_MASK		= GENMASK(7, 4),
+> +	GPIO4D1_UART2_RX_M1	= 10,
+> +};
+> +
+>   void board_debug_uart_init(void)
+>   {
+>   	__maybe_unused static struct rk3588_bus_ioc * const bus_ioc = (void *)BUS_IOC_BASE;
+> +#if (CONFIG_DEBUG_UART_CHANNEL == 0)
+>   	static struct rk3588_pmu2_ioc * const pmu2_ioc = (void *)PMU2_IOC_BASE;
+>   
+>   	/* Refer to BUS_IOC */
+> @@ -110,6 +133,19 @@ void board_debug_uart_init(void)
+>   		     GPIO0B6_MASK | GPIO0B5_MASK,
+>   		     GPIO0B6_UART2_RX_M0 << GPIO0B6_SHIFT |
+>   		     GPIO0B5_UART2_TX_M0 << GPIO0B5_SHIFT);
+> +#elif (CONFIG_DEBUG_UART_CHANNEL == 1)
+> +	/* UART2_M1 Switch iomux */
+> +	rk_clrsetreg(&bus_ioc->gpio4d_iomux_sel_l,
+> +		     GPIO4D0_MASK | GPIO4D1_MASK,
+> +		     GPIO4D0_UART2_TX_M1 << GPIO4D0_UART2_TX_M1 |
+> +		     GPIO4D1_UART2_RX_M1 << GPIO4D1_SHIFT);
+> +#else
+> +	/* UART2_M2 Switch iomux */
+> +	rk_clrsetreg(&bus_ioc->gpio3b_iomux_sel_l,
+> +		     GPIO3B1_MASK | GPIO3B2_MASK,
+> +		     GPIO3B1_UART2_TX_M2 << GPIO3B1_SHIFT |
+> +		     GPIO3B2_UART2_RX_M2 << GPIO3B2_SHIFT);
+> +#endif /* CONFIG_DEBUG_UART_CHANNEL */
+>   }
+>   
+>   #ifdef CONFIG_SPL_BUILD
+>
