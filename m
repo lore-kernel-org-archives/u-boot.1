@@ -4,78 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3BC2C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:34:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC19BC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 11:35:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EFDBE88348;
-	Tue, 23 Apr 2024 13:34:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+	by phobos.denx.de (Postfix) with ESMTP id 6824788503;
+	Tue, 23 Apr 2024 13:35:28 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="SeRa1kJF";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Id5Zy/fN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3392288349; Tue, 23 Apr 2024 13:34:43 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 1206288518; Tue, 23 Apr 2024 13:35:27 +0200 (CEST)
+Received: from mail-m15599.qiye.163.com (mail-m15599.qiye.163.com
+ [101.71.155.99])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 30E7687D8D
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:34:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F3CB87D8D
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 13:35:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sartura.hr
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a519e1b0e2dso623744266b.2
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 04:34:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1713872080; x=1714476880; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=qca/HfxybFfYcO9p8+34XaGObrWCc2mtg6ghduv+F6s=;
- b=SeRa1kJFPEkGYvqbER2WeF85RmT0qBYpoWg0grc0ZPXeUKChv/tgc6YiTQwAUVGeqi
- qQw9n8zrxMXPu0JxEE+BAxhDM/zVNuyOYIgDl/XZ9iEQ96RJAVpaWkDudf+yeti4BoQe
- D664Zaeab8X8Txu8dblr9WNnqratoAyVy1DwPEualcc2/hNv77uKh0PAKkLw7A+F2K56
- OoeINtMADl7i9ryzEp250oOGyDUtCr/JqIpVRIcxDl7FcvSEB7Tg8ORSBiAjt2dPNlW5
- u5Eu/yefvabDG/pgfNSc/DyBfqSVtnB+tvVu5tc7mGD05hmw2DgsT0bNA/rNJ7HRYuhe
- 2/ug==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713872080; x=1714476880;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=qca/HfxybFfYcO9p8+34XaGObrWCc2mtg6ghduv+F6s=;
- b=wvgmOIGsFTCmsSOEFSrekWlXJWCNzKYYwEbfNy9IPrL+IqO+v8BpAt9RI2O1Bawz6F
- ZtyOrzciCf9KKCgciyYAEL3vBbjFKhjscTg1sHTKegh5ypMpzIKBSKlwciWFsPorA49X
- M41Qmhyj7Lztz6rH3SLDUmXjgQhgZ94lHMaTEsMmWDMNSccLjh/nIjSSlMOEgo9PjYsp
- uentmiCzBXCLxw6ZIFWXTVx0zvQdepswIqcBJh/8Ox9XBVagP4azoNb+IbhMbjtZcByR
- 6QYcVpchf/FtxLg6FHq7IWS00y4Q+UIKhTzsZ120MF8h/FOsxNX7zHvdNyYeIdJEWuQ9
- GauA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW5VLgU+3yCSBEfXDFnstDbd0tsq6rJMAiNfAv63EfDlzK0WC0UTpLkR8tlLflskJ+zwN10L3BHZ6gjguwtVUdXx6Wrog==
-X-Gm-Message-State: AOJu0YxNDJaC91c790DJpCKwvMszsJphsU+ftNLBT695f5IFOMal96CW
- eFjTWe0GbC4FhoH8B7moPBlIjBf7o7CAnDIADI5tDb6NsESzfzpDKp9MxTW9i/M=
-X-Google-Smtp-Source: AGHT+IHqd8upZ7Mi9ln2bnRjat6D5Tz4ZIeiYKIYL+033vZYoQj76RE1W4iHRaoXjvxB7L6XACeXaQ==
-X-Received: by 2002:a17:906:c212:b0:a55:67b1:7815 with SMTP id
- d18-20020a170906c21200b00a5567b17815mr9190467ejz.41.1713872080316; 
- Tue, 23 Apr 2024 04:34:40 -0700 (PDT)
-Received: from fedora.. (cpe-188-129-47-121.dynamic.amis.hr. [188.129.47.121])
- by smtp.googlemail.com with ESMTPSA id
- mm7-20020a170906cc4700b00a5872f75cfdsm1227389ejb.49.2024.04.23.04.34.39
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Apr 2024 04:34:39 -0700 (PDT)
-From: Robert Marko <robert.marko@sartura.hr>
-To: trini@konsulko.com, u-boot@lists.denx.de, caleb.connolly@linaro.org,
- neil.armstrong@linaro.org, sumit.garg@linaro.org
-Cc: j.beck@linefinity.com,
-	Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH] sysreset: add Qualcomm PSHOLD reset driver
-Date: Tue, 23 Apr 2024 13:33:46 +0200
-Message-ID: <20240423113437.84339-1-robert.marko@sartura.hr>
-X-Mailer: git-send-email 2.44.0
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+DKIM-Signature: a=rsa-sha256;
+ b=Id5Zy/fNucya7hunyN16RIwnMkh/B/snYu3buRz8CsdyzQUBZ1A43HaiYIpYCdawl0KZjfVEOQIUKNiWPcca2l2HyuI/UUHMW9sXNCc9eJL2bFxXB3+0qwBYyg4u7KyDLJxZD9Gd0nsAI55ebpdFPEFWgOeql1i5lgf1EkruqPw=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
+ bh=4YSt8bsbsg878u44c2yKTbf9ohHpcQEEfMwn+1pk0PQ=;
+ h=date:mime-version:subject:message-id:from;
+Received: from [172.16.33.226] (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTPA id 09B28900352;
+ Tue, 23 Apr 2024 19:35:08 +0800 (CST)
+Message-ID: <27ea0014-f713-4a83-8f35-94fdbeccd612@rock-chips.com>
+Date: Tue, 23 Apr 2024 19:35:08 +0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RESEND PATCH v2] configs: rk3588-turing-rk1: disable SPI flash
+ by default
+To: Sam Edwards <cfsworks@gmail.com>, Joshua Riek <jjriek@verizon.net>,
+ Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Christopher Obbard <chris.obbard@collabora.com>, u-boot@lists.denx.de,
+ Florian Klink <flokli@flokli.de>
+References: <20240413205636.601625-1-CFSworks@gmail.com>
+Content-Language: en-US
+From: Kever Yang <kever.yang@rock-chips.com>
+In-Reply-To: <20240413205636.601625-1-CFSworks@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQx1PTlZKHkhCT0MfSBhKSUNVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
+ kG
+X-HM-Tid: 0a8f0abcffb803a9kunm09b28900352
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ORg6Pio*AzMDLj0vETlDTx8w
+ DBMwC05VSlVKTEpIQ0xJSktCQ05NVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFPT09KNwY+
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,109 +77,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Number of Qualcomm ARMv7 SoC-s did not use PSCI but rather used PSHOLD
-(Qualcomm Power Supply Hold Reset) bit to trigger reset or poweroff.
+Hi Sam,
 
-Qualcomm IPQ40XX is one of them, so provide a simple sysreset driver based
-on the upstream Linux one, it is DT compatible as well.
+     Please help to rebase on latest code, or else I'm not able to apply it.
 
-Signed-off-by: Robert Marko <robert.marko@sartura.hr>
----
- drivers/sysreset/Kconfig               |  6 +++
- drivers/sysreset/Makefile              |  1 +
- drivers/sysreset/sysreset_msm-pshold.c | 56 ++++++++++++++++++++++++++
- 3 files changed, 63 insertions(+)
- create mode 100644 drivers/sysreset/sysreset_msm-pshold.c
 
-diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-index 49c0787b26..30ff9e576d 100644
---- a/drivers/sysreset/Kconfig
-+++ b/drivers/sysreset/Kconfig
-@@ -235,6 +235,12 @@ config SYSRESET_RAA215300
- 	help
- 	  Add support for the system reboot via the Renesas RAA215300 PMIC.
- 
-+config SYSRESET_MSM_PSHOLD
-+	bool "Support sysreset for Qualcomm SoCs via PSHOLD"
-+	depends on ARCH_IPQ40XX
-+	help
-+	  Add support for the system reboot on Qualcomm SoCs via PSHOLD.
-+
- endif
- 
- endmenu
-diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
-index e0e732205d..da61dca8e2 100644
---- a/drivers/sysreset/Makefile
-+++ b/drivers/sysreset/Makefile
-@@ -28,4 +28,5 @@ obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
- obj-$(CONFIG_$(SPL_TPL_)SYSRESET_AT91) += sysreset_at91.o
- obj-$(CONFIG_$(SPL_TPL_)SYSRESET_X86) += sysreset_x86.o
- obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
-+obj-$(CONFIG_SYSRESET_MSM_PSHOLD) += sysreset_msm-pshold.o
- obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
-diff --git a/drivers/sysreset/sysreset_msm-pshold.c b/drivers/sysreset/sysreset_msm-pshold.c
-new file mode 100644
-index 0000000000..d25a412954
---- /dev/null
-+++ b/drivers/sysreset/sysreset_msm-pshold.c
-@@ -0,0 +1,56 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Qualcomm PSHOLD reset driver
-+ *
-+ * Copyright (c) 2024 Sartura Ltd.
-+ *
-+ * Author: Robert Marko <robert.marko@sartura.hr>
-+ * Based on the Linux msm-poweroff driver.
-+ *
-+ */
-+
-+#include <common.h>
-+#include <dm.h>
-+#include <sysreset.h>
-+#include <asm/io.h>
-+#include <linux/delay.h>
-+
-+struct msm_pshold_priv {
-+	phys_addr_t base;
-+};
-+
-+static int msm_pshold_request(struct udevice *dev, enum sysreset_t type)
-+{
-+	struct msm_pshold_priv *priv = dev_get_priv(dev);
-+
-+	writel(0, priv->base);
-+	mdelay(10000);
-+
-+	return 0;
-+}
-+
-+static struct sysreset_ops msm_pshold_ops = {
-+	.request = msm_pshold_request,
-+};
-+
-+static int msm_pshold_probe(struct udevice *dev)
-+{
-+	struct msm_pshold_priv *priv = dev_get_priv(dev);
-+
-+	priv->base = dev_read_addr(dev);
-+	return priv->base == FDT_ADDR_T_NONE ? -EINVAL : 0;
-+}
-+
-+static const struct udevice_id msm_pshold_ids[] = {
-+	{ .compatible = "qcom,pshold", },
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(msm_pshold) = {
-+	.name 		= "msm_pshold",
-+	.id 		= UCLASS_SYSRESET,
-+	.of_match 	= msm_pshold_ids,
-+	.probe 		= msm_pshold_probe,
-+	.priv_auto	= sizeof(struct msm_pshold_priv),
-+	.ops 		= &msm_pshold_ops,
-+};
--- 
-2.44.0
+Thanks,
 
+- Kever
+
+On 2024/4/14 04:56, Sam Edwards wrote:
+> While the Turing RK1 board has a pad on the PCB for SPI flash, it is
+> not populated at the factory: supporting SPI flash boot is a user
+> modification, not an out-of-the-box feature. The defconfig for this
+> board should therefore not be enabling the SPI flash image nor SPI
+> support in the SPL, as it causes confusion among downstream users as to
+> whether the SPI image needs to be distributed.
+>
+> Fixes: 153ac950a599 ("board: rockchip: Add the Turing RK1 SoM")
+> Suggested-by: Florian Klink <flokli@flokli.de>
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+> Acked-by: Joshua Riek <jjriek@verizon.net>
+> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+>
+> Changes v1->v2 (both requested by Jonas):
+> - Added back (i.e. made unremoved by patch) CONFIG_USB_GADGET_PRODUCT_NUM value
+>    previously automatically removed by savedefconfig.
+> - Also disable SPI/SFC driver entirely until SPI/SFC lands in the DT (if ever).
+>
+> ---
+>   configs/turing-rk1-rk3588_defconfig | 14 +-------------
+>   1 file changed, 1 insertion(+), 13 deletions(-)
+>
+> diff --git a/configs/turing-rk1-rk3588_defconfig b/configs/turing-rk1-rk3588_defconfig
+> index 07f7b84852..f500b0cf75 100644
+> --- a/configs/turing-rk1-rk3588_defconfig
+> +++ b/configs/turing-rk1-rk3588_defconfig
+> @@ -4,17 +4,12 @@ CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+>   CONFIG_COUNTER_FREQUENCY=24000000
+>   CONFIG_ARCH_ROCKCHIP=y
+>   CONFIG_NR_DRAM_BANKS=2
+> -CONFIG_SF_DEFAULT_SPEED=24000000
+> -CONFIG_SF_DEFAULT_MODE=0x2000
+>   CONFIG_DEFAULT_DEVICE_TREE="rk3588-turing-rk1"
+>   CONFIG_ROCKCHIP_RK3588=y
+> -CONFIG_ROCKCHIP_SPI_IMAGE=y
+>   CONFIG_SPL_SERIAL=y
+>   CONFIG_TARGET_TURINGRK1_RK3588=y
+>   CONFIG_DEBUG_UART_BASE=0xFEBC0000
+>   CONFIG_DEBUG_UART_CLOCK=24000000
+> -CONFIG_SPL_SPI_FLASH_SUPPORT=y
+> -CONFIG_SPL_SPI=y
+>   CONFIG_SYS_LOAD_ADDR=0xc00800
+>   CONFIG_PCI=y
+>   CONFIG_DEBUG_UART=y
+> @@ -31,8 +26,6 @@ CONFIG_DISPLAY_BOARDINFO_LATE=y
+>   CONFIG_SPL_MAX_SIZE=0x40000
+>   CONFIG_SPL_PAD_TO=0x7f8000
+>   # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+> -CONFIG_SPL_SPI_LOAD=y
+> -CONFIG_SYS_SPI_U_BOOT_OFFS=0x60000
+>   CONFIG_SPL_ATF=y
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_GPT=y
+> @@ -66,11 +59,7 @@ CONFIG_MMC_DW_ROCKCHIP=y
+>   CONFIG_MMC_SDHCI=y
+>   CONFIG_MMC_SDHCI_SDMA=y
+>   CONFIG_MMC_SDHCI_ROCKCHIP=y
+> -CONFIG_SF_DEFAULT_BUS=5
+> -CONFIG_SPI_FLASH_SFDP_SUPPORT=y
+> -CONFIG_SPI_FLASH_MACRONIX=y
+> -CONFIG_SPI_FLASH_XMC=y
+> -CONFIG_SPI_FLASH_XTX=y
+> +# CONFIG_SPI_FLASH is not set
+>   CONFIG_PHY_REALTEK=y
+>   CONFIG_DWC_ETH_QOS=y
+>   CONFIG_DWC_ETH_QOS_ROCKCHIP=y
+> @@ -87,7 +76,6 @@ CONFIG_SPL_RAM=y
+>   CONFIG_SCSI=y
+>   CONFIG_DEBUG_UART_SHIFT=2
+>   CONFIG_SYS_NS16550_MEM32=y
+> -CONFIG_ROCKCHIP_SFC=y
+>   CONFIG_SYSRESET=y
+>   CONFIG_USB=y
+>   CONFIG_USB_XHCI_HCD=y
