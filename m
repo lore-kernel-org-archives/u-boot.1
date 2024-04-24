@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CEB9C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 00:58:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C52C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 01:01:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F0FA88D25;
-	Wed, 24 Apr 2024 02:58:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5BB1A88D29;
+	Wed, 24 Apr 2024 03:01:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sa/D4VHE";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wac2KfjA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47CF288D26; Wed, 24 Apr 2024 02:58:10 +0200 (CEST)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id BE85588D2E; Wed, 24 Apr 2024 03:01:50 +0200 (CEST)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B7A988D1D
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 02:58:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A7E5888D29
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 03:01:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-4375ddb9eaeso36272461cf.3
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 17:58:08 -0700 (PDT)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-78efd533a00so426046585a.0
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 18:01:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713920287; x=1714525087; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1713920507; x=1714525307; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=WTqBVia6T+OPlZ/gIjyI5+1VQUhSd9u2Zzm8gv6au4k=;
- b=sa/D4VHEgE3Vp6TtPTOUkvxBKlj5/AvhymYZYAlCyEila8q/UchnF8ahCl5U75Eorc
- bxOWVrKZ3T01jjqw7QCXhJeeJZfz3Nwc4g+ddGh+NFDE7w8YNiZF4nMMdwXkJDR1t3lR
- t/YMuLn27Uy3DDsDQtceJ4Png/35SaoMWxf08=
+ bh=YKTiPcLKj9wSW7DCO6smyqcc8/nZktUW03lOu3+2MuQ=;
+ b=Wac2KfjAOf5m+/IJwNTz2WFozMyQ5qMof7ihnpUdgzwBLKd4zqOTZ+9Hwl4bcScrig
+ v/3sPI0/wpoULZjn+HX8rLjuvkmK2zsKlM6isLVT3p5lLY09UzIGElf85RcpanZ0PlrT
+ 0+xsIjfsMeqwKMM/FEy3SyWe4JzD54ZHufKGc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713920287; x=1714525087;
+ d=1e100.net; s=20230601; t=1713920507; x=1714525307;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WTqBVia6T+OPlZ/gIjyI5+1VQUhSd9u2Zzm8gv6au4k=;
- b=HlZ/Tm0U7A95MZAHANwa8nF9hZqIwtIhgDtZaCzjgLr7vI0VFNGjRMq+aVOyDGKtPe
- lqdshXjzYql7SugT+yQc4KnykwYmSJKndPClwuN9+Us7fkhCrwyCKPjyF2IVcLWUDW5B
- 6HP8P6g/flTqEQjP7TioFglCcek4yX8DJ3sRMl0UN+Vs+Fz7zHc49R58nTgRuORkwH6D
- hCHDymEBw0IdPS2U08tJK04wtL5sh32n3XKXugQNPWbJxtQLNXK4N/T7i7ASgX1hHEXp
- V6GcUmj0lKpZXmQRqPNSQI2h61QD/W+H1AAOr4dQdOM1RlWCJncpsONU2imelDJu//D0
- t5yA==
-X-Gm-Message-State: AOJu0YwU2AV7u6e41HME0uKoW9zesDuNHwcOa6jwBeTE+9b1++efdQtq
- wxIQYTLnpVy26iNpYIhAMJmeLWvKgBs5ocAavzCp3yimK4td4rcS0tn+zJM9n0k=
-X-Google-Smtp-Source: AGHT+IE6Q2YQSyoXnEHXt5Zi5jjFLdpe0u+bGVGSMTCW44NGmE7AJ8chnY+datZrj9i+opPCIOALcQ==
-X-Received: by 2002:a05:622a:188a:b0:439:b456:14b with SMTP id
- v10-20020a05622a188a00b00439b456014bmr1070614qtc.47.1713920286959; 
- Tue, 23 Apr 2024 17:58:06 -0700 (PDT)
+ bh=YKTiPcLKj9wSW7DCO6smyqcc8/nZktUW03lOu3+2MuQ=;
+ b=P5qYUfMsffORkmFJr7lJgUDhUGMmW+EQkFDAodf/A2I1ySCt7A52f0Cocp6Mb8L/i0
+ pwI737epgjpUQEOgbUePxmfr+++6lUahq6VBGwjeCd2NCEzMn0iFM7CNZeHBsuJeIyaZ
+ RsaXzU+0daMwh6BJep/49ph8Ey30UnBYZNlDyo9WiNbjjn1yrez1xZZt9iJkMPmmpYbt
+ KeJQ0H3VYSrI6sgNAfXamOyWwgg6GBTQTJNqIUl2zVh7sJDk3T/6vPJXAesV3qntYUDe
+ T0b/5CoGHDH/Tj9/roDKLiSuC1odUAPEoQmbZGTu4cwyxoMwa3YLP7hEKxbasyEcIGHq
+ +GjA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVF7uAKsL1nlXe+BwNlTolJesLSysfi4hOGezkawrYNgXzkknBWx//FpF2f2HNIa0GBgTYFMwH8oZFL1cwYAWu1zByClg==
+X-Gm-Message-State: AOJu0YwxeBefD/mGF5aEUl0kSzBmUw+Z8ZDOcYblDW/lTczwpbAwmZzg
+ SKqOuYyKpROMxNccZt88EcZ4/FNNCktfTi4qUZ87N89sWyB4FLl6XcwZQX703nQ=
+X-Google-Smtp-Source: AGHT+IFzkpAanLwta3UnHq8BiL2y8D4laRATcCJAvXyPtl5HqpOnvdwPol6fNcMoDWwAKduK5OnCCw==
+X-Received: by 2002:a05:6214:1808:b0:6a0:7139:800 with SMTP id
+ o8-20020a056214180800b006a071390800mr1068033qvw.33.1713920507377; 
+ Tue, 23 Apr 2024 18:01:47 -0700 (PDT)
 Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- ic10-20020a05622a68ca00b00436510ddc5esm5642473qtb.34.2024.04.23.17.58.05
+ g2-20020a0cdf02000000b0069b447066bbsm5589404qvl.78.2024.04.23.18.01.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Apr 2024 17:58:06 -0700 (PDT)
-Date: Tue, 23 Apr 2024 18:58:02 -0600
+ Tue, 23 Apr 2024 18:01:46 -0700 (PDT)
+Date: Tue, 23 Apr 2024 19:01:44 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Peng Fan <peng.fan@nxp.com>
-Cc: "U-Boot@lists.denx.de" <u-boot@lists.denx.de>,
- Michael Walle <michael@walle.cc>
-Subject: Re: [GIT PULL] please pull fsl-qoriq-2024-4-24
-Message-ID: <20240424005802.GA1054907@bill-the-cat>
-References: <DU0PR04MB9417C878C2E50F0425AEA54A88112@DU0PR04MB9417.eurprd04.prod.outlook.com>
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Subject: Re: [PATCH] sysreset: psci: drop reliance on SPL support
+Message-ID: <20240424010144.GB1054907@bill-the-cat>
+References: <20240423234604.10674-1-andre.przywara@arm.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3xFNsEv4JuCwo4xV"
+ protocol="application/pgp-signature"; boundary="TaKUD4OjApjgPXmD"
 Content-Disposition: inline
-In-Reply-To: <DU0PR04MB9417C878C2E50F0425AEA54A88112@DU0PR04MB9417.eurprd04.prod.outlook.com>
+In-Reply-To: <20240423234604.10674-1-andre.przywara@arm.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,39 +92,71 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---3xFNsEv4JuCwo4xV
+--TaKUD4OjApjgPXmD
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Apr 23, 2024 at 11:34:08PM +0000, Peng Fan wrote:
-
-> Hi Tom,
+On Wed, Apr 24, 2024 at 12:46:04AM +0100, Andre Przywara wrote:
+> At the moment enabling CONFIG_SYSRESET_PSCI *selects* SPL_ARM_PSCI_FW,
+> even though this is a platform design property, so nothing any driver
+> should enforce. Some platforms load the PSCI runtime (TF-A) only in the
+> SPL, so PSCI is naturally not available during SPL runtime.
 >=20
-> Please pull fsl-qoriq-2024-4-24
+> Spit CONFIG_SYSRESET_PSCI up into an SPL and a U-Boot proper version,
+> and let the former *depend* on SPL_ARM_PSCI_FW.
 >=20
+> This allows to enable CONFIG_SYSRESET_PSCI on platforms without SPL PSCI
+> support.
+>=20
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> ---
+>  drivers/sysreset/Kconfig  | 8 +++++++-
+>  drivers/sysreset/Makefile | 2 +-
+>  2 files changed, 8 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
+> index 49c0787b26d..62fe9eb6220 100644
+> --- a/drivers/sysreset/Kconfig
+> +++ b/drivers/sysreset/Kconfig
+> @@ -119,11 +119,17 @@ config SYSRESET_PALMAS
+>  config SYSRESET_PSCI
+>  	bool "Enable support for PSCI System Reset"
+>  	depends on ARM_PSCI_FW
+> -	select SPL_ARM_PSCI_FW if SPL
+>  	help
+>  	  Enable PSCI SYSTEM_RESET function call.  To use this, PSCI firmware
+>  	  must be running on your system.
+> =20
+> +config SYSRESET_SPL_PSCI
 
-Applied to u-boot/master, thanks!
+This should be SPL_SYSRESET_PSCI so that..
+
+[snip]
+> -obj-$(CONFIG_SYSRESET_PSCI) +=3D sysreset_psci.o
+> +obj-$(CONFIG_$(SPL_TPL_)SYSRESET_PSCI) +=3D sysreset_psci.o
+
+This works.
 
 --=20
 Tom
 
---3xFNsEv4JuCwo4xV
+--TaKUD4OjApjgPXmD
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYoWRQACgkQFHw5/5Y0
-tyyGpAv/dzblz63vIevji/o8Wvt0ypDOtLg/OXp9g9tz5Yd8HwYf1oji96rDjvhj
-CbXCgRKz8CuYW8ZgXlQi9XSaQGYMEErCMdZtY4HVYKqT+IML+bKWPYD/rT1i2Xbh
-xGU1SdANGNZdzkKS9ugFwH/3C51yzTDvkS9BJKwnbSIZB65R3JBNgiNEQ2QOFBL7
-/u7L4sZI0KnGxso1/pGw6GuWaBL0G1N0Yxu/slAnvc+2Yji3hHUJplSH50C1e9wJ
-dIbw3XHzW5A08iQ2YEgdh0wvJOmfQf8qTYE5PeBuBE8j98Jh288scOCpyVJ0gtBD
-sPCmfsdgdkdbEERY8jerkirN3QZlpl/63NmmHpLWI7nI0mljgWMxh+7H0Y3Wlgue
-cSq5LCmBFc7G1RjWztI8rEuTF22vKdMzChxBsdkDDnIVkSKno1hoBMYQXD+WsPW7
-9YbR5jwxTyBlx4Sw4QlG/VKz+BIcqZ8RLmqMMpnctsgUTM7oAXVEyIsbr0TH7568
-jiTJH81b
-=EouN
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYoWfgACgkQFHw5/5Y0
+tyy3Vwv+JytYwCKedLBEw6HGecbsrWwT3wR+LYyqpOHtH7YYL7TKAO317yMMA7cR
+1YuyKi/OSK5o4ydsOI4yRTRLaZUsEClCgsvQwBMkdKypZzprRr7fiGfj6HP7WaIC
+a2btH1LYloQr7Vi35r3eReqOh4/+O80yYh7KyqsydFHZSRd+cRQjBj5VtiVTIztC
+MKYO0JQ6e2mHRabxNWG9uuItI4/BqS1pq5MJleNGYzAVt98ANBvn4fLtlhDKnzPY
+fiVyzPQtaM87OU4Q39TtVpOvgvLdTVNnpzkosSo35KaQb3aABbEiAyggdaSKgTGL
+iWda2KYszg9zsFxT5mPq3t8ns/WQmbv+jauz7/6qo/O6BmROdVkrjSJttO/tlYNt
+kc2OtCb8F7/O13y6jDTjeTQnGnSsPWOF+DOOC0Y2HWqQggfETQWlJJ1yzP5oqaFz
+NjL6LH3NjTeH6Hv19u6nDJqLPAvhh8+XBF8+5VEoxspMV0K8w6WT3FBGqxqKIWZs
+OlF0apIT
+=PB6v
 -----END PGP SIGNATURE-----
 
---3xFNsEv4JuCwo4xV--
+--TaKUD4OjApjgPXmD--
