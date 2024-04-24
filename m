@@ -4,56 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95B41C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 12:24:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D138C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 12:43:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ABEE88DEC;
-	Wed, 24 Apr 2024 14:24:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 4DE93887A1;
+	Wed, 24 Apr 2024 14:43:32 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1713961481;
-	bh=Bp/P9FVTU7D07mrWDNE3xOmOH4Bhr7g/dzp0Ld4Szcg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=DMEx43hU8pFnTU6966qvxvHWIq55BOx+EvmiyG2voI8IM2mYDRNNs84sbnIcnoYqD
-	 Zl6cXeAl6TTB+2dmojT6hC3ZwSuGz5RpqdE9e7HUJI/Wyh1hnOeCBPo8QtY6Is0lJU
-	 X9MApxDxl6wlzmqP74ITpeno74k3uUpu4jfeqRMT05PY5xrBzYLtFNeWdGkB4NB5sS
-	 2jhHioUUaBrOY4vm6U0FoGJprjTDn5N//skdUpNOraTXZpedJwQyjKGdRD2HVFqqbA
-	 Ur7lzRZfgeTlVsZILqN434UxZejTHdHGSm8Tr5FeLQ3VEV8xwAbTbfvdea8uOcJWHq
-	 mvzTzTfe7WYZQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="nPTtqJWU";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D7D02887A4; Wed, 24 Apr 2024 14:43:31 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4EF6B88CA6;
- Wed, 24 Apr 2024 14:24:39 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1713961480;
- bh=Bp/P9FVTU7D07mrWDNE3xOmOH4Bhr7g/dzp0Ld4Szcg=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=J2xQyKxuWMAXKmKFBgaOC9syFY3C5RIJt/eIwQr9+WjWY+EEDMRNr3cXP95GVAEWX
- JYf+U/SkaagDitIWdF5bQWQgqMsoNIh08F1UloAO21vPqHer+z0qZRkaW9EyfQh7a9
- XWgKJW2eow54XaUJgoISqVCnZT2Pf07WfW7QmwfX86mC1XbrOSSseosWpFA9qF7+9s
- tcgthOgbgkHWN/KlWYT+egvqRG2WLCogRtPe3FcYt29kbSLQJYGqGqOgia3VkMBANm
- 5dYhzUj37/7m+17jQNAmm+X7E8bjEKEo0S28xYh1kJ4zRxYBjQgeZ1uJYG/Kr2pryM
- piienIMZPES4w==
-Message-ID: <62b2703f-13e4-4609-9fd6-552caa5bef91@denx.de>
-Date: Wed, 24 Apr 2024 14:15:37 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id C8AC88871C
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 14:43:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1713962609; x=1716554609;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=EI5Jg2Hn3CyHIATBtKRdGpZyeEWqAM6UTcD3e5tvFLQ=;
+ b=nPTtqJWUDVT+lmXaFhU9noiURnTOnPJLwvkKLbqpZvbe0bjjvyC6wYuDchBdyEgJ
+ CRJFNJ8DmVD+LqHEEKR+4Sy9dCtmqFUKJsdQbbopjzMeZd3mzt04oLZJhugEAjzs
+ Qc6sUF5wdiOYU6EIdNep0JQli4hkakGqQCm5+narFZU=;
+X-AuditID: ac14000a-fbefe7000000290d-66-6628fe717d50
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 80.2A.10509.17EF8266;
+ Wed, 24 Apr 2024 14:43:29 +0200 (CEST)
+Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 24 Apr
+ 2024 14:43:28 +0200
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <u-boot@lists.denx.de>
+CC: <upstream@lists.phytec.de>, <nm@ti.com>, <bb@ti.com>, <vigneshr@ti.com>
+Subject: [PATCH] arm: mach-k3: am642: Provide a way to obtain boot device for
+ non SPLs
+Date: Wed, 24 Apr 2024 14:43:20 +0200
+Message-ID: <20240424124320.2056543-1-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] usb: cdns3: gadget.c: Set fast access bit
-To: Ravi Gunasekaran <r-gunasekaran@ti.com>, trini@konsulko.com,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: rogerq@kernel.org, u-boot@lists.denx.de, pawell@cadence.com,
- peter.chen@kernel.org, srk@ti.com
-References: <20240424073911.1943-1-r-gunasekaran@ti.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240424073911.1943-1-r-gunasekaran@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrOLMWRmVeSWpSXmKPExsWyRpKBR7fwn0aawZJXShZz3xxgtXjz4yyT
+ xdu9newW3e/ULf6f/cDuwOpx9s4ORo/+7hZWj+M3tjMFMEdx2aSk5mSWpRbp2yVwZTS+uMxa
+ 0G9W8X7LcrYGxsW6XYycHBICJhI9n+axdzFycQgJLGGSuPjxMhuE85hR4uTvE4wgVWwC6hJ3
+ NnxjBbFFBKQkXnZuZAaxmQW8JWYt+scCYgsLhEm8OrwHLM4ioCqxY+UDsF5eAUuJ7mvdLBDb
+ 5CVmXvrODhEXlDg58wkLxBx5ieats6FmSkgcfPECzBYCir+4tByud9q518wQdqjE1i/bmSYw
+ CsxCMmoWklGzkIxawMi8ilEoNzM5O7UoM1uvIKOyJDVZLyV1EyMocEUYuHYw9s3xOMTIxMF4
+ iFGCg1lJhPfmR400Id6UxMqq1KL8+KLSnNTiQ4zSHCxK4ryrO4JThQTSE0tSs1NTC1KLYLJM
+ HJxSDYzGd1S//2StuzxVUjo//PYMWa3fiZUnl0uebjnyZfZJBeulHWcSTgme2Xljf1nOuuvb
+ /+awe1q8buHh3qNQmLKC6drLgr1az54WsbgVMrtaZD/enS7Bw7rv0pn3AZ+ESzvnMZ/LrVrA
+ N0Gpqyk3jWPKlv2aIn8FRZ9cj0uT2rYzaO+yvpC//lFKLMUZiYZazEXFiQBvj8uaSgIAAA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,67 +85,251 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/24/24 9:39 AM, Ravi Gunasekaran wrote:
-> From: Aswath Govindraju <a-govindraju@ti.com>
-> 
-> When the device port is in a low power state [U3/L2/Not Connected],
-> accesses to usb device registers may take a long time. This could lead to
-> potential core hang when the controller registers are accessed after the
-> port is disabled by setting DEVDS field. Setting the fast register access
-> bit ensures that the PHY clock is keeping up in active state.
-> 
-> Therefore, set fast access bit to ensure the accesses to device registers
-> are quick even in low power states.
-> 
-> commit b5148d946f45 ("usb: cdns3: gadget: set fast access bit") in the
-> upstream kernel is taken as reference.
-> 
-> Signed-off-by: Aswath Govindraju <a-govindraju@ti.com>
-> Signed-off-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
-> Reviewed-by: Roger Quadros <rogerq@kernel.org>
-> Reviewed-by: Marek Vasut <marex@denx.de>
-> ---
-> Changes since v2:
-> ----------------
-> * Updated the commit description with reference to upstream kernel commit
-> * Picked up Marek's Reviewed-by tag from v2
-> 
-> Changes since v1:
-> -----------------
-> * Rebased to tip of -next
-> * Added Reviewed-by tag
-> 
-> v2: https://lore.kernel.org/all/20240423082420.32336-1-r-gunasekaran@ti.com/
-> v1: https://lore.kernel.org/u-boot/20230505121353.23486-1-r-gunasekaran@ti.com/
-> 
->   drivers/usb/cdns3/gadget.c | 4 ++++
->   1 file changed, 4 insertions(+)
-> 
-> diff --git a/drivers/usb/cdns3/gadget.c b/drivers/usb/cdns3/gadget.c
-> index 7aa0c6b2be..d11175dc5b 100644
-> --- a/drivers/usb/cdns3/gadget.c
-> +++ b/drivers/usb/cdns3/gadget.c
-> @@ -2325,6 +2325,9 @@ static void cdns3_gadget_config(struct cdns3_device *priv_dev)
->   	writel(USB_IEN_INIT, &regs->usb_ien);
->   	writel(USB_CONF_CLK2OFFDS | USB_CONF_L1DS, &regs->usb_conf);
->   
-> +	/* Set the Fast access bit */
-> +	writel(PUSB_PWR_FST_REG_ACCESS, &priv_dev->regs->usb_pwr);
-> +
->   	cdns3_configure_dmult(priv_dev, NULL);
->   
->   	cdns3_gadget_pullup(&priv_dev->gadget, 1);
-> @@ -2383,6 +2386,7 @@ static int cdns3_gadget_udc_stop(struct usb_gadget *gadget)
->   
->   	/* disable interrupt for device */
->   	writel(0, &priv_dev->regs->usb_ien);
-> +	writel(0, &priv_dev->regs->usb_pwr);
->   	writel(USB_CONF_DEVDS, &priv_dev->regs->usb_conf);
->   
->   	return ret;
-> 
-> base-commit: bc39e06778168a34bb4e0a34fbee4edbde4414d8
+Let's provide get_boot_device() for AM64, similar to what we did
+in commit 2f9095e2bf59 ("arm: mach-k3: am625: Provide a way to obtain boot
+device for non SPLs") for AM62.
 
-Since this is gadget stuff, +CC Mattijs , that should go through their tree.
+Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+---
+ arch/arm/mach-k3/Makefile       |   1 +
+ arch/arm/mach-k3/am642_init.c   |  92 +---------------------------
+ arch/arm/mach-k3/am64x/Makefile |   2 +
+ arch/arm/mach-k3/am64x/boot.c   | 105 ++++++++++++++++++++++++++++++++
+ 4 files changed, 109 insertions(+), 91 deletions(-)
+ create mode 100644 arch/arm/mach-k3/am64x/Makefile
+ create mode 100644 arch/arm/mach-k3/am64x/boot.c
 
-Thanks!
+diff --git a/arch/arm/mach-k3/Makefile b/arch/arm/mach-k3/Makefile
+index 1bd523329a4..3101f57d324 100644
+--- a/arch/arm/mach-k3/Makefile
++++ b/arch/arm/mach-k3/Makefile
+@@ -26,3 +26,4 @@ obj-$(CONFIG_SOC_K3_AM62P5) += am62p5_init.o
+ endif
+ obj-y += common.o security.o
+ obj-$(CONFIG_SOC_K3_AM625) += am62x/
++obj-$(CONFIG_SOC_K3_AM642) += am64x/
+diff --git a/arch/arm/mach-k3/am642_init.c b/arch/arm/mach-k3/am642_init.c
+index ddf47ef0a9b..feadad8c5a8 100644
+--- a/arch/arm/mach-k3/am642_init.c
++++ b/arch/arm/mach-k3/am642_init.c
+@@ -285,97 +285,7 @@ u32 spl_mmc_boot_mode(struct mmc *mmc, const u32 boot_device)
+ 	}
+ }
+ 
+-static u32 __get_backup_bootmedia(u32 main_devstat)
+-{
+-	u32 bkup_bootmode =
+-	    (main_devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
+-	    MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
+-	u32 bkup_bootmode_cfg =
+-	    (main_devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
+-	    MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
+-
+-	switch (bkup_bootmode) {
+-	case BACKUP_BOOT_DEVICE_UART:
+-		return BOOT_DEVICE_UART;
+-
+-	case BACKUP_BOOT_DEVICE_DFU:
+-		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
+-			return BOOT_DEVICE_USB;
+-		return BOOT_DEVICE_DFU;
+-
+-
+-	case BACKUP_BOOT_DEVICE_ETHERNET:
+-		return BOOT_DEVICE_ETHERNET;
+-
+-	case BACKUP_BOOT_DEVICE_MMC:
+-		if (bkup_bootmode_cfg)
+-			return BOOT_DEVICE_MMC2;
+-		return BOOT_DEVICE_MMC1;
+-
+-	case BACKUP_BOOT_DEVICE_SPI:
+-		return BOOT_DEVICE_SPI;
+-
+-	case BACKUP_BOOT_DEVICE_I2C:
+-		return BOOT_DEVICE_I2C;
+-	};
+-
+-	return BOOT_DEVICE_RAM;
+-}
+-
+-static u32 __get_primary_bootmedia(u32 main_devstat)
+-{
+-	u32 bootmode = (main_devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
+-	    MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
+-	u32 bootmode_cfg =
+-	    (main_devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
+-	    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
+-
+-	switch (bootmode) {
+-	case BOOT_DEVICE_OSPI:
+-		fallthrough;
+-	case BOOT_DEVICE_QSPI:
+-		fallthrough;
+-	case BOOT_DEVICE_XSPI:
+-		fallthrough;
+-	case BOOT_DEVICE_SPI:
+-		return BOOT_DEVICE_SPI;
+-
+-	case BOOT_DEVICE_ETHERNET_RGMII:
+-		fallthrough;
+-	case BOOT_DEVICE_ETHERNET_RMII:
+-		return BOOT_DEVICE_ETHERNET;
+-
+-	case BOOT_DEVICE_EMMC:
+-		return BOOT_DEVICE_MMC1;
+-
+-	case BOOT_DEVICE_NAND:
+-		return BOOT_DEVICE_NAND;
+-
+-	case BOOT_DEVICE_MMC:
+-		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
+-		     MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
+-			return BOOT_DEVICE_MMC2;
+-		return BOOT_DEVICE_MMC1;
+-
+-	case BOOT_DEVICE_DFU:
+-		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
+-		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
+-			return BOOT_DEVICE_USB;
+-		return BOOT_DEVICE_DFU;
+-
+-	case BOOT_DEVICE_NOBOOT:
+-		return BOOT_DEVICE_RAM;
+-	}
+-
+-	return bootmode;
+-}
+-
+ u32 spl_boot_device(void)
+ {
+-	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
+-
+-	if (bootindex == K3_PRIMARY_BOOTMODE)
+-		return __get_primary_bootmedia(devstat);
+-	else
+-		return __get_backup_bootmedia(devstat);
++	return get_boot_device();
+ }
+diff --git a/arch/arm/mach-k3/am64x/Makefile b/arch/arm/mach-k3/am64x/Makefile
+new file mode 100644
+index 00000000000..acf09c3426c
+--- /dev/null
++++ b/arch/arm/mach-k3/am64x/Makefile
+@@ -0,0 +1,2 @@
++# SPDX-License-Identifier:	GPL-2.0+
++obj-y += boot.o
+diff --git a/arch/arm/mach-k3/am64x/boot.c b/arch/arm/mach-k3/am64x/boot.c
+new file mode 100644
+index 00000000000..ce8ae941be6
+--- /dev/null
++++ b/arch/arm/mach-k3/am64x/boot.c
+@@ -0,0 +1,105 @@
++// SPDX-License-Identifier: GPL-2.0+
++#include <asm/io.h>
++#include <asm/arch/hardware.h>
++#include <asm/arch/spl.h>
++
++static u32 __get_backup_bootmedia(u32 main_devstat)
++{
++	u32 bkup_bootmode =
++	    (main_devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_MASK) >>
++	    MAIN_DEVSTAT_BACKUP_BOOTMODE_SHIFT;
++	u32 bkup_bootmode_cfg =
++	    (main_devstat & MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_MASK) >>
++	    MAIN_DEVSTAT_BACKUP_BOOTMODE_CFG_SHIFT;
++
++	switch (bkup_bootmode) {
++	case BACKUP_BOOT_DEVICE_UART:
++		return BOOT_DEVICE_UART;
++
++	case BACKUP_BOOT_DEVICE_DFU:
++		if (bkup_bootmode_cfg & MAIN_DEVSTAT_BACKUP_USB_MODE_MASK)
++			return BOOT_DEVICE_USB;
++		return BOOT_DEVICE_DFU;
++
++	case BACKUP_BOOT_DEVICE_ETHERNET:
++		return BOOT_DEVICE_ETHERNET;
++
++	case BACKUP_BOOT_DEVICE_MMC:
++		if (bkup_bootmode_cfg)
++			return BOOT_DEVICE_MMC2;
++		return BOOT_DEVICE_MMC1;
++
++	case BACKUP_BOOT_DEVICE_SPI:
++		return BOOT_DEVICE_SPI;
++
++	case BACKUP_BOOT_DEVICE_I2C:
++		return BOOT_DEVICE_I2C;
++	};
++
++	return BOOT_DEVICE_RAM;
++}
++
++static u32 __get_primary_bootmedia(u32 main_devstat)
++{
++	u32 bootmode = (main_devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_MASK) >>
++	    MAIN_DEVSTAT_PRIMARY_BOOTMODE_SHIFT;
++	u32 bootmode_cfg =
++	    (main_devstat & MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_MASK) >>
++	    MAIN_DEVSTAT_PRIMARY_BOOTMODE_CFG_SHIFT;
++
++	switch (bootmode) {
++	case BOOT_DEVICE_OSPI:
++		fallthrough;
++	case BOOT_DEVICE_QSPI:
++		fallthrough;
++	case BOOT_DEVICE_XSPI:
++		fallthrough;
++	case BOOT_DEVICE_SPI:
++		return BOOT_DEVICE_SPI;
++
++	case BOOT_DEVICE_ETHERNET_RGMII:
++		fallthrough;
++	case BOOT_DEVICE_ETHERNET_RMII:
++		return BOOT_DEVICE_ETHERNET;
++
++	case BOOT_DEVICE_EMMC:
++		return BOOT_DEVICE_MMC1;
++
++	case BOOT_DEVICE_NAND:
++		return BOOT_DEVICE_NAND;
++
++	case BOOT_DEVICE_MMC:
++		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_MMC_PORT_MASK) >>
++		     MAIN_DEVSTAT_PRIMARY_MMC_PORT_SHIFT)
++			return BOOT_DEVICE_MMC2;
++		return BOOT_DEVICE_MMC1;
++
++	case BOOT_DEVICE_DFU:
++		if ((bootmode_cfg & MAIN_DEVSTAT_PRIMARY_USB_MODE_MASK) >>
++		    MAIN_DEVSTAT_PRIMARY_USB_MODE_SHIFT)
++			return BOOT_DEVICE_USB;
++		return BOOT_DEVICE_DFU;
++
++	case BOOT_DEVICE_NOBOOT:
++		return BOOT_DEVICE_RAM;
++	}
++
++	return bootmode;
++}
++
++u32 get_boot_device(void)
++{
++	u32 devstat = readl(CTRLMMR_MAIN_DEVSTAT);
++	u32 bootmode = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
++	u32 bootmedia;
++
++	if (bootmode == K3_PRIMARY_BOOTMODE)
++		bootmedia = __get_primary_bootmedia(devstat);
++	else
++		bootmedia = __get_backup_bootmedia(devstat);
++
++	debug("%s: devstat = 0x%x bootmedia = 0x%x bootmode = %d\n",
++	      __func__, devstat, bootmedia, bootmode);
++
++	return bootmedia;
++}
+-- 
+2.34.1
+
