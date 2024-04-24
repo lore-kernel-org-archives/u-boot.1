@@ -4,72 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DA6BC4345F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 12:54:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38858C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 13:25:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63164887BC;
-	Wed, 24 Apr 2024 14:53:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 792C08874A;
+	Wed, 24 Apr 2024 15:25:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="FQ038gcA";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="s00JwrBl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9D0BF887BC; Wed, 24 Apr 2024 14:53:48 +0200 (CEST)
-Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DEC8E8874A; Wed, 24 Apr 2024 15:25:13 +0200 (CEST)
+Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
+ [IPv6:2a00:1450:4864:20::235])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4DCE887B2
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 14:53:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BE7D588709
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 15:25:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=phytec.de
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=W.Egorov@phytec.de
-DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
- q=dns/txt; i=@phytec.de; t=1713963224; x=1716555224;
- h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
- Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
- Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
- List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Ayhb0My4hLnhlgEVFyBLPmnaG/6rovWYuwoP9XMZrVs=;
- b=FQ038gcAEv0Ws8p34qpKqyBGHAKm/oSWaZ5oWKmP6BVdP/QMk9wkXg99JYtv+SPu
- Dt1TGXcWNk6r3BI8UwWJbFQxAN2H19D/n83MF6JtYsfZo3ngOoQnN7xwAeGr8ii7
- j0wC8Rqv0DirKiP1AbIATmPaCykMxQzIHNyIuB4BDEI=;
-X-AuditID: ac14000a-fbefe7000000290d-33-662900d8fbe5
-Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
- (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
- (Client did not present a certificate)
- by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 69.3A.10509.8D009266;
- Wed, 24 Apr 2024 14:53:44 +0200 (CEST)
-Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
- (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 24 Apr
- 2024 14:53:44 +0200
-From: Wadim Egorov <w.egorov@phytec.de>
-To: <u-boot@lists.denx.de>
-CC: <upstream@lists.phytec.de>
-Subject: [PATCH 2/2] phycore_am64x_a53_defconfig: Enable CONFIG_BOARD_LATE_INIT
-Date: Wed, 24 Apr 2024 14:53:35 +0200
-Message-ID: <20240424125335.2306132-3-w.egorov@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20240424125335.2306132-1-w.egorov@phytec.de>
-References: <20240424125335.2306132-1-w.egorov@phytec.de>
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-lj1-x235.google.com with SMTP id
+ 38308e7fff4ca-2d895138d0eso54396131fa.1
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 06:25:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1713965110; x=1714569910;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=vPjbd0lOGp227cV/e1bmJS+GK8ABEts9Hnffk99sKM0=;
+ b=s00JwrBlnCdpUVVa+xTTCnK2S/+0MdnD6q0aWBvI4GDbZYYIGqr4szv5nMT2sA1fvw
+ 4E2/zjWXR0GKDNDyxWUISG/x3gtSCvE0zi84D61V+KFWOZOTWrtg6OoKAJKnoYXMDeM1
+ aqD9kRXRV9h1CPn4LA3aUF4ijKkOwvYA4vqwhK/kc2D1+VIZaMpAgtsLeHuepysjj8yc
+ AsWkfHS103x1rinM9FnV/ggV9qfINZvEzQPzyLcPOP8lRyqvrabxxB8PQbRIId+fELlB
+ pbjh5pdp9uDcr7uas3/79LBFAt6t0JoS4rbxIvqcqx98GTu7ISrRqnLtJqTLA6XmX90a
+ ZZKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713965110; x=1714569910;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vPjbd0lOGp227cV/e1bmJS+GK8ABEts9Hnffk99sKM0=;
+ b=Yb3wX5UXJFNy9+PB/wTaEAlW1LeMe9S4VzfMV6eTPdDe2aTx6oYlDqh97c2Rdzj2vN
+ ysdGkj/uZ0ft3TGRD8r9gPJXEIJfyN3nU9brYvt9ptPZkxWjIbDmu1bgKBt7F5u46wLA
+ IM8WEMCplszw8YLjoBsRE3NnyBup7ZcepMVpHO0ZfBrUAl3Rx2X6FV4M7lfH1ZthX0aC
+ qMKsl/CSRgjnIDIvk1pi2rb35/CgSQv8u2zmzefgjdAxjNo8YzaYRDxT+Egh7NBZktPV
+ 5BZwlvz1CmeJwr+qtGmblY4wttjrkSXNXcjPT3f2f3dNhoEy/WhhNKIB/yOLZP7p4MFp
+ 0axQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVYwM6JVWA2zU0WtTApJlOz95dzbWl3x9Ra8bTo4JLD1r0S4astknR36ltUz1Y7QdfBqQq+T74MyAJL9pvxa7Zlq76w3g==
+X-Gm-Message-State: AOJu0YxWXOOsAjStI01F6JDGxp/RzQyZfkaNDIXtTS5ah7tp1fKcYnQb
+ h4nhhfiJnV5hJPgOAThfIATVqf/xNBuC/DNqF9F33+5cF1xSXG4sclk2iHIdhMo=
+X-Google-Smtp-Source: AGHT+IHoKWySvwUrka8cl4DcK0FQqAPDaJ1W1gTJ5z3FygjMvcbYOyGCLHn51g52K0ERyXD97OXfIA==
+X-Received: by 2002:a2e:7018:0:b0:2d6:f69d:c74c with SMTP id
+ l24-20020a2e7018000000b002d6f69dc74cmr1453158ljc.38.1713965109880; 
+ Wed, 24 Apr 2024 06:25:09 -0700 (PDT)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ f17-20020a05600c4e9100b004182b87aaacsm23895921wmq.14.2024.04.24.06.25.09
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 24 Apr 2024 06:25:09 -0700 (PDT)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Marek Vasut <marex@denx.de>, Ravi Gunasekaran <r-gunasekaran@ti.com>,
+ trini@konsulko.com
+Cc: rogerq@kernel.org, u-boot@lists.denx.de, pawell@cadence.com,
+ peter.chen@kernel.org, srk@ti.com
+Subject: Re: [PATCH v3] usb: cdns3: gadget.c: Set fast access bit
+In-Reply-To: <62b2703f-13e4-4609-9fd6-552caa5bef91@denx.de>
+References: <20240424073911.1943-1-r-gunasekaran@ti.com>
+ <62b2703f-13e4-4609-9fd6-552caa5bef91@denx.de>
+Date: Wed, 24 Apr 2024 15:25:07 +0200
+Message-ID: <874jbq99l8.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [172.25.0.11]
-X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
- (172.25.0.12)
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrFLMWRmVeSWpSXmKPExsWyRpKBR/cGg2aawdaF+hZv93ayW3S/U3dg
- 8jh7ZwejR393C2sAUxSXTUpqTmZZapG+XQJXRnvPB5aCZWwVHXN+MDcwHmXtYuTkkBAwkbh1
- +QpTFyMXh5DAEiaJKacfskA4jxklXl07AlbFJqAucWfDNzBbREBK4mXnRuYuRg4OZgE5iWX9
- RSBhYQF/ib1r3zCD2CwCqhKbvraB2bwClhKHmh5BLZOXmHnpOzuIzSlgJTF96jQwWwioZnX/
- VXaIekGJkzOfsIDYzED1zVtnM0PYEhIHX7xghqiXl3hxaTkLzMxp514zQ9ihElu/bGeawCg0
- C8moWUhGzUIyagEj8ypGodzM5OzUosxsvYKMypLUZL2U1E2MoPAVYeDawdg3x+MQIxMH4yFG
- CQ5mJRHemx810oR4UxIrq1KL8uOLSnNSiw8xSnOwKInzru4IThUSSE8sSc1OTS1ILYLJMnFw
- SjUwJngHeSnITdvsmpi9SP/9IQFl3pqDH3I9i5ME/Aubfi8o5rqrOTmCOSxVPXlNkJc1F//O
- +hJVJ13+HI1juiqe1w74CR+2+HxQOF4mUTXC8PG7+PKXcavKf/CGNr8Xm2Le76f0xuHk+4jL
- ZlMUi7K7Pm9/7+v3fLrpsR9iybkZL8P/7f/5daISS3FGoqEWc1FxIgDIhM5qTQIAAA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,27 +94,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable CONFIG_BOARD_LATE_INIT to use PHYTECs common board_late_init()
-to set handy environment variables for u-boot.
-Also, resync after savedefconfig.
+Hi Ravi,
 
-Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
----
- configs/phycore_am64x_a53_defconfig | 1 +
- 1 file changed, 1 insertion(+)
+Thank you for the patch.
 
-diff --git a/configs/phycore_am64x_a53_defconfig b/configs/phycore_am64x_a53_defconfig
-index bd1e05bee58..8990d08d30a 100644
---- a/configs/phycore_am64x_a53_defconfig
-+++ b/configs/phycore_am64x_a53_defconfig
-@@ -38,6 +38,7 @@ CONFIG_SPL_LOAD_FIT_ADDRESS=0x81000000
- CONFIG_BOOTSTD_FULL=y
- CONFIG_BOOTCOMMAND="run mmcboot; bootflow scan -lb"
- CONFIG_DEFAULT_FDT_FILE="oftree"
-+CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_MAX_SIZE=0x180000
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
--- 
-2.34.1
+On mer., avril 24, 2024 at 14:15, Marek Vasut <marex@denx.de> wrote:
 
+> On 4/24/24 9:39 AM, Ravi Gunasekaran wrote:
+>> From: Aswath Govindraju <a-govindraju@ti.com>
+>> 
+>> When the device port is in a low power state [U3/L2/Not Connected],
+>> accesses to usb device registers may take a long time. This could lead to
+>> potential core hang when the controller registers are accessed after the
+>> port is disabled by setting DEVDS field. Setting the fast register access
+>> bit ensures that the PHY clock is keeping up in active state.
+>> 
+>> Therefore, set fast access bit to ensure the accesses to device registers
+>> are quick even in low power states.
+>> 
+>> commit b5148d946f45 ("usb: cdns3: gadget: set fast access bit") in the
+>> upstream kernel is taken as reference.
+>> 
+>> Signed-off-by: Aswath Govindraju <a-govindraju@ti.com>
+>> Signed-off-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
+>> Reviewed-by: Roger Quadros <rogerq@kernel.org>
+>> Reviewed-by: Marek Vasut <marex@denx.de>
+>> ---
+>> Changes since v2:
+>> ----------------
+>> * Updated the commit description with reference to upstream kernel commit
+>> * Picked up Marek's Reviewed-by tag from v2
+>> 
+>> Changes since v1:
+>> -----------------
+>> * Rebased to tip of -next
+>> * Added Reviewed-by tag
+>> 
+>> v2: https://lore.kernel.org/all/20240423082420.32336-1-r-gunasekaran@ti.com/
+>> v1: https://lore.kernel.org/u-boot/20230505121353.23486-1-r-gunasekaran@ti.com/
+>> 
+>>   drivers/usb/cdns3/gadget.c | 4 ++++
+>>   1 file changed, 4 insertions(+)
+>> 
+>> diff --git a/drivers/usb/cdns3/gadget.c b/drivers/usb/cdns3/gadget.c
+>> index 7aa0c6b2be..d11175dc5b 100644
+>> --- a/drivers/usb/cdns3/gadget.c
+>> +++ b/drivers/usb/cdns3/gadget.c
+>> @@ -2325,6 +2325,9 @@ static void cdns3_gadget_config(struct cdns3_device *priv_dev)
+>>   	writel(USB_IEN_INIT, &regs->usb_ien);
+>>   	writel(USB_CONF_CLK2OFFDS | USB_CONF_L1DS, &regs->usb_conf);
+>>   
+>> +	/* Set the Fast access bit */
+>> +	writel(PUSB_PWR_FST_REG_ACCESS, &priv_dev->regs->usb_pwr);
+>> +
+>>   	cdns3_configure_dmult(priv_dev, NULL);
+>>   
+>>   	cdns3_gadget_pullup(&priv_dev->gadget, 1);
+>> @@ -2383,6 +2386,7 @@ static int cdns3_gadget_udc_stop(struct usb_gadget *gadget)
+>>   
+>>   	/* disable interrupt for device */
+>>   	writel(0, &priv_dev->regs->usb_ien);
+>> +	writel(0, &priv_dev->regs->usb_pwr);
+>>   	writel(USB_CONF_DEVDS, &priv_dev->regs->usb_conf);
+>>   
+>>   	return ret;
+>> 
+>> base-commit: bc39e06778168a34bb4e0a34fbee4edbde4414d8
+>
+> Since this is gadget stuff, +CC Mattijs , that should go through their tree.
+>
+> Thanks!
+
+Thank you Marek for CC'ing me, I missed this patch.
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
