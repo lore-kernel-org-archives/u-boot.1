@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0DD3C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 23 Apr 2024 23:46:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FAE6C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 00:18:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 277F988CCE;
-	Wed, 24 Apr 2024 01:46:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8574688CF5;
+	Wed, 24 Apr 2024 02:18:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B631488CCF; Wed, 24 Apr 2024 01:46:27 +0200 (CEST)
+ id 51CCE88CEF; Wed, 24 Apr 2024 02:18:29 +0200 (CEST)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 8689788CCD
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 01:46:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTP id 542ED88CEC
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 02:18:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=andre.przywara@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 569FD339;
- Tue, 23 Apr 2024 16:46:52 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 33D93339;
+ Tue, 23 Apr 2024 17:18:54 -0700 (PDT)
 Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
  [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 60A773F7BD;
- Tue, 23 Apr 2024 16:46:23 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B38123F7BD;
+ Tue, 23 Apr 2024 17:18:25 -0700 (PDT)
 From: Andre Przywara <andre.przywara@arm.com>
-To: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH] sysreset: psci: drop reliance on SPL support
-Date: Wed, 24 Apr 2024 00:46:04 +0100
-Message-Id: <20240423234604.10674-1-andre.przywara@arm.com>
+To: Jagan Teki <jagan@amarulasolutions.com>
+Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
+ Piotr Oniszczuk <piotr.oniszczuk@gmail.com>
+Subject: [PATCH 0/4] sunxi: devicetree updates plus new boards
+Date: Wed, 24 Apr 2024 01:18:04 +0100
+Message-Id: <20240424001808.14388-1-andre.przywara@arm.com>
 X-Mailer: git-send-email 2.35.8
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -53,59 +53,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At the moment enabling CONFIG_SYSRESET_PSCI *selects* SPL_ARM_PSCI_FW,
-even though this is a platform design property, so nothing any driver
-should enforce. Some platforms load the PSCI runtime (TF-A) only in the
-SPL, so PSCI is naturally not available during SPL runtime.
+This updates the Allwinner related devicetree files from the Linux
+kernel repository. The files were taken from Linux v6.9-rc4, and
+adjusted to increase compatibility with older kernels.
 
-Spit CONFIG_SYSRESET_PSCI up into an SPL and a U-Boot proper version,
-and let the former *depend* on SPL_ARM_PSCI_FW.
+This also adds board support for two new devices: the old Remix Mini PC,
+a TV box like "Android desktop" device from 2015, and the Tanix TX1,
+which is a tiny TV box with an H313 SoC.
+The DT for the latter is preliminary for now, as it hasn't been merged
+into Linus' tree yet - though that's supposed to happen in about a few
+weeks time.
 
-This allows to enable CONFIG_SYSRESET_PSCI on platforms without SPL PSCI
-support.
+Please have a look!
 
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
----
- drivers/sysreset/Kconfig  | 8 +++++++-
- drivers/sysreset/Makefile | 2 +-
- 2 files changed, 8 insertions(+), 2 deletions(-)
+Cheers,
+Andre
 
-diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-index 49c0787b26d..62fe9eb6220 100644
---- a/drivers/sysreset/Kconfig
-+++ b/drivers/sysreset/Kconfig
-@@ -119,11 +119,17 @@ config SYSRESET_PALMAS
- config SYSRESET_PSCI
- 	bool "Enable support for PSCI System Reset"
- 	depends on ARM_PSCI_FW
--	select SPL_ARM_PSCI_FW if SPL
- 	help
- 	  Enable PSCI SYSTEM_RESET function call.  To use this, PSCI firmware
- 	  must be running on your system.
- 
-+config SYSRESET_SPL_PSCI
-+	bool "Enable support for PSCI System Reset in SPL"
-+	depends on SPL_ARM_PSCI_FW
-+	help
-+	  Enable PSCI SYSTEM_RESET function call in the SPL. To use this, PSCI
-+	  firmware must be running on your system before the SPL.
-+
- config SYSRESET_SBI
- 	bool "Enable support for SBI System Reset"
- 	depends on RISCV_SMODE && SBI_V02
-diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
-index e0e732205df..8d992ae0930 100644
---- a/drivers/sysreset/Makefile
-+++ b/drivers/sysreset/Makefile
-@@ -14,7 +14,7 @@ obj-$(CONFIG_SYSRESET_MPC83XX) += sysreset_mpc83xx.o
- obj-$(CONFIG_SYSRESET_MICROBLAZE) += sysreset_microblaze.o
- obj-$(CONFIG_SYSRESET_OCTEON) += sysreset_octeon.o
- obj-$(CONFIG_$(SPL_TPL_)SYSRESET_PALMAS) += sysreset_palmas.o
--obj-$(CONFIG_SYSRESET_PSCI) += sysreset_psci.o
-+obj-$(CONFIG_$(SPL_TPL_)SYSRESET_PSCI) += sysreset_psci.o
- obj-$(CONFIG_SYSRESET_SBI) += sysreset_sbi.o
- obj-$(CONFIG_SYSRESET_SOCFPGA) += sysreset_socfpga.o
- obj-$(CONFIG_SYSRESET_SOCFPGA_SOC64) += sysreset_socfpga_soc64.o
+Andre Przywara (4):
+  sunxi: dts: arm/arm64: update devicetree files from Linux-v6.9-rc4
+  sunxi: a64: Add Remix Mini PC support
+  [DO NOT MERGE] sunxi: dts: arm64: add Tanix TX1 DT from Linux
+  sunxi: H616: add Tanix TX1 support
+
+ arch/arm/dts/Makefile                         |   4 +-
+ arch/arm/dts/sun50i-h313-tanix-tx1.dts        | 183 +++++++++
+ arch/arm/dts/sun50i-h6-beelink-gs1.dts        |   2 +
+ arch/arm/dts/sun50i-h6-tanix.dtsi             |   2 +
+ arch/arm/dts/sun50i-h6.dtsi                   |   7 +-
+ .../dts/sun50i-h616-bigtreetech-cb1-manta.dts |   2 +-
+ arch/arm/dts/sun50i-h616-bigtreetech-cb1.dtsi |   4 +-
+ arch/arm/dts/sun50i-h616-bigtreetech-pi.dts   |   2 +-
+ arch/arm/dts/sun50i-h616.dtsi                 | 155 ++++++++
+ .../arm/dts/sun50i-h618-longan-module-3h.dtsi |  75 ++++
+ arch/arm/dts/sun50i-h618-longanpi-3h.dts      | 144 +++++++
+ .../arm/dts/sun50i-h618-transpeed-8k618-t.dts |  23 ++
+ arch/arm/dts/sun50i-h64-remix-mini-pc.dts     | 356 ++++++++++++++++++
+ arch/arm/dts/sun8i-r40-feta40i.dtsi           |   7 +
+ configs/remix-mini-pc_defconfig               |  14 +
+ configs/tanix_tx1_defconfig                   |  25 ++
+ 16 files changed, 996 insertions(+), 9 deletions(-)
+ create mode 100644 arch/arm/dts/sun50i-h313-tanix-tx1.dts
+ create mode 100644 arch/arm/dts/sun50i-h618-longan-module-3h.dtsi
+ create mode 100644 arch/arm/dts/sun50i-h618-longanpi-3h.dts
+ create mode 100644 arch/arm/dts/sun50i-h64-remix-mini-pc.dts
+ create mode 100644 configs/remix-mini-pc_defconfig
+ create mode 100644 configs/tanix_tx1_defconfig
+
 -- 
 2.35.8
 
