@@ -4,79 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E603C10F15
-	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 12:45:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 808B5C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 12:52:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07CBD887A7;
-	Wed, 24 Apr 2024 14:45:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
+	by phobos.denx.de (Postfix) with ESMTP id E1C9C8872B;
+	Wed, 24 Apr 2024 14:52:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="Zwo3ZhUS";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qEcGzBHU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3643F887A4; Wed, 24 Apr 2024 14:45:06 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 999F98872E; Wed, 24 Apr 2024 14:52:33 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54D408872B
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 14:45:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0414A88700
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 14:52:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=sartura.hr
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a55bf737cecso332417266b.0
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 05:45:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1713962703; x=1714567503; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=s1sZUceg7pNaDks6BtX36K/4C9Hwa4z+UoQSLbotcMM=;
- b=Zwo3ZhUSbUh/vhCl60yMQZpmj6y0wIQv4bsZj53+OJL7aprVi/lXjLab6N5f3xSW1Q
- +2l0RBe/5t5EKYc9E+ifaYrxOOFukUmMDIpBkPtTniog1RKMNCSU3Vo9rBJTnxxC1eYp
- AuBsrHbcLwGPnMf8vkP23LdKFbgDjURPrMsDP01D+PDKUE32oYDO3Ujdn7t9IU/cJc6u
- RdauYhen0fv889sBWVrbv3KsNqC2dNXEX8QYSiTsl6FkbNHYSX1K51SfuagVL8i5iqyB
- lsNaeqaDcVRzKxrce/cjhBVlOA9NQdOpqe2YxxETdGGXMI3oPKLPglqD9UgtjtYvA2mw
- dOzw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713962703; x=1714567503;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=s1sZUceg7pNaDks6BtX36K/4C9Hwa4z+UoQSLbotcMM=;
- b=SaWyfnFj5NPj6jnvJjxZrnqqWcEGEmms1sAB4dJnOjIW1QDC4u+CugHpxGjyYwNapg
- F0ItSbHYyLGsxhl+Dnr+vS44qObYO1OeghsSBWJBS2NzY71PuQxu34JhgQaYLyGBxWmO
- fnMwTZe1U9jc0iBurSfEuKqpbUv+teMxlBzCKzASO3WE8uutkdpBLrCupji+R2BzVJAB
- PrtvxhSpvYUsJuqfWTRfuFtQ1sFHtvya9KGPAUrwFCDDaw60V1Y/sOVxM+Fh1etuDdoB
- TGE53FtKWUilAqflie/u9jhSoHSLzlvd3u5Cv+gF5DB3WRREMNX6b2m+qkQrALs/MRY1
- bqgA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWgQWimJ+5GKatI4JvvboF8u3BbI5WqyMGWtOKUll1NX03FcwKu7amCisaCGb23YeoOXwQ//hM07W6oQ8A9UYh8TmsUbw==
-X-Gm-Message-State: AOJu0YxTIWLUv/IyCLzRCJ4xoQZZSAXteIjf6M+FxWsYZT85MvuFCpeu
- azZssvDxnF/n5h9xp8yBjJQUfAdluvOSTB4mMDCxPWLm0JIX++u7hZ4hn52cBNf5rhzVFOFvv4J
- n
-X-Google-Smtp-Source: AGHT+IEfNOFgL/DWgebwFUHj3KFYZL9KpAf5+y7EvW2g57mEpuVjplL86LNswHjF5l5zDfi11JozTg==
-X-Received: by 2002:a17:906:7f10:b0:a58:8432:69c0 with SMTP id
- d16-20020a1709067f1000b00a58843269c0mr1253496ejr.67.1713962702561; 
- Wed, 24 Apr 2024 05:45:02 -0700 (PDT)
-Received: from fedora.. (cpe-188-129-47-40.dynamic.amis.hr. [188.129.47.40])
- by smtp.googlemail.com with ESMTPSA id
- u3-20020a170906b10300b00a52552a8605sm8304857ejy.159.2024.04.24.05.45.01
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 24 Apr 2024 05:45:02 -0700 (PDT)
-From: Robert Marko <robert.marko@sartura.hr>
-To: trini@konsulko.com, caleb.connolly@linaro.org, neil.armstrong@linaro.org,
- sumit.garg@linaro.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Cc: j.beck@linefinity.com,
-	Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH v2] sysreset: add Qualcomm PSHOLD reset driver
-Date: Wed, 24 Apr 2024 14:44:33 +0200
-Message-ID: <20240424124500.391735-1-robert.marko@sartura.hr>
-X-Mailer: git-send-email 2.44.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43OCqPSh030386;
+ Wed, 24 Apr 2024 07:52:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1713963145;
+ bh=N8LE7EFGtzzAB4r2cvBA3RkQiW7AN2ZkBedLGBK/X/A=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=qEcGzBHUGyB05/4VQegzdMP/QmGs8c7n0GbwcH4a2JuL/raj9C0k8f4QUojC87TsP
+ 0aV7ap8p4Ajs3CPNp1JYnYHCj+pUDKWkeJjlgKDulHZN71In2+hHAEMb75B5kPWdPg
+ vp4hz3ci/sE7ItFKKoZGtrBaM3ZH3lXvKr5gSQRM=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43OCqPZh022802
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 24 Apr 2024 07:52:25 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 24
+ Apr 2024 07:52:25 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 24 Apr 2024 07:52:25 -0500
+Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
+ [172.24.227.220])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43OCqMLS043656;
+ Wed, 24 Apr 2024 07:52:22 -0500
+Message-ID: <9257d4e3-38db-48de-86ee-e401d9cff349@ti.com>
+Date: Wed, 24 Apr 2024 18:22:21 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 03/10] soc: ti: k3-navss-ringacc: Initialize base address
+ of ring cfg registers
+Content-Language: en-US
+To: Roger Quadros <rogerq@kernel.org>, Siddharth Vadapalli
+ <s-vadapalli@ti.com>, <trini@konsulko.com>,
+ <nm@ti.com>, <sjg@chromium.org>, <afd@ti.com>, <vigneshr@ti.com>
+CC: <u-boot@lists.denx.de>, <dannenberg@ti.com>, <srk@ti.com>
+References: <20240112064759.1801600-1-s-vadapalli@ti.com>
+ <20240112064759.1801600-4-s-vadapalli@ti.com>
+ <121dc2b7-0fc7-42ac-80cb-9c1af64a09eb@kernel.org>
+From: Chintan Vankar <c-vankar@ti.com>
+In-Reply-To: <121dc2b7-0fc7-42ac-80cb-9c1af64a09eb@kernel.org>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,113 +85,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Number of Qualcomm ARMv7 SoC-s did not use PSCI but rather used PSHOLD
-(Qualcomm Power Supply Hold Reset) bit to trigger reset or poweroff.
 
-Qualcomm IPQ40XX is one of them, so provide a simple sysreset driver based
-on the upstream Linux one, it is DT compatible as well.
 
-Signed-off-by: Robert Marko <robert.marko@sartura.hr>
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
----
-Changes in v2:
-* Use QCOM instead of MSM naming
+On 16/01/24 17:13, Roger Quadros wrote:
+> Hi,
+> 
+> On 12/01/2024 08:47, Siddharth Vadapalli wrote:
+>> From: Kishon Vijay Abraham I <kishon@ti.com>
+>>
+>> Initialize base address of ring config registers required to natively
+>> setup ring cfg registers in the absence of Device Manager (DM) services
+>> at R5 SPL stage.
+>>
+>> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+>> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>> ---
+>>   drivers/soc/ti/k3-navss-ringacc.c | 7 ++++++-
+>>   1 file changed, 6 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/soc/ti/k3-navss-ringacc.c b/drivers/soc/ti/k3-navss-ringacc.c
+>> index 7a2fbb0db6..31e9b372ee 100644
+>> --- a/drivers/soc/ti/k3-navss-ringacc.c
+>> +++ b/drivers/soc/ti/k3-navss-ringacc.c
+>> @@ -1030,8 +1030,8 @@ static int k3_nav_ringacc_init(struct udevice *dev, struct k3_nav_ringacc *ringa
+>>   struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
+>>   						struct k3_ringacc_init_data *data)
+>>   {
+>> +	void __iomem *base_rt, *base_cfg;
+>>   	struct k3_nav_ringacc *ringacc;
+>> -	void __iomem *base_rt;
+>>   	int i;
+>>   
+>>   	ringacc = devm_kzalloc(dev, sizeof(*ringacc), GFP_KERNEL);
+>> @@ -1049,6 +1049,10 @@ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
+>>   	if (!base_rt)
+>>   		return ERR_PTR(-EINVAL);
+>>   
+>> +	base_cfg = dev_read_addr_name_ptr(dev, "cfg");
+>> +	if (!base_cfg)
+>> +		return ERR_PTR(-EINVAL);
+>> +
+> 
+> Should this be restricted only for R5 SPL case? else we conflict with
+> Device Manager services?
+> 
 
- drivers/sysreset/Kconfig                |  6 +++
- drivers/sysreset/Makefile               |  1 +
- drivers/sysreset/sysreset_qcom-pshold.c | 56 +++++++++++++++++++++++++
- 3 files changed, 63 insertions(+)
- create mode 100644 drivers/sysreset/sysreset_qcom-pshold.c
+I don't see any conflict in it, you can go through this:
+https://github.com/u-boot/u-boot/commit/86e58800fd7cdba4fa9229aeee3a54a2ccece406
 
-diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-index 49c0787b26..920dceb70b 100644
---- a/drivers/sysreset/Kconfig
-+++ b/drivers/sysreset/Kconfig
-@@ -235,6 +235,12 @@ config SYSRESET_RAA215300
- 	help
- 	  Add support for the system reboot via the Renesas RAA215300 PMIC.
- 
-+config SYSRESET_QCOM_PSHOLD
-+	bool "Support sysreset for Qualcomm SoCs via PSHOLD"
-+	depends on ARCH_IPQ40XX
-+	help
-+	  Add support for the system reboot on Qualcomm SoCs via PSHOLD.
-+
- endif
- 
- endmenu
-diff --git a/drivers/sysreset/Makefile b/drivers/sysreset/Makefile
-index e0e732205d..f0620c391e 100644
---- a/drivers/sysreset/Makefile
-+++ b/drivers/sysreset/Makefile
-@@ -28,4 +28,5 @@ obj-$(CONFIG_SYSRESET_RESETCTL) += sysreset_resetctl.o
- obj-$(CONFIG_$(SPL_TPL_)SYSRESET_AT91) += sysreset_at91.o
- obj-$(CONFIG_$(SPL_TPL_)SYSRESET_X86) += sysreset_x86.o
- obj-$(CONFIG_SYSRESET_RAA215300) += sysreset_raa215300.o
-+obj-$(CONFIG_SYSRESET_QCOM_PSHOLD) += sysreset_qcom-pshold.o
- obj-$(CONFIG_TARGET_XTFPGA) += sysreset_xtfpga.o
-diff --git a/drivers/sysreset/sysreset_qcom-pshold.c b/drivers/sysreset/sysreset_qcom-pshold.c
-new file mode 100644
-index 0000000000..25231cf5e2
---- /dev/null
-+++ b/drivers/sysreset/sysreset_qcom-pshold.c
-@@ -0,0 +1,56 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Qualcomm PSHOLD reset driver
-+ *
-+ * Copyright (c) 2024 Sartura Ltd.
-+ *
-+ * Author: Robert Marko <robert.marko@sartura.hr>
-+ * Based on the Linux msm-poweroff driver.
-+ *
-+ */
-+
-+#include <common.h>
-+#include <dm.h>
-+#include <sysreset.h>
-+#include <asm/io.h>
-+#include <linux/delay.h>
-+
-+struct qcom_pshold_priv {
-+	phys_addr_t base;
-+};
-+
-+static int qcom_pshold_request(struct udevice *dev, enum sysreset_t type)
-+{
-+	struct qcom_pshold_priv *priv = dev_get_priv(dev);
-+
-+	writel(0, priv->base);
-+	mdelay(10000);
-+
-+	return 0;
-+}
-+
-+static struct sysreset_ops qcom_pshold_ops = {
-+	.request = qcom_pshold_request,
-+};
-+
-+static int qcom_pshold_probe(struct udevice *dev)
-+{
-+	struct qcom_pshold_priv *priv = dev_get_priv(dev);
-+
-+	priv->base = dev_read_addr(dev);
-+	return priv->base == FDT_ADDR_T_NONE ? -EINVAL : 0;
-+}
-+
-+static const struct udevice_id qcom_pshold_ids[] = {
-+	{ .compatible = "qcom,pshold", },
-+	{ /* sentinel */ }
-+};
-+
-+U_BOOT_DRIVER(qcom_pshold) = {
-+	.name 		= "qcom_pshold",
-+	.id 		= UCLASS_SYSRESET,
-+	.of_match 	= qcom_pshold_ids,
-+	.probe 		= qcom_pshold_probe,
-+	.priv_auto	= sizeof(struct qcom_pshold_priv),
-+	.ops 		= &qcom_pshold_ops,
-+};
--- 
-2.44.0
-
+>>   	ringacc->rings = devm_kzalloc(dev,
+>>   				      sizeof(*ringacc->rings) *
+>>   				      ringacc->num_rings * 2,
+>> @@ -1063,6 +1067,7 @@ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
+>>   	for (i = 0; i < ringacc->num_rings; i++) {
+>>   		struct k3_nav_ring *ring = &ringacc->rings[i];
+>>   
+>> +		ring->cfg = base_cfg + KNAV_RINGACC_CFG_REGS_STEP * i;
+>>   		ring->rt = base_rt + K3_DMARING_RING_RT_REGS_STEP * i;
+>>   		ring->parent = ringacc;
+>>   		ring->ring_id = i;
+> 
