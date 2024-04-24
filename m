@@ -4,42 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CD05C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 00:19:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CEB9C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 00:58:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3188088D0A;
-	Wed, 24 Apr 2024 02:18:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F0FA88D25;
+	Wed, 24 Apr 2024 02:58:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sa/D4VHE";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2974F88CF1; Wed, 24 Apr 2024 02:18:35 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id E66CB88CED
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 02:18:30 +0200 (CEST)
+ id 47CF288D26; Wed, 24 Apr 2024 02:58:10 +0200 (CEST)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B7A988D1D
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 02:58:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D70541063;
- Tue, 23 Apr 2024 17:18:57 -0700 (PDT)
-Received: from localhost.localdomain (usa-sjc-mx-foss1.foss.arm.com
- [172.31.20.19])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 64D423F7BD;
- Tue, 23 Apr 2024 17:18:29 -0700 (PDT)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Jagan Teki <jagan@amarulasolutions.com>
-Cc: u-boot@lists.denx.de, linux-sunxi@lists.linux.dev,
- Piotr Oniszczuk <piotr.oniszczuk@gmail.com>
-Subject: [PATCH 3/4] [DO NOT MERGE] sunxi: dts: arm64: add Tanix TX1 DT from
- Linux
-Date: Wed, 24 Apr 2024 01:18:07 +0100
-Message-Id: <20240424001808.14388-4-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.35.8
-In-Reply-To: <20240424001808.14388-1-andre.przywara@arm.com>
-References: <20240424001808.14388-1-andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-4375ddb9eaeso36272461cf.3
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 17:58:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1713920287; x=1714525087; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=WTqBVia6T+OPlZ/gIjyI5+1VQUhSd9u2Zzm8gv6au4k=;
+ b=sa/D4VHEgE3Vp6TtPTOUkvxBKlj5/AvhymYZYAlCyEila8q/UchnF8ahCl5U75Eorc
+ bxOWVrKZ3T01jjqw7QCXhJeeJZfz3Nwc4g+ddGh+NFDE7w8YNiZF4nMMdwXkJDR1t3lR
+ t/YMuLn27Uy3DDsDQtceJ4Png/35SaoMWxf08=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713920287; x=1714525087;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=WTqBVia6T+OPlZ/gIjyI5+1VQUhSd9u2Zzm8gv6au4k=;
+ b=HlZ/Tm0U7A95MZAHANwa8nF9hZqIwtIhgDtZaCzjgLr7vI0VFNGjRMq+aVOyDGKtPe
+ lqdshXjzYql7SugT+yQc4KnykwYmSJKndPClwuN9+Us7fkhCrwyCKPjyF2IVcLWUDW5B
+ 6HP8P6g/flTqEQjP7TioFglCcek4yX8DJ3sRMl0UN+Vs+Fz7zHc49R58nTgRuORkwH6D
+ hCHDymEBw0IdPS2U08tJK04wtL5sh32n3XKXugQNPWbJxtQLNXK4N/T7i7ASgX1hHEXp
+ V6GcUmj0lKpZXmQRqPNSQI2h61QD/W+H1AAOr4dQdOM1RlWCJncpsONU2imelDJu//D0
+ t5yA==
+X-Gm-Message-State: AOJu0YwU2AV7u6e41HME0uKoW9zesDuNHwcOa6jwBeTE+9b1++efdQtq
+ wxIQYTLnpVy26iNpYIhAMJmeLWvKgBs5ocAavzCp3yimK4td4rcS0tn+zJM9n0k=
+X-Google-Smtp-Source: AGHT+IE6Q2YQSyoXnEHXt5Zi5jjFLdpe0u+bGVGSMTCW44NGmE7AJ8chnY+datZrj9i+opPCIOALcQ==
+X-Received: by 2002:a05:622a:188a:b0:439:b456:14b with SMTP id
+ v10-20020a05622a188a00b00439b456014bmr1070614qtc.47.1713920286959; 
+ Tue, 23 Apr 2024 17:58:06 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ ic10-20020a05622a68ca00b00436510ddc5esm5642473qtb.34.2024.04.23.17.58.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 23 Apr 2024 17:58:06 -0700 (PDT)
+Date: Tue, 23 Apr 2024 18:58:02 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Peng Fan <peng.fan@nxp.com>
+Cc: "U-Boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Michael Walle <michael@walle.cc>
+Subject: Re: [GIT PULL] please pull fsl-qoriq-2024-4-24
+Message-ID: <20240424005802.GA1054907@bill-the-cat>
+References: <DU0PR04MB9417C878C2E50F0425AEA54A88112@DU0PR04MB9417.eurprd04.prod.outlook.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="3xFNsEv4JuCwo4xV"
+Content-Disposition: inline
+In-Reply-To: <DU0PR04MB9417C878C2E50F0425AEA54A88112@DU0PR04MB9417.eurprd04.prod.outlook.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -56,207 +90,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the board DT file for the Tanix TX1 TV box, with the H313 SoC.
-This has been taken from the sunxi/for-next tree, though it has not been
-merged into any other tree yet.
-So this is a placeholder for now, to enable the board support, and will be
-superseded by the regular sync of the DT files later.
 
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
----
- arch/arm/dts/sun50i-h313-tanix-tx1.dts | 183 +++++++++++++++++++++++++
- 1 file changed, 183 insertions(+)
- create mode 100644 arch/arm/dts/sun50i-h313-tanix-tx1.dts
+--3xFNsEv4JuCwo4xV
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/arch/arm/dts/sun50i-h313-tanix-tx1.dts b/arch/arm/dts/sun50i-h313-tanix-tx1.dts
-new file mode 100644
-index 00000000000..bb2cde59bd0
---- /dev/null
-+++ b/arch/arm/dts/sun50i-h313-tanix-tx1.dts
-@@ -0,0 +1,183 @@
-+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-+/*
-+ * Copyright (C) 2024 Arm Ltd.
-+ */
-+
-+/dts-v1/;
-+
-+#include "sun50i-h616.dtsi"
-+
-+#include <dt-bindings/gpio/gpio.h>
-+#include <dt-bindings/interrupt-controller/arm-gic.h>
-+#include <dt-bindings/input/linux-event-codes.h>
-+#include <dt-bindings/leds/common.h>
-+
-+/ {
-+	model = "Tanix TX1";
-+	compatible = "oranth,tanix-tx1", "allwinner,sun50i-h616";
-+
-+	aliases {
-+		serial0 = &uart0;
-+		ethernet0 = &sdio_wifi;
-+	};
-+
-+	chosen {
-+		stdout-path = "serial0:115200n8";
-+	};
-+
-+	gpio-keys {
-+		compatible = "gpio-keys";
-+
-+		key {
-+			label = "hidden";
-+			linux,code = <BTN_0>;
-+			gpios = <&pio 7 9 GPIO_ACTIVE_LOW>; /* PH9 */
-+		};
-+	};
-+
-+	leds {
-+		compatible = "gpio-leds";
-+
-+		led-0 {
-+			function = LED_FUNCTION_POWER;
-+			color = <LED_COLOR_ID_BLUE>;
-+			gpios = <&pio 7 6 GPIO_ACTIVE_HIGH>; /* PH6 */
-+			default-state = "on";
-+		};
-+	};
-+
-+	wifi_pwrseq: pwrseq {
-+		compatible = "mmc-pwrseq-simple";
-+		clocks = <&rtc CLK_OSC32K_FANOUT>;
-+		clock-names = "ext_clock";
-+		pinctrl-0 = <&x32clk_fanout_pin>;
-+		pinctrl-names = "default";
-+		reset-gpios = <&pio 6 18 GPIO_ACTIVE_LOW>; /* PG18 */
-+	};
-+
-+	reg_vcc5v: vcc5v {
-+		/* board wide 5V supply directly from the DC input */
-+		compatible = "regulator-fixed";
-+		regulator-name = "vcc-5v";
-+		regulator-min-microvolt = <5000000>;
-+		regulator-max-microvolt = <5000000>;
-+		regulator-always-on;
-+	};
-+};
-+
-+&cpu0 {
-+	cpu-supply = <&reg_dcdc2>;
-+};
-+
-+&ehci0 {
-+	status = "okay";
-+};
-+
-+&ir {
-+	status = "okay";
-+};
-+
-+&mmc1 {
-+	vmmc-supply = <&reg_dldo1>;
-+	vqmmc-supply = <&reg_aldo1>;
-+	mmc-pwrseq = <&wifi_pwrseq>;
-+	bus-width = <4>;
-+	non-removable;
-+	status = "okay";
-+
-+	sdio_wifi: wifi@1 {
-+		reg = <1>;
-+	};
-+};
-+
-+&mmc2 {
-+	vmmc-supply = <&reg_dldo1>;
-+	vqmmc-supply = <&reg_aldo1>;
-+	bus-width = <8>;
-+	non-removable;
-+	max-frequency = <100000000>;
-+	cap-mmc-hw-reset;
-+	mmc-ddr-1_8v;
-+	status = "okay";
-+};
-+
-+&ohci0 {
-+	status = "okay";
-+};
-+
-+&pio {
-+	vcc-pc-supply = <&reg_aldo1>;
-+	vcc-pf-supply = <&reg_dldo1>;
-+	vcc-pg-supply = <&reg_aldo1>;
-+	vcc-ph-supply = <&reg_dldo1>;
-+	vcc-pi-supply = <&reg_dldo1>;
-+};
-+
-+&r_i2c {
-+	status = "okay";
-+
-+	axp313: pmic@36 {
-+		compatible = "x-powers,axp313a";
-+		reg = <0x36>;
-+		#interrupt-cells = <1>;
-+		interrupt-controller;
-+
-+		vin1-supply = <&reg_vcc5v>;
-+		vin2-supply = <&reg_vcc5v>;
-+		vin3-supply = <&reg_vcc5v>;
-+
-+		regulators {
-+			/* Supplies VCC-PLL, so needs to be always on. */
-+			reg_aldo1: aldo1 {
-+				regulator-always-on;
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <1800000>;
-+				regulator-name = "vcc1v8";
-+			};
-+
-+			/* Supplies VCC-IO, so needs to be always on. */
-+			reg_dldo1: dldo1 {
-+				regulator-always-on;
-+				regulator-min-microvolt = <3300000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-name = "vcc3v3";
-+			};
-+
-+			reg_dcdc1: dcdc1 {
-+				regulator-always-on;
-+				regulator-min-microvolt = <810000>;
-+				regulator-max-microvolt = <990000>;
-+				regulator-name = "vdd-gpu-sys";
-+			};
-+
-+			reg_dcdc2: dcdc2 {
-+				regulator-always-on;
-+				regulator-min-microvolt = <810000>;
-+				regulator-max-microvolt = <1120000>;
-+				regulator-name = "vdd-cpu";
-+			};
-+
-+			reg_dcdc3: dcdc3 {
-+				regulator-always-on;
-+				regulator-min-microvolt = <1200000>;
-+				regulator-max-microvolt = <1200000>;
-+				regulator-name = "vdd-dram";
-+			};
-+		};
-+	};
-+};
-+
-+&uart0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&uart0_ph_pins>;
-+	status = "okay";
-+};
-+
-+&usbotg {
-+	dr_mode = "host";       /* USB A type receptable */
-+	status = "okay";
-+};
-+
-+&usbphy {
-+	status = "okay";
-+};
--- 
-2.35.8
+On Tue, Apr 23, 2024 at 11:34:08PM +0000, Peng Fan wrote:
 
+> Hi Tom,
+>=20
+> Please pull fsl-qoriq-2024-4-24
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--3xFNsEv4JuCwo4xV
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYoWRQACgkQFHw5/5Y0
+tyyGpAv/dzblz63vIevji/o8Wvt0ypDOtLg/OXp9g9tz5Yd8HwYf1oji96rDjvhj
+CbXCgRKz8CuYW8ZgXlQi9XSaQGYMEErCMdZtY4HVYKqT+IML+bKWPYD/rT1i2Xbh
+xGU1SdANGNZdzkKS9ugFwH/3C51yzTDvkS9BJKwnbSIZB65R3JBNgiNEQ2QOFBL7
+/u7L4sZI0KnGxso1/pGw6GuWaBL0G1N0Yxu/slAnvc+2Yji3hHUJplSH50C1e9wJ
+dIbw3XHzW5A08iQ2YEgdh0wvJOmfQf8qTYE5PeBuBE8j98Jh288scOCpyVJ0gtBD
+sPCmfsdgdkdbEERY8jerkirN3QZlpl/63NmmHpLWI7nI0mljgWMxh+7H0Y3Wlgue
+cSq5LCmBFc7G1RjWztI8rEuTF22vKdMzChxBsdkDDnIVkSKno1hoBMYQXD+WsPW7
+9YbR5jwxTyBlx4Sw4QlG/VKz+BIcqZ8RLmqMMpnctsgUTM7oAXVEyIsbr0TH7568
+jiTJH81b
+=EouN
+-----END PGP SIGNATURE-----
+
+--3xFNsEv4JuCwo4xV--
