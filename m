@@ -4,75 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9712CC4345F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 05:04:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A791C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 05:04:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B78EA88D96;
-	Wed, 24 Apr 2024 07:04:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1ABA688D9B;
+	Wed, 24 Apr 2024 07:04:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x3DDcsIe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IqPGoS/3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FA7B88D9C; Wed, 24 Apr 2024 07:04:03 +0200 (CEST)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 674D288CD6; Wed, 24 Apr 2024 07:04:04 +0200 (CEST)
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
+ [IPv6:2a00:1450:4864:20::329])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7919488CD6
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 07:04:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6388688D97
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 07:04:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-41af6701806so3480285e9.1
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 22:04:01 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id
+ 5b1f17b1804b1-41b086d6676so846645e9.1
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 22:04:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713935041; x=1714539841; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=EVHDPCZH4dUgdDh5TewEvZ9ii+SMu3g0x9ZgWOqncVY=;
- b=x3DDcsIef1iipgl5A5cGq/Yk594ZaEijvGlqH9GXKlgpi4i0B+wReoQxqlSd90axEq
- mEvIVDL53NqUv1CuANddvPYe8l3eJ8wONfdJw4/B9/HPwIkQWT6pSZrIAKf6cCVJOK8t
- EhGPihOq+B2FKGbrfD+rVOF3mKyHGiKfygDHspdy3YYTQepnzvGZAn7DnHOFBEhB3bRj
- eke/SloXZRQAuJj4AhaSXW5oi9LUqDsvomYUF+K/2iEWhKa7RqOgXct/ZbBr46a61oWy
- LYAwh4t70UoWXi9ZF6m5UNnfDl1lmGntIvUi1cGcOOZStrH08xm3sLfBEvZ68UipsuBH
- Hx8g==
+ d=linaro.org; s=google; t=1713935042; x=1714539842; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=vbFHZkLIyTsnFbIYjd2AoiBzf3B0mbR9ncwmyQR2oNk=;
+ b=IqPGoS/3Hy94pgmpXyZm715H10TsmxVWdjp/D2O1gkE2VKdcC5uu8RMIGXOpcTTLJ2
+ w80B/7vCaYu3t1kOJA3kVakKJS0nHIqC676THTumIhPZ6MIwAg4nenPJDXe9BSkgdDip
+ HSIyHJP5bPpgvGSY+C4SoAqX90bRYzRZFTFukTXymggtvO8rF9oduuPmuSvWZ9uwQdta
+ Z46ADTjPvfiiweVoQpIPXt/6qYUa/n9nvEKuPFSQjBfZL7naHqoxJSF3K0p9wMCembzA
+ 7ZqO0CzULooucZCa2tCUnSXY6XXc8bb73vlkQh4VotafKbS9k2oYMyQy5eq4mSsln8+Q
+ IIwQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713935041; x=1714539841;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EVHDPCZH4dUgdDh5TewEvZ9ii+SMu3g0x9ZgWOqncVY=;
- b=m71b+zy15aBwy2W91IabxkLCKf+sPoty0K8gWV6dkn1TLIdf98s4ri+oZ0EQ4WEcgQ
- 50BqTCQ7ZOE12Pr1bFGtzEfd9257QtmIoGV71HYh0v3toXOwD5ESkK66Dxetu06bqTja
- D9/Yos28skewBdyfl4AEQ7AR0cOe9eeOolm4opoLKGA3a+z5PPXdOj+lDeU5Y7S22sIB
- D+C8MAvX5d7Yo1Mvq0O42TiDSyTdsVIV1KNeIYTHKqHXsdDm9HLnHcoD8UZ5f7d6TS5v
- Ob41LWMUDtXvsc//dU5yoFqllXYU6q8KvMYIU6jxKdVD3Lvv0fPigoRwhGfuPu0QKdgp
- C0bw==
-X-Gm-Message-State: AOJu0YyvSRyJ/oDURm9hIU6MAmWK3J9x7bxdhZOdBNQWiI44GHbqT6ib
- XVYGlvWkBx6Hd2zxoLLqd6Hf1Da9VgIPSaztZGLJRWoYuFGF/gjsy9VtFVyElTN3cYela7YIb50
- jM3o=
-X-Google-Smtp-Source: AGHT+IGxaOa2kE/Vk4Q5dndn+NVqNDiRbCWd1Fvns4upr7t5iMwFpHR9kN/sgh4UxVP+ZR119EH+sw==
-X-Received: by 2002:a05:6000:180f:b0:341:d912:1fec with SMTP id
- m15-20020a056000180f00b00341d9121fecmr773170wrh.49.1713935040824; 
- Tue, 23 Apr 2024 22:04:00 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1713935042; x=1714539842;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=vbFHZkLIyTsnFbIYjd2AoiBzf3B0mbR9ncwmyQR2oNk=;
+ b=U/VgHzVAUa5OsjQ2yq9RnniqLOvk1jlG5sD/cANsmzztH29FMQOYbMbUSDTI9s3LZI
+ 7CKxZa+cYMrFo1g7My7ARq8iJY0M8rS8rIrj3iBxDzl3NjvWIVYG0ERmtIqiAPiCeneq
+ aymWye9lfjKA0m/Smy9TWW7hSn3b2vcuq9fiSx82YWbSSykwx+ILaMMxPlzjUfAtykGu
+ lzLfN/0Y+OYl1Ofl6Pwmm4qJaV1pOA3O52gnlE1JocYmzeWkgBsZSsRXf9yzZ+lIcEkn
+ IA+qk9e0PKS21zZfN3LG/Vk+4sxL1Y+tkYrvltmv81GdQ1SghjrVwaGadKutWJ8PC1RE
+ 4s6A==
+X-Gm-Message-State: AOJu0YzSvWv3XWv+H0E8cVpTHvUzNZVtRziONFRYS8zlOd6tmqshzleL
+ QuoQnruFFGxtIVLELope6xa/JBDU+wg0d8ykcWonzTy7XUwot/ZgKfvPk+jFoOyG64Hb1U6mO1m
+ r3/w=
+X-Google-Smtp-Source: AGHT+IGSZM6xVLJO41v8sWTIttgRbzhc60Yiedm/9bRjGwGumb8twM1H6/UJn+ZcjdY2W7BphjnlNQ==
+X-Received: by 2002:a05:600c:208:b0:41a:aad8:e393 with SMTP id
+ 8-20020a05600c020800b0041aaad8e393mr902439wmi.30.1713935041889; 
+ Tue, 23 Apr 2024 22:04:01 -0700 (PDT)
 Received: from hades.. (ppp089210108048.access.hol.gr. [89.210.108.48])
  by smtp.gmail.com with ESMTPSA id
- bi8-20020a05600c3d8800b0041afe0f2f17sm861032wmb.16.2024.04.23.22.03.59
+ bi8-20020a05600c3d8800b0041afe0f2f17sm861032wmb.16.2024.04.23.22.04.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Apr 2024 22:04:00 -0700 (PDT)
+ Tue, 23 Apr 2024 22:04:01 -0700 (PDT)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: u-boot@lists.denx.de,
 	xypron.glpk@gmx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: [PATCH 1/3] efi_loader: enable QueryVariableInfo at runtime for file
- backed variables
-Date: Wed, 24 Apr 2024 08:03:49 +0300
-Message-Id: <20240424050351.318724-1-ilias.apalodimas@linaro.org>
+Subject: [PATCH 2/3] efi_selftest: add tests for QueryVariableInfo at runtime
+Date: Wed, 24 Apr 2024 08:03:50 +0300
+Message-Id: <20240424050351.318724-2-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.40.1
+In-Reply-To: <20240424050351.318724-1-ilias.apalodimas@linaro.org>
+References: <20240424050351.318724-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,139 +93,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Since commit c28d32f946f0 ("efi_loader: conditionally enable SetvariableRT")
-we are enabling the last bits of missing runtime services.
-Add support for QueryVariableInfo which we already support at boottime
-and we just need to mark some fucntions available at runtime and move
-some checks around.
+Since we support QueryVariableInfo at runtime now add the relevant
+tests. Since we want those to be reusable at bootime, add them
+in a separate file
 
-It's worth noting that pointer checks for maxmimum and remaining
-variable storage aren't when we store variables on the RPMB, since the
-Secure World backend is already performing them.
+Add tests for
+- Test QueryVariableInfo returns EFI_SUCCESS
+- Test null pointers for the function arguments
+- Test invalid combination of attributes
 
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- lib/efi_loader/efi_runtime.c                   |  4 ++++
- lib/efi_loader/efi_var_common.c                |  6 ------
- lib/efi_loader/efi_variable.c                  | 18 ++++++++++++------
- lib/efi_loader/efi_variable_tee.c              |  5 +++++
- .../efi_selftest_variables_runtime.c           | 14 +++++++++++---
- 5 files changed, 32 insertions(+), 15 deletions(-)
+ include/efi_selftest.h                        |   9 ++
+ lib/efi_selftest/Makefile                     |   1 +
+ .../efi_selftest_variables_common.c           | 102 ++++++++++++++++++
+ .../efi_selftest_variables_runtime.c          |  10 +-
+ 4 files changed, 118 insertions(+), 4 deletions(-)
+ create mode 100644 lib/efi_selftest/efi_selftest_variables_common.c
 
-diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
-index 73831c527e00..011bcd04836d 100644
---- a/lib/efi_loader/efi_runtime.c
-+++ b/lib/efi_loader/efi_runtime.c
-@@ -129,6 +129,10 @@ efi_status_t efi_init_runtime_supported(void)
- 				EFI_RT_SUPPORTED_SET_VIRTUAL_ADDRESS_MAP |
- 				EFI_RT_SUPPORTED_CONVERT_POINTER;
+diff --git a/include/efi_selftest.h b/include/efi_selftest.h
+index 5bcebb368287..ca7ae948663e 100644
+--- a/include/efi_selftest.h
++++ b/include/efi_selftest.h
+@@ -147,6 +147,15 @@ void *efi_st_get_config_table(const efi_guid_t *guid);
+  */
+ u16 efi_st_get_key(void);
  
-+	if (IS_ENABLED(CONFIG_EFI_VARIABLE_FILE_STORE))
-+		rt_table->runtime_services_supported |=
-+			EFI_RT_SUPPORTED_QUERY_VARIABLE_INFO;
++/**
++ * efi_st_query_variable_common - Common variable tests for boottime/runtime
++ *
++ * @runtime:	Pointer to services table
++ *
++ * Return:	EFI_ST_SUCCESS/FAILURE
++ */
++int efi_st_query_variable_common(struct efi_runtime_services *runtime);
 +
- 	if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
- 		u8 s = 0;
- 
-diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
-index 961139f005af..ea8d2a4cf98c 100644
---- a/lib/efi_loader/efi_var_common.c
-+++ b/lib/efi_loader/efi_var_common.c
-@@ -1,4 +1,3 @@
--// SPDX-License-Identifier: GPL-2.0+
- /*
-  * UEFI runtime variable services
-  *
-@@ -163,11 +162,6 @@ efi_status_t EFIAPI efi_query_variable_info(
- 	EFI_ENTRY("%x %p %p %p", attributes, maximum_variable_storage_size,
- 		  remaining_variable_storage_size, maximum_variable_size);
- 
--	if (!maximum_variable_storage_size ||
--	    !remaining_variable_storage_size ||
--	    !maximum_variable_size)
--		return EFI_EXIT(EFI_INVALID_PARAMETER);
--
- 	ret = efi_query_variable_info_int(attributes,
- 					  maximum_variable_storage_size,
- 					  remaining_variable_storage_size,
-diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
-index 0cbed53d1dbf..e039cecd82b6 100644
---- a/lib/efi_loader/efi_variable.c
-+++ b/lib/efi_loader/efi_variable.c
-@@ -406,12 +406,15 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
- 	return EFI_SUCCESS;
- }
- 
--efi_status_t efi_query_variable_info_int(u32 attributes,
--					 u64 *maximum_variable_storage_size,
--					 u64 *remaining_variable_storage_size,
--					 u64 *maximum_variable_size)
-+efi_status_t __efi_runtime
-+efi_query_variable_info_int(u32 attributes,
-+			    u64 *maximum_variable_storage_size,
-+			    u64 *remaining_variable_storage_size,
-+			    u64 *maximum_variable_size)
- {
--	if (attributes == 0)
-+	if (!maximum_variable_storage_size ||
-+	    !remaining_variable_storage_size ||
-+	    !maximum_variable_size || !attributes)
- 		return EFI_INVALID_PARAMETER;
- 
- 	/* EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS is deprecated */
-@@ -460,7 +463,10 @@ static efi_status_t __efi_runtime EFIAPI efi_query_variable_info_runtime(
- 			u64 *remaining_variable_storage_size,
- 			u64 *maximum_variable_size)
- {
--	return EFI_UNSUPPORTED;
-+	return efi_query_variable_info_int(attributes,
-+					   maximum_variable_storage_size,
-+					   remaining_variable_storage_size,
-+					   maximum_variable_size);
- }
- 
  /**
-diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-index 4f1aa298da13..8b6b0a390869 100644
---- a/lib/efi_loader/efi_variable_tee.c
-+++ b/lib/efi_loader/efi_variable_tee.c
-@@ -873,6 +873,11 @@ efi_status_t efi_query_variable_info_int(u32 attributes,
- 	efi_status_t ret;
- 	u8 *comm_buf;
- 
-+	if (!max_variable_storage_size ||
-+	    !remain_variable_storage_size ||
-+	    !max_variable_size || !attributes)
-+		return EFI_INVALID_PARAMETER;
+  * struct efi_unit_test - EFI unit test
+  *
+diff --git a/lib/efi_selftest/Makefile b/lib/efi_selftest/Makefile
+index e4d75420bff6..414701893f65 100644
+--- a/lib/efi_selftest/Makefile
++++ b/lib/efi_selftest/Makefile
+@@ -45,6 +45,7 @@ efi_selftest_textinputex.o \
+ efi_selftest_textoutput.o \
+ efi_selftest_tpl.o \
+ efi_selftest_util.o \
++efi_selftest_variables_common.o \
+ efi_selftest_variables.o \
+ efi_selftest_variables_runtime.o \
+ efi_selftest_watchdog.o
+diff --git a/lib/efi_selftest/efi_selftest_variables_common.c b/lib/efi_selftest/efi_selftest_variables_common.c
+new file mode 100644
+index 000000000000..36bdfe6ff9c3
+--- /dev/null
++++ b/lib/efi_selftest/efi_selftest_variables_common.c
+@@ -0,0 +1,102 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * efi_selftest_variables_runtime
++ *
++ * Copyright (c) 2024 Ilias Apalodimas <ilias.apalodimas@linaro.org>
++ *
++ * This unit test checks common service across boottime/runtime
++ */
 +
- 	payload_size = sizeof(*mm_query_info);
- 	comm_buf = setup_mm_hdr((void **)&mm_query_info, payload_size,
- 				SMM_VARIABLE_FUNCTION_QUERY_VARIABLE_INFO,
++#include <efi_selftest.h>
++
++#define EFI_INVALID_ATTR BIT(30)
++
++int efi_st_query_variable_common(struct efi_runtime_services *runtime)
++{
++	efi_status_t ret;
++	u64 max_storage, rem_storage, max_size;
++
++	ret = runtime->query_variable_info(EFI_VARIABLE_BOOTSERVICE_ACCESS,
++					   &max_storage, &rem_storage,
++					   &max_size);
++	if (ret != EFI_SUCCESS) {
++		efi_st_error("QueryVariableInfo failed\n");
++		return EFI_ST_FAILURE;
++	}
++
++	ret = runtime->query_variable_info(EFI_VARIABLE_BOOTSERVICE_ACCESS,
++					   NULL, &rem_storage,
++					   &max_size);
++	if (ret != EFI_INVALID_PARAMETER) {
++		efi_st_error("QueryVariableInfo failed\n");
++		return EFI_ST_FAILURE;
++	}
++
++	ret = runtime->query_variable_info(EFI_VARIABLE_BOOTSERVICE_ACCESS,
++					   &max_storage, NULL,
++					   &max_size);
++	if (ret != EFI_INVALID_PARAMETER) {
++		efi_st_error("QueryVariableInfo failed\n");
++		return EFI_ST_FAILURE;
++	}
++
++	ret = runtime->query_variable_info(EFI_VARIABLE_BOOTSERVICE_ACCESS,
++					   &max_storage, &rem_storage,
++					   NULL);
++	if (ret != EFI_INVALID_PARAMETER) {
++		efi_st_error("QueryVariableInfo failed\n");
++		return EFI_ST_FAILURE;
++	}
++
++	ret = runtime->query_variable_info(0, &max_storage, &rem_storage,
++					   &max_size);
++	if (ret != EFI_INVALID_PARAMETER) {
++		efi_st_error("QueryVariableInfo failed\n");
++		return EFI_ST_FAILURE;
++	}
++
++	ret = runtime->query_variable_info(EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS |
++					   EFI_VARIABLE_NON_VOLATILE,
++					   &max_storage, &rem_storage,
++					   &max_size);
++	if (ret != EFI_UNSUPPORTED) {
++		efi_st_error("QueryVariableInfo failed\n");
++		return EFI_ST_FAILURE;
++	}
++
++	/* Use an attribute bit not described in the EFI spec */
++	ret = runtime->query_variable_info(EFI_INVALID_ATTR, &max_storage,
++					   &rem_storage, &max_size);
++	if (ret != EFI_UNSUPPORTED) {
++		efi_st_error("QueryVariableInfo failed\n");
++		return EFI_ST_FAILURE;
++	}
++
++	ret = runtime->query_variable_info(EFI_VARIABLE_RUNTIME_ACCESS, &max_storage, &rem_storage,
++					   &max_size);
++	if (ret != EFI_INVALID_PARAMETER) {
++		efi_st_error("QueryVariableInfo failed\n");
++		return EFI_ST_FAILURE;
++	}
++
++	ret = runtime->query_variable_info(EFI_VARIABLE_NON_VOLATILE, &max_storage, &rem_storage,
++					   &max_size);
++	if (ret != EFI_INVALID_PARAMETER) {
++		efi_st_error("QueryVariableInfo failed\n");
++		return EFI_ST_FAILURE;
++	}
++
++	/*
++	 * Use a mix existing/non-existing attribute bits from the
++	 * UEFI spec
++	 */
++	ret = runtime->query_variable_info(EFI_INVALID_ATTR | EFI_VARIABLE_NON_VOLATILE,
++					   &max_storage, &rem_storage,
++					   &max_size);
++	if (ret != EFI_INVALID_PARAMETER) {
++		efi_st_error("QueryVariableInfo failed\n");
++		return EFI_ST_FAILURE;
++	}
++
++	return EFI_ST_SUCCESS;
++}
 diff --git a/lib/efi_selftest/efi_selftest_variables_runtime.c b/lib/efi_selftest/efi_selftest_variables_runtime.c
-index afa91be62c85..5794a7b2d405 100644
+index 5794a7b2d405..6cb86771fe78 100644
 --- a/lib/efi_selftest/efi_selftest_variables_runtime.c
 +++ b/lib/efi_selftest/efi_selftest_variables_runtime.c
-@@ -60,9 +60,17 @@ static int execute(void)
- 	ret = runtime->query_variable_info(EFI_VARIABLE_BOOTSERVICE_ACCESS,
- 					   &max_storage, &rem_storage,
- 					   &max_size);
--	if (ret != EFI_UNSUPPORTED) {
--		efi_st_error("QueryVariableInfo failed\n");
--		return EFI_ST_FAILURE;
-+
-+	if (IS_ENABLED(CONFIG_EFI_VARIABLE_FILE_STORE)) {
-+		if (ret != EFI_SUCCESS) {
-+			efi_st_error("QueryVariableInfo failed\n");
-+			return EFI_ST_FAILURE;
-+		}
-+	} else {
-+		if (ret != EFI_UNSUPPORTED) {
-+			efi_st_error("QueryVariableInfo failed\n");
-+			return EFI_ST_FAILURE;
-+		}
- 	}
+@@ -55,18 +55,20 @@ static int execute(void)
+ 	u16 varname[EFI_ST_MAX_VARNAME_SIZE];
+ 	efi_guid_t guid;
+ 	u64 max_storage, rem_storage, max_size;
++	int test_ret;
  
- 	ret = runtime->set_variable(u"efi_st_var0", &guid_vendor0,
+ 	memset(v2, 0x1, sizeof(v2));
+-	ret = runtime->query_variable_info(EFI_VARIABLE_BOOTSERVICE_ACCESS,
+-					   &max_storage, &rem_storage,
+-					   &max_size);
+ 
+ 	if (IS_ENABLED(CONFIG_EFI_VARIABLE_FILE_STORE)) {
+-		if (ret != EFI_SUCCESS) {
++		test_ret = efi_st_query_variable_common(runtime);
++		if (test_ret != EFI_ST_SUCCESS) {
+ 			efi_st_error("QueryVariableInfo failed\n");
+ 			return EFI_ST_FAILURE;
+ 		}
+ 	} else {
++		ret = runtime->query_variable_info(EFI_VARIABLE_BOOTSERVICE_ACCESS,
++					   &max_storage, &rem_storage,
++					   &max_size);
+ 		if (ret != EFI_UNSUPPORTED) {
+ 			efi_st_error("QueryVariableInfo failed\n");
+ 			return EFI_ST_FAILURE;
 -- 
 2.40.1
 
