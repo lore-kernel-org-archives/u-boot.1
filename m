@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6C52C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 01:01:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9712CC4345F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 05:04:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BB1A88D29;
-	Wed, 24 Apr 2024 03:01:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B78EA88D96;
+	Wed, 24 Apr 2024 07:04:04 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Wac2KfjA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x3DDcsIe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE85588D2E; Wed, 24 Apr 2024 03:01:50 +0200 (CEST)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 8FA7B88D9C; Wed, 24 Apr 2024 07:04:03 +0200 (CEST)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7E5888D29
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 03:01:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7919488CD6
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 07:04:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-78efd533a00so426046585a.0
- for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 18:01:48 -0700 (PDT)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-41af6701806so3480285e9.1
+ for <u-boot@lists.denx.de>; Tue, 23 Apr 2024 22:04:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1713920507; x=1714525307; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=YKTiPcLKj9wSW7DCO6smyqcc8/nZktUW03lOu3+2MuQ=;
- b=Wac2KfjAOf5m+/IJwNTz2WFozMyQ5qMof7ihnpUdgzwBLKd4zqOTZ+9Hwl4bcScrig
- v/3sPI0/wpoULZjn+HX8rLjuvkmK2zsKlM6isLVT3p5lLY09UzIGElf85RcpanZ0PlrT
- 0+xsIjfsMeqwKMM/FEy3SyWe4JzD54ZHufKGc=
+ d=linaro.org; s=google; t=1713935041; x=1714539841; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EVHDPCZH4dUgdDh5TewEvZ9ii+SMu3g0x9ZgWOqncVY=;
+ b=x3DDcsIef1iipgl5A5cGq/Yk594ZaEijvGlqH9GXKlgpi4i0B+wReoQxqlSd90axEq
+ mEvIVDL53NqUv1CuANddvPYe8l3eJ8wONfdJw4/B9/HPwIkQWT6pSZrIAKf6cCVJOK8t
+ EhGPihOq+B2FKGbrfD+rVOF3mKyHGiKfygDHspdy3YYTQepnzvGZAn7DnHOFBEhB3bRj
+ eke/SloXZRQAuJj4AhaSXW5oi9LUqDsvomYUF+K/2iEWhKa7RqOgXct/ZbBr46a61oWy
+ LYAwh4t70UoWXi9ZF6m5UNnfDl1lmGntIvUi1cGcOOZStrH08xm3sLfBEvZ68UipsuBH
+ Hx8g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713920507; x=1714525307;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YKTiPcLKj9wSW7DCO6smyqcc8/nZktUW03lOu3+2MuQ=;
- b=P5qYUfMsffORkmFJr7lJgUDhUGMmW+EQkFDAodf/A2I1ySCt7A52f0Cocp6Mb8L/i0
- pwI737epgjpUQEOgbUePxmfr+++6lUahq6VBGwjeCd2NCEzMn0iFM7CNZeHBsuJeIyaZ
- RsaXzU+0daMwh6BJep/49ph8Ey30UnBYZNlDyo9WiNbjjn1yrez1xZZt9iJkMPmmpYbt
- KeJQ0H3VYSrI6sgNAfXamOyWwgg6GBTQTJNqIUl2zVh7sJDk3T/6vPJXAesV3qntYUDe
- T0b/5CoGHDH/Tj9/roDKLiSuC1odUAPEoQmbZGTu4cwyxoMwa3YLP7hEKxbasyEcIGHq
- +GjA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVF7uAKsL1nlXe+BwNlTolJesLSysfi4hOGezkawrYNgXzkknBWx//FpF2f2HNIa0GBgTYFMwH8oZFL1cwYAWu1zByClg==
-X-Gm-Message-State: AOJu0YwxeBefD/mGF5aEUl0kSzBmUw+Z8ZDOcYblDW/lTczwpbAwmZzg
- SKqOuYyKpROMxNccZt88EcZ4/FNNCktfTi4qUZ87N89sWyB4FLl6XcwZQX703nQ=
-X-Google-Smtp-Source: AGHT+IFzkpAanLwta3UnHq8BiL2y8D4laRATcCJAvXyPtl5HqpOnvdwPol6fNcMoDWwAKduK5OnCCw==
-X-Received: by 2002:a05:6214:1808:b0:6a0:7139:800 with SMTP id
- o8-20020a056214180800b006a071390800mr1068033qvw.33.1713920507377; 
- Tue, 23 Apr 2024 18:01:47 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
+ d=1e100.net; s=20230601; t=1713935041; x=1714539841;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EVHDPCZH4dUgdDh5TewEvZ9ii+SMu3g0x9ZgWOqncVY=;
+ b=m71b+zy15aBwy2W91IabxkLCKf+sPoty0K8gWV6dkn1TLIdf98s4ri+oZ0EQ4WEcgQ
+ 50BqTCQ7ZOE12Pr1bFGtzEfd9257QtmIoGV71HYh0v3toXOwD5ESkK66Dxetu06bqTja
+ D9/Yos28skewBdyfl4AEQ7AR0cOe9eeOolm4opoLKGA3a+z5PPXdOj+lDeU5Y7S22sIB
+ D+C8MAvX5d7Yo1Mvq0O42TiDSyTdsVIV1KNeIYTHKqHXsdDm9HLnHcoD8UZ5f7d6TS5v
+ Ob41LWMUDtXvsc//dU5yoFqllXYU6q8KvMYIU6jxKdVD3Lvv0fPigoRwhGfuPu0QKdgp
+ C0bw==
+X-Gm-Message-State: AOJu0YyvSRyJ/oDURm9hIU6MAmWK3J9x7bxdhZOdBNQWiI44GHbqT6ib
+ XVYGlvWkBx6Hd2zxoLLqd6Hf1Da9VgIPSaztZGLJRWoYuFGF/gjsy9VtFVyElTN3cYela7YIb50
+ jM3o=
+X-Google-Smtp-Source: AGHT+IGxaOa2kE/Vk4Q5dndn+NVqNDiRbCWd1Fvns4upr7t5iMwFpHR9kN/sgh4UxVP+ZR119EH+sw==
+X-Received: by 2002:a05:6000:180f:b0:341:d912:1fec with SMTP id
+ m15-20020a056000180f00b00341d9121fecmr773170wrh.49.1713935040824; 
+ Tue, 23 Apr 2024 22:04:00 -0700 (PDT)
+Received: from hades.. (ppp089210108048.access.hol.gr. [89.210.108.48])
  by smtp.gmail.com with ESMTPSA id
- g2-20020a0cdf02000000b0069b447066bbsm5589404qvl.78.2024.04.23.18.01.46
+ bi8-20020a05600c3d8800b0041afe0f2f17sm861032wmb.16.2024.04.23.22.03.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 23 Apr 2024 18:01:46 -0700 (PDT)
-Date: Tue, 23 Apr 2024 19:01:44 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Andre Przywara <andre.przywara@arm.com>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
-Subject: Re: [PATCH] sysreset: psci: drop reliance on SPL support
-Message-ID: <20240424010144.GB1054907@bill-the-cat>
-References: <20240423234604.10674-1-andre.przywara@arm.com>
+ Tue, 23 Apr 2024 22:04:00 -0700 (PDT)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: u-boot@lists.denx.de,
+	xypron.glpk@gmx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: [PATCH 1/3] efi_loader: enable QueryVariableInfo at runtime for file
+ backed variables
+Date: Wed, 24 Apr 2024 08:03:49 +0300
+Message-Id: <20240424050351.318724-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.40.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TaKUD4OjApjgPXmD"
-Content-Disposition: inline
-In-Reply-To: <20240423234604.10674-1-andre.przywara@arm.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,72 +91,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Since commit c28d32f946f0 ("efi_loader: conditionally enable SetvariableRT")
+we are enabling the last bits of missing runtime services.
+Add support for QueryVariableInfo which we already support at boottime
+and we just need to mark some fucntions available at runtime and move
+some checks around.
 
---TaKUD4OjApjgPXmD
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+It's worth noting that pointer checks for maxmimum and remaining
+variable storage aren't when we store variables on the RPMB, since the
+Secure World backend is already performing them.
 
-On Wed, Apr 24, 2024 at 12:46:04AM +0100, Andre Przywara wrote:
-> At the moment enabling CONFIG_SYSRESET_PSCI *selects* SPL_ARM_PSCI_FW,
-> even though this is a platform design property, so nothing any driver
-> should enforce. Some platforms load the PSCI runtime (TF-A) only in the
-> SPL, so PSCI is naturally not available during SPL runtime.
->=20
-> Spit CONFIG_SYSRESET_PSCI up into an SPL and a U-Boot proper version,
-> and let the former *depend* on SPL_ARM_PSCI_FW.
->=20
-> This allows to enable CONFIG_SYSRESET_PSCI on platforms without SPL PSCI
-> support.
->=20
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> ---
->  drivers/sysreset/Kconfig  | 8 +++++++-
->  drivers/sysreset/Makefile | 2 +-
->  2 files changed, 8 insertions(+), 2 deletions(-)
->=20
-> diff --git a/drivers/sysreset/Kconfig b/drivers/sysreset/Kconfig
-> index 49c0787b26d..62fe9eb6220 100644
-> --- a/drivers/sysreset/Kconfig
-> +++ b/drivers/sysreset/Kconfig
-> @@ -119,11 +119,17 @@ config SYSRESET_PALMAS
->  config SYSRESET_PSCI
->  	bool "Enable support for PSCI System Reset"
->  	depends on ARM_PSCI_FW
-> -	select SPL_ARM_PSCI_FW if SPL
->  	help
->  	  Enable PSCI SYSTEM_RESET function call.  To use this, PSCI firmware
->  	  must be running on your system.
-> =20
-> +config SYSRESET_SPL_PSCI
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/efi_loader/efi_runtime.c                   |  4 ++++
+ lib/efi_loader/efi_var_common.c                |  6 ------
+ lib/efi_loader/efi_variable.c                  | 18 ++++++++++++------
+ lib/efi_loader/efi_variable_tee.c              |  5 +++++
+ .../efi_selftest_variables_runtime.c           | 14 +++++++++++---
+ 5 files changed, 32 insertions(+), 15 deletions(-)
 
-This should be SPL_SYSRESET_PSCI so that..
+diff --git a/lib/efi_loader/efi_runtime.c b/lib/efi_loader/efi_runtime.c
+index 73831c527e00..011bcd04836d 100644
+--- a/lib/efi_loader/efi_runtime.c
++++ b/lib/efi_loader/efi_runtime.c
+@@ -129,6 +129,10 @@ efi_status_t efi_init_runtime_supported(void)
+ 				EFI_RT_SUPPORTED_SET_VIRTUAL_ADDRESS_MAP |
+ 				EFI_RT_SUPPORTED_CONVERT_POINTER;
+ 
++	if (IS_ENABLED(CONFIG_EFI_VARIABLE_FILE_STORE))
++		rt_table->runtime_services_supported |=
++			EFI_RT_SUPPORTED_QUERY_VARIABLE_INFO;
++
+ 	if (IS_ENABLED(CONFIG_EFI_RT_VOLATILE_STORE)) {
+ 		u8 s = 0;
+ 
+diff --git a/lib/efi_loader/efi_var_common.c b/lib/efi_loader/efi_var_common.c
+index 961139f005af..ea8d2a4cf98c 100644
+--- a/lib/efi_loader/efi_var_common.c
++++ b/lib/efi_loader/efi_var_common.c
+@@ -1,4 +1,3 @@
+-// SPDX-License-Identifier: GPL-2.0+
+ /*
+  * UEFI runtime variable services
+  *
+@@ -163,11 +162,6 @@ efi_status_t EFIAPI efi_query_variable_info(
+ 	EFI_ENTRY("%x %p %p %p", attributes, maximum_variable_storage_size,
+ 		  remaining_variable_storage_size, maximum_variable_size);
+ 
+-	if (!maximum_variable_storage_size ||
+-	    !remaining_variable_storage_size ||
+-	    !maximum_variable_size)
+-		return EFI_EXIT(EFI_INVALID_PARAMETER);
+-
+ 	ret = efi_query_variable_info_int(attributes,
+ 					  maximum_variable_storage_size,
+ 					  remaining_variable_storage_size,
+diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+index 0cbed53d1dbf..e039cecd82b6 100644
+--- a/lib/efi_loader/efi_variable.c
++++ b/lib/efi_loader/efi_variable.c
+@@ -406,12 +406,15 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+ 	return EFI_SUCCESS;
+ }
+ 
+-efi_status_t efi_query_variable_info_int(u32 attributes,
+-					 u64 *maximum_variable_storage_size,
+-					 u64 *remaining_variable_storage_size,
+-					 u64 *maximum_variable_size)
++efi_status_t __efi_runtime
++efi_query_variable_info_int(u32 attributes,
++			    u64 *maximum_variable_storage_size,
++			    u64 *remaining_variable_storage_size,
++			    u64 *maximum_variable_size)
+ {
+-	if (attributes == 0)
++	if (!maximum_variable_storage_size ||
++	    !remaining_variable_storage_size ||
++	    !maximum_variable_size || !attributes)
+ 		return EFI_INVALID_PARAMETER;
+ 
+ 	/* EFI_VARIABLE_AUTHENTICATED_WRITE_ACCESS is deprecated */
+@@ -460,7 +463,10 @@ static efi_status_t __efi_runtime EFIAPI efi_query_variable_info_runtime(
+ 			u64 *remaining_variable_storage_size,
+ 			u64 *maximum_variable_size)
+ {
+-	return EFI_UNSUPPORTED;
++	return efi_query_variable_info_int(attributes,
++					   maximum_variable_storage_size,
++					   remaining_variable_storage_size,
++					   maximum_variable_size);
+ }
+ 
+ /**
+diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
+index 4f1aa298da13..8b6b0a390869 100644
+--- a/lib/efi_loader/efi_variable_tee.c
++++ b/lib/efi_loader/efi_variable_tee.c
+@@ -873,6 +873,11 @@ efi_status_t efi_query_variable_info_int(u32 attributes,
+ 	efi_status_t ret;
+ 	u8 *comm_buf;
+ 
++	if (!max_variable_storage_size ||
++	    !remain_variable_storage_size ||
++	    !max_variable_size || !attributes)
++		return EFI_INVALID_PARAMETER;
++
+ 	payload_size = sizeof(*mm_query_info);
+ 	comm_buf = setup_mm_hdr((void **)&mm_query_info, payload_size,
+ 				SMM_VARIABLE_FUNCTION_QUERY_VARIABLE_INFO,
+diff --git a/lib/efi_selftest/efi_selftest_variables_runtime.c b/lib/efi_selftest/efi_selftest_variables_runtime.c
+index afa91be62c85..5794a7b2d405 100644
+--- a/lib/efi_selftest/efi_selftest_variables_runtime.c
++++ b/lib/efi_selftest/efi_selftest_variables_runtime.c
+@@ -60,9 +60,17 @@ static int execute(void)
+ 	ret = runtime->query_variable_info(EFI_VARIABLE_BOOTSERVICE_ACCESS,
+ 					   &max_storage, &rem_storage,
+ 					   &max_size);
+-	if (ret != EFI_UNSUPPORTED) {
+-		efi_st_error("QueryVariableInfo failed\n");
+-		return EFI_ST_FAILURE;
++
++	if (IS_ENABLED(CONFIG_EFI_VARIABLE_FILE_STORE)) {
++		if (ret != EFI_SUCCESS) {
++			efi_st_error("QueryVariableInfo failed\n");
++			return EFI_ST_FAILURE;
++		}
++	} else {
++		if (ret != EFI_UNSUPPORTED) {
++			efi_st_error("QueryVariableInfo failed\n");
++			return EFI_ST_FAILURE;
++		}
+ 	}
+ 
+ 	ret = runtime->set_variable(u"efi_st_var0", &guid_vendor0,
+-- 
+2.40.1
 
-[snip]
-> -obj-$(CONFIG_SYSRESET_PSCI) +=3D sysreset_psci.o
-> +obj-$(CONFIG_$(SPL_TPL_)SYSRESET_PSCI) +=3D sysreset_psci.o
-
-This works.
-
---=20
-Tom
-
---TaKUD4OjApjgPXmD
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYoWfgACgkQFHw5/5Y0
-tyy3Vwv+JytYwCKedLBEw6HGecbsrWwT3wR+LYyqpOHtH7YYL7TKAO317yMMA7cR
-1YuyKi/OSK5o4ydsOI4yRTRLaZUsEClCgsvQwBMkdKypZzprRr7fiGfj6HP7WaIC
-a2btH1LYloQr7Vi35r3eReqOh4/+O80yYh7KyqsydFHZSRd+cRQjBj5VtiVTIztC
-MKYO0JQ6e2mHRabxNWG9uuItI4/BqS1pq5MJleNGYzAVt98ANBvn4fLtlhDKnzPY
-fiVyzPQtaM87OU4Q39TtVpOvgvLdTVNnpzkosSo35KaQb3aABbEiAyggdaSKgTGL
-iWda2KYszg9zsFxT5mPq3t8ns/WQmbv+jauz7/6qo/O6BmROdVkrjSJttO/tlYNt
-kc2OtCb8F7/O13y6jDTjeTQnGnSsPWOF+DOOC0Y2HWqQggfETQWlJJ1yzP5oqaFz
-NjL6LH3NjTeH6Hv19u6nDJqLPAvhh8+XBF8+5VEoxspMV0K8w6WT3FBGqxqKIWZs
-OlF0apIT
-=PB6v
------END PGP SIGNATURE-----
-
---TaKUD4OjApjgPXmD--
