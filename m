@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 808B5C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 12:52:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DF9EC4345F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 12:53:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E1C9C8872B;
-	Wed, 24 Apr 2024 14:52:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9EB4E887A5;
+	Wed, 24 Apr 2024 14:53:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qEcGzBHU";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="PA5Z1shW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 999F98872E; Wed, 24 Apr 2024 14:52:33 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id CD093887B4; Wed, 24 Apr 2024 14:53:46 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0414A88700
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 14:52:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D57EC887AC
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 14:53:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43OCqPSh030386;
- Wed, 24 Apr 2024 07:52:25 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1713963145;
- bh=N8LE7EFGtzzAB4r2cvBA3RkQiW7AN2ZkBedLGBK/X/A=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=qEcGzBHUGyB05/4VQegzdMP/QmGs8c7n0GbwcH4a2JuL/raj9C0k8f4QUojC87TsP
- 0aV7ap8p4Ajs3CPNp1JYnYHCj+pUDKWkeJjlgKDulHZN71In2+hHAEMb75B5kPWdPg
- vp4hz3ci/sE7ItFKKoZGtrBaM3ZH3lXvKr5gSQRM=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43OCqPZh022802
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 24 Apr 2024 07:52:25 -0500
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 24
- Apr 2024 07:52:25 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 24 Apr 2024 07:52:25 -0500
-Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
- [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43OCqMLS043656;
- Wed, 24 Apr 2024 07:52:22 -0500
-Message-ID: <9257d4e3-38db-48de-86ee-e401d9cff349@ti.com>
-Date: Wed, 24 Apr 2024 18:22:21 +0530
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1713963224; x=1716555224;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=9nQsr/ujXNUvMCd59VLlgaFVuxTfaDvxVX3O60zqSVw=;
+ b=PA5Z1shWQdK83fcUqc8RZO20uzrumZfqqa3omof7ePB57QcQBBDEEJjIm/3WWfdA
+ Lt6LY9nCe9k/gG3sZBtEzD8VGBgDZXGqFsLj4OCmED8tc339uE8nvcsYVTGdJnas
+ yY7m9GKU8YLwR6wB0+aT+auk4eUT4WCujA0kmTF7OcE=;
+X-AuditID: ac14000a-fadff7000000290d-32-662900d8e4b4
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 19.3A.10509.8D009266;
+ Wed, 24 Apr 2024 14:53:44 +0200 (CEST)
+Received: from augenblix2.phytec.de (172.25.0.11) by Berlix.phytec.de
+ (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Wed, 24 Apr
+ 2024 14:53:44 +0200
+From: Wadim Egorov <w.egorov@phytec.de>
+To: <u-boot@lists.denx.de>
+CC: <upstream@lists.phytec.de>
+Subject: [PATCH 1/2] board: phytec: Commonize board code for K3 based SoMs
+Date: Wed, 24 Apr 2024 14:53:34 +0200
+Message-ID: <20240424125335.2306132-2-w.egorov@phytec.de>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20240424125335.2306132-1-w.egorov@phytec.de>
+References: <20240424125335.2306132-1-w.egorov@phytec.de>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/10] soc: ti: k3-navss-ringacc: Initialize base address
- of ring cfg registers
-Content-Language: en-US
-To: Roger Quadros <rogerq@kernel.org>, Siddharth Vadapalli
- <s-vadapalli@ti.com>, <trini@konsulko.com>,
- <nm@ti.com>, <sjg@chromium.org>, <afd@ti.com>, <vigneshr@ti.com>
-CC: <u-boot@lists.denx.de>, <dannenberg@ti.com>, <srk@ti.com>
-References: <20240112064759.1801600-1-s-vadapalli@ti.com>
- <20240112064759.1801600-4-s-vadapalli@ti.com>
- <121dc2b7-0fc7-42ac-80cb-9c1af64a09eb@kernel.org>
-From: Chintan Vankar <c-vankar@ti.com>
-In-Reply-To: <121dc2b7-0fc7-42ac-80cb-9c1af64a09eb@kernel.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrJLMWRmVeSWpSXmKPExsWyRpKBR/cGg2aawY/H6hZv93ayW3S/U3dg
+ 8jh7ZwejR393C2sAUxSXTUpqTmZZapG+XQJXxo6zr1gKjqhVbJr7grWB8Y18FyMnh4SAicSC
+ VfMYuxi5OIQEljBJzN1/ig3Cecwo8eraEVaQKjYBdYk7G76B2SICUhIvOzcydzFycDALyEks
+ 6y8CCQsLeElcPDiLESTMIqAqcagxGCTMK2Ap8WvBSiaIXfISMy99ZwexOQWsJKZPnQZmCwHV
+ rO6/yg5RLyhxcuYTFhCbGai+eetsZghbQuLgixfMEPXyEi8uLWeBmTnt3GtmCDtUYuuX7UwT
+ GIVmIRk1C8moWUhGLWBkXsUolJuZnJ1alJmtV5BRWZKarJeSuokRFLwiDFw7GPvmeBxiZOJg
+ PMQowcGsJMJ786NGmhBvSmJlVWpRfnxRaU5q8SFGaQ4WJXHe1R3BqUIC6YklqdmpqQWpRTBZ
+ Jg5OqQbG9ND1Gfx7YjM4Fkns+9rKH9iSMmlSpupZ27aHSuKbJjI89Xs054bqS5MrVZor2m4n
+ ZQg84esu5H3o46MovstU0DDzhZ9ZxLl9jg0iB9mWmn/kS+h7Pe3nsRWcTevZ1m+sXM4jbmvt
+ eC135o6Ejk27Hr9SWScqkizz1kUp7NTyE1WMFve3CJUrsRRnJBpqMRcVJwIAA0dChEwCAAA=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,63 +86,204 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Environment handling code can be reused across all our K3 based SoMs.
+Instead of adding the same code for every new SoM, move it to a common
+board.c file.
 
+Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+---
+ board/phytec/common/Makefile               |  2 +
+ board/phytec/common/k3/Makefile            |  2 +
+ board/phytec/common/k3/board.c             | 73 ++++++++++++++++++++++
+ board/phytec/phycore_am62x/phycore-am62x.c | 67 --------------------
+ 4 files changed, 77 insertions(+), 67 deletions(-)
+ create mode 100644 board/phytec/common/k3/Makefile
+ create mode 100644 board/phytec/common/k3/board.c
 
-On 16/01/24 17:13, Roger Quadros wrote:
-> Hi,
-> 
-> On 12/01/2024 08:47, Siddharth Vadapalli wrote:
->> From: Kishon Vijay Abraham I <kishon@ti.com>
->>
->> Initialize base address of ring config registers required to natively
->> setup ring cfg registers in the absence of Device Manager (DM) services
->> at R5 SPL stage.
->>
->> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
->> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
->> ---
->>   drivers/soc/ti/k3-navss-ringacc.c | 7 ++++++-
->>   1 file changed, 6 insertions(+), 1 deletion(-)
->>
->> diff --git a/drivers/soc/ti/k3-navss-ringacc.c b/drivers/soc/ti/k3-navss-ringacc.c
->> index 7a2fbb0db6..31e9b372ee 100644
->> --- a/drivers/soc/ti/k3-navss-ringacc.c
->> +++ b/drivers/soc/ti/k3-navss-ringacc.c
->> @@ -1030,8 +1030,8 @@ static int k3_nav_ringacc_init(struct udevice *dev, struct k3_nav_ringacc *ringa
->>   struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
->>   						struct k3_ringacc_init_data *data)
->>   {
->> +	void __iomem *base_rt, *base_cfg;
->>   	struct k3_nav_ringacc *ringacc;
->> -	void __iomem *base_rt;
->>   	int i;
->>   
->>   	ringacc = devm_kzalloc(dev, sizeof(*ringacc), GFP_KERNEL);
->> @@ -1049,6 +1049,10 @@ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
->>   	if (!base_rt)
->>   		return ERR_PTR(-EINVAL);
->>   
->> +	base_cfg = dev_read_addr_name_ptr(dev, "cfg");
->> +	if (!base_cfg)
->> +		return ERR_PTR(-EINVAL);
->> +
-> 
-> Should this be restricted only for R5 SPL case? else we conflict with
-> Device Manager services?
-> 
+diff --git a/board/phytec/common/Makefile b/board/phytec/common/Makefile
+index 35c81741306..0c738041565 100644
+--- a/board/phytec/common/Makefile
++++ b/board/phytec/common/Makefile
+@@ -5,6 +5,8 @@
+ ifdef CONFIG_SPL_BUILD
+ # necessary to create built-in.o
+ obj- := __dummy__.o
++else
++obj-$(CONFIG_ARCH_K3) += k3/
+ endif
+ 
+ obj-y += phytec_som_detection.o
+diff --git a/board/phytec/common/k3/Makefile b/board/phytec/common/k3/Makefile
+new file mode 100644
+index 00000000000..bcca1a9f846
+--- /dev/null
++++ b/board/phytec/common/k3/Makefile
+@@ -0,0 +1,2 @@
++# SPDX-License-Identifier: GPL-2.0+
++obj-y += board.o
+diff --git a/board/phytec/common/k3/board.c b/board/phytec/common/k3/board.c
+new file mode 100644
+index 00000000000..9cb168c36cb
+--- /dev/null
++++ b/board/phytec/common/k3/board.c
+@@ -0,0 +1,73 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright (C) 2024 PHYTEC Messtechnik GmbH
++ * Author: Wadim Egorov <w.egorov@phytec.de>
++ */
++
++#include <env_internal.h>
++#include <spl.h>
++#include <asm/arch/hardware.h>
++
++#if IS_ENABLED(CONFIG_ENV_IS_IN_FAT) || IS_ENABLED(CONFIG_ENV_IS_IN_MMC)
++int mmc_get_env_dev(void)
++{
++	u32 boot_device = get_boot_device();
++
++	switch (boot_device) {
++	case BOOT_DEVICE_MMC1:
++		return 0;
++	case BOOT_DEVICE_MMC2:
++		return 1;
++	};
++
++	return CONFIG_SYS_MMC_ENV_DEV;
++}
++#endif
++
++enum env_location env_get_location(enum env_operation op, int prio)
++{
++	u32 boot_device = get_boot_device();
++
++	if (prio)
++		return ENVL_UNKNOWN;
++
++	switch (boot_device) {
++	case BOOT_DEVICE_MMC1:
++	case BOOT_DEVICE_MMC2:
++		if (CONFIG_IS_ENABLED(ENV_IS_IN_FAT))
++			return ENVL_FAT;
++		if (CONFIG_IS_ENABLED(ENV_IS_IN_MMC))
++			return ENVL_MMC;
++	case BOOT_DEVICE_SPI:
++		if (CONFIG_IS_ENABLED(ENV_IS_IN_SPI_FLASH))
++			return ENVL_SPI_FLASH;
++	default:
++		return ENVL_NOWHERE;
++	};
++}
++
++#if IS_ENABLED(CONFIG_BOARD_LATE_INIT)
++int board_late_init(void)
++{
++	u32 boot_device = get_boot_device();
++
++	switch (boot_device) {
++	case BOOT_DEVICE_MMC1:
++		env_set_ulong("mmcdev", 0);
++		env_set("boot", "mmc");
++		break;
++	case BOOT_DEVICE_MMC2:
++		env_set_ulong("mmcdev", 1);
++		env_set("boot", "mmc");
++		break;
++	case BOOT_DEVICE_SPI:
++		env_set("boot", "spi");
++		break;
++	case BOOT_DEVICE_ETHERNET:
++		env_set("boot", "net");
++		break;
++	};
++
++	return 0;
++}
++#endif
+diff --git a/board/phytec/phycore_am62x/phycore-am62x.c b/board/phytec/phycore_am62x/phycore-am62x.c
+index 618b4c370d1..a082b886bda 100644
+--- a/board/phytec/phycore_am62x/phycore-am62x.c
++++ b/board/phytec/phycore_am62x/phycore-am62x.c
+@@ -5,11 +5,8 @@
+  */
+ 
+ #include <asm/io.h>
+-#include <env.h>
+-#include <env_internal.h>
+ #include <spl.h>
+ #include <fdt_support.h>
+-#include <asm/arch/hardware.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+@@ -57,67 +54,3 @@ void spl_board_init(void)
+ 	       MCU_CTRL_DEVICE_CLKOUT_32K_CTRL);
+ }
+ #endif
+-
+-#if IS_ENABLED(CONFIG_ENV_IS_IN_FAT) || IS_ENABLED(CONFIG_ENV_IS_IN_MMC)
+-int mmc_get_env_dev(void)
+-{
+-	u32 boot_device = get_boot_device();
+-
+-	switch (boot_device) {
+-	case BOOT_DEVICE_MMC1:
+-		return 0;
+-	case BOOT_DEVICE_MMC2:
+-		return 1;
+-	};
+-
+-	return CONFIG_SYS_MMC_ENV_DEV;
+-}
+-#endif
+-
+-enum env_location env_get_location(enum env_operation op, int prio)
+-{
+-	u32 boot_device = get_boot_device();
+-
+-	if (prio)
+-		return ENVL_UNKNOWN;
+-
+-	switch (boot_device) {
+-	case BOOT_DEVICE_MMC1:
+-	case BOOT_DEVICE_MMC2:
+-		if (CONFIG_IS_ENABLED(ENV_IS_IN_FAT))
+-			return ENVL_FAT;
+-		if (CONFIG_IS_ENABLED(ENV_IS_IN_MMC))
+-			return ENVL_MMC;
+-	case BOOT_DEVICE_SPI:
+-		if (CONFIG_IS_ENABLED(ENV_IS_IN_SPI_FLASH))
+-			return ENVL_SPI_FLASH;
+-	default:
+-		return ENVL_NOWHERE;
+-	};
+-}
+-
+-#if IS_ENABLED(CONFIG_BOARD_LATE_INIT)
+-int board_late_init(void)
+-{
+-	u32 boot_device = get_boot_device();
+-
+-	switch (boot_device) {
+-	case BOOT_DEVICE_MMC1:
+-		env_set_ulong("mmcdev", 0);
+-		env_set("boot", "mmc");
+-		break;
+-	case BOOT_DEVICE_MMC2:
+-		env_set_ulong("mmcdev", 1);
+-		env_set("boot", "mmc");
+-		break;
+-	case BOOT_DEVICE_SPI:
+-		env_set("boot", "spi");
+-		break;
+-	case BOOT_DEVICE_ETHERNET:
+-		env_set("boot", "net");
+-		break;
+-	};
+-
+-	return 0;
+-}
+-#endif
+-- 
+2.34.1
 
-I don't see any conflict in it, you can go through this:
-https://github.com/u-boot/u-boot/commit/86e58800fd7cdba4fa9229aeee3a54a2ccece406
-
->>   	ringacc->rings = devm_kzalloc(dev,
->>   				      sizeof(*ringacc->rings) *
->>   				      ringacc->num_rings * 2,
->> @@ -1063,6 +1067,7 @@ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
->>   	for (i = 0; i < ringacc->num_rings; i++) {
->>   		struct k3_nav_ring *ring = &ringacc->rings[i];
->>   
->> +		ring->cfg = base_cfg + KNAV_RINGACC_CFG_REGS_STEP * i;
->>   		ring->rt = base_rt + K3_DMARING_RING_RT_REGS_STEP * i;
->>   		ring->parent = ringacc;
->>   		ring->ring_id = i;
-> 
