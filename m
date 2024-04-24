@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DA32C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 14:14:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21A47C10F15
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 14:14:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BB3788B96;
-	Wed, 24 Apr 2024 16:14:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C692588E6A;
+	Wed, 24 Apr 2024 16:14:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s8YH2zLF";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="KnWVqlk+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 84B8088E45; Wed, 24 Apr 2024 16:14:05 +0200 (CEST)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 662BC88E61; Wed, 24 Apr 2024 16:14:10 +0200 (CEST)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8BBFA8882B
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 16:14:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CD8388E57
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 16:14:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-56e6acb39d4so8107121a12.1
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 07:14:03 -0700 (PDT)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-a58872905b5so171240166b.2
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 07:14:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1713968038; x=1714572838; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1713968048; x=1714572848; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=7YY3xISJroA7LiUimw1N7Nd/rLkINOIq23Yll5wHPW8=;
- b=s8YH2zLFdgWFrLAXJM3Q1AfQHoRKXq0z0stifNdZvRQGIxGXrLn2Qr06ViBye+2HFA
- o8SgKJlauYjfuuFiZ/+9J7Hnf4bShrBl4fw0QiaJXsn3wewyusB5bW8pz/JQHTRbMqHY
- v+47QefZbPLezI4XV4Gsi7H8gKr6i6yvJ/QS49oss4Akc+I+n28awnI4nna1SE5NL4J1
- Ygu441CeEXtFqLrdYbpLHvfvvfJ02LM4QsBNM5TRz1NBGl8h01oIDuyZyXP2wvZUfPT4
- ATqM0MrxIl3ZbRLXL7TepHBATPMBEyYHWbNmTRiLYlY++ttK4VTxHzsSuIYp2Q1LYz75
- sGpA==
+ bh=yTBMB3HdHBLjWyHgYeU+jo1E+IKUoSnacvu6XQpUTCo=;
+ b=KnWVqlk+w4q+qXlqvqMxjSKIKSTirnRY7U6WD/jh+YX9zgUsJteg5wU2zbNVW3/9wV
+ PkzWic5YEMSKgdDOdnXM474XhzOHn+90KFgXWG5uoYBX1LyLy76RCr/j9ZenyMCIs9qa
+ r5yzcMrrlQf8bk68z5UeFuZGjdr6e4KLK5ynfRKu5t5A4nwsZmhEiiDszzoJ0/uMQvpq
+ 7qwaOQUvMK5tvc3VoNgrfy0mn28ATCuLCp03lbOC5jzAv85QFmXisMAkj9SlD24Ot0qO
+ qVwXSxKkMwlKTH/XXilnKhai/cTmHGHqsoZzxf0sl2/hH6sw6ux20q6pWSf6MNIMzA2l
+ qqxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713968038; x=1714572838;
+ d=1e100.net; s=20230601; t=1713968048; x=1714572848;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=7YY3xISJroA7LiUimw1N7Nd/rLkINOIq23Yll5wHPW8=;
- b=wObVlftvSx6wFYmnr9bHlAm9RJagrt+Dj7qJOs2Y6OuHZLOHOgV86o6NPCXHnPFp4t
- S6KqywyPlsPgnLTa8LT40qMfM8bEg6Vb56q4IbAQv/m5jsfTSdpKUbRGBISiyApuDqDn
- HVORO7nSUEmD29Gdi1wetoj4LnJ8tdQkIgOD/OsE5jgO1IHUMqJPczKe3BQAW8IWyPWU
- G+PdxI8Tqe4PmI8SKmXO3Yo/DZUEn6hJzwm7DPZ5rppGOh6Rr0UaP6O7HYRjZQbctLdW
- ddVOC4mvNvk67jCOTU3TZqiIa7CcONBA3PhxOeEbxli/mPJxmUWetARP+jfJrF5jY9+X
- RdDw==
+ bh=yTBMB3HdHBLjWyHgYeU+jo1E+IKUoSnacvu6XQpUTCo=;
+ b=lW1PeB17juGAw+Rm+Vt/WGb/mdFWGKKOKFLHG3HFwHmdVsIORJySRdso5oIjgvUDT+
+ hNhDMYYSYo9/yjq2UTkpjtlILebU3g7/mTl+Cm8uDic+mfeWao3YECE2go+Otm3SqNuM
+ p2pnT+TDKuUtxBLIIuOu6gKmyJ4OzZeUPgDHsW4EoIRq9XTap25KJmtpVHO0fsYIVRGv
+ 376a5i48IF7mxdConNjL9bOCtDDMlQ3GTPpFPiIICbEjxQxCbXc3BkjYfkjUSoQqD3mK
+ bSf7j7kv4BfYnOIY2X+zBpXWC7C7XBsvs3nxa6ETi6rG7x15ghWGwl3iyofO1K0nHvvp
+ kifQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVHplHYYjzB7ezYmgb56F/FOOnTVLw7k/jDCJewTgs2LQ2TTuo2F47dPA3ZYgFFL4/3cwhCDfOrMbCk+w5eOR8d+zFX7A==
-X-Gm-Message-State: AOJu0YyofZ1JoC/Wqn2O/y0fK99eTHGO5l3MH0i4M0YsFkVOLx/tZoMq
- UAgcKNo4es3VaSN6B1XwOPHoHQqUC/brkSBw4NSwsDCmtoQ8KxzErc+63V40nAo=
-X-Google-Smtp-Source: AGHT+IEwjT/JbQK/1y4AQxfsQ7amN/5v4QZCmwVpqyc2rI7nKTOtR2ZFYV/CvJx8shJJRfDfI81h6g==
-X-Received: by 2002:a50:a445:0:b0:570:1ea8:c50a with SMTP id
- v5-20020a50a445000000b005701ea8c50amr2023826edb.6.1713968038009; 
- Wed, 24 Apr 2024 07:13:58 -0700 (PDT)
+ AJvYcCUzm2hCar1qThhyTiXQcStozXv8vSRP6T0ng6100FyqeWlmr0K5jA2efrWY926fw1hTlZRJphHVY79iQejmFPa6BopnvA==
+X-Gm-Message-State: AOJu0Ywf8HbwMBXvNUssREryse7VQHr4P859AfCPEouoHhWggUvbk+KG
+ XgeInEc2QuKVmuIn9L7r6SmGuu/hDs9UrEonBJOawTk7yP9fSA6XxvlkhuwYsNs=
+X-Google-Smtp-Source: AGHT+IE2MRuvPAfdZo3fo9A2c3Jeog/JY5iv2IUrcf+5oPNX43ZHjNSwWTZJsn9f6PVl7E/P8lnwXA==
+X-Received: by 2002:a17:906:c141:b0:a58:934b:a051 with SMTP id
+ dp1-20020a170906c14100b00a58934ba051mr1503224ejc.39.1713968048101; 
+ Wed, 24 Apr 2024 07:14:08 -0700 (PDT)
 Received: from ?IPV6:2a02:8109:aa0d:be00::4c3a? ([2a02:8109:aa0d:be00::4c3a])
  by smtp.gmail.com with ESMTPSA id
- i17-20020a0564020f1100b00572334baee7sm500707eda.41.2024.04.24.07.13.57
+ t4-20020a1709064f0400b00a58a4e08893sm16321eju.104.2024.04.24.07.14.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 24 Apr 2024 07:13:57 -0700 (PDT)
-Message-ID: <5d865703-286f-4b62-b8a3-f6c5cf74dc7d@linaro.org>
-Date: Wed, 24 Apr 2024 16:13:55 +0200
+ Wed, 24 Apr 2024 07:14:07 -0700 (PDT)
+Message-ID: <94b98ef2-b84f-4bbc-bc41-9e68d83d2a8b@linaro.org>
+Date: Wed, 24 Apr 2024 16:14:06 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] mach-ipq40xx: add CPU specific code
+Subject: Re: [PATCH 2/3] mach-ipq40xx: use OF_UPSTREAM
 To: Robert Marko <robert.marko@sartura.hr>, trini@konsulko.com,
  neil.armstrong@linaro.org, sumit.garg@linaro.org, u-boot@lists.denx.de,
  u-boot-qcom@groups.io
 Cc: j.beck@linefinity.com
 References: <20240424111434.373920-1-robert.marko@sartura.hr>
+ <20240424111434.373920-2-robert.marko@sartura.hr>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240424111434.373920-1-robert.marko@sartura.hr>
+In-Reply-To: <20240424111434.373920-2-robert.marko@sartura.hr>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -100,81 +101,27 @@ X-Virus-Status: Clean
 
 
 On 24/04/2024 13:13, Robert Marko wrote:
-> Provide basic DRAM info population from DT, cache setting and the
-> board_init stub.
+> Now that drivers are compatible enough with the upstream DTS, there is no
+> reason to not use the upstream DTS, so imply OF_UPSTREAM by default.
 > 
 > Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 Acked-by: Caleb Connolly <caleb.connolly@linaro.org>
 > ---
->   arch/arm/mach-ipq40xx/Makefile |  7 ++++++
->   arch/arm/mach-ipq40xx/cpu.c    | 44 ++++++++++++++++++++++++++++++++++
->   2 files changed, 51 insertions(+)
->   create mode 100644 arch/arm/mach-ipq40xx/Makefile
->   create mode 100644 arch/arm/mach-ipq40xx/cpu.c
+>   arch/arm/Kconfig | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/arch/arm/mach-ipq40xx/Makefile b/arch/arm/mach-ipq40xx/Makefile
-> new file mode 100644
-> index 0000000000..d611de9933
-> --- /dev/null
-> +++ b/arch/arm/mach-ipq40xx/Makefile
-> @@ -0,0 +1,7 @@
-> +# SPDX-License-Identifier: GPL-2.0+
-> +#
-> +# Copyright (c) 2024 Sartura Ltd.
-> +#
-> +# Author: Robert Marko <robert.marko@sartura.hr>
-> +
-> +obj-y += cpu.o
-> diff --git a/arch/arm/mach-ipq40xx/cpu.c b/arch/arm/mach-ipq40xx/cpu.c
-> new file mode 100644
-> index 0000000000..0446627a8f
-> --- /dev/null
-> +++ b/arch/arm/mach-ipq40xx/cpu.c
-> @@ -0,0 +1,44 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * CPU code for Qualcomm IPQ40xx SoC
-> + *
-> + * Copyright (c) 2024 Sartura Ltd.
-> + *
-> + * Author: Robert Marko <robert.marko@sartura.hr>
-> + */
-> +
-> +#include <common.h>
-> +#include <cpu_func.h>
-> +#include <init.h>
-> +
-> +int dram_init(void)
-> +{
-> +	int ret;
-> +
-> +	ret = fdtdec_setup_memory_banksize();
-> +	if (ret)
-> +		return ret;
-> +	return fdtdec_setup_mem_size_base();
-> +}
-> +
-> +/*
-> + * Enable/Disable D-cache.
-> + * I-cache is already enabled in start.S
-> + */
-> +void enable_caches(void)
-> +{
-> +	dcache_enable();
-> +}
-> +
-> +void disable_caches(void)
-> +{
-> +	dcache_disable();
-> +}
-> +
-> +/*
-> + * In case boards need specific init code, they can override this stub.
-> + */
-> +int __weak board_init(void)
-> +{
-> +	return 0;
-> +}
+> diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> index 93e12d8d53..5c2769b59d 100644
+> --- a/arch/arm/Kconfig
+> +++ b/arch/arm/Kconfig
+> @@ -768,6 +768,7 @@ config ARCH_IPQ40XX
+>   	select CLK_QCOM_IPQ4019
+>   	select PINCTRL_QCOM_IPQ4019
+>   	imply CMD_DM
+> +	imply OF_UPSTREAM
+>   
+>   config ARCH_KEYSTONE
+>   	bool "TI Keystone"
 
 -- 
 // Caleb (they/them)
