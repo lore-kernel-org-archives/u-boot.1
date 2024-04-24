@@ -4,81 +4,204 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F444C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 12:04:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B9B0C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 12:18:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A768E8872F;
-	Wed, 24 Apr 2024 14:04:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7898088CAA;
+	Wed, 24 Apr 2024 14:18:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cLB4+eK2";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="O/qodUgr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EF2288DE4; Wed, 24 Apr 2024 09:52:38 +0200 (CEST)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4BE2888CB2; Wed, 24 Apr 2024 14:18:24 +0200 (CEST)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20631.outbound.protection.outlook.com
+ [IPv6:2a01:111:f400:7e88::631])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7766188DD5
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 09:52:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 53B9088BDB
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 14:18:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=net147@gmail.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-2d9fe2b37acso88420931fa.2
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 00:52:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1713945156; x=1714549956; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Z3uL2x6VO+U3Lqdl2lUbSeHsFEr8Ine2bn+HmSPqMh8=;
- b=cLB4+eK27bRlW+tts2wtXIUP+lTgQOoNi7pr0xzIc/e23YW5TRUnX43QOVRS53i7KY
- jvlpde3+ueON4Bz6eO9Q0n0YJRmR1QbOu2GnLZdlfYizuM94tiVZ4XsKjfCOcMwznn+g
- WId3Qr25YnjxLLdIxUi63/Kg2oG2vKfoOPCybqtbHaW6SnCvJVMCcU48Pc3x6Z3E/NjV
- gUoLw+c0cRaXKOLxVFgEsgvTccF1tEbIFBLDgOQoFMjRLIiYLxHoOzu9nFl6Oz4QaNS6
- fE7TplT83psDOYso3LL9c9a58yg+QzI6QPD8xk6vZC4LVeRZ70/tJPjnTOtCE7c0qm0W
- 3BDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1713945156; x=1714549956;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Z3uL2x6VO+U3Lqdl2lUbSeHsFEr8Ine2bn+HmSPqMh8=;
- b=aR5NdYGU0axFSeI6B4URr3E17rOEtOoShiCFXGWa3xb+12/KPRZvU9k20zoaiv7vYV
- RR5zAZaOOrLDN9d9eC6o2InA1Nb3pVyjP/HUu2Dq9kAyfaO0//rOgpq4rzAbbUCXFJ3Z
- 6OV1Fn7a/KhFdijTDikhB8bgr1cdosEvMPi+cVt/j9KfNiBN643kFKdLron30sdHqB00
- x0lyxxH9pxZEW4FMesDPqWx/eG3doqOtaGBgO8JtAvPfIf4eHZOPIUFd4DeiDpNVW6OD
- MfJH3XMgxn7guA4FnK6ZrAIE2CvxrJFE7ZBSQlqDGHJR+tY4Xr82P+TTIvb6mYzK0h3d
- kCxA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVC/LVp+Sc+FaX4p2BAQRTKlFYx58s1O/He0oMEH1dqxBR+jbVO8KP0ERPZkdQn0f4/4fiwWlUmUSqfQLzQJT8Se8HhFg==
-X-Gm-Message-State: AOJu0YxXo6Isa9L/WhvFjtolW4OrgZPMdIRfKHWRI5vv4lMk8+wyT97X
- TW1Oi+rty1bi8Wza3blvlcmpiJCG5uC76HKO7iqp1hVkLfSzHsXfrOHYuuln8sq9TghpBjiH3xQ
- wnfh3TeokUIRK7/jfknctZMX5Ey0=
-X-Google-Smtp-Source: AGHT+IHDamWlS+uQQFHM43CVyeWYPxh9P3ZdxYoaap/d+7NURJayL7YFaChYuaeZtOTukFTeorJ7hk0+vdkpJsX/VK0=
-X-Received: by 2002:a2e:9201:0:b0:2d8:901f:7f50 with SMTP id
- k1-20020a2e9201000000b002d8901f7f50mr923931ljg.9.1713945155424; Wed, 24 Apr
- 2024 00:52:35 -0700 (PDT)
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=mzKQVw4EOPnxl1ls6bhMdvdXdUMSLKvRegWYPlCDINqKCGpq7GB1r6gaxTiGv99w+FpN5qS7qOEVPQeMlUmpcMbEDr/XQXZ5knB8v6ZaiPiD2LQkag2fnSuzJRL/nHUGoy6SnEfWPWac/ES59mXiqakScWIFsTiShC2rrC092bGcxCp2EYN0jFDlCmHKJSSmMF0AuQt84aSAdy1vEIsGcdzoXWK1s6Z9V0pEFL0Ycx8yMrvR76TFP9TlKJjotPqH6Mbjz63wxG84F0dB0MWG3xV3jES4uaqHCM0u4gmy/Q4W/bXAtVhvs7zTbqEo10/GGi9auDhC9Bi+l+9MMr3SrQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=djR9Nd5jqvroPisUhoVKqSMdVutW7fPTWw+hGY2hKaE=;
+ b=fPm6FIAkiLlyLBhgM+Lf/qrDt26qxD9MzbMgGWP1X90iqhKuCqxwAlpkJlRXM81cFIy0osh4Yd/uc1xQ6H4kE8uea3UIecgUqNzKA/3Fmqnf6ivQW9eRSzneZDgepEOfkhSSdVUxYqPef1HGl4ojZdUUSdMFNXGi96CroaWlHUG6K7i7g5JFLmKjJaMPSkRZ7Vdiig+5BNsSvnjFMpoo8pLo1RYLKLA9BPvyOmGE92QJzJ1ZH43BNz0i3lGwTAceBh8qn0vhmUxt4nj0nIe49QVlNHrrAdSdzKiniHP9glXtiyxNj3/Uh0mx4G08guchB0mw4dKaYF/CpxqOLlNn9A==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=djR9Nd5jqvroPisUhoVKqSMdVutW7fPTWw+hGY2hKaE=;
+ b=O/qodUgrBPpqKbGUdQeaX6ScnqKoCcuI/kh0T7RsgnKNgKcHmyZYqqbPPw9nBZpsBzooUkmCQt3K5EnPnf++Lt335wGA4jwv1xh7xSZagcm4ydcafpyHefo6JMKJfqS13ruCqRK3k7X0waQFfIFvaXRA0G4tnWD/WUli8yN/DHc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
+ by PH8PR12MB7229.namprd12.prod.outlook.com (2603:10b6:510:227::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7519.22; Wed, 24 Apr
+ 2024 12:18:18 +0000
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::c3fc:3be9:dde7:745f]) by SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::c3fc:3be9:dde7:745f%7]) with mapi id 15.20.7472.044; Wed, 24 Apr 2024
+ 12:18:18 +0000
+Message-ID: <3e0c69ee-21bb-4bb8-9952-d0e8e91e091f@amd.com>
+Date: Wed, 24 Apr 2024 14:18:03 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 00/20] FWU: Add support for FWU metadata version 2
+To: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Yann GAUTIER <yann.gautier@st.com>,
+ Etienne Carriere <etienne.carriere@foss.st.com>,
+ Patrick DELAUNAY - foss <patrick.delaunay@foss.st.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Michal Simek <monstr@monstr.eu>
+References: <20240322105733.203888-1-sughosh.ganu@linaro.org>
+Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ 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
+ 3i3l5DA=
+In-Reply-To: <20240322105733.203888-1-sughosh.ganu@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1PR10CA0112.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:803:28::41) To SJ2PR12MB8109.namprd12.prod.outlook.com
+ (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
-References: <ea5147ee8606c47e4d714f8a3e0143d0fd9a1599.camel@googlemail.com>
- <80286c54-c617-d790-b7dc-efd4e52259eb@rock-chips.com>
-In-Reply-To: <80286c54-c617-d790-b7dc-efd4e52259eb@rock-chips.com>
-From: Jonathan Liu <net147@gmail.com>
-Date: Wed, 24 Apr 2024 17:52:23 +1000
-Message-ID: <CANwerB1VhRichsmiozR3zTu2nWi0SsGg6Td5c8RuUe9rxrjsrA@mail.gmail.com>
-Subject: Re: rk3399 issue: no DMA in Linux with mainline TF-A and U-Boot SPL
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: chf.fritz@googlemail.com, U-Boot Mailing List <u-boot@lists.denx.de>, 
- Quentin Schulz <quentin.schulz@theobroma-systems.com>,
- Heiko Stuebner <heiko@sntech.de>, 
- Tony Xie <tony.xie@rock-chips.com>, JuliusWerner <jwerner@chromium.org>, 
- DanHandley <dan.handley@arm.com>, Rockchip <op-tee@rock-chips.com>, 
- Russell King <linux@armlinux.org.uk>, linux-arm-kernel@lists.infradead.org, 
- op-tee@lists.trustedfirmware.org, tf-a@lists.trustedfirmware.org, 
- =?UTF-8?B?5byg5a2m5bm/?= <sugar.zhang@rock-chips.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Wed, 24 Apr 2024 14:04:05 +0200
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|PH8PR12MB7229:EE_
+X-MS-Office365-Filtering-Correlation-Id: ea6acec7-22fd-45fc-d0b3-08dc64589fe7
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230031|1800799015|376005|366007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?aWMrak0wbUNMTzdEMjhHa1g1eGd3QldUQ3VJR25PQXhtQ2JhVEpLRk5MT2pW?=
+ =?utf-8?B?ZWJvcG43aTUxYVNQbHhudXVubGhPVmFSaFlDTk80elAxRGY0NS9DYytGU1Ex?=
+ =?utf-8?B?ME9GOXV1blZudjNVR1lJdzlQNU9HcE1aTVQxUFErZWdBV2drYzFMVU1WUXZM?=
+ =?utf-8?B?QnlkS1pUdzFERXkrK1JiMW9mVGJIMEJ1eGxVQjBOK0RjRW9yL1VqMjdTd2pJ?=
+ =?utf-8?B?Wit5SWNtYWxnbVVna1BPdTl4cjhlOC9YNHNnNU5McUxQc2V2cDdES0tkZWRx?=
+ =?utf-8?B?OW8rLzl5bWozR3BJZjROQWRZVFcvRk9BaWN2SzBxQWQ4NXFVK1lqQlNNa05Y?=
+ =?utf-8?B?YXl2OUo3aVNQU2JrUVkreGY3T2NJQ252aU1raVJrWEhLbGUvbGtoYm9EOVB1?=
+ =?utf-8?B?M0VNak1pYmFsMlNXenJ5ZURlTGlEbVl5WVNpQ3RCZGliVGJ3OFVqOWE1eElC?=
+ =?utf-8?B?U1lRVEJaeTNOUnJZam5raXFkcEtkcVVSWlZDbVR1ZldGSDFFaHU2bmhLSC8r?=
+ =?utf-8?B?VDBYZmFwZ0lnMGxoVnRNdUF5YjdMMzMrUE1yNkovQU96R3lkM2dlRUI2b21R?=
+ =?utf-8?B?aVBYVHBOdWNYY3lXc1ZBa0ZHUDJ1NjIzZVhPcmw3SlZodnA5Zmc1U2RyajF3?=
+ =?utf-8?B?NkRLVUN3KzV5eG9BMmxUNno3MjNTNFRvMGtTL2hTLzNJRHVVdjAyTHNoOXI1?=
+ =?utf-8?B?cFdJaURWOEN2MGwvUXpQOFJ2Y2lTQ0FkZTFxQ2djTm1aM0FIL1QwUllvRHRn?=
+ =?utf-8?B?anN5eHRxcDBhbUY3L0FvWkdVOUE0LzAzVksvTE5mU0JJbjdNbTJERk5SZ1lE?=
+ =?utf-8?B?QkJJRURFTE5VdjRsK0szWXZOTFBLNlRvUDBZMk50L0hzMGZoSVhKQzBncHg5?=
+ =?utf-8?B?UDlaMm9USmx2MkY5ZWwzY2d2V1dHRHFKb09KQXRRNE5ZKzZtVXp1ZTYvMnRS?=
+ =?utf-8?B?Z2hUY3E0VFhpWE5OVGhCdExBSW0rYXN5anA5WU80VlNXdHM2L0hDT3h0dytC?=
+ =?utf-8?B?WmZjMERjUjROcUxxTUZsQzQ0aVBwbjNGUGtOcmlDd2lqMlpXYmNJekhtMlp1?=
+ =?utf-8?B?cUZKeUdVTUhyRmNqZzZqa0VkNXhJU2d1OURBNjV3UVd1WkRQVkZZYlcvMDdZ?=
+ =?utf-8?B?NWg0cUJOMzYyK2NrMlpjdGVSUWlJb09neWUxUHgwdGs1ZStTSDlTTlZFWjU3?=
+ =?utf-8?B?dkxTUGVGZFg0MG1hUnZpbEpOT0tEN0NlYXZhcnJ4U1FiK1lEVWhnNHNyVFZx?=
+ =?utf-8?B?ZFY2Q0NISEdibWdBMjdJK0FWTjdDeXJYeXA4SFg2eUtzak9nNGFueWxIamhE?=
+ =?utf-8?B?eXZpMFZyUVNZTGV0UG8wckxFdzVpcEdqSzNmQ2g4WWV5c0xUTll3NzBuUGVR?=
+ =?utf-8?B?MlczVEt3VFQ4QTJuYzJXNzJNWGNZQ0N2TWdwNTJIWGl5ZnB0aElzU0k5UnR6?=
+ =?utf-8?B?eWdiNXNWTFRWVkoyRzRIa0NGL1BYYkdnUERGeERzaTd0Z2NkM2UzQUMwaHRq?=
+ =?utf-8?B?WGJnTzN0ekFobDZzNGZqUUFGTGhtdWovZlRVREVUTTVwT0pocm96LzZTbWs0?=
+ =?utf-8?B?Q1lSenJSUVU1YjNiL0JzK1lTRVhLQjM1MWNZeTFJTnhIL0ZRTXJ2SktsSkZ5?=
+ =?utf-8?Q?Y1YpxfbtMHpLWjk9kR3wArPfGTIus0dkjMzrf7PFuGbg=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(1800799015)(376005)(366007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?Mjk4Sko5dlAwbVRsb1c3YnBGUnREdmptbGZKSzRROU1mRE4wWTJKejM1MkRR?=
+ =?utf-8?B?QUlmU3ljOWFKUFpNUlRVSGJqbSt4MUVCWHFFb0JGSUdaTENTRlhvTzZNSU95?=
+ =?utf-8?B?SzB6M1NZeC9KcHNOUkJ3UFVudDZ3Vll1SlRaWE52UElvaDdHZXN3ajdMeEYy?=
+ =?utf-8?B?cFhBUTVOaHk1OTFMZ1JER0lvOUxka0djYXdhOEE5NUdXdGw1Vjh2SFBtMTZK?=
+ =?utf-8?B?UTlKdkV2Rm1GVlVTYUlLVGpnWnYxdHN2cHV1K2tkY2VRUGVTbmlJd2g5LzVj?=
+ =?utf-8?B?Y2E5bGdCMWwvN3pTWjRDMS9rUnJkU3FPaVh3R0liVExmbVl4UTNPOWtVZlpu?=
+ =?utf-8?B?akFaMTJ6ZGVqcjIwMzY5NkFDSzBMSFlyRHhnZWM3bkpKNk5WWkxSODNEN0J6?=
+ =?utf-8?B?MVdrWDJTcWpoRWZWWGFjNkVDYWJDYnRIOEI1SFBtQTFlTTR4QmRJdEhIYXZn?=
+ =?utf-8?B?WklmWUk2bUgxRFAxclduSTh1RzZscGpoMnNRY3dNdnJaSUk0ZytPMkpsa2hZ?=
+ =?utf-8?B?RjNDN2xva0VVSTNxa0lHdEdaejM2R2FnTVg4MjY3ZWZDcC8vai8wZjdvYmR4?=
+ =?utf-8?B?VmdHMXAyUGlnUUdWeG1yUllJUWY4MmRWVjhkVlZ2QnVJRmZmM2JnbXN2UDhP?=
+ =?utf-8?B?RDVvL3hXZDIybWhMM3pvK2ptSmREYVEzMjYxQ2RNTjBiZHg4MnlxY2R4Nmsy?=
+ =?utf-8?B?QmowUTh3dlNDejROQzZzNFk4MDAzSGZBcDlRTHk5SERHditpMDhwL24wNGhz?=
+ =?utf-8?B?VzIzNUpXVVdtR3Y5bnJoU3N4T1hhWlNFT3VzT01TWVp0NG1abWNVK0FSUTlv?=
+ =?utf-8?B?eUYweXB0bVo4MVkxd1BGVlRJR20rdlh1cVNZN0xLUmNjak5xcy9kQko1SUh1?=
+ =?utf-8?B?eUdseW1zVVZXOTEvTjhEc1MyTk5kelNjRGlaeU1CVTV6NkVmNmxMekRWOGRn?=
+ =?utf-8?B?bnp0WG9kK1E3OVhidFR5YUlkTzdwWUNhS2lHZ2ZmR1N0aVpjOHZIbUhGeUxm?=
+ =?utf-8?B?T0tiY09VbUh3QW51Q1FRUEduV3VTSWM5OUdXRDZZSG9DMGl4OGVjR3dqejlz?=
+ =?utf-8?B?a2RWaFhaSUQxSm5xdG15SmVVZytOdGFCMW1CTU9GRGdubThITm1lRHRWUUhv?=
+ =?utf-8?B?U2VvOWRLTjhnMFYxQ1hYTXhPMUh6TitjZ2FZQVE3K1RBWjZIeW9UQ0hOMGZN?=
+ =?utf-8?B?cGh5aHFRaEo1ME5zQkFoeGZLeW1iRWQ3SlY5MkpYUmp2RXQzVVhHRE1Takds?=
+ =?utf-8?B?UmMzSWltbWVjTzdqYjZBd0tDc3o1UGc3UE5VQUluaFQrZkN5Vkw0dGZvYkJZ?=
+ =?utf-8?B?eHVOWW5aSUZ2NnAzdEY3MFg1ZEU1anJteCtLQ0lBd2NFSitXalpTNUhGSE1U?=
+ =?utf-8?B?L002Vkl0dUhyYURDK2cvSnU5Z1ZNQ2R0VWZvTlB0dSsvTnNncE82SWZlVTh3?=
+ =?utf-8?B?RlNYcFd1bDVLS01PRExkY2d5cjZxN1ZjcGx5QmxGUTNSRndTOW84K2JsblBR?=
+ =?utf-8?B?SGt5M0kyL3hPdjJ2Smk5TXJlcUxCYWxJMmVoT090Zk1iUUh3SS9FSy80Z1FD?=
+ =?utf-8?B?c3JBakpyS1dMOHBRSDB5L3BFZWJlRzZQMlh3d3BJRmpzb29jZXZkV3orY1R6?=
+ =?utf-8?B?VUJCNDhTRTY4RXFtVk9wS1hEYk91eE1uNWRkVnhXQWRycXhDcjdQQ2hIWUZv?=
+ =?utf-8?B?cEkvYXYvbjFFelRwVVB3cktkbzV1aDZ5Nlh1Kzh4MFpyRU5NdUEvc3N6aVJr?=
+ =?utf-8?B?ZXpPb3VvTHpVanNnajZLczZCYjRaS0hFRnJzaVRFdVBGSDl3SG1FemVzQlZB?=
+ =?utf-8?B?ZXVoRGJKQzV1VmwrVERQeTNOVzFZV2tCTVhxNVJ2WFpmTy83Q0w2ZTJLWExk?=
+ =?utf-8?B?U0J4ZkNGKzlzTmZYRW1lemY1NzE0eVJaVTM4eVRpMWU3MSs3MnZJNDRaTWJX?=
+ =?utf-8?B?MHl0RlZpdFVGNDlWOVRzYTFRcjkwNjgwVjdMVUxvNDcxQ3A4b1YwL3lUZktU?=
+ =?utf-8?B?TE13c1BNN1dialJROWFiZXh5dVg2Y3gyUk1BSE9zU0lhVXlhc0FDZlYzWFFl?=
+ =?utf-8?B?L1N6RXVLMWhUS2hwdmU0d3ZPT0FiaEx5azdkSXp1cWRQb202aDByalo2OEV4?=
+ =?utf-8?Q?t7LbfOUyCp7rTxopq9FxR+aXA?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ea6acec7-22fd-45fc-d0b3-08dc64589fe7
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2024 12:18:18.5063 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: aYYy/BSqXH5wEZD0IpRW9IggldxgqjQwz/ADTZt2m6FlEeVDBoFVvuNUJEsEjpJ+
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7229
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,90 +218,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Kever,
 
-I also see this issue when switching between Rockchip ATF and Upstream ATF.
 
-Versions:
-Rockchip DDR Blob - rk3399_ddr_800MHz_v1.30.bin
-Rockchip Miniloader - rk3399_miniloader_v1.30.bin
-Rockchip ATF - rk3399_bl31_v1.36.elf
-Upstream ATF - git://git.trustedfirmware.org/TF-A/trusted-firmware-a.git,
-git tag v2.8.0, with RK3399_BAUDRATE changed from 115200 to 1500000 in
-plat/rockchip/rk3399/rk3399_def.h
-U-Boot - git://git.denx.de/u-boot.git, git tag v2022.01
+On 3/22/24 11:57, Sughosh Ganu wrote:
+> 
+> 
+> The following patch series adds support for version 2 of the FWU
+> metadata. The version 2 metadata structure is defined in the latest
+> revision of the FWU specification [1].
+> 
+> The earlier versions of these patches were migrating to a version 2
+> only support in U-Boot, similar to TF-A. However, based on feedback
+> from ST [2], this series has been updated to support both versions. A
+> platform would still be needed to enable one of the two versions of
+> metadata through a config symbol.
+> 
+> TF-A has code which reads the FWU metadata and boots the platform from
+> the active partition. TF-A has decided to migrate the FWU code to a
+> version 2 only support. These changes have been merged in upstream
+> TF-A.
+> 
+> These changes have been tested on the ST DK2 board, which uses the GPT
+> based partitioning scheme. Both V1 and V2 metadata versions have been
+> tested on the DK2 board.
+> 
+> These changes need to be tested on platforms with MTD partitioned
+> storage devices.
+> 
+> @Michal and @Kojima-san, please help in this testing.
+> 
+> Note: The CI is breaking on some sandbox py tests, but the errors look
+> unrelated. I will look into those issues, but the code review can
+> proceed.
+> 
+> [1] - https://developer.arm.com/documentation/den0118/latest/
+> [2] - https://lists.denx.de/pipermail/u-boot/2024-February/546277.html
+> 
+> Changes since V2:
+> * New patch which retains support for V1 of metadata
+> * Earlier patch was catering to v2 only support. These changes support
+>    both versions of metadata.
+> * Earlier patch was migrating to v2 only support. These changes
+>    support both versions.
+> * Support both metadata versions instead of only v2.
+> * Added documentation changes.
+> * Make changes to have the test work with v1 metadata.
+> * Make changes to have the test work with updated logic in fwu code.
+> * Changes to indicate support for both v1 and v2 instead of only v2.
+> * Add config symbol for selecting either of the two metadata versions.
+> 
+> 
+> Sughosh Ganu (20):
+>    configs: fwu: remove FWU configs for metadata V2 support
+>    tools: mkfwumdata: fix the size parameter to the fwrite call
+>    drivers: fwu: add the size parameter to the metadata access API's
+>    drivers: fwu: mtd: allocate buffer for image info dynamically
+>    fwu: metadata: add support for version 2 of the structure
+>    fwu: metadata: add a version agnostic structure
+>    fwu: metadata: add functions for handling version specific metadata
+>      fields
+>    fwu: make changes to access version agnostic structure fields
+>    capsule: fwu: transition the platform state on a successful update
+>    fwu: add config symbols for enabling FWU metadata versions
+>    fwu: mtd: remove unused argument from function call
+>    fwu: mtd: get MTD partition specific info from driver
+>    fwu: mtd: obtain image information from version agnostic structure
+>    cmd: fwu: make changes for supporting FWU metadata version 2
+>    tools: mkfwumdata: add support for metadata version 2
+>    tools: mkfwumdata: add logic to append vendor data to the FWU metadata
+>    test: fwu: make changes to the FWU metadata access test
+>    doc: fwu: make changes to reflect support for FWU metadata v2
+>    MAINTAINERS: add entry for FWU multi bank update feature
+>    configs: fwu: re-enable FWU configs
+> 
+>   MAINTAINERS                              |   8 +
+>   cmd/fwu_mdata.c                          |  39 ++--
+>   configs/corstone1000_defconfig           |   1 +
+>   configs/sandbox64_defconfig              |   1 +
+>   configs/synquacer_developerbox_defconfig |   2 +-
+>   doc/board/socionext/developerbox.rst     |   7 +-
+>   doc/develop/uefi/fwu_updates.rst         |  20 +-
+>   doc/mkfwumdata.1                         |  16 +-
+>   drivers/fwu-mdata/fwu-mdata-uclass.c     |  10 +-
+>   drivers/fwu-mdata/gpt_blk.c              |  23 +-
+>   drivers/fwu-mdata/raw_mtd.c              |  78 ++++---
+>   include/fwu.h                            | 147 ++++++++++++-
+>   include/fwu_mdata.h                      |  71 ++++++-
+>   lib/efi_loader/efi_capsule.c             |  14 +-
+>   lib/fwu_updates/Kconfig                  |  14 ++
+>   lib/fwu_updates/Makefile                 |   2 +
+>   lib/fwu_updates/fwu.c                    | 204 ++++++++++++------
+>   lib/fwu_updates/fwu_mtd.c                |  34 +--
+>   lib/fwu_updates/fwu_v1.c                 | 167 +++++++++++++++
+>   lib/fwu_updates/fwu_v2.c                 | 260 +++++++++++++++++++++++
+>   test/dm/fwu_mdata.c                      |  16 +-
+>   tools/mkfwumdata.c                       | 235 ++++++++++++++++----
+>   22 files changed, 1153 insertions(+), 216 deletions(-)
+>   create mode 100644 lib/fwu_updates/fwu_v1.c
+>   create mode 100644 lib/fwu_updates/fwu_v2.c
+> 
 
-Results:
-Rockchip DDR Blob + Rockchip Miniloader + Rockchip ATF + U-Boot = DMA working
-  dma-pl330 ff6d0000.dma-controller: Loaded driver for PL330 DMAC-241330
-  dma-pl330 ff6d0000.dma-controller:       DBUFF-32x8bytes Num_Chans-6
-Num_Peri-12 Num_Events-12
-  dma-pl330 ff6e0000.dma-controller: Loaded driver for PL330 DMAC-241330
-  dma-pl330 ff6e0000.dma-controller:       DBUFF-128x8bytes
-Num_Chans-8 Num_Peri-20 Num_Events-16
-Rockchip DDR Blob + Rockchip Miniloader + Upstream ATF + U-Boot = DMA
-not working
-  OF: amba_device_add() failed (-19) for /bus/dma-controller@ff6d0000
-  OF: amba_device_add() failed (-19) for /bus/dma-controller@ff6e0000
+FYI: We are working on changes in early firmware (img selector) to test this 
+code on Kria platforms.
 
-I can't check the Rockchip ATF source code as it isn't available.
-Any idea what is different between Rockchip ATF and Upstream ATF for
-DMA to work properly?
-
-Regards,
-Jonathan
-
-On Mon, 3 Apr 2023 at 18:38, Kever Yang <kever.yang@rock-chips.com> wrote:
->
-> Hi Christoph,
->
->      The ARM PL330 DMA driver in kernel only relate to:
->
-> - DTS kernel used, can be check in /proc/device-tree/
->
-> - kernel driver which should mach the compatible name.
->
-> This driver should has nothing to do with U-Boot SPL or TF-A, because we
-> don't have any special setting for PL330 in loader stage.
->
->
-> Thanks,
->
-> - Kever
->
-> On 2023/4/3 03:01, Christoph Fritz wrote:
-> > Hello Kever,
-> >
-> >   on a rk3399, booting current U-Boot SPL with mainline TF-A leads to
-> > missing DMA (and no sound) on Linux.
-> >
-> > However, when using rockchip its so called mini-loader
-> > (rk3399_miniloader_v1.26.bin) and their BL31 (rk3399_bl31_v1.35.elf) to
-> > boot, DMA works perfectly fine.
-> >
-> > Tested on a custom rk3399 board and on ROCK Pi4.
-> >
-> > Attached to this mail are two boot logs with some debug prints:
-> >
-> >   - good_amba_log.txt (DMA works)
-> >   - no_amba_log.txt (no DMA device)
-> >
-> > The main difference I can spot between the two logs is that on Linux
-> > (drivers/amba/bus.c) AMBA_CID (0xb105f00d) cannot be found. Instead,
-> > only some CORESIGHT_CIDs (presumably for debugging) and four 0x00000000
-> > CIDs are detected.
-> >
-> > As a result, the "PL330 DMAC-241330" driver does not load. My theory is
-> > that DMA needs to be allowed somewhere in the undocumented syscon-
-> > registers, similar to what U-Boot is already doing for eMMC in
-> > arch_cpu_init() (arch/arm/mach-rockchip/rk3399/rk3399.c).
-> >
-> > Any ideas?
-> >
-> > Or maybe I'm just missing some configuration?
-> >
-> > Since multiple software projects are involved (TF-A, OP-TEE, U-Boot,
-> > Linux), I Cc'ed a bit.
-> >
-> >   Thanks
-> >    -- Christoph
+Thanks,
+Michal
