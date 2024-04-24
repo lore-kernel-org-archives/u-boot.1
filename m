@@ -4,175 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D09F9C4345F
-	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 09:12:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B14FC4345F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 09:21:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAA6B88D92;
-	Wed, 24 Apr 2024 11:12:08 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
+	by phobos.denx.de (Postfix) with ESMTP id 96BD088D56;
+	Wed, 24 Apr 2024 11:21:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="gyK8xrqf";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="UaN27bbH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B22FF88D92; Wed, 24 Apr 2024 11:12:07 +0200 (CEST)
-Received: from EUR04-DB3-obe.outbound.protection.outlook.com
- (mail-db3eur04on0700.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:fe0c::700])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6C69B88D35; Wed, 24 Apr 2024 11:21:44 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33FB888D0B
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 11:12:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=theobroma-systems.com
+ by phobos.denx.de (Postfix) with ESMTPS id D159F88D81
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 11:21:41 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=quentin.schulz@theobroma-systems.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=oNxeAO/hoqejD7IO+ukTevyCPzF7rfN1+NV7MJAD6anjynRwmW31DBzEfCBu4j2T19lNMLkRIEudGJyWzGoqluav6YnWI//GxxWmVUMcI+hwIdRoHlzX8Fh8UcjEl5iBbuyo74HOLYaCGE6ey9lGk+G9vG8N8rTSgHCeAtznbVets/n0vAXQDCvmvGbP7QDkZBaFREbdfjj6FCj9fbJcbaHNxE+sBjnbfDqX//Jidy1GCV3kyqvHplTytPh117G7vWczWY4ZTxvFwv/zmSPxuMg75fpvlbVlRWlpEtFwaryb7XwykNpImj/fTFQeWwEzgawL4qbZuvcmuenYgVh6gQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rWt7BI6ZCdAGA8+3+zda/K87mwl5Lo1db5wskxri21Y=;
- b=biQmZlJknL9OFQDumqFRD2p65PrKVDoc8v5XTZq0CqzaLHM0UGwh0Ab77vOTYdoBjENFzHb+srbmXY6FiELqlZdKlpsOv/B0EThBfED7gEVIj67Lu2+oSAySAfyxlDuvUDd+9brENKIgW8YsadtMUzQ0yrOsFghBK/xFz0WqBPkKYRQ1uegn05j+3BDJ2EOops/T9tKF+SSL03KiavtR7KSEva9JPasjFU6MAZ4LtYm/NOPU1d4sP5F3d7nEiM9j5wFFLTQ9JbVkastWyFSXHNhGO5ehyslZR/yCJGfMmjeiyjt95JXfLc0rNT9FURTTF4TYY2ku07aejG3Ympr06Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
- header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rWt7BI6ZCdAGA8+3+zda/K87mwl5Lo1db5wskxri21Y=;
- b=gyK8xrqf6MEw/IoRs5JvkL6P3fg5rOslukFDXI3c0lRG9GPM3K3KcQP+7+cydpVEwQ6gBQWwwZCaHNOgZwDxToGxKqLiah/RwQt/dWfHYKlRmTeX03l+0ueaj99aJQh4jlqg/i5UJh9BkSXzKxQV+Wym/2RQAVXlbqklF+p7I97/Om7I6mZQlaVoTQY0j+T0og1mRkHHueWq+YrU56LrIhXd2lLpvGsv+/xOR2DrweoDYkKwsIiKFpBX1vNHb+2VHbCruA0Hf4rjBqQ+qUKiAGQjNGVr+dCeDRXzOOd0O1+0BJFr7g+ApBs0bViLx9gapyqinMOKcfWiGWtssp84Ew==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
-Received: from AM0PR04MB4833.eurprd04.prod.outlook.com (2603:10a6:208:c2::30)
- by AS8PR04MB7847.eurprd04.prod.outlook.com (2603:10a6:20b:2ad::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.44; Wed, 24 Apr
- 2024 09:11:58 +0000
-Received: from AM0PR04MB4833.eurprd04.prod.outlook.com
- ([fe80::70be:f731:f7e6:a785]) by AM0PR04MB4833.eurprd04.prod.outlook.com
- ([fe80::70be:f731:f7e6:a785%5]) with mapi id 15.20.7472.044; Wed, 24 Apr 2024
- 09:11:58 +0000
-Message-ID: <efeed0e2-3593-473c-b5b3-e2ceca78ddbd@theobroma-systems.com>
-Date: Wed, 24 Apr 2024 11:11:54 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/11] rockchip: sdram: Support getting banks from TPL
- for rk3568 and rk3588
-To: Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <foss+uboot@0leil.net>,
- Kever Yang <kever.yang@rock-chips.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, John Clark <inindev@gmail.com>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>,
- Eugen Hristev <eugen.hristev@collabora.com>, Andy Yan <andyshrk@163.com>,
- Elon Zhang <zhangzj@rock-chips.com>, Joshua Riek <jjriek@verizon.net>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Heiko Stuebner <heiko.stuebner@cherry.de>, Jagan Teki <jagan@edgeble.ai>,
- Frank Wunderlich <frank-w@public-files.de>,
- Joseph Chen <chenjh@rock-chips.com>, Tianling Shen <cnsztl@gmail.com>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Akash Gajjar <gajjar04akash@gmail.com>, u-boot@lists.denx.de,
- Chris Morgan <macromorgan@hotmail.com>
-References: <20240415-rk35xx-dram-atags-v3-0-5bc5475b3c0d@theobroma-systems.com>
- <20240415-rk35xx-dram-atags-v3-1-5bc5475b3c0d@theobroma-systems.com>
- <2dc654c5-2f03-4f69-9e5f-e4ad5091b844@kwiboo.se>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-In-Reply-To: <2dc654c5-2f03-4f69-9e5f-e4ad5091b844@kwiboo.se>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: WA0P291CA0001.POLP291.PROD.OUTLOOK.COM
- (2603:10a6:1d0:1::27) To AM0PR04MB4833.eurprd04.prod.outlook.com
- (2603:10a6:208:c2::30)
+ smtp.mailfrom=SRS0=2dea=L5=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1713950489;
+ bh=I5kVO/4iaWm2QWAGxzGujHoQF7SR9mGD5M/2Pjqigxc=;
+ b=UaN27bbHBrN9fapnnFaP5iiepWj0xrdnAI5PmdWddffvg6iZb4GPj6Tren6lWgA9c/pCwxWrZ
+ /j/Si5+MEptiKOWanprPVRW6Cd3Vo/zY5Y7y7zYX1kwCS0ZYhdmxc9ikfhOQVd6hE12to8HeRCz
+ Z83fAFon78ThOZcZEtbovrXwQkBG8stOhqYW3ankhbsxnZhLMejAY1WjFO89D+4ECOcXDdoSQvp
+ gH0JFwwtZYSHrFydOUN4Do1PW+vAdvVn5PYjIL9sNzUKZa0iZwYDKmxVUUjRTtsiJKjGmV9Duhg
+ DtK7CWAiTMfBlBjza7cLhY5y5jdK0jLjNvohR0/oxe/Q==
+Message-ID: <3a63ce41-cde0-4c38-82eb-3e2a6d8f544f@kwiboo.se>
+Date: Wed, 24 Apr 2024 11:21:24 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM0PR04MB4833:EE_|AS8PR04MB7847:EE_
-X-MS-Office365-Filtering-Correlation-Id: a056da10-98f7-4eab-1bb9-08dc643e97d8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?emtvdUNISUNmK3RFd1dWWlNtRG95SnVtNlJQdm5zM1lwK3ZuVWQ2b0QvOTNS?=
- =?utf-8?B?cWU4bCt3ck9iNXBBRFR6RFhqK1NvN0VMazcra29uVXRwVWIxY2RpcURIa1Fp?=
- =?utf-8?B?TDRTUzUrd2VYRHZpYVFaYU9peXZRS3EwSkVYa2dwMThWWUpTVjVoT3BGYS93?=
- =?utf-8?B?Ymt2RjZxaXhKSkhWaXl3ZldzZUs1WkFrVkNIeUhTT2VGNFRzTCtTNGZ6UnEv?=
- =?utf-8?B?ejFqNHFHQ2VaWnk1ZE5FZldJTUdRV3QydWtZamYzQ0xNMzFoTm1xcGRwUkFl?=
- =?utf-8?B?cVk3ODV0KzZDWjA5Nm13R0tmVjl5RTRBSzVQWm5VK0Y1Q3F6SHVFZlFZVTJO?=
- =?utf-8?B?Vmp0aitMVXVOVlB5SHZYdVpnbUNEYlczVDBldDdqT1p4UW1BSFBHUlNicFBC?=
- =?utf-8?B?a0V0dTM2dDBPTWtld2xKdEN5Q09JclJCbCtNdHNvSkR2NlZJR0hPTDU4am4y?=
- =?utf-8?B?M2RVUjBuUlEwZzhZZUVRT2dnazJyOUFWRmVsaHoyWlRrRXRlaGNMVlBhZWIx?=
- =?utf-8?B?WjNVakNtYVRBd2k3WVNIY2lVcUtoUG4zOUhkbVcyMlBwamZ4c2J1aVlKcGxi?=
- =?utf-8?B?aVdJMjBTODQxcW5sN3F0THppbkQxd3k3VWdsdXJ2clVzUVpwZVh4V1VtYTJr?=
- =?utf-8?B?SlkrdW9qakxrbGhWc0RNd1VQYXRFU05QaUg3YlNOTEFTVjlHbGdmY0puVlRV?=
- =?utf-8?B?SzhjeHNCeFJMUkhrY2NhemJiME91alQxVlB3cU1BaDBuRnQ3YVZyNjVKejVE?=
- =?utf-8?B?R2M3VjBvV0pNRWllUmFVaFhJZzRWZjltZHdSc3ZXNFdhV3haQU9rcnQyNXpI?=
- =?utf-8?B?dWRDNUFqei9SR3Z6T0ZCcGw2NEZ2S1lpY2lNZER5MUZzZG9hNEs2RTUzSTZy?=
- =?utf-8?B?dDNFMWNhNHRScTR5b05VTjh1UjluY0RpUmpxN3NNVEsyVFFHMERsOW8xVm51?=
- =?utf-8?B?bUpLY00vSmhpTmFHZEJNaXpvU1RiMzdnOU4vQi9ZTnpXY0ZnYnRGb0xQSnMy?=
- =?utf-8?B?VE9BQzhkZ0t2ZWVLZXF0Z0swSk1MR0MwZ2dMcjlFSStaellrbWNuSGJVVEJX?=
- =?utf-8?B?TzA5WVVUMzU5eG9MOGhudG1lQ1N5SXpIMUh3Y1ZzVjF0MWRsTVF4Q2lQeFov?=
- =?utf-8?B?dWVEeVZ4WHl5eHMzSjM1ZGVqTzZyQWlSVHlSYXB3bWNqbFJiSzYzT2FXODVw?=
- =?utf-8?B?U2NCQUwvTTUyN0hnTGc5TUR3TEhVd0d1TFJRc3JCREZxUXdKR3BMV2hvQW5t?=
- =?utf-8?B?cEJHQnpYaG81QmFZejhXcjNidDRGUVEvSXdiczRhdXBHcFBkZHRkMlRQV1pT?=
- =?utf-8?B?S3UzY3JYYTBQMDFEdGNQME1Xd3ZZa3ROTkNROGFtVjNuL2NPSDZsREFLQkg1?=
- =?utf-8?B?dCtMMkprWTBGTEJNYlcwRVgvakpYU3pKd2FPdzBHZFZVbEpxbmtiZlVlU003?=
- =?utf-8?B?UDIwbUhOYkJ4blFTRmtZOW1WSFFUYmx5aTRYZnlkVk91a1FpNjd5ZHd2TkNa?=
- =?utf-8?B?TGdIV2V2eHdRTGpKd2QvRWpBcGFQSEhwTW4wMDY4Y0RDYWk2TzZMUk9tYmFt?=
- =?utf-8?B?R21remUyanl6TjYzYk1aOGxad0ZyRUxnbUg1M3NsSEJ1ejBEWlozQm1xRldx?=
- =?utf-8?B?Q3VKTWZkYnhVSFFuQUhwSTdpbkRxNVd1ZWd6M0lRSmJqUlBZa3l2Q2t1c3dY?=
- =?utf-8?B?SG9vOENzaG1HYnRxZDUzRndLTDU2cktneUdnaWFkS3JWZmlHY2RiSHRnPT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM0PR04MB4833.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(7416005)(376005)(1800799015)(366007); DIR:OUT; SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZkFvbmc5dmFvVGhXZVZTYUtaVERHUnBTN3NVeVgyc25PTm9pUm5xUTk5RmdZ?=
- =?utf-8?B?QjF5TlJFWVZjNVdFTWtEYU5jS0hBWUdGT1BQcUw1VnBpeTg5NXQwemx1MGZR?=
- =?utf-8?B?bSt6UVpIaG9HL2NjdWNDT2dTOWpqVkxoQm82Z05ORElpYlhtcWVRbHFrTzdz?=
- =?utf-8?B?VjFFUVl1TzNFbEphZDhucVNIQmtDYnd3Q1VaOXVsQzJJL3ZBNVg3TXNjWnRG?=
- =?utf-8?B?dTVsSG1ESm1JbndEWTRSVERWcTUwNlFiM25UUXA1QnFERTdMbWNqSzZyamZH?=
- =?utf-8?B?L0JqT244UEdqSGFWbDgrYWVVelAzTXJxOVA4STBJZWtBaUtOU1REWk84S3FO?=
- =?utf-8?B?bzNUMDZUeW5QWFpRRzAySjgrOWZHamU0QlVGekU0Y2E0cGVaV3BiN0dEdGlB?=
- =?utf-8?B?UHpQUEdsSVVhMGo3a2ZWelUwQ0JnZVJVNVVtVzErS0ZpQklNOGNmZFh1QjBz?=
- =?utf-8?B?MU54THErSG9tMEw3aTVOcEdCUmhFR3pCRmVyMnd0aW1JU1JWUXhnNmpWemVC?=
- =?utf-8?B?eTdOUTUzNHFZK1RFZEVXWHJEeFdBTFNCYzdVR2R0TytqcEl2cmNhM1VXMEJh?=
- =?utf-8?B?LzB5NzBvaExac2x1SHVMV081VGt0bHJwNVRGeFltSXQ3QUlveXd6NHRycFp5?=
- =?utf-8?B?S0djOXc2ZDNQV21NQjE3bWc4MDgxMTRhU1pGS20zR1JEckozQlFmOGNlZUZO?=
- =?utf-8?B?d1dNRVRJM0hSbmJlUEZLS0QvaVZWOUZLOXViZTlsZ0lkeXRIZFBWVFdMMVZZ?=
- =?utf-8?B?NFFHMFYwWnp3Nm1KMlgydjFEckJlbnQ4NkpMV2NXTkJHditwZk1udk4wME4r?=
- =?utf-8?B?RzNVcXkwbFM5WTFDcUwrdjRUcUZielB0QkszWXR1alowZ0FUU1FDdkhvQzd1?=
- =?utf-8?B?a0d2V1owZmlLZDB1WWtjbmlEQVpkQkx5QkNOSXZQckxGU3FVaU9oeUUwTFdW?=
- =?utf-8?B?VHBZZjVlWm5zMGF4QlY2WkpoeU5sTnpDLzRqeC9SK0RYcm5nM1Rqemw5aW9h?=
- =?utf-8?B?UEwvbkVmR1RSVkoycS95WkRPVmRUdGpURzhTUEExRkFOa3IxbDVXY3lDMTY0?=
- =?utf-8?B?cDIzNU5vUS9aMEpxNm5TUUovdUpqU0grWEl2b3l2eTVBQTlZaFgweGVSZjcr?=
- =?utf-8?B?dW5YQVppNW40clFlUnF0LzdLQUEyVG1zQ1dVeUhsRDUzZ081M2Y5UkFJQTNK?=
- =?utf-8?B?QVFzeVFXQjZKNlgrT001a2F3RDA3ZHhCYVBHUUc2VmsyTGlZdU03UjVKbkts?=
- =?utf-8?B?Q2ppSkRZejJoLzY1R0NKakZUb09BLzFYd21tSXV1YnNKQW9RRzlibWtsN1BQ?=
- =?utf-8?B?Uy9CTjh0TE1RNzBuYjZQRE02RzNCY25PeWErcDJnWDQyS1JJMnVacGkzZWly?=
- =?utf-8?B?RmZHQnBVajdZMVpEVW5HQzYwNGxEUVAxR1Q4VVJXOVZ4YmpqeXZrT0Noa3Mv?=
- =?utf-8?B?Q0JiWUt4RGY0RGR5aHdXV0xiQStFMXZORklBMjlzeTk3c1hTVEt1YUFTVU5Z?=
- =?utf-8?B?OXNBNWlsVlpiRHNnWGhMdXdZNnZtclRqcC9TZi9VNHBYN1MxQUhVMVVSdHkv?=
- =?utf-8?B?UTdJdjBMWmhSR3N3eHlYdkhqbnVpaFV2NHNjc3ZOUHZOdmRSd0xZRXBsRWF3?=
- =?utf-8?B?alAxS3cxNWlKZTFNLzltbitsbVBDV3JGT2lRUWoxcE1BU2ZDTTExcEd5cCtk?=
- =?utf-8?B?R2YycWxRbkR4eGMwVkVIRnExK2VGb1RKTGlBaXNkZ0ErdU1kWFM3cUlWbXR3?=
- =?utf-8?B?UHltQ2E0Y0ZRbTVXQ0F6aXUzazFCNnhmeTZTbUZUekxRdEtxYjY1aSs4VkNY?=
- =?utf-8?B?MlpDNk52eEJRaVZzZUZXcm5qSmxkMFR5SVFGRGZ0STNzeHY5YTlaWFFBQ3dQ?=
- =?utf-8?B?OFdWY0dPZmJIUlAydHJWUFNtOGM3Zloyd0ZQdHY5WngwaTFXSmZ4WEF4b0pZ?=
- =?utf-8?B?U21YZmdTcnRwczVCZ05Ic0NrWGxjam9QQUFSSFIzcWUxYldSblE2cWRRSWtz?=
- =?utf-8?B?aUNCOWtQR3lzZVM5bmNIdEh4TFlya1V4ZzhJemFMNEg4UFozQzRySExJcFE1?=
- =?utf-8?B?SzJIZktCMFN1eGZkTk1XN1FyZnoxV1pBS2xhY1dxbTQ2amhHUEszeSt4emFq?=
- =?utf-8?B?UTBxMklWWE5XczRrSE1DWHFYSExVcVQ5V0ZsZUtFaWRHTlJTckZqRTdNVHh5?=
- =?utf-8?B?dGk5Nm9SbjlPam14MWJVV0RKSW5kTkpaWi9JclFJNmtXNVNSM3NVSU80VFdU?=
- =?utf-8?B?UTZPWHN2REZYMThmd05XU2dPUWVnPT0=?=
-X-OriginatorOrg: theobroma-systems.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a056da10-98f7-4eab-1bb9-08dc643e97d8
-X-MS-Exchange-CrossTenant-AuthSource: AM0PR04MB4833.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Apr 2024 09:11:58.2930 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 2HReND0w/2ExmRWoG8g62KxcIX2+e+7BvFBtuQnZGLNECWKu+RLv5/BGR7oMiSYGD3vi5eaVLbYvNEFTxZdGhf7L50xMvpCpg0FedAlJqsRCBjSXWmCwWgYbo3zWGgEb
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7847
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/31] rockchip: rk3399: Sync DT with linux v6.8 and
+ update defconfigs
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20240331202921.262323-1-jonas@kwiboo.se>
+ <cbd1e26f-8ff1-430b-b7d2-5d07cf01d9d0@rock-chips.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <cbd1e26f-8ff1-430b-b7d2-5d07cf01d9d0@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 6628cf18a8a4ed7410e87aaa
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -189,73 +75,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Kever,
 
-On 4/24/24 00:40, Jonas Karlman wrote:
-> Hi Quentin,
+On 2024-04-23 13:27, Kever Yang wrote:
+> Hi Jonas,
 > 
-> On 2024-04-15 16:16, Quentin Schulz wrote:
->> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-[...]
-
->> +			if (!(tmp_mem_map->attrs & PTE_BLOCK_NON_SHARE)) {
 > 
-> This check does not seem to work because PTE_BLOCK_NON_SHARE evaluates
-> to 0. Because of this the logic to split the 0-8 GiB bank reported on
-> rk3568 is never split in two.
+> On 2024/4/1 04:28, Jonas Karlman wrote:
+>> This series adds support for new clocks used in linux v6.8 device trees,
+>> enables use of FIT signature check for checksum validation and fixes
+>> loading FIT from SD-card when loading FIT from eMMC fails.
+>>
+>> After this series it should be possible to move RK3399 boards to use
+>> OF_UPSTREAM in a future patch once dts/upstream move to a v6.8+ tag.
+>>
+>> I have runtime tested this series on following devices:
+>> - 96boards Rock960
+>> - Khadas Edge Captain
+>> - Pine64 PineBook Pro
+>> - Pine64 RockPro64
+>> - Radxa ROCK 4C+
+>> - Radxa ROCK 4SE
+>> - Radxa ROCK Pi 4A
+>> - Radxa ROCK Pi 4B+
+>>
+>> This series depends on the following series:
+>> - Enable booting from SPI flash on ROCK Pi 4 [1]
+>> - rockchip: spl: Cache boot source id for later use [2]
 > 
+>      This patch set not able to apply after this dependent patchset 
+> update to v2,
+> 
+> please help to send a new version.
 
-Oof, that's a bit oversight, thanks for the catch.
+Thanks, I will try to split this series in two parts and send a v2
+in a day or two.
 
-Can you test the following please?
+First part will focus on patches up to and including "rockchip: rk3399:
+Fix loading FIT from SD-card when booting from eMMC". And second part
+will focus on updating DTs from v5.x to v6.8, and any pre-requirement
+for doing so.
 
-"""
-diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
-index 5b1ff1e5495..0492f9b9f41 100644
---- a/arch/arm/mach-rockchip/sdram.c
-+++ b/arch/arm/mach-rockchip/sdram.c
-@@ -196,7 +196,23 @@ static int rockchip_dram_init_banksize(void)
-  			const phys_size_t rsrv_size = tmp_mem_map->size;
-  			const phys_addr_t rsrv_end = rsrv_start + rsrv_size;
+Will also send a "third" part that moves the recently updated SoCs to
+OF_UPSTREAM, i.e. rk3308, rk3328, rk3399, rk356x and possible rk3588.
 
--			if (!(tmp_mem_map->attrs & PTE_BLOCK_NON_SHARE)) {
-+			/*
-+			 * DRAM memories are expected by Arm to be marked as
-+			 * Normal Write-back cacheable, Inner shareable[1], so
-+			 * let's filter on that to put holes in non-DRAM areas.
-+			 *
-+			 * [1] 
-https://developer.arm.com/documentation/102376/0200/Cacheability-and-shareability-attributes
-+			 */
-+			const u64 dram_attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-+				PTE_BLOCK_INNER_SHARE;
-+			/*
-+			 * (AttrIndx | SH) in Lower Attributes of Block
-+			 * Descriptor[2].
-+			 * [2] 
-https://developer.arm.com/documentation/102376/0200/Describing-memory-in-AArch64
-+			 */
-+			const u64 attrs_mask = PMD_ATTRINDX_MASK | GENMASK(9, 8);
-+
-+			if ((tmp_mem_map->attrs & attrs_mask) == dram_attrs) {
-  				tmp_mem_map++;
-  				continue;
-  			}
-"""
+Regards,
+Jonas
 
-The DRAM mem_map entry for Rockchip devices seems to have those 
-attributes and no other non-DRAM entry seems to have 
-PTE_BLOCK_MEMTYPE(MT_NORMAL).
+> 
+> 
+> Thanks,
+> 
+> - Kever
+> 
+>>
+>> A copy of this series and all its depends can be found at [3]
+>>
+>> [1] https://patchwork.ozlabs.org/cover/1912469/
+>> [2] https://patchwork.ozlabs.org/cover/1915071/
+>> [3] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3399-dt-sync-v1
+>>
+>> Jonas Karlman (31):
+>>    rockchip: rk3399-gru: Fix max SPL size on bob and kevin
+>>    rockchip: rk3399-ficus: Enable TPL and use common bss and stack addr
+>>    rockchip: rk3399: Sort imply statements alphabetically
+>>    rockchip: rk3399: Enable ARMv8 crypto and FIT checksum validation
+>>    rockchip: rk3399: Enable random generator on all boards
+>>    rockchip: rk3399: Imply support for GbE PHY
+>>    rockchip: rk3399: Enable DT overlay support on all boards
+>>    rockchip: rk3399: Remove use of xPL_MISC_DRIVERS options
+>>    rockchip: rk3399: Add a default spl-boot-order prop
+>>    rockchip: rk3399: Fix loading FIT from SD-card when booting from eMMC
+>>    clk: rockchip: rk3399: Rename SCLK_DDRCLK to SCLK_DDRC
+>>    clk: rockchip: rk3399: Add dummy support for ACLK_VDU clock
+>>    clk: rockchip: rk3399: Add dummy support for SCLK_PCIEPHY_REF clock
+>>    clk: rockchip: rk3399: Add SCLK_USB3OTGx_REF support
+>>    rockchip: rk3399: Sync soc device tree from linux v6.8
+>>    rockchip: rk3399-gru: Sync device tree from linux v6.8
+>>    rockchip: rk3399-puma: Sync DT from linux v6.8
+>>    rockchip: rk3399-rock-pi-n10: Sync device tree from linux v6.8
+>>    rockchip: rk3399-eaidk-610: Sync device tree from linux v6.8
+>>    rockchip: rk3399-leez: Sync device tree from linux v6.8
+>>    rockchip: rk3399-evb: Sync device tree from linux v6.8
+>>    rockchip: rk3399-firefly: Sync device tree from linux v6.8
+>>    rockchip: rk3399-orangepi: Sync device tree from linux v6.8
+>>    rockchip: rk3399-roc-pc: Sync device tree from linux v6.8
+>>    rockchip: rk3399-nanopi-4: Sync device tree from linux v6.8
+>>    rockchip: rk3399-rock960: Sync device tree from linux v6.8
+>>    rockchip: rk3399-khadas: Sync device tree from linux v6.8
+>>    rockchip: rk3399-rock-pi-4: Sync device tree from linux v6.8
+>>    rockchip: rk3399-rockpro64: Sync device tree from linux v6.8
+>>    rockchip: rk3399-pinebook-pro: Sync device tree from linux v6.8
+>>    rockchip: rk3399-pinephone-pro: Sync device tree from linux v6.8
+>>
+>>   arch/arm/dts/rk3288-vmarc-som.dtsi            |  48 +++
+>>   arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi     |   1 -
+>>   arch/arm/dts/rk3399-eaidk-610.dts             |   3 +-
+>>   arch/arm/dts/rk3399-evb-u-boot.dtsi           |  13 +-
+>>   arch/arm/dts/rk3399-evb.dts                   |   3 +-
+>>   arch/arm/dts/rk3399-ficus-u-boot.dtsi         |  10 +-
+>>   arch/arm/dts/rk3399-ficus.dts                 |   4 +
+>>   arch/arm/dts/rk3399-firefly-u-boot.dtsi       |   6 -
+>>   arch/arm/dts/rk3399-firefly.dts               |  17 +-
+>>   arch/arm/dts/rk3399-gru-bob.dts               |   8 +-
+>>   arch/arm/dts/rk3399-gru-chromebook.dtsi       | 200 +++++++++++-
+>>   arch/arm/dts/rk3399-gru-kevin.dts             |   3 +-
+>>   arch/arm/dts/rk3399-gru-u-boot.dtsi           |  34 ++-
+>>   arch/arm/dts/rk3399-gru.dtsi                  |  52 +++-
+>>   arch/arm/dts/rk3399-khadas-edge-captain.dts   |   4 +
+>>   arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi   |   7 +-
+>>   arch/arm/dts/rk3399-khadas-edge-v.dts         |   4 +
+>>   arch/arm/dts/rk3399-khadas-edge.dtsi          |  10 +-
+>>   arch/arm/dts/rk3399-leez-p710-u-boot.dtsi     |   6 -
+>>   arch/arm/dts/rk3399-leez-p710.dts             |   8 +-
+>>   arch/arm/dts/rk3399-nanopc-t4.dts             |   2 +-
+>>   arch/arm/dts/rk3399-nanopi-m4-2gb.dts         |  55 +---
+>>   arch/arm/dts/rk3399-nanopi-m4b.dts            |   2 +-
+>>   arch/arm/dts/rk3399-nanopi-r4s.dts            |   4 +-
+>>   arch/arm/dts/rk3399-nanopi4-u-boot.dtsi       |  18 +-
+>>   arch/arm/dts/rk3399-nanopi4.dtsi              |   7 +-
+>>   arch/arm/dts/rk3399-op1-opp.dtsi              |  31 +-
+>>   arch/arm/dts/rk3399-opp.dtsi                  |   6 +-
+>>   arch/arm/dts/rk3399-orangepi-u-boot.dtsi      |  12 +
+>>   arch/arm/dts/rk3399-orangepi.dts              |  12 +-
+>>   arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi  |  23 +-
+>>   arch/arm/dts/rk3399-pinebook-pro.dts          |  24 +-
+>>   arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi |  24 +-
+>>   arch/arm/dts/rk3399-pinephone-pro.dts         | 147 +++++++++
+>>   arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi   |  27 +-
+>>   arch/arm/dts/rk3399-puma-haikou.dts           |  42 ++-
+>>   arch/arm/dts/rk3399-puma.dtsi                 |  17 +-
+>>   arch/arm/dts/rk3399-roc-pc-u-boot.dtsi        |  45 +--
+>>   arch/arm/dts/rk3399-roc-pc.dtsi               |  15 +-
+>>   arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi  |  20 ++
+>>   arch/arm/dts/rk3399-rock-4c-plus.dts          |   1 +
+>>   arch/arm/dts/rk3399-rock-4se-u-boot.dtsi      |  12 +
+>>   arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi     |   6 -
+>>   arch/arm/dts/rk3399-rock-pi-4.dtsi            |   4 +-
+>>   arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi    |   7 +
+>>   arch/arm/dts/rk3399-rock-pi-4c.dts            |  10 +
+>>   arch/arm/dts/rk3399-rock960-u-boot.dtsi       |  11 +-
+>>   arch/arm/dts/rk3399-rock960.dtsi              |   5 +-
+>>   arch/arm/dts/rk3399-rockpro64-u-boot.dtsi     |  22 +-
+>>   arch/arm/dts/rk3399-rockpro64.dtsi            |  98 +++++-
+>>   arch/arm/dts/rk3399-u-boot.dtsi               | 129 +++++---
+>>   arch/arm/dts/rk3399.dtsi                      | 289 ++++++++++++++++--
+>>   .../arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi |   6 -
+>>   arch/arm/dts/rk3399pro-vmarc-som.dtsi         |  20 +-
+>>   .../dts/rockchip-radxa-dalang-carrier.dtsi    |  21 ++
+>>   arch/arm/mach-rockchip/Kconfig                |  38 ++-
+>>   configs/chromebook_bob_defconfig              |   6 +-
+>>   configs/chromebook_kevin_defconfig            |   6 +-
+>>   configs/eaidk-610-rk3399_defconfig            |  13 +-
+>>   configs/evb-rk3399_defconfig                  |  10 +-
+>>   configs/ficus-rk3399_defconfig                |  38 +--
+>>   configs/firefly-rk3399_defconfig              |  17 +-
+>>   configs/khadas-edge-captain-rk3399_defconfig  |  35 ++-
+>>   configs/khadas-edge-rk3399_defconfig          |  29 +-
+>>   configs/khadas-edge-v-rk3399_defconfig        |  35 ++-
+>>   configs/leez-rk3399_defconfig                 |  13 +-
+>>   configs/nanopc-t4-rk3399_defconfig            |  18 +-
+>>   configs/nanopi-m4-2gb-rk3399_defconfig        |  22 +-
+>>   configs/nanopi-m4-rk3399_defconfig            |  22 +-
+>>   configs/nanopi-m4b-rk3399_defconfig           |  22 +-
+>>   configs/nanopi-neo4-rk3399_defconfig          |  22 +-
+>>   configs/nanopi-r4s-rk3399_defconfig           |  16 +-
+>>   configs/orangepi-rk3399_defconfig             |  14 +-
+>>   configs/pinebook-pro-rk3399_defconfig         |  13 +-
+>>   configs/pinephone-pro-rk3399_defconfig        |  13 +-
+>>   configs/puma-rk3399_defconfig                 |   5 +-
+>>   configs/roc-pc-mezzanine-rk3399_defconfig     |  15 +-
+>>   configs/roc-pc-rk3399_defconfig               |  13 +-
+>>   configs/rock-4c-plus-rk3399_defconfig         |  27 +-
+>>   configs/rock-4se-rk3399_defconfig             |  28 +-
+>>   configs/rock-pi-4-rk3399_defconfig            |  13 +-
+>>   configs/rock-pi-4c-rk3399_defconfig           |  27 +-
+>>   configs/rock-pi-n10-rk3399pro_defconfig       |  10 +-
+>>   configs/rock960-rk3399_defconfig              |  18 +-
+>>   configs/rockpro64-rk3399_defconfig            |  16 +-
+>>   drivers/clk/rockchip/clk_rk3399.c             |  12 +-
+>>   include/dt-bindings/clock/rk3399-cru.h        |  30 +-
+>>   87 files changed, 1700 insertions(+), 531 deletions(-)
+>>
 
-We may have an issue in the future if we also want to mark SRAM, ROM or 
-flash 
-(https://developer.arm.com/documentation/102376/0200/Normal-memory) 
-because it's likely those would also match the same attributes but we 
-would need to put holes for those so that they aren't thought to be 
-DRAM, but I guess we can tackle this the day this happens :)
-
-Thanks again for the catch, let me know if this helps and makes sense 
-and I'll send a v4 for it.
-
-Cheers,
-Quentin
