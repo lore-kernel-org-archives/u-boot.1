@@ -4,78 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C058DC10F15
-	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 13:37:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DA32C4345F
+	for <u-boot@archiver.kernel.org>; Wed, 24 Apr 2024 14:14:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D64CE88840;
-	Wed, 24 Apr 2024 15:37:28 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 6BB3788B96;
+	Wed, 24 Apr 2024 16:14:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="BtohNmEE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="s8YH2zLF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93B3088841; Wed, 24 Apr 2024 15:37:27 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 84B8088E45; Wed, 24 Apr 2024 16:14:05 +0200 (CEST)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8A468883F
- for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 15:37:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BBFA8882B
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 16:14:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=484434c3de=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 43OCE9Nj004066;
- Wed, 24 Apr 2024 15:37:16 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=kIyAcFRXq8ug/cyFLxav8q0LyDP334VdLuUEZiCkf4Q=; b=Bt
- ohNmEEPRojhGn8DAQ6SKJZTiJ0951iy5Ujq6/3XfRyhOR36ckb71Q03D4zewQ9ew
- c84Nmxuw06tM2CqGVFLHbQn5iAeQ+UDS6uuIV8FnDyWAOY2tknjlIQcAoIv6RIc0
- MUIJfyw/FEccEfkDlMs4i7udTEntC6iJw2s5eVhWp8EPzrW07BNp88TILC8xnLRj
- ae+vCbzb5Ra3w9l3maQCxLlTtnPVPbRt2sXn10AF7aLBgS+tKpOh6427cDnl8sNI
- 6eG/OQblne4t2jx2k3tPzqcRe6kTpII30yuAxncf01EP4EivE0/5k6MYD+8apspt
- E4ASgnfZxEgGkbLl7MYA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xm4ee07w8-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 24 Apr 2024 15:37:16 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id F12934002D;
- Wed, 24 Apr 2024 15:37:11 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id E46682207BD;
- Wed, 24 Apr 2024 15:36:48 +0200 (CEST)
-Received: from [10.48.86.98] (10.48.86.98) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Wed, 24 Apr
- 2024 15:36:48 +0200
-Message-ID: <ed05aee3-f24b-4b16-b59b-4b9f6597db44@foss.st.com>
-Date: Wed, 24 Apr 2024 15:36:47 +0200
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-56e6acb39d4so8107121a12.1
+ for <u-boot@lists.denx.de>; Wed, 24 Apr 2024 07:14:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1713968038; x=1714572838; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=7YY3xISJroA7LiUimw1N7Nd/rLkINOIq23Yll5wHPW8=;
+ b=s8YH2zLFdgWFrLAXJM3Q1AfQHoRKXq0z0stifNdZvRQGIxGXrLn2Qr06ViBye+2HFA
+ o8SgKJlauYjfuuFiZ/+9J7Hnf4bShrBl4fw0QiaJXsn3wewyusB5bW8pz/JQHTRbMqHY
+ v+47QefZbPLezI4XV4Gsi7H8gKr6i6yvJ/QS49oss4Akc+I+n28awnI4nna1SE5NL4J1
+ Ygu441CeEXtFqLrdYbpLHvfvvfJ02LM4QsBNM5TRz1NBGl8h01oIDuyZyXP2wvZUfPT4
+ ATqM0MrxIl3ZbRLXL7TepHBATPMBEyYHWbNmTRiLYlY++ttK4VTxHzsSuIYp2Q1LYz75
+ sGpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1713968038; x=1714572838;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=7YY3xISJroA7LiUimw1N7Nd/rLkINOIq23Yll5wHPW8=;
+ b=wObVlftvSx6wFYmnr9bHlAm9RJagrt+Dj7qJOs2Y6OuHZLOHOgV86o6NPCXHnPFp4t
+ S6KqywyPlsPgnLTa8LT40qMfM8bEg6Vb56q4IbAQv/m5jsfTSdpKUbRGBISiyApuDqDn
+ HVORO7nSUEmD29Gdi1wetoj4LnJ8tdQkIgOD/OsE5jgO1IHUMqJPczKe3BQAW8IWyPWU
+ G+PdxI8Tqe4PmI8SKmXO3Yo/DZUEn6hJzwm7DPZ5rppGOh6Rr0UaP6O7HYRjZQbctLdW
+ ddVOC4mvNvk67jCOTU3TZqiIa7CcONBA3PhxOeEbxli/mPJxmUWetARP+jfJrF5jY9+X
+ RdDw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVHplHYYjzB7ezYmgb56F/FOOnTVLw7k/jDCJewTgs2LQ2TTuo2F47dPA3ZYgFFL4/3cwhCDfOrMbCk+w5eOR8d+zFX7A==
+X-Gm-Message-State: AOJu0YyofZ1JoC/Wqn2O/y0fK99eTHGO5l3MH0i4M0YsFkVOLx/tZoMq
+ UAgcKNo4es3VaSN6B1XwOPHoHQqUC/brkSBw4NSwsDCmtoQ8KxzErc+63V40nAo=
+X-Google-Smtp-Source: AGHT+IEwjT/JbQK/1y4AQxfsQ7amN/5v4QZCmwVpqyc2rI7nKTOtR2ZFYV/CvJx8shJJRfDfI81h6g==
+X-Received: by 2002:a50:a445:0:b0:570:1ea8:c50a with SMTP id
+ v5-20020a50a445000000b005701ea8c50amr2023826edb.6.1713968038009; 
+ Wed, 24 Apr 2024 07:13:58 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::4c3a? ([2a02:8109:aa0d:be00::4c3a])
+ by smtp.gmail.com with ESMTPSA id
+ i17-20020a0564020f1100b00572334baee7sm500707eda.41.2024.04.24.07.13.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 24 Apr 2024 07:13:57 -0700 (PDT)
+Message-ID: <5d865703-286f-4b62-b8a3-f6c5cf74dc7d@linaro.org>
+Date: Wed, 24 Apr 2024 16:13:55 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] ARM: dts: stm32: add PWR regulators support on
- stm32mp131
+Subject: Re: [PATCH 1/3] mach-ipq40xx: add CPU specific code
+To: Robert Marko <robert.marko@sartura.hr>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@linaro.org, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+Cc: j.beck@linefinity.com
+References: <20240424111434.373920-1-robert.marko@sartura.hr>
 Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>, Tom Rini
- <trini@konsulko.com>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240319024534.103299-1-marex@denx.de>
- <b8089d71-42f1-4cb7-9b5e-e3cd99e9ffa5@denx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <b8089d71-42f1-4cb7-9b5e-e3cd99e9ffa5@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20240424111434.373920-1-robert.marko@sartura.hr>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.86.98]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.650,FMLib:17.11.176.26
- definitions=2024-04-24_11,2024-04-24_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,23 +99,82 @@ X-Virus-Status: Clean
 
 
 
-On 4/21/24 22:27, Marek Vasut wrote:
-> On 3/19/24 3:45 AM, Marek Vasut wrote:
->> This patch adds STM32 PWR regulators DT support on stm32mp131.
->> This requires TFA to clear RCC_SECCFGR, is disabled by default
->> and can only be enabled on board DT level.
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
+On 24/04/2024 13:13, Robert Marko wrote:
+> Provide basic DRAM info population from DT, cache setting and the
+> board_init stub.
 > 
-> It seems these patches have been missed from the recent PR ?
+> Signed-off-by: Robert Marko <robert.marko@sartura.hr>
+Acked-by: Caleb Connolly <caleb.connolly@linaro.org>
+> ---
+>   arch/arm/mach-ipq40xx/Makefile |  7 ++++++
+>   arch/arm/mach-ipq40xx/cpu.c    | 44 ++++++++++++++++++++++++++++++++++
+>   2 files changed, 51 insertions(+)
+>   create mode 100644 arch/arm/mach-ipq40xx/Makefile
+>   create mode 100644 arch/arm/mach-ipq40xx/cpu.c
 > 
-> Is there any feedback on those patches ?
+> diff --git a/arch/arm/mach-ipq40xx/Makefile b/arch/arm/mach-ipq40xx/Makefile
+> new file mode 100644
+> index 0000000000..d611de9933
+> --- /dev/null
+> +++ b/arch/arm/mach-ipq40xx/Makefile
+> @@ -0,0 +1,7 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +#
+> +# Copyright (c) 2024 Sartura Ltd.
+> +#
+> +# Author: Robert Marko <robert.marko@sartura.hr>
+> +
+> +obj-y += cpu.o
+> diff --git a/arch/arm/mach-ipq40xx/cpu.c b/arch/arm/mach-ipq40xx/cpu.c
+> new file mode 100644
+> index 0000000000..0446627a8f
+> --- /dev/null
+> +++ b/arch/arm/mach-ipq40xx/cpu.c
+> @@ -0,0 +1,44 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * CPU code for Qualcomm IPQ40xx SoC
+> + *
+> + * Copyright (c) 2024 Sartura Ltd.
+> + *
+> + * Author: Robert Marko <robert.marko@sartura.hr>
+> + */
+> +
+> +#include <common.h>
+> +#include <cpu_func.h>
+> +#include <init.h>
+> +
+> +int dram_init(void)
+> +{
+> +	int ret;
+> +
+> +	ret = fdtdec_setup_memory_banksize();
+> +	if (ret)
+> +		return ret;
+> +	return fdtdec_setup_mem_size_base();
+> +}
+> +
+> +/*
+> + * Enable/Disable D-cache.
+> + * I-cache is already enabled in start.S
+> + */
+> +void enable_caches(void)
+> +{
+> +	dcache_enable();
+> +}
+> +
+> +void disable_caches(void)
+> +{
+> +	dcache_disable();
+> +}
+> +
+> +/*
+> + * In case boards need specific init code, they can override this stub.
+> + */
+> +int __weak board_init(void)
+> +{
+> +	return 0;
+> +}
 
-
-Hi Marek
-
-Yes, these patches was voluntary suspended on our side due to internal discussion.
-On my side these patches are ok. They will be part on next STM32 pull request.
-
-Thanks
-Patrice
+-- 
+// Caleb (they/them)
