@@ -4,57 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 327FFC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 03:40:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA771C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 03:55:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39C3E89111;
-	Fri, 26 Apr 2024 05:40:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 80D4789115;
+	Fri, 26 Apr 2024 05:55:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1714102840;
-	bh=RfCXsZ0GLMz56Rdo/RiNMIQsL5PBbKM7I60Rvttmuw0=;
+	s=phobos-20191101; t=1714103700;
+	bh=3KhkjoqHI3Sy8tK1dZ2eQf8fpEfQAIg54JsDAnwUDss=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=DoljS/yoB+skGswM0ckqFmPY/AKehpIgXE/HISIfM71w/BrWYdgbnI+pdwVSXwoZt
-	 0ykQjXEFZzbzMucXsUEe/aK3UHujEQedOANtrPuCpElXWzGAddX1lfSe2Xi5UZh4CE
-	 MBiGJwQPnzjDy4B+RSXXCoJedztyjFVEzdJ1ACtDgW1g2wgDVovdM69NSTuZdk/dMC
-	 kuv3H+qsFetq6J+OVJJh9MLvsXEVr5NkzVL5Erg1FDy56WfJFQQJUVpxGJUvpNbWUx
-	 fek9oDWTiaCga1B88Z0tFfy3S3olODNLATs0gNWln/mRFRJR0+UTzchMfCGtUDwlto
-	 oNelMgvbAgeYQ==
-Received: from [192.168.1.107] (82-131-156-115.pool.digikabel.hu
- [82.131.156.115])
+	 From;
+	b=a0ZEa4aD41GRN5+DcZ2QHzJv8FOS63chzS7Ry2KJYIKp3hadB8+VlDOCyYIplD0kf
+	 7rY+c2gXy7t6/ZB2HI4irB4LK199lgWSX0kOCF63t0GiVijR+FggZJApvTm32djZ6V
+	 V+3tef2jc9wIIoIZNG1qRH75U1Tiys6JX4giDIB1nfLX0DjCNQRH7QtvaPRfz5Qk5P
+	 IsYvyv1P26kISI+teKVy8wE1hTwzjtFhXgAs77cXf/df7sqAFk59goo9pYXNr0JBwr
+	 R1joBv5+yHFPa1s+DZLyjYe8WM8sMum3VEZE+etPWGLK8V7lp3UmsPM0VYg5g+cAIb
+	 O1bz2wWK5DPfA==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 4E430880F5;
- Fri, 26 Apr 2024 05:40:38 +0200 (CEST)
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id ECCCF89116;
+ Fri, 26 Apr 2024 05:54:57 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1714102839;
- bh=RfCXsZ0GLMz56Rdo/RiNMIQsL5PBbKM7I60Rvttmuw0=;
- h=Date:Subject:To:Cc:References:From:Reply-To:In-Reply-To:From;
- b=PT4BYNuXg7sYC2y2qblAihytg2UwtQIcqW9xVYAOuqAy+tjPjPTe5qiVwH5iAp2C+
- nfsspbR3RBmLjyYxKuH59ydkQjbLvBn6rV5d40aBPZe+LovEQeGTd0i9mQ/ivbZtqQ
- SxCrLyoyvHCnM+opLwP81JxKCe74VpndCi1gpzTtenKJ7hH5f4tJEOCw/FAYr3qJhN
- ToQsFGM1BfI3bURS5F8HIXOsWAmJf61J46Pl1LcDwm7htBdGhHLebeTFBO6expRhhk
- libBnVC96JriXQAVnHJDDtN893fVDRo+PdbJpepBbbvmXSIF/sHTxxHQNBQzWTZe2J
- qrmSFf/6hApZg==
-Message-ID: <b1733528-3c33-a52c-f239-dbe39c69d586@denx.de>
-Date: Fri, 26 Apr 2024 05:40:17 +0200
+ s=phobos-20191101; t=1714103699;
+ bh=3KhkjoqHI3Sy8tK1dZ2eQf8fpEfQAIg54JsDAnwUDss=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=QYmQtsERWuerL+XOhpqdo/D7cBKNXNC9/n9O2b3RxMOr0KWe4rXp1NRDxUTl3DorB
+ abUCxTD3ICGuA4ZA6A+h8hvEavPEuaEnk7g1lAA/RNO894uZ2e/98/77dhV4QMbAkN
+ bADMUzDpigPhZS+LAWOgJBwToPCPq4eqMg7JEBKqApzunQM3EmAU/0nURswHyeasxP
+ 1CU9gLCwc9jfSieQsIDBTvjXewRr4UTNFOHzi02QqHZtduUuea5Sat/3NLCYLnAUmM
+ cg4WZi4sBW/TZ/PpjVsSugY4E2Aqs7h0dMOCCxhlyuM7QhULmA7I4QDcAr+s5lYjGv
+ 43httCWgmqBWA==
+Message-ID: <245c3907-b72b-42fc-97ec-d4d70afa35aa@denx.de>
+Date: Fri, 26 Apr 2024 01:33:54 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: imx8mn: bootcount does not increment
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/3] ARM: dts: imx: Convert i.MX8M flash.bin image
+ generation to binman
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Adam Ford <aford173@gmail.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Angus Ainslie <angus@akkea.ca>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass
+ <sjg@chromium.org>, Stefan Eichenberger <stefan.eichenberger@toradex.com>,
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
+ kernel@puri.sm, u-boot@dh-electronics.com
+References: <20240423183247.335791-1-marex@denx.de>
+ <20240423183247.335791-3-marex@denx.de>
+ <CAJ+vNU1fvffzukqr0-u92EyLqXHiwRkvs3CA+1K_A+9p6xrgUg@mail.gmail.com>
 Content-Language: en-US
-To: Fabio Estevam <festevam@gmail.com>, Marek Vasut <marex@denx.de>,
- Tim Harvey <tharvey@gateworks.com>, Adam Ford <aford173@gmail.com>
-Cc: U-Boot-Denx <u-boot@lists.denx.de>, Peng Fan <peng.fan@nxp.com>,
- Ye Li <ye.li@nxp.com>
-References: <CAOMZO5BeK7QyqEZisSVX=fs9jmq98gjnf_n0FrRJrR92pThrGQ@mail.gmail.com>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <CAOMZO5BeK7QyqEZisSVX=fs9jmq98gjnf_n0FrRJrR92pThrGQ@mail.gmail.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAJ+vNU1fvffzukqr0-u92EyLqXHiwRkvs3CA+1K_A+9p6xrgUg@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,50 +77,36 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Fabio,
-
-On 26.04.24 03:55, Fabio Estevam wrote:
-> Hi,
+On 4/25/24 10:34 PM, Tim Harvey wrote:
+> On Tue, Apr 23, 2024 at 11:33 AM Marek Vasut <marex@denx.de> wrote:
+>>
+>> Rework the flash.bin image generation such that it uses the new binman
+>> nxp_imx8mimage etype. This way, the flash.bin is assembled in correct
+>> order using plain binman, without any workarounds or sections assembled
+>> in special DT node order.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> ---
+>> WARNING: This is very likely to break corner case uses, so please do
+>>           test this on your platform.
+>> NOTE: This also opens the implementation for proper CST signing etype,
+>>        the CST signing would look similar to nxp-imx8mimage section, and
+>>        it would likely wrap the whole topmost section {} in the binman
+>>        node.
 > 
-> When enabling bootcount on the imx8mm-evk like this:
+> Marek,
 > 
-> --- a/configs/imx8mm_evk_defconfig
-> +++ b/configs/imx8mm_evk_defconfig
-> @@ -120,3 +120,5 @@ CONFIG_SDP_LOADADDR=0x40400000
->   CONFIG_USB_GADGET_DOWNLOAD=y
->   CONFIG_SPL_USB_SDP_SUPPORT=y
->   CONFIG_IMX_WATCHDOG=y
-> +CONFIG_BOOTCOUNT_LIMIT=y
-> +CONFIG_BOOTCOUNT_ENV=y
+> Thanks - this is neat and I look forward to seeing a CST signing etype!
 
-No chance for a bootcounter in a register?
+The whole collected batch of patches is here:
 
-> It works as expected, and the "bootcount" environment variable gets
-> incremented after a reset.
+https://source.denx.de/u-boot/custodians/u-boot-usb/-/commits/test-cst?ref_type=heads
 
-Good!
-
-> However, if I try the same on an imx8mn_evk, the "bootcount" variable
-> always stays at 1 and never increments.
-
-Uff... environment code should be independent from the board...
-
-> Do you happen to have any idea as to why imx8mn behaves differently in
-> this aspect?
-
-saveenv works on the board? Does it use protected Environment?
-
-No more ideas ... sorry...
-
-bye,
-Heiko
--- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+I believe this will need tweaking, we will probably need more DT 
+properties to configure the content of the CST config file more 
+precisely. But this could be a start.
