@@ -4,78 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3850FC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 15:31:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03E79C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 16:19:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D1D688FE7;
-	Thu, 25 Apr 2024 17:30:59 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2415E8906B;
+	Thu, 25 Apr 2024 18:19:06 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X7Vt1Wlt";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Rqo/lFfE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A772E88FE0; Thu, 25 Apr 2024 17:30:58 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A518F8906D; Thu, 25 Apr 2024 18:19:04 +0200 (CEST)
+Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
+ [IPv6:2607:f8b0:4864:20::f34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0F8A88FFC
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 17:30:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1772889054
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 18:19:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=r-gunasekaran@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PFUdaL084735;
- Thu, 25 Apr 2024 10:30:39 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1714059039;
- bh=XBc/kioONsEMRZmRvaqmjhts1qvej/BW4tkMct5h4so=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=X7Vt1WltODAzFqeM+Hr3bpSHQjgU0Ey9QhNQqSoDeyiVueMBnjvnI4DsM1VgmLSdu
- PpPqVImx+ckjb+7OL0aqHV0f6vXRAWZuCRmi2ZDeAUkEYlZiwkKQ38Swhh1FOAymXC
- mwy8iAakgI+wc01ToIugtvIIAEVlabJ81TlfbR9c=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PFUdUV066320
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 25 Apr 2024 10:30:39 -0500
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- Apr 2024 10:30:39 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 Apr 2024 10:30:39 -0500
-Received: from [10.250.149.192] ([10.250.149.192])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PFUSsn074498;
- Thu, 25 Apr 2024 10:30:29 -0500
-Message-ID: <b326dbec-942a-4333-9ef5-c8b84afae081@ti.com>
-Date: Thu, 25 Apr 2024 21:00:27 +0530
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf34.google.com with SMTP id
+ 6a1803df08f44-69b9365e584so18148266d6.1
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 09:19:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1714061940; x=1714666740; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=kcFNSSZ6s/GorfRVkg5u1OcWOHiH5uJiX3tVvcPnHj8=;
+ b=Rqo/lFfEqUgg2/Pz12L7YcLccZGFJboboyaFzmxe0HakXZTYBVUGwK1ixiL0tDBCuV
+ /gRrm38G0EbpXvYVxwx2zHOmI1Dq8Q0ob8VSMXDd4IyXLXYjObfE2rJAA2KcTqCPreSw
+ TcLUgxwN3XM5jMDkPV8S5xUZjRBiUMPTCD0L4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714061940; x=1714666740;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=kcFNSSZ6s/GorfRVkg5u1OcWOHiH5uJiX3tVvcPnHj8=;
+ b=WsextdaEl4eJIEfw2N8BHKBLhXUZrltEy4ChP1DzU7IAOLHSzbtbjPrsXi37jxXgcz
+ UzYTZfCK+ClhRP2RoJfflQtXJx6xG/y93lMhMc85o9otZRLt72+mn7dGMl2nLzetGhIC
+ ajefXvg6YcxRzpO6Exrf7FV5maYVf+6eu03Bkm6Uhnq8QOpPgnbFSPZCJmsYtkhTr/CX
+ /y8U+SYO8Hz8B3FCp4C2fEYv8U3LA5WBzZOFuxw1REWLKjRe4TAxu+Fqpn890NHVr8u2
+ VFpL41YvUDmER8ovvOwisx6eip3U1lixn2dlj5O9FDk1Wyl6M1c4/bq+2m6A3uf0F0rW
+ pDnQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVw964eo1D8L6/SUdjlrzKMZJ6YHIyDt0B883Q+RiBY2pwX+o1LBxt7yY/lVdox9UdmP+4G23sGXruY3zG6K/NClwWd+Q==
+X-Gm-Message-State: AOJu0YyRdQm0K2RMqbWxj/SlExQ5Vr1BdoM5XCoifLuHGnxPiWVhfglM
+ 3QoahG/5JHWP8/lYQuaIArudNfat4QvU/vXD91HKh6EYWDw1qCJ4UAcM13beu7c=
+X-Google-Smtp-Source: AGHT+IELjarAr248+h3gk+AVenGUc0O97kzE2SpsdLMoKvk1ahEYrZ87bGhaU1JFoT4kkosSnOEeWQ==
+X-Received: by 2002:a05:6214:c28:b0:6a0:9645:526e with SMTP id
+ a8-20020a0562140c2800b006a09645526emr304420qvd.15.1714061939933; 
+ Thu, 25 Apr 2024 09:18:59 -0700 (PDT)
+Received: from bill-the-cat ([187.144.98.216])
+ by smtp.gmail.com with ESMTPSA id
+ g2-20020a0cdf02000000b0069b447066bbsm7055108qvl.78.2024.04.25.09.18.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Apr 2024 09:18:59 -0700 (PDT)
+Date: Thu, 25 Apr 2024 10:18:55 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Richard Hughes <hughsient@gmail.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jonas Karlman <jonas@kwiboo.se>, FUKAUMI Naoki <naoki@radxa.com>,
+ chris.obbard@collabora.com, Paul Liu <paul.liu@linaro.org>,
+ Heiko Thiery <heiko.thiery@gmail.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Michael Walle <michael@walle.cc>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Michal Simek <michal.simek@amd.com>
+Subject: Re: Capsule GUIDs and LVFS
+Message-ID: <20240425161855.GG1054907@bill-the-cat>
+References: <CAC_iWjJNHa4gMF897MqYZNdbgjFG8K4kwGsTXWuy72WkYLizrw@mail.gmail.com>
+ <CAD2FfiGuFaC=r+TGfq9auzWJbyzVNbug8zR9RzSwM2+Uk52d+Q@mail.gmail.com>
+ <CAC_iWj+BonsVbA5Bw3Kck2k4b8SXru0U_Y2kAmx5=_t6SozotA@mail.gmail.com>
+ <cd5ca19b-befe-47cf-9a84-f610ae7f04c9@linaro.org>
+ <CAD2FfiELXfvc9jEDpKVx44BnK5yDpVViARkB0QrHkpMRrdsVEA@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 0/6] Enable ICSSG Ethernet Driver for AM65x
-To: MD Danish Anwar <danishanwar@ti.com>, Bryan Brattlof <bb@ti.com>, Sean
- Anderson <seanga2@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Christian Gmeiner <christian.gmeiner@gmail.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>, Nikhil M Jain
- <n-jain1@ti.com>, Nishanth Menon <nm@ti.com>, Manorit Chawdhry
- <m-chawdhry@ti.com>, Andrew Davis <afd@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Caleb Connolly
- <caleb.connolly@linaro.org>, Tim Harvey <tharvey@gateworks.com>, Tony Dinh
- <mibodhi@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>, Jonas Karlman
- <jonas@kwiboo.se>, Sumit Garg <sumit.garg@linaro.org>, Michal Simek
- <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>, Kever
- Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <srk@ti.com>, Roger Quadros <rogerq@kernel.org>,
- Ravi Gunasekaran <r-gunasekaran@ti.com>
-References: <20240416092018.3593039-1-danishanwar@ti.com>
-Content-Language: en-US
-From: Ravi Gunasekaran <r-gunasekaran@ti.com>
-In-Reply-To: <20240416092018.3593039-1-danishanwar@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rnPWU/ama7Q77LoA"
+Content-Disposition: inline
+In-Reply-To: <CAD2FfiELXfvc9jEDpKVx44BnK5yDpVViARkB0QrHkpMRrdsVEA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,60 +109,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--rnPWU/ama7Q77LoA
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 4/16/2024 2:50 PM, MD Danish Anwar wrote:
-> The series introduces device tree and config changes and AM65x
-> to enable ICSSG driver. The series also enables SPL_LOAD_FIT_APPLY_OVERLAY
-> for AM65x in order to load overlay over spl.
->
-> The ICSSG2 node is added in device tree overlay so that it remains in
-> sync with linux kernel.
->
-> This series has been tested on AM65x SR2.0, and the ICSSG interface is
-> able to ping / dhcp and boot kernel using tftp in uboot.
->
-> The users need to set env variables fw_storage_interface, fw_dev_part,
-> fw_ubi_mtdpart, fw_ubi_volume to indicate which storage medium and
-> partition they want to use to load firmware files from. By default the env
-> fw_storage_interface=mmc and fw_dev_part=1:2 but users can modify these
-> envs as per their requirements.
->
-> This is the v4 of the series [1]. The series doesn't depend on any patch
-> and can be applied cleanly on u-boot/master
->
-> Changes from v3 to v4:
-> *) Separated the device tree and board specific changes into this series
->    from the main series [1].
-> *) Added check for TARGET_AM654_A53_EVM config in board file as suggested
->    by Dan Carpenter <dan.carpenter@linaro.org>
-> *) Rebased on latest u-boot/master.
->
-> [1] https://lore.kernel.org/all/20240124064930.1787929-1-danishanwar@ti.com/
->
-> MD Danish Anwar (6):
->   arm: dts: k3-am654-base-board: Add ICSSG2 Ethernet support
->   arm: dts: k3-am65x-binman: Add ICSSG2 overlay and configuration
->   configs: am65x_evm_a53: Enable ICSSG Driver
->   configs: am65x_evm_a53: add SPL_LOAD_FIT_APPLY_OVERLAY
->   board: ti: am65x: Add check for k3-am654-icssg2 in
->     board_fit_config_match()
->   board: ti: am65x: Set fw_storage_interface and fw_dev_part ENVs
->
->  arch/arm/dts/Makefile             |   4 +-
->  arch/arm/dts/k3-am654-icssg2.dtso | 145 ++++++++++++++++++++++++++++++
->  arch/arm/dts/k3-am65x-binman.dtsi |  65 +++++++++++++-
->  board/ti/am65x/am65x.env          |   4 +
->  board/ti/am65x/evm.c              |   9 +-
->  configs/am65x_evm_a53_defconfig   |   2 +
->  6 files changed, 221 insertions(+), 8 deletions(-)
->  create mode 100644 arch/arm/dts/k3-am654-icssg2.dtso
->
->
-> base-commit: 6e316e3f397b5e01e98c5dd56cdbaab961daeedf
+On Thu, Apr 25, 2024 at 05:13:21PM +0100, Richard Hughes wrote:
+> On Thu, 25 Apr 2024 at 16:16, Caleb Connolly <caleb.connolly@linaro.org> =
+wrote:
+> > I discussed an idea with Ilias to generate GUIDs dynamically based on
+> > the board compatible/model, which seem to essentially just an
+> > abstraction on this..
+>=20
+> Yup, that works too -- on the assumption the compatible string is unique =
+enough.
 
-For the series,
-Acked-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
+This is where things are a little fun. In previous discussions, yes, the
+machine compatible string should be unique. But it's not. Is it unique
+enough for this case, today? No, since mechanism could be what's passing
+the correct device tree to the OS. Might this in turn be what drives
+people to fix the case? Maybe.
 
-Regards,
-Ravi
+--=20
+Tom
 
+--rnPWU/ama7Q77LoA
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYqgmkACgkQFHw5/5Y0
+tyyMtgwAmusJdeqjNMlyvhQgdGYqd3XH0A9NJHo3dP1ZmJL94LfCvexDT+HGEMOS
+P08OwcXxaxklV1x2BkbA1d3e+BVd7C7vJtrlAvhX8f7M5cw27jp75KGh7qPzgHuL
+eRLpksRzXa3ATDrjQ5FdPctAAZLmoS221z15uruROPrKM2AkhHKYjBabgC1ZM2KY
+x4RwcoSfUC83LtclvibPC316Jdc3iqmpYdhQCGujkuqGrBIY596mKsUrDr1UafHf
+LybDgqebPWJ9dz7Bh8N0lU80zLdOnvYVDRI/6cQYJ+zDj/o+XxUAJZOmGRncP4uH
+HIPMdW9OGiP+jvI+hK5qfYjPK3kc68LXn4B3kK0KOntmnmKqPJ20nJzYr/rRyt6R
+T2SHhTfSyriTebMLoN5pDq89uC4lrPKY80WtHuBXRguIf9BBJM9WbmVersGRkY6i
+CUBT7C23frFT9n85ZquledjegZqBdZT8pT4WfvhoymFMXmO1h1AdAumf7wzEr1jz
+hxA+r44x
+=RsVw
+-----END PGP SIGNATURE-----
+
+--rnPWU/ama7Q77LoA--
