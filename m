@@ -4,64 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EF03C10F1A
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 07:52:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9253C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 08:06:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7894888F0B;
-	Thu, 25 Apr 2024 09:52:40 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=walle.cc
+	by phobos.denx.de (Postfix) with ESMTP id 55D8988D0A;
+	Thu, 25 Apr 2024 10:06:39 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=walle.cc header.i=@walle.cc header.b="R+MIOBnL";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KWrbsHL4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9810088F11; Thu, 25 Apr 2024 09:52:39 +0200 (CEST)
-Received: from mail.3ffe.de (0001.3ffe.de [159.69.201.130])
+ id 98B6F88DE4; Thu, 25 Apr 2024 10:06:38 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A204D88F0C
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 09:52:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=walle.cc
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=michael@walle.cc
-Received: from localhost (unknown [213.135.10.150])
+ by phobos.denx.de (Postfix) with ESMTPS id 9F6ED87DCA
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 10:06:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (prime256v1) server-signature RSA-PSS (2048 bits)
- server-digest SHA256) (No client certificate requested)
- by mail.3ffe.de (Postfix) with ESMTPSA id D4A1E109;
- Thu, 25 Apr 2024 09:52:35 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=walle.cc;
- s=mail2022082101; t=1714031556;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:content-type:content-type:in-reply-to:in-reply-to:
- references:references; bh=FIsn9QrdcnuxXsiHo1gq8RFsEM13ahz9WIN/K7Zd9o8=;
- b=R+MIOBnLsOi3pmSBCRBLQoNpQf7PSaBNxri8DLRAqV1k8ZX5LkOEI8JPMDBFAPYayx6Oe+
- 7UgKHW3+cIEhVEvhb8m+9d9goRnudpwBlSuoFxevwUHq+2zOGeQNewszpvapFD2TLc9O8X
- 8BIzWiln73JeeF06NfYZxKk37AuGDWxOwASGIshaFbI0X/6M4+Ofn24s1EGzE9oH5SyoYD
- fslvVhiHGzZBVKqc6j//Z63Zlpx7H6U11PvYTDEf0ifx72gXpAR6cPLSlKD6f6BDjRs5bL
- G86SgrZkytU2JpgBxW8vz2Cfn6PhdT4TTLwu/9jDXDOwN64bhaYL+dNqjX9O5w==
-Content-Type: multipart/signed;
- boundary=741d942a38e8194029a91d31f320dc294341270b6abbd23dc66197ab6cd9;
- micalg=pgp-sha384; protocol="application/pgp-signature"
-Date: Thu, 25 Apr 2024 09:52:28 +0200
-Message-Id: <D0T1H31G99ZV.1I8SXBRR91ECR@walle.cc>
-Subject: Re: Capsule GUIDs and LVFS
-Cc: "Jagan Teki" <jagan@amarulasolutions.com>, "Jonas Karlman"
- <jonas@kwiboo.se>, "FUKAUMI Naoki" <naoki@radxa.com>,
- <chris.obbard@collabora.com>, "Paul Liu" <paul.liu@linaro.org>, "Heiko
- Thiery" <heiko.thiery@gmail.com>, "Frieder Schrempf"
- <frieder.schrempf@kontron.de>, "Masahisa Kojima"
- <kojima.masahisa@socionext.com>, "Patrick DELAUNAY"
- <patrick.delaunay@foss.st.com>, "U-Boot STM32"
- <uboot-stm32@st-md-mailman.stormreply.com>, "Michal Simek"
- <michal.simek@amd.com>
-From: "Michael Walle" <michael@walle.cc>
-To: "Ilias Apalodimas" <ilias.apalodimas@linaro.org>, "U-Boot Mailing List"
- <u-boot@lists.denx.de>, "Tom Rini" <trini@konsulko.com>, "Richard Hughes"
- <hughsient@gmail.com>, "Heinrich Schuchardt" <xypron.glpk@gmx.de>
-X-Mailer: aerc 0.16.0
-References: <CAC_iWjJNHa4gMF897MqYZNdbgjFG8K4kwGsTXWuy72WkYLizrw@mail.gmail.com>
-In-Reply-To: <CAC_iWjJNHa4gMF897MqYZNdbgjFG8K4kwGsTXWuy72WkYLizrw@mail.gmail.com>
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 1943F3FE51
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 08:06:34 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1714032394;
+ bh=ZKBlN41HoRp48iLz4Z6wqzIPAO+YtUEGVurOgmbXEes=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=KWrbsHL4f6mg6TpJ30jWBxDkc8Ib77JVgzjzrrN+tIeg5DVOa0cacPWE/czhXofof
+ 9ssc8Y4OsQ2lOs8T5d/0Ta0aVcYvX714SdPlO67T9eRHEGbDeprtxVzSXevcmjUqmE
+ /zKdontm8F4e3gyxgYJ/7L+9ROXiwwmtSdMO3qloCb+CC8/4lVaZp6k2qMJsqp+KNL
+ DrqidnZBdR91e1vOmet93HiDNm9lhqMQwFd6vsGLHYQ7nlr7gIND74c03JNSk/23h1
+ 733mT89NeNPNhVsuiSn4j6cpgoJQUWEUAZKpgK9rLK/KtNC9NO85dQydgDtcEUIGCL
+ slQILTK5JrjDw==
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-343d02b62ddso488361f8f.1
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 01:06:34 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714032393; x=1714637193;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZKBlN41HoRp48iLz4Z6wqzIPAO+YtUEGVurOgmbXEes=;
+ b=Mb8PTunbMLpaCCIa6I+hnFPxND1UQHriVT6a0fLCqfGnJMRuBk68UenJv/w0gJE4Vk
+ oHd4TsR4nUY6HIvpx+5l5EpYnxXKDo8hcfDhojkaLCpfizcszSf2DsmgElyXUlhLIg8j
+ y+sUjgej5TxLzG8+e/deHKEpOzifr/O0YUC9eNMfzMAct+Ix6xn2OwhlPgJVia/121/A
+ ZG8/puL4fp6/4AMT6qvYzeRQ4j7STyL5TTtus5xiGs88rcEslNYDmAWg9foOnmR23e3F
+ qH2G2Vjm5fmVbAD/ilZ8jtx9/4PbbE0iq1JGAyO67GfwzajZ+yXAkH+RcRaj9h/lmho0
+ yelw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWZayihINShWa+WRceCIY+CT96hLI237mSGLtzPTYWluxS5xVEajcxNVWSE0o20mOozKu/HTOFU0oQJL5NCHJ1rpYOEqw==
+X-Gm-Message-State: AOJu0YxJZHGAjFzrWC/z/ZgWb2PlAxhvVSHrlmdH7eb81B8ZGUY7z+U/
+ kLTSPQwmOkwbJ4VXdO8YrKXAe/pAHCM2fpnGYVKKqXEOwD38prZIwKyI06pXQ5SGUuPeX7JvClj
+ 0zLYa7KC29lj88rWOO7XRa7/0sBgw8LCI6xhx6hhTaD4p/zZS4FWTeDuRP4+nBNqUapw=
+X-Received: by 2002:a05:600c:4f8f:b0:418:58ac:7477 with SMTP id
+ n15-20020a05600c4f8f00b0041858ac7477mr3443977wmq.30.1714032393712; 
+ Thu, 25 Apr 2024 01:06:33 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IFf4krAW9cnJrGCcTyc7qHjTFoyJ8jk/gTOrl/dbAw6jkAfktGQ9pzxdZzDQpAskBbauRoX2Q==
+X-Received: by 2002:a05:600c:4f8f:b0:418:58ac:7477 with SMTP id
+ n15-20020a05600c4f8f00b0041858ac7477mr3443953wmq.30.1714032393188; 
+ Thu, 25 Apr 2024 01:06:33 -0700 (PDT)
+Received: from workstation5.fritz.box
+ (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ by smtp.gmail.com with ESMTPSA id
+ g18-20020a05600c4ed200b00417d624cffbsm30506237wmq.6.2024.04.25.01.06.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Apr 2024 01:06:32 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH v2] efi_loader: do not install dtb if bootmgr fails
+Date: Thu, 25 Apr 2024 10:06:25 +0200
+Message-ID: <20240425080625.26838-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,59 +104,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---741d942a38e8194029a91d31f320dc294341270b6abbd23dc66197ab6cd9
-Mime-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
+If the UEFI boot manager fails there is no point in installing the
+device-tree as a configuration table.
 
-Hi,
+Unload image if device-tree cannot be installed.
 
-On Thu Apr 25, 2024 at 8:19 AM CEST, Ilias Apalodimas wrote:
-> I've cc'ed all the people I could find in board specific MAINTAINER files=
-.
-> Can you respond to Richard with the proper company name & board name
-> so we can bind the following GUIDs to a vendor properly?
-> Richard any guidance on how this should be done properly is
-> appreciated, since I am not too aware of LVFS internals.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+v2:
+	Unload image if device-tree cannot be installed.
+---
+ lib/efi_loader/efi_bootmgr.c | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
 
-Thanks for taking care!
+diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+index ca2ebdaa32f..aa2cc0eb52f 100644
+--- a/lib/efi_loader/efi_bootmgr.c
++++ b/lib/efi_loader/efi_bootmgr.c
+@@ -1209,15 +1209,21 @@ efi_status_t efi_bootmgr_run(void *fdt)
+ 		return CMD_RET_FAILURE;
+ 	}
+ 
+-	ret = efi_install_fdt(fdt);
+-	if (ret != EFI_SUCCESS)
+-		return ret;
+-
+ 	ret = efi_bootmgr_load(&handle, &load_options);
+ 	if (ret != EFI_SUCCESS) {
+ 		log_notice("EFI boot manager: Cannot load any image\n");
+ 		return ret;
+ 	}
+ 
++	ret = efi_install_fdt(fdt);
++	if (ret != EFI_SUCCESS) {
++		if (EFI_CALL(efi_unload_image(*handle)) == EFI_SUCCESS)
++			free(load_options);
++		else
++			log_err("Unloading image failed\n");
++
++		return ret;
++	}
++
+ 	return do_bootefi_exec(handle, load_options);
+ }
+-- 
+2.43.0
 
-> Kontron KONTRON_PITX_IMX8M_FIT_IMAGE_GUID c898e959-5b1f-4e6d-88e0-40d45cc=
-a1399
-
-This (board) should likely be dropped to lower maintenance burden as
-it is EOL and "not recommended for new designs".
-
-> Kontron KONTRON_SL_MX8MM_FIT_IMAGE_GUID d488e45a-4929-4b55-8c14-86cea2cd6=
-629
-
-This is probably (at least) the wrong name. SL is a
-System-on-Module, a small PCB that will be soldered on a carrier
-board and cannot run on it's own and a customer using that SoM will
-likely have their own bootloader. There is, though the "BL" which is
-the in-house board for this SoM.
-
-Company name is "Kontron Electronics GmbH".
-
-> Kontron KONTRON_SL28_FIT_IMAGE_GUID 86ebd44f-feb8-466f-8bb8-890618456d8b
-
-Company name is "Kontron Europe GmbH".
-
-Both entities belong to the Kontron Group, not sure how this is
-handled in LVFS though.
-
--michael
-
---741d942a38e8194029a91d31f320dc294341270b6abbd23dc66197ab6cd9
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iKcEABMJAC8WIQTIVZIcOo5wfU/AngkSJzzuPgIf+AUCZioLvREcbWljaGFlbEB3
-YWxsZS5jYwAKCRASJzzuPgIf+E9MAYDQM+Pw5Zk7pl+wZBQSLolTYenKNOvIQYhy
-JIx00cdCoLAzaYPJE8XIc3ZlCuCxwBIBf2gNeqS2eGt6p7dzvSpJZHX/7rJYSMOm
-1jzDWqOW9YNsecZL2yWcDYXT5rnaVXBl7g==
-=uWNl
------END PGP SIGNATURE-----
-
---741d942a38e8194029a91d31f320dc294341270b6abbd23dc66197ab6cd9--
