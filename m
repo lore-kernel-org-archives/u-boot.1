@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89F8FC19F4F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 10:47:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B217C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 10:47:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E498F88EF0;
-	Thu, 25 Apr 2024 12:47:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 483F188F04;
+	Thu, 25 Apr 2024 12:47:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE16188F05; Thu, 25 Apr 2024 12:47:08 +0200 (CEST)
-Received: from smtp-bc0b.mail.infomaniak.ch (smtp-bc0b.mail.infomaniak.ch
- [45.157.188.11])
+ id 6C7A88874C; Thu, 25 Apr 2024 12:47:11 +0200 (CEST)
+Received: from smtp-8fad.mail.infomaniak.ch (smtp-8fad.mail.infomaniak.ch
+ [IPv6:2001:1600:7:10::8fad])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEAD188EE7
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 12:47:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 89E3188F03
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 12:47:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VQCGf4d3jzThH;
- Thu, 25 Apr 2024 12:47:06 +0200 (CEST)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VQCGh1BBzzW8V;
+ Thu, 25 Apr 2024 12:47:08 +0200 (CEST)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4VQCGc6KpTzpNx; Thu, 25 Apr 2024 12:47:04 +0200 (CEST)
+ id 4VQCGf4j6Nzmj3; Thu, 25 Apr 2024 12:47:06 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Thu, 25 Apr 2024 12:46:27 +0200
-Subject: [PATCH v4 04/11] rockchip: quartzpro64-rk3588: use DRAM banks from
- ATAGS
+Date: Thu, 25 Apr 2024 12:46:28 +0200
+Subject: [PATCH v4 05/11] rockchip: rock5a-rk3588s: use DRAM banks from ATAGS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240425-rk35xx-dram-atags-v4-4-331401a58e8e@theobroma-systems.com>
+Message-Id: <20240425-rk35xx-dram-atags-v4-5-331401a58e8e@theobroma-systems.com>
 References: <20240425-rk35xx-dram-atags-v4-0-331401a58e8e@theobroma-systems.com>
 In-Reply-To: <20240425-rk35xx-dram-atags-v4-0-331401a58e8e@theobroma-systems.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -81,7 +80,7 @@ instead.
 Since ft_board_setup isn't defined anymore, there's no need for
 selecting CONFIG_OF_BOARD_SETUP.
 
-Similarly, because the quartzpro64-rk3588.c would be empty, it is simply
+Similarly, because the rock5a-rk3588s.c would be empty, it is simply
 removed, with the (would-be-empty) Makefile as well.
 
 The CONFIG_NR_DRAM_BANK now defaults to 10 which is a safe bet for
@@ -91,36 +90,39 @@ Co-developed-by: Chris Morgan <macromorgan@hotmail.com>
 Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- board/pine64/quartzpro64-rk3588/Makefile           |  3 --
- .../pine64/quartzpro64-rk3588/quartzpro64-rk3588.c | 39 ----------------------
- configs/quartzpro64-rk3588_defconfig               |  2 --
- 3 files changed, 44 deletions(-)
+ board/radxa/rock5a-rk3588s/Makefile         |  6 -----
+ board/radxa/rock5a-rk3588s/rock5a-rk3588s.c | 39 -----------------------------
+ configs/rock5a-rk3588s_defconfig            |  2 --
+ 3 files changed, 47 deletions(-)
 
-diff --git a/board/pine64/quartzpro64-rk3588/Makefile b/board/pine64/quartzpro64-rk3588/Makefile
+diff --git a/board/radxa/rock5a-rk3588s/Makefile b/board/radxa/rock5a-rk3588s/Makefile
 deleted file mode 100644
-index 47819d9be93..00000000000
---- a/board/pine64/quartzpro64-rk3588/Makefile
+index 48dd5124550..00000000000
+--- a/board/radxa/rock5a-rk3588s/Makefile
 +++ /dev/null
-@@ -1,3 +0,0 @@
+@@ -1,6 +0,0 @@
 -# SPDX-License-Identifier:     GPL-2.0+
+-#
+-# Copyright (c) 2023 Collabora Ltd.
+-#
 -
--obj-y += quartzpro64-rk3588.o
-diff --git a/board/pine64/quartzpro64-rk3588/quartzpro64-rk3588.c b/board/pine64/quartzpro64-rk3588/quartzpro64-rk3588.c
+-obj-y += rock5a-rk3588s.o
+diff --git a/board/radxa/rock5a-rk3588s/rock5a-rk3588s.c b/board/radxa/rock5a-rk3588s/rock5a-rk3588s.c
 deleted file mode 100644
-index bda804a89e2..00000000000
---- a/board/pine64/quartzpro64-rk3588/quartzpro64-rk3588.c
+index 2d7a8c07dc5..00000000000
+--- a/board/radxa/rock5a-rk3588s/rock5a-rk3588s.c
 +++ /dev/null
 @@ -1,39 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+
 -/*
-- * Copyright 2023 Google, Inc
+- * Copyright (c) 2023 Collabora Ltd.
 - */
 -
 -#include <fdtdec.h>
 -#include <fdt_support.h>
 -
 -#ifdef CONFIG_OF_BOARD_SETUP
--int quartzpro64_add_reserved_memory_fdt_nodes(void *new_blob)
+-int rock5a_add_reserved_memory_fdt_nodes(void *new_blob)
 -{
 -	struct fdt_memory gap1 = {
 -		.start = 0x3fc000000,
@@ -147,27 +149,27 @@ index bda804a89e2..00000000000
 -
 -int ft_board_setup(void *blob, struct bd_info *bd)
 -{
--	return quartzpro64_add_reserved_memory_fdt_nodes(blob);
+-	return rock5a_add_reserved_memory_fdt_nodes(blob);
 -}
 -#endif
-diff --git a/configs/quartzpro64-rk3588_defconfig b/configs/quartzpro64-rk3588_defconfig
-index b2a66d3f2db..e398c7c2c0e 100644
---- a/configs/quartzpro64-rk3588_defconfig
-+++ b/configs/quartzpro64-rk3588_defconfig
-@@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+diff --git a/configs/rock5a-rk3588s_defconfig b/configs/rock5a-rk3588s_defconfig
+index ebe2d4a2d81..01df911d9dc 100644
+--- a/configs/rock5a-rk3588s_defconfig
++++ b/configs/rock5a-rk3588s_defconfig
+@@ -2,7 +2,6 @@ CONFIG_ARM=y
+ CONFIG_SKIP_LOWLEVEL_INIT=y
  CONFIG_COUNTER_FREQUENCY=24000000
  CONFIG_ARCH_ROCKCHIP=y
 -CONFIG_NR_DRAM_BANKS=2
- CONFIG_DEFAULT_DEVICE_TREE="rk3588-quartzpro64"
+ CONFIG_DEFAULT_DEVICE_TREE="rk3588s-rock-5a"
  CONFIG_ROCKCHIP_RK3588=y
  CONFIG_SPL_SERIAL=y
-@@ -19,7 +18,6 @@ CONFIG_FIT_VERBOSE=y
+@@ -16,7 +15,6 @@ CONFIG_FIT_VERBOSE=y
  CONFIG_SPL_FIT_SIGNATURE=y
  CONFIG_SPL_LOAD_FIT=y
  CONFIG_LEGACY_IMAGE_FORMAT=y
 -CONFIG_OF_BOARD_SETUP=y
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-quartzpro64.dtb"
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588s-rock-5a.dtb"
  # CONFIG_DISPLAY_CPUINFO is not set
  CONFIG_DISPLAY_BOARDINFO_LATE=y
 
