@@ -4,88 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E41DC10F15
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 16:23:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A82C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 18:02:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F49889077;
-	Thu, 25 Apr 2024 18:23:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EF96D886A8;
+	Thu, 25 Apr 2024 20:02:13 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="m3rvD4Mi";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="RX9OJ1s5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04FEB89038; Thu, 25 Apr 2024 18:13:38 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 49D9F886CC; Thu, 25 Apr 2024 20:02:13 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C008D8903D
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 18:13:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F0377886A7
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 20:02:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hughsient@gmail.com
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-6a0426d72ceso562356d6.3
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 09:13:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714061614; x=1714666414; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=U2PQX4SkDf/EzV28YNsTNC5RWWz59W783pHKrVePLfQ=;
- b=m3rvD4Mia6GZ4xXbZNd3rW9QwWU7EIi42DLhjndlMpIG8pHiQqFHpoRDvrpyBXbttm
- yAKVj+rDhlj/f7RGnH+jiOQnWE9Vl0hgeJT4BlcDNftqt6oQ1pmCBjuvsVwtmbfVqwZr
- 3kTk/BFYODLJgHJSDZOCY6/rmTo+M34NO8mPQFmEU/MO/lzEsi4cXhVh92K5/jeF7nCj
- j7DR4QHG2aek2yGdORYF4R0cykAGc6sCHVyzBJbqsPv5eaBNnav88C5LKQYKJA5cC3+V
- GWMxv6CYtKm6qGkaWHd7NW0aGJpzQ36Z4V15nPs0bxGtRLT6hIdBBAGgUHZTQH/YZHTL
- ZiXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714061614; x=1714666414;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=U2PQX4SkDf/EzV28YNsTNC5RWWz59W783pHKrVePLfQ=;
- b=oMtRRAbpLW+CPDeWWmgAo7/xNnxiAwNJete7dIGemSN1dmMnYbNnUyZCrG75hHlQQC
- 8azK5kUbuRQ36jA8xm8JFYkVCi3cyUtHIxNNSpDb6sy8q9z04fDnrzrz8RhhQ4r0eMuB
- etZJYxrVcTMLVk4o4eL8d7EtFNEM8HKSoxYShhbhzWCbOybm1Cl2rQcJyiWgyhnQQ0jM
- lKEiPpQr+hZ8wXlgkDZ1VtIwehv49YjJLYPWKA2GoDE1+/kViN4csJpDntzEACCNDbE5
- rrekM5mj7sWa/d6gxA/X7YQmP6tAa7Xo0M5L6W3AaP7WKmbWqkPEPdL6p3BoBEDHlwPq
- 8Jww==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWKkkDAq3US9StEHEBxwPtJnrgUnIW8q0e4+WYn0FXXwstQZxnpMOKXQuHAtnq32Tcmu6prXnBcXBCv4DrS++GYSNkqtQ==
-X-Gm-Message-State: AOJu0Yz64AXFQWWe4GX6j0nW4bsEEBwgklZ2cgH3fzTcjBrglgVKIGwx
- jrAp1LjwRSfHu9CKvyFZeD9ynBjad3HeZIv5drh1Oi5Tiiw2x7I7iH2WqBnflkrAjg4ottirbjj
- WlvWL0h97WYtEG85thL36uUyfW34=
-X-Google-Smtp-Source: AGHT+IEE2nxUGaw91/m4nNn5traNusLve8+k8ZVX8nHTnpyYcNJPocB8r8U0fIag9Z195L9s0nBds8IpQ2d8LTw/zNk=
-X-Received: by 2002:a05:6214:27c9:b0:6a0:a98a:481d with SMTP id
- ge9-20020a05621427c900b006a0a98a481dmr16775qvb.2.1714061614494; Thu, 25 Apr
- 2024 09:13:34 -0700 (PDT)
+ spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id 5C680120009;
+ Thu, 25 Apr 2024 21:02:09 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 5C680120009
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1714068129;
+ bh=8bhjZ75C4yUBvce7iaxKSL1rccesey4qMeHyYqrG3vw=;
+ h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
+ b=RX9OJ1s5IQufKko7BMPwzKsMfsD1r/tZKW9pLoHkJW/469hMgRuacsdBMNC1iYtlO
+ x+k9KibgVvDZpSF0NwK06W4c/3aj62y8eK1NC7AOIHgoalrkSYs/LpezXOwrU8ulu0
+ QIezv+5KDxzPeYWWL9nvyI1cC0MCSycwwP4ceLK7oIPH28UZtDorUJcE2fTeJ3sOrM
+ YU6rAcw3iXM84/qCx/7wNruyLDHLmFjsuyH/RvZijUxUbFfBITvDlDaiu4yfJqGITZ
+ w8BVkDQLvrGsr/FMA9fVdcY4+3h1lW/Vg0OSlpD1Y7HP2btzZWuqIidUTBrvShlxgm
+ mMo5JpeahYO8w==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Thu, 25 Apr 2024 21:02:09 +0300 (MSK)
+Received: from localhost.localdomain (100.64.160.123) by
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Thu, 25 Apr 2024 21:02:08 +0300
+From: Arseniy Krasnov <avkrasnov@salutedevices.com>
+To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>
+CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
+ <kernel@sberdevices.ru>, <oxffffaa@gmail.com>, <avkrasnov@salutedevices.com>
+Subject: [PATCH v1] arm: dts: meson-axg: add NAND controller node for AXG
+Date: Thu, 25 Apr 2024 20:50:52 +0300
+Message-ID: <20240425175052.2650301-1-avkrasnov@salutedevices.com>
+X-Mailer: git-send-email 2.35.0
 MIME-Version: 1.0
-References: <CAC_iWjJNHa4gMF897MqYZNdbgjFG8K4kwGsTXWuy72WkYLizrw@mail.gmail.com>
- <CAD2FfiGuFaC=r+TGfq9auzWJbyzVNbug8zR9RzSwM2+Uk52d+Q@mail.gmail.com>
- <CAC_iWj+BonsVbA5Bw3Kck2k4b8SXru0U_Y2kAmx5=_t6SozotA@mail.gmail.com>
- <cd5ca19b-befe-47cf-9a84-f610ae7f04c9@linaro.org>
-In-Reply-To: <cd5ca19b-befe-47cf-9a84-f610ae7f04c9@linaro.org>
-From: Richard Hughes <hughsient@gmail.com>
-Date: Thu, 25 Apr 2024 17:13:21 +0100
-Message-ID: <CAD2FfiELXfvc9jEDpKVx44BnK5yDpVViARkB0QrHkpMRrdsVEA@mail.gmail.com>
-Subject: Re: Capsule GUIDs and LVFS
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>, 
- Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>, 
- FUKAUMI Naoki <naoki@radxa.com>, chris.obbard@collabora.com, 
- Paul Liu <paul.liu@linaro.org>, Heiko Thiery <heiko.thiery@gmail.com>, 
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Michael Walle <michael@walle.cc>, 
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, 
- Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Thu, 25 Apr 2024 18:23:08 +0200
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 184931 [Apr 25 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 18 0.3.18
+ b9d6ada76958f07c6a68617a7ac8df800bc4166c,
+ {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
+ 127.0.0.199:7.1.2; smtp.sberdevices.ru:5.0.1,7.1.1; salutedevices.com:7.1.1;
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
+ ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/04/25 14:02:00 #24969020
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,24 +101,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 25 Apr 2024 at 16:16, Caleb Connolly <caleb.connolly@linaro.org> wrote:
-> I discussed an idea with Ilias to generate GUIDs dynamically based on
-> the board compatible/model, which seem to essentially just an
-> abstraction on this..
+nfc: Synced from Linux commit 7ca2ef33179f ("Linux 6.6-rc1")
+nand_all_pins: Synced from Linux commit be18d53c32b2 ("Linux 6.7-rc3")
 
-Yup, that works too -- on the assumption the compatible string is unique enough.
+Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
+---
+ arch/arm/dts/meson-axg.dtsi | 36 ++++++++++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
 
-> >> Of course, it's much better if they have different GUIDs
-> >> in the ESRT to completely avoid the chance of the wrong firmware being
-> >> flashed on the wrong device.
->
-> So expanding on the above a bit, the idea Ilias and I brainstormed was
-> to use v5 GUIDs (which are deterministic based on a "salt" GUID and some
-> arbitrary data which is hashed together). We would use the board model
-> and compatible, as well as the firmware image name to generate these.
+diff --git a/arch/arm/dts/meson-axg.dtsi b/arch/arm/dts/meson-axg.dtsi
+index 3f5254eeb4..4f6fdd5523 100644
+--- a/arch/arm/dts/meson-axg.dtsi
++++ b/arch/arm/dts/meson-axg.dtsi
+@@ -430,6 +430,27 @@
+ 					};
+ 				};
+ 
++				nand_all_pins: nand_all_pins {
++					mux {
++						groups = "emmc_nand_d0",
++							 "emmc_nand_d1",
++							 "emmc_nand_d2",
++							 "emmc_nand_d3",
++							 "emmc_nand_d4",
++							 "emmc_nand_d5",
++							 "emmc_nand_d6",
++							 "emmc_nand_d7",
++							 "nand_ce0",
++							 "nand_ale",
++							 "nand_cle",
++							 "nand_wen_clk",
++							 "nand_ren_wr";
++						function = "nand";
++						input-enable;
++						bias-pull-up;
++					};
++				};
++
+ 				emmc_ds_pins: emmc_ds {
+ 					mux {
+ 						groups = "emmc_ds";
+@@ -1906,6 +1927,21 @@
+ 				resets = <&reset RESET_SD_EMMC_C>;
+ 			};
+ 
++			nfc: nand-controller@7800 {
++				compatible = "amlogic,meson-axg-nfc";
++				reg = <0x0 0x7800 0x0 0x100>,
++				      <0x0 0x7000 0x0 0x800>;
++				reg-names = "nfc", "emmc";
++				pinctrl-0 = <&nand_all_pins>;
++				pinctrl-names = "default";
++				#address-cells = <1>;
++				#size-cells = <0>;
++				interrupts = <GIC_SPI 34 IRQ_TYPE_EDGE_RISING>;
++				clocks = <&clkc CLKID_SD_EMMC_C>,
++					 <&clkc CLKID_FCLK_DIV2>;
++				clock-names = "core", "device";
++			};
++
+ 			usb2_phy1: phy@9020 {
+ 				compatible = "amlogic,meson-gxl-usb2-phy";
+ 				#phy-cells = <0>;
+-- 
+2.35.0
 
-So that's kinda like Microsoft CHID, and I'm wondering why you
-couldn't just use one of the GUIDs from `sudo fwupdtool hwids`
-actually *as* the capsule GUID.
-
-Richard.
