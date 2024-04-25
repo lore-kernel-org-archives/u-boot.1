@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0E08C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 23:03:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF61C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 23:04:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75DEB89094;
+	by phobos.denx.de (Postfix) with ESMTP id DE3538909C;
 	Fri, 26 Apr 2024 01:03:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
 	s=phobos-20191101; t=1714086220;
-	bh=QP3TVNfwAPVdsuaOefp7j8M1h7nqsLH+PGLkDHqFibw=;
+	bh=ryzjauw8QZpjUei/CAxyZrr5PIqB58VPgTf1WGJm30Q=;
 	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=oWqqrkNrlq7/Pw0UkIEpHVkJ1AuxorW3t5TovEwuGMGRLb+BXcoFaX72ZYKTXHkpb
-	 XH+1yOyK/fzVrIcsw5nWTOKs2sWcOH+YD5x63xY6/fkFOKOON0BSFXRNNJn4tsZf/n
-	 DoxewzN/o8N4Y/Kj4YU5Es28l1zUQBJ0vPCV91JH70fgqbrKxmXOU9HwvrPSiVbnph
-	 sAv2/exqPAzQfBKnSm8elCJ0qApKFUPjnt7KNCVCw2NUFyJK1t+i16QIYL/pjLzqDX
-	 iF3VHgCg6NpfxRem42AaHjuB4rGsX4L+iwFJeSPkJqVLU+5kZUFwhoGTXxnHd0vmNC
-	 M4QGTBX2nDCbQ==
+	b=grGiRAPuA7sCoiDftcfyKvVsheDgJFpySjJm28XT1UC+CJUXdq7dwYHhvjcdxUNVu
+	 5J24Vp5Ib2MYRZawQADYcTLTw46MXALNzPAHdEznCOn0EzS9IcfxUCpXy8R7wEJ95Z
+	 6o0xrxSoEDb9AwEN70Cpy/woW6GBCnbVwG4tO4wxd7Y3Iw5YLjLyCGW22Nk3O+7jjq
+	 zXjHe+vpNdMaaYO1hq7rwo5Ko1WoJpI12AUj03V8qKq/2WG3bvS517m3ATTRH2HNO/
+	 oyA3Xjau+Sg6kg9UZaYuyg/xXtSlMRmedr6TQSCKloLGrHPwjvoNePk02aikn0LUSR
+	 IcTAmkbODt3rQ==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 7DF678907F;
- Fri, 26 Apr 2024 01:03:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 3677189081;
+ Fri, 26 Apr 2024 01:03:39 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
  s=phobos-20191101; t=1714086219;
- bh=QP3TVNfwAPVdsuaOefp7j8M1h7nqsLH+PGLkDHqFibw=;
+ bh=ryzjauw8QZpjUei/CAxyZrr5PIqB58VPgTf1WGJm30Q=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=fBzJZCkv74dzY0FSS1ZwZUrXef2msvDAy6mDRydz1nB2YS6V4amtOFVR9mzenDjUm
- 9YD41aLNvIP73DgdDaAQqKVfQnQXEh0P6MlNrTc50+FfKGcwrc0k+uvadibWiiYH7H
- xJU2FMTty854J2/GWwPOBrTEzXwd81TwXxJN6uux8ter5lWtgMWk7C1U9XVv0g76qP
- sL8iWB0buylb4WyM6Y12WSFnMOEwSVJwyq2+i609bEfPUYzYrE0GfuxAuhlQwExriQ
- bKpjQMERAvDSnWmK9RTf896YbUo+LOozetxbrMwQUU5ot1LQBBScVVdy5DcG8fc4EM
- nCQFgJ3QHpjCw==
+ b=ApIrP4l+ZKfJDVEpu2SJmo02WNl9MbnSlWu5npD1zZxV9Yy8asQFNfrnXKdxz6ymr
+ nyR7qhcQ3Hzq6psgmrR5pf9/juhadwoVWyiQtg6XwJhqC6o035BPlyIYQJLINXZgFy
+ +/VjwgAj8Hionz5M6NXRZJkxe/aEILZfv+chnPC4okynlsjJIgs1mGdA5qyUCP0jME
+ 3v7MONk5LI1NeQMRrpeiASQ+bmOY0hM8CFP01jtG3sepkeEBWawTqk00J8GSxkdUVN
+ xviM/mRwUbz6N6qoACwC16burDqP9ifMPN3eMoF59krQ+xou0rIeHHx9ooXCAPfRTf
+ LOmLGeWzvce0g==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, Angelo Dureghello <angelo@kernel-space.org>,
@@ -49,9 +49,10 @@ Cc: Marek Vasut <marex@denx.de>, Angelo Dureghello <angelo@kernel-space.org>,
  Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 2/3] crypto/fsl: Introduce SPL_FSL_CAAM_RNG
-Date: Fri, 26 Apr 2024 01:02:08 +0200
-Message-ID: <20240425230314.497203-2-marex@denx.de>
+Subject: [PATCH 3/3] crypto/fsl: Differentiate between CAAM and DCP in Kconfig
+ entry
+Date: Fri, 26 Apr 2024 01:02:09 +0200
+Message-ID: <20240425230314.497203-3-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240425230314.497203-1-marex@denx.de>
 References: <20240425230314.497203-1-marex@denx.de>
@@ -73,9 +74,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add SPL variant of SPL_FSL_CAAM_RNG so that the SPL_FSL_CAAM_RNG can
-be disabled in SPL if necessary. This may be necessary due to e.g.
-size constraints of the SPL.
+Differentiate between "Enable Random Number Generator support" and
+"Enable Random Number Generator support" in Kconfig entry, mark the
+first as CAAM and the second as DCP, otherwise users cannot easily
+decide which of the options is which and enable the correct one.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -94,40 +96,31 @@ Cc: Tim Harvey <tharvey@gateworks.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/crypto/fsl/Kconfig  | 7 +++++++
- drivers/crypto/fsl/Makefile | 2 +-
- 2 files changed, 8 insertions(+), 1 deletion(-)
+ drivers/crypto/fsl/Kconfig | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/crypto/fsl/Kconfig b/drivers/crypto/fsl/Kconfig
-index 294e1c8a44e..9f58731bb67 100644
+index 9f58731bb67..9ed56632fcd 100644
 --- a/drivers/crypto/fsl/Kconfig
 +++ b/drivers/crypto/fsl/Kconfig
-@@ -78,6 +78,13 @@ config FSL_CAAM_RNG
- 	  using the prediction resistance flag which means the DRGB is
- 	  reseeded from the TRNG every time random data is generated.
+@@ -69,7 +69,7 @@ config FSL_CAAM_JR_NTZ_ACCESS
+ 	  driver is used.
  
-+config SPL_FSL_CAAM_RNG
-+	bool "Enable CAAM Random Number Generator support in SPL"
-+	depends on SPL_DM_RNG
-+	help
-+	  This option is an SPL-variant of the FSL_CAAM_RNG option.
-+	  See the help of FSL_CAAM_RNG for details.
-+
+ config FSL_CAAM_RNG
+-	bool "Enable Random Number Generator support"
++	bool "Enable CAAM Random Number Generator support"
+ 	depends on DM_RNG
+ 	default y
+ 	help
+@@ -88,7 +88,7 @@ config SPL_FSL_CAAM_RNG
  endif
  
  config FSL_DCP_RNG
-diff --git a/drivers/crypto/fsl/Makefile b/drivers/crypto/fsl/Makefile
-index 7a2543e16cc..4fbce519a0b 100644
---- a/drivers/crypto/fsl/Makefile
-+++ b/drivers/crypto/fsl/Makefile
-@@ -6,6 +6,6 @@ obj-y += sec.o
- obj-$(CONFIG_FSL_CAAM) += jr.o fsl_hash.o jobdesc.o error.o
- obj-$(CONFIG_CMD_BLOB)$(CONFIG_IMX_CAAM_DEK_ENCAP) += fsl_blob.o
- obj-$(CONFIG_RSA_FREESCALE_EXP) += fsl_rsa.o
--obj-$(CONFIG_FSL_CAAM_RNG) += rng.o
-+obj-$(CONFIG_$(SPL_TPL_)FSL_CAAM_RNG) += rng.o
- obj-$(CONFIG_FSL_DCP_RNG) += dcp_rng.o
- obj-$(CONFIG_FSL_MFGPROT) += fsl_mfgprot.o
+-	bool "Enable Random Number Generator support"
++	bool "Enable DCP Random Number Generator support"
+ 	depends on DM_RNG
+ 	help
+ 	  Enable support for the hardware based random number generator
 -- 
 2.43.0
 
