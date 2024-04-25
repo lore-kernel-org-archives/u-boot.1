@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98022C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 12:10:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22610C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 12:10:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C697988F43;
-	Thu, 25 Apr 2024 14:09:18 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 37B2188F4C;
+	Thu, 25 Apr 2024 14:09:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oQQDa953";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cgeVpYiA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE55F88F41; Thu, 25 Apr 2024 14:09:15 +0200 (CEST)
-Received: from fllv0015.ext.ti.com (fllv0015.ext.ti.com [198.47.19.141])
+ id F0EBD88F43; Thu, 25 Apr 2024 14:09:16 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C22ED88F04
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 14:09:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4691688F24
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 14:09:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0015.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PC903v016313;
- Thu, 25 Apr 2024 07:09:00 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PC93YQ022868;
+ Thu, 25 Apr 2024 07:09:03 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1714046940;
- bh=iAnEdjyGTRlVwGGu0SYK2hOlJ6jK2qLwjZl3a8bjM14=;
+ s=ti-com-17Q1; t=1714046943;
+ bh=Jr6uBeVc89I/XALnbI82yLZEN4EdVKywtoPuW1kdjk8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=oQQDa953jPMkoh3I/J0V9UZE4Pe/sDG9Up6rNK1HWg20GW3TuFesHrALFFFCloIfA
- c+OPKi9IzNcSHHgSG9lf3TgpKIAN2ILtG26hXODtmZ2bMOzCG1jI3WmDUuWievnJl1
- RKfdxdQmd9GkiFiK59UM4NSU3wKM4HErE7na2f6k=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PC90hI125114
+ b=cgeVpYiAksPOInDZrI25xw+EGZ1jv5Tto6l5UjYNDOhAWy0RZqcvIYMFyWRri1Ghv
+ ZhmzvgnLm4zhnhN8Z4gbpttRXlA2vN9kz+XrLePUhUnSRmvLVRxp0jPzV0biUifIBc
+ oXDaP5tj3S7vuqBLP3/hLy4kX2hioi2pCsNMyTos=
+Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PC93Sl033994
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 25 Apr 2024 07:09:00 -0500
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 25 Apr 2024 07:09:03 -0500
+Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE102.ent.ti.com
+ (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- Apr 2024 07:09:00 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 07:09:03 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE104.ent.ti.com
+ (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 Apr 2024 07:08:59 -0500
+ Frontend Transport; Thu, 25 Apr 2024 07:09:02 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PC8xNl037562;
- Thu, 25 Apr 2024 07:08:59 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PC92wf037781;
+ Thu, 25 Apr 2024 07:09:02 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Michal Simek
  <michal.simek@amd.com>, Vignesh Raghavendra <vigneshr@ti.com>, "MD Danish
@@ -68,9 +68,10 @@ To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Michal Simek
  Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
  Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v2 08/10] configs: am62: Enable configs required for Ethboot
-Date: Thu, 25 Apr 2024 17:38:20 +0530
-Message-ID: <20240425120822.2048012-9-c-vankar@ti.com>
+Subject: [PATCH v2 10/10] arch: arm: dts: k3-am62-sk-u-boot: Add missing
+ "bootph-all" property to phy_gmii_sel node
+Date: Thu, 25 Apr 2024 17:38:22 +0530
+Message-ID: <20240425120822.2048012-11-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240425120822.2048012-1-c-vankar@ti.com>
 References: <20240425120822.2048012-1-c-vankar@ti.com>
@@ -94,43 +95,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Kishon Vijay Abraham I <kishon@ti.com>
+Add "bootph-all" property to CPSW MAC's PHY node phy_gmii_sel.
 
-Enable config options needed to support Ethernet boot on AM62x SK.
-
-Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
-Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
-Link to v1:
-https://lore.kernel.org/r/20240112064759.1801600-10-s-vadapalli@ti.com/
-
 Changes from v1 to v2:
-- Removed independent defconfig files for A53 configs and created a config
-  fragment for them as suggested by Nishanth.
+- This patch is newly added in this series to enable CPSW MAC's PHY
+  node "phy_gmii_sel". As per discussion at here:
+  https://lore.kernel.org/r/20240112130127.rvvrhz7p4vmlyalh@smother/
+  changes made by this patch can be dropped in the future when the
+  DT-Sync is performed with am62-main.dtsi containing this change in
+  the Linux DT which will match U-Boot's DT.
 
- configs/am62x_evm_a53_ethboot_defconfig | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 configs/am62x_evm_a53_ethboot_defconfig
+ arch/arm/dts/k3-am625-sk-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/configs/am62x_evm_a53_ethboot_defconfig b/configs/am62x_evm_a53_ethboot_defconfig
-new file mode 100644
-index 0000000000..e49221ee23
---- /dev/null
-+++ b/configs/am62x_evm_a53_ethboot_defconfig
-@@ -0,0 +1,11 @@
-+#include <configs/am62x_evm_a53_defconfig>
+diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+index fa778b0ff4..e9a1afde95 100644
+--- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
++++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
+@@ -46,3 +46,7 @@
+ &cpsw_port2 {
+ 	status = "disabled";
+ };
 +
-+CONFIG_SPL_STACK_R_ADDR=0x83000000
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_BOARD_INIT=y
-+CONFIG_SPL_DMA=y
-+CONFIG_SPL_ENV_SUPPORT=y
-+CONFIG_SPL_ETH=y
-+CONFIG_SPL_NET=y
-+CONFIG_SPL_NET_VCI_STRING="AM62X U-Boot A53 SPL"
-+CONFIG_SPL_SYSCON=y
++&phy_gmii_sel {
++	bootph-all;
++};
 -- 
 2.34.1
 
