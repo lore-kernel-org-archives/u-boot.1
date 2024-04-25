@@ -4,55 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D06BC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 15:18:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3850FC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 15:31:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE80388ED9;
-	Thu, 25 Apr 2024 17:18:34 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xff.cz
+	by phobos.denx.de (Postfix) with ESMTP id 9D1D688FE7;
+	Thu, 25 Apr 2024 17:30:59 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=xff.cz header.i=@xff.cz header.b="UF5fr4n5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X7Vt1Wlt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A6D8488E5F; Thu, 25 Apr 2024 17:18:32 +0200 (CEST)
-Received: from vps.xff.cz (vps.xff.cz [195.181.215.36])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A772E88FE0; Thu, 25 Apr 2024 17:30:58 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56B3788ED9
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 17:18:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F0F8A88FFC
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 17:30:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xff.cz
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=megi@xff.cz
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=xff.cz; s=mail;
- t=1714058308; bh=fGRfnmx2H86jBaMwGqoQiElY800SIBmac2PNzbFCda8=;
- h=Date:From:To:Cc:Subject:X-My-GPG-KeyId:References:From;
- b=UF5fr4n5+lH5jTgzQs635YsbzoP17mttD34VQEkz8ElWzEqNdgbasCSYihQK+4vGG
- oD5VyFiu/zZvJNZ1g0wBcZo/YCUPRFAZDAruMp1KQqpxETMsdeEtzZahT1iDEjVkgN
- 1foErn/SWBhCQljnS8OhlxUY0gwQaY6Q+KwoaH88=
-Date: Thu, 25 Apr 2024 17:18:27 +0200
-From: =?utf-8?Q?Ond=C5=99ej?= Jirman <megi@xff.cz>
-To: Michal Simek <michal.simek@amd.com>
-Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Igor Prusov <ivprusov@sberdevices.ru>
-Subject: Re: [PATCH] clk: zynq: Fix EMIO clock use detection for gem0
-Message-ID: <ue225zvgzd4zg5u45uvdatgsevkqau4udfpythlncczwv62znz@fdk2lhm6rdhw>
-Mail-Followup-To: =?utf-8?Q?Ond=C5=99ej?= Jirman <megi@xff.cz>, 
- Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de,
- Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Igor Prusov <ivprusov@sberdevices.ru>
-X-My-GPG-KeyId: EBFBDDE11FB918D44D1F56C1F9F0A873BE9777ED
- <https://xff.cz/key.txt>
-References: <20240416084456.2821567-1-megi@xff.cz>
- <ca63cfb0-5e5f-4522-8cda-87dec22588c9@amd.com>
- <5gv2fqik5vtygldqmv23tpcsyaftazblm4atk3igweduivmiqu@aeoflxwzlvx3>
- <9a5501c1-359d-4e5c-a25e-7c1631451af5@amd.com>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=r-gunasekaran@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PFUdaL084735;
+ Thu, 25 Apr 2024 10:30:39 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1714059039;
+ bh=XBc/kioONsEMRZmRvaqmjhts1qvej/BW4tkMct5h4so=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=X7Vt1WltODAzFqeM+Hr3bpSHQjgU0Ey9QhNQqSoDeyiVueMBnjvnI4DsM1VgmLSdu
+ PpPqVImx+ckjb+7OL0aqHV0f6vXRAWZuCRmi2ZDeAUkEYlZiwkKQ38Swhh1FOAymXC
+ mwy8iAakgI+wc01ToIugtvIIAEVlabJ81TlfbR9c=
+Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PFUdUV066320
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 25 Apr 2024 10:30:39 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE103.ent.ti.com
+ (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
+ Apr 2024 10:30:39 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 25 Apr 2024 10:30:39 -0500
+Received: from [10.250.149.192] ([10.250.149.192])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PFUSsn074498;
+ Thu, 25 Apr 2024 10:30:29 -0500
+Message-ID: <b326dbec-942a-4333-9ef5-c8b84afae081@ti.com>
+Date: Thu, 25 Apr 2024 21:00:27 +0530
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <9a5501c1-359d-4e5c-a25e-7c1631451af5@amd.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 0/6] Enable ICSSG Ethernet Driver for AM65x
+To: MD Danish Anwar <danishanwar@ti.com>, Bryan Brattlof <bb@ti.com>, Sean
+ Anderson <seanga2@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Christian Gmeiner <christian.gmeiner@gmail.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>, Nikhil M Jain
+ <n-jain1@ti.com>, Nishanth Menon <nm@ti.com>, Manorit Chawdhry
+ <m-chawdhry@ti.com>, Andrew Davis <afd@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Simon Glass <sjg@chromium.org>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Tim Harvey <tharvey@gateworks.com>, Tony Dinh
+ <mibodhi@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>, Jonas Karlman
+ <jonas@kwiboo.se>, Sumit Garg <sumit.garg@linaro.org>, Michal Simek
+ <michal.simek@amd.com>, Neil Armstrong <neil.armstrong@linaro.org>, Kever
+ Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, Roger Quadros <rogerq@kernel.org>,
+ Ravi Gunasekaran <r-gunasekaran@ti.com>
+References: <20240416092018.3593039-1-danishanwar@ti.com>
+Content-Language: en-US
+From: Ravi Gunasekaran <r-gunasekaran@ti.com>
+In-Reply-To: <20240416092018.3593039-1-danishanwar@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,71 +92,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 25, 2024 at 12:59:29PM GMT, Michal Simek wrote:
-> > Well, it doesn't help that the code is almost all refering to CLK_CTRL while
-> > actually accessing gem1_rclk_ctrl in the struct.
-> > 
-> > In any case it can't detect the case when sourcing the clock from EMIO and
-> > not one of the PLLs, apparently.
-> > 
-> > The failure I'm talking about is here in zynq_gem.c:
-> > 
-> >          ret = clk_get_rate(&priv->tx_clk);
-> >          if (ret != clk_rate) {
-> >                  ret = clk_set_rate(&priv->tx_clk, clk_rate);
-> >                  if (IS_ERR_VALUE(ret)) {
-> >                          dev_err(dev, "failed to set tx clock rate %ld\n", clk_rate);
-> >                          return ret;
-> >                  }
-> >          }
-> > 
-> > And all I get is "failed to set tx clock rate" from U-Boot and no ethernet.
-> 
-> Zynq is quite a old device but I expect you have external clock out of chip
-> or you generate it in PL. For that you need to describe it.
-> 
-> How does your DT looks like for external clocks?
-
-The situation is that RX/TX clocks just come from outside
-https://megous.com/dl/tmp/af9e7c9e8d51781b.png via PL. 25MHz clock is
-generated by the PHY.
-
-I solved it eventually.
-
-I described the PHY generated clock as a fixed-clock node, and added a
-reference to it under &clkc as a source for "gem0_emio_clk".
-
-  https://megous.com/git/u-boot/tree/arch/arm/dts/zynq-ebaz-megi.dts?h=v2024.07#n26
-
-Zynq clk code seems to fetch gem0_emio_clk from DT for the purpose of
-determining the clk rate for gem0 in emio mode:
-
-  https://elixir.bootlin.com/u-boot/latest/source/drivers/clk/clk_zynq.c#L524
-  https://elixir.bootlin.com/u-boot/latest/source/drivers/clk/clk_zynq.c#L280
-
-This got rid of the "failed to set tx clock rate" error. Thank you for the hint.
 
 
-BTW, I managed to get the .bit file loaded via SPL only with a SPL patch:
+On 4/16/2024 2:50 PM, MD Danish Anwar wrote:
+> The series introduces device tree and config changes and AM65x
+> to enable ICSSG driver. The series also enables SPL_LOAD_FIT_APPLY_OVERLAY
+> for AM65x in order to load overlay over spl.
+>
+> The ICSSG2 node is added in device tree overlay so that it remains in
+> sync with linux kernel.
+>
+> This series has been tested on AM65x SR2.0, and the ICSSG interface is
+> able to ping / dhcp and boot kernel using tftp in uboot.
+>
+> The users need to set env variables fw_storage_interface, fw_dev_part,
+> fw_ubi_mtdpart, fw_ubi_volume to indicate which storage medium and
+> partition they want to use to load firmware files from. By default the env
+> fw_storage_interface=mmc and fw_dev_part=1:2 but users can modify these
+> envs as per their requirements.
+>
+> This is the v4 of the series [1]. The series doesn't depend on any patch
+> and can be applied cleanly on u-boot/master
+>
+> Changes from v3 to v4:
+> *) Separated the device tree and board specific changes into this series
+>    from the main series [1].
+> *) Added check for TARGET_AM654_A53_EVM config in board file as suggested
+>    by Dan Carpenter <dan.carpenter@linaro.org>
+> *) Rebased on latest u-boot/master.
+>
+> [1] https://lore.kernel.org/all/20240124064930.1787929-1-danishanwar@ti.com/
+>
+> MD Danish Anwar (6):
+>   arm: dts: k3-am654-base-board: Add ICSSG2 Ethernet support
+>   arm: dts: k3-am65x-binman: Add ICSSG2 overlay and configuration
+>   configs: am65x_evm_a53: Enable ICSSG Driver
+>   configs: am65x_evm_a53: add SPL_LOAD_FIT_APPLY_OVERLAY
+>   board: ti: am65x: Add check for k3-am654-icssg2 in
+>     board_fit_config_match()
+>   board: ti: am65x: Set fw_storage_interface and fw_dev_part ENVs
+>
+>  arch/arm/dts/Makefile             |   4 +-
+>  arch/arm/dts/k3-am654-icssg2.dtso | 145 ++++++++++++++++++++++++++++++
+>  arch/arm/dts/k3-am65x-binman.dtsi |  65 +++++++++++++-
+>  board/ti/am65x/am65x.env          |   4 +
+>  board/ti/am65x/evm.c              |   9 +-
+>  configs/am65x_evm_a53_defconfig   |   2 +
+>  6 files changed, 221 insertions(+), 8 deletions(-)
+>  create mode 100644 arch/arm/dts/k3-am654-icssg2.dtso
+>
+>
+> base-commit: 6e316e3f397b5e01e98c5dd56cdbaab961daeedf
 
-  https://megous.com/git/u-boot/commit/?h=v2024.07&id=c1403bd080bc517c9dc6f507ee12b62fa85153bc
+For the series,
+Acked-by: Ravi Gunasekaran <r-gunasekaran@ti.com>
 
-It's similar to how it's done in:
+Regards,
+Ravi
 
-  https://elixir.bootlin.com/u-boot/latest/source/boot/image-board.c#L677
-
-fpga_load() function doesn't work with .bit file I get from Vivado but
-fpga_loadbitstream() one does. SPL doesn't call it, though. Is that by design?
-Should I be converting .bit file to something else usable by fpga_load()
-somehow?
-
-I'd like to load bitstream in SPL from FIT because U-Boot proper may already
-need some PL logic activated for ethernet to work there. Also it's one less
-file on the /boot filesystem to worry about. :)
-
-Thank you and kind regards,
-	o.
-
-
-> Thanks,
-> Michal
