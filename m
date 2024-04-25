@@ -4,54 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1402EC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 04:02:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59C4DC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 04:28:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12E8288E23;
-	Thu, 25 Apr 2024 06:02:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mailtundra.com
+	by phobos.denx.de (Postfix) with ESMTP id 8B3DE88727;
+	Thu, 25 Apr 2024 06:28:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailtundra.com header.i=@mailtundra.com header.b="FuizOk2r";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 085ED88E54; Thu, 25 Apr 2024 06:02:43 +0200 (CEST)
-Received: from mail-4323.proton.ch (mail-4323.proton.ch [185.70.43.23])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40AF888E20
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 06:02:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mailtundra.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mwleeds@mailtundra.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailtundra.com;
- s=protonmail2; t=1714017757; x=1714276957;
- bh=D/UGTcNuz78Zd/e35NHhQWG4+rtwdlYs7mYYMmquRv4=;
- h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
- Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
- Message-ID:BIMI-Selector;
- b=FuizOk2rPTqHCZ82YN2DesXk2gbCjfGXVyk54iPYOViwEwBqtabX5Dh81851IYmJi
- hmPAbQJ62N0UKBbMQw8gX3090REO4L2XYwFdO1q5pJNsr/QFAfxgpZdL72LfSDYC4/
- B9Iwm3k6EL2faDEvtO7arvQKSrYI4rIoz/2/gRNEZb2Mv0JAjUhiyvMxQCkOc2u2Bs
- TMQWsQ5NW/wRaTvcKL80oOg6KFAeqoNZzNHub7hzCC2aERIBGZTGV+3RhSjWqBi8fP
- 8e6pfWZmoghpZD5spxoDop35sSXgDbMkopu/wDmI0yYe4drVySCVC/MWpWARqU8mAq
- A0o4FjNmun7BQ==
-Date: Thu, 25 Apr 2024 04:02:32 +0000
-To: Caleb Connolly <caleb.connolly@linaro.org>
-From: mwleeds@mailtundra.com
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH 3/5] zfs: Fix unaligned read of uint64
-Message-ID: <yMP4wWXZMjDL0Xi9eeSdNuUBW7pE82Ie-UoUMbNBa7K1Vckv8A4da_KjBUlGkpeQfQsADCJ8z73FxL9AlyQjSJ41TJM1ohjNHzAStZpdhUk=@mailtundra.com>
-In-Reply-To: <16d96fa3-4d95-4bfa-beac-6585426dc703@linaro.org>
-References: <20240407014743.13872-1-mwleeds@mailtundra.com>
- <20240407014743.13872-4-mwleeds@mailtundra.com>
- <16d96fa3-4d95-4bfa-beac-6585426dc703@linaro.org>
-Feedback-ID: 106267484:user:proton
-X-Pm-Message-ID: c56777ee2579e32ce5e6b75e2492f613054e797b
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1714019307;
+	bh=qqJWBkuYoK9oWobNwD8M2QLCDZZUyHTjuD+AGrPhm9Q=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=qaLAydYfODcHujSxa9998eBN/uRPw4ZhrjoHEzYmgqVVCyA/Ad7wTMe6NgfnKQFUK
+	 Sp7Q706GO4IwWI1B1SzVckCseT2WvEGi00SCggCAepgVjTK2UzwQUzEvaxuSUgl2K4
+	 0/M+asoOoGJ4sB0flaaashZyi8P/Jw7r9fgfFJrFj2rNTQdmmTGpZ2S39H7S2NyqRY
+	 ViHnAC+xJJ26a+02v7jgNwGtKxuD93Hq/7ugxEh5iEy+jA50rrLa1hwj+8X7SGnxMB
+	 5x0Ki2lf9oKaLZW21yST7PbxRBHSX10TAhcXOYoDR7xzWKbjd7031Ngxk44uuC0Wbw
+	 zUCPsoQVriCRg==
+Received: from [192.168.1.107] (82-131-156-115.pool.digikabel.hu
+ [82.131.156.115])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested) (Authenticated sender: hs@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 07C008870C;
+ Thu, 25 Apr 2024 06:28:24 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1714019305;
+ bh=qqJWBkuYoK9oWobNwD8M2QLCDZZUyHTjuD+AGrPhm9Q=;
+ h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
+ b=Cl4GqZUS8BuFgLv0zmVfA2hmnoh2Lc46c9GdrvdKZaNe9X5eHAIzldClCtQlkwE/n
+ mfihrFBt/I5iKQmbuMt+XuZYyXM8C4vDftcRUnJHWc5RrKJUTW70bpNUv88JNww4sj
+ V2J6iiR8VRT8Y+uNF795z8BUNPdkJCZhCwiYlpWeNNFRJBcIgiDm5aA1JTGl2r+BiE
+ iAgDEz1Gda3TuQJO0bgdnbZdf+cfSlbYS+LJ6Kuf0kUcQxyE6Mn3pTwY55wr4+5gl5
+ 1IK2fQ0BIdK5RwK9owGrlv+eOLIY/PgbEMJiGUgSQ4LJaYurvSbNzacEMDlSl2BSKp
+ JSYlesTSBwEGQ==
+Message-ID: <ea2ae539-abc4-30a6-5ffe-911f46f22f70@denx.de>
+Date: Thu, 25 Apr 2024 06:28:05 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v2 0/2] i2c: Add support for Qualcomm Generic Interface
+ (GENI) I2C controller
+Content-Language: en-US
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+References: <20240422-topic-sm8x50-i2c-v2-0-f9ad61c33b07@linaro.org>
+ <171387260254.2280908.3755821257633373339.b4-ty@linaro.org>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <171387260254.2280908.3755821257633373339.b4-ty@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,177 +67,51 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Caleb,
+Hello Caleb,
 
-Thanks for this interesting feedback. I saw these patches were already merg=
-ed
-since you sent this but I added a few thoughts below anyway.
+On 23.04.24 13:43, Caleb Connolly wrote:
+> 
+> On Mon, 22 Apr 2024 11:33:51 +0200, Neil Armstrong wrote:
+>> Add Support for the Qualcomm Generic Interface (GENI) I2C interface
+>> found on newer Qualcomm SoCs.
+>>
+>> The Generic Interface (GENI) is a firmware based Qualcomm Universal
+>> Peripherals (QUP) Serial Engine (SE) Wrapper which can support multiple
+>> bus protocols depending on the firmware type loaded at early boot time
+>> based on system configuration.
+>>
+>> [...]
+> 
+> Applied, thanks!
 
-On Friday, April 12th, 2024 at 11:50 AM, Caleb Connolly <caleb.connolly@lin=
-aro.org> wrote:
+Hmm.. where do you have them applied?
 
-> Hi Phaedrus,
->=20
-> On 07/04/2024 03:47, mwleeds@mailtundra.com wrote:
->=20
-> > Without this patch, when trying to boot zfs using U-Boot on a Jetson TX=
-2
-> > NX (which is aarch64), I get a CPU reset error like so:
-> >=20
-> > "Synchronous Abort" handler, esr 0x96000021
-> > elr: 00000000800c9000 lr : 00000000800c8ffc (reloc)
-> > elr: 00000000fff77000 lr : 00000000fff76ffc
-> > x0 : 00000000ffb40f04 x1 : 0000000000000000
-> > x2 : 000000000000000a x3 : 0000000003100000
-> > x4 : 0000000003100000 x5 : 0000000000000034
-> > x6 : 00000000fff9cc6e x7 : 000000000000000f
-> > x8 : 00000000ff7f84a0 x9 : 0000000000000008
-> > x10: 00000000ffb40f04 x11: 0000000000000006
-> > x12: 000000000001869f x13: 0000000000000001
-> > x14: 00000000ff7f84bc x15: 0000000000000010
-> > x16: 0000000000002080 x17: 00000000001fffff
-> > x18: 00000000ff7fbdd8 x19: 00000000ffb405f8
-> > x20: 00000000ffb40dd0 x21: 00000000fffabe5e
-> > x22: 000000ea77940000 x23: 00000000ffb42090
-> > x24: 0000000000000000 x25: 0000000000000000
-> > x26: 0000000000000000 x27: 0000000000000000
-> > x28: 0000000000bab10c x29: 00000000ff7f85f0
-> >=20
-> > Code: d00001a0 9103a000 94006ac6 f9401ba0 (f9400000)
-> > Resetting CPU ...
-> >=20
-> > This happens when be64_to_cpu() is called on a value that exists at a
-> > memory address that's 4 byte aligned but not 8 byte aligned (e.g. an
-> > address ending in 04). The call stack where that happens is:
-> > check_pool_label() ->
-> > zfs_nvlist_lookup_uint64(vdevnvlist, ZPOOL_CONFIG_ASHIFT,...) ->
-> > be64_to_cpu()
->=20
->=20
-> This is very odd, aarch64 doesn't generally have these restrictions. I
-> got a bit nerdsniped when I saw this so I did some digging and figured th=
-is:
->=20
-> 1. Your abort exception doesn't include the FAR_ELx register (which
-> should contain the address that was being accessed when the abort
-> occured). This means your board is running in EL3.
-> 2. It turns out there is an "A" flag in the SCTLR_ELx register, when set
-> this flag causes a fault when trying to load from an address that isn't
-> aligned to the size of the data element (see "A, bit" on
-> https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-Registers=
-/SCTLR-EL3--System-Control-Register--EL3-
->=20
-> I'm not sure who's in the "wrong" here, maybe the driver should avoid
-> unaligned accesses? But then again, I don't think you should be running
-> a ZFS driver in EL3.
->=20
-> I'm not familiar with the Jetson Nano, but maybe there's a documented
-> way to run U-Boot so that it isn't executing in EL3? Or if not you could
-> also try unsetting the A flag.
+At least you should wait for an Acked-by from me! Especially in xz exploit
+times, we really should give custodians some time...
 
-I may look into this if I get a chance. However if I write some assembly co=
-de
-to change the execution level or unset the A flag, I worry that the code wo=
-uld
-work fine on the hardware I have (Jetson TX2 NX) but behave differently on
-another platform. And I don't think I can easily set up testing environment=
-s
-with u-boot + zfs on different platforms to find out.
+v2 was posted 22.04.2024 11:33 and you applied it one day after!
+(And yes, I was on holiday...)
 
->=20
-> If this really is something to fix in the driver, I don't think
-> hotpatching every unaligned access with a malloc() is the right solution.
->=20
+But okay, v2 patchseries looks good to me...
 
-I'm certainly open to other ideas. The difficulty is the data structure we'=
-re
-parsing in this file is read from disk and it's only 4-byte aligned.
+> 
+> [1/2] i2c: Add support for Qualcomm Generic Interface (GENI) I2C controller
+>        commit: 75db9ede12d06693a3ced8c901b74065a1922a23
+> [2/2] configs: qcom_defconfig: enable GENI I2C Driver
+>        commit: ad12acd7a8f5aeea5816d5c2fc37c205c403eee0
+> 
+> Best regards,
+> 
 
-> > Signed-off-by: Phaedrus Leeds mwleeds@mailtundra.com
-> > Tested-by: Phaedrus Leeds mwleeds@mailtundra.com
->=20
->=20
-> regarding your question about re-sending to remove these tags, I'd say
-> probably yes, and especially if you're going to send a new revision anywa=
-y.
->=20
-> fwiw you seem to have gotten pretty much everything else about the patch
-> submission process spot on :)
->=20
-> Kind regards,
->=20
-> > ---
-> > fs/zfs/zfs.c | 18 ++++++++++++++++++
-> > 1 file changed, 18 insertions(+)
-> >=20
-> > diff --git a/fs/zfs/zfs.c b/fs/zfs/zfs.c
-> > index 61d58fce68..9a50deac18 100644
-> > --- a/fs/zfs/zfs.c
-> > +++ b/fs/zfs/zfs.c
-> > @@ -1552,35 +1552,53 @@ nvlist_find_value(char *nvlist, char *name, int=
- valtype, char **val,
-> > if (nelm_out)
-> > *nelm_out =3D nelm;
-> > return 1;
-> > }
-> >=20
-> > nvlist +=3D encode_size; /* goto the next nvpair */
-> > }
-> > return 0;
-> > }
-> >=20
-> > +int is_word_aligned_ptr(void *ptr) {
-> > + return ((uintptr_t)ptr & (sizeof(void *) - 1)) =3D=3D 0;
-> > +}
-> > +
-> > int
-> > zfs_nvlist_lookup_uint64(char *nvlist, char *name, uint64_t *out)
-> > {
-> > char *nvpair;
-> > size_t size;
-> > int found;
-> >=20
-> > found =3D nvlist_find_value(nvlist, name, DATA_TYPE_UINT64, &nvpair, &s=
-ize, 0);
-> > if (!found)
-> > return 0;
-> > if (size < sizeof(uint64_t)) {
-> > printf("invalid uint64\n");
-> > return ZFS_ERR_BAD_FS;
-> > }
-> >=20
-> > + /* On arm64, calling be64_to_cpu() on a value stored at a memory addr=
-ess
-> > + * that's not 8-byte aligned causes the CPU to reset. Avoid that by co=
-pying the
-> > + * value somewhere else if needed.
-> > + */
-> > + if (!is_word_aligned_ptr((void *)nvpair)) {
-> > + uint64_t *alignedptr =3D malloc(sizeof(uint64_t));
-> > + if (!alignedptr)
-> > + return 0;
-> > + memcpy(alignedptr, nvpair, sizeof(uint64_t));
-> > + *out =3D be64_to_cpu(*alignedptr);
-> > + free(alignedptr);
-> > + return 1;
-> > + }
-> > +
-> > out =3D be64_to_cpu((uint64_t *) nvpair);
-> > return 1;
-> > }
-> >=20
-> > char *
-> > zfs_nvlist_lookup_string(char *nvlist, char *name)
-> > {
-> > char *nvpair;
-> > char *ret;
-> > size_t slen;
->=20
->=20
-> --
-> // Caleb (they/them)
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
