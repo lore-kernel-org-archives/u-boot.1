@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76559C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 14:36:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A04D5C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 14:36:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C48488FC0;
-	Thu, 25 Apr 2024 16:36:35 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id F2CE388FD8;
+	Thu, 25 Apr 2024 16:36:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="AdHzbMHM";
+	dkim=pass (2048-bit key; unprotected) header.d=sartura.hr header.i=@sartura.hr header.b="rY4/Fnlt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFB2E88FD6; Thu, 25 Apr 2024 16:36:33 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id BAF3488080; Thu, 25 Apr 2024 16:36:34 +0200 (CEST)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D89B488080
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 16:36:31 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92E7488FD4
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 16:36:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=sartura.hr
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=robert.marko@sartura.hr
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5723edf0ae5so971170a12.0
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 07:36:31 -0700 (PDT)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-a51f9ad7684so73026166b.2
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 07:36:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sartura.hr; s=sartura; t=1714055791; x=1714660591; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=lkuhd3Z9OBSws+Ugivb47MQEwAUIrDJTPPLs0tI1G6A=;
- b=AdHzbMHMSbfRp50pSe86OlcAk9aOHZM4ZbGMfnNeEoLqr3Mzdx4ins25d9glWqlHfI
- mBIcgpXEfmArYz/Cql80/8jQo7L4IqAX2VpXasswNzzw7huSEEnJ5vpqTsFWChZ4859a
- 9PFLAlOvnCbN0Lg2LFx9QCQxWE4AdeWgZx1rabTJBHUdRsi2jk/nsQFXqceoU9DRueeC
- /J20ryPh4VSuKfCLOjuNiEMjCBpZRSnjFWMS2cN35+j2rnJ3Se5tiTobULQkQ5rDah53
- thvc60NODnU4CWlefZzf14sTCInsPsE7KRWs46ZQPNMMsMP1tIw4NXNb2C0yS7Ip5We0
- B9fA==
+ d=sartura.hr; s=sartura; t=1714055792; x=1714660592; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yhvK/Ygto9oeYN2EUP3dmZ9Ix/3oFSBPptIrw7cEZwQ=;
+ b=rY4/FnltjQwqnreZ5xEJZt6vAngj62RquX6CMvlzlpVI6ZPjqeQlVtliCHoaE6nOWE
+ 7H4CFbolljE+lK4IjgbrFo9X2/HiO7dyqy7oooDgFW/ZTNg2HEbu84g5kQMaVyCzG6Yf
+ Pa7wcp+Kzgw9m2ybttxUC7C0SBYyoEZiWKAe4+/8jjwb1fSxVBfolahK36++nSlnR77M
+ smnH44hf5AQTSXXVwTdwHmF1TFJe0hKfH223DKeT8tsIKJ0IkhNeZ5mpXfERja5LVclV
+ 5AuIWFtHR6D0o3hZ4JztRTpTj/47histI16RkLcaWdCEmcITvZ8d6qtu2Yb/wt0euK2L
+ UHNw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714055791; x=1714660591;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lkuhd3Z9OBSws+Ugivb47MQEwAUIrDJTPPLs0tI1G6A=;
- b=F85zDzrrtT3ulm/01ZrxGx9v20wDsSEjP0Al1OeLR+F0clgJ+Ay+4Gr3TShFAcP8Se
- HIqGzai/gjmYy5OrMCaNVPvQNmMi7bdH7yQvd16fEVFoIW5AcSHw9lLtNUEQE8znEznd
- csvE13/ft9Cize6lmHPnKqs3DSI4VBRe7J0hxNlTDqE82Nn8z6QtiEjnxCg5qcj9LhX2
- eMxGCJp7cyFyR9R8+wyeGczTpKp0qMjtdu3BBdT0A4IcUhpyvD7ZMqFRMu3SAxYekQlJ
- ACloLbUSVuGRvhFm7mpM476Ulqd4Bn7l9wqxYXFpTPyPvF8kKzAFx8ohYizbvu5vxZLs
- Unaw==
+ d=1e100.net; s=20230601; t=1714055792; x=1714660592;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yhvK/Ygto9oeYN2EUP3dmZ9Ix/3oFSBPptIrw7cEZwQ=;
+ b=uXr1tW+PTEQaXyhTjfIrLUvXBqV5pCJAOebY+aIIb9bbyT9X9c0pQL1KcJIbA4i9tl
+ ogZEIy51fx8IeFngBv30rpqQ9JfvP0EWcAqpkRfcLEsO2micw9h52yjcOu1dSLa+d6Z4
+ m5xALAjZ1IRi25BQcdpCfHV2GUDnuN80Nl+ID/gz3cCbLdC/rDUocmyxo/JFSUBcIc4z
+ f99xTc6y5NDaE41kYXqYlF9xDIRmVtgOoVf0IQ7eo3bXMWVwzPyy8uUcTNJzXgEe4wAP
+ NcTbwgLJE4eyYimiTDn6M/jbJbT+485ztJGjP9qECu9EoIqRXqwWJmj0bywrhOomRGwL
+ DHyA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJ2hrlDPT9eJM+i+nyL8tpa5Em9YBqbn8TqcKqqRg/10Br3/RmN+3vLMPEIbtFIJteNgvIDy51wOeehgF+TDMhnvvWQw==
-X-Gm-Message-State: AOJu0YxBw7pKZHGZWPpJUP8cbCTCwvV2jfEm4BgM+eLSmZZs17xtIiqW
- Bqwfv//RlT5HtlAxD4MCK7PedwdTAnzApx3kpZXAACuwHX8SctYo6AU6yA5Zy7Y=
-X-Google-Smtp-Source: AGHT+IHe07qT8eOXbfJgBf2PHAZEjRx2+NnCzJ01NahzyHBhaFws9oDD5qS+hMh4T4DSO4pLQkeojQ==
-X-Received: by 2002:a05:6402:2546:b0:572:2f0f:df37 with SMTP id
- l6-20020a056402254600b005722f0fdf37mr4640490edb.5.1714055790983; 
- Thu, 25 Apr 2024 07:36:30 -0700 (PDT)
+ AJvYcCU0JC7CXkWDrJC8SCsKKBWN9TNjJp+rIBoZJiHdnfurd9NNtBxbiTAUQXRm64tqfE3NB35Wznpy5Xiuv8GrYy9nkLauAQ==
+X-Gm-Message-State: AOJu0YxlYkCsdfP7r4x/inZN8hsMW5QHeLon+oR5sSku5ZH8Nba/pi0p
+ e9dCfxf9KVt2IJSVcIIQXpviuIVQj+vFwTuefV8iczCkPyXzoImBykG741x7WAo=
+X-Google-Smtp-Source: AGHT+IFXXY5xjYnxQTyFTpHnOdZq9MEqc8MpqI7SI5jlLhlb6oJjxDOvzwpGFC7IDQI9tOCPWMZDZA==
+X-Received: by 2002:a05:6402:2033:b0:572:325a:8515 with SMTP id
+ ay19-20020a056402203300b00572325a8515mr4327282edb.36.1714055792003; 
+ Thu, 25 Apr 2024 07:36:32 -0700 (PDT)
 Received: from fedora.. (cpe-188-129-47-40.dynamic.amis.hr. [188.129.47.40])
  by smtp.googlemail.com with ESMTPSA id
- l6-20020aa7d946000000b005723151e99asm1856781eds.95.2024.04.25.07.36.29
+ l6-20020aa7d946000000b005723151e99asm1856781eds.95.2024.04.25.07.36.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Apr 2024 07:36:30 -0700 (PDT)
+ Thu, 25 Apr 2024 07:36:31 -0700 (PDT)
 From: Robert Marko <robert.marko@sartura.hr>
 To: jagan@amarulasolutions.com, vigneshr@ti.com, trini@konsulko.com,
  u-boot@lists.denx.de
 Cc: Robert Marko <robert.marko@sartura.hr>
-Subject: [PATCH 1/2] mtd: spi-nor-core: allow overriding 4-byte OPCODE support
-Date: Thu, 25 Apr 2024 16:36:15 +0200
-Message-ID: <20240425143627.54648-1-robert.marko@sartura.hr>
+Subject: [PATCH 2/2] mtd: spi-nor-core: add 4-byte OPCODE support for Winbond
+ W25Q256JV
+Date: Thu, 25 Apr 2024 16:36:16 +0200
+Message-ID: <20240425143627.54648-2-robert.marko@sartura.hr>
 X-Mailer: git-send-email 2.44.0
+In-Reply-To: <20240425143627.54648-1-robert.marko@sartura.hr>
+References: <20240425143627.54648-1-robert.marko@sartura.hr>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,70 +95,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, the only way to indicate 4-byte OPCODE support is by setting
-the SPI_NOR_4B_OPCODES feature flag for each JEDEC ID in spi_nor_ids[].
+Winbond W25Q256FV and W25Q256JV share the same JEDEC ID, but only
+W25Q256JV fully supports 4-byte OPCODE-s.
 
-However, its becoming increasingly common practice for vendors to reuse
-the same JEDEC ID for new revisions of current parts.
-For example Winbond W25Q256FV does not fully support 4-byte OPCODE-s while
-newer W25Q256JV revision does fully support them but they share the same
-JEDEC ID thus currently its not possible to advertise support for 4-byte
-OPCODE-s on W25Q256JV.
+In order to differentiate between them we can use the SFDP header version
+and apply a fixup post BFPT.
 
-Luckily for us, there usually is a way to differentiate between parts with
-the same JEDEC ID by differences in SFDP tables, so in order to be able to
-apply a fixup after they are parsed lets add a feature flag that we can
-override.
+Based on upstream Linux commit ("mtd: spi-nor: winbond: Fix 4-byte opcode
+support for w25q256").
 
 Signed-off-by: Robert Marko <robert.marko@sartura.hr>
 ---
- drivers/mtd/spi/spi-nor-core.c | 6 ++++--
- include/linux/mtd/spi-nor.h    | 1 +
- 2 files changed, 5 insertions(+), 2 deletions(-)
+ drivers/mtd/spi/spi-nor-core.c | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
 diff --git a/drivers/mtd/spi/spi-nor-core.c b/drivers/mtd/spi/spi-nor-core.c
-index f86003ca8c..7615ba602f 100644
+index 7615ba602f..8882b045ce 100644
 --- a/drivers/mtd/spi/spi-nor-core.c
 +++ b/drivers/mtd/spi/spi-nor-core.c
-@@ -3879,7 +3879,7 @@ static int spi_nor_init(struct spi_nor *nor)
- 	if (nor->addr_width == 4 &&
- 	    !(nor->info->flags & SPI_NOR_OCTAL_DTR_READ) &&
- 	    (JEDEC_MFR(nor->info) != SNOR_MFR_SPANSION) &&
--	    !(nor->info->flags & SPI_NOR_4B_OPCODES)) {
-+	    !(nor->flags & SNOR_F_4B_OPCODES)) {
- 		/*
- 		 * If the RESET# pin isn't hooked up properly, or the system
- 		 * otherwise doesn't perform a reset command in the boot
-@@ -4118,6 +4118,8 @@ int spi_nor_scan(struct spi_nor *nor)
- 		nor->flags |= SNOR_F_NO_OP_CHIP_ERASE;
- 	if (info->flags & USE_CLSR)
- 		nor->flags |= SNOR_F_USE_CLSR;
-+	if (info->flags & SPI_NOR_4B_OPCODES)
-+		nor->flags |= SNOR_F_4B_OPCODES;
- 
- 	if (info->flags & SPI_NOR_NO_ERASE)
- 		mtd->flags |= MTD_NO_ERASE;
-@@ -4156,7 +4158,7 @@ int spi_nor_scan(struct spi_nor *nor)
- 		/* enable 4-byte addressing if the device exceeds 16MiB */
- 		nor->addr_width = 4;
- 		if (JEDEC_MFR(info) == SNOR_MFR_SPANSION ||
--		    info->flags & SPI_NOR_4B_OPCODES)
-+		    nor->flags & SNOR_F_4B_OPCODES)
- 			spi_nor_set_4byte_opcodes(nor, info);
- #else
- 	/* Configure the BAR - discover bank cmds and read current bank */
-diff --git a/include/linux/mtd/spi-nor.h b/include/linux/mtd/spi-nor.h
-index d1dbf3eadb..80e56cf308 100644
---- a/include/linux/mtd/spi-nor.h
-+++ b/include/linux/mtd/spi-nor.h
-@@ -294,6 +294,7 @@ enum spi_nor_option_flags {
- 	SNOR_F_BROKEN_RESET	= BIT(6),
- 	SNOR_F_SOFT_RESET	= BIT(7),
- 	SNOR_F_IO_MODE_EN_VOLATILE = BIT(8),
-+	SNOR_F_4B_OPCODES 	= BIT(9),
+@@ -3816,6 +3816,32 @@ static struct spi_nor_fixups macronix_octal_fixups = {
  };
+ #endif /* CONFIG_SPI_FLASH_MACRONIX */
  
- struct spi_nor;
++#if CONFIG_IS_ENABLED(SPI_FLASH_WINBOND)
++static int w25q256_post_bfpt_fixup(struct spi_nor *nor,
++				   const struct sfdp_parameter_header *header,
++				   const struct sfdp_bfpt *bfpt,
++				   struct spi_nor_flash_parameter *params)
++{
++	/*
++	 * W25Q256JV supports 4B opcodes but W25Q256FV does not.
++	 * Unfortunately, Winbond has re-used the same JEDEC ID for both
++	 * variants which prevents us from defining a new entry in the parts
++	 * table.
++	 * To differentiate between W25Q256JV and W25Q256FV check SFDP header
++	 * version: only JV has JESD216A compliant structure (version 5).
++	 */
++	if(header->major == SFDP_JESD216_MAJOR &&
++	   header->minor == SFDP_JESD216A_MINOR)
++		nor->flags |= SNOR_F_4B_OPCODES;
++
++	return 0;
++}
++
++static struct spi_nor_fixups w25q256_fixups = {
++	.post_bfpt = w25q256_post_bfpt_fixup,
++};
++#endif /* CONFIG_SPI_FLASH_WINBOND */
++
+ /** spi_nor_octal_dtr_enable() - enable Octal DTR I/O if needed
+  * @nor:                 pointer to a 'struct spi_nor'
+  *
+@@ -4004,6 +4030,11 @@ void spi_nor_set_fixups(struct spi_nor *nor)
+ #if CONFIG_IS_ENABLED(SPI_FLASH_MACRONIX)
+ 	nor->fixups = &macronix_octal_fixups;
+ #endif /* SPI_FLASH_MACRONIX */
++
++#if CONFIG_IS_ENABLED(SPI_FLASH_WINBOND)
++	if (!strcmp(nor->info->name, "w25q256"))
++		nor->fixups = &w25q256_fixups;
++#endif /* SPI_FLASH_WINBOND */
+ }
+ 
+ int spi_nor_scan(struct spi_nor *nor)
 -- 
 2.44.0
 
