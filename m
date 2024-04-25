@@ -4,94 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03E79C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 16:19:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C4CFC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 16:23:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2415E8906B;
-	Thu, 25 Apr 2024 18:19:06 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DC1AA8906F;
+	Thu, 25 Apr 2024 18:23:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Rqo/lFfE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gqe7+RTl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A518F8906D; Thu, 25 Apr 2024 18:19:04 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id 60DFF88F1A; Thu, 25 Apr 2024 16:13:23 +0200 (CEST)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1772889054
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 18:19:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A29C8868B
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 16:13:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-69b9365e584so18148266d6.1
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 09:19:01 -0700 (PDT)
+ spf=pass smtp.mailfrom=hughsient@gmail.com
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-78d7802176dso16224785a.1
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 07:13:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714061940; x=1714666740; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=kcFNSSZ6s/GorfRVkg5u1OcWOHiH5uJiX3tVvcPnHj8=;
- b=Rqo/lFfEqUgg2/Pz12L7YcLccZGFJboboyaFzmxe0HakXZTYBVUGwK1ixiL0tDBCuV
- /gRrm38G0EbpXvYVxwx2zHOmI1Dq8Q0ob8VSMXDd4IyXLXYjObfE2rJAA2KcTqCPreSw
- TcLUgxwN3XM5jMDkPV8S5xUZjRBiUMPTCD0L4=
+ d=gmail.com; s=20230601; t=1714054400; x=1714659200; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=+oQtck/diSK1qjx29Nb0NcKkDmFbXQpeKwMz4JSrmdA=;
+ b=gqe7+RTlShyiU0JXUXh41iQHlMucuvIE46Ihf8BTwNGAhIhszG+wgRN9YuD8jVV3QB
+ 9QcrjKfqkxA/oAivjeJi1Ad23fLg0eapLPEEjH7gZZh9mnrQjSum4+4nlJsaNZ0ZSwUB
+ JqQluD3I35tJP+xV2oEliAhP2w2Y4MSRlNrAlnSVxevP3wZbDWi125yv2kfUM1vGx9RA
+ FdbcjtGjRQl3xo0n6L7GrfR8svSbiWMWxfVvrCFOR51jq7KkqNeXxj7bQQTdkB93nGlJ
+ GejuZ4t/yZ07W+PHIgknI6GwtiGT7cvUNU1y3qPg5WSDJrzPbrlrENS43MD6ZW70dMm7
+ ajaQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714061940; x=1714666740;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=kcFNSSZ6s/GorfRVkg5u1OcWOHiH5uJiX3tVvcPnHj8=;
- b=WsextdaEl4eJIEfw2N8BHKBLhXUZrltEy4ChP1DzU7IAOLHSzbtbjPrsXi37jxXgcz
- UzYTZfCK+ClhRP2RoJfflQtXJx6xG/y93lMhMc85o9otZRLt72+mn7dGMl2nLzetGhIC
- ajefXvg6YcxRzpO6Exrf7FV5maYVf+6eu03Bkm6Uhnq8QOpPgnbFSPZCJmsYtkhTr/CX
- /y8U+SYO8Hz8B3FCp4C2fEYv8U3LA5WBzZOFuxw1REWLKjRe4TAxu+Fqpn890NHVr8u2
- VFpL41YvUDmER8ovvOwisx6eip3U1lixn2dlj5O9FDk1Wyl6M1c4/bq+2m6A3uf0F0rW
- pDnQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVw964eo1D8L6/SUdjlrzKMZJ6YHIyDt0B883Q+RiBY2pwX+o1LBxt7yY/lVdox9UdmP+4G23sGXruY3zG6K/NClwWd+Q==
-X-Gm-Message-State: AOJu0YyRdQm0K2RMqbWxj/SlExQ5Vr1BdoM5XCoifLuHGnxPiWVhfglM
- 3QoahG/5JHWP8/lYQuaIArudNfat4QvU/vXD91HKh6EYWDw1qCJ4UAcM13beu7c=
-X-Google-Smtp-Source: AGHT+IELjarAr248+h3gk+AVenGUc0O97kzE2SpsdLMoKvk1ahEYrZ87bGhaU1JFoT4kkosSnOEeWQ==
-X-Received: by 2002:a05:6214:c28:b0:6a0:9645:526e with SMTP id
- a8-20020a0562140c2800b006a09645526emr304420qvd.15.1714061939933; 
- Thu, 25 Apr 2024 09:18:59 -0700 (PDT)
-Received: from bill-the-cat ([187.144.98.216])
- by smtp.gmail.com with ESMTPSA id
- g2-20020a0cdf02000000b0069b447066bbsm7055108qvl.78.2024.04.25.09.18.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 25 Apr 2024 09:18:59 -0700 (PDT)
-Date: Thu, 25 Apr 2024 10:18:55 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Richard Hughes <hughsient@gmail.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Jonas Karlman <jonas@kwiboo.se>, FUKAUMI Naoki <naoki@radxa.com>,
- chris.obbard@collabora.com, Paul Liu <paul.liu@linaro.org>,
- Heiko Thiery <heiko.thiery@gmail.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Michael Walle <michael@walle.cc>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
- Michal Simek <michal.simek@amd.com>
-Subject: Re: Capsule GUIDs and LVFS
-Message-ID: <20240425161855.GG1054907@bill-the-cat>
+ d=1e100.net; s=20230601; t=1714054400; x=1714659200;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+oQtck/diSK1qjx29Nb0NcKkDmFbXQpeKwMz4JSrmdA=;
+ b=V1k81sYdkYazLr3eI3211gaoIf71WeZp121GMd3oZ/3mfrDlt52OzCZnJsn35ZQBbO
+ rPGzFJfQ9LhA1o4oXaicP2VdqAvYzi8aSjsWmjrTbuWYnqgqD/bgeiQcraaEQnL1e4PZ
+ OKWT+lHD1iyqQ/i+Cnh+89nNrqdul2FKLCn4R/vy1gszGhQzw7AVbDvEEDlSk7jHBA44
+ qk5RgpZoAAjg4QpgtjaaWVzRIkFPZyfiBFt8uEG3ibUj7Ywwad50Acguh86ko3hUl0jj
+ KqwTEtSf0SOH5rSTz/GdAx08KeIPB6NvHxWeToTqrslunERRwdtYAD48pkeZrhF/l3fs
+ AmOQ==
+X-Gm-Message-State: AOJu0YxXQEgQIoG35TnwyUW9bDmB6b5Mf9cY3ZK1kJRifyJeivoFcxXn
+ m63ZyUsaPz/HTGrvzzU9vM/6VLeau7NbGjvgcC2U7KtMRNW8x10LWDUNWxl2dGVKO2Ez7MWr+n3
+ vP216twrNJa/btmLYLnInlWshbCNJppQv
+X-Google-Smtp-Source: AGHT+IFS8t904r8HE5VnHqzgtvD9F/u4WQdBkfmNmFZT2YHGyl+k2wEZ2LXsOdfqv8Y0fe6mtIZJHnVatny4gT1ICoU=
+X-Received: by 2002:a05:6214:f0f:b0:69b:1c78:158a with SMTP id
+ gw15-20020a0562140f0f00b0069b1c78158amr6097313qvb.3.1714054400011; Thu, 25
+ Apr 2024 07:13:20 -0700 (PDT)
+MIME-Version: 1.0
 References: <CAC_iWjJNHa4gMF897MqYZNdbgjFG8K4kwGsTXWuy72WkYLizrw@mail.gmail.com>
  <CAD2FfiGuFaC=r+TGfq9auzWJbyzVNbug8zR9RzSwM2+Uk52d+Q@mail.gmail.com>
  <CAC_iWj+BonsVbA5Bw3Kck2k4b8SXru0U_Y2kAmx5=_t6SozotA@mail.gmail.com>
- <cd5ca19b-befe-47cf-9a84-f610ae7f04c9@linaro.org>
- <CAD2FfiELXfvc9jEDpKVx44BnK5yDpVViARkB0QrHkpMRrdsVEA@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rnPWU/ama7Q77LoA"
-Content-Disposition: inline
-In-Reply-To: <CAD2FfiELXfvc9jEDpKVx44BnK5yDpVViARkB0QrHkpMRrdsVEA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <CAC_iWj+BonsVbA5Bw3Kck2k4b8SXru0U_Y2kAmx5=_t6SozotA@mail.gmail.com>
+From: Richard Hughes <hughsient@gmail.com>
+Date: Thu, 25 Apr 2024 15:13:07 +0100
+Message-ID: <CAD2FfiH46mtwPB_wR9H2p6hKCT5eLu5UOyHNDvpdpgFEAdqBuw@mail.gmail.com>
+Subject: Re: Capsule GUIDs and LVFS
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, FUKAUMI Naoki <naoki@radxa.com>,
+ chris.obbard@collabora.com, 
+ Paul Liu <paul.liu@linaro.org>, Heiko Thiery <heiko.thiery@gmail.com>, 
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Michael Walle <michael@walle.cc>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, 
+ Michal Simek <michal.simek@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Thu, 25 Apr 2024 18:23:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,47 +99,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 25 Apr 2024 at 14:46, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+> TBH those are GUIDs that are used by virtual devices. It wouldn't hurt
+> if someone reused those GUIDs but we can display a warning about it?
 
---rnPWU/ama7Q77LoA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Right, I've added some of those to the spreadsheet "never" column.
+They'll work for testing purposes but they can't be pushed to public
+remotes.
 
-On Thu, Apr 25, 2024 at 05:13:21PM +0100, Richard Hughes wrote:
-> On Thu, 25 Apr 2024 at 16:16, Caleb Connolly <caleb.connolly@linaro.org> =
-wrote:
-> > I discussed an idea with Ilias to generate GUIDs dynamically based on
-> > the board compatible/model, which seem to essentially just an
-> > abstraction on this..
->=20
-> Yup, that works too -- on the assumption the compatible string is unique =
-enough.
+> Ok thanks for the info. Is there also a check of "I have duplicate
+> GUIDs that aren't in the DMI list'?
 
-This is where things are a little fun. In previous discussions, yes, the
-machine compatible string should be unique. But it's not. Is it unique
-enough for this case, today? No, since mechanism could be what's passing
-the correct device tree to the OS. Might this in turn be what drives
-people to fix the case? Maybe.
+Yup, we check that components with duplicate GUIDs don't have
+different AppStream IDs or different sets of HWID requirements.
 
---=20
-Tom
-
---rnPWU/ama7Q77LoA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYqgmkACgkQFHw5/5Y0
-tyyMtgwAmusJdeqjNMlyvhQgdGYqd3XH0A9NJHo3dP1ZmJL94LfCvexDT+HGEMOS
-P08OwcXxaxklV1x2BkbA1d3e+BVd7C7vJtrlAvhX8f7M5cw27jp75KGh7qPzgHuL
-eRLpksRzXa3ATDrjQ5FdPctAAZLmoS221z15uruROPrKM2AkhHKYjBabgC1ZM2KY
-x4RwcoSfUC83LtclvibPC316Jdc3iqmpYdhQCGujkuqGrBIY596mKsUrDr1UafHf
-LybDgqebPWJ9dz7Bh8N0lU80zLdOnvYVDRI/6cQYJ+zDj/o+XxUAJZOmGRncP4uH
-HIPMdW9OGiP+jvI+hK5qfYjPK3kc68LXn4B3kK0KOntmnmKqPJ20nJzYr/rRyt6R
-T2SHhTfSyriTebMLoN5pDq89uC4lrPKY80WtHuBXRguIf9BBJM9WbmVersGRkY6i
-CUBT7C23frFT9n85ZquledjegZqBdZT8pT4WfvhoymFMXmO1h1AdAumf7wzEr1jz
-hxA+r44x
-=RsVw
------END PGP SIGNATURE-----
-
---rnPWU/ama7Q77LoA--
+Richard.
