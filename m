@@ -4,87 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A82C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 18:02:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3594CC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 18:30:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF96D886A8;
-	Thu, 25 Apr 2024 20:02:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id 6EBB6886FA;
+	Thu, 25 Apr 2024 20:30:20 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="RX9OJ1s5";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hSQEVXI8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49D9F886CC; Thu, 25 Apr 2024 20:02:13 +0200 (CEST)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
+ id E0B0D886DD; Thu, 25 Apr 2024 20:30:19 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0377886A7
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 20:02:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 4845B886FA
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 20:30:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 5C680120009;
- Thu, 25 Apr 2024 21:02:09 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 5C680120009
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1714068129;
- bh=8bhjZ75C4yUBvce7iaxKSL1rccesey4qMeHyYqrG3vw=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=RX9OJ1s5IQufKko7BMPwzKsMfsD1r/tZKW9pLoHkJW/469hMgRuacsdBMNC1iYtlO
- x+k9KibgVvDZpSF0NwK06W4c/3aj62y8eK1NC7AOIHgoalrkSYs/LpezXOwrU8ulu0
- QIezv+5KDxzPeYWWL9nvyI1cC0MCSycwwP4ceLK7oIPH28UZtDorUJcE2fTeJ3sOrM
- YU6rAcw3iXM84/qCx/7wNruyLDHLmFjsuyH/RvZijUxUbFfBITvDlDaiu4yfJqGITZ
- w8BVkDQLvrGsr/FMA9fVdcY4+3h1lW/Vg0OSlpD1Y7HP2btzZWuqIidUTBrvShlxgm
- mMo5JpeahYO8w==
-Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
- [172.16.192.103])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Thu, 25 Apr 2024 21:02:09 +0300 (MSK)
-Received: from localhost.localdomain (100.64.160.123) by
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1118.40; Thu, 25 Apr 2024 21:02:08 +0300
-From: Arseniy Krasnov <avkrasnov@salutedevices.com>
-To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>
-CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
- <kernel@sberdevices.ru>, <oxffffaa@gmail.com>, <avkrasnov@salutedevices.com>
-Subject: [PATCH v1] arm: dts: meson-axg: add NAND controller node for AXG
-Date: Thu, 25 Apr 2024 20:50:52 +0300
-Message-ID: <20240425175052.2650301-1-avkrasnov@salutedevices.com>
-X-Mailer: git-send-email 2.35.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kamlesh@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PIUElm003084;
+ Thu, 25 Apr 2024 13:30:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1714069814;
+ bh=H+1EvvYL1QfnlO/msH5CEQbP+QcLQj6VsYpDFYQYcsk=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=hSQEVXI8cW9i9jihfAKlAXbVuaCkedu9cBks7ggCWQpko2wWy5ilt8r2llxxMvEpE
+ vlaUpw8FvDfIu68LkpJi1Y2/L1upx212tTM0/TqbiNTcWtPrVlovpJ6C9E7J3Y0p2/
+ PFAdNGAvK12foxixmZZsKAVyrjB6T+xkffbH1fAY=
+Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PIUEHN082140
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 25 Apr 2024 13:30:14 -0500
+Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE107.ent.ti.com
+ (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
+ Apr 2024 13:30:14 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
+ (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 25 Apr 2024 13:30:14 -0500
+Received: from localhost (kamlesh.dhcp.ti.com [172.24.227.123])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PIUD1D113198;
+ Thu, 25 Apr 2024 13:30:14 -0500
+From: Kamlesh Gurudasani <kamlesh@ti.com>
+To: Andrew Davis <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Vignesh
+ Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, "Simon Glass"
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+CC: Jon Humphreys <j-humphreys@ti.com>, <u-boot@lists.denx.de>, Andrew Davis
+ <afd@ti.com>
+Subject: Re: [PATCH] arm: mach-k3: am642: Fix reset for workaround errata ID
+ i2331
+In-Reply-To: <20240418175828.84548-1-afd@ti.com>
+References: <20240418175828.84548-1-afd@ti.com>
+Date: Fri, 26 Apr 2024 00:00:13 +0530
+Message-ID: <87o79xguru.fsf@kamlesh.i-did-not-set--mail-host-address--so-tickle-me>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-Originating-IP: [100.64.160.123]
-X-ClientProxiedBy: p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) To
- p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
-X-KSMG-Rule-ID: 10
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 184931 [Apr 25 2024]
-X-KSMG-AntiSpam-Version: 6.1.0.4
-X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 18 0.3.18
- b9d6ada76958f07c6a68617a7ac8df800bc4166c,
- {Tracking_from_domain_doesnt_match_to}, 100.64.160.123:7.1.2;
- 127.0.0.199:7.1.2; smtp.sberdevices.ru:5.0.1,7.1.1; salutedevices.com:7.1.1;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1, FromAlignment: s,
- ApMailHostAddress: 100.64.160.123
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2024/04/25 14:02:00 #24969020
-X-KSMG-AntiVirus-Status: Clean, skipped
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,68 +80,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-nfc: Synced from Linux commit 7ca2ef33179f ("Linux 6.6-rc1")
-nand_all_pins: Synced from Linux commit be18d53c32b2 ("Linux 6.7-rc3")
+Andrew Davis <afd@ti.com> writes:
 
-Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
----
- arch/arm/dts/meson-axg.dtsi | 36 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
+> To workaround an issue in AM642 we reset the SoC in early boot. For that
+> we first probed the sysreset driver by calling uclass_get_device(). The
+> ti-sci sysreset driver is now probed during the ti-sci firmware probe.
+> Update this call to probe the firmware driver which will then probe
+> the sysreset driver allowing do_reset() to again function as expected.
+>
+> Reported-by: Jonathan Humphreys <j-humphreys@ti.com>
+> Fixes: fc5d40283483 ("firmware: ti_sci: Bind sysreset driver when enabled")
+> Signed-off-by: Andrew Davis <afd@ti.com>
+> ---
+>  arch/arm/mach-k3/am642_init.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/arch/arm/mach-k3/am642_init.c b/arch/arm/mach-k3/am642_init.c
+> index ddf47ef0a9b..80c3cb3479f 100644
+> --- a/arch/arm/mach-k3/am642_init.c
+> +++ b/arch/arm/mach-k3/am642_init.c
+> @@ -226,7 +226,7 @@ void board_init_f(ulong dummy)
+>  	 * The warm reset realigns internal clocks and prevents the lockup from
+>  	 * happening.
+>  	 */
+> -	ret = uclass_first_device_err(UCLASS_SYSRESET, &dev);
+> +	ret = uclass_get_device_by_driver(UCLASS_FIRMWARE, DM_DRIVER_GET(ti_sci), &dev);
+>  	if (ret)
+>  		printf("\n%s:uclass device error [%d]\n",__func__,ret);
+>  
+> -- 
+> 2.39.2
+Tested-by: Kamlesh Gurudasani <kamlesh@ti.com>
 
-diff --git a/arch/arm/dts/meson-axg.dtsi b/arch/arm/dts/meson-axg.dtsi
-index 3f5254eeb4..4f6fdd5523 100644
---- a/arch/arm/dts/meson-axg.dtsi
-+++ b/arch/arm/dts/meson-axg.dtsi
-@@ -430,6 +430,27 @@
- 					};
- 				};
- 
-+				nand_all_pins: nand_all_pins {
-+					mux {
-+						groups = "emmc_nand_d0",
-+							 "emmc_nand_d1",
-+							 "emmc_nand_d2",
-+							 "emmc_nand_d3",
-+							 "emmc_nand_d4",
-+							 "emmc_nand_d5",
-+							 "emmc_nand_d6",
-+							 "emmc_nand_d7",
-+							 "nand_ce0",
-+							 "nand_ale",
-+							 "nand_cle",
-+							 "nand_wen_clk",
-+							 "nand_ren_wr";
-+						function = "nand";
-+						input-enable;
-+						bias-pull-up;
-+					};
-+				};
-+
- 				emmc_ds_pins: emmc_ds {
- 					mux {
- 						groups = "emmc_ds";
-@@ -1906,6 +1927,21 @@
- 				resets = <&reset RESET_SD_EMMC_C>;
- 			};
- 
-+			nfc: nand-controller@7800 {
-+				compatible = "amlogic,meson-axg-nfc";
-+				reg = <0x0 0x7800 0x0 0x100>,
-+				      <0x0 0x7000 0x0 0x800>;
-+				reg-names = "nfc", "emmc";
-+				pinctrl-0 = <&nand_all_pins>;
-+				pinctrl-names = "default";
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+				interrupts = <GIC_SPI 34 IRQ_TYPE_EDGE_RISING>;
-+				clocks = <&clkc CLKID_SD_EMMC_C>,
-+					 <&clkc CLKID_FCLK_DIV2>;
-+				clock-names = "core", "device";
-+			};
-+
- 			usb2_phy1: phy@9020 {
- 				compatible = "amlogic,meson-gxl-usb2-phy";
- 				#phy-cells = <0>;
--- 
-2.35.0
-
+on am64x-evm
