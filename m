@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72594C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 12:09:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A4CFC10F15
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 12:09:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E45DD88F21;
-	Thu, 25 Apr 2024 14:09:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A3BDA88F3C;
+	Thu, 25 Apr 2024 14:09:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IokFyduG";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="vphM+Uyx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E23FD88F19; Thu, 25 Apr 2024 14:09:06 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ id E41A788F30; Thu, 25 Apr 2024 14:09:08 +0200 (CEST)
+Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 77CB488F04
+ by phobos.denx.de (Postfix) with ESMTPS id A8C5788F0D
  for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 14:09:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PC8rO7033727;
- Thu, 25 Apr 2024 07:08:53 -0500
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PC8uI1040551;
+ Thu, 25 Apr 2024 07:08:56 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1714046933;
- bh=xWZAT8LlciMwCWo9f1J/WfDcB7z3jyU/uztlDacHtas=;
+ s=ti-com-17Q1; t=1714046936;
+ bh=eKmf2RWPrqqNM+D3RXPQl3hxJPFDdDN/6ab74+XedTQ=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=IokFyduGPAhAUryjuwZMhN7yrDjblENu7Dbjpac2SC+gme0V8jfIYUCp6sTe5mXph
- KJmBuGG8OFg9my4lf0Jk7qhD0gVSAs6yisVubNRcryVFU9pDjPEPsRC67pwCZUy1i3
- o1jPkVQwhp2MKxn2kwFbQuqKtzoujgjvdt2eK0rE=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PC8r48011715
+ b=vphM+UyxJMXVbBCD54XdcXgFW+NJ7BQIDdRRmxgzZE0CkfwsRi4cegAIGC9ygI4O3
+ bFkUDNPo0zhdtpi4DYTf5uqYbcAwQofQqlynOk4AAvjCk1OkwNBmSvyB1JdwB6QIqZ
+ zLOjC795Yo+a07a25lHkVT8BVUkL1eekdtqc62yw=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PC8uNd033912
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 25 Apr 2024 07:08:53 -0500
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 25 Apr 2024 07:08:56 -0500
+Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- Apr 2024 07:08:53 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 07:08:55 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 Apr 2024 07:08:52 -0500
+ Frontend Transport; Thu, 25 Apr 2024 07:08:55 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PC8pKm037358;
- Thu, 25 Apr 2024 07:08:52 -0500
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PC8sR0061991;
+ Thu, 25 Apr 2024 07:08:55 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Michal Simek
  <michal.simek@amd.com>, Vignesh Raghavendra <vigneshr@ti.com>, "MD Danish
@@ -68,10 +68,10 @@ To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Michal Simek
  Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
  Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v2 03/10] soc: ti: k3-navss-ringacc: Initialize base address
- of ring cfg registers
-Date: Thu, 25 Apr 2024 17:38:15 +0530
-Message-ID: <20240425120822.2048012-4-c-vankar@ti.com>
+Subject: [PATCH v2 05/10] dma: ti: k3-udma: Add support for native
+ configuration of chan/flow
+Date: Thu, 25 Apr 2024 17:38:17 +0530
+Message-ID: <20240425120822.2048012-6-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240425120822.2048012-1-c-vankar@ti.com>
 References: <20240425120822.2048012-1-c-vankar@ti.com>
@@ -97,9 +97,10 @@ X-Virus-Status: Clean
 
 From: Kishon Vijay Abraham I <kishon@ti.com>
 
-Initialize base address of ring config registers required to natively
-setup ring cfg registers in the absence of Device Manager (DM) services
-at R5 SPL stage.
+In absence of Device Manager (DM) services such as at R5 SPL stage,
+driver will have to natively setup TCHAN/RCHAN/RFLOW cfg registers.
+Existing UDMA driver performed the above mentioned configuration
+for UDMA. Add similar configuration for PKTDMA here.
 
 Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
@@ -107,47 +108,38 @@ Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v1:
-https://lore.kernel.org/r/20240112064759.1801600-4-s-vadapalli@ti.com/
+https://lore.kernel.org/r/20240112064759.1801600-6-s-vadapalli@ti.com/
 
 Changes from v1 to v2:
 - No changes.
 
- drivers/soc/ti/k3-navss-ringacc.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ drivers/dma/ti/k3-udma.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/soc/ti/k3-navss-ringacc.c b/drivers/soc/ti/k3-navss-ringacc.c
-index ed39ff2fa4..0a96ed666c 100644
---- a/drivers/soc/ti/k3-navss-ringacc.c
-+++ b/drivers/soc/ti/k3-navss-ringacc.c
-@@ -1030,8 +1030,8 @@ static int k3_nav_ringacc_init(struct udevice *dev, struct k3_nav_ringacc *ringa
- struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
- 						struct k3_ringacc_init_data *data)
- {
-+	void __iomem *base_rt, *base_cfg;
- 	struct k3_nav_ringacc *ringacc;
--	void __iomem *base_rt;
- 	int i;
+diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
+index ef3074aa13..ad3fa4a515 100644
+--- a/drivers/dma/ti/k3-udma.c
++++ b/drivers/dma/ti/k3-udma.c
+@@ -2119,6 +2119,9 @@ static int bcdma_tisci_tx_channel_config(struct udma_chan *uc)
+ 	if (ret)
+ 		dev_err(ud->dev, "tchan%d cfg failed %d\n", tchan->id, ret);
  
- 	ringacc = devm_kzalloc(dev, sizeof(*ringacc), GFP_KERNEL);
-@@ -1049,6 +1049,10 @@ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
- 	if (!base_rt)
- 		return ERR_PTR(-EINVAL);
- 
-+	base_cfg = dev_read_addr_name_ptr(dev, "cfg");
-+	if (!base_cfg)
-+		return ERR_PTR(-EINVAL);
++	if (IS_ENABLED(CONFIG_K3_DM_FW))
++		udma_alloc_tchan_raw(uc);
 +
- 	ringacc->rings = devm_kzalloc(dev,
- 				      sizeof(*ringacc->rings) *
- 				      ringacc->num_rings * 2,
-@@ -1063,6 +1067,7 @@ struct k3_nav_ringacc *k3_ringacc_dmarings_init(struct udevice *dev,
- 	for (i = 0; i < ringacc->num_rings; i++) {
- 		struct k3_nav_ring *ring = &ringacc->rings[i];
+ 	return ret;
+ }
  
-+		ring->cfg = base_cfg + KNAV_RINGACC_CFG_REGS_STEP * i;
- 		ring->rt = base_rt + K3_DMARING_RING_RT_REGS_STEP * i;
- 		ring->parent = ringacc;
- 		ring->ring_id = i;
+@@ -2167,6 +2170,9 @@ static int pktdma_tisci_rx_channel_config(struct udma_chan *uc)
+ 		dev_err(ud->dev, "flow%d config failed: %d\n", uc->rflow->id,
+ 			ret);
+ 
++	if (IS_ENABLED(CONFIG_K3_DM_FW))
++		udma_alloc_rchan_raw(uc);
++
+ 	return ret;
+ }
+ 
 -- 
 2.34.1
 
