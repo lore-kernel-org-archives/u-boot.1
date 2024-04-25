@@ -4,85 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E136C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 12:36:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0A33C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 12:44:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC92588ED9;
-	Thu, 25 Apr 2024 14:36:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 9A4E688F15;
+	Thu, 25 Apr 2024 14:44:57 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="mwuMwt66";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="p0NEXsv6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9880D88ED9; Thu, 25 Apr 2024 14:36:49 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9FE7D88F3F; Thu, 25 Apr 2024 14:44:56 +0200 (CEST)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6904488F20
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 14:36:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A80688F04
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 14:44:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PCaUhi045718;
- Thu, 25 Apr 2024 07:36:31 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1714048591;
- bh=na/By50spNC+DDh7jV5/koy1tse4pGSzkNIQCLL6+NE=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=mwuMwt665bULny+mStw0oitfWb+AeSvm1pvMGBzUwI73BEuSrsAiP3RVErbpDrslm
- EUQfKmeoOIB9bdxbI64c2U745ztIctkx4XgVJX55IK8LGfpTunmBdhU/8RsEauDtsV
- trf12+pSi+ozQj4CmdffG1YI3GkFvN/kKDzFZmm0=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PCaUbS013809
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 25 Apr 2024 07:36:30 -0500
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- Apr 2024 07:36:30 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 Apr 2024 07:36:30 -0500
-Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
- [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PCaN3S092539;
- Thu, 25 Apr 2024 07:36:23 -0500
-Message-ID: <e3785fad-fb0d-4cf8-8787-0a91e6b52332@ti.com>
-Date: Thu, 25 Apr 2024 18:06:21 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-56e56ee8d5cso1103321a12.2
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 05:44:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1714049094; x=1714653894; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=x6F8XnONjqKyz16EaEUOiTa08ZGLewv1rdMqZh2xW7c=;
+ b=p0NEXsv6yLeVtuYey+tcNyPwHAUfSp49PcS2nNJCg0Y/49ZVdwos3yBEwUDUPRzP/U
+ 5pgKb71PfPwWQE6B9u6zCRvlcVET6ErJ/VcgFTTzezWogPsQJBhT+3lixUOOtX81nyBC
+ eI22VLgLVTcC8D66nhgOfvuePDFw2IwLWN5aJ/epYN0gFMAfIZaWRzRAcfDOT495ZYb/
+ 0AY6QMqiyMEdunA2tTPI9brJNfEJ9hjR/y5hLH+sGWcTgWKKfEBCg1bxcVtjnsWQegah
+ Z4ieTVoBb0Kw9n1Av6uDPdoKNqyld2SbIkcyg7pf8PdZJdoANUS95xOYQemVXTB4zmiI
+ Uuxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714049094; x=1714653894;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=x6F8XnONjqKyz16EaEUOiTa08ZGLewv1rdMqZh2xW7c=;
+ b=uu9rt9rL2dLFkLjCpQLUF3XgSLxRSmcOnEHw99hBcfrlnGZFe2LsqX8JU+I3uXgLAD
+ zj48HWcxO0mcWoEaI9ngcfjFKSLmYMIEPx8Db8UosHJYCtkkCX9p7+2JV8rR79B77s4o
+ QieY8tDEhIbfB6CI6GM0PjybO/8kziwRWpTSEatBY69qtoPc4WD62H1tWcaVx4IAvFx0
+ W6C2aEA4dgYmZBDbq4jsqFy8KTln9ID2dgJrJb/kAUcrRACF3X1L2dc6UsLA+J6f19jl
+ gNYhf0yTwIqMiI8UMexnCCBBdBT252uu4aD3Pq9W7dwWSWPs7w1tUZh7c8FXmXPiFkIg
+ /mfQ==
+X-Gm-Message-State: AOJu0YyRdUSeVihptiFEO3rpm+IUq11vFQmBMarhzk+d/iZvbXc+lr4i
+ BhaxQwPFiRKVZzSWTY39So55NA3ejkmCEEfOelWG6STAKvN9s/f87YgC4J/KIwI=
+X-Google-Smtp-Source: AGHT+IFpqVmICm1zpGeG2OngdVOejjPEmGJZoOstQG5/XBpgIEEr0IXxebMMbWQit8+K/nSzdS44vQ==
+X-Received: by 2002:a50:c082:0:b0:565:6c72:40a9 with SMTP id
+ k2-20020a50c082000000b005656c7240a9mr4012190edf.28.1714049093656; 
+ Thu, 25 Apr 2024 05:44:53 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::dcdd? ([2a02:8109:aa0d:be00::dcdd])
+ by smtp.gmail.com with ESMTPSA id
+ p19-20020a05640210d300b00572033ec969sm5068151edu.60.2024.04.25.05.44.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 25 Apr 2024 05:44:53 -0700 (PDT)
+Message-ID: <ab32b5ea-7661-4c15-974e-a3089af15465@linaro.org>
+Date: Thu, 25 Apr 2024 14:44:52 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/10] arch: arm: dts: k3-am62-sk-u-boot: Add missing
- "bootph-all" property to phy_gmii_sel node
+Subject: Re: [PATCH v2 0/2] i2c: Add support for Qualcomm Generic Interface
+ (GENI) I2C controller
+To: hs@denx.de, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Sumit Garg <sumit.garg@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>
+References: <20240422-topic-sm8x50-i2c-v2-0-f9ad61c33b07@linaro.org>
+ <171387260254.2280908.3755821257633373339.b4-ty@linaro.org>
+ <ea2ae539-abc4-30a6-5ffe-911f46f22f70@denx.de>
 Content-Language: en-US
-To: Roger Quadros <rogerq@kernel.org>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
- <kabel@kernel.org>, Michal Simek <michal.simek@amd.com>,
- Vignesh Raghavendra <vigneshr@ti.com>,
- MD Danish Anwar <danishanwar@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Andreas Dannenberg <dannenberg@ti.com>,
- Devarsh Thakkar <devarsht@ti.com>, Bin Meng <bmeng@tinylab.org>,
- Sean Anderson <seanga2@gmail.com>, "Kishon
- Vijay Abraham I" <kishon@ti.com>, Nikhil M Jain <n-jain1@ti.com>, Wadim
- Egorov <w.egorov@phytec.de>, Joao Paulo Goncalves
- <joao.goncalves@toradex.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Dhruva Gole <d-gole@ti.com>, Francesco Dolcini
- <francesco.dolcini@toradex.com>, Andrew Davis <afd@ti.com>, Maxime Ripard
- <mripard@kernel.org>, Neha Malcom Francis <n-francis@ti.com>, Simon Glass
- <sjg@chromium.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>
-References: <20240425120822.2048012-1-c-vankar@ti.com>
- <20240425120822.2048012-11-c-vankar@ti.com>
- <5ac873d5-e485-47d3-b5de-f537c1fb88b1@kernel.org>
-From: Chintan Vankar <c-vankar@ti.com>
-In-Reply-To: <5ac873d5-e485-47d3-b5de-f537c1fb88b1@kernel.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <ea2ae539-abc4-30a6-5ffe-911f46f22f70@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,46 +97,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heiko,
 
+On 25/04/2024 06:28, Heiko Schocher wrote:
+> Hello Caleb,
+> 
+> On 23.04.24 13:43, Caleb Connolly wrote:
+>>
+>> On Mon, 22 Apr 2024 11:33:51 +0200, Neil Armstrong wrote:
+>>> Add Support for the Qualcomm Generic Interface (GENI) I2C interface
+>>> found on newer Qualcomm SoCs.
+>>>
+>>> The Generic Interface (GENI) is a firmware based Qualcomm Universal
+>>> Peripherals (QUP) Serial Engine (SE) Wrapper which can support multiple
+>>> bus protocols depending on the firmware type loaded at early boot time
+>>> based on system configuration.
+>>>
+>>> [...]
+>>
+>> Applied, thanks!
+> 
+> Hmm.. where do you have them applied?
 
-On 25/04/24 18:01, Roger Quadros wrote:
-> 
-> 
-> On 25/04/2024 15:08, Chintan Vankar wrote:
->> Add "bootph-all" property to CPSW MAC's PHY node phy_gmii_sel.
->>
->> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
->> ---
->>
->> Changes from v1 to v2:
->> - This patch is newly added in this series to enable CPSW MAC's PHY
->>    node "phy_gmii_sel". As per discussion at here:
->>    https://lore.kernel.org/r/20240112130127.rvvrhz7p4vmlyalh@smother/
->>    changes made by this patch can be dropped in the future when the
->>    DT-Sync is performed with am62-main.dtsi containing this change in
->>    the Linux DT which will match U-Boot's DT.
-> 
-> I don't think bootph-all exists in am62-main.dtsi. It should come from
-> board.dts
-> 
+That would be 
+https://source.denx.de/u-boot/custodians/u-boot-snapdragon/-/commits/qcom-main/?ref_type=HEADS
 
-Yes, I am having the same discussion at here:
-https://lore.kernel.org/all/c13ac165-7cbd-4e53-914e-8c6bc28250e3@ti.com/
-
->>
->>   arch/arm/dts/k3-am625-sk-u-boot.dtsi | 4 ++++
->>   1 file changed, 4 insertions(+)
->>
->> diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
->> index fa778b0ff4..e9a1afde95 100644
->> --- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
->> +++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
->> @@ -46,3 +46,7 @@
->>   &cpsw_port2 {
->>   	status = "disabled";
->>   };
->> +
->> +&phy_gmii_sel {
->> +	bootph-all;
->> +};
+I'll be sure to include a link next time.
 > 
+> At least you should wait for an Acked-by from me! Especially in xz exploit
+> times, we really should give custodians some time...
+
+My apologies, I got a bit of tunnel vision with all the Qualcomm patches 
+we have flying around and totally neglected to find out how you prefer 
+to handle new drivers in i2c.
+
+I'm happy for patches to go through your tree if you'd prefer.
+> 
+> v2 was posted 22.04.2024 11:33 and you applied it one day after!
+> (And yes, I was on holiday...)
+
+Even so, it would have been fine to wait a few more days for your ack 
+and/or let you pick this up.
+> 
+> But okay, v2 patchseries looks good to me...
+
+Thanks,
+> 
+>>
+>> [1/2] i2c: Add support for Qualcomm Generic Interface (GENI) I2C 
+>> controller
+>>        commit: 75db9ede12d06693a3ced8c901b74065a1922a23
+>> [2/2] configs: qcom_defconfig: enable GENI I2C Driver
+>>        commit: ad12acd7a8f5aeea5816d5c2fc37c205c403eee0
+>>
+>> Best regards,
+>>
+> 
+> bye,
+> Heiko
+
+-- 
+// Caleb (they/them)
