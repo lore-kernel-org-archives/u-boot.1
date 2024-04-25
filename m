@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22610C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 12:10:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9461AC19F4F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 12:21:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 37B2188F4C;
-	Thu, 25 Apr 2024 14:09:19 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B29488EF2;
+	Thu, 25 Apr 2024 14:21:10 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cgeVpYiA";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="Or89pfis";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0EBD88F43; Thu, 25 Apr 2024 14:09:16 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 840B788EF2; Thu, 25 Apr 2024 14:21:08 +0200 (CEST)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4691688F24
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 14:09:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ED61988F1E
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 14:21:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PC93YQ022868;
- Thu, 25 Apr 2024 07:09:03 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1714046943;
- bh=Jr6uBeVc89I/XALnbI82yLZEN4EdVKywtoPuW1kdjk8=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=cgeVpYiAksPOInDZrI25xw+EGZ1jv5Tto6l5UjYNDOhAWy0RZqcvIYMFyWRri1Ghv
- ZhmzvgnLm4zhnhN8Z4gbpttRXlA2vN9kz+XrLePUhUnSRmvLVRxp0jPzV0biUifIBc
- oXDaP5tj3S7vuqBLP3/hLy4kX2hioi2pCsNMyTos=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PC93Sl033994
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 25 Apr 2024 07:09:03 -0500
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- Apr 2024 07:09:03 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 Apr 2024 07:09:02 -0500
-Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
- [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PC92wf037781;
- Thu, 25 Apr 2024 07:09:02 -0500
-From: Chintan Vankar <c-vankar@ti.com>
-To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Michal Simek
- <michal.simek@amd.com>, Vignesh Raghavendra <vigneshr@ti.com>, "MD Danish
- Anwar" <danishanwar@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- Andreas Dannenberg <dannenberg@ti.com>,
- Devarsh Thakkar <devarsht@ti.com>, Bin Meng <bmeng@tinylab.org>, "Sean
- Anderson" <seanga2@gmail.com>, Kishon Vijay Abraham I <kishon@ti.com>,
- "Nikhil M Jain" <n-jain1@ti.com>, Wadim Egorov <w.egorov@phytec.de>, "Joao
- Paulo Goncalves" <joao.goncalves@toradex.com>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Chintan Vankar <c-vankar@ti.com>, Dhruva Gole
- <d-gole@ti.com>, Francesco Dolcini <francesco.dolcini@toradex.com>, "Andrew
- Davis" <afd@ti.com>, Roger Quadros <rogerq@kernel.org>, Maxime Ripard
- <mripard@kernel.org>, Neha Malcom Francis <n-francis@ti.com>, Simon Glass
- <sjg@chromium.org>,
- Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
- Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCH v2 10/10] arch: arm: dts: k3-am62-sk-u-boot: Add missing
- "bootph-all" property to phy_gmii_sel node
-Date: Thu, 25 Apr 2024 17:38:22 +0530
-Message-ID: <20240425120822.2048012-11-c-vankar@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20240425120822.2048012-1-c-vankar@ti.com>
-References: <20240425120822.2048012-1-c-vankar@ti.com>
+ dmarc=pass (p=none dis=none) header.from=kernel.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=rogerq@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 827EE6160D;
+ Thu, 25 Apr 2024 12:21:04 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id DAE5DC113CC;
+ Thu, 25 Apr 2024 12:21:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1714047664;
+ bh=P9y8+ZIiLS9CwwuRpmOHODEqruqERYym/uIqfh7siXY=;
+ h=From:Subject:Date:To:Cc:From;
+ b=Or89pfishUJ5QyHhOhIaXKwoHvMJiHH8rMx5mR+TZIGTabPcnWaG9dhi8ftSztWzz
+ +ttbn4e8tIPs76NQdIYdEWj+z4s4lzkiUxhej9E/MedPwz6Q8R4m+Zg/+0kTbCZTFU
+ aVRYpSdQD3jTg+gEtZyKO4dmR7CHHeKBLB2BEvxkK8jTSO+n3qFwV0lz5Y9mbw3ESX
+ MnDA+ZeHnSvFHQRnkTHVzGfcWHNkgJ99flS9OhPM/sCBH2AdsIlLJQi8XeMOE3lSU7
+ 6fyDlj2ysdK3+cOyAYDy463375M0MD9KwAXuF137Mq7gUyYbyKxlUVfL6RCOl6xjpw
+ gd9uOFt+vbmnQ==
+From: Roger Quadros <rogerq@kernel.org>
+Subject: [PATCH 0/3] arm: dts: am62-beagleplay: Fix Beagleplay Ethernet
+Date: Thu, 25 Apr 2024 15:20:51 +0300
+Message-Id: <20240425-for-2024-07-beagleplay-eth-v1-0-6c985de1c316@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAKNKKmYC/43NQQ6CMBCF4auQWTumU2gqrryHYVHrAI2EkikhE
+ sLdLZzA5fcW/9sgsQROcC82EF5CCnHMoEsBvndjxxje2aCVrlSpDLZR8AAqiy923cDT4Fbkucf
+ 2pp0hqm1dWsiBSbgN3zP+bLL7kOYo6/m10LH+lV0IFTLpunLGGu/p8WEZebhG6aDZ9/0H7mK2Z
+ cUAAAA=
+To: Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
+ Wadim Egorov <w.egorov@phytec.de>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
+ Simon Glass <sjg@chromium.org>
+Cc: srk@ti.com, s-vadapalli@ti.com, vigneshr@ti.com, r-gunasekaran@ti.com, 
+ danishanwar@ti.com, u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>
+X-Mailer: b4 0.12.4
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1946; i=rogerq@kernel.org;
+ h=from:subject:message-id; bh=P9y8+ZIiLS9CwwuRpmOHODEqruqERYym/uIqfh7siXY=;
+ b=owEBbQKS/ZANAwAIAdJaa9O+djCTAcsmYgBmKkqsSzrQdGIh348KS84fmmTj4z81nBUbWKCxE
+ 8boT2ALtYyJAjMEAAEIAB0WIQRBIWXUTJ9SeA+rEFjSWmvTvnYwkwUCZipKrAAKCRDSWmvTvnYw
+ k55SD/9H2w//FYylrz79Z42FC3J8x1Q1vjrw93GS0K4kv5qOxyGA2JLiPbtmBpX4DmJ7nrOlGIH
+ FMhKE/O+VnIj/2sUEi9uU6tG0UoBoSupDy3G9huejvyNlZtrlRnVNSA/XtgQNdnWx7JMFTsROzy
+ 09zOxc4NMpZHnNbLg3KzqnM0XFRZtXwp1uyEnZC5ZStJe6wp0UmL2NzG98xBAVnGaKvAtkSGCAv
+ CJRIBDXrEL5UUrY9hzZxFkpqYFWK/R9I3MqMc/s3Ecuc0C6emJ0t/9jUb4vQsOIjpQAsAfNx9Bc
+ cSjPkvwqWF5AygMyJRgyTOvdGFAVXJXOuIt7Eyog7E++24iEyF4EHdKchK7PEFBkG9jYAXV4A6Z
+ 0Ptv40EnFisQri1uz/kcawmGDANXz7ClJsFaCE26fN98jlSju1ScQJ1iuiD2l++dmu9MH7hzv5e
+ G9Glb3OtOKG/CYMUUEqefVRyGLYdX4gQdff/kG75uGkXZgN8GMBqyUr9D+FmBe8yEBcED39h1G2
+ I3xdVz3Ze/kkN9cJVb+5iJWo2y+17rmn83jq3bu51F+urDol48kxPSQne7Rxi6inbzQwCS1p+M+
+ MW6G1gCA7TVlIcjSa0rzi37O3LchDiWv1ChrXMkw3G5GRd/CDxCz7pMmWfI2DK7BQrKmOsoxJLC
+ EVu9Ada5pOOmZpw==
+X-Developer-Key: i=rogerq@kernel.org; a=openpgp;
+ fpr=412165D44C9F52780FAB1058D25A6BD3BE763093
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,34 +92,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add "bootph-all" property to CPSW MAC's PHY node phy_gmii_sel.
+Sync AM62 device tree files with Linux v6.9-rc5 and
+add in the missing bits in -u-boot.dtsi to get CPSW
+Ethernet working.
 
-Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+The last patch is marked [not-for-merge] as it is not yet
+applied to Linux device tree.
+
+CI testing
+https://github.com/u-boot/u-boot/pull/527
+
+Signed-off-by: Roger Quadros <rogerq@kernel.org>
 ---
 
-Changes from v1 to v2:
-- This patch is newly added in this series to enable CPSW MAC's PHY
-  node "phy_gmii_sel". As per discussion at here:
-  https://lore.kernel.org/r/20240112130127.rvvrhz7p4vmlyalh@smother/
-  changes made by this patch can be dropped in the future when the
-  DT-Sync is performed with am62-main.dtsi containing this change in
-  the Linux DT which will match U-Boot's DT.
+---
+Roger Quadros (3):
+      arm: dts: k3-am62*: sync with Linux v6.9-rc5
+      arm: dts: k3-am625-beagleplay: get CPSW Ethernet to work
+      [not-for-merge] arm: dts: k3-am625-beagleplay: Fix Ethernet PHY reset GPIO
 
- arch/arm/dts/k3-am625-sk-u-boot.dtsi | 4 ++++
- 1 file changed, 4 insertions(+)
+ arch/arm/dts/k3-am62-main.dtsi               | 126 ++++++++++++++---
+ arch/arm/dts/k3-am62-mcu.dtsi                |   4 +-
+ arch/arm/dts/k3-am62-phycore-som.dtsi        |   5 +-
+ arch/arm/dts/k3-am62-thermal.dtsi            |   5 +-
+ arch/arm/dts/k3-am62-wakeup.dtsi             |  38 +++--
+ arch/arm/dts/k3-am62.dtsi                    |   4 +-
+ arch/arm/dts/k3-am625-beagleplay-u-boot.dtsi |  63 +++++++++
+ arch/arm/dts/k3-am625-beagleplay.dts         |  66 ++++-----
+ arch/arm/dts/k3-am625-phyboard-lyra-rdk.dts  | 104 +++++++++++++-
+ arch/arm/dts/k3-am625-sk.dts                 |   4 +-
+ arch/arm/dts/k3-am625.dtsi                   |   4 +-
+ arch/arm/dts/k3-am62a-main.dtsi              | 201 +++++++++++++++++++++++++--
+ arch/arm/dts/k3-am62a-mcu.dtsi               |   4 +-
+ arch/arm/dts/k3-am62a-thermal.dtsi           |   5 +-
+ arch/arm/dts/k3-am62a-wakeup.dtsi            |   4 +-
+ arch/arm/dts/k3-am62a.dtsi                   |   4 +-
+ arch/arm/dts/k3-am62a7-sk.dts                | 162 ++++++++++++++++++++-
+ arch/arm/dts/k3-am62a7.dtsi                  |   4 +-
+ arch/arm/dts/k3-am62x-sk-common.dtsi         |  24 +++-
+ 19 files changed, 722 insertions(+), 109 deletions(-)
+---
+base-commit: 38ea74d6d5c05224acdb03f799897c1bdd56f8cc
+change-id: 20240305-for-2024-07-beagleplay-eth-f82a51197937
 
-diff --git a/arch/arm/dts/k3-am625-sk-u-boot.dtsi b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-index fa778b0ff4..e9a1afde95 100644
---- a/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-+++ b/arch/arm/dts/k3-am625-sk-u-boot.dtsi
-@@ -46,3 +46,7 @@
- &cpsw_port2 {
- 	status = "disabled";
- };
-+
-+&phy_gmii_sel {
-+	bootph-all;
-+};
+Best regards,
 -- 
-2.34.1
+Roger Quadros <rogerq@kernel.org>
 
