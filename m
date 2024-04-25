@@ -4,66 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3594CC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 18:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88BDCC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 20:34:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EBB6886FA;
-	Thu, 25 Apr 2024 20:30:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 904CD88235;
+	Thu, 25 Apr 2024 22:34:44 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hSQEVXI8";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="iUg+Le/x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0B0D886DD; Thu, 25 Apr 2024 20:30:19 +0200 (CEST)
-Received: from fllv0016.ext.ti.com (fllv0016.ext.ti.com [198.47.19.142])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 8093188229; Thu, 25 Apr 2024 22:34:43 +0200 (CEST)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4845B886FA
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 20:30:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C40598823F
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 22:34:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=kamlesh@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PIUElm003084;
- Thu, 25 Apr 2024 13:30:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1714069814;
- bh=H+1EvvYL1QfnlO/msH5CEQbP+QcLQj6VsYpDFYQYcsk=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=hSQEVXI8cW9i9jihfAKlAXbVuaCkedu9cBks7ggCWQpko2wWy5ilt8r2llxxMvEpE
- vlaUpw8FvDfIu68LkpJi1Y2/L1upx212tTM0/TqbiNTcWtPrVlovpJ6C9E7J3Y0p2/
- PFAdNGAvK12foxixmZZsKAVyrjB6T+xkffbH1fAY=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PIUEHN082140
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 25 Apr 2024 13:30:14 -0500
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- Apr 2024 13:30:14 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 Apr 2024 13:30:14 -0500
-Received: from localhost (kamlesh.dhcp.ti.com [172.24.227.123])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PIUD1D113198;
- Thu, 25 Apr 2024 13:30:14 -0500
-From: Kamlesh Gurudasani <kamlesh@ti.com>
-To: Andrew Davis <afd@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Vignesh
- Raghavendra <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, "Simon Glass"
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-CC: Jon Humphreys <j-humphreys@ti.com>, <u-boot@lists.denx.de>, Andrew Davis
- <afd@ti.com>
-Subject: Re: [PATCH] arm: mach-k3: am642: Fix reset for workaround errata ID
- i2331
-In-Reply-To: <20240418175828.84548-1-afd@ti.com>
-References: <20240418175828.84548-1-afd@ti.com>
-Date: Fri, 26 Apr 2024 00:00:13 +0530
-Message-ID: <87o79xguru.fsf@kamlesh.i-did-not-set--mail-host-address--so-tickle-me>
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-a519e1b0e2dso205486066b.2
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 13:34:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks.com; s=google; t=1714077280; x=1714682080; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ymn5Wkd+NLpdESw35Vt4s15ZuJ5RyvefCIooO62Ups0=;
+ b=iUg+Le/xlYm8QiM2mo0rEDIJDc/YSC3cdSqDnZyJ9fTZCbDojeDDkl3Xwrz0B5E4v1
+ xdqJF7YeRPwtOptG9lTS9oGIuc6yaGNvxNQNe/o6vCMR5j+jwhSJH3ytoVQIYfvbJm+I
+ N/+jELQdMRlAkHQ7y8U3AyI7uAnVDZAGa00BYC+wV9t6ikj96zu8o4i2bx47TqzvnhQZ
+ HVjZRKRp04aUNMYETl9eRw0RQxbLRU6s6/QaIe4+xCBHJ27rDkYMEBR18R/dB4ctIPAd
+ LJClU5DJpOdtvhnMJdLRigteE1RkLEdBOo+3MCPCCJ0lE+TlGkFkTYbo8MNiNwEFwYSr
+ PFoQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714077280; x=1714682080;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ymn5Wkd+NLpdESw35Vt4s15ZuJ5RyvefCIooO62Ups0=;
+ b=QThUVf7S1ykWLB/xBEWn0pLna2o9d/MZT7qvZJRdktQHCvh4UK9sdXkRhz/xAJFqSD
+ CicKZPHJWzuQmRS2MIkFwnFoRWNlc4Jn7pVf305FYvjg6qpoG3/X6KpTzD7ZRg/VT9R+
+ S67wy6Vrwb/tlX23yTIMfLc0v4DSHqesPuAwSAnUYPlqrEX6cIHJp8fSjbxThXEIuB2M
+ xiqpKHxT+EO7RWrs586XPexaXUE5RGKs1xtdfqeItGlMV2KtCJd+rxKH0grD3zva0Y4G
+ wit8o5rgw9lFphipRZq3EcgXDxVJ/aFGx2JjiOa+2hishFeTS3h1dGx/08u6pdp3xUwE
+ mqXQ==
+X-Gm-Message-State: AOJu0YyEf5i6deRhC9MWDKcDp0uwXcteQbGdu64URmOROKkODtv82mz2
+ tGTv/+Qn+GuH4ygdTq5+u33Qr16faSaLwAge7iCi5UReMYRp7q5pEGuqUntdkEi+YzPnDMbxpNQ
+ PQMHR+ZoPwMvQ7GJY/NvVUAIASxfs8v1XDWTSXw==
+X-Google-Smtp-Source: AGHT+IFKor4LWbK8Ge179u+KlytroSDhpLKqAquhHq8Ya9p5EJAzptabxBj6iUIyHf+GzpVNPAsJSMjykfAKII9XxdI=
+X-Received: by 2002:a17:906:c1d6:b0:a55:bf86:3ccd with SMTP id
+ bw22-20020a170906c1d600b00a55bf863ccdmr497921ejb.40.1714077280048; Thu, 25
+ Apr 2024 13:34:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240423183247.335791-1-marex@denx.de>
+ <20240423183247.335791-3-marex@denx.de>
+In-Reply-To: <20240423183247.335791-3-marex@denx.de>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Thu, 25 Apr 2024 13:34:28 -0700
+Message-ID: <CAJ+vNU1fvffzukqr0-u92EyLqXHiwRkvs3CA+1K_A+9p6xrgUg@mail.gmail.com>
+Subject: Re: [PATCH 3/3] ARM: dts: imx: Convert i.MX8M flash.bin image
+ generation to binman
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Adam Ford <aford173@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Angus Ainslie <angus@akkea.ca>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Simon Glass <sjg@chromium.org>,
+ Stefan Eichenberger <stefan.eichenberger@toradex.com>, 
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>, kernel@puri.sm, 
+ u-boot@dh-electronics.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,36 +102,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Andrew Davis <afd@ti.com> writes:
-
-> To workaround an issue in AM642 we reset the SoC in early boot. For that
-> we first probed the sysreset driver by calling uclass_get_device(). The
-> ti-sci sysreset driver is now probed during the ti-sci firmware probe.
-> Update this call to probe the firmware driver which will then probe
-> the sysreset driver allowing do_reset() to again function as expected.
+On Tue, Apr 23, 2024 at 11:33=E2=80=AFAM Marek Vasut <marex@denx.de> wrote:
 >
-> Reported-by: Jonathan Humphreys <j-humphreys@ti.com>
-> Fixes: fc5d40283483 ("firmware: ti_sci: Bind sysreset driver when enabled")
-> Signed-off-by: Andrew Davis <afd@ti.com>
+> Rework the flash.bin image generation such that it uses the new binman
+> nxp_imx8mimage etype. This way, the flash.bin is assembled in correct
+> order using plain binman, without any workarounds or sections assembled
+> in special DT node order.
+>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 > ---
->  arch/arm/mach-k3/am642_init.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/arch/arm/mach-k3/am642_init.c b/arch/arm/mach-k3/am642_init.c
-> index ddf47ef0a9b..80c3cb3479f 100644
-> --- a/arch/arm/mach-k3/am642_init.c
-> +++ b/arch/arm/mach-k3/am642_init.c
-> @@ -226,7 +226,7 @@ void board_init_f(ulong dummy)
->  	 * The warm reset realigns internal clocks and prevents the lockup from
->  	 * happening.
->  	 */
-> -	ret = uclass_first_device_err(UCLASS_SYSRESET, &dev);
-> +	ret = uclass_get_device_by_driver(UCLASS_FIRMWARE, DM_DRIVER_GET(ti_sci), &dev);
->  	if (ret)
->  		printf("\n%s:uclass device error [%d]\n",__func__,ret);
->  
-> -- 
-> 2.39.2
-Tested-by: Kamlesh Gurudasani <kamlesh@ti.com>
+> WARNING: This is very likely to break corner case uses, so please do
+>          test this on your platform.
+> NOTE: This also opens the implementation for proper CST signing etype,
+>       the CST signing would look similar to nxp-imx8mimage section, and
+>       it would likely wrap the whole topmost section {} in the binman
+>       node.
 
-on am64x-evm
+Marek,
+
+Thanks - this is neat and I look forward to seeing a CST signing etype!
+
+Reviewed-By: Tim Harvey <tharvey@gateworks.com>
+
+I did test this on imx8mm_venice_defconfig and it worked great:
+Tested-By: Tim Harvey <tharvey@gateworks.com> # imx8mm_venice
+
+This likely paves the way for removing IMX_CONFIG
+
+Best Regards,
+
+Tim
