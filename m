@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17F18C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 12:21:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28CE9C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 12:27:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CD8288F1D;
-	Thu, 25 Apr 2024 14:21:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 8252988DE4;
+	Thu, 25 Apr 2024 14:27:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="eLFdNhjb";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="kSRBdVh6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 96E7588EF0; Thu, 25 Apr 2024 14:21:19 +0200 (CEST)
+ id C611788F20; Thu, 25 Apr 2024 14:27:30 +0200 (CEST)
 Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E7FC88F23
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 14:21:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 85243886FA
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 14:27:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rogerq@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 54E7E6160D;
- Thu, 25 Apr 2024 12:21:16 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AF897C113CE;
- Thu, 25 Apr 2024 12:21:12 +0000 (UTC)
+ by dfw.source.kernel.org (Postfix) with ESMTP id 407E361639;
+ Thu, 25 Apr 2024 12:27:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4A843C113CC;
+ Thu, 25 Apr 2024 12:27:21 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1714047676;
- bh=rsYwkgDOfUqPuMVFzJYWdi7Fb2asENACPVuKGgQm/PU=;
- h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
- b=eLFdNhjbuBWw3ELC9zkx3X+4QD0oSVxGbujYDtQZkVU+f9pS0wt7++9R4DzxWvzR5
- SPVfEuMyjaWrcz5if9BWqFAQdZTeIdCqRhS3uKEpdYCciAKIMbE6IFVCk6Imx1vg7h
- Q6/vzq9ioC/DzFrg84XB8Fjht9pPfnnw5BYS+IrkB01fQR3I56MQMm2QHOvG0AfQYv
- hxlZ6mRG9lIYbV51oilQMeneawsDAOdpMcTd2ID7T4zFDZ2Fg0AhrFEq7mv04Rwq0z
- JtMi98UMOUnMXtKU7VU9gyj1gDS0tnJ0JPwCL6pvKeWbV4gwlxgMLdLyIkP1CAUhrY
- 74zllT5bXe2rA==
-From: Roger Quadros <rogerq@kernel.org>
-Date: Thu, 25 Apr 2024 15:20:54 +0300
-Subject: [PATCH not-for-merge 3/3] arm: dts: k3-am625-beagleplay: Fix
- Ethernet PHY reset GPIO
+ s=k20201202; t=1714048046;
+ bh=0H6LOShG9sK0+fsrtXvWIEPGy4eqH93CrlE4DG33ho4=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=kSRBdVh64oLAcw5L0lmNL+ZzoIRvpzAJhmhW9DVlx11tFZak4qMawVsTS/FMSoaW2
+ BbMwTHYnLuCdb43Hkqsd+6eO0XJFfwZ2syUAc8p07XLf1DxcqVy/7qYkkXKMPGVo65
+ /+CHhr704xsvYoU16fqxbVlL5KXXAh23HfsXOa78Dh9ZG8bdHrEUem3cQNZKagNf1t
+ 2oInfLgPGPDpIaptujJK03HlnE23P0DMEj/y6CqrSdFTqhnY0yVU0U7N0ea9JNEvBg
+ FzxmR9ROc/OMyUKZuBCKmHbDE/bIMl0RfLaeM6B23GZqOI0ufrYWaSEHO4tvwR9h3u
+ BvpCtARPh3esA==
+Message-ID: <84312b9f-7b30-4da1-91a0-067e94cb420a@kernel.org>
+Date: Thu, 25 Apr 2024 15:27:18 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 06/10] arm: mach-k3: am625_init: Probe AM65 CPSW NUSS
+To: Chintan Vankar <c-vankar@ti.com>, =?UTF-8?Q?Marek_Beh=C3=BAn?=
+ <kabel@kernel.org>, Michal Simek <michal.simek@amd.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, MD Danish Anwar <danishanwar@ti.com>,
+ Udit Kumar <u-kumar1@ti.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Andreas Dannenberg <dannenberg@ti.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Bin Meng <bmeng@tinylab.org>, Sean Anderson <seanga2@gmail.com>,
+ Kishon Vijay Abraham I <kishon@ti.com>, Nikhil M Jain <n-jain1@ti.com>,
+ Wadim Egorov <w.egorov@phytec.de>,
+ Joao Paulo Goncalves <joao.goncalves@toradex.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Dhruva Gole
+ <d-gole@ti.com>, Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Andrew Davis <afd@ti.com>, Maxime Ripard <mripard@kernel.org>,
+ Neha Malcom Francis <n-francis@ti.com>, Simon Glass <sjg@chromium.org>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+References: <20240425120822.2048012-1-c-vankar@ti.com>
+ <20240425120822.2048012-7-c-vankar@ti.com>
+Content-Language: en-US
+From: Roger Quadros <rogerq@kernel.org>
+In-Reply-To: <20240425120822.2048012-7-c-vankar@ti.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240425-for-2024-07-beagleplay-eth-v1-3-6c985de1c316@kernel.org>
-References: <20240425-for-2024-07-beagleplay-eth-v1-0-6c985de1c316@kernel.org>
-In-Reply-To: <20240425-for-2024-07-beagleplay-eth-v1-0-6c985de1c316@kernel.org>
-To: Joe Hershberger <joe.hershberger@ni.com>, 
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>, 
- Nishanth Menon <nm@ti.com>, Robert Nelson <robertcnelson@gmail.com>, 
- Wadim Egorov <w.egorov@phytec.de>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>, 
- Simon Glass <sjg@chromium.org>
-Cc: srk@ti.com, s-vadapalli@ti.com, vigneshr@ti.com, r-gunasekaran@ti.com, 
- danishanwar@ti.com, u-boot@lists.denx.de, Roger Quadros <rogerq@kernel.org>
-X-Mailer: b4 0.12.4
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2075; i=rogerq@kernel.org;
- h=from:subject:message-id; bh=rsYwkgDOfUqPuMVFzJYWdi7Fb2asENACPVuKGgQm/PU=;
- b=owEBbQKS/ZANAwAIAdJaa9O+djCTAcsmYgBmKkqsROpTRoHOSU361YbJ91XQFs+MAc+LBd9K0
- GkFMqRBywWJAjMEAAEIAB0WIQRBIWXUTJ9SeA+rEFjSWmvTvnYwkwUCZipKrAAKCRDSWmvTvnYw
- kw+hD/46/bfZ/fBHxVkCzOUp7QDDmgYku+BiEwGIlDNr2nnw3FHKmqaiSHpKbchqzKwU9P2D7ba
- NSFDI+BN7JJCJVpYl6lgPBkjK4KCJsiA+yCVYFFo/+r1ox9rXGHBheRxHQ9Nk73pjngFOnH2KNu
- 3v6ioVTp5OkKfbghzheMvm1edJkxWoLV6g7o6euvqDhsw/GZ0WXn8F9wS1trFK+UuQDeQugH9b3
- m5bzbEzeNHQqKqiRlZTQy+bBjLNtBv5IWINPiaVxgfji1x8Frtolm9u9OGk5rmJUZb2JmtOgHWh
- 3hEjCbXm5UTTeFnoQh3u5EijtQ87Siz/Rv+6lIb5cq/YX++NVDvbEvzImKnG7EhTGPdoPy7Zbjo
- QnH/2AtaR32/ThHEJlQI7EqTQpOifMb41j9d5VcLlxytfcNDWtN4oPS43Da551LfnbwTO7EudJG
- J0ZO+zYPF7Sq2Fa+HQe7l2Oppf56p7ztMzNEW6yhdqc+qHS/GUn//51bsap9LHHAIgM/ifYaCFH
- y5fbRmjpSx8+4gmWsTJkozro/U718S5fer7kum7bFXPk778E5x4tyEKpROXTeGGf7FJbyArwW42
- FjwmHs/THUqwZ9nTj0hiptDRZnXeLQjUjsKf3NE5xdxGIBh73yss/1c35wjDzxWv6S/XQToYjPL
- wEPkytr8aPCnlbQ==
-X-Developer-Key: i=rogerq@kernel.org; a=openpgp;
- fpr=412165D44C9F52780FAB1058D25A6BD3BE763093
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,57 +85,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move GPIO pinmux to MDIO node. Add GB Ethernet reset GPIO.
 
-Add PIN_INPUT to Fix SPE ethernet reset gpio so that
-reading the GPIO can give correct status.
 
-Signed-off-by: Roger Quadros <rogerq@kernel.org>
----
- arch/arm/dts/k3-am625-beagleplay.dts | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+On 25/04/2024 15:08, Chintan Vankar wrote:
+> From: Kishon Vijay Abraham I <kishon@ti.com>
+> 
+> In order to support Ethernet boot on AM62x, probe AM65 CPSW NUSS
+> driver in board_init_f().
+> 
+> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+> ---
+> 
+> Link to v1:
+> https://lore.kernel.org/r/20240112064759.1801600-8-s-vadapalli@ti.com/
+> 
+> Changes from v1 to v2:
+> - No changes.
+> 
+>  arch/arm/mach-k3/am625_init.c | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
+> 
+> diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
+> index 668f9a51ef..9bf61b1e83 100644
+> --- a/arch/arm/mach-k3/am625_init.c
+> +++ b/arch/arm/mach-k3/am625_init.c
+> @@ -277,6 +277,16 @@ void board_init_f(ulong dummy)
+>  		if (ret)
+>  			panic("DRAM init failed: %d\n", ret);
+>  	}
+> +
+> +	if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
+> +	    spl_boot_device() == BOOT_DEVICE_ETHERNET) {
+> +		struct udevice *cpswdev;
+> +
+> +		if (uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
+> +						&cpswdev))
+> +			printf("Failed to probe am65_cpsw_nuss driver\n");
+> +	}
+> +
 
-diff --git a/arch/arm/dts/k3-am625-beagleplay.dts b/arch/arm/dts/k3-am625-beagleplay.dts
-index a34e0df2ab8..8ab838f1697 100644
---- a/arch/arm/dts/k3-am625-beagleplay.dts
-+++ b/arch/arm/dts/k3-am625-beagleplay.dts
-@@ -292,6 +292,8 @@
- 		pinctrl-single,pins = <
- 			AM62X_IOPAD(0x0160, PIN_OUTPUT, 0) /* (AD24) MDIO0_MDC */
- 			AM62X_IOPAD(0x015c, PIN_INPUT, 0) /* (AB22) MDIO0_MDIO */
-+			AM62X_IOPAD(0x003c, PIN_INPUT, 7) /* (M25) GPMC0_AD0.GPIO0_15 */
-+			AM62X_IOPAD(0x018c, PIN_INPUT, 7) /* (AC21) RGMII2_RD2.GPIO1_5 */
- 		>;
- 	};
- 
-@@ -383,7 +385,6 @@
- 			AM62X_IOPAD(0x016c, PIN_INPUT, 1) /* (Y18) RGMII2_TD0.RMII2_TXD0 */
- 			AM62X_IOPAD(0x0170, PIN_INPUT, 1) /* (AA18) RGMII2_TD1.RMII2_TXD1 */
- 			AM62X_IOPAD(0x0164, PIN_INPUT, 1) /* (AA19) RGMII2_TX_CTL.RMII2_TX_EN */
--			AM62X_IOPAD(0x018c, PIN_OUTPUT, 7) /* (AC21) RGMII2_RD2.GPIO1_5 */
- 			AM62X_IOPAD(0x0190, PIN_INPUT, 7) /* (AE22) RGMII2_RD3.GPIO1_6 */
- 			AM62X_IOPAD(0x01f0, PIN_OUTPUT, 5) /* (A18) EXT_REFCLK1.CLKOUT0 */
- 		>;
-@@ -597,6 +598,9 @@
- 
- 	cpsw3g_phy0: ethernet-phy@0 {
- 		reg = <0>;
-+		reset-gpios = <&main_gpio0 15 GPIO_ACTIVE_LOW>;
-+		reset-assert-us = <10000>;
-+		reset-deassert-us = <50000>;
- 	};
- 
- 	cpsw3g_phy1: ethernet-phy@1 {
-@@ -615,7 +619,7 @@
- 		"USR0", "USR1", "USR2", "USR3", "", "", "USR4",	/* 3-9 */
- 		"EEPROM_WP",					/* 10 */
- 		"CSI2_CAMERA_GPIO1", "CSI2_CAMERA_GPIO2",	/* 11-12 */
--		"CC1352P7_BOOT", "CC1352P7_RSTN", "", "", "",	/* 13-17 */
-+		"CC1352P7_BOOT", "CC1352P7_RSTN", "GBE_RSTN", "", "",	/* 13-17 */
- 		"USR_BUTTON", "", "", "", "", "", "", "", "",	/* 18-26 */
- 		"", "", "", "", "", "", "", "", "", "HDMI_INT",	/* 27-36 */
- 		"", "VDD_WLAN_EN", "", "", "WL_IRQ", "GBE_INTN",/* 37-42 */
+This looks like a HACK.
+The network driver should be probed only when the networking feature is actually required.
+
+>  	spl_enable_cache();
+>  
+>  	fixup_a53_cpu_freq_by_speed_grade();
 
 -- 
-2.34.1
-
+cheers,
+-roger
