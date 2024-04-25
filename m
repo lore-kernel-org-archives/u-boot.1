@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95527C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 10:47:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5869C19F4F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 10:47:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8876B88F05;
-	Thu, 25 Apr 2024 12:47:09 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7A33788EF2;
+	Thu, 25 Apr 2024 12:47:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 044D088ED9; Thu, 25 Apr 2024 12:47:06 +0200 (CEST)
-Received: from smtp-bc0d.mail.infomaniak.ch (smtp-bc0d.mail.infomaniak.ch
- [45.157.188.13])
+ id 135C288EE9; Thu, 25 Apr 2024 12:47:07 +0200 (CEST)
+Received: from smtp-8fae.mail.infomaniak.ch (smtp-8fae.mail.infomaniak.ch
+ [83.166.143.174])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2694A88DC3
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 12:47:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 155358865A
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 12:47:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VQCGZ5q9TzQCV;
- Thu, 25 Apr 2024 12:47:02 +0200 (CEST)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4VQCGc5Qxbzl2n;
+ Thu, 25 Apr 2024 12:47:04 +0200 (CEST)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4VQCGY1RH2zrDs; Thu, 25 Apr 2024 12:47:01 +0200 (CEST)
+ id 4VQCGb0RHvzpTB; Thu, 25 Apr 2024 12:47:03 +0200 (CEST)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Thu, 25 Apr 2024 12:46:25 +0200
-Subject: [PATCH v4 02/11] rockchip: NR_DRAM_BANKS now defaults to 10 when
- Rockchip TPL blob is used
+Date: Thu, 25 Apr 2024 12:46:26 +0200
+Subject: [PATCH v4 03/11] rockchip: nanopc-t6-rk3588: use DRAM banks from ATAGS
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240425-rk35xx-dram-atags-v4-2-331401a58e8e@theobroma-systems.com>
+Message-Id: <20240425-rk35xx-dram-atags-v4-3-331401a58e8e@theobroma-systems.com>
 References: <20240425-rk35xx-dram-atags-v4-0-331401a58e8e@theobroma-systems.com>
 In-Reply-To: <20240425-rk35xx-dram-atags-v4-0-331401a58e8e@theobroma-systems.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
@@ -74,34 +73,105 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 
-When Rockchip TPL blob is used, the memory areas that can be used for
-DRAM is gotten from ATAGS passed through the DRAM at a specific address.
+RK3588-based devices now support creating DRAM banks with proper holes
+by reading the ATAGS from Rockchip TPL blob, so let's use that mechanism
+instead.
 
-The DDR_MEM tag contains at most 10 areas, so we should default to 10 if
-Rockchip TPL blob is used. Note that it is technically possible we need
-more if one of those 10 areas overlaps with reserved memory area,
-forcing us to split it in two. But a default doesn't need to handle all
-cases, only most.
+Since ft_board_setup isn't defined anymore, there's no need for
+selecting CONFIG_OF_BOARD_SETUP.
 
+Similarly, because the nanopc-t6-rk3588.c would be empty, it is simply
+removed, with the (would-be-empty) Makefile as well.
+
+The CONFIG_NR_DRAM_BANK now defaults to 10 which is a safe bet for
+reading banks from ATAGS, so let's use the default value instead.
+
+Co-developed-by: Chris Morgan <macromorgan@hotmail.com>
+Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
 Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 ---
- arch/arm/mach-rockchip/Kconfig | 3 +++
- 1 file changed, 3 insertions(+)
+ board/friendlyelec/nanopc-t6-rk3588/Makefile       |  6 ----
+ .../nanopc-t6-rk3588/nanopc-t6-rk3588.c            | 39 ----------------------
+ configs/nanopc-t6-rk3588_defconfig                 |  2 --
+ 3 files changed, 47 deletions(-)
 
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 4f22d9bde9f..644f7997a29 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -574,6 +574,9 @@ config ROCKCHIP_COMMON_STACK_ADDR
- 	imply TPL_SYS_MALLOC_F if TPL
- 	imply TPL_SYS_MALLOC_SIMPLE if TPL
- 
-+config NR_DRAM_BANKS
-+	default 10 if ROCKCHIP_EXTERNAL_TPL
-+
- source "arch/arm/mach-rockchip/px30/Kconfig"
- source "arch/arm/mach-rockchip/rk3036/Kconfig"
- source "arch/arm/mach-rockchip/rk3066/Kconfig"
+diff --git a/board/friendlyelec/nanopc-t6-rk3588/Makefile b/board/friendlyelec/nanopc-t6-rk3588/Makefile
+deleted file mode 100644
+index c1c49b19708..00000000000
+--- a/board/friendlyelec/nanopc-t6-rk3588/Makefile
++++ /dev/null
+@@ -1,6 +0,0 @@
+-# SPDX-License-Identifier:     GPL-2.0+
+-#
+-# Copyright (c) 2023 Rockchip Electronics Co,. Ltd.
+-#
+-
+-obj-y += nanopc-t6-rk3588.o
+diff --git a/board/friendlyelec/nanopc-t6-rk3588/nanopc-t6-rk3588.c b/board/friendlyelec/nanopc-t6-rk3588/nanopc-t6-rk3588.c
+deleted file mode 100644
+index 99bbef964e0..00000000000
+--- a/board/friendlyelec/nanopc-t6-rk3588/nanopc-t6-rk3588.c
++++ /dev/null
+@@ -1,39 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * Copyright (c) 2023 Rockchip Electronics Co,. Ltd.
+- */
+-
+-#include <fdtdec.h>
+-#include <fdt_support.h>
+-
+-#ifdef CONFIG_OF_BOARD_SETUP
+-int nanopc_t6_add_reserved_memory_fdt_nodes(void *new_blob)
+-{
+-	struct fdt_memory gap1 = {
+-		.start = 0x3fc000000,
+-		.end = 0x3fc4fffff,
+-	};
+-	struct fdt_memory gap2 = {
+-		.start = 0x3fff00000,
+-		.end = 0x3ffffffff,
+-	};
+-	unsigned long flags = FDTDEC_RESERVED_MEMORY_NO_MAP;
+-	unsigned int ret;
+-
+-	/*
+-	 * Inject the reserved-memory nodes into the DTS
+-	 */
+-	ret = fdtdec_add_reserved_memory(new_blob, "gap1", &gap1,  NULL, 0,
+-					 NULL, flags);
+-	if (ret)
+-		return ret;
+-
+-	return fdtdec_add_reserved_memory(new_blob, "gap2", &gap2,  NULL, 0,
+-					  NULL, flags);
+-}
+-
+-int ft_board_setup(void *blob, struct bd_info *bd)
+-{
+-	return nanopc_t6_add_reserved_memory_fdt_nodes(blob);
+-}
+-#endif
+diff --git a/configs/nanopc-t6-rk3588_defconfig b/configs/nanopc-t6-rk3588_defconfig
+index 5c7bc0b7196..738dda026b0 100644
+--- a/configs/nanopc-t6-rk3588_defconfig
++++ b/configs/nanopc-t6-rk3588_defconfig
+@@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
+ CONFIG_SYS_HAS_NONCACHED_MEMORY=y
+ CONFIG_COUNTER_FREQUENCY=24000000
+ CONFIG_ARCH_ROCKCHIP=y
+-CONFIG_NR_DRAM_BANKS=2
+ CONFIG_SF_DEFAULT_SPEED=24000000
+ CONFIG_SF_DEFAULT_MODE=0x2000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3588-nanopc-t6"
+@@ -23,7 +22,6 @@ CONFIG_FIT_VERBOSE=y
+ CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_LEGACY_IMAGE_FORMAT=y
+-CONFIG_OF_BOARD_SETUP=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3588-nanopc-t6.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
 
 -- 
 2.44.0
