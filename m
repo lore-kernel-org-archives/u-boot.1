@@ -4,201 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 167EEC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 10:59:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57531C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 11:57:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D559887B4;
-	Thu, 25 Apr 2024 12:59:53 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 74B1388EF0;
+	Thu, 25 Apr 2024 13:57:34 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="vLzv1JRs";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yGyuLrDQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D95A886C5; Thu, 25 Apr 2024 12:59:51 +0200 (CEST)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0981D88F14; Thu, 25 Apr 2024 13:57:33 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DD61887B4
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 12:59:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B7CC788F04
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 13:57:28 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JzSCi+IkAxvbJcdsQGgLQJblCfD28ZA2crG1e+TnDa+eEF7cMC+hzfTAbEomjYWbhbQHCFKy2KDTeqtzx+AN+E+/Z27FAANU6HCsx6WvR7wG1RG62Ovf5FMN0tuILHUmIPOUszqwD7wmVNJQEbLwFSKRFRxqpZSKBkOxMIUdwIqGGB8SnmFSPS6OVW67Bxjyp/w6LPyQ6sVgU1bdJlsFv/SQ45lIyPxCun3v1T5AOMRxhgFeJ7alYaOWSpQ2HXJ18sAJBLcFZ3MkP8vJnU0lHh0BrGGIVp5JlAwabjOGvVmsnPfRBZIuJmdgrL3Jkv/uGlGcT69rgDVECKva0wlHFQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=TWFFaK2du+OGlHdocc+7CHV4Ap/cLg6rzsjFKfowsWM=;
- b=leNZ+z6hF8OeYuWDBPp74AlqWQah5KEFeCroTbzpqz70NKaZbsbhs2OITMfXpeogeGMktnlqTudvRRh+9AX5MZo49jD4pSjczuecU5o2kqLNK5z2fQc4llkmGkJOhV6cTe6AtY8L+U6OBXGrkUsjNtkLqWMlEeLOngU+bPCNAkI8AeSNgsR0YILY/iOsUBg2H32YpMoi6OIv1v+ZyIMcmiLyCjLmIr+sMaPCaTRkdtaV1kZ0yxwrPOZHRQK1R3GM7m6dwYB2FTCnK/J+dvDkfMAhl/UNbi7qfKi88BCHk0B8kgN2vQ0zgSHH6b2vwayPVE51TKZW01yMpHt1yN/Oug==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=TWFFaK2du+OGlHdocc+7CHV4Ap/cLg6rzsjFKfowsWM=;
- b=vLzv1JRshxM1wlAZbb/sKAFJBuUhzm3oEO/IPQNQlIjejYGNvTBy1vB/UuszNXfvcw8/KHLf7uWxueqfCr6MMqn7KLkJfyz4VHtnOv7Y61bq38omB6PDbEmlTCVCQOADNgHjmz2n3bQ5w6NKGSFQl+THX+BEWvpvgKOZrI7so2c=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by PH8PR12MB7133.namprd12.prod.outlook.com (2603:10b6:510:22e::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7519.22; Thu, 25 Apr
- 2024 10:59:40 +0000
-Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::c3fc:3be9:dde7:745f]) by SJ2PR12MB8109.namprd12.prod.outlook.com
- ([fe80::c3fc:3be9:dde7:745f%7]) with mapi id 15.20.7472.044; Thu, 25 Apr 2024
- 10:59:40 +0000
-Message-ID: <9a5501c1-359d-4e5c-a25e-7c1631451af5@amd.com>
-Date: Thu, 25 Apr 2024 12:59:29 +0200
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] clk: zynq: Fix EMIO clock use detection for gem0
-To: =?UTF-8?Q?Ond=C5=99ej_Jirman?= <megi@xff.cz>, u-boot@lists.denx.de,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Tom Rini <trini@konsulko.com>, Igor Prusov <ivprusov@sberdevices.ru>
-References: <20240416084456.2821567-1-megi@xff.cz>
- <ca63cfb0-5e5f-4522-8cda-87dec22588c9@amd.com>
- <5gv2fqik5vtygldqmv23tpcsyaftazblm4atk3igweduivmiqu@aeoflxwzlvx3>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <5gv2fqik5vtygldqmv23tpcsyaftazblm4atk3igweduivmiqu@aeoflxwzlvx3>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: VI1P195CA0069.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:802:59::22) To SJ2PR12MB8109.namprd12.prod.outlook.com
- (2603:10b6:a03:4f5::8)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a55b93f5540so118153666b.1
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 04:57:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1714046248; x=1714651048; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=CkyvEotfAOEBHgCn92o1G3XQniYF8WIzPwCkcWdlhIw=;
+ b=yGyuLrDQ5b+R3ND3EZHsXxmpJ/KR2YO68ISm6ivqlLGQy7A7hLUNmTy5la83UrU3Kp
+ sryqZjhOD9xN12GAmIGAoMEyUOZPDSBU1d5aWElk5HoNj9EzHpbQuo6L14bRCQxfzGOd
+ ntw0t4y69blT2yoHXKrreCl96BtTi0Y3PLkbr7YTAS59oU9njuGlalNBPS92qj5PlN7P
+ 3KMbvG015dZY54caOGUEJNvevxbTvCwj5RDz6CCr8m0NIE3P3JAWfuMOwTsg/tRuHqxv
+ Ts8HbzpZzAJ8tTvKcZ5uo2pYTZqq/aQ1TftGBnZCFgpplrmh+0u/mw5dHSlUVdB9AN5m
+ ZDuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714046248; x=1714651048;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=CkyvEotfAOEBHgCn92o1G3XQniYF8WIzPwCkcWdlhIw=;
+ b=V1jcaZQPdWqU7VbU4Ffz2oqLajzbifvOg8nD4Dmx8fC0E5vCjFvsgX9sltXp6M4Urk
+ ivRB0yO9QokCA0w8307oz+5KAtSl0HlZ9pL6lleXsDgIea0iFbi5WCcVAZMGT2deGhGS
+ 1OHdTJuyVm23v4dS1s8wprMyF8rEz3gJyRvmfP6cirzV0uJ6AObt0/MVtJaWxtWB7XTp
+ YYXjca/ajGrVdigRlFrbGIOb+T1W9qF0/e2cTNGafnDba41RiXZ9rJcn+J+EpoOQieBn
+ zNFrby4mRaa6BuGbtHwUT8n/cZb34bgyTbTCrxKQ4p2OIPpi7s53o8Sd7oyi+DycgG+x
+ kDLw==
+X-Gm-Message-State: AOJu0YxXOSVyZKJDvfuJ1lbCU55bLzNOLW10EbHJrdRniIrzxhvBRuUT
+ mErS7k4vcYPe8StuyTMzNZH6+YaunypD09+RIwLTvoduBNQMcQUNN8miq+XiT7ysPnlIc2nZWUZ
+ fg8hesQ==
+X-Google-Smtp-Source: AGHT+IGfDaeoh9SyoKulhiSIObotTrMyHDdlCE05gNrMVqc6E2WBj14zLlcrUbBbMjVskMSnmPfrjQ==
+X-Received: by 2002:a17:907:6ea8:b0:a51:ddc6:e00d with SMTP id
+ sh40-20020a1709076ea800b00a51ddc6e00dmr4873561ejc.26.1714046248125; 
+ Thu, 25 Apr 2024 04:57:28 -0700 (PDT)
+Received: from ?IPV6:2a02:8109:aa0d:be00::dcdd? ([2a02:8109:aa0d:be00::dcdd])
+ by smtp.gmail.com with ESMTPSA id
+ p2-20020a170906614200b00a588e0e0d9bsm2164845ejl.93.2024.04.25.04.57.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 25 Apr 2024 04:57:27 -0700 (PDT)
+Message-ID: <53b87b44-e87a-4baf-b104-64e62c47263e@linaro.org>
+Date: Thu, 25 Apr 2024 13:57:26 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|PH8PR12MB7133:EE_
-X-MS-Office365-Filtering-Correlation-Id: e0103ff3-7987-42d4-e82e-08dc6516ce2f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230031|376005|366007|1800799015;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?QnJNeXZNVTVWOG5mVmw2OThIdmZqem8wWmZ1S3ZIRCswaS80OU55aHNpOWly?=
- =?utf-8?B?ZlRFMnFvUEIvdDJuakdndDZoUTBMdjhFV2xxN0FnTzNEcTNEbklKQVB6L2FU?=
- =?utf-8?B?WmxSVHNSTUVxM2s0a3VuVTlZOGNmQjg1eUlkbC9hTjdvYlRvZTNtK01CVWxw?=
- =?utf-8?B?eHhmeWN6VXlPemx2MWhjS2RxTXNhRFlrWUFkSnJXQjQ4YitYVUtNK3ZtUjdZ?=
- =?utf-8?B?L29TM0Y0a2NoZmhkd3dpZWI5MHk3S24zMlcvTFE5bDFUNjdFU0lwaDVCNFpG?=
- =?utf-8?B?Ti81UEFHOTRoWE1oeGxXZld6NVZtaXdFTEdXNGJ3bVV6MjFLM1ZmdlRZaGhZ?=
- =?utf-8?B?b1FKaE9RQTdYVTlZSVUxUVM2TEdPL0UyUHJ6bkFMZTErVktia3BYSGV3c2JR?=
- =?utf-8?B?OTNOUzZEYTVCOFBqM0lCUWthUnFTaGFoWEVpYzJubis4NDRLQVpmWDR2Q0pl?=
- =?utf-8?B?b3FQdzlEVE1xc0F5MXhHUHFOVGNNYVNBdjM2aFFuSFdsQjdUR3pwejVlcTlU?=
- =?utf-8?B?QVZXdjVlWEU3QUo3N0hrbHQ1UDdTdWNKY1J3MWhSSkNHMjZvenZrYWVGTzFr?=
- =?utf-8?B?VTRDYmdFank0UEd1ZWdkUXVMRUpnS20rL2QySnRYVFE0VHE3UmJ5UDZHZng3?=
- =?utf-8?B?bHJoTjNsWUFOL0RBVlNsYjFFQ2czMDY2WHN6K0FIVXVibkRoenZxWHdJcy9B?=
- =?utf-8?B?dU9xYlI5NlA4OTRtNm9HQ1BtRWNoKzVRN2kzbDMzMWZHbTdRcWtKWm9oODR2?=
- =?utf-8?B?cTNpYUdLdHVjaE5PM0FyaERLbkpZeDk2bjl1RFdPT0xpK0VYUVlXT2I0TXky?=
- =?utf-8?B?MG1ndERqUWxMcm9jdUJvL3pRVktJNlIyWG0yOHBSRVB1RGo4NWZLWnVlQ242?=
- =?utf-8?B?T2ZzTGRxNkZjV2xibm5zYTdsSzUyTisvU2N2SUJyUDZEbHk0bDR1UGhUaUdn?=
- =?utf-8?B?ZGljZ0tiQlRzNFBKNzJKRU1kNVlicXVxZWR5bVUrcFoyRk9jaXZVaEdVUSs5?=
- =?utf-8?B?S1dhQStHaXdPdXBuUjZkbzBNcS9PdUd3SmMrVVphT2xVRm1peUk0RlY1M08v?=
- =?utf-8?B?TDlROEJCSlJha2ZVNmFTV2NhOGFBNURXRHcwM2Q5WERFQUthVXlvcHFreEhh?=
- =?utf-8?B?aktnbk1xT25qUGhjbWdDUzZSQnRVVzVKd1FCSnZpcmkxTkNPRHZCdUo1S2FY?=
- =?utf-8?B?dHFrT1hJbkRENkJmWXQyZ3FkUXJIaWRLdDlwQlFMcEs2V0QvTjlYTUM1Wlpi?=
- =?utf-8?B?M3hmZnZ3aHhFMFJwa3c3YURzSlEybThSOGptT0M1aW9UTERmQ2kva1U3NS90?=
- =?utf-8?B?VkhTQklrcDVxdmszSkxHMHJiNFNqM2lOdzVERXFCY0s2ZlVsSWxDMXd1Tjhr?=
- =?utf-8?B?NHovZWh0TVFaQVBSeXBreWNRRzlpNGQxVXM0ZDR0cVN1MEJCRjNPUnFMYi85?=
- =?utf-8?B?SmcrQzNPeXkyTTlYVVNZRmMzdFBlK0tCQmlxTktYRFJaQkpqaWpwMGxOZ2NK?=
- =?utf-8?B?UWJQQ1poaW0yR1FHOStFOWVsL3Y3Y3hGOGx1RFkrbUYrQmlKekNKdlF1elVR?=
- =?utf-8?B?NHFvWjI1Rkw1bTc4UHpRRU1tRkQrd3MyVDRnSWRDM3I5WkxJOGd4TzRCeFN2?=
- =?utf-8?Q?CNbiZic4Wd7FMNfn2p1c27kOwaA96UYGHlkTJyQO1yrY=3D?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230031)(376005)(366007)(1800799015); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?RnVyZDJZZlRvc1N5U043OUpNWnVOU2t5cHdYcnJwT1MwM0NOYmFwLzJOaDV5?=
- =?utf-8?B?YUJwREgrWUF1NUVGTmJtck1sVTdaaFVPZkd2cmltbnM4T0xFN3IycXdKbldE?=
- =?utf-8?B?S0RWSmh2eUhkc0FVUlBYZjBZSk1PSU1jbjBiN3pudGJ6MCtGYis1OElxK3dZ?=
- =?utf-8?B?UDNjdGhiOHh4S09USk43dEN0SXlXN0tqbE8vS3N5Tk9xTmZteElXSThBdE5n?=
- =?utf-8?B?Q0lqMHRKd0tiTU5uTTUyS0VTZ1F0eitqZ2hrUTQ5WjBuMG5KNktHeDViQ25O?=
- =?utf-8?B?TUhrL3NsWlJYT2FJUnRLMHVpRFZ5RjBGc2x2RGg4Vm51NlREem4vWWxoS01n?=
- =?utf-8?B?MWluS2RzcHJ6L3gvTFFtV1Z5T2xxRkFkMFlkUXc0Z1M3S3hIemJZbkxwNWFw?=
- =?utf-8?B?ZzBTc2NVT3k4S05WNmhuVmRaeUZGNlJGM0hHcVpNa2srOUVwRDFGK0c5VUxk?=
- =?utf-8?B?aFpNRzYxVHk4QkwvMlVtQk1tSEhPN0F4TTN0RWo0QnQ4TWVPaDVJcHFUNkNW?=
- =?utf-8?B?OHlhSCs5T1ZDV3ZmY09FOFNJT0Flc1crakZBOUFGUU83cVcxQ21oYUcxYTdJ?=
- =?utf-8?B?VXA0bVJVVjllR2J3dCtxOFprMWhJSS9Id2ZHTm5udjRFS29VclFOKzRVWmhv?=
- =?utf-8?B?U1pPVU44d29jMExxVGtWb1g0YzhSV1JNblNwVGZVSzVid25YdkdtaDRNNDVs?=
- =?utf-8?B?bzZhSm9SaUhmZnNCT1JFMmNiTThqK2lWSktNTjJ5TzZhL0srcFVSQXNBZ3d0?=
- =?utf-8?B?cDRFUG9HckJqcG1VWnRtcFR0aCtxSER6elZ6NUdTZjFKdGdzQlNEVnFmS2V2?=
- =?utf-8?B?RWtRK3JwdEc2TnB5WE0yYzB1MlBJWUJWaG1QV0FCRzhXcndCMjNxYTcxOVJS?=
- =?utf-8?B?ZHZkZmJOcU9SNnpzS1VueG5NWDJKUE5tbHhjKzNzM0dPcmlteGFCM0tIVHlu?=
- =?utf-8?B?UEtvZVhFT2grK2xGbncydzA0N3BEL0RhRy9BTTFRQno0bUtwWDh0UWVzT29k?=
- =?utf-8?B?WFNneGQ2dW05WkRGMjJXRW1IRE5pRDBNK0FDYUJBall1ZE5zY0hSN0pYTkZR?=
- =?utf-8?B?cWhSOG5JZ0JaT3h3alBrOG9NVitGWG5nMERSb3dicUtoZTZTKy8vNEFNVTZN?=
- =?utf-8?B?enF5THZPUGQwWHNDYit3ZHRQeExIbm9ReHZBbmRjZzY1d0s5T2s5cC9YTXRz?=
- =?utf-8?B?aWhHN1l1SDVkcGN5bWg4WEtKRE1qajAwUkVCZnVCY0Via0w4bk9ObU43bXlo?=
- =?utf-8?B?QWZEVDlCRjV5Z2ZUdzMrNUxacnNSNHp5b2FpQ3lPWDF3Z3VsdWo0eUhTS2FE?=
- =?utf-8?B?OUxPenNWellaTjM5bkVhK2dweU5oRGVhd0xvQ1RZOG1ETkJRczV2enhjdjFL?=
- =?utf-8?B?K3BxeTkwMjRXWnVYc3RsRjZ5Z3VKNjQ1aEpmaUV5MXB1WlVsTm1uMTJMa1ZZ?=
- =?utf-8?B?SGFYY0F4TEF5alJvNHBzZU93bko1a1lhT2k2anp0RXltOUNXNjVlVW9kTzRw?=
- =?utf-8?B?ZnZsa2lieXdEcUkxN0s0YzRzcy9SZHpzZE16d1daand2SFFUL1pieHJzOXY2?=
- =?utf-8?B?TGs0MWNlMk9mVHloN1FzMlpucXpBUlI3YzFoYSt3a0hwZ3l3YlpKNTdhbVRK?=
- =?utf-8?B?azkwK1Z4R3kyZkZQc2l1ZW9NbjZKd0U4K21icGdPeTkxSzFOTENTa0VpM3JW?=
- =?utf-8?B?WFoxano4bThJOTgvNDY3YUtOZjA2UjJlQnYyRFlZVTRLYXVJMTdvQjlDR1dH?=
- =?utf-8?B?V1lmK3dlT3NreEVnQkpzU0QvTXpqekZlQlY3VlpYMDZHNzhoSEt3UG16Y1di?=
- =?utf-8?B?eHB5V0ZhVExGY1JCRVA0TGlPNDRuUVRnM3lxY3o3MkNUSjJ3TkJjSjUvb0V0?=
- =?utf-8?B?aGdEOVMvZkhpNUUxcmRKUVMzSGJjR3VIZk5RTDJ5TW1RWWdiZTRYUTlVUVNp?=
- =?utf-8?B?WjhxVmU0VWtqemxtUUJrSVNyM096QXBtT1BYSmsrYlJRM0N5TWlGWittRGl0?=
- =?utf-8?B?dkdabmxFWlowSDZTT0w5a3A1L0FPUVFGWFBaMlVWcVRoZ2pYYU9HR3ROaDBz?=
- =?utf-8?B?b0tmQXNVSlZ5SC9BdHh5TmQ4RXdZLytCS2hpdlArYk9mdGo2MWlWamdZZUNp?=
- =?utf-8?Q?pFsjQ01XmfCJ6emrMtTM8j0yA?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e0103ff3-7987-42d4-e82e-08dc6516ce2f
-X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Apr 2024 10:59:40.5353 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sY+fvkSMHuuT+tES323ecRy+R7rhb1TMju0wH1Tr4aCQ36M0VmCLmrlci5HpE4pt
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB7133
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 3/5] zfs: Fix unaligned read of uint64
+To: mwleeds@mailtundra.com
+Cc: u-boot@lists.denx.de
+References: <20240407014743.13872-1-mwleeds@mailtundra.com>
+ <20240407014743.13872-4-mwleeds@mailtundra.com>
+ <16d96fa3-4d95-4bfa-beac-6585426dc703@linaro.org>
+ <yMP4wWXZMjDL0Xi9eeSdNuUBW7pE82Ie-UoUMbNBa7K1Vckv8A4da_KjBUlGkpeQfQsADCJ8z73FxL9AlyQjSJ41TJM1ohjNHzAStZpdhUk=@mailtundra.com>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <yMP4wWXZMjDL0Xi9eeSdNuUBW7pE82Ie-UoUMbNBa7K1Vckv8A4da_KjBUlGkpeQfQsADCJ8z73FxL9AlyQjSJ41TJM1ohjNHzAStZpdhUk=@mailtundra.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -217,150 +99,179 @@ X-Virus-Status: Clean
 
 
 
-On 4/25/24 10:23, Ondřej Jirman wrote:
-> On Wed, Apr 24, 2024 at 04:34:05PM GMT, Michal Simek wrote:
+On 25/04/2024 06:02, mwleeds@mailtundra.com wrote:
+> Hi Caleb,
+> 
+> Thanks for this interesting feedback. I saw these patches were already merged
+> since you sent this but I added a few thoughts below anyway.
+
+Ah, a shame.. It would be good to find a scalable solution to this!
+> 
+> On Friday, April 12th, 2024 at 11:50 AM, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+> 
+>> Hi Phaedrus,
 >>
+>> On 07/04/2024 03:47, mwleeds@mailtundra.com wrote:
 >>
->> On 4/16/24 10:44, Ondřej Jirman wrote:
->>> From: Ondrej Jirman <megi@xff.cz>
+>>> Without this patch, when trying to boot zfs using U-Boot on a Jetson TX2
+>>> NX (which is aarch64), I get a CPU reset error like so:
 >>>
->>> According to TRM, the bit that differentiates between MIO and EMIO
->>> clocks is bit 6. This resolves failure to set clock when using EMIO
->>> clock for ethernet.
->>
->> Not sure which TRM you are using but here
->>
->> https://docs.amd.com/r/en-US/ug585-zynq-7000-SoC-TRM/Register-slcr-GEM0_RCLK_CTRL
->>
->> SRCSEL it is bit 4 not bit 6.
-> 
-> Maybe TRM is wrong? :)
-> 
-> I have XSA produced by Vivado that has:
-> 
-> GEM0_RCLK_CTRL:
-> 
->      EMIT_MASKWRITE(0XF8000138, 0x00000011U ,0x00000011U),
->      // .. CLKACT = 0x1
->      // .. ==> 0XF8000140[0:0] = 0x00000001U
->      // ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
->      // .. SRCSEL = 0x4
->      // .. ==> 0XF8000140[6:4] = 0x00000004U
->      // ..     ==> MASK : 0x00000070U    VAL : 0x00000040U
->      // .. DIVISOR = 0x1
->      // .. ==> 0XF8000140[13:8] = 0x00000001U
->      // ..     ==> MASK : 0x00003F00U    VAL : 0x00000100U
->      // .. DIVISOR1 = 0x5
->      // .. ==> 0XF8000140[25:20] = 0x00000005U
->      // ..     ==> MASK : 0x03F00000U    VAL : 0x00500000U
->      // ..
-> 
-> https://megous.com/dl/tmp/20e2593dbe9e0b3b.png
-> 
-> GEM0_CLK_CTRL:
-> 
->      EMIT_MASKWRITE(0XF8000140, 0x03F03F71U ,0x00500141U),
-
-Here you have 0x140
-
->      // .. CLKACT = 0x1
->      // .. ==> 0XF8000148[0:0] = 0x00000001U
-
-And here 0x148
-
-
-This is what I see for external clock
-
-   265     // .. CLKACT = 0x1
-   266     // .. ==> 0XF8000138[0:0] = 0x00000001U
-   267     // ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-   268     // .. SRCSEL = 0x1
-   269     // .. ==> 0XF8000138[4:4] = 0x00000001U
-   270     // ..     ==> MASK : 0x00000010U    VAL : 0x00000010U
-   271     // ..
-   272     EMIT_MASKWRITE(0XF8000138, 0x00000011U ,0x00000011U),
-
-and this one for io pll
-
-   265     // .. CLKACT = 0x1
-   266     // .. ==> 0XF8000138[0:0] = 0x00000001U
-   267     // ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
-   268     // .. SRCSEL = 0x0
-   269     // .. ==> 0XF8000138[4:4] = 0x00000000U
-   270     // ..     ==> MASK : 0x00000010U    VAL : 0x00000000U
-   271     // ..
-   272     EMIT_MASKWRITE(0XF8000138, 0x00000011U ,0x00000001U),
-
-It means even Vivado is generating it as BIT 4.
-
-
->      // ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
->      // .. SRCSEL = 0x0
->      // .. ==> 0XF8000148[5:4] = 0x00000000U
->      // ..     ==> MASK : 0x00000030U    VAL : 0x00000000U
->      // .. DIVISOR = 0x10
->      // .. ==> 0XF8000148[13:8] = 0x00000010U
->      // ..     ==> MASK : 0x00003F00U    VAL : 0x00001000U
->      // ..
-> 
-> https://megous.com/dl/tmp/65c6ee01818a06ea.png
-> 
-> So the PS init sequence in XSA suggests that GEM0_RCLK_CTRL layout
-> actually matches the GEM0_CLK_CTRL documentation.
-> 
-> I guess Vivado is right and TRM is wrong, since HW works as expected
-> with the PS configuration that doesn't match the TRM.
-> 
+>>> "Synchronous Abort" handler, esr 0x96000021
+>>> elr: 00000000800c9000 lr : 00000000800c8ffc (reloc)
+>>> elr: 00000000fff77000 lr : 00000000fff76ffc
+>>> x0 : 00000000ffb40f04 x1 : 0000000000000000
+>>> x2 : 000000000000000a x3 : 0000000003100000
+>>> x4 : 0000000003100000 x5 : 0000000000000034
+>>> x6 : 00000000fff9cc6e x7 : 000000000000000f
+>>> x8 : 00000000ff7f84a0 x9 : 0000000000000008
+>>> x10: 00000000ffb40f04 x11: 0000000000000006
+>>> x12: 000000000001869f x13: 0000000000000001
+>>> x14: 00000000ff7f84bc x15: 0000000000000010
+>>> x16: 0000000000002080 x17: 00000000001fffff
+>>> x18: 00000000ff7fbdd8 x19: 00000000ffb405f8
+>>> x20: 00000000ffb40dd0 x21: 00000000fffabe5e
+>>> x22: 000000ea77940000 x23: 00000000ffb42090
+>>> x24: 0000000000000000 x25: 0000000000000000
+>>> x26: 0000000000000000 x27: 0000000000000000
+>>> x28: 0000000000bab10c x29: 00000000ff7f85f0
 >>>
->>> Signed-off-by: Ondrej Jirman <megi@xff.cz>
+>>> Code: d00001a0 9103a000 94006ac6 f9401ba0 (f9400000)
+>>> Resetting CPU ...
+>>>
+>>> This happens when be64_to_cpu() is called on a value that exists at a
+>>> memory address that's 4 byte aligned but not 8 byte aligned (e.g. an
+>>> address ending in 04). The call stack where that happens is:
+>>> check_pool_label() ->
+>>> zfs_nvlist_lookup_uint64(vdevnvlist, ZPOOL_CONFIG_ASHIFT,...) ->
+>>> be64_to_cpu()
+>>
+>>
+>> This is very odd, aarch64 doesn't generally have these restrictions. I
+>> got a bit nerdsniped when I saw this so I did some digging and figured this:
+>>
+>> 1. Your abort exception doesn't include the FAR_ELx register (which
+>> should contain the address that was being accessed when the abort
+>> occured). This means your board is running in EL3.
+>> 2. It turns out there is an "A" flag in the SCTLR_ELx register, when set
+>> this flag causes a fault when trying to load from an address that isn't
+>> aligned to the size of the data element (see "A, bit" on
+>> https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-Registers/SCTLR-EL3--System-Control-Register--EL3-
+>>
+>> I'm not sure who's in the "wrong" here, maybe the driver should avoid
+>> unaligned accesses? But then again, I don't think you should be running
+>> a ZFS driver in EL3.
+>>
+>> I'm not familiar with the Jetson Nano, but maybe there's a documented
+>> way to run U-Boot so that it isn't executing in EL3? Or if not you could
+>> also try unsetting the A flag.
+> 
+> I may look into this if I get a chance. However if I write some assembly code
+> to change the execution level or unset the A flag, I worry that the code would
+> work fine on the hardware I have (Jetson TX2 NX) but behave differently on
+
+Well, unsetting the A flag might arguably have some niche negative 
+outcomes, but I really struggle to see how this is a driver bug to be 
+honest...
+> another platform. And I don't think I can easily set up testing environments
+> with u-boot + zfs on different platforms to find out.
+
+fwiw, if you do intend to investigate this further, I'd be happy to 
+validate your assumptions on a Qualcomm board (where we are rather 
+boring and running in EL1 or EL2).
+> 
+>>
+>> If this really is something to fix in the driver, I don't think
+>> hotpatching every unaligned access with a malloc() is the right solution.
+>>
+> 
+> I'm certainly open to other ideas. The difficulty is the data structure we're
+> parsing in this file is read from disk and it's only 4-byte aligned.
+
+According to the ARM docs, the issue is that you're loading an 8-byte 
+value from a 4-byte aligned address. If you split it into two 4-byte 
+reads (for the upper and lower words) then it should work fine. This 
+would avoid the malloc at any rate.
+
+Thanks and regards,
+> 
+>>> Signed-off-by: Phaedrus Leeds mwleeds@mailtundra.com
+>>> Tested-by: Phaedrus Leeds mwleeds@mailtundra.com
+>>
+>>
+>> regarding your question about re-sending to remove these tags, I'd say
+>> probably yes, and especially if you're going to send a new revision anyway.
+>>
+>> fwiw you seem to have gotten pretty much everything else about the patch
+>> submission process spot on :)
+>>
+>> Kind regards,
+>>
 >>> ---
->>>    drivers/clk/clk_zynq.c | 4 +++-
->>>    1 file changed, 3 insertions(+), 1 deletion(-)
+>>> fs/zfs/zfs.c | 18 ++++++++++++++++++
+>>> 1 file changed, 18 insertions(+)
 >>>
->>> diff --git a/drivers/clk/clk_zynq.c b/drivers/clk/clk_zynq.c
->>> index e3cefe2e0c72..78e6886a000c 100644
->>> --- a/drivers/clk/clk_zynq.c
->>> +++ b/drivers/clk/clk_zynq.c
->>> @@ -42,6 +42,8 @@
->>>    #define CLK_CTRL_DIV3X_SHIFT	20
->>>    #define CLK_CTRL_DIV3X_MASK	(ZYNQ_CLK_MAXDIV << CLK_CTRL_DIV3X_SHIFT)
->>> +#define CLK_CTRL_GEM_EMIO	(1u << 6)
+>>> diff --git a/fs/zfs/zfs.c b/fs/zfs/zfs.c
+>>> index 61d58fce68..9a50deac18 100644
+>>> --- a/fs/zfs/zfs.c
+>>> +++ b/fs/zfs/zfs.c
+>>> @@ -1552,35 +1552,53 @@ nvlist_find_value(char *nvlist, char *name, int valtype, char **val,
+>>> if (nelm_out)
+>>> *nelm_out = nelm;
+>>> return 1;
+>>> }
+>>>
+>>> nvlist += encode_size; /* goto the next nvpair */
+>>> }
+>>> return 0;
+>>> }
+>>>
+>>> +int is_word_aligned_ptr(void *ptr) {
+>>> + return ((uintptr_t)ptr & (sizeof(void *) - 1)) == 0;
+>>> +}
 >>> +
->>>    DECLARE_GLOBAL_DATA_PTR;
->>>    #ifndef CONFIG_SPL_BUILD
->>> @@ -161,7 +163,7 @@ static enum zynq_clk_rclk zynq_clk_get_gem_rclk(enum zynq_clk id)
->>>    	else
->>>    		clk_ctrl = readl(&slcr_base->gem1_rclk_ctrl);
->>> -	srcsel = (clk_ctrl & CLK_CTRL_SRCSEL_MASK) >> CLK_CTRL_SRCSEL_SHIFT;
->>> +	srcsel = (clk_ctrl & CLK_CTRL_GEM_EMIO);
+>>> int
+>>> zfs_nvlist_lookup_uint64(char *nvlist, char *name, uint64_t *out)
+>>> {
+>>> char *nvpair;
+>>> size_t size;
+>>> int found;
+>>>
+>>> found = nvlist_find_value(nvlist, name, DATA_TYPE_UINT64, &nvpair, &size, 0);
+>>> if (!found)
+>>> return 0;
+>>> if (size < sizeof(uint64_t)) {
+>>> printf("invalid uint64\n");
+>>> return ZFS_ERR_BAD_FS;
+>>> }
+>>>
+>>> + /* On arm64, calling be64_to_cpu() on a value stored at a memory address
+>>> + * that's not 8-byte aligned causes the CPU to reset. Avoid that by copying the
+>>> + * value somewhere else if needed.
+>>> + */
+>>> + if (!is_word_aligned_ptr((void *)nvpair)) {
+>>> + uint64_t *alignedptr = malloc(sizeof(uint64_t));
+>>> + if (!alignedptr)
+>>> + return 0;
+>>> + memcpy(alignedptr, nvpair, sizeof(uint64_t));
+>>> + *out = be64_to_cpu(*alignedptr);
+>>> + free(alignedptr);
+>>> + return 1;
+>>> + }
+>>> +
+>>> out = be64_to_cpu((uint64_t *) nvpair);
+>>> return 1;
+>>> }
+>>>
+>>> char *
+>>> zfs_nvlist_lookup_string(char *nvlist, char *name)
+>>> {
+>>> char *nvpair;
+>>> char *ret;
+>>> size_t slen;
 >>
->> Definitely using SRCSEL_MASK is not ideal solution because mask is 0x3 and
->> in gem case it is single bit. But based on description you should be getting
->> correct values even with 0x3 because SHIFT is correct.
-> 
-> Well, it doesn't help that the code is almost all refering to CLK_CTRL while
-> actually accessing gem1_rclk_ctrl in the struct.
-> 
-> In any case it can't detect the case when sourcing the clock from EMIO and
-> not one of the PLLs, apparently.
-> 
-> The failure I'm talking about is here in zynq_gem.c:
-> 
->          ret = clk_get_rate(&priv->tx_clk);
->          if (ret != clk_rate) {
->                  ret = clk_set_rate(&priv->tx_clk, clk_rate);
->                  if (IS_ERR_VALUE(ret)) {
->                          dev_err(dev, "failed to set tx clock rate %ld\n", clk_rate);
->                          return ret;
->                  }
->          }
-> 
-> And all I get is "failed to set tx clock rate" from U-Boot and no ethernet.
+>>
+>> --
+>> // Caleb (they/them)
 
-Zynq is quite a old device but I expect you have external clock out of chip or 
-you generate it in PL. For that you need to describe it.
-
-How does your DT looks like for external clocks?
-
-Thanks,
-Michal
+-- 
+// Caleb (they/them)
