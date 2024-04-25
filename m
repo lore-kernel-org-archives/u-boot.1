@@ -4,40 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72889C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 23:07:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A7A5C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 23:07:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE3A38907D;
-	Fri, 26 Apr 2024 01:07:37 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 41E4089087;
+	Fri, 26 Apr 2024 01:07:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1714086457;
-	bh=T/gmZHfqW+V+5gR5r39n3E+RkfAW7V15eU1WPEYrLmY=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=mLVfeuyd68Kfd07Rz7yn4YNGN3vv4uAzs+a4M4SP8BE5s6cDZ2366yqcwBrNaMOlV
-	 RMF/gzT/JRhMh9dnXCWApNlAVn91cNP0Go7rTDNZoAmtDeUa1MuZhN8HGRiNgAOEV3
-	 nHbpGMZXEaAaqOm145twjtd9QznbAUhaTl83CCSSsqUWnTrbO3Ut6YShjtyA7awwqu
-	 OZL5iLhqlT6Qe3SxD50aW+L7DPlEwAF3E2KLsDPfLh7amKGqmojvnz8M8TzJ04nkNh
-	 T1FEkrsgFlXBEyNhqPq34ek2CGTy3/wngjLccia5tf2Qnp5QOTJjLpw23RPYCXKgP0
-	 PpolNu9qjgwQg==
+	s=phobos-20191101; t=1714086458;
+	bh=aClGLI+QLCSNnlo9Y0Shlq5uQdn/m+Od+JBZp4qH5BI=;
+	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=JkK4tMOY3nzE0gmrLMzHdSy0C7Z9ooFvHbmtzz+5jHC+LsxSkigG4zOOmUQ1w0k/2
+	 kbdvpHkvOzN2VwWb0lBVjLtHR0g54gn3PC91pxMY1kWx3P69qwhdUc0yWLLH0buDrH
+	 +FbAvpvJXlTroUb13eydkDdWT+gigZltgH9QTLZ1Z8dTxTbZlc/BaN/geqSIzmqpc6
+	 PdviftkGK7xXkdEXelpAypya52V8WdmwClCvuXUqPzq/vWy2P62o8BFxCDnIMgxKOv
+	 8mlm8YWMe5gXbKA0h3hOcyr4NNd0mNKO3Bk9uQI2RTDLNXePFQUeKBRWZS1zeQvDcw
+	 3iixjgWHL0A0Q==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id BE0F188189;
- Fri, 26 Apr 2024 01:07:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id BAB5988F15;
+ Fri, 26 Apr 2024 01:07:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1714086456;
- bh=T/gmZHfqW+V+5gR5r39n3E+RkfAW7V15eU1WPEYrLmY=;
- h=From:To:Cc:Subject:Date:From;
- b=iLdELUFSY5H/ZP3Fh0zhoxW0U+QkegMWNmCV20jxPMq04q1m9krLcBLMVSppZ+/ZI
- Y8VInb4qqPDISD8EfKbJXTVXqW5u4h9e5o/HAB2UdZjVT0tDUgYlUpZE8/+HNIzzrS
- IzITsrCsDZr+o+nRI4baM2dxdOz6/Z22vfOYxzvD1QUccNxKAwDxB/8Xe0tC2+FUNW
- 7YLTPyG8MXoiH1bufHX207ZwuhwTtof8dGH/zN7sQCnKz7ldiVxpaIaHB1chbIeF3E
- 87BOuA9xG9HQw052uYxIIyeInOK1YHWyEuzc8sK5fSiczJJ2MifgJc87qh8jyu0T9b
- t7eT6K4ruLjcg==
+ s=phobos-20191101; t=1714086457;
+ bh=aClGLI+QLCSNnlo9Y0Shlq5uQdn/m+Od+JBZp4qH5BI=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=RjZlScBBShcErujLb8F9b9ZQ6/EUryOOjk9wiWuK3S6ALjTt9JGPeETBENt+2dnDP
+ NrBW7dy6asJouPaaZ0x9oYPN7brcwGftJphc2gOJq0Ow4bKKKHK6C20dq5gmfTS4WL
+ mdoSbNfmuqfeLIHG2q4WDp9WUHYpIZwo/JD+XU9hHxPai23J/BggelMRH7FiWV1tcV
+ Y03QnDqKHhMPJqGDWeIp9KD4kz+q8WcD9Q+hC/GCgJ6Vq31yhevNBytaWvRp5479KJ
+ oFVrsi88OFFwVvE5HmIu7Zj/d33p5vQdkodTii1DJaOX5AvsOL07kHZ/g5w64YHrks
+ MAcHEnKTE88UQ==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
@@ -54,11 +55,13 @@ Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
  Stefan Eichenberger <stefan.eichenberger@toradex.com>,
  Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>,
  Tom Rini <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
-Subject: [PATCH 1/2] binman: Add nxp_imx8mcst etype for i.MX8M flash.bin
+Subject: [PATCH 2/2] imx: hab: Use nxp_imx8mcst etype for i.MX8M flash.bin
  signing
-Date: Fri, 26 Apr 2024 01:07:01 +0200
-Message-ID: <20240425230721.497441-1-marex@denx.de>
+Date: Fri, 26 Apr 2024 01:07:02 +0200
+Message-ID: <20240425230721.497441-2-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20240425230721.497441-1-marex@denx.de>
+References: <20240425230721.497441-1-marex@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -77,56 +80,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add new binman etype which allows signing both the SPL and fitImage sections
-of i.MX8M flash.bin using CST. There are multiple DT properties which govern
-the signing process, nxp,loader-address is the only mandatory one which sets
-the SPL signature start address without the imx8mimage header, this should be
-SPL text base. The key material can be configured using optional DT properties
-nxp,srk-table, nxp,csf-key, nxp,img-key, all of which default the key material
-names generated by CST tool scripts. The nxp,unlock property can be used to
-unlock CAAM access in SPL section.
-
-Minimal signing description example:
-
-    diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot.dtsi
-    index c4c1a177102..ccd44bf9d0b 100644
-    --- a/arch/arm/dts/imx8mp-u-boot.dtsi
-    +++ b/arch/arm/dts/imx8mp-u-boot.dtsi
-    @@ -86,6 +86,12 @@
-            section {
-                    pad-byte = <0x00>;
-
-    +               nxp-imx8mcst@0 {
-    +                       filename = "u-boot-spl-mkimage.signed.bin";
-    +                       nxp,loader-address = <CONFIG_SPL_TEXT_BASE>;
-    +                       nxp,unlock;
-    +                       args;   /* Needed by mkimage etype superclass */
-    +
-                    nxp-imx8mimage {
-                            filename = "u-boot-spl-mkimage.bin";
-                            nxp,boot-from = "sd";
-    @@ -129,6 +135,14 @@
-                            };
-                    };
-
-    +               };
-    +
-    +               nxp-imx8mcst@1 {
-    +                       filename = "u-boot-fit.signed.bin";
-    +                       nxp,loader-address = <CONFIG_SPL_LOAD_FIT_ADDRESS>;
-    +                       offset = <0x58000>;
-    +                       args;   /* Needed by mkimage etype superclass */
-    +
-                    fit {
-                            description = "Configuration to load ATF before U-Boot";
-     #ifndef CONFIG_IMX_HAB
-    @@ -191,5 +205,6 @@
-                                    };
-                            };
-                    };
-    +               };
-            };
-     };
+Update documentation and use nxp_imx8mcst binman etype for signing
+of flash.bin instead of previous horrible shell scripting.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
@@ -149,205 +104,347 @@ Cc: kernel@puri.sm
 Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 ---
- tools/binman/btool/cst.py          |  48 +++++++++++
- tools/binman/etype/nxp_imx8mcst.py | 133 +++++++++++++++++++++++++++++
- 2 files changed, 181 insertions(+)
- create mode 100644 tools/binman/btool/cst.py
- create mode 100644 tools/binman/etype/nxp_imx8mcst.py
+ doc/imx/habv4/csf_examples/mx8m/csf.sh        |  92 ------------
+ doc/imx/habv4/csf_examples/mx8m/csf_fit.txt   |  30 ----
+ doc/imx/habv4/csf_examples/mx8m/csf_spl.txt   |  33 ----
+ doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 141 +++++++-----------
+ 4 files changed, 55 insertions(+), 241 deletions(-)
+ delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf.sh
+ delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
+ delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf_spl.txt
 
-diff --git a/tools/binman/btool/cst.py b/tools/binman/btool/cst.py
-new file mode 100644
-index 00000000000..30e78bdbbd9
---- /dev/null
-+++ b/tools/binman/btool/cst.py
-@@ -0,0 +1,48 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2024 Marek Vasut <marex@denx.de>
-+#
-+"""Bintool implementation for cst"""
+diff --git a/doc/imx/habv4/csf_examples/mx8m/csf.sh b/doc/imx/habv4/csf_examples/mx8m/csf.sh
+deleted file mode 100644
+index cd3b2614a2f..00000000000
+--- a/doc/imx/habv4/csf_examples/mx8m/csf.sh
++++ /dev/null
+@@ -1,92 +0,0 @@
+-#!/bin/sh
+-
+-# 0) Generate keys
+-#
+-# WARNING: ECDSA keys are only supported by HAB 4.5 and newer (i.e. i.MX8M Plus)
+-#
+-# cd /path/to/cst-3.3.1/keys/
+-#    ./hab4_pki_tree.sh -existing-ca n -use-ecc n -kl 4096 -duration 10 -num-srk 4 -srk-ca y
+-# cd /path/to/cst-3.3.1/crts/
+-#   ../linux64/bin/srktool -h 4 -t SRK_1_2_3_4_table.bin -e SRK_1_2_3_4_fuse.bin -d sha256 -c ./SRK1_sha256_4096_65537_v3_ca_crt.pem,./SRK2_sha256_4096_65537_v3_ca_crt.pem,./SRK3_sha256_4096_65537_v3_ca_crt.pem,./SRK4_sha256_4096_65537_v3_ca_crt.pem -f 1
+-
+-# 1) Build U-Boot (e.g. for i.MX8MM)
+-#
+-# cp -Lv /path/to/arm-trusted-firmware/build/imx8mm/release/bl31.bin .
+-# cp -Lv /path/to/firmware-imx-8.14/firmware/ddr/synopsys/ddr3* .
+-# make -j imx8mm_board_defconfig
+-# make -j`nproc` flash.bin
+-
+-# 2) Sign SPL and DRAM blobs
+-
+-cp doc/imx/habv4/csf_examples/mx8m/csf_spl.txt csf_spl.tmp
+-cp doc/imx/habv4/csf_examples/mx8m/csf_fit.txt csf_fit.tmp
+-
+-# update File Paths from env vars
+-if ! [ -r $CSF_KEY ]; then
+-	echo "Error: \$CSF_KEY not found"
+-	exit 1
+-fi
+-if ! [ -r $IMG_KEY ]; then
+-	echo "Error: \$IMG_KEY not found"
+-	exit 1
+-fi
+-if ! [ -r $SRK_TABLE ]; then
+-	echo "Error: \$SRK_TABLE not found"
+-	exit 1
+-fi
+-sed -i "s:\$CSF_KEY:$CSF_KEY:" csf_spl.tmp
+-sed -i "s:\$IMG_KEY:$IMG_KEY:" csf_spl.tmp
+-sed -i "s:\$SRK_TABLE:$SRK_TABLE:" csf_spl.tmp
+-sed -i "s:\$CSF_KEY:$CSF_KEY:" csf_fit.tmp
+-sed -i "s:\$IMG_KEY:$IMG_KEY:" csf_fit.tmp
+-sed -i "s:\$SRK_TABLE:$SRK_TABLE:" csf_fit.tmp
+-
+-# update SPL Blocks
+-spl_block_base=$(printf "0x%x" $(( $(sed -n "/CONFIG_SPL_TEXT_BASE=/ s@.*=@@p" .config) - 0x40)) )
+-spl_block_size=$(printf "0x%x" $(stat -tc %s u-boot-spl-ddr.bin))
+-sed -i "/Blocks = / s@.*@  Blocks = $spl_block_base 0x0 $spl_block_size \"flash.bin\"@" csf_spl.tmp
+-
+-# Generate CSF blob
+-cst -i csf_spl.tmp -o csf_spl.bin
+-
+-# Patch CSF blob into flash.bin
+-spl_csf_offset=$(xxd -s 24 -l 4 -e flash.bin | cut -d " " -f 2 | sed "s@^@0x@")
+-spl_bin_offset=$(xxd -s 4 -l 4 -e flash.bin | cut -d " " -f 2 | sed "s@^@0x@")
+-spl_dd_offset=$((${spl_csf_offset} - ${spl_bin_offset} + 0x40))
+-dd if=csf_spl.bin of=flash.bin bs=1 seek=${spl_dd_offset} conv=notrunc
+-
+-# 3) Sign u-boot.itb
+-
+-# fitImage
+-fit_block_base=$(printf "0x%x" $(sed -n "/CONFIG_SPL_LOAD_FIT_ADDRESS=/ s@.*=@@p" .config) )
+-fit_block_offset=$(printf "0x%s" $(fdtget -t x u-boot.dtb /binman/imx-boot/uboot offset))
+-fit_block_size=$(printf "0x%x" $(( ( ( $(stat -tc %s u-boot.itb) + 0x1000 - 0x1 ) & ~(0x1000 - 0x1)) + 0x20 )) )
+-sed -i "/Blocks = / s@.*@  Blocks = $fit_block_base $fit_block_offset $fit_block_size \"flash.bin\"@" csf_fit.tmp
+-
+-# IVT
+-ivt_ptr_base=$(printf "%08x" ${fit_block_base} | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
+-ivt_block_base=$(printf "%08x" $(( ${fit_block_base} + ${fit_block_size} - 0x20 )) | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
+-csf_block_base=$(printf "%08x" $(( ${fit_block_base} + ${fit_block_size} )) | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
+-ivt_block_offset=$((${fit_block_offset} + ${fit_block_size} - 0x20))
+-csf_block_offset=$((${ivt_block_offset} + 0x20))
+-
+-echo "0xd1002041 ${ivt_block_base} 0x00000000 0x00000000 0x00000000 ${ivt_block_base} ${csf_block_base} 0x00000000" | xxd -r -p > ivt.bin
+-dd if=ivt.bin of=flash.bin bs=1 seek=${ivt_block_offset} conv=notrunc
+-
+-# Generate CSF blob
+-cst -i csf_fit.tmp -o csf_fit.bin
+-
+-# When loading flash.bin via USB, we must ensure that the file being
+-# served is as large as the target expects (see
+-# board_spl_fit_size_align()), otherwise the target will hang in
+-# rom_api_download_image() waiting for the remaining bytes.
+-#
+-# Note that in order for dd to actually extend the file, one must not
+-# pass conv=notrunc here. With a non-zero seek= argument, dd is
+-# documented to preserve the contents of the file seeked past; in
+-# particular, dd does not open the file with O_TRUNC.
+-CSF_SIZE=$(sed -n "/CONFIG_CSF_SIZE=/ s@.*=@@p" .config)
+-dd if=/dev/null of=csf_fit.bin bs=1 seek=$((CSF_SIZE - 0x20)) count=0
+-
+-# Patch CSF blob into flash.bin
+-dd if=csf_fit.bin of=flash.bin bs=1 seek=${csf_block_offset} conv=notrunc
+diff --git a/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt b/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
+deleted file mode 100644
+index 97f3eea573b..00000000000
+--- a/doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
++++ /dev/null
+@@ -1,30 +0,0 @@
+-[Header]
+-  Version = 4.3
+-  Hash Algorithm = sha256
+-  Engine = CAAM
+-  Engine Configuration = 0
+-  Certificate Format = X509
+-  Signature Format = CMS
+-
+-[Install SRK]
+-  # SRK_TABLE is full path to SRK_1_2_3_4_table.bin
+-  File = "$SRK_TABLE"
+-  Source index = 0
+-
+-[Install CSFK]
+-  # CSF_KEY is full path to CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+-  File = "$CSF_KEY"
+-
+-[Authenticate CSF]
+-
+-[Install Key]
+-  Verification index = 0
+-  Target Index = 2
+-  # IMG_KEY is full path to IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+-  File = "$IMG_KEY"
+-
+-[Authenticate Data]
+-  Verification index = 2
+-  # FIXME:
+-  # Line 1 -- fitImage
+-  Blocks = CONFIG_SPL_LOAD_FIT_ADDRESS 0x57c00 0xffff "flash.bin"
+diff --git a/doc/imx/habv4/csf_examples/mx8m/csf_spl.txt b/doc/imx/habv4/csf_examples/mx8m/csf_spl.txt
+deleted file mode 100644
+index 88fa420a5fa..00000000000
+--- a/doc/imx/habv4/csf_examples/mx8m/csf_spl.txt
++++ /dev/null
+@@ -1,33 +0,0 @@
+-[Header]
+-  Version = 4.3
+-  Hash Algorithm = sha256
+-  Engine = CAAM
+-  Engine Configuration = 0
+-  Certificate Format = X509
+-  Signature Format = CMS
+-
+-[Install SRK]
+-  # SRK_TABLE is full path to SRK_1_2_3_4_table.bin
+-  File = "$SRK_TABLE"
+-  Source index = 0
+-
+-[Install CSFK]
+-  # CSF_KEY is full path to CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+-  File = "$CSF_KEY"
+-
+-[Authenticate CSF]
+-
+-[Unlock]
+-  Engine = CAAM
+-  Features = MID
+-
+-[Install Key]
+-  Verification index = 0
+-  Target Index = 2
+-  # IMG_KEY is full path to IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+-  File = "$IMG_KEY"
+-
+-[Authenticate Data]
+-  Verification index = 2
+-  # FIXME: Adjust start (first column) and size (third column) here
+-  Blocks = 0x7e0fc0 0x0 0x306f0 "flash.bin"
+diff --git a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+index e16e5410bd9..4b2fe08e1d1 100644
+--- a/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
++++ b/doc/imx/habv4/guides/mx8m_spl_secure_boot.txt
+@@ -121,6 +121,9 @@ build configuration:
+ - Defconfig:
+ 
+   CONFIG_IMX_HAB=y
++  CONFIG_FSL_CAAM=y
++  CONFIG_ARCH_MISC_INIT=y
++  CONFIG_SPL_CRYPTO=y
+ 
+ - Kconfig:
+ 
+@@ -131,92 +134,58 @@ build configuration:
+ 
+ The CSF contains all the commands that the HAB executes during the secure
+ boot. These commands instruct the HAB code on which memory areas of the image
+-to authenticate, which keys to install, use and etc.
+-
+-CSF examples are available under doc/imx/habv4/csf_examples/ directory.
+-
+-CSF "Blocks" line for csf_spl.txt can be generated as follows:
+-
+-```
+-spl_block_base=$(printf "0x%x" $(( $(sed -n "/CONFIG_SPL_TEXT_BASE=/ s@.*=@@p" .config) - 0x40)) )
+-spl_block_size=$(printf "0x%x" $(stat -tc %s u-boot-spl-ddr.bin))
+-sed -i "/Blocks = / s@.*@  Blocks = $spl_block_base 0x0 $spl_block_size \"flash.bin\"@" csf_spl.txt
+-```
+-
+-The resulting line looks as follows:
+-```
+-  Blocks = 0x7e0fc0 0x0 0x306f0 "flash.bin"
+-```
+-
+-The columns mean:
+-  - CONFIG_SPL_TEXT_BASE - 0x40 -- Start address of signed data, in DRAM
+-  - 0x0 -- Start address of signed data, in "flash.bin"
+-  - 0x306f0 -- Length of signed data, in "flash.bin"
+-  - Filename -- "flash.bin"
+-
+-To generate signature for the SPL part of flash.bin container, use CST:
+-```
+-cst -i csf_spl.tmp -o csf_spl.bin
+-```
+-
+-The newly generated CST blob has to be patched into existing flash.bin
+-container. Conveniently, flash.bin IVT contains physical address of the
+-CSF blob. Remember, the SPL part of flash.bin container is loaded by the
+-BootROM at CONFIG_SPL_TEXT_BASE - 0x40 , so the offset of CSF blob in
+-the fitImage can be calculated and inserted into the flash.bin in the
+-correct location as follows:
+-```
+-# offset = IVT_HEADER[6 = CSF address] - CONFIG_SPL_TEXT_BASE - 0x40
+-spl_csf_offset=$(xxd -s 24 -l 4 -e flash.bin | cut -d " " -f 2 | sed "s@^@0x@")
+-spl_bin_offset=$(xxd -s 4 -l 4 -e flash.bin | cut -d " " -f 2 | sed "s@^@0x@")
+-spl_dd_offset=$((${spl_csf_offset} - ${spl_bin_offset} + 0x40))
+-dd if=csf_spl.bin of=flash.bin bs=1 seek=${spl_dd_offset} conv=notrunc
+-```
+-
+-CSF "Blocks" line for csf_fit.txt can be generated as follows:
+-```
+-# fitImage
+-fit_block_base=$(printf "0x%x" $(sed -n "/CONFIG_SPL_LOAD_FIT_ADDRESS=/ s@.*=@@p" .config) )
+-fit_block_offset=$(printf "0x%s" $(fdtget -t x u-boot.dtb /binman/imx-boot/uboot offset))
+-fit_block_size=$(printf "0x%x" $(( ( ( $(stat -tc %s u-boot.itb) + 0x1000 - 0x1 ) & ~(0x1000 - 0x1)) + 0x20 )) )
+-sed -i "/Blocks = / s@.*@  Blocks = $fit_block_base $fit_block_offset $fit_block_size \"flash.bin\"@" csf_fit.tmp
+-```
+-
+-The fitImage part of flash.bin requires separate IVT. Generate the IVT and
+-patch it into the correct aligned location of flash.bin as follows:
+-```
+-# IVT
+-ivt_ptr_base=$(printf "%08x" ${fit_block_base} | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
+-ivt_block_base=$(printf "%08x" $(( ${fit_block_base} + ${fit_block_size} - 0x20 )) | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
+-csf_block_base=$(printf "%08x" $(( ${fit_block_base} + ${fit_block_size} )) | sed "s@\(..\)\(..\)\(..\)\(..\)@0x\4\3\2\1@")
+-ivt_block_offset=$((${fit_block_offset} + ${fit_block_size} - 0x20))
+-csf_block_offset=$((${ivt_block_offset} + 0x20))
+-
+-echo "0xd1002041 ${ivt_block_base} 0x00000000 0x00000000 0x00000000 ${ivt_block_base} ${csf_block_base} 0x00000000" | xxd -r -p > ivt.bin
+-dd if=ivt.bin of=flash.bin bs=1 seek=${ivt_block_offset} conv=notrunc
+-```
+-
+-To generate CSF signature for the fitImage part of flash.bin container, use CST:
+-```
+-cst -i csf_fit.tmp -o csf_fit.bin
+-```
+-
+-Finally, patch the CSF signature into the fitImage right past the IVT:
+-```
+-dd if=csf_fit.bin of=flash.bin bs=1 seek=${csf_block_offset} conv=notrunc
+-```
+-
+-The entire script is available in doc/imx/habv4/csf_examples/mx8m/csf.sh
+-and can be used as follows to modify flash.bin to be signed
+-(adjust paths as needed):
+-```
+-export CST_DIR=/usr/src/cst-3.3.1/
+-export CSF_KEY=$CST_DIR/crts/CSF1_1_sha256_4096_65537_v3_usr_crt.pem
+-export IMG_KEY=$CST_DIR/crts/IMG1_1_sha256_4096_65537_v3_usr_crt.pem
+-export SRK_TABLE=$CST_DIR/crts/SRK_1_2_3_4_table.bin
+-export PATH=$CST_DIR/linux64/bin:$PATH
+-/bin/sh doc/imx/habv4/csf_examples/mx8m/csf.sh
+-```
++to authenticate, which keys to install, use and etc. The CSF is generated
++using the CST Code Signing Tool based on input configuration file. This tool
++input configuration file is generated using binman, and the tool is invoked
++from binman as well.
 +
-+import re
++The SPL and fitImage sections of the generated image are signed separately.
++The signing is activated by wrapping SPL and fitImage sections into nxp-imx8mcst
++etype, by adding the following modification into the binman node:
 +
-+from binman import bintool
++"
++    diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot.dtsi
++    index c4c1a177102..ccd44bf9d0b 100644
++    --- a/arch/arm/dts/imx8mp-u-boot.dtsi
++    +++ b/arch/arm/dts/imx8mp-u-boot.dtsi
++    @@ -86,6 +86,12 @@
++            section {
++                    pad-byte = <0x00>;
 +
-+class Bintoolcst(bintool.Bintool):
-+    """Image generation for U-Boot
++    +               nxp-imx8mcst@0 {
++    +                       filename = "u-boot-spl-mkimage.signed.bin";
++    +                       nxp,loader-address = <CONFIG_SPL_TEXT_BASE>;
++    +                       nxp,unlock;
++    +                       args;   /* Needed by mkimage etype superclass */
++    +
++                    nxp-imx8mimage {
++                            filename = "u-boot-spl-mkimage.bin";
++                            nxp,boot-from = "sd";
++    @@ -129,6 +135,14 @@
++                            };
++                    };
 +
-+    This bintool supports running `cst` with some basic parameters as
-+    needed by binman.
-+    """
-+    def __init__(self, name):
-+        super().__init__(name, 'Sign NXP i.MX image')
++    +               };
++    +
++    +               nxp-imx8mcst@1 {
++    +                       filename = "u-boot-fit.signed.bin";
++    +                       nxp,loader-address = <CONFIG_SPL_LOAD_FIT_ADDRESS>;
++    +                       offset = <0x58000>;
++    +                       args;   /* Needed by mkimage etype superclass */
++    +
++                    fit {
++                            description = "Configuration to load ATF before U-Boot";
++     #ifndef CONFIG_IMX_HAB
++    @@ -191,5 +205,6 @@
++                                    };
++                            };
++                    };
++    +               };
++            };
++     };
++"
 +
-+    # pylint: disable=R0913
-+    def run(self, output_fname=None):
-+        """Run cst
-+
-+        Args:
-+            output_fname: Output filename to write to
-+        """
-+        args = []
-+        if output_fname:
-+            args += ['-o', output_fname]
-+        return self.run_cmd(*args)
-+
-+    def fetch(self, method):
-+        """Fetch handler for cst
-+
-+        This installs cst using the apt utility.
-+
-+        Args:
-+            method (FETCH_...): Method to use
-+
-+        Returns:
-+            True if the file was fetched and now installed, None if a method
-+            other than FETCH_BIN was requested
-+
-+        Raises:
-+            Valuerror: Fetching could not be completed
-+        """
-+        if method != bintool.FETCH_BIN:
-+            return None
-+        return self.apt_install('imx-code-signing-tool')
-diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
-new file mode 100644
-index 00000000000..fb1c3415ca1
---- /dev/null
-+++ b/tools/binman/etype/nxp_imx8mcst.py
-@@ -0,0 +1,133 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2023-2024 Marek Vasut <marex@denx.de>
-+# Written with much help from Simon Glass <sjg@chromium.org>
-+#
-+# Entry-type module for generating the i.MX8M code signing tool
-+# input configuration file and invocation of cst on generated
-+# input configuration file and input data to be signed.
-+#
-+
-+import struct
-+
-+from collections import OrderedDict
-+
-+from binman.entry import Entry
-+from binman.etype.mkimage import Entry_mkimage
-+from binman.etype.section import Entry_section
-+from binman import elf
-+from dtoc import fdt_util
-+from u_boot_pylib import tools
-+
-+class Entry_nxp_imx8mcst(Entry_mkimage):
-+    """NXP i.MX8M CST .cfg file generator and cst invoker
-+
-+    Properties / Entry arguments:
-+        - nxp,loader-address - loader address (SPL text base)
-+    """
-+
-+    def __init__(self, section, etype, node):
-+        super().__init__(section, etype, node)
-+        self.required_props = ['nxp,loader-address']
-+
-+    def ReadNode(self):
-+        super().ReadNode()
-+        self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
-+        self.srk_table = fdt_util.GetString(self._node, 'nxp,srk-table', 'SRK_1_2_3_4_table.bin')
-+        self.csf_key = fdt_util.GetString(self._node, 'nxp,csf-key', 'CSF1_1_sha256_4096_65537_v3_usr_crt.pem')
-+        self.img_key = fdt_util.GetString(self._node, 'nxp,img-key', 'IMG1_1_sha256_4096_65537_v3_usr_crt.pem')
-+        self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
-+        self.ReadEntries()
-+
-+    def BuildSectionData(self, required):
-+        data, input_fname, uniq = self.collect_contents_to_file(
-+            self._entries.values(), 'input')
-+        # Parse the input data and figure out what it is that is being signed.
-+        # - If it is mkimage'd imx8mimage, then extract to be signed data size
-+        #   from imx8mimage header, and calculate CSF blob offset right past
-+        #   the SPL from this information.
-+        # - If it is fitImage, then pad the image to 4k, add generated IVT and
-+        #   sign the whole payload, then append CSF blob at the end right past
-+        #   the IVT.
-+        signtype = struct.unpack('<I', data[:4])[0]
-+        signbase = self.loader_address
-+        signsize = 0
-+        if signtype == 0x412000d1: # SPL/imx8mimage
-+            # Sign the payload including imx8mimage header
-+            # (extra 0x40 bytes before the payload)
-+            signbase -= 0x40
-+            signsize = struct.unpack('<I', data[24:28])[0] - signbase
-+            # Remove mkimage generated padding from the end of data
-+            data = data[:signsize]
-+        elif signtype == 0xedfe0dd0: # fitImage
-+            # Align fitImage to 4k
-+            signsize = tools.align(len(data), 0x1000)
-+            data += tools.get_bytes(0, signsize - len(data))
-+            # Add generated IVT
-+            data += struct.pack('<I', 0x412000d1)
-+            data += struct.pack('<I', signbase + signsize) # IVT base
-+            data += struct.pack('<I', 0)
-+            data += struct.pack('<I', 0)
-+            data += struct.pack('<I', 0)
-+            data += struct.pack('<I', signbase + signsize) # IVT base
-+            data += struct.pack('<I', signbase + signsize + 0x20) # CSF base
-+            data += struct.pack('<I', 0)
-+        # Write out customized data to be signed
-+        output_dname = tools.get_output_filename(f'nxp.cst-input-data.{uniq}')
-+        tools.write_file(output_dname, data)
-+        # Generate CST configuration file used to sign payload
-+        cfg_spl_fname = tools.get_output_filename('nxp.csf-config-txt.%s' % uniq)
-+        with open(cfg_spl_fname, 'w') as outf:
-+            print('[Header]', file=outf)
-+            print('  Version = 4.3', file=outf)
-+            print('  Hash Algorithm = sha256', file=outf)
-+            print('  Engine = CAAM', file=outf)
-+            print('  Engine Configuration = 0', file=outf)
-+            print('  Certificate Format = X509', file=outf)
-+            print('  Signature Format = CMS', file=outf)
-+            print('[Install SRK]', file=outf)
-+            print('  File = "%s"' % self.srk_table, file=outf)
-+            print('  Source index = 0', file=outf)
-+            print('[Install CSFK]', file=outf)
-+            print('  File = "%s"' % self.csf_key, file=outf)
-+            print('[Authenticate CSF]', file=outf)
-+            if self.unlock:
-+                print('[Unlock]', file=outf)
-+                print('  Engine = CAAM', file=outf)
-+                print('  Features = MID', file=outf)
-+            print('[Install Key]', file=outf)
-+            print('  Verification index = 0', file=outf)
-+            print('  Target Index = 2', file=outf)
-+            print('  File = "%s"' % self.img_key, file=outf)
-+            print('[Authenticate Data]', file=outf)
-+            print('  Verification index = 2', file=outf)
-+            print('  Blocks = %#x 0 %#x "%s"' % (signbase, len(data), output_dname), file=outf)
-+
-+        output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
-+        args = ['-i', cfg_spl_fname, '-o', output_fname]
-+        if self.cst.run_cmd(*args) is not None:
-+            outdata = tools.read_file(output_fname)
-+            return data + outdata
-+        else:
-+            # Bintool is missing; just use the input data as the output
-+            self.record_missing_bintool(self.cst)
-+            return data
-+
-+    def SetImagePos(self, image_pos):
-+        # Customized SoC specific SetImagePos which skips the mkimage etype
-+        # implementation and removes the 0x48 offset introduced there. That
-+        # offset is only used for uImage/fitImage, which is not the case in
-+        # here.
-+        upto = 0x00
-+        for entry in super().GetEntries().values():
-+            entry.SetOffsetSize(upto, None)
-+
-+            # Give up if any entries lack a size
-+            if entry.size is None:
-+                return
-+            upto += entry.size
-+
-+        Entry_section.SetImagePos(self, image_pos)
-+
-+    def AddBintools(self, btools):
-+        super().AddBintools(btools)
-+        self.cst = self.AddBintool(btools, 'cst')
++Build of flash.bin target then produces a signed flash.bin automatically.
+ 
+ 1.4 Closing the device
+ -----------------------
 -- 
 2.43.0
 
