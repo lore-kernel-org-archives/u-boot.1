@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A906C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 12:10:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E219BC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 12:10:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B62088F32;
+	by phobos.denx.de (Postfix) with ESMTP id 93FB488F3D;
 	Thu, 25 Apr 2024 14:09:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="qFGXL+3U";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="JfDQhtbP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DE7C288F15; Thu, 25 Apr 2024 14:09:09 +0200 (CEST)
-Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ id 4E7E888F31; Thu, 25 Apr 2024 14:09:10 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A59E588F21
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 14:09:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E82D88F2C
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 14:09:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PC8swG022849;
- Thu, 25 Apr 2024 07:08:54 -0500
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43PC8vNO033739;
+ Thu, 25 Apr 2024 07:08:57 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1714046934;
- bh=DwM3mB1hLUrnA7flPCEkuc+m482lvPFf+ifJD0X64K0=;
+ s=ti-com-17Q1; t=1714046937;
+ bh=EQ5UanwwZD5SzoOjTtYSmB4TA8ijbSezfVVbSn/IFCk=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=qFGXL+3UCiKLRsUATuZuNuTLgMUZeb5raBqyU29YRIfEacFhdbbkzf67CSGuvdNJr
- rGnzHH1z9/8rIcaCWNbRDt8KP6YVgfuO7NDKZVbXt5he4uAUDAbhhB4vrmYysJiN6k
- 00qrfj4eRPeEMQQFUqJ0xg/A3O8G0xfYGM9cC0yg=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PC8sIA125076
+ b=JfDQhtbPsF/4KBJUKvMuDMNtE+DdrseDF1ojmGV0bBwE6P7tkA4wa4NDiYF3lcxFE
+ mopGEcCDpWbjalYF8tpjAtWPXgVYxJ6qExWioE2+Rq2qkKCU59WyZUz5givrvprqum
+ taG0yOEe1qOWrjvbAHcAeJ0cL6cr+f/JUUJPdj7M=
+Received: from DFLE106.ent.ti.com (dfle106.ent.ti.com [10.64.6.27])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43PC8vPB011751
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 25 Apr 2024 07:08:54 -0500
-Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 25 Apr 2024 07:08:57 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 25
- Apr 2024 07:08:54 -0500
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ Apr 2024 07:08:57 -0500
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 25 Apr 2024 07:08:54 -0500
+ Frontend Transport; Thu, 25 Apr 2024 07:08:57 -0500
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PC8rZK037402;
- Thu, 25 Apr 2024 07:08:53 -0500
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43PC8ukq037485;
+ Thu, 25 Apr 2024 07:08:56 -0500
 From: Chintan Vankar <c-vankar@ti.com>
 To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Michal Simek
  <michal.simek@amd.com>, Vignesh Raghavendra <vigneshr@ti.com>, "MD Danish
@@ -68,9 +68,9 @@ To: =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>, Michal Simek
  Siddharth Vadapalli <s-vadapalli@ti.com>, Nishanth Menon <nm@ti.com>,
  Tom Rini <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v2 04/10] soc: ti: k3-navss-ringacc: Fix reset ring API
-Date: Thu, 25 Apr 2024 17:38:16 +0530
-Message-ID: <20240425120822.2048012-5-c-vankar@ti.com>
+Subject: [PATCH v2 06/10] arm: mach-k3: am625_init: Probe AM65 CPSW NUSS
+Date: Thu, 25 Apr 2024 17:38:18 +0530
+Message-ID: <20240425120822.2048012-7-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240425120822.2048012-1-c-vankar@ti.com>
 References: <20240425120822.2048012-1-c-vankar@ti.com>
@@ -94,47 +94,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vignesh Raghavendra <vigneshr@ti.com>
+From: Kishon Vijay Abraham I <kishon@ti.com>
 
-Expectation of k3_ringacc_ring_reset_raw() is to reset the ring to
-requested size and not to 0. Fix this.
+In order to support Ethernet boot on AM62x, probe AM65 CPSW NUSS
+driver in board_init_f().
 
-Signed-off-by: Vignesh Raghavendra <vigneshr@ti.com>
+Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v1:
-https://lore.kernel.org/r/20240112064759.1801600-5-s-vadapalli@ti.com/
+https://lore.kernel.org/r/20240112064759.1801600-8-s-vadapalli@ti.com/
 
 Changes from v1 to v2:
 - No changes.
 
- drivers/soc/ti/k3-navss-ringacc-u-boot.c | 9 ++++++++-
- 1 file changed, 8 insertions(+), 1 deletion(-)
+ arch/arm/mach-k3/am625_init.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/drivers/soc/ti/k3-navss-ringacc-u-boot.c b/drivers/soc/ti/k3-navss-ringacc-u-boot.c
-index f958239c2a..5d650b9de7 100644
---- a/drivers/soc/ti/k3-navss-ringacc-u-boot.c
-+++ b/drivers/soc/ti/k3-navss-ringacc-u-boot.c
-@@ -25,9 +25,16 @@ struct k3_nav_ring_cfg_regs {
- #define KNAV_RINGACC_CFG_RING_SIZE_ELSIZE_MASK		GENMASK(26, 24)
- #define KNAV_RINGACC_CFG_RING_SIZE_ELSIZE_SHIFT		(24)
- 
-+#define KNAV_RINGACC_CFG_RING_SIZE_MASK			GENMASK(15, 0)
+diff --git a/arch/arm/mach-k3/am625_init.c b/arch/arm/mach-k3/am625_init.c
+index 668f9a51ef..9bf61b1e83 100644
+--- a/arch/arm/mach-k3/am625_init.c
++++ b/arch/arm/mach-k3/am625_init.c
+@@ -277,6 +277,16 @@ void board_init_f(ulong dummy)
+ 		if (ret)
+ 			panic("DRAM init failed: %d\n", ret);
+ 	}
 +
- static void k3_ringacc_ring_reset_raw(struct k3_nav_ring *ring)
- {
--	writel(0, &ring->cfg->size);
-+	u32 reg;
++	if (IS_ENABLED(CONFIG_SPL_ETH) && IS_ENABLED(CONFIG_TI_AM65_CPSW_NUSS) &&
++	    spl_boot_device() == BOOT_DEVICE_ETHERNET) {
++		struct udevice *cpswdev;
 +
-+	reg = readl(&ring->cfg->size);
-+	reg &= KNAV_RINGACC_CFG_RING_SIZE_MASK;
-+	reg |= ring->size;
-+	writel(reg, &ring->cfg->size);
- }
++		if (uclass_get_device_by_driver(UCLASS_MISC, DM_DRIVER_GET(am65_cpsw_nuss),
++						&cpswdev))
++			printf("Failed to probe am65_cpsw_nuss driver\n");
++	}
++
+ 	spl_enable_cache();
  
- static void k3_ringacc_ring_reconfig_qmode_raw(struct k3_nav_ring *ring, enum k3_nav_ring_mode mode)
+ 	fixup_a53_cpu_freq_by_speed_grade();
 -- 
 2.34.1
 
