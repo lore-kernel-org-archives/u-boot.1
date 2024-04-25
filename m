@@ -4,58 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BF61C4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 23:04:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72889C4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 23:07:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DE3538909C;
-	Fri, 26 Apr 2024 01:03:40 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CE3A38907D;
+	Fri, 26 Apr 2024 01:07:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1714086220;
-	bh=ryzjauw8QZpjUei/CAxyZrr5PIqB58VPgTf1WGJm30Q=;
-	h=From:To:Cc:Subject:Date:In-Reply-To:References:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=grGiRAPuA7sCoiDftcfyKvVsheDgJFpySjJm28XT1UC+CJUXdq7dwYHhvjcdxUNVu
-	 5J24Vp5Ib2MYRZawQADYcTLTw46MXALNzPAHdEznCOn0EzS9IcfxUCpXy8R7wEJ95Z
-	 6o0xrxSoEDb9AwEN70Cpy/woW6GBCnbVwG4tO4wxd7Y3Iw5YLjLyCGW22Nk3O+7jjq
-	 zXjHe+vpNdMaaYO1hq7rwo5Ko1WoJpI12AUj03V8qKq/2WG3bvS517m3ATTRH2HNO/
-	 oyA3Xjau+Sg6kg9UZaYuyg/xXtSlMRmedr6TQSCKloLGrHPwjvoNePk02aikn0LUSR
-	 IcTAmkbODt3rQ==
+	s=phobos-20191101; t=1714086457;
+	bh=T/gmZHfqW+V+5gR5r39n3E+RkfAW7V15eU1WPEYrLmY=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=mLVfeuyd68Kfd07Rz7yn4YNGN3vv4uAzs+a4M4SP8BE5s6cDZ2366yqcwBrNaMOlV
+	 RMF/gzT/JRhMh9dnXCWApNlAVn91cNP0Go7rTDNZoAmtDeUa1MuZhN8HGRiNgAOEV3
+	 nHbpGMZXEaAaqOm145twjtd9QznbAUhaTl83CCSSsqUWnTrbO3Ut6YShjtyA7awwqu
+	 OZL5iLhqlT6Qe3SxD50aW+L7DPlEwAF3E2KLsDPfLh7amKGqmojvnz8M8TzJ04nkNh
+	 T1FEkrsgFlXBEyNhqPq34ek2CGTy3/wngjLccia5tf2Qnp5QOTJjLpw23RPYCXKgP0
+	 PpolNu9qjgwQg==
 Received: from tr.lan (ip-86-49-120-218.bb.vodafone.cz [86.49.120.218])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 3677189081;
- Fri, 26 Apr 2024 01:03:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id BE0F188189;
+ Fri, 26 Apr 2024 01:07:35 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1714086219;
- bh=ryzjauw8QZpjUei/CAxyZrr5PIqB58VPgTf1WGJm30Q=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=ApIrP4l+ZKfJDVEpu2SJmo02WNl9MbnSlWu5npD1zZxV9Yy8asQFNfrnXKdxz6ymr
- nyR7qhcQ3Hzq6psgmrR5pf9/juhadwoVWyiQtg6XwJhqC6o035BPlyIYQJLINXZgFy
- +/VjwgAj8Hionz5M6NXRZJkxe/aEILZfv+chnPC4okynlsjJIgs1mGdA5qyUCP0jME
- 3v7MONk5LI1NeQMRrpeiASQ+bmOY0hM8CFP01jtG3sepkeEBWawTqk00J8GSxkdUVN
- xviM/mRwUbz6N6qoACwC16burDqP9ifMPN3eMoF59krQ+xou0rIeHHx9ooXCAPfRTf
- LOmLGeWzvce0g==
+ s=phobos-20191101; t=1714086456;
+ bh=T/gmZHfqW+V+5gR5r39n3E+RkfAW7V15eU1WPEYrLmY=;
+ h=From:To:Cc:Subject:Date:From;
+ b=iLdELUFSY5H/ZP3Fh0zhoxW0U+QkegMWNmCV20jxPMq04q1m9krLcBLMVSppZ+/ZI
+ Y8VInb4qqPDISD8EfKbJXTVXqW5u4h9e5o/HAB2UdZjVT0tDUgYlUpZE8/+HNIzzrS
+ IzITsrCsDZr+o+nRI4baM2dxdOz6/Z22vfOYxzvD1QUccNxKAwDxB/8Xe0tC2+FUNW
+ 7YLTPyG8MXoiH1bufHX207ZwuhwTtof8dGH/zN7sQCnKz7ldiVxpaIaHB1chbIeF3E
+ 87BOuA9xG9HQw052uYxIIyeInOK1YHWyEuzc8sK5fSiczJJ2MifgJc87qh8jyu0T9b
+ t7eT6K4ruLjcg==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Angelo Dureghello <angelo@kernel-space.org>,
+Cc: Marek Vasut <marex@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Adam Ford <aford173@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Angus Ainslie <angus@akkea.ca>,
  Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@gmail.com>, Gaurav Jain <gaurav.jain@nxp.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Michal Simek <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 3/3] crypto/fsl: Differentiate between CAAM and DCP in Kconfig
- entry
-Date: Fri, 26 Apr 2024 01:02:09 +0200
-Message-ID: <20240425230314.497203-3-marex@denx.de>
+ Fabio Estevam <festevam@gmail.com>,
+ Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Simon Glass <sjg@chromium.org>,
+ Stefan Eichenberger <stefan.eichenberger@toradex.com>,
+ Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
+Subject: [PATCH 1/2] binman: Add nxp_imx8mcst etype for i.MX8M flash.bin
+ signing
+Date: Fri, 26 Apr 2024 01:07:01 +0200
+Message-ID: <20240425230721.497441-1-marex@denx.de>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240425230314.497203-1-marex@denx.de>
-References: <20240425230314.497203-1-marex@denx.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -74,53 +77,277 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Differentiate between "Enable Random Number Generator support" and
-"Enable Random Number Generator support" in Kconfig entry, mark the
-first as CAAM and the second as DCP, otherwise users cannot easily
-decide which of the options is which and enable the correct one.
+Add new binman etype which allows signing both the SPL and fitImage sections
+of i.MX8M flash.bin using CST. There are multiple DT properties which govern
+the signing process, nxp,loader-address is the only mandatory one which sets
+the SPL signature start address without the imx8mimage header, this should be
+SPL text base. The key material can be configured using optional DT properties
+nxp,srk-table, nxp,csf-key, nxp,img-key, all of which default the key material
+names generated by CST tool scripts. The nxp,unlock property can be used to
+unlock CAAM access in SPL section.
+
+Minimal signing description example:
+
+    diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u-boot.dtsi
+    index c4c1a177102..ccd44bf9d0b 100644
+    --- a/arch/arm/dts/imx8mp-u-boot.dtsi
+    +++ b/arch/arm/dts/imx8mp-u-boot.dtsi
+    @@ -86,6 +86,12 @@
+            section {
+                    pad-byte = <0x00>;
+
+    +               nxp-imx8mcst@0 {
+    +                       filename = "u-boot-spl-mkimage.signed.bin";
+    +                       nxp,loader-address = <CONFIG_SPL_TEXT_BASE>;
+    +                       nxp,unlock;
+    +                       args;   /* Needed by mkimage etype superclass */
+    +
+                    nxp-imx8mimage {
+                            filename = "u-boot-spl-mkimage.bin";
+                            nxp,boot-from = "sd";
+    @@ -129,6 +135,14 @@
+                            };
+                    };
+
+    +               };
+    +
+    +               nxp-imx8mcst@1 {
+    +                       filename = "u-boot-fit.signed.bin";
+    +                       nxp,loader-address = <CONFIG_SPL_LOAD_FIT_ADDRESS>;
+    +                       offset = <0x58000>;
+    +                       args;   /* Needed by mkimage etype superclass */
+    +
+                    fit {
+                            description = "Configuration to load ATF before U-Boot";
+     #ifndef CONFIG_IMX_HAB
+    @@ -191,5 +205,6 @@
+                                    };
+                            };
+                    };
+    +               };
+            };
+     };
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
-Cc: Angelo Dureghello <angelo@kernel-space.org>
+Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
+Cc: Adam Ford <aford173@gmail.com>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
+Cc: Angus Ainslie <angus@akkea.ca>
 Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Gaurav Jain <gaurav.jain@nxp.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Michal Simek <michal.simek@amd.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
+Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Stefan Roese <sr@denx.de>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Stefan Eichenberger <stefan.eichenberger@toradex.com>
+Cc: Stefano Babic <sbabic@denx.de>
 Cc: Tim Harvey <tharvey@gateworks.com>
 Cc: Tom Rini <trini@konsulko.com>
+Cc: kernel@puri.sm
+Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
 ---
- drivers/crypto/fsl/Kconfig | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ tools/binman/btool/cst.py          |  48 +++++++++++
+ tools/binman/etype/nxp_imx8mcst.py | 133 +++++++++++++++++++++++++++++
+ 2 files changed, 181 insertions(+)
+ create mode 100644 tools/binman/btool/cst.py
+ create mode 100644 tools/binman/etype/nxp_imx8mcst.py
 
-diff --git a/drivers/crypto/fsl/Kconfig b/drivers/crypto/fsl/Kconfig
-index 9f58731bb67..9ed56632fcd 100644
---- a/drivers/crypto/fsl/Kconfig
-+++ b/drivers/crypto/fsl/Kconfig
-@@ -69,7 +69,7 @@ config FSL_CAAM_JR_NTZ_ACCESS
- 	  driver is used.
- 
- config FSL_CAAM_RNG
--	bool "Enable Random Number Generator support"
-+	bool "Enable CAAM Random Number Generator support"
- 	depends on DM_RNG
- 	default y
- 	help
-@@ -88,7 +88,7 @@ config SPL_FSL_CAAM_RNG
- endif
- 
- config FSL_DCP_RNG
--	bool "Enable Random Number Generator support"
-+	bool "Enable DCP Random Number Generator support"
- 	depends on DM_RNG
- 	help
- 	  Enable support for the hardware based random number generator
+diff --git a/tools/binman/btool/cst.py b/tools/binman/btool/cst.py
+new file mode 100644
+index 00000000000..30e78bdbbd9
+--- /dev/null
++++ b/tools/binman/btool/cst.py
+@@ -0,0 +1,48 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright 2024 Marek Vasut <marex@denx.de>
++#
++"""Bintool implementation for cst"""
++
++import re
++
++from binman import bintool
++
++class Bintoolcst(bintool.Bintool):
++    """Image generation for U-Boot
++
++    This bintool supports running `cst` with some basic parameters as
++    needed by binman.
++    """
++    def __init__(self, name):
++        super().__init__(name, 'Sign NXP i.MX image')
++
++    # pylint: disable=R0913
++    def run(self, output_fname=None):
++        """Run cst
++
++        Args:
++            output_fname: Output filename to write to
++        """
++        args = []
++        if output_fname:
++            args += ['-o', output_fname]
++        return self.run_cmd(*args)
++
++    def fetch(self, method):
++        """Fetch handler for cst
++
++        This installs cst using the apt utility.
++
++        Args:
++            method (FETCH_...): Method to use
++
++        Returns:
++            True if the file was fetched and now installed, None if a method
++            other than FETCH_BIN was requested
++
++        Raises:
++            Valuerror: Fetching could not be completed
++        """
++        if method != bintool.FETCH_BIN:
++            return None
++        return self.apt_install('imx-code-signing-tool')
+diff --git a/tools/binman/etype/nxp_imx8mcst.py b/tools/binman/etype/nxp_imx8mcst.py
+new file mode 100644
+index 00000000000..fb1c3415ca1
+--- /dev/null
++++ b/tools/binman/etype/nxp_imx8mcst.py
+@@ -0,0 +1,133 @@
++# SPDX-License-Identifier: GPL-2.0+
++# Copyright 2023-2024 Marek Vasut <marex@denx.de>
++# Written with much help from Simon Glass <sjg@chromium.org>
++#
++# Entry-type module for generating the i.MX8M code signing tool
++# input configuration file and invocation of cst on generated
++# input configuration file and input data to be signed.
++#
++
++import struct
++
++from collections import OrderedDict
++
++from binman.entry import Entry
++from binman.etype.mkimage import Entry_mkimage
++from binman.etype.section import Entry_section
++from binman import elf
++from dtoc import fdt_util
++from u_boot_pylib import tools
++
++class Entry_nxp_imx8mcst(Entry_mkimage):
++    """NXP i.MX8M CST .cfg file generator and cst invoker
++
++    Properties / Entry arguments:
++        - nxp,loader-address - loader address (SPL text base)
++    """
++
++    def __init__(self, section, etype, node):
++        super().__init__(section, etype, node)
++        self.required_props = ['nxp,loader-address']
++
++    def ReadNode(self):
++        super().ReadNode()
++        self.loader_address = fdt_util.GetInt(self._node, 'nxp,loader-address')
++        self.srk_table = fdt_util.GetString(self._node, 'nxp,srk-table', 'SRK_1_2_3_4_table.bin')
++        self.csf_key = fdt_util.GetString(self._node, 'nxp,csf-key', 'CSF1_1_sha256_4096_65537_v3_usr_crt.pem')
++        self.img_key = fdt_util.GetString(self._node, 'nxp,img-key', 'IMG1_1_sha256_4096_65537_v3_usr_crt.pem')
++        self.unlock = fdt_util.GetBool(self._node, 'nxp,unlock')
++        self.ReadEntries()
++
++    def BuildSectionData(self, required):
++        data, input_fname, uniq = self.collect_contents_to_file(
++            self._entries.values(), 'input')
++        # Parse the input data and figure out what it is that is being signed.
++        # - If it is mkimage'd imx8mimage, then extract to be signed data size
++        #   from imx8mimage header, and calculate CSF blob offset right past
++        #   the SPL from this information.
++        # - If it is fitImage, then pad the image to 4k, add generated IVT and
++        #   sign the whole payload, then append CSF blob at the end right past
++        #   the IVT.
++        signtype = struct.unpack('<I', data[:4])[0]
++        signbase = self.loader_address
++        signsize = 0
++        if signtype == 0x412000d1: # SPL/imx8mimage
++            # Sign the payload including imx8mimage header
++            # (extra 0x40 bytes before the payload)
++            signbase -= 0x40
++            signsize = struct.unpack('<I', data[24:28])[0] - signbase
++            # Remove mkimage generated padding from the end of data
++            data = data[:signsize]
++        elif signtype == 0xedfe0dd0: # fitImage
++            # Align fitImage to 4k
++            signsize = tools.align(len(data), 0x1000)
++            data += tools.get_bytes(0, signsize - len(data))
++            # Add generated IVT
++            data += struct.pack('<I', 0x412000d1)
++            data += struct.pack('<I', signbase + signsize) # IVT base
++            data += struct.pack('<I', 0)
++            data += struct.pack('<I', 0)
++            data += struct.pack('<I', 0)
++            data += struct.pack('<I', signbase + signsize) # IVT base
++            data += struct.pack('<I', signbase + signsize + 0x20) # CSF base
++            data += struct.pack('<I', 0)
++        # Write out customized data to be signed
++        output_dname = tools.get_output_filename(f'nxp.cst-input-data.{uniq}')
++        tools.write_file(output_dname, data)
++        # Generate CST configuration file used to sign payload
++        cfg_spl_fname = tools.get_output_filename('nxp.csf-config-txt.%s' % uniq)
++        with open(cfg_spl_fname, 'w') as outf:
++            print('[Header]', file=outf)
++            print('  Version = 4.3', file=outf)
++            print('  Hash Algorithm = sha256', file=outf)
++            print('  Engine = CAAM', file=outf)
++            print('  Engine Configuration = 0', file=outf)
++            print('  Certificate Format = X509', file=outf)
++            print('  Signature Format = CMS', file=outf)
++            print('[Install SRK]', file=outf)
++            print('  File = "%s"' % self.srk_table, file=outf)
++            print('  Source index = 0', file=outf)
++            print('[Install CSFK]', file=outf)
++            print('  File = "%s"' % self.csf_key, file=outf)
++            print('[Authenticate CSF]', file=outf)
++            if self.unlock:
++                print('[Unlock]', file=outf)
++                print('  Engine = CAAM', file=outf)
++                print('  Features = MID', file=outf)
++            print('[Install Key]', file=outf)
++            print('  Verification index = 0', file=outf)
++            print('  Target Index = 2', file=outf)
++            print('  File = "%s"' % self.img_key, file=outf)
++            print('[Authenticate Data]', file=outf)
++            print('  Verification index = 2', file=outf)
++            print('  Blocks = %#x 0 %#x "%s"' % (signbase, len(data), output_dname), file=outf)
++
++        output_fname = tools.get_output_filename(f'nxp.csf-output-blob.{uniq}')
++        args = ['-i', cfg_spl_fname, '-o', output_fname]
++        if self.cst.run_cmd(*args) is not None:
++            outdata = tools.read_file(output_fname)
++            return data + outdata
++        else:
++            # Bintool is missing; just use the input data as the output
++            self.record_missing_bintool(self.cst)
++            return data
++
++    def SetImagePos(self, image_pos):
++        # Customized SoC specific SetImagePos which skips the mkimage etype
++        # implementation and removes the 0x48 offset introduced there. That
++        # offset is only used for uImage/fitImage, which is not the case in
++        # here.
++        upto = 0x00
++        for entry in super().GetEntries().values():
++            entry.SetOffsetSize(upto, None)
++
++            # Give up if any entries lack a size
++            if entry.size is None:
++                return
++            upto += entry.size
++
++        Entry_section.SetImagePos(self, image_pos)
++
++    def AddBintools(self, btools):
++        super().AddBintools(btools)
++        self.cst = self.AddBintool(btools, 'cst')
 -- 
 2.43.0
 
