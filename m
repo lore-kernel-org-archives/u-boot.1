@@ -4,73 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7610AC4345F
-	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 08:43:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0204AC4345F
+	for <u-boot@archiver.kernel.org>; Thu, 25 Apr 2024 08:44:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C594A88EFD;
-	Thu, 25 Apr 2024 10:43:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 5012B88F16;
+	Thu, 25 Apr 2024 10:44:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xff.cz
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="UTlDapHy";
+	dkim=pass (1024-bit key; secure) header.d=xff.cz header.i=@xff.cz header.b="eBiSuj1Z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6138088F0E; Thu, 25 Apr 2024 10:43:46 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 37E3588F1A; Thu, 25 Apr 2024 10:44:36 +0200 (CEST)
+Received: from vps.xff.cz (vps.xff.cz [195.181.215.36])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7155088B21
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 10:43:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 25B4188F16
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 10:44:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=7067=L6=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1714034575;
- bh=PHYloVNtkJJd6jMwL7S1nPekCzsGII70ZClJaGhXuMc=;
- b=UTlDapHyYwrMEF4JvD5sb5FMpLFKJeYJ5FCLjBcEokDhm1ill6C+P9bQtO+DIscf8HoAK+BHk
- 6Oo/73A1uqsBnuxjzi8TvQfbFFocic9kQG7gi3xN68b5neHAXt6dClP4achom8VT6+KJD4jIIFy
- iDLrrHvbjXW+KA1jsNzt0p3YpPDwIS+VL48s2yw4nhJgnMLGUl5JmU5bt2H8H7jQtpiH3lysaA9
- JUMZ11ksjeMumOY5uXvYlxxtoYd9RxgSbJ0dvgdbqJWGW3tk1tYfVYNRertePL8wuyRZj1wmXcK
- NfZPQSvpo8oce+gXPkURyOkmPleYv4NwG/mCtgsYuOzA==
-Message-ID: <950a3354-8714-4ffa-88b3-293fd69ff189@kwiboo.se>
-Date: Thu, 25 Apr 2024 09:27:44 +0200
+ dmarc=pass (p=none dis=none) header.from=xff.cz
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=megi@xff.cz
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=xff.cz; s=mail;
+ t=1714034672; bh=tGGA0zqEMXy0YhxWhGZVMKwfBM5iLJW7NPsgV3JbQ94=;
+ h=Date:From:To:Subject:X-My-GPG-KeyId:References:From;
+ b=eBiSuj1ZtWtddQiw0nhlDZOcV7id7azzgB6kys6lRbpwQzVONyig9l2KtBxsy3pzV
+ 4ntbnIaEE0c0flUowffgbUsN3YxLxNXzURRIMtOUPRaUkrVWTiSrbsNW48kW2YBk/n
+ ac7biEmiqDCfzRuWegIL18wmFaEfxEzqGxRfMGb8=
+Date: Thu, 25 Apr 2024 10:44:32 +0200
+From: =?utf-8?Q?Ond=C5=99ej?= Jirman <megi@xff.cz>
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Igor Prusov <ivprusov@sberdevices.ru>
+Subject: Re: [PATCH] clk: zynq: Fix EMIO clock use detection for gem0
+Message-ID: <ccgd4qq74wiccuzkelcbdsjayvanpi5b7bukayj7dgx3ejyh7o@ro3y7bchnvx5>
+Mail-Followup-To: =?utf-8?Q?Ond=C5=99ej?= Jirman <megi@xff.cz>, 
+ Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de,
+ Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Igor Prusov <ivprusov@sberdevices.ru>
+X-My-GPG-KeyId: EBFBDDE11FB918D44D1F56C1F9F0A873BE9777ED
+ <https://xff.cz/key.txt>
+References: <20240416084456.2821567-1-megi@xff.cz>
+ <ca63cfb0-5e5f-4522-8cda-87dec22588c9@amd.com>
+ <5gv2fqik5vtygldqmv23tpcsyaftazblm4atk3igweduivmiqu@aeoflxwzlvx3>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/11] rockchip: sdram: Support getting banks from TPL
- for rk3568 and rk3588
-To: Quentin Schulz <quentin.schulz@theobroma-systems.com>, Quentin Schulz
- <foss+uboot@0leil.net>, Kever Yang <kever.yang@rock-chips.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Philipp
- Tomsich <philipp.tomsich@vrull.eu>, John Clark <inindev@gmail.com>, Tom
- Fitzhenry <tom@tom-fitzhenry.me.uk>, Eugen Hristev
- <eugen.hristev@collabora.com>, Andy Yan <andyshrk@163.com>, Elon Zhang
- <zhangzj@rock-chips.com>, Joshua Riek <jjriek@verizon.net>, Klaus Goger
- <klaus.goger@theobroma-systems.com>, Heiko Stuebner
- <heiko.stuebner@cherry.de>, Jagan Teki <jagan@edgeble.ai>, Frank
- Wunderlich <frank-w@public-files.de>, Joseph Chen <chenjh@rock-chips.com>,
- Tianling Shen <cnsztl@gmail.com>, Nicolas Frattaroli
- <frattaroli.nicolas@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Akash Gajjar <gajjar04akash@gmail.com>, u-boot@lists.denx.de, Chris Morgan
- <macromorgan@hotmail.com>
-References: <20240415-rk35xx-dram-atags-v3-0-5bc5475b3c0d@theobroma-systems.com>
- <20240415-rk35xx-dram-atags-v3-1-5bc5475b3c0d@theobroma-systems.com>
- <2dc654c5-2f03-4f69-9e5f-e4ad5091b844@kwiboo.se>
- <efeed0e2-3593-473c-b5b3-e2ceca78ddbd@theobroma-systems.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <efeed0e2-3593-473c-b5b3-e2ceca78ddbd@theobroma-systems.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 662a05f5a331803e9eebb12c
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <5gv2fqik5vtygldqmv23tpcsyaftazblm4atk3igweduivmiqu@aeoflxwzlvx3>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,142 +68,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+On Thu, Apr 25, 2024 at 10:23:42AM GMT, megi xff wrote:
+> On Wed, Apr 24, 2024 at 04:34:05PM GMT, Michal Simek wrote:
+> > 
+> > 
+> > On 4/16/24 10:44, Ondřej Jirman wrote:
+> > > From: Ondrej Jirman <megi@xff.cz>
+> > > 
+> > > According to TRM, the bit that differentiates between MIO and EMIO
+> > > clocks is bit 6. This resolves failure to set clock when using EMIO
+> > > clock for ethernet.
+> > 
+> > Not sure which TRM you are using but here
+> > 
+> > https://docs.amd.com/r/en-US/ug585-zynq-7000-SoC-TRM/Register-slcr-GEM0_RCLK_CTRL
+> > 
+> > SRCSEL it is bit 4 not bit 6.
+> 
+> Maybe TRM is wrong? :)
+> 
+> I have XSA produced by Vivado that has:
+> 
+> GEM0_RCLK_CTRL:
+> 
+>     EMIT_MASKWRITE(0XF8000138, 0x00000011U ,0x00000011U),
+>     // .. CLKACT = 0x1
+>     // .. ==> 0XF8000140[0:0] = 0x00000001U
+>     // ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
+>     // .. SRCSEL = 0x4
+>     // .. ==> 0XF8000140[6:4] = 0x00000004U
+>     // ..     ==> MASK : 0x00000070U    VAL : 0x00000040U
+>     // .. DIVISOR = 0x1
+>     // .. ==> 0XF8000140[13:8] = 0x00000001U
+>     // ..     ==> MASK : 0x00003F00U    VAL : 0x00000100U
+>     // .. DIVISOR1 = 0x5
+>     // .. ==> 0XF8000140[25:20] = 0x00000005U
+>     // ..     ==> MASK : 0x03F00000U    VAL : 0x00500000U
+>     // .. 
 
-On 2024-04-24 11:11, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 4/24/24 00:40, Jonas Karlman wrote:
->> Hi Quentin,
->>
->> On 2024-04-15 16:16, Quentin Schulz wrote:
->>> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-> [...]
-> 
->>> +			if (!(tmp_mem_map->attrs & PTE_BLOCK_NON_SHARE)) {
->>
->> This check does not seem to work because PTE_BLOCK_NON_SHARE evaluates
->> to 0. Because of this the logic to split the 0-8 GiB bank reported on
->> rk3568 is never split in two.
->>
-> 
-> Oof, that's a bit oversight, thanks for the catch.
-> 
-> Can you test the following please?
-> 
-> """
-> diff --git a/arch/arm/mach-rockchip/sdram.c b/arch/arm/mach-rockchip/sdram.c
-> index 5b1ff1e5495..0492f9b9f41 100644
-> --- a/arch/arm/mach-rockchip/sdram.c
-> +++ b/arch/arm/mach-rockchip/sdram.c
-> @@ -196,7 +196,23 @@ static int rockchip_dram_init_banksize(void)
->   			const phys_size_t rsrv_size = tmp_mem_map->size;
->   			const phys_addr_t rsrv_end = rsrv_start + rsrv_size;
-> 
-> -			if (!(tmp_mem_map->attrs & PTE_BLOCK_NON_SHARE)) {
-> +			/*
-> +			 * DRAM memories are expected by Arm to be marked as
-> +			 * Normal Write-back cacheable, Inner shareable[1], so
-> +			 * let's filter on that to put holes in non-DRAM areas.
-> +			 *
-> +			 * [1] 
-> https://developer.arm.com/documentation/102376/0200/Cacheability-and-shareability-attributes
-> +			 */
-> +			const u64 dram_attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) |
-> +				PTE_BLOCK_INNER_SHARE;
-> +			/*
-> +			 * (AttrIndx | SH) in Lower Attributes of Block
-> +			 * Descriptor[2].
-> +			 * [2] 
-> https://developer.arm.com/documentation/102376/0200/Describing-memory-in-AArch64
-> +			 */
-> +			const u64 attrs_mask = PMD_ATTRINDX_MASK | GENMASK(9, 8);
-> +
-> +			if ((tmp_mem_map->attrs & attrs_mask) == dram_attrs) {
->   				tmp_mem_map++;
->   				continue;
->   			}
-> """
-> 
-> The DRAM mem_map entry for Rockchip devices seems to have those 
-> attributes and no other non-DRAM entry seems to have 
-> PTE_BLOCK_MEMTYPE(MT_NORMAL).
-> 
-> We may have an issue in the future if we also want to mark SRAM, ROM or 
-> flash 
-> (https://developer.arm.com/documentation/102376/0200/Normal-memory 
-> because it's likely those would also match the same attributes but we 
-> would need to put holes for those so that they aren't thought to be 
-> DRAM, but I guess we can tackle this the day this happens :)
-> 
-> Thanks again for the catch, let me know if this helps and makes sense 
-> and I'll send a v4 for it.
+Eh, I take this back. :) Copied the wrong comment.
 
-I think this makes sense and seem to work on at least two of my RK356x
-8GB boards using the generic-rk3568 target.
+regards,
+	o.
 
-U-Boot:
-
-  => bdinfo
-  boot_params = 0x0000000000000000
-  DRAM bank   = 0x0000000000000000
-  -> start    = 0x0000000000200000
-  -> size     = 0x00000000efe00000
-  DRAM bank   = 0x0000000000000001
-  -> start    = 0x0000000100000000
-  -> size     = 0x0000000100000000
-  flashstart  = 0x0000000000000000
-  flashsize   = 0x0000000000000000
-  flashoffset = 0x0000000000000000
-  baudrate    = 1500000 bps
-  relocaddr   = 0x00000000eff3a000
-  reloc off   = 0x00000000ef53a000
-  Build       = 64-bit
-  fdt_blob    = 0x00000000edf0b390
-  new_fdt     = 0x00000000edf0b390
-  fdt_size    = 0x000000000000f980
-  lmb_dump_all:
-   memory.cnt = 0x2 / max = 0x10
-   memory[0]      [0x200000-0xefffffff], 0xefe00000 bytes flags: 0
-   memory[1]      [0x100000000-0x1ffffffff], 0x100000000 bytes flags: 0
-   reserved.cnt = 0x2 / max = 0x10
-   reserved[0]    [0xecf07000-0xefffffff], 0x030f9000 bytes flags: 0
-   reserved[1]    [0x100000000-0x1ffffffff], 0x100000000 bytes flags: 0
-  devicetree  = separate
-  serial addr = 0x00000000fe660000
-   width      = 0x0000000000000004
-   shift      = 0x0000000000000002
-   offset     = 0x0000000000000000
-   clock      = 0x00000000016e3600
-  arch_number = 0x0000000000000000
-  TLB addr    = 0x00000000efff0000
-  irq_sp      = 0x00000000edf0b0c0
-  sp start    = 0x00000000edf0b0c0
-  Early malloc usage: 2338 / 10000
-
-Linux:
-
-  [    0.000000] Machine model: Generic RK3566/RK3568
-  [    0.000000] efi: UEFI not found.
-  [    0.000000] NUMA: No NUMA configuration found
-  [    0.000000] NUMA: Faking a node at [mem 0x0000000000200000-0x00000001ffffffff]
-  [    0.000000] NUMA: NODE_DATA [mem 0x1ff0389c0-0x1ff03afff]
-  [    0.000000] Zone ranges:
-  [    0.000000]   DMA      [mem 0x0000000000200000-0x00000000ffffffff]
-  [    0.000000]   DMA32    empty
-  [    0.000000]   Normal   [mem 0x0000000100000000-0x00000001ffffffff]
-  [    0.000000] Movable zone start for each node
-  [    0.000000] Early memory node ranges
-  [    0.000000]   node   0: [mem 0x0000000000200000-0x00000000efffffff]
-  [    0.000000]   node   0: [mem 0x0000000100000000-0x00000001ffffffff]
-  [    0.000000] Initmem setup node 0 [mem 0x0000000000200000-0x00000001ffffffff]
-  [    0.000000] On node 0, zone DMA: 512 pages in unavailable ranges
-  [    0.000000] cma: Reserved 32 MiB at 0x00000000ee000000 on node -1
-
-Regards,
-Jonas
-
+> https://megous.com/dl/tmp/20e2593dbe9e0b3b.png
 > 
-> Cheers,
-> Quentin
-
+> GEM0_CLK_CTRL:
+> 
+>     EMIT_MASKWRITE(0XF8000140, 0x03F03F71U ,0x00500141U),
+>     // .. CLKACT = 0x1
+>     // .. ==> 0XF8000148[0:0] = 0x00000001U
+>     // ..     ==> MASK : 0x00000001U    VAL : 0x00000001U
+>     // .. SRCSEL = 0x0
+>     // .. ==> 0XF8000148[5:4] = 0x00000000U
+>     // ..     ==> MASK : 0x00000030U    VAL : 0x00000000U
+>     // .. DIVISOR = 0x10
+>     // .. ==> 0XF8000148[13:8] = 0x00000010U
+>     // ..     ==> MASK : 0x00003F00U    VAL : 0x00001000U
+>     // ..
+> 
+> https://megous.com/dl/tmp/65c6ee01818a06ea.png
+> 
+> So the PS init sequence in XSA suggests that GEM0_RCLK_CTRL layout
+> actually matches the GEM0_CLK_CTRL documentation.
+> 
+> I guess Vivado is right and TRM is wrong, since HW works as expected
+> with the PS configuration that doesn't match the TRM.
+> 
+> > > 
+> > > Signed-off-by: Ondrej Jirman <megi@xff.cz>
+> > > ---
+> > >   drivers/clk/clk_zynq.c | 4 +++-
+> > >   1 file changed, 3 insertions(+), 1 deletion(-)
+> > > 
+> > > diff --git a/drivers/clk/clk_zynq.c b/drivers/clk/clk_zynq.c
+> > > index e3cefe2e0c72..78e6886a000c 100644
+> > > --- a/drivers/clk/clk_zynq.c
+> > > +++ b/drivers/clk/clk_zynq.c
+> > > @@ -42,6 +42,8 @@
+> > >   #define CLK_CTRL_DIV3X_SHIFT	20
+> > >   #define CLK_CTRL_DIV3X_MASK	(ZYNQ_CLK_MAXDIV << CLK_CTRL_DIV3X_SHIFT)
+> > > +#define CLK_CTRL_GEM_EMIO	(1u << 6)
+> > > +
+> > >   DECLARE_GLOBAL_DATA_PTR;
+> > >   #ifndef CONFIG_SPL_BUILD
+> > > @@ -161,7 +163,7 @@ static enum zynq_clk_rclk zynq_clk_get_gem_rclk(enum zynq_clk id)
+> > >   	else
+> > >   		clk_ctrl = readl(&slcr_base->gem1_rclk_ctrl);
+> > > -	srcsel = (clk_ctrl & CLK_CTRL_SRCSEL_MASK) >> CLK_CTRL_SRCSEL_SHIFT;
+> > > +	srcsel = (clk_ctrl & CLK_CTRL_GEM_EMIO);
+> >
+> > Definitely using SRCSEL_MASK is not ideal solution because mask is 0x3 and
+> > in gem case it is single bit. But based on description you should be getting
+> > correct values even with 0x3 because SHIFT is correct.
+> 
+> Well, it doesn't help that the code is almost all refering to CLK_CTRL while
+> actually accessing gem1_rclk_ctrl in the struct.
+> 
+> In any case it can't detect the case when sourcing the clock from EMIO and
+> not one of the PLLs, apparently.
+> 
+> The failure I'm talking about is here in zynq_gem.c:
+> 
+>         ret = clk_get_rate(&priv->tx_clk);
+>         if (ret != clk_rate) {
+>                 ret = clk_set_rate(&priv->tx_clk, clk_rate);
+>                 if (IS_ERR_VALUE(ret)) {
+>                         dev_err(dev, "failed to set tx clock rate %ld\n", clk_rate);
+>                         return ret;
+>                 }
+>         }
+> 
+> And all I get is "failed to set tx clock rate" from U-Boot and no ethernet.
+> 
+> regards,
+> 	o.
+> 
+> > Thanks,
+> > Michal
