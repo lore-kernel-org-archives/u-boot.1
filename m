@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E45FDC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 14:15:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56286C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 14:15:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C3F388FE4;
-	Fri, 26 Apr 2024 16:14:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 87C0D88EBB;
+	Fri, 26 Apr 2024 16:14:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="CVg0mHxH";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="r37cnPP6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D39E2885AE; Fri, 26 Apr 2024 16:14:03 +0200 (CEST)
+ id 8AFFE89094; Fri, 26 Apr 2024 16:14:07 +0200 (CEST)
 Received: from smtp-relay-internal-0.canonical.com
  (smtp-relay-internal-0.canonical.com [185.125.188.122])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86D7B885D7
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 16:14:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D52B885AE
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 16:14:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id DC88B424A3
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 14:13:57 +0000 (UTC)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 86B4F3FAEB
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 14:13:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1714140837;
- bh=jPJOvfltwrkiJrBW0CR3lSEbcz3sVU2bU9+mzQg84So=;
+ s=20210705; t=1714140838;
+ bh=c7mCI5wQqo2GV8J9ZxNjeFoJ2PUZYvK6nJBiIMGgItg=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=CVg0mHxH/wjXpB01GwkTj3R0NPwfKei2G5MdfmoB0k832BpWKplepsyl5O7AtnZKO
- aUxMWVu+kkNo/E57pcF/x07jwAFZzqsDvike7DPJHWr0AQKW2/YsXT6XwRXmfYEZFY
- s4CCzwrCc61fdVsYxKT0mu5vXGuWwanQ60oUeATUXKq24C9boN69AyPNTQzPYBrC5Z
- UA5U3wqXIfARauQGLbgcd+Nbuo5R/uEn7p0ILSaYuS6Yjl7R1aCjsuVrlqpTI3MKu0
- iD8RGiMI5wMGjZktf9FpFD/FCLBeek5QG8WTDYFqYJfD6NB+h/DO4VZ0H4nYsS1gRb
- eFdLMf8eBVMtg==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-34b4bde57a8so1404430f8f.2
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 07:13:57 -0700 (PDT)
+ b=r37cnPP60QxRLqKg6URTK9dIkmE8yPxw4G+3WUn136MrZz4hGnP+wgDYTl899Qt1d
+ QLWL/JGdYtdk+lOBb7V2S2LhobGxj0r/GDx7/jc/F8cU0cpc71yzGPdv/si7Pc3xi4
+ 3XiPOIp0cpXATBjRL7MeJxLqMPBTa9o+p2igjcKLO/mw4QAnS9xgDdh8TqUyTIAvtg
+ wgaearspnP0f3es+j8A8k8Pq8trFsuwtJMqch2/HSBN8rfF00qIbbBxgtohOx2w8L7
+ ar4j0cbuz/OPyR97skrK3GYTjnMaubp2Mw9VxZh1GMpBAmTS69/M5Rv1zTYETshQ+T
+ OX9Z6BHsI8Gtw==
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-34a49f5a6baso1867591f8f.3
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 07:13:58 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714140836; x=1714745636;
+ d=1e100.net; s=20230601; t=1714140837; x=1714745637;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jPJOvfltwrkiJrBW0CR3lSEbcz3sVU2bU9+mzQg84So=;
- b=EZV5K5dldRG1BwSyi9YewUp/J98rSgLn54Y76r2LElk468cb5tSvrzvroILI4pK3AJ
- 1E1TxbcBEM6R95lCEhu5R6VQMuPegE9NORYZEtubp7BSbtr5ar90NKz/S7C8wY1QDBQr
- As0CaFGRKDb11Y0jK9q97F3DrbWsTj/Coo1MGtf62zoPXYY2VgF+p8opEXQXYQHfuGRv
- DkBsTwI+gU4GKBYDD9JKkesg8/FuoUnfqoK2dq/hvHb7KiEfBc6E1OaUMyFha4V4pZjk
- 7guHSdbfifm4NoT0vsCuz5gjI3Oeh6WgsChwq7SwErZQkXz/Pv3+6/3TnBsRzqKHPanD
- 9esw==
+ bh=c7mCI5wQqo2GV8J9ZxNjeFoJ2PUZYvK6nJBiIMGgItg=;
+ b=Jm3o1LKzDs3A6lrgqfS/87lEPf7o/shMPEHz2lZJ0fWSHeZRLWYsfD91R6z4Pym18E
+ WyrjILAe3CtQjknJaRIEjpPfcR5fcTccGovBe/A2PjpEE5wiR1FUGaTVaYFM0PKV8PpX
+ KR0O5eFgJ12R1kIhw8OYulqBkz7oYmVVZMyOTXKT8X/UZ6Y6SepN8w8Z3ud088oQpOw3
+ SQBFDW7O5cpA5rI+o1E7YOM9s6AfN7nWVRwmwmwkqTv3IvyANZrEKilBjZ0VTdL8LEgQ
+ 1mH8B1dfym2zi0XEV/Db6xBKqiaATGvGwuBwGyjeucTAwtxk6pAhflJPO7/3wyjrEbCR
+ hI9Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVGbzfVtiT/HMusCG9u0tkLH2t8arAGxkJEJ9U8QTELLVSew9f9euWwKdiWggVBLpmPaPqKGdT6UN+iIKg/1lLnBXyBXA==
-X-Gm-Message-State: AOJu0Yxu8EtknlNjdVdQ9yZWUJmZTFmq2Qf93/RD8BjboLph+xVLY/MC
- NjstZZkQGKwkWY880WLI95bC/J437UrWMm+4FSnN9k1lWsrPJV//Afz7EIPiPfpvuoASH4JFOZq
- Gum4ZHP0dXlX5Bqg9G5NPo6EplmsQ68VGM4n5rCmkrfVo25jTeLAdYyxRrg/2qWzUrtk=
-X-Received: by 2002:a05:6000:1567:b0:349:c63e:54f9 with SMTP id
- 7-20020a056000156700b00349c63e54f9mr2290390wrz.43.1714140836011; 
+ AJvYcCUtF03G2MBWnsAcOkZIZyjDOdhO/oY8I01MilPrkgS+xHCZKBhAS4pqTqamNheRKuvoNkooaG9bKgvPP/H3gukOweIUqw==
+X-Gm-Message-State: AOJu0YwQKNcqcxVwv3VYDLk3T4TLVHmBFBsW39csWfswsDYL7UFCldVi
+ ihR48kxX6QN9tJXEIFWHTTv9UhhVzJ8CKFapGNQhnWEIy9/X3G7egvfOJ8MSD1bnxJVTkDpj4S2
+ e3FTjbSCiYPK1c9AQk5okRdbyHElvWsUK1Mh/9SMoFkDCOA415WwGCzA0emnXyNO68Mc=
+X-Received: by 2002:a5d:6d8c:0:b0:343:a337:f380 with SMTP id
+ l12-20020a5d6d8c000000b00343a337f380mr2955669wrs.19.1714140837131; 
+ Fri, 26 Apr 2024 07:13:57 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IHDHp/vqVi/w/t9t3OONiyRa4K2UsWJ3YXiStDurKNYSSrS2DLaNEbFENxzBe3Da3Wc9P5s3w==
+X-Received: by 2002:a5d:6d8c:0:b0:343:a337:f380 with SMTP id
+ l12-20020a5d6d8c000000b00343a337f380mr2955634wrs.19.1714140836606; 
  Fri, 26 Apr 2024 07:13:56 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IFRDCaY30nTY5PjI/CvxA4qcx9iIeIZwFTuMaF8thcegTBAGQov28p56MBKmusHTLcM1V1yjw==
-X-Received: by 2002:a05:6000:1567:b0:349:c63e:54f9 with SMTP id
- 7-20020a056000156700b00349c63e54f9mr2290373wrz.43.1714140835668; 
- Fri, 26 Apr 2024 07:13:55 -0700 (PDT)
 Received: from workstation5.fritz.box
  (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
  by smtp.gmail.com with ESMTPSA id
- s20-20020adfa294000000b003455e5d2569sm1460593wra.0.2024.04.26.07.13.54
+ s20-20020adfa294000000b003455e5d2569sm1460593wra.0.2024.04.26.07.13.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Apr 2024 07:13:55 -0700 (PDT)
+ Fri, 26 Apr 2024 07:13:56 -0700 (PDT)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
@@ -86,9 +86,9 @@ Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Raymond Mao <raymond.mao@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
  Joao Marcos Costa <jmcosta944@gmail.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [RFC 10/14] efi_loader: load device-tree specified in boot option
-Date: Fri, 26 Apr 2024 16:13:17 +0200
-Message-ID: <20240426141321.232236-11-heinrich.schuchardt@canonical.com>
+Subject: [RFC 11/14] efi_loader: move distro_efi_get_fdt_name()
+Date: Fri, 26 Apr 2024 16:13:18 +0200
+Message-ID: <20240426141321.232236-12-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
 References: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
@@ -110,100 +110,205 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We allow to specify the triple of binary, initrd, and device-tree in boot
-options.
-
-Add the code to actually load the specified device-tree.
+Move distro_efi_get_fdt_name() to a separate C module
+and rename it to efi_get_distro_fdt_name().
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- lib/efi_loader/efi_bootmgr.c | 57 +++++++++++++++++++++++++++++++++++-
- 1 file changed, 56 insertions(+), 1 deletion(-)
+ boot/bootmeth_efi.c      | 60 ++-------------------------------
+ include/efi_loader.h     |  2 ++
+ lib/efi_loader/Makefile  |  1 +
+ lib/efi_loader/efi_fdt.c | 73 ++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 78 insertions(+), 58 deletions(-)
+ create mode 100644 lib/efi_loader/efi_fdt.c
 
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index d924810a94b..3d58a928b10 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -1185,6 +1185,55 @@ out:
- 	return ret;
+diff --git a/boot/bootmeth_efi.c b/boot/bootmeth_efi.c
+index aebc5207fc0..40da77c497b 100644
+--- a/boot/bootmeth_efi.c
++++ b/boot/bootmeth_efi.c
+@@ -144,62 +144,6 @@ static int distro_efi_check(struct udevice *dev, struct bootflow_iter *iter)
+ 	return 0;
  }
  
-+/**
-+ * load_fdt_from_load_option - load device-tree from load option
+-/**
+- * distro_efi_get_fdt_name() - Get the filename for reading the .dtb file
+- *
+- * @fname: Place to put filename
+- * @size: Max size of filename
+- * @seq: Sequence number, to cycle through options (0=first)
+- * Returns: 0 on success, -ENOENT if the "fdtfile" env var does not exist,
+- * -EINVAL if there are no more options, -EALREADY if the control FDT should be
+- * used
+- */
+-static int distro_efi_get_fdt_name(char *fname, int size, int seq)
+-{
+-	const char *fdt_fname;
+-	const char *prefix;
+-
+-	/* select the prefix */
+-	switch (seq) {
+-	case 0:
+-		/* this is the default */
+-		prefix = "/dtb";
+-		break;
+-	case 1:
+-		prefix = "";
+-		break;
+-	case 2:
+-		prefix = "/dtb/current";
+-		break;
+-	default:
+-		return log_msg_ret("pref", -EINVAL);
+-	}
+-
+-	fdt_fname = env_get("fdtfile");
+-	if (fdt_fname) {
+-		snprintf(fname, size, "%s/%s", prefix, fdt_fname);
+-		log_debug("Using device tree: %s\n", fname);
+-	} else if (IS_ENABLED(CONFIG_OF_HAS_PRIOR_STAGE)) {
+-		strcpy(fname, "<prior>");
+-		return log_msg_ret("pref", -EALREADY);
+-	/* Use this fallback only for 32-bit ARM */
+-	} else if (IS_ENABLED(CONFIG_ARM) && !IS_ENABLED(CONFIG_ARM64)) {
+-		const char *soc = env_get("soc");
+-		const char *board = env_get("board");
+-		const char *boardver = env_get("boardver");
+-
+-		/* cf the code in label_boot() which seems very complex */
+-		snprintf(fname, size, "%s/%s%s%s%s.dtb", prefix,
+-			 soc ? soc : "", soc ? "-" : "", board ? board : "",
+-			 boardver ? boardver : "");
+-		log_debug("Using default device tree: %s\n", fname);
+-	} else {
+-		return log_msg_ret("env", -ENOENT);
+-	}
+-
+-	return 0;
+-}
+-
+ /*
+  * distro_efi_try_bootflow_files() - Check that files are present
+  *
+@@ -241,7 +185,7 @@ static int distro_efi_try_bootflow_files(struct udevice *dev,
+ 	ret = -ENOENT;
+ 	*fname = '\0';
+ 	for (seq = 0; ret == -ENOENT; seq++) {
+-		ret = distro_efi_get_fdt_name(fname, sizeof(fname), seq);
++		ret = efi_get_distro_fdt_name(fname, sizeof(fname), seq);
+ 		if (ret == -EALREADY)
+ 			bflow->flags = BOOTFLOWF_USE_PRIOR_FDT;
+ 		if (!ret) {
+@@ -340,7 +284,7 @@ static int distro_efi_read_bootflow_net(struct bootflow *bflow)
+ 	sprintf(file_addr, "%lx", fdt_addr);
+ 
+ 	/* We only allow the first prefix with PXE */
+-	ret = distro_efi_get_fdt_name(fname, sizeof(fname), 0);
++	ret = efi_get_distro_fdt_name(fname, sizeof(fname), 0);
+ 	if (ret)
+ 		return log_msg_ret("nam", ret);
+ 
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 0ac04990b8e..ed2b517b130 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -1187,4 +1187,6 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
+  */
+ void efi_add_known_memory(void);
+ 
++int efi_get_distro_fdt_name(char *fname, int size, int seq);
++
+ #endif /* _EFI_LOADER_H */
+diff --git a/lib/efi_loader/Makefile b/lib/efi_loader/Makefile
+index 034e366967f..2af6f2066b5 100644
+--- a/lib/efi_loader/Makefile
++++ b/lib/efi_loader/Makefile
+@@ -59,6 +59,7 @@ obj-y += efi_device_path.o
+ obj-$(CONFIG_EFI_DEVICE_PATH_TO_TEXT) += efi_device_path_to_text.o
+ obj-$(CONFIG_EFI_DEVICE_PATH_UTIL) += efi_device_path_utilities.o
+ obj-y += efi_dt_fixup.o
++obj-y += efi_fdt.o
+ obj-y += efi_file.o
+ obj-$(CONFIG_EFI_LOADER_HII) += efi_hii.o
+ obj-y += efi_image_loader.o
+diff --git a/lib/efi_loader/efi_fdt.c b/lib/efi_loader/efi_fdt.c
+new file mode 100644
+index 00000000000..0edf0c1e2fc
+--- /dev/null
++++ b/lib/efi_loader/efi_fdt.c
+@@ -0,0 +1,73 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Bootmethod for distro boot via EFI
 + *
-+ * Return:	pointer to loaded device-tree or NULL
++ * Copyright 2021 Google LLC
++ * Written by Simon Glass <sjg@chromium.org>
 + */
-+static void *load_fdt_from_load_option(void)
++
++#include <efi_loader.h>
++#include <env.h>
++#include <errno.h>
++#include <log.h>
++#include <string.h>
++#include <vsprintf.h>
++
++/**
++ * distro_efi_get_fdt_name() - get the filename for reading the .dtb file
++ *
++ * @fname:	buffer for filename
++ * @size:	buffer size
++ * @seq:	sequence number, to cycle through options (0=first)
++ *
++ * Returns:
++ * 0 on success,
++ * -ENOENT if the "fdtfile" env var does not exist,
++ * -EINVAL if there are no more options,
++ * -EALREADY if the control FDT should be used
++ */
++int efi_get_distro_fdt_name(char *fname, int size, int seq)
 +{
-+	struct efi_device_path *dp = NULL;
-+	struct efi_file_handle *f = NULL;
-+	efi_uintn_t filesize;
-+	void *buffer;
-+	efi_status_t ret;
++	const char *fdt_fname;
++	const char *prefix;
 +
-+	dp = efi_get_dp_from_boot(&efi_guid_fdt);
-+	if (!dp)
-+		return NULL;
-+
-+	/* Open file */
-+	f = efi_file_from_path(dp);
-+	if (!f) {
-+		log_err("Can't find fdt specified in Boot####\n");
-+		goto out;
++	/* select the prefix */
++	switch (seq) {
++	case 0:
++		/* this is the default */
++		prefix = "/dtb";
++		break;
++	case 1:
++		prefix = "";
++		break;
++	case 2:
++		prefix = "/dtb/current";
++		break;
++	default:
++		return log_msg_ret("pref", -EINVAL);
 +	}
 +
-+	/* Get file size */
-+	ret = efi_file_size(f, &filesize);
-+	if (ret != EFI_SUCCESS)
-+		goto out;
++	fdt_fname = env_get("fdtfile");
++	if (fdt_fname) {
++		snprintf(fname, size, "%s/%s", prefix, fdt_fname);
++		log_debug("Using device tree: %s\n", fname);
++	} else if (IS_ENABLED(CONFIG_OF_HAS_PRIOR_STAGE)) {
++		strcpy(fname, "<prior>");
++		return log_msg_ret("pref", -EALREADY);
++	/* Use this fallback only for 32-bit ARM */
++	} else if (IS_ENABLED(CONFIG_ARM) && !IS_ENABLED(CONFIG_ARM64)) {
++		const char *soc = env_get("soc");
++		const char *board = env_get("board");
++		const char *boardver = env_get("boardver");
 +
-+	buffer = malloc(filesize);
-+	if (!buffer) {
-+		log_err("Out of memory\n");
-+		goto out;
++		/* cf the code in label_boot() which seems very complex */
++		snprintf(fname, size, "%s/%s%s%s%s.dtb", prefix,
++			 soc ? soc : "", soc ? "-" : "", board ? board : "",
++			 boardver ? boardver : "");
++		log_debug("Using default device tree: %s\n", fname);
++	} else {
++		return log_msg_ret("env", -ENOENT);
 +	}
-+	ret = EFI_CALL(f->read(f, &filesize, (void *)buffer));
-+	if (ret != EFI_SUCCESS) {
-+		log_err("Can't read fdt\n");
-+		free(buffer);
-+		buffer = NULL;
-+	}
 +
-+out:
-+	efi_free_pool(dp);
-+	if (f)
-+		EFI_CALL(f->close(f));
-+
-+	return buffer;
++	return 0;
 +}
-+
- /**
-  * efi_bootmgr_run() - execute EFI boot manager
-  * @fdt:	Flat device tree
-@@ -1200,6 +1249,7 @@ efi_status_t efi_bootmgr_run(void *fdt)
- 	efi_handle_t handle;
- 	void *load_options;
- 	efi_status_t ret;
-+	void *fdt_lo;
- 
- 	/* Initialize EFI drivers */
- 	ret = efi_init_obj_list();
-@@ -1215,9 +1265,14 @@ efi_status_t efi_bootmgr_run(void *fdt)
- 		return ret;
- 	}
- 
-+	fdt_lo = load_fdt_from_load_option();
-+	if (fdt_lo)
-+		fdt = fdt_lo;
-+
- 	ret = efi_install_fdt(fdt);
-+	free(fdt_lo);
- 	if (ret != EFI_SUCCESS) {
--		if (EFI_CALL(efi_unload_image(*handle)) == EFI_SUCCESS)
-+		if (EFI_CALL(efi_unload_image(handle)) == EFI_SUCCESS)
- 			free(load_options);
- 		else
- 			log_err("Unloading image failed\n");
 -- 
 2.43.0
 
