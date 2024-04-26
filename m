@@ -4,55 +4,176 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E35BC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 09:45:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4378DC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 09:50:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CC8089083;
-	Fri, 26 Apr 2024 11:45:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 5AE1188FE8;
+	Fri, 26 Apr 2024 11:50:22 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=theobroma-systems.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="JWMvExI7";
+	dkim=pass (2048-bit key; unprotected) header.d=theobroma-systems.com header.i=@theobroma-systems.com header.b="j0HGH/b1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01B7B88DE7; Fri, 26 Apr 2024 11:45:11 +0200 (CEST)
-Received: from mail-m49209.qiye.163.com (mail-m49209.qiye.163.com
- [45.254.49.209])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id B63EB8903D; Fri, 26 Apr 2024 11:50:21 +0200 (CEST)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02on20701.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2607::701])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB05D883E8
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 11:45:05 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=JWMvExI7uarz+xKBTqm/OPqEcSC/fEmDPggFvHQ+XbMLLikiqTvDo6lToEHiVUVIyblcGCrQ3zkcebdq6Of6Dg9ukLWN5eA11vH9bYnu8VEPQJhdUcHKGT0ASx8J5m01w5LFbFGsWMWtEHU2Fo/iAK0FsHEQwDcKQZg6d5sZm/A=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=80twcASztiIbuSgPPtocV8B4NeSOQrskKlNVWNJIInM=;
- h=date:mime-version:subject:message-id:from;
-Received: from localhost.localdomain (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 7329D900379;
- Fri, 26 Apr 2024 17:44:58 +0800 (CST)
-From: Kever Yang <kever.yang@rock-chips.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: Pull request: u-boot-rockchip-20240426
-Date: Fri, 26 Apr 2024 17:44:58 +0800
-Message-Id: <20240426094458.46701-1-kever.yang@rock-chips.com>
-X-Mailer: git-send-email 2.25.1
+ by phobos.denx.de (Postfix) with ESMTPS id 8F18D885C1
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 11:50:19 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=theobroma-systems.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=quentin.schulz@theobroma-systems.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Hqy8FtirVRvaSIvcN0hxyRsATF+XwrzcC6a8Y/48KyB3c/jxms5f5K93hOFHgTqW2MJZ/s6G7KjbKa7aDNv+B3NfHNLJauo1fw05aLgXnKlR94Bo8gSKDMp+kJRIiLqp0yGoJ0kFtac+bT8hhoI/BZVlcxDA8/2K8ew9I3IAAmEdDgs1mIQ3l05x+JAY0XA6SigAq9LQudIu3cj8p+mklMY4Rtzt438OvOLaAO6z7CUBSLUOKxlbEMrzXQoTdM7Q4C1BlUim6VGGOPA1nxHJp8DLCvaViLojKleYlxf+Wz+9ea6wlPuBQvReeVn8eKt6y1kfdkRppsTh2rEDCMvFpg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9kiNKXZtrEDTBGpZZFViIC8NvguY63ET6nsREvPVgD8=;
+ b=ZnwduMjnB/ojYs4ARCS+ztH4iYQOxWg+VPzUwvTjwTkdi0XiA1deymlt7Jzclcy0nGUjHWFyPmkTQfTDji2Tz+L8kIevyYgd7J3DDI53olrzHb8fg8s1953N2MmJskYz3+5Dylf1Cajb2KiVIrG0UWRF2XgIrs8W8mBLV9y4MV0t0X4hfdmrkotmRzHFddJqDMqWzS0z/NFqdca1E+sHp5MIDEvG+ZdQOEsgT2fQCz2dGpn0AlXCoK/nxwQGBe56fQAy4V1FlUcZTYjP5FeBBlYVE/vewAwki2oXvpik9hHIlc2exJJH/KQcd/q1BuN9Cbgt6j++Bsfmpi50SpNlsQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=theobroma-systems.com; dmarc=pass action=none
+ header.from=theobroma-systems.com; dkim=pass header.d=theobroma-systems.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=theobroma-systems.com; 
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9kiNKXZtrEDTBGpZZFViIC8NvguY63ET6nsREvPVgD8=;
+ b=j0HGH/b1zIj1/xf/nbnx1FR7v93/3MTuWGnUB9jmUiyLrbKz8FINqsjdGhiYvsirFto6+ntnyPt50iOFjPj6VwyycHLm/T55DoRKZmZ42tXM+FCj2pv14ZkwP7iyA5UjRrxQtA88D+ygSG78t5hCjEXNzIPjnnIQzNU6MnhLtP6eb8pbIecJujc5FBunajPJKiLF5hWj7XDKK59D+jHe5JPubl4Pu8lPR0e8lAn7ohS8HjEaLqwhycz6kwKjBy8oFdthLwCjSOsDJIrwg1lh7YzTeIzkY2IwVEo/xdJiXnXRPWHkPUQwvAkDKBi6goRWd+GSaTQYR6Z7j1/PCCVrRQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=theobroma-systems.com;
+Received: from DB7PR04MB4842.eurprd04.prod.outlook.com (2603:10a6:10:1b::13)
+ by VI1PR04MB6990.eurprd04.prod.outlook.com (2603:10a6:803:138::16) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7519.22; Fri, 26 Apr
+ 2024 09:50:16 +0000
+Received: from DB7PR04MB4842.eurprd04.prod.outlook.com
+ ([fe80::ac08:df46:97bd:4ae6]) by DB7PR04MB4842.eurprd04.prod.outlook.com
+ ([fe80::ac08:df46:97bd:4ae6%6]) with mapi id 15.20.7519.021; Fri, 26 Apr 2024
+ 09:50:16 +0000
+Message-ID: <42a5cda8-ff07-4083-a2c4-66edc5c06c26@theobroma-systems.com>
+Date: Fri, 26 Apr 2024 11:50:12 +0200
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 01/11] rockchip: sdram: Support getting banks from TPL
+ for rk3568 and rk3588
+To: Kever Yang <kever.yang@rock-chips.com>,
+ Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>,
+ Eugen Hristev <eugen.hristev@collabora.com>, Andy Yan <andyshrk@163.com>,
+ Elon Zhang <zhangzj@rock-chips.com>, Joshua Riek <jjriek@verizon.net>,
+ Klaus Goger <klaus.goger@theobroma-systems.com>,
+ Heiko Stuebner <heiko.stuebner@cherry.de>, Jagan Teki <jagan@edgeble.ai>,
+ Frank Wunderlich <frank-w@public-files.de>,
+ Joseph Chen <chenjh@rock-chips.com>, Tianling Shen <cnsztl@gmail.com>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Akash Gajjar <gajjar04akash@gmail.com>
+Cc: u-boot@lists.denx.de, Chris Morgan <macromorgan@hotmail.com>
+References: <20240425-rk35xx-dram-atags-v4-0-331401a58e8e@theobroma-systems.com>
+ <20240425-rk35xx-dram-atags-v4-1-331401a58e8e@theobroma-systems.com>
+ <fca5f37a-1f50-4628-bbc0-d9db7c18f3e2@rock-chips.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+In-Reply-To: <fca5f37a-1f50-4628-bbc0-d9db7c18f3e2@rock-chips.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: WA1P291CA0004.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:19::15) To DB7PR04MB4842.eurprd04.prod.outlook.com
+ (2603:10a6:10:1b::13)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=y
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ04YT1YdGE5OHRlKGkxDSRpVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk1PSUxOVUpLS1VKQk
- tLWQY+
-X-HM-Tid: 0a8f19cb33c303a9kunm7329d900379
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6OU06OCo6OTMDCCsCTzovATQ3
- CjFPCUhVSlVKTEpPSklPTUJCS0JJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSEJOQjcG
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB7PR04MB4842:EE_|VI1PR04MB6990:EE_
+X-MS-Office365-Filtering-Correlation-Id: d75504a2-75d7-464a-108a-08dc65d6464c
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230031|366007|376005|1800799015|7416005|921011; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dWZxaEFMalBraFBPVDViTXFZNm1KbzBUK1FZR0MwRDdYbUJqK2JrUExTMThX?=
+ =?utf-8?B?T0owODM3Q1RXUU5JMXd4RzdmM2ZiaWlpOVdZSDdSNUVjSFpwTGl3WVc4SFl3?=
+ =?utf-8?B?bVFEc0xQL204REduWDZDNlB3Mk54UkpFbS9Yam9zYTVFNTZ1VFdtVXZ0by80?=
+ =?utf-8?B?SzdNQnYxWTk2ZXZjdmZmNHdhTitySVNUcEZRK0E1VDVac1FUTnNXRElmNy81?=
+ =?utf-8?B?eDZxbkNIcjk0ODBnak9nVWtGY3NFZE5mTHhFOTdlOEhPdHdsWEpSZTVOd0NH?=
+ =?utf-8?B?UGk2NmFSd1hzakV2ZnVHUmp1MXdyWlRzcC9aWGtaNzFwN1JjbnhISzU2SkNT?=
+ =?utf-8?B?akpWOGxaYy9ocUlJclZFVm1NUHEzVEQvaDJEQ0R5VE1wN09qNGs1Wk9VQXJm?=
+ =?utf-8?B?WkZDVll4enZHeVB4Y2hscUpPTWc2RFpjU1g5OFJSMzR5b1pMVG8xMlBMZ1JL?=
+ =?utf-8?B?cG9UMnBxWXFVQXk0L3A2TG9xUS96WE5mS3ErUzIrOSs0ZW5XT3p1OW14WXNW?=
+ =?utf-8?B?MU5QSDZadEhDREE2K3MvYWJrMTdRNVdsNmh2MzF2M2xjbS9paUNUTjhjMDVm?=
+ =?utf-8?B?VW1BeEJnZjZqanNtZTMxNWg4dXIrUUtGRXVjOU1Lc2VmN09ycWpnb2FNckRo?=
+ =?utf-8?B?bUszczY1aCtRV0Nldm9hZkxvdW9ROTUrUTZ6c1AvUlVVcXlwQmU3QlRIbWoy?=
+ =?utf-8?B?ZmxKY25Ca003OVlod0swd1FIUnkvWjhxTFlZTVFGNHNaYkNwWGp3ZUI5VFFy?=
+ =?utf-8?B?Z094eTBVUVZIeWdoUU04b0gwTDRsQk55TXRlSk9FbjAzSURqeDlBai9RUzU5?=
+ =?utf-8?B?QTRXV0hBdnJ2cVBibDFpbkJYMlZwK0gvVjk4am5OUWpaSUN3YXdtU0dKQ1ND?=
+ =?utf-8?B?MkNMbFBoczl1b2xzMENSTVhFSC92T1p2SUY1VTF0ZzlZVTByVkdsbCtKbzVS?=
+ =?utf-8?B?SjVJMjlHUHVHeXhVR0NsSmpVU25zbTFJT1BaOGRrcUJZaGVrRTk4bkhnWWdw?=
+ =?utf-8?B?MDgzZEMrTkJmTmp6Y2t5TWpyL2hzOVJEMFl3MUJ6ekJYUmhUL1I0V0JGb3Qx?=
+ =?utf-8?B?aWR5bUpmczdxU09wVmpNMFl2YTRsamtMMGNCYnpIUkhDOUlSTDJpQ3M3bWRY?=
+ =?utf-8?B?bUsrMmNIbHdlRzBpVnRuZ1lrNWpEVnV6S093MytLUURVWmJqSkhPQzdIVDBS?=
+ =?utf-8?B?SXVsNE40YTMxSHZKUDlSczFYak1Wdy9HejM4NE5wU0NhbVF0YnQ2MHpxVDVY?=
+ =?utf-8?B?eGgzVlZMbHhuWXRnMnBIQXoxRHMwaFYweWZZR0RNckJXUDZESEozcmg3d29N?=
+ =?utf-8?B?RC9oRStZOGxQUVJ4TkJhN2ZHeTZ2Mk9CTzE1OU9ldUJiY09NM0JlNUx1MEho?=
+ =?utf-8?B?a3B2R09ENnZ2cW10OXlqSXBhdjZLRXhXeTVBYUhoYjg5R2JOMVBERm5sVGk4?=
+ =?utf-8?B?TkJtNWNUTk5sSUpVT0JiSjY2cTI5a1dweEVBLzZPeXRZSmZHOTNwQlRjMG9F?=
+ =?utf-8?B?UnY5dUxzTDQ3eHphNjRzSktsa053Ny9KMVBaa0ovVzY4RFBlOEF5ZlFxS0xh?=
+ =?utf-8?B?eXZDY280ZzVMVkZ1clBGckVvL08zZTBBakNHa1E5UXExNzNUYzBrZ042V3VW?=
+ =?utf-8?B?NFZpWEVLT0tNcmU3aVYzVDZEdWpOMmUyc29tWmZCdWVIMlpqQ0o4V0tSVTNw?=
+ =?utf-8?B?eHBkRmdNN1dNWDBuMG1kNk1wVDBKVHdmK25VeEcweEhrUlVuSnNqc25ONU1D?=
+ =?utf-8?Q?S5d4hxDcj+J2f5bA8F1gVVqhkE+zdOCD8b4iq2C?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:DB7PR04MB4842.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230031)(366007)(376005)(1800799015)(7416005)(921011); DIR:OUT; SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZkZaWkpFMHA1S2txcUw0U252ejdMRnZWa3JnWFRHNXdFYnN3dWtIblc0K3pW?=
+ =?utf-8?B?bm8wdEoyVEk2cFR4eURIcjg1T2pXN2RlMnhsM3ZSV0JtNFErVDg2TUtZbnlS?=
+ =?utf-8?B?cXRRUHpkUjgydC9ZRCtOcUswMUduVTloUkUvTllQRVd2MWlOL1l5ZGwyYUw5?=
+ =?utf-8?B?RlBWQXBHSDhkbkVzTW5sTGtobkpRMldTRWZLa08rT0ZUVnlPclFwNUtjT0ly?=
+ =?utf-8?B?Nm82YnkyT3F1SzVzVG1yc2tsTXVhb1YvSGJxYXNiL1h2bldRTncrb1h4VjRX?=
+ =?utf-8?B?ay9mNVdmeksxY0haeVE4QnpDYTV4ODZtaHhpNmsvV3hhMlVRcUNEcUlNQ25K?=
+ =?utf-8?B?NEdjcmwxUjFmS0YyR3dWUHAwL1hkTGF3blN1SWFuV1V0MnpURlNiUWsxNUsx?=
+ =?utf-8?B?WmVDOFhFRjRtdk04eDFzUTU4dyt0WjF0R055MXluNlplNlZYTGk1U2xwU2c2?=
+ =?utf-8?B?NUpzeWYzclB0WXJ3SGsyNDJ6N2dHVlJubldUeTJJQnlkbkpuVDdBUzdYeVU3?=
+ =?utf-8?B?NlJCUkhoVjQ4dDdyZW9uRkFHbWY4eC91REkyT3YzRGpXdTFLWkg2WFkvT1JM?=
+ =?utf-8?B?SnFLNXAxV2o0MFY3dE1nYnJVNndpSWlnbkwySSt4MGdwbjFQaFovM0QvdlNH?=
+ =?utf-8?B?ODRyeXpvM01aRUdYaDN4ZWxDMy9OVVQ3TlNZMDk4QXJYWE5RWlRmNjhFaXgr?=
+ =?utf-8?B?M1k1NENlNVNacDM4UkJrRTlqUXBmcEUxRWtZQkxPYTRvUTlFaUkrUDZZZ2Fh?=
+ =?utf-8?B?aVhseklsZjFvSGx2TEQ3SXQ5Z1dXYUFIaGRGdWRNMk5RY2tzZjlBZElGNDgv?=
+ =?utf-8?B?Qy9PVjBva05oczYxc0Y4bTdHOWdBT2ZzK2ErOUZRaWtZa1hYSGNSbkpYRWxE?=
+ =?utf-8?B?WFA1a2c0MWJUZjNtOU5VYjBkeFRPMkx4Z3BDdCs3RVdLOGVmajRwV01aMUN3?=
+ =?utf-8?B?NE53TVJnNy9tc0tFYVpCS3lxWSt0ZXRpNFJhMHFId2x0ZUpBWEZEMHZnSTl1?=
+ =?utf-8?B?UVEyY04vaGFjdERiN2ZldkRrcVQwdHhTN3dZNWZNZDBsWWFxY1J3eURJWGho?=
+ =?utf-8?B?T3dTOVJrU21ZQWVGNk5rNjFqSURWT2NjWmdQR3d4WE9TZUFGcUdJeWJVdVdx?=
+ =?utf-8?B?SnhFbWlISlVCcGJiaWJUaEo2TmFWcitLZ003NC96c2hnWDJUKzVNUXBEVDhY?=
+ =?utf-8?B?a2pZTVR1WUZzcjg1UStoZUlldGRpWlhqWmtHWDRFTEZvQko4Vll5UXFiK0pB?=
+ =?utf-8?B?eHNaaHIzN3FvU1FkbldCWUFiS281T1hxWmRzdk9MQU1GclJjK21hQk5zaHJp?=
+ =?utf-8?B?NEZCVGpQQ2NTaG1pOUxhVTJNTUh6dHNITmFYQXlzM1k5NjlOQTBqVWNVbTVq?=
+ =?utf-8?B?dzNVb01EVThWVnNNVXp6aWZvMkVTbVNDaGxDY1crT2hyRU5wK1lyWG1peHE0?=
+ =?utf-8?B?UG5MWnluTW9GeTZWYUVUakR6RTUrN1lCMDJWNjdsaVhoN3FpSE81S241dHh1?=
+ =?utf-8?B?S1NOOU43M3IrWWt6Qmw2cXZGc1ArUERyUFBiczJXZXJHd0RUd3huUXgvOGtx?=
+ =?utf-8?B?ejZIVXp0SHhPakZndFhIYnVYcHo5MUE3L0FYb3BpWWNPZis3VkkrcWxlczVl?=
+ =?utf-8?B?Q294Tkhwa2VoRGNXS29hSXJudHo0TUZNYWNSM3YybnpGNXZKNDVQK2VwVHov?=
+ =?utf-8?B?ZzBxenpPd2VSK3plUGcyYW5vNmwrNU9CT3d3dW5MRGVKMThVa25QY3duZlBv?=
+ =?utf-8?B?Wm5pTjF2azhIemdSVkpjbXRvbVhTRXVPejIvaEdKSzM1cGpBUXJGR29HckVp?=
+ =?utf-8?B?a0pXQWY2NlNsU0d4R0pxWFBEaWRYQU0xU2VZdjAyalUzbWdlSlpoVVpMcmRQ?=
+ =?utf-8?B?c1BLeVpVTHlZNDZPV2Q2MUxuM0dkV2VZVkxtdG5XaEhuUXJqbHZlWEVFdWJK?=
+ =?utf-8?B?Z3ZYbGg5TkFsU0ZBWkk3T0IyM1FFUllaZlVBdDduYzFMM1Q1WjNHc1dJSmdl?=
+ =?utf-8?B?V29tUjRKTFFqMVNIMDFMclZEa0QzRzQ1WWZPQ2c4eUpsOUhYVDUvSVFpdVRa?=
+ =?utf-8?B?bE9PVTNwcDcyTTB0V3V4MCt3cUhOc2ZUVFZ2eHJhRHhpWGdLMm1ZWnIzVGxE?=
+ =?utf-8?B?cDNiamdLZ3RjNGczWlhBOVpNY0RWSTJDZnhLaThYQlVMalpTNUhkQUhaTVZa?=
+ =?utf-8?Q?alonXAt7q40+s1GkO6kajfI=3D?=
+X-OriginatorOrg: theobroma-systems.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d75504a2-75d7-464a-108a-08dc65d6464c
+X-MS-Exchange-CrossTenant-AuthSource: DB7PR04MB4842.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Apr 2024 09:50:16.0554 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: aumGMWFkB8wiOnjXlcGlIt7bgLyjZk+qmXIiM28li0+MLHrA4kjd//PLMgK994oIzc7COpFoJED7T6bdfJChEYLFVEMyNRi4W+jAT7UWJUpDqfxk7nfo8dNZcore6gCA
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB6990
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,241 +190,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Kever,
 
-Please pull the updates for rockchip platform:
-- dts sync for rk3308;
-- sdram: Support getting banks from TPL for rk3568 and rk3588;
-- dts and config clean and sync up for rk3568/rk3588;
-- Other misc fixes;
+On 4/26/24 09:41, Kever Yang wrote:
+> Hi Quentin,
+> 
+> On 2024/4/25 18:46, Quentin Schulz wrote:
+>> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+>>
+>> Allow RK3568 and RK3588 based boards to get the RAM bank configuration
+>> from the ROCKCHIP_TPL stage instead of the current logic. This fixes
+>> both an issue where 256MB of RAM is blocked for devices with >= 4GB
+>> of RAM and where memory holes need to be defined for devices with
+>> more than 16GB of RAM. In the event that neither SoC is used or the
+>> ROCKCHIP_TPL stage is not used, fall back to existing logic.
+>>
+>> The logic handles creating memory holes from reserved memory areas
+>> defined in mem_map data struct in SoC C files, but only if the DRAM area
+>> overlaps with one reserved memory area.
+>>
+>> Since mem_map data struct is used, it should be rather straightforward
+>> to add support for other SoCs if needed.
+>>
+>> The logic is taken from Rockchip's U-Boot tag linux-5.10-gen-rkr4.1
+>> (e08e32143dd).
+>>
+>> Note that Rockchip's U-Boot/TF-A/OP-TEE modify the ATAGS at runtime as
+>> well, but the DDR_MEM tag seems to be pretty much stable (though BL31
+>> seems to be reserving only 1MB for itself at the moment).
+>>
+>> u32 for ATAGS is used because it simplifies the pointer arithmetic and
+>> it's expected that ATAGS are always below the 4GB limit allowed by u32.
+>>
+>> Co-developed-by: Chris Morgan <macromorgan@hotmail.com>
+>> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+>> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
+> 
+> This breaks rv1126 build which is non ARM64 platform, I can fix it and 
+> apply it directly.
+> 
 
-CI:
-https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/20543
+Thanks!
 
-Thanks,
-- Kever
-
-The following changes since commit d097f9e1299a3bdb7de468f0d9bbc63932f461cd:
-
-  Merge tag 'fsl-qoriq-2024-4-24' of https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq (2024-04-23 17:53:06 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20240426
-
-for you to fetch changes up to f6114fb871108eb2bad7393191c9983f0b125dc1:
-
-  rockchip: rk356x: use DRAM banks from ATAGS (2024-04-26 15:47:06 +0800)
-
-----------------------------------------------------------------
-Christopher Obbard (4):
-      rockchip: spl-boot-order: fix typo in comment succes→success
-      rockchip: spl-boot-order: show DT path for missing device
-      arm: rockchip: sync ROCK Pi 4A DTS from Linux
-      rockchip: rock-pi-4-rk3399: enable booting from SPI flash
-
-Dragan Simic (1):
-      board: rk3288: simplify the DT file list in MAINTAINERS
-
-Finley Xiao (1):
-      clk: rockchip: rk3308: Add support for SCLK_RTC32K clock
-
-Jason Zhu (1):
-      rockchip: bootrom: Sync bootsource id enum from bootrom
-
-Jonas Karlman (47):
-      rockchip: spl: Cache boot source id for later use
-      rockchip: spl: Add SPI NOR flash to boot_devices array
-      board: rockchip: rk3308: Add device tree files and myself to MAINTAINERS
-      rockchip: rk3308: Sort imply statements alphabetically
-      rockchip: rk3308: Enable ARMv8 crypto and FIT checksum validation
-      rockchip: rk3308: Generate ethaddr based on cpu id
-      rockchip: rk3308: Enable random generator
-      rockchip: rk3308: Fix loading FIT from SD-card when booting from eMMC
-      clk: rockchip: rk3308: Add dummy support for USB480M clock
-      phy: rockchip-inno-usb2: Add support for RK3308
-      rockchip: rk3308: Sync device tree from linux v6.8
-      rockchip: rk3308-evb: Update defconfig
-      rockchip: rk3308-roc-cc: Update defconfig
-      rockchip: rk3308-rock-pi-s: Update defconfig
-      rockchip: rk3308: Move cru and grf include files to arch-rockchip
-      clk: rockchip: rk356x: Add CLK_USB3OTGx_REF support
-      clk: rockchip: rk3588: Add REF_CLK_USB3OTGx support
-      clk: rockchip: rk356x: Fix set rate of SCLK_SFC clock
-      rockchip: rk3588: Drop REGULATOR_PWM Kconfig option
-      rockchip: rk3566-anbernic-rgxx3: Remove SPL_ROCKCHIP_BACK_TO_BROM option
-      rockchip: rk35xx: Sort imply statements alphabetically
-      rockchip: rk35xx: Enable random generator
-      rockchip: rk35xx: Imply support for GbE PHY
-      rockchip: rk356x: Imply enhanced features for standard boot
-      rockchip: rk35xx: Sort soc u-boot.dtsi alphabetically
-      rockchip: rk356x: Update bootph props
-      rockchip: rk3588: Update bootph props
-      rockchip: rk3568-evb: Use pinctrl in SPL
-      rockchip: rk3588-evb: Use pinctrl and aliases in SPL
-      rockchip: rk3566-pinetab2: Fix reading FIT from SPI flash
-      rockchip: rk3588-coolpi: Add boards to documentation
-      rockchip: rk3588-coolpi: Fix .dtb-file entries in Makefile
-      rockchip: rk3588-toybrick: Use pinctrl and aliases in SPL
-      rockchip: rk3588-toybrick: Add .dtb-file entry in Makefile
-      rockchip: rk3588-turing-rk1: Use dwc3-generic driver
-      rockchip: rk3588-edgeble-neu6: Enable FIT checksum validation
-      rockchip: rk356x-generic: Fix eMMC and SD-card pinctrl
-      rockchip: rk356x-generic: Add support for SPI flash
-      rockchip: rk356x-generic: Add support for USB OTG
-      rockchip: rk3588-generic: Use M0 iomux for UART2
-      rockchip: rk3588-generic: Add support for USB OTG
-      rockchip: rk35xx-generic: Disable unused features
-      mmc: rockchip_sdhci: Fix 4 blocks PIO mode read limit for RK35xx
-      rockchip: rk3328: Sort imply statements alphabetically
-      rockchip: rk3328: Enable ARMv8 crypto extensions
-      rockchip: io-domain: Add support for RK3328
-      rockchip: rk3328: Fix bootph prop for vop node
-
-Lukasz Czechowski (1):
-      rockchip: px30-board-tpl: Sync ifdef guards with full TPL
-
-Quentin Schulz (12):
-      rockchip: ringneck-px30: put STM32_RST line in input mode instead of output
-      rockchip: sdram: Support getting banks from TPL for rk3568 and rk3588
-      rockchip: NR_DRAM_BANKS now defaults to 10 when Rockchip TPL blob is used
-      rockchip: nanopc-t6-rk3588: use DRAM banks from ATAGS
-      rockchip: quartzpro64-rk3588: use DRAM banks from ATAGS
-      rockchip: rock5a-rk3588s: use DRAM banks from ATAGS
-      rockchip: rock5b-rk3588: use DRAM banks from ATAGS
-      rockchip: evb_rk3588 et al.: use DRAM banks from ATAGS
-      rockchip: toybrick_rk3588: use DRAM banks from ATAGS
-      rockchip: turing-rk1-rk3588: use DRAM banks from ATAGS
-      rockchip: rk3588: use DRAM banks from ATAGS
-      rockchip: rk356x: use DRAM banks from ATAGS
-
- arch/arm/dts/Makefile                              |    5 +-
- arch/arm/dts/rk3308-evb-u-boot.dtsi                |   11 +-
- arch/arm/dts/rk3308-evb.dts                        |  104 +-
- arch/arm/dts/rk3308-roc-cc-u-boot.dtsi             |   30 +-
- arch/arm/dts/rk3308-roc-cc.dts                     |   83 +-
- arch/arm/dts/rk3308-rock-pi-s-u-boot.dtsi          |   45 +-
- arch/arm/dts/rk3308-rock-pi-s.dts                  |  100 +-
- arch/arm/dts/rk3308-u-boot.dtsi                    |  120 +-
- arch/arm/dts/rk3308.dtsi                           | 1205 ++++++++++----------
- arch/arm/dts/rk3328-u-boot.dtsi                    |    2 +-
- arch/arm/dts/rk3399-rock-pi-4a-u-boot.dtsi         |    7 +
- arch/arm/dts/rk3399-rock-pi-4a.dts                 |   10 +
- arch/arm/dts/rk3566-anbernic-rgxx3-u-boot.dtsi     |    6 -
- arch/arm/dts/rk3566-pinetab2-u-boot.dtsi           |   23 +-
- arch/arm/dts/rk3566-quartz64-a-u-boot.dtsi         |    8 +-
- arch/arm/dts/rk3566-quartz64-b-u-boot.dtsi         |    4 +-
- arch/arm/dts/rk3568-generic-u-boot.dtsi            |    7 +
- arch/arm/dts/rk3568-generic.dts                    |   37 +-
- arch/arm/dts/rk3568-odroid-m1-u-boot.dtsi          |    7 +-
- arch/arm/dts/rk3568-rock-3a-u-boot.dtsi            |    5 +-
- arch/arm/dts/rk356x-u-boot.dtsi                    |  122 +-
- arch/arm/dts/rk3588-coolpi-cm5-evb-u-boot.dtsi     |    8 +-
- arch/arm/dts/rk3588-generic-u-boot.dtsi            |   22 +
- arch/arm/dts/rk3588-generic.dts                    |    3 +-
- arch/arm/dts/rk3588-nanopc-t6-u-boot.dtsi          |    8 +-
- arch/arm/dts/rk3588-orangepi-5-plus-u-boot.dtsi    |    7 +-
- arch/arm/dts/rk3588-rock-5b-u-boot.dtsi            |    8 +-
- arch/arm/dts/rk3588-turing-rk1-u-boot.dtsi         |    6 +-
- arch/arm/dts/rk3588s-coolpi-4b-u-boot.dtsi         |    8 +-
- arch/arm/dts/rk3588s-orangepi-5-u-boot.dtsi        |    7 +-
- arch/arm/dts/rk3588s-u-boot.dtsi                   |  118 +-
- arch/arm/include/asm/arch-rockchip/bootrom.h       |    3 +
- .../{arch-rk3308 => arch-rockchip}/cru_rk3308.h    |   14 +
- .../{arch-rk3308 => arch-rockchip}/grf_rk3308.h    |    0
- arch/arm/mach-rockchip/Kconfig                     |   65 +-
- arch/arm/mach-rockchip/px30-board-tpl.c            |    4 +-
- arch/arm/mach-rockchip/px30/px30.c                 |    1 +
- arch/arm/mach-rockchip/rk3288/rk3288.c             |    1 +
- arch/arm/mach-rockchip/rk3308/Kconfig              |    3 -
- arch/arm/mach-rockchip/rk3308/clk_rk3308.c         |    2 +-
- arch/arm/mach-rockchip/rk3308/rk3308.c             |    3 +-
- arch/arm/mach-rockchip/rk3328/syscon_rk3328.c      |    3 +
- arch/arm/mach-rockchip/rk3368/rk3368.c             |    1 +
- arch/arm/mach-rockchip/rv1126/rv1126.c             |    1 +
- arch/arm/mach-rockchip/sdram.c                     |  260 +++++
- arch/arm/mach-rockchip/spl-boot-order.c            |    6 +-
- arch/arm/mach-rockchip/spl.c                       |   14 +-
- board/firefly/firefly-rk3308/MAINTAINERS           |    1 +
- board/firefly/firefly-rk3308/roc_cc_rk3308.c       |    2 +-
- board/friendlyelec/nanopc-t6-rk3588/Makefile       |    6 -
- .../nanopc-t6-rk3588/nanopc-t6-rk3588.c            |   39 -
- board/pine64/quartzpro64-rk3588/Makefile           |    3 -
- .../pine64/quartzpro64-rk3588/quartzpro64-rk3588.c |   39 -
- board/radxa/rock2/MAINTAINERS                      |    4 +-
- board/radxa/rock5a-rk3588s/Makefile                |    6 -
- board/radxa/rock5a-rk3588s/rock5a-rk3588s.c        |   39 -
- board/radxa/rock5b-rk3588/Makefile                 |    6 -
- board/radxa/rock5b-rk3588/rock5b-rk3588.c          |   39 -
- board/rockchip/evb_rk3308/MAINTAINERS              |    5 +-
- board/rockchip/evb_rk3588/Makefile                 |    6 -
- board/rockchip/evb_rk3588/evb-rk3588.c             |   39 -
- board/rockchip/toybrick_rk3588/Makefile            |    6 -
- board/rockchip/toybrick_rk3588/toybrick-rk3588.c   |   39 -
- .../ringneck_px30/ringneck-px30.c                  |    4 +-
- board/turing/turing-rk1-rk3588/Makefile            |    6 -
- board/turing/turing-rk1-rk3588/turing-rk1-rk3588.c |   39 -
- configs/anbernic-rgxx3-rk3566_defconfig            |    5 -
- configs/bpi-r2-pro-rk3568_defconfig                |    2 -
- configs/coolpi-4b-rk3588s_defconfig                |    2 -
- configs/coolpi-cm5-evb-rk3588_defconfig            |    2 -
- configs/evb-rk3308_defconfig                       |   40 +-
- configs/evb-rk3328_defconfig                       |    1 +
- configs/evb-rk3568_defconfig                       |    4 +-
- configs/evb-rk3588_defconfig                       |    7 +-
- configs/generic-rk3568_defconfig                   |   31 +-
- configs/generic-rk3588_defconfig                   |   18 +-
- configs/jaguar-rk3588_defconfig                    |    1 -
- configs/lubancat-2-rk3568_defconfig                |    1 -
- configs/nanopc-t6-rk3588_defconfig                 |    2 -
- configs/nanopi-r5c-rk3568_defconfig                |    1 -
- configs/nanopi-r5s-rk3568_defconfig                |    1 -
- configs/neu6a-io-rk3588_defconfig                  |    9 +-
- configs/neu6b-io-rk3588_defconfig                  |    9 +-
- configs/odroid-m1-rk3568_defconfig                 |    1 -
- configs/orangepi-5-plus-rk3588_defconfig           |    2 -
- configs/orangepi-5-rk3588s_defconfig               |    2 -
- configs/pinetab2-rk3566_defconfig                  |    2 +-
- configs/quartz64-a-rk3566_defconfig                |    1 -
- configs/quartz64-b-rk3566_defconfig                |    1 -
- configs/quartzpro64-rk3588_defconfig               |    3 -
- configs/radxa-cm3-io-rk3566_defconfig              |    1 -
- configs/radxa-e25-rk3568_defconfig                 |    1 -
- configs/roc-cc-rk3308_defconfig                    |   40 +-
- configs/rock-3a-rk3568_defconfig                   |    1 -
- configs/rock-pi-4-rk3399_defconfig                 |   17 +-
- configs/rock-pi-s-rk3308_defconfig                 |   35 +-
- configs/rock5a-rk3588s_defconfig                   |    2 -
- configs/rock5b-rk3588_defconfig                    |    3 -
- configs/soquartz-blade-rk3566_defconfig            |    1 -
- configs/soquartz-cm4-rk3566_defconfig              |    1 -
- configs/soquartz-model-a-rk3566_defconfig          |    1 -
- configs/toybrick-rk3588_defconfig                  |    7 +-
- configs/turing-rk1-rk3588_defconfig                |    4 -
- doc/board/rockchip/rockchip.rst                    |    2 +
- drivers/clk/rockchip/clk_rk3308.c                  |  101 +-
- drivers/clk/rockchip/clk_rk3568.c                  |   36 +-
- drivers/clk/rockchip/clk_rk3588.c                  |    6 +
- drivers/misc/Kconfig                               |    2 +-
- drivers/misc/rockchip-io-domain.c                  |   38 +
- drivers/mmc/rockchip_sdhci.c                       |   26 +-
- drivers/net/gmac_rockchip.c                        |    4 +-
- drivers/phy/rockchip/phy-rockchip-inno-usb2.c      |   20 +
- drivers/ram/rockchip/sdram_rk3308.c                |    2 +-
- 113 files changed, 1933 insertions(+), 1411 deletions(-)
- rename arch/arm/include/asm/{arch-rk3308 => arch-rockchip}/cru_rk3308.h (95%)
- rename arch/arm/include/asm/{arch-rk3308 => arch-rockchip}/grf_rk3308.h (100%)
- delete mode 100644 board/friendlyelec/nanopc-t6-rk3588/Makefile
- delete mode 100644 board/friendlyelec/nanopc-t6-rk3588/nanopc-t6-rk3588.c
- delete mode 100644 board/pine64/quartzpro64-rk3588/Makefile
- delete mode 100644 board/pine64/quartzpro64-rk3588/quartzpro64-rk3588.c
- delete mode 100644 board/radxa/rock5a-rk3588s/Makefile
- delete mode 100644 board/radxa/rock5a-rk3588s/rock5a-rk3588s.c
- delete mode 100644 board/radxa/rock5b-rk3588/Makefile
- delete mode 100644 board/radxa/rock5b-rk3588/rock5b-rk3588.c
- delete mode 100644 board/rockchip/evb_rk3588/Makefile
- delete mode 100644 board/rockchip/evb_rk3588/evb-rk3588.c
- delete mode 100644 board/rockchip/toybrick_rk3588/Makefile
- delete mode 100644 board/rockchip/toybrick_rk3588/toybrick-rk3588.c
- delete mode 100644 board/turing/turing-rk1-rk3588/Makefile
- delete mode 100644 board/turing/turing-rk1-rk3588/turing-rk1-rk3588.c
+Cheers,
+Quentin
