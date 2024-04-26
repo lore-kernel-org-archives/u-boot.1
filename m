@@ -4,139 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E2DBC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 13:39:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD379C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 14:13:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8EE7C881B8;
-	Fri, 26 Apr 2024 15:39:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id ED48D885A3;
+	Fri, 26 Apr 2024 16:13:51 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="mUiJplFi";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="S9W/eO/V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3C6F881BF; Fri, 26 Apr 2024 15:39:40 +0200 (CEST)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id AF444885AF; Fri, 26 Apr 2024 16:13:50 +0200 (CEST)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E15DA8819D
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 15:39:38 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DB0798857C
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 16:13:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=TGyT/R61XrfjYKAOg4QuAoKBvZh/74bJ8vajcdILsEhI3US33OjPZnoPfEdPGThJgnT5PiaWgNAhA4Kvfp1kQV0UAR6IDqu7EYJuXlkNn6hGHbTceYLfNXcHT0sSqlSOdB2yylBzGVaWGlGScuqzj2IFJR8T30BDdL1AfapVgJPQBkO9+LfvLBdbJVDCzJtYrrOeeSGKBXw77DD1GQmj/tddMofqE8aPClHIygXegb4bH3//jXyG2GmX3zoIm1C38jhm+wZXoP31sZGcgJWpUBsa5FHNxHvDayId6XEwrQw78M3nsFd3Hp3RjW97/S+/V+2qvc9zSmIjb8wSs4NMfw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=06hgP/Zm5hfTSGh4cNxv+kxlX9GyOcaSSGVDcR2zS5c=;
- b=Eo43QYURaFnle03410uQkQxGKFcp3I7zwMDl0WxhcCPDrpVO8Il0QTF7p0elrqlxhkwuR7vmuPx/dyjSYMI5bALWe6pgEB1hcfA3pRb9yyRy72u9/CvJwqVif65HghmgdLyKZ+cOoqZ8S7l4mYPP1L8ZyI2aH6du9fmTVfQ9KUMTKlQxqFPkj8KOsZpKbAbMivNlSAX4ENLu+ublvCSMyk0JrGTE4ZA//DNdXYFN0eTgeKqPjloWQ5/u2DP2d9DZRtMIN34Jj7Mb1QDsk8vsPIF6XrMRftU5aPptDr+gDWt/ZnTbROA5YIUqk/++U5IRTYRSOBeuY7Nyj7y973AdNA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=06hgP/Zm5hfTSGh4cNxv+kxlX9GyOcaSSGVDcR2zS5c=;
- b=mUiJplFijcDT5GliXeYieqsLc+EFfShWiKO9ue7nvZyjqMwDsyVoaJ+HXvI/Hso94+LOYTnx6TR9JwXgQOWmHmYkNl9Bmdl3wp7IdN8ZAWaNsxs3hWTfQLy0xgVcrOJIxls1CrhVw6FPHpllvrrBondXz/hMk8s/snHliy2YPKQ=
-Received: from SA9PR13CA0027.namprd13.prod.outlook.com (2603:10b6:806:21::32)
- by SA1PR12MB7412.namprd12.prod.outlook.com (2603:10b6:806:2b2::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7472.44; Fri, 26 Apr
- 2024 13:38:33 +0000
-Received: from SN1PEPF0002529D.namprd05.prod.outlook.com
- (2603:10b6:806:21:cafe::53) by SA9PR13CA0027.outlook.office365.com
- (2603:10b6:806:21::32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7544.16 via Frontend
- Transport; Fri, 26 Apr 2024 13:38:33 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- SN1PEPF0002529D.mail.protection.outlook.com (10.167.242.4) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7519.19 via Frontend Transport; Fri, 26 Apr 2024 13:38:33 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 26 Apr
- 2024 08:38:32 -0500
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Francesco Dolcini <francesco.dolcini@toradex.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, Max
- Krummenacher <max.krummenacher@toradex.com>, Peter Robinson
- <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>, Tom Rini
- <trini@konsulko.com>
-Subject: [PATCH 3/3] lib: smbios: Detect system properties via SYSINFO IDs
-Date: Fri, 26 Apr 2024 15:38:13 +0200
-Message-ID: <7a3722af00af013e4a76f3b086c08db50d155fa1.1714138688.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.44.0
-In-Reply-To: <cover.1714138688.git.michal.simek@amd.com>
-References: <cover.1714138688.git.michal.simek@amd.com>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C0CE43F17D
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 14:13:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1714140826;
+ bh=Xn6nWubBL19EDGjrFqb3XXxecvSzg5HtQsQJBUwrJrs=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=S9W/eO/VHDHzY0MPi2w8difOIpAXSZDEjUDpRc84nILqJHKuC5jEeolEFaDrElY0S
+ 1jDdm9EqpyCX4sKRcAIsE0Wl+cZ4Rso0cOqu+cMBEeuxHF864spYie0g7rt9DJ2FVS
+ m3dzp46KzJkoPDT0r+I9Q/ZBwJ67EAKkZZk5CbB06FLLzWPMeNKTlsCpzmI7FIJKXg
+ 6vk6zr+N1qfWxvn8k0oyndOHLxP8p1CafZLWSbwukClOSfnodsvvCmZqXxycVQy/P1
+ OPjUziaXewvFKTpiedzaG4YVZikSFLxZ/udC3QHDLhsauoBbv19zBNT3/AEEm2SMyM
+ wStTFyxD4asGw==
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-4147de378b9so10114415e9.3
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 07:13:46 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714140826; x=1714745626;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Xn6nWubBL19EDGjrFqb3XXxecvSzg5HtQsQJBUwrJrs=;
+ b=iJAAvkEjqlU3Qx8sCxCrOtZA38Uz4jKrTsHBXO+/50LUO0QNSvImjfI4BV3CsSqn9i
+ x1GlUQF1R88BM6ojvMF5LKHuyAOV0lq56mqkjS3NbTvU0plCoKoGJl/EPmYYrw6CLps4
+ yNycN5c4tgQK1Wbz2oX5ReduhYsi8JknTSpqTTPP/dJu5M7FbSJE8z+M05U0lcAX7/Sv
+ 35JJ4IxYQyxVZQ7H9I4ckVfB/U5T6JrKTqPgjXu3m5ietx9xANDM6Eq0BxEWiclj8ngw
+ gRGnO4g2kyCNL35a5EubsXL1gXxCt2oUps1r2Vkd5zr7bwd/wKBj3PTHX8EfOf1s7COQ
+ FZOQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXI5gnyvtbyduiLTJdoPWWXi6PWVnVyNWBzKE0K3jyXtPSvjhOtUFnlHlZF7jK5f5CCvyjPUfa1+Bb5p0rPMkbXUiITcw==
+X-Gm-Message-State: AOJu0Yx8QmOUbrWMVZlOwtcw1VVbvwu/6rOLZU9tx9EDsksewDMjKqO0
+ xIhOLn0V+UxvPM4xFo1uwkAIUk8G1HNCJMYdV3CDS4HsqsuRFOf91X+mTzDISgil8tPxgoUOwDU
+ MOzdzd6L8c3vLX3KLrAW3YBQS+qpAE39aMsy42sB0oyN/u6Ahtoj36V0riQVREiZcEjg=
+X-Received: by 2002:a05:600c:3546:b0:419:f505:8a7e with SMTP id
+ i6-20020a05600c354600b00419f5058a7emr2020159wmq.3.1714140826118; 
+ Fri, 26 Apr 2024 07:13:46 -0700 (PDT)
+X-Google-Smtp-Source: AGHT+IG/b9o6Q5j/Yu4UzqhYt1ATMv+W11PzCO1qACFPF3FKdZWxUKPb1gLww/tHc9UjgVMB2suqLQ==
+X-Received: by 2002:a05:600c:3546:b0:419:f505:8a7e with SMTP id
+ i6-20020a05600c354600b00419f5058a7emr2020144wmq.3.1714140825707; 
+ Fri, 26 Apr 2024 07:13:45 -0700 (PDT)
+Received: from workstation5.fritz.box
+ (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ by smtp.gmail.com with ESMTPSA id
+ s20-20020adfa294000000b003455e5d2569sm1460593wra.0.2024.04.26.07.13.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 26 Apr 2024 07:13:44 -0700 (PDT)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Shantur Rathore <i@shantur.com>, Bin Meng <bmeng@tinylab.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Joao Marcos Costa <jmcosta944@gmail.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [RFC 00/14] efi_loader: improve device-tree loading
+Date: Fri, 26 Apr 2024 16:13:07 +0200
+Message-ID: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=4171; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=7x+cjCRe5BkbGnKTvk48ReFA81q3YyUN48BctbePqXU=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhjTtdZ7mV3Xcm4qOvq67VR/2YP7G1qgzr4VyfQw0pW2mR
- 39d8HVPRywLgyATg6yYIou0zZUzeytnTBG+eFgOZg4rE8gQBi5OAZiIRT3DfIft2qs1Fh5wOndw
- /hE/n5is+Rmb5zHMD9CTElMUbXbP1+9jKWGdm//Z0qUGAA==
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF0002529D:EE_|SA1PR12MB7412:EE_
-X-MS-Office365-Filtering-Correlation-Id: a90e86a4-7603-4261-5177-08dc65f62b10
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?lWOYxAe7AB7SUyd/cNudIOV5Dw/tvmguleoz4RfiY6j1WRmvHEqIHzca0fQ6?=
- =?us-ascii?Q?DfZhLDmcZSPhQGpQzDHDpQbwjNJ8Hu2vsF5GzWJhQbXRQyD5ettsyUEqQol5?=
- =?us-ascii?Q?cwj7LclJJeb3KyZpkqVoDjnijHK4t5Ly0UJH9pk43PDXZiBU6HrR7DvD40sV?=
- =?us-ascii?Q?b6LSWjVvcnI0kN75F+MogTQ54cwiGrgTDscOkDu/YG65629f5wxvTOjLvzWk?=
- =?us-ascii?Q?lHM2Zcgqngxqci1XTxafRsZRdnplliiLkTPEcFcTHw7Df6Z9CI8Zd3TH4j7s?=
- =?us-ascii?Q?dLDKG2sq+qxf2dY7V0F5HpZkkndH4JowYwkT1lJ1bnZrhsRJUcx9lVnt7zWk?=
- =?us-ascii?Q?lgxS3mmKfWHnpEA7/oFm1YNdbFbCZsys6aMqxPNGh5L1HGYFmNEmtGIeX6NQ?=
- =?us-ascii?Q?sYR95clUnug7My/XHjjkLK2McHSqpn6s/2Tvx6YoRmLf2I0tGUmUjllss+Nx?=
- =?us-ascii?Q?eYb6Ym1YM3QKwAamujULFxMLYQ1wv3kepjhzM7JnmdxO3/2PDyNGYNhsACrF?=
- =?us-ascii?Q?7GRs62/LiAFPIJQ0WK5F+ayoJqn0xJoiRnr2Bin+idDf9U/cQA8SGvma0cRy?=
- =?us-ascii?Q?oX7yDYb5Wu3bTxPuquRKXD7LkRZA1kD2YwODaj0Ir2qCQLyEf1GxQnRYABQY?=
- =?us-ascii?Q?AVXf55ChHdJo5MYTWfg7jl/kluCEAfrG1yZNDzZvKXSWxxX8FqhAgHu+BYtP?=
- =?us-ascii?Q?oQOamyslppcFdkmuaK7ceddsLxJI+G07xOGu1upfbVYc3AGkicAn8wr5rj4R?=
- =?us-ascii?Q?6k+UJmuIuNUBKoyksHSHa8+KA+o1icTtxrI4Kdxz62jEa/5l/T4RKULUsQr7?=
- =?us-ascii?Q?H1cGl4N2PM9+TZOU1bB0IZxCaAPJ2ULEjthCGrOsqpPTZqbiAYCw/WvzNDFO?=
- =?us-ascii?Q?QdSdztxrfpuG8XtgspG3am+amJcLeAt5uTBJ6LIgjA45+vq5vNTSam0CFtwO?=
- =?us-ascii?Q?++MeBsgLeVHi7Z6nL8xp0ZGWHqAuWRCk22FboUHN+Pqd1mFH1e/UJUk3Pm/Y?=
- =?us-ascii?Q?Z7/6iq/qoRedF713azKoyUIb/GGUw12uC3hjjhWeL4jyMXxqUby2YBvtDVWC?=
- =?us-ascii?Q?/FsX4JxUzTcWLuYmWWJ9gvOpwQnC1Eu39Fd1Wyz5ycS1sUWjA//AjeVXppEb?=
- =?us-ascii?Q?ooWR7QyAbWCDBiOmS9UUEATE0GfoV+SpzCje0Xtzzt1jAl1dJr+wMmWgamMo?=
- =?us-ascii?Q?URa9JswFBbNoBF2ccpyTY/hpSxe38pcnsLvp2jiQdzv+DseeiW4+dVvTjGGg?=
- =?us-ascii?Q?y+OqUa4DJcIV/lb/X5alRZ3I5LqTKPo6mywbXM1CSk6LiFztjmg3QlM27xg/?=
- =?us-ascii?Q?1++P6BFmAifQUnQgkARn5G1ZQdU3usy30FNmkqNoI+QG5nigQnuZ69HPvaC6?=
- =?us-ascii?Q?Yle4aoV7uyN0Fdp6deHsr5I+2Rfz?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(36860700004)(1800799015)(82310400014)(376005); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Apr 2024 13:38:33.7523 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a90e86a4-7603-4261-5177-08dc65f62b10
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF0002529D.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7412
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,107 +107,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Code is pretty much supports only DT properties and completely ignore
-information coming from sysinfo driver.
-Code is calling smbios_add_prop() which calls with
-smbios_add_prop_si(SYSINFO_ID_NONE). But SYSINFO_ID_NONE can't
-differentiate different entries from sysinfo driver.
-That's why introduce separate SYSINFO macros which can be used in sysinfo
-driver and passed to smbios structure.
+In U-Boot EFI boot options can already specify both an EFI binary and
+an initrd. With this series we can additionally define the matching
+device-tree to be loaded in the boot option.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+With the last patch the boot manager will fall back the device-tree
+specified by $fdtfile in directories '/dtb/', '/', or '/dtb/current/'
+on the boot device if no device-tree is specified in the boot
+option or via a bootefi command parameter.
 
- include/sysinfo.h |  9 +++++++++
- lib/smbios.c      | 34 ++++++++++++++++++++++++++--------
- 2 files changed, 35 insertions(+), 8 deletions(-)
+Heinrich Schuchardt (14):
+  efi_loader: pass GUID by address to efi_dp_from_lo
+  efi_loader: library function efi_dp_merge
+  efi_loader: simplify efi_dp_concat()
+  cmd: eficonfig: add support for setting fdt
+  cmd: efidebug: add support for setting fdt
+  efi_loader: superfluous efi_restore_gd after EFI_CALL
+  cmd: terminate efidebug test bootmgr early on error
+  efi_loader: improve error handling in try_load_entry()
+  efi_loader: do not install dtb if bootmgr fails
+  efi_loader: load device-tree specified in boot option
+  efi_loader: move distro_efi_get_fdt_name()
+  efi_loader: return binary from efi_dp_from_lo()
+  efi_loader: export efi_load_image_from_path
+  efi_loader: load distro dtb in bootmgr
 
-diff --git a/include/sysinfo.h b/include/sysinfo.h
-index 524c7d6b223f..8a77ef448565 100644
---- a/include/sysinfo.h
-+++ b/include/sysinfo.h
-@@ -43,8 +43,17 @@ enum sysinfo_id {
- 	SYSINFO_ID_NONE,
- 
- 	/* For SMBIOS tables */
-+	SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
-+	SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
- 	SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
-+	SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
-+	SYSINFO_ID_SMBIOS_SYSTEM_SKU,
-+	SYSINFO_ID_SMBIOS_SYSTEM_FAMILY,
-+	SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
-+	SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
- 	SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
-+	SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
-+	SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
- 
- 	/* For show_board_info() */
- 	SYSINFO_ID_BOARD_MODEL,
-diff --git a/lib/smbios.c b/lib/smbios.c
-index 3c1b3cf47e72..cd4a4aef6309 100644
---- a/lib/smbios.c
-+++ b/lib/smbios.c
-@@ -383,8 +383,12 @@ static int smbios_write_type1(ulong *current, int handle,
- 	memset(t, 0, sizeof(struct smbios_type1));
- 	fill_smbios_header(t, SMBIOS_SYSTEM_INFORMATION, len, handle);
- 	smbios_set_eos(ctx, t->eos);
--	t->manufacturer = smbios_add_prop(ctx, "manufacturer", NULL);
--	t->product_name = smbios_add_prop(ctx, "product", NULL);
-+	t->manufacturer = smbios_add_prop_si(ctx, "manufacturer",
-+					     SYSINFO_ID_SMBIOS_SYSTEM_MANUFACTURER,
-+					     NULL);
-+	t->product_name = smbios_add_prop_si(ctx, "product",
-+					     SYSINFO_ID_SMBIOS_SYSTEM_PRODUCT,
-+					     NULL);
- 	t->version = smbios_add_prop_si(ctx, "version",
- 					SYSINFO_ID_SMBIOS_SYSTEM_VERSION,
- 					NULL);
-@@ -392,11 +396,15 @@ static int smbios_write_type1(ulong *current, int handle,
- 		t->serial_number = smbios_add_prop(ctx, NULL, serial_str);
- 		strncpy((char *)t->uuid, serial_str, sizeof(t->uuid));
- 	} else {
--		t->serial_number = smbios_add_prop(ctx, "serial", NULL);
-+		t->serial_number = smbios_add_prop_si(ctx, "serial",
-+						      SYSINFO_ID_SMBIOS_SYSTEM_SERIAL,
-+						      NULL);
- 	}
- 	t->wakeup_type = SMBIOS_WAKEUP_TYPE_UNKNOWN;
--	t->sku_number = smbios_add_prop(ctx, "sku", NULL);
--	t->family = smbios_add_prop(ctx, "family", NULL);
-+	t->sku_number = smbios_add_prop_si(ctx, "sku",
-+					   SYSINFO_ID_SMBIOS_SYSTEM_SKU, NULL);
-+	t->family = smbios_add_prop_si(ctx, "family",
-+				       SYSINFO_ID_SMBIOS_SYSTEM_FAMILY, NULL);
- 
- 	len = t->length + smbios_string_table_len(ctx);
- 	*current += len;
-@@ -415,12 +423,22 @@ static int smbios_write_type2(ulong *current, int handle,
- 	memset(t, 0, sizeof(struct smbios_type2));
- 	fill_smbios_header(t, SMBIOS_BOARD_INFORMATION, len, handle);
- 	smbios_set_eos(ctx, t->eos);
--	t->manufacturer = smbios_add_prop(ctx, "manufacturer", NULL);
--	t->product_name = smbios_add_prop(ctx, "product", NULL);
-+	t->manufacturer = smbios_add_prop_si(ctx, "manufacturer",
-+					     SYSINFO_ID_SMBIOS_BASEBOARD_MANUFACTURER,
-+					     NULL);
-+	t->product_name = smbios_add_prop_si(ctx, "product",
-+					     SYSINFO_ID_SMBIOS_BASEBOARD_PRODUCT,
-+					     NULL);
- 	t->version = smbios_add_prop_si(ctx, "version",
- 					SYSINFO_ID_SMBIOS_BASEBOARD_VERSION,
- 					NULL);
--	t->asset_tag_number = smbios_add_prop(ctx, "asset-tag", NULL);
-+
-+	t->serial_number = smbios_add_prop_si(ctx, "serial",
-+					      SYSINFO_ID_SMBIOS_BASEBOARD_SERIAL,
-+					      NULL);
-+	t->asset_tag_number = smbios_add_prop_si(ctx, "asset-tag",
-+						 SYSINFO_ID_SMBIOS_BASEBOARD_ASSET_TAG,
-+						 NULL);
- 	t->feature_flags = SMBIOS_BOARD_FEATURE_HOSTING;
- 	t->board_type = SMBIOS_BOARD_MOTHERBOARD;
- 	t->chassis_handle = handle + 1;
+ boot/bootmeth_efi.c                           |  60 +-----
+ cmd/bootefi.c                                 |   1 -
+ cmd/eficonfig.c                               |  90 +++++++--
+ cmd/efidebug.c                                |  89 +++++++--
+ include/efi_loader.h                          |  15 +-
+ lib/efi_loader/Makefile                       |   1 +
+ lib/efi_loader/efi_bootbin.c                  |   2 +-
+ lib/efi_loader/efi_bootmgr.c                  | 186 +++++++++++++-----
+ lib/efi_loader/efi_boottime.c                 |   3 +-
+ lib/efi_loader/efi_device_path.c              |  77 +++++---
+ lib/efi_loader/efi_device_path_utilities.c    |   2 +-
+ lib/efi_loader/efi_fdt.c                      | 117 +++++++++++
+ lib/efi_loader/efi_helper.c                   |   6 +-
+ lib/efi_loader/efi_load_initrd.c              |   2 +-
+ test/py/tests/test_efi_secboot/test_signed.py |  28 +--
+ .../test_efi_secboot/test_signed_intca.py     |  10 +-
+ .../tests/test_efi_secboot/test_unsigned.py   |   6 +-
+ 17 files changed, 489 insertions(+), 206 deletions(-)
+ create mode 100644 lib/efi_loader/efi_fdt.c
+
 -- 
-2.44.0
+2.43.0
 
