@@ -4,75 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDBC3C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 15:33:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B426CC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 15:44:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5100F885B4;
-	Fri, 26 Apr 2024 17:33:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E1FFD88354;
+	Fri, 26 Apr 2024 17:44:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VP2qUWNb";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dC7/4BdB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6122B88698; Fri, 26 Apr 2024 17:33:46 +0200 (CEST)
-Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
- [IPv6:2607:f8b0:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F03EF88384; Fri, 26 Apr 2024 17:44:29 +0200 (CEST)
+Received: from lelv0142.ext.ti.com (lelv0142.ext.ti.com [198.47.23.249])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C6DA81EEF
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 17:33:44 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 883AC8833D
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 17:44:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=macroalpha82@gmail.com
-Received: by mail-ot1-x32e.google.com with SMTP id
- 46e09a7af769-6eb6b9e1808so1402394a34.3
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 08:33:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714145623; x=1714750423; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=P955uJcGgbhoXtzf85BSpV4aNBBUBEfaNHJbuCpnNxs=;
- b=VP2qUWNbNu3wQpihjjuF6ujD1ElyNomnxr5zTqxPKAm+qUsO9Yc4b/ESmPCajPRP2D
- 29rkSl6ABc7CMlQ+Gujnz9UYCpwPUa0u3wCbrHUyxJNEIIQb+Ts72Vf6fIb4Juq32bvo
- E3LZIrBlYlhyR3J639KNrIsJjapl/O6AyKzH2mT9I6HcqJlG4oUcOuqQnn0geNHfiURY
- Yll1IeyTpkJ3bewHVPwEu+CA+j9SBck2szNuViofiTnWu0xNETsOfLF5Og2axlzogmz9
- LvfMVxxNkJyvwMTEKMyQEuh+HIbos+/DAGjVgjofVz75bY+hf3QmrfafiBlgga+f69rY
- /EKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714145623; x=1714750423;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=P955uJcGgbhoXtzf85BSpV4aNBBUBEfaNHJbuCpnNxs=;
- b=M6WLcutP7qy7JCZ6kO88HLrZqFzdUN31HpR3HiF1kb3d36ziZxrdlMGzvUD74Wl8Wy
- C07ZeUtInO/8YXPoHUEi8FgbOqt9wbH5a17Ow8UirH9qWexHJEh1JblsFj2EYb+0SLDd
- d0feHu2RJOo/ghfyj0xxzBEE0yUrKymvEMM0vHVWJQJf4YXKHd693nNDijTV7qjdaN7w
- ZYoCzU+ti1J9JVv3zuv5rWu8W9XWs2EayRt265v5juoC6wrlPGKrN7WBTlEHDcThbD+2
- ybxHo10SZ30aafkO3lD+EqB/iKJBr3cHkMTAx7G9V4EdRVy/NmpYAcrtY85t0fT1EKiy
- oGUw==
-X-Gm-Message-State: AOJu0Yy9gjkpbAh2f+BbGGh8/+z9jEaN0vxG6QOmSQ+2lYt/Bd3Vg27M
- NNlvM+5TfX88IlyxwvXNaDEVnuDSBvAU5Qz83d88t/ji9GSGbnGehmCMDg==
-X-Google-Smtp-Source: AGHT+IHS3kKbBuuplmjcGgSvNO6F03G2NMmOyUUZNXV71l1QeG99fgAMTy1yFnAyj2lJaDkd0StM9g==
-X-Received: by 2002:a05:6830:1e34:b0:6ea:181a:a539 with SMTP id
- t20-20020a0568301e3400b006ea181aa539mr3297121otr.3.1714145622710; 
- Fri, 26 Apr 2024 08:33:42 -0700 (PDT)
-Received: from localhost.localdomain ([75.28.21.198])
- by smtp.gmail.com with ESMTPSA id
- w38-20020a056830412600b006ea27c70ab1sm3024128ott.27.2024.04.26.08.33.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Apr 2024 08:33:42 -0700 (PDT)
-From: Chris Morgan <macroalpha82@gmail.com>
-To: u-boot@lists.denx.de
-Cc: trini@konsulko.com, kever.yang@rock-chips.com, philipp.tomsich@vrull.eu,
- sjg@chromium.org, Chris Morgan <macromorgan@hotmail.com>
-Subject: [PATCH] rockchip: Correct UUID for root partitions
-Date: Fri, 26 Apr 2024 10:33:38 -0500
-Message-Id: <20240426153338.210102-1-macroalpha82@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 43QFiOEO094152;
+ Fri, 26 Apr 2024 10:44:24 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1714146264;
+ bh=nRX+ZAX+6hjl+tj3MUv2LsEFk4sMr297iIOdWsBKRdA=;
+ h=From:To:CC:Subject:Date;
+ b=dC7/4BdBFfL7OgZDghdkbtMdqB9yg/45t+m3BxnN2UINxC/fDj//3qgiCU5dNzOXO
+ 24GDu1fgDoDbWr5a0fGQuAEvI9aqrzSdTwRrJHH1ZOEELJI/ndrypNZrd8mhoRtNMN
+ ybdSoxS2ihMt4KVQ+yYnpX5zdeWWVl4RHa7RvHTU=
+Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 43QFiNkr017160
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 26 Apr 2024 10:44:23 -0500
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 26
+ Apr 2024 10:44:23 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 26 Apr 2024 10:44:23 -0500
+Received: from ula0226330.dhcp.ti.com (ula0226330.dhcp.ti.com [128.247.81.8])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 43QFiNW8069470; 
+ Fri, 26 Apr 2024 10:44:23 -0500
+From: Andrew Davis <afd@ti.com>
+To: Neha Malcom Francis <n-francis@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Nishanth Menon <nm@ti.com>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, Andrew Davis <afd@ti.com>
+Subject: [PATCH] arm: mach-k3: am62ax: Fix typo in ROM data macro name
+Date: Fri, 26 Apr 2024 10:44:23 -0500
+Message-ID: <20240426154423.10547-1-afd@ti.com>
+X-Mailer: git-send-email 2.39.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,39 +78,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Chris Morgan <macromorgan@hotmail.com>
+s/ENTENDED/EXTENDED
 
-For root partitions, the UUID should still be random but the partition
-type uuid should either be b921b045-1df0-41c3-af44-4c6f280d3fae for
-aarch64 or 69dad710-2ce4-4e3c-b16c-21a1d49abed3 for aarch32. Correct
-the attribute so it is the partition type that is hard coded and not
-the partition unique identifier.
-
-Note that in order for "type" to be used the config option
-CONFIG_PARTITION_TYPE_GUID must be enabled. If this option is not
-enabled then the type is ignored and instead the partition type
-remains the generic ebd0a0a2-b9e5-4433-87c0-68b6b72699c7 for a
-Linux data partition.
-
-Fixes: 42ec247e6988 ("rockchip: use UUID for root partitions")
-Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
+Signed-off-by: Andrew Davis <afd@ti.com>
 ---
- include/configs/rockchip-common.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/arm/mach-k3/am62a7_init.c                 | 2 +-
+ arch/arm/mach-k3/include/mach/am62a_hardware.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/include/configs/rockchip-common.h b/include/configs/rockchip-common.h
-index 9121bba373..f620579248 100644
---- a/include/configs/rockchip-common.h
-+++ b/include/configs/rockchip-common.h
-@@ -26,7 +26,7 @@
- 	"name=loader2,start=8MB,size=4MB,uuid=${uuid_gpt_loader2};" \
- 	"name=trust,size=4M,uuid=${uuid_gpt_atf};" \
- 	"name=boot,size=112M,bootable,uuid=${uuid_gpt_boot};" \
--	"name=rootfs,size=-,uuid="ROOT_UUID
-+	"name=rootfs,size=-,uuid=${uuid_gpt_rootfs},type="ROOT_UUID
+diff --git a/arch/arm/mach-k3/am62a7_init.c b/arch/arm/mach-k3/am62a7_init.c
+index 2a0221a3718..658828cf75f 100644
+--- a/arch/arm/mach-k3/am62a7_init.c
++++ b/arch/arm/mach-k3/am62a7_init.c
+@@ -31,7 +31,7 @@ static void store_boot_info_from_rom(void)
+ 	bootindex = *(u32 *)(CONFIG_SYS_K3_BOOT_PARAM_TABLE_INDEX);
  
- #endif
+ 	if (IS_ENABLED(CONFIG_CPU_V7R)) {
+-		memcpy(&bootdata, (uintptr_t *)ROM_ENTENDED_BOOT_DATA_INFO,
++		memcpy(&bootdata, (uintptr_t *)ROM_EXTENDED_BOOT_DATA_INFO,
+ 		       sizeof(struct rom_extended_boot_data));
+ 	}
+ }
+diff --git a/arch/arm/mach-k3/include/mach/am62a_hardware.h b/arch/arm/mach-k3/include/mach/am62a_hardware.h
+index 11080801c4c..cd61abe0185 100644
+--- a/arch/arm/mach-k3/include/mach/am62a_hardware.h
++++ b/arch/arm/mach-k3/include/mach/am62a_hardware.h
+@@ -66,7 +66,7 @@
+ #define MCU_CTRL_DEVICE_CLKOUT_32K_CTRL		(MCU_CTRL_MMR0_BASE + 0x8058)
+ #define MCU_CTRL_DEVICE_CLKOUT_LFOSC_SELECT_VAL	(0x3)
+ 
+-#define ROM_ENTENDED_BOOT_DATA_INFO		0x43c3f1e0
++#define ROM_EXTENDED_BOOT_DATA_INFO		0x43c3f1e0
+ 
+ #define K3_BOOT_PARAM_TABLE_INDEX_OCRAM         0x7000F290
  
 -- 
-2.34.1
+2.39.2
 
