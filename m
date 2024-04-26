@@ -4,99 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E883FC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 14:53:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2D56C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 15:11:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E81088233;
-	Fri, 26 Apr 2024 16:53:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 3BC628824B;
+	Fri, 26 Apr 2024 17:11:35 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ts2Sj9Of";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="Ue/ZV0kW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 311FF88233; Fri, 26 Apr 2024 16:53:02 +0200 (CEST)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id A01598824B; Fri, 26 Apr 2024 17:11:33 +0200 (CEST)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2BAF088231
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 16:53:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CBC748823A
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 17:11:29 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-lj1-f199.google.com (mail-lj1-f199.google.com
- [209.85.208.199])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 274C13FAEB
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 14:52:58 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1714143178;
- bh=oHQv4CXatV6HVLMhpMiXl66kZU5mqZxWOVus6DxymK0=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=ts2Sj9OfN+3TtnLXE81U0ZlY2cJ67+ZecPeb2NFsUvDaETacrXVZ82IXhyEGRco+g
- nwnY2a9kpu83mKl/KsvkJ98y8rPz0lpEf40E6QHpAs2I2dQrGiKqFJi8wM57yQ3YUu
- YAN/HjeCSSz6khRdtP+suOORuOv8iM4jpe6Hc10RgN4L9eLkYOqIWF0kGLMiBcR9ui
- GCKzP3q2divv2yysVVr9K/i1Bt96kWvO5zUaOOp0cYiZrRwbZRBzb4bjwDaxn/9hRN
- FlxTkGjGyrdCxALz/5+FaEYCxbkssxlGCDnMMh23xeObSNYAtb2IIBykcl36xbr1Nd
- AIHsq7nWbgfIA==
-Received: by mail-lj1-f199.google.com with SMTP id
- 38308e7fff4ca-2db099e687fso18631711fa.1
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 07:52:58 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-a58989cd1f8so295849166b.1
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 08:11:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gateworks.com; s=google; t=1714144289; x=1714749089; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=MXMfavX9m4g9ssAPkexjmq5TAzzHYVkjDyhPi3odo50=;
+ b=Ue/ZV0kWxkVsT5dB++kXzvlJL9dn4HiHMf8sC/dk8ZQIwZA+tCgQm5XAGTd7duFx6u
+ oITZhnI+Fy1ejDPbtzzYxtYD3n1ebKVIwD3Cf5TJ4mjabXPVqLTCDmHv5HaQZf29GqsL
+ anERXWDHVpUKulmabnu06FEDR6l3rfyrisgXtHfzQGkE+C6HicPvGClANBRRj4INmlys
+ GJ/kbqwwVuILwYaNE8WLFZGmilUXDlf9MCQN3GzP1qfMsXWVllrrsunT7mjTszCGH7O3
+ JliTLpUFHS6gLXyGWyRubIMy5+/minOi+LBhthwq8bak4kTLB5+GR5ZAzXVeowTCiGE2
+ RxIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714143177; x=1714747977;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=oHQv4CXatV6HVLMhpMiXl66kZU5mqZxWOVus6DxymK0=;
- b=O4FBPpVVxzrAIEUWnnPfU+5aWUuD0pezUCH24068p/pBiGwaf6hVldbLGAszfSU4AS
- A3v5/Z+i6ZpxQjkRCaD6nSCT+XmLuDjDm70I6L6CusxBsZeYVxo2YB9h08rnaUIK5l6C
- /V0dVfiTBX7E5hUanqL36XUeUyXihN0QsdhHPbPvHbEdUspb6muattDwyVr2oOun6ytj
- SCCYHfqrLt7h+roFJbxh01qomPAm4ryxmZc4nVXBOnopNRWPQ3eknoGQI+T9cEx4dien
- UVr5dsAHa0//uv8QqSGCxd6mbflqt22574bkaYXAwYb8uK8DFJC6d/2asUgn1YD3N0bW
- 8yiQ==
+ d=1e100.net; s=20230601; t=1714144289; x=1714749089;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=MXMfavX9m4g9ssAPkexjmq5TAzzHYVkjDyhPi3odo50=;
+ b=KGEgArHT0QnlReamEPfnI5liiQfEfraild7AlzpxtthWhk95EdCWGDvVq2T6f7RKML
+ nlgNDqGZOau9JduedxrXSPE/uiYrGgMTQzCtwsLcDftczbFkduxezRdI6Hxx4DBxtxR5
+ DH5vjlWQcUxymvUz/s1+yAZbNs3u455ChjNE9KnSOemaXXZ5b87TMrQImKLRpI0nPHQ4
+ 925ZscLDfqAZXaRffjTbngx+GH0xAD4sTR55z5fXp3PBQ1pi/OuCCylKYwIaOSkFjmMU
+ 3jGTMeQYT6EQUji1qNdqBV318iZY8ZqnHHUwdQiNN/sDUFpW34NHYo5bVimJK4oxvkfD
+ KMOA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXIhVwR+6mclvGxpWJsJtHB72RYJ2FRCQTRSLAVqpfjU7kyPeUKu7zxhXer3a50XL7x9F7lvpKkFVdStc/iAhiW2l4ybA==
-X-Gm-Message-State: AOJu0Yy3d85tRMn2qAyWI8mY2Tr5O2010yXagRpXlIXayCPQptJI2WEB
- 008nbnP24ghAT1yXgdhneDBHIKUca9gL0mbbWaePcYhOdarAlja+L7F9C1VLF41Mm3NIbH5AZsT
- UI6bl2BF6AIhLX1f/ClIEC1RCnJb3lFRyHFNy9OtA9hn+H7NbduLEJisneTnrQU+ao18=
-X-Received: by 2002:a2e:b5cd:0:b0:2d8:394c:6e7e with SMTP id
- g13-20020a2eb5cd000000b002d8394c6e7emr1532835ljn.15.1714143177426; 
- Fri, 26 Apr 2024 07:52:57 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IHRmzRa8kc1DQFgRocpZudBFAhorwVj3rk1MLLZdc79nsUulU1cQDUwmTHP/lvOcwJSVNmlbg==
-X-Received: by 2002:a2e:b5cd:0:b0:2d8:394c:6e7e with SMTP id
- g13-20020a2eb5cd000000b002d8394c6e7emr1532824ljn.15.1714143176840; 
- Fri, 26 Apr 2024 07:52:56 -0700 (PDT)
-Received: from [192.168.123.126]
- (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
- by smtp.gmail.com with ESMTPSA id
- t10-20020a5d49ca000000b0034bfc32a4f6sm4875616wrs.48.2024.04.26.07.52.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 26 Apr 2024 07:52:56 -0700 (PDT)
-Message-ID: <aac7887b-b123-4006-bbcd-4549e8e44a54@canonical.com>
-Date: Fri, 26 Apr 2024 16:52:55 +0200
+ AJvYcCWndUDiskFfybdmMF8dUoKqdv/61qQmR5t8U9IZiBcWitWr8II0vY8GjYi1Jy2qa08VuSjMrgrealLJXyLTmelytFzQHg==
+X-Gm-Message-State: AOJu0YzcznRirOhM0m1YFUrntvZY4ZNbTr3cVql6JfA7ZBONG8eE0aht
+ NkdZp00enjvQerIa4r3AN4QBi6vMWqh31QDQL5EdYWNmzwnAkwqmXp04J2T/gZm/oOaLvO4o3fh
+ YWU2QgoS1fO2U5Kj9CMTUypjt55R11C8HY/1yUg==
+X-Google-Smtp-Source: AGHT+IGLXh14+jQTPWPazHUU9v8M3d1M8fcn7C+TyfLGyFrOkr/8jJEsbBbpbTsK8L8qSi2UeCT7MS9Y1QjRUpf2LNA=
+X-Received: by 2002:a17:906:7d0:b0:a55:a8a6:aac6 with SMTP id
+ m16-20020a17090607d000b00a55a8a6aac6mr2089437ejc.54.1714144289179; Fri, 26
+ Apr 2024 08:11:29 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 02/14] efi_loader: library function efi_dp_merge
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Shantur Rathore <i@shantur.com>, Bin Meng <bmeng@tinylab.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Raymond Mao <raymond.mao@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Joao Marcos Costa <jmcosta944@gmail.com>, u-boot@lists.denx.de
-References: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
- <20240426141321.232236-3-heinrich.schuchardt@canonical.com>
- <CAC_iWjKg9NDKnoNa-V+H+5OOJe2uYsHb0vXM0+-QdCxUctiksg@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAC_iWjKg9NDKnoNa-V+H+5OOJe2uYsHb0vXM0+-QdCxUctiksg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20240426001419.1210364-1-tharvey@gateworks.com>
+ <CAOMZO5DYtWRxmBH9n5W362ajx8VRxmwwD7xEJ7hv-kAFbrKkMA@mail.gmail.com>
+ <CAOMZO5D512G07JUX9=ZDxFJciD40v678o-2_mo_awn+-u4=Mow@mail.gmail.com>
+In-Reply-To: <CAOMZO5D512G07JUX9=ZDxFJciD40v678o-2_mo_awn+-u4=Mow@mail.gmail.com>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Fri, 26 Apr 2024 08:11:17 -0700
+Message-ID: <CAJ+vNU29zVMM+8sk3DHL=6XjhqJa+UhPwtTdU-Fkof43p=4=Eg@mail.gmail.com>
+Subject: Re: [PATCH] cmd: mmc: allow use of hardware parittion names for mmc
+ partconf
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,92 +94,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 26.04.24 16:30, Ilias Apalodimas wrote:
-> Hi Heinrich,
-> 
-> On Fri, 26 Apr 2024 at 17:13, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> Provide a function to append a device_path to a list of device paths
->> that is separated by final end nodes.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>   include/efi_loader.h             |  3 +++
->>   lib/efi_loader/efi_device_path.c | 31 +++++++++++++++++++++++++++++++
->>   2 files changed, 34 insertions(+)
->>
->> diff --git a/include/efi_loader.h b/include/efi_loader.h
->> index 9600941aa32..a7d7b8324f1 100644
->> --- a/include/efi_loader.h
->> +++ b/include/efi_loader.h
->> @@ -944,6 +944,9 @@ struct efi_load_option {
->>
->>   struct efi_device_path *efi_dp_from_lo(struct efi_load_option *lo,
->>                                         const efi_guid_t *guid);
->> +struct efi_device_path *efi_dp_merge(const struct efi_device_path *dp1,
->> +                                    efi_uintn_t *size,
->> +                                    const struct efi_device_path *dp2);
->>   struct efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
->>                                        const struct efi_device_path *dp2,
->>                                        bool split_end_node);
->> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
->> index 46aa59b9e40..16cbe41d32f 100644
->> --- a/lib/efi_loader/efi_device_path.c
->> +++ b/lib/efi_loader/efi_device_path.c
->> @@ -270,6 +270,37 @@ struct efi_device_path *efi_dp_dup(const struct efi_device_path *dp)
->>          return ndp;
->>   }
->>
->> +/**
->> + * efi_dp_merge() - Concatenate two device paths separated by final end node
->> + *
->> + * @dp1:       first device path
->> + * @size:      pointer to length of @dp1, total size on return
->> + * @dp2:       second device path
->> + *
->> + * Return:     concatenated device path or NULL
->> + */
->> +struct efi_device_path *efi_dp_merge(const struct efi_device_path *dp1,
->> +                                    efi_uintn_t *size,
->> +                                    const struct efi_device_path *dp2)
->> +{
->> +       efi_uintn_t len, len1, len2;
->> +       struct efi_device_path *dp;
->> +       u8 *p;
->> +
->> +       len1 = *size;
->> +       len2 = efi_dp_size(dp2) + sizeof(END);
->> +       len = len1 + len2;
->> +       dp = efi_alloc(len);
->> +       if (!dp)
->> +               return NULL;
->> +       memcpy(dp, dp1, len1);
->> +       p = (u8 *)dp + len1;
->> +       memcpy(p, dp2, len2);
->> +       *size = len;
-> 
-> Can't we just use efi_dp_concat()?
+On Thu, Apr 25, 2024 at 6:37=E2=80=AFPM Fabio Estevam <festevam@gmail.com> =
+wrote:
+>
+> On Thu, Apr 25, 2024 at 10:35=E2=80=AFPM Fabio Estevam <festevam@gmail.co=
+m> wrote:
+>
+> > This is a nice improvement:
+> >
+> > Reviewed-by: Fabio Estevam <festevam@gmail.com>
+>
+> There is a typo in the Subject: "partition"
 
-efi_dp_concat cannot be used to put a device-path end-node in between 
-two device-paths that are concatenated. We need that separator in the 
-load options.
+Hi Fabio,
 
-Best regards
+Thanks - I will fix this in v2.
 
-Heinrich
+Best Regards,
 
-> 
-> Thanks
-> /Ilias
->> +
->> +       return dp;
->> +}
->> +
->>   /**
->>    * efi_dp_concat() - Concatenate two device paths and add and terminate them
->>    *                   with an end node.
->> --
->> 2.43.0
->>
-
+Tim
