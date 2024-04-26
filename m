@@ -4,96 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26860C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 14:16:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F39A1C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 14:19:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40ECF8868B;
-	Fri, 26 Apr 2024 16:14:12 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 5BB9F89176;
+	Fri, 26 Apr 2024 16:19:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="WtbJP0Lf";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="we9A648x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F1EB88F03; Fri, 26 Apr 2024 16:14:09 +0200 (CEST)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id E884789175; Fri, 26 Apr 2024 16:19:45 +0200 (CEST)
+Received: from mail-lf1-x136.google.com (mail-lf1-x136.google.com
+ [IPv6:2a00:1450:4864:20::136])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79BEF88728
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 16:14:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74E1087F4A
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 16:19:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
- [209.85.221.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 567E73FE65
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 14:14:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1714140840;
- bh=wiiYQD4IlqLYLTMQaivXL/3FtvuZbrAFoz04S0nkXHI=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=WtbJP0Lfhn0o7EifWALhNApsnfdbVRgv1No9g3GUofLh+uHzGoIevA21qK2zWY4zr
- kaUA83CVL/FCvN7nWiLtABbsXYrLOygl4aMDSFIsWfzlQaMy+sKgJx+ISB6PadgG4W
- 8OyiJjA1e5eGFYxECZeIz/IhWTWWFLj11L5kZF+MocW9z2I1Jz1udKggmCBJ0eMUsW
- Mbm6QPTGqyvzGfKmK3P7nfUL0ADGSFgg5qJZYUVxkUUMA7UhDZYJXxp3xp90+R33yo
- UfHBfq8FTHA2bcwfwyOTjQwppZ8Vyos1w0h12CwlSuNq4VK1tU8F2nYNikvtMU19pp
- bspC2iP80YzCQ==
-Received: by mail-wr1-f71.google.com with SMTP id
- ffacd0b85a97d-347f92ab882so1481003f8f.0
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 07:14:00 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-lf1-x136.google.com with SMTP id
+ 2adb3069b0e04-51b526f0fc4so2851438e87.1
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 07:19:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1714141183; x=1714745983; darn=lists.denx.de;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fnoJ2f12+jdQQKO8LXDQqLjeZqAqNUj5ojTEb/bxl2U=;
+ b=we9A648xWHTu4Hljfb3xrPzVgGyLoCRjkpmP3f1L5Xj6+KC7yxuc2Zyag0dqCOiye7
+ Pdxw86Et/X43y3iAyd+uPuLT8QRbfPJN3/6y5m9VvqzIj9xJawHU3lo808PzD66HHcbb
+ sMPFF5wUsIFxl1AqX/bJkZEna/KWNLbd/NZ7yZFY+OE+DIZ06HzNFxoRjK9FQn6yVzex
+ JfkFLm2LGkVuSM/sErO4KVnOv9+LoX7rV7/eicTteTr/dn5Ed6wkZWZB/OzLE5Ngi8qt
+ suk4bHx369G0wwJ3gl75ZgjJfXvv6EDGPvJFXLYu4d5milLwkGObm1o1neHTCZIXp/zz
+ rhIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714140840; x=1714745640;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wiiYQD4IlqLYLTMQaivXL/3FtvuZbrAFoz04S0nkXHI=;
- b=PY10sCqW5HQYrcVWm9iY06z8KyX5Hwc2Wc7SURlUaURhegQmG1RtnhrPDVYROHaO1Y
- sK3Ddj5VhuuWn0l6lEXgMbJ9cdyd+MFQl0U/R6Pw2zujuT4hhivZCZQrizKMM5DccHGb
- 0ocL1HW9Dctrz3n/yYU5qQxIQYWxsSTAKZZdhRuyLx03yaL0nxHGLbnaMdkZg7Slt4jP
- vi7y2vG0aFhmM9JNxuMUJKfYA0Dux9MnVdQLIP+VdJ5q6l1xhUPG7jFByVatsiyQTkjG
- Vs95uMvtxHdRDMmt5HaViKr8p2kxR9ngZzS6nGDqtlRsgD0kqsRLXiyzFP3GVUp9EDnu
- 5dqw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXsFVEqf4aUELOXmrP7JPb6Mvt2iLwi2+H3pzT0Ixyf9v9iU2Sva3WrjVIZxdaoRxWmUqUtATQFYg1MP5tM/wYV4t+XYw==
-X-Gm-Message-State: AOJu0YxFcUXeMhqyH7a27jC/xME3an9XEC85+je7sPKpSaNL21cxjwRp
- iWnjxlMf4Mc39zDEY0ylNaCsG0lA4ResS2OT3LHP5hFTJdcIj3xTEDxqL4SL9KgHn2xuWtujy4F
- l6X2DzPRkpDz9b4RP4VJpFozLMNTFxM//AwjPWQdTUkQAWF+iOMceXFqpHmtjb5D+WYk=
-X-Received: by 2002:a5d:5f86:0:b0:343:f3d9:a9d5 with SMTP id
- dr6-20020a5d5f86000000b00343f3d9a9d5mr2594405wrb.10.1714140839907; 
- Fri, 26 Apr 2024 07:13:59 -0700 (PDT)
-X-Google-Smtp-Source: AGHT+IE3W7tVl/+blx0da2asseSOBihiQSa6Whax+KjhaeBsLRyQmBZYPGuyQtmSNGO7IsQFsNResg==
-X-Received: by 2002:a5d:5f86:0:b0:343:f3d9:a9d5 with SMTP id
- dr6-20020a5d5f86000000b00343f3d9a9d5mr2594386wrb.10.1714140839629; 
- Fri, 26 Apr 2024 07:13:59 -0700 (PDT)
-Received: from workstation5.fritz.box
- (ip-062-143-245-032.um16.pools.vodafone-ip.de. [62.143.245.32])
+ d=1e100.net; s=20230601; t=1714141183; x=1714745983;
+ h=cc:to:content-transfer-encoding:mime-version:message-id:date
+ :subject:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fnoJ2f12+jdQQKO8LXDQqLjeZqAqNUj5ojTEb/bxl2U=;
+ b=FFx48P8nrwdJHgEuW7qWGG7Zc9W6oNIoQY/mDdAZly7FV7eCKPgFMRsx9OQIyp4OxJ
+ rQEej67Xdwg5+YrEOeufxPX7quJ1FMSuOdQD5xcMVdoXgvMQ0AomHzxvOoGfmV6MtqIh
+ NjX0lWElSMRehgP+30mzqI6IhY79kDbZDXJzxEJMaSid/M+c/DAU8p4v1LY0tweDppnL
+ zbY3W8SesdoHDBlM0EL9K4sBz5Nqg6q0JpyxK4+7ZydywYAOOLcSh430CZRumhrMg3qk
+ NAr6QY9GiuZftm++trRHzJw6mwxWIVUeKElG0P8QoNERPRYWYTYBjziwk9V89n0sTde9
+ 6bzQ==
+X-Gm-Message-State: AOJu0YyLM5jNwgmOlrZkvzfOYJOnZ8mPoZXeLbSWHv/6xXogbdbRnhMJ
+ hLtYJ3fgKB/gwkokYgyrohKX+mgq2ZiV5EAfxjdVi0VXhFTc21o9SlqnJFIMKQ4=
+X-Google-Smtp-Source: AGHT+IFEsYRuXMoOs40pmGh3tRE/KLkzscaTyMtQWHUytdHJSpfRATJsqRVkCXfFfH5bA/0VI4SBtQ==
+X-Received: by 2002:ac2:42ca:0:b0:51c:a631:7360 with SMTP id
+ n10-20020ac242ca000000b0051ca6317360mr1437402lfl.25.1714141182549; 
+ Fri, 26 Apr 2024 07:19:42 -0700 (PDT)
+Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::9b06])
  by smtp.gmail.com with ESMTPSA id
- s20-20020adfa294000000b003455e5d2569sm1460593wra.0.2024.04.26.07.13.58
+ ds2-20020a0564021cc200b0057059d26756sm10041182edb.76.2024.04.26.07.19.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Apr 2024 07:13:59 -0700 (PDT)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Shantur Rathore <i@shantur.com>, Bin Meng <bmeng@tinylab.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Raymond Mao <raymond.mao@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
- Joao Marcos Costa <jmcosta944@gmail.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [RFC 14/14] efi_loader: load distro dtb in bootmgr
-Date: Fri, 26 Apr 2024 16:13:21 +0200
-Message-ID: <20240426141321.232236-15-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
-References: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
+ Fri, 26 Apr 2024 07:19:42 -0700 (PDT)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+Subject: [PATCH RFC 0/4] efi: CapsuleUpdate: support for dynamic GUIDs
+Date: Fri, 26 Apr 2024 16:19:34 +0200
+Message-Id: <20240426-b4-dynamic-uuid-v1-0-e8154e00ec44@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPa3K2YC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDIxMDEyMj3SQT3ZTKvMTczGTd0tLMFF3DRNPEJEMTC7NkI3MloK6CotS0zAq
+ widFKQW7OSrG1tQB80rZrZgAAAA==
+To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Richard Hughes <hughsient@gmail.com>
+Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
+X-Mailer: b4 0.14-dev
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4171;
+ i=caleb.connolly@linaro.org; h=from:subject:message-id;
+ bh=x49t2DMVg2TWIuwsmRQTtlWVqdPL8x5yRhJl+xeFc9U=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmK7f9KmIboiUoF6O982WSZ3jeikrBZHcQh9Z8Z
+ eo9cuRyf2mJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZiu3/QAKCRAFgzErGV9k
+ to8lD/4riGK6WQuVEddamtL/fKEpFUEHwXHLzfEKZDGSrh25NJnR5dAk94hWnSaWrFmJwd9byHl
+ qnR4q+AKJ11YOvZvaBIaIPS3KGR1Z6weLElENszKDxhLMOCaGHT/FpW2M6LiSH3rf0ZVx2AebZH
+ EwgzVmhCbsLMziJx43twtT0GpVBVYTtTO7yAVgLgcKVARNESCfXQzretFPFNhOq2gIrjyBTm1Q9
+ /VP2g1zBb3po2IejMFStKQycL1mjMklj2v1SsOHYdFhzLvriLgusWtD2ztbjR0Fc/D3rA1yzLBy
+ BAKje38TUJVRDaRN0OEV4oLeMI9m3761E5op9og/udJzmWzLkXCNgnOFswfboleenqr4XPWdiJd
+ 1Hos6zh88n4WaA27mjZaomix+RQ4XUD0/I+q5jIGqiAyaS16lGczPkpjqxY2y6ZkY40gvGhfivX
+ NnBKvuvxaF+pikDi49X2KP7MmIjVqDjt0hOz8oDArzH+8jliOPiL+Ze/HbEJAVtYaviZd8+1Pnf
+ 5qTLXlCXNMfDV0sBssJ+QkEgnRPjQxBU1S1RnGqAMAMXNN6mjEGDtcG3uUCM9w6FLnaqTAyu0oE
+ JM+8U0Pd8C8ZR6ayFF/AGCQ30GZmk7WmNsW7830cS4TiBeOJvNLBkVur9U2YxcU2NYGOM4gmsK5
+ w0X0K+MhPTS0jKg==
+X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
+ fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,119 +111,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If no device-tree is specified, try to load a device-tree from the boot
-device use the $fdtfile concatenated to either of the paths '/dtb/', '/',
-'/dtb/current/'.
+As more boards adopt support for the EFI CapsuleUpdate mechanism, there
+is a growing issue of being able to target updates to them properly. The
+current mechanism of hardcoding UUIDs for each board at compile time is
+unsustainable, and maintaining lists of GUIDs is similarly cumbersome.
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In this series, I propose that we adopt v5 GUIDs, these are generated
+by using a well-known salt GUID as well as board specific information
+(like the model/revision), these are hashed together and the result is
+truncated to form a new UUID.
+
+The well-known salt GUID can be specific to the architecture (SoC
+vendor), or OEM. Exact rules on how these are used (e.g. if vendors
+should be told to generate their own for their products, and if that
+can be added upstream, etc) will need to be decided.
+
+Specifically, the following fields are used to generate a GUID for a
+particular fw_image:
+
+* namespace salt
+* soc name
+* board model (usually from dt root model property)
+* board compatible (usually the first entry in the dt root compatible
+  array).
+* fw_image name (the string identifying the specific image, especially
+  relevant for board that can update multiple images).
+
+Once generated, the GUIDs can be printed with the "%pUs" format string,
+these can then be stored externally to U-Boot.
+
+The SoC name field might be controversial, it could be generated from
+the last entry in the dt root compatible in most cases, or in some board
+specific way. It might make sense to remove this field if it is
+unfeasible for some boards.
+
+== Usage ==
+
+Boards can integrate dynamic UUID support as follows:
+
+1. Adjust Kconfig to depend on EFI_CAPSULE_DYNAMIC_UUIDS if
+   EFI_HAVE_CAPSULE_SUPPORT
+2. Skip setting the fw_images image_type_id property.
+3. In board_init() (or anywhere before the EFI subsystem is
+   initialised), add a call to efi_capsule_update_info_gen_ids() with
+   the board specific info.
+
+== Limitations ==
+
+* Changing GUIDs
+
+The primary limitation with this approach is that if any of the source
+fields change, so will the GUID for the board. It is therefore pretty
+important to ensure that GUID changes are caught during development.
+
+* Supporting multiple boards with a single image
+
+This now requires having an entry with the GUID for every board which
+might lead to larger UpdateCapsule images.
+
+== Tooling ==
+
+Not part of this RFC is a tool to generate the GUIDs outside of U-Boot.
+I suspect this might be a requirement, but it makes sense to decide on
+what fields we use first.
+
+The tool should take in the salt, DTB, and a list of fw_image names. It
+could also accept values to overwrite the individual fields if they
+aren't derived from the DTB for some reason. It would then generate the
+expected GUID.
+
+A potential idea here would be to integrate this into the build system
+so that it prints a warning if the GUID changes.
+
+== TOOD ==
+
+Missing from this RFC are unit tests for the dynamic UUID feature, these
+will be implemented for future revisions.
+
+I would appreciate any feedback on the above.
+
+This follows a related discussion started by Ilias:
+https://lore.kernel.org/u-boot/CAC_iWjJNHa4gMF897MqYZNdbgjFG8K4kwGsTXWuy72WkYLizrw@mail.gmail.com/
+
 ---
- include/efi_loader.h         |  1 +
- lib/efi_loader/efi_bootmgr.c | 13 +++++++++--
- lib/efi_loader/efi_fdt.c     | 44 ++++++++++++++++++++++++++++++++++++
- 3 files changed, 56 insertions(+), 2 deletions(-)
+Caleb Connolly (4):
+      lib: uuid: add UUID v5 support
+      efi: add a helper to generate dynamic UUIDs
+      doc: uefi: document dynamic GUID generation
+      sandbox: switch to dynamic UUIDs
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index 0bf325fdc4b..e0bdce2dbdf 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -1192,5 +1192,6 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
- void efi_add_known_memory(void);
- 
- int efi_get_distro_fdt_name(char *fname, int size, int seq);
-+void efi_load_distro_fdt(void **fdt, efi_uintn_t *fdt_size);
- 
- #endif /* _EFI_LOADER_H */
-diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-index 9ae948bcf08..7987b047f1a 100644
---- a/lib/efi_loader/efi_bootmgr.c
-+++ b/lib/efi_loader/efi_bootmgr.c
-@@ -1249,7 +1249,8 @@ efi_status_t efi_bootmgr_run(void *fdt)
- 	efi_handle_t handle;
- 	void *load_options;
- 	efi_status_t ret;
--	void *fdt_lo;
-+	void *fdt_lo, *fdt_distro = NULL;
-+	efi_uintn_t fdt_size;
- 
- 	/* Initialize EFI drivers */
- 	ret = efi_init_obj_list();
-@@ -1269,6 +1270,10 @@ efi_status_t efi_bootmgr_run(void *fdt)
- 		fdt_lo = load_fdt_from_load_option();
- 		if (fdt_lo)
- 			fdt = fdt_lo;
-+		if (!fdt) {
-+			efi_load_distro_fdt(&fdt_distro, &fdt_size);
-+			fdt = fdt_distro;
-+		}
- 	}
- 
- 	/*
-@@ -1277,8 +1282,12 @@ efi_status_t efi_bootmgr_run(void *fdt)
- 	 */
- 	ret = efi_install_fdt(fdt);
- 
--	if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE))
-+	if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE)) {
- 		free(fdt_lo);
-+		if (fdt_distro)
-+			efi_free_pages((uintptr_t)fdt_distro,
-+				       efi_size_in_pages(fdt_size));
-+	}
- 
- 	if (ret != EFI_SUCCESS) {
- 		if (EFI_CALL(efi_unload_image(handle)) == EFI_SUCCESS)
-diff --git a/lib/efi_loader/efi_fdt.c b/lib/efi_loader/efi_fdt.c
-index 0edf0c1e2fc..86ba00c2bdd 100644
---- a/lib/efi_loader/efi_fdt.c
-+++ b/lib/efi_loader/efi_fdt.c
-@@ -71,3 +71,47 @@ int efi_get_distro_fdt_name(char *fname, int size, int seq)
- 
- 	return 0;
- }
-+
-+/**
-+ * efi_load_distro_fdt() - load distro device-tree
-+ *
-+ * @fdt:	on return device-tree, must be freed via efi_free_pages()
-+ * @fdt_size:	buffer size
-+ */
-+void efi_load_distro_fdt(void **fdt, efi_uintn_t *fdt_size)
-+{
-+	struct efi_device_path *rem, *dp;
-+	efi_status_t  ret;
-+	efi_handle_t device;
-+
-+	*fdt = NULL;
-+
-+	dp = efi_get_dp_from_boot(NULL);
-+	if (!dp)
-+		return;
-+	device = efi_dp_find_obj(dp, NULL, &rem);
-+	ret = efi_search_protocol(device, &efi_simple_file_system_protocol_guid,
-+				  NULL);
-+	if (ret != EFI_SUCCESS)
-+		goto err;
-+	memcpy(rem, &END, sizeof(END));
-+
-+	/* try the various available names */
-+	for (int seq = 0; ; ++seq) {
-+		struct efi_device_path *file;
-+		char buf[255];
-+
-+		if (efi_get_distro_fdt_name(buf, sizeof(buf), seq))
-+			break;
-+		file = efi_dp_from_file(dp, buf);
-+		if (!file)
-+			break;
-+		ret = efi_load_image_from_path(true, file, fdt, fdt_size);
-+		efi_free_pool(file);
-+		if (ret == EFI_SUCCESS)
-+			break;
-+	}
-+
-+err:
-+	efi_free_pool(dp);
-+}
--- 
-2.43.0
+ arch/Kconfig                 |  1 +
+ board/sandbox/sandbox.c      | 28 +++++++++++++++-------------
+ doc/develop/uefi/uefi.rst    | 35 +++++++++++++++++++++++++++++++++++
+ include/efi_loader.h         | 28 ++++++++++++++++++++++++++++
+ include/uuid.h               | 16 ++++++++++++++++
+ lib/Kconfig                  |  8 ++++++++
+ lib/efi_loader/Kconfig       | 14 ++++++++++++++
+ lib/efi_loader/efi_capsule.c | 33 +++++++++++++++++++++++++++++++++
+ lib/uuid.c                   | 33 +++++++++++++++++++++++++++++++++
+ 9 files changed, 183 insertions(+), 13 deletions(-)
+---
+change-id: 20240422-b4-dynamic-uuid-1a5ab1486c27
+base-commit: d097f9e1299a3bdb7de468f0d9bbc63932f461cd
+
+// Caleb (they/them)
 
