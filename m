@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2B0AC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 07:44:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98522C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 07:48:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7BC289142;
-	Fri, 26 Apr 2024 09:43:50 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id 0B5FB88FDA;
+	Fri, 26 Apr 2024 09:48:27 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="hvOjxGCk";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="yIa2CGs5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E17F98914E; Fri, 26 Apr 2024 09:43:48 +0200 (CEST)
-Received: from mail-m127226.xmail.ntesmail.com
- (mail-m127226.xmail.ntesmail.com [115.236.127.226])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EAE19890FE; Fri, 26 Apr 2024 09:48:25 +0200 (CEST)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BAB988F5D
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 09:43:46 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0676588FD8
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 09:48:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-DKIM-Signature: a=rsa-sha256;
- b=hvOjxGCk/QK8vWzQ0vSFNKx4adwnvuLbDasVVWmw5yN/KNfOd+F/Q3/FhLw5kFi+myyteMQ+aVd1WymvZYM0CKoZVwCpRlFAWFmdJBHuw8fqwRCZ7ZAEeGVAUPhgXu3qLVb0WidkNCyyqRrzeSR7rg8T+XF5M/dK5ZrnG9M84jg=;
- s=default; c=relaxed/relaxed; d=rock-chips.com; v=1;
- bh=bNwndP8jV7GMzF7ZVtoYtqT453XJyEUK8WXqqOYSr6I=;
- h=date:mime-version:subject:message-id:from;
-Received: from [172.16.12.77] (unknown [58.22.7.114])
- by smtp.qiye.163.com (Hmail) with ESMTPA id 9025E90032E;
- Fri, 26 Apr 2024 15:43:29 +0800 (CST)
-Message-ID: <32d4bb13-70cd-4ec3-abf0-4a216deaabc3@rock-chips.com>
-Date: Fri, 26 Apr 2024 15:43:29 +0800
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=4846c7b602=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 43Q0wEJg012185;
+ Fri, 26 Apr 2024 09:48:13 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=Tlw7JCSp98V0AlCpVn/7r6fomVkhFAB7XG5LwbZeFA8=; b=yI
+ a2CGs5VAl3dbfY7WK/2B565IxN+OfEa0UNNpzKUogKigDRWTmN4ES4Fturf9pCk9
+ gXv8VhyLwDA0fHi1c91/HO17sHV3yjna0020AIn7QeERntaHGrfIWmX5P/2LW/OO
+ mb1o8zHsbfc0376v48N1cno7+MnHxu9qCgmRjI9WAGk/X54yjp60loWn9JRwSrUP
+ xKQ/uStuAAg0qbCnXGOzkAqjG59z6Kni+ZHkDwwhHxZxkhhqEvAcNeC6oCqPsbZs
+ fBgz3vhojldg9cHJVop4DagpubbSb55+pO1n5HYqnHQZwI9WC/hkckkBkyrRlW46
+ CBdX2O5D/YJJR4OPaD1Q==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xmq90y2ge-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 26 Apr 2024 09:48:13 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id A303840049;
+ Fri, 26 Apr 2024 09:48:07 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 31B21212FB6;
+ Fri, 26 Apr 2024 09:47:43 +0200 (CEST)
+Received: from [10.48.86.98] (10.48.86.98) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 26 Apr
+ 2024 09:47:42 +0200
+Message-ID: <b030f729-c0d9-4249-8a5b-38124ada5379@foss.st.com>
+Date: Fri, 26 Apr 2024 09:47:41 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 11/11] rockchip: rk356x: use DRAM banks from ATAGS
-To: Quentin Schulz <foss+uboot@0leil.net>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- John Clark <inindev@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>,
- Eugen Hristev <eugen.hristev@collabora.com>, Andy Yan <andyshrk@163.com>,
- Elon Zhang <zhangzj@rock-chips.com>, Joshua Riek <jjriek@verizon.net>,
- Klaus Goger <klaus.goger@theobroma-systems.com>,
- Heiko Stuebner <heiko.stuebner@cherry.de>, Jagan Teki <jagan@edgeble.ai>,
- Frank Wunderlich <frank-w@public-files.de>,
- Joseph Chen <chenjh@rock-chips.com>, Tianling Shen <cnsztl@gmail.com>,
- Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Akash Gajjar <gajjar04akash@gmail.com>
-Cc: u-boot@lists.denx.de, Chris Morgan <macromorgan@hotmail.com>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>
-References: <20240425-rk35xx-dram-atags-v4-0-331401a58e8e@theobroma-systems.com>
- <20240425-rk35xx-dram-atags-v4-11-331401a58e8e@theobroma-systems.com>
+Subject: Re: [PATCH] ARM: dts: stm32: add eth1 and eth2 support on stm32mp13
 Content-Language: en-US
-From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20240425-rk35xx-dram-atags-v4-11-331401a58e8e@theobroma-systems.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Christophe Roullier <christophe.roullier@st.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Ramon Fried <rfried.dev@gmail.com>, <u-boot@dh-electronics.com>,
+ <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240421230954.193773-1-marex@denx.de>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20240421230954.193773-1-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGkwdT1ZOShhMQktLHUoaHUNVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlOQ1VJSVVMVUpKT1lXWRYaDxIVHRRZQVlPS0hVSk5MSUpJVUpLS1VKQl
- kG
-X-HM-Tid: 0a8f195bffb003a9kunm9025e90032e
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PC46Qww*IzMCECsNKj4RSklJ
- PAxPCzZVSlVKTEpPSkpMT0pKSElOVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFKSUJCSjcG
+X-Originating-IP: [10.48.86.98]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.650,FMLib:17.11.176.26
+ definitions=2024-04-26_07,2024-04-26_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,245 +92,122 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
-On 2024/4/25 18:46, Quentin Schulz wrote:
-> From: Quentin Schulz <quentin.schulz@theobroma-systems.com>
->
-> RK356x-based devices now support creating DRAM banks with proper holes
-> by reading the ATAGS from Rockchip TPL blob, so let's use that mechanism
-> instead.
->
-> The CONFIG_NR_DRAM_BANK now defaults to 10 which is a safe bet for
-> reading banks from ATAGS, so let's use the default value instead.
->
-> Co-developed-by: Chris Morgan <macromorgan@hotmail.com>
-> Signed-off-by: Chris Morgan <macromorgan@hotmail.com>
-> Signed-off-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 
-Thanks,
-- Kever
+On 4/22/24 01:09, Marek Vasut wrote:
+> From: Christophe Roullier <christophe.roullier@st.com>
+> 
+> Add both ethernet MACs based on GMAC SNPS IP on stm32mp13.
+> 
+> Signed-off-by: Christophe Roullier <christophe.roullier@st.com>
 > ---
->   configs/anbernic-rgxx3-rk3566_defconfig   | 1 -
->   configs/bpi-r2-pro-rk3568_defconfig       | 1 -
->   configs/evb-rk3568_defconfig              | 1 -
->   configs/generic-rk3568_defconfig          | 1 -
->   configs/lubancat-2-rk3568_defconfig       | 1 -
->   configs/nanopi-r5c-rk3568_defconfig       | 1 -
->   configs/nanopi-r5s-rk3568_defconfig       | 1 -
->   configs/odroid-m1-rk3568_defconfig        | 1 -
->   configs/pinetab2-rk3566_defconfig         | 1 -
->   configs/quartz64-a-rk3566_defconfig       | 1 -
->   configs/quartz64-b-rk3566_defconfig       | 1 -
->   configs/radxa-cm3-io-rk3566_defconfig     | 1 -
->   configs/radxa-e25-rk3568_defconfig        | 1 -
->   configs/rock-3a-rk3568_defconfig          | 1 -
->   configs/soquartz-blade-rk3566_defconfig   | 1 -
->   configs/soquartz-cm4-rk3566_defconfig     | 1 -
->   configs/soquartz-model-a-rk3566_defconfig | 1 -
->   17 files changed, 17 deletions(-)
->
-> diff --git a/configs/anbernic-rgxx3-rk3566_defconfig b/configs/anbernic-rgxx3-rk3566_defconfig
-> index c8c9238f96f..aa3809e00c1 100644
-> --- a/configs/anbernic-rgxx3-rk3566_defconfig
-> +++ b/configs/anbernic-rgxx3-rk3566_defconfig
-> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
->   CONFIG_SPL_GPIO=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-anbernic-rgxx3"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_ROCKCHIP_BACK_TO_BROM=y
-> diff --git a/configs/bpi-r2-pro-rk3568_defconfig b/configs/bpi-r2-pro-rk3568_defconfig
-> index 5cc95241ba4..0f85dc63c55 100644
-> --- a/configs/bpi-r2-pro-rk3568_defconfig
-> +++ b/configs/bpi-r2-pro-rk3568_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-bpi-r2-pro"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/evb-rk3568_defconfig b/configs/evb-rk3568_defconfig
-> index 6e8061f5f48..f2f429d33c4 100644
-> --- a/configs/evb-rk3568_defconfig
-> +++ b/configs/evb-rk3568_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-evb"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/generic-rk3568_defconfig b/configs/generic-rk3568_defconfig
-> index e7d5e55bbfd..8f4a6259a27 100644
-> --- a/configs/generic-rk3568_defconfig
-> +++ b/configs/generic-rk3568_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-generic"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/lubancat-2-rk3568_defconfig b/configs/lubancat-2-rk3568_defconfig
-> index 1c50a0ccbe6..ea67b6a7286 100644
-> --- a/configs/lubancat-2-rk3568_defconfig
-> +++ b/configs/lubancat-2-rk3568_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-lubancat-2"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/nanopi-r5c-rk3568_defconfig b/configs/nanopi-r5c-rk3568_defconfig
-> index 0f1a9461a0c..00743b7f926 100644
-> --- a/configs/nanopi-r5c-rk3568_defconfig
-> +++ b/configs/nanopi-r5c-rk3568_defconfig
-> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_SYS_HAS_NONCACHED_MEMORY=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-nanopi-r5c"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/nanopi-r5s-rk3568_defconfig b/configs/nanopi-r5s-rk3568_defconfig
-> index 4ebf0cc9ee8..91e3a19dea6 100644
-> --- a/configs/nanopi-r5s-rk3568_defconfig
-> +++ b/configs/nanopi-r5s-rk3568_defconfig
-> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_SYS_HAS_NONCACHED_MEMORY=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-nanopi-r5s"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/odroid-m1-rk3568_defconfig b/configs/odroid-m1-rk3568_defconfig
-> index b5ed9e4bc98..e749f9af9d2 100644
-> --- a/configs/odroid-m1-rk3568_defconfig
-> +++ b/configs/odroid-m1-rk3568_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SF_DEFAULT_SPEED=24000000
->   CONFIG_SF_DEFAULT_MODE=0x1000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-odroid-m1"
-> diff --git a/configs/pinetab2-rk3566_defconfig b/configs/pinetab2-rk3566_defconfig
-> index edeb1d89b99..112f2b26b08 100644
-> --- a/configs/pinetab2-rk3566_defconfig
-> +++ b/configs/pinetab2-rk3566_defconfig
-> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
->   CONFIG_SPL_GPIO=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SF_DEFAULT_MODE=0x1000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-pinetab2-v2.0"
->   CONFIG_ROCKCHIP_RK3568=y
-> diff --git a/configs/quartz64-a-rk3566_defconfig b/configs/quartz64-a-rk3566_defconfig
-> index fef80439d89..535e34fb990 100644
-> --- a/configs/quartz64-a-rk3566_defconfig
-> +++ b/configs/quartz64-a-rk3566_defconfig
-> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
->   CONFIG_SPL_GPIO=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SF_DEFAULT_SPEED=24000000
->   CONFIG_SF_DEFAULT_MODE=0x2000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-quartz64-a"
-> diff --git a/configs/quartz64-b-rk3566_defconfig b/configs/quartz64-b-rk3566_defconfig
-> index bb541ed1af6..e197defd3af 100644
-> --- a/configs/quartz64-b-rk3566_defconfig
-> +++ b/configs/quartz64-b-rk3566_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SF_DEFAULT_SPEED=24000000
->   CONFIG_SF_DEFAULT_MODE=0x2000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-quartz64-b"
-> diff --git a/configs/radxa-cm3-io-rk3566_defconfig b/configs/radxa-cm3-io-rk3566_defconfig
-> index bf61db44d3a..d23ab57ada5 100644
-> --- a/configs/radxa-cm3-io-rk3566_defconfig
-> +++ b/configs/radxa-cm3-io-rk3566_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-radxa-cm3-io"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/radxa-e25-rk3568_defconfig b/configs/radxa-e25-rk3568_defconfig
-> index 43aa8ec20e4..dbb77b85f5d 100644
-> --- a/configs/radxa-e25-rk3568_defconfig
-> +++ b/configs/radxa-e25-rk3568_defconfig
-> @@ -3,7 +3,6 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_SYS_HAS_NONCACHED_MEMORY=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-radxa-e25"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/rock-3a-rk3568_defconfig b/configs/rock-3a-rk3568_defconfig
-> index c161bc974fb..b06b57fe0bf 100644
-> --- a/configs/rock-3a-rk3568_defconfig
-> +++ b/configs/rock-3a-rk3568_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_SF_DEFAULT_SPEED=24000000
->   CONFIG_SF_DEFAULT_MODE=0x2000
->   CONFIG_DEFAULT_DEVICE_TREE="rk3568-rock-3a"
-> diff --git a/configs/soquartz-blade-rk3566_defconfig b/configs/soquartz-blade-rk3566_defconfig
-> index b9ac6b9f33d..9d565c162ef 100644
-> --- a/configs/soquartz-blade-rk3566_defconfig
-> +++ b/configs/soquartz-blade-rk3566_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-soquartz-blade"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/soquartz-cm4-rk3566_defconfig b/configs/soquartz-cm4-rk3566_defconfig
-> index e87a6392c52..fe2c771db71 100644
-> --- a/configs/soquartz-cm4-rk3566_defconfig
-> +++ b/configs/soquartz-cm4-rk3566_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-soquartz-cm4"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
-> diff --git a/configs/soquartz-model-a-rk3566_defconfig b/configs/soquartz-model-a-rk3566_defconfig
-> index b2c1684515e..db9eee21751 100644
-> --- a/configs/soquartz-model-a-rk3566_defconfig
-> +++ b/configs/soquartz-model-a-rk3566_defconfig
-> @@ -2,7 +2,6 @@ CONFIG_ARM=y
->   CONFIG_SKIP_LOWLEVEL_INIT=y
->   CONFIG_COUNTER_FREQUENCY=24000000
->   CONFIG_ARCH_ROCKCHIP=y
-> -CONFIG_NR_DRAM_BANKS=2
->   CONFIG_DEFAULT_DEVICE_TREE="rk3566-soquartz-model-a"
->   CONFIG_ROCKCHIP_RK3568=y
->   CONFIG_SPL_SERIAL=y
->
+> Cc: Christophe Roullier <christophe.roullier@st.com>
+> Cc: Joe Hershberger <joe.hershberger@ni.com>
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: Ramon Fried <rfried.dev@gmail.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>  arch/arm/dts/stm32mp131.dtsi | 37 ++++++++++++++++++++++++++++++++++++
+>  arch/arm/dts/stm32mp133.dtsi | 30 +++++++++++++++++++++++++++++
+>  2 files changed, 67 insertions(+)
+> 
+> diff --git a/arch/arm/dts/stm32mp131.dtsi b/arch/arm/dts/stm32mp131.dtsi
+> index 159ba8f8c9c..ad331b73d18 100644
+> --- a/arch/arm/dts/stm32mp131.dtsi
+> +++ b/arch/arm/dts/stm32mp131.dtsi
+> @@ -1328,6 +1328,37 @@
+>  			status = "disabled";
+>  		};
+>  
+> +		eth1: eth1@5800a000 {
+> +			compatible = "snps,dwmac-4.20a", "st,stm32mp13-dwmac";
+> +			reg = <0x5800a000 0x2000>;
+> +			reg-names = "stmmaceth";
+> +			interrupts-extended = <&intc GIC_SPI 62 IRQ_TYPE_LEVEL_HIGH>,
+> +					      <&exti 68 1>;
+> +			interrupt-names = "macirq", "eth_wake_irq";
+> +			clock-names = "stmmaceth",
+> +				      "mac-clk-tx",
+> +				      "mac-clk-rx",
+> +				      "ethstp",
+> +				      "eth-ck";
+> +			clocks = <&rcc ETH1MAC>,
+> +				 <&rcc ETH1TX>,
+> +				 <&rcc ETH1RX>,
+> +				 <&rcc ETH1STP>,
+> +				 <&rcc ETH1CK_K>;
+> +			st,syscon = <&syscfg 0x4 0xff0000>;
+> +			snps,mixed-burst;
+> +			snps,pbl = <2>;
+> +			snps,axi-config = <&stmmac_axi_config_1>;
+> +			snps,tso;
+> +			status = "disabled";
+> +
+> +			stmmac_axi_config_1: stmmac-axi-config {
+> +				snps,wr_osr_lmt = <0x7>;
+> +				snps,rd_osr_lmt = <0x7>;
+> +				snps,blen = <0 0 0 0 16 8 4>;
+> +			};
+> +		};
+> +
+>  		usbh_ohci: usb@5800c000 {
+>  			compatible = "generic-ohci";
+>  			reg = <0x5800c000 0x1000>;
+> @@ -1404,6 +1435,12 @@
+>  			ts_cal2: calib@5e {
+>  				reg = <0x5e 0x2>;
+>  			};
+> +			ethernet_mac1_address: mac1@e4 {
+> +				reg = <0xe4 0x6>;
+> +			};
+> +			ethernet_mac2_address: mac2@ea {
+> +				reg = <0xea 0x6>;
+> +			};
+>  		};
+>  
+>  		/*
+> diff --git a/arch/arm/dts/stm32mp133.dtsi b/arch/arm/dts/stm32mp133.dtsi
+> index df451c3c2a2..5cd5bde9535 100644
+> --- a/arch/arm/dts/stm32mp133.dtsi
+> +++ b/arch/arm/dts/stm32mp133.dtsi
+> @@ -64,5 +64,35 @@
+>  				};
+>  			};
+>  		};
+> +
+> +		eth2: eth2@5800e000 {
+> +			compatible = "snps,dwmac-4.20a", "st,stm32mp13-dwmac";
+> +			reg = <0x5800e000 0x2000>;
+> +			reg-names = "stmmaceth";
+> +			interrupts-extended = <&intc GIC_SPI 97 IRQ_TYPE_LEVEL_HIGH>;
+> +			interrupt-names = "macirq";
+> +			clock-names = "stmmaceth",
+> +				      "mac-clk-tx",
+> +				      "mac-clk-rx",
+> +				      "ethstp",
+> +				      "eth-ck";
+> +			clocks = <&rcc ETH2MAC>,
+> +				 <&rcc ETH2TX>,
+> +				 <&rcc ETH2RX>,
+> +				 <&rcc ETH2STP>,
+> +				 <&rcc ETH2CK_K>;
+> +			st,syscon = <&syscfg 0x4 0xff000000>;
+> +			snps,mixed-burst;
+> +			snps,pbl = <2>;
+> +			snps,axi-config = <&stmmac_axi_config_2>;
+> +			snps,tso;
+> +			status = "disabled";
+> +
+> +			stmmac_axi_config_2: stmmac-axi-config {
+> +				snps,wr_osr_lmt = <0x7>;
+> +				snps,rd_osr_lmt = <0x7>;
+> +				snps,blen = <0 0 0 0 16 8 4>;
+> +			};
+> +		};
+>  	};
+>  };
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
