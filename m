@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B8DCC04FFE
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 15:51:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D446C04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 15:52:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9883E8857B;
-	Fri, 26 Apr 2024 17:51:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 07E5A885BE;
+	Fri, 26 Apr 2024 17:52:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PxTyuFND";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vxh7FNrR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1338988300; Fri, 26 Apr 2024 17:51:56 +0200 (CEST)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
+ id 53EEB885CF; Fri, 26 Apr 2024 17:52:01 +0200 (CEST)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A2D1888648
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 17:51:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D87C1885B4
+ for <U-Boot@lists.denx.de>; Fri, 26 Apr 2024 17:51:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-78f0592309aso151207185a.2
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 08:51:53 -0700 (PDT)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-617cd7bd929so24217437b3.3
+ for <U-Boot@lists.denx.de>; Fri, 26 Apr 2024 08:51:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714146712; x=1714751512; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714146718; x=1714751518; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=bv7D4l3XHHj22q4MKLiMfJuvUYFhFI6ePhnNOcZOtEA=;
- b=PxTyuFNDA6w/hlup/bja9z3SZfudZEBI6P7Qcdq9rg2ysNAfgk2hkMQJTxZWMpHafh
- HmYUziWAfGkiZw+TBQvvYS/zUojuH3oLGnNB+s9l4Uxm5NGMQngDUqZICHbe/o1G66os
- g3UExmpDYjofZ0dVBhhqHZ6kkpVL+CTS4GI/w=
+ bh=Xsaf7nrqOSciVz20MtppYbgREs0pIEBWA5rl9lDpAEc=;
+ b=Vxh7FNrR5z+pxl3qRhaa/2TuIzH7qhtn6d4AFrZvG2ZbjJjI6OuVXabfgEHvdvp97L
+ jPsfLVCragfKFmyWLjMkPyAriE7/DstJwJTEbjK0S+8fXBObm7pUXF5nHsBLDq0trkQL
+ eGEEVyWZTkeuTaLwgQf2U1kWLXYLtRpkxo5Dc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714146712; x=1714751512;
+ d=1e100.net; s=20230601; t=1714146718; x=1714751518;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bv7D4l3XHHj22q4MKLiMfJuvUYFhFI6ePhnNOcZOtEA=;
- b=KHU1T5lx0qER6G4BaNxnFxM+Pur9AA+OlRqsfAPpNLXc74TvdHwvGgZyIjNrdZrJSl
- gzSjO5KuKmacvoaWgIb2nogEAH9UZtr7BFJKbbuPaIXv3fi9P4Kt54hvmKsCwIYdruMt
- /7z1YfmMqXxE2D5e2al4sj9KudIovHeNBuU/l8+JhKxgfLRAXThQAoCySDTdk6q77EUh
- hh9ezwaXsi8TmrnljqKvujes8C1dAvgpAgRQsZDjY2MIJSuFTwkfEj1ElHV+1oyKaGRn
- v2+GTUcK5sPTpC0YxQLZqNrTGJuuRpdXENzswS+Jh7/ApIug52Yw35QL5tcmrTSqRfkh
- pSog==
-X-Gm-Message-State: AOJu0YwW30OdRf8n3dgz92I2JPiOLYoikggn5ho6CIDIUxQaf3K5+dtu
- RVtvSNWN7R6zBLTROySnNqM89vUX1KUd+tDeRg+XttcUcgiDONGdwC7hoVZmRczVo3jUZ1A/CSc
- 9WyM=
-X-Google-Smtp-Source: AGHT+IFK65AXMXTYQol4ZWmATs3sUTDvl5XbQ1ETMbn6sPLA/WGoKTzo2XGLLjg7q4Z3HLkjkdxViw==
-X-Received: by 2002:a05:620a:4d4:b0:78e:c0ef:50f with SMTP id
- 20-20020a05620a04d400b0078ec0ef050fmr3337912qks.41.1714146712388; 
- Fri, 26 Apr 2024 08:51:52 -0700 (PDT)
+ bh=Xsaf7nrqOSciVz20MtppYbgREs0pIEBWA5rl9lDpAEc=;
+ b=n9beltDDdqqVQTh7/rbgls9HAvFtUFzTH4iuCtba9r4JM1zd6yZGByc2lQLeAua9kJ
+ pPIYWx6DoGTADTwO0yAs+UL0uLiO3vDZ87Fc2C02Vohb22Y3MySqabzoGpENKtBbifL8
+ 5/qLWw2ihqoYJIMGi+iUvslz2zKNnAj5tRY1AhzXG4zBhC6zm8IhEmAv6tmO5Ig3VjYj
+ c7IxZNb76PketWbopPDJcdMcotba4jnSGG7ZzpgjtfSsohzf9Ut3irU1pvime1EosczJ
+ 6WJ/Q6c9kU+o6w3CtnEy0b5/jiUcrxH5o3mSZPBPELVWwu13sUZZ1alnJapbtGNTXgjm
+ ArpA==
+X-Gm-Message-State: AOJu0YzuW5iiFZiJCr0oAlJcbjwWnQWkYciEJ+NM3cdGW9b1KuWKL0RU
+ iI4LgNaOp9rQiYZvjSScCoslVPDu0jYlWkN9jzXglTs2K5wfuG9hE10hYojSh6g=
+X-Google-Smtp-Source: AGHT+IHrA6Zp5RR4KN8lY0COWk0YHw95UeZvmeuq8CpMtoXMwbN2j095F+L/hc9lnpLBNm08ewfeFg==
+X-Received: by 2002:a05:690c:ed0:b0:615:15c7:9d6b with SMTP id
+ cs16-20020a05690c0ed000b0061515c79d6bmr3582169ywb.4.1714146717673; 
+ Fri, 26 Apr 2024 08:51:57 -0700 (PDT)
 Received: from bill-the-cat ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- o15-20020a05620a0d4f00b0078ee090baa3sm8041957qkl.10.2024.04.26.08.51.51
+ jv9-20020a05622aa08900b004366d3eef03sm7967938qtb.68.2024.04.26.08.51.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Apr 2024 08:51:51 -0700 (PDT)
-Date: Fri, 26 Apr 2024 09:51:49 -0600
+ Fri, 26 Apr 2024 08:51:57 -0700 (PDT)
+Date: Fri, 26 Apr 2024 09:51:54 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: Pull request: u-boot-rockchip-20240426
-Message-ID: <20240426155149.GJ1054907@bill-the-cat>
-References: <20240426094458.46701-1-kever.yang@rock-chips.com>
+To: Jaehoon Chung <jh80.chung@samsung.com>
+Cc: U-Boot Mailing List <U-Boot@lists.denx.de>,
+ maximilian.brune@9elements.com, curtis.machida@intel.com,
+ Jonas Karlman <jonas@kwiboo.se>, greg.malysa@timesys.com,
+ ian.roberts@timesys.com, Jae hoon Chung <jh80.chung@gmail.com>,
+ Peng Fan <peng.fan@nxp.com>, sheng.tan@9elements.com
+Subject: Re: [GIT PULL] Please pull u-boot-mmc master
+Message-ID: <20240426155154.GK1054907@bill-the-cat>
+References: <CGME20240426103830epcas1p3720a09dd50c8ef3d16de0a6ff2ff514b@epcas1p3.samsung.com>
+ <e6c74bd0-de66-42ef-a6af-0d5c058b12a0@samsung.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="WWvGTysPLQx7Bzxo"
+ protocol="application/pgp-signature"; boundary="qEQSiBJcrglmA9eh"
 Content-Disposition: inline
-In-Reply-To: <20240426094458.46701-1-kever.yang@rock-chips.com>
+In-Reply-To: <e6c74bd0-de66-42ef-a6af-0d5c058b12a0@samsung.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,26 +95,22 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---WWvGTysPLQx7Bzxo
+--qEQSiBJcrglmA9eh
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 26, 2024 at 05:44:58PM +0800, Kever Yang wrote:
+On Fri, Apr 26, 2024 at 07:38:30PM +0900, Jaehoon Chung wrote:
 
-> Hi Tom,
+> Dear Tom,
 >=20
-> Please pull the updates for rockchip platform:
-> - dts sync for rk3308;
-> - sdram: Support getting banks from TPL for rk3568 and rk3588;
-> - dts and config clean and sync up for rk3568/rk3588;
-> - Other misc fixes;
+> Please pull u-boot-mmc master into u-boot master branch.
+> If there is any problem, let me know, plz
 >=20
-> CI:
-> https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/20543
+> Best Regards,
+> Jaehoon Chung
 >=20
-> Thanks,
-> - Kever
+> CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/20547
 >=20
 > The following changes since commit d097f9e1299a3bdb7de468f0d9bbc63932f461=
 cd:
@@ -120,12 +120,12 @@ ians/u-boot-fsl-qoriq (2024-04-23 17:53:06 -0600)
 >=20
 > are available in the Git repository at:
 >=20
->   https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boo=
-t-rockchip-20240426
+>   git@source.denx.de:u-boot/custodians/u-boot-mmc.git master
 >=20
-> for you to fetch changes up to f6114fb871108eb2bad7393191c9983f0b125dc1:
+> for you to fetch changes up to 1776213dadef4b578f98bcf18beb152f8975a8bf:
 >=20
->   rockchip: rk356x: use DRAM banks from ATAGS (2024-04-26 15:47:06 +0800)
+>   mmc: arm_pl180: Limit data transfer to U16_MAX (2024-04-26 15:32:06 +09=
+00)
 >=20
 
 Applied to u-boot/master, thanks!
@@ -133,22 +133,22 @@ Applied to u-boot/master, thanks!
 --=20
 Tom
 
---WWvGTysPLQx7Bzxo
+--qEQSiBJcrglmA9eh
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYrzZUACgkQFHw5/5Y0
-tyxc7gv/ct/rCG+9DOgvcUJcs9cJgZ2qsgov3BJwuzoxupe1z4F2CDPGE5yb+asQ
-lxUqQfLPYezJMfGqV2KPXoYokX9nB7Yxfs2tvHG0WpfZ3IVOoY2tAxM4853gHI5i
-/Jqb+qKqk5Rdm7Sz36Yxy5idOm4RhXwcX4Ey0WySjwDBVX/XiCWaCFlQUTj64sV4
-zMXiKZoB7ceQhrgeEGpm7vk1xBwSqS+LxbBFr6aWczVOHmDf6ID1rxgd7rz0p+l7
-o++bEXVBtFArnuRXWka9eO29fhYikXimhhschGAcbKIt94yeZ1QE0cvbJ76HTi1E
-k2xZO4IYzMyL76k4V20mEaggw1gnyaPcWcXrsl99oauaTa2RuSga2/iaUt6l4Qop
-WyEFDYHql4dUGxD1PFwKmr3qb6j8F53Ee5k8HOnm4kTZrhuU8rhYevPUGFDabjXM
-y306KGYvRHAW95+k0Xn+RKiqzdmN3AZwLDlYWc8iKCF2stVMwB53lqS3DODQ/HOF
-cPLhhVE1
-=seG7
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmYrzZoACgkQFHw5/5Y0
+tyzGhAwArPxnfHjmtzHr4nsM3K6h1UR7NeZNIv9xJCfbjldvqaYkrjakeQIGdqOX
+VXiXm3Jx8EjvxmdOZ10gXGGb88RGJM5DT/LhEQKZ2tWIshIDQamb6snzg2r2PoUF
+D2Ih8fquM/exnE0jsCgMw6OjYmopIEBxZhnI3qv8vUwEpr2PInAwYNbEgfP5qSwY
+SNRZTizWvdiujqUioJ0GjCC14t5YDBcDp/J6kiQqUChQLbXFuwIiY91KyjB4J1qg
+W+k0Lb/oJAXpzL+U57yXkg6A2HBBjR1FaVtnKIh+KTHGZIW6xtlW0C42sMAEB5CZ
+rnEplqTBMWD1QCoq1jfxsm0Ko5somU+G0W8ge57Y0jMzBV7OkqfJ0nOLaLJqpmJ2
+5vwLgg4qjXkdJxyeAB9qEoOpbISnxioerccP7WA7bNLO5h7AfBFQobUpa5UJcpf4
+z4LeYaQnij2vRTi10od7vBduMKOJElgtIKBhtOdzfhy6mqU4lzJCU3+HzluVDAxp
+u207zp49
+=5wAk
 -----END PGP SIGNATURE-----
 
---WWvGTysPLQx7Bzxo--
+--qEQSiBJcrglmA9eh--
