@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07211C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 14:20:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 104A5C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 14:20:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B33289188;
+	by phobos.denx.de (Postfix) with ESMTP id DB44989191;
 	Fri, 26 Apr 2024 16:19:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jL+/Wlvi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tHR2vagO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ED3EF89173; Fri, 26 Apr 2024 16:19:47 +0200 (CEST)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id E14BD8915E; Fri, 26 Apr 2024 16:19:48 +0200 (CEST)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EDD7C87F4A
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 16:19:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id F06128916C
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 16:19:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-57225322312so3164316a12.1
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 07:19:45 -0700 (PDT)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-a51f9ad7684so148452766b.2
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 07:19:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714141185; x=1714745985; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1714141186; x=1714745986; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CwTsInjpjudXn53fHxDK4wIbcKysXTmFLjOh/p+RuRs=;
- b=jL+/WlviIWlzcTVd0Cgh562J6dVidgRL1sSFkTVX1rIUIx1bo3K1/NU4JiOYK/oE3i
- ON+as+SF94jwnPGq3BBCXr/nLEo13GD6jbrTB7XdF7XQJW6/P+ilJuc3EpDRwBkclkFa
- a4Kzk+b+Th21uqyBSISxthG3D3KsfGqeYIomIPYFoDozYMHjHBgZ8l2lCSqn6QgGk2hK
- sfzV9sfpUpJhutI4U8zeYcYIMMD74G/En59BwRdCqEED0g3sErTL64fB/uI0890xnLHS
- +GfkJo2isRGk0p09KYdh4OcY+T6flAmoFSNA+v5vOdI2WcVfuoEVJlV37F2SN4FRHp44
- paYA==
+ :reply-to; bh=3Y8/39cJ/XbEfKQUYQpKfPZueeODoQuUVuK6ghcCumU=;
+ b=tHR2vagO2RiEqEKvabBsdDe5WhjFRONxfaDuszmaZWo4Fn0EBVBZ9Zay+DAKrsVE8n
+ PTey7xalGKiz6oS4quyhlqs9nzgc3IxlCWm83k0fFNn0XJTPmKPqw9A5keWbXGH2W1Sv
+ xHQxseJv7ZikRRJjeZoAO+UsFZpk2pDyhJaQkN3QeynlhqBUWTheqPWYWMUhskapKE+N
+ yzyYfaPyjN4b+joQ1LXpNv7OXObobNWC4sPJAGEjPCckMcZcmPb+1zesRUA5Dj1Z3V/F
+ fEjSbcXiOLa3VZxQnTr6/rPA+Ip6eSnw+qk/q1C1ltFLy3z0ry6c4ZuWhApmlzNqSO09
+ nwKA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714141185; x=1714745985;
+ d=1e100.net; s=20230601; t=1714141186; x=1714745986;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=CwTsInjpjudXn53fHxDK4wIbcKysXTmFLjOh/p+RuRs=;
- b=CpOSaqr9NDN9HEUPTeHtF/IKfBdIfhdL5oniLoRSLTnLrlJgIVlOluCW65CBSHUAT4
- LBCrOp0aV5mf5DbfMyNMwRQvsP4HFSFph7gZ7x7SL0X4zSCDEpbZR/UKO+ZNJRMiFHbZ
- +6kKFRsNd2EXDHPNVetfDHq8FDFGAxieIf4/Stl4mAqiWL/7ffEtavGy88r6+xEER8qz
- dZ2qQ5YbyNBFcWAM/KwnHdAd6iKE5bOUBwXlXkFBvDfkK//uAUjhgveFNIINnQxFPVl4
- CmOTFzdqzw1JqTOwV6BHuFzs3+fSMWqQtTmsQYgBpAd8D1S1FXdg9LASCZaAhUHuVZ+s
- Rn9g==
-X-Gm-Message-State: AOJu0Yw05OuE33hn9J93HTwEbqA/ZfSBsnfA4j4nXvVwzcz1jZXRZXFf
- /aseNHneC3fC4nfDI7MY7GD+xx0L38B0VIO9MDx5u4i+V6ARnFw0BO9OwLk3eT4=
-X-Google-Smtp-Source: AGHT+IE3Lg+eTymjoBmP9edcoiUxdR6moVH3vO162hMJlev1ZUSZFc1Ok/cw9gFN7ccxnkxAd+Gn5Q==
-X-Received: by 2002:a50:cd54:0:b0:56d:e6f6:f73c with SMTP id
- d20-20020a50cd54000000b0056de6f6f73cmr1650219edj.42.1714141185591; 
- Fri, 26 Apr 2024 07:19:45 -0700 (PDT)
+ bh=3Y8/39cJ/XbEfKQUYQpKfPZueeODoQuUVuK6ghcCumU=;
+ b=nuJa4M778fQ8TTxC46F0rcWt7A3JTn1BMKgGdzU4mk1XtLNpEqHaPIiIlKXAECvgws
+ 4iUjuEru6vqk9koxbUDIA63m/QxwiUn9AEN01jBpH8w/irxwVtA6TIJD1D80swe6HVBe
+ Ybpymf9OsFpg7dBQuh45/yU98MD5iMRQhbM0b/He4isvSleK6ObQEoichCRj0efyfVpM
+ QYRmQs3eW6E9uDp8/zWtKVXMu51+kO3cvhYlbn2gr/bZ/UKsUsRLJjqL7Zosn8UqwV4Y
+ zrRDvrSOOROkmDbHWjKVZE4hu3urtW2DRLIikxnw/HwHjnCYXW/9597dgwYVJfLaB/kU
+ H4jQ==
+X-Gm-Message-State: AOJu0YxLOsSFD8H7Wk8q8siauttBhyI6omdBxTai2hRUHmAXl5Oxq3iT
+ dEzeT68ZMFQNcDuM72P6jWCx0iEz5ursw43MDkyIdH/5/afsN2OvkYI3LOpT0Dl9k6IYa7McRcb
+ /VlRdJg==
+X-Google-Smtp-Source: AGHT+IFEIAky7p1NWqpzRK6Z9bty+lXmyCO8hT5F8vKosxkWw+PVLvOTiBACczfr9VJSncC5pqvkOQ==
+X-Received: by 2002:a50:ba88:0:b0:570:3bb:e099 with SMTP id
+ x8-20020a50ba88000000b0057003bbe099mr2755189ede.1.1714141186485; 
+ Fri, 26 Apr 2024 07:19:46 -0700 (PDT)
 Received: from [192.168.0.113] ([2a02:8109:aa0d:be00::9b06])
  by smtp.gmail.com with ESMTPSA id
- ds2-20020a0564021cc200b0057059d26756sm10041182edb.76.2024.04.26.07.19.44
+ ds2-20020a0564021cc200b0057059d26756sm10041182edb.76.2024.04.26.07.19.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 26 Apr 2024 07:19:45 -0700 (PDT)
+ Fri, 26 Apr 2024 07:19:46 -0700 (PDT)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Fri, 26 Apr 2024 16:19:37 +0200
-Subject: [PATCH RFC 3/4] doc: uefi: document dynamic GUID generation
+Date: Fri, 26 Apr 2024 16:19:38 +0200
+Subject: [PATCH RFC 4/4] sandbox: switch to dynamic UUIDs
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20240426-b4-dynamic-uuid-v1-3-e8154e00ec44@linaro.org>
+Message-Id: <20240426-b4-dynamic-uuid-v1-4-e8154e00ec44@linaro.org>
 References: <20240426-b4-dynamic-uuid-v1-0-e8154e00ec44@linaro.org>
 In-Reply-To: <20240426-b4-dynamic-uuid-v1-0-e8154e00ec44@linaro.org>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
@@ -77,21 +78,21 @@ To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Richard Hughes <hughsient@gmail.com>
 Cc: u-boot@lists.denx.de, Caleb Connolly <caleb.connolly@linaro.org>
 X-Mailer: b4 0.14-dev
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2582;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2566;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=LpTzTY0m1P+CE2jca2MTSIniF4NLea/ir3Ovry4WRWk=;
- b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmK7f9MiwAwCGbX6eJYwWMR+rrF0dW0TgKFn7mv
- lPMPhjhgDSJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZiu3/QAKCRAFgzErGV9k
- tkxKD/4hiSFC3tQndAMvuplSrWO5N+u5e7AYG6vlBp/L71l//aGgwdAfS9ALvaA+/sR/y+Kdt5S
- dw1oTTrdEBIm8HnTKGN8b8sz5nX/mHUbDbiPuqO9+5gglDdp9p14ruGxu8EZkS6yqXrsheXd9Vf
- RvNYMg9FuxWB0q/Klbr++4FR7hUe8sqkXfJgUl233CJqJfv9Qdj044WC0MxHG3UCVUXWQJIsZVP
- 1tpnwp2149T5QeQT0RlmGPRLF+rLOsddjYxqmB3AFWcblzpNQVnihfye0bUkZYutHV1mTWCXrGm
- gUEdzMk7RK5TbtoVN+3+c8AXnx10LGsqgz14EC1qO+aVRqGrsyq3L9Dlnobbcsx1o3TEZTT6kBj
- DreuDummaO+jSs9OU8SGpIAngT9fCfN2+nbjRViL/eCzna79zi1cI4qG2+d21/I/fq0TjKnTw2l
- fmXVSaSUD1Quf4zT76ijWdyJRyhxjmOx7uDcPDmN6d9hAaAigZ/lQ4l4/TpfXbfSVGmQvZcQnBM
- VSzKe5ALr5K4L83S38pLwVyN6HBgMwNV/FLJeN8qVBasbts++uPEBnmkqO21alUPIiZrjEnUaDp
- rN7pSUj6r5KgiGQwX1QQB7vzREQ5RNc9S2zs6BxLOGEPsqmGjpbykL2yOj1c/Wk0ghEsKITTxQ6
- e5E9A43KjfKRcYA==
+ bh=E29aV3hWmEHhJMw6u12fMNE/7DMvKk2T1uEAZEN8hmQ=;
+ b=owEBbQKS/ZANAwAIAQWDMSsZX2S2AcsmYgBmK7f9/WvzgTExC96OZ6YMZwevx7rRdWSIRFLbL
+ nA/E6V4oHSJAjMEAAEIAB0WIQS2UaFGPGq+0GkMVc0FgzErGV9ktgUCZiu3/QAKCRAFgzErGV9k
+ tm+vEAChI75+4mOd76OnwamKWAUljhRgq5sA8I720VtLs1Avsa7mEwwKVZXd1NUTH5FqyOKQfzi
+ vb44NmYVJsV1SVH9dbqxknAIyJsRkj9Y8od7q9zK9Mj4fZwmV4LtZ4GI8CWufTu6NQAcB8KXkVU
+ OUKg4eaR1HHWuxTsHr/6TocZnQd4dNI0aIYPjDMz9Zipo4N54DXjWTmgeqcLcyzfhY6DqTYaKoo
+ E/y1q8qI8XVIQVglRyJWL8vovCCW21/cCHx0XfVQ5LMSVnJboxgJGUkfS7HXBbG6KzF09wqVpEq
+ I3NWrjPc6I2Ud0PEJ8mfuWLRWMIUb9oFloIEXRuxUU71ySsOAgy1MyEplTyHzmGRkx8zE15JGkD
+ qWh/XNqEqMPXmxLB297E2lYDQML4kO2CoysCl+plZqGXqB2ORIaWpEC2GocJdMi9plpXziMKuWK
+ R/d5+gUnMCqk4nE1uHKpw0y5bKKzlQWSKvXRZsbnS2q7idFt8yOMlJxoZ74C3kS8ETEXlTyqj8Q
+ ELfIscsvN8ctkTPLSF6JLkEDUXlsTNn04rLJCuRQy90LUhGW0yIEg8QHXEWXaaMSOImLiXGXS6f
+ hFT4nCim1fbT+/MlqngkzTiCJu2RPweM0Oc8m7UUID/lHp/C4+wHNQNN8qXnRWOFaCpvg4JTnqC
+ IHyajdku7/DVADQ==
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -110,62 +111,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Document how platforms can generate GUIDs at runtime rather than
-maintaining a list of GUIDs per-board.
+Migrate sandbox over to generating it's capsule update image GUIDs
+dynamically rather than using a set of hardcoded ones.
 
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- doc/develop/uefi/uefi.rst | 35 +++++++++++++++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
+ arch/Kconfig            |  1 +
+ board/sandbox/sandbox.c | 28 +++++++++++++++-------------
+ 2 files changed, 16 insertions(+), 13 deletions(-)
 
-diff --git a/doc/develop/uefi/uefi.rst b/doc/develop/uefi/uefi.rst
-index 0389b269c01b..52076fb4c106 100644
---- a/doc/develop/uefi/uefi.rst
-+++ b/doc/develop/uefi/uefi.rst
-@@ -448,8 +448,43 @@ the location of the firmware updates is not a very secure
- practice. Getting this information from the firmware itself is more
- secure, assuming the firmware has been verified by a previous stage
- boot loader.
+diff --git a/arch/Kconfig b/arch/Kconfig
+index abd406d48841..0558c90540b6 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -164,8 +164,9 @@ config SANDBOX
+ 	select SYS_CACHE_SHIFT_4
+ 	select IRQ
+ 	select SUPPORT_EXTENSION_SCAN if CMDLINE
+ 	select SUPPORT_ACPI
++	select EFI_CAPSULE_DYNAMIC_UUIDS if EFI_HAVE_CAPSULE_SUPPORT
+ 	imply BITREVERSE
+ 	select BLOBLIST
+ 	imply LTO
+ 	imply CMD_DM
+diff --git a/board/sandbox/sandbox.c b/board/sandbox/sandbox.c
+index 802596569c64..68a99ce1fc07 100644
+--- a/board/sandbox/sandbox.c
++++ b/board/sandbox/sandbox.c
+@@ -31,36 +31,24 @@
+  */
+ gd_t *gd;
  
-+The image_type_id contains a GUID value which is specific to the image
-+and board being updated, that is to say it should uniquely identify the
-+board model (and revision if relevant) and image pair. Traditionally,
-+these GUIDs are generated manually and hardcoded on a per-board basis,
-+however this scheme makes it difficult to scale up to support many
-+boards.
+ #if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
+-/* GUIDs for capsule updatable firmware images */
+-#define SANDBOX_UBOOT_IMAGE_GUID \
++#define SANDBOX_CAPSULE_UPDATE_SALT \
+ 	EFI_GUID(0x09d7cf52, 0x0720, 0x4710, 0x91, 0xd1, \
+ 		 0x08, 0x46, 0x9b, 0x7f, 0xe9, 0xc8)
+ 
+-#define SANDBOX_UBOOT_ENV_IMAGE_GUID \
+-	EFI_GUID(0x5a7021f5, 0xfef2, 0x48b4, 0xaa, 0xba, \
+-		 0x83, 0x2e, 0x77, 0x74, 0x18, 0xc0)
+-
+-#define SANDBOX_FIT_IMAGE_GUID \
+-	EFI_GUID(0x3673b45d, 0x6a7c, 0x46f3, 0x9e, 0x60, \
+-		 0xad, 0xab, 0xb0, 0x3f, 0x79, 0x37)
+-
+ struct efi_fw_image fw_images[] = {
+ #if defined(CONFIG_EFI_CAPSULE_FIRMWARE_RAW)
+ 	{
+-		.image_type_id = SANDBOX_UBOOT_IMAGE_GUID,
+ 		.fw_name = u"SANDBOX-UBOOT",
+ 		.image_index = 1,
+ 	},
+ 	{
+-		.image_type_id = SANDBOX_UBOOT_ENV_IMAGE_GUID,
+ 		.fw_name = u"SANDBOX-UBOOT-ENV",
+ 		.image_index = 2,
+ 	},
+ #elif defined(CONFIG_EFI_CAPSULE_FIRMWARE_FIT)
+ 	{
+-		.image_type_id = SANDBOX_FIT_IMAGE_GUID,
+ 		.fw_name = u"SANDBOX-FIT",
+ 		.image_index = 1,
+ 	},
+ #endif
+@@ -122,8 +110,22 @@ int dram_init(void)
+ }
+ 
+ int board_init(void)
+ {
++	int ret;
 +
-+To address this, v5 GUIDs can be used to generate board-specific GUIDs
-+at runtime, based on a set of persistent identifiable information:
++	if (CONFIG_IS_ENABLED(EFI_HAVE_CAPSULE_SUPPORT)) {
++		efi_guid_t salt_guid = SANDBOX_CAPSULE_UPDATE_SALT;
 +
-+.. code-block:: c
-+
-+	/**
-+	* efi_capsule_update_info_gen_ids - Generate image_type_id UUIDs
-+	* for all firmware images based on a platform namespace UUID.
-+	*
-+	* @namespace: The arch/platform specific namespace salt. This should be
-+	* hardcoded per platform and replaced by vendors.
-+	* @soc: A string identifying the SoC used on this board.
-+	* @model: The model string for the board.
-+	* @compatible: The most specific (first) root compatible string.
-+	*
-+	* This can be called by board code to populate the image_type_id
-+	* UUID fields deterministically based on the board's model. Allowing
-+	* many boards to be supported without the need for a large hardcoded
-+	* array of fw images. This works using v5 UUIDs.
-+	*/
-+	int efi_capsule_update_info_gen_ids(efi_guid_t *namespace, const char *soc,
-+										const char *model,
-+										const char *compatible);
-+
-+These strings are combined with the fw_image name to generate GUIDs for
-+each image. This function should be called during board init, before the
-+EFI subsystem is initialised.
-+
- The firmware images structure defines the GUID values, image index
- values and the name of the images that are to be updated through
- the capsule update feature. These values are to be defined as part of
- an array. These GUID values would be used by the Firmware Management
++		ret = efi_capsule_update_info_gen_ids(&salt_guid,
++					      "sandbox",
++					      ofnode_read_string(ofnode_root(), "model"),
++					      ofnode_read_string(ofnode_root(), "compatible"));
++		if (ret) {
++			printf("Failed to generate GUIDs: %d\n", ret);
++			return ret;
++		}
++	}
+ 	return 0;
+ }
+ 
+ int ft_board_setup(void *fdt, struct bd_info *bd)
 
 -- 
 2.44.0
