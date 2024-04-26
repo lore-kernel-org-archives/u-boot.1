@@ -4,91 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA932C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 15:56:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B84EC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 16:00:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4BE8884D0;
-	Fri, 26 Apr 2024 17:56:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id D6E6F885A4;
+	Fri, 26 Apr 2024 18:00:55 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="ZA261UvK";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 07E4188F35; Fri, 26 Apr 2024 17:56:44 +0200 (CEST)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1714147255;
+	bh=2z1VTJJp5Naq/Adarg4mVSih2+BcH11vpMu0ESQH7E0=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=J+pFyW3sSzSHot1nKRQzgvoaQcg1guWzI5Tx3SKRE3p5GtRM1/UKDqra5mZWeWB2+
+	 5SRYuYuIhHAennxv3mBv0Kciokct6bp8J3Ds3F00dp7BiaMmII7CMlCx+nQGHZNYz+
+	 tCp2bx6afWxYy3hofaRBu4eIVl38GV0aCbpDU/hcExiZ6mwFXNpDR7xB7Eg2vA/uU4
+	 3FUK3qHoEE/jhMBBbM5db4WEtGZ0NddPIhpb5Sxz/MEo9iWeg99Z9s07tMsS0qFiQu
+	 y4q5uCHue5RU4AAk4V7aaA2JyTPi4zZRBkVzu8MKt44KLnoZMRtkwrQG4MICwoTs5p
+	 VasCk/VH9bSUQ==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A5D9884D0
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 17:56:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-a556d22fa93so274315066b.3
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 08:56:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1714147001; x=1714751801; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EM/KCg85UIEAd2LnjAKOep8nt6nG1sLIjHlOYVYy0sE=;
- b=ZA261UvKB1iHQWDchISg1Z/g6FQhWR9N1e4oTdELFHBogBfjuBC5ysSr2g8pCWl0r9
- fn+FE944i3h9mk5wVGZqPifje/Uv2xkFGjLXI2/zxVZ/tpbveOCrh2GJXOqTbRbLJJQc
- Q/2JA/jd/OK3NXy3AoKB87pv+v8tR8d9tJ16XMAcjL0x6IP/tJUqGgyZLL9PAUBb/mAh
- pSdFXaJ0WwDRTNegNW81fKdzvSaXZY2SnLjYLvuXlIxzuJt4Rx76kTXKwbrIjDYxjoZw
- c/iyCMxzaxB8X2pfY52+ANMJG4u7MhGgKBQnQ8N1J1ONcr7jKEYwuJd+GCmPMiEpQZe9
- ycYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714147001; x=1714751801;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EM/KCg85UIEAd2LnjAKOep8nt6nG1sLIjHlOYVYy0sE=;
- b=YOmd3iEaNgP9FDa18PE+L20l7NBUMvm0E5ix4xFPW6cE6ebndtL4trEpdSxcHSUBn1
- zX24ItVV8WfLSqv/2RfOwgyKMU5oj7PsYq+1Pw88Gv2bkvgidof/ggH5s/zhCjnljJZO
- C1GxqgXvDfLjVsJaZBKaC1c++m8pmN87RgDMpDMmb/iAo32zsq9vLoMUuvlsdTcl9XTF
- pDY/DEQipydqUZ79G3jsMaCTXuyPItdN7mBt6n8pCzrY2eVF2QOvUB0TN+EMgmO4XPVL
- /1AE2tKu9zKd1X57NivgiBxdU7hY2vJrj4GIh0zYqeuH/Xr4OEec1t94JA5fwDLFfAmZ
- C+kg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUK0QOq04a1hQ7UXNRWx26jf9/98rM0dqX9l8Z/uwIsKB+h+F0bFxR0KJP3BfpMZVbHc5H/jnHgKBGfHwQwFgfiUzQ4pg==
-X-Gm-Message-State: AOJu0YxcBWrlpyr/Z0FITrHe8hFOWThQKlOIcM+fkIoNkPFgizi3JjGH
- szHRAWqhN45OrLOI1JYJDhhWwDHuwjl9cHR4NGASOGtW9zmnV+VCTwDxcTvo64FXZrCOnoZ1Bbp
- GRg7sVJowAmY7e7j/l0ue4MON8acaE/rWpmOQrA==
-X-Google-Smtp-Source: AGHT+IEbyzENzy+u59eRTqed/K4/UPEsRgY7j27Rrr2lEc+nJuY/aGmXrIohcDQlLCbWQ5v8zgF5t849Ip8n/5SoGqk=
-X-Received: by 2002:a17:907:31c2:b0:a58:a721:3a61 with SMTP id
- xf2-20020a17090731c200b00a58a7213a61mr2540743ejb.3.1714147001538; Fri, 26 Apr
- 2024 08:56:41 -0700 (PDT)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 34AA788505;
+ Fri, 26 Apr 2024 18:00:55 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1714147255;
+ bh=2z1VTJJp5Naq/Adarg4mVSih2+BcH11vpMu0ESQH7E0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=O+2zQfaTzYkdarMbSuI3Faev/0aUbyEmctDUqfo0FDqGZlJ2zZuOP6ZPMAujjfn5z
+ fqDCkPfHh0/xhfo2SzHQKPUh2/zlJSv3ZnCEORQeVqC4ynOqobv0iEyxclJOlsFffS
+ 9/3e4D71GbIUMfcrSmgoAq27jU/T4Yo5rrcFTchgfcuMtG/iOCvi9Y8oUJbVKBo6xG
+ GsQzza+ipgLA9m/AmNrBqfwtrxT2Jc6PMYQAzobrERhURgSePLnJEn4yL4CmekjPP3
+ IrWWkj2G9VHbbdXBtXfwlca8h1wkUDG4XBRuKkC6+zHNMfoFUJBzcbOc4AnbUBZ+5B
+ vrtaWqXlxseAg==
+Message-ID: <e5745575-9ee4-4e35-a81a-634d5b399d02@denx.de>
+Date: Fri, 26 Apr 2024 17:46:53 +0200
 MIME-Version: 1.0
-References: <20240425230721.497441-1-marex@denx.de>
- <20240425230721.497441-2-marex@denx.de>
- <CAJ+vNU34Zrn8znALzZqsDnkWifhVbz3D4D_hyNurKzH0cn30Lw@mail.gmail.com>
- <20240426155113.GH1054907@bill-the-cat>
-In-Reply-To: <20240426155113.GH1054907@bill-the-cat>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Fri, 26 Apr 2024 08:56:29 -0700
-Message-ID: <CAJ+vNU3QHGxwLsYbNouV0x9G0qLnufDSHEUC5OLzT-zxE7dCiQ@mail.gmail.com>
-Subject: Re: [PATCH 2/2] imx: hab: Use nxp_imx8mcst etype for i.MX8M flash.bin
- signing
-To: Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Angus Ainslie <angus@akkea.ca>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@gmail.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Simon Glass <sjg@chromium.org>,
- Stefan Eichenberger <stefan.eichenberger@toradex.com>, 
- Stefano Babic <sbabic@denx.de>, kernel@puri.sm, u-boot@dh-electronics.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] cmd: mmc: allow use of hardware parittion names for mmc
+ partconf
+To: Tim Harvey <tharvey@gateworks.com>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Fabio Estevam <festevam@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
+ u-boot@lists.denx.de
+References: <20240426001419.1210364-1-tharvey@gateworks.com>
+ <254b0fd2-0085-4894-bcfa-686c456e4e2a@denx.de>
+ <CAJ+vNU0fRLnZ-DvA8-ksKZAXWsgtFt_qa7Bcifb=3xLzZDu8WQ@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAJ+vNU0fRLnZ-DvA8-ksKZAXWsgtFt_qa7Bcifb=3xLzZDu8WQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,44 +73,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Apr 26, 2024 at 8:51=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Fri, Apr 26, 2024 at 08:30:23AM -0700, Tim Harvey wrote:
-> > On Thu, Apr 25, 2024 at 4:07=E2=80=AFPM Marek Vasut <marex@denx.de> wro=
-te:
-> > >
-> > > Update documentation and use nxp_imx8mcst binman etype for signing
-> > > of flash.bin instead of previous horrible shell scripting.
-> >
-> > Hi Marek,
-> >
-> > To be completely fair we are just replacing a shell script and
-> > template file with a python script
-> > (tools/binman/etype/nxp_imx8mcst.py) which also creates the template
-> > file.
-> >
-> > I could care less about shell vs python but do put huge value in the
-> > idea of making signing easier and doing so without modification of
-> > U-Boot code. The current implementation requires a couple of things to
-> > be enabled in defconfig which can be done with a seperate
-> > 'out-of-tree' defconfig but this new proposed implementation requires
-> > changing a u-boot.dtsi which is a tracked file.
->
-> A counter-point is that with using binman for signing we start
-> eliminating differences between different semiconductors on how to get
-> something signed.
+On 4/26/24 5:14 PM, Tim Harvey wrote:
+> On Thu, Apr 25, 2024 at 9:07 PM Marek Vasut <marex@denx.de> wrote:
+>>
+>> On 4/26/24 2:14 AM, Tim Harvey wrote:
+>>> eMMC devices have hardware partitions such as user, boot0, and boot1.
+>>> Allow these names to be displayed when reading the mmc PARTITION_CONFIG
+>>> field via 'mmc partconf'. Additionally allow a name to be specified when
+>>> setting the PARTITION_CONFIG.
+>>>
+>>> Before:
+>>> u-boot=> mmc partconf 2 1 1 0 && mmc partconf 2
+>>> EXT_CSD[179], PARTITION_CONFIG:
+>>> BOOT_ACK: 0x1
+>>> BOOT_PARTITION_ENABLE: 0x2
+>>> PARTITION_ACCESS: 0x0
+>>>
+>>> After:
+>>> u-boot=> mmc partconf 2 1 1 0 && mmc partconf 2
+>>> EXT_CSD[179], PARTITION_CONFIG:
+>>> BOOT_ACK: 0x1
+>>> BOOT_PARTITION_ENABLE: 0x1 (boot0)
+>>> PARTITION_ACCESS: 0x0
+>>> u-boot=> mmc partconf 2 1 boot1 0 && mmc partconf 2
+>>> EXT_CSD[179], PARTITION_CONFIG:
+>>> BOOT_ACK: 0x1
+>>> BOOT_PARTITION_ENABLE: 0x2 (boot1)
+>>> PARTITION_ACCESS: 0x0
+>>>
+>>> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+>>> ---
+>>>    cmd/mmc.c | 25 ++++++++++++++++++++++---
+>>>    1 file changed, 22 insertions(+), 3 deletions(-)
+>>>
+>>> diff --git a/cmd/mmc.c b/cmd/mmc.c
+>>> index 2d5430a53079..26692a8e349b 100644
+>>> --- a/cmd/mmc.c
+>>> +++ b/cmd/mmc.c
+>>> @@ -14,6 +14,18 @@
+>>>    #include <part.h>
+>>>    #include <sparse_format.h>
+>>>    #include <image-sparse.h>
+>>> +#include <linux/ctype.h>
+>>> +
+>>> +static const char *mmc_partnames[] = {
+>>> +     "user",
+>>> +     "boot0",
+>>> +     "boot1",
+>>> +     "",
+>>
+>> Shouldn't these be 'gp' partitions here ?
+>>
+> 
+> He Marek,
+> 
+> Do you mean that 3-6 should be named 'gp1', 'gp2' etc? I couldn't find
+> if those values were possible or have meaning.
 
-Hi Tom,
-
-I agree... I'm a huge fan of binman. I just don't want to replace
-current constructs that use env and/or config items on a clean code
-directory with replacements that require code diffs to do the same.
-
-I'm simply wanting to wrap binman sections with Kconfig items. Is
-there a way to use environment variables within binman sections (ie to
-wrap sections or override filenames)?
-
-Best Regards,
-
-Tim
+Yes, General Purpose eMMC hardware partitions.
