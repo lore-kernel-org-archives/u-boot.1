@@ -4,88 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D2ADC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 15:30:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 385CEC04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 15:31:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4002D88634;
-	Fri, 26 Apr 2024 17:30:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id B954088682;
+	Fri, 26 Apr 2024 17:31:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="QwLXSOlb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QJ3cyMlh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7928A88679; Fri, 26 Apr 2024 17:30:38 +0200 (CEST)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 7C98088698; Fri, 26 Apr 2024 17:31:37 +0200 (CEST)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D793888399
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 17:30:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CF5B81EEF
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 17:31:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-a51a7d4466bso278539466b.2
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 08:30:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=maximmosk4@gmail.com
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-51acb95b892so2931904e87.2
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 08:31:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1714145435; x=1714750235; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EQ/gOSn7/3ViahvFK+vaXfktrY2AAJbrzlBwYk7CdVk=;
- b=QwLXSOlbosOad2ITh+WBCI15zvZ4hGQ+hQJlv9mG1z2zMHSGJcK0bMH0eBrWcy/QWJ
- p3c+sQsoR17l9uFBh3MSKb2ODjCAfqu2VhRTvGpyYlm/P8KKxme113NsA666gIN+8FM1
- KHrwnAiL2ukyHWwAogjXs54jGnvGdS2KYPSv5ylHx6N5YHx0mD/Zd+gCsMtL4sZNiGIN
- 59NeTl65T/sHY9jzFWgAnxYAtUE3wL384s/6sLDdSegroDfSBVpes45oaG2rZRWe9tc1
- Cp5cPr8SkPXF6G5n0+fOmjAemMV9CDguCNc4s7zhE5ParjIk+Gz7IfGotLWfyC5L7/Ao
- CNMA==
+ d=gmail.com; s=20230601; t=1714145495; x=1714750295; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=op6pjnAZGP2vQukJ59KT5Xlpxx7RMzmDyDcXUMhJ4JI=;
+ b=QJ3cyMlha1RMb+5aUklgZz1zhZ3XOopynfQjFcIGTUUKjeCCUjsiLb9VjrEt6+0BhT
+ XiH8g+MFAvOxv2QEPlwzOEdBSyX0gRNLvZC/VLYmvjN+Li0hr9I/Jsa1UvCJOujoDY4Q
+ wLaRmBmQCi118iqDXAcJcIH5zw9+HOoTwdrUXmSIq4LR8XImwhrE0bY1fJKFexKPtxmx
+ qlcqa1XfRJGKFfyh9HmAW8lzdRWVITo69qhhDpOiFWbLPzbVY2i17dFSolsSV6cT3oyJ
+ qrbt7RfQkuBae+jZzezdvjvuwDzrf51kZ1AVpZMEkFxRTbv28LmcQpkdSMcwlPuLbxUs
+ zAXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714145435; x=1714750235;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EQ/gOSn7/3ViahvFK+vaXfktrY2AAJbrzlBwYk7CdVk=;
- b=Pv2tLPhvuXa2LHUHlt8yj4jWXz5wEx+ahZkPFgCAweqFgkQ9ecQS3DU3PjFCNMdW7m
- XgrjGz/RxzPAV7bkS1ja9vdtepYNCWqk7x0I1DGHPRhxnCFy/21H+nSfdxIXmSe9kuxT
- V+taKUTGYiRP5zL3rH5FuzdDXjHsGyypsKlrI4hMS5TtO46gM5FARpbkzOCM0nioNgpC
- BsZjuVcKviQsai3MUCpzFIvoe2PxImyxitMiXYcnfi246i+tLzpe95hmlLG5rtZQs3YA
- A+76mUeQcXWl5MCEuHsr6yoBBHCSjaQQg9X2awhNKw8LzwM4tI5yAk0WbdeGc30g5u8F
- Z7Gw==
-X-Gm-Message-State: AOJu0YwrldARblAFIhe8DNdUsRSYAGqG5tq8zNgHh8f5JDXd0neE0loL
- gfZoyT2WEOq32yYQ7owgfVeN2OhWjKEs9rCIO/zRil6q0M6FkseLiPXhUsbo4HPlA9zbbQ+ZHPG
- SUNxcCrna1nXJm2z4FT4LyX1kjTCAPHeIolauuQ==
-X-Google-Smtp-Source: AGHT+IH+JDKm8K24Kf/0+xfoz3YWo+XTmt95Cd9SlZK7GmwlP7ts0tSizRAkhr3jE7dl/lgKS+1FcchcA2Faw8wKZOQ=
-X-Received: by 2002:a17:906:abc8:b0:a58:5ee1:db43 with SMTP id
- kq8-20020a170906abc800b00a585ee1db43mr2382397ejb.23.1714145435289; Fri, 26
- Apr 2024 08:30:35 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1714145495; x=1714750295;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=op6pjnAZGP2vQukJ59KT5Xlpxx7RMzmDyDcXUMhJ4JI=;
+ b=djEKyqzpJAtTLA+dVBS02SOPJZfwrAdaGKMw9FRKhhVmWIairltQsOJzJtSAiPFXPM
+ g7jEstDAEy/Hc5OMl1Dje7EK22LMDRVmvHIVeGGJbhV6jJv1H9W75zucLhv42DbgRtpH
+ O/32KA8miezmTGf2FA0sYmeTFe6IkQREhSxSbw4m79mEfVbddrvkwYd3Dgmj7Q3lzAsE
+ G+JhG8l+jhKNumcSdB3dshFbTPMNNTofKO/iFe/VMMSJD/B60cz3Auu3dsLq0GVoBi7o
+ RcL03J2iYPRx8B692qN3efsMtmiYc56a7MJ0quqDDAOlSt5APCuBqTjwmfLdUfTUkhXB
+ Ce3w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWJZJAw5U+TNPIh/+dejLuDQMKfwnWgdZVFGphgusGvGyy73oTUl8ea6qbiPUoEBtFvkT+SRtO9i2e4G0dOmqOGXqO6EQ==
+X-Gm-Message-State: AOJu0YyLPuVEHu57TGNLL8lyzEiWPr3itg80Zet5ZLv6CeXDL3DJYCpa
+ lnqPmnb+pkYfd9N35/UcmJQx+5+k8pamTRg9I491WCXvCzwi2HOe
+X-Google-Smtp-Source: AGHT+IFsugeWuRiby0w4fIYExn/mYVStncec6EfCtOlz2WZViP76Rc5eRCvMrMK8idygrbnRz0CGAQ==
+X-Received: by 2002:ac2:5607:0:b0:513:9e44:c68c with SMTP id
+ v7-20020ac25607000000b005139e44c68cmr2260265lfd.6.1714145494301; 
+ Fri, 26 Apr 2024 08:31:34 -0700 (PDT)
+Received: from ?IPV6:2a00:1fa0:28a:c024:f9e9:89d9:4998:675d?
+ ([2a00:1fa0:28a:c024:f9e9:89d9:4998:675d])
+ by smtp.gmail.com with ESMTPSA id
+ o16-20020ac24e90000000b00518df09f2d5sm3167354lfr.296.2024.04.26.08.31.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 26 Apr 2024 08:31:33 -0700 (PDT)
+Message-ID: <c4bd1827-8a10-4fc2-bc53-0ba0988b93d1@gmail.com>
+Date: Fri, 26 Apr 2024 18:31:31 +0300
 MIME-Version: 1.0
-References: <20240425230721.497441-1-marex@denx.de>
- <20240425230721.497441-2-marex@denx.de>
-In-Reply-To: <20240425230721.497441-2-marex@denx.de>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Fri, 26 Apr 2024 08:30:23 -0700
-Message-ID: <CAJ+vNU34Zrn8znALzZqsDnkWifhVbz3D4D_hyNurKzH0cn30Lw@mail.gmail.com>
-Subject: Re: [PATCH 2/2] imx: hab: Use nxp_imx8mcst etype for i.MX8M flash.bin
- signing
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Adam Ford <aford173@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Angus Ainslie <angus@akkea.ca>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@gmail.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Simon Glass <sjg@chromium.org>,
- Stefan Eichenberger <stefan.eichenberger@toradex.com>, 
- Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>, kernel@puri.sm, 
- u-boot@dh-electronics.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] cmd: move ELF load and boot to lib/elf.c
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Maxim.Moskalets@kaspersky.com, u-boot@lists.denx.de, trini@konsulko.com,
+ sjg@chromium.org, quentin.schulz@theobroma-systems.com
+References: <20240426091102.50350-1-Maxim.Moskalets@kaspersky.com>
+ <98a5dfe3-f388-4cf0-89ae-5fc56c3dc729@gmx.de>
+Content-Language: en-US
+From: "Maxim M. Moskalets" <maximmosk4@gmail.com>
+In-Reply-To: <98a5dfe3-f388-4cf0-89ae-5fc56c3dc729@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,140 +98,239 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 25, 2024 at 4:07=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+On 26.04.2024 17:32, Heinrich Schuchardt wrote:
+> On 26.04.24 11:11, Maxim Moskalets wrote:
+>> Loading and running the ELF image is the responsibility of the
+>> library and should not be associated with the command line interface.
+>>
+>> It is also required to run ELF images from FIT with the bootm command
+>> so as not to depend on the command line interface.
+>>
+>> Signed-off-by: Maxim Moskalets <maximmosk4@gmail.com>
+>> ---
+>>   cmd/elf.c     | 49 +++++++++++++++++--------------------------------
+>>   include/elf.h | 10 ++++++++++
+>>   lib/elf.c     | 36 ++++++++++++++++++++++++++++++++++++
+>>   3 files changed, 63 insertions(+), 32 deletions(-)
+>>
+>> diff --git a/cmd/elf.c b/cmd/elf.c
+>> index df4354d374..8bbdc67db7 100644
+>> --- a/cmd/elf.c
+>> +++ b/cmd/elf.c
+>> @@ -20,21 +20,6 @@
+>>   #include <linux/linkage.h>
+>>   #endif
+>>
+>> -/* Allow ports to override the default behavior */
+>> -static unsigned long do_bootelf_exec(ulong (*entry)(int, char * 
+>> const[]),
+>> -                     int argc, char *const argv[])
+>> -{
+>> -    unsigned long ret;
+>> -
+>> -    /*
+>> -     * pass address parameter as argv[0] (aka command name),
+>> -     * and all remaining args
+>> -     */
+>> -    ret = entry(argc, argv);
+>> -
+>> -    return ret;
+>> -}
+>> -
+>>   /* Interpreter command to boot an arbitrary ELF image from memory */
+>>   int do_bootelf(struct cmd_tbl *cmdtp, int flag, int argc, char 
+>> *const argv[])
+>>   {
+>> @@ -44,8 +29,8 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, int 
+>> argc, char *const argv[])
+>>   #endif
+>>       unsigned long addr; /* Address of the ELF image */
+>>       unsigned long rc; /* Return value from user code */
+>> -    char *sload = NULL;
+>>       int rcode = 0;
+>> +    Bootelf_flags flags = {0};
+>>
+>>       /* Consume 'bootelf' */
+>>       argc--; argv++;
+>> @@ -53,7 +38,10 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, 
+>> int argc, char *const argv[])
+>>       /* Check for [-p|-s] flag. */
+>>       if (argc >= 1 && (argv[0][0] == '-' && \
+>>                   (argv[0][1] == 'p' || argv[0][1] == 's'))) {
+>> -        sload = argv[0];
+>> +        if (argv[0][1] == 'p')
+>> +            flags.phdr = 1;
+>> +        printf("## Try to elf hdr format %s\n",
+>> +                flags.phdr ? "phdr" : "shdr");
+>>           /* Consume flag. */
+>>           argc--; argv++;
+>>       }
+>> @@ -76,14 +64,6 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, 
+>> int argc, char *const argv[])
+>>       } else
+>>           addr = image_load_addr;
+>>
+>> -    if (!valid_elf_image(addr))
+>> -        return 1;
+>> -
+>> -    if (sload && sload[1] == 'p')
+>> -        addr = load_elf_image_phdr(addr);
+>> -    else
+>> -        addr = load_elf_image_shdr(addr);
+>> -
+>>   #if CONFIG_IS_ENABLED(CMD_ELF_FDT_SETUP)
+>>       if (fdt_addr) {
+>>           printf("## Setting up FDT at 0x%08lx ...\n", fdt_addr);
+>> @@ -94,21 +74,26 @@ int do_bootelf(struct cmd_tbl *cmdtp, int flag, 
+>> int argc, char *const argv[])
+>>       }
+>>   #endif
+>>
+>> -    if (!env_get_autostart())
+>> -        return rcode;
+>> -
+>> -    printf("## Starting application at 0x%08lx ...\n", addr);
+>> -    flush();
+>> +    if (env_get_autostart()) {
+>> +        flags.autostart = 1;
+>> +        printf("## Starting application at 0x%08lx ...\n", addr);
+>> +        flush();
+>> +    }
+>>
+>>       /*
+>>        * pass address parameter as argv[0] (aka command name),
+>>        * and all remaining args
+>>        */
+>> -    rc = do_bootelf_exec((void *)addr, argc, argv);
+>> +    rc = bootelf(addr, flags, argc, argv);
+>>       if (rc != 0)
+>>           rcode = 1;
+>>
+>> -    printf("## Application terminated, rc = 0x%lx\n", rc);
+>> +    if (flags.autostart) {
+>> +        if (ENOEXEC == errno)
+>> +            printf("## Invalid ELF image\n");
+>> +        else
+>> +            printf("## Application terminated, rc = 0x%lx\n", rc);
+>> +    }
+>>
+>>       return rcode;
+>>   }
+>> diff --git a/include/elf.h b/include/elf.h
+>> index a4ba74d8ab..b88e6cf403 100644
+>> --- a/include/elf.h
+>> +++ b/include/elf.h
+>> @@ -12,6 +12,12 @@
+>>   #ifndef __ASSEMBLY__
+>>   #include "compiler.h"
+>>
+>> +/* Flag param bits for bootelf() function */
+>> +typedef struct {
+>> +    unsigned phdr      : 1; /* load via program (not section) 
+>> headers */
+>> +    unsigned autostart : 1; /* Start ELF after loading */
+>> +} Bootelf_flags;
+>> +
+>>   /* This version doesn't work for 64-bit ABIs - Erik */
+>>
+>>   /* These typedefs need to be handled better */
+>> @@ -700,6 +706,10 @@ unsigned long elf_hash(const unsigned char *name);
+>>   #define R_RISCV_RELATIVE    3
+>>
+>>   #ifndef __ASSEMBLY__
+>> +unsigned long bootelf_exec(ulong (*entry)(int, char * const[]),
+>> +               int argc, char *const argv[]);
+>> +unsigned long bootelf(unsigned long addr, Bootelf_flags flags,
+>> +              int argc, char *const argv[]);
+>>   int valid_elf_image(unsigned long addr);
+>>   unsigned long load_elf64_image_phdr(unsigned long addr);
+>>   unsigned long load_elf64_image_shdr(unsigned long addr);
+>> diff --git a/lib/elf.c b/lib/elf.c
+>> index 9a794f9cba..0f3d752758 100644
+>> --- a/lib/elf.c
+>> +++ b/lib/elf.c
+>> @@ -7,6 +7,7 @@
+>>   #include <cpu_func.h>
+>>   #include <elf.h>
+>>   #include <env.h>
+>> +#include <errno.h>
+>>   #include <net.h>
+>>   #include <vxworks.h>
+>>   #ifdef CONFIG_X86
+>> @@ -15,6 +16,41 @@
+>>   #include <linux/linkage.h>
+>>   #endif
+>>
+>> +/* Allow ports to override the default behavior */
+>> +unsigned long bootelf_exec(ulong (*entry)(int, char * const[]),
+>> +               int argc, char *const argv[])
+>> +{
+>> +    return entry(argc, argv);
+>> +}
+>> +
+>> +/*
+>> + * Boot ELF from memory
+>> + *
+>> + * addr       - loading address of ELF in memory
+>> + * flags      - bits like ELF_PHDR to control boot details
+>> + * argc, argv - may be used to pass command line arguments (maybe 
+>> unused)
+>> + *
+>> + * Sets errno = ENOEXEC if ELF image is not valid
+>> + */
+>> +unsigned long bootelf(unsigned long addr, Bootelf_flags flags,
+>> +              int argc, char *const argv[])
 >
-> Update documentation and use nxp_imx8mcst binman etype for signing
-> of flash.bin instead of previous horrible shell scripting.
-
-Hi Marek,
-
-To be completely fair we are just replacing a shell script and
-template file with a python script
-(tools/binman/etype/nxp_imx8mcst.py) which also creates the template
-file.
-
-I could care less about shell vs python but do put huge value in the
-idea of making signing easier and doing so without modification of
-U-Boot code. The current implementation requires a couple of things to
-be enabled in defconfig which can be done with a seperate
-'out-of-tree' defconfig but this new proposed implementation requires
-changing a u-boot.dtsi which is a tracked file.
-
+> Moving bootelf functionality is a good idea as we want to be able to
+> build without command line interface.
 >
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>
-> Cc: Adam Ford <aford173@gmail.com>
-> Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>
-> Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>
-> Cc: Angus Ainslie <angus@akkea.ca>
-> Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
-> Cc: Fabio Estevam <festevam@gmail.com>
-> Cc: Francesco Dolcini <francesco.dolcini@toradex.com>
-> Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>
-> Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Stefan Eichenberger <stefan.eichenberger@toradex.com>
-> Cc: Stefano Babic <sbabic@denx.de>
-> Cc: Tim Harvey <tharvey@gateworks.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: kernel@puri.sm
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> ---
->  doc/imx/habv4/csf_examples/mx8m/csf.sh        |  92 ------------
->  doc/imx/habv4/csf_examples/mx8m/csf_fit.txt   |  30 ----
->  doc/imx/habv4/csf_examples/mx8m/csf_spl.txt   |  33 ----
->  doc/imx/habv4/guides/mx8m_spl_secure_boot.txt | 141 +++++++-----------
->  4 files changed, 55 insertions(+), 241 deletions(-)
->  delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf.sh
->  delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf_fit.txt
->  delete mode 100644 doc/imx/habv4/csf_examples/mx8m/csf_spl.txt
+> We should define the library functions without usage of argc and argv.
+> The translation from argv[], argc to the library function parameters
+> should happen in cmd/elf.c.
 >
-<snip>
-
-> +to authenticate, which keys to install, use and etc. The CSF is generate=
-d
-> +using the CST Code Signing Tool based on input configuration file. This =
-tool
-> +input configuration file is generated using binman, and the tool is invo=
-ked
-> +from binman as well.
-> +
-> +The SPL and fitImage sections of the generated image are signed separate=
-ly.
-> +The signing is activated by wrapping SPL and fitImage sections into nxp-=
-imx8mcst
-> +etype, by adding the following modification into the binman node:
-> +
-
-Can we avoid having to modify code to sign an image? If we add a
-Kconfig then you can wrap the following changes with an ifdef.
-
-I've run into a similar issues enabling OPTEE and was able to wrap the
-entries with ifdefs with the exception of one that requires a unique
-load address which I guess requires another Kconfig to solve [1]
-
-Best Regards,
-
-Tim
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20230622173006.3921891=
--1-tharvey@gateworks.com/
-
-> +"
-> +    diff --git a/arch/arm/dts/imx8mp-u-boot.dtsi b/arch/arm/dts/imx8mp-u=
--boot.dtsi
-> +    index c4c1a177102..ccd44bf9d0b 100644
-> +    --- a/arch/arm/dts/imx8mp-u-boot.dtsi
-> +    +++ b/arch/arm/dts/imx8mp-u-boot.dtsi
-> +    @@ -86,6 +86,12 @@
-> +            section {
-> +                    pad-byte =3D <0x00>;
-> +
-> +    +               nxp-imx8mcst@0 {
-> +    +                       filename =3D "u-boot-spl-mkimage.signed.bin"=
-;
-> +    +                       nxp,loader-address =3D <CONFIG_SPL_TEXT_BASE=
->;
-> +    +                       nxp,unlock;
-> +    +                       args;   /* Needed by mkimage etype superclas=
-s */
-> +    +
-> +                    nxp-imx8mimage {
-> +                            filename =3D "u-boot-spl-mkimage.bin";
-> +                            nxp,boot-from =3D "sd";
-> +    @@ -129,6 +135,14 @@
-> +                            };
-> +                    };
-> +
-> +    +               };
-> +    +
-> +    +               nxp-imx8mcst@1 {
-> +    +                       filename =3D "u-boot-fit.signed.bin";
-> +    +                       nxp,loader-address =3D <CONFIG_SPL_LOAD_FIT_=
-ADDRESS>;
-> +    +                       offset =3D <0x58000>;
-> +    +                       args;   /* Needed by mkimage etype superclas=
-s */
-> +    +
-> +                    fit {
-> +                            description =3D "Configuration to load ATF b=
-efore U-Boot";
-> +     #ifndef CONFIG_IMX_HAB
-> +    @@ -191,5 +205,6 @@
-> +                                    };
-> +                            };
-> +                    };
-> +    +               };
-> +            };
-> +     };
-> +"
-> +
-> +Build of flash.bin target then produces a signed flash.bin automatically=
-.
+> Best regards
 >
->  1.4 Closing the device
->  -----------------------
-> --
-> 2.43.0
+> Heinrich
 >
+
+In the library ported part, command line arguments are not analyzed, 
+only passed
+to the running image.
+
+This is necessary to pass the command line arguments to the running 
+applications,
+which is required for backward compatibility. In other cases, you can 
+replace argc
+and argv with null values.
+
+Perhaps there is a better engineering solution for putting this in the 
+library and
+maintaining compatibility?
+
+Translated with DeepL.com (free version)
+
+Best regards
+
+Maxim
+>> +{
+>> +    unsigned long entry_addr;
+>> +
+>> +    if (!valid_elf_image(addr)) {
+>> +        errno = ENOEXEC;
+>> +        return 1;
+>> +    }
+>> +
+>> +    entry_addr = flags.phdr ? load_elf_image_phdr(addr)
+>> +                        : load_elf_image_shdr(addr);
+>> +
+>> +    if (!flags.autostart)
+>> +        return 0;
+>> +
+>> +    return bootelf_exec((void *)entry_addr, argc, argv);;
+>> +}
+>> +
+>>   /*
+>>    * A very simple ELF64 loader, assumes the image is valid, returns the
+>>    * entry point address.
+>
+
