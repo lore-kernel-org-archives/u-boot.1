@@ -4,74 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BC43C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 08:03:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1E51C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 08:03:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BB0F8914A;
-	Fri, 26 Apr 2024 10:03:10 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ew.tq-group.com
+	by phobos.denx.de (Postfix) with ESMTP id 9279C89151;
+	Fri, 26 Apr 2024 10:03:12 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=tq-group.com header.i=@tq-group.com header.b="gpeeLhGO";
-	dkim=fail reason="key not found in DNS" (0-bit key; unprotected) header.d=ew.tq-group.com header.i=@ew.tq-group.com header.b="ilnlbrDn";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="jV6TvV+7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 235F88915B; Fri, 26 Apr 2024 10:03:08 +0200 (CEST)
-Received: from mx1.tq-group.com (mx1.tq-group.com [93.104.207.81])
+ id 405E189155; Fri, 26 Apr 2024 10:03:11 +0200 (CEST)
+Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B59D88EF8
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 10:03:04 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ew.tq-group.com
+ by phobos.denx.de (Postfix) with ESMTPS id D4CCC89151
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 10:03:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=matthias.schiffer@ew.tq-group.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=tq-group.com; i=@tq-group.com; q=dns/txt; s=key1;
- t=1714118583; x=1745654583;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=/JV6d2ir3FmMS2C8p9V/8pX87bdwS5QoIkkHOu736IM=;
- b=gpeeLhGOWCBgu1mViy8fLnpOvStH3R9lhGYq7zxxyY/o/Fw6Vhklb3i7
- 5gIAwZB8LJLZTSvZTvN4b+JSpEf6CHEKitG4Ka4GI+Fc32oYohuYFHkBw
- iF4lSKmorsMqD/XYBN1ba9qBNqHL1ugPzRGUme89mHBcHrYQWerttOJ3K
- 6ul8t6b9iW597PVfN7zmfTFmth8f01vCz7NlkIg3N0RM1yaU4VAfpajSp
- APNinEaZKVXWNTsBMz6rSpqgwWWFR2IaICLKL13qFYuUOOwu/jXsuLDME
- RtQaWSUaIvTCKgBhEYfPMhtsgGL/EQmZJZklUfaeU4WdDbIE4v1HO6egr A==;
-X-IronPort-AV: E=Sophos;i="6.07,231,1708383600"; d="scan'208";a="36629249"
-Received: from vmailcow01.tq-net.de ([10.150.86.48])
- by mx1.tq-group.com with ESMTP; 26 Apr 2024 10:03:03 +0200
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5A92916FC9C; Fri, 26 Apr 2024 10:02:59 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ew.tq-group.com;
- s=dkim; t=1714118579;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:
- content-transfer-encoding:in-reply-to:references;
- bh=/JV6d2ir3FmMS2C8p9V/8pX87bdwS5QoIkkHOu736IM=;
- b=ilnlbrDnf3gjylseeTnVgkuEfOhcu4WCYLp4cbYuih8kDcoI5HDNE7B/GjWKK8yLHTRBem
- ftAuDOJhUH3oSHpKBRn1pPQZOueH25yB59srpRZLlFR+fdnguzHWdF08cLglp8xcER2BWv
- Q1n8OqIgmoUkKAm2yB7OZeOAgdvbytlfPuml1k/jIoswHhihdk9FeV8S6Xs71HweH1shwV
- p0wbyBZFHasdbUeJUt8Ryb6qkDGaYZ4aZs8QDnddLZpnsf+pGBIvWUGYQK3nW4eBDqS1CV
- Iipag6bqM/4xsszJDGSoyRuBxOSGU5slGXNrm39WR6zwhT5igLkT2+QvT4yzcQ==
-From: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-To: Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, MD Danish Anwar <danishanwar@ti.com>,
- Jai Luthra <j-luthra@ti.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
- Nishanth Menon <nm@ti.com>, Udit Kumar <u-kumar1@ti.com>,
- Suman Anna <s-anna@ti.com>
-Cc: u-boot@lists.denx.de, u-boot@ew.tq-group.com,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
-Subject: [PATCH 5/5] dma: ti: k3-udma: invalidate prepared buffers before
- pushing to recv ring
-Date: Fri, 26 Apr 2024 10:02:28 +0200
-Message-ID: <d3f36df0833702190ce902033a4c14d5d844d9b6.1714117337.git.matthias.schiffer@ew.tq-group.com>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <de7fe2da7ae4a85252d63904fae61585e4641936.1714117337.git.matthias.schiffer@ew.tq-group.com>
-References: <de7fe2da7ae4a85252d63904fae61585e4641936.1714117337.git.matthias.schiffer@ew.tq-group.com>
+ smtp.mailfrom=prvs=4846c7b602=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 43Q03FMa029882;
+ Fri, 26 Apr 2024 10:03:00 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ message-id:date:mime-version:subject:to:cc:references:from
+ :in-reply-to:content-type:content-transfer-encoding; s=
+ selector1; bh=XMyVKI8/vNHzUTOxjnaC8UHDF1HqzCGvBfbu7enanzI=; b=jV
+ 6TvV+7GFzWmfRqZQ3GKRmRSI3QHr9d2JFCtM86iJ4LUGy6FvQuIktzOxw1S1HUan
+ 7OtHvqb7s93/vEYv7g2Gj3Y6WB9dhW7JYi16Q7KywXS78TihuG/YL9V0AbjNbEwf
+ W25c2DWyHR4sx9bvPjNEZmC0p90mPdp6U1DAFb5idb8oMwMpNDfYcYbwQubE9VJr
+ LCQErChB9Q9cYqEdTzQwqS2RrbfoN6X44Mb+gHImxXvZqZ6mdlSIVPjVYfpK2vOc
+ dVtf2JLFDR39HEGTdE3iIRscd0vaMAvrd+cqFxUVznmYSBlVjxQn/KZ9Z5RkpNvC
+ l16/615vXx7po0QoIxZA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xmrnjee6f-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 26 Apr 2024 10:03:00 +0200 (MEST)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id EE86A4002D;
+ Fri, 26 Apr 2024 10:02:56 +0200 (CEST)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 312C82132D5;
+ Fri, 26 Apr 2024 10:02:39 +0200 (CEST)
+Received: from [10.48.86.98] (10.48.86.98) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 26 Apr
+ 2024 10:02:38 +0200
+Message-ID: <d58d0b50-33c8-449f-8140-33afabbd099b@foss.st.com>
+Date: Fri, 26 Apr 2024 10:02:38 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 13/19] ARM: dts: stm32: Add alternate pinmux for MP13 SPI2
+ pins
+Content-Language: en-US
+To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
+CC: Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
+References: <20240421231849.194648-1-marex@denx.de>
+ <20240421231849.194648-13-marex@denx.de>
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20240421231849.194648-13-marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.86.98]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.650,FMLib:17.11.176.26
+ definitions=2024-04-26_07,2024-04-26_01,2023-05-22_02
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,40 +91,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Buffers must not have an unclean cache before being used for DMA - a
-pending write-back may corrupt the next dev-to-mem transfer otherwise.
 
-This was consistently noticeable during long TFTP transfers, when an ARP
-request is answered by U-Boot in the middle of the transfer:
 
-As U-Boot's arp_receive() reuses the receive buffer to prepare its
-reply packet, the beginning of one of the next incoming TFTP packets
-is overwritten by the ARP reply. The corrupted packet is ignored, but
-the TFTP transfer stalls for a few seconds until a timeout is detected
-and a retransmit is triggered.
+On 4/22/24 01:16, Marek Vasut wrote:
+> Add another mux option for SPI2 pins, this is used on
+> DH electronics STM32MP13xx DHCOR DHSBC board.
+> 
+> Signed-off-by: Marek Vasut <marex@denx.de>
+> ---
+> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+> Cc: u-boot@dh-electronics.com
+> Cc: uboot-stm32@st-md-mailman.stormreply.com
+> ---
+>  arch/arm/dts/stm32mp13-pinctrl.dtsi | 23 +++++++++++++++++++++++
+>  1 file changed, 23 insertions(+)
+> 
+> diff --git a/arch/arm/dts/stm32mp13-pinctrl.dtsi b/arch/arm/dts/stm32mp13-pinctrl.dtsi
+> index c6967e82b5d..17acd2850d3 100644
+> --- a/arch/arm/dts/stm32mp13-pinctrl.dtsi
+> +++ b/arch/arm/dts/stm32mp13-pinctrl.dtsi
+> @@ -511,6 +511,29 @@
+>  		};
+>  	};
+>  
+> +	spi2_pins_a: spi2-0 {
+> +		pins1 {
+> +			pinmux = <STM32_PINMUX('B', 10, AF6)>, /* SPI2_SCK */
+> +				 <STM32_PINMUX('H', 10, AF6)>; /* SPI2_MOSI */
+> +			bias-disable;
+> +			drive-push-pull;
+> +			slew-rate = <1>;
+> +		};
+> +
+> +		pins2 {
+> +			pinmux = <STM32_PINMUX('B', 5, AF5)>; /* SPI2_MISO */
+> +			bias-disable;
+> +		};
+> +	};
+> +
+> +	spi2_sleep_pins_a: spi2-sleep-0 {
+> +		pins {
+> +			pinmux = <STM32_PINMUX('B', 10, ANALOG)>, /* SPI2_SCK */
+> +				 <STM32_PINMUX('B', 5, ANALOG)>, /* SPI2_MISO */
+> +				 <STM32_PINMUX('H', 10, ANALOG)>; /* SPI2_MOSI */
+> +		};
+> +	};
+> +
+>  	spi5_pins_a: spi5-0 {
+>  		pins1 {
+>  			pinmux = <STM32_PINMUX('H', 7, AF6)>, /* SPI5_SCK */
 
-Signed-off-by: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
----
- drivers/dma/ti/k3-udma.c | 3 +++
- 1 file changed, 3 insertions(+)
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
 
-diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
-index 4e6f7f570c5..8f6d396653e 100644
---- a/drivers/dma/ti/k3-udma.c
-+++ b/drivers/dma/ti/k3-udma.c
-@@ -2678,6 +2678,9 @@ int udma_prepare_rcv_buf(struct dma *dma, void *dst, size_t size)
- 	cppi5_hdesc_set_pktlen(desc_rx, size);
- 	cppi5_hdesc_attach_buf(desc_rx, dma_dst, size, dma_dst, size);
- 
-+	invalidate_dcache_range((unsigned long)dma_dst,
-+				(unsigned long)(dma_dst + size));
-+
- 	flush_dcache_range((unsigned long)desc_rx,
- 			   ALIGN((unsigned long)desc_rx + uc->config.hdesc_size,
- 				 ARCH_DMA_MINALIGN));
--- 
-TQ-Systems GmbH | Mühlstraße 2, Gut Delling | 82229 Seefeld, Germany
-Amtsgericht München, HRB 105018
-Geschäftsführer: Detlef Schneider, Rüdiger Stahl, Stefan Schneider
-https://www.tq-group.com/
-
+Thanks
+Patrice
