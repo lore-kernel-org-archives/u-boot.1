@@ -4,59 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44D6FC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 17:42:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04E7BC4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 19:26:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 834CA8858D;
-	Fri, 26 Apr 2024 19:42:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 64D41882BC;
+	Fri, 26 Apr 2024 21:26:49 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1714153323;
-	bh=6gICVIjfTFYhNSwIegT0vE8G3BPWNZ/LaRM8MgD4xTk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=KyYYfhBDyrkqHdxmogzYNi5IOuj4Sum/s+0rLSMo7WufiAK3ZmymL+KafdKM5m4kA
-	 wS0Jt1odG+jcuRaALMu2+X2FYa4bhHSCAyfuZjtXxQIWTxqgZ2t9k1kFcRdotbdoWe
-	 svzMK7857bi0wd9R0Uh0XPoyhMUSoZR6+mFqy0ybDlyLXDoRJFzKX65ngTRVPvjKIx
-	 f4ZR7lHzLr/5NiNTSNIUiOmaNzp2ObJk23jIzGE5VVQr535yZwv/XpwXh6IfzUj+sc
-	 V32nyih0pkVy3pGkvH7Tz4309AjNUORlztHT105r0uzmh5MjugSGrCeN8Y8X671KJN
-	 T2sxRPxVYAGGA==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="RHnAzX3k";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 69058882B0; Fri, 26 Apr 2024 21:26:48 +0200 (CEST)
+Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id DD5CC88354;
- Fri, 26 Apr 2024 19:42:00 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1714153321;
- bh=6gICVIjfTFYhNSwIegT0vE8G3BPWNZ/LaRM8MgD4xTk=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=rZAQltHFeyaLXQtHGFV6t3PDjEgbt5y4jXE0NOoeGWAUmQusumRa6jlQ3BCavOXFD
- PAJp5XHauhpnuet/Yya97QkIp97mzqZYoL6GAUJxchVj+3JbQlQ7xCBQx0dIJmYIMo
- wH+E+2KfRjEKyoo3WT5L/Qhpw4PnuD1x4IKaKb21dLaUgzD5GgSjSwA4u3QBvKxYjf
- KUnarU+yREyWqsjiWlSzhhI7BjalVMV2fYtcMBQledAzUbhTU33PlRQnr/Ba1tKEqd
- QDCZXlLn9Wj7BR2XmhBAd482Rkn3G7tCBA2Oze+o1Rbv0tS2x5uYaGsXw6cfYQC8zw
- v2tY0h4TDx02Q==
-Message-ID: <a1e9206f-0cbf-44b2-a5e7-351f77c0d2b5@denx.de>
-Date: Fri, 26 Apr 2024 19:42:00 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id A1B7E882BC
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 21:26:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=manjaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=dsimic@manjaro.org
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] cmd: mmc: allow use of hardware partition names for
- mmc partconf
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
+ t=1714159605;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=eqFcNJjSmZHA3QHUJKO0+PpENKz8RoZ8UxhiCfYdZ10=;
+ b=RHnAzX3k5azXK8LeSOavys66iekkDvWqD1w5j8AygOBi4hqJuYKjIjBXaEStocjqmty2Mm
+ 2C5roMo26QUuJgIdOaRFPatTheL3AmncID+2zwuFgA/xKREFlwDE6vts345n6wtwyB+jJ2
+ vSW77vIWMjXPjVbEL5MJlIIyJHQAEXw56uhiWoqqS9Fs64j76jssRSMEpuMgf4KFkXHkYG
+ r6U7lTFIEsVZGrXZTgVCLR4uLk69ruYKzCAJfE0CA61rvkhNPioizrPiDJwXXGKWERUycd
+ pUjKydc1WxOXF4gwgKgrAbM/kkEBjsajtlb/ieh5Bf/KRsZxHkeRu1RBwLibmg==
+Date: Fri, 26 Apr 2024 21:26:43 +0200
+From: Dragan Simic <dsimic@manjaro.org>
 To: Tim Harvey <tharvey@gateworks.com>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Fabio Estevam <festevam@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- u-boot@lists.denx.de
-References: <20240426171205.1382212-1-tharvey@gateworks.com>
- <9f5dc653-8252-4da7-81bc-a76280cf4c68@denx.de>
- <CAJ+vNU3U4P0wLcJ=_Bev++bsRF+=2inGEcs3pMuRb4f7ObSjBQ@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAJ+vNU3U4P0wLcJ=_Bev++bsRF+=2inGEcs3pMuRb4f7ObSjBQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Cc: Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de, Marek Vasut
+ <marex@denx.de>
+Subject: Re: [PATCH] venice: show emmc boot hardware partition
+In-Reply-To: <20240426165554.1376497-1-tharvey@gateworks.com>
+References: <20240426165554.1376497-1-tharvey@gateworks.com>
+Message-ID: <cf40b1dd10eb915984717a9ae2247003@manjaro.org>
+X-Sender: dsimic@manjaro.org
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Authentication-Results: ORIGINATING;
+ auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,77 +69,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/26/24 7:36 PM, Tim Harvey wrote:
-> On Fri, Apr 26, 2024 at 10:25 AM Marek Vasut <marex@denx.de> wrote:
->>
->> On 4/26/24 7:12 PM, Tim Harvey wrote:
->>> eMMC devices have hardware partitions such as user, boot0, and boot1.
->>> Allow these names to be displayed when reading the mmc PARTITION_CONFIG
->>> field via 'mmc partconf'. Additionally allow a name to be specified when
->>> setting the PARTITION_CONFIG.
->>>
->>> Before:
->>> u-boot=> mmc partconf 2 1 1 0 && mmc partconf 2
->>> EXT_CSD[179], PARTITION_CONFIG:
->>> BOOT_ACK: 0x1
->>> BOOT_PARTITION_ENABLE: 0x2
->>> PARTITION_ACCESS: 0x0
->>>
->>> After:
->>> u-boot=> mmc partconf 2 1 1 0 && mmc partconf 2
->>> EXT_CSD[179], PARTITION_CONFIG:
->>> BOOT_ACK: 0x1
->>> BOOT_PARTITION_ENABLE: 0x1 (boot0)
->>> PARTITION_ACCESS: 0x0
->>> u-boot=> mmc partconf 2 1 boot1 0 && mmc partconf 2
->>> EXT_CSD[179], PARTITION_CONFIG:
->>> BOOT_ACK: 0x1
->>> BOOT_PARTITION_ENABLE: 0x2 (boot1)
->>> PARTITION_ACCESS: 0x0
->>>
->>> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
->>> ---
->>> v2:
->>>    - fix typo in subject
->>>    - add names for gp1..gp4
->>> ---
->>>    cmd/mmc.c | 25 ++++++++++++++++++++++---
->>>    1 file changed, 22 insertions(+), 3 deletions(-)
->>>
->>> diff --git a/cmd/mmc.c b/cmd/mmc.c
->>> index 2d5430a53079..af9a66cc6df4 100644
->>> --- a/cmd/mmc.c
->>> +++ b/cmd/mmc.c
->>> @@ -14,6 +14,18 @@
->>>    #include <part.h>
->>>    #include <sparse_format.h>
->>>    #include <image-sparse.h>
->>> +#include <linux/ctype.h>
->>> +
->>> +static const char *mmc_partnames[] = {
->>> +     "user",
->>> +     "boot0",
->>> +     "boot1",
->>> +     "gp1",
->>> +     "gp2",
->>> +     "gp3",
->>> +     "gp4",
->>
->> Uh, maybe gp%d are indexed from zero too ?
->>
->> (sorry for the confusion)
-> 
-> but 'mmc hwpartition' does not list them 0 based:
-> u-boot=> mmc hwpartition
-> switch to partitions #0, OK
-> mmc2(part 0) is current device
-> Partition configuration:
->          No enhanced user data area
->          No GP1 partition
->          No GP2 partition
->          No GP3 partition
->          No GP4 partition
-> 
-> I'm ok with either, I'm just not sure what is more understandable and standard.
+Hello Tim,
 
-Then 1-based counting is OK, thanks for checking !
+Please see my comments below.
+
+On 2024-04-26 18:55, Tim Harvey wrote:
+> To aid in understanding what emmc hardware partition is being
+> used to boot on power-up, display the hardware partition name in the
+> SPL.
+> 
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> ---
+>  board/gateworks/venice/spl.c | 16 ++++++++++++++++
+>  1 file changed, 16 insertions(+)
+> 
+> diff --git a/board/gateworks/venice/spl.c 
+> b/board/gateworks/venice/spl.c
+> index 3b0f11f2fd0f..531bad260b6d 100644
+> --- a/board/gateworks/venice/spl.c
+> +++ b/board/gateworks/venice/spl.c
+> @@ -366,9 +366,25 @@ unsigned long
+> board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long
+> 
+>  const char *spl_board_loader_name(u32 boot_device)
+>  {
+> +	struct mmc *mmc;
+> +	int part;
+> +
+>  	switch (boot_device) {
+>  	/* SDHC2 */
+>  	case BOOT_DEVICE_MMC1:
+> +		mmc_init_device(0);
+> +		mmc = find_mmc_device(0);
+> +		mmc_init(mmc);
+> +		part = EXT_CSD_EXTRACT_BOOT_PART(mmc->part_config);
+> +		switch (part) {
+> +		case 1:
+> +			return "eMMC boot0";
+> +		case 2:
+> +			return "eMMC boot1";
+> +		case 0:
+> +		case 7:
+> +			return "eMMC user";
+> +		}
+>  		return "eMMC";
+>  	/* SDHC3 */
+>  	case BOOT_DEVICE_MMC2:
+
+Your other patch on the mailing list does something similar. [1]
+Perhaps this is a good oportunity to extract and unify the logic
+that produces the names of eMMC partitions?  That would also allow
+other boards to use the same logic.
+
+[1] 
+https://lore.kernel.org/u-boot/a1e9206f-0cbf-44b2-a5e7-351f77c0d2b5@denx.de/T/#u
