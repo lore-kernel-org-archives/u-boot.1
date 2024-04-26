@@ -4,68 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05A61C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 14:21:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96741C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 14:30:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AF3587FED;
-	Fri, 26 Apr 2024 16:21:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=asics.ws
+	by phobos.denx.de (Postfix) with ESMTP id 109C8885AE;
+	Fri, 26 Apr 2024 16:30:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=asics.ws header.i=@asics.ws header.b="brd3SAtr";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mL95mvbY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F9988834D; Fri, 26 Apr 2024 15:18:57 +0200 (CEST)
-Received: from durango.smallvillages.com (durango.smallvillages.com
- [192.211.125.240])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 40611885C1; Fri, 26 Apr 2024 16:30:43 +0200 (CEST)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9359A8808B
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 15:18:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 75ED3885B4
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 16:30:40 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=asics.ws
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=chris@asics.ws
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=asics.ws;
- s=default; h=Content-Transfer-Encoding:Content-Type:Subject:From:To:
- MIME-Version:Date:Message-ID:Sender:Reply-To:Cc:Content-ID:
- Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
- :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=Is8nbFMc9TU6ymk1zj849RJP1PZL0NCMqAhE/t6yDY4=; b=brd3SAtrGm9k82guwpCSav/Pfy
- 7peIKg+qIwdl/tbn3yMiMeqNKbSWL523B6AC5hcermXCVwT12xj1YO2vR/VX8Lt+0TIZlAV9urdLG
- GsT0IfnGpKYB9iB6p5ZaWb+eYFaU6kjUPoVpHYUw45XqsIpNjtfWmDFFgbpL3tQNVWPyrao4yYHhC
- 5N3iHEe9yAwzwe9vkeThWz0kfXRqHxcUKiJ4Ya5yAbrV+75JIRBwErV1l1oy8m2ohCCuDE1srvU3N
- a7KudUB5JMIhppry8wLhenNzB+mtG4EiRaqz2WXmNNT+p9MMs3q5+1JIgjZiyUd+H0h7/9F1dE0hW
- EnNX6ZOw==;
-Received: from [223.205.153.24] (port=55594 helo=[192.168.1.212])
- by durango.smallvillages.com with esmtpsa (TLS1.2) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96.2)
- (envelope-from <chris@asics.ws>) id 1s0LTY-0000By-2r
- for u-boot@lists.denx.de; Fri, 26 Apr 2024 09:18:53 -0400
-Message-ID: <045921fa-aad3-13f4-7f30-85b028891016@asics.ws>
-Date: Fri, 26 Apr 2024 20:18:48 +0700
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-a519e1b0e2dso309932866b.2
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 07:30:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1714141840; x=1714746640; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=cBdRNFG20vbkGwAnyhpfObqkcwzf8jPk9V5XGXcUZRc=;
+ b=mL95mvbYGF1jpIfUAGcWA2lZ5wK1dOrL+QPwZ0CWf+TCdnynzKtWOYP3MD9gFxog0X
+ 1HGfEmrDoWhyi/Er6rhfm5JMnZ+r7s6ZQC10pk2TRWfgoxrHv1fZbTwszDh9vifVSvJo
+ kUVnB9csHeykLBRdxHjZgIb8RzLOGHSL68RXd5f3GEnRxdOliC/ub1ZVBE5LGARrwIq5
+ UoLNE2Iy+5hWBiFrAvwjoakQNy1A+iB8ELRlnDaE4yGqjkWFvZdo2IUbhBxze/RaNxRU
+ cIhQGYcnXJDdsFpS6ohzISSr++6fEx3AubXmGcgUbS2Z2gzAUISBm27wmODet0iKp/8X
+ ikEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714141840; x=1714746640;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cBdRNFG20vbkGwAnyhpfObqkcwzf8jPk9V5XGXcUZRc=;
+ b=wbmYv9qTpntDYSDIjouS37B+Duj6bWHrlcAK95UlRQo0mBGgDS4qQ07tsLEbHaOBSt
+ v9CJQsrkxYFdts9MRGDBrhNi7pU0W2yQ4QXLlWst2rWgg47XtpmduDpinljDmFUq+ffN
+ 07iUsAiVcUKLL5qm6Jl3D5jrqDxVas+DKa6c/vBKaBITnOPnD+Bw0UAlIozeXjdEz7vv
+ l/w8bvXyALyFSo1iFKKJ1cDeTG6pHRjju/ZcgsD59cFRu5woEJEcoRqINZQhF976O5T5
+ ZSMnbAHVOtg2q/gHfl4bl71mPNYZVzQHK7AmLcQI3ZxyK8UjXav2bPR3Cn92Pl0K8FSf
+ wKzw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUpiixP8f1Udm3rswZ74vAtk+QnNPmsTe3UxijTCqHPJ2E7Iglt1k6sjwyE6XdGVaG1MYW6W1lf/GcCLr59YRxW1r8Gcg==
+X-Gm-Message-State: AOJu0YyRSBJtH20BETJiC5YigOwxZbucp9mmBsuHdZa/vYfObRyn8yzf
+ gCNip9vU3wwQT+63+GneUoIdc7qkU4Mo4DazQWg02gGrrC9n9gKHo3x2/ujZ+98NuvOSOU5GccE
+ RR+BPyyYxr48YgLAnCIEu6i9+iOcUDFYIK6c9Vg==
+X-Google-Smtp-Source: AGHT+IE1mmATu5F2Ts2Qic89nZJ6qVil1HaccUPg2gnjB2XEBqDZNbC1JRHQt/8ha9kYv1uNjR3dk25bXpBxW8uUNpA=
+X-Received: by 2002:a17:906:2416:b0:a52:19ea:8df0 with SMTP id
+ z22-20020a170906241600b00a5219ea8df0mr2298350eja.66.1714141839908; Fri, 26
+ Apr 2024 07:30:39 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
- Thunderbird/102.11.0
-Content-Language: en-US
-To: u-boot@lists.denx.de
-From: Chris Ziomkowski <chris@asics.ws>
-Subject: Many USB storage drives fail in latest U-boot
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse,
- please include it with any abuse report
-X-AntiAbuse: Primary Hostname - durango.smallvillages.com
-X-AntiAbuse: Original Domain - lists.denx.de
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - asics.ws
-X-Get-Message-Sender-Via: durango.smallvillages.com: authenticated_id:
- chris@asics.ws
-X-Authenticated-Sender: durango.smallvillages.com: chris@asics.ws
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Mailman-Approved-At: Fri, 26 Apr 2024 16:21:35 +0200
+References: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
+ <20240426141321.232236-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240426141321.232236-3-heinrich.schuchardt@canonical.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 26 Apr 2024 17:30:03 +0300
+Message-ID: <CAC_iWjKg9NDKnoNa-V+H+5OOJe2uYsHb0vXM0+-QdCxUctiksg@mail.gmail.com>
+Subject: Re: [RFC 02/14] efi_loader: library function efi_dp_merge
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Shantur Rathore <i@shantur.com>, Bin Meng <bmeng@tinylab.org>, 
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>, 
+ Raymond Mao <raymond.mao@linaro.org>, Mark Kettenis <kettenis@openbsd.org>, 
+ Joao Marcos Costa <jmcosta944@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,46 +93,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi everyone,
+Hi Heinrich,
 
-The latest version of u-boot seems to have some serious issues with USB 
-drives. More than half of my disks do not work. I have traced the issue 
-down to the following:
+On Fri, 26 Apr 2024 at 17:13, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> Provide a function to append a device_path to a list of device paths
+> that is separated by final end nodes.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  include/efi_loader.h             |  3 +++
+>  lib/efi_loader/efi_device_path.c | 31 +++++++++++++++++++++++++++++++
+>  2 files changed, 34 insertions(+)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index 9600941aa32..a7d7b8324f1 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -944,6 +944,9 @@ struct efi_load_option {
+>
+>  struct efi_device_path *efi_dp_from_lo(struct efi_load_option *lo,
+>                                        const efi_guid_t *guid);
+> +struct efi_device_path *efi_dp_merge(const struct efi_device_path *dp1,
+> +                                    efi_uintn_t *size,
+> +                                    const struct efi_device_path *dp2);
+>  struct efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
+>                                       const struct efi_device_path *dp2,
+>                                       bool split_end_node);
+> diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
+> index 46aa59b9e40..16cbe41d32f 100644
+> --- a/lib/efi_loader/efi_device_path.c
+> +++ b/lib/efi_loader/efi_device_path.c
+> @@ -270,6 +270,37 @@ struct efi_device_path *efi_dp_dup(const struct efi_device_path *dp)
+>         return ndp;
+>  }
+>
+> +/**
+> + * efi_dp_merge() - Concatenate two device paths separated by final end node
+> + *
+> + * @dp1:       first device path
+> + * @size:      pointer to length of @dp1, total size on return
+> + * @dp2:       second device path
+> + *
+> + * Return:     concatenated device path or NULL
+> + */
+> +struct efi_device_path *efi_dp_merge(const struct efi_device_path *dp1,
+> +                                    efi_uintn_t *size,
+> +                                    const struct efi_device_path *dp2)
+> +{
+> +       efi_uintn_t len, len1, len2;
+> +       struct efi_device_path *dp;
+> +       u8 *p;
+> +
+> +       len1 = *size;
+> +       len2 = efi_dp_size(dp2) + sizeof(END);
+> +       len = len1 + len2;
+> +       dp = efi_alloc(len);
+> +       if (!dp)
+> +               return NULL;
+> +       memcpy(dp, dp1, len1);
+> +       p = (u8 *)dp + len1;
+> +       memcpy(p, dp2, len2);
+> +       *size = len;
 
-1. During a transfer, the XHCI TRB ring buffer reports back an error of 
-type 4. (USB Transaction Error)
-2. The COMP_TX_ERR is not matched in 
-'drivers/usb/host/xhci-ring.c:record_transfer_result()', so the status 
-gets set to the default value in the switch statement:
+Can't we just use efi_dp_concat()?
 
-      udev->status = 0x80;  /* USB_ST_TOO_LAZY_TO_MAKE_A_NEW_MACRO */
-
-3. 'common/usb.c:usb_bulk_msg()' then incorrectly reports this as a timeout
-4. On the next loop, an endpoint reset is attempted, which fails with 
-another completion code 4, and the USB subsystem becomes stuck in an 
-loop trying to reset the drive until it finally gives up.
-
-
-Question:  how should this situation be handled? Can we recover from it? 
-It doesn't appear the current logic was designed to handle it (or at 
-least it doesn't handle it).
-
-The XHCI documentation lists a code 4 as a result of:
-
-"Asserted in the case where the host did not receive a valid response 
-from the device (Timeout, CRC, Bad PID, unexpected NYET, etc.)."
-
-
-Can the individual who is maintaining this section of the code (or 
-anyone knowledgeable about the implementation) offer some advice on how 
-this should be corrected?
-
-Best regards,
-
-Chris
-
-
-
-
-
-
+Thanks
+/Ilias
+> +
+> +       return dp;
+> +}
+> +
+>  /**
+>   * efi_dp_concat() - Concatenate two device paths and add and terminate them
+>   *                   with an end node.
+> --
+> 2.43.0
+>
