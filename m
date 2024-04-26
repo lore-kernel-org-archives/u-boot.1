@@ -4,60 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9804CC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 04:03:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66BC9C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 04:07:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1157089115;
-	Fri, 26 Apr 2024 06:03:31 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A93FD89119;
+	Fri, 26 Apr 2024 06:07:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1714104211;
-	bh=FUIxyQ2U9o8GvOD3Zh23jpiHA5uvO+FSsa4LR1uoIr4=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1714104451;
+	bh=lSv1xhuRgCHdfg+veywi/9tMUnaqZC+mQCmHyE5U7FY=;
+	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=mKFgKfyv5ZcpeCezPCmGvcEN4mOZ9D8L7+hL21kdw2h6pratHtUtXLk83ccCaqpFk
-	 mxnIAkSdW2yg/vxDt2WohmPq8Xnr1BwSJdqUS5Ql8AQVNEXFkFCt/1niSOEe0kTtyJ
-	 cjKHBvxGrcmE8a/zjPf8r/24AdEQtQn3soUEewjD81usAhKtnzYKEsBvKaj4NKWYy6
-	 zt3ddffdyKrjv7qP5L9R2KOSaSewNjNSXJ7kV7W4CdtCoVuTP8EfrjMZql2Fooq6Jj
-	 +a+1wO7E4S589qy35k1CBNblbUXuXX8WVvly540ms1zUZMb6/R7fvBey+rsZYEdzSQ
-	 58v6FME/9NTfg==
+	b=fFmHh3uCYXV0/dedxvYo1Yo/2MzO5yuejhK5WL20mEfh++8KbFP3dh6sPkK2/l2Ja
+	 FwtVxRqiOW0WAvYkFHYQoZAxBRvbVrUk6PM7utCtGu9gsoEn6f6jKiBAtXrZTIkwy7
+	 2R+DTqSIxrLphD4x/Hsj98DIGRjBPsmH0mbDBRPFAofDesPwWTL5I0enz3USV+VR3Y
+	 n4QCNzyP/OMQQN2Qk6A8GyIAhHDvy6Puu1umFrGZxyV60qrSRE/5SLLgDo1vFsvUk9
+	 R/CW3NVE2mskuuUAApAU/7zot98Hmi0e0zUeICJF8+KGGJpoJ8/4OGfqIpnwUa6duo
+	 PHXZcPdiK6/wQ==
 Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
  (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 136C68911A;
- Fri, 26 Apr 2024 06:03:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 8074D87D40;
+ Fri, 26 Apr 2024 06:07:29 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1714104209;
- bh=FUIxyQ2U9o8GvOD3Zh23jpiHA5uvO+FSsa4LR1uoIr4=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=T3P9rJqUo9Y5WOGGB7te1HrwRHnheAvyaSXIg3JkTmkI3ouFv1qXPb+01Bn8rkBum
- Z9DilCAxxB/Rt6CexHwca+YWZUkr2s/c+fkXaiVAgRfJbLnRTdoSqOlCaMym+v0k76
- 1Dcab2AUHfpCp3XVQXcpK2anqL/t+4BSnepgXlepQ4fmj8NTwMS+WCP5TIuysd8G4z
- h6BNap62O3aU9BIngFzgzWNty/5J7vVBBXOc3E2dsUfINGZJr6FrZy3L2T1T9geEtp
- 6j6XkKk0G2hJor+qzLLBhndj9SwizleMmsM8+xEOunx9jFgeWXoEFoU48HXqPqejZT
- KGu+uuIEmgxXw==
-Message-ID: <94a75eb9-950c-41f0-b9fc-c7d95ecec6c6@denx.de>
-Date: Fri, 26 Apr 2024 06:03:27 +0200
+ s=phobos-20191101; t=1714104450;
+ bh=lSv1xhuRgCHdfg+veywi/9tMUnaqZC+mQCmHyE5U7FY=;
+ h=Date:Subject:To:References:From:In-Reply-To:From;
+ b=geMVWtNJgbmx6MSFW3Y25zLsJsf7Xl7OYBa7igIkoaKIlRjxT0EJSPs+vMRpOBc/W
+ E3qPkA9NLZMwmx1Kk0cawylFApMAaebrqvuXeyjgEFq75K5zy05Gp0qH/tuiQMrUCo
+ PTfOT/66aA5ueL2vKYJ4mf8ou9udPNszBLcXzr9B+wVLtqQ/fn7xvAIg2y1dTmISpL
+ z6YLdvOok284t2nCMfuF4b2LFF8io71SMookSR/JTSBSmkE+zeBOonW7zOn0eJtRJW
+ awXSlBBVUqDfmZ5Ve3Dly+zZpV/qKdQH1DSdCj1xcK7HYYm5cAMXDzCKf1zTAiQ3mq
+ BDO2RYR9iWHaQ==
+Message-ID: <254b0fd2-0085-4894-bcfa-686c456e4e2a@denx.de>
+Date: Fri, 26 Apr 2024 06:07:28 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/3] crypto/fsl: Introduce SPL_FSL_CAAM_RNG
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: u-boot@lists.denx.de, Angelo Dureghello <angelo@kernel-space.org>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@gmail.com>, Gaurav Jain <gaurav.jain@nxp.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Michal Simek
- <michal.simek@amd.com>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20240425230314.497203-1-marex@denx.de>
- <20240425230314.497203-2-marex@denx.de>
- <CAJ+vNU3ndKTXr5XBOd9b2aQF7WmBPARJ70Fsuab1rmnaQsEZiQ@mail.gmail.com>
+Subject: Re: [PATCH] cmd: mmc: allow use of hardware parittion names for mmc
+ partconf
+To: Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Fabio Estevam <festevam@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+References: <20240426001419.1210364-1-tharvey@gateworks.com>
 Content-Language: en-US
 From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAJ+vNU3ndKTXr5XBOd9b2aQF7WmBPARJ70Fsuab1rmnaQsEZiQ@mail.gmail.com>
+In-Reply-To: <20240426001419.1210364-1-tharvey@gateworks.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -76,35 +70,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/26/24 2:16 AM, Tim Harvey wrote:
-
->> diff --git a/drivers/crypto/fsl/Makefile b/drivers/crypto/fsl/Makefile
->> index 7a2543e16cc..4fbce519a0b 100644
->> --- a/drivers/crypto/fsl/Makefile
->> +++ b/drivers/crypto/fsl/Makefile
->> @@ -6,6 +6,6 @@ obj-y += sec.o
->>   obj-$(CONFIG_FSL_CAAM) += jr.o fsl_hash.o jobdesc.o error.o
->>   obj-$(CONFIG_CMD_BLOB)$(CONFIG_IMX_CAAM_DEK_ENCAP) += fsl_blob.o
->>   obj-$(CONFIG_RSA_FREESCALE_EXP) += fsl_rsa.o
->> -obj-$(CONFIG_FSL_CAAM_RNG) += rng.o
->> +obj-$(CONFIG_$(SPL_TPL_)FSL_CAAM_RNG) += rng.o
->>   obj-$(CONFIG_FSL_DCP_RNG) += dcp_rng.o
->>   obj-$(CONFIG_FSL_MFGPROT) += fsl_mfgprot.o
->> --
->> 2.43.0
->>
+On 4/26/24 2:14 AM, Tim Harvey wrote:
+> eMMC devices have hardware partitions such as user, boot0, and boot1.
+> Allow these names to be displayed when reading the mmc PARTITION_CONFIG
+> field via 'mmc partconf'. Additionally allow a name to be specified when
+> setting the PARTITION_CONFIG.
 > 
-> Marek,
+> Before:
+> u-boot=> mmc partconf 2 1 1 0 && mmc partconf 2
+> EXT_CSD[179], PARTITION_CONFIG:
+> BOOT_ACK: 0x1
+> BOOT_PARTITION_ENABLE: 0x2
+> PARTITION_ACCESS: 0x0
+> 
+> After:
+> u-boot=> mmc partconf 2 1 1 0 && mmc partconf 2
+> EXT_CSD[179], PARTITION_CONFIG:
+> BOOT_ACK: 0x1
+> BOOT_PARTITION_ENABLE: 0x1 (boot0)
+> PARTITION_ACCESS: 0x0
+> u-boot=> mmc partconf 2 1 boot1 0 && mmc partconf 2
+> EXT_CSD[179], PARTITION_CONFIG:
+> BOOT_ACK: 0x1
+> BOOT_PARTITION_ENABLE: 0x2 (boot1)
+> PARTITION_ACCESS: 0x0
+> 
+> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> ---
+>   cmd/mmc.c | 25 ++++++++++++++++++++++---
+>   1 file changed, 22 insertions(+), 3 deletions(-)
+> 
+> diff --git a/cmd/mmc.c b/cmd/mmc.c
+> index 2d5430a53079..26692a8e349b 100644
+> --- a/cmd/mmc.c
+> +++ b/cmd/mmc.c
+> @@ -14,6 +14,18 @@
+>   #include <part.h>
+>   #include <sparse_format.h>
+>   #include <image-sparse.h>
+> +#include <linux/ctype.h>
+> +
+> +static const char *mmc_partnames[] = {
+> +	"user",
+> +	"boot0",
+> +	"boot1",
+> +	"",
 
-Hi,
+Shouldn't these be 'gp' partitions here ?
 
-> Thanks - this series does solve the issue I am seeing in the SPL when
-> enabling DM_RNG. Is this going to cause an issue for people who expect
-> it to be currently enabled and now have to manually enable it?
-
-That's a good question. If I do '$ git grep FSL_CAAM_RNG' , there seem 
-to be no users, so I don't think we need to worry here, right ?
-
-With SPL_DM_RNG i.e. 1/3 I am a bit more concerned. But, looking at the 
-users that enable DM_RNG, I am not seeing any obvious ones that would 
-require SPL_DM_RNG too. What do you think ?
+[...]
