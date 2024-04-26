@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B20D7C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 01:36:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2C534C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 01:37:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D59C389094;
-	Fri, 26 Apr 2024 03:36:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A521C890CE;
+	Fri, 26 Apr 2024 03:37:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fU7kAkZH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HncqHRMY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 19B92882AC; Fri, 26 Apr 2024 03:36:07 +0200 (CEST)
-Received: from mail-yb1-xb2e.google.com (mail-yb1-xb2e.google.com
- [IPv6:2607:f8b0:4864:20::b2e])
+ id 3EEA4890CE; Fri, 26 Apr 2024 03:37:33 +0200 (CEST)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8410C89094
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 03:36:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 56544882AC
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 03:37:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-yb1-xb2e.google.com with SMTP id
- 3f1490d57ef6-de59ec28b08so198100276.3
- for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 18:36:02 -0700 (PDT)
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-61b4f3c03c8so4217497b3.0
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 18:37:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714095361; x=1714700161; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1714095449; x=1714700249; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wkzHoBnFQuBpK8dhprSooHu2z62vBTA8VoLiebB94g4=;
- b=fU7kAkZHphQ1T0/eP3xR94lnivSZJty9KByxditzYALccunwRPusZptakfxhJwySh9
- hUrFFc+BlM9+mHWt9uIVpD1YpXOuu4Vm3AH+6kA4sMXuGsgyIqSTg0Sf33k8SBEpTsE5
- c1IllPtI9wBS4mGG2eVrG311DJtoFbMaDOgaCsmghwJUjRD6wZpV5LGekZwXJWqeLjWa
- hKPs4qd+mDM79IEIR/dl2R+wHvGe2JZcAzZsvGMGX9neUReyHBcWcZ3+ALcVngqDH7/8
- /bH8xzg2LWUrOF16VdJY86wfwkrJtV90KBd2hSgcceBIbDOjqxqMLpBdiTz7Yxy0TBAH
- amAg==
+ bh=inmiLfTxjzNnB2L+qFGhhInyf7V+Tif/8RILm5yGNQk=;
+ b=HncqHRMYGmqWjhQynbok57NLOrVXB5+PYorjqBvt/9JPcuX96RRbTr43a8I+Z/Fo55
+ FTcfUfLqTkjYV6TIuFLgiaHBZDAM63IzlI4b7zHzHycJ1Bp20GtvGvYV9uXM1Qa7LKKk
+ 8ERfpIz004/b8IUjW0QFp19U9lssce2N8+GjePn+XG6iEAn0/8jCnwG1deFswjsTZaEk
+ STKK7FGdUSYPLTQtYxE/fWhyITO/jML2F4VWDhw38Tlp5c/5nEIAofcBRP0saxHXBNV0
+ cX+osnnM9OzTaYmGYwsDVP4AXDwTJRdLFGkenQUiUFWQih9Rr18+ZAMLCxnYffs+JSjo
+ LS4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714095361; x=1714700161;
+ d=1e100.net; s=20230601; t=1714095449; x=1714700249;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=wkzHoBnFQuBpK8dhprSooHu2z62vBTA8VoLiebB94g4=;
- b=l2ndebJcv0VtMdyJ/b8YmXLUoes4Frs+dDjPqpzoe+EbaNRmomsTlC6qNVjYptWlbN
- DmhYLwSibxvXwyi9SdWltaLbe96J/MDE7KYAnhstQlOKRzz7ZpNu3FO2Ltsj8i1ziPir
- 9M723W8w23rR0rEm60jAfSG29j6M+shZi+DqWuQ2q7+HEokZfYQgjoXqbt+pt/PX3m9g
- 4Ssc3+JbO+0gsmtDG9eKHmx3dHLw0t1hswXln96FRACrMIMKEvqapMBoHxZ3Ly7tULQb
- RQohE2ToQwrYRT77hZ+gNy59GQjHk9DOmD62h86ENeLgqE2NOQIsdyHaj0kNzsgc3ZQ/
- q/eA==
+ bh=inmiLfTxjzNnB2L+qFGhhInyf7V+Tif/8RILm5yGNQk=;
+ b=UtsPQISKfREzYzcsyKPCXKHAweQXthC88ntf2tkvtb67lh0hyC3LQygWP/HaflOIU3
+ RAaL3Drs2af0UgWY8qNZmSKf9wUPYBnZUSPDvgT86nXmLkJyRx2VnPNPy9jRxBfMiys/
+ gANSw2AXvhIkwbd7g/PtggtVLr9gQGiflf03slm+Su57b62Oa1UtEcVWa0AP4Jx7OM7r
+ Bl4Udy9i2vWYQPlYwpqzcn22MapZJA6bQiUoUOLh6lob9Fh3VgggkLkTNtYIwjcA2ial
+ bVeGUx9eMdKQJeJV5VK5R1uxcFrYTS5acQ4wOlX/8YdDzgmn23q6/8UY7cFvOFyxwxob
+ YMDA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXbgjaTTiOwXPOYaal7RnRk6Cm25MoMC1tlm95zvZ4g8lJLwMRx50pSmh65HvD5FuV7DtUjaZIIsyuqH19X/EyiONwSQw==
-X-Gm-Message-State: AOJu0YwqNafkvWFuc6ffkPxNnWkmnpYhtUMenn3VZqdYjs3t/P5o0YRF
- 085J9dLbwgdO2P8dfOrCmsK1l3p37q+Lr2SH3r3uOhGTkUJylqyxyQ85RiZrbFUhT7Gi4w3z+Lf
- 5zVGSbp/K47SAlGEstGslgm9ML6Q=
-X-Google-Smtp-Source: AGHT+IFBt72jg1quwX5cMWT+70LKpNNP5hks0YaXIdxkMAr4a66sS2S/DW6KvXTs107J6SfuLXwt4BItBgcjJqGy79o=
-X-Received: by 2002:a25:aa6f:0:b0:de4:be6:6449 with SMTP id
- s102-20020a25aa6f000000b00de40be66449mr1407202ybi.4.1714095361124; Thu, 25
- Apr 2024 18:36:01 -0700 (PDT)
+ AJvYcCV2Y2deOABO4LndfNe/nJ3f28EgXJhAQ4ms39xF4T3HAzTi0B3an3Gb8AAIyyvWecvttA6lHIIGlA+/ocsWPvujXgVF/A==
+X-Gm-Message-State: AOJu0YyXcNfiRE4v6lDEhm7eXIztjf+55rfoVB02RxCIsbCW9jkfGaBn
+ d3B5GulFdIhKmt/UPUVvB1XqiV1TdFVoq2U+A0cJcAwdz+ZSUKxBM1TuiAB9ZSRiru4xiOp89g+
+ I8oFYEeFpF1YpFtUAlWcSAyx+47E=
+X-Google-Smtp-Source: AGHT+IGO01kdJ4RKF/61H0egyVcINhq2BUpnWfUPLYPGZat4SYazScgITE2DuQqN7jQ7u4qQ/Bn/f9vtMMY0ha1x780=
+X-Received: by 2002:a25:ab8a:0:b0:dc7:491a:18c2 with SMTP id
+ v10-20020a25ab8a000000b00dc7491a18c2mr1329953ybi.6.1714095449065; Thu, 25 Apr
+ 2024 18:37:29 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240426001419.1210364-1-tharvey@gateworks.com>
-In-Reply-To: <20240426001419.1210364-1-tharvey@gateworks.com>
+ <CAOMZO5DYtWRxmBH9n5W362ajx8VRxmwwD7xEJ7hv-kAFbrKkMA@mail.gmail.com>
+In-Reply-To: <CAOMZO5DYtWRxmBH9n5W362ajx8VRxmwwD7xEJ7hv-kAFbrKkMA@mail.gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 25 Apr 2024 22:35:49 -0300
-Message-ID: <CAOMZO5DYtWRxmBH9n5W362ajx8VRxmwwD7xEJ7hv-kAFbrKkMA@mail.gmail.com>
+Date: Thu, 25 Apr 2024 22:37:17 -0300
+Message-ID: <CAOMZO5D512G07JUX9=ZDxFJciD40v678o-2_mo_awn+-u4=Mow@mail.gmail.com>
 Subject: Re: [PATCH] cmd: mmc: allow use of hardware parittion names for mmc
  partconf
 To: Tim Harvey <tharvey@gateworks.com>
@@ -92,35 +93,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tim,
+On Thu, Apr 25, 2024 at 10:35=E2=80=AFPM Fabio Estevam <festevam@gmail.com>=
+ wrote:
 
-On Thu, Apr 25, 2024 at 9:14=E2=80=AFPM Tim Harvey <tharvey@gateworks.com> =
-wrote:
+> This is a nice improvement:
 >
-> eMMC devices have hardware partitions such as user, boot0, and boot1.
-> Allow these names to be displayed when reading the mmc PARTITION_CONFIG
-> field via 'mmc partconf'. Additionally allow a name to be specified when
-> setting the PARTITION_CONFIG.
->
-> Before:
-> u-boot=3D> mmc partconf 2 1 1 0 && mmc partconf 2
-> EXT_CSD[179], PARTITION_CONFIG:
-> BOOT_ACK: 0x1
-> BOOT_PARTITION_ENABLE: 0x2
-> PARTITION_ACCESS: 0x0
->
-> After:
-> u-boot=3D> mmc partconf 2 1 1 0 && mmc partconf 2
-> EXT_CSD[179], PARTITION_CONFIG:
-> BOOT_ACK: 0x1
-> BOOT_PARTITION_ENABLE: 0x1 (boot0)
-> PARTITION_ACCESS: 0x0
-> u-boot=3D> mmc partconf 2 1 boot1 0 && mmc partconf 2
-> EXT_CSD[179], PARTITION_CONFIG:
-> BOOT_ACK: 0x1
-> BOOT_PARTITION_ENABLE: 0x2 (boot1)
-> PARTITION_ACCESS: 0x0
+> Reviewed-by: Fabio Estevam <festevam@gmail.com>
 
-This is a nice improvement:
-
-Reviewed-by: Fabio Estevam <festevam@gmail.com>
+There is a typo in the Subject: "partition"
