@@ -4,56 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66BC9C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 04:07:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 997E2C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 05:18:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A93FD89119;
-	Fri, 26 Apr 2024 06:07:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C028088D0B;
+	Fri, 26 Apr 2024 07:18:26 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1714104451;
-	bh=lSv1xhuRgCHdfg+veywi/9tMUnaqZC+mQCmHyE5U7FY=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=fFmHh3uCYXV0/dedxvYo1Yo/2MzO5yuejhK5WL20mEfh++8KbFP3dh6sPkK2/l2Ja
-	 FwtVxRqiOW0WAvYkFHYQoZAxBRvbVrUk6PM7utCtGu9gsoEn6f6jKiBAtXrZTIkwy7
-	 2R+DTqSIxrLphD4x/Hsj98DIGRjBPsmH0mbDBRPFAofDesPwWTL5I0enz3USV+VR3Y
-	 n4QCNzyP/OMQQN2Qk6A8GyIAhHDvy6Puu1umFrGZxyV60qrSRE/5SLLgDo1vFsvUk9
-	 R/CW3NVE2mskuuUAApAU/7zot98Hmi0e0zUeICJF8+KGGJpoJ8/4OGfqIpnwUa6duo
-	 PHXZcPdiK6/wQ==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pjEvzA4M";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 6B13088DE7; Fri, 26 Apr 2024 07:18:26 +0200 (CEST)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 8074D87D40;
- Fri, 26 Apr 2024 06:07:29 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1714104450;
- bh=lSv1xhuRgCHdfg+veywi/9tMUnaqZC+mQCmHyE5U7FY=;
- h=Date:Subject:To:References:From:In-Reply-To:From;
- b=geMVWtNJgbmx6MSFW3Y25zLsJsf7Xl7OYBa7igIkoaKIlRjxT0EJSPs+vMRpOBc/W
- E3qPkA9NLZMwmx1Kk0cawylFApMAaebrqvuXeyjgEFq75K5zy05Gp0qH/tuiQMrUCo
- PTfOT/66aA5ueL2vKYJ4mf8ou9udPNszBLcXzr9B+wVLtqQ/fn7xvAIg2y1dTmISpL
- z6YLdvOok284t2nCMfuF4b2LFF8io71SMookSR/JTSBSmkE+zeBOonW7zOn0eJtRJW
- awXSlBBVUqDfmZ5Ve3Dly+zZpV/qKdQH1DSdCj1xcK7HYYm5cAMXDzCKf1zTAiQ3mq
- BDO2RYR9iWHaQ==
-Message-ID: <254b0fd2-0085-4894-bcfa-686c456e4e2a@denx.de>
-Date: Fri, 26 Apr 2024 06:07:28 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 6751588BEE
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 07:18:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-5196c755e82so2204621e87.0
+ for <u-boot@lists.denx.de>; Thu, 25 Apr 2024 22:18:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1714108704; x=1714713504; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=mQqwUHipI0ugq3Jsyqgcw4Ya0EuwuidJE6UUnpMIrPc=;
+ b=pjEvzA4MOJKvHpnPLaI//VCR/XN5FXKmxeOyIxAPN1eb+UikVkzLtT36hdd3jXfFe+
+ Tsy755SZP8aYKFlSudKye5lLqu3m3wZA6e1zo6BwB1DLrYhHBghtAvm8Pvm3DUabnvuu
+ QzB0lZ1lTGFPXQ0KwKC7Ey0nPmTqUOsZIf10Nw6onrD9LdjUQVyTqL/dhwHrz+YuDFBP
+ fB9rYi19pScQhR7CX3VSOBI0I0tt41YIjjoWwFjvLcvccGcAwCEnr78AgC6tSC/axx6a
+ L8WCjXnbZqXil+F3lVmqwO+Ilzn6e7IcX/2L9zFNYgnodVjTA5BhRemVl0FAYe4OvZSS
+ L9BQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714108704; x=1714713504;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=mQqwUHipI0ugq3Jsyqgcw4Ya0EuwuidJE6UUnpMIrPc=;
+ b=DY/E6fdlYieZElp2/8qzU24tjEcT/xgtMEv+yxNsUjC8IYex47YKF4w0YeqWGCpLji
+ p8Sk9h2fhTDdeHodp7fU/ovbW8/TAs1e7P0knbbnJ5vpcsj1digstkNxe+b1vKG1vQjI
+ 5M9AeB97EdBuzBgIixtzvnQTYN7em5aC35hjjWW7W4YyWlaA1NAWEGgpoSeQTBIKzXKM
+ d+gcgYiph9K6EHxsH4V9ZcACNi5vKGtD11RUrxp/C2hLWVmh1D5C33Cg8PdKg299wn0r
+ RQAUmFz6Qkx6pDGzRsfpBksk0RUmUXKLPXZgtl0MCy2uEr0HBFLP8QnhFgZLoSkwAROH
+ tlCg==
+X-Gm-Message-State: AOJu0YzvRtfSnGwcGSJQWfIWhuptiWd83O6ymGISLskQBpt3V5iuK5DK
+ 7VtEB7MK32KDi5DlB2NxkIOLK5Q44tXxTGSRtIh4TbFvgQOrW1yPuYj9kz+46rc=
+X-Google-Smtp-Source: AGHT+IEPpV4DC/13M1VnMpTGMgTXiHxjAnTZ9ZBg+SDzVJbqxsrDxpzSUmBoV6zXitii3UML2mpoJA==
+X-Received: by 2002:a05:6512:10c9:b0:51c:c90d:90f3 with SMTP id
+ k9-20020a05651210c900b0051cc90d90f3mr167645lfg.40.1714108703479; 
+ Thu, 25 Apr 2024 22:18:23 -0700 (PDT)
+Received: from hera (ppp089210108048.access.hol.gr. [89.210.108.48])
+ by smtp.gmail.com with ESMTPSA id
+ 15-20020a0564021f4f00b00571d74c6074sm8100981edz.46.2024.04.25.22.18.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 25 Apr 2024 22:18:22 -0700 (PDT)
+Date: Fri, 26 Apr 2024 08:18:20 +0300
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Igor Opaniuk <igor.opaniuk@gmail.com>
+Cc: u-boot@lists.denx.de, jens.wiklander@linaro.org,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jorge Ramirez-Ortiz <jorge@foundries.io>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v1] tee: sandbox: check for buffer size
+Message-ID: <Zis5HMOgbvL8rgvo@hera>
+References: <20240421204839.2129998-1-igor.opaniuk@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] cmd: mmc: allow use of hardware parittion names for mmc
- partconf
-To: Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Fabio Estevam <festevam@gmail.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
-References: <20240426001419.1210364-1-tharvey@gateworks.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20240426001419.1210364-1-tharvey@gateworks.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20240421204839.2129998-1-igor.opaniuk@gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,52 +94,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/26/24 2:14 AM, Tim Harvey wrote:
-> eMMC devices have hardware partitions such as user, boot0, and boot1.
-> Allow these names to be displayed when reading the mmc PARTITION_CONFIG
-> field via 'mmc partconf'. Additionally allow a name to be specified when
-> setting the PARTITION_CONFIG.
-> 
-> Before:
-> u-boot=> mmc partconf 2 1 1 0 && mmc partconf 2
-> EXT_CSD[179], PARTITION_CONFIG:
-> BOOT_ACK: 0x1
-> BOOT_PARTITION_ENABLE: 0x2
-> PARTITION_ACCESS: 0x0
-> 
-> After:
-> u-boot=> mmc partconf 2 1 1 0 && mmc partconf 2
-> EXT_CSD[179], PARTITION_CONFIG:
-> BOOT_ACK: 0x1
-> BOOT_PARTITION_ENABLE: 0x1 (boot0)
-> PARTITION_ACCESS: 0x0
-> u-boot=> mmc partconf 2 1 boot1 0 && mmc partconf 2
-> EXT_CSD[179], PARTITION_CONFIG:
-> BOOT_ACK: 0x1
-> BOOT_PARTITION_ENABLE: 0x2 (boot1)
-> PARTITION_ACCESS: 0x0
-> 
-> Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+On Sun, Apr 21, 2024 at 10:48:39PM +0200, Igor Opaniuk wrote:
+> Add additional check for buffer size when reading out persistent
+> storage value and provide back actual value size.
+>
+> Signed-off-by: Igor Opaniuk <igor.opaniuk@gmail.com>
 > ---
->   cmd/mmc.c | 25 ++++++++++++++++++++++---
->   1 file changed, 22 insertions(+), 3 deletions(-)
-> 
-> diff --git a/cmd/mmc.c b/cmd/mmc.c
-> index 2d5430a53079..26692a8e349b 100644
-> --- a/cmd/mmc.c
-> +++ b/cmd/mmc.c
-> @@ -14,6 +14,18 @@
->   #include <part.h>
->   #include <sparse_format.h>
->   #include <image-sparse.h>
-> +#include <linux/ctype.h>
+>
+>  drivers/tee/sandbox.c | 10 +++++++---
+>  1 file changed, 7 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/tee/sandbox.c b/drivers/tee/sandbox.c
+> index 8ad7c09efdd..86b16a3bb8d 100644
+> --- a/drivers/tee/sandbox.c
+> +++ b/drivers/tee/sandbox.c
+> @@ -174,7 +174,7 @@ static u32 ta_avb_invoke_func(struct udevice *dev, u32 func, uint num_params,
+>  	uint slot;
+>  	u64 val;
+>  	char *value;
+> -	u32 value_sz;
+> +	u32 value_sz, tmp_sz;
+>
+>  	switch (func) {
+>  	case TA_AVB_CMD_READ_ROLLBACK_INDEX:
+> @@ -267,8 +267,12 @@ static u32 ta_avb_invoke_func(struct udevice *dev, u32 func, uint num_params,
+>  		if (!ep)
+>  			return TEE_ERROR_ITEM_NOT_FOUND;
+>
+> -		value_sz = strlen(ep->data) + 1;
+> -		memcpy(value, ep->data, value_sz);
+> +		tmp_sz = strlen(ep->data) + 1;
+> +		if (value_sz < tmp_sz)
+> +			return TEE_ERROR_SHORT_BUFFER;
 > +
-> +static const char *mmc_partnames[] = {
-> +	"user",
-> +	"boot0",
-> +	"boot1",
-> +	"",
+> +		memcpy(value, ep->data, tmp_sz);
+> +		params[1].u.memref.size = tmp_sz;
+>
+>  		return TEE_SUCCESS;
+>  	case TA_AVB_CMD_WRITE_PERSIST_VALUE:
+> --
+> 2.34.1
+>
 
-Shouldn't these be 'gp' partitions here ?
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-[...]
