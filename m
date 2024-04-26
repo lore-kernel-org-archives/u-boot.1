@@ -4,76 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3838C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 15:56:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA932C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 15:56:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4750788384;
-	Fri, 26 Apr 2024 17:56:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id B4BE8884D0;
+	Fri, 26 Apr 2024 17:56:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="ZR9sjPfP";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="ZA261UvK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C69618869E; Fri, 26 Apr 2024 17:56:41 +0200 (CEST)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 07E4188F35; Fri, 26 Apr 2024 17:56:44 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8187788499
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 17:56:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
+ by phobos.denx.de (Postfix) with ESMTPS id 1A5D9884D0
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 17:56:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=michael@amarulasolutions.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-2dd6a7ae2dcso36217821fa.1
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 08:56:39 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a556d22fa93so274315066b.3
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 08:56:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1714146999; x=1714751799;
- darn=lists.denx.de; 
+ d=gateworks.com; s=google; t=1714147001; x=1714751801; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YAjiRWdt+0TRYD10Lzd4/Aty3LtTVJdOU5ta17+PX8M=;
- b=ZR9sjPfPVQ8LiqmcDuJaz+/8SA8iWGjS/UmAYwVeWgd66j22vG5Swgegw8A/sQPZKF
- 39SgGUkSCR33+7ByEqXPoQ5ZxWUgh+l0hiIwva7XV/fr9bm9yZRE5QsU9LDix4qk7M5z
- trB/O4+HO0uzVuKiSXCGHzHxqtI3diCXMRRo8=
+ bh=EM/KCg85UIEAd2LnjAKOep8nt6nG1sLIjHlOYVYy0sE=;
+ b=ZA261UvKB1iHQWDchISg1Z/g6FQhWR9N1e4oTdELFHBogBfjuBC5ysSr2g8pCWl0r9
+ fn+FE944i3h9mk5wVGZqPifje/Uv2xkFGjLXI2/zxVZ/tpbveOCrh2GJXOqTbRbLJJQc
+ Q/2JA/jd/OK3NXy3AoKB87pv+v8tR8d9tJ16XMAcjL0x6IP/tJUqGgyZLL9PAUBb/mAh
+ pSdFXaJ0WwDRTNegNW81fKdzvSaXZY2SnLjYLvuXlIxzuJt4Rx76kTXKwbrIjDYxjoZw
+ c/iyCMxzaxB8X2pfY52+ANMJG4u7MhGgKBQnQ8N1J1ONcr7jKEYwuJd+GCmPMiEpQZe9
+ ycYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714146999; x=1714751799;
+ d=1e100.net; s=20230601; t=1714147001; x=1714751801;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YAjiRWdt+0TRYD10Lzd4/Aty3LtTVJdOU5ta17+PX8M=;
- b=aDUUBt/RKn3CgCthtTYT1hoy63LHmIKE5SyML/xg+pCbXoAWnnmkJKQDc1TM4yVHF8
- eAXeDUxnpphXOd9pFfYCcF1EMe39Z0/WdqiMhKbPZGjIlcFnDgXqwN/TO0u/dqmiq1b6
- Ufqe3Mx41I2eeqgk6YMhq738GwEGrsuUCOBn21K9/GcWs8mI3faS3gntzlAB4UGnGapi
- PMZgdgfhROmLAVLNFMlcugdG2f20t4L/LYd8DY9CPvMUdEnLWOmzXzAuZoOTdlq5LBNy
- 6UqeHNWl+u6/uFTDuzvw6BLTsY/Dp/XTGrxN2mWBIZE210QtQ9PO2rxnKNMTRzg1qWV4
- s/hw==
+ bh=EM/KCg85UIEAd2LnjAKOep8nt6nG1sLIjHlOYVYy0sE=;
+ b=YOmd3iEaNgP9FDa18PE+L20l7NBUMvm0E5ix4xFPW6cE6ebndtL4trEpdSxcHSUBn1
+ zX24ItVV8WfLSqv/2RfOwgyKMU5oj7PsYq+1Pw88Gv2bkvgidof/ggH5s/zhCjnljJZO
+ C1GxqgXvDfLjVsJaZBKaC1c++m8pmN87RgDMpDMmb/iAo32zsq9vLoMUuvlsdTcl9XTF
+ pDY/DEQipydqUZ79G3jsMaCTXuyPItdN7mBt6n8pCzrY2eVF2QOvUB0TN+EMgmO4XPVL
+ /1AE2tKu9zKd1X57NivgiBxdU7hY2vJrj4GIh0zYqeuH/Xr4OEec1t94JA5fwDLFfAmZ
+ C+kg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWl2FR8nm+Z1roAJZksWAIvOsYiZxC+BgauPvVm/qLM650DXuYkkE1j2z+Fjidpjl46e3MUkivN4Enh8Qh3mwUXBj+dlQ==
-X-Gm-Message-State: AOJu0YwO9NE7HM2DXx0SKYYQffdP4dgvwHq+nAYl9Q+DvwPOYZk+K/KW
- yY2k2kGsXfEzpm0X5WQo9OUgGw8GD6hjkYoksQhlEqec3TLWWd5AQM7jaYbti9a+rvw6e0unioR
- 8sUk1TtzroQqSzRb8MZQ+YMnVCZDGJQCaDmSzoQ==
-X-Google-Smtp-Source: AGHT+IEe4WCAPI58a9cbXTrAFOGUsgbL5tnXdT6OUQpn7IhiYJntaOsY/uVkA3Xx9kqk/lvGhz84Cd5EIzLme9nTmIc=
-X-Received: by 2002:a2e:9a8d:0:b0:2d4:49d1:38e with SMTP id
- p13-20020a2e9a8d000000b002d449d1038emr2459187lji.28.1714146998594; Fri, 26
- Apr 2024 08:56:38 -0700 (PDT)
+ AJvYcCUK0QOq04a1hQ7UXNRWx26jf9/98rM0dqX9l8Z/uwIsKB+h+F0bFxR0KJP3BfpMZVbHc5H/jnHgKBGfHwQwFgfiUzQ4pg==
+X-Gm-Message-State: AOJu0YxcBWrlpyr/Z0FITrHe8hFOWThQKlOIcM+fkIoNkPFgizi3JjGH
+ szHRAWqhN45OrLOI1JYJDhhWwDHuwjl9cHR4NGASOGtW9zmnV+VCTwDxcTvo64FXZrCOnoZ1Bbp
+ GRg7sVJowAmY7e7j/l0ue4MON8acaE/rWpmOQrA==
+X-Google-Smtp-Source: AGHT+IEbyzENzy+u59eRTqed/K4/UPEsRgY7j27Rrr2lEc+nJuY/aGmXrIohcDQlLCbWQ5v8zgF5t849Ip8n/5SoGqk=
+X-Received: by 2002:a17:907:31c2:b0:a58:a721:3a61 with SMTP id
+ xf2-20020a17090731c200b00a58a7213a61mr2540743ejb.3.1714147001538; Fri, 26 Apr
+ 2024 08:56:41 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240411-mtd-v1-1-fe300f6ab657@jookia.org>
- <CAOf5uwmcrh6M-GGYwZVk3D4LzZRnk8fE+88JJgtOAHJ_X2=P2Q@mail.gmail.com>
- <74dc9d77-9316-4c14-5d52-9b496cad2a76@denx.de>
- <20240426155200.GL1054907@bill-the-cat>
-In-Reply-To: <20240426155200.GL1054907@bill-the-cat>
-From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
-Date: Fri, 26 Apr 2024 17:56:26 +0200
-Message-ID: <CAOf5uwmmGVvAffzojF=YDrcMrn48MtxjsoiScmrHcs6T+LQd_Q@mail.gmail.com>
-Subject: Re: [PATCH] ubi: Depend on MTD
-To: Tom Rini <trini@konsulko.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Cc: Heiko Schocher <hs@denx.de>, Kyungmin Park <kmpark@infradead.org>,
- u-boot@lists.denx.de, John Watts <contact@jookia.org>
+References: <20240425230721.497441-1-marex@denx.de>
+ <20240425230721.497441-2-marex@denx.de>
+ <CAJ+vNU34Zrn8znALzZqsDnkWifhVbz3D4D_hyNurKzH0cn30Lw@mail.gmail.com>
+ <20240426155113.GH1054907@bill-the-cat>
+In-Reply-To: <20240426155113.GH1054907@bill-the-cat>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Fri, 26 Apr 2024 08:56:29 -0700
+Message-ID: <CAJ+vNU3QHGxwLsYbNouV0x9G0qLnufDSHEUC5OLzT-zxE7dCiQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] imx: hab: Use nxp_imx8mcst etype for i.MX8M flash.bin
+ signing
+To: Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
+ "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Adam Ford <aford173@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Angus Ainslie <angus@akkea.ca>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>, 
+ Francesco Dolcini <francesco.dolcini@toradex.com>, 
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
+ Simon Glass <sjg@chromium.org>,
+ Stefan Eichenberger <stefan.eichenberger@toradex.com>, 
+ Stefano Babic <sbabic@denx.de>, kernel@puri.sm, u-boot@dh-electronics.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,61 +105,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dario
-
-On Fri, Apr 26, 2024 at 5:52=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+On Fri, Apr 26, 2024 at 8:51=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
 :
 >
-> On Fri, Apr 26, 2024 at 07:18:18AM +0200, Heiko Schocher wrote:
-> > Hello Tom,
-> >
-> > On 11.04.24 08:09, Michael Nazzareno Trimarchi wrote:
-> > > Hi
+> On Fri, Apr 26, 2024 at 08:30:23AM -0700, Tim Harvey wrote:
+> > On Thu, Apr 25, 2024 at 4:07=E2=80=AFPM Marek Vasut <marex@denx.de> wro=
+te:
 > > >
-> > > On Thu, Apr 11, 2024 at 7:06=E2=80=AFAM John Watts <contact@jookia.or=
-g> wrote:
-> > > >
-> > > > UBI required MTD to build correctly, add it as a Kconfig dependency=
-.
-> > > >
-> > > > Signed-off-by: John Watts <contact@jookia.org>
-> > > > ---
-> > > > While working with UBI on my SPI NAND patch series I found it was
-> > > > possible to enable it without enabling the MTD subsystem.
-> > > > Add a Kconfig option to solve this.
-> > > > ---
-> > > >   drivers/mtd/ubi/Kconfig | 1 +
-> > > >   1 file changed, 1 insertion(+)
+> > > Update documentation and use nxp_imx8mcst binman etype for signing
+> > > of flash.bin instead of previous horrible shell scripting.
 > >
-> > Seems I am too dummy to find this patch in Patchwork, nor is it
-> > applied in master ... can you pick it up, or should I do this and
-> > send you a pull request?
+> > Hi Marek,
+> >
+> > To be completely fair we are just replacing a shell script and
+> > template file with a python script
+> > (tools/binman/etype/nxp_imx8mcst.py) which also creates the template
+> > file.
+> >
+> > I could care less about shell vs python but do put huge value in the
+> > idea of making signing easier and doing so without modification of
+> > U-Boot code. The current implementation requires a couple of things to
+> > be enabled in defconfig which can be done with a seperate
+> > 'out-of-tree' defconfig but this new proposed implementation requires
+> > changing a u-boot.dtsi which is a tracked file.
 >
-> It's over at
-> https://patchwork.ozlabs.org/project/uboot/patch/20240411-mtd-v1-1-fe300f=
-6ab657@jookia.org/
-> currently but you can take it up and send it to me if you like.
->
+> A counter-point is that with using binman for signing we start
+> eliminating differences between different semiconductors on how to get
+> something signed.
 
-Can you pick it up? Seems that you are delegate and was already reviewed by=
- me
+Hi Tom,
 
-Michael
+I agree... I'm a huge fan of binman. I just don't want to replace
+current constructs that use env and/or config items on a clean code
+directory with replacements that require code diffs to do the same.
 
-> --
-> Tom
+I'm simply wanting to wrap binman sections with Kconfig items. Is
+there a way to use environment variables within binman sections (ie to
+wrap sections or override filenames)?
 
+Best Regards,
 
-
---=20
-Michael Nazzareno Trimarchi
-Co-Founder & Chief Executive Officer
-M. +39 347 913 2170
-michael@amarulasolutions.com
-__________________________________
-
-Amarula Solutions BV
-Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
-T. +31 (0)85 111 9172
-info@amarulasolutions.com
-www.amarulasolutions.com
+Tim
