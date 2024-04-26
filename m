@@ -4,120 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEB88C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 10:38:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9413C4345F
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 10:49:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E5737886A3;
-	Fri, 26 Apr 2024 12:38:41 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 10C448869E;
+	Fri, 26 Apr 2024 12:49:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="h8XdPnQ0";
+	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="BEMtek0n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 761D0886D4; Fri, 26 Apr 2024 12:38:40 +0200 (CEST)
-Received: from mailout1.samsung.com (mailout1.samsung.com [203.254.224.24])
+ id 2753F8869E; Fri, 26 Apr 2024 12:49:57 +0200 (CEST)
+Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40AE38869E
- for <U-Boot@lists.denx.de>; Fri, 26 Apr 2024 12:38:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 932E588EF8
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 12:49:54 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=salutedevices.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout1.samsung.com (KnoxPortal) with ESMTP id
- 20240426103833epoutp01da08502bbad4ed801770a305dc959bd7~JzkFgzqy81289912899epoutp01Y
- for <U-Boot@lists.denx.de>; Fri, 26 Apr 2024 10:38:33 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout1.samsung.com
- 20240426103833epoutp01da08502bbad4ed801770a305dc959bd7~JzkFgzqy81289912899epoutp01Y
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1714127913;
- bh=RHW+GsqUjxPXPYXtgbvMfPp6Uf3QQm5onwqAX+7o3j8=;
- h=Date:To:Cc:From:Subject:References:From;
- b=h8XdPnQ0Y/GCDT70PyfK6eXsrfraL7WCjZDpqFXE4alHCqRzPjCjp60C+f12QDKpa
- BV9Kopk0jEBa1QNq1zeyRss1rKg37BKKJAUMnw4QbXovcV2+bMLKQ1aYk/oql10CNg
- ObM3ndfsAAceyBEQmlBahmZW5G4G4GQ/oWPi+luM=
-Received: from epsnrtp1.localdomain (unknown [182.195.42.162]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20240426103832epcas1p4564baffda499d03e9b84646dd6b2d016~JzkE2EJCe2649026490epcas1p4p;
- Fri, 26 Apr 2024 10:38:32 +0000 (GMT)
-Received: from epsmges1p5.samsung.com (unknown [182.195.38.234]) by
- epsnrtp1.localdomain (Postfix) with ESMTP id 4VQq2H2cg2z4x9Pp; Fri, 26 Apr
- 2024 10:38:31 +0000 (GMT)
-Received: from epcas1p4.samsung.com ( [182.195.41.48]) by
- epsmges1p5.samsung.com (Symantec Messaging Gateway) with SMTP id
- C2.96.10076.7248B266; Fri, 26 Apr 2024 19:38:31 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20240426103830epcas1p3720a09dd50c8ef3d16de0a6ff2ff514b~JzkDHZHBO2987029870epcas1p3l;
- Fri, 26 Apr 2024 10:38:30 +0000 (GMT)
-Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20240426103830epsmtrp2065fd304945f2bf3cdfb7c55c368d09b~JzkDGrzlG2526125261epsmtrp26;
- Fri, 26 Apr 2024 10:38:30 +0000 (GMT)
-X-AuditID: b6c32a39-7edf87000000275c-1e-662b842739cd
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- C6.37.07541.6248B266; Fri, 26 Apr 2024 19:38:30 +0900 (KST)
-Received: from [10.113.113.235] (unknown [10.113.113.235]) by
- epsmtip1.samsung.com (KnoxPortal) with ESMTPA id
- 20240426103830epsmtip14169f50a57c1e91f78042e1257d4cf5d~JzkC2GuNS1460814608epsmtip1v;
- Fri, 26 Apr 2024 10:38:30 +0000 (GMT)
-Message-ID: <e6c74bd0-de66-42ef-a6af-0d5c058b12a0@samsung.com>
-Date: Fri, 26 Apr 2024 19:38:30 +0900
+ spf=pass smtp.mailfrom=avkrasnov@salutedevices.com
+Received: from p-infra-ksmg-sc-msk02 (localhost [127.0.0.1])
+ by mx1.sberdevices.ru (Postfix) with ESMTP id F37B712000C;
+ Fri, 26 Apr 2024 13:49:53 +0300 (MSK)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru F37B712000C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
+ s=mail; t=1714128593;
+ bh=LUBZAYMCoDpNp02hOn1EqYPSRNlF9jL5qZ2INsf/tyM=;
+ h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type:From;
+ b=BEMtek0niZ924bUUDz503wbF7sGJxeIMRjaggA80IrpdvoNoRukeds71rUcGZQo5w
+ QGUkHiScrjy4qgOPFrJRaVvMAmsoqjxLfz30bo5q/BLUgjAh1y1JnMN6dvHUErkWIb
+ uFmaHMABQiO9ot1joylaRCaNCadlZ5wzgLrL79AT5cUO+XpbQzmt1F5a7uDcaAtrbe
+ BykfhP175r55TDw4TIp5XM82ddQt0lyZipMs+zrNbPBiBBoT0d3uvmM8oaw3TWqS/w
+ pXBESa7b3VnIOqyM/xw5TiUafpm/0fr/gL2aFy9VD29lijkZ2nP+jRzRzWOm9UyIEF
+ IsfipHHKc/R7Q==
+Received: from smtp.sberdevices.ru (p-i-exch-sc-m02.sberdevices.ru
+ [172.16.192.103])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by mx1.sberdevices.ru (Postfix) with ESMTPS;
+ Fri, 26 Apr 2024 13:49:53 +0300 (MSK)
+Received: from [172.28.226.125] (100.64.160.123) by
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1118.40; Fri, 26 Apr 2024 13:49:53 +0300
+Message-ID: <58d9dfc6-1782-0b56-85ca-ff490580c13a@salutedevices.com>
+Date: Fri, 26 Apr 2024 13:38:46 +0300
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101
+ Thunderbird/102.7.1
+Subject: Re: [PATCH v1] arm: dts: meson-axg: add NAND controller node for AXG
 Content-Language: en-US
-To: U-Boot Mailing List <U-Boot@lists.denx.de>
-Cc: maximilian.brune@9elements.com, curtis.machida@intel.com, Jonas Karlman
- <jonas@kwiboo.se>, greg.malysa@timesys.com, ian.roberts@timesys.com, Tom
- Rini <trini@konsulko.com>, Jae hoon Chung <jh80.chung@gmail.com>, Peng Fan
- <peng.fan@nxp.com>, sheng.tan@9elements.com
-From: Jaehoon Chung <jh80.chung@samsung.com>
-Subject: [GIT PULL] Please pull u-boot-mmc master
-Content-Transfer-Encoding: 7bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrNJsWRmVeSWpSXmKPExsWy7bCmga56i3aawe69vBbnPx1ntDj96QaL
- xcv795gsLl5Zymxx8s1VFouf98+xWPxY9YXVYs/nv+wWUydtZrd4u7eT3YHL4/o0O4+ds+6y
- eyze85LJ49WBVeweJyZcYvI4e2cHo8fGdzuYPPZu/8EUwBGVbZORmpiSWqSQmpecn5KZl26r
- 5B0c7xxvamZgqGtoaWGupJCXmJtqq+TiE6DrlpkDdKSSQlliTilQKCCxuFhJ386mKL+0JFUh
- I7+4xFYptSAlp8C0QK84Mbe4NC9dLy+1xMrQwMDIFKgwITtj/6ZrzAVHeSuOfn7A1sD4hauL
- kYNDQsBE4uoFxy5GLg4hgR2MEncWX2GEcD4xShw8fx3K+cYoMfnCCvYuRk6wjrY5h1kgEnsZ
- JdZPOc4K4bxnlFgw8x1YFa+AncSM4xcZQWwWAVWJ9ZcuMkHEBSVOznzCAmKLCshL3L81A6ye
- WUBc4taT+WA1IgJ6Eo/PHgUbyiwwkUniUOs2sEFsAjoS278dBysSFjCUeHzzBCtEs7zE9rdz
- mEEaJASWcki07J3MBnGri8TFvXOg7haWeHV8C5QtJfH53V42iIZmRomlSw6yQjg9jBL/Gq5D
- dRtL7F86mQkUTswCmhLrd+lDbOOTePe1hxUSfLwSHW1CENUqEpdev2SCmX/3yX+oEg+J+/dy
- QcJCArES0650sk9glJ+FFBazkPw/C8k7sxD2LmBkWcUollpQnJueWmxYYAqP4uT83E2M4FSr
- ZbmDcfrbD3qHGJk4GA8xSnAwK4nw3vyokSbEm5JYWZValB9fVJqTWnyI0RQYIxOZpUST84HJ
- Pq8k3tDE0sDEzMjYxMLQzFBJnPfMlbJUIYH0xJLU7NTUgtQimD4mDk6pBqb9q4v29V/799hA
- ZpdC8vQ4czHmFzzX1/ywvdV6QfCPt/1i35xikzhnr9UhdSXblB1EdCdWRYjZXvg7TWLa4bx0
- bfXSpXc+fE1bLMZcvyLpHsO0HK4EpkrrfJ6qk4kX9AuLMtaZSQb9im//5FqwawFz/p+3ug2S
- hr82nnCYu/2f0txrt3sKVshcvbLx+py97rE7V/Os/FHx/q9CbY6f4ZKpfxc0rLoUeKreT+Wf
- x/GEoxP1L1W1vpy+jmVz24toWctzUxkOr93sMDmUtWeCJ5NJwO8dV+5pr8wymbff6HlQsnen
- +zXXqF1bc757/suPiFn422CN+UVJqedzyty8Ti2961qh1PvOt+jPj9jeS1VKLMUZiYZazEXF
- iQANSisoPgQAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFvrNLMWRmVeSWpSXmKPExsWy7bCSnK5ai3aaQVu/tsX5T8cZLU5/usFi
- 8fL+PSaLi1eWMlucfHOVxeLn/XMsFj9WfWG12PP5L7vF1Emb2S3e7u1kd+DyuD7NzmPnrLvs
- Hov3vGTyeHVgFbvHiQmXmDzO3tnB6LHx3Q4mj73bfzAFcERx2aSk5mSWpRbp2yVwZezfdI25
- 4ChvxdHPD9gaGL9wdTFyckgImEi0zTnM0sXIxSEksJtR4tO2j2wQCSmJz0+nAtkcQLawxOHD
- xRA1bxklbu+5zQJSwytgJzHj+EVGEJtFQFVi/aWLTBBxQYmTM5+A1YgKyEvcvzWDHcRmFhCX
- uPVkPliNiICexOOzR1lBhjILTGaSmLtyCzNIgk1AR2L7t+NgRcIChhKPb55gBTmCWUBdYv08
- IYg58hLb385hnsAoMAvJullIVsxC6JiFpGMBI8sqRsnUguLc9NxkwwLDvNRyveLE3OLSvHS9
- 5PzcTYzg+NHS2MF4b/4/vUOMTByMhxglOJiVRHhvftRIE+JNSaysSi3Kjy8qzUktPsQozcGi
- JM5rOGN2ipBAemJJanZqakFqEUyWiYNTqoFpZXhwzrprVdZ/9ZqPq+Sw3Hn4dcKzZzsFn6TJ
- PHYoLp67MIz7/qZ3s1Z9upX5/GRbaVPW+fm8Exv0/m6wC/gxobTVViO1fvqlfK2f0f0r77sk
- JtasNTc69HaNQAVny5P5pQx8Iv5TTMuTJykfL1j3ZNWkyk0NFk9+lJ1Z/ESdZ7c6R4XGPPdT
- KwS1bRI3ZfZe0ZS2/RrHZ7C+jL3xy+QTzyNDT2x5dcVL8PC2ekXTjUtEZaR9WO8xZsm5H9Lr
- tA1jqNmjudYx5HpJWOzdLtEpO42KVXSDbXaoyhjujdh0Usv9xKvSDmVXlqKEc8VPb8/vex7A
- luHdH6uWdP3hL7l3VpfeTDt20uZl8d3WwHglluKMREMt5qLiRAAus1NoDgMAAA==
-X-CMS-MailID: 20240426103830epcas1p3720a09dd50c8ef3d16de0a6ff2ff514b
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240426103830epcas1p3720a09dd50c8ef3d16de0a6ff2ff514b
-References: <CGME20240426103830epcas1p3720a09dd50c8ef3d16de0a6ff2ff514b@epcas1p3.samsung.com>
+To: <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <u-boot-amlogic@groups.io>,
+ <kernel@sberdevices.ru>, <oxffffaa@gmail.com>
+References: <20240425175052.2650301-1-avkrasnov@salutedevices.com>
+ <d272b0f6-2f21-4601-b347-f83eac4f12d4@linaro.org>
+ <21b14ae5-1f92-6c7b-2c65-20ef3cb5820d@salutedevices.com>
+ <f3c7627e-fdd4-4b1d-9c4b-6cec3bde18f9@linaro.org>
+From: Arseniy Krasnov <avkrasnov@salutedevices.com>
+In-Reply-To: <f3c7627e-fdd4-4b1d-9c4b-6cec3bde18f9@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [100.64.160.123]
+X-ClientProxiedBy: p-i-exch-sc-m01.sberdevices.ru (172.16.192.107) To
+ p-i-exch-sc-m02.sberdevices.ru (172.16.192.103)
+X-KSMG-Rule-ID: 10
+X-KSMG-Message-Action: clean
+X-KSMG-AntiSpam-Lua-Profiles: 184948 [Apr 26 2024]
+X-KSMG-AntiSpam-Version: 6.1.0.4
+X-KSMG-AntiSpam-Envelope-From: avkrasnov@salutedevices.com
+X-KSMG-AntiSpam-Rate: 0
+X-KSMG-AntiSpam-Status: not_detected
+X-KSMG-AntiSpam-Method: none
+X-KSMG-AntiSpam-Auth: dkim=none
+X-KSMG-AntiSpam-Info: LuaCore: 18 0.3.18
+ b9d6ada76958f07c6a68617a7ac8df800bc4166c,
+ {Tracking_from_domain_doesnt_match_to},
+ d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; 100.64.160.123:7.1.2;
+ smtp.sberdevices.ru:5.0.1,7.1.1; 127.0.0.199:7.1.2;
+ salutedevices.com:7.1.1, FromAlignment: s, ApMailHostAddress: 100.64.160.123
+X-MS-Exchange-Organization-SCL: -1
+X-KSMG-AntiSpam-Interceptor-Info: scan successful
+X-KSMG-AntiPhishing: Clean
+X-KSMG-LinksScanning: Clean
+X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
+ bases: 2024/04/26 09:39:00 #24974035
+X-KSMG-AntiVirus-Status: Clean, skipped
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -134,51 +108,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
 
-Please pull u-boot-mmc master into u-boot master branch.
-If there is any problem, let me know, plz
 
-Best Regards,
-Jaehoon Chung
+On 26.04.2024 11:55, neil.armstrong@linaro.org wrote:
+> On 26/04/2024 10:40, Arseniy Krasnov wrote:
+>> Hi,
+>>
+>> On 26.04.2024 11:21, Neil Armstrong wrote:
+>>> Hi,
+>>>
+>>> On 25/04/2024 19:50, Arseniy Krasnov wrote:
+>>>> nfc: Synced from Linux commit 7ca2ef33179f ("Linux 6.6-rc1")
+>>>> nand_all_pins: Synced from Linux commit be18d53c32b2 ("Linux 6.7-rc3")
+>>>
+>>> No need to sync DT anymore, this is handled by OF_UPSTREAM and for next release
+>>> it's already aligned with v6.9 DT.
+>>>
+>>> Please try your patches with master or next branch of U-Boot repo.
+>>
+>> Ok, so I can remove "Synced from" from commit description, thus make it empty, and test that patch applies correctly
+>> on uboot master/ next ?
+> 
+> It won't apply because arch/arm/dts/meson-axg.dtsi doesn't exist anymore, DT comes
+> from dts/upstream, however if you need to add u-boot specific changes you can
+> still update arch/arm/dts/meson-axgi-u-boot.dtsi
 
-CI: https://source.denx.de/u-boot/custodians/u-boot-mmc/-/pipelines/20547
+Ahh ok, I see. Thanks. This patch must be dropped, as same code is
+already in uboot in dts/upstream
 
-The following changes since commit d097f9e1299a3bdb7de468f0d9bbc63932f461cd:
+Thanks
 
-  Merge tag 'fsl-qoriq-2024-4-24' of https://source.denx.de/u-boot/custodians/u-boot-fsl-qoriq (2024-04-23 17:53:06 -0600)
-
-are available in the Git repository at:
-
-  git@source.denx.de:u-boot/custodians/u-boot-mmc.git master
-
-for you to fetch changes up to 1776213dadef4b578f98bcf18beb152f8975a8bf:
-
-  mmc: arm_pl180: Limit data transfer to U16_MAX (2024-04-26 15:32:06 +0900)
-
-----------------------------------------------------------------
-Greg Malysa (1):
-      mmc: Support 32-bit only ADMA on 64-bit platforms
-
-Ian Roberts (2):
-      mmc: sdhci: introduce adma_write_desc() hook to struct sdhci_ops
-      mmc: sdhci: Fix potential ADMA descriptor table overflow
-
-Jonas Karlman (2):
-      mmc: Imply HS200 cap with mmc-hs400 prop to match linux
-      mmc: Add support for the no-mmc-hs400 prop
-
-Maximilian Brune (1):
-      mmc: arm_pl180: Limit data transfer to U16_MAX
-
-cmachida (1):
-      mmc: sdhci: programmable clock calculation needs multiplier +1
-
- drivers/mmc/Kconfig          | 18 ++++++++++++++++++
- drivers/mmc/arm_pl180_mmci.c | 10 ++++++++++
- drivers/mmc/fsl_esdhc.c      |  2 +-
- drivers/mmc/mmc-uclass.c     |  7 +++++--
- drivers/mmc/sdhci-adma.c     | 43 +++++++++++++++++++++++++++++--------------
- drivers/mmc/sdhci.c          | 26 ++++++++++++++++++--------
- include/sdhci.h              | 21 +++++++++++++++------
- 7 files changed, 96 insertions(+), 31 deletions(-)
+> 
+> Neil
+> 
+>>
+>> Thanks
+>>
+>>>
+>>> Neil
+>>>
+>>>>
+>>>> Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
+>>>> ---
+>>>>    arch/arm/dts/meson-axg.dtsi | 36 ++++++++++++++++++++++++++++++++++++
+>>>>    1 file changed, 36 insertions(+)
+>>>>
+>>>> diff --git a/arch/arm/dts/meson-axg.dtsi b/arch/arm/dts/meson-axg.dtsi
+>>>> index 3f5254eeb4..4f6fdd5523 100644
+>>>> --- a/arch/arm/dts/meson-axg.dtsi
+>>>> +++ b/arch/arm/dts/meson-axg.dtsi
+>>>> @@ -430,6 +430,27 @@
+>>>>                        };
+>>>>                    };
+>>>>    +                nand_all_pins: nand_all_pins {
+>>>> +                    mux {
+>>>> +                        groups = "emmc_nand_d0",
+>>>> +                             "emmc_nand_d1",
+>>>> +                             "emmc_nand_d2",
+>>>> +                             "emmc_nand_d3",
+>>>> +                             "emmc_nand_d4",
+>>>> +                             "emmc_nand_d5",
+>>>> +                             "emmc_nand_d6",
+>>>> +                             "emmc_nand_d7",
+>>>> +                             "nand_ce0",
+>>>> +                             "nand_ale",
+>>>> +                             "nand_cle",
+>>>> +                             "nand_wen_clk",
+>>>> +                             "nand_ren_wr";
+>>>> +                        function = "nand";
+>>>> +                        input-enable;
+>>>> +                        bias-pull-up;
+>>>> +                    };
+>>>> +                };
+>>>> +
+>>>>                    emmc_ds_pins: emmc_ds {
+>>>>                        mux {
+>>>>                            groups = "emmc_ds";
+>>>> @@ -1906,6 +1927,21 @@
+>>>>                    resets = <&reset RESET_SD_EMMC_C>;
+>>>>                };
+>>>>    +            nfc: nand-controller@7800 {
+>>>> +                compatible = "amlogic,meson-axg-nfc";
+>>>> +                reg = <0x0 0x7800 0x0 0x100>,
+>>>> +                      <0x0 0x7000 0x0 0x800>;
+>>>> +                reg-names = "nfc", "emmc";
+>>>> +                pinctrl-0 = <&nand_all_pins>;
+>>>> +                pinctrl-names = "default";
+>>>> +                #address-cells = <1>;
+>>>> +                #size-cells = <0>;
+>>>> +                interrupts = <GIC_SPI 34 IRQ_TYPE_EDGE_RISING>;
+>>>> +                clocks = <&clkc CLKID_SD_EMMC_C>,
+>>>> +                     <&clkc CLKID_FCLK_DIV2>;
+>>>> +                clock-names = "core", "device";
+>>>> +            };
+>>>> +
+>>>>                usb2_phy1: phy@9020 {
+>>>>                    compatible = "amlogic,meson-gxl-usb2-phy";
+>>>>                    #phy-cells = <0>;
+>>>
+> 
