@@ -4,77 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 964F9C4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 07:50:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A40B2C04FFE
+	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 07:52:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 227F9890C6;
-	Fri, 26 Apr 2024 09:50:47 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 2E36F89092;
+	Fri, 26 Apr 2024 09:52:29 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="sRdnwFH+";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BE6718823F; Fri, 26 Apr 2024 09:50:45 +0200 (CEST)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 19E998912C; Fri, 26 Apr 2024 09:52:28 +0200 (CEST)
+Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
+ [60.248.80.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2EF98911C
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 09:50:43 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F9278823F
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 09:52:24 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
+ header.from=andestech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=4846c7b602=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 43PLgKNo007975;
- Fri, 26 Apr 2024 09:50:35 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- message-id:date:mime-version:subject:to:cc:references:from
- :in-reply-to:content-type:content-transfer-encoding; s=
- selector1; bh=NSiFLOrmAxdpG4k36SmrzdhJfm2b8w+/Osqnwf2XEvA=; b=sR
- dnwFH+e8oAWXzhIvLwAx657lQJIz+NTQp5e/wgYn+24tM8hwmkeMtWJNb1MGTD/o
- UYWyPL3quHRYccxIi9BbjOrHQB5CrBI/k1+cMl3e5zhmaD+gdlzQ16WpHc+LhHL1
- fXGq+vU/UgSalJQwPrtTZxDCftCq/D1CKz8wfMydLK/RBGLAmyb9MboFw800TbAM
- KWVxmBaj2KTUbmEvcgwp5zaJW6ewkE1X2Zj5aw5EdPhLw203uPVXbZZgZ97FDKG8
- UgTX4070/xW/cv34cCmSFj1Z8k/Cmxq6IL5PMCIKDBHsGWaG5zWIzg/C9jcIcIbS
- z1Wi8e4HFhkkuQtB2jBQ==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 3xmq90y2s6-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 26 Apr 2024 09:50:35 +0200 (MEST)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id ED07E40044;
- Fri, 26 Apr 2024 09:50:31 +0200 (CEST)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 309712132D4;
- Fri, 26 Apr 2024 09:50:14 +0200 (CEST)
-Received: from [10.48.86.98] (10.48.86.98) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Fri, 26 Apr
- 2024 09:50:13 +0200
-Message-ID: <5b254caa-3adb-4183-84fd-a281cee87dcb@foss.st.com>
-Date: Fri, 26 Apr 2024 09:50:13 +0200
+ spf=pass smtp.mailfrom=ycliang@andestech.com
+Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
+ by Atcsqr.andestech.com with ESMTP id 43Q7pt3o031470;
+ Fri, 26 Apr 2024 15:51:55 +0800 (+08)
+ (envelope-from ycliang@andestech.com)
+Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
+ with Microsoft SMTP Server id 14.3.498.0;
+ Fri, 26 Apr 2024 15:51:53 +0800
+Date: Fri, 26 Apr 2024 15:51:49 +0800
+From: Leo Liang <ycliang@andestech.com>
+To: <lukas.funke-oss@weidmueller.com>
+CC: <u-boot@lists.denx.de>, E Shattow <lucent@gmail.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Lukas Funke <lukas.funke@weidmueller.com>, Anup Patel
+ <anup@brainfault.org>, Atish Patra <atishp@atishpatra.org>, Green Wan
+ <green.wan@sifive.com>, Nylon Chen <nylon.chen@sifive.com>, Palmer Dabbelt
+ <palmer@dabbelt.com>, Paul Walmsley <paul.walmsley@sifive.com>, Tom Rini
+ <trini@konsulko.com>, Vincent Chen <vincent.chen@sifive.com>, Zong Li
+ <zong.li@sifve.com>
+Subject: Re: [PATCH v3 1/2] board: sifive: Rename spl_soc_init() to
+ spl_dram_init()
+Message-ID: <ZitdFfUfBRHb5tNL@swlinux02>
+References: <20240424074339.210851-1-lukas.funke-oss@weidmueller.com>
+ <20240424074339.210851-2-lukas.funke-oss@weidmueller.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 02/19] ARM: dts: stm32: Add alternate pinmux for MP13 ADC
- CC pins
-Content-Language: en-US
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>,
- <u-boot@dh-electronics.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20240421231849.194648-1-marex@denx.de>
- <20240421231849.194648-2-marex@denx.de>
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20240421231849.194648-2-marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.86.98]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1011,Hydra:6.0.650,FMLib:17.11.176.26
- definitions=2024-04-26_07,2024-04-26_01,2023-05-22_02
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20240424074339.210851-2-lukas.funke-oss@weidmueller.com>
+User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
+X-Originating-IP: [10.0.15.183]
+X-DNSRBL: 
+X-MAIL: Atcsqr.andestech.com 43Q7pt3o031470
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,41 +69,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 4/22/24 01:16, Marek Vasut wrote:
-> Add another mux option for ADC CC pins, this is used on
-> DH electronics STM32MP13xx DHCOR DHSBC board.
+On Wed, Apr 24, 2024 at 09:43:38AM +0200, lukas.funke-oss@weidmueller.com wrote:
+> From: Lukas Funke <lukas.funke@weidmueller.com>
 > 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  arch/arm/dts/stm32mp13-pinctrl.dtsi | 7 +++++++
->  1 file changed, 7 insertions(+)
+> Rename spl_soc_init() to spl_dram_init() because the generic function
+> name does not reflect what the function actually does. Also
+> spl_dram_init() is commonly used for dram initialization and should be
+> called from board_init_f().
 > 
-> diff --git a/arch/arm/dts/stm32mp13-pinctrl.dtsi b/arch/arm/dts/stm32mp13-pinctrl.dtsi
-> index 03ded415390..396fb6eee84 100644
-> --- a/arch/arm/dts/stm32mp13-pinctrl.dtsi
-> +++ b/arch/arm/dts/stm32mp13-pinctrl.dtsi
-> @@ -19,6 +19,13 @@
->  		};
->  	};
->  
-> +	adc1_usb_cc_pins_b: adc1-usb-cc-pins-1 {
-> +		pins {
-> +			pinmux = <STM32_PINMUX('A', 5, ANALOG)>, /* ADC1_INP2 */
-> +				 <STM32_PINMUX('F', 13, ANALOG)>; /* ADC1_INP11 */
-> +		};
-> +	};
-> +
->  	i2c1_pins_a: i2c1-0 {
->  		pins {
->  			pinmux = <STM32_PINMUX('D', 12, AF5)>, /* I2C1_SCL */
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+> Signed-off-by: Lukas Funke <lukas.funke@weidmueller.com>
+> ---
+> 
+> (no changes since v1)
+> 
+>  arch/riscv/cpu/fu540/spl.c              | 2 +-
+>  arch/riscv/cpu/fu740/spl.c              | 2 +-
+>  arch/riscv/include/asm/arch-fu540/spl.h | 2 +-
+>  arch/riscv/include/asm/arch-fu740/spl.h | 2 +-
+>  board/sifive/unleashed/spl.c            | 4 ++--
+>  board/sifive/unmatched/spl.c            | 4 ++--
+>  6 files changed, 8 insertions(+), 8 deletions(-)
 
-Thanks
-Patrice
+Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
