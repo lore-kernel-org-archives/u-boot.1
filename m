@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A4BCC4345F
-	for <u-boot@archiver.kernel.org>; Fri, 26 Apr 2024 23:51:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFE08C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 27 Apr 2024 00:09:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 181DA8829B;
-	Sat, 27 Apr 2024 01:51:39 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 3568A882FE;
+	Sat, 27 Apr 2024 02:09:05 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qooGFJoO";
+	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="OrAoYgFH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB204882D0; Sat, 27 Apr 2024 01:51:37 +0200 (CEST)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 05E21882FA; Sat, 27 Apr 2024 02:09:02 +0200 (CEST)
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
+ [IPv6:2a00:1450:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC25288297
- for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 01:51:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B87FE882FE
+ for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 02:08:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gateworks.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-a4702457ccbso362481766b.3
- for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 16:51:35 -0700 (PDT)
+ spf=pass smtp.mailfrom=tharvey@gateworks.com
+Received: by mail-lf1-x134.google.com with SMTP id
+ 2adb3069b0e04-51d20472133so21367e87.3
+ for <u-boot@lists.denx.de>; Fri, 26 Apr 2024 17:08:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714175495; x=1714780295; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=0NTe5EXq216olxUzm25KFdZfzOt66bVEJbFt2JsudOU=;
- b=qooGFJoOOovu15kwswB3fq1lgR9/9Ct2M+9h2K2NJLEMzT2vwjv8MdnMNTwOJnbw2t
- GkH3xBoldzAdEwx0CJaYXRF0g3mUwlLKIskbsGb6KRIzYaHGTaeCker8HcHBw1NLF4ye
- JUVnXK1oJjHN3mNsSzmwBqMQPbBZNT7WAUNDb0cIvWd5wugp9XOwys9rULyYQlsy4EVi
- aGZ8TjIYX2DvwnRZ5Ny8Fyywacycz8u4gvtp6tCIewgShn8ibsfAjSORKejksMyfFWsO
- rLj1iKj/0ryeijVns4iFFfvQhY6jdp+3twHGI6ng95zh/tDLEqUn1TEf+xYfWvxb4Oj1
- tvvg==
+ d=gateworks.com; s=google; t=1714176538; x=1714781338; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Z50E88vs15STnFHHCHRd5qxUDmikMMx8zG1R866xF98=;
+ b=OrAoYgFHx/JyTIeK09dc0rGPy+qMJEgrg63B/UrxaAs+o9lAu+X+7Z6oO6jsCzzJy4
+ yT+cCL0NYzuN5DZnBz0PXnneNfFkBecPfu75ZJ2EEUVaHU97nxU12IRb3UR0Jjbhh1sc
+ MKvJ5La/EKo9uyJTAP6lhJzpLxY9yWEl0EvDCXetlKsWRGd3GKJaHCH4JAzUdZzMX81l
+ 1HN29hpv3ruAMYbP/lJluwmRiIN5YCl0t942VxyJkj6DVCql1jPg0z7JCEEVL5As7Ya5
+ 6INiWUOVwGsq2TFM/8ME3EIFPVx0+4SuV/wCIDN+pvlZVO2V/MAGmXESGwu4NW4b0iGb
+ qxog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714175495; x=1714780295;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=0NTe5EXq216olxUzm25KFdZfzOt66bVEJbFt2JsudOU=;
- b=GoSb8SU0rlXdTs8ZFnE6JUyzvol65eCBY+9Pd5g6YuUhzH1YNL7Hi9QH8jjssB0ouE
- D4rXIgymrWZos1N48Tlp1gsEhb9MsJ+gDB9xR8XYreL2JEhlAShhewwB0T0N1V+3Qzyf
- q8PU2zLyn12n2OOm+I78OLDeGjXMObdoT3/Oa6GdIDZxHLZw0rAbxA9Fs2bPpjdU2Duo
- LNi4GlwtT5HNYAt5CNIs+4DV0+DwOc8t4MepnMZ7B8CDoQlcw51pcAwsTrDzUU8oPCGT
- tpy+VlvIbTTt+Yz5qZAo9k3VqBzxYmUKuEJB2lYcgW+cdY4X2R8S6ftkmuO1pBIlfHaz
- l6vw==
+ d=1e100.net; s=20230601; t=1714176538; x=1714781338;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Z50E88vs15STnFHHCHRd5qxUDmikMMx8zG1R866xF98=;
+ b=cv0c1CaC8m7iYOaIn3mNETpQsfLa7xllVxfbha4ZFVCKQtXam2sQGbyc6wl2Oalp+k
+ N8Cm1bG86a8dvyQyvXkjnKppNmtCDPHnF6357NmOguVo7f2Kv182gaJE12WEFJ7vpazb
+ iXUxjNkPvss+wYxhJ4xuE4rMkB+rYAnf87Zo8iWMI4HUlx0xyb5xgXZ8BlBswT6yaNcy
+ pdRfrTt+sCZhvkN2XewUXz/Z+L/RqmSut6vzQNR+cOR0i14p4kpXozsu15yOwYjjfJ7P
+ rPM0OUWO68lI0ZBF8By3cJS+fPPgCdvdMwvFGv23nsO6hWn63U4L6JvHDCK7Q96GwV0S
+ RPSA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUPxhGHJwM7k/yv+Xq6REyyHmeKQaWndpop5r9DxPA8oup2BHcdoPnOvA8pRN3A3tgh6yuIzJaHTQ9au5ejwagIIamKpA==
-X-Gm-Message-State: AOJu0Yz+VSEpRw3oknXJcNhfNj6jTK0IXfo5TkKMsKHJJH65h9gft0dL
- L0ixUhkT3AYyTgIKSdiQ1kV0+Upa1p8NtEFm/+tL7THdh//bWUebCrxAJRgYv8RLpPv2viLnZvw
- z4lZ9H3vLmlYIe+fBOg5XuWYsQ1p0OE92fP6LYw==
-X-Google-Smtp-Source: AGHT+IG6k9sj+k+ejFEq28Q0OHi6R8BOOPfCJF94i4jaEwUHJRIHjNXGSBKGU/8YsxFI5FXqUhORFN+asDwbITS6k9Q=
-X-Received: by 2002:a17:906:3918:b0:a58:7e41:c65a with SMTP id
- f24-20020a170906391800b00a587e41c65amr2889078eje.25.1714175495072; Fri, 26
- Apr 2024 16:51:35 -0700 (PDT)
+ AJvYcCXq+vIRpejW0RtoKdTjns7kJeCq13rv5Y6cbUnjhUyNvcxtXyy7n5vbC+WjP6QKy8RcsjfK6j4A3eg+oJDz6qcNPqhyiA==
+X-Gm-Message-State: AOJu0YyMLxS56hJxclVscw89CsR7K6RGTv1iLJoJS54TFUI0/oPJLW7X
+ ZnCGmUJ2r30RREccm+pshSW/1RDj5KigX7zAAlAcW9uPdaHl6XGpv+J08dxNTQ20uqHUpf2okr7
+ KLE3IXyGRvObm8fnZV10IzVQRwTzOge7r8v8JtQ==
+X-Google-Smtp-Source: AGHT+IEMI3eCRMnPiWvNM4olL0HYJM5psWTvHIgyyNs9E4AyCGWhyrpDxRv2oK/yI2/HnIttiXTsklnvkRy2LXy1ki4=
+X-Received: by 2002:ac2:5049:0:b0:518:6d2:2a8f with SMTP id
+ a9-20020ac25049000000b0051806d22a8fmr2313451lfm.24.1714176537656; Fri, 26 Apr
+ 2024 17:08:57 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
- <20240426141321.232236-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240426141321.232236-2-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sat, 27 Apr 2024 02:50:58 +0300
-Message-ID: <CAC_iWj+WT8_zZSaz2LOt8DcsRMpkeZOa=WF==-_RQytnvuBvpg@mail.gmail.com>
-Subject: Re: [RFC 01/14] efi_loader: pass GUID by address to efi_dp_from_lo
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Shantur Rathore <i@shantur.com>, Bin Meng <bmeng@tinylab.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Raymond Mao <raymond.mao@linaro.org>, Mark Kettenis <kettenis@openbsd.org>, 
- Joao Marcos Costa <jmcosta944@gmail.com>, u-boot@lists.denx.de
+References: <20240426165554.1376497-1-tharvey@gateworks.com>
+ <cf40b1dd10eb915984717a9ae2247003@manjaro.org>
+In-Reply-To: <cf40b1dd10eb915984717a9ae2247003@manjaro.org>
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Fri, 26 Apr 2024 17:08:45 -0700
+Message-ID: <CAJ+vNU0oS6zdwYxzkKt2QTzneSg1M1xhx8H7nYN1AEJaHKX3qg@mail.gmail.com>
+Subject: Re: [PATCH] venice: show emmc boot hardware partition
+To: Dragan Simic <dsimic@manjaro.org>
+Cc: Fabio Estevam <festevam@gmail.com>, u-boot@lists.denx.de,
+ Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,68 +91,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 26 Apr 2024 at 17:13, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Fri, Apr 26, 2024 at 12:26=E2=80=AFPM Dragan Simic <dsimic@manjaro.org> =
+wrote:
 >
-> We should not pass GUIDs by value as this requires copying.
+> Hello Tim,
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  include/efi_loader.h             | 2 +-
->  lib/efi_loader/efi_helper.c      | 4 ++--
->  lib/efi_loader/efi_load_initrd.c | 2 +-
->  3 files changed, 4 insertions(+), 4 deletions(-)
+> Please see my comments below.
 >
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 69442f4e58d..9600941aa32 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -743,7 +743,7 @@ efi_status_t EFIAPI efi_register_protocol_notify(const efi_guid_t *protocol,
->  efi_status_t efi_file_size(struct efi_file_handle *fh, efi_uintn_t *size);
+> On 2024-04-26 18:55, Tim Harvey wrote:
+> > To aid in understanding what emmc hardware partition is being
+> > used to boot on power-up, display the hardware partition name in the
+> > SPL.
+> >
+> > Signed-off-by: Tim Harvey <tharvey@gateworks.com>
+> > ---
+> >  board/gateworks/venice/spl.c | 16 ++++++++++++++++
+> >  1 file changed, 16 insertions(+)
+> >
+> > diff --git a/board/gateworks/venice/spl.c
+> > b/board/gateworks/venice/spl.c
+> > index 3b0f11f2fd0f..531bad260b6d 100644
+> > --- a/board/gateworks/venice/spl.c
+> > +++ b/board/gateworks/venice/spl.c
+> > @@ -366,9 +366,25 @@ unsigned long
+> > board_spl_mmc_get_uboot_raw_sector(struct mmc *mmc, unsigned long
+> >
+> >  const char *spl_board_loader_name(u32 boot_device)
+> >  {
+> > +     struct mmc *mmc;
+> > +     int part;
+> > +
+> >       switch (boot_device) {
+> >       /* SDHC2 */
+> >       case BOOT_DEVICE_MMC1:
+> > +             mmc_init_device(0);
+> > +             mmc =3D find_mmc_device(0);
+> > +             mmc_init(mmc);
+> > +             part =3D EXT_CSD_EXTRACT_BOOT_PART(mmc->part_config);
+> > +             switch (part) {
+> > +             case 1:
+> > +                     return "eMMC boot0";
+> > +             case 2:
+> > +                     return "eMMC boot1";
+> > +             case 0:
+> > +             case 7:
+> > +                     return "eMMC user";
+> > +             }
+> >               return "eMMC";
+> >       /* SDHC3 */
+> >       case BOOT_DEVICE_MMC2:
 >
->  /* get a device path from a Boot#### option */
-> -struct efi_device_path *efi_get_dp_from_boot(const efi_guid_t guid);
-> +struct efi_device_path *efi_get_dp_from_boot(const efi_guid_t *guid);
->
->  /* get len, string (used in u-boot crypto from a guid */
->  const char *guid_to_sha_str(const efi_guid_t *guid);
-> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> index 6918fd5e48a..c5d13c0f19c 100644
-> --- a/lib/efi_loader/efi_helper.c
-> +++ b/lib/efi_loader/efi_helper.c
-> @@ -72,7 +72,7 @@ out:
->   *
->   * Return:     device path or NULL. Caller must free the returned value
->   */
-> -struct efi_device_path *efi_get_dp_from_boot(const efi_guid_t guid)
-> +struct efi_device_path *efi_get_dp_from_boot(const efi_guid_t *guid)
->  {
->         struct efi_load_option lo;
->         void *var_value;
-> @@ -92,7 +92,7 @@ struct efi_device_path *efi_get_dp_from_boot(const efi_guid_t guid)
->         if (ret != EFI_SUCCESS)
->                 goto err;
->
-> -       return efi_dp_from_lo(&lo, &guid);
-> +       return efi_dp_from_lo(&lo, guid);
->
->  err:
->         free(var_value);
-> diff --git a/lib/efi_loader/efi_load_initrd.c b/lib/efi_loader/efi_load_initrd.c
-> index 67d1f75d525..d91135436c4 100644
-> --- a/lib/efi_loader/efi_load_initrd.c
-> +++ b/lib/efi_loader/efi_load_initrd.c
-> @@ -63,7 +63,7 @@ static efi_status_t get_initrd_fp(struct efi_device_path **initrd_fp)
->          * We can then use this specific return value and not install the
->          * protocol, while allowing the boot to continue
->          */
-> -       dp = efi_get_dp_from_boot(efi_lf2_initrd_guid);
-> +       dp = efi_get_dp_from_boot(&efi_lf2_initrd_guid);
->         if (!dp)
->                 return EFI_INVALID_PARAMETER;
->
-> --
-> 2.43.0
+> Your other patch on the mailing list does something similar. [1]
+> Perhaps this is a good oportunity to extract and unify the logic
+> that produces the names of eMMC partitions?  That would also allow
+> other boards to use the same logic.
 >
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Hi Dragan,
+
+Fair enough - I will resubmit both patches with this in mind.
+
+Best Regards
+
+Tim
