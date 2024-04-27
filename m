@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2524C4345F
-	for <u-boot@archiver.kernel.org>; Sat, 27 Apr 2024 14:12:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F41A1C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 27 Apr 2024 14:12:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEC018844F;
-	Sat, 27 Apr 2024 16:11:22 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 5665988491;
+	Sat, 27 Apr 2024 16:11:23 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nH5PNhBY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sUH0UCYg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D3BD8827F; Sat, 27 Apr 2024 16:11:21 +0200 (CEST)
-Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
- [IPv6:2607:f8b0:4864:20::32c])
+ id B31898827F; Sat, 27 Apr 2024 16:11:21 +0200 (CEST)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C71088407
+ by phobos.denx.de (Postfix) with ESMTPS id 993AC8841F
  for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 16:11:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x32c.google.com with SMTP id
- 46e09a7af769-6eb848b5a2eso1640657a34.3
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-78f02298dc6so264214785a.1
  for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 07:11:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714227077; x=1714831877; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714227078; x=1714831878; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=kRirUDMZ5L8RdTH2engZsd6mWSEaUScR2+CjL90/nSM=;
- b=nH5PNhBY8O3u6Ixcey5UbOFkPZd6EagSRb00x5eEA12fosr7SJ8KHJfYWb5SgXaEKR
- k81Ude6XPx4HngrwdXAy98ZIVCpbzMRWZqpB577SN6Y/T5RwNCXUBkiD2uK/YJdwxzcv
- A/DKwPf4+TB3GRHtIX1fXpQLt4f0dCqmd3rY0=
+ :reply-to; bh=x5FlwvR8f/MvFUN/bHEQOmpXSFqybtxkKz7ITeQR40U=;
+ b=sUH0UCYgwvajCCNAB2uXjcc/P+iEVip0Wm9Kjnmnz5yKC5jDIA9ZmItbLOddo5Wc0m
+ 0IUZcMovzfz49kBhYJVL1PunF2DwdkL2sM8RX5a7D1EhvKJRFmq6jdWNbadQlCeM/j46
+ aq9Y8PNPrUXMChhMF6p90kLU/ybNTRrr2y3gU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714227077; x=1714831877;
+ d=1e100.net; s=20230601; t=1714227078; x=1714831878;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=kRirUDMZ5L8RdTH2engZsd6mWSEaUScR2+CjL90/nSM=;
- b=Fu2tQZQaI87J8Igw+rDi/y9KTy7WaRCXZUb7icZvfvSgDITKcmCEWJI1ojvO8qEIEm
- 0zpAYfsLr+wtwWsx9000Y8YQ17puLhI2WZBSgpaFxKKAVlghGifiGCpSIwKGluBT8Bpn
- VrhcfLU4Kn6Ak+Fwxvy70PFp+F5YmkN73JCJH9h9tWFihilvuuGgoHwyjwkmvjreNqRl
- IK/syaz7CjRZ276TfD9SsxhK8yRR1jTzzUCyiyfpLnrxU5uHiAtvwzH8CSnw4RP3chOb
- XoNlt5IwgKonLRRiBDr0ev5rxNyw9maDBLe540Zf/bgBIMPtcnX6ZhYDiCFBsa/LV1rq
- kfkA==
-X-Gm-Message-State: AOJu0YynWqi/e9y8Z3Y2Fre45Fp349EUY10LSnH4FlCVjk7ELTT/rxGu
- zflP0WT7LN8Vk+fRmNgVOLml2ujLTut3w1kEgqW9JXKdAMRXvA2MFTGzOr8cLQTOjIKu4NqTUQK
- A1v/DiQ==
-X-Google-Smtp-Source: AGHT+IEV+Tj/dq8Zy7IjNXW54qfLTKzFnktdWoK8neJF2OLqpWZ5aFDKjP465CvyQDCpGs6355/0RQ==
-X-Received: by 2002:a05:6830:a:b0:6eb:e1ba:6648 with SMTP id
- c10-20020a056830000a00b006ebe1ba6648mr5875330otp.1.1714227077399; 
- Sat, 27 Apr 2024 07:11:17 -0700 (PDT)
+ bh=x5FlwvR8f/MvFUN/bHEQOmpXSFqybtxkKz7ITeQR40U=;
+ b=nXI2e+1Mf2z7nhxdj8hyB/r8ZsErMAcVOP+HAwLFYa2GfCFlKSx6gVdii7jaxblfNB
+ CmD7KU7g+bdnH/v3NaKLUjPUwt09NzMCC9Ny6FatWpeU2g+9F6tlnMAqnplt3Rjvt9ZT
+ SQRm7WyMvGz/Q1ANHmz6qK2/TeNC7txGDunwJHS/wHiQ7uZv4HxYf9k8TKTCXcKR4x88
+ J2LDNkK9RqLTo6cZ4fVmtU1p34aJHu2NIpYHX0twHvBXkv1eb/NVdxYCIrrebYRHVBXQ
+ 6IWQryxDjYh+bqfMGWa8DhNekVlnPJjHEhnIuxuw7K8xwxpJ4p+oVOzWG7f+roVUjXXi
+ 7axw==
+X-Gm-Message-State: AOJu0YzsQfW1KN9TaMnRoaU/MpRWJAyFGrAe+928bJXWVMdNKJJGI4mg
+ 4+F215MZ+uF8svNOoakQB9d3CFPvD3TySyJWDEzowek/wNrBHu1+4xjdFSxsv/1Y7mSmod9xoZZ
+ oH+DYNg==
+X-Google-Smtp-Source: AGHT+IHV3GQ16L8ZLhmRfJ17GfOHq1wNLYXXlgFZAiKidHcb2WnerrhSFaVmNUlCz3A2rcs+4+gcMA==
+X-Received: by 2002:a05:620a:2808:b0:790:7f30:6c0 with SMTP id
+ f8-20020a05620a280800b007907f3006c0mr5033509qkp.23.1714227078318; 
+ Sat, 27 Apr 2024 07:11:18 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a05620a112300b0078ed3667cb8sm8829760qkk.124.2024.04.27.07.11.16
+ p3-20020a05620a112300b0078ed3667cb8sm8829760qkk.124.2024.04.27.07.11.17
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 27 Apr 2024 07:11:16 -0700 (PDT)
+ Sat, 27 Apr 2024 07:11:17 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 05/18] xtensa: Remove <common.h> and add needed includes
-Date: Sat, 27 Apr 2024 08:10:53 -0600
-Message-Id: <20240427141106.3406000-6-trini@konsulko.com>
+Subject: [PATCH 06/18] nios2: Remove <common.h> and add needed includes
+Date: Sat, 27 Apr 2024 08:10:54 -0600
+Message-Id: <20240427141106.3406000-7-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240427141106.3406000-1-trini@konsulko.com>
 References: <20240427141106.3406000-1-trini@konsulko.com>
@@ -88,84 +88,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove <common.h> from all xtensa architecture files and when needed add
+Remove <common.h> from all nios2 architecture files and when needed add
 missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- arch/xtensa/cpu/cpu.c        | 2 +-
- arch/xtensa/cpu/exceptions.c | 2 +-
- arch/xtensa/lib/bootm.c      | 1 -
- arch/xtensa/lib/cache.c      | 1 -
- arch/xtensa/lib/time.c       | 1 -
+ arch/nios2/cpu/cpu.c        | 2 +-
+ arch/nios2/cpu/interrupts.c | 1 -
+ arch/nios2/cpu/traps.c      | 2 +-
+ arch/nios2/lib/bootm.c      | 1 -
+ arch/nios2/lib/cache.c      | 1 -
  5 files changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/arch/xtensa/cpu/cpu.c b/arch/xtensa/cpu/cpu.c
-index 98d9753b7e34..abcd8f7984fa 100644
---- a/arch/xtensa/cpu/cpu.c
-+++ b/arch/xtensa/cpu/cpu.c
-@@ -8,7 +8,7 @@
-  * CPU specific code
+diff --git a/arch/nios2/cpu/cpu.c b/arch/nios2/cpu/cpu.c
+index de7bfa947f11..792fa01ab9e2 100644
+--- a/arch/nios2/cpu/cpu.c
++++ b/arch/nios2/cpu/cpu.c
+@@ -4,7 +4,7 @@
+  * Scott McNutt <smcnutt@psyent.com>
   */
  
 -#include <common.h>
 +#include <config.h>
  #include <command.h>
- #include <init.h>
- #include <vsprintf.h>
-diff --git a/arch/xtensa/cpu/exceptions.c b/arch/xtensa/cpu/exceptions.c
-index cf9af4326a29..206767094e9f 100644
---- a/arch/xtensa/cpu/exceptions.c
-+++ b/arch/xtensa/cpu/exceptions.c
-@@ -10,12 +10,12 @@
-  *  (Note that alloca is a special case and handled in start.S)
+ #include <cpu.h>
+ #include <cpu_func.h>
+diff --git a/arch/nios2/cpu/interrupts.c b/arch/nios2/cpu/interrupts.c
+index 90cabb67571b..27093c4faa3d 100644
+--- a/arch/nios2/cpu/interrupts.c
++++ b/arch/nios2/cpu/interrupts.c
+@@ -7,7 +7,6 @@
+  * Scott McNutt <smcnutt@psyent.com>
   */
  
 -#include <common.h>
  #include <command.h>
  #include <irq_func.h>
+ #include <asm/nios2.h>
+diff --git a/arch/nios2/cpu/traps.c b/arch/nios2/cpu/traps.c
+index 087a05097d9e..59690214f14e 100644
+--- a/arch/nios2/cpu/traps.c
++++ b/arch/nios2/cpu/traps.c
+@@ -4,8 +4,8 @@
+  * Scott McNutt <smcnutt@psyent.com>
+  */
+ 
+-#include <common.h>
+ #include <hang.h>
++#include <stdio.h>
  #include <asm/ptrace.h>
- #include <asm/string.h>
- #include <asm/regs.h>
-+#include <vsprintf.h>
  
- typedef void (*handler_t)(struct pt_regs *);
- 
-diff --git a/arch/xtensa/lib/bootm.c b/arch/xtensa/lib/bootm.c
-index 9780d46e9b89..1de06b7fb53d 100644
---- a/arch/xtensa/lib/bootm.c
-+++ b/arch/xtensa/lib/bootm.c
+ void trap_handler (struct pt_regs *regs)
+diff --git a/arch/nios2/lib/bootm.c b/arch/nios2/lib/bootm.c
+index 657a17c7204f..ce939ff5e15a 100644
+--- a/arch/nios2/lib/bootm.c
++++ b/arch/nios2/lib/bootm.c
 @@ -4,7 +4,6 @@
-  * (C) Copyright 2014 Cadence Design Systems Inc.
+  * Scott McNutt <smcnutt@psyent.com>
   */
  
 -#include <common.h>
  #include <bootm.h>
- #include <bootstage.h>
- #include <command.h>
-diff --git a/arch/xtensa/lib/cache.c b/arch/xtensa/lib/cache.c
-index 4e0c0acc3bbe..e6a7f6827fc2 100644
---- a/arch/xtensa/lib/cache.c
-+++ b/arch/xtensa/lib/cache.c
-@@ -4,7 +4,6 @@
-  * (C) Copyright 2014 - 2016 Cadence Design Systems Inc.
+ #include <cpu_func.h>
+ #include <env.h>
+diff --git a/arch/nios2/lib/cache.c b/arch/nios2/lib/cache.c
+index 5864d8f0f473..8f543f2a2f26 100644
+--- a/arch/nios2/lib/cache.c
++++ b/arch/nios2/lib/cache.c
+@@ -5,7 +5,6 @@
+  * Implemented by fredrik.markstrom@gmail.com and ivarholmqvist@gmail.com
   */
  
 -#include <common.h>
  #include <cpu_func.h>
  #include <asm/cache.h>
- 
-diff --git a/arch/xtensa/lib/time.c b/arch/xtensa/lib/time.c
-index 1c927d2a6a3c..c6739584bbf2 100644
---- a/arch/xtensa/lib/time.c
-+++ b/arch/xtensa/lib/time.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2008 - 2013 Tensilica Inc.
-  */
- 
--#include <common.h>
- #include <clock_legacy.h>
- #include <time.h>
  #include <asm/global_data.h>
 -- 
 2.34.1
