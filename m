@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CD4DC4345F
-	for <u-boot@archiver.kernel.org>; Sat, 27 Apr 2024 14:14:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBE81C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 27 Apr 2024 14:14:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CC4D88411;
+	by phobos.denx.de (Postfix) with ESMTP id 81605885A5;
 	Sat, 27 Apr 2024 16:11:39 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NyXc87A/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HcafwkOK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01EE4885A1; Sat, 27 Apr 2024 16:11:33 +0200 (CEST)
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com
- [IPv6:2607:f8b0:4864:20::72c])
+ id 435398827F; Sat, 27 Apr 2024 16:11:34 +0200 (CEST)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B044288427
- for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 16:11:30 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E3EF88411
+ for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 16:11:31 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72c.google.com with SMTP id
- af79cd13be357-78edc3ad5fdso274587885a.0
- for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 07:11:30 -0700 (PDT)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-78edc3e80e6so220108885a.2
+ for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 07:11:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714227089; x=1714831889; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714227090; x=1714831890; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=bQJ6usMVxWGPcqDELI+EPGJrlC3+JXo7hWbZGsoTw1g=;
- b=NyXc87A/MHcISpcseNl82VNm/0gmwvdXk8Jm96XLG4hP5jyWASW04ZaL5gizZBSkB5
- 87mb79D0jmFvKBSQC2KzEcFJS5rTfjW7lsjppPLtuSWkkFHh02hm9xEoATorSf3HN5Nv
- V6zeWEyDm26g0P/zOPWMafo3osK4S6HqFadFg=
+ :reply-to; bh=bNCk92xkdwVzqVkykxigfQbhKy5IwfYQYn66e/ci+mc=;
+ b=HcafwkOK8qXpADsWlCpbi81nwa/4z1a8lXHbe5IoXJ4+HMKtYrZO4D14/Ubiw+W5HD
+ hqAktdgAR8pHXzIyJGexD2pbZSiY4yVcH5jWaXc0Hp+SRlV5WXk2gy2CCbN8V5GbAIoE
+ uYAmKi/MEoa6xDT3F7RGfE7VESoDn7+2mxBck=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714227089; x=1714831889;
+ d=1e100.net; s=20230601; t=1714227090; x=1714831890;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bQJ6usMVxWGPcqDELI+EPGJrlC3+JXo7hWbZGsoTw1g=;
- b=l4ClNtLEAb2Ujggi4fZrRe2CRlskWPnCcjMuEqkt9C72Dpofx6DoMkalywx/c1wIrg
- aPUksWG9vQOYQUVJijoqIqG/wVCjUhmtAgE7IH0QHcOQ6azx49kVcxS39IKyfGFMKASU
- DGCAREZJtMX+zbMUDRUSpv9e8E6R3eZ0ur3PJFEl1T9OPc8JJnz8F9u0sRFUNTwelsSo
- U4cko6kgSExZNSeVB/vx3v+O4n+LppwwSWv9UMQVLfIDBDmmVvS3MRO4MpHKzJGPMIvi
- ElctH4vfjS0T2ZHV1psiI9gr2ko6A0HiCOYkmSik01R8SwZpiLtGFL1b0Rov7V68j1pI
- 6yBg==
-X-Gm-Message-State: AOJu0YzjmKmOH5HobdMlSxYzao8+5PBtn1ad/JUwu/PkLEcaDu64goDR
- hp7KnBzPLCNEieUu7KfougzytNKuUUa75VzMd69Y2ALwODrFD1gyEbSTRtXYpVlCIW2r2xRg0VN
- chETM/w==
-X-Google-Smtp-Source: AGHT+IE8igT/M9SjzWE/ZmBQr3wCCYWulk40jArMxQi+HmKx6/yW4TZRXSIouxDiIGCZcF9aF61EDg==
-X-Received: by 2002:a05:620a:19a3:b0:78a:3ccc:8140 with SMTP id
- bm35-20020a05620a19a300b0078a3ccc8140mr11106727qkb.28.1714227089222; 
- Sat, 27 Apr 2024 07:11:29 -0700 (PDT)
+ bh=bNCk92xkdwVzqVkykxigfQbhKy5IwfYQYn66e/ci+mc=;
+ b=evIYUN57SP13aIG1AmffAL0L67jjbURFKhYSe7ATJ3BYo6cmU6TV+VtmVQBD6HoNNt
+ lXZvw3eCZDmABNNFUzebqpJRJZw3iNqJEaQv05CBHu0Z8tN5aaUs9fgBdoDqv+1nWJZ+
+ co5JJtOBYlS00b9js5Lj+Wx4MUKdpHlWgK9ykYyHBP2z6WbipFMncs93/tInXCKKkrw/
+ oS+Bg3uGDEjPWVS/RzFMxFhxgIq5a9kjyy0DgdxTuTWlXH8eM+/AwaUMlpnXBBkpPgTW
+ M0q5lXkVmF70PeyR9UBUREO0Gy+hCQtzCQaLiFTwXzB2gQU8s6vkB2fQXIxX4n/3rFP5
+ pwOg==
+X-Gm-Message-State: AOJu0YwtA+Sk/+xKiVaPqfzhB3g6XD9aNvgv0SwipVfG6UB8tyNyk023
+ FAcF1QKmdJg8f5bVa+luCk7PQ8V9jvzxv5N5IhTl6b4qV9nf2mD98s0vWwe5x2eIj897mV68z2L
+ 2snfUxw==
+X-Google-Smtp-Source: AGHT+IG37XLliN+HtwQY9+Bseiymqo7gvo/wOEAzGDgmfECYcslA7gxrVFHfC3ku6uA+Mhc/cJKozA==
+X-Received: by 2002:ae9:c305:0:b0:78d:7738:6889 with SMTP id
+ n5-20020ae9c305000000b0078d77386889mr6085603qkg.73.1714227090178; 
+ Sat, 27 Apr 2024 07:11:30 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a05620a112300b0078ed3667cb8sm8829760qkk.124.2024.04.27.07.11.27
+ p3-20020a05620a112300b0078ed3667cb8sm8829760qkk.124.2024.04.27.07.11.29
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 27 Apr 2024 07:11:28 -0700 (PDT)
+ Sat, 27 Apr 2024 07:11:29 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 16/18] net: Remove <common.h> and add needed includes
-Date: Sat, 27 Apr 2024 08:11:04 -0600
-Message-Id: <20240427141106.3406000-17-trini@konsulko.com>
+Subject: [PATCH 17/18] fs: Remove <common.h> and add needed includes
+Date: Sat, 27 Apr 2024 08:11:05 -0600
+Message-Id: <20240427141106.3406000-18-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240427141106.3406000-1-trini@konsulko.com>
 References: <20240427141106.3406000-1-trini@konsulko.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,365 +89,444 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove <common.h> from all "net/" files and when needed add
+Remove <common.h> from all "fs/" files and when needed add
 missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- net/arp.c             | 2 +-
- net/bootp.c           | 1 -
- net/cdp.c             | 1 -
- net/dhcpv6.c          | 1 -
- net/dns.c             | 1 -
- net/eth-uclass.c      | 1 -
- net/eth_bootdev.c     | 1 -
- net/eth_common.c      | 1 -
- net/fastboot_tcp.c    | 1 -
- net/fastboot_udp.c    | 1 -
- net/link_local.c      | 1 -
- net/mdio-mux-uclass.c | 1 -
- net/mdio-uclass.c     | 1 -
- net/ndisc.c           | 1 -
- net/net.c             | 1 -
- net/net6.c            | 2 +-
- net/nfs.c             | 1 -
- net/pcap.c            | 2 +-
- net/ping6.c           | 1 -
- net/rarp.c            | 1 -
- net/sntp.c            | 1 -
- net/tcp.c             | 1 -
- net/tftp.c            | 1 -
- net/udp.c             | 1 -
- net/wget.c            | 1 -
- net/wol.c             | 1 -
- 26 files changed, 3 insertions(+), 26 deletions(-)
+ fs/btrfs/dev.c               | 1 -
+ fs/btrfs/disk-io.c           | 1 -
+ fs/btrfs/volumes.c           | 2 +-
+ fs/cbfs/cbfs.c               | 2 +-
+ fs/cramfs/cramfs.c           | 2 +-
+ fs/cramfs/uncompress.c       | 2 +-
+ fs/ext4/dev.c                | 1 -
+ fs/ext4/ext4_common.c        | 1 -
+ fs/ext4/ext4_journal.c       | 1 -
+ fs/ext4/ext4_write.c         | 1 -
+ fs/ext4/ext4fs.c             | 1 -
+ fs/fat/fat.c                 | 1 -
+ fs/fat/fat_write.c           | 1 -
+ fs/fs.c                      | 2 +-
+ fs/fs_internal.c             | 1 -
+ fs/jffs2/compr_zlib.c        | 2 --
+ fs/jffs2/jffs2_1pass.c       | 1 -
+ fs/jffs2/mergesort.c         | 1 -
+ fs/sandbox/host_bootdev.c    | 1 -
+ fs/sandbox/sandboxfs.c       | 2 +-
+ fs/semihostingfs.c           | 2 +-
+ fs/ubifs/super.c             | 1 -
+ fs/ubifs/ubifs.c             | 1 -
+ fs/yaffs2/yaffs_mtdif.c      | 1 -
+ fs/yaffs2/yaffs_mtdif2.c     | 1 -
+ fs/yaffs2/yaffs_uboot_glue.c | 1 -
+ fs/zfs/dev.c                 | 1 -
+ fs/zfs/zfs.c                 | 1 -
+ fs/zfs/zfs_fletcher.c        | 1 -
+ fs/zfs/zfs_lzjb.c            | 1 -
+ fs/zfs/zfs_sha256.c          | 1 -
+ include/jffs2/load_kernel.h  | 1 +
+ 32 files changed, 8 insertions(+), 32 deletions(-)
 
-diff --git a/net/arp.c b/net/arp.c
-index 37848ad32fbd..bc1e25f941f7 100644
---- a/net/arp.c
-+++ b/net/arp.c
-@@ -9,10 +9,10 @@
-  *	Copyright 2000-2002 Wolfgang Denk, wd@denx.de
-  */
- 
--#include <common.h>
- #include <env.h>
- #include <log.h>
- #include <net.h>
-+#include <vsprintf.h>
- #include <linux/delay.h>
- 
- #include "arp.h"
-diff --git a/net/bootp.c b/net/bootp.c
-index c15472f5d37f..5efee7f37776 100644
---- a/net/bootp.c
-+++ b/net/bootp.c
-@@ -8,7 +8,6 @@
-  *	Copyright 2000-2004 Wolfgang Denk, wd@denx.de
-  */
- 
--#include <common.h>
- #include <bootstage.h>
- #include <command.h>
- #include <env.h>
-diff --git a/net/cdp.c b/net/cdp.c
-index a8f890e75226..d4cfc587ee35 100644
---- a/net/cdp.c
-+++ b/net/cdp.c
-@@ -9,7 +9,6 @@
-  *	Copyright 2000-2002 Wolfgang Denk, wd@denx.de
-  */
- 
--#include <common.h>
- #include <net.h>
- 
- #include "cdp.h"
-diff --git a/net/dhcpv6.c b/net/dhcpv6.c
-index 4aea779f6f24..54619ee69836 100644
---- a/net/dhcpv6.c
-+++ b/net/dhcpv6.c
-@@ -7,7 +7,6 @@
- 
- /* Simple DHCP6 network layer implementation. */
- 
--#include <common.h>
- #include <net6.h>
- #include <malloc.h>
- #include <linux/delay.h>
-diff --git a/net/dns.c b/net/dns.c
-index 5b1fe5b01037..c2f0ab98c8d0 100644
---- a/net/dns.c
-+++ b/net/dns.c
-@@ -22,7 +22,6 @@
-  * this stuff is worth it, you can buy me a beer in return.
-  */
- 
--#include <common.h>
- #include <command.h>
- #include <env.h>
- #include <log.h>
-diff --git a/net/eth-uclass.c b/net/eth-uclass.c
-index 3d0ec91dfa49..4e3933fd05f3 100644
---- a/net/eth-uclass.c
-+++ b/net/eth-uclass.c
-@@ -7,7 +7,6 @@
- 
- #define LOG_CATEGORY UCLASS_ETH
- 
--#include <common.h>
- #include <bootdev.h>
- #include <bootstage.h>
- #include <dm.h>
-diff --git a/net/eth_bootdev.c b/net/eth_bootdev.c
-index 869adf8cbbd3..6ee54e3c7901 100644
---- a/net/eth_bootdev.c
-+++ b/net/eth_bootdev.c
-@@ -8,7 +8,6 @@
- 
- #define LOG_CATEGORY UCLASS_BOOTSTD
- 
--#include <common.h>
- #include <bootdev.h>
- #include <bootflow.h>
- #include <command.h>
-diff --git a/net/eth_common.c b/net/eth_common.c
-index 14d4c07b695d..89b5bb371897 100644
---- a/net/eth_common.c
-+++ b/net/eth_common.c
+diff --git a/fs/btrfs/dev.c b/fs/btrfs/dev.c
+index cb3b9713a5f4..e27a032c9f69 100644
+--- a/fs/btrfs/dev.c
++++ b/fs/btrfs/dev.c
 @@ -5,7 +5,6 @@
-  * Joe Hershberger, National Instruments
+  * 2017 Marek Behún, CZ.NIC, kabel@kernel.org
   */
  
 -#include <common.h>
- #include <bootstage.h>
- #include <dm.h>
- #include <env.h>
-diff --git a/net/fastboot_tcp.c b/net/fastboot_tcp.c
-index 2eb52ea25679..d1fccbc72386 100644
---- a/net/fastboot_tcp.c
-+++ b/net/fastboot_tcp.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2023 The Android Open Source Project
-  */
- 
+ #include <blk.h>
+ #include <compiler.h>
+ #include <fs_internal.h>
+diff --git a/fs/btrfs/disk-io.c b/fs/btrfs/disk-io.c
+index 7eaa7e949604..e5bfaf461c2b 100644
+--- a/fs/btrfs/disk-io.c
++++ b/fs/btrfs/disk-io.c
+@@ -1,5 +1,4 @@
+ // SPDX-License-Identifier: GPL-2.0+
 -#include <common.h>
- #include <fastboot.h>
- #include <net.h>
- #include <net/fastboot_tcp.h>
-diff --git a/net/fastboot_udp.c b/net/fastboot_udp.c
-index 6fee441ab3b6..d1479510d61a 100644
---- a/net/fastboot_udp.c
-+++ b/net/fastboot_udp.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2016 The Android Open Source Project
-  */
- 
--#include <common.h>
- #include <command.h>
- #include <fastboot.h>
- #include <net.h>
-diff --git a/net/link_local.c b/net/link_local.c
-index 8aec3c79969b..179721333ffc 100644
---- a/net/link_local.c
-+++ b/net/link_local.c
-@@ -11,7 +11,6 @@
-  * Licensed under the GPL v2 or later
-  */
- 
--#include <common.h>
- #include <env.h>
+ #include <fs_internal.h>
  #include <log.h>
- #include <net.h>
-diff --git a/net/mdio-mux-uclass.c b/net/mdio-mux-uclass.c
-index 94b90e065762..ee188b504d16 100644
---- a/net/mdio-mux-uclass.c
-+++ b/net/mdio-mux-uclass.c
-@@ -4,7 +4,6 @@
-  * Alex Marginean, NXP
-  */
- 
+ #include <uuid.h>
+diff --git a/fs/btrfs/volumes.c b/fs/btrfs/volumes.c
+index 7d4095d9ca88..8ec545eded7b 100644
+--- a/fs/btrfs/volumes.c
++++ b/fs/btrfs/volumes.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ #include <stdlib.h>
 -#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <miiphy.h>
-diff --git a/net/mdio-uclass.c b/net/mdio-uclass.c
-index 0ebfb2f1343a..4f052ae432c6 100644
---- a/net/mdio-uclass.c
-+++ b/net/mdio-uclass.c
-@@ -4,7 +4,6 @@
-  * Alex Marginean, NXP
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <dm/lists.h>
- #include <eth_phy.h>
-diff --git a/net/ndisc.c b/net/ndisc.c
-index d1cec0601c83..d417c5987ac4 100644
---- a/net/ndisc.c
-+++ b/net/ndisc.c
-@@ -9,7 +9,6 @@
- 
- /* Neighbour Discovery for IPv6 */
- 
--#include <common.h>
- #include <net.h>
- #include <net6.h>
- #include <ndisc.h>
-diff --git a/net/net.c b/net/net.c
-index 0fb2d2507734..23b5d3356afa 100644
---- a/net/net.c
-+++ b/net/net.c
-@@ -81,7 +81,6 @@
-  */
- 
- 
--#include <common.h>
- #include <bootstage.h>
- #include <command.h>
- #include <console.h>
-diff --git a/net/net6.c b/net/net6.c
-index 2dd64c0e1618..4cff98df15cf 100644
---- a/net/net6.c
-+++ b/net/net6.c
-@@ -9,12 +9,12 @@
- 
- /* Simple IPv6 network layer implementation */
- 
--#include <common.h>
- #include <env_internal.h>
- #include <malloc.h>
- #include <net.h>
- #include <net6.h>
- #include <ndisc.h>
-+#include <vsprintf.h>
- 
- /* NULL IPv6 address */
- struct in6_addr const net_null_addr_ip6 = ZERO_IPV6_ADDR;
-diff --git a/net/nfs.c b/net/nfs.c
-index c18282448ccd..acc7106f10d4 100644
---- a/net/nfs.c
-+++ b/net/nfs.c
-@@ -30,7 +30,6 @@
-  * September 27, 2018. As of now, NFSv3 is the default choice. If the server
-  * does not support NFSv3, we fall back to versions 2 or 1. */
- 
--#include <common.h>
- #include <command.h>
- #include <display_options.h>
- #ifdef CONFIG_SYS_DIRECT_FLASH_NFS
-diff --git a/net/pcap.c b/net/pcap.c
-index 4036d8a3fa53..c959e3e4e511 100644
---- a/net/pcap.c
-+++ b/net/pcap.c
++#include <errno.h>
+ #include <fs_internal.h>
+ #include "ctree.h"
+ #include "disk-io.h"
+diff --git a/fs/cbfs/cbfs.c b/fs/cbfs/cbfs.c
+index 714f4baafc9e..ad5583233bb1 100644
+--- a/fs/cbfs/cbfs.c
++++ b/fs/cbfs/cbfs.c
 @@ -3,10 +3,10 @@
-  * Copyright 2019 Ramon Fried <rfried.dev@gmail.com>
+  * Copyright (c) 2011 The Chromium OS Authors. All rights reserved.
   */
  
 -#include <common.h>
- #include <net.h>
- #include <net/pcap.h>
- #include <time.h>
+ #include <cbfs.h>
+ #include <log.h>
+ #include <malloc.h>
 +#include <linux/errno.h>
- #include <asm/io.h>
+ #include <asm/byteorder.h>
  
- #define LINKTYPE_ETHERNET	1
-diff --git a/net/ping6.c b/net/ping6.c
-index 4882a17f510b..2479e08fd82f 100644
---- a/net/ping6.c
-+++ b/net/ping6.c
-@@ -9,7 +9,6 @@
- 
- /* Simple ping6 implementation */
+ /* Offset of master header from the start of a coreboot ROM */
+diff --git a/fs/cramfs/cramfs.c b/fs/cramfs/cramfs.c
+index abb2de34eb05..22148ff8fe27 100644
+--- a/fs/cramfs/cramfs.c
++++ b/fs/cramfs/cramfs.c
+@@ -24,7 +24,7 @@
+  * The actual compression is based on zlib, see the other files.
+  */
  
 -#include <common.h>
- #include <net.h>
- #include <net6.h>
- #include "ndisc.h"
-diff --git a/net/rarp.c b/net/rarp.c
-index 231b6233c07a..a6b564e314d4 100644
---- a/net/rarp.c
-+++ b/net/rarp.c
-@@ -4,7 +4,6 @@
-  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
++#include <stdio.h>
+ #include <malloc.h>
+ #include <asm/byteorder.h>
+ #include <linux/stat.h>
+diff --git a/fs/cramfs/uncompress.c b/fs/cramfs/uncompress.c
+index 0d071b69f4cc..2141edf22e4a 100644
+--- a/fs/cramfs/uncompress.c
++++ b/fs/cramfs/uncompress.c
+@@ -20,7 +20,7 @@
+  * then is used by multiple filesystems.
   */
+ 
+-#include <common.h>
++#include <stdio.h>
+ #include <cyclic.h>
+ #include <malloc.h>
+ #include <watchdog.h>
+diff --git a/fs/ext4/dev.c b/fs/ext4/dev.c
+index 168443de1ff7..3fd8980b1d69 100644
+--- a/fs/ext4/dev.c
++++ b/fs/ext4/dev.c
+@@ -22,7 +22,6 @@
+  *		fs/ext2/dev.c file in uboot.
+  */
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <config.h>
+ #include <fs_internal.h>
+diff --git a/fs/ext4/ext4_common.c b/fs/ext4/ext4_common.c
+index 2ff0dca2495e..857c15d878e4 100644
+--- a/fs/ext4/ext4_common.c
++++ b/fs/ext4/ext4_common.c
+@@ -18,7 +18,6 @@
+  * ext4write : Based on generic ext4 protocol.
+  */
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <ext_common.h>
+ #include <ext4fs.h>
+diff --git a/fs/ext4/ext4_journal.c b/fs/ext4/ext4_journal.c
+index e80f797c8dc9..02c4ac2cb931 100644
+--- a/fs/ext4/ext4_journal.c
++++ b/fs/ext4/ext4_journal.c
+@@ -13,7 +13,6 @@
+  * Copyright 1998-2000 Red Hat, Inc --- All Rights Reserved
+  */
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <ext4fs.h>
+ #include <log.h>
+diff --git a/fs/ext4/ext4_write.c b/fs/ext4/ext4_write.c
+index d057f6b5a794..38da3923c477 100644
+--- a/fs/ext4/ext4_write.c
++++ b/fs/ext4/ext4_write.c
+@@ -21,7 +21,6 @@
+  */
+ 
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <log.h>
+ #include <malloc.h>
+diff --git a/fs/ext4/ext4fs.c b/fs/ext4/ext4fs.c
+index 33e200ffa3c5..da59cb008fce 100644
+--- a/fs/ext4/ext4fs.c
++++ b/fs/ext4/ext4fs.c
+@@ -20,7 +20,6 @@
+  * ext4write : Based on generic ext4 protocol.
+  */
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <ext_common.h>
+ #include <ext4fs.h>
+diff --git a/fs/fat/fat.c b/fs/fat/fat.c
+index 2dd9d4e72dcc..e2570e816768 100644
+--- a/fs/fat/fat.c
++++ b/fs/fat/fat.c
+@@ -10,7 +10,6 @@
+ 
+ #define LOG_CATEGORY	LOGC_FS
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <config.h>
+ #include <exports.h>
+diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
+index c8e0fbf1a3b3..ea877ee9171b 100644
+--- a/fs/fat/fat_write.c
++++ b/fs/fat/fat_write.c
+@@ -7,7 +7,6 @@
+ 
+ #define LOG_CATEGORY LOGC_FS
  
 -#include <common.h>
  #include <command.h>
+ #include <config.h>
+ #include <div64.h>
+diff --git a/fs/fs.c b/fs/fs.c
+index acf465bdd807..bed1f7242f41 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -9,7 +9,6 @@
+ #include <config.h>
+ #include <display_options.h>
+ #include <errno.h>
+-#include <common.h>
+ #include <env.h>
+ #include <lmb.h>
  #include <log.h>
- #include <net.h>
-diff --git a/net/sntp.c b/net/sntp.c
-index dac0f8ceea1b..73d1d87d38b1 100644
---- a/net/sntp.c
-+++ b/net/sntp.c
-@@ -5,7 +5,6 @@
+@@ -21,6 +20,7 @@
+ #include <fs.h>
+ #include <sandboxfs.h>
+ #include <semihostingfs.h>
++#include <time.h>
+ #include <ubifs_uboot.h>
+ #include <btrfs.h>
+ #include <asm/global_data.h>
+diff --git a/fs/fs_internal.c b/fs/fs_internal.c
+index 111f91b355d1..51c1719361b1 100644
+--- a/fs/fs_internal.c
++++ b/fs/fs_internal.c
+@@ -7,7 +7,6 @@
+ 
+ #define LOG_CATEGORY LOGC_CORE
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <compiler.h>
+ #include <log.h>
+diff --git a/fs/jffs2/compr_zlib.c b/fs/jffs2/compr_zlib.c
+index d306b6dc4cfe..e1e3c15e75e1 100644
+--- a/fs/jffs2/compr_zlib.c
++++ b/fs/jffs2/compr_zlib.c
+@@ -35,8 +35,6 @@
   *
   */
  
 -#include <common.h>
- #include <command.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/net/tcp.c b/net/tcp.c
-index a713e1dd6096..b0cc8a1fe3ed 100644
---- a/net/tcp.c
-+++ b/net/tcp.c
-@@ -17,7 +17,6 @@
-  *                      - TCP application (eg wget)
-  *      Next Step       HTTPS?
+-#include <config.h>
+ #include <jffs2/jffs2.h>
+ #include <jffs2/mini_inflate.h>
+ 
+diff --git a/fs/jffs2/jffs2_1pass.c b/fs/jffs2/jffs2_1pass.c
+index 49ba82ef9596..5b7d7f4ae881 100644
+--- a/fs/jffs2/jffs2_1pass.c
++++ b/fs/jffs2/jffs2_1pass.c
+@@ -111,7 +111,6 @@
   */
+ 
+ 
 -#include <common.h>
- #include <command.h>
- #include <console.h>
- #include <env_internal.h>
-diff --git a/net/tftp.c b/net/tftp.c
-index 2e335413492b..6b16bdcbe4c2 100644
---- a/net/tftp.c
-+++ b/net/tftp.c
-@@ -5,7 +5,6 @@
-  * Copyright 2011 Comelit Group SpA,
-  *                Luca Ceresoli <luca.ceresoli@comelit.it>
-  */
--#include <common.h>
- #include <command.h>
- #include <display_options.h>
- #include <efi_loader.h>
-diff --git a/net/udp.c b/net/udp.c
-index a93822f511cd..37162260d175 100644
---- a/net/udp.c
-+++ b/net/udp.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2020 Philippe Reynes <philippe.reynes@softathome.com>
+ #include <config.h>
+ #include <malloc.h>
+ #include <div64.h>
+diff --git a/fs/jffs2/mergesort.c b/fs/jffs2/mergesort.c
+index fca77aa65114..495937d792db 100644
+--- a/fs/jffs2/mergesort.c
++++ b/fs/jffs2/mergesort.c
+@@ -7,7 +7,6 @@
+  * http://www.chiark.greenend.org.uk/~sgtatham/algorithms/listsort.html
   */
  
 -#include <common.h>
- #include <net.h>
- #include <net/udp.h>
+ #include "jffs2_private.h"
  
-diff --git a/net/wget.c b/net/wget.c
-index abab371e58ed..f1dd7abeff69 100644
---- a/net/wget.c
-+++ b/net/wget.c
+ int sort_list(struct b_list *list)
+diff --git a/fs/sandbox/host_bootdev.c b/fs/sandbox/host_bootdev.c
+index 3ef53627608a..3f74972a9f81 100644
+--- a/fs/sandbox/host_bootdev.c
++++ b/fs/sandbox/host_bootdev.c
 @@ -6,7 +6,6 @@
- 
- #include <asm/global_data.h>
- #include <command.h>
--#include <common.h>
- #include <display_options.h>
- #include <env.h>
- #include <image.h>
-diff --git a/net/wol.c b/net/wol.c
-index 0a625668a992..96478ba5751e 100644
---- a/net/wol.c
-+++ b/net/wol.c
-@@ -3,7 +3,6 @@
-  * Copyright 2018 Lothar Felten, lothar.felten@gmail.com
+  * Written by Simon Glass <sjg@chromium.org>
   */
  
 -#include <common.h>
- #include <command.h>
+ #include <bootdev.h>
+ #include <bootflow.h>
+ #include <bootmeth.h>
+diff --git a/fs/sandbox/sandboxfs.c b/fs/sandbox/sandboxfs.c
+index 4ae41d5b4db1..773b583fa43e 100644
+--- a/fs/sandbox/sandboxfs.c
++++ b/fs/sandbox/sandboxfs.c
+@@ -3,7 +3,7 @@
+  * Copyright (c) 2012, Google Inc.
+  */
+ 
+-#include <common.h>
++#include <stdio.h>
+ #include <fs.h>
+ #include <malloc.h>
+ #include <os.h>
+diff --git a/fs/semihostingfs.c b/fs/semihostingfs.c
+index 3592338a6865..77e39ca407e4 100644
+--- a/fs/semihostingfs.c
++++ b/fs/semihostingfs.c
+@@ -4,7 +4,7 @@
+  * Copyright (c) 2012, Google Inc.
+  */
+ 
+-#include <common.h>
++#include <stdio.h>
+ #include <fs.h>
+ #include <malloc.h>
+ #include <os.h>
+diff --git a/fs/ubifs/super.c b/fs/ubifs/super.c
+index 3e7160352e6c..788f88f04952 100644
+--- a/fs/ubifs/super.c
++++ b/fs/ubifs/super.c
+@@ -29,7 +29,6 @@
+ #include <linux/writeback.h>
+ #else
+ 
+-#include <common.h>
+ #include <malloc.h>
+ #include <memalign.h>
+ #include <linux/bitops.h>
+diff --git a/fs/ubifs/ubifs.c b/fs/ubifs/ubifs.c
+index a509584e5d71..75de01e95f7c 100644
+--- a/fs/ubifs/ubifs.c
++++ b/fs/ubifs/ubifs.c
+@@ -11,7 +11,6 @@
+  *          Adrian Hunter
+  */
+ 
+-#include <common.h>
  #include <env.h>
- #include <net.h>
+ #include <gzip.h>
+ #include <log.h>
+diff --git a/fs/yaffs2/yaffs_mtdif.c b/fs/yaffs2/yaffs_mtdif.c
+index 50fed2d4b150..0eec22bc4a54 100644
+--- a/fs/yaffs2/yaffs_mtdif.c
++++ b/fs/yaffs2/yaffs_mtdif.c
+@@ -12,7 +12,6 @@
+  */
+ 
+ /* XXX U-BOOT XXX */
+-#include <common.h>
+ 
+ #include "yportenv.h"
+ 
+diff --git a/fs/yaffs2/yaffs_mtdif2.c b/fs/yaffs2/yaffs_mtdif2.c
+index 81a4d964f3e9..2bf171f99f13 100644
+--- a/fs/yaffs2/yaffs_mtdif2.c
++++ b/fs/yaffs2/yaffs_mtdif2.c
+@@ -14,7 +14,6 @@
+ /* mtd interface for YAFFS2 */
+ 
+ /* XXX U-BOOT XXX */
+-#include <common.h>
+ #include <linux/bug.h>
+ #include <linux/errno.h>
+ 
+diff --git a/fs/yaffs2/yaffs_uboot_glue.c b/fs/yaffs2/yaffs_uboot_glue.c
+index 0a920561149a..deddbaac51eb 100644
+--- a/fs/yaffs2/yaffs_uboot_glue.c
++++ b/fs/yaffs2/yaffs_uboot_glue.c
+@@ -19,7 +19,6 @@
+  * This version now uses the ydevconfig mechanism to set up partitions.
+  */
+ 
+-#include <common.h>
+ #include <div64.h>
+ #include <malloc.h>
+ #include <linux/printk.h>
+diff --git a/fs/zfs/dev.c b/fs/zfs/dev.c
+index fcd9893b3ac2..722c6a86176c 100644
+--- a/fs/zfs/dev.c
++++ b/fs/zfs/dev.c
+@@ -8,7 +8,6 @@
+  */
+ 
+ 
+-#include <common.h>
+ #include <config.h>
+ #include <fs_internal.h>
+ #include <zfs_common.h>
+diff --git a/fs/zfs/zfs.c b/fs/zfs/zfs.c
+index bfc11fa6676b..c44e7ece5dfb 100644
+--- a/fs/zfs/zfs.c
++++ b/fs/zfs/zfs.c
+@@ -10,7 +10,6 @@
+  *	Copyright 2004	Sun Microsystems, Inc.
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <linux/stat.h>
+diff --git a/fs/zfs/zfs_fletcher.c b/fs/zfs/zfs_fletcher.c
+index 008a303ec796..b06c335626a4 100644
+--- a/fs/zfs/zfs_fletcher.c
++++ b/fs/zfs/zfs_fletcher.c
+@@ -8,7 +8,6 @@
+  * Use is subject to license terms.
+  */
+ 
+-#include <common.h>
+ #include <malloc.h>
+ #include <linux/stat.h>
+ #include <linux/time.h>
+diff --git a/fs/zfs/zfs_lzjb.c b/fs/zfs/zfs_lzjb.c
+index b42d4980129f..e79c5b4278fd 100644
+--- a/fs/zfs/zfs_lzjb.c
++++ b/fs/zfs/zfs_lzjb.c
+@@ -8,7 +8,6 @@
+  * Use is subject to license terms.
+  */
+ 
+-#include <common.h>
+ #include <malloc.h>
+ #include <linux/stat.h>
+ #include <linux/time.h>
+diff --git a/fs/zfs/zfs_sha256.c b/fs/zfs/zfs_sha256.c
+index cb5b1c06834d..602d75254ff9 100644
+--- a/fs/zfs/zfs_sha256.c
++++ b/fs/zfs/zfs_sha256.c
+@@ -8,7 +8,6 @@
+  * Use is subject to license terms.
+  */
+ 
+-#include <common.h>
+ #include <malloc.h>
+ #include <linux/stat.h>
+ #include <linux/time.h>
+diff --git a/include/jffs2/load_kernel.h b/include/jffs2/load_kernel.h
+index 9346d7ee9f1b..fa4600e84fc0 100644
+--- a/include/jffs2/load_kernel.h
++++ b/include/jffs2/load_kernel.h
+@@ -10,6 +10,7 @@
+  *-----------------------------------------------------------------------*/
+ 
+ #include <linux/list.h>
++#include <linux/string.h>
+ 
+ /* mtd device types */
+ #define MTD_DEV_TYPE_NOR	0x0001
 -- 
 2.34.1
 
