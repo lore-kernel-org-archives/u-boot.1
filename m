@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 879CFC4345F
-	for <u-boot@archiver.kernel.org>; Sat, 27 Apr 2024 14:12:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2524C4345F
+	for <u-boot@archiver.kernel.org>; Sat, 27 Apr 2024 14:12:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95B5B8843A;
+	by phobos.denx.de (Postfix) with ESMTP id EEC018844F;
 	Sat, 27 Apr 2024 16:11:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iLNdmoNf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nH5PNhBY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D678988422; Sat, 27 Apr 2024 16:11:19 +0200 (CEST)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id 3D3BD8827F; Sat, 27 Apr 2024 16:11:21 +0200 (CEST)
+Received: from mail-ot1-x32c.google.com (mail-ot1-x32c.google.com
+ [IPv6:2607:f8b0:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A446388413
- for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 16:11:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C71088407
+ for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 16:11:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-78f02298dc6so264211485a.1
- for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 07:11:17 -0700 (PDT)
+Received: by mail-ot1-x32c.google.com with SMTP id
+ 46e09a7af769-6eb848b5a2eso1640657a34.3
+ for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 07:11:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714227076; x=1714831876; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714227077; x=1714831877; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=lNdGC4VP60zRDZ338f8B5jsIMs0fk6cuGwoB7L26obM=;
- b=iLNdmoNf+de9oyP+wv64Ri4v6FSBijxM1WV/8p5APVC2oKYyF54wOhy1wBCo9o4HAc
- 4QrF9rntqmUdoxbseBhXic6vE0WtXX8L2rBpJMSADKb9kHv9N6pkvKeiH8jz2jGq8khw
- Uki/H4FW66RpakI3vlBoyKR14Kww2l2EsxzBk=
+ :reply-to; bh=kRirUDMZ5L8RdTH2engZsd6mWSEaUScR2+CjL90/nSM=;
+ b=nH5PNhBY8O3u6Ixcey5UbOFkPZd6EagSRb00x5eEA12fosr7SJ8KHJfYWb5SgXaEKR
+ k81Ude6XPx4HngrwdXAy98ZIVCpbzMRWZqpB577SN6Y/T5RwNCXUBkiD2uK/YJdwxzcv
+ A/DKwPf4+TB3GRHtIX1fXpQLt4f0dCqmd3rY0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714227076; x=1714831876;
+ d=1e100.net; s=20230601; t=1714227077; x=1714831877;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lNdGC4VP60zRDZ338f8B5jsIMs0fk6cuGwoB7L26obM=;
- b=RBO0uOkO/AfR8Y+79bYNNwLZTc/oyPiJVxlDCjQlGkhEXEydSYQVeBk78vkvpzjWsQ
- P74fsqLRNKdJrIVbfhrKmqwBT4bZ8gU9Kh+feVQOR3mkPLlekxJLcQZ+a7206bfkMb1/
- dj4NJe7Z0P5xmwsffnSFVrd4DTmHMFoKHq7QJBfyS0MUbRm7U7R+7wliUE1t/gjKeRw0
- qWoqtKkXial3R/M6cxmsrUo0CGHpds4Vyc9cCZzcThstHF/WqvieadfXpEkbM3unfvll
- trKUancRZW/h2WpRiCu+661qY4/b3X8QD0dHyiuCcxGN2m6uziVe4+RGHepg9c2JMoJi
- iQ8g==
-X-Gm-Message-State: AOJu0YxtRoAMYzR52j2I48k08Ig+Hk+tszLtMCM4ZgFSAaFQMC/E+ctG
- p2O2xfmQs7AQLisA+l96LZHW4SGRdg06wTVKcCHrpIVZL7tZ6UeQl1YbjM2mAgzHAhv0iP5rmtr
- p8g2SIg==
-X-Google-Smtp-Source: AGHT+IFgIhycDm1qh/8+JJ8Hmk+k0bbYFrcN8QhfPuexG+Fpnt9wX3iNAgyBTgxRPgmvj6Q0hfE2Gw==
-X-Received: by 2002:a05:620a:1095:b0:790:a3ce:a761 with SMTP id
- g21-20020a05620a109500b00790a3cea761mr9228874qkk.2.1714227076134; 
- Sat, 27 Apr 2024 07:11:16 -0700 (PDT)
+ bh=kRirUDMZ5L8RdTH2engZsd6mWSEaUScR2+CjL90/nSM=;
+ b=Fu2tQZQaI87J8Igw+rDi/y9KTy7WaRCXZUb7icZvfvSgDITKcmCEWJI1ojvO8qEIEm
+ 0zpAYfsLr+wtwWsx9000Y8YQ17puLhI2WZBSgpaFxKKAVlghGifiGCpSIwKGluBT8Bpn
+ VrhcfLU4Kn6Ak+Fwxvy70PFp+F5YmkN73JCJH9h9tWFihilvuuGgoHwyjwkmvjreNqRl
+ IK/syaz7CjRZ276TfD9SsxhK8yRR1jTzzUCyiyfpLnrxU5uHiAtvwzH8CSnw4RP3chOb
+ XoNlt5IwgKonLRRiBDr0ev5rxNyw9maDBLe540Zf/bgBIMPtcnX6ZhYDiCFBsa/LV1rq
+ kfkA==
+X-Gm-Message-State: AOJu0YynWqi/e9y8Z3Y2Fre45Fp349EUY10LSnH4FlCVjk7ELTT/rxGu
+ zflP0WT7LN8Vk+fRmNgVOLml2ujLTut3w1kEgqW9JXKdAMRXvA2MFTGzOr8cLQTOjIKu4NqTUQK
+ A1v/DiQ==
+X-Google-Smtp-Source: AGHT+IEV+Tj/dq8Zy7IjNXW54qfLTKzFnktdWoK8neJF2OLqpWZ5aFDKjP465CvyQDCpGs6355/0RQ==
+X-Received: by 2002:a05:6830:a:b0:6eb:e1ba:6648 with SMTP id
+ c10-20020a056830000a00b006ebe1ba6648mr5875330otp.1.1714227077399; 
+ Sat, 27 Apr 2024 07:11:17 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a05620a112300b0078ed3667cb8sm8829760qkk.124.2024.04.27.07.11.15
+ p3-20020a05620a112300b0078ed3667cb8sm8829760qkk.124.2024.04.27.07.11.16
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 27 Apr 2024 07:11:15 -0700 (PDT)
+ Sat, 27 Apr 2024 07:11:16 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 04/18] cmd/Kconfig: Add some missing dependencies
-Date: Sat, 27 Apr 2024 08:10:52 -0600
-Message-Id: <20240427141106.3406000-5-trini@konsulko.com>
+Subject: [PATCH 05/18] xtensa: Remove <common.h> and add needed includes
+Date: Sat, 27 Apr 2024 08:10:53 -0600
+Message-Id: <20240427141106.3406000-6-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240427141106.3406000-1-trini@konsulko.com>
 References: <20240427141106.3406000-1-trini@konsulko.com>
@@ -88,83 +88,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With the migration to Kconfig complete, we can now add some previously
-missing dependencies to some commands.
+Remove <common.h> from all xtensa architecture files and when needed add
+missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- cmd/Kconfig | 8 ++++++--
- env/Kconfig | 2 +-
- 2 files changed, 7 insertions(+), 3 deletions(-)
+ arch/xtensa/cpu/cpu.c        | 2 +-
+ arch/xtensa/cpu/exceptions.c | 2 +-
+ arch/xtensa/lib/bootm.c      | 1 -
+ arch/xtensa/lib/cache.c      | 1 -
+ arch/xtensa/lib/time.c       | 1 -
+ 5 files changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index c182d73ddbd7..d9df34942d4f 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -539,6 +539,7 @@ config CMD_IMI
+diff --git a/arch/xtensa/cpu/cpu.c b/arch/xtensa/cpu/cpu.c
+index 98d9753b7e34..abcd8f7984fa 100644
+--- a/arch/xtensa/cpu/cpu.c
++++ b/arch/xtensa/cpu/cpu.c
+@@ -8,7 +8,7 @@
+  * CPU specific code
+  */
  
- config CMD_IMLS
- 	bool "imls"
-+	depends on MTD_NOR_FLASH || FLASH_CFI_DRIVER
- 	help
- 	  List all images found in flash
+-#include <common.h>
++#include <config.h>
+ #include <command.h>
+ #include <init.h>
+ #include <vsprintf.h>
+diff --git a/arch/xtensa/cpu/exceptions.c b/arch/xtensa/cpu/exceptions.c
+index cf9af4326a29..206767094e9f 100644
+--- a/arch/xtensa/cpu/exceptions.c
++++ b/arch/xtensa/cpu/exceptions.c
+@@ -10,12 +10,12 @@
+  *  (Note that alloca is a special case and handled in start.S)
+  */
  
-@@ -830,7 +831,7 @@ config SYS_EEPROM_SIZE
+-#include <common.h>
+ #include <command.h>
+ #include <irq_func.h>
+ #include <asm/ptrace.h>
+ #include <asm/string.h>
+ #include <asm/regs.h>
++#include <vsprintf.h>
  
- config SYS_EEPROM_PAGE_WRITE_BITS
- 	int "Number of bits used to address bytes in a single page"
--	depends on CMD_EEPROM
-+	depends on CMD_EEPROM || ENV_IS_IN_EEPROM
- 	default 8
- 	help
- 	  The EEPROM page size is 2^SYS_EEPROM_PAGE_WRITE_BITS.
-@@ -1022,8 +1023,8 @@ config CMD_ARMFFA
- 		- Displaying the arm_ffa device info
+ typedef void (*handler_t)(struct pt_regs *);
  
- config CMD_ARMFLASH
--	#depends on FLASH_CFI_DRIVER
- 	bool "armflash"
-+	depends on FLASH_CFI_DRIVER
- 	help
- 	  ARM Ltd reference designs flash partition access
+diff --git a/arch/xtensa/lib/bootm.c b/arch/xtensa/lib/bootm.c
+index 9780d46e9b89..1de06b7fb53d 100644
+--- a/arch/xtensa/lib/bootm.c
++++ b/arch/xtensa/lib/bootm.c
+@@ -4,7 +4,6 @@
+  * (C) Copyright 2014 Cadence Design Systems Inc.
+  */
  
-@@ -1166,6 +1167,7 @@ config CMD_FPGA_LOAD_SECURE
+-#include <common.h>
+ #include <bootm.h>
+ #include <bootstage.h>
+ #include <command.h>
+diff --git a/arch/xtensa/lib/cache.c b/arch/xtensa/lib/cache.c
+index 4e0c0acc3bbe..e6a7f6827fc2 100644
+--- a/arch/xtensa/lib/cache.c
++++ b/arch/xtensa/lib/cache.c
+@@ -4,7 +4,6 @@
+  * (C) Copyright 2014 - 2016 Cadence Design Systems Inc.
+  */
  
- config CMD_FPGAD
- 	bool "fpgad - dump FPGA registers"
-+	depends on GDSYS_LEGACY_DRIVERS
- 	help
- 	  (legacy, needs conversion to driver model)
- 	  Provides a way to dump FPGA registers by calling the board-specific
-@@ -1601,6 +1603,7 @@ config CMD_TEMPERATURE
+-#include <common.h>
+ #include <cpu_func.h>
+ #include <asm/cache.h>
  
- config CMD_TSI148
- 	bool "tsi148 - Command to access tsi148 device"
-+	depends on DM_PCI_COMPAT
- 	help
- 	  This provides various sub-commands to initialise and configure the
- 	  Turndra tsi148 device. See the command help for full details.
-@@ -1614,6 +1617,7 @@ config CMD_UFS
+diff --git a/arch/xtensa/lib/time.c b/arch/xtensa/lib/time.c
+index 1c927d2a6a3c..c6739584bbf2 100644
+--- a/arch/xtensa/lib/time.c
++++ b/arch/xtensa/lib/time.c
+@@ -3,7 +3,6 @@
+  * (C) Copyright 2008 - 2013 Tensilica Inc.
+  */
  
- config CMD_UNIVERSE
- 	bool "universe - Command to set up the Turndra Universe controller"
-+	depends on DM_PCI_COMPAT
- 	help
- 	  This allows setting up the VMEbus provided by this controller.
- 	  See the command help for full details.
-diff --git a/env/Kconfig b/env/Kconfig
-index 1f8e90af55e5..9641abe371a0 100644
---- a/env/Kconfig
-+++ b/env/Kconfig
-@@ -312,7 +312,7 @@ config ENV_IS_IN_NVRAM
- 
- config ENV_IS_IN_ONENAND
- 	bool "Environment is in OneNAND"
--	depends on !CHAIN_OF_TRUST
-+	depends on !CHAIN_OF_TRUST && CMD_ONENAND
- 	help
- 	  Define this if you want to put your local device's environment in
- 	  OneNAND.
+-#include <common.h>
+ #include <clock_legacy.h>
+ #include <time.h>
+ #include <asm/global_data.h>
 -- 
 2.34.1
 
