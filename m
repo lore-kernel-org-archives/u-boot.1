@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2553AC4345F
-	for <u-boot@archiver.kernel.org>; Sat, 27 Apr 2024 07:30:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C954CC4345F
+	for <u-boot@archiver.kernel.org>; Sat, 27 Apr 2024 10:22:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3FB0888308;
-	Sat, 27 Apr 2024 09:30:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EC822882B1;
+	Sat, 27 Apr 2024 12:22:11 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="ukMe7t2d";
-	dkim-atps=neutral
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 856FE882D9; Sat, 27 Apr 2024 09:30:35 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1714213332;
+	bh=CkSc1MzmASfau50N0U5gnsonC6XrVL4Nyy3JTWHmP8o=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=vMDHNtAZVUf5Wj3SufqmYVb9B/BUfBG1OlJ3+Iv9FBNdxWL5tu30ir01VcRukmtV8
+	 OTqMVRJ/cbea++ataUhG6QYIi2GN2sBNIeawhPpjMNt6TGOJ5l1hPdEO2u4nV18Fy8
+	 fOdOUyiDr3h4JsnL2jMcHJFX9UMs/bItCC3cdIl1nNmsfaRyfupO8Vy+nQwJpq32R+
+	 /79NCeWdXeR+n3hc3si5IHs9iW+LBNqdSWKHJvK94V1GqhUvzJO58/vD4EnbKQ4EvJ
+	 qGx5C5L/7BQTapLLEMmvMP4Tfcu5+BGJf0ViN7J0WgWpNKFCvXA/sTN6HW43VHSFma
+	 wvaEvrrEA6qYw==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A08998830D
- for <u-boot@lists.denx.de>; Sat, 27 Apr 2024 09:30:33 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id 7C93788297;
+ Sat, 27 Apr 2024 12:22:09 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1714213330;
+ bh=CkSc1MzmASfau50N0U5gnsonC6XrVL4Nyy3JTWHmP8o=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=U3fzJ4qBsTLX8VICJQxsH1qMeMkn7GC0MKg/N7yNYvMO6lwdQJNbOPIVFiCtZgWX0
+ iaw75aUr211Iu37LMx8amaFCvdHNaf6gz5rrCxEnOs3n9QgkgHIyoqZhnUz904YxwV
+ oIroXNL6KMz53qR4LxR3pyUX/J5Zio3/uaDEgt+EIER/oRkjSH4IUVB9iiiASKEkc9
+ YG+7eyPwfVn5+ZZTc7H+ipVZd/YnXZ8BAhAzb/MfJ9M7FC35738FQ2ZDwe7oTntzR5
+ v8qAON4XyhL1D6HuwlEh7IzNctL7ai3iG70eNz0k7y/PIQA+SMwXY2+6Dsrvr7bRVX
+ eke6wK1Fr+snQ==
+Message-ID: <d8a77dd7-39bf-4ccd-979a-97eedb054b36@denx.de>
+Date: Sat, 27 Apr 2024 12:22:08 +0200
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1714203033;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=0ntvmuViseUnFUOpaEMHPTxtZoupndVaTs1A28RqVNI=;
- b=ukMe7t2d4ZC3kYPY4Slk7cobM4/4dkNfvnnDjELZyB6K+C7FR0mi+2v2g/GSQXo63qn5h/
- 7xcedlTxqsYcN63msl6Cgomh5bv1D2nSbibuvB0+mXa3y6cwG0rbISYkMIiegrNyUJy5pI
- NsGfkRY2wXQjHZGy4IYszQ3GfqSZx3aeR1BXhZsVDBucDM70S20OxHoQ0FiQMcaP8r8hUo
- T/Eedv5rlde3OtuG5mGYW1vevlTD15Dbz0WBKBvExAwKumr7KtaoEAoa27PWC4FRDAY2Ue
- RZfXK5YquajbBzBm1vck0T5ouIr72qmEjzLcvCqnf70rk5xSpbnhD/0eEMiheQ==
-Date: Sat, 27 Apr 2024 09:30:32 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Tim Harvey <tharvey@gateworks.com>
-Cc: Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>, Simon Glass
- <sjg@chromium.org>, Fabio Estevam <festevam@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2] cmd: mmc: allow use of hardware partition names for
- mmc partconf
-In-Reply-To: <7aac74dc3adf48f746520fa9e6c83699@manjaro.org>
-References: <20240426171205.1382212-1-tharvey@gateworks.com>
- <9f5dc653-8252-4da7-81bc-a76280cf4c68@denx.de>
- <CAJ+vNU3U4P0wLcJ=_Bev++bsRF+=2inGEcs3pMuRb4f7ObSjBQ@mail.gmail.com>
- <7aac74dc3adf48f746520fa9e6c83699@manjaro.org>
-Message-ID: <427816e0e69cad91b149a91136f1f290@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3] mmc: allow use of hardware partition names for mmc
+ partconf
+To: E Shattow <lucent@gmail.com>
+Cc: Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>, Fabio Estevam <festevam@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de,
+ Dragan Simic <dsimic@manjaro.org>
+References: <20240427001157.1460302-1-tharvey@gateworks.com>
+ <52d7d87e-19b0-4474-bf75-33dbbc150c31@denx.de>
+ <CANV2PTOQknpnfKsZQC9Tr0AhZgMQOOTTND0T+WMp8pwv-5TNdQ@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CANV2PTOQknpnfKsZQC9Tr0AhZgMQOOTTND0T+WMp8pwv-5TNdQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,44 +74,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-04-27 09:25, Dragan Simic wrote:
-> On 2024-04-26 19:36, Tim Harvey wrote:
->> On Fri, Apr 26, 2024 at 10:25 AM Marek Vasut <marex@denx.de> wrote:
->>> On 4/26/24 7:12 PM, Tim Harvey wrote:
->>> > +static const char *mmc_partnames[] = {
->>> > +     "user",
->>> > +     "boot0",
->>> > +     "boot1",
->>> > +     "gp1",
->>> > +     "gp2",
->>> > +     "gp3",
->>> > +     "gp4",
->>> 
->>> Uh, maybe gp%d are indexed from zero too ?
->>> 
->>> (sorry for the confusion)
->> 
->> but 'mmc hwpartition' does not list them 0 based:
->> u-boot=> mmc hwpartition
->> switch to partitions #0, OK
->> mmc2(part 0) is current device
->> Partition configuration:
->>         No enhanced user data area
->>         No GP1 partition
->>         No GP2 partition
->>         No GP3 partition
->>         No GP4 partition
->> 
->> I'm ok with either, I'm just not sure what is more understandable and 
->> standard.
+On 4/27/24 3:29 AM, E Shattow wrote:
+> Hi Marek,
 > 
-> I can confirm that JEDEC also starts the numbering of the GP
-> partitions from one in some of its documents.
+> On Fri, Apr 26, 2024 at 5:49 PM Marek Vasut <marex@denx.de> wrote:
+>>
+>> [...]
+>>
+>>> diff --git a/include/mmc.h b/include/mmc.h
+>>> index 4b8327f1f93b..7243bd761202 100644
+>>> --- a/include/mmc.h
+>>> +++ b/include/mmc.h
+>>> @@ -381,6 +381,21 @@ enum mmc_voltage {
+>>>    #define MMC_TIMING_MMC_HS200        9
+>>>    #define MMC_TIMING_MMC_HS400        10
+>>>
+>>> +/* emmc hardware partition values */
+>>> +enum emmc_hwpart {
+>>> +     EMMC_HWPART_DEFAULT = 0,
+>>> +     EMMC_HWPART_BOOT0 = 1,
+>>> +     EMMC_HWPART_BOOT1 = 2,
+>>> +     EMMC_HWPART_GP1 = 3,
+>>> +     EMMC_HWPART_GP2 = 4,
+>>> +     EMMC_HWPART_GP3 = 5,
+>>> +     EMMC_HWPART_GP4 = 6,
+>>> +     EMMC_HWPART_USER = 7,
+>>> +};
+>>> +
+>>> +/* emmc hardware partition names */
+>>> +extern const char *emmc_hwpart_names[];
+>>
+>> Maybe the array should have fixed size here, i.e. 8 ?
 > 
-> Though, it's a bit intriguing why the numbering of the boot
-> partitions starts from zero.  Perhaps there's some good reason
-> for that difference.
+> Is there an ABI reason to do so? Can you explain further why it would
+> be needed to do that?
 
-Hmm, it seems that JEDEC actually starts the numbering of the boot
-partitions from one in some of its documents, instead of starting
-from zero.  I'll try to research that better.
+It has nothing to do with ABI, it is only to let the compiler validate 
+that nobody would index the array with index > 7 by accident.
