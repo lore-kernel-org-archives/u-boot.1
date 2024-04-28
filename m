@@ -4,79 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5EC93C4345F
-	for <u-boot@archiver.kernel.org>; Sun, 28 Apr 2024 13:32:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6C84C4345F
+	for <u-boot@archiver.kernel.org>; Sun, 28 Apr 2024 14:40:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF1E6882D9;
-	Sun, 28 Apr 2024 15:32:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CBF27881F6;
+	Sun, 28 Apr 2024 16:40:40 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="J/9dxsmU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AxQmLP2U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 281A088308; Sun, 28 Apr 2024 15:32:55 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 0BADA880F4; Sun, 28 Apr 2024 16:24:24 +0200 (CEST)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B085882AF
- for <u-boot@lists.denx.de>; Sun, 28 Apr 2024 15:32:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DE6378828B
+ for <u-boot@lists.denx.de>; Sun, 28 Apr 2024 16:24:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a58989cd1f8so462257666b.1
- for <u-boot@lists.denx.de>; Sun, 28 Apr 2024 06:32:53 -0700 (PDT)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=heesub@gmail.com
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2ac16b59fbeso3167840a91.2
+ for <u-boot@lists.denx.de>; Sun, 28 Apr 2024 07:24:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714311172; x=1714915972; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1OJH7hsLok++OkguDqhGYtVffiqU9XIQwKibpkMbzuU=;
- b=J/9dxsmUnjFkjunjmzF9W7NwKCMWJBOaKuYeqCforGSh9uFjyLAXso6qlqLHljcy0J
- gqDBrhp6qr8tM1snmg5WkKNLSXPouazVUgHIW9mv2io51gv3mGxZBsboNJ1CoWh+N6dK
- tyHoTRTMQXxQYj+FXB4mMpHnkrr7CVeipynwbwQzsv4El4YrCI2uZbkTMCmAkVwKRmCe
- E40wxQkYPF8ftQ+g4OdfXfPRrXMyvb7PAknf084gEhXGK6UXvZabXGOuWWUTOvXio5oK
- DEi7Pt3FUY5JEXtWs8Lb993ICk4PZdp6aI8LpPlN5iib/TF+QWDDA9elSa0uCbj49TnC
- LIBw==
+ d=gmail.com; s=20230601; t=1714314260; x=1714919060; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SOBZ07hLcIVya2JI+W8ZuSOXxCBaGDbY3A7AEZ+QJuY=;
+ b=AxQmLP2U184fnhQ3URFntpVPT7lUfYB7fB57Eag/tMgnhNzbBRHbe7H5Df3V/nPkCp
+ e3xJ99i404ItkQiZUk7uI09T7KnX+MFoXTxhy9N7unfdj0jWNNkH7fLCktRrgqOsHwpE
+ e0Xcm5aCbwRGgnFk8b/8LsB9DDKXMrXPtq20es5Iqb5I8z1Gjxz8Sosy/JqjsLH/0LdV
+ mASR7VioSzQLSiyuDixHdYBfgcFBXHjlfj9SEOveHVBYeKZbCadEDUYwlhMNaA5tGe17
+ p4JZUdebw9HE0F2vLFKgnVoXLuCXlGObJA/TEWIsnuFaSQeuiyaO3ce+VUczGXIEFWBO
+ eByA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714311172; x=1714915972;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1714314260; x=1714919060;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=1OJH7hsLok++OkguDqhGYtVffiqU9XIQwKibpkMbzuU=;
- b=U4mTntiAgvIeQ/twowO0sFTfKs+wxh3InHvQrBBQiT/k0CadgAmGBtWfUqivK0bg+S
- X3YsqkzR2saNSOMpBVcZz5gkTDzvHOKINg6YinyYyndfEi0BDBEX4q0LRJuFPFbIK1dd
- yaeikzEF5etv7x9XMbsQih3LZI9bEruC1mDrjDhp+ye5Y6khqP0iDX6zJmR8cmtIgV3W
- x9TyxpzHAxAIBKdVufJ7RqyCZe9zEdX6Ea0CL8JtBrpuC5ja3BPRLM9Id27WQA56Gy8d
- D2fb62YNS7qzDZ5EinA9TcxApLKggxuxAw7Blxcl/PAf92CVpkxyAmIa9L5dCV30BJqa
- AZkA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWgn/KvvDO7lQa5kZvEmXxEOzQk5mZdSWvpyJRt3mow40aAz3V8wQ8lo+qGgMdt3/H6MgSZsd863tPW3GE1a8dbpjMM8Q==
-X-Gm-Message-State: AOJu0Yyoir1A6NxYLgtvZ5n3ZBmVsHZjlpYmO632wo0epix2p02ZLHnf
- rmmzWICBW1kHwEYr37AukYJnyeQm1D4LKotP6nrBv2l0GA6hIWGiZ8ZvJiPpJJD4LozKzBXcKQC
- qZhMN0RNM975Hk/ojh7GCDw44JB6aDJs5S2oxdQ==
-X-Google-Smtp-Source: AGHT+IF8bPP0W4z/3e2FYxW7/d6iCEgxqIZ1EIk57OwetDIihWU5oFTzvLCwHxOlTfxqCMhCw7U4JfUhiNa4YhWD2mU=
-X-Received: by 2002:a17:906:d929:b0:a55:75f6:ce0f with SMTP id
- rn9-20020a170906d92900b00a5575f6ce0fmr3286662ejb.13.1714311172609; Sun, 28
- Apr 2024 06:32:52 -0700 (PDT)
+ bh=SOBZ07hLcIVya2JI+W8ZuSOXxCBaGDbY3A7AEZ+QJuY=;
+ b=CUTw58pSxaMTy4EmsfymRATo5dxrVlEgxChnLGXlAO/G/vgdbbAVZS3HBis1nlm27U
+ Fz4kdDDxpR3H73OnPKPT2ID+OXjYOyt6EAVWh0AdU2v5y4hKy6a+MfTMW2FFQEoZ/vAl
+ IUJ4bKUj2cx/FCF1AIeUfE6wS9nqMhVCuP7YbQsUsNrqJqmQ9cPyZ0nMPxtJcnBeHgHX
+ htfHN0yr9MR2SYinAdV55fOKPROS71M0+DvHFDJ4T68S1YeBtJJKB5CBulOwmy0zstdm
+ 6xsQWxNOYMZrJMQPyCA1EWwhiiP+2Y0hCRewlXBIMb9TyXGVIELIxpk9IfOU0GW8vUdb
+ Kavg==
+X-Gm-Message-State: AOJu0YxOHcH/o/JSKfHt8CVBXTStvMalnNdpzunNdZHR/GIJgWqN8tWO
+ G9hB79beMBeNV3zv0UusRG4kWMMpCy/S23AZelo+wysHRBODtuUdquwsVA==
+X-Google-Smtp-Source: AGHT+IFEYH2+czUhzLbU62hn10B9n7QVAABr+pvbnFcg1rPYGH7FhWxxvaukkTQRcHihP7jAcgGAdQ==
+X-Received: by 2002:a17:90b:4f85:b0:2af:8959:2cc with SMTP id
+ qe5-20020a17090b4f8500b002af895902ccmr7898371pjb.9.1714314260026; 
+ Sun, 28 Apr 2024 07:24:20 -0700 (PDT)
+Received: from heesub-ubuntu.localdomain ([58.229.217.38])
+ by smtp.gmail.com with ESMTPSA id
+ t3-20020a635343000000b005f077dce0f6sm17568744pgl.31.2024.04.28.07.24.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 28 Apr 2024 07:24:19 -0700 (PDT)
+From: Heesub Shin <heesub@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Heesub Shin <heesub@gmail.com>
+Subject: [PATCH 1/5] dts: stm32mp157c-odyssey: set PLL4_P to 125Mhz for ETH_CLK
+Date: Sun, 28 Apr 2024 23:24:02 +0900
+Message-Id: <20240428142406.28445-1-heesub@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
- <20240426141321.232236-14-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240426141321.232236-14-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 28 Apr 2024 16:32:16 +0300
-Message-ID: <CAC_iWjKnXv6+v7P8wqmXW9rJt7YyZ=0WyWMpgskmdk28z5jAsw@mail.gmail.com>
-Subject: Re: [RFC 13/14] efi_loader: export efi_load_image_from_path
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Shantur Rathore <i@shantur.com>, Bin Meng <bmeng@tinylab.org>, 
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>, 
- Raymond Mao <raymond.mao@linaro.org>, Mark Kettenis <kettenis@openbsd.org>, 
- Joao Marcos Costa <jmcosta944@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 28 Apr 2024 16:40:40 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,82 +88,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 26 Apr 2024 at 17:14, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> We can reuse this function to load the device-tree.
+Odyssey board requires ETH_CLK of 125Mhz. This commit sets PLL4_P/Q/R to
+125, 62.5 and 62.5Mhz in respectively.
 
-This patch is correct, but needs splitting.
-It exports the function, but also adds IS_ENABLED etc, that belong to
-an earlier patch
+Signed-off-by: Heesub Shin <heesub@gmail.com>
+---
+ arch/arm/dts/stm32mp157c-odyssey-som-u-boot.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Thanks
-/Ilias
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  include/efi_loader.h          |  4 ++++
->  lib/efi_loader/efi_bootmgr.c  | 17 +++++++++++++----
->  lib/efi_loader/efi_boottime.c |  1 -
->  3 files changed, 17 insertions(+), 5 deletions(-)
->
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index ed2b517b130..0bf325fdc4b 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -664,6 +664,10 @@ efi_status_t EFIAPI efi_load_image(bool boot_policy,
->                                    void *source_buffer,
->                                    efi_uintn_t source_size,
->                                    efi_handle_t *image_handle);
-> +/* Load image from path */
-> +efi_status_t efi_load_image_from_path(bool boot_policy,
-> +                                     struct efi_device_path *file_path,
-> +                                     void **buffer, efi_uintn_t *size);
->  /* Start image */
->  efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
->                                     efi_uintn_t *exit_data_size,
-> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
-> index 3d58a928b10..9ae948bcf08 100644
-> --- a/lib/efi_loader/efi_bootmgr.c
-> +++ b/lib/efi_loader/efi_bootmgr.c
-> @@ -1265,12 +1265,21 @@ efi_status_t efi_bootmgr_run(void *fdt)
->                 return ret;
->         }
->
-> -       fdt_lo = load_fdt_from_load_option();
-> -       if (fdt_lo)
-> -               fdt = fdt_lo;
-> +       if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE)) {
-> +               fdt_lo = load_fdt_from_load_option();
-> +               if (fdt_lo)
-> +                       fdt = fdt_lo;
-> +       }
->
-> +       /*
-> +        * Needed in ACPI case to create reservations based on
-> +        * control device-tree.
-> +        */
->         ret = efi_install_fdt(fdt);
-> -       free(fdt_lo);
-> +
-> +       if (!IS_ENABLED(CONFIG_GENERATE_ACPI_TABLE))
-> +               free(fdt_lo);
-> +
->         if (ret != EFI_SUCCESS) {
->                 if (EFI_CALL(efi_unload_image(handle)) == EFI_SUCCESS)
->                         free(load_options);
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-> index 33f03c0cb0f..50ce8386051 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -1996,7 +1996,6 @@ error:
->   * @size:              size of the loaded image
->   * Return:             status code
->   */
-> -static
->  efi_status_t efi_load_image_from_path(bool boot_policy,
->                                       struct efi_device_path *file_path,
->                                       void **buffer, efi_uintn_t *size)
-> --
-> 2.43.0
->
+diff --git a/arch/arm/dts/stm32mp157c-odyssey-som-u-boot.dtsi b/arch/arm/dts/stm32mp157c-odyssey-som-u-boot.dtsi
+index b780dbd95e..d07fdcf4bc 100644
+--- a/arch/arm/dts/stm32mp157c-odyssey-som-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp157c-odyssey-som-u-boot.dtsi
+@@ -115,11 +115,11 @@
+ 		bootph-all;
+ 	};
+ 
+-	/* VCO = 594.0 MHz => P = 99, Q = 74, R = 74 */
++	/* VCO = 750.0 MHz => P = 125, Q = 62.5, R = 62.5 */
+ 	pll4: st,pll@3 {
+ 		compatible = "st,stm32mp1-pll";
+ 		reg = <3>;
+-		cfg = < 3 98 5 7 7 PQR(1,1,1) >;
++		cfg = < 3 124 5 9 9 PQR(1,1,1) >;
+ 		bootph-all;
+ 	};
+ };
+-- 
+2.34.1
+
