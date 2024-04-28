@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D936C4345F
-	for <u-boot@archiver.kernel.org>; Sun, 28 Apr 2024 13:29:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CAA26C4345F
+	for <u-boot@archiver.kernel.org>; Sun, 28 Apr 2024 13:30:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AAE2588294;
-	Sun, 28 Apr 2024 15:29:38 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 54FC58824A;
+	Sun, 28 Apr 2024 15:30:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XRD1TuF4";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Y4QG/5Fa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9730388299; Sun, 28 Apr 2024 15:29:37 +0200 (CEST)
-Received: from mail-lj1-x22a.google.com (mail-lj1-x22a.google.com
- [IPv6:2a00:1450:4864:20::22a])
+ id 6112288274; Sun, 28 Apr 2024 15:30:16 +0200 (CEST)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 826858828B
- for <u-boot@lists.denx.de>; Sun, 28 Apr 2024 15:29:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 49A5088233
+ for <u-boot@lists.denx.de>; Sun, 28 Apr 2024 15:30:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-lj1-x22a.google.com with SMTP id
- 38308e7fff4ca-2def8e58471so53319821fa.0
- for <u-boot@lists.denx.de>; Sun, 28 Apr 2024 06:29:35 -0700 (PDT)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-a58ebdd8b64so85382866b.0
+ for <u-boot@lists.denx.de>; Sun, 28 Apr 2024 06:30:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714310975; x=1714915775; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1714311014; x=1714915814; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=peh5lb/46mTB1rlm8DUp7MaZQRd5dLPYMcutebI6Pgw=;
- b=XRD1TuF46HDXuE40Im70KEk60Q9RpEgvwA03btqy3ox6GTh0ensQ0NqNOAViZL5/4X
- rD0AuoYO6rY30aEma+2OBu3rjovMBtj0t/wBz2In7XLhBJwDEBRL1zlYRAVy1efEeUu1
- xDkKaLA17AFlXKn2kWEBrSEG4+Fzz8Udaa2+9fvCXe1AByJzXLE95kCLUX/IjxRloRnH
- z3ztV/Sfz9BH0mBsAurJYdducjV7T9OywjCRMKHheTSX6NmXrTPtFHfm2aevllBEjtiw
- aMTJf0fJGPXFRbwXytNgh5BV/yMPvtzLrHXz0LDKzvTyE1BqJENOQNYG1dtQYQlrejuY
- +KGQ==
+ bh=qvC/TqGVGN6oMoUyKBb3T0Uz8F3ptzFmuJJ+w3mzid8=;
+ b=Y4QG/5Fac5CaxcrFGoW9KppRU9rzRPhxgWZCdBI5iMFukzz+9F68rsIsZbreG2rZjB
+ FiVPf805buXCI6x+qbiDX9brRb3bwRd8Ml7uKRDy2qpxV/rnLwSZN8j89W9mjD2xmmxs
+ ylc9T+hmFwyp3qMoOOhQCBFxHHp0XOJYSBTqtqesdDcUNxaV0VlOf7WjT5fe77yJPxlv
+ iVZbBlOmtzf8OagQJReRvjArEf5KDvDPLza9f80HlCVBJlESoWFZTfv7/0vYCKqBe2Ac
+ PhfzNjDNaJP7iU6iFaAJRblmw/lCzWIVJ43qhl5U3vN5sL2/mSecJnYaA3Jawg0fcR8S
+ oGrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714310975; x=1714915775;
+ d=1e100.net; s=20230601; t=1714311014; x=1714915814;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=peh5lb/46mTB1rlm8DUp7MaZQRd5dLPYMcutebI6Pgw=;
- b=kLITrqVM1RkFqThwkdKPkfDfRHzimMT6bASpSqA2pocwjmUDVoZjoecTvysvZwmP5r
- a2b+jaur4W+UJWQMuzZrMHRyP9duiKmi0tiy9IpHQxwaKGGIRLwlxEmJW+0HDcgxPsGm
- iVFyrd2BkR2JGlKXyB63ctCbT28N2Oj3le5Ict6fDYG7g/vLcnSa+CnofHuMn0aNH/YV
- g1VPfOhmbkiVBOcWRqkrRv2MKXqy8huiABM2rPZLkBH9ftYh2FMnDfeWQ8aNYE3tqxfM
- 6EF26kXJAAQPSBjSMhgiijXKs/LlBYzr58z6KK2lwvuyW019z3RYRM1WGos0NFbsZ61i
- TleQ==
+ bh=qvC/TqGVGN6oMoUyKBb3T0Uz8F3ptzFmuJJ+w3mzid8=;
+ b=owEmyJ4ShYEBdHyoauJSA64k7SCNk+uGWROhfdfHq5h+GgsiF2+Vw2LCTSnm6xXqmS
+ 6nAMSAonndI0I9hXknTJ23MnpB3QWVwhAWlqYV4IsTaRcn236PPlOs5+hTp37KUab5f3
+ QG9qRU3HmBzuXkA7c/4FyaquGz3hMxbAJEM54Dgk0MwWnweUpUpx+Rbl/O2oZKGA4bd1
+ gZVGWz18WJ5sgmro1SvNfD+3jAUZmTk65Te8YDDfQ36CzvVnj4yKQHuOnpJ00zVIHFyS
+ zS8VcEICG6ui2t7hLtvwiV9VE7etfcAH+dXwJdZ2ev/JIZC5isIi7q0A9sRCCLINGP7/
+ 1lug==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW3Mm6UeBdiCQmRYdJ22clsiZK3AOyn87Y2Nh/4EFzOZXETdE5U8Rt4BXGc1zEKWkFLwq5PcIvsLvuCOce5Awx0V2BilA==
-X-Gm-Message-State: AOJu0Ywt30j3klhuV5qPdR+9TsZrLncS35COZsW+laP7LMDVwr4lrM3C
- Sn5eMyMkP+fRwND9V6EJHgE64xAhDuMxstntAz0mcHe0AQjHC7rS3HR2RhM+sXrOTvwiaM08ILa
- iVJ6vnLGozJyL/Mq0/4cir0GkS9FYcUl3NmtzMw==
-X-Google-Smtp-Source: AGHT+IF861ufI+XfkHxSGy/IImFG4TgVhMfAGbk14n6CBixgGYnqWdC1yqaxSputXeLEAAc2AmRZ9Jj1IryRVNSuHA8=
-X-Received: by 2002:a2e:be2b:0:b0:2de:8697:e08b with SMTP id
- z43-20020a2ebe2b000000b002de8697e08bmr6422711ljq.26.1714310974620; Sun, 28
- Apr 2024 06:29:34 -0700 (PDT)
+ AJvYcCWViUm2gVC8fPGD+2LEAXF6dVTz8NqgaJzdVniuevW9R8xXfPcVQbW0tlp9yVoG3IXVUl0RHkegSLp6xOJ09nsr2S9ssw==
+X-Gm-Message-State: AOJu0YzqHL2PIJOITW1qjWQHk3WFQY7eHejd4SMJDPz+C/IeWvvlXIv8
+ vJ7+I8BjmTe/FWouFVfmpPz5JY+B+Q3CQUySOdNV5Kai9At6+VV7NfPY8ZPjxdFTBaZ5d9syHhq
+ Fob6D6JeeTlhqDieQMZYlLTQffrmLOK9HGNIwB1wdNDqk/SB/ixg=
+X-Google-Smtp-Source: AGHT+IEKZ+nUeOz2KhQk8uvAap5VgPP5q3NM+IkLnpNPm8zu4TN+A8ikMHJzOcU1Gyg4GtYsKzHRwZchS7CfcPnuU4g=
+X-Received: by 2002:a17:906:c303:b0:a58:7aab:96bf with SMTP id
+ s3-20020a170906c30300b00a587aab96bfmr5392260ejz.18.1714311013600; Sun, 28 Apr
+ 2024 06:30:13 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240426141321.232236-1-heinrich.schuchardt@canonical.com>
- <20240426141321.232236-13-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20240426141321.232236-13-heinrich.schuchardt@canonical.com>
+ <20240426141321.232236-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240426141321.232236-4-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Sun, 28 Apr 2024 16:28:58 +0300
-Message-ID: <CAC_iWjJrD3BODipSJ=t9_qpAXzefjzRPw_4r2fQAsOqyq8mkYg@mail.gmail.com>
-Subject: Re: [RFC 12/14] efi_loader: return binary from efi_dp_from_lo()
+Date: Sun, 28 Apr 2024 16:29:37 +0300
+Message-ID: <CAC_iWj+bREfgzcfV4Yc+2P8L0vM08qrC=PnbdtF+B3FEqe4ueA@mail.gmail.com>
+Subject: Re: [RFC 03/14] efi_loader: simplify efi_dp_concat()
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
  Shantur Rathore <i@shantur.com>, Bin Meng <bmeng@tinylab.org>, 
@@ -93,65 +93,240 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich
-
-On Fri, 26 Apr 2024 at 17:14, Heinrich Schuchardt
+On Fri, 26 Apr 2024 at 17:13, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> Up to now efi_dp_from_lo() only could return the initrd or fdt device-path.
-> Allow returning the binary device-path to.
+> As we now have efi_dp_merge() we can use this function to replace
+> efi_dp_concat(,,true) and remove the last parameter from efi_dp_concat()
+> otherwise.
+>
 
-Why do we need this?
+This patch looks correct, but I prefer keeping the existing efi_dp_concat as-is
 
 Thanks
 /Ilias
->
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  lib/efi_loader/efi_device_path.c | 20 ++++++++++++--------
->  1 file changed, 12 insertions(+), 8 deletions(-)
+>  cmd/eficonfig.c                            | 22 +++++++++---------
+>  cmd/efidebug.c                             | 17 +++++++++-----
+>  include/efi_loader.h                       |  3 +--
+>  lib/efi_loader/efi_bootbin.c               |  2 +-
+>  lib/efi_loader/efi_bootmgr.c               |  2 +-
+>  lib/efi_loader/efi_boottime.c              |  2 +-
+>  lib/efi_loader/efi_device_path.c           | 26 ++++------------------
+>  lib/efi_loader/efi_device_path_utilities.c |  2 +-
+>  8 files changed, 31 insertions(+), 45 deletions(-)
 >
+> diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
+> index 0ba92c60e03..1c57e66040b 100644
+> --- a/cmd/eficonfig.c
+> +++ b/cmd/eficonfig.c
+> @@ -531,7 +531,7 @@ struct efi_device_path *eficonfig_create_device_path(struct efi_device_path *dp_
+>         dp = efi_dp_shorten(dp_volume);
+>         if (!dp)
+>                 dp = dp_volume;
+> -       dp = efi_dp_concat(dp, &fp->dp, false);
+> +       dp = efi_dp_concat(dp, &fp->dp);
+>         free(buf);
+>
+>         return dp;
+> @@ -1485,7 +1485,7 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+>                         goto out;
+>                 }
+>                 initrd_dp = efi_dp_concat((const struct efi_device_path *)&id_dp,
+> -                                         dp, false);
+> +                                         dp);
+>                 efi_free_pool(dp);
+>         }
+>
+> @@ -1494,17 +1494,17 @@ static efi_status_t eficonfig_edit_boot_option(u16 *varname, struct eficonfig_bo
+>                 ret = EFI_OUT_OF_RESOURCES;
+>                 goto out;
+>         }
+> -       final_dp_size = efi_dp_size(dp) + sizeof(END);
+> +
+> +       final_dp = dp;
+> +       final_dp_size = efi_dp_size(final_dp) + sizeof(END);
+> +
+>         if (initrd_dp) {
+> -               final_dp = efi_dp_concat(dp, initrd_dp, true);
+> -               final_dp_size += efi_dp_size(initrd_dp) + sizeof(END);
+> -       } else {
+> -               final_dp = efi_dp_dup(dp);
+> +               final_dp = efi_dp_merge(final_dp, &final_dp_size, initrd_dp);
+> +               if (!final_dp) {
+> +                       ret = EFI_OUT_OF_RESOURCES;
+> +                       goto out;
+> +               }
+>         }
+> -       efi_free_pool(dp);
+> -
+> -       if (!final_dp)
+> -               goto out;
+>
+>         if (utf16_utf8_strlen(bo->optional_data)) {
+>                 len = utf16_utf8_strlen(bo->optional_data) + 1;
+> diff --git a/cmd/efidebug.c b/cmd/efidebug.c
+> index a587860e2a5..93ba16efc7d 100644
+> --- a/cmd/efidebug.c
+> +++ b/cmd/efidebug.c
+> @@ -697,7 +697,7 @@ struct efi_device_path *create_initrd_dp(const char *dev, const char *part,
+>                 short_fp = tmp_fp;
+>
+>         initrd_dp = efi_dp_concat((const struct efi_device_path *)&id_dp,
+> -                                 short_fp, false);
+> +                                 short_fp);
+>
+>  out:
+>         efi_free_pool(tmp_dp);
+> @@ -917,11 +917,16 @@ static int do_efi_boot_add(struct cmd_tbl *cmdtp, int flag,
+>                 goto out;
+>         }
+>
+> -       final_fp = efi_dp_concat(file_path, initrd_dp, true);
+> -       if (!final_fp) {
+> -               printf("Cannot create final device path\n");
+> -               r = CMD_RET_FAILURE;
+> -               goto out;
+> +       final_fp = file_path;
+> +       fp_size = efi_dp_size(final_fp) + sizeof(END);
+> +
+> +       if (initrd_dp) {
+> +               final_fp = efi_dp_merge(final_fp, &fp_size, initrd_dp);
+> +               if (!final_fp) {
+> +                       printf("Cannot create final device path\n");
+> +                       r = CMD_RET_FAILURE;
+> +                       goto out;
+> +               }
+>         }
+>
+>         lo.file_path = final_fp;
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index a7d7b8324f1..0ac04990b8e 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -948,8 +948,7 @@ struct efi_device_path *efi_dp_merge(const struct efi_device_path *dp1,
+>                                      efi_uintn_t *size,
+>                                      const struct efi_device_path *dp2);
+>  struct efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
+> -                                     const struct efi_device_path *dp2,
+> -                                     bool split_end_node);
+> +                                     const struct efi_device_path *dp2);
+>  struct efi_device_path *search_gpt_dp_node(struct efi_device_path *device_path);
+>  efi_status_t efi_deserialize_load_option(struct efi_load_option *lo, u8 *data,
+>                                          efi_uintn_t *size);
+> diff --git a/lib/efi_loader/efi_bootbin.c b/lib/efi_loader/efi_bootbin.c
+> index b7910f78fb6..745b941b6ca 100644
+> --- a/lib/efi_loader/efi_bootbin.c
+> +++ b/lib/efi_loader/efi_bootbin.c
+> @@ -150,7 +150,7 @@ efi_status_t efi_run_image(void *source_buffer, efi_uintn_t source_size)
+>                 msg_path = file_path;
+>         } else {
+>                 file_path = efi_dp_concat(bootefi_device_path,
+> -                                         bootefi_image_path, false);
+> +                                         bootefi_image_path);
+>                 msg_path = bootefi_image_path;
+>                 log_debug("Loaded from disk\n");
+>         }
+> diff --git a/lib/efi_loader/efi_bootmgr.c b/lib/efi_loader/efi_bootmgr.c
+> index 4ac519228a6..db394df6bf4 100644
+> --- a/lib/efi_loader/efi_bootmgr.c
+> +++ b/lib/efi_loader/efi_bootmgr.c
+> @@ -130,7 +130,7 @@ static efi_status_t try_load_from_file_path(efi_handle_t *fs_handles,
+>                 if (!dp)
+>                         continue;
+>
+> -               dp = efi_dp_concat(dp, fp, false);
+> +               dp = efi_dp_concat(dp, fp);
+>                 if (!dp)
+>                         continue;
+>
+> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+> index 1951291747c..33f03c0cb0f 100644
+> --- a/lib/efi_loader/efi_boottime.c
+> +++ b/lib/efi_loader/efi_boottime.c
+> @@ -1816,7 +1816,7 @@ efi_status_t efi_setup_loaded_image(struct efi_device_path *device_path,
+>         if (device_path) {
+>                 info->device_handle = efi_dp_find_obj(device_path, NULL, NULL);
+>
+> -               dp = efi_dp_concat(device_path, file_path, false);
+> +               dp = efi_dp_concat(device_path, file_path);
+>                 if (!dp) {
+>                         ret = EFI_OUT_OF_RESOURCES;
+>                         goto failure;
 > diff --git a/lib/efi_loader/efi_device_path.c b/lib/efi_loader/efi_device_path.c
-> index 75fe95c9c1e..c8893f5626b 100644
+> index 16cbe41d32f..75fe95c9c1e 100644
 > --- a/lib/efi_loader/efi_device_path.c
 > +++ b/lib/efi_loader/efi_device_path.c
-> @@ -1140,17 +1140,18 @@ ssize_t efi_dp_check_length(const struct efi_device_path *dp,
->  }
->
->  /**
-> - * efi_dp_from_lo() - Get the instance of a VenMedia node in a
-> - *                    multi-instance device path that matches
-> - *                    a specific GUID. This kind of device paths
-> - *                    is found in Boot#### options describing an
-> - *                    initrd location
-> + * efi_dp_from_lo() - get device-path from load option
+> @@ -307,21 +307,15 @@ struct efi_device_path *efi_dp_merge(const struct efi_device_path *dp1,
 >   *
-> - * @lo:                EFI_LOAD_OPTION containing a valid device path
-> - * @guid:      guid to search for
-> + * The load options in U-Boot may contain multiple concatenated device-paths.
-> + * The first device-path indicates the EFI binary to execute. Subsequent
-> + * device-paths start with a VenMedia node where the GUID identifies the
-> + * function (initrd or fdt).
-> + *
-> + * @lo:                EFI load option containing a valid device path
-> + * @guid:      GUID identifying device-path or NULL for the EFI binary
+>   * @dp1:           First device path
+>   * @dp2:           Second device path
+> - * @split_end_node: If true the two device paths will be concatenated and
+> - *                  separated by an end node (DEVICE_PATH_SUB_TYPE_END).
+> - *                 If false the second device path will be concatenated to the
+> - *                 first one as-is.
 >   *
 >   * Return:
-> - * device path including the VenMedia node or NULL.
-> + * device path excluding the matched VenMedia node or NULL.
->   * Caller must free the returned value.
+>   * concatenated device path or NULL. Caller must free the returned value
 >   */
 >  struct
-> @@ -1161,6 +1162,9 @@ efi_device_path *efi_dp_from_lo(struct efi_load_option *lo,
->         struct efi_device_path_vendor *vendor;
->         int lo_len = lo->file_path_length;
+>  efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
+> -                              const struct efi_device_path *dp2,
+> -                              bool split_end_node)
+> +                              const struct efi_device_path *dp2)
+>  {
+>         struct efi_device_path *ret;
+> -       size_t end_size;
 >
-> +       if (!guid)
-> +               return efi_dp_dup(fp);
-> +
->         for (; lo_len >=  sizeof(struct efi_device_path);
->              lo_len -= fp->length, fp = (void *)fp + fp->length) {
->                 if (lo_len < 0 || efi_dp_check_length(fp, lo_len) < 0)
+>         if (!dp1 && !dp2) {
+>                 /* return an end node */
+> @@ -333,29 +327,17 @@ efi_device_path *efi_dp_concat(const struct efi_device_path *dp1,
+>         } else {
+>                 /* both dp1 and dp2 are non-null */
+>                 unsigned sz1 = efi_dp_size(dp1);
+> -               unsigned sz2 = efi_dp_size(dp2);
+> +               /* the end node of the second device path has to be retained */
+> +               unsigned int sz2 = efi_dp_size(dp2) + sizeof(END);
+>                 void *p;
+>
+> -               if (split_end_node)
+> -                       end_size = 2 * sizeof(END);
+> -               else
+> -                       end_size = sizeof(END);
+> -               p = efi_alloc(sz1 + sz2 + end_size);
+> +               p = efi_alloc(sz1 + sz2);
+>                 if (!p)
+>                         return NULL;
+>                 ret = p;
+>                 memcpy(p, dp1, sz1);
+>                 p += sz1;
+> -
+> -               if (split_end_node) {
+> -                       memcpy(p, &END, sizeof(END));
+> -                       p += sizeof(END);
+> -               }
+> -
+> -               /* the end node of the second device path has to be retained */
+>                 memcpy(p, dp2, sz2);
+> -               p += sz2;
+> -               memcpy(p, &END, sizeof(END));
+>         }
+>
+>         return ret;
+> diff --git a/lib/efi_loader/efi_device_path_utilities.c b/lib/efi_loader/efi_device_path_utilities.c
+> index c95dbfa9b5f..5f06602dba6 100644
+> --- a/lib/efi_loader/efi_device_path_utilities.c
+> +++ b/lib/efi_loader/efi_device_path_utilities.c
+> @@ -76,7 +76,7 @@ static struct efi_device_path * EFIAPI append_device_path(
+>         const struct efi_device_path *src2)
+>  {
+>         EFI_ENTRY("%pD, %pD", src1, src2);
+> -       return EFI_EXIT(efi_dp_concat(src1, src2, false));
+> +       return EFI_EXIT(efi_dp_concat(src1, src2));
+>  }
+>
+>  /*
 > --
 > 2.43.0
 >
