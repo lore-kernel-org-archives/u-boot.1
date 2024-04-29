@@ -4,85 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36C96C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 10:38:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B0FAC04FFE
+	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 10:42:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4E6C88987;
-	Mon, 29 Apr 2024 12:38:25 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B716388993;
+	Mon, 29 Apr 2024 12:42:42 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="DVU5YXC2";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B688A880B5; Mon, 29 Apr 2024 12:38:24 +0200 (CEST)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94E1F8898D
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 12:38:22 +0200 (CEST)
+ id EA2648899A; Mon, 29 Apr 2024 12:42:40 +0200 (CEST)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id A0F8488993
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 12:42:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-2b1e620de65so151360a91.1
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 03:38:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714387101; x=1714991901; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=RGaEHsdO1/Bq4lXnwjstKmsThrkRqVrwaSVejNO4LoE=;
- b=DVU5YXC24f6gWRS3vxie5gdLypUzdFqvd6cB7CDWc1zXipkQ3sN/IDYUbcJ3UyIdCh
- sX+CdjsVJFKQVXE2imsSDUSeis8Io9NDf9UmEr3xuCUxX9dZByXS1TpHT+DChGEaXGf+
- m/4HhtnszCeaGooB7FBawjbg76Ijky5QYuiXIbe5o1SIOs13M330v3m1k+S1Ie1wyml2
- qdIYP+bs07F2JwSjs19KT30Eu7fMbk6jq7uBRZ+f5t0FvYqXIqAHUXhSmsbkRkGdCsGC
- yy2EhyCY6wDSdlhmisoQmrZ2TSr4cWIToMyxE/OV3IBdz78mH4jtYVm8JTODsaVJ5alH
- t4kw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714387101; x=1714991901;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=RGaEHsdO1/Bq4lXnwjstKmsThrkRqVrwaSVejNO4LoE=;
- b=QPwlfSLbbksafWXDMGyeZl7d2D85OuJnlEtYdkosIyKCtElVqODEl1V5Zmbo1ltYv8
- Ee+MD9SivbUIuwfms9lopkFnzdM4jILYuB5CS+OcH2fN3+iSk9Lt1ARZgWE1ov3JzzkS
- wxVEsLg8aIhvvT3M8fX0jmh8tLZRuM3DrQ0H7vrUoLJQJuJXGMgBjeHBchScBihLzvbp
- oqbN/ldq0BD6/m/0Vth8bGhcKufRxeOfxx+Yt1TlWPhWSRQKUfEKFgyfNUB0JBCoL+w+
- NAA/Kn6TWibgV2FmjT/M50toMwFifsUXgn3BzyL6joROmgEoX7uKpEQpG/hIYUqrtby5
- e8Lg==
-X-Gm-Message-State: AOJu0YwOiSavQLq9adpIP0DHuYbIqtDS4xMIEtLWFCamXUIAc4fSv+4y
- LH3B2iumx9Br9Opx5u+7Q85Y/zCr1iAeo1WkJrbwXSrw2fvdm5R+JKOo9gug3+o6ALzmbk7DH8R
- k7oU7C5D0LulCdll+OWvR4emVyGQ=
-X-Google-Smtp-Source: AGHT+IE+Q5AghR0+mgA30UWUZrjkxVtecPUOkDGTCiISQR9BKJTvEp3dyAsI7SzgfwNhgP5qn9xd+TPolcEtbMVwYzE=
-X-Received: by 2002:a17:90a:c301:b0:2af:8f41:6ab7 with SMTP id
- g1-20020a17090ac30100b002af8f416ab7mr9518385pjt.1.1714387101035; Mon, 29 Apr
- 2024 03:38:21 -0700 (PDT)
+ spf=pass smtp.mailfrom=andre.przywara@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A34E42F4;
+ Mon, 29 Apr 2024 03:43:04 -0700 (PDT)
+Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
+ [10.121.207.14])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 352713F793;
+ Mon, 29 Apr 2024 03:42:36 -0700 (PDT)
+Date: Mon, 29 Apr 2024 11:42:33 +0100
+From: Andre Przywara <andre.przywara@arm.com>
+To: Peter Hoyes <peter.hoyes@arm.com>
+Cc: u-boot@lists.denx.de, trini@konsulko.com, mk7.kang@samsung.com,
+ ilias.apalodimas@linaro.org, wqu@suse.com, neil.armstrong@linaro.org,
+ sr@denx.de, michal.simek@amd.com, patrick.delaunay@foss.st.com,
+ sjg@chromium.org, patrice.chotard@foss.st.com
+Subject: Re: [PATCH 1/2] arm: Move sev() and wfe() definitions to common Arm
+ header file
+Message-ID: <20240429114233.6eef5c18@donnerap.manchester.arm.com>
+In-Reply-To: <20240423081005.23218-2-peter.hoyes@arm.com>
+References: <20240423081005.23218-1-peter.hoyes@arm.com>
+ <20240423081005.23218-2-peter.hoyes@arm.com>
+Organization: ARM
+X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
 MIME-Version: 1.0
-References: <20240425230102.497160-1-marex@denx.de>
-In-Reply-To: <20240425230102.497160-1-marex@denx.de>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 29 Apr 2024 07:38:09 -0300
-Message-ID: <CAOMZO5AP-4au75uJgxfvA2gYatkHCnNm8yzuuE7QG_XbdtzaDw@mail.gmail.com>
-Subject: Re: [PATCH v2 1/3] binman: Add nxp_imx8mimage etype
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Adam Ford <aford173@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Angus Ainslie <angus@akkea.ca>, 
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, 
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Simon Glass <sjg@chromium.org>,
- Stefan Eichenberger <stefan.eichenberger@toradex.com>, 
- Stefano Babic <sbabic@denx.de>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>, kernel@puri.sm, u-boot@dh-electronics.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,24 +61,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 25, 2024 at 8:01=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
->
-> Add new binman etype derived from mkimage etype which generates configura=
-tion
-> input file for mkimage -T imx8mimage, and runs the mkimage on input data.=
- The
-> mkimage -T imx8mimage is used to generate combined image with SPL and DDR=
- PHY
-> blobs which is bootable on i.MX8M.
->
-> The configuration file generated here is equivalent of imx8mimage.cfg, wh=
-ich
-> is the file passed to '$ mkimage -T imx8mimage -n imx8mimage.cfg ...' . T=
-he
-> settings generated into the imx8mimage.cfg file are configured via suppor=
-ted
-> binman DT properties, nxp,boot-from, nxp,loader-address, nxp,rom-version.
->
-> Signed-off-by: Marek Vasut <marex@denx.de>
+On Tue, 23 Apr 2024 09:10:04 +0100
+Peter Hoyes <peter.hoyes@arm.com> wrote:
 
-Applied all, thanks.
+Hi,
+
+> From: Peter Hoyes <Peter.Hoyes@arm.com>
+> 
+> The sev() and wfe() asm macros are currently defined only for
+> mach-exynos. As these are common Arm instructions, move them to the
+> common asm/system.h header file, for both Armv7 and Armv8, so they
+> can be used by other machines.
+> 
+> wfe may theoretically trigger a context switch if an interrupt occurs
+> so add a memory barrier to this call.
+> 
+> Signed-off-by: Peter Hoyes <Peter.Hoyes@arm.com>
+
+Looks alright to me, and the memory barrier for wfe looks justified.
+
+For the records: we couldn't come up with a reason why "sev" would need
+one as well, so even while the kernel has this, this seems to be more a
+copy&paste incident rather than something intentional.
+
+Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+
+Cheers,
+Andre
+
+> ---
+>  arch/arm/include/asm/system.h              |  9 +++++++++
+>  arch/arm/mach-exynos/include/mach/system.h | 19 -------------------
+>  2 files changed, 9 insertions(+), 19 deletions(-)
+> 
+> diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
+> index 43f7503571..51123c2968 100644
+> --- a/arch/arm/include/asm/system.h
+> +++ b/arch/arm/include/asm/system.h
+> @@ -154,6 +154,13 @@ enum dcache_option {
+>  	"wfi" : : : "memory");		\
+>  	})
+>  
+> +#define wfe()				\
+> +	({asm volatile(			\
+> +	"wfe" : : : "memory");		\
+> +	})
+> +
+> +#define sev() asm volatile("sev")
+> +
+>  static inline unsigned int current_el(void)
+>  {
+>  	unsigned long el;
+> @@ -369,6 +376,8 @@ void switch_to_hypervisor_ret(void);
+>  
+>  #ifdef __ARM_ARCH_7A__
+>  #define wfi() __asm__ __volatile__ ("wfi" : : : "memory")
+> +#define wfe() __asm__ __volatile__ ("wfe" : : : "memory")
+> +#define sev() __asm__ __volatile__ ("sev")
+>  #else
+>  #define wfi()
+>  #endif
+> diff --git a/arch/arm/mach-exynos/include/mach/system.h b/arch/arm/mach-exynos/include/mach/system.h
+> index 5d0bebac57..0aed4c3e2b 100644
+> --- a/arch/arm/mach-exynos/include/mach/system.h
+> +++ b/arch/arm/mach-exynos/include/mach/system.h
+> @@ -36,25 +36,6 @@ struct exynos5_sysreg {
+>  
+>  #define USB20_PHY_CFG_HOST_LINK_EN	(1 << 0)
+>  
+> -/*
+> - * This instruction causes an event to be signaled to all cores
+> - * within a multiprocessor system. If SEV is implemented,
+> - * WFE must also be implemented.
+> - */
+> -#define sev() __asm__ __volatile__ ("sev\n\t" : : );
+> -/*
+> - * If the Event Register is not set, WFE suspends execution until
+> - * one of the following events occurs:
+> - * - an IRQ interrupt, unless masked by the CPSR I-bit
+> - * - an FIQ interrupt, unless masked by the CPSR F-bit
+> - * - an Imprecise Data abort, unless masked by the CPSR A-bit
+> - * - a Debug Entry request, if Debug is enabled
+> - * - an Event signaled by another processor using the SEV instruction.
+> - * If the Event Register is set, WFE clears it and returns immediately.
+> - * If WFE is implemented, SEV must also be implemented.
+> - */
+> -#define wfe() __asm__ __volatile__ ("wfe\n\t" : : );
+> -
+>  /* Move 0xd3 value to CPSR register to enable SVC mode */
+>  #define svc32_mode_en() __asm__ __volatile__				\
+>  			("@ I&F disable, Mode: 0x13 - SVC\n\t"		\
+
