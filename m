@@ -4,46 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06E24C04FFE
-	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 15:16:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11E50C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 16:22:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 389868854F;
-	Mon, 29 Apr 2024 17:16:44 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 46CB78879D;
+	Mon, 29 Apr 2024 18:22:17 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OulvjZEi";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BB5A88646; Mon, 29 Apr 2024 17:16:42 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 0A45F8854F
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 17:16:40 +0200 (CEST)
+ id E223F88783; Mon, 29 Apr 2024 18:22:15 +0200 (CEST)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E5438879D
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 18:22:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 149A62F4;
- Mon, 29 Apr 2024 08:17:06 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9E36B3F793;
- Mon, 29 Apr 2024 08:16:37 -0700 (PDT)
-Date: Mon, 29 Apr 2024 16:16:34 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Peter Hoyes <peter.hoyes@arm.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, mk7.kang@samsung.com,
- ilias.apalodimas@linaro.org, wqu@suse.com, neil.armstrong@linaro.org,
- sr@denx.de, michal.simek@amd.com, patrick.delaunay@foss.st.com,
- sjg@chromium.org, patrice.chotard@foss.st.com
-Subject: Re: [PATCH 2/2] armv8: generic_timer: Use event stream for udelay
-Message-ID: <20240429161634.3a2d504f@donnerap.manchester.arm.com>
-In-Reply-To: <20240423081005.23218-3-peter.hoyes@arm.com>
-References: <20240423081005.23218-1-peter.hoyes@arm.com>
- <20240423081005.23218-3-peter.hoyes@arm.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ spf=pass smtp.mailfrom=judge.packham@gmail.com
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-617d25b2bc4so50171787b3.2
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 09:22:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1714407732; x=1715012532; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=7eckP200a1evwQaGwC0z3W8tIQIFy+wrOxYkYRwdED0=;
+ b=OulvjZEiedIBttEXWyFgJc23MHkDE6+TS4CudmcpIdCYlTAr/LgEaMFp+CUmMfOUIy
+ RtQpqEt7vO7jI9WZQFoVtdc8DoatlFW9L6nTj9DsZc1HgXRCpE5Y1jzoQS3rHLQ2FITS
+ /FpuhaEJXFlun34WXgygQ+Y5QBgGhMbWa1kalvuR5jpF+7bgq9Y+blvbRv/2h9pBHzTl
+ PNMcsIWNwxXFGU3Kt94pAZsIufgpayNAGc3lInczKiDStm+VeZ655BfUM3ZLRXPwZjal
+ dolu8BpZjOi7T97ImpH2T1wsNmkUopH6m4aITWrfop7Iy2qLPnEvy1vJ9M3O7+fgs3Qb
+ SS6A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714407732; x=1715012532;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=7eckP200a1evwQaGwC0z3W8tIQIFy+wrOxYkYRwdED0=;
+ b=kQWAf33+gpZSAn6ZkeHuiaWyRu4KJ8H79XYfo9J2uKN82n+9z6wkGTXbRXzNSiC5K2
+ Fc0wGH4IPI2FuqsHwG0UroMcnkMhNEEuQ4VZo8Sjdv6VXJcE07i0HbiGZLc3iMDHU00v
+ G0PCBvAkUNHFTLP/6PoZ1XHvolpEB6NSa0Q4C3rofKjNlrCWjkdvFaihaR/twLBTgYGI
+ nZyY2u55qX6VW1vHwQEvOMVwXixlQVaput7r8OGO8pPqSFniKMAnAhqC6KR9HRSL06zg
+ LYcKeEl7YOCPQlzmtPzLeGHd679OzCuCgcuOXNCzr4AbQfv4QD251StuCW8e9zLKqHPD
+ ITyQ==
+X-Gm-Message-State: AOJu0Yw4WSOK5aM779vTvDEvm9kvQAXskepf4skxm3ZtiqRk9guoMLsm
+ oEYKlTT/jM3bvTqzixD61NuXTQoF000R9unp6GqZy2qhTPJNLNU1H29UboHz6Lijs2GYUyq8y+0
+ p3RfI1eu/zzkSvqkszFhDp9ENoJg=
+X-Google-Smtp-Source: AGHT+IHCodkYfINa5T2fvzQNxOnO/s2PhEErkEmpPBkOnG301VAYGUHhgYsStspOtQh5ba1EH9Je/ImTRl0nXKybuSA=
+X-Received: by 2002:a05:690c:62c3:b0:61a:e4ef:51d with SMTP id
+ hn3-20020a05690c62c300b0061ae4ef051dmr8670258ywb.9.1714407732003; Mon, 29 Apr
+ 2024 09:22:12 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <ea0422cd-a8e6-3c36-f551-a0142893301b@marvell.com>
+In-Reply-To: <ea0422cd-a8e6-3c36-f551-a0142893301b@marvell.com>
+From: Chris Packham <judge.packham@gmail.com>
+Date: Tue, 30 Apr 2024 04:22:00 +1200
+Message-ID: <CAFOYHZCAKtYiy=3X=u2+oqv3Wx8=W-vtV=+akbo+e479hPoX7A@mail.gmail.com>
+Subject: Re: [PATCH] mtd: nand: pxa3xx: Incorrect bitflip return on page read
+To: Ravi Minnikanti <rminnikanti@marvell.com>
+Cc: u-boot@lists.denx.de, hs@denx.de, trini@konsulko.com, sr@denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -60,128 +87,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 23 Apr 2024 09:10:05 +0100
-Peter Hoyes <peter.hoyes@arm.com> wrote:
+On Sun, Apr 28, 2024 at 4:15=E2=80=AFAM Ravi Minnikanti <rminnikanti@marvel=
+l.com> wrote:
+>
+> Once a page is read with higher bitflips all subsequent reads
+> are returning the same bitflip value even though they have none.
+> max_bitflip variable is not being reset to 0 across page reads.
+>
+> This is causing problems like incorrectly
+> marking erase blocks bad by UBI and causing read failures.
+>
+> Verified the change with both MTD reads and UBI.
+> This change is inline with other NFC drivers.
+>
+> Sample error log where a block is marked bad incorrectly:
+>
+> ubi0: fixable bit-flip detected at PEB 125
+> ubi0: run torture test for PEB 125
+> ubi0: fixable bit-flip detected at PEB 125
+> ubi0 error: torture_peb: read problems on freshly erased PEB 125,
+> must be bad
+> ubi0 error: erase_worker: failed to erase PEB 125, error -5
+> ubi0: mark PEB 125 as bad
+>
+> Signed-off-by: rminnikanti <rminnikanti@marvell.com>
 
-Hi,
+Looks good to me
 
-> From: Peter Hoyes <Peter.Hoyes@arm.com>
-> 
-> Polling cntpct_el0 in a tight loop for delays is inefficient.
-> This is particularly apparent on Arm FVPs, which do not simulate
-> real time, meaning that a 1s sleep can take a couple of orders
-> of magnitude longer to execute in wall time.
-> 
-> If running at EL2 or above (where CNTHCTL_EL2 is available), enable
-> the cntpct_el0 event stream temporarily and use wfe to implement
-> the delay more efficiently. The event period is chosen as a
-> trade-off between efficiency and the fact that Arm FVPs do not
-> typically simulate real time.
-> 
-> This is only implemented for Armv8 boards, where an architectural
-> timer exists.
-> 
-> Some mach-socfpga AArch64 boards already override __udelay to make
-> it always inline, so guard the functionality with a new
-> ARMV8_UDELAY_EVENT_STREAM Kconfig, enabled by default.
+Reviewed-by: Chris Packham <judge.packham@gmail.com>
 
-So the code looks alright, and it works for me, tested on some hardware I
-just had at hand.
-However I am a bit worried about the scope of this patch. While it's
-indeed purely architectural and should work on all systems, I think we
-need to be careful with messing with the arch timer *while the OS is
-running*. U-Boot code will run for UEFI runtime services and for serving
-PSCI on some platforms, and I guess messing with CNTHCTL_EL2 is not a good
-idea then. And udelay sounds like a basic function that this code might
-use.
-So I wonder if we should limit this to the Arm FVPs for now? To not create
-subtle and hard-to-diagnose problems for a lot of boards?
-
-Or maybe there is some mechanism to limit this to U-Boot boot time/UEFI
-boot services?
-
-> Signed-off-by: Peter Hoyes <Peter.Hoyes@arm.com>
 > ---
->  arch/arm/cpu/armv8/Kconfig         |  8 ++++++++
->  arch/arm/cpu/armv8/generic_timer.c | 27 +++++++++++++++++++++++++++
->  arch/arm/include/asm/system.h      |  6 ++++--
->  3 files changed, 39 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/cpu/armv8/Kconfig b/arch/arm/cpu/armv8/Kconfig
-> index 9f0fb369f7..544c5e2d74 100644
-> --- a/arch/arm/cpu/armv8/Kconfig
-> +++ b/arch/arm/cpu/armv8/Kconfig
-> @@ -191,6 +191,14 @@ config ARMV8_EA_EL3_FIRST
->  	  Exception handling at all exception levels for External Abort and
->  	  SError interrupt exception are taken in EL3.
->  
-> +config ARMV8_UDELAY_EVENT_STREAM
-> +	bool "Use the event stream for udelay"
-> +	default y if !ARCH_SOCFPGA
-
-As described above, change this to something like "... if ARCH_VEXPRESS64".
-
-Cheers,
-Andre
-
-> +	help
-> +	  Use the event stream provided by the AArch64 architectural timer for
-> +	  delays. This is more efficient than the default polling
-> +	  implementation.
-> +
->  menuconfig ARMV8_CRYPTO
->  	bool "ARM64 Accelerated Cryptographic Algorithms"
->  
-> diff --git a/arch/arm/cpu/armv8/generic_timer.c b/arch/arm/cpu/armv8/generic_timer.c
-> index 8f83372cbc..e18b5c8187 100644
-> --- a/arch/arm/cpu/armv8/generic_timer.c
-> +++ b/arch/arm/cpu/armv8/generic_timer.c
-> @@ -115,3 +115,30 @@ ulong timer_get_boot_us(void)
->  
->  	return val / get_tbclk();
->  }
-> +
-> +#if CONFIG_IS_ENABLED(ARMV8_UDELAY_EVENT_STREAM)
-> +void __udelay(unsigned long usec)
-> +{
-> +	u64 target = get_ticks() + usec_to_tick(usec);
-> +
-> +	/* At EL2 or above, use the event stream to avoid polling CNTPCT_EL0 so often */
-> +	if (current_el() >= 2) {
-> +		u32 cnthctl_val;
-> +		const u8 event_period = 0x7;
-> +
-> +		asm volatile("mrs %0, cnthctl_el2" : "=r" (cnthctl_val));
-> +		asm volatile("msr cnthctl_el2, %0" : : "r"
-> +			(cnthctl_val | CNTHCTL_EL2_EVNT_EN | CNTHCTL_EL2_EVNT_I(event_period)));
-> +
-> +		while (get_ticks() + (1ULL << event_period) <= target)
-> +			wfe();
-> +
-> +		/* Reset the event stream */
-> +		asm volatile("msr cnthctl_el2, %0" : : "r" (cnthctl_val));
-> +	}
-> +
-> +	/* Fall back to polling CNTPCT_EL0 */
-> +	while (get_ticks() <= target)
-> +		;
-> +}
-> +#endif
-> diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
-> index 51123c2968..7e30cac32a 100644
-> --- a/arch/arm/include/asm/system.h
-> +++ b/arch/arm/include/asm/system.h
-> @@ -69,8 +69,10 @@
->  /*
->   * CNTHCTL_EL2 bits definitions
->   */
-> -#define CNTHCTL_EL2_EL1PCEN_EN	(1 << 1)  /* Physical timer regs accessible   */
-> -#define CNTHCTL_EL2_EL1PCTEN_EN	(1 << 0)  /* Physical counter accessible      */
-> +#define CNTHCTL_EL2_EVNT_EN	BIT(2)	     /* Enable the event stream       */
-> +#define CNTHCTL_EL2_EVNT_I(val)	((val) << 4) /* Event stream trigger bits     */
-> +#define CNTHCTL_EL2_EL1PCEN_EN	(1 << 1)     /* Physical timer regs accessible */
-> +#define CNTHCTL_EL2_EL1PCTEN_EN	(1 << 0)     /* Physical counter accessible   */
->  
->  /*
->   * HCR_EL2 bits definitions
-
+>  drivers/mtd/nand/raw/pxa3xx_nand.c | 5 +++++
+>  1 file changed, 5 insertions(+)
+>
+> diff --git a/drivers/mtd/nand/raw/pxa3xx_nand.c b/drivers/mtd/nand/raw/px=
+a3xx_nand.c
+> index 1d9a6d107b..d2a4faad56 100644
+> --- a/drivers/mtd/nand/raw/pxa3xx_nand.c
+> +++ b/drivers/mtd/nand/raw/pxa3xx_nand.c
+> @@ -800,6 +800,11 @@ static void prepare_start_command(struct pxa3xx_nand=
+_info *info, int command)
+>         info->ecc_err_cnt       =3D 0;
+>         info->ndcb3             =3D 0;
+>         info->need_wait         =3D 0;
+> +       /*
+> +        * Reset max_bitflips to zero. Once command is complete,
+> +        * max_bitflips for this READ is returned in ecc.read_page()
+> +        */
+> +       info->max_bitflips      =3D 0;
+>
+>         switch (command) {
+>         case NAND_CMD_READ0:
+> --
+> 2.17.1
