@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA16FC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 23:06:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CD97C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 23:06:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E2EE889F7;
+	by phobos.denx.de (Postfix) with ESMTP id C1088889DF;
 	Tue, 30 Apr 2024 01:04:32 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p6cKRGo1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C2Vzix1y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6909F889A9; Tue, 30 Apr 2024 01:04:25 +0200 (CEST)
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com
- [IPv6:2607:f8b0:4864:20::735])
+ id 87B3D889A9; Tue, 30 Apr 2024 01:04:26 +0200 (CEST)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 63AB7889DF
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 01:04:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FCE0889B9
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 01:04:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x735.google.com with SMTP id
- af79cd13be357-78ef9ce897bso349482485a.0
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 16:04:23 -0700 (PDT)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-790ff1fa7b3so89000985a.2
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 16:04:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714431862; x=1715036662; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714431863; x=1715036663; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ThObhZK+wGIE8H0kOQzaUwivnYPQHXEAoY5YhWY2HOo=;
- b=p6cKRGo1J5rC1PG0nGJuQ7Czn6vYoaBcomcXXaU4QFuOMYApj+/KrejP8uO547LcJc
- djE2rZdNRhUtfHy4lAPb0tCZuNhmGF0bfO6GyCtLpLE+SKUWpxMTcxzVeYO4RKtmrqGI
- SAJ8EAmIGisFRyh/Rf1bmQ8YvjHgbWhwAxvQk=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=CJHqcH0e42ck9PHmLuPUanU2NjsoYcR6jlD3EhSbLtk=;
+ b=C2Vzix1yOmyrV3l+kxlFODqV+XazANL+bTzF+TRyZDJ1XY9zdxd2NG3hp6fNDzYNuD
+ iTr03r+pIKxKds6nLhcPslAiHtNSq2YoxaCO0XUi1gfWrLEglmXSy21PHBxEyYChNVjA
+ o8e4uOhhUQixVpXfcLqHHseFPX/nTT92xjYck=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714431862; x=1715036662;
+ d=1e100.net; s=20230601; t=1714431863; x=1715036663;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ThObhZK+wGIE8H0kOQzaUwivnYPQHXEAoY5YhWY2HOo=;
- b=h4QWkzo3YNCW1MbQOyzwo0mvHLpP7F6YSlXdkTcCn/LsqC46M4R2/viiylakaE9Lrr
- REF5T6IM/WUaxE09yxCokg80G+u2tootlqZRkkJky7V0JoMKLZAxckOJH58BESNi6gCl
- AgE9LXPSB3QsmmHkADb0AdSi08CcRUCd7PcGTc/vWyIAysAiVbR+9ocUegNiTCb05Syg
- KN0XPH9qRHj0Az2ul5ar17swiMplZXakOvhRTng26nI8JEKFrqK0xCUcP6Y+PCH1/3fx
- AN1xuyFKDi423Lm99ZyZLngg1rGB5zHB+S+fbNj2oOA8JXzzN0Zx+aAvsr3WNoou0ypB
- 5gtw==
-X-Gm-Message-State: AOJu0YylO7Z1NKa2XPk0Se89W4iC/zJY+a6/9WeFfVkVWPB/VXwny6t5
- tjLR3JaGIaneyzl5twT6j975g8GZREHUuGzhWkoe9TeB/eaCry0/f5/8N+vRXiRcwOxYzCWI80R
- IebiUxw==
-X-Google-Smtp-Source: AGHT+IHfc+PYfEJhzyvy4uKW8rSzI434OacsjXZeiXNSq3W0SNPkbH6kuM9BUd3ehb1wnF3X5uyYyQ==
-X-Received: by 2002:a05:620a:2150:b0:790:97b3:68a5 with SMTP id
- m16-20020a05620a215000b0079097b368a5mr1016259qkm.51.1714431861923; 
- Mon, 29 Apr 2024 16:04:21 -0700 (PDT)
+ bh=CJHqcH0e42ck9PHmLuPUanU2NjsoYcR6jlD3EhSbLtk=;
+ b=Aw8c5fD5ANaj0d+ihGu2OoddQpiETGZCMlvrV0o7IqXcMSSKmXg7kx9P7L/EooiwsD
+ 4PO+w7xJl9CDBQO2ZFNgVdprH68drmzCAnYwSNLM9zuD2zt/gTmWmI8s69tOPXMg6fKd
+ yBed8MSTrkHdbbO+hdJ5sKi2n1VmmtE+/5ik3gcUwkbuOViuTzmODWlXibzIspTpyoEu
+ r9SadAxx+BnePRheHCpBMCSw/a6pyI7mTHHjLmz5wAawfh71g1WO0ED1Nr4EIKMiZ3FA
+ n/bk8pllMXlUvrcC5isClA0mSD7/FGKhO33qEfYKPX3n3gvtUNSQodjGNZ106SIef9Wz
+ bpBw==
+X-Gm-Message-State: AOJu0YwBCp3NjJrM/t8OWn/ghaoLi8Qd4nneWGRrMLzpCXbp3h0oUorY
+ 0fPAnhlwSAyl0R7goZDPoGFxuAoVuvtxMGhgZISeCc4VLf6p/zBfj1HrYgK7fr1BSNemYEYCcT+
+ CH2KxCg==
+X-Google-Smtp-Source: AGHT+IFfHl1oDzMPha6bJKj1C3PgqcnI+7fsK5CUSJ1Kr6TgDcufmdFFfIKY9GjnEnkUzDIcoxY6qQ==
+X-Received: by 2002:a05:620a:10ba:b0:78b:cfdc:b0fc with SMTP id
+ h26-20020a05620a10ba00b0078bcfdcb0fcmr8975168qkk.21.1714431862910; 
+ Mon, 29 Apr 2024 16:04:22 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
- h6-20020a05620a13e600b0078f044ff474sm10967156qkl.35.2024.04.29.16.04.21
+ h6-20020a05620a13e600b0078f044ff474sm10967156qkl.35.2024.04.29.16.04.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 16:04:21 -0700 (PDT)
+ Mon, 29 Apr 2024 16:04:22 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Wadim Egorov <w.egorov@phytec.de>
-Cc: upstream@lists.phytec.de
-In-Reply-To: <20240419065117.2305346-1-w.egorov@phytec.de>
-References: <20240419065117.2305346-1-w.egorov@phytec.de>
-Subject: Re: [PATCH 0/3] *** Migrate some PHYTEC boards to OF_UPSTREAM ***
-Message-Id: <171443186101.1749944.9869151603554748357.b4-ty@konsulko.com>
-Date: Mon, 29 Apr 2024 17:04:21 -0600
+To: u-boot@lists.denx.de, Daniel Schultz <d.schultz@phytec.de>
+In-Reply-To: <20240419155540.2447006-1-d.schultz@phytec.de>
+References: <20240419155540.2447006-1-d.schultz@phytec.de>
+Subject: Re: [PATCH 0/5] Update PHYTEC SOM Detection
+Message-Id: <171443186216.1749944.4720717716938824007.b4-ty@konsulko.com>
+Date: Mon, 29 Apr 2024 17:04:22 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -89,14 +87,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 19 Apr 2024 08:51:14 +0200, Wadim Egorov wrote:
+On Fri, 19 Apr 2024 08:55:35 -0700, Daniel Schultz wrote:
 
-> Migrate the boards I maintain to OF_UPSTREAM.
+> This patch series extends PHYTEC's SOM detection by minor
+> fixes, a generic helper function and a new valid flag.
 > 
-> Wadim Egorov (3):
->   phycore-am62x: Migrate to OF_UPSTREAM
->   phycore-am64x: Migrate to OF_UPSTREAM
->   phycore-rk3288: Migrate to OF_UPSTREAM
+> Moreover, it adds a module to provide access to the SOM
+> detection for our TI AM6 products.
+> 
+> Daniel Schultz (3):
+>   board: phytec: common: Generic "add extension" function
+>   board: phytec: common: Fix eepom is empty check
+>   board: phytec: Add SOM detection for AM6x
 > 
 > [...]
 
