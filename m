@@ -4,46 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B0FAC04FFE
-	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 10:42:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20661C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 13:28:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B716388993;
-	Mon, 29 Apr 2024 12:42:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 68452888CC;
+	Mon, 29 Apr 2024 15:28:14 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id EA2648899A; Mon, 29 Apr 2024 12:42:40 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A0F8488993
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 12:42:38 +0200 (CEST)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A34E42F4;
- Mon, 29 Apr 2024 03:43:04 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 352713F793;
- Mon, 29 Apr 2024 03:42:36 -0700 (PDT)
-Date: Mon, 29 Apr 2024 11:42:33 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Peter Hoyes <peter.hoyes@arm.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, mk7.kang@samsung.com,
- ilias.apalodimas@linaro.org, wqu@suse.com, neil.armstrong@linaro.org,
- sr@denx.de, michal.simek@amd.com, patrick.delaunay@foss.st.com,
- sjg@chromium.org, patrice.chotard@foss.st.com
-Subject: Re: [PATCH 1/2] arm: Move sev() and wfe() definitions to common Arm
- header file
-Message-ID: <20240429114233.6eef5c18@donnerap.manchester.arm.com>
-In-Reply-To: <20240423081005.23218-2-peter.hoyes@arm.com>
-References: <20240423081005.23218-1-peter.hoyes@arm.com>
- <20240423081005.23218-2-peter.hoyes@arm.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1714397294;
+	bh=2bfS63GFzBK2rKq8vi46yg4dGImB6ed85w2NS5vv5Tw=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=JYaAFhbR4urLvubUDcz6AALuwS7NC5AUt95mR7nyOBtbxx4I8PoDDzik2jSThpp1k
+	 g11kR4nhWjFdIErebgxCMi99XMSqlfzah+oS7EP5Le6yBPM62XdFwSk8+EcxIGt5bt
+	 IMEzfMSM5JxMlTRRqjG47FrHSRN6B83ozSrNmVfHjTYFozDN3ot3YOoh5ZIzmSEuca
+	 aGXRUzUAfRjgMVNBuTVgW0mLijWXUg5f80OoTLzDjXgt7njwwgxCqZ4W+zbMwrmw63
+	 j50SwDn37w0nqPdTPErp1X4n/lB52vQmD/gfvdJALGI3C6nQo/xogsFZUD8c8Cp/6u
+	 EGX61r9f6IP6g==
+Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ (Authenticated sender: marex@denx.de)
+ by phobos.denx.de (Postfix) with ESMTPSA id ED09F887EA;
+ Mon, 29 Apr 2024 15:28:11 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+ s=phobos-20191101; t=1714397293;
+ bh=2bfS63GFzBK2rKq8vi46yg4dGImB6ed85w2NS5vv5Tw=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=MC5K47uBDSghjRhJ1VngPNxJYKu9aiBCRWDioFQwClzDYqP8J15Jf3rVMzw9OeoOt
+ 2MxvDCceDl6bziOi4M+pWND8RAgpw0ucqWo7oa6mabGB6H1BBc6rI0TC2Pwn/n9Jsc
+ jJeoRlX01RVE6LQn8PpIb39up7iHR0n1FAtv8c3hF4Ouhahb3H5t6+5LJIiGCCpRVr
+ 63/Vf+suZFt+FEkPLUbxLOCKf5RTDmRcvI95FIkPbiaNcIOzmtJlMtd2Q0i8pMBCUb
+ teT7qgIQ9Kag8Ywnocrvv/YNwkP2HTkVcaubKlM90abliZeOw7eYE/EDeGYzraY74L
+ 0O+xu3c+MsKTw==
+Message-ID: <dc3973f1-ecee-426d-81ed-4c37b46eb2ff@denx.de>
+Date: Mon, 29 Apr 2024 14:32:24 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+User-Agent: Mozilla Thunderbird
+Subject: Re: [EXT] Re: [PATCH 2/3] crypto/fsl: Introduce SPL_FSL_CAAM_RNG
+To: Gaurav Jain <gaurav.jain@nxp.com>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Fabio Estevam <festevam@gmail.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>,
+ Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel
+ <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>,
+ Varun Sethi <V.Sethi@nxp.com>, Kshitiz Varshney <kshitiz.varshney@nxp.com>
+References: <20240425230314.497203-1-marex@denx.de>
+ <20240425230314.497203-2-marex@denx.de>
+ <CAJ+vNU3ndKTXr5XBOd9b2aQF7WmBPARJ70Fsuab1rmnaQsEZiQ@mail.gmail.com>
+ <94a75eb9-950c-41f0-b9fc-c7d95ecec6c6@denx.de>
+ <AM0PR04MB600444768BFB0DF8114EFAF5E71B2@AM0PR04MB6004.eurprd04.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <AM0PR04MB600444768BFB0DF8114EFAF5E71B2@AM0PR04MB6004.eurprd04.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -61,94 +81,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 23 Apr 2024 09:10:04 +0100
-Peter Hoyes <peter.hoyes@arm.com> wrote:
+On 4/29/24 11:02 AM, Gaurav Jain wrote:
 
 Hi,
 
-> From: Peter Hoyes <Peter.Hoyes@arm.com>
+>>>> diff --git a/drivers/crypto/fsl/Makefile
+>>>> b/drivers/crypto/fsl/Makefile index 7a2543e16cc..4fbce519a0b 100644
+>>>> --- a/drivers/crypto/fsl/Makefile
+>>>> +++ b/drivers/crypto/fsl/Makefile
+>>>> @@ -6,6 +6,6 @@ obj-y += sec.o
+>>>>    obj-$(CONFIG_FSL_CAAM) += jr.o fsl_hash.o jobdesc.o error.o
+>>>>    obj-$(CONFIG_CMD_BLOB)$(CONFIG_IMX_CAAM_DEK_ENCAP) += fsl_blob.o
+>>>>    obj-$(CONFIG_RSA_FREESCALE_EXP) += fsl_rsa.o
+>>>> -obj-$(CONFIG_FSL_CAAM_RNG) += rng.o
+>>>> +obj-$(CONFIG_$(SPL_TPL_)FSL_CAAM_RNG) += rng.o
+>>>>    obj-$(CONFIG_FSL_DCP_RNG) += dcp_rng.o
+>>>>    obj-$(CONFIG_FSL_MFGPROT) += fsl_mfgprot.o
+>>>> --
+>>>> 2.43.0
+>>>>
+>>>
+>>> Marek,
+>>
+>> Hi,
+>>
+>>> Thanks - this series does solve the issue I am seeing in the SPL when
+>>> enabling DM_RNG. Is this going to cause an issue for people who expect
+>>> it to be currently enabled and now have to manually enable it?
+>>
+>> That's a good question. If I do '$ git grep FSL_CAAM_RNG' , there seem to be no
+>> users, so I don't think we need to worry here, right ?
+>>
+>> With SPL_DM_RNG i.e. 1/3 I am a bit more concerned. But, looking at the users
+>> that enable DM_RNG, I am not seeing any obvious ones that would require
+>> SPL_DM_RNG too. What do you think ?
 > 
-> The sev() and wfe() asm macros are currently defined only for
-> mach-exynos. As these are common Arm instructions, move them to the
-> common asm/system.h header file, for both Armv7 and Armv8, so they
-> can be used by other machines.
-> 
-> wfe may theoretically trigger a context switch if an interrupt occurs
-> so add a memory barrier to this call.
-> 
-> Signed-off-by: Peter Hoyes <Peter.Hoyes@arm.com>
+> FSL_CAAM_RNG is enabled based on DM_RNG. This patch will disable the build of drivers/crypto/fsl/rng.c in SPL.
 
-Looks alright to me, and the memory barrier for wfe looks justified.
-
-For the records: we couldn't come up with a reason why "sev" would need
-one as well, so even while the kernel has this, this seems to be more a
-copy&paste incident rather than something intentional.
-
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
-
-Cheers,
-Andre
-
-> ---
->  arch/arm/include/asm/system.h              |  9 +++++++++
->  arch/arm/mach-exynos/include/mach/system.h | 19 -------------------
->  2 files changed, 9 insertions(+), 19 deletions(-)
-> 
-> diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
-> index 43f7503571..51123c2968 100644
-> --- a/arch/arm/include/asm/system.h
-> +++ b/arch/arm/include/asm/system.h
-> @@ -154,6 +154,13 @@ enum dcache_option {
->  	"wfi" : : : "memory");		\
->  	})
->  
-> +#define wfe()				\
-> +	({asm volatile(			\
-> +	"wfe" : : : "memory");		\
-> +	})
-> +
-> +#define sev() asm volatile("sev")
-> +
->  static inline unsigned int current_el(void)
->  {
->  	unsigned long el;
-> @@ -369,6 +376,8 @@ void switch_to_hypervisor_ret(void);
->  
->  #ifdef __ARM_ARCH_7A__
->  #define wfi() __asm__ __volatile__ ("wfi" : : : "memory")
-> +#define wfe() __asm__ __volatile__ ("wfe" : : : "memory")
-> +#define sev() __asm__ __volatile__ ("sev")
->  #else
->  #define wfi()
->  #endif
-> diff --git a/arch/arm/mach-exynos/include/mach/system.h b/arch/arm/mach-exynos/include/mach/system.h
-> index 5d0bebac57..0aed4c3e2b 100644
-> --- a/arch/arm/mach-exynos/include/mach/system.h
-> +++ b/arch/arm/mach-exynos/include/mach/system.h
-> @@ -36,25 +36,6 @@ struct exynos5_sysreg {
->  
->  #define USB20_PHY_CFG_HOST_LINK_EN	(1 << 0)
->  
-> -/*
-> - * This instruction causes an event to be signaled to all cores
-> - * within a multiprocessor system. If SEV is implemented,
-> - * WFE must also be implemented.
-> - */
-> -#define sev() __asm__ __volatile__ ("sev\n\t" : : );
-> -/*
-> - * If the Event Register is not set, WFE suspends execution until
-> - * one of the following events occurs:
-> - * - an IRQ interrupt, unless masked by the CPSR I-bit
-> - * - an FIQ interrupt, unless masked by the CPSR F-bit
-> - * - an Imprecise Data abort, unless masked by the CPSR A-bit
-> - * - a Debug Entry request, if Debug is enabled
-> - * - an Event signaled by another processor using the SEV instruction.
-> - * If the Event Register is set, WFE clears it and returns immediately.
-> - * If WFE is implemented, SEV must also be implemented.
-> - */
-> -#define wfe() __asm__ __volatile__ ("wfe\n\t" : : );
-> -
->  /* Move 0xd3 value to CPSR register to enable SVC mode */
->  #define svc32_mode_en() __asm__ __volatile__				\
->  			("@ I&F disable, Mode: 0x13 - SVC\n\t"		\
-
+Is that actually a problem for any supported platform ?
+(that is what is being discussed in this thread already)
