@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD0DC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 23:04:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21E11C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 23:04:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F6B2889BA;
+	by phobos.denx.de (Postfix) with ESMTP id 74CD5889BB;
 	Tue, 30 Apr 2024 01:04:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KgNkX8L/";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sBeQNTSf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AB93889B2; Tue, 30 Apr 2024 01:04:06 +0200 (CEST)
-Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
- [IPv6:2607:f8b0:4864:20::f2f])
+ id 2EBCB889BE; Tue, 30 Apr 2024 01:04:08 +0200 (CEST)
+Received: from mail-ot1-x32e.google.com (mail-ot1-x32e.google.com
+ [IPv6:2607:f8b0:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 488B3889A7
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 01:04:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 99BB888966
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 01:04:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2f.google.com with SMTP id
- 6a1803df08f44-6969388c36fso20882886d6.1
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 16:04:04 -0700 (PDT)
+Received: by mail-ot1-x32e.google.com with SMTP id
+ 46e09a7af769-6ea1f98f3b9so2151083a34.1
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 16:04:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714431843; x=1715036643; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714431844; x=1715036644; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=m9j7tKFcPVgeBV1H/vEGmmtdvgtLww7mrsCrZlHCKog=;
- b=KgNkX8L/7kM3m+bg8nyLRnCSihH93IvQCjlid647bP04DaFU57ug/h54cojfhcAOTD
- FWxnoq9okvJ3tOxX/398Wv1D1U6xzYmmWk7VBevZsPtSF64WYty1voFuS+3YoVLzwONi
- QdukwnV9Ub6nJ31rE/wqkCHN4NvmoIxkeLpjM=
+ bh=Bho1BjaSPrx63tRwqaE+zdhKVx9uPjFfEsjMnlib8yE=;
+ b=sBeQNTSf2BQ4juKAKlhWzzLNAijvbub0aAW3lJ2Jn1BT009a4aN2+UNS/EkWN9ZJz0
+ ph3JLwSWIZDDEBcklCUfzO7XCldRFKvsCfwz8ox5ZpBjlZ3SZ+Fowes3CO9Ch3eTFLkT
+ YE4y0YWQQeDCXz/uWy0It09rjhXZSPZQRGpeE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714431843; x=1715036643;
+ d=1e100.net; s=20230601; t=1714431844; x=1715036644;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=m9j7tKFcPVgeBV1H/vEGmmtdvgtLww7mrsCrZlHCKog=;
- b=mELTxMZVTa2HmOnq3qtf00H6Xq347PDmYvo2IOKYM0kER47kidEDdJwg2n26lP/jvd
- N15AkdiEJRneg7zag0D5vynxMXBQv+P76Oamu1R8t20T1z3lGkmeCzDzZXhI/9p4fA1t
- uflrZBEDEM6DdechiED9Fwa+4Y+f4WBWKyRMnHzGRcZTXzUcj2l5mFuI1di5Zwu8adek
- Jf0TdWCa4Aj6eNl4zPFns4sB/thubOUDOJmQMFj5WB4KWFZ5ydxDsf5uz3VG8jnBrbK9
- mY5jg3OQRLA6HzRaLEPKzUEfTe3gobNxIUAMntLrVDAXBl83LQ1lmgHuTYqujfArYqKg
- EQbQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUC8pcqdkH/59lvWwWXuM/QopPRyzG0IBAWZsKycAUw+gby7taN5mNS0Sx67jMAuiRwhVhAmqORmvCKdcwL1OjPQBabrg==
-X-Gm-Message-State: AOJu0YzNi6KCmegR+0yF9R8gIeU0bp2LvQUVG3KWoD+uDL/WtUGnBdzv
- UwLSv2bH66Iqeo+P5Qpa9R8iap6VTEJS2R0zD2y7uF0aUUjui5LM1JsRYQ0NvZE=
-X-Google-Smtp-Source: AGHT+IFrjI9MF0QcD/VbXV4R8UBW5Wbrl6kcEkpRBPE6myr0zcS3D4wzpjG8ohJCPojBlLKoo/YOUQ==
-X-Received: by 2002:a05:6214:2629:b0:6a0:48f1:6148 with SMTP id
- gv9-20020a056214262900b006a048f16148mr965219qvb.27.1714431842742; 
- Mon, 29 Apr 2024 16:04:02 -0700 (PDT)
+ bh=Bho1BjaSPrx63tRwqaE+zdhKVx9uPjFfEsjMnlib8yE=;
+ b=dPuLJDfnCQn7q45lEfrLODwaKR+vCqRifXPMoI28SQWe8Vjfj9HRC+2KZ9y7yx1Di+
+ 6LKJ6/p5Pw+DBLFVhJ5o2bfOR25I9y5AGRvoUFqj4couN7ceBGJT1KW3SbPUMr42IAtQ
+ J1g9BrofkFo/a/t+E9EtsyQWb1VnLrYF/t0TtJrHV8miM8/RwfC+O4N6kF5IFEnH4+LO
+ YC0btM0muwcEa4+d3M7+vh1YsArLB/ybUonFgTwGHYOW1/w5kE17kX6vBSV7U4B6aplm
+ EjAA/1PPlgOtTUoEQ7Jz13qTVIyJNHCWXcbiFuqlFV0tGAsSdOPjPyf4E6KLSEIvm+PP
+ WBGg==
+X-Gm-Message-State: AOJu0YxbvuxetoPdMnk74STEPgwumA1DOijI3N8t7ptYAOr4zgeNafBa
+ VrGn4TaHNKkzbJDUwWutDHjdAGYXE5vZILHe810XpfDVTWAS9zFK/EMQZt88pdY=
+X-Google-Smtp-Source: AGHT+IGEQ2Bsn2U1A6cgmt1YvUJHKCrX6iEmtQshRftTwj3F5s/2xsKmlsi6Px0VvoNIDF7lQCay0w==
+X-Received: by 2002:a05:6830:1296:b0:6ee:1742:4d25 with SMTP id
+ z22-20020a056830129600b006ee17424d25mr1131957otp.12.1714431844293; 
+ Mon, 29 Apr 2024 16:04:04 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
- h6-20020a05620a13e600b0078f044ff474sm10967156qkl.35.2024.04.29.16.04.01
+ h6-20020a05620a13e600b0078f044ff474sm10967156qkl.35.2024.04.29.16.04.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 16:04:02 -0700 (PDT)
+ Mon, 29 Apr 2024 16:04:03 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: n-francis@ti.com, afd@ti.com, j-keerthy@ti.com, 
- Udit Kumar <u-kumar1@ti.com>
-Cc: nm@ti.com, rogerq@kernel.org, christian.gmeiner@gmail.com, 
- sjg@chromium.org, u-boot@lists.denx.de
-In-Reply-To: <20240417043650.3743061-1-u-kumar1@ti.com>
-References: <20240417043650.3743061-1-u-kumar1@ti.com>
-Subject: Re: [PATCH] board: ti: j721e: Add support for both esm probe
-Message-Id: <171443184122.1749944.14631410142041013825.b4-ty@konsulko.com>
-Date: Mon, 29 Apr 2024 17:04:01 -0600
+To: marcel.ziswiler@toradex.com, nm@ti.com, francesco.dolcini@toradex.com, 
+ rogerq@kernel.org, stefan.eichenberger@toradex.com, 
+ andrejs.cainikovs@toradex.com, Stefan Eichenberger <eichest@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20240417083921.13367-1-eichest@gmail.com>
+References: <20240417083921.13367-1-eichest@gmail.com>
+Subject: Re: [PATCH v1] arm: dts: verdin-am62: use gpio-hog for sleep moci
+Message-Id: <171443184295.1749944.17897928843529701392.b4-ty@konsulko.com>
+Date: Mon, 29 Apr 2024 17:04:02 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -92,15 +90,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 17 Apr 2024 10:06:50 +0530, Udit Kumar wrote:
+On Wed, 17 Apr 2024 10:39:21 +0200, Stefan Eichenberger wrote:
 
-> At present only MCU domain ESM is probed, this means errors
-> occurred in mcu domain will be propagate to MCU_SAFETY_ERRORn.
-> MCU ESM accepts SOC_SAFETY_ERRORn signal as Error
-> event and propagate to MCU_SAFETY_ERRORn.[0]
-> 
-> Therefore adding support to probe both main domain and mcu
-> domain ESM.
+> In Linux, we allow sleep moci to be turned off when the carrier board
+> supports it and the system is in suspend. In U-Boot, however, we want
+> the sleep moci to be always on. So we use a gpio hog and disable the
+> regulator. This change is necessary because we switched to upstream
+> device tree files with commit c07bba7a2c7e ("verdin-am62: move verdin
+> am62 to OF_UPSTREAM"). A recent upstream patch removes the gpio hog from
+> the Linux device tree, so we need to add it to the u-boot dtsi. The
+> following patch will remove the gpio hog from the Linux device tree:
+> https://lore.kernel.org/linux-devicetree/20240301084901.16656-1-eichest@gmail.com/
+> The U-Boot patch can be applied without it and will not break the build.
 > 
 > [...]
 
