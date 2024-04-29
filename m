@@ -4,119 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4ACCC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 22:36:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A74F8C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 22:46:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3063D889A1;
-	Tue, 30 Apr 2024 00:36:51 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 2308A88717;
+	Tue, 30 Apr 2024 00:46:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="YkKFZrVE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eD9XOIUN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF2A288988; Tue, 30 Apr 2024 00:36:49 +0200 (CEST)
-Received: from mailout3.samsung.com (mailout3.samsung.com [203.254.224.33])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 6A350887A4; Tue, 30 Apr 2024 00:46:57 +0200 (CEST)
+Received: from mail-vk1-xa2d.google.com (mail-vk1-xa2d.google.com
+ [IPv6:2607:f8b0:4864:20::a2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF01A87ED1
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 00:36:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EEFAD883D1
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 00:46:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jh80.chung@samsung.com
-Received: from epcas1p1.samsung.com (unknown [182.195.41.45])
- by mailout3.samsung.com (KnoxPortal) with ESMTP id
- 20240429223639epoutp0304450cbde0f017b608a83dea2d56739a~K4S6_tnFd0917009170epoutp03Q
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 22:36:39 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout3.samsung.com
- 20240429223639epoutp0304450cbde0f017b608a83dea2d56739a~K4S6_tnFd0917009170epoutp03Q
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1714430199;
- bh=0Qpn1gSAg1dFF1spJZF3gIh1i5b0zlSIPK7S8uPsiKA=;
- h=From:To:Cc:In-Reply-To:Subject:Date:References:From;
- b=YkKFZrVESEJCi7Q79AwJF4NNRm1u2dKpfKZmFZxJvuZwwT5mLKogDMDkmia3Rzkpq
- Tq24TcJTV+Vg32gWZKcYESOVFOiKVPuE+jb9bL4BhmHb1wCOLS/Mo+QTB3XTYnk9K7
- QJTfwqW5HViJIAjUyQ/IgpGb1jlsNVGXRW93m198=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p4.samsung.com (KnoxPortal) with ESMTP id
- 20240429223638epcas1p4574581561fb9825c6e854c22426fc0c2~K4S6r5HwO0368703687epcas1p4v;
- Mon, 29 Apr 2024 22:36:38 +0000 (GMT)
-Received: from epsmgec1p1.samsung.com (unknown [182.195.36.133]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4VSyqT639rz4x9Pq; Mon, 29 Apr
- 2024 22:36:37 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmgec1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- DA.BB.08627.5F020366; Tue, 30 Apr 2024 07:36:37 +0900 (KST)
-Received: from epsmtrp1.samsung.com (unknown [182.195.40.13]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20240429223637epcas1p394372e0e5d0a99041e95c7fb694808f7~K4S5nQ0xe1504515045epcas1p3Y;
- Mon, 29 Apr 2024 22:36:37 +0000 (GMT)
-Received: from epsmgmcp1.samsung.com (unknown [182.195.42.82]) by
- epsmtrp1.samsung.com (KnoxPortal) with ESMTP id
- 20240429223637epsmtrp1d4077156f5af8c95f1a7cdf509d657f7~K4S5mmQbk1606116061epsmtrp1Y;
- Mon, 29 Apr 2024 22:36:37 +0000 (GMT)
-X-AuditID: b6c32a33-af9ff700000021b3-f7-663020f57cc4
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgmcp1.samsung.com (Symantec Messaging Gateway) with SMTP id
- DE.A0.19234.5F020366; Tue, 30 Apr 2024 07:36:37 +0900 (KST)
-Received: from jh80chung01 (unknown [10.113.111.84]) by epsmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20240429223637epsmtip130f95460ed348b214d0eac6d3b1a0b61~K4S5ZWQkv1996619966epsmtip1J;
- Mon, 29 Apr 2024 22:36:37 +0000 (GMT)
-From: "Jaehoon Chung" <jh80.chung@samsung.com>
-To: "'Marek Vasut'" <marek.vasut@mailbox.org>, <u-boot@lists.denx.de>
-Cc: "'Peng Fan'" <peng.fan@nxp.com>, "'Simon Glass'" <sjg@chromium.org>
-In-Reply-To: <e55e21af-7208-4b4d-9398-ee1e4825f69b@mailbox.org>
-Subject: RE: [PATCH v4] mmc: Poll CD in case cyclic framework is enabled
-Date: Tue, 30 Apr 2024 07:36:37 +0900
-Message-ID: <050401da9a85$b24539a0$16cface0$@samsung.com>
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: AQFhA7XuusjSORLPiS0WG04V0LW/BwFhpEL9AsAUzzUDa45HcgLqm2/Tsh9ETMA=
-Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrMKsWRmVeSWpSXmKPExsWy7bCmvu5XBYM0gxl/9S067t5it/ix6gur
- xbct2xgt3u7tZHdg8ZjdcJHF4+ydHYweO2fvY/LY+G4HUwBLVLZNRmpiSmqRQmpecn5KZl66
- rZJ3cLxzvKmZgaGuoaWFuZJCXmJuqq2Si0+ArltmDtBOJYWyxJxSoFBAYnGxkr6dTVF+aUmq
- QkZ+cYmtUmpBSk6BaYFecWJucWleul5eaomVoYGBkSlQYUJ2xq7Lj9gK9nNXzGn5w9jAuJSz
- i5GTQ0LARGLVjVlMXYxcHEICOxglHu5axALhfGKUWNJ3lxXOOdK8kw2mpbNtDRtEYiejxPdJ
- 76H6XwJVvb7OBFLFJqAn8X/RQmYQW0TAVWLXtsWMIDazgLvE3wVLWUFsTgF7iVuLfwPZHBzC
- Ah4Sjw6bg4RZBFQlvk64AbaMV8BSovXVO3aIxQoSP58uY4UY6Sdx5ucTdoiRIhKzO9uYQW6Q
- ENjFLnH97XZWiAYXiedPpkLZwhKvjm+BGiQl8bK/jR2ioZlRYumSg6wQTg+jxL+G61B/Gkvs
- XzqZCeQ6ZgFNifW79CG28Um8+9oDdrSEAK9ER5sQRLWKxKXXL5lg5t998h9qr4fE9olbGSEB
- tJlJ4tLDnewTGOVnITl8FsKGBYxMqxjFUguKc9NTkw0LDOFxmZyfu4kRnNq0jHcwXp7/T+8Q
- IxMH4yFGCQ5mJRHeKQv104R4UxIrq1KL8uOLSnNSiw8xmgKDciKzlGhyPjC55pXEG5pYGpiY
- GRmbWBiaGSqJ8565UpYqJJCeWJKanZpakFoE08fEwSnVwLRk82MvvimXso+VLZjjybTv34vj
- lml2M4WuObdXcIpO+T/JpfuifPGhHXXnJ/ye48Hju6cj/cO/NY2cSZI7z80X7tzcJKx9u9aA
- LaCt5vHxp0rZMz2OOC8/0t6yc92Bv76RwmWu9cwsjULsAtx531f+kzj3gu/Y76RZuZ2zbbtz
- D/++mZm4fd77l7uDJ6mFzlPb84gr2q3o0OwZXyN2eqz5NG+TvJ19ffmpRRF+jKJJ4SFVxy4J
- G8+0uVmky55+9dP57tYj3M4tckz3l70p+Hzd6uKzl39lZb6fPFzuarZD/W/0pLUd5rnqCRXv
- GE12CAQv+XWwas2/CN5l9+Xq7JoEAkqeMjBOejx7iWty4FslluKMREMt5qLiRACKLwG49gMA
- AA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrALMWRmVeSWpSXmKPExsWy7bCSnO5XBYM0g5NXpS067t5it/ix6gur
- xbct2xgt3u7tZHdg8ZjdcJHF4+ydHYweO2fvY/LY+G4HUwBLFJdNSmpOZllqkb5dAlfGrsuP
- 2Ar2c1fMafnD2MC4lLOLkZNDQsBEorNtDRuILSSwnVFi6lZjiLiUxOenU4HiHEC2sMThw8UQ
- Jc8ZJb4u0QOx2QT0JP4vWsgMYosIuEusffCRBcRmFvCU2LhwKgtE/Womib6GRBCbU8Be4tbi
- 36wgI4UFPCQeHTYHCbMIqEp8nXAD7AJeAUuJ1lfv2CEuUJD4+XQZK8R4P4kzP5+wQ4wXkZjd
- 2cY8gVFgFhJ3ASPjKkbR1ILi3PTc5AJDveLE3OLSvHS95PzcTYzgQNQK2sG4bP1fvUOMTByM
- hxglOJiVRHinLNRPE+JNSaysSi3Kjy8qzUktPsQozcGiJM6rnNOZIiSQnliSmp2aWpBaBJNl
- 4uCUamDyqsl0mz8z6XCU+BX2Gs1vX0Xs6u/oBmZs/l7cV/spOOJyW8mqlzrrTrIZllt6fjhf
- KdzXrr4uvOejFdO5Iy0tvMkMmdkHGq6fS5Thqo7/aTrvwLPFB/Py29pLT9zboxnikrB+brSB
- 5GmBV2uuHm7VWC9R86zT4MzJJWy3vSRD5k7X1JtmckBMvLva+LzZLoufqwqEXky93u1oVP1I
- 2XH+emMvF9/P9aZ+NyYuupx09swnA2XDbgutdUU2qXcnKX95/2KH4pxpbXK7NH6b7Kwtnu97
- ndmsyvjl2X4PyR86ES/lz830ZeP3P+rkui3jc/oWV+1tN86qyr7qNZBbsTNLVblsasSxtVHi
- nt4xXkosxRmJhlrMRcWJADTPnaizAgAA
-X-CMS-MailID: 20240429223637epcas1p394372e0e5d0a99041e95c7fb694808f7
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20240423231800epcas1p4e21bd06153b2394afd9a8696a4df6470
-References: <20240316201416.211480-1-marek.vasut+renesas@mailbox.org>
- <CGME20240423231800epcas1p4e21bd06153b2394afd9a8696a4df6470@epcas1p4.samsung.com>
- <fab40e09-1ac4-45c3-8dda-f0a1544d2d39@mailbox.org>
- <000001da97a2$d3247950$796d6bf0$@samsung.com>
- <e55e21af-7208-4b4d-9398-ee1e4825f69b@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-vk1-xa2d.google.com with SMTP id
+ 71dfb90a1353d-4dae8b2d29bso1443730e0c.0
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 15:46:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1714430814; x=1715035614; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=a83vKl4A2honFKHkzDJKAAitvLy0dh9TUz/OIsbnaoI=;
+ b=eD9XOIUNdmlbHrPWXWUqxacMdZf++ng02hsPQ/dhhhbn+e8PzR0PF+T/iI48qk2/ms
+ L1xLl5vavy/NNShlxY1abewl0k519suSCop02EegPtFPxLZtM3y9WiUUmiUdE/vT3mIc
+ EjjprvrOdEKW5vcI+7LpYJ0DnAuBE6TXzD1c+UnmsQvNvVfJU+F/Gg8pFNDOhuV+KpgG
+ RCt74QGXNUrqlR0a29qMNI1cOATrfgxpvPOSI4LlZX5eqUCrs8cugYLxFQo0XKQy970Z
+ gAxHuMdOl7O3l4MDOtjRcATjuvo/XWvsfS4JYlMcATIc8iiFenIz2nasUrjLfiPwugOt
+ r/Sg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714430814; x=1715035614;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=a83vKl4A2honFKHkzDJKAAitvLy0dh9TUz/OIsbnaoI=;
+ b=daRmkMR0CAQ6Hb+ZQ4zTxO4AD1wkev/41vJ9zlOmMA+Lwb0WPKwz8qHrZsNR/a+vnE
+ G+EUtEpcWTn400CZKRS2JWzFLvzjwhCuay0KiGVMywXwnIE0eUrshGW+hKcaRqOX0qHb
+ ++x6+fWjbXPuhL+MtWjNVaz6Ppt3ecxIKRVfjS0qm7oWZdTTIKRJkZiKQk7PRxR5IKv4
+ tJftHmpREuywdIkU5QVI+oW3/1aJkbkgpKQlyy7bnfVt1VQ921Y3OqKUsGkgfm8IO2Yn
+ r2ZefyGfXNFxBMuSUvC5cXpt08+tPEZscQaYe09qEFKblKR8kHwlD01q6nFbNuVGrjHy
+ RdEA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUP/o6PGW7fFXS2+RllTRihwcukxDyg/6hRu9uL9CPf2XCCi34dsNIH3chceni1bRPS3aM6eJ2GnO0/+3DJ5Ercry1QKw==
+X-Gm-Message-State: AOJu0Yw4Q9UuI/ifbM2AC4pQR4XE0g/zrfPfgShRuFJ4GMDxr0zZ1b7g
+ 2SO8c9xowyMH77TXfMYRogl2Sy3AEZJjwyQPdQ68C9XSgoIiNMprxYLwxTHt3N8UjV8Dkoy7Jwe
+ jmYQTEF711UHnCncbMcGlI69iuMg=
+X-Google-Smtp-Source: AGHT+IH7wez0tBr05ik7Y9PgyXoStLfDrUoDKP4EGcbFf68tif2/3tY6Y2G6R5qNsg88fXLEfnHaS1+qs8QXr59W8KQ=
+X-Received: by 2002:a05:6122:1da4:b0:4d4:15d2:8b3b with SMTP id
+ gg36-20020a0561221da400b004d415d28b3bmr12847586vkb.9.1714430813687; Mon, 29
+ Apr 2024 15:46:53 -0700 (PDT)
+MIME-Version: 1.0
+References: <20240415115035.46199-1-heinrich.schuchardt@canonical.com>
+ <20240415115035.46199-3-heinrich.schuchardt@canonical.com>
+ <CAJM55Z9gVQom+jKzcLZ4jVKLS3MbGNpx1hx6dEWjgpY7Xmy5aA@mail.gmail.com>
+In-Reply-To: <CAJM55Z9gVQom+jKzcLZ4jVKLS3MbGNpx1hx6dEWjgpY7Xmy5aA@mail.gmail.com>
+From: E Shattow <lucent@gmail.com>
+Date: Mon, 29 Apr 2024 15:46:42 -0700
+Message-ID: <CANV2PTO1EAkgf_4Uo6cqes=DMD=juGJaB17eLymJL4tCLerwvw@mail.gmail.com>
+Subject: Re: [PATCH 2/4] board: add support for Milk-V Mars CM
+To: Emil Renner Berthing <emil.renner.berthing@canonical.com>
+Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
+ Minda Chen <minda.chen@starfivetech.com>, Hal Feng <hal.feng@starfivetech.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
+ Lukasz Tekieli <tekieli.lukasz@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, 
+ Shengyu Qu <wiagn233@outlook.com>, Shiji Yang <yangshiji66@outlook.com>, 
+ Seung-Woo Kim <sw0312.kim@samsung.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -133,42 +96,155 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-> -----Original Message-----
-> From: Marek Vasut <marek.vasut@mailbox.org>
-> Sent: Friday, April 26, 2024 8:41 PM
-> To: Jaehoon Chung <jh80.chung@samsung.com>; u-boot@lists.denx.de
-> Cc: 'Peng Fan' <peng.fan@nxp.com>; 'Simon Glass' <sjg@chromium.org>
-> Subject: Re: [PATCH v4] mmc: Poll CD in case cyclic framework is enabled
+On Sun, Apr 28, 2024 at 9:13=E2=80=AFAM Emil Renner Berthing
+<emil.renner.berthing@canonical.com> wrote:
 >
-> On 4/26/24 8:27 AM, Jaehoon Chung wrote:
-> > Dear Marek,
-> >
-> >> -----Original Message-----
-> >> From: Marek Vasut <marek.vasut@mailbox.org>
-> >> Sent: Wednesday, April 24, 2024 8:18 AM
-> >> To: u-boot@lists.denx.de; Jaehoon Chung <jh80.chung@samsung.com>
-> >> Cc: Peng Fan <peng.fan@nxp.com>; Simon Glass <sjg@chromium.org>
-> >> Subject: Re: [PATCH v4] mmc: Poll CD in case cyclic framework is enabled
-> >>
-> >> On 3/16/24 9:13 PM, Marek Vasut wrote:
-> >>> In case the cyclic framework is enabled, poll the card detect of already
-> >>> initialized cards and deinitialize them in case they are removed. Since
-> >>> the card initialization is a longer process and card initialization is
-> >>> done on first access to an uninitialized card anyway, avoid initializing
-> >>> newly detected uninitialized cards in the cyclic callback.
-> >>
-> >> Any input on this ?
-> >
-> > When I have applied your patch from patchwork, it didn't apply directly.
-> > If you're ok, I will apply after touch your patch. Is it ok?
+> Heinrich Schuchardt wrote:
+> > We already support the VisionFive 2 and the Milk-V Mars board by
+> > patching the VisionFive 2 device tree. With this patch the same
+> > is done for the Milk-V Mars CM.
 >
-> Sure.
+> Hi Heinrich.
+>
+> Thanks for the patch. As far as I can tell the Milk-V documentation[1] is
+> pretty consistent in calling the version without eMMC "Milk-V Mars CM Lit=
+e"
+> and the version with eMMC just "Milk-V Mars CM". So I'd prefer the model,
+> compatible and filenames suggested below.
+>
+> [1]: https://milkv.io/docs/mars/compute-module/introduction#design-philos=
+ophy
+>
 
-After touching your patch, I will inform again to you.
+Are there any actual differences that need representation in the dtb
+file for downstream OS different from Milk-V Mars to Milk-V Mars CM
+(or CM Lite)?
 
-Best Regards,
-Jaehoon Chung
+I did find this vendor repo commit "kernel: dts reconfig sdio0 for
+SDCard version"
+https://github.com/milkv-mars/mars-buildroot-sdk/commit/042ea06598995db99dd=
+bbbb252ee439c42b9c1a9
+but it does not seem necessary in mainline Linux, SD Card is working
+without changes.
 
+It was necessary for U-Boot and the Mars CM Lite with SD Card to apply
+s/GPIO62/GPIO22/ as in the vendor commit "u-boot: configure sdio0 as
+mars-cm sdcard version"
+https://github.com/milkv-mars/mars-buildroot-sdk/commit/880a249518f72ecf1e2=
+947dfeb2c66e5035fce90
 
+Then also there is some mention about PMIC and renamed i2c reference,
+already obsolete. That's all, is there more to it? Possibly a dtb for
+Mars is enough to also be used on Mars CM and Mars Lite?
+
+-E
+
+> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> > ---
+> >  board/starfive/visionfive2/spl.c              | 27 ++++++++++++++++++-
+> >  .../visionfive2/starfive_visionfive2.c        | 11 +++++++-
+> >  2 files changed, 36 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfi=
+ve2/spl.c
+> > index 45848db6d8b..bb0f28d7aad 100644
+> > --- a/board/starfive/visionfive2/spl.c
+> > +++ b/board/starfive/visionfive2/spl.c
+> > @@ -129,6 +129,29 @@ void spl_fdt_fixup_mars(void *fdt)
+> >       }
+> >  }
+> >
+> > +void spl_fdt_fixup_marc(void *fdt)
+> > +{
+> > +     const char *compat;
+> > +     const char *model;
+> > +
+> > +     spl_fdt_fixup_mars(fdt);
+> > +
+> > +     if (!get_mmc_size_from_eeprom()) {
+> > +             int offset;
+> > +
+> > +             model =3D "Milk-V Mars CM SDCard";
+>
+> "Milk-V Mars CM Lite"
+>
+> > +             compat =3D "milkv,mars-cm-sdcard\0starfive,jh7110";
+>
+> "milkv,mars-cm-lite\0starfive,jh7110"
+>
+> > +
+> > +             offset =3D fdt_path_offset(fdt, "/soc/pinctrl/mmc0-pins/m=
+mc0-pins-rest");
+> > +             fdt_setprop_u32(fdt, offset, "pinmux", 0xff130016);
+> > +     } else {
+> > +             model =3D "Milk-V Mars CM eMMC";
+>
+> "Milk-V Mars CM"
+>
+> > +             compat =3D "milkv,mars-cm-emmc\0starfive,jh7110";
+>
+> "milkv,mars-cm\0starfive,jh7110"
+>
+> > +     }
+> > +     fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compat,=
+ sizeof(compat));
+> > +     fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model", model=
+);
+> > +}
+> > +
+> >  void spl_fdt_fixup_version_a(void *fdt)
+> >  {
+> >       static const char compat[] =3D "starfive,visionfive-2-v1.2a\0star=
+five,jh7110";
+> > @@ -236,7 +259,9 @@ void spl_perform_fixups(struct spl_image_info *spl_=
+image)
+> >               pr_err("Can't read EEPROM\n");
+> >               return;
+> >       }
+> > -     if (!strncmp(product_id, "MARS", 4)) {
+> > +     if (!strncmp(product_id, "MARC", 4)) {
+> > +             spl_fdt_fixup_marc(spl_image->fdt_addr);
+> > +     } else if (!strncmp(product_id, "MARS", 4)) {
+> >               spl_fdt_fixup_mars(spl_image->fdt_addr);
+> >       } else if (!strncmp(product_id, "VF7110", 6)) {
+> >               version =3D get_pcb_revision_from_eeprom();
+> > diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/board/=
+starfive/visionfive2/starfive_visionfive2.c
+> > index a86bca533b2..be6ca85b030 100644
+> > --- a/board/starfive/visionfive2/starfive_visionfive2.c
+> > +++ b/board/starfive/visionfive2/starfive_visionfive2.c
+> > @@ -17,6 +17,10 @@
+> >  DECLARE_GLOBAL_DATA_PTR;
+> >  #define JH7110_L2_PREFETCHER_BASE_ADDR               0x2030000
+> >  #define JH7110_L2_PREFETCHER_HART_OFFSET     0x2000
+> > +#define FDTFILE_MILK_V_MARC_SD \
+> > +     "starfive/jh7110-milkv-mars-cm-sdcard.dtb"
+>
+> "starfive/jh7110-milkv-mars-cm-lite.dtb"
+>
+> > +#define FDTFILE_MILK_V_MARC_MMC \
+> > +     "starfive/jh7110-milkv-mars-cm-emmc.dtb"
+>
+> "starfive/jh7110-milkv-mars-cm.dtb"
+>
+> >  #define FDTFILE_MILK_V_MARS \
+> >       "starfive/jh7110-milkv-mars.dtb"
+> >  #define FDTFILE_VISIONFIVE2_1_2A \
+> > @@ -61,7 +65,12 @@ static void set_fdtfile(void)
+> >               log_err("Can't read EEPROM\n");
+> >               return;
+> >       }
+> > -     if (!strncmp(product_id, "MARS", 4)) {
+> > +     if (!strncmp(product_id, "MARC", 4)) {
+> > +             if (get_mmc_size_from_eeprom())
+> > +                     fdtfile =3D FDTFILE_MILK_V_MARC_MMC;
+> > +             else
+> > +                     fdtfile =3D FDTFILE_MILK_V_MARC_SD;
+> > +     } else if (!strncmp(product_id, "MARS", 4)) {
+> >               fdtfile =3D FDTFILE_MILK_V_MARS;
+> >       } else if (!strncmp(product_id, "VF7110", 6)) {
+> >               version =3D get_pcb_revision_from_eeprom();
+> > --
+> > 2.43.0
+> >
+> >
