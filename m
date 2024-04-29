@@ -4,77 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFA6FC4345F
-	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 16:48:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEAD6C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 16:49:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC2D1887B3;
-	Mon, 29 Apr 2024 18:48:27 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gateworks.com
+	by phobos.denx.de (Postfix) with ESMTP id 38DB1887B8;
+	Mon, 29 Apr 2024 18:49:21 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gateworks.com header.i=@gateworks.com header.b="NA5X47dA";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QhjN1zhr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 61E11887C3; Mon, 29 Apr 2024 18:48:26 +0200 (CEST)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id C6D53887BF; Mon, 29 Apr 2024 18:49:19 +0200 (CEST)
+Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com
+ [IPv6:2607:f8b0:4864:20::82c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E802A887B9
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 18:48:23 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 93384887B0
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 18:49:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gateworks.com
+ dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tharvey@gateworks.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5726716a006so3336041a12.2
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 09:48:23 -0700 (PDT)
+ spf=pass smtp.mailfrom=dianders@chromium.org
+Received: by mail-qt1-x82c.google.com with SMTP id
+ d75a77b69052e-43a5715f71eso23836671cf.0
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 09:49:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gateworks.com; s=google; t=1714409303; x=1715014103; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1714409356; x=1715014156; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MsGEHH2Pz2PdA+JpBwkjIYoiMmVq+D1c+95A9XSWou0=;
- b=NA5X47dAXNKzeYmPVH/YBIuvQ+UH1qgM7U82X9XxN2waqsvxihyJRH6Ya5rknWQslm
- pg00kkmqeUCzvVDj6oVypxqcD0XiLVRk+iRByP2vj2567DmZvGk2aFIGApwAx7TNwDS6
- bVKidjAebtShvQVBySAxOdPccgn7Q1uwgUaOOk3JQLeYowUjgV72OSKuXZBn8He3kmvW
- 1eht9XIsMLvlKznwKzUk7VUVGT+Tk0llkPr9cP1/WbTvCISD4oSd+Dx/G7CPNjnOaWiU
- 4CdD9kWFW0h8HgdQJoKCuMxYTwxq35FK4ty3iWiVC3bFFiO9QJ9KM1rC1/fNRTjsZgeg
- yDDA==
+ bh=Pt1BAPBA5Dwd88qO91Kw8NCtcgY/6aR6zS2cJhDTC6I=;
+ b=QhjN1zhrbn6lJP6P+jgL+z8D0fyzbC2rOMV5+kUXmyvXq6N3v+qHKMp6OJ4uFar32F
+ a9Z1LIWGZ4GV97K8rxdi4F9+BkCsJmyJlJqccCpZam4HzPQC1LhbK8SBOh+SReD2UIFS
+ ybMaqFHdXzDDwcy0HBejVj+/KVnvLeETufcK8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714409303; x=1715014103;
+ d=1e100.net; s=20230601; t=1714409356; x=1715014156;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MsGEHH2Pz2PdA+JpBwkjIYoiMmVq+D1c+95A9XSWou0=;
- b=nMfdQoZswVougkYa4njSu3JSs+hp2nkbO20LKiN11sH7356MSwW1XKUzVyiUxfvHZv
- YocNiwBXgYIhn2qm+d30EEeEGe0W9G9xr7UsBEufd/vV4brl1s89gbeibVKYx41BSkM/
- pr6mr9+8HsHYMTG/eYH2ZuDsGQ+W0Nsmt7DmWZvt2/qxncpBGzJohI+gZ+zMz8ji28q7
- 2de8Sh3ZcQFuL/7O4wISAC/VYaeFD5+jHY3NYTFqudmCqcBDaAn8rDk/1ez283z1Lije
- Ap0kTzCf9hf5Nclad+HnCpb+aoqOZNmnLYof6ZW30hXnhaheoy8hz60wKU18JDx4Zuq1
- nlIA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV4+0OxOmrkLAHgeDwpVsfyxfuwXSvJBXAt/Nu2ijN9uRm9dBQwxlnpy0LdB+fKWv+D7woq7Ah/e7e2q2Folse0161DYw==
-X-Gm-Message-State: AOJu0YwOCsaloO1kpD4YvYd3jYXVS1UHXpAh/thOvO1tJUpXWJySoW7Y
- kN9LP3oSadgzC4NRtKDK3vRkWz4FhMNOLA0EvxS52PqHeJPINVksL0B41ufTbPSyqnrRO2l/rxi
- 34Tj1Mvo4g4o8PqUywUmAxA7CjyLUH3C+xGZkFA==
-X-Google-Smtp-Source: AGHT+IHcGbK0Hu6Wseao49OQdbpREEsGK6HdOmfLKLCXUHb2ForYaoupJ0IVLo2qrVlkoMIgeSjJRnTOXfCI/VbCYZQ=
-X-Received: by 2002:a17:906:2ed3:b0:a52:6bb2:2b15 with SMTP id
- s19-20020a1709062ed300b00a526bb22b15mr7297064eji.38.1714409303180; Mon, 29
- Apr 2024 09:48:23 -0700 (PDT)
+ bh=Pt1BAPBA5Dwd88qO91Kw8NCtcgY/6aR6zS2cJhDTC6I=;
+ b=XQyN3pNKz1lR6sCV6BVepM1bSVIzQOMOF/xl6mCdD0IgmNQc0BDXs3XD18lw38lSxT
+ e4sycgNhhUO4gOpIFBM8hyC7O2TIb/O46Bxkc8aPZMhd+084+kHqohpuzfb43uqYPokg
+ XafkNMqqugN0d4Unwj/7ze0hXDh1QdMuWJl5Nw8tewajSZyCkHCnj5RSeTR/igHmttpy
+ GiLZFvWK2oWTiAkjlB6ypwtefjf05z/EunQe15H2VQPRpwvtH4uVvA/tIiz/as+b8NA2
+ lW6WdVNYCNdwRyNc2smiI/vY0P1bZC1HwaVecLGAP/XCVl30B8eECIptZ8BuhdiAQdMX
+ V04Q==
+X-Gm-Message-State: AOJu0YxPntwSJffYjic6y+gS7jHxAhdlLfbftkT+fCmO3PaYqc8JCwaT
+ zJ+t9ZLaqD2/SoBucp+S1HVE87u2Ltm1BW1+6E6Ov8k1LFdcW5WCdaa1HGH7vDqSP3/BN5oMBww
+ =
+X-Google-Smtp-Source: AGHT+IHvpg6GtwrE4Yvpt7vGKwqcsT8mHfgBcxgSgsEzyBbUGTZ9936IO2YC6ktbYcuV+CmkaGfGQQ==
+X-Received: by 2002:a05:622a:11cc:b0:43b:7be:15a1 with SMTP id
+ n12-20020a05622a11cc00b0043b07be15a1mr96035qtk.12.1714409355650; 
+ Mon, 29 Apr 2024 09:49:15 -0700 (PDT)
+Received: from mail-qt1-f171.google.com (mail-qt1-f171.google.com.
+ [209.85.160.171]) by smtp.gmail.com with ESMTPSA id
+ v10-20020ac873ca000000b004378b8ef629sm10552311qtp.31.2024.04.29.09.49.14
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 29 Apr 2024 09:49:14 -0700 (PDT)
+Received: by mail-qt1-f171.google.com with SMTP id
+ d75a77b69052e-436ed871225so1601cf.1
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 09:49:14 -0700 (PDT)
+X-Received: by 2002:a05:622a:164d:b0:43b:fed:fcac with SMTP id
+ y13-20020a05622a164d00b0043b0fedfcacmr133076qtj.18.1714409354182; Mon, 29 Apr
+ 2024 09:49:14 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240427001157.1460302-1-tharvey@gateworks.com>
- <495f60d6-6ff2-4c53-8b2c-867b5ca05993@denx.de>
-In-Reply-To: <495f60d6-6ff2-4c53-8b2c-867b5ca05993@denx.de>
-From: Tim Harvey <tharvey@gateworks.com>
-Date: Mon, 29 Apr 2024 09:48:11 -0700
-Message-ID: <CAJ+vNU0R5iTgS2_C_OV2VYh5fQnyPV-Lw003CTJAkp1Q6Qdedg@mail.gmail.com>
-Subject: Re: [PATCH v3] mmc: allow use of hardware partition names for mmc
- partconf
-To: Marek Vasut <marex@denx.de>
-Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, 
- Fabio Estevam <festevam@gmail.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- u-boot@lists.denx.de, Dragan Simic <dsimic@manjaro.org>
+References: <20240419023632.29078-1-seanga2@gmail.com>
+ <20240419023632.29078-4-seanga2@gmail.com>
+In-Reply-To: <20240419023632.29078-4-seanga2@gmail.com>
+From: Doug Anderson <dianders@chromium.org>
+Date: Mon, 29 Apr 2024 09:49:02 -0700
+X-Gmail-Original-Message-ID: <CAD=FV=Unkeyszq8FZOG3NODgTK2ke8OrHNR=K06k55ZmUoTA8g@mail.gmail.com>
+Message-ID: <CAD=FV=Unkeyszq8FZOG3NODgTK2ke8OrHNR=K06k55ZmUoTA8g@mail.gmail.com>
+Subject: Re: [PATCH 3/3] patman: Add a tag for when a patch gets added to a
+ series
+To: Sean Anderson <seanga2@gmail.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -93,36 +99,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, Apr 27, 2024 at 4:20=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+Hi,
+
+On Thu, Apr 18, 2024 at 7:36=E2=80=AFPM Sean Anderson <seanga2@gmail.com> w=
+rote:
 >
-> On 4/27/24 2:11 AM, Tim Harvey wrote:
+> When a patch is added to a series after the initial version, there are no
+> changes to note except that it is new. This is typically done to suppress
+> the "(no changes in vN)" message. It's also nice to add a change to the
+> cover letter so reviewers know there is an additional patch. Add a tag to
+> automate this process a bit.
 >
-> [...]
+> There are two nits with the current approach:
 >
-> > diff --git a/include/mmc.h b/include/mmc.h
-> > index 4b8327f1f93b..7243bd761202 100644
-> > --- a/include/mmc.h
-> > +++ b/include/mmc.h
-> > @@ -381,6 +381,21 @@ enum mmc_voltage {
-> >   #define MMC_TIMING_MMC_HS200        9
-> >   #define MMC_TIMING_MMC_HS400        10
-> >
-> > +/* emmc hardware partition values */
-> > +enum emmc_hwpart {
-> > +     EMMC_HWPART_DEFAULT =3D 0,
+> - It favors '-' as a bullet point, but some people may prefer '*' (or
+>   something else)
+> - Tags (e.g. 'patman: ' in 'patman: foo bar') are not stripped. They are
+>   probably just noise in most series, but they may be useful for treewide
+>   series to distinguish 'gpio: frobnicate' from 'reset: frobnicate', so
+>   I've left them in.
 >
-> One more thing ... eMMC hardware partition 0 and 7 are both referring to
-> USER HW partition. Have a look at the git log, there have been patches
-> which handled this case in the MMC subsystem from about a year ago.
+> Suggestions for the above appreciated.
+>
+> Suggested-by: Douglas Anderson <dianders@chromium.org>
+> Signed-off-by: Sean Anderson <seanga2@gmail.com>
+> ---
+>
+>  tools/patman/func_test.py                           |  2 ++
+>  tools/patman/patchstream.py                         |  5 +++++
+>  tools/patman/patman.rst                             | 13 +++++++++++++
+>  ...t-cast-for-sandbox-in-fdtdec_setup_mem_siz.patch |  1 +
+>  tools/patman/test/test01.txt                        |  1 +
+>  5 files changed, 22 insertions(+)
 
-Hi Marek,
+I love it, thanks!
 
-I can't find what you are referring to. I assume you are talking about
-calling the first name something other than 'user' as technically it's
-not (but it gets treated as user).
-
-Can you find the commit or discussion you are thinking about?
-
-Best Regards,
-
-Tim
+Reviewed-by: Douglas Anderson <dianders@chromium.org>
