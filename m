@@ -4,67 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20661C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 13:28:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 759D3C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 13:34:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68452888CC;
-	Mon, 29 Apr 2024 15:28:14 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C7E67886E6;
+	Mon, 29 Apr 2024 15:34:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1714397294;
-	bh=2bfS63GFzBK2rKq8vi46yg4dGImB6ed85w2NS5vv5Tw=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=JYaAFhbR4urLvubUDcz6AALuwS7NC5AUt95mR7nyOBtbxx4I8PoDDzik2jSThpp1k
-	 g11kR4nhWjFdIErebgxCMi99XMSqlfzah+oS7EP5Le6yBPM62XdFwSk8+EcxIGt5bt
-	 IMEzfMSM5JxMlTRRqjG47FrHSRN6B83ozSrNmVfHjTYFozDN3ot3YOoh5ZIzmSEuca
-	 aGXRUzUAfRjgMVNBuTVgW0mLijWXUg5f80OoTLzDjXgt7njwwgxCqZ4W+zbMwrmw63
-	 j50SwDn37w0nqPdTPErp1X4n/lB52vQmD/gfvdJALGI3C6nQo/xogsFZUD8c8Cp/6u
-	 EGX61r9f6IP6g==
-Received: from [127.0.0.1] (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+Authentication-Results: phobos.denx.de;
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="mn/XoNUM";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 210E3807EC; Mon, 29 Apr 2024 15:34:38 +0200 (CEST)
+Received: from mickerik.phytec.de (mickerik.phytec.de [91.26.50.163])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- (Authenticated sender: marex@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id ED09F887EA;
- Mon, 29 Apr 2024 15:28:11 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1714397293;
- bh=2bfS63GFzBK2rKq8vi46yg4dGImB6ed85w2NS5vv5Tw=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=MC5K47uBDSghjRhJ1VngPNxJYKu9aiBCRWDioFQwClzDYqP8J15Jf3rVMzw9OeoOt
- 2MxvDCceDl6bziOi4M+pWND8RAgpw0ucqWo7oa6mabGB6H1BBc6rI0TC2Pwn/n9Jsc
- jJeoRlX01RVE6LQn8PpIb39up7iHR0n1FAtv8c3hF4Ouhahb3H5t6+5LJIiGCCpRVr
- 63/Vf+suZFt+FEkPLUbxLOCKf5RTDmRcvI95FIkPbiaNcIOzmtJlMtd2Q0i8pMBCUb
- teT7qgIQ9Kag8Ywnocrvv/YNwkP2HTkVcaubKlM90abliZeOw7eYE/EDeGYzraY74L
- 0O+xu3c+MsKTw==
-Message-ID: <dc3973f1-ecee-426d-81ed-4c37b46eb2ff@denx.de>
-Date: Mon, 29 Apr 2024 14:32:24 +0200
+ by phobos.denx.de (Postfix) with ESMTPS id 365E288795
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 15:34:36 +0200 (CEST)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=phytec.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+DKIM-Signature: v=1; a=rsa-sha256; d=phytec.de; s=a4; c=relaxed/simple;
+ q=dns/txt; i=@phytec.de; t=1714397675; x=1716989675;
+ h=From:Sender:Reply-To:Subject:Date:Message-ID:To:CC:MIME-Version:Content-Type:
+ Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+ List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=Lzx4SXR/GbCPTkZSShdGuHEIgr3gmFnJdJUhIZHH92Y=;
+ b=mn/XoNUMYioUuLGMmxeX/t6Z4bC0GMJ2YB4TwEzduaXvtHBDKzmcEIeVWzatLbH6
+ o/idpYePdO9bYAs2QVy8C+Kx1sQd9wc6aJEZPijnaAUrvOGd4U7SL/fRiwxlvNx2
+ hbO0e7i6Dmad3riFWsi2qasyxED6T9VpRn7loBvDZ+E=;
+X-AuditID: ac14000a-fbefe7000000290d-fb-662fa1eb68f2
+Received: from berlix.phytec.de (Unknown_Domain [172.25.0.12])
+ (using TLS with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+ (Client did not present a certificate)
+ by mickerik.phytec.de (PHYTEC Mail Gateway) with SMTP id 47.E9.10509.BE1AF266;
+ Mon, 29 Apr 2024 15:34:35 +0200 (CEST)
+Received: from [172.25.39.28] (172.25.0.11) by Berlix.phytec.de (172.25.0.12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.6; Mon, 29 Apr
+ 2024 15:34:35 +0200
+Message-ID: <b6232b4c-4bc0-4b0a-8017-55333cfc1490@phytec.de>
+Date: Mon, 29 Apr 2024 15:34:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [EXT] Re: [PATCH 2/3] crypto/fsl: Introduce SPL_FSL_CAAM_RNG
-To: Gaurav Jain <gaurav.jain@nxp.com>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Fabio Estevam <festevam@gmail.com>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Michal Simek <michal.simek@amd.com>,
- Simon Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel
- <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>,
- Varun Sethi <V.Sethi@nxp.com>, Kshitiz Varshney <kshitiz.varshney@nxp.com>
-References: <20240425230314.497203-1-marex@denx.de>
- <20240425230314.497203-2-marex@denx.de>
- <CAJ+vNU3ndKTXr5XBOd9b2aQF7WmBPARJ70Fsuab1rmnaQsEZiQ@mail.gmail.com>
- <94a75eb9-950c-41f0-b9fc-c7d95ecec6c6@denx.de>
- <AM0PR04MB600444768BFB0DF8114EFAF5E71B2@AM0PR04MB6004.eurprd04.prod.outlook.com>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <AM0PR04MB600444768BFB0DF8114EFAF5E71B2@AM0PR04MB6004.eurprd04.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Wadim Egorov <w.egorov@phytec.de>
+Subject: Usage of fdt_addr vs fdt_addr_r
+To: <u-boot@lists.denx.de>
+CC: <upstream@lists.phytec.de>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.25.0.11]
+X-ClientProxiedBy: Berlix.phytec.de (172.25.0.12) To Berlix.phytec.de
+ (172.25.0.12)
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrBLMWRmVeSWpSXmKPExsWyRpKBR/f1Qv00g6kfNS3e7u1kt+h+p+7A
+ 5HH2zg5Gj/7uFtYApigum5TUnMyy1CJ9uwSujJObrrIUfGCpeLBVpoHxN3MXIyeHhICJxLxP
+ v1i7GLk4hASWMEn8/XcfyrnLKPFp0w12kCpeARuJQ3s/sYHYLAKqEk/+LGaGiAtKnJz5hAXE
+ FhWQl7h/awZYPbOAuMStJ/OZQGw2AXWJOxu+AQ3l4BAW0JBo7EwBCYsISEm87NzIDBJmFpCT
+ WNZfBNFpIbH4zUGoKfIS29/OAdskBGS/uLScBeJmeYlp515D3R8qsfXLdqYJjIKzkBw0C8kR
+ s5CMnYVk7AJGllWMQrmZydmpRZnZegUZlSWpyXopqZsYQaErwsC1g7FvjschRiYOxkOMEhzM
+ SiK8W6brpwnxpiRWVqUW5ccXleakFh9ilOZgURLnXd0RnCokkJ5YkpqdmlqQWgSTZeLglGpg
+ dEyb+odjPwtv7cZdlftizv3j/lnovviJR9I5ky0/vdt/sW3wPv4/Pf4Us1PnZG4Rqf4k9RuR
+ vVKpbTc2vyy/cOP3lvKkydIfpqmHZl3/Vyn6/o9z5dtup8zph9M1/3jOdz3HsrZwxRPWKYpX
+ 3H+WrdhlVDxh7Qq5jTknJgavmbM2pFud77pHuBJLcUaioRZzUXEiAFVU55pLAgAA
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,42 +85,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 4/29/24 11:02 AM, Gaurav Jain wrote:
-
 Hi,
 
->>>> diff --git a/drivers/crypto/fsl/Makefile
->>>> b/drivers/crypto/fsl/Makefile index 7a2543e16cc..4fbce519a0b 100644
->>>> --- a/drivers/crypto/fsl/Makefile
->>>> +++ b/drivers/crypto/fsl/Makefile
->>>> @@ -6,6 +6,6 @@ obj-y += sec.o
->>>>    obj-$(CONFIG_FSL_CAAM) += jr.o fsl_hash.o jobdesc.o error.o
->>>>    obj-$(CONFIG_CMD_BLOB)$(CONFIG_IMX_CAAM_DEK_ENCAP) += fsl_blob.o
->>>>    obj-$(CONFIG_RSA_FREESCALE_EXP) += fsl_rsa.o
->>>> -obj-$(CONFIG_FSL_CAAM_RNG) += rng.o
->>>> +obj-$(CONFIG_$(SPL_TPL_)FSL_CAAM_RNG) += rng.o
->>>>    obj-$(CONFIG_FSL_DCP_RNG) += dcp_rng.o
->>>>    obj-$(CONFIG_FSL_MFGPROT) += fsl_mfgprot.o
->>>> --
->>>> 2.43.0
->>>>
->>>
->>> Marek,
->>
->> Hi,
->>
->>> Thanks - this series does solve the issue I am seeing in the SPL when
->>> enabling DM_RNG. Is this going to cause an issue for people who expect
->>> it to be currently enabled and now have to manually enable it?
->>
->> That's a good question. If I do '$ git grep FSL_CAAM_RNG' , there seem to be no
->> users, so I don't think we need to worry here, right ?
->>
->> With SPL_DM_RNG i.e. 1/3 I am a bit more concerned. But, looking at the users
->> that enable DM_RNG, I am not seeing any obvious ones that would require
->> SPL_DM_RNG too. What do you think ?
-> 
-> FSL_CAAM_RNG is enabled based on DM_RNG. This patch will disable the build of drivers/crypto/fsl/rng.c in SPL.
+there are multiple definitions of fdt_addr and fdt_addr_r:
 
-Is that actually a problem for any supported platform ?
-(that is what is being discussed in this thread already)
+usage/environment.rst:
+Tells us fdt_addr is in flash location and _r in RAM
+
+develop/distro.rst:
+fdt_addr -> Mandatory for any system that provides the DTB in HW (e.g. ROM)
+
+I also noticed that bootmeth_efi.c/distro_efi_try_bootflow_files() will 
+copy the dtb it has found into fdt_addr_r. But efi_install_fdt() try to 
+load first from fdt_addr. Shouldn't they use the same environment variable?
+
+Doing so would allow efiboot to use the dtb it has detected using 
+bootflow. Right now it seems to fallback to fdtcontroladdr.
+
+Regards,
+Wadim
