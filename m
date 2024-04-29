@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94FA3C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 23:04:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDD0DC4345F
+	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 23:04:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E8ED889B2;
-	Tue, 30 Apr 2024 01:04:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F6B2889BA;
+	Tue, 30 Apr 2024 01:04:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HQf3A2RP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KgNkX8L/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9716D889AF; Tue, 30 Apr 2024 01:04:04 +0200 (CEST)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
+ id 6AB93889B2; Tue, 30 Apr 2024 01:04:06 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F1D788966
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 01:04:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 488B3889A7
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 01:04:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-78f04924a96so420780685a.0
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 16:04:02 -0700 (PDT)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6969388c36fso20882886d6.1
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 16:04:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714431841; x=1715036641; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714431843; x=1715036643; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GysYMFArqYTNxGoAj6nVswfx5lIPzUoJ3vW3ZeaXQiA=;
- b=HQf3A2RP35oa7G2MNiYL8sfPWp09cH0XLNjUd3sA3wR0zQ9huNWa7kvngdZ3N4XVI4
- llwYC0rs+R6mK/1aXU7uXBRCVxCeg4JIJIS4dW7UjF/8K0BNWGiloeYLOsXQN53mh0uT
- qcRHlQtMspBo/eP8gPa7BHuMiRE5KiMGrpFMA=
+ bh=m9j7tKFcPVgeBV1H/vEGmmtdvgtLww7mrsCrZlHCKog=;
+ b=KgNkX8L/7kM3m+bg8nyLRnCSihH93IvQCjlid647bP04DaFU57ug/h54cojfhcAOTD
+ FWxnoq9okvJ3tOxX/398Wv1D1U6xzYmmWk7VBevZsPtSF64WYty1voFuS+3YoVLzwONi
+ QdukwnV9Ub6nJ31rE/wqkCHN4NvmoIxkeLpjM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714431841; x=1715036641;
+ d=1e100.net; s=20230601; t=1714431843; x=1715036643;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GysYMFArqYTNxGoAj6nVswfx5lIPzUoJ3vW3ZeaXQiA=;
- b=hFsYFob/eWTLGG67LDDrMQ0HwSQQIb8FdoBQDhlkjLxTv+6iKzI+wIq6Vlg9Fw/Lg8
- X7kYBO36FNIhbhnvJ4HEqrfjYpfJ87Jsyx6gYRkFbd0y8kk4hwICuxPteFg7j6BgFY9o
- DWDR/jNO9WFcC0K5Vhfh8jpNu39yaDLLAmocHnAOZYHW9vi/0ZQ+9Iq9rg2izK0FukCy
- egl8AJxlv6j8Sm9IOQS1SLN20myx8uYjqPN6LpBkp+lQKXrV3GoKo0gcV0REzvX9An8V
- eOjVVvn5tpExO5xlbmGsIfN5unmAtxRdVlPIRYxelQNEt+QrDUAjTSOHhhQOci168S2L
- hSOA==
+ bh=m9j7tKFcPVgeBV1H/vEGmmtdvgtLww7mrsCrZlHCKog=;
+ b=mELTxMZVTa2HmOnq3qtf00H6Xq347PDmYvo2IOKYM0kER47kidEDdJwg2n26lP/jvd
+ N15AkdiEJRneg7zag0D5vynxMXBQv+P76Oamu1R8t20T1z3lGkmeCzDzZXhI/9p4fA1t
+ uflrZBEDEM6DdechiED9Fwa+4Y+f4WBWKyRMnHzGRcZTXzUcj2l5mFuI1di5Zwu8adek
+ Jf0TdWCa4Aj6eNl4zPFns4sB/thubOUDOJmQMFj5WB4KWFZ5ydxDsf5uz3VG8jnBrbK9
+ mY5jg3OQRLA6HzRaLEPKzUEfTe3gobNxIUAMntLrVDAXBl83LQ1lmgHuTYqujfArYqKg
+ EQbQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXYv13Xg7eiIxFjj1G1Kg9qw9wxMuHOMLQmr+0SUMoKACPsebOB1LisWmNGiAGYBvliNVIcmu4L3I+HLbd/4XEnAlakJg==
-X-Gm-Message-State: AOJu0YwkAsdVIb4I1AMKpOlBbxVEg+62tXw42I8j/ueH/+z9cWbpk2Wh
- u1rUn4GUyb5QbbPxYGhPIDUEQE4dOkhWMs7VuMzXEt2aEtMHm2C/PmI7+UCoDqs=
-X-Google-Smtp-Source: AGHT+IHAp3S5tGnK5gYkQRd+nPPoSUaD1dMoxvak9zk5IJoNv1b/0WeWCYXDtL8JEvyzf6MvEVs1HQ==
-X-Received: by 2002:a05:620a:1033:b0:790:fa2c:6352 with SMTP id
- a19-20020a05620a103300b00790fa2c6352mr3343430qkk.77.1714431841061; 
- Mon, 29 Apr 2024 16:04:01 -0700 (PDT)
+ AJvYcCUC8pcqdkH/59lvWwWXuM/QopPRyzG0IBAWZsKycAUw+gby7taN5mNS0Sx67jMAuiRwhVhAmqORmvCKdcwL1OjPQBabrg==
+X-Gm-Message-State: AOJu0YzNi6KCmegR+0yF9R8gIeU0bp2LvQUVG3KWoD+uDL/WtUGnBdzv
+ UwLSv2bH66Iqeo+P5Qpa9R8iap6VTEJS2R0zD2y7uF0aUUjui5LM1JsRYQ0NvZE=
+X-Google-Smtp-Source: AGHT+IFrjI9MF0QcD/VbXV4R8UBW5Wbrl6kcEkpRBPE6myr0zcS3D4wzpjG8ohJCPojBlLKoo/YOUQ==
+X-Received: by 2002:a05:6214:2629:b0:6a0:48f1:6148 with SMTP id
+ gv9-20020a056214262900b006a048f16148mr965219qvb.27.1714431842742; 
+ Mon, 29 Apr 2024 16:04:02 -0700 (PDT)
 Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
- h6-20020a05620a13e600b0078f044ff474sm10967156qkl.35.2024.04.29.16.03.59
+ h6-20020a05620a13e600b0078f044ff474sm10967156qkl.35.2024.04.29.16.04.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 16:04:00 -0700 (PDT)
+ Mon, 29 Apr 2024 16:04:02 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
-To: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, 
- Judith Mendez <jm@ti.com>
-Cc: Andrew Davis <afd@ti.com>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <20240416162115.2743405-1-jm@ti.com>
-References: <20240416162115.2743405-1-jm@ti.com>
-Subject: Re: [PATCH v2] configs: am62px_evm_a53_defconfig: Enable MMC UHS
- config option
-Message-Id: <171443183988.1749944.3594631559891599519.b4-ty@konsulko.com>
-Date: Mon, 29 Apr 2024 17:03:59 -0600
+To: n-francis@ti.com, afd@ti.com, j-keerthy@ti.com, 
+ Udit Kumar <u-kumar1@ti.com>
+Cc: nm@ti.com, rogerq@kernel.org, christian.gmeiner@gmail.com, 
+ sjg@chromium.org, u-boot@lists.denx.de
+In-Reply-To: <20240417043650.3743061-1-u-kumar1@ti.com>
+References: <20240417043650.3743061-1-u-kumar1@ti.com>
+Subject: Re: [PATCH] board: ti: j721e: Add support for both esm probe
+Message-Id: <171443184122.1749944.14631410142041013825.b4-ty@konsulko.com>
+Date: Mon, 29 Apr 2024 17:04:01 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,12 +92,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 16 Apr 2024 11:21:15 -0500, Judith Mendez wrote:
+On Wed, 17 Apr 2024 10:06:50 +0530, Udit Kumar wrote:
 
-> Enable MMC UHS support for to allow to enter the UHS
-> modes for MMC1.
+> At present only MCU domain ESM is probed, this means errors
+> occurred in mcu domain will be propagate to MCU_SAFETY_ERRORn.
+> MCU ESM accepts SOC_SAFETY_ERRORn signal as Error
+> event and propagate to MCU_SAFETY_ERRORn.[0]
 > 
+> Therefore adding support to probe both main domain and mcu
+> domain ESM.
 > 
+> [...]
 
 Applied to u-boot/master, thanks!
 
