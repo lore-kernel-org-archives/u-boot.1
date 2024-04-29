@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD2D1C25B5C
-	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 10:36:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31648C4345F
+	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 10:37:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2576F8897F;
-	Mon, 29 Apr 2024 12:36:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A01DA88951;
+	Mon, 29 Apr 2024 12:37:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kcTHX07p";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TfnST/cg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79A7A8897E; Mon, 29 Apr 2024 12:36:38 +0200 (CEST)
-Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
- [IPv6:2607:f8b0:4864:20::102e])
+ id 747528897D; Mon, 29 Apr 2024 12:37:06 +0200 (CEST)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52B6A880B5
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 12:36:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 582EA880B5
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 12:37:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pj1-x102e.google.com with SMTP id
- 98e67ed59e1d1-2b0fb1b6acfso424230a91.3
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 03:36:36 -0700 (PDT)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2abae23d682so1128792a91.3
+ for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 03:37:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714386995; x=1714991795; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1714387023; x=1714991823; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ko80OFDnPPQYO5EDXIcBKer+RH/rHjE+ExbFv/2OT+g=;
- b=kcTHX07pE6XzWSdh23gErD1pzs3+cthh/vyDwst/diM+pnhPhForzsxOBLVKMty/06
- 2lSXMZlsbyDeppTBAmLBkE2gruxztAQTNpbSMWhGnGmJcgUr07z6fXCZt950J0g/H3fi
- tlexLuFVRNEF3IzJajzSHB1xp7MfOXM8RFTYsisJVzWFtvB111n1k8yewQkdi67FQhtB
- KugpW0kbteBKXm0NdEjPYOnbujjEtKQ5kS6E/PplD0owXHJU+BtjykTbKwbKIgq2ANBj
- zvlD9lkt9fBv1ukbhLRr6O44HWUraKzs+G28jOmql+U/60FDEk5EowjhdXWOa6+qRVEd
- bxXg==
+ bh=aSWRkZNbKPUUzk7wXbJuhDm2nm44SvB4sxKAMB7DHZ4=;
+ b=TfnST/cgU/CMZPuVVVQLWNpjzs2K6YvVUnaKGRUDZQ+ztpO8OEZCtDaw2RSqVK5cuU
+ c+m9p7xi3mWjA7JPTJgYNV3DrNYjQRT36Y3BA6EMgb4JV2GPCBSWPrC1bTyO61vKDrv1
+ vXxYsXzohiPKzj8oav2o1W2/hXMKGLgnyQ2+SlxpjZiqiQMnXF0iuz1MGJG8qNyJ/WBB
+ Bt0FH0w5G8bQ725n8gvzPjIDcUkuPmyiP+zDYItOzjVFLQdoQiskbG3IVV0Duo1Z7ALY
+ OrSe6Q5V9TouG1GE0sIsR27z7XytqOLCAccayAaAmDRWqma0aa+MAMLBWI0UM1w3/gUF
+ ymJA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714386995; x=1714991795;
+ d=1e100.net; s=20230601; t=1714387023; x=1714991823;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ko80OFDnPPQYO5EDXIcBKer+RH/rHjE+ExbFv/2OT+g=;
- b=tTk0niFV+IZbJS1+3Po6sBnFy72EJOFKOljlVe20vu00f4uheUiA2VHJmCEaDBSRg9
- rR7jKe4G4QjMqFz8n8iP6TT21iALkrY0NQ5PrkHtlVegzmTX4WnsuBIgkqcbj2ssQ2+U
- JQcJfB7mJfW0n9I+wOy0f7NcytnlWMS9+PnnqOeQ8G/uPkf17TB/q7hOANf3c4UEl45J
- x27uYAjJJwPbwve22rmFjqwe1NbtY/Rk1Q7cFy8hRTcLsEvZSQsXJLLisJAePESO0/GK
- zdtH+vLP3V5PjhYD6/x9g7iSPGBTGDA64HmCYqVDipwmqhVKa79XtKcfsqajTL6BH3/O
- WBUw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVj5U8eNkiBBQ+K64N+bEjBovpdPWF86fz+bDn66ly63DUH0dbPTA+nCmDpoKPWYf1OQ/05NoAAUsJ1NatuH28ZgyktUQ==
-X-Gm-Message-State: AOJu0Yx3PLYZL+3Fd7F/Bl3oqPNeLF24CaRz9kjPb5W80LNWBGb/efKb
- qxBjKmrRBubieaVAsZCLkR3+CiwcHlv1lVr6xjJf5etATGr9Q4yEZFiCgS1ZvXfuIz3CP+5iKwl
- CE+8fiI/2R89ZSnqJBFWll2pE8kZtvw==
-X-Google-Smtp-Source: AGHT+IF4/zkse32siyzmX8Q2HHBFLe6pknlFinSlHVBgSfU/SR867P4yGLhHNfRpZ62pcnPA5SNPIA8LHuRBOFzAdm0=
-X-Received: by 2002:a17:90a:d081:b0:2ac:69b:886b with SMTP id
- k1-20020a17090ad08100b002ac069b886bmr9598681pju.1.1714386994836; Mon, 29 Apr
- 2024 03:36:34 -0700 (PDT)
+ bh=aSWRkZNbKPUUzk7wXbJuhDm2nm44SvB4sxKAMB7DHZ4=;
+ b=SXLN6Sws50+ChGRmVqJuIIjbDLTkziUhDwOH2Up3OPCmRA83iHpxZyNME3aCw9WAEU
+ 62POwcIW6x0c4NVX0GGYRc9XW4/aHGKYZQqprPWsFRkSh2XytevlmMmTAyKY9dTORCQc
+ MStAd2cJbulNOl0Gb5NuBRIglewjbLyA3iTKkCGkF9X2OWpV8w6daEgqYpFIg9GMVX7J
+ 4rdG77L9aHBIdhBmq/4nAfNp+4iUALL9CsrSYO+W8EqkS4NDANIVJLxt+BNZQXW9QFle
+ qyAEpSHEzyXE4uUbUWWcHnzRSt4LAGGFLFq+atVag/OlndlGu6XLSTQbo+kzbH1v4kdJ
+ VX6A==
+X-Gm-Message-State: AOJu0Yy1HC8Fgfac5sNmUImWAH/AJe9dA44ZtVTk7hRey4wLMM9Vn7gw
+ ZC3FAd1/k9KyKGvRYaNRGUGUmR+38pSesDsdcdZV8FKCoQG3gJEwoh4JAWT+HkIo3YTB9xPMBfl
+ 3Uo8z0vKP3S43aXaA5e43a20pN5M=
+X-Google-Smtp-Source: AGHT+IGWDz6FhwaE3I1Q067+wnvPmre1YaWCTA6plCZLZBSh85dpcJUvj/eCy3WohWUulKh94t6jaNvZBzMRdzviAEU=
+X-Received: by 2002:a17:90a:fe0b:b0:2ab:be54:85ed with SMTP id
+ ck11-20020a17090afe0b00b002abbe5485edmr9570862pjb.0.1714387022853; Mon, 29
+ Apr 2024 03:37:02 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240423155701.33657-1-francesco@dolcini.it>
-In-Reply-To: <20240423155701.33657-1-francesco@dolcini.it>
+References: <20240423231526.536883-1-marex@denx.de>
+In-Reply-To: <20240423231526.536883-1-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Mon, 29 Apr 2024 07:36:23 -0300
-Message-ID: <CAOMZO5CE6YWz8nZ7_o6N1Mj3kaXVygk6bKAixZoZ17TY-ary_w@mail.gmail.com>
-Subject: Re: [PATCH v1] board: toradex: colibri-imx(6ull|imx7): Fix missing
- fdt_fixup boot error
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Tom Rini <trini@konsulko.com>, 
- Francesco Dolcini <francesco.dolcini@toradex.com>, u-boot@lists.denx.de
+Date: Mon, 29 Apr 2024 07:36:51 -0300
+Message-ID: <CAOMZO5CMfmick0dP50jF7HXVc7U0UeRD0vkX5OPep9vw=V6YXw@mail.gmail.com>
+Subject: Re: [PATCH] ARM: dts: imx: Enable PCIe and NVMe on DH i.MX8M Plus
+ DHCOM PDK3
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Stefano Babic <sbabic@denx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@dh-electronics.com
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -92,24 +91,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 23, 2024 at 12:57=E2=80=AFPM Francesco Dolcini <francesco@dolci=
-ni.it> wrote:
+On Tue, Apr 23, 2024 at 8:15=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
-> From: Francesco Dolcini <francesco.dolcini@toradex.com>
+> Enable PCIe/NVMe support on DH i.MX8M Plus DHCOM PDK3. Except for
+> the configuration options which are enabled, add slight adjustment
+> to board u-boot.dtsi, which is necessary as there is currently no
+> driver for the I2C PCIe clock generator. Since the generator is
+> strapped to be always on, it is possible to supplant the generator
+> functionality by fixed-clock.
 >
-> In commit 51aaaf5e7975 ("board: toradex: imx: Remove not needed env varia=
-bles")
-> the empty definition of fdt_fixup variable was removed, however this was
-> still referenced from the boot command leading to boot failures:
->  ## Error: \"fdt_fixup\" not defined`
->
-> Fix this by removing "run fdt_fixup" from the boot command and instead
-> enable CONFIG_OF_ENV_SETUP in the defconfig that would achieve the same
-> but in a more robust way (it works fine even if the variable is not
-> defined).
->
-> Fixes: 51aaaf5e7975 ("board: toradex: imx: Remove not needed env variable=
-s")
-> Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
 Applied, thanks.
