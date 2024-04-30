@@ -4,38 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A53C9C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 16:40:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A9AAC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 16:55:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 186F288519;
-	Tue, 30 Apr 2024 18:40:52 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D9F59886BF;
+	Tue, 30 Apr 2024 18:55:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=rivoreo.one
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87D5688518; Tue, 30 Apr 2024 18:40:50 +0200 (CEST)
+ id 160D28870C; Tue, 30 Apr 2024 18:55:24 +0200 (CEST)
 Received: from tianjin2.rivoreo.one (unknown [60.25.139.170])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 82447888E6
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 18:40:48 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DBF4D885F4
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 18:55:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=rivoreo.one
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=whr@rivoreo.one
 Received: from [10.1.105.1] (localhost [127.0.0.1])
- by tianjin2.rivoreo.one (Postfix) with ESMTP id C072772168;
- Wed,  1 May 2024 00:40:38 +0800 (CST)
+ by tianjin2.rivoreo.one (Postfix) with ESMTP id 4C70672179;
+ Wed,  1 May 2024 00:55:10 +0800 (CST)
 Received: from 10.1.107.31 (SquirrelMail authenticated user whr)
- by _ with HTTP; Wed, 1 May 2024 00:40:38 +0800
-Message-ID: <f1c277becf620ba6fd949758704076ce.squirrel@_>
-Date: Wed, 1 May 2024 00:40:38 +0800
-Subject: [PATCH] zfs: fix function 'zlib_decompress' pointlessly calling itself
+ by _ with HTTP; Wed, 1 May 2024 00:55:10 +0800
+Message-ID: <98e71d2cd17cd9992e60190ede4a5b03.squirrel@_>
+Date: Wed, 1 May 2024 00:55:10 +0800
+Subject: [PATCH v3] sandbox: make function 'do_undefined' properly compiles
+ for PowerPC
 From: "WHR" <whr@rivoreo.one>
 To: u-boot@lists.denx.de
-Cc: "Tom Rini" <trini@konsulko.com>,
- mwleeds@mailtundra.com
+Cc: "Heinrich Schuchardt" <xypron.glpk@gmx.de>,
+ "Simon Glass" <sjg@chromium.org>, "Tom Rini" <trini@konsulko.com>
 User-Agent: SquirrelMail/1.4.23 [SVN]
 MIME-Version: 1.0
-Content-Type: multipart/mixed;boundary="----=_20240501004038_73634"
+Content-Type: multipart/mixed;boundary="----=_20240501005510_91274"
 X-Priority: 3 (Normal)
 Importance: Normal
 X-BeenThere: u-boot@lists.denx.de
@@ -54,50 +55,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-------=_20240501004038_73634
+------=_20240501005510_91274
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-In order to prevent crashing due to infinite recursion and actually
-decompress the requested data, call the zlib function 'uncompress'
-instead.
+The 2 bytes 0xffff is too short for being a PowerPC instruction, resulting
+in an error similar to:
+    /tmp/ccW8yjie.s: Assembler messages:
+    /tmp/ccW8yjie.s: Error: unaligned opcodes detected in executable segment
+    /tmp/ccW8yjie.s:223: Error: instruction address is not a multiple of 4 
+    make[2]: *** [/tmp/ccyF4HIC.mk:17: /tmp/ccCKUFuF.ltrans5.ltrans.o] Error 1
 
 Signed-off-by: WHR <msl0000023508@gmail.com>
 
 ---
 v2:
 Resubmit with diff content in plain text.
+v3:
+Reformat commit message body that was previously mangled by my email client.
+
+ cmd/sandbox/exception.c | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 
-------=_20240501004038_73634
+------=_20240501005510_91274
 Content-Type: text/plain;
- name="0001-zfs-fix-function-zlib_decompress-pointlessly-calling"
+ name="0001-sandbox-make-function-do_undefined-properly-compiles"
 Content-Transfer-Encoding: 8bit
 Content-Disposition: attachment;
- filename="0001-zfs-fix-function-zlib_decompress-pointlessly-calling"
+ filename="0001-sandbox-make-function-do_undefined-properly-compiles"
 
-diff --git a/fs/zfs/zfs.c b/fs/zfs/zfs.c
-index bfc11fa667..4896cc18ef 100644
---- a/fs/zfs/zfs.c
-+++ b/fs/zfs/zfs.c
-@@ -17,6 +17,7 @@
- #include <linux/time.h>
- #include <linux/ctype.h>
- #include <asm/byteorder.h>
-+#include <u-boot/zlib.h>
- #include "zfs_common.h"
- #include "div64.h"
- 
-@@ -183,7 +184,8 @@ static int
- zlib_decompress(void *s, void *d,
- 				uint32_t slen, uint32_t dlen)
+diff --git a/cmd/sandbox/exception.c b/cmd/sandbox/exception.c
+index cfa153da26..f9c847d8ff 100644
+--- a/cmd/sandbox/exception.c
++++ b/cmd/sandbox/exception.c
+@@ -19,7 +19,11 @@ static int do_sigsegv(struct cmd_tbl *cmdtp, int flag, int argc,
+ static int do_undefined(struct cmd_tbl *cmdtp, int flag, int argc,
+ 			char *const argv[])
  {
--	if (zlib_decompress(s, d, slen, dlen) < 0)
-+	uLongf z_dest_len = dlen;
-+	if (uncompress(d, &z_dest_len, s, slen) != Z_OK)
- 		return ZFS_ERR_BAD_FS;
- 	return ZFS_ERR_NONE;
++#ifdef __powerpc__
++	asm volatile (".long 0xffffffff\n");
++#else
+ 	asm volatile (".word 0xffff\n");
++#endif
+ 	return CMD_RET_FAILURE;
  }
-------=_20240501004038_73634--
+ 
+------=_20240501005510_91274--
 
 
