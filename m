@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4213C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 12:18:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2261BC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 13:36:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BF83889BB;
-	Tue, 30 Apr 2024 14:18:03 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=timesys.com
+	by phobos.denx.de (Postfix) with ESMTP id 5A471885A4;
+	Tue, 30 Apr 2024 15:36:08 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=timesys-com.20230601.gappssmtp.com header.i=@timesys-com.20230601.gappssmtp.com header.b="UbaTew6Q";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XOqHupp2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF20F889B3; Tue, 30 Apr 2024 12:24:07 +0200 (CEST)
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com
- [IPv6:2a00:1450:4864:20::12b])
+ id E36D08824A; Tue, 30 Apr 2024 15:36:06 +0200 (CEST)
+Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
+ [IPv6:2607:f8b0:4864:20::332])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25256887B8
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 12:24:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9504E8824A
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 15:36:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=timesys.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=piotr.wojtaszczyk@timesys.com
-Received: by mail-lf1-x12b.google.com with SMTP id
- 2adb3069b0e04-51b09c3a111so7777342e87.1
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 03:24:04 -0700 (PDT)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x332.google.com with SMTP id
+ 46e09a7af769-6eb8ea5ac95so3433240a34.2
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 06:36:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=timesys-com.20230601.gappssmtp.com; s=20230601; t=1714472644; x=1715077444;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=EbYWJ777GaNT+/g2AmZX4TYnTOQzzxU0uNtXFduag+c=;
- b=UbaTew6QQhBDZldaEMTu8S8E0vZNNJ8BL1uL1/XYdvJL4n2GPc+f22ySpCyVRI8yam
- L5Tj1zalYWnnuQ4ARkGeD57Q+kAiLdhjFcuhUYtTYtvx2xl4H+Wxn5TzJFKfxbKXYr9x
- XaXwVSI54ZeG/LnKepCMeAA4jSWmazjBhMoskB0gThL4St+zWlmW/MNKVacrF/5kpUnI
- 0kL6NMn2easGssW5E5UURibyl4T5w9odLpkvBInzCShAER6s2FEY2Ey7lfwlK0LvNwsG
- 52nZeG2SNv6ipjP18fisGKdOkamF3lhihTcOOtNTZbo8/3mlEPlNUaR0rZcWlJT8+1W4
- Gr5Q==
+ d=konsulko.com; s=google; t=1714484163; x=1715088963; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=6jFUKq3f7KH2tplJyy2uRjjP50APNad7TIAGVaB6ef4=;
+ b=XOqHupp2yGzWM3rLDVCWaHS6+b3qC9yGtlSwRxo+RVxquUbrcYgUZ3/VOBk/w7B1K0
+ kxNrLjy9EZG6SDbm44bgqmzCDVZSiwMAsIlTDzHtgDAUMI8fAr1yrMcRhpCBAgqrqGGW
+ +Uqg9b8p18LnYFx2LxePQUb0bb8Vu2fjekkCM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714472644; x=1715077444;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EbYWJ777GaNT+/g2AmZX4TYnTOQzzxU0uNtXFduag+c=;
- b=fGZ2GOyWyhxzNf+iWpE8rqILMhHyTbNEsI8padDJ6aapX4SM3H/D82wAKDf3Aow+Sy
- bcjcYbm1pEm4iTHZgtraGD6JCdcgN2kb2iAFB+tjHRmlvK3IdFofZI9V35mdO/4V5d08
- VhjXCkXNK0jv7sNfdRmD8L87k/MK58SYbeuAUJA42DzkAXzWIkQArz3RhuDxS4MyHaBk
- PbAMqAteIa2YlYca0zhXl4HajjPLGZT6cjZx2d4xXf0mpj56lfF3M7yqEFh99LY3ZPyZ
- z6GxQm8ZA/qNOKF+HyvPhKDeuxYhr4zbPbuWUsEF8X2NoNEWZX6u8envK7CEd9ZEzc3h
- pItw==
-X-Gm-Message-State: AOJu0YxIb7M/lnFZEofFsA/nv5bwzjdUK4OU9O/uV0Z22MSlkSU31mx+
- 8nB4HdrJ2LrujOhqavmcQzMMUR0K44EtjBPO7zSyGyMjsveQPO3xlQyltTX74/eB95HOI/sRGnw
- w
-X-Google-Smtp-Source: AGHT+IGC+yv0MYSgZSGwB3SQ7jRBEh6JOOTkHa6vdzDpOoOFiZWnsvk10qHX6Hi6NwkOu2+5f5vZKg==
-X-Received: by 2002:a05:6512:2f0:b0:516:a6ff:2467 with SMTP id
- m16-20020a05651202f000b00516a6ff2467mr9207329lfq.0.1714472643715; 
- Tue, 30 Apr 2024 03:24:03 -0700 (PDT)
-Received: from localhost.localdomain ([91.216.213.152])
+ d=1e100.net; s=20230601; t=1714484163; x=1715088963;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6jFUKq3f7KH2tplJyy2uRjjP50APNad7TIAGVaB6ef4=;
+ b=P+AphN2nm1SEqqutnwFsMZFJkDGDE7/r2ufQZNYvEccFVodTxYqYApw6STq9bnX1cD
+ xvsrW2dtSInYbaI7MB8muRNqXbX3Z0VbJfajn2UrDh7rR4vjS8vh52JJaWrVgAxB1aTE
+ VIE//zrLCyqzIiEutDLhUH+r2Fy2YetV8oqsMaTRZXyViLdntq+1eiLkY7czDJRq+1sT
+ GRinhUSmC430E4bm4Eh434uhkO+QlguOm/okQGEyAbcNLV72IFJglIOmOOPRMcNGecyh
+ 9xK3c34+DXPRkobjfWKUhlBzoMVQz/AU9xzBSPH4o75jmrkJ8SV+Kyxv1itl7APnbvbK
+ CmtA==
+X-Gm-Message-State: AOJu0Yx4unaC9Op3mkCq2QQCRodva33SUYy/A1rRXQk2Dzk7XJj+DP5U
+ Xwcc3V25IZWz8UIfCXnqXAwsFCGyx4BsU4rRHOKKKHIEseqlMR/plVfTBKEF6qoTO0UC+xdg+xQ
+ e4FP5DQ==
+X-Google-Smtp-Source: AGHT+IFU70SbdN8Zy5qC42BRHy8O/gXLV7fcwtmsy9ph8ZKa2MuBZRAgxTldpdbGzFtofVeCAqFskw==
+X-Received: by 2002:a05:6830:12d8:b0:6ee:32ab:8124 with SMTP id
+ a24-20020a05683012d800b006ee32ab8124mr2831233otq.25.1714484162713; 
+ Tue, 30 Apr 2024 06:36:02 -0700 (PDT)
+Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- k9-20020a17090666c900b00a52274ee0a7sm15111201ejp.171.2024.04.30.03.24.02
+ f12-20020a05621400cc00b006a0d0d792cesm1743877qvs.83.2024.04.30.06.36.01
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 03:24:03 -0700 (PDT)
-From: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
+ Tue, 30 Apr 2024 06:36:02 -0700 (PDT)
+From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
- Ben Dooks <ben.dooks@sifive.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] fs: ubifs: Add support for ZSTD decompression
-Date: Tue, 30 Apr 2024 12:23:58 +0200
-Message-Id: <20240430102358.11163-1-piotr.wojtaszczyk@timesys.com>
-X-Mailer: git-send-email 2.25.1
+Subject: [PATCH 01/33] arm: mach-versatile: Remove dead code
+Date: Tue, 30 Apr 2024 07:35:27 -0600
+Message-Id: <20240430133559.1836389-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Tue, 30 Apr 2024 14:18:01 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,128 +86,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Signed-off-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
+This platform is no longer supported in tree, remove.
+
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
+ arch/arm/mach-versatile/Makefile |  7 ----
+ arch/arm/mach-versatile/reset.S  | 28 ---------------
+ arch/arm/mach-versatile/timer.c  | 62 --------------------------------
+ 3 files changed, 97 deletions(-)
+ delete mode 100644 arch/arm/mach-versatile/Makefile
+ delete mode 100644 arch/arm/mach-versatile/reset.S
+ delete mode 100644 arch/arm/mach-versatile/timer.c
 
- fs/ubifs/ubifs-media.h |  2 ++
- fs/ubifs/ubifs.c       | 55 ++++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 55 insertions(+), 2 deletions(-)
-
-diff --git a/fs/ubifs/ubifs-media.h b/fs/ubifs/ubifs-media.h
-index 2b5b26a01b..299d80f928 100644
---- a/fs/ubifs/ubifs-media.h
-+++ b/fs/ubifs/ubifs-media.h
-@@ -320,12 +320,14 @@ enum {
-  * UBIFS_COMPR_NONE: no compression
-  * UBIFS_COMPR_LZO: LZO compression
-  * UBIFS_COMPR_ZLIB: ZLIB compression
-+ * UBIFS_COMPR_ZSTD: ZSTD compression
-  * UBIFS_COMPR_TYPES_CNT: count of supported compression types
-  */
- enum {
- 	UBIFS_COMPR_NONE,
- 	UBIFS_COMPR_LZO,
- 	UBIFS_COMPR_ZLIB,
-+	UBIFS_COMPR_ZSTD,
- 	UBIFS_COMPR_TYPES_CNT,
- };
- 
-diff --git a/fs/ubifs/ubifs.c b/fs/ubifs/ubifs.c
-index a509584e5d..4df7cbb951 100644
---- a/fs/ubifs/ubifs.c
-+++ b/fs/ubifs/ubifs.c
-@@ -27,6 +27,11 @@
- #include <linux/err.h>
- #include <linux/lzo.h>
- 
-+#if IS_ENABLED(CONFIG_ZSTD)
-+#include <linux/zstd.h>
-+#include <abuf.h>
-+#endif
-+
- DECLARE_GLOBAL_DATA_PTR;
- 
- /* compress.c */
-@@ -42,6 +47,26 @@ static int gzip_decompress(const unsigned char *in, size_t in_len,
- 		      (unsigned long *)out_len, 0, 0);
- }
- 
-+#if IS_ENABLED(CONFIG_ZSTD)
-+static int zstd_decompress_wrapper(const unsigned char *in, size_t in_len,
-+			   unsigned char *out, size_t *out_len)
-+{
-+	struct abuf abuf_in, abuf_out;
-+	int ret;
-+
-+	abuf_init_set(&abuf_in, (void *)in, in_len);
-+	abuf_init_set(&abuf_out, (void *)out, *out_len);
-+
-+	ret = zstd_decompress(&abuf_in, &abuf_out);
-+	if (ret < 0) {
-+		return ret;
-+	}
-+
-+	*out_len = ret;
-+	return 0;
-+}
-+#endif
-+
- /* Fake description object for the "none" compressor */
- static struct ubifs_compressor none_compr = {
- 	.compr_type = UBIFS_COMPR_NONE,
-@@ -71,8 +96,22 @@ static struct ubifs_compressor zlib_compr = {
- 	.decompress = gzip_decompress,
- };
- 
-+#if IS_ENABLED(CONFIG_ZSTD)
-+static struct ubifs_compressor zstd_compr = {
-+	.compr_type = UBIFS_COMPR_ZSTD,
-+#ifndef __UBOOT__
-+	.comp_mutex = &zstd_enc_mutex,
-+	.decomp_mutex = &zstd_dec_mutex,
-+#endif
-+	.name = "zstd",
-+	.capi_name = "zstd",
-+	.decompress = zstd_decompress_wrapper,
-+};
-+#endif
-+
-+
- /* All UBIFS compressors */
--struct ubifs_compressor *ubifs_compressors[UBIFS_COMPR_TYPES_CNT];
-+struct ubifs_compressor *ubifs_compressors[UBIFS_COMPR_TYPES_CNT] = {NULL};
- 
- 
- #ifdef __UBOOT__
-@@ -166,8 +205,14 @@ int ubifs_decompress(const struct ubifs_info *c, const void *in_buf,
- 
- 	compr = ubifs_compressors[compr_type];
- 
-+	if (unlikely(!compr)) {
-+		ubifs_err(c, "compression type %d is not compiled in", compr_type);
-+		return -EINVAL;
-+	}
-+
- 	if (unlikely(!compr->capi_name)) {
--		ubifs_err(c, "%s compression is not compiled in", compr->name);
-+		ubifs_err(c, "%s compression is not compiled in",
-+				compr->name ? compr->name : "unknown");
- 		return -EINVAL;
- 	}
- 
-@@ -232,6 +277,12 @@ int __init ubifs_compressors_init(void)
- 	if (err)
- 		return err;
- 
-+#if IS_ENABLED(CONFIG_ZSTD)
-+	err = compr_init(&zstd_compr);
-+	if (err)
-+		return err;
-+#endif
-+
- 	err = compr_init(&none_compr);
- 	if (err)
- 		return err;
+diff --git a/arch/arm/mach-versatile/Makefile b/arch/arm/mach-versatile/Makefile
+deleted file mode 100644
+index 858ca9414c05..000000000000
+--- a/arch/arm/mach-versatile/Makefile
++++ /dev/null
+@@ -1,7 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0+
+-#
+-# (C) Copyright 2000-2006
+-# Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+-
+-obj-y	= timer.o
+-obj-y	+= reset.o
+diff --git a/arch/arm/mach-versatile/reset.S b/arch/arm/mach-versatile/reset.S
+deleted file mode 100644
+index c7f1225fb298..000000000000
+--- a/arch/arm/mach-versatile/reset.S
++++ /dev/null
+@@ -1,28 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- *  armboot - Startup Code for ARM926EJS CPU-core
+- *
+- *  Copyright (c) 2003  Texas Instruments
+- *
+- *  ----- Adapted for OMAP1610 OMAP730 from ARM925t code ------
+- *
+- *  Copyright (c) 2001	Marius Gröger <mag@sysgo.de>
+- *  Copyright (c) 2002	Alex Züpke <azu@sysgo.de>
+- *  Copyright (c) 2002	Gary Jennejohn <garyj@denx.de>
+- *  Copyright (c) 2003	Richard Woodruff <r-woodruff2@ti.com>
+- *  Copyright (c) 2003	Kshitij <kshitij@ti.com>
+- */
+-
+-	.align	5
+-.globl reset_cpu
+-reset_cpu:
+-	ldr	r1, rstctl1	/* get clkm1 reset ctl */
+-	mov	r3, #0x0
+-	strh	r3, [r1]	/* clear it */
+-	mov	r3, #0x8
+-	strh	r3, [r1]	/* force dsp+arm reset */
+-_loop_forever:
+-	b	_loop_forever
+-
+-rstctl1:
+-	.word	0xfffece10
+diff --git a/arch/arm/mach-versatile/timer.c b/arch/arm/mach-versatile/timer.c
+deleted file mode 100644
+index b471412186d1..000000000000
+--- a/arch/arm/mach-versatile/timer.c
++++ /dev/null
+@@ -1,62 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0+
+-/*
+- * (C) Copyright 2003
+- * Texas Instruments <www.ti.com>
+- *
+- * (C) Copyright 2002
+- * Sysgo Real-Time Solutions, GmbH <www.elinos.com>
+- * Marius Groeger <mgroeger@sysgo.de>
+- *
+- * (C) Copyright 2002
+- * Sysgo Real-Time Solutions, GmbH <www.elinos.com>
+- * Alex Zuepke <azu@sysgo.de>
+- *
+- * (C) Copyright 2002-2004
+- * Gary Jennejohn, DENX Software Engineering, <garyj@denx.de>
+- *
+- * (C) Copyright 2004
+- * Philippe Robin, ARM Ltd. <philippe.robin@arm.com>
+- */
+-
+-#include <common.h>
+-
+-#define TIMER_ENABLE	(1 << 7)
+-#define TIMER_MODE_MSK	(1 << 6)
+-#define TIMER_MODE_FR	(0 << 6)
+-#define TIMER_MODE_PD	(1 << 6)
+-
+-#define TIMER_INT_EN	(1 << 5)
+-#define TIMER_PRS_MSK	(3 << 2)
+-#define TIMER_PRS_8S	(1 << 3)
+-#define TIMER_SIZE_MSK	(1 << 2)
+-#define TIMER_ONE_SHT	(1 << 0)
+-
+-int timer_init (void)
+-{
+-	ulong	tmr_ctrl_val;
+-
+-	/* 1st disable the Timer */
+-	tmr_ctrl_val = *(volatile ulong *)(CFG_SYS_TIMERBASE + 8);
+-	tmr_ctrl_val &= ~TIMER_ENABLE;
+-	*(volatile ulong *)(CFG_SYS_TIMERBASE + 8) = tmr_ctrl_val;
+-
+-	/*
+-	 * The Timer Control Register has one Undefined/Shouldn't Use Bit
+-	 * So we should do read/modify/write Operation
+-	 */
+-
+-	/*
+-	 * Timer Mode : Free Running
+-	 * Interrupt : Disabled
+-	 * Prescale : 8 Stage, Clk/256
+-	 * Tmr Siz : 16 Bit Counter
+-	 * Tmr in Wrapping Mode
+-	 */
+-	tmr_ctrl_val = *(volatile ulong *)(CFG_SYS_TIMERBASE + 8);
+-	tmr_ctrl_val &= ~(TIMER_MODE_MSK | TIMER_INT_EN | TIMER_PRS_MSK | TIMER_SIZE_MSK | TIMER_ONE_SHT );
+-	tmr_ctrl_val |= (TIMER_ENABLE | TIMER_PRS_8S);
+-
+-	*(volatile ulong *)(CFG_SYS_TIMERBASE + 8) = tmr_ctrl_val;
+-
+-	return 0;
+-}
 -- 
-2.25.1
+2.34.1
 
