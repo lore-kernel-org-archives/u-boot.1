@@ -4,39 +4,38 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0258C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 15:38:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15848C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 16:00:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ED5588A67;
-	Tue, 30 Apr 2024 17:38:29 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 86B9388180;
+	Tue, 30 Apr 2024 18:00:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=rivoreo.one
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7A8AF88A68; Tue, 30 Apr 2024 17:38:27 +0200 (CEST)
+ id DA5AB889AD; Tue, 30 Apr 2024 18:00:53 +0200 (CEST)
 Received: from tianjin2.rivoreo.one (unknown [60.25.139.170])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BF88884A2
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 17:38:25 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id BAA55880AD
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 18:00:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=rivoreo.one
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=whr@rivoreo.one
 Received: from [10.1.105.1] (localhost [127.0.0.1])
- by tianjin2.rivoreo.one (Postfix) with ESMTP id C7C3A72144;
- Tue, 30 Apr 2024 23:38:14 +0800 (CST)
+ by tianjin2.rivoreo.one (Postfix) with ESMTP id 2578B7230D;
+ Wed,  1 May 2024 00:00:42 +0800 (CST)
 Received: from 10.1.107.31 (SquirrelMail authenticated user whr)
- by _ with HTTP; Tue, 30 Apr 2024 23:38:14 +0800
-Message-ID: <51ddf37de37df8afe45d683983b519f9.squirrel@_>
-Date: Tue, 30 Apr 2024 23:38:14 +0800
-Subject: [PATCH] zfs: recognize zpools formatted with features support as
- used in OpenZFS
+ by _ with HTTP; Wed, 1 May 2024 00:00:42 +0800
+Message-ID: <db1fdfc216d720c7ce02e249e83d7147.squirrel@_>
+Date: Wed, 1 May 2024 00:00:42 +0800
+Subject: [PATCH] zfs: recognize zpools formatted with features support
 From: "WHR" <whr@rivoreo.one>
 To: u-boot@lists.denx.de
 Cc: "Tom Rini" <trini@konsulko.com>,
  mwleeds@mailtundra.com
 User-Agent: SquirrelMail/1.4.23 [SVN]
 MIME-Version: 1.0
-Content-Type: multipart/mixed;boundary="----=_20240430233814_91499"
+Content-Type: multipart/mixed;boundary="----=_20240501000042_39236"
 X-Priority: 3 (Normal)
 Importance: Normal
 X-BeenThere: u-boot@lists.denx.de
@@ -55,7 +54,7 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-------=_20240430233814_91499
+------=_20240501000042_39236
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
@@ -69,7 +68,7 @@ Signed-off-by: WHR <msl0000023508@gmail.com>
 
 
 
-------=_20240430233814_91499
+------=_20240501000042_39236
 Content-Type: text/plain;
  name="0001-zfs-recognize-zpools-formatted-with-features-support"
 Content-Transfer-Encoding: 8bit
@@ -129,6 +128,18 @@ index 4896cc18ef..3575c23a42 100644
  		free(nvlist);
  		printf("SPA version too new %llu > %llu\n",
  			   (unsigned long long) version,
-------=_20240430233814_91499--
+diff --git a/include/zfs/zfs.h b/include/zfs/zfs.h
+index 17b93c10c8..72d87452dd 100644
+--- a/include/zfs/zfs.h
++++ b/include/zfs/zfs.h
+@@ -15,6 +15,7 @@
+  * On-disk version number.
+  */
+ #define	SPA_VERSION			28ULL
++#define	FEATURES_SUPPORTED_SPA_VERSION	5000ULL
+ 
+ /*
+  * The following are configuration names used in the nvlist describing a pool's
+------=_20240501000042_39236--
 
 
