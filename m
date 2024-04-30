@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FD02C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 13:40:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0257EC10F16
+	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 13:40:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68C7288A78;
+	by phobos.denx.de (Postfix) with ESMTP id D610288A7E;
 	Tue, 30 Apr 2024 15:36:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="G/OFFe7Z";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q0PevCMW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D45588A5E; Tue, 30 Apr 2024 15:36:33 +0200 (CEST)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id 4221C88A61; Tue, 30 Apr 2024 15:36:33 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AC20F88A6A
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 15:36:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FE8888A70
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 15:36:30 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6a0b4622ea0so17504046d6.2
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 06:36:29 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6a0c8fb3540so20775246d6.1
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 06:36:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714484188; x=1715088988; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714484189; x=1715088989; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=NuT15ewAdCx3dIZpIl3gQetej90w+XOx+TLHYQrvKiA=;
- b=G/OFFe7ZsEKyJvILwmytzpRYFV7kr4gYPrsXmh4fXQGhw+SW1tZ1/ksZMI5dTe31T2
- A2VT0FmTzUNHbMBeskY89AFyKrQGP48TbLIG7hJIEdOifsdlhW2jPFkc9Sn9hNX2ieEo
- JQ3ZcQ+lMbA4XThPeowqLEdNlTJCVEgoawTXg=
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=2J/DWM4xCtEpXUg07v+G9OLgSMTW+lxfEOOS3W7jSNg=;
+ b=q0PevCMWh/iDlCUNCvLjyiPAPWQogbbbNJDZMkzrXaFD2o8UxMNYreqZJIEa6mT5ND
+ dGYSIREN7BT6eRNepM4/skygQx+uhBvBivenWrxFDB2YfP5ceArgwYdm+oEJ49FuIf6k
+ qhKH8ib0ymsy7YSpdaY5e58RNprbsXvVSuLtU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714484188; x=1715088988;
+ d=1e100.net; s=20230601; t=1714484189; x=1715088989;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=NuT15ewAdCx3dIZpIl3gQetej90w+XOx+TLHYQrvKiA=;
- b=jBpbETF2coJkCQ4aOpV95A6yUqTjL5HLEEeq9uwjgUBvr0/N2ZnTMh9CsaDV5ryNfT
- IYpKqHihDLuImG8e62AI9oMW3em310cluW+OsVmUZtOndtiggkNAUlahuL8NAIe34Gq1
- aVJZq1xyIH3Pm9DpaNqBcVstas6pvDOXOaqfjF6ggjU28U8vbOx65K8V97E8srVMbMcV
- VK5oWouV9X0miLMEgGp0slR50kInEA9u4pFaBNRKVrNUm3bHT8EcVB5vvwl/HpubJD5R
- jfJrx3PB8JUmf6brjrj8Y3YxK0hOwrxNsBUbXL8PNXTHRkkqF+wPIbeng7rOlOx7NKyE
- avzA==
-X-Gm-Message-State: AOJu0YxXiBzR+jd3HtRW/AQ1+miZSsfmYSOTxW436Z0hB86y/FzuItBU
- 4xGfBQH7Urcpa2fvbGSYF9JLAui4aPQ5bxhV5n3o3mIeZgOnAfsWTMoqnG18AuX+GaY/oAtCXMM
- F9HSsDA==
-X-Google-Smtp-Source: AGHT+IF2Sz+8pg2JV5D8kOOeE7jf0y+uZUZLeKfRzWRonDc5yAJiunGZhmN0nBkT7TiG1vyW3PwIBA==
-X-Received: by 2002:a05:6214:1d09:b0:6a0:669f:ff2c with SMTP id
- e9-20020a0562141d0900b006a0669fff2cmr14886988qvd.64.1714484188190; 
- Tue, 30 Apr 2024 06:36:28 -0700 (PDT)
+ bh=2J/DWM4xCtEpXUg07v+G9OLgSMTW+lxfEOOS3W7jSNg=;
+ b=C8qY9oBKgTaJF90N/KeWxVF+dUkSc+qYT3bo0Gu+PRMr3QWvdV9JhgI5xATKqZEZLv
+ vxbk/4nQ7RIgP4rEEInx1uymdp78HOmYkwHiiA94u24a5cz8Nits+E0LAHb1k3hTA2lm
+ rP3h023ZtrMql6URX3phMqY3QbDAEawfx3nqzW/0wgcrJn/99jLeclOd0gz80zCGa0An
+ uOJ2lg64p8hxIozaiNayzuEPMVEPQ+AXduVhj1ei0TRODQ8nysimPVjWj8xv9ReR4oar
+ vUd7NsKqYu3+7jFvPUNzVEaH0qvY0Oo3+5WFKzvwdaG/es7LiQ7J9AAK/MKEj+zirhDB
+ KS1g==
+X-Gm-Message-State: AOJu0YxoZgytl/V5wnSTdv3Vbg7MlEdNMLPigWhK1F0jms5rrjOgEu1e
+ 3kpT9bjS8mrqLY6FFz6yKUOWfROC63wOpnDg+wZiYZ9yIJto5aqiseBf49Am6u51xqrdt5KtYBA
+ Q2Lktzw==
+X-Google-Smtp-Source: AGHT+IECkCP8I5QYd6c0HjlPjJG1tAMVdtO1MwyN88QXLrK7aur9QrdTT7a6YhV13eo70Qf+HIiNVw==
+X-Received: by 2002:a05:6214:20c3:b0:69c:b559:547d with SMTP id
+ 3-20020a05621420c300b0069cb559547dmr5907667qve.25.1714484189221; 
+ Tue, 30 Apr 2024 06:36:29 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- f12-20020a05621400cc00b006a0d0d792cesm1743877qvs.83.2024.04.30.06.36.27
+ f12-20020a05621400cc00b006a0d0d792cesm1743877qvs.83.2024.04.30.06.36.28
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 06:36:27 -0700 (PDT)
+ Tue, 30 Apr 2024 06:36:28 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Peter Griffin <peter.griffin@linaro.org>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Subject: [PATCH 24/33] arm: histb: Remove <common.h> and add needed includes
-Date: Tue, 30 Apr 2024 07:35:50 -0600
-Message-Id: <20240430133559.1836389-24-trini@konsulko.com>
+Subject: [PATCH 25/33] arm: highbank: Remove <common.h> and add needed includes
+Date: Tue, 30 Apr 2024 07:35:51 -0600
+Message-Id: <20240430133559.1836389-25-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240430133559.1836389-1-trini@konsulko.com>
 References: <20240430133559.1836389-1-trini@konsulko.com>
@@ -90,42 +88,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove <common.h> from all mach-histb files and when needed add missing
-include files directly.
+Remove <common.h> from all mach-highbank files and when needed add
+missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Peter Griffin <peter.griffin@linaro.org>
-Cc: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
----
- arch/arm/mach-histb/board_common.c | 1 -
- arch/arm/mach-histb/sysmap-histb.c | 1 -
- 2 files changed, 2 deletions(-)
+ arch/arm/mach-highbank/timer.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/arch/arm/mach-histb/board_common.c b/arch/arm/mach-histb/board_common.c
-index a26c2066e028..84d02c9aca21 100644
---- a/arch/arm/mach-histb/board_common.c
-+++ b/arch/arm/mach-histb/board_common.c
+diff --git a/arch/arm/mach-highbank/timer.c b/arch/arm/mach-highbank/timer.c
+index 2423a0e37855..32ec6f0ac0e2 100644
+--- a/arch/arm/mach-highbank/timer.c
++++ b/arch/arm/mach-highbank/timer.c
 @@ -5,7 +5,6 @@
-  * (C) Copyright 2023 Yang Xiwen <forbidden405@outlook.com>
+  * Based on arm926ejs/mx27/timer.c
   */
  
 -#include <common.h>
- #include <fdtdec.h>
  #include <init.h>
- #include <asm/system.h>
-diff --git a/arch/arm/mach-histb/sysmap-histb.c b/arch/arm/mach-histb/sysmap-histb.c
-index 83a2bb941799..76414558379f 100644
---- a/arch/arm/mach-histb/sysmap-histb.c
-+++ b/arch/arm/mach-histb/sysmap-histb.c
-@@ -5,7 +5,6 @@
-  * (C) Copyright 2023 Yang Xiwen <forbidden405@outlook.com>
-  */
- 
--#include <common.h>
- #include <asm/armv8/mmu.h>
- 
- static struct mm_region histb_mem_map[] = {
+ #include <asm/io.h>
+ #include <asm/arch-armv7/systimer.h>
 -- 
 2.34.1
 
