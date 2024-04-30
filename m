@@ -4,130 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 296BFC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 08:55:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52987C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 10:00:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 531AB88500;
-	Tue, 30 Apr 2024 10:55:07 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 8D06F889B6;
+	Tue, 30 Apr 2024 12:00:09 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="s7PtXS5G";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="U5fHQrN0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F04488258; Tue, 30 Apr 2024 10:55:06 +0200 (CEST)
-Received: from NAM10-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam10on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2412::601])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EAF398899F; Tue, 30 Apr 2024 12:00:07 +0200 (CEST)
+Received: from mail-vs1-xe2c.google.com (mail-vs1-xe2c.google.com
+ [IPv6:2607:f8b0:4864:20::e2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 31F4788258
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 10:55:03 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 60749886BF
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 12:00:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=love.kumar@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=N0fWmc3cGR2IWDwQ/MrlPIMimV1Ry+0fENuDVDmKHkUh0baZmtV0+rBN10dfMPFJih8OTN2V7jzwHEacNgP1oIFiGU/KnZVtzSjD1xLV824HcmlurGE1Z9s2oEJ4VXLRw02lJ/ydDkWxmnCD8NzPnxAPYzv/t7SCP/KbNqIGIRuxxdgAMwtlY7Q+4ZPCbVl6zCMlph3TRdlnPUVg5W+n4ikylIHd3oDUWm/8NDGCfM+iCTWgChhovHKuR/MiKH30GDT3ODu27PqIaloTJ6ds2W3bYcCKP5SJYM1HbeRDlxtKo06dQmlOzx6SvgZD/3pqrc0lgF8aVT9GMVX/erYmtA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8bxpznPJ5ZJ8b0Xwxbz4W6/bAUmzQNVgyMVnNCJe+2o=;
- b=OxwPDfVqZnJOPGPEMohH0zyb/TKXTMAJ9i3JCgMAp7v8urNNAyWTy3f2eBttpW6rgJ/Al0lBW8ii3gsWThlCuJIATCY+HAf/tOx268GCyKINZVpLfiCu8T1fRqLtTf7bYuQr3j3NsSqJYKrP55vocQPw1TgwkAGzBBYLf3juVcmkQGgErLspXCmrPH+BBwATTSG8hW/sPBAaO38paF6mYhhmKJkFrNA4GT/ctlb4i1L6rAw/ByET0ED41lwpP3nu2EOrSDtLqMkKDHjbDBY3ZTc7n+h6k7K42zZKZh25gWPqelroOxolI/3+qJ0JS8LgB9aKuhr/L+TI0S+ef8bzRg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8bxpznPJ5ZJ8b0Xwxbz4W6/bAUmzQNVgyMVnNCJe+2o=;
- b=s7PtXS5Gfu5A8yWO9h5sGJ56bBmZqw8Y/DQTUX9f7KbDJX1N9GlE4UvvATNsnK838MFU/eY2yu/NrODn+rHluGkQwCVVZTMxCev9XL2MJs8tMlZvv1qGbUn20xFnM2ssPpPn7DPcZqYfCzrxoRNSw+dBSSYWg8TkSpfEnhZrWMk=
-Received: from MN2PR05CA0024.namprd05.prod.outlook.com (2603:10b6:208:c0::37)
- by PH7PR12MB5709.namprd12.prod.outlook.com (2603:10b6:510:1e0::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7519.36; Tue, 30 Apr
- 2024 08:54:59 +0000
-Received: from BL02EPF0001A0FC.namprd03.prod.outlook.com
- (2603:10b6:208:c0:cafe::84) by MN2PR05CA0024.outlook.office365.com
- (2603:10b6:208:c0::37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7544.22 via Frontend
- Transport; Tue, 30 Apr 2024 08:54:59 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- BL02EPF0001A0FC.mail.protection.outlook.com (10.167.242.103) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.7544.18 via Frontend Transport; Tue, 30 Apr 2024 08:54:58 +0000
-Received: from SATLEXMB06.amd.com (10.181.40.147) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 30 Apr
- 2024 03:54:58 -0500
-Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB06.amd.com
- (10.181.40.147) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.35; Tue, 30 Apr
- 2024 03:54:57 -0500
-Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.35 via Frontend
- Transport; Tue, 30 Apr 2024 03:54:56 -0500
-From: Love Kumar <love.kumar@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <git@xilinx.com>
-Subject: [PATCH v3] test/py: net_boot: Add test cases for net boot
-Date: Tue, 30 Apr 2024 14:24:55 +0530
-Message-ID: <1e297cfe3063e6ac6103e0b15fbc61442fc4dea8.1714467244.git.love.kumar@amd.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=lucent@gmail.com
+Received: by mail-vs1-xe2c.google.com with SMTP id
+ ada2fe7eead31-479edfd02e4so1781457137.2
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 03:00:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1714471204; x=1715076004; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2o6Ku17vPaTtVmXfYxXvv2cKTrWsqzd7PeyjQ4EnXuY=;
+ b=U5fHQrN07I9umLYFsg1yqQQ9e6iouEL3vJgjpAW3YY6xoitXDDmeYTYvxg6YpeMzD0
+ m2AJC2Xp4q/fhBEjPqrhlxPimMvv+5kUa4K/q9PuCuWzQYo1bk0FVychO8LYF2yehwya
+ UxPQHDDV2bojxJ2bmlHGUjtffRFebDJB2hFcbJAGjTDotmKGUK4q6wxlvhDxh0Ezl4NY
+ FO3fvTcxZfFy+IR0Tbvl7yBq9pG8hSDVnlolViUY4GtFpJ0XUUsnZNfr4YQFuUi1WlTe
+ U7pZ41j0nqG4JJNPHgsWdk6TahL5kyNDwYWR2gs0yoPMT0HlMrfCBKpFrFrXaX42uABl
+ AXng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714471204; x=1715076004;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2o6Ku17vPaTtVmXfYxXvv2cKTrWsqzd7PeyjQ4EnXuY=;
+ b=eSDzNqvrXQKdz9/hftWvPCYie6aLF44BiDoKD05E4pTqQeaP4qEkJr3ksBi90br3dH
+ iyYAVAAvNx815tT2o332o0H+xtHoCtxb3fbleZb/Bw566M2ipXVpIVnJjUjtOulSUGDJ
+ M7PG0ajUB+vmVNW0mr8FW32c7SmpZpU+vGPROYRqv1RJEkCIaBmMCQ+St5X2EeoCzQGY
+ nH8VSCypADpG+jRPmRTdwxiHYw8LVPdfpQqJW9c5JXyrnc+R5VMu0KcVq1xiPKkqDydW
+ 05xr22FHH02gLunKwjIykoX6Ih87Z/RcWFigiFZzVECwKE6rOYr/k5dCq440JGLcT1+5
+ 4/Iw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXMmG+VIwcpaFBkqCx9Lc8cbNns2QB2Md6G90jCP5kI9SGdr4NgXoWY17CWTBT7LI4aSuiQsIekdhy3t1ru5X0Us8Qw5A==
+X-Gm-Message-State: AOJu0Yy5PQ9kLkNN0OIaAD45Vqs2AHl2dCIZl6KgDqTKZsmLAQbMHYbT
+ IacLJeebMwHG5TPfds3D9F8Xtzjm5bS0Z63OBmb0cZNnHh6Q7eRTgyZlzlxO3bVsXwqqvI6Rbks
+ Ebv0mCrudYMh03NdmX5B6QH0xAhY=
+X-Google-Smtp-Source: AGHT+IGiVfjiSgoYEviHp4B6WdXUhbCHL5wkF41mPqPQ+v8DSC4Mai1psgh7sblNnKcMQ/N6InzkRK0fFt0e0+ENgpM=
+X-Received: by 2002:a67:efc4:0:b0:47b:b817:f31f with SMTP id
+ s4-20020a67efc4000000b0047bb817f31fmr11851837vsp.9.1714471204045; Tue, 30 Apr
+ 2024 03:00:04 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF0001A0FC:EE_|PH7PR12MB5709:EE_
-X-MS-Office365-Filtering-Correlation-Id: 69f566bb-a791-449c-32f0-08dc68f3371e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230031|1800799015|376005|82310400014|36860700004; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?RpZS8x1navq6SOTF33F+ic7auQigDnvLwmqbeW6woe1fJDO6YtgsUz1XQI37?=
- =?us-ascii?Q?TxH913NKto1LNqvNTW+JQNO2LF+Pwj4BOQWkcqg2zuVt8+U66O68vSUqo/ug?=
- =?us-ascii?Q?jP9TvcP+CoWdMQq8PQRArF7hWLrNleAYcebCckZA4X0li21Ilc4IcDlRVFkE?=
- =?us-ascii?Q?9yuZVGIVKOJqRi6oFWPmatEfKN3bJPx4lcR+WaUAOlclAtt4wzlDW9iPaXVT?=
- =?us-ascii?Q?u7zYOTRAAwwiFLxZH1HcR0WRy9CLuc+g9umtIPuuGL6dDr7tzM4nZ1P6F7Jo?=
- =?us-ascii?Q?VQL3BQGMp4iaw61ZdHYnWSJFgyC/9/ZQ/USUtcZWqDFZmYstTCqgp24fphy+?=
- =?us-ascii?Q?AA9OpXdu5u71IZGAzVmjPmfR8EtBRLXqMeja80+qv+A4ksW3bWARnfucZj5k?=
- =?us-ascii?Q?cifUmWr3mYQoWPLDdg6goNSQlt2lAPUJLe8jtWkGoOjaBt7B5mKQzLLyVLfn?=
- =?us-ascii?Q?4PgHHKRSaaha5lOTOU5YDoU/7R29DAsH0Wn4n3V/b5gMmchAOQqQqJ+uu39N?=
- =?us-ascii?Q?CQA2cJUrr5+vL8j0lVytlCxADuAOaAUcAXHlmZ3mmflL9dLraeOh1FWaMVGu?=
- =?us-ascii?Q?BagcDOhfbQqGM0uhrf1kyxxDpa2muIYyHtcISPw3nEIZoxdqYHpTyyg4Bc1L?=
- =?us-ascii?Q?sT6cJ6Go9gDak6HsiplBQ+aG0lidk0VgMM24LZHQmkvcJcSeTa/mqRgyerk2?=
- =?us-ascii?Q?6gPxKEhgAhbrxiw3lNCDproEj9btYu98b5eJwoRuVY7uSaPGFXIuyq/Wv/fn?=
- =?us-ascii?Q?BVh5Njw4DQtmsIIPdkJi+XzyK9Nmeec7H3Ei7QFIFtdDUUx1rMECJJenn7wG?=
- =?us-ascii?Q?XkIdXrMAJSL0SqtYRKfSC/qDo+46KDzChAKu8PDWJjSSTBAOn6DWEBUFxkpI?=
- =?us-ascii?Q?qpBSpMyo1ujLlBMoolrqDqFy2AY3aZcdu3LDWmHaWxEuN4eTLWdihQ4Wnvb2?=
- =?us-ascii?Q?IE5CHwTg24t5C3AVKg20SpNbJiEgdZEUlj6XnIc5YJ2r/JcVrGNz0NjIDzZS?=
- =?us-ascii?Q?3kdlZ50tA7aa3aKQhdAjYxSffYqQ76Zovht5tUc4P4Cf9NHR2C7zpSIUelgx?=
- =?us-ascii?Q?r/8K96vE3ZBLdrSWbjB2g1H3xRuWPd3SNnSaxwgp/qVcFc+p3+nn83xkf2GY?=
- =?us-ascii?Q?xdMklcPpAPGENe6iyVpPkdS7mEBdrc9fUogCm75UrDYjNARBgGfhuE9kFyzu?=
- =?us-ascii?Q?YGOM9UETXU1hSsQpojBnAefAA7N0DJLnl10SDZG/iwhThsP3NbHuEPdoK0/x?=
- =?us-ascii?Q?B5mwMt0Wtrvd55Tk9p+qmtISnMaEEkwmkA0AsJmg+S7jfrITR/DXioo/ZRZa?=
- =?us-ascii?Q?8FwohbyOxqA+hMAd+iXgl336?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230031)(1800799015)(376005)(82310400014)(36860700004); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Apr 2024 08:54:58.6460 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 69f566bb-a791-449c-32f0-08dc68f3371e
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: BL02EPF0001A0FC.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB5709
+References: <20240415115035.46199-1-heinrich.schuchardt@canonical.com>
+ <20240415115035.46199-3-heinrich.schuchardt@canonical.com>
+ <CAJM55Z9gVQom+jKzcLZ4jVKLS3MbGNpx1hx6dEWjgpY7Xmy5aA@mail.gmail.com>
+ <CANV2PTO1EAkgf_4Uo6cqes=DMD=juGJaB17eLymJL4tCLerwvw@mail.gmail.com>
+ <7138128e-1e48-42a0-8114-2d4cdde25ce0@canonical.com>
+In-Reply-To: <7138128e-1e48-42a0-8114-2d4cdde25ce0@canonical.com>
+From: E Shattow <lucent@gmail.com>
+Date: Tue, 30 Apr 2024 02:59:52 -0700
+Message-ID: <CANV2PTPci_WVDnerZ1QxPYSio869XiRq21E-pezeD03X3teqEw@mail.gmail.com>
+Subject: Re: [PATCH 2/4] board: add support for Milk-V Mars CM
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, 
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
+ Lukasz Tekieli <tekieli.lukasz@gmail.com>,
+ Aurelien Jarno <aurelien@aurel32.net>, 
+ Shengyu Qu <wiagn233@outlook.com>, Shiji Yang <yangshiji66@outlook.com>, 
+ Seung-Woo Kim <sw0312.kim@samsung.com>, u-boot@lists.denx.de, 
+ Emil Renner Berthing <emil.renner.berthing@canonical.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,426 +99,204 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add tests for booting image using tftpboot/pxe boot commands, tftpboot
-boot case loads the FIT image into DDR and boots using bootm command
-whereas pxe boot cases downloads the pxe configuration file from the
-TFTP server and interprets it to boot the images mentioned in the pxe
-configurations file.
-This test relies on boardenv_* containing configuration values including
-the parameter 'pattern'. tftpboot/pxe boot cases boots the Linux till the
-boot log pattern value is matched. For example, if the parameter
-'pattern' is defined as 'login:', it will boot till login prompt.
+On Tue, Apr 30, 2024 at 12:18=E2=80=AFAM Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> On 30.04.24 00:46, E Shattow wrote:
+> > On Sun, Apr 28, 2024 at 9:13=E2=80=AFAM Emil Renner Berthing
+> > <emil.renner.berthing@canonical.com> wrote:
+> >>
+> >> Heinrich Schuchardt wrote:
+> >>> We already support the VisionFive 2 and the Milk-V Mars board by
+> >>> patching the VisionFive 2 device tree. With this patch the same
+> >>> is done for the Milk-V Mars CM.
+> >>
+> >> Hi Heinrich.
+> >>
+> >> Thanks for the patch. As far as I can tell the Milk-V documentation[1]=
+ is
+> >> pretty consistent in calling the version without eMMC "Milk-V Mars CM =
+Lite"
+> >> and the version with eMMC just "Milk-V Mars CM". So I'd prefer the mod=
+el,
+> >> compatible and filenames suggested below.
+> >>
+> >> [1]: https://milkv.io/docs/mars/compute-module/introduction#design-phi=
+losophy
+> >>
+> >
+> > Are there any actual differences that need representation in the dtb
+> > file for downstream OS different from Milk-V Mars to Milk-V Mars CM
+> > (or CM Lite)?
+> >
+> > I did find this vendor repo commit "kernel: dts reconfig sdio0 for
+> > SDCard version"
+> > https://github.com/milkv-mars/mars-buildroot-sdk/commit/042ea06598995db=
+99ddbbbb252ee439c42b9c1a9
+> > but it does not seem necessary in mainline Linux, SD Card is working
+> > without changes.
+> >
+> > It was necessary for U-Boot and the Mars CM Lite with SD Card to apply
+> > s/GPIO62/GPIO22/ as in the vendor commit "u-boot: configure sdio0 as
+> > mars-cm sdcard version"
+> > https://github.com/milkv-mars/mars-buildroot-sdk/commit/880a249518f72ec=
+f1e2947dfeb2c66e5035fce90
+>
+> This is what is patched in fdt_fixup_marc().
 
-Signed-off-by: Love Kumar <love.kumar@amd.com>
----
-Changes in v2:
- - Expand commit message
-Changes in v3:
- - Add the config option to skip the test
- - Remove imi command to check FIT image config
- - Configure static networking only if DHCP fails
----
- test/py/tests/test_net_boot.py | 391 +++++++++++++++++++++++++++++++++
- 1 file changed, 391 insertions(+)
- create mode 100644 test/py/tests/test_net_boot.py
+That's the Mars fixup with a conditional for the s/GPIO62/GPIO22/ of
+CM Lite;  which Linux seems not to mind either way so long as this was
+done at the U-Boot phase, it is functional for eMMC/SD mmc access with
+unmodified visionfive2 1.3b dtb (GPIO62 pinmux) from Linux.
 
-diff --git a/test/py/tests/test_net_boot.py b/test/py/tests/test_net_boot.py
-new file mode 100644
-index 000000000000..cf7d5cca5cbd
---- /dev/null
-+++ b/test/py/tests/test_net_boot.py
-@@ -0,0 +1,391 @@
-+# SPDX-License-Identifier: GPL-2.0
-+# (C) Copyright 2023, Advanced Micro Devices, Inc.
-+
-+import pytest
-+import u_boot_utils
-+import test_net
-+
-+"""
-+Note: This test relies on boardenv_* containing configuration values to define
-+which the network environment available for testing. Without this, this test
-+will be automatically skipped.
-+
-+For example:
-+
-+# Details regarding a boot image file that may be read from a TFTP server. This
-+# variable may be omitted or set to None if TFTP boot testing is not possible
-+# or desired.
-+env__net_tftp_bootable_file = {
-+    'fn': 'image.ub',
-+    'addr': 0x10000000,
-+    'size': 5058624,
-+    'crc32': 'c2244b26',
-+    'pattern': 'Linux',
-+    'config': 'config@2',
-+    'timeout': 50000,
-+}
-+
-+# False or omitted if a TFTP boot test should be tested.
-+# If TFTP boot testing is not possible or desired, set this variable to True.
-+# For example: If FIT image is not proper to boot
-+env__tftp_boot_test_skip = False
-+
-+# Here is the example of FIT image configurations:
-+configurations {
-+    default = "config@1";
-+    config@1 {
-+        description = "Boot Linux kernel with config@1";
-+        kernel = "kernel@0";
-+        fdt = "fdt@0";
-+        ramdisk = "ramdisk@0";
-+        hash@1 {
-+            algo = "sha1";
-+        };
-+    };
-+    config@2 {
-+        description = "Boot Linux kernel with config@2";
-+        kernel = "kernel@1";
-+        fdt = "fdt@1";
-+        ramdisk = "ramdisk@1";
-+        hash@1 {
-+            algo = "sha1";
-+        };
-+    };
-+};
-+
-+# Details regarding a file that may be read from a TFTP server. This variable
-+# may be omitted or set to None if PXE testing is not possible or desired.
-+env__net_pxe_bootable_file = {
-+    'fn': 'default',
-+    'addr': 0x10000000,
-+    'size': 74,
-+    'timeout': 50000,
-+    'pattern': 'Linux',
-+    'valid_label': '1',
-+    'invalid_label': '2',
-+    'exp_str_invalid': 'Skipping install for failure retrieving',
-+    'local_label': '3',
-+    'exp_str_local': 'missing environment variable: localcmd',
-+    'empty_label': '4',
-+    'exp_str_empty': 'No kernel given, skipping boot',
-+}
-+
-+# False or omitted if a PXE boot test should be tested.
-+# If PXE boot testing is not possible or desired, set this variable to True.
-+# For example: If pxe configuration file is not proper to boot
-+env__pxe_boot_test_skip = False
-+
-+# Here is the example of pxe configuration file ordered based on the execution
-+# flow:
-+1) /tftpboot/pxelinux.cfg/default-arm-zynqmp
-+
-+    menu include pxelinux.cfg/default-arm
-+    timeout 50
-+
-+    default Linux
-+
-+2) /tftpboot/pxelinux.cfg/default-arm
-+
-+    menu title Linux boot selections
-+    menu include pxelinux.cfg/default
-+
-+    label install
-+        menu label Invalid boot
-+        kernel kernels/install.bin
-+        append console=ttyAMA0,38400 debug earlyprintk
-+        initrd initrds/uzInitrdDebInstall
-+
-+    label local
-+        menu label Local boot
-+        append root=/dev/sdb1
-+        localboot 1
-+
-+    label boot
-+        menu label Empty boot
-+
-+3) /tftpboot/pxelinux.cfg/default
-+
-+    label Linux
-+        menu label Boot kernel
-+        kernel Image
-+        fdt system.dtb
-+        initrd rootfs.cpio.gz.u-boot
-+"""
-+
-+def setup_tftpboot_boot(u_boot_console):
-+    f = u_boot_console.config.env.get('env__net_tftp_bootable_file', None)
-+    if not f:
-+        pytest.skip('No TFTP bootable file to read')
-+
-+    test_net.test_net_dhcp(u_boot_console)
-+    if not test_net.net_set_up:
-+        test_net.test_net_setup_static(u_boot_console)
-+
-+    addr = f.get('addr', None)
-+    if not addr:
-+        addr = u_boot_utils.find_ram_base(u_boot_console)
-+
-+    fn = f['fn']
-+    output = u_boot_console.run_command('tftpboot %x %s' % (addr, fn))
-+    expected_text = 'Bytes transferred = '
-+    sz = f.get('size', None)
-+    if sz:
-+        expected_text += '%d' % sz
-+    assert expected_text in output
-+
-+    expected_crc = f.get('crc32', None)
-+    output = u_boot_console.run_command('crc32 %x $filesize' % addr)
-+    if expected_crc:
-+        assert expected_crc in output
-+
-+    pattern = f.get('pattern')
-+    config = f.get('config', None)
-+    timeout = f.get('timeout', 50000)
-+
-+    return addr, pattern, timeout, config
-+
-+@pytest.mark.buildconfigspec('cmd_net')
-+def test_net_tftpboot_boot(u_boot_console):
-+    """Boot the loaded image
-+
-+    A boot file (fit image) is downloaded from the TFTP server and booted using
-+    bootm command with the default fit configuration, its boot log pattern are
-+    validated.
-+
-+    The details of the file to download are provided by the boardenv_* file;
-+    see the comment at the beginning of this file.
-+    """
-+    if u_boot_console.config.env.get('env__tftp_boot_test_skip', True):
-+        pytest.skip('TFTP boot test is not enabled!')
-+
-+    addr, pattern, timeout, imcfg = setup_tftpboot_boot(u_boot_console)
-+    with u_boot_console.temporary_timeout(timeout):
-+        try:
-+            # wait_for_prompt=False makes the core code not wait for the U-Boot
-+            # prompt code to be seen, since it won't be on a successful kernel
-+            # boot
-+            u_boot_console.run_command('bootm %x'% addr, wait_for_prompt=False)
-+            # You might want to expand wait_for() with options to add extra bad
-+            # patterns which immediately indicate a failed boot, or add a new
-+            # "with object" function u_boot_console.enable_check() that can
-+            # cause extra patterns like the U-Boot console prompt, U-Boot boot
-+            # error messages, kernel boot error messages, etc. to fail the
-+            # wait_for().
-+
-+            # Wait for boot log pattern
-+            u_boot_console.wait_for(pattern)
-+        finally:
-+            # This forces the console object to be shutdown, so any subsequent
-+            # test will reset the board back into U-Boot. We want to force this
-+            # no matter whether the kernel boot passed or failed.
-+            u_boot_console.drain_console()
-+            u_boot_console.cleanup_spawn()
-+
-+@pytest.mark.buildconfigspec('cmd_net')
-+def test_net_tftpboot_boot_config(u_boot_console):
-+    """Boot the loaded image from FIT image configuration
-+
-+    A boot file (fit image) is downloaded from the TFTP server and booted using
-+    bootm command with the custom fit configuration, its boot log pattern are
-+    validated.
-+
-+    The details of the file to download are provided by the boardenv_* file;
-+    see the comment at the beginning of this file.
-+    """
-+    if u_boot_console.config.env.get('env__tftp_boot_test_skip', True):
-+        pytest.skip('TFTP boot test is not enabled!')
-+
-+    addr, pattern, timeout, imcfg = setup_tftpboot_boot(u_boot_console)
-+
-+    with u_boot_console.temporary_timeout(timeout):
-+        try:
-+            u_boot_console.run_command(
-+                'bootm %x#%s' % (addr, imcfg), wait_for_prompt=False
-+            )
-+            u_boot_console.wait_for(pattern)
-+        finally:
-+            u_boot_console.drain_console()
-+            u_boot_console.cleanup_spawn()
-+
-+def setup_pxe_boot(u_boot_console):
-+    f = u_boot_console.config.env.get('env__net_pxe_bootable_file', None)
-+    if not f:
-+        pytest.skip('No PXE bootable file to read')
-+
-+    test_net.test_net_dhcp(u_boot_console)
-+    test_net.test_net_setup_static(u_boot_console)
-+    return f
-+
-+@pytest.mark.buildconfigspec('cmd_net')
-+@pytest.mark.buildconfigspec('cmd_pxe')
-+def test_net_pxe_boot(u_boot_console):
-+    """Test the pxe boot command.
-+
-+    A pxe configuration file is downloaded from the TFTP server and interpreted
-+    to boot the images mentioned in pxe configuration file.
-+
-+    The details of the file to download are provided by the boardenv_* file;
-+    see the comment at the beginning of this file.
-+    """
-+    if u_boot_console.config.env.get('env__pxe_boot_test_skip', True):
-+        pytest.skip('PXE boot test is not enabled!')
-+
-+    f = setup_pxe_boot(u_boot_console)
-+    addr = f.get('addr', None)
-+    timeout = f.get('timeout', u_boot_console.p.timeout)
-+    fn = f['fn']
-+
-+    with u_boot_console.temporary_timeout(timeout):
-+        output = u_boot_console.run_command('pxe get')
-+
-+    expected_text = 'Bytes transferred = '
-+    sz = f.get('size', None)
-+    if sz:
-+        expected_text += '%d' % sz
-+    assert 'TIMEOUT' not in output
-+    assert expected_text in output
-+    assert "Config file 'default.boot' found" in output
-+
-+    pattern = f.get('pattern')
-+    if not addr:
-+        pxe_boot_cmd = 'pxe boot'
-+    else:
-+        pxe_boot_cmd = 'pxe boot %x' % addr
-+
-+    with u_boot_console.temporary_timeout(timeout):
-+        try:
-+            u_boot_console.run_command(pxe_boot_cmd, wait_for_prompt=False)
-+            u_boot_console.wait_for(pattern)
-+        finally:
-+            u_boot_console.drain_console()
-+            u_boot_console.cleanup_spawn()
-+
-+@pytest.mark.buildconfigspec('cmd_net')
-+@pytest.mark.buildconfigspec('cmd_pxe')
-+def test_net_pxe_boot_config(u_boot_console):
-+    """Test the pxe boot command by selecting different combination of labels
-+
-+    A pxe configuration file is downloaded from the TFTP server and interpreted
-+    to boot the images mentioned in pxe configuration file.
-+
-+    The details of the file to download are provided by the boardenv_* file;
-+    see the comment at the beginning of this file.
-+    """
-+    if u_boot_console.config.env.get('env__pxe_boot_test_skip', True):
-+        pytest.skip('PXE boot test is not enabled!')
-+
-+    f = setup_pxe_boot(u_boot_console)
-+    addr = f.get('addr', None)
-+    timeout = f.get('timeout', u_boot_console.p.timeout)
-+    fn = f['fn']
-+    local_label = f['local_label']
-+    empty_label = f['empty_label']
-+    exp_str_local = f['exp_str_local']
-+    exp_str_empty = f['exp_str_empty']
-+
-+    with u_boot_console.temporary_timeout(timeout):
-+        output = u_boot_console.run_command('pxe get')
-+
-+    expected_text = 'Bytes transferred = '
-+    sz = f.get('size', None)
-+    if sz:
-+        expected_text += '%d' % sz
-+    assert 'TIMEOUT' not in output
-+    assert expected_text in output
-+    assert "Config file 'default.boot' found" in output
-+
-+    pattern = f.get('pattern')
-+    if not addr:
-+        pxe_boot_cmd = 'pxe boot'
-+    else:
-+        pxe_boot_cmd = 'pxe boot %x' % addr
-+
-+    with u_boot_console.temporary_timeout(timeout):
-+        try:
-+            u_boot_console.run_command(pxe_boot_cmd, wait_for_prompt=False)
-+
-+            # pxe config is loaded where multiple labels are there and need to
-+            # select particular label to boot and check for expected string
-+            # In this case, local label is selected and it should look for
-+            # localcmd env variable and if that variable is not defined it
-+            # should not boot it and come out to u-boot prompt
-+            u_boot_console.wait_for('Enter choice:')
-+            u_boot_console.run_command(local_label, wait_for_prompt=False)
-+            expected_str = u_boot_console.p.expect([exp_str_local])
-+            assert (
-+                expected_str == 0
-+            ), f'Expected string: {exp_str_local} did not match!'
-+
-+            # In this case, empty label is selected and it should look for
-+            # kernel image path and if it is not set it should fail it and load
-+            # default label to boot
-+            u_boot_console.run_command(pxe_boot_cmd, wait_for_prompt=False)
-+            u_boot_console.wait_for('Enter choice:')
-+            u_boot_console.run_command(empty_label, wait_for_prompt=False)
-+            expected_str = u_boot_console.p.expect([exp_str_empty])
-+            assert (
-+                expected_str == 0
-+            ), f'Expected string: {exp_str_empty} did not match!'
-+
-+            u_boot_console.wait_for(pattern)
-+        finally:
-+            u_boot_console.drain_console()
-+            u_boot_console.cleanup_spawn()
-+
-+@pytest.mark.buildconfigspec('cmd_net')
-+@pytest.mark.buildconfigspec('cmd_pxe')
-+def test_net_pxe_boot_config_invalid(u_boot_console):
-+    """Test the pxe boot command by selecting invalid label
-+
-+    A pxe configuration file is downloaded from the TFTP server and interpreted
-+    to boot the images mentioned in pxe configuration file.
-+
-+    The details of the file to download are provided by the boardenv_* file;
-+    see the comment at the beginning of this file.
-+    """
-+    if u_boot_console.config.env.get('env__pxe_boot_test_skip', True):
-+        pytest.skip('PXE boot test is not enabled!')
-+
-+    f = setup_pxe_boot(u_boot_console)
-+    addr = f.get('addr', None)
-+    timeout = f.get('timeout', u_boot_console.p.timeout)
-+    fn = f['fn']
-+    invalid_label = f['invalid_label']
-+    exp_str_invalid = f['exp_str_invalid']
-+
-+    with u_boot_console.temporary_timeout(timeout):
-+        output = u_boot_console.run_command('pxe get')
-+
-+    expected_text = 'Bytes transferred = '
-+    sz = f.get('size', None)
-+    if sz:
-+        expected_text += '%d' % sz
-+    assert 'TIMEOUT' not in output
-+    assert expected_text in output
-+    assert "Config file 'default.boot' found" in output
-+
-+    pattern = f.get('pattern')
-+    if not addr:
-+        pxe_boot_cmd = 'pxe boot'
-+    else:
-+        pxe_boot_cmd = 'pxe boot %x' % addr
-+
-+    with u_boot_console.temporary_timeout(timeout):
-+        try:
-+            u_boot_console.run_command(pxe_boot_cmd, wait_for_prompt=False)
-+
-+            # pxe config is loaded where multiple labels are there and need to
-+            # select particular label to boot and check for expected string
-+            # In this case invalid label is selected, it should load invalid
-+            # label and if it fails it should load the default label to boot
-+            u_boot_console.wait_for('Enter choice:')
-+            u_boot_console.run_command(invalid_label, wait_for_prompt=False)
-+            expected_str = u_boot_console.p.expect([exp_str_invalid])
-+            assert (
-+                expected_str == 0
-+            ), f'Expected string: {exp_str_invalid} did not match!'
-+
-+            u_boot_console.wait_for(pattern)
-+        finally:
-+            u_boot_console.drain_console()
-+            u_boot_console.cleanup_spawn()
--- 
-2.25.1
+It is not clear to me why in vendor U-Boot this is s/GPIO62/GPIO22/
+but in vendor Linux kernel this is s/GPIO62/GPIO24/ ? It seems not
+needed (in Linux).
 
+>
+> >
+> > Then also there is some mention about PMIC and renamed i2c reference,
+> > already obsolete. That's all, is there more to it? Possibly a dtb for
+> > Mars is enough to also be used on Mars CM and Mars Lite?
+>
+> Looking at the schematics the biggest difference between the Mars and
+> the Mars CM (Lite) is on the USB side. The Mars board has USB 3.0 via a
+> PCIe lane and a VIA VL805/806 while the Mars CM has USB directly via the
+> SoC.
+>
+> To add USB support for the Mars CM we will need an adapted device-tree.
+
+Mars also needs this direct-to-SoC USB support, as its USB ports are a
+mix of VL805 and directly via the SoC. This can be the same for Mars
+and Mars CM/Lite.
+
+See this photo from
+https://milkv.io/docs/mars/getting-started/bootloader what highlights
+this direct SoC USB port of Milk-V Mars:
+https://milkv.io/assets/images/mars-usb-port-a-b48fe1ff1003539d42bf5e1dde17=
+25a3.jpg
+
+The over-current errata
+https://doc-en.rvspace.org/VisionFive2/DG_USB/JH7110_SDK/usb_overcurrent_de=
+bug.html
+suggests "please modify the above settings during the U-Boot phase".
+
+-E
+
+>
+> Best regards
+>
+> Heinrich
+> >
+> >>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com=
+>
+> >>> ---
+> >>>   board/starfive/visionfive2/spl.c              | 27 ++++++++++++++++=
+++-
+> >>>   .../visionfive2/starfive_visionfive2.c        | 11 +++++++-
+> >>>   2 files changed, 36 insertions(+), 2 deletions(-)
+> >>>
+> >>> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/vision=
+five2/spl.c
+> >>> index 45848db6d8b..bb0f28d7aad 100644
+> >>> --- a/board/starfive/visionfive2/spl.c
+> >>> +++ b/board/starfive/visionfive2/spl.c
+> >>> @@ -129,6 +129,29 @@ void spl_fdt_fixup_mars(void *fdt)
+> >>>        }
+> >>>   }
+> >>>
+> >>> +void spl_fdt_fixup_marc(void *fdt)
+> >>> +{
+> >>> +     const char *compat;
+> >>> +     const char *model;
+> >>> +
+> >>> +     spl_fdt_fixup_mars(fdt);
+> >>> +
+> >>> +     if (!get_mmc_size_from_eeprom()) {
+> >>> +             int offset;
+> >>> +
+> >>> +             model =3D "Milk-V Mars CM SDCard";
+> >>
+> >> "Milk-V Mars CM Lite"
+> >>
+> >>> +             compat =3D "milkv,mars-cm-sdcard\0starfive,jh7110";
+> >>
+> >> "milkv,mars-cm-lite\0starfive,jh7110"
+> >>
+> >>> +
+> >>> +             offset =3D fdt_path_offset(fdt, "/soc/pinctrl/mmc0-pins=
+/mmc0-pins-rest");
+> >>> +             fdt_setprop_u32(fdt, offset, "pinmux", 0xff130016);
+> >>> +     } else {
+> >>> +             model =3D "Milk-V Mars CM eMMC";
+> >>
+> >> "Milk-V Mars CM"
+> >>
+> >>> +             compat =3D "milkv,mars-cm-emmc\0starfive,jh7110";
+> >>
+> >> "milkv,mars-cm\0starfive,jh7110"
+> >>
+> >>> +     }
+> >>> +     fdt_setprop(fdt, fdt_path_offset(fdt, "/"), "compatible", compa=
+t, sizeof(compat));
+> >>> +     fdt_setprop_string(fdt, fdt_path_offset(fdt, "/"), "model", mod=
+el);
+> >>> +}
+> >>> +
+> >>>   void spl_fdt_fixup_version_a(void *fdt)
+> >>>   {
+> >>>        static const char compat[] =3D "starfive,visionfive-2-v1.2a\0s=
+tarfive,jh7110";
+> >>> @@ -236,7 +259,9 @@ void spl_perform_fixups(struct spl_image_info *sp=
+l_image)
+> >>>                pr_err("Can't read EEPROM\n");
+> >>>                return;
+> >>>        }
+> >>> -     if (!strncmp(product_id, "MARS", 4)) {
+> >>> +     if (!strncmp(product_id, "MARC", 4)) {
+> >>> +             spl_fdt_fixup_marc(spl_image->fdt_addr);
+> >>> +     } else if (!strncmp(product_id, "MARS", 4)) {
+> >>>                spl_fdt_fixup_mars(spl_image->fdt_addr);
+> >>>        } else if (!strncmp(product_id, "VF7110", 6)) {
+> >>>                version =3D get_pcb_revision_from_eeprom();
+> >>> diff --git a/board/starfive/visionfive2/starfive_visionfive2.c b/boar=
+d/starfive/visionfive2/starfive_visionfive2.c
+> >>> index a86bca533b2..be6ca85b030 100644
+> >>> --- a/board/starfive/visionfive2/starfive_visionfive2.c
+> >>> +++ b/board/starfive/visionfive2/starfive_visionfive2.c
+> >>> @@ -17,6 +17,10 @@
+> >>>   DECLARE_GLOBAL_DATA_PTR;
+> >>>   #define JH7110_L2_PREFETCHER_BASE_ADDR               0x2030000
+> >>>   #define JH7110_L2_PREFETCHER_HART_OFFSET     0x2000
+> >>> +#define FDTFILE_MILK_V_MARC_SD \
+> >>> +     "starfive/jh7110-milkv-mars-cm-sdcard.dtb"
+> >>
+> >> "starfive/jh7110-milkv-mars-cm-lite.dtb"
+> >>
+> >>> +#define FDTFILE_MILK_V_MARC_MMC \
+> >>> +     "starfive/jh7110-milkv-mars-cm-emmc.dtb"
+> >>
+> >> "starfive/jh7110-milkv-mars-cm.dtb"
+> >>
+> >>>   #define FDTFILE_MILK_V_MARS \
+> >>>        "starfive/jh7110-milkv-mars.dtb"
+> >>>   #define FDTFILE_VISIONFIVE2_1_2A \
+> >>> @@ -61,7 +65,12 @@ static void set_fdtfile(void)
+> >>>                log_err("Can't read EEPROM\n");
+> >>>                return;
+> >>>        }
+> >>> -     if (!strncmp(product_id, "MARS", 4)) {
+> >>> +     if (!strncmp(product_id, "MARC", 4)) {
+> >>> +             if (get_mmc_size_from_eeprom())
+> >>> +                     fdtfile =3D FDTFILE_MILK_V_MARC_MMC;
+> >>> +             else
+> >>> +                     fdtfile =3D FDTFILE_MILK_V_MARC_SD;
+> >>> +     } else if (!strncmp(product_id, "MARS", 4)) {
+> >>>                fdtfile =3D FDTFILE_MILK_V_MARS;
+> >>>        } else if (!strncmp(product_id, "VF7110", 6)) {
+> >>>                version =3D get_pcb_revision_from_eeprom();
+> >>> --
+> >>> 2.43.0
+> >>>
+> >>>
+>
