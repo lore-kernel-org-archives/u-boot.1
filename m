@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2261BC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 13:36:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27E64C19F53
+	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 13:36:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5A471885A4;
+	by phobos.denx.de (Postfix) with ESMTP id BEB8C889C8;
 	Tue, 30 Apr 2024 15:36:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XOqHupp2";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YzP86jdC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E36D08824A; Tue, 30 Apr 2024 15:36:06 +0200 (CEST)
-Received: from mail-ot1-x332.google.com (mail-ot1-x332.google.com
- [IPv6:2607:f8b0:4864:20::332])
+ id B9325885A4; Tue, 30 Apr 2024 15:36:07 +0200 (CEST)
+Received: from mail-oo1-xc32.google.com (mail-oo1-xc32.google.com
+ [IPv6:2607:f8b0:4864:20::c32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9504E8824A
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 15:36:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6795A88516
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 15:36:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ot1-x332.google.com with SMTP id
- 46e09a7af769-6eb8ea5ac95so3433240a34.2
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 06:36:04 -0700 (PDT)
+Received: by mail-oo1-xc32.google.com with SMTP id
+ 006d021491bc7-5ac8c73cf88so3768807eaf.2
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 06:36:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714484163; x=1715088963; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=6jFUKq3f7KH2tplJyy2uRjjP50APNad7TIAGVaB6ef4=;
- b=XOqHupp2yGzWM3rLDVCWaHS6+b3qC9yGtlSwRxo+RVxquUbrcYgUZ3/VOBk/w7B1K0
- kxNrLjy9EZG6SDbm44bgqmzCDVZSiwMAsIlTDzHtgDAUMI8fAr1yrMcRhpCBAgqrqGGW
- +Uqg9b8p18LnYFx2LxePQUb0bb8Vu2fjekkCM=
+ d=konsulko.com; s=google; t=1714484164; x=1715088964; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=fMTqVSGYkbgCMKe3oTa1OkY/bWoUts2xNgb0LXDOT4I=;
+ b=YzP86jdCP26HYj0wsq3y8UGb/Zhzz1WVTuKUqkPVM//eL18n1x//nT1lkNlvYk9ecq
+ mAmHiYeKSfFQRu0YUieJ5vQzeHjotKw5nGw00Wawt3oTcyHWqKA6x8o3wiJJT0INWUYS
+ Y98IQAbocpsEzDtdIjzI3LXEZ/1QrSnuXFxCI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714484163; x=1715088963;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=6jFUKq3f7KH2tplJyy2uRjjP50APNad7TIAGVaB6ef4=;
- b=P+AphN2nm1SEqqutnwFsMZFJkDGDE7/r2ufQZNYvEccFVodTxYqYApw6STq9bnX1cD
- xvsrW2dtSInYbaI7MB8muRNqXbX3Z0VbJfajn2UrDh7rR4vjS8vh52JJaWrVgAxB1aTE
- VIE//zrLCyqzIiEutDLhUH+r2Fy2YetV8oqsMaTRZXyViLdntq+1eiLkY7czDJRq+1sT
- GRinhUSmC430E4bm4Eh434uhkO+QlguOm/okQGEyAbcNLV72IFJglIOmOOPRMcNGecyh
- 9xK3c34+DXPRkobjfWKUhlBzoMVQz/AU9xzBSPH4o75jmrkJ8SV+Kyxv1itl7APnbvbK
- CmtA==
-X-Gm-Message-State: AOJu0Yx4unaC9Op3mkCq2QQCRodva33SUYy/A1rRXQk2Dzk7XJj+DP5U
- Xwcc3V25IZWz8UIfCXnqXAwsFCGyx4BsU4rRHOKKKHIEseqlMR/plVfTBKEF6qoTO0UC+xdg+xQ
- e4FP5DQ==
-X-Google-Smtp-Source: AGHT+IFU70SbdN8Zy5qC42BRHy8O/gXLV7fcwtmsy9ph8ZKa2MuBZRAgxTldpdbGzFtofVeCAqFskw==
-X-Received: by 2002:a05:6830:12d8:b0:6ee:32ab:8124 with SMTP id
- a24-20020a05683012d800b006ee32ab8124mr2831233otq.25.1714484162713; 
- Tue, 30 Apr 2024 06:36:02 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1714484164; x=1715088964;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=fMTqVSGYkbgCMKe3oTa1OkY/bWoUts2xNgb0LXDOT4I=;
+ b=Vt021AfBVstmprkMPTuteNFllSKBRpTKalhOEqmnVcCdHosK+fepszIjHRFRXuK62O
+ 5VCYk6HXB+hvO0PiEyi+jQkhzZxEsF79raIbOaQVHBbdolZ6pUdDxtENTGtBTk3yEMnQ
+ nJgJIlRIew2AlpJqDyGilGfWI/N+yoyCGfLO5ETsUDung5PtuUzmYNaI7RGTZQonEKS3
+ zJN/49YmCtcMF49U+y38NzIPFfCwzk31sVbpxc56HhGXg/NrvOVnilMgo3vv6x9zSmvc
+ TgEg3IWAZdG631cb7V4/RNZ2klehRkONNo0bxyf5pW6us2ux6Ps+C3UKFTeK0AvYw87L
+ 3gvA==
+X-Gm-Message-State: AOJu0Yz9tzRMSTH2dHMl/iFnwkidXtq5nJLyO+swnlA9E+KrYBqoK30g
+ daWWzm/sKIY8kQd/3b8Ko7fxD8KX25HdFm15XT+8l04nIsbfNzE9JFM16Kq2do8TyLbtRSsdJuD
+ mM/Gn3g==
+X-Google-Smtp-Source: AGHT+IEKTsLEZLQwvcM5Zsuke9vT52NpD/ma5jyPuIb6ZhMhsJsN59VENNYeMypThYWcTTMSdWQMgQ==
+X-Received: by 2002:a05:6870:308:b0:22e:c860:9a6a with SMTP id
+ m8-20020a056870030800b0022ec8609a6amr16022352oaf.49.1714484163933; 
+ Tue, 30 Apr 2024 06:36:03 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- f12-20020a05621400cc00b006a0d0d792cesm1743877qvs.83.2024.04.30.06.36.01
+ f12-20020a05621400cc00b006a0d0d792cesm1743877qvs.83.2024.04.30.06.36.02
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 06:36:02 -0700 (PDT)
+ Tue, 30 Apr 2024 06:36:03 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 01/33] arm: mach-versatile: Remove dead code
-Date: Tue, 30 Apr 2024 07:35:27 -0600
-Message-Id: <20240430133559.1836389-1-trini@konsulko.com>
+Subject: [PATCH 02/33] include: Add missing headers in a few instances
+Date: Tue, 30 Apr 2024 07:35:28 -0600
+Message-Id: <20240430133559.1836389-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240430133559.1836389-1-trini@konsulko.com>
+References: <20240430133559.1836389-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,133 +88,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This platform is no longer supported in tree, remove.
+A few headers rely on indirect inclusion of <linux/types.h> or
+<linux/kernel.h> so add them directly. In the case of <netdev.h> add a
+"struct bd_info;" as well rather than the large header chain to resolve
+that.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- arch/arm/mach-versatile/Makefile |  7 ----
- arch/arm/mach-versatile/reset.S  | 28 ---------------
- arch/arm/mach-versatile/timer.c  | 62 --------------------------------
- 3 files changed, 97 deletions(-)
- delete mode 100644 arch/arm/mach-versatile/Makefile
- delete mode 100644 arch/arm/mach-versatile/reset.S
- delete mode 100644 arch/arm/mach-versatile/timer.c
+ include/mailbox.h       | 2 ++
+ include/netdev.h        | 3 +++
+ include/phy_interface.h | 1 +
+ include/u-boot/sha1.h   | 2 ++
+ include/u-boot/sha256.h | 2 ++
+ include/u-boot/sha512.h | 2 ++
+ 6 files changed, 12 insertions(+)
 
-diff --git a/arch/arm/mach-versatile/Makefile b/arch/arm/mach-versatile/Makefile
-deleted file mode 100644
-index 858ca9414c05..000000000000
---- a/arch/arm/mach-versatile/Makefile
-+++ /dev/null
-@@ -1,7 +0,0 @@
--# SPDX-License-Identifier: GPL-2.0+
--#
--# (C) Copyright 2000-2006
--# Wolfgang Denk, DENX Software Engineering, wd@denx.de.
--
--obj-y	= timer.o
--obj-y	+= reset.o
-diff --git a/arch/arm/mach-versatile/reset.S b/arch/arm/mach-versatile/reset.S
-deleted file mode 100644
-index c7f1225fb298..000000000000
---- a/arch/arm/mach-versatile/reset.S
-+++ /dev/null
-@@ -1,28 +0,0 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
--/*
-- *  armboot - Startup Code for ARM926EJS CPU-core
-- *
-- *  Copyright (c) 2003  Texas Instruments
-- *
-- *  ----- Adapted for OMAP1610 OMAP730 from ARM925t code ------
-- *
-- *  Copyright (c) 2001	Marius Gröger <mag@sysgo.de>
-- *  Copyright (c) 2002	Alex Züpke <azu@sysgo.de>
-- *  Copyright (c) 2002	Gary Jennejohn <garyj@denx.de>
-- *  Copyright (c) 2003	Richard Woodruff <r-woodruff2@ti.com>
-- *  Copyright (c) 2003	Kshitij <kshitij@ti.com>
-- */
--
--	.align	5
--.globl reset_cpu
--reset_cpu:
--	ldr	r1, rstctl1	/* get clkm1 reset ctl */
--	mov	r3, #0x0
--	strh	r3, [r1]	/* clear it */
--	mov	r3, #0x8
--	strh	r3, [r1]	/* force dsp+arm reset */
--_loop_forever:
--	b	_loop_forever
--
--rstctl1:
--	.word	0xfffece10
-diff --git a/arch/arm/mach-versatile/timer.c b/arch/arm/mach-versatile/timer.c
-deleted file mode 100644
-index b471412186d1..000000000000
---- a/arch/arm/mach-versatile/timer.c
-+++ /dev/null
-@@ -1,62 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * (C) Copyright 2003
-- * Texas Instruments <www.ti.com>
-- *
-- * (C) Copyright 2002
-- * Sysgo Real-Time Solutions, GmbH <www.elinos.com>
-- * Marius Groeger <mgroeger@sysgo.de>
-- *
-- * (C) Copyright 2002
-- * Sysgo Real-Time Solutions, GmbH <www.elinos.com>
-- * Alex Zuepke <azu@sysgo.de>
-- *
-- * (C) Copyright 2002-2004
-- * Gary Jennejohn, DENX Software Engineering, <garyj@denx.de>
-- *
-- * (C) Copyright 2004
-- * Philippe Robin, ARM Ltd. <philippe.robin@arm.com>
-- */
--
--#include <common.h>
--
--#define TIMER_ENABLE	(1 << 7)
--#define TIMER_MODE_MSK	(1 << 6)
--#define TIMER_MODE_FR	(0 << 6)
--#define TIMER_MODE_PD	(1 << 6)
--
--#define TIMER_INT_EN	(1 << 5)
--#define TIMER_PRS_MSK	(3 << 2)
--#define TIMER_PRS_8S	(1 << 3)
--#define TIMER_SIZE_MSK	(1 << 2)
--#define TIMER_ONE_SHT	(1 << 0)
--
--int timer_init (void)
--{
--	ulong	tmr_ctrl_val;
--
--	/* 1st disable the Timer */
--	tmr_ctrl_val = *(volatile ulong *)(CFG_SYS_TIMERBASE + 8);
--	tmr_ctrl_val &= ~TIMER_ENABLE;
--	*(volatile ulong *)(CFG_SYS_TIMERBASE + 8) = tmr_ctrl_val;
--
--	/*
--	 * The Timer Control Register has one Undefined/Shouldn't Use Bit
--	 * So we should do read/modify/write Operation
--	 */
--
--	/*
--	 * Timer Mode : Free Running
--	 * Interrupt : Disabled
--	 * Prescale : 8 Stage, Clk/256
--	 * Tmr Siz : 16 Bit Counter
--	 * Tmr in Wrapping Mode
--	 */
--	tmr_ctrl_val = *(volatile ulong *)(CFG_SYS_TIMERBASE + 8);
--	tmr_ctrl_val &= ~(TIMER_MODE_MSK | TIMER_INT_EN | TIMER_PRS_MSK | TIMER_SIZE_MSK | TIMER_ONE_SHT );
--	tmr_ctrl_val |= (TIMER_ENABLE | TIMER_PRS_8S);
--
--	*(volatile ulong *)(CFG_SYS_TIMERBASE + 8) = tmr_ctrl_val;
--
--	return 0;
--}
+diff --git a/include/mailbox.h b/include/mailbox.h
+index 323b6c2bc5d8..e70266fb61c9 100644
+--- a/include/mailbox.h
++++ b/include/mailbox.h
+@@ -6,6 +6,8 @@
+ #ifndef _MAILBOX_H
+ #define _MAILBOX_H
+ 
++#include <linux/types.h>
++
+ /**
+  * A mailbox is a hardware mechanism for transferring small fixed-size messages
+  * and/or notifications between the CPU on which U-Boot runs and some other
+diff --git a/include/netdev.h b/include/netdev.h
+index 2a7f40e5040e..2a06d9a261bb 100644
+--- a/include/netdev.h
++++ b/include/netdev.h
+@@ -10,9 +10,12 @@
+ 
+ #ifndef _NETDEV_H_
+ #define _NETDEV_H_
++
++#include <linux/types.h>
+ #include <phy_interface.h>
+ 
+ struct udevice;
++struct bd_info;
+ 
+ /*
+  * Board and CPU-specific initialization functions
+diff --git a/include/phy_interface.h b/include/phy_interface.h
+index 31be3228c7c4..b74f4ccd84ad 100644
+--- a/include/phy_interface.h
++++ b/include/phy_interface.h
+@@ -11,6 +11,7 @@
+ #define _PHY_INTERFACE_H
+ 
+ #include <string.h>
++#include <linux/kernel.h>
+ 
+ typedef enum {
+ 	PHY_INTERFACE_MODE_NA, /* don't touch */
+diff --git a/include/u-boot/sha1.h b/include/u-boot/sha1.h
+index 09fee594d263..c1e9f67068d4 100644
+--- a/include/u-boot/sha1.h
++++ b/include/u-boot/sha1.h
+@@ -14,6 +14,8 @@
+ #ifndef _SHA1_H
+ #define _SHA1_H
+ 
++#include <linux/types.h>
++
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+diff --git a/include/u-boot/sha256.h b/include/u-boot/sha256.h
+index 9aa1251789a3..a4fe176c0b46 100644
+--- a/include/u-boot/sha256.h
++++ b/include/u-boot/sha256.h
+@@ -1,6 +1,8 @@
+ #ifndef _SHA256_H
+ #define _SHA256_H
+ 
++#include <linux/types.h>
++
+ #define SHA256_SUM_LEN	32
+ #define SHA256_DER_LEN	19
+ 
+diff --git a/include/u-boot/sha512.h b/include/u-boot/sha512.h
+index 516729d77506..90bd96a3f8c2 100644
+--- a/include/u-boot/sha512.h
++++ b/include/u-boot/sha512.h
+@@ -1,6 +1,8 @@
+ #ifndef _SHA512_H
+ #define _SHA512_H
+ 
++#include <linux/types.h>
++
+ #define SHA384_SUM_LEN          48
+ #define SHA384_DER_LEN          19
+ #define SHA512_SUM_LEN          64
 -- 
 2.34.1
 
