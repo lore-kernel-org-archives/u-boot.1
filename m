@@ -4,44 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93872C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 14:23:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD2A5C10F16
+	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 15:31:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAD4F889B0;
-	Tue, 30 Apr 2024 16:23:42 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id F1968889AD;
+	Tue, 30 Apr 2024 17:31:48 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="UBodkVZy";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4944F889B9; Tue, 30 Apr 2024 16:23:42 +0200 (CEST)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 1B19C88843
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 16:23:38 +0200 (CEST)
+ id 04D67889B6; Tue, 30 Apr 2024 17:31:47 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6D0FC8899F
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 17:31:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A7E902F4;
- Tue, 30 Apr 2024 07:24:03 -0700 (PDT)
-Received: from donnerap.manchester.arm.com (usa-sjc-imap-foss1.foss.arm.com
- [10.121.207.14])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8A1F33F793;
- Tue, 30 Apr 2024 07:23:36 -0700 (PDT)
-Date: Tue, 30 Apr 2024 15:23:33 +0100
-From: Andre Przywara <andre.przywara@arm.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Jagan Teki <jagan@amarulasolutions.com>
-Subject: Re: [PATCH 07/33] arm: sunxi: Remove <common.h> and add needed
- includes
-Message-ID: <20240430152333.2745eefa@donnerap.manchester.arm.com>
-In-Reply-To: <20240430133559.1836389-7-trini@konsulko.com>
-References: <20240430133559.1836389-1-trini@konsulko.com>
- <20240430133559.1836389-7-trini@konsulko.com>
-Organization: ARM
-X-Mailer: Claws Mail 3.18.0 (GTK+ 2.24.32; aarch64-unknown-linux-gnu)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=8b89=ME=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1714491064;
+ bh=gtQse0TCtgrO1HhR4/ILIvGW1lKMXLtnNpamIZGQwvg=;
+ b=UBodkVZyAYKqptKIRr2pTOWpOVCsgOHhYSGpaCVBwGYlBbe5+1hUvj7aUM6TnIEoEIFJTqhcr
+ 9uRdrl0khbu/LzaTsJvJOY4xI6ueBG+lBhNW2j2d6IUsSWR5a873i1QsQqrhlQYLGZ2uvEW1Y2P
+ nqnyIEb3c7dkrt8VwQgjJzJA550Bxf5JoXJKQUMNS1Mod/xO9PibMMhFOmPV6+Ta9WhPvlbS3WP
+ d5J4AVR6ZAPKiSYNvvWSY2KZaL1WwELZw45gFlNR7HD5UeSuZXy8WHTfPcE27GwdIu7FiCVPYGq
+ z7ZCctHNIZa/whpeI63OTQND4WDUOTG9yWZB88SHQeSg==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, Peter Robinson
+ <pbrobinson@gmail.com>, u-boot@lists.denx.de, Jonas Karlman
+ <jonas@kwiboo.se>
+Subject: [PATCH v2 00/18] rockchip: rk3399: Fix loading FIT from SD-card when
+ booting from eMMC
+Date: Tue, 30 Apr 2024 15:30:07 +0000
+Message-ID: <20240430153053.308788-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 167.172.40.54
+X-ForwardEmail-ID: 66310eb4d99e42224315b7bc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,208 +70,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 30 Apr 2024 07:35:33 -0600
-Tom Rini <trini@konsulko.com> wrote:
+This series enables use of FIT signature check for checksum validation
+in SPL and fixes loading FIT from SD-card when loading FIT from eMMC or
+SPI flash fails.
 
-Hi,
+Changes in v2:
+- Split series in two, this is the first part, second part will follow
+- Split a big patch into smaller and more reviewable parts
+- Change rk3399-puma to use common bss and stack addresses
+- Skip UART related pinctrl nodes at pre-reloc phase to not slow down
+  boot for i.e. rk3399-puma
+- Rebase on latest master branch
+- Collect r-b tags
 
-> Remove <common.h> from all mach-sunxi and board/sunxi files and when
-> needed add missing include files directly.
+I have runtime tested this series on following devices:
+- 96boards Rock960
+- Khadas Edge Captain
+- Pine64 PineBook Pro
+- Pine64 RockPro64
+- Radxa ROCK 4C+
+- Radxa ROCK 4SE
+- Radxa ROCK Pi 4A
+- Radxa ROCK Pi 4B+
 
-Oh wow, many thanks, that takes one point of my TODO list!
-After cherry-picking the netdev.h and phy_interface.h changes from 01/33,
-I compiled all 168 sunxi boards successfully.
+Boot times before this series using rock-pi-4-rk3399:
 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
+  => bootstage report
+  Timer summary in microseconds (11 records):
+         Mark    Elapsed  Stage
+                 204,349  SPL
+      494,212    289,863  end phase
+        8,637      8,637  board_init_f
+    1,314,991  1,306,354  board_init_r
+    3,483,389  2,168,398  eth_common_init
+    3,814,525    331,136  eth_initialize
+    3,814,762        237  main_loop
+    3,823,030      8,268  cli_loop
+  
+  Accumulated time:
+                  22,295  dm_spl
+                 852,152  dm_f
+                  60,268  dm_r
 
-Reviewed-by: Andre Przywara <andre.przywara@arm.com>
+After this series the boot time have improved, mostly thanks to the use
+of ARMv8 crypto, OF_LIVE and reduced clutter in FDT:
 
-Cheers,
-Andre
+  => bootstage report
+  Timer summary in microseconds (12 records):
+         Mark    Elapsed  Stage
+                 165,322  SPL
+      419,002    253,680  end phase
+        8,620      8,620  board_init_f
+    1,314,364  1,305,744  board_init_r
+    2,234,295    919,931  eth_common_init
+    2,399,375    165,080  eth_initialize
+    2,406,203      6,828  main_loop
+    2,406,499        296  cli_loop
+  
+  Accumulated time:
+                  28,365  dm_spl
+                 864,210  dm_f
+                  11,943  of_live
+                  13,085  dm_r
 
-> ---
-> Cc: Jagan Teki <jagan@amarulasolutions.com>
-> Cc: Andre Przywara <andre.przywara@arm.com>
-> ---
->  arch/arm/cpu/armv7/sunxi/psci.c                     | 1 -
->  arch/arm/cpu/armv7/sunxi/sram.c                     | 1 -
->  arch/arm/mach-sunxi/dram_timings/ddr2_v3s.c         | 1 -
->  arch/arm/mach-sunxi/dram_timings/ddr3_1333.c        | 1 -
->  arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c   | 1 -
->  arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c      | 1 -
->  arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c | 1 -
->  arch/arm/mach-sunxi/dram_timings/h6_ddr3_1333.c     | 1 -
->  arch/arm/mach-sunxi/dram_timings/h6_lpddr3.c        | 1 -
->  arch/arm/mach-sunxi/dram_timings/lpddr3_stock.c     | 1 -
->  board/sunxi/board.c                                 | 1 -
->  board/sunxi/chip.c                                  | 1 -
->  board/sunxi/dram_sun4i_auto.c                       | 1 -
->  board/sunxi/dram_sun5i_auto.c                       | 1 -
->  board/sunxi/gmac.c                                  | 1 -
->  15 files changed, 15 deletions(-)
-> 
-> diff --git a/arch/arm/cpu/armv7/sunxi/psci.c b/arch/arm/cpu/armv7/sunxi/psci.c
-> index 5cb8cfa6cf3f..4c30f3294b7a 100644
-> --- a/arch/arm/cpu/armv7/sunxi/psci.c
-> +++ b/arch/arm/cpu/armv7/sunxi/psci.c
-> @@ -7,7 +7,6 @@
->   * which was based on code by Carl van Schaik <carl@ok-labs.com>.
->   */
->  #include <config.h>
-> -#include <common.h>
->  #include <asm/cache.h>
->  
->  #include <asm/arch/cpu.h>
-> diff --git a/arch/arm/cpu/armv7/sunxi/sram.c b/arch/arm/cpu/armv7/sunxi/sram.c
-> index 28ff6a1b7c23..bc25719c9c46 100644
-> --- a/arch/arm/cpu/armv7/sunxi/sram.c
-> +++ b/arch/arm/cpu/armv7/sunxi/sram.c
-> @@ -9,7 +9,6 @@
->   * SRAM init for older sunxi SoCs.
->   */
->  
-> -#include <common.h>
->  #include <init.h>
->  #include <asm/io.h>
->  #include <asm/arch/cpu.h>
-> diff --git a/arch/arm/mach-sunxi/dram_timings/ddr2_v3s.c b/arch/arm/mach-sunxi/dram_timings/ddr2_v3s.c
-> index 9077f86a8b4c..3666dddca15c 100644
-> --- a/arch/arm/mach-sunxi/dram_timings/ddr2_v3s.c
-> +++ b/arch/arm/mach-sunxi/dram_timings/ddr2_v3s.c
-> @@ -1,4 +1,3 @@
-> -#include <common.h>
->  #include <asm/arch/dram.h>
->  #include <asm/arch/cpu.h>
->  
-> diff --git a/arch/arm/mach-sunxi/dram_timings/ddr3_1333.c b/arch/arm/mach-sunxi/dram_timings/ddr3_1333.c
-> index 0471e8a49e58..ceaafd6ec6fa 100644
-> --- a/arch/arm/mach-sunxi/dram_timings/ddr3_1333.c
-> +++ b/arch/arm/mach-sunxi/dram_timings/ddr3_1333.c
-> @@ -1,4 +1,3 @@
-> -#include <common.h>
->  #include <asm/arch/dram.h>
->  #include <asm/arch/cpu.h>
->  
-> diff --git a/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c b/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c
-> index 232b4fe2df7f..3faf8d5bd974 100644
-> --- a/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c
-> +++ b/arch/arm/mach-sunxi/dram_timings/h616_ddr3_1333.c
-> @@ -11,7 +11,6 @@
->   * SPDX-License-Identifier:	GPL-2.0+
->   */
->  
-> -#include <common.h>
->  #include <asm/arch/dram.h>
->  #include <asm/arch/cpu.h>
->  
-> diff --git a/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c b/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
-> index b6d6a6874682..ce2ffa7a020e 100644
-> --- a/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
-> +++ b/arch/arm/mach-sunxi/dram_timings/h616_lpddr3.c
-> @@ -11,7 +11,6 @@
->   * SPDX-License-Identifier:	GPL-2.0+
->   */
->  
-> -#include <common.h>
->  #include <asm/arch/dram.h>
->  #include <asm/arch/cpu.h>
->  
-> diff --git a/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c b/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
-> index c11cb8678f64..e6446b9180da 100644
-> --- a/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
-> +++ b/arch/arm/mach-sunxi/dram_timings/h616_lpddr4_2133.c
-> @@ -9,7 +9,6 @@
->   * SPDX-License-Identifier:	GPL-2.0+
->   */
->  
-> -#include <common.h>
->  #include <asm/arch/dram.h>
->  #include <asm/arch/cpu.h>
->  
-> diff --git a/arch/arm/mach-sunxi/dram_timings/h6_ddr3_1333.c b/arch/arm/mach-sunxi/dram_timings/h6_ddr3_1333.c
-> index 2136ca3a4cb0..afe8e25c7f58 100644
-> --- a/arch/arm/mach-sunxi/dram_timings/h6_ddr3_1333.c
-> +++ b/arch/arm/mach-sunxi/dram_timings/h6_ddr3_1333.c
-> @@ -19,7 +19,6 @@
->   * SPDX-License-Identifier:	GPL-2.0+
->   */
->  
-> -#include <common.h>
->  #include <asm/arch/dram.h>
->  #include <asm/arch/cpu.h>
->  
-> diff --git a/arch/arm/mach-sunxi/dram_timings/h6_lpddr3.c b/arch/arm/mach-sunxi/dram_timings/h6_lpddr3.c
-> index 10008601134a..c243b574406d 100644
-> --- a/arch/arm/mach-sunxi/dram_timings/h6_lpddr3.c
-> +++ b/arch/arm/mach-sunxi/dram_timings/h6_lpddr3.c
-> @@ -6,7 +6,6 @@
->   * SPDX-License-Identifier:	GPL-2.0+
->   */
->  
-> -#include <common.h>
->  #include <asm/arch/dram.h>
->  #include <asm/arch/cpu.h>
->  
-> diff --git a/arch/arm/mach-sunxi/dram_timings/lpddr3_stock.c b/arch/arm/mach-sunxi/dram_timings/lpddr3_stock.c
-> index bd57e2f6aac2..bc47a4638533 100644
-> --- a/arch/arm/mach-sunxi/dram_timings/lpddr3_stock.c
-> +++ b/arch/arm/mach-sunxi/dram_timings/lpddr3_stock.c
-> @@ -1,4 +1,3 @@
-> -#include <common.h>
->  #include <asm/arch/dram.h>
->  #include <asm/arch/cpu.h>
->  
-> diff --git a/board/sunxi/board.c b/board/sunxi/board.c
-> index 1313b01dcea5..ed86f1df5dc4 100644
-> --- a/board/sunxi/board.c
-> +++ b/board/sunxi/board.c
-> @@ -10,7 +10,6 @@
->   * Some board init for the Allwinner A10-evb board.
->   */
->  
-> -#include <common.h>
->  #include <clock_legacy.h>
->  #include <dm.h>
->  #include <env.h>
-> diff --git a/board/sunxi/chip.c b/board/sunxi/chip.c
-> index eeee6319e799..270af2506d21 100644
-> --- a/board/sunxi/chip.c
-> +++ b/board/sunxi/chip.c
-> @@ -5,7 +5,6 @@
->   * Based on initial code from Maxime Ripard
->   */
->  
-> -#include <common.h>
->  #include <malloc.h>
->  #include <dm.h>
->  #include <w1.h>
-> diff --git a/board/sunxi/dram_sun4i_auto.c b/board/sunxi/dram_sun4i_auto.c
-> index 547d1c0cb4de..4b78919a5baa 100644
-> --- a/board/sunxi/dram_sun4i_auto.c
-> +++ b/board/sunxi/dram_sun4i_auto.c
-> @@ -1,4 +1,3 @@
-> -#include <common.h>
->  #include <init.h>
->  #include <asm/arch/dram.h>
->  
-> diff --git a/board/sunxi/dram_sun5i_auto.c b/board/sunxi/dram_sun5i_auto.c
-> index 517506ccc4f0..8976e3b16d68 100644
-> --- a/board/sunxi/dram_sun5i_auto.c
-> +++ b/board/sunxi/dram_sun5i_auto.c
-> @@ -1,6 +1,5 @@
->  /* DRAM parameters for auto dram configuration on sun5i and sun7i */
->  
-> -#include <common.h>
->  #include <init.h>
->  #include <asm/arch/dram.h>
->  
-> diff --git a/board/sunxi/gmac.c b/board/sunxi/gmac.c
-> index 2a885305ebe0..710e821e3fc8 100644
-> --- a/board/sunxi/gmac.c
-> +++ b/board/sunxi/gmac.c
-> @@ -1,4 +1,3 @@
-> -#include <common.h>
->  #include <netdev.h>
->  #include <miiphy.h>
->  #include <asm/io.h>
+After this the board still spend a long time waiting for timeout during
+probe of display/hdmi driver (~1200 ms) or reading FDT during pre-reloc
+phase (~600ms).
+
+A copy of this series can be found at [1].
+
+[1] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3399-dt-sync-v2-part1
+
+Jonas Karlman (18):
+  rockchip: rk3399-gru: Fix max SPL size on bob and kevin
+  rockchip: rk3399-puma: Update SPL_PAD_TO Kconfig option
+  rockchip: rk3399-puma: Use common bss and stack addresses
+  rockchip: rk3399-ficus: Enable TPL and use common bss and stack addr
+  rockchip: rk3399: Sort imply statements alphabetically
+  rockchip: rk3399: Enable ARMv8 crypto and FIT checksum validation
+  rockchip: rk3399: Enable random generator on all boards
+  rockchip: rk3399: Imply support for GbE PHY
+  rockchip: rk3399: Enable DT overlay support on all boards
+  rockchip: rk3399: Remove use of xPL_MISC_DRIVERS options
+  rockchip: rk3399: Add a default spl-boot-order prop
+  rockchip: rk3399: Remove inherited bootph-all props
+  rockchip: rk3399: Sort nodes in u-boot.dtsi files
+  rockchip: rk3399: Fix bootph prop for vop nodes
+  rockchip: rk3399-puma: Move uart0 bootph to board u-boot.dtsi
+  rockchip: rk3399: Include uart related pinctrl nodes in TPL/SPL
+  rockchip: rk3399: Fix loading FIT from SD-card when booting from eMMC
+  rockchip: rk3399: Configure sdmmc regulator pinctrl in SPL
+
+ arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi     |   1 -
+ arch/arm/dts/rk3399-evb-u-boot.dtsi           |  26 +++--
+ arch/arm/dts/rk3399-ficus-u-boot.dtsi         |  12 ++-
+ arch/arm/dts/rk3399-firefly-u-boot.dtsi       |   6 --
+ arch/arm/dts/rk3399-gru-u-boot.dtsi           |  24 +++++
+ arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi   |   6 --
+ arch/arm/dts/rk3399-leez-p710-u-boot.dtsi     |   6 --
+ arch/arm/dts/rk3399-nanopi4-u-boot.dtsi       |  14 ++-
+ arch/arm/dts/rk3399-orangepi-u-boot.dtsi      |  12 +++
+ arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi  |  23 ++--
+ arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi |  12 ---
+ arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi   |  25 ++---
+ arch/arm/dts/rk3399-roc-pc-u-boot.dtsi        |  31 ++++--
+ arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi  |  10 ++
+ arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi     |   6 --
+ arch/arm/dts/rk3399-rock960-u-boot.dtsi       |  13 ++-
+ arch/arm/dts/rk3399-rockpro64-u-boot.dtsi     |  22 ++--
+ arch/arm/dts/rk3399-u-boot.dtsi               | 101 +++++++++++++-----
+ .../arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi |   6 --
+ arch/arm/mach-rockchip/Kconfig                |  36 ++++---
+ configs/chromebook_bob_defconfig              |   6 +-
+ configs/chromebook_kevin_defconfig            |   6 +-
+ configs/eaidk-610-rk3399_defconfig            |   2 +-
+ configs/evb-rk3399_defconfig                  |   4 +-
+ configs/ficus-rk3399_defconfig                |  16 +--
+ configs/firefly-rk3399_defconfig              |   4 +-
+ configs/khadas-edge-captain-rk3399_defconfig  |   2 +-
+ configs/khadas-edge-rk3399_defconfig          |   2 +-
+ configs/khadas-edge-v-rk3399_defconfig        |   2 +-
+ configs/leez-rk3399_defconfig                 |   3 +-
+ configs/nanopc-t4-rk3399_defconfig            |   4 +-
+ configs/nanopi-m4-2gb-rk3399_defconfig        |   4 +-
+ configs/nanopi-m4-rk3399_defconfig            |   4 +-
+ configs/nanopi-m4b-rk3399_defconfig           |   4 +-
+ configs/nanopi-neo4-rk3399_defconfig          |   4 +-
+ configs/nanopi-r4s-rk3399_defconfig           |   4 +-
+ configs/orangepi-rk3399_defconfig             |   4 +-
+ configs/pinebook-pro-rk3399_defconfig         |   7 +-
+ configs/pinephone-pro-rk3399_defconfig        |   5 +-
+ configs/puma-rk3399_defconfig                 |  14 +--
+ configs/roc-pc-mezzanine-rk3399_defconfig     |   4 +-
+ configs/roc-pc-rk3399_defconfig               |   6 +-
+ configs/rock-4c-plus-rk3399_defconfig         |   3 +-
+ configs/rock-4se-rk3399_defconfig             |   5 +-
+ configs/rock-pi-4-rk3399_defconfig            |   5 +-
+ configs/rock-pi-4c-rk3399_defconfig           |   3 +-
+ configs/rock-pi-n10-rk3399pro_defconfig       |   2 +-
+ configs/rock960-rk3399_defconfig              |   4 +-
+ configs/rockpro64-rk3399_defconfig            |   9 +-
+ 49 files changed, 298 insertions(+), 236 deletions(-)
+
+-- 
+2.43.2
 
