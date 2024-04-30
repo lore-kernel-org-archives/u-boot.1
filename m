@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B9BC4345F
-	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 13:41:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F30DAC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 13:41:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7985B88A8B;
+	by phobos.denx.de (Postfix) with ESMTP id E822588A94;
 	Tue, 30 Apr 2024 15:36:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZUM6WcNC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eFrdhUgE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11BA388A81; Tue, 30 Apr 2024 15:36:39 +0200 (CEST)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 3BAE288A69; Tue, 30 Apr 2024 15:36:39 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDE0A88A68
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 15:36:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9FF8C88A53
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 15:36:36 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6a0406438b5so23181616d6.1
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 06:36:35 -0700 (PDT)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6a05f376effso44313446d6.0
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 06:36:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714484194; x=1715088994; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714484195; x=1715088995; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VBYrDcXI9IUVXr2Oiw/l6BxvMPlkhYo7iO3ESKRSzEk=;
- b=ZUM6WcNCXN9aA/1sHHToEeGBfOFuD3Ca7A4FDN4CgCDjGC0bzuYzfZnK268C6MrjA/
- 935yRa2QtcGadtlXLY3+GJdnnAO8YV9i0qk/QfBJKCTZj8qOIwIxQwo8nQy5hnUbVWhR
- q3/wlw/jjieeEd86XxnmMlk+rgXMG1MV65wcs=
+ bh=rXsa/M8uMhADbT8Th5bVQcwB2ZZAkDzTGf5zLnpwIlY=;
+ b=eFrdhUgEKhHtuaCvpPAGWeZiF4N82Cds1znp4FmOmprdEOd+Km25pXcP3IvKGV3NKO
+ 8bNhFjOWgtthpIVi6OYJy5NeVoPMpL+h7TGL0UjLRvdlxeU4ZMv7u4HzO32M3nDmy6OR
+ Qtp80hwazuvbeNLp5RCy2fIiTeW1PSAax/VTs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714484194; x=1715088994;
+ d=1e100.net; s=20230601; t=1714484195; x=1715088995;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VBYrDcXI9IUVXr2Oiw/l6BxvMPlkhYo7iO3ESKRSzEk=;
- b=juxbeXaE/bZDNnw8kwxaERkIStjL5tyXehBQLGjRnoPRzSygY77y1CRH78Qgw9g2LU
- 73e9OD5omqfqil2dXk4roa7cMJa1OtsqYoBKHwl5VktaP+CoGKJy7+7JxPM9S5jJB1XS
- qpAJV+lchK/1FlD9pfSTOLyB98F14Zf8DELpbde30Y/e6RORZNFzkWiBvNmJD250btkB
- MRFWp2yYbFAFE6hFbm0mlBqd14mMw8ZuFF0ixjy3k+3kOC6bGeR1Ll02F++AEaFN1wjk
- K1njASrLZtzExWAlNWuttU+BPV++UxfCtVz8IBXOAp/xfka8lqVIhyP8oTgHsAZHwI0i
- VQJA==
-X-Gm-Message-State: AOJu0YzMbNtHnUf4UTgOxOCQlELHORDiZc6c2uZXgvrvA6ythY+bU7VD
- 5eL0y9DUF6RcqrC/CriblV3LV39NGFA6zqAboCbSSQXBgWfNk1hbYvE0BdM1XALws8ZYvbQUAAs
- o8GfAZQ==
-X-Google-Smtp-Source: AGHT+IFG73Na/krrKPuWqNqM3Luk+m1LCXOEb6YEZdwSCeXl1D6AFPhJ+KmYsTxYv+NV+iGPUanT6A==
-X-Received: by 2002:a05:6214:5289:b0:6a0:9fd9:faac with SMTP id
- kj9-20020a056214528900b006a09fd9faacmr12218230qvb.9.1714484194476; 
- Tue, 30 Apr 2024 06:36:34 -0700 (PDT)
+ bh=rXsa/M8uMhADbT8Th5bVQcwB2ZZAkDzTGf5zLnpwIlY=;
+ b=M280vxjkrr74o0WG2nGgqptNaqpFjpBY0TpSGj5vUoAc50eIQ4jJMuSYFtbRF/vC0j
+ xZrGhikA1I9sTqkeIowAfKZAztj0YV1ei0uiz402zyqV3vtS4brT0YnxuWjFOmjRQy1K
+ vXQFWRC8eSCcKCjoLQ49qsqPsLVt0diEq3WVfgOOTtdkr9uwIjCVW+ZJFAfPCLsySVmA
+ g+U8CQe2ujSEBIBKLGDP0yrBkqr3tNHqXrx/tX/qG2+JtglTw/oUeYaLga28UpA41vZo
+ +aexVh8uSGsEXCh6PilhnU5i1v5f9Ns1aVDsLtPOxxP6or4zmUoT7Mx9VXA4sKjQYpJE
+ +VRg==
+X-Gm-Message-State: AOJu0YzwCHulq3BF+/tEbqBUOASxL28+GPvtq36r9W2x+qgvaiHF0Pkt
+ JZvDnl9sY7AK/Uey39iVeNNa29waUjmmNYhn356wtdofV3sNJs4VxuOY5YNV6Ayq7CwrOzNc+y2
+ oSW41iQ==
+X-Google-Smtp-Source: AGHT+IFmwHmqx1CByrrd4eHi7o3G1bHd6XH8r2UBnFZRwXjakNrHDj/3xoelnlPocBMW33SUOmkXig==
+X-Received: by 2002:a05:6214:518f:b0:6a0:b352:f3b0 with SMTP id
+ kl15-20020a056214518f00b006a0b352f3b0mr12461428qvb.39.1714484195382; 
+ Tue, 30 Apr 2024 06:36:35 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- f12-20020a05621400cc00b006a0d0d792cesm1743877qvs.83.2024.04.30.06.36.33
+ f12-20020a05621400cc00b006a0d0d792cesm1743877qvs.83.2024.04.30.06.36.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 06:36:34 -0700 (PDT)
+ Tue, 30 Apr 2024 06:36:35 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>
-Subject: [PATCH 30/33] arm: aspeed: Remove <common.h> and add needed includes
-Date: Tue, 30 Apr 2024 07:35:56 -0600
-Message-Id: <20240430133559.1836389-30-trini@konsulko.com>
+Cc: Mark Kettenis <kettenis@openbsd.org>
+Subject: [PATCH 31/33] arm: apple: Remove <common.h> and add needed includes
+Date: Tue, 30 Apr 2024 07:35:57 -0600
+Message-Id: <20240430133559.1836389-31-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240430133559.1836389-1-trini@konsulko.com>
 References: <20240430133559.1836389-1-trini@konsulko.com>
@@ -91,85 +89,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Remove <common.h> from all mach-aspeed files and when needed add missing
+Remove <common.h> from all mach-apple files and when needed add missing
 include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Ryan Chen <ryan_chen@aspeedtech.com>
-Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
-Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
-Cc: Joel Stanley <joel@jms.id.au>
+Cc: Mark Kettenis <kettenis@openbsd.org>
 ---
- arch/arm/mach-aspeed/ast2500/board_common.c | 2 +-
- arch/arm/mach-aspeed/ast2500/clk_ast2500.c  | 1 -
- arch/arm/mach-aspeed/ast2600/board_common.c | 2 +-
- arch/arm/mach-aspeed/ast2600/spl.c          | 1 -
- arch/arm/mach-aspeed/ast_wdt.c              | 1 -
- 5 files changed, 2 insertions(+), 5 deletions(-)
+ arch/arm/mach-apple/board.c | 1 -
+ arch/arm/mach-apple/rtkit.c | 3 ++-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/mach-aspeed/ast2500/board_common.c b/arch/arm/mach-aspeed/ast2500/board_common.c
-index bae10271844a..531c2ad1562c 100644
---- a/arch/arm/mach-aspeed/ast2500/board_common.c
-+++ b/arch/arm/mach-aspeed/ast2500/board_common.c
-@@ -2,7 +2,7 @@
- /*
-  * Copyright (c) 2016 Google, Inc
-  */
--#include <common.h>
-+#include <config.h>
- #include <dm.h>
- #include <init.h>
- #include <log.h>
-diff --git a/arch/arm/mach-aspeed/ast2500/clk_ast2500.c b/arch/arm/mach-aspeed/ast2500/clk_ast2500.c
-index 02bd3f67c96a..50d7f99b2643 100644
---- a/arch/arm/mach-aspeed/ast2500/clk_ast2500.c
-+++ b/arch/arm/mach-aspeed/ast2500/clk_ast2500.c
+diff --git a/arch/arm/mach-apple/board.c b/arch/arm/mach-apple/board.c
+index 7a6151a97223..8bace3005eb5 100644
+--- a/arch/arm/mach-apple/board.c
++++ b/arch/arm/mach-apple/board.c
 @@ -3,7 +3,6 @@
-  * Copyright (C) 2016 Google, Inc
+  * (C) Copyright 2021 Mark Kettenis <kettenis@openbsd.org>
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <asm/io.h>
- #include <asm/arch/scu_ast2500.h>
-diff --git a/arch/arm/mach-aspeed/ast2600/board_common.c b/arch/arm/mach-aspeed/ast2600/board_common.c
-index dc6cdc35d15c..4c0b705ea88d 100644
---- a/arch/arm/mach-aspeed/ast2600/board_common.c
-+++ b/arch/arm/mach-aspeed/ast2600/board_common.c
-@@ -2,7 +2,7 @@
- /*
-  * Copyright (c) Aspeed Technology Inc.
-  */
--#include <common.h>
-+#include <config.h>
- #include <dm.h>
- #include <ram.h>
- #include <timer.h>
-diff --git a/arch/arm/mach-aspeed/ast2600/spl.c b/arch/arm/mach-aspeed/ast2600/spl.c
-index 0952e73a4572..05390c16f3af 100644
---- a/arch/arm/mach-aspeed/ast2600/spl.c
-+++ b/arch/arm/mach-aspeed/ast2600/spl.c
-@@ -2,7 +2,6 @@
- /*
-  * Copyright (c) Aspeed Technology Inc.
-  */
--#include <common.h>
- #include <debug_uart.h>
- #include <dm.h>
- #include <spl.h>
-diff --git a/arch/arm/mach-aspeed/ast_wdt.c b/arch/arm/mach-aspeed/ast_wdt.c
-index 5bc442ef33ce..c420940d1cb9 100644
---- a/arch/arm/mach-aspeed/ast_wdt.c
-+++ b/arch/arm/mach-aspeed/ast_wdt.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2016 Google, Inc
+ #include <dm/uclass-internal.h>
+ #include <efi_loader.h>
+diff --git a/arch/arm/mach-apple/rtkit.c b/arch/arm/mach-apple/rtkit.c
+index a550b553b663..b8f4771e5e71 100644
+--- a/arch/arm/mach-apple/rtkit.c
++++ b/arch/arm/mach-apple/rtkit.c
+@@ -4,13 +4,14 @@
+  * (C) Copyright 2021 Copyright The Asahi Linux Contributors
   */
  
 -#include <common.h>
- #include <asm/io.h>
- #include <asm/arch/wdt.h>
- #include <linux/err.h>
+ #include <mailbox.h>
+ #include <malloc.h>
+ 
+ #include <asm/arch/rtkit.h>
+ #include <linux/apple-mailbox.h>
+ #include <linux/bitfield.h>
++#include <linux/errno.h>
++#include <linux/types.h>
+ 
+ #define APPLE_RTKIT_EP_MGMT 0
+ #define APPLE_RTKIT_EP_CRASHLOG	1
 -- 
 2.34.1
 
