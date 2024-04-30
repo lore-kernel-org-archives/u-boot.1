@@ -4,73 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CD97C4345F
-	for <u-boot@archiver.kernel.org>; Mon, 29 Apr 2024 23:06:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00AA6C4345F
+	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 01:49:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1088889DF;
-	Tue, 30 Apr 2024 01:04:32 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id F301E8871F;
+	Tue, 30 Apr 2024 03:49:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C2Vzix1y";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HXYsIB3Y";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87B3D889A9; Tue, 30 Apr 2024 01:04:26 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6699788725; Tue, 30 Apr 2024 03:49:00 +0200 (CEST)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7FCE0889B9
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 01:04:24 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A08C8870B
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 03:48:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-790ff1fa7b3so89000985a.2
- for <u-boot@lists.denx.de>; Mon, 29 Apr 2024 16:04:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714431863; x=1715036663; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=CJHqcH0e42ck9PHmLuPUanU2NjsoYcR6jlD3EhSbLtk=;
- b=C2Vzix1yOmyrV3l+kxlFODqV+XazANL+bTzF+TRyZDJ1XY9zdxd2NG3hp6fNDzYNuD
- iTr03r+pIKxKds6nLhcPslAiHtNSq2YoxaCO0XUi1gfWrLEglmXSy21PHBxEyYChNVjA
- o8e4uOhhUQixVpXfcLqHHseFPX/nTT92xjYck=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714431863; x=1715036663;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=CJHqcH0e42ck9PHmLuPUanU2NjsoYcR6jlD3EhSbLtk=;
- b=Aw8c5fD5ANaj0d+ihGu2OoddQpiETGZCMlvrV0o7IqXcMSSKmXg7kx9P7L/EooiwsD
- 4PO+w7xJl9CDBQO2ZFNgVdprH68drmzCAnYwSNLM9zuD2zt/gTmWmI8s69tOPXMg6fKd
- yBed8MSTrkHdbbO+hdJ5sKi2n1VmmtE+/5ik3gcUwkbuOViuTzmODWlXibzIspTpyoEu
- r9SadAxx+BnePRheHCpBMCSw/a6pyI7mTHHjLmz5wAawfh71g1WO0ED1Nr4EIKMiZ3FA
- n/bk8pllMXlUvrcC5isClA0mSD7/FGKhO33qEfYKPX3n3gvtUNSQodjGNZ106SIef9Wz
- bpBw==
-X-Gm-Message-State: AOJu0YwBCp3NjJrM/t8OWn/ghaoLi8Qd4nneWGRrMLzpCXbp3h0oUorY
- 0fPAnhlwSAyl0R7goZDPoGFxuAoVuvtxMGhgZISeCc4VLf6p/zBfj1HrYgK7fr1BSNemYEYCcT+
- CH2KxCg==
-X-Google-Smtp-Source: AGHT+IFfHl1oDzMPha6bJKj1C3PgqcnI+7fsK5CUSJ1Kr6TgDcufmdFFfIKY9GjnEnkUzDIcoxY6qQ==
-X-Received: by 2002:a05:620a:10ba:b0:78b:cfdc:b0fc with SMTP id
- h26-20020a05620a10ba00b0078bcfdcb0fcmr8975168qkk.21.1714431862910; 
- Mon, 29 Apr 2024 16:04:22 -0700 (PDT)
-Received: from [127.0.1.1] ([187.144.98.216]) by smtp.gmail.com with ESMTPSA id
- h6-20020a05620a13e600b0078f044ff474sm10967156qkl.35.2024.04.29.16.04.22
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 29 Apr 2024 16:04:22 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Daniel Schultz <d.schultz@phytec.de>
-In-Reply-To: <20240419155540.2447006-1-d.schultz@phytec.de>
-References: <20240419155540.2447006-1-d.schultz@phytec.de>
-Subject: Re: [PATCH 0/5] Update PHYTEC SOM Detection
-Message-Id: <171443186216.1749944.4720717716938824007.b4-ty@konsulko.com>
-Date: Mon, 29 Apr 2024 17:04:22 -0600
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4VT35M3PqTz9st3;
+ Tue, 30 Apr 2024 03:48:55 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1714441735;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=+DDHWUJFd2elbMJcEsu3VjzoonLvX8UY6aFel+z5gH8=;
+ b=HXYsIB3Y5OyNCU8oIkmJ6C5LqPVbhi9hdoaOBt4pg0CoFsG0LxFjfnhm6dNUUPqRZgQyUo
+ qcooCXjTzQZq0/4FOHxyNKG4t4YGKfZLx5EUKsa96EnONSmMRnYIGs58Izcha2OL+3LE6l
+ kqrRPFHT4PTXzfE7h2Mk1qfayWbpsVsQmiLDtIzpeGA1VcWUMWhVqRiwQj4DHZDPDH2HP+
+ /KQ8aeeeOF2R0l5gbjzRmoQs6kVaPOgov7dpTQgCXF8X1v2Pv+I41J/tDF+IhPkpjuO5zg
+ ptLaJslJYPnFC5NNFMuF5bT+OxoLzHA5DPRfy0bplTgVwANw/Z3taChqEoZAOA==
+Message-ID: <d1eb5f12-0718-4a85-bfe1-3c141ee6b049@mailbox.org>
+Date: Tue, 30 Apr 2024 03:48:53 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Subject: Re: [PATCH v4] mmc: Poll CD in case cyclic framework is enabled
+To: Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+Cc: 'Peng Fan' <peng.fan@nxp.com>, 'Simon Glass' <sjg@chromium.org>
+References: <20240316201416.211480-1-marek.vasut+renesas@mailbox.org>
+ <CGME20240423231800epcas1p4e21bd06153b2394afd9a8696a4df6470@epcas1p4.samsung.com>
+ <fab40e09-1ac4-45c3-8dda-f0a1544d2d39@mailbox.org>
+ <000001da97a2$d3247950$796d6bf0$@samsung.com>
+ <e55e21af-7208-4b4d-9398-ee1e4825f69b@mailbox.org>
+ <050401da9a85$b24539a0$16cface0$@samsung.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <050401da9a85$b24539a0$16cface0$@samsung.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.13.0
+X-MBO-RS-META: ftsmhntk9dadfyimxpz6ji6qbgdkdthj
+X-MBO-RS-ID: b2d81e36e215aa429fd
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,24 +79,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 19 Apr 2024 08:55:35 -0700, Daniel Schultz wrote:
-
-> This patch series extends PHYTEC's SOM detection by minor
-> fixes, a generic helper function and a new valid flag.
+On 4/30/24 12:36 AM, Jaehoon Chung wrote:
 > 
-> Moreover, it adds a module to provide access to the SOM
-> detection for our TI AM6 products.
 > 
-> Daniel Schultz (3):
->   board: phytec: common: Generic "add extension" function
->   board: phytec: common: Fix eepom is empty check
->   board: phytec: Add SOM detection for AM6x
+>> -----Original Message-----
+>> From: Marek Vasut <marek.vasut@mailbox.org>
+>> Sent: Friday, April 26, 2024 8:41 PM
+>> To: Jaehoon Chung <jh80.chung@samsung.com>; u-boot@lists.denx.de
+>> Cc: 'Peng Fan' <peng.fan@nxp.com>; 'Simon Glass' <sjg@chromium.org>
+>> Subject: Re: [PATCH v4] mmc: Poll CD in case cyclic framework is enabled
+>>
+>> On 4/26/24 8:27 AM, Jaehoon Chung wrote:
+>>> Dear Marek,
+>>>
+>>>> -----Original Message-----
+>>>> From: Marek Vasut <marek.vasut@mailbox.org>
+>>>> Sent: Wednesday, April 24, 2024 8:18 AM
+>>>> To: u-boot@lists.denx.de; Jaehoon Chung <jh80.chung@samsung.com>
+>>>> Cc: Peng Fan <peng.fan@nxp.com>; Simon Glass <sjg@chromium.org>
+>>>> Subject: Re: [PATCH v4] mmc: Poll CD in case cyclic framework is enabled
+>>>>
+>>>> On 3/16/24 9:13 PM, Marek Vasut wrote:
+>>>>> In case the cyclic framework is enabled, poll the card detect of already
+>>>>> initialized cards and deinitialize them in case they are removed. Since
+>>>>> the card initialization is a longer process and card initialization is
+>>>>> done on first access to an uninitialized card anyway, avoid initializing
+>>>>> newly detected uninitialized cards in the cyclic callback.
+>>>>
+>>>> Any input on this ?
+>>>
+>>> When I have applied your patch from patchwork, it didn't apply directly.
+>>> If you're ok, I will apply after touch your patch. Is it ok?
+>>
+>> Sure.
 > 
-> [...]
+> After touching your patch, I will inform again to you.
 
-Applied to u-boot/master, thanks!
-
--- 
-Tom
-
-
+btw. what is the problem with the patch ?
