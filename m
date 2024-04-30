@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F473C4345F
-	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 15:33:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C62CCC4345F
+	for <u-boot@archiver.kernel.org>; Tue, 30 Apr 2024 15:33:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 893EC88A3F;
-	Tue, 30 Apr 2024 17:32:59 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id EB48388A2C;
+	Tue, 30 Apr 2024 17:33:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="fRSGksAv";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="KNziImeg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2472C887BA; Tue, 30 Apr 2024 17:32:58 +0200 (CEST)
+ id D296688A49; Tue, 30 Apr 2024 17:33:05 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B5EC88A38
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 17:32:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 23DE2887BA
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 17:33:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,25 +28,26 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1714491095; bh=h6QDybBoRB6rFEuf7iBo954NaR+xsqqooiLIGYiWWQs=;
- b=fRSGksAvUplJFuULTIvaJUFL3XdfqCifmOKBYmr+oq4N6e3YCSb7DWkfHaiqRSj7/XDsl0/Rd
- huw386fl9zbrHhxIGPxR6GM93rUZI7L23K7w27oo38BmWmM1P8gGcEZrStzT84lau/uHf1OmyNz
- YjOGyXkl7OM5aTM0R5a2hNHewEbnEKbp7EYW63xN4EBiWvL1abBLZeG1JkirvFO1uaH1PJhB+vo
- wXK/vS4qrCluutxi+WVsRJRbPDMQ/zw/Ai9cJC6wTXbFa7g2293V6mrwvthsqwSQWmBvovb7ko5
- rvpUkq1bcN81UvhxCm1Bu2VV8OXXKzsNRRKonPPzS4NA==
+ t=1714491094; bh=Zj1hjVgqHN4yjbYOPERCUxUnugTD1A8AclBKLTYBQ+E=;
+ b=KNziImegs03BdAs1X5KGa96oaSMcUZLvQtds3BJ/ay5pDevuzRE7U6Lsz3Ji5JabtcPDF5q2b
+ qUQzieKXTNNb5zll3lEPFLvyWTRHrBIfmoNchITC2IXOZq4Mf7R+iPAisL+BNNePWSJcn4/4zuD
+ kVNXjYiBvTLdRnnFfOSBr7TIewGoZkbaf8Pi7y8JlsOm0LZgifDabP1K1rbfCTDbEG5LyRx9pSG
+ AHrnGgVRGMWb1q8/1oqBP+76aWJHb7TE+U15prYsdSQCT4ckEOhIpj/o7/h3JoWeoymVBdYiBbO
+ VH5bPqBZ6nCysbejf4VBsafVILOlfTzVD7De6Mr+ylQw==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Peter Robinson <pbrobinson@gmail.com>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Jonas Karlman <jonas@kwiboo.se>, Levin Du
- <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>, Jagan Teki
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Andy Yan
+ <andy.yan@rock-chips.com>, Quentin Schulz
+ <quentin.schulz@theobroma-systems.com>, Klaus Goger
+ <klaus.goger@theobroma-systems.com>, Christopher Obbard
+ <chris.obbard@collabora.com>, Jonas Karlman <jonas@kwiboo.se>, Jagan Teki
  <jagan@amarulasolutions.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-Subject: [PATCH v2 07/18] rockchip: rk3399: Enable random generator on all
- boards
-Date: Tue, 30 Apr 2024 15:30:14 +0000
-Message-ID: <20240430153053.308788-8-jonas@kwiboo.se>
+Cc: Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
+Subject: [PATCH v2 06/18] rockchip: rk3399: Enable ARMv8 crypto and FIT
+ checksum validation
+Date: Tue, 30 Apr 2024 15:30:13 +0000
+Message-ID: <20240430153053.308788-7-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240430153053.308788-1-jonas@kwiboo.se>
 References: <20240430153053.308788-1-jonas@kwiboo.se>
@@ -58,7 +59,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  167.172.40.54
-X-ForwardEmail-ID: 66310ed4d99e42224315b843
+X-ForwardEmail-ID: 66310eced99e42224315b831
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,198 +76,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The RK3399 SoC contain a crypto engine block that can generate random
-numbers.
+The RK3399 SoC support the ARMv8 Cryptography Extensions, use of ARMv8
+crypto can speed up FIT checksum validation in SPL.
 
-Imply DM_RNG and RNG_ROCKCHIP Kconfig options to take advantage of the
-random generator on all RK3399 boards. Also remove the unnecessary use
-of a status = "okay" prop.
+Imply ARMV8_SET_SMPEN and ARMV8_CRYPTO to take advantage of the crypto
+extensions for SHA256 when validating checksum of FIT images.
+
+Imply SPL_FIT_SIGNATURE and LEGACY_IMAGE_FORMAT to enable FIT checksum
+validation to almost all RK3399 boards.
+
+The following boards have been excluded:
+- chromebook_bob: SPL max size limitation of 120 KiB
+- chromebook_kevin: SPL max size limitation of 120 KiB
+
+Also imply OF_LIVE to help speed up init of U-Boot proper and disable
+CONFIG_SPL_RAW_IMAGE_SUPPORT on leez-rk3399 to ensure SPL does not try
+to jump to code that failed checksum validation.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
-Reviewed-by: Peter Robinson <pbrobinson@gmail.com>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
-v2: Move rng node cleanup to this patch
-v2: Collect r-b tags
+v2: Do not exclude puma-rk3399 from FIT checksum validation in SPL
 ---
- arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi | 4 ----
- arch/arm/dts/rk3399-u-boot.dtsi               | 1 -
- arch/arm/mach-rockchip/Kconfig                | 2 ++
- configs/chromebook_bob_defconfig              | 2 --
- configs/chromebook_kevin_defconfig            | 2 --
- configs/evb-rk3399_defconfig                  | 2 --
- configs/firefly-rk3399_defconfig              | 2 --
- configs/pinebook-pro-rk3399_defconfig         | 2 --
- configs/pinephone-pro-rk3399_defconfig        | 2 --
- configs/roc-pc-rk3399_defconfig               | 2 --
- configs/rock960-rk3399_defconfig              | 2 --
- configs/rockpro64-rk3399_defconfig            | 2 --
- 12 files changed, 2 insertions(+), 23 deletions(-)
+ arch/arm/mach-rockchip/Kconfig     | 5 +++++
+ configs/chromebook_bob_defconfig   | 1 +
+ configs/chromebook_kevin_defconfig | 1 +
+ configs/leez-rk3399_defconfig      | 1 +
+ configs/puma-rk3399_defconfig      | 1 -
+ configs/rock-4se-rk3399_defconfig  | 2 --
+ configs/rock-pi-4-rk3399_defconfig | 1 -
+ configs/rockpro64-rk3399_defconfig | 2 --
+ 8 files changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-index cabf0a9dae89..0e46e87e1fa0 100644
---- a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-@@ -12,10 +12,6 @@
- 	};
- };
- 
--&rng {
--	status = "okay";
--};
--
- &sdhci {
- 	max-frequency = <25000000>;
- 	bootph-all;
-diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
-index 87b173e59579..0b0a90acf431 100644
---- a/arch/arm/dts/rk3399-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-u-boot.dtsi
-@@ -32,7 +32,6 @@
- 	rng: rng@ff8b8000 {
- 		compatible = "rockchip,rk3399-crypto";
- 		reg = <0x0 0xff8b8000 0x0 0x1000>;
--		status = "okay";
- 	};
- 
- 	dmc: dmc {
 diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 7c0116da4921..f580d69ed879 100644
+index 20f1b7572a31..7c0116da4921 100644
 --- a/arch/arm/mach-rockchip/Kconfig
 +++ b/arch/arm/mach-rockchip/Kconfig
-@@ -265,12 +265,14 @@ config ROCKCHIP_RK3399
- 	imply ARMV8_SET_SMPEN
+@@ -261,15 +261,20 @@ config ROCKCHIP_RK3399
+ 	select DM_PMIC
+ 	select DM_REGULATOR_FIXED
+ 	select BOARD_LATE_INIT
++	imply ARMV8_CRYPTO
++	imply ARMV8_SET_SMPEN
  	imply BOOTSTD_FULL
  	imply CMD_BOOTCOUNT if BOOTCOUNT_LIMIT
-+	imply DM_RNG
- 	imply LEGACY_IMAGE_FORMAT
++	imply LEGACY_IMAGE_FORMAT
  	imply MISC
  	imply MISC_INIT_R
- 	imply OF_LIVE
++	imply OF_LIVE
  	imply PARTITION_TYPE_GUID
  	imply PRE_CONSOLE_BUFFER
-+	imply RNG_ROCKCHIP
  	imply ROCKCHIP_COMMON_BOARD
  	imply ROCKCHIP_EFUSE
  	imply ROCKCHIP_SDRAM_COMMON
++	imply SPL_FIT_SIGNATURE
+ 	imply SPL_ROCKCHIP_COMMON_BOARD
+ 	imply SYS_BOOTCOUNT_SINGLEWORD if BOOTCOUNT_LIMIT
+ 	imply TPL_CLK
 diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
-index 400b2d7ed7de..5ffd5195ea19 100644
+index 805da11dbf6a..400b2d7ed7de 100644
 --- a/configs/chromebook_bob_defconfig
 +++ b/configs/chromebook_bob_defconfig
-@@ -89,8 +89,6 @@ CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_CROS_EC=y
- CONFIG_PWM_ROCKCHIP=y
--CONFIG_DM_RNG=y
--CONFIG_RNG_ROCKCHIP=y
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
- CONFIG_ROCKCHIP_SPI=y
+@@ -28,6 +28,7 @@ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+ CONFIG_SPL_SPI=y
+ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_DEBUG_UART=y
++# CONFIG_SPL_FIT_SIGNATURE is not set
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-gru-bob.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
 diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
-index a881028cc7eb..bacdcc367bda 100644
+index 8744152df61d..a881028cc7eb 100644
 --- a/configs/chromebook_kevin_defconfig
 +++ b/configs/chromebook_kevin_defconfig
-@@ -90,8 +90,6 @@ CONFIG_DM_REGULATOR_GPIO=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_CROS_EC=y
- CONFIG_PWM_ROCKCHIP=y
--CONFIG_DM_RNG=y
--CONFIG_RNG_ROCKCHIP=y
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
- CONFIG_ROCKCHIP_SPI=y
-diff --git a/configs/evb-rk3399_defconfig b/configs/evb-rk3399_defconfig
-index d81c7f9604e1..c4936768ffb6 100644
---- a/configs/evb-rk3399_defconfig
-+++ b/configs/evb-rk3399_defconfig
-@@ -47,8 +47,6 @@ CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
--CONFIG_DM_RNG=y
--CONFIG_RNG_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-diff --git a/configs/firefly-rk3399_defconfig b/configs/firefly-rk3399_defconfig
-index 545c047c6df8..8f68ffbd3a49 100644
---- a/configs/firefly-rk3399_defconfig
-+++ b/configs/firefly-rk3399_defconfig
-@@ -45,8 +45,6 @@ CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
--CONFIG_DM_RNG=y
--CONFIG_RNG_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-diff --git a/configs/pinebook-pro-rk3399_defconfig b/configs/pinebook-pro-rk3399_defconfig
-index 23ac24a0bffe..e4aad1b710cb 100644
---- a/configs/pinebook-pro-rk3399_defconfig
-+++ b/configs/pinebook-pro-rk3399_defconfig
-@@ -75,8 +75,6 @@ CONFIG_REGULATOR_PWM=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM_ROCKCHIP_LPDDR4=y
--CONFIG_DM_RNG=y
--CONFIG_RNG_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-diff --git a/configs/pinephone-pro-rk3399_defconfig b/configs/pinephone-pro-rk3399_defconfig
-index 8c6323f6c516..285c47d76b6e 100644
---- a/configs/pinephone-pro-rk3399_defconfig
-+++ b/configs/pinephone-pro-rk3399_defconfig
-@@ -65,8 +65,6 @@ CONFIG_REGULATOR_PWM=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM_ROCKCHIP_LPDDR4=y
--CONFIG_DM_RNG=y
--CONFIG_RNG_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_ROCKCHIP_SPI=y
-diff --git a/configs/roc-pc-rk3399_defconfig b/configs/roc-pc-rk3399_defconfig
-index a41f71d9e167..5d6e6b17091f 100644
---- a/configs/roc-pc-rk3399_defconfig
-+++ b/configs/roc-pc-rk3399_defconfig
-@@ -60,8 +60,6 @@ CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- # CONFIG_RAM_ROCKCHIP_DEBUG is not set
- CONFIG_RAM_ROCKCHIP_LPDDR4=y
--CONFIG_DM_RNG=y
--CONFIG_RNG_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-diff --git a/configs/rock960-rk3399_defconfig b/configs/rock960-rk3399_defconfig
-index 13575c580054..7a4a3df85b1b 100644
---- a/configs/rock960-rk3399_defconfig
-+++ b/configs/rock960-rk3399_defconfig
-@@ -52,8 +52,6 @@ CONFIG_PMIC_RK8XX=y
- CONFIG_REGULATOR_PWM=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
--CONFIG_DM_RNG=y
--CONFIG_RNG_ROCKCHIP=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
+@@ -29,6 +29,7 @@ CONFIG_SPL_SPI_FLASH_SUPPORT=y
+ CONFIG_SPL_SPI=y
+ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_DEBUG_UART=y
++# CONFIG_SPL_FIT_SIGNATURE is not set
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-gru-kevin.dtb"
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+diff --git a/configs/leez-rk3399_defconfig b/configs/leez-rk3399_defconfig
+index e5088341389a..2831cfb36689 100644
+--- a/configs/leez-rk3399_defconfig
++++ b/configs/leez-rk3399_defconfig
+@@ -15,6 +15,7 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-leez-p710.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+ CONFIG_SPL_PAD_TO=0x7f8000
++# CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+diff --git a/configs/puma-rk3399_defconfig b/configs/puma-rk3399_defconfig
+index bd4926cf0fce..53fc62bf7e35 100644
+--- a/configs/puma-rk3399_defconfig
++++ b/configs/puma-rk3399_defconfig
+@@ -42,7 +42,6 @@ CONFIG_CMD_TIME=y
+ CONFIG_CMD_PMIC=y
+ CONFIG_CMD_REGULATOR=y
+ CONFIG_SPL_OF_CONTROL=y
+-CONFIG_OF_LIVE=y
+ CONFIG_OF_SPL_REMOVE_PROPS="interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_MMC=y
+diff --git a/configs/rock-4se-rk3399_defconfig b/configs/rock-4se-rk3399_defconfig
+index 712502517eb2..04622df3c0a0 100644
+--- a/configs/rock-4se-rk3399_defconfig
++++ b/configs/rock-4se-rk3399_defconfig
+@@ -15,8 +15,6 @@ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_PCI=y
+ CONFIG_DEBUG_UART=y
+ # CONFIG_ANDROID_BOOT_IMAGE is not set
+-CONFIG_SPL_FIT_SIGNATURE=y
+-CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-4se.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x2e000
+diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
+index 315b8b853fc3..9036c51de421 100644
+--- a/configs/rock-pi-4-rk3399_defconfig
++++ b/configs/rock-pi-4-rk3399_defconfig
+@@ -19,7 +19,6 @@ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_PCI=y
+ CONFIG_DEBUG_UART=y
+ # CONFIG_ANDROID_BOOT_IMAGE is not set
+-CONFIG_SPL_FIT_SIGNATURE=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-pi-4a.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+ CONFIG_SPL_MAX_SIZE=0x40000
 diff --git a/configs/rockpro64-rk3399_defconfig b/configs/rockpro64-rk3399_defconfig
-index 062477286708..368ef7c4b5db 100644
+index d66b4a9d8900..062477286708 100644
 --- a/configs/rockpro64-rk3399_defconfig
 +++ b/configs/rockpro64-rk3399_defconfig
-@@ -68,8 +68,6 @@ CONFIG_REGULATOR_PWM=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM_ROCKCHIP_LPDDR4=y
--CONFIG_DM_RNG=y
--CONFIG_RNG_ROCKCHIP=y
- CONFIG_SCSI=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
+@@ -17,8 +17,6 @@ CONFIG_SPL_SPI=y
+ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_PCI=y
+ CONFIG_DEBUG_UART=y
+-CONFIG_SPL_FIT_SIGNATURE=y
+-CONFIG_LEGACY_IMAGE_FORMAT=y
+ CONFIG_BOOTSTAGE=y
+ CONFIG_BOOTSTAGE_REPORT=y
+ CONFIG_USE_PREBOOT=y
 -- 
 2.43.2
 
