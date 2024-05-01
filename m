@@ -4,74 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94142C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:57:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2273CC4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:57:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA93688BAC;
-	Wed,  1 May 2024 04:44:46 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 35A9D88BB3;
+	Wed,  1 May 2024 04:44:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="M/rs5QTl";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z80kuUr3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2490F88B9D; Wed,  1 May 2024 04:44:45 +0200 (CEST)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id 142C388BB2; Wed,  1 May 2024 04:44:47 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99EAD88BAC
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EB5DF88B97
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:44 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6a0c8fb3540so4318506d6.1
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:42 -0700 (PDT)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-790f91b834cso232637085a.0
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531481; x=1715136281; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531483; x=1715136283; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=d7B/iIORXl6MbfpPeo3KN9hw9BdyPn/5cTqaRFKlpvI=;
- b=M/rs5QTlW4/MBWIApH+f8EUWL7Jesaq3Wxb1HDQpQy6qy1/CRnhapzFyHwsTX6t/fi
- nk60sKrRN/3XgUCYSLuEnCb49EV0gL4356Hm4Bpls1BV17GaCQJLpucsoPHrEN/NfbSl
- 19Evpzx+i8oiP5Xx3FMr22Rn7rEJLCTGhOAwk=
+ bh=/pi8AXEqSn6GcYiupcZTt1yd0MUZSUnAt+ndS+pNaZo=;
+ b=Z80kuUr3t6PBaTFdrh59cR643WuCOp5bT2/29Sb8O0QmoJQNx/2NPhcZnwRs12uAG6
+ e0VWjslFLgy13ys3Ql1mPTBP4knZ5Rm3xSWa+ZEi/jLR6tUcJBNtmY33cd4+yjDWb18Q
+ PSyWtlOremFtOxsJkwBHQeoa7HkXJjEX8ef/I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531481; x=1715136281;
+ d=1e100.net; s=20230601; t=1714531483; x=1715136283;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=d7B/iIORXl6MbfpPeo3KN9hw9BdyPn/5cTqaRFKlpvI=;
- b=L4DsnqNFlGm87UuIQ8Cme8NxCLrOWi1GVcl4CW8FqDPAWveyYl4maJ9JjP8hKQLy5t
- kjzJIletlJ0Z+De4q/Xc0nlMk11rll+z8IUrYuGG0YjpXgfR7lwJfFycwXJz9oNZultU
- 0UIU0t65CvuvfW4F86r91mhu1wrZlX134CLhHw7rMtzb72iuX5YGnrP/T0+QcBhYAP1R
- oeRGegIB+54n8cyQlt/mtMX2SOqN8J3J+A22eTSTQPNjBS78VgT1xfxC4nnCae//CqKm
- 9QWmVLbWJ9HE/QlOJrc3QV3mxAvPvfFN/gllkqQywZUCES81LYCLmJXVQRe+v487BN19
- dFiQ==
-X-Gm-Message-State: AOJu0YzQTxfgtDwI8NSq9ZnE69bsBl3Hl/+bZmbQmO3LTRHl+xVsq6HK
- bwEzn2Qky/xcVjtcLPPlVzB5uEI3RNR8IXYpybp7VVELOeTakDr2XUWUujbJOgEHPS1lkfGkVaB
- IjXHK9w==
-X-Google-Smtp-Source: AGHT+IFWTGNMz+QypzMuAxcejBws2xJHQTZGjUBwKMJP6SRymlD2RgaPyCvQDP0uOnoyObGBlpvT/w==
-X-Received: by 2002:a05:6214:1c4f:b0:6a0:e529:e953 with SMTP id
- if15-20020a0562141c4f00b006a0e529e953mr6013227qvb.6.1714531481389; 
- Tue, 30 Apr 2024 19:44:41 -0700 (PDT)
+ bh=/pi8AXEqSn6GcYiupcZTt1yd0MUZSUnAt+ndS+pNaZo=;
+ b=UDj3hksMupmyoRc0iJdlBZBxRbrHUc2r2udRLs1Iljc4hsQ+V7znBC1G1KUpNdviFr
+ CvsfBDoEHqvSE7vp8ZbUw/1hfD263gtYy3b89qBo7ZXLg8iyt2xszYWpKw3oj2F4U4NV
+ RjeHMxB1YWsJuiPxk5lgy3mnpmW11U3z+SERaOyppkCTxxcpwlnFmowC7i/iaODjjADN
+ MVoT8+kGqU0wOCTqa28vNGL7D2Kypo5mtxYbT0W+ZUcaSbo6vfLF8L4Llx8JXfvN5BkX
+ PrArEidrudB+fjmavdJVZiOoQfsuHnuuAu/V0Sp/FWI1rrdkn56DfcAJ+my1H9uWXTjq
+ pAmg==
+X-Gm-Message-State: AOJu0Ywp4PkesokUFHEO4XY49zEwoLyeDnFNwFcp7jJ+716kmZN8qkZJ
+ rFChsYvdInGtQQGiITJ/P8IiFC6GGpwkwdv0XvoA1VqZPogzlHc8e2rb2Dle7Ih9Lkx2fRoGfAz
+ KAjXNSQ==
+X-Google-Smtp-Source: AGHT+IHtSlmooiEtAD1jOIXdKna2hdVyf7t1DvzRJlKpjMv4kDKJ62m86DdSnHDzzq79ITi54hSKMA==
+X-Received: by 2002:a05:6214:62d:b0:69b:4c1a:83ca with SMTP id
+ a13-20020a056214062d00b0069b4c1a83camr1061315qvx.26.1714531483436; 
+ Tue, 30 Apr 2024 19:44:43 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.40
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:44:41 -0700 (PDT)
+ Tue, 30 Apr 2024 19:44:43 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Peter Griffin <peter.griffin@linaro.org>,
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
- Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>,
- Shawn Guo <shawn.guo@linaro.org>, Igor Opaniuk <igor.opaniuk@gmail.com>
-Subject: [PATCH 070/149] board: hisilicon: Remove <common.h> and add needed
+Cc: Paul Burton <paul.burton@mips.com>,
+ Ezequiel Garcia <ezequiel@collabora.com>,
+ Zubair Lutfullah Kakakhel <Zubair.Kakakhel@imgtec.com>
+Subject: [PATCH 072/149] board: imgtec: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:41:57 -0600
-Message-Id: <20240501024316.1767971-70-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:41:59 -0600
+Message-Id: <20240501024316.1767971-72-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -98,53 +97,92 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Peter Griffin <peter.griffin@linaro.org>
-Cc: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Cc: Jorge Ramirez-Ortiz <jorge.ramirez.ortiz@gmail.com>
-Cc: Shawn Guo <shawn.guo@linaro.org>
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
+Cc: Paul Burton <paul.burton@mips.com>
+Cc: Ezequiel Garcia <ezequiel@collabora.com>
+Cc: Zubair Lutfullah Kakakhel <Zubair.Kakakhel@imgtec.com>
 ---
- board/hisilicon/hikey/hikey.c       | 1 -
- board/hisilicon/hikey960/hikey960.c | 1 -
- board/hisilicon/poplar/poplar.c     | 1 -
- 3 files changed, 3 deletions(-)
+ board/imgtec/boston/checkboard.c | 1 -
+ board/imgtec/boston/ddr.c        | 2 +-
+ board/imgtec/boston/dt.c         | 1 -
+ board/imgtec/ci20/ci20.c         | 1 -
+ board/imgtec/malta/superio.c     | 1 -
+ board/imgtec/xilfpga/xilfpga.c   | 2 +-
+ 6 files changed, 2 insertions(+), 6 deletions(-)
 
-diff --git a/board/hisilicon/hikey/hikey.c b/board/hisilicon/hikey/hikey.c
-index c9a2d60ee56c..95a831efcafd 100644
---- a/board/hisilicon/hikey/hikey.c
-+++ b/board/hisilicon/hikey/hikey.c
+diff --git a/board/imgtec/boston/checkboard.c b/board/imgtec/boston/checkboard.c
+index c246a7b9d455..b0f7d3243c5e 100644
+--- a/board/imgtec/boston/checkboard.c
++++ b/board/imgtec/boston/checkboard.c
 @@ -3,7 +3,6 @@
-  * (C) Copyright 2015 Linaro
-  * Peter Griffin <peter.griffin@linaro.org>
-  */
--#include <common.h>
- #include <cpu_func.h>
- #include <dm.h>
- #include <fdt_support.h>
-diff --git a/board/hisilicon/hikey960/hikey960.c b/board/hisilicon/hikey960/hikey960.c
-index f41fabbad099..5029f4edb2af 100644
---- a/board/hisilicon/hikey960/hikey960.c
-+++ b/board/hisilicon/hikey960/hikey960.c
-@@ -4,7 +4,6 @@
-  * Author: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
+  * Copyright (C) 2016 Imagination Technologies
   */
  
 -#include <common.h>
- #include <cpu_func.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/board/hisilicon/poplar/poplar.c b/board/hisilicon/poplar/poplar.c
-index b89e7e869766..c3ea080ff75a 100644
---- a/board/hisilicon/poplar/poplar.c
-+++ b/board/hisilicon/poplar/poplar.c
-@@ -4,7 +4,6 @@
-  * Jorge Ramirez-Ortiz <jorge.ramirez-ortiz@linaro.org>
-  */
- 
--#include <common.h>
- #include <cpu_func.h>
- #include <dm.h>
  #include <init.h>
+ 
+ #include <asm/io.h>
+diff --git a/board/imgtec/boston/ddr.c b/board/imgtec/boston/ddr.c
+index cecf454011cc..55356d1175de 100644
+--- a/board/imgtec/boston/ddr.c
++++ b/board/imgtec/boston/ddr.c
+@@ -3,7 +3,7 @@
+  * Copyright (C) 2016 Imagination Technologies
+  */
+ 
+-#include <common.h>
++#include <config.h>
+ #include <init.h>
+ #include <asm/global_data.h>
+ 
+diff --git a/board/imgtec/boston/dt.c b/board/imgtec/boston/dt.c
+index bf772ff5dec4..874a21cec61e 100644
+--- a/board/imgtec/boston/dt.c
++++ b/board/imgtec/boston/dt.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2016 Imagination Technologies
+  */
+ 
+-#include <common.h>
+ #include <fdt_support.h>
+ #include <asm/global_data.h>
+ 
+diff --git a/board/imgtec/ci20/ci20.c b/board/imgtec/ci20/ci20.c
+index 89f5e7ad792c..4e268381d3c5 100644
+--- a/board/imgtec/ci20/ci20.c
++++ b/board/imgtec/ci20/ci20.c
+@@ -6,7 +6,6 @@
+  * Author: Paul Burton <paul.burton@imgtec.com>
+  */
+ 
+-#include <common.h>
+ #include <env.h>
+ #include <init.h>
+ #include <net.h>
+diff --git a/board/imgtec/malta/superio.c b/board/imgtec/malta/superio.c
+index aba11e25be31..edd5c203b16d 100644
+--- a/board/imgtec/malta/superio.c
++++ b/board/imgtec/malta/superio.c
+@@ -6,7 +6,6 @@
+  * Setup code for the FDC37M817 super I/O controller
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ 
+ #define SIO_CONF_PORT		0x3f0
+diff --git a/board/imgtec/xilfpga/xilfpga.c b/board/imgtec/xilfpga/xilfpga.c
+index 712269272114..e50ee8efe558 100644
+--- a/board/imgtec/xilfpga/xilfpga.c
++++ b/board/imgtec/xilfpga/xilfpga.c
+@@ -8,7 +8,7 @@
+  *
+  */
+ 
+-#include <common.h>
++#include <config.h>
+ #include <init.h>
+ #include <asm/global_data.h>
+ 
 -- 
 2.34.1
 
