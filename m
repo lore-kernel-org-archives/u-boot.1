@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65D5CC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:01:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0CF0C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:01:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 178E488C05;
+	by phobos.denx.de (Postfix) with ESMTP id 7ABE588BE4;
 	Wed,  1 May 2024 04:45:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eEjkUngK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZmjNDkD9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15F2F88BF8; Wed,  1 May 2024 04:45:07 +0200 (CEST)
-Received: from mail-ua1-x92f.google.com (mail-ua1-x92f.google.com
- [IPv6:2607:f8b0:4864:20::92f])
+ id A02D588BF9; Wed,  1 May 2024 04:45:08 +0200 (CEST)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FBED88BFE
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:04 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D5CED88BE4
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-7f16ff3aa86so527099241.3
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:04 -0700 (PDT)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6a05f376effso49633986d6.0
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531503; x=1715136303; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531504; x=1715136304; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=9Gao4Q8tjjzQf/n/3sG4uI+iAjZW/HpqWNawfINSHpQ=;
- b=eEjkUngKzFoVoH5FBLgWufJx4Xp3dn3s5+Ay40i4UxuIytLJwjKy9/bCg2rSK0/R1T
- 49SGpaQL4E6obxAfEpxYOVuW46H5ajX8ZJu/URkicP7JMLL1Xeo6eymcjPvDOJvx2W+n
- HSWgTbcThCIhh7qicVaYzmWVBe3NRdmfA/EwU=
+ bh=oIYMhYdUOSOxXqSIs2afYazuolG8WHjKGtm5J7zRjb0=;
+ b=ZmjNDkD94W6o4LB201aFj9KYjCuMZOMWr4xFWl7MLKVeJDWuPvttodZcHLtyqYqQTK
+ CwxcdlCJpJOhN6K7T9dBigvlVHRAZ9Ux01JD2gupFbfomrjTKvPyCe+AqrrXBsGtYWVN
+ qZnm8YeMj6kE0U/byMItR2jlTSnj6QZg+UF1M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531503; x=1715136303;
+ d=1e100.net; s=20230601; t=1714531504; x=1715136304;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=9Gao4Q8tjjzQf/n/3sG4uI+iAjZW/HpqWNawfINSHpQ=;
- b=OjhmN0KdGhg9DwSnxU9eDxT9aqgKWre4ZNwnSuQJ+C747JMwQq9Z1s67+RUeZWfJJb
- eQqcoaovotF5j8+D1U/2SLyl3uXA7qpNDqiCPKSw14IObdCRZRAo+rKLvspjvp/uM525
- M0ragdoOjv4xi7PWkADwqb4u2x6/stzT5xHsLBptnYRF8U9fjTySXPdkRT/iWwUYIOFf
- DZ9SGal6oufFfmg0SbE2/+NJYZA8VjkIYv90H4w05djdVp7T77d8T1hmVo1GZ1+3n8CD
- xORGeht13sZFhtOKrIAZiYPIUPAC2LjrA5+ujwzQkD/bFfCOniyhcV+L3fz3KjAIX9eC
- 8iLg==
-X-Gm-Message-State: AOJu0YyPGczCgBmrYnEPKMwJMKrQEDi5JyVm+i8yvuDgPIrVejHoYF5f
- 5p5quXxiuOob93CVNuOdiJylQCgoDknl3QeSktAkdPvaR4qCBXm6rJiVs2uKVUqn8M3Mf0xQW9o
- DondWqzZz
-X-Google-Smtp-Source: AGHT+IGN/uJ3RSGqjkvMcn6mR9hFtsQQA6pGUXZfiAg3Pyeb6aq1YzdzvMlkQMlwk3MeC0kJVHA/GA==
-X-Received: by 2002:a67:f554:0:b0:47c:e2b:69f7 with SMTP id
- z20-20020a67f554000000b0047c0e2b69f7mr1558423vsn.4.1714531502796; 
- Tue, 30 Apr 2024 19:45:02 -0700 (PDT)
+ bh=oIYMhYdUOSOxXqSIs2afYazuolG8WHjKGtm5J7zRjb0=;
+ b=KDhb8JYbgItoTqK5ef11y+rRN8t9m2390FSY4XiblkhrozLqQNeNdLt+lQC48NUE24
+ iE9af5Y+b0FTXkL0BVRGz5ZwczBPhuRR5L4IvZ+wvOKA7ygLWRgpKwoVlJS68va6gs2s
+ 8sPL+TNqkIIpd/6h1LoT0+jbqFRpjEwjZP1IRmMSySzODjq2DtKQmpLVNQcN+Y4TbkuX
+ nzCEcciOOtY1WwNZf46gcQaseOvGfs+cvgR/5gcS0nb+RtRwntcy6fWALjqCm1uMNHjO
+ orOkTaI3yCZ1WhMjTYnA6SxB5oFj18Kc/vC3l7kRqygluWzz6X75PMLJAWu5IVtXBMQz
+ Ny2Q==
+X-Gm-Message-State: AOJu0YwGUpuigIMkurAbK3A1mWm+IzkwKhf1SJKfTk0MlgiNfc1+Bswa
+ jOGFBDlO59iw74OvL7WNRZznmO0fhdu7e+3zF7Js+nJbe/IcXxibLlUdf4boHlpIf93BEwMAUDB
+ tvBs2N79g
+X-Google-Smtp-Source: AGHT+IEMtQIIijfKNP0AFf2wPUT06KxAyn+eGzE2qe5/ipxSDaNZKwBg/LaRGz1fI01gd/4Crhx67Q==
+X-Received: by 2002:a05:6214:4114:b0:6a0:7913:641f with SMTP id
+ kc20-20020a056214411400b006a07913641fmr1078121qvb.62.1714531503934; 
+ Tue, 30 Apr 2024 19:45:03 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.01
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:45:02 -0700 (PDT)
+ Tue, 30 Apr 2024 19:45:03 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Padmarao Begari <padmarao.begari@microchip.com>,
- Cyril Jean <cyril.jean@microchip.com>,
- Purna Chandra Mandal <purna.mandal@microchip.com>
-Subject: [PATCH 090/149] board: microchip: Remove <common.h> and add needed
+Cc: Luka Kovacic <luka.kovacic@sartura.hr>,
+ Luka Perkov <luka.perkov@sartura.hr>
+Subject: [PATCH 091/149] board: mikrotik: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:42:17 -0600
-Message-Id: <20240501024316.1767971-90-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:42:18 -0600
+Message-Id: <20240501024316.1767971-91-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -97,38 +96,24 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Padmarao Begari <padmarao.begari@microchip.com>
-Cc: Cyril Jean <cyril.jean@microchip.com>
-Cc: Purna Chandra Mandal <purna.mandal@microchip.com>
+Cc: Luka Kovacic <luka.kovacic@sartura.hr>
+Cc: Luka Perkov <luka.perkov@sartura.hr>
 ---
- board/microchip/mpfs_icicle/mpfs_icicle.c | 1 -
- board/microchip/pic32mzda/pic32mzda.c     | 1 -
- 2 files changed, 2 deletions(-)
+ board/mikrotik/crs3xx-98dx3236/crs3xx-98dx3236.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/board/microchip/mpfs_icicle/mpfs_icicle.c b/board/microchip/mpfs_icicle/mpfs_icicle.c
-index 0f5f82924e77..7beac33cfbd3 100644
---- a/board/microchip/mpfs_icicle/mpfs_icicle.c
-+++ b/board/microchip/mpfs_icicle/mpfs_icicle.c
-@@ -4,7 +4,6 @@
-  * Padmarao Begari <padmarao.begari@microchip.com>
+diff --git a/board/mikrotik/crs3xx-98dx3236/crs3xx-98dx3236.c b/board/mikrotik/crs3xx-98dx3236/crs3xx-98dx3236.c
+index 315169ba661d..ae1c586277f9 100644
+--- a/board/mikrotik/crs3xx-98dx3236/crs3xx-98dx3236.c
++++ b/board/mikrotik/crs3xx-98dx3236/crs3xx-98dx3236.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2015 Stefan Roese <sr@denx.de>
   */
  
 -#include <common.h>
- #include <dm.h>
- #include <env.h>
+ #include <i2c.h>
  #include <init.h>
-diff --git a/board/microchip/pic32mzda/pic32mzda.c b/board/microchip/pic32mzda/pic32mzda.c
-index 3c2203d22025..848a1aee4000 100644
---- a/board/microchip/pic32mzda/pic32mzda.c
-+++ b/board/microchip/pic32mzda/pic32mzda.c
-@@ -7,7 +7,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <clk.h>
- #include <init.h>
+ #include <asm/global_data.h>
 -- 
 2.34.1
 
