@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D542C10F1A
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 09:14:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DA50C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 09:23:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5743B88AA8;
-	Wed,  1 May 2024 11:14:37 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id A0E7D88AF5;
+	Wed,  1 May 2024 11:23:07 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="qCOxsd33";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CKMRCTBn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 511E788A8D; Wed,  1 May 2024 11:14:36 +0200 (CEST)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D7AC988AFD; Wed,  1 May 2024 11:23:06 +0200 (CEST)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18FE488AAF
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 11:14:34 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id ACB5487FA0
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 11:23:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1714554872; x=1715159672; i=xypron.glpk@gmx.de;
- bh=l5R4kyCL16868LmQJyG0pbzAX+5ZxxIU7gmP0vKbcvM=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
- Subject:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=qCOxsd33M9VtvzCyDzQ3I6jUiiKyUsRb7ZYQql/89besxOXXaMjU/VVLOjY5CPbL
- tCo5zc65V/nHr5/ivyWJ9Ti9DJK0dIqx0Xqi9/cTlTY8AADorFrh03KnWzCSYU+NN
- zAF6tgU7c1tsOOshOxdwAJaLcQxZIsBYI+UzzS7l5/Mi+8y51o9b/cIdIfpgOuk5o
- kXjw+6esSxjiWzqygYItP9RnNgxI5GYappO4OPPKPdzaKouNuncqlqQjETXAkH1hX
- lENxoxa6vS6FBeKc4hPNOOGvTVq+eicH5TttBYK3f/NhholVtYVMM3M9eRr4AjwaE
- G/Sv5rwoWTqPM7xiWQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MMofc-1sKrLo1B8m-00IoB6; Wed, 01
- May 2024 11:14:32 +0200
-Message-ID: <400218f9-d580-42fe-bb61-bc75c4e69cf1@gmx.de>
-Date: Wed, 1 May 2024 11:14:27 +0200
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2b239b5fedaso1977517a91.0
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 02:23:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1714555383; x=1715160183; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=oKSYQIOgZunyOLmYG84QozqoNTehLMUK8OR6aPjWDRo=;
+ b=CKMRCTBnlmky6zdYNZSqoAKXHKsz/5hMb6yzF+FoVEln51LpILDTc0699ohin3DDDh
+ R54wajVnsnpzANmqkS+QHgODQvp84butzir6t6ZGb33EXcTQp2KrW/OqSEKhpQo6jE40
+ W+/Q5YokVG+v33el7hB+6CO1/dV1AmkPjIbrlahIymejBIPGNd97xs1E1kuRKNgqvGg3
+ 25lnBt+xtKP57BrKp2q9Z9HvSqxdn6PtbiyTkyCBx9xhA9quEsypdvLSJPCanVx5ksqX
+ QgxY8W1TZRZPaC9G174Zf5+pD2R9LOGLkhpQyLRWwFoyVWn5MfqkXGDqwGRZM+jrBost
+ 0l5A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714555383; x=1715160183;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=oKSYQIOgZunyOLmYG84QozqoNTehLMUK8OR6aPjWDRo=;
+ b=PGQURkc5FQlcwaWasWpQ6gcLhMZXm1uxqJg4noxMxfliAKMNEVMmpDv28l9c4ukbUT
+ eD2qJ6rhfhszy1vgM159UMfE+BfnELM1u4zg9ioEhCd3TZNsv6GyXDy/a50E+a2A5zXo
+ tM2lA3r4tjQ11dQLF1a9VndspMPNupr2+HIPprHMlelAUGuJxQxfzp42kNX6URhbNAOL
+ cpW4SCXkfmwyyCsWcXQKJbb1oLTZ0p0IRPjrzSCki6jj0MlaaZ12iPx8NbQlPfOpk3/O
+ uXEaxREDIOrea5olj/OYNm2F/UY6WaHCWuS9au/gVMfPWkBgS0if9c0XmHFlliWwiuGI
+ jgEA==
+X-Gm-Message-State: AOJu0YwWbaTwvxWWa8J7Y4nUgsW3bRBZkdt5ySd8nDmNTyS4l+RUKk1W
+ jZVIc6TftqG3SHz3+VipbIQOpw/71Lhd/btmB1vsD3qigcNDdoFnwTYU1RNYRKT2UKD03c151mM
+ pjYqSO92bUeQPkik2wOG5X5edNgh01w==
+X-Google-Smtp-Source: AGHT+IHOilvOp8DkrdPOO2015TkBym4gC1HQrEdUBRxMHqsKWArp+xLIZ3CS5oq/4nopWXm1I7VZXloPSOmRxzQQh3U=
+X-Received: by 2002:a17:90a:e2c9:b0:2ac:8366:8ab4 with SMTP id
+ fr9-20020a17090ae2c900b002ac83668ab4mr1948022pjb.38.1714555382487; Wed, 01
+ May 2024 02:23:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
+References: <20240501024316.1767971-1-trini@konsulko.com>
+ <20240501024316.1767971-23-trini@konsulko.com>
+In-Reply-To: <20240501024316.1767971-23-trini@konsulko.com>
+From: Adam Ford <aford173@gmail.com>
+Date: Wed, 1 May 2024 04:22:51 -0500
+Message-ID: <CAHCN7xL5=KkyDsK-w_awPCRyoS+NCOYu9sQHRKZMTB_VtA280Q@mail.gmail.com>
+Subject: Re: [PATCH 023/149] board: beacon: Remove <common.h> and add needed
+ includes
 To: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: Pull request efi-2024-07-rc2
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Cc: u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:E1VJOvzEQf/A5A6qG926pFg631chkIANuN+kRw1IrwdfXqzUtEO
- scdGz59AHdixVjHmoxDEEcymIP6KuXgeCAMTpxRwvH2FCwKW/ljgjXSuDuHKSWOdtr/oKIs
- vKAsK/vY+AlODetGEdA4PmExAUYg8iQyu2ATY9Jp+XHSn+n4ovwTim2uqKQ2pAQhu8Q73hc
- Le2X71wmLl9FFWkbEo83Q==
-UI-OutboundReport: notjunk:1;M01:P0:SIy7kC4v14s=;kmPV0tRwMSBsBFTNDquZ5KlmGQ3
- 5pVyZjwRFnMWeOITHhub/w/6uauAX1PvjSRTJxea5gXyZI6PyuZ3Ki1beRapZAUyih/Hx1aHh
- Tut2se5U1lJB+gf2jC5hpVtKkAY2Gt5BMwHXKpLA39FK6nG/egCdUrnyKR4POjeoQkD19EKoV
- YbW1lYrkyKS1NIXLzowmMKgo/hhQJiqBa8z1AelaOxRJ0HOUowgvs8hXk8anCfITTBQj1iqOY
- hE7p5b85+sJMzd1ieDDu8BgHwpSCwYrOgceVVfd9TODyottVmDrzpRKvuxDISKA/jPQMTOTFl
- B+0WeLB8T4BYrxnvyOUh9nwPJiG8Bp7JaX1bK/OtqF1LVhjcatBGLRs8f17YQJoc9/aq4KK8S
- aWf1Jouvr5qi6cF9sIekaX7yKHm8jA+ucHNbX4886h0x/3mtyhTGHqQjcn6L42ptvSQIZx6z9
- vMUvpoxYzioxnCRNur0X2iife9j5GhAVuBwN4x8ulyV3afL8OoSI469D/V/ODhpS0G5SPc4Hm
- QaTtrh7hGmvizDwAQlF/L4emlJ4roQwV2zeplzbv6N6MQaUS4lbr1P6naQgvgDzkJCjMVnizu
- 1IY5qNO0C7llQSs6TT1EcPNXAI+ZVwD5s9DU6lVy2XA1EvR1kVWJNa8WcIX2mBixd/7MhOlCn
- IPPsU5kYResC12xdchIrcbHbfG66E9BmoIyWBVUXSQyRQYXBnMsI48NIyLuZ6GmwfLCD417UY
- ZbEw13F8DacW42ksNCsk7a4WRD5z2Su5dDpj5agqPbNBRQle9v1STHiGFUOaIdlwHRtPq93nR
- Tb6xU1PtxEmu7psJz6E7nBvaLVpGQXExPbQDZQHRqEJ8o=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,82 +89,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+On Tue, Apr 30, 2024 at 9:43=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> Remove <common.h> from this board vendor directory and when needed
+> add missing include files directly.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 
-The following changes since commit ff0de1f0557ed7d2dab47ba976a37347a1fdc43=
-2:
+Acked-by:  Adam Ford <aford173@gmail.com>
 
-   Merge patch series "Update PHYTEC SOM Detection" (2024-04-29 10:56:05
--0600)
-
-are available in the Git repository at:
-
-   https://source.denx.de/u-boot/custodians/u-boot-efi.git
-tags/efi-2024-07-rc2
-
-for you to fetch changes up to 8745f13fe102968f58a9e2e5f69ad153a675b59c:
-
-   efi_loader: pass GUID by address to efi_dp_from_lo (2024-05-01
-08:40:42 +0200)
-
-Gitlab CI showed no issues:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/20590
-
-=2D---------------------------------------------------------------
-Pull request efi-2024-07-rc2
-
-Documentation:
-
-* correct description of 'env print -e'
-
-UEFI:
-
-* remove superfluous efi_restore_gd after EFI_CALL
-* terminate efidebug test bootmgr early on error
-* do not install device-tree if bootmgr fails
-* pass GUID by address to efi_dp_from_lo
-* remove dead code in efi_var_mem_init()
-* enable QueryVariableInfo at runtime for file backed variables
-
-=2D---------------------------------------------------------------
-Heinrich Schuchardt (7):
-       efi_loader: superfluous efi_restore_gd after EFI_CALL
-       cmd: terminate efidebug test bootmgr early on error
-       efi_loader: improve error handling in try_load_entry()
-       efi_loader: do not install dtb if bootmgr fails
-       doc: correct description of 'env print -e'
-       efi_loader: fix description efi_dp_shorten
-       efi_loader: pass GUID by address to efi_dp_from_lo
-
-Ilias Apalodimas (4):
-       efi_loader: address coverity report 492766 for dead code
-       efi_loader: enable QueryVariableInfo at runtime for file backed
-variables
-       efi_selftest: add tests for QueryVariableInfo at runtime
-       efi_selftest: add tests for QueryVariableInfo at boottime
-
-  cmd/bootefi.c                                      |   1 -
-  cmd/efidebug.c                                     |   4 +-
-  doc/usage/cmd/env.rst                              |  10 +-
-  include/efi_loader.h                               |   2 +-
-  include/efi_selftest.h                             |  11 ++
-  lib/efi_loader/efi_bootmgr.c                       | 111
-+++++++++++----------
-  lib/efi_loader/efi_device_path.c                   |   2 +-
-  lib/efi_loader/efi_helper.c                        |   6 +-
-  lib/efi_loader/efi_load_initrd.c                   |   2 +-
-  lib/efi_loader/efi_runtime.c                       |   4 +
-  lib/efi_loader/efi_var_common.c                    |   6 --
-  lib/efi_loader/efi_var_mem.c                       |   2 -
-  lib/efi_loader/efi_variable.c                      |  25 +++--
-  lib/efi_loader/efi_variable_tee.c                  |   5 +
-  lib/efi_selftest/Makefile                          |   1 +
-  lib/efi_selftest/efi_selftest_variables.c          |  13 +--
-  lib/efi_selftest/efi_selftest_variables_common.c   | 102
-+++++++++++++++++++
-  lib/efi_selftest/efi_selftest_variables_runtime.c  |  19 +++-
-  test/py/tests/test_efi_secboot/test_signed.py      |  28 +++---
-  .../py/tests/test_efi_secboot/test_signed_intca.py |  10 +-
-  test/py/tests/test_efi_secboot/test_unsigned.py    |   6 +-
-  21 files changed, 256 insertions(+), 114 deletions(-)
-  create mode 100644 lib/efi_selftest/efi_selftest_variables_common.c
+> ---
+> Cc: Adam Ford <aford173@gmail.com>
+> ---
+>  board/beacon/beacon-rzg2m/beacon-rzg2m.c | 1 -
+>  board/beacon/imx8mm/lpddr4_timing.c      | 1 -
+>  board/beacon/imx8mm/spl.c                | 1 -
+>  board/beacon/imx8mn/spl.c                | 1 -
+>  board/beacon/imx8mp/imx8mp_beacon.c      | 1 -
+>  board/beacon/imx8mp/spl.c                | 1 -
+>  6 files changed, 6 deletions(-)
+>
+> diff --git a/board/beacon/beacon-rzg2m/beacon-rzg2m.c b/board/beacon/beac=
+on-rzg2m/beacon-rzg2m.c
+> index 99fe1edfb330..099053235ded 100644
+> --- a/board/beacon/beacon-rzg2m/beacon-rzg2m.c
+> +++ b/board/beacon/beacon-rzg2m/beacon-rzg2m.c
+> @@ -3,7 +3,6 @@
+>   * Copyright 2020 Compass Electronics Group, LLC
+>   */
+>
+> -#include <common.h>
+>  #include <asm/global_data.h>
+>  #include <asm/io.h>
+>
+> diff --git a/board/beacon/imx8mm/lpddr4_timing.c b/board/beacon/imx8mm/lp=
+ddr4_timing.c
+> index 8e48b9d81b77..c1498dd5eaf4 100644
+> --- a/board/beacon/imx8mm/lpddr4_timing.c
+> +++ b/board/beacon/imx8mm/lpddr4_timing.c
+> @@ -4,7 +4,6 @@
+>   */
+>
+>  #include <linux/kernel.h>
+> -#include <common.h>
+>  #include <asm/arch/ddr.h>
+>  #include <asm/arch/lpddr4_define.h>
+>
+> diff --git a/board/beacon/imx8mm/spl.c b/board/beacon/imx8mm/spl.c
+> index 1632238bf5dd..12013aa5a4da 100644
+> --- a/board/beacon/imx8mm/spl.c
+> +++ b/board/beacon/imx8mm/spl.c
+> @@ -1,6 +1,5 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>
+> -#include <common.h>
+>  #include <cpu_func.h>
+>  #include <hang.h>
+>  #include <init.h>
+> diff --git a/board/beacon/imx8mn/spl.c b/board/beacon/imx8mn/spl.c
+> index b4d46f11f98d..f03841e5a01d 100644
+> --- a/board/beacon/imx8mn/spl.c
+> +++ b/board/beacon/imx8mn/spl.c
+> @@ -3,7 +3,6 @@
+>   * Copyright 2020 Compass Electronics Group, LLC
+>   */
+>
+> -#include <common.h>
+>  #include <hang.h>
+>  #include <image.h>
+>  #include <init.h>
+> diff --git a/board/beacon/imx8mp/imx8mp_beacon.c b/board/beacon/imx8mp/im=
+x8mp_beacon.c
+> index 8963a51fbba0..dd74e7c0f755 100644
+> --- a/board/beacon/imx8mp/imx8mp_beacon.c
+> +++ b/board/beacon/imx8mp/imx8mp_beacon.c
+> @@ -1,7 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>  /* Copyright 2023 Logic PD, Inc dba Beacon EmbeddedWorks */
+>
+> -#include <common.h>
+>  #include <init.h>
+>  #include <miiphy.h>
+>  #include <asm/arch/sys_proto.h>
+> diff --git a/board/beacon/imx8mp/spl.c b/board/beacon/imx8mp/spl.c
+> index 591e8ca9ab5b..30d577f7e0e3 100644
+> --- a/board/beacon/imx8mp/spl.c
+> +++ b/board/beacon/imx8mp/spl.c
+> @@ -4,7 +4,6 @@
+>   *
+>   */
+>
+> -#include <common.h>
+>  #include <hang.h>
+>  #include <init.h>
+>  #include <log.h>
+> --
+> 2.34.1
+>
