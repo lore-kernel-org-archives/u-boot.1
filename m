@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE40FC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 09:23:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BA1DC4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 09:24:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3D6DB88B29;
-	Wed,  1 May 2024 11:23:43 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id E1DDF88B36;
+	Wed,  1 May 2024 11:24:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="G8NUmmXd";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Uofp0l8M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2144888B27; Wed,  1 May 2024 11:23:42 +0200 (CEST)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id B8D3D88B37; Wed,  1 May 2024 11:24:06 +0200 (CEST)
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com
+ [IPv6:2607:f8b0:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C45888B33
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 11:23:39 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DD5DB88B27
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 11:24:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2ac9b225a91so5103779a91.2
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 02:23:39 -0700 (PDT)
+Received: by mail-pg1-x52c.google.com with SMTP id
+ 41be03b00d2f7-602801ea164so4484752a12.0
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 02:24:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714555418; x=1715160218; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1714555442; x=1715160242; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XwXdkc14sbsqvtgrbcLDUwjTmnyfRQhVMwVYII56GqM=;
- b=G8NUmmXdOuCxf8p9SIBzR8L4XQ/mN2VZBAh/Ua16NRl87zUXTO9WACT/kFxSe0WCCD
- Y2r7IM+Lvuiob/NPAyG4HwHBQ3GCZ4yvicHj9nBagfLbsloQitUdi5wyIoDMqEDHhf/G
- EiYXObihkw5a3+BJxtb1OyOpoz/T/Ccy87jHg52qXaEVSJeb7wUNwTheJ1aaXTMeJdoj
- bKyMS7cIZhPlhYjB2MbgdAfPZ4MKss/HY7vCa3X7rrGNgUX/L4rrNhg2DjzG+cPMoRIc
- 5wy+tNHDmaFFAJneXypZqFWFCp8rndBHipME7GvsbDV5XJr60FRzhlAwzhKg+F7UaMe4
- A+eg==
+ bh=giudb46qYXb2aJtZR3vud3JoQVvYTqvW6WQIyda7Rls=;
+ b=Uofp0l8MOKRzdJXAoAHbp+mb/03oi8KtkA3gwwBghfx9ge6+H/+/uF7B6rNNEgmzHm
+ eOji9ALS0FdQleO0lp3rTmbgxR3q5k0zpUe9uo5jPNf7tIak5JoTt/Gra+Q9pvHtBmN4
+ uxpz3D4FPc706KAcFv4O2pTQflb/kV3wusuZLGJWni6C68tGt9NRy19sRfbbZYo/JOlV
+ yRngEec8BNAQRvpn1a2Qr1+EpYL3NaMavPDKL6oBxTBNpVTUemhomvyRBaGuLMiq7gsp
+ l1ZPKZfLx0AJ688f2CKJ17olqBTXq3/TJdtqEl+cuJxBmaikaaDcyd6NUo4M5lE5ykhG
+ lwVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714555418; x=1715160218;
+ d=1e100.net; s=20230601; t=1714555442; x=1715160242;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XwXdkc14sbsqvtgrbcLDUwjTmnyfRQhVMwVYII56GqM=;
- b=LoMMUwfAy1qxkpwAM8pzIoDtoWDPMkU4sVNQlkdaIs+1mp2abcLAy+GxMXBqYruDAZ
- pwar0jDEkizfUwYcGmyZQt0k7CbwQh01DE3kHAorjsKmT+fHkpzwFDmWUtqTyFFqp7+V
- i+EMI4ulZ1YbF5gfEtze2yrBtba1gOD4yvDMgN04SCv/cBy+yKzyqaZmGGG1yPuccNXH
- AMgPmbiHLns0EVy3jlalU9o4dnATYBOl6ri9eg6y4RktHr6fyrsRFyWULfS3U39jAkS2
- QyMt00Z1mUuHc/nXifjmW3aEN4kqSdKnfwwMV7Ony1RuRGwkEdquptOLqoHZ+nEGNugN
- s4sA==
-X-Gm-Message-State: AOJu0YzzSPmpe9DeFNFUYILcg/eXkAm8ka77djak0YMKAngV8zylaNRX
- sZdyXoMTKfi/0CnNMYppd73HWB1ZmRAfw90AP4dEkHL2fMgEUS4ObWPiAGO+JB7Uoo6wHqwqIPn
- G4btxRpV7/Msljx2JdmyC3yQWTR4=
-X-Google-Smtp-Source: AGHT+IEYXFJ4ahbX/4cI0nCOHI2GEGCZOJ+4UWTwhdvgOrOQ+ITSO1TdjepphgxMDUSGiXy62ZElb6+Irz5T05FwdlA=
-X-Received: by 2002:a17:90a:b284:b0:2af:3c0e:f6b8 with SMTP id
- c4-20020a17090ab28400b002af3c0ef6b8mr1701238pjr.3.1714555417790; Wed, 01 May
- 2024 02:23:37 -0700 (PDT)
+ bh=giudb46qYXb2aJtZR3vud3JoQVvYTqvW6WQIyda7Rls=;
+ b=GcthopejCtEmFRO41bf7bQIT+XhOY+OIfkju83BCb+UWwcmguyTH9BGib/9hrjX4Nm
+ 7DIp5H79ZmF85ZIToV9ErHyEhZPoWNXHuoyZTrif/aXZCPX1vXJI230B3QIcO9FLKWzN
+ EgVLU3KhmgiDvkx69beN/i5dBhPMtDuOkZJ+50THbTaIrboQdHgQxYMgD7BOKxTA/9HR
+ u/Sl8/OFtvng3W1o5zq3Yi7kKZiakDcSKR3CrGuY63hqP3gEe/M05zgu0S0CClGUc7RI
+ EqJsvXbAuThXS0Vax3nTOp/7+wIz6GMxvXkScu9BGVgAoGD+DOSE/9wCyPCW2WFeP/8c
+ h0Kw==
+X-Gm-Message-State: AOJu0YzZj5T9chGdPNk/29O+DouSS5o6R9M/VXQRe9tl2XlB/LymjkEP
+ 9SpNX2hWFdOW0jF1WfeG1o6Xna83kjzOlZnXq4hP0b3tWEL/ohJiNMAiM7vT7pbsqL1vzG5kLdS
+ syADNZOgZrRJ2ZUJ1daVaXaGQRrJVJw==
+X-Google-Smtp-Source: AGHT+IFvjZTbhM6NeoGowYpWy0F49xlp1bHnwOCfvv1LwTKr91IpzudZcLIJy4BAjxdi+jvHUWaPaQ3cYFBsqZ2X0qA=
+X-Received: by 2002:a05:6a21:99a6:b0:1af:4e66:5eb6 with SMTP id
+ ve38-20020a056a2199a600b001af4e665eb6mr2628223pzb.22.1714555442172; Wed, 01
+ May 2024 02:24:02 -0700 (PDT)
 MIME-Version: 1.0
 References: <20240501024316.1767971-1-trini@konsulko.com>
- <20240501024316.1767971-48-trini@konsulko.com>
-In-Reply-To: <20240501024316.1767971-48-trini@konsulko.com>
+ <20240501024316.1767971-86-trini@konsulko.com>
+In-Reply-To: <20240501024316.1767971-86-trini@konsulko.com>
 From: Adam Ford <aford173@gmail.com>
-Date: Wed, 1 May 2024 04:23:26 -0500
-Message-ID: <CAHCN7xKEZpYkdnY+30noWZBVY0K7AD_RmELq2Hb4D=DMLkUG7A@mail.gmail.com>
-Subject: Re: [PATCH 048/149] board: davinci: Remove <common.h> and add needed
+Date: Wed, 1 May 2024 04:23:50 -0500
+Message-ID: <CAHCN7xLPjSUz-PAEpCAHoEFdhX6DCFM=H8p4XmhhES+tKBoXOw@mail.gmail.com>
+Subject: Re: [PATCH 086/149] board: logicpd: Remove <common.h> and add needed
  includes
 To: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
@@ -102,38 +102,51 @@ Acked-by:  Adam Ford <aford173@gmail.com>
 > ---
 > Cc: Adam Ford <aford173@gmail.com>
 > ---
->  board/davinci/da8xxevm/da850evm.c      | 2 +-
->  board/davinci/da8xxevm/omapl138_lcdk.c | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
+>  board/logicpd/am3517evm/am3517evm.c | 1 -
+>  board/logicpd/imx6/imx6logic.c      | 1 -
+>  board/logicpd/omap3som/omap3logic.c | 2 +-
+>  3 files changed, 1 insertion(+), 3 deletions(-)
 >
-> diff --git a/board/davinci/da8xxevm/da850evm.c b/board/davinci/da8xxevm/d=
-a850evm.c
-> index 05053a87a5a9..0011c8285237 100644
-> --- a/board/davinci/da8xxevm/da850evm.c
-> +++ b/board/davinci/da8xxevm/da850evm.c
-> @@ -8,7 +8,7 @@
->   * Copyright (C) 2007 Sergey Kubushyn <ksi@koi8.net>
+> diff --git a/board/logicpd/am3517evm/am3517evm.c b/board/logicpd/am3517ev=
+m/am3517evm.c
+> index e69a73f2af6f..e6ca31016b7c 100644
+> --- a/board/logicpd/am3517evm/am3517evm.c
+> +++ b/board/logicpd/am3517evm/am3517evm.c
+> @@ -10,7 +10,6 @@
+>   * Texas Instruments Incorporated - https://www.ti.com/
 >   */
 >
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <init.h>
+>  #include <net.h>
+> diff --git a/board/logicpd/imx6/imx6logic.c b/board/logicpd/imx6/imx6logi=
+c.c
+> index 0d53548dcb4b..589136fd64aa 100644
+> --- a/board/logicpd/imx6/imx6logic.c
+> +++ b/board/logicpd/imx6/imx6logic.c
+> @@ -8,7 +8,6 @@
+>   * and updates by Jagan Teki <jagan@amarulasolutions.com>
+>   */
+>
+> -#include <common.h>
+>  #include <env.h>
+>  #include <init.h>
+>  #include <miiphy.h>
+> diff --git a/board/logicpd/omap3som/omap3logic.c b/board/logicpd/omap3som=
+/omap3logic.c
+> index 86992829caf4..a9fe61918b6a 100644
+> --- a/board/logicpd/omap3som/omap3logic.c
+> +++ b/board/logicpd/omap3som/omap3logic.c
+> @@ -10,7 +10,7 @@
+>   *     Richard Woodruff <r-woodruff2@ti.com>
+>   *     Syed Mohammed Khasim <khasim@ti.com>
+>   */
 > -#include <common.h>
 > +#include <config.h>
 >  #include <dm.h>
->  #include <env.h>
->  #include <i2c.h>
-> diff --git a/board/davinci/da8xxevm/omapl138_lcdk.c b/board/davinci/da8xx=
-evm/omapl138_lcdk.c
-> index 9738e2bd9c77..607e05ad9ae4 100644
-> --- a/board/davinci/da8xxevm/omapl138_lcdk.c
-> +++ b/board/davinci/da8xxevm/omapl138_lcdk.c
-> @@ -8,7 +8,7 @@
->   * Copyright (C) 2007 Sergey Kubushyn <ksi@koi8.net>
->   */
->
-> -#include <common.h>
-> +#include <config.h>
->  #include <env.h>
->  #include <i2c.h>
 >  #include <init.h>
+>  #include <net.h>
 > --
 > 2.34.1
 >
