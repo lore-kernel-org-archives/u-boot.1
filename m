@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6620FC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:10:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9438DC4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:11:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B612888C8B;
-	Wed,  1 May 2024 04:46:05 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 3D55488CDB;
+	Wed,  1 May 2024 04:46:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CFh8xm05";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="no+/THQJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B593A88CF1; Wed,  1 May 2024 04:46:02 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id DFA4C88CC5; Wed,  1 May 2024 04:46:03 +0200 (CEST)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5D4288CD9
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:46:00 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 74A6F88CE0
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:46:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6a0ce3e823fso13802946d6.1
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:46:00 -0700 (PDT)
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-79100a90868so189434085a.2
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:46:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531559; x=1715136359; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531560; x=1715136360; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oFcQXveb0a5NATbeiqlKTe5T+MMbI8bnDGusbAo0UQ4=;
- b=CFh8xm05a6VSAUryvvmo9hCak7Y0tFPn+I+5dfvooyGmi24ZwLKcl4tgRdr2WGV3Hp
- flXfYXyauNjkperHkYMKbsGFarmxMkRSvNgZLYuJ5CisSx6yBCtPdFBFFqs8C1dY9clA
- lziiUfMcxJmharAxRGqZomjhLWggRl1Sed9Zw=
+ bh=em6vvJq9c69ZmOoqXMI7QN1siDnm3EFtH2IP0CjoVDk=;
+ b=no+/THQJ54J2pza3wmq9ybOrqJmzin8J/MvYyCmPT7yvU9Ok0WARCoYJ8ABJ3qQAdr
+ Ah7uAbTtkv7C0C04shNvRygETlE0LEB9S8WkQAiHpMjdbl7AFC7hAOl59szil9D+bkD2
+ 4JI2FRoB/Z4nFUyUObJbnyr3GFNcZXmcXsLGU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531559; x=1715136359;
+ d=1e100.net; s=20230601; t=1714531560; x=1715136360;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oFcQXveb0a5NATbeiqlKTe5T+MMbI8bnDGusbAo0UQ4=;
- b=XyWVs4MkIXhNwDFYprabCFMPs/4HutSB0SDCqY3sMep6BAlNTIkF1GEIJGXVIq2clN
- 3KmsEke6aIQhGluhkFDwyL/hey2nY0EmJlMoRwboi0KnMRQznTENF9Hbyfe6LoQE0DD7
- q+lPEHb2p7pCpa/+li/RXDbXfOd9X17vmWVLks3TQ9uVt45awQ+a+/ImTfYIYBzm1kSi
- c0OWtkgiPLTLLOqlX83UKIY3LrOjENT21U/QDfv9d9A3pjFbM3bO4A7Mp+K3Ki8tuYDG
- Tbf3thpQI/J0YskjZkOl27VLQIEASqzSib9why08tgzOoWFRqdeDChp80M4lGPjoy17k
- w46A==
-X-Gm-Message-State: AOJu0YwOkpwj2qR4ltU8D2sYfb9cdqzEv4DkcGLm13r4oPhSJdgMBSi8
- Hj6ueNy3rA9f+PvShWu0PfDQCY0azBd1sdpueH4QeriMrFzc6cC3O2xkN9+N2jqSlzuCeOI3opW
- OJWB6lcIM
-X-Google-Smtp-Source: AGHT+IHEzFtlRXpK5Qk/XAPH2o7SPV8OhQPv+wHDLMQPvimwia77WenRXkFBg9xnsCd/cMOfvC2u8Q==
-X-Received: by 2002:a05:6214:2aac:b0:6a0:7f0f:5856 with SMTP id
- js12-20020a0562142aac00b006a07f0f5856mr1281642qvb.0.1714531559369; 
- Tue, 30 Apr 2024 19:45:59 -0700 (PDT)
+ bh=em6vvJq9c69ZmOoqXMI7QN1siDnm3EFtH2IP0CjoVDk=;
+ b=KnXK/d1JGOj1iaRjrCBGWwVFQtN8ZGVpdPsVVSyx5+EI3nlh7C3RcIGwv3l/FLJWyc
+ bbOKZ/Cm4GsFmZfsz7P1ihqT00iEFD0Nn/PeXWyOKKTi6nyeI2QHYCPHj+vvzpkUTzH6
+ 9xTiA8hGQHxyqQ6x0xdQX0t/PnB+1pIoEKEVVEKmzUQtA6jgJPlY5hfQ4E+leVO45LRs
+ c+fLB110zpm6A1AAsVZf8zcczycDMcIRfhnBL98LNxmAABoa0eOB2cV9rVADd9o2myr4
+ 96DAKuKZ1ngG3ljQFzxVoEGz4OlyRxcLnv9e6A2hFAPMpYB6DAghOZ1wL7k01jUU6ffu
+ 0yYA==
+X-Gm-Message-State: AOJu0Yxvq1BJB2mjmeX3zTBfqqCRBQBe25mhZeQ3Vppx8LTldLEgKiTn
+ dspa2pVVgi40QNRoqD2Bvi73Tn6UZuhMOvOu/kEsgDjn79ImtODXKLliXBNNEBL1IaLShEnxfIm
+ +8/C+Z6ut
+X-Google-Smtp-Source: AGHT+IEDlFGy9AHwZ53mu1rcLJnDMprT41e8OCba4p5ItR6SRKrTLideHSAqF8Qs0i1sGecCEjGduQ==
+X-Received: by 2002:ad4:5aa1:0:b0:6a0:7de0:a28c with SMTP id
+ u1-20020ad45aa1000000b006a07de0a28cmr1141510qvg.65.1714531560215; 
+ Tue, 30 Apr 2024 19:46:00 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.58
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
  Tue, 30 Apr 2024 19:45:59 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Parthiban Nallathambi <parthitce@gmail.com>,
- Hugo Villeneuve <hvilleneuve@dimonoff.com>
-Subject: [PATCH 142/149] board: variscite: Remove <common.h> and add needed
+Cc: Yegor Yefremov <yegorslists@googlemail.com>
+Subject: [PATCH 143/149] board: vscom: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:43:09 -0600
-Message-Id: <20240501024316.1767971-142-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:43:10 -0600
+Message-Id: <20240501024316.1767971-143-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -96,38 +95,37 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Parthiban Nallathambi <parthitce@gmail.com>
-Cc: Hugo Villeneuve <hvilleneuve@dimonoff.com>
+Cc: Yegor Yefremov <yegorslists@googlemail.com>
 ---
- board/variscite/dart_6ul/spl.c                  | 2 +-
- board/variscite/imx8mn_var_som/imx8mn_var_som.c | 1 -
+ board/vscom/baltos/board.c | 2 +-
+ board/vscom/baltos/mux.c   | 1 -
  2 files changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/board/variscite/dart_6ul/spl.c b/board/variscite/dart_6ul/spl.c
-index 1dff69c82771..6d17563d32c0 100644
---- a/board/variscite/dart_6ul/spl.c
-+++ b/board/variscite/dart_6ul/spl.c
-@@ -4,7 +4,7 @@
-  * Copyright (C) 2019 Parthiban Nallathambi <parthitce@gmail.com>
+diff --git a/board/vscom/baltos/board.c b/board/vscom/baltos/board.c
+index bc7dc5888f2d..2c91e9fac43d 100644
+--- a/board/vscom/baltos/board.c
++++ b/board/vscom/baltos/board.c
+@@ -7,7 +7,7 @@
+  * Copyright (C) 2011, Texas Instruments, Incorporated - https://www.ti.com/
   */
  
 -#include <common.h>
 +#include <config.h>
+ #include <env.h>
+ #include <errno.h>
  #include <init.h>
- #include <spl.h>
- #include <asm/arch/clock.h>
-diff --git a/board/variscite/imx8mn_var_som/imx8mn_var_som.c b/board/variscite/imx8mn_var_som/imx8mn_var_som.c
-index 994fd4f70582..532d8d60a762 100644
---- a/board/variscite/imx8mn_var_som/imx8mn_var_som.c
-+++ b/board/variscite/imx8mn_var_som/imx8mn_var_som.c
-@@ -5,7 +5,6 @@
-  * Copyright 2023 DimOnOff Inc.
+diff --git a/board/vscom/baltos/mux.c b/board/vscom/baltos/mux.c
+index 7b99cf0e182f..77b142f08f0a 100644
+--- a/board/vscom/baltos/mux.c
++++ b/board/vscom/baltos/mux.c
+@@ -13,7 +13,6 @@
+  * GNU General Public License for more details.
   */
  
 -#include <common.h>
- #include <dm.h>
- #include <env.h>
- #include <fdtdec.h>
+ #include <asm/arch/sys_proto.h>
+ #include <asm/arch/hardware.h>
+ #include <asm/arch/mux.h>
 -- 
 2.34.1
 
