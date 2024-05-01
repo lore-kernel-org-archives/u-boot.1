@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D523CC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:00:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 075F0C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:00:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8A7388BE7;
-	Wed,  1 May 2024 04:45:03 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 735EF88C01;
+	Wed,  1 May 2024 04:45:04 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mmqq4RkO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fasWBmyO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 26EB088BB8; Wed,  1 May 2024 04:45:02 +0200 (CEST)
-Received: from mail-qv1-xf34.google.com (mail-qv1-xf34.google.com
- [IPv6:2607:f8b0:4864:20::f34])
+ id B50F088BE4; Wed,  1 May 2024 04:45:02 +0200 (CEST)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE36888BB8
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:59 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A821D88BE5
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf34.google.com with SMTP id
- 6a1803df08f44-69b24162dd6so39903126d6.2
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:59 -0700 (PDT)
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6a0ce3e823fso13799586d6.1
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531498; x=1715136298; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531499; x=1715136299; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SGVKcZx9+tQnslxl6AWp/m+23N/UG7O3qKtCFwohEIM=;
- b=mmqq4RkOlcy/Q+Yv6Tp/YCNDYRxyTgDsDHEXfwFF4xjcoQOak/z+AsOT7F7ABujjQL
- Nv1Key0eFaq0pErqi4cxq79Hcr9r9Ob64d7vKahEoS5xk7OYKjoC5D521MlIYwIeahyr
- 0SNWAfzmD3p7F1bWpCwGXrvyz0DmnOYkhd+zs=
+ bh=6HerkAdk7lg0Vf2G49/p8nkcR78Rx9sFVUcwTJchcBc=;
+ b=fasWBmyOv1WsGVlFO9eBAYERWZDrRSbwhqsT093WqJ3kM1HkqYEy371rNzClGytYc3
+ FimQZkaobzezv8S4Ju4XkCnoynSz5riB2QcEH7ocCrDYXvED/2CvE84dSMVxAbDnjwTd
+ /Jt6Sv1z2Pt6D4d8Hz2XTq0V0VFbTbtP/iBfg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531498; x=1715136298;
+ d=1e100.net; s=20230601; t=1714531499; x=1715136299;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SGVKcZx9+tQnslxl6AWp/m+23N/UG7O3qKtCFwohEIM=;
- b=fNwN7W5KNACRHrvh+pYQ6FOtyT1iEx35oK7E59fKKKUVNxpk8wQPbpMmP/w4h+Yn7/
- oGN5jv00qPDGepoX8pltpSDRnxNcsKzgkP5vfEa/hgTrLLlWctxo8d5l+bSs6zAlTBZN
- Bb1ktOPbg3RVzkqZONlFzgHLWw1NtPUAxJJJh2jspwJqkFpRcueVx49JXB6VdLhn3JDa
- g118z4MYUHFqTPNRqdYoaCxZ2PAenlu9F08PsLWgBqho32MUcemohenD6CyoOkE+XmbG
- zCI/sP0yXrA5lsgN+SdMfWEcEyOeCXlFNRCr+QEBY9DCOJs5+XFJDSyrWvc8akJYY+Lj
- QKrw==
-X-Gm-Message-State: AOJu0Yw3JS9FvKCNQR7XJs3uRpcEbwCBp7xsRe2vVlyKKC6hlbx1fBR+
- W16TPuINA8Nk8KPQ2rMESzIRFSng6Ld3kljvIaMTcFr7nOZSQT2sjT81rH6HVcrRlBWgURZsbvA
- J1gmniA==
-X-Google-Smtp-Source: AGHT+IFRcr+LBbT+9oWMe2pWoRDHnGX8r1TpnVZDlc4rLLLogRSYwEhTqrQCKlHMIt5pkXDnZbU0Ow==
-X-Received: by 2002:a05:6214:21e4:b0:6a0:c784:69ac with SMTP id
- p4-20020a05621421e400b006a0c78469acmr1464008qvj.13.1714531498534; 
- Tue, 30 Apr 2024 19:44:58 -0700 (PDT)
+ bh=6HerkAdk7lg0Vf2G49/p8nkcR78Rx9sFVUcwTJchcBc=;
+ b=iaB8mYVldKQ38g7QAjNPnVEjwwKuci6o1tWezOYXKTolM7JH17mJ+89bIVYC93NUXV
+ vpdRz50wbCkXDX4OHzryltFkXG8RLV+97f0OtYPN8uAdJcpKOlf9XBXyZxGnfl3awLQG
+ tPa/Fhv4AkLsebe/3JE2fEpyGwmXX2V9trWo1wWtw9E03QGFrBKr0h0Fn2QtNPpdo5R+
+ wWZEAkkl5YoDBDq4IdTfqzsC9hAurJRjc0aqsUeM69I7P4ef9ee5v2MMdsexjiMpi4XR
+ 5rHmn99aaZpqDedmeRFuV2DFuJbew84TKmem/mcQ20QIfYAiBJBbkYjGx8Cjz7W2ojT0
+ HECQ==
+X-Gm-Message-State: AOJu0YylrmxwI1rFh+ni1OSJgL2R0IyXipbZjAJx+M8VUhBgyInskaKU
+ eDXyFugfAdsZ45W/ZhxMcn13cm+kGTGi4MrENtmQ+TzOGo+cZvEsd3syAGcTtn6w2KTfeZvQ6Uw
+ BuA7VRQ==
+X-Google-Smtp-Source: AGHT+IG2T/WM5epQZ3EUVeLRAm3sOUT952s0/e4ZqD1e00kjcxwu8o9lW81b6Xv3mXdSMYzEbVrlgA==
+X-Received: by 2002:ad4:5764:0:b0:6a0:e59b:6737 with SMTP id
+ r4-20020ad45764000000b006a0e59b6737mr1176227qvx.26.1714531499420; 
+ Tue, 30 Apr 2024 19:44:59 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.57
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:44:58 -0700 (PDT)
+ Tue, 30 Apr 2024 19:44:59 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Adam Ford <aford173@gmail.com>
-Subject: [PATCH 086/149] board: logicpd: Remove <common.h> and add needed
+Cc: Stefan Roese <sr@denx.de>
+Subject: [PATCH 087/149] board: maxbcm: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:42:13 -0600
-Message-Id: <20240501024316.1767971-86-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:42:14 -0600
+Message-Id: <20240501024316.1767971-87-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -95,50 +95,23 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Adam Ford <aford173@gmail.com>
+Cc: Stefan Roese <sr@denx.de>
 ---
- board/logicpd/am3517evm/am3517evm.c | 1 -
- board/logicpd/imx6/imx6logic.c      | 1 -
- board/logicpd/omap3som/omap3logic.c | 2 +-
- 3 files changed, 1 insertion(+), 3 deletions(-)
+ board/maxbcm/maxbcm.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/board/logicpd/am3517evm/am3517evm.c b/board/logicpd/am3517evm/am3517evm.c
-index e69a73f2af6f..e6ca31016b7c 100644
---- a/board/logicpd/am3517evm/am3517evm.c
-+++ b/board/logicpd/am3517evm/am3517evm.c
-@@ -10,7 +10,6 @@
-  * Texas Instruments Incorporated - https://www.ti.com/
+diff --git a/board/maxbcm/maxbcm.c b/board/maxbcm/maxbcm.c
+index aad3dc864295..e011520f2ec2 100644
+--- a/board/maxbcm/maxbcm.c
++++ b/board/maxbcm/maxbcm.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2014 Stefan Roese <sr@denx.de>
   */
  
 -#include <common.h>
- #include <dm.h>
- #include <init.h>
- #include <net.h>
-diff --git a/board/logicpd/imx6/imx6logic.c b/board/logicpd/imx6/imx6logic.c
-index 0d53548dcb4b..589136fd64aa 100644
---- a/board/logicpd/imx6/imx6logic.c
-+++ b/board/logicpd/imx6/imx6logic.c
-@@ -8,7 +8,6 @@
-  * and updates by Jagan Teki <jagan@amarulasolutions.com>
-  */
- 
--#include <common.h>
- #include <env.h>
  #include <init.h>
  #include <miiphy.h>
-diff --git a/board/logicpd/omap3som/omap3logic.c b/board/logicpd/omap3som/omap3logic.c
-index 86992829caf4..a9fe61918b6a 100644
---- a/board/logicpd/omap3som/omap3logic.c
-+++ b/board/logicpd/omap3som/omap3logic.c
-@@ -10,7 +10,7 @@
-  *	Richard Woodruff <r-woodruff2@ti.com>
-  *	Syed Mohammed Khasim <khasim@ti.com>
-  */
--#include <common.h>
-+#include <config.h>
- #include <dm.h>
- #include <init.h>
- #include <net.h>
+ #include <asm/global_data.h>
 -- 
 2.34.1
 
