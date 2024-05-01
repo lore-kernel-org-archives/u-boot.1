@@ -4,72 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A71D1C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:01:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B952C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:02:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A7DCE88C0C;
-	Wed,  1 May 2024 04:45:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 19B1B88C13;
+	Wed,  1 May 2024 04:45:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KTrCNVRT";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="njSToXT9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A99A88A98; Wed,  1 May 2024 04:45:11 +0200 (CEST)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
+ id AE05788C09; Wed,  1 May 2024 04:45:11 +0200 (CEST)
+Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
+ [IPv6:2607:f8b0:4864:20::f2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 29C6688BD7
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:06 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A686F88BF9
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6a0b4622ea0so21040996d6.2
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:06 -0700 (PDT)
+Received: by mail-qv1-xf2c.google.com with SMTP id
+ 6a1803df08f44-6a0406438b5so26618596d6.1
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531505; x=1715136305; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531508; x=1715136308; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zQ2+o6aswbiuOLfrHjT92vhFRYT7Eicqk1zLTJn2aSs=;
- b=KTrCNVRTWbJb/w1OxYd0XSCCGXOsFM7Zl9+0c/fwkpRc+ECJIbMsyFoAkJJWIwiH+A
- VfpuGNSbzs3vtB03XWN3D6KbVAbS78AykRPuMJG1wxAQZAJmO0kc/blEYws2tdZ64D7Q
- sASXxNauvoKZdbSkUeQyExCZmW5eBp6buXP0I=
+ bh=u6ZmeDc9I0gsMBZgPZvI9fGgwvipY8SHxLZfEhNd2yU=;
+ b=njSToXT9dEaT8I3GEi7+4MVkOc0jDDx61XKuoHzl/j+bgXFyt6dbQ9AjT373rEZbus
+ +CbTnnzF9XCtQ2sTrJd1EKRsiEu7vmUptR9WQqIuNFGvu2YWZ94iQj57hBi3xL/Ux3wD
+ aCeqoyyjQjRLFY6gKozX3PFeQGxKBVYvxD2f8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531505; x=1715136305;
+ d=1e100.net; s=20230601; t=1714531508; x=1715136308;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=zQ2+o6aswbiuOLfrHjT92vhFRYT7Eicqk1zLTJn2aSs=;
- b=Tiz4feeYCi9p9IIkm1VMkbqJ50fDZkD6uBsEyqmbQ6RbEwx6bEzacpoApTzRZQ/qGJ
- DK14lhicz050UnRkCTGiPppNuEY6cgvHhtDmfhx9LIWmR6I1Z/Gy7t7xPLZ/4ghSTaCZ
- pa/0NIBSBQq1rVmPFnS7YNCQq6w8HFKOe24A6jZvOjUQ7n1J8pk+Td2z3YHHpQCgi8gV
- FjB/wV1cA0uhkkygJJ45XAeG7E8ejwiRjVNJCnQj6KTMjLdZMUfiJX57flyhzoBLZHS2
- W/OtwfW7FNQfno8JjuXx8UF3pdVd8pXdP6B6pBAHixRxZRhBdBrOQWvEpc/lDin2UcZ0
- U3tw==
-X-Gm-Message-State: AOJu0YyJgnMbpGIH8Ym925la0DLZxhuSfMgAPVAWEN8LQahQJSmWPAf0
- ReeFshXvoNswLp3XAaWo3JN13Kv4tATeYoTv+OX1l7ajGTpwibVFXXMAspBoinXB57mqJU8IbI9
- DZuTuHmfZ
-X-Google-Smtp-Source: AGHT+IFAa9/8XiCQ69VI5OCNd4+dDkMwACa6FWqpfB8EngiWPri1PNjB+amwn/ZMs08IUlNx6RDtAA==
-X-Received: by 2002:a05:6214:d89:b0:69b:6e98:2f33 with SMTP id
- e9-20020a0562140d8900b0069b6e982f33mr1207816qve.39.1714531504852; 
- Tue, 30 Apr 2024 19:45:04 -0700 (PDT)
+ bh=u6ZmeDc9I0gsMBZgPZvI9fGgwvipY8SHxLZfEhNd2yU=;
+ b=VROrfH8Tu9sv1/yI9fhBiyEqTNwV+tPZOx0rOBCSY4ZMl+OxM2wRfsHEuNdDQPePoL
+ UVWgUqivSAV4brSMlaB4lGNu/od/he1r6qVgRxsrf9VfswuEVl7TY0tBnfK5/CFgLkgD
+ XvG+A3XRfgVut+HgPEcaZwulua1qhA1q6De30VXJdjUmZOsJ6MipBl00CLVU6B86x0Hq
+ QT1+ikA9e94ZdD6TN8QthuhQnjwRtREomXeVE8odzuRWqP3hYPQNlgRM/dMjHBtDKqtZ
+ NrqnVhqZckyH11if1tZTC5yEkpg5CHWsIFdGZygCBp5nbi70MZr4aS/oHRRSgoayBNwy
+ kPsg==
+X-Gm-Message-State: AOJu0YwLfHHhBVfQ24o7UUGjL9JpoQ6iomO4UCs++nnRGGGl4Q5yY66g
+ l5R9vCI1vt+xc0dE7KZNvFLOYKWfEUx9+hRoT0XD/Ga6Q66xoQv72uAxSUiGVW5IGdf/Z59Prpj
+ 2Pi1UpUf4
+X-Google-Smtp-Source: AGHT+IEJRlEYCJlTV61OKNTvKDrIm9/BoaGKzKPK+RoWgEZGyrvztv24CAJaJKi4n3S+wDgoQ2K06A==
+X-Received: by 2002:a05:6214:21ea:b0:6a0:b4fd:c7af with SMTP id
+ p10-20020a05621421ea00b006a0b4fdc7afmr1182359qvj.32.1714531508165; 
+ Tue, 30 Apr 2024 19:45:08 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.04
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:45:04 -0700 (PDT)
+ Tue, 30 Apr 2024 19:45:07 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: "Lukas F. Hartmann" <lukas@mntre.com>,
-	Patrick Wildt <patrick@blueri.se>
-Subject: [PATCH 092/149] board: mntre: Remove <common.h> and add needed
- includes
-Date: Tue, 30 Apr 2024 20:42:19 -0600
-Message-Id: <20240501024316.1767971-92-trini@konsulko.com>
+Cc: Parthiban Nallathambi <parthiban@linumiz.com>
+Subject: [PATCH 095/149] board: myir: Remove <common.h> and add needed includes
+Date: Tue, 30 Apr 2024 20:42:22 -0600
+Message-Id: <20240501024316.1767971-95-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -96,38 +94,24 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: "Lukas F. Hartmann" <lukas@mntre.com>
-Cc: Patrick Wildt <patrick@blueri.se>
+Cc: Parthiban Nallathambi <parthiban@linumiz.com>
 ---
- board/mntre/imx8mq_reform2/imx8mq_reform2.c | 1 -
- board/mntre/imx8mq_reform2/spl.c            | 2 +-
- 2 files changed, 1 insertion(+), 2 deletions(-)
+ board/myir/mys_6ulx/spl.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/board/mntre/imx8mq_reform2/imx8mq_reform2.c b/board/mntre/imx8mq_reform2/imx8mq_reform2.c
-index be5c5060a2a0..ebc490e24b1c 100644
---- a/board/mntre/imx8mq_reform2/imx8mq_reform2.c
-+++ b/board/mntre/imx8mq_reform2/imx8mq_reform2.c
-@@ -4,7 +4,6 @@
-  * Copyright (C) 2018, Boundary Devices <info@boundarydevices.com>
-  */
- 
--#include <common.h>
- #include <env.h>
- #include <init.h>
- #include <malloc.h>
-diff --git a/board/mntre/imx8mq_reform2/spl.c b/board/mntre/imx8mq_reform2/spl.c
-index 5120c628b91a..48a783593b6e 100644
---- a/board/mntre/imx8mq_reform2/spl.c
-+++ b/board/mntre/imx8mq_reform2/spl.c
-@@ -5,7 +5,7 @@
-  * SPDX-License-Identifier:	GPL-2.0+
+diff --git a/board/myir/mys_6ulx/spl.c b/board/myir/mys_6ulx/spl.c
+index 3cf14e2bc660..4414487eff24 100644
+--- a/board/myir/mys_6ulx/spl.c
++++ b/board/myir/mys_6ulx/spl.c
+@@ -4,7 +4,7 @@
+  * Author: Parthiban Nallathambi <parthiban@linumiz.com>
   */
  
 -#include <common.h>
 +#include <config.h>
- #include <hang.h>
- #include <image.h>
  #include <init.h>
+ #include <spl.h>
+ #include <asm/arch/clock.h>
 -- 
 2.34.1
 
