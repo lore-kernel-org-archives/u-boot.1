@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6292DC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:02:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD9F9C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:02:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 415B288C2A;
-	Wed,  1 May 2024 04:45:17 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id A398788C27;
+	Wed,  1 May 2024 04:45:18 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kL+kNSP1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="szCIvCi8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 878B388C1D; Wed,  1 May 2024 04:45:14 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id B690388C28; Wed,  1 May 2024 04:45:15 +0200 (CEST)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7D6838804F
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:12 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 78B8B88C18
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:13 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-69b9365e584so3645176d6.1
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:12 -0700 (PDT)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-69b730fc89bso25359786d6.1
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531511; x=1715136311; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531512; x=1715136312; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=7IC7z3cg+VQcVQ+3/FbHIbwob63kIE4NRtuRVH7XA0M=;
- b=kL+kNSP1D4bxQKrl3ezBmadePX6juuTnf6x2BFBWkWqB2Y2te+ZOA0B+kj2V4z+vP/
- 1VFt2lmRGmjFfm/BcHfYlAEtidWShBagMgeXEf5Afi/tnTj7k1uFD9Gqbpb+8yVOmPFR
- q6cBkdwr+bEAImkXQTjdbn9r1RJSSUvPB+o/w=
+ bh=8MV0ALZCoN8rmXBzi/4u3vqMCnbdR5QE8w/0epuRO8o=;
+ b=szCIvCi82+fJrTU9vNKmrXGGNTyLlYyZVgv0lWYzQUNMkwE9l45GZub6deo/LjCcYl
+ 6htzQrTLYC3o9df/Aw15Z+okwywiGfmDIJ4d9SSG+20PiljbZW0ih1B81jAVvPXXRifR
+ PU/VIAAooPYepiq83jqwBWi4P/zKlUbxhHorA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531511; x=1715136311;
+ d=1e100.net; s=20230601; t=1714531512; x=1715136312;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=7IC7z3cg+VQcVQ+3/FbHIbwob63kIE4NRtuRVH7XA0M=;
- b=IoFGPYZoF3Rvuf7nhVrsUEya4Wcd0ErDweZyjK84Ivwm5dQuxGT/FUNR4ILVugpwT5
- E9Rkf9DaHp7xS6/Ts2EW/vIXjfw6wfH7m2W8gqTdlJE+L9d2YXu1CDwrhpLX/42vt34Y
- 4XpXVXxTnwapw0x2+38XJpOVvynl1p+g6CmmJnvYsjBqO9Cus09wx7b46U9iatB9ZfbV
- DygA07vCsLzAKLfoaNYbf9piU+xuVYP1E/DZE+dOCuXKO7N6gPFI7HuNukdU4L1+WnWm
- zx2z0c+VsBtNbNXbcHg0zT6jFiRoCsL9JkWzs0RrbIjhaAFg2SdWEf/79oS0xP08vteS
- BZJQ==
-X-Gm-Message-State: AOJu0YxfXQkk/jub7v0+CQO2P9TYqN3eLB52IFee0pyj39ISfsI+yLY0
- jeegRpaPkLtvb+HBu1UnAxqw4TREhk+wVDKOsPRJpTA6aj9jVRMTRffCaJOlyKuIZu/3GJJe2ea
- LAJOKA9t7
-X-Google-Smtp-Source: AGHT+IGv4lE+6jLBSdc12vf74Sv0oHaFUjdXDEKXizJkMK9gs9F7d0E6+CodPmtOAdlgn18+qfMLvg==
-X-Received: by 2002:a05:6214:1090:b0:6a0:e7d8:4adb with SMTP id
- o16-20020a056214109000b006a0e7d84adbmr3908663qvr.26.1714531511226; 
- Tue, 30 Apr 2024 19:45:11 -0700 (PDT)
+ bh=8MV0ALZCoN8rmXBzi/4u3vqMCnbdR5QE8w/0epuRO8o=;
+ b=U2eKAObkvqBLheWq9VgRRgUysNmYVdApUlKjOyA39wIFubGnb1RgztmZoGUUuxBCcw
+ vutUT9ng9a9PjcvN7KbnfPDd/m+nUuTnNbeBePoS8gjzwknYL3eEsMhElk+GwhEyftfO
+ VweCBsYkCoMxJS1LbNuzVxO5e3Dkc9sx0rtQTvUmpaRTVLhsvbaVmSJSv6xIesgNW1Bp
+ U2DYlgo21RUwRB1jCy69Ezxh2yl6X6vlWai8y+dDSOxFpQTetuRVK7cgJwPLtZuYcMt3
+ LBSTVQFjtD5HUYO5XOcFhu6xk2GTKK0/1qp7Y6x6Z46wDUGHtzUUP55vEC0dpE7LC8ER
+ Or8w==
+X-Gm-Message-State: AOJu0YzRAVptvmCMgARN0AvZTIiTHRj/6NWsAQ4v7JI9FsGEsqTummXl
+ IH+ruedFFBL2npBkK4x67kF40b7Qpsu44iEbrZ9E+rJs5Kdx/A1W40+x6GRRjlarnT8I21U2QVx
+ Qg1fGe3or
+X-Google-Smtp-Source: AGHT+IE1j9P/M4GsQ5xGK5R5Cw4nAuiPNWH0ubCyQY9+XtC+w1QwvKMxyVTx+bJBScZC3+m63AcEKQ==
+X-Received: by 2002:a05:6214:2b0d:b0:6a0:b3ec:9036 with SMTP id
+ jx13-20020a0562142b0d00b006a0b3ec9036mr1094632qvb.28.1714531512237; 
+ Tue, 30 Apr 2024 19:45:12 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.10
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:45:10 -0700 (PDT)
+ Tue, 30 Apr 2024 19:45:11 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Stanley Chu <yschu@nuvoton.com>,
-	Jim Liu <JJLIU0@nuvoton.com>
-Subject: [PATCH 098/149] board: nuvoton: Remove <common.h> and add needed
+Cc: Tom Warren <twarren@nvidia.com>, Stephen Warren <swarren@nvidia.com>,
+ Allen Martin <amartin@nvidia.com>
+Subject: [PATCH 099/149] board: nvidia: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:42:25 -0600
-Message-Id: <20240501024316.1767971-98-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:42:26 -0600
+Message-Id: <20240501024316.1767971-99-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -96,37 +96,234 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Stanley Chu <yschu@nuvoton.com>
-Cc: Jim Liu <JJLIU0@nuvoton.com>
+Cc: Tom Warren <twarren@nvidia.com>
+Cc: Stephen Warren <swarren@nvidia.com>
+Cc: Allen Martin <amartin@nvidia.com>
 ---
- board/nuvoton/arbel_evb/arbel_evb.c | 1 -
- board/nuvoton/poleg_evb/poleg_evb.c | 1 -
- 2 files changed, 2 deletions(-)
+ arch/arm/include/asm/arch-tegra/gpio.h      | 1 +
+ arch/arm/include/asm/arch-tegra/tegra_i2c.h | 1 +
+ board/nvidia/beaver/beaver-spl.c            | 1 -
+ board/nvidia/cardhu/cardhu-spl.c            | 1 -
+ board/nvidia/cardhu/cardhu.c                | 1 -
+ board/nvidia/dalmore/dalmore.c              | 1 -
+ board/nvidia/harmony/harmony.c              | 1 -
+ board/nvidia/jetson-tk1/jetson-tk1.c        | 1 -
+ board/nvidia/nyan-big/nyan-big.c            | 1 -
+ board/nvidia/p2371-0000/p2371-0000.c        | 1 -
+ board/nvidia/p2371-2180/p2371-2180.c        | 1 -
+ board/nvidia/p2571/p2571.c                  | 1 -
+ board/nvidia/p2771-0000/p2771-0000.c        | 1 -
+ board/nvidia/p3450-0000/p3450-0000.c        | 1 -
+ board/nvidia/seaboard/seaboard.c            | 1 -
+ board/nvidia/venice2/as3722_init.c          | 1 -
+ board/nvidia/venice2/venice2.c              | 2 +-
+ 17 files changed, 3 insertions(+), 15 deletions(-)
 
-diff --git a/board/nuvoton/arbel_evb/arbel_evb.c b/board/nuvoton/arbel_evb/arbel_evb.c
-index 8fc56c183976..44e0cc9ae7cb 100644
---- a/board/nuvoton/arbel_evb/arbel_evb.c
-+++ b/board/nuvoton/arbel_evb/arbel_evb.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2022 Nuvoton Technology Corp.
+diff --git a/arch/arm/include/asm/arch-tegra/gpio.h b/arch/arm/include/asm/arch-tegra/gpio.h
+index fe7b3a50e0d9..3c1838cf1372 100644
+--- a/arch/arm/include/asm/arch-tegra/gpio.h
++++ b/arch/arm/include/asm/arch-tegra/gpio.h
+@@ -6,6 +6,7 @@
+ #ifndef _TEGRA_GPIO_H_
+ #define _TEGRA_GPIO_H_
+ 
++#include <linux/types.h>
+ #include <dt-bindings/gpio/tegra-gpio.h>
+ 
+ #define TEGRA_GPIOS_PER_PORT	8
+diff --git a/arch/arm/include/asm/arch-tegra/tegra_i2c.h b/arch/arm/include/asm/arch-tegra/tegra_i2c.h
+index afec6bbdda33..dc8db3912219 100644
+--- a/arch/arm/include/asm/arch-tegra/tegra_i2c.h
++++ b/arch/arm/include/asm/arch-tegra/tegra_i2c.h
+@@ -10,6 +10,7 @@
+ 
+ #include <asm/io.h>
+ #include <asm/types.h>
++#include <asm/arch/tegra.h>
+ 
+ struct udevice;
+ 
+diff --git a/board/nvidia/beaver/beaver-spl.c b/board/nvidia/beaver/beaver-spl.c
+index b5d0c14854dd..c6956ff9f582 100644
+--- a/board/nvidia/beaver/beaver-spl.c
++++ b/board/nvidia/beaver/beaver-spl.c
+@@ -7,7 +7,6 @@
+  *  Svyatoslav Ryhel <clamor95@gmail.com>
   */
  
 -#include <common.h>
- #include <dm.h>
- #include <asm/io.h>
- #include <asm/arch/gcr.h>
-diff --git a/board/nuvoton/poleg_evb/poleg_evb.c b/board/nuvoton/poleg_evb/poleg_evb.c
-index 7421911a416b..093ea292ac02 100644
---- a/board/nuvoton/poleg_evb/poleg_evb.c
-+++ b/board/nuvoton/poleg_evb/poleg_evb.c
+ #include <asm/arch-tegra/tegra_i2c.h>
+ #include <linux/delay.h>
+ 
+diff --git a/board/nvidia/cardhu/cardhu-spl.c b/board/nvidia/cardhu/cardhu-spl.c
+index de2fa300f1c8..80912a65a194 100644
+--- a/board/nvidia/cardhu/cardhu-spl.c
++++ b/board/nvidia/cardhu/cardhu-spl.c
+@@ -7,7 +7,6 @@
+  *  Svyatoslav Ryhel <clamor95@gmail.com>
+  */
+ 
+-#include <common.h>
+ #include <asm/arch-tegra/tegra_i2c.h>
+ #include <linux/delay.h>
+ 
+diff --git a/board/nvidia/cardhu/cardhu.c b/board/nvidia/cardhu/cardhu.c
+index 6848e3400466..ab0dc61ebe54 100644
+--- a/board/nvidia/cardhu/cardhu.c
++++ b/board/nvidia/cardhu/cardhu.c
 @@ -4,7 +4,6 @@
-  * Copyright (c) 2021 Nuvoton Technology Corp.
+  *  NVIDIA Corporation <www.nvidia.com>
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <env.h>
+ #include <log.h>
+ #include <asm/arch/pinmux.h>
+diff --git a/board/nvidia/dalmore/dalmore.c b/board/nvidia/dalmore/dalmore.c
+index 72511e401e3c..c00c6343eaa0 100644
+--- a/board/nvidia/dalmore/dalmore.c
++++ b/board/nvidia/dalmore/dalmore.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2010-2013, NVIDIA CORPORATION.  All rights reserved.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <asm/arch/pinmux.h>
+diff --git a/board/nvidia/harmony/harmony.c b/board/nvidia/harmony/harmony.c
+index 52236792e24d..da14e09c40cc 100644
+--- a/board/nvidia/harmony/harmony.c
++++ b/board/nvidia/harmony/harmony.c
+@@ -4,7 +4,6 @@
+  *  NVIDIA Corporation <www.nvidia.com>
+  */
+ 
+-#include <common.h>
  #include <asm/io.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/funcmux.h>
+diff --git a/board/nvidia/jetson-tk1/jetson-tk1.c b/board/nvidia/jetson-tk1/jetson-tk1.c
+index 7f3cdd70fe77..da6edb42c1eb 100644
+--- a/board/nvidia/jetson-tk1/jetson-tk1.c
++++ b/board/nvidia/jetson-tk1/jetson-tk1.c
+@@ -4,7 +4,6 @@
+  * NVIDIA Corporation <www.nvidia.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <linux/printk.h>
+diff --git a/board/nvidia/nyan-big/nyan-big.c b/board/nvidia/nyan-big/nyan-big.c
+index 06a36f8ed387..e15f31dcfd7f 100644
+--- a/board/nvidia/nyan-big/nyan-big.c
++++ b/board/nvidia/nyan-big/nyan-big.c
+@@ -4,7 +4,6 @@
+  * NVIDIA Corporation <www.nvidia.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <log.h>
+diff --git a/board/nvidia/p2371-0000/p2371-0000.c b/board/nvidia/p2371-0000/p2371-0000.c
+index b819b049f4b4..edf2b1adb7c6 100644
+--- a/board/nvidia/p2371-0000/p2371-0000.c
++++ b/board/nvidia/p2371-0000/p2371-0000.c
+@@ -4,7 +4,6 @@
+  * NVIDIA Corporation <www.nvidia.com>
+  */
+ 
+-#include <common.h>
+ #include <i2c.h>
+ #include <log.h>
+ #include <asm/arch/gpio.h>
+diff --git a/board/nvidia/p2371-2180/p2371-2180.c b/board/nvidia/p2371-2180/p2371-2180.c
+index 816c7bec6ae4..5f203d8ffaa8 100644
+--- a/board/nvidia/p2371-2180/p2371-2180.c
++++ b/board/nvidia/p2371-2180/p2371-2180.c
+@@ -4,7 +4,6 @@
+  * NVIDIA Corporation <www.nvidia.com>
+  */
+ 
+-#include <common.h>
+ #include <env.h>
+ #include <fdtdec.h>
+ #include <i2c.h>
+diff --git a/board/nvidia/p2571/p2571.c b/board/nvidia/p2571/p2571.c
+index a4c4259eeaee..4056f986483b 100644
+--- a/board/nvidia/p2571/p2571.c
++++ b/board/nvidia/p2571/p2571.c
+@@ -4,7 +4,6 @@
+  * NVIDIA Corporation <www.nvidia.com>
+  */
+ 
+-#include <common.h>
+ #include <i2c.h>
+ #include <log.h>
+ #include <asm/arch/gpio.h>
+diff --git a/board/nvidia/p2771-0000/p2771-0000.c b/board/nvidia/p2771-0000/p2771-0000.c
+index 5ff89c45423e..12eaa7a1e53d 100644
+--- a/board/nvidia/p2771-0000/p2771-0000.c
++++ b/board/nvidia/p2771-0000/p2771-0000.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2016, NVIDIA CORPORATION
+  */
+ 
+-#include <common.h>
+ #include <env.h>
+ #include <fdtdec.h>
+ #include <i2c.h>
+diff --git a/board/nvidia/p3450-0000/p3450-0000.c b/board/nvidia/p3450-0000/p3450-0000.c
+index fb1a224daa72..530c438a2e30 100644
+--- a/board/nvidia/p3450-0000/p3450-0000.c
++++ b/board/nvidia/p3450-0000/p3450-0000.c
+@@ -5,7 +5,6 @@
+  *
+  */
+ 
+-#include <common.h>
+ #include <fdtdec.h>
+ #include <i2c.h>
+ #include <linux/bitops.h>
+diff --git a/board/nvidia/seaboard/seaboard.c b/board/nvidia/seaboard/seaboard.c
+index 829751112f1c..a646dcc96b52 100644
+--- a/board/nvidia/seaboard/seaboard.c
++++ b/board/nvidia/seaboard/seaboard.c
+@@ -4,7 +4,6 @@
+  *  NVIDIA Corporation <www.nvidia.com>
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <asm/mach-types.h>
+ #include <asm/arch/tegra.h>
+diff --git a/board/nvidia/venice2/as3722_init.c b/board/nvidia/venice2/as3722_init.c
+index 395bdd99c789..b89e03703b21 100644
+--- a/board/nvidia/venice2/as3722_init.c
++++ b/board/nvidia/venice2/as3722_init.c
+@@ -4,7 +4,6 @@
+  * NVIDIA Corporation <www.nvidia.com>
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <asm/io.h>
+ #include <asm/arch-tegra/tegra_i2c.h>
+diff --git a/board/nvidia/venice2/venice2.c b/board/nvidia/venice2/venice2.c
+index d89bbe5ecce2..fa10cda4870e 100644
+--- a/board/nvidia/venice2/venice2.c
++++ b/board/nvidia/venice2/venice2.c
+@@ -4,7 +4,7 @@
+  * NVIDIA Corporation <www.nvidia.com>
+  */
+ 
+-#include <common.h>
++#include <linux/kernel.h>
+ #include <asm/arch/gpio.h>
+ #include <asm/arch/pinmux.h>
+ #include "pinmux-config-venice2.h"
 -- 
 2.34.1
 
