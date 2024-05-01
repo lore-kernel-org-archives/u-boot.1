@@ -4,70 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B532AC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 23:17:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0358C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 23:58:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6B85788B30;
-	Thu,  2 May 2024 01:17:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C82398831B;
+	Thu,  2 May 2024 01:58:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YtOD90G4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CRLIU0or";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9856488B36; Thu,  2 May 2024 01:17:04 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id B0DAB88B83; Thu,  2 May 2024 01:58:56 +0200 (CEST)
+Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
+ [IPv6:2607:f8b0:4864:20::731])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC1CB88189
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 01:17:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 80688882CB
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 01:58:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-69b44071a07so70624806d6.3
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 16:17:01 -0700 (PDT)
+Received: by mail-qk1-x731.google.com with SMTP id
+ af79cd13be357-792639cf4faso143226085a.1
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 16:58:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714605420; x=1715210220; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=O3X++bT5HqzoquWE7450HcTM1/RHcx9ZPDZgiT5pqtQ=;
- b=YtOD90G4TsCMTvdgrbtbysjSkpwjD5mqIACOY1w6/Z07ciuLjqD7XEsh4dKFkyrjO6
- iHjTEBAi3nWQZJDSnSA+dCZJa1sXg3kt2viz1LpE+nm55MA25j8BALwyIIj/pB7e3xfH
- ErEJfX47UEBx9TPVkSzGZIvmNLwrHg4gM2LbE=
+ d=konsulko.com; s=google; t=1714607933; x=1715212733; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=YR8BqLO1oJqVMSNh50NCctprernriU5BtFf9o358WqE=;
+ b=CRLIU0orYUAvygEfx1xVclSwsUxBwwaYO6RotGHKtLKjIzZhdDIFjKWPvxMTQncxU1
+ stuvdAe6UpEEh+yK0KTpa6MXqECV3sNcMkxn0UWeDkm7Rck7NpGheUsw9s5Q+zx/Zwim
+ p0RJ7KzbYeHAw5RK87FHeMknfU2B1KPHhwp9k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714605420; x=1715210220;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=O3X++bT5HqzoquWE7450HcTM1/RHcx9ZPDZgiT5pqtQ=;
- b=cD+OfQeMpIRvt3E8ZYXemwpsbYmD3PZa017QY7MiX/92w1LNUkLX2i1F+Mgm08BVSL
- YxryTkwlxVcdjRjbGWNbHZNPB8jJm7SEpPwRzEgrG5542vyaU0D+VLiN+r9w/ceiS5v3
- f6as4wo/6XOioTbbHu6KuhP77QHuTdOruZkRC2GYlkTzdW1bfJm3WtwgAJuFpfEjhjhQ
- 2Ob6npHBrOgT/JnMdVulI68gG4svDNQKAUpGFJ89Tnsd9SodD5s1OOa/hTygOlj2MDfR
- ZEc1QQMVjQUW0wLfpoupuRnN1OlzXKYO3mPJ6gZIq7d3eqEF6HA+fPWqY+V+loV/GW6v
- y1xA==
-X-Gm-Message-State: AOJu0YxeJp+NLy8fLG+TWo7AgQ7vz0gLjwAxv7FwONimSCKoq0/Z1hG6
- hzXrb75mIqgs9oT11kBrdo+7X5UIZ8szg7UJriK7mfn/oaNM1H2nYhUk7RLgJTVMXvrGGJC8XoX
- tUPIufH8y
-X-Google-Smtp-Source: AGHT+IHy+R35rcVDndU41sRGfPwhbEa5LT1D/l0AcD0Fzi4UB+XJoQXBjlOiQpswqsJBDoZKe3Lp4g==
-X-Received: by 2002:ad4:5746:0:b0:6a0:d52f:67b4 with SMTP id
- q6-20020ad45746000000b006a0d52f67b4mr4926024qvx.30.1714605420393; 
- Wed, 01 May 2024 16:17:00 -0700 (PDT)
+ d=1e100.net; s=20230601; t=1714607933; x=1715212733;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=YR8BqLO1oJqVMSNh50NCctprernriU5BtFf9o358WqE=;
+ b=boLIZlFVK1FUymNCABettd+/kB/J8CDIGMKd9zmTGdx19SVuKt3WKpSC24Ga/qSKP0
+ tDpZ7sZCCCyiAH9YK3BJ8CxD24zgJIDzKWfwNThIenM4n9U2f5mITLSRQiWgOvtqhSIe
+ 7tp2OahlZRZip61giv+oN3PlHGUWMgDLrwpDXLTuFZU8D82QPZXTipYY2oefDB+V/5QR
+ qgAivWlEmPULKJwH6LsX2tG7ycDk0kSOyfT0sFFW2ZfMY+FP5ksQ4Gmk29mfoqZm7Szh
+ 9BSZ85ZUP5Dx9VW0XEEcbEfql14sqGqHjiWGkfJIT8bJu45yhtShnk7PU+T/S50Apmr5
+ DZXQ==
+X-Gm-Message-State: AOJu0Yy5KatX/7UOCieipfVlzrC6BA0TmIZqLZNeciyaGpvkoZLmtFm/
+ pTY+G2vmlHmL/VZUSnIU4ZJj3qOTRFUAWCTsCSeqH/h5XdOIXHyVJ8Ry98A4vcQmR+VD1edi+mu
+ e0P+5I+2P
+X-Google-Smtp-Source: AGHT+IGoelbWEJ9Dnz9zVfYU6Q2cxIDJYrcHnMv0qDA1eAdBwSEPDAhnlSkaN0BMjeJR7hMFEB+G9g==
+X-Received: by 2002:a05:6214:2683:b0:6a0:83a5:deaf with SMTP id
+ gm3-20020a056214268300b006a083a5deafmr4957259qvb.29.1714607932710; 
+ Wed, 01 May 2024 16:58:52 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- j7-20020a0ce6a7000000b006a0cc19f870sm3447109qvn.9.2024.05.01.16.16.59
+ k10-20020ad4420a000000b0069b69c5f077sm189785qvp.102.2024.05.01.16.58.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 16:16:59 -0700 (PDT)
+ Wed, 01 May 2024 16:58:52 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH] buildman: Add flag to filter out missing binary blobs
-Date: Wed,  1 May 2024 17:16:57 -0600
-Message-Id: <20240501231657.2088609-1-trini@konsulko.com>
+Cc: "Huan 'Kitty' Wang" <HuanWang@gehealthcare.com>,
+ Ian Ray <ian.ray@gehealthcare.com>,
+ Martyn Welch <martyn.welch@collabora.com>
+Subject: [PATCHv2 066/149] board: ge: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 17:58:49 -0600
+Message-Id: <20240501235849.2224082-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20240501024316.1767971-66-trini@konsulko.com>
+References: <20240501024316.1767971-66-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -86,100 +91,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When doing builds of a number of platforms and not intending to run the
-resulting binaries, we have an option already to tell buildman to just
-make fake binaries for linking only. Add another option to filter this
-from the output, to make parsing build logs easier.
+Remove <common.h> from this board vendor directory and when needed
+add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Simon Glass <sjg@chromium.org>
----
- tools/buildman/builder.py | 13 ++++++++++++-
- tools/buildman/cmdline.py |  3 +++
- tools/buildman/control.py |  3 ++-
- 3 files changed, 17 insertions(+), 2 deletions(-)
+Changes in v2:
+- Remove "common.h" include as well.
 
-diff --git a/tools/buildman/builder.py b/tools/buildman/builder.py
-index f35175b4598d..d72dbc3e8bfb 100644
---- a/tools/buildman/builder.py
-+++ b/tools/buildman/builder.py
-@@ -368,6 +368,9 @@ class Builder:
-         self._re_note = re.compile('(.*):(\d*):(\d*): note: this is the location of the previous.*')
-         self._re_migration_warning = re.compile(r'^={21} WARNING ={22}\n.*\n=+\n',
-                                                 re.MULTILINE | re.DOTALL)
-+        self._re_missing_blobs = re.compile(r'Image.*is missing.*blobs.*\n.*\nSome images are invalid',
-+                                                re.MULTILINE | re.DOTALL)
-+
+Cc: "Huan 'Kitty' Wang" <HuanWang@gehealthcare.com>
+Cc: Ian Ray <ian.ray@gehealthcare.com>
+Cc: Martyn Welch <martyn.welch@collabora.com>
+
+ board/ge/b1x5v2/b1x5v2.c         | 1 -
+ board/ge/common/ge_rtc.c         | 1 -
+ board/ge/common/vpd_reader.h     | 2 +-
+ board/ge/mx53ppd/mx53ppd.c       | 1 -
+ board/ge/mx53ppd/mx53ppd_video.c | 1 -
+ 5 files changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/board/ge/b1x5v2/b1x5v2.c b/board/ge/b1x5v2/b1x5v2.c
+index a2cbd1512e92..031773bc5ef3 100644
+--- a/board/ge/b1x5v2/b1x5v2.c
++++ b/board/ge/b1x5v2/b1x5v2.c
+@@ -17,7 +17,6 @@
+ #include <asm/io.h>
+ #include <asm/mach-imx/video.h>
+ #include <command.h>
+-#include <common.h>
+ #include <i2c.h>
+ #include <input.h>
+ #include <ipu_pixfmt.h>
+diff --git a/board/ge/common/ge_rtc.c b/board/ge/common/ge_rtc.c
+index 6437afc7bd0a..5c62ecca8c89 100644
+--- a/board/ge/common/ge_rtc.c
++++ b/board/ge/common/ge_rtc.c
+@@ -3,7 +3,6 @@
+  * Copyright 2017 General Electric Company
+  */
  
-         self.thread_exceptions = []
-         self.test_thread_exceptions = test_thread_exceptions
-@@ -409,7 +412,8 @@ class Builder:
-                           show_detail=False, show_bloat=False,
-                           list_error_boards=False, show_config=False,
-                           show_environment=False, filter_dtb_warnings=False,
--                          filter_migration_warnings=False, ide=False):
-+                          filter_migration_warnings=False,
-+                          filter_missing_blobs=False, ide=False):
-         """Setup display options for the builder.
+-#include <common.h>
+ #include <env.h>
+ #include <dm/uclass.h>
+ #include <rtc.h>
+diff --git a/board/ge/common/vpd_reader.h b/board/ge/common/vpd_reader.h
+index 0c51dc57e902..d32c18da351c 100644
+--- a/board/ge/common/vpd_reader.h
++++ b/board/ge/common/vpd_reader.h
+@@ -3,7 +3,7 @@
+  * Copyright 2016 General Electric Company
+  */
  
-         Args:
-@@ -424,6 +428,8 @@ class Builder:
-                 compiler
-             filter_migration_warnings: Filter out any warnings about migrating
-                 a board to driver model
-+            filter_missing_blobs: Filter out any warnings about missing binary
-+                blobs
-             ide: Create output that can be parsed by an IDE. There is no '+' prefix on
-                 error lines and output on stderr stays on stderr.
-         """
-@@ -436,6 +442,7 @@ class Builder:
-         self._show_environment = show_environment
-         self._filter_dtb_warnings = filter_dtb_warnings
-         self._filter_migration_warnings = filter_migration_warnings
-+        self._filter_missing_blobs = filter_missing_blobs
-         self._ide = ide
+-#include "common.h"
++#include <linux/types.h>
  
-     def _add_timestamp(self):
-@@ -672,6 +679,10 @@ class Builder:
-             text = '\n'.join(lines)
-             text = self._re_migration_warning.sub('', text)
-             lines = text.splitlines()
-+        if self._filter_missing_blobs:
-+            text = '\n'.join(lines)
-+            text = self._re_missing_blobs.sub('', text)
-+            lines = text.splitlines()
-         for line in lines:
-             if self.re_make_err.search(line):
-                 continue
-diff --git a/tools/buildman/cmdline.py b/tools/buildman/cmdline.py
-index 03211bd5aa5f..6e5263b40747 100644
---- a/tools/buildman/cmdline.py
-+++ b/tools/buildman/cmdline.py
-@@ -168,6 +168,9 @@ def add_after_m(parser):
-     parser.add_argument('-Y', '--filter-migration-warnings', action='store_true',
-           default=False,
-           help='Filter out migration warnings from output')
-+    parser.add_argument('--filter-missing-blobs', action='store_true',
-+          default=False,
-+          help='Filter out missing binary blob warnings from output')
+ struct vpd_cache;
  
+diff --git a/board/ge/mx53ppd/mx53ppd.c b/board/ge/mx53ppd/mx53ppd.c
+index cc462d53da6a..9396d43f8add 100644
+--- a/board/ge/mx53ppd/mx53ppd.c
++++ b/board/ge/mx53ppd/mx53ppd.c
+@@ -8,7 +8,6 @@
+  * Jason Liu <r64343@freescale.com>
+  */
  
- def parse_args():
-diff --git a/tools/buildman/control.py b/tools/buildman/control.py
-index 8f6850c52113..cd6c47bd2993 100644
---- a/tools/buildman/control.py
-+++ b/tools/buildman/control.py
-@@ -539,7 +539,8 @@ def run_builder(builder, commits, board_selected, args):
-     builder.set_display_options(
-         args.show_errors, args.show_sizes, args.show_detail, args.show_bloat,
-         args.list_error_boards, args.show_config, args.show_environment,
--        args.filter_dtb_warnings, args.filter_migration_warnings, args.ide)
-+        args.filter_dtb_warnings, args.filter_migration_warnings,
-+        args.filter_missing_blobs, args.ide)
-     if args.summary:
-         builder.show_summary(commits, board_selected)
-     else:
+-#include <common.h>
+ #include <init.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+diff --git a/board/ge/mx53ppd/mx53ppd_video.c b/board/ge/mx53ppd/mx53ppd_video.c
+index 4e2c6ebde73c..eb4dd758b3b5 100644
+--- a/board/ge/mx53ppd/mx53ppd_video.c
++++ b/board/ge/mx53ppd/mx53ppd_video.c
+@@ -8,7 +8,6 @@
+  * Fabio Estevam <fabio.estevam@freescale.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <linux/list.h>
+ #include <asm/arch/iomux-mx53.h>
 -- 
 2.34.1
 
