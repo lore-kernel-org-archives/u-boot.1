@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F05FCC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:04:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 480B0C10F16
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:04:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 08FC788C51;
+	by phobos.denx.de (Postfix) with ESMTP id 6AAC888C58;
 	Wed,  1 May 2024 04:45:25 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ikAgUkS5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ESsglrkz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C7F188C4A; Wed,  1 May 2024 04:45:22 +0200 (CEST)
-Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
- [IPv6:2607:f8b0:4864:20::834])
+ id 640C688C4E; Wed,  1 May 2024 04:45:23 +0200 (CEST)
+Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
+ [IPv6:2607:f8b0:4864:20::72e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7CADE88C21
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:20 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5352988C45
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x834.google.com with SMTP id
- d75a77b69052e-4375ddb9eaeso39512591cf.3
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:20 -0700 (PDT)
+Received: by mail-qk1-x72e.google.com with SMTP id
+ af79cd13be357-78edc3e80e6so498609185a.2
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531519; x=1715136319; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531520; x=1715136320; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WfnORaXgDHXvqVEle6C1W4abqjFzQZiGeSFfhSegJBE=;
- b=ikAgUkS5sepuIPPJ4fbVZNtaIiZRD0eOcHSH/o1OEPXWpv3dhdGZhENG3oONao9GSu
- Ku/X6gk3qoD+t6xYuFpOuqULzPTFNXJyiKqCsIQK+C4HapkLnqD+7gCI2cYRzMd1wU+z
- lhRrtrSqiK0NQgGIlD8P69P6ZcufEhI/VH1hg=
+ bh=rQycl2kR9dDpWFrbkH/cJab5P3jiaXtarJdsqahz/pU=;
+ b=ESsglrkzHg+Ao3rWoffl+EvEcyC2enkEzqS4KyBr51HZsiBvWeFn2Gp0UPAAUmefuK
+ E2CvVa4zMuGLR25d7Mavl5aVjkJDn/Jufh3eAkkt0cvOEm7eOSmOraRk03C8LCV7lBAM
+ fAMhBiHqjShc2yvA0X21+vJSVSNtKOAjVNYuU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531519; x=1715136319;
+ d=1e100.net; s=20230601; t=1714531520; x=1715136320;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WfnORaXgDHXvqVEle6C1W4abqjFzQZiGeSFfhSegJBE=;
- b=ADAW4+e2JRD/AvGB09BfubO1bQmRw/zZfjOP1NXlSTPzo+AH7g8OtSbJ+afAtYdbf+
- 8Sq8P7dGjX4huK4JiP2s5XCXDp7lGryfj1SAQ/wjhBVvIguqSPECVYXak4Yugc2jekvt
- lORyLLYuDKOoZrPmvqUhcwxMlzIHUjRxpq5NKRo7jGVru1MzekSH+oMXaMJAorpgaBPk
- PQ5b8hkgTeFu8F322YJhyQhoRECnXv4LOeglTNnMwQZSBbL8TaNlnGV2RTzKtHhjmYyc
- ZAlVRuST1Gs/vCOFzLtXlP0FWtgUX3+73IY4KXpS0Vgfj3Y9XdRb8LLi0lACLMMUMzcB
- g2Gw==
-X-Gm-Message-State: AOJu0YxZN7pdXhuIOtb/7Ney9P6ILPyGpQIgE4oMdDjudRYFwn+FzHlP
- fHv/BomlewO0EqOoxJw70Ye7GITdhjglu2nmJhI/3YJ9ySSZUlkG7vf+k1ECuHt8XF1X/EH3SlM
- 9CLGx5o3C
-X-Google-Smtp-Source: AGHT+IE747IgWKDVzmQKr3DbEGGTx2hsj7G7PzP266dsoyUEjScwCdW3K+xWFPTTM7fXN4Q2Hpxq1w==
-X-Received: by 2002:a05:6214:1d29:b0:6a0:d21b:c914 with SMTP id
- f9-20020a0562141d2900b006a0d21bc914mr1183403qvd.51.1714531518905; 
- Tue, 30 Apr 2024 19:45:18 -0700 (PDT)
+ bh=rQycl2kR9dDpWFrbkH/cJab5P3jiaXtarJdsqahz/pU=;
+ b=Ol4kP7z2O+0SmugeL4JkfH3cxAD35KcIFnmTvUeHD2390EDGnDkUXDs+Gxu2mZS0Dk
+ hnUMMt76V4evNdxvgkpFsHvTExvIMod+24hCVJcQtSThdKSX3lmOzBg3tpLI9xgsiEGX
+ tcLNVHimscxsIPXGW/FqsLF8YI3FpGD3i/cpOoj/XOkuWQi3fil6PmULFAseFxxbKN5G
+ A72oZv/4Rzs8PlgEuJjNhmCeubQRij3ycHBX8xJvBb+1hGDydQvVpuT7+cXK9AgFZ+4X
+ ULO3CxEj10ZqLoi2USsaQqiJpoUZ6/hZdh7TAToApOMkJLPPp//SPUfTpS6g42pzd3As
+ VLbw==
+X-Gm-Message-State: AOJu0YwSOpuMSiSflAuBixSWSgXh9qMs6ecTv+ZB/hzwL9gTfR3NPzH4
+ SdZxgtbW+kVqc2gc2+Z+3O7lvcS4ibhS0x5OItCdOTwm/IQkKEF2OZwrC/fQB5RjwplcefjKX9K
+ nv83Mb3Ex
+X-Google-Smtp-Source: AGHT+IHx+ooSTK/XzFSW0FKug33S8eXHdrA1iyH7gnnhIXfOT4ILYAATQiqWNQkMpSiwN7B9KQDT9Q==
+X-Received: by 2002:ad4:5f4f:0:b0:6a0:b3cc:ee1e with SMTP id
+ p15-20020ad45f4f000000b006a0b3ccee1emr1247367qvg.39.1714531520096; 
+ Tue, 30 Apr 2024 19:45:20 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.18
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.19
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:45:18 -0700 (PDT)
+ Tue, 30 Apr 2024 19:45:19 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Gilles Talis <gilles.talis@gmail.com>
-Subject: [PATCH 105/149] board: polyhex: Remove <common.h> and add needed
+Cc: Angus Ainslie <angus@akkea.ca>,
+	kernel@puri.sm
+Subject: [PATCH 106/149] board: purism: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:42:32 -0600
-Message-Id: <20240501024316.1767971-105-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:42:33 -0600
+Message-Id: <20240501024316.1767971-106-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -95,36 +96,64 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Gilles Talis <gilles.talis@gmail.com>
+Cc: Angus Ainslie <angus@akkea.ca>
+Cc: kernel@puri.sm
 ---
- board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c | 1 -
- board/polyhex/imx8mp_debix_model_a/spl.c                  | 1 -
- 2 files changed, 2 deletions(-)
+ board/purism/librem5/librem5.c          | 1 -
+ board/purism/librem5/lpddr4_timing.c    | 1 -
+ board/purism/librem5/lpddr4_timing_b0.c | 1 -
+ board/purism/librem5/spl.c              | 2 +-
+ 4 files changed, 1 insertion(+), 4 deletions(-)
 
-diff --git a/board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c b/board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c
-index 14b94c9e33ce..112770ba4931 100644
---- a/board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c
-+++ b/board/polyhex/imx8mp_debix_model_a/imx8mp_debix_model_a.c
-@@ -11,7 +11,6 @@
- #include <asm/global_data.h>
- #include <asm/mach-imx/gpio.h>
- #include <asm/mach-imx/iomux-v3.h>
+diff --git a/board/purism/librem5/librem5.c b/board/purism/librem5/librem5.c
+index d0249e71f09a..a3c421572afb 100644
+--- a/board/purism/librem5/librem5.c
++++ b/board/purism/librem5/librem5.c
+@@ -4,7 +4,6 @@
+  * Copyright 2021 Purism
+  */
+ 
 -#include <common.h>
- #include <env.h>
+ #include <malloc.h>
  #include <errno.h>
- #include <init.h>
-diff --git a/board/polyhex/imx8mp_debix_model_a/spl.c b/board/polyhex/imx8mp_debix_model_a/spl.c
-index eb904e116b11..6cbd1815cad5 100644
---- a/board/polyhex/imx8mp_debix_model_a/spl.c
-+++ b/board/polyhex/imx8mp_debix_model_a/spl.c
-@@ -11,7 +11,6 @@
- #include <asm/global_data.h>
- #include <asm/mach-imx/boot_mode.h>
- #include <asm/sections.h>
+ #include <asm/io.h>
+diff --git a/board/purism/librem5/lpddr4_timing.c b/board/purism/librem5/lpddr4_timing.c
+index 46bc7f8591cb..e9559e3d843a 100644
+--- a/board/purism/librem5/lpddr4_timing.c
++++ b/board/purism/librem5/lpddr4_timing.c
+@@ -4,7 +4,6 @@
+  */
+ 
+ #include <linux/kernel.h>
 -#include <common.h>
- #include <dm/device.h>
- #include <dm/uclass.h>
- #include <hang.h>
+ #include <asm/arch/ddr.h>
+ #include <asm/arch/lpddr4_define.h>
+ 
+diff --git a/board/purism/librem5/lpddr4_timing_b0.c b/board/purism/librem5/lpddr4_timing_b0.c
+index ec68edaf6905..5d8f2803be67 100644
+--- a/board/purism/librem5/lpddr4_timing_b0.c
++++ b/board/purism/librem5/lpddr4_timing_b0.c
+@@ -4,7 +4,6 @@
+  */
+ 
+ #include <linux/kernel.h>
+-#include <common.h>
+ #include <asm/arch/ddr.h>
+ #include <asm/arch/lpddr4_define.h>
+ 
+diff --git a/board/purism/librem5/spl.c b/board/purism/librem5/spl.c
+index 9aadc553302e..ed57554a2bc3 100644
+--- a/board/purism/librem5/spl.c
++++ b/board/purism/librem5/spl.c
+@@ -4,7 +4,7 @@
+  * Copyright 2021 Purism
+  */
+ 
+-#include <common.h>
++#include <config.h>
+ #include <asm/io.h>
+ #include <errno.h>
+ #include <asm/io.h>
 -- 
 2.34.1
 
