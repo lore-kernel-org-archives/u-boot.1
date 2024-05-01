@@ -4,59 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90230C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 17:19:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59EBDC4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 18:54:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E39E388B84;
-	Wed,  1 May 2024 19:19:20 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 80382882B5;
+	Wed,  1 May 2024 20:53:58 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="mmHXWD5R";
+	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="DCRlJsJm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDB2D88B4E; Wed,  1 May 2024 19:19:19 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 83189882BA; Wed,  1 May 2024 20:53:57 +0200 (CEST)
+Received: from mta-65-227.siemens.flowmailer.net
+ (mta-65-227.siemens.flowmailer.net [185.136.65.227])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A707881AF
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 19:19:17 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A577F88279
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 20:53:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=373c=MF=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1714583921; bh=/ssXHO/MMhnrQv2w26xyCkLAtHiTbhe0IqcqKUTe2N0=;
- b=mmHXWD5RlwUVHOwkjboDxxy/YkuAeF3qajDbkdmPQZsN608F7exSTt5z3eUe+nhSxzn+KvDgR
- uWtxcBg4wDzXcArA7J0lyTfgOgUS5JiYr0L3fyf04ClFMmtWmzT99i1knrKmX60/ccpn8uf4G+c
- mOcV8F4mJ2G4zeDcbk8EqDYkkKFAJ8gKf29imiDtISeurnFMzQqMNrRu93dsFNRS0/xbOZCHQxw
- 5CGCzt9+f90YqaZKlYxNVOaN2d957cwVxtiHUvk+2qqwMQlejgNwa9ZREeGnTYD/KY3KSrDHLTx
- CUizELbp//D1kw21xgfSo10LNoAAZ/ziT4pFz3z7vSew==
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Peter Robinson <pbrobinson@gmail.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, Dragan Simic
- <dsimic@manjaro.org>, Christopher Obbard <chris.obbard@collabora.com>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 21/22] rockchip: rk3399-pinephone-pro: Sync DT from v6.8
- and update defconfig
-Date: Wed,  1 May 2024 16:22:38 +0000
-Message-ID: <20240501162308.875193-22-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.43.2
-In-Reply-To: <20240501162308.875193-1-jonas@kwiboo.se>
-References: <20240501162308.875193-1-jonas@kwiboo.se>
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
+Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
+ 202405011853531443fb598b7e4a14d8 for <u-boot@lists.denx.de>;
+ Wed, 01 May 2024 20:53:54 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
+ d=siemens.com; i=alexander.sverdlin@siemens.com;
+ h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
+ bh=VnpDeMWIeC+PODhF0DqMfRJYoD7xPPyHFissKtZxdr0=;
+ b=DCRlJsJmH9w806OqujivqEZwMGZi26Oq537c1+mbMBgQZtdv9otckH9pOBGlx++8KkM9Xi
+ Uhl7168NK/V+YgN/RxdfU6x4VHlulqJVe5+B7qM5QMSzl5Bqw4+Uk8REohplU5n3QN9r5mht
+ SHab7bg79yvfPajl9zq0mOXGveeVE=;
+From: "A. Sverdlin" <alexander.sverdlin@siemens.com>
+To: Ian Roberts <ian.roberts@timesys.com>,
+ Greg Malysa <greg.malysa@timesys.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
+Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Subject: [PATCH] mmc: sdhci: Correct ADMA_DESC_LEN to 12
+Date: Wed,  1 May 2024 20:53:04 +0200
+Message-ID: <20240501185331.1189647-1-alexander.sverdlin@siemens.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Report-Abuse-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-ForwardEmail-Version: 0.4.40
-X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-ForwardEmail-ID: 66326cc43e72fadc559dbb3e
+X-Flowmailer-Platform: Siemens
+Feedback-ID: 519:519-456497:519-21489:flowmailer
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,300 +64,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sync rk3399-pinephone-pro device tree from Linux kernel v6.8.
+From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 
-Add SPI flash related node and options to support boot from SPI flash.
+Commit 37cb626da25d0d ("mmc: sdhci: Add Support for ADMA2") introduced
+ADMA_DESC_LEN == 16 (64 bit case), but it was never used before commit
+74755c1fed1b0 ("mmc: sdhci: introduce adma_write_desc() hook to struct sdhci_ops").
 
-Remove REGULATOR_PWM=y, board does not use pwm-regulator compatible.
+"sizeof(struct sdhci_adma_desc)" (== 12 for 64bit case) was used instead.
 
-Add SYS_NS16550_MEM32=y to use readl/writel for serial console.
+Confusion probably originates from Linux commit 685e444bbaa0
+("mmc: sdhci: Add ADMA2 64-bit addressing support for V4 mode"), but
+the latter "V4 mode" was never ported to U-Boot.
 
-Remove SPL_TINY_MEMSET=y to use full memset in SPL.
-
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
+Fixes: 74755c1fed1b0 ("mmc: sdhci: introduce adma_write_desc() hook to struct sdhci_ops")
+Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
 ---
-v2: Collect r-b tags
----
- arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi |  12 ++
- arch/arm/dts/rk3399-pinephone-pro.dts         | 147 ++++++++++++++++++
- configs/pinephone-pro-rk3399_defconfig        |   8 +-
- 3 files changed, 163 insertions(+), 4 deletions(-)
+ include/sdhci.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-index dcfcec4f3072..037cec10ce36 100644
---- a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-@@ -13,3 +13,15 @@
- &sdmmc {
- 	max-frequency = <20000000>;
- };
-+
-+&spi1 {
-+	status = "okay";
-+
-+	flash@0 {
-+		compatible = "jedec,spi-nor";
-+		reg = <0>;
-+		bootph-pre-ram;
-+		bootph-some-ram;
-+		spi-max-frequency = <10000000>;
-+	};
-+};
-diff --git a/arch/arm/dts/rk3399-pinephone-pro.dts b/arch/arm/dts/rk3399-pinephone-pro.dts
-index 04403a76238b..61f3fec5a8b1 100644
---- a/arch/arm/dts/rk3399-pinephone-pro.dts
-+++ b/arch/arm/dts/rk3399-pinephone-pro.dts
-@@ -10,6 +10,7 @@
-  */
+diff --git a/include/sdhci.h b/include/sdhci.h
+index d73a725609be3..810ef56e4be66 100644
+--- a/include/sdhci.h
++++ b/include/sdhci.h
+@@ -300,7 +300,7 @@ struct sdhci_ops {
  
- /dts-v1/;
-+#include <dt-bindings/input/gpio-keys.h>
- #include <dt-bindings/input/linux-event-codes.h>
- #include "rk3399.dtsi"
- #include "rk3399-opp.dtsi"
-@@ -29,6 +30,31 @@
- 		stdout-path = "serial2:115200n8";
- 	};
- 
-+	adc-keys {
-+		compatible = "adc-keys";
-+		io-channels = <&saradc 1>;
-+		io-channel-names = "buttons";
-+		keyup-threshold-microvolt = <1600000>;
-+		poll-interval = <100>;
-+
-+		button-up {
-+			label = "Volume Up";
-+			linux,code = <KEY_VOLUMEUP>;
-+			press-threshold-microvolt = <100000>;
-+		};
-+
-+		button-down {
-+			label = "Volume Down";
-+			linux,code = <KEY_VOLUMEDOWN>;
-+			press-threshold-microvolt = <600000>;
-+		};
-+	};
-+
-+	backlight: backlight {
-+		compatible = "pwm-backlight";
-+		pwms = <&pwm0 0 50000 0>;
-+	};
-+
- 	gpio-keys {
- 		compatible = "gpio-keys";
- 		pinctrl-names = "default";
-@@ -102,6 +128,37 @@
- 		/* WL_REG_ON on module */
- 		reset-gpios = <&gpio0 RK_PB2 GPIO_ACTIVE_LOW>;
- 	};
-+
-+	/* MIPI DSI panel 1.8v supply */
-+	vcc1v8_lcd: vcc1v8-lcd {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		regulator-name = "vcc1v8_lcd";
-+		regulator-min-microvolt = <1800000>;
-+		regulator-max-microvolt = <1800000>;
-+		vin-supply = <&vcc3v3_sys>;
-+		gpio = <&gpio3 RK_PA5 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+	};
-+
-+	/* MIPI DSI panel 2.8v supply */
-+	vcc2v8_lcd: vcc2v8-lcd {
-+		compatible = "regulator-fixed";
-+		enable-active-high;
-+		regulator-name = "vcc2v8_lcd";
-+		regulator-min-microvolt = <2800000>;
-+		regulator-max-microvolt = <2800000>;
-+		vin-supply = <&vcc3v3_sys>;
-+		gpio = <&gpio3 RK_PA1 GPIO_ACTIVE_HIGH>;
-+		pinctrl-names = "default";
-+	};
-+};
-+
-+&cpu_alert0 {
-+	temperature = <65000>;
-+};
-+&cpu_alert1 {
-+	temperature = <68000>;
- };
- 
- &cpu_l0 {
-@@ -132,6 +189,11 @@
- 	status = "okay";
- };
- 
-+&gpu {
-+	mali-supply = <&vdd_gpu>;
-+	status = "okay";
-+};
-+
- &i2c0 {
- 	clock-frequency = <400000>;
- 	i2c-scl-rising-time-ns = <168>;
-@@ -326,6 +388,25 @@
- 	};
- };
- 
-+&i2c3 {
-+	i2c-scl-rising-time-ns = <450>;
-+	i2c-scl-falling-time-ns = <15>;
-+	status = "okay";
-+
-+	touchscreen@14 {
-+		compatible = "goodix,gt1158";
-+		reg = <0x14>;
-+		interrupt-parent = <&gpio3>;
-+		interrupts = <RK_PB5 IRQ_TYPE_EDGE_RISING>;
-+		irq-gpios = <&gpio3 RK_PB5 GPIO_ACTIVE_HIGH>;
-+		reset-gpios = <&gpio3 RK_PB4 GPIO_ACTIVE_HIGH>;
-+		AVDD28-supply = <&vcc3v0_touch>;
-+		VDDIO-supply = <&vcc3v0_touch>;
-+		touchscreen-size-x = <720>;
-+		touchscreen-size-y = <1440>;
-+	};
-+};
-+
- &cluster0_opp {
- 	opp04 {
- 		status = "disabled";
-@@ -355,6 +436,39 @@
- 	status = "okay";
- };
- 
-+&mipi_dsi {
-+	status = "okay";
-+	clock-master;
-+
-+	ports {
-+		mipi_out: port@1 {
-+			#address-cells = <0>;
-+			#size-cells = <0>;
-+			reg = <1>;
-+
-+			mipi_out_panel: endpoint {
-+				remote-endpoint = <&mipi_in_panel>;
-+			};
-+		};
-+	};
-+
-+	panel@0 {
-+		compatible = "hannstar,hsd060bhw4";
-+		reg = <0>;
-+		backlight = <&backlight>;
-+		reset-gpios = <&gpio4 RK_PD1 GPIO_ACTIVE_LOW>;
-+		vcc-supply = <&vcc2v8_lcd>;
-+		iovcc-supply = <&vcc1v8_lcd>;
-+		pinctrl-names = "default";
-+
-+		port {
-+			mipi_in_panel: endpoint {
-+				remote-endpoint = <&mipi_out_panel>;
-+			};
-+		};
-+	};
-+};
-+
- &pmu_io_domains {
- 	pmu1830-supply = <&vcc_1v8>;
- 	status = "okay";
-@@ -422,6 +536,15 @@
- 	status = "okay";
- };
- 
-+&pwm0 {
-+	status = "okay";
-+};
-+
-+&saradc {
-+	vref-supply = <&vcca1v8_s3>;
-+	status = "okay";
-+};
-+
- &sdmmc {
- 	bus-width = <4>;
- 	cap-sd-highspeed;
-@@ -472,3 +595,27 @@
- &uart2 {
- 	status = "okay";
- };
-+
-+&vopb {
-+	status = "okay";
-+	assigned-clocks = <&cru DCLK_VOP0_DIV>, <&cru DCLK_VOP0>,
-+			  <&cru ACLK_VOP0>, <&cru HCLK_VOP0>;
-+	assigned-clock-rates = <0>, <0>, <400000000>, <100000000>;
-+	assigned-clock-parents = <&cru PLL_GPLL>, <&cru DCLK_VOP0_DIV>;
-+};
-+
-+&vopb_mmu {
-+	status = "okay";
-+};
-+
-+&vopl {
-+	status = "okay";
-+	assigned-clocks = <&cru DCLK_VOP1_DIV>, <&cru DCLK_VOP1>,
-+			  <&cru ACLK_VOP1>, <&cru HCLK_VOP1>;
-+	assigned-clock-rates = <0>, <0>, <400000000>, <100000000>;
-+	assigned-clock-parents = <&cru PLL_GPLL>, <&cru DCLK_VOP1_DIV>;
-+};
-+
-+&vopl_mmu {
-+	status = "okay";
-+};
-diff --git a/configs/pinephone-pro-rk3399_defconfig b/configs/pinephone-pro-rk3399_defconfig
-index c36898364b5d..1bb7b35a255c 100644
---- a/configs/pinephone-pro-rk3399_defconfig
-+++ b/configs/pinephone-pro-rk3399_defconfig
-@@ -3,7 +3,7 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
--CONFIG_SF_DEFAULT_SPEED=20000000
-+CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_SIZE=0x8000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-pinephone-pro"
-@@ -33,7 +33,6 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
- CONFIG_CMD_USB=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_CMD_TIME=y
-@@ -54,18 +53,20 @@ CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
- CONFIG_SF_DEFAULT_BUS=1
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
- CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_SILICONKAISER=y
- CONFIG_SPI_FLASH_WINBOND=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PHY_ROCKCHIP_TYPEC=y
- CONFIG_DM_PMIC_FAN53555=y
- CONFIG_PMIC_RK8XX=y
--CONFIG_REGULATOR_PWM=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM_ROCKCHIP_LPDDR4=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
-+CONFIG_SYS_NS16550_MEM32=y
- CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
-@@ -85,5 +86,4 @@ CONFIG_VIDEO=y
- CONFIG_DISPLAY=y
- CONFIG_VIDEO_ROCKCHIP=y
- CONFIG_DISPLAY_ROCKCHIP_EDP=y
--CONFIG_SPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
+ #define ADMA_MAX_LEN	65532
+ #ifdef CONFIG_DMA_ADDR_T_64BIT
+-#define ADMA_DESC_LEN	16
++#define ADMA_DESC_LEN	12
+ #else
+ #define ADMA_DESC_LEN	8
+ #endif
 -- 
-2.43.2
+2.44.0
 
