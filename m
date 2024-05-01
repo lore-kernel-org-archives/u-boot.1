@@ -4,65 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46964C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 20:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5B20C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 20:20:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F6E488349;
-	Wed,  1 May 2024 22:06:56 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 34432883AD;
+	Wed,  1 May 2024 22:20:38 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="r0nwXLuU";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XMwSB2Zt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 268DF88349; Wed,  1 May 2024 22:06:56 +0200 (CEST)
-Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 3DB97885A4; Wed,  1 May 2024 22:20:36 +0200 (CEST)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF9BF8831B
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 22:06:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C562388348
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 22:20:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 441K6odd051981;
- Wed, 1 May 2024 15:06:50 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1714594010;
- bh=aBDotIHP8RkBokd7k5SuHowoCFA2TvmWt2y246yF1sQ=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=r0nwXLuUbuAphq9m4F8I5fq6g2w3HTldef2Kv9Uvp4m80k1EqY1alK6y/7DjoMb9o
- q1F7Eh20aPZE6B86FTCo68EwjLkyAKL9BQSvADodjzYZOsZjc2OgkTng+94kje4Y7z
- xntv6sgO28OUFT6tL5D2EjEbUZH+gaXUrTQIf5RA=
-Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 441K6ob1003303
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 1 May 2024 15:06:50 -0500
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE104.ent.ti.com
- (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 1
- May 2024 15:06:49 -0500
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 1 May 2024 15:06:49 -0500
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.81.241])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 441K6ngT021679;
- Wed, 1 May 2024 15:06:49 -0500
-From: Jon Humphreys <j-humphreys@ti.com>
-To: "A. Sverdlin" <alexander.sverdlin@siemens.com>, Ian Roberts
- <ian.roberts@timesys.com>, Greg Malysa <greg.malysa@timesys.com>, "Jaehoon
- Chung" <jh80.chung@samsung.com>, <u-boot@lists.denx.de>
-CC: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-Subject: Re: [PATCH] mmc: sdhci: Correct ADMA_DESC_LEN to 12
-In-Reply-To: <20240501185331.1189647-1-alexander.sverdlin@siemens.com>
-References: <20240501185331.1189647-1-alexander.sverdlin@siemens.com>
-Date: Wed, 1 May 2024 15:06:49 -0500
-Message-ID: <86wmode1pi.fsf@udb0321960.dhcp.ti.com>
+ spf=pass smtp.mailfrom=mibodhi@gmail.com
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-56c5d05128dso6427004a12.0
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 13:20:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1714594833; x=1715199633; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3BAPc+N76KBMY/dJsqDeK4/mf6GNoE36Oe+LtN5W25I=;
+ b=XMwSB2ZtK9HPP9s8CH4JlL/wWOifOPOv+LWGRdUNXzkqFLeaOqj/33/v6dOuvMubYC
+ PrxYj2PZlTWe70fVzjUinzM4V2HWY29jDWuSAz9qxgljFnRo94md4nYbPlhAko6E3Reh
+ oEmce0ZS94aZxy/CO9m68eOkV6Az2FminSNFrbvz1xjJQKLmZzjiJoM7GYZFT3NtlPZ+
+ 3uIEae55DNwrT5Fi98LqGlvF7Jut6IxmtrOkA1uZB5vktIQqGcXjcjIvVOUHshgc3KOV
+ ZyfU71ts8pj6vRTGAMPjgSDnq4u8aDvkxM6wYffswD44cNWqSaHWXGbCCe+2n2i84ISl
+ aZZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714594833; x=1715199633;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3BAPc+N76KBMY/dJsqDeK4/mf6GNoE36Oe+LtN5W25I=;
+ b=Jg4oYxp2K+uTg2RTQEFhWx65JwAr2kWMumB+ftk/DnFw3cOls7BNBb+t+Yimpn2c/x
+ IXWqC04JqcP8R0MhBMv3sA7pXjaFVow9ofnIHGtW7I//5KWgLA2GZldOpYy0jCuRuBb2
+ SvVv1F27iuj0haOVecOAcbcLLTm5SfMOq51dlgY9dRjceWI5ue+LALVUPwJv02HNWH6s
+ ELHVx55AdCNf15G8dWtxm1tdAHzPwZr5+v+XL0SsSeXyNzKNDyL4AK//obE/ujW8Rf9r
+ rIoW0J5bWohz7U0ucUpvy2hTK1fDhmKBOFUJwiQHlzEXXkpnVsREkVxHEkcfynxJBnQM
+ YAHQ==
+X-Gm-Message-State: AOJu0YwK8WxrANKJ7RmaQbVUXwATE6JLI+WQVlQ7FnuZiiLVs/O1/aBv
+ CdRlQn1twDv1prZMdyGZmKACGyElwK9QAJWLDDxOFB22UBNdIhJr+Umov3TLbKWb1WJj9GBGdvH
+ d+NwNTx8t9tDPMnXVjt4Si0S8fjw=
+X-Google-Smtp-Source: AGHT+IF616bzEmmR9On21OtBbj2ANGvV4gZ1VvWhJup/GecCM3GdnFdraHyecpUZtfPXh4GNH3E8ulqb/LpaKZ0+DyM=
+X-Received: by 2002:a50:d683:0:b0:56e:966:be7c with SMTP id
+ r3-20020a50d683000000b0056e0966be7cmr68514edi.2.1714594833013; Wed, 01 May
+ 2024 13:20:33 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+References: <20240501024316.1767971-1-trini@konsulko.com>
+ <20240501024316.1767971-10-trini@konsulko.com>
+In-Reply-To: <20240501024316.1767971-10-trini@konsulko.com>
+From: Tony Dinh <mibodhi@gmail.com>
+Date: Wed, 1 May 2024 13:20:00 -0700
+Message-ID: <CAJaLiFwUFnb7Yc8LRbvm=dmLhAzUqzjJnBVzVhMEQs0YaLtkyA@mail.gmail.com>
+Subject: Re: [PATCH 010/149] board: Marvell: Remove <common.h> and add needed
+ includes
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Stefan Roese <sr@denx.de>, 
+ Chris Packham <chris.packham@alliedtelesis.co.nz>,
+ Jason Cooper <u-boot@lakedaemon.net>, 
+ Siddarth Gore <gores@marvell.com>, Aaron Williams <awilliams@marvell.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,42 +92,227 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-"A. Sverdlin" <alexander.sverdlin@siemens.com> writes:
-
-> From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+On Tue, Apr 30, 2024 at 7:43=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
 >
-> Commit 37cb626da25d0d ("mmc: sdhci: Add Support for ADMA2") introduced
-> ADMA_DESC_LEN == 16 (64 bit case), but it was never used before commit
-> 74755c1fed1b0 ("mmc: sdhci: introduce adma_write_desc() hook to struct sdhci_ops").
+> Remove <common.h> from this board vendor directory and when needed
+> add missing include files directly.
 >
-> "sizeof(struct sdhci_adma_desc)" (== 12 for 64bit case) was used instead.
->
-> Confusion probably originates from Linux commit 685e444bbaa0
-> ("mmc: sdhci: Add ADMA2 64-bit addressing support for V4 mode"), but
-> the latter "V4 mode" was never ported to U-Boot.
->
-> Fixes: 74755c1fed1b0 ("mmc: sdhci: introduce adma_write_desc() hook to struct sdhci_ops")
-> Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
->  include/sdhci.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+> Cc: Stefan Roese <sr@denx.de>
+> Cc: Chris Packham <chris.packham@alliedtelesis.co.nz>
+> Cc: Tony Dinh <mibodhi@gmail.com>
+> Cc: Jason Cooper <u-boot@lakedaemon.net>
+> Cc: Siddarth Gore <gores@marvell.com>
+> Cc: Aaron Williams <awilliams@marvell.com>
+
+Reviewed-by: Tony Dinh <mibodhi@gmail.com>
+
+> ---
+>  arch/arm/mach-kirkwood/include/mach/mpp.h     | 2 ++
+>  board/Marvell/db-88f6720/db-88f6720.c         | 1 -
+>  board/Marvell/db-88f6820-amc/db-88f6820-amc.c | 2 +-
+>  board/Marvell/db-88f6820-gp/db-88f6820-gp.c   | 2 +-
+>  board/Marvell/db-mv784mp-gp/db-mv784mp-gp.c   | 1 -
+>  board/Marvell/db-xc3-24g4xg/db-xc3-24g4xg.c   | 1 -
+>  board/Marvell/dreamplug/dreamplug.c           | 1 -
+>  board/Marvell/guruplug/guruplug.c             | 1 -
+>  board/Marvell/mvebu_alleycat-5/board.c        | 2 +-
+>  board/Marvell/mvebu_armada-37xx/board.c       | 2 +-
+>  board/Marvell/mvebu_armada-8k/board.c         | 2 +-
+>  board/Marvell/octeontx2/soc-utils.c           | 1 -
+>  board/Marvell/openrd/openrd.c                 | 1 -
+>  board/Marvell/sheevaplug/sheevaplug.c         | 1 -
+>  14 files changed, 7 insertions(+), 13 deletions(-)
 >
-> diff --git a/include/sdhci.h b/include/sdhci.h
-> index d73a725609be3..810ef56e4be66 100644
-> --- a/include/sdhci.h
-> +++ b/include/sdhci.h
-> @@ -300,7 +300,7 @@ struct sdhci_ops {
->  
->  #define ADMA_MAX_LEN	65532
->  #ifdef CONFIG_DMA_ADDR_T_64BIT
-> -#define ADMA_DESC_LEN	16
-> +#define ADMA_DESC_LEN	12
->  #else
->  #define ADMA_DESC_LEN	8
->  #endif
-> -- 
-> 2.44.0
-
-on TI AM64 and AM62p platforms:
-
-Tested-by: Jonathan Humphreys <j-humphreys@ti.com>
+> diff --git a/arch/arm/mach-kirkwood/include/mach/mpp.h b/arch/arm/mach-ki=
+rkwood/include/mach/mpp.h
+> index 4d1f58c0cbdf..e2757942590b 100644
+> --- a/arch/arm/mach-kirkwood/include/mach/mpp.h
+> +++ b/arch/arm/mach-kirkwood/include/mach/mpp.h
+> @@ -8,6 +8,8 @@
+>  #ifndef __KIRKWOOD_MPP_H
+>  #define __KIRKWOOD_MPP_H
+>
+> +#include <linux/types.h>
+> +
+>  #define MPP(_num, _sel, _in, _out, _F6180, _F6190, _F6192, _F6281) ( \
+>         /* MPP number */                ((_num) & 0xff) | \
+>         /* MPP select value */          (((_sel) & 0xf) << 8) | \
+> diff --git a/board/Marvell/db-88f6720/db-88f6720.c b/board/Marvell/db-88f=
+6720/db-88f6720.c
+> index 26c30647fbb0..920421366f11 100644
+> --- a/board/Marvell/db-88f6720/db-88f6720.c
+> +++ b/board/Marvell/db-88f6720/db-88f6720.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (C) 2016 Stefan Roese <sr@denx.de>
+>   */
+>
+> -#include <common.h>
+>  #include <init.h>
+>  #include <miiphy.h>
+>  #include <net.h>
+> diff --git a/board/Marvell/db-88f6820-amc/db-88f6820-amc.c b/board/Marvel=
+l/db-88f6820-amc/db-88f6820-amc.c
+> index 122c63d11f99..0f92cc385bc8 100644
+> --- a/board/Marvell/db-88f6820-amc/db-88f6820-amc.c
+> +++ b/board/Marvell/db-88f6820-amc/db-88f6820-amc.c
+> @@ -3,7 +3,7 @@
+>   * Copyright (C) 2015 Stefan Roese <sr@denx.de>
+>   */
+>
+> -#include <common.h>
+> +#include <config.h>
+>  #include <i2c.h>
+>  #include <init.h>
+>  #include <miiphy.h>
+> diff --git a/board/Marvell/db-88f6820-gp/db-88f6820-gp.c b/board/Marvell/=
+db-88f6820-gp/db-88f6820-gp.c
+> index 1edc1cb6515c..8f8b2720107a 100644
+> --- a/board/Marvell/db-88f6820-gp/db-88f6820-gp.c
+> +++ b/board/Marvell/db-88f6820-gp/db-88f6820-gp.c
+> @@ -3,7 +3,7 @@
+>   * Copyright (C) 2015 Stefan Roese <sr@denx.de>
+>   */
+>
+> -#include <common.h>
+> +#include <config.h>
+>  #include <i2c.h>
+>  #include <init.h>
+>  #include <miiphy.h>
+> diff --git a/board/Marvell/db-mv784mp-gp/db-mv784mp-gp.c b/board/Marvell/=
+db-mv784mp-gp/db-mv784mp-gp.c
+> index 9e1fdecfca4d..6bca1f91a0a4 100644
+> --- a/board/Marvell/db-mv784mp-gp/db-mv784mp-gp.c
+> +++ b/board/Marvell/db-mv784mp-gp/db-mv784mp-gp.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (C) 2014 Stefan Roese <sr@denx.de>
+>   */
+>
+> -#include <common.h>
+>  #include <init.h>
+>  #include <miiphy.h>
+>  #include <net.h>
+> diff --git a/board/Marvell/db-xc3-24g4xg/db-xc3-24g4xg.c b/board/Marvell/=
+db-xc3-24g4xg/db-xc3-24g4xg.c
+> index 0abdca1cd210..a7a84798a53b 100644
+> --- a/board/Marvell/db-xc3-24g4xg/db-xc3-24g4xg.c
+> +++ b/board/Marvell/db-xc3-24g4xg/db-xc3-24g4xg.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (C) 2015 Stefan Roese <sr@denx.de>
+>   */
+>
+> -#include <common.h>
+>  #include <i2c.h>
+>  #include <init.h>
+>  #include <asm/global_data.h>
+> diff --git a/board/Marvell/dreamplug/dreamplug.c b/board/Marvell/dreamplu=
+g/dreamplug.c
+> index d15faa1cb7ff..381275061318 100644
+> --- a/board/Marvell/dreamplug/dreamplug.c
+> +++ b/board/Marvell/dreamplug/dreamplug.c
+> @@ -8,7 +8,6 @@
+>   * Written-by: Siddarth Gore <gores@marvell.com>
+>   */
+>
+> -#include <common.h>
+>  #include <init.h>
+>  #include <netdev.h>
+>  #include <asm/arch/cpu.h>
+> diff --git a/board/Marvell/guruplug/guruplug.c b/board/Marvell/guruplug/g=
+uruplug.c
+> index ea87ded222e6..7c3cea22b936 100644
+> --- a/board/Marvell/guruplug/guruplug.c
+> +++ b/board/Marvell/guruplug/guruplug.c
+> @@ -5,7 +5,6 @@
+>   * Written-by: Siddarth Gore <gores@marvell.com>
+>   */
+>
+> -#include <common.h>
+>  #include <init.h>
+>  #include <miiphy.h>
+>  #include <net.h>
+> diff --git a/board/Marvell/mvebu_alleycat-5/board.c b/board/Marvell/mvebu=
+_alleycat-5/board.c
+> index 0c4f8e03b859..c1b7cc3b613c 100644
+> --- a/board/Marvell/mvebu_alleycat-5/board.c
+> +++ b/board/Marvell/mvebu_alleycat-5/board.c
+> @@ -1,6 +1,6 @@
+>  // SPDX-License-Identifier: GPL-2.0+
+>
+> -#include <common.h>
+> +#include <config.h>
+>  #include <asm/global_data.h>
+>
+>  DECLARE_GLOBAL_DATA_PTR;
+> diff --git a/board/Marvell/mvebu_armada-37xx/board.c b/board/Marvell/mveb=
+u_armada-37xx/board.c
+> index 1685b12b8478..df3fb6d21645 100644
+> --- a/board/Marvell/mvebu_armada-37xx/board.c
+> +++ b/board/Marvell/mvebu_armada-37xx/board.c
+> @@ -3,7 +3,7 @@
+>   * Copyright (C) 2016 Stefan Roese <sr@denx.de>
+>   */
+>
+> -#include <common.h>
+> +#include <config.h>
+>  #include <dm.h>
+>  #include <dm/device-internal.h>
+>  #include <env.h>
+> diff --git a/board/Marvell/mvebu_armada-8k/board.c b/board/Marvell/mvebu_=
+armada-8k/board.c
+> index a8899af6e5af..6d7042117424 100644
+> --- a/board/Marvell/mvebu_armada-8k/board.c
+> +++ b/board/Marvell/mvebu_armada-8k/board.c
+> @@ -3,7 +3,7 @@
+>   * Copyright (C) 2016 Stefan Roese <sr@denx.de>
+>   */
+>
+> -#include <common.h>
+> +#include <config.h>
+>  #include <dm.h>
+>  #include <i2c.h>
+>  #include <init.h>
+> diff --git a/board/Marvell/octeontx2/soc-utils.c b/board/Marvell/octeontx=
+2/soc-utils.c
+> index 43a19a90717c..64eb95f3b400 100644
+> --- a/board/Marvell/octeontx2/soc-utils.c
+> +++ b/board/Marvell/octeontx2/soc-utils.c
+> @@ -5,7 +5,6 @@
+>   * https://spdx.org/licenses
+>   */
+>
+> -#include <common.h>
+>  #include <dm.h>
+>  #include <malloc.h>
+>  #include <errno.h>
+> diff --git a/board/Marvell/openrd/openrd.c b/board/Marvell/openrd/openrd.=
+c
+> index 581e2e084d6f..dda56a582b3e 100644
+> --- a/board/Marvell/openrd/openrd.c
+> +++ b/board/Marvell/openrd/openrd.c
+> @@ -10,7 +10,6 @@
+>   * Written-by: Prafulla Wadaskar <prafulla@marvell.com>
+>   */
+>
+> -#include <common.h>
+>  #include <init.h>
+>  #include <miiphy.h>
+>  #include <net.h>
+> diff --git a/board/Marvell/sheevaplug/sheevaplug.c b/board/Marvell/sheeva=
+plug/sheevaplug.c
+> index 26ee39ef77f9..23e761d5febf 100644
+> --- a/board/Marvell/sheevaplug/sheevaplug.c
+> +++ b/board/Marvell/sheevaplug/sheevaplug.c
+> @@ -6,7 +6,6 @@
+>   * Written-by: Prafulla Wadaskar <prafulla@marvell.com>
+>   */
+>
+> -#include <common.h>
+>  #include <init.h>
+>  #include <netdev.h>
+>  #include <asm/global_data.h>
+> --
+> 2.34.1
+>
