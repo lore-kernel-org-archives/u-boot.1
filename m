@@ -4,50 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59EBDC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 18:54:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89B20C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 19:21:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 80382882B5;
-	Wed,  1 May 2024 20:53:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id DB9B6882E9;
+	Wed,  1 May 2024 21:21:47 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=siemens.com header.i=alexander.sverdlin@siemens.com header.b="DCRlJsJm";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="S0szFbuU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83189882BA; Wed,  1 May 2024 20:53:57 +0200 (CEST)
-Received: from mta-65-227.siemens.flowmailer.net
- (mta-65-227.siemens.flowmailer.net [185.136.65.227])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id ACB06882E5; Wed,  1 May 2024 21:21:46 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A577F88279
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 20:53:54 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2D22E882DF
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 21:21:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
-Received: by mta-65-227.siemens.flowmailer.net with ESMTPSA id
- 202405011853531443fb598b7e4a14d8 for <u-boot@lists.denx.de>;
- Wed, 01 May 2024 20:53:54 +0200
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm1;
- d=siemens.com; i=alexander.sverdlin@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc;
- bh=VnpDeMWIeC+PODhF0DqMfRJYoD7xPPyHFissKtZxdr0=;
- b=DCRlJsJmH9w806OqujivqEZwMGZi26Oq537c1+mbMBgQZtdv9otckH9pOBGlx++8KkM9Xi
- Uhl7168NK/V+YgN/RxdfU6x4VHlulqJVe5+B7qM5QMSzl5Bqw4+Uk8REohplU5n3QN9r5mht
- SHab7bg79yvfPajl9zq0mOXGveeVE=;
-From: "A. Sverdlin" <alexander.sverdlin@siemens.com>
-To: Ian Roberts <ian.roberts@timesys.com>,
- Greg Malysa <greg.malysa@timesys.com>,
- Jaehoon Chung <jh80.chung@samsung.com>, u-boot@lists.denx.de
-Cc: Alexander Sverdlin <alexander.sverdlin@siemens.com>
-Subject: [PATCH] mmc: sdhci: Correct ADMA_DESC_LEN to 12
-Date: Wed,  1 May 2024 20:53:04 +0200
-Message-ID: <20240501185331.1189647-1-alexander.sverdlin@siemens.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=373c=MF=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1714591293;
+ bh=7zYJDvcVgbRyAVWJO8yOD89GGBfslPE5aekzHQ+ySRY=;
+ b=S0szFbuUYUj0YrxB2vswggbBG919uDmr8obDjlGwFCY8ohEvVeQucfo7htuCuaa8TXqemw+iw
+ q8fWNIGlF4/wDSEcr+m49l/totxubhS5Rd09vvSr+Ag88NYR886+QX7XBZddTXCp+ISuIrM+Q/F
+ 3vXnzVJUTl/cC4zVdgnyS/UPJXb7Iyu3+QNn29ML85m0qKiAW+NlDdxfQv9PW689nGQyXR+nzjL
+ knQH5QQM0ngQfafK3DdVHNuVRyJSVvK8eRIWeXkOS9+TEXFUSK2Kwo98/15oSbv0DR14O4ORm/T
+ b5DS/RhuGI+I9UfxbuUwXCztZhij81KDJDIpZQrVWoXg==
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ David Bauer <mail@david-bauer.net>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>, Tianling Shen
+ <cnsztl@gmail.com>, "Matwey V. Kornilov" <matwey.kornilov@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] rockchip: rk3328: Add missing bootph-some-ram props
+Date: Wed,  1 May 2024 19:21:24 +0000
+Message-ID: <20240501192127.962261-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.43.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-456497:519-21489:flowmailer
+X-Report-Abuse-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-ForwardEmail-Version: 0.4.40
+X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-ForwardEmail-ID: 6632963c4c2a88c85b8058e0
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,37 +70,257 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Add bootph-some-ram props to pinctrl nodes related to eMMC, SD-card and
+SPI flash to match e.g. RK3308 and RK3399.
 
-Commit 37cb626da25d0d ("mmc: sdhci: Add Support for ADMA2") introduced
-ADMA_DESC_LEN == 16 (64 bit case), but it was never used before commit
-74755c1fed1b0 ("mmc: sdhci: introduce adma_write_desc() hook to struct sdhci_ops").
+Also adjust bootph props for sdio_vcc_pin, pinctrl and uart2m1_xfer.
 
-"sizeof(struct sdhci_adma_desc)" (== 12 for 64bit case) was used instead.
-
-Confusion probably originates from Linux commit 685e444bbaa0
-("mmc: sdhci: Add ADMA2 64-bit addressing support for V4 mode"), but
-the latter "V4 mode" was never ported to U-Boot.
-
-Fixes: 74755c1fed1b0 ("mmc: sdhci: introduce adma_write_desc() hook to struct sdhci_ops")
-Signed-off-by: Alexander Sverdlin <alexander.sverdlin@siemens.com>
+Fixes: 1e21f5693045 ("rockchip: rk3328: Fix loading FIT from SD-card when booting from eMMC")
+Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- include/sdhci.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This has been runtime tested on a Rock64 and NanoPi R2S Plus.
 
-diff --git a/include/sdhci.h b/include/sdhci.h
-index d73a725609be3..810ef56e4be66 100644
---- a/include/sdhci.h
-+++ b/include/sdhci.h
-@@ -300,7 +300,7 @@ struct sdhci_ops {
+The uart2m1_xfer change help speed up boot by around 100 ms.
+---
+ arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi    |  2 +-
+ .../rk3328-orangepi-r1-plus-lts-u-boot.dtsi   |  7 ++++---
+ .../dts/rk3328-orangepi-r1-plus-u-boot.dtsi   |  7 ++++---
+ arch/arm/dts/rk3328-rock64-u-boot.dtsi        |  7 ++++---
+ arch/arm/dts/rk3328-u-boot.dtsi               | 20 +++++++++++++++----
+ 5 files changed, 29 insertions(+), 14 deletions(-)
+
+diff --git a/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi b/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
+index 4fa170eeaf8d..d8c79600b659 100644
+--- a/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
++++ b/arch/arm/dts/rk3328-nanopi-r2s-u-boot.dtsi
+@@ -12,7 +12,7 @@
+ };
  
- #define ADMA_MAX_LEN	65532
- #ifdef CONFIG_DMA_ADDR_T_64BIT
--#define ADMA_DESC_LEN	16
-+#define ADMA_DESC_LEN	12
- #else
- #define ADMA_DESC_LEN	8
- #endif
+ &sdio_vcc_pin {
+-	bootph-all;
++	bootph-pre-ram;
+ };
+ 
+ &usb20_otg {
+diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
+index 0a9423cd9c7e..b50c1332b836 100644
+--- a/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
++++ b/arch/arm/dts/rk3328-orangepi-r1-plus-lts-u-boot.dtsi
+@@ -8,9 +8,6 @@
+ #include "rk3328-sdram-lpddr3-666.dtsi"
+ 
+ &spi0 {
+-	bootph-pre-ram;
+-	bootph-some-ram;
+-
+ 	flash@0 {
+ 		bootph-pre-ram;
+ 		bootph-some-ram;
+@@ -19,18 +16,22 @@
+ 
+ &spi0m2_clk {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &spi0m2_cs0 {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &spi0m2_rx {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &spi0m2_tx {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &usb20_otg {
+diff --git a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
+index 1096821fc5d3..8ae003bbefd1 100644
+--- a/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
++++ b/arch/arm/dts/rk3328-orangepi-r1-plus-u-boot.dtsi
+@@ -8,9 +8,6 @@
+ #include "rk3328-sdram-ddr4-666.dtsi"
+ 
+ &spi0 {
+-	bootph-pre-ram;
+-	bootph-some-ram;
+-
+ 	flash@0 {
+ 		bootph-pre-ram;
+ 		bootph-some-ram;
+@@ -19,18 +16,22 @@
+ 
+ &spi0m2_clk {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &spi0m2_cs0 {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &spi0m2_rx {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &spi0m2_tx {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &usb20_otg {
+diff --git a/arch/arm/dts/rk3328-rock64-u-boot.dtsi b/arch/arm/dts/rk3328-rock64-u-boot.dtsi
+index 551cff6f24f6..22f128090f84 100644
+--- a/arch/arm/dts/rk3328-rock64-u-boot.dtsi
++++ b/arch/arm/dts/rk3328-rock64-u-boot.dtsi
+@@ -30,9 +30,6 @@
+ };
+ 
+ &spi0 {
+-	bootph-pre-ram;
+-	bootph-some-ram;
+-
+ 	flash@0 {
+ 		bootph-pre-ram;
+ 		bootph-some-ram;
+@@ -41,18 +38,22 @@
+ 
+ &spi0m2_clk {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &spi0m2_cs0 {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &spi0m2_rx {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &spi0m2_tx {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &usb20_otg {
+diff --git a/arch/arm/dts/rk3328-u-boot.dtsi b/arch/arm/dts/rk3328-u-boot.dtsi
+index d3608bd0e2b2..0135bc08d491 100644
+--- a/arch/arm/dts/rk3328-u-boot.dtsi
++++ b/arch/arm/dts/rk3328-u-boot.dtsi
+@@ -17,7 +17,6 @@
+ 	};
+ 
+ 	dmc: dmc {
+-		bootph-all;
+ 		compatible = "rockchip,rk3328-dmc";
+ 		reg = <0x0 0xff400000 0x0 0x1000
+ 		       0x0 0xff780000 0x0 0x3000
+@@ -25,6 +24,7 @@
+ 		       0x0 0xff440000 0x0 0x1000
+ 		       0x0 0xff720000 0x0 0x1000
+ 		       0x0 0xff798000 0x0 0x1000>;
++		bootph-all;
+ 	};
+ };
+ 
+@@ -42,14 +42,17 @@
+ 
+ &emmc_bus8 {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &emmc_clk {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &emmc_cmd {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &gpio0 {
+@@ -66,10 +69,12 @@
+ 
+ &pcfg_pull_none_8ma {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &pcfg_pull_none_12ma {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &pcfg_pull_up {
+@@ -78,19 +83,21 @@
+ 
+ &pcfg_pull_up_4ma {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &pcfg_pull_up_8ma {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &pcfg_pull_up_12ma {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &pinctrl {
+-	bootph-pre-ram;
+-	bootph-some-ram;
++	bootph-all;
+ };
+ 
+ &sdmmc {
+@@ -103,18 +110,22 @@
+ 
+ &sdmmc0_bus4 {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &sdmmc0_clk {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &sdmmc0_cmd {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &sdmmc0_dectn {
+ 	bootph-pre-ram;
++	bootph-some-ram;
+ };
+ 
+ &sdmmc0m1_pin {
+@@ -127,7 +138,8 @@
+ };
+ 
+ &uart2m1_xfer {
+-	bootph-all;
++	bootph-pre-sram;
++	bootph-pre-ram;
+ };
+ 
+ &vop {
 -- 
-2.44.0
+2.43.2
 
