@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83386C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:56:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0D44C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:56:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 764EA88B96;
-	Wed,  1 May 2024 04:44:39 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id D8C7D88BA3;
+	Wed,  1 May 2024 04:44:41 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jKeMAAgs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SmTSDwmQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 22AE188B7A; Wed,  1 May 2024 04:44:38 +0200 (CEST)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id 54CDA88B95; Wed,  1 May 2024 04:44:39 +0200 (CEST)
+Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
+ [IPv6:2607:f8b0:4864:20::92d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE5DF88B87
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:35 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2329A88B68
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-7926564c111so36961085a.2
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:35 -0700 (PDT)
+Received: by mail-ua1-x92d.google.com with SMTP id
+ a1e0cc1a2514c-7f16ff3aa86so527022241.3
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531475; x=1715136275; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531476; x=1715136276; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TvB843mzN9T8aYZGxNrJyHWLW0VWSgou7AILFWnQbxo=;
- b=jKeMAAgsLeWX2ZuOWSIy3TKMjhbPbQJi02hvEOMcwsXlp36976Ghey5RfVK/ULXka6
- IBnUmWo+Ml6MdabbFNQ/bm+bwQWLgoNCw1sxb4toRKh16wPs5XcBRZCKow3sFEdqNqAX
- 9scaBF52YiO2MRpLJ0ORpaUsVdzoXIf9y0/4M=
+ bh=s183MRilSELGmj0oxtfzjrgWYXtZ+K5n38YP9ZfvKSk=;
+ b=SmTSDwmQN5bX7x6gdUGJjE3SSmWCg4VB79hsXa0q5I0MPiBrrMwHOp8aD3w1P7l4Rn
+ QakIOsc1ZL9ciSOiRq91tv7hw8Cmg0WMaOcn+00r/T/HmWZbQ6lo4LlhmMXUwuj+zd+h
+ wFQWBCFHyRIdm+ayGq8Lf1lfVKzNTskfbaDSQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531475; x=1715136275;
+ d=1e100.net; s=20230601; t=1714531476; x=1715136276;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TvB843mzN9T8aYZGxNrJyHWLW0VWSgou7AILFWnQbxo=;
- b=TDQZREfl+VH5nDAFLnrBbL2nePaFLf7zs/Pbgol6EKvk13XqHSsnSl8e19GNQP39ik
- GM/2L+0BDwPmUK0oYBjDNCCh0UPom97PZ59ik9Th5ALdlaTvwTxsYnmRCaDeJ56AwXBZ
- ReqTAWhRuISM7SaSDKEGOaiAyZK4jYWb9XfqxC33jkPBbqSpE/2AqnJn8tWsM3PFxBgu
- 7hNjjaxQIRlAvo0AnyOlhF3soCsilbbcTKT6rt2wpkm71rkojbH5Xcnb1JJbyhxgbWZF
- nXubTZZqh42Twxn7MHLcTPp0dQxI4esZaPbLoNot3Dq3z8H3hH40nYbvqULaUDJIPUwK
- FFUA==
-X-Gm-Message-State: AOJu0Yyh9hN18SMjz/USJFPKaoODVhMXrDuuuanzfLXaICHzav0xaBgt
- sxGX05OMCePebc8A9F5bXxkgTCNY6rYjuebiZzuAnU4MCfi/TMT4X4ei1h9ow0ywg/iybHWRRiV
- fUChtaA==
-X-Google-Smtp-Source: AGHT+IE5qEh0luo58O4F5BYA7d9OysRUxmINxnUJjK7gcsIoA1YaZazywFsElQ+GLox3UMxfN+SruQ==
-X-Received: by 2002:a05:6214:f21:b0:6a0:ada7:200a with SMTP id
- iw1-20020a0562140f2100b006a0ada7200amr1341499qvb.18.1714531474681; 
- Tue, 30 Apr 2024 19:44:34 -0700 (PDT)
+ bh=s183MRilSELGmj0oxtfzjrgWYXtZ+K5n38YP9ZfvKSk=;
+ b=lAtXKEiWRYKxVR7iP3PeH7qDenw/gsaOOrDezr4vEzFTZYCuypZsfLiVnb+oXzCKHJ
+ IPk86RSRYIToUog9zf1+igILXb7IUJwH9UyDKD3//aSaA4Jx6WW3Cc/CqqDRFA1Yol4Z
+ 07LPP/FHWO/1V9gyIsuI18DTi17xleW9t2cG+6BqpegzjJyAqGgtJ7pk1BK5ZRaw7DuF
+ 0WmZM8F1X0LSWvnSQp2jppt1qvd1Rs0GdYHU2y4slaIagarkKaA9yCBOJbxA1Mpno/Z7
+ bHb2+1xwCVTSQhTcwPKGZRpultgoZ1mBZi4Jikj0z8VlpoQceJIjfHSgQ78QSWg45Alc
+ dibQ==
+X-Gm-Message-State: AOJu0YygQGlFIKx9UrWbWYT8/UQqLcEpaAwB6xTt9JrrBup9oPfoLSXc
+ LyhgELxNHvsESONDuAPge5i96tXSgxUxT9/rz9DXC6YgfGdN+/XL43NRupB004zj1pzuTJBOCll
+ J4q7ZvA==
+X-Google-Smtp-Source: AGHT+IE/phjOotZoZbiNt4wn89oxXIsvjevWJuXwJUitv+waVtHzY/EdZYJus60rv1l8dSOj0YCKTA==
+X-Received: by 2002:a05:6102:357:b0:47b:9df6:f91f with SMTP id
+ e23-20020a056102035700b0047b9df6f91fmr1392043vsa.30.1714531475726; 
+ Tue, 30 Apr 2024 19:44:35 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.33
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.34
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:44:34 -0700 (PDT)
+ Tue, 30 Apr 2024 19:44:35 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Tim Harvey <tharvey@gateworks.com>
-Subject: [PATCH 064/149] board: gateworks: Remove <common.h> and add needed
+Cc: Mario Six <mario.six@gdsys.cc>
+Subject: [PATCH 065/149] board: gdsys: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:41:51 -0600
-Message-Id: <20240501024316.1767971-64-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:41:52 -0600
+Message-Id: <20240501024316.1767971-65-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -95,102 +95,206 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Tim Harvey <tharvey@gateworks.com>
+Cc: Mario Six <mario.six@gdsys.cc>
 ---
- board/gateworks/gw_ventana/common.c           | 1 -
- board/gateworks/gw_ventana/eeprom.c           | 1 -
- board/gateworks/gw_ventana/gw_ventana.c       | 1 -
- board/gateworks/gw_ventana/gw_ventana_spl.c   | 2 +-
- board/gateworks/venice/eeprom.c               | 1 -
- board/gateworks/venice/lpddr4_timing_imx8mm.c | 1 -
- board/gateworks/venice/spl.c                  | 1 -
- 7 files changed, 1 insertion(+), 7 deletions(-)
+ board/gdsys/a38x/controlcenterdc.c | 2 +-
+ board/gdsys/a38x/dt_helpers.c      | 1 -
+ board/gdsys/a38x/hre.c             | 1 -
+ board/gdsys/a38x/hydra.c           | 2 +-
+ board/gdsys/a38x/ihs_phys.c        | 1 -
+ board/gdsys/a38x/keyprogram.c      | 1 -
+ board/gdsys/common/cmd_ioloop.c    | 1 -
+ board/gdsys/common/dp501.c         | 1 -
+ board/gdsys/common/ihs_mdio.c      | 1 -
+ board/gdsys/common/ioep-fpga.c     | 1 -
+ board/gdsys/common/osd.c           | 1 -
+ board/gdsys/common/osd_cmd.c       | 1 -
+ board/gdsys/mpc8308/gazerbeam.c    | 1 -
+ board/gdsys/mpc8308/mpc8308.c      | 1 -
+ board/gdsys/mpc8308/sdram.c        | 2 +-
+ 15 files changed, 3 insertions(+), 15 deletions(-)
 
-diff --git a/board/gateworks/gw_ventana/common.c b/board/gateworks/gw_ventana/common.c
-index 74328b2e1b31..891d1b5ddcaa 100644
---- a/board/gateworks/gw_ventana/common.c
-+++ b/board/gateworks/gw_ventana/common.c
-@@ -5,7 +5,6 @@
-  * Author: Tim Harvey <tharvey@gateworks.com>
-  */
- 
--#include <common.h>
- #include <env.h>
- #include <fsl_esdhc_imx.h>
- #include <hwconfig.h>
-diff --git a/board/gateworks/gw_ventana/eeprom.c b/board/gateworks/gw_ventana/eeprom.c
-index e622a9ba9e4d..b37f19722491 100644
---- a/board/gateworks/gw_ventana/eeprom.c
-+++ b/board/gateworks/gw_ventana/eeprom.c
-@@ -5,7 +5,6 @@
-  */
- 
- #include <command.h>
--#include <common.h>
- #include <gsc.h>
- #include <hexdump.h>
- #include <i2c.h>
-diff --git a/board/gateworks/gw_ventana/gw_ventana.c b/board/gateworks/gw_ventana/gw_ventana.c
-index 683def7e9f71..21a908c20dd5 100644
---- a/board/gateworks/gw_ventana/gw_ventana.c
-+++ b/board/gateworks/gw_ventana/gw_ventana.c
-@@ -6,7 +6,6 @@
-  */
- 
- #include <command.h>
--#include <common.h>
- #include <fdt_support.h>
- #include <gsc.h>
- #include <hwconfig.h>
-diff --git a/board/gateworks/gw_ventana/gw_ventana_spl.c b/board/gateworks/gw_ventana/gw_ventana_spl.c
-index 2f046c9c0b3e..3de4727b2edf 100644
---- a/board/gateworks/gw_ventana/gw_ventana_spl.c
-+++ b/board/gateworks/gw_ventana/gw_ventana_spl.c
+diff --git a/board/gdsys/a38x/controlcenterdc.c b/board/gdsys/a38x/controlcenterdc.c
+index 0f620c2d9172..4abb3e451285 100644
+--- a/board/gdsys/a38x/controlcenterdc.c
++++ b/board/gdsys/a38x/controlcenterdc.c
 @@ -4,7 +4,7 @@
-  * Author: Tim Harvey <tharvey@gateworks.com>
+  * Copyright (C) 2016 Mario Six <mario.six@gdsys.cc>
   */
  
 -#include <common.h>
 +#include <config.h>
+ #include <command.h>
+ #include <dm.h>
+ #include <event.h>
+diff --git a/board/gdsys/a38x/dt_helpers.c b/board/gdsys/a38x/dt_helpers.c
+index 61d30c2e6373..a12e115c72cb 100644
+--- a/board/gdsys/a38x/dt_helpers.c
++++ b/board/gdsys/a38x/dt_helpers.c
+@@ -4,7 +4,6 @@
+  * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
+  */
+ 
+-#include <common.h>
+ #include <i2c.h>
+ #include <fdt_support.h>
+ #include <asm-generic/gpio.h>
+diff --git a/board/gdsys/a38x/hre.c b/board/gdsys/a38x/hre.c
+index d16233ed78ee..f303793b63b7 100644
+--- a/board/gdsys/a38x/hre.c
++++ b/board/gdsys/a38x/hre.c
+@@ -4,7 +4,6 @@
+  * Reinhard Pfau, Guntermann & Drunck GmbH, reinhard.pfau@gdsys.cc
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <fs.h>
+diff --git a/board/gdsys/a38x/hydra.c b/board/gdsys/a38x/hydra.c
+index 495a97691881..970d508ff328 100644
+--- a/board/gdsys/a38x/hydra.c
++++ b/board/gdsys/a38x/hydra.c
+@@ -1,8 +1,8 @@
+-#include <common.h>
+ #include <command.h>
+ #include <console.h> /* ctrlc */
+ #include <pci.h>
+ #include <asm/io.h>
++#include <mach/soc.h>
+ 
+ #include "hydra.h"
+ 
+diff --git a/board/gdsys/a38x/ihs_phys.c b/board/gdsys/a38x/ihs_phys.c
+index 60a5c37aeffb..690a29690b9c 100644
+--- a/board/gdsys/a38x/ihs_phys.c
++++ b/board/gdsys/a38x/ihs_phys.c
+@@ -1,4 +1,3 @@
+-#include <common.h>
+ #include <dm.h>
+ #include <miiphy.h>
+ #include <asm-generic/gpio.h>
+diff --git a/board/gdsys/a38x/keyprogram.c b/board/gdsys/a38x/keyprogram.c
+index 7020fae18941..15c36e22684f 100644
+--- a/board/gdsys/a38x/keyprogram.c
++++ b/board/gdsys/a38x/keyprogram.c
+@@ -4,7 +4,6 @@
+  * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
+  */
+ 
+-#include <common.h>
+ #include <command.h>
  #include <env.h>
- #include <gsc.h>
- #include <hang.h>
-diff --git a/board/gateworks/venice/eeprom.c b/board/gateworks/venice/eeprom.c
-index 241be4ee630b..afaabf348793 100644
---- a/board/gateworks/venice/eeprom.c
-+++ b/board/gateworks/venice/eeprom.c
-@@ -3,7 +3,6 @@
-  * Copyright 2021 Gateworks Corporation
+ #include <tpm-v1.h>
+diff --git a/board/gdsys/common/cmd_ioloop.c b/board/gdsys/common/cmd_ioloop.c
+index 1412421a0218..fb6313f01975 100644
+--- a/board/gdsys/common/cmd_ioloop.c
++++ b/board/gdsys/common/cmd_ioloop.c
+@@ -4,7 +4,6 @@
+  * Dirk Eibach, Guntermann & Drunck GmbH, dirk.eibach@gdsys.cc
   */
  
 -#include <common.h>
- #include <gsc.h>
- #include <hexdump.h>
+ #include <command.h>
+ #include <console.h>
+ #include <linux/bitops.h>
+diff --git a/board/gdsys/common/dp501.c b/board/gdsys/common/dp501.c
+index 9ca69ebcbbe7..7698e76b5248 100644
+--- a/board/gdsys/common/dp501.c
++++ b/board/gdsys/common/dp501.c
+@@ -8,7 +8,6 @@
+ 
+ #ifdef CONFIG_GDSYS_LEGACY_DRIVERS
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <errno.h>
  #include <i2c.h>
-diff --git a/board/gateworks/venice/lpddr4_timing_imx8mm.c b/board/gateworks/venice/lpddr4_timing_imx8mm.c
-index 78b431dc2844..3f2c090a94fc 100644
---- a/board/gateworks/venice/lpddr4_timing_imx8mm.c
-+++ b/board/gateworks/venice/lpddr4_timing_imx8mm.c
+diff --git a/board/gdsys/common/ihs_mdio.c b/board/gdsys/common/ihs_mdio.c
+index 5f1215e9e8a6..a814566beaf0 100644
+--- a/board/gdsys/common/ihs_mdio.c
++++ b/board/gdsys/common/ihs_mdio.c
+@@ -4,7 +4,6 @@
+  * Dirk Eibach,  Guntermann & Drunck GmbH, dirk.eibach@gdsys.cc
+  */
+ 
+-#include <common.h>
+ #include <linux/delay.h>
+ 
+ #include <miiphy.h>
+diff --git a/board/gdsys/common/ioep-fpga.c b/board/gdsys/common/ioep-fpga.c
+index 7292d7ab5a41..f01b48b5c8e9 100644
+--- a/board/gdsys/common/ioep-fpga.c
++++ b/board/gdsys/common/ioep-fpga.c
 @@ -6,7 +6,6 @@
-  */
  
- #include <linux/kernel.h>
--#include <common.h>
- #include <asm/arch/ddr.h>
- #include <asm/arch/lpddr4_define.h>
- 
-diff --git a/board/gateworks/venice/spl.c b/board/gateworks/venice/spl.c
-index b0a315ba9531..f10d310a46d4 100644
---- a/board/gateworks/venice/spl.c
-+++ b/board/gateworks/venice/spl.c
-@@ -3,7 +3,6 @@
-  * Copyright 2021 Gateworks Corporation
-  */
+ #ifdef CONFIG_GDSYS_LEGACY_DRIVERS
  
 -#include <common.h>
- #include <cpu_func.h>
- #include <hang.h>
+ 
+ #include <gdsys_fpga.h>
+ #include <linux/bitops.h>
+diff --git a/board/gdsys/common/osd.c b/board/gdsys/common/osd.c
+index dc548efbc7a4..bd9c5ca99698 100644
+--- a/board/gdsys/common/osd.c
++++ b/board/gdsys/common/osd.c
+@@ -6,7 +6,6 @@
+ 
+ #ifdef CONFIG_GDSYS_LEGACY_DRIVERS
+ 
+-#include <common.h>
+ #include <command.h>
  #include <i2c.h>
+ #include <malloc.h>
+diff --git a/board/gdsys/common/osd_cmd.c b/board/gdsys/common/osd_cmd.c
+index 6a9c0b4c24f0..39e64f5f2eb3 100644
+--- a/board/gdsys/common/osd_cmd.c
++++ b/board/gdsys/common/osd_cmd.c
+@@ -9,7 +9,6 @@
+  * Dirk Eibach,  Guntermann & Drunck GmbH, eibach@gdsys.de
+  */
+ 
+-#include <common.h>
+ #include <command.h>
+ #include <dm.h>
+ #include <hexdump.h>
+diff --git a/board/gdsys/mpc8308/gazerbeam.c b/board/gdsys/mpc8308/gazerbeam.c
+index cc608c4ac434..05e4d84460ae 100644
+--- a/board/gdsys/mpc8308/gazerbeam.c
++++ b/board/gdsys/mpc8308/gazerbeam.c
+@@ -5,7 +5,6 @@
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+ 
+-#include <common.h>
+ #include <command.h>
+ #include <dm.h>
+ #include <env.h>
+diff --git a/board/gdsys/mpc8308/mpc8308.c b/board/gdsys/mpc8308/mpc8308.c
+index 0f90f8ad327b..42c45ecedcea 100644
+--- a/board/gdsys/mpc8308/mpc8308.c
++++ b/board/gdsys/mpc8308/mpc8308.c
+@@ -4,7 +4,6 @@
+  * Dirk Eibach,  Guntermann & Drunck GmbH, dirk.eibach@gdsys.cc
+  */
+ 
+-#include <common.h>
+ #include <command.h>
+ #include <init.h>
+ #include <asm/processor.h>
+diff --git a/board/gdsys/mpc8308/sdram.c b/board/gdsys/mpc8308/sdram.c
+index 4fac146353da..2933de0f3048 100644
+--- a/board/gdsys/mpc8308/sdram.c
++++ b/board/gdsys/mpc8308/sdram.c
+@@ -13,7 +13,7 @@
+ 
+ #ifndef CONFIG_MPC83XX_SDRAM
+ 
+-#include <common.h>
++#include <config.h>
+ #include <init.h>
+ #include <mpc83xx.h>
+ #include <spd_sdram.h>
 -- 
 2.34.1
 
