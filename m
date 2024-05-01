@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 498AEC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:59:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE13BC4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:59:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B51688BBB;
+	by phobos.denx.de (Postfix) with ESMTP id B112588BD8;
 	Wed,  1 May 2024 04:44:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PZh2TgsD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dT23xtFV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6412288BD0; Wed,  1 May 2024 04:44:56 +0200 (CEST)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id F3C0088BB8; Wed,  1 May 2024 04:44:56 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0B26488BB8
+ by phobos.denx.de (Postfix) with ESMTPS id C636D88BD5
  for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-69b4043b7b3so36829446d6.1
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:53 -0700 (PDT)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-6a0badb6892so15247666d6.1
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=konsulko.com; s=google; t=1714531493; x=1715136293; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Qe3m2h+uWwx9QgZAercqZnZVdRmK92/5BWIxB30XEgQ=;
- b=PZh2TgsDSxneOQofnUjJzzEz+pIV3kXoUboSvBXyupMTTcddY2SXIOkifdbmxGucBh
- swYt7olOznANuIEbgaCOFo52HbgxaiNfXWFkBRESGqwlb+/JyULiCBfK1mx1eTQ1k8J+
- Ok1lzwnArVD6Eu8hWonLkUMkDKM5PedjQetuc=
+ bh=j+L09nF2R/CbbTOf9Wvac8aa3j/p83TSmysC380RT/E=;
+ b=dT23xtFVBNKUsPPr7S91tkYRxFbzbxvJVae5mkv5ZxVtc31OVY0BjwkAcQ4ms2WX/Y
+ n5wKBqVxeTYOJ6u6GkgiL6HxBiY6E46GYLVXkaBSptjymsd8M5jK5Psi3tR/CzPdSOvl
+ d+Wb8PQuFpU3b6x/h8aW+oHRnDd6csLBK+Ghs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=1e100.net; s=20230601; t=1714531493; x=1715136293;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Qe3m2h+uWwx9QgZAercqZnZVdRmK92/5BWIxB30XEgQ=;
- b=seVTl1xxjOKrh2753eQeS8ZUkjOYJaTAinEE2ctSb9q81gFql+TUnHbVgL7ygWPc/G
- cpawlCK08wWT43SEQqeu+XuAPh3vPBdfhEpTkCC5/uQEV7ep7W3qrbi9JXyR7USqoc0B
- cYMqM/lR+M3vesPhF7l0hXeyPNjOPdmz21/0frZElW1WccAMmK5bmQ4EZ83Gsc+Sxqg/
- BY4K7MSKp0sAmOfFTffalfh9wqfOfLnhs1/pEoqjPjBG87cTxBj7mTS3NmQTQyCwiJZK
- 8oTACY+y7RLwgEC7NJb70AMDAj/zZLOcAZU1nBNrA6TbEAQ/n1WJYKXK7/S2hh2HvtPz
- uZnQ==
-X-Gm-Message-State: AOJu0YxWTAQLERK07qtUxfh1ZGecDuS8fYnv7vSBjm0wk2KzSydhP9df
- OuwbbRn9iJRhH8fG8eFTP54GO6wV6EAFsct9wW2WmXk/ZBKdU3gNuj4J0/E4CYXfokMvaXblWjA
- 7HO0Blw==
-X-Google-Smtp-Source: AGHT+IEllgMIHWTpzDB+06VfS8u0qfDj+BlKnBUwRrmnI8PFlmu9UTmqZOUqjkQ5335O2NyjlqB21Q==
-X-Received: by 2002:a05:6214:29c3:b0:6a0:cd13:fb7a with SMTP id
- gh3-20020a05621429c300b006a0cd13fb7amr1252366qvb.24.1714531492664; 
- Tue, 30 Apr 2024 19:44:52 -0700 (PDT)
+ bh=j+L09nF2R/CbbTOf9Wvac8aa3j/p83TSmysC380RT/E=;
+ b=uVTy1sfTGEa3FkZ9izakVk3IkWVMd0DaiGpbcwTnzDThhlE8IjnfOs5zY9mWVSnp9g
+ TDYkDr5W/GHxBwudOziR7vawb8TFnEgkVjhAiIcZ5R0wK0gZrRoN4VSUnf91neYKHzCq
+ ud5kSDmyY7j04fbaqpZfMLXcA7sjUNzJSw5wP+CyJAUZx6aHXCfTnLyC+IWo6kaVJQ+R
+ q2CTtbQC2N81ld7fPVgh+S4zGpyOYReq/LT7qJq2hPN1h+cYl/YAKxp269yAz9+/pXDv
+ f6/Uz++RcL9OhnUqS4dDVPdWSnokR46kEJfCzeL+tSaMc6MRmip2AwAmDv9UjDCTYs16
+ 2nTQ==
+X-Gm-Message-State: AOJu0YxMs2iPNZaIhKz/PrqgXu+qNK+zVmvVssSxh7G5UQssr5Zpzuji
+ zaJf6bpjZ0AYzc8SbKgG5G6XjjuLSsY+rAuvAJ02L9teBdgvxae8UwUVH1CkgwY2XlFRB8jQ9t6
+ VrwsBYQ==
+X-Google-Smtp-Source: AGHT+IGQg6EARQR6a8FR8E3XOoxbrfJNhW4rA4nucwUsVVJ4sYZx41Bme2V2OsWOHDk62tmU4fibuA==
+X-Received: by 2002:a05:6214:518b:b0:6a0:5034:778e with SMTP id
+ kl11-20020a056214518b00b006a05034778emr1255760qvb.57.1714531493517; 
+ Tue, 30 Apr 2024 19:44:53 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.51
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:44:52 -0700 (PDT)
+ Tue, 30 Apr 2024 19:44:53 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Heiko Thiery <heiko.thiery@gmail.com>,
- Frieder Schrempf <frieder.schrempf@kontron.de>,
- Michael Walle <michael@walle.cc>
-Subject: [PATCH 080/149] board: kontron: Remove <common.h> and add needed
+Cc: Marek Vasut <marex@denx.de>
+Subject: [PATCH 081/149] board: kosagi: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:42:07 -0600
-Message-Id: <20240501024316.1767971-80-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:42:08 -0600
+Message-Id: <20240501024316.1767971-81-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -97,134 +95,50 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Heiko Thiery <heiko.thiery@gmail.com>
-Cc: Frieder Schrempf <frieder.schrempf@kontron.de>
-Cc: Michael Walle <michael@walle.cc>
+Cc: Marek Vasut <marex@denx.de>
 ---
- board/kontron/pitx_imx8m/pitx_imx8m.c  | 1 -
- board/kontron/pitx_imx8m/spl.c         | 2 +-
- board/kontron/sl-mx8mm/lpddr4_timing.c | 1 -
- board/kontron/sl28/cmds.c              | 3 ++-
- board/kontron/sl28/common.c            | 2 +-
- board/kontron/sl28/ddr.c               | 2 +-
- board/kontron/sl28/sl28.c              | 1 -
- board/kontron/sl28/spl.c               | 2 +-
- board/kontron/sl28/spl_atf.c           | 2 +-
- 9 files changed, 7 insertions(+), 9 deletions(-)
+ board/kosagi/novena/novena.c     | 1 -
+ board/kosagi/novena/novena_spl.c | 2 +-
+ board/kosagi/novena/video.c      | 1 -
+ 3 files changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/board/kontron/pitx_imx8m/pitx_imx8m.c b/board/kontron/pitx_imx8m/pitx_imx8m.c
-index 4548e7c1dff9..a908aee9eccf 100644
---- a/board/kontron/pitx_imx8m/pitx_imx8m.c
-+++ b/board/kontron/pitx_imx8m/pitx_imx8m.c
-@@ -1,7 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
- #include "pitx_misc.h"
--#include <common.h>
- #include <efi.h>
- #include <efi_loader.h>
- #include <init.h>
-diff --git a/board/kontron/pitx_imx8m/spl.c b/board/kontron/pitx_imx8m/spl.c
-index a247803a4b46..475e52f62314 100644
---- a/board/kontron/pitx_imx8m/spl.c
-+++ b/board/kontron/pitx_imx8m/spl.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
--#include <common.h>
-+#include <config.h>
- #include <errno.h>
- #include <fsl_esdhc_imx.h>
- #include <hang.h>
-diff --git a/board/kontron/sl-mx8mm/lpddr4_timing.c b/board/kontron/sl-mx8mm/lpddr4_timing.c
-index 74b79c7a009f..851aeef8f8c2 100644
---- a/board/kontron/sl-mx8mm/lpddr4_timing.c
-+++ b/board/kontron/sl-mx8mm/lpddr4_timing.c
-@@ -4,7 +4,6 @@
-  */
- 
- #include <linux/kernel.h>
--#include <common.h>
- #include <asm/arch/ddr.h>
- #include <asm/arch/lpddr4_define.h>
- 
-diff --git a/board/kontron/sl28/cmds.c b/board/kontron/sl28/cmds.c
-index 08a22b5d01e0..7851361c48cc 100644
---- a/board/kontron/sl28/cmds.c
-+++ b/board/kontron/sl28/cmds.c
-@@ -5,10 +5,11 @@
-  * Copyright (c) 2020 Kontron Europe GmbH
+diff --git a/board/kosagi/novena/novena.c b/board/kosagi/novena/novena.c
+index f009a8afd48c..3220727f2366 100644
+--- a/board/kosagi/novena/novena.c
++++ b/board/kosagi/novena/novena.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2014 Marek Vasut <marex@denx.de>
   */
  
 -#include <common.h>
- #include <command.h>
- #include <i2c.h>
-+#include <vsprintf.h>
- #include <linux/delay.h>
-+#include <linux/errno.h>
- 
- #define CPLD_I2C_ADDR 0x4a
- #define REG_UFM_CTRL 0x02
-diff --git a/board/kontron/sl28/common.c b/board/kontron/sl28/common.c
-index 331de29baee6..d8d0172a21b7 100644
---- a/board/kontron/sl28/common.c
-+++ b/board/kontron/sl28/common.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
--#include <common.h>
-+#include <config.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- 
-diff --git a/board/kontron/sl28/ddr.c b/board/kontron/sl28/ddr.c
-index 315d9f99c71d..9b881fdc265e 100644
---- a/board/kontron/sl28/ddr.c
-+++ b/board/kontron/sl28/ddr.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
--#include <common.h>
-+#include <config.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <fsl_ddr_sdram.h>
-diff --git a/board/kontron/sl28/sl28.c b/board/kontron/sl28/sl28.c
-index 4ab221c12bf6..adfec8ba2379 100644
---- a/board/kontron/sl28/sl28.c
-+++ b/board/kontron/sl28/sl28.c
-@@ -1,6 +1,5 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
--#include <common.h>
+ #include <display_options.h>
  #include <dm.h>
- #include <malloc.h>
- #include <efi.h>
-diff --git a/board/kontron/sl28/spl.c b/board/kontron/sl28/spl.c
-index 80acde74956d..45a4fc65120e 100644
---- a/board/kontron/sl28/spl.c
-+++ b/board/kontron/sl28/spl.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
--#include <common.h>
-+#include <config.h>
- #include <asm/io.h>
- #include <asm/spl.h>
- #include <asm/arch-fsl-layerscape/fsl_serdes.h>
-diff --git a/board/kontron/sl28/spl_atf.c b/board/kontron/sl28/spl_atf.c
-index a9cd6850e983..0710316a48bc 100644
---- a/board/kontron/sl28/spl_atf.c
-+++ b/board/kontron/sl28/spl_atf.c
+ #include <eeprom.h>
+diff --git a/board/kosagi/novena/novena_spl.c b/board/kosagi/novena/novena_spl.c
+index 24c0fb22268f..008418b01846 100644
+--- a/board/kosagi/novena/novena_spl.c
++++ b/board/kosagi/novena/novena_spl.c
 @@ -5,7 +5,7 @@
-  * Copyright (c) 2020 Michael Walle <michael@walle.cc>
+  * Copyright (C) 2014 Marek Vasut <marex@denx.de>
   */
  
 -#include <common.h>
 +#include <config.h>
- #include <asm/global_data.h>
+ #include <clock_legacy.h>
+ #include <init.h>
  #include <asm/io.h>
- #include <atf_common.h>
+diff --git a/board/kosagi/novena/video.c b/board/kosagi/novena/video.c
+index a96a877f5f21..be5a737a31dd 100644
+--- a/board/kosagi/novena/video.c
++++ b/board/kosagi/novena/video.c
+@@ -9,7 +9,6 @@
+  * Copyright (C) 2014 Marek Vasut <marex@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <linux/delay.h>
+ #include <linux/errno.h>
 -- 
 2.34.1
 
