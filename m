@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 476DDC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:08:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 81777C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:08:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2244188CBC;
+	by phobos.denx.de (Postfix) with ESMTP id 7E00188CB1;
 	Wed,  1 May 2024 04:45:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XJAcxiAK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QrOeu6GS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3A4088C9F; Wed,  1 May 2024 04:45:47 +0200 (CEST)
-Received: from mail-vs1-xe36.google.com (mail-vs1-xe36.google.com
- [IPv6:2607:f8b0:4864:20::e36])
+ id 1D16A88CB2; Wed,  1 May 2024 04:45:49 +0200 (CEST)
+Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
+ [IPv6:2607:f8b0:4864:20::92b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E28DD88CA0
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 08BBD88CA3
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-vs1-xe36.google.com with SMTP id
- ada2fe7eead31-47c1cf8a7d7so1764909137.0
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:45 -0700 (PDT)
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-7f169d3ef53so589059241.1
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531544; x=1715136344; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531546; x=1715136346; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lW+CEufsZIaJ/tjQr/kPIgEGSlwWFPSstSySxvVumGw=;
- b=XJAcxiAKio4RI6fjDApxFGcqJygXN5KAFyuYqDIueP4UVTP8JSshf6phXKxf7xF9xM
- EQWVyKgXNwvYXe/ZjSJBcZ6pUHabEgBa3gEX+SkQW7807GqqcP+lKtEKEiBmtQ7a/UFK
- 9HaqnN30qAD6K50TMBfx6Rfng5tFx3474+1Xw=
+ bh=oq9S6ZBNoxRuEPqxrUlimJGVrMaKpbfBBwDUfjV93m4=;
+ b=QrOeu6GSOXF6eLWNt710OLvmqw4gSoIH3XijAdnICm6yxkHTVdktoM+UkRXVTIchKq
+ tTPXT1sQDb6SPm/AgXnIvsfBjjYqDmObfjY6uz0QxoVay43GRJ6iwaXd/POyWN7aLl30
+ T3AtBGHPDP+RD/fXuW3y4y7jMbFBRbY6ppWQs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531544; x=1715136344;
+ d=1e100.net; s=20230601; t=1714531546; x=1715136346;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lW+CEufsZIaJ/tjQr/kPIgEGSlwWFPSstSySxvVumGw=;
- b=CgG5sRq7pTrTWcjfIfaAO58ZueLBUMGBctPpqa3PrxjJFA0YzanTFsWRLcys9ghmbU
- YYpGFM+An+3Azyb+h2MkFzxS3uM3JsNNik0i33DZpHqzG29KmbS1pidZKTvVpwsfvGZb
- 1/UqeGcbAp2iIhsK+/ATw7p6lsZ4F0afAIsnMNnjgVJ4Yl7QF+0H72CqOYBkeMTihWYD
- N5CUX7U6Eg3hbVBZ27d3lTycmnRkFn/VaUCDllPUd+iRU45ftq6CLFcyOXgOcigLOBum
- fIr4EGRdoCy9VPRWLYX5Kpik91j8IVeDsWGNv3mn5tNXrntQTnx35nWG3nsBcIGy/VYC
- 9L+g==
-X-Gm-Message-State: AOJu0YwailBACjQySlFTRfVmHuHF0ZKGsYuuNRyOBpViKFwrlOUrf1Ni
- vHukbSS7pH9dtlZmbUFEUbLhoc8UEeqz0Y7j0cga1xC5ocr0QR9kf/EVWl9ytdrKExCBCcgE/w+
- YXNutRoli
-X-Google-Smtp-Source: AGHT+IGrYlf5NahIFS/SLUjWh89ebHuQmDNliSSuaTA5HtTfgzpUNMtqf+hH6NPEL1ykKaSRCvWWaQ==
-X-Received: by 2002:a05:6102:c89:b0:47c:2a80:ac61 with SMTP id
- f9-20020a0561020c8900b0047c2a80ac61mr2012636vst.27.1714531544616; 
- Tue, 30 Apr 2024 19:45:44 -0700 (PDT)
+ bh=oq9S6ZBNoxRuEPqxrUlimJGVrMaKpbfBBwDUfjV93m4=;
+ b=OgYal+BmLJf/qT5XKG4rBuBCqruywsuW1BmEdWRMGX9XWCwr53Zu8Yu1sOTcw9eGfd
+ SIIX8VGk03v5F9efogtHz1hb8pe3BqQ6RTe1RNs0eYbqqazPDf9wPp6f7pcp/lbJqxA4
+ ud6jQ/g2Qfy5ujOsPqHS7bgL/B6CUaKmnukxnnNu75c/Xvt7NtVVCcnfpM8ytAtOTu+S
+ nGCCFDmRMxVBLw1hg2psjaOBiPSVVttmTufVuK5X6b3YT2YQHnOZTsluTcn9Yw7f1YF5
+ gfvWzqqHgei15k2JWi5grIDVTWeZyq91X8cXWlK4qamq0ycTDuZnvNxFujHjEh/Q4SGA
+ yNkw==
+X-Gm-Message-State: AOJu0YwGJXkJ+tzoa6H0nk//iwzSRlo+cztM1AZ5aXohqIRBTGqTn+2x
+ oZH7qLOw8pqaDg6AhtRv4ufS8DnsczIkoqYKP2VNY6VzqslkWdoKoFWQIrnbB96wizOy0TRFK+l
+ Joaj18LCx
+X-Google-Smtp-Source: AGHT+IEDMAQIN1Svm1VRpbp0pHZNDj3BvkYcpxNtMEwLuUuzATfhUbp2bhluQMvvEcj1rLjFCFNFQg==
+X-Received: by 2002:a67:f40f:0:b0:47c:2926:6212 with SMTP id
+ p15-20020a67f40f000000b0047c29266212mr1722040vsn.35.1714531545749; 
+ Tue, 30 Apr 2024 19:45:45 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.43
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:45:44 -0700 (PDT)
+ Tue, 30 Apr 2024 19:45:45 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Fabio Estevam <festevam@denx.de>,
-	Eduard Strehlau <eduard@lionizers.com>
-Subject: [PATCH 128/149] board: storopack: Remove <common.h> and add needed
+Cc: Angelo Dureghello <angelo@sysam.it>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: [PATCH 129/149] board: sysam: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:42:55 -0600
-Message-Id: <20240501024316.1767971-128-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:42:56 -0600
+Message-Id: <20240501024316.1767971-129-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -96,24 +97,40 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Fabio Estevam <festevam@denx.de>
-Cc: Eduard Strehlau <eduard@lionizers.com>
+Cc: Angelo Dureghello <angelo@sysam.it>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- board/storopack/smegw01/smegw01.c | 1 -
- 1 file changed, 1 deletion(-)
+ board/sysam/amcore/amcore.c   | 2 +-
+ board/sysam/stmark2/stmark2.c | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/board/storopack/smegw01/smegw01.c b/board/storopack/smegw01/smegw01.c
-index 345191b31c29..910feeda31f5 100644
---- a/board/storopack/smegw01/smegw01.c
-+++ b/board/storopack/smegw01/smegw01.c
-@@ -12,7 +12,6 @@
- #include <asm/mach-imx/hab.h>
- #include <asm/mach-imx/iomux-v3.h>
- #include <asm/io.h>
+diff --git a/board/sysam/amcore/amcore.c b/board/sysam/amcore/amcore.c
+index 086421d9265d..d5aa1f0776fd 100644
+--- a/board/sysam/amcore/amcore.c
++++ b/board/sysam/amcore/amcore.c
+@@ -7,7 +7,7 @@
+  * This file copies memory testdram() from sandburst/common/sb_common.c
+  */
+ 
 -#include <common.h>
- #include <env.h>
- #include <env_internal.h>
- #include <asm/arch/crm_regs.h>
++#include <config.h>
+ #include <init.h>
+ #include <asm/global_data.h>
+ #include <asm/immap.h>
+diff --git a/board/sysam/stmark2/stmark2.c b/board/sysam/stmark2/stmark2.c
+index 475e3edfa62e..7818f2671d5a 100644
+--- a/board/sysam/stmark2/stmark2.c
++++ b/board/sysam/stmark2/stmark2.c
+@@ -5,7 +5,7 @@
+  * (C) Copyright 2017 Angelo Dureghello <angelo@sysam.it>
+  */
+ 
+-#include <common.h>
++#include <config.h>
+ #include <init.h>
+ #include <spi.h>
+ #include <asm/global_data.h>
 -- 
 2.34.1
 
