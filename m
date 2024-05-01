@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3E39C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:51:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B4F0C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:51:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9C63988B2F;
-	Wed,  1 May 2024 04:44:13 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0F79A88B35;
+	Wed,  1 May 2024 04:44:16 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jFN8NFCw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="priw6+jx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 700FD88AFA; Wed,  1 May 2024 04:44:12 +0200 (CEST)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 3FAD388AFA; Wed,  1 May 2024 04:44:13 +0200 (CEST)
+Received: from mail-vk1-xa2b.google.com (mail-vk1-xa2b.google.com
+ [IPv6:2607:f8b0:4864:20::a2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F0C888AB6
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:10 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2EDBB88AFE
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:11 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-79100a90868so189344585a.2
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:10 -0700 (PDT)
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-4dcc7c1055bso2004184e0c.0
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531449; x=1715136249; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531450; x=1715136250; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SvPciHnFD5/bR5S8s2Go1AKllo7K9GsXGwFe4scAqC0=;
- b=jFN8NFCw/Jh5Pc0otSrPZkwhkbgbGKa0zTsU6IPGSph575R36czttlaVCKjgpdl/2w
- mz1RbtROscpxXEICtQGp2BrzjiZBBN+6DA9D2vrgn/372kPUY8ylHSG65BVAW/BeT+6o
- 9nlxzxyU2Rhi3FaS/w1ymPSYq8XhQjhYwc5R4=
+ bh=LZY9h+buyzg27o5VxqTezVPRITBX+1E3WNBK1ZxpgPw=;
+ b=priw6+jxRdeFlSqkTOSfvC+BwF2wOO3PqzgFmKbrcIL0GhkpYIIz2MzrekwBMCOyQG
+ VgieUBNeu2iYn78IHxY2DdxXXSZDO/ztAVP7sse8Re4W89Fqp9sLRYtIAkwVPEfRGojC
+ UpKcap+6yxc7YrUpARRXG6YeYkEw753ad2Hpk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531449; x=1715136249;
+ d=1e100.net; s=20230601; t=1714531450; x=1715136250;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SvPciHnFD5/bR5S8s2Go1AKllo7K9GsXGwFe4scAqC0=;
- b=Rfl5hBNaBfzSXEHcIey3Kw02UHZPlByxgoQfZ+lnaf6ooVbG7GuqkksftMRrNa0NpB
- MguGI31eUDmvggMXajpiVmsgS8uixdbxHovKmEzg9I/4r8t9NiDP3SUXE4YqOtwUJgfw
- G539vS2tXmyUjCU/hAX4MgdSSNnebSaLb1plRWM8rkYKPCaJvdlMvcKbqNjOWXqySlTw
- IBoL/pB/fk8tminVZ5X2WQk6VUMX/vhkwUsCUimVXBE9jScj2crHueqL1JmMCpvJw2Kb
- cQLvvL0ZN/x2ca9dFKeyg13nJTEcMnSy14IIZ25lXI3bMSspV9Yn0yCIeTUw899+3OJ/
- Tv4w==
-X-Gm-Message-State: AOJu0Ywe3tcT4h4Z/s6ZBXJNggB2GrXsQUvfnEUeudvakJbj4WMQsYod
- QPieWOg56wn4pI9FSFhmJ+318vfpDsEz1HzRvK9wCzeBSHR91xDVvIzvfK0EOG50/QRrujzahp4
- EMHQ8mA==
-X-Google-Smtp-Source: AGHT+IEAjKrgwpZaFRYUAwBn9k5YJzl51E9oNxiSj5e5UlY510sQBg6XeKo5BrzRtmezTjiWkmfU6A==
-X-Received: by 2002:a05:6214:529a:b0:6a0:b746:870d with SMTP id
- kj26-20020a056214529a00b006a0b746870dmr1281111qvb.33.1714531448780; 
- Tue, 30 Apr 2024 19:44:08 -0700 (PDT)
+ bh=LZY9h+buyzg27o5VxqTezVPRITBX+1E3WNBK1ZxpgPw=;
+ b=MK7fCAzzm5I1Aoj+Wg1t1R+SVrSWeUsZXet4vwjWExIXY0ndfiS5hBHuMp2X8XaWbk
+ Sb97daKmj010LB2+4HKz3LWygQj3pbZ+vOdQGvSEK/TsAffWNBc2nokMPsGK4a15usgk
+ RaQiITUfsRmg9ZupcwTHYHIt7qC2Yn0WHvLkAK9v9l7xtfTzRm4Z1dljAEVlGrMBJMnR
+ GC59ERdQ9pWSpX37Tyf/NJPCEpnpuXXx1XCR5xolaAgmqDC1wg2wcQOUPBKt2I1ow9/E
+ ifuVoVvdBd0O9ikypq7mKOnWkwa62DAg2x3Qxjjcxxyzz332zt2o5ROCu08T8zFBI6aP
+ p+jA==
+X-Gm-Message-State: AOJu0Yz5Q0IOdXwOfROerKRa9edVl5BxLsQOw0oK0hXM1yDbt/D9naiX
+ Dss5ebHGHcpuzC4tC8RKva1F9dpkNqnjrCMjEZIUh/vyEwlyXfuj5riBMCKcUHgJ+5lerzjNPr4
+ QDbGyXA==
+X-Google-Smtp-Source: AGHT+IF3gIHiHpZa1wP/WTJcRAM/DO0TA6y8wL4A1dOQXZBtlbFQXVt3bS/MuJvHaiW3naTtdijLXA==
+X-Received: by 2002:a05:6122:2503:b0:4cb:56c5:5816 with SMTP id
+ cl3-20020a056122250300b004cb56c55816mr1727865vkb.12.1714531449948; 
+ Tue, 30 Apr 2024 19:44:09 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.07
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:44:08 -0700 (PDT)
+ Tue, 30 Apr 2024 19:44:09 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Oliver Graute <oliver.graute@kococonnector.com>, Stefan Roese <sr@denx.de>
-Subject: [PATCH 043/149] board: congatec: Remove <common.h> and add needed
+Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ Mike Frysinger <vapier@chromium.org>
+Subject: [PATCH 044/149] board: coreboot: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:41:30 -0600
-Message-Id: <20240501024316.1767971-43-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:41:31 -0600
+Message-Id: <20240501024316.1767971-44-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -95,66 +96,25 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Oliver Graute <oliver.graute@kococonnector.com>
-Cc: Stefan Roese <sr@denx.de>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Mike Frysinger <vapier@chromium.org>
 ---
- board/congatec/cgtqmx8/cgtqmx8.c                           | 2 +-
- board/congatec/cgtqmx8/spl.c                               | 1 -
- board/congatec/common/mmc.c                                | 3 ++-
- board/congatec/conga-qeval20-qa3-e3845/conga-qeval20-qa3.c | 1 -
- 4 files changed, 3 insertions(+), 4 deletions(-)
+ board/coreboot/coreboot/coreboot.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/board/congatec/cgtqmx8/cgtqmx8.c b/board/congatec/cgtqmx8/cgtqmx8.c
-index d8e5b1d69633..99c33a1943e0 100644
---- a/board/congatec/cgtqmx8/cgtqmx8.c
-+++ b/board/congatec/cgtqmx8/cgtqmx8.c
-@@ -3,7 +3,7 @@
-  * Copyright 2018 congatec AG
-  * Copyright (C) 2019 Oliver Graute <oliver.graute@kococonnector.com>
-  */
--#include <common.h>
-+#include <config.h>
- #include <errno.h>
- #include <linux/libfdt.h>
- #include <fsl_esdhc.h>
-diff --git a/board/congatec/cgtqmx8/spl.c b/board/congatec/cgtqmx8/spl.c
-index b432ce27459f..242e794981b7 100644
---- a/board/congatec/cgtqmx8/spl.c
-+++ b/board/congatec/cgtqmx8/spl.c
-@@ -4,7 +4,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <fdt_support.h>
- #include <init.h>
-diff --git a/board/congatec/common/mmc.c b/board/congatec/common/mmc.c
-index bb7a3d4a9aa0..74a189ab4d7f 100644
---- a/board/congatec/common/mmc.c
-+++ b/board/congatec/common/mmc.c
-@@ -4,7 +4,8 @@
-  * Copyright 2018 NXP
-  *
-  */
--#include <common.h>
-+
-+#include <vsprintf.h>
- #include <linux/errno.h>
- #include <asm/io.h>
- #include <env.h>
-diff --git a/board/congatec/conga-qeval20-qa3-e3845/conga-qeval20-qa3.c b/board/congatec/conga-qeval20-qa3-e3845/conga-qeval20-qa3.c
-index 315b6dc54295..4197e88fb6ff 100644
---- a/board/congatec/conga-qeval20-qa3-e3845/conga-qeval20-qa3.c
-+++ b/board/congatec/conga-qeval20-qa3-e3845/conga-qeval20-qa3.c
+diff --git a/board/coreboot/coreboot/coreboot.c b/board/coreboot/coreboot/coreboot.c
+index e58dce37477f..f2ca10767681 100644
+--- a/board/coreboot/coreboot/coreboot.c
++++ b/board/coreboot/coreboot/coreboot.c
 @@ -3,7 +3,6 @@
-  * Copyright (C) 2016 Stefan Roese <sr@denx.de>
+  * Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
   */
  
 -#include <common.h>
- #include <i2c.h>
+ #include <splash.h>
  #include <init.h>
- #include <winbond_w83627.h>
+ #include <smbios.h>
 -- 
 2.34.1
 
