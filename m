@@ -4,74 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3FCFC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:58:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AAADFC4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:58:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 17BC488BD4;
-	Wed,  1 May 2024 04:44:53 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7992F88BCA;
+	Wed,  1 May 2024 04:44:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KbEZzhuX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j/5VahUo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9000088B7B; Wed,  1 May 2024 04:44:52 +0200 (CEST)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
+ id 3A2E388BD5; Wed,  1 May 2024 04:44:53 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DC5288B7B
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 92C3C88B8B
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:49 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-69b10ead8f5so33943716d6.0
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:50 -0700 (PDT)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-790f699eb2cso258624885a.1
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531489; x=1715136289; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531488; x=1715136288; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5mUHJPXPoRaJIdJCeCP12kKOFktWf3cGFMMA8TvHrgw=;
- b=KbEZzhuXI+ydJWzeoFf+pRAjxjrHpbBP+26sucFXE4Jx8lYMungETPPxXPM8eFu+8U
- 2gz2zVuWKME2kyH9H4eAYGch8IkQ0+4oUW0rOWLkrp/fmit171wf99gUDRvUv69K9MtI
- LUKMt6FadGX1LrH3EWM8LR33mLg1c6wJ1Mi78=
+ bh=oSlHZGCgOJcp/1VoJ/9ZfkNZPIryF3sFtE9LvKIcYKg=;
+ b=j/5VahUo6QuuiWO/9XM3LbHX15qGi4puA0hwGXy1iH+VDIoqXv4ke+LsxF9uQ73D+3
+ IYMrtlJw5wepE6fUVQWzS7offLfoc0frX8eX0f1KLutu2iAVYUNBirLUiwIZevLgL6vl
+ hYQ81ikuk0AOAQRNhzF7dN7ve61kij1Qt7/Go=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531489; x=1715136289;
+ d=1e100.net; s=20230601; t=1714531488; x=1715136288;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5mUHJPXPoRaJIdJCeCP12kKOFktWf3cGFMMA8TvHrgw=;
- b=HTUpjQXfL/K5hfeNoHPlenSAhi7ZXsvUBLnmVJna5CCFAvTQabM6r76svVPgQWSNzb
- mKFToXkMnySPcoCx8iwqUwP6VYKv2EGevK3YwSiATutYXuZCx+qZx+21LHkT3d2XJ8P/
- Y2iBMHYbB6rGUQwKsPHQfwg6KyklbPvwM4/Zf92C5F/oCZ/P3tQd26JxB63P5wWIdiVD
- ypG5CMCA24/69EV76ch0amWYvYJ5QAWndaWfHXprOn8HqzfZ0kVdTQevZosNZE73nCuM
- EsptYnXobLnltBxO9Z3plP0am9iJHJfD4g7cGXXNPTYLkXn+sQuXwBliOQ3cHv0of/hU
- 29og==
-X-Gm-Message-State: AOJu0YzqDVmuWeePO3VTz8V2/aYmQQ5/qrgZ0o9Z2VFoY4hl2iLq7jcm
- bn7GCZj7cHQGsqLgX2iaD/LVq09y8M/4vFrYR6dfuEbt02I1hRchZe+0VSOgiWQYupOuAsG6RIP
- tcbsRQw==
-X-Google-Smtp-Source: AGHT+IFQJaQpNRbTIeZmDikHT1vaeHuZ67GPTv31VHnuHDISTJRvBA81j4RkNVeoVnz+I+C4bM4CGA==
-X-Received: by 2002:a05:6214:3002:b0:6a0:aac9:c4a8 with SMTP id
- ke2-20020a056214300200b006a0aac9c4a8mr1000221qvb.28.1714531489244; 
- Tue, 30 Apr 2024 19:44:49 -0700 (PDT)
+ bh=oSlHZGCgOJcp/1VoJ/9ZfkNZPIryF3sFtE9LvKIcYKg=;
+ b=pvToBjOXx3VEmHdf4zSrXJatPqRvWKMyPN0EGIM1WDSWMjaIsUvTkbcoDMBTNC/c8j
+ Z1JFqHRlTpg/4H6ViZ3IOCA9fv7EYTXPPanw9Aps/JwMBNXzNpeUTmHhdwTdxRQRWxUo
+ OYIsKp8oZjUM/ySrxnLGzetCGHhuHwQDjhf9DVtYU2Y6dKPK75w2foDR0hXGXa9X5gwN
+ Tx9ZCeRYnQXfN9x5boV4WUyCn7xBeUwixQ9uFOdX/P4wag3diS3fMu5G0+fZtDCueVBF
+ 9fcmOzbP2EOjgZfPikU4nUkzxsF7EuF1vaNNaCEovMx4R7P3YIYxbsR3fwXo4dPrRxgy
+ Jmtg==
+X-Gm-Message-State: AOJu0Ywq0dlWqjNK+VH0KeCGVACIKoHiUVH+ATrTbme2bjcVb6zbycvh
+ cxd+xSOejBgKv3tH8B8bRV95uuxEf135xt1NI2l+X5a6VNkU9zj6npow5VDb4q7fJswG4uaRHO0
+ INYlxWg==
+X-Google-Smtp-Source: AGHT+IETFFILxaQkDB/fXT8ylFwVX72O4CH/cgn2upaoTlFiqWLiWO5i7yQzDwP/47OKMXXiE292ng==
+X-Received: by 2002:ad4:5dcb:0:b0:6a0:c962:a2be with SMTP id
+ m11-20020ad45dcb000000b006a0c962a2bemr1361149qvh.39.1714531487937; 
+ Tue, 30 Apr 2024 19:44:47 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.48
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.46
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:44:48 -0700 (PDT)
+ Tue, 30 Apr 2024 19:44:47 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>
-Subject: [PATCH 077/149] board: k+p: Remove <common.h> and add needed includes
-Date: Tue, 30 Apr 2024 20:42:04 -0600
-Message-Id: <20240501024316.1767971-77-trini@konsulko.com>
+Cc: =?UTF-8?q?Javier=20Mart=C3=ADnez=20Canillas?= <javier@dowhile0.org>,
+ Enric Balletbo i Serra <eballetbo@gmail.com>
+Subject: [PATCH 076/149] board: isee: Remove <common.h> and add needed includes
+Date: Tue, 30 Apr 2024 20:42:03 -0600
+Message-Id: <20240501024316.1767971-76-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,67 +96,64 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Lukasz Majewski <lukma@denx.de>
+Cc: "Javier Martínez Canillas" <javier@dowhile0.org>
+Cc: Enric Balletbo i Serra <eballetbo@gmail.com>
 ---
- board/k+p/kp_imx53/kp_id_rev.c            | 2 +-
- board/k+p/kp_imx53/kp_imx53.c             | 1 -
- board/k+p/kp_imx6q_tpc/kp_imx6q_tpc.c     | 1 -
- board/k+p/kp_imx6q_tpc/kp_imx6q_tpc_spl.c | 1 -
- 4 files changed, 1 insertion(+), 4 deletions(-)
+ board/isee/igep003x/board.c    | 2 +-
+ board/isee/igep003x/mux.c      | 1 -
+ board/isee/igep00x0/common.c   | 1 -
+ board/isee/igep00x0/igep00x0.c | 2 +-
+ 4 files changed, 2 insertions(+), 4 deletions(-)
 
-diff --git a/board/k+p/kp_imx53/kp_id_rev.c b/board/k+p/kp_imx53/kp_id_rev.c
-index 9f93cf008ce8..cbfe94e25a28 100644
---- a/board/k+p/kp_imx53/kp_id_rev.c
-+++ b/board/k+p/kp_imx53/kp_id_rev.c
-@@ -9,11 +9,11 @@
-  * Daniel Gericke <daniel.gericke@tqs.de>
+diff --git a/board/isee/igep003x/board.c b/board/isee/igep003x/board.c
+index 7dbb08008927..7cd26ce3c34b 100644
+--- a/board/isee/igep003x/board.c
++++ b/board/isee/igep003x/board.c
+@@ -5,7 +5,7 @@
+  * Copyright (C) 2013-2017, ISEE 2007 SL - http://www.isee.biz/
   */
  
 -#include <common.h>
++#include <config.h>
  #include <env.h>
- #include <i2c.h>
- #include "kp_id_rev.h"
- #include <net.h>
-+#include <vsprintf.h>
- 
- static int eeprom_has_been_read;
- static struct id_eeprom eeprom;
-diff --git a/board/k+p/kp_imx53/kp_imx53.c b/board/k+p/kp_imx53/kp_imx53.c
-index 7c3a695cb258..efb7b49cbe08 100644
---- a/board/k+p/kp_imx53/kp_imx53.c
-+++ b/board/k+p/kp_imx53/kp_imx53.c
-@@ -4,7 +4,6 @@
-  * Lukasz Majewski, DENX Software Engineering, lukma@denx.de
+ #include <errno.h>
+ #include <init.h>
+diff --git a/board/isee/igep003x/mux.c b/board/isee/igep003x/mux.c
+index 550e3b3197dd..1a40c0077627 100644
+--- a/board/isee/igep003x/mux.c
++++ b/board/isee/igep003x/mux.c
+@@ -11,7 +11,6 @@
+  * GNU General Public License for more details.
   */
  
 -#include <common.h>
- #include <init.h>
+ #include <asm/arch/sys_proto.h>
+ #include <asm/arch/hardware.h>
+ #include <asm/arch/mux.h>
+diff --git a/board/isee/igep00x0/common.c b/board/isee/igep00x0/common.c
+index 3fdf83e845c9..2584d2e5ddfd 100644
+--- a/board/isee/igep00x0/common.c
++++ b/board/isee/igep00x0/common.c
+@@ -1,6 +1,5 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+-#include <common.h>
+ #include <twl4030.h>
  #include <asm/global_data.h>
  #include <asm/io.h>
-diff --git a/board/k+p/kp_imx6q_tpc/kp_imx6q_tpc.c b/board/k+p/kp_imx6q_tpc/kp_imx6q_tpc.c
-index e6877e4c0703..e0895194300a 100644
---- a/board/k+p/kp_imx6q_tpc/kp_imx6q_tpc.c
-+++ b/board/k+p/kp_imx6q_tpc/kp_imx6q_tpc.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2018 Lukasz Majewski <lukma@denx.de>
+diff --git a/board/isee/igep00x0/igep00x0.c b/board/isee/igep00x0/igep00x0.c
+index 0f0a9c592fcc..8a3f290f678f 100644
+--- a/board/isee/igep00x0/igep00x0.c
++++ b/board/isee/igep00x0/igep00x0.c
+@@ -3,7 +3,7 @@
+  * (C) Copyright 2010
+  * ISEE 2007 SL, <www.iseebcn.com>
   */
- 
 -#include <common.h>
++#include <config.h>
+ #include <env.h>
  #include <init.h>
- #include <asm/arch/clock.h>
- #include <asm/arch/crm_regs.h>
-diff --git a/board/k+p/kp_imx6q_tpc/kp_imx6q_tpc_spl.c b/board/k+p/kp_imx6q_tpc/kp_imx6q_tpc_spl.c
-index 54902437940b..6a5e252751d4 100644
---- a/board/k+p/kp_imx6q_tpc/kp_imx6q_tpc_spl.c
-+++ b/board/k+p/kp_imx6q_tpc/kp_imx6q_tpc_spl.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2018 Lukasz Majewski <lukma@denx.de>
-  */
- 
--#include <common.h>
- #include <init.h>
- #include <log.h>
- #include <asm/arch/clock.h>
+ #include <malloc.h>
 -- 
 2.34.1
 
