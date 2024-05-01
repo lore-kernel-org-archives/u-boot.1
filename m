@@ -4,73 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE53BC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:55:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48666C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:55:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CDBC088B72;
-	Wed,  1 May 2024 04:44:34 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4134F88B86;
+	Wed,  1 May 2024 04:44:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PI1RmdR8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SPyXcFQn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B0D388B72; Wed,  1 May 2024 04:44:33 +0200 (CEST)
-Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
- [IPv6:2607:f8b0:4864:20::931])
+ id 1B6F388B88; Wed,  1 May 2024 04:44:36 +0200 (CEST)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9084F88B69
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:29 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id E180588B43
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ua1-x931.google.com with SMTP id
- a1e0cc1a2514c-7f169d3ef53so588758241.1
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:29 -0700 (PDT)
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-69b47833dc5so23588976d6.0
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531468; x=1715136268; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531472; x=1715136272; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ic8rt5c6z8/BwrRix31TJe5BV4lIhcdfTxkyKFZ80LY=;
- b=PI1RmdR8NMfO3z9mXONs2NvjcL0s2LddwzFNiGp7fADl7aaOW/4Vvjm2CYGR2FLYlt
- wBPUkUmVh/hwrA8CQob6jm6GaaMOVIxwPuuGcxMaCIH/FKfN65qYlIEB6ZAryGHHk8x/
- GkWjGPg12Zu2OMglBqeFDLDEwSSe5WoIe3u8M=
+ bh=IAB1E5rsWA6auZvkrDtuqFkPuVRYoxYzydnGjPC2lwk=;
+ b=SPyXcFQnxhkLYmi85LNnW8ILm5lDaTC43hQu0L8SPNW34hNxG+fxHfnCTrn2r95VgN
+ ym52UmvKCy3ovIO5meQgLSnhD+R7PEECv1L76EZpPkc8y8M78Pz0SJWg/9RehWStZ5g0
+ 3p7FZHXmanrNGUjDpnFkGAFtrOpgpFo78W+dI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531468; x=1715136268;
+ d=1e100.net; s=20230601; t=1714531472; x=1715136272;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ic8rt5c6z8/BwrRix31TJe5BV4lIhcdfTxkyKFZ80LY=;
- b=eclVqnkKyNZaoWKaOovIjvA4H1Rzf0C9S6VQ0t9B/OFdXBaeV2lSyYfvz0r4aIpmvU
- ShMJvxwMIxmHIo1OHrdOQv6HCmyqeqkdV6aTTgk9ls/Ojjp4iZRQ7rau2YdyYRbYOmq2
- ccYtojcqJrgaDPXMR7JmE4VqrM3bxztFIDrj6esYsCrsV4ioaY5uQkiRm20vEbvwtTfz
- DfLnmvxfCSlKibZzlehRCPM9XKLYCc6iATSt03ds6MKId6ER7GewOO081rTs5IYNqkfx
- uwj0+fyHnj9OocBIQOh6fVAUmwL4WGHrHcF25ga4Ez/TVw48ZUMkkVtiWcuZn1GvWF5f
- W5Vg==
-X-Gm-Message-State: AOJu0YzBsi7lGW5NJxeEjqYsYQ2H/9LjrcJU6Kjdahnn46IPRKUHxOrv
- ucsQknDMkU+d2fb1yHmym7yVSNzv8rubEQ1ijsJPdnl3lzdFpyIc6AGD2QzRJP4BwoPF5pE1rfy
- kTTnCrg==
-X-Google-Smtp-Source: AGHT+IHtlQIzi8nP7JTLa/TLxIMYesfZj7g/mm8uji6dvlp7d+7I+UT1DG7mncYgaq8bmazUAE96Zg==
-X-Received: by 2002:a67:ed11:0:b0:47b:cc56:7aa8 with SMTP id
- l17-20020a67ed11000000b0047bcc567aa8mr1755359vsp.1.1714531468082; 
- Tue, 30 Apr 2024 19:44:28 -0700 (PDT)
+ bh=IAB1E5rsWA6auZvkrDtuqFkPuVRYoxYzydnGjPC2lwk=;
+ b=BSuT61B9tcgbmIcovjmRRpz5hhJSahijqk5WHUd/riFxG5p40J4RF+hEOdK7ucrswU
+ cirqsqOgSt50b+9EIWAZwHcy9SCD62jqKYR9scfct3XZ2Kv7m7DCiASLbOTwMKq4+j1D
+ H9xDghQNfu/EMNMt2XxtZycq9n6AfGWrPIsVed2BICqMoee2u8n9U/mvgD3QiEyBRFKq
+ lGHHVjTVIXNscgf7JFU/qnL1/bn8ghNaTp4TnsFeOg3O+kv9C/yQ5umusu9206sO10Ff
+ NOqoFK92BG9xedXIkDGoYnMMyAYaLiPy9ucclIEe7NAv/QTPL6UiIEWUIWcx8kmpigE7
+ dZKA==
+X-Gm-Message-State: AOJu0YycJ8keMmW/hA4IoE/yFaCuB2vMBb1OXDpGf/UjDPrtbpSm4/mP
+ h6qUah2XsuBgSP0YH9g2wGI18iWAmXL5FQIYcFwgWF8kn7nYgAsjb7St6QIaVy8puF90Yh9EyGT
+ J2pU1iA==
+X-Google-Smtp-Source: AGHT+IGAHmJeGVQdBy0EqRXb6/0JiDgTBtpNarso2Isz+BgP4fZFRIewpyxgGgbKGwkyiYVtvU93AQ==
+X-Received: by 2002:ad4:5ae7:0:b0:6a0:c914:2a07 with SMTP id
+ c7-20020ad45ae7000000b006a0c9142a07mr1210323qvh.4.1714531472576; 
+ Tue, 30 Apr 2024 19:44:32 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.26
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:44:27 -0700 (PDT)
+ Tue, 30 Apr 2024 19:44:32 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>, Andy Yan <andy.yan@rock-chips.com>,
- Levin Du <djw@t-chip.com.cn>, Suniel Mahesh <sunil@amarulasolutions.com>
-Subject: [PATCH 060/149] board: firefly: Remove <common.h> and add needed
+Cc: Stefan Bosch <stefan_b@posteo.net>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: [PATCH 062/149] board: friendlyarm: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:41:47 -0600
-Message-Id: <20240501024316.1767971-60-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:41:49 -0600
+Message-Id: <20240501024316.1767971-62-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -97,54 +99,66 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Kever Yang <kever.yang@rock-chips.com>
-Cc: Andy Yan <andy.yan@rock-chips.com>
-Cc: Levin Du <djw@t-chip.com.cn>
-Cc: Suniel Mahesh <sunil@amarulasolutions.com>
+Cc: Stefan Bosch <stefan_b@posteo.net>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>
+Cc: Igor Prusov <ivprusov@salutedevices.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 ---
- board/firefly/firefly-rk3288/firefly-rk3288.c | 1 -
- board/firefly/firefly-rk3308/roc_cc_rk3308.c  | 1 -
- board/firefly/roc-pc-rk3399/roc-pc-rk3399.c   | 1 -
- 3 files changed, 3 deletions(-)
+ board/friendlyarm/nanopi2/board.c   | 1 -
+ board/friendlyarm/nanopi2/hwrev.c   | 1 -
+ board/friendlyarm/nanopi2/lcds.c    | 1 -
+ board/friendlyarm/nanopi2/onewire.c | 1 -
+ 4 files changed, 4 deletions(-)
 
-diff --git a/board/firefly/firefly-rk3288/firefly-rk3288.c b/board/firefly/firefly-rk3288/firefly-rk3288.c
-index 95d8b00924d8..8e67ab4b1327 100644
---- a/board/firefly/firefly-rk3288/firefly-rk3288.c
-+++ b/board/firefly/firefly-rk3288/firefly-rk3288.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2015 Google, Inc
+diff --git a/board/friendlyarm/nanopi2/board.c b/board/friendlyarm/nanopi2/board.c
+index 393c5a447d6f..c8cbc5a15fa8 100644
+--- a/board/friendlyarm/nanopi2/board.c
++++ b/board/friendlyarm/nanopi2/board.c
+@@ -5,7 +5,6 @@
   */
  
+ #include <config.h>
 -#include <common.h>
- #include <hang.h>
- #include <led.h>
+ #include <command.h>
+ #include <fdt_support.h>
  #include <log.h>
-diff --git a/board/firefly/firefly-rk3308/roc_cc_rk3308.c b/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-index af00250e118d..404bdc632bbc 100644
---- a/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-+++ b/board/firefly/firefly-rk3308/roc_cc_rk3308.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2019 Rockchip Electronics Co., Ltd
+diff --git a/board/friendlyarm/nanopi2/hwrev.c b/board/friendlyarm/nanopi2/hwrev.c
+index 585e08c944f9..cd9c2414a320 100644
+--- a/board/friendlyarm/nanopi2/hwrev.c
++++ b/board/friendlyarm/nanopi2/hwrev.c
+@@ -5,7 +5,6 @@
   */
  
+ #include <config.h>
 -#include <common.h>
- #include <adc.h>
- #include <asm/arch-rockchip/grf_rk3308.h>
- #include <asm/arch-rockchip/hardware.h>
-diff --git a/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c b/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
-index 590519b32af2..a149e4fe822e 100644
---- a/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
-+++ b/board/firefly/roc-pc-rk3399/roc-pc-rk3399.c
-@@ -3,7 +3,6 @@
-  * (C) Copyright 2016 Rockchip Electronics Co., Ltd
+ #include <i2c.h>
+ #include <asm/io.h>
+ 
+diff --git a/board/friendlyarm/nanopi2/lcds.c b/board/friendlyarm/nanopi2/lcds.c
+index 7303e53af925..b37367300cf0 100644
+--- a/board/friendlyarm/nanopi2/lcds.c
++++ b/board/friendlyarm/nanopi2/lcds.c
+@@ -4,7 +4,6 @@
   */
  
+ #include <config.h>
 -#include <common.h>
- #include <dm.h>
- #include <env.h>
- #include <log.h>
+ #include <errno.h>
+ #include <fdtdec.h>
+ #include <fdt_support.h>
+diff --git a/board/friendlyarm/nanopi2/onewire.c b/board/friendlyarm/nanopi2/onewire.c
+index 4f0b1e33c2df..31cc871330ca 100644
+--- a/board/friendlyarm/nanopi2/onewire.c
++++ b/board/friendlyarm/nanopi2/onewire.c
+@@ -5,7 +5,6 @@
+  */
+ 
+ #include <config.h>
+-#include <common.h>
+ #include <errno.h>
+ #include <asm/io.h>
+ #include <asm/arch/clk.h>
 -- 
 2.34.1
 
