@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 038DDC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 16:36:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6420EC4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 16:36:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 61A61886C4;
-	Wed,  1 May 2024 18:35:25 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C297488340;
+	Wed,  1 May 2024 18:35:27 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="jwcEe76P";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="z+VUtZqu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3987B88699; Wed,  1 May 2024 18:35:24 +0200 (CEST)
+ id C69DC88648; Wed,  1 May 2024 18:35:26 +0200 (CEST)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07F018833F
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 18:35:22 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 95DCB8833F
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 18:35:24 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,25 +28,26 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1714581278; bh=ocWZQqcVqv8PbSK6zB4agMhvSny1Giu0rD4Bjob+kiA=;
- b=jwcEe76PCIpj9/p3QDK29pWOJ/Gn0SKnOONFU3P87ImvgvUdft+Uillmu2v5gJJCRxvoDlcBL
- biKtVFXK00fPVgaOyc9XE7hk99WGALRJ9yDtk4ZotIa/T9EqCCDKfh5Y+0KQ3ReWjvl8DWWmSOZ
- 7UTc2FCh13s786YEc0b6Tk4kyeS8CHhbaxw7rd8VfBBoKaAeCmVpOoX8CcY0MoiULqOTrrmSyyG
- pOuQVEqMauJqQ3AwQ6VO3rBAeofY8HUs8ByrMc8GKtN4VP1+QtnyH2ur7sMIncOMprNv3MztYd7
- 7kx0SOl6oOR2N4oKIbj4Fm5X1Ws3fe/U7BkXUyw++ZGw==
+ t=1714581278; bh=9JJrWmW4P9KusvATeeLPrCLIswoyw/Eg/0sOOqsGLFI=;
+ b=z+VUtZquDGYJriI3deQxjbyoBye+W6yzWAv4z1s+hhV6dI/GoW2TBUSNE6+M3NfoDJQ5ub4XE
+ vB7u4LFUFcG7Jq2GXxzFwh27lhGGm4DuaePtBKNq+wMfjB3rVSdfs6ZWW4zHXwks0FZa3NNadj3
+ batmCmgJyHW1rAONalvYEz3efyG2np6LRPmEEgLxRhUDmuvUQ+YByoB2f3oEUHIwxFlHQMe+VH/
+ EhCtwjzUhIWt81X5Zp9C1Bncu0Mp2dBDaFlivkWT2q0JURDqh7JQtN2TdcwfepEBjd1/lYgh41z
+ +nyOIA2FKF63DHgL5irOl6YaPsjJmxH369pg7gry/xqw==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- FUKAUMI Naoki <naoki@radxa.com>, Jonas Karlman <jonas@kwiboo.se>,
- Christopher Obbard <chris.obbard@collabora.com>, Jagan Teki
- <jagan@amarulasolutions.com>
+ Jagan Teki <jagan@amarulasolutions.com>, Deepak Das
+ <deepakdas.linux@gmail.com>, Alexandre Vicenzi <linux@alxd.me>, Xiaobo
+ Tian <peterwillcn@gmail.com>
 Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, Dragan Simic
- <dsimic@manjaro.org>, Peter Robinson <pbrobinson@gmail.com>,
- u-boot@lists.denx.de
-Subject: [PATCH v2 18/22] rockchip: rk3399-rock-pi-4: Sync DT from v6.8 and
+ <dsimic@manjaro.org>, Christopher Obbard <chris.obbard@collabora.com>,
+ Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de, Jonas Karlman
+ <jonas@kwiboo.se>
+Subject: [PATCH v2 15/22] rockchip: rk3399-nanopi-4: Sync DT from v6.8 and
  update defconfig
-Date: Wed,  1 May 2024 16:22:35 +0000
-Message-ID: <20240501162308.875193-19-jonas@kwiboo.se>
+Date: Wed,  1 May 2024 16:22:32 +0000
+Message-ID: <20240501162308.875193-16-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240501162308.875193-1-jonas@kwiboo.se>
 References: <20240501162308.875193-1-jonas@kwiboo.se>
@@ -58,7 +59,7 @@ X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  167.172.40.54
-X-ForwardEmail-ID: 66326cb93e72fadc559dbafb
+X-ForwardEmail-ID: 66326cac3e72fadc559dbac3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,200 +76,226 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sync rk3399-rock-pi-4 related device tree from Linux kernel v6.8.
+Sync rk3399-nanopi-4 related device tree from Linux kernel v6.8.
 
-Add SPI flash related nodes and options to support boot from SPI flash.
+Add DM_RESET=y to support reset signals.
 
-Add AHCI=y, SCSI_AHCI=y, AHCI_PCI=y and SCSI=y to support SATA HAT.
+Add PCI=y, CMD_PCI=y and NVME_PCI=y to support PCIe and NVMe boot.
 
-Change to SPL_MAX_SIZE=0x40000, SPL can be up to 256 KiB.
+Add AHCI=y, SCSI_AHCI=y, AHCI_PCI=y and SCSI=y to support M4 SATA HAT.
 
 Add ROCKCHIP_IODOMAIN=y to configure io-domain voltage.
 
+Add MMC_SDHCI_SDMA=y to use DMA transfer for eMMC.
+
 Add PHY_REALTEK=y and DM_ETH_PHY=y to support ethernet PHY.
+
+Add PHY_ROCKCHIP_INNO_USB2=y and PHY_ROCKCHIP_TYPEC=y to support USB PHY.
+
+Remove REGULATOR_PWM=y, boards does not use pwm-regulator compatible.
 
 Remove SPL_TINY_MEMSET=y to use full memset in SPL.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
-Reviewed-by: Christopher Obbard <chris.obbard@collabora.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
-v2: Collect r-b tags
+v2: Only enable AHCI/SCSI on M4 variant
+v2: Skip enable of PCI on NEO4 variant
+v2: Keep SDHCI enabled on R4S variant
+v2: Collect r-b tag
 ---
- arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi | 12 ++++++++++
- arch/arm/dts/rk3399-rock-4c-plus.dts         |  1 +
- arch/arm/dts/rk3399-rock-4se-u-boot.dtsi     | 12 ++++++++++
- arch/arm/dts/rk3399-rock-pi-4.dtsi           |  4 +++-
- arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi   |  7 ++++++
- arch/arm/dts/rk3399-rock-pi-4c.dts           | 10 ++++++++
- configs/rock-4c-plus-rk3399_defconfig        | 24 +++++++++++++++-----
- configs/rock-4se-rk3399_defconfig            | 23 +++++++++++++++++--
- configs/rock-pi-4-rk3399_defconfig           |  8 +++++++
- configs/rock-pi-4c-rk3399_defconfig          | 24 ++++++++++++++++++--
- 10 files changed, 114 insertions(+), 11 deletions(-)
+ arch/arm/dts/rk3399-nanopc-t4.dts       |  2 +-
+ arch/arm/dts/rk3399-nanopi-m4-2gb.dts   | 55 +------------------------
+ arch/arm/dts/rk3399-nanopi-m4b.dts      |  2 +-
+ arch/arm/dts/rk3399-nanopi-r4s.dts      |  4 +-
+ arch/arm/dts/rk3399-nanopi4-u-boot.dtsi |  4 ++
+ arch/arm/dts/rk3399-nanopi4.dtsi        |  7 ++--
+ configs/nanopc-t4-rk3399_defconfig      | 10 +++--
+ configs/nanopi-m4-2gb-rk3399_defconfig  | 18 ++++++--
+ configs/nanopi-m4-rk3399_defconfig      | 18 ++++++--
+ configs/nanopi-m4b-rk3399_defconfig     | 18 ++++++--
+ configs/nanopi-neo4-rk3399_defconfig    | 11 +++--
+ configs/nanopi-r4s-rk3399_defconfig     | 11 +++--
+ 12 files changed, 81 insertions(+), 79 deletions(-)
 
-diff --git a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-index 44dab14dc211..5ec15a845c1a 100644
---- a/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-rock-4c-plus-u-boot.dtsi
-@@ -13,3 +13,15 @@
- 	bootph-pre-ram;
- 	bootph-some-ram;
- };
-+
-+&spi1 {
-+	status = "okay";
-+
-+	flash@0 {
-+		compatible = "jedec,spi-nor";
-+		reg = <0>;
-+		bootph-pre-ram;
-+		bootph-some-ram;
-+		spi-max-frequency = <10000000>;
-+	};
-+};
-diff --git a/arch/arm/dts/rk3399-rock-4c-plus.dts b/arch/arm/dts/rk3399-rock-4c-plus.dts
-index 8bfd5f88d1ef..7baf9d1b22fd 100644
---- a/arch/arm/dts/rk3399-rock-4c-plus.dts
-+++ b/arch/arm/dts/rk3399-rock-4c-plus.dts
-@@ -15,6 +15,7 @@
- 	compatible = "radxa,rock-4c-plus", "rockchip,rk3399";
+diff --git a/arch/arm/dts/rk3399-nanopc-t4.dts b/arch/arm/dts/rk3399-nanopc-t4.dts
+index 452728b82e42..3bf8f959e42c 100644
+--- a/arch/arm/dts/rk3399-nanopc-t4.dts
++++ b/arch/arm/dts/rk3399-nanopc-t4.dts
+@@ -39,7 +39,7 @@
+ 		keyup-threshold-microvolt = <1800000>;
+ 		poll-interval = <100>;
  
- 	aliases {
-+		ethernet0 = &gmac;
- 		mmc0 = &sdhci;
- 		mmc1 = &sdmmc;
- 	};
-diff --git a/arch/arm/dts/rk3399-rock-4se-u-boot.dtsi b/arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
-index 85ee5770add0..f9ad518d3adb 100644
---- a/arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-rock-4se-u-boot.dtsi
-@@ -4,3 +4,15 @@
+-		recovery {
++		button-recovery {
+ 			label = "Recovery";
+ 			linux,code = <KEY_VENDOR>;
+ 			press-threshold-microvolt = <18000>;
+diff --git a/arch/arm/dts/rk3399-nanopi-m4-2gb.dts b/arch/arm/dts/rk3399-nanopi-m4-2gb.dts
+index 60358ab8c7df..e9cf71f224a3 100644
+--- a/arch/arm/dts/rk3399-nanopi-m4-2gb.dts
++++ b/arch/arm/dts/rk3399-nanopi-m4-2gb.dts
+@@ -10,57 +10,4 @@
   */
  
- #include "rk3399-rock-pi-4-u-boot.dtsi"
+ /dts-v1/;
+-#include "rk3399-nanopi4.dtsi"
+-
+-/ {
+-	model = "FriendlyElec NanoPi M4";
+-	compatible = "friendlyarm,nanopi-m4", "rockchip,rk3399";
+-
+-	vdd_5v: vdd-5v {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vdd_5v";
+-		regulator-always-on;
+-		regulator-boot-on;
+-	};
+-
+-	vcc5v0_core: vcc5v0-core {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vcc5v0_core";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		vin-supply = <&vdd_5v>;
+-	};
+-
+-	vcc5v0_usb1: vcc5v0-usb1 {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vcc5v0_usb1";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		vin-supply = <&vcc5v0_sys>;
+-	};
+-
+-	vcc5v0_usb2: vcc5v0-usb2 {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vcc5v0_usb2";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		vin-supply = <&vcc5v0_sys>;
+-	};
+-};
+-
+-&vcc3v3_sys {
+-	vin-supply = <&vcc5v0_core>;
+-};
+-
+-&u2phy0_host {
+-	phy-supply = <&vcc5v0_usb1>;
+-};
+-
+-&u2phy1_host {
+-	phy-supply = <&vcc5v0_usb2>;
+-};
+-
+-&vbus_typec {
+-	regulator-always-on;
+-	vin-supply = <&vdd_5v>;
+-};
++#include "rk3399-nanopi-m4.dts"
+diff --git a/arch/arm/dts/rk3399-nanopi-m4b.dts b/arch/arm/dts/rk3399-nanopi-m4b.dts
+index 72182c58cc46..65cb21837b0c 100644
+--- a/arch/arm/dts/rk3399-nanopi-m4b.dts
++++ b/arch/arm/dts/rk3399-nanopi-m4b.dts
+@@ -19,7 +19,7 @@
+ 		keyup-threshold-microvolt = <1500000>;
+ 		poll-interval = <100>;
+ 
+-		recovery {
++		button-recovery {
+ 			label = "Recovery";
+ 			linux,code = <KEY_VENDOR>;
+ 			press-threshold-microvolt = <18000>;
+diff --git a/arch/arm/dts/rk3399-nanopi-r4s.dts b/arch/arm/dts/rk3399-nanopi-r4s.dts
+index cef4d18b599d..fe5b52610010 100644
+--- a/arch/arm/dts/rk3399-nanopi-r4s.dts
++++ b/arch/arm/dts/rk3399-nanopi-r4s.dts
+@@ -46,9 +46,9 @@
+ 	gpio-keys {
+ 		pinctrl-0 = <&reset_button_pin>;
+ 
+-		/delete-node/ power;
++		/delete-node/ key-power;
+ 
+-		reset {
++		key-reset {
+ 			debounce-interval = <50>;
+ 			gpios = <&gpio1 RK_PC6 GPIO_ACTIVE_LOW>;
+ 			label = "reset";
+diff --git a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
+index e0d7a518dfc2..757361249968 100644
+--- a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
+@@ -20,3 +20,7 @@
+ &vcc3v0_sd {
+ 	bootph-pre-ram;
+ };
 +
-+&spi1 {
-+	status = "okay";
-+
-+	flash@0 {
-+		compatible = "jedec,spi-nor";
-+		reg = <0>;
-+		bootph-pre-ram;
-+		bootph-some-ram;
-+		spi-max-frequency = <10000000>;
-+	};
++&vcc_sdio {
++	regulator-init-microvolt = <3000000>;
 +};
-diff --git a/arch/arm/dts/rk3399-rock-pi-4.dtsi b/arch/arm/dts/rk3399-rock-pi-4.dtsi
-index b1b7f4ffb1d4..281a12180703 100644
---- a/arch/arm/dts/rk3399-rock-pi-4.dtsi
-+++ b/arch/arm/dts/rk3399-rock-pi-4.dtsi
-@@ -12,6 +12,7 @@
+diff --git a/arch/arm/dts/rk3399-nanopi4.dtsi b/arch/arm/dts/rk3399-nanopi4.dtsi
+index 8c0ff6c96e03..b7f1e47978a6 100644
+--- a/arch/arm/dts/rk3399-nanopi4.dtsi
++++ b/arch/arm/dts/rk3399-nanopi4.dtsi
+@@ -18,6 +18,7 @@
  
  / {
  	aliases {
 +		ethernet0 = &gmac;
- 		mmc0 = &sdhci;
+ 		mmc0 = &sdio0;
  		mmc1 = &sdmmc;
- 	};
-@@ -44,7 +45,7 @@
- 	sdio_pwrseq: sdio-pwrseq {
- 		compatible = "mmc-pwrseq-simple";
- 		clocks = <&rk808 1>;
--		clock-names = "ext_clock";
-+		clock-names = "lpo";
+ 		mmc2 = &sdhci;
+@@ -111,7 +112,7 @@
  		pinctrl-names = "default";
- 		pinctrl-0 = <&wifi_enable_h>;
- 		reset-gpios = <&gpio0 RK_PB2 GPIO_ACTIVE_LOW>;
-@@ -492,6 +493,7 @@
+ 		pinctrl-0 = <&power_key>;
  
- &i2s0 {
- 	pinctrl-0 = <&i2s0_2ch_bus>;
-+	pinctrl-1 = <&i2s0_2ch_bus_bclk_off>;
- 	rockchip,capture-channels = <2>;
- 	rockchip,playback-channels = <2>;
- 	status = "okay";
-diff --git a/arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi b/arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
-index 85ee5770add0..38385621deb1 100644
---- a/arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-rock-pi-4c-u-boot.dtsi
-@@ -4,3 +4,10 @@
-  */
- 
- #include "rk3399-rock-pi-4-u-boot.dtsi"
-+
-+&spi1 {
-+	flash@0 {
-+		bootph-pre-ram;
-+		bootph-some-ram;
-+	};
-+};
-diff --git a/arch/arm/dts/rk3399-rock-pi-4c.dts b/arch/arm/dts/rk3399-rock-pi-4c.dts
-index d32efab74e94..de2ebe4cb4f3 100644
---- a/arch/arm/dts/rk3399-rock-pi-4c.dts
-+++ b/arch/arm/dts/rk3399-rock-pi-4c.dts
-@@ -43,6 +43,16 @@
- 	hp-det-gpio = <&gpio1 RK_PA0 GPIO_ACTIVE_HIGH>;
+-		power {
++		key-power {
+ 			debounce-interval = <100>;
+ 			gpios = <&gpio0 RK_PA5 GPIO_ACTIVE_LOW>;
+ 			label = "GPIO Key Power";
+@@ -167,6 +168,7 @@
  };
  
-+&spi1 {
-+	status = "okay";
-+
-+	flash@0 {
-+		compatible = "jedec,spi-nor";
-+		reg = <0>;
-+		spi-max-frequency = <10000000>;
-+	};
-+};
-+
- &uart0 {
+ &emmc_phy {
++	rockchip,enable-strobe-pulldown;
  	status = "okay";
+ };
  
-diff --git a/configs/rock-4c-plus-rk3399_defconfig b/configs/rock-4c-plus-rk3399_defconfig
-index 2024defb2bf0..e97fde17acc2 100644
---- a/configs/rock-4c-plus-rk3399_defconfig
-+++ b/configs/rock-4c-plus-rk3399_defconfig
-@@ -3,22 +3,27 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
-+CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-4c-plus"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
-+CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_ROCKPI4_RK3399=y
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
- CONFIG_SYS_LOAD_ADDR=0x800800
--CONFIG_PCI=y
+@@ -267,7 +269,7 @@
+ 		interrupt-parent = <&gpio1>;
+ 		interrupts = <21 IRQ_TYPE_LEVEL_LOW>;
+ 		pinctrl-names = "default";
+-		pinctrl-0 = <&pmic_int_l>;
++		pinctrl-0 = <&pmic_int_l>, <&ap_pwroff>, <&clk_32k>;
+ 		rockchip,system-power-controller;
+ 		wakeup-source;
+ 
+@@ -374,7 +376,6 @@
+ 			vcc_sdio: LDO_REG4 {
+ 				regulator-always-on;
+ 				regulator-boot-on;
+-				regulator-init-microvolt = <3000000>;
+ 				regulator-min-microvolt = <1800000>;
+ 				regulator-max-microvolt = <3300000>;
+ 				regulator-name = "vcc_sdio";
+diff --git a/configs/nanopc-t4-rk3399_defconfig b/configs/nanopc-t4-rk3399_defconfig
+index 89c36e273a9b..3e89f3dcabd0 100644
+--- a/configs/nanopc-t4-rk3399_defconfig
++++ b/configs/nanopc-t4-rk3399_defconfig
+@@ -16,7 +16,7 @@ CONFIG_PCI=y
  CONFIG_DEBUG_UART=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-4c-plus.dtb"
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopc-t4.dtb"
  CONFIG_DISPLAY_BOARDINFO_LATE=y
 -CONFIG_SPL_MAX_SIZE=0x2e000
 +CONFIG_SPL_MAX_SIZE=0x40000
  CONFIG_SPL_PAD_TO=0x7f8000
  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
- CONFIG_TPL=y
- CONFIG_CMD_BOOTZ=y
-@@ -26,7 +31,6 @@ CONFIG_CMD_NVEDIT_EFI=y
- CONFIG_CMD_DFU=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
--CONFIG_CMD_PCI=y
- CONFIG_CMD_USB=y
- CONFIG_CMD_ROCKUSB=y
- CONFIG_CMD_USB_MASS_STORAGE=y
-@@ -40,23 +44,32 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_DFU_MMC=y
+@@ -34,15 +34,20 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
  CONFIG_ROCKCHIP_GPIO=y
  CONFIG_SYS_I2C_ROCKCHIP=y
 +CONFIG_ROCKCHIP_IODOMAIN=y
@@ -277,204 +304,62 @@ index 2024defb2bf0..e97fde17acc2 100644
  CONFIG_MMC_SDHCI=y
 +CONFIG_MMC_SDHCI_SDMA=y
  CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_SF_DEFAULT_BUS=1
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_XTX=y
 +CONFIG_PHY_REALTEK=y
 +CONFIG_DM_ETH_PHY=y
  CONFIG_ETH_DESIGNWARE=y
  CONFIG_GMAC_ROCKCHIP=y
--CONFIG_NVME_PCI=y
- CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PHY_ROCKCHIP_TYPEC=y
+ CONFIG_NVME_PCI=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_TYPEC=y
  CONFIG_PMIC_RK8XX=y
 -CONFIG_REGULATOR_PWM=y
+ CONFIG_SPL_DM_REGULATOR_FIXED=y
  CONFIG_REGULATOR_RK8XX=y
  CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM_ROCKCHIP_LPDDR4=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
-@@ -77,7 +90,6 @@ CONFIG_VIDEO=y
+@@ -68,5 +73,4 @@ CONFIG_VIDEO=y
  CONFIG_DISPLAY=y
  CONFIG_VIDEO_ROCKCHIP=y
  CONFIG_DISPLAY_ROCKCHIP_HDMI=y
 -CONFIG_SPL_TINY_MEMSET=y
  CONFIG_ERRNO_STR=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-diff --git a/configs/rock-4se-rk3399_defconfig b/configs/rock-4se-rk3399_defconfig
-index 9b2303fdf792..13f5f84b9836 100644
---- a/configs/rock-4se-rk3399_defconfig
-+++ b/configs/rock-4se-rk3399_defconfig
-@@ -3,22 +3,29 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
+diff --git a/configs/nanopi-m4-2gb-rk3399_defconfig b/configs/nanopi-m4-2gb-rk3399_defconfig
+index eb1d2c1f51fc..10bd9fba5388 100644
+--- a/configs/nanopi-m4-2gb-rk3399_defconfig
++++ b/configs/nanopi-m4-2gb-rk3399_defconfig
+@@ -6,15 +6,18 @@ CONFIG_SPL_GPIO=y
  CONFIG_NR_DRAM_BANKS=1
-+CONFIG_SF_DEFAULT_SPEED=10000000
  CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-4se"
- CONFIG_DM_RESET=y
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-m4-2gb"
++CONFIG_DM_RESET=y
  CONFIG_ROCKCHIP_RK3399=y
-+CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_ROCKPI4_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
  CONFIG_DEBUG_UART_BASE=0xFF1A0000
  CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
  CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_PCI=y
++CONFIG_PCI=y
  CONFIG_DEBUG_UART=y
 +CONFIG_AHCI=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-4se.dtb"
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopi-m4-2gb.dtb"
  CONFIG_DISPLAY_BOARDINFO_LATE=y
 -CONFIG_SPL_MAX_SIZE=0x2e000
 +CONFIG_SPL_MAX_SIZE=0x40000
  CONFIG_SPL_PAD_TO=0x7f8000
  # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
- CONFIG_TPL=y
- CONFIG_CMD_BOOTZ=y
- CONFIG_CMD_NVEDIT_EFI=y
-@@ -36,14 +43,25 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SCSI_AHCI=y
-+CONFIG_AHCI_PCI=y
- CONFIG_DFU_MMC=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-+CONFIG_ROCKCHIP_IODOMAIN=y
- CONFIG_MMC_DW=y
- CONFIG_MMC_DW_ROCKCHIP=y
- CONFIG_MMC_SDHCI=y
- CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_SF_DEFAULT_BUS=1
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_XTX=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DM_ETH_PHY=y
- CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
- CONFIG_NVME_PCI=y
-@@ -54,9 +72,11 @@ CONFIG_REGULATOR_PWM=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM_ROCKCHIP_LPDDR4=y
-+CONFIG_SCSI=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
-@@ -77,7 +97,6 @@ CONFIG_VIDEO=y
- CONFIG_DISPLAY=y
- CONFIG_VIDEO_ROCKCHIP=y
- CONFIG_DISPLAY_ROCKCHIP_HDMI=y
--CONFIG_SPL_TINY_MEMSET=y
- CONFIG_ERRNO_STR=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
-diff --git a/configs/rock-pi-4-rk3399_defconfig b/configs/rock-pi-4-rk3399_defconfig
-index e5a2bba8e7ff..d474d91053c1 100644
---- a/configs/rock-pi-4-rk3399_defconfig
-+++ b/configs/rock-pi-4-rk3399_defconfig
-@@ -17,6 +17,7 @@ CONFIG_SPL_SPI=y
- CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_PCI=y
- CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-pi-4a.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
-@@ -43,6 +44,8 @@ CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
- CONFIG_ENV_IS_IN_MMC=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
-+CONFIG_SCSI_AHCI=y
-+CONFIG_AHCI_PCI=y
- CONFIG_DFU_MMC=y
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-@@ -54,8 +57,12 @@ CONFIG_MMC_SDHCI_SDMA=y
- CONFIG_MMC_SDHCI_ROCKCHIP=y
- CONFIG_SF_DEFAULT_BUS=1
- CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_MACRONIX=y
- CONFIG_SPI_FLASH_WINBOND=y
- CONFIG_SPI_FLASH_XTX=y
-+CONFIG_PHY_REALTEK=y
-+CONFIG_DM_ETH_PHY=y
- CONFIG_ETH_DESIGNWARE=y
- CONFIG_GMAC_ROCKCHIP=y
- CONFIG_NVME_PCI=y
-@@ -66,6 +73,7 @@ CONFIG_REGULATOR_PWM=y
- CONFIG_REGULATOR_RK8XX=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM_ROCKCHIP_LPDDR4=y
-+CONFIG_SCSI=y
- CONFIG_BAUDRATE=1500000
- CONFIG_DEBUG_UART_SHIFT=2
- CONFIG_SYS_NS16550_MEM32=y
-diff --git a/configs/rock-pi-4c-rk3399_defconfig b/configs/rock-pi-4c-rk3399_defconfig
-index 4a9d1c531c10..50c6755246f2 100644
---- a/configs/rock-pi-4c-rk3399_defconfig
-+++ b/configs/rock-pi-4c-rk3399_defconfig
-@@ -3,22 +3,29 @@ CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
- CONFIG_NR_DRAM_BANKS=1
-+CONFIG_SF_DEFAULT_SPEED=10000000
- CONFIG_ENV_OFFSET=0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE="rk3399-rock-pi-4c"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3399=y
-+CONFIG_ROCKCHIP_SPI_IMAGE=y
- CONFIG_TARGET_ROCKPI4_RK3399=y
- CONFIG_DEBUG_UART_BASE=0xFF1A0000
- CONFIG_DEBUG_UART_CLOCK=24000000
-+CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_SPI=y
- CONFIG_SYS_LOAD_ADDR=0x800800
- CONFIG_PCI=y
- CONFIG_DEBUG_UART=y
-+CONFIG_AHCI=y
- # CONFIG_ANDROID_BOOT_IMAGE is not set
- CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-rock-pi-4c.dtb"
- CONFIG_DISPLAY_BOARDINFO_LATE=y
--CONFIG_SPL_MAX_SIZE=0x2e000
-+CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_SPI_LOAD=y
-+CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
  CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
- CONFIG_TPL=y
+@@ -22,6 +25,7 @@ CONFIG_TPL=y
  CONFIG_CMD_BOOTZ=y
-@@ -37,13 +44,25 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_TIME=y
+@@ -29,19 +33,28 @@ CONFIG_SPL_OF_CONTROL=y
  CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
  CONFIG_ENV_IS_IN_MMC=y
  CONFIG_SYS_RELOC_GD_ENV_ADDR=y
 +CONFIG_SCSI_AHCI=y
 +CONFIG_AHCI_PCI=y
- CONFIG_DFU_MMC=y
  CONFIG_ROCKCHIP_GPIO=y
  CONFIG_SYS_I2C_ROCKCHIP=y
 +CONFIG_ROCKCHIP_IODOMAIN=y
@@ -483,37 +368,260 @@ index 4a9d1c531c10..50c6755246f2 100644
  CONFIG_MMC_SDHCI=y
 +CONFIG_MMC_SDHCI_SDMA=y
  CONFIG_MMC_SDHCI_ROCKCHIP=y
-+CONFIG_SF_DEFAULT_BUS=1
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=y
-+CONFIG_SPI_FLASH_GIGADEVICE=y
-+CONFIG_SPI_FLASH_MACRONIX=y
-+CONFIG_SPI_FLASH_WINBOND=y
-+CONFIG_SPI_FLASH_XTX=y
 +CONFIG_PHY_REALTEK=y
 +CONFIG_DM_ETH_PHY=y
  CONFIG_ETH_DESIGNWARE=y
  CONFIG_GMAC_ROCKCHIP=y
- CONFIG_NVME_PCI=y
-@@ -54,9 +73,11 @@ CONFIG_REGULATOR_PWM=y
++CONFIG_NVME_PCI=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_TYPEC=y
+ CONFIG_PMIC_RK8XX=y
+-CONFIG_REGULATOR_PWM=y
+ CONFIG_SPL_DM_REGULATOR_FIXED=y
  CONFIG_REGULATOR_RK8XX=y
  CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM_ROCKCHIP_LPDDR4=y
 +CONFIG_SCSI=y
  CONFIG_BAUDRATE=1500000
  CONFIG_DEBUG_UART_SHIFT=2
  CONFIG_SYS_NS16550_MEM32=y
-+CONFIG_ROCKCHIP_SPI=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_USB_XHCI_HCD=y
-@@ -77,7 +98,6 @@ CONFIG_VIDEO=y
+@@ -63,5 +76,4 @@ CONFIG_VIDEO=y
  CONFIG_DISPLAY=y
  CONFIG_VIDEO_ROCKCHIP=y
  CONFIG_DISPLAY_ROCKCHIP_HDMI=y
 -CONFIG_SPL_TINY_MEMSET=y
  CONFIG_ERRNO_STR=y
- CONFIG_EFI_CAPSULE_ON_DISK=y
- CONFIG_EFI_CAPSULE_FIRMWARE_RAW=y
+diff --git a/configs/nanopi-m4-rk3399_defconfig b/configs/nanopi-m4-rk3399_defconfig
+index bc0b90b3d861..f5305549716c 100644
+--- a/configs/nanopi-m4-rk3399_defconfig
++++ b/configs/nanopi-m4-rk3399_defconfig
+@@ -6,15 +6,18 @@ CONFIG_SPL_GPIO=y
+ CONFIG_NR_DRAM_BANKS=1
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-m4"
++CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
++CONFIG_PCI=y
+ CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopi-m4.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_SPL_MAX_SIZE=0x2e000
++CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+@@ -22,6 +25,7 @@ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_TIME=y
+@@ -29,19 +33,28 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SCSI_AHCI=y
++CONFIG_AHCI_PCI=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DM_ETH_PHY=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_NVME_PCI=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_TYPEC=y
+ CONFIG_PMIC_RK8XX=y
+-CONFIG_REGULATOR_PWM=y
+ CONFIG_SPL_DM_REGULATOR_FIXED=y
+ CONFIG_REGULATOR_RK8XX=y
+ CONFIG_PWM_ROCKCHIP=y
++CONFIG_SCSI=y
+ CONFIG_BAUDRATE=1500000
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_SYS_NS16550_MEM32=y
+@@ -63,5 +76,4 @@ CONFIG_VIDEO=y
+ CONFIG_DISPLAY=y
+ CONFIG_VIDEO_ROCKCHIP=y
+ CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+-CONFIG_SPL_TINY_MEMSET=y
+ CONFIG_ERRNO_STR=y
+diff --git a/configs/nanopi-m4b-rk3399_defconfig b/configs/nanopi-m4b-rk3399_defconfig
+index 678f4d9d823f..70de7e0a6d7f 100644
+--- a/configs/nanopi-m4b-rk3399_defconfig
++++ b/configs/nanopi-m4b-rk3399_defconfig
+@@ -6,15 +6,18 @@ CONFIG_SPL_GPIO=y
+ CONFIG_NR_DRAM_BANKS=1
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-m4b"
++CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+ CONFIG_DEBUG_UART_CLOCK=24000000
+ CONFIG_SYS_LOAD_ADDR=0x800800
++CONFIG_PCI=y
+ CONFIG_DEBUG_UART=y
++CONFIG_AHCI=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopi-m4b.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_SPL_MAX_SIZE=0x2e000
++CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+@@ -22,6 +25,7 @@ CONFIG_TPL=y
+ CONFIG_CMD_BOOTZ=y
+ CONFIG_CMD_GPT=y
+ CONFIG_CMD_MMC=y
++CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_CMD_TIME=y
+@@ -29,19 +33,28 @@ CONFIG_SPL_OF_CONTROL=y
+ CONFIG_OF_SPL_REMOVE_PROPS="clock-names interrupt-parent assigned-clocks assigned-clock-rates assigned-clock-parents"
+ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_SCSI_AHCI=y
++CONFIG_AHCI_PCI=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DM_ETH_PHY=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_NVME_PCI=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_TYPEC=y
+ CONFIG_PMIC_RK8XX=y
+-CONFIG_REGULATOR_PWM=y
+ CONFIG_SPL_DM_REGULATOR_FIXED=y
+ CONFIG_REGULATOR_RK8XX=y
+ CONFIG_PWM_ROCKCHIP=y
++CONFIG_SCSI=y
+ CONFIG_BAUDRATE=1500000
+ CONFIG_DEBUG_UART_SHIFT=2
+ CONFIG_SYS_NS16550_MEM32=y
+@@ -63,5 +76,4 @@ CONFIG_VIDEO=y
+ CONFIG_DISPLAY=y
+ CONFIG_VIDEO_ROCKCHIP=y
+ CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+-CONFIG_SPL_TINY_MEMSET=y
+ CONFIG_ERRNO_STR=y
+diff --git a/configs/nanopi-neo4-rk3399_defconfig b/configs/nanopi-neo4-rk3399_defconfig
+index d9b7a90e8402..7f936636d419 100644
+--- a/configs/nanopi-neo4-rk3399_defconfig
++++ b/configs/nanopi-neo4-rk3399_defconfig
+@@ -6,6 +6,7 @@ CONFIG_SPL_GPIO=y
+ CONFIG_NR_DRAM_BANKS=1
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-neo4"
++CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+@@ -14,7 +15,7 @@ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_DEBUG_UART=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopi-neo4.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_SPL_MAX_SIZE=0x2e000
++CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+@@ -31,14 +32,19 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DM_ETH_PHY=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_TYPEC=y
+ CONFIG_PMIC_RK8XX=y
+-CONFIG_REGULATOR_PWM=y
+ CONFIG_SPL_DM_REGULATOR_FIXED=y
+ CONFIG_REGULATOR_RK8XX=y
+ CONFIG_PWM_ROCKCHIP=y
+@@ -63,5 +69,4 @@ CONFIG_VIDEO=y
+ CONFIG_DISPLAY=y
+ CONFIG_VIDEO_ROCKCHIP=y
+ CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+-CONFIG_SPL_TINY_MEMSET=y
+ CONFIG_ERRNO_STR=y
+diff --git a/configs/nanopi-r4s-rk3399_defconfig b/configs/nanopi-r4s-rk3399_defconfig
+index 1fcccf2bae6e..ef74628fb284 100644
+--- a/configs/nanopi-r4s-rk3399_defconfig
++++ b/configs/nanopi-r4s-rk3399_defconfig
+@@ -6,6 +6,7 @@ CONFIG_SPL_GPIO=y
+ CONFIG_NR_DRAM_BANKS=1
+ CONFIG_ENV_OFFSET=0x3F8000
+ CONFIG_DEFAULT_DEVICE_TREE="rk3399-nanopi-r4s"
++CONFIG_DM_RESET=y
+ CONFIG_ROCKCHIP_RK3399=y
+ CONFIG_TARGET_EVB_RK3399=y
+ CONFIG_DEBUG_UART_BASE=0xFF1A0000
+@@ -14,7 +15,7 @@ CONFIG_SYS_LOAD_ADDR=0x800800
+ CONFIG_DEBUG_UART=y
+ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3399-nanopi-r4s.dtb"
+ CONFIG_DISPLAY_BOARDINFO_LATE=y
+-CONFIG_SPL_MAX_SIZE=0x2e000
++CONFIG_SPL_MAX_SIZE=0x40000
+ CONFIG_SPL_PAD_TO=0x7f8000
+ # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
+ CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+@@ -31,14 +32,19 @@ CONFIG_ENV_IS_IN_MMC=y
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_ROCKCHIP_GPIO=y
+ CONFIG_SYS_I2C_ROCKCHIP=y
++CONFIG_ROCKCHIP_IODOMAIN=y
+ CONFIG_MMC_DW=y
+ CONFIG_MMC_DW_ROCKCHIP=y
+ CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_SDMA=y
+ CONFIG_MMC_SDHCI_ROCKCHIP=y
++CONFIG_PHY_REALTEK=y
++CONFIG_DM_ETH_PHY=y
+ CONFIG_ETH_DESIGNWARE=y
+ CONFIG_GMAC_ROCKCHIP=y
++CONFIG_PHY_ROCKCHIP_INNO_USB2=y
++CONFIG_PHY_ROCKCHIP_TYPEC=y
+ CONFIG_PMIC_RK8XX=y
+-CONFIG_REGULATOR_PWM=y
+ CONFIG_SPL_DM_REGULATOR_FIXED=y
+ CONFIG_REGULATOR_RK8XX=y
+ CONFIG_PWM_ROCKCHIP=y
+@@ -66,5 +72,4 @@ CONFIG_VIDEO=y
+ CONFIG_DISPLAY=y
+ CONFIG_VIDEO_ROCKCHIP=y
+ CONFIG_DISPLAY_ROCKCHIP_HDMI=y
+-CONFIG_SPL_TINY_MEMSET=y
+ CONFIG_ERRNO_STR=y
 -- 
 2.43.2
 
