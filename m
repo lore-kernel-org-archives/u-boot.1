@@ -4,73 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBB46C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 20:29:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C159C10F1A
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 21:12:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 375F4885C8;
-	Wed,  1 May 2024 22:29:31 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A82D7885A0;
+	Wed,  1 May 2024 23:12:30 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gr2YpaMC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uYHlCUvj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E008A88AE9; Wed,  1 May 2024 22:29:29 +0200 (CEST)
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
- [IPv6:2a00:1450:4864:20::534])
+ id 3798C8869A; Wed,  1 May 2024 23:12:29 +0200 (CEST)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DF3388592
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 22:29:27 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id C0FE48857C
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 23:12:26 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x534.google.com with SMTP id
- 4fb4d7f45d1cf-572669fd9f9so6887680a12.0
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 13:29:27 -0700 (PDT)
+ spf=pass smtp.mailfrom=semen.protsenko@linaro.org
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-de610800da0so2757732276.2
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 14:12:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714595367; x=1715200167; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1714597945; x=1715202745; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=C1qJhkYTN9FB8yyGvtivNTExUbX+WD2ojZZqzWh+RFg=;
- b=gr2YpaMC1la5fL1XPuFQQ55p/EToCYYxrEdomG0Xjpa1e1yxyLR+jgoqyJOIfnGlNM
- +sLk0xvGfWFlhT+avSsEls1Xpu9vw5FG1AKoipRbDbg/C0bSkfrEkSLd0750UuvjvwA8
- ioFv2MRPhLuKbshj1WZHDrkzaXNthZ8Pnnwp4KBN0WUqAKZVGwFIO6qPifl2+j4dziMY
- rG0pteyeNzRsz0UHvpYnroMp/bP9rCmi3dv55eT239lHbTZavbWpUEN+n90Q1WYr8Xn2
- hQ0okJL6YEzw6EYip+57N0VD9tMKOTc/uCaO8pqxfMIY9BS9WGgtLk53fdsJER8+FsjU
- bgXw==
+ bh=z3vsAs76CSrfRx9MU28GvVE6lBtvqHFj4sm2a7LpkBc=;
+ b=uYHlCUvjiAzYDp4rq138ew4x35KVtGcZUnrsvVwrLOlHMpEIU/N0cuxkpIsWg1dwo6
+ CaftmxnEuz1NynUPbzhFZeWLeghJK+XXIbau0mPJQAaPvy4FVwz98WfGzNFmQcLop6Pa
+ wtiJNW7tyq3dro6YaAzw5vLlugRl2zWR8mjwCEBWZNhieUSGP3BAZogHpPLifYrvnUqn
+ /MKjTaZzvQ1p9BcfDHM7oyONj0f+GgDyi08XcS9ArHbBPrhOfq6u6D3Du+QjYbMUt9++
+ hAAUfaWVZeAUC91duEei28CkfwWgjcHarfK2SGjgOmfTZwZu7+Td9knc+y1a2v7y8E5d
+ HH5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714595367; x=1715200167;
+ d=1e100.net; s=20230601; t=1714597945; x=1715202745;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=C1qJhkYTN9FB8yyGvtivNTExUbX+WD2ojZZqzWh+RFg=;
- b=bjimHe0tGSHzGeHe8UNtklPVYZWUdzjhXFJdVCOw6wEeZQ/gqgYyE9VUf1zwwqYESk
- cPwYc/npsjxiRr17y6RnzgcTRpZ02U9A3AhXb2D43Rg9khW6lfylvnmHBcgm4RdpB1QH
- pfgTjm8KOjOKCYCFhw2WOca3OBai6CMTbhGKwKBvAwOEh2ouZtQ3V7oz3Cj+mvuGQiGB
- ZE4cumzg3hUdnFjgerLVVcHogR8yrOhNbjbSknYfj1jET2KrzhZ14bBe9QV5aKmzJSab
- xIGLvBHJaJaIBpFI7mNgr3cPac1IbHQSFS5LVtz4oUnZngS/sqNOmGtvjHQ8hhU6uAA2
- WqUg==
-X-Gm-Message-State: AOJu0YxFMAMzMWHxG3/dE5TtXiLdiMeDPalvJJim42kF1WzEWpLoQu6J
- 3x/8iU0N+NgsCZmx3xh9laOFr0Jm74rJTYHOLSSjTtq+mngwUIT2l9Ti69NC9D9TNQM4/chvOxQ
- 2BZjAEFFvwu1TpoBs7FbIgC5UGnM=
-X-Google-Smtp-Source: AGHT+IFh8v7mPl6/t41KbFNFOBagFyV7xbKdOV8rhengxrJN9hqzCKPdEzEAqBj+bnGmX4+oUDMs2100/lV3iwxvQPM=
-X-Received: by 2002:a50:99d4:0:b0:566:2f24:b063 with SMTP id
- n20-20020a5099d4000000b005662f24b063mr2533795edb.23.1714595366610; Wed, 01
- May 2024 13:29:26 -0700 (PDT)
+ bh=z3vsAs76CSrfRx9MU28GvVE6lBtvqHFj4sm2a7LpkBc=;
+ b=Dk3ZnVs3av+FfUB3c2Sz/aVWUVPG8fGRsnCESAXCas/h8IYFt27f5O7HzW12rH8LgU
+ yALH5RYGUqhbg4ueQF++Ofl7ckpVEF6HtZngzO2GpxVoJO0a1j4VCkTJ6UmivlOJt0lW
+ ijB/fDBaBSqPfsusNOPrFK78Hg5cVk8xoqZhXcvcXQwabF0s+w5y6tcyeQxEXS9lxpV3
+ v6gBtzDWZgUWDRWoRGBer1scIrvEp5EwSjhWcOIRL3wuf3wtZKVOC8TlWENJJrhH/s0R
+ FMjQ6h2w6rpORJMnL+LWbOfISkOKIeDoOz20t1jErSRUsWXe1Ai9NUjoUvdhDa8MRLBB
+ QeFw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVZSPgYADGkJIjko9RwxAuCfBePVobSduAkXm+Xk0to1xQzoj/jEGVLwikWRSrPKD86gbn+slXo9H1YK3iuOqSCI8G8PA==
+X-Gm-Message-State: AOJu0YwNSKgsjbbPHEfSaMBsJ5sQbszAoS3G6fM+ReKJ0tEQsuxB23va
+ nyv3kHM8lQcf1vo3EM/xRHgX4l6dKd46onji2fap9qk2Om7CJPKnnFrVJeOJ5eiAtpzlfnL7E7c
+ 5gyOoP/DhjTqJAKThD9gqo51WvUZIU/9K8GNnkQ==
+X-Google-Smtp-Source: AGHT+IEWpuwwypfFQz3fvZSb5pKz/b3DE60Z89WYHljbIunNuu3jmeNofkQ0H/dqkNySo02XEuhoWJcxawXVyjOXs9c=
+X-Received: by 2002:a25:ac57:0:b0:de4:6f1e:c9bb with SMTP id
+ r23-20020a25ac57000000b00de46f1ec9bbmr36874ybd.26.1714597945427; Wed, 01 May
+ 2024 14:12:25 -0700 (PDT)
 MIME-Version: 1.0
-References: <20240501024316.1767971-1-trini@konsulko.com>
- <20240501024316.1767971-149-trini@konsulko.com>
-In-Reply-To: <20240501024316.1767971-149-trini@konsulko.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Wed, 1 May 2024 13:29:02 -0700
-Message-ID: <CAJaLiFz8Lev7TuLa9STxiat59sJ39_JsPg5YzAgXS6gya8q40Q@mail.gmail.com>
-Subject: Re: [PATCH 149/149] board: zyxel: Remove <common.h> and add needed
- includes
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Luka Perkov <luka.perkov@sartura.hr>
+References: <20240308000432.32369-1-semen.protsenko@linaro.org>
+ <a135888e-0d97-1382-c1f9-5bf097a7ffe3@gmail.com>
+In-Reply-To: <a135888e-0d97-1382-c1f9-5bf097a7ffe3@gmail.com>
+From: Sam Protsenko <semen.protsenko@linaro.org>
+Date: Wed, 1 May 2024 16:12:14 -0500
+Message-ID: <CAPLW+4=f1AcZRde8e+rWWpCm9BtFAACqdWCfMryRBcSFn4OinA@mail.gmail.com>
+Subject: Re: [PATCH] clk: Propagate clk_set_rate() if CLK_SET_PARENT_RATE
+ present
+To: Sean Anderson <seanga2@gmail.com>
+Cc: Lukasz Majewski <lukma@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Ashok Reddy Soma <ashok.reddy.soma@amd.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>, 
+ Yang Xiwen <forbidden405@outlook.com>, Julien Masson <jmasson@baylibre.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -89,50 +97,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Apr 30, 2024 at 7:46=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
+On Wed, Apr 10, 2024 at 9:53=E2=80=AFPM Sean Anderson <seanga2@gmail.com> w=
+rote:
 >
-> Remove <common.h> from this board vendor directory and when needed
-> add missing include files directly.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Tony Dinh <mibodhi@gmail.com>
-> Cc: Luka Perkov <luka.perkov@sartura.hr>
+> On 3/7/24 19:04, Sam Protsenko wrote:
+> > Sometimes clocks provided to a consumer might not have .set_rate
+> > operation (like gate or mux clocks), but have CLK_SET_PARENT_RATE flag
+> > set. In that case it's usually possible to find a parent up the tree
+> > which is capable of setting the rate (div, pll, etc). Implement a simpl=
+e
+> > lookup procedure for such cases, to traverse the clock tree until
+> > .set_rate capable parent is found, and use that parent to actually
+> > change the rate. The search will stop once the first .set_rate capable
+> > clock is found, which is usually enough to handle most cases.
+> >
+> > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
+> > ---
 
-Reviewed-by: Tony Dinh <mibodhi@gmail.com>
-Tested-by: Tony Dinh <mibodhi@gmail.com> # on Zyxel NSA310s
+[snip]
 
-> ---
->  board/zyxel/nsa310s/nsa310s.c | 1 -
->  board/zyxel/nsa325/nsa325.c   | 1 -
->  2 files changed, 2 deletions(-)
 >
-> diff --git a/board/zyxel/nsa310s/nsa310s.c b/board/zyxel/nsa310s/nsa310s.=
-c
-> index b3ea6608914a..d018b5738242 100644
-> --- a/board/zyxel/nsa310s/nsa310s.c
-> +++ b/board/zyxel/nsa310s/nsa310s.c
-> @@ -4,7 +4,6 @@
->   * Copyright (C) 2015 Gerald Kerma <dreagle@doukki.net>
->   */
+> Can you give an example of where this is needed?
 >
-> -#include <common.h>
->  #include <init.h>
->  #include <netdev.h>
->  #include <asm/arch/cpu.h>
-> diff --git a/board/zyxel/nsa325/nsa325.c b/board/zyxel/nsa325/nsa325.c
-> index f5f63ee5d3b0..38340b33c8bf 100644
-> --- a/board/zyxel/nsa325/nsa325.c
-> +++ b/board/zyxel/nsa325/nsa325.c
-> @@ -14,7 +14,6 @@
->   * Marvell Semiconductor <www.marvell.com>
->   */
->
-> -#include <common.h>
->  #include <asm/arch/soc.h>
->  #include <asm/arch/mpp.h>
->  #include <netdev.h>
-> --
-> 2.34.1
->
+
+Sure. In my case it's needed for eMMC enablement on E850-96 board.
+eMMC node in the device tree [1] is a gate clock
+(CLK_GOUT_MMC_EMBD_SDCLKIN), so the MMC driver won't be able to change
+its rate. But that clock actually has CLK_SET_RATE_PARENT flag set in
+the clock driver [2]. So the right thing to do in this case (and
+that's basically how it's done in Linux kernel too) is to traverse the
+clock tree upwards, and try to find the parent capable to do .set_rate
+(which is usually a divider clock), and use it to change the clock
+rate. I'm working on exynos_dw_mmc driver [3] right now, making it use
+CCF clocks, but I can't do that before this patch is applied.
+
+Grepping the U-Boot tree I can see the CLK_SET_RATE_PARENT flag is
+also used in various IMX clock drivers and STM32MP13 clock driver. I
+guess without this change those flags will be basically ignored.
+
+Thanks!
+
+[1] https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/exynos8=
+50.dtsi#L408
+[2] https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/clk/exynos/c=
+lk-exynos850.c#L353
+[3] https://source.denx.de/u-boot/u-boot/-/blob/master/drivers/mmc/exynos_d=
+w_mmc.c#L117
+
+> --Sean
