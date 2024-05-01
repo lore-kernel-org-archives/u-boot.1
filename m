@@ -4,70 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CDFAC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:48:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE7D3C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:49:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6839C88ADB;
+	by phobos.denx.de (Postfix) with ESMTP id BFC1388AF6;
 	Wed,  1 May 2024 04:44:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sXvcV8eu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TgLQ5cdz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1754288B08; Wed,  1 May 2024 04:43:57 +0200 (CEST)
-Received: from mail-qv1-xf29.google.com (mail-qv1-xf29.google.com
- [IPv6:2607:f8b0:4864:20::f29])
+ id F37CF88AEB; Wed,  1 May 2024 04:43:58 +0200 (CEST)
+Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com
+ [IPv6:2607:f8b0:4864:20::f30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C49688AD7
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:43:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 224D188AD1
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:43:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf29.google.com with SMTP id
- 6a1803df08f44-6a0c8fb3540so4314816d6.1
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:43:54 -0700 (PDT)
+Received: by mail-qv1-xf30.google.com with SMTP id
+ 6a1803df08f44-69b4043b7b3so36826166d6.1
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:43:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531434; x=1715136234; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531435; x=1715136235; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=8y7n5Ku0NBLdhn43MH76WLCEbbwpiR1WaIZD3dxoJxA=;
- b=sXvcV8eujGccu4dJWeoxuJq9ZqS6nVWffZG+BQV6jdlFy3laEIrwhuhrOIX+3jouVu
- Ix9fPFnWZujmY1WAlehPVtH2s4skHuoG1aw+jkTJJuSvVJg8/MxQq5BglQ45k1k0Gy4u
- +JSqY0bX9hxQdlI4qKwPCYxCveJjuXziVaiWI=
+ bh=yZveNDbipepOmgS/PPQI+z05QS+AeweBfkvOjG4Tfqs=;
+ b=TgLQ5cdznBKZxUl4ZMbdZPett5oksyyz5gxb3vfyTWSLc1WqEofR4AVifYCVPUV/Xy
+ qWH+i1dqyW2SYhvIcdPcqnlHMm5sTPfvzDuxP7abfpHLbZX4et8I63y2Jo++aM+R2KtP
+ 82/onwLEdK9u5piqfeDGf9DlZj+qr9jl7ecWI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531434; x=1715136234;
+ d=1e100.net; s=20230601; t=1714531435; x=1715136235;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=8y7n5Ku0NBLdhn43MH76WLCEbbwpiR1WaIZD3dxoJxA=;
- b=a2kcHI3B3W37HA3IOEHcXK13OoRKvdBmzpKXQOu3agpuVQmhZRa2RgcxOVVidk5JyF
- AVg/juvfdhNPNc5SFP2F5nsL8ZCUGYe9AiAy0yZVffYjXAiSQGIWgIwhxtKa1irftLsA
- G+8C3u3MBLkUxbRUEUoIFhj5RLWWdIcgjsy6oUvnX6YRlNNyBsKViRnL52lTYVo9mTu3
- HAnk4bwabMsKkD5ekK66vovGUDtJSadFmQdP/SMfXv6UKu1A3AA1Xv4PeqoT1cb9/0ML
- 5SIqODKJ9GaXXERCTZnAzgGyJyRPw1mgkXdcYokklv+Di15ZQwmvH3U62iSZudrh+B1A
- sf+Q==
-X-Gm-Message-State: AOJu0YweFJHCyhsdyOT/XzTwm9ozCmbvxhz+pTq/E7I1koT+59QzcPqW
- hRtStkJOMmSmtZCUHO5tRtCIq9HBJxOZi1ucPu39G6jK5L3tBDqcD9euo4s7oCibMTFTzjD7bok
- eys8o9w==
-X-Google-Smtp-Source: AGHT+IHSN4pEmHivvwclFUyKy+Pl8BgGMVEg3hoQrzhxUMde3dCmcuIrAX6JFeaFQ9uAgjZtqb4dsw==
-X-Received: by 2002:a05:6214:1d26:b0:6a0:a9dc:b11a with SMTP id
- f6-20020a0562141d2600b006a0a9dcb11amr2853387qvd.3.1714531433704; 
- Tue, 30 Apr 2024 19:43:53 -0700 (PDT)
+ bh=yZveNDbipepOmgS/PPQI+z05QS+AeweBfkvOjG4Tfqs=;
+ b=jY5dUZIYPhTWaSPqBjCFQVq1RxdvUsLCJeM3BbrpEf4ZInfUu4q3tCW0vySKJH8AxI
+ 0FgbfphdY/Kr/YHAAiBvgkBuILj9qGMRDQX2BeDxhuLH5j2pfwcMf8gkGajc4P9E9kDp
+ pht7Ufynwumj6YAl9/AAG80+KEU6Wg83OT6sm+m5Xw48Y0b3lc67kTz3FGSU9vCqw81R
+ 2L2HIYrOwdAoLAbuH55uUoaGgH4xLtfYQKKdNjSxM3cT+Ulq3TbLZn4Wby0vkCP0q3ch
+ hIfceGB8uv8cKjygZSi2Wg649ORH07scNN8s+VAqijAkxoHFWJW0kkYVZ8wBNKO8ynwb
+ ZAmQ==
+X-Gm-Message-State: AOJu0Yyxfn8F97/+SuHeYyt2i8g91JQm//KVOIk0l7Hh0j/6JmK9aY4C
+ z3Ah6bw4AhyJ6eyh2YAOPrcpGHccuvx+n7oLkAJNlO6q/eGKc0IuNZSycQ3mgctOG7YqPUfJZbW
+ MnX4pmQ==
+X-Google-Smtp-Source: AGHT+IH2LBo92t+51DDCv5M9AYgFfRkJ4Iixmp+EEq4qauOK+WPehBJEKLgTYkBJtlJpAuQEoPQvUA==
+X-Received: by 2002:ad4:5ec6:0:b0:6a0:a98a:484b with SMTP id
+ jm6-20020ad45ec6000000b006a0a98a484bmr1428432qvb.16.1714531434934; 
+ Tue, 30 Apr 2024 19:43:54 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.43.52
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.43.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:43:53 -0700 (PDT)
+ Tue, 30 Apr 2024 19:43:54 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Michael Trimarchi <michael@amarulasolutions.com>
-Subject: [PATCH 030/149] board: bsh: Remove <common.h> and add needed includes
-Date: Tue, 30 Apr 2024 20:41:17 -0600
-Message-Id: <20240501024316.1767971-30-trini@konsulko.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Raffaele RECALCATI <raffaele.recalcati@bticino.it>,
+ Simone CIANNI <simone.cianni@bticino.it>
+Subject: [PATCH 031/149] board: bticino: Remove <common.h> and add needed
+ includes
+Date: Tue, 30 Apr 2024 20:41:18 -0600
+Message-Id: <20240501024316.1767971-31-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -94,48 +97,38 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Michael Trimarchi <michael@amarulasolutions.com>
+Cc: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Raffaele RECALCATI <raffaele.recalcati@bticino.it>
+Cc: Simone CIANNI <simone.cianni@bticino.it>
 ---
- board/bsh/imx6ulz_smm_m2/imx6ulz_smm_m2.c | 1 -
- board/bsh/imx6ulz_smm_m2/spl.c            | 1 -
- board/bsh/imx8mn_smm_s2/imx8mn_smm_s2.c   | 1 -
- 3 files changed, 3 deletions(-)
+ board/bticino/mamoj/mamoj.c | 1 -
+ board/bticino/mamoj/spl.c   | 1 -
+ 2 files changed, 2 deletions(-)
 
-diff --git a/board/bsh/imx6ulz_smm_m2/imx6ulz_smm_m2.c b/board/bsh/imx6ulz_smm_m2/imx6ulz_smm_m2.c
-index c82eabbfbea1..c03e390762a9 100644
---- a/board/bsh/imx6ulz_smm_m2/imx6ulz_smm_m2.c
-+++ b/board/bsh/imx6ulz_smm_m2/imx6ulz_smm_m2.c
-@@ -14,7 +14,6 @@
- #include <asm/mach-imx/boot_mode.h>
- #include <asm/global_data.h>
- #include <asm/gpio.h>
--#include <common.h>
- #include <env.h>
- #include <linux/sizes.h>
- 
-diff --git a/board/bsh/imx6ulz_smm_m2/spl.c b/board/bsh/imx6ulz_smm_m2/spl.c
-index 5b4812e129e3..724841b57456 100644
---- a/board/bsh/imx6ulz_smm_m2/spl.c
-+++ b/board/bsh/imx6ulz_smm_m2/spl.c
-@@ -1,6 +1,5 @@
- // SPDX-License-Identifier: GPL-2.0+
- 
--#include <common.h>
- #include <cpu_func.h>
- #include <hang.h>
- #include <init.h>
-diff --git a/board/bsh/imx8mn_smm_s2/imx8mn_smm_s2.c b/board/bsh/imx8mn_smm_s2/imx8mn_smm_s2.c
-index 0ebf208be82a..c99896873991 100644
---- a/board/bsh/imx8mn_smm_s2/imx8mn_smm_s2.c
-+++ b/board/bsh/imx8mn_smm_s2/imx8mn_smm_s2.c
-@@ -3,7 +3,6 @@
-  * Copyright 2021 Collabora Ltd.
+diff --git a/board/bticino/mamoj/mamoj.c b/board/bticino/mamoj/mamoj.c
+index c9da42b43bf5..71497b8ab1e8 100644
+--- a/board/bticino/mamoj/mamoj.c
++++ b/board/bticino/mamoj/mamoj.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2018 Jagan Teki <jagan@amarulasolutions.com>
   */
  
 -#include <common.h>
+ #include <init.h>
  #include <asm/arch/sys_proto.h>
- #include <env.h>
+ #include <asm/global_data.h>
+diff --git a/board/bticino/mamoj/spl.c b/board/bticino/mamoj/spl.c
+index 883b7f4133b9..59b7c24ccc9a 100644
+--- a/board/bticino/mamoj/spl.c
++++ b/board/bticino/mamoj/spl.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2018 Jagan Teki <jagan@amarulasolutions.com>
+  */
  
+-#include <common.h>
+ #include <init.h>
+ #include <serial.h>
+ #include <spl.h>
 -- 
 2.34.1
 
