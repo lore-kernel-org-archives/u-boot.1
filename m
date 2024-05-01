@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FCCBC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:10:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85565C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:10:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 142E688CA3;
-	Wed,  1 May 2024 04:46:00 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 718AE88CDE;
+	Wed,  1 May 2024 04:46:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SRB4H4Fw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QLttEeoc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F31A688CCB; Wed,  1 May 2024 04:45:58 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id EE90F88CD5; Wed,  1 May 2024 04:45:59 +0200 (CEST)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7BA088CCC
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:56 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DCFEE88CA6
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-78edc3e80e6so498634385a.2
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:56 -0700 (PDT)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-790e7c02430so293819185a.0
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531555; x=1715136355; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531556; x=1715136356; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=J7Qg/QlN5CUUvFO/Zu3U9K7TnQanU+rtN340J0cVQVw=;
- b=SRB4H4FwSIAOzL8PqyKvVv0xkl/Y8MgiFXslaq4WiJVux7/as1OYjpjRl/Xbe2V2OG
- zNEgVI2fmKZQqIKNRPpjksZ/YG0WuFAsHeYNU2bxorbOOGqU070A02h3mMtCCv3vUS72
- fQWxfbTLaCv4eAbv3pYDxlrdsEBfV5BTZYiNw=
+ bh=x+kl3HH4WbsmqWJHeZEObxxcbddRf0ewmmosjv7iqtM=;
+ b=QLttEeocTBa3AZxLiRYK8DvCMMllTQGybSiRy4HUKkKjOrKWMHcPZ5ifQ3TXCX0Dp3
+ 0w38V5bgwTQR6lf4+y9wtH/aZl+ptAbtwiH8roM9x4xdbhkY/2oOgNZ+Wxyfn7+Jwa06
+ MzWxUh5QR7fPQTbum1h2QUDFRxuv4JialvftE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531555; x=1715136355;
+ d=1e100.net; s=20230601; t=1714531556; x=1715136356;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=J7Qg/QlN5CUUvFO/Zu3U9K7TnQanU+rtN340J0cVQVw=;
- b=Hh/dGVJMCUpeyzbWeHh3YRmeTwrEGMOvVrHBFeb0o1AHW0xV5n0UO2twJZpVmLmd7i
- cQ4HgNopo2UEkewcLAzYa0j4VubV94rtXD9jm33AmVZ4nD5QB8m3oLHjmzsYf1CQDl+x
- PcG8RqNi8o720eYJa9vg5aK7qWgf+LuDux1zFwi3UcB66YJU93tsXerxAnWPzQ5lQWtu
- TjLq24lCrCm1YdSHI+Ar7Qk0A2piSWObb107da6fh+XRujMWkipHuaBvQKw4H6uUtLYT
- xYrT645NUVnRqgriiH5eA5E0StI2WXTPeS769dIEQwJNqH0SEkKTFZ+6sr1ObwRbhK/b
- n+LQ==
-X-Gm-Message-State: AOJu0YyHtVfLc8PhYxYS8hPB6HO7zPzGsNw91eSYnZ0Bxk0hMacQmac/
- rB5RY67Hde6LxloQPdt8GzAEYz6/9mOiQR9pv5DJPtx1EVEKf2EF6iQEIo5MxcJsYl5/br2OP5Q
- 4zJgmgD68
-X-Google-Smtp-Source: AGHT+IFHg2jxx+P/GW4sMN2JezhKKZtXAQC1l6x61HC17WJEUPg4zvShAZtKPWNCRN+0aaqkRSwBeA==
-X-Received: by 2002:a05:6214:2489:b0:6a0:6843:b52c with SMTP id
- gi9-20020a056214248900b006a06843b52cmr1567154qvb.7.1714531555681; 
- Tue, 30 Apr 2024 19:45:55 -0700 (PDT)
+ bh=x+kl3HH4WbsmqWJHeZEObxxcbddRf0ewmmosjv7iqtM=;
+ b=Ecbd2C/CvQkAzKlsNoqkEkCTsHDbUZs72H/4rE3kfCYiyHByW3tuDKq3Z/6ifxu4Pg
+ STTTmPVFL88nL7fKJ8Qd8OFp7cyTvpXc9w8ry7vr8anzfUe5yZrh7SyxtoLjGrYkie6N
+ tNItqcnV09K0XFBcf9kSJd07g3/MEdHg91j9l9NNoLDT9GLHdd6hwXHrnrSnH6NGk/V/
+ cZ+w5edTosxoig4Mvy4lfwpQjLCb5gbdLY1dwvYncn2NmXMaAlMlGJl3SB9iBzDCHVzh
+ f14hr52t4uIUGg8IZ52ubEQ0NmHsHlC5jiLb15DmhSm1HzVEG/3auzI7mDf94OxvZF0+
+ YLdg==
+X-Gm-Message-State: AOJu0YzYJWGaGofdirB7X2UFLv3G1ICOZjtQiWV0+MlvQiS4550YcczL
+ DI/mHqAi+gh9yU8KScHK4osKFqhinkADZ2mE5Ri63jdY1M4bGczZp8Qzj+rU8e6WZ4lPGEwCVUo
+ 1D+i0sDYG
+X-Google-Smtp-Source: AGHT+IGhqRzkH/3iGfhiwc1GaF8kA8qAxXUYEQns/8P4oupCL5bKvLRjgc0e8Laz7DU59mD0XYRzYQ==
+X-Received: by 2002:a05:6214:4116:b0:6a0:817f:7275 with SMTP id
+ kc22-20020a056214411600b006a0817f7275mr1113236qvb.34.1714531556499; 
+ Tue, 30 Apr 2024 19:45:56 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
  p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:45:55 -0700 (PDT)
+ Tue, 30 Apr 2024 19:45:56 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>
-Subject: [PATCH 138/149] board: tplink: Remove <common.h> and add needed
- includes
-Date: Tue, 30 Apr 2024 20:43:05 -0600
-Message-Id: <20240501024316.1767971-138-trini@konsulko.com>
+Cc: Markus Niebel <Markus.Niebel@tq-group.com>
+Subject: [PATCH 139/149] board: tq: Remove <common.h> and add needed includes
+Date: Tue, 30 Apr 2024 20:43:06 -0600
+Message-Id: <20240501024316.1767971-139-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -95,23 +94,49 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Marek Vasut <marex@denx.de>
+Cc: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
- board/tplink/wdr4300/wdr4300.c | 1 -
- 1 file changed, 1 deletion(-)
+ board/tq/tqma6/tqma6.c      | 1 -
+ board/tq/tqma6/tqma6_mba6.c | 1 -
+ board/tq/tqma6/tqma6_wru4.c | 1 -
+ 3 files changed, 3 deletions(-)
 
-diff --git a/board/tplink/wdr4300/wdr4300.c b/board/tplink/wdr4300/wdr4300.c
-index f2de039b6b47..3ae0dc4ecd73 100644
---- a/board/tplink/wdr4300/wdr4300.c
-+++ b/board/tplink/wdr4300/wdr4300.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2016 Marek Vasut <marex@denx.de>
-  */
+diff --git a/board/tq/tqma6/tqma6.c b/board/tq/tqma6/tqma6.c
+index 1c2228c77ad0..92142c10ae5a 100644
+--- a/board/tq/tqma6/tqma6.c
++++ b/board/tq/tqma6/tqma6.c
+@@ -21,7 +21,6 @@
+ #include <asm/io.h>
+ #include <asm/mach-imx/mxc_i2c.h>
+ #include <asm/mach-imx/spi.h>
+-#include <common.h>
+ #include <fsl_esdhc_imx.h>
+ #include <linux/libfdt.h>
+ #include <i2c.h>
+diff --git a/board/tq/tqma6/tqma6_mba6.c b/board/tq/tqma6/tqma6_mba6.c
+index 52851dd5b55e..877539e359e2 100644
+--- a/board/tq/tqma6/tqma6_mba6.c
++++ b/board/tq/tqma6/tqma6_mba6.c
+@@ -20,7 +20,6 @@
+ #include <asm/gpio.h>
+ #include <asm/mach-imx/mxc_i2c.h>
  
 -#include <common.h>
- #include <init.h>
- #include <asm/io.h>
- #include <asm/addrspace.h>
+ #include <fsl_esdhc_imx.h>
+ #include <linux/libfdt.h>
+ #include <malloc.h>
+diff --git a/board/tq/tqma6/tqma6_wru4.c b/board/tq/tqma6/tqma6_wru4.c
+index 5d239913fc5b..21c710188e09 100644
+--- a/board/tq/tqma6/tqma6_wru4.c
++++ b/board/tq/tqma6/tqma6_wru4.c
+@@ -23,7 +23,6 @@
+ #include <asm/mach-imx/boot_mode.h>
+ #include <asm/mach-imx/mxc_i2c.h>
+ 
+-#include <common.h>
+ #include <fsl_esdhc_imx.h>
+ #include <linux/libfdt.h>
+ #include <malloc.h>
 -- 
 2.34.1
 
