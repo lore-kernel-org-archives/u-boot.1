@@ -4,47 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31A8EC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 14:18:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DFC1C10F1A
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 14:19:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 657D2886AA;
-	Wed,  1 May 2024 16:18:41 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id CB25B886DC;
+	Wed,  1 May 2024 16:19:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D819E886DC; Wed,  1 May 2024 16:18:40 +0200 (CEST)
+ id 3939088A77; Wed,  1 May 2024 16:19:38 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53DDB88690
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 16:18:36 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id D598088690
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 16:19:35 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 441EIMfS001717;
- Wed, 1 May 2024 22:18:22 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 441EJNo2001961;
+ Wed, 1 May 2024 22:19:23 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
  with Microsoft SMTP Server id 14.3.498.0;
- Wed, 1 May 2024 22:18:21 +0800
-Date: Wed, 1 May 2024 22:18:19 +0800
+ Wed, 1 May 2024 22:19:22 +0800
+Date: Wed, 1 May 2024 22:19:20 +0800
 From: Leo Liang <ycliang@andestech.com>
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 CC: Rick Chen <rick@andestech.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH 1/2] cmd: sbi: add Supervisor Software Events extension
-Message-ID: <ZjJPK-dI2fab0UiW@swlinux02>
+Subject: Re: [PATCH 2/2] cmd: sbi: add coreboot and oreboot implementation IDs
+Message-ID: <ZjJPaGw2WPAuNsBI@swlinux02>
 References: <20240417140128.100372-1-heinrich.schuchardt@canonical.com>
+ <20240417140128.100372-2-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240417140128.100372-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20240417140128.100372-2-heinrich.schuchardt@canonical.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 441EIMfS001717
+X-MAIL: Atcsqr.andestech.com 441EJNo2001961
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,14 +62,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, Apr 17, 2024 at 04:01:27PM +0200, Heinrich Schuchardt wrote:
-> OpenSBI has implemented the Supervisor Software Events Extension.
-> Allow detecting it in the sbi command.
+On Wed, Apr 17, 2024 at 04:01:28PM +0200, Heinrich Schuchardt wrote:
+> Let the sbi command detect the coreboot and oreboot SBI Implementation IDs
+> defined in SBI specification v2.0.
 > 
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  arch/riscv/include/asm/sbi.h | 1 +
->  cmd/riscv/sbi.c              | 1 +
->  2 files changed, 2 insertions(+)
+>  cmd/riscv/sbi.c | 2 ++
+>  1 file changed, 2 insertions(+)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
