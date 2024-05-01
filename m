@@ -4,47 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97BB1C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 14:33:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 483EAC4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 14:37:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11DB988AE6;
-	Wed,  1 May 2024 16:33:12 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id B878787E88;
+	Wed,  1 May 2024 16:37:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=andestech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AAED88B22; Wed,  1 May 2024 16:33:11 +0200 (CEST)
+ id 3E5D187E9D; Wed,  1 May 2024 16:37:37 +0200 (CEST)
 Received: from Atcsqr.andestech.com (60-248-80-70.hinet-ip.hinet.net
  [60.248.80.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 18C0688A86
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 16:33:08 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A48FC87E47
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 16:37:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none)
  header.from=andestech.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ycliang@andestech.com
 Received: from mail.andestech.com (ATCPCS16.andestech.com [10.0.1.222])
- by Atcsqr.andestech.com with ESMTP id 441EX4Ng007373
- for <u-boot@lists.denx.de>; Wed, 1 May 2024 22:33:04 +0800 (+08)
+ by Atcsqr.andestech.com with ESMTP id 441EbNhA009316;
+ Wed, 1 May 2024 22:37:23 +0800 (+08)
  (envelope-from ycliang@andestech.com)
 Received: from swlinux02 (10.0.15.183) by ATCPCS16.andestech.com (10.0.1.222)
  with Microsoft SMTP Server id 14.3.498.0;
- Wed, 1 May 2024 22:33:01 +0800
-Date: Wed, 1 May 2024 22:32:59 +0800
+ Wed, 1 May 2024 22:37:20 +0800
+Date: Wed, 1 May 2024 22:37:17 +0800
 From: Leo Liang <ycliang@andestech.com>
-To: Yu Chien Peter Lin <peterlin@andestech.com>
-CC: <tim609@andestech.com>, <randolph@andestech.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH] riscv: andesv5: Set default cache line size to 64-bytes
-Message-ID: <ZjJSm0iDX4ZhiWz8@swlinux02>
-References: <20240411092945.777695-1-peterlin@andestech.com>
+To: Kongyang Liu <seashell11234455@gmail.com>
+CC: <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH 3/3] configs: milkv_duo: Add sysreset configs
+Message-ID: <ZjJTnQNSwo9o7HtA@swlinux02>
+References: <20240416075254.13729-1-seashell11234455@gmail.com>
+ <20240416075254.13729-4-seashell11234455@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20240411092945.777695-1-peterlin@andestech.com>
+In-Reply-To: <20240416075254.13729-4-seashell11234455@gmail.com>
 User-Agent: Mutt/2.2.10 (e0e92c31) (2023-03-25)
 X-Originating-IP: [10.0.15.183]
 X-DNSRBL: 
-X-MAIL: Atcsqr.andestech.com 441EX4Ng007373
+X-MAIL: Atcsqr.andestech.com 441EbNhA009316
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -61,14 +62,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Apr 11, 2024 at 05:29:45PM +0800, Yu Chien Peter Lin wrote:
-> The instruction and data cache line sizes of Andes core
-> are 64-byte. Select SYS_CACHE_SHIFT_6 for RISCV_NDS so
-> the SYS_CACHELINE_SIZE is enabled with a default value.
+On Tue, Apr 16, 2024 at 03:52:40PM +0800, Kongyang Liu wrote:
+> Add sysreset configs as well as poweroff and reset commands for Sophgo
+> Milk-V Duo board.
 > 
-> Signed-off-by: Yu Chien Peter Lin <peterlin@andestech.com>
+> Signed-off-by: Kongyang Liu <seashell11234455@gmail.com>
 > ---
->  arch/riscv/cpu/andesv5/Kconfig | 1 +
->  1 file changed, 1 insertion(+)
+> 
+>  configs/milkv_duo_defconfig | 3 +++
+>  1 file changed, 3 insertions(+)
 
 Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
