@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3A7DC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:59:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80379C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:59:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DB3B88BD5;
-	Wed,  1 May 2024 04:45:01 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0B6EA88BEB;
+	Wed,  1 May 2024 04:45:02 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ptBh8jRv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PefsK75V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6546488BE0; Wed,  1 May 2024 04:44:59 +0200 (CEST)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 174CC88BD7; Wed,  1 May 2024 04:45:01 +0200 (CEST)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 26BD088BB8
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3878A88BD2
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-78ecd752a7cso452808085a.0
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:57 -0700 (PDT)
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6a0ce3e823fso13799386d6.1
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531496; x=1715136296; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531497; x=1715136297; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I7kj5tbMvlnf0me+DqpwkDFRnw0Rpi4QYVr3oktRHlk=;
- b=ptBh8jRvLsR9YMej+UvLqfTY1wPxKddRXjupH87+kuZ3wAPnTLSTcMuSGnwLS6QQMB
- i57/NT9bJVajrEmPD/IuFWj98gqc68/T06SV4WIjNQHukH0k5PjKMRFuuGU2KUitaU0c
- e7SOv2t5rfve8DU3XKO/FLv8LDisS8gLKsslQ=
+ bh=/v3DmG/TLXfqSSG4LwHHm4mixtKFy3QlZ0i26hne44I=;
+ b=PefsK75VT8qT+zOKte+ymlqEEKk7S/L3L9aVEH+QLRyePrM/BS8Q/M2BJ5iIiKQ1Qg
+ iXc9w0+dZ29CeKYoOokLtDN5QsbTfuYyy1HxmFqLGs4K25Zxv11Ve9ZGsSIiyYsFbRsn
+ lxa+UrDvcUITaeINZzoCl1h8zLsq2xBWa/HtY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531496; x=1715136296;
+ d=1e100.net; s=20230601; t=1714531497; x=1715136297;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=I7kj5tbMvlnf0me+DqpwkDFRnw0Rpi4QYVr3oktRHlk=;
- b=ikzTXNtDopbrbbjXCkSMutPvpvOa/9C2KWN9MfEWzK3YUufjAbNHRKz9MJUgOTCZNT
- CaI6wT2KOLFUmEObsHjxu4jQDHQvA/geLWz02ftUI5iEUPABISKSUHpoXEJD3oy6XoiR
- Lut0MAedFXxxZo52/Zd5sdAvXkag1zkLm+f0zIk7wxj0Sph8ctCOa2m09059acVTl9m1
- +DbFRcocKZSS2l3uzxKz4xMW7Tx/uPnyFs+t/BNygeJHJOHpAkRAUeLSskGJ1ZdEZ8rB
- wLxecQgr84bOY38QvLITodcvxcGGmGvbsYf/KuvjC19mnRI9Am0F0t4HcgaXllu+y2FL
- 9HBg==
-X-Gm-Message-State: AOJu0YxrDhTfkYYwlTvmfViK3Lpj4/vd5zQonlb+MnfOox0y2RnTbFl6
- 3ozw3rCtWvDJexY6EQvt89g9avALrSyGahJH4CL8Os/Yeitccs/e2DabY9ufq/iBvIJ79WucWmL
- MWOEpBQ==
-X-Google-Smtp-Source: AGHT+IHu7VWyn/mIpVFjSfmomNWyJ8vZr9V0sQCGOoAg6l1cVs7krul2F5gb2P6HT5CEkrsHvthrPA==
-X-Received: by 2002:a05:6214:dc9:b0:6a0:d290:693b with SMTP id
- 9-20020a0562140dc900b006a0d290693bmr1408123qvt.50.1714531495802; 
- Tue, 30 Apr 2024 19:44:55 -0700 (PDT)
+ bh=/v3DmG/TLXfqSSG4LwHHm4mixtKFy3QlZ0i26hne44I=;
+ b=KU2NYNpF6koP2DeHkoIs6yu/2FxcTfL/BtCkhxFWMHC+7SYMwXc6K1hQkd28ykC/zV
+ 2Dxp8MBv1+FvXbt/6p74pNtB0E8h28eh/uTQA8+1DzUC5FiqNbszicx4EihBAFVbY+tX
+ kOaB9tJfmCYuIW2dvh2xF9eLe51BdNWEPZVykfUqNMbHAXKUmSh0cjom16j0LxhTfWLu
+ 0CpXC9fy4tD+g+TMnQK1jGP4A5fKX6+Uo0reuYlzehw31/2x0e04ZdC4TB8QN7LOkU7m
+ C6Z0nb5BfsyQsPDKtbe+qpgYyR5gGGLdWHzyEg4AD92SpQXFk8lyThxk5Ut/1DN5QFlp
+ scbw==
+X-Gm-Message-State: AOJu0YxWjFH8Ke5m9+haLxvif7v39yzZSvhhbTHCcgKEjbvSk+JA111t
+ QnwuXvSgWqyTwyoo26Jn9lBdaz6p87jaXmQxOUSvO4jY/83/vsIKiugHkBTZGn/eM2MI3BMyTrj
+ CRVZRPQ==
+X-Google-Smtp-Source: AGHT+IGaST9WrEOyqTLApH0njE8pvYRozvx90NEa84jyG5ESG6FJ/6TfId56dmHcWXPsI5J2WIpHGQ==
+X-Received: by 2002:a05:6214:2a49:b0:6a0:af07:1141 with SMTP id
+ jf9-20020a0562142a4900b006a0af071141mr1165140qvb.65.1714531496842; 
+ Tue, 30 Apr 2024 19:44:56 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.54
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:44:55 -0700 (PDT)
+ Tue, 30 Apr 2024 19:44:56 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: David Lechner <david@lechnology.com>
-Subject: [PATCH 083/149] board: lego: Remove <common.h> and add needed includes
-Date: Tue, 30 Apr 2024 20:42:10 -0600
-Message-Id: <20240501024316.1767971-83-trini@konsulko.com>
+Cc: Paul Kocialkowski <contact@paulk.fr>
+Subject: [PATCH 084/149] board: lg: Remove <common.h> and add needed includes
+Date: Tue, 30 Apr 2024 20:42:11 -0600
+Message-Id: <20240501024316.1767971-84-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -94,24 +94,23 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: David Lechner <david@lechnology.com>
+Cc: Paul Kocialkowski <contact@paulk.fr>
 ---
- board/lego/ev3/legoev3.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/lg/sniper/sniper.c | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/board/lego/ev3/legoev3.c b/board/lego/ev3/legoev3.c
-index 43afe593c78b..1a153668a43c 100644
---- a/board/lego/ev3/legoev3.c
-+++ b/board/lego/ev3/legoev3.c
-@@ -12,7 +12,7 @@
-  * Copyright (C) 2007 Sergey Kubushyn <ksi@koi8.net>
+diff --git a/board/lg/sniper/sniper.c b/board/lg/sniper/sniper.c
+index 86032d7fcdf7..88d5d0881433 100644
+--- a/board/lg/sniper/sniper.c
++++ b/board/lg/sniper/sniper.c
+@@ -6,7 +6,6 @@
   */
  
+ #include <config.h>
 -#include <common.h>
-+#include <config.h>
+ #include <dm.h>
  #include <env.h>
- #include <i2c.h>
- #include <init.h>
+ #include <fastboot.h>
 -- 
 2.34.1
 
