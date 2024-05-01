@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9E54C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:01:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A71D1C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:01:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4703F87F36;
+	by phobos.denx.de (Postfix) with ESMTP id A7DCE88C0C;
 	Wed,  1 May 2024 04:45:12 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="huYOnIEX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KTrCNVRT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42F0D88C08; Wed,  1 May 2024 04:45:11 +0200 (CEST)
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
- [IPv6:2607:f8b0:4864:20::732])
+ id 5A99A88A98; Wed,  1 May 2024 04:45:11 +0200 (CEST)
+Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
+ [IPv6:2607:f8b0:4864:20::f36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21B4A88A98
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 29C6688BD7
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x732.google.com with SMTP id
- af79cd13be357-78edc3ad5fdso41178985a.0
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:09 -0700 (PDT)
+Received: by mail-qv1-xf36.google.com with SMTP id
+ 6a1803df08f44-6a0b4622ea0so21040996d6.2
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531507; x=1715136307; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531505; x=1715136305; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RnJRse7bYaBHcl7yPlGlqjnKczxGxIAJcARhADVMusU=;
- b=huYOnIEXRTvtHz0ef6IgQA2jIifCtBnPFRY68Jup5Qr84p6m6zgbmiPqDoujxSkbIZ
- LcFa8+f7B5SiZ+v+llihYWtlApMpDOM2GPWBdEouF5N6w2hl3oXaSsJxA+DeGpQCDLsm
- IMuFxh7qLwWy56BHK95Y2wgtDgPDYQp2tl3/c=
+ bh=zQ2+o6aswbiuOLfrHjT92vhFRYT7Eicqk1zLTJn2aSs=;
+ b=KTrCNVRTWbJb/w1OxYd0XSCCGXOsFM7Zl9+0c/fwkpRc+ECJIbMsyFoAkJJWIwiH+A
+ VfpuGNSbzs3vtB03XWN3D6KbVAbS78AykRPuMJG1wxAQZAJmO0kc/blEYws2tdZ64D7Q
+ sASXxNauvoKZdbSkUeQyExCZmW5eBp6buXP0I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531507; x=1715136307;
+ d=1e100.net; s=20230601; t=1714531505; x=1715136305;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RnJRse7bYaBHcl7yPlGlqjnKczxGxIAJcARhADVMusU=;
- b=MGMoa9yqkPDd2DhpqB1oVVtSjBDZpyLoSIdWETCgO30ncHfmd1rieus66lcYbrZeMO
- DZhk673Bp62mzq7NOrZACW6b9qMtL2l5QWleb2PFu9Cr/JwL0YKTte7FCRTnEGQoO3k7
- eJwC9lXkcEMQFzTFP0+DhcA4eVMHW6IVs6O/xCLmMKk1eDgfOK7u3WgLSwGKj8sIEh4I
- 2esc8i4xU7Gs7wAcsgO/bxjEwPv4oquA53qugIrNXRRSf0JiRp4u2716o5mgM9qRu4Yo
- /IdkNm0bKuiqdoNUy05MdgLGkT7Lnwfqkp1is4o9LFenBA2Kv8EGa7dvTSQlZthvLtQL
- aVnw==
-X-Gm-Message-State: AOJu0YycPUwI/+kf6drhRWiA9fg0HvF25dbSjRB7UhanK9h+Sz3o5/GJ
- OPb+TPdT0GAkK7WutegpGPTHC3MGS3mTuvBJQoohDzPKHk6t0WuFu/tLmmOCAFCdm2iWO0DvnWI
- 6anzYo6gW
-X-Google-Smtp-Source: AGHT+IESfSR5F3mU1gIdAOaXfy6C7tMe+JRIHFEZeLi2x17+nLXyxi63R4u8xGR9a2gnO0DMTZ9Mvw==
-X-Received: by 2002:a05:620a:1a8e:b0:790:eed5:53f with SMTP id
- bl14-20020a05620a1a8e00b00790eed5053fmr7658081qkb.1.1714531507289; 
- Tue, 30 Apr 2024 19:45:07 -0700 (PDT)
+ bh=zQ2+o6aswbiuOLfrHjT92vhFRYT7Eicqk1zLTJn2aSs=;
+ b=Tiz4feeYCi9p9IIkm1VMkbqJ50fDZkD6uBsEyqmbQ6RbEwx6bEzacpoApTzRZQ/qGJ
+ DK14lhicz050UnRkCTGiPppNuEY6cgvHhtDmfhx9LIWmR6I1Z/Gy7t7xPLZ/4ghSTaCZ
+ pa/0NIBSBQq1rVmPFnS7YNCQq6w8HFKOe24A6jZvOjUQ7n1J8pk+Td2z3YHHpQCgi8gV
+ FjB/wV1cA0uhkkygJJ45XAeG7E8ejwiRjVNJCnQj6KTMjLdZMUfiJX57flyhzoBLZHS2
+ W/OtwfW7FNQfno8JjuXx8UF3pdVd8pXdP6B6pBAHixRxZRhBdBrOQWvEpc/lDin2UcZ0
+ U3tw==
+X-Gm-Message-State: AOJu0YyJgnMbpGIH8Ym925la0DLZxhuSfMgAPVAWEN8LQahQJSmWPAf0
+ ReeFshXvoNswLp3XAaWo3JN13Kv4tATeYoTv+OX1l7ajGTpwibVFXXMAspBoinXB57mqJU8IbI9
+ DZuTuHmfZ
+X-Google-Smtp-Source: AGHT+IFAa9/8XiCQ69VI5OCNd4+dDkMwACa6FWqpfB8EngiWPri1PNjB+amwn/ZMs08IUlNx6RDtAA==
+X-Received: by 2002:a05:6214:d89:b0:69b:6e98:2f33 with SMTP id
+ e9-20020a0562140d8900b0069b6e982f33mr1207816qve.39.1714531504852; 
+ Tue, 30 Apr 2024 19:45:04 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.06
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:45:06 -0700 (PDT)
+ Tue, 30 Apr 2024 19:45:04 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Gregory CLEMENT <gregory.clement@bootlin.com>,
- Lars Povlsen <lars.povlsen@microchip.com>,
- Horatiu Vultur <horatiu.vultur@microchip.com>,
- Simon Glass <sjg@chromium.org>
-Subject: [PATCH 094/149] board: mscc: Remove <common.h> and add needed includes
-Date: Tue, 30 Apr 2024 20:42:21 -0600
-Message-Id: <20240501024316.1767971-94-trini@konsulko.com>
+Cc: "Lukas F. Hartmann" <lukas@mntre.com>,
+	Patrick Wildt <patrick@blueri.se>
+Subject: [PATCH 092/149] board: mntre: Remove <common.h> and add needed
+ includes
+Date: Tue, 30 Apr 2024 20:42:19 -0600
+Message-Id: <20240501024316.1767971-92-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -97,96 +96,38 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Gregory CLEMENT <gregory.clement@bootlin.com>
-Cc: Lars Povlsen <lars.povlsen@microchip.com>
-Cc: Horatiu Vultur <horatiu.vultur@microchip.com>
-Cc: Simon Glass <sjg@chromium.org>
+Cc: "Lukas F. Hartmann" <lukas@mntre.com>
+Cc: Patrick Wildt <patrick@blueri.se>
 ---
- board/mscc/common/spi.c      | 1 -
- board/mscc/jr2/jr2.c         | 2 +-
- board/mscc/luton/luton.c     | 2 +-
- board/mscc/ocelot/ocelot.c   | 2 +-
- board/mscc/serval/serval.c   | 2 +-
- board/mscc/servalt/servalt.c | 2 +-
- 6 files changed, 5 insertions(+), 6 deletions(-)
+ board/mntre/imx8mq_reform2/imx8mq_reform2.c | 1 -
+ board/mntre/imx8mq_reform2/spl.c            | 2 +-
+ 2 files changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/board/mscc/common/spi.c b/board/mscc/common/spi.c
-index 45b9649336db..cb43ad6811e7 100644
---- a/board/mscc/common/spi.c
-+++ b/board/mscc/common/spi.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2018 Microsemi Coprporation
+diff --git a/board/mntre/imx8mq_reform2/imx8mq_reform2.c b/board/mntre/imx8mq_reform2/imx8mq_reform2.c
+index be5c5060a2a0..ebc490e24b1c 100644
+--- a/board/mntre/imx8mq_reform2/imx8mq_reform2.c
++++ b/board/mntre/imx8mq_reform2/imx8mq_reform2.c
+@@ -4,7 +4,6 @@
+  * Copyright (C) 2018, Boundary Devices <info@boundarydevices.com>
   */
  
 -#include <common.h>
- #include <asm/io.h>
- #include <spi.h>
- #include <linux/bitops.h>
-diff --git a/board/mscc/jr2/jr2.c b/board/mscc/jr2/jr2.c
-index 84b95be648d7..acaeb4680223 100644
---- a/board/mscc/jr2/jr2.c
-+++ b/board/mscc/jr2/jr2.c
-@@ -3,7 +3,7 @@
-  * Copyright (c) 2018 Microsemi Corporation
+ #include <env.h>
+ #include <init.h>
+ #include <malloc.h>
+diff --git a/board/mntre/imx8mq_reform2/spl.c b/board/mntre/imx8mq_reform2/spl.c
+index 5120c628b91a..48a783593b6e 100644
+--- a/board/mntre/imx8mq_reform2/spl.c
++++ b/board/mntre/imx8mq_reform2/spl.c
+@@ -5,7 +5,7 @@
+  * SPDX-License-Identifier:	GPL-2.0+
   */
  
 -#include <common.h>
 +#include <config.h>
+ #include <hang.h>
  #include <image.h>
  #include <init.h>
- #include <asm/io.h>
-diff --git a/board/mscc/luton/luton.c b/board/mscc/luton/luton.c
-index 48170b3aa12d..f9ea26ebc5c6 100644
---- a/board/mscc/luton/luton.c
-+++ b/board/mscc/luton/luton.c
-@@ -3,7 +3,7 @@
-  * Copyright (c) 2018 Microsemi Corporation
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <image.h>
- #include <init.h>
- #include <asm/global_data.h>
-diff --git a/board/mscc/ocelot/ocelot.c b/board/mscc/ocelot/ocelot.c
-index d69db04de664..4cec25b3976c 100644
---- a/board/mscc/ocelot/ocelot.c
-+++ b/board/mscc/ocelot/ocelot.c
-@@ -3,7 +3,7 @@
-  * Copyright (c) 2018 Microsemi Corporation
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <image.h>
- #include <init.h>
- #include <log.h>
-diff --git a/board/mscc/serval/serval.c b/board/mscc/serval/serval.c
-index 99d5f5be657e..951c24dd286b 100644
---- a/board/mscc/serval/serval.c
-+++ b/board/mscc/serval/serval.c
-@@ -3,7 +3,7 @@
-  * Copyright (c) 2018 Microsemi Corporation
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <image.h>
- #include <init.h>
- #include <asm/global_data.h>
-diff --git a/board/mscc/servalt/servalt.c b/board/mscc/servalt/servalt.c
-index 49993168c237..9055b73ada27 100644
---- a/board/mscc/servalt/servalt.c
-+++ b/board/mscc/servalt/servalt.c
-@@ -3,7 +3,7 @@
-  * Copyright (c) 2018 Microsemi Corporation
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <image.h>
- #include <init.h>
- #include <asm/global_data.h>
 -- 
 2.34.1
 
