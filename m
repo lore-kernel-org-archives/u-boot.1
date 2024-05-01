@@ -4,166 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36311C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 09:38:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15049C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 09:58:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1D0988AB8;
-	Wed,  1 May 2024 11:38:43 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=aspeedtech.com
+	by phobos.denx.de (Postfix) with ESMTP id 395BC88AB4;
+	Wed,  1 May 2024 11:58:25 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=aspeedtech.com header.i=@aspeedtech.com header.b="cbrm25Vz";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xcrrr1ft";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 86E3488AFD; Wed,  1 May 2024 11:38:42 +0200 (CEST)
-Received: from APC01-PSA-obe.outbound.protection.outlook.com
- (mail-psaapc01on2071a.outbound.protection.outlook.com
- [IPv6:2a01:111:f400:feae::71a])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A334688AB8; Wed,  1 May 2024 11:58:24 +0200 (CEST)
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
+ [IPv6:2607:f8b0:4864:20::134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E7FF288AB6
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 11:38:36 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=aspeedtech.com
+ by phobos.denx.de (Postfix) with ESMTPS id 047F18822F
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 11:58:22 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=chiawei_wang@aspeedtech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=SySXqqlTfiXgDt+ia285otRleOt7ccShWL3cCgQAoWenwzd5ddczRh+AGFC4SoE1bgkT2mKJyG8fHJRIONhgXAVC/KyB7kSQ734OKBzIHoB3PoBTTbPBgVozOeNamdfPUEp235HLtHm4+tDyVsGpsbzmB0frZP5Kzn/n0uvgSP9VUXr15gcuavrnvHJ4SLAIo1acBfpw+Bt1uBG0p6zT8D8DAkm9QD1r5RZo8EgfzKE3N5RH+AGh+BxbaeyDTeTl7w1CTOAKmw/WggN1qHRJPKw+67gQdIJgMCWnMr8xAe60j/4yeadkhxhW7Co+tTGSWVJYPqMQV8sAue9OTICAPQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=6fNSnLpwvsUABdPj9SR4NlezEJvAFqj2ar31re4Uo+s=;
- b=YDgN2gUVjSQiX5VJ/3tm6H88lWuBIYouiPpHA5zTL8O3vVjmbOH2u7GcBemE+4OdGZ/4Dt0SfMC5HmCeTHmqyVHFEYk4AyUf4FOBo1IyoRfZP9BAcm/VThvHIPi0uaQMj8USnDXOEgleN0rBRPgEgOOa74zLixLWpQFe/Sp/piA8ayR1QK4Fd0vS08C3r3cdLtBI2AIX5NrwFoFIvLfgoy/UAxgKnHir3OTB97TXf8CAHRIBNbs50mYNWEmtWahuk2lBsYpHt6AmOngG/eqHUw27SsDYSUsLXurxaW1SWmeovSazjRUU9Ze6BVer14vZhmx81J0lWu9TZfEql5p1Ag==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=aspeedtech.com; dmarc=pass action=none
- header.from=aspeedtech.com; dkim=pass header.d=aspeedtech.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aspeedtech.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=6fNSnLpwvsUABdPj9SR4NlezEJvAFqj2ar31re4Uo+s=;
- b=cbrm25VzD6EKfsTgOyzPxxdihvkgxEfqrA3AqM1RsUW3IX3y9jbMjyLhA8cBu8NTe9oJ7aq15CCeXBqitkhpPKMea9oUn1BZU9iH2eZZus2PUEMuCvSye5C3NpxYARq2elxi4Z2RQugg5UwlSk7SPOADbblHEIeqUMpZ6kdZMPHlCbH6LkY3nvw4rQVVVhCCig0H57ocaL/8dtRnIY0bv03RoU7W7s0gqX7UOKXwWh9VCPuhpgoI/h1y6AMyok1lNhFHIn0YsBiPD76BKUD5sAe6aBDSgRHQ8Nsq+GlBimK4wZJCLlZ2m7hccYF7DOx9jbABCZO9rp4Hv4aDFFGLHQ==
-Received: from KL1PR06MB6652.apcprd06.prod.outlook.com (2603:1096:820:f9::5)
- by JH0PR06MB7233.apcprd06.prod.outlook.com (2603:1096:990:94::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7519.36; Wed, 1 May
- 2024 09:38:32 +0000
-Received: from KL1PR06MB6652.apcprd06.prod.outlook.com
- ([fe80::3c13:dd16:cffe:9b68]) by KL1PR06MB6652.apcprd06.prod.outlook.com
- ([fe80::3c13:dd16:cffe:9b68%4]) with mapi id 15.20.7519.035; Wed, 1 May 2024
- 09:38:31 +0000
-From: ChiaWei Wang <chiawei_wang@aspeedtech.com>
-To: Tom Rini <trini@konsulko.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-CC: Ryan Chen <ryan_chen@aspeedtech.com>, BMC-SW <BMC-SW@aspeedtech.com>, Joel
- Stanley <joel@jms.id.au>
-Subject: RE: [PATCH 30/33] arm: aspeed: Remove <common.h> and add needed
- includes
-Thread-Topic: [PATCH 30/33] arm: aspeed: Remove <common.h> and add needed
- includes
-Thread-Index: AQHamwNuOYG9E7jHeUC5jBqhdFK4KLGCIFlA
-Date: Wed, 1 May 2024 09:38:31 +0000
-Message-ID: <KL1PR06MB6652175E97D7676D334E616891192@KL1PR06MB6652.apcprd06.prod.outlook.com>
-References: <20240430133559.1836389-1-trini@konsulko.com>
- <20240430133559.1836389-30-trini@konsulko.com>
-In-Reply-To: <20240430133559.1836389-30-trini@konsulko.com>
-Accept-Language: zh-TW, en-US
-Content-Language: zh-TW
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=aspeedtech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: KL1PR06MB6652:EE_|JH0PR06MB7233:EE_
-x-ms-office365-filtering-correlation-id: e1152129-194b-4147-6184-08dc69c276e1
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230031|1800799015|376005|366007|38070700009;
-x-microsoft-antispam-message-info: =?utf-8?B?WGMySFRWcURGbEhkWjdyWkJ2L0lJSkNlcXhVc0swdGNxSm1CRjVOVHdFZEZL?=
- =?utf-8?B?ZFQ2ckFsOWErclRRT3IzY0JLMUx4ajFpSHJpVDJUZWxUNm1BZ1pNRUhLWUJz?=
- =?utf-8?B?c2x0U05SVW0reGF1TkxoT05sTTdiVm1nS2ZuRUw5YzhJemdoUUdmVTA1ZEtP?=
- =?utf-8?B?Qnk3cHFIMHl0MnFweVhvbmFSbmlaMjcyNjdPQS9oQnQ5cG4ySGNzOXl6U1Zs?=
- =?utf-8?B?YllhVzd2YmtLckdyeW5jUzJKVHFPQWMxeTFUckNrLy9uZTZuWngyT3RLYU9R?=
- =?utf-8?B?d0F4cFNlMUhJL21mNnR0bDl3NVFWZTh6T2RrR3hrRThpVHg0bkVYYTVhSHpV?=
- =?utf-8?B?bXBITGE1ank1emdBM2lxNjA4b21jRG1jRnVaQ1JTcVdBcElOV2lJcjc4OVB6?=
- =?utf-8?B?dzNQZHNaYkl3S3ZzekZqdEdyT3lJOVVnVkN0L0wva0pkcHpseEdOYmFJbjFP?=
- =?utf-8?B?SHdVbkRNeTgrN1ZxUjdNMGhZUWpScmloQjZ4Y3QxNDdEeFVYTi9NNjVKMEZF?=
- =?utf-8?B?c2ZBdEI1WHYvMm1GUythM2JETEt3cDl0RHFYTTc2VmNRYVNxWlc4VnB6SG84?=
- =?utf-8?B?bUdVTHhLQzk2VGNwV0lkRldRTGRSUWw2aFlCZDB4VXZGTEYxSU5NSmdnUk13?=
- =?utf-8?B?WkhSUDhtaWNvejNHS3YwSzNXbUI3MEQ0eE5JKzJYaElFNWRTMFpma01Ucmpu?=
- =?utf-8?B?MTZSdUZmbUdPYWxWdUdvZUR5MlVBS2ljL0hIOVNCYUtkcnRUc3FSVFBCUm1L?=
- =?utf-8?B?VTdhSXllWnZOenpJRlJ2cndMOEdFK1dyU0RYLzRMcUhiQUNwZDBiQUZMcHZM?=
- =?utf-8?B?RGlMOTMzZHVqbnUyRFhBRFFLQnB4YzliWGtBSTB5R0FKQnRQOEpKVVpiYWk1?=
- =?utf-8?B?eXBaMHpOS3BuaFpxV2xDdDFDNjV1NHR5cjIwMzlremN3ZHRYbmRQcFpYcVhX?=
- =?utf-8?B?RjFzK2FCQVJvRnpJek1scDAzTjNCM080d09JYnZoREVRdVlvRFNjbi8rS2ND?=
- =?utf-8?B?R2xGcDlDOUM1QWJoY3dsK3I1elM4aUtNUXdLdmZ5RlJpbWhZVEN2YlZjcURR?=
- =?utf-8?B?Q1BQOGc5aHAvRVdHZGdVRVYyWllzMERVRlhKTmxNRHRoUmJJb1lTSzc5bkV1?=
- =?utf-8?B?L3UzTXpQRy9GWFVLZEEvVEZPK1BSY0tQNmZVSXNrSVFSZC8vR0doVFZsNndM?=
- =?utf-8?B?b0dlMVg5c045MWNpdXBWbWFIbmhkRldFZHpZeDNlVmFqdzFtSjhoY3R1Zy92?=
- =?utf-8?B?NjZqQ29IL0R3MHBob1Z6Wk1oQUdXMzVrQks3N1R1Z1NWYXBpZFlVclBmcE9K?=
- =?utf-8?B?RVpDdlRONHExN2xvRHU5bERsRmtvQnNoeCtlUmRGcWZnOVJURmVyQnNQRllq?=
- =?utf-8?B?OFU1TVBTeUx1UFp5d1hBRXdBSGt3UWRkYkFTczh5ay9DK0Zmb2V4UGRzRzk2?=
- =?utf-8?B?MG80czJVSzQ1NmdoU09XZEY1MmFmT3JRdGh5ajBIdTB3S0lhYlVneC9JUWhM?=
- =?utf-8?B?bXY5N25MZHppdTBzZnFWUmZzSXFUNGw5M2NhY0ovOHBnTXdoWXhEN1FIVzBq?=
- =?utf-8?B?c1J5SDd5MXREM2EyRFNqZkRxNmY2T2dvbUdod3BXeDBYYi8wcjhFbk5sNTVS?=
- =?utf-8?B?UGxtVXhzS2wyRlg2QnBtMHR3Ykg0ODJLdmYrd2hHK0U5M1RNcWdDRTVPanIx?=
- =?utf-8?B?Nm1NdVRjVENXWHJ2YlNEeXE2aFd4OWV2a2FyZ2Yyak9UK2o3ODNySldUUHBN?=
- =?utf-8?B?Uld3cm93UG4zUmxUQ3RxNmhkeVhNVnUwbXBLQmY3VWI2Yi9RSVI5YU5sOUZX?=
- =?utf-8?B?aHorSUZpL1pvWXpLSlk4QT09?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:zh-tw; SCL:1;
- SRV:; IPV:NLI; SFV:NSPM; H:KL1PR06MB6652.apcprd06.prod.outlook.com; PTR:;
- CAT:NONE; SFS:(13230031)(1800799015)(376005)(366007)(38070700009); DIR:OUT;
- SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?WWxyOXVlMHhrZW5XOWJGNkJrQUV2aUQvQTlUNERLcFV1MVFrSGNnamZlOXRw?=
- =?utf-8?B?eDg3V1RSQmd5R0pFZVl2NFV4QnBnSEN0aFR0c1duY2EvTkNQQXpCQ3RTZXpv?=
- =?utf-8?B?MHN6b0toNVdaWGo2UFJOSGY1ZlUza3hsMWtmZ2dyWlJsdFRBU2dNMHFLMXdm?=
- =?utf-8?B?ejhHbkdjdlY1U0IrK25xb1ZYMDZMVnZrUEZVcHpYSTRpTHA2bzFEQW11OEVq?=
- =?utf-8?B?a1gyYjJndlBwVmtuZEk4Qi8ra1NreHVTaTZyM1R6VlZySGVrekpvbW1uOHpx?=
- =?utf-8?B?ck9lRWtQUjU4ejl5NXBPZ0UyTmI2ejBqRGdQM21weUs1Rk9LdDIzTWJDTkl6?=
- =?utf-8?B?S3lJdURXZ25RcTJiVmZSdTAwcXJJcTdqNjJSSi81MHlDNEx1T0J3SFZ3SHA1?=
- =?utf-8?B?ZmRrODc5Q3Q4MStwNjJPLzBJS1hjSjAvc1JuOHZpcXhsTFlYSCtEakdUOXQ3?=
- =?utf-8?B?dlAxcVZrbWUwaHlCY0w0VkwxYWExcWNJQkt5MkhubE5wQ1MzWDdpRVlFRytP?=
- =?utf-8?B?NmZaOE50aHhQeWFBNkcvT1U4UkFiMUo0R2FJbzEzUjh0Z05oSTd4YWJycFdT?=
- =?utf-8?B?aTZBbm5Eb1lzbG9PVk5DcnV0WVlnL3podjY2L3hqeTR4MHZHZkRhMFVGcnRa?=
- =?utf-8?B?d2ZTVUQ4a1dPY09kaFBuRjRlS2RBMldkdmlvQThJelJxYURtYlBUaC9WVzg4?=
- =?utf-8?B?MVpaVWZhcUFiQldZWUhRWENPbmhINXh0Z0dVMFFUQWh1dk9lNXk2NGthSnhj?=
- =?utf-8?B?SlEyOFU5UW1oRk5BMkZQdzlsSGtQdFR2VkZySVNtbWFMM3Away8vTXd5UlVv?=
- =?utf-8?B?Tnh2THhKMDlvcTBHd2pWYWdkYlNmVnFxS1kyQktLeE51N3IrcnFMNzY2VUd2?=
- =?utf-8?B?NHFHMTBVNXRyWU5WNk1kV3MrT1NBS01kNUFvZEtjeFY4TmEvaXRQTzdzRjhD?=
- =?utf-8?B?Z2duRTEwNE5LZGdOZ0VXaHJaSTk5NU5VdnoxYkE1T3JWQVNnNHV4YWJsWEU5?=
- =?utf-8?B?d2FXMGJWSjk2REZHMWRYT2c2RTJQRHMyMzdEVFUrSlZsbEdtTTFBMFJ1Wldq?=
- =?utf-8?B?ZlU3MnZYK1hVa0NPTWlBM2tZNWVyZkNxWnY2WUxxMEMrZVZlZFBlM2dqbHJl?=
- =?utf-8?B?VWlCQjFwck5YWUQ5akhNYTl3L0c0OWF0RjFpQURQTUVkN1laOHRZSUh0MXU3?=
- =?utf-8?B?VVdnaTVxVWp0MUlVUFRJUFJFN05lMUc2SEJRUnNlSlMrWXFRSlhqd1ZqcjlU?=
- =?utf-8?B?blRuZytYTUovUWxvbWtSYi9Hb3d6RzFNOUhPTzR5WlNJV1IwVHYwUk9sWFpG?=
- =?utf-8?B?WlU3UmNVdWhsWTlvYmUrQ0RHenBuYkFsbmNwZ0piLzJ4RTk1cUNkZXp4UzJJ?=
- =?utf-8?B?RzVBTFNFZ2tCK1ZFWlZMVlBsTlBhU2dCTkduRW1TQVN5Sm1tTTRQTTRzcU1Z?=
- =?utf-8?B?VTl6MlIwekhsYk1aTkE5a3JNQkoxdEJEeXNRNGp2WGcybXNUVEVNUnE5a0lm?=
- =?utf-8?B?dDhSMGJkbThIcFZvUW03aytmemlkVEZjcTlvNjRIRkhBL3JKZ2orZGJ0a3J0?=
- =?utf-8?B?N3BySmxPVSsrTGloZ3NmR3d5aW1wVEVzT0NHbllQUEQwVG1QeXZmWXJRUEhp?=
- =?utf-8?B?Zko1SllMTDRjOU9RNEtDTUIySXBSOVQ0UEpuMkFLOXVYazMxUnp0TGFsdWFU?=
- =?utf-8?B?RDR1eC92NGx1d2g5QTdDeTVIMVJRMThCcFdBQjlUa2pTUVI4TXFDaEJCdVpL?=
- =?utf-8?B?T3Y3MDkvSUxSYzZvRnFhS2NFMmpuQWQrL1d0Z0JiTmF5aDJsdFBjSUwvMCt6?=
- =?utf-8?B?K2FmcXFqNERPcVdJV1F2VzJ6VllOWEdzUmo1bXI4NWpjY09HUjlySmtyMnZo?=
- =?utf-8?B?OWhRL01iTDdqb21YUkROTnFuL253Z3czY2dseEVFTjNmaS9RRTl3K0kwUTNP?=
- =?utf-8?B?L3BoZmNtL3VQeDNpZ0Vtcm94VmJMM2VISDYxUWtXYW5Ld014SlUzMHdQblpz?=
- =?utf-8?B?VDhKNHYzY2VJeGl5ZEtOYzRsNDUrS3hwcDBCblZBRzhlNmN2R2VORm9MbytH?=
- =?utf-8?B?SS9qOGtrYStUMU1ZbjBzYVhnVFdPNmZ2clBxYWZsNWFwaVhreTB4eVp3WW1v?=
- =?utf-8?B?dkdzWk5XVTRuMHg3YlZ4SHlGV2FiZEszRUl4ZGtYdW16ZFVmbFNUMnY3anpw?=
- =?utf-8?B?dUE9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=aford173@gmail.com
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-36c5f81dc4bso5970015ab.0
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 02:58:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1714557500; x=1715162300; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=k29SjJg6prXvMBBcnD3IjO/KGbnqnRPKo+REaRge80o=;
+ b=Xcrrr1ftj2O1KyCqB2VS7/W4xsHIO5CU/P1+KLiwjFeq87cyPMytffO24SCE2eptSL
+ 2se8Ar/OogDBcR3Rfara/8X4dxRqzNDXA9zWDyV7oFYGUCfk7H72iPiLFwI2oFi42CEK
+ 6q3nwngMWD2bAX9vd6pDwX3si/2AlrSp/Rv4b+UNrW704IZ8waz2zQywLzCj64xPSGcu
+ gUh0v0MJW+1c/Yeajg3gRves7jQcdhz/V4jsL7atXMNz77ul8G1zOpWf2PJvu5n6Ay+C
+ hlBr65wGiW4p0+tSyzRf9ssuS3U0H6BTL3VUHvEwZ6DKztxHmHHX7XZe+g94nyapv94w
+ TW2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1714557500; x=1715162300;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=k29SjJg6prXvMBBcnD3IjO/KGbnqnRPKo+REaRge80o=;
+ b=rzfk5+Km0soTXEL6CBocTqcbc281pyJioka27FcLur44JJ+EDhf17nWXZlUEuCJhOo
+ YMBctVJojmH/nwLxbT90yxofA82mEGvPAJrcWWP3kmyHhRanUg3dg59Tt9NSpzKI11GJ
+ Dz5A0/uLkYQqm4cnX30N1HVgIv0po3cgEsroLlt9c24O8yxBYgQh6MMQTilQ2LZtR9sL
+ 44vnAskDHafkV9HRL/IvEd6uCoxeGAOUygBl4BI0g9WH85XIAJj5Sbxb6MMkTk+nwJcA
+ MC6RZHfL3eBMz/uF2eljUCZEP3DYmmwa7W8I87W8uyGkSPK1rlCRsxn2NfXkKjkixmRu
+ ynwg==
+X-Gm-Message-State: AOJu0YwpdOn0Jnh55txIsF3JIfV6aO3QwcIQVYQuys5e5GqR2CdSsT/j
+ IDaAUciErpvPmMWvE/A2q8XDxvd0WJvlpmHygxY2kzBeHs2NGksijx+svA==
+X-Google-Smtp-Source: AGHT+IG+Yddi6ZW1sqePL58SWe5XHnQeniDBanWlXH5qCSE4+ODXjZbLbny56pNDado57GnLi4tTkQ==
+X-Received: by 2002:a05:6e02:1c2a:b0:36b:2c9f:425e with SMTP id
+ m10-20020a056e021c2a00b0036b2c9f425emr2416983ilh.4.1714557500005; 
+ Wed, 01 May 2024 02:58:20 -0700 (PDT)
+Received: from aford-System-Version.lan
+ ([2601:447:d002:5be:ad0c:90ac:24d9:a4a8])
+ by smtp.gmail.com with ESMTPSA id
+ v9-20020a056e02164900b0036c50989681sm1256105ilu.20.2024.05.01.02.58.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 01 May 2024 02:58:19 -0700 (PDT)
+From: Adam Ford <aford173@gmail.com>
+To: u-boot@lists.denx.de
+Cc: aford@beaconembedded.com, Adam Ford <aford173@gmail.com>,
+ Tom Rini <trini@konsulko.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Michal Simek <michal.simek@amd.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tony Dinh <mibodhi@gmail.com>,
+ Tim Harvey <tharvey@gateworks.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sean Anderson <seanga2@gmail.com>,
+ Martyn Welch <martyn.welch@collabora.com>,
+ Marcel Ziswiler <marcel.ziswiler@toradex.com>
+Subject: [PATCH V2 1/4] arm: davinci: Migrate da850-evm to OF_UPSTREAM
+Date: Wed,  1 May 2024 04:57:50 -0500
+Message-ID: <20240501095813.23591-1-aford173@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-X-OriginatorOrg: aspeedtech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: KL1PR06MB6652.apcprd06.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: e1152129-194b-4147-6184-08dc69c276e1
-X-MS-Exchange-CrossTenant-originalarrivaltime: 01 May 2024 09:38:31.8436 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 43d4aa98-e35b-4575-8939-080e90d5a249
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Y/ib2IBdZ8EsBS6U1TXYLEyrzm81AugIvkU08jo65sxhY7xBdTMIMbycZhiZgQ1eKPFe8OWbIK9xgpXTp8z9AJ+WikrpnBpB/cTn2gcZzKQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: JH0PR06MB7233
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -180,9 +100,536 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-PiBGcm9tOiBUb20gUmluaSA8dHJpbmlAa29uc3Vsa28uY29tPg0KPiBTZW50OiBUdWVzZGF5LCBB
-cHJpbCAzMCwgMjAyNCA5OjM2IFBNDQo+IA0KPiBSZW1vdmUgPGNvbW1vbi5oPiBmcm9tIGFsbCBt
-YWNoLWFzcGVlZCBmaWxlcyBhbmQgd2hlbiBuZWVkZWQgYWRkDQo+IG1pc3NpbmcgaW5jbHVkZSBm
-aWxlcyBkaXJlY3RseS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IFRvbSBSaW5pIDx0cmluaUBrb25z
-dWxrby5jb20+DQoNClJldmlld2VkLWJ5OiBDaGlhLVdlaSBXYW5nIDxjaGlhd2VpX3dhbmdAYXNw
-ZWVkdGVjaC5jb20+DQoNClRoYW5rcywNCkNoaWF3ZWkNCg==
+The da850-evm can remove the U-Boot device trees if migrated
+to OF_UPSTREAM.  This means pointing the device trees to the
+ti/davinci directory.
+
+Signed-off-by: Adam Ford <aford173@gmail.com>
+---
+v2:  Remove DTS from Makefile.
+
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index c9f1b25ad6..d6135c41ad 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -41,7 +41,6 @@ dtb-$(CONFIG_ARCH_APPLE) += \
+ 	t8103-j457.dtb
+ 
+ dtb-$(CONFIG_ARCH_DAVINCI) += \
+-	da850-evm.dtb \
+ 	da850-lcdk.dtb \
+ 	da850-lego-ev3.dtb
+ 
+diff --git a/arch/arm/dts/da850-evm.dts b/arch/arm/dts/da850-evm.dts
+deleted file mode 100644
+index 378af9f344..0000000000
+--- a/arch/arm/dts/da850-evm.dts
++++ /dev/null
+@@ -1,453 +0,0 @@
+-// SPDX-License-Identifier: GPL-2.0-only
+-/*
+- * Device Tree for DA850 EVM board
+- *
+- * Copyright (C) 2012 Texas Instruments Incorporated - https://www.ti.com/
+- */
+-/dts-v1/;
+-#include "da850.dtsi"
+-#include <dt-bindings/gpio/gpio.h>
+-
+-/ {
+-	compatible = "ti,da850-evm", "ti,da850";
+-	model = "DA850/AM1808/OMAP-L138 EVM";
+-
+-	chosen {
+-		stdout-path = &serial2;
+-	};
+-
+-	aliases {
+-		serial0 = &serial0;
+-		serial1 = &serial1;
+-		serial2 = &serial2;
+-		ethernet0 = &eth0;
+-		spi0 = &spi1;
+-	};
+-
+-	backlight: backlight-pwm {
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&ecap2_pins>;
+-		power-supply = <&backlight_lcd>;
+-		compatible = "pwm-backlight";
+-		/*
+-		 * The PWM here corresponds to production hardware. The
+-		 * schematic needs to be 1015171 (15 March 2010), Rev A
+-		 * or newer.
+-		 */
+-		pwms = <&ecap2 0 50000 0>;
+-		brightness-levels = <0 10 20 30 40 50 60 70 80 90 99>;
+-		default-brightness-level = <7>;
+-	};
+-
+-	panel {
+-		compatible = "ti,tilcdc,panel";
+-		pinctrl-names = "default";
+-		pinctrl-0 = <&lcd_pins>;
+-		/*
+-		 * The vpif and the LCD are mutually exclusive.
+-		 * To enable VPIF, change the status below to 'disabled' then
+-		 * then change the status of the vpif below to 'okay'
+-		 */
+-		status = "okay";
+-		enable-gpios = <&gpio 40 GPIO_ACTIVE_HIGH>; /* lcd_panel_pwr */
+-
+-		panel-info {
+-			ac-bias = <255>;
+-			ac-bias-intrpt = <0>;
+-			dma-burst-sz = <16>;
+-			bpp = <16>;
+-			fdd = <0x80>;
+-			sync-edge = <0>;
+-			sync-ctrl = <1>;
+-			raster-order = <0>;
+-			fifo-th = <0>;
+-		};
+-
+-		display-timings {
+-			native-mode = <&timing0>;
+-			timing0: 480x272 {
+-				clock-frequency = <9000000>;
+-				hactive = <480>;
+-				vactive = <272>;
+-				hfront-porch = <3>;
+-				hback-porch = <2>;
+-				hsync-len = <42>;
+-				vback-porch = <3>;
+-				vfront-porch = <4>;
+-				vsync-len = <11>;
+-				hsync-active = <0>;
+-				vsync-active = <0>;
+-				de-active = <1>;
+-				pixelclk-active = <1>;
+-			};
+-		};
+-	};
+-
+-	vbat: fixedregulator0 {
+-		compatible = "regulator-fixed";
+-		regulator-name = "vbat";
+-		regulator-min-microvolt = <5000000>;
+-		regulator-max-microvolt = <5000000>;
+-		regulator-boot-on;
+-	};
+-
+-	baseboard_3v3: fixedregulator-3v3 {
+-		/* TPS73701DCQ */
+-		compatible = "regulator-fixed";
+-		regulator-name = "baseboard_3v3";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		vin-supply = <&vbat>;
+-		regulator-always-on;
+-		regulator-boot-on;
+-	};
+-
+-	baseboard_1v8: fixedregulator-1v8 {
+-		/* TPS73701DCQ */
+-		compatible = "regulator-fixed";
+-		regulator-name = "baseboard_1v8";
+-		regulator-min-microvolt = <1800000>;
+-		regulator-max-microvolt = <1800000>;
+-		vin-supply = <&vbat>;
+-		regulator-always-on;
+-		regulator-boot-on;
+-	};
+-
+-	backlight_lcd: backlight-regulator {
+-		compatible = "regulator-fixed";
+-		regulator-name = "lcd_backlight_pwr";
+-		regulator-min-microvolt = <3300000>;
+-		regulator-max-microvolt = <3300000>;
+-		gpio = <&gpio 47 GPIO_ACTIVE_HIGH>; /* lcd_backlight_pwr */
+-		enable-active-high;
+-	};
+-
+-	sound {
+-		compatible = "simple-audio-card";
+-		simple-audio-card,name = "DA850-OMAPL138 EVM";
+-		simple-audio-card,widgets =
+-			"Line", "Line In",
+-			"Line", "Line Out";
+-		simple-audio-card,routing =
+-			"LINE1L", "Line In",
+-			"LINE1R", "Line In",
+-			"Line Out", "LLOUT",
+-			"Line Out", "RLOUT";
+-		simple-audio-card,format = "dsp_b";
+-		simple-audio-card,bitclock-master = <&link0_codec>;
+-		simple-audio-card,frame-master = <&link0_codec>;
+-		simple-audio-card,bitclock-inversion;
+-
+-		simple-audio-card,cpu {
+-			sound-dai = <&mcasp0>;
+-			system-clock-frequency = <24576000>;
+-		};
+-
+-		link0_codec: simple-audio-card,codec {
+-			sound-dai = <&tlv320aic3106>;
+-			system-clock-frequency = <24576000>;
+-		};
+-	};
+-};
+-
+-&ecap2 {
+-	status = "okay";
+-};
+-
+-&ref_clk {
+-	clock-frequency = <24000000>;
+-};
+-
+-&pmx_core {
+-	status = "okay";
+-
+-	mcasp0_pins: pinmux_mcasp0_pins {
+-		pinctrl-single,bits = <
+-			/*
+-			 * AHCLKX, ACLKX, AFSX, AHCLKR, ACLKR,
+-			 * AFSR, AMUTE
+-			 */
+-			0x00 0x11111111 0xffffffff
+-			/* AXR11, AXR12 */
+-			0x04 0x00011000 0x000ff000
+-		>;
+-	};
+-	nand_pins: nand_pins {
+-		pinctrl-single,bits = <
+-			/* EMA_WAIT[0], EMA_OE, EMA_WE, EMA_CS[4], EMA_CS[3] */
+-			0x1c 0x10110110  0xf0ff0ff0
+-			/*
+-			 * EMA_D[0], EMA_D[1], EMA_D[2],
+-			 * EMA_D[3], EMA_D[4], EMA_D[5],
+-			 * EMA_D[6], EMA_D[7]
+-			 */
+-			0x24 0x11111111  0xffffffff
+-			/* EMA_A[1], EMA_A[2] */
+-			0x30 0x01100000  0x0ff00000
+-		>;
+-	};
+-};
+-
+-&sata {
+-	status = "okay";
+-};
+-
+-&serial0 {
+-	status = "okay";
+-};
+-
+-&serial1 {
+-	status = "okay";
+-};
+-
+-&serial2 {
+-	status = "okay";
+-};
+-
+-&rtc0 {
+-	status = "okay";
+-};
+-
+-&lcdc {
+-	status = "okay";
+-};
+-
+-&i2c0 {
+-	status = "okay";
+-	clock-frequency = <100000>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&i2c0_pins>;
+-
+-	tps: tps@48 {
+-		reg = <0x48>;
+-	};
+-	tlv320aic3106: tlv320aic3106@18 {
+-		#sound-dai-cells = <0>;
+-		compatible = "ti,tlv320aic3106";
+-		reg = <0x18>;
+-		status = "okay";
+-
+-		/* Regulators */
+-		IOVDD-supply = <&vdcdc2_reg>;
+-		AVDD-supply = <&baseboard_3v3>;
+-		DRVDD-supply = <&baseboard_3v3>;
+-		DVDD-supply = <&baseboard_1v8>;
+-	};
+-	tca6416: gpio@20 {
+-		compatible = "ti,tca6416";
+-		reg = <0x20>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-	};
+-	tca6416_bb: gpio@21 {
+-		compatible = "ti,tca6416";
+-		reg = <0x21>;
+-		gpio-controller;
+-		#gpio-cells = <2>;
+-	};
+-};
+-
+-&wdt {
+-	status = "okay";
+-};
+-
+-&mmc0 {
+-	max-frequency = <50000000>;
+-	bus-width = <4>;
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mmc0_pins>;
+-	cd-gpios = <&gpio 64 GPIO_ACTIVE_LOW>;
+-	wp-gpios = <&gpio 65 GPIO_ACTIVE_HIGH>;
+-};
+-
+-&spi1 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&spi1_pins &spi1_cs0_pin>;
+-	flash: flash@0 {
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		compatible = "m25p64";
+-		spi-max-frequency = <30000000>;
+-		m25p,fast-read;
+-		reg = <0>;
+-		partition@0 {
+-			label = "U-Boot-SPL";
+-			reg = <0x00000000 0x00010000>;
+-			read-only;
+-		};
+-		partition@1 {
+-			label = "U-Boot";
+-			reg = <0x00010000 0x00080000>;
+-			read-only;
+-		};
+-		partition@2 {
+-			label = "U-Boot-Env";
+-			reg = <0x00090000 0x00010000>;
+-			read-only;
+-		};
+-		partition@3 {
+-			label = "Kernel";
+-			reg = <0x000a0000 0x00280000>;
+-		};
+-		partition@4 {
+-			label = "Filesystem";
+-			reg = <0x00320000 0x00400000>;
+-		};
+-		partition@5 {
+-			label = "MAC-Address";
+-			reg = <0x007f0000 0x00010000>;
+-			read-only;
+-		};
+-	};
+-};
+-
+-&mdio {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mdio_pins>;
+-	bus_freq = <2200000>;
+-};
+-
+-&eth0 {
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mii_pins>;
+-};
+-
+-&gpio {
+-	status = "okay";
+-};
+-
+-/include/ "tps6507x.dtsi"
+-
+-&tps {
+-	vdcdc1_2-supply = <&vbat>;
+-	vdcdc3-supply = <&vbat>;
+-	vldo1_2-supply = <&vbat>;
+-
+-	regulators {
+-		vdcdc1_reg: regulator@0 {
+-			regulator-name = "VDCDC1_3.3V";
+-			regulator-min-microvolt = <3150000>;
+-			regulator-max-microvolt = <3450000>;
+-			regulator-always-on;
+-			regulator-boot-on;
+-		};
+-
+-		vdcdc2_reg: regulator@1 {
+-			regulator-name = "VDCDC2_3.3V";
+-			regulator-min-microvolt = <1710000>;
+-			regulator-max-microvolt = <3450000>;
+-			regulator-always-on;
+-			regulator-boot-on;
+-			ti,defdcdc_default = <1>;
+-		};
+-
+-		vdcdc3_reg: regulator@2 {
+-			regulator-name = "VDCDC3_1.2V";
+-			regulator-min-microvolt = <950000>;
+-			regulator-max-microvolt = <1350000>;
+-			regulator-always-on;
+-			regulator-boot-on;
+-			ti,defdcdc_default = <1>;
+-		};
+-
+-		ldo1_reg: regulator@3 {
+-			regulator-name = "LDO1_1.8V";
+-			regulator-min-microvolt = <1710000>;
+-			regulator-max-microvolt = <1890000>;
+-			regulator-always-on;
+-			regulator-boot-on;
+-		};
+-
+-		ldo2_reg: regulator@4 {
+-			regulator-name = "LDO2_1.2V";
+-			regulator-min-microvolt = <1140000>;
+-			regulator-max-microvolt = <1320000>;
+-			regulator-always-on;
+-			regulator-boot-on;
+-		};
+-	};
+-};
+-
+-&mcasp0 {
+-	#sound-dai-cells = <0>;
+-	status = "okay";
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&mcasp0_pins>;
+-
+-	op-mode = <0>;          /* MCASP_IIS_MODE */
+-	tdm-slots = <2>;
+-	/* 4 serializer */
+-	serial-dir = <  /* 0: INACTIVE, 1: TX, 2: RX */
+-		0 0 0 0
+-		0 0 0 0
+-		0 0 0 1
+-		2 0 0 0
+-	>;
+-	tx-num-evt = <32>;
+-	rx-num-evt = <32>;
+-};
+-
+-&edma0 {
+-	ti,edma-reserved-slot-ranges = <32 50>;
+-};
+-
+-&edma1 {
+-	ti,edma-reserved-slot-ranges = <32 90>;
+-};
+-
+-&aemif {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&nand_pins>;
+-	status = "okay";
+-	cs3 {
+-		#address-cells = <2>;
+-		#size-cells = <1>;
+-		clock-ranges;
+-		ranges;
+-
+-		ti,cs-chipselect = <3>;
+-
+-		nand@2000000,0 {
+-			compatible = "ti,davinci-nand";
+-			#address-cells = <1>;
+-			#size-cells = <1>;
+-			reg = <0 0x02000000 0x02000000
+-			       1 0x00000000 0x00008000>;
+-
+-			ti,davinci-chipselect = <1>;
+-			ti,davinci-mask-ale = <0>;
+-			ti,davinci-mask-cle = <0>;
+-			ti,davinci-mask-chipsel = <0>;
+-			ti,davinci-ecc-mode = "hw";
+-			ti,davinci-ecc-bits = <4>;
+-			ti,davinci-nand-use-bbt;
+-		};
+-	};
+-};
+-
+-&usb_phy {
+-	status = "okay";
+-};
+-
+-&usb0 {
+-	status = "okay";
+-};
+-
+-&usb1 {
+-	status = "okay";
+-};
+-
+-&vpif {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&vpif_capture_pins>, <&vpif_display_pins>;
+-	/*
+-	 * The vpif and the LCD are mutually exclusive.
+-	 * To enable VPIF, disable the ti,tilcdc,panel then
+-	 * change the status below to 'okay'
+-	 */
+-	status = "disabled";
+-};
+diff --git a/arch/arm/mach-davinci/Kconfig b/arch/arm/mach-davinci/Kconfig
+index 25c5db4991..8fa2660a0c 100644
+--- a/arch/arm/mach-davinci/Kconfig
++++ b/arch/arm/mach-davinci/Kconfig
+@@ -9,6 +9,7 @@ config TARGET_DA850EVM
+ 	select MACH_DAVINCI_DA850_EVM
+ 	select SOC_DA850
+ 	select SUPPORT_SPL
++	imply OF_UPSTREAM
+ 
+ config TARGET_OMAPL138_LCDK
+ 	bool "OMAPL138 LCDK"
+diff --git a/configs/da850evm_defconfig b/configs/da850evm_defconfig
+index 1095a761ab..30d1a93fec 100644
+--- a/configs/da850evm_defconfig
++++ b/configs/da850evm_defconfig
+@@ -18,7 +18,7 @@ CONFIG_ENV_SIZE=0x10000
+ CONFIG_ENV_OFFSET=0x80000
+ CONFIG_ENV_SECT_SIZE=0x10000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="da850-evm"
++CONFIG_DEFAULT_DEVICE_TREE="ti/davinci/da850-evm"
+ CONFIG_SPL_TEXT_BASE=0x80000000
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_STACK=0x8001ff00
+diff --git a/configs/da850evm_direct_nor_defconfig b/configs/da850evm_direct_nor_defconfig
+index 4d6efbebf3..936de61071 100644
+--- a/configs/da850evm_direct_nor_defconfig
++++ b/configs/da850evm_direct_nor_defconfig
+@@ -14,7 +14,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x8001ff00
+ CONFIG_ENV_SIZE=0x2800
+ CONFIG_ENV_SECT_SIZE=0x20000
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="da850-evm"
++CONFIG_DEFAULT_DEVICE_TREE="ti/davinci/da850-evm"
+ CONFIG_SYS_LOAD_ADDR=0xc0700000
+ CONFIG_ENV_ADDR=0x60100000
+ CONFIG_LTO=y
+diff --git a/configs/da850evm_nand_defconfig b/configs/da850evm_nand_defconfig
+index 1f22b65302..62cbd02b69 100644
+--- a/configs/da850evm_nand_defconfig
++++ b/configs/da850evm_nand_defconfig
+@@ -15,7 +15,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0000f20
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0x0
+ CONFIG_DM_GPIO=y
+-CONFIG_DEFAULT_DEVICE_TREE="da850-evm"
++CONFIG_DEFAULT_DEVICE_TREE="ti/davinci/da850-evm"
+ CONFIG_SPL_TEXT_BASE=0x80000000
+ CONFIG_SPL_SERIAL=y
+ CONFIG_SPL_STACK=0x8001ff00
+-- 
+2.43.0
+
