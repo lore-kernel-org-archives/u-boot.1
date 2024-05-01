@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94E81C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:59:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 498AEC4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:59:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 482DA88BC5;
-	Wed,  1 May 2024 04:44:57 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2B51688BBB;
+	Wed,  1 May 2024 04:44:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JosrAy3J";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PZh2TgsD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FB9E88BD0; Wed,  1 May 2024 04:44:56 +0200 (CEST)
-Received: from mail-qv1-xf33.google.com (mail-qv1-xf33.google.com
- [IPv6:2607:f8b0:4864:20::f33])
+ id 6412288BD0; Wed,  1 May 2024 04:44:56 +0200 (CEST)
+Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
+ [IPv6:2607:f8b0:4864:20::f32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BE87388B7B
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B26488BB8
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:54 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf33.google.com with SMTP id
- 6a1803df08f44-69b782287f9so30784456d6.0
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:52 -0700 (PDT)
+Received: by mail-qv1-xf32.google.com with SMTP id
+ 6a1803df08f44-69b4043b7b3so36829446d6.1
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531491; x=1715136291; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531493; x=1715136293; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=XgRLobhlUI/QZSgieMY7Whx9q4rQ/f0H7aOWyw3fNsc=;
- b=JosrAy3JpZhc4nHVknEFzchjEaj90ie/OKB4A1zEuklaFrjpWf8r9dtKCprtth5CiT
- ze6wg+7VDGu/nzr+cgw15SL9uM/wske1nfbgqgJBsfDj72xTWnqvX1x57z3JDUuIekaF
- F607TEFBURDSBDYMcEwooSH+1dfKgF330jXd4=
+ bh=Qe3m2h+uWwx9QgZAercqZnZVdRmK92/5BWIxB30XEgQ=;
+ b=PZh2TgsDSxneOQofnUjJzzEz+pIV3kXoUboSvBXyupMTTcddY2SXIOkifdbmxGucBh
+ swYt7olOznANuIEbgaCOFo52HbgxaiNfXWFkBRESGqwlb+/JyULiCBfK1mx1eTQ1k8J+
+ Ok1lzwnArVD6Eu8hWonLkUMkDKM5PedjQetuc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531491; x=1715136291;
+ d=1e100.net; s=20230601; t=1714531493; x=1715136293;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=XgRLobhlUI/QZSgieMY7Whx9q4rQ/f0H7aOWyw3fNsc=;
- b=E2cSfPzk+gWM2D+TKDejvwKoHo855uDt4qJA1KEoyDfY2w9+xyYd9xsisw80xPgAbC
- 2N9pCipq/PeSYLcRQEC9ojFke89Jv6Vt9NngWxjzQMDm+7KVZRD86Kr4UUhIisrdIeKo
- EUDZB/M0UqpUNpy0+fgTRMKAwajGMbW5ZuIcUc4hXusCmkg0aZuHtuvuxd5a3dJEv5eW
- O80NL4zY/18HWIej9qsK1nSK9+WFcFuSc21xOW4vqDwQe8ur/onCV2ZyKzIwhklWBvYm
- 6/xTjG+A1Y/wGoyFeveQvcLw2dnLk5iE7NhmCweHkTgR0n3VrZ9BgTnPk/36z8X3iEEU
- CfUQ==
-X-Gm-Message-State: AOJu0YxKFcI9vVZDtLKevzLFriSP0ildEVLTlhqFG8v8pcvC4A0uK/Vt
- h0YHXTLFbM69KVg0s05FNOOx7SQ3GrN4nEVrndj76ep08ulVWG/GwjGxmJy9OZqpp/bc30k3jy9
- K/0f6SA==
-X-Google-Smtp-Source: AGHT+IEJUmcIFfjKh4k8dW+d06qfxMxQVXbDFXc46rfaZoq3D0B1WUuYu5hu2XXKym2EEKnTwtLffg==
-X-Received: by 2002:a05:6214:d02:b0:6a0:b3cc:ee0f with SMTP id
- 2-20020a0562140d0200b006a0b3ccee0fmr1451552qvh.43.1714531491519; 
- Tue, 30 Apr 2024 19:44:51 -0700 (PDT)
+ bh=Qe3m2h+uWwx9QgZAercqZnZVdRmK92/5BWIxB30XEgQ=;
+ b=seVTl1xxjOKrh2753eQeS8ZUkjOYJaTAinEE2ctSb9q81gFql+TUnHbVgL7ygWPc/G
+ cpawlCK08wWT43SEQqeu+XuAPh3vPBdfhEpTkCC5/uQEV7ep7W3qrbi9JXyR7USqoc0B
+ cYMqM/lR+M3vesPhF7l0hXeyPNjOPdmz21/0frZElW1WccAMmK5bmQ4EZ83Gsc+Sxqg/
+ BY4K7MSKp0sAmOfFTffalfh9wqfOfLnhs1/pEoqjPjBG87cTxBj7mTS3NmQTQyCwiJZK
+ 8oTACY+y7RLwgEC7NJb70AMDAj/zZLOcAZU1nBNrA6TbEAQ/n1WJYKXK7/S2hh2HvtPz
+ uZnQ==
+X-Gm-Message-State: AOJu0YxWTAQLERK07qtUxfh1ZGecDuS8fYnv7vSBjm0wk2KzSydhP9df
+ OuwbbRn9iJRhH8fG8eFTP54GO6wV6EAFsct9wW2WmXk/ZBKdU3gNuj4J0/E4CYXfokMvaXblWjA
+ 7HO0Blw==
+X-Google-Smtp-Source: AGHT+IEllgMIHWTpzDB+06VfS8u0qfDj+BlKnBUwRrmnI8PFlmu9UTmqZOUqjkQ5335O2NyjlqB21Q==
+X-Received: by 2002:a05:6214:29c3:b0:6a0:cd13:fb7a with SMTP id
+ gh3-20020a05621429c300b006a0cd13fb7amr1252366qvb.24.1714531492664; 
+ Tue, 30 Apr 2024 19:44:52 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.50
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.51
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:44:51 -0700 (PDT)
+ Tue, 30 Apr 2024 19:44:52 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Dennis Gilmore <dgilmore@redhat.com>
-Subject: [PATCH 079/149] board: kobol: Remove <common.h> and add needed
+Cc: Heiko Thiery <heiko.thiery@gmail.com>,
+ Frieder Schrempf <frieder.schrempf@kontron.de>,
+ Michael Walle <michael@walle.cc>
+Subject: [PATCH 080/149] board: kontron: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:42:06 -0600
-Message-Id: <20240501024316.1767971-79-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:42:07 -0600
+Message-Id: <20240501024316.1767971-80-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -95,24 +97,134 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Dennis Gilmore <dgilmore@redhat.com>
+Cc: Heiko Thiery <heiko.thiery@gmail.com>
+Cc: Frieder Schrempf <frieder.schrempf@kontron.de>
+Cc: Michael Walle <michael@walle.cc>
 ---
- board/kobol/helios4/helios4.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/kontron/pitx_imx8m/pitx_imx8m.c  | 1 -
+ board/kontron/pitx_imx8m/spl.c         | 2 +-
+ board/kontron/sl-mx8mm/lpddr4_timing.c | 1 -
+ board/kontron/sl28/cmds.c              | 3 ++-
+ board/kontron/sl28/common.c            | 2 +-
+ board/kontron/sl28/ddr.c               | 2 +-
+ board/kontron/sl28/sl28.c              | 1 -
+ board/kontron/sl28/spl.c               | 2 +-
+ board/kontron/sl28/spl_atf.c           | 2 +-
+ 9 files changed, 7 insertions(+), 9 deletions(-)
 
-diff --git a/board/kobol/helios4/helios4.c b/board/kobol/helios4/helios4.c
-index 9c5b687b3e8b..4c8407bb6768 100644
---- a/board/kobol/helios4/helios4.c
-+++ b/board/kobol/helios4/helios4.c
-@@ -4,7 +4,7 @@
-  *  based on board/solidrun/clearfog/clearfog.c
+diff --git a/board/kontron/pitx_imx8m/pitx_imx8m.c b/board/kontron/pitx_imx8m/pitx_imx8m.c
+index 4548e7c1dff9..a908aee9eccf 100644
+--- a/board/kontron/pitx_imx8m/pitx_imx8m.c
++++ b/board/kontron/pitx_imx8m/pitx_imx8m.c
+@@ -1,7 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+ #include "pitx_misc.h"
+-#include <common.h>
+ #include <efi.h>
+ #include <efi_loader.h>
+ #include <init.h>
+diff --git a/board/kontron/pitx_imx8m/spl.c b/board/kontron/pitx_imx8m/spl.c
+index a247803a4b46..475e52f62314 100644
+--- a/board/kontron/pitx_imx8m/spl.c
++++ b/board/kontron/pitx_imx8m/spl.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+-#include <common.h>
++#include <config.h>
+ #include <errno.h>
+ #include <fsl_esdhc_imx.h>
+ #include <hang.h>
+diff --git a/board/kontron/sl-mx8mm/lpddr4_timing.c b/board/kontron/sl-mx8mm/lpddr4_timing.c
+index 74b79c7a009f..851aeef8f8c2 100644
+--- a/board/kontron/sl-mx8mm/lpddr4_timing.c
++++ b/board/kontron/sl-mx8mm/lpddr4_timing.c
+@@ -4,7 +4,6 @@
+  */
+ 
+ #include <linux/kernel.h>
+-#include <common.h>
+ #include <asm/arch/ddr.h>
+ #include <asm/arch/lpddr4_define.h>
+ 
+diff --git a/board/kontron/sl28/cmds.c b/board/kontron/sl28/cmds.c
+index 08a22b5d01e0..7851361c48cc 100644
+--- a/board/kontron/sl28/cmds.c
++++ b/board/kontron/sl28/cmds.c
+@@ -5,10 +5,11 @@
+  * Copyright (c) 2020 Kontron Europe GmbH
+  */
+ 
+-#include <common.h>
+ #include <command.h>
+ #include <i2c.h>
++#include <vsprintf.h>
+ #include <linux/delay.h>
++#include <linux/errno.h>
+ 
+ #define CPLD_I2C_ADDR 0x4a
+ #define REG_UFM_CTRL 0x02
+diff --git a/board/kontron/sl28/common.c b/board/kontron/sl28/common.c
+index 331de29baee6..d8d0172a21b7 100644
+--- a/board/kontron/sl28/common.c
++++ b/board/kontron/sl28/common.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+-#include <common.h>
++#include <config.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ 
+diff --git a/board/kontron/sl28/ddr.c b/board/kontron/sl28/ddr.c
+index 315d9f99c71d..9b881fdc265e 100644
+--- a/board/kontron/sl28/ddr.c
++++ b/board/kontron/sl28/ddr.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+-#include <common.h>
++#include <config.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <fsl_ddr_sdram.h>
+diff --git a/board/kontron/sl28/sl28.c b/board/kontron/sl28/sl28.c
+index 4ab221c12bf6..adfec8ba2379 100644
+--- a/board/kontron/sl28/sl28.c
++++ b/board/kontron/sl28/sl28.c
+@@ -1,6 +1,5 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <malloc.h>
+ #include <efi.h>
+diff --git a/board/kontron/sl28/spl.c b/board/kontron/sl28/spl.c
+index 80acde74956d..45a4fc65120e 100644
+--- a/board/kontron/sl28/spl.c
++++ b/board/kontron/sl28/spl.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ 
+-#include <common.h>
++#include <config.h>
+ #include <asm/io.h>
+ #include <asm/spl.h>
+ #include <asm/arch-fsl-layerscape/fsl_serdes.h>
+diff --git a/board/kontron/sl28/spl_atf.c b/board/kontron/sl28/spl_atf.c
+index a9cd6850e983..0710316a48bc 100644
+--- a/board/kontron/sl28/spl_atf.c
++++ b/board/kontron/sl28/spl_atf.c
+@@ -5,7 +5,7 @@
+  * Copyright (c) 2020 Michael Walle <michael@walle.cc>
   */
  
 -#include <common.h>
 +#include <config.h>
- #include <i2c.h>
- #include <init.h>
- #include <miiphy.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <atf_common.h>
 -- 
 2.34.1
 
