@@ -4,58 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5607C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 05:10:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB982C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 05:10:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C6FF88ADA;
-	Wed,  1 May 2024 07:10:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 1817887FFB;
+	Wed,  1 May 2024 07:10:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1714540204;
-	bh=lWb+WDT/isLYyRsrj/lPpCacqq4pWD04s54ykNetuRI=;
+	s=phobos-20191101; t=1714540214;
+	bh=Sqzx1dz9Lc9Rs6Wd6TJv+fjZQw9cSpBcOGG3Gz9+M1k=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=RTPws6HYB6zIV+elwB2Mds0yd06FqAtz/UmzSpm88UIE0nLZYXWzGSLKqXYxMfv7X
-	 9FY0UCV/if8jvRiDGlKQJuwpOdvI2XcrxTCpuPB1ja33r36NYumtNAKM0Be+Jd5Iz4
-	 eennwwryS+RzJZgyRo5M89Wmttz0GTAHeZB2nUb154CPnhEgu0XmRdFggqKkSvSJez
-	 siQS6hiG7WXBEXHmzW9xQUmNvsTKadbGOZyckyGCFwnj16TCt8+rPc7/XSYRKo97kI
-	 GkJIH/ZBFlLxQt8a3ES+B01SB4sAQ02TdcQUA5+c/2PB1OhlLZCf5S4PptSCR3rK15
-	 lQZNoVdcrYFSQ==
+	b=plIYbGjMFspcGhbz+nqrjuicgQqVSiFg5THD3CUgdyVCxgt4Xv8WNxQdvZAKoVJhz
+	 7cJei3pEHR83qwvyxjj96RNtY/2UkeOUSDrNi7qXFL6VnnG+SlK1p8wai7txFJn/LJ
+	 aJVeyJsy6LTSMQPLN55AfG7iIE6vbYEy8vhQM6MOoJ0lXSQor+LM49rgidk6qNxgfl
+	 8Dlmj52CzS0gzyPD4SY3Ekmwszunkj5iAQ5b9J2f5ivx5nlEAvKMeSz3OS/INTtj/7
+	 dOFNFhxvpFbUcszlMXLhdD1JVhsnAl6Y5jOOAMzau3oxtiAmZe2BnnpJSyVeXrEp4W
+	 UuivQIxDI7eZA==
 Received: from [192.168.1.107] (89-186-112-218.pool.digikabel.hu
  [89.186.112.218])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id BFC7588ACA;
- Wed,  1 May 2024 07:10:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 6839E87EB2;
+ Wed,  1 May 2024 07:10:12 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1714540202;
- bh=lWb+WDT/isLYyRsrj/lPpCacqq4pWD04s54ykNetuRI=;
+ s=phobos-20191101; t=1714540213;
+ bh=Sqzx1dz9Lc9Rs6Wd6TJv+fjZQw9cSpBcOGG3Gz9+M1k=;
  h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
- b=f58YW78MpDonOCsANIdSB6V4xumcx64TYZ88xABX1B2iPq5YtEkBaTQmZCUeOAQFJ
- JMaeHXBuk1BCeLnwbVQW8RHN4aX0p87scoVZWptQjwA2R5I4o+EbR/7HVK0Ht/DD61
- 51nl92P64sMuXrt6GROE1ebt8bCZ5ov2zx2fCOgsNUG5zSHU5W1obcsOC+zzIjP1aY
- JNEuU4XjnRwLDgaJR/Z+PmNzFWPyNZqyk814bvIQYthI6gcTH3J2ya/AdMb+ql1s+2
- /xTbOxyKZh2TAyRyHuOZh+BldYHhBLbzYu+4R/2DL6nu5BYpfLwfc/+/y+aYbJHBJL
- X2x1xAoIz6QYQ==
-Message-ID: <4ec0568e-373b-ee32-f12f-806ce456d4df@denx.de>
-Date: Wed, 1 May 2024 07:09:41 +0200
+ b=Ji6Ryglm7FBruY1/RCKtw0F4NUX0QQy4V3BCCHY2UPrggoteFiE7cvcmpV6m04atk
+ 8O+sD7AVGQU3m79Hl0F0zB2UXH+HY57sBflWdw4s2T+LOPNgIFopg2H/7M0sIN7E4o
+ TcJKJAuQK0OuoWgcOIbFal0EZGFg4tYQx3k882aFGA7Et/qfdijukNJUnI+hsFtTVZ
+ SuJbUlMF3gsf5mVO8zKBG0yGiPRPOptGKP8N936mfnojnpzlSJk1PtRpmivzQkoeSF
+ yhHvhvN14935x98KcK7c0oQf9GkNGj2ZHvJSHauxEnDesOOCrS3j+TgLh7sKmuQqnW
+ vIiQEP2aFcpnA==
+Message-ID: <d89e032c-b205-bbc0-ec7c-a22b14691c51@denx.de>
+Date: Wed, 1 May 2024 07:09:52 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH 078/149] board: keymile: Remove <common.h> and add needed
+Subject: Re: [PATCH 116/149] board: siemens: Remove <common.h> and add needed
  includes
 Content-Language: en-US
 To: Tom Rini <trini@konsulko.com>
-Cc: Holger Brunck <holger.brunck@hitachienergy.com>,
- Niel Fourie <lusus@denx.de>,
- Aleksandar Gerasimovski <aleksandar.gerasimovski@hitachienergy.com>,
- Rainer Boschung <rainer.boschung@hitachienergy.com>, u-boot@lists.denx.de
+Cc: Anatolij Gustschin <agust@denx.de>, Le Jin <le.jin@siemens.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>, u-boot@lists.denx.de
 References: <20240501024316.1767971-1-trini@konsulko.com>
- <20240501024316.1767971-78-trini@konsulko.com>
+ <20240501024316.1767971-116-trini@konsulko.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20240501024316.1767971-78-trini@konsulko.com>
+In-Reply-To: <20240501024316.1767971-116-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -83,19 +81,18 @@ On 01.05.24 04:42, Tom Rini wrote:
 > 
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
-> Cc: Holger Brunck <holger.brunck@hitachienergy.com>
+> Cc: Anatolij Gustschin <agust@denx.de>
 > Cc: Heiko Schocher <hs@denx.de>
-> Cc: Niel Fourie <lusus@denx.de>
-> Cc: Aleksandar Gerasimovski <aleksandar.gerasimovski@hitachienergy.com>
-> Cc: Rainer Boschung <rainer.boschung@hitachienergy.com>
+> Cc: Le Jin <le.jin@siemens.com>
+> Cc: Jan Kiszka <jan.kiszka@siemens.com>
 > ---
->   board/keymile/common/common.c       | 2 +-
->   board/keymile/common/ivm.c          | 3 ++-
->   board/keymile/common/qrio.c         | 2 +-
->   board/keymile/km83xx/km83xx.c       | 2 +-
->   board/keymile/pg-wcom-ls102xa/ddr.c | 2 +-
->   board/keymile/secu1/socfpga.c       | 1 -
->   6 files changed, 6 insertions(+), 6 deletions(-)
+>   board/siemens/capricorn/board.c   | 1 -
+>   board/siemens/capricorn/spl.c     | 1 -
+>   board/siemens/corvus/board.c      | 2 +-
+>   board/siemens/iot2050/board.c     | 2 +-
+>   board/siemens/smartweb/smartweb.c | 2 +-
+>   board/siemens/taurus/taurus.c     | 2 +-
+>   6 files changed, 4 insertions(+), 6 deletions(-)
 
 Thanks!
 
@@ -103,6 +100,7 @@ Reviewed-by: Heiko Schocher <hs@denx.de>
 
 bye,
 Heiko
+
 -- 
 DENX Software Engineering GmbH,      Managing Director: Erika Unter
 HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
