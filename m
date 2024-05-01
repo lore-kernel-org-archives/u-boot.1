@@ -4,54 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC24AC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 05:06:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83F4CC4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 05:08:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4347988AD9;
-	Wed,  1 May 2024 07:06:10 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id C3B8788ACB;
+	Wed,  1 May 2024 07:08:33 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1714539970;
-	bh=2B52E5JmkUAvawA5z12XHRKmeFgUcohq88W7AfPKkRI=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
+	s=phobos-20191101; t=1714540113;
+	bh=weFliPgGRa0K+uJNG/Q2O0kzR08ZTyFdw7pm5c24/1s=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 Reply-To:From;
-	b=cW4WgFXfBlXNfukxmmJyG8xKkQsRUYVtvS86ulB/XUe4BXoXNtAW7Xr8itnYsddtZ
-	 y4+YBL0z3AHleLg4lDXJgkILuOSHKM2xko9O8tfg7QbeOEz+5CsnIYkE+Rgdmu+AYq
-	 ulv2E53UQtKv48XbjoytwYN3LplZR6CJdHTMhx11uGJvBMYbJ78t8edKOcGFL+SoLx
-	 PRiFc9zw6qZUXExgJ+FjlcF4ldUaY2Cv7DSESnz3oj5mZ2PvPgwLZMkPaUaVzEIYt+
-	 xaKijNvIlNJRDFBxIyPRff1HPnJzbF29+oJL2oTjFISCIE8evC7kEPiEsElaqWiMUi
-	 XFdv7gBZvI+QQ==
+	b=Xn4s0HoFnjeH3Db+T2VKJsVK1cHV9JVbZBOxi/F7UXTX11xikQRmhwNg/txhqnHkF
+	 8XiyUDgDD+W1CMZJDwbQKGgvvmG7nUKuLY/8DcisJeoDht5d6W/s9GwjTjzlAev2FB
+	 utuMW7xnFhbFB+KqcAd54hBWvUexndA1y8mjuagWan2npapoL9GGMOMl4JgWkMb2LX
+	 FHTDdRnTUDIANn4Yq2lZVjpJe2fTRz3hSMSWrakXtPW/77NzR+UrViTdRk1xVoeYjV
+	 Jr1BQysAdHSUqFFtXgeJW0epLpIaMP0I/ub+IkfvQYHnx6lIAXyy1Lp7xpvds6F/Po
+	 Kqg3XRVru6gcA==
 Received: from [192.168.1.107] (89-186-112-218.pool.digikabel.hu
  [89.186.112.218])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested) (Authenticated sender: hs@denx.de)
- by phobos.denx.de (Postfix) with ESMTPSA id 31F0D88ACA;
- Wed,  1 May 2024 07:06:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPSA id 2196B88AE2;
+ Wed,  1 May 2024 07:08:32 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
- s=phobos-20191101; t=1714539969;
- bh=2B52E5JmkUAvawA5z12XHRKmeFgUcohq88W7AfPKkRI=;
- h=Date:Subject:To:References:Reply-To:From:In-Reply-To:From;
- b=luZi3cxfD4fvtPXjKZ1SgPoLCT4P0sK6DrxDO8xeAmVjRBWVu0KEHKLAh9sp2mkel
- 8ggdjjod4D1pXoPsq4qtvNPrbBTdNpWEwESpt2Qw7V+yZxsQd3LFySR5my2ssNIyc4
- e0Hsslj3cRDujBcyvNJnzrxm+gtmZducNZXVaq/Fs84rN5hb338XfnkF7BYZIwFduJ
- HGEI5Aay5OlJ3RR7gp3B51CM2ac2N5COtB8WglMlW0LN/9ueFXrM36IROFNzxiNTnO
- nLwl+JmZyHu2i4nWsS976chR5zAIdziv20HnImhuyLCKsVmghWc8PMQ8DJ6y71sYxz
- vbnoAXIfb9olg==
-Message-ID: <572abfcc-ac9c-d373-321d-7ceb50e7d00d@denx.de>
-Date: Wed, 1 May 2024 07:05:44 +0200
+ s=phobos-20191101; t=1714540113;
+ bh=weFliPgGRa0K+uJNG/Q2O0kzR08ZTyFdw7pm5c24/1s=;
+ h=Date:Subject:To:Cc:References:Reply-To:From:In-Reply-To:From;
+ b=d4ZFeohQjq+lfP6dM4Yl5lOjeO7tx3UZJyTg3dKKdCvWz5gXp2w2nUC0RbxHww3IU
+ E11igIhiW7wOWimIyVVbe91CF2cbBpIxPCAvKAwteYh1C201MaoMoSd5XBCjJoQhtA
+ TvIQO6fZ0X0/1Z1qUKvD+jUwJsoen2TBrFAM2MnSNAbADYM/WL35w+ul7p8ZXkYnB4
+ ELERmkS1SrNibiA9KCwFTRaG0QfO3HNxm3r6l4H/6eqi2H4qbmnrwEbEZ5ezZQzQM6
+ 35gBjgqS+Hn3vxiiI8detkpBG2gnpSfocJKFDVHm9mvRxRryE0BRoz1VYlOGP6+TK/
+ mbLbsPEj+u5Lw==
+Message-ID: <2da10997-60e9-0dd3-c2d6-241aed4c637c@denx.de>
+Date: Wed, 1 May 2024 07:08:12 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
  Thunderbird/91.2.0
-Subject: Re: [PATCH 017/149] board: aristainetos: Remove <common.h> and add
- needed includes
+Subject: Re: [PATCH 027/149] board: bosch: Remove <common.h> and add needed
+ includes
 Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+To: Tom Rini <trini@konsulko.com>
+Cc: Matthias Winker <matthias.winker@de.bosch.com>,
+ Philip Oberfichtner <pro@denx.de>,
+ Sjoerd Simons <sjoerd.simons@collabora.co.uk>,
+ Govindaraji Sivanantham <Govindaraji.Sivanantham@in.bosch.com>,
+ Hiremath Gireesh <Gireesh.Hiremath@in.bosch.com>, u-boot@lists.denx.de
 References: <20240501024316.1767971-1-trini@konsulko.com>
- <20240501024316.1767971-17-trini@konsulko.com>
+ <20240501024316.1767971-27-trini@konsulko.com>
 From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20240501024316.1767971-17-trini@konsulko.com>
+In-Reply-To: <20240501024316.1767971-27-trini@konsulko.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -79,10 +84,19 @@ On 01.05.24 04:41, Tom Rini wrote:
 > 
 > Signed-off-by: Tom Rini <trini@konsulko.com>
 > ---
+> Cc: Matthias Winker <matthias.winker@de.bosch.com>
+> Cc: Philip Oberfichtner <pro@denx.de>
+> Cc: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+> Cc: Govindaraji Sivanantham <Govindaraji.Sivanantham@in.bosch.com>
+> Cc: Hiremath Gireesh <Gireesh.Hiremath@in.bosch.com>
 > Cc: Heiko Schocher <hs@denx.de>
 > ---
->   board/aristainetos/aristainetos.c | 1 -
->   1 file changed, 1 deletion(-)
+>   board/bosch/acc/acc.c        | 2 +-
+>   board/bosch/guardian/board.c | 2 +-
+>   board/bosch/guardian/mux.c   | 1 -
+>   board/bosch/shc/board.c      | 2 +-
+>   board/bosch/shc/mux.c        | 1 -
+>   5 files changed, 3 insertions(+), 5 deletions(-)
 
 Thanks!
 
