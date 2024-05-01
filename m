@@ -4,71 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EF8CC19F53
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:52:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31E90C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:52:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9A9E88B40;
-	Wed,  1 May 2024 04:44:16 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4BB2188B2D;
+	Wed,  1 May 2024 04:44:19 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ct4hPera";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MK68kX0M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91C8188B39; Wed,  1 May 2024 04:44:15 +0200 (CEST)
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
+ id B1E0D88AD7; Wed,  1 May 2024 04:44:16 +0200 (CEST)
+Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com
+ [IPv6:2607:f8b0:4864:20::732])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 831E188AFA
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:13 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9701988AD7
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:44:14 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-7f169d3ef53so588698241.1
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:13 -0700 (PDT)
+Received: by mail-qk1-x732.google.com with SMTP id
+ af79cd13be357-78f0628da1eso448626185a.3
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:44:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531452; x=1715136252; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531453; x=1715136253; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RJpoW6gLLcYN2mVpGkr6uum3vkdVcbFJk5lEK9Onqso=;
- b=Ct4hPeraUCaQKmcFeG9E5zG2YAUSM9EexTcvoL/xg5OOEbe+WeTGGF9dLqPjgDSyYh
- zkqku8u74ITd1cpQYuWPSoAEbOSxCRVa6SF71KjD4pYtSv6llQsgkMcOVkkf8c1QeIC9
- Zyd5Ng4mry9jWMsU+bCc2RAAIVUnQwuB/gjNI=
+ bh=SYucNiX/7L9JQOZDtCAdxK3lYKSnUy5JdvzwENp6rrc=;
+ b=MK68kX0M41Bp3NOGFi4Hr/p1GnAGfKejCngKTadqgr5kZL98IVyTM8yf+QeSS+QYZT
+ RAiKZapvTiMWVGSjE+LX0umeRgWsTPISAZfs+T+eOzPG+cj6vTourJem3PJmGe3vratZ
+ phNEMGO0S8DldzcYnWP3uRMaXO/tpu3xceyxo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531452; x=1715136252;
+ d=1e100.net; s=20230601; t=1714531453; x=1715136253;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=RJpoW6gLLcYN2mVpGkr6uum3vkdVcbFJk5lEK9Onqso=;
- b=OeUxIICJzp4OIz9QUbPAdj5o88sVnpIpuTWcwf0bN16f1ciN2n8/ssCL+bEUUaxZr6
- PucSa9f02kaGs/9dwnBxiHQ8aOGTchUtdp2m+mKHkw+seUP4Y4wNlW3rVgpHsWa39Toa
- 4SVAtiHyAhMBun9ghz6qW28H9H36JC9Nskh5TckBOT31vlBuv9OFnfs2i1LhkMXglxu9
- HMv6vQxc+uoQDHNF3YhzBfk2T+hoLcvvnweaemMRlJcrS/BQoDhhf21ddfr8NZa9BAcN
- jsi8HrfTRGwzDOdZfryDzr9VQjskc/x9XHA0kfIATpPkeK/z+Awdvuk1v/WZzAdXqtPL
- qEFA==
-X-Gm-Message-State: AOJu0YyM8QT+Xw22aazdw5GxWhSN1/rlZulaABrj7M5QVi79Ia/8Qe3Z
- tDAW9nEym9SWAdNEYRj55Vrugx3BoS9uKxwlD8rnu7t1u4CvEwiTMnXwyo5AOGptVr/gDHkKhUQ
- +lhe7pw==
-X-Google-Smtp-Source: AGHT+IH40x4hroBDcz2dXmBwB0n8NcT0lohnr7DTD9PriAS344+JLq4I/QX4noplXLvuWyxgc6zwEA==
-X-Received: by 2002:a67:c50b:0:b0:47b:bfbd:1577 with SMTP id
- e11-20020a67c50b000000b0047bbfbd1577mr1889397vsk.5.1714531452085; 
- Tue, 30 Apr 2024 19:44:12 -0700 (PDT)
+ bh=SYucNiX/7L9JQOZDtCAdxK3lYKSnUy5JdvzwENp6rrc=;
+ b=uw5rlB0EEf2I3m3Ou6IYpW3Vq4jB2b5SdjuvEnVhNiPDqy8kYw5jdgCTMYdb1gKz0Z
+ tZA7H17u3cGypuVmf+bwBP1mzOLf1txZGTXjbJpdZwJToVT/FCg1sVvlbz94DDSU/Dz9
+ Ofu9FhyeCvM/CP66bJtNn78Z8GfXJ4E2G+KlgOHXcowvkmFCIXJQmIUNCL1o+nkGWYbZ
+ PPCYX6m/0Qk8OXI6csjXzqhOqMyqmLfweJm+Q+UlKMzFOQsUVp+yMUmI3ZNUFmuWj3M7
+ eOr1PjrTAaUGvFmj/+/waT0jkVYctCcSCrtyr6rINnY3mKHxKHYiC9QbaWJ0By4/hp4G
+ RKug==
+X-Gm-Message-State: AOJu0YyCnfbYls5S5o4JqgcKGzGCaHSCKrr2FKwFQwJtJV01ab2bKvRk
+ MbZPtkG+bM3tKoT09ATAniGM3s270YaK4vrrDt1J55dhf/ctYKf8j6M0MySJWXLET3x3hwUYelA
+ bv7CSWA==
+X-Google-Smtp-Source: AGHT+IHLE0maVGQxLGkTShICfBPfx0xNPsEtYtPXJGomqlPfvMMcxAsM9jbhMlWs95gnA4ORhkbPOw==
+X-Received: by 2002:a05:6214:21e3:b0:6a0:cef9:d45e with SMTP id
+ p3-20020a05621421e300b006a0cef9d45emr1187910qvj.50.1714531453241; 
+ Tue, 30 Apr 2024 19:44:13 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.11
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.44.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:44:11 -0700 (PDT)
+ Tue, 30 Apr 2024 19:44:12 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
-Subject: [PATCH 046/149] board: d-link: Remove <common.h> and add needed
+Cc: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH 047/149] board: data_modul: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:41:33 -0600
-Message-Id: <20240501024316.1767971-46-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:41:34 -0600
+Message-Id: <20240501024316.1767971-47-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -95,23 +96,78 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Stefan Herbrechtsmeier <stefan@herbrechtsmeier.net>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Fabio Estevam <festevam@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
 ---
- board/d-link/dns325/dns325.c | 1 -
- 1 file changed, 1 deletion(-)
+ board/data_modul/common/common.c                            | 1 -
+ board/data_modul/imx8mm_edm_sbc/imx8mm_data_modul_edm_sbc.c | 1 -
+ board/data_modul/imx8mm_edm_sbc/spl.c                       | 1 -
+ board/data_modul/imx8mp_edm_sbc/imx8mp_data_modul_edm_sbc.c | 1 -
+ board/data_modul/imx8mp_edm_sbc/spl.c                       | 1 -
+ 5 files changed, 5 deletions(-)
 
-diff --git a/board/d-link/dns325/dns325.c b/board/d-link/dns325/dns325.c
-index 8ebfe4c60189..3bbde9808d20 100644
---- a/board/d-link/dns325/dns325.c
-+++ b/board/d-link/dns325/dns325.c
-@@ -9,7 +9,6 @@
-  * Written-by: Prafulla Wadaskar <prafulla@marvell.com>
+diff --git a/board/data_modul/common/common.c b/board/data_modul/common/common.c
+index 4ece82c73039..b4d74a8fd8bd 100644
+--- a/board/data_modul/common/common.c
++++ b/board/data_modul/common/common.c
+@@ -3,7 +3,6 @@
+  * Copyright 2022 Marek Vasut <marex@denx.de>
   */
  
 -#include <common.h>
+ #include <asm-generic/gpio.h>
+ #include <asm-generic/sections.h>
+ #include <asm/arch/clock.h>
+diff --git a/board/data_modul/imx8mm_edm_sbc/imx8mm_data_modul_edm_sbc.c b/board/data_modul/imx8mm_edm_sbc/imx8mm_data_modul_edm_sbc.c
+index bfb2bddc1d1f..339702e83927 100644
+--- a/board/data_modul/imx8mm_edm_sbc/imx8mm_data_modul_edm_sbc.c
++++ b/board/data_modul/imx8mm_edm_sbc/imx8mm_data_modul_edm_sbc.c
+@@ -3,7 +3,6 @@
+  * Copyright 2022 Marek Vasut <marex@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/imx8mm_pins.h>
+ #include <asm/io.h>
+diff --git a/board/data_modul/imx8mm_edm_sbc/spl.c b/board/data_modul/imx8mm_edm_sbc/spl.c
+index 4a9c62fb86fc..17aafd719c9d 100644
+--- a/board/data_modul/imx8mm_edm_sbc/spl.c
++++ b/board/data_modul/imx8mm_edm_sbc/spl.c
+@@ -3,7 +3,6 @@
+  * Copyright 2022 Marek Vasut <marex@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <hang.h>
+ #include <image.h>
  #include <init.h>
- #include <log.h>
- #include <miiphy.h>
+diff --git a/board/data_modul/imx8mp_edm_sbc/imx8mp_data_modul_edm_sbc.c b/board/data_modul/imx8mp_edm_sbc/imx8mp_data_modul_edm_sbc.c
+index f0f373aa2800..138acd36ad24 100644
+--- a/board/data_modul/imx8mp_edm_sbc/imx8mp_data_modul_edm_sbc.c
++++ b/board/data_modul/imx8mp_edm_sbc/imx8mp_data_modul_edm_sbc.c
+@@ -3,7 +3,6 @@
+  * Copyright 2022 Marek Vasut <marex@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/imx8mp_pins.h>
+ #include <asm/io.h>
+diff --git a/board/data_modul/imx8mp_edm_sbc/spl.c b/board/data_modul/imx8mp_edm_sbc/spl.c
+index cc2d253e391e..c19358985332 100644
+--- a/board/data_modul/imx8mp_edm_sbc/spl.c
++++ b/board/data_modul/imx8mp_edm_sbc/spl.c
+@@ -3,7 +3,6 @@
+  * Copyright 2022 Marek Vasut <marex@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <hang.h>
+ #include <image.h>
+ #include <init.h>
 -- 
 2.34.1
 
