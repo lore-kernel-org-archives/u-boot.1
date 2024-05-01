@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85565C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:10:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32848C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:10:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 718AE88CDE;
+	by phobos.denx.de (Postfix) with ESMTP id E9CC788CE7;
 	Wed,  1 May 2024 04:46:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QLttEeoc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Chyz4Ke5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EE90F88CD5; Wed,  1 May 2024 04:45:59 +0200 (CEST)
-Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
- [IPv6:2607:f8b0:4864:20::734])
+ id B7A5488CDA; Wed,  1 May 2024 04:46:00 +0200 (CEST)
+Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
+ [IPv6:2607:f8b0:4864:20::f35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DCFEE88CA6
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A329388C1B
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:58 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x734.google.com with SMTP id
- af79cd13be357-790e7c02430so293819185a.0
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:57 -0700 (PDT)
+Received: by mail-qv1-xf35.google.com with SMTP id
+ 6a1803df08f44-6a073f10e25so33847366d6.3
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531556; x=1715136356; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531557; x=1715136357; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=x+kl3HH4WbsmqWJHeZEObxxcbddRf0ewmmosjv7iqtM=;
- b=QLttEeocTBa3AZxLiRYK8DvCMMllTQGybSiRy4HUKkKjOrKWMHcPZ5ifQ3TXCX0Dp3
- 0w38V5bgwTQR6lf4+y9wtH/aZl+ptAbtwiH8roM9x4xdbhkY/2oOgNZ+Wxyfn7+Jwa06
- MzWxUh5QR7fPQTbum1h2QUDFRxuv4JialvftE=
+ bh=Scdy+S71GtnjkEvRTHWsYtypzdjMB72YrG+d1cr1wWA=;
+ b=Chyz4Ke5HGPivBmCWhfQH8FB/G9VaYlBIEmoXEaRiOE8lIbuFOjIsOasqL+ETlkbo+
+ kJrOilzWyMELiFRxRSHqS7LyTfKgqMRBhcrASgkOv4wWVNX5rvQBNkPC/6xzVMoMG8Di
+ MdLJNsAV/DB1aGbtGppIEAEkeYjhG7cUUfw/8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531556; x=1715136356;
+ d=1e100.net; s=20230601; t=1714531557; x=1715136357;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=x+kl3HH4WbsmqWJHeZEObxxcbddRf0ewmmosjv7iqtM=;
- b=Ecbd2C/CvQkAzKlsNoqkEkCTsHDbUZs72H/4rE3kfCYiyHByW3tuDKq3Z/6ifxu4Pg
- STTTmPVFL88nL7fKJ8Qd8OFp7cyTvpXc9w8ry7vr8anzfUe5yZrh7SyxtoLjGrYkie6N
- tNItqcnV09K0XFBcf9kSJd07g3/MEdHg91j9l9NNoLDT9GLHdd6hwXHrnrSnH6NGk/V/
- cZ+w5edTosxoig4Mvy4lfwpQjLCb5gbdLY1dwvYncn2NmXMaAlMlGJl3SB9iBzDCHVzh
- f14hr52t4uIUGg8IZ52ubEQ0NmHsHlC5jiLb15DmhSm1HzVEG/3auzI7mDf94OxvZF0+
- YLdg==
-X-Gm-Message-State: AOJu0YzYJWGaGofdirB7X2UFLv3G1ICOZjtQiWV0+MlvQiS4550YcczL
- DI/mHqAi+gh9yU8KScHK4osKFqhinkADZ2mE5Ri63jdY1M4bGczZp8Qzj+rU8e6WZ4lPGEwCVUo
- 1D+i0sDYG
-X-Google-Smtp-Source: AGHT+IGhqRzkH/3iGfhiwc1GaF8kA8qAxXUYEQns/8P4oupCL5bKvLRjgc0e8Laz7DU59mD0XYRzYQ==
-X-Received: by 2002:a05:6214:4116:b0:6a0:817f:7275 with SMTP id
- kc22-20020a056214411600b006a0817f7275mr1113236qvb.34.1714531556499; 
- Tue, 30 Apr 2024 19:45:56 -0700 (PDT)
+ bh=Scdy+S71GtnjkEvRTHWsYtypzdjMB72YrG+d1cr1wWA=;
+ b=Oq+IQvHj2CMZRiMLB3kH+gpc+Np5MSmFOF+/WJSucDzE4/3XGrn4OfN55qrJFK4E13
+ ces8eS21wm9g2BlxB40OmZPhB8c5szMQ3K/YRjTNNdDNRve4a8U6d2EFk7+oHco5MfQg
+ GiS2z1rloSNrrD3qYy/lXjLS2WGLOnWnWpnS6zzJ9LtQvki9SdJEnvu5jq5nrOO2BZTM
+ tpu3zo+Vb9xTSv18QzGCrDrmLDm3xif9PbOAocPiDlz1uewmquc3dV3uDorW73AmYgrD
+ Uh3nD1cYJM/aP7phwULvE9j3K+j2YjnlnkiLAJ/eBd3qviomfIKhThkmyHdMU6ksFp1y
+ TDjg==
+X-Gm-Message-State: AOJu0YztEgLGJKK0mMjwJiMkglcs2JC4QakanSw9fVhohJY2ZjuyAEj7
+ B9wFXuJ0Bnl9JCOhDOjBzHKkO/Bqjlz1nFLEFbsVsiivt5bPRHofQQVUV6TM6U8Ioimef84yKnH
+ 5upDAPqty
+X-Google-Smtp-Source: AGHT+IEZzvikQ83wmyYANBLw44HbCSuG2OyIKzOpuSb3RrwujfT7dGVqE158zNSuR6rHwnW7RlMdtg==
+X-Received: by 2002:a05:6214:40e:b0:6a0:d220:861f with SMTP id
+ z14-20020a056214040e00b006a0d220861fmr1106055qvx.59.1714531557352; 
+ Tue, 30 Apr 2024 19:45:57 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.55
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:45:56 -0700 (PDT)
+ Tue, 30 Apr 2024 19:45:57 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Markus Niebel <Markus.Niebel@tq-group.com>
-Subject: [PATCH 139/149] board: tq: Remove <common.h> and add needed includes
-Date: Tue, 30 Apr 2024 20:43:06 -0600
-Message-Id: <20240501024316.1767971-139-trini@konsulko.com>
+Cc: Mathew McBride <matt@traverse.com.au>
+Subject: [PATCH 140/149] board: traverse: Remove <common.h> and add needed
+ includes
+Date: Tue, 30 Apr 2024 20:43:07 -0600
+Message-Id: <20240501024316.1767971-140-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -94,49 +95,50 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Markus Niebel <Markus.Niebel@tq-group.com>
+Cc: Mathew McBride <matt@traverse.com.au>
 ---
- board/tq/tqma6/tqma6.c      | 1 -
- board/tq/tqma6/tqma6_mba6.c | 1 -
- board/tq/tqma6/tqma6_wru4.c | 1 -
- 3 files changed, 3 deletions(-)
+ board/traverse/common/ten64_controller.c | 1 -
+ board/traverse/ten64/eth_ten64.c         | 1 -
+ board/traverse/ten64/ten64.c             | 2 +-
+ 3 files changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/board/tq/tqma6/tqma6.c b/board/tq/tqma6/tqma6.c
-index 1c2228c77ad0..92142c10ae5a 100644
---- a/board/tq/tqma6/tqma6.c
-+++ b/board/tq/tqma6/tqma6.c
-@@ -21,7 +21,6 @@
- #include <asm/io.h>
- #include <asm/mach-imx/mxc_i2c.h>
- #include <asm/mach-imx/spi.h>
+diff --git a/board/traverse/common/ten64_controller.c b/board/traverse/common/ten64_controller.c
+index d6ef8a8d0df9..63b72c4df7b9 100644
+--- a/board/traverse/common/ten64_controller.c
++++ b/board/traverse/common/ten64_controller.c
+@@ -5,7 +5,6 @@
+  *
+  */
+ 
 -#include <common.h>
- #include <fsl_esdhc_imx.h>
- #include <linux/libfdt.h>
+ #include <dm.h>
+ #include <misc.h>
  #include <i2c.h>
-diff --git a/board/tq/tqma6/tqma6_mba6.c b/board/tq/tqma6/tqma6_mba6.c
-index 52851dd5b55e..877539e359e2 100644
---- a/board/tq/tqma6/tqma6_mba6.c
-+++ b/board/tq/tqma6/tqma6_mba6.c
-@@ -20,7 +20,6 @@
- #include <asm/gpio.h>
- #include <asm/mach-imx/mxc_i2c.h>
- 
+diff --git a/board/traverse/ten64/eth_ten64.c b/board/traverse/ten64/eth_ten64.c
+index 3f96e572b75a..c5f7acecc146 100644
+--- a/board/traverse/ten64/eth_ten64.c
++++ b/board/traverse/ten64/eth_ten64.c
+@@ -3,7 +3,6 @@
+  * Copyright 2017 NXP
+  * Copyright 2019-2021 Traverse Technologies Australia
+  */
 -#include <common.h>
- #include <fsl_esdhc_imx.h>
- #include <linux/libfdt.h>
+ #include <command.h>
+ #include <netdev.h>
  #include <malloc.h>
-diff --git a/board/tq/tqma6/tqma6_wru4.c b/board/tq/tqma6/tqma6_wru4.c
-index 5d239913fc5b..21c710188e09 100644
---- a/board/tq/tqma6/tqma6_wru4.c
-+++ b/board/tq/tqma6/tqma6_wru4.c
-@@ -23,7 +23,6 @@
- #include <asm/mach-imx/boot_mode.h>
- #include <asm/mach-imx/mxc_i2c.h>
- 
+diff --git a/board/traverse/ten64/ten64.c b/board/traverse/ten64/ten64.c
+index 6ff5312d6d79..d41bd2e9deeb 100644
+--- a/board/traverse/ten64/ten64.c
++++ b/board/traverse/ten64/ten64.c
+@@ -4,7 +4,7 @@
+  * Copyright 2017-2018 NXP
+  * Copyright 2019-2021 Traverse Technologies
+  */
 -#include <common.h>
- #include <fsl_esdhc_imx.h>
- #include <linux/libfdt.h>
- #include <malloc.h>
++#include <config.h>
+ #include <display_options.h>
+ #include <dm/uclass.h>
+ #include <env.h>
 -- 
 2.34.1
 
