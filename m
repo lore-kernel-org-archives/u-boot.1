@@ -4,72 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E25AC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:09:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 907CAC4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 03:09:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FA2B88CB6;
-	Wed,  1 May 2024 04:45:55 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7C7F488CBB;
+	Wed,  1 May 2024 04:45:56 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="C7Rghtk9";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VToc7SRt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40CDA88CB2; Wed,  1 May 2024 04:45:54 +0200 (CEST)
-Received: from mail-ua1-x92d.google.com (mail-ua1-x92d.google.com
- [IPv6:2607:f8b0:4864:20::92d])
+ id D538A88C1C; Wed,  1 May 2024 04:45:54 +0200 (CEST)
+Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
+ [IPv6:2607:f8b0:4864:20::72f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D233188CC0
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:51 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CF46088C83
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:45:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ua1-x92d.google.com with SMTP id
- a1e0cc1a2514c-7f1aa0b69ebso344883241.2
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:51 -0700 (PDT)
+Received: by mail-qk1-x72f.google.com with SMTP id
+ af79cd13be357-78f05341128so448682885a.0
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:45:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531550; x=1715136350; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531551; x=1715136351; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BTyaq1smI+ntdzy07oTQeebIp5my/kl5OICEZPA+PfE=;
- b=C7Rghtk9BT6YOB6QeeK55Upe4baSjv/C1Ia8bkdFtX5G6F9qRtLbCFbSEKKeY+0wVA
- UCckvrSwQFxEV6LDgEYle3hFTGY2CJV5t3UgstV5DdqlX7qSXEoKxRWUZ7K/dXNL+FPx
- sWWGu14THR/kg++ixARK394BVHPHIJZnOHa90=
+ bh=KyMeydR3+9pIPcHeKTj6F3qjFtRtAXpYZt30K8oSkYs=;
+ b=VToc7SRtB/oKHw1ucwH+Y8C+Ak+xyxOmfz4p44w5GPxyLQ8gFolYADg0RxqRp9CsRF
+ IftHRqGry++IrBf4Gyu/KZQsvSQCOiOfK0POiJi8OrM9Kw5zRNv3gWHE+T8icYX/7Cg9
+ Xyu/gDJxWudLY5M4sSV23P/KyK/eVP5z6TnaM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531550; x=1715136350;
+ d=1e100.net; s=20230601; t=1714531551; x=1715136351;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BTyaq1smI+ntdzy07oTQeebIp5my/kl5OICEZPA+PfE=;
- b=iv0HxhM2RP3WwTJe6xaq04oFJutF5ARBATWO5EETS/ED9v16T633OyCSGBOwhQ3455
- I3CJJhu+ZYfATZDsyUMTP0eWKyt7ksFKtMh6hg0G2XkLuLGNbsOIBMs/GgAS6KSV27od
- WqEXzamymNGowCgYvdTUX1ofpL0bRZYqo6ODfLP2+6TgwWK6JumhgbJn29comq/Lmx83
- bre4NnDHnwlK5ruOPY4OGdaPL/T6iTpCgqrhV+Xmq59HVCvxUZxizVDGu8+kwe3jcHuH
- qqzWEaV3wkm3qSupAMRlrzpktEwDOVCRRLXTM2ANz3ixvSvJelk3CF4HWcJz+rGS2jnh
- QSQw==
-X-Gm-Message-State: AOJu0YwdjTdxccWJnJ/TyIGvWYT9V9qXHQd2JJPuCKMD8wf9URFDdciG
- xug+/5ZX9xR3CBbt/gQRMO/wxUMC9Jw3TmaeJrx88T+xegymnIzrzfkFBzqZq8CN4OBTymnSxtG
- qpL+W255y
-X-Google-Smtp-Source: AGHT+IH68A+Yk08WaZNlBj7Q40LH6lf35BjRRw7HspUP8lT3cf0i398Vz+0FJt6R5x9MA32iri5kGA==
-X-Received: by 2002:a05:6102:745:b0:47c:4e97:4f72 with SMTP id
- v5-20020a056102074500b0047c4e974f72mr1650918vsg.23.1714531550475; 
- Tue, 30 Apr 2024 19:45:50 -0700 (PDT)
+ bh=KyMeydR3+9pIPcHeKTj6F3qjFtRtAXpYZt30K8oSkYs=;
+ b=JovE/vanpdmxQnKtnIKYZpCm3MaNqYs/bMLNohJi5tN+y66+n1hK3ZkKARmG0dxnYn
+ VfYldNjacf/YjteUxm3knuIcGgm0uTBkYHqbBLiNuX6A0m+uY3Idxq2LeEqH1TnYtSps
+ GavuhlzdCXSh//Jnc8lYgSmn7j3NVbqIOAYMyjLLUdFsV938BtDwSKwMbVWWcXQxEQ5r
+ HSyIyhtYz4Wx/RaduodWxijY65Xrk+G8ZDhtBm/Jbq5k9QohjGYYvmTs+VTq7v1GNX66
+ hhra3E5L+6/WF7f340pvlT9BEvntppmnoz39SVpTAjzs7Eh2Jtb96rl6DRrPfAbn5EHy
+ p6KA==
+X-Gm-Message-State: AOJu0YwnOwQefidbrTwd0STOiF4qyfkXy1liEYw75zBaIt/Bzh/wT79i
+ LO+J8rhNfRrAiyu9Cf/pu+etD5aGmNKO2JJGCwolXenEr1KmE2TZe+SinF0F036tizplu0F9ytM
+ gWoIGidj5
+X-Google-Smtp-Source: AGHT+IEJknCgtHF2hXWGL2JwgJtpNSmH2C93Wf/3mncyowtRtg8pesEZ9uwt6YN58Htbxc0q+6Fjew==
+X-Received: by 2002:a05:6214:2b0e:b0:6a0:ca29:1954 with SMTP id
+ jx14-20020a0562142b0e00b006a0ca291954mr1164389qvb.46.1714531551608; 
+ Tue, 30 Apr 2024 19:45:51 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.49
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.45.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:45:50 -0700 (PDT)
+ Tue, 30 Apr 2024 19:45:51 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Wei Fu <wefu@redhat.com>,
-	Yixun Lan <dlan@gentoo.org>
-Subject: [PATCH 133/149] board: thead: Remove <common.h> and add needed
+Cc: Stefan Roese <sr@denx.de>
+Subject: [PATCH 134/149] board: theadorable: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:43:00 -0600
-Message-Id: <20240501024316.1767971-133-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:43:01 -0600
+Message-Id: <20240501024316.1767971-134-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
@@ -96,24 +95,40 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Wei Fu <wefu@redhat.com>
-Cc: Yixun Lan <dlan@gentoo.org>
+Cc: Stefan Roese <sr@denx.de>
 ---
- board/thead/th1520_lpi4a/board.c | 1 -
- 1 file changed, 1 deletion(-)
+ board/theadorable/fpga.c        | 2 +-
+ board/theadorable/theadorable.c | 1 -
+ 2 files changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/board/thead/th1520_lpi4a/board.c b/board/thead/th1520_lpi4a/board.c
-index 16c3e456b3e5..bb83e7561f4e 100644
---- a/board/thead/th1520_lpi4a/board.c
-+++ b/board/thead/th1520_lpi4a/board.c
-@@ -4,7 +4,6 @@
-  *
+diff --git a/board/theadorable/fpga.c b/board/theadorable/fpga.c
+index bc8379cccf6d..56d3647227bb 100644
+--- a/board/theadorable/fpga.c
++++ b/board/theadorable/fpga.c
+@@ -3,10 +3,10 @@
+  * Copyright (C) 2016 Stefan Roese <sr@denx.de>
   */
  
 -#include <common.h>
- #include <cpu_func.h>
+ #include <altera.h>
+ #include <errno.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/gpio.h>
+ #include <asm/io.h>
+ #include <asm/arch/cpu.h>
+diff --git a/board/theadorable/theadorable.c b/board/theadorable/theadorable.c
+index 144f122bb206..cca5c3d33b5e 100644
+--- a/board/theadorable/theadorable.c
++++ b/board/theadorable/theadorable.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2015-2019 Stefan Roese <sr@denx.de>
+  */
  
- int board_init(void)
+-#include <common.h>
+ #include <command.h>
+ #include <console.h>
+ #include <dm.h>
 -- 
 2.34.1
 
