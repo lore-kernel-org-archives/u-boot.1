@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2430EC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:46:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AA87C4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 02:46:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0705A88ABF;
-	Wed,  1 May 2024 04:43:44 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 6756688AD0;
+	Wed,  1 May 2024 04:43:45 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aKk6+ciC";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pws2P0pX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 149AC88AC8; Wed,  1 May 2024 04:43:43 +0200 (CEST)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 0FC1F88ACD; Wed,  1 May 2024 04:43:45 +0200 (CEST)
+Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
+ [IPv6:2607:f8b0:4864:20::730])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02F7088AAD
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:43:41 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6323488A7E
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 04:43:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-69b4e94ecd2so32100216d6.3
- for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:43:40 -0700 (PDT)
+Received: by mail-qk1-x730.google.com with SMTP id
+ af79cd13be357-790f91b834cso232575185a.0
+ for <u-boot@lists.denx.de>; Tue, 30 Apr 2024 19:43:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714531420; x=1715136220; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714531421; x=1715136221; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mK/vupfvHB0K9GGqLgBmtbyaQH0qX2wK7YRoW4G198A=;
- b=aKk6+ciCRu1T+5B8AjcfB7wtkG3OJwfhOyisFPCtgKVk/N+TFJ0l/AgaJG59Rh7AQD
- EIMos5Y2/geidJzpWqA5bgc+9AmB4lbd0OFLQuPP+ccq3gYXS2aN6xn1UGNZES8Q77gp
- 3/6Wr/XowFrXDfKvWf2VDDz2KP0fj+8GgAGbQ=
+ bh=ANjz9MKiNs7c7j57Bo4z9o4rRUiU2SLk/EkyXNZVgiE=;
+ b=pws2P0pXDRyn0JN+3/BtASk+ppLC3qodVQmGLogttbadKXN7dR2R1+hw3W90hzlHc2
+ dJF13YUjgFG3EWJZOxu+hHFyLn70jZJji8q+swDtTLSY8sB0nCJ9F6poySPxej7a7oJd
+ au4obawe+3HWBXT2MwP0Dr2Cp8g7kzAUz5tVU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714531420; x=1715136220;
+ d=1e100.net; s=20230601; t=1714531421; x=1715136221;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mK/vupfvHB0K9GGqLgBmtbyaQH0qX2wK7YRoW4G198A=;
- b=rk+63w5JKAFesHTS+VXmgavJuHLq5RCEdPzWY2p8dpoGBsc9kQiIYswYxDPwkekMkq
- oSQTjDExr7HOpfEFyUuKYDHwIGf9SpHyf/f0S3HucQfcCSMSxDPRu5X47HtYqctUY4i0
- DtkI8eid6MZLstb+pzwLtPkEuMW5DNNzGo9RFOB+7Nz6xMd9uk+IsrEHYsHcM6IEPtnM
- z5AlVyF4WSRRTwF5tjh8dqNK0a4eMae5B0NTgbX7nboINWDyo7iQ7zT7GSWgKjhvVPUn
- McS3cUCfIRLna/3zuJcVWu3kvJWAd4qSjxOC6fpD77PwI5GPSJvVYKV3juSNrf5SUg2G
- /B3Q==
-X-Gm-Message-State: AOJu0YxYqHD9Iq9J9EC6aIiy9auaa1ZnpGUa7Q+BxbwYoJ18nFZLcBFS
- 63tBLLIVXfNSrn4rrob8ecxAqiKjk7xyxs2gTUixarhM0OO5EhKIAG3D3IUr3UJkyMR4Hx+kGuZ
- w+rCL8w==
-X-Google-Smtp-Source: AGHT+IGx24VeQ6LdZay7Vq5501NFi94HYmBvev3hRtq5YwK4boBmbySmVP38ultRLRgHRzqROjMdAw==
-X-Received: by 2002:a05:6214:2527:b0:6a0:49c5:c2b5 with SMTP id
- gg7-20020a056214252700b006a049c5c2b5mr1510801qvb.28.1714531417565; 
- Tue, 30 Apr 2024 19:43:37 -0700 (PDT)
+ bh=ANjz9MKiNs7c7j57Bo4z9o4rRUiU2SLk/EkyXNZVgiE=;
+ b=WWLkoWUYGLpeElz79JXWz8ghy9CtpaC4+R81dN9jgMhxrnqLqzVNnRXBeXaacXK5vO
+ ENgeyogygvzLci4cUvQvBVURIJQ0LSyDMQjTsN48j2UTtjLm0U1b8EHoB9Cr4huA298Q
+ pwONREvoAZPc2Q1jFYFNKlPrPlNPTkh8KrqL74/xtruM5lPIX9Scp/F6lUtJa4qCQrGJ
+ fJF4SUZVVGJuBARFKasRq43HWh1zzwfIeTV3BtjbeE/n0+P7X9KILGSGuWJr9GgCTqjn
+ VWDQ+oF6jcQzyq0P/hAnq5A7zy7VIAjTpOAKrK9hPe7vCI4Aqho33t5WAHlkKCHnGgYp
+ f4/Q==
+X-Gm-Message-State: AOJu0Yxf6EjGXuvSvNWJctlX5Ftv6x98CbvUaot7QCjLGE7zc8S454x/
+ ZjNV2KEG7BxLMQtKXDocQ8Q5z+o8vhtFZ2hcFKQeT6aJRW8JzkTk1e1+u3QiosAQzXHkYT5zaT9
+ UCg/H5w==
+X-Google-Smtp-Source: AGHT+IEaAFhUwwuSkVLa/UCL5hfppj+2c9gQxBd9IqNgPkgeJw2xUzMhXh3Wj9x5W2ZBtAFULye+bQ==
+X-Received: by 2002:a05:6214:27c9:b0:6a0:d20e:5478 with SMTP id
+ ge9-20020a05621427c900b006a0d20e5478mr1496279qvb.2.1714531421080; 
+ Tue, 30 Apr 2024 19:43:41 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.43.36
+ p3-20020a0cf683000000b006a0ed3ea821sm391763qvn.72.2024.04.30.19.43.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 30 Apr 2024 19:43:37 -0700 (PDT)
+ Tue, 30 Apr 2024 19:43:40 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: =?UTF-8?q?S=C3=A9bastien=20Szymanski?= <sebastien.szymanski@armadeus.com>
-Subject: [PATCH 018/149] board: armadeus: Remove <common.h> and add needed
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>,
+ Xueliang Zhong <xueliang.zhong@arm.com>,
+ Linus Walleij <linus.walleij@linaro.org>, Usama Arif <usama.arif@arm.com>,
+ Kristian Amlie <kristian.amlie@northern.tech>,
+ Liviu Dudau <liviu.dudau@foss.arm.com>,
+ David Feng <fenghua@phytium.com.cn>, Peter Hoyes <Peter.Hoyes@arm.com>
+Subject: [PATCH 019/149] board: armltd: Remove <common.h> and add needed
  includes
-Date: Tue, 30 Apr 2024 20:41:05 -0600
-Message-Id: <20240501024316.1767971-18-trini@konsulko.com>
+Date: Tue, 30 Apr 2024 20:41:06 -0600
+Message-Id: <20240501024316.1767971-19-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240501024316.1767971-1-trini@konsulko.com>
 References: <20240501024316.1767971-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,23 +100,113 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: "Sébastien Szymanski" <sebastien.szymanski@armadeus.com>
+Cc: Abdellatif El Khlifi <abdellatif.elkhlifi@arm.com>
+Cc: Xueliang Zhong <xueliang.zhong@arm.com>
+Cc: Linus Walleij <linus.walleij@linaro.org>
+Cc: Usama Arif <usama.arif@arm.com>
+Cc: Kristian Amlie <kristian.amlie@northern.tech>
+Cc: Liviu Dudau <liviu.dudau@foss.arm.com>
+Cc: David Feng <fenghua@phytium.com.cn>
+Cc: Peter Hoyes <Peter.Hoyes@arm.com>
 ---
- board/armadeus/opos6uldev/board.c | 1 -
- 1 file changed, 1 deletion(-)
+ board/armltd/corstone1000/corstone1000.c   | 1 -
+ board/armltd/integrator/integrator.c       | 2 +-
+ board/armltd/integrator/timer.c            | 2 +-
+ board/armltd/total_compute/total_compute.c | 2 +-
+ board/armltd/vexpress/vexpress_common.c    | 2 +-
+ board/armltd/vexpress64/pcie.c             | 1 -
+ board/armltd/vexpress64/vexpress64.c       | 2 +-
+ 7 files changed, 5 insertions(+), 7 deletions(-)
 
-diff --git a/board/armadeus/opos6uldev/board.c b/board/armadeus/opos6uldev/board.c
-index 365fdca1b76f..5b25545cdb88 100644
---- a/board/armadeus/opos6uldev/board.c
-+++ b/board/armadeus/opos6uldev/board.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2018 Armadeus Systems
+diff --git a/board/armltd/corstone1000/corstone1000.c b/board/armltd/corstone1000/corstone1000.c
+index 01c80aaf9d77..3ad77f51949f 100644
+--- a/board/armltd/corstone1000/corstone1000.c
++++ b/board/armltd/corstone1000/corstone1000.c
+@@ -6,7 +6,6 @@
+  */
+ 
+ #include <blk.h>
+-#include <common.h>
+ #include <cpu_func.h>
+ #include <dm.h>
+ #include <env.h>
+diff --git a/board/armltd/integrator/integrator.c b/board/armltd/integrator/integrator.c
+index ad02cf16da5e..eaf87e3bfe30 100644
+--- a/board/armltd/integrator/integrator.c
++++ b/board/armltd/integrator/integrator.c
+@@ -16,7 +16,7 @@
+  * Philippe Robin, <philippe.robin@arm.com>
+  */
+ 
+-#include <common.h>
++#include <config.h>
+ #include <bootstage.h>
+ #include <cpu_func.h>
+ #include <dm.h>
+diff --git a/board/armltd/integrator/timer.c b/board/armltd/integrator/timer.c
+index 9db5135a8ffa..f4101b649e30 100644
+--- a/board/armltd/integrator/timer.c
++++ b/board/armltd/integrator/timer.c
+@@ -16,7 +16,7 @@
+  * Philippe Robin, <philippe.robin@arm.com>
+  */
+ 
+-#include <common.h>
++#include <config.h>
+ #include <div64.h>
+ #include <time.h>
+ #include <linux/delay.h>
+diff --git a/board/armltd/total_compute/total_compute.c b/board/armltd/total_compute/total_compute.c
+index 53941b5f5f28..e1b4f49d044b 100644
+--- a/board/armltd/total_compute/total_compute.c
++++ b/board/armltd/total_compute/total_compute.c
+@@ -4,7 +4,7 @@
+  * Usama Arif <usama.arif@arm.com>
+  */
+ 
+-#include <common.h>
++#include <config.h>
+ #include <dm.h>
+ #include <dm/platform_data/serial_pl01x.h>
+ #include <asm/armv8/mmu.h>
+diff --git a/board/armltd/vexpress/vexpress_common.c b/board/armltd/vexpress/vexpress_common.c
+index 763131c217e5..6c374e25e32c 100644
+--- a/board/armltd/vexpress/vexpress_common.c
++++ b/board/armltd/vexpress/vexpress_common.c
+@@ -15,7 +15,7 @@
+  * ARM Ltd.
+  * Philippe Robin, <philippe.robin@arm.com>
+  */
+-#include <common.h>
++#include <config.h>
+ #include <bootstage.h>
+ #include <cpu_func.h>
+ #include <init.h>
+diff --git a/board/armltd/vexpress64/pcie.c b/board/armltd/vexpress64/pcie.c
+index e553da86e0e0..1045c905f732 100644
+--- a/board/armltd/vexpress64/pcie.c
++++ b/board/armltd/vexpress64/pcie.c
+@@ -5,7 +5,6 @@
+  * Author: Liviu Dudau <Liviu.Dudau@arm.com>
   */
  
 -#include <common.h>
  #include <init.h>
- #include <asm/arch/sys_proto.h>
- #include <asm/gpio.h>
+ #include <log.h>
+ #include <asm/io.h>
+diff --git a/board/armltd/vexpress64/vexpress64.c b/board/armltd/vexpress64/vexpress64.c
+index ee65a596838a..0119f54f0df8 100644
+--- a/board/armltd/vexpress64/vexpress64.c
++++ b/board/armltd/vexpress64/vexpress64.c
+@@ -4,7 +4,7 @@
+  * David Feng <fenghua@phytium.com.cn>
+  * Sharma Bhupesh <bhupesh.sharma@freescale.com>
+  */
+-#include <common.h>
++#include <config.h>
+ #include <cpu_func.h>
+ #include <dm.h>
+ #include <init.h>
 -- 
 2.34.1
 
