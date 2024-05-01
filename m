@@ -4,62 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62DABC4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 08:49:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D542C10F1A
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 09:14:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C681088B3C;
-	Wed,  1 May 2024 10:49:48 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=manjaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 5743B88AA8;
+	Wed,  1 May 2024 11:14:37 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=manjaro.org header.i=@manjaro.org header.b="XluEvWnC";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="qCOxsd33";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6154188B3D; Wed,  1 May 2024 10:49:47 +0200 (CEST)
-Received: from mail.manjaro.org (mail.manjaro.org [116.203.91.91])
+ id 511E788A8D; Wed,  1 May 2024 11:14:36 +0200 (CEST)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1DE2B88B34
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 10:49:45 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=manjaro.org
+ by phobos.denx.de (Postfix) with ESMTPS id 18FE488AAF
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 11:14:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dsimic@manjaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1714554872; x=1715159672; i=xypron.glpk@gmx.de;
+ bh=l5R4kyCL16868LmQJyG0pbzAX+5ZxxIU7gmP0vKbcvM=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:To:Cc:From:
+ Subject:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=qCOxsd33M9VtvzCyDzQ3I6jUiiKyUsRb7ZYQql/89besxOXXaMjU/VVLOjY5CPbL
+ tCo5zc65V/nHr5/ivyWJ9Ti9DJK0dIqx0Xqi9/cTlTY8AADorFrh03KnWzCSYU+NN
+ zAF6tgU7c1tsOOshOxdwAJaLcQxZIsBYI+UzzS7l5/Mi+8y51o9b/cIdIfpgOuk5o
+ kXjw+6esSxjiWzqygYItP9RnNgxI5GYappO4OPPKPdzaKouNuncqlqQjETXAkH1hX
+ lENxoxa6vS6FBeKc4hPNOOGvTVq+eicH5TttBYK3f/NhholVtYVMM3M9eRr4AjwaE
+ G/Sv5rwoWTqPM7xiWQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([62.143.245.32]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MMofc-1sKrLo1B8m-00IoB6; Wed, 01
+ May 2024 11:14:32 +0200
+Message-ID: <400218f9-d580-42fe-bb61-bc75c4e69cf1@gmx.de>
+Date: Wed, 1 May 2024 11:14:27 +0200
 MIME-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=manjaro.org; s=2021;
- t=1714553384;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5/10cF+yRhKgiNxwBbWLdS9i9fpVK2mF8hlimVGnTtI=;
- b=XluEvWnCNC6Ux/9y1Ul0wdCPYxiNDeSOc1gYg8i/8y/kuY+xfYjMIucZg38czbUtN2V9ei
- WoOSnl6lJqvdjt5BMyBNiGnQTTOGvEzYbBRURN9g1Cm5jbY3u3Bh+A9PR4T2SU/DwKGKMo
- kiUPzYwYm96FB73djJD/bE4wUx2gBj9qlHgZ0QcVbv31DFpO6vq5hvsrZFtvg10cfI+f43
- blQILT1R0XAb+qZTXFXld6QIgg/GQ9Icgz4Jckr9+WOH9HQEkQ2IfnKrr7a3pIEFLRrOW9
- ilp1kwW+aFMYRhH1ldp4Zbk26/DEQdLsC4UqsjPSRaXGrQovMW11VRj9M7PNTA==
-Date: Wed, 01 May 2024 10:49:44 +0200
-From: Dragan Simic <dsimic@manjaro.org>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Andy Yan <andy.yan@rock-chips.com>, Manivannan Sadhasivam
- <manivannan.sadhasivam@linaro.org>, Nick Xie <nick@khadas.com>, Peter
- Robinson <pbrobinson@gmail.com>, Levin Du <djw@t-chip.com.cn>, Suniel Mahesh
- <sunil@amarulasolutions.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Quentin Schulz <quentin.schulz@theobroma-systems.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 11/18] rockchip: rk3399: Add a default spl-boot-order
- prop
-In-Reply-To: <20240430153053.308788-12-jonas@kwiboo.se>
-References: <20240430153053.308788-1-jonas@kwiboo.se>
- <20240430153053.308788-12-jonas@kwiboo.se>
-Message-ID: <42b94427811d5a217981298852421dec@manjaro.org>
-X-Sender: dsimic@manjaro.org
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Authentication-Results: ORIGINATING;
- auth=pass smtp.auth=dsimic@manjaro.org smtp.mailfrom=dsimic@manjaro.org
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: Pull request efi-2024-07-rc2
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:E1VJOvzEQf/A5A6qG926pFg631chkIANuN+kRw1IrwdfXqzUtEO
+ scdGz59AHdixVjHmoxDEEcymIP6KuXgeCAMTpxRwvH2FCwKW/ljgjXSuDuHKSWOdtr/oKIs
+ vKAsK/vY+AlODetGEdA4PmExAUYg8iQyu2ATY9Jp+XHSn+n4ovwTim2uqKQ2pAQhu8Q73hc
+ Le2X71wmLl9FFWkbEo83Q==
+UI-OutboundReport: notjunk:1;M01:P0:SIy7kC4v14s=;kmPV0tRwMSBsBFTNDquZ5KlmGQ3
+ 5pVyZjwRFnMWeOITHhub/w/6uauAX1PvjSRTJxea5gXyZI6PyuZ3Ki1beRapZAUyih/Hx1aHh
+ Tut2se5U1lJB+gf2jC5hpVtKkAY2Gt5BMwHXKpLA39FK6nG/egCdUrnyKR4POjeoQkD19EKoV
+ YbW1lYrkyKS1NIXLzowmMKgo/hhQJiqBa8z1AelaOxRJ0HOUowgvs8hXk8anCfITTBQj1iqOY
+ hE7p5b85+sJMzd1ieDDu8BgHwpSCwYrOgceVVfd9TODyottVmDrzpRKvuxDISKA/jPQMTOTFl
+ B+0WeLB8T4BYrxnvyOUh9nwPJiG8Bp7JaX1bK/OtqF1LVhjcatBGLRs8f17YQJoc9/aq4KK8S
+ aWf1Jouvr5qi6cF9sIekaX7yKHm8jA+ucHNbX4886h0x/3mtyhTGHqQjcn6L42ptvSQIZx6z9
+ vMUvpoxYzioxnCRNur0X2iife9j5GhAVuBwN4x8ulyV3afL8OoSI469D/V/ODhpS0G5SPc4Hm
+ QaTtrh7hGmvizDwAQlF/L4emlJ4roQwV2zeplzbv6N6MQaUS4lbr1P6naQgvgDzkJCjMVnizu
+ 1IY5qNO0C7llQSs6TT1EcPNXAI+ZVwD5s9DU6lVy2XA1EvR1kVWJNa8WcIX2mBixd/7MhOlCn
+ IPPsU5kYResC12xdchIrcbHbfG66E9BmoIyWBVUXSQyRQYXBnMsI48NIyLuZ6GmwfLCD417UY
+ ZbEw13F8DacW42ksNCsk7a4WRD5z2Su5dDpj5agqPbNBRQle9v1STHiGFUOaIdlwHRtPq93nR
+ Tb6xU1PtxEmu7psJz6E7nBvaLVpGQXExPbQDZQHRqEJ8o=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,299 +87,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2024-04-30 17:30, Jonas Karlman wrote:
-> A lot of RK3399 boards use a u-boot,spl-boot-order of "same-as-spl",
-> &sdhci and &sdmmc.
-> 
-> Move this to rk3399-u-boot.dtsi and make this default for boards
-> currently missing a u-boot,spl-boot-order prop.
-> 
-> Before commit a7e69952eb6d ("rockchip: spl: Cache boot source id for
-> later use") it was required to include the SPI flash node in the
-> u-boot,spl-boot-order prop to successfully load FIT from SPI flash.
-> 
-> The SPI flash node reference has been dropped from spl-boot-order from
-> pinebook-pro, roc-pc and rockpro64 now that "same-as-spl" also gets
-> resolved to the SPI flash node and loading FIT from SPI flash works
-> without having the node explicitly referenced in spl-boot-order prop.
-> 
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Dear Tom,
 
-Looking good to me.
+The following changes since commit ff0de1f0557ed7d2dab47ba976a37347a1fdc43=
+2:
 
-Reviewed-by: Dragan Simic <dsimic@manjaro.org>
+   Merge patch series "Update PHYTEC SOM Detection" (2024-04-29 10:56:05
+-0600)
 
-> ---
-> v2: Update commit message
-> ---
->  arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi      | 1 -
->  arch/arm/dts/rk3399-evb-u-boot.dtsi            | 1 -
->  arch/arm/dts/rk3399-ficus-u-boot.dtsi          | 6 ------
->  arch/arm/dts/rk3399-firefly-u-boot.dtsi        | 6 ------
->  arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi    | 6 ------
->  arch/arm/dts/rk3399-leez-p710-u-boot.dtsi      | 6 ------
->  arch/arm/dts/rk3399-nanopi4-u-boot.dtsi        | 6 ------
->  arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi   | 6 ------
->  arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi  | 6 ------
->  arch/arm/dts/rk3399-roc-pc-u-boot.dtsi         | 4 ----
->  arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi      | 6 ------
->  arch/arm/dts/rk3399-rock960-u-boot.dtsi        | 5 -----
->  arch/arm/dts/rk3399-rockpro64-u-boot.dtsi      | 5 +----
->  arch/arm/dts/rk3399-u-boot.dtsi                | 4 ++++
->  arch/arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi | 6 ------
->  15 files changed, 5 insertions(+), 69 deletions(-)
-> 
-> diff --git a/arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi
-> b/arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi
-> index a3f27566e438..6c07de98fa01 100644
-> --- a/arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-eaidk-610-u-boot.dtsi
-> @@ -9,7 +9,6 @@
->  / {
->  	chosen {
->  		stdout-path = "serial2:1500000n8";
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
->  	};
->  };
-> 
-> diff --git a/arch/arm/dts/rk3399-evb-u-boot.dtsi
-> b/arch/arm/dts/rk3399-evb-u-boot.dtsi
-> index dfce63e4d428..796ac9642399 100644
-> --- a/arch/arm/dts/rk3399-evb-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-evb-u-boot.dtsi
-> @@ -9,7 +9,6 @@
->  / {
->  	chosen {
->  		stdout-path = "serial2:1500000n8";
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
->  	};
->  };
-> 
-> diff --git a/arch/arm/dts/rk3399-ficus-u-boot.dtsi
-> b/arch/arm/dts/rk3399-ficus-u-boot.dtsi
-> index 38e0897db91d..67b63a835238 100644
-> --- a/arch/arm/dts/rk3399-ficus-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-ficus-u-boot.dtsi
-> @@ -5,9 +5,3 @@
-> 
->  #include "rk3399-u-boot.dtsi"
->  #include "rk3399-sdram-ddr3-1600.dtsi"
-> -
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> diff --git a/arch/arm/dts/rk3399-firefly-u-boot.dtsi
-> b/arch/arm/dts/rk3399-firefly-u-boot.dtsi
-> index c58ad95d120a..1f5fda1d0f1d 100644
-> --- a/arch/arm/dts/rk3399-firefly-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-firefly-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->  #include "rk3399-u-boot.dtsi"
->  #include "rk3399-sdram-ddr3-1600.dtsi"
-> 
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> -
->  &vdd_log {
->  	regulator-init-microvolt = <950000>;
->  };
-> diff --git a/arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi
-> b/arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi
-> index a7039d74a016..4a3b23e48313 100644
-> --- a/arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-khadas-edge-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->  #include "rk3399-u-boot.dtsi"
->  #include "rk3399-sdram-lpddr4-100.dtsi"
-> 
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> -
->  &vdd_log {
->  	regulator-init-microvolt = <950000>;
->  };
-> diff --git a/arch/arm/dts/rk3399-leez-p710-u-boot.dtsi
-> b/arch/arm/dts/rk3399-leez-p710-u-boot.dtsi
-> index c638ce259731..03b596850635 100644
-> --- a/arch/arm/dts/rk3399-leez-p710-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-leez-p710-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->  #include "rk3399-u-boot.dtsi"
->  #include "rk3399-sdram-lpddr4-100.dtsi"
-> 
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> -
->  &vdd_log {
->  	regulator-init-microvolt = <950000>;
->  };
-> diff --git a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-> b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-> index a9d10592d573..a126bbaf086f 100644
-> --- a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-> @@ -5,12 +5,6 @@
-> 
->  #include "rk3399-u-boot.dtsi"
-> 
-> -/{
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> -
->  &sdmmc {
->  	pinctrl-0 = <&sdmmc_bus4 &sdmmc_clk &sdmmc_cmd &sdmmc_cd>;
->  };
-> diff --git a/arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi
-> b/arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi
-> index 88a77cad8d43..83b0c44e9ec5 100644
-> --- a/arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-pinebook-pro-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->  #include "rk3399-u-boot.dtsi"
->  #include "rk3399-sdram-lpddr4-100.dtsi"
-> 
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &spiflash, &sdmmc;
-> -	};
-> -};
-> -
->  &edp {
->  	rockchip,panel = <&edp_panel>;
->  };
-> diff --git a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> index 0e46e87e1fa0..5dc7d0db5f73 100644
-> --- a/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-pinephone-pro-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->  #include "rk3399-u-boot.dtsi"
->  #include "rk3399-sdram-lpddr4-100.dtsi"
-> 
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> -
->  &sdhci {
->  	max-frequency = <25000000>;
->  	bootph-all;
-> diff --git a/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-> b/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-> index c8f4418a7389..e390cf3abab5 100644
-> --- a/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-roc-pc-u-boot.dtsi
-> @@ -7,10 +7,6 @@
->  #include "rk3399-sdram-lpddr4-100.dtsi"
-> 
->  / {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &spi_flash, &sdhci, &sdmmc;
-> -	};
-> -
->  	vcc_hub_en: vcc_hub_en-regulator {
->  		compatible = "regulator-fixed";
->  		enable-active-high;
-> diff --git a/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> b/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> index 60122f3bcd6c..b3bfc77f7569 100644
-> --- a/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rock-pi-4-u-boot.dtsi
-> @@ -6,12 +6,6 @@
->  #include "rk3399-u-boot.dtsi"
->  #include "rk3399-sdram-lpddr4-100.dtsi"
-> 
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
-> -
->  &sdhci {
->  	cap-mmc-highspeed;
->  	mmc-ddr-1_8v;
-> diff --git a/arch/arm/dts/rk3399-rock960-u-boot.dtsi
-> b/arch/arm/dts/rk3399-rock960-u-boot.dtsi
-> index c190089e2643..55716ba4df73 100644
-> --- a/arch/arm/dts/rk3399-rock960-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rock960-u-boot.dtsi
-> @@ -7,10 +7,6 @@
->  #include "rk3399-sdram-lpddr3-2GB-1600.dtsi"
-> 
->  / {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -
->  	vdd_log: vdd-log {
->  		compatible = "pwm-regulator";
->  		pwms = <&pwm2 0 25000 1>;
-> @@ -22,5 +18,4 @@
->  		regulator-init-microvolt = <950000>;
->  		vin-supply = <&vcc5v0_sys>;
->  	};
-> -
->  };
-> diff --git a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> index 089732524a76..b15e5392c3cf 100644
-> --- a/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-rockpro64-u-boot.dtsi
-> @@ -5,11 +5,8 @@
-> 
->  #include "rk3399-u-boot.dtsi"
->  #include "rk3399-sdram-lpddr4-100.dtsi"
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &spi_flash, &sdmmc, &sdhci;
-> -	};
-> 
-> +/ {
->          smbios {
->                  compatible = "u-boot,sysinfo-smbios";
->                  smbios {
-> diff --git a/arch/arm/dts/rk3399-u-boot.dtsi 
-> b/arch/arm/dts/rk3399-u-boot.dtsi
-> index 0b0a90acf431..96523a138ae3 100644
-> --- a/arch/arm/dts/rk3399-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399-u-boot.dtsi
-> @@ -14,6 +14,10 @@
->  		spi1 = &spi1;
->  	};
-> 
-> +	chosen {
-> +		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> +	};
-> +
->  	cic: syscon@ff620000 {
->  		bootph-all;
->  		compatible = "rockchip,rk3399-cic", "syscon";
-> diff --git a/arch/arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi
-> b/arch/arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi
-> index 7c66e1145a50..946a0230dbb4 100644
-> --- a/arch/arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi
-> +++ b/arch/arm/dts/rk3399pro-rock-pi-n10-u-boot.dtsi
-> @@ -5,9 +5,3 @@
-> 
->  #include "rk3399pro-u-boot.dtsi"
->  #include "rk3399-sdram-lpddr3-4GB-1600.dtsi"
-> -
-> -/ {
-> -	chosen {
-> -		u-boot,spl-boot-order = "same-as-spl", &sdhci, &sdmmc;
-> -	};
-> -};
+are available in the Git repository at:
+
+   https://source.denx.de/u-boot/custodians/u-boot-efi.git
+tags/efi-2024-07-rc2
+
+for you to fetch changes up to 8745f13fe102968f58a9e2e5f69ad153a675b59c:
+
+   efi_loader: pass GUID by address to efi_dp_from_lo (2024-05-01
+08:40:42 +0200)
+
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/20590
+
+=2D---------------------------------------------------------------
+Pull request efi-2024-07-rc2
+
+Documentation:
+
+* correct description of 'env print -e'
+
+UEFI:
+
+* remove superfluous efi_restore_gd after EFI_CALL
+* terminate efidebug test bootmgr early on error
+* do not install device-tree if bootmgr fails
+* pass GUID by address to efi_dp_from_lo
+* remove dead code in efi_var_mem_init()
+* enable QueryVariableInfo at runtime for file backed variables
+
+=2D---------------------------------------------------------------
+Heinrich Schuchardt (7):
+       efi_loader: superfluous efi_restore_gd after EFI_CALL
+       cmd: terminate efidebug test bootmgr early on error
+       efi_loader: improve error handling in try_load_entry()
+       efi_loader: do not install dtb if bootmgr fails
+       doc: correct description of 'env print -e'
+       efi_loader: fix description efi_dp_shorten
+       efi_loader: pass GUID by address to efi_dp_from_lo
+
+Ilias Apalodimas (4):
+       efi_loader: address coverity report 492766 for dead code
+       efi_loader: enable QueryVariableInfo at runtime for file backed
+variables
+       efi_selftest: add tests for QueryVariableInfo at runtime
+       efi_selftest: add tests for QueryVariableInfo at boottime
+
+  cmd/bootefi.c                                      |   1 -
+  cmd/efidebug.c                                     |   4 +-
+  doc/usage/cmd/env.rst                              |  10 +-
+  include/efi_loader.h                               |   2 +-
+  include/efi_selftest.h                             |  11 ++
+  lib/efi_loader/efi_bootmgr.c                       | 111
++++++++++++----------
+  lib/efi_loader/efi_device_path.c                   |   2 +-
+  lib/efi_loader/efi_helper.c                        |   6 +-
+  lib/efi_loader/efi_load_initrd.c                   |   2 +-
+  lib/efi_loader/efi_runtime.c                       |   4 +
+  lib/efi_loader/efi_var_common.c                    |   6 --
+  lib/efi_loader/efi_var_mem.c                       |   2 -
+  lib/efi_loader/efi_variable.c                      |  25 +++--
+  lib/efi_loader/efi_variable_tee.c                  |   5 +
+  lib/efi_selftest/Makefile                          |   1 +
+  lib/efi_selftest/efi_selftest_variables.c          |  13 +--
+  lib/efi_selftest/efi_selftest_variables_common.c   | 102
++++++++++++++++++++
+  lib/efi_selftest/efi_selftest_variables_runtime.c  |  19 +++-
+  test/py/tests/test_efi_secboot/test_signed.py      |  28 +++---
+  .../py/tests/test_efi_secboot/test_signed_intca.py |  10 +-
+  test/py/tests/test_efi_secboot/test_unsigned.py    |   6 +-
+  21 files changed, 256 insertions(+), 114 deletions(-)
+  create mode 100644 lib/efi_selftest/efi_selftest_variables_common.c
