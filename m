@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 523D1C4345F
-	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 16:24:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 617DFC4345F
+	for <u-boot@archiver.kernel.org>; Wed,  1 May 2024 16:24:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 220FF88B8A;
-	Wed,  1 May 2024 18:24:06 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7B5C088B8D;
+	Wed,  1 May 2024 18:24:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="I6I1TVaH";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="bYWJpYn0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2324D88B94; Wed,  1 May 2024 18:24:05 +0200 (CEST)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [167.172.40.54])
+ id 30E3788B4B; Wed,  1 May 2024 18:24:07 +0200 (CEST)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DACF188B8F
- for <u-boot@lists.denx.de>; Wed,  1 May 2024 18:24:02 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 857A288B8D
+ for <u-boot@lists.denx.de>; Wed,  1 May 2024 18:24:03 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,24 +28,23 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1714580601; bh=yz0PEeRcIGf9hW6TinE0PtXhp0yFpncqgYQLR5DRZz4=;
- b=I6I1TVaHNRIU8kNZwMqzQpDxKeHE/aypCTtJ0yCxLUfZCYTN9dORFbZGZpqjvJ0REwZsb2ZGz
- VrfvoHGohsIhaY9tyaM+71HYuFUuRJdODoN3l1PwNGYfq5t6mt4VdH6giw0O+k4CacXhfnBDblB
- YnRmlqcb0J2eTHZIMPF4eJuDVs9gwJ9BrNWjT1yU8Tk6HLVX5OE5Dqbu+ZdPoO3gn+bYpLOJWT/
- T100uL79GbAnidjEwSin+9freRZVNB5bFSVajRtCTy6aA7ItuiSWvtZa2QAx/qXZK1QxOPa1KNy
- 0OgYrtTrvi6kpBNzIPrtEl3xzSvZLAktPjEuMPxm1JXA==
+ t=1714580621; bh=P+pPIA5jxb86lOc5BTr95Ig97uAbrBYTpqchHU+NPbM=;
+ b=bYWJpYn0h3lqSisODwl9Ufsowfs9ttcARiFXXl6+BLnKm9ola/QbZXyl7hcVVlnv0+ugFw4CZ
+ tuOjAIPCWKvi3tWyGpDSUUqKZk9XP6R3725n9DBOMNBK/eUemUNAEocIT/JsWXrYKRCSVcbx5ME
+ jkvKARsIlT3G/X32Sa+nr0yuU4sqMpdd17SwoqD16eNzF9OB/VjFjxn0FrcgloHrOl/4ifzA2+3
+ PuDc7esdNQeN2unZqsw3njgOZJmBW/bMtKADIiAoU5JKaaapeVQS72n2YAKulOdyLzeShpOio0+
+ WqFNZXIa4hFwN8DTsfVPolsy7UuuFN7Y8u17YxVvkNew==
 From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>
-Cc: Quentin Schulz <quentin.schulz@theobroma-systems.com>, Dragan Simic
- <dsimic@manjaro.org>, Christopher Obbard <chris.obbard@collabora.com>,
- Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de, Jonas Karlman
- <jonas@kwiboo.se>
-Subject: [PATCH v2 01/22] clk: rockchip: rk3399: Rename SCLK_DDRCLK to
- SCLK_DDRC
-Date: Wed,  1 May 2024 16:22:18 +0000
-Message-ID: <20240501162308.875193-2-jonas@kwiboo.se>
+ Quentin Schulz <quentin.schulz@theobroma-systems.com>, Klaus Goger
+ <klaus.goger@theobroma-systems.com>
+Cc: Dragan Simic <dsimic@manjaro.org>, Christopher Obbard
+ <chris.obbard@collabora.com>, Peter Robinson <pbrobinson@gmail.com>,
+ u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v2 07/22] rockchip: rk3399-puma: Sync DT from Linux kernel v6.8
+Date: Wed,  1 May 2024 16:22:24 +0000
+Message-ID: <20240501162308.875193-8-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.43.2
 In-Reply-To: <20240501162308.875193-1-jonas@kwiboo.se>
 References: <20240501162308.875193-1-jonas@kwiboo.se>
@@ -56,8 +55,8 @@ X-Report-Abuse: abuse@forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-ForwardEmail-Version: 0.4.40
 X-ForwardEmail-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 167.172.40.54
-X-ForwardEmail-ID: 66326c753e72fadc559db944
+ 149.28.215.223
+X-ForwardEmail-ID: 66326c8c3e72fadc559dba17
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,134 +73,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Sync rk3399-cru.h with one from Linux kernel v6.2+ and fix use of the
-SCLK_DDRCLK name that was only used by U-Boot.
+Sync rk3399-puma related device tree from Linux kernel v6.8.
+
+The vdd_log node is already part of rk3399-puma.dtsi, only keep the
+regulator-init-microvolt prop in u-boot.dtsi.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+Reviewed-by: Quentin Schulz <quentin.schulz@theobroma-systems.com>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 ---
-v2: Collect r-b tag
-
-The dt-bindings/clock/rk3399-cru.h file could instead be dropped to pick
-an updated version from dts/upstream. However for revewability and being
-able to cherry-pick this series to v2024.04 this patch instead sync the
-file, it will be removed in another series that switch to OF_UPSTREAM.
+v2: The SPL_PAD_TO defconfig change was moved to own patch in part1
+v2: Collect r-b tags
 ---
- arch/arm/dts/rk3399-u-boot.dtsi        |  2 +-
- drivers/clk/rockchip/clk_rk3399.c      |  2 +-
- include/dt-bindings/clock/rk3399-cru.h | 30 ++++++++++++++------------
- 3 files changed, 18 insertions(+), 16 deletions(-)
+ arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi | 16 ++------
+ arch/arm/dts/rk3399-puma-haikou.dts         | 42 ++++++++++++++++++---
+ arch/arm/dts/rk3399-puma.dtsi               | 17 ++++++++-
+ 3 files changed, 56 insertions(+), 19 deletions(-)
 
-diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
-index 4298552dd999..0357d6273b96 100644
---- a/arch/arm/dts/rk3399-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-u-boot.dtsi
-@@ -56,7 +56,7 @@
- 		       0x0 0xffa8c000 0x0 0x1000>;
- 		devfreq-events = <&dfi>;
- 		interrupts = <GIC_SPI 1 IRQ_TYPE_LEVEL_HIGH 0>;
--		clocks = <&cru SCLK_DDRCLK>;
-+		clocks = <&cru SCLK_DDRC>;
- 		clock-names = "dmc_clk";
- 		bootph-all;
+diff --git a/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi b/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi
+index 1930e5e10353..5a9bd320ec46 100644
+--- a/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-puma-haikou-u-boot.dtsi
+@@ -30,18 +30,6 @@
+ 	aliases {
+ 		spi5 = &spi5;
  	};
-diff --git a/drivers/clk/rockchip/clk_rk3399.c b/drivers/clk/rockchip/clk_rk3399.c
-index 80f65a237e8e..f0ce54067f8c 100644
---- a/drivers/clk/rockchip/clk_rk3399.c
-+++ b/drivers/clk/rockchip/clk_rk3399.c
-@@ -1049,7 +1049,7 @@ static ulong rk3399_clk_set_rate(struct clk *clk, ulong rate)
- 		 * return 0 to satisfy clk_set_defaults during device probe.
- 		 */
- 		return 0;
--	case SCLK_DDRCLK:
-+	case SCLK_DDRC:
- 		ret = rk3399_ddr_set_clk(priv->cru, rate);
- 		break;
- 	case PCLK_EFUSE1024NS:
-diff --git a/include/dt-bindings/clock/rk3399-cru.h b/include/dt-bindings/clock/rk3399-cru.h
-index 211faf8fa891..39169d94a44e 100644
---- a/include/dt-bindings/clock/rk3399-cru.h
-+++ b/include/dt-bindings/clock/rk3399-cru.h
-@@ -1,6 +1,7 @@
--/* SPDX-License-Identifier: GPL-2.0+ */
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
- /*
-  * Copyright (c) 2016 Rockchip Electronics Co. Ltd.
-+ * Author: Xing Zheng <zhengxing@rock-chips.com>
-  */
+-
+-	vdd_log: vdd-log {
+-		compatible = "pwm-regulator";
+-		pwms = <&pwm2 0 25000 1>;
+-		regulator-name = "vdd_log";
+-		regulator-always-on;
+-		regulator-boot-on;
+-		regulator-min-microvolt = <800000>;
+-		regulator-max-microvolt = <1400000>;
+-		regulator-init-microvolt = <950000>;
+-		vin-supply = <&vcc5v0_sys>;
+-	};
+ };
  
- #ifndef _DT_BINDINGS_CLK_ROCKCHIP_RK3399_H
-@@ -121,16 +122,17 @@
- #define SCLK_DPHY_RX0_CFG		165
- #define SCLK_RMII_SRC			166
- #define SCLK_PCIEPHY_REF100M		167
--#define SCLK_USBPHY0_480M_SRC		168
--#define SCLK_USBPHY1_480M_SRC		169
--#define SCLK_DDRCLK			170
--#define SCLK_TESTOUT2			171
-+#define SCLK_DDRC			168
-+#define SCLK_TESTCLKOUT1		169
-+#define SCLK_TESTCLKOUT2		170
+ &binman {
+@@ -111,3 +99,7 @@
+ 	bootph-pre-sram;
+ 	bootph-pre-ram;
+ };
++
++&vdd_log {
++	regulator-init-microvolt = <950000>;
++};
+diff --git a/arch/arm/dts/rk3399-puma-haikou.dts b/arch/arm/dts/rk3399-puma-haikou.dts
+index 115c14c0a3c6..18a98c4648ea 100644
+--- a/arch/arm/dts/rk3399-puma-haikou.dts
++++ b/arch/arm/dts/rk3399-puma-haikou.dts
+@@ -5,6 +5,7 @@
  
- #define DCLK_VOP0			180
- #define DCLK_VOP1			181
- #define DCLK_VOP0_DIV			182
- #define DCLK_VOP1_DIV			183
- #define DCLK_M0_PERILP			184
-+#define DCLK_VOP0_FRAC			185
-+#define DCLK_VOP1_FRAC			186
+ /dts-v1/;
+ #include "rk3399-puma.dtsi"
++#include <dt-bindings/input/input.h>
  
- #define FCLK_CM0S			190
+ / {
+ 	model = "Theobroma Systems RK3399-Q7 SoM";
+@@ -18,6 +19,38 @@
+ 		stdout-path = "serial0:115200n8";
+ 	};
  
-@@ -545,8 +547,8 @@
- #define SRST_H_PERILP0			171
- #define SRST_H_PERILP0_NOC		172
- #define SRST_ROM			173
--#define SRST_CRYPTO_S			174
--#define SRST_CRYPTO_M			175
-+#define SRST_CRYPTO0_S			174
-+#define SRST_CRYPTO0_M			175
++	gpio-keys {
++		compatible = "gpio-keys";
++		pinctrl-0 = <&haikou_keys_pin>;
++		pinctrl-names = "default";
++
++		button-batlow-n {
++			gpios = <&gpio0 RK_PB2 GPIO_ACTIVE_LOW>;
++			label = "BATLOW#";
++			linux,code = <KEY_BATTERY>;
++		};
++
++		button-slp-btn-n {
++			gpios = <&gpio0 RK_PB3 GPIO_ACTIVE_LOW>;
++			label = "SLP_BTN#";
++			linux,code = <KEY_SLEEP>;
++		};
++
++		button-wake-n {
++			gpios = <&gpio0 RK_PB1 GPIO_ACTIVE_LOW>;
++			label = "WAKE#";
++			linux,code = <KEY_WAKEUP>;
++			wakeup-source;
++		};
++
++		switch-lid-btn-n {
++			gpios = <&gpio0 RK_PA4 GPIO_ACTIVE_LOW>;
++			label = "LID_BTN#";
++			linux,code = <SW_LID>;
++			linux,input-type = <EV_SW>;
++		};
++	};
++
+ 	leds {
+ 		pinctrl-0 = <&module_led_pin>, <&sd_card_led_pin>;
  
- /* cru_softrst_con11 */
- #define SRST_P_DCF			176
-@@ -554,7 +556,7 @@
- #define SRST_CM0S			178
- #define SRST_CM0S_DBG			179
- #define SRST_CM0S_PO			180
--#define SRST_CRYPTO			181
-+#define SRST_CRYPTO0			181
- #define SRST_P_PERILP1_SGRF		182
- #define SRST_P_PERILP1_GRF		183
- #define SRST_CRYPTO1_S			184
-@@ -592,13 +594,13 @@
- #define SRST_P_SPI0			214
- #define SRST_P_SPI1			215
- #define SRST_P_SPI2			216
--#define SRST_P_SPI4			217
--#define SRST_P_SPI5			218
-+#define SRST_P_SPI3			217
-+#define SRST_P_SPI4			218
- #define SRST_SPI0			219
- #define SRST_SPI1			220
- #define SRST_SPI2			221
--#define SRST_SPI4			222
--#define SRST_SPI5			223
-+#define SRST_SPI3			222
-+#define SRST_SPI4			223
+@@ -165,11 +198,8 @@
+ };
  
- /* cru_softrst_con14 */
- #define SRST_I2S0_8CH			224
-@@ -720,8 +722,8 @@
- #define SRST_H_CM0S_NOC			3
- #define SRST_DBG_CM0S			4
- #define SRST_PO_CM0S			5
--#define SRST_P_SPI3			6
--#define SRST_SPI3			7
-+#define SRST_P_SPI6			6
-+#define SRST_SPI6			7
- #define SRST_P_TIMER_0_1		8
- #define SRST_P_TIMER_0			9
- #define SRST_P_TIMER_1			10
+ &pinctrl {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&haikou_pin_hog>;
+-
+-	hog {
+-		haikou_pin_hog: haikou-pin-hog {
++	buttons {
++		haikou_keys_pin: haikou-keys-pin {
+ 			rockchip,pins =
+ 			  /* LID_BTN */
+ 			  <0 RK_PA4 RK_FUNC_GPIO &pcfg_pull_up>,
+@@ -177,7 +207,7 @@
+ 			  <0 RK_PB2 RK_FUNC_GPIO &pcfg_pull_up>,
+ 			  /* SLP_BTN# */
+ 			  <0 RK_PB3 RK_FUNC_GPIO &pcfg_pull_up>,
+-			  /* BIOS_DISABLE# */
++			  /* WAKE# */
+ 			  <0 RK_PB1 RK_FUNC_GPIO &pcfg_pull_up>;
+ 		};
+ 	};
+diff --git a/arch/arm/dts/rk3399-puma.dtsi b/arch/arm/dts/rk3399-puma.dtsi
+index aa3e21bd6c8f..c08e69391c01 100644
+--- a/arch/arm/dts/rk3399-puma.dtsi
++++ b/arch/arm/dts/rk3399-puma.dtsi
+@@ -9,6 +9,7 @@
+ 
+ / {
+ 	aliases {
++		ethernet0 = &gmac;
+ 		mmc0 = &sdhci;
+ 	};
+ 
+@@ -27,7 +28,7 @@
+ 
+ 	extcon_usb3: extcon-usb3 {
+ 		compatible = "linux,extcon-usb-gpio";
+-		id-gpio = <&gpio1 RK_PC2 GPIO_ACTIVE_HIGH>;
++		id-gpios = <&gpio1 RK_PC2 GPIO_ACTIVE_HIGH>;
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&usb3_id>;
+ 	};
+@@ -119,6 +120,20 @@
+ 	drive-impedance-ohm = <33>;
+ };
+ 
++&gpio0 {
++	/*
++	 * The BIOS_DISABLE hog is a feedback pin for the actual status of the
++	 * signal. This usually represents the state of a switch on the baseboard.
++	 * The pin has a 10k pull-up resistor connected, so no pull-up setting is needed.
++	 */
++	bios-disable-hog {
++		gpios = <RK_PB0 GPIO_ACTIVE_HIGH>;
++		gpio-hog;
++		input;
++		line-name = "bios_disable";
++	};
++};
++
+ &gmac {
+ 	assigned-clocks = <&cru SCLK_RMII_SRC>;
+ 	assigned-clock-parents = <&clkin_gmac>;
 -- 
 2.43.2
 
