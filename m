@@ -4,74 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03637C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:40:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFF8BC4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:40:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4577788CE2;
+	by phobos.denx.de (Postfix) with ESMTP id A150E88CE7;
 	Thu,  2 May 2024 03:33:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XfTgjtz3";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dEL7rXds";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 58A9488CC5; Thu,  2 May 2024 03:33:55 +0200 (CEST)
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
- [IPv6:2607:f8b0:4864:20::830])
+ id 6DEB588CC9; Thu,  2 May 2024 03:33:55 +0200 (CEST)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F23688CD8
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:33:52 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 3B88988CA2
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:33:53 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x830.google.com with SMTP id
- d75a77b69052e-43a8246b51dso38297451cf.1
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:33:52 -0700 (PDT)
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-43ad4097aefso18050721cf.2
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:33:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613631; x=1715218431; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613632; x=1715218432; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SCkr6vR++u/plngZSMPCSl4IhmlG5pBg5sUr0KfhqQo=;
- b=XfTgjtz3sravKHYKEDKLxjRVGsS5yl0A5ULgblH6e1Bvma9RARUiJddELiOBb8DwHU
- B81aR/BP7GXhUj605sMiesEaE4w1pDEN+a68HRHpNeYuCg16RKB2MdoJFDmvblbWar9Q
- B5W/ZLq+gGqCBWYiAbIqQORJnkjjbWSaEMtW4=
+ bh=FKx9cdlelBr8Bn20wUPdTgjnAMrcsIu5gwsg5LpBFI4=;
+ b=dEL7rXdsOELi68qTw4ko7/ZytMJGcn7dP6lx9j9XnOynsD8YYjqN0puLYqJXEms5Rn
+ 7ZYgGLbkYCaEzoOYgCLpdiG7We1jzuIX8EuG5fN4ILyt4a1x+dqdbUkOvDL6wkNPlwtI
+ JMsfZ86tlsz1tiSLKiWw5lR4mwzBOMIq62chk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613631; x=1715218431;
+ d=1e100.net; s=20230601; t=1714613632; x=1715218432;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SCkr6vR++u/plngZSMPCSl4IhmlG5pBg5sUr0KfhqQo=;
- b=tMMez2sFPYhghGQruMKc34KTn/0Qs2lRmnh5KsjAuz9LWUiAsFsN2dnln2ORacCihp
- fjZ0ba8fnY1m4cs5BHzvfcVZGflWd1gOvGHWb3Hl/x8BpfnqfR6KWK/x1dVVXTJ3sppF
- ftggVCtD4c9I5QuWH4uBaDTqx9Qrddec6qCez3OoQhJ+WrQlJs2dsTRMQELUOxhS9ciJ
- /+K0k05IL3mYXgu2qAf9zmy9KPcq/SxnrVqoRnwE7rrv1hOV0g5ubQ/R4HXFEdI7Y4mb
- 4163by1OG2y0OA04bVoBa++AG53SbCKUbKwpXtXL9GLzy0pqd3efIYpNSe3rNu/e4GCK
- mjhQ==
-X-Gm-Message-State: AOJu0YxXocNfrzykNvoreFm2Zjxrt5Du0qPn3sJV+ApxR/TwUzD8cS38
- NP32ik+c8qGhd0Iv6hVIDlS4YrMlwPmOhE325ci7qdZDL+neeKVAp90ftRTiMuCyDJyVBq45fLd
- u1KjANA/u
-X-Google-Smtp-Source: AGHT+IEQAEKmI71q85TcX6DQ2L+8epVksujFxTQozVIazFmB5XtOS4Pc6J7nRNLDnLwtDXaMm+Fd/A==
-X-Received: by 2002:a05:622a:13cf:b0:43a:fd38:5390 with SMTP id
- p15-20020a05622a13cf00b0043afd385390mr658440qtk.64.1714613630806; 
- Wed, 01 May 2024 18:33:50 -0700 (PDT)
+ bh=FKx9cdlelBr8Bn20wUPdTgjnAMrcsIu5gwsg5LpBFI4=;
+ b=hYUypXKdUFpT+zz8F9TtkA6gmZJTKd3FDFD+Q7p+688O+vYLJsIgp5vJJr2LtHbxng
+ HMPOkpD3aO21Q5fSwexuor7OfvDhINTZnoPPKs3KaDuoQqy4F4A2Mftp/X/88lgPtTmB
+ EC/nPaKpdeoteSg+G+jISY5+1gxF7hZ8LmhO/XliExzLOjlhLfHEvzr2XXpGgP1EMVPT
+ KvgGxs+6o0yvIM3S4Z0BgH20eAUXMJP36cFIiRsQH3bDKu0rU6MCd/zHn/hsDEHhMrHP
+ zIMYJ1vZWrwF6iX1d3FNpie639xqWessq4Q4nmuCASSuuiKbYek7Ftzw4FBbJhBG4NXw
+ ntCQ==
+X-Gm-Message-State: AOJu0YzbFRkuHNh2Vy12fftxCh/jgDqV68NudigFTiTa+TfwA9bLMfez
+ HFyzHbtgq5XBXsppMpaizZi8OLl0BjV82wIPUevZgdCHfltJqsi1oHoZGhNktPlYSc3KZRx7XhI
+ 9udRQU65A
+X-Google-Smtp-Source: AGHT+IFiz3FiQWjp4BRT5/vhXT9sr55kRGAuaysPiiWxX0wiek61W8s7Gkn+N3RV9LR6tqSc7pcZOg==
+X-Received: by 2002:a05:622a:1485:b0:43a:b9e1:3891 with SMTP id
+ t5-20020a05622a148500b0043ab9e13891mr653420qtx.51.1714613631970; 
+ Wed, 01 May 2024 18:33:51 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.33.49
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.33.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:33:50 -0700 (PDT)
+ Wed, 01 May 2024 18:33:51 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>,
- Mateusz Kulikowski <mateusz.kulikowski@gmail.com>,
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Simon Glass <sjg@chromium.org>
-Subject: [PATCH 66/81] spmi: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:31:23 -0600
-Message-Id: <20240502013138.2383421-66-trini@konsulko.com>
+Subject: [PATCH 67/81] sysinfo: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:31:24 -0600
+Message-Id: <20240502013138.2383421-67-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -98,54 +96,91 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Sumit Garg <sumit.garg@linaro.org>
-Cc: Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 Cc: Simon Glass <sjg@chromium.org>
 ---
- drivers/spmi/spmi-msm.c     | 1 -
- drivers/spmi/spmi-sandbox.c | 1 -
- drivers/spmi/spmi-uclass.c  | 1 -
- 3 files changed, 3 deletions(-)
+ drivers/sysinfo/gazerbeam.c      | 1 -
+ drivers/sysinfo/gpio.c           | 1 -
+ drivers/sysinfo/rcar3.c          | 1 -
+ drivers/sysinfo/sandbox.c        | 1 -
+ drivers/sysinfo/smbios.c         | 1 -
+ drivers/sysinfo/sysinfo-uclass.c | 1 -
+ 6 files changed, 6 deletions(-)
 
-diff --git a/drivers/spmi/spmi-msm.c b/drivers/spmi/spmi-msm.c
-index 244de69b3590..b0d6226041e5 100644
---- a/drivers/spmi/spmi-msm.c
-+++ b/drivers/spmi/spmi-msm.c
-@@ -7,7 +7,6 @@
-  * Loosely based on Little Kernel driver
+diff --git a/drivers/sysinfo/gazerbeam.c b/drivers/sysinfo/gazerbeam.c
+index c1fae6ccf2a6..a3c9d5354dd2 100644
+--- a/drivers/sysinfo/gazerbeam.c
++++ b/drivers/sysinfo/gazerbeam.c
+@@ -4,7 +4,6 @@
+  * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <errno.h>
- #include <fdtdec.h>
-diff --git a/drivers/spmi/spmi-sandbox.c b/drivers/spmi/spmi-sandbox.c
-index f6772946bca3..992b08dd6120 100644
---- a/drivers/spmi/spmi-sandbox.c
-+++ b/drivers/spmi/spmi-sandbox.c
-@@ -7,7 +7,6 @@
-  * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
+ #include <sysinfo.h>
+ #include <i2c.h>
+diff --git a/drivers/sysinfo/gpio.c b/drivers/sysinfo/gpio.c
+index 82f90303bb70..aaca318419b0 100644
+--- a/drivers/sysinfo/gpio.c
++++ b/drivers/sysinfo/gpio.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2021 Sean Anderson <sean.anderson@seco.com>
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <errno.h>
- #include <spmi/spmi.h>
-diff --git a/drivers/spmi/spmi-uclass.c b/drivers/spmi/spmi-uclass.c
-index 9d9f46a37d83..34fe8f6644c3 100644
---- a/drivers/spmi/spmi-uclass.c
-+++ b/drivers/spmi/spmi-uclass.c
-@@ -7,7 +7,6 @@
- 
- #define LOG_CATEGORY UCLASS_SPMI
+ #include <log.h>
+ #include <sysinfo.h>
+diff --git a/drivers/sysinfo/rcar3.c b/drivers/sysinfo/rcar3.c
+index 7b127986da7e..37e2cccd9afe 100644
+--- a/drivers/sysinfo/rcar3.c
++++ b/drivers/sysinfo/rcar3.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2021 Marek Vasut <marek.vasut+renesas@gmail.com>
+  */
  
 -#include <common.h>
  #include <dm.h>
- #include <errno.h>
- #include <spmi/spmi.h>
+ #include <i2c_eeprom.h>
+ #include <log.h>
+diff --git a/drivers/sysinfo/sandbox.c b/drivers/sysinfo/sandbox.c
+index d270a26aa438..d39720958f07 100644
+--- a/drivers/sysinfo/sandbox.c
++++ b/drivers/sysinfo/sandbox.c
+@@ -4,7 +4,6 @@
+  * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <sysinfo.h>
+ 
+diff --git a/drivers/sysinfo/smbios.c b/drivers/sysinfo/smbios.c
+index 80ebd1921d8e..a7ac8e3f072a 100644
+--- a/drivers/sysinfo/smbios.c
++++ b/drivers/sysinfo/smbios.c
+@@ -4,7 +4,6 @@
+  * Written by Simon Glass <sjg@chromium.org>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <sysinfo.h>
+ 
+diff --git a/drivers/sysinfo/sysinfo-uclass.c b/drivers/sysinfo/sysinfo-uclass.c
+index 10194d0e14c3..d77d1e3ee442 100644
+--- a/drivers/sysinfo/sysinfo-uclass.c
++++ b/drivers/sysinfo/sysinfo-uclass.c
+@@ -6,7 +6,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_SYSINFO
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <sysinfo.h>
+ 
 -- 
 2.34.1
 
