@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0920C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 13:16:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFAD5C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 13:18:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50CD188354;
-	Thu,  2 May 2024 15:16:13 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 68A8988361;
+	Thu,  2 May 2024 15:18:00 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=beckhoff.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="D+iOsnWl";
+	dkim=permerror (0-bit key) header.d=beckhoff.com header.i=@beckhoff.com header.b="iFbld/+u";
+	dkim=pass (2048-bit key; unprotected) header.d=beckhoff.com header.i=@beckhoff.com header.b="CRFX0QPp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AD6BE88361; Thu,  2 May 2024 15:16:11 +0200 (CEST)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 693C988D11; Thu,  2 May 2024 08:47:09 +0200 (CEST)
+Received: from netsrv01.beckhoff.com (netsrv01.beckhoff.com [62.159.14.10])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5C458834B
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 15:16:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 507C288D03
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 08:47:07 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=beckhoff.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jassisinghbrar@gmail.com
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-a5966f5a76bso140789266b.1
- for <u-boot@lists.denx.de>; Thu, 02 May 2024 06:16:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714655769; x=1715260569; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6CSnPKIoAjXTIqHnTo1hVSOxafrRD011odSIZ46v5WA=;
- b=D+iOsnWl+x3WdNoBITVaWWFlokiREufgbot9mJS/gLNjXd8vqlqklBQ5+PXgraIPWe
- GU/8BivbR5qUyHAv5pXzBX/AF2IQUrdUMKEdz0XpQ1isWBpenemZxgsZQfoaJ8dU6iyv
- pk+JlLYrqI4Yr6ZrFhHzWNOuSXf40n/fEKWxVhdupwEnEVwTkPt226VmJI8x7NFLC9sA
- aQqcLewbOnzx4Fy2EBVxj6AHzlsz93GWSFQyN5EmvG1vWIjuuc/aeqCaf04gIdQhtUDg
- qlAUmqUhhIhAdxppUQyb/UfpJSKUbLVvoeaS23Ly5yzz6En7zzMPLXh4092ksJ/+axqP
- NG1A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714655769; x=1715260569;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6CSnPKIoAjXTIqHnTo1hVSOxafrRD011odSIZ46v5WA=;
- b=abvTBQvuC/xmx7Brl3eNb/1IaAMN2lxzX3Tz8/i+GqzZOHvT/gRKEyNdX3PlZH8IP+
- afqqb08nKxitrH4mqIaO7qmCNWir9ZhOOK/KQvMPN3Sh2xhZz0UQuliCGRcoCYjPI/vc
- 81DzhIF4UvGrWLVLMld9Y/7z6+mEThT0U98xWYNGxZVt76mJqg6F0PO9Dl7yJUJLWH5c
- 3BJZZf9xjEmcEgF6J512lVJ89auvZYBLFN4TMHin6DfgK2z+3g0dCROHxpN9AxHmga48
- PX9IGfhapgjJHtgAECMkJazbcX5MuxF1v1ck/eajn8c1lVxO+PgvZ4EQO7oA7MIGHusc
- nc9w==
-X-Gm-Message-State: AOJu0YxLzoNdxB0o9ArJ/XMT3hFPgdzhVKkqSXSBTt37qWmLozbenVy9
- q11de++QHvSInEI+d+Pj7YJ+ski0LS444n3gv6xJ9fgDfqxU05gXe839Pbo4UQyJi8Pfb/hDaBT
- a2ajUTV9W3e5U7MZjSq1exkvYP/s=
-X-Google-Smtp-Source: AGHT+IGwV09A5Snl7dmpmoqKXi9rs9tW8g5BMA8SgbejtPKV9TlDQKMYof41J7PAeQRu45sd7Q8PIOw3lzkMQ68eZkM=
-X-Received: by 2002:a17:906:31d9:b0:a58:bcb2:5e33 with SMTP id
- f25-20020a17090631d900b00a58bcb25e33mr2098912ejf.18.1714655769051; Thu, 02
- May 2024 06:16:09 -0700 (PDT)
+ spf=pass smtp.mailfrom=P.Bruenn@beckhoff.com
+Received: from 172.17.2.169 by netsrv01.beckhoff.com (Tls12, Aes256, Sha384,
+ DiffieHellmanEllipticKey384); Thu, 02 May 2024 06:47:07 GMT
+DKIM-Signature: v=1; c=relaxed/relaxed; d=beckhoff.com; s=mail2022e; 
+ t=1714632427; bh=YvS4bD7/XijEyHQEJHesjkearZKigv2rFMo4Hf5pllU=; h=
+ Subject:Subject:From:From:Date:Date:ReplyTo:ReplyTo:Cc:Cc:Message-Id:Message-Id;
+ a=ed25519-sha256; b=
+ iFbld/+ubS2Yii8IfyhWE/ISGdIGHVV6MewJ8mcATIb7lLelUnmS5mrZuSC+O3PnIN2AQ1TJUxwPymhhr3+JDA==
+DKIM-Signature: v=1; c=relaxed/relaxed; d=beckhoff.com; s=mail2022r; 
+ t=1714632427; bh=YvS4bD7/XijEyHQEJHesjkearZKigv2rFMo4Hf5pllU=; h=
+ Subject:Subject:From:From:Date:Date:ReplyTo:ReplyTo:Cc:Cc:Message-Id:Message-Id;
+ a=rsa-sha256; b=
+ CRFX0QPpUnvuCS3B/fwLeI17FKzzSP4Nb4CRazB5OcOngDWiUuJfuPCsVuWtQYx5qfAi9UvJ7Eu+uFtirfqqSuWe6u03E18A0jWtFb5RVxqyECqo5OqOqBhpZFRvvIGDR7DZz3nDi669qLN7vOP6vmvIyrosbWO4UFP9/93D5I8NCeNE42awfuqBH4zq69Gf8PxBhihNBiO2/HgiXUkRa1kSi5yYb7DyLfSUv7HzkcEQfYgkyGFd3vJDekFIDurcqRjYOGEMj9nS2Qexq5Q95bTNPBnX3P9FvzcsQUwPnzTou6M+cOR30dzsj/YB8H7IcDJT6D5dHZF9XTOigSrJ0A==
+Received: from ex01.beckhoff.com (172.17.2.168) by ex03.beckhoff.com
+ (172.17.2.169) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.1.2507.35; Thu, 2 May
+ 2024 08:47:05 +0200
+Received: from ex01.beckhoff.com ([fe80::f430:9287:849d:b171]) by
+ ex01.beckhoff.com ([fe80::f430:9287:849d:b171%7]) with mapi id
+ 15.01.2507.035; Thu, 2 May 2024 08:47:05 +0200
+From: =?utf-8?B?UGF0cmljayBCcsO8bm4=?= <P.Bruenn@beckhoff.com>
+To: "trini@konsulko.com" <trini@konsulko.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH 025/149] board: beckhoff: Remove <common.h> and add needed
+ includes
+Thread-Topic: [PATCH 025/149] board: beckhoff: Remove <common.h> and add
+ needed includes
+Thread-Index: AQHam3Fm6qgevFNfb0yUTr/StlRApbGDYKqA
+Date: Thu, 2 May 2024 06:47:04 +0000
+Message-ID: <0472737240a94e150914246388a0d608fe8467cc.camel@beckhoff.com>
+References: <20240501024316.1767971-1-trini@konsulko.com>
+ <20240501024316.1767971-25-trini@konsulko.com>
+In-Reply-To: <20240501024316.1767971-25-trini@konsulko.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.17.129.198]
+x-olx-disclaimer: EX03.BECKHOFF.COM
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <2124DD4FF54FFE4F9DA49FCA024EE713@beckhoff.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20240502013138.2383421-1-trini@konsulko.com>
- <20240502013138.2383421-32-trini@konsulko.com>
-In-Reply-To: <20240502013138.2383421-32-trini@konsulko.com>
-From: Jassi Brar <jassisinghbrar@gmail.com>
-Date: Thu, 2 May 2024 08:15:57 -0500
-Message-ID: <CABb+yY1AWgfWuxh_rkg7zx24P9aCQ68t8qiHpv_n0vKnAoUEzQ@mail.gmail.com>
-Subject: Re: [PATCH 32/81] fwu-mdata: Remove <common.h> and add needed includes
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Jassi Brar <jaswinder.singh@linaro.org>,
- Etienne Carriere <etienne.carriere@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Thu, 02 May 2024 15:17:58 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,19 +85,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, May 1, 2024 at 8:45=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
->
-> Remove <common.h> from this driver directory and when needed
-> add missing include files directly.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Jassi Brar <jaswinder.singh@linaro.org>
-> Cc: Etienne Carriere <etienne.carriere@linaro.org>
-> ---
+VGVzdGVkLWJ5OiBQYXRyaWNrIEJydWVubiA8cC5icnVlbm5AYmVja2hvZmYuY29tPg0KDQoNCk9u
+IFR1ZSwgMjAyNC0wNC0zMCBhdCAyMDo0MSAtMDYwMCwgVG9tIFJpbmkgd3JvdGU6DQo+IO+7v0NB
+VVRJT046IEV4dGVybmFsIEVtYWlsISENCj4gUmVtb3ZlIDxjb21tb24uaD4gZnJvbSB0aGlzIGJv
+YXJkIHZlbmRvciBkaXJlY3RvcnkgYW5kIHdoZW4gbmVlZGVkDQo+IGFkZCBtaXNzaW5nIGluY2x1
+ZGUgZmlsZXMgZGlyZWN0bHkuDQo+DQo+IFNpZ25lZC1vZmYtYnk6IFRvbSBSaW5pIDx0cmluaUBr
+b25zdWxrby5jb20+DQo+IC0tLQ0KPiBDYzogUGF0cmljayBCcnVlbm4gPHAuYnJ1ZW5uQGJlY2to
+b2ZmLmNvbT4NCj4gLS0tDQo+ICBib2FyZC9iZWNraG9mZi9teDUzY3g5MDIwL214NTNjeDkwMjAu
+YyAgICAgICB8IDEgLQ0KPiAgYm9hcmQvYmVja2hvZmYvbXg1M2N4OTAyMC9teDUzY3g5MDIwX3Zp
+ZGVvLmMgfCAxIC0NCj4gIDIgZmlsZXMgY2hhbmdlZCwgMiBkZWxldGlvbnMoLSkNCj4NCj4gZGlm
+ZiAtLWdpdCBhL2JvYXJkL2JlY2tob2ZmL214NTNjeDkwMjAvbXg1M2N4OTAyMC5jIGIvYm9hcmQv
+YmVja2hvZmYvbXg1M2N4OTAyMC9teDUzY3g5MDIwLmMNCj4gaW5kZXggZTdiMTMxODM2YjYxLi4z
+YTc2NjcyOGE2ZjcgMTAwNjQ0DQo+IC0tLSBhL2JvYXJkL2JlY2tob2ZmL214NTNjeDkwMjAvbXg1
+M2N4OTAyMC5jDQo+ICsrKyBiL2JvYXJkL2JlY2tob2ZmL214NTNjeDkwMjAvbXg1M2N4OTAyMC5j
+DQo+IEBAIC03LDcgKzcsNiBAQA0KPiAgICogQ29weXJpZ2h0IChDKSAyMDExIEZyZWVzY2FsZSBT
+ZW1pY29uZHVjdG9yLCBJbmMuDQo+ICAgKi8NCj4NCj4gLSNpbmNsdWRlIDxjb21tb24uaD4NCj4g
+ICNpbmNsdWRlIDxjcHVfZnVuYy5oPg0KPiAgI2luY2x1ZGUgPGluaXQuaD4NCj4gICNpbmNsdWRl
+IDxhc20vYXJjaC9zeXNfcHJvdG8uaD4NCj4gZGlmZiAtLWdpdCBhL2JvYXJkL2JlY2tob2ZmL214
+NTNjeDkwMjAvbXg1M2N4OTAyMF92aWRlby5jIGIvYm9hcmQvYmVja2hvZmYvbXg1M2N4OTAyMC9t
+eDUzY3g5MDIwX3ZpZGVvLmMNCj4gaW5kZXggYmY0NzI5MDI1NjIyLi5mZDI4YTcwZjRkNzIgMTAw
+NjQ0DQo+IC0tLSBhL2JvYXJkL2JlY2tob2ZmL214NTNjeDkwMjAvbXg1M2N4OTAyMF92aWRlby5j
+DQo+ICsrKyBiL2JvYXJkL2JlY2tob2ZmL214NTNjeDkwMjAvbXg1M2N4OTAyMF92aWRlby5jDQo+
+IEBAIC03LDcgKzcsNiBAQA0KPiAgICogQ29weXJpZ2h0IChDKSAyMDEyIEZyZWVzY2FsZSBTZW1p
+Y29uZHVjdG9yLCBJbmMuDQo+ICAgKi8NCj4NCj4gLSNpbmNsdWRlIDxjb21tb24uaD4NCj4gICNp
+bmNsdWRlIDxhc20vYXJjaC9pb211eC1teDUzLmg+DQo+ICAjaW5jbHVkZSA8YXNtL2dwaW8uaD4N
+Cj4gICNpbmNsdWRlIDxhc20vbWFjaC1pbXgvdmlkZW8uaD4NCg0KVGhpcyBlbWFpbCBjb250YWlu
+cyBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uIElmIHlvdSBoYXZlIHJlY2VpdmVkIGl0IGluIGVy
+cm9yLCB5b3UgbXVzdCBub3QgcmVhZCwgdXNlLCBjb3B5IG9yIHBhc3Mgb24gdGhpcyBlLW1haWwg
+b3IgaXRzIGF0dGFjaG1lbnRzLiBJZiB5b3UgaGF2ZSByZWNlaXZlZCB0aGUgZS1tYWlsIGluIGVy
+cm9yLCBwbGVhc2UgaW5mb3JtIG1lIGltbWVkaWF0ZWx5IGJ5IHJlcGx5IGUtbWFpbCBhbmQgdGhl
+biBkZWxldGUgdGhpcyBlLW1haWwgZnJvbSB5b3VyIHN5c3RlbS4gVGhhbmsgeW91DQoNCkRpZXNl
+IEUtTWFpbCBlbnRow6RsdCB2ZXJ0cmF1bGljaGUgSW5mb3JtYXRpb25lbi4gU29sbHRlbiBTaWUg
+c2llIGlycnTDvG1saWNoIGVyaGFsdGVuIGhhYmVuLCBkw7xyZmVuIFNpZSBkaWVzZSBFLU1haWwg
+b2RlciBpaHJlIEFuaMOkbmdlIG5pY2h0IGxlc2VuLCB2ZXJ3ZW5kZW4sIGtvcGllcmVuIG9kZXIg
+d2VpdGVyZ2ViZW4uIFNvbGx0ZW4gU2llIGRpZSBNYWlsIHZlcnNlaGVudGxpY2ggZXJoYWx0ZW4g
+aGFiZW4sIHRlaWxlbiBTaWUgbWlyIGRpZXMgYml0dGUgdW1nZWhlbmQgcGVyIEFudHdvcnQtRS1N
+YWlsIG1pdCB1bmQgbMO2c2NoZW4gU2llIGRpZXNlIEUtTWFpbCBkYW5uIGF1cyBJaHJlbSBTeXN0
+ZW0uIFZpZWxlbiBEYW5rDQoNCkJlY2tob2ZmIEF1dG9tYXRpb24gR21iSCAmIENvLiBLRyB8IE1h
+bmFnaW5nIERpcmVjdG9yOiBEaXBsLiBQaHlzLiBIYW5zIEJlY2tob2ZmDQpSZWdpc3RlcmVkIG9m
+ZmljZTogVmVybCwgR2VybWFueSB8IFJlZ2lzdGVyIGNvdXJ0OiBHdWV0ZXJzbG9oIEhSQSA3MDc1
+DQoNCg0K
 
-Acked-by: Jassi Brar <jassisinghbrar@gmail.com>
-
-Thanks
