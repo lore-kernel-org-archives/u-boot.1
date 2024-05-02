@@ -4,49 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5822C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 13:19:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B99B6C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 13:20:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0EA5E88CDC;
+	by phobos.denx.de (Postfix) with ESMTP id 7753C88CF4;
 	Thu,  2 May 2024 15:18:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="eikDoM8j";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="b8RZswNg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9CA68839A; Thu,  2 May 2024 15:16:55 +0200 (CEST)
-Received: from mail-4323.proton.ch (mail-4323.proton.ch [185.70.43.23])
+ id 5D84F88370; Thu,  2 May 2024 15:17:03 +0200 (CEST)
+Received: from mail-4022.proton.ch (mail-4022.proton.ch [185.70.40.22])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9162388370
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 15:16:53 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5F53488354
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 15:17:01 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail2; t=1714655812; x=1714915012;
- bh=xRs0D9+ixib3yOD3wSPxVscTW5L5y1QZPUUjiGE7uWs=;
- h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
- Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
- b=eikDoM8jSfLDh+4aQMaDfxU/6bLZXKkzQlrKjjUnI2qKktFIKOprMc+c3VTjOEat3
- RELdNEyugNi+zaQF8i4SrZqCnuYu7zw1xLIKwTfcldevXigxphlzgYkoi+ceN5kUcb
- zU39bGMnuR5ucyy3z7gGyO/sjPsAjzr9CutE2Ho2pzXY7QG7LBBG1PJViAiWtS0w+z
- iXDwy1xFYj4ZzdOaiwNKTRrrG3tkJvsvIV/uGxto8H98MB5dHRprMphI8hyVN0Bnpl
- neo82D7nIjqeIMLkONGjuaMqAQMUMiUEqH0Z0OnCh/M0bDT8kiu5qcetycfpYnAyHs
- ZQld7O/JXiFIQ==
-Date: Thu, 02 May 2024 13:16:47 +0000
+ s=protonmail2; t=1714655820; x=1714915020;
+ bh=3YbdD02ZW+uU9zMq1XEaGgLD4yuMdKyFIu7h82jJnbU=;
+ h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
+ Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
+ Message-ID:BIMI-Selector;
+ b=b8RZswNgPSPsAhT2VzBoTHkR50Mr4AQMIa+LukWYZ+f0IuDIo2z3iMcJeqno6Tp9F
+ YkH6kLujzLV6+EJ7GO0wynnjgc3iAzG1VTa7WqzA0atBMP3vmIJJWNvGpEdhys2Yl2
+ K3Y7Hs4w6sUSgG1UzusMvr76rSpL1UQ7onEcVBHJEnrjBYLwEpoi+d9hwE22YSGr92
+ ewynrJn65WL0A01mFaZ0m111Bb/9y7D18vl4JI42HV6DXPS+oMVtU4dW/AA3N8k7nR
+ YUH7qaQnKdTI4WZXHBfAYIkYPoaJo+/cz5FStWRPjDN4DkKemNK02TLe5CvP3uu7ba
+ +gXGqIB5fb3JQ==
+Date: Thu, 02 May 2024 13:16:56 +0000
 To: u-boot@lists.denx.de
 From: Sam Day <me@samcday.com>
 Cc: Caleb Connolly <caleb.connolly@linaro.org>, Sam Day <me@samcday.com>
-Subject: [PATCH 0/2] qcom: ehci: enable core + iface clocks
-Message-ID: <20240502-msm8916-hs-usb-clocks-v1-0-eeccf483b68d@samcday.com>
+Subject: [PATCH 2/2] ehci: msm: bring up iface + core clocks
+Message-ID: <20240502-msm8916-hs-usb-clocks-v1-2-eeccf483b68d@samcday.com>
+In-Reply-To: <20240502-msm8916-hs-usb-clocks-v1-0-eeccf483b68d@samcday.com>
+References: <20240502-msm8916-hs-usb-clocks-v1-0-eeccf483b68d@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 1d15e580c77c820e80c360616c276a6bae8b1c40
+X-Pm-Message-ID: 0e8f8177985e24a0bec8d6eb63c697d924d6e113
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Thu, 02 May 2024 15:17:58 +0200
+X-Mailman-Approved-At: Thu, 02 May 2024 15:18:08 +0200
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -63,32 +66,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These clocks are mandatory, as can be seen in msm_hsusb driver in the
-Linux kernel.
+This seems to be necessary on my samsung-a5. Without this patch, the
+first access of EHCI registers causes a bus stall and subsequent reset.
 
-The appropriate HS_USB AHB/SYSTEM clocks were added to gcc_apq8016.
-
-Technically there's other adjacent SoC families that can use the
-msm_hsusb driver with different clocks, but only msm8916/apq8016 are
-currently making use of it so I think this change shouldn't break
-anything elsewhere.
+I am unsure why this wasn't already necessary for db410c, perhaps those
+clocks are already enabled on boot.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
-Sam Day (2):
-      clk/qcom: apq8016: add support for USB_HS clocks
-      ehci: msm: bring up iface + core clocks
+ drivers/usb/host/ehci-msm.c | 37 +++++++++++++++++++++++++++++++++++--
+ 1 file changed, 35 insertions(+), 2 deletions(-)
 
- drivers/clk/qcom/clock-apq8016.c | 31 +++++++++++++++++++++++++++++++
- drivers/usb/host/ehci-msm.c      | 37 +++++++++++++++++++++++++++++++++++-=
--
- 2 files changed, 66 insertions(+), 2 deletions(-)
----
-base-commit: ff0de1f0557ed7d2dab47ba976a37347a1fdc432
-change-id: 20240502-msm8916-hs-usb-clocks-34bc22b03f3d
+diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
+index 98fe7bc3bc..b2e294dd64 100644
+--- a/drivers/usb/host/ehci-msm.c
++++ b/drivers/usb/host/ehci-msm.c
+@@ -7,8 +7,10 @@
+  * Based on Linux driver
+  */
+=20
++#include <clk.h>
+ #include <common.h>
+ #include <dm.h>
++#include <dm/device_compat.h>
+ #include <dm/lists.h>
+ #include <errno.h>
+ #include <usb.h>
+@@ -25,6 +27,8 @@ struct msm_ehci_priv {
+ =09struct usb_ehci *ehci; /* Start of IP core*/
+ =09struct ulpi_viewport ulpi_vp; /* ULPI Viewport */
+ =09struct phy phy;
++=09struct clk iface_clk;
++=09struct clk core_clk;
+ };
+=20
+ static int msm_init_after_reset(struct ehci_ctrl *dev)
+@@ -53,20 +57,46 @@ static int ehci_usb_probe(struct udevice *dev)
+ =09struct ehci_hcor *hcor;
+ =09int ret;
+=20
++=09ret =3D clk_get_by_name(dev, "core", &p->core_clk);
++=09if (ret) {
++=09=09dev_err(dev, "Failed to get core clock: %d\n", ret);
++=09=09return ret;
++=09}
++
++=09ret =3D clk_get_by_name(dev, "iface", &p->iface_clk);
++=09if (ret) {
++=09=09dev_err(dev, "Failed to get iface clock: %d\n", ret);
++=09=09return ret;
++=09}
++
++=09ret =3D clk_prepare_enable(&p->core_clk);
++=09if (ret)
++=09=09return ret;
++
++=09ret =3D clk_prepare_enable(&p->iface_clk);
++=09if (ret)
++=09=09goto cleanup_core;
++
+ =09hccr =3D (struct ehci_hccr *)((phys_addr_t)&ehci->caplength);
+ =09hcor =3D (struct ehci_hcor *)((phys_addr_t)hccr +
+ =09=09=09HC_LENGTH(ehci_readl(&(hccr)->cr_capbase)));
+=20
+ =09ret =3D generic_setup_phy(dev, &p->phy, 0);
+ =09if (ret)
+-=09=09return ret;
++=09=09goto cleanup_iface;
+=20
+ =09ret =3D board_usb_init(0, plat->init_type);
+ =09if (ret < 0)
+-=09=09return ret;
++=09=09goto cleanup_iface;
+=20
+ =09return ehci_register(dev, hccr, hcor, &msm_ehci_ops, 0,
+ =09=09=09     plat->init_type);
++
++cleanup_iface:
++=09clk_disable_unprepare(&p->iface_clk);
++cleanup_core:
++=09clk_disable_unprepare(&p->core_clk);
++=09return ret;
+ }
+=20
+ static int ehci_usb_remove(struct udevice *dev)
+@@ -82,6 +112,9 @@ static int ehci_usb_remove(struct udevice *dev)
+ =09/* Stop controller. */
+ =09clrbits_le32(&ehci->usbcmd, CMD_RUN);
+=20
++=09clk_disable_unprepare(&p->iface_clk);
++=09clk_disable_unprepare(&p->core_clk);
++
+ =09ret =3D generic_shutdown_phy(&p->phy);
+ =09if (ret)
+ =09=09return ret;
 
-Best regards,
 --=20
-Sam Day <me@samcday.com>
+2.44.0
 
 
