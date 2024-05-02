@@ -4,71 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6007C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:33:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4032CC4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:33:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E70D288BE5;
-	Thu,  2 May 2024 03:32:04 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 4D39888C19;
+	Thu,  2 May 2024 03:32:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="knycY6Z8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WCHelIfo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5CF6988BF7; Thu,  2 May 2024 03:31:59 +0200 (CEST)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 8948C88C0A; Thu,  2 May 2024 03:32:02 +0200 (CEST)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44A9588BFD
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:31:57 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 2427D88BF7
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:00 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-439dfa27003so42996051cf.2
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:31:57 -0700 (PDT)
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-43ca8e1f990so4008341cf.0
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613515; x=1715218315; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613518; x=1715218318; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MQ5d5c8m7+zzaH2O7R2U4zPn4t0zZT5CQZpZZhpEijs=;
- b=knycY6Z88viliCgh5ankQ6lnPLh7EEYdQnJaDS+o1tARJFQFYU+aZYPfZD0CzqJTy+
- 16X/MpoVR805vHetwH1ytLU71qnmht6daLcJPM8NdgCr1b3OcLaMLc3X9DB0CZQ+rZqf
- HQOu3MuIbBLPC/AMXrJoifWczJIEviD2VRD7k=
+ bh=5nYhvykwUDA1gRqecrFWRgbCvmpSfWJckgr853e65eY=;
+ b=WCHelIfo20ZTUFDJ6vw7bX1NCkzoF6BXf0egV7OCVMvvxJ3jAMqTdAZt6w9SrisC8u
+ eRfHF+uNgDPRCN9PhizpntSubZM9r+KmCTGxnNmRdZ7jCCU7HFxEhqJPtC5vd+FPYFo3
+ /c7hJ8W1JoPsSLh+4c8l5goftI5Kbicf9Jm4I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613515; x=1715218315;
+ d=1e100.net; s=20230601; t=1714613518; x=1715218318;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MQ5d5c8m7+zzaH2O7R2U4zPn4t0zZT5CQZpZZhpEijs=;
- b=sI9eXapemxV2OQ7AwcCLdlIpWN0zgMT5xrMYvtc4i/baTE7RXNNJ+bFvEtyXX6GNlj
- ITh5dBBiou4VKp7p34R5VslO/jSf9RfHfQ43B05va+oSmcP9dhjLJgfano8VV+Y9cg8z
- PfZtO2SDEv7FmRcS5kuoBwl2j9wXzX9RhENSMvK8Md2UO0SFZHq8yzuHTCMjkdOxJRMj
- Ym1jq7nJf+gIJ6ULzc/Fi1pAA1DCjq2gKMvtyZOcN+rbPJTnLTIO5ZuqrwOtfe+WJyez
- qyolf2km+/FVSF0zSDotdTfXg9C+M6Vg14kEs8GTkk1U1azLNhu+wr0RaqFgFB9PBrbP
- nivg==
-X-Gm-Message-State: AOJu0YzD7QdXsS6AvgK+xaMCtPbgFZ1kFiFAEU5wPCoEGMZ5LEh6Z9B9
- bFzWLf3v8JirlhY6Mqyq6M1OZ7iyLNDzzNmdfhqDmFZM85Oc5XTrmqARmONYk+irochRBZ1hsRZ
- C77gJ/eAH
-X-Google-Smtp-Source: AGHT+IHmkc7om1I3HDZycDKkwSRwKyWN4wqqU9wiQy/gBhJlyI1nN8gn8GCeTY1D6QHSC8E79Vpl8g==
-X-Received: by 2002:a05:622a:4cf:b0:43a:befb:dcdb with SMTP id
- q15-20020a05622a04cf00b0043abefbdcdbmr4594012qtx.5.1714613515677; 
- Wed, 01 May 2024 18:31:55 -0700 (PDT)
+ bh=5nYhvykwUDA1gRqecrFWRgbCvmpSfWJckgr853e65eY=;
+ b=AjFCCtftOM0uHyM498rRdE461FFqWrYsYtrSUvGdsPMJXEn/iNOFBrBvojaMWTtGUU
+ iKWC58VlM6F+zBwJGB2E1eOGNl009hOJpvvWjo2XsSpSvnolE/xbjyRI667dfosNPtir
+ g9yrymmC0hjO6x2Ql71MQPAwMFkPx+7hcqtaxLiO/2q8JWz0ZTvoGlsq/uYALz+sDFGQ
+ yz0xxRyNhQat0o88uPvDNek5QLvWCUJh4VZOlSyQ2/aSlpfGvwyoDV+7Vp1UvhfWFENp
+ p2GbxudX2ZETHFvqye5zRyqMRvc9F5xyOKjoCJIrUnDlpRNaOwqKp+gFzQ/0+pk3hxZ+
+ SM7Q==
+X-Gm-Message-State: AOJu0YzPrvEm/7sC8lYIylSp3lBQxnvWcDQ0nZZFOZ9plN25OVz5XZru
+ ZeNB7lTjdB4vvAlq/vF2dZY7tObutlv7sPt1fBkQ/EyNL+qe9j0eGjanILimv8odqyvmez8fvHr
+ 4zD/X9QjR
+X-Google-Smtp-Source: AGHT+IEORc54W6wNeitI3mm1uPn+XCrn0dfKSDLr8BFQeAAjbz5H19elo9VqzvZSih+Oy8a19++2Fg==
+X-Received: by 2002:a05:622a:124f:b0:43a:e2da:136a with SMTP id
+ z15-20020a05622a124f00b0043ae2da136amr2550457qtx.26.1714613518542; 
+ Wed, 01 May 2024 18:31:58 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.31.54
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.31.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:31:55 -0700 (PDT)
+ Wed, 01 May 2024 18:31:58 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
-	Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH 12/81] axi: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:30:29 -0600
-Message-Id: <20240502013138.2383421-12-trini@konsulko.com>
+Cc: Tobias Waldekranz <tobias@waldekranz.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Bin Meng <bmeng@tinylab.org>, Johan Jonker <jbx6244@gmail.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Subject: [PATCH 14/81] block: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:30:31 -0600
+Message-Id: <20240502013138.2383421-14-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -96,76 +101,161 @@ add missing include files directly.
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Tom Rini <trini@konsulko.com>
+Cc: Tobias Waldekranz <tobias@waldekranz.com>
 Cc: Simon Glass <sjg@chromium.org>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Bin Meng <bmeng@tinylab.org>
+Cc: Johan Jonker <jbx6244@gmail.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>
+Cc: Dan Carpenter <dan.carpenter@linaro.org>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- drivers/axi/axi-emul-uclass.c | 1 -
- drivers/axi/axi-uclass.c      | 1 -
- drivers/axi/axi_sandbox.c     | 1 -
- drivers/axi/ihs_axi.c         | 1 -
- drivers/axi/sandbox_store.c   | 1 -
- 5 files changed, 5 deletions(-)
+ drivers/block/blk-uclass.c       | 1 -
+ drivers/block/blk_legacy.c       | 1 -
+ drivers/block/blkcache.c         | 1 -
+ drivers/block/blkmap.c           | 1 -
+ drivers/block/efi-media-uclass.c | 1 -
+ drivers/block/efi_blk.c          | 1 -
+ drivers/block/host-uclass.c      | 1 -
+ drivers/block/host_dev.c         | 1 -
+ drivers/block/ide.c              | 1 -
+ drivers/block/sandbox.c          | 1 -
+ drivers/block/sb_efi_media.c     | 1 -
+ 11 files changed, 11 deletions(-)
 
-diff --git a/drivers/axi/axi-emul-uclass.c b/drivers/axi/axi-emul-uclass.c
-index e6f3ef072005..bea0b040738c 100644
---- a/drivers/axi/axi-emul-uclass.c
-+++ b/drivers/axi/axi-emul-uclass.c
+diff --git a/drivers/block/blk-uclass.c b/drivers/block/blk-uclass.c
+index 77066da352a3..512c952f4d7a 100644
+--- a/drivers/block/blk-uclass.c
++++ b/drivers/block/blk-uclass.c
 @@ -6,7 +6,6 @@
  
- #define LOG_CATEGORY UCLASS_AXI_EMUL
+ #define LOG_CATEGORY UCLASS_BLK
  
 -#include <common.h>
- #include <axi.h>
+ #include <blk.h>
  #include <dm.h>
  #include <log.h>
-diff --git a/drivers/axi/axi-uclass.c b/drivers/axi/axi-uclass.c
-index 41551ae85c9c..fa2475cbaf4e 100644
---- a/drivers/axi/axi-uclass.c
-+++ b/drivers/axi/axi-uclass.c
+diff --git a/drivers/block/blk_legacy.c b/drivers/block/blk_legacy.c
+index 5bf1d0471524..f36932183d1f 100644
+--- a/drivers/block/blk_legacy.c
++++ b/drivers/block/blk_legacy.c
+@@ -4,7 +4,6 @@
+  * Written by Simon Glass <sjg@chromium.org>
+  */
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <part.h>
+ #include <linux/err.h>
+diff --git a/drivers/block/blkcache.c b/drivers/block/blkcache.c
+index 26bcbea43533..0e69160249c7 100644
+--- a/drivers/block/blkcache.c
++++ b/drivers/block/blkcache.c
+@@ -4,7 +4,6 @@
+  * Author: Eric Nelson<eric@nelint.com>
+  *
+  */
+-#include <common.h>
+ #include <blk.h>
+ #include <log.h>
+ #include <malloc.h>
+diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
+index 21201409ed4b..34eed1380dca 100644
+--- a/drivers/block/blkmap.c
++++ b/drivers/block/blkmap.c
+@@ -4,7 +4,6 @@
+  * Author: Tobias Waldekranz <tobias@waldekranz.com>
+  */
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <blkmap.h>
+ #include <dm.h>
+diff --git a/drivers/block/efi-media-uclass.c b/drivers/block/efi-media-uclass.c
+index e012f6f2f4c4..dc5e4f59b7f3 100644
+--- a/drivers/block/efi-media-uclass.c
++++ b/drivers/block/efi-media-uclass.c
+@@ -5,7 +5,6 @@
+  * Copyright 2021 Google LLC
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ 
+ UCLASS_DRIVER(efi_media) = {
+diff --git a/drivers/block/efi_blk.c b/drivers/block/efi_blk.c
+index 917a19f60254..9766cd6f8327 100644
+--- a/drivers/block/efi_blk.c
++++ b/drivers/block/efi_blk.c
+@@ -8,7 +8,6 @@
+  * Copyright 2021 Google LLC
+  */
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <dm.h>
+ #include <efi.h>
+diff --git a/drivers/block/host-uclass.c b/drivers/block/host-uclass.c
+index b3647e3ce335..cf42bd1e07ac 100644
+--- a/drivers/block/host-uclass.c
++++ b/drivers/block/host-uclass.c
+@@ -9,7 +9,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_HOST
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <dm.h>
+ #include <malloc.h>
+diff --git a/drivers/block/host_dev.c b/drivers/block/host_dev.c
+index 52313435a0cb..b3ff3cd1fab9 100644
+--- a/drivers/block/host_dev.c
++++ b/drivers/block/host_dev.c
+@@ -9,7 +9,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_HOST
+ 
+-#include <common.h>
+ #include <blk.h>
+ #include <bootdev.h>
+ #include <dm.h>
+diff --git a/drivers/block/ide.c b/drivers/block/ide.c
+index c698f9cbd558..b16623d7a3ab 100644
+--- a/drivers/block/ide.c
++++ b/drivers/block/ide.c
 @@ -6,7 +6,6 @@
  
- #define LOG_CATEGORY UCLASS_AXI
+ #define LOG_CATEGORY UCLASS_IDE
  
 -#include <common.h>
- #include <dm.h>
- #include <axi.h>
- 
-diff --git a/drivers/axi/axi_sandbox.c b/drivers/axi/axi_sandbox.c
-index b91c91f6b3b6..6f698a405f92 100644
---- a/drivers/axi/axi_sandbox.c
-+++ b/drivers/axi/axi_sandbox.c
-@@ -4,7 +4,6 @@
-  * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
+ #include <ata.h>
+ #include <blk.h>
+ #include <bootdev.h>
+diff --git a/drivers/block/sandbox.c b/drivers/block/sandbox.c
+index be4e02cb601a..ec34f1ad8c2e 100644
+--- a/drivers/block/sandbox.c
++++ b/drivers/block/sandbox.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2013 Henrik Nordstrom <henrik@henriknordstrom.net>
   */
  
 -#include <common.h>
- #include <axi.h>
+ #include <blk.h>
  #include <dm.h>
- #include <asm/axi.h>
-diff --git a/drivers/axi/ihs_axi.c b/drivers/axi/ihs_axi.c
-index a7e9761fbfc2..a37dd1e17867 100644
---- a/drivers/axi/ihs_axi.c
-+++ b/drivers/axi/ihs_axi.c
-@@ -7,7 +7,6 @@
-  * Mario Six,  Guntermann & Drunck GmbH, mario.six@gdsys.cc
+ #include <fdtdec.h>
+diff --git a/drivers/block/sb_efi_media.c b/drivers/block/sb_efi_media.c
+index 52af155a6001..3255db064961 100644
+--- a/drivers/block/sb_efi_media.c
++++ b/drivers/block/sb_efi_media.c
+@@ -5,7 +5,6 @@
+  * Copyright 2021 Google LLC
   */
  
 -#include <common.h>
- #include <axi.h>
  #include <dm.h>
- #include <log.h>
-diff --git a/drivers/axi/sandbox_store.c b/drivers/axi/sandbox_store.c
-index ef349a50b798..b9413c758f7b 100644
---- a/drivers/axi/sandbox_store.c
-+++ b/drivers/axi/sandbox_store.c
-@@ -4,7 +4,6 @@
-  * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
-  */
  
--#include <common.h>
- #include <axi.h>
- #include <dm.h>
- #include <log.h>
+ static const struct udevice_id sandbox_efi_media_ids[] = {
 -- 
 2.34.1
 
