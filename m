@@ -4,79 +4,164 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21598C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 03:32:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1B20C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 05:56:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A77288C6A;
-	Thu,  2 May 2024 05:32:52 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id F0BAC88CE6;
+	Thu,  2 May 2024 07:56:45 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="eSjYjKIS";
+	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="FODdcZWt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AC8288C10; Thu,  2 May 2024 05:32:51 +0200 (CEST)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3D2D188CE9; Thu,  2 May 2024 07:56:45 +0200 (CEST)
+Received: from EUR04-HE1-obe.outbound.protection.outlook.com
+ (mail-he1eur04on20601.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260f::601])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E1F9A88C71
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 05:32:47 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id DC9F888CE3
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 07:56:42 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=reject dis=none) header.from=siemens.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mibodhi@gmail.com
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5723edf0ae5so7741522a12.0
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 20:32:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1714620767; x=1715225567; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=0pL/p8kpLAW4M1MeSwS20PhbWcUneqim8aIjLtMx/Wg=;
- b=eSjYjKIScfg/eAwXHAp8NpHQQJZttWhFat5dfMjzAka4YEfUpVYcKrzOIfCzOPCoQm
- zscCzaE/O5v3W16iPjq2Bk7ye3hM/1cH+CMRFmUqXP3kQ9ERB6byUmUsLydOjIbi248m
- 3D7PIPpZbpYKgiePXGw89DNcjU5c/GsZ/ftd49H99Be3zZzIwZzLuCamvv8OvrRsIyYq
- Ifs91edvvy7YL+rJJ7f/Ga1xVKK8s92N/9kA3lL5KNwSWVjMWWdbvgThf+geKDTFbQB2
- isC2kP19uu1TrsuMBUMxkarbjKD7U6xVwc1lKpCmGShquEKSJcSDaOe5NzUPYykqm6ya
- FWWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714620767; x=1715225567;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=0pL/p8kpLAW4M1MeSwS20PhbWcUneqim8aIjLtMx/Wg=;
- b=C47Lze1z+Dn3NE4cKDKKyzXaEH7EPxYuPen1N7WfDXJsRbldTlkPVwSexMSOQYBSYJ
- FZBZMpas5BdBSum64wCdmvCxLnrdRPQufrhV8tFueyzujtNMel94av2EvwSvf7/CUY6I
- ZB6SL7MFOandTUzZSNctIWCM6o7WK9Y9Kdq32B+NlbeYYoDKko0LUFMz6XqxpJF5fhXy
- vOA4sjzwfRAKvB58PaRiZZzRIK84UTKzRYbX3XkgZLZ4mEAAM4t41/Dwo7p1/wezStL6
- cdhC4j9RDfS4oGi76uRSdJq1bJs3ciNLy9k1fq5u3lBbFmjIdQtasL7PHOVY5n3qdOce
- akEw==
-X-Gm-Message-State: AOJu0Ywsq/zeQG2jv06aQTTzCx11+HDc7Hu+WNxUqku6ZLbhk7jmcbyP
- fvM1eijJCBAW1dB4vmIFjrWK6GUXLIdBwrq4U//Gzc6P37E0Zz1dD5F5AHxa3nz2DOYG8oJ2/7B
- GHHbLvGNVToBV13AjVGR2Bb+g/P0=
-X-Google-Smtp-Source: AGHT+IFlFt2ueE+3pMXMUp8YBMZLM7eyKELAmDHytM0cjp9MMEssfHp9oR8FBDe7ofgByESoiVgU4DGb0kOMz8wZdjA=
-X-Received: by 2002:a50:aad9:0:b0:572:a745:521e with SMTP id
- r25-20020a50aad9000000b00572a745521emr3138685edc.14.1714620766933; Wed, 01
- May 2024 20:32:46 -0700 (PDT)
+ spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=hdKjEabeLTiCLpQieeoaqabLsHCGmsQ2gVwb2iBsinlV2DgJDubcNqHeMgbSoW55Hgyzi1yz3zc6AONvySpGbclxPCtc+Jsxh2ftffSqeKyU5GW9s/K9FB/rNmcPGw7Kdp1UW+nCPbnXm7JCHmIohJJvcdMO3MOYxDfwjrlEtCb2MOow5fowKyMaao7Ac0hvgpCIICxIITebVfPYbo9IuahKAimUjWNh8kn8KYy+RLe+JvUx8Dfe9RBj4qHgCFTex/THaWIpboAeFN5HJMV6Q4YDMjAOFGnEjm+XXvLQHjf0Qw20IALz72/h7DtJM5Lo2dpPtAUMTuQe0HJImthILw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=49DIWq73jjs3O9eE18LUZ+eqSA/2q34jBOJ40aFBqYs=;
+ b=BEd6gj+eqDzcs+pi+isgqucueloYpc2M4X/9o2NTsPFPOvLguuMtxk4+HOINwf4z2QrSTmPjRTMBCP3OKoesul/tDiG0qjNXv98AdQcf8RcJBa6WtTj0J/fAhy3P3nqvGwKyqAWOUew7aTWv9yp+7Mc4WyEaOk+58pQw/NYJPGpl/x/O8tAiBe1cHVEmZ14ziNkErgWjtW4VgrugJoy0waBeNm2wLz42l1lNMUiUTD42LcO1o/LhvpGFfDLbIbmFdCq2erNAGj5nUzf58lo1l1ioxs4nxUBxjUj4NLnPWgHYZXLy6+BWzGdZoo1ojIN3w5vgo90G3emqgJAcpnH5yw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
+ dkim=pass header.d=siemens.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=49DIWq73jjs3O9eE18LUZ+eqSA/2q34jBOJ40aFBqYs=;
+ b=FODdcZWtfTfHri9KSHFvV2EEYR1YvVoxvdxeVBW6du0CcOoU6+KZMfH/jlx+E5nl/ewAy4R0VVPTsBQafpIntlxCBEsZxvvphXjR+6+1cvpbGvaowlpDNmV0BCOWTglMujLi8q/ISscF0eNI8AqxoMTswZ/bcOrU4SSe8eZkRdBLmDXBLM154efNI73upi9GSOqRZn8tHGEhKiZrS/y9P+rjuUHOqym3WUT2bu7VdE3Yn+0RxaFeWBRP269v3nhEzmuhyU+FG6QAL07AzkV21ZJkekDuv40/l5vdG2pyr4rQ3C0EWqccWo1qkoLXZtELVt09F5/8dOgJST64Ey8iDQ==
+Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::22)
+ by GV1PR10MB8320.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:150:1cc::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.7544.28; Thu, 2 May
+ 2024 05:56:41 +0000
+Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::baa6:3ada:fbe6:98f4]) by AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
+ ([fe80::baa6:3ada:fbe6:98f4%5]) with mapi id 15.20.7544.029; Thu, 2 May 2024
+ 05:56:41 +0000
+From: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
+To: "j-humphreys@ti.com" <j-humphreys@ti.com>, "greg.malysa@timesys.com"
+ <greg.malysa@timesys.com>
+CC: "ian.roberts@timesys.com" <ian.roberts@timesys.com>,
+ "jh80.chung@samsung.com" <jh80.chung@samsung.com>, "u-boot@lists.denx.de"
+ <u-boot@lists.denx.de>
+Subject: Re: [PATCH] mmc: sdhci: Correct ADMA_DESC_LEN to 12
+Thread-Topic: [PATCH] mmc: sdhci: Correct ADMA_DESC_LEN to 12
+Thread-Index: AQHam/js4UJorbWlBU6ZtMwdvnwza7GCzkGAgABteQCAADdUAA==
+Date: Thu, 2 May 2024 05:56:41 +0000
+Message-ID: <f8acbd38c223fa16613e7560d5ccef1e3b544edd.camel@siemens.com>
+References: <20240501185331.1189647-1-alexander.sverdlin@siemens.com>
+ <86wmode1pi.fsf@udb0321960.dhcp.ti.com>
+ <CAAjXUar_8wmFiUmo_nGhquwb4iiUmRXWASkg1W9Vga4hrQW-Nw@mail.gmail.com>
+In-Reply-To: <CAAjXUar_8wmFiUmo_nGhquwb4iiUmRXWASkg1W9Vga4hrQW-Nw@mail.gmail.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=siemens.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS8PR10MB6867:EE_|GV1PR10MB8320:EE_
+x-ms-office365-filtering-correlation-id: f454ced6-05ab-442c-e581-08dc6a6ca39b
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0; ARA:13230031|1800799015|376005|366007|38070700009;
+x-microsoft-antispam-message-info: =?utf-8?B?Z0U3V3pCb05uOVBiN0xxWHJkdUpMaWdtL3dmMzc2bElQL0JBRmdzY1RTRkdT?=
+ =?utf-8?B?S0V2emVCY1ltN09zVG9FZklLNVQ1a2s2T2lCKzZ6SVNBeVJSNkFoZjFvRGhR?=
+ =?utf-8?B?VHFFM3ByWm5mYmhYR0s0VDBjSy9EWVVWNmlmQkY5YzFyVXFBN1lKUXlZRm8y?=
+ =?utf-8?B?ZWVvMUd4d2F4a004VURYNE5ZVUN0cTlDc3RCQkFXb0haa3VoRnYzQTRwb3lP?=
+ =?utf-8?B?Y3JkRytCVlp0TUtENFZFWUtPSDFuMWZDekh0UUdLNTYrNGJ1K3k4ckJnSVhX?=
+ =?utf-8?B?QmM4OUVwc0NtTlR4ZkVVSlR3U1J2S0oxQlNPSVVzUUpHcjAyZnlkTXhZYWFL?=
+ =?utf-8?B?a3FjQVREWDBsSnhxd3M3QTIyNVBHM2g0NkpUTkZNOVRld3krRE14UUdKOTFH?=
+ =?utf-8?B?QzUxUjlCWXpLUWFvaGt2UVEzRWNVOVlsblEydXV6WVI4ZHhCTHJnbjhKWHV6?=
+ =?utf-8?B?Rm5BTXorWnhuWVFTZk9CYVdOSGRNQUM2RWI5eGZWWFp6OG9LMXhCNXNmVUsw?=
+ =?utf-8?B?ZGdCWEQ5bnNlQStMUDJISjNRMWU0VFV1anpwZ0VOQmd4S1hSWXByRlN1R3Rn?=
+ =?utf-8?B?TkdMVko3Q1dZUGk0RzZJQ3cxRlRmaVZ6RnpRbFdDU0hTVmt5dXA2elRkazVu?=
+ =?utf-8?B?RzMwYW96MXFOTDFkajdUcTRMMGQ1SzFIUG1waVlPRXdpZEJvcmF2K1JBa041?=
+ =?utf-8?B?b3JMTDBrNXUyeDlaM05KVWgrRTZ4UGM2UkhGdEkrQ2lRUkhHbzJPZXZiRm9v?=
+ =?utf-8?B?bm1DQ29VcGd0UVhxQ3BmNzNvejVEOEtpT1hQSWhaOVBVMCtjVnJteXc5WUo5?=
+ =?utf-8?B?d3I0QkM1K3FPVkkxcUl5MFNXdDJxV1VvdzJHYWJ2YlhnUHo0T0ZRalp4RDVy?=
+ =?utf-8?B?MERydElFUFRCWGpmejBjeHF2aCtkOW1vcDNGR09Fd1MwMG1MZUtUR3I2NXIw?=
+ =?utf-8?B?VGZCRVNVUklGWENHWnplclZwd3NjRTc2ck1Hekc1MTdnV0FNbGdjWUwrMWdE?=
+ =?utf-8?B?bTdpSEQxY3hyd0ZuOEc3RldJcEJpWTNVWjNIcDVLTWxTWVZORS9TQ3Y4Z3JR?=
+ =?utf-8?B?eW9sU3UrdWNSV1JOSjVkS2hYTjdRQjQydGovQ0xLTUZiT1FLVmRkcWwwWFhs?=
+ =?utf-8?B?N1lzSi9NeFZhRmhLL29QY0drQzExZTRqZ3lxcW5FeXZtY3EwNUl3OUd5Y2lN?=
+ =?utf-8?B?NU9LemVXRWpOUWs0Q2xGRmpzbXNkTG5Ca091RU43RkVmak1IZzdhQUZNa3ZV?=
+ =?utf-8?B?UFR4S1pwQUZMMHgwdGkzY0o0NEJNQlB5ekdIUzdGamNGTk13eXRKR0pyZVFI?=
+ =?utf-8?B?ekNIdmlJelhkSTl5UDNkanNSRHFBeVF6YUpzM0U2TlVBV1hHa0hYOHJFek52?=
+ =?utf-8?B?K3FyMlBabnZFQUhTRGdHNTU0L3U0Y1B5Q1BDZEo4RVdrQzFzamlocWpNMTBG?=
+ =?utf-8?B?WHZySjh1QnV3S25YTU9KNjI0bzJpQUFMZ2NCeVJvdExCWmdpNUhWSytXNmgw?=
+ =?utf-8?B?WEo4Uk1lM0E3TFpGSWwrUFkyK2o5QVdCTE96YVVBWTlBbm5YbWdoam1peENB?=
+ =?utf-8?B?UTZmNlEreEdBZzJiZDNveVYvRXlpdVNNS2ltV1ByLzhyT2tDVzRra3c2OGFO?=
+ =?utf-8?B?NWZ6eWFDd0JsYzczSjh1RWZYLzYrTVdyWlVRWURmN3JDYkxmRVV4R0pFNis5?=
+ =?utf-8?B?SGlQU1JUWG1hVnJLaHlaVVY0K2pad0RoeHZQTE9rV0NiM2c0WFN3YWhBPT0=?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230031)(1800799015)(376005)(366007)(38070700009); DIR:OUT; SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?aGRHWXlaT2lkNkdQU1BhWkZZdGlyd1RVMkZPNldPaWNwbExtWm01SmV5Zkkx?=
+ =?utf-8?B?eWFjdWFSeG1YWnAzOE5YaThJd2lyaStXZnpCaUxMeEQzVXptMTlrRy9mejBG?=
+ =?utf-8?B?UW8wU1ViNi9Vc1dVV0I0SkR5UDFTSW5MLzkzVDJKR0xRWlIyKzZTaHppcUNH?=
+ =?utf-8?B?MzVHNlIvMXQzY1prd21PcW8weWlIZGpLZ21mbS9CWHgyd3NMMzMxTnJNK25h?=
+ =?utf-8?B?UEluL0hCa0MveUJkM2tycWNzeUpJRVdtWitTSlpPdlRRaHd3d0NGeE9yQjJO?=
+ =?utf-8?B?SmxWMUNmZ3ZkVFE1N0xoa1hYeTJBM1pLWDdsU2dnaU92YWx2TWU3b1dlUmZJ?=
+ =?utf-8?B?MW8xMGg1SDliNGkyd1pQc240YkRyZVBDK0EvMHo4MXFTL2RHNG1yelNUcFly?=
+ =?utf-8?B?Z0J4RXhReVI1MThGNUhZL2ZqeklidGpLQVFqWDRmTDhlSG41YXFsbURYYmln?=
+ =?utf-8?B?Yklyd0lRTE9rc3hrYUVUSU93TFVueVlEZHlzSVFJMjYwWllhb0xtV1RQTEJk?=
+ =?utf-8?B?RzRGQ1huclBqYWlYeWVFY2c2RFh4UzBBSzI1Z2RjVWlBdDg3UjVDVFNmMit3?=
+ =?utf-8?B?SThUdTJXZXVKWTZaZGNaeWdBQlRYSTA1ZXJabDE1ZS9oKzZtT2RyOW1yRVhr?=
+ =?utf-8?B?K0ZCclJwaEJzeWpySlo4YXk4NU1iMnBZTHdwaXBKMWc1Y1ZBcTJOY1AvblJX?=
+ =?utf-8?B?eStveGtZeGVnU0VrR2JRM29weW1paEZGcjZadm5KSlFlejA0MTlZNEc5aVF5?=
+ =?utf-8?B?b3N6REc0Nm9WenpFU0E3Q2dmQ0JEZUl5M2xBTXgxUlA3eWJrbGc2eDZCVUFl?=
+ =?utf-8?B?b1E2TzhoOGpMdE9sRktJMWxLQ00vbUtyTnlEZnEra2FDM3gwQUxKWVl5RTU0?=
+ =?utf-8?B?anorUzRWLzlQVkxQZVFyeUpKYjBZNWh4TmxPakc5SnljczgrS0gxTVRremRm?=
+ =?utf-8?B?ZnZMQks3Uk9scjcrMnRzUzJncHg4YU9WUmJRTVREK282dnhDNDRCVFUvV3Fy?=
+ =?utf-8?B?d2hRZWs1bXFyc1E5ek43amY5NytSRnZCTFQ5OVhhVzU0b25ucE1CSUNNbWJt?=
+ =?utf-8?B?TUt5c1QrZU1WcFVsZmVoT0lwRXM1ZXFBOEFnbDU3bE81dE9kUWpUQ1pTS1hL?=
+ =?utf-8?B?elMzRkVWY3gvZ0liNWdXUU5yaTk4R2thTGRmVUoyYTVyUWRSV2VYNmRsQVVj?=
+ =?utf-8?B?S3ZFdk1WSjcyVWdMWHREckhDOXJYSXdnK09yQklmVmdXall0WGZBM3VFbzMr?=
+ =?utf-8?B?ZmlKY1lUTnE2YTlFK1hvRUdRUjJPZUR2R3IxTlZtVGJsZ0lielNVUlJ2Z3Nl?=
+ =?utf-8?B?UnVyMm9vK2thT3VBYjNDbCtCQnFkRC9kWDVCRUZteHdwdWdNZlZlakd0Mmxt?=
+ =?utf-8?B?UTdPbHVlNVFWdE9ySHV6RnNzR2pLZ1o4SUVXd0ZWVE5UTG8zdkRkK3NxOTJJ?=
+ =?utf-8?B?aXZPSVpCbHpndlczcVdwakNiRXAwbHk4ZnlGNjBCakJQNDRkOER4d1FvMmF2?=
+ =?utf-8?B?SVRkaFZLTWc5WDkwL0RKY0xLZ2cxandHQlpCODJiZFlWb1FpNktYS0l6bHZO?=
+ =?utf-8?B?a2lSV1czU244SVV6Ty9yNHFXZXNFcVhCYTdrODR4dUs2cEt5aUNibUZ1ci81?=
+ =?utf-8?B?Ry9MYlJQb1lnRzJ5b29RcXdsWlJXcmZJOVkvYzlyK2xvUk9oN1dLVXo3M3Fn?=
+ =?utf-8?B?NERFU0QrZWpSdmhCSGFRa0Q5YzgxZlRuY1RzaFlhM0VTU2xEb1o1ZVZIakp0?=
+ =?utf-8?B?Zjd3aGJKQWhTaGk5ZzNYZUl0aEtlVlBadG9hRXVXSlNjZmQ4ZmxMS0ppcjRB?=
+ =?utf-8?B?Y3h4NU5MODBhMFVjNHNobzdKdngybXhsOFdncS9FYk5sMVhXM1VnWnpYVy9n?=
+ =?utf-8?B?dk5HSW00UUo5MDZiclNSanc3OEZmT2NrbU5jbmRoS3ZQTjVyeHVaV0ZNUTVp?=
+ =?utf-8?B?SXcxODgvN1FqZUgyK3hnbDRSNW9NY0VPVkpnSnB2OVJvZFoxNUE2akR0OVlm?=
+ =?utf-8?B?WE43ZnRIR1djVmRmTTRJUjVtWHNmWmwwMXdSZE5lZkh3ZlRadEFuMFM4ZUJM?=
+ =?utf-8?B?a3lndXZKTTBaSE1pTWJZWEVNR3hHRlZtdlB5TVlaK2g4R2pHVlUxOVloanNu?=
+ =?utf-8?B?dEFXbkV2SGpmMmlUV0NnSnBadHVqTUpkeGxwVnlMWVdwY2RFZW1NeklKenhy?=
+ =?utf-8?Q?e8u0P8a0UAnzJMmvCMYHuBg=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <28627043FD0E064D84F756C6F8276068@EURPRD10.PROD.OUTLOOK.COM>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-References: <20240502013138.2383421-1-trini@konsulko.com>
- <20240502013138.2383421-11-trini@konsulko.com>
-In-Reply-To: <20240502013138.2383421-11-trini@konsulko.com>
-From: Tony Dinh <mibodhi@gmail.com>
-Date: Wed, 1 May 2024 20:32:28 -0700
-Message-ID: <CAJaLiFybpFKDSZSaW4jcN4tkaCQOxcXiN3Fw1W5Vr1+xwpikqQ@mail.gmail.com>
-Subject: Re: [PATCH 11/81] ata: Remove <common.h> and add needed includes
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Stefan Roese <sr@denx.de>,
- Samuel Holland <samuel@sholland.org>, 
- Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>, 
- Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
- Johan Jonker <jbx6244@gmail.com>, 
- Bin Meng <bmeng@tinylab.org>, Michal Simek <michal.simek@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-OriginatorOrg: siemens.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: f454ced6-05ab-442c-e581-08dc6a6ca39b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 May 2024 05:56:41.3192 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: B5bEfeHo2b+//DQrT0XPFsvlz4/3CD5wzl8VGNLvfpfPgQwWCTX+Mc853x984pN1midQZdySxzDovdJh4SFUGhaHmCrZHcNw0yjAJQJBdtY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR10MB8320
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,237 +178,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, May 1, 2024 at 6:31=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote:
->
-> Remove <common.h> from this driver directory and when needed
-> add missing include files directly.
->
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: Stefan Roese <sr@denx.de>
-> Cc: Samuel Holland <samuel@sholland.org>
-> Cc: Sam Edwards <CFSworks@gmail.com>
-> Cc: Andre Przywara <andre.przywara@arm.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Jonas Karlman <jonas@kwiboo.se>
-> Cc: Johan Jonker <jbx6244@gmail.com>
-> Cc: Bin Meng <bmeng@tinylab.org>
-> Cc: Tony Dinh <mibodhi@gmail.com>
-> Cc: Michal Simek <michal.simek@amd.com>
-
-Reviewed-by: Tony Dinh <mibodhi@gmail.com>
-
-> ---
->  drivers/ata/ahci-pci.c     | 1 -
->  drivers/ata/ahci-uclass.c  | 1 -
->  drivers/ata/ahci.c         | 2 +-
->  drivers/ata/ahci_mvebu.c   | 1 -
->  drivers/ata/ahci_sunxi.c   | 1 -
->  drivers/ata/dwc_ahci.c     | 1 -
->  drivers/ata/dwc_ahsata.c   | 1 -
->  drivers/ata/fsl_sata.c     | 1 -
->  drivers/ata/libata.c       | 2 +-
->  drivers/ata/mtk_ahci.c     | 1 -
->  drivers/ata/sata.c         | 1 -
->  drivers/ata/sata_bootdev.c | 1 -
->  drivers/ata/sata_ceva.c    | 1 -
->  drivers/ata/sata_mv.c      | 2 +-
->  drivers/ata/sata_sil.c     | 1 -
->  15 files changed, 3 insertions(+), 15 deletions(-)
->
-> diff --git a/drivers/ata/ahci-pci.c b/drivers/ata/ahci-pci.c
-> index 5356b9d83d34..f2102aaa6353 100644
-> --- a/drivers/ata/ahci-pci.c
-> +++ b/drivers/ata/ahci-pci.c
-> @@ -3,7 +3,6 @@
->   * Copyright (C) 2017, Bin Meng <bmeng.cn@gmail.com>
->   */
->
-> -#include <common.h>
->  #include <ahci.h>
->  #include <scsi.h>
->  #include <dm.h>
-> diff --git a/drivers/ata/ahci-uclass.c b/drivers/ata/ahci-uclass.c
-> index d398b50b9a1e..7affb3f1ec79 100644
-> --- a/drivers/ata/ahci-uclass.c
-> +++ b/drivers/ata/ahci-uclass.c
-> @@ -6,7 +6,6 @@
->
->  #define LOG_CATEGORY UCLASS_AHCI
->
-> -#include <common.h>
->  #include <ahci.h>
->  #include <dm.h>
->
-> diff --git a/drivers/ata/ahci.c b/drivers/ata/ahci.c
-> index 04ddc3394648..ac869296d525 100644
-> --- a/drivers/ata/ahci.c
-> +++ b/drivers/ata/ahci.c
-> @@ -8,10 +8,10 @@
->   *
->   * This driver provides a SCSI interface to SATA.
->   */
-> -#include <common.h>
->  #include <blk.h>
->  #include <cpu_func.h>
->  #include <log.h>
-> +#include <time.h>
->  #include <linux/bitops.h>
->  #include <linux/delay.h>
->
-> diff --git a/drivers/ata/ahci_mvebu.c b/drivers/ata/ahci_mvebu.c
-> index f05150d61ddf..f6e2d6bee45b 100644
-> --- a/drivers/ata/ahci_mvebu.c
-> +++ b/drivers/ata/ahci_mvebu.c
-> @@ -3,7 +3,6 @@
->   * Copyright (C) 2016 Stefan Roese <sr@denx.de>
->   */
->
-> -#include <common.h>
->  #include <ahci.h>
->  #include <dm.h>
->  #include <log.h>
-> diff --git a/drivers/ata/ahci_sunxi.c b/drivers/ata/ahci_sunxi.c
-> index 9064774e6614..6cf5cee055e7 100644
-> --- a/drivers/ata/ahci_sunxi.c
-> +++ b/drivers/ata/ahci_sunxi.c
-> @@ -1,4 +1,3 @@
-> -#include <common.h>
->  #include <ahci.h>
->  #include <dm.h>
->  #include <log.h>
-> diff --git a/drivers/ata/dwc_ahci.c b/drivers/ata/dwc_ahci.c
-> index 15fd3e365b2b..b480cde4465b 100644
-> --- a/drivers/ata/dwc_ahci.c
-> +++ b/drivers/ata/dwc_ahci.c
-> @@ -8,7 +8,6 @@
->   * Author: Mugunthan V N <mugunthanvnm@ti.com>
->   */
->
-> -#include <common.h>
->  #include <dm.h>
->  #include <ahci.h>
->  #include <scsi.h>
-> diff --git a/drivers/ata/dwc_ahsata.c b/drivers/ata/dwc_ahsata.c
-> index b4d4e39c9b3b..a29d641343ed 100644
-> --- a/drivers/ata/dwc_ahsata.c
-> +++ b/drivers/ata/dwc_ahsata.c
-> @@ -4,7 +4,6 @@
->   * Terry Lv <r65388@freescale.com>
->   */
->
-> -#include <common.h>
->  #include <ahci.h>
->  #include <blk.h>
->  #include <cpu_func.h>
-> diff --git a/drivers/ata/fsl_sata.c b/drivers/ata/fsl_sata.c
-> index 969bc191f8e8..4990148388b6 100644
-> --- a/drivers/ata/fsl_sata.c
-> +++ b/drivers/ata/fsl_sata.c
-> @@ -5,7 +5,6 @@
->   * Author: Dave Liu <daveliu@freescale.com>
->   */
->
-> -#include <common.h>
->  #include <ahci.h>
->  #include <blk.h>
->  #include <command.h>
-> diff --git a/drivers/ata/libata.c b/drivers/ata/libata.c
-> index 47e2c5c1cc40..ef659cb1728a 100644
-> --- a/drivers/ata/libata.c
-> +++ b/drivers/ata/libata.c
-> @@ -5,9 +5,9 @@
->   *             port from the libata of linux kernel
->   */
->
-> -#include <common.h>
->  #include <compiler.h>
->  #include <libata.h>
-> +#include <stdio.h>
->
->  u64 ata_id_n_sectors(u16 *id)
->  {
-> diff --git a/drivers/ata/mtk_ahci.c b/drivers/ata/mtk_ahci.c
-> index 2c5227df306b..53aabee0a5e6 100644
-> --- a/drivers/ata/mtk_ahci.c
-> +++ b/drivers/ata/mtk_ahci.c
-> @@ -8,7 +8,6 @@
->   * Author: Frank Wunderlich <frank-w@public-files.de>
->   */
->
-> -#include <common.h>
->  #include <ahci.h>
->  #include <asm/global_data.h>
->  #include <asm/io.h>
-> diff --git a/drivers/ata/sata.c b/drivers/ata/sata.c
-> index 784d9bbeacb4..84437d3d346b 100644
-> --- a/drivers/ata/sata.c
-> +++ b/drivers/ata/sata.c
-> @@ -9,7 +9,6 @@
->   *             Dave Liu <daveliu@freescale.com>
->   */
->
-> -#include <common.h>
->  #include <ahci.h>
->  #include <blk.h>
->  #include <dm.h>
-> diff --git a/drivers/ata/sata_bootdev.c b/drivers/ata/sata_bootdev.c
-> index f638493ce04f..a5ca6f6fd5bb 100644
-> --- a/drivers/ata/sata_bootdev.c
-> +++ b/drivers/ata/sata_bootdev.c
-> @@ -5,7 +5,6 @@
->   * Copyright 2023 Tony Dinh <mibodhi@gmail.com>
->   */
->
-> -#include <common.h>
->  #include <ahci.h>
->  #include <bootdev.h>
->  #include <dm.h>
-> diff --git a/drivers/ata/sata_ceva.c b/drivers/ata/sata_ceva.c
-> index 7769d4f99efd..a81b3165992a 100644
-> --- a/drivers/ata/sata_ceva.c
-> +++ b/drivers/ata/sata_ceva.c
-> @@ -3,7 +3,6 @@
->   * (C) Copyright 2015 - 2016 Xilinx, Inc.
->   * Michal Simek <michal.simek@amd.com>
->   */
-> -#include <common.h>
->  #include <dm.h>
->  #include <ahci.h>
->  #include <generic-phy.h>
-> diff --git a/drivers/ata/sata_mv.c b/drivers/ata/sata_mv.c
-> index 94d7369351a3..ac78760a33eb 100644
-> --- a/drivers/ata/sata_mv.c
-> +++ b/drivers/ata/sata_mv.c
-> @@ -31,7 +31,6 @@
->   * No port multiplier support
->   */
->
-> -#include <common.h>
->  #include <ahci.h>
->  #include <blk.h>
->  #include <bootdev.h>
-> @@ -46,6 +45,7 @@
->  #include <libata.h>
->  #include <malloc.h>
->  #include <sata.h>
-> +#include <time.h>
->  #include <linux/bitops.h>
->  #include <linux/delay.h>
->  #include <linux/errno.h>
-> diff --git a/drivers/ata/sata_sil.c b/drivers/ata/sata_sil.c
-> index 43a91a79120a..5b80f6249d76 100644
-> --- a/drivers/ata/sata_sil.c
-> +++ b/drivers/ata/sata_sil.c
-> @@ -5,7 +5,6 @@
->   * Author: Tang Yuantian <b29983@freescale.com>
->   */
->
-> -#include <common.h>
->  #include <blk.h>
->  #include <cpu_func.h>
->  #include <dm.h>
-> --
-> 2.34.1
->
+SGkgR3JlZywNCg0KT24gV2VkLCAyMDI0LTA1LTAxIGF0IDIyOjM4IC0wNDAwLCBHcmVnIE1hbHlz
+YSB3cm90ZToNCj4gVGhhbmtzIGZvciBmaXhpbmcgdGhpcyBmb3IgbWUuDQo+IA0KPiA+IENvbmZ1
+c2lvbiBwcm9iYWJseSBvcmlnaW5hdGVzIGZyb20gTGludXggY29tbWl0IDY4NWU0NDRiYmFhMA0K
+PiA+ICgibW1jOiBzZGhjaTogQWRkIEFETUEyIDY0LWJpdCBhZGRyZXNzaW5nIHN1cHBvcnQgZm9y
+IFY0IG1vZGUiKSwgYnV0DQo+ID4gdGhlIGxhdHRlciAiVjQgbW9kZSIgd2FzIG5ldmVyIHBvcnRl
+ZCB0byBVLUJvb3QuDQo+IA0KPiBJIGhhdmUgb25lIG9mIHRoZSByYXJlIHBsYXRmb3JtcyB0aGF0
+IGRvZXMgbm90IHN1cHBvcnQgNjQtYml0IEFETUEyIFYzDQo+IHNvIHdlIGFsc28gc3VibWl0dGVk
+IDUzNTljZDExMzUgKCJtbWM6IFN1cHBvcnQgMzItYml0IG9ubHkgQURNQSBvbg0KPiA2NC1iaXQg
+cGxhdGZvcm1zIikgdG8gc3VwcG9ydCB0aGF0LCBidXQgaWYgd2Ugc2F3IGhhcmR3YXJlIHRoYXQN
+Cj4gcmVxdWlyZWQgdjQgZGVzY3JpcHRvcnMgb3Igc29tZW9uZSBpbnNpc3RlZCBvbiBpdCwgd2Un
+ZCBuZWVkIHRvIGFkZA0KPiBhbm90aGVyIEtjb25maWcgZm9yIGl0LiBEbyB5b3UgdGhpbmsgd2Ug
+c2hvdWxkIHBvcnQgdGhlIHJlc3Qgb2YgdGhlIHY0DQo+IHN1cHBvcnQ/IFdoYXQgYWJvdXQgbWly
+cm9yaW5nIHRoZSBrZXJuZWwncyBkeW5hbWljIGJlaGF2aW9yIGJ5DQo+IGNoZWNraW5nIHRoZSBj
+b21iaW5hdGlvbiBvZiBjYXBhYmlsaXRpZXMgYW5kIGNvbnRyb2wgcmVnaXN0ZXJzIHRvDQo+IGZp
+Z3VyZSBvdXQgd2hpY2ggbW9kZSB0byB1c2UgcmF0aGVyIHRoYW4gaGFyZGNvZGluZyBpdD8NCg0K
+Y3VycmVudCB1LWJvb3QgbWFzdGVyIGNvbnRhaW5zIEFETUFfREVTQ19MRU4gdmFsdWUgZnJvbSA2
+ODVlNDQ0YmJhYTANCndpdGhvdXQgYWxsIHRoZSBwcmUtcmVxdWlzaXRlcy4gTXkgcGF0Y2ggY2hh
+bmdlcyBpdCB0byA2ODVlNDQ0YmJhYTBeIHN0YXRlLg0KDQpNeSBwYXRjaCB3aWxsIGhlbHAgdG8g
+YXBwbHkgNjg1ZTQ0NGJiYWEwXl5eLi4uNjg1ZTQ0NGJiYWEwLA0KYnV0IEknZCBwcmVmZXIgc29t
+ZW9uZSB3aXRoIHNvbWUgZXhwZXJpZW5jZSBpbiB0aGlzDQphcmVhIHdvdWxkIGRvIGl0LCBJJ20g
+cGVyc29uYWxseSBub3Qgc28gc291bmQgaW4gU0QvTU1DIGNvbnRyb2xsZXIgc3BlYy4NCg0KLS0g
+DQpBbGV4YW5kZXIgU3ZlcmRsaW4NClNpZW1lbnMgQUcNCnd3dy5zaWVtZW5zLmNvbQ0K
