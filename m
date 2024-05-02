@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC47FC4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 07:28:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFF07C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 07:29:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A20A88CE6;
-	Thu,  2 May 2024 09:28:11 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 7ED2088D33;
+	Thu,  2 May 2024 09:29:21 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Z1ORbAzs";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rU5Pp6iB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A83A488C38; Thu,  2 May 2024 09:28:09 +0200 (CEST)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id A76D688D35; Thu,  2 May 2024 09:29:19 +0200 (CEST)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A098E88D29
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 09:28:07 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id B2CDB88C38
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 09:29:17 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-34d9c9f2cf0so1839455f8f.3
- for <u-boot@lists.denx.de>; Thu, 02 May 2024 00:28:07 -0700 (PDT)
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-41a1d88723bso53420025e9.0
+ for <u-boot@lists.denx.de>; Thu, 02 May 2024 00:29:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1714634887; x=1715239687;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1714634957; x=1715239757;
  darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=/H4NYfY4zyOhd75u4cstdGl7EAVnSFFaQq9R31bPKU4=;
- b=Z1ORbAzsMeVfmLVvi5C5eUS/a9CluLDnaG3j7Ns85geky4KBmIadaNedG3SFyLS9Uq
- BwkuWd8WiUPGQ3PwM3ZShg2M/oOnlGCs6RvfWV/pocym18FQEVOSy0RFBLMkjPovuYHW
- GFSKMQE0Ldz2C09+CQm5eNXJUdEdzrei6a+Me5Cwveyq9afyR/BQm+9g4FZ8iOWoXptM
- uUXRZQ1SOp7Ogj41fyiPM822yptSZFwrFuq67pQiu6dBMvsnMaS7oKrUI9vFZ4+Hyc2g
- /fxcQsC41eQM52bcKFETGMZ7w14RBwv+wHiyDIgT2yyAWaDf5iHUOaTCxelR0ENJa6yd
- WgZg==
+ h=mime-version:message-id:date:references:in-reply-to:subject:to:from
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=K/eBjDjimCT9NuottdksbwACmVNQOat+PwhWYrWpUsM=;
+ b=rU5Pp6iB7ksC8iWVN/LZZ/SV3ugaxXMuj7e5zc/AMoNbFl5F//3kLbQ2vT/N6alflA
+ XMUtGuD/j7Y7tRgPsJq/fBAdrwxWCB1oX3e7UT5MwpicdcsyDpxRliYsrKD0XkmajZEX
+ xtUzM9c+tOeQKvne3wTUlr+CSwHqBnlBF6PnEAIlYQ6wc7nR3COevAaHdwOpxD0P5JP5
+ 3vemET8zdNPyoRz+WpX+6ZX4ujuZZNGPZuTDEtuvvzBhd7i22usnU8nV7b09VdximVOD
+ ZQh36orppoa8W9uVeNPZ20uFwiBIK22XlPEk9eZI3uNjp0UCiv3BX/aMsVHG+L2nb+lH
+ j+zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714634887; x=1715239687;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/H4NYfY4zyOhd75u4cstdGl7EAVnSFFaQq9R31bPKU4=;
- b=FNvKFqQGNEWHd1oAB0WDxolsQDW+ImFlgXMHvuTqc2ubyHE3qPw5ym5tI/Y5X8u4q5
- XQdsliQVh0pW7Sz4g52xV1UvVzu2cXjC0D0kEXmE4Qw5YTtedQilIARnHALpM08zPgzs
- Q/mH49Mwj+tC0A83O7qiwcDSP1lYKCjo6BunP8Cu9+IrLMmiEb6kite0hhYccPNb5l6V
- NUht1n7CHdAItJST6cpv39ZhoP7MJVyj9R2V81rNbBjKywmDmo4gHIoM0cdNR9jyZNBv
- jND0PwM/aA00WrSOHY5zm2ySiB4iiT3IPZsXT6bJnQ2+UFzMMqCN/PSOIfxup2xU6M11
- 28Ug==
+ d=1e100.net; s=20230601; t=1714634957; x=1715239757;
+ h=mime-version:message-id:date:references:in-reply-to:subject:to:from
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=K/eBjDjimCT9NuottdksbwACmVNQOat+PwhWYrWpUsM=;
+ b=pdCDxqUiZTAuzcQP+zHdqjWxAaWi8/iLDTKCkDoB9XKkDQrpBQSCO1WFYRP4BJEODO
+ DfomfpKCSp3L0G5XsPQruZWwV/6fLFFe4tRaMNRFVpYJV8RJEKVJgVpQAfTMHxFtwxLR
+ ZHNGxYuQC5kdLcF//5T2A0wim++cPKTRmd6hfpLoa+ARDvBwT+z3qKD1ZlD+TJTHb+H/
+ DjAKWriIxz/7n+p4sc9MNaOjv3kP7nFkTOxgmBHxWaSosrgYyOCOcOgsBu8F+SFVZhEV
+ psFYopuH9nnO8d1YXwLg8pMbjcNMAhhn6qHHvBXBw5EwK6DZ1RKa1EIPL2ZrkORP4aoH
+ cdaA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX7HVjqH9GHWbd5nHvaZVobelTN282d4vaxEjgaxwe21dEtl8ET6s/9tjNNe0ZLozqlGmC9EhtO1Wv913tQk4x7CQgHpg==
-X-Gm-Message-State: AOJu0Ywjz3Iv4kcKzxM3swqFKLaOoYE7QqTL6JtvqiEeJb/aFDiK7eBD
- APTYEJmiKMbJxLVmnLbjTw+MAahXgK6EJPTrsRBKcjuJ/Njx4h6Ymwl/pBTr+8ab5M2DLjaKul3
- uRAA=
-X-Google-Smtp-Source: AGHT+IF8EYkM2nO0iYOt1iDiP0f+ocOXhL5wVSQHK8jFFtSubrFK5lEMBK3vtH6KrUoIzZSvnIQ50w==
-X-Received: by 2002:a05:6000:1109:b0:34d:b9d2:4dfb with SMTP id
- z9-20020a056000110900b0034db9d24dfbmr4024459wrw.48.1714634886990; 
- Thu, 02 May 2024 00:28:06 -0700 (PDT)
+ AJvYcCX06q3re8XTK+J8SMBNXokBg3FOB3zri57nzISpHFnl1jiCDVkDto9jWR9l4lm8xVaRtc/W7tcwIxcMHLabSVDv1gm74Q==
+X-Gm-Message-State: AOJu0YzVezPtEBJucMJ5dZQrE0e6tj/3P/KqIwtXgGviB/gkLe3601nh
+ jNdUdaCHeH08pVUX9OAm2OXv/aRHgb5zBxQEtDw+5XiQZe5ofJ4aVnO3k/j61ni4icUWqWqyc/9
+ zhTM=
+X-Google-Smtp-Source: AGHT+IHe/IJsyELXOkWMauufNfz0hu6fG6Ry+Uo8mxCq8Yi5q36IwtqfbDANiUVAz0pJ2Hsx+f+dQQ==
+X-Received: by 2002:a05:600c:a0b:b0:41b:fbec:a53a with SMTP id
+ z11-20020a05600c0a0b00b0041bfbeca53amr3075733wmp.16.1714634957066; 
+ Thu, 02 May 2024 00:29:17 -0700 (PDT)
 Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- dd3-20020a0560001e8300b0034c9f060a14sm534236wrb.11.2024.05.02.00.28.06
+ g7-20020a05600c4ec700b0041902ebc87esm932851wmq.35.2024.05.02.00.29.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 02 May 2024 00:28:06 -0700 (PDT)
+ Thu, 02 May 2024 00:29:16 -0700 (PDT)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>
-Subject: Re: [PATCH 25/81] dfu: Remove <common.h> and add needed includes
-In-Reply-To: <20240502013138.2383421-25-trini@konsulko.com>
+Subject: Re: [PATCH 28/81] fastboot: Remove <common.h> and add needed includes
+In-Reply-To: <20240502013138.2383421-28-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
- <20240502013138.2383421-25-trini@konsulko.com>
-Date: Thu, 02 May 2024 09:28:03 +0200
-Message-ID: <87ttjg4qrg.fsf@baylibre.com>
+ <20240502013138.2383421-28-trini@konsulko.com>
+Date: Thu, 02 May 2024 09:29:14 +0200
+Message-ID: <87r0ek4qph.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -105,121 +104,97 @@ On mer., mai 01, 2024 at 19:30, Tom Rini <trini@konsulko.com> wrote:
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-Since this is quite a big series, I'm assuming you will pick it up
-yourself.
-
-If it's expected of me to pick this up through u-boot-dfu, let me know.
-
 > ---
-> Cc: Lukasz Majewski <lukma@denx.de>
 > Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > Cc: Tom Rini <trini@konsulko.com>
 > ---
->  drivers/dfu/dfu.c      | 1 -
->  drivers/dfu/dfu_alt.c  | 1 -
->  drivers/dfu/dfu_mmc.c  | 1 -
->  drivers/dfu/dfu_mtd.c  | 1 -
->  drivers/dfu/dfu_nand.c | 1 -
->  drivers/dfu/dfu_ram.c  | 1 -
->  drivers/dfu/dfu_sf.c   | 1 -
->  drivers/dfu/dfu_virt.c | 1 -
->  8 files changed, 8 deletions(-)
+>  drivers/fastboot/fb_command.c | 2 +-
+>  drivers/fastboot/fb_common.c  | 2 +-
+>  drivers/fastboot/fb_getvar.c  | 2 +-
+>  drivers/fastboot/fb_mmc.c     | 1 -
+>  drivers/fastboot/fb_nand.c    | 1 -
+>  5 files changed, 3 insertions(+), 5 deletions(-)
 >
-> diff --git a/drivers/dfu/dfu.c b/drivers/dfu/dfu.c
-> index 2adf26e2fe24..540d48fab77d 100644
-> --- a/drivers/dfu/dfu.c
-> +++ b/drivers/dfu/dfu.c
-> @@ -6,7 +6,6 @@
->   * author: Lukasz Majewski <l.majewski@samsung.com>
+> diff --git a/drivers/fastboot/fb_command.c b/drivers/fastboot/fb_command.c
+> index 01443c5d39e2..e4484d65aca5 100644
+> --- a/drivers/fastboot/fb_command.c
+> +++ b/drivers/fastboot/fb_command.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (C) 2016 The Android Open Source Project
+>   */
+>  
+> -#include <common.h>
+>  #include <command.h>
+>  #include <console.h>
+>  #include <env.h>
+> @@ -13,6 +12,7 @@
+>  #include <fb_nand.h>
+>  #include <part.h>
+>  #include <stdlib.h>
+> +#include <vsprintf.h>
+>  #include <linux/printk.h>
+>  
+>  /**
+> diff --git a/drivers/fastboot/fb_common.c b/drivers/fastboot/fb_common.c
+> index 3576b0677299..12ffb463deb9 100644
+> --- a/drivers/fastboot/fb_common.c
+> +++ b/drivers/fastboot/fb_common.c
+> @@ -11,11 +11,11 @@
+>   */
+>  
+>  #include <bcb.h>
+> -#include <common.h>
+>  #include <command.h>
+>  #include <env.h>
+>  #include <fastboot.h>
+>  #include <net.h>
+> +#include <vsprintf.h>
+>  
+>  /**
+>   * fastboot_buf_addr - base address of the fastboot download buffer
+> diff --git a/drivers/fastboot/fb_getvar.c b/drivers/fastboot/fb_getvar.c
+> index f65519c57b47..93cbd598e024 100644
+> --- a/drivers/fastboot/fb_getvar.c
+> +++ b/drivers/fastboot/fb_getvar.c
+> @@ -3,7 +3,6 @@
+>   * Copyright (C) 2016 The Android Open Source Project
 >   */
 >  
 > -#include <common.h>
 >  #include <env.h>
->  #include <errno.h>
->  #include <log.h>
-> diff --git a/drivers/dfu/dfu_alt.c b/drivers/dfu/dfu_alt.c
-> index ece3d2236f3d..e9132936a90b 100644
-> --- a/drivers/dfu/dfu_alt.c
-> +++ b/drivers/dfu/dfu_alt.c
+>  #include <fastboot.h>
+>  #include <fastboot-internal.h>
+> @@ -12,6 +11,7 @@
+>  #include <fs.h>
+>  #include <part.h>
+>  #include <version.h>
+> +#include <vsprintf.h>
+>  #include <linux/printk.h>
+>  
+>  static void getvar_version(char *var_parameter, char *response);
+> diff --git a/drivers/fastboot/fb_mmc.c b/drivers/fastboot/fb_mmc.c
+> index 060918e49109..f11eb66761b1 100644
+> --- a/drivers/fastboot/fb_mmc.c
+> +++ b/drivers/fastboot/fb_mmc.c
 > @@ -4,7 +4,6 @@
->   * Lukasz Majewski <l.majewski@majess.pl>
 >   */
 >  
+>  #include <config.h>
 > -#include <common.h>
->  #include <log.h>
->  #include <malloc.h>
->  #include <errno.h>
-> diff --git a/drivers/dfu/dfu_mmc.c b/drivers/dfu/dfu_mmc.c
-> index 12c54e90ef71..cfa6334e4397 100644
-> --- a/drivers/dfu/dfu_mmc.c
-> +++ b/drivers/dfu/dfu_mmc.c
-> @@ -6,7 +6,6 @@
->   * author: Lukasz Majewski <l.majewski@samsung.com>
+>  #include <blk.h>
+>  #include <env.h>
+>  #include <fastboot.h>
+> diff --git a/drivers/fastboot/fb_nand.c b/drivers/fastboot/fb_nand.c
+> index bbe26ddcc9be..afc64fd52807 100644
+> --- a/drivers/fastboot/fb_nand.c
+> +++ b/drivers/fastboot/fb_nand.c
+> @@ -5,7 +5,6 @@
 >   */
 >  
+>  #include <config.h>
 > -#include <common.h>
->  #include <log.h>
->  #include <malloc.h>
->  #include <errno.h>
-> diff --git a/drivers/dfu/dfu_mtd.c b/drivers/dfu/dfu_mtd.c
-> index 485586989c8a..c36ac09189f3 100644
-> --- a/drivers/dfu/dfu_mtd.c
-> +++ b/drivers/dfu/dfu_mtd.c
-> @@ -7,7 +7,6 @@
->   * Based on dfu_nand.c
->   */
+>  #include <blk.h>
 >  
-> -#include <common.h>
->  #include <dfu.h>
->  #include <mtd.h>
->  #include <linux/err.h>
-> diff --git a/drivers/dfu/dfu_nand.c b/drivers/dfu/dfu_nand.c
-> index 08e8cf5cdb37..940cfefc986c 100644
-> --- a/drivers/dfu/dfu_nand.c
-> +++ b/drivers/dfu/dfu_nand.c
-> @@ -9,7 +9,6 @@
->   * author: Lukasz Majewski <l.majewski@samsung.com>
->   */
->  
-> -#include <common.h>
->  #include <log.h>
->  #include <malloc.h>
->  #include <errno.h>
-> diff --git a/drivers/dfu/dfu_ram.c b/drivers/dfu/dfu_ram.c
-> index c4f4bd2e482f..043acbf022fc 100644
-> --- a/drivers/dfu/dfu_ram.c
-> +++ b/drivers/dfu/dfu_ram.c
-> @@ -8,7 +8,6 @@
->   * author: Lukasz Majewski <l.majewski@samsung.com>
->   */
->  
-> -#include <common.h>
->  #include <malloc.h>
->  #include <mapmem.h>
->  #include <errno.h>
-> diff --git a/drivers/dfu/dfu_sf.c b/drivers/dfu/dfu_sf.c
-> index 2dae15937064..7c1c0f9e2dc7 100644
-> --- a/drivers/dfu/dfu_sf.c
-> +++ b/drivers/dfu/dfu_sf.c
-> @@ -3,7 +3,6 @@
->   * Copyright (c) 2014, NVIDIA CORPORATION. All rights reserved.
->   */
->  
-> -#include <common.h>
->  #include <malloc.h>
->  #include <errno.h>
->  #include <div64.h>
-> diff --git a/drivers/dfu/dfu_virt.c b/drivers/dfu/dfu_virt.c
-> index 29f7a08f6728..2c31445af12a 100644
-> --- a/drivers/dfu/dfu_virt.c
-> +++ b/drivers/dfu/dfu_virt.c
-> @@ -2,7 +2,6 @@
->  /*
->   * Copyright (C) 2019, STMicroelectronics - All Rights Reserved
->   */
-> -#include <common.h>
->  #include <dfu.h>
->  #include <errno.h>
->  #include <log.h>
+>  #include <fastboot.h>
 > -- 
 > 2.34.1
