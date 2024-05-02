@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DC45C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:34:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D98A3C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:34:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0E68788C22;
-	Thu,  2 May 2024 03:32:08 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 705D588C1F;
+	Thu,  2 May 2024 03:32:10 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZoWEGYvW";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ouxAwBaS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 202DB88C05; Thu,  2 May 2024 03:32:07 +0200 (CEST)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id 9D29B88C10; Thu,  2 May 2024 03:32:08 +0200 (CEST)
+Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
+ [IPv6:2607:f8b0:4864:20::82d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BFCE88C17
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:05 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 446CF88C2A
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-de477949644so8296173276.1
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:04 -0700 (PDT)
+Received: by mail-qt1-x82d.google.com with SMTP id
+ d75a77b69052e-43ca9047bd2so2676651cf.1
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613524; x=1715218324; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613525; x=1715218325; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=p32AsXAoXlbh2FP4LW5LeUAbrGqvIG3nHRFMpTJ+Xik=;
- b=ZoWEGYvWXKd978Bg+5YtatvHTpBfHYG/RFYcmrnW3hLUfzgeJR+p+rFdVGs5lfQ4ek
- R0XYllXmSumtmxv5/O7ZDgz9bi/QHsNQkP+Z0dxRhoktpPL0XciW1yHFEamyZ/1Bij5/
- a9DvjocnTQVAbxgncZ5Wm2WetdqdmhpVGLeGI=
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Ik0J8pT3yhOVNee5JyCCI0V9HqlaWvvGa4WWDpeT1pc=;
+ b=ouxAwBaSuruSDifT5NJ2r6e8KQpoJU/WFWagNUb7bAbRozHEeD7lwZUY0CIbWdHVbU
+ jvaOw8bFKj3O3pMcg2TlhrPX5gBJOU3NnGTE2jFP0BljkR1zfGeKYKbPMdAhskz1p9n9
+ 12Vg3oasV/IoYOiqfuRMvynuWb5mLcK+bMD6Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613524; x=1715218324;
+ d=1e100.net; s=20230601; t=1714613525; x=1715218325;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=p32AsXAoXlbh2FP4LW5LeUAbrGqvIG3nHRFMpTJ+Xik=;
- b=NhuNtAmtZUYt6cpXpDkgPLQ4jo+bR9o+l9Pp37LpNhHPZQ44Dn+IunNULdyRMNTOg5
- r3c2SRi/6jommQfEUB8t3LzTPGrU8BNen7c+9/Oq7XP1VnvczJNdTO5refaxOfb9mVkr
- Ogu9e3cev+OvOMsjVWJtXA8UiDWq3fw4DBmAGudkkBYUnJN8psZyn9O/7noZe86sZbZa
- 2aVNVuEkNJZpMSqmADg6+pDOitVP7LSrg4lNYyWJV9BEsEw7h3jB3IiAKuwcXqRfs9lG
- W7fUkL9ulbUH7Ab+vagjE1EYCDjs6PtHgxQ7BsZ5HI0v80av49PEPypKtxB1BBB2iMw9
- 1ZEA==
-X-Gm-Message-State: AOJu0Yyv91BswqTEOKNjMXrUH9IDYmIzu2fU2JQqoljE9OtzN0nEpPMd
- XPQcixARbIkYyGaDWkt9tdUCynNKpepiSmGlOsFnGHjJscplyVPWnahW1/tBmTzWoPk5WrivSeL
- YmmH0jqIB
-X-Google-Smtp-Source: AGHT+IEhClpW7UDh67AQ2qeol+xgZvieQcu1wlaA/RAb0M4IqoJZWUwD5YLmIqsNCxl/NkV/JsYTsA==
-X-Received: by 2002:a25:a043:0:b0:de5:c1a4:560c with SMTP id
- x61-20020a25a043000000b00de5c1a4560cmr588286ybh.56.1714613521700; 
- Wed, 01 May 2024 18:32:01 -0700 (PDT)
+ bh=Ik0J8pT3yhOVNee5JyCCI0V9HqlaWvvGa4WWDpeT1pc=;
+ b=DKkYZ9SAcUkaaaD1u0R6N+7SFcTYOUDb+K/KKlv3/5CmjXYkDA0V7HLF/R12wguHir
+ 2p5c3VLU+NlXbtxshR3nwWVxq1PMDVibcIwmOEL3lRyk4az8ay82ddXXyCswx+6e5sae
+ 6gpc4/7OS0Yg99RW1WhZGQbi2y1xShNlrjZYsaepe2vJnTd3jZM5QKb0Vwf7Aj5xstIe
+ tpr/UCMhernHn+1vqRTfQBrToZhJzm0uTci1lkIlkllJZJssCsq+QwgmF9k+fq2KIUx9
+ m9/3MLncBnsuTWnAsqIKwMWTBx2i1eXULk9GOG8mZZB5g9rDoIwo689YNXvq0jHURcyP
+ MHYg==
+X-Gm-Message-State: AOJu0YzNJx0HA0Dwcg7OPlGV4OEKp/70smWYcwazToSuDz6+LJKc6aSV
+ PB4ay+I9Qgw9RUkN5B2ceEk6cwT3DoV/8CngfbBNWYLDCPGXdapfPLmeqAEaZaja2r42kaXe7T9
+ yTHkRJ3s0
+X-Google-Smtp-Source: AGHT+IHTU4a9HEo1zYTiwgYseYHjeUtJ3BkzYvHYpH+PyhSwrIXkoOX+Kvrd2Qye4YrG665307Q6RQ==
+X-Received: by 2002:a05:622a:5e8b:b0:43a:7b64:2fcc with SMTP id
+ er11-20020a05622a5e8b00b0043a7b642fccmr2569320qtb.7.1714613524885; 
+ Wed, 01 May 2024 18:32:04 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.00
- for <u-boot@lists.denx.de>
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:32:01 -0700 (PDT)
+ Wed, 01 May 2024 18:32:04 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 17/81] button: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:30:34 -0600
-Message-Id: <20240502013138.2383421-17-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+	Johan Jonker <jbx6244@gmail.com>
+Subject: [PATCH 18/81] cache: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:30:35 -0600
+Message-Id: <20240502013138.2383421-18-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -94,48 +96,76 @@ add missing include files directly.
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Johan Jonker <jbx6244@gmail.com>
 ---
- drivers/button/button-adc.c    | 1 -
- drivers/button/button-gpio.c   | 1 -
- drivers/button/button-uclass.c | 1 -
- 3 files changed, 3 deletions(-)
+ drivers/cache/cache-l2x0.c          | 1 -
+ drivers/cache/cache-sifive-ccache.c | 1 -
+ drivers/cache/cache-uclass.c        | 1 -
+ drivers/cache/cache-v5l2.c          | 1 -
+ drivers/cache/sandbox_cache.c       | 1 -
+ 5 files changed, 5 deletions(-)
 
-diff --git a/drivers/button/button-adc.c b/drivers/button/button-adc.c
-index 9c24c960e6ff..da7ddf2a8577 100644
---- a/drivers/button/button-adc.c
-+++ b/drivers/button/button-adc.c
-@@ -5,7 +5,6 @@
-  * Author: Marek Szyprowski <m.szyprowski@samsung.com>
+diff --git a/drivers/cache/cache-l2x0.c b/drivers/cache/cache-l2x0.c
+index 560f4c94f1ef..c7bdd9d064a5 100644
+--- a/drivers/cache/cache-l2x0.c
++++ b/drivers/cache/cache-l2x0.c
+@@ -2,7 +2,6 @@
+ /*
+  * Copyright (C) 2019 Intel Corporation <www.intel.com>
   */
- 
 -#include <common.h>
- #include <adc.h>
- #include <button.h>
- #include <log.h>
-diff --git a/drivers/button/button-gpio.c b/drivers/button/button-gpio.c
-index 7b5b3affe2dd..43b82d98aeb7 100644
---- a/drivers/button/button-gpio.c
-+++ b/drivers/button/button-gpio.c
+ #include <command.h>
+ #include <dm.h>
+ 
+diff --git a/drivers/cache/cache-sifive-ccache.c b/drivers/cache/cache-sifive-ccache.c
+index 521df40466f9..cc00b80f60b8 100644
+--- a/drivers/cache/cache-sifive-ccache.c
++++ b/drivers/cache/cache-sifive-ccache.c
 @@ -3,7 +3,6 @@
-  * Copyright (C) 2020 Philippe Reynes <philippe.reynes@softathome.com>
+  * Copyright (C) 2021 SiFive
   */
  
 -#include <common.h>
- #include <button.h>
+ #include <cache.h>
  #include <dm.h>
- #include <dm/lists.h>
-diff --git a/drivers/button/button-uclass.c b/drivers/button/button-uclass.c
-index 032191d61abc..cda243389df3 100644
---- a/drivers/button/button-uclass.c
-+++ b/drivers/button/button-uclass.c
-@@ -7,7 +7,6 @@
+ #include <asm/io.h>
+diff --git a/drivers/cache/cache-uclass.c b/drivers/cache/cache-uclass.c
+index 0c13dbdb75c4..300e7bc86e1a 100644
+--- a/drivers/cache/cache-uclass.c
++++ b/drivers/cache/cache-uclass.c
+@@ -5,7 +5,6 @@
  
- #define LOG_CATEGORY UCLASS_BUTTON
+ #define LOG_CATEGORY UCLASS_CACHE
  
 -#include <common.h>
- #include <button.h>
+ #include <cache.h>
  #include <dm.h>
- #include <dm/uclass-internal.h>
+ 
+diff --git a/drivers/cache/cache-v5l2.c b/drivers/cache/cache-v5l2.c
+index fe3f9392b2ca..f0b8ecc88079 100644
+--- a/drivers/cache/cache-v5l2.c
++++ b/drivers/cache/cache-v5l2.c
+@@ -4,7 +4,6 @@
+  * Rick Chen, Andes Technology Corporation <rick@andestech.com>
+  */
+ 
+-#include <common.h>
+ #include <command.h>
+ #include <cache.h>
+ #include <dm.h>
+diff --git a/drivers/cache/sandbox_cache.c b/drivers/cache/sandbox_cache.c
+index 955dfc8a0f84..2e20b83ab803 100644
+--- a/drivers/cache/sandbox_cache.c
++++ b/drivers/cache/sandbox_cache.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2019 Intel Corporation <www.intel.com>
+  */
+ 
+-#include <common.h>
+ #include <cache.h>
+ #include <dm.h>
+ #include <errno.h>
 -- 
 2.34.1
 
