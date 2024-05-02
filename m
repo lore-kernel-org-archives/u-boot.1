@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCF9BC4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:32:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 840DFC4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:33:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2E32088BFF;
+	by phobos.denx.de (Postfix) with ESMTP id 8E97E88BFB;
 	Thu,  2 May 2024 03:31:55 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Vil8zdHs";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ITgFdLOU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB31E88BAC; Thu,  2 May 2024 03:31:52 +0200 (CEST)
-Received: from mail-qt1-x831.google.com (mail-qt1-x831.google.com
- [IPv6:2607:f8b0:4864:20::831])
+ id ABD6E88B93; Thu,  2 May 2024 03:31:53 +0200 (CEST)
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com
+ [IPv6:2607:f8b0:4864:20::830])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 906C888B98
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:31:50 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 5436788BF4
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:31:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x831.google.com with SMTP id
- d75a77b69052e-43ab8e0f435so19415151cf.1
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:31:50 -0700 (PDT)
+Received: by mail-qt1-x830.google.com with SMTP id
+ d75a77b69052e-43a8246b51dso38288011cf.1
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:31:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613509; x=1715218309; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613510; x=1715218310; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=hQ3kKJxpjX/fzeoHO6TObb6wMmA/5+4CIh1wdpO76DM=;
- b=Vil8zdHsShY51DgZm6xp8YzjvwRfYmkHzK78JBFBtg9qZ95mWDrpmdFSrtdQi1fyNo
- 9wINPbKutE0Gi7TSogCqP71dBbRaoTRe9Sc8VCL0Dfy3RVZKId3lsvhU81kF7dB9VYAI
- g7q/xfkivixc5sxHFjJL7zqnwCwhCpCMP6udY=
+ :reply-to; bh=jcDp8A0nffEY8McOU1bX8tI1zw0tcOz6P2gweaYkb/I=;
+ b=ITgFdLOU3BFLOuQ/gZlsG1qeVTcx9sPKr5U183vg7V7jUrELPlShO2KdEjVkSK4gzt
+ i8Tf+yTImoFgSNUELn3sE3GKFJURN0JUJaIipAZjhBU6yJFwstXQmGXUiCZNawE+vcVz
+ TFdUXOrslXRDF0Ull1hsZ3CCqfrjCu86pS6Bw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613509; x=1715218309;
+ d=1e100.net; s=20230601; t=1714613510; x=1715218310;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hQ3kKJxpjX/fzeoHO6TObb6wMmA/5+4CIh1wdpO76DM=;
- b=ACG6rZAv6qkfzTi2WgqqLoUVqC7w2P6DF4AaWhWC/eKO6laJaNu87McfOSvu9Xz+X1
- Cy03XxSxjGAtlLgMmcJiMUJLCM/+H/RE084P70W/w9Jtk3gJrRCNf/COYFRT71Bbfc98
- MXPvYdikszoSsU3sMn6wFgWzxfvJ8Phon/iINsCumDegluVu5AWKH8xfWJdKIvCQ56hX
- LvI/LOt+oFsZgKGTx2+J3AOv3Y+X/SptZKybstY0JeVNRRGyuq/fWZ8lhExJ9qhK4KNV
- FCuTDAfVS1MHS1WLPRqQ1I+cIpNPIxtppOielEcnbtaaQAJSJe9SOIvqenmUMjI87PWp
- PBYg==
-X-Gm-Message-State: AOJu0YwfPyqzdjXHPfcpQVDpZj3bhiugW+EupiaWsNGBIIsuZqaig7oL
- GGrGHu7Jl6CCf16LRQEajo5Xsokb5KCsK+bi78GpgnLf02DQRc/08CkS6a58L8zoMXnOwCnCpoD
- dMFT/afpT
-X-Google-Smtp-Source: AGHT+IHglZ68Jnoqa9sWhT6zEZuFUZDAsKPlWbNj3+jfthyDpYYAqcHE8gkUaR0XWfRGYC/ooxcQUA==
-X-Received: by 2002:a05:622a:1309:b0:43a:b9c9:a25a with SMTP id
- v9-20020a05622a130900b0043ab9c9a25amr5136516qtk.56.1714613509047; 
- Wed, 01 May 2024 18:31:49 -0700 (PDT)
+ bh=jcDp8A0nffEY8McOU1bX8tI1zw0tcOz6P2gweaYkb/I=;
+ b=MXK0LAAbGpjci0znnwfROCW1p3rdeXzfPObZz2iu9A3RqMgDdR/UaQU2G05oajBDOK
+ SJWINT2i6+aT4m5AkrUl/n1NUp2/RF4hdAekrYmBgzV9KhKEVMY9ntColbWR/1eFMDao
+ REmQ9slgippmFXbgx8M/txyTerLOws5cjwmEdllG9XVeBGj1RUNj/wv1vDg+whBQET0T
+ g/VB3mX2Xsx963sqgUs0ciNkgoAzEjNrSYUigcwCheBEzwniAoZyH6auEd29b1ph0DqR
+ RrUldFXLripLM6OiZD0xIp7P9pH9JjshrkkS64fTlsOtN6uQw6yJ3ZYXK3Y580PmvxA2
+ cAFQ==
+X-Gm-Message-State: AOJu0Yx1KXntsBD85m8WBZo4nglkOA1ai1noAfweGt7+qq0HCj+RNSFM
+ WpMppeJIjgMi5TchZVzORMq72usrLDZ5zMLvD7lMvdGRtqwFILCMMywLA1o1Z6kPHTt9UvYd3Zq
+ F5pRUFlBH
+X-Google-Smtp-Source: AGHT+IGtObzhnDMQEti4+mZ19YsyCzyKLiKqOWkZY1WHfJMVOR+6UVhvyRkVSpaqZD5GGLo9CcFLbw==
+X-Received: by 2002:a05:622a:2c1:b0:43a:a255:cf3 with SMTP id
+ a1-20020a05622a02c100b0043aa2550cf3mr610301qtx.63.1714613510057; 
+ Wed, 01 May 2024 18:31:50 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.31.48
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.31.49
  for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:31:48 -0700 (PDT)
+ Wed, 01 May 2024 18:31:49 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 07/81] include: Add missing <linux/types.h>
-Date: Wed,  1 May 2024 19:30:24 -0600
-Message-Id: <20240502013138.2383421-7-trini@konsulko.com>
+Subject: [PATCH 08/81] fsl_ifc.h: Add <asm/ppc.h>
+Date: Wed,  1 May 2024 19:30:25 -0600
+Message-Id: <20240502013138.2383421-8-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -88,94 +88,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These files have many "Linux" style types in them, add <linux/types.h>
+In the case of PowerPC, this file needs to include <asm/ppc.h> in order
+to resolve all of the references it makes.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- include/display.h    | 2 ++
- include/fuse.h       | 2 ++
- include/i2c_eeprom.h | 1 +
- include/libata.h     | 1 +
- include/ram.h        | 2 ++
- include/sm.h         | 2 +-
- 6 files changed, 9 insertions(+), 1 deletion(-)
+ include/fsl_ifc.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/include/display.h b/include/display.h
-index 3d0121764411..e8d8aaa15fbc 100644
---- a/include/display.h
-+++ b/include/display.h
-@@ -6,6 +6,8 @@
- #ifndef _DISPLAY_H
- #define _DISPLAY_H
+diff --git a/include/fsl_ifc.h b/include/fsl_ifc.h
+index f9a0a7017d4a..4991d9322007 100644
+--- a/include/fsl_ifc.h
++++ b/include/fsl_ifc.h
+@@ -12,6 +12,8 @@
+ #include <part.h>
+ #ifdef CONFIG_ARM
+ #include <asm/arch/soc.h>
++#else
++#include <asm/ppc.h>
+ #endif
  
-+#include <linux/types.h>
-+
- struct udevice;
- struct display_timing;
- 
-diff --git a/include/fuse.h b/include/fuse.h
-index d48dcdfa6474..4519821af7ea 100644
---- a/include/fuse.h
-+++ b/include/fuse.h
-@@ -11,6 +11,8 @@
- #ifndef _FUSE_H_
- #define _FUSE_H_
- 
-+#include <linux/types.h>
-+
- /*
-  * Read/Sense/Program/Override interface:
-  *   bank:    Fuse bank
-diff --git a/include/i2c_eeprom.h b/include/i2c_eeprom.h
-index cba991e3574f..1fe32d2dd687 100644
---- a/include/i2c_eeprom.h
-+++ b/include/i2c_eeprom.h
-@@ -7,6 +7,7 @@
- #define __I2C_EEPROM
- 
- #include <linux/errno.h>
-+#include <linux/types.h>
- 
- struct udevice;
- 
-diff --git a/include/libata.h b/include/libata.h
-index a55e9315a730..fa39d21a44a0 100644
---- a/include/libata.h
-+++ b/include/libata.h
-@@ -10,6 +10,7 @@
- #ifndef __LIBATA_H__
- #define __LIBATA_H__
- 
-+#include <linux/types.h>
- 
- enum {
- 	/* various global constants */
-diff --git a/include/ram.h b/include/ram.h
-index 2fc971df465a..3600bb57a6cf 100644
---- a/include/ram.h
-+++ b/include/ram.h
-@@ -7,6 +7,8 @@
- #ifndef __RAM_H
- #define __RAM_H
- 
-+#include <linux/types.h>
-+
- struct udevice;
- 
- struct ram_info {
-diff --git a/include/sm.h b/include/sm.h
-index afa9c89055e5..fbc156ad68a7 100644
---- a/include/sm.h
-+++ b/include/sm.h
-@@ -19,7 +19,7 @@
-  * implementation of the driver you are using.
-  */
- 
--#include <asm/types.h>
-+#include <linux/types.h>
- #include <asm/ptrace.h>
- 
- struct udevice;
+ #define FSL_IFC_V1_1_0	0x01010000
 -- 
 2.34.1
 
