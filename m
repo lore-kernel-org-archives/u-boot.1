@@ -4,83 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99D0EC4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:37:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9D15C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:37:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CEA088C6F;
-	Thu,  2 May 2024 03:32:42 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 9D3AB88C6E;
+	Thu,  2 May 2024 03:32:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qy05D4/4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="sPIRxKwr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B13F988BDF; Thu,  2 May 2024 03:32:40 +0200 (CEST)
-Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
- [IPv6:2607:f8b0:4864:20::836])
+ id 5C3D688C74; Thu,  2 May 2024 03:32:42 +0200 (CEST)
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
+ [IPv6:2607:f8b0:4864:20::829])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3222588C38
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:37 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 7A95A88C10
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:38 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x836.google.com with SMTP id
- d75a77b69052e-43b06b803c4so19620511cf.1
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:37 -0700 (PDT)
+Received: by mail-qt1-x829.google.com with SMTP id
+ d75a77b69052e-439884be4efso46707151cf.2
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613556; x=1715218356; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613557; x=1715218357; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aF92RFp9e7mWmWOBlLgETATgdr7sLRP3yOOlQiZFCqs=;
- b=qy05D4/4uN2m857XGV92XSLD6Tc0JSZ+tXm0K2eXl23wOUZsr8dnvQNLgixuIZJe2R
- KWaExj2I4PupPm+rU/PzrrZrEcDBg4p1rE1cD45yAAIT5hTrrVY9EuzTeMQcEDcslpkW
- EJJRqO+uQ0FtzVorKFiQaM1/fw7C0ww8ZQicY=
+ bh=vQbU8Xka+mS6atPKNcBlZjA97j+PxJsQobbeRdQhosg=;
+ b=sPIRxKwrdmPSQWbZkj491P2u/kn1/NzugWkHD9TLS7n+C1Q9dpxjC+UhUsNWrB9nIN
+ 7tKXJ2FghO3rrKmMVdTBC+ytPu1GjVu7vEGZM5pW3pREWtu7IKdKaQKuVWClo8KGo7Uc
+ RAzzc8xjmiY1VniFYG5WT6ObQ1sFKQJG+5QNI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613556; x=1715218356;
+ d=1e100.net; s=20230601; t=1714613557; x=1715218357;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=aF92RFp9e7mWmWOBlLgETATgdr7sLRP3yOOlQiZFCqs=;
- b=EiLYuOW74AXVKUEv8FkKSyNIg43XfoKlCuvi1cyiQqpsqYthSCZjVZmDLEL7bJjF0U
- I0d05eZovR2UAJLggSVY4zM+aT/Zxn7Y5OMLcxzdM/idAelO0+mT8Ry1oCUq23aXBhya
- p4+Xn0bm/WOuIsBFyC1c5xhIqDWykxJnOhw1Leo+IprMsq0Htt8hYK6AKOyXoL2NHLyn
- Sbel3q2Eb960VGta2t0SgPgV9CYQNbJjpIiUDKbXmnldwRGM+upPyTa19IjdWxM7QCyT
- 1hfGsYFKK9Ulrs1Ugt/v08S5gCLR4USqy5b9AMgFHC8oYPG51SQVRG32b31Cpto+XAh2
- R39Q==
-X-Gm-Message-State: AOJu0Yyyid5L54ANHCqDECvMf+iUD4fCGuvvPclUllVSxDytTbjkz+6u
- x1ZEjcuiVRBNYPk7lT8CXHmGHfKoCLRZ82fXrySyeKRrguXQDF80wyYWrVoF3KmTN3tmIA4H4J2
- PAAgpyGJ+
-X-Google-Smtp-Source: AGHT+IEiFLcIDGQ03dAnpYkU34B1OUTrzIaHtKTbqAG7KQqyffKejScx3nrrcn11KUPscLCbNTUAVA==
-X-Received: by 2002:ac8:5dd0:0:b0:43a:b584:a842 with SMTP id
- e16-20020ac85dd0000000b0043ab584a842mr5148408qtx.59.1714613555837; 
- Wed, 01 May 2024 18:32:35 -0700 (PDT)
+ bh=vQbU8Xka+mS6atPKNcBlZjA97j+PxJsQobbeRdQhosg=;
+ b=rSxFR3kUdbJedXkOehkgJ/FZ90xuSfvNAoY91Iauvm4YoEVBiVs3U5MI9CpZ8Kd37B
+ EDdbzcw70CFlMwxWVp79kVecSYohL6XVpnsO0aJo7Ai9O67zsv2a/62HAMEaEIgp+QF+
+ nH1BT7mGAoW317zBQyBpVSWCbN5I3IVEY6mIJpcGZQ7fYWVlRBRVgXPgB7Fy1eTfWMeq
+ O3/j9UwxaNs9sBY/hIG3M2ElyZZTnlBAjFkc4w/fp9LsjX8zInPPBAZWcs+7UIq5qHUv
+ 89j8zNxeuynSUblFqEeo4gJRNb396YQHArouzar+yEw7pHBmaMC8gzazhp6eUvfNAP/H
+ 2b7g==
+X-Gm-Message-State: AOJu0Yy3gYqDL54QJ0VoohsLyoSFK4oAHxOYomE57SbkNyqGMhpEMgd3
+ wEZRERFqNQ9KTBpR3RnWzbHQsw9Y0hkjS3kpiwFDbS7d3C2F92f+bZRRVs9ATlfwtR8+/Wx5CR+
+ I7kTeJSRB
+X-Google-Smtp-Source: AGHT+IFpboL42G0NBNCLqxftbeN22X+E3JMTEY6xlxJtnPodYOIFxD3wCIawTlr24tWCM6AvrIeJ5w==
+X-Received: by 2002:a05:622a:5290:b0:43c:78d1:ee2d with SMTP id
+ dr16-20020a05622a529000b0043c78d1ee2dmr5176803qtb.23.1714613557216; 
+ Wed, 01 May 2024 18:32:37 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.33
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:32:35 -0700 (PDT)
+ Wed, 01 May 2024 18:32:36 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Heiko Schocher <hs@denx.de>, Ryan Chen <ryan_chen@aspeedtech.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- Michal Simek <michal.simek@amd.com>,
- Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
- Liviu Dudau <liviu.dudau@foss.arm.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, Stefan Roese <sr@denx.de>,
- Stefan Bosch <stefan_b@posteo.net>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Simon Glass <sjg@chromium.org>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: [PATCH 35/81] i2c: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:30:52 -0600
-Message-Id: <20240502013138.2383421-35-trini@konsulko.com>
+Cc: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [PATCH 36/81] input: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:30:53 -0600
+Message-Id: <20240502013138.2383421-36-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -107,695 +96,135 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Heiko Schocher <hs@denx.de>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Ryan Chen <ryan_chen@aspeedtech.com>
-Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
-Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
-Cc: Joel Stanley <joel@jms.id.au>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>
-Cc: Liviu Dudau <liviu.dudau@foss.arm.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Stefan Roese <sr@denx.de>
-Cc: Stefan Bosch <stefan_b@posteo.net>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Thierry Reding <treding@nvidia.com>
 Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Bin Meng <bmeng.cn@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
 ---
- drivers/i2c/acpi_i2c.c                     | 1 -
- drivers/i2c/ast2600_i2c.c                  | 1 -
- drivers/i2c/ast_i2c.c                      | 1 -
- drivers/i2c/at91_i2c.c                     | 1 -
- drivers/i2c/cros_ec_ldo.c                  | 1 -
- drivers/i2c/cros_ec_tunnel.c               | 1 -
- drivers/i2c/davinci_i2c.c                  | 2 +-
- drivers/i2c/designware_i2c.c               | 1 -
- drivers/i2c/designware_i2c_pci.c           | 1 -
- drivers/i2c/exynos_hs_i2c.c                | 1 -
- drivers/i2c/fsl_i2c.c                      | 2 +-
- drivers/i2c/i2c-cdns.c                     | 1 -
- drivers/i2c/i2c-cortina.c                  | 2 +-
- drivers/i2c/i2c-emul-uclass.c              | 1 -
- drivers/i2c/i2c-gpio.c                     | 1 -
- drivers/i2c/i2c-microchip.c                | 1 -
- drivers/i2c/i2c-uclass.c                   | 1 -
- drivers/i2c/i2c-versatile.c                | 1 -
- drivers/i2c/i2c_core.c                     | 2 +-
- drivers/i2c/ihs_i2c.c                      | 1 -
- drivers/i2c/imx_lpi2c.c                    | 1 -
- drivers/i2c/intel_i2c.c                    | 2 +-
- drivers/i2c/iproc_i2c.c                    | 1 -
- drivers/i2c/lpc32xx_i2c.c                  | 2 +-
- drivers/i2c/meson_i2c.c                    | 1 -
- drivers/i2c/muxes/i2c-arb-gpio-challenge.c | 2 +-
- drivers/i2c/muxes/i2c-mux-gpio.c           | 1 -
- drivers/i2c/muxes/i2c-mux-uclass.c         | 1 -
- drivers/i2c/muxes/pca954x.c                | 1 -
- drivers/i2c/mv_i2c.c                       | 1 -
- drivers/i2c/mvtwsi.c                       | 2 +-
- drivers/i2c/mxc_i2c.c                      | 2 +-
- drivers/i2c/nx_i2c.c                       | 2 +-
- drivers/i2c/ocores_i2c.c                   | 1 -
- drivers/i2c/omap24xx_i2c.c                 | 1 -
- drivers/i2c/qup_i2c.c                      | 1 -
- drivers/i2c/rcar_i2c.c                     | 1 -
- drivers/i2c/rcar_iic.c                     | 1 -
- drivers/i2c/rk_i2c.c                       | 1 -
- drivers/i2c/s3c24x0_i2c.c                  | 2 +-
- drivers/i2c/sandbox_i2c.c                  | 1 -
- drivers/i2c/sh_i2c.c                       | 1 -
- drivers/i2c/soft_i2c.c                     | 2 +-
- drivers/i2c/stm32f7_i2c.c                  | 1 -
- drivers/i2c/sun6i_p2wi.c                   | 1 -
- drivers/i2c/sun8i_rsb.c                    | 1 -
- drivers/i2c/tegra186_bpmp_i2c.c            | 1 -
- drivers/i2c/tegra_i2c.c                    | 1 -
- drivers/i2c/xilinx_xiic.c                  | 1 -
- 49 files changed, 12 insertions(+), 49 deletions(-)
+ drivers/input/apple_spi_kbd.c   | 1 -
+ drivers/input/button_kbd.c      | 1 -
+ drivers/input/cros_ec_keyb.c    | 1 -
+ drivers/input/i8042.c           | 1 -
+ drivers/input/input.c           | 2 +-
+ drivers/input/key_matrix.c      | 1 -
+ drivers/input/keyboard-uclass.c | 1 -
+ drivers/input/tegra-kbc.c       | 2 +-
+ 8 files changed, 2 insertions(+), 8 deletions(-)
 
-diff --git a/drivers/i2c/acpi_i2c.c b/drivers/i2c/acpi_i2c.c
-index 142f41178c10..82cb5db5cc8b 100644
---- a/drivers/i2c/acpi_i2c.c
-+++ b/drivers/i2c/acpi_i2c.c
+diff --git a/drivers/input/apple_spi_kbd.c b/drivers/input/apple_spi_kbd.c
+index 7cf12f453a30..5b30cec2dcb9 100644
+--- a/drivers/input/apple_spi_kbd.c
++++ b/drivers/input/apple_spi_kbd.c
 @@ -3,7 +3,6 @@
-  * Copyright 2019 Google LLC
+  * Copyright (C) 2021 Mark Kettenis <kettenis@openbsd.org>
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <i2c.h>
- #include <log.h>
-diff --git a/drivers/i2c/ast2600_i2c.c b/drivers/i2c/ast2600_i2c.c
-index e566b01feacf..9d1d70670b95 100644
---- a/drivers/i2c/ast2600_i2c.c
-+++ b/drivers/i2c/ast2600_i2c.c
-@@ -2,7 +2,6 @@
- /*
-  * Copyright ASPEED Technology Inc.
-  */
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/i2c/ast_i2c.c b/drivers/i2c/ast_i2c.c
-index 1c1d5566dad4..02ee406bbd7d 100644
---- a/drivers/i2c/ast_i2c.c
-+++ b/drivers/i2c/ast_i2c.c
-@@ -5,7 +5,6 @@
-  * Copyright 2017 Google, Inc.
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/i2c/at91_i2c.c b/drivers/i2c/at91_i2c.c
-index b7a25885e666..cfae36c74d19 100644
---- a/drivers/i2c/at91_i2c.c
-+++ b/drivers/i2c/at91_i2c.c
-@@ -8,7 +8,6 @@
- #include <malloc.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/i2c/cros_ec_ldo.c b/drivers/i2c/cros_ec_ldo.c
-index c593540ac138..dfe823c142c5 100644
---- a/drivers/i2c/cros_ec_ldo.c
-+++ b/drivers/i2c/cros_ec_ldo.c
+ #include <keyboard.h>
+ #include <spi.h>
+diff --git a/drivers/input/button_kbd.c b/drivers/input/button_kbd.c
+index c73d3b18be9c..0a917ac8b995 100644
+--- a/drivers/input/button_kbd.c
++++ b/drivers/input/button_kbd.c
 @@ -4,7 +4,6 @@
-  * Written by Simon Glass <sjg@chromium.org>
   */
  
+ #include <stdlib.h>
 -#include <common.h>
- #include <dm.h>
- #include <cros_ec.h>
- #include <errno.h>
-diff --git a/drivers/i2c/cros_ec_tunnel.c b/drivers/i2c/cros_ec_tunnel.c
-index 75828b6e7c27..2d610e0a2aa9 100644
---- a/drivers/i2c/cros_ec_tunnel.c
-+++ b/drivers/i2c/cros_ec_tunnel.c
-@@ -4,7 +4,6 @@
-  * Written by Simon Glass <sjg@chromium.org>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <cros_ec.h>
- #include <errno.h>
-diff --git a/drivers/i2c/davinci_i2c.c b/drivers/i2c/davinci_i2c.c
-index 25ef937dc0b3..391327472087 100644
---- a/drivers/i2c/davinci_i2c.c
-+++ b/drivers/i2c/davinci_i2c.c
-@@ -11,7 +11,7 @@
-  * Please see doc/driver-model/i2c-howto.rst for instructions.
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <i2c.h>
- #include <dm.h>
- #include <log.h>
-diff --git a/drivers/i2c/designware_i2c.c b/drivers/i2c/designware_i2c.c
-index 29cf63375c7f..e8c1623d41fd 100644
---- a/drivers/i2c/designware_i2c.c
-+++ b/drivers/i2c/designware_i2c.c
-@@ -4,7 +4,6 @@
-  * Vipin Kumar, STMicroelectronics, vipin.kumar@st.com.
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/designware_i2c_pci.c b/drivers/i2c/designware_i2c_pci.c
-index 28495a3f4285..11c986722650 100644
---- a/drivers/i2c/designware_i2c_pci.c
-+++ b/drivers/i2c/designware_i2c_pci.c
-@@ -5,7 +5,6 @@
-  * Copyright 2019 Google Inc
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <spl.h>
-diff --git a/drivers/i2c/exynos_hs_i2c.c b/drivers/i2c/exynos_hs_i2c.c
-index a7349e06cfd3..9a364fdae375 100644
---- a/drivers/i2c/exynos_hs_i2c.c
-+++ b/drivers/i2c/exynos_hs_i2c.c
-@@ -6,7 +6,6 @@
-  * David Mueller, ELSOFT AG, d.mueller@elsoft.ch
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <i2c.h>
- #include <log.h>
-diff --git a/drivers/i2c/fsl_i2c.c b/drivers/i2c/fsl_i2c.c
-index d9d8ee81d2ed..bac14fb2f422 100644
---- a/drivers/i2c/fsl_i2c.c
-+++ b/drivers/i2c/fsl_i2c.c
-@@ -6,7 +6,7 @@
-  * Changes for multibus/multiadapter I2C support.
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <command.h>
- #include <i2c.h>		/* Functional interface */
- #include <log.h>
-diff --git a/drivers/i2c/i2c-cdns.c b/drivers/i2c/i2c-cdns.c
-index 935b2ac63772..3f7cf8533ec7 100644
---- a/drivers/i2c/i2c-cdns.c
-+++ b/drivers/i2c/i2c-cdns.c
-@@ -7,7 +7,6 @@
-  * with added driver-model support and code cleanup.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <linux/bitops.h>
-diff --git a/drivers/i2c/i2c-cortina.c b/drivers/i2c/i2c-cortina.c
-index 960ae8c700f9..96f957164c19 100644
---- a/drivers/i2c/i2c-cortina.c
-+++ b/drivers/i2c/i2c-cortina.c
-@@ -4,12 +4,12 @@
-  * Arthur Li, Cortina Access, arthur.li@cortina-access.com.
-  */
- 
--#include <common.h>
- #include <i2c.h>
- #include <log.h>
- #include <asm/io.h>
- #include <dm.h>
- #include <mapmem.h>
-+#include <time.h>
- #include "i2c-cortina.h"
- 
- static void set_speed(struct i2c_regs *regs, int i2c_spd)
-diff --git a/drivers/i2c/i2c-emul-uclass.c b/drivers/i2c/i2c-emul-uclass.c
-index d421ddfcbe29..0954d53847e6 100644
---- a/drivers/i2c/i2c-emul-uclass.c
-+++ b/drivers/i2c/i2c-emul-uclass.c
-@@ -5,7 +5,6 @@
- 
- #define LOG_CATEGORY UCLASS_I2C_EMUL
- 
--#include <common.h>
- #include <dm.h>
- #include <i2c.h>
- #include <log.h>
-diff --git a/drivers/i2c/i2c-gpio.c b/drivers/i2c/i2c-gpio.c
-index 5fc3cfe42ef7..e0a575fb4a48 100644
---- a/drivers/i2c/i2c-gpio.c
-+++ b/drivers/i2c/i2c-gpio.c
-@@ -5,7 +5,6 @@
-  * This file is based on: drivers/i2c/soft-i2c.c,
-  * with added driver-model support and code cleanup.
-  */
--#include <common.h>
- #include <errno.h>
- #include <dm.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/i2c-microchip.c b/drivers/i2c/i2c-microchip.c
-index d453e243d6f2..788747879a25 100644
---- a/drivers/i2c/i2c-microchip.c
-+++ b/drivers/i2c/i2c-microchip.c
-@@ -6,7 +6,6 @@
-  * Padmarao Begari <padmarao.begari@microchip.com>
-  * Conor Dooley <conor.dooley@microchip.com>
-  */
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/i2c-uclass.c b/drivers/i2c/i2c-uclass.c
-index 98f95859f3bc..380a9f8f3add 100644
---- a/drivers/i2c/i2c-uclass.c
-+++ b/drivers/i2c/i2c-uclass.c
-@@ -5,7 +5,6 @@
- 
- #define LOG_CATEGORY UCLASS_I2C
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/i2c-versatile.c b/drivers/i2c/i2c-versatile.c
-index 0a1a85dfc288..a8f0a170f799 100644
---- a/drivers/i2c/i2c-versatile.c
-+++ b/drivers/i2c/i2c-versatile.c
-@@ -5,7 +5,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/i2c_core.c b/drivers/i2c/i2c_core.c
-index fe0cd75d94a1..7c43a5546d3d 100644
---- a/drivers/i2c/i2c_core.c
-+++ b/drivers/i2c/i2c_core.c
-@@ -7,7 +7,7 @@
-  *
-  * Multibus/multiadapter I2C core functions (wrappers)
-  */
--#include <common.h>
-+#include <config.h>
- #include <i2c.h>
- #include <linker_lists.h>
- #include <asm/global_data.h>
-diff --git a/drivers/i2c/ihs_i2c.c b/drivers/i2c/ihs_i2c.c
-index d715714638ff..dc88cd19167e 100644
---- a/drivers/i2c/ihs_i2c.c
-+++ b/drivers/i2c/ihs_i2c.c
-@@ -4,7 +4,6 @@
-  * Dirk Eibach,  Guntermann & Drunck GmbH, dirk.eibach@gdsys.cc
-  */
- 
--#include <common.h>
- #include <i2c.h>
- #include <dm.h>
- #include <regmap.h>
-diff --git a/drivers/i2c/imx_lpi2c.c b/drivers/i2c/imx_lpi2c.c
-index ad9293c92e1a..6c0d8eb5f4f5 100644
---- a/drivers/i2c/imx_lpi2c.c
-+++ b/drivers/i2c/imx_lpi2c.c
-@@ -3,7 +3,6 @@
-  * Copyright 2016 Freescale Semiconductors, Inc.
-  */
- 
--#include <common.h>
- #include <errno.h>
- #include <log.h>
- #include <asm/io.h>
-diff --git a/drivers/i2c/intel_i2c.c b/drivers/i2c/intel_i2c.c
-index 4fc6f1a11a75..d8ceea10cda7 100644
---- a/drivers/i2c/intel_i2c.c
-+++ b/drivers/i2c/intel_i2c.c
-@@ -7,11 +7,11 @@
-  * Copyright (C) 2016 Stefan Roese <sr@denx.de>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <i2c.h>
- #include <log.h>
- #include <pci.h>
-+#include <time.h>
- #include <asm/io.h>
- 
- /* PCI Configuration Space (D31:F3): SMBus */
-diff --git a/drivers/i2c/iproc_i2c.c b/drivers/i2c/iproc_i2c.c
-index 39af49c4ec54..6570f64fe774 100644
---- a/drivers/i2c/iproc_i2c.c
-+++ b/drivers/i2c/iproc_i2c.c
-@@ -6,7 +6,6 @@
- 
- #include <asm/global_data.h>
- #include <asm/io.h>
--#include <common.h>
- #include <config.h>
- #include <dm.h>
- #include <linux/printk.h>
-diff --git a/drivers/i2c/lpc32xx_i2c.c b/drivers/i2c/lpc32xx_i2c.c
-index 496f4feec566..a4e42e64a9b8 100644
---- a/drivers/i2c/lpc32xx_i2c.c
-+++ b/drivers/i2c/lpc32xx_i2c.c
-@@ -6,7 +6,7 @@
-  * Written-by: Albert ARIBAUD - 3ADEV <albert.aribaud@3adev.fr>
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <log.h>
- #include <asm/io.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/meson_i2c.c b/drivers/i2c/meson_i2c.c
-index 434e3461b1dd..19f1b6b08196 100644
---- a/drivers/i2c/meson_i2c.c
-+++ b/drivers/i2c/meson_i2c.c
-@@ -2,7 +2,6 @@
- /*
-  * (C) Copyright 2017 - Beniamino Galvani <b.galvani@gmail.com>
-  */
--#include <common.h>
- #include <log.h>
- #include <asm/io.h>
- #include <clk.h>
-diff --git a/drivers/i2c/muxes/i2c-arb-gpio-challenge.c b/drivers/i2c/muxes/i2c-arb-gpio-challenge.c
-index ad730e0e79ff..a83d7cb0829d 100644
---- a/drivers/i2c/muxes/i2c-arb-gpio-challenge.c
-+++ b/drivers/i2c/muxes/i2c-arb-gpio-challenge.c
-@@ -4,12 +4,12 @@
-  * Written by Simon Glass <sjg@chromium.org>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <i2c.h>
- #include <log.h>
- #include <malloc.h>
-+#include <time.h>
- #include <asm/global_data.h>
- #include <asm/gpio.h>
- #include <linux/delay.h>
-diff --git a/drivers/i2c/muxes/i2c-mux-gpio.c b/drivers/i2c/muxes/i2c-mux-gpio.c
-index 4ca206115f85..f212bd1f9836 100644
---- a/drivers/i2c/muxes/i2c-mux-gpio.c
-+++ b/drivers/i2c/muxes/i2c-mux-gpio.c
-@@ -10,7 +10,6 @@
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm-generic/gpio.h>
--#include <common.h>
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <dm/devres.h>
-diff --git a/drivers/i2c/muxes/i2c-mux-uclass.c b/drivers/i2c/muxes/i2c-mux-uclass.c
-index a5d1bb0576db..d1999d21feb7 100644
---- a/drivers/i2c/muxes/i2c-mux-uclass.c
-+++ b/drivers/i2c/muxes/i2c-mux-uclass.c
-@@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY UCLASS_I2C_MUX
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/muxes/pca954x.c b/drivers/i2c/muxes/pca954x.c
-index 0034dfbf6daf..b4e3e16a9764 100644
---- a/drivers/i2c/muxes/pca954x.c
-+++ b/drivers/i2c/muxes/pca954x.c
-@@ -5,7 +5,6 @@
-  * Written by Michal Simek
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/mv_i2c.c b/drivers/i2c/mv_i2c.c
-index 5bc9cd7b295a..949cc45d308d 100644
---- a/drivers/i2c/mv_i2c.c
-+++ b/drivers/i2c/mv_i2c.c
-@@ -16,7 +16,6 @@
-  * Murray.Jensen@cmst.csiro.au, 27-Jan-01.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <i2c.h>
- #include <log.h>
-diff --git a/drivers/i2c/mvtwsi.c b/drivers/i2c/mvtwsi.c
-index c38330f758a9..44e8e191b039 100644
---- a/drivers/i2c/mvtwsi.c
-+++ b/drivers/i2c/mvtwsi.c
-@@ -7,7 +7,7 @@
-  * Copyright (c) 2010 Albert Aribaud.
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <i2c.h>
- #include <log.h>
- #include <asm/global_data.h>
-diff --git a/drivers/i2c/mxc_i2c.c b/drivers/i2c/mxc_i2c.c
-index d501133a0c8f..0acdaf7e7431 100644
---- a/drivers/i2c/mxc_i2c.c
-+++ b/drivers/i2c/mxc_i2c.c
-@@ -14,7 +14,7 @@
-  *
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <log.h>
- #include <asm/arch/clock.h>
- #include <asm/arch/imx-regs.h>
-diff --git a/drivers/i2c/nx_i2c.c b/drivers/i2c/nx_i2c.c
-index 07cda0fa6793..8562dd82bd63 100644
---- a/drivers/i2c/nx_i2c.c
-+++ b/drivers/i2c/nx_i2c.c
-@@ -1,8 +1,8 @@
--#include <common.h>
- #include <errno.h>
- #include <dm.h>
- #include <i2c.h>
- #include <log.h>
-+#include <time.h>
- #include <asm/arch/nexell.h>
- #include <asm/arch/reset.h>
- #include <asm/arch/clk.h>
-diff --git a/drivers/i2c/ocores_i2c.c b/drivers/i2c/ocores_i2c.c
-index fff85118d0de..cf714d22ee46 100644
---- a/drivers/i2c/ocores_i2c.c
-+++ b/drivers/i2c/ocores_i2c.c
-@@ -12,7 +12,6 @@
-  * Andreas Larsson <andreas@gaisler.com>
-  */
- 
--#include <common.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <clk.h>
-diff --git a/drivers/i2c/omap24xx_i2c.c b/drivers/i2c/omap24xx_i2c.c
-index 6fc9d1eba9d1..ebe472e20cdb 100644
---- a/drivers/i2c/omap24xx_i2c.c
-+++ b/drivers/i2c/omap24xx_i2c.c
-@@ -38,7 +38,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <i2c.h>
- #include <log.h>
-diff --git a/drivers/i2c/qup_i2c.c b/drivers/i2c/qup_i2c.c
-index 5ae3cccd4acd..26707d63980e 100644
---- a/drivers/i2c/qup_i2c.c
-+++ b/drivers/i2c/qup_i2c.c
-@@ -9,7 +9,6 @@
- 
- #include <init.h>
- #include <env.h>
--#include <common.h>
- #include <log.h>
- #include <dm/device_compat.h>
- #include <linux/delay.h>
-diff --git a/drivers/i2c/rcar_i2c.c b/drivers/i2c/rcar_i2c.c
-index ff9a2d80dda1..f0f9b2afacfb 100644
---- a/drivers/i2c/rcar_i2c.c
-+++ b/drivers/i2c/rcar_i2c.c
-@@ -11,7 +11,6 @@
-  *   Kuninori Morimoto <kuninori.morimoto.gx@renesas.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/rcar_iic.c b/drivers/i2c/rcar_iic.c
-index f0e50914c68d..2aa0f5fbfae4 100644
---- a/drivers/i2c/rcar_iic.c
-+++ b/drivers/i2c/rcar_iic.c
-@@ -9,7 +9,6 @@
-  * Copyright (C) 2011, 2013 Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/rk_i2c.c b/drivers/i2c/rk_i2c.c
-index 9927af94a80b..fa167268ae71 100644
---- a/drivers/i2c/rk_i2c.c
-+++ b/drivers/i2c/rk_i2c.c
-@@ -6,7 +6,6 @@
-  * Peter, Software Engineering, <superpeter.cai@gmail.com>.
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/i2c/s3c24x0_i2c.c b/drivers/i2c/s3c24x0_i2c.c
-index 505e20bc61c8..72d2ab0f73d8 100644
---- a/drivers/i2c/s3c24x0_i2c.c
-+++ b/drivers/i2c/s3c24x0_i2c.c
-@@ -4,10 +4,10 @@
-  * David Mueller, ELSOFT AG, d.mueller@elsoft.ch
-  */
- 
--#include <common.h>
- #include <errno.h>
  #include <dm.h>
  #include <fdtdec.h>
+ #include <input.h>
+diff --git a/drivers/input/cros_ec_keyb.c b/drivers/input/cros_ec_keyb.c
+index c4853463739b..0917ee20fedc 100644
+--- a/drivers/input/cros_ec_keyb.c
++++ b/drivers/input/cros_ec_keyb.c
+@@ -5,7 +5,6 @@
+  * Copyright (c) 2012 The Chromium OS Authors.
+  */
+ 
+-#include <common.h>
+ #include <cros_ec.h>
+ #include <dm.h>
+ #include <errno.h>
+diff --git a/drivers/input/i8042.c b/drivers/input/i8042.c
+index e6070ca01529..9bf21053cf06 100644
+--- a/drivers/input/i8042.c
++++ b/drivers/input/i8042.c
+@@ -8,7 +8,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_KEYBOARD
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <env.h>
+ #include <errno.h>
+diff --git a/drivers/input/input.c b/drivers/input/input.c
+index 8a6506e7c6f9..3f146fb07e6d 100644
+--- a/drivers/input/input.c
++++ b/drivers/input/input.c
+@@ -6,13 +6,13 @@
+  * (C) Copyright 2004 DENX Software Engineering, Wolfgang Denk, wd@denx.de
+  */
+ 
+-#include <common.h>
+ #include <console.h>
+ #include <dm.h>
+ #include <env.h>
+ #include <errno.h>
+ #include <log.h>
+ #include <stdio_dev.h>
 +#include <time.h>
- #if defined(CONFIG_ARCH_EXYNOS4) || defined(CONFIG_ARCH_EXYNOS5)
- #include <log.h>
- #include <asm/arch/clk.h>
-diff --git a/drivers/i2c/sandbox_i2c.c b/drivers/i2c/sandbox_i2c.c
-index c99e6de93327..74bb5e933973 100644
---- a/drivers/i2c/sandbox_i2c.c
-+++ b/drivers/i2c/sandbox_i2c.c
-@@ -5,7 +5,6 @@
-  * Copyright (c) 2014 Google, Inc
+ #include <input.h>
+ #ifdef CONFIG_DM_KEYBOARD
+ #include <keyboard.h>
+diff --git a/drivers/input/key_matrix.c b/drivers/input/key_matrix.c
+index e2fb2e170787..2e631660c880 100644
+--- a/drivers/input/key_matrix.c
++++ b/drivers/input/key_matrix.c
+@@ -6,7 +6,6 @@
+  * (C) Copyright 2004 DENX Software Engineering, Wolfgang Denk, wd@denx.de
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <errno.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/sh_i2c.c b/drivers/i2c/sh_i2c.c
-index 3335d9482a29..ab816101dea0 100644
---- a/drivers/i2c/sh_i2c.c
-+++ b/drivers/i2c/sh_i2c.c
-@@ -7,7 +7,6 @@
-  * Please see doc/driver-model/i2c-howto.rst for instructions.
-  */
- 
--#include <common.h>
- #include <i2c.h>
+ #include <key_matrix.h>
  #include <log.h>
- #include <asm/global_data.h>
-diff --git a/drivers/i2c/soft_i2c.c b/drivers/i2c/soft_i2c.c
-index ed8ba47de450..1f2afc65e8b3 100644
---- a/drivers/i2c/soft_i2c.c
-+++ b/drivers/i2c/soft_i2c.c
-@@ -15,7 +15,7 @@
-  * Please see doc/driver-model/i2c-howto.rst for instructions.
-  */
- 
--#include <common.h>
-+#include <config.h>
- #if defined(CONFIG_AT91FAMILY)
- #include <asm/io.h>
- #include <asm/arch/hardware.h>
-diff --git a/drivers/i2c/stm32f7_i2c.c b/drivers/i2c/stm32f7_i2c.c
-index f42e08a64180..3f51b1dd1db4 100644
---- a/drivers/i2c/stm32f7_i2c.c
-+++ b/drivers/i2c/stm32f7_i2c.c
+diff --git a/drivers/input/keyboard-uclass.c b/drivers/input/keyboard-uclass.c
+index aefc8e825e20..df9ee8f7d659 100644
+--- a/drivers/input/keyboard-uclass.c
++++ b/drivers/input/keyboard-uclass.c
 @@ -5,7 +5,6 @@
  
- #define LOG_CATEGORY UCLASS_I2C
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/sun6i_p2wi.c b/drivers/i2c/sun6i_p2wi.c
-index b8e07a533ca9..c927c0edf250 100644
---- a/drivers/i2c/sun6i_p2wi.c
-+++ b/drivers/i2c/sun6i_p2wi.c
-@@ -15,7 +15,6 @@
- 
- #include <axp_pmic.h>
- #include <clk.h>
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/sun8i_rsb.c b/drivers/i2c/sun8i_rsb.c
-index f36f2c7afacf..2197f1805663 100644
---- a/drivers/i2c/sun8i_rsb.c
-+++ b/drivers/i2c/sun8i_rsb.c
-@@ -10,7 +10,6 @@
- 
- #include <axp_pmic.h>
- #include <clk.h>
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/tegra186_bpmp_i2c.c b/drivers/i2c/tegra186_bpmp_i2c.c
-index 588f6bdcc4b4..d30eb5231229 100644
---- a/drivers/i2c/tegra186_bpmp_i2c.c
-+++ b/drivers/i2c/tegra186_bpmp_i2c.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2016, NVIDIA CORPORATION.
-  */
+ #define LOG_CATEGORY UCLASS_KEYBOARD
  
 -#include <common.h>
  #include <dm.h>
- #include <i2c.h>
+ #include <keyboard.h>
  #include <log.h>
-diff --git a/drivers/i2c/tegra_i2c.c b/drivers/i2c/tegra_i2c.c
-index 57d77d56ea55..3c324bd26635 100644
---- a/drivers/i2c/tegra_i2c.c
-+++ b/drivers/i2c/tegra_i2c.c
-@@ -5,7 +5,6 @@
+diff --git a/drivers/input/tegra-kbc.c b/drivers/input/tegra-kbc.c
+index d4741a76663e..fc13975d4f0f 100644
+--- a/drivers/input/tegra-kbc.c
++++ b/drivers/input/tegra-kbc.c
+@@ -4,7 +4,6 @@
   *  NVIDIA Corporation <www.nvidia.com>
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <errno.h>
- #include <i2c.h>
-diff --git a/drivers/i2c/xilinx_xiic.c b/drivers/i2c/xilinx_xiic.c
-index 72199a62b2d7..056024e350fb 100644
---- a/drivers/i2c/xilinx_xiic.c
-+++ b/drivers/i2c/xilinx_xiic.c
-@@ -9,7 +9,6 @@
-  * Copyright (c) 2009-2010 Intel Corporation
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <i2c.h>
+ #include <fdtdec.h>
+ #include <input.h>
+@@ -13,6 +12,7 @@
+ #include <log.h>
+ #include <stdio_dev.h>
+ #include <tegra-kbc.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/funcmux.h>
 -- 
 2.34.1
 
