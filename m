@@ -4,102 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A58B3C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:43:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C245C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:43:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A1F388D27;
+	by phobos.denx.de (Postfix) with ESMTP id 92B0088D2C;
 	Thu,  2 May 2024 03:34:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="j6inI+yw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="spO5TbJG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B9F5288C62; Thu,  2 May 2024 03:32:36 +0200 (CEST)
-Received: from mail-qk1-x72e.google.com (mail-qk1-x72e.google.com
- [IPv6:2607:f8b0:4864:20::72e])
+ id 8936788C6C; Thu,  2 May 2024 03:32:54 +0200 (CEST)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F53588C69
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:33 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id CD91B88C91
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72e.google.com with SMTP id
- af79cd13be357-790eedf44faso322010485a.3
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:33 -0700 (PDT)
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-4371955d27fso45529711cf.0
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613552; x=1715218352; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613567; x=1715218367; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6/iCYd+6f1phOCaE6evWE97fVyRtmhaSh+sItDUuZ4k=;
- b=j6inI+yw/iBvbocn2ocW/2CmKDxsOJR6poe1WoyeIfyrsSl4konBHpIL3n+XhlCrUq
- BJcI4F3pRssUHswxxm+4LRki+/M3eud888SG7sVSxHajc3x3ZRwZbkd+WS/EjD6se0CN
- UCjC5cO5zDA2A+Wlsl9RofxBKIvyGNMkFMp1Q=
+ bh=lAXymq7gfhZk1cQeJzWbgd++hg6ND+oAZqBZNuVVejg=;
+ b=spO5TbJGyQOMPhKpyXsaEYSr35rM10ATDwoSxVZtojZ6Np+xCAAL3f4Eflt0B7gJ4z
+ nsGRxLONXROueQ29VJk1OrH2lBQGg61ZINeu6ul90Q362He67k4WXkPwkBwuuSsyE1CV
+ 8SiDhyY/ozZh58/9UxAY15YJfRXe5lBr1+aGs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613552; x=1715218352;
+ d=1e100.net; s=20230601; t=1714613567; x=1715218367;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6/iCYd+6f1phOCaE6evWE97fVyRtmhaSh+sItDUuZ4k=;
- b=BC51HacmGW6G/TcdK+MLB4Z7ehOfdl9m4gdrtQ7cHm381oH3VuDhtlyhcKaUJT4n5j
- kavAI79uPQ21E/qTnvug7O8Qim26q9U6hDasu1Dx64RifUvM6bTqn7Yq0FVNb3XXm9Xt
- mcTbdB7Fe8ZGlY7F3Dwvhz0ATujFIpx/BE5rr65GhfYZeMj0GdKr5thCXm6CmCB1yphm
- DxMN/RuphMSpbTefug8woDk84/EvKT/t0FZhbPfsrjN6raRCi0IRtj4lSqPFnoGcTZYe
- e7hWWTc8ilIPt+C40n01lJqqhLlcuU6XDFqbKc+y5Pj4UaswaSuwcVcFcZK5fRwbPboR
- 35Sg==
-X-Gm-Message-State: AOJu0YxEOvcx0e+HVmfSHdeMtgXDnIuwEyGG3DpnRdcQMcAhYjnguOS4
- qeLeZn6Suiv0N/mG+tPd6GeyuGwZkz9YtTS4W4q9hTo1jdZnt2g+w4ay/5m3OwGaAilnyX5tfz3
- 2liWriUdh
-X-Google-Smtp-Source: AGHT+IGO0Az2Q56TvhJq+uXGYl4rp5/7E7egNJfc9XrMh+pLk0b6cmIzoDeA3Dj+/hX4EiXAGz4UJw==
-X-Received: by 2002:a05:622a:38f:b0:43a:bd5b:3ff1 with SMTP id
- j15-20020a05622a038f00b0043abd5b3ff1mr5228769qtx.63.1714613552003; 
- Wed, 01 May 2024 18:32:32 -0700 (PDT)
+ bh=lAXymq7gfhZk1cQeJzWbgd++hg6ND+oAZqBZNuVVejg=;
+ b=F/sLEuDPmpLNP5Fs7gk9aLbI+KlZid6yu1xal6i9sHkrrV+g6bHDqbM2/gQDFg1r2r
+ FlPo9DBYmlZXLR9T4xMgP60tl5c5FNBqe7qZyrZMtJ+3x49kHyamfhO1jsyZuSMvGQZ6
+ 0M6F5AM3HUiYmGqmbnI/Ak4D0L15ipC/wK1NPVuHSx0ocxTdQL/5Vl/iF30Lsj+BJZzN
+ hsHM0o6La5tv354EW611b2YD8An9n1V0x3ml6bsX13zzxjed3IGdZ0btybHi189c3Kq+
+ TR+JzOdvbMZ6oJ80cTm9PM7+zMBiuL2qKOvXL574cMI3bJrS8IuUCyS2OUNL3d+tyK68
+ 8eTA==
+X-Gm-Message-State: AOJu0Yx/SPKK/V0QjEYp8pvidlaZSVKqMBFlAfG4Vi4Q+sDghYnrV1WJ
+ 58TzlnCLimqkKWctoHhfcX3hHi76FfbPLQvwc4nvMSGrOZaZWq0osOcqAvboRDxy0i1pXx66/aU
+ BUeXoqmyI
+X-Google-Smtp-Source: AGHT+IFHDKzUUQkLjeudcz3gV2283LVBzPQuyqYyXZ4Xj1TIB9Z/TRGttkLoYhFOq8/3VSSU8a8duA==
+X-Received: by 2002:a05:622a:4cf:b0:43a:befb:dcdb with SMTP id
+ q15-20020a05622a04cf00b0043abefbdcdbmr4596248qtx.5.1714613567397; 
+ Wed, 01 May 2024 18:32:47 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.27
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:32:31 -0700 (PDT)
+ Wed, 01 May 2024 18:32:46 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Matthias Brugger <mbrugger@suse.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
- Ryan Chen <ryan_chen@aspeedtech.com>,
- Chia-Wei Wang <chiawei_wang@aspeedtech.com>,
- Aspeed BMC SW team <BMC-SW@aspeedtech.com>, Joel Stanley <joel@jms.id.au>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Dai Okamura <okamura.dai@socionext.com>,
- Michal Simek <michal.simek@amd.com>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Gregory CLEMENT <gregory.clement@bootlin.com>,
- Lars Povlsen <lars.povlsen@microchip.com>,
- Horatiu Vultur <horatiu.vultur@microchip.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Stefan Roese <sr@denx.de>,
- Stephan Gerhold <stephan@gerhold.net>,
- Linus Walleij <linus.walleij@linaro.org>,
- Stefan Bosch <stefan_b@posteo.net>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
+Cc: Simon Glass <sjg@chromium.org>, Sean Anderson <sean.anderson@seco.com>,
+ Eugen Hristev <eugen.hristev@collabora.com>,
+ Mario Six <mario.six@gdsys.cc>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, Michael Walle <michael@walle.cc>,
  Patrick Delaunay <patrick.delaunay@foss.st.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>,
  Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Sean Anderson <seanga2@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
- Qu Wenruo <wqu@suse.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heiko Schocher <hs@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Bin Meng <bmeng.cn@gmail.com>,
- Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
- Jim Liu <jim.t90615@gmail.com>, Nishanth Menon <nm@ti.com>,
- Samuel Holland <samuel@sholland.org>, Sam Edwards <CFSworks@gmail.com>
-Subject: [PATCH 33/81] gpio: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:30:50 -0600
-Message-Id: <20240502013138.2383421-33-trini@konsulko.com>
+ Liviu Dudau <liviu.dudau@foss.arm.com>,
+ =?UTF-8?q?Micha=C5=82=20Barna=C5=9B?= <barnas@google.com>,
+ Bin Meng <bmeng.cn@gmail.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ =?UTF-8?q?Milan=20P=2E=20Stani=C4=87?= <mps@arvanta.net>,
+ Neha Malcom Francis <n-francis@ti.com>, Nishanth Menon <nm@ti.com>,
+ Marek Vasut <marex@denx.de>, Michel Alex <Alex.Michel@wiedemann-group.com>,
+ Stefano Babic <sbabic@denx.de>, Peng Fan <peng.fan@nxp.com>,
+ Igor Opaniuk <igor.opaniuk@foundries.io>,
+ Clement Faure <clement.faure@nxp.com>, Mathieu Othacehe <othacehe@gnu.org>,
+ Ye Li <ye.li@nxp.com>, Jim Liu <jim.t90615@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tim Lunn <tim@feathertop.org>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Stefan Roese <sr@denx.de>
+Subject: [PATCH 41/81] misc: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:30:58 -0600
+Message-Id: <20240502013138.2383421-41-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -129,30 +118,10 @@ add missing include files directly.
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Matthias Brugger <mbrugger@suse.com>
-Cc: Peter Robinson <pbrobinson@gmail.com>
-Cc: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>
-Cc: Ryan Chen <ryan_chen@aspeedtech.com>
-Cc: Chia-Wei Wang <chiawei_wang@aspeedtech.com>
-Cc: Aspeed BMC SW team <BMC-SW@aspeedtech.com>
-Cc: Joel Stanley <joel@jms.id.au>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
-Cc: Dai Okamura <okamura.dai@socionext.com>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>
-Cc: Gregory CLEMENT <gregory.clement@bootlin.com>
-Cc: Lars Povlsen <lars.povlsen@microchip.com>
-Cc: Horatiu Vultur <horatiu.vultur@microchip.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Sumit Garg <sumit.garg@linaro.org>
-Cc: Stefan Roese <sr@denx.de>
-Cc: Stephan Gerhold <stephan@gerhold.net>
-Cc: Linus Walleij <linus.walleij@linaro.org>
-Cc: Stefan Bosch <stefan_b@posteo.net>
 Cc: Simon Glass <sjg@chromium.org>
+Cc: Sean Anderson <sean.anderson@seco.com>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>
+Cc: Mario Six <mario.six@gdsys.cc>
 Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
 Cc: Kever Yang <kever.yang@rock-chips.com>
 Cc: Michael Walle <michael@walle.cc>
@@ -160,846 +129,1001 @@ Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: Patrice Chotard <patrice.chotard@foss.st.com>
 Cc: Thierry Reding <treding@nvidia.com>
 Cc: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Sean Anderson <seanga2@gmail.com>
-Cc: Andre Przywara <andre.przywara@arm.com>
-Cc: Qu Wenruo <wqu@suse.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Heiko Schocher <hs@denx.de>
-Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Liviu Dudau <liviu.dudau@foss.arm.com>
+Cc: "Michał Barnaś" <barnas@google.com>
 Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
-Cc: Jim Liu <jim.t90615@gmail.com>
+Cc: Dan Carpenter <dan.carpenter@linaro.org>
+Cc: "Milan P. Stanić" <mps@arvanta.net>
+Cc: Neha Malcom Francis <n-francis@ti.com>
 Cc: Nishanth Menon <nm@ti.com>
-Cc: Samuel Holland <samuel@sholland.org>
-Cc: Sam Edwards <CFSworks@gmail.com>
+Cc: Marek Vasut <marex@denx.de>
+Cc: Michel Alex <Alex.Michel@wiedemann-group.com>
+Cc: Stefano Babic <sbabic@denx.de>
+Cc: Peng Fan <peng.fan@nxp.com>
+Cc: Igor Opaniuk <igor.opaniuk@foundries.io>
+Cc: Clement Faure <clement.faure@nxp.com>
+Cc: Mathieu Othacehe <othacehe@gnu.org>
+Cc: Ye Li <ye.li@nxp.com>
+Cc: Jim Liu <jim.t90615@gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tim Lunn <tim@feathertop.org>
+Cc: "Marek Behún" <kabel@kernel.org>
+Cc: Stefan Roese <sr@denx.de>
 ---
- drivers/gpio/74x164_gpio.c          | 1 -
- drivers/gpio/altera_pio.c           | 1 -
- drivers/gpio/at91_gpio.c            | 1 -
- drivers/gpio/atmel_pio4.c           | 1 -
- drivers/gpio/axp_gpio.c             | 1 -
- drivers/gpio/bcm2835_gpio.c         | 1 -
- drivers/gpio/bcm6345_gpio.c         | 1 -
- drivers/gpio/cortina_gpio.c         | 1 -
- drivers/gpio/da8xx_gpio.c           | 1 -
- drivers/gpio/ftgpio010.c            | 1 -
- drivers/gpio/gpio-aspeed.c          | 1 -
- drivers/gpio/gpio-fxl6408.c         | 1 -
- drivers/gpio/gpio-rcar.c            | 1 -
- drivers/gpio/gpio-rza1.c            | 1 -
- drivers/gpio/gpio-uclass.c          | 1 -
- drivers/gpio/gpio-uniphier.c        | 1 -
- drivers/gpio/gpio_slg7xl45106.c     | 1 -
- drivers/gpio/hi6220_gpio.c          | 1 -
- drivers/gpio/hsdk-creg-gpio.c       | 1 -
- drivers/gpio/imx_rgpio2p.c          | 1 -
- drivers/gpio/intel_broadwell_gpio.c | 1 -
- drivers/gpio/intel_gpio.c           | 1 -
- drivers/gpio/intel_ich6_gpio.c      | 1 -
- drivers/gpio/iproc_gpio.c           | 1 -
- drivers/gpio/kw_gpio.c              | 1 -
- drivers/gpio/lpc32xx_gpio.c         | 1 -
- drivers/gpio/max7320_gpio.c         | 1 -
- drivers/gpio/mcp230xx_gpio.c        | 1 -
- drivers/gpio/mpc83xx_spisel_boot.c  | 1 -
- drivers/gpio/mpc8xx_gpio.c          | 1 -
- drivers/gpio/mpc8xxx_gpio.c         | 1 -
- drivers/gpio/mscc_sgpio.c           | 1 -
- drivers/gpio/msm_gpio.c             | 1 -
- drivers/gpio/mt7621_gpio.c          | 1 -
- drivers/gpio/mvebu_gpio.c           | 1 -
- drivers/gpio/mxc_gpio.c             | 1 -
- drivers/gpio/mxs_gpio.c             | 1 -
- drivers/gpio/nmk_gpio.c             | 1 -
- drivers/gpio/npcm_gpio.c            | 1 -
- drivers/gpio/nx_gpio.c              | 1 -
- drivers/gpio/omap_gpio.c            | 1 -
- drivers/gpio/pca953x.c              | 3 ++-
- drivers/gpio/pca953x_gpio.c         | 1 -
- drivers/gpio/pcf8575_gpio.c         | 1 -
- drivers/gpio/pic32_gpio.c           | 1 -
- drivers/gpio/qcom_pmic_gpio.c       | 1 -
- drivers/gpio/qe_gpio.c              | 1 -
- drivers/gpio/rk_gpio.c              | 1 -
- drivers/gpio/s5p_gpio.c             | 1 -
- drivers/gpio/sandbox.c              | 1 -
- drivers/gpio/sandbox_test.c         | 1 -
- drivers/gpio/sh_pfc.c               | 1 -
- drivers/gpio/sifive-gpio.c          | 1 -
- drivers/gpio/sl28cpld-gpio.c        | 1 -
- drivers/gpio/stm32_gpio.c           | 1 -
- drivers/gpio/sunxi_gpio.c           | 1 -
- drivers/gpio/tca642x.c              | 2 +-
- drivers/gpio/tegra186_gpio.c        | 1 -
- drivers/gpio/tegra_gpio.c           | 1 -
- drivers/gpio/vybrid_gpio.c          | 1 -
- drivers/gpio/xilinx_gpio.c          | 1 -
- drivers/gpio/zynq_gpio.c            | 1 -
- drivers/gpio/zynqmp_gpio_modepin.c  | 1 -
- 63 files changed, 3 insertions(+), 63 deletions(-)
+ drivers/misc/altera_sysid.c      | 1 -
+ drivers/misc/atsha204a-i2c.c     | 1 -
+ drivers/misc/cbmem_console.c     | 2 +-
+ drivers/misc/cros_ec.c           | 2 +-
+ drivers/misc/cros_ec_i2c.c       | 1 -
+ drivers/misc/cros_ec_lpc.c       | 2 +-
+ drivers/misc/cros_ec_sandbox.c   | 2 +-
+ drivers/misc/cros_ec_spi.c       | 2 +-
+ drivers/misc/ds4510.c            | 1 -
+ drivers/misc/esm_pmic.c          | 1 -
+ drivers/misc/fs_loader.c         | 1 -
+ drivers/misc/fsl_devdis.c        | 2 +-
+ drivers/misc/fsl_ifc.c           | 2 +-
+ drivers/misc/fsl_iim.c           | 1 -
+ drivers/misc/fsl_portals.c       | 2 +-
+ drivers/misc/fsl_sec_mon.c       | 2 +-
+ drivers/misc/gdsys_ioep.c        | 1 -
+ drivers/misc/gdsys_rxaui_ctrl.c  | 1 -
+ drivers/misc/gdsys_soc.c         | 1 -
+ drivers/misc/gpio_led.c          | 1 -
+ drivers/misc/i2c_eeprom.c        | 1 -
+ drivers/misc/i2c_eeprom_emul.c   | 1 -
+ drivers/misc/ihs_fpga.c          | 1 -
+ drivers/misc/imx8/fuse.c         | 1 -
+ drivers/misc/imx8/scu.c          | 1 -
+ drivers/misc/imx8/scu_api.c      | 1 -
+ drivers/misc/imx_ele/ele_api.c   | 1 -
+ drivers/misc/imx_ele/ele_mu.c    | 1 -
+ drivers/misc/imx_ele/fuse.c      | 1 -
+ drivers/misc/irq-uclass.c        | 1 -
+ drivers/misc/irq_sandbox.c       | 1 -
+ drivers/misc/irq_sandbox_test.c  | 1 -
+ drivers/misc/jz4780_efuse.c      | 1 -
+ drivers/misc/k3_avs.c            | 1 -
+ drivers/misc/k3_esm.c            | 1 -
+ drivers/misc/ls2_sfp.c           | 1 -
+ drivers/misc/microchip_flexcom.c | 1 -
+ drivers/misc/misc-uclass.c       | 1 -
+ drivers/misc/misc_sandbox.c      | 1 -
+ drivers/misc/mpc83xx_serdes.c    | 1 -
+ drivers/misc/mxc_ocotp.c         | 1 -
+ drivers/misc/mxs_ocotp.c         | 1 -
+ drivers/misc/npcm_host_intf.c    | 1 -
+ drivers/misc/npcm_otp.c          | 1 -
+ drivers/misc/nuvoton_nct6102d.c  | 1 -
+ drivers/misc/nvmem.c             | 1 -
+ drivers/misc/p2sb-uclass.c       | 1 -
+ drivers/misc/p2sb_emul.c         | 1 -
+ drivers/misc/p2sb_sandbox.c      | 1 -
+ drivers/misc/pca9551_led.c       | 1 -
+ drivers/misc/pwrseq-uclass.c     | 1 -
+ drivers/misc/qfw.c               | 1 -
+ drivers/misc/rockchip-efuse.c    | 1 -
+ drivers/misc/rockchip-otp.c      | 1 -
+ drivers/misc/sandbox_adder.c     | 1 -
+ drivers/misc/sifive-otp.c        | 1 -
+ drivers/misc/sl28cpld.c          | 1 -
+ drivers/misc/smsc_lpc47m.c       | 1 -
+ drivers/misc/smsc_sio1007.c      | 1 -
+ drivers/misc/spltest_sandbox.c   | 1 -
+ drivers/misc/status_led.c        | 2 +-
+ drivers/misc/stm32_rcc.c         | 1 -
+ drivers/misc/stm32mp_fuse.c      | 1 -
+ drivers/misc/swap_case.c         | 1 -
+ drivers/misc/syscon_sandbox.c    | 1 -
+ drivers/misc/tegra186_bpmp.c     | 1 -
+ drivers/misc/tegra_car.c         | 1 -
+ drivers/misc/test_drv.c          | 1 -
+ drivers/misc/turris_omnia_mcu.c  | 1 -
+ drivers/misc/usb251xb.c          | 1 -
+ drivers/misc/vexpress_config.c   | 1 -
+ drivers/misc/winbond_w83627.c    | 1 -
+ 72 files changed, 10 insertions(+), 72 deletions(-)
 
-diff --git a/drivers/gpio/74x164_gpio.c b/drivers/gpio/74x164_gpio.c
-index 7a7cfe86114b..331428ccdb9a 100644
---- a/drivers/gpio/74x164_gpio.c
-+++ b/drivers/gpio/74x164_gpio.c
-@@ -8,7 +8,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <errno.h>
- #include <dm.h>
- #include <fdtdec.h>
-diff --git a/drivers/gpio/altera_pio.c b/drivers/gpio/altera_pio.c
-index edc5a8093b0c..7ba1595e4ae3 100644
---- a/drivers/gpio/altera_pio.c
-+++ b/drivers/gpio/altera_pio.c
+diff --git a/drivers/misc/altera_sysid.c b/drivers/misc/altera_sysid.c
+index 878df12771c8..21e64fa3e6fe 100644
+--- a/drivers/misc/altera_sysid.c
++++ b/drivers/misc/altera_sysid.c
 @@ -4,7 +4,6 @@
-  * Copyright (C) 2011  Missing Link Electronics
-  *                     Joachim Foerster <joachim@missinglinkelectronics.com>
+  * Scott McNutt <smcnutt@psyent.com>
   */
+ 
 -#include <common.h>
+ #include <command.h>
  #include <dm.h>
  #include <errno.h>
- #include <malloc.h>
-diff --git a/drivers/gpio/at91_gpio.c b/drivers/gpio/at91_gpio.c
-index f80f4afd24ff..50a698159075 100644
---- a/drivers/gpio/at91_gpio.c
-+++ b/drivers/gpio/at91_gpio.c
-@@ -8,7 +8,6 @@
-  */
- 
- #include <config.h>
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <malloc.h>
-diff --git a/drivers/gpio/atmel_pio4.c b/drivers/gpio/atmel_pio4.c
-index be1dd752bf76..65d064b46dfb 100644
---- a/drivers/gpio/atmel_pio4.c
-+++ b/drivers/gpio/atmel_pio4.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2015 Atmel Corporation
-  *		 Wenyou.Yang <wenyou.yang@atmel.com>
-  */
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <fdtdec.h>
-diff --git a/drivers/gpio/axp_gpio.c b/drivers/gpio/axp_gpio.c
-index af6631697f58..6e632c8fc730 100644
---- a/drivers/gpio/axp_gpio.c
-+++ b/drivers/gpio/axp_gpio.c
-@@ -5,7 +5,6 @@
-  * X-Powers AXP Power Management ICs gpio driver
-  */
- 
--#include <common.h>
- #include <asm/arch/pmic_bus.h>
- #include <asm/gpio.h>
- #include <axp_pmic.h>
-diff --git a/drivers/gpio/bcm2835_gpio.c b/drivers/gpio/bcm2835_gpio.c
-index 704a6fa71210..ccf84fdae11f 100644
---- a/drivers/gpio/bcm2835_gpio.c
-+++ b/drivers/gpio/bcm2835_gpio.c
-@@ -4,7 +4,6 @@
-  * <vikram186@gmail.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <dm/pinctrl.h>
- #include <errno.h>
-diff --git a/drivers/gpio/bcm6345_gpio.c b/drivers/gpio/bcm6345_gpio.c
-index e031f71a784d..e76c84e806ad 100644
---- a/drivers/gpio/bcm6345_gpio.c
-+++ b/drivers/gpio/bcm6345_gpio.c
-@@ -7,7 +7,6 @@
-  *	Copyright (C) 2008-2011 Florian Fainelli <florian@openwrt.org>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <asm/gpio.h>
-diff --git a/drivers/gpio/cortina_gpio.c b/drivers/gpio/cortina_gpio.c
-index 72ef523be960..e0ea14cce696 100644
---- a/drivers/gpio/cortina_gpio.c
-+++ b/drivers/gpio/cortina_gpio.c
-@@ -5,7 +5,6 @@
-  * GPIO Driver for Cortina Access CAxxxx Line of SoCs
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <asm/io.h>
-diff --git a/drivers/gpio/da8xx_gpio.c b/drivers/gpio/da8xx_gpio.c
-index b310f2dbf651..1ccb9e69f158 100644
---- a/drivers/gpio/da8xx_gpio.c
-+++ b/drivers/gpio/da8xx_gpio.c
-@@ -6,7 +6,6 @@
-  * Laurence Withers <lwithers@guralp.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <fdtdec.h>
- #include <malloc.h>
-diff --git a/drivers/gpio/ftgpio010.c b/drivers/gpio/ftgpio010.c
-index 6c091d4fd874..4cb550a540c6 100644
---- a/drivers/gpio/ftgpio010.c
-+++ b/drivers/gpio/ftgpio010.c
-@@ -3,7 +3,6 @@
-  * Faraday Technology's FTGPIO010 controller.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <asm/io.h>
- #include <asm/gpio.h>
-diff --git a/drivers/gpio/gpio-aspeed.c b/drivers/gpio/gpio-aspeed.c
-index 1c3d18796b3a..c5608f4a9dfc 100644
---- a/drivers/gpio/gpio-aspeed.c
-+++ b/drivers/gpio/gpio-aspeed.c
-@@ -6,7 +6,6 @@
-  *
-  * Implementation extracted from the Linux kernel and adapted for u-boot.
-  */
--#include <common.h>
- #include <asm/io.h>
- #include <asm/gpio.h>
- 
-diff --git a/drivers/gpio/gpio-fxl6408.c b/drivers/gpio/gpio-fxl6408.c
-index ca7aa14eeb23..c8d2dff5f7bf 100644
---- a/drivers/gpio/gpio-fxl6408.c
-+++ b/drivers/gpio/gpio-fxl6408.c
-@@ -37,7 +37,6 @@
- 
- #include <asm-generic/gpio.h>
- #include <asm/global_data.h>
--#include <common.h>
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <dt-bindings/gpio/gpio.h>
-diff --git a/drivers/gpio/gpio-rcar.c b/drivers/gpio/gpio-rcar.c
-index 707785012322..d1a399388095 100644
---- a/drivers/gpio/gpio-rcar.c
-+++ b/drivers/gpio/gpio-rcar.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2017 Marek Vasut <marek.vasut@gmail.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <malloc.h>
-diff --git a/drivers/gpio/gpio-rza1.c b/drivers/gpio/gpio-rza1.c
-index f14be871e8d0..8c3fe61b25f6 100644
---- a/drivers/gpio/gpio-rza1.c
-+++ b/drivers/gpio/gpio-rza1.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2019 Marek Vasut <marek.vasut@gmail.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/gpio/gpio-uclass.c b/drivers/gpio/gpio-uclass.c
-index 4234cd912c9f..92ce68dd4a13 100644
---- a/drivers/gpio/gpio-uclass.c
-+++ b/drivers/gpio/gpio-uclass.c
-@@ -5,7 +5,6 @@
- 
- #define LOG_CATEGORY	UCLASS_GPIO
- 
--#include <common.h>
- #include <dm.h>
- #include <dt-structs.h>
- #include <log.h>
-diff --git a/drivers/gpio/gpio-uniphier.c b/drivers/gpio/gpio-uniphier.c
-index 61c705b5ac56..033fb4b60ee6 100644
---- a/drivers/gpio/gpio-uniphier.c
-+++ b/drivers/gpio/gpio-uniphier.c
-@@ -4,7 +4,6 @@
-  *   Author: Masahiro Yamada <yamada.masahiro@socionext.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <linux/bitops.h>
- #include <linux/io.h>
-diff --git a/drivers/gpio/gpio_slg7xl45106.c b/drivers/gpio/gpio_slg7xl45106.c
-index 4ad06c18b4bd..a7c9ff53af7d 100644
---- a/drivers/gpio/gpio_slg7xl45106.c
-+++ b/drivers/gpio/gpio_slg7xl45106.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2021 Xilinx, Inc.
-  */
- 
--#include <common.h>
- #include <errno.h>
- #include <asm/io.h>
- #include <asm/gpio.h>
-diff --git a/drivers/gpio/hi6220_gpio.c b/drivers/gpio/hi6220_gpio.c
-index e287c31b93fc..7ceb5f424c9d 100644
---- a/drivers/gpio/hi6220_gpio.c
-+++ b/drivers/gpio/hi6220_gpio.c
-@@ -4,7 +4,6 @@
-  * Peter Griffin <peter.griffin@linaro.org>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <asm/gpio.h>
- #include <asm/io.h>
-diff --git a/drivers/gpio/hsdk-creg-gpio.c b/drivers/gpio/hsdk-creg-gpio.c
-index 66f8441840b5..734b31d3dc17 100644
---- a/drivers/gpio/hsdk-creg-gpio.c
-+++ b/drivers/gpio/hsdk-creg-gpio.c
-@@ -12,7 +12,6 @@
- #include <log.h>
- #include <asm-generic/gpio.h>
- #include <asm/io.h>
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <linux/bitops.h>
-diff --git a/drivers/gpio/imx_rgpio2p.c b/drivers/gpio/imx_rgpio2p.c
-index 3227a8d5b574..fc1d418315c5 100644
---- a/drivers/gpio/imx_rgpio2p.c
-+++ b/drivers/gpio/imx_rgpio2p.c
-@@ -5,7 +5,6 @@
-  * RGPIO2P driver for the Freescale i.MX7ULP.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <fdtdec.h>
-diff --git a/drivers/gpio/intel_broadwell_gpio.c b/drivers/gpio/intel_broadwell_gpio.c
-index 20af35de2cf5..53ed0a3eed06 100644
---- a/drivers/gpio/intel_broadwell_gpio.c
-+++ b/drivers/gpio/intel_broadwell_gpio.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2012 The Chromium OS Authors.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <fdtdec.h>
-diff --git a/drivers/gpio/intel_gpio.c b/drivers/gpio/intel_gpio.c
-index 4a3ec6d63502..0ab6e8a90bcb 100644
---- a/drivers/gpio/intel_gpio.c
-+++ b/drivers/gpio/intel_gpio.c
-@@ -5,7 +5,6 @@
- 
- #define LOG_CATEGORY	UCLASS_GPIO
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <fdtdec.h>
-diff --git a/drivers/gpio/intel_ich6_gpio.c b/drivers/gpio/intel_ich6_gpio.c
-index 2ed0d0bea9a5..096bc3b05bb7 100644
---- a/drivers/gpio/intel_ich6_gpio.c
-+++ b/drivers/gpio/intel_ich6_gpio.c
-@@ -28,7 +28,6 @@
- 
- #define LOG_CATEGORY	UCLASS_GPIO
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <fdtdec.h>
-diff --git a/drivers/gpio/iproc_gpio.c b/drivers/gpio/iproc_gpio.c
-index 7187d3257b90..8688f12e43c7 100644
---- a/drivers/gpio/iproc_gpio.c
-+++ b/drivers/gpio/iproc_gpio.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2020 Broadcom
-  */
- 
--#include <common.h>
- #include <errno.h>
- #include <asm/gpio.h>
- #include <asm/io.h>
-diff --git a/drivers/gpio/kw_gpio.c b/drivers/gpio/kw_gpio.c
-index a15769793f17..e183f5594b51 100644
---- a/drivers/gpio/kw_gpio.c
-+++ b/drivers/gpio/kw_gpio.c
-@@ -12,7 +12,6 @@
-  * Dieter Kiermaier dk-arm-linux@gmx.de
-  */
- 
--#include <common.h>
- #include <linux/bitops.h>
- #include <asm/io.h>
- #include <asm/arch/soc.h>
-diff --git a/drivers/gpio/lpc32xx_gpio.c b/drivers/gpio/lpc32xx_gpio.c
-index de66c765d11e..2b537e007ba9 100644
---- a/drivers/gpio/lpc32xx_gpio.c
-+++ b/drivers/gpio/lpc32xx_gpio.c
-@@ -6,7 +6,6 @@
-  * Written-by: Albert ARIBAUD <albert.aribaud@3adev.fr>
-  */
- 
--#include <common.h>
- #include <asm/io.h>
- #include <asm/arch-lpc32xx/cpu.h>
- #include <asm/arch-lpc32xx/gpio.h>
-diff --git a/drivers/gpio/max7320_gpio.c b/drivers/gpio/max7320_gpio.c
-index 647aed907b4c..f733cc924e56 100644
---- a/drivers/gpio/max7320_gpio.c
-+++ b/drivers/gpio/max7320_gpio.c
-@@ -7,7 +7,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <i2c.h>
- #include <asm-generic/gpio.h>
-diff --git a/drivers/gpio/mcp230xx_gpio.c b/drivers/gpio/mcp230xx_gpio.c
-index df99fde56602..42e7fe9d474c 100644
---- a/drivers/gpio/mcp230xx_gpio.c
-+++ b/drivers/gpio/mcp230xx_gpio.c
-@@ -7,7 +7,6 @@
- 
- #define LOG_CATEGORY UCLASS_GPIO
- 
--#include <common.h>
- #include <errno.h>
- #include <dm.h>
- #include <i2c.h>
-diff --git a/drivers/gpio/mpc83xx_spisel_boot.c b/drivers/gpio/mpc83xx_spisel_boot.c
-index fd26a36a0f94..2be8c73ae3d7 100644
---- a/drivers/gpio/mpc83xx_spisel_boot.c
-+++ b/drivers/gpio/mpc83xx_spisel_boot.c
-@@ -5,7 +5,6 @@
-  * GPIO driver to set/clear SPISEL_BOOT pin on mpc83xx.
-  */
- 
--#include <common.h>
- #include <log.h>
- #include <dm.h>
- #include <mapmem.h>
-diff --git a/drivers/gpio/mpc8xx_gpio.c b/drivers/gpio/mpc8xx_gpio.c
-index 2f6534653313..e2b12f8b56c7 100644
---- a/drivers/gpio/mpc8xx_gpio.c
-+++ b/drivers/gpio/mpc8xx_gpio.c
+diff --git a/drivers/misc/atsha204a-i2c.c b/drivers/misc/atsha204a-i2c.c
+index 707daa90bdba..3b9046da880c 100644
+--- a/drivers/misc/atsha204a-i2c.c
++++ b/drivers/misc/atsha204a-i2c.c
 @@ -10,7 +10,6 @@
-  * Copyright 2010 eXMeritus, A Boeing Company
-  */
- 
--#include <common.h>
- #include <asm/io.h>
- #include <dm.h>
- #include <mapmem.h>
-diff --git a/drivers/gpio/mpc8xxx_gpio.c b/drivers/gpio/mpc8xxx_gpio.c
-index f7ffd8926ade..e9bd38f162c1 100644
---- a/drivers/gpio/mpc8xxx_gpio.c
-+++ b/drivers/gpio/mpc8xxx_gpio.c
-@@ -9,7 +9,6 @@
-  * Copyright 2020-2021 NXP
+  * published by the Free Software Foundation.
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <mapmem.h>
- #include <asm/gpio.h>
-diff --git a/drivers/gpio/mscc_sgpio.c b/drivers/gpio/mscc_sgpio.c
-index c97e44005ee1..5a40304f1f93 100644
---- a/drivers/gpio/mscc_sgpio.c
-+++ b/drivers/gpio/mscc_sgpio.c
-@@ -7,7 +7,6 @@
-  * Copyright (c) 2018 Microsemi Corporation
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <asm/gpio.h>
-diff --git a/drivers/gpio/msm_gpio.c b/drivers/gpio/msm_gpio.c
-index f5d9ab54e817..2fb266f12854 100644
---- a/drivers/gpio/msm_gpio.c
-+++ b/drivers/gpio/msm_gpio.c
-@@ -5,7 +5,6 @@
-  * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
+ #include <i2c.h>
  #include <errno.h>
- #include <asm/global_data.h>
-diff --git a/drivers/gpio/mt7621_gpio.c b/drivers/gpio/mt7621_gpio.c
-index 43bb4df4da72..63a202310a5e 100644
---- a/drivers/gpio/mt7621_gpio.c
-+++ b/drivers/gpio/mt7621_gpio.c
-@@ -7,7 +7,6 @@
-  *   Copyright (C) 2013 John Crispin <blogic@openwrt.org>
+diff --git a/drivers/misc/cbmem_console.c b/drivers/misc/cbmem_console.c
+index ba3a599c4a51..8220addd579b 100644
+--- a/drivers/misc/cbmem_console.c
++++ b/drivers/misc/cbmem_console.c
+@@ -3,8 +3,8 @@
+  * Copyright (C) 2011 The ChromiumOS Authors.  All rights reserved.
   */
  
 -#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <fdtdec.h>
-diff --git a/drivers/gpio/mvebu_gpio.c b/drivers/gpio/mvebu_gpio.c
-index f706a6dfa4fe..0d82380dde4a 100644
---- a/drivers/gpio/mvebu_gpio.c
-+++ b/drivers/gpio/mvebu_gpio.c
-@@ -3,7 +3,6 @@
-  * Copyright (C) 2016 Stefan Roese <sr@denx.de>
-  */
+ #include <console.h>
++#include <linux/string.h>
+ #include <asm/cb_sysinfo.h>
+ 
+ void cbmemc_putc(struct stdio_dev *dev, char data)
+diff --git a/drivers/misc/cros_ec.c b/drivers/misc/cros_ec.c
+index 9c1e6a5e3e70..fabe4964a334 100644
+--- a/drivers/misc/cros_ec.c
++++ b/drivers/misc/cros_ec.c
+@@ -15,7 +15,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_CROS_EC
  
 -#include <common.h>
+ #include <command.h>
  #include <dm.h>
- #include <dm/pinctrl.h>
- #include <asm/gpio.h>
-diff --git a/drivers/gpio/mxc_gpio.c b/drivers/gpio/mxc_gpio.c
-index 1dec4e35e0a7..cac6b32b2796 100644
---- a/drivers/gpio/mxc_gpio.c
-+++ b/drivers/gpio/mxc_gpio.c
-@@ -6,7 +6,6 @@
-  * Copyright (C) 2011
-  * Stefano Babic, DENX Software Engineering, <sbabic@denx.de>
-  */
--#include <common.h>
- #include <errno.h>
- #include <dm.h>
- #include <malloc.h>
-diff --git a/drivers/gpio/mxs_gpio.c b/drivers/gpio/mxs_gpio.c
-index 1356f89ac2f0..80910c9ec4c2 100644
---- a/drivers/gpio/mxs_gpio.c
-+++ b/drivers/gpio/mxs_gpio.c
-@@ -6,7 +6,6 @@
-  * on behalf of DENX Software Engineering GmbH
-  */
- 
--#include <common.h>
+ #include <i2c.h>
+@@ -24,6 +23,7 @@
  #include <log.h>
  #include <malloc.h>
- #include <asm/global_data.h>
-diff --git a/drivers/gpio/nmk_gpio.c b/drivers/gpio/nmk_gpio.c
-index e1bb41b196cc..c2716e717632 100644
---- a/drivers/gpio/nmk_gpio.c
-+++ b/drivers/gpio/nmk_gpio.c
-@@ -1,7 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0+
- /* Copyright (C) 2019 Stephan Gerhold */
- 
--#include <common.h>
- #include <dm.h>
- #include <asm/gpio.h>
+ #include <spi.h>
++#include <time.h>
+ #include <linux/delay.h>
+ #include <linux/errno.h>
  #include <asm/io.h>
-diff --git a/drivers/gpio/npcm_gpio.c b/drivers/gpio/npcm_gpio.c
-index 98e5dc79c1cc..da3b3ffbc92f 100644
---- a/drivers/gpio/npcm_gpio.c
-+++ b/drivers/gpio/npcm_gpio.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2022 Nuvoton Technology Corp.
+diff --git a/drivers/misc/cros_ec_i2c.c b/drivers/misc/cros_ec_i2c.c
+index a1b78a3045dd..5516aa8b3ffd 100644
+--- a/drivers/misc/cros_ec_i2c.c
++++ b/drivers/misc/cros_ec_i2c.c
+@@ -12,7 +12,6 @@
+  * KBC.
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <asm/gpio.h>
- #include <linux/io.h>
-diff --git a/drivers/gpio/nx_gpio.c b/drivers/gpio/nx_gpio.c
-index e2565d709535..741b2ff7f177 100644
---- a/drivers/gpio/nx_gpio.c
-+++ b/drivers/gpio/nx_gpio.c
-@@ -4,7 +4,6 @@
-  * DeokJin, Lee <truevirtue@nexell.co.kr>
+ #include <i2c.h>
+ #include <cros_ec.h>
+diff --git a/drivers/misc/cros_ec_lpc.c b/drivers/misc/cros_ec_lpc.c
+index 1a8a81349c3a..e2a3226362a9 100644
+--- a/drivers/misc/cros_ec_lpc.c
++++ b/drivers/misc/cros_ec_lpc.c
+@@ -12,11 +12,11 @@
+  * KBC.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <command.h>
+ #include <cros_ec.h>
+ #include <log.h>
++#include <time.h>
+ #include <asm/io.h>
+ 
+ #ifdef DEBUG_TRACE
+diff --git a/drivers/misc/cros_ec_sandbox.c b/drivers/misc/cros_ec_sandbox.c
+index 1201535f4af4..1cad51d474de 100644
+--- a/drivers/misc/cros_ec_sandbox.c
++++ b/drivers/misc/cros_ec_sandbox.c
+@@ -7,7 +7,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_CROS_EC
+ 
+-#include <common.h>
+ #include <cros_ec.h>
+ #include <dm.h>
+ #include <ec_commands.h>
+@@ -17,6 +16,7 @@
+ #include <os.h>
+ #include <u-boot/sha256.h>
+ #include <spi.h>
++#include <time.h>
+ #include <asm/malloc.h>
+ #include <asm/state.h>
+ #include <asm/sdl.h>
+diff --git a/drivers/misc/cros_ec_spi.c b/drivers/misc/cros_ec_spi.c
+index 591ff30df89b..e86791c03a73 100644
+--- a/drivers/misc/cros_ec_spi.c
++++ b/drivers/misc/cros_ec_spi.c
+@@ -12,12 +12,12 @@
+  * KBC.
+  */
+ 
+-#include <common.h>
+ #include <cros_ec.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <log.h>
+ #include <spi.h>
++#include <time.h>
+ 
+ int cros_ec_spi_packet(struct udevice *udev, int out_bytes, int in_bytes)
+ {
+diff --git a/drivers/misc/ds4510.c b/drivers/misc/ds4510.c
+index 9340596f2c63..302015e27938 100644
+--- a/drivers/misc/ds4510.c
++++ b/drivers/misc/ds4510.c
+@@ -8,7 +8,6 @@
+  * and 4 programmable non-volatile GPIO pins.
+  */
+ 
+-#include <common.h>
+ #include <i2c.h>
+ #include <command.h>
+ #include <linux/delay.h>
+diff --git a/drivers/misc/esm_pmic.c b/drivers/misc/esm_pmic.c
+index a518f750611a..1963c8664a54 100644
+--- a/drivers/misc/esm_pmic.c
++++ b/drivers/misc/esm_pmic.c
+@@ -7,7 +7,6 @@
+  *
   */
  
 -#include <common.h>
  #include <dm.h>
  #include <errno.h>
- #include <malloc.h>
-diff --git a/drivers/gpio/omap_gpio.c b/drivers/gpio/omap_gpio.c
-index 50c4f75ddf5d..1aceafcdf581 100644
---- a/drivers/gpio/omap_gpio.c
-+++ b/drivers/gpio/omap_gpio.c
-@@ -17,7 +17,6 @@
-  * Copyright (C) 2003-2005 Nokia Corporation
-  * Written by Juha Yrjölä <juha.yrjola@nokia.com>
-  */
+ #include <power/pmic.h>
+diff --git a/drivers/misc/fs_loader.c b/drivers/misc/fs_loader.c
+index 1ffc199ba1e4..66803f4b9975 100644
+--- a/drivers/misc/fs_loader.c
++++ b/drivers/misc/fs_loader.c
+@@ -6,7 +6,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_FS_FIRMWARE_LOADER
+ 
 -#include <common.h>
  #include <dm.h>
- #include <fdtdec.h>
- #include <asm/global_data.h>
-diff --git a/drivers/gpio/pca953x.c b/drivers/gpio/pca953x.c
-index b5ed35256ee7..fc4dcf9f9861 100644
---- a/drivers/gpio/pca953x.c
-+++ b/drivers/gpio/pca953x.c
-@@ -8,10 +8,11 @@
-  * pca9539, etc)
+ #include <env.h>
+ #include <errno.h>
+diff --git a/drivers/misc/fsl_devdis.c b/drivers/misc/fsl_devdis.c
+index 179053a298af..2c3d23480762 100644
+--- a/drivers/misc/fsl_devdis.c
++++ b/drivers/misc/fsl_devdis.c
+@@ -3,7 +3,7 @@
+  * Copyright 2015 Freescale Semiconductor, Inc.
+  * Author: Zhuoyu Zhang <Zhuoyu.Zhang@freescale.com>
+  */
+-#include <common.h>
++#include <config.h>
+ #include <asm/io.h>
+ #include <asm/arch-ls102xa/immap_ls102xa.h>
+ #include <asm/arch-ls102xa/config.h>
+diff --git a/drivers/misc/fsl_ifc.c b/drivers/misc/fsl_ifc.c
+index f165b8c36ba4..93f41da0f974 100644
+--- a/drivers/misc/fsl_ifc.c
++++ b/drivers/misc/fsl_ifc.c
+@@ -4,7 +4,7 @@
+  * Author: Dipen Dudhat <dipen.dudhat@freescale.com>
   */
  
 -#include <common.h>
 +#include <config.h>
- #include <command.h>
- #include <i2c.h>
- #include <pca953x.h>
-+#include <vsprintf.h>
+ #include <fsl_ifc.h>
+ #include <part.h>
  
- /* Default to an address that hopefully won't corrupt other i2c devices */
- #ifndef CFG_SYS_I2C_PCA953X_ADDR
-diff --git a/drivers/gpio/pca953x_gpio.c b/drivers/gpio/pca953x_gpio.c
-index b0c66d18317e..80ebaadb3e43 100644
---- a/drivers/gpio/pca953x_gpio.c
-+++ b/drivers/gpio/pca953x_gpio.c
-@@ -18,7 +18,6 @@
-  * 2. Support Polarity Inversion
+diff --git a/drivers/misc/fsl_iim.c b/drivers/misc/fsl_iim.c
+index 85cc3c26b2ef..65468a68dbdf 100644
+--- a/drivers/misc/fsl_iim.c
++++ b/drivers/misc/fsl_iim.c
+@@ -8,7 +8,6 @@
+  * Martha Marx <mmarx@silicontkx.com>
   */
  
 -#include <common.h>
- #include <errno.h>
+ #include <fuse.h>
+ #include <linux/delay.h>
+ #include <linux/errno.h>
+diff --git a/drivers/misc/fsl_portals.c b/drivers/misc/fsl_portals.c
+index 6b831281e96f..e7c0df78b6b6 100644
+--- a/drivers/misc/fsl_portals.c
++++ b/drivers/misc/fsl_portals.c
+@@ -4,7 +4,7 @@
+  * Copyright 2017 NXP
+  */
+ 
+-#include <common.h>
++#include <config.h>
+ #include <log.h>
+ #include <linux/libfdt.h>
+ #include <fdt_support.h>
+diff --git a/drivers/misc/fsl_sec_mon.c b/drivers/misc/fsl_sec_mon.c
+index 3597ee22242c..7518089e1e3e 100644
+--- a/drivers/misc/fsl_sec_mon.c
++++ b/drivers/misc/fsl_sec_mon.c
+@@ -3,7 +3,7 @@
+  * Copyright 2015 Freescale Semiconductor, Inc.
+  */
+ 
+-#include <common.h>
++#include <config.h>
+ #include <fsl_sec_mon.h>
+ #include <linux/delay.h>
+ 
+diff --git a/drivers/misc/gdsys_ioep.c b/drivers/misc/gdsys_ioep.c
+index 145cfa23c6c5..d4916a277b84 100644
+--- a/drivers/misc/gdsys_ioep.c
++++ b/drivers/misc/gdsys_ioep.c
+@@ -11,7 +11,6 @@
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+ 
+-#include <common.h>
  #include <dm.h>
- #include <fdtdec.h>
-diff --git a/drivers/gpio/pcf8575_gpio.c b/drivers/gpio/pcf8575_gpio.c
-index f38e215c4d6e..10ae86ec5d45 100644
---- a/drivers/gpio/pcf8575_gpio.c
-+++ b/drivers/gpio/pcf8575_gpio.c
-@@ -17,7 +17,6 @@
+ #include <log.h>
+ #include <misc.h>
+diff --git a/drivers/misc/gdsys_rxaui_ctrl.c b/drivers/misc/gdsys_rxaui_ctrl.c
+index 8f5cbe420f87..d4cd63ca9f89 100644
+--- a/drivers/misc/gdsys_rxaui_ctrl.c
++++ b/drivers/misc/gdsys_rxaui_ctrl.c
+@@ -7,7 +7,6 @@
+  * Mario Six,  Guntermann & Drunck GmbH, mario.six@gdsys.cc
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <regmap.h>
+ #include <misc.h>
+diff --git a/drivers/misc/gdsys_soc.c b/drivers/misc/gdsys_soc.c
+index 27e7dc483276..0adbb8df3c2c 100644
+--- a/drivers/misc/gdsys_soc.c
++++ b/drivers/misc/gdsys_soc.c
+@@ -4,7 +4,6 @@
+  * Mario Six,  Guntermann & Drunck GmbH, mario.six@gdsys.cc
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <dm/lists.h>
+diff --git a/drivers/misc/gpio_led.c b/drivers/misc/gpio_led.c
+index 30679f80cf15..e63689967a7a 100644
+--- a/drivers/misc/gpio_led.c
++++ b/drivers/misc/gpio_led.c
+@@ -5,7 +5,6 @@
+  * Licensed under the GPL-2 or later.
+  */
+ 
+-#include <common.h>
+ #include <status_led.h>
+ #include <asm/gpio.h>
+ 
+diff --git a/drivers/misc/i2c_eeprom.c b/drivers/misc/i2c_eeprom.c
+index 9cb375a99ab8..10f0173d8050 100644
+--- a/drivers/misc/i2c_eeprom.c
++++ b/drivers/misc/i2c_eeprom.c
+@@ -5,7 +5,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_I2C_EEPROM
+ 
+-#include <common.h>
+ #include <linux/delay.h>
+ #include <linux/err.h>
+ #include <linux/kernel.h>
+diff --git a/drivers/misc/i2c_eeprom_emul.c b/drivers/misc/i2c_eeprom_emul.c
+index 6f32087ede56..3ad2e047ee3e 100644
+--- a/drivers/misc/i2c_eeprom_emul.c
++++ b/drivers/misc/i2c_eeprom_emul.c
+@@ -5,7 +5,6 @@
+  * Copyright (c) 2014 Google, Inc
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <i2c.h>
+diff --git a/drivers/misc/ihs_fpga.c b/drivers/misc/ihs_fpga.c
+index a0fece985d85..fe196b608198 100644
+--- a/drivers/misc/ihs_fpga.c
++++ b/drivers/misc/ihs_fpga.c
+@@ -9,7 +9,6 @@
+  * Dirk Eibach,  Guntermann & Drunck GmbH, eibach@gdsys.de
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <regmap.h>
+diff --git a/drivers/misc/imx8/fuse.c b/drivers/misc/imx8/fuse.c
+index b81f73f283f4..90d251a44058 100644
+--- a/drivers/misc/imx8/fuse.c
++++ b/drivers/misc/imx8/fuse.c
+@@ -3,7 +3,6 @@
+  * Copyright 2019 NXP
+  */
+ 
+-#include <common.h>
+ #include <console.h>
+ #include <errno.h>
+ #include <fuse.h>
+diff --git a/drivers/misc/imx8/scu.c b/drivers/misc/imx8/scu.c
+index 798800aa7583..bbd7e24200bd 100644
+--- a/drivers/misc/imx8/scu.c
++++ b/drivers/misc/imx8/scu.c
+@@ -5,7 +5,6 @@
+  * Peng Fan <peng.fan@nxp.com>
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+diff --git a/drivers/misc/imx8/scu_api.c b/drivers/misc/imx8/scu_api.c
+index 6e2c678e614f..591d71b096a8 100644
+--- a/drivers/misc/imx8/scu_api.c
++++ b/drivers/misc/imx8/scu_api.c
+@@ -5,7 +5,6 @@
+  * Peng Fan <peng.fan@nxp.com>
+  */
+ 
+-#include <common.h>
+ #include <hang.h>
+ #include <malloc.h>
+ #include <asm/global_data.h>
+diff --git a/drivers/misc/imx_ele/ele_api.c b/drivers/misc/imx_ele/ele_api.c
+index e0ec22c7abf9..3745504637b3 100644
+--- a/drivers/misc/imx_ele/ele_api.c
++++ b/drivers/misc/imx_ele/ele_api.c
+@@ -4,7 +4,6 @@
   *
   */
  
 -#include <common.h>
- #include <dm.h>
- #include <i2c.h>
- #include <log.h>
-diff --git a/drivers/gpio/pic32_gpio.c b/drivers/gpio/pic32_gpio.c
-index 975a2af3ccb8..d8edfefb2d75 100644
---- a/drivers/gpio/pic32_gpio.c
-+++ b/drivers/gpio/pic32_gpio.c
-@@ -4,7 +4,6 @@
-  * Purna Chandra Mandal <purna.mandal@microchip.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
+ #include <hang.h>
  #include <malloc.h>
-diff --git a/drivers/gpio/qcom_pmic_gpio.c b/drivers/gpio/qcom_pmic_gpio.c
-index 0dd3434e9e04..80fee841ee3f 100644
---- a/drivers/gpio/qcom_pmic_gpio.c
-+++ b/drivers/gpio/qcom_pmic_gpio.c
-@@ -5,7 +5,6 @@
-  * (C) Copyright 2015 Mateusz Kulikowski <mateusz.kulikowski@gmail.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <dm/device-internal.h>
- #include <dm/lists.h>
-diff --git a/drivers/gpio/qe_gpio.c b/drivers/gpio/qe_gpio.c
-index 16e8d1eae6ed..ac6e68299e07 100644
---- a/drivers/gpio/qe_gpio.c
-+++ b/drivers/gpio/qe_gpio.c
-@@ -4,7 +4,6 @@
-  * Christophe Leroy <christophe.leroy@csgroup.eu>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <mapmem.h>
- #include <asm/gpio.h>
-diff --git a/drivers/gpio/rk_gpio.c b/drivers/gpio/rk_gpio.c
-index 2e901ac5c734..24ba12dd820e 100644
---- a/drivers/gpio/rk_gpio.c
-+++ b/drivers/gpio/rk_gpio.c
-@@ -6,7 +6,6 @@
-  * Peter, Software Engineering, <superpeter.cai@gmail.com>.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <syscon.h>
- #include <linux/errno.h>
-diff --git a/drivers/gpio/s5p_gpio.c b/drivers/gpio/s5p_gpio.c
-index 06ed585f3d64..83e65aa4aec4 100644
---- a/drivers/gpio/s5p_gpio.c
-+++ b/drivers/gpio/s5p_gpio.c
-@@ -4,7 +4,6 @@
-  * Minkyu Kang <mk7.kang@samsung.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <fdtdec.h>
-diff --git a/drivers/gpio/sandbox.c b/drivers/gpio/sandbox.c
-index 305f9a6ff62f..f5be27814438 100644
---- a/drivers/gpio/sandbox.c
-+++ b/drivers/gpio/sandbox.c
+ #include <asm/io.h>
+diff --git a/drivers/misc/imx_ele/ele_mu.c b/drivers/misc/imx_ele/ele_mu.c
+index 053cdcf0fe07..0cf81f33ba5e 100644
+--- a/drivers/misc/imx_ele/ele_mu.c
++++ b/drivers/misc/imx_ele/ele_mu.c
 @@ -3,7 +3,6 @@
-  * Copyright (c) 2011 The Chromium OS Authors.
+  * Copyright 2020-2022 NXP
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <dm.h>
+ #include <dm/lists.h>
+diff --git a/drivers/misc/imx_ele/fuse.c b/drivers/misc/imx_ele/fuse.c
+index 4e4dcb42cdd9..d12539c8aac0 100644
+--- a/drivers/misc/imx_ele/fuse.c
++++ b/drivers/misc/imx_ele/fuse.c
+@@ -3,7 +3,6 @@
+  * Copyright 2020 NXP
+  */
+ 
+-#include <common.h>
+ #include <console.h>
+ #include <errno.h>
+ #include <fuse.h>
+diff --git a/drivers/misc/irq-uclass.c b/drivers/misc/irq-uclass.c
+index 7b79ed2df466..79eb7c200dc2 100644
+--- a/drivers/misc/irq-uclass.c
++++ b/drivers/misc/irq-uclass.c
+@@ -6,7 +6,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_IRQ
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <dt-structs.h>
+ #include <irq.h>
+diff --git a/drivers/misc/irq_sandbox.c b/drivers/misc/irq_sandbox.c
+index 8b5573fcaddd..5d176f63b5cf 100644
+--- a/drivers/misc/irq_sandbox.c
++++ b/drivers/misc/irq_sandbox.c
+@@ -5,7 +5,6 @@
+  * Copyright 2019 Google LLC
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <fdtdec.h>
- #include <log.h>
-diff --git a/drivers/gpio/sandbox_test.c b/drivers/gpio/sandbox_test.c
-index c76e19974196..4699a976252c 100644
---- a/drivers/gpio/sandbox_test.c
-+++ b/drivers/gpio/sandbox_test.c
+ #include <irq.h>
+ #include <acpi/acpi_device.h>
+diff --git a/drivers/misc/irq_sandbox_test.c b/drivers/misc/irq_sandbox_test.c
+index 95c45c24edb8..3669b863bec1 100644
+--- a/drivers/misc/irq_sandbox_test.c
++++ b/drivers/misc/irq_sandbox_test.c
 @@ -5,7 +5,6 @@
   * Copyright 2021 Google LLC
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <asm-generic/gpio.h>
- 
-diff --git a/drivers/gpio/sh_pfc.c b/drivers/gpio/sh_pfc.c
-index 2495d6c1c154..9f6051c1c4d3 100644
---- a/drivers/gpio/sh_pfc.c
-+++ b/drivers/gpio/sh_pfc.c
-@@ -9,7 +9,6 @@
-  * for more details.
+ #include <irq.h>
+ #include <asm/irq.h>
+diff --git a/drivers/misc/jz4780_efuse.c b/drivers/misc/jz4780_efuse.c
+index 1fba3271db61..5c92de26ec5f 100644
+--- a/drivers/misc/jz4780_efuse.c
++++ b/drivers/misc/jz4780_efuse.c
+@@ -6,7 +6,6 @@
+  * Author: Alex Smith <alex.smith@imgtec.com>
   */
  
 -#include <common.h>
- #include <log.h>
- #include <malloc.h>
- #include <asm/bitops.h>
-diff --git a/drivers/gpio/sifive-gpio.c b/drivers/gpio/sifive-gpio.c
-index 151f484e8fd1..90f59120ecd0 100644
---- a/drivers/gpio/sifive-gpio.c
-+++ b/drivers/gpio/sifive-gpio.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2019 SiFive, Inc.
+ #include <asm/io.h>
+ #include <asm/unaligned.h>
+ #include <errno.h>
+diff --git a/drivers/misc/k3_avs.c b/drivers/misc/k3_avs.c
+index 0d29eff1ac08..87471cc3b16a 100644
+--- a/drivers/misc/k3_avs.c
++++ b/drivers/misc/k3_avs.c
+@@ -7,7 +7,6 @@
+  *
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <asm/arch/gpio.h>
+ #include <errno.h>
  #include <asm/io.h>
-diff --git a/drivers/gpio/sl28cpld-gpio.c b/drivers/gpio/sl28cpld-gpio.c
-index 700fc3df298c..e85f9260ec39 100644
---- a/drivers/gpio/sl28cpld-gpio.c
-+++ b/drivers/gpio/sl28cpld-gpio.c
+diff --git a/drivers/misc/k3_esm.c b/drivers/misc/k3_esm.c
+index f6ac18bdc757..fa3d65656220 100644
+--- a/drivers/misc/k3_esm.c
++++ b/drivers/misc/k3_esm.c
+@@ -7,7 +7,6 @@
+  *
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <asm/io.h>
+diff --git a/drivers/misc/ls2_sfp.c b/drivers/misc/ls2_sfp.c
+index 5351c7ed34fd..8cb6e999bed1 100644
+--- a/drivers/misc/ls2_sfp.c
++++ b/drivers/misc/ls2_sfp.c
+@@ -12,7 +12,6 @@
+  */
+ 
+ #define LOG_CATEGORY UCLASS_MISC
+-#include <common.h>
+ #include <clk.h>
+ #include <fuse.h>
+ #include <misc.h>
+diff --git a/drivers/misc/microchip_flexcom.c b/drivers/misc/microchip_flexcom.c
+index e0a6f2d38801..c5ddecac7551 100644
+--- a/drivers/misc/microchip_flexcom.c
++++ b/drivers/misc/microchip_flexcom.c
+@@ -4,7 +4,6 @@
+  * Author: Eugen Hristev <eugen.hristev@microchip.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <log.h>
+diff --git a/drivers/misc/misc-uclass.c b/drivers/misc/misc-uclass.c
+index cfe9d562fa0d..1389e146b612 100644
+--- a/drivers/misc/misc-uclass.c
++++ b/drivers/misc/misc-uclass.c
 @@ -5,7 +5,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_MISC
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <misc.h>
+diff --git a/drivers/misc/misc_sandbox.c b/drivers/misc/misc_sandbox.c
+index 31cde2dbac07..2473419df2a3 100644
+--- a/drivers/misc/misc_sandbox.c
++++ b/drivers/misc/misc_sandbox.c
+@@ -4,7 +4,6 @@
+  * Mario Six, Guntermann & Drunck GmbH, mario.six@gdsys.cc
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <misc.h>
+ 
+diff --git a/drivers/misc/mpc83xx_serdes.c b/drivers/misc/mpc83xx_serdes.c
+index 93c87e998c4f..cf9aa9b35b33 100644
+--- a/drivers/misc/mpc83xx_serdes.c
++++ b/drivers/misc/mpc83xx_serdes.c
+@@ -9,7 +9,6 @@
+  * Copyright (C) 2008 MontaVista Software, Inc.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <mapmem.h>
+diff --git a/drivers/misc/mxc_ocotp.c b/drivers/misc/mxc_ocotp.c
+index 8ee18f29d9be..d1674caa138c 100644
+--- a/drivers/misc/mxc_ocotp.c
++++ b/drivers/misc/mxc_ocotp.c
+@@ -11,7 +11,6 @@
+  * Copyright (C) 2011 Freescale Semiconductor, Inc.
+  */
+ 
+-#include <common.h>
+ #include <fuse.h>
+ #include <linux/delay.h>
+ #include <linux/errno.h>
+diff --git a/drivers/misc/mxs_ocotp.c b/drivers/misc/mxs_ocotp.c
+index facc720c8ef2..6432c62dac34 100644
+--- a/drivers/misc/mxs_ocotp.c
++++ b/drivers/misc/mxs_ocotp.c
+@@ -11,7 +11,6 @@
+  *       etc.) which would make common driver an ifdef nightmare :-(
+  */
+ 
+-#include <common.h>
+ #include <fuse.h>
+ #include <linux/delay.h>
+ #include <linux/errno.h>
+diff --git a/drivers/misc/npcm_host_intf.c b/drivers/misc/npcm_host_intf.c
+index 79f57f57d89c..58bab888c3c8 100644
+--- a/drivers/misc/npcm_host_intf.c
++++ b/drivers/misc/npcm_host_intf.c
+@@ -4,7 +4,6 @@
+  * Copyright (c) 2022 Nuvoton Technology Corp.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <regmap.h>
+ #include <syscon.h>
+diff --git a/drivers/misc/npcm_otp.c b/drivers/misc/npcm_otp.c
+index 08029724c040..adb6135291dc 100644
+--- a/drivers/misc/npcm_otp.c
++++ b/drivers/misc/npcm_otp.c
+@@ -4,7 +4,6 @@
+  */
+ 
+ #include <clk.h>
+-#include <common.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <fuse.h>
+diff --git a/drivers/misc/nuvoton_nct6102d.c b/drivers/misc/nuvoton_nct6102d.c
+index daf5019d0170..a3ca037d25f7 100644
+--- a/drivers/misc/nuvoton_nct6102d.c
++++ b/drivers/misc/nuvoton_nct6102d.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2016 Stefan Roese <sr@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <nuvoton_nct6102d.h>
+ #include <asm/io.h>
+ #include <asm/pnp_def.h>
+diff --git a/drivers/misc/nvmem.c b/drivers/misc/nvmem.c
+index 5a2bd1f9f72c..d0cb0a35b816 100644
+--- a/drivers/misc/nvmem.c
++++ b/drivers/misc/nvmem.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2022 Sean Anderson <sean.anderson@seco.com>
+  */
+ 
+-#include <common.h>
+ #include <i2c_eeprom.h>
+ #include <linker_lists.h>
+ #include <misc.h>
+diff --git a/drivers/misc/p2sb-uclass.c b/drivers/misc/p2sb-uclass.c
+index f24857a1515e..016c80733782 100644
+--- a/drivers/misc/p2sb-uclass.c
++++ b/drivers/misc/p2sb-uclass.c
+@@ -8,7 +8,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_P2SB
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <malloc.h>
+diff --git a/drivers/misc/p2sb_emul.c b/drivers/misc/p2sb_emul.c
+index 51f87161d5b7..3dac6bd82e30 100644
+--- a/drivers/misc/p2sb_emul.c
++++ b/drivers/misc/p2sb_emul.c
+@@ -8,7 +8,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_MISC
+ 
+-#include <common.h>
+ #include <axi.h>
+ #include <dm.h>
+ #include <log.h>
+diff --git a/drivers/misc/p2sb_sandbox.c b/drivers/misc/p2sb_sandbox.c
+index d80bca22a6b2..9f3cd14958b8 100644
+--- a/drivers/misc/p2sb_sandbox.c
++++ b/drivers/misc/p2sb_sandbox.c
+@@ -7,7 +7,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_P2SB
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <asm/io.h>
+ #include <p2sb.h>
+diff --git a/drivers/misc/pca9551_led.c b/drivers/misc/pca9551_led.c
+index cdc4390f8155..040d0d5cf48c 100644
+--- a/drivers/misc/pca9551_led.c
++++ b/drivers/misc/pca9551_led.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2015 Stefan Roese <sr@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <errno.h>
+ #include <i2c.h>
+ #include <status_led.h>
+diff --git a/drivers/misc/pwrseq-uclass.c b/drivers/misc/pwrseq-uclass.c
+index a0f24e1bf3a9..bddc3c336857 100644
+--- a/drivers/misc/pwrseq-uclass.c
++++ b/drivers/misc/pwrseq-uclass.c
+@@ -5,7 +5,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_PWRSEQ
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <pwrseq.h>
+ 
+diff --git a/drivers/misc/qfw.c b/drivers/misc/qfw.c
+index db98619fdf53..0e002ac25f48 100644
+--- a/drivers/misc/qfw.c
++++ b/drivers/misc/qfw.c
+@@ -6,7 +6,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_QFW
+ 
+-#include <common.h>
+ #include <acpi/acpi_table.h>
+ #include <bootdev.h>
+ #include <bootflow.h>
+diff --git a/drivers/misc/rockchip-efuse.c b/drivers/misc/rockchip-efuse.c
+index 2f96b79ea407..c7430147718a 100644
+--- a/drivers/misc/rockchip-efuse.c
++++ b/drivers/misc/rockchip-efuse.c
+@@ -6,7 +6,6 @@
+  * Written by Philipp Tomsich <philipp.tomsich@theobroma-systems.com>
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <command.h>
+ #include <display_options.h>
+diff --git a/drivers/misc/rockchip-otp.c b/drivers/misc/rockchip-otp.c
+index 4f757083a1b6..2123c31038fc 100644
+--- a/drivers/misc/rockchip-otp.c
++++ b/drivers/misc/rockchip-otp.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2019 Fuzhou Rockchip Electronics Co., Ltd
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <command.h>
+ #include <display_options.h>
+diff --git a/drivers/misc/sandbox_adder.c b/drivers/misc/sandbox_adder.c
+index 3ea33e46e9f2..de1c63575820 100644
+--- a/drivers/misc/sandbox_adder.c
++++ b/drivers/misc/sandbox_adder.c
+@@ -7,7 +7,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_MISC
+ 
+-#include <common.h>
+ #include <axi.h>
+ #include <dm.h>
+ #include <misc.h>
+diff --git a/drivers/misc/sifive-otp.c b/drivers/misc/sifive-otp.c
+index a624a358802c..7fbcd3799e52 100644
+--- a/drivers/misc/sifive-otp.c
++++ b/drivers/misc/sifive-otp.c
+@@ -17,7 +17,6 @@
+  * Right now first 1KiB is used to store only serial number.
+  */
+ 
+-#include <common.h>
+ #include <dm/device.h>
+ #include <dm/read.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/misc/sl28cpld.c b/drivers/misc/sl28cpld.c
+index 01ef1c6178fc..1c61b005af3a 100644
+--- a/drivers/misc/sl28cpld.c
++++ b/drivers/misc/sl28cpld.c
+@@ -3,7 +3,6 @@
   * Copyright (c) 2021 Michael Walle <michael@walle.cc>
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <asm/gpio.h>
- #include <sl28cpld.h>
-diff --git a/drivers/gpio/stm32_gpio.c b/drivers/gpio/stm32_gpio.c
-index 7a2ca91c7692..b8eb55465d3c 100644
---- a/drivers/gpio/stm32_gpio.c
-+++ b/drivers/gpio/stm32_gpio.c
+ #include <i2c.h>
+ 
+diff --git a/drivers/misc/smsc_lpc47m.c b/drivers/misc/smsc_lpc47m.c
+index bda064f1365b..1b15907b0933 100644
+--- a/drivers/misc/smsc_lpc47m.c
++++ b/drivers/misc/smsc_lpc47m.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2014, Bin Meng <bmeng.cn@gmail.com>
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <asm/pnp_def.h>
+ 
+diff --git a/drivers/misc/smsc_sio1007.c b/drivers/misc/smsc_sio1007.c
+index 3b7b1c8bcf2a..6d99aa61d91d 100644
+--- a/drivers/misc/smsc_sio1007.c
++++ b/drivers/misc/smsc_sio1007.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2016, Bin Meng <bmeng.cn@gmail.com>
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <errno.h>
+ #include <smsc_sio1007.h>
+diff --git a/drivers/misc/spltest_sandbox.c b/drivers/misc/spltest_sandbox.c
+index 6b9701a06aee..3011a2292713 100644
+--- a/drivers/misc/spltest_sandbox.c
++++ b/drivers/misc/spltest_sandbox.c
+@@ -4,7 +4,6 @@
+  * Written by Simon Glass <sjg@chromium.org>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <dt-structs.h>
+ 
+diff --git a/drivers/misc/status_led.c b/drivers/misc/status_led.c
+index a6e9c03a02ec..3b1baa4f840b 100644
+--- a/drivers/misc/status_led.c
++++ b/drivers/misc/status_led.c
+@@ -4,8 +4,8 @@
+  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+  */
+ 
+-#include <common.h>
+ #include <status_led.h>
++#include <linux/types.h>
+ 
+ /*
+  * The purpose of this code is to signal the operational status of a
+diff --git a/drivers/misc/stm32_rcc.c b/drivers/misc/stm32_rcc.c
+index c1e5428a6b81..0dd827e1dd0e 100644
+--- a/drivers/misc/stm32_rcc.c
++++ b/drivers/misc/stm32_rcc.c
 @@ -6,7 +6,6 @@
  
- #define LOG_CATEGORY UCLASS_GPIO
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <fdtdec.h>
-diff --git a/drivers/gpio/sunxi_gpio.c b/drivers/gpio/sunxi_gpio.c
-index e4463a223f7b..5e86474d3dbb 100644
---- a/drivers/gpio/sunxi_gpio.c
-+++ b/drivers/gpio/sunxi_gpio.c
-@@ -9,7 +9,6 @@
-  * Tom Cubie <tangliang@allwinnertech.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <fdtdec.h>
-diff --git a/drivers/gpio/tca642x.c b/drivers/gpio/tca642x.c
-index b07496e6e49c..1d45b5007461 100644
---- a/drivers/gpio/tca642x.c
-+++ b/drivers/gpio/tca642x.c
-@@ -20,7 +20,7 @@
-  * MA 02111-1307 USA
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <command.h>
- #include <i2c.h>
- #include <tca642x.h>
-diff --git a/drivers/gpio/tegra186_gpio.c b/drivers/gpio/tegra186_gpio.c
-index 94a20d143e10..01b8245c8d5b 100644
---- a/drivers/gpio/tegra186_gpio.c
-+++ b/drivers/gpio/tegra186_gpio.c
-@@ -4,7 +4,6 @@
-  * (based on tegra_gpio.c)
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <malloc.h>
- #include <errno.h>
-diff --git a/drivers/gpio/tegra_gpio.c b/drivers/gpio/tegra_gpio.c
-index 55105f2802c3..0c40d36c41e2 100644
---- a/drivers/gpio/tegra_gpio.c
-+++ b/drivers/gpio/tegra_gpio.c
-@@ -10,7 +10,6 @@
-  * Tom Warren (twarren@nvidia.com)
-  */
+ #define LOG_CATEGORY UCLASS_NOP
  
 -#include <common.h>
  #include <dm.h>
  #include <log.h>
- #include <malloc.h>
-diff --git a/drivers/gpio/vybrid_gpio.c b/drivers/gpio/vybrid_gpio.c
-index 339392dcd35a..5b4bba96da70 100644
---- a/drivers/gpio/vybrid_gpio.c
-+++ b/drivers/gpio/vybrid_gpio.c
-@@ -4,7 +4,6 @@
-  * Bhuvanchandra DV, Toradex, Inc.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <fdtdec.h>
-diff --git a/drivers/gpio/xilinx_gpio.c b/drivers/gpio/xilinx_gpio.c
-index fa8d630b4658..c0a92378b035 100644
---- a/drivers/gpio/xilinx_gpio.c
-+++ b/drivers/gpio/xilinx_gpio.c
+ #include <misc.h>
+diff --git a/drivers/misc/stm32mp_fuse.c b/drivers/misc/stm32mp_fuse.c
+index 9fd6c367dc61..34be6c28c192 100644
+--- a/drivers/misc/stm32mp_fuse.c
++++ b/drivers/misc/stm32mp_fuse.c
 @@ -3,7 +3,6 @@
-  * Copyright (c) 2013 - 2018 Xilinx, Michal Simek
+  * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
   */
  
 -#include <common.h>
+ #include <command.h>
+ #include <fuse.h>
+ #include <misc.h>
+diff --git a/drivers/misc/swap_case.c b/drivers/misc/swap_case.c
+index ee5c12bd0a42..d4a5620c62c1 100644
+--- a/drivers/misc/swap_case.c
++++ b/drivers/misc/swap_case.c
+@@ -6,7 +6,6 @@
+  * Written by Simon Glass <sjg@chromium.org>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
  #include <errno.h>
  #include <log.h>
- #include <malloc.h>
-diff --git a/drivers/gpio/zynq_gpio.c b/drivers/gpio/zynq_gpio.c
-index 71a56127c0aa..7db58c70663e 100644
---- a/drivers/gpio/zynq_gpio.c
-+++ b/drivers/gpio/zynq_gpio.c
-@@ -8,7 +8,6 @@
-  * Copyright (C) 2009 - 2014 Xilinx, Inc.
+diff --git a/drivers/misc/syscon_sandbox.c b/drivers/misc/syscon_sandbox.c
+index d5cef188d742..6adb4154c25b 100644
+--- a/drivers/misc/syscon_sandbox.c
++++ b/drivers/misc/syscon_sandbox.c
+@@ -4,7 +4,6 @@
+  * Written by Simon Glass <sjg@chromium.org>
   */
  
 -#include <common.h>
- #include <asm/gpio.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
-diff --git a/drivers/gpio/zynqmp_gpio_modepin.c b/drivers/gpio/zynqmp_gpio_modepin.c
-index e9565ff5430e..8aaffaf37b3d 100644
---- a/drivers/gpio/zynqmp_gpio_modepin.c
-+++ b/drivers/gpio/zynqmp_gpio_modepin.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2021 Xilinx, Inc.
-  */
- 
--#include <common.h>
+ #include <dm.h>
  #include <errno.h>
- #include <asm/io.h>
+ #include <syscon.h>
+diff --git a/drivers/misc/tegra186_bpmp.c b/drivers/misc/tegra186_bpmp.c
+index fecac9c4d902..a1585b818677 100644
+--- a/drivers/misc/tegra186_bpmp.c
++++ b/drivers/misc/tegra186_bpmp.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2016, NVIDIA CORPORATION.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <malloc.h>
+diff --git a/drivers/misc/tegra_car.c b/drivers/misc/tegra_car.c
+index 0ddbb3c619b2..497ec18564cc 100644
+--- a/drivers/misc/tegra_car.c
++++ b/drivers/misc/tegra_car.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2016, NVIDIA CORPORATION.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <dm/lists.h>
+diff --git a/drivers/misc/test_drv.c b/drivers/misc/test_drv.c
+index 927618256f0a..9b1e357a1397 100644
+--- a/drivers/misc/test_drv.c
++++ b/drivers/misc/test_drv.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2014 Google, Inc
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <dm/test.h>
+ #include <asm/global_data.h>
+diff --git a/drivers/misc/turris_omnia_mcu.c b/drivers/misc/turris_omnia_mcu.c
+index 6b2f17c0002d..be77acbd1652 100644
+--- a/drivers/misc/turris_omnia_mcu.c
++++ b/drivers/misc/turris_omnia_mcu.c
+@@ -4,7 +4,6 @@
+  * Copyright (C) 2024 Marek Behún <kabel@kernel.org>
+  */
+ 
+-#include <common.h>
+ #include <console.h>
+ #include <dm.h>
+ #include <dm/lists.h>
+diff --git a/drivers/misc/usb251xb.c b/drivers/misc/usb251xb.c
+index 92e92ba5e624..daba2c2d6835 100644
+--- a/drivers/misc/usb251xb.c
++++ b/drivers/misc/usb251xb.c
+@@ -10,7 +10,6 @@
+  * https://patchwork.kernel.org/patch/9257715/
+  */
+ 
+-#include <common.h>
  #include <asm/gpio.h>
+ #include <dm.h>
+ #include <dm/device_compat.h>
+diff --git a/drivers/misc/vexpress_config.c b/drivers/misc/vexpress_config.c
+index 99aad1412ae7..e7655ceff74c 100644
+--- a/drivers/misc/vexpress_config.c
++++ b/drivers/misc/vexpress_config.c
+@@ -4,7 +4,6 @@
+  * Author: Liviu Dudau <liviu.dudau@foss.arm.com>
+  *
+  */
+-#include <common.h>
+ #include <dm.h>
+ #include <malloc.h>
+ #include <dm/read.h>
+diff --git a/drivers/misc/winbond_w83627.c b/drivers/misc/winbond_w83627.c
+index 3838b3f74f40..87b9043e65c4 100644
+--- a/drivers/misc/winbond_w83627.c
++++ b/drivers/misc/winbond_w83627.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2016 Stefan Roese <sr@denx.de>
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <asm/pnp_def.h>
+ 
 -- 
 2.34.1
 
