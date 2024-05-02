@@ -4,71 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27073C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:32:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F377DC10F1A
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:32:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F3D088BE9;
+	by phobos.denx.de (Postfix) with ESMTP id C43C088BEF;
 	Thu,  2 May 2024 03:31:50 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JMrTEiJ6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KoDyxEXu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D50CE88BD9; Thu,  2 May 2024 03:31:48 +0200 (CEST)
-Received: from mail-ua1-x933.google.com (mail-ua1-x933.google.com
- [IPv6:2607:f8b0:4864:20::933])
+ id 1925788BE5; Thu,  2 May 2024 03:31:49 +0200 (CEST)
+Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
+ [IPv6:2607:f8b0:4864:20::82e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF64088BAC
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:31:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id EF23288B0D
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:31:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-ua1-x933.google.com with SMTP id
- a1e0cc1a2514c-7e3d5cfd81fso1003390241.3
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:31:45 -0700 (PDT)
+Received: by mail-qt1-x82e.google.com with SMTP id
+ d75a77b69052e-43b06b803c4so19617331cf.1
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:31:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613504; x=1715218304; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613505; x=1715218305; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HbotegWjgdVuS8y8Yf7HiZxcby2w0yxr4Ha6l832kVE=;
- b=JMrTEiJ6E13PbLmHvtit1okDoIamZHpf13wiBIEsfRwKaDAt2TfFFEDtX351jp8wqL
- fqvePhPhH2zF2Gc9Sh1ClGfgDU7JdazLywPkjuIVAg6vNKqChFrs9c4sJBgK5hekBfn/
- MXoaWpNMgicbidCKOClOglKs9lzF83B43JeRc=
+ bh=twc7v37XyxfRt4wS5NGiAWn5CRq80rMcYFQp2nDjqoE=;
+ b=KoDyxEXuhYEX+zbTav8PufYNQgJ5VV8ql4BHcK64HFG2WAseIKD6surKTn2YTlwzdF
+ EQasY2vKmwgk59k/3FDQh0NgcDiUNW1yJ4JCllmGL16T4WuXn7+VOHld4r0SP4bhbGnb
+ Cdptbmt66DPdTn/vrba4i/tvS7TVBqtgouXjA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613504; x=1715218304;
+ d=1e100.net; s=20230601; t=1714613505; x=1715218305;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HbotegWjgdVuS8y8Yf7HiZxcby2w0yxr4Ha6l832kVE=;
- b=O9O9ezuMRp84SNfDzeuxNAsKDNzJt5M21ZIkofzCAOi7goePVWIy3L61A7Dov5r0g3
- RIto47A6OQJDqAAvDCcrQ1HrQC/qiLChp0GW3c50sj7nVOPN82Johc5XnXYTtGKpv6Xy
- Pz4bQRz1Z7HxMyRw+YrQVXP9dUc7XRuZvAlzfdCTFhkGjkFtUK7yZek6fFU5n3XIw8Ms
- SUvjKF0k2oeneN3Ko5ZVfrxQsSG7Is0kMDqPbb8xHm6Zr1L9Qu27R5Ksw8kWV57Wtlra
- I2HKc9GXLO7Inn62hTkJen5b62cfYo9plcZfegH/g4wRAZ+3xQ5bgr/ijFNZEid0IX0m
- HIrg==
-X-Gm-Message-State: AOJu0YzPEuNZQkqgfv18FrqN5sXf+n5HSPcvUrPrwpvQkgVdQPOb2ltB
- fgPI9gTuxpo68w+io4N5/bSQrkMKTOYogTPQAJCIDtGQ0UEN0ZVOhU8/g0dkNi0hfGOag4vBXcr
- +E1gHl0Yp
-X-Google-Smtp-Source: AGHT+IGCmaj66emuZ4PGr5m/2n2I3BXYTCsWu/FS4ZbjBIZ9ligRoBUlZiePAn4Bi3CEG8iYrl+9BQ==
-X-Received: by 2002:a05:6122:1d50:b0:4db:223b:1c0a with SMTP id
- gd16-20020a0561221d5000b004db223b1c0amr473885vkb.11.1714613504401; 
- Wed, 01 May 2024 18:31:44 -0700 (PDT)
+ bh=twc7v37XyxfRt4wS5NGiAWn5CRq80rMcYFQp2nDjqoE=;
+ b=lsGgXW5E1dAUtugy46+2bcg5QM53z9OZyacK4mnlbMWwU1jw7Hf3Bg0wTpjBs3FoZs
+ lp8DEOWy8BUaISfP6J6MADIDtSVciHnJqoVA+WX32AAInRxvrf++0ke+2CR35JJ3LDNm
+ g0NWVKrqV1Uim/aca3l1nDHUeLVrP8TF+DL9tgEYfIv3KsIwXnq3fvrXAOxZZyOD3GfQ
+ j6hKX8eV/h504Kiw8bwEmskw7djTPIH4m8Uu0zS7+Ng3zohZT4LgfyKFuwXArRtVqigD
+ oUlZbNmlpOwAnm/lY//HqLbVt9sj8abszNdd44H54Ix1a5pgyLiwn58XnOy3T0C495o3
+ V0Ng==
+X-Gm-Message-State: AOJu0YznRkrYrzoEWQMNKamDrEMNIphNYPbIyJMOUoj7wTBixXAKGpIg
+ GXOIuCh+x2Q/QJLSd55NkY10GYaFn4Oh/UaIl7KK/cYJh+TYLmDhsZ9RkdNG6XCEru7FRZ8p1JI
+ Wf3Gr9dbw
+X-Google-Smtp-Source: AGHT+IFkfc6tCWSuVq/5x0L+3opAhgrGbgUDYSx6c4DDgkHRP2StQV8jIih4Yk6GKMcyT2FYK9eszg==
+X-Received: by 2002:a05:622a:1214:b0:43b:1571:e00b with SMTP id
+ y20-20020a05622a121400b0043b1571e00bmr5160738qtx.43.1714613505494; 
+ Wed, 01 May 2024 18:31:45 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.31.43
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.31.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:31:43 -0700 (PDT)
+ Wed, 01 May 2024 18:31:45 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Jagan Teki <jagan@amarulasolutions.com>,
- Andre Przywara <andre.przywara@arm.com>
-Subject: [PATCH 03/81] arm: sunxi: Add missing <linux/types.h>
-Date: Wed,  1 May 2024 19:30:20 -0600
-Message-Id: <20240502013138.2383421-3-trini@konsulko.com>
+Cc: Stefan Bosch <stefan_b@posteo.net>
+Subject: [PATCH 04/81] arm: nexell: Add missing <linux/types.h>
+Date: Wed,  1 May 2024 19:30:21 -0600
+Message-Id: <20240502013138.2383421-4-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -90,43 +89,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These files have many "Linux" style types in them, add <linux/types.h>
+This file has many "Linux" style types in it, add <linux/types.h>
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Jagan Teki <jagan@amarulasolutions.com>
-Cc: Andre Przywara <andre.przywara@arm.com>
+Cc: Stefan Bosch <stefan_b@posteo.net>
 ---
- arch/arm/include/asm/arch-sunxi/pmic_bus.h | 2 ++
- arch/arm/include/asm/arch-sunxi/tve.h      | 2 ++
- 2 files changed, 4 insertions(+)
+ arch/arm/mach-nexell/include/mach/mipi_display.h | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/include/asm/arch-sunxi/pmic_bus.h b/arch/arm/include/asm/arch-sunxi/pmic_bus.h
-index 5ab9b2809f29..e26459fdd3bf 100644
---- a/arch/arm/include/asm/arch-sunxi/pmic_bus.h
-+++ b/arch/arm/include/asm/arch-sunxi/pmic_bus.h
-@@ -8,6 +8,8 @@
- #ifndef _SUNXI_PMIC_BUS_H
- #define _SUNXI_PMIC_BUS_H
+diff --git a/arch/arm/mach-nexell/include/mach/mipi_display.h b/arch/arm/mach-nexell/include/mach/mipi_display.h
+index f3fdec64647c..9183ffdd9c3d 100644
+--- a/arch/arm/mach-nexell/include/mach/mipi_display.h
++++ b/arch/arm/mach-nexell/include/mach/mipi_display.h
+@@ -11,6 +11,8 @@
+ #ifndef MIPI_DISPLAY_H
+ #define MIPI_DISPLAY_H
  
 +#include <linux/types.h>
 +
- int pmic_bus_init(void);
- int pmic_bus_read(u8 reg, u8 *data);
- int pmic_bus_write(u8 reg, u8 data);
-diff --git a/arch/arm/include/asm/arch-sunxi/tve.h b/arch/arm/include/asm/arch-sunxi/tve.h
-index 46cd87e79e8d..4fbb4b91c86b 100644
---- a/arch/arm/include/asm/arch-sunxi/tve.h
-+++ b/arch/arm/include/asm/arch-sunxi/tve.h
-@@ -9,6 +9,8 @@
- #ifndef _TVE_H
- #define _TVE_H
- 
-+#include <linux/types.h>
-+
- enum tve_mode {
- 	tve_mode_vga,
- 	tve_mode_composite_pal,
+ /* MIPI DSI Processor-to-Peripheral transaction types */
+ enum {
+ 	MIPI_DSI_V_SYNC_START				= 0x01,
 -- 
 2.34.1
 
