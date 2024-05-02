@@ -4,81 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AD46C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 13:42:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A553CC4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 14:18:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E412E882AE;
-	Thu,  2 May 2024 15:41:58 +0200 (CEST)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 152AE88321;
+	Thu,  2 May 2024 16:18:01 +0200 (CEST)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="phLMX1ai";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="IjgvWW7h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD9088838E; Thu,  2 May 2024 15:41:57 +0200 (CEST)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 877D488323; Thu,  2 May 2024 16:18:00 +0200 (CEST)
+Received: from lelv0143.ext.ti.com (lelv0143.ext.ti.com [198.47.23.248])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5A51882AE
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 15:41:55 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 059E28830F
+ for <U-Boot@lists.denx.de>; Thu,  2 May 2024 16:17:57 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-a52223e004dso891442866b.2
- for <u-boot@lists.denx.de>; Thu, 02 May 2024 06:41:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1714657315; x=1715262115; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=PRRDRfOe1hRWoy+hOvgi8leU0HuFtqezAnUxxqvJjEI=;
- b=phLMX1aiIsv8KrcJUuhbvvqAzkXAOQVtc3ees3gm/HHSCxqwVzqSxe1MyY/s3BXCLy
- onZLcsoZVsdUQQCOug9XerfxxOVkMwtr7s+RA+KpWZ88A2FUKBvgzfWGkKje88M/l63u
- tooP//zgs/LyNR1zcCY0Oj4N3bBRqzreRHQjupcGElezuirah6zGY1hN6dlx3hyuPQjv
- R1OsZoz6me6Mo9RoK9HVRgisZoTa0edt3AW66+R1G/HeTQqtw9qDdL+EzSiOZkBdnrWM
- dRpnBS7K7tZmlBywWMpsy33KPb3EwHXX9p9feFTfWyA/v0cqZszPZc/kSmy9NdlIDDvs
- J5lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714657315; x=1715262115;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=PRRDRfOe1hRWoy+hOvgi8leU0HuFtqezAnUxxqvJjEI=;
- b=SAP4rueNtvgyVJjPQbAzJbiOI+H7Jsu83dD6OmKSH1RDAUrapO29THwbbl0Xr3JTY2
- wZN6fdrLoNcDrh/MQD7Z5niX91di1II7rzhQ7rkXn13PLS7CS6TlcZZN6khxOIsUWF6e
- gKiR19S3rmVRymDHU0TSUmiLiQ2oRCEsb1ASsk+AcrbD4W03Lxk931scd8Sq5YXU7Scr
- 3N01v6qpk9b17bG1dIbSZS2a3LpxrW6I2h1t1EKEA/DJDICIhMfXoLu3SeIObcEqeLe4
- +27FY6B3lB27jfycHPzAZvZNK2tqG5FsPEgNBGKTL7aELLPLUtFlaWo5EWN6Boih+sdD
- 3Erg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXbGCZ2ecOjYG6nt/F1ovsWqHPww3RaHJ6AuWkmw2Vt0aEyrJvDQQcml0PJxQVouUZVxcAZZg9F4+dU1Amd32FUsricMQ==
-X-Gm-Message-State: AOJu0YwRfccPTt8oQ0F0J6r6nq28b+6zi5rd0VL270lGxuRR1+I6GUBx
- p4TiKrB4z37dauE1Y25D1Q7GCYi8NxQOxag9n4RNs/rJXjduNQdMbOmRYUxwjQQ=
-X-Google-Smtp-Source: AGHT+IFdl+rW8djF8tNiQT84EAiZURmsUCYuJXD9xUp2VdFHr3tdFXlh39ogTnj+un6nsx7Q/GA/2g==
-X-Received: by 2002:a17:906:e08:b0:a55:5ff4:ff4f with SMTP id
- l8-20020a1709060e0800b00a555ff4ff4fmr1603021eji.71.1714657315234; 
- Thu, 02 May 2024 06:41:55 -0700 (PDT)
-Received: from ?IPV6:2a02:8109:aa0d:be00::8bb3? ([2a02:8109:aa0d:be00::8bb3])
- by smtp.gmail.com with ESMTPSA id
- v2-20020a17090606c200b00a5910978658sm563684ejb.208.2024.05.02.06.41.54
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 02 May 2024 06:41:54 -0700 (PDT)
-Message-ID: <526f5a87-24e6-4147-a29b-ee4e74c6abde@linaro.org>
-Date: Thu, 2 May 2024 15:41:54 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 442EHha8033909;
+ Thu, 2 May 2024 09:17:43 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1714659463;
+ bh=TkbLQasRpBjVRO6nq2LGn/+cMZ7FUWgEEWf14RIO3Nw=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=IjgvWW7hPui5DZyUR/bUY5Cchc60ByjafLaOFZMi9+dHGuHjvWMHOl6o9Jw/mTuHE
+ 2dQkdTawLuvo8RYO1Ud8oxUvl7xTWrr94I0zQqWjCSBnNG1gU+qZNpToOpb+kQnav/
+ KGi9S2pAfjd7lKHOcpb0AB8ToW6P4exISrmxItk4=
+Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 442EHhxf094952
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 2 May 2024 09:17:43 -0500
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 2
+ May 2024 09:17:43 -0500
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 2 May 2024 09:17:43 -0500
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 442EHh8b007178;
+ Thu, 2 May 2024 09:17:43 -0500
+Message-ID: <55bd217a-07ee-4eb4-a9d6-ff810be8bd21@ti.com>
+Date: Thu, 2 May 2024 09:17:43 -0500
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/2] qcom: ehci: enable core + iface clocks
-To: Sam Day <me@samcday.com>, u-boot@lists.denx.de
-References: <20240502-msm8916-hs-usb-clocks-v1-0-eeccf483b68d@samcday.com>
+Subject: Re: [GIT PULL] Please pull u-boot-mmc master
+To: Greg Malysa <greg.malysa@timesys.com>, Francesco Dolcini
+ <francesco@dolcini.it>
+CC: Jae hoon Chung <jh80.chung@gmail.com>, Ian Roberts
+ <ian.roberts@timesys.com>, Tom Rini <trini@konsulko.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, U-Boot Mailing List <U-Boot@lists.denx.de>,
+ <maximilian.brune@9elements.com>, <curtis.machida@intel.com>, Jonas Karlman
+ <jonas@kwiboo.se>, "ian.roberts@timesys.com Peng Fan" <peng.fan@nxp.com>,
+ <sheng.tan@9elements.com>
+References: <CGME20240426103830epcas1p3720a09dd50c8ef3d16de0a6ff2ff514b@epcas1p3.samsung.com>
+ <e6c74bd0-de66-42ef-a6af-0d5c058b12a0@samsung.com>
+ <20240426155154.GK1054907@bill-the-cat>
+ <33db14f4-f3f0-4e5f-a256-2ce9b5c505fd@ti.com>
+ <20240430074221.GA10438@francesco-nb>
+ <CAAjXUaqCWHVmqHT7iMoHOir5PH1E6fhOFoZHBLJ4obdW6bHw4Q@mail.gmail.com>
 Content-Language: en-US
-Cc: Robert Marko <robert.marko@sartura.hr>
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20240502-msm8916-hs-usb-clocks-v1-0-eeccf483b68d@samcday.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <CAAjXUaqCWHVmqHT7iMoHOir5PH1E6fhOFoZHBLJ4obdW6bHw4Q@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,38 +90,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
+Hi Greg,
 
-On 02/05/2024 15:16, Sam Day wrote:
-> These clocks are mandatory, as can be seen in msm_hsusb driver in the
-> Linux kernel.
+On 5/1/24 9:40 PM, Greg Malysa wrote:
+> On Tue, Apr 30, 2024 at 3:42 AM Francesco Dolcini <francesco@dolcini.it> wrote:
+>>
+>> On Mon, Apr 29, 2024 at 03:39:53PM -0500, Judith Mendez wrote:
+>>> A patch in this series caused a regression for AM62x SK with the
+>>> following error:
+>>
+>> +1, this affects also Verdin AM62.
 > 
-> The appropriate HS_USB AHB/SYSTEM clocks were added to gcc_apq8016.
-> 
-> Technically there's other adjacent SoC families that can use the
-> msm_hsusb driver with different clocks, but only msm8916/apq8016 are
-> currently making use of it so I think this change shouldn't break
-> anything elsewhere.
+> Hi, please try https://patchwork.ozlabs.org/project/uboot/patch/20240501185331.1189647-1-alexander.sverdlin@siemens.com/
+> as this should explain the issue and also fix it.
 
-Thanks for the patches. I have a feeling this might break IPQ4019, you 
-might need to stub the clks there (cc Robert).
+The fix fixes my issuu on AM62x, thanks.
 
-Seems like the To: and Cc: addresses aren't all quite right still.
-> 
-> Signed-off-by: Sam Day <me@samcday.com>
-> ---
-> Sam Day (2):
->        clk/qcom: apq8016: add support for USB_HS clocks
->        ehci: msm: bring up iface + core clocks
-> 
->   drivers/clk/qcom/clock-apq8016.c | 31 +++++++++++++++++++++++++++++++
->   drivers/usb/host/ehci-msm.c      | 37 +++++++++++++++++++++++++++++++++++--
->   2 files changed, 66 insertions(+), 2 deletions(-)
-> ---
-> base-commit: ff0de1f0557ed7d2dab47ba976a37347a1fdc432
-> change-id: 20240502-msm8916-hs-usb-clocks-34bc22b03f3d
-> 
-> Best regards,
-
--- 
-// Caleb (they/them)
+~ Judith
