@@ -4,104 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 198D4C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:44:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A83BC4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:44:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 158F788D39;
+	by phobos.denx.de (Postfix) with ESMTP id 88C3F88D26;
 	Thu,  2 May 2024 03:34:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="bZq/VRjn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oZflZUE2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C447F88C64; Thu,  2 May 2024 03:33:15 +0200 (CEST)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id 6FCB888C9E; Thu,  2 May 2024 03:33:18 +0200 (CEST)
+Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
+ [IPv6:2607:f8b0:4864:20::832])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DE68C88CA0
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:33:09 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 8774488CA4
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:33:15 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-61816fc256dso75800937b3.0
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:33:09 -0700 (PDT)
+Received: by mail-qt1-x832.google.com with SMTP id
+ d75a77b69052e-4365c1451d4so49280331cf.2
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:33:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613588; x=1715218388; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613594; x=1715218394; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=h1GA7PTyB1gH3CDYkPVrcouzQF1n1+B00F9/v0ZUje8=;
- b=bZq/VRjnCu8AORuSG/AACsDMySPezrHM9Ng5biEBhcVtM47rNF6iXRmnIRdm8aEPZA
- 4BrgC2Mc1bqxtmL3+m5zrlqbt4S3wUZMwgHrpbHyaAJ/zt7arxSWz/khviwhWCmcstMi
- EQd6Ezwn0X4gd9WF1y46NiD6AE4vN2ZJe93BQ=
+ bh=t2AD/hwwpT8EV7YN7mwzvVNkZPAttqsmHs++vWZgpq4=;
+ b=oZflZUE2fYtZvcVVP7fQwsa+sXjNpgLtIujBjRebf5gfhqaBwub2t1fTzDktt/K3xZ
+ Zx36ANPkyjRHPB6bSxoqLGplI/KZpoq3AYYKzrh9mBhRmvISHZCOAD+QDjs16yz+8e8S
+ E11O0YIXF47jmGpXXMTTb+v6aSJlPHUpWRMAM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613588; x=1715218388;
+ d=1e100.net; s=20230601; t=1714613594; x=1715218394;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=h1GA7PTyB1gH3CDYkPVrcouzQF1n1+B00F9/v0ZUje8=;
- b=S4RwntjC8jWGPZNvYMFiovS8HnXVGoBrx9M55A5Pl82PY+0zP4WiMqVYjMS4CbOHsI
- gjTdmEI22SGaoWuPreR87IhxrhCDjfhEjnarXVWCqtXmsgUeLTJavh6osmDth7J15mlA
- Inbw2FuEOZM3bthZwwLYDDm68HwHdXp7YYQih6qDCsztwNc9F58tk2cbuuoqoI3Ushbp
- b4wRv4We5e7FYb9RGNTxEOGc8RHZ92yB6bEdDJ+xm5DOwS++xo1v4dxe60tmAoIn26hn
- jDLXBOXTvgHPTf6+7WI+fXEpslQ6jYVnxiYnSaaynuelFdZyrI08bxLTJQCYH+5r+xm3
- uSEw==
-X-Gm-Message-State: AOJu0YwNbTZoXHYiEnKyr5sIJ9chUmGNE+O5GQbL/3/xp1ctBTXlvKAn
- i5ybBEj7VIuzY/zHEmqAyasLhjQ63yOb2lqOTz7TJ3kuCjuXzn7ozSTalcBFtChMoY/bcrjP1tI
- ZnTTMvdrf
-X-Google-Smtp-Source: AGHT+IFQZ98mQdwyGuUz5HleF5wWt0iFiFFU38EY6hLsqn+HDWZNxiY5jBIIFe6mzkrk5g+pu+cGTg==
-X-Received: by 2002:a05:690c:b82:b0:61b:91e3:f954 with SMTP id
- ck2-20020a05690c0b8200b0061b91e3f954mr4905633ywb.8.1714613588511; 
- Wed, 01 May 2024 18:33:08 -0700 (PDT)
+ bh=t2AD/hwwpT8EV7YN7mwzvVNkZPAttqsmHs++vWZgpq4=;
+ b=r8q6j3TIr1P1ANQiLoJmVsC9AM6TwV6f4Quy5+h5ZvDwUZT/+60iP+hZiR4kD7d50h
+ w1pNusMlUNvcgdKbHATIWFTGs8RcfejPaUiysMykf1AyEwd1BsiXZF8SwyLsuls7ft06
+ 7jyMgoxtsY7wTGfOuRV1cOJNJksScLFBm8pdBldRrDO7V1BzAWAI66YEm6WYDcY7e1b2
+ 8DV0xiAV7GhkAUXdnPf86/4IM/Xra5g8KHJxAfnJWYoZCyCXcRG+tQEkvjwuEYTNs8ou
+ vI/g+7ISqfQH9q7OigKcgtTLULSm70lxuf03z/1ezu12Feyb9LNPlsfNjGjEXDnb9AE4
+ TrCA==
+X-Gm-Message-State: AOJu0YzTcpi2iCIqbqwBn0tMZfZcvvpOCwGaXZXfmREisFwWVErwR1AB
+ iPXzjRa42ozSm9UMNRMiNxd7/oFT3netQkE9gyPXdkSSied+HAQb7AhiKaHjx1yglwUbTAe3kft
+ EQHGqFfhS
+X-Google-Smtp-Source: AGHT+IHLhClKrm5rZRUBzfktWu5Q7h5BagL6IV7g0K27P8gd53nbmQMW1VXbLhoVNYNIIQCoxcJJhg==
+X-Received: by 2002:a05:622a:1214:b0:43b:1571:e00b with SMTP id
+ y20-20020a05622a121400b0043b1571e00bmr5164913qtx.43.1714613593768; 
+ Wed, 01 May 2024 18:33:13 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.33.04
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.33.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:33:08 -0700 (PDT)
+ Wed, 01 May 2024 18:33:13 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Stefan Roese <sr@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Heiko Schocher <hs@denx.de>,
- Simon Glass <sjg@chromium.org>, Mark Kettenis <kettenis@openbsd.org>,
+Cc: Jagan Teki <jagan@amarulasolutions.com>,
+ Andre Przywara <andre.przywara@arm.com>, Stefan Roese <sr@denx.de>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Kever Yang <kever.yang@rock-chips.com>,
- Masahisa Kojima <kojima.masahisa@socionext.com>,
- Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>,
+ Stephan Gerhold <stephan@gerhold.net>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ Mark Kettenis <kettenis@openbsd.org>, Ryder Lee <ryder.lee@mediatek.com>,
+ Weijie Gao <weijie.gao@mediatek.com>,
  Chunfeng Yun <chunfeng.yun@mediatek.com>,
  GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>,
- liuhao <liuhao@phytium.com.cn>, shuyiqi <shuyiqi@phytium.com.cn>,
- Minda Chen <minda.chen@starfivetech.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
  Kunihiko Hayashi <hayashi.kunihiko@socionext.com>,
- Dai Okamura <okamura.dai@socionext.com>,
- Michal Simek <michal.simek@amd.com>, Bin Meng <bmeng.cn@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Moritz Fischer <moritzf@google.com>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Sergei Antonov <saproj@gmail.com>, Nikhil M Jain <n-jain1@ti.com>,
- Sam Edwards <cfsworks@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Johan Jonker <jbx6244@gmail.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Jon Lin <jon.lin@rock-chips.com>,
+ Dai Okamura <okamura.dai@socionext.com>, Sean Anderson <seanga2@gmail.com>,
+ Nishanth Menon <nm@ti.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
+ Stefan Bosch <stefan_b@posteo.net>,
  Eugen Hristev <eugen.hristev@collabora.com>,
- Maksim Kiselev <bigunclemax@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- Peng Fan <peng.fan@nxp.com>, Ioana Ciornei <ioana.ciornei@nxp.com>,
- Mathew McBride <matt@traverse.com.au>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Mason Huo <mason.huo@starfivetech.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>
-Subject: [PATCH 48/81] pci: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:31:05 -0600
-Message-Id: <20240502013138.2383421-48-trini@konsulko.com>
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tim Harvey <tharvey@gateworks.com>,
+ Fabio Estevam <festevam@denx.de>, Adam Ford <aford173@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Johan Jonker <jbx6244@gmail.com>,
+ Jon Lin <jon.lin@rock-chips.com>, Ren Jianing <jianing.ren@rock-chips.com>,
+ Frank Wang <frank.wang@rock-chips.com>,
+ Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Ravi Gunasekaran <r-gunasekaran@ti.com>
+Subject: [PATCH 50/81] phy: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:31:07 -0600
+Message-Id: <20240502013138.2383421-50-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 02 May 2024 03:34:44 +0200
 X-BeenThere: u-boot@lists.denx.de
@@ -125,670 +126,726 @@ add missing include files directly.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Stefan Roese <sr@denx.de>
+Cc: Jagan Teki <jagan@amarulasolutions.com>
+Cc: Andre Przywara <andre.przywara@arm.com>
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Cc: Heiko Schocher <hs@denx.de>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Mark Kettenis <kettenis@openbsd.org>
+Cc: Stefan Roese <sr@denx.de>
 Cc: Neil Armstrong <neil.armstrong@linaro.org>
-Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
-Cc: Kever Yang <kever.yang@rock-chips.com>
-Cc: Masahisa Kojima <kojima.masahisa@socionext.com>
+Cc: Stephan Gerhold <stephan@gerhold.net>
+Cc: Linus Walleij <linus.walleij@linaro.org>
+Cc: Mark Kettenis <kettenis@openbsd.org>
 Cc: Ryder Lee <ryder.lee@mediatek.com>
 Cc: Weijie Gao <weijie.gao@mediatek.com>
 Cc: Chunfeng Yun <chunfeng.yun@mediatek.com>
 Cc: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>
-Cc: liuhao <liuhao@phytium.com.cn>
-Cc: shuyiqi <shuyiqi@phytium.com.cn>
-Cc: Minda Chen <minda.chen@starfivetech.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Sumit Garg <sumit.garg@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Kever Yang <kever.yang@rock-chips.com>
 Cc: Kunihiko Hayashi <hayashi.kunihiko@socionext.com>
 Cc: Dai Okamura <okamura.dai@socionext.com>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Bin Meng <bmeng.cn@gmail.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Moritz Fischer <moritzf@google.com>
-Cc: This contributor prefers not to receive mails <noreply@example.com>
-Cc: Sergei Antonov <saproj@gmail.com>
-Cc: Nikhil M Jain <n-jain1@ti.com>
-Cc: Sam Edwards <cfsworks@gmail.com>
+Cc: Sean Anderson <seanga2@gmail.com>
+Cc: Nishanth Menon <nm@ti.com>
+Cc: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+Cc: Stefan Bosch <stefan_b@posteo.net>
+Cc: Eugen Hristev <eugen.hristev@collabora.com>
+Cc: Igor Prusov <ivprusov@salutedevices.com>
+Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Tim Harvey <tharvey@gateworks.com>
+Cc: Fabio Estevam <festevam@denx.de>
+Cc: Adam Ford <aford173@gmail.com>
 Cc: Jonas Karlman <jonas@kwiboo.se>
 Cc: Johan Jonker <jbx6244@gmail.com>
-Cc: Michael Trimarchi <michael@amarulasolutions.com>
 Cc: Jon Lin <jon.lin@rock-chips.com>
-Cc: Eugen Hristev <eugen.hristev@collabora.com>
-Cc: Maksim Kiselev <bigunclemax@gmail.com>
-Cc: Sumit Garg <sumit.garg@linaro.org>
-Cc: Peng Fan <peng.fan@nxp.com>
-Cc: Ioana Ciornei <ioana.ciornei@nxp.com>
-Cc: Mathew McBride <matt@traverse.com.au>
-Cc: Leo Yu-Chi Liang <ycliang@andestech.com>
-Cc: Mason Huo <mason.huo@starfivetech.com>
-Cc: Mayuresh Chitale <mchitale@ventanamicro.com>
+Cc: Ren Jianing <jianing.ren@rock-chips.com>
+Cc: Frank Wang <frank.wang@rock-chips.com>
+Cc: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: Ravi Gunasekaran <r-gunasekaran@ti.com>
 ---
- drivers/pci/pci-aardvark.c                 | 1 -
- drivers/pci/pci-emul-uclass.c              | 1 -
- drivers/pci/pci-rcar-gen2.c                | 2 +-
- drivers/pci/pci-rcar-gen3.c                | 1 -
- drivers/pci/pci-uclass.c                   | 1 -
- drivers/pci/pci_auto.c                     | 2 +-
- drivers/pci/pci_auto_common.c              | 1 -
- drivers/pci/pci_common.c                   | 1 -
- drivers/pci/pci_compat.c                   | 1 -
- drivers/pci/pci_ftpci100.c                 | 1 -
- drivers/pci/pci_mpc85xx.c                  | 1 -
- drivers/pci/pci_mvebu.c                    | 1 -
- drivers/pci/pci_rom.c                      | 2 +-
- drivers/pci/pci_sandbox.c                  | 1 -
- drivers/pci/pci_sh7751.c                   | 2 +-
- drivers/pci/pci_tegra.c                    | 1 -
- drivers/pci/pci_x86.c                      | 1 -
- drivers/pci/pcie_apple.c                   | 1 -
- drivers/pci/pcie_brcmstb.c                 | 1 -
- drivers/pci/pcie_dw_common.c               | 1 -
- drivers/pci/pcie_dw_meson.c                | 1 -
- drivers/pci/pcie_dw_mvebu.c                | 3 ++-
- drivers/pci/pcie_dw_rockchip.c             | 1 -
- drivers/pci/pcie_dw_sifive.c               | 1 -
- drivers/pci/pcie_dw_ti.c                   | 1 -
- drivers/pci/pcie_ecam_generic.c            | 1 -
- drivers/pci/pcie_ecam_synquacer.c          | 1 -
- drivers/pci/pcie_fsl.c                     | 2 +-
- drivers/pci/pcie_fsl_fixup.c               | 1 -
- drivers/pci/pcie_imx.c                     | 1 -
- drivers/pci/pcie_intel_fpga.c              | 1 -
- drivers/pci/pcie_iproc.c                   | 1 -
- drivers/pci/pcie_layerscape.c              | 1 -
- drivers/pci/pcie_layerscape_ep.c           | 2 +-
- drivers/pci/pcie_layerscape_fixup.c        | 1 -
- drivers/pci/pcie_layerscape_fixup_common.c | 2 +-
- drivers/pci/pcie_layerscape_gen4.c         | 2 +-
- drivers/pci/pcie_layerscape_gen4_fixup.c   | 1 -
- drivers/pci/pcie_layerscape_rc.c           | 1 -
- drivers/pci/pcie_mediatek.c                | 1 -
- drivers/pci/pcie_phytium.c                 | 1 -
- drivers/pci/pcie_plda_common.c             | 1 -
- drivers/pci/pcie_rockchip.c                | 1 -
- drivers/pci/pcie_starfive_jh7110.c         | 1 -
- drivers/pci/pcie_uniphier.c                | 1 -
- drivers/pci/pcie_xilinx.c                  | 1 -
- 46 files changed, 10 insertions(+), 46 deletions(-)
+ drivers/phy/allwinner/phy-sun4i-usb.c              | 1 -
+ drivers/phy/bcm6318-usbh-phy.c                     | 1 -
+ drivers/phy/bcm6348-usbh-phy.c                     | 1 -
+ drivers/phy/bcm6358-usbh-phy.c                     | 1 -
+ drivers/phy/bcm6368-usbh-phy.c                     | 1 -
+ drivers/phy/cadence/phy-cadence-sierra.c           | 1 -
+ drivers/phy/cadence/phy-cadence-torrent.c          | 1 -
+ drivers/phy/keystone-usb-phy.c                     | 1 -
+ drivers/phy/marvell/comphy_a3700.c                 | 1 -
+ drivers/phy/marvell/comphy_core.c                  | 1 -
+ drivers/phy/marvell/comphy_cp110.c                 | 2 +-
+ drivers/phy/marvell/comphy_mux.c                   | 1 -
+ drivers/phy/meson-axg-mipi-dphy.c                  | 1 -
+ drivers/phy/meson-axg-mipi-pcie-analog.c           | 1 -
+ drivers/phy/meson-g12a-usb2.c                      | 1 -
+ drivers/phy/meson-g12a-usb3-pcie.c                 | 1 -
+ drivers/phy/meson-gxbb-usb2.c                      | 1 -
+ drivers/phy/meson-gxl-usb2.c                       | 1 -
+ drivers/phy/mt76x8-usb-phy.c                       | 1 -
+ drivers/phy/nop-phy.c                              | 1 -
+ drivers/phy/omap-usb2-phy.c                        | 1 -
+ drivers/phy/phy-ab8500-usb.c                       | 1 -
+ drivers/phy/phy-apple-atc.c                        | 1 -
+ drivers/phy/phy-bcm-sr-pcie.c                      | 1 -
+ drivers/phy/phy-core-mipi-dphy.c                   | 2 +-
+ drivers/phy/phy-da8xx-usb.c                        | 2 +-
+ drivers/phy/phy-imx8mq-usb.c                       | 1 -
+ drivers/phy/phy-mtk-tphy.c                         | 1 -
+ drivers/phy/phy-npcm-usb.c                         | 1 -
+ drivers/phy/phy-rcar-gen2.c                        | 1 -
+ drivers/phy/phy-rcar-gen3.c                        | 1 -
+ drivers/phy/phy-stm32-usbphyc.c                    | 1 -
+ drivers/phy/phy-ti-am654.c                         | 1 -
+ drivers/phy/phy-uclass.c                           | 1 -
+ drivers/phy/phy-zynqmp.c                           | 1 -
+ drivers/phy/qcom/msm8916-usbh-phy.c                | 1 -
+ drivers/phy/qcom/phy-qcom-ipq4019-usb.c            | 1 -
+ drivers/phy/qcom/phy-qcom-usb-hs-28nm.c            | 1 -
+ drivers/phy/qcom/phy-qcom-usb-ss.c                 | 1 -
+ drivers/phy/renesas/r8a779f0-ether-serdes.c        | 1 -
+ drivers/phy/rockchip/phy-rockchip-naneng-combphy.c | 1 -
+ drivers/phy/rockchip/phy-rockchip-pcie.c           | 1 -
+ drivers/phy/rockchip/phy-rockchip-snps-pcie3.c     | 1 -
+ drivers/phy/rockchip/phy-rockchip-typec.c          | 1 -
+ drivers/phy/rockchip/phy-rockchip-usbdp.c          | 1 -
+ drivers/phy/sandbox-phy.c                          | 1 -
+ drivers/phy/socionext/phy-uniphier-pcie.c          | 1 -
+ drivers/phy/socionext/phy-uniphier-usb3.c          | 1 -
+ drivers/phy/sti_usb_phy.c                          | 1 -
+ drivers/phy/ti-pipe3-phy.c                         | 1 -
+ drivers/phy/ti/phy-j721e-wiz.c                     | 1 -
+ 51 files changed, 3 insertions(+), 51 deletions(-)
 
-diff --git a/drivers/pci/pci-aardvark.c b/drivers/pci/pci-aardvark.c
-index af0e55cd2f2c..f5db4bdb7605 100644
---- a/drivers/pci/pci-aardvark.c
-+++ b/drivers/pci/pci-aardvark.c
-@@ -25,7 +25,6 @@
-  *
+diff --git a/drivers/phy/allwinner/phy-sun4i-usb.c b/drivers/phy/allwinner/phy-sun4i-usb.c
+index 6624e9134f43..b9306c9a8279 100644
+--- a/drivers/phy/allwinner/phy-sun4i-usb.c
++++ b/drivers/phy/allwinner/phy-sun4i-usb.c
+@@ -10,7 +10,6 @@
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <log.h>
+diff --git a/drivers/phy/bcm6318-usbh-phy.c b/drivers/phy/bcm6318-usbh-phy.c
+index a2fa446cb1c9..d715541bd4cb 100644
+--- a/drivers/phy/bcm6318-usbh-phy.c
++++ b/drivers/phy/bcm6318-usbh-phy.c
+@@ -7,7 +7,6 @@
+  *	Copyright 2013 Florian Fainelli <florian@openwrt.org>
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+diff --git a/drivers/phy/bcm6348-usbh-phy.c b/drivers/phy/bcm6348-usbh-phy.c
+index 857fb575ef19..ffb37b634a31 100644
+--- a/drivers/phy/bcm6348-usbh-phy.c
++++ b/drivers/phy/bcm6348-usbh-phy.c
+@@ -7,7 +7,6 @@
+  *	Copyright 2013 Florian Fainelli <florian@openwrt.org>
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+diff --git a/drivers/phy/bcm6358-usbh-phy.c b/drivers/phy/bcm6358-usbh-phy.c
+index bfdcfb0d245e..a8d24609bfc0 100644
+--- a/drivers/phy/bcm6358-usbh-phy.c
++++ b/drivers/phy/bcm6358-usbh-phy.c
+@@ -7,7 +7,6 @@
+  *	Copyright 2013 Florian Fainelli <florian@openwrt.org>
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <pci.h>
- #include <asm/io.h>
-diff --git a/drivers/pci/pci-emul-uclass.c b/drivers/pci/pci-emul-uclass.c
-index a0b8afb87a01..166ee9fcd431 100644
---- a/drivers/pci/pci-emul-uclass.c
-+++ b/drivers/pci/pci-emul-uclass.c
+ #include <generic-phy.h>
+ #include <log.h>
+diff --git a/drivers/phy/bcm6368-usbh-phy.c b/drivers/phy/bcm6368-usbh-phy.c
+index 1a2870d51499..5bee130425d5 100644
+--- a/drivers/phy/bcm6368-usbh-phy.c
++++ b/drivers/phy/bcm6368-usbh-phy.c
+@@ -7,7 +7,6 @@
+  *	Copyright 2013 Florian Fainelli <florian@openwrt.org>
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+diff --git a/drivers/phy/cadence/phy-cadence-sierra.c b/drivers/phy/cadence/phy-cadence-sierra.c
+index 4bb8a0ca7f34..f5e23f36c56e 100644
+--- a/drivers/phy/cadence/phy-cadence-sierra.c
++++ b/drivers/phy/cadence/phy-cadence-sierra.c
+@@ -11,7 +11,6 @@
+  * Jean-Jacques Hiblot <jjhiblot@ti.com>
+  *
+  */
+-#include <common.h>
+ #include <clk.h>
+ #include <linux/delay.h>
+ #include <linux/clk-provider.h>
+diff --git a/drivers/phy/cadence/phy-cadence-torrent.c b/drivers/phy/cadence/phy-cadence-torrent.c
+index ef924e7af508..d4e8ece4935a 100644
+--- a/drivers/phy/cadence/phy-cadence-torrent.c
++++ b/drivers/phy/cadence/phy-cadence-torrent.c
+@@ -10,7 +10,6 @@
+  *
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <generic-phy.h>
+ #include <reset.h>
+diff --git a/drivers/phy/keystone-usb-phy.c b/drivers/phy/keystone-usb-phy.c
+index 3bb9c0814c14..cfc15203d632 100644
+--- a/drivers/phy/keystone-usb-phy.c
++++ b/drivers/phy/keystone-usb-phy.c
 @@ -4,7 +4,6 @@
-  * Written by Simon Glass <sjg@chromium.org>
+  * Written by Jean-Jacques Hiblot  <jjhiblot@ti.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <dm/device.h>
+diff --git a/drivers/phy/marvell/comphy_a3700.c b/drivers/phy/marvell/comphy_a3700.c
+index c490dc69c695..bca325d19960 100644
+--- a/drivers/phy/marvell/comphy_a3700.c
++++ b/drivers/phy/marvell/comphy_a3700.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2015-2016 Marvell International Ltd.
+  */
+ 
+-#include <common.h>
+ #include <fdt_support.h>
+ #include <log.h>
+ #include <asm/global_data.h>
+diff --git a/drivers/phy/marvell/comphy_core.c b/drivers/phy/marvell/comphy_core.c
+index 7272dfb9fe80..a666a4e794ee 100644
+--- a/drivers/phy/marvell/comphy_core.c
++++ b/drivers/phy/marvell/comphy_core.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2016 Stefan Roese <sr@denx.de>
   */
  
 -#include <common.h>
  #include <dm.h>
  #include <fdtdec.h>
+ #include <asm/global_data.h>
+diff --git a/drivers/phy/marvell/comphy_cp110.c b/drivers/phy/marvell/comphy_cp110.c
+index bb15fbaf347e..b8cdedf6edf0 100644
+--- a/drivers/phy/marvell/comphy_cp110.c
++++ b/drivers/phy/marvell/comphy_cp110.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2015-2016 Marvell International Ltd.
+  */
+ 
+-#include <common.h>
+ #include <fdtdec.h>
  #include <log.h>
-diff --git a/drivers/pci/pci-rcar-gen2.c b/drivers/pci/pci-rcar-gen2.c
-index b81eb3536896..12c31e74087f 100644
---- a/drivers/pci/pci-rcar-gen2.c
-+++ b/drivers/pci/pci-rcar-gen2.c
-@@ -5,7 +5,7 @@
+ #include <asm/global_data.h>
+@@ -12,6 +11,7 @@
+ #include <asm/arch/cpu.h>
+ #include <asm/arch/soc.h>
+ #include <linux/delay.h>
++#include <linux/errno.h>
+ #include <linux/printk.h>
+ 
+ #include "comphy_core.h"
+diff --git a/drivers/phy/marvell/comphy_mux.c b/drivers/phy/marvell/comphy_mux.c
+index 10981d25ec95..a8aa37fc46f3 100644
+--- a/drivers/phy/marvell/comphy_mux.c
++++ b/drivers/phy/marvell/comphy_mux.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2015-2016 Marvell International Ltd.
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <asm/io.h>
+ 
+diff --git a/drivers/phy/meson-axg-mipi-dphy.c b/drivers/phy/meson-axg-mipi-dphy.c
+index faa1d9d6d378..3f89de19970b 100644
+--- a/drivers/phy/meson-axg-mipi-dphy.c
++++ b/drivers/phy/meson-axg-mipi-dphy.c
+@@ -7,7 +7,6 @@
+  * Author: Neil Armstrong <narmstrong@baylibre.com>
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <asm/io.h>
+diff --git a/drivers/phy/meson-axg-mipi-pcie-analog.c b/drivers/phy/meson-axg-mipi-pcie-analog.c
+index 236ea1ce5ca7..731917cef434 100644
+--- a/drivers/phy/meson-axg-mipi-pcie-analog.c
++++ b/drivers/phy/meson-axg-mipi-pcie-analog.c
+@@ -7,7 +7,6 @@
+  * Author: Neil Armstrong <narmstrong@baylibre.com>
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <asm/io.h>
+diff --git a/drivers/phy/meson-g12a-usb2.c b/drivers/phy/meson-g12a-usb2.c
+index 3958d2404b85..8cded12438b9 100644
+--- a/drivers/phy/meson-g12a-usb2.c
++++ b/drivers/phy/meson-g12a-usb2.c
+@@ -7,7 +7,6 @@
+  * Author: Neil Armstrong <narmstron@baylibre.com>
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <asm/io.h>
+diff --git a/drivers/phy/meson-g12a-usb3-pcie.c b/drivers/phy/meson-g12a-usb3-pcie.c
+index 1eaff410efa4..4d183867c3a0 100644
+--- a/drivers/phy/meson-g12a-usb3-pcie.c
++++ b/drivers/phy/meson-g12a-usb3-pcie.c
+@@ -7,7 +7,6 @@
+  * Author: Neil Armstrong <narmstron@baylibre.com>
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <malloc.h>
+diff --git a/drivers/phy/meson-gxbb-usb2.c b/drivers/phy/meson-gxbb-usb2.c
+index 725b056a71a7..4c88ccf39276 100644
+--- a/drivers/phy/meson-gxbb-usb2.c
++++ b/drivers/phy/meson-gxbb-usb2.c
+@@ -8,7 +8,6 @@
+  * Author: Beniamino Galvani <b.galvani@gmail.com>
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+diff --git a/drivers/phy/meson-gxl-usb2.c b/drivers/phy/meson-gxl-usb2.c
+index d633effa4042..92c285103c4a 100644
+--- a/drivers/phy/meson-gxl-usb2.c
++++ b/drivers/phy/meson-gxl-usb2.c
+@@ -7,7 +7,6 @@
+  * Author: Neil Armstrong <narmstron@baylibre.com>
+  */
+ 
+-#include <common.h>
+ #include <malloc.h>
+ #include <asm/io.h>
+ #include <bitfield.h>
+diff --git a/drivers/phy/mt76x8-usb-phy.c b/drivers/phy/mt76x8-usb-phy.c
+index 4069208b6790..99f8a221f5a1 100644
+--- a/drivers/phy/mt76x8-usb-phy.c
++++ b/drivers/phy/mt76x8-usb-phy.c
+@@ -7,7 +7,6 @@
+  */
+ 
+ #include <clk.h>
+-#include <common.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+ #include <log.h>
+diff --git a/drivers/phy/nop-phy.c b/drivers/phy/nop-phy.c
+index c53e3216d0fd..286171cba76a 100644
+--- a/drivers/phy/nop-phy.c
++++ b/drivers/phy/nop-phy.c
+@@ -5,7 +5,6 @@
+  */
+ 
+ #include <clk.h>
+-#include <common.h>
+ #include <dm.h>
+ #include <dm/device.h>
+ #include <dm/device_compat.h>
+diff --git a/drivers/phy/omap-usb2-phy.c b/drivers/phy/omap-usb2-phy.c
+index d3d38062ecf7..2be0178882a4 100644
+--- a/drivers/phy/omap-usb2-phy.c
++++ b/drivers/phy/omap-usb2-phy.c
+@@ -6,7 +6,6 @@
+  * Written by Jean-Jacques Hiblot <jjhiblot@ti.com>
+  */
+ 
+-#include <common.h>
+ #include <asm/global_data.h>
+ #include <asm/io.h>
+ #include <dm.h>
+diff --git a/drivers/phy/phy-ab8500-usb.c b/drivers/phy/phy-ab8500-usb.c
+index 3d3d48c9733a..5de7b6f86cca 100644
+--- a/drivers/phy/phy-ab8500-usb.c
++++ b/drivers/phy/phy-ab8500-usb.c
+@@ -1,7 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ /* Copyright (C) 2019 Stephan Gerhold */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/phy/phy-apple-atc.c b/drivers/phy/phy-apple-atc.c
+index 15c5b8a1c2d0..78eedf676b09 100644
+--- a/drivers/phy/phy-apple-atc.c
++++ b/drivers/phy/phy-apple-atc.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2022 Mark Kettenis <kettenis@openbsd.org>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <dm/device-internal.h>
+ #include <generic-phy.h>
+diff --git a/drivers/phy/phy-bcm-sr-pcie.c b/drivers/phy/phy-bcm-sr-pcie.c
+index cf33bab37072..97859a0cb87e 100644
+--- a/drivers/phy/phy-bcm-sr-pcie.c
++++ b/drivers/phy/phy-bcm-sr-pcie.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2019 Broadcom
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+ #include <asm/io.h>
+diff --git a/drivers/phy/phy-core-mipi-dphy.c b/drivers/phy/phy-core-mipi-dphy.c
+index bb61816add27..8fb985a1e682 100644
+--- a/drivers/phy/phy-core-mipi-dphy.c
++++ b/drivers/phy/phy-core-mipi-dphy.c
+@@ -4,8 +4,8 @@
+  * Copyright (C) 2018 Cadence Design Systems Inc.
+  */
+ 
+-#include <common.h>
+ #include <div64.h>
++#include <linux/kernel.h>
+ #include <linux/time.h>
+ 
+ #include <phy-mipi-dphy.h>
+diff --git a/drivers/phy/phy-da8xx-usb.c b/drivers/phy/phy-da8xx-usb.c
+index d025188eae98..cf26aaaa3d82 100644
+--- a/drivers/phy/phy-da8xx-usb.c
++++ b/drivers/phy/phy-da8xx-usb.c
+@@ -6,9 +6,9 @@
+  * DT support added by: Adam Ford <aford173@gmail.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
++#include <time.h>
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
+ #include <asm/arch/hardware.h>
+diff --git a/drivers/phy/phy-imx8mq-usb.c b/drivers/phy/phy-imx8mq-usb.c
+index e5e96e77a681..75763046adc1 100644
+--- a/drivers/phy/phy-imx8mq-usb.c
++++ b/drivers/phy/phy-imx8mq-usb.c
+@@ -4,7 +4,6 @@
+  *
+  */
+ 
+-#include <common.h>
+ #include <asm/io.h>
+ #include <dm.h>
+ #include <errno.h>
+diff --git a/drivers/phy/phy-mtk-tphy.c b/drivers/phy/phy-mtk-tphy.c
+index ea9edf212c6f..6f9ac1528e88 100644
+--- a/drivers/phy/phy-mtk-tphy.c
++++ b/drivers/phy/phy-mtk-tphy.c
+@@ -5,7 +5,6 @@
+  *	   Ryder Lee <ryder.lee@mediatek.com>
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+diff --git a/drivers/phy/phy-npcm-usb.c b/drivers/phy/phy-npcm-usb.c
+index 24eba6655435..028fedf92dc3 100644
+--- a/drivers/phy/phy-npcm-usb.c
++++ b/drivers/phy/phy-npcm-usb.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2021 Nuvoton Technology Corp.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+ #include <regmap.h>
+diff --git a/drivers/phy/phy-rcar-gen2.c b/drivers/phy/phy-rcar-gen2.c
+index e528c4ec5793..f9428c7ad122 100644
+--- a/drivers/phy/phy-rcar-gen2.c
++++ b/drivers/phy/phy-rcar-gen2.c
+@@ -5,7 +5,6 @@
   * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
   */
  
 -#include <common.h>
-+#include <config.h>
- #include <asm/io.h>
  #include <clk.h>
+ #include <div64.h>
  #include <dm.h>
-diff --git a/drivers/pci/pci-rcar-gen3.c b/drivers/pci/pci-rcar-gen3.c
-index 1252ef74c581..76878246f1e0 100644
---- a/drivers/pci/pci-rcar-gen3.c
-+++ b/drivers/pci/pci-rcar-gen3.c
-@@ -15,7 +15,6 @@
-  * Author: Phil Edworthy <phil.edworthy@renesas.com>
+diff --git a/drivers/phy/phy-rcar-gen3.c b/drivers/phy/phy-rcar-gen3.c
+index 03c747b373b1..7c292cae0e2f 100644
+--- a/drivers/phy/phy-rcar-gen3.c
++++ b/drivers/phy/phy-rcar-gen3.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2018 Marek Vasut <marek.vasut@gmail.com>
   */
  
 -#include <common.h>
- #include <asm/io.h>
  #include <clk.h>
+ #include <div64.h>
  #include <dm.h>
-diff --git a/drivers/pci/pci-uclass.c b/drivers/pci/pci-uclass.c
-index 1a48256de036..6571e653049d 100644
---- a/drivers/pci/pci-uclass.c
-+++ b/drivers/pci/pci-uclass.c
+diff --git a/drivers/phy/phy-stm32-usbphyc.c b/drivers/phy/phy-stm32-usbphyc.c
+index 000e495dbd4e..8d643b762f90 100644
+--- a/drivers/phy/phy-stm32-usbphyc.c
++++ b/drivers/phy/phy-stm32-usbphyc.c
+@@ -5,7 +5,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_PHY
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <clk-uclass.h>
+ #include <div64.h>
+diff --git a/drivers/phy/phy-ti-am654.c b/drivers/phy/phy-ti-am654.c
+index 70a746d2c92d..c3d9972397aa 100644
+--- a/drivers/phy/phy-ti-am654.c
++++ b/drivers/phy/phy-ti-am654.c
+@@ -6,7 +6,6 @@
+  * Author: Kishon Vijay Abraham I <kishon@ti.com>
+  */
+ 
+-#include <common.h>
+ #include <clk-uclass.h>
+ #include <dm.h>
+ #include <log.h>
+diff --git a/drivers/phy/phy-uclass.c b/drivers/phy/phy-uclass.c
+index 0dcfe258bc44..acdcda15b5b8 100644
+--- a/drivers/phy/phy-uclass.c
++++ b/drivers/phy/phy-uclass.c
 @@ -6,7 +6,6 @@
  
- #define LOG_CATEGORY UCLASS_PCI
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <init.h>
-diff --git a/drivers/pci/pci_auto.c b/drivers/pci/pci_auto.c
-index 01230360bad2..90f818864457 100644
---- a/drivers/pci/pci_auto.c
-+++ b/drivers/pci/pci_auto.c
-@@ -8,7 +8,7 @@
-  * Copyright (c) 2021  Maciej W. Rozycki <macro@orcam.me.uk>
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <dm.h>
- #include <errno.h>
- #include <log.h>
-diff --git a/drivers/pci/pci_auto_common.c b/drivers/pci/pci_auto_common.c
-index 2f4aff01049a..cfa818ed8218 100644
---- a/drivers/pci/pci_auto_common.c
-+++ b/drivers/pci/pci_auto_common.c
-@@ -11,7 +11,6 @@
-  * Written by Simon Glass <sjg@chromium.org>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <log.h>
-diff --git a/drivers/pci/pci_common.c b/drivers/pci/pci_common.c
-index a18251297fd0..a57cf11cc537 100644
---- a/drivers/pci/pci_common.c
-+++ b/drivers/pci/pci_common.c
-@@ -9,7 +9,6 @@
-  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <env.h>
- #include <errno.h>
-diff --git a/drivers/pci/pci_compat.c b/drivers/pci/pci_compat.c
-index 9dddca8efe07..8233925e525e 100644
---- a/drivers/pci/pci_compat.c
-+++ b/drivers/pci/pci_compat.c
-@@ -4,7 +4,6 @@
-  *
-  * Copyright (C) 2014 Google, Inc
-  */
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <log.h>
-diff --git a/drivers/pci/pci_ftpci100.c b/drivers/pci/pci_ftpci100.c
-index a1775445005a..43275b3d6a22 100644
---- a/drivers/pci/pci_ftpci100.c
-+++ b/drivers/pci/pci_ftpci100.c
-@@ -1,6 +1,5 @@
- // SPDX-License-Identifier: GPL-2.0-or-later
- 
--#include <common.h>
- #include <pci.h>
- #include <dm.h>
- #include <asm/io.h>
-diff --git a/drivers/pci/pci_mpc85xx.c b/drivers/pci/pci_mpc85xx.c
-index 249cfe66466b..c07feba79768 100644
---- a/drivers/pci/pci_mpc85xx.c
-+++ b/drivers/pci/pci_mpc85xx.c
-@@ -4,7 +4,6 @@
-  * Heiko Schocher, DENX Software Engineering, hs@denx.de.
-  *
-  */
--#include <common.h>
- #include <asm/bitops.h>
- #include <pci.h>
- #include <dm.h>
-diff --git a/drivers/pci/pci_mvebu.c b/drivers/pci/pci_mvebu.c
-index 83559550e6fb..77815513b768 100644
---- a/drivers/pci/pci_mvebu.c
-+++ b/drivers/pci/pci_mvebu.c
-@@ -10,7 +10,6 @@
-  * Pali Rohár <pali@kernel.org>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <malloc.h>
-diff --git a/drivers/pci/pci_rom.c b/drivers/pci/pci_rom.c
-index 438583aa0179..78e5de937cdf 100644
---- a/drivers/pci/pci_rom.c
-+++ b/drivers/pci/pci_rom.c
-@@ -24,7 +24,6 @@
- 
- #define LOG_CATEGORY UCLASS_PCI
- 
--#include <common.h>
- #include <bios_emul.h>
- #include <bloblist.h>
- #include <bootstage.h>
-@@ -36,6 +35,7 @@
- #include <pci.h>
- #include <pci_rom.h>
- #include <spl.h>
-+#include <time.h>
- #include <vesa.h>
- #include <video.h>
- #include <acpi/acpi_s3.h>
-diff --git a/drivers/pci/pci_sandbox.c b/drivers/pci/pci_sandbox.c
-index ca44d002371e..fed0850458d9 100644
---- a/drivers/pci/pci_sandbox.c
-+++ b/drivers/pci/pci_sandbox.c
-@@ -4,7 +4,6 @@
-  * Written by Simon Glass <sjg@chromium.org>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <fdtdec.h>
- #include <log.h>
-diff --git a/drivers/pci/pci_sh7751.c b/drivers/pci/pci_sh7751.c
-index c1be56ce7a08..3cd01e9b94a2 100644
---- a/drivers/pci/pci_sh7751.c
-+++ b/drivers/pci/pci_sh7751.c
-@@ -5,7 +5,7 @@
-  * (C) 2007,2008 Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <dm.h>
- #include <pci.h>
- #include <asm/processor.h>
-diff --git a/drivers/pci/pci_tegra.c b/drivers/pci/pci_tegra.c
-index d6374a58e330..bb8832c6ab96 100644
---- a/drivers/pci/pci_tegra.c
-+++ b/drivers/pci/pci_tegra.c
-@@ -11,7 +11,6 @@
- 
- #define pr_fmt(fmt) "tegra-pcie: " fmt
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/pci/pci_x86.c b/drivers/pci/pci_x86.c
-index 8d036930e73b..ab76166451c7 100644
---- a/drivers/pci/pci_x86.c
-+++ b/drivers/pci/pci_x86.c
-@@ -3,7 +3,6 @@
-  * Copyright (c) 2015 Google, Inc
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <pci.h>
- #include <asm/pci.h>
-diff --git a/drivers/pci/pcie_apple.c b/drivers/pci/pcie_apple.c
-index 21bafba3b0ee..6a8e715d4b6e 100644
---- a/drivers/pci/pcie_apple.c
-+++ b/drivers/pci/pcie_apple.c
-@@ -16,7 +16,6 @@
-  * Author: Marc Zyngier <maz@kernel.org>
-  */
+ #define LOG_CATEGORY UCLASS_PHY
  
 -#include <common.h>
  #include <dm.h>
  #include <dm/device_compat.h>
  #include <dm/devres.h>
-diff --git a/drivers/pci/pcie_brcmstb.c b/drivers/pci/pcie_brcmstb.c
-index cd45f0bee9b7..f978c64365c3 100644
---- a/drivers/pci/pcie_brcmstb.c
-+++ b/drivers/pci/pcie_brcmstb.c
-@@ -12,7 +12,6 @@
-  * Copyright (C) 2020 Nicolas Saenz Julienne <nsaenzjulienne@suse.de>
-  */
- 
--#include <common.h>
- #include <errno.h>
- #include <dm.h>
- #include <dm/ofnode.h>
-diff --git a/drivers/pci/pcie_dw_common.c b/drivers/pci/pcie_dw_common.c
-index 74fb6df412c7..0673e516c6fe 100644
---- a/drivers/pci/pcie_dw_common.c
-+++ b/drivers/pci/pcie_dw_common.c
-@@ -8,7 +8,6 @@
-  * Copyright (C) 2018 Texas Instruments, Inc
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <pci.h>
-diff --git a/drivers/pci/pcie_dw_meson.c b/drivers/pci/pcie_dw_meson.c
-index f953797908b8..bb78e7874b14 100644
---- a/drivers/pci/pcie_dw_meson.c
-+++ b/drivers/pci/pcie_dw_meson.c
+diff --git a/drivers/phy/phy-zynqmp.c b/drivers/phy/phy-zynqmp.c
+index d1288bb17f3c..7049e740d569 100644
+--- a/drivers/phy/phy-zynqmp.c
++++ b/drivers/phy/phy-zynqmp.c
 @@ -9,7 +9,6 @@
-  * Copyright (c) 2021 Rockchip, Inc.
+  * Author: Laurent Pinchart <laurent.pinchart@ideasonboard.com>
   */
  
 -#include <common.h>
- #include <clk.h>
+ #include <clk-uclass.h>
  #include <dm.h>
  #include <generic-phy.h>
-diff --git a/drivers/pci/pcie_dw_mvebu.c b/drivers/pci/pcie_dw_mvebu.c
-index c41f3f153044..43b919175c92 100644
---- a/drivers/pci/pcie_dw_mvebu.c
-+++ b/drivers/pci/pcie_dw_mvebu.c
-@@ -10,10 +10,11 @@
-  *   - drivers/pci/pcie_xilinx.c
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <dm.h>
- #include <log.h>
- #include <pci.h>
-+#include <time.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm-generic/gpio.h>
-diff --git a/drivers/pci/pcie_dw_rockchip.c b/drivers/pci/pcie_dw_rockchip.c
-index bc4635f67136..1bad51fb3eb5 100644
---- a/drivers/pci/pcie_dw_rockchip.c
-+++ b/drivers/pci/pcie_dw_rockchip.c
-@@ -5,7 +5,6 @@
-  * Copyright (c) 2021 Rockchip, Inc.
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <generic-phy.h>
-diff --git a/drivers/pci/pcie_dw_sifive.c b/drivers/pci/pcie_dw_sifive.c
-index fac3f1823724..6285edf4b037 100644
---- a/drivers/pci/pcie_dw_sifive.c
-+++ b/drivers/pci/pcie_dw_sifive.c
-@@ -14,7 +14,6 @@
- #include <asm/io.h>
- #include <asm-generic/gpio.h>
- #include <clk.h>
--#include <common.h>
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <generic-phy.h>
-diff --git a/drivers/pci/pcie_dw_ti.c b/drivers/pci/pcie_dw_ti.c
-index 4195a02de390..78a5d0358651 100644
---- a/drivers/pci/pcie_dw_ti.c
-+++ b/drivers/pci/pcie_dw_ti.c
+diff --git a/drivers/phy/qcom/msm8916-usbh-phy.c b/drivers/phy/qcom/msm8916-usbh-phy.c
+index f52046f7cb02..4b435aa2a6eb 100644
+--- a/drivers/phy/qcom/msm8916-usbh-phy.c
++++ b/drivers/phy/qcom/msm8916-usbh-phy.c
 @@ -3,7 +3,6 @@
-  * Copyright (C) 2018 Texas Instruments, Inc
+  * Copyright (C) 2018 Ramon Fried <ramon.fried@gmail.com>
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <log.h>
- #include <pci.h>
-diff --git a/drivers/pci/pcie_ecam_generic.c b/drivers/pci/pcie_ecam_generic.c
-index f5bc6e3d92d6..3cb2bbbccb44 100644
---- a/drivers/pci/pcie_ecam_generic.c
-+++ b/drivers/pci/pcie_ecam_generic.c
-@@ -7,7 +7,6 @@
-  * Copyright (C) 2016 Imagination Technologies
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <pci.h>
- #include <linux/ioport.h>
-diff --git a/drivers/pci/pcie_ecam_synquacer.c b/drivers/pci/pcie_ecam_synquacer.c
-index e3e22891088e..fc855dfca4eb 100644
---- a/drivers/pci/pcie_ecam_synquacer.c
-+++ b/drivers/pci/pcie_ecam_synquacer.c
-@@ -8,7 +8,6 @@
-  * Copyright (C) 2021 Linaro Ltd.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <pci.h>
- #include <log.h>
-diff --git a/drivers/pci/pcie_fsl.c b/drivers/pci/pcie_fsl.c
-index ec917ee7d5b8..18af23c9504e 100644
---- a/drivers/pci/pcie_fsl.c
-+++ b/drivers/pci/pcie_fsl.c
-@@ -6,7 +6,7 @@
-  * Author: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <dm.h>
- #include <malloc.h>
- #include <mapmem.h>
-diff --git a/drivers/pci/pcie_fsl_fixup.c b/drivers/pci/pcie_fsl_fixup.c
-index f4e227895d17..9187e7af7461 100644
---- a/drivers/pci/pcie_fsl_fixup.c
-+++ b/drivers/pci/pcie_fsl_fixup.c
-@@ -6,7 +6,6 @@
-  * Author: Hou Zhiqiang <Zhiqiang.Hou@nxp.com>
-  */
- 
--#include <common.h>
- #ifdef CONFIG_OF_BOARD_SETUP
- #include <dm.h>
- #include <fdt_support.h>
-diff --git a/drivers/pci/pcie_imx.c b/drivers/pci/pcie_imx.c
-index 78f2c7d6bcdf..11c4ccbfc555 100644
---- a/drivers/pci/pcie_imx.c
-+++ b/drivers/pci/pcie_imx.c
-@@ -17,7 +17,6 @@
-  * those too in order to have a single modern PCIe iMX driver.
-  */
- 
--#include <common.h>
- #include <init.h>
- #include <log.h>
- #include <malloc.h>
-diff --git a/drivers/pci/pcie_intel_fpga.c b/drivers/pci/pcie_intel_fpga.c
-index 60195cfe1b6e..959fd3690869 100644
---- a/drivers/pci/pcie_intel_fpga.c
-+++ b/drivers/pci/pcie_intel_fpga.c
-@@ -6,7 +6,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <pci.h>
- #include <asm/global_data.h>
-diff --git a/drivers/pci/pcie_iproc.c b/drivers/pci/pcie_iproc.c
-index d6d3a9e20250..360ef1b011f2 100644
---- a/drivers/pci/pcie_iproc.c
-+++ b/drivers/pci/pcie_iproc.c
-@@ -4,7 +4,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
  #include <generic-phy.h>
-diff --git a/drivers/pci/pcie_layerscape.c b/drivers/pci/pcie_layerscape.c
-index 3c7c4ca18e8b..1be33095b9ce 100644
---- a/drivers/pci/pcie_layerscape.c
-+++ b/drivers/pci/pcie_layerscape.c
+ #include <linux/bitops.h>
+diff --git a/drivers/phy/qcom/phy-qcom-ipq4019-usb.c b/drivers/phy/qcom/phy-qcom-ipq4019-usb.c
+index 5808489249f5..3b647324e021 100644
+--- a/drivers/phy/qcom/phy-qcom-ipq4019-usb.c
++++ b/drivers/phy/qcom/phy-qcom-ipq4019-usb.c
+@@ -8,7 +8,6 @@
+  */
+ 
+ #include <clk.h>
+-#include <common.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+ #include <log.h>
+diff --git a/drivers/phy/qcom/phy-qcom-usb-hs-28nm.c b/drivers/phy/qcom/phy-qcom-usb-hs-28nm.c
+index 05a9a2cf1d7c..c344809a6086 100644
+--- a/drivers/phy/qcom/phy-qcom-usb-hs-28nm.c
++++ b/drivers/phy/qcom/phy-qcom-usb-hs-28nm.c
 @@ -5,7 +5,6 @@
-  * Layerscape PCIe driver
+  * Based on Linux driver
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+ #include <reset.h>
+diff --git a/drivers/phy/qcom/phy-qcom-usb-ss.c b/drivers/phy/qcom/phy-qcom-usb-ss.c
+index 1b03a3c43dc8..270d09d883c4 100644
+--- a/drivers/phy/qcom/phy-qcom-usb-ss.c
++++ b/drivers/phy/qcom/phy-qcom-usb-ss.c
+@@ -5,7 +5,6 @@
+  * Based on Linux driver
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/phy/renesas/r8a779f0-ether-serdes.c b/drivers/phy/renesas/r8a779f0-ether-serdes.c
+index bd1fdd3a667d..40284ef2fd34 100644
+--- a/drivers/phy/renesas/r8a779f0-ether-serdes.c
++++ b/drivers/phy/renesas/r8a779f0-ether-serdes.c
+@@ -7,7 +7,6 @@
+ #include <asm/io.h>
+ #include <clk-uclass.h>
+ #include <clk.h>
+-#include <common.h>
+ #include <div64.h>
+ #include <dm.h>
+ #include <dm/device_compat.h>
+diff --git a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+index 9ca66bf8db92..3ad339bccc1d 100644
+--- a/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
++++ b/drivers/phy/rockchip/phy-rockchip-naneng-combphy.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2021 Rockchip Electronics Co., Ltd.
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <dm/lists.h>
+diff --git a/drivers/phy/rockchip/phy-rockchip-pcie.c b/drivers/phy/rockchip/phy-rockchip-pcie.c
+index 44ca4bc7919e..660037034ec0 100644
+--- a/drivers/phy/rockchip/phy-rockchip-pcie.c
++++ b/drivers/phy/rockchip/phy-rockchip-pcie.c
+@@ -7,7 +7,6 @@
+  * Copyright (C) 2016 ROCKCHIP, Inc.
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <asm/global_data.h>
+diff --git a/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c b/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c
+index a4392daf4c92..2737bd81dd96 100644
+--- a/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c
++++ b/drivers/phy/rockchip/phy-rockchip-snps-pcie3.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2021 Rockchip Electronics Co., Ltd.
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+diff --git a/drivers/phy/rockchip/phy-rockchip-typec.c b/drivers/phy/rockchip/phy-rockchip-typec.c
+index 47c69dd6c453..c7459dbc5fc6 100644
+--- a/drivers/phy/rockchip/phy-rockchip-typec.c
++++ b/drivers/phy/rockchip/phy-rockchip-typec.c
+@@ -8,7 +8,6 @@
+  *         Kever Yang <kever.yang@rock-chips.com>
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <asm/global_data.h>
+diff --git a/drivers/phy/rockchip/phy-rockchip-usbdp.c b/drivers/phy/rockchip/phy-rockchip-usbdp.c
+index baf92529348c..5bcc76613d14 100644
+--- a/drivers/phy/rockchip/phy-rockchip-usbdp.c
++++ b/drivers/phy/rockchip/phy-rockchip-usbdp.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2021 Rockchip Electronics Co., Ltd
+  */
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <dm/device_compat.h>
+diff --git a/drivers/phy/sandbox-phy.c b/drivers/phy/sandbox-phy.c
+index 7e123da25fb4..b159147a765b 100644
+--- a/drivers/phy/sandbox-phy.c
++++ b/drivers/phy/sandbox-phy.c
+@@ -4,7 +4,6 @@
+  * Written by Jean-Jacques Hiblot  <jjhiblot@ti.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+ 
+diff --git a/drivers/phy/socionext/phy-uniphier-pcie.c b/drivers/phy/socionext/phy-uniphier-pcie.c
+index d352c4ca3a9c..91208dfe1200 100644
+--- a/drivers/phy/socionext/phy-uniphier-pcie.c
++++ b/drivers/phy/socionext/phy-uniphier-pcie.c
+@@ -4,7 +4,6 @@
+  * Copyright 2019-2021 Socionext, Inc.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+ #include <linux/bitops.h>
+diff --git a/drivers/phy/socionext/phy-uniphier-usb3.c b/drivers/phy/socionext/phy-uniphier-usb3.c
+index 1d65b0b08f76..1d65c1f7da52 100644
+--- a/drivers/phy/socionext/phy-uniphier-usb3.c
++++ b/drivers/phy/socionext/phy-uniphier-usb3.c
+@@ -4,7 +4,6 @@
+  * Copyright 2019-2023 Socionext, Inc.
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <generic-phy.h>
+ 
+diff --git a/drivers/phy/sti_usb_phy.c b/drivers/phy/sti_usb_phy.c
+index 9e5ac9bfde67..2447e89f50df 100644
+--- a/drivers/phy/sti_usb_phy.c
++++ b/drivers/phy/sti_usb_phy.c
+@@ -4,7 +4,6 @@
+  * Author(s): Patrice Chotard, <patrice.chotard@foss.st.com> for STMicroelectronics.
   */
  
 -#include <common.h>
  #include <log.h>
  #include <asm/global_data.h>
  #include <asm/io.h>
-diff --git a/drivers/pci/pcie_layerscape_ep.c b/drivers/pci/pcie_layerscape_ep.c
-index 83f7eebd6277..3520488b3453 100644
---- a/drivers/pci/pcie_layerscape_ep.c
-+++ b/drivers/pci/pcie_layerscape_ep.c
-@@ -4,7 +4,7 @@
-  * Layerscape PCIe EP driver
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <asm/arch/fsl_serdes.h>
- #include <dm.h>
- #include <asm/global_data.h>
-diff --git a/drivers/pci/pcie_layerscape_fixup.c b/drivers/pci/pcie_layerscape_fixup.c
-index c5198353957b..ec4a7e7b6574 100644
---- a/drivers/pci/pcie_layerscape_fixup.c
-+++ b/drivers/pci/pcie_layerscape_fixup.c
-@@ -5,7 +5,6 @@
-  * Layerscape PCIe driver
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <init.h>
- #include <log.h>
-diff --git a/drivers/pci/pcie_layerscape_fixup_common.c b/drivers/pci/pcie_layerscape_fixup_common.c
-index 095874a92763..f37e37f6b153 100644
---- a/drivers/pci/pcie_layerscape_fixup_common.c
-+++ b/drivers/pci/pcie_layerscape_fixup_common.c
-@@ -7,10 +7,10 @@
-  *
-  */
- 
--#include <common.h>
- #include <init.h>
- #include <asm/arch/clock.h>
- #include <asm/arch/soc.h>
-+#include <linux/errno.h>
- #include <linux/libfdt.h>
- #include <fdt_support.h>
- #include "pcie_layerscape_fixup_common.h"
-diff --git a/drivers/pci/pcie_layerscape_gen4.c b/drivers/pci/pcie_layerscape_gen4.c
-index 021c975869fd..57dc91f2faef 100644
---- a/drivers/pci/pcie_layerscape_gen4.c
-+++ b/drivers/pci/pcie_layerscape_gen4.c
-@@ -6,7 +6,7 @@
-  * Author: Hou Zhiqiang <Minder.Hou@gmail.com>
-  */
- 
--#include <common.h>
-+#include <config.h>
- #include <log.h>
- #include <asm/arch/fsl_serdes.h>
- #include <pci.h>
-diff --git a/drivers/pci/pcie_layerscape_gen4_fixup.c b/drivers/pci/pcie_layerscape_gen4_fixup.c
-index b2a45bf105c8..60c4338bcdb5 100644
---- a/drivers/pci/pcie_layerscape_gen4_fixup.c
-+++ b/drivers/pci/pcie_layerscape_gen4_fixup.c
-@@ -7,7 +7,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <log.h>
- #include <pci.h>
-diff --git a/drivers/pci/pcie_layerscape_rc.c b/drivers/pci/pcie_layerscape_rc.c
-index 6a5bf88da234..e7913d43a8be 100644
---- a/drivers/pci/pcie_layerscape_rc.c
-+++ b/drivers/pci/pcie_layerscape_rc.c
+diff --git a/drivers/phy/ti-pipe3-phy.c b/drivers/phy/ti-pipe3-phy.c
+index 29a35ae5ffb9..62f6cc2bfbfd 100644
+--- a/drivers/phy/ti-pipe3-phy.c
++++ b/drivers/phy/ti-pipe3-phy.c
 @@ -4,7 +4,6 @@
-  * Layerscape PCIe driver
+  * Written by Jean-Jacques Hiblot  <jjhiblot@ti.com>
   */
  
 -#include <common.h>
- #include <asm/arch/fsl_serdes.h>
- #include <pci.h>
- #include <asm/global_data.h>
-diff --git a/drivers/pci/pcie_mediatek.c b/drivers/pci/pcie_mediatek.c
-index f0f34b5d1197..04d8cc29afd5 100644
---- a/drivers/pci/pcie_mediatek.c
-+++ b/drivers/pci/pcie_mediatek.c
-@@ -7,7 +7,6 @@
-  *	   Honghui Zhang <honghui.zhang@mediatek.com>
-  */
- 
--#include <common.h>
- #include <clk.h>
  #include <dm.h>
+ #include <dm/device.h>
  #include <generic-phy.h>
-diff --git a/drivers/pci/pcie_phytium.c b/drivers/pci/pcie_phytium.c
-index 3bd1f5cd6d91..94de89bcad7b 100644
---- a/drivers/pci/pcie_phytium.c
-+++ b/drivers/pci/pcie_phytium.c
-@@ -7,7 +7,6 @@
-  * Copyright (C) 2019
+diff --git a/drivers/phy/ti/phy-j721e-wiz.c b/drivers/phy/ti/phy-j721e-wiz.c
+index daf62f5deda0..c69a342e2b49 100644
+--- a/drivers/phy/ti/phy-j721e-wiz.c
++++ b/drivers/phy/ti/phy-j721e-wiz.c
+@@ -4,7 +4,6 @@
+  * Jean-Jacques Hiblot <jjhiblot@ti.com>
   */
  
 -#include <common.h>
- #include <dm.h>
- #include <pci.h>
- #include <asm/global_data.h>
-diff --git a/drivers/pci/pcie_plda_common.c b/drivers/pci/pcie_plda_common.c
-index cd74bb471163..622a5cee1099 100644
---- a/drivers/pci/pcie_plda_common.c
-+++ b/drivers/pci/pcie_plda_common.c
-@@ -6,7 +6,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <pci.h>
-diff --git a/drivers/pci/pcie_rockchip.c b/drivers/pci/pcie_rockchip.c
-index 624841e9d8b8..19f9e58a640d 100644
---- a/drivers/pci/pcie_rockchip.c
-+++ b/drivers/pci/pcie_rockchip.c
-@@ -11,7 +11,6 @@
-  * Bits taken from Linux Rockchip PCIe host controller.
-  */
- 
--#include <common.h>
+ #include <clk-uclass.h>
  #include <dm.h>
  #include <dm/device_compat.h>
- #include <generic-phy.h>
-diff --git a/drivers/pci/pcie_starfive_jh7110.c b/drivers/pci/pcie_starfive_jh7110.c
-index 903a544d37f6..569fbfd35c81 100644
---- a/drivers/pci/pcie_starfive_jh7110.c
-+++ b/drivers/pci/pcie_starfive_jh7110.c
-@@ -7,7 +7,6 @@
-  *
-  */
- 
--#include <common.h>
- #include <clk.h>
- #include <dm.h>
- #include <pci.h>
-diff --git a/drivers/pci/pcie_uniphier.c b/drivers/pci/pcie_uniphier.c
-index f2edea9899a4..d1170b576bcd 100644
---- a/drivers/pci/pcie_uniphier.c
-+++ b/drivers/pci/pcie_uniphier.c
-@@ -5,7 +5,6 @@
-  */
- 
- #include <clk.h>
--#include <common.h>
- #include <dm.h>
- #include <dm/device_compat.h>
- #include <generic-phy.h>
-diff --git a/drivers/pci/pcie_xilinx.c b/drivers/pci/pcie_xilinx.c
-index 3db460b5f936..a674ab04beee 100644
---- a/drivers/pci/pcie_xilinx.c
-+++ b/drivers/pci/pcie_xilinx.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2016 Imagination Technologies
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <pci.h>
- #include <linux/bitops.h>
 -- 
 2.34.1
 
