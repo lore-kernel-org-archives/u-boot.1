@@ -4,73 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE3E9C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:40:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5187C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:40:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E14288CBE;
-	Thu,  2 May 2024 03:33:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ADB8788CD0;
+	Thu,  2 May 2024 03:33:51 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tZR9E4eR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RQ7gDLlu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 479FD88CC0; Thu,  2 May 2024 03:33:49 +0200 (CEST)
-Received: from mail-qt1-x834.google.com (mail-qt1-x834.google.com
- [IPv6:2607:f8b0:4864:20::834])
+ id E8C7688CA2; Thu,  2 May 2024 03:33:49 +0200 (CEST)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9470F88CBE
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:33:45 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 45AF688CC1
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:33:47 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x834.google.com with SMTP id
- d75a77b69052e-43ab2b2f11bso12485001cf.1
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:33:45 -0700 (PDT)
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-43692353718so48067701cf.0
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:33:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613624; x=1715218424; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613626; x=1715218426; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rKrNsogFInAjTfK+Y0J/3tTJOdF5LnuiSICyjf8gKLs=;
- b=tZR9E4eRxz/U4y/CCCz+xrIish+CogDRigiJywMWFkClQcLMAXZ0rpQIwwdgveFC+s
- Zkn88iWCSHJ2jelh+RdatIJ7ljuHmu3DRNXhuSQeXWPQZO+rKpVGLT+316ZKyjdFf06z
- bMWu1dtRnQENK9QaBQltNCKYc9s1Rzw3QWDjM=
+ bh=dnNuvpUxlgYlMb94jIYMWg3LneSZiMMn2nlUJn5/m40=;
+ b=RQ7gDLlucuykbOgVMGQpeJFJGxuBHy0kIuIjQhm8OsiwcgEsyl5bwNJlrcS8La1cWB
+ ZcnWfQGoRSTBIDx87Vo2HYg+/fJoKtrwqcYvKgNoJNhjz1nXVptUPB5+auZ+0rx02bB7
+ fhmQLlDnIgLyxxjUz0jBN/p40KlJ6A3OzPbvM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613624; x=1715218424;
+ d=1e100.net; s=20230601; t=1714613626; x=1715218426;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rKrNsogFInAjTfK+Y0J/3tTJOdF5LnuiSICyjf8gKLs=;
- b=TzcZ7xC4FedcbCaBnkQFW0V6CyXgDv8BPCqWjeBkoGdtdLmnx/U7P+rD3c2f103+om
- ewcb0wipCvmx0wL7YbjpTEYxJ/1W/exOPqeAAFHBF6bg8bjeVj1WIpnyC6Cl9NlSdQMF
- idQISVFAQq2ocMK9ROu6lkjvPFwbI/calubFuidiP8ZXg9WRyXw6lPU1Eamdu2/26Ul9
- CgdXt/YB2uwNdjG3C+rKNKmNEyrEWUn77eaap8O7Utyqnu+Js9yHrX0u8SkJ3p+PVqeq
- Kh1abN0smLLHZ6VidHu7/re75fnydu9J2M9jD6E7N6pfTd2oFZX/ty2MXNKAkjhQ9P0U
- 58Mw==
-X-Gm-Message-State: AOJu0YzNiFEb5zKAVu+aZMI9cwoRMlqeUseHybub6ckbR2Gym79ERth6
- UYQG9arYyeYWnALhlw7IFLkpEFXxp3P97PbJnj0Z89OxCqMpM93J6DLE7k9G8zNvz1bzk9+oxez
- ZMq03WP1B
-X-Google-Smtp-Source: AGHT+IG66YEWfdFa2YFgQPwGPVINMevxOjteOr+P7ziCGlZlJHdzYiP0TphBmyT2HOWGH2ucUWl4pQ==
-X-Received: by 2002:ac8:570b:0:b0:43a:f150:a4ac with SMTP id
- 11-20020ac8570b000000b0043af150a4acmr4321631qtw.48.1714613624337; 
- Wed, 01 May 2024 18:33:44 -0700 (PDT)
+ bh=dnNuvpUxlgYlMb94jIYMWg3LneSZiMMn2nlUJn5/m40=;
+ b=KFKIgrDVnj0IYmtASYpNarMGAbusyf52nBUkYRjZzfpGrmzqOYv3UBfdKoj+p95ACR
+ eiXztlBQB16ScyewphozrJxijqyh4w1RHCLOmufZQV7D/41KvMJIJCirz5uVhB/p+YEO
+ JGGfMzsbA+JEgXzidFF6fBRPcxgogw3T7TMpwlLLK75FtSVhjHuP9FUlrmOrBFuMwL+T
+ nKIYyTcb3m9hXFxfYxSOlXK4TCqtbjtT1cicjwvgbip/Iw91TelwQPrELrQekp7qGpka
+ NVOTl0SBQ4n6EedETas6n8d+Ocf0nDaG87UAJCIbyoaIN9DyQVsLXqIkyC1qbWdSKA4n
+ vveg==
+X-Gm-Message-State: AOJu0YwK2LoAm9Kb5iRe1f/tAHLSGRcMkph8W7zOS81tZ1E8F2nPmJGD
+ IJV57hQwM3qzmovZfskNnlQzvNGgAGOGOzTTFNgmfhkeINoCwxSFDYwSqFXMn4oT7elnOknt5X1
+ gAAW7Yhor
+X-Google-Smtp-Source: AGHT+IF7lOGkmTUX24RnKxThr5oAKsPd6ixbRxQ5cU+81nRqtRYhpZ138aPowKzK9mNeolbsNTpFLg==
+X-Received: by 2002:a05:622a:202:b0:43a:e2da:2b78 with SMTP id
+ b2-20020a05622a020200b0043ae2da2b78mr5086439qtx.29.1714613625628; 
+ Wed, 01 May 2024 18:33:45 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.33.43
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.33.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:33:44 -0700 (PDT)
+ Wed, 01 May 2024 18:33:45 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>, Michal Simek <michal.simek@amd.com>,
- Nishanth Menon <nm@ti.com>, Roger Quadros <rogerq@kernel.org>,
- Apurva Nandan <a-nandan@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Bryan Brattlof <bb@ti.com>
-Subject: [PATCH 63/81] soc: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:31:20 -0600
-Message-Id: <20240502013138.2383421-63-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: [PATCH 64/81] sound: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:31:21 -0600
+Message-Id: <20240502013138.2383421-64-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -99,132 +98,351 @@ Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>
-Cc: Michal Simek <michal.simek@amd.com>
-Cc: Nishanth Menon <nm@ti.com>
-Cc: Roger Quadros <rogerq@kernel.org>
-Cc: Apurva Nandan <a-nandan@ti.com>
-Cc: Hari Nagalla <hnagalla@ti.com>
-Cc: Bryan Brattlof <bb@ti.com>
+Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>
+Cc: Kever Yang <kever.yang@rock-chips.com>
+Cc: Thierry Reding <treding@nvidia.com>
+Cc: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/soc/soc-uclass.c            | 1 -
- drivers/soc/soc_sandbox.c           | 1 -
- drivers/soc/soc_ti_k3.c             | 1 -
- drivers/soc/soc_xilinx_versal.c     | 1 -
- drivers/soc/soc_xilinx_versal_net.c | 1 -
- drivers/soc/soc_xilinx_zynqmp.c     | 1 -
- drivers/soc/ti/k3-navss-ringacc.c   | 1 -
- drivers/soc/ti/keystone_serdes.c    | 1 -
- drivers/soc/ti/pruss.c              | 1 -
- 9 files changed, 9 deletions(-)
+ drivers/sound/broadwell_i2s.c   | 1 -
+ drivers/sound/broadwell_sound.c | 1 -
+ drivers/sound/codec-uclass.c    | 1 -
+ drivers/sound/da7219.c          | 1 -
+ drivers/sound/hda_codec.c       | 1 -
+ drivers/sound/i2s-uclass.c      | 1 -
+ drivers/sound/i8254_beep.c      | 1 -
+ drivers/sound/ivybridge_sound.c | 1 -
+ drivers/sound/max98088.c        | 1 -
+ drivers/sound/max98090.c        | 1 -
+ drivers/sound/max98095.c        | 1 -
+ drivers/sound/max98357a.c       | 1 -
+ drivers/sound/maxim_codec.c     | 1 -
+ drivers/sound/rockchip_i2s.c    | 1 -
+ drivers/sound/rockchip_sound.c  | 1 -
+ drivers/sound/rt5677.c          | 1 -
+ drivers/sound/samsung-i2s.c     | 2 +-
+ drivers/sound/samsung_sound.c   | 1 -
+ drivers/sound/sandbox.c         | 1 -
+ drivers/sound/sound-uclass.c    | 1 -
+ drivers/sound/sound.c           | 2 +-
+ drivers/sound/tegra_ahub.c      | 2 +-
+ drivers/sound/tegra_i2s.c       | 1 -
+ drivers/sound/tegra_sound.c     | 1 -
+ drivers/sound/wm8994.c          | 1 -
+ 25 files changed, 3 insertions(+), 25 deletions(-)
 
-diff --git a/drivers/soc/soc-uclass.c b/drivers/soc/soc-uclass.c
-index 8b3044fed8d2..744cdda2e187 100644
---- a/drivers/soc/soc-uclass.c
-+++ b/drivers/soc/soc-uclass.c
-@@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY UCLASS_SOC
- 
--#include <common.h>
- #include <soc.h>
- #include <dm.h>
- #include <errno.h>
-diff --git a/drivers/soc/soc_sandbox.c b/drivers/soc/soc_sandbox.c
-index 15fdd9930cb4..8d621e88f567 100644
---- a/drivers/soc/soc_sandbox.c
-+++ b/drivers/soc/soc_sandbox.c
-@@ -6,7 +6,6 @@
-  * Dave Gerlach <d-gerlach@ti.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <soc.h>
- 
-diff --git a/drivers/soc/soc_ti_k3.c b/drivers/soc/soc_ti_k3.c
-index 3a4e58bba671..b585e47d46fe 100644
---- a/drivers/soc/soc_ti_k3.c
-+++ b/drivers/soc/soc_ti_k3.c
-@@ -4,7 +4,6 @@
-  *	Dave Gerlach <d-gerlach@ti.com>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <soc.h>
- 
-diff --git a/drivers/soc/soc_xilinx_versal.c b/drivers/soc/soc_xilinx_versal.c
-index 3d8c25c19bb6..7427f8432c8b 100644
---- a/drivers/soc/soc_xilinx_versal.c
-+++ b/drivers/soc/soc_xilinx_versal.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2021 Xilinx, Inc.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <soc.h>
- #include <zynqmp_firmware.h>
-diff --git a/drivers/soc/soc_xilinx_versal_net.c b/drivers/soc/soc_xilinx_versal_net.c
-index 146d068bb4ae..d64fc366a6d1 100644
---- a/drivers/soc/soc_xilinx_versal_net.c
-+++ b/drivers/soc/soc_xilinx_versal_net.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2022, Advanced Micro Devices, Inc.
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <soc.h>
- #include <zynqmp_firmware.h>
-diff --git a/drivers/soc/soc_xilinx_zynqmp.c b/drivers/soc/soc_xilinx_zynqmp.c
-index d8b4f172a39d..a2d5b82fd34d 100644
---- a/drivers/soc/soc_xilinx_zynqmp.c
-+++ b/drivers/soc/soc_xilinx_zynqmp.c
+diff --git a/drivers/sound/broadwell_i2s.c b/drivers/sound/broadwell_i2s.c
+index 7f754e656761..bc44b5ec7e1f 100644
+--- a/drivers/sound/broadwell_i2s.c
++++ b/drivers/sound/broadwell_i2s.c
 @@ -9,7 +9,6 @@
-  * Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
-  */
+ 
+ #define LOG_CATEGORY UCLASS_I2S
  
 -#include <common.h>
  #include <dm.h>
- #include <dm/device_compat.h>
- #include <asm/cache.h>
-diff --git a/drivers/soc/ti/k3-navss-ringacc.c b/drivers/soc/ti/k3-navss-ringacc.c
-index ed39ff2fa4c7..d3f3d4761c2f 100644
---- a/drivers/soc/ti/k3-navss-ringacc.c
-+++ b/drivers/soc/ti/k3-navss-ringacc.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2018 Texas Instruments Incorporated - https://www.ti.com
-  */
- 
--#include <common.h>
- #include <cpu_func.h>
+ #include <i2s.h>
  #include <log.h>
- #include <asm/cache.h>
-diff --git a/drivers/soc/ti/keystone_serdes.c b/drivers/soc/ti/keystone_serdes.c
-index 0e1bf8ff39db..b19617997e1a 100644
---- a/drivers/soc/ti/keystone_serdes.c
-+++ b/drivers/soc/ti/keystone_serdes.c
-@@ -7,7 +7,6 @@
-  */
+diff --git a/drivers/sound/broadwell_sound.c b/drivers/sound/broadwell_sound.c
+index 6e083fe1f696..473f8d8f9771 100644
+--- a/drivers/sound/broadwell_sound.c
++++ b/drivers/sound/broadwell_sound.c
+@@ -8,7 +8,6 @@
  
- #include <errno.h>
+ #define LOG_CATEGORY UCLASS_SOUND
+ 
 -#include <common.h>
- #include <asm/io.h>
- #include <asm/ti-common/keystone_serdes.h>
- #include <linux/bitops.h>
-diff --git a/drivers/soc/ti/pruss.c b/drivers/soc/ti/pruss.c
-index 461390925d2c..8df8140cc186 100644
---- a/drivers/soc/ti/pruss.c
-+++ b/drivers/soc/ti/pruss.c
-@@ -5,7 +5,6 @@
-  * Copyright (C) 2020-2021 Texas Instruments Incorporated - https://www.ti.com/
+ #include <audio_codec.h>
+ #include <dm.h>
+ #include <i2s.h>
+diff --git a/drivers/sound/codec-uclass.c b/drivers/sound/codec-uclass.c
+index 2cb233bd3060..1c1560619ea5 100644
+--- a/drivers/sound/codec-uclass.c
++++ b/drivers/sound/codec-uclass.c
+@@ -6,7 +6,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_AUDIO_CODEC
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <audio_codec.h>
+ 
+diff --git a/drivers/sound/da7219.c b/drivers/sound/da7219.c
+index c1edef443608..5b9b3f65263f 100644
+--- a/drivers/sound/da7219.c
++++ b/drivers/sound/da7219.c
+@@ -6,7 +6,6 @@
+  * Parts taken from coreboot
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <dm/of_access.h>
- #include <errno.h>
+ #include <i2c.h>
+ #include <irq.h>
+diff --git a/drivers/sound/hda_codec.c b/drivers/sound/hda_codec.c
+index af6148ef7240..da8bde67de65 100644
+--- a/drivers/sound/hda_codec.c
++++ b/drivers/sound/hda_codec.c
+@@ -7,7 +7,6 @@
+ 
+ #define LOG_CATEGORY	UCLASS_SOUND
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <hda_codec.h>
+ #include <log.h>
+diff --git a/drivers/sound/i2s-uclass.c b/drivers/sound/i2s-uclass.c
+index fc4f686b516d..6263c4d70719 100644
+--- a/drivers/sound/i2s-uclass.c
++++ b/drivers/sound/i2s-uclass.c
+@@ -6,7 +6,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_I2S
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <i2s.h>
+ 
+diff --git a/drivers/sound/i8254_beep.c b/drivers/sound/i8254_beep.c
+index 5572dc4d265d..7234ad4a07e5 100644
+--- a/drivers/sound/i8254_beep.c
++++ b/drivers/sound/i8254_beep.c
+@@ -3,7 +3,6 @@
+  * Copyright 2018 Google LLC
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <sound.h>
+ #include <asm/i8254.h>
+diff --git a/drivers/sound/ivybridge_sound.c b/drivers/sound/ivybridge_sound.c
+index d982219e06de..aeeba1d267ec 100644
+--- a/drivers/sound/ivybridge_sound.c
++++ b/drivers/sound/ivybridge_sound.c
+@@ -12,7 +12,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_SOUND
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <hda_codec.h>
+ #include <log.h>
+diff --git a/drivers/sound/max98088.c b/drivers/sound/max98088.c
+index c0463b8e8a62..d9037641ca46 100644
+--- a/drivers/sound/max98088.c
++++ b/drivers/sound/max98088.c
+@@ -8,7 +8,6 @@
+  * following the changes made in max98095.c
+  */
+ 
+-#include <common.h>
+ #include <audio_codec.h>
+ #include <div64.h>
+ #include <dm.h>
+diff --git a/drivers/sound/max98090.c b/drivers/sound/max98090.c
+index a798762f1ee7..18a3ffa85c8e 100644
+--- a/drivers/sound/max98090.c
++++ b/drivers/sound/max98090.c
+@@ -5,7 +5,6 @@
+  * Copyright 2011 Maxim Integrated Products
+  */
+ 
+-#include <common.h>
+ #include <audio_codec.h>
+ #include <div64.h>
+ #include <dm.h>
+diff --git a/drivers/sound/max98095.c b/drivers/sound/max98095.c
+index d0f701aaf105..96e772cff21b 100644
+--- a/drivers/sound/max98095.c
++++ b/drivers/sound/max98095.c
+@@ -7,7 +7,6 @@
+  * Modified for U-Boot by R. Chandrasekar (rcsekar@samsung.com)
+  */
+ 
+-#include <common.h>
+ #include <audio_codec.h>
+ #include <dm.h>
+ #include <div64.h>
+diff --git a/drivers/sound/max98357a.c b/drivers/sound/max98357a.c
+index bdf6dc236ec3..da56ffdd6bb4 100644
+--- a/drivers/sound/max98357a.c
++++ b/drivers/sound/max98357a.c
+@@ -6,7 +6,6 @@
+  * Parts taken from coreboot
+  */
+ 
+-#include <common.h>
+ #include <audio_codec.h>
+ #include <dm.h>
+ #include <log.h>
+diff --git a/drivers/sound/maxim_codec.c b/drivers/sound/maxim_codec.c
+index 6553d9590472..98f094c0e9ad 100644
+--- a/drivers/sound/maxim_codec.c
++++ b/drivers/sound/maxim_codec.c
+@@ -5,7 +5,6 @@
+  * Copyright 2011 Maxim Integrated Products
+  */
+ 
+-#include <common.h>
+ #include <div64.h>
+ #include <i2c.h>
+ #include <i2s.h>
+diff --git a/drivers/sound/rockchip_i2s.c b/drivers/sound/rockchip_i2s.c
+index 4e9e68aaac81..5078dfbed07d 100644
+--- a/drivers/sound/rockchip_i2s.c
++++ b/drivers/sound/rockchip_i2s.c
+@@ -7,7 +7,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_I2S
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <i2s.h>
+ #include <log.h>
+diff --git a/drivers/sound/rockchip_sound.c b/drivers/sound/rockchip_sound.c
+index 94058e603d7d..418d2efd4526 100644
+--- a/drivers/sound/rockchip_sound.c
++++ b/drivers/sound/rockchip_sound.c
+@@ -6,7 +6,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_SOUND
+ 
+-#include <common.h>
+ #include <audio_codec.h>
+ #include <clk.h>
+ #include <dm.h>
+diff --git a/drivers/sound/rt5677.c b/drivers/sound/rt5677.c
+index b655bb40b642..b5c997c6dd53 100644
+--- a/drivers/sound/rt5677.c
++++ b/drivers/sound/rt5677.c
+@@ -5,7 +5,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_SOUND
+ 
+-#include <common.h>
+ #include <audio_codec.h>
+ #include <dm.h>
+ #include <i2c.h>
+diff --git a/drivers/sound/samsung-i2s.c b/drivers/sound/samsung-i2s.c
+index dc5a2789aeed..42175fd7d28b 100644
+--- a/drivers/sound/samsung-i2s.c
++++ b/drivers/sound/samsung-i2s.c
+@@ -4,11 +4,11 @@
+  * R. Chandrasekar <rcsekar@samsung.com>
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <i2s.h>
+ #include <log.h>
+ #include <sound.h>
++#include <time.h>
+ #include <asm/arch/clk.h>
+ #include <asm/arch/pinmux.h>
+ #include <asm/arch/i2s-regs.h>
+diff --git a/drivers/sound/samsung_sound.c b/drivers/sound/samsung_sound.c
+index 473cedf7e974..9150ad4a63ba 100644
+--- a/drivers/sound/samsung_sound.c
++++ b/drivers/sound/samsung_sound.c
+@@ -4,7 +4,6 @@
+  * Written by Simon Glass <sjg@chromium.org>
+  */
+ 
+-#include <common.h>
+ #include <audio_codec.h>
+ #include <dm.h>
+ #include <i2s.h>
+diff --git a/drivers/sound/sandbox.c b/drivers/sound/sandbox.c
+index c6cbd81fdbce..31ae153530e8 100644
+--- a/drivers/sound/sandbox.c
++++ b/drivers/sound/sandbox.c
+@@ -5,7 +5,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_SOUND
+ 
+-#include <common.h>
+ #include <audio_codec.h>
+ #include <dm.h>
+ #include <i2s.h>
+diff --git a/drivers/sound/sound-uclass.c b/drivers/sound/sound-uclass.c
+index 2ffc4fc7c1db..b8a3dab447d9 100644
+--- a/drivers/sound/sound-uclass.c
++++ b/drivers/sound/sound-uclass.c
+@@ -6,7 +6,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_SOUND
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <i2s.h>
+ #include <log.h>
+diff --git a/drivers/sound/sound.c b/drivers/sound/sound.c
+index c0fc50c99dac..4fde2989e04f 100644
+--- a/drivers/sound/sound.c
++++ b/drivers/sound/sound.c
+@@ -4,9 +4,9 @@
+  * R. Chandrasekar <rcsekar@samsung.com>
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <sound.h>
++#include <linux/string.h>
+ 
+ void sound_create_square_wave(uint sample_rate, unsigned short *data, int size,
+ 			      uint freq, uint channels)
+diff --git a/drivers/sound/tegra_ahub.c b/drivers/sound/tegra_ahub.c
+index 495a29c5137c..8f1b0c009a88 100644
+--- a/drivers/sound/tegra_ahub.c
++++ b/drivers/sound/tegra_ahub.c
+@@ -7,11 +7,11 @@
+ 
+ #define LOG_CATEGORY UCLASS_MISC
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <i2s.h>
+ #include <log.h>
+ #include <misc.h>
++#include <time.h>
+ #include <asm/io.h>
+ #include <asm/arch-tegra/tegra_ahub.h>
+ #include <asm/arch-tegra/tegra_i2s.h>
+diff --git a/drivers/sound/tegra_i2s.c b/drivers/sound/tegra_i2s.c
+index 932f737900e4..357aac36ceaa 100644
+--- a/drivers/sound/tegra_i2s.c
++++ b/drivers/sound/tegra_i2s.c
+@@ -5,7 +5,6 @@
+  */
+ #define LOG_CATEGORY UCLASS_I2S
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <i2s.h>
+ #include <log.h>
+diff --git a/drivers/sound/tegra_sound.c b/drivers/sound/tegra_sound.c
+index aef6a2eb1475..152c929146f5 100644
+--- a/drivers/sound/tegra_sound.c
++++ b/drivers/sound/tegra_sound.c
+@@ -6,7 +6,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_I2S
+ 
+-#include <common.h>
+ #include <audio_codec.h>
+ #include <dm.h>
+ #include <i2s.h>
+diff --git a/drivers/sound/wm8994.c b/drivers/sound/wm8994.c
+index fd646479b315..6b3091aa5de1 100644
+--- a/drivers/sound/wm8994.c
++++ b/drivers/sound/wm8994.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2012 Samsung Electronics
+  * R. Chandrasekar <rcsekar@samsung.com>
+  */
+-#include <common.h>
+ #include <audio_codec.h>
+ #include <dm.h>
+ #include <div64.h>
 -- 
 2.34.1
 
