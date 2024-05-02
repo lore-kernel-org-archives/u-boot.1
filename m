@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D2C1C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:37:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12ABCC4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:37:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6283D88C6B;
-	Thu,  2 May 2024 03:32:45 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id ED0C288C82;
+	Thu,  2 May 2024 03:32:46 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="lX1YXrcY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tAm8DdRV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A2AF88C38; Thu,  2 May 2024 03:32:44 +0200 (CEST)
-Received: from mail-qk1-x72f.google.com (mail-qk1-x72f.google.com
- [IPv6:2607:f8b0:4864:20::72f])
+ id A690F88C81; Thu,  2 May 2024 03:32:45 +0200 (CEST)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A3F188C62
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:42 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F06988C10
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:43 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72f.google.com with SMTP id
- af79cd13be357-790e7c02430so378589285a.0
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:41 -0700 (PDT)
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-4347cbdb952so34877441cf.3
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613560; x=1715218360; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613562; x=1715218362; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=t4kPduWTXsqopZoVsh0u/PVyN8rRlmOxnS0537tamnw=;
- b=lX1YXrcYYca6wZoAs6tTnXsA8Cb6KJgKRUK/W/yjuWHVuoKbh7FFxrztCvrvEitQHZ
- KhTKeOAkp2jKjkIKupSVhTy4QiLXjamNnZNJA2Yzvvl4IAU+Pr8QgL20tUmPkkMX7kew
- lSfekhQ3G9n4BdsLv15UqvuCvmDTdcepgWVtA=
+ bh=akGxRe8Wp/IJSstJvunyKAbf0Ra++7brB1yE0JQYQWk=;
+ b=tAm8DdRVkaEcWLUKNhLpo1tM0X8nT1ue0g+P9OnCUDUJ8M8ofbLuGjAo2yDND4NIPV
+ sEzjijsUT/SIH1/4zVKcrrGA5LOYHaOGG9qWLH+9Xg3OuSmC6VSuzE/F3W+cpkox7j8P
+ 6eaCAimkRT9OZYJ6CgjJxxS1tN2B8naih37Sk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613560; x=1715218360;
+ d=1e100.net; s=20230601; t=1714613562; x=1715218362;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=t4kPduWTXsqopZoVsh0u/PVyN8rRlmOxnS0537tamnw=;
- b=GM0N2Ma8+KdgtmItBefDbPS3Dqq8XZosJ7f54ynziTpq7Fxd0Eq79mHUtks7Ou7qQu
- Gk29rDgNOr3OZk9tqlf7Zc8dshVPSsDuUNm0rId+X833miHMGZ895nf4PQPPgDpOA7SL
- FPVgZMA9Lv51y74LlRrmQ+MnsIWlq93dQ+RUYOFhdGsYLcIPSW5M/hF2OW3US3YR8Zb0
- x6LPWdO16zbAQd+ELNbEZDdZzxEy430j4XE4+HzMxdtv5qB2aXS2U0LmA57KxFuG2xmv
- ySdYMc3WHYkJFw09UXJP1WKCYD0SdYUr+gBBiPT2Ucd7b3k+zsYnNIvq8Uv/shr4MlBn
- /nMw==
-X-Gm-Message-State: AOJu0Ywc2DLquT5/Qzw/bKU5Jf9CJfaNHOpLMxqoRYd4QSY42vFB8mZZ
- bVIgzlu+R7upTgPzhR3zysSro2mSCMXQMDharo29iufprW+AFTIZONtcDT5kXskEPH42Q97uQ9v
- LNEEWY2PD
-X-Google-Smtp-Source: AGHT+IFNbWdUXaFFWXODN9Tnj/ZuBGJjfNte3okECz2An3hG0XlZr/dctWEuPMzWqkX5qf5KlWfRQw==
-X-Received: by 2002:a05:622a:1650:b0:43a:c4e8:cb8c with SMTP id
- y16-20020a05622a165000b0043ac4e8cb8cmr626542qtj.64.1714613560377; 
- Wed, 01 May 2024 18:32:40 -0700 (PDT)
+ bh=akGxRe8Wp/IJSstJvunyKAbf0Ra++7brB1yE0JQYQWk=;
+ b=ORexucDvfSjknR+9fNj8JNeLk16Ql1k5cQunSiM9N2J9mr0hy2XEaqTn3/BhAllEAO
+ 0uR9r81y5/brutlh9/wtar3fEuIjO2cjLuHnTZChEB71lNy9BK8rg/466ndK6mz8xWmA
+ WNq1De9GgWUqf7qCiy6nZxEYsJ1foQnYuiIXIXJ7HbWLSobV6RIxOCJZK4avrqZxL4p4
+ 4XIzW7tfFAsYwvtNjQcVifNamr00VRUmsJP5sQCjLtfjwFNaUiGS1RmcFO16M9xty9QY
+ OAIbNmdQNQXM2lspQr7jMhc9bz/Hhp6Ld4r63MMLkDSgxJCD1hDm7Gj0nzPUVnAKKKWo
+ dOcg==
+X-Gm-Message-State: AOJu0Yyvm8YvffNfUFmoLMe3GVagqMvVJXLhtFzr4hR8EERCSPYPd4EH
+ FRcB2o6/JAa31eKa7N/beLZ8PLPVz1z8zMv1CnKccZkD3uFn7TeGj1bCMLqSJb/WiMs0w0LKSg8
+ uCqqbhKaU
+X-Google-Smtp-Source: AGHT+IHTY55CykpVV1YUZ/4YUbXJge+51mPZukuLQ8xgjCJuyk18HSJ5eQM/2lvEFEHB903ifYY3Zg==
+X-Received: by 2002:a05:622a:349:b0:43a:bd5b:2c9a with SMTP id
+ r9-20020a05622a034900b0043abd5b2c9amr5110166qtw.57.1714613562049; 
+ Wed, 01 May 2024 18:32:42 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.38
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:32:39 -0700 (PDT)
+ Wed, 01 May 2024 18:32:41 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Anand Gore <anand.gore@broadcom.com>,
- William Zhang <william.zhang@broadcom.com>,
- Kursad Oney <kursad.oney@broadcom.com>,
- Joel Peshkin <joel.peshkin@broadcom.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Alex Nemirovsky <alex.nemirovsky@cortina-access.com>,
- Ivan Vozvakhov <i.vozvakhov@vk.team>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Marek Vasut <marex@denx.de>,
- Christian Gmeiner <christian.gmeiner@gmail.com>
-Subject: [PATCH 38/81] led: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:30:55 -0600
-Message-Id: <20240502013138.2383421-38-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ Michal Simek <michal.simek@amd.com>, Nishanth Menon <nm@ti.com>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+Subject: [PATCH 39/81] mailbox: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:30:56 -0600
+Message-Id: <20240502013138.2383421-39-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,123 +100,121 @@ add missing include files directly.
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Anand Gore <anand.gore@broadcom.com>
-Cc: William Zhang <william.zhang@broadcom.com>
-Cc: Kursad Oney <kursad.oney@broadcom.com>
-Cc: Joel Peshkin <joel.peshkin@broadcom.com>
-Cc: Philippe Reynes <philippe.reynes@softathome.com>
-Cc: Alex Nemirovsky <alex.nemirovsky@cortina-access.com>
-Cc: Ivan Vozvakhov <i.vozvakhov@vk.team>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: Marek Vasut <marex@denx.de>
-Cc: Christian Gmeiner <christian.gmeiner@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Thierry Reding <treding@nvidia.com>
+Cc: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Nishanth Menon <nm@ti.com>
+Cc: Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
 ---
- drivers/led/led-uclass.c  | 1 -
- drivers/led/led_bcm6328.c | 1 -
- drivers/led/led_bcm6358.c | 1 -
- drivers/led/led_bcm6753.c | 1 -
- drivers/led/led_bcm6858.c | 1 -
- drivers/led/led_cortina.c | 1 -
- drivers/led/led_gpio.c    | 1 -
- drivers/led/led_pwm.c     | 1 -
+ drivers/mailbox/apple-mbox.c        | 1 -
+ drivers/mailbox/k3-sec-proxy.c      | 1 -
+ drivers/mailbox/mailbox-uclass.c    | 1 -
+ drivers/mailbox/sandbox-mbox-test.c | 1 -
+ drivers/mailbox/sandbox-mbox.c      | 1 -
+ drivers/mailbox/stm32-ipcc.c        | 1 -
+ drivers/mailbox/tegra-hsp.c         | 1 -
+ drivers/mailbox/zynqmp-ipi.c        | 1 -
  8 files changed, 8 deletions(-)
 
-diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
-index a4be56fc2584..f37bf6a1550c 100644
---- a/drivers/led/led-uclass.c
-+++ b/drivers/led/led-uclass.c
-@@ -6,7 +6,6 @@
- 
- #define LOG_CATEGORY UCLASS_LED
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <led.h>
-diff --git a/drivers/led/led_bcm6328.c b/drivers/led/led_bcm6328.c
-index f59a92fb1fda..dcc5741195cd 100644
---- a/drivers/led/led_bcm6328.c
-+++ b/drivers/led/led_bcm6328.c
+diff --git a/drivers/mailbox/apple-mbox.c b/drivers/mailbox/apple-mbox.c
+index 30c8e2f03fa8..2ee49734f406 100644
+--- a/drivers/mailbox/apple-mbox.c
++++ b/drivers/mailbox/apple-mbox.c
 @@ -3,7 +3,6 @@
-  * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
+  * Copyright (C) 2021 Mark Kettenis <kettenis@openbsd.org>
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <errno.h>
- #include <led.h>
-diff --git a/drivers/led/led_bcm6358.c b/drivers/led/led_bcm6358.c
-index 25aa3994d0e4..b1373ab74267 100644
---- a/drivers/led/led_bcm6358.c
-+++ b/drivers/led/led_bcm6358.c
+ #include <mailbox-uclass.h>
+ #include <asm/io.h>
+diff --git a/drivers/mailbox/k3-sec-proxy.c b/drivers/mailbox/k3-sec-proxy.c
+index 05f6b1795d64..5eafe46fd4d0 100644
+--- a/drivers/mailbox/k3-sec-proxy.c
++++ b/drivers/mailbox/k3-sec-proxy.c
+@@ -6,7 +6,6 @@
+  *	Lokesh Vutla <lokeshvutla@ti.com>
+  */
+ 
+-#include <common.h>
+ #include <log.h>
+ #include <malloc.h>
+ #include <asm/global_data.h>
+diff --git a/drivers/mailbox/mailbox-uclass.c b/drivers/mailbox/mailbox-uclass.c
+index 85ba8c5fd99d..4bf4987ce0a1 100644
+--- a/drivers/mailbox/mailbox-uclass.c
++++ b/drivers/mailbox/mailbox-uclass.c
+@@ -5,7 +5,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_MAILBOX
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <log.h>
+ #include <mailbox.h>
+diff --git a/drivers/mailbox/sandbox-mbox-test.c b/drivers/mailbox/sandbox-mbox-test.c
+index ffd4674d1ef7..a2cfde2f62d6 100644
+--- a/drivers/mailbox/sandbox-mbox-test.c
++++ b/drivers/mailbox/sandbox-mbox-test.c
 @@ -3,7 +3,6 @@
-  * Copyright (C) 2017 Álvaro Fernández Rojas <noltari@gmail.com>
+  * Copyright (c) 2016, NVIDIA CORPORATION.
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <errno.h>
- #include <led.h>
-diff --git a/drivers/led/led_bcm6753.c b/drivers/led/led_bcm6753.c
-index 2466d9301166..170caf7bdca7 100644
---- a/drivers/led/led_bcm6753.c
-+++ b/drivers/led/led_bcm6753.c
-@@ -6,7 +6,6 @@
-  * drivers/led/led_bcm6858.c
+ #include <mailbox.h>
+ #include <malloc.h>
+diff --git a/drivers/mailbox/sandbox-mbox.c b/drivers/mailbox/sandbox-mbox.c
+index 87d38de0cb61..87e06e492fe7 100644
+--- a/drivers/mailbox/sandbox-mbox.c
++++ b/drivers/mailbox/sandbox-mbox.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2016, NVIDIA CORPORATION.
   */
  
 -#include <common.h>
  #include <dm.h>
- #include <errno.h>
- #include <led.h>
-diff --git a/drivers/led/led_bcm6858.c b/drivers/led/led_bcm6858.c
-index 397dc0d8693d..a6efdcf64053 100644
---- a/drivers/led/led_bcm6858.c
-+++ b/drivers/led/led_bcm6858.c
-@@ -7,7 +7,6 @@
-  * drivers/led/led_bcm6358.c
+ #include <log.h>
+ #include <mailbox-uclass.h>
+diff --git a/drivers/mailbox/stm32-ipcc.c b/drivers/mailbox/stm32-ipcc.c
+index 046e1a8aca6e..dda108735fce 100644
+--- a/drivers/mailbox/stm32-ipcc.c
++++ b/drivers/mailbox/stm32-ipcc.c
+@@ -5,7 +5,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_MAILBOX
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <log.h>
+diff --git a/drivers/mailbox/tegra-hsp.c b/drivers/mailbox/tegra-hsp.c
+index 08c51c40f141..bfd4d7cdf2e4 100644
+--- a/drivers/mailbox/tegra-hsp.c
++++ b/drivers/mailbox/tegra-hsp.c
+@@ -3,7 +3,6 @@
+  * Copyright (c) 2016, NVIDIA CORPORATION.
   */
  
 -#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <led.h>
-diff --git a/drivers/led/led_cortina.c b/drivers/led/led_cortina.c
-index bcbe78d632ac..2d3ad323d33b 100644
---- a/drivers/led/led_cortina.c
-+++ b/drivers/led/led_cortina.c
-@@ -6,7 +6,6 @@
-  *
+ #include <log.h>
+ #include <malloc.h>
+ #include <asm/io.h>
+diff --git a/drivers/mailbox/zynqmp-ipi.c b/drivers/mailbox/zynqmp-ipi.c
+index eb86847bbe23..4df69734ed95 100644
+--- a/drivers/mailbox/zynqmp-ipi.c
++++ b/drivers/mailbox/zynqmp-ipi.c
+@@ -5,7 +5,6 @@
+  * Copyright (C) 2018-2019 Xilinx, Inc.
   */
  
 -#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <led.h>
-diff --git a/drivers/led/led_gpio.c b/drivers/led/led_gpio.c
-index 71421de628c9..ce22fb49f2a9 100644
---- a/drivers/led/led_gpio.c
-+++ b/drivers/led/led_gpio.c
-@@ -4,7 +4,6 @@
-  * Written by Simon Glass <sjg@chromium.org>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <led.h>
-diff --git a/drivers/led/led_pwm.c b/drivers/led/led_pwm.c
-index ae6de3087ab7..15dd836509b8 100644
---- a/drivers/led/led_pwm.c
-+++ b/drivers/led/led_pwm.c
-@@ -4,7 +4,6 @@
-  * Author: Ivan Vozvakhov <i.vozvakhov@vk.team>
-  */
- 
--#include <common.h>
- #include <dm.h>
- #include <errno.h>
- #include <led.h>
+ #include <log.h>
+ #include <asm/io.h>
+ #include <asm/system.h>
 -- 
 2.34.1
 
