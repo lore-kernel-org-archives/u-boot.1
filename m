@@ -4,48 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B99B6C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 13:20:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41B62C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 13:20:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7753C88CF4;
+	by phobos.denx.de (Postfix) with ESMTP id E4FED88D00;
 	Thu,  2 May 2024 15:18:09 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="b8RZswNg";
+	dkim=pass (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="CqRCWEe1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D84F88370; Thu,  2 May 2024 15:17:03 +0200 (CEST)
-Received: from mail-4022.proton.ch (mail-4022.proton.ch [185.70.40.22])
+ id 8B5BC88378; Thu,  2 May 2024 15:17:08 +0200 (CEST)
+Received: from mail-40136.proton.ch (mail-40136.proton.ch [185.70.40.136])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F53488354
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 15:17:01 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 9DA9788361
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 15:17:06 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
- s=protonmail2; t=1714655820; x=1714915020;
- bh=3YbdD02ZW+uU9zMq1XEaGgLD4yuMdKyFIu7h82jJnbU=;
+ s=protonmail2; t=1714655826; x=1714915026;
+ bh=mdAk5izBOY//fJ4gA5Fsm8JLte41MXOgZ6EHx/UHDvo=;
  h=Date:To:From:Cc:Subject:Message-ID:In-Reply-To:References:
  Feedback-ID:From:To:Cc:Date:Subject:Reply-To:Feedback-ID:
  Message-ID:BIMI-Selector;
- b=b8RZswNgPSPsAhT2VzBoTHkR50Mr4AQMIa+LukWYZ+f0IuDIo2z3iMcJeqno6Tp9F
- YkH6kLujzLV6+EJ7GO0wynnjgc3iAzG1VTa7WqzA0atBMP3vmIJJWNvGpEdhys2Yl2
- K3Y7Hs4w6sUSgG1UzusMvr76rSpL1UQ7onEcVBHJEnrjBYLwEpoi+d9hwE22YSGr92
- ewynrJn65WL0A01mFaZ0m111Bb/9y7D18vl4JI42HV6DXPS+oMVtU4dW/AA3N8k7nR
- YUH7qaQnKdTI4WZXHBfAYIkYPoaJo+/cz5FStWRPjDN4DkKemNK02TLe5CvP3uu7ba
- +gXGqIB5fb3JQ==
-Date: Thu, 02 May 2024 13:16:56 +0000
+ b=CqRCWEe1GFHEZiICtTSA7hxVpx4vZer8dywvLtwZzgRjB6nJo/i/nTHHA/KNCDPyE
+ Oq/FaM6Npk/kXTCErMD1CSCR2YExZ5S/AHqpMBJI08IXhquv3zTdLpq0YUHmlbciIZ
+ 3o8LRqMhYVBt0Al45i6GQZL00vvbWWnJ9nKfmwU9tHpXkI9h0k8Azi1cfGsl/nYhwc
+ 9+YZdziw1F3WwAjOUPBWMZWSyycJaN9LIhUD4ccKwwR+L2peWwdS7Hxx9Mlv8LhwET
+ Hy9kG4VjNsThuwEs7bhJlviXYxFH6FCHvhgSzT8w/KgzvhJAVUahMw0tKJ0LgTTSJI
+ qmf42b7Nvcidg==
+Date: Thu, 02 May 2024 13:16:52 +0000
 To: u-boot@lists.denx.de
 From: Sam Day <me@samcday.com>
 Cc: Caleb Connolly <caleb.connolly@linaro.org>, Sam Day <me@samcday.com>
-Subject: [PATCH 2/2] ehci: msm: bring up iface + core clocks
-Message-ID: <20240502-msm8916-hs-usb-clocks-v1-2-eeccf483b68d@samcday.com>
+Subject: [PATCH 1/2] clk/qcom: apq8016: add support for USB_HS clocks
+Message-ID: <20240502-msm8916-hs-usb-clocks-v1-1-eeccf483b68d@samcday.com>
 In-Reply-To: <20240502-msm8916-hs-usb-clocks-v1-0-eeccf483b68d@samcday.com>
 References: <20240502-msm8916-hs-usb-clocks-v1-0-eeccf483b68d@samcday.com>
 Feedback-ID: 25366008:user:proton
-X-Pm-Message-ID: 0e8f8177985e24a0bec8d6eb63c697d924d6e113
+X-Pm-Message-ID: a382db0c1549b186093a3790eb84841eec136301
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -66,100 +66,100 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This seems to be necessary on my samsung-a5. Without this patch, the
-first access of EHCI registers causes a bus stall and subsequent reset.
+The newer "register map for simple gate clocks" support added for qcom
+clocks is used. As a result gcc_apq8016 now has a mixture of the old and
+new styles. I didn't (and still don't!) feel comfortable enough in this
+area to update the existing code.
 
-I am unsure why this wasn't already necessary for db410c, perhaps those
-clocks are already enabled on boot.
+Some groundwork was also laid to dump the state of these gate clocks
+with the recently-added qcom dump callbacks.
 
 Signed-off-by: Sam Day <me@samcday.com>
 ---
- drivers/usb/host/ehci-msm.c | 37 +++++++++++++++++++++++++++++++++++--
- 1 file changed, 35 insertions(+), 2 deletions(-)
+ drivers/clk/qcom/clock-apq8016.c | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
 
-diff --git a/drivers/usb/host/ehci-msm.c b/drivers/usb/host/ehci-msm.c
-index 98fe7bc3bc..b2e294dd64 100644
---- a/drivers/usb/host/ehci-msm.c
-+++ b/drivers/usb/host/ehci-msm.c
-@@ -7,8 +7,10 @@
-  * Based on Linux driver
-  */
+diff --git a/drivers/clk/qcom/clock-apq8016.c b/drivers/clk/qcom/clock-apq8=
+016.c
+index d3b63b9c1a..745371a289 100644
+--- a/drivers/clk/qcom/clock-apq8016.c
++++ b/drivers/clk/qcom/clock-apq8016.c
+@@ -17,6 +17,8 @@
 =20
-+#include <clk.h>
- #include <common.h>
- #include <dm.h>
-+#include <dm/device_compat.h>
- #include <dm/lists.h>
- #include <errno.h>
- #include <usb.h>
-@@ -25,6 +27,8 @@ struct msm_ehci_priv {
- =09struct usb_ehci *ehci; /* Start of IP core*/
- =09struct ulpi_viewport ulpi_vp; /* ULPI Viewport */
- =09struct phy phy;
-+=09struct clk iface_clk;
-+=09struct clk core_clk;
+ #include "clock-qcom.h"
+=20
++#define USB_HS_SYSTEM_CLK_CMD_RCGR=090x41010
++
+ /* Clocks: (from CLK_CTL_BASE)  */
+ #define GPLL0_STATUS=09=09=09(0x2101C)
+ #define APCS_GPLL_ENA_VOTE=09=09(0x45000)
+@@ -39,6 +41,11 @@
+ /* GPLL0 clock control registers */
+ #define GPLL0_STATUS_ACTIVE BIT(17)
+=20
++static const struct freq_tbl ftbl_gcc_usb_hs_system_clk[] =3D {
++=09F(80000000, CFG_CLK_SRC_GPLL0, 10, 0, 0),
++=09{ }
++};
++
+ static struct pll_vote_clk gpll0_vote_clk =3D {
+ =09.status =3D GPLL0_STATUS,
+ =09.status_bit =3D GPLL0_STATUS_ACTIVE,
+@@ -52,6 +59,11 @@ static struct vote_clk gcc_blsp1_ahb_clk =3D {
+ =09.vote_bit =3D BIT(10),
  };
 =20
- static int msm_init_after_reset(struct ehci_ctrl *dev)
-@@ -53,20 +57,46 @@ static int ehci_usb_probe(struct udevice *dev)
- =09struct ehci_hcor *hcor;
- =09int ret;
++static const struct gate_clk apq8016_clks[] =3D {
++=09GATE_CLK(GCC_USB_HS_AHB_CLK,    0x41008, 0x00000001),
++=09GATE_CLK(GCC_USB_HS_SYSTEM_CLK,=090x41004, 0x00000001),
++};
++
+ /* SDHCI */
+ static int apq8016_clk_init_sdc(struct msm_clk_priv *priv, int slot, uint =
+rate)
+ {
+@@ -106,6 +118,7 @@ int apq8016_clk_init_uart(phys_addr_t base, unsigned lo=
+ng id)
 =20
-+=09ret =3D clk_get_by_name(dev, "core", &p->core_clk);
-+=09if (ret) {
-+=09=09dev_err(dev, "Failed to get core clock: %d\n", ret);
-+=09=09return ret;
-+=09}
-+
-+=09ret =3D clk_get_by_name(dev, "iface", &p->iface_clk);
-+=09if (ret) {
-+=09=09dev_err(dev, "Failed to get iface clock: %d\n", ret);
-+=09=09return ret;
-+=09}
-+
-+=09ret =3D clk_prepare_enable(&p->core_clk);
-+=09if (ret)
-+=09=09return ret;
-+
-+=09ret =3D clk_prepare_enable(&p->iface_clk);
-+=09if (ret)
-+=09=09goto cleanup_core;
-+
- =09hccr =3D (struct ehci_hccr *)((phys_addr_t)&ehci->caplength);
- =09hcor =3D (struct ehci_hcor *)((phys_addr_t)hccr +
- =09=09=09HC_LENGTH(ehci_readl(&(hccr)->cr_capbase)));
+ static ulong apq8016_clk_set_rate(struct clk *clk, ulong rate)
+ {
++=09const struct freq_tbl *freq;
+ =09struct msm_clk_priv *priv =3D dev_get_priv(clk->dev);
 =20
- =09ret =3D generic_setup_phy(dev, &p->phy, 0);
- =09if (ret)
--=09=09return ret;
-+=09=09goto cleanup_iface;
-=20
- =09ret =3D board_usb_init(0, plat->init_type);
- =09if (ret < 0)
--=09=09return ret;
-+=09=09goto cleanup_iface;
-=20
- =09return ehci_register(dev, hccr, hcor, &msm_ehci_ops, 0,
- =09=09=09     plat->init_type);
-+
-+cleanup_iface:
-+=09clk_disable_unprepare(&p->iface_clk);
-+cleanup_core:
-+=09clk_disable_unprepare(&p->core_clk);
-+=09return ret;
+ =09switch (clk->id) {
+@@ -117,13 +130,31 @@ static ulong apq8016_clk_set_rate(struct clk *clk, ul=
+ong rate)
+ =09case GCC_BLSP1_UART2_APPS_CLK: /* UART2 */
+ =09=09apq8016_clk_init_uart(priv->base, clk->id);
+ =09=09return 7372800;
++=09case GCC_USB_HS_SYSTEM_CLK:
++=09=09freq =3D qcom_find_freq(ftbl_gcc_usb_hs_system_clk, rate);
++=09=09clk_rcg_set_rate_mnd(priv->base, USB_HS_SYSTEM_CLK_CMD_RCGR,
++=09=09                     freq->pre_div, freq->m, freq->n, freq->src, 0);
++=09=09return freq->freq;
+ =09default:
+ =09=09return 0;
+ =09}
  }
 =20
- static int ehci_usb_remove(struct udevice *dev)
-@@ -82,6 +112,9 @@ static int ehci_usb_remove(struct udevice *dev)
- =09/* Stop controller. */
- =09clrbits_le32(&ehci->usbcmd, CMD_RUN);
-=20
-+=09clk_disable_unprepare(&p->iface_clk);
-+=09clk_disable_unprepare(&p->core_clk);
++static int apq8016_clk_enable(struct clk *clk)
++{
++=09struct msm_clk_priv *priv =3D dev_get_priv(clk->dev);
 +
- =09ret =3D generic_shutdown_phy(&p->phy);
- =09if (ret)
- =09=09return ret;
++=09debug("%s: clk %s\n", __func__, apq8016_clks[clk->id].name);
++=09qcom_gate_clk_en(priv, clk->id);
++
++=09return 0;
++}
++
+ static struct msm_clk_data apq8016_clk_data =3D {
+ =09.set_rate =3D apq8016_clk_set_rate,
++=09.clks =3D apq8016_clks,
++=09.num_clks =3D ARRAY_SIZE(apq8016_clks),
++=09.enable =3D apq8016_clk_enable,
+ };
+=20
+ static const struct udevice_id gcc_apq8016_of_match[] =3D {
 
 --=20
 2.44.0
