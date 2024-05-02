@@ -4,70 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F377DC10F1A
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:32:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 779B5C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:32:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C43C088BEF;
-	Thu,  2 May 2024 03:31:50 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 2AFE388BE7;
+	Thu,  2 May 2024 03:31:52 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KoDyxEXu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Factc2r0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1925788BE5; Thu,  2 May 2024 03:31:49 +0200 (CEST)
-Received: from mail-qt1-x82e.google.com (mail-qt1-x82e.google.com
- [IPv6:2607:f8b0:4864:20::82e])
+ id 853C888BED; Thu,  2 May 2024 03:31:50 +0200 (CEST)
+Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
+ [IPv6:2607:f8b0:4864:20::82d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF23288B0D
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:31:46 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 51EF488B98
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:31:48 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82e.google.com with SMTP id
- d75a77b69052e-43b06b803c4so19617331cf.1
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:31:46 -0700 (PDT)
+Received: by mail-qt1-x82d.google.com with SMTP id
+ d75a77b69052e-4371955d27fso45523671cf.0
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:31:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613505; x=1715218305; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613507; x=1715218307; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=twc7v37XyxfRt4wS5NGiAWn5CRq80rMcYFQp2nDjqoE=;
- b=KoDyxEXuhYEX+zbTav8PufYNQgJ5VV8ql4BHcK64HFG2WAseIKD6surKTn2YTlwzdF
- EQasY2vKmwgk59k/3FDQh0NgcDiUNW1yJ4JCllmGL16T4WuXn7+VOHld4r0SP4bhbGnb
- Cdptbmt66DPdTn/vrba4i/tvS7TVBqtgouXjA=
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=mr95XS4slzFbw8V05f9ALVkdwe0bfvRRNpRAZXjLy7Y=;
+ b=Factc2r0JUaj2wWVMuofw99N2I4OHKIbUvUfU8EMdFdsKv7kkzYUEoOmT05T0ifqXA
+ dDumkDJwrpBGywCuxkp5dPS9mUTr1STfQVQ1ZuidID4y9jk6AguVWbUWXIEmGYuHQefx
+ iSDlLt2rrIO7XDwVODY0R2ZENMWfYdBg0phm8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613505; x=1715218305;
+ d=1e100.net; s=20230601; t=1714613507; x=1715218307;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=twc7v37XyxfRt4wS5NGiAWn5CRq80rMcYFQp2nDjqoE=;
- b=lsGgXW5E1dAUtugy46+2bcg5QM53z9OZyacK4mnlbMWwU1jw7Hf3Bg0wTpjBs3FoZs
- lp8DEOWy8BUaISfP6J6MADIDtSVciHnJqoVA+WX32AAInRxvrf++0ke+2CR35JJ3LDNm
- g0NWVKrqV1Uim/aca3l1nDHUeLVrP8TF+DL9tgEYfIv3KsIwXnq3fvrXAOxZZyOD3GfQ
- j6hKX8eV/h504Kiw8bwEmskw7djTPIH4m8Uu0zS7+Ng3zohZT4LgfyKFuwXArRtVqigD
- oUlZbNmlpOwAnm/lY//HqLbVt9sj8abszNdd44H54Ix1a5pgyLiwn58XnOy3T0C495o3
- V0Ng==
-X-Gm-Message-State: AOJu0YznRkrYrzoEWQMNKamDrEMNIphNYPbIyJMOUoj7wTBixXAKGpIg
- GXOIuCh+x2Q/QJLSd55NkY10GYaFn4Oh/UaIl7KK/cYJh+TYLmDhsZ9RkdNG6XCEru7FRZ8p1JI
- Wf3Gr9dbw
-X-Google-Smtp-Source: AGHT+IFkfc6tCWSuVq/5x0L+3opAhgrGbgUDYSx6c4DDgkHRP2StQV8jIih4Yk6GKMcyT2FYK9eszg==
-X-Received: by 2002:a05:622a:1214:b0:43b:1571:e00b with SMTP id
- y20-20020a05622a121400b0043b1571e00bmr5160738qtx.43.1714613505494; 
- Wed, 01 May 2024 18:31:45 -0700 (PDT)
+ bh=mr95XS4slzFbw8V05f9ALVkdwe0bfvRRNpRAZXjLy7Y=;
+ b=oM3dTJa+Zy9zobepvu1RzLCBfsBJQNDEQjFzW79dJS4BPIb4Dnf9ov1YJ86fm9aUPb
+ 7AMsBYPqV8vYAlO5Auc+HjNJ/lLbvuqsRrzmr51AhsMn0IKCHV47JIPDXg0WMMbpvikb
+ hZRSvCfW6HsD/N3VmPJu/uMRYlOVqzK4Mqp6PUruyzWbQ3Tp4s1EOxhTpJPQUvx3aLk/
+ ZEj16pXtSCw/61vym+41hB4AlH6VYr20kCTH0qkvXTcoL9f/oS0FXrDgfzH2h6rYB+nw
+ RCwI9IaFO5I+5FkCJBHMapc4GR+pWgQCPWfID0LlFkdxi8J4WT1o0HexyoGKx4ZH4slq
+ tnsg==
+X-Gm-Message-State: AOJu0Yy86rzgP/eeeW70uXyj7KbJeNmdShhkbUG5C6Fnb+PlNSj0edzJ
+ e/byd1t71I5l5XfgDsrSXM/psQmwDCbkNIclljv/wDADWhs1Tgb1HHsE4bBEsblaTmGUIdHgRES
+ hR5a7+PRm
+X-Google-Smtp-Source: AGHT+IEC0FwojiPePbFCj/UqdsgSvxGCRartikvJFoUeDCGwOCEte0sXM0vpp8StbW0vVEB53tTEsA==
+X-Received: by 2002:a05:622a:540e:b0:43a:c554:e64a with SMTP id
+ en14-20020a05622a540e00b0043ac554e64amr5272254qtb.26.1714613506821; 
+ Wed, 01 May 2024 18:31:46 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.31.44
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.31.45
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:31:45 -0700 (PDT)
+ Wed, 01 May 2024 18:31:46 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Stefan Bosch <stefan_b@posteo.net>
-Subject: [PATCH 04/81] arm: nexell: Add missing <linux/types.h>
-Date: Wed,  1 May 2024 19:30:21 -0600
-Message-Id: <20240502013138.2383421-4-trini@konsulko.com>
+Subject: [PATCH 05/81] arm: socfpga: Add missing <linux/types.h>
+Date: Wed,  1 May 2024 19:30:22 -0600
+Message-Id: <20240502013138.2383421-5-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -93,24 +92,22 @@ This file has many "Linux" style types in it, add <linux/types.h>
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-Cc: Stefan Bosch <stefan_b@posteo.net>
----
- arch/arm/mach-nexell/include/mach/mipi_display.h | 2 ++
+ arch/arm/mach-socfpga/include/mach/secure_reg_helper.h | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/mach-nexell/include/mach/mipi_display.h b/arch/arm/mach-nexell/include/mach/mipi_display.h
-index f3fdec64647c..9183ffdd9c3d 100644
---- a/arch/arm/mach-nexell/include/mach/mipi_display.h
-+++ b/arch/arm/mach-nexell/include/mach/mipi_display.h
-@@ -11,6 +11,8 @@
- #ifndef MIPI_DISPLAY_H
- #define MIPI_DISPLAY_H
+diff --git a/arch/arm/mach-socfpga/include/mach/secure_reg_helper.h b/arch/arm/mach-socfpga/include/mach/secure_reg_helper.h
+index d5a11122c723..01335dc93108 100644
+--- a/arch/arm/mach-socfpga/include/mach/secure_reg_helper.h
++++ b/arch/arm/mach-socfpga/include/mach/secure_reg_helper.h
+@@ -7,6 +7,8 @@
+ #ifndef	_SECURE_REG_HELPER_H_
+ #define	_SECURE_REG_HELPER_H_
  
 +#include <linux/types.h>
 +
- /* MIPI DSI Processor-to-Peripheral transaction types */
- enum {
- 	MIPI_DSI_V_SYNC_START				= 0x01,
+ #define SOCFPGA_SECURE_REG_SYSMGR_SOC64_SDMMC 1
+ #define SOCFPGA_SECURE_REG_SYSMGR_SOC64_EMAC0 2
+ #define SOCFPGA_SECURE_REG_SYSMGR_SOC64_EMAC1 3
 -- 
 2.34.1
 
