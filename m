@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EE26C4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:36:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7956EC4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:36:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5163388C66;
-	Thu,  2 May 2024 03:32:33 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id AF95A88C7A;
+	Thu,  2 May 2024 03:32:37 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="k+HWOLG1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XPtPvEYD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D917888BDF; Thu,  2 May 2024 03:32:30 +0200 (CEST)
-Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com
- [IPv6:2607:f8b0:4864:20::82b])
+ id EB3CF88BE0; Thu,  2 May 2024 03:32:36 +0200 (CEST)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9CE1F88BDF
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:28 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id A972388BDF
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:34 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x82b.google.com with SMTP id
- d75a77b69052e-43ab76cac73so12862081cf.1
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:28 -0700 (PDT)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-de5b1e6beceso6966269276.0
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613547; x=1715218347; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613553; x=1715218353; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=41Nz/u3j/efVd+aX44DOkZ7MgF4rWK3oZLCE+CpzlOI=;
- b=k+HWOLG12ZEh9JwdKlOZY57UpjU5Uq3O1CW2sh9QHlejSPfXKaPxkz0jjKr+0nOelW
- chw+o5CdE1IcQsFe1q26JADd+4wsPFwvPB6hv6p1kYIeN5UM9KudboEAR3zIccsv/zuC
- 1BaMtY0rrkKPZpL/PZDVtCKo24YcsJ6zHu32Y=
+ bh=AWd5qwfYo7kQLDko5t+EdpUdTgElX3YwnCclZvBRFL0=;
+ b=XPtPvEYD6JGOhtJLlX4PNrsWL37oc2iZ6cZ+QEnsg01/5MSNgXQBSqVt4MuGHHbRVV
+ VMoFtYc48KLMVXROm8g7V68oXf4PqX7sIJ7ihOuMf59c0NI1/EHhdg+kNkgeeycR3CjA
+ YfPT98X/wgwSk0Po6JEyJkgUV1g8viwHRGnBw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613547; x=1715218347;
+ d=1e100.net; s=20230601; t=1714613553; x=1715218353;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=41Nz/u3j/efVd+aX44DOkZ7MgF4rWK3oZLCE+CpzlOI=;
- b=pooDq/2hBs2XWHvuWeKk/A86vhDiqNakpYAFx8ToWNij90uqzpC25AgeqVFLo+PB22
- HtpcawNmU8NEo+LcmK+DTS41QPkGztb44a7avzUtJP5K0kUtkddhdYmwvwmHzE9e5UEe
- fkD5hl26bdu3HYmWkF0yML9Xxj9Jy3KYO1xVcHC4c/C0a+nh/yIgSfNl3mIx14pu6LFs
- Rh1IUg2rkCBOCodZbR4V9Sdz/rlA/SWcBWw5VoDpP+JY76vH5FxAlQeJeyVL4qS/sHn4
- mBMOixVlwKVmK8+XRrBSU2WEm1h4J/O1AvmNjLWr8A+GvU8i5FQcd6t/IyF8pPogDuM+
- LxJQ==
-X-Gm-Message-State: AOJu0YzS7WBu/9C1EESwXXiwHto9fl7cCO5cD/W20R87TwTOCQ7j+mKd
- wq/fsa9ZU9Xno/D4euxZ9by4/NH+LmaAKfb5RHO8ZOj6vReyr8jeHAEbrGLvov//FWa/bPlEs27
- 8lpBYrTxs
-X-Google-Smtp-Source: AGHT+IHg7psd12QUFFR+cNmX1DH5K+RMahZnqPkGOHy3BWWLUW5v7Opaq+5Cwtmhehhpg9222f0JrQ==
-X-Received: by 2002:a05:622a:5497:b0:439:de9d:620c with SMTP id
- ep23-20020a05622a549700b00439de9d620cmr2444418qtb.20.1714613547365; 
- Wed, 01 May 2024 18:32:27 -0700 (PDT)
+ bh=AWd5qwfYo7kQLDko5t+EdpUdTgElX3YwnCclZvBRFL0=;
+ b=bgc3vJ2BZyGizb1TZOx8EMMsYUy7z5yc3IlcPvQoka7PJJWlFPMCRxWdDGxM91j0HO
+ vtyb/vwyp82VXNXHRxr/tYKfcXBFi6KMJXChfPqQwOYgbcjKRKLuPfAwONZUq+nSnvyK
+ Ou2K9QzUfjdsqgF3tyIYMaO95ejOz6nrQrdX+JMHFvw6Dv0HC3BnJahvXrahncMZvMpL
+ hHdMbnw7yTnly5vvjMhJAsYElySBq88ER+rFI0pHWaqhtnERhhirWATFlpQd/sTaFogC
+ KgYM6EoOvi4c26NP3xn/5udiSEl2l9Wkmgan2GzD/wXuvyXoJF8MvTQt2xyCtDIO/Rmg
+ wUTQ==
+X-Gm-Message-State: AOJu0Yz/NVsWlZeGHITgWuj+TAkcRLPHVS+lWpmtIK7zGR1EC2T2h9zl
+ rvaV8rou0p6F2WC6TUrS6Qo6RGzOw748i37u0FP6IJ10iOYpSx+hcHv44iDZdLfzDPyklT/eSYf
+ UGrEWHlJ0
+X-Google-Smtp-Source: AGHT+IEj6EMVYtPVckWn+S7fjG+KzdzOsTB/RYr510RakA7vQxBZLHKxLffr2XNRGQ9AErQqmK0qeQ==
+X-Received: by 2002:a25:b111:0:b0:de6:b58:fe72 with SMTP id
+ g17-20020a25b111000000b00de60b58fe72mr607052ybj.58.1714613553359; 
+ Wed, 01 May 2024 18:32:33 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.26
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:32:26 -0700 (PDT)
+ Wed, 01 May 2024 18:32:32 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jassi Brar <jaswinder.singh@linaro.org>,
- Etienne Carriere <etienne.carriere@linaro.org>
-Subject: [PATCH 32/81] fwu-mdata: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:30:49 -0600
-Message-Id: <20240502013138.2383421-32-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 34/81] hwspinlock: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:30:51 -0600
+Message-Id: <20240502013138.2383421-34-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -97,25 +98,52 @@ add missing include files directly.
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Jassi Brar <jaswinder.singh@linaro.org>
-Cc: Etienne Carriere <etienne.carriere@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- drivers/fwu-mdata/fwu-mdata-uclass.c | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/hwspinlock/hwspinlock-uclass.c  | 1 -
+ drivers/hwspinlock/sandbox_hwspinlock.c | 1 -
+ drivers/hwspinlock/stm32_hwspinlock.c   | 1 -
+ 3 files changed, 3 deletions(-)
 
-diff --git a/drivers/fwu-mdata/fwu-mdata-uclass.c b/drivers/fwu-mdata/fwu-mdata-uclass.c
-index 0a8edaaa418f..bab7a7e80d1d 100644
---- a/drivers/fwu-mdata/fwu-mdata-uclass.c
-+++ b/drivers/fwu-mdata/fwu-mdata-uclass.c
+diff --git a/drivers/hwspinlock/hwspinlock-uclass.c b/drivers/hwspinlock/hwspinlock-uclass.c
+index e9a4d7f9fbbd..ea93efc97df7 100644
+--- a/drivers/hwspinlock/hwspinlock-uclass.c
++++ b/drivers/hwspinlock/hwspinlock-uclass.c
 @@ -5,7 +5,6 @@
  
- #define LOG_CATEGORY UCLASS_FWU_MDATA
+ #define LOG_CATEGORY UCLASS_HWSPINLOCK
  
 -#include <common.h>
  #include <dm.h>
- #include <efi_loader.h>
- #include <fwu.h>
+ #include <errno.h>
+ #include <hwspinlock.h>
+diff --git a/drivers/hwspinlock/sandbox_hwspinlock.c b/drivers/hwspinlock/sandbox_hwspinlock.c
+index be920f5f99df..fcda55517e1e 100644
+--- a/drivers/hwspinlock/sandbox_hwspinlock.c
++++ b/drivers/hwspinlock/sandbox_hwspinlock.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2018, STMicroelectronics - All Rights Reserved
+  */
+ 
+-#include <common.h>
+ #include <dm.h>
+ #include <hwspinlock.h>
+ #include <asm/state.h>
+diff --git a/drivers/hwspinlock/stm32_hwspinlock.c b/drivers/hwspinlock/stm32_hwspinlock.c
+index 346b138e98f0..5273b9bfed89 100644
+--- a/drivers/hwspinlock/stm32_hwspinlock.c
++++ b/drivers/hwspinlock/stm32_hwspinlock.c
+@@ -5,7 +5,6 @@
+ 
+ #define LOG_CATEGORY UCLASS_HWSPINLOCK
+ 
+-#include <common.h>
+ #include <clk.h>
+ #include <dm.h>
+ #include <hwspinlock.h>
 -- 
 2.34.1
 
