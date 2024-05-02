@@ -4,71 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB32FC4345F
-	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:34:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DC45C4345F
+	for <u-boot@archiver.kernel.org>; Thu,  2 May 2024 01:34:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9935C88C17;
-	Thu,  2 May 2024 03:32:07 +0200 (CEST)
+	by phobos.denx.de (Postfix) with ESMTP id 0E68788C22;
+	Thu,  2 May 2024 03:32:08 +0200 (CEST)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JCrhq9EB";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ZoWEGYvW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D263888C22; Thu,  2 May 2024 03:32:05 +0200 (CEST)
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com
- [IPv6:2607:f8b0:4864:20::832])
+ id 202DB88C05; Thu,  2 May 2024 03:32:07 +0200 (CEST)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E1E188C03
- for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:31:58 +0200 (CEST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0BFCE88C17
+ for <u-boot@lists.denx.de>; Thu,  2 May 2024 03:32:05 +0200 (CEST)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x832.google.com with SMTP id
- d75a77b69052e-43a317135a5so12236541cf.0
- for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:31:58 -0700 (PDT)
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-de477949644so8296173276.1
+ for <u-boot@lists.denx.de>; Wed, 01 May 2024 18:32:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1714613517; x=1715218317; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1714613524; x=1715218324; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YLR0+InlPW/PcyiqSWamS73C+Cs76eycB4fFkZzERqg=;
- b=JCrhq9EB/TcEcjZ/YOzW5EWxMP207a5KAa+2HewkmvgclaSKIJORI8EaLawJ2MVEr5
- qCmIfeAM9C7ixjEzUJMne2wGrJNy1ZBL93SEq/km8RAC0t1Z0Pex1Iurcp4oBN4/pYDX
- ahW9dUUhD+3wt7+L1BlOq8WPWWjyHVdUilL9Y=
+ :message-id:date:subject:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=p32AsXAoXlbh2FP4LW5LeUAbrGqvIG3nHRFMpTJ+Xik=;
+ b=ZoWEGYvWXKd978Bg+5YtatvHTpBfHYG/RFYcmrnW3hLUfzgeJR+p+rFdVGs5lfQ4ek
+ R0XYllXmSumtmxv5/O7ZDgz9bi/QHsNQkP+Z0dxRhoktpPL0XciW1yHFEamyZ/1Bij5/
+ a9DvjocnTQVAbxgncZ5Wm2WetdqdmhpVGLeGI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1714613517; x=1715218317;
+ d=1e100.net; s=20230601; t=1714613524; x=1715218324;
  h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :message-id:date:subject:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YLR0+InlPW/PcyiqSWamS73C+Cs76eycB4fFkZzERqg=;
- b=v6PqI7KyIOq5YOLWR6EjqZ3Yjm3HD+axrZpmWY5RUanjEXRfsaFSYNhEpqQw+oXn4S
- MlQYQTPL3mNrPEIl54QKG/EUEQS7GTMUJ8tsHpbDS7wosPmmdf40SD2t3pkVCI4LHp9R
- eH4Dh8jyKk3hYdUVc2Mji0nT1kHSBDnj2miTjnU+v6nwYQpLl31zfjXLW85KHdLsmzIi
- RUPR7JvpwNpOMx7q/mDyNanbZIg6u0c10AaPUHZ51CZWsZrwntwR0uGIUEExtBRdwqJK
- yGmODtu+hF2PyvzTNXFJOxdGoc7d9+GKXNlLK7/UdolvTM/8jMlNr6dZS3nVwSLJFPjG
- E4Mg==
-X-Gm-Message-State: AOJu0Yx6VsAl3+hUwlxC2kMRXcjYkt4Fe1I7H9JocssU0xdhvno/9pZ9
- HGhL6M+hAuBgVvpNONDecsljHoD4S/SGOJxxGnla+SZut0OCZ5lU3xSv1szuXEVq2Qv5GVxn0lf
- aGemOvlYM
-X-Google-Smtp-Source: AGHT+IE99DgVbXXY6noeTj2VaE5wkkKxHNpSdEevWt1Iq1DrWt0tfT6g8wwkhxFEzKK1WXEcATR5PA==
-X-Received: by 2002:a05:622a:1a1e:b0:43a:fa49:8096 with SMTP id
- f30-20020a05622a1a1e00b0043afa498096mr2675735qtb.8.1714613516826; 
- Wed, 01 May 2024 18:31:56 -0700 (PDT)
+ bh=p32AsXAoXlbh2FP4LW5LeUAbrGqvIG3nHRFMpTJ+Xik=;
+ b=NhuNtAmtZUYt6cpXpDkgPLQ4jo+bR9o+l9Pp37LpNhHPZQ44Dn+IunNULdyRMNTOg5
+ r3c2SRi/6jommQfEUB8t3LzTPGrU8BNen7c+9/Oq7XP1VnvczJNdTO5refaxOfb9mVkr
+ Ogu9e3cev+OvOMsjVWJtXA8UiDWq3fw4DBmAGudkkBYUnJN8psZyn9O/7noZe86sZbZa
+ 2aVNVuEkNJZpMSqmADg6+pDOitVP7LSrg4lNYyWJV9BEsEw7h3jB3IiAKuwcXqRfs9lG
+ W7fUkL9ulbUH7Ab+vagjE1EYCDjs6PtHgxQ7BsZ5HI0v80av49PEPypKtxB1BBB2iMw9
+ 1ZEA==
+X-Gm-Message-State: AOJu0Yyv91BswqTEOKNjMXrUH9IDYmIzu2fU2JQqoljE9OtzN0nEpPMd
+ XPQcixARbIkYyGaDWkt9tdUCynNKpepiSmGlOsFnGHjJscplyVPWnahW1/tBmTzWoPk5WrivSeL
+ YmmH0jqIB
+X-Google-Smtp-Source: AGHT+IEhClpW7UDh67AQ2qeol+xgZvieQcu1wlaA/RAb0M4IqoJZWUwD5YLmIqsNCxl/NkV/JsYTsA==
+X-Received: by 2002:a25:a043:0:b0:de5:c1a4:560c with SMTP id
+ x61-20020a25a043000000b00de5c1a4560cmr588286ybh.56.1714613521700; 
+ Wed, 01 May 2024 18:32:01 -0700 (PDT)
 Received: from bill-the-cat.tail58a08.ts.net ([187.144.98.216])
  by smtp.gmail.com with ESMTPSA id
- c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.31.55
+ c6-20020ac80546000000b00436bb57faddsm12737444qth.25.2024.05.01.18.32.00
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 01 May 2024 18:31:56 -0700 (PDT)
+ Wed, 01 May 2024 18:32:01 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Simon Glass <sjg@chromium.org>,
-	Bin Meng <bmeng.cn@gmail.com>
-Subject: [PATCH 13/81] bios_emulator: Remove <common.h> and add needed includes
-Date: Wed,  1 May 2024 19:30:30 -0600
-Message-Id: <20240502013138.2383421-13-trini@konsulko.com>
+Subject: [PATCH 17/81] button: Remove <common.h> and add needed includes
+Date: Wed,  1 May 2024 19:30:34 -0600
+Message-Id: <20240502013138.2383421-17-trini@konsulko.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20240502013138.2383421-1-trini@konsulko.com>
 References: <20240502013138.2383421-1-trini@konsulko.com>
@@ -96,141 +94,48 @@ add missing include files directly.
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Bin Meng <bmeng.cn@gmail.com>
 ---
- drivers/bios_emulator/atibios.c         | 1 -
- drivers/bios_emulator/besys.c           | 1 -
- drivers/bios_emulator/bios.c            | 1 -
- drivers/bios_emulator/biosemu.c         | 1 -
- drivers/bios_emulator/x86emu/debug.c    | 1 -
- drivers/bios_emulator/x86emu/decode.c   | 1 -
- drivers/bios_emulator/x86emu/ops.c      | 1 -
- drivers/bios_emulator/x86emu/ops2.c     | 1 -
- drivers/bios_emulator/x86emu/prim_ops.c | 1 -
- drivers/bios_emulator/x86emu/sys.c      | 1 -
- 10 files changed, 10 deletions(-)
+ drivers/button/button-adc.c    | 1 -
+ drivers/button/button-gpio.c   | 1 -
+ drivers/button/button-uclass.c | 1 -
+ 3 files changed, 3 deletions(-)
 
-diff --git a/drivers/bios_emulator/atibios.c b/drivers/bios_emulator/atibios.c
-index 7ebead6bfad6..d544ffb5ffb6 100644
---- a/drivers/bios_emulator/atibios.c
-+++ b/drivers/bios_emulator/atibios.c
-@@ -45,7 +45,6 @@
- *		Jason ported this file to u-boot to run the ATI video card
- *		BIOS in u-boot.
- ****************************************************************************/
--#include <common.h>
- #include <compiler.h>
- #include <bios_emul.h>
- #include <errno.h>
-diff --git a/drivers/bios_emulator/besys.c b/drivers/bios_emulator/besys.c
-index 02c4286a854c..690fb5a4d7b3 100644
---- a/drivers/bios_emulator/besys.c
-+++ b/drivers/bios_emulator/besys.c
-@@ -48,7 +48,6 @@
- ****************************************************************************/
- 
- #define __io
--#include <common.h>
- #include <asm/io.h>
- #include "biosemui.h"
- 
-diff --git a/drivers/bios_emulator/bios.c b/drivers/bios_emulator/bios.c
-index 9596a1fdd3e0..7f883daf8f06 100644
---- a/drivers/bios_emulator/bios.c
-+++ b/drivers/bios_emulator/bios.c
-@@ -42,7 +42,6 @@
- ****************************************************************************/
- 
- #define __io
--#include <common.h>
- #include <asm/io.h>
- #include "biosemui.h"
- 
-diff --git a/drivers/bios_emulator/biosemu.c b/drivers/bios_emulator/biosemu.c
-index 82befbae66f7..ba4328474ce2 100644
---- a/drivers/bios_emulator/biosemu.c
-+++ b/drivers/bios_emulator/biosemu.c
-@@ -46,7 +46,6 @@
- ****************************************************************************/
- 
- #include <malloc.h>
--#include <common.h>
- #include "biosemui.h"
- 
- BE_sysEnv _BE_env = {{0}};
-diff --git a/drivers/bios_emulator/x86emu/debug.c b/drivers/bios_emulator/x86emu/debug.c
-index 95f3cc09aad5..b426dc3bc45e 100644
---- a/drivers/bios_emulator/x86emu/debug.c
-+++ b/drivers/bios_emulator/x86emu/debug.c
-@@ -38,7 +38,6 @@
- ****************************************************************************/
- 
- #include <stdarg.h>
--#include <common.h>
- #include <linux/ctype.h>
- #include <linux/printk.h>
- #include "x86emu/x86emui.h"
-diff --git a/drivers/bios_emulator/x86emu/decode.c b/drivers/bios_emulator/x86emu/decode.c
-index e2028eaf0833..7e188d58a52c 100644
---- a/drivers/bios_emulator/x86emu/decode.c
-+++ b/drivers/bios_emulator/x86emu/decode.c
-@@ -36,7 +36,6 @@
- *		instruction decoding and accessess of immediate data via IP.  etc.
- *
- ****************************************************************************/
--#include <common.h>
- #include <linux/printk.h>
- #include "x86emu/x86emui.h"
- 
-diff --git a/drivers/bios_emulator/x86emu/ops.c b/drivers/bios_emulator/x86emu/ops.c
-index 8c1a146165c9..57422ec3d473 100644
---- a/drivers/bios_emulator/x86emu/ops.c
-+++ b/drivers/bios_emulator/x86emu/ops.c
-@@ -72,7 +72,6 @@
- *
- ****************************************************************************/
+diff --git a/drivers/button/button-adc.c b/drivers/button/button-adc.c
+index 9c24c960e6ff..da7ddf2a8577 100644
+--- a/drivers/button/button-adc.c
++++ b/drivers/button/button-adc.c
+@@ -5,7 +5,6 @@
+  * Author: Marek Szyprowski <m.szyprowski@samsung.com>
+  */
  
 -#include <common.h>
- #include <linux/printk.h>
- #include "x86emu/x86emui.h"
- 
-diff --git a/drivers/bios_emulator/x86emu/ops2.c b/drivers/bios_emulator/x86emu/ops2.c
-index 6cd1ac398252..32fecb347913 100644
---- a/drivers/bios_emulator/x86emu/ops2.c
-+++ b/drivers/bios_emulator/x86emu/ops2.c
-@@ -41,7 +41,6 @@
- *
- ****************************************************************************/
- 
--#include <common.h>
- #include <linux/compiler.h>
- #include <linux/printk.h>
- #include "x86emu/x86emui.h"
-diff --git a/drivers/bios_emulator/x86emu/prim_ops.c b/drivers/bios_emulator/x86emu/prim_ops.c
-index 5f6c795fb7ff..b3cccb17f202 100644
---- a/drivers/bios_emulator/x86emu/prim_ops.c
-+++ b/drivers/bios_emulator/x86emu/prim_ops.c
-@@ -97,7 +97,6 @@
- *
- ****************************************************************************/
+ #include <adc.h>
+ #include <button.h>
+ #include <log.h>
+diff --git a/drivers/button/button-gpio.c b/drivers/button/button-gpio.c
+index 7b5b3affe2dd..43b82d98aeb7 100644
+--- a/drivers/button/button-gpio.c
++++ b/drivers/button/button-gpio.c
+@@ -3,7 +3,6 @@
+  * Copyright (C) 2020 Philippe Reynes <philippe.reynes@softathome.com>
+  */
  
 -#include <common.h>
+ #include <button.h>
+ #include <dm.h>
+ #include <dm/lists.h>
+diff --git a/drivers/button/button-uclass.c b/drivers/button/button-uclass.c
+index 032191d61abc..cda243389df3 100644
+--- a/drivers/button/button-uclass.c
++++ b/drivers/button/button-uclass.c
+@@ -7,7 +7,6 @@
  
- #define PRIM_OPS_NO_REDEFINE_ASM
- #include "x86emu/x86emui.h"
-diff --git a/drivers/bios_emulator/x86emu/sys.c b/drivers/bios_emulator/x86emu/sys.c
-index f96652415cd3..483ecd52efe3 100644
---- a/drivers/bios_emulator/x86emu/sys.c
-+++ b/drivers/bios_emulator/x86emu/sys.c
-@@ -39,7 +39,6 @@
- *
- ****************************************************************************/
+ #define LOG_CATEGORY UCLASS_BUTTON
  
 -#include <common.h>
- #include <linux/printk.h>
- #include "x86emu/x86emui.h"
- 
+ #include <button.h>
+ #include <dm.h>
+ #include <dm/uclass-internal.h>
 -- 
 2.34.1
 
